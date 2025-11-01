@@ -254,6 +254,17 @@
     <button id="reset">🧹 Reset</button>
   </div>
 
+  <!----------------------------------------------------------->
+  <!-- VỊ TRÍ 1 (HTML): CHÈN PHẦN NHẢY THẺ SAU KHỐI NÚT ĐIỀU KHIỂN -->
+  <!----------------------------------------------------------->
+  <div class="jump-control">
+    <input type="number" id="jumpInput" placeholder="Nhập số thứ tự (1-N)" min="1">
+    <button id="jumpBtn">Nhảy đến thẻ</button>
+  </div>
+  <div id="jumpStatus"></div>
+  <!----------------------------------------------------------->
+  
+  
   <div class="example" id="example">
     <div class="cn" id="exCn"></div>
     <div class="vi" id="exVi"></div>
@@ -5232,22 +5243,28 @@
     const exCn = document.getElementById("exCn");
     const exVi = document.getElementById("exVi");
 
-    // Update Filter button text with counts
+    // Khai báo biến cho tính năng mới (VỊ TRÍ 2: KHAI BÁO BIẾN DOM MỚI)
+    const jumpInput = document.getElementById("jumpInput");
+    const jumpBtn = document.getElementById("jumpBtn");
+    const jumpStatus = document.getElementById("jumpStatus");
+    // -------------------------------------------
+
+
     function updateFilterCounts() {
+      // ... (Giữ nguyên hàm này) ...
       let totalCount = 0;
       document.querySelectorAll('.filter-btn').forEach(btn => {
         const filter = btn.dataset.filter;
         let count = 0;
         if (filter === 'all') {
-           totalCount = words.length;
-           count = totalCount;
+           count = words.length;
            btn.textContent = `TẤT CẢ (${count})`;
         } else {
           count = words.filter(word => word.hsk === filter).length;
           btn.textContent = `HSK ${filter} (${count})`;
         }
       });
-
+      
       const activeFilter = document.querySelector('.filter-btn.active');
       let initialCount = 0;
       if (activeFilter && activeFilter.dataset.filter !== 'all') {
@@ -5255,9 +5272,8 @@
           initialCount = currentWords.length;
       } else {
           currentWords = [...words];
-          initialCount = currentWords.length;
+          initialCount = words.length;
       }
-      // Cập nhật progress ban đầu
       if (initialCount > 0) {
         progress.textContent = `Đã học: 1 / ${initialCount}`;
       } else {
@@ -5265,7 +5281,78 @@
       }
     }
 
-    // Filter event listeners
+    function updateCard() {
+      // ... (Logic cập nhật thẻ giữ nguyên) ...
+      example.classList.remove("show");
+      jumpStatus.textContent = ''; // Xóa trạng thái nhảy thẻ cũ
+
+      if (!currentWords || currentWords.length === 0) {
+        // ... (Xử lý khi không có từ) ...
+        han.textContent = "Không có từ!";
+        pin.textContent = "Hãy chọn bộ lọc HSK";
+        mean.textContent = "";
+        hv.textContent = "";
+        hskTag.textContent = "";
+        hskTag.className = "hsk-tag";
+        progress.textContent = "Đã học: 0 / 0";
+        document.querySelectorAll('.buttons button').forEach(b => b.disabled = true);
+        jumpInput.disabled = true;
+        jumpBtn.disabled = true;
+        return;
+      }
+
+      document.querySelectorAll('.buttons button').forEach(b => b.disabled = false);
+      jumpInput.disabled = false;
+      jumpBtn.disabled = false;
+
+      // Xử lý vòng lặp cho index
+      if (index < 0) index = currentWords.length - 1;
+      if (index >= currentWords.length) index = 0;
+
+      const w = currentWords[index];
+      han.textContent = w.han || '';
+      pin.textContent = w.pin || '';
+      mean.textContent = w.mean || '';
+      hv.textContent = w.hv ? `HV: ${w.hv}` : '';
+      hskTag.textContent = `HSK${w.hsk || '?'}`;
+      hskTag.className = `hsk-tag hsk${w.hsk || '?'}-tag`;
+
+      if (w.exCn && w.exVi) {
+           exCn.textContent = w.exCn;
+           exVi.textContent = w.exVi;
+           document.getElementById("exampleBtn").style.display = '';
+       } else {
+           exCn.textContent = '';
+           exVi.textContent = '';
+           document.getElementById("exampleBtn").style.display = 'none';
+       }
+
+      progress.textContent = `Đã học: ${index + 1} / ${currentWords.length}`;
+    }
+    
+    // -------------------------------------------
+    // VỊ TRÍ 3: JAVASCRIPT LOGIC VÀ EVENT LISTENERS MỚI
+    // -------------------------------------------
+    function jumpToCard() {
+        const value = parseInt(jumpInput.value);
+        if (currentWords.length === 0) {
+             jumpStatus.textContent = `Lỗi: Không có từ nào để nhảy.`;
+             return;
+        }
+        if (isNaN(value) || value < 1 || value > currentWords.length) {
+            jumpStatus.textContent = `Lỗi: Nhập số từ 1 đến ${currentWords.length}.`;
+            return;
+        }
+
+        // Cập nhật index (Số thứ tự - 1)
+        index = value - 1;
+        flashcard.classList.remove("flipped");
+        updateCard();
+        jumpStatus.textContent = `Đã nhảy đến thẻ số ${value}.`;
+        jumpInput.value = ''; // Xóa input sau khi nhảy
+    }
+
+    // Event Listeners cho bộ lọc (Giữ nguyên)
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const filter = btn.dataset.filter;
@@ -5285,76 +5372,10 @@
       });
     });
 
-    function updateCard() {
-      example.classList.remove("show");
-
-      if (!currentWords || currentWords.length === 0) {
-        han.textContent = "Không có từ!";
-        pin.textContent = "Hãy chọn bộ lọc HSK";
-        mean.textContent = "";
-        hv.textContent = "";
-        hskTag.textContent = "";
-        hskTag.className = "hsk-tag";
-        exCn.textContent = "";
-        exVi.textContent = "";
-        progress.textContent = "Đã học: 0 / 0";
-        document.getElementById("next").disabled = true;
-        document.getElementById("prev").disabled = true;
-        document.getElementById("shuffle").disabled = true;
-        document.getElementById("exampleBtn").disabled = true;
-        document.getElementById("exampleBtn").style.display = 'none';
-        return;
-      }
-
-      document.getElementById("next").disabled = false;
-      document.getElementById("prev").disabled = false;
-      document.getElementById("shuffle").disabled = false;
-
-      if (index < 0) index = currentWords.length - 1;
-      if (index >= currentWords.length) index = 0;
-
-      const w = currentWords[index];
-      han.textContent = w.han || '';
-      pin.textContent = w.pin || '';
-      mean.textContent = w.mean || '';
-      hv.textContent = w.hv ? `HV: ${w.hv}` : '';
-      hskTag.textContent = `HSK${w.hsk || '?'}`;
-      hskTag.className = `hsk-tag hsk${w.hsk || '?'}-tag`;
-
-      if (w.exCn && w.exVi) {
-           exCn.textContent = w.exCn;
-           exVi.textContent = w.exVi;
-           document.getElementById("exampleBtn").disabled = false;
-           document.getElementById("exampleBtn").style.display = '';
-       } else {
-           exCn.textContent = '';
-           exVi.textContent = '';
-           document.getElementById("exampleBtn").disabled = true;
-           document.getElementById("exampleBtn").style.display = 'none';
-       }
-
-      progress.textContent = `Đã học: ${index + 1} / ${currentWords.length}`;
-    }
-
-    // Nút bấm
-    flashcard.onclick = () => {
-        if (currentWords.length > 0) {
-            flashcard.classList.toggle("flipped");
-        }
-    };
-
-    document.getElementById("next").onclick = () => {
-      index = index + 1;
-      flashcard.classList.remove("flipped");
-      updateCard();
-    };
-
-    document.getElementById("prev").onclick = () => {
-      index = index - 1;
-      flashcard.classList.remove("flipped");
-      updateCard();
-    };
-
+    // Event Listeners cho các nút điều khiển (Giữ nguyên)
+    flashcard.onclick = () => { if (currentWords.length > 0) { flashcard.classList.toggle("flipped"); } };
+    document.getElementById("next").onclick = () => { index = index + 1; flashcard.classList.remove("flipped"); updateCard(); };
+    document.getElementById("prev").onclick = () => { index = index - 1; flashcard.classList.remove("flipped"); updateCard(); };
     document.getElementById("shuffle").onclick = () => {
       if (currentWords.length > 0) {
         let newIndex;
@@ -5372,7 +5393,6 @@
     };
 
     document.getElementById("exampleBtn").onclick = () => example.classList.toggle("show");
-
     document.getElementById("reset").onclick = () => {
       index = 0;
       flashcard.classList.remove("flipped");
@@ -5380,15 +5400,24 @@
       document.querySelector('[data-filter="all"]').click();
     };
 
+    // Event Listener cho nút Nhảy thẻ (ĐÃ THÊM MỚI)
+    jumpBtn.onclick = jumpToCard;
+    // Cho phép nhấn Enter trong ô input để nhảy thẻ (ĐÃ THÊM MỚI)
+    jumpInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            jumpToCard();
+        }
+    });
+    // -------------------------------------------
+
     // Khởi tạo ban đầu
-    if (typeof words !== 'undefined' && words.length > 0) {
+    if (words.length > 0) {
       updateFilterCounts();
       updateCard();
     } else {
-       updateFilterCounts();
+       progress.textContent = "Không có dữ liệu từ vựng. Vui lòng kiểm tra mảng 'const words'.";
        updateCard();
     }
-
   </script>
 </body>
 </html>
