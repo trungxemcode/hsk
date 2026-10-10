@@ -774,10 +774,16 @@ let adaptiveState={enabled:true,stats:{}};
 try{const x=JSON.parse(localStorage.getItem(ADAPTIVE_KEY)||'null');if(x?.version===1&&x.stats&&typeof x.stats==='object'){adaptiveState.enabled=x.enabled!==false;for(const [id,r] of Object.entries(x.stats))if(wordByKey.has(r.key)&&quizTypeLabels[r.type]&&['attempts','wrong','streak','last'].every(k=>Number.isFinite(r[k])&&r[k]>=0)&&r.wrong<=r.attempts)adaptiveState.stats[id]=r;}}catch(e){}
 function saveAdaptive(){try{localStorage.setItem(ADAPTIVE_KEY,JSON.stringify({version:1,...adaptiveState}));}catch(e){$('storageNotice').hidden=false;$('storageNotice').textContent='Không lưu được phân tích mới; dữ liệu hiện chỉ tồn tại trong phiên này.';}}
 function adaptiveRows(key){return Object.values(adaptiveState.stats).filter(r=>!key||r.key===key);}
-function adaptiveRisk(key,type){const rs=adaptiveRows(key).filter(r=>!type||r.type===type);let score=0;for(const r of rs){const recency=1/(1+(Date.now()-r.last)/86400000/14);score+=((r.wrong+1)/(r.attempts+2))*Math.log2(r.wrong+2)*recency/Math.pow(1.8,Math.min(r.streak,5));}const old=Object.values(mistakeRecords).filter(e=>e.snapshot.key===key&&!e.resolved&&(!type||e.snapshot.direction===type));return score+old.reduce((n,e)=>n+Math.log2(e.wrongCount+1),0);}
+let adaptiveScoreCache=null;
+function adaptiveRisk(key,type){
+ const minute=Math.floor(Date.now()/60000);if(!adaptiveScoreCache||adaptiveScoreCache.minute!==minute){const scores=new Map(),add=(key,type,value)=>{for(const id of [JSON.stringify([key,type]),JSON.stringify([key,null])])scores.set(id,(scores.get(id)||0)+value);};
+ for(const r of Object.values(adaptiveState.stats)){const recency=1/(1+Math.max(0,Date.now()-r.last)/86400000/14);add(r.key,r.type,((r.wrong+1)/(r.attempts+2))*Math.log2(r.wrong+2)*recency/Math.pow(1.8,Math.min(r.streak,5)));}
+ for(const e of Object.values(mistakeRecords))if(!e.resolved)add(e.snapshot.key,e.snapshot.direction,Math.log2(e.wrongCount+1));adaptiveScoreCache={minute,scores};}
+ return adaptiveScoreCache.scores.get(JSON.stringify([key,type||null]))||0;
+}
 function weightedAdaptiveWords(pool){return pool.map(w=>({w,p:-Math.log(Math.max(Math.random(),1e-9))/(1+adaptiveRisk(wordKey(w)))})).sort((a,b)=>a.p-b.p).map(x=>x.w);}
 const oldRecordMistake=recordQuizMistake;
-recordQuizMistake=function(q,chosen){oldRecordMistake(q,chosen);const key=wordKey(q.w),id=JSON.stringify([key,q.direction]),r=adaptiveState.stats[id]||{key,type:q.direction,attempts:0,wrong:0,streak:0,last:0};r.attempts++;if(chosen.correct)r.streak++;else{r.wrong++;r.streak=0;}r.last=Date.now();adaptiveState.stats[id]=r;saveAdaptive();};
+recordQuizMistake=function(q,chosen){oldRecordMistake(q,chosen);const key=wordKey(q.w),id=JSON.stringify([key,q.direction]),r=adaptiveState.stats[id]||{key,type:q.direction,attempts:0,wrong:0,streak:0,last:0};r.attempts++;if(chosen.correct)r.streak++;else{r.wrong++;r.streak=0;}r.last=Date.now();adaptiveState.stats[id]=r;adaptiveScoreCache=null;saveAdaptive();};
 const ordinaryStartQuiz=startQuiz;
 startQuiz=function(e){
  if(!adaptiveState.enabled){ordinaryStartQuiz(e);return;}e?.preventDefault();const types=selectedQuizTypes(),count=Number($('quizCount').value);if(!types.length||!Number.isInteger(count)||count<1||count>100){ordinaryStartQuiz(e);return;}
