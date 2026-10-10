@@ -1,6 +1,6 @@
 (async function(){
  const status=document.getElementById('appLoadStatus');
- const names=['words','dictionarySupplement','checkedPracticeExamples','exampleMetadata','wordRelationsData','usageFactsData','confusableGroups','contextQuizBank'];
+ const names=['words','dictionarySupplement','checkedPracticeExamples','exampleMetadata','wordRelationsData','usageFactsData','confusableGroups','contextQuizBank','visualConfusions'];
  function scriptFile(url){return new Promise((resolve,reject)=>{const el=document.createElement('script');el.src=url;el.onload=resolve;el.onerror=()=>reject(Error('Không tải được '+url));document.body.append(el);});}
  async function dataText(name){
   if(typeof DecompressionStream!=='function'||location.protocol==='file:')return null;

@@ -705,7 +705,27 @@ function startComparison(groups) {
  if(!questions.length){$('compareSummary').textContent='Chưa có bài tập của nhóm này trong HSK đang chọn.';return;}
  startSavedQuestions(questions,`Phân biệt từ: ${groups.map(g=>g.title).join(' / ')}`);
 }
+const visualWordIndex=new Map();
+function visualSamples(char){
+ if(!visualWordIndex.size){const chars=new Set(visualConfusions.flatMap(g=>g.members.map(m=>m.han)));for(const c of chars)visualWordIndex.set(c,words.filter(w=>w.han.includes(c)).sort((a,b)=>Number(a.hsk)-Number(b.hsk)||a.han.length-b.han.length));}
+ return visualWordIndex.get(char)||[];
+}
+function visualFold(value){return value.normalize('NFD').replace(/\p{Diacritic}/gu,'').toLowerCase().trim();}
+function renderVisualComparisons(){
+ const query=visualFold($('visualCompareQuery').value),groups=visualConfusions.filter(g=>(activeLevel==='all'||g.members.some(m=>visualSamples(m.han).some(w=>String(w.hsk)===activeLevel)))&&(!query||visualFold(g.members.map(m=>m.han+' '+m.pin+' '+m.mean+' '+visualSamples(m.han).map(w=>w.han+' '+w.pin+' '+w.mean).join(' ')).join(' ')+' '+g.note).includes(query)));
+ $('compareTitle').textContent='Chữ gần giống nhau';$('compareIntro').textContent='Nhìn hình chữ và vùng được đánh dấu, rồi so nét khác biệt. Bộ lọc HSK dựa trên từ trong app có chứa chữ đó; không gán một level cố định cho từng chữ đơn.';
+ $('compareSummary').textContent=`${groups.length} / ${visualConfusions.length} nhóm · ${new Set(groups.flatMap(g=>g.members.map(m=>m.han))).size} chữ đang hiển thị. Khung màu chỉ vùng cần quan sát, không phải hướng dẫn thứ tự nét.`;$('compareGroups').replaceChildren();
+ if(!groups.length){$('compareGroups').append(textElement('p','Chưa có nhóm phù hợp với từ tìm kiếm và bộ lọc HSK. Thử bỏ tìm kiếm hoặc chọn Tất cả HSK.'));return;}
+ for(const [i,g] of groups.entries()){
+  const details=document.createElement('details');details.className='compare-lesson visual-lesson';details.dataset.group=g.id;details.open=i===0;details.append(textElement('summary',g.members.map(m=>m.han).join(' ↔ ')));const pair=textElement('div','','visual-pair');
+  for(const m of g.members){const card=textElement('div','','visual-character-card'),glyph=textElement('div',m.han,'visual-glyph'),focus=textElement('span','','visual-focus focus-'+g.region);focus.setAttribute('aria-hidden','true');glyph.append(focus);card.append(glyph,pinyinLine(m.pin),textElement('p',m.mean,'visual-char-mean'));pair.append(card);}details.append(pair,textElement('h3','Khác ở nét nào?'),textElement('p',g.note,'visual-difference'),textElement('p','Cách nhớ: '+g.tip));
+  const examples=textElement('div','','visual-word-examples');for(const m of g.members){const box=textElement('section','','visual-examples-column');box.append(textElement('h4','Từ có chữ '+m.han));const all=visualSamples(m.han),matching=activeLevel==='all'?all:all.filter(w=>String(w.hsk)===activeLevel),samples=(matching.length?matching:all).slice(0,2);for(const w of samples){const entry=textElement('div','','visual-word-example');entry.append(textElement('strong',w.han+' · HSK '+w.hsk),pinyinLine(w.pin),textElement('p',w.mean));const open=textElement('button','Mở thẻ '+w.han);open.onclick=()=>openRelatedWord(wordKey(w));entry.append(open);box.append(entry);}if(!samples.length)box.append(textElement('p','Chưa có từ chứa chữ này trong bộ HSK hiện tại.'));examples.append(box);}details.append(examples,textElement('p','Nghĩa và cách đọc ở trên là nghĩa/cách đọc tiêu biểu, không phải toàn bộ nghĩa của chữ. Mẹo nét viết là hướng dẫn biên soạn; từ minh họa lấy từ bộ HSK của app. Hình dáng có thể thay đổi nhẹ theo phông chữ.','hint'));$('compareGroups').append(details);
+ }
+}
 function renderComparisons() {
+ const visual=$('compareCategory').value==='visual';$('compareStart').hidden=visual;$('visualCompareSearch').hidden=!visual;$('compareMeaningTab').setAttribute('aria-pressed',String(!visual));$('compareShapeTab').setAttribute('aria-pressed',String(visual));if(visual){renderVisualComparisons();return;}
+ $('compareIntro').textContent='Các nhóm từ gần nghĩa nhưng khác cách dùng; giải thích đối chiếu Hanzii và ví dụ trong bộ học. Chọn Chữ gần giống để phân biệt hình dáng, nét viết.';
+
  const groups=shownCompareGroups(),count=groups.flatMap(g=>g.questions).filter(q=>activeLevel==='all'||String(wordByKey.get(q.key).hsk)===activeLevel).length;
  const memberCount=new Set(groups.flatMap(g=>g.members.filter(m=>activeLevel==='all'||String(m.level)===activeLevel).map(m=>m.key))).size;
  $('compareTitle').textContent=$('compareCategory').value==='other'?'Các cặp dễ lẫn khác':$('compareCategory').value==='all'?'Phân biệt cách dùng từ':'Từ gần nghĩa khác cách dùng';
@@ -720,7 +740,7 @@ function renderComparisons() {
   const practice=textElement('button','Luyện nhóm này');practice.onclick=()=>startComparison([g]);details.append(practice);$('compareGroups').append(details);
  }
 }
-$('mistakeStart').onclick=()=>reviewMistakeEntries(mistakeEntries());$('mistakeScope').onchange=()=>{mistakesVisible=40;renderMistakes();};$('mistakeMore').onclick=()=>{mistakesVisible+=40;renderMistakes();};$('compareStart').onclick=()=>startComparison(shownCompareGroups());$('compareCategory').onchange=renderComparisons;
+$('mistakeStart').onclick=()=>reviewMistakeEntries(mistakeEntries());$('mistakeScope').onchange=()=>{mistakesVisible=40;renderMistakes();};$('mistakeMore').onclick=()=>{mistakesVisible+=40;renderMistakes();};$('compareStart').onclick=()=>startComparison(shownCompareGroups());$('compareCategory').onchange=renderComparisons;$('compareMeaningTab').onclick=()=>{$('compareCategory').value='near';renderComparisons();};$('compareShapeTab').onclick=()=>{$('compareCategory').value='visual';renderComparisons();};$('visualCompareQuery').oninput=renderComparisons;
 renderMistakes();renderComparisons();
 
   // Use the existing progress record and timestamps; never replace prior progress.
