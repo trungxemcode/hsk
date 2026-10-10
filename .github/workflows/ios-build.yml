@@ -1,0 +1,49 @@
+name: Build iOS SideStore
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'ios-source.zip'
+      - '.github/workflows/ios-build.yml'
+      - 'app.js'
+      - 'index.html'
+      - 'loader.js'
+      - 'style.css'
+      - '*Data.js'
+      - 'words.js'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract iOS sources
+        run: unzip -o ios-source.zip
+      - name: Prepare offline vocabulary and web app
+        run: node ios/prepare-web.cjs
+      - name: Test SRS and notification question logic
+        run: swiftc ios/HSK/StudyCore.swift ios/Tests/CoreTests.swift -o /tmp/hsk-core-tests && /tmp/hsk-core-tests
+      - name: Install project generator
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        working-directory: ios
+        run: xcodegen generate
+      - name: Build iPhone application (SideStore signs it locally)
+        working-directory: ios
+        run: xcodebuild -project HSK.xcodeproj -scheme HSK -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build
+      - name: Package IPA
+        run: |
+          mkdir -p dist/Payload
+          cp -R ios/build/Build/Products/Release-iphoneos/HSK.app dist/Payload/
+          cd dist
+          zip -qr HSK-SideStore.ipa Payload
+          shasum -a 256 HSK-SideStore.ipa > SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HSK-SideStore-IPA
+          path: |
+            dist/HSK-SideStore.ipa
+            dist/SHA256.txt
+          retention-days: 30
