@@ -109,6 +109,7 @@
         <label><input type="checkbox" name="quizType" value="blank" checked> Điền từ vào chỗ trống</label>
         <label><input type="checkbox" name="quizType" value="usage" checked> Chọn nghĩa theo ngữ cảnh</label>
       </div><p class="hint">Chọn ít nhất một dạng. Các dạng đã chọn được phân bổ đều và xáo trộn trong lượt làm.</p></fieldset>
+      <label class="adaptive-option"><input id="adaptiveToggle" type="checkbox" checked> Ôn thích ứng: ưu tiên từ và câu hay sai</label><p class="hint">Tối đa 60% câu dành cho lỗi chưa khắc phục, phần còn lại luyện đa dạng trong HSK và chế độ đã chọn. Phân tích lưu trên thiết bị này.</p>
       <div class="field-row"><label for="quizScope">Nhóm từ:</label><select id="quizScope"><option value="all">Tất cả trong phạm vi ôn</option><option value="unknown">Chưa thuộc</option><option value="known">Đã thuộc</option><option value="due">Đến hạn SRS</option></select><label for="quizCount">Số câu:</label><input id="quizCount" type="number" min="1" max="100" value="10" style="width:85px"><button type="submit">Bắt đầu / Làm lại</button></div>
     </form>
     <div id="quizProgress" class="hint" role="status"></div>
@@ -116,7 +117,7 @@
     <div id="quizFeedback" role="status"></div><button id="quizNext" hidden>Câu tiếp theo</button>
   </section>
   <section id="mistakesPanel" class="panel-box" hidden>
-    <h2>Ôn câu sai và từ hay nhầm</h2><p class="hint">Tự lưu câu trả lời sai từ các bài kiểm tra. Ôn lại đúng câu đã nhầm; câu sai nhiều lần được ưu tiên. Lịch sử bắt đầu từ bản cập nhật này và được giữ khi tải lại.</p>
+    <h2>Ôn câu sai và từ hay nhầm</h2><h3>Phân tích học tập cá nhân</h3><div id="adaptiveAnalysis" class="result-grid"></div><p class="hint">Tự lưu câu trả lời sai từ các bài kiểm tra. Ôn lại đúng câu đã nhầm; câu sai nhiều lần được ưu tiên. Lịch sử bắt đầu từ bản cập nhật này và được giữ khi tải lại.</p>
     <div class="field-row"><label for="mistakeScope">Hiển thị:</label><select id="mistakeScope"><option value="pending">Câu chưa ôn đúng</option><option value="all">Tất cả câu từng làm sai</option></select><label for="mistakeCount">Số câu:</label><input id="mistakeCount" type="number" min="1" max="100" value="10" style="width:80px"><button id="mistakeStart">Ôn các câu này</button></div>
     <p id="mistakeSummary" class="hint" role="status"></p><h3>Từ hay nhầm</h3><div id="mistakeWords" class="result-grid"></div><h3>Câu đã làm sai</h3><div id="mistakeList"></div><button id="mistakeMore" hidden>Xem thêm câu sai</button>
   </section>
