@@ -1,7 +1,7 @@
 rules_version = '2';
 service cloud.firestore {
  match /databases/{database}/documents {
-  function isDashboardAdmin() {return request.auth != null && request.auth.token.email == 'honghiemtrung668@gmail.com' && request.auth.token.email_verified == true;}
+  function isDashboardAdmin() {return request.auth != null && request.auth.uid == 'BIvUyItDYJWcLvlhhtYFyj5csBH2';}
   match /learningSummaries/{uid} {
    allow read: if request.auth != null && (request.auth.uid == uid || isDashboardAdmin());
    allow create, update: if request.auth != null && request.auth.uid == uid

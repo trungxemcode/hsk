@@ -1,4 +1,4 @@
-const OFFLINE_VERSION='hsk-offline-20261010-ios-inset-1';
+const OFFLINE_VERSION='hsk-offline-20261010-admin-uid-1';
 const OFFLINE_FILES=["index.html","style.css","mobile-layout.css","mobile-layout.js","admin-core.js","admin.js","account.js","account-core.js","account-config.json","loader.js","app.js","push.js","offline.js","manifest.webmanifest","icon-180.png","icon-192.png","icon-512.png","push-config.json","ios-transfer.html","words.js","dictionarySupplement.js","checkedPracticeExamples.js","exampleMetadata.js","wordRelationsData.js","usageFactsData.js","confusableGroups.js","contextQuizBank.js","words.js.gz","dictionarySupplement.js.gz","checkedPracticeExamples.js.gz","exampleMetadata.js.gz","wordRelationsData.js.gz","usageFactsData.js.gz","confusableGroups.js.gz","contextQuizBank.js.gz"];
 let download={type:'HSK_DOWNLOAD_PROGRESS',done:0,total:OFFLINE_FILES.length,reused:0};
 async function announce(value){download={...download,...value};for(const client of await self.clients.matchAll({includeUncontrolled:true,type:'window'}))client.postMessage(download);}
