@@ -1,3 +1,34 @@
+const detailedRelationGuides={
+ '喜|爱':{
+  intro:'Hai chữ chỉ giao nhau ở nghĩa thích/ưa. 喜 còn diễn tả niềm vui, chuyện đáng mừng; 爱 còn diễn tả tình yêu và việc dễ/hay xảy ra. Phải chọn nghĩa trong câu trước khi so sánh.',
+  sections:[
+   ['喜 (xǐ · Hỉ): vui mừng khi nào?','Ở nghĩa vui, 喜 là cảm xúc trước điều làm mình hài lòng hoặc đáng mừng: nhận tin tốt, đạt kết quả mong muốn, đoàn tụ. Thường gặp trong 喜悦 (niềm vui), 欢喜 (vui mừng), 惊喜 (vui bất ngờ), 喜事 (chuyện vui). Trong lời nói thường ngày, muốn nói “hôm nay tôi rất vui”, dùng 我今天很高兴 / 很开心 tự nhiên hơn việc ghép máy móc 我今天很喜. Đây là xu hướng cách diễn đạt, không phải lệnh cấm 喜 đứng một mình.'],
+   ['喜: thích/ưa và những cách dùng khác','喜 cũng có nghĩa thích hoặc ưa, nhưng chữ đơn thường thấy trong cách viết cô đọng, văn viết hoặc cụm quen dùng. 喜光 / 喜阴 nói cây phù hợp hoặc ưa ánh sáng / bóng râm, không phải cây có cảm xúc vui. Trong giao tiếp, muốn nói thích một người, món ăn hay hoạt động, thường dùng 喜欢. 喜事 / 喜酒 liên quan chuyện đáng mừng, thường là cưới hỏi; 有喜 là cách nói có thai. Những nghĩa này không tương đương với 爱.'],
+   ['爱 (ài · Ái): yêu khi nào?','Dùng 爱 khi muốn nói tình yêu, sự yêu thương hoặc gắn bó với một đối tượng: người thân, người yêu, quê hương. 爱 không chỉ dùng cho tình yêu nam nữ. 爱 + người có thể bộc lộ tình cảm sâu hoặc sự yêu quý; trong lời tỏ tình, 我爱你 mạnh hơn 我喜欢你. Không có thước đo cố định rằng mọi câu có 爱 đều biểu thị cùng một mức cảm xúc.'],
+   ['爱: thích làm gì hoặc dễ/hay xảy ra','爱 + hành động có thể nói sở thích: 爱看书 là thích đọc sách, gần với 喜欢看书 trong ngữ cảnh đó. Nhưng 爱 + hiện tượng cũng có thể nói khuynh hướng: 爱掉色 là dễ phai màu, 爱感冒 là hay bị cảm. Không dịch các câu này thành “thích phai màu” hay “thích bị cảm”. 喜 không tự động thay được vào cách dùng này.'],
+   ['Chọn từ theo ý muốn nói','Vui vì một tin tốt → thường dùng 高兴 / 开心, hoặc cụm có 喜 như 惊喜. Thích một món hay hoạt động → thường dùng 喜欢; 爱 cũng dùng được với nhiều sở thích. Yêu thương người thân / tỏ tình → 爱. Nói đặc tính ưa sáng của cây → 喜光. Nói vật dễ hỏng / dễ phai màu → xem nghĩa dễ/hay của 爱.']
+  ],
+  examples:[
+   {cn:'我很爱我的父母。',pin:'Wǒ hěn ài wǒ de fùmǔ.',vi:'Tôi rất yêu bố mẹ mình.',note:'Tình cảm yêu thương gia đình; 爱 không có nghĩa vui ở đây.',origin:'Ví dụ Hanzii'},
+   {cn:'收到录取通知后，小林很高兴。',pin:'Shōudào lùqǔ tōngzhī hòu, Xiǎolín hěn gāoxìng.',vi:'Sau khi nhận thông báo trúng tuyển, Tiểu Lâm rất vui.',note:'Vui vì tin tốt: câu giao tiếp dùng 高兴. Có thể nói 这个消息让她感到惊喜 khi nhấn mạnh niềm vui bất ngờ, nhưng sắc thái thay đổi.',origin:'Ví dụ biên soạn; đối chiếu nghĩa và cách dùng'},
+   {cn:'我爱看书，也喜欢听音乐。',pin:'Wǒ ài kàn shū, yě xǐhuan tīng yīnyuè.',vi:'Tôi thích đọc sách và cũng thích nghe nhạc.',note:'爱看书 nói sở thích, không cần hiểu thành tình yêu sâu đậm. 喜欢看书 cũng diễn đạt được ý thích đọc trong ngữ cảnh này.',origin:'Ví dụ biên soạn; đối chiếu nghĩa và cách dùng'},
+   {cn:'这种植物喜光。',pin:'Zhè zhǒng zhíwù xǐ guāng.',vi:'Loại cây này ưa ánh sáng.',note:'喜光 nói điều kiện sinh trưởng thích hợp; không phải niềm vui của cây. Không thay thành 爱光 để diễn đạt đặc tính này.',origin:'Ví dụ Hanzii; phiên âm trình bày lại'},
+   {cn:'这件衣服爱掉色，最好单独洗。',pin:'Zhè jiàn yīfu ài diào sè, zuìhǎo dāndú xǐ.',vi:'Chiếc áo này dễ phai màu, tốt nhất nên giặt riêng.',note:'爱 nghĩa dễ/hay xảy ra; 喜掉色 không mang cùng nghĩa trong câu này.',origin:'Ví dụ biên soạn; đối chiếu nghĩa và cách dùng'},
+   {cn:'他们家有喜事，周末要办婚礼。',pin:'Tāmen jiā yǒu xǐshì, zhōumò yào bàn hūnlǐ.',vi:'Nhà họ có chuyện vui, cuối tuần sẽ tổ chức lễ cưới.',note:'喜 trong 喜事 gắn với chuyện đáng mừng. Đây là từ ghép cố định, không đổi thành 爱事.',origin:'Ví dụ biên soạn; đối chiếu nghĩa và cách dùng'}
+  ],
+  takeaway:'Nhớ theo câu: 喜 có thể là vui, chuyện mừng hoặc thích/ưa; 爱 có thể là yêu thương, thích làm gì hoặc dễ/hay xảy ra. Không đồng nhất 喜 với 喜欢, cũng không đồng nhất mọi nghĩa của 爱 với “yêu”.'
+ }
+};
+function detailedPairExplanation(w,item){
+ const guide=detailedRelationGuides[[w.han,item.han].sort().join('|')];if(!guide)return null;
+ const box=relationElement('div','','relation-pair-guide');box.append(relationElement('h6','Phân biệt nghĩa và cách dùng'),relationElement('p',guide.intro));
+ for(const [heading,body] of guide.sections)box.append(relationElement('h6',heading),relationElement('p',body));
+ box.append(relationElement('h6','Tình huống và ví dụ'));
+ for(const example of guide.examples){const ex=relationElement('div','','relation-pair-example');ex.append(relationElement('strong',example.cn),pinyinLine(example.pin),relationElement('span',example.vi,'relation-meaning'),relationElement('p',example.note),relationElement('small',example.origin));box.append(ex);}
+ box.append(relationElement('p',guide.takeaway));
+ const sources=relationElement('div','','source-links');for(const [title,url] of [['Hanzii: 爱','https://hanzii.net/search/word/%E7%88%B1?hl=vi'],['Hanzii: 喜','https://hanzii.net/search/word/%E5%96%9C?hl=vi'],['Đối chiếu thêm: 喜 · Hán Điển','https://zdic.net/hans/%E5%96%9C']]){const a=relationElement('a',title);a.href=url;a.target='_blank';a.rel='noopener noreferrer';sources.append(a);}box.append(sources);return box;
+}
+
 
 'use strict';
 const $ = id => document.getElementById(id);
@@ -511,6 +542,7 @@ rebuildDeck();renderSearch();
 for(const input of document.querySelectorAll('input[name="quizType"]'))input.onchange=()=>{resetQuiz('Đã đổi dạng kiểm tra tổng hợp. Bấm Bắt đầu để tạo lượt mới.');updateQuizScopeInfo();};
 
 function relationPairGuide(w,item){
+ const detailed=detailedPairExplanation(w,item);if(detailed)return detailed;
  const detail=relationElement('div','','relation-pair-guide');
  const group=confusableGroups.find(g=>g.category!=='other'&&g.members.some(m=>m.key===wordKey(w))&&g.members.some(m=>m.han===item.han));
  detail.append(relationElement('h6','So sánh nghĩa'));
