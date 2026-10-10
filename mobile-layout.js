@@ -1,4 +1,9 @@
 (()=>{
+ // Some iOS Home Screen sessions report a zero inset while drawing the status bar over content.
+ const iosDevice=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),standalone=window.matchMedia('(display-mode: standalone)');
+ function updateSafeArea(){document.body.classList.toggle('ios-standalone',iosDevice&&(navigator.standalone===true||standalone.matches));}
+ updateSafeArea();standalone.addEventListener?.('change',updateSafeArea);window.addEventListener('pageshow',updateSafeArea);
+
  const $=id=>document.getElementById(id),body=document.body,drawer=$('drawer'),menu=$('menuBtn'),about=$('aboutPanel'),workspace=document.querySelector('.workspace');
  function hideAbout(){about.hidden=true;body.classList.remove('show-about');}
  function closeDrawer(restore=true){if(!body.classList.contains('drawer-open'))return;body.classList.remove('drawer-open');drawer.inert=true;drawer.setAttribute('aria-hidden','true');menu.setAttribute('aria-expanded','false');if(restore)menu.focus();}
