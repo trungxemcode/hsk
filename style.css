@@ -355,4 +355,4 @@
 
 .phone-title{display:none}@media(max-width:600px){.full-title{display:none}.phone-title{display:inline}}
 
-.relation-tabs{display:flex;gap:8px;margin:12px 0}.relation-toggle{flex:1;min-height:48px}.relation-toggle[aria-expanded="true"],.relation-word[aria-expanded="true"]{background:#dce8ff;border-color:#466fd1;box-shadow:inset 0 0 0 1px #466fd1}.relation-panel[hidden],.relation-pair[hidden]{display:none}.relation-panel .relation-list{grid-template-columns:repeat(auto-fit,minmax(95px,1fr))}.relation-panel .relation-word{min-height:56px;text-align:center;cursor:pointer}.relation-panel .relation-pin{display:block}
+.relation-tabs{display:flex;gap:8px;margin:12px 0}.relation-toggle{flex:1;min-height:48px}.relation-toggle[aria-expanded="true"],.relation-word[aria-expanded="true"]{background:#dce8ff;color:#173b75;border-color:#466fd1;box-shadow:inset 0 0 0 1px #466fd1}.relation-panel[hidden],.relation-pair[hidden]{display:none}.relation-panel .relation-list{grid-template-columns:repeat(auto-fit,minmax(95px,1fr))}.relation-panel .relation-word{min-height:56px;text-align:center;cursor:pointer}.relation-panel .relation-pin{display:block}
