@@ -2,46 +2,43 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>HSK Flashcards (HSK 1-6) - Import từ file (Gộp)</title>
   <link rel="stylesheet" href="./style.css?v=push-2">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#2563eb">
+<link rel="stylesheet" href="./mobile-layout.css?v=mobile-1">
+<meta name="theme-color" content="#12307a">
 </head>
 
 <body>
-  <h1><span class="full-title">HSK Flashcards (Tổng hợp HSK 1-6)</span><span class="phone-title">HSK 1–6 · Từ vựng</span></h1>
+  <button type="button" class="menu-btn" id="menuBtn" aria-label="Mở menu" aria-controls="drawer" aria-expanded="false"></button>
+  <button type="button" class="level-pill" id="levelPill" aria-label="Đổi bộ lọc HSK"></button>
+  <h1>HSK Flashcards (Tổng hợp HSK 1-6)</h1>
 
-  <div class="offline-bar"><span id="offlineStatus" role="status">Đang chuẩn bị học offline…</span><button id="offlineUpdate" hidden>Cập nhật</button></div>
+  
   <div class="mobile-controls">
     <label for="mobileLevel">Trình độ<select id="mobileLevel"><option value="all">Tất cả HSK</option><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select></label>
     <label for="mobileMode">Cách học<select id="mobileMode"><option value="learn">Thẻ từ vựng</option><option value="search">Tìm kiếm</option><option value="quiz">Trắc nghiệm</option><option value="mistakes">Ôn câu sai</option><option value="compare">Từ dễ nhầm</option><option value="srs">Ôn tập SRS</option></select></label>
   </div>
-  <div class="filter-buttons">
-    <button class="filter-btn active" data-filter="all">TẤT CẢ</button>
-    <button class="filter-btn hsk1" data-filter="1">HSK 1</button>
-    <button class="filter-btn hsk2" data-filter="2">HSK 2</button>
-    <button class="filter-btn hsk3" data-filter="3">HSK 3</button>
-    <button class="filter-btn hsk4" data-filter="4">HSK 4</button>
-    <button class="filter-btn hsk5" data-filter="5">HSK 5</button>
-    <button class="filter-btn hsk6" data-filter="6">HSK 6</button>
-  </div>
+
 
 
   <nav class="app-tabs" aria-label="Chế độ học">
-    <button class="active" data-mode="learn" aria-pressed="true">📖 Thẻ từ vựng</button>
-    <button data-mode="search" aria-pressed="false">🔎 Tìm kiếm từ vựng</button>
-    <button data-mode="quiz" aria-pressed="false">🎯 Trắc nghiệm</button>
-    <button data-mode="mistakes" aria-pressed="false">↻ Ôn câu sai</button>
-    <button data-mode="compare" aria-pressed="false">⇄ Từ dễ nhầm</button>
-    <button data-mode="srs" aria-pressed="false">📅 Ôn tập SRS</button>
+    <button class="active" data-mode="learn" aria-pressed="true" aria-label="Thẻ từ vựng"><span class="ico" aria-hidden="true">📖</span><span class="lbl">Thẻ từ</span></button>
+    <button data-mode="search" aria-pressed="false" aria-label="Tìm kiếm từ vựng"><span class="ico" aria-hidden="true">🔎</span><span class="lbl">Tìm kiếm</span></button>
+    <button data-mode="quiz" aria-pressed="false" aria-label="Trắc nghiệm"><span class="ico" aria-hidden="true">🎯</span><span class="lbl">Trắc nghiệm</span></button>
+    <button data-mode="mistakes" aria-pressed="false" aria-label="Ôn câu sai"><span class="ico" aria-hidden="true">↻</span><span class="lbl">Ôn sai</span></button>
+    <button data-mode="compare" aria-pressed="false" aria-label="Từ dễ nhầm"><span class="ico" aria-hidden="true">⇄</span><span class="lbl">Dễ nhầm</span></button>
+    <button data-mode="srs" aria-pressed="false" aria-label="Ôn tập SRS"><span class="ico" aria-hidden="true">📅</span><span class="lbl">SRS</span></button>
   </nav>
-  <p id="storageNotice" role="status" hidden></p>
-  <details id="dictionarySummary" class="dictionary-summary"><summary id="dictionaryCoverage"></summary><p id="dictionaryCoverageDetail"></p></details>
-  <aside class="memory-reminder" role="status"><span id="memoryReminderText"></span> <button id="memoryDueStart" hidden>Ôn từ đến hạn ngay</button></aside>
-  <div id="appLoadStatus" role="status">Đang tải dữ liệu học…</div><main class="workspace">
+  
+  
+  
+  <main class="workspace">
+<div class="offline-bar"><span id="offlineStatus" role="status">Đang chuẩn bị học offline…</span><button id="offlineUpdate" hidden>Cập nhật</button></div><p id="storageNotice" role="status" hidden></p><aside class="memory-reminder" role="status"><span id="memoryReminderText"></span> <button id="memoryDueStart" hidden>Ôn từ đến hạn ngay</button></aside><div id="appLoadStatus" role="status">Đang tải dữ liệu học…</div>
   <section id="learnPanel" aria-label="Thẻ từ vựng">
   <div class="field-row"><label for="masteryFilter">Trạng thái:</label><select id="masteryFilter"><option value="all">Tất cả từ</option><option value="known">Đã thuộc</option><option value="unknown">Chưa thuộc (gồm từ chưa đánh dấu)</option></select></div>
   <p class="hint">Chạm thẻ để xem nghĩa. Dùng hai nút ở dưới thẻ để đánh dấu trạng thái.</p>
@@ -92,7 +89,7 @@
   </section>
   <section id="searchPanel" class="panel-box" hidden>
     <h2>Tìm kiếm từ vựng</h2>
-    <p class="hint">Nhập nghĩa tiếng Việt, có hoặc không dấu. Tìm theo từ/cụm từ và các nhóm gần nghĩa có sẵn; kết quả luôn xếp HSK thấp → cao. Bộ lọc HSK phía trên áp dụng cho cả tìm kiếm.</p>
+    <p class="hint">Nhập nghĩa tiếng Việt, có hoặc không dấu. Tìm theo từ/cụm từ và các nhóm gần nghĩa có sẵn; kết quả luôn xếp HSK thấp → cao. Bộ lọc HSK trong menu ☰ áp dụng cho cả tìm kiếm.</p>
     <form id="searchForm" class="field-row"><input id="searchInput" aria-label="Nghĩa tiếng Việt cần tìm" placeholder="Ví dụ: vui vẻ, bố, xinh đẹp…" autocomplete="off"><button type="submit">Tìm kiếm</button></form>
     <div id="searchSummary" class="hint" role="status"></div>
     <div id="searchResults" class="result-grid"></div><button id="searchMore" hidden>Xem thêm</button>
@@ -127,7 +124,7 @@
     <p id="mistakeSummary" class="hint" role="status"></p><h3>Từ hay nhầm</h3><div id="mistakeWords" class="result-grid"></div><h3>Câu đã làm sai</h3><div id="mistakeList"></div><button id="mistakeMore" hidden>Xem thêm câu sai</button>
   </section>
   <section id="comparePanel" class="panel-box" hidden>
-    <h2 id="compareTitle">Từ gần nghĩa khác cách dùng</h2><p class="hint">Giải thích đã đối chiếu với Hanzii; các câu bài tập được biên soạn riêng. Đọc cách dùng, điểm giao nhau và lưu ý trước khi luyện. Đồng nghĩa và trái nghĩa của từng từ nằm dưới thẻ từ vựng, trong kết quả tìm kiếm và đáp án SRS. Bộ lọc HSK phía trên lọc theo từ trong nhóm.</p><div class="field-row"><label for="compareCategory">Loại nhóm:</label><select id="compareCategory"><option value="near">Gần nghĩa, khác cách dùng</option><option value="other">Các cặp dễ lẫn khác</option><option value="all">Tất cả nhóm</option></select></div><p id="compareSummary" class="hint"></p><button id="compareStart">Luyện các nhóm đang hiển thị</button><div id="compareGroups"></div>
+    <h2 id="compareTitle">Từ gần nghĩa khác cách dùng</h2><p class="hint">Giải thích đã đối chiếu với Hanzii; các câu bài tập được biên soạn riêng. Đọc cách dùng, điểm giao nhau và lưu ý trước khi luyện. Đồng nghĩa và trái nghĩa của từng từ nằm dưới thẻ từ vựng, trong kết quả tìm kiếm và đáp án SRS. Bộ lọc HSK trong menu ☰ lọc theo từ trong nhóm.</p><div class="field-row"><label for="compareCategory">Loại nhóm:</label><select id="compareCategory"><option value="near">Gần nghĩa, khác cách dùng</option><option value="other">Các cặp dễ lẫn khác</option><option value="all">Tất cả nhóm</option></select></div><p id="compareSummary" class="hint"></p><button id="compareStart">Luyện các nhóm đang hiển thị</button><div id="compareGroups"></div>
   </section>
   <section id="srsPanel" class="panel-box" hidden>
     <h2>Ôn tập ngắt quãng SRS</h2>
@@ -149,13 +146,46 @@
     <div id="srsRatings" class="ratings" hidden><button data-rating="again">Quên<small></small></button><button data-rating="hard">Khó<small></small></button><button data-rating="good">Nhớ<small></small></button><button data-rating="easy">Dễ<small></small></button></div>
     <div id="srsMessage" role="status"></div>
   </section>
-  </main>
+  <section id="aboutPanel" class="about" aria-label="Giới thiệu ứng dụng" hidden>
+    <div class="about-hero"><span class="about-logo" aria-hidden="true">汉</span><div><strong>HSK Flashcards</strong><span>Tổng hợp HSK 1–6</span></div></div>
+    <div class="about-card"><h3>Ứng dụng này để làm gì</h3>
+      <p>Học từ vựng HSK 1–6 bằng thẻ lật, tìm từ theo nghĩa tiếng Việt, làm trắc nghiệm, ôn lại câu đã sai, phân biệt các từ dễ nhầm và ôn tập ngắt quãng (SRS).</p></div>
+    
+    <div class="about-card"><h3>Nguồn dữ liệu trích dẫn</h3>
+      <p>Nghĩa, câu ví dụ và quan hệ từ (đồng nghĩa, trái nghĩa) được đối chiếu với từ điển <a href="https://hanzii.net" target="_blank" rel="noopener noreferrer">Hanzii</a>. Các câu bài tập và phần giải thích cách dùng được biên soạn riêng dựa trên Hanzii và được ghi rõ, tách khỏi câu gốc.</p>
+<details id="dictionarySummary" class="dictionary-summary"><summary id="dictionaryCoverage"></summary><p id="dictionaryCoverageDetail"></p></details>
+    </div>
+    <div class="about-card"><h3>Dữ liệu học của bạn</h3>
+      <p>Tiến độ từ vựng, lịch ôn SRS và lịch sử câu sai được lưu trong trình duyệt của thiết bị này. Xóa dữ liệu trình duyệt hoặc đổi thiết bị sẽ làm mất các thông tin đó.</p></div>
+  </section>
+</main>
 
-  <!-- Dữ liệu words được gộp vào đây -->
+  <div class="drawer-scrim" id="drawerScrim"></div>
+  <aside class="drawer" id="drawer" aria-label="Menu" aria-hidden="true" inert>
+    <div class="drawer-head"><span class="about-logo" aria-hidden="true">汉</span><div><strong>HSK Flashcards</strong><span>Tổng hợp HSK 1–6</span></div>
+      <button type="button" class="drawer-close" id="drawerClose" aria-label="Đóng menu">✕</button></div>
+    <div class="drawer-body">
+      <h2 class="drawer-title">Bộ lọc HSK</h2>
+      <p class="drawer-hint">Áp dụng cho thẻ từ vựng, tìm kiếm, trắc nghiệm và ôn tập.</p>
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">TẤT CẢ</button>
+    <button class="filter-btn hsk1" data-filter="1">HSK 1</button>
+    <button class="filter-btn hsk2" data-filter="2">HSK 2</button>
+    <button class="filter-btn hsk3" data-filter="3">HSK 3</button>
+    <button class="filter-btn hsk4" data-filter="4">HSK 4</button>
+    <button class="filter-btn hsk5" data-filter="5">HSK 5</button>
+    <button class="filter-btn hsk6" data-filter="6">HSK 6</button>
+  </div>
+      <h2 class="drawer-title">Thông tin</h2>
+      <button type="button" class="drawer-item" id="aboutBtn"><span class="di-ico" aria-hidden="true">ℹ️</span><span class="di-lbl">Giới thiệu ứng dụng</span><span class="di-chev" aria-hidden="true">›</span></button>
+    </div>
+  </aside>
+<!-- Dữ liệu words được gộp vào đây -->
   
 
   
 <script src="./loader.js?v=push-2" defer></script>
 <script src="./offline.js?v=offline-1" defer></script>
+<script src="./mobile-layout.js?v=mobile-1" defer></script>
 </body>
 </html>
