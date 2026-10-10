@@ -588,3 +588,6 @@ body>h1{font-size:12.5px;line-height:1.3;margin:0;letter-spacing:0}
 body>h1{order:1}
 
 body.show-account .workspace>section:not(#accountPanel){display:none!important}body.show-account h1::after{content:"Tài khoản"!important}#accountPanel h2{display:block;font-size:20px}#accountForm{display:grid;gap:10px}#accountForm input,#accountForm select{width:100%;min-width:0}#accountForm label{font-size:14px;font-weight:600}#accountForm button,#accountReset,#accountBackup{width:100%;margin:10px 0}.account-actions{display:grid;gap:10px}.account-badge{display:inline-block;padding:5px 10px;background:#e6edff;color:#12307a;border-radius:12px;font-size:13px}#accountEmailLabel{overflow-wrap:anywhere}.show-account .app-tabs button.active{color:var(--muted)}.show-account .app-tabs button.active .ico{background:transparent}
+
+/* Pair explanations occupy the row directly below the selected word. */
+.relation-list > .relation-pair{grid-column:1 / -1;box-sizing:border-box;min-height:0;margin:0}

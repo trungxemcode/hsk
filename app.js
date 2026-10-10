@@ -601,12 +601,21 @@ function wordRelationDetails(w){
    panel.append(relationElement('p','Chọn một từ để xem giải thích.','hint'));
    if(!list.length)panel.append(relationElement('p',`Hanzii chưa liệt kê từ ${label.toLowerCase()} cho cách đọc này.`,'hint'));
    const grid=relationElement('div','','relation-list'),detail=relationElement('section','','relation-pair');detail.hidden=true;
-   let selected=null;
+   let selected=null,motion=null;
+   function expandPair(show){
+    motion?.cancel();motion=null;detail.inert=!show;
+    const height=detail.getBoundingClientRect().height;
+    if(show)detail.hidden=false;
+    if(typeof detail.animate!=='function'||matchMedia('(prefers-reduced-motion: reduce)').matches){detail.hidden=!show;detail.style.overflow='';return;}
+    detail.style.overflow='hidden';
+    const animation=detail.animate([{height:show?'0px':height+'px',opacity:show?0:1},{height:show?detail.getBoundingClientRect().height+'px':'0px',opacity:show?1:0}],{duration:240,easing:'cubic-bezier(.22,1,.36,1)'});motion=animation;
+    animation.onfinish=()=>{if(motion!==animation)return;motion=null;detail.hidden=!show;detail.style.overflow='';};
+   }
    for(const item of list){
     const entry=relationElement('button','','relation-word');entry.type='button';entry.setAttribute('aria-expanded','false');
     entry.append(relationElement('strong',item.han),relationElement('span',item.pin||'','relation-pin'));
     entry.onclick=()=>{
-     const hide=selected===entry;for(const e of grid.children)e.setAttribute('aria-expanded','false');detail.replaceChildren();detail.hidden=hide;selected=hide?null:entry;if(hide)return;
+     const hide=selected===entry;for(const e of grid.querySelectorAll(':scope > .relation-word'))e.setAttribute('aria-expanded','false');selected=hide?null:entry;if(hide){expandPair(false);return;}motion?.cancel();motion=null;detail.replaceChildren();detail.hidden=false;entry.after(detail);
      entry.setAttribute('aria-expanded','true');detail.append(relationElement('h5',w.han+' ↔ '+item.han));
      if(!isSyn)detail.append(relationElement('p','Đây là quan hệ trái nghĩa theo Hanzii. Đối chiếu đúng nghĩa trong câu; không mặc định mọi nghĩa của hai từ đều đối lập.','hint'));
      if(isSyn)detail.append(relationPairGuide(w,item));else{
@@ -615,9 +624,10 @@ function wordRelationDetails(w){
       appendPairExamples(detail,w.han,w.pin,[]);appendPairExamples(detail,item.han,pin,[]);
      }
      const known=item.key&&relationIndex().get(item.key);if(known){const open=relationElement('button',`Mở thẻ ${item.han} · HSK ${known.hsk}`);open.type='button';open.onclick=()=>openRelatedWord(item.key);detail.append(open);}
+     expandPair(true);
     };grid.append(entry);
    }
-   panel.append(grid,detail);
+   panel.append(grid);
    if(!isSyn&&counter.length)panel.append(relationElement('p','Từ đối ứng (khác vai trò, không phải trái nghĩa): '+counter.map(i=>i.han).join(' · '),'hint'));
    const source=relationElement('a','Nguồn quan hệ từ · Hanzii ↗','dictionary-source');source.href=r.url;source.target='_blank';source.rel='noopener noreferrer';panel.append(source);
   };tabs.append(toggle);

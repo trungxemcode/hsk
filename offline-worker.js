@@ -1,4 +1,4 @@
-const OFFLINE_VERSION='hsk-offline-20261010-update-4';
+const OFFLINE_VERSION='hsk-offline-20261010-inline-pair-1';
 const OFFLINE_FILES=["./", "index.html", "style.css", "mobile-layout.css", "mobile-layout.js", "account.js", "account-core.js", "account-config.json", "loader.js", "app.js", "push.js", "offline.js", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png", "push-config.json", "ios-transfer.html", "words.js", "dictionarySupplement.js", "checkedPracticeExamples.js", "exampleMetadata.js", "wordRelationsData.js", "usageFactsData.js", "confusableGroups.js", "contextQuizBank.js", "words.js.gz", "dictionarySupplement.js.gz", "checkedPracticeExamples.js.gz", "exampleMetadata.js.gz", "wordRelationsData.js.gz", "usageFactsData.js.gz", "confusableGroups.js.gz", "contextQuizBank.js.gz"];
 self.addEventListener('install',event=>event.waitUntil((async()=>{
  const cache=await caches.open(OFFLINE_VERSION);
