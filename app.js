@@ -587,27 +587,42 @@ function relationElement(tag,text,cls){const el=document.createElement(tag);el.t
 function relationIndex(){if(!relationWordIndex){relationWordIndex=new Map();for(const w of words)relationWordIndex.set(wordKey(w),w);}return relationWordIndex;}
 function openRelatedWord(key){const w=relationIndex().get(key);if(!w)return;document.querySelector(`[data-filter="${w.hsk}"]`).click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');$('flashcard').focus();}
 function wordRelationDetails(w){
- const r=wordRelationsData.entries[wordKey(w)],box=relationElement('details','', 'word-relations');
- box.open=true;
+ const r=wordRelationsData.entries[wordKey(w)],box=relationElement('section','','word-relations');
  const syn=r?.synonyms||[],ant=r?.antonyms||[],counter=r?.counterparts||[];
- box.append(relationElement('summary',`Đồng nghĩa / gần nghĩa (${syn.length}) · Trái nghĩa (${ant.length})${counter.length?' · Đối ứng ('+counter.length+')':''}`));
- if(!r?.checked){box.append(relationElement('p','Chưa có dữ liệu quan hệ từ đã đối chiếu cho mục này.','hint'));return box;}
- if(r.status==='reading-not-listed')box.append(relationElement('p','Nguồn chưa liệt kê quan hệ từ khớp với cách đọc đang học; không dùng danh sách của cách đọc khác.','hint'));
- if(r.status==='not-listed')box.append(relationElement('p','Hanzii chưa có mục quan hệ từ khớp riêng cho từ hoặc cấu trúc này.','hint'));
- box.append(relationElement('p',`Quan hệ từ của ${w.han} (${w.pin}).`,'hint'));
- box.append(relationElement('p','Mỗi cặp bên dưới có đối chiếu các nghĩa, từ loại và ngữ cảnh hiện có. Các nhận định riêng về sắc thái hoặc điều kiện thay thế chỉ xuất hiện khi đã có giải thích được đối chiếu.','hint'));
- box.append(relationElement('p','Danh sách Hanzii liệt kê theo các nghĩa của từ. Từ gần nghĩa có thể khác cấu trúc, sắc thái hoặc cách kết hợp; không mặc định thay thế trong mọi câu.','hint'));
- for(const [title,list,empty] of [['Đồng nghĩa / gần nghĩa',syn,'Hanzii chưa liệt kê từ đồng nghĩa / gần nghĩa cho mục này.'],['Trái nghĩa',ant,'Hanzii chưa liệt kê từ trái nghĩa cho mục này.'],['Từ đối ứng',counter,'']]){
-  if(title==='Từ đối ứng'&&!list.length)continue;
-  box.append(relationElement('h4',title));if(!list.length){box.append(relationElement('p',empty,'hint'));continue;}
-  const grid=relationElement('div','', 'relation-list');
-  for(const item of list){const known=item.key&&relationIndex().get(item.key);const entry=relationElement(known?'button':'div','', 'relation-word');if(known){entry.type='button';entry.title='Mở thẻ '+item.han;entry.onclick=e=>{e.stopPropagation();openRelatedWord(item.key);};}
-   entry.append(relationElement('strong',item.han));const variants=wordRelationsData.lexicon[item.han]||[];if(variants.length){for(const v of variants){entry.append(relationElement('span',v.pinyin||'Phiên âm chưa có ở nguồn tra cứu','relation-pin'),relationElement('span',v.mean||'Nghĩa riêng chưa có ở nguồn tra cứu','relation-meaning'));}if(variants.length>1)entry.append(relationElement('small','Nhiều cách đọc: xem nghĩa ở từng dòng.'));}else{entry.append(relationElement('span',item.pin||'Phiên âm chưa có ở nguồn tra cứu','relation-pin'),relationElement('span',item.mean||'Nghĩa riêng chưa có ở nguồn tra cứu','relation-meaning'));}if(known)entry.append(relationElement('small',`Mở thẻ: ${known.pin} · HSK ${known.hsk}`));else entry.append(relationElement('small','Ngoài danh sách học hiện tại'));grid.append(entry);}
-  box.append(grid);if(title==='Đồng nghĩa / gần nghĩa'){const guides=relationElement('div','','relation-pair-guides');for(const item of list){const wrap=relationElement('section','','relation-pair');wrap.append(relationElement('h5',w.han+' ↔ '+item.han),relationPairGuide(w,item));guides.append(wrap);}box.append(guides);}if(title==='Từ đối ứng')box.append(relationElement('p','Khác vai trò hoặc quan hệ đối ứng, không phải phủ định nghĩa của nhau.','hint'));
+ const tabs=relationElement('div','','relation-tabs'),panel=relationElement('div','','relation-panel');panel.hidden=true;
+ box.append(tabs,panel);
+ let active=null;
+ for(const [label,list,isSyn] of [['Đồng nghĩa',syn,true],['Trái nghĩa',ant,false]]){
+  const toggle=relationElement('button',`${label} (${list.length})`,'relation-toggle');toggle.type='button';toggle.setAttribute('aria-expanded','false');
+  toggle.onclick=()=>{
+   const close=active===toggle;for(const t of tabs.children)t.setAttribute('aria-expanded','false');panel.replaceChildren();panel.hidden=close;active=close?null:toggle;if(close)return;
+   toggle.setAttribute('aria-expanded','true');
+   if(!r?.checked){panel.append(relationElement('p','Chưa có dữ liệu quan hệ từ đã đối chiếu cho mục này.','hint'));return;}
+   panel.append(relationElement('p','Chọn một từ để xem giải thích.','hint'));
+   if(!list.length)panel.append(relationElement('p',`Hanzii chưa liệt kê từ ${label.toLowerCase()} cho cách đọc này.`,'hint'));
+   const grid=relationElement('div','','relation-list'),detail=relationElement('section','','relation-pair');detail.hidden=true;
+   let selected=null;
+   for(const item of list){
+    const entry=relationElement('button','','relation-word');entry.type='button';entry.setAttribute('aria-expanded','false');
+    entry.append(relationElement('strong',item.han),relationElement('span',item.pin||'','relation-pin'));
+    entry.onclick=()=>{
+     const hide=selected===entry;for(const e of grid.children)e.setAttribute('aria-expanded','false');detail.replaceChildren();detail.hidden=hide;selected=hide?null:entry;if(hide)return;
+     entry.setAttribute('aria-expanded','true');detail.append(relationElement('h5',w.han+' ↔ '+item.han));
+     if(!isSyn)detail.append(relationElement('p','Đây là quan hệ trái nghĩa theo Hanzii. Đối chiếu đúng nghĩa trong câu; không mặc định mọi nghĩa của hai từ đều đối lập.','hint'));
+     if(isSyn)detail.append(relationPairGuide(w,item));else{
+      const known=item.key&&relationIndex().get(item.key),pin=item.pin||known?.pin||'',a=usageVariant(w.han,w.pin),b=usageVariant(item.han,pin);
+      appendUsageWord(detail,w.han,w.pin,a,w.mean);appendUsageWord(detail,item.han,pin,b,item.mean);
+      appendPairExamples(detail,w.han,w.pin,[]);appendPairExamples(detail,item.han,pin,[]);
+     }
+     const known=item.key&&relationIndex().get(item.key);if(known){const open=relationElement('button',`Mở thẻ ${item.han} · HSK ${known.hsk}`);open.type='button';open.onclick=()=>openRelatedWord(item.key);detail.append(open);}
+    };grid.append(entry);
+   }
+   panel.append(grid,detail);
+   if(!isSyn&&counter.length)panel.append(relationElement('p','Từ đối ứng (khác vai trò, không phải trái nghĩa): '+counter.map(i=>i.han).join(' · '),'hint'));
+   const source=relationElement('a','Nguồn quan hệ từ · Hanzii ↗','dictionary-source');source.href=r.url;source.target='_blank';source.rel='noopener noreferrer';panel.append(source);
+  };tabs.append(toggle);
  }
- const lessons=confusableGroups.filter(g=>g.category!=='other'&&g.members.some(m=>m.key===wordKey(w)));
- if(lessons.length){const b=relationElement('button','Xem phân biệt cách dùng');b.type='button';b.onclick=e=>{e.stopPropagation();$('compareCategory').value='near';document.querySelector('[data-filter="all"]').click();switchMode('compare');const target=$('compareGroups').querySelector(`[data-group="${lessons[0].id}"]`);if(target){target.open=true;target.scrollIntoView({block:'start',behavior:'smooth'});}};box.append(b);}
- const source=relationElement('a','Nguồn quan hệ từ · Hanzii ↗','dictionary-source');source.href=r.url;source.target='_blank';source.rel='noopener noreferrer';box.append(source);return box;
+ return box;
 }
 function renderCardRelations(w){const root=$('wordRelations');if(!root)return;root.replaceChildren();root.hidden=!w;if(w)root.append(wordRelationDetails(w));}
 // Separate history keeps previous vocabulary/SRS records compatible.
