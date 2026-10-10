@@ -11,6 +11,8 @@
 <meta name="theme-color" content="#2563eb">
 <link rel="stylesheet" href="./mobile-layout.css?v=mobile-1">
 <meta name="theme-color" content="#12307a">
+<script src="./admin-core.js" defer></script>
+<script src="./admin.js" defer></script>
 <script src="./account-core.js?v=account-1" defer></script>
 <script src="./account.js?v=account-1" defer></script>
 </head>
@@ -148,6 +150,7 @@
     <div id="srsRatings" class="ratings" hidden><button data-rating="again">Quên<small></small></button><button data-rating="hard">Khó<small></small></button><button data-rating="good">Nhớ<small></small></button><button data-rating="easy">Dễ<small></small></button></div>
     <div id="srsMessage" role="status"></div>
   </section>
+  <section id="adminPanel" class="panel-box" aria-label="Dashboard admin" hidden><h2>Dashboard học viên</h2><p class="hint">Thống kê từ tiến độ đã đồng bộ. Đã thuộc là trạng thái tự đánh dấu hoặc kết quả ôn; dữ liệu offline xuất hiện khi người học kết nối lại.</p><button id="adminRefresh">Làm mới thống kê</button><p id="adminStatus" role="status"></p><div id="adminOverview" class="admin-kpis"></div><label for="adminSearch">Tìm học viên</label><input id="adminSearch" type="search" placeholder="Nhập email"><label for="adminStudent">Chọn học viên</label><select id="adminStudent"></select><div id="adminDetail"></div></section>
   <section id="accountPanel" class="panel-box" aria-label="Tài khoản" hidden>
 <h2>Tài khoản và đồng bộ</h2><p id="accountBadge" class="account-badge"></p><p id="accountStatus" role="status" class="hint"></p>
 <div id="accountForms"><form id="accountForm">
@@ -157,7 +160,7 @@
 <button id="accountSubmit" type="submit">Đăng nhập</button></form><button id="accountReset" type="button">Quên mật khẩu</button></div>
 <div id="accountSigned" hidden><p>Đang đăng nhập: <strong id="accountEmailLabel"></strong></p><div class="account-actions"><button id="accountSync">Đồng bộ lại</button><button id="accountApply" hidden>Áp dụng tiến độ mới</button><button id="accountImport" hidden>Nhập tiến độ cũ trên thiết bị</button><button id="accountVerify">Gửi email xác minh</button><button id="accountLogout">Đăng xuất</button></div></div>
 <p class="hint">Tiến độ từ vựng, lịch SRS, câu sai và phân tích học tập được lưu theo tài khoản. Khi mất mạng, app giữ thay đổi trên máy và gửi lên khi có mạng. Nếu hai thiết bị sửa cùng một mục, lần cập nhật có thời gian mới hơn được giữ.</p>
-<button id="accountBackup">Tải bản sao lưu tiến độ</button><p class="hint">Firebase quản lý email và mật khẩu. Bạn không cần đăng nhập lại mỗi lần mở app trên thiết bị đã đăng nhập.</p>
+<button id="accountBackup">Tải bản sao lưu tiến độ</button><p class="hint">Thống kê tiến độ đã đồng bộ có thể được quản trị viên xem. Firebase quản lý email và mật khẩu. Bạn không cần đăng nhập lại mỗi lần mở app trên thiết bị đã đăng nhập.</p>
 </section>
 <section id="aboutPanel" class="about" aria-label="Giới thiệu ứng dụng" hidden>
     <div class="about-hero"><span class="about-logo" aria-hidden="true">汉</span><div><strong>HSK Flashcards</strong><span>Tổng hợp HSK 1–6</span></div></div>
@@ -189,7 +192,7 @@
     <button class="filter-btn hsk5" data-filter="5">HSK 5</button>
     <button class="filter-btn hsk6" data-filter="6">HSK 6</button>
   </div>
-      <h2 class="drawer-title">Tài khoản</h2><button type="button" class="drawer-item" id="accountBtn"><span class="di-ico" aria-hidden="true">👤</span><span class="di-lbl" id="accountNavLabel">Đăng nhập / Tạo tài khoản</span><span class="di-chev" aria-hidden="true">›</span></button><h2 class="drawer-title">Thông tin</h2>
+      <h2 class="drawer-title">Tài khoản</h2><button type="button" class="drawer-item" id="accountBtn"><span class="di-ico" aria-hidden="true">👤</span><span class="di-lbl" id="accountNavLabel">Đăng nhập / Tạo tài khoản</span><span class="di-chev" aria-hidden="true">›</span></button><button type="button" class="drawer-item" id="adminBtn" hidden><span class="di-ico" aria-hidden="true">📊</span><span class="di-lbl">Dashboard admin</span><span class="di-chev">›</span></button><h2 class="drawer-title">Thông tin</h2>
       <button type="button" class="drawer-item" id="aboutBtn"><span class="di-ico" aria-hidden="true">ℹ️</span><span class="di-lbl">Giới thiệu ứng dụng</span><span class="di-chev" aria-hidden="true">›</span></button>
     </div>
   </aside>

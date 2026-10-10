@@ -1,6 +1,21 @@
 rules_version = '2';
 service cloud.firestore {
  match /databases/{database}/documents {
+  function isDashboardAdmin() {return request.auth != null && request.auth.token.email == 'honghiemtrung668@gmail.com' && request.auth.token.email_verified == true;}
+  match /learningSummaries/{uid} {
+   allow read: if request.auth != null && (request.auth.uid == uid || isDashboardAdmin());
+   allow create, update: if request.auth != null && request.auth.uid == uid
+    && request.resource.data.keys().hasOnly(['schema','email','levels','dueDates','attempts','errors','lastActivity','daily','difficult','updatedAt'])
+    && request.resource.data.schema == 1 && request.resource.data.email == request.auth.token.email
+    && request.resource.data.levels is list && request.resource.data.levels.size() == 6
+    && request.resource.data.dueDates is list && request.resource.data.dueDates.size() <= 5000
+    && request.resource.data.daily is list && request.resource.data.daily.size() <= 90
+    && request.resource.data.difficult is list && request.resource.data.difficult.size() <= 8
+    && request.resource.data.attempts is number && request.resource.data.attempts >= 0
+    && request.resource.data.errors is number && request.resource.data.errors >= 0 && request.resource.data.errors <= request.resource.data.attempts
+    && request.resource.data.lastActivity is number && request.resource.data.updatedAt == request.time;
+   allow delete: if false;
+  }
   match /users/{uid}/items/{itemId} {
    allow read: if request.auth != null && request.auth.uid == uid;
    allow create, update: if request.auth != null && request.auth.uid == uid
