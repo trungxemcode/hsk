@@ -10,6 +10,7 @@
  try{
  registration=await navigator.serviceWorker.getRegistration('./');
  if(!registration||!new URL(registration.active?.scriptURL||registration.waiting?.scriptURL||registration.installing?.scriptURL||location.href).pathname.endsWith('/OneSignalSDKWorker.js'))registration=await navigator.serviceWorker.register('./OneSignalSDKWorker.js',{scope:'./',updateViaCache:'none'});
+ if(registration.updateViaCache!=='none'){const existing=registration.active||registration.waiting||registration.installing;if(existing)registration=await navigator.serviceWorker.register(existing.scriptURL,{scope:registration.scope,updateViaCache:'none'});}
  // Observe an already-installing worker as well as future updatefound events.
  registration.addEventListener('updatefound',()=>watch(registration.installing));watch(registration.installing);waiting();check(registration.active);
  navigator.serviceWorker.ready.then(r=>check(r.active));
