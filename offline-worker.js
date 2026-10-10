@@ -1,4 +1,4 @@
-const OFFLINE_VERSION='hsk-offline-20261010-reliable-1';
+const OFFLINE_VERSION='hsk-offline-20261010-safari-2';
 const OFFLINE_FILES=["index.html","style.css","mobile-layout.css","mobile-layout.js","account.js","account-core.js","account-config.json","loader.js","app.js","push.js","offline.js","manifest.webmanifest","icon-180.png","icon-192.png","icon-512.png","push-config.json","ios-transfer.html","words.js","dictionarySupplement.js","checkedPracticeExamples.js","exampleMetadata.js","wordRelationsData.js","usageFactsData.js","confusableGroups.js","contextQuizBank.js","words.js.gz","dictionarySupplement.js.gz","checkedPracticeExamples.js.gz","exampleMetadata.js.gz","wordRelationsData.js.gz","usageFactsData.js.gz","confusableGroups.js.gz","contextQuizBank.js.gz"];
 let download={type:'HSK_DOWNLOAD_PROGRESS',done:0,total:OFFLINE_FILES.length,reused:0};
 async function announce(value){download={...download,...value};for(const client of await self.clients.matchAll({includeUncontrolled:true,type:'window'}))client.postMessage(download);}
@@ -24,11 +24,17 @@ self.addEventListener('install',event=>event.waitUntil((async()=>{
 })()));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith('hsk-offline-')&&key!==OFFLINE_VERSION)await caches.delete(key);await self.clients.claim();})()));
 self.addEventListener('message',event=>{if(event.data?.type==='HSK_ACTIVATE_UPDATE')self.skipWaiting();if(event.data?.type==='HSK_OFFLINE_STATUS')event.ports[0]?.postMessage({ready:true,version:OFFLINE_VERSION});if(event.data?.type==='HSK_DOWNLOAD_STATUS')event.source?.postMessage(download);});
+async function serve(request,file,navigation){
+ const url=new URL(file,self.registration.scope).href;
+ try{const cache=await caches.open(OFFLINE_VERSION),hit=await cache.match(url);if(hit instanceof Response)return hit;}catch(error){console.warn('HSK cache unavailable',error);}
+ try{const response=await fetch(request);if(response instanceof Response&&response.type!=='error')return response;}catch(error){console.warn('HSK network unavailable',error);}
+ // A fetch handler must always resolve to a Response, even if cache storage fails.
+ if(navigation)return new Response('<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HSK · Tải lại app</title><body style="font:18px system-ui;padding:24px;line-height:1.6"><h2>Chưa tải được app</h2><p>Bộ nhớ offline hoặc kết nối đang gặp lỗi. Tiến độ học vẫn được giữ; không cần xóa dữ liệu Safari.</p><button onclick="location.reload()" style="font:inherit;padding:14px 22px">Thử tải lại</button></body></html>',{status:503,headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}});
+ return new Response('HSK resource temporarily unavailable',{status:503,headers:{'Content-Type':'text/plain; charset=utf-8','Cache-Control':'no-store'}});
+}
 self.addEventListener('fetch',event=>{
  const url=new URL(event.request.url);if(event.request.method!=='GET'||url.origin!==self.location.origin||!url.href.startsWith(self.registration.scope))return;
- const relative=url.pathname.slice(new URL(self.registration.scope).pathname.length);
- if(event.request.mode==='navigate'&&(relative===''||relative==='index.html')){event.respondWith(caches.open(OFFLINE_VERSION).then(async cache=>await cache.match(new URL('index.html',self.registration.scope))||fetch(event.request)));return;}
- // Version metadata always goes to the network, never the offline cache.
- if(!OFFLINE_FILES.includes(relative))return;
- event.respondWith((async()=>{const cache=await caches.open(OFFLINE_VERSION),hit=await cache.match(new URL(relative,self.registration.scope));return hit||fetch(event.request);})());
+ const relative=url.pathname.slice(new URL(self.registration.scope).pathname.length),navigation=event.request.mode==='navigate'&&(relative===''||relative==='index.html');
+ if(navigation){event.respondWith(serve(event.request,'index.html',true));return;}
+ if(OFFLINE_FILES.includes(relative))event.respondWith(serve(event.request,relative,false));
 });
