@@ -35,3 +35,7 @@ Menu ☰ → Đăng nhập / Tạo tài khoản. Firebase Authentication quản 
 Cấu hình công khai trong account-config.json; không thêm khóa quản trị hoặc service account. Firestore rules ở firestore.rules đã triển khai cho đường dẫn users/{uid}/items/{itemId}, chỉ UID tương ứng đọc/ghi được. Project hsk-flashcards-44631 dùng Spark; không bật billing. Một bản ghi đồng bộ cho mỗi từ/mục thay đổi, giao dịch kiểm tra phiên bản để tránh ghi đè tiến độ mới hơn; xóa được biểu diễn bằng tombstone.
 
 Đăng nhập, tạo tài khoản, đặt lại mật khẩu và đồng bộ cần mạng. Học offline vẫn lưu vào hàng đợi trên thiết bị. Đồng bộ tiến độ không đồng bộ quyền thông báo của iPhone; quyền thông báo vẫn theo thiết bị. Không xóa dữ liệu trình duyệt trước khi thay đổi offline đã đồng bộ.
+
+## Triển khai bản cập nhật offline
+
+Sau mỗi thay đổi app, tăng phiên bản và tạo lại metadata bằng `python build-version.py --version hsk-offline-YYYYMMDD-N`. Upload các file đã đổi cùng offline.js, offline-worker.js, OneSignalSDKWorker.js và app-version.json lên cùng một commit. Giữ đường dẫn và scope cũ. Metadata luôn tải từ mạng; file dữ liệu không thay đổi được xác minh SHA-256 và dùng lại từ cache cũ. Bản mới chỉ sẵn sàng khi đủ mọi file đúng checksum. Nếu tải lỗi, cache cũ và localStorage được giữ. Nút kiểm tra báo rõ tiến độ/lỗi và không bị khóa trong lúc chờ; áp dụng bản mới có thời hạn chờ và cách thử lại.
