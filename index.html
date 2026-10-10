@@ -14,6 +14,7 @@
 <body>
   <h1><span class="full-title">HSK Flashcards (Tổng hợp HSK 1-6)</span><span class="phone-title">HSK 1–6 · Từ vựng</span></h1>
 
+  <div class="offline-bar"><span id="offlineStatus" role="status">Đang chuẩn bị học offline…</span><button id="offlineUpdate" hidden>Cập nhật</button></div>
   <div class="mobile-controls">
     <label for="mobileLevel">Trình độ<select id="mobileLevel"><option value="all">Tất cả HSK</option><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select></label>
     <label for="mobileMode">Cách học<select id="mobileMode"><option value="learn">Thẻ từ vựng</option><option value="search">Tìm kiếm</option><option value="quiz">Trắc nghiệm</option><option value="mistakes">Ôn câu sai</option><option value="compare">Từ dễ nhầm</option><option value="srs">Ôn tập SRS</option></select></label>
@@ -155,5 +156,6 @@
 
   
 <script src="./loader.js?v=push-2" defer></script>
+<script src="./offline.js?v=offline-1" defer></script>
 </body>
 </html>
