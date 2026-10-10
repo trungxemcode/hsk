@@ -38,7 +38,10 @@ def main():
     try:
         with urllib.request.urlopen(request, timeout=25) as response:
             result = json.load(response)
-        if result.get('errors'):
+        errors = result.get('errors') or []
+        no_audience = errors == ['All included players are not subscribed'] or errors == ['All included subscriptions are not subscribed']
+        if errors and not no_audience:
+            print('OneSignal validation errors: ' + json.dumps(errors).replace(key, '[REDACTED]'))
             raise SystemExit('OneSignal rejected the request; review configuration in its dashboard.')
         print('Reminder request accepted.' if result.get('id') else 'No subscribed devices matched the reminder filters.')
     except urllib.error.HTTPError as error:
