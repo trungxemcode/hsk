@@ -1,0 +1,9 @@
+{
+  "enabled": true,
+  "firebase": {
+    "apiKey": "AIzaSyAQlltCY7fZzNUnVkaiOusYSwa0LO5a6ko",
+    "authDomain": "hsk-flashcards-44631.firebaseapp.com",
+    "projectId": "hsk-flashcards-44631",
+    "appId": "1:1072290227351:web:11c19ae04eb7cd516e75d2"
+  }
+}

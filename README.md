@@ -4,7 +4,7 @@ App từ vựng: thẻ học, tìm kiếm, kiểm tra tổng hợp, học trong 
 
 Mở index.html qua GitHub Pages hoặc rawcdn.githack.com. Các file JS, CSS và dữ liệu .js.gz nằm cùng thư mục với index.html; tải đủ tất cả file. Trình duyệt tự tải dữ liệu nén, hoặc dùng bản JS dự phòng. Không cần build.
 
-Tiến độ và lịch ôn được lưu trong cùng trình duyệt theo tên miền. Nhắc ôn khi mở app; thông báo khi đóng app cần kết nối OneSignal và bật quyền.
+Chưa đăng nhập: tiến độ và lịch ôn lưu trên trình duyệt. Đăng nhập bằng email/mật khẩu: tiến độ từng từ, lịch SRS, lỗi sai, thống kê học và tùy chọn ghi nhớ đồng bộ theo tài khoản; bản offline được giữ trên thiết bị và tự gửi khi có mạng. Nhắc ôn khi mở app; thông báo khi đóng app cần kết nối OneSignal và bật quyền.
 
 ## Thông báo iPhone / OneSignal
 
@@ -27,3 +27,11 @@ Giờ gửi có thể trễ do GitHub Actions. Với repo công khai, GitHub có
 vô hiệu hóa lịch sau 60 ngày repo không có hoạt động; cần bật lại workflow.
 Thông báo cần mạng; không phải báo thức đúng phút. Lịch ôn thuộc thiết bị
 đã đăng ký, không tự đồng bộ tiến độ học giữa các thiết bị.
+
+## Tài khoản / Firebase
+
+Menu ☰ → Đăng nhập / Tạo tài khoản. Firebase Authentication quản lý mật khẩu; mã app không lưu mật khẩu. Cùng tài khoản dùng được trên nhiều thiết bị. Tài khoản mới đầu tiên trên thiết bị nhận tiến độ cũ khi tài khoản chưa có dữ liệu. Nút Nhập tiến độ cũ chỉ bổ sung các mục chưa có. Thay đổi từ thiết bị khác hiện nút Áp dụng tiến độ mới để không ngắt câu đang học. Đăng xuất giữ riêng bản lưu từng tài khoản và khôi phục tiến độ khách.
+
+Cấu hình công khai trong account-config.json; không thêm khóa quản trị hoặc service account. Firestore rules ở firestore.rules đã triển khai cho đường dẫn users/{uid}/items/{itemId}, chỉ UID tương ứng đọc/ghi được. Project hsk-flashcards-44631 dùng Spark; không bật billing. Một bản ghi đồng bộ cho mỗi từ/mục thay đổi, giao dịch kiểm tra phiên bản để tránh ghi đè tiến độ mới hơn; xóa được biểu diễn bằng tombstone.
+
+Đăng nhập, tạo tài khoản, đặt lại mật khẩu và đồng bộ cần mạng. Học offline vẫn lưu vào hàng đợi trên thiết bị. Đồng bộ tiến độ không đồng bộ quyền thông báo của iPhone; quyền thông báo vẫn theo thiết bị. Không xóa dữ liệu trình duyệt trước khi thay đổi offline đã đồng bộ.
