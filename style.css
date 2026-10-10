@@ -311,3 +311,46 @@
 .memory-reminder{margin:12px auto;padding:14px;border:1px solid #b6d4ef;border-radius:12px;background:#eff6ff;color:#173b60;max-width:1100px;line-height:1.6}.memory-options{display:grid;gap:10px;margin:12px 0}.memory-options label{display:flex;align-items:center;gap:10px;min-height:44px}.memory-options input{width:22px;height:22px;flex-shrink:0}.memory-schedule{margin:12px 0;padding:12px;border:1px solid #d7e3ee;border-radius:10px}.memory-schedule summary{min-height:44px;cursor:pointer}.memory-sentence{font-size:24px;line-height:1.8;overflow-wrap:anywhere}#memoryRecall{box-sizing:border-box;max-width:100%;width:100%;min-height:48px;padding:10px;font-size:18px}.memory-context-answer{padding:12px;margin-top:12px;background:#eff6ff;color:#173b60;border-radius:10px}#memoryUpcoming p{overflow-wrap:anywhere}#memoryLearnCurrent{min-height:48px;margin:12px 0}
 
 #appLoadStatus{padding:16px;margin:12px;background:#eff6ff;color:#173b60;border-radius:12px}
+/* Compact phone layout: the card and its primary actions stay above supporting content. */
+.mobile-controls{display:none}
+@media(max-width:600px){
+ body{padding:10px 12px 24px;gap:0}
+ body>h1{font-size:19px;line-height:1.35;margin:2px 0 10px;letter-spacing:0;order:0}
+ .mobile-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:440px;order:1;margin-bottom:8px}
+ .mobile-controls label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:#52627b}
+ .mobile-controls select{width:100%;height:44px;min-width:0;font-size:14px;padding:8px}
+ body>.filter-buttons,body>.app-tabs{display:none}
+ #appLoadStatus{order:2;width:100%;margin:4px 0}
+ .memory-reminder{order:3;width:100%;padding:8px 10px;margin:0 0 8px;font-size:12px;line-height:1.4}
+ .memory-reminder.no-due{order:7;margin-top:12px}
+ #memoryDueStart{min-height:44px;margin-top:4px;font-size:13px}
+ .workspace{order:4;width:100%;min-width:0}
+ .dictionary-summary{order:6;margin:12px 0 0;font-size:12px}
+ #storageNotice{order:2}
+ #learnPanel>.field-row{order:0;width:100%;margin:0 0 8px;gap:8px;justify-content:center;font-size:13px}
+ #masteryFilter{height:44px;padding:8px;font-size:13px}
+ #learnPanel>#flashcard{order:1;width:min(360px,100%);height:clamp(220px,34svh,270px);margin:0 0 10px}
+ .front,.back{padding:38px 14px 76px}
+ #flashcard .han{font-size:clamp(36px,12vw,52px)}
+ #flashcard .mean{font-size:16px;max-height:72px;line-height:1.4}
+ #flashcard .pin{font-size:20px;margin-top:4px}
+ #flashcard .hv{font-size:13px;margin-top:4px}
+ #learnPanel>.buttons{order:2;width:100%;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin:0}
+ #learnPanel>.buttons button{min-height:44px;padding:8px 4px;font-size:13px;grid-column:span 2}
+ #learnPanel>.buttons #prev,#learnPanel>.buttons #next{grid-column:span 3;font-size:15px}
+ #learnPanel>#progress{order:3;font-size:13px;margin:8px 0 0}
+ #learnPanel>.hint{order:4;font-size:12px;margin:6px 0;line-height:1.4;text-align:center}
+ #learnPanel>#memoryLearnCurrent{order:5;margin:6px 0;width:100%;max-width:360px}
+ #learnPanel>#learningStats{order:6;margin:4px 0;font-size:12px}
+ #learnPanel>.jump-control{order:7;width:100%;display:grid;grid-template-columns:1fr auto;gap:6px;margin-top:8px}
+ #jumpInput{width:100%;min-width:0;font-size:13px}#jumpBtn{min-height:44px;font-size:13px}
+ #learnPanel>#jumpStatus{order:8;margin:0}
+ #learnPanel>#example{order:9;width:100%}
+ #learnPanel>#wordRelations{order:10;margin-top:8px}
+ .word-relations{padding:10px}.relation-pair{padding:10px}.relation-pair-guides{gap:8px}
+ .panel-box{padding:14px}.panel-box h2{font-size:20px}
+ .mastery-tools{bottom:12px;left:12px;right:12px;gap:8px}
+ .mastery-btn{min-height:48px}
+}
+
+.phone-title{display:none}@media(max-width:600px){.full-title{display:none}.phone-title{display:inline}}

@@ -693,3 +693,12 @@ window.addEventListener('focus',()=>{stats();});document.addEventListener('visib
 refreshMemoryDashboard();
 $('srsStart').onclick=startSrs;
 
+// Native phone selectors reuse existing controls and preserve all HSK/mode behavior.
+$('mobileLevel').onchange=e=>document.querySelector('[data-filter="'+e.target.value+'"]').click();
+$('mobileMode').onchange=e=>switchMode(e.target.value);
+const baseMobileSwitch=switchMode;
+switchMode=function(next){baseMobileSwitch(next);$('mobileMode').value=mode;};
+document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{$('mobileLevel').value=activeLevel;}));
+const baseMobileReminder=refreshMemoryDashboard;
+refreshMemoryDashboard=function(){baseMobileReminder();document.querySelector('.memory-reminder').classList.toggle('no-due',$('memoryDueStart').hidden);};
+$('mobileLevel').value=activeLevel;$('mobileMode').value=mode;refreshMemoryDashboard();
