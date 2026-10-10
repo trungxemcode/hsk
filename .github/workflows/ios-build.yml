@@ -35,6 +35,10 @@ jobs:
         run: xcodebuild -project HSK.xcodeproj -scheme HSK -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build
       - name: Package IPA
         run: |
+          test -f ios/build/Build/Products/Release-iphoneos/HSK.app/Web/index.html
+          test -f ios/build/Build/Products/Release-iphoneos/HSK.app/Web/app.js
+          test -f ios/build/Build/Products/Release-iphoneos/HSK.app/Web/words.js
+          test -f ios/build/Build/Products/Release-iphoneos/HSK.app/notification-words.json
           mkdir -p dist/Payload
           cp -R ios/build/Build/Products/Release-iphoneos/HSK.app dist/Payload/
           cd dist
