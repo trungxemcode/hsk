@@ -9,6 +9,6 @@
  try{
   const texts=await Promise.all(names.map(dataText));
   for(let i=0;i<names.length;i++){status.textContent='Đang mở dữ liệu '+(i+1)+' / '+names.length+'…';if(texts[i]!==null){const el=document.createElement('script');el.textContent=texts[i];document.body.append(el);}else await scriptFile('./'+names[i]+'.js');}
-  await scriptFile('./app.js?v=adaptive-1');status.hidden=true;
+  await scriptFile('./app.js?v=push-1');await scriptFile('./push.js?v=push-1');status.hidden=true;
  }catch(e){status.textContent='Chưa tải được dữ liệu. Kiểm tra mạng và việc đã tải đủ các file dữ liệu lên GitHub. ';const retry=document.createElement('button');retry.textContent='Tải lại';retry.onclick=()=>location.reload();status.append(retry);}
 })();

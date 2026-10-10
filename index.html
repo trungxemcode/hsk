@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HSK Flashcards (HSK 1-6) - Import từ file (Gộp)</title>
-  <link rel="stylesheet" href="./style.css?v=adaptive-1">
+  <link rel="stylesheet" href="./style.css?v=push-1">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#2563eb">
 </head>
 
 <body>
@@ -126,6 +130,13 @@
   </section>
   <section id="srsPanel" class="panel-box" hidden>
     <h2>Ôn tập ngắt quãng SRS</h2>
+    <details class="push-settings"><summary>🔔 Nhắc ôn trên điện thoại</summary>
+    <p class="hint">iPhone: mở bằng Safari → Chia sẻ → Thêm vào màn hình chính; mở app từ biểu tượng đó rồi bật thông báo (iOS 16.4 trở lên).</p>
+    <div class="field-row"><label for="pushHour">Giờ nhắc (giờ Việt Nam):</label><select id="pushHour"></select></div>
+    <div class="field-row"><button id="pushEnable" disabled>Bật thông báo</button><button id="pushDisable" disabled>Tắt thông báo</button></div>
+    <p id="pushStatus" class="hint" role="status">Đang kiểm tra kết nối thông báo…</p>
+    <p class="hint">Nhắc mỗi ngày khi có từ đến hạn. App gửi giờ nhắc và hạn ôn sớm nhất tới OneSignal khi bạn học hoặc mở app. Lịch kiểm tra một lần mỗi giờ, có thể gửi trễ.</p>
+    </details>
     <p class="hint">Ôn từ đến hạn trước, sau đó tối đa 10 từ mới mỗi phiên trong HSK đang chọn. Xem đáp án rồi tự đánh giá: Quên / Khó / Nhớ / Dễ. Lịch ôn tăng dần theo mức độ nhớ.</p>
     <div class="memory-options"><label><input id="memoryContextToggle" type="checkbox"> Học trong ngữ cảnh: nhớ từ bị che trong câu</label><label><input id="memoryNewWords" type="checkbox"> Thêm tối đa 10 từ mới sau khi ôn từ đến hạn</label></div>
     <p class="hint">Nhớ: ôn sau 1 ngày, rồi 3 ngày và tăng dần. Dễ: bắt đầu sau 4 ngày. Khó: khoảng cách ngắn hơn; Quên: ôn lại sau 10 phút. Ngày hẹn được lưu trên trình duyệt này và tự kiểm tra khi mở app. Khi đóng app, app không gửi thông báo nền.</p>
@@ -143,6 +154,6 @@
   
 
   
-<script src="./loader.js?v=adaptive-1" defer></script>
+<script src="./loader.js?v=push-1" defer></script>
 </body>
 </html>
