@@ -1,3 +1,42 @@
+const usageWordMap=new Map();
+function usageReading(pin){return String(pin||'').normalize('NFC').toLowerCase().replace(/[\s'’·]/g,'');}
+function usageVariant(han,pin){const rows=usageFactsData.words[han]?.variants||[];const match=rows.find(v=>usageReading(v.pin)===usageReading(pin));if(match)return {rows:[match],exact:true};return {rows:pin?[]:rows,exact:false};}
+function usageGlosses(rows){return [...new Set(rows.flatMap(v=>v.senses.map(s=>s.mean)).filter(Boolean))];}
+function glossTokens(glosses){return [...new Set(glosses.flatMap(x=>String(x).split(/[;,]/)).map(x=>x.trim().toLowerCase()).filter(x=>x.length>1&&!x.includes('(')))];}
+function usageLabel(pos){return ({n:'Danh từ',v:'Động từ',adj:'Tính từ',adv:'Phó từ',prep:'Giới từ',conj:'Liên từ',pron:'Đại từ',num:'Số từ',classifier:'Lượng từ',particle:'Trợ từ',interj:'Thán từ',a:'Tính từ',d:'Phó từ',m:'Số từ',q:'Lượng từ',p:'Giới từ',c:'Liên từ',r:'Đại từ',u:'Trợ từ'})[pos]||pos||'Nguồn chưa ghi từ loại';}
+function appendUsageWord(box,han,pin,variant,fallback){
+ box.append(relationElement('h6',han+' ('+(pin||variant.rows.map(v=>v.pin).join(' / ')||'chưa có phiên âm')+'): nghĩa và vai trò trong câu'));
+ if(!variant.rows.length){box.append(relationElement('p',fallback||'Chưa có nghĩa riêng khớp với cách đọc cần đối chiếu.'));box.append(relationElement('small','Chưa đủ dữ liệu cùng cách đọc để kết luận về từ loại hoặc mẫu câu.'));return;}
+ for(const v of variant.rows){if(variant.rows.length>1)box.append(relationElement('strong','Cách đọc: '+v.pin));for(const sense of v.senses)box.append(relationElement('p',usageLabel(sense.pos)+' — '+sense.mean));
+  const patterns=[...new Set(v.structures||[])];if(patterns.length){box.append(relationElement('strong','Cấu trúc ghi nhận trong Hanzii'));for(const pattern of patterns.slice(0,3))box.append(relationElement('p',pattern));}
+ }
+ const positions=[...new Set(variant.rows.flatMap(v=>v.senses.map(s=>usageLabel(s.pos))))];
+ let guide=[];if(positions.includes('Danh từ'))guide.push('Ở nghĩa danh từ, xem từ đang gọi tên người, vật, sự việc hay khái niệm nào; đối chiếu đối tượng với nghĩa bạn muốn nói.');if(positions.includes('Động từ'))guide.push('Ở nghĩa động từ, xem hành động/trạng thái được nói đến và từ đi cùng phía sau. Cùng dịch gần nhau không bảo đảm mang cùng tân ngữ.');if(positions.includes('Tính từ'))guide.push('Ở nghĩa tính từ, xem đặc điểm đang được đánh giá là gì; kiểm tra cách kết hợp trong câu thay vì chỉ đổi một tính từ có bản dịch giống nhau.');if(positions.includes('Phó từ'))guide.push('Ở nghĩa phó từ, xem từ bổ nghĩa cho hành động hay mức độ, thời gian hoặc tần suất. Vị trí trong câu là một phần của cách dùng.');if(guide.length)box.append(relationElement('p',guide.join(' ')));
+}
+function pairExamplePool(han,pin){if(!usageWordMap.size){for(const w of words){const xs=usageWordMap.get(w.han)||[];xs.push(w);usageWordMap.set(w.han,xs);}}const ws=usageWordMap.get(han)||[];const exact=ws.filter(w=>usageReading(w.pin)===usageReading(pin));return (exact.length?exact:pin?[]:ws).flatMap(w=>w.practice?.examples||[]).filter(e=>e.cn?.includes(han)&&e.pin&&e.vi);}
+function appendPairExamples(box,han,pin,shared){
+ const examples=pairExamplePool(han,pin);box.append(relationElement('h6','Ngữ cảnh dùng '+han));
+ if(!examples.length){box.append(relationElement('p','Chưa bổ sung câu ví dụ có phiên âm và bản dịch đã đối chiếu riêng cho '+han+' trong bộ dữ liệu hiện tại. Xem các nghĩa và cấu trúc phía trên; không tự tạo câu để lấp dữ liệu.','hint'));return;}
+ const scored=examples.map((e,i)=>({e,i,score:glossTokens([e.meaning||e.sense||'']).some(t=>shared.includes(t))?1:0})).sort((a,b)=>b.score-a.score||a.i-b.i);const chosen=[],seen=new Set();for(const {e} of scored){const sense=e.meaning||e.sense||'';if(!seen.has(sense)){chosen.push(e);seen.add(sense);}if(chosen.length===2)break;}if(chosen.length<2)for(const {e} of scored){if(!chosen.includes(e))chosen.push(e);if(chosen.length===2)break;}
+ for(const e of chosen){const ex=relationElement('div','','relation-pair-example');ex.append(relationElement('strong',e.cn),pinyinLine(e.pin),relationElement('span',e.vi,'relation-meaning'),relationElement('p','Trong câu này, '+han+' được dùng theo nghĩa: '+(e.meaning||e.sense||'xem bản dịch và nghĩa ở trên')+'. Giữ đúng ý này trước khi cân nhắc dùng từ gần nghĩa.'));const origin=e.origin==='hanzii'?'Ví dụ Hanzii':e.origin==='authored'?'Ví dụ biên soạn; đã đối chiếu':'Ví dụ có sẵn trong bộ học; đã đối chiếu';ex.append(relationElement('small',origin));box.append(ex);}
+}
+function allPairExplanation(w,item){
+ const detailed=detailedPairExplanation(w,item);if(detailed)return detailed;
+ const box=relationElement('div','','relation-pair-guide'),r=wordRelationsData.entries[wordKey(w)];const a=usageVariant(w.han,r?.sourcePin||w.pin);const known=item.key&&relationIndex().get(item.key);const bpin=known?.pin||((wordRelationsData.lexicon[item.han]||[]).length===1?wordRelationsData.lexicon[item.han][0].pinyin:'');const b=usageVariant(item.han,bpin);
+ const ag=usageGlosses(a.rows),bg=usageGlosses(b.rows),at=glossTokens(ag),bt=glossTokens(bg),shared=at.filter(x=>bt.includes(x)),onlyA=at.filter(x=>!bt.includes(x)),onlyB=bt.filter(x=>!at.includes(x));
+ box.append(relationElement('h6','Phân biệt nghĩa và cách dùng'));
+ const note=usageFactsData.pairNotes[[w.han,item.han].sort().join('|')];const group=confusableGroups.find(g=>g.category!=='other'&&g.members.some(m=>m.key===wordKey(w))&&g.members.some(m=>m.han===item.han));
+ if(note){box.append(relationElement('p','Nghĩa gần nhau: '+note.common),relationElement('p','Khác ở đâu: '+note.difference),relationElement('p','Khi nào dùng: '+note.when));}
+ else if(group){box.append(relationElement('p',group.intro));for(const m of group.members.filter(m=>m.key===wordKey(w)||m.han===item.han))box.append(relationElement('p',m.note));box.append(relationElement('p','Lưu ý khi chọn từ: '+group.caution));}
+ else{box.append(relationElement('p',shared.length?'Các mục nghĩa có cách dịch trùng nhau: '+shared.slice(0,6).join('; ')+'. Đây là điểm cần đối chiếu trong ngữ cảnh; cách dịch giống nhau chưa chứng minh đổi từ được.':'Hanzii xếp hai từ vào quan hệ gần nghĩa, nhưng các bản dịch không trùng hoàn toàn. Phần dưới đặt từng nghĩa và từ loại cạnh nhau để xác định ý bạn cần diễn đạt.'));}
+ appendUsageWord(box,w.han,r?.sourcePin||w.pin,a,w.mean);appendUsageWord(box,item.han,bpin,b,item.mean);
+ if(!note&&!group){if(onlyA.length||onlyB.length){box.append(relationElement('h6','Phạm vi nghĩa cần phân biệt'));if(onlyA.length)box.append(relationElement('p','Các cách dịch riêng được ghi nhận cho '+w.han+': '+onlyA.slice(0,8).join('; ')+'.'));if(onlyB.length)box.append(relationElement('p','Các cách dịch riêng được ghi nhận cho '+item.han+': '+onlyB.slice(0,8).join('; ')+'.'));box.append(relationElement('small','“Riêng” ở đây nghĩa là không trùng cách dịch trong hai mục đang đối chiếu; không kết luận từ còn lại tuyệt đối không diễn đạt được ý tương tự.'));}
+  const ap=[...new Set(a.rows.flatMap(v=>v.senses.map(s=>usageLabel(s.pos))))],bp=[...new Set(b.rows.flatMap(v=>v.senses.map(s=>usageLabel(s.pos))))];if(ap.length&&bp.length){box.append(relationElement('p',w.han+': '+ap.join(', ')+'. '+item.han+': '+bp.join(', ')+'. '+(ap.some(p=>bp.includes(p))?'Có từ loại giao nhau; vẫn cần chọn đúng nghĩa và cách kết hợp.':'Các mục nguồn ghi nhận vai trò khác nhau. Khi câu cần gọi tên sự vật, miêu tả đặc điểm hoặc nói hành động, hãy chọn đúng vai trò; không giữ nguyên cấu trúc rồi chỉ đổi từ.')));}}
+ appendPairExamples(box,w.han,w.pin,shared);appendPairExamples(box,item.han,bpin,shared);
+ if(!note&&!group)box.append(relationElement('small','Đã đối chiếu danh sách nghĩa và từ loại. Chưa có nhận định riêng đã kiểm chứng về sắc thái, mức độ hoặc điều kiện thay thế của cặp này; không tự suy ra từ bản dịch.'));
+ const links=relationElement('div','','source-links');for(const han of [w.han,item.han]){const link=relationElement('a','Hanzii: '+han);link.href='https://hanzii.net/search/word/'+encodeURIComponent(han)+'?hl=vi';link.target='_blank';link.rel='noopener noreferrer';links.append(link);}box.append(links);return box;
+}
+
 const detailedRelationGuides={
  '喜|爱':{
   intro:'Hai chữ chỉ giao nhau ở nghĩa thích/ưa. 喜 còn diễn tả niềm vui, chuyện đáng mừng; 爱 còn diễn tả tình yêu và việc dễ/hay xảy ra. Phải chọn nghĩa trong câu trước khi so sánh.',
@@ -541,29 +580,7 @@ rebuildDeck();renderSearch();
 
 for(const input of document.querySelectorAll('input[name="quizType"]'))input.onchange=()=>{resetQuiz('Đã đổi dạng kiểm tra tổng hợp. Bấm Bắt đầu để tạo lượt mới.');updateQuizScopeInfo();};
 
-function relationPairGuide(w,item){
- const detailed=detailedPairExplanation(w,item);if(detailed)return detailed;
- const detail=relationElement('div','','relation-pair-guide');
- const group=confusableGroups.find(g=>g.category!=='other'&&g.members.some(m=>m.key===wordKey(w))&&g.members.some(m=>m.han===item.han));
- detail.append(relationElement('h6','So sánh nghĩa'));
- if(group){
-  detail.append(relationElement('p',group.intro));
-  for(const m of group.members.filter(m=>m.key===wordKey(w)||m.han===item.han))detail.append(relationElement('p',m.note));
-  detail.append(relationElement('p','Lưu ý cách dùng: '+group.caution));
-  const qs=group.questions.filter(q=>q.key===wordKey(w)||group.members.some(m=>m.han===item.han&&m.key===q.key));
-  for(const q of qs.slice(0,2)){
-   const ex=relationElement('div','','relation-pair-example');ex.append(relationElement('strong',q.cn),relationElement('span',q.pin,'relation-pin'),relationElement('span',q.vi,'relation-meaning'),relationElement('p',q.explanation));detail.append(ex);
-  }
-  detail.append(relationElement('small','Giải thích biên soạn dựa trên các nghĩa và cấu trúc đã đối chiếu Hanzii. Ví dụ minh họa cách dùng, không mặc định đổi được từ trong câu.'));
- }else{
-  detail.append(relationElement('p',w.han+' ('+w.pin+'): '+w.mean));
-  const variants=wordRelationsData.lexicon[item.han]||[];
-  for(const v of variants)detail.append(relationElement('p',item.han+' ('+v.pinyin+'): '+v.mean));
-  if(!variants.length)detail.append(relationElement('p',item.han+': '+(item.mean||'Chưa có nghĩa riêng ở nguồn.')));
-  detail.append(relationElement('p','So sánh theo nghĩa và cách đọc trên Hanzii. Chưa có phần phân biệt cách dùng đã đối chiếu riêng cho cặp này.'));
- }
- return detail;
-}
+function relationPairGuide(w,item){return allPairExplanation(w,item);}
 // Dictionary relations are facts observed in Hanzii, never inferred from matching translations.
 var relationWordIndex;
 function relationElement(tag,text,cls){const el=document.createElement(tag);el.textContent=text||'';if(cls)el.className=cls;return el;}
@@ -578,6 +595,7 @@ function wordRelationDetails(w){
  if(r.status==='reading-not-listed')box.append(relationElement('p','Nguồn chưa liệt kê quan hệ từ khớp với cách đọc đang học; không dùng danh sách của cách đọc khác.','hint'));
  if(r.status==='not-listed')box.append(relationElement('p','Hanzii chưa có mục quan hệ từ khớp riêng cho từ hoặc cấu trúc này.','hint'));
  box.append(relationElement('p',`Quan hệ từ của ${w.han} (${w.pin}).`,'hint'));
+ box.append(relationElement('p','Mỗi cặp bên dưới có đối chiếu các nghĩa, từ loại và ngữ cảnh hiện có. Các nhận định riêng về sắc thái hoặc điều kiện thay thế chỉ xuất hiện khi đã có giải thích được đối chiếu.','hint'));
  box.append(relationElement('p','Danh sách Hanzii liệt kê theo các nghĩa của từ. Từ gần nghĩa có thể khác cấu trúc, sắc thái hoặc cách kết hợp; không mặc định thay thế trong mọi câu.','hint'));
  for(const [title,list,empty] of [['Đồng nghĩa / gần nghĩa',syn,'Hanzii chưa liệt kê từ đồng nghĩa / gần nghĩa cho mục này.'],['Trái nghĩa',ant,'Hanzii chưa liệt kê từ trái nghĩa cho mục này.'],['Từ đối ứng',counter,'']]){
   if(title==='Từ đối ứng'&&!list.length)continue;
