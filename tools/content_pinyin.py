@@ -11,10 +11,11 @@ def pin(text):
         char=token.group();at=token.start();before=text[:at];after=text[at:]
         reading=value[0]
         if char=='得':
-            reading='dé' if after.startswith(('得到','得出','得知','得以')) or before.endswith(('获','赢','取','征')) else 'de'
-        elif char=='还':reading='hái'
+            reading='dé' if after.startswith(('得到','得出','得知','得以')) or before.endswith(('获','赢','取','征','值','不')) else 'de'
+        elif char=='了' and (after.startswith('了不起') or before.endswith('不') and after.startswith('了解')):reading='liǎo'
+        elif char=='还':reading='huán' if before.endswith('归') or after.startswith(('还给','还书')) else 'hái'
         elif char=='都':reading='dū' if before.endswith('首') or after.startswith('都市') else 'dōu'
-        elif char=='长':reading='zhǎng' if before.endswith(('增','成','校','院','部')) or after.startswith('长辈') else 'cháng'
+        elif char=='长':reading='zhǎng' if before.endswith(('增','成','校','院','部')) or after.startswith(('长辈','长大')) else 'cháng'
         elif char=='当':reading='dàng' if after.startswith(('当作','当成','当笑话')) else 'dāng'
         elif char=='只':reading='zhī' if before.endswith(('一','两','三','四','几')) else 'zhǐ'
         elif char=='约':reading='yuē'
