@@ -11,7 +11,7 @@ function save(id,value,refresh=true){const lessons=progress();lessons[id]={...le
 function api(){return window.HSKLessons;}
 function course(){return data?.courses.find(c=>c.hsk===hsk);}
 function matched(lesson){return api().match(lesson.words);}
-function close(preserve=false){viewRequest++;panel.hidden=true;document.body.classList.remove('show-lessons','lesson-focus');if(!preserve&&location.hash.startsWith('#lesson/'))history.replaceState(null,'',location.pathname+location.search);}
+function close(preserve=false){window.dispatchEvent(new CustomEvent('hsk-lesson-context',{detail:null}));viewRequest++;panel.hidden=true;document.body.classList.remove('show-lessons','lesson-focus');if(!preserve&&location.hash.startsWith('#lesson/'))history.replaceState(null,'',location.pathname+location.search);}
 function fromHash(){try{const id=decodeURIComponent(location.hash.slice(8));return data?.courses.flatMap(c=>c.lessons).find(l=>l.id===id);}catch{return null;}}
 function goList(){selected=null;document.body.classList.remove('lesson-focus');history.pushState(null,'',location.pathname+location.search);render();document.querySelector('.workspace').scrollTop=0;}
 async function load(){
@@ -29,6 +29,7 @@ async function loadContent(level){
  }).finally(()=>contentLoads.delete(level)));return contentLoads.get(level);
 }
 async function open(){
+ window.dispatchEvent(new CustomEvent('hsk-lesson-context',{detail:null}));
  const request=++viewRequest;
  document.body.classList.remove('drawer-open','show-about','show-account','show-admin','show-translator');document.body.classList.add('show-lessons');
  for(const id of ['aboutPanel','accountPanel','adminPanel','translatorPanel'])$(id).hidden=true;
@@ -37,7 +38,7 @@ async function open(){
  try{await load();const target=location.hash.startsWith('#lesson/')?fromHash():null;const level=target?Number(target.id.split('-')[1]):hsk;await loadContent(level);if(request!==viewRequest||panel.hidden)return;if(!api())throw Error('Dữ liệu từ vựng đang tải. Chờ một chút rồi mở lại Bài học.');status.textContent='';selected=location.hash.startsWith('#lesson/')?fromHash():null;if(selected)hsk=Number(selected.id.split('-')[1]);render();}catch(e){if(request!==viewRequest||panel.hidden)return;status.textContent=e.message;root.replaceChildren(button('Thử lại',open));}
 }
 function render(){
- if(!data||!api())return;root.replaceChildren();const p=progress();
+ if(!data||!api())return;window.dispatchEvent(new CustomEvent('hsk-lesson-context',{detail:selected&&!panel.hidden?{id:selected.id,hsk,title:selected.title,vi:selected.vi,number:selected.number,words:matched(selected).map(w=>({han:w.han,pin:w.pin,mean:w.mean})),content:selected.content}:null}));root.replaceChildren();const p=progress();
  if(selected){document.body.classList.add('lesson-focus');renderLesson(selected,p);return;}document.body.classList.remove('lesson-focus');
  root.append(button('☷ Chọn cấp độ · HSK '+hsk,()=>$('menuBtn').click(),'lesson-level-picker'));
  root.append(el('h3','HSK '+hsk+' · '+course().lessons.length+' bài'));
