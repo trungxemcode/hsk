@@ -1,9 +1,19 @@
-const OFFLINE_VERSION='hsk-offline-all-readings-20261011';
+const OFFLINE_VERSION='hsk-offline-mobile-refresh-20261011';
 const OFFLINE_FILES=["index.html", "style.css", "mobile-layout.css", "mobile-layout.js", "admin-core.js", "admin.js", "account.js", "account-core.js", "account-config.json", "loader.js", "app.js", "push.js", "offline.js", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png", "push-config.json", "ios-transfer.html", "words.js", "dictionarySupplement.js", "checkedPracticeExamples.js", "exampleMetadata.js", "wordRelationsData.js", "usageFactsData.js", "confusableGroups.js", "contextQuizBank.js", "visualConfusions.js", "visualConfusions.js.gz", "hskConfusionIndex.js", "hskConfusionIndex.js.gz", "hanzi-data-notice.html", "hanzi-data-LGPL.txt", "hanzi-data-GPL.txt", "hanzi-data-APL.txt", "words.js.gz", "dictionarySupplement.js.gz", "checkedPracticeExamples.js.gz", "exampleMetadata.js.gz", "wordRelationsData.js.gz", "usageFactsData.js.gz", "confusableGroups.js.gz", "contextQuizBank.js.gz", "translator.js", "ocr.js", "translation-config.json", "lessons.js", "lessons-data.json", "lesson-mastery.js", "lesson-content-hsk1.json", "lesson-content-hsk2.json", "lesson-content-hsk3.json", "lesson-content-hsk4.json", "lesson-content-hsk5.json", "lesson-content-hsk6.json"];
 let download={type:'HSK_DOWNLOAD_PROGRESS',done:0,total:OFFLINE_FILES.length,reused:0};
 async function announce(value){download={...download,...value};for(const client of await self.clients.matchAll({includeUncontrolled:true,type:'window'}))client.postMessage(download);}
 async function network(url,timeout=25000){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);try{const response=await fetch(url,{cache:'no-store',signal:controller.signal});if(!response.ok)throw Error('HTTP '+response.status);const bytes=await response.arrayBuffer();return {response,bytes};}finally{clearTimeout(timer);}}
 async function digest(bytes){return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');}
+async function verifiedAsset(url,asset,file,version){
+ for(let attempt=0;attempt<3;attempt++){
+  const requestUrl=new URL(url.href);requestUrl.searchParams.set('hsk-version',version);
+  if(attempt)requestUrl.searchParams.set('hsk-retry',Date.now()+'-'+attempt);
+  const result=await network(requestUrl,25000);
+  if(await digest(result.bytes)===asset.sha256)return result;
+  if(attempt<2)await new Promise(resolve=>setTimeout(resolve,500*(attempt+1)));
+ }
+ throw Error('Tệp '+file+' chưa khớp phiên bản sau 3 lần tải. Có thể máy chủ đang đồng bộ; hãy thử lại sau ít phút.');
+}
 self.addEventListener('install',event=>event.waitUntil((async()=>{
  const cache=await caches.open(OFFLINE_VERSION);let cancelled=false;
  try{
@@ -12,9 +22,9 @@ self.addEventListener('install',event=>event.waitUntil((async()=>{
   if(manifest.version!==OFFLINE_VERSION)throw Error('Phiên bản trên máy chủ đã thay đổi; hãy kiểm tra lại.');
   const oldNames=(await caches.keys()).filter(k=>k.startsWith('hsk-offline-')&&k!==OFFLINE_VERSION),oldCaches=await Promise.all(oldNames.reverse().map(k=>caches.open(k)));let cursor=0;
   async function task(){while(cursor<OFFLINE_FILES.length&&!cancelled){const file=OFFLINE_FILES[cursor++],asset=manifest.assets[file],url=new URL(file,self.registration.scope);if(!asset?.sha256)throw Error('Thiếu thông tin '+file);let response=null;
-   for(const previous of oldCaches){const hit=await previous.match(url);if(!hit)continue;const hash=hit.headers.get('X-HSK-Asset-Hash')||await digest(await hit.clone().arrayBuffer());if(hash===asset.sha256){response=hit;break;}}
+   for(const previous of oldCaches){const hit=await previous.match(url);if(!hit)continue;const hash=await digest(await hit.clone().arrayBuffer());if(hash===asset.sha256){response=hit;break;}}
    const reused=!!response;
-   if(!response){const result=await network(url);if(await digest(result.bytes)!==asset.sha256)throw Error('Tệp '+file+' chưa khớp phiên bản. Hãy thử lại.');response=new Response(result.bytes,{status:result.response.status,headers:result.response.headers});}
+   if(!response){const result=await verifiedAsset(url,asset,file,manifest.version);response=new Response(result.bytes,{status:result.response.status,headers:result.response.headers});}
    const headers=new Headers(response.headers);headers.delete('content-encoding');headers.delete('content-length');headers.delete('transfer-encoding');headers.set('X-HSK-Asset-Hash',asset.sha256);await cache.put(url,new Response(response.body,{status:response.status,headers}));
    await announce({phase:'files',done:download.done+1,reused:download.reused+(reused?1:0)});
   }}
