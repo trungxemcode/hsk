@@ -14,6 +14,9 @@
  $('aboutBtn').addEventListener('click',()=>{about.hidden=false;body.classList.add('show-about');closeDrawer(false);workspace.scrollTop=0;});
  document.querySelector('.app-tabs').addEventListener('click',()=>{hideAbout();workspace.scrollTop=0;});
  drawer.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{hideAbout();closeDrawer();workspace.scrollTop=0;}));
+ drawer.querySelectorAll('[data-drawer-mode]').forEach(button=>button.addEventListener('click',()=>{
+  hideAbout();closeDrawer();document.querySelector(`.app-tabs [data-mode="${button.dataset.drawerMode}"]`)?.click();workspace.scrollTop=0;
+ }));
  document.addEventListener('keydown',event=>{if(event.key==='Escape')closeDrawer();if(event.key==='Tab'&&body.classList.contains('drawer-open')){const focusable=Array.from(drawer.querySelectorAll('button,a,input,select')).filter(el=>!el.disabled&&!el.closest('[inert]')&&el.getClientRects().length),first=focusable[0],last=focusable.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}}});
  // Programmatic navigation (reviewing mistakes, SRS, opening related words).
  const sync=()=>{if(!about.hidden&&document.querySelector('.app-tabs [data-mode].active')?.dataset.mode!==previousMode)hideAbout();previousMode=document.querySelector('.app-tabs [data-mode].active')?.dataset.mode;};

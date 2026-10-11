@@ -390,6 +390,10 @@ body:has(.app-tabs [data-mode="srs"].active) h1::after{content:"Ôn tập SRS"}
 .app-tabs button.active{background:transparent;color:var(--ink);box-shadow:none}
 .app-tabs button.active .ico{background:#dbe6ff}
 .app-tabs button.active .lbl{font-weight:700}
+@media(max-width:559px){
+  .app-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));}
+  .app-tabs [data-mode="quiz"],.app-tabs [data-mode="mistakes"],.app-tabs [data-mode="compare"]{display:none!important}
+}
 
 /* Form & nút */
 input,select,textarea{font-size:16px;min-height:46px;border-radius:12px}
@@ -594,9 +598,9 @@ body.show-account .workspace>section:not(#accountPanel){display:none!important}b
 
 body.show-admin .workspace>section:not(#adminPanel){display:none!important}body.show-admin h1::after{content:"Dashboard"!important}#adminPanel h2{display:block;font-size:20px}#adminPanel input,#adminPanel select{width:100%;margin:8px 0 16px}#adminPanel h3{font-size:17px;margin:24px 0 12px}.admin-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}.admin-kpi{background:white;border:1px solid var(--line);border-radius:14px;padding:14px}.admin-kpi strong{display:block;font-size:24px;color:var(--ink)}.admin-chart{width:100%;height:auto;background:white;border-radius:14px}.admin-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px}.admin-detail-table{width:100%;font-size:13px;border-collapse:collapse}.admin-detail-table th,.admin-detail-table td{padding:8px 3px;border-bottom:1px solid var(--line);text-align:right}.admin-detail-table th:first-child,.admin-detail-table td:first-child{text-align:left}#adminBtn[hidden]{display:none!important}#adminDetail{overflow-wrap:anywhere}
 
-/* Keep the entire header and drawer below the iOS status bar, including zero-inset PWA sessions. */
-body.ios-standalone{--safe-t:max(env(safe-area-inset-top,0px),60px)}
-body.ios-standalone>h1{min-height:calc(74px + var(--safe-t))}
+/* Use the inset reported by iOS; the previous forced 60px inset duplicated the status-bar gap. */
+body.ios-standalone{--safe-t:env(safe-area-inset-top,0px)}
+body.ios-standalone>h1{min-height:74px}
 @media(orientation:landscape){body.ios-standalone{--safe-t:max(env(safe-area-inset-top,0px),24px)}}
 
 .confusion-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 14px}.confusion-tabs button{min-height:46px;background:#e4ecfa;color:var(--ink);font-size:14px}.confusion-tabs button[aria-pressed="true"]{background:var(--ink);color:white}#visualCompareQuery{width:100%;margin:8px 0 14px}.visual-pair,.visual-word-examples{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.visual-character-card{border:1px solid var(--line);border-radius:14px;background:white;padding:12px 6px;text-align:center}.visual-glyph{position:relative;width:110px;height:110px;max-width:100%;margin:auto;font:500 86px/110px "Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;color:#12307a}.visual-focus{position:absolute;border:2px solid #e78119;background:#ffbc5020;border-radius:5px;pointer-events:none;inset:8%}.focus-top{inset:8% 8% 46%}.focus-middle{inset:30% 10% 16%}.focus-bottom{inset:52% 6% 6%}.focus-left{inset:8% 49% 8% 4%}.visual-char-mean{font-size:14px;margin:8px 0 0;overflow-wrap:anywhere}.visual-difference{border-left:4px solid #e78119;padding:10px;background:#fff4df;border-radius:8px}.visual-lesson h3{font-size:17px;margin:18px 0 8px}.visual-lesson h4{font-size:15px;margin:14px 0 8px}.visual-word-example{padding:10px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:white;overflow-wrap:anywhere}.visual-word-example button{width:100%;font-size:13px;min-height:44px;padding:8px}.visual-word-example .example-pinyin{font-size:13px}.visual-word-example p{font-size:14px}.visual-examples-column{min-width:0}@media(max-width:360px){.visual-word-examples{grid-template-columns:1fr}.visual-glyph{width:98px;height:104px;font-size:78px;line-height:104px}}
