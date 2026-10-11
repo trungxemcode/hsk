@@ -16,6 +16,7 @@
 <script src="./account-core.js?v=account-1" defer></script>
 <script src="./account.js?v=account-1" defer></script>
 <script src="./translator.js" defer></script>
+<script src="./ocr.js" defer></script>
 </head>
 
 <body>
@@ -166,6 +167,15 @@
 <section id="translatorPanel" class="panel-box" hidden aria-label="Dịch câu tiếng Việt">
 <h2>Dịch câu Việt → Trung</h2>
 <p class="hint">Chọn HSK 1–6 để điều chỉnh từ vựng và cách diễn đạt. Trình độ ngữ pháp là ước lượng; tên riêng hoặc ý chuyên môn có thể vượt mức đã chọn.</p>
+<details class="ocr-panel"><summary>📷 Lấy chữ từ ảnh</summary>
+<p class="hint">Chọn hoặc chụp ảnh chứa câu tiếng Việt. Ảnh chỉ được gửi tới Google Gemini khi bấm Nhận dạng chữ; hãy kiểm tra nội dung trước khi dịch.</p>
+<div class="ocr-actions"><button id="ocrChoose" type="button">Chọn ảnh</button><button id="ocrCamera" type="button">Chụp ảnh</button></div>
+<input id="ocrFile" type="file" accept="image/*" hidden><input id="ocrCapture" type="file" accept="image/*" capture="environment" hidden>
+<img id="ocrPreview" alt="Ảnh đã chọn để nhận dạng chữ" hidden>
+<div class="ocr-actions"><button id="ocrRead" type="button" disabled>Nhận dạng chữ</button><button id="ocrRemove" type="button" hidden>Bỏ ảnh</button></div>
+<p id="ocrStatus" class="hint" role="status" aria-live="polite"></p>
+<div id="ocrOutput" hidden><label for="ocrText">Chữ nhận dạng — có thể sửa hoặc giữ lại đoạn cần dịch</label><textarea id="ocrText" rows="5" maxlength="10000"></textarea><button id="ocrUse" type="button">Đưa vào ô dịch</button><p class="hint">Mỗi lượt dịch tối đa 500 ký tự. Nhận dạng chữ bằng AI có thể sai dấu hoặc chữ trong ảnh mờ.</p></div>
+</details>
 <form id="translationForm"><label for="translationInput">Câu tiếng Việt</label><textarea id="translationInput" maxlength="500" rows="4" placeholder="Nhập câu bạn muốn dịch…" required></textarea><label for="translationLevel">Trình độ đích</label><select id="translationLevel"><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3" selected>HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select><button id="translationSubmit" type="submit" disabled>Dịch câu</button></form>
 <p id="translationStatus" role="status">Đang kiểm tra kết nối…</p>
 <article id="translationResult" hidden><h3 id="translation-heading"></h3><p id="translation-chinese" lang="zh-Hans"></p><p id="translation-pinyin"></p><p id="translation-explanation"></p><p id="translation-note" hidden></p><p id="translation-outside" class="hint" hidden></p><section id="translationQa" aria-label="Hỏi đáp về câu dịch"><h3>Hỏi AI về câu này</h3><div id="translationChat" role="log" aria-live="polite"></div><form id="translationAskForm"><label for="translationQuestion">Bạn muốn hỏi gì về câu dịch?</label><textarea id="translationQuestion" rows="2" maxlength="500" placeholder="Ví dụ: Vì sao dùng 了 trong câu này?" required></textarea><button id="translationAskSubmit" type="submit">Gửi câu hỏi</button><p id="translationAskStatus" role="status" class="hint"></p></form></section></article>
