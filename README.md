@@ -1,5 +1,15 @@
 # HSK 1–6
 
+## Nội dung bổ sung ngày 11/10/2026
+
+Đợt này thêm 83 mục từ theo bài học (76 mục đối chiếu nghĩa/phiên âm với Hanzii, 6 tên riêng và 1 mẫu ngữ pháp chưa đối chiếu mục từ), cùng 249 câu ví dụ tự biên soạn. Lấp đủ các mục chưa có thẻ của danh sách giáo trình HSK 1–2; HSK 3–6 bổ sung chọn lọc, vẫn còn các mục thiếu. Cấp HSK của thẻ bổ sung là cấp bài học đầu tiên sử dụng, không khẳng định phân loại trong danh sách từ thi chính thức. Giữ nguyên thẻ và khóa tiến độ cũ.
+
+Bài 3, 6, 9 và 12 ở mỗi cấp có bài đọc dài mới, 3–5 đoạn song ngữ/pinyin, một hội thoại 8 lượt và 3 câu đọc hiểu có giải thích. Tổng cộng 24 bài đọc, 24 hội thoại và 72 câu hỏi mới. Độ dài: HSK1 132–156 chữ Hán, HSK2 255–269, HSK3 317–338, HSK4 394–424, HSK5 511–575, HSK6 716–798. Đây là nội dung tự biên soạn theo chủ đề, không sao chép bài khóa hoặc từ điển. Đoạn ngắn cũ được giữ trong phần khởi động; các bài khác vẫn dùng nội dung ngắn trước đó.
+
+Nguồn biên tập và báo cáo phạm vi nằm trong `content/`. Chạy `python tools/expand-vocabulary.py` và `python tools/expand-reading.py` để tái tạo dữ liệu (cần Node và pypinyin); các bảng đọc theo ngữ cảnh nằm trong `tools/content_pinyin.py`. Chạy `python build-version.py --version hsk-offline-content-depth-20261011` sau thay đổi để cập nhật các hash tải offline, rồi `node tools/check-content.cjs`. Kiểm tra UI: chạy HTTP server cổng 8765 và `node tools/check-reading-ui.cjs` (cần Playwright/Chromium). Pinyin là dữ liệu được hỗ trợ sinh và sửa theo ngữ cảnh; cần tiếp tục rà soát biên tập trước khi coi là tài liệu chuẩn xuất bản.
+
+Đã kiểm tra dữ liệu, khóa học cũ, các file nén/hash offline và chạy app trong DOM qua `tools/check-reading-dom.cjs`: mở đủ 24 bài đọc, kiểm tra thẻ mới/cách viết tương đương, nút ẩn/hiện, 8 lượt thoại và chấm/lưu 6 câu của một bài mở rộng. Chạy kiểm tra DOM với `NODE_PATH` trỏ tới cài đặt jsdom. Môi trường hiện tại chưa có Chromium và tải trình duyệt không thành công, nên kiểm tra DOM không thay thế kiểm tra bố cục trực quan trong trình duyệt.
+
 App từ vựng: thẻ học, tìm kiếm, kiểm tra tổng hợp, học trong ngữ cảnh và lịch ôn SRS.
 
 Mở index.html qua GitHub Pages hoặc rawcdn.githack.com. Các file JS, CSS và dữ liệu .js.gz nằm cùng thư mục với index.html; tải đủ tất cả file. Trình duyệt tự tải dữ liệu nén, hoặc dùng bản JS dự phòng. Không cần build.

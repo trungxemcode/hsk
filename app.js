@@ -108,13 +108,14 @@ function pinyinLine(pin) {
   const p=document.createElement('p');p.className='example-pinyin';p.lang='zh-Latn';p.textContent=pin||'';return p;
 }
 $('dictionaryCoverage').textContent=`Hanzii: đã đối chiếu ${dictionaryReport.matched.toLocaleString('vi')} / ${dictionaryReport.total.toLocaleString('vi')} mục`;
-$('dictionaryCoverageDetail').textContent=`Bản bổ sung ngày 09/10/2026: mở rộng nghĩa cho ${dictionaryReport.expandedWords} từ và thêm ${dictionaryReport.addedExamples} câu ví dụ ngắn. Đã bổ sung bộ 3–4 ví dụ cho ${checkedPracticeExamples.report.covered.toLocaleString('vi')} / ${dictionaryReport.total.toLocaleString('vi')} mục; câu biên soạn được ghi rõ, tách khỏi câu gốc. HSK 1–6 đã đủ 3–4 ví dụ mỗi mục. Còn ${dictionaryReport.notMatched.toLocaleString('vi')} mục chưa đối chiếu; các mục đó dùng dữ liệu có sẵn. Đây là tiến độ bổ sung dữ liệu, không phải tiến độ học.`;
+$('dictionaryCoverageDetail').textContent=`Bản bổ sung ngày ${dictionaryReport.date}: mở rộng nghĩa cho ${dictionaryReport.expandedWords} từ và thêm ${dictionaryReport.addedExamples} câu ví dụ ngắn từ bộ đối chiếu trước. Có 3–4 ví dụ cho ${checkedPracticeExamples.report.covered.toLocaleString('vi')} / ${dictionaryReport.total.toLocaleString('vi')} mục; câu biên soạn được ghi rõ. Đợt 11/10 bổ sung ${dictionaryReport.addedCourseWords||0} mục theo giáo trình và 249 ví dụ tự biên soạn; cấp độ của mục bổ sung là cấp bài học, không khẳng định phân loại trong danh sách thi chính thức. Còn ${dictionaryReport.notMatched.toLocaleString('vi')} mục tên riêng/mẫu ngữ pháp chưa đối chiếu từ điển. Đây là tiến độ bổ sung dữ liệu, không phải tiến độ học.`;
 function renderDictionaryExample(container,w) {
   container.replaceChildren();
   const extra=w.dictionary;
   if(!extra&&!w.practice){container.hidden=true;return;}
   container.hidden=false;
   const box=document.createElement('div');box.className='dictionary-extra';
+  if(w.vocabularyProvenance){const note=document.createElement('p');note.className='hint';note.textContent='Từ bổ sung theo bài HSK '+w.hsk+' · '+w.vocabularyProvenance.label;box.append(note);}
   if(container.id==='srsDictionaryExample')box.append(wordRelationDetails(w));
   if(extra?.meanings.length) {
     const details=document.createElement('details'), summary=document.createElement('summary');
@@ -131,7 +132,7 @@ function renderDictionaryExample(container,w) {
       const label=document.createElement('p');label.className='example-sense';label.textContent=`${i+1}. Nghĩa: ${e.meaning || e.sense}`;
       const cn=document.createElement('p');cn.className='dictionary-cn';cn.textContent=e.cn;
       const vi=document.createElement('p');vi.textContent=e.vi;
-      const note=document.createElement('small');note.className='example-origin';note.textContent=e.origin==='hanzii'?'Câu gốc · Hanzii':e.origin==='original'?'Câu trong dữ liệu gốc':'Câu biên soạn · đối chiếu nghĩa và cách dùng với Hanzii';
+      const note=document.createElement('small');note.className='example-origin';note.textContent=e.origin==='hanzii'?'Câu gốc · Hanzii':e.origin==='original'?'Câu trong dữ liệu gốc':w.practice?.sourceKind&&w.practice.sourceKind!=='hanzii'?'Câu tự biên soạn · tên riêng/mẫu ngữ pháp giáo trình':'Câu biên soạn · nghĩa và phiên âm mục từ đối chiếu Hanzii';
       item.append(label,cn,pinyinLine(e.pin),vi);
       if(e.sense&&e.sense!==e.meaning){const usage=document.createElement('small');usage.className='example-origin';usage.textContent=`Cách dùng: ${e.sense}`;item.append(usage);}
       item.append(note);box.append(item);
@@ -902,10 +903,12 @@ $('adaptiveToggle').checked=adaptiveState.enabled;$('adaptiveToggle').onchange=e
 // Bridge for textbook lesson practice. All words keep their existing keys and SRS records.
 const lessonWordsByHan=new Map();
 for(const w of words)for(const han of new Set([w.han,...w.han.split(/[()（）]/).map(s=>s.trim()).filter(Boolean)])){const xs=lessonWordsByHan.get(han)||[];xs.push(w);lessonWordsByHan.set(han,xs);}
+// Exact orthographic equivalents only; keep the existing card and SRS key.
+const lessonWordAliases=new Map([['贏','赢'],['內容','内容'],['勺（子）','勺子']]);
 window.HSKLessons={
  show(){switchMode('lessons');},
  key(w){return wordKey(w);},
- match(hans){const out=[],seen=new Set();for(const han of hans)for(const w of lessonWordsByHan.get(han)||[]){if(!seen.has(wordKey(w))){out.push(w);seen.add(wordKey(w));}}return out;},
+ match(hans){const out=[],seen=new Set();for(const han of hans)for(const w of lessonWordsByHan.get(lessonWordAliases.get(han)||han)||[]){if(!seen.has(wordKey(w))){out.push(w);seen.add(wordKey(w));}}return out;},
  record(w){return recordOf(w);},
  mark(w,status){markWord(w,status);},
  examples(w){return (w.practice?.examples||[]).filter(e=>e.cn&&e.pin&&e.vi);},
