@@ -652,3 +652,12 @@ body.show-translator .workspace>section:not(#translatorPanel){display:none!impor
  .drawer-close{top:10px}
  .drawer-body{padding-bottom:20px}
 }
+
+/* HSK filter expands inline and pushes the following menu items down. */
+.hsk-filter-toggle .di-chev{transition:transform .22s ease}
+.hsk-filter-toggle[aria-expanded="true"] .di-chev{transform:rotate(90deg)}
+.hsk-filter-content{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .22s ease,visibility .22s}
+.hsk-filter-toggle[aria-expanded="true"] + .hsk-filter-content{grid-template-rows:1fr;visibility:visible}
+.hsk-filter-inner{min-height:0;overflow:hidden}
+.hsk-filter-inner .drawer-hint{margin:10px 0}
+@media(prefers-reduced-motion:reduce){.hsk-filter-content,.hsk-filter-toggle .di-chev{transition:none}}

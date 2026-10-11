@@ -190,7 +190,8 @@
     <div class="drawer-head"><span class="about-logo" aria-hidden="true">汉</span><div><strong>HSK Flashcards</strong><span>Tổng hợp HSK 1–6</span></div>
       <button type="button" class="drawer-close" id="drawerClose" aria-label="Đóng menu">✕</button></div>
     <div class="drawer-body">
-      <h2 class="drawer-title">Bộ lọc HSK</h2>
+      <button type="button" class="drawer-item hsk-filter-toggle" id="hskFilterToggle" aria-expanded="false" aria-controls="hskFilterContent"><span class="di-ico" aria-hidden="true">☷</span><span class="di-lbl">Bộ lọc HSK</span><span class="di-chev" aria-hidden="true">›</span></button>
+      <div class="hsk-filter-content" id="hskFilterContent" inert><div class="hsk-filter-inner">
       <p class="drawer-hint">Áp dụng cho thẻ từ vựng, tìm kiếm, trắc nghiệm và ôn tập.</p>
   <div class="filter-buttons">
     <button class="filter-btn active" data-filter="all">TẤT CẢ</button>
@@ -201,6 +202,7 @@
     <button class="filter-btn hsk5" data-filter="5">HSK 5</button>
     <button class="filter-btn hsk6" data-filter="6">HSK 6</button>
   </div>
+      </div></div>
       <h2 class="drawer-title">Công cụ</h2><button type="button" class="drawer-item" id="translatorBtn"><span class="di-ico" aria-hidden="true">译</span><span class="di-lbl">Dịch câu theo HSK</span><span class="di-chev" aria-hidden="true">›</span></button><h2 class="drawer-title">Tài khoản</h2><button type="button" class="drawer-item" id="accountBtn"><span class="di-ico" aria-hidden="true">👤</span><span class="di-lbl" id="accountNavLabel">Đăng nhập / Tạo tài khoản</span><span class="di-chev" aria-hidden="true">›</span></button><button type="button" class="drawer-item" id="adminBtn" hidden><span class="di-ico" aria-hidden="true">📊</span><span class="di-lbl">Dashboard admin</span><span class="di-chev">›</span></button><h2 class="drawer-title">Thông tin</h2>
       <button type="button" class="drawer-item" id="aboutBtn"><span class="di-ico" aria-hidden="true">ℹ️</span><span class="di-lbl">Giới thiệu ứng dụng</span><span class="di-chev" aria-hidden="true">›</span></button>
     </div>
