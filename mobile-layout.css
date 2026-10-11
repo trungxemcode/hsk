@@ -718,3 +718,5 @@ progress::-webkit-progress-value{background:#16965a;border-radius:8px}
 body.lesson-focus .offline-bar,body.lesson-focus .memory-reminder,body.lesson-focus #lessonsPanel>h2{display:none!important}
 @media(max-width:700px){.app-tabs .ico{width:42px}.app-tabs button{padding-inline:2px}.lesson-mastery{padding:12px}.lesson-mastery small{display:block}}
 @media(max-width:360px){.app-tabs .ico{width:34px}.app-tabs .lbl{font-size:9px}}
+
+body.lesson-focus #lessonsPanel>.hint{display:none}

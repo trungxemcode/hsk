@@ -70,7 +70,7 @@ function goListFromHistory(){selected=null;document.body.classList.remove('lesso
 window.addEventListener('hsk-lesson-evidence',e=>{const l=data?.courses.flatMap(c=>c.lessons).find(l=>l.id===e.detail?.id);if(!l||!matched(l).some(w=>api().key(w)===e.detail.key))return;save(l.id,mastery.apply(progress()[l.id],e.detail));});
 for(const n of document.querySelectorAll('.app-tabs button:not([data-mode="lessons"]),#translatorBtn,#accountBtn,#adminBtn,#aboutBtn,[data-filter]'))n.addEventListener('click',()=>close());
 $('mobileMode').addEventListener('change',()=>{if($('mobileMode').value!=='lessons')close();});
-window.addEventListener('hsk-account-ready',()=>{selected=null;cardIndex=0;revealed=false;if(!panel.hidden)render();});
+window.addEventListener('hsk-account-ready',()=>{selected=location.hash.startsWith('#lesson/')?fromHash():null;cardIndex=0;revealed=false;if(!panel.hidden)render();});
 window.addEventListener('storage',e=>{if([KEY,'hsk-flashcards-progress-v1'].includes(e.key)&&!panel.hidden)render();});
 window.addEventListener('hsk-lessons-ready',()=>{if(location.hash.startsWith('#lesson/'))api().show();if(!panel.hidden){status.textContent='';render();}});
 })();
