@@ -1,7 +1,7 @@
 (()=>{
 'use strict';
-const panel=document.getElementById('translatorPanel'),form=document.getElementById('translationForm'),input=document.getElementById('translationInput'),level=document.getElementById('translationLevel'),button=document.getElementById('translationSubmit'),status=document.getElementById('translationStatus'),result=document.getElementById('translationResult');
-let config=null,pending=null,serial=0,lastText='';
+const panel=document.getElementById('translatorPanel'),form=document.getElementById('translationForm'),input=document.getElementById('translationInput'),level=document.getElementById('translationLevel'),button=document.getElementById('translationSubmit'),status=document.getElementById('translationStatus'),result=document.getElementById('translationResult'),askForm=document.getElementById('translationAskForm'),askInput=document.getElementById('translationQuestion'),askButton=document.getElementById('translationAskSubmit'),askStatus=document.getElementById('translationAskStatus'),chat=document.getElementById('translationChat');
+let config=null,pending=null,askPending=null,serial=0,lastText='',currentTranslation=null,conversation=[];
 const cache=new Map();
 function close(){document.body.classList.remove('show-translator');panel.hidden=true;}
 document.getElementById('translatorBtn').addEventListener('click',()=>{
@@ -11,19 +11,22 @@ document.getElementById('translatorBtn').addEventListener('click',()=>{
  document.getElementById('menuBtn')?.setAttribute('aria-expanded','false');panel.hidden=false;document.querySelector('.workspace').scrollTop=0;
 });
 for(const el of document.querySelectorAll('.app-tabs button,#accountBtn,#adminBtn,#aboutBtn,[data-filter]'))el.addEventListener('click',close);
+function clearConversation(){conversation=[];chat.replaceChildren();askInput.value='';askStatus.textContent='';askForm.hidden=true;askButton.disabled=false;askPending?.abort();askPending=null;}
+function addMessage(role,text){const item=document.createElement('p');item.className='translation-chat-message '+(role==='model'?'assistant':'user');const label=document.createElement('strong');label.textContent=role==='model'?'AI':'Bạn';const body=document.createElement('span');body.textContent=text;item.append(label,body);chat.append(item);chat.scrollTop=chat.scrollHeight;}
 function render(data){
+ currentTranslation=data;
  for(const key of ['chinese','pinyin','explanation','note'])document.getElementById('translation-'+key).textContent=data[key];
  document.getElementById('translation-note').hidden=!data.note;
  document.getElementById('translation-heading').textContent='Bản dịch theo HSK '+data.hsk;
  const outside=document.getElementById('translation-outside');outside.textContent=data.outOfVocabulary.length?'Chữ/cụm chưa khớp danh sách HSK đã chọn: '+data.outOfVocabulary.join('、'):'';outside.hidden=!outside.textContent;
- result.hidden=false;
+ askForm.hidden=false;result.hidden=false;
 }
 async function translate(event){
  event?.preventDefault();const text=input.value.trim(),hsk=Number(level.value);
  if(!config){status.textContent='Chưa kết nối dịch vụ dịch. Cần kích hoạt máy chủ miễn phí trước.';return;}
  if(!text){status.textContent='Nhập câu tiếng Việt cần dịch.';input.focus();return;}
  const user=window.HSKAccountDashboard?.user;if(!user){status.textContent='Hãy đăng nhập tài khoản app trước khi dịch.';return;}
- pending?.abort();const current=++serial;pending=new AbortController();const controller=pending;
+ clearConversation();currentTranslation=null;pending?.abort();const current=++serial;pending=new AbortController();const controller=pending;
  const key=JSON.stringify([user.uid,text,hsk]);lastText=text;
  if(cache.has(key)){render(cache.get(key));status.textContent='Đã hiển thị bản dịch trước đó.';button.disabled=false;return;}
  button.disabled=true;status.textContent='Đang dịch theo HSK '+hsk+'…';result.hidden=true;
@@ -33,14 +36,27 @@ async function translate(event){
   const response=await fetch(config.endpoint,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({text,hsk}),signal:controller.signal});
   const data=await response.json();if(current!==serial)return;if(!response.ok)throw Error(typeof data.error==='string'?data.error:'Dịch chưa thành công. Hãy thử lại.');
   if(data.hsk!==hsk||!['chinese','pinyin','explanation','note'].every(k=>typeof data[k]==='string')||!Array.isArray(data.outOfVocabulary)||!data.outOfVocabulary.every(v=>typeof v==='string'))throw Error('Kết quả chưa đúng định dạng.');
-  cache.set(key,data);if(cache.size>30)cache.delete(cache.keys().next().value);render(data);status.textContent='Đã dịch. Bạn có thể đổi HSK để xem cách diễn đạt khác.';
+  cache.set(key,data);if(cache.size>30)cache.delete(cache.keys().next().value);render(data);status.textContent='Đã dịch. Bạn có thể hỏi AI về từ, ngữ pháp và cách dùng trong câu này.';
  }catch(error){if(current===serial)status.textContent=error.name==='AbortError'?'Dịch quá lâu hoặc đã bị hủy. Hãy thử lại.':error.message;}
  finally{clearTimeout(timer);if(current===serial){button.disabled=false;pending=null;}}
 }
-form.addEventListener('submit',translate);
+async function ask(event){
+ event.preventDefault();const question=askInput.value.trim();if(!question||!currentTranslation)return;
+ const user=window.HSKAccountDashboard?.user;if(!user){askStatus.textContent='Hãy đăng nhập tài khoản app trước khi hỏi AI.';return;}
+ askPending?.abort();askPending=new AbortController();const controller=askPending;askButton.disabled=true;askInput.disabled=true;askStatus.textContent='AI đang trả lời…';
+ const timer=setTimeout(()=>controller.abort(),50000);
+ try{
+  const token=await user.getIdToken();const endpoint=config.endpoint.replace(/\/translate$/,'/ask');
+  const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({question,hsk:currentTranslation.hsk,translation:{vietnamese:lastText,chinese:currentTranslation.chinese,pinyin:currentTranslation.pinyin,explanation:currentTranslation.explanation},history:conversation.slice(-8)}),signal:controller.signal});
+  const data=await response.json();if(!response.ok)throw Error(typeof data.error==='string'?data.error:'AI chưa trả lời được. Hãy thử lại.');if(typeof data.answer!=='string'||!data.answer.trim())throw Error('Câu trả lời chưa đúng định dạng.');
+  conversation.push({role:'user',text:question},{role:'assistant',text:data.answer});addMessage('user',question);addMessage('model',data.answer);askInput.value='';askStatus.textContent='';
+ }catch(error){askStatus.textContent=error.name==='AbortError'?'Hỏi đáp quá lâu. Hãy thử lại.':error.message;}
+ finally{clearTimeout(timer);askButton.disabled=false;askInput.disabled=false;askPending=null;}
+}
+form.addEventListener('submit',translate);askForm.addEventListener('submit',ask);
 level.addEventListener('change',()=>{if(lastText&&input.value.trim()===lastText)translate();});
-input.addEventListener('input',()=>{++serial;pending?.abort();pending=null;button.disabled=!config;result.hidden=true;lastText='';});
-window.addEventListener('hsk-account-ready',()=>{++serial;pending?.abort();cache.clear();result.hidden=true;lastText='';button.disabled=!config;});
+input.addEventListener('input',()=>{++serial;pending?.abort();pending=null;button.disabled=!config;result.hidden=true;lastText='';currentTranslation=null;clearConversation();});
+window.addEventListener('hsk-account-ready',()=>{++serial;pending?.abort();cache.clear();result.hidden=true;lastText='';currentTranslation=null;clearConversation();button.disabled=!config;});
 fetch('./translation-config.json',{cache:'no-store'}).then(r=>r.json()).then(c=>{
  if(c.enabled&&typeof c.endpoint==='string'&&new URL(c.endpoint).protocol==='https:'){config=c;button.disabled=false;status.textContent='Sẵn sàng dịch. Cần mạng và đăng nhập.';}
  else status.textContent='Dịch câu đang chờ kích hoạt kết nối miễn phí.';
