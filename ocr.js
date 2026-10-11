@@ -2,12 +2,13 @@
 'use strict';
 const $=id=>document.getElementById(id),choose=$('ocrChoose'),camera=$('ocrCamera'),file=$('ocrFile'),capture=$('ocrCapture'),preview=$('ocrPreview'),run=$('ocrRead'),remove=$('ocrRemove'),status=$('ocrStatus'),output=$('ocrOutput'),text=$('ocrText'),use=$('ocrUse');
 let config=null,image=null,url=null,controller=null,serial=0,busy=false,source=null,region=null,cropping=false,start=null;
+const fastButton=$('ocrFast');
 const stage=$('ocrStage'),box=$('ocrCropBox'),crop=$('ocrCrop'),whole=$('ocrWhole'),cancel=$('ocrCancel'),cache=new Map();
 function encode(img,rect=null){const r=rect||{x:0,y:0,w:1,h:1},sw=Math.max(1,Math.round(img.naturalWidth*r.w)),sh=Math.max(1,Math.round(img.naturalHeight*r.h)),ratio=Math.min(1,(rect?2048:1600)/Math.max(sw,sh)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(sw*ratio));canvas.height=Math.max(1,Math.round(sh*ratio));const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,img.naturalWidth*r.x,img.naturalHeight*r.y,sw,sh,0,0,canvas.width,canvas.height);let data=canvas.toDataURL('image/jpeg',.88);if(data.length>2000023)data=canvas.toDataURL('image/jpeg',.72);if(data.length>2000023)throw Error('Ảnh quá lớn sau nén. Hãy chọn vùng có chữ nhỏ hơn.');return {dataUrl:data,image:{mimeType:'image/jpeg',data:data.split(',')[1]}};}
 function stopCrop(){cropping=false;stage.classList.remove('selecting');crop.textContent='Chọn vùng chữ';}
 function showData(data){text.value=data.text;output.hidden=false;status.textContent='Đã nhận dạng chữ Trung. Kiểm tra nét chữ trước khi dịch.'+(data.note?' '+data.note:'');}
 
-function buttons(){run.disabled=!config||!image||busy;choose.disabled=camera.disabled=crop.disabled=whole.disabled=busy;cancel.hidden=!busy||!controller;crop.hidden=whole.hidden=!image;}
+function buttons(){run.disabled=!config||!image||busy;fastButton.disabled=run.disabled;choose.disabled=camera.disabled=crop.disabled=whole.disabled=busy;cancel.hidden=!busy||!controller;crop.hidden=whole.hidden=!image;}
 function reset(){++serial;controller?.abort();controller=null;busy=false;image=null;source=null;region=null;start=null;box.hidden=true;stopCrop();if(url)URL.revokeObjectURL(url);url=null;preview.removeAttribute('src');preview.hidden=true;remove.hidden=true;output.hidden=true;text.value='';file.value=capture.value='';status.textContent='';buttons();}
 async function pick(event){
  const selected=event.target.files?.[0];if(!selected)return;reset();const id=serial;
@@ -23,26 +24,28 @@ async function pick(event){
  }catch(error){if(id===serial)status.textContent=error.message;}
  finally{if(id===serial){busy=false;buttons();}}
 }
-async function read(){
+async function read(fast=false){
  const user=window.HSKAccountDashboard?.user;
  if(!user){status.textContent='Hãy đăng nhập tài khoản app để nhận dạng chữ.';return;}
  if(!config||!image||busy)return;
  let prepared;try{prepared=region?encode(source,region).image:image;}catch(error){status.textContent=error.message;return;}
- const key=user.uid+':'+prepared.data;if(cache.has(key)){showData(cache.get(key));return;}
- const id=++serial;controller=new AbortController();const current=controller;busy=true;buttons();output.hidden=true;status.textContent='Đang nhận dạng chữ…';
+ const hsk=Number($('translationLevel').value),key=user.uid+':'+(fast?'fast:'+hsk:'ocr')+':'+prepared.data;
+ function show(data){showData(data);if(fast){if(data.direction!=='zh-vi'||typeof data.vietnamese!=='string'||typeof data.pinyin!=='string'||typeof data.explanation!=='string'||!Array.isArray(data.outOfVocabulary))throw Error('Máy chủ chưa có chế độ dịch ảnh một lượt. Hãy cập nhật Worker hoặc dùng Nhận dạng chữ.');window.dispatchEvent(new CustomEvent('hsk-image-translated',{detail:data}));status.textContent='Đã nhận dạng và dịch trong một lượt AI. Kiểm tra chữ Trung và bản dịch bên dưới.';}}
+ if(cache.has(key)){show(cache.get(key));return;}
+ const id=++serial;controller=new AbortController();const current=controller;busy=true;buttons();output.hidden=true;status.textContent=fast?'Đang đọc và dịch ảnh trong một lượt AI…':'Đang nhận dạng chữ…';
  const timer=setTimeout(()=>current.abort(),125000),started=Date.now(),progress=setInterval(()=>{if(id===serial)status.textContent='AI đang đọc chữ Trung… đã chờ '+Math.round((Date.now()-started)/1000)+' giây. Bạn có thể bấm Hủy.';},15000);
  try{
   const token=await user.getIdToken();if(id!==serial)return;
-  const response=await fetch(config.endpoint.replace(/\/translate\/?$/,'/ocr'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({image:prepared}),signal:current.signal});
+  const response=await fetch(config.endpoint.replace(/\/translate\/?$/,'/ocr'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({image:prepared,...(fast?{translate:true,hsk}:{})}),signal:current.signal});
   const data=await response.json();if(id!==serial)return;
   if(!response.ok)throw Error(response.status===404?'Máy chủ chưa hỗ trợ nhận dạng ảnh. Cần triển khai bản máy chủ mới.':data.error||'Chưa nhận dạng được ảnh. Hãy thử lại.');
   if(typeof data.text!=='string'||data.text.length>10000||typeof data.note!=='string')throw Error('Kết quả nhận dạng không hợp lệ.');
   if(!data.text.trim()){status.textContent='Không tìm thấy chữ Trung rõ trong ảnh. Hãy chọn vùng có chữ hoặc chụp gần hơn.';return;}
-  cache.set(key,data);if(cache.size>3)cache.delete(cache.keys().next().value);showData(data);
+  show(data);cache.set(key,data);if(cache.size>3)cache.delete(cache.keys().next().value);
  }catch(error){if(id===serial)status.textContent=error.name==='AbortError'?'AI chưa trả lời sau 2 phút. Hãy chọn riêng vùng chữ Trung rồi thử lại.':error.message;}
  finally{clearTimeout(timer);clearInterval(progress);if(id===serial){controller=null;busy=false;buttons();}}
 }
-choose.addEventListener('click',()=>file.click());camera.addEventListener('click',()=>capture.click());file.addEventListener('change',pick);capture.addEventListener('change',pick);run.addEventListener('click',read);remove.addEventListener('click',reset);
+choose.addEventListener('click',()=>file.click());camera.addEventListener('click',()=>capture.click());file.addEventListener('change',pick);capture.addEventListener('change',pick);run.addEventListener('click',()=>read(false));fastButton.addEventListener('click',()=>read(true));remove.addEventListener('click',reset);
 use.addEventListener('click',()=>{const value=text.value.trim();if(!value){status.textContent='Chưa có nội dung để dịch.';return;}if(value.length>500){status.textContent='Ô dịch nhận tối đa 500 ký tự. Hãy giữ lại câu hoặc đoạn muốn dịch trong ô nhận dạng.';text.focus();return;}const direction=$('translationDirection');direction.value='zh-vi';direction.dispatchEvent(new Event('change',{bubbles:true}));const input=$('translationInput');input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}));input.focus();input.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});status.textContent='Đã đưa chữ Trung vào ô dịch. Bấm Dịch câu để xem nghĩa tiếng Việt và phiên âm.';});
 window.addEventListener('hsk-account-ready',()=>{cache.clear();reset();});
 cancel.addEventListener('click',()=>{++serial;controller?.abort();controller=null;busy=false;buttons();status.textContent='Đã hủy nhận dạng.';});

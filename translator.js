@@ -25,6 +25,7 @@ function render(data){
  const outside=document.getElementById('translation-outside');outside.textContent=data.outOfVocabulary.length?'Chữ/cụm chưa khớp danh sách HSK đã chọn: '+data.outOfVocabulary.join('、'):'';outside.hidden=!outside.textContent;
  askForm.hidden=false;result.hidden=false;
 }
+window.addEventListener('hsk-image-translated',event=>{const data=event.detail;if(!data||data.direction!=='zh-vi')return;direction.value='zh-vi';syncDirection();input.value=data.chinese;input.dispatchEvent(new Event('input',{bubbles:true}));lastText=data.chinese;render(data);status.textContent='Đã dịch trực tiếp từ ảnh. Bạn có thể hỏi AI về câu này.';});
 async function translate(event){
  event?.preventDefault();const text=input.value.trim(),hsk=Number(level.value),translationDirection=direction.value;
  if(!config){status.textContent='Chưa kết nối dịch vụ dịch. Cần kích hoạt máy chủ miễn phí trước.';return;}
