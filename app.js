@@ -321,8 +321,11 @@ function updateCard() {
 }
 function switchMode(next) {
  mode=next;
- for(const name of ['learn','search','quiz','srs','mistakes','compare'])$(name+'Panel').hidden=name!==mode;
+ if(next!=='lessons')document.body.classList.remove('show-lessons','lesson-focus');
+ if(!['quiz','srs'].includes(next))$('lessonPracticeBack').hidden=true;
+ for(const name of ['learn','search','quiz','srs','mistakes','compare','lessons'])$(name+'Panel').hidden=name!==mode;
  document.querySelectorAll('[data-mode]').forEach(b=>{ b.classList.toggle('active',b.dataset.mode===mode);b.setAttribute('aria-pressed',String(b.dataset.mode===mode));});
+ if(mode==='lessons')window.HSKLessonNav?.open();
  if(mode==='search')$('searchInput').focus();if(mode==='mistakes')renderMistakes();if(mode==='compare')renderComparisons(); stats();
 }
 let searchMatches=[], visibleResults=40, searchTimer;
@@ -515,6 +518,7 @@ function answerQuiz(i) {
  [...$('quizOptions').children].forEach((b,j)=>{b.disabled=true;if(question.options[j].correct)b.classList.add('correct');else if(j===i)b.classList.add('wrong');});
  recordQuizMistake(question,chosen);
  review(question.w,correct?'good':'again');
+ if(quizSession.lessonId)window.dispatchEvent(new CustomEvent('hsk-lesson-evidence',{detail:{id:quizSession.lessonId,key:wordKey(question.w),kind:'quiz',correct,time:Date.now()}}));
  const w=question.w;
  $('quizFeedback').textContent=`${correct?'✓ Chính xác!':'× Chưa đúng.'}\n${w.han} · ${w.pin}\nNghĩa: ${w.mean}\nÔn lại sau ${intervalLabel(recordOf(w).interval)}.`;
  if(question.item)$('quizFeedback').textContent+=`\n\nCâu đúng: ${question.item.cn}\n${question.item.pin}\n${question.item.vi}\n\nGiải thích: ${question.item.explanation}`;
@@ -540,6 +544,7 @@ function renderSrs() {
 function rateSrs(rating) {
  if(!srsSession?.queue.length||$('srsAnswer').hidden)return;
  const w=srsSession.queue.shift();review(w,rating);srsSession.done++;
+ if(srsSession.lessonId)window.dispatchEvent(new CustomEvent('hsk-lesson-evidence',{detail:{id:srsSession.lessonId,key:wordKey(w),kind:'srs',correct:['good','easy'].includes(rating),time:Date.now()}}));
  $('srsMessage').textContent=`${w.han}: ôn lại ${new Date(recordOf(w).due).toLocaleString('vi-VN')} (${intervalLabel(recordOf(w).interval)}).`;renderSrs();
 }
 function clearSessions() {
@@ -898,11 +903,13 @@ $('adaptiveToggle').checked=adaptiveState.enabled;$('adaptiveToggle').onchange=e
 const lessonWordsByHan=new Map();
 for(const w of words)for(const han of new Set([w.han,...w.han.split(/[()（）]/).map(s=>s.trim()).filter(Boolean)])){const xs=lessonWordsByHan.get(han)||[];xs.push(w);lessonWordsByHan.set(han,xs);}
 window.HSKLessons={
+ show(){switchMode('lessons');},
+ key(w){return wordKey(w);},
  match(hans){const out=[],seen=new Set();for(const han of hans)for(const w of lessonWordsByHan.get(han)||[]){if(!seen.has(wordKey(w))){out.push(w);seen.add(wordKey(w));}}return out;},
  record(w){return recordOf(w);},
  mark(w,status){markWord(w,status);},
  examples(w){return (w.practice?.examples||[]).filter(e=>e.cn&&e.pin&&e.vi);},
- quiz(ws,label){const qs=shuffled(ws).slice(0,20).map((w,i)=>createQuestion(w,i%2?'mean':'han',words)).filter(Boolean);startSavedQuestions(qs,label);},
- srs(ws){switchMode('srs');const due=ws.filter(w=>!recordOf(w)||recordOf(w).due<=Date.now()).sort((a,b)=>(recordOf(a)?.due||0)-(recordOf(b)?.due||0));srsSession={queue:due,total:due.length,done:0};$('srsMessage').textContent=due.length?'Ôn từ đến hạn và từ mới của bài học.':'Tất cả từ trong bài đã có lịch ôn và chưa đến hạn.';renderSrs();}
+ quiz(ws,label,id){let state={};try{state=JSON.parse(localStorage.getItem('hsk-course-lessons-v1')||'{}').lessons?.[id]||{};}catch{};const pool=shuffled(ws).sort((a,b)=>(state.evidence?.[wordKey(a)]?.quizStreak||0)-(state.evidence?.[wordKey(b)]?.quizStreak||0));const qs=pool.slice(0,20).map((w,i)=>createQuestion(w,i%2?'mean':'han',words)).filter(Boolean);startSavedQuestions(qs,label);if(qs.length){quizSession.lessonId=id;$('lessonPracticeBack').hidden=!id;}},
+ srs(ws,id){switchMode('srs');const due=ws.filter(w=>!recordOf(w)||recordOf(w).due<=Date.now()).sort((a,b)=>(recordOf(a)?.due||0)-(recordOf(b)?.due||0));srsSession={queue:due,total:due.length,done:0,lessonId:id};$('lessonPracticeBack').hidden=!id;$('srsMessage').textContent=due.length?'Ôn từ đến hạn và từ mới của bài học.':'Tất cả từ trong bài đã có lịch ôn và chưa đến hạn.';renderSrs();}
 };
 window.dispatchEvent(new Event('hsk-lessons-ready'));

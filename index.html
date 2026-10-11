@@ -17,6 +17,7 @@
 <script src="./account.js?v=account-1" defer></script>
 <script src="./translator.js" defer></script>
 <script src="./ocr.js" defer></script>
+<script src="./lesson-mastery.js" defer></script>
 <script src="./lessons.js" defer></script>
 </head>
 
@@ -28,12 +29,13 @@
   
   <div class="mobile-controls">
     <label for="mobileLevel">Trình độ<select id="mobileLevel"><option value="all">Tất cả HSK</option><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select></label>
-    <label for="mobileMode">Cách học<select id="mobileMode"><option value="learn">Thẻ từ vựng</option><option value="search">Tìm kiếm</option><option value="quiz">Trắc nghiệm</option><option value="mistakes">Ôn câu sai</option><option value="compare">Từ dễ nhầm</option><option value="srs">Ôn tập SRS</option></select></label>
+    <label for="mobileMode">Cách học<select id="mobileMode"><option value="learn">Thẻ từ vựng</option><option value="search">Tìm kiếm</option><option value="quiz">Trắc nghiệm</option><option value="mistakes">Ôn câu sai</option><option value="compare">Từ dễ nhầm</option><option value="srs">Ôn tập SRS</option><option value="lessons">Bài học</option></select></label>
   </div>
 
 
 
   <nav class="app-tabs" aria-label="Chế độ học">
+<button id="lessonsBtn" data-mode="lessons" aria-pressed="false" aria-label="Bài học"><span class="ico" aria-hidden="true">📚</span><span class="lbl">Bài học</span></button>
     <button class="active" data-mode="learn" aria-pressed="true" aria-label="Thẻ từ vựng"><span class="ico" aria-hidden="true">📖</span><span class="lbl">Thẻ từ</span></button>
     <button data-mode="search" aria-pressed="false" aria-label="Tìm kiếm từ vựng"><span class="ico" aria-hidden="true">🔎</span><span class="lbl">Tìm kiếm</span></button>
     <button data-mode="quiz" aria-pressed="false" aria-label="Trắc nghiệm"><span class="ico" aria-hidden="true">🎯</span><span class="lbl">Trắc nghiệm</span></button>
@@ -182,6 +184,7 @@
 <article id="translationResult" hidden><h3 id="translation-heading"></h3><p id="translation-chinese" lang="zh"></p><p id="translation-vietnamese" lang="vi" hidden></p><p id="translation-pinyin"></p><p id="translation-explanation"></p><p id="translation-note" hidden></p><p id="translation-outside" class="hint" hidden></p><section id="translationQa" aria-label="Hỏi đáp về câu dịch"><h3>Hỏi AI về câu này</h3><div id="translationChat" role="log" aria-live="polite"></div><form id="translationAskForm"><label for="translationQuestion">Bạn muốn hỏi gì về câu dịch?</label><textarea id="translationQuestion" rows="2" maxlength="500" placeholder="Ví dụ: Vì sao dùng 了 trong câu này?" required></textarea><button id="translationAskSubmit" type="submit">Gửi câu hỏi</button><p id="translationAskStatus" role="status" class="hint"></p></form></section></article>
 <p class="hint">Dịch bằng AI, cần mạng. Câu tiếng Việt, bản dịch và câu hỏi được gửi đến Google Gemini; dữ liệu ở gói miễn phí có thể được Google dùng để cải thiện sản phẩm.</p>
 </section>
+<button id="lessonPracticeBack" type="button" hidden>← Quay về bài đang học</button>
 <section id="lessonsPanel" class="panel-box" aria-label="Bài học giáo trình chuẩn HSK" hidden><h2>Bài học · Giáo trình chuẩn HSK</h2><p class="hint">Chọn HSK → chọn bài. HSK 4–6 gồm hai tập Thượng và Hạ.</p><p id="lessonsStatus" role="status" aria-live="polite"></p><div id="lessonsContent"></div></section>
 <section id="aboutPanel" class="about" aria-label="Giới thiệu ứng dụng" hidden>
     <div class="about-hero"><span class="about-logo" aria-hidden="true">汉</span><div><strong>HSK Flashcards</strong><span>Tổng hợp HSK 1–6</span></div></div>
@@ -215,7 +218,7 @@
     <button class="filter-btn hsk6" data-filter="6">HSK 6</button>
   </div>
       </div></div>
-      <h2 class="drawer-title">Công cụ</h2><button type="button" class="drawer-item" id="lessonsBtn"><span class="di-ico" aria-hidden="true">📚</span><span class="di-lbl">Bài học giáo trình HSK</span><span class="di-chev" aria-hidden="true">›</span></button><button type="button" class="drawer-item" id="translatorBtn"><span class="di-ico" aria-hidden="true">译</span><span class="di-lbl">Dịch câu theo HSK</span><span class="di-chev" aria-hidden="true">›</span></button><h2 class="drawer-title">Tài khoản</h2><button type="button" class="drawer-item" id="accountBtn"><span class="di-ico" aria-hidden="true">👤</span><span class="di-lbl" id="accountNavLabel">Đăng nhập / Tạo tài khoản</span><span class="di-chev" aria-hidden="true">›</span></button><button type="button" class="drawer-item" id="adminBtn" hidden><span class="di-ico" aria-hidden="true">📊</span><span class="di-lbl">Dashboard admin</span><span class="di-chev">›</span></button><h2 class="drawer-title">Thông tin</h2>
+      <div class="lesson-menu-levels"><h2 class="drawer-title">Giáo trình HSK</h2><button type="button" class="drawer-item" data-lesson-level="1">HSK 1</button><button type="button" class="drawer-item" data-lesson-level="2">HSK 2</button><button type="button" class="drawer-item" data-lesson-level="3">HSK 3</button><button type="button" class="drawer-item" data-lesson-level="4">HSK 4</button><button type="button" class="drawer-item" data-lesson-level="5">HSK 5</button><button type="button" class="drawer-item" data-lesson-level="6">HSK 6</button></div><h2 class="drawer-title">Công cụ</h2><button type="button" class="drawer-item" id="translatorBtn"><span class="di-ico" aria-hidden="true">译</span><span class="di-lbl">Dịch câu theo HSK</span><span class="di-chev" aria-hidden="true">›</span></button><h2 class="drawer-title">Tài khoản</h2><button type="button" class="drawer-item" id="accountBtn"><span class="di-ico" aria-hidden="true">👤</span><span class="di-lbl" id="accountNavLabel">Đăng nhập / Tạo tài khoản</span><span class="di-chev" aria-hidden="true">›</span></button><button type="button" class="drawer-item" id="adminBtn" hidden><span class="di-ico" aria-hidden="true">📊</span><span class="di-lbl">Dashboard admin</span><span class="di-chev">›</span></button><h2 class="drawer-title">Thông tin</h2>
       <button type="button" class="drawer-item" id="aboutBtn"><span class="di-ico" aria-hidden="true">ℹ️</span><span class="di-lbl">Giới thiệu ứng dụng</span><span class="di-chev" aria-hidden="true">›</span></button>
     </div>
   </aside>
