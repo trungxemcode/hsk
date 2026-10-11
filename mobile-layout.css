@@ -700,7 +700,7 @@ body.show-lessons h1::after{content:"Bài học"!important}
 
 .lesson-menu-levels{display:none}
 body.show-lessons .lesson-menu-levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.lesson-menu-levels h3{grid-column:1/-1}
+.lesson-menu-levels h2{grid-column:1/-1}
 body.show-lessons #hskFilterToggle,body.show-lessons #hskFilterContent{display:none!important}
 .lesson-row.is-read{background:#ecfdf3!important;border-color:#86d4a5}
 .lesson-row.is-mastered{background:#d1fae5!important;border-color:#16965a}
