@@ -1,5 +1,5 @@
 (async()=>{
- const BUILD='hsk-offline-20261011-lesson-mastery-3',status=document.getElementById('offlineStatus'),update=document.getElementById('offlineUpdate'),manual=document.getElementById('offlineCheck');
+ const BUILD='hsk-offline-20261011-lesson-content-1',status=document.getElementById('offlineStatus'),update=document.getElementById('offlineUpdate'),manual=document.getElementById('offlineCheck');
  let registration,ready=false,checking=false,lastCheck=0,phase='',lastProgress=0,latest=null,activating=false,activeVersion=null;const watched=new WeakSet();
  const set=text=>status.textContent=text;
  const idle=()=>{if(!checking&&!activating&&!['files','manifest','error'].includes(phase))set(ready?(navigator.onLine?'Đã sẵn sàng học offline · HSK 1–6':'Đang học offline · Tiến độ vẫn được lưu'):'Đang chuẩn bị học offline…');};

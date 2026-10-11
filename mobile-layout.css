@@ -720,3 +720,21 @@ body.lesson-focus .offline-bar,body.lesson-focus .memory-reminder,body.lesson-fo
 @media(max-width:360px){.app-tabs .ico{width:34px}.app-tabs .lbl{font-size:9px}}
 
 body.lesson-focus #lessonsPanel>.hint{display:none}
+
+.lesson-section-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:12px 0 18px}
+.lesson-section-nav button{padding:8px 4px;font-size:13px}
+.lesson-section-nav button[aria-pressed=true]{background:#12307a!important;color:white!important}
+.lesson-section[hidden]{display:none!important}
+.lesson-section p{line-height:1.7;overflow-wrap:anywhere}
+.lesson-section h4{font-size:18px;margin:12px 0}
+.lesson-grammar-point,.lesson-dialogue{padding:14px;border:1px solid #d9e1ef;border-radius:16px;margin:14px 0;background:#fff}
+.lesson-pattern{padding:10px;border-radius:10px;background:#eaf1ff;color:#153477;font-weight:600}
+.lesson-language-line{padding:12px;margin:10px 0;background:#f4f7fc;border-radius:12px}
+.lesson-language-line p{margin:4px 0}
+.lesson-cn{font-size:22px}
+.lesson-error-note{border-left:3px solid #e3a630;padding-left:10px;color:#6a501a}
+.lesson-test-options{display:grid;gap:8px}
+.lesson-test-options button{text-align:left}
+.lesson-test-options button.correct{background:#d1fae5!important;color:#14532d!important;opacity:1}
+.lesson-test-options button.wrong{background:#fee2e2!important;color:#991b1b!important;opacity:1}
+.lesson-test-feedback{white-space:pre-line}

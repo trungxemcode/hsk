@@ -1,12 +1,13 @@
 (function(root){
 'use strict';
 const DAY=86400000;
-function score(state={},keys=[]){
+function score(state={},keys=[],contentKeys=[]){
  const read=!!(state.read||state.completed),e=state.evidence||{};
  const quiz=keys.length?keys.reduce((s,k)=>s+Math.min(2,Math.max(0,e[k]?.quizStreak||0))/2,0)/keys.length:0;
  const srs=keys.length?keys.reduce((s,k)=>s+Math.min(3,(e[k]?.srsPasses||[]).length)/3,0)/keys.length:0;
- const mastered=read&&keys.length>0&&quiz===1&&srs===1;
- return {read,quiz,srs,mastered,percent:mastered?100:Math.min(99,Math.floor((read?20:0)+30*quiz+50*srs)),quizReady:keys.filter(k=>(e[k]?.quizStreak||0)>=2).length,srsReady:keys.filter(k=>(e[k]?.srsPasses||[]).length>=3).length};
+ const content=contentKeys.length?contentKeys.reduce((s,k)=>s+Math.min(2,Math.max(0,state.contentEvidence?.[k]?.streak||0))/2,0)/contentKeys.length:1;
+ const mastered=read&&keys.length>0&&quiz===1&&srs===1&&content===1;
+ return {read,quiz,srs,content,mastered,percent:mastered?100:Math.min(99,Math.floor((read?20:0)+(contentKeys.length?15*quiz+15*content:30*quiz)+50*srs)),quizReady:keys.filter(k=>(e[k]?.quizStreak||0)>=2).length,srsReady:keys.filter(k=>(e[k]?.srsPasses||[]).length>=3).length};
 }
 function apply(state,event){
  const next=JSON.parse(JSON.stringify(state||{})),e=next.evidence||(next.evidence={}),r=e[event.key]||(e[event.key]={quizStreak:0,srsPasses:[]});
