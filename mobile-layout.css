@@ -739,8 +739,15 @@ body.lesson-focus #lessonsPanel>.hint{display:none}
 .lesson-test-options button.wrong{background:#fee2e2!important;color:#991b1b!important;opacity:1}
 .lesson-test-feedback{white-space:pre-line}
 /* Independent controls for long reading practice; translation remains on by default. */
-.lesson-reading-body.hide-pinyin .lesson-pinyin{display:none;}
-.lesson-reading-body.hide-translation .lesson-language-line>p:last-child{display:none;}
+/* Reading, dialogue and grammar assistance opens only after a learner clicks. */
+.lesson-language-help{margin-top:8px;}
+.lesson-language-help>summary{display:flex;align-items:center;gap:8px;width:fit-content;min-height:40px;cursor:pointer;color:#405c93;list-style:none;}
+.lesson-language-help>summary::-webkit-details-marker{display:none;}
+.lesson-language-help>summary:focus-visible{outline:2px solid #406fde;outline-offset:3px;border-radius:4px;}
+.lesson-language-help .lesson-help-arrow{display:inline-block;transition:transform .15s;}
+.lesson-language-help[open] .lesson-help-arrow{transform:rotate(180deg);}
+.lesson-language-help:not([open])>p{display:none;}
+.lesson-language-help[open]>p{padding:8px 0;border-top:1px solid #dbe3ef;}
 .lesson-reading-body .lesson-language-line{margin-bottom:1.5rem;}
 .lesson-reading-body .lesson-cn{line-height:1.9;}
 .lesson-warmup{margin:1rem 0;}
