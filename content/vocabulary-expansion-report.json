@@ -1,0 +1,1001 @@
+{
+  "date": "2026-10-11",
+  "added": 83,
+  "hanziiLexicalChecks": 76,
+  "properNames": 6,
+  "grammarPatterns": 1,
+  "examples": 249,
+  "levelMeaning": "First textbook level using a word; not official HSK exam classification.",
+  "remainingScope": "This batch closes HSK1–2 catalogue gaps and adds selected HSK3–6 vocabulary. Other higher-level gaps remain.",
+  "entries": [
+    {
+      "han": "你们",
+      "pin": "nǐmen",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E4%BD%A0%E4%BB%AC?hl=vi"
+      }
+    },
+    {
+      "han": "美国",
+      "pin": "Měiguó",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%BE%8E%E5%9B%BD?hl=vi"
+      }
+    },
+    {
+      "han": "哪",
+      "pin": "nǎ",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%93%AA?hl=vi"
+      }
+    },
+    {
+      "han": "国",
+      "pin": "guó",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%9B%BD?hl=vi"
+      }
+    },
+    {
+      "han": "今年",
+      "pin": "jīnnián",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E4%BB%8A%E5%B9%B4?hl=vi"
+      }
+    },
+    {
+      "han": "说",
+      "pin": "shuō",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E8%AF%B4?hl=vi"
+      }
+    },
+    {
+      "han": "汉字",
+      "pin": "hànzì",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%B1%89%E5%AD%97?hl=vi"
+      }
+    },
+    {
+      "han": "哪儿",
+      "pin": "nǎr",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%93%AA%E5%84%BF?hl=vi"
+      }
+    },
+    {
+      "han": "那儿",
+      "pin": "nàr",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E9%82%A3%E5%84%BF?hl=vi"
+      }
+    },
+    {
+      "han": "下面",
+      "pin": "xiàmiàn",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E4%B8%8B%E9%9D%A2?hl=vi"
+      }
+    },
+    {
+      "han": "没有",
+      "pin": "méiyǒu",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%B2%A1%E6%9C%89?hl=vi"
+      }
+    },
+    {
+      "han": "这儿",
+      "pin": "zhèr",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E8%BF%99%E5%84%BF?hl=vi"
+      }
+    },
+    {
+      "han": "吃饭",
+      "pin": "chīfàn",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%90%83%E9%A5%AD?hl=vi"
+      }
+    },
+    {
+      "han": "前",
+      "pin": "qián",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%89%8D?hl=vi"
+      }
+    },
+    {
+      "han": "雨",
+      "pin": "yǔ",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E9%9B%A8?hl=vi"
+      }
+    },
+    {
+      "han": "学",
+      "pin": "xué",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%AD%A6?hl=vi"
+      }
+    },
+    {
+      "han": "一点儿",
+      "pin": "yīdiǎnr",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E4%B8%80%E7%82%B9%E5%84%BF?hl=vi"
+      }
+    },
+    {
+      "han": "不少",
+      "pin": "bù shǎo",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E4%B8%8D%E5%B0%91?hl=vi"
+      }
+    },
+    {
+      "han": "车",
+      "pin": "chē",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E8%BD%A6?hl=vi"
+      }
+    },
+    {
+      "han": "回来",
+      "pin": "huílái",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%9B%9E%E6%9D%A5?hl=vi"
+      }
+    },
+    {
+      "han": "这些",
+      "pin": "zhèxiē",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E8%BF%99%E4%BA%9B?hl=vi"
+      }
+    },
+    {
+      "han": "饭店",
+      "pin": "fàndiàn",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E9%A5%AD%E5%BA%97?hl=vi"
+      }
+    },
+    {
+      "han": "大学",
+      "pin": "dàxué",
+      "hsk": "1",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%A4%A7%E5%AD%A6?hl=vi"
+      }
+    },
+    {
+      "han": "出院",
+      "pin": "chūyuàn",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%87%BA%E9%99%A2?hl=vi"
+      }
+    },
+    {
+      "han": "一下",
+      "pin": "yīxià",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E4%B8%80%E4%B8%8B?hl=vi"
+      }
+    },
+    {
+      "han": "粉",
+      "pin": "fěn",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%B2%89?hl=vi"
+      }
+    },
+    {
+      "han": "红色",
+      "pin": "hóngsè",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%BA%A2%E8%89%B2?hl=vi"
+      }
+    },
+    {
+      "han": "帮",
+      "pin": "bāng",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%B8%AE?hl=vi"
+      }
+    },
+    {
+      "han": "不错",
+      "pin": "bùcuò",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E4%B8%8D%E9%94%99?hl=vi"
+      }
+    },
+    {
+      "han": "外面",
+      "pin": "wàimian",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%A4%96%E9%9D%A2?hl=vi"
+      }
+    },
+    {
+      "han": "男",
+      "pin": "nán",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%94%B7?hl=vi"
+      }
+    },
+    {
+      "han": "女",
+      "pin": "nǚ",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%A5%B3?hl=vi"
+      }
+    },
+    {
+      "han": "度",
+      "pin": "dù",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%BA%A6?hl=vi"
+      }
+    },
+    {
+      "han": "往",
+      "pin": "wǎng",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%BE%80?hl=vi"
+      }
+    },
+    {
+      "han": "路口",
+      "pin": "lùkǒu",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E8%B7%AF%E5%8F%A3?hl=vi"
+      }
+    },
+    {
+      "han": "手",
+      "pin": "shǒu",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%89%8B?hl=vi"
+      }
+    },
+    {
+      "han": "玩儿",
+      "pin": "wánr",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%8E%A9%E5%84%BF?hl=vi"
+      }
+    },
+    {
+      "han": "有意思",
+      "pin": "yǒu yìsi",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%9C%89%E6%84%8F%E6%80%9D?hl=vi"
+      }
+    },
+    {
+      "han": "新年",
+      "pin": "xīnnián",
+      "hsk": "2",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%96%B0%E5%B9%B4?hl=vi"
+      }
+    },
+    {
+      "han": "经理",
+      "pin": "jīnglǐ",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%BB%8F%E7%90%86?hl=vi"
+      }
+    },
+    {
+      "han": "每天",
+      "pin": "měitiān",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%AF%8F%E5%A4%A9?hl=vi"
+      }
+    },
+    {
+      "han": "饮料",
+      "pin": "yǐnliào",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E9%A5%AE%E6%96%99?hl=vi"
+      }
+    },
+    {
+      "han": "音乐会",
+      "pin": "yīnyuèhuì",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E9%9F%B3%E4%B9%90%E4%BC%9A?hl=vi"
+      }
+    },
+    {
+      "han": "中文",
+      "pin": "zhōngwén",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E4%B8%AD%E6%96%87?hl=vi"
+      }
+    },
+    {
+      "han": "最后",
+      "pin": "zuìhòu",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%9C%80%E5%90%8E?hl=vi"
+      }
+    },
+    {
+      "han": "后来",
+      "pin": "hòulái",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%90%8E%E6%9D%A5?hl=vi"
+      }
+    },
+    {
+      "han": "词典",
+      "pin": "cídiǎn",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E8%AF%8D%E5%85%B8?hl=vi"
+      }
+    },
+    {
+      "han": "电子邮件",
+      "pin": "diànzǐ yóujiàn",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6?hl=vi"
+      }
+    },
+    {
+      "han": "钱包",
+      "pin": "qiánbāo",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E9%92%B1%E5%8C%85?hl=vi"
+      }
+    },
+    {
+      "han": "留学",
+      "pin": "liúxué",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%95%99%E5%AD%A6?hl=vi"
+      }
+    },
+    {
+      "han": "春节",
+      "pin": "Chūnjié",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%98%A5%E8%8A%82?hl=vi"
+      }
+    },
+    {
+      "han": "请假",
+      "pin": "qǐngjià",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E8%AF%B7%E5%81%87?hl=vi"
+      }
+    },
+    {
+      "han": "起来",
+      "pin": "qǐlai",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E8%B5%B7%E6%9D%A5?hl=vi"
+      }
+    },
+    {
+      "han": "愿意",
+      "pin": "yuànyì",
+      "hsk": "3",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%84%BF%E6%84%8F?hl=vi"
+      }
+    },
+    {
+      "han": "普通",
+      "pin": "pǔtōng",
+      "hsk": "4",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%99%AE%E9%80%9A?hl=vi"
+      }
+    },
+    {
+      "han": "校园",
+      "pin": "xiàoyuán",
+      "hsk": "4",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%A0%A1%E5%9B%AD?hl=vi"
+      }
+    },
+    {
+      "han": "面试",
+      "pin": "miànshì",
+      "hsk": "4",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E9%9D%A2%E8%AF%95?hl=vi"
+      }
+    },
+    {
+      "han": "笔试",
+      "pin": "bǐshì",
+      "hsk": "4",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%AC%94%E8%AF%95?hl=vi"
+      }
+    },
+    {
+      "han": "购买",
+      "pin": "gòumǎi",
+      "hsk": "4",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E8%B4%AD%E4%B9%B0?hl=vi"
+      }
+    },
+    {
+      "han": "长期",
+      "pin": "chángqī",
+      "hsk": "4",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E9%95%BF%E6%9C%9F?hl=vi"
+      }
+    },
+    {
+      "han": "环保",
+      "pin": "huánbǎo",
+      "hsk": "4",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%8E%AF%E4%BF%9D?hl=vi"
+      }
+    },
+    {
+      "han": "垃圾",
+      "pin": "lājī",
+      "hsk": "4",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%9E%83%E5%9C%BE?hl=vi"
+      }
+    },
+    {
+      "han": "父母",
+      "pin": "fùmǔ",
+      "hsk": "4",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%88%B6%E6%AF%8D?hl=vi"
+      }
+    },
+    {
+      "han": "科技",
+      "pin": "kējì",
+      "hsk": "4",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%A7%91%E6%8A%80?hl=vi"
+      }
+    },
+    {
+      "han": "增长",
+      "pin": "zēngzhǎng",
+      "hsk": "4",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%A2%9E%E9%95%BF?hl=vi"
+      }
+    },
+    {
+      "han": "分享",
+      "pin": "fēnxiǎng",
+      "hsk": "5",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%88%86%E4%BA%AB?hl=vi"
+      }
+    },
+    {
+      "han": "查询",
+      "pin": "cháxún",
+      "hsk": "5",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%9F%A5%E8%AF%A2?hl=vi"
+      }
+    },
+    {
+      "han": "投诉",
+      "pin": "tóusù",
+      "hsk": "6",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%8A%95%E8%AF%89?hl=vi"
+      }
+    },
+    {
+      "han": "敬业",
+      "pin": "jìngyè",
+      "hsk": "6",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%95%AC%E4%B8%9A?hl=vi"
+      }
+    },
+    {
+      "han": "屏幕",
+      "pin": "píngmù",
+      "hsk": "6",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%B1%8F%E5%B9%95?hl=vi"
+      }
+    },
+    {
+      "han": "视频",
+      "pin": "shìpín",
+      "hsk": "6",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E8%A7%86%E9%A2%91?hl=vi"
+      }
+    },
+    {
+      "han": "虚拟",
+      "pin": "xūnǐ",
+      "hsk": "6",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E8%99%9A%E6%8B%9F?hl=vi"
+      }
+    },
+    {
+      "han": "居民",
+      "pin": "jūmín",
+      "hsk": "6",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E5%B1%85%E6%B0%91?hl=vi"
+      }
+    },
+    {
+      "han": "明智",
+      "pin": "míngzhì",
+      "hsk": "6",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E6%98%8E%E6%99%BA?hl=vi"
+      }
+    },
+    {
+      "han": "维护",
+      "pin": "wéihù",
+      "hsk": "6",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E7%BB%B4%E6%8A%A4?hl=vi"
+      }
+    },
+    {
+      "han": "严谨",
+      "pin": "yánjǐn",
+      "hsk": "6",
+      "entryKind": "vocabulary",
+      "vocabularyProvenance": {
+        "kind": "hanzii-lexical-check",
+        "checkedAt": "2026-10-11",
+        "label": "Phiên âm và nghĩa đối chiếu Hanzii; ví dụ tự biên soạn.",
+        "url": "https://hanzii.net/search/word/%E4%B8%A5%E8%B0%A8?hl=vi"
+      }
+    },
+    {
+      "han": "李月",
+      "pin": "Lǐ Yuè",
+      "hsk": "1",
+      "entryKind": "proper-name",
+      "vocabularyProvenance": {
+        "kind": "proper-name",
+        "checkedAt": "2026-10-11",
+        "label": "Tên riêng/mẫu ngữ pháp trong danh sách giáo trình; ví dụ tự biên soạn, chưa đối chiếu mục từ Hanzii."
+      }
+    },
+    {
+      "han": "王方",
+      "pin": "Wáng Fāng",
+      "hsk": "1",
+      "entryKind": "proper-name",
+      "vocabularyProvenance": {
+        "kind": "proper-name",
+        "checkedAt": "2026-10-11",
+        "label": "Tên riêng/mẫu ngữ pháp trong danh sách giáo trình; ví dụ tự biên soạn, chưa đối chiếu mục từ Hanzii."
+      }
+    },
+    {
+      "han": "谢朋",
+      "pin": "Xiè Péng",
+      "hsk": "1",
+      "entryKind": "proper-name",
+      "vocabularyProvenance": {
+        "kind": "proper-name",
+        "checkedAt": "2026-10-11",
+        "label": "Tên riêng/mẫu ngữ pháp trong danh sách giáo trình; ví dụ tự biên soạn, chưa đối chiếu mục từ Hanzii."
+      }
+    },
+    {
+      "han": "大卫",
+      "pin": "Dàwèi",
+      "hsk": "1",
+      "entryKind": "proper-name",
+      "vocabularyProvenance": {
+        "kind": "proper-name",
+        "checkedAt": "2026-10-11",
+        "label": "Tên riêng/mẫu ngữ pháp trong danh sách giáo trình; ví dụ tự biên soạn, chưa đối chiếu mục từ Hanzii."
+      }
+    },
+    {
+      "han": "花花",
+      "pin": "Huāhua",
+      "hsk": "2",
+      "entryKind": "proper-name",
+      "vocabularyProvenance": {
+        "kind": "proper-name",
+        "checkedAt": "2026-10-11",
+        "label": "Tên riêng/mẫu ngữ pháp trong danh sách giáo trình; ví dụ tự biên soạn, chưa đối chiếu mục từ Hanzii."
+      }
+    },
+    {
+      "han": "杨笑笑",
+      "pin": "Yáng Xiàoxiao",
+      "hsk": "2",
+      "entryKind": "proper-name",
+      "vocabularyProvenance": {
+        "kind": "proper-name",
+        "checkedAt": "2026-10-11",
+        "label": "Tên riêng/mẫu ngữ pháp trong danh sách giáo trình; ví dụ tự biên soạn, chưa đối chiếu mục từ Hanzii."
+      }
+    },
+    {
+      "han": "太……了",
+      "pin": "tài … le",
+      "hsk": "1",
+      "entryKind": "grammar-pattern",
+      "vocabularyProvenance": {
+        "kind": "grammar-pattern",
+        "checkedAt": "2026-10-11",
+        "label": "Tên riêng/mẫu ngữ pháp trong danh sách giáo trình; ví dụ tự biên soạn, chưa đối chiếu mục từ Hanzii."
+      }
+    }
+  ]
+}

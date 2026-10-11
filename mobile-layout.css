@@ -738,3 +738,9 @@ body.lesson-focus #lessonsPanel>.hint{display:none}
 .lesson-test-options button.correct{background:#d1fae5!important;color:#14532d!important;opacity:1}
 .lesson-test-options button.wrong{background:#fee2e2!important;color:#991b1b!important;opacity:1}
 .lesson-test-feedback{white-space:pre-line}
+/* Independent controls for long reading practice; translation remains on by default. */
+.lesson-reading-body.hide-pinyin .lesson-pinyin{display:none;}
+.lesson-reading-body.hide-translation .lesson-language-line>p:last-child{display:none;}
+.lesson-reading-body .lesson-language-line{margin-bottom:1.5rem;}
+.lesson-reading-body .lesson-cn{line-height:1.9;}
+.lesson-warmup{margin:1rem 0;}

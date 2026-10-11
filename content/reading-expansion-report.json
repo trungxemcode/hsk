@@ -1,0 +1,201 @@
+{
+  "date": "2026-10-11",
+  "originalReadings": 24,
+  "originalDialogues": 24,
+  "newComprehensionQuestions": 72,
+  "scope": "Four expanded lessons per level, lessons 3, 6, 9 and 12. Other lessons retain their earlier short texts.",
+  "entries": [
+    {
+      "id": "standard-1-03",
+      "hsk": 1,
+      "readingCharacters": 132,
+      "paragraphs": 3,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-1-06",
+      "hsk": 1,
+      "readingCharacters": 148,
+      "paragraphs": 3,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-1-09",
+      "hsk": 1,
+      "readingCharacters": 156,
+      "paragraphs": 3,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-1-12",
+      "hsk": 1,
+      "readingCharacters": 153,
+      "paragraphs": 3,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-2-03",
+      "hsk": 2,
+      "readingCharacters": 255,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-2-06",
+      "hsk": 2,
+      "readingCharacters": 261,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-2-09",
+      "hsk": 2,
+      "readingCharacters": 263,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-2-12",
+      "hsk": 2,
+      "readingCharacters": 269,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-3-03",
+      "hsk": 3,
+      "readingCharacters": 338,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-3-06",
+      "hsk": 3,
+      "readingCharacters": 317,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-3-09",
+      "hsk": 3,
+      "readingCharacters": 329,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-3-12",
+      "hsk": 3,
+      "readingCharacters": 337,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-4-03",
+      "hsk": 4,
+      "readingCharacters": 424,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-4-06",
+      "hsk": 4,
+      "readingCharacters": 407,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-4-09",
+      "hsk": 4,
+      "readingCharacters": 398,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-4-12",
+      "hsk": 4,
+      "readingCharacters": 394,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-5-03",
+      "hsk": 5,
+      "readingCharacters": 575,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-5-06",
+      "hsk": 5,
+      "readingCharacters": 547,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-5-09",
+      "hsk": 5,
+      "readingCharacters": 545,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-5-12",
+      "hsk": 5,
+      "readingCharacters": 511,
+      "paragraphs": 4,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-6-03",
+      "hsk": 6,
+      "readingCharacters": 716,
+      "paragraphs": 5,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-6-06",
+      "hsk": 6,
+      "readingCharacters": 720,
+      "paragraphs": 5,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-6-09",
+      "hsk": 6,
+      "readingCharacters": 765,
+      "paragraphs": 5,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    },
+    {
+      "id": "standard-6-12",
+      "hsk": 6,
+      "readingCharacters": 798,
+      "paragraphs": 5,
+      "dialogueTurns": 8,
+      "comprehensionQuestions": 3
+    }
+  ]
+}
