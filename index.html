@@ -19,6 +19,8 @@
 <script src="./ocr.js" defer></script>
 <script src="./lesson-mastery.js" defer></script>
 <script src="./lessons.js" defer></script>
+<link rel="stylesheet" href="./lesson-chat.css">
+<script src="./lesson-chat.js" defer></script>
 </head>
 
 <body>
@@ -234,5 +236,11 @@
 <script src="./loader.js?v=push-2" defer></script>
 <script src="./offline.js?v=offline-2" defer></script>
 <script src="./mobile-layout.js?v=mobile-2" defer></script>
+<button id="lessonChatButton" class="lesson-chat-button" type="button" aria-controls="lessonChatPanel" aria-expanded="false" hidden>💬 Hỏi AI</button>
+<section id="lessonChatPanel" class="lesson-chat-panel" aria-label="Hỏi đáp AI về bài đang mở" hidden>
+ <header class="lesson-chat-head"><div><strong>Hỏi đáp bài học</strong><small id="lessonChatTitle"></small></div><button id="lessonChatClose" type="button" aria-label="Đóng hỏi đáp">×</button></header>
+ <div id="lessonChatMessages" class="lesson-chat-messages" role="log" aria-live="polite"></div><p id="lessonChatStatus" class="lesson-chat-status" role="status"></p>
+ <form id="lessonChatForm" class="lesson-chat-form"><textarea id="lessonChatInput" rows="2" maxlength="500" aria-label="Câu hỏi về bài học" placeholder="Bạn thắc mắc gì trong bài này?" required></textarea><button id="lessonChatSend" type="submit">Gửi</button></form>
+</section>
 </body>
 </html>
