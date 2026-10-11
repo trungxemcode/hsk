@@ -1,15 +1,16 @@
 /* Account storage: per-item revisions, account isolation, offline queue. */
 (function(root){
- const KEYS=['hsk-flashcards-progress-v1','hsk-flashcards-mistakes-v1','hsk-adaptive-learning-v1','hsk-memory-preferences-v1'];
+ const KEYS=['hsk-flashcards-progress-v1','hsk-flashcards-mistakes-v1','hsk-adaptive-learning-v1','hsk-memory-preferences-v1','hsk-course-lessons-v1'];
  const clone=x=>JSON.parse(JSON.stringify(x));
  function flatten(storage){const out={};for(const key of KEYS){let value;try{value=JSON.parse(storage[key]||'null');}catch(_){continue;}if(!value||typeof value!=='object')continue;
   if(key===KEYS[0]){for(const [id,v] of Object.entries(value.words||{}))out['word:'+id]=v;}
   else if(key===KEYS[1]){for(const v of value.entries||[])if(v?.id)out['mistake:'+v.id]=v;}
   else if(key===KEYS[2]){for(const [id,v] of Object.entries(value.stats||{}))out['adaptive:'+id]=v;out['adaptive:enabled']=value.enabled!==false;}
-  else out['memory:preferences']=value;
+  else if(key===KEYS[3])out['memory:preferences']=value;
+  else for(const [id,v] of Object.entries(value.lessons||{}))out['lesson:'+id]=v;
  }return out;}
- function materialize(items){const words={},entries=[],stats={};let enabled=true,memory={context:false,newWords:false};for(const [id,item] of Object.entries(items)){if(!valid(item)||item.deleted)continue;const v=item.value;if(id.startsWith('word:'))words[id.slice(5)]=v;else if(id.startsWith('mistake:'))entries.push(v);else if(id==='adaptive:enabled')enabled=v!==false;else if(id.startsWith('adaptive:'))stats[id.slice(9)]=v;else if(id==='memory:preferences')memory=v;}
- return {[KEYS[0]]:JSON.stringify({version:1,words}),[KEYS[1]]:JSON.stringify({version:1,entries}),[KEYS[2]]:JSON.stringify({version:1,enabled,stats}),[KEYS[3]]:JSON.stringify(memory)};}
+ function materialize(items){const words={},entries=[],stats={},lessons={};let enabled=true,memory={context:false,newWords:false};for(const [id,item] of Object.entries(items)){if(!valid(item)||item.deleted)continue;const v=item.value;if(id.startsWith('word:'))words[id.slice(5)]=v;else if(id.startsWith('mistake:'))entries.push(v);else if(id==='adaptive:enabled')enabled=v!==false;else if(id.startsWith('adaptive:'))stats[id.slice(9)]=v;else if(id==='memory:preferences')memory=v;else if(id.startsWith('lesson:'))lessons[id.slice(7)]=v;}
+ return {[KEYS[0]]:JSON.stringify({version:1,words}),[KEYS[1]]:JSON.stringify({version:1,entries}),[KEYS[2]]:JSON.stringify({version:1,enabled,stats}),[KEYS[3]]:JSON.stringify(memory),[KEYS[4]]:JSON.stringify({version:1,lessons})};}
  function valid(x){return !!x&&Number.isFinite(x.time)&&x.time>=0&&typeof x.writer==='string'&&typeof x.deleted==='boolean'&&(x.deleted||x.value!==undefined);}
  function compare(a,b){if(!a)return -1;if(!b)return 1;return a.time-b.time||a.writer.localeCompare(b.writer);}
  function revision(previous,time,writer,value,deleted=false){return {time:Math.max(time,(previous?.time||0)+1),writer,value:deleted?null:clone(value),deleted};}

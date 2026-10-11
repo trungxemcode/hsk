@@ -39,3 +39,10 @@ Cấu hình công khai trong account-config.json; không thêm khóa quản tr�
 ## Triển khai bản cập nhật offline
 
 Sau mỗi thay đổi app, tăng phiên bản và tạo lại metadata bằng `python build-version.py --version hsk-offline-YYYYMMDD-N`. Upload các file đã đổi cùng offline.js, offline-worker.js, OneSignalSDKWorker.js và app-version.json lên cùng một commit. Giữ đường dẫn và scope cũ. Metadata luôn tải từ mạng; file dữ liệu không thay đổi được xác minh SHA-256 và dùng lại từ cache cũ. Bản mới chỉ sẵn sàng khi đủ mọi file đúng checksum. Nếu tải lỗi, cache cũ và localStorage được giữ. Nút kiểm tra báo rõ tiến độ/lỗi và không bị khóa trong lúc chờ; áp dụng bản mới có thời hạn chờ và cách thử lại.
+
+## Bài học Giáo trình chuẩn HSK
+Mục Công cụ → Bài học giáo trình HSK. Theo bộ HSK Standard Course 1–6 (9 quyển): 15/15/20/20/36/40 bài; HSK 4: A1–10,B11–20; HSK 5: A1–18,B19–36; HSK 6: A1–20,B21–40. `lessons-data.json` chứa mục lục và vị trí từ theo bài; `lessons.js` dùng cầu nối `HSKLessons` của app để học và ôn bằng dữ liệu đã có. Không gọi AI để tạo bài học.
+Mỗi bài có thẻ từ, nghĩa/phiên âm/ví dụ hiện có, đánh dấu đã thuộc/chưa thuộc, kiểm tra từ bài (tối đa 20 câu trộn chữ→nghĩa và nghĩa→chữ), ôn SRS từ đến hạn và từ mới, hoàn thành bài và tiếp tục bài học. Hoàn thành bài là đánh dấu thủ công, không chứng nhận thi đỗ.
+Tiến độ `hsk-course-lessons-v1` đồng bộ theo mục `lesson:<id>` qua cơ chế tài khoản đang có; không thay đổi quyền Firestore. Bài học và dữ liệu được lưu offline cùng app (48 assets).
+Nguồn cấu trúc: BLCUP và mục lục HanziStroke; ánh xạ từ theo bài: joelypoley/hsk_standard_course_vocab cho HSK1–5, Blog Tiếng Trung cho HSK6. Chỉ dùng thông tin từ/bài, không nhập giải thích hoặc đoạn sách của nguồn ngoài. Chuẩn hóa một số lỗi phiên chép (阿→啊 trong HSK3 bài1, 和爱→和蔼, 进来→近来, エ人→工人, 何況→何况, 丟→丢) và biến thể ngoặc khi khớp dữ liệu. Không tuyên bố tất cả ánh xạ đã được đối chiếu trực tiếp với từng trang sách.
+Danh sách giáo trình có tên riêng và từ ngoài dữ liệu. Mục chưa khớp hiện riêng trong từng bài, không tính vào thẻ/kiểm tra. Không chứa toàn bộ bài khóa, âm thanh và bài tập nguyên bản của sách.

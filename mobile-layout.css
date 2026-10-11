@@ -665,3 +665,35 @@ body.show-translator .workspace>section:not(#translatorPanel){display:none!impor
 .ocr-panel{border:1px solid var(--line);border-radius:14px;padding:12px;margin:0 0 18px;background:#f7faff;min-width:0}.ocr-panel summary{cursor:pointer;min-height:44px;font-weight:600;color:var(--ink)}.ocr-actions{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.ocr-actions button{flex:1;min-height:46px;font-size:14px}.ocr-panel [hidden]{display:none!important}#ocrPreview{display:block;max-width:100%;max-height:240px;object-fit:contain;margin:12px auto;border-radius:10px}#ocrText{display:block;width:100%;box-sizing:border-box;min-height:130px;resize:vertical;padding:12px;font:inherit;border:1px solid var(--line);border-radius:10px;margin:8px 0}#ocrUse{width:100%;min-height:46px}#ocrStatus{overflow-wrap:anywhere}
 
 #ocrStage{position:relative;min-width:0}#ocrStage.selecting{touch-action:none;user-select:none;cursor:crosshair}#ocrCropBox{position:absolute;pointer-events:none;border:2px solid #2563eb;box-sizing:border-box;background:#2563eb15}#translation-vietnamese{font-size:19px;line-height:1.65;color:var(--ink);white-space:pre-wrap}
+body.show-lessons .workspace>section:not(#lessonsPanel){display:none!important}
+body.show-lessons h1::after{content:"Bài học"!important}
+#lessonsPanel{max-width:1100px;margin-inline:auto}
+#lessonsPanel h2{display:block;font-size:22px}
+#lessonsPanel h3{margin:20px 0 10px;font-size:20px}
+#lessonsPanel button{min-height:48px;white-space:normal;line-height:1.4}
+.lesson-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
+.lesson-levels button[aria-pressed=true],.lesson-actions button[aria-pressed=true]{background:#12307a;color:white}
+.lesson-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.lesson-actions button{flex:1 1 130px}
+.lesson-resume{width:100%;margin:8px 0 16px;background:#e8f0ff!important;color:#12307a!important}
+.lesson-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.lesson-row{display:flex;gap:12px;text-align:left;padding:14px!important;border:1px solid var(--line);background:white!important;color:var(--text)!important;border-radius:14px}
+.lesson-number{flex:0 0 32px;font-size:20px;color:#2563eb;font-weight:700}
+.lesson-row-text{display:grid;gap:6px;min-width:0;overflow-wrap:anywhere}
+.lesson-row-text>span,.lesson-row-text>small{color:var(--muted)}
+.lesson-title-cn{font-size:22px;line-height:1.6}
+.lesson-card{padding:20px;margin:18px 0;border:1px solid var(--line);border-radius:20px;background:white;text-align:center;overflow-wrap:anywhere}
+.lesson-han{font-size:48px;line-height:1.7;color:#12307a}
+.lesson-pinyin{color:#526b8f;line-height:1.6}
+.lesson-meaning{font-size:18px;line-height:1.6}
+.lesson-example{margin:14px 0;padding:12px;background:#f4f7fc;border-radius:12px;text-align:left}
+.lesson-example p{margin:5px 0;line-height:1.6}
+.lesson-example p:first-child{font-size:21px}
+.lesson-actions .unknown{background:#fee2e2!important;color:#991b1b!important}
+.lesson-actions .known{background:#dcfce7!important;color:#166534!important}
+.lesson-actions .unknown[aria-pressed=true],.lesson-actions .known[aria-pressed=true]{outline:2px solid currentColor}
+.lesson-vocab,.lesson-sources{border:1px solid var(--line);border-radius:12px;margin:16px 0;padding:12px;overflow-wrap:anywhere}
+.lesson-vocab summary,.lesson-sources summary{cursor:pointer;min-height:32px;font-weight:600}
+.lesson-word-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.lesson-sources a{display:block;margin:10px 0;color:#2563eb}
+@media(max-width:700px){.lesson-list{grid-template-columns:1fr}.lesson-card{padding:14px}.lesson-levels{grid-template-columns:repeat(3,minmax(0,1fr))}.lesson-levels button{padding:8px 4px;font-size:13px}}
