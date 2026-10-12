@@ -2,7 +2,7 @@
 
 ## Nội dung bổ sung ngày 11/10/2026
 
-Đợt này thêm 83 mục từ theo bài học (76 mục đối chiếu nghĩa/phiên âm với Hanzii, 6 tên riêng và 1 mẫu ngữ pháp chưa đối chiếu mục từ), cùng 249 câu ví dụ tự biên soạn. Lấp đủ các mục chưa có thẻ của danh sách giáo trình HSK 1–2; HSK 3–6 bổ sung chọn lọc, vẫn còn các mục thiếu. Cấp HSK của thẻ bổ sung là cấp bài học đầu tiên sử dụng, không khẳng định phân loại trong danh sách từ thi chính thức. Giữ nguyên thẻ và khóa tiến độ cũ.
+Đợt này thêm 83 mục từ theo bài học (76 mục đối chiếu nghĩa/phiên âm với Hanzii, 6 tên riêng và 1 mẫu ngữ pháp chưa đối chiếu mục từ), cùng 249 câu ví dụ tự biên soạn. Lấp đủ các mục chưa có thẻ của danh sách giáo trình HSK 1–2; HSK 3–6 bổ sung chọn lọc, vẫn còn các mục thiếu. Cấp HSK của thẻ bổ sung là cấp bài học đầu tiên sử dụng, không khẳng định phân loại trong danh sách từ thi chính thức. Giữ nguyên thẻ và khóa tiến độ cũ..
 
 Bài 3, 6, 9 và 12 ở mỗi cấp có bài đọc dài mới, 3–5 đoạn song ngữ/pinyin, một hội thoại 8 lượt và 3 câu đọc hiểu có giải thích. Tổng cộng 24 bài đọc, 24 hội thoại và 72 câu hỏi mới. Độ dài: HSK1 132–156 chữ Hán, HSK2 255–269, HSK3 317–338, HSK4 394–424, HSK5 511–575, HSK6 716–798. Đây là nội dung tự biên soạn theo chủ đề, không sao chép bài khóa hoặc từ điển. Đoạn ngắn cũ được giữ trong phần khởi động; các bài khác vẫn dùng nội dung ngắn trước đó.
 
