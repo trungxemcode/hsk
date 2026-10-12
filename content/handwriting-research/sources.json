@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-12",
+  "dictionary": {
+    "repository": "PaddlePaddle/PaddleOCR",
+    "path": "ppocr/utils/dict/ppocrv5_dict.txt",
+    "gitBlob": "567898b49de2707853454682f05e0c504c0085b9",
+    "status": "downloaded",
+    "license": "Apache-2.0"
+  },
+  "model": {
+    "name": "PP-OCRv5_mobile_rec",
+    "source": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
+    "license": "Apache-2.0 declared by official model card",
+    "weightUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec/resolve/main/inference.pdiparams",
+    "status": "not_downloaded_or_tested",
+    "format": "Paddle; ONNX conversion/runtime validation required"
+  },
+  "alternatives": [
+    {
+      "name": "CASIA-HWDB",
+      "source": "https://nlpr.ia.ac.cn/databases/handwriting/Application_form.html",
+      "status": "not_downloaded",
+      "restriction": "academic research agreement; commercial use requires a separate license"
+    },
+    {
+      "name": "cnn_chinese_hw",
+      "source": "https://github.com/mcyph/cnn_chinese_hw",
+      "status": "catalogued_only",
+      "restriction": "No pretrained checkpoint ships in the inspected version; dataset-specific licenses apply"
+    },
+    {
+      "name": "Tomoe zh_CN snapshot",
+      "source": "https://github.com/mcyph/cnn_chinese_hw/blob/master/cnn_chinese_hw/data/handwriting-zh_CN.xml",
+      "status": "download_failed_transport_closed; not_included"
+    }
+  ]
+}
