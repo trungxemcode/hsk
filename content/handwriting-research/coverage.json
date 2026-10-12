@@ -1,0 +1,9 @@
+{
+  "hskCharacters": 2603,
+  "dictionaryEntries": 18383,
+  "covered": 2603,
+  "missing": [],
+  "niCovered": true,
+  "dictionaryIndexZeroBasedNi": 782,
+  "note": "Vocabulary coverage is not recognition accuracy; decoder indices also require model-specific blank/space rules."
+}

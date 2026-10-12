@@ -17,6 +17,8 @@ An aspect-preserving crop was tested against the same fixture suite. It did not 
 | `gugray/hanzi_lookup` | Repository includes a 740,534-byte WASM and 593,078-byte stroke database for 9,507 characters | LGPL-3.0 code plus Arphic Public License derived data; browser WASM | Local trajectory matching is available, but recognition with reordered strokes was not tested. It is not selected without that test. |
 | `mcyph/cnn_chinese_hw` | Current repository has a 53,879,553-byte legacy `hw_model.pt`, but its current README says the current PyTorch recognizer requires training and no compatible pretrained checkpoint ships. Its corpus files include Tomoe, Make Me a Hanzi, and KanjiVG. | LGPL-2.1 code; separate model/data license groups, including Arphic PL and CC BY-SA 3.0 | The project supports some stroke reordering and documents ONNX export, but the checkpoint's compatibility and provenance for this current architecture are unverified. Training needs PyTorch and corpus preparation. Not bundled. |
 
+The research snapshot also contains `ppocrv5_dict.txt`, its Apache-2.0 license, `hsk-label-map.json`, `coverage.json`, and `sources.json`. The 18,383 dictionary labels cover all 2,603 HSK characters, but the map is not a model output-index map and is not training data. No PP-OCR weights or CASIA images are included.
+
 CASIA-HWDB is not included or redistributed: its terms require an academic research agreement, and commercial use needs separate permission. Do not use it for app weights by default.
 
 ## Decision and limits
