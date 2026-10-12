@@ -1,0 +1,93 @@
+{
+  "baseline": {
+    "independent-clean": {
+      "cases": 40,
+      "top1": 17,
+      "top5": 26,
+      "top10": 27,
+      "recall5": 0.65,
+      "recall10": 0.675
+    },
+    "size-position": {
+      "cases": 120,
+      "top1": 51,
+      "top5": 78,
+      "top10": 81,
+      "recall5": 0.65,
+      "recall10": 0.675
+    },
+    "independent-rough": {
+      "cases": 240,
+      "top1": 99,
+      "top5": 139,
+      "top10": 158,
+      "recall5": 0.5791666666666667,
+      "recall10": 0.6583333333333333
+    },
+    "missing-stroke": {
+      "cases": 39,
+      "top1": 3,
+      "top5": 6,
+      "top10": 9,
+      "recall5": 0.15384615384615385,
+      "recall10": 0.23076923076923078
+    }
+  },
+  "external": {
+    "independent-clean": {
+      "cases": 40,
+      "top1": 17,
+      "top5": 26,
+      "top10": 27,
+      "recall5": 0.65,
+      "recall10": 0.675
+    },
+    "size-position": {
+      "cases": 120,
+      "top1": 51,
+      "top5": 78,
+      "top10": 81,
+      "recall5": 0.65,
+      "recall10": 0.675
+    },
+    "independent-rough": {
+      "cases": 240,
+      "top1": 105,
+      "top5": 154,
+      "top10": 166,
+      "recall5": 0.6416666666666667,
+      "recall10": 0.6916666666666667
+    },
+    "missing-stroke": {
+      "cases": 39,
+      "top1": 2,
+      "top5": 6,
+      "top10": 8,
+      "recall5": 0.15384615384615385,
+      "recall10": 0.20512820512820512
+    }
+  },
+  "baselineMedianMs": 3.649899000000005,
+  "externalMedianMs": 5.753138000000035,
+  "personal": {
+    "before": {
+      "cases": 240,
+      "top1": 117,
+      "top5": 168
+    },
+    "after": {
+      "cases": 240,
+      "top1": 240,
+      "top5": 240
+    },
+    "regressions": 0
+  },
+  "externalSamples": 2602,
+  "externalBytes": 520946,
+  "limitations": [
+    "Geometric fixtures only, not a real multi-writer benchmark.",
+    "Missing-stroke top10 decreases from 9/39 to 8/39.",
+    "Existing quality gate (clean top10 >=90%, rough top10 >=80%) still fails.",
+    "No CNN training, component learning, or physical Safari/iPhone verification."
+  ]
+}

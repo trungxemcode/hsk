@@ -58,3 +58,7 @@ Các mẫu chữ đã xác nhận của bộ nhận dạng cá nhân đồng b�
 Trong bài học, nút chat AI là nút tròn cố định ở góc dưới; có thể chọn một đoạn nội dung để gửi câu hỏi kèm trích đoạn đó. Hỏi đáp cần đăng nhập và cấu hình dịch vụ AI.
 Nguồn cấu trúc: BLCUP và mục lục HanziStroke; ánh xạ từ theo bài: joelypoley/hsk_standard_course_vocab cho HSK1–5, Blog Tiếng Trung cho HSK6. Chỉ dùng thông tin từ/bài, không nhập giải thích hoặc đoạn sách của nguồn ngoài. Chuẩn hóa một số lỗi phiên chép (阿→啊 trong HSK3 bài1, 和爱→和蔼, 进来→近来, エ人→工人, 何況→何况, 丟→丢) và biến thể ngoặc khi khớp dữ liệu. Không tuyên bố tất cả ánh xạ đã được đối chiếu trực tiếp với từng trang sách.
 Danh sách giáo trình có tên riêng và từ ngoài dữ liệu. Mục chưa khớp hiện riêng trong từng bài, không tính vào thẻ/kiểm tra. Không chứa toàn bộ bài khóa, âm thanh và bài tập nguyên bản của sách.
+
+## Nhận dạng viết tay nâng cao
+
+Trong khung Vẽ chữ, chọn **Tải nhận dạng nâng cao (~28 MB)**. Tải một lần để nhận dạng trên thiết bị bằng PP-OCRv5 / ONNX Runtime Web; không cần API key, không gửi nét vẽ đến máy chủ. Nhận dạng cơ bản tiếp tục dùng khi chưa tải hoặc mô hình gặp lỗi. Safari/iPhone thực tế chưa được kiểm chứng. Xem `content/handwriting-neural-status.md` để biết kết quả và giới hạn.

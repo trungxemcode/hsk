@@ -112,6 +112,7 @@
       <p class="hint">Vẽ theo thứ tự nét bất kỳ, rồi chọn chữ đúng. Gợi ý có thể sai; app không chấm bài luyện viết.</p>
       <div class="handwriting-board"><canvas id="handwritingCanvas" width="640" height="640" aria-label="Khung vẽ một chữ Hán bằng cảm ứng, bút hoặc chuột"></canvas></div>
       <div class="handwriting-actions"><button id="handwritingClear" type="button">Xóa</button><button id="handwritingRecognize" type="button" disabled>Nhận dạng offline</button><button id="handwritingAI" type="button" disabled>Nhờ AI nhận dạng</button><button id="handwritingCancelAI" type="button" hidden>Hủy</button></div>
+      <button id="handwritingAdvanced" type="button" disabled>Tải nhận dạng nâng cao (~28 MB)</button><p id="handwritingAdvancedStatus" class="hint" role="status">Chạy trên thiết bị, không cần API key. Tải một lần để dùng offline; nét vẽ không được gửi đi.</p>
       <p id="handwritingStatus" class="hint" role="status" aria-live="polite"></p>
       <div id="handwritingCandidates" class="handwriting-candidates" aria-label="Chọn chữ bạn vừa vẽ"></div>
       <form id="handwritingCorrection" class="handwriting-correction" hidden><label for="handwritingCorrectChar">Không có chữ đúng? Nhập một chữ Hán rồi xác nhận:</label><div><input id="handwritingCorrectChar" autocomplete="off" aria-label="Chữ Hán đúng" placeholder="好" required><button type="submit">Xác nhận chữ đúng</button></div></form>

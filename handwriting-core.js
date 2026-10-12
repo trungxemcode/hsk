@@ -40,20 +40,36 @@
  function fromBitmap(character,bitmap,source='base'){if(!bitmap||bitmap.length!==CELLS)return null;const ink=[];for(let i=0;i<CELLS;i++)if(bitmap[i])ink.push(i);if(ink.length<4)return null;return {character,source,ink,distances:distance(bitmap)};}
  function template(character,strokes){const bitmap=rasterize(strokes);return fromBitmap(character,bitmap);}
  function prepare(data){if(data.version!==1||data.characters.length!==data.samples.length)throw Error('Dữ liệu mẫu chữ không hợp lệ.');return Array.from(data.characters,(character,i)=>template(character,data.samples[i])).filter(Boolean);}
+ function shapeScore(query,candidate){
+  let a=0,b=0;for(const i of query.ink)a+=candidate.distances[i]**2;for(const i of candidate.ink)b+=query.distances[i]**2;
+  return a/query.ink.length+b/candidate.ink.length+4*Math.abs(Math.log(query.ink.length/candidate.ink.length));
+ }
  function recognize(strokes,templates,limit=10){
   const query=template('',strokes);if(!query||query.ink.length<4)return [];
+  // Conflicting labels for identical personal bitmaps provide no reliable evidence.
+  const labels=new Map();for(const candidate of templates)if(candidate.source==='personal'){
+   const key=candidate.ink.join(','),set=labels.get(key)||new Set();set.add(candidate.character);labels.set(key,set);
+  }
   const scores=new Map();for(const candidate of templates){
-   let a=0,b=0;for(const i of query.ink)a+=candidate.distances[i]**2;for(const i of candidate.ink)b+=query.distances[i]**2;
-   const score=a/query.ink.length+b/candidate.ink.length+4*Math.abs(Math.log(query.ink.length/candidate.ink.length));
+   const score=shapeScore(query,candidate);
    const group=scores.get(candidate.character)||{base:Infinity,personal:[]};
-   if(candidate.source==='personal')group.personal.push(score);else group.base=Math.min(group.base,score);
+   if(candidate.source==='personal'){
+    const key=candidate.ink.join(',');
+    if(labels.get(key).size===1&&!group.personal.some(item=>item.key===key))group.personal.push({score,candidate,key});
+   }else group.base=Math.min(group.base,score);
    scores.set(candidate.character,group);
   }
   const ranked=Array.from(scores,([character,group])=>{
    let score=group.base;
-   if(group.personal.length>=3){
-    const personal=group.personal.sort((a,b)=>a-b),median=personal[Math.floor(personal.length/2)],deviations=personal.map(value=>Math.abs(value-median)).sort((a,b)=>a-b),mad=deviations[Math.floor(deviations.length/2)];
-    if(Number.isFinite(group.base)&&mad<=Math.max(1,median*.35)&&median<group.base)score=group.base-Math.min((group.base-median)*.1,group.base*.1);
+   if(group.personal.length&&Number.isFinite(group.base)){
+    const personal=group.personal.sort((a,b)=>a.score-b.score),nearest=personal[0];
+    // A saved shape can be recalled immediately when nearly identical. Generalize
+    // only with a distinct nearby confirmed sample; unrelated styles are not averaged.
+    const supported=personal.slice(1).some(item=>item.score<=3&&shapeScore(nearest.candidate,item.candidate)<=3);
+    if(nearest.score<=.35||supported&&nearest.score<=3){
+     const residual=supported?.15:.35;
+     score=Math.min(score,nearest.score+group.base*residual);
+    }
    }
    return {character,score};
   }).sort((a,b)=>a.score-b.score||a.character.codePointAt(0)-b.character.codePointAt(0));
