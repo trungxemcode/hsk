@@ -1,0 +1,10 @@
+.handwriting-panel{margin:14px 0;padding:14px;border:1px solid #cad8ef;border-radius:16px;background:#f8faff;min-width:0}.handwriting-panel[hidden],.handwriting-panel [hidden]{display:none!important}
+.handwriting-head{display:flex;align-items:center;gap:10px;color:#12307a}.handwriting-head strong{flex:1}.handwriting-head button{width:42px;min-height:42px;padding:0;font-size:24px}
+.handwriting-board{width:min(320px,100%);aspect-ratio:1;margin:12px auto;border:1px solid #bac9e3;border-radius:12px;overflow:hidden;background:linear-gradient(transparent calc(50% - .5px),#dbe3f1 50%,transparent calc(50% + .5px)),linear-gradient(90deg,transparent calc(50% - .5px),#dbe3f1 50%,transparent calc(50% + .5px)),#fff}
+#handwritingCanvas{display:block;width:100%;height:100%;touch-action:none;user-select:none;-webkit-user-select:none;cursor:crosshair}
+.handwriting-actions{display:flex;gap:10px;justify-content:center}.handwriting-actions button{min-height:46px;min-width:100px}
+.handwriting-candidates{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:12px 0}.handwriting-candidates button{min-height:52px;padding:6px;background:#e7eefc;color:#12307a;border:1px solid #c5d5f1;font:28px/1.2 'PingFang SC','Microsoft YaHei',sans-serif}
+.handwriting-correction{display:grid;gap:8px;margin:14px 0}.handwriting-correction>div{display:flex;gap:8px;align-items:center}.handwriting-correction input{width:70px;min-width:0;text-align:center;font-size:24px}.handwriting-correction button{flex:1;min-height:46px}
+.handwriting-share{display:flex;align-items:center;gap:8px;line-height:1.5;margin-top:14px;font-size:14px}.handwriting-share input{width:20px;height:20px;min-height:20px;flex:none}
+#handwritingForget,#handwritingMeaningSearch{margin:4px 6px 8px 0;min-height:44px;padding:8px 10px;background:#e8eef8;color:#173d91;font-size:13px}.handwriting-credit{display:block;line-height:1.5;color:#52627b}.handwriting-credit a{color:#173d91}
+@media(max-width:420px){#searchForm{gap:6px}#searchForm>button{padding:8px;font-size:13px}.handwriting-panel{padding:10px}}

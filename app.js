@@ -342,8 +342,10 @@ function searchScore(w,q,terms) {
  if(senses.some(s=>typoSimilar(fold(q),fold(s))))return 25;
  return 0;
 }
+let handwritingSearchCharacter='';
 function runSearch() {
  clearTimeout(searchTimer); const q=fold($('searchInput').value); visibleResults=40;
+ if(handwritingSearchCharacter){searchMatches=levelWords().filter(w=>w.han.includes(handwritingSearchCharacter)).map((w,i)=>({w,score:100,i})).sort((a,b)=>Number(a.w.hsk)-Number(b.w.hsk)||a.i-b.i);renderSearch();return;}
  if(!q){searchMatches=[];renderSearch();return;}
  const terms=expandedTerms($('searchInput').value);
  searchMatches=levelWords().map((w,i)=>({w,score:searchScore(w,$('searchInput').value,terms),i})).filter(r=>r.score>0).sort((a,b)=>Number(a.w.hsk)-Number(b.w.hsk)||b.score-a.score||a.i-b.i);
@@ -351,7 +353,7 @@ function runSearch() {
 }
 function renderSearch() {
  $('searchResults').replaceChildren(); const q=fold($('searchInput').value);
- $('searchSummary').textContent=!q?'Nhập nghĩa để tìm từ.':searchMatches.length?`${searchMatches.length} kết quả · HSK thấp → cao · Đang hiển thị ${Math.min(visibleResults,searchMatches.length)} từ`:'Không tìm thấy. Thử một cụm ngắn hơn hoặc một cách diễn đạt gần nghĩa khác.';
+ $('searchSummary').textContent=handwritingSearchCharacter?(searchMatches.length?`Chứa chữ ${handwritingSearchCharacter} · ${searchMatches.length} kết quả · HSK thấp → cao · Đang hiển thị ${Math.min(visibleResults,searchMatches.length)} từ`:`Không có từ chứa chữ ${handwritingSearchCharacter} trong bộ lọc HSK đang chọn. Thử đổi bộ lọc hoặc vẽ lại.`):!q?'Nhập nghĩa để tìm từ.':searchMatches.length?`${searchMatches.length} kết quả · HSK thấp → cao · Đang hiển thị ${Math.min(visibleResults,searchMatches.length)} từ`:'Không tìm thấy. Thử một cụm ngắn hơn hoặc một cách diễn đạt gần nghĩa khác.';
  for(const {w} of searchMatches.slice(0,visibleResults)) {
   const card=document.createElement('article');card.className='result-card';card.append(makeMasteryTools(w));
   const tag=document.createElement('span');tag.className=`hsk-tag hsk${w.hsk}-tag`;tag.textContent=`HSK ${w.hsk}`;card.append(tag);
@@ -362,6 +364,11 @@ function renderSearch() {
  }
  $('searchMore').hidden=visibleResults>=searchMatches.length;
 }
+window.HSKHandwritingSearch={
+ characters:()=>[...new Set(words.flatMap(w=>Array.from(w.han).filter(c=>/[\u3400-\u9fff\u3007]/.test(c))))].join(''),
+ select(character){if(Array.from(character).length!==1||!words.some(w=>w.han.includes(character)))return {supported:false,count:0};handwritingSearchCharacter=character;runSearch();return {supported:true,count:searchMatches.length};},
+ clear(){handwritingSearchCharacter='';runSearch();}
+};
 // Adaptive spaced repetition. Due dates are timestamps, so the schedule survives closing the file.
 function nextSchedule(w,rating,now=Date.now()) {
  const old=recordOf(w)||{ease:2.5,reps:0,interval:0,lapses:0}; let ease=old.ease, interval,reps=old.reps,lapses=old.lapses||0;
@@ -570,7 +577,7 @@ $('reset').title='Trở về bộ thẻ ban đầu; giữ tiến độ học và
 $('reset').onclick=()=>{$('masteryFilter').value='all';document.querySelector('[data-filter="all"]').click();};
 function jumpToCard(){const n=Number($('jumpInput').value);if(!Number.isInteger(n)||n<1||n>currentWords.length){$('jumpStatus').textContent=`Nhập số nguyên từ 1 đến ${currentWords.length}.`;return;}index=n-1;updateCard();$('jumpStatus').textContent=`Đã nhảy đến thẻ số ${n}.`;$('jumpInput').value='';}
 $('jumpBtn').onclick=jumpToCard;$('jumpInput').onkeydown=e=>{if(e.key==='Enter')jumpToCard();};
-$('searchForm').onsubmit=e=>{e.preventDefault();runSearch();};$('searchInput').oninput=()=>{clearTimeout(searchTimer);searchTimer=setTimeout(runSearch,180);};
+$('searchForm').onsubmit=e=>{e.preventDefault();handwritingSearchCharacter='';runSearch();};$('searchInput').oninput=()=>{handwritingSearchCharacter='';clearTimeout(searchTimer);searchTimer=setTimeout(runSearch,180);};
 $('searchMore').onclick=()=>{visibleResults+=40;renderSearch();};
 $('quizForm').onsubmit=startQuiz;$('quizNext').onclick=()=>{if(quizSession){quizSession.position++;renderQuestion();}};
  for(const id of ['quizLevelMode','quizSingleLevel','quizLevelFrom','quizLevelTo','quizScope','quizDirection'])$(id).onchange=()=>{

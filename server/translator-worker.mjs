@@ -1,4 +1,5 @@
 import { vocabulary } from './hsk-vocabulary.mjs';
+import { validateHandwritingSample, submitHandwritingSample } from './handwriting-samples.mjs';
 
 const schema = {type:'OBJECT',properties:{chinese:{type:'STRING'},pinyin:{type:'STRING'},explanation:{type:'STRING'},note:{type:'STRING'}},required:['chinese','pinyin','explanation','note']};
 const chineseSchema={...schema,properties:{...schema.properties,vietnamese:{type:'STRING'}},required:[...schema.required,'vietnamese']};
@@ -21,7 +22,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-gemini-location-20261012';
+export const WORKER_REVISION='hsk-handwriting-learning-20261012-1';
 async function geminiFailure(response,model,env){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -41,17 +42,18 @@ export function createHandler(fetchFn=fetch,now=()=>Date.now()){
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
   Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
-  const route=new URL(request.url).pathname,isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk,isOcr=route==='/ocr';
-  if(route!=='/translate'&&!isAsk&&!isOcr)return reply({error:'Không tìm thấy dịch vụ.'},404);
+  const route=new URL(request.url).pathname,isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk,isOcr=route==='/ocr',isSample=route==='/handwriting-samples';
+  if(route!=='/translate'&&!isAsk&&!isOcr&&!isSample)return reply({error:'Không tìm thấy dịch vụ.'},404);
   if(request.method!=='POST')return reply({error:'Yêu cầu không hợp lệ.'},405);
-  if(!env.GEMINI_API_KEY||!env.FIREBASE_API_KEY)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
+  if(!env.FIREBASE_API_KEY||!isSample&&!env.GEMINI_API_KEY)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
   const token=request.headers.get('Authorization')?.match(/^Bearer ([^\s]+)$/)?.[1],c=token&&token.length<5000?claims(token):null,project=env.FIREBASE_PROJECT_ID||'hsk-flashcards-44631';
   if(!c||c.aud!==project||c.iss!=='https://securetoken.google.com/'+project||typeof c.sub!=='string'||!c.sub||typeof c.exp!=='number'||c.exp<=now()/1000)return reply({error:'Hãy đăng nhập tài khoản app để dịch.'},401);
-  let body;try{body=await readBody(request,isOcr?2100000:isLessonAsk?120000:20000);}catch{return reply({error:isOcr?'Ảnh quá lớn hoặc không hợp lệ.':'Câu nhập không hợp lệ hoặc quá dài.'},400);}
+  let body;try{body=await readBody(request,isSample?4096:isOcr?2100000:isLessonAsk?120000:20000);}catch{return reply({error:isOcr?'Ảnh quá lớn hoặc không hợp lệ.':'Câu nhập không hợp lệ hoặc quá dài.'},400);}
   if(!body||typeof body!=='object')return reply({error:'Yêu cầu không hợp lệ.'},400);
-  if(!isOcr&&(!Number.isInteger(body.hsk)||body.hsk<1||body.hsk>6))return reply({error:'Chọn trình độ HSK 1–6.'},400);
-  if(!isOcr&&!isAsk&&body.direction!==undefined&&!['vi-zh','zh-vi'].includes(body.direction))return reply({error:'Chọn chiều dịch hợp lệ.'},400);
-  if(isOcr){
+  if(!isOcr&&!isSample&&(!Number.isInteger(body.hsk)||body.hsk<1||body.hsk>6))return reply({error:'Chọn trình độ HSK 1–6.'},400);
+  if(!isOcr&&!isAsk&&!isSample&&body.direction!==undefined&&!['vi-zh','zh-vi'].includes(body.direction))return reply({error:'Chọn chiều dịch hợp lệ.'},400);
+  if(isSample){if(!validateHandwritingSample(body))return reply({error:'Mẫu góp phải là một chữ Hán đã xác nhận và ảnh nét hợp lệ.'},400);}
+  else if(isOcr){
    if(body.translate!==undefined&&typeof body.translate!=='boolean')return reply({error:'Chế độ ảnh không hợp lệ.'},400);
    if(body.translate&&(!Number.isInteger(body.hsk)||body.hsk<1||body.hsk>6))return reply({error:'Chọn trình độ HSK 1–6.'},400);
    const im=body.image;
@@ -71,6 +73,7 @@ export function createHandler(fetchFn=fetch,now=()=>Date.now()){
    if(!auth.ok)return reply({error:'Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại.'},401);
    const account=(await auth.json()).users?.[0];if(!account||account.localId!==c.sub||account.disabled)return reply({error:'Tài khoản không được phép dịch.'},401);
    const restricted=(env.ALLOWED_UIDS||'').split(',').filter(Boolean);if(restricted.length&&!restricted.includes(c.sub))return reply({error:'Tài khoản chưa được bật dịch câu.'},403);
+   if(isSample){const result=await submitHandwritingSample(body,c.sub,env,now());return reply(result.body,result.status);}
    // Per-isolate cooldown reduces double submissions; provider free-tier quotas remain the global limit.
    const cooldownKey=(isOcr?'ocr:':isAsk?'ask:':'translate:')+c.sub;
    if((cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
