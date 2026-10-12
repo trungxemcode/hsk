@@ -1,0 +1,1216 @@
+{
+  "before": {
+    "cases": 240,
+    "top1": 117,
+    "top5": 168
+  },
+  "after": {
+    "cases": 240,
+    "top1": 240,
+    "top5": 240
+  },
+  "regressions": 0,
+  "limitation": "Two training variants and six held-out perturbations per geometric glyph. No human writers; no evidence of component transfer.",
+  "results": [
+    {
+      "label": "一",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "一",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "一",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "一",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "一",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "一",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "二",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "二",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "二",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "二",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "二",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "二",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "三",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "三",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "三",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "三",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "三",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "三",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "十",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "十",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "十",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "十",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "十",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "十",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "人",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "人",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "人",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "人",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "人",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "人",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "入",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "入",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "入",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "入",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "入",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "入",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "八",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "八",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "八",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "八",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "八",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "八",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "大",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "大",
+      "before": 3,
+      "after": 1
+    },
+    {
+      "label": "大",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "大",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "大",
+      "before": 3,
+      "after": 1
+    },
+    {
+      "label": "大",
+      "before": 3,
+      "after": 1
+    },
+    {
+      "label": "太",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "太",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "太",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "太",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "太",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "太",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "犬",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "犬",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "犬",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "犬",
+      "before": 3,
+      "after": 1
+    },
+    {
+      "label": "犬",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "犬",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "天",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "天",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "天",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "天",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "天",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "天",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "木",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "木",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "木",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "木",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "木",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "木",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "本",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "本",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "本",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "本",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "本",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "本",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "末",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "末",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "末",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "末",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "末",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "末",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "未",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "未",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "未",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "未",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "未",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "未",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "土",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "土",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "土",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "土",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "土",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "土",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "士",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "士",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "士",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "士",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "士",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "士",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "口",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "口",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "口",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "口",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "口",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "口",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "日",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "日",
+      "before": 4,
+      "after": 1
+    },
+    {
+      "label": "日",
+      "before": 3,
+      "after": 1
+    },
+    {
+      "label": "日",
+      "before": 3,
+      "after": 1
+    },
+    {
+      "label": "日",
+      "before": 4,
+      "after": 1
+    },
+    {
+      "label": "日",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "目",
+      "before": 5,
+      "after": 1
+    },
+    {
+      "label": "目",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "目",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "目",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "目",
+      "before": 5,
+      "after": 1
+    },
+    {
+      "label": "目",
+      "before": 5,
+      "after": 1
+    },
+    {
+      "label": "田",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "田",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "田",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "田",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "田",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "田",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "由",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "由",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "由",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "由",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "由",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "由",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "甲",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "甲",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "甲",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "甲",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "甲",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "甲",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "申",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "申",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "申",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "申",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "申",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "申",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "中",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "中",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "中",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "中",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "中",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "中",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "王",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "王",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "王",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "王",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "王",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "王",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "玉",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "玉",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "玉",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "玉",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "玉",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "玉",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "主",
+      "before": 6,
+      "after": 1
+    },
+    {
+      "label": "主",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "主",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "主",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "主",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "主",
+      "before": 7,
+      "after": 1
+    },
+    {
+      "label": "干",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "干",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "干",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "干",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "干",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "干",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "千",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "千",
+      "before": 6,
+      "after": 1
+    },
+    {
+      "label": "千",
+      "before": 3,
+      "after": 1
+    },
+    {
+      "label": "千",
+      "before": 7,
+      "after": 1
+    },
+    {
+      "label": "千",
+      "before": 6,
+      "after": 1
+    },
+    {
+      "label": "千",
+      "before": 9,
+      "after": 1
+    },
+    {
+      "label": "牛",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "牛",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "牛",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "牛",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "牛",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "牛",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "午",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "午",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "午",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "午",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "午",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "午",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "山",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "山",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "山",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "山",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "山",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "山",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "小",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "小",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "小",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "小",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "小",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "小",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "少",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "少",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "少",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "少",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "少",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "少",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "水",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "水",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "水",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "水",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "水",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "水",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "火",
+      "before": 5,
+      "after": 1
+    },
+    {
+      "label": "火",
+      "before": 4,
+      "after": 1
+    },
+    {
+      "label": "火",
+      "before": 4,
+      "after": 1
+    },
+    {
+      "label": "火",
+      "before": 7,
+      "after": 1
+    },
+    {
+      "label": "火",
+      "before": 6,
+      "after": 1
+    },
+    {
+      "label": "火",
+      "before": 4,
+      "after": 1
+    },
+    {
+      "label": "明",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "明",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "明",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "明",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "明",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "明",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "好",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "好",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "好",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "好",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "label": "好",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "好",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "label": "你",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "你",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "你",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "你",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "你",
+      "before": null,
+      "after": 1
+    },
+    {
+      "label": "你",
+      "before": null,
+      "after": 1
+    }
+  ]
+}
