@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "model": "PP-OCRv5_mobile_rec",
+  "license": "Apache-2.0",
+  "snapshot": "ed152b8b495f84de93cda5709d768548a9127622",
+  "assets": {
+    "runtime": {
+      "url": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort.wasm.min.js",
+      "sha256": "65e09376df69107e881b5c34d2d37aed333a366b6d941073ec518168e269b87d",
+      "bytes": 48327,
+      "type": "text/javascript"
+    },
+    "module": {
+      "url": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort-wasm-simd-threaded.mjs",
+      "sha256": "30dd851d9c00622940500f71ddd2ff8820c5cb65270816080175b958705385a8",
+      "bytes": 20856,
+      "type": "text/javascript"
+    },
+    "wasm": {
+      "url": "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort-wasm-simd-threaded.wasm",
+      "sha256": "71aef04959c5c1b6de461b6538e2058e306610034a85aad2742d0c7fd4533fe4",
+      "bytes": 11210254,
+      "type": "application/wasm"
+    },
+    "model": {
+      "url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec_onnx/resolve/ed152b8b495f84de93cda5709d768548a9127622/inference.onnx",
+      "sha256": "da72dc72ca4dc220df0dfde68c1dedc31c58d3e76a25871122e5056227d50092",
+      "bytes": 16534782,
+      "type": "application/octet-stream"
+    }
+  },
+  "downloadBytes": 27814219
+}
