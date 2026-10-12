@@ -1,4 +1,4 @@
-/* Confirmed handwriting only; isolated local storage and an authenticated upload queue. */
+/* Confirmed handwriting samples, local offline storage, and separate opt-in uploads. */
 (function(root){
  'use strict';
  const MAX_SAMPLES=500,PER_CHARACTER=5,MAX_QUEUE=100;
@@ -8,7 +8,7 @@
   const allowed=new Set(Array.from(characters)),key='hsk-handwriting-learning-v1:'+owner;
   let state={schema:1,samples:[],queue:[]},busy=false,lastSaveError='';
   const valid=s=>{try{return s&&allowed.has(s.label)&&!!unpack(s.bitmap);}catch{return false;}};
-  try{const data=JSON.parse(storage.getItem(key)||'null');if(data?.schema===1){state.samples=(data.samples||[]).filter(valid).slice(-MAX_SAMPLES);state.queue=(data.queue||[]).filter(valid).slice(-MAX_QUEUE);}}catch{}
+  try{const data=JSON.parse(storage.getItem(key)||'null');if(data?.schema===1){state.samples=(data.samples||[]).filter(valid).map(s=>({...s,source:['local','ai','manual'].includes(s.source)?s.source:'local',updatedAt:Number.isFinite(s.updatedAt)?s.updatedAt:0})).slice(-MAX_SAMPLES);state.queue=(data.queue||[]).filter(valid).map(s=>({...s,source:['local','ai','manual'].includes(s.source)?s.source:'local'})).slice(-MAX_QUEUE);}}catch{}
   function save(next){try{storage.setItem(key,JSON.stringify(next));state=next;lastSaveError='';return true;}catch{lastSaveError='Bộ nhớ đầy; mẫu này chưa được lưu.';return false;}}
   function record(label,bitmap,{confirmed=false,share=false,source='local'}={}){
    if(!confirmed)throw Error('Cần xác nhận chữ đúng trước khi học.');
@@ -22,6 +22,18 @@
    if(share&&owner!=='guest')queue.push(sample);
    const saved=save({schema:1,samples:samples.slice(-MAX_SAMPLES),queue:queue.slice(-MAX_QUEUE)});
    return {saved,samples:state.samples.length,queued:state.queue.length,error:lastSaveError};
+  }
+  function merge(incoming){
+   const unique=new Map();for(const sample of [...state.samples,...incoming])if(valid(sample)){
+    const source=['local','ai','manual'].includes(sample.source)?sample.source:'local',updatedAt=Number.isFinite(sample.updatedAt)?sample.updatedAt:0,key=sample.label+'\0'+sample.bitmap,old=unique.get(key);
+    if(!old||updatedAt>old.updatedAt)unique.set(key,{label:sample.label,bitmap:sample.bitmap,modelVersion:String(sample.modelVersion||modelVersion),source,updatedAt});
+   }
+   const samples=[],counts=new Map();for(const sample of [...unique.values()].sort((a,b)=>b.updatedAt-a.updatedAt)){
+    const count=counts.get(sample.label)||0;if(count>=PER_CHARACTER||samples.length>=MAX_SAMPLES)continue;counts.set(sample.label,count+1);samples.push(sample);
+   }
+   const added=samples.filter(s=>!state.samples.some(old=>old.label===s.label&&old.bitmap===s.bitmap)).length;
+   if(added||samples.length!==state.samples.length)save({...state,samples});
+   return {added,samples:state.samples.length,error:lastSaveError};
   }
   async function flush({user,endpoint,fetchFn=root.fetch,online=true}){
    if(busy||!online||!user||user.uid!==owner||owner==='guest'||!state.queue.length)return {sent:0,pending:state.queue.length};
@@ -42,7 +54,7 @@
    return {sent,pending:state.queue.length,error};
   }
   function clear(){return save({schema:1,samples:[],queue:[]});}
-  return {record,flush,clear,snapshot:()=>JSON.parse(JSON.stringify(state)),stats:()=>({samples:state.samples.length,pending:state.queue.length,error:lastSaveError}),key};
+  return {record,merge,flush,clear,snapshot:()=>JSON.parse(JSON.stringify(state)),stats:()=>({samples:state.samples.length,pending:state.queue.length,error:lastSaveError}),key};
  }
  const api={pack,unpack,createStore,MAX_SAMPLES,PER_CHARACTER,MAX_QUEUE};
  if(typeof module==='object'&&module.exports)module.exports=api;else root.HSKHandwritingLearning=api;

@@ -28,5 +28,18 @@ service cloud.firestore {
     && request.resource.data.updatedAt == request.time;
    allow delete: if false;
   }
+  match /users/{uid}/handwritingSamples/{sampleId} {
+   allow read: if request.auth != null && request.auth.uid == uid;
+   allow create, update: if request.auth != null && request.auth.uid == uid
+    && sampleId.matches('^[a-f0-9]{64}$')
+    && request.resource.data.keys().hasOnly(['label','bitmap','modelVersion','source','updatedAt'])
+    && request.resource.data.label is string && request.resource.data.label.size() == 1
+    && request.resource.data.bitmap is string && request.resource.data.bitmap.size() == 172
+    && request.resource.data.modelVersion is string && request.resource.data.modelVersion.size() <= 80
+    && request.resource.data.source in ['local','ai','manual']
+    && request.resource.data.updatedAt == request.time;
+   allow delete: if request.auth != null && request.auth.uid == uid
+    && sampleId.matches('^[a-f0-9]{64}$');
+  }
  }
 }
