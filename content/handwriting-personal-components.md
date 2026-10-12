@@ -11,3 +11,7 @@ Tách gói Tomoe khỏi mẫu cộng đồng đã duyệt. Lưu và đồng bộ
 ## Giới hạn
 
 Chưa học chéo thành phần: không có cây cấu tạo và căn chỉnh nét đủ tin cậy. Không huấn luyện mô hình. Kết quả thử với 40 chữ hình học và các biến dạng không đại diện chữ viết thật. Xem báo cáo `handwriting-improvement-summary.json`.
+
+## Nhận dạng nâng cao
+
+PP-OCRv5 / ONNX Runtime Web là tầng nền tùy chọn. Mẫu cá nhân đã xác nhận có bitmap trùng khớp và nhãn không mâu thuẫn được ưu tiên trước gợi ý mô hình. Các biến thể toàn chữ vẫn hỗ trợ tầng so hình và fallback. Mô hình nền không tự cập nhật trọng số từ mẫu người dùng.
