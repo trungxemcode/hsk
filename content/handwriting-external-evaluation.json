@@ -1,0 +1,1495 @@
+{
+  "date": "2026-10-12",
+  "approach": "Axis-normalized, order-independent 32x32 bitmap / symmetric squared chamfer + ink density; personal variants use near-shape recall and distinct local support",
+  "supportedCharacters": 5205,
+  "prepareMs": 140.432288,
+  "recognitionMedianMs": 5.753138000000035,
+  "recognitionP95Ms": 7.650486000000001,
+  "orderInvariantCharacters": 2603,
+  "strokeOrderAndSegmentationChecks": 160,
+  "personalInfluence": {
+    "singleSample": "near-shape recall only",
+    "generalization": "two distinct nearby confirmed shapes"
+  },
+  "metrics": {
+    "independent-clean": {
+      "cases": 40,
+      "top1": 17,
+      "top5": 26,
+      "top10": 27,
+      "recall5": 0.65,
+      "recall10": 0.675
+    },
+    "size-position": {
+      "cases": 120,
+      "top1": 51,
+      "top5": 78,
+      "top10": 81,
+      "recall5": 0.65,
+      "recall10": 0.675
+    },
+    "independent-rough": {
+      "cases": 240,
+      "top1": 105,
+      "top5": 154,
+      "top10": 166,
+      "recall5": 0.6416666666666667,
+      "recall10": 0.6916666666666667
+    },
+    "missing-stroke": {
+      "cases": 39,
+      "top1": 2,
+      "top5": 6,
+      "top10": 8,
+      "recall5": 0.15384615384615385,
+      "recall10": 0.20512820512820512
+    }
+  },
+  "perCharacter": {
+    "一": {
+      "cases": 10,
+      "top1": 6,
+      "top5": 6,
+      "top10": 6
+    },
+    "二": {
+      "cases": 11,
+      "top1": 10,
+      "top5": 10,
+      "top10": 10
+    },
+    "三": {
+      "cases": 11,
+      "top1": 10,
+      "top5": 10,
+      "top10": 11
+    },
+    "十": {
+      "cases": 11,
+      "top1": 9,
+      "top5": 10,
+      "top10": 10
+    },
+    "人": {
+      "cases": 11,
+      "top1": 7,
+      "top5": 10,
+      "top10": 10
+    },
+    "入": {
+      "cases": 11,
+      "top1": 10,
+      "top5": 10,
+      "top10": 10
+    },
+    "八": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 1,
+      "top10": 1
+    },
+    "大": {
+      "cases": 11,
+      "top1": 2,
+      "top5": 9,
+      "top10": 9
+    },
+    "太": {
+      "cases": 11,
+      "top1": 11,
+      "top5": 11,
+      "top10": 11
+    },
+    "犬": {
+      "cases": 11,
+      "top1": 4,
+      "top5": 10,
+      "top10": 11
+    },
+    "天": {
+      "cases": 11,
+      "top1": 5,
+      "top5": 10,
+      "top10": 10
+    },
+    "木": {
+      "cases": 11,
+      "top1": 1,
+      "top5": 6,
+      "top10": 7
+    },
+    "本": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 0,
+      "top10": 0
+    },
+    "末": {
+      "cases": 11,
+      "top1": 6,
+      "top5": 8,
+      "top10": 8
+    },
+    "未": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 2,
+      "top10": 4
+    },
+    "土": {
+      "cases": 11,
+      "top1": 7,
+      "top5": 9,
+      "top10": 10
+    },
+    "士": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 0,
+      "top10": 0
+    },
+    "口": {
+      "cases": 11,
+      "top1": 10,
+      "top5": 11,
+      "top10": 11
+    },
+    "日": {
+      "cases": 11,
+      "top1": 9,
+      "top5": 10,
+      "top10": 11
+    },
+    "目": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 3,
+      "top10": 3
+    },
+    "田": {
+      "cases": 11,
+      "top1": 2,
+      "top5": 4,
+      "top10": 5
+    },
+    "由": {
+      "cases": 11,
+      "top1": 3,
+      "top5": 10,
+      "top10": 10
+    },
+    "甲": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 0,
+      "top10": 0
+    },
+    "申": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 0,
+      "top10": 0
+    },
+    "中": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 0,
+      "top10": 0
+    },
+    "王": {
+      "cases": 11,
+      "top1": 10,
+      "top5": 10,
+      "top10": 10
+    },
+    "玉": {
+      "cases": 11,
+      "top1": 10,
+      "top5": 11,
+      "top10": 11
+    },
+    "主": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 6,
+      "top10": 6
+    },
+    "干": {
+      "cases": 11,
+      "top1": 2,
+      "top5": 9,
+      "top10": 10
+    },
+    "千": {
+      "cases": 11,
+      "top1": 1,
+      "top5": 2,
+      "top10": 5
+    },
+    "牛": {
+      "cases": 11,
+      "top1": 8,
+      "top5": 10,
+      "top10": 10
+    },
+    "午": {
+      "cases": 11,
+      "top1": 1,
+      "top5": 8,
+      "top10": 8
+    },
+    "山": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 10,
+      "top10": 10
+    },
+    "小": {
+      "cases": 11,
+      "top1": 6,
+      "top5": 6,
+      "top10": 7
+    },
+    "少": {
+      "cases": 11,
+      "top1": 9,
+      "top5": 9,
+      "top10": 9
+    },
+    "水": {
+      "cases": 11,
+      "top1": 10,
+      "top5": 11,
+      "top10": 11
+    },
+    "火": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 2,
+      "top10": 6
+    },
+    "明": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 0,
+      "top10": 0
+    },
+    "好": {
+      "cases": 11,
+      "top1": 6,
+      "top5": 9,
+      "top10": 9
+    },
+    "你": {
+      "cases": 11,
+      "top1": 0,
+      "top5": 1,
+      "top10": 2
+    }
+  },
+  "confusableGroups": [
+    {
+      "characters": "你他休体",
+      "results": {
+        "你": {
+          "cases": 11,
+          "top1": 0,
+          "top5": 1,
+          "top10": 2
+        },
+        "他": null,
+        "休": null,
+        "体": null
+      }
+    },
+    {
+      "characters": "日目白自",
+      "results": {
+        "日": {
+          "cases": 11,
+          "top1": 9,
+          "top5": 10,
+          "top10": 11
+        },
+        "目": {
+          "cases": 11,
+          "top1": 0,
+          "top5": 3,
+          "top10": 3
+        },
+        "白": null,
+        "自": null
+      }
+    },
+    {
+      "characters": "未末",
+      "results": {
+        "未": {
+          "cases": 11,
+          "top1": 0,
+          "top5": 2,
+          "top10": 4
+        },
+        "末": {
+          "cases": 11,
+          "top1": 6,
+          "top5": 8,
+          "top10": 8
+        }
+      }
+    },
+    {
+      "characters": "土士",
+      "results": {
+        "土": {
+          "cases": 11,
+          "top1": 7,
+          "top5": 9,
+          "top10": 10
+        },
+        "士": {
+          "cases": 11,
+          "top1": 0,
+          "top5": 0,
+          "top10": 0
+        }
+      }
+    },
+    {
+      "characters": "人入",
+      "results": {
+        "人": {
+          "cases": 11,
+          "top1": 7,
+          "top5": 10,
+          "top10": 10
+        },
+        "入": {
+          "cases": 11,
+          "top1": 10,
+          "top5": 10,
+          "top10": 10
+        }
+      }
+    },
+    {
+      "characters": "木本",
+      "results": {
+        "木": {
+          "cases": 11,
+          "top1": 1,
+          "top5": 6,
+          "top10": 7
+        },
+        "本": {
+          "cases": 11,
+          "top1": 0,
+          "top5": 0,
+          "top10": 0
+        }
+      }
+    }
+  ],
+  "failures": [
+    {
+      "character": "一",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 39.37366484957644,
+      "candidates": "却咖呻伞畔命牛绅抑辆"
+    },
+    {
+      "character": "一",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 39.37366484957644,
+      "candidates": "却咖呻伞畔命牛绅抑辆"
+    },
+    {
+      "character": "一",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 39.37366484957644,
+      "candidates": "却咖呻伞畔命牛绅抑辆"
+    },
+    {
+      "character": "一",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 39.37366484957644,
+      "candidates": "却咖呻伞畔命牛绅抑辆"
+    },
+    {
+      "character": "二",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 39.37366484957644,
+      "candidates": "却咖呻伞畔命牛绅抑辆"
+    },
+    {
+      "character": "十",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 39.37366484957644,
+      "candidates": "却咖呻伞畔命牛绅抑辆"
+    },
+    {
+      "character": "人",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 29.119774902696182,
+      "candidates": "户一虏声夕启岩肩虐者"
+    },
+    {
+      "character": "入",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 18.37178298625453,
+      "candidates": "一纵乳气权奴趴忆队电"
+    },
+    {
+      "character": "八",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 13.321688249982149,
+      "candidates": "只烈片然熊均列找纬贝"
+    },
+    {
+      "character": "八",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 13.321688249982149,
+      "candidates": "只烈片然熊均列找纬贝"
+    },
+    {
+      "character": "八",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 13.321688249982149,
+      "candidates": "只烈片然熊均列找纬贝"
+    },
+    {
+      "character": "八",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 13.321688249982149,
+      "candidates": "只烈片然熊均列找纬贝"
+    },
+    {
+      "character": "八",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 13.84735444918245,
+      "candidates": "刀列片纠月利州刺川判"
+    },
+    {
+      "character": "八",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 15.462357713498715,
+      "candidates": "列片只刀们纠剔月弱约"
+    },
+    {
+      "character": "八",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 15.887544789402964,
+      "candidates": "片纠列弱川州烈刺洲朽"
+    },
+    {
+      "character": "八",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 20.141575301882206,
+      "candidates": "均纠烈纬列只约码的门"
+    },
+    {
+      "character": "八",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 19.395064716318625,
+      "candidates": "门烈列纠弱只州均约纬"
+    },
+    {
+      "character": "八",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 29.119774902696182,
+      "candidates": "户一虏声夕启岩肩虐者"
+    },
+    {
+      "character": "大",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 7.426764255122381,
+      "candidates": "六穴攻太力犬汰武为虫"
+    },
+    {
+      "character": "大",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 9.527117504804007,
+      "candidates": "少产介夕奔才步奢户声"
+    },
+    {
+      "character": "天",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 8.163390271471144,
+      "candidates": "严尸歹产炉扩少梦步旷"
+    },
+    {
+      "character": "木",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.758545760810057,
+      "candidates": "右方余永攻者未术看古"
+    },
+    {
+      "character": "木",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.62605189763897,
+      "candidates": "右余太方未古术攻永禽"
+    },
+    {
+      "character": "木",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.645327311982459,
+      "candidates": "术米未攻汰冰束永柬虫"
+    },
+    {
+      "character": "木",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 4.451337156640424,
+      "candidates": "才介牙方命矛考幸拿者"
+    },
+    {
+      "character": "本",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 4.508165509706952,
+      "candidates": "虫攻汰由冰未束索难泳"
+    },
+    {
+      "character": "本",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.508165509706952,
+      "candidates": "虫攻汰由冰未束索难泳"
+    },
+    {
+      "character": "本",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.508165509706952,
+      "candidates": "虫攻汰由冰未束索难泳"
+    },
+    {
+      "character": "本",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.508165509706952,
+      "candidates": "虫攻汰由冰未束索难泳"
+    },
+    {
+      "character": "本",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.845255244560137,
+      "candidates": "束虫点柬森床兔冰沐成"
+    },
+    {
+      "character": "本",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.046954492528659,
+      "candidates": "冰床束汰点虫攻成难未"
+    },
+    {
+      "character": "本",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 3.7999104563784254,
+      "candidates": "水未虫束永术承点柬木"
+    },
+    {
+      "character": "本",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.365917155506939,
+      "candidates": "木未叙加扛束权水杠虫"
+    },
+    {
+      "character": "本",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.016129610533721,
+      "candidates": "攻冰难汰虫珠床戏由泳"
+    },
+    {
+      "character": "本",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.438584905644652,
+      "candidates": "攻虫隶右余汰成煮森咸"
+    },
+    {
+      "character": "本",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 4.779222400810729,
+      "candidates": "未冰术木示永虫束米索"
+    },
+    {
+      "character": "末",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 3.8083259301612724,
+      "candidates": "来采浪某策菜亲乘紊恢"
+    },
+    {
+      "character": "末",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.335524867186789,
+      "candidates": "来采亲某紊乘崇班恢宗"
+    },
+    {
+      "character": "末",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 6.205877456254527,
+      "candidates": "齐芽宁审市守帘宰布苦"
+    },
+    {
+      "character": "未",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 5.152726165440232,
+      "candidates": "来亲崇击某采紊娘东茫"
+    },
+    {
+      "character": "未",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 5.152726165440232,
+      "candidates": "来亲崇击某采紊娘东茫"
+    },
+    {
+      "character": "未",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 5.152726165440232,
+      "candidates": "来亲崇击某采紊娘东茫"
+    },
+    {
+      "character": "未",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 5.152726165440232,
+      "candidates": "来亲崇击某采紊娘东茫"
+    },
+    {
+      "character": "未",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.585131390332131,
+      "candidates": "若寿紊苦府著舟者修寄"
+    },
+    {
+      "character": "未",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.720305761793278,
+      "candidates": "崇亲宏紊娘岩兼某迸淹"
+    },
+    {
+      "character": "未",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 4.492847046714575,
+      "candidates": "齐宁苦夺守亭寄芽井手"
+    },
+    {
+      "character": "土",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 1.8027214316725615,
+      "candidates": "十千卡干于予牛寸个子"
+    },
+    {
+      "character": "士",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 9.837717902150185,
+      "candidates": "贪于寸宝主尘岔古堂玄"
+    },
+    {
+      "character": "士",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 9.837717902150185,
+      "candidates": "贪于寸宝主尘岔古堂玄"
+    },
+    {
+      "character": "士",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 9.837717902150185,
+      "candidates": "贪于寸宝主尘岔古堂玄"
+    },
+    {
+      "character": "士",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 9.837717902150185,
+      "candidates": "贪于寸宝主尘岔古堂玄"
+    },
+    {
+      "character": "士",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 10.868273199219631,
+      "candidates": "吁啃叶嗦喷呀哼寸哑哎"
+    },
+    {
+      "character": "士",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 7.855748716941278,
+      "candidates": "寸岔生堂玄童嚏肯贪宝"
+    },
+    {
+      "character": "士",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 9.53289467155224,
+      "candidates": "岔堂嚏宝尘党玄主重贪"
+    },
+    {
+      "character": "士",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 8.632382652726658,
+      "candidates": "寸岔贪才方玄于古吉亏"
+    },
+    {
+      "character": "士",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 8.110937612845314,
+      "candidates": "寸古亏贪含于岔玄吉肯"
+    },
+    {
+      "character": "士",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 10.331390877645259,
+      "candidates": "岔堂寸吃童啃生嚏宝素"
+    },
+    {
+      "character": "士",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 5.399115094228057,
+      "candidates": "十于千干卡寸予中牛亏"
+    },
+    {
+      "character": "目",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 4.878558507897216,
+      "candidates": "团因困园国固圆围闻网"
+    },
+    {
+      "character": "目",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.878558507897216,
+      "candidates": "团因困园国固圆围闻网"
+    },
+    {
+      "character": "目",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.878558507897216,
+      "candidates": "团因困园国固圆围闻网"
+    },
+    {
+      "character": "目",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.878558507897216,
+      "candidates": "团因困园国固圆围闻网"
+    },
+    {
+      "character": "目",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.384101251784195,
+      "candidates": "医匪丽眶因园醒国匹团"
+    },
+    {
+      "character": "目",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.205214398854531,
+      "candidates": "匪医区附臣眶温滥匹湿"
+    },
+    {
+      "character": "目",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.835216343119523,
+      "candidates": "团匪匹医能岂因园眶隔"
+    },
+    {
+      "character": "目",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.331628049986198,
+      "candidates": "医匪眶丽岂能匹园隔附"
+    },
+    {
+      "character": "田",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 5.080342609413974,
+      "candidates": "困围图团固闹园国圈因"
+    },
+    {
+      "character": "田",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 5.080342609413974,
+      "candidates": "困围图团固闹园国圈因"
+    },
+    {
+      "character": "田",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 5.080342609413974,
+      "candidates": "困围图团固闹园国圈因"
+    },
+    {
+      "character": "田",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 5.080342609413974,
+      "candidates": "困围图团固闹园国圈因"
+    },
+    {
+      "character": "田",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.266428153032138,
+      "candidates": "围困图园团闹国四目因"
+    },
+    {
+      "character": "田",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 6.724049434290575,
+      "candidates": "日困目凹旧因四匹阴围"
+    },
+    {
+      "character": "由",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 5.269001596444687,
+      "candidates": "日凹旧困目团因四阴围"
+    },
+    {
+      "character": "甲",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 6.156144539469036,
+      "candidates": "币那昂学军串深障乖擎"
+    },
+    {
+      "character": "甲",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 6.156144539469036,
+      "candidates": "币那昂学军串深障乖擎"
+    },
+    {
+      "character": "甲",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 6.156144539469036,
+      "candidates": "币那昂学军串深障乖擎"
+    },
+    {
+      "character": "甲",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 6.156144539469036,
+      "candidates": "币那昂学军串深障乖擎"
+    },
+    {
+      "character": "甲",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 6.580922955603559,
+      "candidates": "币学军罕那掌擎乖华串"
+    },
+    {
+      "character": "甲",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 6.706294122635107,
+      "candidates": "那深币障军渺学惮弹串"
+    },
+    {
+      "character": "甲",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.176043773269259,
+      "candidates": "军学牢曝耻堆眼罕障添"
+    },
+    {
+      "character": "甲",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.1221952798049735,
+      "candidates": "军障浑琢学深渺擎牢弹"
+    },
+    {
+      "character": "甲",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 6.208469192346555,
+      "candidates": "耻吊学擎职渺私和乖军"
+    },
+    {
+      "character": "甲",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 6.979539035913992,
+      "candidates": "军渺深币学常障浑那窜"
+    },
+    {
+      "character": "甲",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 6.724049434290575,
+      "candidates": "日困目凹旧因四匹阴围"
+    },
+    {
+      "character": "申",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 5.84666913241261,
+      "candidates": "陶淘自嘲班缩湖茫瞒潮"
+    },
+    {
+      "character": "申",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 5.84666913241261,
+      "candidates": "陶淘自嘲班缩湖茫瞒潮"
+    },
+    {
+      "character": "申",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 5.84666913241261,
+      "candidates": "陶淘自嘲班缩湖茫瞒潮"
+    },
+    {
+      "character": "申",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 5.84666913241261,
+      "candidates": "陶淘自嘲班缩湖茫瞒潮"
+    },
+    {
+      "character": "申",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.931667074443454,
+      "candidates": "暗密陪海除给睡瞎晴睁"
+    },
+    {
+      "character": "申",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 6.006890466235569,
+      "candidates": "酝陷配架际陆柴聪租溶"
+    },
+    {
+      "character": "申",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.903323607691216,
+      "candidates": "架窃海瞎密盼荣暗陪陈"
+    },
+    {
+      "character": "申",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.47363045871898,
+      "candidates": "滚昧家沫乘溶眯班浪海"
+    },
+    {
+      "character": "申",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.301561153232983,
+      "candidates": "滚昧海睬架班柴眯乘染"
+    },
+    {
+      "character": "申",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.78060510788362,
+      "candidates": "田渐酝架攀班准染职窜"
+    },
+    {
+      "character": "申",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 6.724049434290575,
+      "candidates": "日困目凹旧因四匹阴围"
+    },
+    {
+      "character": "中",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 4.751380159356198,
+      "candidates": "巾幸字宇李学串季牵乖"
+    },
+    {
+      "character": "中",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.751380159356198,
+      "candidates": "巾幸字宇李学串季牵乖"
+    },
+    {
+      "character": "中",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.751380159356198,
+      "candidates": "巾幸字宇李学串季牵乖"
+    },
+    {
+      "character": "中",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.751380159356198,
+      "candidates": "巾幸字宇李学串季牵乖"
+    },
+    {
+      "character": "中",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 6.969129517247815,
+      "candidates": "和咖伞扣私啦参幸初扫"
+    },
+    {
+      "character": "中",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.376338126837565,
+      "candidates": "巾字宇申李串幸毕季津"
+    },
+    {
+      "character": "中",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.615083101045063,
+      "candidates": "巾伞幸申宇命尔牢字啦"
+    },
+    {
+      "character": "中",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 6.492946152458655,
+      "candidates": "幸巾学字李牵哈串味咖"
+    },
+    {
+      "character": "中",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.705232329057554,
+      "candidates": "巾字乖牢丰串牵伞宇幸"
+    },
+    {
+      "character": "中",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.246334513809246,
+      "candidates": "巾幸字宇串李学牢申伞"
+    },
+    {
+      "character": "中",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 9.563469436946193,
+      "candidates": "口门日四目匹凹旧凸己"
+    },
+    {
+      "character": "王",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 7.374464258608833,
+      "candidates": "下甲予干子于千平耳了"
+    },
+    {
+      "character": "主",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.847601730647498,
+      "candidates": "空室宝重宣岂宜斑尘劣"
+    },
+    {
+      "character": "主",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.658092346498254,
+      "candidates": "支史交宜更直宣灾宽完"
+    },
+    {
+      "character": "主",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 7.059608926480022,
+      "candidates": "空查直垄差史坐室宠完"
+    },
+    {
+      "character": "主",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 6.2520332796246505,
+      "candidates": "庄空左些应尘完室差望"
+    },
+    {
+      "character": "主",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 3.7337451055241386,
+      "candidates": "中申宁牛守宇市巾牢年"
+    },
+    {
+      "character": "干",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 9.120149338381436,
+      "candidates": "二工乙三卫口己了显正"
+    },
+    {
+      "character": "千",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 5.463546182507115,
+      "candidates": "半午手年早乎平子爷耳"
+    },
+    {
+      "character": "千",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 5.463546182507115,
+      "candidates": "半午手年早乎平子爷耳"
+    },
+    {
+      "character": "千",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 5.463546182507115,
+      "candidates": "半午手年早乎平子爷耳"
+    },
+    {
+      "character": "千",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 5.463546182507115,
+      "candidates": "半午手年早乎平子爷耳"
+    },
+    {
+      "character": "千",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 7.068111582586058,
+      "candidates": "半年乎午子早手爷亭平"
+    },
+    {
+      "character": "千",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 16.526903938615924,
+      "candidates": "二三工乞艺汇豆王巴宽"
+    },
+    {
+      "character": "牛",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 11.932935954136001,
+      "candidates": "虹奴血把纽企丘叔叙色"
+    },
+    {
+      "character": "午",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.318796094041306,
+      "candidates": "牛年尔半毕卑丰印申巾"
+    },
+    {
+      "character": "午",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 7.417590667608307,
+      "candidates": "尔毕印申宇牛年中牢诊"
+    },
+    {
+      "character": "午",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 12.350962007935662,
+      "candidates": "虹色把丘生奴包业纽土"
+    },
+    {
+      "character": "山",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 14.953029690633551,
+      "candidates": "生土主良臣咙波止直色"
+    },
+    {
+      "character": "小",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 11.01784752917829,
+      "candidates": "序雇店座庙在扁难鸡扇"
+    },
+    {
+      "character": "小",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 10.805985620194473,
+      "candidates": "序难斥雇库岸座碌店庙"
+    },
+    {
+      "character": "小",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 11.764618638589923,
+      "candidates": "公冻赤房在曲奋春庙序"
+    },
+    {
+      "character": "小",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 19.702709718078797,
+      "candidates": "川片肩月州启刺扇刑利"
+    },
+    {
+      "character": "少",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 11.37445777023791,
+      "candidates": "乡台办啦咖夕多白知彻"
+    },
+    {
+      "character": "少",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 10.512117257518128,
+      "candidates": "承水乐未杰瓜冰示床小"
+    },
+    {
+      "character": "火",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 7.083605649624254,
+      "candidates": "虫太大汰六次夫出灾天"
+    },
+    {
+      "character": "火",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 8.27174400574173,
+      "candidates": "攻汰次六虫吹玻武宏放"
+    },
+    {
+      "character": "火",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 6.882952714913963,
+      "candidates": "太大六虫天灾夫攻穴次"
+    },
+    {
+      "character": "火",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 8.547252603124871,
+      "candidates": "虫汰点宏六成束攻武咸"
+    },
+    {
+      "character": "火",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 6.852531537348207,
+      "candidates": "少夕步岁声产介吵方户"
+    },
+    {
+      "character": "明",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 4.118007142807428,
+      "candidates": "阐闭阂因网固闹咽国阔"
+    },
+    {
+      "character": "明",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.118007142807428,
+      "candidates": "阐闭阂因网固闹咽国阔"
+    },
+    {
+      "character": "明",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.118007142807428,
+      "candidates": "阐闭阂因网固闹咽国阔"
+    },
+    {
+      "character": "明",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.118007142807428,
+      "candidates": "阐闭阂因网固闹咽国阔"
+    },
+    {
+      "character": "明",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.48726997873883,
+      "candidates": "瞧断附殴眶萌渐酌酷隘"
+    },
+    {
+      "character": "明",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.933265607642623,
+      "candidates": "酌踢蹈晒续瞧西瞎跑萌"
+    },
+    {
+      "character": "明",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.040816056624557,
+      "candidates": "阐闲闹阂刚闭阔咽网涮"
+    },
+    {
+      "character": "明",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.730903034355562,
+      "candidates": "田闭阂晒闲固闹阐潇刚"
+    },
+    {
+      "character": "明",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.274417047362223,
+      "candidates": "阐国面网闹围阔闭晒固"
+    },
+    {
+      "character": "明",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.49098678433757,
+      "candidates": "酌跑晒踢陷蹈滴瞧菌溅"
+    },
+    {
+      "character": "明",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 3.492638302600156,
+      "candidates": "闭阂团因固阐闹阅闲刚"
+    },
+    {
+      "character": "好",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.479323531804601,
+      "candidates": "矩挪苟纺辨妨绍约筒疗"
+    },
+    {
+      "character": "好",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 5.940981409141155,
+      "candidates": "苟疗衍辨辫何挪封掰筒"
+    },
+    {
+      "character": "你",
+      "kind": "independent-clean",
+      "rank": 0,
+      "score": 4.375229269868577,
+      "candidates": "弥依惊怀体保练综惦坏"
+    },
+    {
+      "character": "你",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.375229269868577,
+      "candidates": "弥依惊怀体保练综惦坏"
+    },
+    {
+      "character": "你",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.375229269868577,
+      "candidates": "弥依惊怀体保练综惦坏"
+    },
+    {
+      "character": "你",
+      "kind": "size-position",
+      "rank": 0,
+      "score": 4.375229269868577,
+      "candidates": "弥依惊怀体保练综惦坏"
+    },
+    {
+      "character": "你",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 5.738151946287841,
+      "candidates": "穷留侮信储弥您搬悔继"
+    },
+    {
+      "character": "你",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.449060111377061,
+      "candidates": "您弥依练悔惊悠溶苏体"
+    },
+    {
+      "character": "你",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.306167675130805,
+      "candidates": "惊弥怀忧依洁惮综齿信"
+    },
+    {
+      "character": "你",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 4.2369951306652265,
+      "candidates": "弥惊穷综惋惦湾信侮踪"
+    },
+    {
+      "character": "你",
+      "kind": "missing-stroke",
+      "rank": 0,
+      "score": 4.971496849330148,
+      "candidates": "价信衍情愉许偷贫贸穷"
+    }
+  ],
+  "limitation": "Component decomposition data is not shipped, so this build learns confirmed whole-glyph variants only. Geometric fixtures and controlled distortions are not a representative multi-writer real-handwriting benchmark or physical iPhone test."
+}
