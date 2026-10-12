@@ -1,237 +1,291 @@
 {
   "date": "2026-10-12",
-  "approach": "Axis-normalized, order-independent 32x32 bitmap / symmetric squared chamfer + ink density; one glyph template per character",
+  "approach": "Axis-normalized, order-independent 32x32 bitmap / symmetric squared chamfer + ink density; confirmed personal variants require at least three consistent samples and rerank by at most ten percent",
   "supportedCharacters": 2603,
-  "prepareMs": 100.1038,
-  "recognitionMedianMs": 2.1868999999999232,
-  "recognitionP95Ms": 2.603399999999965,
+  "prepareMs": 95.7878,
+  "recognitionMedianMs": 2.1947000000000116,
+  "recognitionP95Ms": 2.6193999999999846,
   "orderInvariantCharacters": 2603,
+  "strokeOrderAndSegmentationChecks": 160,
+  "personalInfluence": {
+    "singleSample": "no effect",
+    "consistentSamples": 3,
+    "maxRerankPercent": 10
+  },
   "metrics": {
     "independent-clean": {
       "cases": 40,
       "top1": 17,
+      "top5": 26,
       "top10": 27,
+      "recall5": 0.65,
       "recall10": 0.675
     },
     "size-position": {
       "cases": 120,
       "top1": 51,
+      "top5": 78,
       "top10": 81,
+      "recall5": 0.65,
       "recall10": 0.675
     },
     "independent-rough": {
       "cases": 240,
-      "top1": 95,
-      "top10": 156,
-      "recall10": 0.65
+      "top1": 99,
+      "top5": 139,
+      "top10": 158,
+      "recall5": 0.5791666666666667,
+      "recall10": 0.6583333333333333
     },
     "missing-stroke": {
       "cases": 39,
-      "top1": 2,
-      "top10": 8,
-      "recall10": 0.20512820512820512
+      "top1": 3,
+      "top5": 6,
+      "top10": 9,
+      "recall5": 0.15384615384615385,
+      "recall10": 0.23076923076923078
     }
   },
   "perCharacter": {
     "一": {
       "cases": 10,
       "top1": 4,
+      "top5": 4,
       "top10": 4
     },
     "二": {
       "cases": 11,
       "top1": 10,
+      "top5": 10,
       "top10": 10
     },
     "三": {
       "cases": 11,
       "top1": 10,
+      "top5": 10,
       "top10": 11
     },
     "十": {
       "cases": 11,
       "top1": 9,
+      "top5": 10,
       "top10": 10
     },
     "人": {
       "cases": 11,
       "top1": 6,
+      "top5": 10,
       "top10": 10
     },
     "入": {
       "cases": 11,
       "top1": 10,
+      "top5": 10,
       "top10": 10
     },
     "八": {
       "cases": 11,
       "top1": 1,
+      "top5": 1,
       "top10": 1
     },
     "大": {
       "cases": 11,
       "top1": 2,
+      "top5": 9,
       "top10": 9
     },
     "太": {
       "cases": 11,
       "top1": 11,
+      "top5": 11,
       "top10": 11
     },
     "犬": {
       "cases": 11,
       "top1": 5,
+      "top5": 10,
       "top10": 11
     },
     "天": {
       "cases": 11,
       "top1": 5,
+      "top5": 10,
       "top10": 10
     },
     "木": {
       "cases": 11,
       "top1": 1,
+      "top5": 7,
       "top10": 8
     },
     "本": {
       "cases": 11,
       "top1": 0,
+      "top5": 0,
       "top10": 0
     },
     "末": {
       "cases": 11,
       "top1": 1,
+      "top5": 3,
       "top10": 9
     },
     "未": {
       "cases": 11,
       "top1": 0,
+      "top5": 2,
       "top10": 3
     },
     "土": {
       "cases": 11,
       "top1": 8,
+      "top5": 9,
       "top10": 10
     },
     "士": {
       "cases": 11,
       "top1": 0,
+      "top5": 0,
       "top10": 0
     },
     "口": {
       "cases": 11,
       "top1": 4,
+      "top5": 10,
       "top10": 11
     },
     "日": {
       "cases": 11,
       "top1": 1,
+      "top5": 9,
       "top10": 9
     },
     "目": {
       "cases": 11,
       "top1": 1,
+      "top5": 3,
       "top10": 3
     },
     "田": {
       "cases": 11,
       "top1": 0,
+      "top5": 0,
       "top10": 0
     },
     "由": {
       "cases": 11,
       "top1": 4,
+      "top5": 4,
       "top10": 8
     },
     "甲": {
       "cases": 11,
       "top1": 0,
+      "top5": 0,
       "top10": 0
     },
     "申": {
       "cases": 11,
       "top1": 0,
+      "top5": 0,
       "top10": 0
     },
     "中": {
       "cases": 11,
       "top1": 0,
+      "top5": 0,
       "top10": 1
     },
     "王": {
       "cases": 11,
       "top1": 10,
+      "top5": 10,
       "top10": 10
     },
     "玉": {
       "cases": 11,
       "top1": 10,
+      "top5": 11,
       "top10": 11
     },
     "主": {
       "cases": 11,
       "top1": 4,
+      "top5": 5,
       "top10": 6
     },
     "干": {
       "cases": 11,
       "top1": 8,
+      "top5": 9,
       "top10": 10
     },
     "千": {
       "cases": 11,
       "top1": 2,
+      "top5": 5,
       "top10": 5
     },
     "牛": {
       "cases": 11,
       "top1": 10,
+      "top5": 10,
       "top10": 10
     },
     "午": {
       "cases": 11,
       "top1": 1,
+      "top5": 7,
       "top10": 9
     },
     "山": {
       "cases": 11,
       "top1": 5,
+      "top5": 10,
       "top10": 10
     },
     "小": {
       "cases": 11,
       "top1": 6,
+      "top5": 6,
       "top10": 7
     },
     "少": {
       "cases": 11,
       "top1": 9,
+      "top5": 9,
       "top10": 9
     },
     "水": {
       "cases": 11,
-      "top1": 5,
-      "top10": 8
+      "top1": 10,
+      "top5": 11,
+      "top10": 11
     },
     "火": {
       "cases": 11,
       "top1": 1,
-      "top10": 9
+      "top5": 6,
+      "top10": 6
     },
     "明": {
       "cases": 11,
       "top1": 0,
+      "top5": 0,
       "top10": 1
     },
     "好": {
       "cases": 11,
       "top1": 1,
-      "top10": 8
+      "top5": 7,
+      "top10": 9
     },
     "你": {
       "cases": 11,
       "top1": 0,
-      "top10": 0
+      "top5": 1,
+      "top10": 2
     }
   },
   "confusableGroups": [
@@ -241,7 +295,8 @@
         "你": {
           "cases": 11,
           "top1": 0,
-          "top10": 0
+          "top5": 1,
+          "top10": 2
         },
         "他": null,
         "休": null,
@@ -254,11 +309,13 @@
         "日": {
           "cases": 11,
           "top1": 1,
+          "top5": 9,
           "top10": 9
         },
         "目": {
           "cases": 11,
           "top1": 1,
+          "top5": 3,
           "top10": 3
         },
         "白": null,
@@ -271,11 +328,13 @@
         "未": {
           "cases": 11,
           "top1": 0,
+          "top5": 2,
           "top10": 3
         },
         "末": {
           "cases": 11,
           "top1": 1,
+          "top5": 3,
           "top10": 9
         }
       }
@@ -286,11 +345,13 @@
         "土": {
           "cases": 11,
           "top1": 8,
+          "top5": 9,
           "top10": 10
         },
         "士": {
           "cases": 11,
           "top1": 0,
+          "top5": 0,
           "top10": 0
         }
       }
@@ -301,11 +362,13 @@
         "人": {
           "cases": 11,
           "top1": 6,
+          "top5": 10,
           "top10": 10
         },
         "入": {
           "cases": 11,
           "top1": 10,
+          "top5": 10,
           "top10": 10
         }
       }
@@ -316,11 +379,13 @@
         "木": {
           "cases": 11,
           "top1": 1,
+          "top5": 7,
           "top10": 8
         },
         "本": {
           "cases": 11,
           "top1": 0,
+          "top5": 0,
           "top10": 0
         }
       }
@@ -1294,32 +1359,32 @@
       "candidates": "杰乐床小示虫出难承山"
     },
     {
-      "character": "水",
+      "character": "火",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 7.339948204387704,
-      "candidates": "示欢难攻东冰吐永煮泳"
-    },
-    {
-      "character": "水",
-      "kind": "independent-rough",
-      "rank": 0,
-      "score": 6.867394348929421,
-      "candidates": "吐嗦哇难戏冻症吨鸡魂"
-    },
-    {
-      "character": "水",
-      "kind": "missing-stroke",
-      "rank": 0,
-      "score": 7.171990483731742,
-      "candidates": "才考渗汁矛幸牙希珍净"
+      "score": 7.545678787987121,
+      "candidates": "太虫大汰六出天穴止宏"
     },
     {
       "character": "火",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 7.762206302041858,
-      "candidates": "六太宏穴犬汰肃攻大天"
+      "score": 9.12452349837709,
+      "candidates": "六宏汰虫吹止攻武啸赋"
+    },
+    {
+      "character": "火",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 6.882952714913963,
+      "candidates": "太大六天穴女汰灾虫犬"
+    },
+    {
+      "character": "火",
+      "kind": "independent-rough",
+      "rank": 0,
+      "score": 9.238990366505064,
+      "candidates": "宏虫六汰点武成柬庇床"
     },
     {
       "character": "火",
@@ -1360,57 +1425,50 @@
       "character": "明",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 4.654924621341206,
-      "candidates": "萌断阐丽晒阅菌颈国葡"
+      "score": 4.48726997873883,
+      "candidates": "瞧断附殴眶萌渐酷暄薪"
     },
     {
       "character": "明",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 4.426388686500902,
-      "candidates": "国闭闲阂晒圆闹围阐困"
+      "score": 4.933265607642623,
+      "candidates": "酌踢蹈晒瞧瞎萌陋菌断"
     },
     {
       "character": "明",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 4.387018449697702,
-      "candidates": "瞧桨跳萌隧随酌晓暄陵"
+      "score": 4.194037214654389,
+      "candidates": "闲阐阂闹刚闭阔涮阴阅"
     },
     {
       "character": "明",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 4.538252643317472,
-      "candidates": "萌晒踢阴阐闭蹈端颈刚"
+      "score": 4.954703166517595,
+      "candidates": "闭阂闲固闹晒刚阐粥断"
     },
     {
       "character": "明",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 4.898075108921926,
-      "candidates": "丽晒萌踢酌西闭刚蹈瞧"
+      "score": 4.4301222001366485,
+      "candidates": "阐闹围阔固晒国闭阂涮"
     },
     {
       "character": "明",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 4.820201498561255,
-      "candidates": "断渐晤梨晴醋晒瞎殴障"
+      "score": 4.49098678433757,
+      "candidates": "酌跑晒踢蹈瞧菌萌溅隧"
     },
     {
       "character": "好",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 5.371051333776872,
-      "candidates": "师筛辨鲜拌辩胖粹停懈"
-    },
-    {
-      "character": "好",
-      "kind": "independent-rough",
-      "rank": 0,
-      "score": 4.89933236000312,
-      "candidates": "穷辨筛纺辩辫财劳解妨"
+      "score": 5.635025604720389,
+      "candidates": "矩纺妨辨疗穷僻辫财留"
     },
     {
       "character": "好",
@@ -1451,43 +1509,29 @@
       "character": "你",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 4.280203273169915,
-      "candidates": "惊惦前性湾信治洁依恒"
+      "score": 5.738151946287841,
+      "candidates": "穷留您悔储衍缠筒怀假"
     },
     {
       "character": "你",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 4.970135687996771,
-      "candidates": "休沐体怀佩抓弥保悔坏"
+      "score": 5.441442249860234,
+      "candidates": "弥苏练综您溶悔恋滨惮"
     },
     {
       "character": "你",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 5.382232684761898,
-      "candidates": "织佩沫沐津胆案维涨寒"
+      "score": 4.9512903321722375,
+      "candidates": "怀惊悔综弥洁治穷留沛"
     },
     {
       "character": "你",
       "kind": "independent-rough",
       "rank": 0,
-      "score": 4.813217534533745,
-      "candidates": "惊休恒保体徙忧依怀佩"
-    },
-    {
-      "character": "你",
-      "kind": "independent-rough",
-      "rank": 0,
-      "score": 4.1205259827824205,
-      "candidates": "惊休依信住弥惦怀体性"
-    },
-    {
-      "character": "你",
-      "kind": "independent-rough",
-      "rank": 0,
-      "score": 4.202070391762447,
-      "candidates": "沫依沐佩恒体恨泳派维"
+      "score": 5.571956954414306,
+      "candidates": "穷综惊弥湾悔洁惦贴留"
     },
     {
       "character": "你",
@@ -1497,5 +1541,5 @@
       "candidates": "价情贫穷湾惊劳听衍河"
     }
   ],
-  "limitation": "Geometric fixtures and controlled distortions, not a representative multi-writer real-handwriting benchmark or physical iPhone test."
+  "limitation": "Component decomposition data is not shipped, so this build learns confirmed whole-glyph variants only. Geometric fixtures and controlled distortions are not a representative multi-writer real-handwriting benchmark or physical iPhone test."
 }

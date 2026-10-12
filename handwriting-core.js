@@ -37,7 +37,7 @@
   }
   return values;
  }
- function fromBitmap(character,bitmap){if(!bitmap||bitmap.length!==CELLS)return null;const ink=[];for(let i=0;i<CELLS;i++)if(bitmap[i])ink.push(i);if(ink.length<4)return null;return {character,ink,distances:distance(bitmap)};}
+ function fromBitmap(character,bitmap,source='base'){if(!bitmap||bitmap.length!==CELLS)return null;const ink=[];for(let i=0;i<CELLS;i++)if(bitmap[i])ink.push(i);if(ink.length<4)return null;return {character,source,ink,distances:distance(bitmap)};}
  function template(character,strokes){const bitmap=rasterize(strokes);return fromBitmap(character,bitmap);}
  function prepare(data){if(data.version!==1||data.characters.length!==data.samples.length)throw Error('Dữ liệu mẫu chữ không hợp lệ.');return Array.from(data.characters,(character,i)=>template(character,data.samples[i])).filter(Boolean);}
  function recognize(strokes,templates,limit=10){
@@ -45,9 +45,18 @@
   const scores=new Map();for(const candidate of templates){
    let a=0,b=0;for(const i of query.ink)a+=candidate.distances[i]**2;for(const i of candidate.ink)b+=query.distances[i]**2;
    const score=a/query.ink.length+b/candidate.ink.length+4*Math.abs(Math.log(query.ink.length/candidate.ink.length));
-   const previous=scores.get(candidate.character);if(previous===undefined||score<previous)scores.set(candidate.character,score);
+   const group=scores.get(candidate.character)||{base:Infinity,personal:[]};
+   if(candidate.source==='personal')group.personal.push(score);else group.base=Math.min(group.base,score);
+   scores.set(candidate.character,group);
   }
-  const ranked=Array.from(scores,([character,score])=>({character,score})).sort((a,b)=>a.score-b.score||a.character.codePointAt(0)-b.character.codePointAt(0));
+  const ranked=Array.from(scores,([character,group])=>{
+   let score=group.base;
+   if(group.personal.length>=3){
+    const personal=group.personal.sort((a,b)=>a-b),median=personal[Math.floor(personal.length/2)],deviations=personal.map(value=>Math.abs(value-median)).sort((a,b)=>a-b),mad=deviations[Math.floor(deviations.length/2)];
+    if(Number.isFinite(group.base)&&mad<=Math.max(1,median*.35)&&median<group.base)score=group.base-Math.min((group.base-median)*.1,group.base*.1);
+   }
+   return {character,score};
+  }).sort((a,b)=>a.score-b.score||a.character.codePointAt(0)-b.character.codePointAt(0));
   return ranked.slice(0,Math.max(0,Math.min(10,limit)));
  }
  const api={SIZE,rasterize,distance,fromBitmap,prepare,recognize};
