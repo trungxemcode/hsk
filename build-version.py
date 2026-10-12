@@ -11,6 +11,9 @@ if args.version:
   p.write_text(s)
 worker=(root/'offline-worker.js').read_text();version=re.search(r"OFFLINE_VERSION='([^']+)'",worker).group(1)
 files=json.loads(re.search(r'const OFFLINE_FILES=(\[.*?\]);',worker).group(1))
-assets={n:{'sha256':hashlib.sha256((root/n).read_bytes()).hexdigest(),'bytes':(root/n).stat().st_size} for n in files}
+def asset_metadata(name):
+ data=(root/name).read_bytes().replace(b'\r\n',b'\n')
+ return {'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data)}
+assets={n:asset_metadata(n) for n in files}
 (root/'app-version.json').write_text(json.dumps({'version':version,'label':version.removeprefix('hsk-offline-'),'assets':assets},ensure_ascii=False))
 print(f'{version}: {len(assets)} assets')
