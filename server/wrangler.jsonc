@@ -1,0 +1,9 @@
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "hsk-vietnamese-translator",
+  "main": "translator-worker-bundled.mjs",
+  "compatibility_date": "2026-10-12",
+  "workers_dev": true,
+  "placement": { "region": "gcp:us-east4" },
+  "keep_vars": true
+}

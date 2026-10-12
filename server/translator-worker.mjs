@@ -21,7 +21,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-gemini35-compat-20261012';
+export const WORKER_REVISION='hsk-gemini-location-20261012';
 async function geminiFailure(response,model,env){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -29,7 +29,8 @@ async function geminiFailure(response,model,env){
  detail=detail.replace(/AIza[\w-]{20,}/g,'[redacted]').replace(/[\u0000-\u001f\u007f]/g,' ').trim().slice(0,500);
  console.warn('Gemini request rejected',{httpStatus:status,providerStatus,model,workerRevision:WORKER_REVISION});
  const message=status===429?'Đã chạm hạn mức AI. Đợi rồi thử lại.':status===401||status===403?'Gemini từ chối API key hoặc quyền truy cập.':status===404?'Không tìm thấy mô hình Gemini '+model+'.':status===400?'Gemini '+model+' từ chối yêu cầu (HTTP 400)'+(detail?': '+detail:'. Dịch vụ không trả lý do chi tiết.'):'Gemini chưa trả lời được (HTTP '+status+'). Hãy thử lại sau.';
- return {error:message,providerStatus,model,workerRevision:WORKER_REVISION};
+ const locationRejected=status===400&&/user location is not supported/i.test(detail);
+ return {error:locationRejected?'Google từ chối khu vực của kết nối máy chủ AI. Cả hỏi đáp, dịch và đọc ảnh đang tạm ngừng. Cần kiểm tra vị trí chạy Cloudflare Worker và quyền khu vực của dự án Gemini.':message,code:locationRejected?'AI_LOCATION_UNSUPPORTED':'AI_PROVIDER_ERROR',providerStatus,model,workerRevision:WORKER_REVISION};
 }
 export function createHandler(fetchFn=fetch,now=()=>Date.now()){
  const cooldowns=new Map();
@@ -119,3 +120,4 @@ export function createHandler(fetchFn=fetch,now=()=>Date.now()){
  };
 }
 export default {fetch:createHandler()};
+
