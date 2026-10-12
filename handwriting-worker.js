@@ -10,6 +10,9 @@ let templates=[],supported=new Set(),revision='',ready=false;
   templates=core.prepare(base);supported=new Set(Array.from(base.characters));revision=learned.revision;
   if(learned.schema!==1||!Array.isArray(learned.samples))throw Error('Dữ liệu mẫu cải tiến chưa hợp lệ.');
   for(const sample of learned.samples){if(!supported.has(sample.label))continue;templates.push(core.fromBitmap(sample.label,learning.unpack(sample.bitmap),'published'));}
+  // External licensed prototypes are separate from reviewed community releases.
+  // A missing optional pack must not disable base recognition or personal learning.
+  try{const response=await fetch('./handwriting-external.json');if(response.ok){const external=await response.json();if(external.schema!==1||!Array.isArray(external.samples))throw Error('Invalid external pack');for(const sample of external.samples.slice(0,6000)){if(!supported.has(sample.label))continue;try{templates.push(core.fromBitmap(sample.label,learning.unpack(sample.bitmap),'published'));}catch{}}}}catch{}
   templates=templates.filter(Boolean);ready=true;postMessage({type:'ready',characters:base.characters,revision,supported:supported.size,learned:learned.samples.length});
  }catch(error){postMessage({type:'error',message:error.message});}
 })();
