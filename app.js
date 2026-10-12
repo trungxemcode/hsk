@@ -298,6 +298,8 @@ function rebuildDeck(preserve) {
  updateCard();
 }
 function updateCard() {
+ window.HSKSpeech?.stop();
+ document.querySelectorAll('#flashcard .speech-button').forEach(b=>b.remove());
  $('flashcard').classList.remove('flipped'); $('example').classList.remove('show'); $('jumpStatus').textContent='';
  const empty=!currentWords.length;
  for(const id of ['prev','next','shuffle','exampleBtn','jumpBtn','jumpInput'])$(id).disabled=empty;
@@ -314,6 +316,7 @@ function updateCard() {
  $('exampleBtn').hidden=!(w.exCn||w.exVi||w.dictionary);
  $('progress').textContent=`Thẻ: ${index+1} / ${currentWords.length}`;
  $('jumpInput').max=currentWords.length;
+ document.querySelectorAll('#flashcard .front,#flashcard .back').forEach(face=>{const b=window.HSKSpeech?.button(w.han,'Nghe phát âm '+w.han);if(b){b.classList.add('card-speech');face.append(b);}});
  $('flashcard').append(makeMasteryTools(w));
  document.querySelectorAll('#flashcard .front,#flashcard .back').forEach(face=>{
   const label=document.createElement('span'); label.className='status-label';label.textContent=recordOf(w)?(statusOf(w)==='known'?'✓ Đã thuộc':'× Chưa thuộc'):'Chưa đánh dấu';face.append(label);
@@ -321,6 +324,7 @@ function updateCard() {
  stats();
 }
 function switchMode(next) {
+ window.HSKSpeech?.stop();
  mode=next;
  if(next!=='lessons')document.body.classList.remove('show-lessons','lesson-focus');
  if(!['quiz','srs'].includes(next))$('lessonPracticeBack').hidden=true;
