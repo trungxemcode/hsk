@@ -1,0 +1,8 @@
+.speech-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;padding:8px 12px;border:1px solid #c5d5ef;border-radius:12px;background:#f0f6ff;color:#173b73;font:inherit;cursor:pointer;touch-action:manipulation;flex-shrink:0}
+.speech-button:hover,.speech-button.is-speaking{background:#dbeafe;border-color:#2563eb}
+.speech-button:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+.card-speech{position:absolute;right:12px;top:12px;z-index:2}
+.lesson-language-heading{display:flex;align-items:flex-start;gap:10px}
+.lesson-language-heading .lesson-cn{flex:1;min-width:0;margin-top:0}
+.speech-status{position:fixed;bottom:max(14px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);max-width:min(90vw,640px);padding:10px 16px;border-radius:12px;background:#17315b;color:white;z-index:1000;font-size:14px;box-shadow:0 4px 18px #0002;pointer-events:none}
+.speech-status:empty{display:none}

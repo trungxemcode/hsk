@@ -1,0 +1,51 @@
+/* Mandarin pronunciation through the device's Web Speech synthesis engine. */
+(function(root){
+ 'use strict';
+ function chooseVoice(voices){
+  const mandarin=voices.filter(v=>/^(zh|cmn)(-|_|$)/i.test(v.lang)&&!/^zh[-_]hk/i.test(v.lang)&&!/(cantonese|yue)/i.test(v.name));
+  const preferred=mandarin.filter(v=>/^(zh[-_](cn|hans)|cmn[-_]cn)/i.test(v.lang));
+  const choices=preferred.length?preferred:mandarin;
+  return choices.find(v=>v.localService)||choices[0]||null;
+ }
+ function chunks(input,max=100){
+  const lines=Array.isArray(input)?input:[input],result=[];
+  for(const line of lines){const text=String(line||'').trim();if(!text)continue;let current='';
+   for(const ch of Array.from(text)){current+=ch;if(/[。！？!?；;\n]/.test(ch)||Array.from(current).length>=max){result.push(current);current='';}}
+   if(current)result.push(current);
+  }return result;
+ }
+ function createPlayer({synth,Utterance,notify=()=>{}}){
+  let token=0,active=null,held=null;
+  const reset=button=>{if(button){button.classList.remove('is-speaking');button.setAttribute('aria-pressed','false');button.setAttribute('aria-label',button.dataset.speechLabel);}};
+  function stop(){token++;reset(active);active=null;held=null;synth?.cancel();}
+  function play(input,button){
+   if(active===button&&active){stop();notify('Đã dừng phát âm.');return;}
+   stop();if(!synth||!Utterance){notify('Trình duyệt chưa hỗ trợ phát âm. Hãy thử Chrome, Edge hoặc Safari.');return;}
+   const parts=chunks(input);if(!parts.length)return;
+   const voice=chooseVoice(synth.getVoices());
+   if(!voice){notify('Chưa tìm thấy giọng tiếng Trung. Hãy thêm giọng Mandarin / Chinese trong cài đặt giọng nói của thiết bị, rồi thử lại.');return;}
+   const id=token;active=button;if(button){button.classList.add('is-speaking');button.setAttribute('aria-pressed','true');button.setAttribute('aria-label','Dừng phát âm');}
+   let index=0;notify('Đang phát âm tiếng Trung…');
+   function next(){
+    if(id!==token)return;
+    if(index===parts.length){reset(active);active=null;held=null;notify('Đã nghe xong.');return;}
+    const utterance=new Utterance(parts[index++]);held=utterance;utterance.voice=voice;utterance.lang=voice.lang||'zh-CN';utterance.rate=.85;utterance.pitch=1;utterance.volume=1;
+    utterance.onend=next;utterance.onerror=event=>{if(id!==token)return;stop();notify(event.error==='network'?'Giọng đọc này cần kết nối mạng. Hãy kết nối hoặc cài giọng tiếng Trung offline.':'Không phát được âm thanh. Kiểm tra âm lượng và giọng tiếng Trung của thiết bị.');};
+    try{synth.speak(utterance);}catch{if(id===token){stop();notify('Không phát được âm thanh. Hãy thử lại.');}}
+   }next();
+  }
+  return {play,stop,get currentUtterance(){return held;}};
+ }
+ const api={chooseVoice,chunks,createPlayer};
+ if(typeof module==='object'&&module.exports){module.exports=api;return;}
+ let status,statusTimer;
+ function notify(message){if(!status){status=document.createElement('p');status.id='speechStatus';status.className='speech-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');document.body.append(status);}status.textContent=message;root.clearTimeout(statusTimer);statusTimer=root.setTimeout(()=>{status.textContent='';},8000);}
+ const player=createPlayer({synth:root.speechSynthesis,Utterance:root.SpeechSynthesisUtterance,notify});
+ // Prime engines whose voice inventory arrives asynchronously; refreshed on every click.
+ root.speechSynthesis?.getVoices();
+ function button(text,label='Nghe phát âm',full=false){
+  const b=document.createElement('button');b.type='button';b.className='speech-button';b.textContent=full?'🔊 '+label:'🔊';b.title=label;b.dataset.speechLabel=label;b.setAttribute('aria-label',label);b.setAttribute('aria-pressed','false');
+  b.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();player.play(typeof text==='function'?text():text,b);});return b;
+ }
+ root.HSKSpeech={...api,button,stop:player.stop};root.addEventListener('pagehide',player.stop);
+})(typeof window==='object'?window:globalThis);

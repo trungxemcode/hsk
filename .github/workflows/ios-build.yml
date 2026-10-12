@@ -22,7 +22,9 @@ jobs:
       - name: Extract iOS sources
         run: unzip -o ios-source.zip
       - name: Prepare offline vocabulary and web app
-        run: node ios/prepare-web.cjs
+        run: |
+          node ios/prepare-web.cjs
+          cp speech.js speech.css ios/Web/
       - name: Test SRS and notification question logic
         run: swiftc ios/HSK/StudyCore.swift ios/Tests/CoreTests.swift -o /tmp/hsk-core-tests && /tmp/hsk-core-tests
       - name: Install project generator

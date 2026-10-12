@@ -62,3 +62,9 @@ Danh sách giáo trình có tên riêng và từ ngoài dữ liệu. Mục chưa
 ## Nhận dạng viết tay nâng cao
 
 Trong khung Vẽ chữ, chọn **Tải nhận dạng nâng cao (~28 MB)**. Tải một lần để nhận dạng trên thiết bị bằng PP-OCRv5 / ONNX Runtime Web; không cần API key, không gửi nét vẽ đến máy chủ. Nhận dạng cơ bản tiếp tục dùng khi chưa tải hoặc mô hình gặp lỗi. Safari/iPhone thực tế chưa được kiểm chứng. Xem `content/handwriting-neural-status.md` để biết kết quả và giới hạn.
+
+## Nghe phát âm
+
+Nút loa trên hai mặt thẻ từ vựng và thẻ từ trong bài học đọc từ bằng giọng Mandarin của thiết bị. Bài đọc / hội thoại có loa cho từng câu và nút nghe toàn nội dung; bấm lại để dừng. Các đoạn dài chia thành lượt đọc ngắn, chỉ đọc phần chữ Trung (không đọc nhãn vai A/B, pinyin hoặc bản dịch). Đổi thẻ hoặc chuyển phần học sẽ dừng phát âm. Không cần API key; offline phụ thuộc giọng tiếng Trung đã cài trên thiết bị. App thông báo nếu trình duyệt không hỗ trợ hoặc chưa có giọng Mandarin. Giọng tổng hợp không phải bản thu âm giáo trình; từ đa âm có thể được thiết bị đọc theo cách đọc mặc định.
+
+Kiểm tra: `node --test server/speech.test.mjs`; `NODE_PATH=PATH_TO_JSDOM node tools/check-speech-dom.cjs`. DOM test dùng speech engine giả lập, chưa kiểm chứng âm thanh thực trên iPhone/Windows.
