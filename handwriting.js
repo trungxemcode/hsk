@@ -2,7 +2,7 @@
  'use strict';
  const $=id=>document.getElementById(id),open=$('handwritingOpen'),panel=$('handwritingPanel'),canvas=$('handwritingCanvas'),ctx=canvas.getContext('2d'),learning=window.HSKHandwritingLearning;
  let worker=null,ready=false,busy=false,characters='',revision='',strokes=[],pointer=null,serial=0,bitmap='',store=null,storeOwner='',config=null;
- const sharingKey='hsk-handwriting-sharing-v1';try{$('handwritingShare').checked=localStorage.getItem(sharingKey)!=='off';}catch{}
+ const sharingKey='hsk-handwriting-sharing-v1';try{$('handwritingShare').checked=localStorage.getItem(sharingKey)==='on';}catch{}
  const status=text=>$('handwritingStatus').textContent=text;
  function currentStore(){const owner=window.HSKAccountDashboard?.user?.uid||'guest';if(store&&storeOwner===owner)return store;storeOwner=owner;store=learning.createStore({storage:{getItem:k=>localStorage.getItem(k),setItem:(k,v)=>localStorage.setItem(k,v)},owner,characters,modelVersion:revision});return store;}
  function learningStatus(extra=''){if(!ready)return;const data=currentStore().stats(),guest=storeOwner==='guest';$('handwritingLearningStatus').textContent=(data.error||`${data.samples} mẫu trên thiết bị · ${data.pending} mẫu chờ gửi`)+(guest?' · Đăng nhập để góp mẫu.':'')+(extra?' · '+extra:'');}
