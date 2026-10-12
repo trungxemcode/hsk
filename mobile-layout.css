@@ -599,7 +599,7 @@ body.show-account .workspace>section:not(#accountPanel){display:none!important}b
 body.show-admin .workspace>section:not(#adminPanel){display:none!important}body.show-admin h1::after{content:"Dashboard"!important}#adminPanel h2{display:block;font-size:20px}#adminPanel input,#adminPanel select{width:100%;margin:8px 0 16px}#adminPanel h3{font-size:17px;margin:24px 0 12px}.admin-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}.admin-kpi{background:white;border:1px solid var(--line);border-radius:14px;padding:14px}.admin-kpi strong{display:block;font-size:24px;color:var(--ink)}.admin-chart{width:100%;height:auto;background:white;border-radius:14px}.admin-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px}.admin-detail-table{width:100%;font-size:13px;border-collapse:collapse}.admin-detail-table th,.admin-detail-table td{padding:8px 3px;border-bottom:1px solid var(--line);text-align:right}.admin-detail-table th:first-child,.admin-detail-table td:first-child{text-align:left}#adminBtn[hidden]{display:none!important}#adminDetail{overflow-wrap:anywhere}
 
 /* Use the inset reported by iOS; the previous forced 60px inset duplicated the status-bar gap. */
-body.ios-standalone{--safe-t:env(safe-area-inset-top,0px)}
+body.ios-standalone{--safe-t:max(env(safe-area-inset-top,0px),44px)}
 body.ios-standalone>h1{min-height:74px}
 @media(orientation:landscape){body.ios-standalone{--safe-t:max(env(safe-area-inset-top,0px),24px)}}
 
