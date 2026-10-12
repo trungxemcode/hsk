@@ -2,6 +2,10 @@
 
 Máy chủ hỗ trợ /translate (dịch câu), /ask (hỏi đáp theo câu) và /ocr (nhận dạng ảnh). Không có khóa Gemini trong mã ứng dụng.
 
+Worker cũng hỗ trợ `/lesson-ask` để hỏi theo bài học. Bản `hsk-gemini35-compat-20261012` khôi phục cấu hình của commit `8be39e5`: model mặc định `gemini-3.5-flash-lite`, temperature `0.2` cho dịch/hỏi đáp và `0` cho OCR. Nếu có biến `GEMINI_MODEL` trên Cloudflare, đặt đúng `gemini-3.5-flash-lite` để dùng model này; biến đó có ưu tiên hơn giá trị mặc định trong code.
+
+Để cập nhật Worker hiện tại, thay toàn bộ mã trong Cloudflare Edit code bằng `translator-worker-bundled.mjs`, rồi Deploy. Bản nguồn và bundle được kiểm tra đồng nhất bằng `node --test --test-isolation=none server/translator-worker.test.mjs` từ thư mục app. Kiểm tra dùng API giả lập, không gọi Gemini thật. Header `X-HSK-Worker-Version` xác nhận mã Worker đang phục vụ; HTTP 400 trả model thực tế và lý do Google gửi về, đã ẩn khóa API. Không ghi log câu hỏi, token hoặc nội dung lỗi provider.
+
 1. Tạo Gemini API key trong Google AI Studio, chọn dự án ở Free tier. Không bật billing/gói trả phí.
 2. Trong tài khoản Cloudflare Workers Free, triển khai thư mục server bằng Wrangler: `npx wrangler deploy`.
 3. Thêm secret bằng `npx wrangler secret put GEMINI_API_KEY`, nhập khóa trong prompt của Wrangler (không đưa vào GitHub hoặc chat).
