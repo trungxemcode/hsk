@@ -92,3 +92,25 @@ test('bundled deployment includes exactly the same handler as the source worker'
  const bundled=await readFile(new URL('./translator-worker-bundled.mjs',import.meta.url),'utf8');
  assert.equal(source.slice(source.indexOf('const schema =')).replace(/\r\n/g,'\n'),bundled.slice(bundled.indexOf('const schema =')).replace(/\r\n/g,'\n'));
 });
+
+
+test('all AI routes identify unsupported upstream location without exposing secrets',async(t)=>{
+ t.mock.method(console,'warn',()=>{});
+ for(const route of ['/lesson-ask','/ask','/translate','/ocr']){
+  const {run}=setup(()=>Response.json({error:{status:'FAILED_PRECONDITION',message:'User location is not supported for the API use. '+env.GEMINI_API_KEY}},{status:400}));
+  const response=await run(route),data=await response.json();
+  assert.equal(response.status,502);
+  assert.equal(data.code,'AI_LOCATION_UNSUPPORTED');
+  assert.match(data.error,/khu vực/);
+  assert.equal(JSON.stringify(data).includes(env.GEMINI_API_KEY),false);
+ }
+});
+
+test('deployment config targets the existing Worker and preserves dashboard variables',async()=>{
+ const config=JSON.parse(await readFile(new URL('./wrangler.jsonc',import.meta.url),'utf8'));
+ assert.equal(config.name,'hsk-vietnamese-translator');
+ assert.equal(config.main,'translator-worker-bundled.mjs');
+ assert.equal(config.placement.region,'gcp:us-east4');
+ assert.equal(config.keep_vars,true);
+ assert.equal(config.vars,undefined);
+});
