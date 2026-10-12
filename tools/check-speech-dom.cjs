@@ -21,8 +21,8 @@ const {JSDOM,VirtualConsole}=require('jsdom'),fs=require('node:fs'),assert=requi
   const nav=label=>[...d.querySelectorAll('.lesson-section-nav button')].find(b=>b.textContent===label);
   nav('Từ vựng').click();d.querySelector('.lesson-card .speech-button').click();assert.equal(spoken.at(-1).text,d.querySelector('.lesson-han').textContent);
   nav('Bài đọc').click();const line=d.querySelector('.lesson-reading-body .lesson-language-line');line.querySelector('.speech-button').click();const expected=w.HSKSpeech.chunks(line.querySelector('.lesson-cn').textContent)[0];assert.equal(spoken.at(-1).text,expected);
-  const fullReading=[...d.querySelectorAll('button')].find(b=>b.textContent==='🔊 Nghe toàn bài đọc');assert.ok(fullReading);fullReading.click();assert.equal(spoken.at(-1).text,expected);
-  nav('Hội thoại').click();const dialogue=d.querySelector('.lesson-dialogue'),speechButton=dialogue.querySelector('.lesson-language-line .speech-button');speechButton.click();assert.ok(!/^[AB][:：]/.test(spoken.at(-1).text),'speaker labels not spoken');assert.ok(dialogue.querySelector('button').textContent.includes('Nghe toàn hội thoại'));
+  const fullReading=d.querySelector('.speech-button-full[aria-label="Nghe toàn bài đọc"]');assert.ok(fullReading);assert.equal(fullReading.textContent,'Nghe toàn bài đọc');fullReading.click();assert.equal(spoken.at(-1).text,expected);
+  nav('Hội thoại').click();const dialogue=d.querySelector('.lesson-dialogue'),speechButton=dialogue.querySelector('.lesson-language-line .speech-button');speechButton.click();assert.ok(!/^[AB][:：]/.test(spoken.at(-1).text),'speaker labels not spoken');assert.equal(dialogue.querySelector('.speech-button-full').textContent,'Nghe toàn hội thoại');
   assert.deepEqual(errors,[]);process.stdout.write('PASS: actual app load, front/back card speaker, next card, lesson vocabulary, sentence reading, full passage and dialogue; mocked audio only.\n');
  }finally{clearTimeout(timeout);dom.window.close();server.close();}
 })().catch(e=>{console.error(e);process.exit(1);});

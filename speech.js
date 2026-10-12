@@ -44,7 +44,10 @@
  // Prime engines whose voice inventory arrives asynchronously; refreshed on every click.
  root.speechSynthesis?.getVoices();
  function button(text,label='Nghe phát âm',full=false){
-  const b=document.createElement('button');b.type='button';b.className='speech-button';b.textContent=full?'🔊 '+label:'🔊';b.title=label;b.dataset.speechLabel=label;b.setAttribute('aria-label',label);b.setAttribute('aria-pressed','false');
+  const b=document.createElement('button');b.type='button';b.className='speech-button'+(full?' speech-button-full':'');
+  b.innerHTML='<svg class="speech-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+  if(full){const caption=document.createElement('span');caption.textContent=label;b.append(caption);}
+  b.title=label;b.dataset.speechLabel=label;b.setAttribute('aria-label',label);b.setAttribute('aria-pressed','false');
   b.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();player.play(typeof text==='function'?text():text,b);});return b;
  }
  root.HSKSpeech={...api,button,stop:player.stop};root.addEventListener('pagehide',player.stop);
