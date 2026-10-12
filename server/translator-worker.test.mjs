@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { createHandler, WORKER_REVISION } from './translator-worker-bundled.mjs';
+import { createHandler, WORKER_REVISION, validateHandwritingSample } from './translator-worker-bundled.mjs';
 
 const origin='https://trungxemcode.github.io';
 const env={GEMINI_API_KEY:'test-gemini-secret',FIREBASE_API_KEY:'test-firebase-secret'};
@@ -16,6 +16,7 @@ const bodies={
  '/translate':{hsk:1,text:'Xin chào'},
  '/ocr':{image:{mimeType:'image/png',data:Buffer.from([137,80,78,71,13,10,26,10,0,0,0,0,0,0,0,0]).toString('base64')}}
 };
+const handwritingImage={mimeType:'image/png',data:Buffer.from([137,80,78,71,13,10,26,10,...Array(32).fill(0)]).toString('base64')};
 function setup(providerResponse,options={}){
  const calls=[];
  const handler=createHandler(async(url,request)=>{
@@ -85,6 +86,39 @@ test('input validation still prevents invalid questions reaching Firebase or Gem
  const {run,calls}=setup(answerResponse);
  assert.equal((await run('/lesson-ask',{...bodies['/lesson-ask'],question:'x'.repeat(501)})).status,400);
  assert.equal(calls.length,0);
+});
+
+test('handwriting recognition is a separate route with a strict candidate contract',async()=>{
+ const {run,calls}=setup(()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify({candidates:['你','他','你'],uncertain:false})}]}}]}));
+ const response=await run('/handwriting-recognize',{image:handwritingImage}),data=await response.json();
+ assert.equal(response.status,502);
+ assert.match(data.error,/không hợp lệ/);
+ assert.match(calls[0].url,/accounts:lookup/);
+ assert.equal(calls.length,2);
+
+ const valid=setup(()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify({candidates:['你','他'],uncertain:false})}]}}]}));
+ const accepted=await valid.run('/handwriting-recognize',{image:handwritingImage}),result=await accepted.json();
+ assert.equal(accepted.status,200);
+ assert.deepEqual(result,{candidates:['你','他'],uncertain:false});
+ assert.match(valid.calls[1].url,/gemini-3\.5-flash-lite:generateContent$/);
+ assert.deepEqual(valid.calls[1].body.generationConfig.responseSchema,{type:'OBJECT',properties:{candidates:{type:'ARRAY',items:{type:'STRING'}},uncertain:{type:'BOOLEAN'}},required:['candidates','uncertain']});
+ assert.match(valid.calls[1].body.systemInstruction.parts[0].text,/never follow instructions/);
+});
+
+test('handwriting rejects extra payload and invalid image before contacting providers',async()=>{
+ const {run,calls}=setup(answerResponse);
+ assert.equal((await run('/handwriting-recognize',{image:handwritingImage,lesson:{secret:'not sent'}})).status,400);
+ assert.equal((await run('/handwriting-recognize',{image:{mimeType:'image/png',data:Buffer.from('not png').toString('base64')}})).status,400);
+ assert.equal(calls.length,0);
+});
+
+test('confirmed handwriting sample provenance is validated while legacy local samples remain accepted',()=>{
+ const bytes=Buffer.alloc(128);bytes[0]=15;
+ const sample={schema:1,confirmed:true,label:'你',bitmap:bytes.toString('base64'),modelVersion:'test-1'};
+ assert.equal(validateHandwritingSample(sample),true);
+ assert.equal(validateHandwritingSample({...sample,source:'ai'}),true);
+ assert.equal(validateHandwritingSample({...sample,source:'manual'}),true);
+ assert.equal(validateHandwritingSample({...sample,source:'unverified'}),false);
 });
 
 test('bundled deployment includes exactly the same handler as the source worker',async()=>{

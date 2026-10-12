@@ -10,11 +10,12 @@
   const valid=s=>{try{return s&&allowed.has(s.label)&&!!unpack(s.bitmap);}catch{return false;}};
   try{const data=JSON.parse(storage.getItem(key)||'null');if(data?.schema===1){state.samples=(data.samples||[]).filter(valid).slice(-MAX_SAMPLES);state.queue=(data.queue||[]).filter(valid).slice(-MAX_QUEUE);}}catch{}
   function save(next){try{storage.setItem(key,JSON.stringify(next));state=next;lastSaveError='';return true;}catch{lastSaveError='Bộ nhớ đầy; mẫu này chưa được lưu.';return false;}}
-  function record(label,bitmap,{confirmed=false,share=false}={}){
+  function record(label,bitmap,{confirmed=false,share=false,source='local'}={}){
    if(!confirmed)throw Error('Cần xác nhận chữ đúng trước khi học.');
    if(!allowed.has(label)||Array.from(label).length!==1)throw Error('Chữ này không có trong dữ liệu HSK của app.');
    unpack(bitmap);
-   const sample={label,bitmap,modelVersion,updatedAt:now()},samples=state.samples.filter(s=>s.bitmap!==bitmap);
+   if(!['local','ai','manual'].includes(source))throw Error('Nguồn gợi ý không hợp lệ.');
+   const sample={label,bitmap,modelVersion,source,updatedAt:now()},samples=state.samples.filter(s=>s.bitmap!==bitmap);
    samples.push(sample);
    while(samples.filter(s=>s.label===label).length>PER_CHARACTER)samples.splice(samples.findIndex(s=>s.label===label),1);
    const queue=state.queue.filter(s=>s.bitmap!==bitmap);
@@ -31,7 +32,7 @@
     for(const sample of [...state.queue]){
      if(!state.queue.some(s=>s.bitmap===sample.bitmap&&s.label===sample.label))continue;
      const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);
-     let response;try{response=await fetchFn(url.href,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({schema:1,label:sample.label,bitmap:sample.bitmap,modelVersion:sample.modelVersion,confirmed:true}),signal:controller.signal});}finally{clearTimeout(timer);}
+     let response;try{response=await fetchFn(url.href,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({schema:1,label:sample.label,bitmap:sample.bitmap,modelVersion:sample.modelVersion,source:sample.source||'local',confirmed:true}),signal:controller.signal});}finally{clearTimeout(timer);}
      if(!response.ok){error=response.status===401?'Đăng nhập lại để gửi mẫu.':response.status===429?'Gửi mẫu đạt giới hạn; app sẽ thử lại khi bạn dùng tiếp.':'Chưa gửi được mẫu; mẫu vẫn được giữ trên thiết bị.';break;}
      const result=await response.json();if(result.accepted!==true){error='Dịch vụ chưa xác nhận lưu mẫu.';break;}
      if(!save({...state,queue:state.queue.filter(s=>s.bitmap!==sample.bitmap||s.label!==sample.label)})){error=lastSaveError;break;}sent++;

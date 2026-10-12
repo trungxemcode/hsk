@@ -23,6 +23,7 @@
 <script src="./lesson-chat.js?v=lesson-chat-2" defer></script>
 <link rel="stylesheet" href="./handwriting.css?v=handwriting-1">
 <script src="./handwriting-learning.js?v=handwriting-1" defer></script>
+<script src="./handwriting-core.js?v=handwriting-1" defer></script>
 <script src="./handwriting.js?v=handwriting-1" defer></script>
 </head>
 
@@ -110,12 +111,12 @@
       <div class="handwriting-head"><strong>Vẽ một chữ Hán · Thử nghiệm</strong><button id="handwritingClose" type="button" aria-label="Đóng khung vẽ">×</button></div>
       <p class="hint">Vẽ theo thứ tự nét bất kỳ, rồi chọn chữ đúng. Gợi ý có thể sai; app không chấm bài luyện viết.</p>
       <div class="handwriting-board"><canvas id="handwritingCanvas" width="640" height="640" aria-label="Khung vẽ một chữ Hán bằng cảm ứng, bút hoặc chuột"></canvas></div>
-      <div class="handwriting-actions"><button id="handwritingClear" type="button">Xóa</button><button id="handwritingRecognize" type="button" disabled>Nhận dạng</button></div>
+      <div class="handwriting-actions"><button id="handwritingClear" type="button">Xóa</button><button id="handwritingRecognize" type="button" disabled>Nhận dạng offline</button><button id="handwritingAI" type="button" disabled>Nhờ AI nhận dạng</button><button id="handwritingCancelAI" type="button" hidden>Hủy</button></div>
       <p id="handwritingStatus" class="hint" role="status" aria-live="polite"></p>
       <div id="handwritingCandidates" class="handwriting-candidates" aria-label="Chọn chữ bạn vừa vẽ"></div>
       <form id="handwritingCorrection" class="handwriting-correction" hidden><label for="handwritingCorrectChar">Không có chữ đúng? Nhập một chữ Hán rồi xác nhận:</label><div><input id="handwritingCorrectChar" autocomplete="off" aria-label="Chữ Hán đúng" placeholder="好" required><button type="submit">Xác nhận chữ đúng</button></div></form>
       <label class="handwriting-share"><input id="handwritingShare" type="checkbox"> Góp mẫu đã xác nhận để cải thiện gợi ý chung</label>
-      <p class="hint">Nhận dạng chạy trên thiết bị, dùng được offline sau khi tải đủ dữ liệu. Khi bạn xác nhận chữ đúng, mẫu được ghi nhớ trên thiết bị; nếu bật góp mẫu, app gửi ảnh nét đã chuẩn hóa khi có mạng và đã đăng nhập. Mẫu chung được kiểm tra trước khi đưa vào bản cập nhật offline.</p>
+      <p class="hint">Nhận dạng offline chạy trên thiết bị. Nhờ AI sẽ gửi riêng ảnh ô vẽ lên máy chủ; cần mạng và đăng nhập. AI chỉ gợi ý, bạn chọn chữ đúng. Việc dùng AI không bật góp mẫu. Mẫu chỉ được gửi để cải thiện khi bạn bật góp mẫu và xác nhận chữ đúng.</p>
       <p id="handwritingLearningStatus" class="hint" role="status"></p><button id="handwritingForget" type="button">Xóa mẫu đã học trên thiết bị</button><button id="handwritingMeaningSearch" type="button">Trở lại tìm nghĩa tiếng Việt</button>
       <small class="handwriting-credit">Hình chữ Arphic © 1999, không có bảo đảm; cho phép chia sẻ/chỉnh sửa theo APL. <a href="./handwriting-notice.html" target="_blank" rel="noopener">Nguồn và giấy phép</a>.</small>
     </section>
