@@ -27,7 +27,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
     await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(40);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+1),false,mode+' overflow at '+width);
    }
    await page.evaluate(()=>window.HSKStudio.navigate('practice'));const color=await page.locator('#studioPractice .hub-content strong').first().evaluate(el=>getComputedStyle(el).color);assert.equal(color,'rgb(32, 32, 51)');
-   await page.waitForTimeout(350);await page.screenshot({path:'/tmp/studio-practice-'+width+'.png',fullPage:true});
+   await page.waitForTimeout(350);if(width===390){const overlap=await page.evaluate(()=>document.querySelector('#speechStatus').getBoundingClientRect().bottom>document.querySelector('.bottom-nav').getBoundingClientRect().top);assert.equal(overlap,false,'speech status must clear phone navigation');}await page.screenshot({path:'/tmp/studio-practice-'+width+'.png',fullPage:true});
   }
   // All known core modules and controls still exist, including protected admin UI.
   for(const id of ['accountSync','accountBackup','adminRefresh','handwritingAdvanced','handwritingAI','handwritingCorrectChar','translationAskSubmit','lessonChatSend','memoryCalendar'])assert.equal(await page.locator('#'+id).count(),1,id);
