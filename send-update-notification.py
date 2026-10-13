@@ -1,6 +1,7 @@
 """Notify only opted-in devices after the exact web version is live."""
 import json
 import os
+import time
 import urllib.error
 import urllib.request
 import uuid
@@ -28,9 +29,20 @@ def main():
         raise SystemExit('OneSignal secrets missing: update push cannot be sent.')
     manifest = json.loads(Path('app-version.json').read_text())
     try:
-        with urllib.request.urlopen(SITE + 'app-version.json?release=' + manifest['version'], timeout=25) as response:
-            live = json.load(response)
-        if live['version'] != manifest['version']:
+        # Native Pages deployments do not reliably emit a workflow_run to user workflows.
+        # Wait for the deployed manifest rather than notifying from an unverified push.
+        live = {}
+        for attempt in range(12):
+            try:
+                with urllib.request.urlopen(SITE + 'app-version.json?release=' + manifest['version'], timeout=10) as response:
+                    live = json.load(response)
+                if live.get('version') == manifest['version']:
+                    break
+            except (urllib.error.URLError, TimeoutError, ValueError):
+                pass
+            if attempt < 11:
+                time.sleep(10)
+        if live.get('version') != manifest['version']:
             raise SystemExit('Live version differs: refusing premature/stale update notification.')
         request = urllib.request.Request('https://api.onesignal.com/notifications?c=push',
             data=json.dumps(payload(app_id, manifest)).encode(),
