@@ -1,7 +1,7 @@
 name: Studio layout checks
 on:
   pull_request:
-    paths: ['index.html', 'studio.js', 'studio-layout.css', 'tools/check-studio-ui.cjs', '.github/workflows/studio-ui.yml']
+    paths: ['index.html', 'studio.js', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-reading-dom.cjs', '.github/workflows/studio-ui.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -18,6 +18,8 @@ jobs:
           node-version: '22'
       - name: Install test dependencies
         run: npm install --prefix /tmp/hsk-tests jsdom@26.1.0 playwright@1.56.1
+      - name: Install Chinese fonts for visual checks
+        run: sudo apt-get update -qq && sudo apt-get install -y fonts-noto-cjk
       - name: Functional regression checks
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules

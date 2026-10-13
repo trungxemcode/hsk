@@ -39,6 +39,8 @@ const iconPaths={
 function renderIcons(){document.querySelectorAll('[data-icon]').forEach(el=>{const key=el.getAttribute('data-icon');if(iconPaths[key]){el.innerHTML=`<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${iconPaths[key]}</svg>`}})}
 renderIcons();
  const $=id=>document.getElementById(id),main=document.querySelector('.workspace');
+ function decorateControls(){main.querySelectorAll('.panel-box button:not(.speech-button):not(.mastery-btn)').forEach(b=>b.classList.add('studio-action'));}
+ decorateControls();new MutationObserver(decorateControls).observe(main,{subtree:true,childList:true});
  const labels={home:'Tổng quan',lessons:'Bài học',practice:'Luyện tập',review:'Ôn tập',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn tập SRS',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
  const parents={learn:'practice',quiz:'practice',compare:'practice',srs:'review',mistakes:'review',translator:'search',about:'home'};
  let ready=false,route='home',lastOwner='',fingerprint='',activityTimer,refreshTimer;
@@ -86,7 +88,7 @@ renderIcons();
  }
  document.querySelectorAll('[data-studio-go]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.studioGo)));
  $('levelPill').replaceChildren();const levelText=document.createElement('span');levelText.id='studioLevelText';levelText.textContent='Tất cả HSK';$('levelPill').append(levelText);
- document.querySelectorAll('.app-tabs button,#accountBtn,#translatorBtn,#adminBtn,#aboutBtn,[data-filter]').forEach(b=>b.addEventListener('click',()=>{clearHub();queueMicrotask(()=>{title(coreView());refresh();});},true));
+ document.querySelectorAll('.app-tabs button,#accountBtn,#translatorBtn,#adminBtn,#aboutBtn,[data-filter]').forEach(b=>b.addEventListener('click',()=>{clearHub();queueMicrotask(()=>{if(!document.body.dataset.studioHub)title(coreView());refresh();});},true));
  new MutationObserver(()=>{if(!document.body.dataset.studioHub)title(coreView());}).observe(document.body,{attributes:true,attributeFilter:['class']});
  new MutationObserver(()=>{if(!document.body.dataset.studioHub)title(coreView());}).observe(document.querySelector('.app-tabs'),{subtree:true,attributes:true,attributeFilter:['class']});
  new MutationObserver(refresh).observe($('adminBtn'),{attributes:true,attributeFilter:['hidden']});

@@ -220,3 +220,5 @@ body.studio-enabled .studio-account-overview{margin-top:20px}
 body.studio-enabled .hero-button,body.studio-enabled .level-pill,body.studio-enabled .avatar-button,body.studio-enabled .menu-button{min-height:44px}body.studio-enabled .avatar-button{width:44px;height:44px}
 
 body.studio-enabled details.lesson-vocab{display:block;grid-template-columns:none}
+
+body.studio-enabled .studio-action{background:#f0edff;color:#5141c3;border:1px solid #ded8f5;border-radius:11px;min-height:44px;padding:10px 14px;font-size:14px}

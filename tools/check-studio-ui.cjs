@@ -7,10 +7,10 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   const page=await browser.newPage({viewport:{width:1440,height:1000}});page.on('pageerror',e=>errors.push(e.message));
   await page.route('**/account-config.json',route=>route.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
   await page.route('https://**/*',route=>route.abort());
-  await page.addInitScript(()=>{window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>[{name:'Test Mandarin',lang:'zh-CN',localService:true}],cancel(){},speak(u){window.__spoken=u.text;}}});});
+  await page.addInitScript(()=>{window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>[{name:'Test Mandarin',lang:'zh-CN',localService:true}],cancel(){},speak(u){window.__spoken=u.text;setTimeout(()=>u.onend?.(),10);}}});});
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`);await page.waitForFunction(()=>!!window.HSKLessons&&document.body.dataset.studioHub==='home',{timeout:60000});
   const nav=async mode=>{await page.locator('.sidebar [data-studio-go="'+mode+'"]').click();};
-  await nav('practice');await page.locator('#studioPractice [data-studio-go="learn"]').click();await page.locator('#flashcard').waitFor({state:'visible'});
+  await nav('practice');await page.waitForTimeout(350);assert.equal(await page.locator('#activeTitle').innerText(),'Luyện tập');await page.locator('#studioPractice [data-studio-go="learn"]').click();await page.locator('#flashcard').waitFor({state:'visible'});
   await page.locator('#flashcard .front .speech-button').click();assert.ok(await page.evaluate(()=>!!window.__spoken));assert.equal(await page.locator('#flashcard').evaluate(el=>el.classList.contains('flipped')),false);
   await page.locator('#flashcard .mastery-btn.known').click();await page.waitForTimeout(180);await nav('account');assert.equal(await page.locator('#studioStreak').innerText(),'1 ngày');assert.ok(await page.locator('#offlineUpdate').isDisabled());
   await page.locator('#studioTargetLevel').selectOption('1');assert.match(await page.locator('#studioKnownCount').innerText(),/^1 \/ /);
@@ -27,7 +27,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
     await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(40);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+1),false,mode+' overflow at '+width);
    }
    await page.evaluate(()=>window.HSKStudio.navigate('practice'));const color=await page.locator('#studioPractice .hub-content strong').first().evaluate(el=>getComputedStyle(el).color);assert.equal(color,'rgb(32, 32, 51)');
-   await page.screenshot({path:'/tmp/studio-practice-'+width+'.png',fullPage:true});
+   await page.waitForTimeout(350);await page.screenshot({path:'/tmp/studio-practice-'+width+'.png',fullPage:true});
   }
   // All known core modules and controls still exist, including protected admin UI.
   for(const id of ['accountSync','accountBackup','adminRefresh','handwritingAdvanced','handwritingAI','handwritingCorrectChar','translationAskSubmit','lessonChatSend','memoryCalendar'])assert.equal(await page.locator('#'+id).count(),1,id);
