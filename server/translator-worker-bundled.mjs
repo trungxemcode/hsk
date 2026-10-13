@@ -48,7 +48,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-handwriting-ai-20261012-1';
+export const WORKER_REVISION='hsk-study-planner-20261013-1';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -68,7 +68,7 @@ export function createHandler(fetchFn=fetch,now=()=>Date.now()){
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
   Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
-  const route=new URL(request.url).pathname,isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize';
+  const route=new URL(request.url).pathname,isPlan=route==='/study-plan-review',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize';
   if(route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting)return reply({error:'Không tìm thấy dịch vụ.'},404);
   if(request.method!=='POST')return reply({error:'Yêu cầu không hợp lệ.'},405);
   if(!env.FIREBASE_API_KEY||!isSample&&!env.GEMINI_API_KEY)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
@@ -92,6 +92,9 @@ export function createHandler(fetchFn=fetch,now=()=>Date.now()){
    if(!im||!['image/jpeg','image/png','image/webp'].includes(im.mimeType)||typeof im.data!=='string'||im.data.length<16||im.data.length>2000000||im.data.length%4||!/^[A-Za-z0-9+/]+={0,2}$/.test(im.data))return reply({error:'Ảnh không hợp lệ. Dùng ảnh JPG, PNG hoặc WebP dưới 1,5 MB sau nén.'},400);
    const sig=atob(im.data.slice(0,16));
    if(!(im.mimeType==='image/jpeg'&&sig.startsWith('\xff\xd8\xff')||im.mimeType==='image/png'&&sig.startsWith('\x89PNG\r\n\x1a\n')||im.mimeType==='image/webp'&&sig.startsWith('RIFF')&&sig.slice(8,12)==='WEBP'))return reply({error:'Định dạng ảnh không khớp nội dung.'},400);
+  }else if(isPlan){
+   const s=body.stats,fields=['ratio','attempts','accuracy','recalls','retention','meanMinutes','actual','expected','remaining','daysLeft','minutes','budget'];
+   if(Object.keys(body).some(k=>!['hsk','signal','stats'].includes(k))||!['fast','steady','slow'].includes(body.signal)||!s||typeof s!=='object'||Object.keys(s).some(k=>!fields.includes(k))||!fields.every(k=>(['accuracy','retention'].includes(k)&&s[k]===null)||Number.isFinite(s[k])&&s[k]>=0&&s[k]<=100000)||s.accuracy!==null&&s.accuracy>1||s.retention!==null&&s.retention>1||s.minutes>240||s.budget>240)return reply({error:'Thống kê kế hoạch không hợp lệ.'},400);
   }else if(isLessonAsk){
    const l=body.lesson,h=body.history;
    if(typeof body.question!=='string'||!body.question.trim()||body.question.length>500||!l||typeof l.id!=='string'||typeof l.title!=='string'||!Array.isArray(l.words)||l.words.length>150||!l.content||typeof l.content!=='object'||JSON.stringify(l).length>45000||!Array.isArray(h)||h.length>8||!h.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.text==='string'&&m.text.length<=5000))return reply({error:'Câu hỏi hoặc nội dung bài học không hợp lệ.'},400);
@@ -112,6 +115,17 @@ export function createHandler(fetchFn=fetch,now=()=>Date.now()){
    if(cooldowns.size>1000)for(const [uid,t] of cooldowns)if(t<=now())cooldowns.delete(uid);
    cooldowns.set(cooldownKey,now()+(isHandwriting?5000:10000));
    const level=body.hsk,model=env.GEMINI_MODEL||'gemini-3.5-flash-lite';
+   if(isPlan){
+    if(!/^[a-z0-9.-]+$/.test(model))return reply({error:'Cấu hình mô hình chưa hợp lệ.'},503);
+    const instruction='You review an HSK study schedule using only aggregate numeric statistics. Reply in Vietnamese. Do not guarantee an exam pass. Return JSON action keep, accelerate, or slow and a concise reason. Acceleration is allowed only when signal=fast, attempts>=20, accuracy>=0.9, recalls>=10, retention>=0.85; otherwise never accelerate. If signal=slow explain the choice of extending the deadline or extra study within the budget; never select that choice for the user. Do not invent dates or scores.';
+    const response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify({systemInstruction:{parts:[{text:instruction}]},contents:[{role:'user',parts:[{text:JSON.stringify(body)}]}],generationConfig:{temperature:0.2,maxOutputTokens:400,responseMimeType:'application/json',responseSchema:{type:'OBJECT',properties:{action:{type:'STRING',enum:['keep','accelerate','slow']},reason:{type:'STRING'}},required:['action','reason']}}})});
+    if(!response.ok)return reply(await geminiFailure(response,model,env),response.status===429?429:502);
+    const payload=await response.json();let result;try{result=JSON.parse(payload.candidates?.[0]?.content?.parts?.map(p=>p.text||'').join('')||'');}catch{return reply({error:'AI chưa trả đánh giá hợp lệ.'},502);}
+    if(!['keep','accelerate','slow'].includes(result.action)||typeof result.reason!=='string'||!result.reason.trim()||result.reason.length>1500)return reply({error:'AI chưa trả đánh giá hợp lệ.'},502);
+    const s=body.stats;if(result.action==='accelerate'&&(body.signal!=='fast'||s.attempts<20||s.accuracy===null||s.accuracy<.9||s.recalls<10||s.retention===null||s.retention<.85))result.action='keep';
+    if(body.signal==='slow')result.action='slow';return reply({action:result.action,reason:result.reason});
+   }
+
    if(isHandwriting){
     const handwritingModel=env.HANDWRITING_MODEL||'gemini-3.5-flash-lite';
     if(!/^[a-z0-9.-]+$/.test(handwritingModel))return reply({error:'Cấu hình mô hình nhận dạng chưa hợp lệ.'},503);

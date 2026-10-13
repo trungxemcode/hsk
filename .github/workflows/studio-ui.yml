@@ -1,7 +1,7 @@
 name: Studio layout checks
 on:
   pull_request:
-    paths: ['index.html', 'studio.js', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-reading-dom.cjs', '.github/workflows/studio-ui.yml']
+    paths: ['index.html', 'studio.js', 'planner.js', 'planner-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-reading-dom.cjs', '.github/workflows/studio-ui.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -28,6 +28,7 @@ jobs:
           node tools/check-speech-dom.cjs
           node tools/check-reading-dom.cjs
           node tools/check-studio-dom.cjs
+          node tools/check-planner-dom.cjs
       - name: Browser layout and controls
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules

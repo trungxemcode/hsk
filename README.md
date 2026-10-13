@@ -78,3 +78,12 @@ Sidebar desktop và điều hướng mobile tổ chức thành Tổng quan, Bài
 Chuỗi ngày và giờ học được ghi từ bản này trên thiết bị, khi tương tác làm thay đổi tiến độ/lịch sử học thật. Nhật ký dùng khóa riêng `hsk-studio-activity-v1:<uid hoặc guest>`; không sửa khóa học cũ và chưa đồng bộ nhật ký này lên cloud. Dữ liệu thiếu hiển thị trạng thái chưa đủ dữ liệu. Bộ cập nhật gốc giữ quyền tải/cài đặt, nút Cập nhật bị khóa đến khi bản mới tải xong và sẵn sàng áp dụng.
 
 Kiểm tra: `node --test server/*.test.mjs`; các script DOM `check-speech-dom.cjs`, `check-reading-dom.cjs`, `check-studio-dom.cjs`; browser desktop/mobile `check-studio-ui.cjs` (Playwright, Chrome). GitHub Actions `Studio layout checks` chạy các kiểm tra này và lưu ảnh nội bộ. Gói iOS sao chép đủ tài nguyên từ manifest, giữ loader native.
+
+
+## Kế hoạch học theo mục tiêu
+
+`planner-core.js` tính ba nhịp học theo số từ chưa thuộc đến cấp mục tiêu, nền tảng tự khai báo, số ngày học và giới hạn phút/ngày. Không cam kết đạt chứng chỉ; chưa có đánh giá đầu vào nghe/đọc toàn diện. `planner.js` lưu kế hoạch và nhật ký riêng trong `hsk-study-plan-v1:<uid hoặc guest>`; chưa đồng bộ cloud. Kế hoạch không ghi đè tiến độ từ, bài học hay SRS. Nhiệm vụ mở handler học thật, ưu tiên từ chưa học, SRS đến hạn trong phạm vi mục tiêu, bài tiếp theo và bài kiểm tra.
+
+Thời gian chỉ ghi khi trang hiện, có focus và có thao tác học gần đây; không tính thời gian tab chạy nền. Tăng tốc cần ít nhất 7 ngày, vượt tiến độ, đủ bài kiểm tra đúng và lần nhớ lại cách ngày. Không dùng đánh dấu Đã thuộc đơn thuần làm chứng cứ nhớ lâu. Checkbox AI cho phép gửi thống kê số tổng hợp (không email, từ vựng, bài viết hay token trong nội dung) đến `/study-plan-review`, dùng cơ chế Firebase/Gemini hiện có. Tăng tốc tối đa khoảng 10% mỗi lần, trong giới hạn thời gian; có hoàn tác. Chậm tiến độ chỉ đề xuất giãn hạn hoặc học bù; luôn chờ người học chọn. Lỗi mạng, auth hay AI không đổi lịch.
+
+Endpoint mới cần triển khai Worker từ `server/wrangler.jsonc` sau khi kiểm tra; bundle đã đồng bộ bằng `node tools/build-worker-bundle.cjs`. Giữ nguyên secrets và model hiện có. Nếu Worker chưa nâng cấp, UI báo rõ dịch vụ tinh chỉnh chưa triển khai và vẫn giữ kế hoạch local. Kiểm tra: `node --test server/planner.test.mjs`, `node tools/check-planner-dom.cjs` và browser `check-studio-ui.cjs`.
