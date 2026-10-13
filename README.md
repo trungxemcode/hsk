@@ -68,3 +68,13 @@ Trong khung Vẽ chữ, chọn **Tải nhận dạng nâng cao (~28 MB)**. Tải
 Nút loa trên hai mặt thẻ từ vựng và thẻ từ trong bài học đọc từ bằng giọng Mandarin của thiết bị. Bài đọc / hội thoại có loa cho từng câu và nút nghe toàn nội dung; bấm lại để dừng. Các đoạn dài chia thành lượt đọc ngắn, chỉ đọc phần chữ Trung (không đọc nhãn vai A/B, pinyin hoặc bản dịch). Đổi thẻ hoặc chuyển phần học sẽ dừng phát âm. Không cần API key; offline phụ thuộc giọng tiếng Trung đã cài trên thiết bị. App thông báo nếu trình duyệt không hỗ trợ hoặc chưa có giọng Mandarin. Giọng tổng hợp không phải bản thu âm giáo trình; từ đa âm có thể được thiết bị đọc theo cách đọc mặc định.
 
 Kiểm tra: `node --test server/speech.test.mjs`; `NODE_PATH=PATH_TO_JSDOM node tools/check-speech-dom.cjs`. DOM test dùng speech engine giả lập, chưa kiểm chứng âm thanh thực trên iPhone/Windows.
+
+## Giao diện Studio · 13/10/2026
+
+Sidebar desktop và điều hướng mobile tổ chức thành Tổng quan, Bài học, Luyện tập, Ôn tập, Tra cứu và Tài khoản. Các màn cũ, ID điều khiển, dữ liệu và script học/AI/tài khoản vẫn được giữ. Dịch câu/OCR có tab ở Tra cứu; quản trị nằm trong menu và trang tài khoản nếu được cấp quyền; bài học giữ sáu phần và hỏi đáp AI.
+
+`studio-layout.css` áp hệ màu, icon và phân cấp chữ theo thiết kế đã chốt. `studio.js` chỉ nối các điểm điều hướng mới với nút/handler có sẵn, đọc tiến độ và trình bày thống kê. Cấp đang theo học là mục tiêu được chọn, không phải kết quả đánh giá năng lực. Tiến độ từ vựng = số mục đã thuộc / số mục ở cấp đó trong app.
+
+Chuỗi ngày và giờ học được ghi từ bản này trên thiết bị, khi tương tác làm thay đổi tiến độ/lịch sử học thật. Nhật ký dùng khóa riêng `hsk-studio-activity-v1:<uid hoặc guest>`; không sửa khóa học cũ và chưa đồng bộ nhật ký này lên cloud. Dữ liệu thiếu hiển thị trạng thái chưa đủ dữ liệu. Bộ cập nhật gốc giữ quyền tải/cài đặt, nút Cập nhật bị khóa đến khi bản mới tải xong và sẵn sàng áp dụng.
+
+Kiểm tra: `node --test server/*.test.mjs`; các script DOM `check-speech-dom.cjs`, `check-reading-dom.cjs`, `check-studio-dom.cjs`; browser desktop/mobile `check-studio-ui.cjs` (Playwright, Chrome). GitHub Actions `Studio layout checks` chạy các kiểm tra này và lưu ảnh nội bộ. Gói iOS sao chép đủ tài nguyên từ manifest, giữ loader native.

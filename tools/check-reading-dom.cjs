@@ -5,11 +5,12 @@ const {JSDOM,VirtualConsole}=require('jsdom'),fs=require('node:fs'),assert=requi
  const root=process.cwd(),server=http.createServer((req,res)=>{const name=path.resolve(root,'.'+new URL(req.url,'http://localhost').pathname);if(!name.startsWith(root+path.sep)||!fs.existsSync(name)){res.writeHead(404);res.end();return;}const types={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'};res.setHeader('Content-Type',types[path.extname(name)]||'application/octet-stream');res.end(fs.readFileSync(name));});await new Promise(r=>server.listen(0,'127.0.0.1',r));
  const dom=await JSDOM.fromURL(`http://127.0.0.1:${server.address().port}/index.html`,{runScripts:'dangerously',resources:'usable',pretendToBeVisual:true,virtualConsole,beforeParse(w){
   w.fetch=(url,opts)=>fetch(new URL(url,w.location.href),opts);for(const name of ['Response','Request','Headers','DecompressionStream','TextDecoder','TextEncoder'])w[name]=globalThis[name];
+  w.HTMLCanvasElement.prototype.getContext=()=>null;
   w.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});w.speechSynthesis={getVoices:()=>[],cancel(){},speak(){}};w.scrollTo=()=>{};
   w.addEventListener('hsk-lessons-ready',()=>readyResolve());
  }});
  try{await Promise.race([ready,new Promise((_,reject)=>setTimeout(()=>reject(Error('App initialization timeout: '+errors.join('; '))),30000))]);const w=dom.window,d=w.document;
- const button=name=>{const found=[...d.querySelectorAll('button')].filter(b=>b.textContent===name&&!b.closest('[hidden]'));assert.equal(found.length,1,'Button: '+name);return found[0];};
+ const button=name=>{const found=[...d.querySelectorAll('#lessonsContent button')].filter(b=>b.textContent===name&&!b.closest('[hidden]'));assert.equal(found.length,1,'Button: '+name);return found[0];};
  for(const han of ['你们','太……了','花花','贏','內容','勺（子）']){const xs=w.HSKLessons.match([han]);assert.ok(xs.length);assert.ok(xs.every(x=>w.HSKLessons.examples(x).length>=3));}
  const catalog=JSON.parse(fs.readFileSync('lessons-data.json'));
  for(const course of catalog.courses)for(const lesson of course.lessons){const id=lesson.id;w.history.replaceState(null,'','#lesson/'+id);await w.HSKLessonNav.open();button('Bài đọc').click();const body=d.querySelector('.lesson-reading-body');assert.ok(body.textContent.length>300,id+' long passage');assert.equal(body.querySelectorAll('.lesson-language-help').length,body.querySelectorAll('.lesson-language-line').length*2,id+' pinyin/meaning disclosure');for(const details of body.querySelectorAll('.lesson-language-help')){assert.equal(details.open,false,id+' assistance initially collapsed');assert.match(details.querySelector('summary').textContent,/pinyin|nghĩa|↓/);}
