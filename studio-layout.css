@@ -330,3 +330,8 @@ body.studio-enabled.show-lessons #hskFilterContent{display:grid!important}
 }
 @media(max-width:400px){body.studio-enabled .ratings{grid-template-columns:repeat(2,minmax(0,1fr))}body.studio-enabled .account-progress-heading{flex-direction:column;align-items:flex-start}}
 @media(prefers-reduced-motion:reduce){body.studio-enabled .drawer-group-heading .di-chev{transition:none}}
+@media(max-width:720px){
+ body.studio-enabled .result-card{display:block;padding:46px 14px 88px;overflow-wrap:anywhere}
+ body.studio-enabled .result-card .result-open{max-width:100%;padding:0;border:0;background:transparent;color:#202033;white-space:normal;font-size:28px;line-height:1.4}
+ body.studio-enabled .result-card p,body.studio-enabled .result-card small{min-width:0;overflow-wrap:anywhere}
+}

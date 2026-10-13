@@ -64,7 +64,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    await page.setViewportSize({width,height:900});
    for(const mode of ['home','practice','review','learn','search','quiz','mistakes','compare','srs','account','translator','lessons','about']){
     await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(350);
-    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,mode+' phone overflow '+width);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,mode+' phone overflow '+width+' '+JSON.stringify(await page.evaluate(()=>Array.from(document.querySelectorAll('.workspace *')).filter(el=>el.getClientRects().length&&el.getBoundingClientRect().right>innerWidth+1).slice(0,8).map(el=>({tag:el.tagName,id:el.id,cls:el.className,text:el.textContent.slice(0,50),width:el.getBoundingClientRect().width})))));
    }
    await page.evaluate(()=>window.HSKStudio.navigate('account'));await page.waitForTimeout(350);
    const cramped=await page.locator('.account-metric').evaluateAll(cards=>cards.map(card=>{const value=card.querySelector('strong').getBoundingClientRect(),label=card.querySelector('.metric-caption').getBoundingClientRect(),note=card.querySelector('small').getBoundingClientRect();return {stacked:value.top>=label.bottom-1&&note.top>=value.bottom-1,noteWidth:note.width,cardWidth:card.clientWidth};}).filter(x=>!x.stacked||x.noteWidth<x.cardWidth*.65));
