@@ -20,6 +20,6 @@ for(const w of r.weaknesses)if(!skills.includes(w.skill)||!ids.has(w.id)||!str(w
 for(const c of r.corrections)if(!ids.has(c.id)||!str(c.original,500)||!ids.get(c.id).answer.includes(c.original)||!str(c.corrected,700)||!str(c.why,500))throw Error('AI chưa trích đúng câu trả lời để sửa. Hãy thử lại.');
 if(!samples.some(s=>s.writing))r.score=null;
 return {summary:r.summary,score:r.score,weaknesses:r.weaknesses,corrections:r.corrections};}
-function contextualSample(q,value,correct,meta){const row=sample(q,value,correct,meta);if(q.images){row.expected=optionText(q,q.options[q.answer]);row.options=q.options.map(v=>optionText(q,v));}return row;}
+function contextualSample(q,value,correct,meta){const row=sample(q,value,correct,meta);row.type=q.type||q.format||'';if(q.images){row.expected=optionText(q,q.options[q.answer]);row.options=q.options.map(v=>optionText(q,v));}return row;}
 const api={skills,answer,sample:contextualSample,stats,parse};root.HSKAICoachCore=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
