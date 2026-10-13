@@ -1,0 +1,10 @@
+(function(root){'use strict';
+const normalize=s=>String(s??'').normalize('NFKC').replace(/[\s\p{P}\p{S}]/gu,'');
+const count=s=>(String(s).match(/[\p{Script=Han}]/gu)||[]).length;
+function eligible(bank,level,skill='all',type='all'){const types=new Map(bank.types.map(t=>[t.id,t]));return bank.items.filter(q=>q.level===Number(level)&&(type==='all'||q.type===type)&&(skill==='all'||types.get(q.type)?.skill===skill));}
+function grade(q,value){if(q.tokens){if(!Array.isArray(value)||value.length!==q.tokens.length||new Set(value).size!==q.tokens.length||value.some(i=>!Number.isInteger(i)||i<0||i>=q.tokens.length))return false;const text=normalize(value.map(i=>q.tokens[i]).join(''));return q.accepted.some(a=>normalize(a)===text);}if(q.options)return Number.isInteger(value)&&value===q.answer;return normalize(value)===normalize(q.answer);}
+function writing(q,text){return {characters:count(text),keywords:(q.keywords||[]).map(word=>({word,present:normalize(text).includes(normalize(word))})),target:q.target||0};}
+function shuffled(array,rng=Math.random){const out=[...array];for(let i=out.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;}
+function validate(bank){const ids=new Set(),types=new Map(bank.types.map(t=>[t.id,t]));for(const q of bank.items){if(ids.has(q.id))throw Error('Duplicate question '+q.id);ids.add(q.id);const type=types.get(q.type);if(!type?.levels.includes(q.level))throw Error('Invalid level/type '+q.id);if(q.options&&(!Number.isInteger(q.answer)||q.answer<0||q.answer>=q.options.length||new Set(q.options).size!==q.options.length))throw Error('Invalid choices '+q.id);if(q.tokens&&(!q.accepted?.length||!grade(q,q.tokens.map((_,i)=>i))))throw Error('Invalid order '+q.id);if(type.format==='writing'&&(!q.model||!q.rubric?.length))throw Error('Missing writing guidance '+q.id);if(q.audio&&!q.audio.trim())throw Error('Missing audio text '+q.id);}return true;}
+const api={normalize,count,eligible,grade,writing,shuffled,validate};root.HSKExamCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
+})(typeof window==='object'?window:globalThis);
