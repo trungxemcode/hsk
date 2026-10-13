@@ -11,6 +11,8 @@ on:
       - 'style.css'
       - 'studio-layout.css'
       - 'studio.js'
+      - 'planner.js'
+      - 'planner-core.js'
       - '*Data.js'
       - 'words.js'
 permissions:

@@ -83,6 +83,18 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    await summaries.filter({hasText:'Ôn luyện'}).click();await page.locator('#drawer [data-drawer-mode="quiz"]').click();assert.ok(await page.locator('#quizPanel').isVisible());
    await page.waitForTimeout(350);await page.screenshot({path:'/tmp/studio-quiz-'+width+'.png',fullPage:true});
   }
+  // Create a goal and prove task launches and progress use the real learning handlers.
+  await page.evaluate(()=>window.HSKStudio.navigate('account'));await page.locator('#planSetup summary').click();
+  await page.locator('#planLevel').selectOption('2');await page.locator('#planBudget').fill('120');await page.locator('#planBudget').dispatchEvent('change');await page.locator('#planAI').check();
+  assert.equal(await page.locator('.plan-choice').count(),3);await page.locator('#planForm button[type="submit"]').click();
+  assert.equal(await page.evaluate(()=>window.HSKPlanner.plan.target),2);assert.equal(await page.locator('#planAIToggle').isChecked(),true);
+  await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.locator('#planTasks button').nth(1).click();assert.ok(await page.locator('#flashcard').isVisible());
+  await page.locator('#flashcard .mastery-btn.known').click();await page.waitForTimeout(250);assert.equal(await page.evaluate(()=>Object.values(window.HSKPlanner.plan.journal).flatMap(r=>r.new).length),1);
+  await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.locator('#planTasks button').nth(3).click();assert.ok(await page.locator('#quizOptions button').count()>0);
+  const correct=await page.evaluate(()=>question.options.findIndex(x=>x.correct));await page.locator('#quizOptions button').nth(correct).click();await page.waitForTimeout(250);
+  assert.ok(await page.evaluate(()=>Object.values(window.HSKPlanner.plan.journal).reduce((n,r)=>n+r.attempts,0)>0));
+  await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.locator('#planTasks button').nth(2).click();assert.match(await page.evaluate(()=>location.hash),/#lesson\/standard-2-/);
+  for(const width of [320,390,1440]){await page.setViewportSize({width,height:900});await page.evaluate(()=>window.HSKStudio.navigate('account'));await page.waitForTimeout(350);await contrast('.plan-panel h3,.plan-panel strong,.plan-panel p,.plan-panel button,.plan-panel label');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'planner account overflow '+width);await page.screenshot({path:'/tmp/studio-planner-account-'+width+'.png',fullPage:true});await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.waitForTimeout(350);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'planner today overflow '+width);await page.screenshot({path:'/tmp/studio-planner-today-'+width+'.png',fullPage:true});}
   // All known core modules and controls still exist, including protected admin UI.
   for(const id of ['accountSync','accountBackup','adminRefresh','handwritingAdvanced','handwritingAI','handwritingCorrectChar','translationAskSubmit','lessonChatSend','memoryCalendar'])assert.equal(await page.locator('#'+id).count(),1,id);
   assert.deepEqual(errors,[]);console.log('PASS: desktop/mobile layout; original feature controls; real flashcards/search/SRS/lessons; guarded updater; local activity statistics; no page errors. External AI/auth mocked.');

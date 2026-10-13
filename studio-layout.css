@@ -339,3 +339,25 @@ body.studio-enabled.show-lessons #hskFilterContent{display:grid!important}
  body.studio-enabled .adaptive-option,body.studio-enabled .memory-options label{display:flex;align-items:flex-start;gap:10px;line-height:1.6}
  body.studio-enabled .adaptive-option input,body.studio-enabled .memory-options input{flex:0 0 20px;width:20px;height:20px;min-height:20px;margin:2px 0 0}
 }
+body.studio-enabled .plan-panel{padding:22px;margin-bottom:22px;border:1px solid var(--line);border-radius:18px;background:#fff;color:#303044;min-width:0}
+body.studio-enabled .plan-panel h3{font-size:18px;color:#202033;margin:0 0 14px}
+body.studio-enabled .plan-panel p{font-size:14px;line-height:1.65;color:#5e6278;overflow-wrap:anywhere}
+body.studio-enabled .plan-panel strong{color:#202033}
+body.studio-enabled .plan-panel button{min-height:44px;padding:10px 14px;border:1px solid #ded8f5;border-radius:11px;background:#f0edff;color:#5141c3;font-size:14px;white-space:normal}
+body.studio-enabled #planForm{display:grid;gap:10px;padding-top:16px}
+body.studio-enabled #planForm input:not([type=checkbox]):not([type=radio]),body.studio-enabled #planForm select{width:100%;min-width:0}
+body.studio-enabled #planForm fieldset{border:1px solid var(--line);padding:12px;border-radius:13px;min-width:0;margin:6px 0}
+body.studio-enabled #planChoices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+body.studio-enabled .plan-choice{display:flex;gap:10px;padding:14px;background:#f7f6ff;border-radius:12px;align-items:flex-start;cursor:pointer;min-width:0}
+body.studio-enabled .plan-choice small{display:block;margin-top:7px;color:#5e6278;font-size:13px;line-height:1.6}
+body.studio-enabled .plan-check{display:flex;gap:10px;align-items:flex-start;line-height:1.6}
+body.studio-enabled .plan-check input,body.studio-enabled .plan-choice input{flex:0 0 20px;width:20px;height:20px;min-height:20px;margin:2px 0 0;accent-color:#6957e7}
+body.studio-enabled #planSetup summary{min-height:44px;padding:12px 0;cursor:pointer;font-weight:650;color:#5141c3}
+body.studio-enabled .plan-task{display:flex;align-items:center;gap:18px;padding:16px 0;border-top:1px solid var(--line)}
+body.studio-enabled .plan-task>div{flex:1;min-width:0}
+body.studio-enabled .plan-task p{margin:5px 0 0}
+body.studio-enabled .plan-actions{display:flex;gap:8px;flex-wrap:wrap}
+body.studio-enabled #planSlow{padding:16px;border:1px solid #ecc2c6;border-radius:14px;margin:16px 0;background:#fff8f8}
+body.studio-enabled #planSlow article{margin-top:18px}
+body.studio-enabled .plan-panel button:disabled{background:#eceef3;color:#676b80}
+@media(max-width:720px){body.studio-enabled .plan-panel{padding:18px}body.studio-enabled #planChoices{grid-template-columns:1fr}body.studio-enabled .plan-task{align-items:flex-start;flex-direction:column;gap:10px}body.studio-enabled .plan-task button,body.studio-enabled .plan-actions button{width:100%}body.studio-enabled #planForm select,body.studio-enabled #planForm input:not([type=checkbox]):not([type=radio]){font-size:16px}body.studio-enabled .plan-panel .section-row{flex-wrap:wrap}}
