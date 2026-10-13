@@ -410,7 +410,8 @@ body.studio-enabled .update-notice{position:fixed;z-index:30;left:50%;bottom:cal
 body.studio-enabled .update-notice strong{display:block;font-size:15px}
 body.studio-enabled .update-notice p{font-size:13px;color:var(--sub);margin:6px 0 12px}
 body.studio-enabled .update-notice-actions{display:flex;gap:8px;flex-wrap:wrap}
-body.studio-enabled .update-notice button{background:#f0edff;color:#5141c3;min-height:40px;padding:8px 14px;border:0;border-radius:10px}
+body.studio-enabled .update-notice button,body.studio-enabled .update-push-settings button{background:#f0edff;color:#5141c3;min-height:40px;padding:8px 14px;border:0;border-radius:10px}
+body.studio-enabled .update-push-settings button:disabled{background:#eceef3;color:#676b80}
 body.studio-enabled .update-push-settings{padding:12px 16px;background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:18px;color:var(--ink)}
 body.studio-enabled .update-push-settings summary{cursor:pointer;font-weight:650}
 body.studio-enabled .update-push-settings p{font-size:13px;color:var(--sub);margin:10px 0}
