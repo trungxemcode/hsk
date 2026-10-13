@@ -129,6 +129,18 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
     await page.screenshot({path:'/tmp/studio-spacing-'+mode+'-'+width+'.png',fullPage:true});
    }
   }
+  // Real theme button, persistent choice, header centering and dark text contrast.
+  await page.mouse.move(0,0);await page.locator('#themeToggle').click();await page.mouse.move(0,0);assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');
+  for(const width of [320,390,1440]){
+   await page.setViewportSize({width,height:900});
+   const center=await page.locator('#headerInfo').evaluate(b=>{const a=b.getBoundingClientRect(),s=b.querySelector('svg').getBoundingClientRect();return {x:Math.abs((a.left+a.right-s.left-s.right)/2),y:Math.abs((a.top+a.bottom-s.top-s.bottom)/2)};});assert.ok(center.x<1&&center.y<1,'account SVG centered '+width);
+   for(const mode of ['home','practice','review','learn','search','quiz','mistakes','compare','srs','account','translator','lessons','about']){
+    await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(350);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'dark overflow '+mode+' '+width);
+    await contrast('#activeTitle,#studioLevelText,.sidebar-label,.side-nav button,.shortcut strong,.shortcut small,.hub-content strong,.hub-content small,.hub-content em,.today-title,.today-copy,.featured-han span,.plan-panel p,.plan-panel strong,.plan-panel label,.account-metric strong,.account-metric small,.account-detail h3,.account-day,.account-progress-meta,.account-version-copy p,.tool-card h3,.tool-card p,.panel-box>h2,.panel-box>p,.panel-box label,.lesson-card strong,.lesson-card p,.lesson-cn,.lesson-pinyin,.info-card p,.info-card h3,.about-hero strong,.about-hero span');
+    if(width===390&&['home','learn','account','lessons'].includes(mode))await page.screenshot({path:'/tmp/studio-dark-'+mode+'.png',fullPage:true});
+   }
+  }
+  await page.reload();await page.waitForFunction(()=>!!window.HSKStudio&&document.body.dataset.studioHub==='home');assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');assert.equal(await page.locator('#themeToggle').getAttribute('aria-pressed'),'true');await page.locator('#themeToggle').click();assert.equal(await page.locator('html').getAttribute('data-theme'),'light');
   // All known core modules and controls still exist, including protected admin UI.
   for(const id of ['accountSync','accountBackup','adminRefresh','handwritingAdvanced','handwritingAI','handwritingCorrectChar','translationAskSubmit','lessonChatSend','memoryCalendar'])assert.equal(await page.locator('#'+id).count(),1,id);
   assert.deepEqual(errors,[]);console.log('PASS: desktop/mobile layout; original feature controls; real flashcards/search/SRS/lessons; guarded updater; local activity statistics; no page errors. External AI/auth mocked.');

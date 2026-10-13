@@ -418,6 +418,11 @@ body.studio-enabled .update-push-settings p{font-size:13px;color:var(--sub);marg
 @media(max-width:720px){body.studio-enabled .today-copy{margin:10px 0 12px}}
 
 /* One spacing rhythm; content, rather than fixed empty rows, sets phone card height. */
+body.studio-enabled .avatar-button,body.studio-enabled .theme-button{display:grid;place-items:center;flex:none;padding:0;line-height:1;width:40px;height:40px;min-height:40px}
+body.studio-enabled .avatar-button i{display:flex;align-items:center;justify-content:center;line-height:1}
+body.studio-enabled .avatar-button svg,body.studio-enabled .theme-button svg{display:block;width:21px;height:21px;margin:0}
+body.studio-enabled .theme-button{border:1px solid var(--line-dark);border-radius:12px;background:var(--surface);color:var(--sub)}
+@media(max-width:380px){body.studio-enabled .topbar-inner{gap:8px}body.studio-enabled .topbar-actions{gap:5px}body.studio-enabled .level-pill{padding:0 8px}body.studio-enabled .topbar-title strong{font-size:14px}body.studio-enabled .avatar-button,body.studio-enabled .theme-button{width:36px;height:36px;min-height:36px}}
 body.studio-enabled .hub-intro{padding:0;margin:0 0 24px}
 body.studio-enabled .hub-intro h2{margin:0}
 body.studio-enabled .hub-cards{gap:16px}
@@ -445,3 +450,42 @@ body.studio-enabled .tool-card{padding:20px}
  body.studio-enabled .flash-tools{gap:16px}
  body.studio-enabled .studio-search-tabs{margin-bottom:20px}
 }
+
+/* Dark palette covers the existing learning panels as well as the studio shell. */
+html[data-theme=dark]{color-scheme:dark;background:#14151f}
+html[data-theme=dark] body.studio-enabled{--paper:#14151f;--surface:#20222f;--ink:#eeeef6;--ink-strong:#f6f5fc;--sub:#b9bdce;--muted:#b9bdce;--line:#373a4d;--line-dark:#44485e;--accent-dark:#bcb2ff;--accent-light:#302a4e;--green:#92deb3;--red:#ffabb3;--shadow:0 12px 40px #0003;background:var(--paper);color:var(--ink)}
+html[data-theme=dark] body.studio-enabled :is(.sidebar,.drawer,.side-card,.shortcut,.hub-card,.panel-box,.tool-card,.result-card,.lesson-card,.lesson-grammar-point,.lesson-dialogue,.review-card,.account-metric,.account-detail,.account-version,.plan-panel,.update-push-settings,.update-notice,.pathway,.info-card,.mistake-card,.lesson-chat-panel,.handwriting,.mini-card,.details,.visual-character-card,.visual-word-example,.admin-kpi,.admin-chart,.stats-card,#translationResult,#speechStatus){background:#20222f!important;border-color:#373a4d!important;color:#eeeef6}
+html[data-theme=dark] body.studio-enabled :is(.topbar,.bottom-nav){background:rgba(20,21,31,.95)!important;border-color:#373a4d}
+html[data-theme=dark] body.studio-enabled :is(h1,h2,h3,h4,strong,.han,.featured-han,.mean,.lesson-cn,.lesson-han,.visual-glyph,.today-title,#activeTitle){color:#f6f5fc!important}
+html[data-theme=dark] body.studio-enabled :is(p,small,label,.hint,.pin,.hv,.status-label,.progress,.sidebar-label,.drawer-title,.drawer-hint,.di-lbl,.studio-filter-label,.studio-filter-count,.metric-caption,.account-progress-meta,.account-day,.account-day b,.offline-bar span,.speech-status,.lesson-pinyin,.example-pinyin,.section-note,.featured-han span,.today-copy,.path-step>span,.path-step small,.lesson-vi,.stat-disclaimer,#studioLevelText){color:#b9bdce!important}
+html[data-theme=dark] body.studio-enabled :is(.drawer-head,.example,.example-box,.quiz-prompt,.stat,.compare-note,.compare-pair article,.confusion-family-strip,.visual-difference,.lesson-resume,.lesson-back,.lesson-grammar-examples,.lesson-language-line,.lesson-dialogue-line,.hsk-badge,.hsk-tag,.review-reminder,.account-day.is-studied,.plan-choice,#planSlow){background:#2a293e!important;border-color:#44405c!important;color:#eeeef6!important}
+html[data-theme=dark] body.studio-enabled :is(.front,.back){background:#20222f!important;border-color:#44405c!important;color:#eeeef6!important}
+html[data-theme=dark] body.studio-enabled .face:before{border-color:#393247}
+html[data-theme=dark] body.studio-enabled :is(input:not([type=checkbox]):not([type=radio]),textarea,select){background:#191b27!important;color:#eeeef6!important;border-color:#44485e!important}
+html[data-theme=dark] body.studio-enabled :is(input,textarea)::placeholder{color:#b0b4c6!important}
+html[data-theme=dark] body.studio-enabled button{background:#302a4e!important;color:#c9c0ff!important;border-color:#44405c!important}
+html[data-theme=dark] body.studio-enabled :is(.hub-card,.shortcut,.today-card){background:#20222f!important;color:#eeeef6!important}
+html[data-theme=dark] body.studio-enabled :is(.side-nav button,.side-quick button,.bottom-nav button,.drawer-item,.speech-button,.sound-button,.result-open){background:transparent!important;color:#b9bdce!important}
+html[data-theme=dark] body.studio-enabled :is(.side-nav button.active,.bottom-nav button.active,.drawer-item.active,.filter-btn.active){background:#302a4e!important;color:#c9c0ff!important}
+html[data-theme=dark] body.studio-enabled :is(.shortcut-icon,.hub-symbol,.hub-visual,.avatar-button){background:#363050!important;color:#c9c0ff!important}
+html[data-theme=dark] body.studio-enabled .feature-hero{background:#5141b8!important}
+html[data-theme=dark] body.studio-enabled .feature-hero :is(h3,p){color:#fff!important}
+html[data-theme=dark] body.studio-enabled .hero-button{background:#eeeaff!important;color:#5141c3!important}
+html[data-theme=dark] body.studio-enabled :is(.hub-content em,.subtle-link,.lesson-sources a,.account-day.is-studied b,.pin){color:#c9c0ff!important}
+html[data-theme=dark] body.studio-enabled .board{background-color:#f4f3fb!important}
+html[data-theme=dark] body.studio-enabled :is(.known,.correct){background:#203c32!important;color:#a2ecc3!important;border-color:#446d59!important}
+html[data-theme=dark] body.studio-enabled :is(.unknown,.wrong){background:#442a33!important;color:#ffc0c7!important;border-color:#795160!important}
+html[data-theme=dark] body.studio-enabled .lesson-chat-head{background:#5141c3!important;color:white!important}
+html[data-theme=dark] body.studio-enabled button:disabled{background:#292c3b!important;color:#b9bdce!important;opacity:.65}
+html[data-theme=dark] body.studio-enabled button:is(:hover,:active,:focus-visible):not(:disabled),html[data-theme=dark] body.studio-enabled summary:is(:hover,:active,:focus-visible){background:#6957e7!important;color:white!important;border-color:#6957e7!important}
+html[data-theme=dark] body.studio-enabled button:is(:hover,:active,:focus-visible):not(:disabled) *,html[data-theme=dark] body.studio-enabled summary:is(:hover,:active,:focus-visible) *{color:white!important}
+html[data-theme=dark] body.studio-enabled :is(.theme-button,.avatar-button){color:#c9c0ff!important}
+html[data-theme=dark] body.studio-enabled :is(.about-hero,.account-identity,.account-badge,.account-progress-track,.lesson-example,.lesson-pattern,.lesson-mastery,.translation-chat-message,.lesson-chat-message,.lesson-translation,.lesson-test-feedback,.relation-word,.relation-merged,.visual-pair,.lesson-row){background:#2a293e!important;border-color:#44405c!important;color:#eeeef6!important}
+html[data-theme=dark] body.studio-enabled :is(.about-hero span,.lesson-row span,.lesson-number,.lesson-pattern,.translation-chat-message span,.lesson-chat-message span,.relation-word small,.relation-merged summary){color:#b9bdce!important}
+html[data-theme=dark] body.studio-enabled .brand-mark{background:#5141c3;color:white}
+html[data-theme=dark] body.studio-enabled .account-avatar{background:#363050;color:#c9c0ff}
+html[data-theme=dark] body.studio-enabled button:is(:hover,:active,:focus-visible):not(:disabled)::after{color:white!important}
+html[data-theme=dark] body.studio-enabled :is(.quiz-level-picker,.quiz-type-grid label,.compare-member,.word-relations,.relation-pair,.relation-pair-example,.relation-pair-tag,.memory-context-answer,.about-card,.about-card em,.dictionary-summary,.confusion-word-card,.ocr-panel,.workspace .offline-bar,#appLoadStatus){background:#2a293e!important;color:#eeeef6!important;border-color:#44405c!important}
+html[data-theme=dark] body.studio-enabled :is(.about-logo,.filter-buttons,.drawer-close,.memory-reminder){background:#20222f!important;color:#c9c0ff!important;border-color:#44405c!important}
+html[data-theme=dark] body.studio-enabled :is(.hsk1-tag,.hsk2-tag,.hsk3-tag,.hsk4-tag,.hsk5-tag,.hsk6-tag){background:#5141c3!important;color:white!important}
+html[data-theme=dark] body.studio-enabled :is(#progress,#learningStats,#srsStats,#srsSessionProgress,.feedback,.example-cn,.example-vi,.memory-status,.comparison-note){color:#b9bdce!important}
