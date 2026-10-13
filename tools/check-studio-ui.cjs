@@ -81,7 +81,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    if(await page.locator('#hskFilterToggle').getAttribute('aria-expanded')==='true')await page.locator('#hskFilterToggle').click();
    await page.waitForTimeout(300);await page.screenshot({path:'/tmp/studio-menu-'+width+'.png',fullPage:true});
    await summaries.filter({hasText:'Ôn luyện'}).click();await page.locator('#drawer [data-drawer-mode="quiz"]').click();assert.ok(await page.locator('#quizPanel').isVisible());
-   await page.screenshot({path:'/tmp/studio-quiz-'+width+'.png',fullPage:true});
+   await page.waitForTimeout(350);await page.screenshot({path:'/tmp/studio-quiz-'+width+'.png',fullPage:true});
   }
   // All known core modules and controls still exist, including protected admin UI.
   for(const id of ['accountSync','accountBackup','adminRefresh','handwritingAdvanced','handwritingAI','handwritingCorrectChar','translationAskSubmit','lessonChatSend','memoryCalendar'])assert.equal(await page.locator('#'+id).count(),1,id);
