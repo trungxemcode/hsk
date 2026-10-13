@@ -492,3 +492,14 @@ html[data-theme=dark] body.studio-enabled :is(#progress,#learningStats,#srsStats
 /* Theme text rules include legacy IDs; interactive white feedback must outrank them. */
 html[data-theme=dark] body.studio-enabled :is(button,#themeToggle):is(:hover,:active,:focus-visible):not(:disabled){background:#6957e7!important;color:white!important;border-color:#6957e7!important}
 html[data-theme=dark] body.studio-enabled :is(button,#themeToggle):is(:hover,:active,:focus-visible):not(:disabled) :is(*,#studioLevelText){color:white!important}
+
+/* Keep iOS rubber-band scrolling inside the content, away from fixed navigation. */
+@media(max-width:720px){
+ html:has(body.studio-enabled){height:100%;overflow:hidden;overscroll-behavior:none}
+ body.studio-enabled{height:100%;min-height:0;overflow:hidden;overscroll-behavior:none}
+ body.studio-enabled .app-shell{position:fixed;inset:0;height:100%;min-height:0;overflow:hidden}
+ body.studio-enabled .app-area{height:100%;min-height:0;overflow:hidden}
+ body.studio-enabled .topbar{flex:none}
+ body.studio-enabled main.workspace{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
+ body.studio-enabled .bottom-nav{position:fixed;inset:auto 0 0;transform:translateZ(0);-webkit-transform:translateZ(0);backface-visibility:hidden}
+}
