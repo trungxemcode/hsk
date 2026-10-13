@@ -15,7 +15,13 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   await page.locator('#flashcard .mastery-btn.known').click();await page.waitForTimeout(180);await nav('account');assert.equal(await page.locator('#studioStreak').innerText(),'1 ngày');assert.ok(await page.locator('#offlineUpdate').isDisabled());
   await page.locator('#studioTargetLevel').selectOption('1');assert.match(await page.locator('#studioKnownCount').innerText(),/^1 \/ /);
   await page.screenshot({path:'/tmp/studio-account-desktop.png',fullPage:true});
-  await nav('search');await page.locator('#searchInput').fill('bạn');await page.locator('#searchForm button[type="submit"]').click();assert.ok(await page.locator('#searchResults .result-card').count()>0);await page.locator('#handwritingOpen').click();assert.ok(await page.locator('#handwritingCanvas').isVisible());await page.locator('#handwritingClose').click();
+  await nav('search');await page.locator('#searchInput').fill('bạn');await page.locator('#searchForm button[type="submit"]').click();assert.ok(await page.locator('#searchResults .result-card').count()>0);await page.locator('#handwritingOpen').click();assert.ok(await page.locator('#handwritingCanvas').isVisible());
+  await page.locator('#handwritingCanvas').scrollIntoViewIfNeeded();const board=await page.locator('#handwritingCanvas').boundingBox();
+  const ink=()=>page.locator('#handwritingCanvas').evaluate(c=>{const a=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let n=0;for(let i=3;i<a.length;i+=4)if(a[i])n++;return n;});
+  assert.ok(await page.locator('#handwritingUndo').isDisabled());
+  for(const dy of [.3,.7]){await page.mouse.move(board.x+board.width*.2,board.y+board.height*dy);await page.mouse.down();await page.mouse.move(board.x+board.width*.8,board.y+board.height*dy,{steps:10});await page.mouse.up();}
+  const two=await ink();assert.ok(two>0);await page.locator('#handwritingUndo').click();const one=await ink();assert.ok(one>0&&one<two);await page.locator('#handwritingUndo').click();assert.equal(await ink(),0);assert.ok(await page.locator('#handwritingUndo').isDisabled());assert.match(await page.locator('#handwritingStatus').innerText(),/hoàn tác hết/);
+  await page.locator('#handwritingClose').click();
   await page.locator('#searchPanel [data-studio-go="translator"]').click();assert.ok(await page.locator('#translationInput').isVisible());await page.locator('#ocrCapture').locator('..').locator('summary').click().catch(()=>{});assert.equal(await page.locator('#ocrFile').count(),1);
   await nav('lessons');await page.evaluate(async()=>{history.replaceState(null,'','#lesson/standard-2-03');await window.HSKLessonNav.open();});assert.equal(await page.locator('.lesson-section-nav button').count(),6);for(const name of ['Ngữ pháp','Bài đọc','Hội thoại','Từ vựng','Luyện tập']){await page.locator('.lesson-section-nav').getByRole('button',{name,exact:true}).click();}
   assert.equal(await page.locator('#lessonChatButton').count(),1);
@@ -26,7 +32,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    for(const mode of ['home','practice','review','learn','search','quiz','mistakes','compare','srs','account','translator','lessons','about']){
     await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(40);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+1),false,mode+' overflow at '+width);
    }
-   await page.evaluate(()=>window.HSKStudio.navigate('practice'));const color=await page.locator('#studioPractice .hub-content strong').first().evaluate(el=>getComputedStyle(el).color);assert.equal(color,'rgb(32, 32, 51)');
+   await page.mouse.move(0,0);await page.evaluate(()=>window.HSKStudio.navigate('practice'));const color=await page.locator('#studioPractice .hub-content strong').first().evaluate(el=>getComputedStyle(el).color);assert.equal(color,'rgb(32, 32, 51)');
    await page.waitForTimeout(350);if(width===390){const overlap=await page.evaluate(()=>document.querySelector('#speechStatus').getBoundingClientRect().bottom>document.querySelector('.bottom-nav').getBoundingClientRect().top);assert.equal(overlap,false,'speech status must clear phone navigation');}await page.screenshot({path:'/tmp/studio-practice-'+width+'.png',fullPage:true});
   }
   // Audit computed foreground/background pairs after the full CSS cascade.
@@ -95,6 +101,15 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   assert.ok(await page.evaluate(()=>Object.values(window.HSKPlanner.plan.journal).reduce((n,r)=>n+r.attempts,0)>0));
   await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.locator('#planTasks button').nth(2).click();assert.match(await page.evaluate(()=>location.hash),/#lesson\/standard-2-/);
   for(const width of [320,390,1440]){await page.setViewportSize({width,height:900});await page.evaluate(()=>window.HSKStudio.navigate('account'));await page.waitForTimeout(350);await contrast('.plan-panel h3,.plan-panel strong,.plan-panel p,.plan-panel button,.plan-panel label');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'planner account overflow '+width);await page.screenshot({path:'/tmp/studio-planner-account-'+width+'.png',fullPage:true});await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.waitForTimeout(350);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'planner today overflow '+width);await page.screenshot({path:'/tmp/studio-planner-today-'+width+'.png',fullPage:true});}
+  // Equal-row headings and white text during the actual mouse press.
+  for(const width of [390,1440]){
+   await page.setViewportSize({width,height:900});await page.mouse.move(0,0);await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.waitForTimeout(350);
+   const positions=await page.locator('#studioHome .shortcut').evaluateAll(cards=>cards.map(c=>({top:c.getBoundingClientRect().top,title:c.querySelector('strong').getBoundingClientRect().top,description:c.querySelector('small').getBoundingClientRect().top})));
+   for(let i=0;i<positions.length;i++)for(let j=i+1;j<positions.length;j++)if(Math.abs(positions[i].top-positions[j].top)<1){assert.ok(Math.abs(positions[i].title-positions[j].title)<1,'shortcut title alignment');assert.ok(Math.abs(positions[i].description-positions[j].description)<1,'shortcut copy alignment');}
+   await page.screenshot({path:'/tmp/studio-aligned-home-'+width+'.png',fullPage:true});await page.evaluate(()=>window.HSKStudio.navigate('practice'));await page.waitForTimeout(350);
+   const first=page.locator('#studioPractice .hub-card').first();await first.scrollIntoViewIfNeeded();const b=await first.boundingBox();await page.mouse.move(b.x+b.width/2,b.y+b.height/2);await page.mouse.down();await page.waitForTimeout(150);
+   const colors=await first.evaluate(el=>({bg:getComputedStyle(el).backgroundColor,colors:[...el.querySelectorAll('strong,small,em,svg')].map(x=>getComputedStyle(x).color)}));assert.equal(colors.bg,'rgb(105, 87, 231)');assert.ok(colors.colors.every(c=>c==='rgb(255, 255, 255)'));await page.screenshot({path:'/tmp/studio-pressed-'+width+'.png',fullPage:true});await page.mouse.up();await page.mouse.move(0,0);
+  }
   // All known core modules and controls still exist, including protected admin UI.
   for(const id of ['accountSync','accountBackup','adminRefresh','handwritingAdvanced','handwritingAI','handwritingCorrectChar','translationAskSubmit','lessonChatSend','memoryCalendar'])assert.equal(await page.locator('#'+id).count(),1,id);
   assert.deepEqual(errors,[]);console.log('PASS: desktop/mobile layout; original feature controls; real flashcards/search/SRS/lessons; guarded updater; local activity statistics; no page errors. External AI/auth mocked.');

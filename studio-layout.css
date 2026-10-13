@@ -361,3 +361,38 @@ body.studio-enabled #planSlow{padding:16px;border:1px solid #ecc2c6;border-radiu
 body.studio-enabled #planSlow article{margin-top:18px}
 body.studio-enabled .plan-panel button:disabled{background:#eceef3;color:#676b80}
 @media(max-width:720px){body.studio-enabled .plan-panel{padding:18px}body.studio-enabled #planChoices{grid-template-columns:1fr}body.studio-enabled .plan-task{align-items:flex-start;flex-direction:column;gap:10px}body.studio-enabled .plan-task button,body.studio-enabled .plan-actions button{width:100%}body.studio-enabled #planForm select,body.studio-enabled #planForm input:not([type=checkbox]):not([type=radio]){font-size:16px}body.studio-enabled .plan-panel .section-row{flex-wrap:wrap}}
+
+/* Stable content rows: descriptions no longer push neighboring headings upward. */
+body.studio-enabled .shortcut{display:grid;grid-template-rows:41px auto 1fr;align-content:start;align-items:start;row-gap:14px;min-height:180px}
+body.studio-enabled .shortcut-icon{margin-bottom:0}
+body.studio-enabled .shortcut strong{margin:0;line-height:1.35;align-self:start}
+body.studio-enabled .shortcut small{margin:0;min-height:3.2em;max-width:none;align-self:start}
+body.studio-enabled .hub-cards{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+body.studio-enabled .review-hubs{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.studio-enabled .hub-card,body.studio-enabled .hub-card.large{display:grid;grid-template-rows:49px 1fr;row-gap:20px;grid-row:auto;justify-content:normal;min-height:265px;padding:24px;background:#fff}
+body.studio-enabled .hub-card.large{background:#f2efff}
+body.studio-enabled .hub-visual{width:49px;height:49px;min-height:0;border-radius:15px}
+body.studio-enabled .han-visual{font-size:34px;line-height:1}
+body.studio-enabled .hub-content{display:grid;grid-template-rows:auto 1fr auto;align-content:start;min-width:0;gap:8px}
+body.studio-enabled .hub-content strong{margin:0;line-height:1.35}
+body.studio-enabled .hub-content small{margin:0;max-width:none;min-height:3.2em}
+body.studio-enabled .hub-content em{margin-top:12px}
+body.studio-enabled .review-reminder{background:#f0edff}
+body.studio-enabled .hub-card:hover,body.studio-enabled .shortcut:hover{transform:none}
+body.studio-enabled button{transition:background-color .12s ease,color .12s ease,border-color .12s ease; -webkit-tap-highlight-color:transparent}
+body.studio-enabled button:active:not(:disabled),body.studio-enabled button:focus-visible:not(:disabled),body.studio-enabled summary:active,body.studio-enabled summary:focus-visible{background:#6957e7!important;color:#fff!important;border-color:#6957e7!important;transform:none!important;filter:none!important}
+body.studio-enabled button:active:not(:disabled) *,body.studio-enabled button:focus-visible:not(:disabled) *,body.studio-enabled summary:active *,body.studio-enabled summary:focus-visible *{color:#fff!important}
+body.studio-enabled button:active:not(:disabled) :is(.shortcut-icon,.hub-symbol,.hub-visual),body.studio-enabled button:focus-visible:not(:disabled) :is(.shortcut-icon,.hub-symbol,.hub-visual){background:rgba(255,255,255,.16)!important}
+body.studio-enabled button:focus-visible,body.studio-enabled summary:focus-visible{outline:2px solid #6957e7!important;outline-offset:3px}
+@media(hover:hover){
+ body.studio-enabled button:hover:not(:disabled),body.studio-enabled summary:hover{background:#6957e7!important;color:#fff!important;border-color:#6957e7!important;transform:none!important;filter:none!important}
+ body.studio-enabled button:hover:not(:disabled) *,body.studio-enabled summary:hover *{color:#fff!important}
+ body.studio-enabled button:hover:not(:disabled) :is(.shortcut-icon,.hub-symbol,.hub-visual){background:rgba(255,255,255,.16)!important}
+}
+@media(max-width:970px){body.studio-enabled .hub-cards,body.studio-enabled .review-hubs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){body.studio-enabled .shortcut{padding:16px;min-height:180px}body.studio-enabled .hub-card,body.studio-enabled .hub-card.large{padding:20px;min-height:245px}}
+@media(max-width:500px){body.studio-enabled .hub-cards,body.studio-enabled .review-hubs{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){body.studio-enabled button{transition:none}}
+
+body.studio-enabled button:active:not(:disabled)::after,body.studio-enabled button:focus-visible:not(:disabled)::after{color:#fff!important}
+@media(hover:hover){body.studio-enabled button:hover:not(:disabled)::after{color:#fff!important}}
