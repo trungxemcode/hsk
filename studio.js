@@ -4,6 +4,8 @@ const iconPaths={
 'house':'<path d="m3 10 9-7 9 7"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-7h6v7"/>',
 'book-open':'<path d="M12 7v14"/><path d="M3 18V5a2 2 0 0 1 2-2h3a4 4 0 0 1 4 4 4 4 0 0 1 4-4h3a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2h-3a4 4 0 0 0-4 4 4 4 0 0 0-4-4H5a2 2 0 0 0-2 2Z"/>',
 'pencil-ruler':'<path d="m15 5 4 4M3 21l4.8-1.2L20.1 7.5a2.2 2.2 0 0 0-3.1-3.1L4.7 16.7 3 21Z"/><path d="m11 7 6 6M10 17l-3-3"/>',
+'x':'<path d="m6 6 12 12M18 6 6 18"/>',
+'languages':'<path d="M3 5h12M9 3v2M5 5c0 6 6 10 9 11M13 5c0 6-6 10-10 11M14 21l4-10 4 10M15.5 17h5"/>',
 'refresh-cw':'<path d="M20 11a8 8 0 0 0-14-5L4 8"/><path d="M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14 5l2-2"/><path d="M20 20v-4h-4"/>',
 'search':'<circle cx="11" cy="11" r="7.3"/><path d="m16.4 16.4 4 4"/>',
 'layers':'<path d="m12 3 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5"/>',
@@ -71,6 +73,11 @@ renderIcons();
   try{localStorage.setItem('hsk-studio-activity-v1:'+who,JSON.stringify(a));}catch{}refresh();
  }
  function refresh(){
+  document.querySelectorAll('.filter-btn[data-filter]').forEach(b=>{
+   const match=b.textContent.match(/\((\d+)\)$/);
+   if(match&&!b.querySelector('.studio-filter-label')){const label=document.createElement('span'),count=document.createElement('small');label.className='studio-filter-label';label.textContent=b.dataset.filter==='all'?'Tất cả HSK':'HSK '+b.dataset.filter;count.className='studio-filter-count';count.textContent=Number(match[1]).toLocaleString('vi-VN')+' từ';b.replaceChildren(label,count);}
+   b.setAttribute('aria-pressed',String(b.classList.contains('active')));
+  });
   const who=owner();if(lastOwner!==who){lastOwner=who;fingerprint=snapshot();}
   const selected=Number(read('hsk-studio-target-v1:'+who,5));const level=Number.isInteger(selected)&&selected>=1&&selected<=6?selected:5;
   $('studioTargetLevel').value=String(level);$('studioTarget').textContent='HSK '+level;$('studioProgressLabel').textContent='HSK '+level;
@@ -91,6 +98,7 @@ renderIcons();
  document.querySelectorAll('.app-tabs button,#accountBtn,#translatorBtn,#adminBtn,#aboutBtn,[data-filter]').forEach(b=>b.addEventListener('click',()=>{clearHub();queueMicrotask(()=>{if(!document.body.dataset.studioHub)title(coreView());refresh();});},true));
  new MutationObserver(()=>{if(!document.body.dataset.studioHub)title(coreView());}).observe(document.body,{attributes:true,attributeFilter:['class']});
  new MutationObserver(()=>{if(!document.body.dataset.studioHub)title(coreView());}).observe(document.querySelector('.app-tabs'),{subtree:true,attributes:true,attributeFilter:['class']});
+ new MutationObserver(refresh).observe(document.querySelector('.filter-buttons'),{subtree:true,attributes:true,attributeFilter:['class']});
  new MutationObserver(refresh).observe($('adminBtn'),{attributes:true,attributeFilter:['hidden']});
  $('studioTargetLevel').addEventListener('change',()=>{try{localStorage.setItem('hsk-studio-target-v1:'+owner(),JSON.stringify(Number($('studioTargetLevel').value)));}catch{}refresh();});
  document.addEventListener('click',event=>{if(!ready)return;const panel=event.target.closest('#learnPanel,#quizPanel,#srsPanel,#lessonsPanel,#mistakesPanel');if(panel&&event.target.closest('button')){clearTimeout(activityTimer);activityTimer=setTimeout(recordActivity,120);}},true);

@@ -29,6 +29,36 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    await page.evaluate(()=>window.HSKStudio.navigate('practice'));const color=await page.locator('#studioPractice .hub-content strong').first().evaluate(el=>getComputedStyle(el).color);assert.equal(color,'rgb(32, 32, 51)');
    await page.waitForTimeout(350);if(width===390){const overlap=await page.evaluate(()=>document.querySelector('#speechStatus').getBoundingClientRect().bottom>document.querySelector('.bottom-nav').getBoundingClientRect().top);assert.equal(overlap,false,'speech status must clear phone navigation');}await page.screenshot({path:'/tmp/studio-practice-'+width+'.png',fullPage:true});
   }
+  // Audit computed foreground/background pairs after the full CSS cascade.
+  const contrast=async selectors=>{
+   const failures=await page.evaluate(selectors=>{
+    const rgb=s=>s.match(/[\d.]+/g).map(Number),blend=(f,b)=>f.slice(0,3).map((n,i)=>n*(f[3]??1)+b[i]*(1-(f[3]??1))),lum=c=>c.map(n=>{n/=255;return n<=.04045?n/12.92:((n+.055)/1.055)**2.4;}).reduce((a,n,i)=>a+n*[.2126,.7152,.0722][i],0),out=[];
+    for(const el of document.querySelectorAll(selectors)){
+     if(!el.getClientRects().length||getComputedStyle(el).visibility==='hidden')continue;
+     const chain=[];for(let e=el;e;e=e.parentElement)chain.unshift(e);
+     let bg=[255,255,255];for(const e of chain)bg=blend(rgb(getComputedStyle(e).backgroundColor),bg);
+     const st=getComputedStyle(el),fg=blend(rgb(st.color),bg),ratio=(Math.max(lum(fg),lum(bg))+.05)/(Math.min(lum(fg),lum(bg))+.05),size=parseFloat(st.fontSize),minimum=size>=24||(size>=18.66&&Number(st.fontWeight)>=700)?3:4.5;
+     if(ratio<minimum)out.push({text:el.textContent.trim().slice(0,65),ratio:ratio.toFixed(2),minimum,color:st.color,bg});
+    }return out;
+   },selectors);assert.deepEqual(failures,[],'contrast '+selectors);
+  };
+  for(const width of [1440,390]){
+   await page.setViewportSize({width,height:900});
+   for(const mode of ['home','practice','review','account','about']){
+    await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(350);
+    await contrast('.sidebar-label,.side-nav button,.side-quick button,#activeTitle,#studioLevelText,.feature-copy h3,.feature-copy p,.hero-button,.shortcut strong,.shortcut small,.path-step>span,.path-step strong,.path-step small,.today-card p,.featured-han span,.stats-stack strong,.stats-stack small,.review-reminder strong,.review-reminder small,.hub-content strong,.hub-content small,.hub-content em,.about-hero strong,.about-hero span,.account-metric strong,.account-metric small,.metric-caption,.account-detail h3,.account-day,.account-day b,.account-progress-meta,.account-level-note,.account-version-copy strong,.account-version-copy p,.account-version button');
+   }
+   await page.locator('#levelPill').click();if(await page.locator('#hskFilterToggle').getAttribute('aria-expanded')!=='true')await page.locator('#hskFilterToggle').click();await page.waitForTimeout(300);
+   await contrast('.drawer-head strong,.drawer-head span,.drawer-title,.drawer-hint,.di-lbl,.studio-filter-label,.studio-filter-count');
+   assert.equal(await page.locator('.filter-btn[aria-pressed=true]').count(),1);
+   await page.locator('.filter-btn[data-filter="5"]').click();await page.waitForTimeout(300);
+   assert.equal(await page.locator('#studioLevelText').innerText(),'HSK 5');
+   assert.equal(await page.locator('.filter-btn[data-filter="5"]').getAttribute('aria-pressed'),'true');
+   if(!await page.locator('#drawerClose').isVisible())await page.locator('#levelPill').click();
+   if(await page.locator('#hskFilterToggle').getAttribute('aria-expanded')!=='true')await page.locator('#hskFilterToggle').click();
+   await page.waitForTimeout(300);await contrast('.studio-filter-label,.studio-filter-count');await page.screenshot({path:'/tmp/studio-filter-'+width+'.png',fullPage:true});
+   await page.locator('#drawerClose').click();await page.evaluate(()=>window.HSKStudio.navigate('about'));await page.waitForTimeout(350);await page.screenshot({path:'/tmp/studio-about-'+width+'.png',fullPage:true});
+  }
   // All known core modules and controls still exist, including protected admin UI.
   for(const id of ['accountSync','accountBackup','adminRefresh','handwritingAdvanced','handwritingAI','handwritingCorrectChar','translationAskSubmit','lessonChatSend','memoryCalendar'])assert.equal(await page.locator('#'+id).count(),1,id);
   assert.deepEqual(errors,[]);console.log('PASS: desktop/mobile layout; original feature controls; real flashcards/search/SRS/lessons; guarded updater; local activity statistics; no page errors. External AI/auth mocked.');
