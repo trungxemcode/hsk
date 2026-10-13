@@ -46,8 +46,8 @@ renderIcons();
  const $=id=>document.getElementById(id),main=document.querySelector('.workspace');
  function decorateControls(){main.querySelectorAll('.panel-box button:not(.speech-button):not(.mastery-btn)').forEach(b=>b.classList.add('studio-action'));}
  decorateControls();new MutationObserver(decorateControls).observe(main,{subtree:true,childList:true});
- const labels={home:'Tổng quan',lessons:'Bài học',practice:'Luyện tập',review:'Ôn tập',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn tập SRS',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
- const parents={learn:'practice',quiz:'practice',compare:'practice',srs:'review',mistakes:'review',translator:'search',about:'home'};
+ const labels={home:'Tổng quan',lessons:'Bài học',practice:'Luyện tập',exam:'Dạng đề HSK',review:'Ôn tập',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn tập SRS',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
+ const parents={learn:'practice',quiz:'practice',compare:'practice',exam:'practice',srs:'review',mistakes:'review',translator:'search',about:'home'};
  let ready=false,route='home',lastOwner='',fingerprint='',activityTimer,refreshTimer;
  function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||'null')||fallback;}catch{return fallback;}}
  function owner(){return read('hsk-account-meta-v1',{}).uid||'guest';}
@@ -61,12 +61,12 @@ renderIcons();
  function navigate(name){
   if(!ready&&!['account','translator','about','admin'].includes(name))return;
   clearHub();
-  if(['home','practice','review'].includes(name)){
+  if(['home','practice','review','exam'].includes(name)){
    document.querySelector('.app-tabs [data-mode="learn"]').click();document.body.classList.remove('show-lessons','lesson-focus');document.body.dataset.studioHub=name;document.querySelector(`[data-studio-hub-panel="${name}"]`).hidden=false;title(name);
   }else{const special={account:'accountBtn',translator:'translatorBtn',admin:'adminBtn',about:'aboutBtn'};const trigger=special[name]?$(special[name]):document.querySelector(`.app-tabs [data-mode="${name}"]`);if(!trigger||trigger.hidden)return;trigger.click();title(name);}
-  closeDrawer();main.scrollTop=0;window.scrollTo({top:0,behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});refresh();
+  closeDrawer();main.scrollTop=0;window.scrollTo({top:0,behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});refresh();if(name==='exam')window.dispatchEvent(new Event('hsk-exam-open'));
  }
- function snapshot(){return ['hsk-flashcards-progress-v1','hsk-flashcards-mistakes-v1','hsk-course-lessons-v1','hsk-adaptive-learning-v1'].map(k=>localStorage.getItem(k)||'').join('|');}
+ function snapshot(){return ['hsk-flashcards-progress-v1','hsk-flashcards-mistakes-v1','hsk-course-lessons-v1','hsk-adaptive-learning-v1','hsk-exam-practice-v1'].map(k=>localStorage.getItem(k)||'').join('|');}
  function day(timestamp){return new Date(timestamp+7*3600000).toISOString().slice(0,10);}
  function activity(){const a=read('hsk-studio-activity-v1:'+owner(),{});return {version:1,days:a.days&&typeof a.days==='object'&&!Array.isArray(a.days)?a.days:{},hours:Array.isArray(a.hours)&&a.hours.length===24?a.hours.map(n=>Number.isFinite(n)&&n>=0?n:0):Array(24).fill(0)};}
  function recordActivity(){
@@ -104,7 +104,7 @@ renderIcons();
  new MutationObserver(refresh).observe(document.querySelector('.filter-buttons'),{subtree:true,attributes:true,attributeFilter:['class']});
  new MutationObserver(refresh).observe($('adminBtn'),{attributes:true,attributeFilter:['hidden']});
  $('studioTargetLevel').addEventListener('change',()=>{try{localStorage.setItem('hsk-studio-target-v1:'+owner(),JSON.stringify(Number($('studioTargetLevel').value)));}catch{}refresh();});
- document.addEventListener('click',event=>{if(!ready)return;const panel=event.target.closest('#learnPanel,#quizPanel,#srsPanel,#lessonsPanel,#mistakesPanel');if(panel&&event.target.closest('button')){clearTimeout(activityTimer);activityTimer=setTimeout(recordActivity,120);}},true);
+ document.addEventListener('click',event=>{if(!ready)return;const panel=event.target.closest('#learnPanel,#quizPanel,#srsPanel,#lessonsPanel,#mistakesPanel,#examPractice');if(panel&&event.target.closest('button')){clearTimeout(activityTimer);activityTimer=setTimeout(recordActivity,120);}},true);
  window.addEventListener('storage',()=>{refresh();});window.addEventListener('hsk-account-ready',()=>{lastOwner=owner();fingerprint=snapshot();refresh();});
  // The existing updater owns activation and download readiness; hidden means disabled here.
  const update=$('offlineUpdate');function updateAvailability(){if(update.hidden)update.disabled=true;}
