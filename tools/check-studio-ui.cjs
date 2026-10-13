@@ -118,6 +118,17 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   await phone.screenshot({path:'/tmp/studio-whole-corner-390.png',fullPage:true});await corner.tap();assert.ok(await phone.locator('#flashcard').isVisible());
   await phone.evaluate(()=>window.HSKStudio.navigate('home'));await phone.locator('.shortcut[data-studio-go="quiz"]').tap();await phone.evaluate(()=>window.HSKStudio.navigate('home'));await phone.waitForTimeout(600);
   const after=await phone.locator('.shortcut[data-studio-go="quiz"]').evaluate(el=>({bg:getComputedStyle(el).backgroundColor,color:getComputedStyle(el.querySelector('strong')).color}));assert.ok(['rgb(255, 255, 255)','rgb(105, 87, 231)'].includes(after.bg),'no legacy blue after touch release');if(after.bg==='rgb(105, 87, 231)')assert.equal(after.color,'rgb(255, 255, 255)');await touch.close();
+  // Guard against stacked heading margins and tall empty card rows on phones.
+  for(const width of [320,390,1440]){
+   await page.setViewportSize({width,height:900});
+   for(const mode of ['practice','review']){
+    await page.mouse.move(0,0);await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(350);
+    const spacing=await page.locator('[data-studio-hub-panel="'+mode+'"]:not([hidden])').evaluate(panel=>{const heading=panel.querySelector('.hub-intro h2').getBoundingClientRect(),cards=[...panel.querySelectorAll('.hub-card')];return {headingGap:cards[0].getBoundingClientRect().top-heading.bottom,cards:cards.map(c=>{const desc=c.querySelector('small').getBoundingClientRect(),cta=c.querySelector('em').getBoundingClientRect();return {height:c.getBoundingClientRect().height,ctaGap:cta.top-desc.bottom,padding:parseFloat(getComputedStyle(c).paddingTop)};})};});
+    assert.ok(spacing.headingGap>=16&&spacing.headingGap<=25,'heading to cards spacing '+width);
+    for(const card of spacing.cards){assert.ok(card.padding>=20,'comfortable card inset');if(width<=500){assert.ok(card.height<240,'phone card must not reserve empty height');assert.ok(card.ctaGap>=12&&card.ctaGap<=20,'CTA close to description');}}
+    await page.screenshot({path:'/tmp/studio-spacing-'+mode+'-'+width+'.png',fullPage:true});
+   }
+  }
   // All known core modules and controls still exist, including protected admin UI.
   for(const id of ['accountSync','accountBackup','adminRefresh','handwritingAdvanced','handwritingAI','handwritingCorrectChar','translationAskSubmit','lessonChatSend','memoryCalendar'])assert.equal(await page.locator('#'+id).count(),1,id);
   assert.deepEqual(errors,[]);console.log('PASS: desktop/mobile layout; original feature controls; real flashcards/search/SRS/lessons; guarded updater; local activity statistics; no page errors. External AI/auth mocked.');
