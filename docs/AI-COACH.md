@@ -2,7 +2,9 @@
 
 Nằm trong Luyện tập và Luyện theo dạng đề. Mỗi câu đã làm có nút AI chấm và góp ý; bài viết có thể gửi trước khi tự đối chiếu. AI nhận đề, câu trả lời thực tế, đáp án/mẫu tham khảo, tiêu chí và nội dung nguồn của bài. Chấp nhận cách diễn đạt đúng khác mẫu. Không dùng AI để thay đổi đáp án khách quan hoặc 100% hoàn thành.
 
-Quan sát tự động mặc định tắt. Bật để gửi một nhóm tối đa 8 câu gần đây sau khoảng 5 câu khách quan hoặc một bài viết đã hoàn thành, khi đang đăng nhập. Gọi dịch vụ có khoảng cách tối thiểu 11 giây, không gửi mỗi lần gõ. Nếu bận/chưa kết nối, dữ liệu vẫn lưu để người dùng bấm phân tích lại. Không theo dõi hoạt động ngoài app, micro hay màn hình.
+Tùy chọn “Hiện đúng/sai và giải thích AI ngay sau mỗi câu” mặc định tắt và nằm trong phần làm bài. Bỏ tick: nút Xem đáp án mở kết quả theo yêu cầu, không tự gửi AI. Bật: đúng/sai được chấm bằng đáp án có sẵn ngay sau chọn; câu vừa trả lời được gửi AI để giải thích bên dưới. Không đợi đủ 5 câu nữa. Với viết mở, AI góp ý sau khi nộp, không tự suy ra đúng/sai như câu khách quan. Cấu hình cũ enabled không tự kích hoạt tùy chọn mới instantEnabled, vì chế độ mới gửi nhiều yêu cầu hơn.
+
+Yêu cầu AI được xếp hàng để tôn trọng khoảng cách 11 giây của dịch vụ hiện có. Nếu làm nhanh, có thể phải chờ giải thích; không khóa chọn đáp án hay chuyển câu. Câu đã rời màn hình trước khi tới lượt gửi không được gửi thừa; vẫn được lưu để phân tích tổng hợp. Bỏ tick hoặc đổi tài khoản hủy hàng đợi và phản hồi đang chạy tự động. Không gửi mỗi lần gõ. Không theo dõi hoạt động ngoài app, micro hay màn hình.
 
 60 lượt gần nhất và 8 nhận xét được lưu trong drafts.__aiCoach của hsk-exam-practice-v1, dùng đồng bộ/sao lưu và tách tài khoản hiện có. Điểm bài viết 0–10 là nhận xét tham khảo, không quy đổi điểm thi HSK. Không kết luận phát âm/nói khi không có dữ liệu. Lỗi lặp được cung cấp kèm số lần gần đây; một lỗi riêng lẻ chưa phải kết luận năng lực. Xóa lịch sử AI không xóa bài làm, bản nháp hay tiến độ gốc.
 
