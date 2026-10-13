@@ -66,6 +66,7 @@ renderIcons();
   }else{const special={account:'accountBtn',translator:'translatorBtn',admin:'adminBtn',about:'aboutBtn'};const trigger=special[name]?$(special[name]):document.querySelector(`.app-tabs [data-mode="${name}"]`);if(!trigger||trigger.hidden)return;trigger.click();title(name);}
   closeDrawer();main.scrollTop=0;window.scrollTo({top:0,behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});refresh();if(name==='exam')window.dispatchEvent(new Event('hsk-exam-open'));
  }
+ window.addEventListener('hsk-lesson-context',()=>refresh());
  function snapshot(){return ['hsk-flashcards-progress-v1','hsk-flashcards-mistakes-v1','hsk-course-lessons-v1','hsk-adaptive-learning-v1','hsk-exam-practice-v1'].map(k=>localStorage.getItem(k)||'').join('|');}
  function day(timestamp){return new Date(timestamp+7*3600000).toISOString().slice(0,10);}
  function activity(){const a=read('hsk-studio-activity-v1:'+owner(),{});return {version:1,days:a.days&&typeof a.days==='object'&&!Array.isArray(a.days)?a.days:{},hours:Array.isArray(a.hours)&&a.hours.length===24?a.hours.map(n=>Number.isFinite(n)&&n>=0?n:0):Array(24).fill(0)};}
@@ -94,7 +95,7 @@ renderIcons();
   const week=$('studioWeek');week.replaceChildren();for(let i=6;i>=0;i--){const date=day(now-i*86400000),cell=document.createElement('div');cell.className='account-day'+(a.days[date]?' is-studied':'');const b=document.createElement('b');b.textContent=a.days[date]?'✓':'·';cell.append(b,document.createTextNode(new Date(date+'T00:00:00Z').toLocaleDateString('vi-VN',{weekday:'short',timeZone:'UTC'})));week.append(cell);}
   $('studioHomeWords').textContent=all.length.toLocaleString('vi-VN');$('studioHomeDue').textContent=String(Object.values(r).filter(x=>Number.isFinite(x.due)&&x.due<=now).length);
   const admin=$('adminBtn');$('studioAdminLink').hidden=admin.hidden;
-  const filter=document.querySelector('[data-filter].active')?.dataset.filter||'all';$('studioLevelText').textContent=filter==='all'?'Tất cả HSK':'HSK '+filter;
+  const filter=document.body.classList.contains('show-lessons')?$('lessonsPanel').dataset.lessonLevel||'1':document.querySelector('[data-filter].active')?.dataset.filter||'all';$('studioLevelText').textContent=filter==='all'?'Tất cả HSK':'HSK '+filter;
  }
  document.querySelectorAll('[data-studio-go]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.studioGo)));
  $('levelPill').replaceChildren();const levelText=document.createElement('span');levelText.id='studioLevelText';levelText.textContent='Tất cả HSK';$('levelPill').append(levelText);
