@@ -396,3 +396,22 @@ body.studio-enabled button:focus-visible,body.studio-enabled summary:focus-visib
 
 body.studio-enabled button:active:not(:disabled)::after,body.studio-enabled button:focus-visible:not(:disabled)::after{color:#fff!important}
 @media(hover:hover){body.studio-enabled button:hover:not(:disabled)::after{color:#fff!important}}
+
+/* Touch Safari may retain :hover after release. Never fall back to legacy blue. */
+body.studio-enabled button:hover:not(:disabled){background:#6957e7!important;color:#fff!important;border-color:#6957e7!important;transform:none!important;filter:none!important}
+body.studio-enabled button:hover:not(:disabled) *,body.studio-enabled button:hover:not(:disabled)::after{color:#fff!important}
+body.studio-enabled button:hover:not(:disabled) :is(.shortcut-icon,.hub-symbol,.hub-visual){background:rgba(255,255,255,.16)!important}
+body.studio-enabled button.today-card{display:block;width:100%;text-align:left;background:#fff;color:var(--ink);white-space:normal}
+body.studio-enabled .today-title{font-size:17px;font-weight:750;line-height:1.4}
+body.studio-enabled .today-card .featured-han{display:block}
+body.studio-enabled .today-copy{display:block;color:var(--sub);font-size:13px;line-height:1.75;margin:20px 0 17px}
+body.studio-enabled .today-card .subtle-link{display:flex;align-items:center;gap:8px;padding:0;background:transparent;color:var(--accent-dark)}
+body.studio-enabled .update-notice{position:fixed;z-index:30;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(520px,calc(100% - 32px));padding:16px;background:#fff;border:1px solid #ded8fa;border-radius:16px;box-shadow:0 12px 40px #25253b22;color:var(--ink)}
+body.studio-enabled .update-notice strong{display:block;font-size:15px}
+body.studio-enabled .update-notice p{font-size:13px;color:var(--sub);margin:6px 0 12px}
+body.studio-enabled .update-notice-actions{display:flex;gap:8px;flex-wrap:wrap}
+body.studio-enabled .update-notice button{background:#f0edff;color:#5141c3;min-height:40px;padding:8px 14px;border:0;border-radius:10px}
+body.studio-enabled .update-push-settings{padding:12px 16px;background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:18px;color:var(--ink)}
+body.studio-enabled .update-push-settings summary{cursor:pointer;font-weight:650}
+body.studio-enabled .update-push-settings p{font-size:13px;color:var(--sub);margin:10px 0}
+@media(max-width:720px){body.studio-enabled .today-copy{margin:10px 0 12px}}
