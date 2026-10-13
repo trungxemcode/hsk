@@ -416,3 +416,32 @@ body.studio-enabled .update-push-settings{padding:12px 16px;background:#fff;bord
 body.studio-enabled .update-push-settings summary{cursor:pointer;font-weight:650}
 body.studio-enabled .update-push-settings p{font-size:13px;color:var(--sub);margin:10px 0}
 @media(max-width:720px){body.studio-enabled .today-copy{margin:10px 0 12px}}
+
+/* One spacing rhythm; content, rather than fixed empty rows, sets phone card height. */
+body.studio-enabled .hub-intro{padding:0;margin:0 0 24px}
+body.studio-enabled .hub-intro h2{margin:0}
+body.studio-enabled .hub-cards{gap:16px}
+body.studio-enabled .hub-card,body.studio-enabled .hub-card.large{min-height:238px;row-gap:16px}
+body.studio-enabled .hub-content{gap:8px}
+body.studio-enabled .hub-content em{margin-top:8px}
+body.studio-enabled .shortcut{min-height:164px;row-gap:12px}
+body.studio-enabled .feature-hero{margin-bottom:24px}
+body.studio-enabled .pathway-head{margin-top:24px}
+body.studio-enabled .dashboard-grid{gap:20px}
+body.studio-enabled .activity-intro{margin:0 0 20px}
+body.studio-enabled .tool-card{padding:20px}
+@media(max-width:720px){
+ body.studio-enabled .workspace{padding-top:20px}
+ body.studio-enabled .hub-intro{margin-bottom:20px}
+ body.studio-enabled .hub-card,body.studio-enabled .hub-card.large{padding:20px;min-height:0;grid-template-rows:49px auto;row-gap:16px}
+ body.studio-enabled .hub-content{grid-template-rows:auto auto auto;gap:8px}
+ body.studio-enabled .hub-content small{min-height:0}
+ body.studio-enabled .hub-content em{margin-top:8px}
+ body.studio-enabled .shortcut{padding:16px;min-height:164px}
+ body.studio-enabled .section-row{gap:12px;margin-bottom:16px}
+ body.studio-enabled .side-card{padding:20px}
+ body.studio-enabled .pathway{padding:18px 16px;gap:12px}
+ body.studio-enabled .tool-heading{margin-bottom:12px}
+ body.studio-enabled .flash-tools{gap:16px}
+ body.studio-enabled .studio-search-tabs{margin-bottom:20px}
+}
