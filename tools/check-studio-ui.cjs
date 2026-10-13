@@ -59,6 +59,29 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    await page.waitForTimeout(300);await contrast('.studio-filter-label,.studio-filter-count');await page.screenshot({path:'/tmp/studio-filter-'+width+'.png',fullPage:true});
    await page.locator('#drawerClose').click();await page.evaluate(()=>window.HSKStudio.navigate('about'));await page.waitForTimeout(350);await page.screenshot({path:'/tmp/studio-about-'+width+'.png',fullPage:true});
   }
+  // Menu groups and the phone text layout must retain usable widths.
+  for(const width of [320,375,390,430]){
+   await page.setViewportSize({width,height:900});
+   for(const mode of ['home','practice','review','learn','search','quiz','mistakes','compare','srs','account','translator','lessons','about']){
+    await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(350);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,mode+' phone overflow '+width);
+   }
+   await page.evaluate(()=>window.HSKStudio.navigate('account'));await page.waitForTimeout(350);
+   const cramped=await page.locator('.account-metric').evaluateAll(cards=>cards.map(card=>{const value=card.querySelector('strong').getBoundingClientRect(),label=card.querySelector('.metric-caption').getBoundingClientRect(),note=card.querySelector('small').getBoundingClientRect();return {stacked:value.top>=label.bottom-1&&note.top>=value.bottom-1,noteWidth:note.width,cardWidth:card.clientWidth};}).filter(x=>!x.stacked||x.noteWidth<x.cardWidth*.65));
+   assert.deepEqual(cramped,[],'account metrics must not squeeze copy beside values '+width);
+   assert.ok(await page.locator('#studioTargetLevel').evaluate(el=>el.clientWidth>200));
+   await page.screenshot({path:'/tmp/studio-account-'+width+'.png',fullPage:true});
+   await page.locator('#levelPill').click();
+   assert.equal(await page.locator('#drawer .drawer-body > .drawer-group').count(),5);
+   const summaries=page.locator('#drawer .drawer-group-heading');assert.equal(await summaries.count(),4);
+   for(const summary of await summaries.all()){
+    assert.equal(await summary.locator('..').getAttribute('open'),null);await summary.press('Enter');assert.notEqual(await summary.locator('..').getAttribute('open'),null);await summary.press('Enter');assert.equal(await summary.locator('..').getAttribute('open'),null);
+   }
+   if(await page.locator('#hskFilterToggle').getAttribute('aria-expanded')==='true')await page.locator('#hskFilterToggle').click();
+   await page.waitForTimeout(300);await page.screenshot({path:'/tmp/studio-menu-'+width+'.png',fullPage:true});
+   await summaries.filter({hasText:'Ôn luyện'}).click();await page.locator('#drawer [data-drawer-mode="quiz"]').click();assert.ok(await page.locator('#quizPanel').isVisible());
+   await page.screenshot({path:'/tmp/studio-quiz-'+width+'.png',fullPage:true});
+  }
   // All known core modules and controls still exist, including protected admin UI.
   for(const id of ['accountSync','accountBackup','adminRefresh','handwritingAdvanced','handwritingAI','handwritingCorrectChar','translationAskSubmit','lessonChatSend','memoryCalendar'])assert.equal(await page.locator('#'+id).count(),1,id);
   assert.deepEqual(errors,[]);console.log('PASS: desktop/mobile layout; original feature controls; real flashcards/search/SRS/lessons; guarded updater; local activity statistics; no page errors. External AI/auth mocked.');

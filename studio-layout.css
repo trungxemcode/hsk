@@ -255,3 +255,78 @@ body.studio-enabled .featured-han span,body.studio-enabled .stats-stack small,bo
 body.studio-enabled .path-step>span{color:#5141c3}
 body.studio-enabled .account-day,body.studio-enabled .account-hours,body.studio-enabled .account-demo-control{color:#5e6278}
 body.studio-enabled .account-version button:disabled,body.studio-enabled button:disabled,body.studio-enabled #offlineUpdate[hidden]{opacity:1;background:#eceef3;color:#676b80;border-color:#e2e5ed;box-shadow:none;transform:none}
+
+/* Five collapsible menu groups, retaining the original destination controls. */
+body.studio-enabled .drawer-body>.drawer-group{margin:0 0 10px;min-width:0}
+body.studio-enabled .drawer-group-heading,body.studio-enabled .drawer-filter-group>.hsk-filter-toggle{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:13px 14px;margin:0;border:0;border-radius:13px;background:#f4f1ff;color:#5141c3;font-size:14px;line-height:1.5;font-weight:700;cursor:pointer;list-style:none}
+body.studio-enabled .drawer-group-heading::-webkit-details-marker{display:none}
+body.studio-enabled .drawer-group-heading .di-ico,body.studio-enabled .drawer-group-heading .di-chev{color:#5141c3}
+body.studio-enabled .drawer-group-heading .di-chev,body.studio-enabled .hsk-filter-toggle .di-chev{transform:rotate(-90deg);transition:transform .18s}
+body.studio-enabled .drawer-group[open]>.drawer-group-heading .di-chev,body.studio-enabled .hsk-filter-toggle[aria-expanded=true] .di-chev{transform:rotate(0)}
+body.studio-enabled .drawer-group-content{padding:7px 4px 4px 12px}
+body.studio-enabled .drawer-filter-group .hsk-filter-inner{padding-top:14px}
+body.studio-enabled .drawer-group-content .drawer-item{font-size:14px;padding:10px;min-height:46px}
+body.studio-enabled .drawer-group-heading:focus-visible{outline:3px solid #aba1ff;outline-offset:3px}
+body.studio-enabled.show-lessons #hskFilterToggle{display:flex!important}
+body.studio-enabled.show-lessons #hskFilterContent{display:grid!important}
+
+/* Phone layout: content gets width before decorative/nested containers. */
+@media(max-width:720px){
+ body.studio-enabled .workspace{width:calc(100% - 32px);padding-top:24px}
+ body.studio-enabled .panel-box{padding:16px;min-width:0}
+ body.studio-enabled .panel-box h2,body.studio-enabled .activity-intro h2{font-size:25px;line-height:1.3;overflow-wrap:break-word}
+ body.studio-enabled .hint,body.studio-enabled .panel-box p{line-height:1.7;overflow-wrap:break-word}
+ body.studio-enabled .panel-box input:not([type=checkbox]),body.studio-enabled .panel-box select,body.studio-enabled .panel-box textarea{font-size:16px;min-width:0}
+ body.studio-enabled .field-row{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;align-items:stretch}
+ body.studio-enabled .field-row>*{min-width:0;max-width:100%}
+ body.studio-enabled .field-row select,body.studio-enabled .field-row input:not([type=checkbox]){width:100%!important}
+ body.studio-enabled .field-row label{margin-top:8px}
+ body.studio-enabled #searchForm{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ body.studio-enabled #searchInput{grid-column:1/-1}
+ body.studio-enabled .studio-search-tabs{display:grid;grid-template-columns:1fr;gap:8px}
+ body.studio-enabled .studio-search-tabs button{width:100%;white-space:normal}
+ body.studio-enabled .result-grid,body.studio-enabled .answers,body.studio-enabled .compare-pair,body.studio-enabled .visual-word-examples,body.studio-enabled .confusion-control-row{grid-template-columns:minmax(0,1fr)}
+ body.studio-enabled .result-card,body.studio-enabled .lesson-card,body.studio-enabled .review-card{min-width:0}
+ body.studio-enabled #accountPanel{padding:0;border:0;background:transparent;box-shadow:none}
+ body.studio-enabled .studio-account-overview{margin-top:0}
+ body.studio-enabled .account-metrics{grid-template-columns:1fr;gap:12px}
+ body.studio-enabled .account-metric{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:18px;min-width:0}
+ body.studio-enabled .account-metric .metric-caption{font-size:13px;font-weight:600}
+ body.studio-enabled .account-metric strong{font-size:28px;line-height:1.25;margin:0}
+ body.studio-enabled .account-metric small{display:block;font-size:13px;line-height:1.6;max-width:none}
+ body.studio-enabled .account-details{grid-template-columns:minmax(0,1fr);gap:12px}
+ body.studio-enabled .account-detail{padding:18px}
+ body.studio-enabled .account-progress-heading{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+ body.studio-enabled .account-progress-heading strong{font-size:26px;line-height:1.3;white-space:nowrap}
+ body.studio-enabled #studioTargetLevel{display:block;width:100%;margin-top:8px}
+ body.studio-enabled .account-week{gap:2px}
+ body.studio-enabled .account-day{font-size:11px}
+ body.studio-enabled .account-actions{display:grid;grid-template-columns:1fr;gap:8px}
+ body.studio-enabled .account-actions button,body.studio-enabled #accountBackup{width:100%;white-space:normal}
+ body.studio-enabled .account-version{padding:18px;gap:12px}
+ body.studio-enabled .account-version-copy{min-width:0;flex-basis:100%}
+ body.studio-enabled .account-version .offline-bar{display:grid;grid-template-columns:1fr;gap:10px}
+ body.studio-enabled .account-version .offline-bar button{width:100%;margin:0}
+ body.studio-enabled .hub-card.large{min-height:0;gap:20px}
+ body.studio-enabled .hub-visual{min-height:150px}
+ body.studio-enabled .feature-copy{max-width:100%}
+ body.studio-enabled .hero-character{opacity:.3;right:8px;z-index:-1}
+ body.studio-enabled .lesson-list{grid-template-columns:minmax(0,1fr)}
+ body.studio-enabled .lesson-section-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ body.studio-enabled .lesson-section-nav button{padding:10px 8px;white-space:normal}
+ body.studio-enabled .lesson-grammar-point,body.studio-enabled .lesson-dialogue{padding:12px}
+ body.studio-enabled .lesson-language-line{padding:10px}
+ body.studio-enabled .lesson-cn{font-size:21px;line-height:1.7}
+ body.studio-enabled .handwriting-head{align-items:flex-start}
+ body.studio-enabled .handwriting-head strong{min-width:0;font-size:14px}
+ body.studio-enabled .handwriting-actions,body.studio-enabled .ocr-actions{display:grid;grid-template-columns:1fr;gap:8px}
+ body.studio-enabled .handwriting-actions button,body.studio-enabled .ocr-actions button{width:100%;white-space:normal}
+ body.studio-enabled #handwritingAdvanced{width:100%;white-space:normal}
+ body.studio-enabled .topbar-title strong{font-size:16px;line-height:1.3;overflow-wrap:break-word}
+ body.studio-enabled .topbar-inner{gap:10px}
+ body.studio-enabled .topbar-actions{gap:6px}
+ body.studio-enabled .level-pill{font-size:11px;padding:8px 10px}
+ body.studio-enabled #adminDetail{overflow-x:auto}
+}
+@media(max-width:400px){body.studio-enabled .ratings{grid-template-columns:repeat(2,minmax(0,1fr))}body.studio-enabled .account-progress-heading{flex-direction:column;align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){body.studio-enabled .drawer-group-heading .di-chev{transition:none}}
