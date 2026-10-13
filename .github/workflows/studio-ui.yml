@@ -1,7 +1,7 @@
 name: Studio layout checks
 on:
   pull_request:
-    paths: ['index.html', 'studio.js', 'planner.js', 'planner-core.js', 'exam*', 'account-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-exam*.cjs', 'tools/check-reading-dom.cjs', '.github/workflows/studio-ui.yml']
+    paths: ['index.html', 'studio.js', 'planner.js', 'planner-core.js', 'exam*', 'lessons.js', 'lessons-data.json', 'lesson-mastery.js', 'lesson-mini*', 'account-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-exam*.cjs', 'tools/check-lesson-mini*.cjs', 'tools/check-reading-dom.cjs', '.github/workflows/studio-ui.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -31,6 +31,7 @@ jobs:
           node tools/check-planner-dom.cjs
           node tools/check-update-dom.cjs
           node tools/check-exam-dom.cjs
+          node tools/check-lesson-mini-dom.cjs
           python3 -m unittest discover -s tools -p 'test_update*.py'
       - name: Browser layout and controls
         env:
