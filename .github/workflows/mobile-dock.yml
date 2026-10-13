@@ -1,0 +1,23 @@
+name: Mobile dock touch checks
+on:
+  pull_request:
+    paths: ['index.html', 'mobile-dock.js', 'studio-layout.css', 'tools/check-mobile-dock.cjs', '.github/workflows/mobile-dock.yml']
+permissions:
+  contents: read
+jobs:
+  touch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix /tmp/hsk-tests playwright@1.56.1
+      - run: CHROME_EXECUTABLE="$(command -v google-chrome)" NODE_PATH=/tmp/hsk-tests/node_modules node tools/check-mobile-dock.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-dock-touch
+          path: /tmp/studio-mobile-dock-*.png
+          retention-days: 7

@@ -493,7 +493,15 @@ html[data-theme=dark] body.studio-enabled :is(#progress,#learningStats,#srsStats
 html[data-theme=dark] body.studio-enabled :is(button,#themeToggle):is(:hover,:active,:focus-visible):not(:disabled){background:#6957e7!important;color:white!important;border-color:#6957e7!important}
 html[data-theme=dark] body.studio-enabled :is(button,#themeToggle):is(:hover,:active,:focus-visible):not(:disabled) :is(*,#studioLevelText){color:white!important}
 
-/* Keep only the bottom navigation fixed; preserve native document scrolling. */
+/* Mobile dock is a sibling of the independently scrolling application content. */
+.mobile-dock{display:none}
 @media(max-width:720px){
- body.studio-enabled .bottom-nav{position:fixed;inset:auto 0 0;transform:translateZ(0);-webkit-transform:translateZ(0);backface-visibility:hidden}
+ html:has(body.studio-enabled){height:100%;overflow:hidden;overscroll-behavior:none}
+ html body.studio-enabled{height:100%;min-height:0;overflow:hidden;overscroll-behavior:none}
+ body.studio-enabled .app-shell{position:fixed;inset:0 0 var(--mobile-dock-height,calc(67px + env(safe-area-inset-bottom)));height:auto;min-height:0;display:flex;overflow:hidden}
+ body.studio-enabled .app-area{display:flex;flex-direction:column;flex:1;min-height:0;min-width:0;overflow:hidden}
+ body.studio-enabled .topbar{position:relative;top:auto;flex:0 0 66px}
+ body.studio-enabled main.workspace{display:block;flex:1 1 0;min-height:0;height:auto;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;padding:20px 0 24px;touch-action:pan-y pinch-zoom}
+ body.studio-enabled .mobile-dock{display:block;position:fixed;inset:auto 0 0;z-index:12;isolation:isolate;transform:translateZ(0);backface-visibility:hidden}
+ body.studio-enabled .mobile-dock .bottom-nav{position:relative;inset:auto;transform:none;display:grid}
 }
