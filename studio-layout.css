@@ -489,3 +489,6 @@ html[data-theme=dark] body.studio-enabled :is(.quiz-level-picker,.quiz-type-grid
 html[data-theme=dark] body.studio-enabled :is(.about-logo,.filter-buttons,.drawer-close,.memory-reminder){background:#20222f!important;color:#c9c0ff!important;border-color:#44405c!important}
 html[data-theme=dark] body.studio-enabled :is(.hsk1-tag,.hsk2-tag,.hsk3-tag,.hsk4-tag,.hsk5-tag,.hsk6-tag){background:#5141c3!important;color:white!important}
 html[data-theme=dark] body.studio-enabled :is(#progress,#learningStats,#srsStats,#srsSessionProgress,.feedback,.example-cn,.example-vi,.memory-status,.comparison-note){color:#b9bdce!important}
+/* Theme text rules include legacy IDs; interactive white feedback must outrank them. */
+html[data-theme=dark] body.studio-enabled :is(button,#themeToggle):is(:hover,:active,:focus-visible):not(:disabled){background:#6957e7!important;color:white!important;border-color:#6957e7!important}
+html[data-theme=dark] body.studio-enabled :is(button,#themeToggle):is(:hover,:active,:focus-visible):not(:disabled) :is(*,#studioLevelText){color:white!important}
