@@ -480,3 +480,8 @@ html[data-theme=dark] body.studio-enabled button:disabled{background:#292c3b!imp
 html[data-theme=dark] body.studio-enabled button:is(:hover,:active,:focus-visible):not(:disabled),html[data-theme=dark] body.studio-enabled summary:is(:hover,:active,:focus-visible){background:#6957e7!important;color:white!important;border-color:#6957e7!important}
 html[data-theme=dark] body.studio-enabled button:is(:hover,:active,:focus-visible):not(:disabled) *,html[data-theme=dark] body.studio-enabled summary:is(:hover,:active,:focus-visible) *{color:white!important}
 html[data-theme=dark] body.studio-enabled :is(.theme-button,.avatar-button){color:#c9c0ff!important}
+html[data-theme=dark] body.studio-enabled :is(.about-hero,.account-identity,.account-badge,.account-progress-track,.lesson-example,.lesson-pattern,.lesson-mastery,.translation-chat-message,.lesson-chat-message,.lesson-translation,.lesson-test-feedback,.relation-word,.relation-merged,.visual-pair,.lesson-row){background:#2a293e!important;border-color:#44405c!important;color:#eeeef6!important}
+html[data-theme=dark] body.studio-enabled :is(.about-hero span,.lesson-row span,.lesson-number,.lesson-pattern,.translation-chat-message span,.lesson-chat-message span,.relation-word small,.relation-merged summary){color:#b9bdce!important}
+html[data-theme=dark] body.studio-enabled .brand-mark{background:#5141c3;color:white}
+html[data-theme=dark] body.studio-enabled .account-avatar{background:#363050;color:#c9c0ff}
+html[data-theme=dark] body.studio-enabled button:is(:hover,:active,:focus-visible):not(:disabled)::after{color:white!important}
