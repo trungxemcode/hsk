@@ -505,6 +505,7 @@ body.studio-enabled .handwriting-advanced-settings summary{cursor:pointer;color:
 body.studio-enabled .handwriting-advanced-settings #handwritingAdvanced{margin:8px 0;width:100%;min-height:44px}
 html[data-theme=dark] body.studio-enabled .handwriting-panel{background:var(--surface);color:var(--ink);border-color:var(--line)}
 html[data-theme=dark] body.studio-enabled .handwriting-head strong{color:var(--ink)}
+html[data-theme=dark] body.studio-enabled .handwriting-credit a{color:var(--accent-dark)}
 .coach-result>p,.coach-history>p{white-space:pre-line}
 @media(max-width:720px){
  html:has(body.studio-enabled){height:100%;overflow:hidden;overscroll-behavior:none}
