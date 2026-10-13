@@ -1,5 +1,9 @@
 # AI hỗ trợ phát hiện điểm cần cải thiện
 
+## Sửa tương thích phản hồi 13/10/2026
+
+Endpoint hỏi đáp hiện có trả `{answer: string}`, không cam kết JSON lồng bên trong chuỗi answer. Câu khách quan hiện yêu cầu giải thích bằng văn bản. App hiển thị và lưu nhận xét văn bản trực tiếp, không tự bịa điểm hoặc nhãn điểm yếu. JSON có cấu trúc vẫn được kiểm tra điểm, id và câu trích; JSON trong code fence/lời dẫn và wrapper answer cũng được hỗ trợ. JSON bị cắt hoặc sai chứng cứ không được biến thành điểm hợp lệ. Chọn hình gửi mô tả người đọc sách/uống nước… thay vì mã icon nội bộ.
+
 Nằm trong Luyện tập và Luyện theo dạng đề. Mỗi câu đã làm có nút AI chấm và góp ý; bài viết có thể gửi trước khi tự đối chiếu. AI nhận đề, câu trả lời thực tế, đáp án/mẫu tham khảo, tiêu chí và nội dung nguồn của bài. Chấp nhận cách diễn đạt đúng khác mẫu. Không dùng AI để thay đổi đáp án khách quan hoặc 100% hoàn thành.
 
 Tùy chọn “Hiện đúng/sai và giải thích AI ngay sau mỗi câu” mặc định tắt và nằm trong phần làm bài. Bỏ tick: nút Xem đáp án mở kết quả theo yêu cầu, không tự gửi AI. Bật: đúng/sai được chấm bằng đáp án có sẵn ngay sau chọn; câu vừa trả lời được gửi AI để giải thích bên dưới. Không đợi đủ 5 câu nữa. Với viết mở, AI góp ý sau khi nộp, không tự suy ra đúng/sai như câu khách quan. Cấu hình cũ enabled không tự kích hoạt tùy chọn mới instantEnabled, vì chế độ mới gửi nhiều yêu cầu hơn.

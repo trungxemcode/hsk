@@ -495,6 +495,18 @@ html[data-theme=dark] body.studio-enabled :is(button,#themeToggle):is(:hover,:ac
 
 /* Mobile dock is a sibling of the independently scrolling application content. */
 .mobile-dock{display:none}
+body.studio-enabled .handwriting-actions{display:grid;grid-template-columns:1fr;gap:12px;margin:12px 0}
+body.studio-enabled :is(.handwriting-edit-actions,.handwriting-recognition-actions){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+body.studio-enabled .handwriting-actions button{width:100%;min-width:0;min-height:44px;padding:10px 8px;margin:0;white-space:normal;line-height:1.35}
+body.studio-enabled .handwriting-edit-actions button{background:var(--surface);color:var(--sub);border:1px solid var(--line-dark)}
+body.studio-enabled #handwritingCancelAI{grid-column:1/-1}
+body.studio-enabled .handwriting-advanced-settings{margin:14px 0;border-top:1px solid var(--line);padding-top:12px}
+body.studio-enabled .handwriting-advanced-settings summary{cursor:pointer;color:var(--sub);font-size:13px;min-height:44px;padding:10px 0}
+body.studio-enabled .handwriting-advanced-settings #handwritingAdvanced{margin:8px 0;width:100%;min-height:44px}
+html[data-theme=dark] body.studio-enabled .handwriting-panel{background:var(--surface);color:var(--ink);border-color:var(--line)}
+html[data-theme=dark] body.studio-enabled .handwriting-head strong{color:var(--ink)}
+html[data-theme=dark] body.studio-enabled .handwriting-credit a{color:var(--accent-dark)}
+.coach-result>p,.coach-history>p{white-space:pre-line}
 @media(max-width:720px){
  html:has(body.studio-enabled){height:100%;overflow:hidden;overscroll-behavior:none}
  html body.studio-enabled{height:100%;min-height:0;overflow:hidden;overscroll-behavior:none}
