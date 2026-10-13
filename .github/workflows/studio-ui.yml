@@ -29,6 +29,8 @@ jobs:
           node tools/check-reading-dom.cjs
           node tools/check-studio-dom.cjs
           node tools/check-planner-dom.cjs
+          node tools/check-update-dom.cjs
+          python3 -m unittest discover -s tools -p 'test_update*.py'
       - name: Browser layout and controls
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules

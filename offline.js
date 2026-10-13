@@ -1,11 +1,15 @@
 (async()=>{
- const BUILD='hsk-offline-polish-20261013-1',status=document.getElementById('offlineStatus'),update=document.getElementById('offlineUpdate'),manual=document.getElementById('offlineCheck');
+ const BUILD='hsk-offline-notify-20261013-1',status=document.getElementById('offlineStatus'),update=document.getElementById('offlineUpdate'),manual=document.getElementById('offlineCheck');
  let registration,ready=false,checking=false,lastCheck=0,phase='',lastProgress=0,latest=null,activating=false,activeVersion=null;const watched=new WeakSet();
+ const notice=document.getElementById('updateNotice'),noticeText=document.getElementById('updateNoticeText'),noticeApply=document.getElementById('updateNoticeApply');let dismissed='';
+ function announce(downloaded=false){if(!notice||!latest||latest===BUILD||dismissed===latest)return;notice.hidden=false;noticeText.textContent=downloaded?'Bản mới đã sẵn sàng. Cập nhật khi bạn học xong; tiến độ được giữ.':'Đang tải bản mới. Bạn vẫn có thể tiếp tục học.';noticeApply.disabled=!downloaded;noticeApply.textContent=downloaded?'Cập nhật ngay':'Đang tải…';}
+ document.getElementById('updateNoticeLater')?.addEventListener('click',()=>{dismissed=latest;notice.hidden=true;});
+ noticeApply?.addEventListener('click',()=>activate());
  const set=text=>status.textContent=text;
  const idle=()=>{if(!checking&&!activating&&!['files','manifest','error'].includes(phase))set(ready?(navigator.onLine?'Đã sẵn sàng học offline · HSK 1–6':'Đang học offline · Tiến độ vẫn được lưu'):'Đang chuẩn bị học offline…');};
  const timeout=(promise,ms)=>{let timer;return Promise.race([promise,new Promise((_,reject)=>timer=setTimeout(()=>reject(Error('timeout')),ms))]).finally(()=>clearTimeout(timer));};
  function ask(worker){if(!worker)return Promise.resolve(null);return new Promise(resolve=>{const channel=new MessageChannel(),timer=setTimeout(()=>{channel.port1.close();resolve(null);},3000);channel.port1.onmessage=e=>{clearTimeout(timer);channel.port1.close();resolve(e.data);};worker.postMessage({type:'HSK_OFFLINE_STATUS'},[channel.port2]);});}
- function waiting(){if(registration?.waiting){phase='ready';update.hidden=false;update.disabled=false;update.textContent='Cập nhật ngay';set('Bản mới đã tải xong. Bấm Cập nhật ngay để áp dụng; tiến độ được giữ.');return true;}if(!activating)update.hidden=true;return false;}
+ function waiting(){if(registration?.waiting){phase='ready';update.hidden=false;update.disabled=false;update.textContent='Cập nhật ngay';set('Bản mới đã tải xong. Bấm Cập nhật ngay để áp dụng; tiến độ được giữ.');announce(true);return true;}if(!activating)update.hidden=true;return false;}
  function watch(worker){if(!worker||watched.has(worker))return;watched.add(worker);lastProgress=Date.now();const changed=()=>{if(worker.state==='installed'){waiting();setTimeout(waiting,0);if(!registration.active)ask(worker).then(x=>{if(x?.ready){ready=true;activeVersion=x.version;phase='';idle();}});}if(worker.state==='redundant'&&phase!=='error'){phase='error';set('Không cài được bản mới. Bản cũ và tiến độ vẫn được giữ. Bấm Kiểm tra cập nhật để thử lại.');}};worker.addEventListener('statechange',changed);worker.postMessage({type:'HSK_DOWNLOAD_STATUS'});changed();}
  navigator.serviceWorker?.addEventListener('message',event=>{const x=event.data;if(x?.type!=='HSK_DOWNLOAD_PROGRESS')return;phase=x.phase;lastProgress=Date.now();if(x.phase==='error')set('Cập nhật chưa hoàn tất: '+x.error+' Tiến độ vẫn được giữ.');else if(x.phase==='ready')waiting();else set(x.phase==='manifest'?'Đang xác nhận phiên bản mới…':`Đang chuẩn bị bản mới: ${x.done}/${x.total} tệp · ${Math.round(100*x.done/x.total)}%`);});
  async function refresh(explicit=false){
@@ -15,7 +19,7 @@
   try{
    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);let manifest;
    try{const r=await fetch('./app-version.json?t='+Date.now(),{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error('manifest');manifest=await r.json();if(typeof manifest.version!=='string')throw Error('manifest');}finally{clearTimeout(timer);}
-   latest=manifest.version;if(waiting())return;
+   latest=manifest.version;announce();if(waiting())return;
    if(registration.installing){watch(registration.installing);set('Bản mới đang được chuẩn bị. Tiến độ tải sẽ hiện ở đây.');return;}
    if(latest===BUILD&&ready&&activeVersion===BUILD){phase='';set('Bạn đang dùng bản mới nhất · '+manifest.label);return;}
    set('Đã tìm thấy bản mới · Đang tải cập nhật…');await timeout(registration.update(),20000);watch(registration.installing);

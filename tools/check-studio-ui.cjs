@@ -110,6 +110,14 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    const first=page.locator('#studioPractice .hub-card').first();await first.scrollIntoViewIfNeeded();const b=await first.boundingBox();await page.mouse.move(b.x+b.width/2,b.y+b.height/2);await page.mouse.down();await page.waitForTimeout(150);
    const colors=await first.evaluate(el=>({bg:getComputedStyle(el).backgroundColor,colors:[...el.querySelectorAll('strong,small,em,svg')].map(x=>getComputedStyle(x).color)}));assert.equal(colors.bg,'rgb(105, 87, 231)');assert.ok(colors.colors.every(c=>c==='rgb(255, 255, 255)'));await page.screenshot({path:'/tmp/studio-pressed-'+width+'.png',fullPage:true});await page.mouse.up();await page.mouse.move(0,0);
   }
+  // Touch emulation: verify retained hover after release, and whole learning-corner feedback.
+  const touch=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'}),phone=await touch.newPage();
+  await phone.route('https://**/*',r=>r.abort());await phone.goto(`http://127.0.0.1:${server.address().port}/index.html`);await phone.waitForFunction(()=>!!window.HSKStudio&&document.body.dataset.studioHub==='home');
+  const corner=phone.locator('.today-card');await corner.scrollIntoViewIfNeeded();await corner.focus();await phone.waitForTimeout(350);
+  assert.equal(await corner.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(105, 87, 231)');assert.equal(await corner.locator('.featured-han').evaluate(el=>getComputedStyle(el).color),'rgb(255, 255, 255)');
+  await phone.screenshot({path:'/tmp/studio-whole-corner-390.png',fullPage:true});await corner.tap();assert.ok(await phone.locator('#flashcard').isVisible());
+  await phone.evaluate(()=>window.HSKStudio.navigate('home'));await phone.locator('.shortcut[data-studio-go="quiz"]').tap();await phone.evaluate(()=>window.HSKStudio.navigate('home'));await phone.waitForTimeout(600);
+  const after=await phone.locator('.shortcut[data-studio-go="quiz"]').evaluate(el=>({bg:getComputedStyle(el).backgroundColor,color:getComputedStyle(el.querySelector('strong')).color}));assert.ok(['rgb(255, 255, 255)','rgb(105, 87, 231)'].includes(after.bg),'no legacy blue after touch release');if(after.bg==='rgb(105, 87, 231)')assert.equal(after.color,'rgb(255, 255, 255)');await touch.close();
   // All known core modules and controls still exist, including protected admin UI.
   for(const id of ['accountSync','accountBackup','adminRefresh','handwritingAdvanced','handwritingAI','handwritingCorrectChar','translationAskSubmit','lessonChatSend','memoryCalendar'])assert.equal(await page.locator('#'+id).count(),1,id);
   assert.deepEqual(errors,[]);console.log('PASS: desktop/mobile layout; original feature controls; real flashcards/search/SRS/lessons; guarded updater; local activity statistics; no page errors. External AI/auth mocked.');
