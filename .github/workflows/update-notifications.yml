@@ -1,8 +1,8 @@
 name: Notify web update
 on:
-  workflow_run:
-    workflows: ['pages build and deployment']
-    types: [completed]
+  push:
+    branches: [main]
+    paths: ['app-version.json', '.github/workflows/update-notifications.yml']
 permissions:
   contents: read
 concurrency:
@@ -10,13 +10,12 @@ concurrency:
   cancel-in-progress: false
 jobs:
   notify:
-    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ github.sha }}
           persist-credentials: false
       - name: Verify live version and notify opted-in devices
         env:
