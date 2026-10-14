@@ -333,11 +333,11 @@ function switchMode(next) {
  if(mode==='lessons')window.HSKLessonNav?.open();
  if(mode==='search')$('searchInput').focus();if(mode==='mistakes')renderMistakes();if(mode==='compare')renderComparisons(); stats();
 }
-let searchMatches=[], visibleResults=40, searchTimer;
+let searchMatches=[], visibleResults=40, searchTimer, searchPinyinAllowed=true;
 function searchScore(w,q,terms) {
  if(w.han===q.trim())return 150;
  if(/^[\u3400-\u9fff]+$/.test(q.trim())&&w.han.includes(q.trim()))return 110;
- if(window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(q)&&/[a-z]/i.test(q))return 120;
+ if(searchPinyinAllowed&&window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(q)&&/[a-z]/i.test(q))return 120;
  const senses=sensesMap.get(w), vietnamese=senses.map(viText);
  const meanings=senses.map(s=>hasAccent(q)?viText(s):fold(s)), query=hasAccent(q)?viText(q):fold(q);
  if(meanings.some(s=>s===query))return 100;
@@ -355,8 +355,10 @@ function runSearch() {
  if(handwritingSearchCharacter){searchMatches=levelWords().filter(w=>w.han.includes(handwritingSearchCharacter)).map((w,i)=>({w,score:100,i})).sort((a,b)=>Number(a.w.hsk)-Number(b.w.hsk)||a.i-b.i);renderSearch();return;}
  if(!q){searchMatches=[];renderSearch();return;}
  const terms=expandedTerms($('searchInput').value);
- const query=$('searchInput').value.trim(),pool=[...new Set([...levelWords(),...words.filter(w=>w.han===query||window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(query)&&/[a-z]/i.test(query))])];
- searchMatches=pool.map((w,i)=>({w,score:searchScore(w,query,terms),i})).filter(r=>r.score>0).sort((a,b)=>b.score-a.score||Number(a.w.hsk)-Number(b.w.hsk)||a.i-b.i);
+ const query=$('searchInput').value.trim(),normalized=hasAccent(query)?viText(query):fold(query);
+ searchPinyinAllowed=!words.some(w=>sensesMap.get(w).some(s=>(hasAccent(query)?viText(s):fold(s))===normalized));
+ const pool=[...new Set([...levelWords(),...words.filter(w=>w.han===query||searchPinyinAllowed&&window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(query)&&/[a-z]/i.test(query))])];
+ searchMatches=pool.map((w,i)=>({w,score:searchScore(w,query,terms),i})).filter(r=>r.score>0).sort((a,b)=>Number(b.score>=120)-Number(a.score>=120)||Number(a.w.hsk)-Number(b.w.hsk)||b.score-a.score||a.i-b.i);
  renderSearch();
 }
 function renderSearch() {
