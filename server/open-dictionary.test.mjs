@@ -5,6 +5,12 @@ import zlib from 'node:zlib';
 import crypto from 'node:crypto';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url),C=require('../open-dictionary-core.js'),A=require('../account-core.js');
+test('semantic intent and tone-sensitive readings avoid cross-reading meaning contamination',()=>{
+ for(const q of ['tam thuong','binh thuong','chú thuật','live streaming room','university'])assert.equal(C.semanticQuery(q),true,q);
+ for(const q of ['ping fan','zhi2 bo1','nǐ hǎo','lv4','直播间'])assert.equal(C.semanticQuery(q),false,q);
+ assert.equal(C.sameReading('píngfán','ping2 fan2'),true);assert.equal(C.sameReading('zhòng','zhong4'),true);assert.equal(C.sameReading('zhòng','zhong1'),false);assert.equal(C.sameReading('shù','shu3'),false);assert.equal(C.sameReading('lǜ','lu:4'),true);
+ assert.equal(C.score(['形','形','xing2',['shape']],'he'),0,'short English substrings must not match unrelated glosses');
+});
 test('general search ranks exact, containing and near results without an HSK bonus',()=>{
  const exact=['直播','直播','zhi2 bo1',['live broadcast']],partial=['直播间','直播間','zhi2 bo1 jian1',['livestream room']],contains=['网络直播','網絡直播','wang3 luo4 zhi2 bo1',['webcast']];
  assert.ok(C.score(exact,'直播')>C.score(partial,'直播'));assert.ok(C.score(partial,'直播')>=C.score(contains,'直播'));assert.ok(C.score(partial,'直播間')>0);assert.ok(C.score(['学习','學習','xue2 xi2',['study']],'学刁')>0);
