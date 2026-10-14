@@ -16,24 +16,26 @@
    loaded.set(n,data);if(!hit&&cache)try{await cache.put(url,copy);}catch(_){}return data;
   })();pending.set(n,task);try{return await task;}finally{pending.delete(n);}}
  function membership(w){return B.hsk(w.han,w.trad);}
- async function lookup(q,target,status,token){status.textContent='Đang tra từ điển mở rộng…';
+ async function lookup(q,target,status,token,general=false){status.textContent='Đang tra từ điển…';
   try{const chinese=/^[\p{Script=Han}]+$/u.test(q),rows=[];
-   if(chinese)rows.push(...await shard(q.codePointAt(0)%32));
-   else for(let i=0;i<32;i++){if(token!==serial)return;rows.push(...await shard(i));status.textContent=`Đang tra pinyin / tiếng Anh · ${i+1}/32 phần…`;}
-   if(token!==serial)return;const seen=new Set(),found=rows.filter(r=>C.matches(r,q)&&!seen.has(r.slice(0,3).join('|'))&&seen.add(r.slice(0,3).join('|'))).slice(0,40);
-   target.replaceChildren();for(const r of found)renderWord({han:r[0],trad:r[1],pin:r[2],mean:r[3].join('; ')},target);
-   status.textContent=found.length?`${found.length} kết quả · Nghĩa gốc tiếng Anh`:'Chưa có mục từ khớp. Bạn có thể nhập câu chứa từ và nhờ AI giải thích.';
+   if(chinese&&!general)rows.push(...await shard(q.codePointAt(0)%32));
+   else for(let start=0;start<32;start+=4){if(token!==serial)return;const batch=await Promise.all(Array.from({length:4},(_,i)=>shard(start+i)));for(const part of batch)rows.push(...part);status.textContent=`Đang mở từ điển · ${start+4}/32 phần…`;}
+   if(token!==serial)return;const seen=new Set(),found=[];
+   if(general)for(const {w,score} of B.results()){const word={han:w.han,trad:w.han,pin:w.pin,mean:w.mean,native:true};seen.add('hsk|'+w.han+'|'+w.pin);found.push({w:word,score});}
+   for(const r of rows){const key=r.slice(0,3).join('|'),score=general?C.score(r,q):C.matches(r,q)?150:0;if(!score||seen.has(key))continue;seen.add(key);found.push({w:{han:r[0],trad:r[1],pin:r[2],mean:r[3].join('; ')},score});}
+   found.sort((a,b)=>b.score-a.score||a.w.han.length-b.w.han.length||a.w.han.localeCompare(b.w.han));let shown=40;
+   const draw=()=>{target.replaceChildren();for(const {w} of found.slice(0,shown))renderWord(w,target);status.textContent=found.length?`${found.length} kết quả · Hiển thị ${Math.min(shown,found.length)} · ${general?'Xếp theo độ khớp':'Tham khảo ngoài kho HSK'}`:'Chưa có kết quả phù hợp. Có thể nhập câu chứa từ và nhờ AI giải thích.';if(shown<found.length)target.append(button('Xem thêm kết quả',()=>{shown+=40;draw();}));};draw();
   }catch(e){if(token===serial)status.textContent=e.message;}}
- function renderWord(w,target){const card=node('article','','result-card extended-word');const level=membership(w);card.append(node('span',level?'HSK '+level:'Từ mở rộng','hsk-tag'),node('h3',w.han),node('p',w.pin),node('p',w.mean));if(w.trad!==w.han)card.append(node('p','Phồn thể: '+w.trad,'hint'));
+ function renderWord(w,target){const card=node('article','','result-card extended-word');const level=membership(w);card.append(node('span',level?'HSK '+level:'Từ mở rộng','hsk-tag'),node('h3',w.han),node('p',w.pin),node('p',w.mean));if(w.trad!==w.han)card.append(node('p','Phồn thể: '+w.trad,'hint'));if(w.native)card.append(button('Mở thẻ HSK',()=>B.open(w.han,w.pin)));
   const speech=window.HSKSpeech?.button(w.han,'Nghe phát âm '+w.han);if(speech)card.append(speech);
   const ai=node('div','','dictionary-ai');ai.append(button('Giải thích tiếng Việt với AI',()=>askAI(w,ai)));card.append(ai);
   if(!level){const action=button(items[C.id(w)]?'Đã thêm vào SRS · Gỡ':'Ôn với SRS',()=>{const key=C.id(w);if(items[key]){delete items[key];queue=queue.filter(k=>k!==key);}else items=C.add(items,w);save();action.textContent=items[key]?'Đã thêm vào SRS · Gỡ':'Ôn với SRS';});action.className='dictionary-srs-add';card.append(action);}
-  card.append(node('small','CC-CEDICT · Nghĩa tiếng Anh'));target.append(card);}
- function prepare(){++serial;controller?.abort();controller=null;const token=serial,q=B.query().trim();box.replaceChildren();if(!q)return;
-  box.append(node('h3','Từ điển mở rộng'));const status=node('p','','hint'),results=node('div','','result-grid'),context=node('input');context.placeholder='Câu chứa từ (không bắt buộc)';context.maxLength=280;context.setAttribute('aria-label','Ngữ cảnh của từ cần tra');context.className='dictionary-context';
-  const actions=node('div','','dictionary-actions');actions.append(button('Tra từ mở rộng',()=>lookup(q,results,status,token)),button('Giải thích bằng AI',()=>askAI({han:q,pin:'',mean:'Chưa có nghĩa từ điển; cần xác định theo ngữ cảnh.'},results,context.value)));
+  card.append(node('small',w.native?'Kho HSK · Nghĩa tiếng Việt':'CC-CEDICT · Nghĩa tiếng Anh'));target.append(card);}
+ function prepare(){++serial;controller?.abort();controller=null;const token=serial,q=B.query().trim(),general=B.scope()==='general';box.replaceChildren();box.hidden=!q||!general&&B.results().length>0;if(box.hidden)return;
+  box.append(node('h3',general?'Kết quả tra cứu':'Tham khảo ngoài kho HSK'));const status=node('p','','hint'),results=node('div','','result-grid'),context=node('input');context.placeholder='Câu chứa từ (không bắt buộc)';context.maxLength=280;context.setAttribute('aria-label','Ngữ cảnh của từ cần tra');context.className='dictionary-context';
+  const actions=node('div','','dictionary-actions');if(!general)actions.append(button('Tra từ mở rộng',()=>lookup(q,results,status,token)));actions.append(button('Giải thích bằng AI',()=>askAI({han:q,pin:'',mean:'Chưa có nghĩa từ điển; cần xác định theo ngữ cảnh.'},results,context.value)));
   box.append(actions,context,status,results);const credit=node('a','Nguồn từ điển và giấy phép');credit.href='./open-dictionary-notice.html';credit.target='_blank';credit.rel='noopener';box.append(credit);
-  if(/^[\p{Script=Han}]+$/u.test(q)&&!B.exact(q))lookup(q,results,status,token);
+  if(general){for(const {w} of B.results().slice(0,40))renderWord({han:w.han,trad:w.han,pin:w.pin,mean:w.mean,native:true},results);lookup(q,results,status,token,true);}else if(/^[\p{Script=Han}]+$/u.test(q)&&!B.exact(q))lookup(q,results,status,token);
  }
  async function askAI(w,target,context=''){
   const user=window.HSKAccountDashboard?.user;target.replaceChildren();const status=node('p','','hint');target.append(status);

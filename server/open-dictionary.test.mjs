@@ -5,6 +5,12 @@ import zlib from 'node:zlib';
 import crypto from 'node:crypto';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url),C=require('../open-dictionary-core.js'),A=require('../account-core.js');
+test('general search ranks exact, containing and near results without an HSK bonus',()=>{
+ const exact=['直播','直播','zhi2 bo1',['live broadcast']],partial=['直播间','直播間','zhi2 bo1 jian1',['livestream room']],contains=['网络直播','網絡直播','wang3 luo4 zhi2 bo1',['webcast']];
+ assert.ok(C.score(exact,'直播')>C.score(partial,'直播'));assert.ok(C.score(partial,'直播')>=C.score(contains,'直播'));assert.ok(C.score(partial,'直播間')>0);assert.ok(C.score(['学习','學習','xue2 xi2',['study']],'学刁')>0);
+ assert.ok(C.score(['大学','大學','da4 xue2',['university']],'universitty')>0);assert.ok(C.score(partial,'zhi bo')>0);assert.equal(C.score(exact,'completely unrelated'),0);assert.equal(C.score(exact,''),0);
+ assert.equal(C.matches(['看','看','kan4',['see also 直播']],'直播'),false);assert.equal(C.near('abcd','abXYZd'),false);
+});
 test('extended SRS requires opt-in and syncs separately from HSK with deletion revisions',()=>{
  const w={han:'直播间',trad:'直播間',pin:'zhi2 bo1 jian1',mean:'livestream room'},initial={};
  assert.deepEqual(initial,{});const added=C.add(initial,w,1000),id=C.id(w);assert.equal(initial[id],undefined);assert.equal(added[id].due,1000);assert.strictEqual(C.add(added,w),added);

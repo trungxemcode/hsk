@@ -1,5 +1,9 @@
 # Tra cứu mở rộng
 
+## Hai chế độ tra cứu
+
+“Tra cứu HSK” ưu tiên dữ liệu HSK tiếng Việt và bộ lọc cấp độ hiện có; chỉ đưa phần tham khảo ngoài kho khi không có kết quả HSK. “Tra cứu thường” bỏ giới hạn cấp độ, tìm toàn bộ 32 gói cùng dữ liệu HSK, xếp theo chính xác → chứa cụm/prefix → gần giống (sai khác một ký tự, với độ dài tối thiểu). Không có ưu tiên riêng cho cấp HSK trong chế độ thường. Kết quả hiển thị 40 mục mỗi lượt, nút Xem thêm duyệt tiếp toàn bộ kết quả có điểm phù hợp, không cắt tập kết quả ở 40. Chỉ loại các bản sao cùng chữ giản thể/phồn thể/cách đọc do một mục xuất hiện trong nhiều gói; giữ các cách đọc khác nhau và ghi rõ nguồn HSK tiếng Việt hoặc CC-CEDICT tiếng Anh. Không phải tìm web Google và không khẳng định nhận diện đồng nghĩa ngoài dữ liệu sẵn có. Tải đủ các gói một lần để không bỏ sót từ chứa truy vấn ở giữa/cuối từ; những lần sau dùng cache đã tải.
+
 CC-CEDICT giữ nghĩa gốc tiếng Anh, pinyin và chữ giản thể/phồn thể; không tự tạo bản dịch Việt rồi coi là dữ liệu đã kiểm duyệt. `content/open-dictionary/manifest.json` ghi nguồn, giấy phép, số mục và SHA256. Chạy `python3 tools/build-open-dictionary.py source.txt.gz` để tái tạo 32 gói nén. Mỗi gói được định tuyến theo mã Unicode chữ đầu modulo 32; từ phồn thể có thể xuất hiện ở hai gói để tra đúng. Tải gói chính thức từ trang download CC-CEDICT; không quét nội dung web từ điển.
 
 Tra chính xác chữ Hán hoặc pinyin HSK vẫn tìm ngoài bộ lọc hiện tại. Chữ Hán chưa có trong danh mục tự tra gói mở rộng; pinyin/tiếng Anh mở rộng chỉ tải khi bấm nút (lần đầu cần tải đủ gói). Nghĩa Việt tiếp tục dùng kho HSK sẵn có; ngoài kho này, người dùng bấm AI để giải thích theo ngữ cảnh. AI dùng endpoint `/lesson-ask` hiện có, không đổi backend, cần đăng nhập. Kết quả AI ghi nhãn riêng, có timeout, hủy khi đổi truy vấn/tài khoản và cache theo tài khoản trong phiên.
