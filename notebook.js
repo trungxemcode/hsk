@@ -3,7 +3,8 @@
  'use strict';const KEY='hsk-vocabulary-notebook-v1',panel=document.getElementById('notebookPanel');if(!panel)return;
  const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(cls)n.className=cls;return n;};
  const action=(text,fn)=>{const b=node('button',text);b.type='button';b.onclick=fn;return b;};
- let editing=null,items={};
+ const owner=()=>{try{return JSON.parse(localStorage.getItem('hsk-account-meta-v1')||'{}').uid||'guest';}catch(_){return 'guest';}};
+ let editing=null,items={},activeOwner=owner();
  function load(){try{const data=JSON.parse(localStorage.getItem(KEY)||'{}');items=data.items&&typeof data.items==='object'&&!Array.isArray(data.items)?data.items:{};}catch(_){items={};}}
  const intro=node('div','','hub-intro');intro.append(node('h2','Sổ từ vựng'));panel.append(intro,node('p','Tự thêm từ hoặc lưu từ khi tra cứu. Sổ lưu trên thiết bị và đồng bộ khi đăng nhập.','hint'));
  const status=node('p');status.setAttribute('role','status');
@@ -19,5 +20,5 @@
  function add(value){const w={};for(const [k,input] of Object.entries(fields))w[k]=String(value[k]||'').trim().slice(0,input.maxLength);if(!w.han||!w.mean){status.textContent='Nhập chữ Trung và nghĩa tiếng Việt để lưu.';return false;}const duplicate=Object.entries(items).find(([id,x])=>id!==editing&&x?.han===w.han&&String(x.pin||'')===w.pin);if(duplicate){status.textContent='Từ với phiên âm này đã có trong sổ. Bạn có thể tìm và sửa từ đã lưu.';return false;}const id=editing||crypto.randomUUID();w.createdAt=items[id]?.createdAt||Date.now();w.updatedAt=Date.now();if(!persist({...items,[id]:w}))return false;status.textContent=editing?'Đã lưu thay đổi.':'Đã thêm từ vào sổ.';reset();return true;}
  form.onsubmit=e=>{e.preventDefault();add(Object.fromEntries(Object.entries(fields).map(([k,input])=>[k,input.value])));};search.oninput=render;
  window.HSKNotebook={button(getWord){return action('Lưu vào sổ',()=>{const w=getWord();window.HSKStudio?.navigate('notebook');reset();for(const k of Object.keys(fields))fields[k].value=w[k]||'';fields.example.value=w.example||[w.exCn,w.exPin,w.exVi].filter(Boolean).join('\n');status.textContent='Kiểm tra nghĩa tiếng Việt rồi bấm Thêm từ.';fields.mean.focus();});}};
- window.addEventListener('hsk-account-ready',()=>{load();reset();render();});window.addEventListener('storage',e=>{if(e.key===KEY){load();render();}});load();render();
+ window.addEventListener('hsk-account-ready',()=>{const nextOwner=owner();load();if(nextOwner!==activeOwner){activeOwner=nextOwner;reset();}render();});window.addEventListener('storage',e=>{if(e.key===KEY){load();render();}});load();render();
 })();
