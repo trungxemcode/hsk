@@ -1,5 +1,5 @@
 """Run after modifying site files; optional --version bumps all worker/client revisions."""
-import argparse, hashlib, json, re
+import argparse, hashlib, json, re, gzip
 from pathlib import Path
 root=Path(__file__).resolve().parent
 parser=argparse.ArgumentParser();parser.add_argument('--version');args=parser.parse_args()
@@ -11,13 +11,17 @@ if args.version:
   p.write_text(s,encoding='utf-8',newline='')
 worker=(root/'offline-worker.js').read_text(encoding='utf-8');version=re.search(r"OFFLINE_VERSION='([^']+)'",worker).group(1)
 files=json.loads(re.search(r'const OFFLINE_FILES=(\[.*?\]);',worker).group(1))
-for name in ('exam-bank.js','exam-core.js','exam.js','exam.css','lesson-mini.js','lesson-mini-data.json','ai-coach-core.js','ai-coach.js','mobile-dock.js','exam-expansion.js','coach-profile.js'):
+for name in ('exam-bank.js','exam-core.js','exam.js','exam.css','lesson-mini.js','lesson-mini-data.json','ai-coach-core.js','ai-coach.js','mobile-dock.js','exam-expansion.js','coach-profile.js','drive-exam.js','drive-exam-data.json.gz'):
  if name not in files:files.append(name)
+files=[f for f in files if not f.startswith('content/drive-hsk/') and f not in ('drive-exam-data.json','drive-exam-images.json')]
+for code in sorted({p.split('/')[-1].split('-')[0] for p in json.loads(gzip.decompress((root/'drive-exam-data.json.gz').read_bytes()))['report']['images']}):
+ path='content/drive-hsk/'+code+'.json'
+ if path not in files:files.append(path)
 worker=re.sub(r'const OFFLINE_FILES=\[.*?\];','const OFFLINE_FILES='+json.dumps(files,ensure_ascii=False)+';',worker,count=1)
 (root/'offline-worker.js').write_text(worker,encoding='utf-8',newline='')
 def asset_metadata(name):
  path=root/name;data=path.read_bytes()
- if path.suffix.lower() not in {'.png','.gz'}:data=data.replace(b'\r\n',b'\n')
+ if path.suffix.lower() not in {'.png','.gz','.webp'}:data=data.replace(b'\r\n',b'\n')
  return {'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data)}
 assets={n:asset_metadata(n) for n in files}
 (root/'app-version.json').write_text(json.dumps({'version':version,'label':version.removeprefix('hsk-offline-'),'assets':assets},ensure_ascii=False),encoding='utf-8')

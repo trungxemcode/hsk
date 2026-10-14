@@ -1,0 +1,8 @@
+/* User-supplied Drive practice: only complete questions backed by source answer keys. */
+(function(root){'use strict';
+const type={id:'driveReadImage',name:'Đọc theo tài liệu gốc',skill:'Đọc',levels:[1],format:'choice',note:'Câu có hình/pinyin gốc; chạm để phóng to và chọn đáp án.'};
+function install(bank,data){if(!bank.types.some(t=>t.id===type.id))bank.types.push(type);const ids=new Set(bank.items.map(q=>q.id));for(const q of data.items)if(!ids.has(q.id)){bank.items.push(q);ids.add(q.id);}bank.driveReport=data.report;return bank;}
+if(typeof module==='object'&&module.exports){module.exports=install;return;}
+root.HSKDriveExam={ready:false,error:null};const imagePromises={};root.HSKDriveExam.image=path=>{const code=path.split('/').pop().split('-')[0];const imagePromise=imagePromises[code]=imagePromises[code]||fetch('./content/drive-hsk/'+code+'.json').then(r=>{if(!r.ok)throw Error('Không tải được hình đề.');return r.json();});return imagePromise.then(images=>{if(!images[path])throw Error('Thiếu hình đề.');return images[path];});};
+fetch('./drive-exam-data.json.gz').then(r=>{if(!r.ok)throw Error('Không tải được kho đề.');return new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).json();}).then(data=>{install(root.HSKExamBank,data);root.HSKExamCore.validate(root.HSKExamBank);root.HSKDriveExam.ready=true;root.dispatchEvent(new Event('hsk-exam-ready'));if(root.HSKExam&&!root.HSKExam.question&&!document.getElementById('examPractice').hidden)root.HSKExam.catalogue();}).catch(e=>{root.HSKDriveExam.error=e.message;root.dispatchEvent(new Event('hsk-exam-ready'));});
+})(typeof window==='object'?window:globalThis);
