@@ -2,3 +2,4 @@
 .open-dictionary a{color:var(--accent-dark,#5141c3)}body.studio-enabled .result-card.extended-word{display:flex;padding:20px;gap:12px}body.studio-enabled .extended-word h3{font-size:28px;line-height:1.4;margin:0;color:var(--ink)}body.studio-enabled .extended-word .hsk-tag{align-self:flex-start}body.studio-enabled .extended-word small{font-size:13px}html[data-theme=dark] .open-dictionary a{color:#c1b7ff}
 .extended-word .hsk-tag{position:static;margin:0}
 body.studio-enabled .extended-word .hsk-tag{background:var(--accent-light,#f0edff);color:var(--accent-dark,#5141c3)}
+.dictionary-modes{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}.dictionary-modes button{flex:1 1 140px;min-height:44px}.dictionary-modes button[aria-pressed=true]{background:var(--accent-dark,#5141c3)!important;color:white!important;border-color:transparent!important}html[data-theme=dark] .dictionary-modes button[aria-pressed=true]{background:#6957e7!important;color:white!important}

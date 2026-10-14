@@ -15,6 +15,18 @@
   else{interval=reps===0?1:reps===1?3:Math.max(1,interval*ease);reps++;}
   return {...old,ease,reps,interval,lapses,lastReview:now,due:now+Math.round(interval*DAY)};
  }
- function matches(row,q){q=q.trim();if(/^[\\p{Script=Han}]+$/u.test(q))return row[0]===q||row[1]===q;return row[0]===q||row[1]===q||fold(row[2])===fold(q)&&!!fold(q)||row[3].some(s=>s.toLowerCase().includes(q.toLowerCase()));}
- const api={KEY,id,fold,valid,clean,add,rate,matches};root.HSKOpenDictionaryCore=api;if(typeof module!=='undefined')module.exports=api;
+ function matches(row,q){q=q.trim();if(/^[\p{Script=Han}]+$/u.test(q))return row[0]===q||row[1]===q;return row[0]===q||row[1]===q||fold(row[2])===fold(q)&&!!fold(q)||row[3].some(s=>s.toLowerCase().includes(q.toLowerCase()));}
+ function near(a,b){if(Math.abs(a.length-b.length)>1)return false;let i=0,j=0,n=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;continue;}if(++n>1)return false;if(a.length>=b.length)i++;if(b.length>=a.length)j++;}return n+(i<a.length||j<b.length?1:0)<=1;}
+ function score(row,q){q=q.trim();if(!q)return 0;const [han,trad,pin,mean]=row;
+  if(han===q||trad===q)return 150;
+  if(/\p{Script=Han}/u.test(q)){if(han.startsWith(q)||trad.startsWith(q))return 130;if(han.includes(q)||trad.includes(q))return 115;return q.length>=2&&(near(han,q)||near(trad,q))?60:0;}
+  const p=fold(pin),f=fold(q);if(f&&p===f)return 145;
+  const english=mean.join('; ').toLowerCase(),query=q.toLowerCase();if(mean.some(s=>s.toLowerCase()===query))return 140;
+  if(english.includes(query))return 110;
+  if(query.split(/\s+/).length>1&&query.split(/\s+/).every(t=>english.includes(t)))return 85;
+  if(f.length>=2&&p.startsWith(f))return 100;if(f.length>=3&&p.includes(f))return 80;
+  if(f.length>=4&&near(p,f))return 55;
+  return query.length>=4&&english.split(/[^a-z]+/).some(t=>near(t,query))?45:0;
+ }
+ const api={KEY,id,fold,valid,clean,add,rate,matches,near,score};root.HSKOpenDictionaryCore=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
