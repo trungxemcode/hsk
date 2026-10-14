@@ -5,7 +5,7 @@
  const fold=s=>String(s||'').toLowerCase().replace(/u:|ü|ǖ|ǘ|ǚ|ǜ/g,'v').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[1-5]/g,'').replace(/[^a-zv]/g,'');
  function valid(x){return !!x&&x.word&&['han','trad','pin','mean'].every(k=>typeof x.word[k]==='string'&&x.word[k].length>0&&x.word[k].length<8000)&&Number.isFinite(x.due)&&Number.isFinite(x.interval)&&x.interval>=0&&Number.isFinite(x.ease)&&x.ease>=1.3&&Number.isInteger(x.reps)&&x.reps>=0;}
  function clean(value){const items={};for(const [k,x] of Object.entries(value?.items||{}))if(valid(x)&&k===id(x.word))items[k]=x;return items;}
- function add(items,word,now=Date.now()){const key=id(word);return items[key]?items:{...items,[key]:{word:{han:word.han,trad:word.trad,pin:word.pin,mean:word.mean},due:now,interval:0,ease:2.5,reps:0,lapses:0}};}
+ function add(items,word,now=Date.now()){const key=id(word);return items[key]?items:{...items,[key]:{word:{han:word.han,trad:word.trad,pin:word.pin,mean:word.meanVi||word.mean,meanLanguage:word.meanVi||word.native?'vi':'unknown',sourceMean:word.sourceMean||word.mean},due:now,interval:0,ease:2.5,reps:0,lapses:0}};}
  function rate(old,rating,now=Date.now()){
   if(!valid(old)||!['again','hard','good','easy'].includes(rating))throw Error('Invalid review');
   let {ease,reps,interval}=old,lapses=old.lapses||0;
@@ -29,5 +29,6 @@
   return query.length>=4&&english.split(/[^a-z]+/).some(t=>near(t,query))?45:0;
  }
  const vietnamese=q=>/[đĐ]|[\u0302\u0306\u0309\u031b\u0323]/.test(String(q).normalize('NFD'));
- const api={KEY,id,fold,valid,clean,add,rate,matches,near,score,vietnamese};root.HSKOpenDictionaryCore=api;if(typeof module!=='undefined')module.exports=api;
+ function translationKey(w){let h=2166136261;for(const c of w.sourceMean||w.mean||''){h^=c.codePointAt(0);h=Math.imul(h,16777619);}return id(w)+'|'+(h>>>0).toString(16);}
+ const api={KEY,id,fold,valid,clean,add,rate,matches,near,score,vietnamese,translationKey};root.HSKOpenDictionaryCore=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
