@@ -34,7 +34,9 @@ jobs:
           assets = json.loads(Path('app-version.json').read_text())['assets']
           for name in assets:
               if name not in ('index.html', 'loader.js'):
-                  shutil.copyfile(name, Path('ios/Web') / name)
+                  target = Path('ios/Web') / name
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  shutil.copyfile(name, target)
           PYCODE
       - name: Test SRS and notification question logic
         run: swiftc ios/HSK/StudyCore.swift ios/Tests/CoreTests.swift -o /tmp/hsk-core-tests && /tmp/hsk-core-tests
