@@ -6,7 +6,7 @@ import crypto from 'node:crypto';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url),C=require('../open-dictionary-core.js'),A=require('../account-core.js');
 test('semantic intent and tone-sensitive readings avoid cross-reading meaning contamination',()=>{
- for(const q of ['tam thuong','binh thuong','chú thuật','live streaming room','university'])assert.equal(C.semanticQuery(q),true,q);
+ for(const q of ['tam thuong','binh thuong','thong tin','chú thuật','live streaming room','university'])assert.equal(C.semanticQuery(q),true,q);
  for(const q of ['ping fan','zhi2 bo1','nǐ hǎo','lv4','直播间'])assert.equal(C.semanticQuery(q),false,q);
  assert.equal(C.sameReading('píngfán','ping2 fan2'),true);assert.equal(C.sameReading('zhòng','zhong4'),true);assert.equal(C.sameReading('zhòng','zhong1'),false);assert.equal(C.sameReading('shù','shu3'),false);assert.equal(C.sameReading('lǜ','lu:4'),true);
  assert.equal(C.score(['形','形','xing2',['shape']],'he'),0,'short English substrings must not match unrelated glosses');
