@@ -27,6 +27,16 @@ function setup(providerResponse,options={}){
  return {calls,run:(route,body=bodies[route])=>handler(new Request('https://worker.test'+route,{method:'POST',headers:{Origin:origin,Authorization:'Bearer '+token},body:JSON.stringify(body)}),{...env,...options})};
 }
 const answerResponse=()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify({answer:'你好 là lời chào.'})}]}}]});
+const batchBody={entries:[{id:'entry-1',han:'直播间',pinyin:'zhi2 bo1 jian1',gloss:'live streaming room'}]};
+const batchResponse=data=>()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(data)}]}}]});
+test('batch meanings are Vietnamese, mapped to source entries, and independent of HSK',async()=>{
+ const {run,calls}=setup(batchResponse({translations:[{id:'entry-1',meaning:'phòng phát trực tiếp'}]}));const r=await run('/dictionary-translate',batchBody);assert.equal(r.status,200);assert.equal((await r.json()).language,'vi');assert.match(calls[1].body.systemInstruction.parts[0].text,/tiếng Việt/);assert.equal((await run('/dictionary-translate',batchBody)).status,429);assert.equal((await run('/dictionary-lookup',{query:'直播间'})).status,502,'separate dictionary routes must not share cooldown');
+});
+test('batch translation rejects invalid entries and mismatched provider IDs',async()=>{
+ for(const entries of [[],Array(41).fill(batchBody.entries[0]),[{...batchBody.entries[0],han:'not Han'}],[{...batchBody.entries[0],gloss:''}],[batchBody.entries[0],batchBody.entries[0]]]){const {run,calls}=setup(batchResponse({translations:[]}));assert.equal((await run('/dictionary-translate',{entries})).status,400);assert.equal(calls.length,0);}
+ for(const translations of [[],[{id:'wrong',meaning:'phòng phát trực tiếp'}],[{id:'entry-1',meaning:''}]]){const {run}=setup(batchResponse({translations}));assert.equal((await run('/dictionary-translate',batchBody)).status,502);}
+ const handler=createHandler(async()=>{throw Error('unauthenticated provider call');});assert.equal((await handler(new Request('https://worker.test/dictionary-translate',{method:'POST',headers:{Origin:origin},body:JSON.stringify(batchBody)}),env)).status,401);
+});
 const dictionaryResponse=()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify({answer:'Chú thuật cần hiểu theo ngữ cảnh tín ngưỡng hoặc truyện/phim.',terms:[{han:'咒语',pinyin:'zhòu yǔ',meaning:'câu chú; thần chú'}]})}]}}]});
 test('general dictionary has no HSK requirement and emits bounded Vietnamese semantic candidates',async()=>{
  const {run,calls}=setup(dictionaryResponse);const response=await run('/dictionary-lookup',{query:'chú thuật',context:'Trong truyện/phim'}),data=await response.json();assert.equal(response.status,200);assert.equal(data.scope,'general');assert.equal(data.source,'ai');assert.equal(data.terms[0].han,'咒语');
