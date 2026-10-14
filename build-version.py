@@ -14,7 +14,7 @@ files=json.loads(re.search(r'const OFFLINE_FILES=(\[.*?\]);',worker).group(1))
 for name in ('exam-bank.js','exam-core.js','exam.js','exam.css','lesson-mini.js','lesson-mini-data.json','ai-coach-core.js','ai-coach.js','mobile-dock.js','exam-expansion.js','coach-profile.js','drive-exam.js','drive-exam-data.json.gz'):
  if name not in files:files.append(name)
 files=[f for f in files if not f.startswith('content/drive-hsk/') and f not in ('drive-exam-data.json','drive-exam-images.json','ios-transfer.html')]
-for name in ('drive-audio.js','drive-audio-data.json'):
+for name in ('drive-audio.js','drive-audio-data.json','open-dictionary-core.js','open-dictionary.js','open-dictionary.css','open-dictionary-notice.html'):
  if name not in files:files.append(name)
 for question in json.loads((root/'drive-audio-data.json').read_text())['items']:
  if question['audioFile'] not in files:files.append(question['audioFile'])

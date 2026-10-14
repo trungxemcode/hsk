@@ -1,0 +1,9 @@
+# Tra cứu mở rộng
+
+CC-CEDICT giữ nghĩa gốc tiếng Anh, pinyin và chữ giản thể/phồn thể; không tự tạo bản dịch Việt rồi coi là dữ liệu đã kiểm duyệt. `content/open-dictionary/manifest.json` ghi nguồn, giấy phép, số mục và SHA256. Chạy `python3 tools/build-open-dictionary.py source.txt.gz` để tái tạo 32 gói nén. Mỗi gói được định tuyến theo mã Unicode chữ đầu modulo 32; từ phồn thể có thể xuất hiện ở hai gói để tra đúng. Tải gói chính thức từ trang download CC-CEDICT; không quét nội dung web từ điển.
+
+Tra chính xác chữ Hán hoặc pinyin HSK vẫn tìm ngoài bộ lọc hiện tại. Chữ Hán chưa có trong danh mục tự tra gói mở rộng; pinyin/tiếng Anh mở rộng chỉ tải khi bấm nút (lần đầu cần tải đủ gói). Nghĩa Việt tiếp tục dùng kho HSK sẵn có; ngoài kho này, người dùng bấm AI để giải thích theo ngữ cảnh. AI dùng endpoint `/lesson-ask` hiện có, không đổi backend, cần đăng nhập. Kết quả AI ghi nhãn riêng, có timeout, hủy khi đổi truy vấn/tài khoản và cache theo tài khoản trong phiên.
+
+Không đưa gói từ điển vào toàn bộ tải offline ban đầu: gói được cache riêng khi đã tra, sử dụng offline nếu trình duyệt giữ cache. Từ chủ động thêm vào SRS được lưu đủ chữ/phiên âm/nghĩa để ôn ngay cả khi gói cache bị xóa. Tra cứu, phát âm và hỏi AI không thêm lịch. Nút “Ôn với SRS” mới thêm; bấm lại gỡ. Lịch từ mở rộng nằm trong `hsk-open-dictionary-srs-v1`, không chèn vào words, record HSK hoặc bằng chứng bài học. Có mục SRS riêng trong trang Ôn SRS và quản lý từng từ đã chọn. Account core đồng bộ từng từ bằng revision `open-word:`; backup và đăng xuất dùng cơ chế hiện có.
+
+Kiểm tra: `node --test server/*.test.mjs`, `tools/check-exam-dom.cjs`, kiểm tra trình duyệt có tra gói thật, opt-in, rating, gỡ, tiến độ HSK không đổi, không tràn 320/390/1440px và tương phản sáng/tối. Không chứng nhận độ đúng của AI từ mock: phản hồi thật phụ thuộc dịch vụ hiện có.

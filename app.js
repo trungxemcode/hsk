@@ -333,8 +333,11 @@ function switchMode(next) {
  if(mode==='lessons')window.HSKLessonNav?.open();
  if(mode==='search')$('searchInput').focus();if(mode==='mistakes')renderMistakes();if(mode==='compare')renderComparisons(); stats();
 }
-let searchMatches=[], visibleResults=40, searchTimer;
+let searchMatches=[], visibleResults=40, searchTimer, searchPinyinAllowed=true;
 function searchScore(w,q,terms) {
+ if(w.han===q.trim())return 150;
+ if(/^[\u3400-\u9fff]+$/.test(q.trim())&&w.han.includes(q.trim()))return 110;
+ if(searchPinyinAllowed&&window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(q)&&/[a-z]/i.test(q))return 120;
  const senses=sensesMap.get(w), vietnamese=senses.map(viText);
  const meanings=senses.map(s=>hasAccent(q)?viText(s):fold(s)), query=hasAccent(q)?viText(q):fold(q);
  if(meanings.some(s=>s===query))return 100;
@@ -352,7 +355,10 @@ function runSearch() {
  if(handwritingSearchCharacter){searchMatches=levelWords().filter(w=>w.han.includes(handwritingSearchCharacter)).map((w,i)=>({w,score:100,i})).sort((a,b)=>Number(a.w.hsk)-Number(b.w.hsk)||a.i-b.i);renderSearch();return;}
  if(!q){searchMatches=[];renderSearch();return;}
  const terms=expandedTerms($('searchInput').value);
- searchMatches=levelWords().map((w,i)=>({w,score:searchScore(w,$('searchInput').value,terms),i})).filter(r=>r.score>0).sort((a,b)=>Number(a.w.hsk)-Number(b.w.hsk)||b.score-a.score||a.i-b.i);
+ const query=$('searchInput').value.trim(),normalized=hasAccent(query)?viText(query):fold(query);
+ searchPinyinAllowed=!words.some(w=>sensesMap.get(w).some(s=>(hasAccent(query)?viText(s):fold(s))===normalized));
+ const pool=[...new Set([...levelWords(),...words.filter(w=>w.han===query||searchPinyinAllowed&&window.HSKOpenDictionaryCore?.fold(w.pin)===window.HSKOpenDictionaryCore?.fold(query)&&/[a-z]/i.test(query))])];
+ searchMatches=pool.map((w,i)=>({w,score:searchScore(w,query,terms),i})).filter(r=>r.score>0).sort((a,b)=>Number(b.score>=120)-Number(a.score>=120)||Number(a.w.hsk)-Number(b.w.hsk)||b.score-a.score||a.i-b.i);
  renderSearch();
 }
 function renderSearch() {
@@ -362,11 +368,12 @@ function renderSearch() {
   const card=document.createElement('article');card.className='result-card';card.append(makeMasteryTools(w));
   const tag=document.createElement('span');tag.className=`hsk-tag hsk${w.hsk}-tag`;tag.textContent=`HSK ${w.hsk}`;card.append(tag);
   const open=document.createElement('button');open.className='result-open';open.textContent=w.han;open.title='Mở từ này trong thẻ từ vựng';
-  open.onclick=()=>{$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');$('flashcard').focus();};card.append(open);
+  open.onclick=()=>{if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');$('flashcard').focus();};card.append(open);
   for(const value of [w.pin,w.mean]) {const p=document.createElement('p');p.textContent=value;card.append(p);}
   const label=document.createElement('small');label.textContent=recordOf(w)?statusOf(w)==='known'?'✓ Đã thuộc':'× Chưa thuộc':'Chưa đánh dấu';card.append(label,wordRelationDetails(w));$('searchResults').append(card);
  }
  $('searchMore').hidden=visibleResults>=searchMatches.length;
+ window.dispatchEvent(new Event('hsk-search-rendered'));
 }
 window.HSKHandwritingSearch={
  characters:()=>[...new Set(words.flatMap(w=>Array.from(w.han).filter(c=>/[\u3400-\u9fff\u3007]/.test(c))))].join(''),
@@ -926,4 +933,5 @@ window.HSKLessons={
  quiz(ws,label,id){let state={};try{state=JSON.parse(localStorage.getItem('hsk-course-lessons-v1')||'{}').lessons?.[id]||{};}catch{};const pool=shuffled(ws).sort((a,b)=>(state.evidence?.[wordKey(a)]?.quizStreak||0)-(state.evidence?.[wordKey(b)]?.quizStreak||0));const qs=pool.slice(0,20).map((w,i)=>createQuestion(w,i%2?'mean':'han',words)).filter(Boolean);startSavedQuestions(qs,label);if(qs.length){quizSession.lessonId=id;$('lessonPracticeBack').hidden=!id;}},
  srs(ws,id){switchMode('srs');const due=ws.filter(w=>!recordOf(w)||recordOf(w).due<=Date.now()).sort((a,b)=>(recordOf(a)?.due||0)-(recordOf(b)?.due||0));srsSession={queue:due,total:due.length,done:0,lessonId:id};$('lessonPracticeBack').hidden=!id;$('srsMessage').textContent=due.length?'Ôn từ đến hạn và từ mới của bài học.':'Tất cả từ trong bài đã có lịch ôn và chưa đến hạn.';renderSrs();}
 };
+window.HSKDictionaryBridge={query:()=>handwritingSearchCharacter||$('searchInput').value,exact:q=>words.some(w=>w.han===q),hsk:(han,trad)=>words.find(w=>w.han===han||w.han===trad)?.hsk||null};
 window.dispatchEvent(new Event('hsk-lessons-ready'));
