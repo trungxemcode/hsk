@@ -104,8 +104,8 @@
   </div><div id="jumpStatus"></div><div id="learningStats" aria-live="polite"></div></div><div class="tool-card"><h3>Từ liên quan</h3><div id="wordRelations" class="card-relations"></div></div></div></div></section>
   <section id="searchPanel" class="panel-box activity-panel" hidden=""><nav class="studio-search-tabs" aria-label="Các công cụ tra cứu"><button type="button" data-studio-go="search">Từ vựng / Vẽ chữ</button><button type="button" data-studio-go="translator">Dịch câu / Đọc ảnh</button></nav>
     <h2>Tìm kiếm từ vựng</h2>
-    <p class="hint">Nhập nghĩa tiếng Việt, có hoặc không dấu. Tìm theo từ/cụm từ và các nhóm gần nghĩa có sẵn; kết quả luôn xếp HSK thấp → cao. Bộ lọc HSK trong menu ☰ áp dụng cho cả tìm kiếm.</p>
-    <form id="searchForm" class="field-row"><input id="searchInput" aria-label="Nghĩa tiếng Việt cần tìm" placeholder="Ví dụ: vui vẻ, bố, xinh đẹp…" autocomplete="off"><button type="submit">Tìm kiếm</button><button id="handwritingOpen" type="button" aria-controls="handwritingPanel" aria-expanded="false" disabled="">✍ Vẽ chữ</button></form>
+    <p class="hint">Tra chữ Hán, pinyin hoặc nghĩa tiếng Việt. Từ khớp chính xác vẫn hiện ở HSK khác; từ mở rộng có lịch SRS riêng khi bạn chọn thêm.</p>
+    <form id="searchForm" class="field-row"><input id="searchInput" aria-label="Từ hoặc nghĩa cần tra" placeholder="Ví dụ: 你好, ni hao, vui vẻ…" autocomplete="off"><button type="submit">Tìm kiếm</button><button id="handwritingOpen" type="button" aria-controls="handwritingPanel" aria-expanded="false" disabled="">✍ Vẽ chữ</button></form>
     <section id="handwritingPanel" class="handwriting-panel" aria-label="Vẽ chữ để tra cứu" hidden="">
       <div class="handwriting-head"><strong>Vẽ một chữ Hán · Thử nghiệm</strong><button id="handwritingClose" type="button" aria-label="Đóng khung vẽ">×</button></div>
       <p class="hint">Vẽ theo thứ tự nét bất kỳ, rồi chọn chữ đúng. Gợi ý có thể sai; app không chấm bài luyện viết.</p>
@@ -274,7 +274,7 @@
 
   
 <aside id="updateNotice" class="update-notice" aria-label="Thông báo cập nhật" hidden><strong>Có phiên bản HSK mới</strong><p id="updateNoticeText" role="status"></p><div class="update-notice-actions"><button type="button" id="updateNoticeApply" disabled>Đang tải…</button><button type="button" id="updateNoticeLater">Để sau</button></div></aside>
-<script src="./loader.js?v=push-2" defer=""></script>
+<link rel="stylesheet" href="./open-dictionary.css"><script src="./loader.js?v=push-2" defer=""></script>
 <script src="./offline.js?v=offline-2" defer=""></script>
 <script src="./mobile-layout.js?v=mobile-3" defer=""></script>
 <button id="lessonChatButton" class="lesson-chat-button" type="button" aria-label="Hỏi AI về bài học" title="Hỏi AI về bài học" aria-controls="lessonChatPanel" aria-expanded="false" hidden=""><span aria-hidden="true">💬</span></button>

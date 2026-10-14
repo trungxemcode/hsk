@@ -1,6 +1,6 @@
 /* Account storage: per-item revisions, account isolation, offline queue. */
 (function(root){
- const KEYS=['hsk-flashcards-progress-v1','hsk-flashcards-mistakes-v1','hsk-adaptive-learning-v1','hsk-memory-preferences-v1','hsk-course-lessons-v1','hsk-exam-practice-v1'];
+ const KEYS=['hsk-flashcards-progress-v1','hsk-flashcards-mistakes-v1','hsk-adaptive-learning-v1','hsk-memory-preferences-v1','hsk-course-lessons-v1','hsk-exam-practice-v1','hsk-open-dictionary-srs-v1'];
  const clone=x=>JSON.parse(JSON.stringify(x));
  function flatten(storage){const out={};for(const key of KEYS){let value;try{value=JSON.parse(storage[key]||'null');}catch(_){continue;}if(!value||typeof value!=='object')continue;
   if(key===KEYS[0]){for(const [id,v] of Object.entries(value.words||{}))out['word:'+id]=v;}
@@ -8,10 +8,11 @@
   else if(key===KEYS[2]){for(const [id,v] of Object.entries(value.stats||{}))out['adaptive:'+id]=v;out['adaptive:enabled']=value.enabled!==false;}
   else if(key===KEYS[3])out['memory:preferences']=value;
   else if(key===KEYS[4])for(const [id,v] of Object.entries(value.lessons||{}))out['lesson:'+id]=v;
-  else {for(const [id,v] of Object.entries(value.records||{}))out['exam:'+id]=v;for(const [id,v] of Object.entries(value.drafts||{}))out['exam-draft:'+id]=v;}
+  else if(key===KEYS[5]){for(const [id,v] of Object.entries(value.records||{}))out['exam:'+id]=v;for(const [id,v] of Object.entries(value.drafts||{}))out['exam-draft:'+id]=v;}
+  else for(const [id,v] of Object.entries(value.items||{}))out['open-word:'+id]=v;
  }return out;}
- function materialize(items){const words={},entries=[],stats={},lessons={},records={},drafts={};let enabled=true,memory={context:false,newWords:false};for(const [id,item] of Object.entries(items)){if(!valid(item)||item.deleted)continue;const v=item.value;if(id.startsWith('word:'))words[id.slice(5)]=v;else if(id.startsWith('mistake:'))entries.push(v);else if(id==='adaptive:enabled')enabled=v!==false;else if(id.startsWith('adaptive:'))stats[id.slice(9)]=v;else if(id==='memory:preferences')memory=v;else if(id.startsWith('lesson:'))lessons[id.slice(7)]=v;else if(id.startsWith('exam:'))records[id.slice(5)]=v;else if(id.startsWith('exam-draft:'))drafts[id.slice(11)]=v;}
- return {[KEYS[0]]:JSON.stringify({version:1,words}),[KEYS[1]]:JSON.stringify({version:1,entries}),[KEYS[2]]:JSON.stringify({version:1,enabled,stats}),[KEYS[3]]:JSON.stringify(memory),[KEYS[4]]:JSON.stringify({version:1,lessons}),[KEYS[5]]:JSON.stringify({version:1,records,drafts})};}
+ function materialize(items){const words={},entries=[],stats={},lessons={},records={},drafts={},openWords={};let enabled=true,memory={context:false,newWords:false};for(const [id,item] of Object.entries(items)){if(!valid(item)||item.deleted)continue;const v=item.value;if(id.startsWith('word:'))words[id.slice(5)]=v;else if(id.startsWith('mistake:'))entries.push(v);else if(id==='adaptive:enabled')enabled=v!==false;else if(id.startsWith('adaptive:'))stats[id.slice(9)]=v;else if(id==='memory:preferences')memory=v;else if(id.startsWith('lesson:'))lessons[id.slice(7)]=v;else if(id.startsWith('exam:'))records[id.slice(5)]=v;else if(id.startsWith('exam-draft:'))drafts[id.slice(11)]=v;else if(id.startsWith('open-word:'))openWords[id.slice(10)]=v;}
+ return {[KEYS[0]]:JSON.stringify({version:1,words}),[KEYS[1]]:JSON.stringify({version:1,entries}),[KEYS[2]]:JSON.stringify({version:1,enabled,stats}),[KEYS[3]]:JSON.stringify(memory),[KEYS[4]]:JSON.stringify({version:1,lessons}),[KEYS[5]]:JSON.stringify({version:1,records,drafts}),[KEYS[6]]:JSON.stringify({version:1,items:openWords})};}
  function valid(x){return !!x&&Number.isFinite(x.time)&&x.time>=0&&typeof x.writer==='string'&&typeof x.deleted==='boolean'&&(x.deleted||x.value!==undefined);}
  function compare(a,b){if(!a)return -1;if(!b)return 1;return a.time-b.time||a.writer.localeCompare(b.writer);}
  function revision(previous,time,writer,value,deleted=false){return {time:Math.max(time,(previous?.time||0)+1),writer,value:deleted?null:clone(value),deleted};}
