@@ -87,3 +87,4 @@ html[data-theme=dark] body.studio-enabled .lesson-course-progress{background:#2a
 .exam-material{min-width:0;grid-template-columns:minmax(0,1fr)}
 .exam-material>img{min-width:0}
 body.studio-enabled .exam-panel .coach-toggle input{width:18px;flex:0 0 18px;margin-top:5px}
+.exam-audio audio{display:block;width:100%;max-width:100%;min-width:0;margin:12px 0}
