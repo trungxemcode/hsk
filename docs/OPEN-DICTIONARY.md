@@ -1,5 +1,13 @@
 # Tra cứu mở rộng
 
+## Trả kết quả sớm và tra nghĩa Việt
+
+Chữ Hán mở gói theo chữ đầu trước rồi hiển thị ngay, các gói còn lại bổ sung dần; có trạng thái chưa hoàn tất để không nhầm số kết quả tạm thời là toàn bộ. Tìm pinyin/tiếng Anh hiển thị theo từng nhóm gói. Kết quả truy vấn đã hoàn tất được cache trong phiên với giới hạn số lượng; dữ liệu tải vẫn dùng CacheStorage. Lỗi tải một phần giữ kết quả đã có và báo rõ. Chọn giải thích AI tạm dừng quá trình bổ sung để tránh thay mất card người dùng đang đọc.
+
+Truy vấn có dấu tiếng Việt đặc trưng (ví dụ “chú thuật”) không quét nghĩa tiếng Anh ở cả 32 gói. Khi bấm Tìm kiếm ở chế độ thường, dùng `/dictionary-lookup` có đăng nhập để xác định nghĩa/cách dịch và tối đa 6 gợi ý chữ Hán. Không gọi khi chỉ gõ từng ký tự. Câu trả lời AI nằm riêng, không bị quá trình tải kết quả ghi đè. Gợi ý được ghi rõ do AI tạo; chỉ tìm các gói của những từ gợi ý để đối chiếu. Nếu từ chưa có trong nguồn, giữ lời giải và báo rõ, không tự biến AI thành mục từ đã kiểm duyệt. Truy vấn không dấu mơ hồ vẫn có nút “Tra nghĩa / Giải thích bằng AI” để yêu cầu cách dịch theo ngữ cảnh.
+
+Worker revision `hsk-dictionary-20261014-1` có route mới và xử lý tương thích các yêu cầu open-dictionary cũ. Route mới không có trường hsk, không dùng danh sách từ cho phép HSK; các đường hỏi bài HSK cũ vẫn giữ phạm vi bài. CORS/xác thực/hạn mức/API keys cũ giữ nguyên. Kiểm tra OPTIONS trên Worker thực tế xác nhận revision đã triển khai; kết quả Gemini và tra nghĩa trong kiểm tra tự động vẫn dùng mock, không chứng nhận đáp án thực tế của provider.
+
 ## Hai chế độ tra cứu
 
 “Tra cứu HSK” ưu tiên dữ liệu HSK tiếng Việt và bộ lọc cấp độ hiện có; chỉ đưa phần tham khảo ngoài kho khi không có kết quả HSK. “Tra cứu thường” bỏ giới hạn cấp độ, tìm toàn bộ 32 gói cùng dữ liệu HSK, xếp theo chính xác → chứa cụm/prefix → gần giống (sai khác một ký tự, với độ dài tối thiểu). Không có ưu tiên riêng cho cấp HSK trong chế độ thường. Kết quả hiển thị 40 mục mỗi lượt, nút Xem thêm duyệt tiếp toàn bộ kết quả có điểm phù hợp, không cắt tập kết quả ở 40. Chỉ loại các bản sao cùng chữ giản thể/phồn thể/cách đọc do một mục xuất hiện trong nhiều gói; giữ các cách đọc khác nhau và ghi rõ nguồn HSK tiếng Việt hoặc CC-CEDICT tiếng Anh. Không phải tìm web Google và không khẳng định nhận diện đồng nghĩa ngoài dữ liệu sẵn có. Tải đủ các gói một lần để không bỏ sót từ chứa truy vấn ở giữa/cuối từ; những lần sau dùng cache đã tải.

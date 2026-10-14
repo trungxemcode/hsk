@@ -3,3 +3,4 @@
 .extended-word .hsk-tag{position:static;margin:0}
 body.studio-enabled .extended-word .hsk-tag{background:var(--accent-light,#f0edff);color:var(--accent-dark,#5141c3)}
 .dictionary-modes{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}.dictionary-modes button{flex:1 1 140px;min-height:44px}.dictionary-modes button[aria-pressed=true]{background:var(--accent-dark,#5141c3)!important;color:white!important;border-color:transparent!important}html[data-theme=dark] .dictionary-modes button[aria-pressed=true]{background:#6957e7!important;color:white!important}
+html[data-theme=dark] body.studio-enabled .open-dictionary .speech-button{background:var(--surface,#20222f)!important;color:var(--ink,#eeeef6)!important}

@@ -1,3 +1,3 @@
-// HSK shell revision: hsk-offline-search-modes-20261014-1
-importScripts('./offline-worker.js?v=search-modes-20261014-1');
+// HSK shell revision: hsk-offline-fast-dictionary-20261014-1
+importScripts('./offline-worker.js?v=fast-dictionary-20261014-1');
 try{importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js');}catch(error){console.warn('Thông báo cần mạng; học offline vẫn hoạt động.',error);}
