@@ -333,7 +333,7 @@ function switchMode(next) {
  if(mode==='lessons')window.HSKLessonNav?.open();
  if(mode==='search')$('searchInput').focus();if(mode==='mistakes')renderMistakes();if(mode==='compare')renderComparisons(); stats();
 }
-let searchMatches=[], visibleResults=40, searchTimer, searchPinyinAllowed=true, searchScope='hsk';
+let searchMatches=[], visibleResults=40, searchTimer, searchPinyinAllowed=true, searchScope='hsk',searchExplicit=false;
 function searchScore(w,q,terms) {
  if(w.han===q.trim())return 150;
  if(/^[\u3400-\u9fff]+$/.test(q.trim())&&w.han.includes(q.trim()))return 110;
@@ -374,7 +374,7 @@ function renderSearch() {
   const label=document.createElement('small');label.textContent=recordOf(w)?statusOf(w)==='known'?'✓ Đã thuộc':'× Chưa thuộc':'Chưa đánh dấu';card.append(label,wordRelationDetails(w));$('searchResults').append(card);
  }
  $('searchMore').hidden=general||visibleResults>=searchMatches.length;
- window.dispatchEvent(new Event('hsk-search-rendered'));
+ const submitted=searchExplicit;searchExplicit=false;window.dispatchEvent(new CustomEvent('hsk-search-rendered',{detail:{submitted}}));
 }
 window.HSKHandwritingSearch={
  characters:()=>[...new Set(words.flatMap(w=>Array.from(w.han).filter(c=>/[\u3400-\u9fff\u3007]/.test(c))))].join(''),
@@ -589,7 +589,7 @@ $('reset').title='Trở về bộ thẻ ban đầu; giữ tiến độ học và
 $('reset').onclick=()=>{$('masteryFilter').value='all';document.querySelector('[data-filter="all"]').click();};
 function jumpToCard(){const n=Number($('jumpInput').value);if(!Number.isInteger(n)||n<1||n>currentWords.length){$('jumpStatus').textContent=`Nhập số nguyên từ 1 đến ${currentWords.length}.`;return;}index=n-1;updateCard();$('jumpStatus').textContent=`Đã nhảy đến thẻ số ${n}.`;$('jumpInput').value='';}
 $('jumpBtn').onclick=jumpToCard;$('jumpInput').onkeydown=e=>{if(e.key==='Enter')jumpToCard();};
-$('searchForm').onsubmit=e=>{e.preventDefault();handwritingSearchCharacter='';runSearch();};$('searchInput').oninput=()=>{handwritingSearchCharacter='';clearTimeout(searchTimer);searchTimer=setTimeout(runSearch,180);};
+$('searchForm').onsubmit=e=>{e.preventDefault();handwritingSearchCharacter='';searchExplicit=true;runSearch();};$('searchInput').oninput=()=>{handwritingSearchCharacter='';clearTimeout(searchTimer);searchTimer=setTimeout(runSearch,180);};
 $('searchMore').onclick=()=>{visibleResults+=40;renderSearch();};
 $('quizForm').onsubmit=startQuiz;$('quizNext').onclick=()=>{if(quizSession){quizSession.position++;renderQuestion();}};
  for(const id of ['quizLevelMode','quizSingleLevel','quizLevelFrom','quizLevelTo','quizScope','quizDirection'])$(id).onchange=()=>{
@@ -934,6 +934,6 @@ window.HSKLessons={
  quiz(ws,label,id){let state={};try{state=JSON.parse(localStorage.getItem('hsk-course-lessons-v1')||'{}').lessons?.[id]||{};}catch{};const pool=shuffled(ws).sort((a,b)=>(state.evidence?.[wordKey(a)]?.quizStreak||0)-(state.evidence?.[wordKey(b)]?.quizStreak||0));const qs=pool.slice(0,20).map((w,i)=>createQuestion(w,i%2?'mean':'han',words)).filter(Boolean);startSavedQuestions(qs,label);if(qs.length){quizSession.lessonId=id;$('lessonPracticeBack').hidden=!id;}},
  srs(ws,id){switchMode('srs');const due=ws.filter(w=>!recordOf(w)||recordOf(w).due<=Date.now()).sort((a,b)=>(recordOf(a)?.due||0)-(recordOf(b)?.due||0));srsSession={queue:due,total:due.length,done:0,lessonId:id};$('lessonPracticeBack').hidden=!id;$('srsMessage').textContent=due.length?'Ôn từ đến hạn và từ mới của bài học.':'Tất cả từ trong bài đã có lịch ôn và chưa đến hạn.';renderSrs();}
 };
-window.HSKDictionaryBridge={query:()=>handwritingSearchCharacter||$('searchInput').value,exact:q=>words.some(w=>w.han===q),hsk:(han,trad)=>words.find(w=>w.han===han||w.han===trad)?.hsk||null,open(han,pin){const w=words.find(w=>w.han===han&&w.pin===pin);if(!w)return;if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');},scope:()=>searchScope,results:()=>searchMatches.slice(),setScope(value){if(!['hsk','general'].includes(value))return;searchScope=value;document.querySelectorAll('[data-search-scope]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.searchScope===value)));$('dictionaryModeHint').textContent=value==='hsk'?'Ưu tiên từ vựng HSK và nghĩa tiếng Việt. Từ khớp chính xác vẫn hiện ở HSK khác.':'Tìm toàn bộ từ điển, không giới hạn HSK. Xếp theo độ khớp: chính xác, chứa từ và gần giống. Kho mở rộng có nghĩa gốc tiếng Anh.';runSearch();}};
+window.HSKDictionaryBridge={query:()=>handwritingSearchCharacter||$('searchInput').value,exact:q=>words.some(w=>w.han===q),hsk:(han,trad)=>words.find(w=>w.han===han||w.han===trad)?.hsk||null,open(han,pin){const w=words.find(w=>w.han===han&&w.pin===pin);if(!w)return;if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');},scope:()=>searchScope,results:()=>searchMatches.slice(),setScope(value){if(!['hsk','general'].includes(value))return;searchScope=value;document.querySelectorAll('[data-search-scope]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.searchScope===value)));$('dictionaryModeHint').textContent=value==='hsk'?'Ưu tiên từ vựng HSK và nghĩa tiếng Việt. Từ khớp chính xác vẫn hiện ở HSK khác.':'Tìm toàn bộ từ điển, không giới hạn HSK. Xếp theo độ khớp: chính xác, chứa từ và gần giống. Nghĩa tiếng Việt dùng AI khi bấm Tìm kiếm (cần đăng nhập); kho gốc có nghĩa tiếng Anh.';runSearch();}};
 document.querySelectorAll('[data-search-scope]').forEach(b=>b.onclick=()=>window.HSKDictionaryBridge.setScope(b.dataset.searchScope));
 window.dispatchEvent(new Event('hsk-lessons-ready'));

@@ -28,5 +28,6 @@
   if(f.length>=4&&near(p,f))return 55;
   return query.length>=4&&english.split(/[^a-z]+/).some(t=>near(t,query))?45:0;
  }
- const api={KEY,id,fold,valid,clean,add,rate,matches,near,score};root.HSKOpenDictionaryCore=api;if(typeof module!=='undefined')module.exports=api;
+ const vietnamese=q=>/[đĐ]|[\u0302\u0306\u0309\u031b\u0323]/.test(String(q).normalize('NFD'));
+ const api={KEY,id,fold,valid,clean,add,rate,matches,near,score,vietnamese};root.HSKOpenDictionaryCore=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
