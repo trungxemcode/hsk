@@ -1,5 +1,5 @@
 (async()=>{
- const BUILD='hsk-offline-lookup-accuracy-20261014-3',status=document.getElementById('offlineStatus'),update=document.getElementById('offlineUpdate'),manual=document.getElementById('offlineCheck');
+ const BUILD='hsk-offline-notebook-20261014',status=document.getElementById('offlineStatus'),update=document.getElementById('offlineUpdate'),manual=document.getElementById('offlineCheck');
  let registration,ready=false,checking=false,lastCheck=0,phase='',lastProgress=0,latest=null,activating=false,activeVersion=null;const watched=new WeakSet();
  const notice=document.getElementById('updateNotice'),noticeText=document.getElementById('updateNoticeText'),noticeApply=document.getElementById('updateNoticeApply');let dismissed='';
  function announce(downloaded=false){if(!notice||!latest||latest===BUILD||dismissed===latest)return;notice.hidden=false;noticeText.textContent=downloaded?'Bản mới đã sẵn sàng. Cập nhật khi bạn học xong; tiến độ được giữ.':'Đang tải bản mới. Bạn vẫn có thể tiếp tục học.';noticeApply.disabled=!downloaded;noticeApply.textContent=downloaded?'Cập nhật ngay':'Đang tải…';}

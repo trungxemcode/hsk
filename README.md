@@ -87,3 +87,11 @@ Kiểm tra: `node --test server/*.test.mjs`; các script DOM `check-speech-dom.c
 Thời gian chỉ ghi khi trang hiện, có focus và có thao tác học gần đây; không tính thời gian tab chạy nền. Tăng tốc cần ít nhất 7 ngày, vượt tiến độ, đủ bài kiểm tra đúng và lần nhớ lại cách ngày. Không dùng đánh dấu Đã thuộc đơn thuần làm chứng cứ nhớ lâu. Checkbox AI cho phép gửi thống kê số tổng hợp (không email, từ vựng, bài viết hay token trong nội dung) đến `/study-plan-review`, dùng cơ chế Firebase/Gemini hiện có. Tăng tốc tối đa khoảng 10% mỗi lần, trong giới hạn thời gian; có hoàn tác. Chậm tiến độ chỉ đề xuất giãn hạn hoặc học bù; luôn chờ người học chọn. Lỗi mạng, auth hay AI không đổi lịch.
 
 Endpoint mới cần triển khai Worker từ `server/wrangler.jsonc` sau khi kiểm tra; bundle đã đồng bộ bằng `node tools/build-worker-bundle.cjs`. Giữ nguyên secrets và model hiện có. Nếu Worker chưa nâng cấp, UI báo rõ dịch vụ tinh chỉnh chưa triển khai và vẫn giữ kế hoạch local. Kiểm tra: `node --test server/planner.test.mjs`, `node tools/check-planner-dom.cjs` và browser `check-studio-ui.cjs`.
+
+## Sổ từ vựng cá nhân · 14/10/2026
+
+Mở Sổ từ vựng từ sidebar hoặc lối tắt Tổng quan trên điện thoại. Thêm chữ Trung và nghĩa tiếng Việt, pinyin/ví dụ/ghi chú tùy chọn; tìm, sửa và xóa từng từ. Nút Lưu vào sổ ở kết quả HSK và từ điển mở điền sẵn biểu mẫu để kiểm tra trước khi lưu. Không lưu nghĩa tiếng Anh làm nghĩa Việt. Từ trùng chữ và pinyin được báo để sửa mục cũ.
+
+Khóa riêng `hsk-vocabulary-notebook-v1` được ánh xạ thành `notebook:<uuid>` trong hàng đợi tài khoản hiện có; giữ nguyên khóa tiến độ/SRS. Xóa dùng tombstone và hợp nhất theo phiên bản từng mục. Không cần đổi Firestore rules hiện tại. Khi có dữ liệu từ thiết bị khác, dùng Tài khoản → Áp dụng như tiến độ học. Sao lưu tài khoản bao gồm sổ. Chưa đăng nhập lưu theo khách; đăng nhập/đăng xuất dùng cơ chế tách dữ liệu hiện có.
+
+Kiểm tra: `node --test server/notebook.test.mjs`, `NODE_PATH=/tmp/hsk-tests/node_modules node tools/check-notebook-dom.cjs`, cùng kiểm tra hồi quy Studio/tra cứu/bài đọc/phát âm.

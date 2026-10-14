@@ -46,7 +46,7 @@ renderIcons();
  const $=id=>document.getElementById(id),main=document.querySelector('.workspace');
  function decorateControls(){main.querySelectorAll('.panel-box button:not(.speech-button):not(.mastery-btn)').forEach(b=>b.classList.add('studio-action'));}
  decorateControls();new MutationObserver(decorateControls).observe(main,{subtree:true,childList:true});
- const labels={home:'Tổng quan',lessons:'Bài học',practice:'Luyện tập',exam:'Dạng đề HSK',review:'Ôn tập',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn tập SRS',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
+ const labels={home:'Tổng quan',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện tập',exam:'Dạng đề HSK',review:'Ôn tập',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn tập SRS',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
  const parents={learn:'practice',quiz:'practice',compare:'practice',exam:'practice',srs:'review',mistakes:'review',translator:'search',about:'home'};
  let ready=false,route='home',lastOwner='',fingerprint='',activityTimer,refreshTimer;
  function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||'null')||fallback;}catch{return fallback;}}
@@ -61,7 +61,7 @@ renderIcons();
  function navigate(name){
   if(!ready&&!['account','translator','about','admin'].includes(name))return;
   clearHub();
-  if(['home','practice','review','exam'].includes(name)){
+  if(['home','practice','review','exam','notebook'].includes(name)){
    document.querySelector('.app-tabs [data-mode="learn"]').click();document.body.classList.remove('show-lessons','lesson-focus');document.body.dataset.studioHub=name;document.querySelector(`[data-studio-hub-panel="${name}"]`).hidden=false;title(name);
   }else{const special={account:'accountBtn',translator:'translatorBtn',admin:'adminBtn',about:'aboutBtn'};const trigger=special[name]?$(special[name]):document.querySelector(`.app-tabs [data-mode="${name}"]`);if(!trigger||trigger.hidden)return;trigger.click();title(name);}
   closeDrawer();main.scrollTop=0;window.scrollTo({top:0,behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});refresh();if(name==='exam')window.dispatchEvent(new Event('hsk-exam-open'));
