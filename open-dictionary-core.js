@@ -3,6 +3,11 @@
  const KEY='hsk-open-dictionary-srs-v1',DAY=86400000;
  const id=w=>'cedict|'+w.han+'|'+w.trad+'|'+w.pin;
  const fold=s=>String(s||'').toLowerCase().replace(/u:|ü|ǖ|ǘ|ǚ|ǜ/g,'v').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[1-5]/g,'').replace(/[^a-zv]/g,'');
+ // Keep tones when identifying a dictionary reading; accent-free matching is only for search.
+ const reading=s=>fold(s)+'|'+[...String(s||'').normalize('NFD')].map(c=>({'\u0304':'1','\u0301':'2','\u030c':'3','\u0300':'4'}[c]||(/[1-4]/.test(c)?c:''))).join('');
+ const sameReading=(a,b)=>reading(a)===reading(b);
+ function pinyinQuery(q){const tokens=String(q).trim().toLowerCase().split(/[\s'’]+/);return tokens.length>0&&tokens.every(t=>/^(?:(?:[bpmfdtnlgkhjqxrzcswy]|zh|ch|sh)?(?:a|o|e|ai|ei|ao|ou|an|en|ang|eng|ong|i|ia|ie|iao|iu|ian|in|iang|ing|iong|u|ua|uo|uai|ui|uan|un|uang|ueng|v|ve|van|vn)|er|m|n|ng)$/.test(fold(t))&&!/[^a-züv:\d\u00c0-\u024f\u1e00-\u1eff]/i.test(t));}
+ const semanticQuery=q=>vietnamese(q)||!/[\p{Script=Han}]/u.test(q)&&/[a-zA-Z]/.test(q)&&!pinyinQuery(q);
  function valid(x){return !!x&&x.word&&['han','trad','pin','mean'].every(k=>typeof x.word[k]==='string'&&x.word[k].length>0&&x.word[k].length<8000)&&Number.isFinite(x.due)&&Number.isFinite(x.interval)&&x.interval>=0&&Number.isFinite(x.ease)&&x.ease>=1.3&&Number.isInteger(x.reps)&&x.reps>=0;}
  function clean(value){const items={};for(const [k,x] of Object.entries(value?.items||{}))if(valid(x)&&k===id(x.word))items[k]=x;return items;}
  function add(items,word,now=Date.now()){const key=id(word);return items[key]?items:{...items,[key]:{word:{han:word.han,trad:word.trad,pin:word.pin,mean:word.meanVi||word.mean,meanLanguage:word.meanVi||word.native?'vi':'unknown',sourceMean:word.sourceMean||word.mean},due:now,interval:0,ease:2.5,reps:0,lapses:0}};}
@@ -22,7 +27,8 @@
   if(/\p{Script=Han}/u.test(q)){if(han.startsWith(q)||trad.startsWith(q))return 130;if(han.includes(q)||trad.includes(q))return 115;return q.length>=2&&(near(han,q)||near(trad,q))?60:0;}
   const p=fold(pin),f=fold(q);if(f&&p===f)return 145;
   const english=mean.join('; ').toLowerCase(),query=q.toLowerCase();if(mean.some(s=>s.toLowerCase()===query))return 140;
-  if(english.includes(query))return 110;
+  if(query.length>=2&&english.split(/[^a-z]+/).includes(query))return 110;
+  if(query.length>=4&&english.includes(query))return 95;
   if(query.split(/\s+/).length>1&&query.split(/\s+/).every(t=>english.includes(t)))return 85;
   if(f.length>=2&&p.startsWith(f))return 100;if(f.length>=3&&p.includes(f))return 80;
   if(f.length>=4&&near(p,f))return 55;
@@ -30,5 +36,5 @@
  }
  const vietnamese=q=>/[đĐ]|[\u0302\u0306\u0309\u031b\u0323]/.test(String(q).normalize('NFD'));
  function translationKey(w){let h=2166136261;for(const c of w.sourceMean||w.mean||''){h^=c.codePointAt(0);h=Math.imul(h,16777619);}return id(w)+'|'+(h>>>0).toString(16);}
- const api={KEY,id,fold,valid,clean,add,rate,matches,near,score,vietnamese,translationKey};root.HSKOpenDictionaryCore=api;if(typeof module!=='undefined')module.exports=api;
+ const api={KEY,id,fold,reading,sameReading,pinyinQuery,semanticQuery,valid,clean,add,rate,matches,near,score,vietnamese,translationKey};root.HSKOpenDictionaryCore=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
