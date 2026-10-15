@@ -1,12 +1,18 @@
 # Bản 2.09 — Đánh giá trình độ và lộ trình học lại
 
+## Bản 2.11 — Bắt đầu và tiếp tục lộ trình
+
+Kết quả đã lưu hiện nút **Bắt đầu lộ trình** ngay ở Tổng quan và đầu trang kết quả, không cần đánh giá lại hoặc tự tìm form. Nếu chưa có kế hoạch, nút này tạo kế hoạch nhịp cân bằng theo quỹ thời gian đã chọn và mở ngay bài củng cố đầu tiên. Mục tiêu có thể tùy chỉnh qua lựa chọn HSK trong kết quả. Bài củng cố được ưu tiên trước bài học tiếp theo cho đến khi có bằng chứng đã đọc theo luồng bài học hiện hữu.
+
+Sau khi bắt đầu, Tổng quan có **Tiếp tục lộ trình**, **Nhiệm vụ hôm nay**; trong bài có nút trở về nhiệm vụ. Bấm tiếp tục hoặc tải lại trang không tạo kế hoạch mới, không xóa nhật ký và không tự tăng mastery/SRS. Có kế hoạch khác thì phải chọn rõ tiếp tục kế hoạch cũ hoặc thay kế hoạch. Kiểm tra ID kế hoạch trước khi thay để tránh ghi đè một kế hoạch vừa đổi ở nơi khác. Nếu lưu không thành công, kế hoạch đang có được giữ nguyên. Đây là kết nối lộ trình gợi ý với planner thật, không phải một bộ đếm 14 buổi hoàn thành tự động.
+
 Vào Tổng quan hoặc Luyện & Ôn → Luyện → Đánh giá trình độ. Chọn 15–120 phút/ngày và 5–7 ngày/tuần. Làm 12–36 câu, từ HSK1 lên HSK6; dừng sau hai mức liên tiếp chưa vững phần từ vựng–đọc–ngữ pháp. Có thể đóng và tiếp tục. Đáp án không hiện giữa bài. Khi làm lại, thứ tự lựa chọn được trộn; bộ câu vẫn là cùng bộ sàng lọc, vì vậy việc nhớ đáp án có thể làm kết quả cao hơn thực lực.
 
 36 câu biên soạn riêng: mỗi cấp 2 từ vựng, 1 ngữ pháp, 1 đọc hiểu, 2 nghe giọng máy. Dữ liệu bám kho HSK 1–6/2.0 của app, không tuyên bố là bài thi mới hay bộ định chuẩn tâm trắc. Tham chiếu phân tách kỹ năng: https://m.chinesetest.cn/HSK/4 và https://m.chinesetest.cn/HSK/3 . Các mức khó là định hướng nội dung; không suy ra điểm đỗ hay năng lực giao tiếp từ mẫu ngắn này.
 
 Kết quả tách nền tảng đọc/từ/ngữ pháp và nghe. Mức nền tảng chỉ tăng liên tiếp nếu đúng ít nhất 3/4 câu, điểm bằng chứng ít nhất 2.6/4; đáp án đúng nhớ chắc=1, mang máng=.65, đoán=.25. Nghe cần 2/2 đúng và bằng chứng≥1.3/2. Ước lượng kết hợp lấy mức thấp hơn; nếu thiếu nghe thì chỉ là ước lượng phần đọc. Câu không thể nghe không tính sai, không tạo bằng chứng nghe. Phải phát hết âm thanh trước khi chọn; không coi việc bấm phát là đã nghe xong. Không kiểm tra phát âm, nói hay viết tự do. Không đánh dấu mastery/SRS và không huấn luyện AI từ bài này.
 
-Kết quả có lỗi cần ôn, câu đúng chưa chắc, tổng hợp kỹ năng và lịch 14 buổi: khôi phục nền tảng, vá kỹ năng yếu, học tiếp, rồi kiểm chứng cách ngày. Gợi ý bài học cùng cấp, ưu tiên giao với từ đã sai. Nếu chưa có lịch SRS, bắt đầu bằng thẻ từ và tự chọn mức nhớ để tạo lịch. Khối kế hoạch hiện có được điền gợi ý, không thay đổi kế hoạch đang chạy cho đến khi người dùng bấm Tạo kế hoạch. Thời hạn mục tiêu dùng thuật toán planner hiện hữu, không hứa đạt chứng chỉ trong 14 buổi.
+Kết quả có lỗi cần ôn, câu đúng chưa chắc, tổng hợp kỹ năng và lịch 14 buổi: khôi phục nền tảng, vá kỹ năng yếu, học tiếp, rồi kiểm chứng cách ngày. Gợi ý bài học cùng cấp, ưu tiên giao với từ đã sai. Nếu chưa có lịch SRS, bắt đầu bằng thẻ từ và tự chọn mức nhớ để tạo lịch. Có thể tạo trực tiếp bằng Bắt đầu lộ trình hoặc điền gợi ý vào form để tự chọn nhịp rồi Tạo kế hoạch; kế hoạch khác đang chạy chỉ bị thay khi người dùng xác nhận rõ. Thời hạn mục tiêu dùng thuật toán planner hiện hữu, không hứa đạt chứng chỉ trong 14 buổi.
 
 `placement-core.js` chứa ngân hàng và quy tắc thuần; `placement.js` quản lý giao diện và âm thanh qua HSKSpeech; `placement.css` chỉ dùng design tokens. Store `hsk-placement-v1` có draft và 5 báo cáo mới nhất, tách owner, được account-core flatten thành `placement-result:` và `placement-draft:`. Đồng bộ dùng luồng tài khoản hiện hữu; không cần Worker/Firestore rule mới. JSON backup nhận store mới. Nội dung, kết quả và bản nháp lưu thiết bị; không gửi bài làm tới AI. Đổi tài khoản đóng phiên đang mở.
 
