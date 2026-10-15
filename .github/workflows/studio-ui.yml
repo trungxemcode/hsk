@@ -26,6 +26,7 @@ jobs:
         run: |
           node tools/check-design-tokens.cjs
           node tools/check-placement-dom.cjs
+          node tools/check-placement-route-dom.cjs
           node tools/check-passive-dom.cjs
           node --test server/*.test.mjs
           node tools/check-speech-dom.cjs
@@ -47,6 +48,7 @@ jobs:
         run: |
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-writing-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-placement-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-placement-route-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-passive-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-studio-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-ui.cjs
