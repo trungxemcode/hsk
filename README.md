@@ -115,3 +115,11 @@ Bài học có bốn phần: Từ vựng (kèm tổng quan), Đọc & hội tho�
 ## Bản 2.04 — Tra chữ viết tay ngoài HSK
 
 Chọn một chữ Hán sẽ điền chữ đó vào ô tìm kiếm. Nếu bộ lọc HSK hiện tại có từ phù hợp, tiếp tục tra HSK; nếu không, tự chuyển sang Tra cứu thường mà không đổi cấp HSK toàn app. Nhận dạng nâng cao được phép gợi ý các chữ Hán có trong mô hình ngoài kho HSK; bộ nhận dạng cơ bản và học mẫu nét vẫn giữ phạm vi dữ liệu hiện có. Chữ ngoài phạm vi học mẫu vẫn được tra bình thường, không báo đã học mẫu và không tự thêm vào SRS.
+
+## Bản 2.05 — Bộ giao diện dùng chung
+
+Toàn bộ biến giao diện được định nghĩa tại đầu `style.css`: một khối `:root` và một khối `html[data-theme="dark"]`. CSS module không khai báo lại màu, bo góc hay đổ bóng. Màu thanh trình duyệt cũng đọc `--paper` thay vì giữ một bảng màu JS riêng.
+
+Module mới dùng vai trò: `--paper` (nền trang), `--surface` (bề mặt), `--ink`/`--sub`/`--muted` (chữ), `--line`/`--line-dark` (đường phân cách), `--accent`/`--accent-dark`/`--accent-light`, `--green`/`--red` (phản hồi đúng/sai). Nút dùng chính sách `ui-buttons.css` và nhóm `--button-*`; không tự đặt màu nút. Bo góc chuẩn: `--radius-btn`, `--radius-card`, `--radius-dialog`, `--radius-pill`, `--radius-round`; bóng thẻ dùng `--shadow`. Các biến radius cỡ riêng và shadow recipe giữ nguyên hình dạng cũ.
+
+Nhóm `--palette-*` và `--legacy-*` là bảng màu nền cố định để giữ nguyên các sắc độ đã có; module mới ưu tiên vai trò theo theme ở trên, không tạo thêm màu legacy tùy ý. Kiểm tra `node tools/check-design-tokens.cjs` ngăn CSS module thêm mã màu, bo góc/đổ bóng trực tiếp hoặc khai báo trùng biến theme. Mọi thay đổi giao diện phải qua kiểm tra trình duyệt sáng/tối và độ tương phản.
