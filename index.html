@@ -12,9 +12,9 @@
 <meta name="theme-color" content="#12307a">
 <script src="./admin-core.js" defer=""></script>
 <script src="./admin.js" defer=""></script>
-<script src="./study-sync-core.js" defer></script><script src="./study-sync.js" defer></script><script src="./account-core.js?v=account-2" defer=""></script>
-<script src="./account.js?v=account-2" defer=""></script>
-<link rel="stylesheet" href="./ui-buttons.css"><link rel="stylesheet" href="./notebook.css"><script src="./notebook.js" defer></script>
+<script src="./notebook-tools-core.js" defer></script><script src="./backup-core.js" defer></script><script src="./study-sync-core.js" defer></script><script src="./study-sync.js" defer></script><script src="./account-core.js?v=account-3" defer=""></script>
+<script src="./account.js?v=account-3" defer=""></script>
+<link rel="stylesheet" href="./ui-buttons.css"><link rel="stylesheet" href="./notebook.css"><script src="./notebook.js" defer></script><link rel="stylesheet" href="./notebook-factory.css"><script src="./notebook-factory.js" defer></script><script src="./backup-restore.js" defer></script>
 <script src="./translator.js" defer=""></script>
 <script src="./ocr.js" defer=""></script>
 <script src="./lesson-mastery.js" defer=""></script>
@@ -186,7 +186,7 @@
 
 
 <p class="hint">Tiến độ từ vựng, lịch SRS, câu sai và phân tích học tập được lưu theo tài khoản. Khi mất mạng, app giữ thay đổi trên máy và gửi lên khi có mạng. Nếu hai thiết bị sửa cùng một mục, lần cập nhật có thời gian mới hơn được giữ.</p>
-<button id="accountBackup">Tải bản sao lưu tiến độ</button><p class="hint">Thống kê tiến độ đã đồng bộ có thể được quản trị viên xem. Firebase quản lý email và mật khẩu. Bạn không cần đăng nhập lại mỗi lần mở app trên thiết bị đã đăng nhập.</p>
+<button id="accountBackup">Tải bản sao lưu tiến độ</button><button id="accountRestore" type="button">Nhập bản sao lưu JSON</button><p class="hint">Thống kê tiến độ đã đồng bộ có thể được quản trị viên xem. Firebase quản lý email và mật khẩu. Bạn không cần đăng nhập lại mỗi lần mở app trên thiết bị đã đăng nhập.</p>
 <div class="account-detail studio-account-settings"><div id="accountForms"><form id="accountForm">
 <label for="accountAction">Bạn muốn</label><select id="accountAction"><option value="login">Đăng nhập</option><option value="register">Tạo tài khoản mới</option></select>
 <label for="accountEmail">Email</label><input id="accountEmail" type="email" autocomplete="username" required="" placeholder="Email của bạn">

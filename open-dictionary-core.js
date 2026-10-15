@@ -8,7 +8,7 @@
  const sameReading=(a,b)=>reading(a)===reading(b);
  function pinyinQuery(q){const tokens=String(q).trim().toLowerCase().split(/[\s'’]+/);return tokens.length>0&&tokens.every(t=>/^(?:(?:[bpmfdtnlgkhjqxrzcswy]|zh|ch|sh)?(?:a|o|e|ai|ei|ao|ou|an|en|ang|eng|ong|i|ia|ie|iao|iu|ian|in|iang|ing|iong|u|ua|uo|uai|ui|uan|un|uang|ueng|v|ve|van|vn)|er|m|n|ng)$/.test(fold(t))&&!/[^a-züv:\d\u00c0-\u024f\u1e00-\u1eff]/i.test(t));}
  const semanticQuery=q=>vietnamese(q)||!/[\p{Script=Han}]/u.test(q)&&/[a-zA-Z]/.test(q)&&!pinyinQuery(q);
- function valid(x){return !!x&&x.word&&['han','trad','pin','mean'].every(k=>typeof x.word[k]==='string'&&x.word[k].length>0&&x.word[k].length<8000)&&Number.isFinite(x.due)&&Number.isFinite(x.interval)&&x.interval>=0&&Number.isFinite(x.ease)&&x.ease>=1.3&&Number.isInteger(x.reps)&&x.reps>=0;}
+ function valid(x){return !!x&&x.word&&['han','trad','mean'].every(k=>typeof x.word[k]==='string'&&x.word[k].length>0&&x.word[k].length<8000)&&typeof x.word.pin==='string'&&x.word.pin.length<8000&&Number.isFinite(x.due)&&Number.isFinite(x.interval)&&x.interval>=0&&Number.isFinite(x.ease)&&x.ease>=1.3&&Number.isInteger(x.reps)&&x.reps>=0;}
  function clean(value){const items={};for(const [k,x] of Object.entries(value?.items||{}))if(valid(x)&&k===id(x.word))items[k]=x;return items;}
  function add(items,word,now=Date.now()){const key=id(word);return items[key]?items:{...items,[key]:{word:{han:word.han,trad:word.trad,pin:word.pin,mean:word.meanVi||word.mean,meanLanguage:word.meanVi||word.native?'vi':'unknown',sourceMean:word.sourceMean||word.mean},due:now,interval:0,ease:2.5,reps:0,lapses:0}};}
  function rate(old,rating,now=Date.now()){
