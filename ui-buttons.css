@@ -1,6 +1,5 @@
 /* Default policy for all existing and future buttons; feedback colors remain semantic. */
-:root{--button-bg:#fff;--button-text:#202033;--button-border:#ded8f5;--button-active-bg:#6957e7;--button-active-text:#fff;--button-disabled-bg:#eceef3;--button-disabled-text:#676b80}
-html[data-theme=dark]{--button-bg:#20222f;--button-text:#eeeef6;--button-border:#44485e;--button-disabled-bg:#303241;--button-disabled-text:#b9bdce}
+
 html body.studio-enabled button:not(.correct):not(.wrong){background:var(--button-bg)!important;color:var(--button-text)!important;border-color:var(--button-border)!important;box-shadow:none}
 html body.studio-enabled button:is(.active,[aria-pressed=true],[aria-current=page]):not(:disabled),html body.studio-enabled button:is(:hover,:active,:focus-visible):not(:disabled){background:var(--button-active-bg)!important;color:var(--button-active-text)!important;border-color:var(--button-active-bg)!important}
 html body.studio-enabled button:is(.active,[aria-pressed=true],[aria-current=page],:hover,:active,:focus-visible):not(:disabled) :is(strong,small,span,p,em,i,svg){color:var(--button-active-text)!important}

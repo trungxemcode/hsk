@@ -1,7 +1,7 @@
 name: Studio layout checks
 on:
   pull_request:
-    paths: ['study-sync*', 'ui-buttons.css', 'notebook*', 'tools/check-notebook*.cjs', 'account.js', 'index.html', 'studio.js', 'planner.js', 'planner-core.js', 'exam*', 'drive-exam*', 'drive-audio*', 'open-dictionary*', 'content/open-dictionary/**', 'tools/check-open-dictionary*.cjs', 'tools/build-open-dictionary.py', 'content/drive-hsk/**', 'tools/import-drive-hsk.py', 'ai-coach*', 'coach-profile.js', 'lessons.js', 'lessons-data.json', 'lesson-mastery.js', 'lesson-mini*', 'account-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-exam*.cjs', 'tools/check-ai-coach*.cjs', 'tools/check-lesson-mini*.cjs', 'tools/check-reading-dom.cjs', '.github/workflows/studio-ui.yml']
+    paths: ['style.css', 'mobile-layout.css', 'ui-buttons.css', 'handwriting.css', 'speech.css', 'lesson-chat.css', 'tools/check-design-tokens.cjs', 'study-sync*', 'ui-buttons.css', 'notebook*', 'tools/check-notebook*.cjs', 'account.js', 'index.html', 'studio.js', 'planner.js', 'planner-core.js', 'exam*', 'drive-exam*', 'drive-audio*', 'open-dictionary*', 'content/open-dictionary/**', 'tools/check-open-dictionary*.cjs', 'tools/build-open-dictionary.py', 'content/drive-hsk/**', 'tools/import-drive-hsk.py', 'ai-coach*', 'coach-profile.js', 'lessons.js', 'lessons-data.json', 'lesson-mastery.js', 'lesson-mini*', 'account-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-exam*.cjs', 'tools/check-ai-coach*.cjs', 'tools/check-lesson-mini*.cjs', 'tools/check-reading-dom.cjs', '.github/workflows/studio-ui.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,6 +24,7 @@ jobs:
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: |
+          node tools/check-design-tokens.cjs
           node --test server/*.test.mjs
           node tools/check-speech-dom.cjs
           node tools/check-reading-dom.cjs
