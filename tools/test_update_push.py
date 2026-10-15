@@ -5,6 +5,11 @@ notify = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(notify)
 
 class UpdatePushTests(unittest.TestCase):
+    def test_readable_release_name_is_not_prefixed_twice(self):
+        result = notify.payload('app', {'version': 'hsk-offline-r2-01', 'label': 'Bản 2.01 (Thu gọn Luyện & Ôn)'})
+        self.assertTrue(result['contents']['en'].startswith('Bản 2.01 (Thu gọn Luyện & Ôn) đã sẵn sàng.'))
+        self.assertNotIn('Bản Bản', result['contents']['en'])
+
     def test_release_deduplication_and_consent(self):
         a = notify.payload('app', {'version': 'v1', 'label': 'v1'})
         b = notify.payload('app', {'version': 'v2', 'label': 'v2'})

@@ -14,7 +14,7 @@ def payload(app_id, manifest):
     return {
         'app_id': app_id, 'target_channel': 'push',
         'headings': {'en': 'HSK · Có phiên bản mới'},
-        'contents': {'en': 'Bản ' + manifest['label'] + ' đã sẵn sàng. Mở app để cập nhật; tiến độ được giữ.'},
+        'contents': {'en': ('' if manifest['label'].startswith('Bản ') else 'Bản ') + manifest['label'] + ' đã sẵn sàng. Mở app để cập nhật; tiến độ được giữ.'},
         'url': SITE + '?update=1',
         'filters': [{'field': 'tag', 'key': 'hsk_update_on', 'relation': '=', 'value': '1'}],
         'idempotency_key': str(uuid.uuid5(uuid.NAMESPACE_URL, app_id + '/web-update/' + manifest['version'])),

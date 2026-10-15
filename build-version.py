@@ -2,7 +2,12 @@
 import argparse, hashlib, json, re, gzip
 from pathlib import Path
 root=Path(__file__).resolve().parent
-parser=argparse.ArgumentParser();parser.add_argument('--version');args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('--version');parser.add_argument('--release');parser.add_argument('--note');args=parser.parse_args()
+previous=json.loads((root/'app-version.json').read_text(encoding='utf-8')) if (root/'app-version.json').exists() else {}
+if args.release and not re.fullmatch(r'\d+\.\d{2}',args.release):raise SystemExit('Release must look like 2.01')
+if bool(args.release)!=bool(args.note):raise SystemExit('Provide --release and --note together')
+if args.note and (len(args.note)>100 or '\n' in args.note):raise SystemExit('Release note must be one short line')
+if args.version and args.version!=previous.get('version') and previous.get('release') and not args.release:raise SystemExit('New releases require --release 2.02 --note "Nội dung cập nhật"')
 if args.version:
  if not re.fullmatch(r'hsk-offline-[a-zA-Z0-9-]+',args.version):raise SystemExit('Invalid version')
  for name in ('offline.js','offline-worker.js','OneSignalSDKWorker.js'):
@@ -28,5 +33,5 @@ def asset_metadata(name):
  if path.suffix.lower() not in {'.png','.gz','.webp','.mp3'}:data=data.replace(b'\r\n',b'\n')
  return {'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data)}
 assets={n:asset_metadata(n) for n in files}
-(root/'app-version.json').write_text(json.dumps({'version':version,'label':version.removeprefix('hsk-offline-'),'assets':assets},ensure_ascii=False),encoding='utf-8')
+(root/'app-version.json').write_text(json.dumps({'version':version,'release':args.release or previous.get('release',''),'releaseNote':args.note or previous.get('releaseNote',''),'label':('Bản '+(args.release or previous.get('release',''))+' ('+(args.note or previous.get('releaseNote',''))+')') if (args.release or previous.get('release')) else version.removeprefix('hsk-offline-'),'assets':assets},ensure_ascii=False),encoding='utf-8')
 print(f'{version}: {len(assets)} assets')

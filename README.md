@@ -95,3 +95,7 @@ Mở Sổ từ vựng từ sidebar hoặc lối tắt Tổng quan trên điện 
 Khóa riêng `hsk-vocabulary-notebook-v1` được ánh xạ thành `notebook:<uuid>` trong hàng đợi tài khoản hiện có; giữ nguyên khóa tiến độ/SRS. Xóa dùng tombstone và hợp nhất theo phiên bản từng mục. Không cần đổi Firestore rules hiện tại. Khi có dữ liệu từ thiết bị khác, dùng Tài khoản → Áp dụng như tiến độ học. Sao lưu tài khoản bao gồm sổ. Chưa đăng nhập lưu theo khách; đăng nhập/đăng xuất dùng cơ chế tách dữ liệu hiện có.
 
 Kiểm tra: `node --test server/notebook.test.mjs`, `NODE_PATH=/tmp/hsk-tests/node_modules node tools/check-notebook-dom.cjs`, cùng kiểm tra hồi quy Studio/tra cứu/bài đọc/phát âm.
+
+## Đặt tên bản cập nhật
+
+Tên hiển thị dùng `Bản 2.01 (Nội dung cập nhật)`, tăng lần lượt 2.02, 2.03… khi phát hành. Tạo manifest bằng `python3 build-version.py --version hsk-offline-r2-02 --release 2.02 --note "Nội dung cập nhật"`. Khóa phiên bản nội bộ vẫn dùng cho cache/kiểm tra hash; không đổi cơ chế cập nhật. Chạy lại không tham số sẽ giữ tên phát hành hiện tại. Tên này dùng ở Tài khoản, trạng thái cập nhật và thông báo điện thoại.
