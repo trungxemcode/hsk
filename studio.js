@@ -84,7 +84,7 @@ renderIcons();
    b.setAttribute('aria-pressed',String(b.classList.contains('active')));
   });
   const who=owner();if(lastOwner!==who){lastOwner=who;fingerprint=snapshot();}
-  const selected=Number(read('hsk-studio-target-v1:'+who,5));const level=Number.isInteger(selected)&&selected>=1&&selected<=6?selected:5;
+  const selected=Number(window.HSKPlanner?.plan?.target??read('hsk-studio-target-v1:'+who,5));const level=Number.isInteger(selected)&&selected>=1&&selected<=6?selected:5;
   $('studioTargetLevel').value=String(level);$('studioTarget').textContent='HSK '+level;$('studioProgressLabel').textContent='HSK '+level;
   const all=dictionary(),r=progress(),pool=all.filter(w=>Number(w.hsk)===level),known=pool.filter(w=>r[key(w)]?.status==='known').length,percent=pool.length?Math.round(known*100/pool.length):0;
   $('studioProgressPercent').textContent=percent+'% / 100%';$('studioProgressFill').style.width=percent+'%';$('studioProgress').setAttribute('aria-valuenow',String(percent));$('studioKnownCount').textContent=pool.length?`${known} / ${pool.length} mục từ đã thuộc · theo dữ liệu của app`:'Đang tải bộ từ vựng…';
@@ -105,7 +105,8 @@ renderIcons();
  new MutationObserver(()=>{if(!document.body.dataset.studioHub)title(coreView());}).observe(document.querySelector('.app-tabs'),{subtree:true,attributes:true,attributeFilter:['class']});
  new MutationObserver(refresh).observe(document.querySelector('.filter-buttons'),{subtree:true,attributes:true,attributeFilter:['class']});
  new MutationObserver(refresh).observe($('adminBtn'),{attributes:true,attributeFilter:['hidden']});
- $('studioTargetLevel').addEventListener('change',()=>{try{localStorage.setItem('hsk-studio-target-v1:'+owner(),JSON.stringify(Number($('studioTargetLevel').value)));}catch{}refresh();});
+ $('studioTargetLevel').addEventListener('change',()=>{const target=Number($('studioTargetLevel').value);if(window.HSKPlanner?.setTarget){if(!window.HSKPlanner.setTarget(target))$('accountStatus').textContent='Chưa lưu được mục tiêu. Kế hoạch cũ vẫn được giữ.';}else try{localStorage.setItem('hsk-studio-target-v1:'+owner(),JSON.stringify(target));}catch{}refresh();});
+ window.addEventListener('hsk-plan-change',()=>refresh());
  document.addEventListener('click',event=>{if(!ready)return;const panel=event.target.closest('#learnPanel,#quizPanel,#srsPanel,#lessonsPanel,#mistakesPanel,#examPractice');if(panel&&event.target.closest('button')){clearTimeout(activityTimer);activityTimer=setTimeout(recordActivity,120);}},true);
  window.addEventListener('storage',()=>{refresh();});window.addEventListener('hsk-account-ready',()=>{lastOwner=owner();fingerprint=snapshot();refresh();});
  // The existing updater owns activation and download readiness; hidden means disabled here.
