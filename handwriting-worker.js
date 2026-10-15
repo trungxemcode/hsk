@@ -32,7 +32,7 @@ onmessage=async event=>{
   const personal=[];for(const sample of (message.samples||[]).slice(-learning.MAX_SAMPLES)){if(supported.has(sample.label)){try{personal.push(core.fromBitmap(sample.label,learning.unpack(sample.bitmap),'personal'));}catch{}}}
   let candidates=core.recognize(strokes,[...templates,...personal.filter(Boolean)]),engine='shape',warning='';
   const packed=learning.pack(bitmap);
-  if(neuralEnabled){try{const neural=await HSKHandwritingNeural.recognize(strokes,supported);if(neural.length){candidates=HSKHandwritingNeuralCore.combine(neural,candidates,packed,(message.samples||[]).filter(s=>supported.has(s.label)));engine='neural';}}catch{neuralEnabled=false;warning='Nhận dạng nâng cao gặp lỗi; đang dùng bộ so hình.';postMessage({type:'neural-status',enabled:false,error:warning});}}
+  if(neuralEnabled){try{const neural=await HSKHandwritingNeural.recognize(strokes,null);if(neural.length){candidates=HSKHandwritingNeuralCore.combine(neural,candidates,packed,(message.samples||[]).filter(s=>supported.has(s.label)));engine='neural';}}catch{neuralEnabled=false;warning='Nhận dạng nâng cao gặp lỗi; đang dùng bộ so hình.';postMessage({type:'neural-status',enabled:false,error:warning});}}
   postMessage({type:'result',id:message.id,candidates,bitmap:packed,revision,engine,warning});
  }catch(error){postMessage({type:'error',id:message.id,message:error.message});}
 };

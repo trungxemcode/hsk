@@ -377,7 +377,7 @@ function renderSearch() {
 }
 window.HSKHandwritingSearch={
  characters:()=>[...new Set(words.flatMap(w=>Array.from(w.han).filter(c=>/[\u3400-\u9fff\u3007]/.test(c))))].join(''),
- select(character){if(Array.from(character).length!==1||!words.some(w=>w.han.includes(character)))return {supported:false,count:0};handwritingSearchCharacter=character;runSearch();return {supported:true,count:searchMatches.length};},
+ select(character){if(typeof character!=='string'||!/^\p{Script=Han}$/u.test(character)&&character!=='〇')return {supported:false,count:0};handwritingSearchCharacter=character;$('searchInput').value=character;const fallback=searchScope==='hsk'&&!levelWords().some(w=>w.han.includes(character));if(fallback)window.HSKDictionaryBridge.setScope('general');else runSearch();return {supported:true,count:searchMatches.length,scope:searchScope,fallback};},
  clear(){handwritingSearchCharacter='';runSearch();}
 };
 // Adaptive spaced repetition. Due dates are timestamps, so the schedule survives closing the file.
