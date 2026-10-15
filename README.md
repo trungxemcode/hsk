@@ -111,3 +111,7 @@ Cấu hình mục tiêu chuyển về Tổng quan, mục Mục tiêu & lịch h�
 ## Bản 2.03 — Luồng học gọn trên điện thoại
 
 Bài học có bốn phần: Từ vựng (kèm tổng quan), Đọc & hội thoại (hội thoại trước bài đọc), Ngữ pháp, Luyện tập. Nút Tiếp theo/Quay lại ở cuối mỗi phần chuyển nội dung và đưa vị trí đọc về đầu phần mới. Thanh chọn phần hiển thị 2×2 trên điện thoại, bốn cột trên desktop. Không thay đổi dữ liệu, cách chấm điểm, SRS hay điều kiện đạt 100%.
+
+## Bản 2.04 — Tra chữ viết tay ngoài HSK
+
+Chọn một chữ Hán sẽ điền chữ đó vào ô tìm kiếm. Nếu bộ lọc HSK hiện tại có từ phù hợp, tiếp tục tra HSK; nếu không, tự chuyển sang Tra cứu thường mà không đổi cấp HSK toàn app. Nhận dạng nâng cao được phép gợi ý các chữ Hán có trong mô hình ngoài kho HSK; bộ nhận dạng cơ bản và học mẫu nét vẫn giữ phạm vi dữ liệu hiện có. Chữ ngoài phạm vi học mẫu vẫn được tra bình thường, không báo đã học mẫu và không tự thêm vào SRS.

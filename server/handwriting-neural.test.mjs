@@ -9,6 +9,7 @@ test('single glyph decoder filters supported characters, skips blank and ranks m
  const out={dims:[1,2,4],data:Float32Array.from([.9,.05,.04,.01,.1,.2,.3,.4])};
  const result=core.decode(out,['','你','好','X'],new Set(['你','好']));
  assert.deepEqual(result.map(r=>r.character),['好','你']);
+ assert.deepEqual(core.decode(out,['','你','龘','X'],null).map(r=>r.character),['龘','你'],'general candidates include Han outside HSK but exclude Latin labels');
  assert.throws(()=>core.decode({...out,dims:[1,2,5]},['','你','好','X'],new Set(['你'])));
 });
 test('confirmed exact personal recall remains first; conflicting labels cannot override model',()=>{

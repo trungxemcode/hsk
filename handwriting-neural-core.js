@@ -21,7 +21,7 @@
   const scores=new Map();
   // Max over timesteps adapts the text-line CTC output to ranked single glyphs.
   // These scores are not calibrated probabilities of a whole drawing.
-  for(let i=1;i<classes;i++)if(supported.has(characters[i])){
+  for(let i=1;i<classes;i++)if((!supported||supported.has(characters[i]))&&/^[\u3400-\u9fff\u3007]$/u.test(characters[i])){
    let score=0;for(let t=0;t<steps;t++)score=Math.max(score,output.data[t*classes+i]);
    if(Number.isFinite(score)&&score>0)scores.set(characters[i],Math.max(score,scores.get(characters[i])||0));
   }

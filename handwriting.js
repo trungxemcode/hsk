@@ -74,7 +74,12 @@
   finally{clearTimeout(timer);if(id===serial){aiController=null;busy=false;updateButton();}}
  }
  $('handwritingAI').onclick=recognizeWithAI;$('handwritingCancelAI').onclick=()=>{if(aiController){aiController.abort();serial++;aiController=null;busy=false;status('Đã hủy yêu cầu AI.');updateButton();}};
- function choose(character,source='manual'){if(!bitmap)return;const result=window.HSKHandwritingSearch?.select(character);if(!result?.supported){status('Chữ này không có trong từ điển HSK của app. Chọn hoặc nhập lại một chữ Hán.');return;}try{const saved=currentStore().record(character,bitmap,{confirmed:true,share:$('handwritingShare').checked,source});status((result.count?`Đã chọn ${character} · ${result.count} từ trong bộ lọc HSK hiện tại.`:`Đã chọn ${character}, nhưng bộ lọc HSK hiện tại không có từ phù hợp. Thử đổi bộ lọc.`)+(saved.saved?' App đã ghi nhớ mẫu của bạn.':' '+saved.error));learningStatus();startKnowledgeSync();if(knowledgeUid)uploadLocalKnowledge(knowledgeUid);flush();}catch(error){status(error.message);}}
+ function choose(character,source='manual'){
+  if(!bitmap)return;const result=window.HSKHandwritingSearch?.select(character);if(!result?.supported){status('Hãy chọn hoặc nhập đúng một chữ Hán.');return;}
+  const message=result.scope==='general'?`Đã chọn ${character} · Đang tra trong từ điển mở.`:`Đã chọn ${character} · ${result.count} từ trong bộ lọc HSK hiện tại.`;
+  if(!characters.includes(character)){status(message);return;}
+  try{const saved=currentStore().record(character,bitmap,{confirmed:true,share:$('handwritingShare').checked,source});status(message+(saved.saved?' App đã ghi nhớ mẫu của bạn.':' '+saved.error));learningStatus();startKnowledgeSync();if(knowledgeUid)uploadLocalKnowledge(knowledgeUid);flush();}catch(error){status(message+' '+error.message);}
+ }
  $('handwritingCorrection').onsubmit=event=>{event.preventDefault();const character=$('handwritingCorrectChar').value.trim();if(Array.from(character).length!==1){status('Hãy nhập đúng một chữ Hán.');return;}choose(character,'manual');};
  async function flush(){if(!ready||!config||!$('handwritingShare').checked)return;const current=currentStore(),user=window.HSKAccountDashboard?.user;const result=await current.flush({user,endpoint:config.endpoint.replace(/\/translate$/,'/handwriting-samples'),online:navigator.onLine});if(current===store)learningStatus(result.sent?`Đã góp ${result.sent} mẫu.`:result.error||'');}
  $('handwritingShare').onchange=()=>{try{localStorage.setItem(sharingKey,$('handwritingShare').checked?'on':'off');}catch{}if(!$('handwritingShare').checked){learningStatus('Góp mẫu đang tắt; nhận dạng và học trên thiết bị vẫn hoạt động.');}else flush();};
