@@ -33,6 +33,8 @@ details.drawer-group:not([open])>.drawer-group-content{display:none!important}
  body.mobile-ux .account-progress-heading :is(span,strong){min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.3}
  body.mobile-ux .account-week{grid-template-columns:repeat(7,minmax(0,1fr))}
  body.mobile-ux .account-day{min-width:0;padding-inline:2px;white-space:normal;overflow-wrap:anywhere}
+ body.mobile-ux .about-hero>div{min-width:0;overflow-wrap:anywhere}
+ body.mobile-ux .about-hero .about-logo{flex:none}
  body.mobile-ux .bottom-nav button{min-width:0;height:auto;white-space:normal;line-height:1.3;padding-inline:3px}
  body.mobile-ux .mobile-dock-label{display:block;width:100%;min-width:0;white-space:normal;overflow-wrap:break-word;line-height:1.3;text-wrap:balance}
  body.mobile-ux .mobile-today-hero{display:block;background:linear-gradient(130deg,var(--accent),var(--navy));color:var(--palette-white);padding:22px;border-radius:var(--radius-card);margin:0 0 20px}
