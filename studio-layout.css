@@ -517,3 +517,5 @@ html[data-theme=dark] body.studio-enabled .handwriting-credit a{color:var(--acce
  body.studio-enabled .mobile-dock{display:block;position:fixed;inset:auto 0 0;z-index:12;isolation:isolate;transform:translateZ(0);backface-visibility:hidden}
  body.studio-enabled .mobile-dock .bottom-nav{position:relative;inset:auto;transform:none;display:grid}
 }
+
+#studioPractice>.hub-intro{padding-bottom:20px}#studioPractice .hub-section-heading{margin:0 0 16px;font-size:20px;line-height:1.35;color:var(--ink);font-weight:700}#studioReview{margin-bottom:28px}#studioPractice .review-hubs{grid-template-columns:repeat(2,minmax(0,1fr))}#studioPractice .practice-hubs{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:500px){#studioPractice .review-hubs,#studioPractice .practice-hubs{grid-template-columns:1fr}#studioPractice .hub-section-heading{font-size:18px}#studioReview{margin-bottom:24px}.bottom-nav button{white-space:nowrap}}

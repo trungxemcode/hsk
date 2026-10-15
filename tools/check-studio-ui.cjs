@@ -9,8 +9,8 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   await page.route('https://**/*',route=>route.abort());
   await page.addInitScript(()=>{window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>[{name:'Test Mandarin',lang:'zh-CN',localService:true}],cancel(){},speak(u){window.__spoken=u.text;setTimeout(()=>u.onend?.(),10);}}});});
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`);await page.waitForFunction(()=>!!window.HSKLessons&&document.body.dataset.studioHub==='home',{timeout:60000});
-  const nav=async mode=>{await page.locator('.sidebar [data-studio-go="'+mode+'"]').click();};
-  await nav('practice');await page.waitForTimeout(350);assert.equal(await page.locator('#activeTitle').innerText(),'Luyện tập');await page.locator('#studioPractice [data-studio-go="learn"]').click();await page.locator('#flashcard').waitFor({state:'visible'});
+  const nav=async mode=>{if(mode==='review')mode='practice';await page.locator('.sidebar [data-studio-go="'+mode+'"]').click();};
+  await nav('practice');await page.waitForTimeout(350);assert.equal(await page.locator('#activeTitle').innerText(),'Luyện & Ôn');await page.locator('#studioPractice [data-studio-go="learn"]').click();await page.locator('#flashcard').waitFor({state:'visible'});
   await page.locator('#flashcard .front .speech-button').click();assert.ok(await page.evaluate(()=>!!window.__spoken));assert.equal(await page.locator('#flashcard').evaluate(el=>el.classList.contains('flipped')),false);
   await page.locator('#flashcard .mastery-btn.known').click();await page.waitForTimeout(180);await nav('account');assert.equal(await page.locator('#studioStreak').innerText(),'1 ngày');assert.ok(await page.locator('#offlineUpdate').isDisabled());
   await page.locator('#studioTargetLevel').selectOption('1');assert.match(await page.locator('#studioKnownCount').innerText(),/^1 \/ /);
@@ -121,9 +121,9 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   // Guard against stacked heading margins and tall empty card rows on phones.
   for(const width of [320,390,1440]){
    await page.setViewportSize({width,height:900});
-   for(const mode of ['practice','review']){
+   for(const mode of ['practice']){
     await page.mouse.move(0,0);await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(350);
-    const spacing=await page.locator('[data-studio-hub-panel="'+mode+'"]:not([hidden])').evaluate(panel=>{const heading=panel.querySelector('.hub-intro h2').getBoundingClientRect(),cards=[...panel.querySelectorAll('.hub-card')];return {headingGap:cards[0].getBoundingClientRect().top-heading.bottom,cards:cards.map(c=>{const desc=c.querySelector('small').getBoundingClientRect(),cta=c.querySelector('em').getBoundingClientRect();return {height:c.getBoundingClientRect().height,ctaGap:cta.top-desc.bottom,padding:parseFloat(getComputedStyle(c).paddingTop)};})};});
+    const spacing=await page.locator('[data-studio-hub-panel="'+mode+'"]:not([hidden])').evaluate(panel=>{const heading=panel.querySelector('.hub-section-heading').getBoundingClientRect(),cards=[...panel.querySelectorAll('.hub-card')];return {headingGap:cards[0].getBoundingClientRect().top-heading.bottom,cards:cards.map(c=>{const desc=c.querySelector('small').getBoundingClientRect(),cta=c.querySelector('em').getBoundingClientRect();return {height:c.getBoundingClientRect().height,ctaGap:cta.top-desc.bottom,padding:parseFloat(getComputedStyle(c).paddingTop)};})};});
     assert.ok(spacing.headingGap>=16&&spacing.headingGap<=25,'heading to cards spacing '+width);
     for(const card of spacing.cards){assert.ok(card.padding>=20,'comfortable card inset');if(width<=500){assert.ok(card.height<240,'phone card must not reserve empty height');assert.ok(card.ctaGap>=12&&card.ctaGap<=20,'CTA close to description');}}
     await page.screenshot({path:'/tmp/studio-spacing-'+mode+'-'+width+'.png',fullPage:true});
