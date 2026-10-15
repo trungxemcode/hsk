@@ -1,0 +1,38 @@
+/* Hands-free exposure is not recall/mastery evidence. All effects are injected. */
+(function(root){'use strict';
+const speeds={slow:{label:'Chậm',recall:6000,answer:5000,rate:.7},normal:{label:'Vừa',recall:4000,answer:3000,rate:.85},fast:{label:'Nhanh',recall:2000,answer:2000,rate:1}};
+const abortError=()=>Object.assign(new Error('Đã tạm dừng.'),{name:'AbortError'});
+function wait(ms,signal){return new Promise((resolve,reject)=>{if(signal?.aborted){reject(abortError());return;}const abort=()=>{clearTimeout(timer);signal?.removeEventListener('abort',abort);reject(abortError());},timer=setTimeout(()=>{signal?.removeEventListener('abort',abort);resolve();},ms);signal?.addEventListener('abort',abort,{once:true});});}
+function config(v={}){return {speed:speeds[v.speed]?v.speed:'normal',examples:v.examples!==false,audio:v.audio!==false,meaning:v.meaning!==false,repeats:Number(v.repeats)===1?1:2,count:[10,20,50].includes(Number(v.count))?Number(v.count):10,minutes:[5,10,20,30].includes(Number(v.minutes))?Number(v.minutes):10,loop:v.loop===true,wake:v.wake!==false};}
+function example(w){const candidates=[...(w.practice?.examples||[]),w.dictionary?.example,w.exCn?{cn:w.exCn,vi:w.exVi,pin:w.originalExampleMetadata?.pin||''}:null];return candidates.find(e=>e&&typeof e.cn==='string'&&typeof e.vi==='string'&&e.cn.trim()&&e.vi.trim()&&e.cn.length<=200&&e.vi.length<=500)||null;}
+function word(w){if(!w||!w.han||!w.mean)return null;const e=example(w),meaning=(w.practice?.meanings?.[0]||String(w.mean).split(/[;；]/)[0]).trim();return {key:w.learningKey||`${w.hsk}|${w.han}|${w.pin}`,han:String(w.han),pin:String(w.pin||''),mean:meaning,level:String(w.hsk||''),example:e?{cn:e.cn,vi:e.vi,pin:e.pin||''}:null};}
+function queue(deck,index=0,count=10){const seen=new Set(),out=[];if(!deck.length)return out;for(let i=0;i<deck.length&&out.length<count;i++){const w=deck[(Math.max(0,index)+i)%deck.length];if(!w?.key||seen.has(w.key))continue;seen.add(w.key);out.push({...w,example:w.example?{...w.example}:null});}return out;}
+function readingTime(text,min=3000){return Math.max(min,Math.min(15000,String(text||'').trim().split(/\s+/).length*300));}
+function chooseVoice(voices,lang){const list=voices.filter(v=>lang==='vi'?/^vi(?:-|_|$)/i.test(v.lang):/^(zh|cmn)(-|_|$)/i.test(v.lang)&&!/^zh[-_]hk/i.test(v.lang)&&!/(cantonese|yue)/i.test(v.name||'')),preferred=lang==='vi'?list:list.filter(v=>/^(zh[-_](cn|hans)|cmn[-_]cn)/i.test(v.lang));return (preferred.length?preferred:list).find(v=>v.localService)||(preferred.length?preferred:list)[0]||null;}
+function createSpeech({synth,Utterance,notice=()=>{},setTimer=setTimeout,clearTimer=clearTimeout}){let cancel=null,held=null;
+ function stop(){cancel?.();cancel=null;held=null;synth?.cancel();}
+ function speak(text,lang,rate,signal){stop();if(signal?.aborted)return Promise.reject(abortError());const voice=chooseVoice(synth?.getVoices?.()||[],lang);if(!synth||!Utterance||!voice){if(lang==='vi'){notice('Chưa có giọng tiếng Việt trên thiết bị; nghĩa vẫn hiện trên thẻ. Thêm giọng Việt để nghe rảnh tay đầy đủ.');return Promise.resolve(false);}return Promise.reject(Error('Chưa có giọng tiếng Trung. Thêm giọng Mandarin trong cài đặt thiết bị, hoặc tắt Đọc tự động để chỉ xem thẻ.'));}
+  return new Promise((resolve,reject)=>{let settled=false,timer;const cleanup=()=>{if(timer!==undefined)clearTimer(timer);signal?.removeEventListener('abort',abort);if(cancel===abort)cancel=null;held=null;},done=(error)=>{if(settled)return;settled=true;cleanup();error?reject(error):resolve(true);},abort=()=>{done(abortError());synth.cancel();};cancel=abort;signal?.addEventListener('abort',abort,{once:true});const u=new Utterance(String(text));held=u;u.voice=voice;u.lang=voice.lang;u.rate=rate;u.pitch=1;u.volume=1;u.onend=()=>done();u.onerror=()=>done(Error('Âm thanh bị gián đoạn. Kiểm tra âm lượng/giọng đọc rồi bấm Tiếp tục; hoặc tắt Đọc tự động.'));timer=setTimer(()=>{done(Error('Giọng đọc bị treo; phiên đã tạm dừng để không bỏ qua thẻ.'));synth.cancel();},Math.min(90000,Math.max(15000,String(text).length*500/Math.max(.5,rate)+8000)));try{synth.speak(u);}catch{done(Error('Thiết bị chưa cho phát âm. Bấm Tiếp tục để thử lại.'));}});
+ }
+ return {speak,stop,get currentUtterance(){return held;}};
+}
+function createEngine(deps){const now=deps.now||Date.now,delay=deps.wait||wait,setTimer=deps.setTimer||setTimeout,clearTimer=deps.clearTimer||clearTimeout;let cards=[],opts=config(),position=0,run=0,controller=null,timer=null,running=false,finished=false,phase='idle',reason='',started=0,spent=0,cycles=0;const completed=new Set();
+ function snapshot(){return {running,finished,phase,reason,position,total:cards.length,completed:completed.size,cycles,elapsed:spent+(running?Math.max(0,now()-started):0),card:cards[position]||null,options:{...opts}};}
+ function emit(){deps.onState?.(snapshot());}
+ function cancel(){run++;controller?.abort();controller=null;if(timer!==null)clearTimer(timer);timer=null;if(running)spent+=Math.max(0,now()-started);running=false;deps.stopSpeech?.();}
+ function pause(message='Đã tạm dừng.'){if(!running)return;cancel();phase='paused';reason=message;emit();}
+ function finish(message='Đã phát hết bộ thẻ.'){cancel();finished=true;phase='finished';reason=message;emit();}
+ function configure(list,settings){cancel();cards=list.map(w=>({...w,example:w.example?{...w.example}:null}));opts=config(settings);position=0;spent=0;cycles=0;completed.clear();finished=false;phase='idle';reason='';emit();}
+ async function play(){if(running||finished||!cards.length)return;running=true;phase='front';reason='';started=now();const id=++run;controller=new AbortController();const signal=controller.signal,valid=()=>id===run&&running&&!signal.aborted;timer=setTimer(()=>finish('Đã hết thời gian hẹn dừng.'),Math.max(1,opts.minutes*60000-spent));emit();
+  try{while(valid()){if(spent+now()-started>=opts.minutes*60000){finish('Đã hết thời gian hẹn dừng.');return;}const w=cards[position],pace=speeds[opts.speed];phase='front';emit();if(deps.show(w)===false)throw Error('Bộ thẻ đã thay đổi. Hãy bắt đầu phiên mới.');
+    if(opts.audio)for(let n=0;n<opts.repeats;n++){await deps.speak(w.han,'zh',pace.rate,signal);if(!valid())return;if(n<opts.repeats-1)await delay(650,signal);}
+    if(!valid())return;phase='recall';emit();await delay(pace.recall,signal);if(!valid())return;deps.reveal(w);phase='answer';emit();if(opts.audio&&opts.meaning)await deps.speak(w.mean,'vi',.95,signal);if(!valid())return;await delay(readingTime(w.mean,pace.answer),signal);if(!valid())return;
+    if(opts.examples&&w.example){phase='example';deps.example?.(w.example);emit();if(opts.audio){await deps.speak(w.example.cn,'zh',pace.rate,signal);if(!valid())return;if(opts.meaning)await deps.speak(w.example.vi,'vi',.95,signal);}if(!valid())return;await delay(readingTime(w.example.vi,pace.answer),signal);}
+    if(!valid())return;completed.add(w.key);if(position===cards.length-1){cycles++;if(!opts.loop){finish();return;}position=0;}else position++;phase='gap';emit();await delay(700,signal);
+   }}catch(e){if(valid()&&e.name!=='AbortError')pause(e.message||'Không phát được nội dung.');}
+ }
+ function seek(n){const resume=running;cancel();finished=false;position=Math.max(0,Math.min(cards.length-1,n));phase='paused';reason='Đã chọn thẻ. Bấm Tiếp tục để phát.';if(cards[position])deps.show(cards[position]);emit();if(resume)void play();}
+ return {configure,play,pause,finish,seek,get state(){return snapshot();}};
+}
+const api={speeds,config,example,word,queue,readingTime,chooseVoice,createSpeech,createEngine,wait,abortError};root.HSKPassiveCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
+})(typeof window==='object'?window:globalThis);

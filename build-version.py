@@ -16,6 +16,8 @@ if args.version:
   p.write_text(s,encoding='utf-8',newline='')
 worker=(root/'offline-worker.js').read_text(encoding='utf-8');version=re.search(r"OFFLINE_VERSION='([^']+)'",worker).group(1)
 files=json.loads(re.search(r'const OFFLINE_FILES=(\[.*?\]);',worker).group(1))
+for name in ('passive-core.js','passive.js','passive.css'):
+ if name not in files:files.append(name)
 for name in ('placement-core.js','placement.js','placement.css'):
  if name not in files:files.append(name)
 for name in ('hanzi-writer.min.js','writing-practice.js','writing-practice.css','writing-starter.json','writing-library-LICENSE.txt','writing-data-LICENSE.txt'):
