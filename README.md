@@ -102,6 +102,8 @@ Tên hiển thị dùng `Bản 2.01 (Nội dung cập nhật)`, tăng lần lư�
 
 ## Bản 2.02 — Nút đồng bộ màu và kế hoạch học theo tài khoản
 
+Kiểm tra phát hành: 72 unit tests, hồi quy DOM/account, giao diện và tương phản trên trình duyệt, thao tác thanh điều hướng di động đều đạt.
+
 Nút mới tự nhận nền trắng (bề mặt tối khi dark mode), bấm/chọn chuyển tím. Dùng biến trong `ui-buttons.css`; không đặt lại màu xanh hoặc ghi đè màu cố định ở module mới. Giữ màu đúng/sai cho phản hồi học tập. Checkbox/radio dùng accent tím. Browser CI quét màu xanh còn sót trên các nút đang hiện và kiểm tra tương phản.
 
 Cấu hình mục tiêu chuyển về Tổng quan, mục Mục tiêu & lịch học; Tài khoản giữ thống kê và đồng bộ. `study-sync-core.js`/`study-sync.js` lưu cấu hình kế hoạch, nhật ký theo ngày/phiên và hoạt động vào `hsk-study-sync-v1`, đồng bộ qua các mục `study-*` của cơ chế phiên bản hiện có. Danh sách từ dài được chia nhỏ trước khi gửi. Streak được tính lại từ hợp ngày học, không đồng bộ một con số streak. Dữ liệu cũ theo UID/guest được nhập bổ sung, không xóa bản cũ; baseline cũ trùng/lồng nhau lấy mức lớn nhất để hạn chế cộng trùng, không thể dựng lại thời gian sự kiện vốn chưa được ghi. Khách vẫn lưu trên máy; thay đổi từ thiết bị khác vẫn chờ người dùng Áp dụng tại Tài khoản. Không cần thay Firestore rules hiện có của repo. Kiểm tra hợp nhất và giao dịch dùng Firebase giả lập, không phải xác nhận trực tiếp tất cả phiên đăng nhập thực.
