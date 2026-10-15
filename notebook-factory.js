@@ -44,4 +44,5 @@ async function createStory(){const words=picked().map(([,w])=>({han:w.han,pin:w.
  }catch(e){if(id===serial&&who===owner())status.textContent=e.name==='AbortError'?'AI trả lời quá lâu. Hãy thử lại.':e.message;}finally{clearTimeout(timer);if(id===serial){pending=null;storyButton.disabled=false;}}
 }
 window.addEventListener('hsk-notebook-change',refresh);window.addEventListener('hsk-account-ready',refresh);window.addEventListener('storage',e=>{if(e.key===KEY)renderHistory();});window.addEventListener('pagehide',()=>{++serial;pending?.abort();});fetch('./translation-config.json',{cache:'no-store'}).then(r=>r.json()).then(c=>{if(c.enabled&&new URL(c.endpoint).protocol==='https:')config=c;}).catch(()=>{});refresh();
+window.HSKNotebookFactory={startCurrent(format){selection=new Set(entries().map(([id])=>id));refresh();start(format);}};
 })();

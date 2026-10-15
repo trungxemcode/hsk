@@ -29,5 +29,5 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)engine.paus
 function resetOwner(){if(owner()!==who){engine.finish('Tài khoản đã thay đổi.');who=owner();invalid=true;example.hidden=true;preferences();}render(engine.state);}
 window.addEventListener('hsk-account-ready',resetOwner);window.addEventListener('storage',e=>{if(e.key==='hsk-account-meta-v1')resetOwner();});window.addEventListener('hsk-lessons-ready',()=>render(engine.state));
 const entry=button('',()=>{window.HSKStudio?.navigate('learn');settings.open=true;root.scrollIntoView?.({block:'start',behavior:'smooth'});});entry.className='hub-card';const symbol=el('span','听','hub-symbol lilac'),copy=el('span',undefined,'hub-content');symbol.setAttribute('aria-hidden','true');copy.append(el('strong','Học rảnh tay'),el('small','Tự lật thẻ, nghe từ và ví dụ theo nhịp của bạn.'),el('em','Mở chế độ tự chạy ↗'));entry.append(symbol,copy);document.querySelector('.practice-hubs')?.append(entry);
-preferences();render(engine.state);window.HSKPassive={get state(){return engine.state;},pause:message=>engine.pause(message)};
+preferences();render(engine.state);window.HSKPassive={toggle(){engine.state.running?engine.pause():start();},get state(){return engine.state;},pause:message=>engine.pause(message)};
 })();

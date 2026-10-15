@@ -22,7 +22,7 @@ for name in ('placement-core.js','placement.js','placement.css'):
  if name not in files:files.append(name)
 for name in ('hanzi-writer.min.js','writing-practice.js','writing-practice.css','writing-starter.json','writing-library-LICENSE.txt','writing-data-LICENSE.txt'):
  if name not in files:files.append(name)
-for name in ('notebook-tools-core.js','notebook-factory.js','notebook-factory.css','backup-core.js','backup-restore.js','study-sync-core.js','study-sync.js','ui-buttons.css','notebook.js','notebook.css','exam-bank.js','exam-core.js','exam.js','exam.css','lesson-mini.js','lesson-mini-data.json','ai-coach-core.js','ai-coach.js','mobile-dock.js','exam-expansion.js','coach-profile.js','drive-exam.js','drive-exam-data.json.gz'):
+for name in ('notebook-tools-core.js','notebook-factory.js','notebook-factory.css','backup-core.js','backup-restore.js','study-sync-core.js','study-sync.js','ui-buttons.css','notebook.js','notebook.css','exam-bank.js','exam-core.js','exam.js','exam.css','lesson-mini.js','lesson-mini-data.json','ai-coach-core.js','ai-coach.js','mobile-dock.js','mobile-ux.js','mobile-ux.css','exam-expansion.js','coach-profile.js','drive-exam.js','drive-exam-data.json.gz'):
  if name not in files:files.append(name)
 files=[f for f in files if not f.startswith('content/drive-hsk/') and f not in ('drive-exam-data.json','drive-exam-images.json','ios-transfer.html')]
 for name in ('drive-audio.js','drive-audio-data.json','open-dictionary-core.js','open-dictionary.js','open-dictionary.css','open-dictionary-notice.html'):

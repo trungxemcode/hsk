@@ -938,3 +938,5 @@ window.HSKDictionaryBridge={query:()=>handwritingSearchCharacter||$('searchInput
 document.querySelectorAll('[data-search-scope]').forEach(b=>b.onclick=()=>window.HSKDictionaryBridge.setScope(b.dataset.searchScope));
 window.HSKFlashcardBridge={snapshot(){return {index,words:currentWords.map(w=>window.HSKPassiveCore?.word(w)).filter(Boolean)};},show(key){if(mode!=='learn')return false;const n=currentWords.findIndex(w=>wordKey(w)===key);if(n<0)return false;index=n;updateCard();return true;},reveal(){$('flashcard').classList.add('flipped');}};
 window.dispatchEvent(new Event('hsk-lessons-ready'));
+// Mobile exit ends only the current quiz session; saved answers/SRS remain intact.
+window.HSKMobileQuiz={exit(){resetQuiz('Đã thoát phiên. Các câu đã làm vẫn được giữ; chọn Bắt đầu để luyện lượt mới.');}};

@@ -100,7 +100,7 @@ function contentShell(l,p){
  const c=l.content,nav=el('div',undefined,'lesson-section-nav'),views={};nav.setAttribute('aria-label','Các phần của bài học');root.append(nav);
  for(const [id,label] of lessonSteps){
   const v=el('section',undefined,'lesson-section');v.hidden=lessonSection!==id;v.setAttribute('aria-label',label);views[id]=v;
-  v.dataset.lessonSection=id;const b=button(label,()=>changeSection(id));b.setAttribute('aria-pressed',String(!v.hidden));nav.append(b);root.append(v);
+  v.dataset.lessonSection=id;const b=button(label,()=>changeSection(id));b.setAttribute('aria-pressed',String(!v.hidden));const evidence=measure(l,p),complete=id==='overview'?evidence.quiz===1:id==='reading'?evidence.read:id==='practice'?evidence.content===1&&evidence.mini===1:evidence.mastered;b.dataset.complete=String(complete);if(complete)b.title='Có bằng chứng hoàn thành trong tiến độ bài';nav.append(b);root.append(v);
  }
  views.overview.append(el('h4','Tổng quan & từ vựng'),el('p',c.objectives.join(' ')));const summary=el('details',undefined,'lesson-sources');summary.append(el('summary','Nội dung trọng tâm'),el('p',c.summary));views.overview.append(summary);views.vocabulary=views.overview;
  const readingGroup=views.reading;views.dialogue=el('section',undefined,'lesson-dialogues');views.dialogue.append(el('h4','Hội thoại'));views.reading=el('section',undefined,'lesson-reading');readingGroup.append(views.dialogue,views.reading);
