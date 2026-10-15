@@ -46,8 +46,8 @@ renderIcons();
  const $=id=>document.getElementById(id),main=document.querySelector('.workspace');
  function decorateControls(){main.querySelectorAll('.panel-box button:not(.speech-button):not(.mastery-btn)').forEach(b=>b.classList.add('studio-action'));}
  decorateControls();new MutationObserver(decorateControls).observe(main,{subtree:true,childList:true});
- const labels={home:'Tổng quan',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện tập',exam:'Dạng đề HSK',review:'Ôn tập',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn tập SRS',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
- const parents={learn:'practice',quiz:'practice',compare:'practice',exam:'practice',srs:'review',mistakes:'review',translator:'search',about:'home'};
+ const labels={home:'Tổng quan',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện & Ôn',exam:'Dạng đề HSK',review:'Luyện & Ôn',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn tập SRS',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
+ const parents={learn:'practice',quiz:'practice',compare:'practice',exam:'practice',srs:'practice',mistakes:'practice',translator:'search',about:'home'};
  let ready=false,route='home',lastOwner='',fingerprint='',activityTimer,refreshTimer;
  function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||'null')||fallback;}catch{return fallback;}}
  function owner(){return read('hsk-account-meta-v1',{}).uid||'guest';}
@@ -59,6 +59,7 @@ renderIcons();
  function title(name){route=name;$('activeTitle').textContent=labels[name]||'HSK Flashcards';document.querySelectorAll('[data-studio-go]').forEach(b=>{const selected=b.dataset.studioGo===(parents[name]||name);b.classList.toggle('active',selected);if(selected)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});}
  function coreView(){for(const [cls,name] of [['show-account','account'],['show-admin','admin'],['show-translator','translator'],['show-about','about'],['show-lessons','lessons']])if(document.body.classList.contains(cls))return name;return document.querySelector('.app-tabs [data-mode].active')?.dataset.mode||'learn';}
  function navigate(name){
+  if(name==='review')name='practice';
   if(!ready&&!['account','translator','about','admin'].includes(name))return;
   clearHub();
   if(['home','practice','review','exam','notebook'].includes(name)){
