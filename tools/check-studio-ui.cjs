@@ -133,9 +133,12 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    await page.setViewportSize({width,height:900});
    for(const mode of ['practice']){
     await page.mouse.move(0,0);await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(350);
-    const spacing=await page.locator('[data-studio-hub-panel="'+mode+'"]:not([hidden])').evaluate(panel=>{const heading=panel.querySelector('.hub-group-heading').getBoundingClientRect(),cards=[...panel.querySelectorAll('.hub-card')];return {headingGap:cards[0].getBoundingClientRect().top-heading.bottom,cards:cards.map(c=>{const desc=c.querySelector('small').getBoundingClientRect(),cta=c.querySelector('em').getBoundingClientRect();return {height:c.getBoundingClientRect().height,ctaGap:cta.top-desc.bottom,padding:parseFloat(getComputedStyle(c).paddingTop)};})};});
+    for(const group of await page.locator('#studioPractice .hub-group').all()){
+    if(!await group.evaluate(d=>d.open))await group.locator('summary').first().click();
+    const spacing=await group.evaluate(panel=>{const heading=panel.querySelector('.hub-group-heading').getBoundingClientRect(),cards=[...panel.querySelectorAll('.hub-card')];return {headingGap:cards[0].getBoundingClientRect().top-heading.bottom,cards:cards.map(c=>{const desc=c.querySelector('small').getBoundingClientRect(),cta=c.querySelector('em').getBoundingClientRect();return {height:c.getBoundingClientRect().height,ctaGap:cta.top-desc.bottom,padding:parseFloat(getComputedStyle(c).paddingTop)};})};});
     assert.ok(spacing.headingGap>=0&&spacing.headingGap<=16,'heading to cards spacing '+width);
     for(const card of spacing.cards){assert.ok(card.padding>=12,'comfortable card inset');if(width<=500){assert.ok(card.height<240,'phone card must not reserve empty height');assert.ok(card.height>=44,'compact rows retain touch target');}}
+    }
     await page.screenshot({path:'/tmp/studio-spacing-'+mode+'-'+width+'.png',fullPage:true});
    }
   }
