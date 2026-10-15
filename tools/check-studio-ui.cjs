@@ -15,7 +15,9 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   await page.locator('#flashcard .mastery-btn.known').click();await page.waitForTimeout(180);await nav('account');assert.equal(await page.locator('#studioStreak').innerText(),'1 ngày');assert.ok(await page.locator('#offlineUpdate').isDisabled());
   await page.locator('#studioTargetLevel').selectOption('1');assert.match(await page.locator('#studioKnownCount').innerText(),/^1 \/ /);
   await page.screenshot({path:'/tmp/studio-account-desktop.png',fullPage:true});
-  await nav('search');await page.locator('#searchInput').fill('bạn');await page.locator('#searchForm button[type="submit"]').click();assert.ok(await page.locator('#searchResults .result-card').count()>0);await page.locator('#handwritingOpen').click();assert.ok(await page.locator('#handwritingCanvas').isVisible());
+  // Opening lookup must not summon the mobile keyboard; direct input activation still works.
+  for(const width of [390,1440]){await page.setViewportSize({width,height:900});const host=width<600?'#mobileDock':'.sidebar';for(const mode of ['home','search'])await page.locator(host+' [data-studio-go="'+mode+'"]').click();assert.equal(await page.locator('#searchInput').evaluate(el=>document.activeElement===el),false);await page.locator('#searchInput').click();assert.equal(await page.locator('#searchInput').evaluate(el=>document.activeElement===el),true);}
+  await page.locator('#searchInput').fill('bạn');await page.locator('#searchForm button[type="submit"]').click();assert.ok(await page.locator('#searchResults .result-card').count()>0);await page.locator('#handwritingOpen').click();assert.ok(await page.locator('#handwritingCanvas').isVisible());
   await page.locator('#handwritingCanvas').scrollIntoViewIfNeeded();const board=await page.locator('#handwritingCanvas').boundingBox();
   const ink=()=>page.locator('#handwritingCanvas').evaluate(c=>{const a=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let n=0;for(let i=3;i<a.length;i+=4)if(a[i])n++;return n;});
   assert.ok(await page.locator('#handwritingUndo').isDisabled());

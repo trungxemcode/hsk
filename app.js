@@ -331,7 +331,7 @@ function switchMode(next) {
  for(const name of ['learn','search','quiz','srs','mistakes','compare','lessons'])$(name+'Panel').hidden=name!==mode;
  document.querySelectorAll('[data-mode]').forEach(b=>{ b.classList.toggle('active',b.dataset.mode===mode);b.setAttribute('aria-pressed',String(b.dataset.mode===mode));});
  if(mode==='lessons')window.HSKLessonNav?.open();
- if(mode==='search')$('searchInput').focus();if(mode==='mistakes')renderMistakes();if(mode==='compare')renderComparisons(); stats();
+ if(mode==='mistakes')renderMistakes();if(mode==='compare')renderComparisons(); stats();
 }
 let searchMatches=[], visibleResults=40, searchTimer, searchPinyinAllowed=true, searchScope='hsk',searchExplicit=false;
 function searchScore(w,q,terms) {
