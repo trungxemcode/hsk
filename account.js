@@ -6,9 +6,10 @@
  let meta=read(META,{uid:null,email:null,writer:crypto.randomUUID(),guestImportedTo:null});if(!meta.writer){meta.writer=crypto.randomUUID();write(META,meta);}
  let profile=meta.uid?read(PREFIX+meta.uid,{items:{},pending:{}}):null,cloud=null,user=null,unsubscribe=null,timer=null,busy=false,blocked=false,cloudReady=false,remoteAvailable=false,config=null,connectionPromise=null;
  function persist(){if(meta.uid&&profile)write(PREFIX+meta.uid,profile);write(META,meta);}
- function applyStorage(items){const values=C.materialize(items);for(const key of C.KEYS)originalSet.call(localStorage,key,values[key]);}
+ function applyStorage(items){const values=C.materialize(items,meta.uid||'guest');for(const key of C.KEYS)originalSet.call(localStorage,key,values[key]);}
  // The active local cache belongs to exactly one account.
- if(profile)applyStorage(profile.items);else write(GUEST,snapshot());
+ function migrateStudy(uid){const state=window.HSKStudyStore?.legacy(uid);if(!state||!profile)return;const imported=C.capture({}, {},{['hsk-study-sync-v1']:JSON.stringify(state)},Date.now(),writer);for(const id of imported.changed)if(!Object.hasOwn(profile.items,id)){profile.items[id]=imported.items[id];profile.pending[id]=imported.items[id];}}
+ if(profile){migrateStudy(meta.uid);persist();applyStorage(profile.items);}else{window.HSKStudyStore?.initialize();write(GUEST,snapshot());}
  function status(message){$('accountStatus').textContent=message;}
  function render(){const signed=!!meta.uid;$('accountForms').hidden=signed&&!!user;$('accountSigned').hidden=!signed;$('accountEmailLabel').textContent=meta.email||'';$('accountNavLabel').textContent=signed?'Tài khoản · Đã đăng nhập':'Đăng nhập / Tạo tài khoản';$('accountBadge').textContent=signed?(navigator.onLine?'Tài khoản':'Tài khoản · Offline'):'Học trên thiết bị';$('accountImport').hidden=!signed||!Object.keys(C.flatten(read(GUEST,{}))).length;$('accountApply').hidden=!remoteAvailable;}
  async function publishSummary(){if(!cloudReady||!user||!profile||Object.keys(profile.pending).length||typeof words==='undefined')return;try{const summary=HSKAdminCore.summarize(profile.items,words);await cloud.setDoc(cloud.doc(cloud.db,'learningSummaries',user.uid),{...summary,email:user.email||'',updatedAt:cloud.serverTimestamp()});}catch(error){console.warn('HSK summary sync pending',error);}}
@@ -17,7 +18,7 @@
  function captureChange(before,after){if(!meta.uid){write(GUEST,after);return;}if(!profile)return;const result=C.capture(profile.items,before,after,Date.now(),writer);profile.items=result.items;for(const id of result.changed)profile.pending[id]=profile.items[id];persist();if(result.changed.length){status(navigator.onLine?'Đã lưu trên máy · Đang chờ đồng bộ…':'Đã lưu offline · Sẽ đồng bộ khi có mạng.');queue();}}
  Storage.prototype.setItem=function(key,value){if(this!==localStorage||!C.KEYS.includes(String(key)))return originalSet.call(this,key,value);const before=snapshot();originalSet.call(this,key,value);try{captureChange(before,snapshot());}catch(_){status('Không lưu được bản dự phòng tài khoản. Hãy sao lưu tiến độ.');}};
  Storage.prototype.removeItem=function(key){if(this!==localStorage||!C.KEYS.includes(String(key)))return originalRemove.call(this,key);const before=snapshot();originalRemove.call(this,key);captureChange(before,snapshot());};
- function decode(doc){try{const x=doc.data();if(typeof x.id!=='string'||!['word:','mistake:','adaptive:','memory:','lesson:','notebook:'].some(p=>x.id.startsWith(p)))return null;const item={time:x.time,writer:x.writer,deleted:x.deleted,value:JSON.parse(x.payload)};return C.valid(item)?[x.id,item]:null;}catch(_){return null;}}
+ function decode(doc){try{const x=doc.data();if(!C.supportedId(x.id))return null;const item={time:x.time,writer:x.writer,deleted:x.deleted,value:JSON.parse(x.payload)};return C.valid(item)?[x.id,item]:null;}catch(_){return null;}}
  function mergeIncoming(remote){const before=JSON.stringify(profile.items);profile.items=C.merge(profile.items,remote);for(const [id,pending] of Object.entries(profile.pending))if(C.compare(profile.items[id],pending)>0)delete profile.pending[id];persist();if(JSON.stringify(profile.items)!==before){remoteAvailable=true;render();status('Có tiến độ từ thiết bị khác. Bấm Áp dụng để tải lại sau khi hoàn thành câu đang học.');}}
  async function flush(){if(!Object.keys(profile?.pending||{}).length||busy||blocked||!navigator.onLine||!cloudReady||!user||!profile||user.uid!==meta.uid)return;busy=true;const uid=user.uid;try{
   for(const [id,item] of Object.entries({...profile.pending})){if(meta.uid!==uid)break;const ref=cloud.doc(cloud.db,'users',uid,'items',encodeURIComponent(id));let winner=item;
@@ -36,7 +37,7 @@
    blocked=true;try{const collection=cloud.collection(cloud.db,'users',current.uid,'items'),docs=await cloud.getDocs(collection),remote=Object.fromEntries(docs.docs.map(decode).filter(Boolean)),switching=meta.uid!==current.uid;
     if(switching){if(!meta.uid)write(GUEST,snapshot());meta.uid=current.uid;meta.email=current.email;profile=read(PREFIX+current.uid,{items:{},pending:{}});profile.items=C.merge(profile.items,remote);
      if(!Object.keys(remote).length&&!Object.keys(profile.items).length&&!meta.guestImportedTo){const imported=C.importGuest(profile.items,read(GUEST,{}),Date.now(),writer);profile.items=imported.items;for(const id of imported.changed)profile.pending[id]=profile.items[id];meta.guestImportedTo=current.uid;}
-     persist();applyStorage(profile.items);location.reload();return;
+     migrateStudy(current.uid);persist();applyStorage(profile.items);location.reload();return;
     }
     meta.email=current.email;mergeIncoming(remote);persist();cloudReady=true;
     unsubscribe=cloud.onSnapshot(collection,snap=>{if(meta.uid!==current.uid)return;mergeIncoming(Object.fromEntries(snap.docs.map(decode).filter(Boolean)));},()=>status('Mất kết nối đồng bộ. Thay đổi vẫn lưu trên thiết bị.'));

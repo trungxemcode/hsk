@@ -37,6 +37,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   }
   // Audit computed foreground/background pairs after the full CSS cascade.
   const contrast=async selectors=>{
+   const blue=await page.evaluate(()=>[...document.querySelectorAll('button')].filter(b=>b.getClientRects().length&&!b.disabled).flatMap(b=>{const s=getComputedStyle(b);return ['backgroundColor','color'].filter(k=>{const v=s[k].match(/[\d.]+/g)?.map(Number)||[],[r,g,bl,a=1]=v;return a>.5&&bl>r+35&&bl>g+15&&g>=r;}).map(k=>({text:b.textContent.slice(0,50),id:b.id,property:k,value:s[k]}));}));assert.deepEqual(blue,[],'no legacy blue button backgrounds or text');
    const failures=await page.evaluate(selectors=>{
     const rgb=s=>s.match(/[\d.]+/g).map(Number),blend=(f,b)=>f.slice(0,3).map((n,i)=>n*(f[3]??1)+b[i]*(1-(f[3]??1))),lum=c=>c.map(n=>{n/=255;return n<=.04045?n/12.92:((n+.055)/1.055)**2.4;}).reduce((a,n,i)=>a+n*[.2126,.7152,.0722][i],0),out=[];
     for(const el of document.querySelectorAll(selectors)){
@@ -90,7 +91,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    await page.waitForTimeout(350);await page.screenshot({path:'/tmp/studio-quiz-'+width+'.png',fullPage:true});
   }
   // Create a goal and prove task launches and progress use the real learning handlers.
-  await page.evaluate(()=>window.HSKStudio.navigate('account'));await page.locator('#planSetup summary').click();
+  await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.locator('#homePlanSettings').evaluate(d=>d.open=true);await page.locator('#planSetup summary').click();
   await page.locator('#planLevel').selectOption('2');await page.locator('#planBudget').fill('120');await page.locator('#planBudget').dispatchEvent('change');await page.locator('#planAI').check();
   assert.equal(await page.locator('.plan-choice').count(),3);await page.locator('#planForm button[type="submit"]').click();
   assert.equal(await page.evaluate(()=>window.HSKPlanner.plan.target),2);assert.equal(await page.locator('#planAIToggle').isChecked(),true);
@@ -100,7 +101,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   const correct=await page.evaluate(()=>question.options.findIndex(x=>x.correct));await page.locator('#quizOptions button').nth(correct).click();await page.waitForTimeout(250);
   assert.ok(await page.evaluate(()=>Object.values(window.HSKPlanner.plan.journal).reduce((n,r)=>n+r.attempts,0)>0));
   await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.locator('#planTasks button').nth(2).click();assert.match(await page.evaluate(()=>location.hash),/#lesson\/standard-2-/);
-  for(const width of [320,390,1440]){await page.setViewportSize({width,height:900});await page.evaluate(()=>window.HSKStudio.navigate('account'));await page.waitForTimeout(350);await contrast('.plan-panel h3,.plan-panel strong,.plan-panel p,.plan-panel button,.plan-panel label');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'planner account overflow '+width);await page.screenshot({path:'/tmp/studio-planner-account-'+width+'.png',fullPage:true});await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.waitForTimeout(350);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'planner today overflow '+width);await page.screenshot({path:'/tmp/studio-planner-today-'+width+'.png',fullPage:true});}
+  for(const width of [320,390,1440]){await page.setViewportSize({width,height:900});await page.evaluate(()=>window.HSKStudio.navigate('account'));await page.waitForTimeout(350);await contrast('.plan-panel h3,.plan-panel strong,.plan-panel p,.plan-panel button,.plan-panel label');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'planner account overflow '+width);await page.screenshot({path:'/tmp/studio-planner-account-'+width+'.png',fullPage:true});await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.locator('#homePlanSettings').evaluate(d=>d.open=true);await page.waitForTimeout(350);await contrast('.plan-panel summary,.plan-panel strong,.plan-panel p,.plan-panel button,.plan-panel label');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'planner today overflow '+width);await page.screenshot({path:'/tmp/studio-planner-today-'+width+'.png',fullPage:true});}
   // Equal-row headings and white text during the actual mouse press.
   for(const width of [390,1440]){
    await page.setViewportSize({width,height:900});await page.mouse.move(0,0);await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.waitForTimeout(350);
