@@ -162,14 +162,14 @@
       padding: 8px 14px;
       border: none;
       border-radius: 8px;
-      background: #2b63c0;
+      background: var(--button-bg, #fff);
       color: white;
       font-size: 15px;
       cursor: pointer;
       transition: all 0.25s;
     }
     button:hover {
-      background: #143d91;
+      background: var(--button-active-bg, #6957e7);
       transform: translateY(-1px);
     }
     button:disabled {

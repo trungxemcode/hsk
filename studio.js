@@ -70,12 +70,12 @@ renderIcons();
  window.addEventListener('hsk-lesson-context',()=>refresh());
  function snapshot(){return ['hsk-flashcards-progress-v1','hsk-flashcards-mistakes-v1','hsk-course-lessons-v1','hsk-adaptive-learning-v1','hsk-exam-practice-v1'].map(k=>localStorage.getItem(k)||'').join('|');}
  function day(timestamp){return new Date(timestamp+7*3600000).toISOString().slice(0,10);}
- function activity(){const a=read('hsk-studio-activity-v1:'+owner(),{});return {version:1,days:a.days&&typeof a.days==='object'&&!Array.isArray(a.days)?a.days:{},hours:Array.isArray(a.hours)&&a.hours.length===24?a.hours.map(n=>Number.isFinite(n)&&n>=0?n:0):Array(24).fill(0)};}
+ function activity(){const a=window.HSKStudyStore.activity();return {version:1,days:a.days&&typeof a.days==='object'&&!Array.isArray(a.days)?a.days:{},hours:Array.isArray(a.hours)&&a.hours.length===24?a.hours.map(n=>Number.isFinite(n)&&n>=0?n:0):Array(24).fill(0)};}
  function recordActivity(){
   const who=owner(),next=snapshot();if(who!==lastOwner){lastOwner=who;fingerprint=next;return;}if(next===fingerprint)return;fingerprint=next;
-  const a=activity(),now=Date.now(),date=day(now),hour=new Date(now+7*3600000).getUTCHours();a.days[date]=(a.days[date]||0)+1;a.hours[hour]=(a.hours[hour]||0)+1;
+  const a=activity(),now=Date.now(),date=day(now),hour=new Date(now+7*3600000).getUTCHours();
   const sorted=Object.keys(a.days).sort();for(const old of sorted.slice(0,Math.max(0,sorted.length-370)))delete a.days[old];
-  try{localStorage.setItem('hsk-studio-activity-v1:'+who,JSON.stringify(a));}catch{}refresh();
+  try{window.HSKStudyStore.recordActivity(now);}catch{}refresh();
  }
  function refresh(){
   document.querySelectorAll('.filter-btn[data-filter]').forEach(b=>{
@@ -90,7 +90,7 @@ renderIcons();
   $('studioProgressPercent').textContent=percent+'% / 100%';$('studioProgressFill').style.width=percent+'%';$('studioProgress').setAttribute('aria-valuenow',String(percent));$('studioKnownCount').textContent=pool.length?`${known} / ${pool.length} mục từ đã thuộc · theo dữ liệu của app`:'Đang tải bộ từ vựng…';
   const a=activity(),now=Date.now(),today=day(now),yesterday=day(now-86400000);let cursor=a.days[today]?today:a.days[yesterday]?yesterday:null,streak=0;
   while(cursor&&a.days[cursor]){streak++;cursor=day(Date.parse(cursor+'T00:00:00Z')-7*3600000-86400000);}
-  $('studioStreak').textContent=streak+' ngày';$('studioStreakNote').textContent='Hoạt động học ghi trên thiết bị này';
+  $('studioStreak').textContent=streak+' ngày';$('studioStreakNote').textContent=owner()==='guest'?'Hoạt động học trên thiết bị · chưa đăng nhập':'Tính từ các ngày học đã ghi và dữ liệu tài khoản đã áp dụng';
   const hours=Array.isArray(a.hours)&&a.hours.length===24?a.hours:Array(24).fill(0),peak=Math.max(...hours),hour=hours.indexOf(peak);
   $('studioHour').textContent=peak?String(hour).padStart(2,'0')+':00':'—';$('studioHourNote').textContent=peak?'Khung giờ có nhiều thao tác học · UTC+7':'Chưa có dữ liệu giờ học';
   const week=$('studioWeek');week.replaceChildren();for(let i=6;i>=0;i--){const date=day(now-i*86400000),cell=document.createElement('div');cell.className='account-day'+(a.days[date]?' is-studied':'');const b=document.createElement('b');b.textContent=a.days[date]?'✓':'·';cell.append(b,document.createTextNode(new Date(date+'T00:00:00Z').toLocaleDateString('vi-VN',{weekday:'short',timeZone:'UTC'})));week.append(cell);}
