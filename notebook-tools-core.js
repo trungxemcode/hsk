@@ -5,7 +5,7 @@ const text=(v,max)=>String(v??'').replace(/\u0000/g,'').trim().slice(0,max);
 function word(v){if(!v||typeof v!=='object')return null;const w={};for(const [k,n]of Object.entries({han:80,pin:160,mean:500,example:1500,note:1500,deck:80}))w[k]=text(v[k],n);return w.han&&w.mean?w:null;}
 const signature=w=>w.han+'\u0000'+(w.pin||'');
 const normalize=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[đĐ]/g,'d').toLowerCase().replace(/[ _-]/g,'');
-const headers={han:['han','chutrung','chuhan','chinese','simplifiedchinese','tuvung','中文','汉语','漢字','詞語','simplified','front','term','word','汉字','词语','tu'],pin:['pin','pinyin','phienam','拼音'],mean:['mean','meaning','nghia','nghiatiengviet','vietnamese','definition','dinhnghia','translation','越南语','back','释义'],example:['example','vidu','sentence','例句'],note:['note','notes','ghichu'],deck:['deck','collection','bosuutap','bo','folder']};
+const headers={han:['han','chutrung','chuhan','chinese','hanzi','expression','characters','character','simplifiedchinese','tuvung','中文','汉语','漢字','詞語','simplified','front','term','word','汉字','词语','tu'],pin:['pin','pinyin','phienam','拼音'],mean:['mean','meaning','nghia','nghiatiengviet','vietnamese','definition','dinhnghia','translation','english','vietnamese meaning','越南语','back','释义'],example:['example','vidu','sentence','例句'],note:['note','notes','ghichu'],deck:['deck','collection','bosuutap','bo','folder']};
 function parseTable(input){
  if(typeof input!=='string'||new TextEncoder().encode(input).length>MAX_FILE)throw Error('Tệp tối đa 5 MB.');
  let source=input.replace(/^\uFEFF/,'');const lines=source.split(/\r?\n/),directives=[];
