@@ -16,6 +16,8 @@ if args.version:
   p.write_text(s,encoding='utf-8',newline='')
 worker=(root/'offline-worker.js').read_text(encoding='utf-8');version=re.search(r"OFFLINE_VERSION='([^']+)'",worker).group(1)
 files=json.loads(re.search(r'const OFFLINE_FILES=(\[.*?\]);',worker).group(1))
+for name in ('placement-core.js','placement.js','placement.css'):
+ if name not in files:files.append(name)
 for name in ('hanzi-writer.min.js','writing-practice.js','writing-practice.css','writing-starter.json','writing-library-LICENSE.txt','writing-data-LICENSE.txt'):
  if name not in files:files.append(name)
 for name in ('notebook-tools-core.js','notebook-factory.js','notebook-factory.css','backup-core.js','backup-restore.js','study-sync-core.js','study-sync.js','ui-buttons.css','notebook.js','notebook.css','exam-bank.js','exam-core.js','exam.js','exam.css','lesson-mini.js','lesson-mini-data.json','ai-coach-core.js','ai-coach.js','mobile-dock.js','exam-expansion.js','coach-profile.js','drive-exam.js','drive-exam-data.json.gz'):
