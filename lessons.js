@@ -59,6 +59,8 @@ function render(){
  for(const s of data.sources){const a=el('a',s.label);a.href=s.url;a.target='_blank';a.rel='noopener noreferrer';sources.append(a);}root.append(sources);
 }
 function select(l){history.pushState({lesson:l.id},'','#lesson/'+l.id);selected=l;cardIndex=0;revealed=false;lessonSection='overview';save(l.id,{startedAt:progress()[l.id]?.startedAt||Date.now()});document.querySelector('.workspace').scrollTop=0;}
+const lessonSteps=[['overview','Từ vựng'],['reading','Đọc & hội thoại'],['grammar','Ngữ pháp'],['practice','Luyện tập']];
+function changeSection(id){lessonSection=id;render();const target=root.querySelector('.lesson-section:not([hidden])');if(target){target.tabIndex=-1;target.focus({preventScroll:true});target.scrollIntoView?.({block:'start',behavior:'auto'});}}
 function renderLesson(l,p){
  const ws=matched(l),known=ws.filter(w=>api().record(w)?.status==='known').length;
  root.append(button('← Quay về danh sách',goList,'lesson-back'));
@@ -84,6 +86,7 @@ function renderLesson(l,p){
  }draw();
  const vocab=el('details',undefined,'lesson-vocab');vocab.append(el('summary','Danh sách từ của bài · '+ws.length+' thẻ'));const grid=el('div',undefined,'lesson-word-grid');for(let i=0;i<ws.length;i++){const w=ws[i],b=button(w.han+' · '+w.pin,()=>{cardIndex=i;revealed=true;draw();card.scrollIntoView({block:'center',behavior:'smooth'});});grid.append(b);}vocab.append(grid);vocabRoot.append(vocab);
  const missing=l.words.filter(w=>!api().match([w]).length);if(missing.length){const gaps=el('details',undefined,'lesson-sources');gaps.append(el('summary','Mục từ chưa có thẻ trong app · '+missing.length),el('p',missing.join('、')),el('p','Danh sách giáo trình có thêm tên riêng, từ bổ sung và mục chưa khớp dữ liệu hiện tại. Các mục này chưa được tính vào kiểm tra hay số từ đã thuộc.','hint'));vocabRoot.append(gaps);}
+ if(views)for(let i=0;i<lessonSteps.length;i++){const [id]=lessonSteps[i],footer=el('nav',undefined,'lesson-step-footer');footer.setAttribute('aria-label','Đi tiếp trong bài học');if(i>0){const [prev,label]=lessonSteps[i-1];footer.append(button('← '+label,()=>changeSection(prev)));}if(i<lessonSteps.length-1){const [next,label]=lessonSteps[i+1];footer.append(button('Tiếp theo: '+label+' →',()=>changeSection(next),'lesson-step-next'));}else footer.append(button('Về danh sách bài học',goList));views[id].append(footer);}
  const navigation=el('div',undefined,'lesson-actions'),ls=course().lessons,position=ls.indexOf(l);if(position>0)navigation.append(button('← Bài trước',()=>select(ls[position-1])));if(position<ls.length-1)navigation.append(button('Bài tiếp →',()=>select(ls[position+1])));root.append(navigation);
 }
 function languageLine(x){
@@ -95,11 +98,12 @@ function languageLine(x){
 }
 function contentShell(l,p){
  const c=l.content,nav=el('div',undefined,'lesson-section-nav'),views={};nav.setAttribute('aria-label','Các phần của bài học');root.append(nav);
- for(const [id,label] of [['overview','Tổng quan'],['grammar','Ngữ pháp'],['reading','Bài đọc'],['dialogue','Hội thoại'],['vocabulary','Từ vựng'],['practice','Luyện tập']]){
+ for(const [id,label] of lessonSteps){
   const v=el('section',undefined,'lesson-section');v.hidden=lessonSection!==id;v.setAttribute('aria-label',label);views[id]=v;
-  const b=button(label,()=>{lessonSection=id;render();document.querySelector('.workspace').scrollTop=0;});b.setAttribute('aria-pressed',String(!v.hidden));nav.append(b);root.append(v);
+  v.dataset.lessonSection=id;const b=button(label,()=>changeSection(id));b.setAttribute('aria-pressed',String(!v.hidden));nav.append(b);root.append(v);
  }
- views.overview.append(el('h4','Mục tiêu'),el('p',c.objectives.join(' ')),el('h4','Nội dung trọng tâm'),el('p',c.summary),button('Bắt đầu học ngữ pháp',()=>{lessonSection='grammar';render();}));
+ views.overview.append(el('h4','Tổng quan & từ vựng'),el('p',c.objectives.join(' ')));const summary=el('details',undefined,'lesson-sources');summary.append(el('summary','Nội dung trọng tâm'),el('p',c.summary));views.overview.append(summary);views.vocabulary=views.overview;
+ const readingGroup=views.reading;views.dialogue=el('section',undefined,'lesson-dialogues');views.dialogue.append(el('h4','Hội thoại'));views.reading=el('section',undefined,'lesson-reading');readingGroup.append(views.dialogue,views.reading);
  const source=el('details',undefined,'lesson-sources');source.append(el('summary','Nội dung và nguồn đối chiếu'),el('p',c.provenance.label));for(const s of c.provenance.sources){const a=el('a',s.label);a.href=s.url;a.target='_blank';a.rel='noopener';source.append(a);}views.overview.append(source);
  views.grammar.append(el('p',hsk===1&&Number(l.id.split('-')[2])<3?'Hai bài đầu ưu tiên ngữ âm và giao tiếp. Các phần dưới đây bao gồm hướng dẫn phát âm và mẫu giao tiếp.':'Học mẫu câu, đọc ví dụ rồi đối chiếu lỗi thường gặp.','hint'));
  for(const x of c.grammar){const box=el('article',undefined,'lesson-grammar-point');box.append(el('h4',x.title),el('p',x.pattern,'lesson-pattern'),el('p',x.usage));for(const e of x.examples)box.append(languageLine(e));box.append(el('p','Lưu ý: '+x.error,'lesson-error-note'));views.grammar.append(box);}
@@ -109,10 +113,11 @@ function contentShell(l,p){
  if(longReading)views.reading.append(el('p',c.reading.task,'hint'));
  if(c.warmupReading){const warmup=el('details',undefined,'lesson-warmup');warmup.append(el('summary','Đoạn ngắn khởi động'));for(const x of c.warmupReading.lines)warmup.append(languageLine(x));views.reading.append(warmup);}
  const readingBody=el('div',undefined,'lesson-reading-body');for(const x of c.reading.lines)readingBody.append(languageLine(x));views.reading.append(readingBody);
- if(longReading)views.reading.append(button('Làm câu hỏi đọc hiểu',()=>{lessonSection='practice';render();document.querySelector('.workspace').scrollTop=0;}));
+ if(longReading)views.reading.append(button('Làm câu hỏi đọc hiểu',()=>changeSection('practice')));
  views.dialogue.append(el('p',c.dialogues.length+' tình huống luyện giao tiếp. Đọc cả vai A và vai B, sau đó thử nói lại khi che bản dịch.','hint'));
  for(const d of c.dialogues){const box=el('article',undefined,'lesson-dialogue');box.append(el('h4',d.title));if(window.HSKSpeech)box.append(window.HSKSpeech.button(d.lines.map(x=>x.cn),'Nghe toàn hội thoại',true));if(d.kind==='long-form-original')box.append(el('p',d.lines.length+' lượt thoại · tình huống có mở đầu, trao đổi và kết thúc.','hint'));for(const x of d.lines)box.append(languageLine(x));views.dialogue.append(box);}
  renderContentPractice(l,views.practice);
+ views.reading=readingGroup;
  return views;
 }
 function renderContentPractice(l,view){

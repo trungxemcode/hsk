@@ -525,3 +525,13 @@ html[data-theme=dark] body.studio-enabled .handwriting-credit a{color:var(--acce
 #studioPractice .hub-group .hub-card:is(:hover,:active,:focus-visible) .hub-symbol{background:#ffffff26!important}#studioPractice .hub-group .hub-visual{display:grid;width:36px;min-height:36px;height:36px;border-radius:10px;flex:none;background:var(--accent-light)}#studioPractice .hub-group .hub-visual .han-visual{font-size:23px;color:var(--accent-dark)}#studioPractice .hub-group .hub-card:is(:hover,:active,:focus-visible) .hub-visual{background:#ffffff26!important}#studioPractice .hub-group .hub-card:is(:hover,:active,:focus-visible) .han-visual{color:#fff!important}
 
 #studioPractice .hub-group-heading:is(:hover,:active,:focus-visible),#studioPractice .hub-group .hub-card:is(:hover,:active,:focus-visible){background:#6957e7!important;color:#fff!important}#studioPractice .hub-group-heading:is(:hover,:active,:focus-visible)::after{color:#fff}
+
+/* Four learning stages: keep navigation compact and continuation close to content. */
+body.studio-enabled .lesson-section-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+body.studio-enabled .lesson-section-nav button{min-width:0;white-space:normal;line-height:1.4}
+.lesson-section{scroll-margin-top:100px}
+.lesson-step-footer{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;margin-top:24px;padding-top:20px;border-top:1px solid var(--button-border,#ded9f1)}
+.lesson-step-footer button{min-height:44px;padding:12px 16px;white-space:normal}
+.lesson-step-next{margin-left:auto}
+.lesson-reading{margin-top:28px}
+@media(max-width:600px){body.studio-enabled .lesson-section-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.lesson-step-footer{gap:10px;margin-top:20px;padding-top:16px}.lesson-step-footer button{flex:1 1 140px}.lesson-section{scroll-margin-top:90px}}
