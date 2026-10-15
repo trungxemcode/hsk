@@ -17,8 +17,26 @@ details.drawer-group:not([open])>.drawer-group-content{display:none!important}
  body.mobile-ux .topbar-actions{gap:8px;flex:none}body.mobile-ux .level-pill{min-height:44px;min-width:76px;padding:8px 10px;font-size:13px}
  body.mobile-ux .level-pill::after{content:'⌄';margin-left:5px}body.mobile-ux .avatar-button{width:44px;height:44px;min-height:44px;display:grid;place-items:center;padding:10px}
  body.mobile-ux .mobile-account-settings{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:14px;margin:0 0 16px;border:1px solid var(--line);border-radius:var(--radius-card)}
- .mobile-account-settings h3{width:100%;font-size:16px;margin:0}.mobile-account-settings button{min-height:44px}.mobile-account-settings .theme-button{width:auto;min-width:60px}
- .mobile-account-settings #themeToggle::after{content:' Sáng / Tối';font-size:13px}
+ body.mobile-ux .mobile-account-settings h3{flex-basis:100%;width:100%;font-size:16px;margin:0;line-height:1.4}
+ body.mobile-ux .mobile-account-settings>button{flex:1 1 150px;min-width:0;min-height:48px;height:auto;padding:12px;line-height:1.4;white-space:normal;overflow-wrap:break-word}
+ body.mobile-ux .mobile-account-settings #themeToggle{display:flex;align-items:center;justify-content:center;gap:8px;width:auto;min-width:0;height:auto;flex:1 1 120px;padding:12px;line-height:1.4}
+ body.mobile-ux .mobile-account-settings #themeToggle svg{flex:none;width:21px;height:21px}
+ .mobile-account-settings #themeToggle::after{content:'Sáng / Tối';font-size:14px;line-height:1.4;white-space:nowrap}
+ body.mobile-ux .topbar{height:auto;flex:0 0 auto;padding-block:10px}
+ body.mobile-ux .topbar-inner{height:auto;min-width:0}
+ body.mobile-ux :is(.mobile-hero-top h2,.plan-task>div,.account-detail,.account-metric,.hub-content,.notebook-row,.section-row>div){min-width:0;overflow-wrap:break-word}
+ body.mobile-ux :is(.plan-task button,.mobile-hero-top button,.notebook-actions button,.mobile-card-actions button,.writing-mode-bar button){height:auto;white-space:normal;line-height:1.4;overflow-wrap:break-word}
+ body.mobile-ux :is(.section-row,.mobile-hero-top){flex-wrap:wrap}
+ body.mobile-ux .mobile-hero-top h2{flex:1 1 150px}
+ body.mobile-ux .mobile-card-actions{align-items:stretch}
+ body.mobile-ux .account-progress-heading{flex-wrap:wrap;gap:8px;align-items:baseline}
+ body.mobile-ux .account-progress-heading :is(span,strong){min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.3}
+ body.mobile-ux .account-week{grid-template-columns:repeat(7,minmax(0,1fr))}
+ body.mobile-ux .account-day{min-width:0;padding-inline:2px;white-space:normal;overflow-wrap:anywhere}
+ body.mobile-ux .about-hero>div{min-width:0;overflow-wrap:anywhere}
+ body.mobile-ux .about-hero .about-logo{flex:none}
+ body.mobile-ux .bottom-nav button{min-width:0;height:auto;white-space:normal;line-height:1.3;padding-inline:3px}
+ body.mobile-ux .mobile-dock-label{display:block;width:100%;min-width:0;white-space:normal;overflow-wrap:break-word;line-height:1.3;text-wrap:balance}
  body.mobile-ux .mobile-today-hero{display:block;background:linear-gradient(130deg,var(--accent),var(--navy));color:var(--palette-white);padding:22px;border-radius:var(--radius-card);margin:0 0 20px}
  .mobile-hero-top{display:flex;align-items:start;gap:8px;justify-content:space-between}.mobile-hero-top h2{margin:0;line-height:1.3;font-size:24px;color:inherit!important}.mobile-hero-top button{font-size:12px;min-height:44px;padding:8px;flex:none}
  .mobile-today-hero>p{color:inherit!important;font-size:15px!important;margin:14px 0 18px;line-height:1.5}
@@ -41,7 +59,7 @@ details.drawer-group:not([open])>.drawer-group-content{display:none!important}
  body.mobile-focus .mobile-feedback-open{display:block;min-height:48px;width:100%;margin-block:12px}
  body.mobile-focus #quizFeedback,body.mobile-focus #examFeedback{max-height:3.4em;overflow:hidden;line-height:1.7}
  .mobile-focused-dialog .mobile-dialog-focushead{display:flex;gap:12px;justify-content:space-between;align-items:center;position:sticky;top:-16px;background:var(--surface);z-index:3;padding-block:8px;border-bottom:2px solid var(--accent);margin-bottom:12px}
- .mobile-dialog-focushead strong{font-size:13px;line-height:1.4}.mobile-dialog-focushead button{width:44px;min-height:44px;font-size:24px;flex:none}
+ .mobile-dialog-focushead strong{font-size:13px;line-height:1.4;min-width:0;overflow-wrap:anywhere}.mobile-dialog-focushead button{width:44px;min-height:44px;font-size:24px;flex:none;padding:0;line-height:1.2}
  #writingPractice.mobile-focused-dialog,#placementDialog.mobile-focused-dialog{width:100%;max-width:100%;height:100dvh;max-height:100dvh;margin:0;padding:calc(16px + var(--safe-t)) 16px calc(20px + var(--safe-b));border-radius:var(--radius-none)}
  .mobile-focused-dialog>h2,.mobile-focused-dialog>button{display:none!important}
  body.mobile-ux.mobile-card-mode main.workspace{padding-bottom:110px!important}
@@ -59,8 +77,8 @@ details.drawer-group:not([open])>.drawer-group-content{display:none!important}
  body.mobile-ux .lesson-chat-panel{left:0;right:0;bottom:0;width:100%;height:52dvh;max-height:calc(100dvh - 80px);border-radius:var(--radius-22px-22px-0-0);padding-bottom:var(--safe-b);z-index:30;animation:mobile-sheet-enter 180ms ease-out}
  body.mobile-ux #notebookPanel{display:flex;flex-direction:column;gap:12px}body.mobile-ux #notebookPanel>.hub-intro{order:0}body.mobile-ux #notebookPanel>.hub-intro+.hint{display:none}
  body.mobile-ux #notebookPanel>.mobile-add-word{display:block;order:1;align-self:flex-end;min-height:44px}
- body.mobile-ux #notebookPanel>label:has(#notebook-search){order:2}body.mobile-ux .mobile-notebook-games{order:3;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
- .mobile-notebook-games button{min-height:44px;padding:8px 4px;font-size:13px}
+ body.mobile-ux #notebookPanel>label:has(#notebook-search){order:2}body.mobile-ux .mobile-notebook-games{order:3;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,110px),1fr));gap:6px}
+ .mobile-notebook-games button{min-height:44px;min-width:0;padding:8px 4px;font-size:13px;white-space:normal;overflow-wrap:break-word;line-height:1.4}
  body.mobile-ux #notebookPanel>.notebook-form{display:none}body.mobile-ux #notebookPanel>.notebook-list{order:5;margin:0}body.mobile-ux #notebookPanel>p:not(.hint){order:4;margin:0}
  body.mobile-ux #notebookPanel>#notebookFactory{order:7;border-top:1px solid var(--line);margin-top:12px;padding-top:16px}
  body.mobile-ux #notebookPanel>.mobile-notebook-tools-toggle{display:block;order:6;min-height:44px}
@@ -92,8 +110,10 @@ details.drawer-group:not([open])>.drawer-group-content{display:none!important}
  body.mobile-mini-rail .mobile-dock{display:block;position:fixed;inset:0 auto 0 0;width:64px;height:100dvh;padding:var(--safe-t) 4px var(--safe-b);background:var(--surface);border-right:1px solid var(--line)}
  body.mobile-mini-rail .bottom-nav{display:grid;grid-template-columns:1fr;grid-template-rows:repeat(5,minmax(44px,1fr));height:100%;padding:0;position:relative;inset:auto}
  body.mobile-mini-rail .bottom-nav button{min-height:44px;padding:8px;font-size:0;gap:0}body.mobile-mini-rail .bottom-nav button i{font-size:20px}
+ body.mobile-mini-rail .mobile-dock-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
  body.mobile-mini-rail .mobile-card-actions{left:64px;bottom:0}body.mobile-mini-rail #flashcard{height:270px!important;min-height:270px}
  body.mobile-mini-rail.mobile-focus .app-shell{inset:0!important;width:100%}body.mobile-mini-rail .topbar{flex-basis:52px;min-height:52px}
 }
 @keyframes mobile-sheet-enter{from{transform:translateY(24px);opacity:.5}to{transform:translateY(0);opacity:1}}
 @media(prefers-reduced-motion:reduce){.mobile-ux-sheet,.lesson-chat-panel{animation:none!important;scroll-behavior:auto!important}}
+

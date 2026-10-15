@@ -46,6 +46,7 @@ jobs:
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: |
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-responsive-goal-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-mobile-ux-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-writing-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-placement-ui.cjs
