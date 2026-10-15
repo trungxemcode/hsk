@@ -1,7 +1,7 @@
 name: Studio layout checks
 on:
   pull_request:
-    paths: ['placement*', 'tools/check-placement*.cjs', 'style.css', 'mobile-layout.css', 'ui-buttons.css', 'handwriting.css', 'speech.css', 'lesson-chat.css', 'tools/check-design-tokens.cjs', 'study-sync*', 'ui-buttons.css', 'notebook*', 'backup*', 'tools/check-notebook*.cjs', 'account.js', 'index.html', 'studio.js', 'planner.js', 'planner-core.js', 'exam*', 'drive-exam*', 'drive-audio*', 'open-dictionary*', 'content/open-dictionary/**', 'tools/check-open-dictionary*.cjs', 'tools/build-open-dictionary.py', 'content/drive-hsk/**', 'tools/import-drive-hsk.py', 'ai-coach*', 'coach-profile.js', 'lessons.js', 'lessons-data.json', 'lesson-mastery.js', 'lesson-mini*', 'account-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-exam*.cjs', 'tools/check-ai-coach*.cjs', 'tools/check-lesson-mini*.cjs', 'tools/check-reading-dom.cjs', '.github/workflows/studio-ui.yml']
+    paths: ['passive*', 'tools/check-passive*.cjs', 'app.js', 'placement*', 'tools/check-placement*.cjs', 'style.css', 'mobile-layout.css', 'ui-buttons.css', 'handwriting.css', 'speech.css', 'lesson-chat.css', 'tools/check-design-tokens.cjs', 'study-sync*', 'ui-buttons.css', 'notebook*', 'backup*', 'tools/check-notebook*.cjs', 'account.js', 'index.html', 'studio.js', 'planner.js', 'planner-core.js', 'exam*', 'drive-exam*', 'drive-audio*', 'open-dictionary*', 'content/open-dictionary/**', 'tools/check-open-dictionary*.cjs', 'tools/build-open-dictionary.py', 'content/drive-hsk/**', 'tools/import-drive-hsk.py', 'ai-coach*', 'coach-profile.js', 'lessons.js', 'lessons-data.json', 'lesson-mastery.js', 'lesson-mini*', 'account-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-exam*.cjs', 'tools/check-ai-coach*.cjs', 'tools/check-lesson-mini*.cjs', 'tools/check-reading-dom.cjs', '.github/workflows/studio-ui.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -26,6 +26,7 @@ jobs:
         run: |
           node tools/check-design-tokens.cjs
           node tools/check-placement-dom.cjs
+          node tools/check-passive-dom.cjs
           node --test server/*.test.mjs
           node tools/check-speech-dom.cjs
           node tools/check-reading-dom.cjs
@@ -46,6 +47,7 @@ jobs:
         run: |
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-writing-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-placement-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-passive-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-studio-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-factory-ui.cjs

@@ -298,6 +298,7 @@ function rebuildDeck(preserve) {
  updateCard();
 }
 function updateCard() {
+ window.dispatchEvent(new Event('hsk-flashcard-change'));
  window.HSKSpeech?.stop();
  document.querySelectorAll('#flashcard .speech-button').forEach(b=>b.remove());
  $('flashcard').classList.remove('flipped'); $('example').classList.remove('show'); $('jumpStatus').textContent='';
@@ -935,4 +936,5 @@ window.HSKLessons={
 };
 window.HSKDictionaryBridge={query:()=>handwritingSearchCharacter||$('searchInput').value,exact:q=>words.some(w=>w.han===q),hsk:(han,trad)=>words.find(w=>w.han===han||w.han===trad)?.hsk||null,open(han,pin){const w=words.find(w=>w.han===han&&w.pin===pin);if(!w)return;if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');},scope:()=>searchScope,results:()=>searchMatches.slice(),setScope(value){if(!['hsk','general'].includes(value))return;searchScope=value;document.querySelectorAll('[data-search-scope]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.searchScope===value)));$('dictionaryModeHint').textContent=value==='hsk'?'Ưu tiên từ vựng HSK và nghĩa tiếng Việt. Từ khớp chính xác vẫn hiện ở HSK khác.':'Tìm toàn bộ từ điển, không giới hạn HSK. Xếp theo độ khớp: chính xác, chứa từ và gần giống. Kết quả hiện nghĩa chính tiếng Việt; bấm vào từng hàng để xem chi tiết. Từ chưa có bản dịch cần đăng nhập và mạng.';runSearch();}};
 document.querySelectorAll('[data-search-scope]').forEach(b=>b.onclick=()=>window.HSKDictionaryBridge.setScope(b.dataset.searchScope));
+window.HSKFlashcardBridge={snapshot(){return {index,words:currentWords.map(w=>window.HSKPassiveCore?.word(w)).filter(Boolean)};},show(key){if(mode!=='learn')return false;const n=currentWords.findIndex(w=>wordKey(w)===key);if(n<0)return false;index=n;updateCard();return true;},reveal(){$('flashcard').classList.add('flipped');}};
 window.dispatchEvent(new Event('hsk-lessons-ready'));
