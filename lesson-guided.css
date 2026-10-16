@@ -1,6 +1,6 @@
 .lesson-guided{max-width:760px;margin-inline:auto;color:var(--ink)}
 .lesson-guided progress{width:100%;height:8px}
-.guided-body{padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-card);margin-block:16px;overflow-wrap:anywhere}
+.guided-body{scroll-margin-top:16px;padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-card);margin-block:16px;overflow-wrap:anywhere}
 .guided-body h3{margin-top:0;font-size:1.2rem;line-height:1.4}
 .guided-body p{line-height:1.65;margin-block:8px}
 .guided-word+.guided-word,.guided-line+.guided-line{border-top:1px solid var(--line);margin-top:16px;padding-top:16px}
