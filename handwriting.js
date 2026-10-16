@@ -60,7 +60,7 @@
   if(!navigator.onLine){status('Cần kết nối mạng để nhờ AI; nhận dạng offline vẫn dùng được.');return;}
   if(!config){status('Dịch vụ nhận dạng AI chưa được cấu hình.');return;}
   const user=window.HSKAccountDashboard?.user;if(!user){status('Đăng nhập để dùng AI nhận dạng. Nhận dạng offline vẫn dùng được.');return;}
-  busy=true;bitmap='';const id=++serial,controller=new AbortController();let timedOut=false;aiController=controller;const timer=setTimeout(()=>{timedOut=true;controller.abort();},55000);status('Đang gửi riêng ảnh ô vẽ cho AI…');updateButton();
+  busy=true;bitmap='';const id=++serial,controller=new AbortController();let timedOut=false;aiController=controller;const timer=setTimeout(()=>{timedOut=true;controller.abort();},55000);status('AI nhận dạng chữ viết tay đang load…');const stopLoading=window.HSKLoading?.show('AI nhận dạng chữ viết tay đang load...','Đang phân tích nét viết tay chữ Hán...');updateButton();
   try{
    const [image,token]=await Promise.all([handwritingImage(),user.getIdToken()]);
    const endpoint=config.endpoint.replace(/\/translate$/,'/handwriting-recognize');
@@ -71,7 +71,7 @@
    const normalized=window.HSKHandwritingCore.rasterize(strokes);if(!normalized){status('Hãy vẽ lại một chữ trước khi chọn kết quả.');return;}bitmap=learning.pack(normalized);showCandidates(candidates,'ai');
    status(candidates.length?(data.uncertain?'AI chưa chắc chắn; hãy kiểm tra kỹ rồi chọn chữ đúng.':'AI gợi ý các chữ sau; hãy chọn chữ đúng.'):'Chưa xác định được chữ. Hãy vẽ lại hoặc nhập chữ đúng.');
   }catch(error){if(id===serial)status(timedOut?'AI quá thời gian chờ. Hãy thử lại.':error.name==='AbortError'?'Đã hủy yêu cầu AI.':'Không kết nối được với AI. Kiểm tra mạng rồi thử lại.');}
-  finally{clearTimeout(timer);if(id===serial){aiController=null;busy=false;updateButton();}}
+  finally{stopLoading?.();clearTimeout(timer);if(id===serial){aiController=null;busy=false;updateButton();}}
  }
  $('handwritingAI').onclick=recognizeWithAI;$('handwritingCancelAI').onclick=()=>{if(aiController){aiController.abort();serial++;aiController=null;busy=false;status('Đã hủy yêu cầu AI.');updateButton();}};
  function choose(character,source='manual'){

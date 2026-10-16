@@ -517,7 +517,8 @@ function startQuiz(e) {
 }
 function renderQuestion() {
  const s=quizSession;if(!s)return;
- if(s.position>=s.pool.length){$('quizProgress').textContent='Hoàn thành';$('quizPrompt').textContent=`${s.score} / ${s.pool.length} câu đúng`;$('quizOptions').replaceChildren();$('quizFeedback').textContent='Lịch ôn đã được cập nhật. Chọn Bắt đầu / Làm lại để tạo lượt mới.';$('quizNext').hidden=true;question=null;return;}
+ if(s.position>=s.pool.length){window.HSKLoading?.flash('Kết quả bài kiểm tra đang load...','Đang tổng hợp điểm số và cập nhật lịch ôn...',undefined,$('quizPanel'));$('quizProgress').textContent='Hoàn thành';$('quizPrompt').textContent=`${s.score} / ${s.pool.length} câu đúng`;$('quizOptions').replaceChildren();$('quizFeedback').textContent='Lịch ôn đã được cập nhật. Chọn Bắt đầu / Làm lại để tạo lượt mới.';$('quizNext').hidden=true;question=null;return;}
+ if(s.position===0){const label=/^Ôn câu|^Ôn từ hay nhầm|^Làm lại câu|^Ôn trọng tâm/.test(s.levelLabel||'')?'Bài ôn câu sai đang load...':/^Phân biệt từ/.test(s.levelLabel||'')?'Bài luyện từ dễ nhầm đang load...':'Bài kiểm tra trắc nghiệm đang load...';window.HSKLoading?.flash(label,'Phạm vi: '+(s.levelLabel||'HSK'),undefined,$('quizPanel'));}
  const direction=s.plan?.[s.position]||(s.direction==='mixed'?randomItem(['han','mean']):s.direction);
  question=s.savedQuestions?{...s.savedQuestions[s.position],answered:false,options:shuffled(s.savedQuestions[s.position].options.map(option=>({...option})))}:createQuestion(s.pool[s.position],direction,s.candidates);
  $('quizOptions').replaceChildren();$('quizNext').hidden=true;$('quizFeedback').textContent='';
@@ -549,7 +550,7 @@ let srsSession=null;
 function startSrs() {
  const pool=levelWords(), due=pool.filter(w=>recordOf(w)&&recordOf(w).due<=Date.now()).sort((a,b)=>recordOf(a).due-recordOf(b).due);
  const fresh=shuffled(pool.filter(w=>!recordOf(w))).slice(0,10);
- srsSession={queue:[...due,...fresh],total:due.length+fresh.length,done:0};$('srsMessage').textContent='';renderSrs();
+ srsSession={queue:[...due,...fresh],total:due.length+fresh.length,done:0};$('srsMessage').textContent='';window.HSKLoading?.flash('Phiên ôn tập SRS đang load...','Đang chuẩn bị thẻ từ cần ôn...',undefined,$('srsPanel'));renderSrs();
 }
 function renderSrs() {
  const s=srsSession;if(!s)return;stats();$('srsRatings').hidden=true;$('srsAnswer').hidden=true;$('srsReveal').hidden=false;
@@ -565,6 +566,7 @@ function rateSrs(rating) {
  if(!srsSession?.queue.length||$('srsAnswer').hidden)return;
  const w=srsSession.queue.shift();review(w,rating);srsSession.done++;
  if(srsSession.lessonId)window.dispatchEvent(new CustomEvent('hsk-lesson-evidence',{detail:{id:srsSession.lessonId,key:wordKey(w),kind:'srs',correct:['good','easy'].includes(rating),time:Date.now()}}));
+ if(!srsSession.queue.length)window.HSKLoading?.flash('Kết quả phiên ôn SRS đang load...','Đã hoàn thành phiên ôn tập SRS...',undefined,$('srsPanel'));
  $('srsMessage').textContent=`${w.han}: ôn lại ${new Date(recordOf(w).due).toLocaleString('vi-VN')} (${intervalLabel(recordOf(w).interval)}).`;renderSrs();
 }
 function clearSessions() {
@@ -859,7 +861,7 @@ const baseMemoryReview=review;
 review=function(w,rating){const old=recordOf(w),first=old?.firstLearned||old?.lastReview||old?.lastMarked||Date.now(),seen=old?.contextSeen||0;baseMemoryReview(w,rating);records[wordKey(w)].firstLearned=first;if(mode==='srs'&&memoryPrefs.context&&memoryCurrentExample)records[wordKey(w)].contextSeen=seen+1;saveRecords();refreshMemoryDashboard();};
 const baseMemoryMark=markWord;
 markWord=function(w,status){const old=recordOf(w),first=old?.firstLearned||old?.lastReview||old?.lastMarked||Date.now();baseMemoryMark(w,status);records[wordKey(w)].firstLearned=first;saveRecords();refreshMemoryDashboard();};
-startSrs=function(){const pool=levelWords(),due=pool.filter(w=>recordOf(w)&&recordOf(w).due<=Date.now()).sort((a,b)=>recordOf(a).due-recordOf(b).due);const fresh=memoryPrefs.newWords?shuffled(pool.filter(w=>!recordOf(w))).slice(0,10):[];srsSession={queue:[...due,...fresh],total:due.length+fresh.length,done:0};$('srsMessage').textContent='';renderSrs();};
+startSrs=function(){const pool=levelWords(),due=pool.filter(w=>recordOf(w)&&recordOf(w).due<=Date.now()).sort((a,b)=>recordOf(a).due-recordOf(b).due);const fresh=memoryPrefs.newWords?shuffled(pool.filter(w=>!recordOf(w))).slice(0,10):[];srsSession={queue:[...due,...fresh],total:due.length+fresh.length,done:0};$('srsMessage').textContent='';window.HSKLoading?.flash('Phiên ôn tập SRS đang load...','Đang chuẩn bị thẻ từ cần ôn...',undefined,$('srsPanel'));renderSrs();};
 function refreshMemoryDashboard(){
  const now=Date.now(),tracked=words.filter(w=>recordOf(w)),due=tracked.filter(w=>recordOf(w).due<=now),future=tracked.filter(w=>recordOf(w).due>now).sort((a,b)=>recordOf(a).due-recordOf(b).due);
  $('memoryReminderText').textContent=due.length?`Có ${due.length} từ đến hạn ôn trong tất cả HSK.`:future.length?`Lần ôn tiếp theo: ${memoryDate(recordOf(future[0]).due)}.`:'Chưa có lịch ôn. Học một từ rồi chọn mức nhớ để tạo lịch.';
@@ -870,8 +872,8 @@ function refreshMemoryDashboard(){
 }
 $('memoryContextToggle').checked=memoryPrefs.context;$('memoryNewWords').checked=memoryPrefs.newWords;
 $('memoryContextToggle').onchange=e=>{memoryPrefs.context=e.target.checked;saveMemoryPrefs();if(srsSession)renderSrs();};$('memoryNewWords').onchange=e=>{memoryPrefs.newWords=e.target.checked;saveMemoryPrefs();};
-$('memoryDueStart').onclick=()=>{document.querySelector('[data-filter="all"]').click();switchMode('srs');const due=words.filter(w=>recordOf(w)&&recordOf(w).due<=Date.now()).sort((a,b)=>recordOf(a).due-recordOf(b).due);srsSession={queue:due,total:due.length,done:0};$('srsMessage').textContent='Chỉ ôn từ đến hạn trong tất cả HSK.';renderSrs();};
-$('memoryLearnCurrent').onclick=()=>{const w=currentWords[index];if(!w)return;memoryPrefs.context=true;$('memoryContextToggle').checked=true;saveMemoryPrefs();switchMode('srs');srsSession={queue:[w],total:1,done:0};renderSrs();};
+$('memoryDueStart').onclick=()=>{document.querySelector('[data-filter="all"]').click();switchMode('srs');const due=words.filter(w=>recordOf(w)&&recordOf(w).due<=Date.now()).sort((a,b)=>recordOf(a).due-recordOf(b).due);srsSession={queue:due,total:due.length,done:0};$('srsMessage').textContent='Chỉ ôn từ đến hạn trong tất cả HSK.';window.HSKLoading?.flash('Phiên ôn tập SRS đang load...','Chỉ ôn từ đến hạn trong tất cả HSK...',undefined,$('srsPanel'));renderSrs();};
+$('memoryLearnCurrent').onclick=()=>{const w=currentWords[index];if(!w)return;memoryPrefs.context=true;$('memoryContextToggle').checked=true;saveMemoryPrefs();switchMode('srs');srsSession={queue:[w],total:1,done:0};window.HSKLoading?.flash('Phiên ôn tập SRS đang load...','Ôn theo ngữ cảnh: '+w.han,undefined,$('srsPanel'));renderSrs();};
 const baseMemoryStats=stats;stats=function(){baseMemoryStats();refreshMemoryDashboard();};
 window.addEventListener('focus',()=>{stats();});document.addEventListener('visibilitychange',()=>{if(!document.hidden)stats();});setInterval(()=>{if(!document.hidden)stats();},60000);
 refreshMemoryDashboard();
@@ -932,7 +934,7 @@ window.HSKLessons={
  mark(w,status){markWord(w,status);},
  examples(w){return (w.practice?.examples||[]).filter(e=>e.cn&&e.pin&&e.vi);},
  quiz(ws,label,id){let state={};try{state=JSON.parse(localStorage.getItem('hsk-course-lessons-v1')||'{}').lessons?.[id]||{};}catch{};const pool=shuffled(ws).sort((a,b)=>(state.evidence?.[wordKey(a)]?.quizStreak||0)-(state.evidence?.[wordKey(b)]?.quizStreak||0));const qs=pool.slice(0,20).map((w,i)=>createQuestion(w,i%2?'mean':'han',words)).filter(Boolean);startSavedQuestions(qs,label);if(qs.length){quizSession.lessonId=id;$('lessonPracticeBack').hidden=!id;}},
- srs(ws,id){switchMode('srs');const due=ws.filter(w=>!recordOf(w)||recordOf(w).due<=Date.now()).sort((a,b)=>(recordOf(a)?.due||0)-(recordOf(b)?.due||0));srsSession={queue:due,total:due.length,done:0,lessonId:id};$('lessonPracticeBack').hidden=!id;$('srsMessage').textContent=due.length?'Ôn từ đến hạn và từ mới của bài học.':'Tất cả từ trong bài đã có lịch ôn và chưa đến hạn.';renderSrs();}
+ srs(ws,id){switchMode('srs');const due=ws.filter(w=>!recordOf(w)||recordOf(w).due<=Date.now()).sort((a,b)=>(recordOf(a)?.due||0)-(recordOf(b)?.due||0));srsSession={queue:due,total:due.length,done:0,lessonId:id};$('lessonPracticeBack').hidden=!id;$('srsMessage').textContent=due.length?'Ôn từ đến hạn và từ mới của bài học.':'Tất cả từ trong bài đã có lịch ôn và chưa đến hạn.';window.HSKLoading?.flash('Phiên ôn tập SRS đang load...','Ôn từ đến hạn và từ mới của bài học...',undefined,$('srsPanel'));renderSrs();}
 };
 window.HSKDictionaryBridge={query:()=>handwritingSearchCharacter||$('searchInput').value,exact:q=>words.some(w=>w.han===q),hsk:(han,trad)=>words.find(w=>w.han===han||w.han===trad)?.hsk||null,open(han,pin){const w=words.find(w=>w.han===han&&w.pin===pin);if(!w)return;if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');},scope:()=>searchScope,results:()=>searchMatches.slice(),setScope(value){if(!['hsk','general'].includes(value))return;searchScope=value;document.querySelectorAll('[data-search-scope]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.searchScope===value)));$('dictionaryModeHint').textContent=value==='hsk'?'Ưu tiên từ vựng HSK.':'Tìm cả từ ngoài HSK.';runSearch();}};
 document.querySelectorAll('[data-search-scope]').forEach(b=>b.onclick=()=>window.HSKDictionaryBridge.setScope(b.dataset.searchScope));

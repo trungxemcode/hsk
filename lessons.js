@@ -36,8 +36,9 @@ async function open(){
  document.body.classList.remove('drawer-open','show-about','show-account','show-admin','show-translator');document.body.classList.add('show-lessons');
  for(const id of ['aboutPanel','accountPanel','adminPanel','translatorPanel'])$(id).hidden=true;
  $('drawer').inert=true;$('drawer').setAttribute('aria-hidden','true');$('menuBtn').setAttribute('aria-expanded','false');panel.hidden=false;document.querySelector('.workspace').scrollTop=0;
- status.textContent='Đang mở bài học…';
- try{await load();const target=location.hash.startsWith('#lesson/')?fromHash():null;const level=target?Number(target.id.split('-')[1]):hsk;await loadContent(level);if(request!==viewRequest||panel.hidden)return;if(!api())throw Error('Dữ liệu từ vựng đang tải. Chờ một chút rồi mở lại Bài học.');status.textContent='';selected=location.hash.startsWith('#lesson/')?fromHash():null;if(selected)hsk=Number(selected.id.split('-')[1]);render();}catch(e){if(request!==viewRequest||panel.hidden)return;status.textContent=e.message;root.replaceChildren(button('Thử lại',open));}
+ status.textContent='Giáo trình bài học đang load…';
+ const stopLoading=(!data||!course()?.contentReady)?window.HSKLoading?.show('Giáo trình bài học đang load...','Đang tải nội dung HSK '+hsk+'...'):null;
+ try{await load();const target=location.hash.startsWith('#lesson/')?fromHash():null;const level=target?Number(target.id.split('-')[1]):hsk;await loadContent(level);if(request!==viewRequest||panel.hidden)return;if(!api())throw Error('Dữ liệu từ vựng đang tải. Chờ một chút rồi mở lại Bài học.');status.textContent='';selected=location.hash.startsWith('#lesson/')?fromHash():null;if(selected)hsk=Number(selected.id.split('-')[1]);render();}catch(e){if(request!==viewRequest||panel.hidden)return;status.textContent=e.message;root.replaceChildren(button('Thử lại',open));}finally{stopLoading?.();}
 }
 function render(){
  panel.dataset.lessonLevel=String(hsk);
@@ -58,7 +59,7 @@ function render(){
  const sources=el('details',undefined,'lesson-sources');sources.append(el('summary','Về bộ bài học và nguồn đối chiếu'),el('p','Theo thứ tự bài của bộ Giáo trình chuẩn HSK 1–6 trong ảnh. Mỗi bài có nội dung luyện đọc, hội thoại, cấu trúc chọn lọc và kiểm tra hiểu bài được biên soạn riêng; phần từ vựng dùng dữ liệu hiện có của app. Đây là phần luyện tập đi kèm sách, không phải bản sao toàn bộ bài khóa, âm thanh hay sách bài tập.'));
  for(const s of data.sources){const a=el('a',s.label);a.href=s.url;a.target='_blank';a.rel='noopener noreferrer';sources.append(a);}root.append(sources);
 }
-function select(l){history.pushState({lesson:l.id},'','#lesson/'+l.id);selected=l;cardIndex=0;revealed=false;lessonSection='overview';save(l.id,{startedAt:progress()[l.id]?.startedAt||Date.now()});document.querySelector('.workspace').scrollTop=0;}
+function select(l){history.pushState({lesson:l.id},'','#lesson/'+l.id);selected=l;cardIndex=0;revealed=false;lessonSection='overview';window.HSKLoading?.flash('Bài học HSK '+hsk+' đang load...','Bài '+l.number+' · '+l.vi,undefined,root);save(l.id,{startedAt:progress()[l.id]?.startedAt||Date.now()});document.querySelector('.workspace').scrollTop=0;}
 const lessonSteps=[['overview','Từ vựng'],['reading','Đọc & hội thoại'],['grammar','Ngữ pháp'],['practice','Luyện tập']];
 function changeSection(id){lessonSection=id;render();const target=root.querySelector('.lesson-section:not([hidden])');if(target){target.tabIndex=-1;target.focus({preventScroll:true});target.scrollIntoView?.({block:'start',behavior:'auto'});}}
 function renderLesson(l,p){
@@ -125,7 +126,7 @@ function renderContentPractice(l,view){
  const qs=l.content.practice,done=progress()[l.id]?.contentEvidence||{};
  view.append(el('h4','Kiểm tra hiểu bài'),el('p',qs.length+' câu về cấu trúc, giao tiếp và đọc hiểu; câu ghi “đoạn ngắn khởi động” dựa trên mục đó ở Bài đọc. Câu sai có giải thích; trả lời đúng hai lần liên tiếp cho từng câu mới đạt phần điểm hiểu bài.','hint'));
  let order=[...qs].sort((a,b)=>(done[a.id]?.streak||0)-(done[b.id]?.streak||0)),position=0,answered=false;const stage=el('div',undefined,'lesson-test');view.append(stage);
- function draw(){stage.replaceChildren();answered=false;if(position>=order.length){stage.append(el('p','Đã làm xong lượt kiểm tra.'),button('Làm lượt mới',()=>{render();}));return;}
+ function draw(){stage.replaceChildren();answered=false;if(position>=order.length){window.HSKLoading?.flash('Kết quả kiểm tra hiểu bài đang load...','Đang ghi nhận kết quả hiểu bài...',undefined,stage);stage.append(el('p','Đã làm xong lượt kiểm tra.'),button('Làm lượt mới',()=>{render();}));return;}
   const q=order[position];stage.append(el('strong','Câu '+(position+1)+' / '+order.length),el('p',q.prompt));const indices=q.options.map((_,i)=>i);for(let i=indices.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[indices[i],indices[j]]=[indices[j],indices[i]];}
   const opts=el('div',undefined,'lesson-test-options'),feedback=el('p',undefined,'lesson-test-feedback');feedback.setAttribute('role','status');
   const next=button(position===order.length-1?'Xem kết quả':'Câu tiếp theo',()=>{position++;draw();});next.hidden=true;
