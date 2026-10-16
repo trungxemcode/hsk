@@ -10,6 +10,23 @@ function measure(l,p=progress()){return mastery.score(p[l.id],matched(l).map(w=>
 function save(id,value,refresh=true){const lessons=progress();lessons[id]={...lessons[id],...value,updatedAt:Date.now()};try{localStorage.setItem(KEY,JSON.stringify({version:1,lessons}));status.textContent='Đã lưu tiến độ bài học.';}catch{status.textContent='Không lưu được tiến độ. Kiểm tra bộ nhớ trình duyệt.';}if(refresh&&!panel.hidden)render();}
 function api(){return window.HSKLessons;}
 function course(){return data?.courses.find(c=>c.hsk===hsk);}
+function preferredLevel(){
+ let value=window.HSKPlanner?.plan?.target;
+ if(value==null)try{
+  const uid=JSON.parse(localStorage.getItem('hsk-account-meta-v1')||'{}').uid||'guest';
+  value=JSON.parse(localStorage.getItem('hsk-studio-target-v1:'+uid)||'null');
+ }catch{}
+ const n=Number(value);
+ return Number.isInteger(n)&&n>=1&&n<=6?n:null;
+}
+function setPreferredLevel(level){
+ const n=Number(level);
+ if(!Number.isInteger(n)||n<1||n>6||location.hash.startsWith('#lesson/'))return false;
+ if(hsk===n)return true;
+ hsk=n;volume='';
+ if(!panel.hidden&&!selected){root.replaceChildren();open();}
+ return true;
+}
 function matched(lesson){return api().match(lesson.words);}
 function close(preserve=false){window.HSKSpeech?.stop();window.dispatchEvent(new CustomEvent('hsk-lesson-context',{detail:null}));viewRequest++;panel.hidden=true;document.body.classList.remove('show-lessons','lesson-focus');if(!preserve&&location.hash.startsWith('#lesson/'))history.replaceState(null,'',location.pathname+location.search);}
 function fromHash(){try{const id=decodeURIComponent(location.hash.slice(8));return data?.courses.flatMap(c=>c.lessons).find(l=>l.id===id);}catch{return null;}}
@@ -29,7 +46,8 @@ async function loadContent(level){
   for(const l of c.lessons){const mini=miniData.lessons[l.id];if(!mini||mini.level!==level||mini.questions.length!==5||mini.questions.map(q=>q.id).join('|')!==(l.miniReviewKeys||[]).join('|'))throw Error('Ôn ngắn bài '+l.number+' chưa khớp nội dung.');l.content=entries.get(l.id);l.content.miniReview=mini;}c.contentReady=true;
  }).finally(()=>contentLoads.delete(level)));return contentLoads.get(level);
 }
-async function open(){
+async function open({preserveLevel=false}={}){
+ if(panel.hidden&&!preserveLevel&&!location.hash.startsWith('#lesson/'))setPreferredLevel(preferredLevel());
  panel.dataset.lessonLevel=String(hsk);
  window.dispatchEvent(new CustomEvent('hsk-lesson-context',{detail:null}));
  const request=++viewRequest;
@@ -140,9 +158,9 @@ function renderContentPractice(l,view){
 function breakdown(m){return 'Học qua: '+(m.read?m.weights.read:0)+'/'+m.weights.read+' · Kiểm tra từ: '+Math.floor(m.quiz*m.weights.quiz)+'/'+m.weights.quiz+' · Hiểu bài: '+Math.floor(m.content*m.weights.content)+'/'+m.weights.content+' · SRS: '+Math.floor(m.srs*m.weights.srs)+'/'+m.weights.srs+(m.weights.mini?' · Ôn ngắn: '+Math.floor(m.mini*m.weights.mini)+'/'+m.weights.mini:'');}
 function courseProgress(level,p=progress()){const list=data?.courses.find(c=>c.hsk===Number(level))?.lessons||[],scores=list.map(l=>measure(l,p));return {total:list.length,completed:scores.filter(m=>m.mastered).length,percent:list.length?Math.floor(10*scores.reduce((n,m)=>n+m.percent,0)/list.length)/10:0};}
 
-window.HSKLessonNav={open,progress:courseProgress};
+window.HSKLessonNav={open,progress:courseProgress,setPreferredLevel,get level(){return hsk;}};
 $('lessonPracticeBack').onclick=()=>api()?.show();
-for(const b of document.querySelectorAll('[data-lesson-level]'))b.addEventListener('click',()=>{hsk=Number(b.dataset.lessonLevel);volume='';selected=null;history.pushState(null,'',location.pathname+location.search);root.replaceChildren();$('drawerClose').click();return open();});
+for(const b of document.querySelectorAll('[data-lesson-level]'))b.addEventListener('click',()=>{hsk=Number(b.dataset.lessonLevel);volume='';selected=null;history.pushState(null,'',location.pathname+location.search);root.replaceChildren();$('drawerClose').click();return open({preserveLevel:true});});
 window.addEventListener('popstate',()=>{if(location.hash.startsWith('#lesson/'))api()?.show();else if(!panel.hidden)goListFromHistory();});
 function goListFromHistory(){selected=null;document.body.classList.remove('lesson-focus');render();document.querySelector('.workspace').scrollTop=0;}
 window.addEventListener('hsk-lesson-evidence',e=>{const l=data?.courses.flatMap(c=>c.lessons).find(l=>l.id===e.detail?.id);if(!l||!matched(l).some(w=>api().key(w)===e.detail.key))return;save(l.id,mastery.apply(progress()[l.id],e.detail));});
