@@ -8,11 +8,9 @@
 - Secondary checkout originally contained untracked private/local Serena and Codex notes; preserve them in a separate backup instead of overwriting them. `.serena/` is local and may contain stale notes.
 
 ## Current work
-- Goal: fix square purple press/focus backgrounds in rounded disclosure controls (release 2.17).
-- Paths: `ui-buttons.css`, `tools/check-press-shape-ui.cjs`, UI workflow and generated PWA release metadata.
-- Fix: standalone summaries use the shared button radius; framed summaries use the same radius token as their card, with square lower corners only while expanded. Disable native rectangular tap highlight, retain keyboard outline, geometry and all handlers. Do not globally clip details or change learning data.
-- Verified locally: press shape at 320/390/1440 light/dark; mobile UX at 360/390 and desktop; design-token guard. CI must pass before merge, then verify Pages release and asset hashes.
-- Source baseline: GitHub `58f781c`. This cloud snapshot has no `.git`; use GitHub feature branch/PR and SHA leases. Windows checkouts were not modified in this task.
+- Consolidate a short shared AI context. No application logic or PWA assets need changing.
+- Shared context is committed to `main`, then mirrored into the secondary checkout after its original local AI notes are archived outside the repository. Verify Git on every new session; these directories can diverge again after future edits.
+- Follow-on tasks must be requested by the user; no pending feature is implied.
 
 ## Handoff template (replace this section only when work actually starts)
 - Goal:
@@ -23,3 +21,8 @@
 - Open issues / next safe action:
 
 Do not store secrets, API keys, personal data, or entire chat logs. This file is a checkpoint, never a substitute for checking actual code or Git state.
+
+## UI follow-up — rounded press states (2.17)
+- Fix: `ui-buttons.css` summaries use the same shared radius tokens as their frames; standalone summaries use the button radius. Expanded framed headers keep rounded top corners. Native rectangular tap highlight is disabled; keyboard outline, geometry and handlers remain intact. No global overflow clipping or learning-data changes.
+- Tests: press shape at 320/390/1440 light/dark, mobile UX and 552 responsive cases pass locally. Full Studio CI passed on application commit `81e0c45`; the follow-up commit changes only this handoff to preserve the concurrent workspace-consolidation notes.
+- Release: PWA metadata bumped to 2.17. Verify Pages and asset hashes after merge. Windows checkout/configuration was not modified by this cloud task.
