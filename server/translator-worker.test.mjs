@@ -172,5 +172,10 @@ test('deployment config targets the existing Worker and preserves dashboard vari
  assert.equal(config.main,'translator-worker-bundled.mjs');
  assert.equal(config.placement.region,'gcp:us-east4');
  assert.equal(config.keep_vars,true);
- assert.equal(config.vars,undefined);
+ assert.equal(config.vars.AI_CONTROL_REQUIRED,'true');
+ assert.equal(Number(config.vars.AI_GLOBAL_DAILY_LIMIT)>0,true);
+ assert.ok(Number(config.vars.AI_GLOBAL_MINUTE_LIMIT)<=12);
+ assert.equal(config.durable_objects.bindings[0].name,'AI_CONTROL');
+ assert.ok(config.migrations.some(m=>m.new_sqlite_classes?.includes('HSkaIControl')));
+ assert.equal(Object.keys(config.vars).some(k=>/KEY|TOKEN|SECRET/.test(k)),false);
 });

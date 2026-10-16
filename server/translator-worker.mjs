@@ -1,6 +1,7 @@
 import { vocabulary } from './hsk-vocabulary.mjs';
 import { validateHandwritingSample, submitHandwritingSample } from './handwriting-samples.mjs';
 import { checkReadingBody, buildReadingStory } from './reading-service.mjs';
+import { controlCall, readingCacheKey, HSkaIControl } from './ai-control.mjs';
 
 const schema = {type:'OBJECT',properties:{chinese:{type:'STRING'},pinyin:{type:'STRING'},explanation:{type:'STRING'},note:{type:'STRING'}},required:['chinese','pinyin','explanation','note']};
 const chineseSchema={...schema,properties:{...schema.properties,vietnamese:{type:'STRING'}},required:[...schema.required,'vietnamese']};
@@ -97,11 +98,27 @@ export function createHandler(fetchFn=fetch,now=()=>Date.now()){
    if(cooldowns.size>1000)for(const [uid,t] of cooldowns)if(t<=now())cooldowns.delete(uid);
    cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
    const level=body.hsk,model=env.GEMINI_MODEL||'gemini-3.5-flash-lite';
+   let readingKey=null,readingLocked=false;
+   if(isReading){
+    if(!/^[a-z0-9.-]+$/.test(model))return reply({error:'Cấu hình AI chưa hợp lệ.'},503);
+    readingKey=await readingCacheKey(body);
+    const cached=await controlCall(env,'get',{key:readingKey});
+    if(cached?.hit)return reply({story:cached.story,cached:true});
+    const lock=await controlCall(env,'lock',{key:readingKey});
+    if(lock&&!lock.acquired)return reply({error:'Bài đọc này đang được tạo. Hãy thử lại sau ít giây.'},429);
+    readingLocked=!!lock?.acquired;
+   }
+   try{
+    const budget=await controlCall(env,'reserve',{uid:c.sub,route:isReading?'reading':isOcr?'ocr':isHandwriting?'handwriting':isPlan?'study-plan':isAsk?'ask':'translate'});
+    if(budget&&!budget.allowed)return reply({error:'Đã đạt giới hạn AI an toàn. Bạn vẫn có thể dùng bài học và các tính năng không cần AI.',code:'AI_BUDGET_EXHAUSTED',reason:budget.reason},429);
     if(isReading){
-     if(!/^[a-z0-9.-]+$/.test(model))return reply({error:'Cấu hình AI chưa hợp lệ.'},503);
      const result=await buildReadingStory(body,{fetchFn,env,signal:controller.signal,model});
+     if(result.status===200&&result.data.story)await controlCall(env,'put',{key:readingKey,story:result.data.story});
      return reply(result.data,result.status);
     }
+   }finally{
+    if(readingLocked)await controlCall(env,'unlock',{key:readingKey}).catch(()=>{});
+   }
    if(isPlan){
     if(!/^[a-z0-9.-]+$/.test(model))return reply({error:'Cấu hình mô hình chưa hợp lệ.'},503);
     const instruction='You review an HSK study schedule using only aggregate numeric statistics. Reply in Vietnamese. Do not guarantee an exam pass. Return JSON action keep, accelerate, or slow and a concise reason. Acceleration is allowed only when signal=fast, attempts>=20, accuracy>=0.9, recalls>=10, retention>=0.85; otherwise never accelerate. If signal=slow explain the choice of extending the deadline or extra study within the budget; never select that choice for the user. Do not invent dates or scores.';
