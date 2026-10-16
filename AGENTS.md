@@ -2,7 +2,7 @@
 
 Source of truth: `https://github.com/trungxemcode/hsk`, branch `main`.
 Preferred workspace on this Windows PC: `C:\Users\LENOVO\hsk`.
-The older `C:\New folder\hsk` is a secondary checkout, not a separate app or source of truth.
+This is the **only supported local HSK checkout**. The former `C:\New folder\hsk` checkout was consolidated and should not be used. Serena and RTK are installed for this Windows user; `.serena/` and other machine-local agent configurations are ignored by Git.
 
 ## Start a coding task (fast)
 1. Read this file. Run `git status -sb`, `git branch --show-current`, and `git log -1 --oneline` in the current checkout.

@@ -1,2 +1,21 @@
 __pycache__/
 *.pyc
+
+# Machine-local AI coding assistants and token optimization setup.
+# Keep shared AGENTS.md / docs/ai / CLAUDE.md / GEMINI.md tracked.
+# These local folders/files must never be pushed to GitHub.
+/.serena/
+/.codex/
+/.cursor/
+/.claude/
+/.gemini/
+/.vscode/
+/.rtk/
+/.agents/
+/RTK.md
+/AGENTS.md.backup
+/.mcp.json
+/.serena-config/
+/.serena_cache/
+/tmp-ai/
+/.ai-cache/
