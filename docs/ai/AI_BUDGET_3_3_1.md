@@ -10,7 +10,8 @@
 ## Key AI thứ hai — CHƯA kích hoạt
 - Adapter OpenAI-compatible `server/ai-backup.mjs` hỗ trợ **xKiro**, cố định endpoint `https://api.xkiro.com/v1/chat/completions`, chỉ fallback đọc thực tế khi Gemini trả 429/502/503, không gọi hai model song song tốn phí.
 - Tiền tố `sk-xt-` chưa chứng minh là xKiro: **XTokenHub** cũng phát hành key tiền tố này. Cần xác nhận nhà cung cấp/model/bảng giá trước khi bật; nếu provider khác phải sửa adapter cho endpoint thật.
-- Key đăng trong chat cần bị **thu hồi và tạo mới**. Không lưu, không thử key đã lộ; chỉ cài key mới qua Wrangler secret `SECONDARY_AI_API_KEY` hoặc Cloudflare Dashboard.
+- Nhà cung cấp đã xác nhận: xKiro, endpoint `https://api.xkiro.com/v1/chat/completions`. Chọn model trong catalog Free ngày 17/10/2026: `qwen/qwen-plus-2025-07-28:free`. Cấu hình `AI_BACKUP_ENABLED=true` nhưng tự động vô hiệu khi chưa có secret; Gemini vẫn chạy chính. Chỉ fallback bài đọc khi Gemini trả 429/502/503.
+- Key đăng trong chat cần được **thu hồi và tạo mới**. Công cụ từ chối việc truyền khóa chat thẳng sang Cloudflare; key chưa được cài. Người dùng nhập key mới trong Cloudflare > Workers & Pages > hsk-vietnamese-translator > Settings > Variables and Secrets, tên `SECONDARY_AI_API_KEY`, Type Secret, sau đó Deploy. Không lưu trong git, chat hoặc mã nguồn.
 - Bật sau xác minh bằng vars `AI_BACKUP_ENABLED=true`, `SECONDARY_AI_PROVIDER=xkiro`, `SECONDARY_AI_MODEL=<model ID thực tế>`. Mặc định tắt; chưa chi phí nhà cung cấp thứ hai.
 - Không đồng bộ từ vựng/tiến độ hay lịch sử đọc trên nhiều thiết bị; token guard không thay thế việc đồng bộ đó.
 
