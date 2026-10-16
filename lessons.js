@@ -89,7 +89,8 @@ function renderLesson(l,p){
  root.append(el('h3','Bài '+l.number+' · '+l.vi),el('p',l.title,'lesson-title-cn'),el('p','HSK '+hsk+(l.volume?' · Tập '+(l.volume==='A'?'Thượng':'Hạ'):'')+' · '+known+'/'+ws.length+' từ đã thuộc','hint'));
  root.append(button(lessonSection==='guided'?'Đang học tự động':'Học tự động',()=>changeSection('guided'),'lesson-guided-entry'));
 
- const views=l.content?contentShell(l,p):null,overview=views?.overview||root,vocabRoot=views?.vocabulary||root;
+ root.append(button('Đọc thêm tình huống thực tế',()=>window.HSKRealReading?.openFromLesson({id:l.id,hsk,number:l.number,words:ws.map(w=>({han:w.han,mean:w.mean,pin:w.pin}))}),'lesson-guided-entry lesson-reading-entry'));
+  const views=l.content?contentShell(l,p):null,overview=views?.overview||root,vocabRoot=views?.vocabulary||root;
  if(!l.content)root.append(el('p','Bài này hiện có phần từ vựng; nội dung ngữ pháp, bài đọc và hội thoại đang chờ đối chiếu.','hint'));
  const steps=el('p','Học từ → đọc ví dụ → kiểm tra → ôn lại theo lịch. Các nút đã thuộc/chưa thuộc dùng chung tiến độ với thẻ từ và SRS.','hint');overview.append(steps);
  const m=measure(l,p),meter=el('section',undefined,'lesson-mastery');
