@@ -24,7 +24,26 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   for(const dy of [.3,.7]){await page.mouse.move(board.x+board.width*.2,board.y+board.height*dy);await page.mouse.down();await page.mouse.move(board.x+board.width*.8,board.y+board.height*dy,{steps:10});await page.mouse.up();}
   const two=await ink();assert.ok(two>0);await page.locator('#handwritingUndo').click();const one=await ink();assert.ok(one>0&&one<two);await page.locator('#handwritingUndo').click();assert.equal(await ink(),0);assert.ok(await page.locator('#handwritingUndo').isDisabled());assert.match(await page.locator('#handwritingStatus').innerText(),/hoàn tác hết/);
   await page.locator('#handwritingClose').click();
-  await page.locator('#searchPanel [data-studio-go="translator"]').click();assert.ok(await page.locator('#translationInput').isVisible());await page.locator('#ocrCapture').locator('..').locator('summary').click().catch(()=>{});assert.equal(await page.locator('#ocrFile').count(),1);
+  await page.locator('#searchPanel [data-studio-go="translator"]').click();assert.ok(await page.locator('#translationInput').isVisible());
+  // Regression: the selected search subtab must follow the visible panel, not the sidebar parent.
+  for(const width of [390,1440]){
+   await page.setViewportSize({width,height:900});
+   const translatorTabs=page.locator('#translatorPanel .studio-search-tabs');
+   assert.equal(await translatorTabs.locator('[data-studio-go="translator"]').getAttribute('aria-current'),'page','translator tab current '+width);
+   assert.equal(await translatorTabs.locator('[data-studio-go="translator"]').getAttribute('aria-pressed'),'true');
+   assert.equal(await translatorTabs.locator('[data-studio-go="search"]').getAttribute('aria-pressed'),'false');
+   const colors=await translatorTabs.locator('button').evaluateAll(items=>items.map(b=>getComputedStyle(b).backgroundColor));
+   assert.notEqual(colors[0],colors[1],'wrong translation tab highlighted at '+width);
+   assert.equal(await page.locator('.sidebar [data-studio-go="search"]').getAttribute('aria-current'),'page','lookup parent must remain selected');
+   await translatorTabs.locator('[data-studio-go="search"]').click();
+   assert.ok(await page.locator('#searchInput').isVisible());
+   const searchTabs=page.locator('#searchPanel .studio-search-tabs');
+   assert.equal(await searchTabs.locator('[data-studio-go="search"]').getAttribute('aria-pressed'),'true');
+   assert.equal(await searchTabs.locator('[data-studio-go="translator"]').getAttribute('aria-pressed'),'false');
+   await searchTabs.locator('[data-studio-go="translator"]').click();
+   assert.ok(await page.locator('#translationInput').isVisible());
+  }
+  await page.locator('#ocrCapture').locator('..').locator('summary').click().catch(()=>{});assert.equal(await page.locator('#ocrFile').count(),1);
   await nav('lessons');await page.evaluate(async()=>{history.replaceState(null,'','#lesson/standard-2-03');await window.HSKLessonNav.open();});assert.equal(await page.locator('.lesson-section-nav button').count(),4);for(const name of ['Từ vựng','Đọc & hội thoại','Ngữ pháp','Luyện tập']){await page.locator('.lesson-section-nav').getByRole('button',{name,exact:true}).click();}
   assert.equal(await page.locator('#lessonChatButton').count(),1);
   await nav('review');await page.locator('#studioReview [data-studio-go="srs"]').click();await page.locator('#srsStart').click();assert.ok(await page.locator('#srsCard').isVisible());await page.locator('#srsReveal').click();assert.ok(await page.locator('#srsRatings').isVisible());
