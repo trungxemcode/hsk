@@ -25,6 +25,10 @@ for(const width of [320,390,1440]){
  for(const theme of ['light','dark']){
   await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;HSKStudio.navigate('practice')},theme);
   assert.equal(await page.locator('#studioPractice [data-studio-go="match-game"]').count(),1);
+  // Existing Flashcard entry from the same hub must remain reachable.
+  await page.locator('#studioPractice [data-studio-go="learn"]').evaluate(el=>el.click());
+  await page.locator('#learnPanel #flashcard').waitFor({state:'visible',timeout:10000});
+  await page.evaluate(()=>HSKStudio.navigate('practice'));
   assert.equal(await page.locator('#studioPractice [data-studio-go="sentence-game"]').count(),1);
   await page.locator('#studioPractice [data-studio-go="match-game"]').evaluate(el=>el.click());
   await page.waitForFunction(()=>document.querySelector('#matchGamePanel .pg-match-grid .pg-match-tile'));
