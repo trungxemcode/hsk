@@ -18,6 +18,7 @@ Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-
 | Flashcards and SRS | `app.js`, `words.js`, `lessons.js` | Preserve existing storage keys and review semantics |
 | Lessons and content | `lessons.js`, `lessons-data.json`, `lesson-content-hsk1.json` ... `hsk6.json` | Curriculum, progress and reading content. Mobile evidence chips read existing mastery; tappable lesson vocabulary preserves sentence text and speech. |
 | Tests/exams | `lesson-mini.js`, `exam.js`, `exam-core.js`, `exam-bank.js` | Existing question/score behavior |
+| Practice games | `practice-games-core.js`, `practice-games.js/css`, `studio.js` | Two independent Luyện & Ôn modes: shuffled Hán–pinyin–meaning triples and sentence-word ordering from existing checked examples. Session-only scoring; no SRS writes. Browser/core checks in `tools/check-practice-games-*`. |
 | Study planner | `planner.js`, `planner-core.js` | Actual plan, time and mastery stats |
 | Vocabulary notebook | `notebook.js/css`, `notebook-factory.js/css`, `notebook-tools-core.js` | CRUD, saved entries, import/export, exercises, AI stories |
 | Auth and sync | `account.js`, `account-core.js`, `study-sync.js`, `study-sync-core.js`, `firestore.rules` | Local-first and per-account isolation |

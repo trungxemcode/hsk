@@ -1,7 +1,7 @@
 name: Studio layout checks
 on:
   pull_request:
-    paths: ['home-overview*', 'tools/check-home-overview-ui.cjs', 'tools/check-press-shape-ui.cjs', 'mobile-ux*', 'tools/check-mobile-ux*.cjs', 'tools/check-mobile-flow*.cjs', 'passive*', 'tools/check-passive*.cjs', 'app.js', 'placement*', 'tools/check-placement*.cjs', 'style.css', 'mobile-layout.css', 'ui-buttons.css', 'handwriting.css', 'speech.css', 'lesson-chat.css', 'tools/check-design-tokens.cjs', 'study-sync*', 'ui-buttons.css', 'notebook*', 'backup*', 'tools/check-notebook*.cjs', 'account.js', 'index.html', 'studio.js', 'planner.js', 'planner-core.js', 'exam*', 'drive-exam*', 'drive-audio*', 'open-dictionary*', 'content/open-dictionary/**', 'tools/check-open-dictionary*.cjs', 'tools/build-open-dictionary.py', 'content/drive-hsk/**', 'tools/import-drive-hsk.py', 'ai-coach*', 'coach-profile.js', 'lessons.js', 'lessons-data.json', 'lesson-mastery.js', 'lesson-mini*', 'account-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-exam*.cjs', 'tools/check-ai-coach*.cjs', 'tools/check-lesson-mini*.cjs', 'tools/check-reading-dom.cjs', '.github/workflows/studio-ui.yml']
+    paths: ['home-overview*', 'tools/check-home-overview-ui.cjs', 'tools/check-press-shape-ui.cjs', 'mobile-ux*', 'tools/check-mobile-ux*.cjs', 'tools/check-mobile-flow*.cjs', 'passive*', 'tools/check-passive*.cjs', 'app.js', 'placement*', 'tools/check-placement*.cjs', 'style.css', 'mobile-layout.css', 'ui-buttons.css', 'handwriting.css', 'speech.css', 'lesson-chat.css', 'tools/check-design-tokens.cjs', 'study-sync*', 'ui-buttons.css', 'notebook*', 'backup*', 'tools/check-notebook*.cjs', 'account.js', 'index.html', 'studio.js', 'planner.js', 'planner-core.js', 'exam*', 'drive-exam*', 'drive-audio*', 'open-dictionary*', 'content/open-dictionary/**', 'tools/check-open-dictionary*.cjs', 'tools/build-open-dictionary.py', 'content/drive-hsk/**', 'tools/import-drive-hsk.py', 'ai-coach*', 'coach-profile.js', 'lessons.js', 'lessons-data.json', 'lesson-mastery.js', 'lesson-mini*', 'account-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-exam*.cjs', 'tools/check-ai-coach*.cjs', 'tools/check-lesson-mini*.cjs', 'tools/check-reading-dom.cjs', 'practice-games*', 'tools/check-practice-games*.cjs', '.github/workflows/studio-ui.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -41,6 +41,7 @@ jobs:
           node tools/check-exam-dom.cjs
           node tools/check-open-dictionary-dom.cjs
           node tools/check-lesson-mini-dom.cjs
+          node tools/check-practice-games-core.cjs
           python3 -m unittest discover -s tools -p 'test_update*.py'
       - name: Browser layout and controls
         env:
@@ -58,6 +59,7 @@ jobs:
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-placement-route-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-passive-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-search-tabs-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-practice-games-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-goal-scope-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-ios-push-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-studio-ui.cjs
