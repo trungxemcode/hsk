@@ -74,3 +74,53 @@
  #studioPractice .ps-icon{width:46px;min-width:46px;height:46px;min-height:46px}
  #studioPractice .ps-copy strong{font-size:14px}
 }
+
+
+/* 2.24: single, initially collapsed mode picker. Old duplicated card lists stay in DOM for JS integrations only. */
+#studioPractice>.hub-intro,#studioPractice>#studioReview,#studioPractice>#practiceGroup{display:none!important}
+#studioPractice .ps-picker{display:grid;gap:12px;margin-bottom:18px}
+#studioPractice .ps-disclosure{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden}
+#studioPractice .ps-disclosure-summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:82px;padding:14px 16px;cursor:pointer;color:var(--ink);user-select:none}
+#studioPractice .ps-disclosure-summary::-webkit-details-marker{display:none}
+#studioPractice .ps-summary-icon{display:grid;place-items:center;width:44px;height:44px;flex:none;background:var(--accent-light);color:var(--accent-dark);border-radius:var(--radius-btn);font-size:19px}
+#studioPractice .ps-summary-copy{display:grid;align-content:center;gap:5px;min-width:0;flex:1}
+#studioPractice .ps-summary-copy strong{color:var(--ink);font-size:clamp(15px,2vw,19px);line-height:1.2}
+#studioPractice .ps-summary-copy small{color:var(--muted);font-size:12px;font-weight:650}
+#studioPractice .ps-chevron{font-size:27px;color:var(--accent-dark);transition:transform .15s;line-height:1}
+#studioPractice .ps-disclosure[open] .ps-chevron{transform:rotate(180deg)}
+#studioPractice .ps-disclosure-body{display:grid;gap:12px;padding:0 14px 14px}
+#studioPractice .ps-tools p{margin:0;font-size:12px;color:var(--muted);line-height:1.4}
+#studioPractice .ps-tools button{min-height:36px;padding:7px 10px;font-size:12px}
+#studioPractice .ps-option{min-height:68px;padding:9px;gap:9px}
+#studioPractice .ps-icon{width:40px;height:40px;min-width:40px;min-height:40px}
+#studioPractice .ps-icon svg{width:23px;height:23px}
+#studioPractice .ps-copy strong{font-size:13px}
+#studioPractice .ps-copy small{font-size:11px}
+#studioPractice .ps-check{width:20px;height:20px;min-width:20px;align-self:center}
+#studioPractice .ps-start-row{justify-content:flex-end;min-height:52px}
+#studioPractice .ps-start{min-height:48px;flex:1}
+#studioPractice .ps-disclosure-summary:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+html[data-theme=dark] #studioPractice .ps-disclosure{background:var(--surface);color:var(--ink)}
+@media(max-width:720px){
+ #studioPractice .ps-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ #studioPractice .ps-option{min-width:0;min-height:60px;padding:7px;gap:6px}
+ #studioPractice .ps-icon{width:35px;height:35px;min-width:35px;min-height:35px}
+ #studioPractice .ps-icon svg{width:20px;height:20px}
+ #studioPractice .ps-copy strong{font-size:12px;overflow-wrap:anywhere}
+ #studioPractice .ps-copy small{display:none}
+ #studioPractice .ps-check{width:17px;height:17px;min-width:17px;font-size:11px}
+ #studioPractice .ps-disclosure-summary{min-height:74px;padding:12px;gap:9px}
+ #studioPractice .ps-summary-icon{width:36px;height:36px}
+ #studioPractice .ps-level{font-size:11px;padding:7px}
+ #studioPractice .ps-disclosure-body{padding:0 10px 12px}
+ #studioPractice .ps-tools{align-items:center}
+ #studioPractice .ps-tools p{font-size:11px;flex:1}
+ #studioPractice .ps-start-row{position:sticky;bottom:calc(95px + env(safe-area-inset-bottom, 0px));z-index:9;background:var(--paper);border-radius:var(--radius-btn);padding:6px}
+ #studioPractice .ps-start-row p:empty{display:none}
+}
+@media(max-width:360px){
+ #studioPractice .ps-option{min-height:58px}
+ #studioPractice .ps-icon{width:30px;height:30px;min-width:30px;min-height:30px}
+ #studioPractice .ps-icon svg{width:18px;height:18px}
+ #studioPractice .ps-copy strong{font-size:11px}
+}
