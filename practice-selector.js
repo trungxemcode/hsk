@@ -38,19 +38,23 @@
  }
  const practice=document.getElementById('studioPractice');
  if(!practice)return;
- const picker=document.createElement('div');picker.id='practiceModePicker';picker.className='ps-picker';
- picker.innerHTML=`<details id="practiceModeDisclosure" class="ps-disclosure">
- <summary class="ps-disclosure-summary"><span class="ps-summary-icon" aria-hidden="true">☰</span><span class="ps-summary-copy"><strong>Chọn chế độ luyện</strong><small id="practiceSelectedCount" aria-live="polite"></small></span><span class="ps-level" id="practiceModeLevel">HSK</span><span class="ps-chevron" aria-hidden="true">⌄</span></summary>
- <div class="ps-disclosure-body"><div class="ps-tools"><p>Chọn một, nhiều hoặc tất cả chế độ.</p><div><button type="button" id="practiceSelectAll">Chọn tất cả</button><button type="button" id="practiceClearAll">Bỏ chọn</button></div></div><div id="practiceModeOptions" class="ps-options" role="group" aria-label="Các chế độ luyện"></div></div>
- </details><div class="ps-start-row"><p id="practiceModeStatus" role="status"></p><button type="button" class="ps-start" id="practiceStartModes">Bắt đầu luyện →</button></div>`;
- practice.insertBefore(picker,practice.firstChild);
- picker.querySelector('.ps-summary-icon').replaceChildren(svg('check'));
- // Retain legacy DOM nodes for active feature routes, but hide the duplicate menus.
+ const reviewIDs=new Set(['srs','mistakes']);
+ const groups=[{prefix:'practice',name:'luyện',modes:MODES.filter(m=>!reviewIDs.has(m[0]))},{prefix:'review',name:'ôn',modes:MODES.filter(m=>reviewIDs.has(m[0]))}];
+ for(const group of groups){
+  const {prefix,name}=group,picker=document.createElement('div');picker.id=prefix+'ModePicker';picker.className='ps-picker';group.picker=picker;
+  picker.innerHTML=`<details id="${prefix}ModeDisclosure" class="ps-disclosure">
+  <summary class="ps-disclosure-summary"><span class="ps-summary-icon" aria-hidden="true"></span><span class="ps-summary-copy"><strong>Chọn chế độ ${name}</strong><small id="${prefix}SelectedCount" aria-live="polite"></small></span><span class="ps-level" id="${prefix}ModeLevel">HSK</span><span class="ps-chevron" aria-hidden="true">⌄</span></summary>
+  <div class="ps-disclosure-body"><div class="ps-tools"><p>Chọn một, nhiều hoặc tất cả chế độ.</p><div><button type="button" id="${prefix}SelectAll">Chọn tất cả</button><button type="button" id="${prefix}ClearAll">Bỏ chọn</button></div></div><div id="${prefix}ModeOptions" class="ps-options" role="group" aria-label="Các chế độ ${name}"></div><div class="ps-start-row"><p id="${prefix}ModeStatus" role="status"></p><button type="button" class="ps-start" id="${prefix}StartModes">Bắt đầu ${name} →</button></div></div>
+  </details>`;
+  picker.querySelector('.ps-summary-icon').append(svg(prefix==='review'?'repeat':'check'));
+  group.disclosure=picker.querySelector('details');group.options=picker.querySelector('.ps-options');group.counter=picker.querySelector('small');group.start=picker.querySelector('.ps-start');group.hint=picker.querySelector('[role=status]');
+ }
+ practice.prepend(...groups.map(g=>g.picker));
+ // Legacy nodes keep their feature handlers; both visible chooser groups use the same UI.
  for(const legacy of ['studioReview','practiceGroup']){const group=document.getElementById(legacy);if(group){group.hidden=true;group.open=false;}}
- const options=picker.querySelector('#practiceModeOptions'),counter=picker.querySelector('#practiceSelectedCount'),start=picker.querySelector('#practiceStartModes'),hint=picker.querySelector('#practiceModeStatus');
  const owner=()=>{try{return JSON.parse(localStorage.getItem('hsk-account-meta-v1')||'{}').uid||'guest';}catch{return 'guest';}};
  const prefKey=()=>'hsk-practice-mode-choice-v1:'+owner();
- const defaultSelection=['match-game','sentence-game','quiz'];
+ const defaultSelection=['match-game','sentence-game','quiz','srs','mistakes'];
  function restore(){
   try{const a=JSON.parse(localStorage.getItem(prefKey())||'null');if(Array.isArray(a))return a.filter(x=>MODES.some(m=>m[0]===x));}catch{}
   return defaultSelection.slice();
@@ -58,33 +62,37 @@
  let selected=new Set(restore()),session=null;
  function persist(){try{localStorage.setItem(prefKey(),JSON.stringify([...selected]));}catch{}}
  function renderCount(){
-  const n=selected.size;counter.textContent=n+' / '+MODES.length+' đã chọn';start.disabled=!n;
-  start.textContent=n>1?'Bắt đầu '+n+' chế độ →':'Bắt đầu luyện →';
-  for(const input of options.querySelectorAll('input[type=checkbox]')){
-   input.checked=selected.has(input.value);
-   input.closest('.ps-option').classList.toggle('is-selected',input.checked);
+  for(const group of groups){
+   const n=group.modes.filter(m=>selected.has(m[0])).length;
+   group.counter.textContent=n+' / '+group.modes.length+' đã chọn';group.start.disabled=!n;
+   group.start.textContent=n>1?'Bắt đầu '+n+' chế độ '+group.name+' →':'Bắt đầu '+group.name+' →';
+   for(const input of group.options.querySelectorAll('input[type=checkbox]')){input.checked=selected.has(input.value);input.closest('.ps-option').classList.toggle('is-selected',input.checked);}
   }
  }
- for(const [id,name,detail,icon] of MODES){
-  const label=document.createElement('label');label.className='ps-option';label.dataset.practiceOption=id;
-  const input=document.createElement('input');input.type='checkbox';input.value=id;input.setAttribute('aria-label','Chọn '+name);
-  const pict=document.createElement('span');pict.className='ps-icon';pict.append(svg(icon));
-  const copy=document.createElement('span');copy.className='ps-copy';
-  const strong=document.createElement('strong');strong.textContent=name;
-  const small=document.createElement('small');small.textContent=detail;
-  const mark=document.createElement('span');mark.className='ps-check';mark.setAttribute('aria-hidden','true');mark.textContent='✓';
-  copy.append(strong,small);label.append(input,pict,copy,mark);options.append(label);
-  input.addEventListener('change',()=>{if(input.checked)selected.add(id);else selected.delete(id);persist();renderCount();});
+ for(const group of groups){
+  for(const [id,name,detail,icon] of group.modes){
+   const label=document.createElement('label');label.className='ps-option';label.dataset.practiceOption=id;
+   const input=document.createElement('input');input.type='checkbox';input.value=id;input.setAttribute('aria-label','Chọn '+name);
+   const pict=document.createElement('span');pict.className='ps-icon';pict.append(svg(icon));
+   const copy=document.createElement('span');copy.className='ps-copy';
+   const strong=document.createElement('strong');strong.textContent=name;
+   const small=document.createElement('small');small.textContent=detail;
+   const mark=document.createElement('span');mark.className='ps-check';mark.setAttribute('aria-hidden','true');mark.textContent='✓';
+   copy.append(strong,small);label.append(input,pict,copy,mark);group.options.append(label);
+   input.addEventListener('change',()=>{if(input.checked)selected.add(id);else selected.delete(id);persist();renderCount();});
+  }
+  group.picker.querySelector('#'+group.prefix+'SelectAll').addEventListener('click',()=>{for(const m of group.modes)selected.add(m[0]);persist();renderCount();});
+  group.picker.querySelector('#'+group.prefix+'ClearAll').addEventListener('click',()=>{for(const m of group.modes)selected.delete(m[0]);persist();renderCount();});
+  group.start.addEventListener('click',()=>begin(group));
+  group.disclosure.addEventListener('toggle',()=>{if(group.disclosure.open)for(const other of groups)if(other!==group)other.disclosure.open=false;});
  }
  renderCount();
- picker.querySelector('#practiceSelectAll').addEventListener('click',()=>{selected=new Set(MODES.map(m=>m[0]));persist();renderCount();});
- picker.querySelector('#practiceClearAll').addEventListener('click',()=>{selected.clear();persist();renderCount();});
  function level(){
   const v=document.querySelector('.filter-btn[data-filter].active')?.dataset.filter;
   const n=Number(v)||Number(window.HSKPlanner?.plan?.target)||3;
   return n>=1&&n<=6?n:3;
  }
- function updateLevel(){picker.querySelector('#practiceModeLevel').textContent='HSK '+level();}
+ function updateLevel(){for(const group of groups)group.picker.querySelector('.ps-level').textContent='HSK '+level();}
  updateLevel();window.addEventListener('hsk-plan-change',updateLevel);
  function banner(){
   const el=document.createElement('div');el.id='practiceSessionBar';el.className='ps-session-bar';el.hidden=true;
@@ -98,7 +106,7 @@
  function updateBar(visible=true){
   bar.hidden=!session||!visible;if(!session)return;
   const id=session.routes[session.index];
-  bar.querySelector('#practiceSessionStep').textContent='Lượt luyện '+(session.index+1)+' / '+session.routes.length;
+  bar.querySelector('#practiceSessionStep').textContent='Lượt '+session.group.name+' '+(session.index+1)+' / '+session.routes.length;
   bar.querySelector('#practiceSessionName').textContent=MODES.find(m=>m[0]===id)?.[1]||'Luyện tập';
   bar.querySelector('#practiceSessionNext').textContent=session.index===session.routes.length-1?'Hoàn thành ✓':'Chế độ tiếp →';
  }
@@ -113,17 +121,17 @@
   else window.HSKStudio?.navigate(id);
   updateBar();
  }
- function begin(){
-  if(!selected.size){hint.textContent='Hãy chọn ít nhất một chế độ.';return;}
-  session={routes:MODES.map(m=>m[0]).filter(id=>selected.has(id)),index:0};
-  hint.textContent='';launch(session.routes[0]);
+ function begin(group=groups[0]){
+  const routes=group.modes.map(m=>m[0]).filter(id=>selected.has(id));
+  if(!routes.length){group.hint.textContent='Hãy chọn ít nhất một chế độ.';return;}
+  session={routes,index:0,group};group.hint.textContent='';group.disclosure.open=false;launch(routes[0]);
  }
  function stop(){
   session=null;updateBar();window.HSKStudio?.navigate('practice');
  }
  function next(){
   if(!session)return;
-  if(session.index===session.routes.length-1){stop();hint.textContent='Đã kết thúc lượt luyện. Bạn có thể chọn chế độ mới.';return;}
+  if(session.index===session.routes.length-1){const group=session.group;stop();group.hint.textContent='Đã kết thúc lượt '+group.name+'. Bạn có thể chọn chế độ mới.';return;}
   session.index++;launch(session.routes[session.index]);
  }
  function onNavigate(route){
@@ -132,7 +140,6 @@
   updateBar(route===session.routes[session.index]||route==='practice'||
    (session.routes[session.index]==='passive'&&route==='learn'));
  }
- start.addEventListener('click',begin);
  window.addEventListener('hsk-account-ready',()=>{selected=new Set(restore());renderCount();stopIfNeeded();});
  function stopIfNeeded(){if(session){session=null;updateBar();}}
  function alignExistingIcons(){

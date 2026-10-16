@@ -76,7 +76,7 @@
 }
 
 
-/* 2.24: single, initially collapsed mode picker. Old duplicated card lists stay in DOM for JS integrations only. */
+/* Two initially collapsed choosers. Legacy cards remain for feature integrations only. */
 #studioPractice>.hub-intro,#studioPractice>#studioReview,#studioPractice>#practiceGroup{display:none!important}
 #studioPractice .ps-picker{display:grid;gap:12px;margin-bottom:18px}
 #studioPractice .ps-disclosure{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-card);overflow:hidden}
@@ -115,7 +115,7 @@ html[data-theme=dark] #studioPractice .ps-disclosure{background:var(--surface);c
  #studioPractice .ps-disclosure-body{padding:0 10px 12px}
  #studioPractice .ps-tools{align-items:center}
  #studioPractice .ps-tools p{font-size:11px;flex:1}
- #studioPractice .ps-start-row{position:sticky;bottom:calc(95px + env(safe-area-inset-bottom, 0px));z-index:9;background:var(--paper);border-radius:var(--radius-btn);padding:6px}
+ #studioPractice .ps-start-row{position:static;background:var(--palette-clear);padding:6px 0 0}
  #studioPractice .ps-start-row p:empty{display:none}
 }
 @media(max-width:360px){

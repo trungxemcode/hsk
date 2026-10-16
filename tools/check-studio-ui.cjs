@@ -22,7 +22,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   assert.equal(await practiceDisclosure.evaluate(el=>el.open),false);
   await page.waitForTimeout(150);
   assert.equal(await page.locator('#activeTitle').innerText(),'Luyện & Ôn');
-  await page.locator('#practiceStartModes').click();
+  await practiceDisclosure.locator('summary').click();await page.locator('#practiceStartModes').click();
   await page.locator('#flashcard').waitFor({state:'visible'});
   await page.locator('#flashcard .front .speech-button').click();assert.ok(await page.evaluate(()=>!!window.__spoken));assert.equal(await page.locator('#flashcard').evaluate(el=>el.classList.contains('flipped')),false);
   await page.locator('#flashcard .mastery-btn.known').click();await page.waitForTimeout(180);await nav('account');assert.equal(await page.locator('#studioStreak').innerText(),'1 ngày');assert.ok(await page.locator('#offlineUpdate').isDisabled());
@@ -40,7 +40,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   await page.locator('#searchPanel [data-studio-go="translator"]').click();assert.ok(await page.locator('#translationInput').isVisible());await page.locator('#ocrCapture').locator('..').locator('summary').click().catch(()=>{});assert.equal(await page.locator('#ocrFile').count(),1);
   await nav('lessons');await page.evaluate(async()=>{history.replaceState(null,'','#lesson/standard-2-03');await window.HSKLessonNav.open();});assert.equal(await page.locator('.lesson-section-nav button').count(),4);for(const name of ['Từ vựng','Đọc & hội thoại','Ngữ pháp','Luyện tập']){await page.locator('.lesson-section-nav').getByRole('button',{name,exact:true}).click();}
   assert.equal(await page.locator('#lessonChatButton').count(),1);
-  await nav('review');await page.locator('#practiceModeDisclosure>summary').click();await page.locator('#practiceClearAll').click();await page.locator('[data-practice-option="srs"] input').check();await page.locator('#practiceModeDisclosure>summary').click();await page.locator('#practiceStartModes').click();await page.locator('#srsStart').click();assert.ok(await page.locator('#srsCard').isVisible());await page.locator('#srsReveal').click();assert.ok(await page.locator('#srsRatings').isVisible());
+  await nav('review');await page.locator('#reviewModeDisclosure>summary').click();await page.locator('#reviewClearAll').click();await page.locator('[data-practice-option="srs"] input').check();await page.locator('#reviewStartModes').click();await page.locator('#srsStart').click();assert.ok(await page.locator('#srsCard').isVisible());await page.locator('#srsReveal').click();assert.ok(await page.locator('#srsRatings').isVisible());
   // Render each main view at desktop and phone sizes; assert it remains within the viewport.
   for(const width of [1440,390]){
    await page.setViewportSize({width,height:900});
@@ -161,7 +161,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
     const disclosure=page.locator('#practiceModeDisclosure');
     await disclosure.evaluate(el=>el.open=true);
     const tiles=page.locator('#practiceModeOptions .ps-option');
-    assert.equal(await tiles.count(),12);
+    assert.equal(await tiles.count(),10);
     const sizing=await tiles.evaluateAll(cards=>cards.map(c=>{const r=c.getBoundingClientRect();return {height:r.height,width:r.width}}));
     for(const tile of sizing){assert.ok(tile.height>=44,'compact tile still finger-friendly');assert.ok(tile.width>40,'tile remains legible');}
     if(width<=720)assert.equal(await page.locator('#practiceModeOptions').evaluate(n=>getComputedStyle(n).gridTemplateColumns.split(' ').length),2);
