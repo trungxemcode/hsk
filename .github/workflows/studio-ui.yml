@@ -57,6 +57,7 @@ jobs:
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-placement-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-placement-route-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-passive-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-search-tabs-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-studio-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-factory-ui.cjs

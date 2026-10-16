@@ -185,7 +185,8 @@ body.studio-enabled .answers button{color:var(--palette-ink);background:var(--pa
 body.studio-enabled .answers button.correct{color:var(--legacy-hex-145b37);background:var(--legacy-hex-e8f6ef)}
 body.studio-enabled .answers button.wrong{color:var(--legacy-hex-9a3038);background:var(--legacy-hex-fff0f0)}
 body.studio-enabled .studio-search-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
-body.studio-enabled .studio-search-tabs button{background:var(--palette-violet-soft);color:var(--palette-violet-deep);font-size:13px;padding:10px 14px;border:0;border-radius:var(--radius-btn)}
+body.studio-enabled .studio-search-tabs button{background:var(--surface);color:var(--ink);font-size:13px;padding:10px 14px;border:1px solid var(--line);border-radius:var(--radius-btn)}
+body.studio-enabled .studio-search-tabs button.active{background:var(--palette-violet);color:var(--palette-white);border-color:var(--palette-violet)}
 body.studio-enabled .lesson-section-nav{display:flex;flex-wrap:wrap;gap:8px}
 body.studio-enabled .lesson-section-nav button{min-height:44px;background:var(--palette-violet-soft);color:var(--palette-violet-deep);padding:10px 14px}
 body.studio-enabled .lesson-section-nav button[aria-pressed=true]{background:var(--palette-violet);color:var(--palette-white)}
