@@ -35,7 +35,7 @@ async function translate(event){
  const key=JSON.stringify([user.uid,text,hsk,translationDirection]);lastText=text;
  if(cache.has(key)){render(cache.get(key));status.textContent='Đã hiển thị bản dịch trước đó.';button.disabled=false;return;}
  button.disabled=true;status.textContent=translationDirection==='zh-vi'?'AI dịch Trung → Việt đang load…':'AI dịch theo HSK '+hsk+' đang load…';result.hidden=true;
- const stopLoading=window.HSKLoading?.show(translationDirection==='zh-vi'?'AI dịch Trung → Việt đang load...':'AI dịch theo HSK '+hsk+' đang load...','Đang phân tích cấu trúc câu và đối chiếu từ vựng...');
+ const stopLoading=window.HSKLoading?.showAI(translationDirection==='zh-vi'?'AI dịch Trung → Việt đang load...':'AI dịch theo HSK '+hsk+' đang load...',{size:text.length,detail:'Đang gửi câu cần dịch cho AI...',signal:controller.signal});
  const timer=setTimeout(()=>controller.abort(),70000);
  try{
   const token=await user.getIdToken();if(current!==serial)return;
@@ -51,7 +51,7 @@ async function ask(event){
  event.preventDefault();const question=askInput.value.trim();if(!question||!currentTranslation)return;
  const user=window.HSKAccountDashboard?.user;if(!user){askStatus.textContent='Hãy đăng nhập tài khoản app trước khi hỏi AI.';return;}
  askPending?.abort();askPending=new AbortController();const controller=askPending;askButton.disabled=true;askInput.disabled=true;askStatus.textContent='AI giải đáp bản dịch đang load…';
- const stopLoading=window.HSKLoading?.show('AI giải đáp bản dịch đang load...','Đang phân tích câu hỏi ngữ pháp & từ vựng của bạn...');
+ const stopLoading=window.HSKLoading?.showAI('AI giải đáp bản dịch đang load...',{size:question.length+JSON.stringify(currentTranslation).length,detail:'Đang gửi câu hỏi và bản dịch cho AI...',signal:controller.signal});
  const timer=setTimeout(()=>controller.abort(),50000);
  try{
   const token=await user.getIdToken();const endpoint=config.endpoint.replace(/\/translate$/,'/ask');

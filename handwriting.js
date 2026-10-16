@@ -60,7 +60,7 @@
   if(!navigator.onLine){status('Cần kết nối mạng để nhờ AI; nhận dạng offline vẫn dùng được.');return;}
   if(!config){status('Dịch vụ nhận dạng AI chưa được cấu hình.');return;}
   const user=window.HSKAccountDashboard?.user;if(!user){status('Đăng nhập để dùng AI nhận dạng. Nhận dạng offline vẫn dùng được.');return;}
-  busy=true;bitmap='';const id=++serial,controller=new AbortController();let timedOut=false;aiController=controller;const timer=setTimeout(()=>{timedOut=true;controller.abort();},55000);status('AI nhận dạng chữ viết tay đang load…');const stopLoading=window.HSKLoading?.show('AI nhận dạng chữ viết tay đang load...','Đang phân tích nét viết tay chữ Hán...');updateButton();
+  busy=true;bitmap='';const id=++serial,controller=new AbortController();let timedOut=false;aiController=controller;const timer=setTimeout(()=>{timedOut=true;controller.abort();},55000);status('AI nhận dạng chữ viết tay đang load…');const stopLoading=window.HSKLoading?.showAI('AI nhận dạng chữ viết tay đang load...',{size:strokes.reduce((n,s)=>n+s.length,0),kind:'handwriting',detail:'Đang gửi hình chữ viết để AI nhận dạng...',signal:controller.signal});updateButton();
   try{
    const [image,token]=await Promise.all([handwritingImage(),user.getIdToken()]);
    const endpoint=config.endpoint.replace(/\/translate$/,'/handwriting-recognize');

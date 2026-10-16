@@ -14,7 +14,7 @@ async function sendQuestion(question){
  if(!config){status.textContent='Chưa kết nối được dịch vụ AI. Hãy thử lại sau.';return;}
  const user=window.HSKAccountDashboard?.user;if(!user){status.textContent='Hãy đăng nhập tài khoản app để hỏi AI.';return;}
  const current=serial,context=lesson,controller=new AbortController();pending=controller;send.disabled=true;input.disabled=true;status.textContent='AI hỏi đáp bài học đang load…';
- const stopLoading=window.HSKLoading?.show('AI hỏi đáp bài học đang load...','Đang phân tích nội dung Bài '+context.number+' · '+context.vi);
+ const stopLoading=window.HSKLoading?.showAI('AI hỏi đáp bài học đang load...',{size:question.length+JSON.stringify(context).length,detail:'Đang gửi câu hỏi về Bài '+context.number+' · '+context.vi,signal:controller.signal});
  const timer=setTimeout(()=>controller.abort(),55000);
  try{
   const token=await user.getIdToken();if(current!==serial)return;

@@ -34,7 +34,7 @@ async function read(fast=false){
  function show(data){showData(data);if(fast){if(data.direction!=='zh-vi'||typeof data.vietnamese!=='string'||typeof data.pinyin!=='string'||typeof data.explanation!=='string'||!Array.isArray(data.outOfVocabulary))throw Error('Máy chủ chưa có chế độ dịch ảnh một lượt. Hãy cập nhật Worker hoặc dùng Nhận dạng chữ.');window.dispatchEvent(new CustomEvent('hsk-image-translated',{detail:data}));status.textContent='Đã nhận dạng và dịch trong một lượt AI. Kiểm tra chữ Trung và bản dịch bên dưới.';}}
  if(cache.has(key)){show(cache.get(key));return;}
  const id=++serial;controller=new AbortController();const current=controller;busy=true;buttons();output.hidden=true;status.textContent=fast?'AI nhận dạng & dịch ảnh đang load…':'AI nhận dạng chữ từ ảnh đang load…';
- const stopLoading=window.HSKLoading?.show(fast?'AI nhận dạng & dịch ảnh đang load...':'AI nhận dạng chữ từ ảnh đang load...','Đang quét chữ Hán trên ảnh...');
+ const stopLoading=window.HSKLoading?.showAI(fast?'AI nhận dạng & dịch ảnh đang load...':'AI nhận dạng chữ từ ảnh đang load...',{size:prepared.data.length,kind:'image',detail:'Đang gửi vùng ảnh đã chọn để AI nhận dạng...',signal:current.signal});
  const timer=setTimeout(()=>current.abort(),125000),started=Date.now(),progress=setInterval(()=>{if(id===serial)status.textContent='AI đang đọc chữ Trung… đã chờ '+Math.round((Date.now()-started)/1000)+' giây. Bạn có thể bấm Hủy.';},15000);
  try{
   const token=await user.getIdToken();if(id!==serial)return;

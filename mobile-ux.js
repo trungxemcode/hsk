@@ -96,10 +96,31 @@ $('planForm').addEventListener('submit',()=>{const before=window.HSKPlanner?.pla
  function animateStage(target){const node=typeof target==='string'?document.querySelector(target):target;if(!node||reduce.matches)return;node.classList.remove('hsk-stage-enter');void node.offsetWidth;node.classList.add('hsk-stage-enter');}
  const HSKLoading={
   formatLabel:formatLoadLabel,
-  show(feature,sub='Vui lòng đợi trong giây lát...'){
+  show(feature,sub='Vui lòng đợi trong giây lát...',options={}){
    const id=++loadSeq,started=Date.now(),entry={feature:formatLoadLabel(feature),sub};
+   const minimumMs=Number.isFinite(options.minimumMs)?Math.max(0,options.minimumMs):400;
    activeLoads.set(id,entry);clearTimeout(flashTimer);flashTimer=0;renderLoadingState(entry.feature,entry.sub);
-   return ()=>{if(!activeLoads.has(id))return;const wait=(!automated&&!reduce.matches)?Math.max(0,400-(Date.now()-started)):0;const release=()=>{activeLoads.delete(id);const last=[...activeLoads.values()].at(-1);if(last)renderLoadingState(last.feature,last.sub);else settleLoading();};if(wait)setTimeout(release,wait);else release();};
+   let closing=false;
+   const release=()=>{if(!activeLoads.has(id))return;activeLoads.delete(id);const last=[...activeLoads.values()].at(-1);if(last)renderLoadingState(last.feature,last.sub);else settleLoading();};
+   const stop=()=>{if(closing)return;closing=true;const wait=(!automated&&!reduce.matches)?Math.max(0,minimumMs-(Date.now()-started)):0;if(wait)setTimeout(release,wait);else release();};
+   stop.update=next=>{if(closing||!activeLoads.has(id))return;entry.sub=String(next);if([...activeLoads.keys()].at(-1)===id)renderLoadingState(entry.feature,entry.sub);};
+   return stop;
+  },
+  showAI(feature,{size=0,kind='text',detail='',signal}={}){
+   // The overlay follows the real request lifetime; length is used for wording, never a fabricated countdown.
+   const length=Math.max(0,Number(size)||0),complex=kind==='image'||kind==='story'||length>1200,medium=length>240;
+   const subject=kind==='image'?'ảnh':kind==='handwriting'?'nét viết':kind==='story'?'10 từ đã chọn':kind==='study'?'dữ liệu học tập':'nội dung';
+   const stop=HSKLoading.show(feature,detail||'Đang gửi '+subject+' đến AI...',{minimumMs:0});
+   let ended=false;
+   const stages=[
+    [2500,complex?'Đang chờ AI xử lý yêu cầu có nhiều dữ liệu...':medium?'Đang chờ AI xử lý nội dung dài hơn...':'Đang chờ AI phản hồi...'],
+    [10000,'Yêu cầu vẫn đang xử lý. Thời gian phụ thuộc độ dài, độ khó và kết nối.'],
+    [25000,'Vẫn chưa có kết quả AI. Có thể tiếp tục chờ hoặc hủy yêu cầu ở chức năng đang dùng.']
+   ];
+   const timers=stages.map(([ms,message])=>setTimeout(()=>{if(!ended)stop.update(message);},ms));
+   const finish=()=>{if(ended)return;ended=true;timers.forEach(clearTimeout);signal?.removeEventListener('abort',finish);stop();};
+   if(signal){if(signal.aborted)finish();else signal.addEventListener('abort',finish,{once:true});}
+   return finish;
   },
   flash(feature,sub='Đang chuẩn bị giao diện...',duration,stage){
    if(stage)animateStage(stage);
