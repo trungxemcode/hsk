@@ -62,6 +62,7 @@ function render(){
 function select(l){history.pushState({lesson:l.id},'','#lesson/'+l.id);selected=l;cardIndex=0;revealed=false;lessonSection='overview';window.HSKLoading?.flash('Bài học HSK '+hsk+' đang load...','Bài '+l.number+' · '+l.vi,undefined,root);save(l.id,{startedAt:progress()[l.id]?.startedAt||Date.now()});document.querySelector('.workspace').scrollTop=0;}
 const lessonSteps=[['overview','Từ vựng'],['reading','Đọc & hội thoại'],['grammar','Ngữ pháp'],['practice','Luyện tập']];
 function changeSection(id){lessonSection=id;render();const target=root.querySelector('.lesson-section:not([hidden])');if(target){target.tabIndex=-1;target.focus({preventScroll:true});target.scrollIntoView?.({block:'start',behavior:'auto'});}}
+function masteryChips(meter,m,total,miniTotal){let chips=meter.querySelector('.lesson-evidence-chips');if(!chips){chips=el('div',undefined,'lesson-evidence-chips');meter.append(chips);}chips.replaceChildren();for(const label of [m.read?'✓ Đã xem bài':'Chưa đánh dấu đã xem',`Từ: ${m.quizReady}/${total}`,`Đọc hiểu: ${Math.round(m.content*100)}%`,`Ôn ngắn: ${m.miniReady}/${miniTotal}`,`SRS: ${m.srsReady}/${total} từ đủ 3 lượt`])chips.append(el('span',label));}
 function renderLesson(l,p){
  const ws=matched(l),known=ws.filter(w=>api().record(w)?.status==='known').length;
  root.append(button('← Quay về danh sách',goList,'lesson-back'));
@@ -71,6 +72,7 @@ function renderLesson(l,p){
  const steps=el('p','Học từ → đọc ví dụ → kiểm tra → ôn lại theo lịch. Các nút đã thuộc/chưa thuộc dùng chung tiến độ với thẻ từ và SRS.','hint');overview.append(steps);
  const m=measure(l,p),meter=el('section',undefined,'lesson-mastery');
  meter.append(el('strong','Tiến độ bài · '+m.percent+'%'));const bar=el('progress');bar.max=100;bar.value=m.percent;meter.append(bar,el('p',breakdown(m),'lesson-mastery-breakdown'),el('small',m.quizReady+'/'+ws.length+' từ trả lời đúng 2 lần liên tiếp · '+m.srsReady+'/'+ws.length+' từ ôn đúng 3 lần cách nhau ít nhất 24 giờ.'+(l.miniReviewKeys?' · Ôn ngắn: '+m.miniReady+'/'+l.miniReviewKeys.length+' tác vụ hoàn thành.':'')));
+ masteryChips(meter,m,ws.length,l.miniReviewKeys?.length||0);
  overview.append(meter);
  const actions=el('div',undefined,'lesson-actions');actions.append(button('Kiểm tra từ bài này',()=>{close(true);api().quiz(ws,'HSK '+hsk+' · Bài '+l.number,l.id);}),button('Ôn SRS bài này',()=>{close(true);api().srs(ws,l.id);}),button(m.read?'✓ Đã học qua':'Đánh dấu đã học qua',()=>save(l.id,{read:true,completed:false})));overview.append(actions);
  const card=el('article',undefined,'lesson-card');vocabRoot.append(card);
@@ -91,7 +93,7 @@ function renderLesson(l,p){
  const navigation=el('div',undefined,'lesson-actions'),ls=course().lessons,position=ls.indexOf(l);if(position>0)navigation.append(button('← Bài trước',()=>select(ls[position-1])));if(position<ls.length-1)navigation.append(button('Bài tiếp →',()=>select(ls[position+1])));root.append(navigation);
 }
 function languageLine(x){
- const row=el('div',undefined,'lesson-language-line'),heading=el('div',undefined,'lesson-language-heading');heading.append(el('p',(x.speaker?x.speaker+': ':'')+x.cn,'lesson-cn'));if(window.HSKSpeech)heading.append(window.HSKSpeech.button(x.cn,'Nghe câu tiếng Trung'));row.append(heading);
+ const row=el('div',undefined,'lesson-language-line'),heading=el('div',undefined,'lesson-language-heading'),cn=el('p',undefined,'lesson-cn');if(x.speaker)cn.append(document.createTextNode(x.speaker+': '));const vocabulary=selected?matched(selected).filter(w=>w.han).sort((a,b)=>b.han.length-a.han.length):[];let at=0,plain='';while(at<x.cn.length){const w=vocabulary.find(w=>x.cn.startsWith(w.han,at));if(!w){plain+=x.cn[at++];continue;}if(plain){cn.append(document.createTextNode(plain));plain='';}const term=el('span',w.han,'lesson-tap-word');term.onclick=()=>window.HSKMobileUX?.word(w,term);term.onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&document.body.classList.contains('mobile-ux')){e.preventDefault();term.click();}};cn.append(term);at+=w.han.length;}if(plain)cn.append(document.createTextNode(plain));heading.append(cn);if(window.HSKSpeech)heading.append(window.HSKSpeech.button(x.cn,'Nghe câu tiếng Trung'));row.append(heading);
  for(const [label,value,cls] of [['pinyin',x.pin,'lesson-pinyin'],['nghĩa',x.vi,'lesson-meaning']]){
   const details=el('details',undefined,'lesson-language-help'),summary=el('summary');summary.append(el('span',label),el('span','↓','lesson-help-arrow'));details.append(summary,el('p',value,cls));row.append(details);
  }
@@ -122,7 +124,7 @@ function contentShell(l,p){
  return views;
 }
 function renderContentPractice(l,view){
- if(l.content.miniReview&&window.HSKLessonMini)window.HSKLessonMini.mount(view,l,{read:()=>progress()[l.id]||{},persist:value=>save(l.id,value,false),changed:()=>{const m=measure(l),meter=root.querySelector('.lesson-mastery');if(meter){const total=matched(l).length;meter.querySelector('strong').textContent='Tiến độ bài · '+m.percent+'%';meter.querySelector('progress').value=m.percent;meter.querySelector('.lesson-mastery-breakdown').textContent=breakdown(m);meter.querySelector('small').textContent=m.quizReady+'/'+total+' từ trả lời đúng 2 lần liên tiếp · '+m.srsReady+'/'+total+' từ ôn đúng 3 lần cách nhau ít nhất 24 giờ · Ôn ngắn: '+m.miniReady+'/'+l.miniReviewKeys.length+' tác vụ hoàn thành.';}}});
+ if(l.content.miniReview&&window.HSKLessonMini)window.HSKLessonMini.mount(view,l,{read:()=>progress()[l.id]||{},persist:value=>save(l.id,value,false),changed:()=>{const m=measure(l),meter=root.querySelector('.lesson-mastery');if(meter){const total=matched(l).length;masteryChips(meter,m,total,l.miniReviewKeys.length);meter.querySelector('strong').textContent='Tiến độ bài · '+m.percent+'%';meter.querySelector('progress').value=m.percent;meter.querySelector('.lesson-mastery-breakdown').textContent=breakdown(m);meter.querySelector('small').textContent=m.quizReady+'/'+total+' từ trả lời đúng 2 lần liên tiếp · '+m.srsReady+'/'+total+' từ ôn đúng 3 lần cách nhau ít nhất 24 giờ · Ôn ngắn: '+m.miniReady+'/'+l.miniReviewKeys.length+' tác vụ hoàn thành.';}}});
  const qs=l.content.practice,done=progress()[l.id]?.contentEvidence||{};
  view.append(el('h4','Kiểm tra hiểu bài'),el('p',qs.length+' câu về cấu trúc, giao tiếp và đọc hiểu; câu ghi “đoạn ngắn khởi động” dựa trên mục đó ở Bài đọc. Câu sai có giải thích; trả lời đúng hai lần liên tiếp cho từng câu mới đạt phần điểm hiểu bài.','hint'));
  let order=[...qs].sort((a,b)=>(done[a.id]?.streak||0)-(done[b.id]?.streak||0)),position=0,answered=false;const stage=el('div',undefined,'lesson-test');view.append(stage);
