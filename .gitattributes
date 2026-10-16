@@ -1,0 +1,6 @@
+# Keep the shared AI context byte-identical across Windows and other Git clients.
+AGENTS.md text eol=lf
+CLAUDE.md text eol=lf
+GEMINI.md text eol=lf
+.github/copilot-instructions.md text eol=lf
+docs/ai/*.md text eol=lf
