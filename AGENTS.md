@@ -2,7 +2,7 @@
 
 Source of truth: `https://github.com/trungxemcode/hsk`, branch `main`.
 Preferred workspace on this Windows PC: `C:\Users\LENOVO\hsk`.
-This is the **only supported local HSK checkout**. The former `C:\New folder\hsk` checkout was consolidated and should not be used. Serena and RTK are installed for this Windows user; `.serena/` and other machine-local agent configurations are ignored by Git.
+The older `C:\New folder\hsk` is a secondary checkout, not a separate app or source of truth.
 
 ## Start a coding task (fast)
 1. Read this file. Run `git status -sb`, `git branch --show-current`, and `git log -1 --oneline` in the current checkout.
@@ -22,6 +22,7 @@ This is the **only supported local HSK checkout**. The former `C:\New folder\hsk
 - Run narrow unit/DOM tests for edited modules first, then regression checks for shared UI/data changes.
 - Server tests: `node --test server/*.test.mjs` (PowerShell: `node --test (Get-ChildItem server -Filter '*.test.mjs').FullName`).
 - Useful UI checks (Playwright): `tools/check-home-overview-ui.cjs`, `tools/check-responsive-goal-ui.cjs`, `tools/check-mobile-ux-ui.cjs`, `tools/check-ai-loading-ui.cjs`. See `.github/workflows/studio-ui.yml` for the full CI set.
+- **Release naming (user policy):** the new release line starts at `3.1.1`. Increment the last component for fixes/improvements within an existing feature, or the middle component for a major feature addition (reset last to 1). Keep major `3` until the user explicitly requests a change. Label releases `Bản X.Y.Z (Nội dung cập nhật)`.
 - **PWA release:** code merge alone does not refresh installed phones. After user approval to release changed site assets, bump the version and hashes with `build-version.py`, include `offline.js`, `offline-worker.js`, `OneSignalSDKWorker.js`, `app-version.json` and confirm Pages deployment. Do not bump versions for documentation-only commits.
 
 ## Token-efficient handoff

@@ -4,10 +4,10 @@ from pathlib import Path
 root=Path(__file__).resolve().parent
 parser=argparse.ArgumentParser();parser.add_argument('--version');parser.add_argument('--release');parser.add_argument('--note');args=parser.parse_args()
 previous=json.loads((root/'app-version.json').read_text(encoding='utf-8')) if (root/'app-version.json').exists() else {}
-if args.release and not re.fullmatch(r'\d+\.\d{2}',args.release):raise SystemExit('Release must look like 2.01')
+if args.release and not re.fullmatch(r'\d+\.\d+\.\d+',args.release):raise SystemExit('Release must look like 3.1.1')
 if bool(args.release)!=bool(args.note):raise SystemExit('Provide --release and --note together')
 if args.note and (len(args.note)>100 or '\n' in args.note):raise SystemExit('Release note must be one short line')
-if args.version and args.version!=previous.get('version') and previous.get('release') and not args.release:raise SystemExit('New releases require --release 2.02 --note "Nội dung cập nhật"')
+if args.version and args.version!=previous.get('version') and previous.get('release') and not args.release:raise SystemExit('New releases require --release 3.1.2 --note "Nội dung cập nhật"')
 if args.version:
  if not re.fullmatch(r'hsk-offline-[a-zA-Z0-9-]+',args.version):raise SystemExit('Invalid version')
  for name in ('offline.js','offline-worker.js','OneSignalSDKWorker.js'):
