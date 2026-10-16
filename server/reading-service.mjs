@@ -1,7 +1,6 @@
 // Real-world reading adaptation. Source URLs are allowlisted and checked on server; no arbitrary URL fetches.
 export const READING_SOURCES=Object.freeze([
- {id:'breakfast',hskMin:2,hskMax:5,topic:'Ăn uống',site:'36Kr',url:'https://www.36kr.com/p/1470282839229576'},
- {id:'coffee',hskMin:3,hskMax:6,topic:'Đời sống',site:'China Daily',url:'https://cn.chinadaily.com.cn/a/202605/02/WS69f564a5a310942cc49aa8f6.html'},
+ {id:'breakfast',hskMin:2,hskMax:6,topic:'Ăn uống',site:'36Kr',url:'https://www.36kr.com/p/1470282839229576'},
  {id:'life-change',hskMin:1,hskMax:4,topic:'Đời sống',site:'Mandarin Bean',url:'https://mandarinbean.com/change-of-life/'},
  {id:'ask-leave',hskMin:1,hskMax:4,topic:'Công việc',site:'Mandarin Bean',url:'https://mandarinbean.com/ask-for-leave/'}
 ]);
@@ -41,7 +40,7 @@ export async function buildReadingStory(body,{fetchFn,env,signal,model,random=Ma
  const source=chooseReadingSource(body,random);
  if(!source)return {status:404,data:{error:'Chưa có nguồn phù hợp cấp HSK này.'}};
  const canonical=new URL(source.url);
- if(canonical.protocol!=='https:'||!['www.36kr.com','cn.chinadaily.com.cn','mandarinbean.com'].includes(canonical.hostname)||canonical.port||canonical.username||canonical.password)return {status:400,data:{error:'Nguồn không được phép.'}};
+ if(canonical.protocol!=='https:'||!['www.36kr.com','mandarinbean.com'].includes(canonical.hostname)||canonical.port||canonical.username||canonical.password)return {status:400,data:{error:'Nguồn không được phép.'}};
  let text='';
  try{
   // Jina acts as a text extractor. It receives only a strict allowlisted public URL.

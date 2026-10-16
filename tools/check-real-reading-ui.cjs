@@ -43,7 +43,7 @@ const SAMPLE={
    await page.evaluate(x=>{document.documentElement.dataset.theme=x;window.HSKRealReading.leaveLesson();window.HSKStudio.navigate('real-reading')},theme);
    assert.equal(await page.locator('#realReadingPanel').isVisible(),true);
    assert.equal(await page.locator('#rrHsk').inputValue(),'3');
-   assert.equal(await page.locator('#rrSourceList a').count(),4);
+   assert.equal(await page.locator('#rrSourceList a').count(),3);
    assert.equal(await page.locator('#rrArticle').isVisible(),false);
    await page.locator('#rrNew').click();
    assert.match(await page.locator('#rrStatus').innerText(),/Đăng nhập/,'must not call AI for guests without cached stories');

@@ -8,7 +8,7 @@ Phạm vi: nhánh `feature/real-reading-player-3-3` từ thiết kế PR #74; **
 - `real-reading-variety-core.js` chọn bài cache chưa đọc trước, chặn trùng ID/đoạn Hanzi gần giống, luân phiên nguồn + chủ đề + góc nhìn khi cache thiếu.
 - `real-reading.js` lưu lịch sử (`hsk-real-reading-history-v1:<uid>`) và bài chuyển thể trên **thiết bị hiện tại** (`hsk-real-reading-cache-v1:<uid>`), giới hạn 400 lịch sử và 18 bản đầy đủ. Mở/hoàn thành tách riêng, không chạm cơ chế lưu SRS hay đánh giá bài chuẩn.
 - Worker `POST /reading-next`: xác thực Firebase theo luồng có sẵn; kiểm tra chính xác ID bài nguồn trong danh sách cho phép; đọc source thông qua Jina Reader; gửi văn bản đã giới hạn độ dài cho Gemini; yêu cầu output JSON theo HSK và từ vựng bài; kiểm tra tối thiểu cấu trúc Hán/pinyin/Vi và 3 câu hỏi rồi trả về **kịch bản chuyển thể** (không nhận là lời trích gốc). Không sao chép nội dung toàn văn sang kho công khai.
-- Nhóm nguồn ban đầu: 36Kr (bữa sáng), China Daily (văn hóa cà phê), Mandarin Bean (thay đổi cuộc sống, xin nghỉ). HSK 1/6 có nguồn ít và chất lượng chuyên môn cần kiểm duyệt bổ sung.
+- Nhóm nguồn ban đầu: 36Kr (bữa sáng), Mandarin Bean (thay đổi cuộc sống, xin nghỉ). HSK 1/6 có nguồn ít và chất lượng chuyên môn cần kiểm duyệt bổ sung.
 
 ## Điều kiện vận hành / chưa hoàn thiện
 - Frontend có route và PWA asset nhưng chỉ tạo bài mới nếu **người học đã đăng nhập**, Worker thực sự đã được cập nhật/deploy và khóa Gemini hợp lệ. Nếu Worker trả 404, AI chưa được triển khai ở backend. Trình duyệt không biết/không giữ khóa Gemini.

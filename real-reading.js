@@ -6,8 +6,7 @@
  const panel=document.createElement('section');
  panel.id='realReadingPanel';panel.className='panel rr-panel';panel.dataset.studioHubPanel='real-reading';panel.hidden=true;
  const sources=[
-  {id:'breakfast',source:{id:'breakfast',url:'https://www.36kr.com/p/1470282839229576'},hskMin:2,hskMax:5,site:'36Kr',topic:'Ăn uống'},
-  {id:'coffee',source:{id:'coffee',url:'https://cn.chinadaily.com.cn/a/202605/02/WS69f564a5a310942cc49aa8f6.html'},hskMin:3,hskMax:6,site:'China Daily',topic:'Đời sống'},
+  {id:'breakfast',source:{id:'breakfast',url:'https://www.36kr.com/p/1470282839229576'},hskMin:2,hskMax:6,site:'36Kr',topic:'Ăn uống'},
   {id:'life-change',source:{id:'life-change',url:'https://mandarinbean.com/change-of-life/'},hskMin:1,hskMax:4,site:'Mandarin Bean',topic:'Đời sống'},
   {id:'ask-leave',source:{id:'ask-leave',url:'https://mandarinbean.com/ask-for-leave/'},hskMin:1,hskMax:4,site:'Mandarin Bean',topic:'Công việc'}
  ];
