@@ -29,6 +29,7 @@ function mount(host,lesson,words,store){
   }update();if(running)run();
  }
  settings.append(el('summary','Tốc độ & giọng đọc'));const speedLabel=el('label','Tốc độ chuyển: '),select=el('select');select.setAttribute('aria-label','Tốc độ học tự động');for(const [value,label] of [[.75,'Chậm'],[1,'Vừa'],[1.5,'Nhanh']]){const o=el('option',label);o.value=value;select.append(o);}select.value='1';select.onchange=()=>{speed=Number(select.value);clear();if(running)run();};speedLabel.append(select);const audioLabel=el('label'),check=el('input');check.type='checkbox';check.onchange=()=>{audio=check.checked;clear();if(running)run();};audioLabel.append(check,document.createTextNode('Tự đọc tiếng Trung'));settings.append(speedLabel,audioLabel);controls.append(back,play,next);box.append(meter,bar,body,feedback,notice,controls,settings,exit);host.append(box);
+ box.addEventListener('toggle',e=>{if(e.target.open&&running){running=false;clear();update();notice.textContent='Đã tạm dừng để bạn xem chi tiết.';}},true);
  const visibility=()=>{if(document.hidden){running=false;clear();update();}},onLeave=()=>{running=false;clear();update();};document.addEventListener('visibilitychange',visibility);window.addEventListener('pagehide',onLeave);window.addEventListener('hsk-account-ready',onLeave);
  dispose=()=>{dead=true;clear();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('pagehide',onLeave);window.removeEventListener('hsk-account-ready',onLeave);};draw();
 }

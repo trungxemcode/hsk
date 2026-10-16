@@ -18,6 +18,11 @@ function plan(lesson,words){
  for(const q of c.practice||[])steps.push({kind:'check',title:'Vận dụng trong bài',question:q,lines:q.source==='warmup'?c.warmupReading?.lines||[]:c.reading?.lines||[]});
  return steps;
 }
-function duration(step,speed=1){const text=JSON.stringify(step);return Math.max(5000,Math.min(90000,2500+text.length*55))/Math.max(.75,Math.min(1.5,Number(speed)||1));}
+function duration(step,speed=1){let ms;
+ if(step.words)ms=6000+step.words.length*4500;
+ else if(step.lines)ms=5000+step.lines.reduce((n,x)=>n+(x.cn||'').length*170+(x.vi||'').length*45,0);
+ else {const g=step.grammar||{};ms=5000+[(g.pattern||''),(g.usage||''),(g.error||''),...(g.examples||[]).map(x=>x.cn+' '+x.vi)].join(' ').length*65;}
+ return Math.max(6000,Math.min(90000,ms))/Math.max(.75,Math.min(1.5,Number(speed)||1));}
+
 const api={plan,duration};root.HSKGuidedCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window==='object'?window:globalThis);
