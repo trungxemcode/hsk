@@ -7,7 +7,7 @@ Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-
 | --- | --- | --- |
 | Entry/shell | `index.html`, `loader.js`, `app.js` | Static HTML, CSS, vanilla JS; no frontend build required |
 | Navigation | `studio.js`, `studio-layout.css` | Existing panels, sidebar, mobile routes |
-| Home 2.16 | `home-overview.js/css`, `docs/OVERVIEW-2.16.md` | Single learning CTA, 2×2 shortcuts, real progress and compact vocabulary |
+| Home 2.16 | `home-overview.js/css`, `docs/OVERVIEW-2.16.md` | Single learning CTA, 2×2 shortcuts, real progress and compact vocabulary. Daily-word summary has persistent 8px vertical / 12px horizontal padding so purple press/focus never hugs the text (2.18). |
 | Mobile | `mobile-ux.js/css`, `mobile-layout.js/css`, `mobile-dock.js` | Focus modes, tabs, dialog and touch behavior |
 | Visual tokens | `style.css`, `ui-buttons.css` | Neutral buttons, purple active state; light/dark. Disclosure press states follow their parent card radius, standalone summaries use the button radius; no global overflow clipping (2.17). |
 | HSK target/filter | `planner.js`, `planner-core.js`, `studio.js` | Learning goal and vocabulary search filter are intentionally independent |
