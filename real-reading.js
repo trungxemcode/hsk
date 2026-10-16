@@ -117,7 +117,7 @@
   }catch(error){if(request===controller)setState(error.name==='AbortError'?'Tải bài quá lâu. Thử lại khi mạng ổn định.':error.message);}
   finally{clearTimeout(timeout);if(request===controller){request=null;newButton.disabled=false;cancelButton.hidden=true;panel.removeAttribute('aria-busy');}}
  }
- function cancel(){request?.abort();request=null;newButton.disabled=false;cancelButton.hidden=true;panel.removeAttribute('aria-busy');window.HSKSpeech?.stop?.();}
+ function cancel(){request?.abort();request=null;newButton.disabled=false;cancelButton.hidden=true;panel.removeAttribute('aria-busy');setState('');window.HSKSpeech?.stop?.();}
  function enter(){
   if(owner()!==openedOwner)loadHistory();
   if(!level.value)level.value=String(studyGoal());

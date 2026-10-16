@@ -98,6 +98,8 @@ const SAMPLE={
   assert.equal(await page.evaluate(()=>!!window.HSKLoading?.active),false);
   await page.locator('#rrCancel').click();await page.waitForFunction(()=>!document.querySelector('#rrNew').disabled);
   assert.equal(submissions.length,before);assert.match(await page.locator('#rrStatus').innerText(),/Đã hủy/);
+  await page.locator('#rrNew').click();await page.locator('#rrCancel').waitFor({state:'visible'});await page.locator('#rrTopic').selectOption('Đời sống');
+  assert.equal(await page.locator('#rrNew').isDisabled(),false);assert.equal(await page.locator('#rrStatus').innerText(),'');assert.equal(submissions.length,before);
   await page.evaluate(()=>{HSKAccountDashboard.user.getIdToken=async()=>'mock-token';});
   await page.unroute('https://example-worker.test/reading-next');
   await page.route('https://example-worker.test/reading-next',r=>r.fulfill({status:400,contentType:'application/json',body:JSON.stringify({error:'Yêu cầu bài đọc chưa hợp lệ.'})}));
