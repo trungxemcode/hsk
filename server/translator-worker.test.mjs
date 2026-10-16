@@ -173,6 +173,9 @@ test('deployment config targets the existing Worker and preserves dashboard vari
  assert.equal(config.placement.region,'gcp:us-east4');
  assert.equal(config.keep_vars,true);
  assert.equal(config.vars.AI_CONTROL_REQUIRED,'true');
+ assert.equal(config.vars.SECONDARY_AI_PROVIDER,'xkiro');
+ assert.equal(config.vars.SECONDARY_AI_MODEL,'qwen/qwen-plus-2025-07-28:free');
+ assert.equal(config.vars.AI_BACKUP_ENABLED,'true');
  assert.equal(Number(config.vars.AI_GLOBAL_DAILY_LIMIT)>0,true);
  assert.ok(Number(config.vars.AI_GLOBAL_MINUTE_LIMIT)<=12);
  assert.equal(config.durable_objects.bindings[0].name,'AI_CONTROL');
