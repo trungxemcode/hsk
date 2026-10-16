@@ -28,7 +28,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await page.locator('.ps-extras').count(),0,'no redundant direct-mode section');
    await disclosure.locator('summary').click();
    assert.equal(await disclosure.evaluate(el=>el.open),true);
-   const amount=await picker.locator('.ps-option input').count();assert.equal(amount,12);
+   const amount=await picker.locator('.ps-option input').count();assert.equal(amount,10);
    if(width<721){
     const layout=await picker.locator('.ps-options').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length);
     assert.equal(layout,2,'mobile mode choices form a compact two-column grid');
@@ -49,10 +49,10 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await picker.locator('#practiceStartModes').isDisabled(),true);
    await picker.locator('[data-practice-option=match-game] input').check();
    await picker.locator('[data-practice-option=sentence-game] input').check();
-   assert.match(await picker.locator('#practiceSelectedCount').innerText(),/2 \/ 12/);
+   assert.match(await picker.locator('#practiceSelectedCount').innerText(),/2 \/ 10/);
    await disclosure.locator('summary').click();
    assert.equal(await disclosure.evaluate(el=>el.open),false,'can collapse after choosing');
-   assert.equal(await picker.locator('#practiceStartModes').isVisible(),true,'start accessible without expanding');
+   assert.equal(await picker.locator('#practiceStartModes').isVisible(),false,'start hidden with its collapsed group');await disclosure.locator('summary').click();
    await picker.locator('#practiceStartModes').click();
    assert.equal(await page.locator('#matchGamePanel').isVisible(),true);
    assert.match(await page.locator('#practiceSessionStep').innerText(),/1 \/ 2/);
@@ -70,7 +70,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await picker.locator('.ps-option input:checked').count(),1);
    await disclosure.locator('summary').click();
    assert.equal(await disclosure.evaluate(el=>el.open),false);
-   await picker.locator('#practiceStartModes').click();
+   await disclosure.locator('summary').click();await picker.locator('#practiceStartModes').click();
    assert.equal(await page.locator('#study4PracticePanel').isVisible(),true);
    assert.equal(await page.locator('#study4Level').inputValue(),'3');
    const url=await page.locator('.s4-visit').getAttribute('href');
@@ -87,10 +87,40 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.locator('#practiceSessionStop').click();
    await page.evaluate(()=>HSKStudio.navigate('practice'));
    assert.equal(await disclosure.evaluate(el=>el.open),false,'single mode starts from collapsed picker');
-   assert.equal(await picker.locator('#practiceStartModes').isVisible(),true);
+   assert.equal(await picker.locator('#practiceStartModes').isVisible(),false);
    assert.equal(await page.locator('#studioReview').isVisible(),false);
    assert.equal(await page.locator('#practiceGroup').isVisible(),false);
    assert.equal(await page.locator('#practiceSessionBar').isVisible(),false);
+   // Ôn has identical scoped selection; expanding either group closes its sibling.
+   const review=page.locator('#reviewModeDisclosure');assert.equal(await review.evaluate(d=>d.open),false);
+   assert.equal(await page.locator('#reviewStartModes').isVisible(),false);
+   await disclosure.locator('summary').click();await review.locator('summary').click();
+   await page.waitForFunction(()=>!document.querySelector('#practiceModeDisclosure').open);
+   assert.equal(await page.locator('#reviewModeOptions input').count(),2);
+   const storedPractice=await picker.locator('input:checked').count();
+   await page.locator('#reviewClearAll').click();assert.equal(await page.locator('#reviewStartModes').isDisabled(),true);
+   await page.locator('#reviewSelectAll').click();assert.equal(await page.locator('#reviewModeOptions input:checked').count(),2);
+   assert.equal(await picker.locator('input:checked').count(),storedPractice,'review selection must not alter practice');
+   const records=await page.evaluate(()=>localStorage.getItem('hsk-flashcards-progress-v1'));
+   await page.locator('#reviewStartModes').click();assert.equal(await page.locator('#srsPanel').isVisible(),true);
+   assert.match(await page.locator('#practiceSessionStep').innerText(),/Lượt ôn 1 \/ 2/);
+   await page.locator('#practiceSessionNext').click();assert.equal(await page.locator('#mistakesPanel').isVisible(),true);
+   await page.locator('#practiceSessionNext').click();
+   assert.equal(await page.evaluate(()=>localStorage.getItem('hsk-flashcards-progress-v1')),records,'opening review does not write progress');
+   assert.equal(await review.evaluate(d=>d.open),false);assert.equal(await disclosure.evaluate(d=>d.open),false);
+   // The start action belongs after its options and scrolls with content, not over tiles.
+   await disclosure.locator('summary').click();
+   const geometry=await picker.evaluate(n=>{const row=n.querySelector('.ps-start-row'),options=n.querySelector('.ps-options'),r=row.getBoundingClientRect();return {position:getComputedStyle(row).position,top:r.top,optionsBottom:options.getBoundingClientRect().bottom};});
+   assert.equal(geometry.position,'static');assert.ok(geometry.top>=geometry.optionsBottom);
+   if(width<721)await page.setViewportSize({width,height:560});
+   await page.locator('#practiceStartModes').scrollIntoViewIfNeeded();
+   const beforeY=(await page.locator('#practiceStartModes').boundingBox()).y;
+   await page.evaluate(()=>{const n=document.querySelector('.workspace');n.scrollTo({top:n.scrollTop-80,behavior:'instant'});});
+   const afterY=(await page.locator('#practiceStartModes').boundingBox()).y;
+   if(width<721)assert.ok(afterY>beforeY+30,'start button must move with content scroll');
+   await page.screenshot({path:'/tmp/practice-picker-'+width+'-'+theme+'.png'});
+   if(width<721)await page.setViewportSize({width,height:900});
+   await disclosure.locator('summary').click();
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
    assert.equal(overflow,false,'no viewport overflow');
   }
