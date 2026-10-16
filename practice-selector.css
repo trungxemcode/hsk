@@ -1,0 +1,76 @@
+/* Native multi-mode picker, consistent pictogram icons and sourced HSK mock exams. */
+#studioPractice .ps-picker{display:grid;gap:16px;min-width:0;margin-bottom:26px}
+#studioPractice .ps-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#studioPractice .ps-heading h2{font-size:clamp(22px,3vw,28px);margin:0;color:var(--ink);line-height:1.25}
+#studioPractice .ps-eyebrow{color:var(--accent);font-size:12px;font-weight:750;margin:0 0 5px}
+#studioPractice .ps-description{color:var(--sub);font-size:13px;line-height:1.5;margin:7px 0 0}
+#studioPractice .ps-level{color:var(--accent-dark);background:var(--accent-light);border-radius:var(--radius-btn);font-size:13px;font-weight:750;padding:10px 12px;white-space:nowrap}
+#studioPractice .ps-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+#studioPractice .ps-tools>span{font-size:13px;color:var(--muted);font-weight:650}
+#studioPractice .ps-tools>div{display:flex;gap:8px}
+#studioPractice .ps-tools button,#studioPractice .ps-session-actions button{border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);padding:9px 12px;min-height:40px;color:var(--ink);font-size:13px;font-weight:650}
+#studioPractice .ps-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#studioPractice .ps-option{position:relative;display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-btn);padding:14px 12px;min-width:0;min-height:88px;cursor:pointer;transition:border-color .15s,background .15s}
+#studioPractice .ps-option.is-selected{background:var(--accent-light);border-color:var(--accent)}
+#studioPractice .ps-option input{position:absolute;left:12px;top:12px;opacity:0;width:18px;height:18px}
+#studioPractice .ps-option:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+#studioPractice .ps-icon,#studioPractice .hub-card .ps-hub-icon{display:grid!important;place-items:center!important;align-items:center!important;justify-items:center!important;flex:none;width:54px;height:54px;min-width:54px;min-height:54px;border-radius:var(--radius-btn);background:var(--accent-light);color:var(--accent-dark)}
+#studioPractice .ps-icon svg,#studioPractice .hub-card .ps-hub-icon svg{display:block;width:26px;height:26px;flex:none;stroke:currentColor!important;stroke-width:1.8}
+#studioPractice .ps-copy{display:grid;min-width:0;gap:5px;align-content:center}
+#studioPractice .ps-copy strong{font-size:15px;color:var(--ink);font-weight:750;line-height:1.3}
+#studioPractice .ps-copy small{font-size:12px;color:var(--sub);line-height:1.5;overflow-wrap:anywhere}
+#studioPractice .ps-check{flex:none;align-self:flex-start;margin-left:auto;display:grid;place-items:center;border:1px solid var(--line);border-radius:var(--radius-pill,50%);width:23px;height:23px;font-size:13px;color:var(--surface);background:var(--surface)}
+#studioPractice .ps-option.is-selected .ps-check{background:var(--accent);border-color:var(--accent);color:var(--palette-white)}
+#studioPractice .ps-start-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+#studioPractice .ps-start-row p{color:var(--muted);font-size:13px;margin:0}
+#studioPractice .ps-start{background:var(--accent);color:var(--palette-white);border:1px solid var(--accent);border-radius:var(--radius-btn);min-height:48px;padding:11px 22px;font-size:14px;font-weight:750}
+#studioPractice .ps-start:disabled{opacity:.45;cursor:not-allowed}
+#studioPractice .ps-extras{margin-top:2px;padding:10px 0;color:var(--sub);font-size:13px}
+#studioPractice .ps-extras strong{font-size:14px;color:var(--accent-dark)}
+#studioPractice .ps-extras p{margin:6px 0 0}
+#studioPractice .hub-card .ps-hub-icon{width:54px;min-width:54px;height:54px;min-height:54px}
+#studioPractice .hub-card .hub-symbol.ps-hub-icon,#studioPractice .hub-card .hub-visual.ps-hub-icon{background:var(--accent-light)!important;color:var(--accent-dark)!important}
+#practiceSessionBar[hidden]{display:none!important}
+#practiceSessionBar{display:flex;position:sticky;top:0;z-index:25;justify-content:space-between;align-items:center;gap:12px;margin:0 0 14px;padding:12px 15px;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-btn)}
+#practiceSessionBar .ps-session-label{display:grid;gap:4px}
+#practiceSessionBar .ps-session-label strong{font-size:13px;color:var(--accent)}
+#practiceSessionBar .ps-session-label span{color:var(--ink);font-size:14px}
+#practiceSessionBar .ps-session-actions{display:flex;align-items:center;gap:8px}
+#practiceSessionBar .ps-session-actions button{border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);padding:8px 12px;min-height:42px;font-weight:700}
+#practiceSessionBar #practiceSessionNext{background:var(--accent);color:var(--palette-white);border-color:var(--accent)}
+.study4-exam-panel{max-width:930px;margin:auto}
+.study4-exam-panel[hidden]{display:none!important}
+.study4-exam-panel .s4-head h2{font-size:clamp(24px,3vw,32px);margin:0;color:var(--ink)}
+.study4-exam-panel .s4-head p{font-size:14px;color:var(--sub);line-height:1.5}
+.study4-exam-panel .s4-controls{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:20px 0}
+.study4-exam-panel .s4-controls label{display:grid;gap:8px;color:var(--sub);font-size:13px;font-weight:700}
+.study4-exam-panel .s4-controls select{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-btn);padding:12px;color:var(--ink);font:inherit;min-width:120px}
+.study4-exam-panel .s4-tabs{display:flex;gap:8px}
+.study4-exam-panel .s4-tabs button{border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);min-height:44px;padding:10px 14px;font-weight:700}
+.study4-exam-panel .s4-tabs button.is-active{background:var(--accent);border-color:var(--accent);color:var(--palette-white)}
+.study4-exam-panel .s4-test-card{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-card);padding:22px;display:grid;justify-items:start;gap:12px}
+.study4-exam-panel .s4-brow{font-size:12px;font-weight:750;color:var(--accent)}
+.study4-exam-panel .s4-test-card h3{font-size:clamp(18px,2.5vw,23px);color:var(--ink);margin:0}
+.study4-exam-panel .s4-test-card p{margin:0;font-size:14px;color:var(--sub);line-height:1.65}
+.study4-exam-panel .s4-visit{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:var(--radius-btn);background:var(--accent);color:var(--palette-white);font-weight:750;padding:11px 17px;text-decoration:none}
+.study4-exam-panel .s4-library{color:var(--accent-dark);font-size:13px;font-weight:700;text-decoration:underline}
+.study4-exam-panel .s4-credit{font-size:12px;color:var(--muted);margin:12px 0}
+.study4-exam-panel .s4-credit a{color:var(--accent-dark)}
+.study4-exam-panel .s4-internal{background:var(--surface);color:var(--accent-dark);border:1px solid var(--line);border-radius:var(--radius-btn);min-height:44px;padding:10px 12px;font-weight:700}
+@media(max-width:720px){
+ #studioPractice .ps-options{grid-template-columns:1fr}
+ #studioPractice .ps-option{min-height:80px}
+ #studioPractice .ps-tools{gap:8px}
+ #studioPractice .ps-option .ps-icon{width:52px;height:52px;min-width:52px;min-height:52px}
+ #practiceSessionBar{position:sticky;top:0;flex-wrap:wrap;padding:10px}
+ #practiceSessionBar .ps-session-actions{width:100%}
+ #practiceSessionBar .ps-session-actions button{flex:1}
+ .study4-exam-panel .s4-controls{align-items:stretch}
+ .study4-exam-panel .s4-tabs{width:100%}
+ .study4-exam-panel .s4-tabs button{flex:1}
+}
+@media(max-width:365px){
+ #studioPractice .ps-heading{flex-wrap:wrap}
+ #studioPractice .ps-icon{width:46px;min-width:46px;height:46px;min-height:46px}
+ #studioPractice .ps-copy strong{font-size:14px}
+}
