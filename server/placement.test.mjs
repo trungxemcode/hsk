@@ -5,3 +5,18 @@ test('a beginner stops after 12 and lower gaps cannot be offset by passing harde
 test('remembering, guessing and unavailable audio produce different evidence',()=>{assert.equal(C.summarize(answers()).level,6);assert.equal(C.summarize(answers(6,'guess')).level,0);const r=C.summarize(answers(3,'sure',true));assert.equal(r.coreLevel,3);assert.equal(r.listeningComplete,false);assert.equal(r.bySkill.listening.n,0);assert.equal(r.confidence,'Cần kiểm chứng thêm');const uneven=answers();uneven.filter(a=>a.skill==='listening'&&a.level>=2).forEach(a=>a.correct=false);assert.equal(C.summarize(uneven).level,1);});
 test('roadmap respects time budgets, includes foundation repairs and avoids nonexistent HSK7',()=>{for(const minutes of [15,30,60,120]){const r=C.roadmap(C.summarize(answers()),minutes,5);assert.equal(r.daily.reduce((n,t)=>n+t.minutes,0),minutes);assert.equal(r.studyLevel,6);assert.equal(r.days,5);assert.equal(r.phases.length,4);}const r=C.roadmap(C.summarize(answers(0).slice(0,12)),0,9);assert.equal(r.minutes,30);assert.equal(r.days,7);assert.equal(r.reviewLevel,1);});
 test('reports and drafts synchronize separately and do not create course or SRS evidence',()=>{const report={version:1,id:'result',createdAt:1,answers:answers(0).slice(0,12),minutes:30,days:6};assert.ok(C.validReport(report));const storage={[C.KEY]:JSON.stringify({version:1,owner:'old',reports:{result:report},draft:{owner:'old',answers:[]}})},captured=A.capture({}, {},storage,10,'device'),out=A.materialize(captured.items,'new');assert.ok(A.supportedId('placement-result:result'));assert.ok(A.supportedId('placement-draft:active'));const restored=JSON.parse(out[C.KEY]);assert.equal(restored.owner,'new');assert.equal(restored.draft.owner,'new');assert.deepEqual(restored.reports.result,report);assert.deepEqual(JSON.parse(out[A.KEYS[0]]).words,{});assert.deepEqual(JSON.parse(out[A.KEYS[4]]).lessons,{});assert.deepEqual(B.validate({version:1,storage},A).storage,storage);assert.equal(C.validReport({...report,answers:report.answers.slice(0,2)}),false);});
+
+test('diagnosis separates demonstrated strengths, weak skills, limited samples and unavailable audio',()=>{
+ const a=answers(6,'sure',true).slice(0,18);a.filter(x=>x.skill==='grammar').forEach(x=>x.correct=false);const p=C.diagnose(a);
+ assert.ok(p.strengths.some(x=>x.skill==='vocab'));assert.ok(p.weaknesses.some(x=>x.skill==='grammar'));
+ assert.equal(p.rows.find(x=>x.skill==='listening').status,'unassessed');assert.equal(p.rows.find(x=>x.skill==='listening').wrong,0);
+ assert.ok(p.limits.some(x=>x.includes('nghe')));assert.ok(p.limits.some(x=>x.includes('Nói')));
+ for(const row of p.strengths)assert.ok(row.evidence.every(id=>a.find(x=>x.id===id).correct&&a.find(x=>x.id===id).confidence==='sure'));
+ const guess=C.diagnose(answers(6,'guess').slice(0,12));assert.equal(guess.strengths.length,0);assert.ok(guess.weaknesses.length);
+ const low=C.diagnose(answers().slice(0,12));assert.equal(low.rows.find(x=>x.skill==='grammar').status,'developing');
+});
+
+test('roadmap repairs earliest real gap even if that HSK level passed, not skipped audio',()=>{
+ const a=answers(6,'sure',true).slice(0,18);a.filter(x=>x.skill==='grammar').forEach(x=>x.correct=false);const r=C.summarize(a);assert.equal(r.coreLevel,3);const road=C.roadmap(r,60,5);assert.equal(road.reviewLevel,1);assert.equal(road.focus,'grammar');assert.equal(road.daily.reduce((n,x)=>n+x.minutes,0),60);
+ const clean=C.summarize(answers(6,'sure',true).slice(0,18));assert.equal(C.roadmap(clean).reviewLevel,4,'unavailable audio must not fabricate a gap');
+});
