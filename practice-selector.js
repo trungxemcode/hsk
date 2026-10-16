@@ -103,7 +103,7 @@
  function launch(id){
   if(id==='writing'){window.HSKStudio?.navigate('practice');if(window.HSKWritingPractice?.open)window.HSKWritingPractice.open();else clickCard('Học viết');}
   else if(id==='placement'){window.HSKStudio?.navigate('practice');clickCard('Đánh giá trình độ');}
-  else if(id==='passive'){window.HSKStudio?.navigate('learn');document.querySelector('#passiveControls')?.scrollIntoView({block:'start'});}
+  else if(id==='passive'){window.HSKStudio?.navigate('practice');clickCard('Học rảnh tay');}
   else window.HSKStudio?.navigate(id);
   updateBar();
  }
