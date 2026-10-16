@@ -471,6 +471,8 @@
   --green:var(--legacy-hex-27845b);
   --red:var(--legacy-hex-cb5760);
   --shadow:0 12px 40px var(--legacy-rgb-13);
+  --shadow-home-cta:0 4px 0 var(--accent-dark);
+  --shadow-home-cta-pressed:0 1px 0 var(--accent-dark);
   --navy:var(--palette-violet-deep);
   --blue:var(--accent);
   --ink-2:var(--legacy-hex-1d4bb8);
