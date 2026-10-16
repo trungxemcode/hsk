@@ -8,9 +8,11 @@
 - Secondary checkout originally contained untracked private/local Serena and Codex notes; preserve them in a separate backup instead of overwriting them. `.serena/` is local and may contain stale notes.
 
 ## Current work
-- Consolidate a short shared AI context. No application logic or PWA assets need changing.
-- Shared context is committed to `main`, then mirrored into the secondary checkout after its original local AI notes are archived outside the repository. Verify Git on every new session; these directories can diverge again after future edits.
-- Follow-on tasks must be requested by the user; no pending feature is implied.
+- Goal: fix square purple press/focus backgrounds in rounded disclosure controls (release 2.17).
+- Paths: `ui-buttons.css`, `tools/check-press-shape-ui.cjs`, UI workflow and generated PWA release metadata.
+- Fix: standalone summaries use the shared button radius; framed summaries use the same radius token as their card, with square lower corners only while expanded. Disable native rectangular tap highlight, retain keyboard outline, geometry and all handlers. Do not globally clip details or change learning data.
+- Verified locally: press shape at 320/390/1440 light/dark; mobile UX at 360/390 and desktop; design-token guard. CI must pass before merge, then verify Pages release and asset hashes.
+- Source baseline: GitHub `58f781c`. This cloud snapshot has no `.git`; use GitHub feature branch/PR and SHA leases. Windows checkouts were not modified in this task.
 
 ## Handoff template (replace this section only when work actually starts)
 - Goal:

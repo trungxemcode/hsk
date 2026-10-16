@@ -7,3 +7,13 @@ html body.studio-enabled button:disabled{background:var(--button-disabled-bg)!im
 html body.studio-enabled button:focus-visible{outline:2px solid var(--button-active-bg);outline-offset:3px}
 body.studio-enabled :is(input[type=checkbox],input[type=radio],progress){accent-color:var(--button-active-bg)}
 body.studio-enabled :is(input,textarea,select):focus-visible{outline:2px solid var(--button-active-bg);outline-offset:2px}
+
+/* A disclosure is a real touch target, not an unshaped rectangle inside its card.
+   Do not clip the whole details element: expanded content and focus rings must remain visible. */
+body.studio-enabled summary{border-radius:var(--radius-btn);background-clip:padding-box;-webkit-tap-highlight-color:var(--palette-clear);transition:background-color .12s ease,color .12s ease}
+/* Use the same tokens as each frame. `inherit` is unreliable through the native details shadow tree. */
+body.studio-enabled :is(.overview-search,.clean-disclosure,.mobile-home-stats)>summary{border-radius:var(--radius-btn)}
+body.studio-enabled .dictionary-row>summary{border-radius:var(--radius-14px)}
+body.studio-enabled .hub-group>summary{border-radius:var(--radius-18px)}
+body.studio-enabled :is(.overview-search,.clean-disclosure,.dictionary-row,.hub-group,.mobile-home-stats)[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0}
+@media(prefers-reduced-motion:reduce){body.studio-enabled summary{transition:none}}
