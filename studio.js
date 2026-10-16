@@ -56,7 +56,18 @@ renderIcons();
  function progress(){return read('hsk-flashcards-progress-v1',{}).words||{};}
  function clearHub(){delete document.body.dataset.studioHub;document.querySelectorAll('[data-studio-hub-panel]').forEach(p=>p.hidden=true);}
  function closeDrawer(){document.body.classList.remove('drawer-open');$('drawer').inert=true;$('drawer').setAttribute('aria-hidden','true');$('menuBtn').setAttribute('aria-expanded','false');}
- function title(name){route=name;$('activeTitle').textContent=labels[name]||'HSK Flashcards';document.querySelectorAll('[data-studio-go]').forEach(b=>{const selected=b.dataset.studioGo===(parents[name]||name);b.classList.toggle('active',selected);if(selected)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});}
+ function title(name){
+  route=name;
+  $('activeTitle').textContent=labels[name]||'HSK Flashcards';
+  document.querySelectorAll('[data-studio-go]').forEach(b=>{
+   // "translator" belongs to the global Search section, but is a distinct local tab.
+   const localTab=!!b.closest('.studio-search-tabs');
+   const selected=b.dataset.studioGo===(localTab?name:(parents[name]||name));
+   b.classList.toggle('active',selected);
+   if(localTab)b.setAttribute('aria-pressed',String(selected));
+   if(selected)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
+  });
+ }
  function coreView(){for(const [cls,name] of [['show-account','account'],['show-admin','admin'],['show-translator','translator'],['show-about','about'],['show-lessons','lessons']])if(document.body.classList.contains(cls))return name;return document.querySelector('.app-tabs [data-mode].active')?.dataset.mode||'learn';}
  function navigate(name){
   if(name==='review')name='practice';
