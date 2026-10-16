@@ -888,6 +888,18 @@ document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListen
 const baseMobileReminder=refreshMemoryDashboard;
 refreshMemoryDashboard=function(){baseMobileReminder();document.querySelector('.memory-reminder').classList.toggle('no-due',$('memoryDueStart').hidden);};
 $('mobileLevel').value=activeLevel;$('mobileMode').value=mode;refreshMemoryDashboard();
+// Select the saved study goal on startup/change, without replacing a manual filter choice on every rerender.
+window.HSKLearningFilter={
+ select(level){
+  const target=Number(level);
+  if(!Number.isInteger(target)||target<1||target>6)return false;
+  const button=document.querySelector('.filter-btn[data-filter="'+target+'"]');
+  if(!button)return false;
+  if(activeLevel!==String(target)){button.onclick();$('mobileLevel').value=activeLevel;}
+  return true;
+ },
+ get level(){return activeLevel;}
+};
 
 // On-device learner: aggregates answers, estimates weakness and adapts review selection.
 const ADAPTIVE_KEY='hsk-adaptive-learning-v1';

@@ -48,12 +48,25 @@ renderIcons();
  decorateControls();new MutationObserver(decorateControls).observe(main,{subtree:true,childList:true});
  const labels={home:'Trang chủ',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện & Ôn',exam:'Bài tập HSK',review:'Luyện & Ôn',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn theo lịch',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
  const parents={learn:'practice',quiz:'practice',compare:'practice',exam:'practice',srs:'practice',mistakes:'practice',translator:'search',about:'home'};
- let ready=false,route='home',lastOwner='',fingerprint='',activityTimer,refreshTimer;
+ let ready=false,route='home',lastOwner='',fingerprint='',activityTimer,refreshTimer,lastGoalScope='';
  function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||'null')||fallback;}catch{return fallback;}}
  function owner(){return read('hsk-account-meta-v1',{}).uid||'guest';}
  function dictionary(){try{return typeof words!=='undefined'?words:[];}catch{return [];}}
  function key(w){return w.learningKey||`${w.hsk}|${w.han}|${w.pin}`;}
  function progress(){return read('hsk-flashcards-progress-v1',{}).words||{};}
+ function studyGoal(){
+  const value=window.HSKPlanner?.plan?.target??read('hsk-studio-target-v1:'+owner(),null);
+  const level=Number(value);
+  return Number.isInteger(level)&&level>=1&&level<=6?level:null;
+ }
+ function syncGoalScope(){
+  const level=studyGoal(),signature=owner()+':'+level;
+  if(!level||!window.HSKLearningFilter||signature===lastGoalScope)return;
+  if(!window.HSKLearningFilter.select(level))return;
+  lastGoalScope=signature;
+  window.HSKLessonNav?.setPreferredLevel?.(level);
+  refresh();
+ }
  function clearHub(){delete document.body.dataset.studioHub;document.querySelectorAll('[data-studio-hub-panel]').forEach(p=>p.hidden=true);}
  function closeDrawer(){document.body.classList.remove('drawer-open');$('drawer').inert=true;$('drawer').setAttribute('aria-hidden','true');$('menuBtn').setAttribute('aria-expanded','false');}
  function title(name){
@@ -117,7 +130,9 @@ renderIcons();
  new MutationObserver(refresh).observe(document.querySelector('.filter-buttons'),{subtree:true,attributes:true,attributeFilter:['class']});
  new MutationObserver(refresh).observe($('adminBtn'),{attributes:true,attributeFilter:['hidden']});
  $('studioTargetLevel').addEventListener('change',()=>{const target=Number($('studioTargetLevel').value);if(window.HSKPlanner?.setTarget){if(!window.HSKPlanner.setTarget(target))$('accountStatus').textContent='Chưa lưu được mục tiêu. Kế hoạch cũ vẫn được giữ.';}else try{localStorage.setItem('hsk-studio-target-v1:'+owner(),JSON.stringify(target));}catch{}refresh();});
- window.addEventListener('hsk-plan-change',()=>refresh());
+ window.addEventListener('hsk-plan-change',()=>{syncGoalScope();refresh();});
+ window.addEventListener('hsk-lessons-ready',syncGoalScope);
+ window.addEventListener('hsk-account-ready',()=>{lastGoalScope='';queueMicrotask(syncGoalScope);});
  document.addEventListener('click',event=>{if(!ready)return;const panel=event.target.closest('#learnPanel,#quizPanel,#srsPanel,#lessonsPanel,#mistakesPanel,#examPractice');if(panel&&event.target.closest('button')){clearTimeout(activityTimer);activityTimer=setTimeout(recordActivity,120);}},true);
  window.addEventListener('storage',()=>{refresh();});window.addEventListener('hsk-account-ready',()=>{lastOwner=owner();fingerprint=snapshot();refresh();});
  // The existing updater owns activation and download readiness; hidden means disabled here.
