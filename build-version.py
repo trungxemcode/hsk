@@ -27,7 +27,7 @@ for name in ('notebook-tools-core.js','notebook-factory.js','notebook-factory.cs
 files=[f for f in files if not f.startswith('content/drive-hsk/') and f not in ('drive-exam-data.json','drive-exam-images.json','ios-transfer.html')]
 for name in ('drive-audio.js','drive-audio-data.json','open-dictionary-core.js','open-dictionary.js','open-dictionary.css','open-dictionary-notice.html'):
  if name not in files:files.append(name)
-for question in json.loads((root/'drive-audio-data.json').read_text())['items']:
+for question in json.loads((root/'drive-audio-data.json').read_text(encoding='utf-8'))['items']:
  if question['audioFile'] not in files:files.append(question['audioFile'])
 for code in sorted({p.split('/')[-1].split('-')[0] for p in json.loads(gzip.decompress((root/'drive-exam-data.json.gz').read_bytes()))['report']['images']}):
  path='content/drive-hsk/'+code+'.json'
