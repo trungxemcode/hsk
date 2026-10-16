@@ -2,7 +2,7 @@
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const SAMPLE={
  id:'mock-lesson-3-01',hsk:3,lessonId:'standard-3-01',topic:'Ăn uống',status:'adapted',
- source:{id:'breakfast',site:'36Kr',url:'https://www.36kr.com/p/1470282839229576'},
+ source:{id:'ask-leave',site:'Mandarin Bean',url:'https://mandarinbean.com/ask-for-leave/'},
  titleZh:'今天的早饭',titleVi:'Bữa sáng hôm nay',
  scriptMode:[
  {speaker:'小王',stageNote:'在公司',hanzi:'你今天早上吃饭了吗？',pinyin:'Nǐ jīntiān zǎoshang chīfàn le ma?',vi:'Sáng nay bạn đã ăn chưa?'},
@@ -43,7 +43,7 @@ const SAMPLE={
    await page.evaluate(x=>{document.documentElement.dataset.theme=x;window.HSKRealReading.leaveLesson();window.HSKStudio.navigate('real-reading')},theme);
    assert.equal(await page.locator('#realReadingPanel').isVisible(),true);
    assert.equal(await page.locator('#rrHsk').inputValue(),'3');
-   assert.equal(await page.locator('#rrSourceList a').count(),3);
+   assert.equal(await page.locator('#rrSourceList a').count(),2);
    assert.equal(await page.locator('#rrArticle').isVisible(),false);
    await page.locator('#rrNew').click();
    assert.match(await page.locator('#rrStatus').innerText(),/Đăng nhập/,'must not call AI for guests without cached stories');

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildReadingStory,checkReadingBody,chooseReadingSource,validReadingStory,READING_SOURCES} from './reading-service.mjs';
+import {buildReadingStory,checkReadingBody,chooseReadingSource,validReadingStory,READING_SOURCES,extractReadingText} from './reading-service.mjs';
 import {createHandler} from './translator-worker-bundled.mjs';
 const sourceText='年轻人今天早上在办公室讨论买早饭和日常工作。有些人很忙，不会每天在家里吃早餐。'.repeat(8);
 const story={
@@ -20,26 +20,34 @@ const story={
 };
 const origin='https://trungxemcode.github.io',env={GEMINI_API_KEY:'test-gemini',FIREBASE_API_KEY:'test-firebase'};
 const jwt='head.'+Buffer.from(JSON.stringify({aud:'hsk-flashcards-44631',iss:'https://securetoken.google.com/hsk-flashcards-44631',sub:'tester',exp:Math.floor(Date.now()/1000)+3600})).toString('base64url')+'.sig';
-const valid={hsk:3,lessonId:'hsk-3-01',sourceId:'breakfast',angle:'gặp đồng nghiệp',lessonWords:[{han:'吃饭',mean:'ăn cơm'}],excludeIds:[],excludeSources:[]};
+const valid={hsk:3,lessonId:'hsk-3-01',sourceId:'ask-leave',angle:'gặp đồng nghiệp',lessonWords:[{han:'吃饭',mean:'ăn cơm'}],excludeIds:[],excludeSources:[]};
 const providerResponse=()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(story)}]}}]});
 function provider({sourceOkay=true,ai=providerResponse}={}){
  const calls=[];const fetchFn=async(url,options={})=>{
   calls.push({url:String(url),options});
   if(String(url).includes('identitytoolkit.googleapis.com'))return Response.json({users:[{localId:'tester'}]});
-  if(String(url).startsWith('https://r.jina.ai/'))return sourceOkay?new Response(sourceText):new Response('Unavailable',{status:503});
+  if(String(url)==='https://mandarinbean.com/ask-for-leave/')return sourceOkay?new Response(sourceText):new Response('Unavailable',{status:503});
   if(String(url).includes('generativelanguage.googleapis.com'))return ai();
   throw Error('Unexpected external request '+url);
  };
  return {calls,fetchFn};
 }
+test('extracts only the simplified Chinese post, not the menu or pinyin',()=>{
+ const ruby=(han,trad,pin)=>'<ruby class="mb-tooltip"><span class="si">'+han+'</span><span class="tr">'+trad+'</span><rt>'+pin+'</rt></ruby>';
+ const html='<html><nav>FAKE MENU: injected</nav><div class="elementor-widget-theme-post-content"><div class="elementor-widget-container"><p>'+ruby('今天','今天','jīntiān')+ruby('吃饭','吃飯','chīfàn')+'。</p><p>'+ruby('我喜欢','我喜歡','wǒ xǐhuan')+'喝茶。</p></div></div><footer>fake answer</footer></html>';
+ const out=extractReadingText(html);
+ assert.match(out,/今天吃饭。/);assert.match(out,/我喜欢喝茶/);
+ assert.doesNotMatch(out,/吃飯|jīntiān|FAKE MENU|fake answer/);
+ assert.equal(extractReadingText('<html><script>evil()</script></html>'),'');
+});
 test('rejects untrusted source IDs, malicious request shape and incomplete HSK',()=>{
  assert.equal(checkReadingBody(valid),true);
  for(const changes of [{hsk:8},{sourceId:'https://internal.test/'},{url:'http://localhost:3000/'},{lessonWords:[{han:'hello',mean:'test'}]},{excludeIds:Array(50).fill('x')},{lessonId:'../private'}]){
   assert.equal(checkReadingBody({...valid,...changes}),false);
  }
  assert.equal(READING_SOURCES.every(x=>new URL(x.url).protocol==='https:'),true);
- assert.equal(chooseReadingSource({hsk:3,sourceId:'breakfast'},()=>0).id,'breakfast');
- assert.equal(chooseReadingSource({hsk:1,sourceId:'breakfast'},()=>0),null);
+ assert.equal(chooseReadingSource({hsk:3,sourceId:'ask-leave'},()=>0).id,'ask-leave');
+ assert.equal(chooseReadingSource({hsk:1,sourceId:'ask-leave'},()=>0),null);
 });
 test('validates completeness of script/paragraph/questions',()=>{
  assert.equal(validReadingStory(story),true);
@@ -52,12 +60,12 @@ test('extracts only verified public source and generates a labeled educational a
  const x=await buildReadingStory(valid,{fetchFn,env,model:'gemini-3.5-flash-lite',random:()=>0});
  assert.equal(x.status,200);
  assert.equal(x.data.story.hsk,3);
- assert.equal(x.data.story.source.url,'https://www.36kr.com/p/1470282839229576');
+ assert.equal(x.data.story.source.url,'https://mandarinbean.com/ask-for-leave/');
  assert.equal(x.data.story.status,'adapted');
  assert.match(x.data.story.attribution,/chuyển thể/);
  assert.equal(x.data.story.quiz.length,3);
  assert.equal(calls.length,2);
- assert.match(calls[0].url,/^https:\/\/r\.jina\.ai\/https:\/\/www\.36kr\.com/);
+ assert.equal(calls[0].url,'https://mandarinbean.com/ask-for-leave/');
  const body=JSON.parse(calls[1].options.body);
  assert.ok(body.contents[0].parts[0].text.includes('吃饭'));
  assert.ok(body.generationConfig.maxOutputTokens<=5000);
@@ -82,6 +90,6 @@ test('worker enables authenticated reading and applies per-user cooldown',async(
  const make=()=>new Request('https://worker.test/reading-next',{method:'POST',headers:{Origin:origin,Authorization:'Bearer '+jwt,'Content-Type':'application/json'},body:JSON.stringify(valid)});
  const first=await handler(make(),env);assert.equal(first.status,200,JSON.stringify(await first.clone().json()));
  const answer=await first.json();assert.equal(answer.story.scriptMode.length,4);
- assert.ok(calls.some(x=>x.url.startsWith('https://r.jina.ai/')));
+ assert.ok(calls.some(x=>x.url==='https://mandarinbean.com/ask-for-leave/'));
  assert.equal((await handler(make(),env)).status,429);
 });
