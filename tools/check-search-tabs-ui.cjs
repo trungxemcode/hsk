@@ -31,6 +31,12 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
      }
      const buttons=page.locator(panel+' .studio-search-tabs button');
      await page.evaluate(()=>document.activeElement?.blur?.());
+     // CSS color transitions may not settle at the same speed on headless Chrome/CI.
+     // Wait for actual visual contrast rather than asserting in the first animation frame.
+     await page.waitForFunction(selector=>{
+      const buttons=[...document.querySelectorAll(selector)];
+      return buttons.length===2&&getComputedStyle(buttons[0]).backgroundColor!==getComputedStyle(buttons[1]).backgroundColor;
+     },panel+' .studio-search-tabs button',{timeout:4000});
      const colors=await buttons.evaluateAll(bs=>bs.map(el=>getComputedStyle(el).backgroundColor));
      assert.notEqual(colors[0],colors[1],mode+' visually distinguishes chosen tab');
      const chosen=await buttons.nth(mode==='search'?0:1).getAttribute('aria-current');
