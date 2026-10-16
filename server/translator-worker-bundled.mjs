@@ -216,11 +216,12 @@ export async function buildReadingStory(body,{fetchFn,env,signal,model,random=Ma
   const r=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal,body:JSON.stringify({systemInstruction:{parts:[{text:instruction}]},contents:[{role:'user',parts:[{text:JSON.stringify(prompt)}]}],generationConfig:{temperature:0.65,maxOutputTokens:3200,responseMimeType:'application/json',responseSchema:schema}})});
   if(!r.ok){
    // Explicit opt-in only: never spend secondary-provider credits without confirmation.
-   if([429,502,503].includes(r.status)){
-    const fallback=await requestBackupJSON({fetchFn,env,signal,instruction,prompt});
+   let fallback=null;
+   if([429,500,502,503,504].includes(r.status)){
+    fallback=await requestBackupJSON({fetchFn,env,signal,instruction,prompt});
     if(fallback?.ok)data=fallback.data;
    }
-   if(!data)return {status:r.status===429?429:502,data:{error:'AI chưa tạo được bài đọc. Hãy thử lại sau.'}};
+   if(!data)return {status:r.status===429?429:502,data:{code:r.status===429?'READING_PROVIDER_QUOTA':'READING_PROVIDER_UNAVAILABLE',error:r.status===429?(fallback===null?'Gemini đã hết hạn mức. AI dự phòng chưa được cấu hình trên máy chủ.':'Gemini đã hết hạn mức và AI dự phòng chưa trả được bài. Hãy thử lại sau.'):'AI chưa tạo được bài đọc. Hãy thử lại sau.'}};
   }else{
    const json=await r.json(),candidate=json.candidates?.[0];
    if(candidate?.finishReason&&candidate.finishReason!=='STOP')return {status:502,data:{error:'AI chưa hoàn thành bài đọc.'}};
@@ -253,7 +254,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-dictionary-accuracy-20261014-3';
+export const WORKER_REVISION='hsk-reading-fix-3-3-2';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';

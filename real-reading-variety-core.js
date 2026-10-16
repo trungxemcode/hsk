@@ -147,7 +147,17 @@
       topics:new Set(entries.map(e=>e.topic).filter(Boolean)).size,
       sources:new Set(entries.map(e=>e.sourceKey).filter(Boolean)).size};
   }
-  const api={VERSION,HISTORY_KEY,MAX_HISTORY,TOPICS,ANGLES,canonicalUrl,storyText,hash,fingerprint,similarity,
+  // Match the server's bounded vocabulary contract without changing stored words.
+  function requestWords(words){
+    const seen=new Set(),out=[];
+    for(const w of Array.isArray(words)?words:[]){
+      if(!w||typeof w.han!=='string'||typeof w.mean!=='string')continue;
+      const han=w.han.trim(),mean=w.mean.trim().slice(0,80);
+      if(!han||han.length>12||!/[\u3400-\u9fff]/u.test(han)||!mean||seen.has(han))continue;
+      seen.add(han);out.push({han,mean});if(out.length===20)break;
+    }return out;
+  }
+  const api={requestWords,VERSION,HISTORY_KEY,MAX_HISTORY,TOPICS,ANGLES,canonicalUrl,storyText,hash,fingerprint,similarity,
     sourceKey,nextCached,nextGeneration,next,isNovel,record,stats};
   root.HSKRealReadingVariety=api;
   if(typeof module==='object'&&module.exports)module.exports=api;

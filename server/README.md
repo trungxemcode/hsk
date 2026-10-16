@@ -1,5 +1,13 @@
 # Kết nối dịch Việt → Trung theo HSK
 
+## AI dự phòng cho Đọc thực tế
+
+Gemini là dịch vụ chính. Khi provider Gemini trả 429 hoặc lỗi máy chủ 500/502/503/504, `/reading-next` thử xKiro **một lần**, không gọi song song và không bỏ qua giới hạn AI của app. Nội dung dự phòng vẫn phải qua cùng kiểm tra cấu trúc bài đọc.
+
+Worker cần secret `SECONDARY_AI_API_KEY`; tạo/cập nhật trong Cloudflare → Worker `hsk-vietnamese-translator` → Settings → Variables and Secrets → Add → Secret. Hoặc chạy `npx wrangler secret put SECONDARY_AI_API_KEY` trong thư mục `server` và nhập key ở prompt riêng. Không đặt key trong Git, frontend, biến thường hoặc gửi lại qua chat. Nếu key đã từng được chia sẻ công khai, thu hồi và tạo key mới trước khi cài.
+
+Các biến không bí mật hiện tại là `AI_BACKUP_ENABLED=true`, `SECONDARY_AI_PROVIDER=xkiro`, `SECONDARY_AI_MODEL=qwen/qwen-plus-2025-07-28:free`. Chỉ có biến chưa đủ: thiếu secret thì dự phòng không hoạt động. Dùng `npx wrangler secret list` để kiểm tra **tên** secret, không in giá trị. Bài kiểm thử dùng provider giả lập không chứng minh key thật còn quota.
+
 Máy chủ hỗ trợ /translate (dịch câu), /ask (hỏi đáp theo câu) và /ocr (nhận dạng ảnh). Không có khóa Gemini trong mã ứng dụng.
 
 Worker cũng hỗ trợ `/lesson-ask` để hỏi theo bài học. Bản `hsk-gemini35-compat-20261012` khôi phục cấu hình của commit `8be39e5`: model mặc định `gemini-3.5-flash-lite`, temperature `0.2` cho dịch/hỏi đáp và `0` cho OCR. Nếu có biến `GEMINI_MODEL` trên Cloudflare, đặt đúng `gemini-3.5-flash-lite` để dùng model này; biến đó có ưu tiên hơn giá trị mặc định trong code.

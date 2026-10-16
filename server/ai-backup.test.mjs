@@ -5,6 +5,7 @@ import {buildReadingStory} from './reading-service.mjs';
 const config={AI_BACKUP_ENABLED:'true',SECONDARY_AI_PROVIDER:'xkiro',SECONDARY_AI_API_KEY:'fake-test-secret-long-enough',SECONDARY_AI_MODEL:'qwen/qwen3.5-397b-a17b:free'};
 test('backup is off by default and never assumes a provider from key prefix',()=>{
  assert.equal(backupConfigured({}),false);
+ assert.equal(backupConfigured({...config,SECONDARY_AI_API_KEY:undefined}),false);
  assert.equal(backupConfigured({...config,AI_BACKUP_ENABLED:'false'}),false);
  assert.equal(backupConfigured({...config,SECONDARY_AI_PROVIDER:'x-token-hub'}),false);
  assert.equal(backupConfigured({...config,SECONDARY_AI_MODEL:'../api?bad'}),false);
@@ -35,10 +36,10 @@ test('Gemini quota error can route to configured backup, but never while disable
  const content={titleZh:'学习汉语',titleVi:'Học tiếng Trung',scriptMode:transcript,
  paragraphMode:[{hanzi:'他们每天都在学校学习汉语。',pinyin:'Tāmen měitiān dōu zài xuéxiào xuéxí Hànyǔ.',vi:'Họ học tiếng Trung mỗi ngày.'}],
  quiz:[1,2,3].map((i)=>({question:'他们在哪里学习汉语？',options:['学校','家里','公司'],answerIndex:0,explanationVi:'Họ học ở trường.'}))};
- let backupCalls=0;
+ let backupCalls=0,geminiStatus=429;
  const fetchFn=async(url,opts)=>{
   if(url.startsWith('https://mandarinbean.com/'))return new Response('汉语学习学校汉语学习学校学习'.repeat(12));
-  if(url.includes('generativelanguage.googleapis.com'))return Response.json({error:'quota'},{status:429});
+  if(url.includes('generativelanguage.googleapis.com'))return Response.json({error:'quota'},{status:geminiStatus});
   if(url.includes('api.xkiro.com')){backupCalls++;return Response.json({choices:[{message:{content:JSON.stringify(content)}}]});}
   throw Error('unexpected '+url);
  };
@@ -49,4 +50,5 @@ test('Gemini quota error can route to configured backup, but never while disable
  assert.equal(yes.status,200);assert.equal(backupCalls,1);
  assert.equal(yes.data.story.scriptMode.length,4);
  assert.equal(yes.data.story.quiz.length,3);
+ for(const status of [500,502,503,504]){geminiStatus=status;const before=backupCalls;const r=await buildReadingStory(params,{fetchFn,env:{...config,GEMINI_API_KEY:'fake'},model});assert.equal(r.status,200);assert.equal(backupCalls,before+1);}
 });

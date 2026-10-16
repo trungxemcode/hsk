@@ -2,6 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildReadingStory,checkReadingBody,chooseReadingSource,validReadingStory,READING_SOURCES,extractReadingText} from './reading-service.mjs';
 import {createHandler} from './translator-worker-bundled.mjs';
+import {createRequire} from 'node:module';
+const Client=createRequire(import.meta.url)('../real-reading-variety-core.js');
+test('client bounds lesson vocabulary before sending without weakening server validation',()=>{
+ const raw=[{han:'普通',mean:'Nghĩa rất dài '.repeat(40)},{han:'长'.repeat(13),mean:'quá dài'},{han:'abc',mean:'không phải chữ Hán'},{han:'普通',mean:'trùng'},{han:'学习',mean:'học'}];
+ assert.equal(checkReadingBody({hsk:3,lessonWords:raw}),false);
+ const normalized=Client.requestWords(raw);assert.equal(normalized.length,2);assert.equal(normalized[0].mean.length,80);
+ assert.equal(checkReadingBody({hsk:3,lessonWords:normalized}),true);
+ assert.equal(raw[0].mean.length>80,true);assert.equal(Client.requestWords(Array(40).fill(null)).length,0);
+});
 const sourceText='年轻人今天早上在办公室讨论买早饭和日常工作。有些人很忙，不会每天在家里吃早餐。'.repeat(8);
 const story={
  titleZh:'今天早上的早餐',titleVi:'Bữa sáng hôm nay',

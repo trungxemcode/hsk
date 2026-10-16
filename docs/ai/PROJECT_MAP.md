@@ -13,6 +13,7 @@ Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-
 | HSK target/filter | `planner.js`, `planner-core.js`, `studio.js` | Learning goal and vocabulary search filter are intentionally independent |
 
 ## Đọc thực tế thử nghiệm HSK 3.3.0
+- Sửa 3.3.2: payload từ vựng dùng `requestWords` (20 mục, Han ≤12, nghĩa ≤80), giữ nguyên dữ liệu gốc và validator máy chủ. Trạng thái chờ inline có nút hủy; hủy được cả lúc Firebase token chưa trả, chặn ghi cache/lịch sử từ phản hồi cũ. Adapter xKiro đã có; secret `SECONDARY_AI_API_KEY` chưa được cài tại thời điểm kiểm tra 17/10/2026. Xem `server/README.md` để cấu hình an toàn.
 - Route đọc và Worker API được lập trình trên nhánh tính năng: `real-reading.js/css`, `real-reading-variety-core.js`, `server/reading-service.mjs`, `server/translator-worker.mjs`; hướng dẫn và giới hạn tại `docs/ai/REAL_READING_IMPLEMENTED_3_3_0.md`. **Chưa xác nhận triển khai Worker live và đồng bộ lịch sử đa thiết bị.**
 
 ## Đề xuất chưa triển khai
