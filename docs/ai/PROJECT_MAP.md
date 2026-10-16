@@ -13,7 +13,7 @@ Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-
 | HSK target/filter | `planner.js`, `planner-core.js`, `studio.js` | Learning goal and vocabulary search filter are intentionally independent |
 
 ## Đề xuất chưa triển khai
-- **Đọc thực tế & Kịch bản theo HSK:** đặc tả kiến trúc, nguồn đã kiểm tra, UX tối giản, API/trust boundary, tests và checklist triển khai trong `docs/ai/REAL_READING_DESIGN_3_2_1.md`. Chỉ là tài liệu thiết kế; chưa có route/API thật.
+- **Đọc thực tế & Kịch bản theo HSK:** đặc tả kiến trúc, nguồn đã kiểm tra, UX tối giản, API/trust boundary, tests và checklist triển khai trong `docs/ai/REAL_READING_DESIGN_3_2_1.md`. Cơ chế AI chọn bài mới, chống trùng và đọc không giới hạn một bài chuẩn: `docs/ai/REAL_READING_VARIETY_3_2_1.md`, core `real-reading-variety-core.js`, test `tools/check-real-reading-variety.cjs`. Chưa có route/API sản xuất.
 
 ## Learning and accounts
 | Feature | Primary files | Notes |

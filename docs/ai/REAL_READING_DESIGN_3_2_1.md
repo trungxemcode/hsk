@@ -68,6 +68,11 @@ Không nhầm bài gốc với bản chuyển thể. Mỗi bài luôn gắn tên
 ```
 Nội dung `...` là **placeholder**, không được xem là câu hỏi/bản dịch đã kiểm chứng. Schema validation bắt buộc: tối thiểu 1 paragraph, 4 script lines, quiz **đúng 3 câu**, options 3–4, đáp án trong phạm vi; pinyin và vi tương ứng câu Hán; không HTML/script từ nguồn ngoài.
 
+## 6a. AI chọn bài mới — nhiều bài trong một bài học
+- Mỗi cấp HSK và một bài chuẩn (ví dụ HSK 3 · Bài 1) có thể có **nhiều bài đọc/kịch bản**, không chỉ một. Nút `AI chọn bài mới ↻` ưu tiên truyện chưa đọc, nguồn/tình huống chưa dùng, không lặp ID hoặc nội dung gần giống.
+- Lịch sử mở và hoàn thành theo tài khoản, luân phiên nguồn + chủ đề + góc nhìn trước khi yêu cầu Worker sinh bài mới; cache chung theo cấp/bài học nhưng lịch sử riêng UID.
+- Đặc tả chi tiết ở `docs/ai/REAL_READING_VARIETY_3_2_1.md`, engine chọn bài thuần JS ở `real-reading-variety-core.js`, kiểm thử ở `tools/check-real-reading-variety.cjs`. **Đây vẫn là thiết kế/chạy test core; giao diện và API chưa được triển khai.**
+
 ## 7. Các bước triển khai trên app
 1. PR độc lập: core `real-reading-core.js` (validations, URL rules, filter/word segmentation) + unit tests; source catalog mẫu chỉ metadata URL thật; không đụng SRS.
 2. PR UI: `real-reading.js/css`, một `section[data-studio-hub-panel=real-reading]`; route `real-reading` trong `studio.js`, 1 lối vào Bài học, 1 checkbox trong `practice-selector.js`; focus one-hand trên 320/390/1440, có lối về.
