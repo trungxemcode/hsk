@@ -16,6 +16,8 @@ if args.version:
   p.write_text(s,encoding='utf-8',newline='')
 worker=(root/'offline-worker.js').read_text(encoding='utf-8');version=re.search(r"OFFLINE_VERSION='([^']+)'",worker).group(1)
 files=json.loads(re.search(r'const OFFLINE_FILES=(\[.*?\]);',worker).group(1))
+for name in ('real-reading-variety-core.js','real-reading.js','real-reading.css'):
+ if name not in files:files.append(name)
 for name in ('lesson-guided-core.js','lesson-guided.js','lesson-guided.css','practice-selector.js','practice-selector.css','study4-practice.js'):
  if name not in files:files.append(name)
 for name in ('practice-games-core.js','practice-games.js','practice-games.css'):

@@ -13,7 +13,8 @@
   ['mistakes','Ôn câu sai','Làm lại những câu từng sai.','target'],
   ['exam','Bài tập HSK','Luyện Nghe, Đọc, Viết theo dạng.','clipboard'],
   ['placement','Đánh giá trình độ','Kiểm tra và gợi ý lộ trình.','chart'],
-  ['study4','Luyện thi HSK','Đề thi và bài nghe từ Study4.','exam']
+  ['study4','Luyện thi HSK','Đề thi và bài nghe từ Study4.','exam'],
+  ['real-reading','Đọc thực tế','Đọc kịch bản mới từ bài báo và truyện.','cards']
  ];
  const paths={
   cards:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
@@ -118,7 +119,7 @@
   if(id==='writing'){window.HSKStudio?.navigate('practice');if(window.HSKWritingPractice?.open)window.HSKWritingPractice.open();else clickCard('Học viết');}
   else if(id==='placement'){window.HSKStudio?.navigate('practice');clickCard('Đánh giá trình độ');}
   else if(id==='passive'){window.HSKStudio?.navigate('practice');clickCard('Học rảnh tay');}
-  else window.HSKStudio?.navigate(id);
+  else {if(id==='real-reading')window.HSKRealReading?.leaveLesson?.();window.HSKStudio?.navigate(id);}
   updateBar();
  }
  function begin(group=groups[0]){

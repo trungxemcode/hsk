@@ -12,6 +12,9 @@ Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-
 | Visual tokens | `style.css`, `ui-buttons.css` | Neutral buttons, purple active state; light/dark. Disclosure press states follow their parent card radius, standalone summaries use the button radius; no global overflow clipping (2.17). |
 | HSK target/filter | `planner.js`, `planner-core.js`, `studio.js` | Learning goal and vocabulary search filter are intentionally independent |
 
+## Đọc thực tế thử nghiệm HSK 3.3.0
+- Route đọc và Worker API được lập trình trên nhánh tính năng: `real-reading.js/css`, `real-reading-variety-core.js`, `server/reading-service.mjs`, `server/translator-worker.mjs`; hướng dẫn và giới hạn tại `docs/ai/REAL_READING_IMPLEMENTED_3_3_0.md`. **Chưa xác nhận triển khai Worker live và đồng bộ lịch sử đa thiết bị.**
+
 ## Đề xuất chưa triển khai
 - **Đọc thực tế & Kịch bản theo HSK:** đặc tả kiến trúc, nguồn đã kiểm tra, UX tối giản, API/trust boundary, tests và checklist triển khai trong `docs/ai/REAL_READING_DESIGN_3_2_1.md`. Cơ chế AI chọn bài mới, chống trùng và đọc không giới hạn một bài chuẩn: `docs/ai/REAL_READING_VARIETY_3_2_1.md`, core `real-reading-variety-core.js`, test `tools/check-real-reading-variety.cjs`. Chưa có route/API sản xuất.
 
