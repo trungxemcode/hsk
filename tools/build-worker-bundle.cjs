@@ -4,7 +4,9 @@ const previous=fs.readFileSync(target,'utf8'),match=previous.match(/^export cons
 if(!match)throw Error('Existing bundled vocabulary is missing');
 const vocabulary=JSON.parse(match[1]);
 const collector=fs.readFileSync(path.join(server,'handwriting-samples.mjs'),'utf8').replace(/\r\n/g,'\n');
-const reading=fs.readFileSync(path.join(server,'reading-service.mjs'),'utf8').replace(/\r\n/g,'\n');
+const reading=fs.readFileSync(path.join(server,'reading-service.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
+const aiControl=fs.readFileSync(path.join(server,'ai-control.mjs'),'utf8').replace(/\r\n/g,'\n');
+const aiBackup=fs.readFileSync(path.join(server,'ai-backup.mjs'),'utf8').replace(/\r\n/g,'\n');
 const handler=fs.readFileSync(path.join(server,'translator-worker.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'').trimStart();
-fs.writeFileSync(target,'// Standalone Cloudflare Worker. Generated from vocabulary + translator-worker.mjs.\nexport const vocabulary='+JSON.stringify(vocabulary)+';\n\n'+collector+'\n'+reading+'\n'+handler);
+fs.writeFileSync(target,'// Standalone Cloudflare Worker. Generated from vocabulary + translator-worker.mjs.\nexport const vocabulary='+JSON.stringify(vocabulary)+';\n\n'+collector+'\n'+aiControl+'\n'+aiBackup+'\n'+reading+'\n'+handler);
 console.log('Bundled worker synchronized; '+vocabulary.length+' vocabulary entries preserved.');
