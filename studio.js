@@ -46,7 +46,7 @@ renderIcons();
  const $=id=>document.getElementById(id),main=document.querySelector('.workspace');
  function decorateControls(){main.querySelectorAll('.panel-box button:not(.speech-button):not(.mastery-btn)').forEach(b=>b.classList.add('studio-action'));}
  decorateControls();new MutationObserver(decorateControls).observe(main,{subtree:true,childList:true});
- const labels={home:'Tổng quan',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện & Ôn',exam:'Dạng đề HSK',review:'Luyện & Ôn',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn tập SRS',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
+ const labels={home:'Trang chủ',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện & Ôn',exam:'Bài tập HSK',review:'Luyện & Ôn',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn theo lịch',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
  const parents={learn:'practice',quiz:'practice',compare:'practice',exam:'practice',srs:'practice',mistakes:'practice',translator:'search',about:'home'};
  let ready=false,route='home',lastOwner='',fingerprint='',activityTimer,refreshTimer;
  function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||'null')||fallback;}catch{return fallback;}}

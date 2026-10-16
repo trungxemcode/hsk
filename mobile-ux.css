@@ -117,3 +117,63 @@ details.drawer-group:not([open])>.drawer-group-content{display:none!important}
 @keyframes mobile-sheet-enter{from{transform:translateY(24px);opacity:.5}to{transform:translateY(0);opacity:1}}
 @media(prefers-reduced-motion:reduce){.mobile-ux-sheet,.lesson-chat-panel{animation:none!important;scroll-behavior:auto!important}}
 
+/* Task hierarchy: primary learning, quick lookup, optional tools. No data/feature removal. */
+body.studio-enabled .clean-home-search{padding:16px;margin-bottom:18px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface)}
+.clean-home-search>label{display:block;font-weight:700;margin-bottom:8px;font-size:14px;color:var(--ink)}
+.clean-home-search form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.clean-home-search input{width:100%;min-width:0;min-height:48px;font:inherit;padding:10px;border:1px solid var(--line-dark);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink)}
+.clean-home-search button{min-height:44px;padding:10px 12px;line-height:1.4;white-space:normal}
+.clean-home-search form button,.clean-home-inputs button{border:1px solid var(--line-dark);border-radius:var(--radius-btn)}
+.clean-home-inputs{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}.clean-home-inputs button{flex:1 1 110px}
+body.studio-enabled #studioHome .dashboard-grid{grid-template-columns:minmax(0,1fr)}
+body.studio-enabled #studioHome :is(.dashboard-side,.today-card,.pathway,.pathway-head){display:none!important}
+body.studio-enabled #studioHome .shortcut:is([data-studio-go=srs],[data-studio-go=search]){display:none!important}
+body.studio-enabled #studioHome .shortcut-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+body.studio-enabled #studioHome .shortcut{min-height:0;padding:14px;gap:8px}
+body.studio-enabled #studioHome .shortcut-icon{width:36px;height:36px;margin:0}
+body.studio-enabled #studioHome .shortcut strong{font-size:16px;margin:4px 0 0}body.studio-enabled #studioHome .shortcut small{margin:0;line-height:1.4}
+body.studio-enabled #studioHome .shortcut :is(strong,small){min-width:0;max-width:100%;overflow-wrap:anywhere}
+body.studio-enabled #studioHome .section-row>button[data-studio-go=notebook]{display:none}
+body.studio-enabled .memory-reminder:not(.clean-relevant){display:none!important}
+body.studio-enabled .clean-disclosure{display:block;min-width:0;grid-column:1/-1;border:1px solid var(--line);border-radius:var(--radius-btn);margin:12px 0;background:var(--surface);color:var(--ink)}
+.clean-disclosure>summary{cursor:pointer;min-height:44px;box-sizing:border-box;padding:12px 14px;font-size:14px;font-weight:650;line-height:1.4;color:var(--ink);overflow-wrap:anywhere}
+.clean-disclosure:not([open])>:not(summary){display:none!important}
+.clean-disclosure[open]>:not(summary){margin:10px 12px 14px;max-width:calc(100% - 24px)}
+.clean-disclosure .source-links{display:flex;gap:8px;flex-wrap:wrap}.clean-disclosure a{overflow-wrap:anywhere}
+body.studio-enabled #passiveDisclosure #passiveTitle{display:none}
+body.studio-enabled #passiveDisclosure #passiveControls{margin:0;border:0;padding-top:0}
+body.studio-enabled #cardOptions[open]{display:flex;gap:8px;flex-wrap:wrap}
+body.studio-enabled #cardOptions>summary{width:100%}#cardOptions>button{min-height:44px;flex:1 1 130px}
+body.studio-enabled #coachDisclosure .ai-coach-panel{padding:12px;margin:0;border:0}
+body.studio-enabled #coachDisclosure .ai-coach-panel>h3{display:none}
+body.studio-enabled #aboutPanel .mobile-home-stats{display:block;margin-top:16px;border:1px solid var(--line);border-radius:var(--radius-btn)}
+#aboutPanel .mobile-home-stats>summary{display:block;cursor:pointer;padding:14px;min-height:44px}
+#aboutPanel .mobile-home-stats:not([open])>:not(summary){display:none!important}
+@media(max-width:720px), (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+ body.mobile-ux .mobile-today-hero{padding:18px;margin-bottom:14px}
+ body.mobile-ux .mobile-hero-top h2{font-size:22px}
+ body.mobile-ux .mobile-today-hero>p{margin:10px 0 14px;font-size:14px!important}
+ body.mobile-ux .mobile-hero-result{font-size:13px;line-height:1.4;min-height:44px;margin:8px 6px 0 0}
+ body.mobile-ux .mobile-hero-top button{font-size:12px}
+ body.mobile-ux #planToday{margin-bottom:16px}
+ body.mobile-ux #planToday .section-row{margin:0 0 8px}
+ body.mobile-ux #planTodayTitle{font-size:16px;line-height:1.4}
+ body.mobile-ux #planTodayMeta,body.mobile-ux #planSettingsLink{display:none}
+ body.mobile-ux .plan-task{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:10px 12px;margin-bottom:6px}
+ body.mobile-ux .plan-task strong{font-size:14px;line-height:1.4}
+ body.mobile-ux .plan-task p{font-size:12px;line-height:1.4;margin:3px 0 0}
+ body.mobile-ux .plan-task button{min-height:44px;padding:8px 10px}
+ body.mobile-ux #studioHome .section-row h3{font-size:16px}
+ body.mobile-ux #studioPractice>.hub-intro,body.mobile-ux #learnPanel>.activity-intro,body.mobile-ux #notebookPanel>.hub-intro{display:none}
+ body.mobile-ux :is(#accountPanel,#searchPanel,#quizPanel,#srsPanel,#mistakesPanel,#comparePanel,#translatorPanel)>h2{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ body.mobile-ux #searchPanel>.studio-search-tabs{margin-top:0}
+ body.mobile-ux #searchPanel #dictionaryModeHint{font-size:12px;line-height:1.4;margin:8px 0 12px}
+ body.mobile-ux #searchSummary:empty{display:none}
+ body.mobile-ux .clean-home-search{padding:14px;margin-bottom:16px}
+ body.mobile-ux #learnPanel .buttons{display:flex;flex-wrap:wrap;gap:8px}
+ body.mobile-ux #learnPanel .buttons button{min-height:44px;white-space:normal;padding:8px}
+ body.mobile-ux #learnPanel .buttons :is(#prev,#next,#exampleBtn){grid-column:auto;flex:1 1 88px;min-width:min-content;max-width:100%;min-height:44px;font-size:14px;padding:8px 4px;overflow-wrap:normal;line-height:1.4}
+ body.mobile-ux #cardOptions{margin-top:8px}
+ body.mobile-ux .flash-tools>.tool-card{padding:14px}
+}
+
