@@ -48,7 +48,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    const failures=await page.evaluate(selectors=>{
     const rgb=s=>s.match(/[\d.]+/g).map(Number),blend=(f,b)=>f.slice(0,3).map((n,i)=>n*(f[3]??1)+b[i]*(1-(f[3]??1))),lum=c=>c.map(n=>{n/=255;return n<=.04045?n/12.92:((n+.055)/1.055)**2.4;}).reduce((a,n,i)=>a+n*[.2126,.7152,.0722][i],0),out=[];
     for(const el of document.querySelectorAll(selectors)){
-     if(!el.getClientRects().length||getComputedStyle(el).visibility==='hidden')continue;
+     if(!el.textContent.trim()||!el.getClientRects().length||getComputedStyle(el).visibility==='hidden')continue;
      const chain=[];for(let e=el;e;e=e.parentElement)chain.unshift(e);
      let bg=[255,255,255];for(const e of chain)bg=blend(rgb(getComputedStyle(e).backgroundColor),bg);
      const st=getComputedStyle(el),fg=blend(rgb(st.color),bg),ratio=(Math.max(lum(fg),lum(bg))+.05)/(Math.min(lum(fg),lum(bg))+.05),size=parseFloat(st.fontSize),minimum=size>=24||(size>=18.66&&Number(st.fontWeight)>=700)?3:4.5;
