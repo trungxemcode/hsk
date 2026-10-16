@@ -34,7 +34,8 @@ async function translate(event){
  clearConversation();currentTranslation=null;pending?.abort();const current=++serial;pending=new AbortController();const controller=pending;
  const key=JSON.stringify([user.uid,text,hsk,translationDirection]);lastText=text;
  if(cache.has(key)){render(cache.get(key));status.textContent='Đã hiển thị bản dịch trước đó.';button.disabled=false;return;}
- button.disabled=true;status.textContent=translationDirection==='zh-vi'?'Đang dịch tiếng Trung sang tiếng Việt…':'Đang dịch theo HSK '+hsk+'…';result.hidden=true;
+ button.disabled=true;status.textContent=translationDirection==='zh-vi'?'AI dịch Trung → Việt đang load…':'AI dịch theo HSK '+hsk+' đang load…';result.hidden=true;
+ const stopLoading=window.HSKLoading?.showAI(translationDirection==='zh-vi'?'AI dịch Trung → Việt đang load...':'AI dịch theo HSK '+hsk+' đang load...',{size:text.length,detail:'Đang gửi câu cần dịch cho AI...',signal:controller.signal});
  const timer=setTimeout(()=>controller.abort(),70000);
  try{
   const token=await user.getIdToken();if(current!==serial)return;
@@ -44,12 +45,13 @@ async function translate(event){
   if(translationDirection==='zh-vi'&&(data.direction!=='zh-vi'||typeof data.vietnamese!=='string'||!data.vietnamese.trim()))throw Error('Máy chủ chưa hỗ trợ Trung → Việt. Cần cập nhật mã Cloudflare mới.');
   cache.set(key,data);if(cache.size>30)cache.delete(cache.keys().next().value);render(data);status.textContent='Đã dịch. Bạn có thể hỏi AI về từ, ngữ pháp và cách dùng trong câu này.';
  }catch(error){if(current===serial)status.textContent=error.name==='AbortError'?'Dịch quá lâu hoặc đã bị hủy. Hãy thử lại.':error.message;}
- finally{clearTimeout(timer);if(current===serial){button.disabled=false;pending=null;}}
+ finally{stopLoading?.();clearTimeout(timer);if(current===serial){button.disabled=false;pending=null;}}
 }
 async function ask(event){
  event.preventDefault();const question=askInput.value.trim();if(!question||!currentTranslation)return;
  const user=window.HSKAccountDashboard?.user;if(!user){askStatus.textContent='Hãy đăng nhập tài khoản app trước khi hỏi AI.';return;}
- askPending?.abort();askPending=new AbortController();const controller=askPending;askButton.disabled=true;askInput.disabled=true;askStatus.textContent='AI đang trả lời…';
+ askPending?.abort();askPending=new AbortController();const controller=askPending;askButton.disabled=true;askInput.disabled=true;askStatus.textContent='AI giải đáp bản dịch đang load…';
+ const stopLoading=window.HSKLoading?.showAI('AI giải đáp bản dịch đang load...',{size:question.length+JSON.stringify(currentTranslation).length,detail:'Đang gửi câu hỏi và bản dịch cho AI...',signal:controller.signal});
  const timer=setTimeout(()=>controller.abort(),50000);
  try{
   const token=await user.getIdToken();const endpoint=config.endpoint.replace(/\/translate$/,'/ask');
@@ -57,7 +59,7 @@ async function ask(event){
   const data=await response.json();if(!response.ok)throw Error(typeof data.error==='string'?data.error:'AI chưa trả lời được. Hãy thử lại.');if(typeof data.answer!=='string'||!data.answer.trim())throw Error('Câu trả lời chưa đúng định dạng.');
   conversation.push({role:'user',text:question},{role:'assistant',text:data.answer});addMessage('user',question);addMessage('model',data.answer);askInput.value='';askStatus.textContent='';
  }catch(error){askStatus.textContent=error.name==='AbortError'?'Hỏi đáp quá lâu. Hãy thử lại.':error.message;}
- finally{clearTimeout(timer);askButton.disabled=false;askInput.disabled=false;askPending=null;}
+ finally{stopLoading?.();clearTimeout(timer);askButton.disabled=false;askInput.disabled=false;askPending=null;}
 }
 form.addEventListener('submit',translate);askForm.addEventListener('submit',ask);
 level.addEventListener('change',()=>{if(lastText&&input.value.trim()===lastText)translate();});

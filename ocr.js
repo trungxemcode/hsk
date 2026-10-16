@@ -14,7 +14,8 @@ async function pick(event){
  const selected=event.target.files?.[0];if(!selected)return;reset();const id=serial;
  if(selected.size>20*1024*1024){status.textContent='Ảnh quá lớn. Chọn ảnh dưới 20 MB.';return;}
  if(selected.type==='image/svg+xml'||selected.type&&!selected.type.startsWith('image/')){status.textContent='Hãy chọn ảnh JPG, PNG, WebP hoặc ảnh chụp.';return;}
- busy=true;buttons();status.textContent='Đang chuẩn bị ảnh…';
+ busy=true;buttons();status.textContent='Xử lý ảnh OCR đang load…';
+ const stopLoading=window.HSKLoading?.show('Xử lý ảnh OCR đang load...','Đang chuẩn bị và nén ảnh để nhận dạng chữ Hán...');
  try{
   const localUrl=URL.createObjectURL(selected),img=new Image();
   try{await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(Error('Không mở được ảnh. Hãy đổi sang JPG hoặc PNG.'));img.src=localUrl;});}finally{URL.revokeObjectURL(localUrl);}
@@ -22,7 +23,7 @@ async function pick(event){
   if(!img.naturalWidth||!img.naturalHeight||img.naturalWidth*img.naturalHeight>50000000)throw Error('Ảnh quá lớn. Hãy cắt phần chứa chữ rồi chọn lại.');
   source=img;const encoded=encode(img);image=encoded.image;preview.src=encoded.dataUrl;preview.hidden=false;remove.hidden=false;status.textContent='Ảnh đã sẵn sàng. Có thể chọn riêng vùng chữ Trung để nhận dạng nhanh và rõ hơn.';
  }catch(error){if(id===serial)status.textContent=error.message;}
- finally{if(id===serial){busy=false;buttons();}}
+ finally{stopLoading?.();if(id===serial){busy=false;buttons();}}
 }
 async function read(fast=false){
  const user=window.HSKAccountDashboard?.user;
@@ -32,7 +33,8 @@ async function read(fast=false){
  const hsk=Number($('translationLevel').value),key=user.uid+':'+(fast?'fast:'+hsk:'ocr')+':'+prepared.data;
  function show(data){showData(data);if(fast){if(data.direction!=='zh-vi'||typeof data.vietnamese!=='string'||typeof data.pinyin!=='string'||typeof data.explanation!=='string'||!Array.isArray(data.outOfVocabulary))throw Error('Máy chủ chưa có chế độ dịch ảnh một lượt. Hãy cập nhật Worker hoặc dùng Nhận dạng chữ.');window.dispatchEvent(new CustomEvent('hsk-image-translated',{detail:data}));status.textContent='Đã nhận dạng và dịch trong một lượt AI. Kiểm tra chữ Trung và bản dịch bên dưới.';}}
  if(cache.has(key)){show(cache.get(key));return;}
- const id=++serial;controller=new AbortController();const current=controller;busy=true;buttons();output.hidden=true;status.textContent=fast?'Đang đọc và dịch ảnh trong một lượt AI…':'Đang nhận dạng chữ…';
+ const id=++serial;controller=new AbortController();const current=controller;busy=true;buttons();output.hidden=true;status.textContent=fast?'AI nhận dạng & dịch ảnh đang load…':'AI nhận dạng chữ từ ảnh đang load…';
+ const stopLoading=window.HSKLoading?.showAI(fast?'AI nhận dạng & dịch ảnh đang load...':'AI nhận dạng chữ từ ảnh đang load...',{size:prepared.data.length,kind:'image',detail:'Đang gửi vùng ảnh đã chọn để AI nhận dạng...',signal:current.signal});
  const timer=setTimeout(()=>current.abort(),125000),started=Date.now(),progress=setInterval(()=>{if(id===serial)status.textContent='AI đang đọc chữ Trung… đã chờ '+Math.round((Date.now()-started)/1000)+' giây. Bạn có thể bấm Hủy.';},15000);
  try{
   const token=await user.getIdToken();if(id!==serial)return;
@@ -43,7 +45,7 @@ async function read(fast=false){
   if(!data.text.trim()){status.textContent='Không tìm thấy chữ Trung rõ trong ảnh. Hãy chọn vùng có chữ hoặc chụp gần hơn.';return;}
   show(data);cache.set(key,data);if(cache.size>3)cache.delete(cache.keys().next().value);
  }catch(error){if(id===serial)status.textContent=error.name==='AbortError'?'AI chưa trả lời sau 2 phút. Hãy chọn riêng vùng chữ Trung rồi thử lại.':error.message;}
- finally{clearTimeout(timer);clearInterval(progress);if(id===serial){controller=null;busy=false;buttons();}}
+ finally{stopLoading?.();clearTimeout(timer);clearInterval(progress);if(id===serial){controller=null;busy=false;buttons();}}
 }
 choose.addEventListener('click',()=>file.click());camera.addEventListener('click',()=>capture.click());file.addEventListener('change',pick);capture.addEventListener('change',pick);run.addEventListener('click',()=>read(false));fastButton.addEventListener('click',()=>read(true));remove.addEventListener('click',reset);
 use.addEventListener('click',()=>{const value=text.value.trim();if(!value){status.textContent='Chưa có nội dung để dịch.';return;}if(value.length>500){status.textContent='Ô dịch nhận tối đa 500 ký tự. Hãy giữ lại câu hoặc đoạn muốn dịch trong ô nhận dạng.';text.focus();return;}const direction=$('translationDirection');direction.value='zh-vi';direction.dispatchEvent(new Event('change',{bubbles:true}));const input=$('translationInput');input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}));input.focus();input.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});status.textContent='Đã đưa chữ Trung vào ô dịch. Bấm Dịch câu để xem nghĩa tiếng Việt và phiên âm.';});
