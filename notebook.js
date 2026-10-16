@@ -6,7 +6,7 @@ const action=(text,fn)=>{const b=node('button',text);b.type='button';b.onclick=f
  const owner=()=>{try{return JSON.parse(localStorage.getItem('hsk-account-meta-v1')||'{}').uid||'guest';}catch(_){return 'guest';}};
  let editing=null,items={},activeOwner=owner(),deckFilter=null,visibleCount=80;
  function load(){try{const data=JSON.parse(localStorage.getItem(KEY)||'{}');items=data.items&&typeof data.items==='object'&&!Array.isArray(data.items)?data.items:{};}catch(_){items={};}}
- const intro=node('div','','hub-intro');intro.append(node('h2','Sổ từ vựng'));panel.append(intro,node('p','Tự thêm từ hoặc lưu từ khi tra cứu. Sổ lưu trên thiết bị và đồng bộ khi đăng nhập.','hint'));
+ const intro=node('div','','hub-intro');intro.append(node('h2','Sổ từ vựng'));panel.append(intro);
  const status=node('p');status.setAttribute('role','status');
  const form=node('form','','notebook-form'),fields={};
  for(const [key,label,max,required] of [['han','Chữ Trung',80,true],['pin','Pinyin',160,false],['mean','Nghĩa tiếng Việt',500,true],['example','Ví dụ',1500,false],['note','Ghi chú',1500,false],['deck','Bộ sưu tập',80,false]]){const wrap=node('label',label),input=node(key==='example'||key==='note'?'textarea':'input');input.id='notebook-'+key;input.maxLength=max;input.required=required;fields[key]=input;wrap.append(input);form.append(wrap);}
