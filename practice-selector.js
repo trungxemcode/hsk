@@ -39,8 +39,14 @@
  const practice=document.getElementById('studioPractice');
  if(!practice)return;
  const picker=document.createElement('div');picker.id='practiceModePicker';picker.className='ps-picker';
- picker.innerHTML='<div class="ps-heading"><div><p class="ps-eyebrow">Luyện tập cá nhân hóa</p><h2>Chọn chế độ luyện</h2><p class="ps-description">Chọn một, nhiều hoặc tất cả. Mục tiêu HSK của bạn được dùng làm mặc định.</p></div><span class="ps-level" id="practiceModeLevel">HSK</span></div><div class="ps-tools"><span id="practiceSelectedCount" aria-live="polite"></span><div><button type="button" id="practiceSelectAll">Chọn tất cả</button><button type="button" id="practiceClearAll">Bỏ chọn</button></div></div><div id="practiceModeOptions" class="ps-options" role="group" aria-label="Các chế độ luyện"></div><div class="ps-start-row"><p id="practiceModeStatus" role="status"></p><button type="button" class="ps-start" id="practiceStartModes">Bắt đầu luyện →</button></div><div class="ps-extras"><strong>Hoặc mở từng chế độ riêng lẻ</strong><p>Các bài luyện quen thuộc vẫn ở bên dưới, không cần chọn cả lượt.</p></div>';
+ picker.innerHTML=`<details id="practiceModeDisclosure" class="ps-disclosure">
+ <summary class="ps-disclosure-summary"><span class="ps-summary-icon" aria-hidden="true">☰</span><span class="ps-summary-copy"><strong>Chọn chế độ luyện</strong><small id="practiceSelectedCount" aria-live="polite"></small></span><span class="ps-level" id="practiceModeLevel">HSK</span><span class="ps-chevron" aria-hidden="true">⌄</span></summary>
+ <div class="ps-disclosure-body"><div class="ps-tools"><p>Chọn một, nhiều hoặc tất cả chế độ.</p><div><button type="button" id="practiceSelectAll">Chọn tất cả</button><button type="button" id="practiceClearAll">Bỏ chọn</button></div></div><div id="practiceModeOptions" class="ps-options" role="group" aria-label="Các chế độ luyện"></div></div>
+ </details><div class="ps-start-row"><p id="practiceModeStatus" role="status"></p><button type="button" class="ps-start" id="practiceStartModes">Bắt đầu luyện →</button></div>`;
  practice.insertBefore(picker,practice.firstChild);
+ picker.querySelector('.ps-summary-icon').replaceChildren(svg('check'));
+ // Retain legacy DOM nodes for active feature routes, but hide the duplicate menus.
+ for(const legacy of ['studioReview','practiceGroup']){const group=document.getElementById(legacy);if(group){group.hidden=true;group.open=false;}}
  const options=picker.querySelector('#practiceModeOptions'),counter=picker.querySelector('#practiceSelectedCount'),start=picker.querySelector('#practiceStartModes'),hint=picker.querySelector('#practiceModeStatus');
  const owner=()=>{try{return JSON.parse(localStorage.getItem('hsk-account-meta-v1')||'{}').uid||'guest';}catch{return 'guest';}};
  const prefKey=()=>'hsk-practice-mode-choice-v1:'+owner();

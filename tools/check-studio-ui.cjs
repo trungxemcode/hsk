@@ -9,8 +9,21 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   await page.route('https://**/*',route=>route.abort());
   await page.addInitScript(()=>{window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>[{name:'Test Mandarin',lang:'zh-CN',localService:true}],cancel(){},speak(u){window.__spoken=u.text;setTimeout(()=>u.onend?.(),10);}}});});
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`);await page.waitForFunction(()=>!!window.HSKLessons&&document.body.dataset.studioHub==='home',{timeout:60000});
-  const nav=async mode=>{if(mode==='review')mode='practice';await page.locator('.sidebar [data-studio-go="'+mode+'"]').click();if(mode==='practice')await page.locator('#studioPractice>.hub-group').evaluateAll(groups=>groups.forEach(d=>d.open=true));};
-  assert.equal(await page.locator('#studioReview').getAttribute('open'),null);assert.equal(await page.locator('#practiceGroup').getAttribute('open'),null);await nav('practice');await page.locator('#studioReview>summary').click();assert.equal(await page.locator('#studioReview .hub-card').first().isVisible(),false);await page.locator('#studioReview>summary').click();await page.waitForTimeout(350);assert.equal(await page.locator('#activeTitle').innerText(),'Luyện & Ôn');await page.locator('#studioPractice [data-studio-go="learn"]').click();await page.locator('#flashcard').waitFor({state:'visible'});
+  const nav=async mode=>{if(mode==='review')mode='practice';await page.locator('.sidebar [data-studio-go="'+mode+'"]').click();};
+  await nav('practice');
+  assert.equal(await page.locator('#studioReview').isVisible(),false);
+  assert.equal(await page.locator('#practiceGroup').isVisible(),false);
+  const practiceDisclosure=page.locator('#practiceModeDisclosure');
+  assert.equal(await practiceDisclosure.evaluate(el=>el.open),false);
+  await practiceDisclosure.locator('summary').click();
+  await page.locator('#practiceClearAll').click();
+  await page.locator('[data-practice-option="learn"] input').check();
+  await practiceDisclosure.locator('summary').click();
+  assert.equal(await practiceDisclosure.evaluate(el=>el.open),false);
+  await page.waitForTimeout(150);
+  assert.equal(await page.locator('#activeTitle').innerText(),'Luyện & Ôn');
+  await page.locator('#practiceStartModes').click();
+  await page.locator('#flashcard').waitFor({state:'visible'});
   await page.locator('#flashcard .front .speech-button').click();assert.ok(await page.evaluate(()=>!!window.__spoken));assert.equal(await page.locator('#flashcard').evaluate(el=>el.classList.contains('flipped')),false);
   await page.locator('#flashcard .mastery-btn.known').click();await page.waitForTimeout(180);await nav('account');assert.equal(await page.locator('#studioStreak').innerText(),'1 ngày');assert.ok(await page.locator('#offlineUpdate').isDisabled());
   await page.locator('#studioTargetLevel').selectOption('1');assert.match(await page.locator('#studioKnownCount').innerText(),/^1 \/ /);
@@ -27,14 +40,14 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   await page.locator('#searchPanel [data-studio-go="translator"]').click();assert.ok(await page.locator('#translationInput').isVisible());await page.locator('#ocrCapture').locator('..').locator('summary').click().catch(()=>{});assert.equal(await page.locator('#ocrFile').count(),1);
   await nav('lessons');await page.evaluate(async()=>{history.replaceState(null,'','#lesson/standard-2-03');await window.HSKLessonNav.open();});assert.equal(await page.locator('.lesson-section-nav button').count(),4);for(const name of ['Từ vựng','Đọc & hội thoại','Ngữ pháp','Luyện tập']){await page.locator('.lesson-section-nav').getByRole('button',{name,exact:true}).click();}
   assert.equal(await page.locator('#lessonChatButton').count(),1);
-  await nav('review');await page.locator('#studioReview [data-studio-go="srs"]').click();await page.locator('#srsStart').click();assert.ok(await page.locator('#srsCard').isVisible());await page.locator('#srsReveal').click();assert.ok(await page.locator('#srsRatings').isVisible());
+  await nav('review');await page.locator('#practiceModeDisclosure>summary').click();await page.locator('#practiceClearAll').click();await page.locator('[data-practice-option="srs"] input').check();await page.locator('#practiceModeDisclosure>summary').click();await page.locator('#practiceStartModes').click();await page.locator('#srsStart').click();assert.ok(await page.locator('#srsCard').isVisible());await page.locator('#srsReveal').click();assert.ok(await page.locator('#srsRatings').isVisible());
   // Render each main view at desktop and phone sizes; assert it remains within the viewport.
   for(const width of [1440,390]){
    await page.setViewportSize({width,height:900});
    for(const mode of ['home','practice','review','learn','search','quiz','mistakes','compare','srs','account','translator','lessons','about']){
     await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(40);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+1),false,mode+' overflow at '+width);
    }
-   await page.mouse.move(0,0);await page.evaluate(()=>window.HSKStudio.navigate('practice'));const color=await page.locator('#studioPractice .hub-content strong').first().evaluate(el=>getComputedStyle(el).color);assert.equal(color,'rgb(32, 32, 51)');
+   await page.mouse.move(0,0);await page.evaluate(()=>window.HSKStudio.navigate('practice'));const color=await page.locator('#practiceModeDisclosure .ps-summary-copy strong').first().evaluate(el=>getComputedStyle(el).color);assert.equal(color,'rgb(48, 48, 68)');
    await page.waitForTimeout(350);if(width===390){const overlap=await page.evaluate(()=>document.querySelector('#speechStatus').getBoundingClientRect().bottom>document.querySelector('.bottom-nav').getBoundingClientRect().top);assert.equal(overlap,false,'speech status must clear phone navigation');}await page.screenshot({path:'/tmp/studio-practice-'+width+'.png',fullPage:true});
   }
   // Shared tokens must resolve on both root and feature descendants after theme changes.
@@ -117,8 +130,18 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    const positions=await page.locator('#studioHome .shortcut').evaluateAll(cards=>cards.map(c=>({top:c.getBoundingClientRect().top,title:c.querySelector('strong').getBoundingClientRect().top,description:c.querySelector('small').getBoundingClientRect().top})));
    for(let i=0;i<positions.length;i++)for(let j=i+1;j<positions.length;j++)if(Math.abs(positions[i].top-positions[j].top)<1){assert.ok(Math.abs(positions[i].title-positions[j].title)<1,'shortcut title alignment');assert.ok(Math.abs(positions[i].description-positions[j].description)<1,'shortcut copy alignment');}
    await page.screenshot({path:'/tmp/studio-aligned-home-'+width+'.png',fullPage:true});await page.evaluate(()=>window.HSKStudio.navigate('practice'));await page.waitForTimeout(350);
-   const first=page.locator('#studioPractice .hub-card').first();await first.evaluate(n=>n.closest('details').open=true);await first.scrollIntoViewIfNeeded();const b=await first.boundingBox();await page.mouse.move(b.x+b.width/2,b.y+b.height/2);await page.mouse.down();await page.waitForTimeout(150);
-   const colors=await first.evaluate(el=>({bg:getComputedStyle(el).backgroundColor,colors:[...el.querySelectorAll('strong,small,em,svg')].map(x=>getComputedStyle(x).color)}));assert.equal(colors.bg,'rgb(105, 87, 231)');assert.ok(colors.colors.every(c=>c==='rgb(255, 255, 255)'));await page.screenshot({path:'/tmp/studio-pressed-'+width+'.png',fullPage:true});await page.mouse.up();await page.mouse.move(0,0);
+   await page.locator('#practiceModeDisclosure').evaluate(el=>el.open=true);
+   const first=page.locator('#practiceModeOptions .ps-option').first();
+   await first.scrollIntoViewIfNeeded();
+   const b=await first.boundingBox();
+   assert.ok(b&&b.height>=44,'compact touch target must remain >=44px');
+   await page.mouse.move(b.x+b.width/2,b.y+b.height/2);
+   await page.mouse.down();await page.waitForTimeout(150);
+   assert.equal(await first.evaluate(el=>el.getBoundingClientRect().width>0),true);
+   await page.mouse.up();await page.mouse.move(0,0);
+   await first.locator('input').check();
+   assert.equal(await first.evaluate(el=>el.classList.contains('is-selected')),true);
+   await page.screenshot({path:'/tmp/studio-pressed-'+width+'.png',fullPage:true});
   }
   // Touch emulation: verify retained hover after release, and whole learning-corner feedback.
   const touch=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'}),phone=await touch.newPage();
@@ -133,13 +156,16 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    await page.setViewportSize({width,height:900});
    for(const mode of ['practice']){
     await page.mouse.move(0,0);await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(350);
-    for(const group of await page.locator('#studioPractice .hub-group').all()){
-    if(!await group.evaluate(d=>d.open))await group.locator('summary').first().click();
-    await page.waitForTimeout(100);
-    const spacing=await group.evaluate(panel=>{const heading=panel.querySelector('.hub-group-heading').getBoundingClientRect(),cards=[...panel.querySelectorAll('.hub-card')];return {headingGap:cards[0].getBoundingClientRect().top-heading.bottom,cards:cards.map(c=>{const desc=c.querySelector('small').getBoundingClientRect(),cta=c.querySelector('em').getBoundingClientRect();return {height:c.getBoundingClientRect().height,ctaGap:cta.top-desc.bottom,padding:parseFloat(getComputedStyle(c).paddingTop)};})};});
-    assert.ok(spacing.headingGap>=0&&spacing.headingGap<=16,'heading to cards spacing '+width+' '+JSON.stringify(spacing));
-    for(const card of spacing.cards){assert.ok(card.padding>=12,'comfortable card inset');if(width<=500){assert.ok(card.height<240,'phone card must not reserve empty height');assert.ok(card.height>=44,'compact rows retain touch target');}}
-    }
+    assert.equal(await page.locator('#studioReview').isVisible(),false);
+    assert.equal(await page.locator('#practiceGroup').isVisible(),false);
+    const disclosure=page.locator('#practiceModeDisclosure');
+    await disclosure.evaluate(el=>el.open=true);
+    const tiles=page.locator('#practiceModeOptions .ps-option');
+    assert.equal(await tiles.count(),12);
+    const sizing=await tiles.evaluateAll(cards=>cards.map(c=>{const r=c.getBoundingClientRect();return {height:r.height,width:r.width}}));
+    for(const tile of sizing){assert.ok(tile.height>=44,'compact tile still finger-friendly');assert.ok(tile.width>40,'tile remains legible');}
+    if(width<=720)assert.equal(await page.locator('#practiceModeOptions').evaluate(n=>getComputedStyle(n).gridTemplateColumns.split(' ').length),2);
+    await disclosure.evaluate(el=>el.open=false);
     await page.screenshot({path:'/tmp/studio-spacing-'+mode+'-'+width+'.png',fullPage:true});
    }
   }
@@ -156,7 +182,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   }
   await page.reload();await page.waitForFunction(()=>!!window.HSKStudio&&document.body.dataset.studioHub==='home');assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');assert.equal(await page.locator('#themeToggle').getAttribute('aria-pressed'),'true');await page.locator('#themeToggle').evaluate(b=>b.click());assert.equal(await page.locator('html').getAttribute('data-theme'),'light');
   // New competency practice uses real controls, stable grading and persistent writing drafts.
-  await page.mouse.move(0,0);await page.evaluate(()=>window.HSKStudio.navigate('practice'));await page.locator('#practiceGroup').evaluate(d=>d.open=true);await page.locator('#studioPractice [data-studio-go="exam"]').click();assert.equal(await page.locator('#activeTitle').innerText(),'Bài tập HSK');
+  await page.mouse.move(0,0);await page.evaluate(()=>window.HSKStudio.navigate('practice'));await page.evaluate(()=>window.HSKStudio.navigate('exam'));assert.equal(await page.locator('#activeTitle').innerText(),'Bài tập HSK');
   const examSelect=async(level,type)=>{await page.evaluate(()=>window.HSKExam.catalogue());await page.locator('#examLevel').selectOption(String(level));await page.locator('[data-exam-type="'+type+'"]').click();};
   await examSelect(3,'order');assert.ok(await page.locator('#examCheck').isDisabled());const n=await page.evaluate(()=>window.HSKExam.question.tokens.length);for(let i=0;i<n;i++)await page.locator('.exam-token-pool [data-token-index="'+i+'"]').click();await page.locator('#examCheck').click();await page.locator('#examFeedback').getByRole('button',{name:'Xem đáp án và giải thích',exact:true}).click();assert.match(await page.locator('#examFeedback').innerText(),/Chính xác/);
   await examSelect(3,'character');await page.locator('#examCharacter').fill(await page.evaluate(()=>window.HSKExam.question.answer));await page.locator('#examCheck').click();await page.locator('#examFeedback').getByRole('button',{name:'Xem đáp án và giải thích',exact:true}).click();assert.match(await page.locator('#examFeedback').innerText(),/Chính xác/);

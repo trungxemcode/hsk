@@ -19,7 +19,20 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.evaluate(x=>{document.documentElement.dataset.theme=x;HSKStudio.navigate('practice')},theme);
    const picker=page.locator('#practiceModePicker');
    await picker.waitFor({state:'visible'});
+   const disclosure=picker.locator('#practiceModeDisclosure');
+   if(theme==='light'){
+    assert.equal(await disclosure.evaluate(el=>el.open),false,'default mode list must be collapsed');
+   }
+   assert.equal(await page.locator('#studioReview').isVisible(),false,'legacy SRS mode list removed from view');
+   assert.equal(await page.locator('#practiceGroup').isVisible(),false,'legacy practice list removed from view');
+   assert.equal(await page.locator('.ps-extras').count(),0,'no redundant direct-mode section');
+   await disclosure.locator('summary').click();
+   assert.equal(await disclosure.evaluate(el=>el.open),true);
    const amount=await picker.locator('.ps-option input').count();assert.equal(amount,12);
+   if(width<721){
+    const layout=await picker.locator('.ps-options').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length);
+    assert.equal(layout,2,'mobile mode choices form a compact two-column grid');
+   }
    assert.match(await page.locator('#practiceModeLevel').innerText(),/HSK 3/);
    assert.equal(await picker.locator('.ps-icon svg').count(),amount);
    for(const card of await page.locator('#studioPractice .hub-card').all()){
@@ -36,6 +49,10 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await picker.locator('#practiceStartModes').isDisabled(),true);
    await picker.locator('[data-practice-option=match-game] input').check();
    await picker.locator('[data-practice-option=sentence-game] input').check();
+   assert.match(await picker.locator('#practiceSelectedCount').innerText(),/2 \/ 12/);
+   await disclosure.locator('summary').click();
+   assert.equal(await disclosure.evaluate(el=>el.open),false,'can collapse after choosing');
+   assert.equal(await picker.locator('#practiceStartModes').isVisible(),true,'start accessible without expanding');
    await picker.locator('#practiceStartModes').click();
    assert.equal(await page.locator('#matchGamePanel').isVisible(),true);
    assert.match(await page.locator('#practiceSessionStep').innerText(),/1 \/ 2/);
@@ -45,10 +62,14 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.locator('#practiceSessionNext').click();
    assert.equal(await page.locator('#practiceModePicker').isVisible(),true);
    assert.equal(await page.locator('#practiceSessionBar').isVisible(),false);
+   await disclosure.locator('summary').click();
    await picker.locator('#practiceSelectAll').click();
    assert.equal(await picker.locator('.ps-option input:checked').count(),amount);
    await picker.locator('#practiceClearAll').click();
    await picker.locator('[data-practice-option=study4] input').check();
+   assert.equal(await picker.locator('.ps-option input:checked').count(),1);
+   await disclosure.locator('summary').click();
+   assert.equal(await disclosure.evaluate(el=>el.open),false);
    await picker.locator('#practiceStartModes').click();
    assert.equal(await page.locator('#study4PracticePanel').isVisible(),true);
    assert.equal(await page.locator('#study4Level').inputValue(),'3');
@@ -64,6 +85,11 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
     assert.ok(link.startsWith('https://study4.com/tests/'),'valid source URL');
    }
    await page.locator('#practiceSessionStop').click();
+   await page.evaluate(()=>HSKStudio.navigate('practice'));
+   assert.equal(await disclosure.evaluate(el=>el.open),false,'single mode starts from collapsed picker');
+   assert.equal(await picker.locator('#practiceStartModes').isVisible(),true);
+   assert.equal(await page.locator('#studioReview').isVisible(),false);
+   assert.equal(await page.locator('#practiceGroup').isVisible(),false);
    assert.equal(await page.locator('#practiceSessionBar').isVisible(),false);
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
    assert.equal(overflow,false,'no viewport overflow');
