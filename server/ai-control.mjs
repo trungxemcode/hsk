@@ -10,11 +10,15 @@ export class HSkaIControl {
   const time=Date.now();
   if(data.action==='reserve'){
    if(typeof data.uid!=='string'||!/^[-\w:]{1,150}$/.test(data.uid)||typeof data.route!=='string'||!/^[-\w:]{1,55}$/.test(data.route))return Response.json({error:'input'},{status:400});
+   // UID comes only from the Worker's Firebase-verified account, never a client role flag.
+   const admins=(this.env.ADMIN_UIDS||'').split(',').map(uid=>uid.trim()).filter(Boolean);
+   if(admins.includes(data.uid))return Response.json({allowed:true,unlimited:true});
    const day=new Date(time).toISOString().slice(0,10),minute=Math.floor(time/60000);
    const globalDayLimit=Math.max(1,Math.min(10000,Number(this.env.AI_GLOBAL_DAILY_LIMIT)||180));
    const globalMinuteLimit=Math.max(1,Math.min(1000,Number(this.env.AI_GLOBAL_MINUTE_LIMIT)||10));
-   const userDayLimit=Math.max(1,Math.min(500,Number(this.env.AI_USER_DAILY_LIMIT)||15));
-   const readingDayLimit=Math.max(1,Math.min(100,Number(this.env.AI_USER_READING_DAILY_LIMIT)||5));
+   const userDayLimit=Math.max(1,Math.min(500,Number(this.env.AI_USER_DAILY_LIMIT)||50));
+   const readingDayLimit=Math.max(1,Math.min(100,Number(this.env.AI_USER_READING_DAILY_LIMIT)||15));
+   const queryDayLimit=Math.max(1,Math.min(500,Number(this.env.AI_USER_QUERY_DAILY_LIMIT)||35));
    const userKey='u:'+day+':'+data.uid,readingKey='r:'+day+':'+data.uid;
    const dayKey='g:'+day,minuteKey='m:'+minute;
    const result=await this.state.storage.transaction(async t=>{
@@ -23,6 +27,7 @@ export class HSkaIControl {
     if(count[0]>=globalDayLimit)return {allowed:false,reason:'global-daily'};
     if(count[1]>=globalMinuteLimit)return {allowed:false,reason:'global-minute'};
     if(count[2]>=userDayLimit)return {allowed:false,reason:'user-daily'};
+    if(data.route!=='reading'&&Math.max(0,count[2]-count[3])>=queryDayLimit)return {allowed:false,reason:'user-query-daily'};
     if(data.route==='reading'&&count[3]>=readingDayLimit)return {allowed:false,reason:'user-reading-daily'};
     const updates={[dayKey]:count[0]+1,[minuteKey]:count[1]+1,[userKey]:count[2]+1};
     if(data.route==='reading')updates[readingKey]=count[3]+1;

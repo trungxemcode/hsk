@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {HSkaIControl,controlCall,readingCacheKey} from './ai-control.mjs';
 
-function mock(){
+function mock(overrides={}){
  const map=new Map();
  const storage={
   async get(k){return map.get(k)},
@@ -11,9 +11,9 @@ function mock(){
   async transaction(fn){return fn(this)}
  };
  const state={storage};
- const e={AI_GLOBAL_DAILY_LIMIT:'3',AI_GLOBAL_MINUTE_LIMIT:'3',AI_USER_DAILY_LIMIT:'3',AI_USER_READING_DAILY_LIMIT:'1'};
+ const e={AI_GLOBAL_DAILY_LIMIT:'3',AI_GLOBAL_MINUTE_LIMIT:'3',AI_USER_DAILY_LIMIT:'3',AI_USER_READING_DAILY_LIMIT:'1',...overrides};
  const instance=new HSkaIControl(state,e);
- const environment={AI_CONTROL:{idFromName:n=>n,get:id=>({fetch:(url,init)=>instance.fetch(new Request(url,init))})},AI_CONTROL_REQUIRED:'true'};
+ const environment={...e,AI_CONTROL:{idFromName:n=>n,get:id=>({fetch:(url,init)=>instance.fetch(new Request(url,init))})},AI_CONTROL_REQUIRED:'true'};
  return {instance,map,environment};
 }
 test('budget rejects missing binding when explicitly required',async()=>{
@@ -52,4 +52,34 @@ test('reading cache fingerprints include lesson topic and source, no ID token',a
  assert.notEqual(await readingCacheKey({...body,angle:'bàn kế hoạch'}),k);
  assert.notEqual(await readingCacheKey({...body,hsk:5}),k);
  assert.notEqual(await readingCacheKey({...body,lessonWords:[]}),k);
+});
+
+test('regular accounts get independent 35-query and 15-reading daily allowances',async()=>{
+ const {environment}=mock({AI_GLOBAL_DAILY_LIMIT:'10000',AI_GLOBAL_MINUTE_LIMIT:'1000',AI_USER_DAILY_LIMIT:'50',AI_USER_QUERY_DAILY_LIMIT:'35',AI_USER_READING_DAILY_LIMIT:'15'});
+ for(let i=0;i<35;i++)assert.equal((await controlCall(environment,'reserve',{uid:'regular',route:'ask'})).allowed,true);
+ assert.equal((await controlCall(environment,'reserve',{uid:'regular',route:'ask'})).reason,'user-query-daily');
+ for(let i=0;i<15;i++)assert.equal((await controlCall(environment,'reserve',{uid:'regular',route:'reading'})).allowed,true);
+ assert.equal((await controlCall(environment,'reserve',{uid:'regular',route:'reading'})).reason,'user-daily');
+ for(let i=0;i<15;i++)assert.equal((await controlCall(environment,'reserve',{uid:'other',route:'reading'})).allowed,true);
+ assert.equal((await controlCall(environment,'reserve',{uid:'other',route:'reading'})).reason,'user-reading-daily');
+ assert.equal((await controlCall(environment,'reserve',{uid:'other',route:'translate'})).allowed,true);
+});
+test('configured admin bypasses all budget caps without consuming normal-user counters',async()=>{
+ const {environment,map}=mock({ADMIN_UIDS:'owner',AI_GLOBAL_DAILY_LIMIT:'1',AI_GLOBAL_MINUTE_LIMIT:'1'});
+ assert.equal((await controlCall(environment,'reserve',{uid:'regular',route:'ask'})).allowed,true);
+ const before=JSON.stringify([...map]);
+ for(let i=0;i<60;i++)assert.deepEqual(await controlCall(environment,'reserve',{uid:'owner',route:i%2?'reading':'ask'}),{status:200,allowed:true,unlimited:true});
+ assert.equal(JSON.stringify([...map]),before);
+ assert.equal((await controlCall(environment,'reserve',{uid:'attacker',route:'ask',admin:true})).allowed,false);
+});
+test('Worker admin exemption uses verified account UID, ignoring forged token roles',async()=>{
+ const {createHandler}=await import('./translator-worker-bundled.mjs');
+ const uid='owner',project='hsk-flashcards-44631';let verifiedUid=uid;
+ const configured={...mock({ADMIN_UIDS:uid,AI_GLOBAL_DAILY_LIMIT:'1',AI_GLOBAL_MINUTE_LIMIT:'1',AI_USER_DAILY_LIMIT:'1'}).environment,GEMINI_API_KEY:'fake',FIREBASE_API_KEY:'fake'};
+ const handler=createHandler(async u=>u.includes('identitytoolkit')?Response.json({users:[{localId:verifiedUid}]}):Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify({answer:'Xin chào',terms:[]})}]}}]}));
+ const req=sub=>{const claims={aud:project,iss:'https://securetoken.google.com/'+project,sub,admin:true,exp:Math.floor(Date.now()/1000)+3600};return new Request('https://worker.test/dictionary-lookup',{method:'POST',headers:{Origin:'https://trungxemcode.github.io',Authorization:'Bearer h.'+Buffer.from(JSON.stringify(claims)).toString('base64url')+'.s'},body:JSON.stringify({query:'xin chào'})});};
+ for(let i=0;i<3;i++)assert.equal((await handler(req(uid),configured)).status,200,'admin bypasses budget and cooldown');
+ verifiedUid='regular';assert.equal((await handler(req(uid),configured)).status,401,'claimed owner UID must match Firebase account');
+ assert.equal((await handler(req('regular'),configured)).status,200);
+ assert.equal((await handler(req('regular'),configured)).status,429,'forged admin claim does not bypass cooldown or quotas');
 });
