@@ -2,8 +2,16 @@ import { controlCall } from './ai-control.mjs';
 
 // Slot 1 accepts the existing secret. Remaining slots are optional, server-only.
 export function configuredGeminiKeys(env){
- return [...new Set(Array.from({length:10},(_,i)=>env['GEMINI_API_KEY_'+(i+1)]||(i===0?env.GEMINI_API_KEY:''))
-  .filter(k=>typeof k==='string'&&k.trim()&&k.trim().length<=300).map(k=>k.trim()))];
+ return configuredGeminiSlots(env).map(entry=>entry.key);
+}
+function configuredGeminiSlots(env){
+ const seen=new Set(),entries=[];
+ for(let slot=1;slot<=10;slot++){
+  const raw=env['GEMINI_API_KEY_'+slot]||(slot===1?env.GEMINI_API_KEY:'');
+  if(typeof raw!=='string'||!raw.trim()||raw.trim().length>300)continue;
+  const key=raw.trim();if(seen.has(key))continue;seen.add(key);entries.push({slot,key});
+ }
+ return entries;
 }
 async function geminiKeyId(key){
  const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(key));
@@ -24,8 +32,14 @@ async function geminiCooldown(response,now){
  const daily=details.some(d=>d.violations?.some(v=>/perday|daily/i.test(String(v.quotaId)+' '+String(v.quotaMetric))));
  return Math.max(daily?86400000:60000,Number.isFinite(ms)?ms:0);
 }
-export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={cursor:0,blocked:new Map()}}={}){
- const keys=configuredGeminiKeys(env);
+export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={cursor:0,blocked:new Map()},onAttempt=()=>{}}={}){
+ const slots=configuredGeminiSlots(env),keys=slots.map(entry=>entry.key);
+ const callKey=async(index,url,init)=>{
+  const headers=new Headers(init.headers);headers.set('x-goog-api-key',keys[index]);const started=Date.now();
+  const report=(status,outcome)=>{try{onAttempt({phase:'gemini-key',slot:slots[index].slot,ms:Date.now()-started,status,outcome})}catch{}};
+  try{const response=await fetchFn(url,{...init,headers});report(response.status,'response');return response;}
+  catch(error){report(0,init.signal?.aborted?'canceled':'network');throw error;}
+ };
  let idsPromise;
  return async(url,init={})=>{
   if(!String(url).startsWith('https://generativelanguage.googleapis.com/v1beta/models/'))return fetchFn(url,init);
@@ -33,7 +47,7 @@ export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={curs
   canceled();
   if(!keys.length)return Response.json({error:{status:'UNAVAILABLE'}},{status:503});
   // Legacy single-key installations retain one attempt and existing behavior.
-  if(keys.length===1){const headers=new Headers(init.headers);headers.set('x-goog-api-key',keys[0]);return fetchFn(url,{...init,headers});}
+  if(keys.length===1)return callKey(0,url,init);
   const ids=await (idsPromise||=Promise.all(keys.map(geminiKeyId))),excluded=[];
   let last;
   // Never fan out or scan ten accounts for one prompt: max two sequential calls.
@@ -52,9 +66,8 @@ export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={curs
     return Response.json({error:{status:'RESOURCE_EXHAUSTED'}},{status:429,headers:{'Retry-After':String(Number.isFinite(picked.retryAfter)?Math.max(1,picked.retryAfter):60)}});
    }
    const index=picked.index;excluded.push(ids[index]);
-   const headers=new Headers(init.headers);headers.set('x-goog-api-key',keys[index]);
    let response;
-   try{response=await fetchFn(url,{...init,headers});}catch(error){canceled();throw error;}
+   try{response=await callKey(index,url,init);}catch(error){canceled();throw error;}
    canceled();
    const delay=await geminiCooldown(response,now());
    canceled();

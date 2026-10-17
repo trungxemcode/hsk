@@ -122,3 +122,17 @@ test('genres are validated and prose is not forced into a dialogue',async()=>{
  assert.equal(validReadingStory({...prose,paragraphMode:prose.paragraphMode.map(x=>({...x,hanzi:'我读书。'}))},{genre:'news',hsk:6,quality:true}),false);
  assert.equal(validReadingStory(prose,{genre:'news',hsk:8,quality:true}),false);
 });
+test('only verified source text is reused; each call still generates a complete new story',async()=>{
+ const {fetchFn,calls}=provider(),sourceCache=new Map(),timings=[];
+ const run=()=>buildReadingStory(valid,{fetchFn,env,model:'gemini-3.5-flash-lite',sourceCache,onTiming:e=>timings.push(e)});
+ const first=await run(),second=await run();
+ assert.equal(first.status,200);assert.equal(second.status,200);assert.notEqual(first.data.story.id,second.data.story.id);
+ assert.equal(calls.filter(c=>c.url.includes('mandarinbean')).length,1);
+ assert.equal(calls.filter(c=>c.url.includes('generativelanguage')).length,2);
+ assert.deepEqual(timings.map(e=>e.cached),[false,true]);
+ const config=JSON.parse(calls[1].options.body).generationConfig;
+ assert.equal(config.maxOutputTokens,3200);assert.equal(second.data.story.quiz.length,3);
+ sourceCache.get('ask-leave').expiresAt=0;await run();assert.equal(calls.filter(c=>c.url.includes('mandarinbean')).length,2);
+ const failed=provider({sourceOkay:false}),badCache=new Map();
+ assert.equal((await buildReadingStory(valid,{fetchFn:failed.fetchFn,env,model:'test',sourceCache:badCache})).status,502);assert.equal(badCache.size,0);
+});

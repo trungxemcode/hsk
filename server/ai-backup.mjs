@@ -28,7 +28,7 @@ export const AI_TIMEOUTS=Object.freeze({text:6000,reading:12000,backup:25000});
 export const AI_ROLE_TIMEOUTS=Object.freeze({text:10000,reading:18000,gemini:25000,complex:15000,heavyReading:25000});
 export function aiTaskRole(route,body={}){
  if(['/ocr','/handwriting-recognize','/study-plan-review'].includes(route))return 'gemini';
- if(route==='/reading-next')return body.hsk>=5||['news','explainer'].includes(body.genre)?'gemini':'xkiro';
+ if(route==='/reading-next')return 'gemini'; // Full passage + pinyin + translation + quiz is a generation task.
  if(route==='/dictionary-translate')return body.entries?.length>15?'gemini':'xkiro';
  const question=String(body.question||body.query||'');
  const complex=/phân tích|phan tich|chuyên sâu|chuyen sau|sắc thái|sac thai|ngữ dụng|ngu dung|nhiều nghĩa|nhieu nghia|ẩn dụ|an du|thành ngữ|thanh ngu|分析|语用|隐喻|细微|nuance|in.depth/i.test(question);
@@ -50,7 +50,7 @@ function aiSchemaMatches(value,s){
 // At most two sequential provider attempts. Never retry refusals or caller cancellation.
 export function createAiFailoverFetch(fetchFn,env,{
  timeoutMs=AI_TIMEOUTS.text,backupTimeoutMs=AI_TIMEOUTS.backup,
- preferSecondary=false,validateData=()=>true,onProvider=()=>{}
+ preferSecondary=false,validateData=()=>true,onProvider=()=>{},onAttempt=()=>{}
 }={}){
  if(fetchFn.hskFailover)return fetchFn;
  const wrapped=async(url,init={})=>{
@@ -92,11 +92,13 @@ export function createAiFailoverFetch(fetchFn,env,{
   let original;
   const order=preferSecondary?[['xkiro',xkiro,timeoutMs],['gemini',gemini,backupTimeoutMs]]:[['gemini',gemini,timeoutMs],['xkiro',xkiro,backupTimeoutMs]];
   for(let i=0;i<order.length;i++){
-   const [provider,call,ms]=order[i];
+   const [provider,call,ms]=order[i],started=Date.now();
+   const report=(outcome,status=0)=>{try{onAttempt({provider,ms:Date.now()-started,outcome,status})}catch{}};
    try{
     const result=await stage(call,ms);original=result.response;
+    report(result.retry?'retry':result.success?'success':'rejected',result.response.status);
     if(!result.retry){if(result.success)onProvider(provider);return result.response;}
-   }catch(error){if(parent?.aborted)throw error;}
+   }catch(error){report(parent?.aborted?'canceled':error?.name==='AbortError'?'timeout':'network');if(parent?.aborted)throw error;}
    if(parent?.aborted)throw new DOMException('Canceled','AbortError');
   }
   // Never let malformed final output escape as a successful response.
@@ -104,12 +106,12 @@ export function createAiFailoverFetch(fetchFn,env,{
  };
  wrapped.hskFailover=true;return wrapped;
 }
-export function createAiRoleFetch(fetchFn,env,{route,body,validateData,onProvider}={}){
+export function createAiRoleFetch(fetchFn,env,{route,body,validateData,onProvider,onAttempt}={}){
  const reading=route==='/reading-next',enabled=env.AI_TASK_ROUTING==='true',role=aiTaskRole(route,body);
  return createAiFailoverFetch(fetchFn,env,{
   preferSecondary:enabled&&role==='xkiro',
   timeoutMs:enabled&&role==='xkiro'?(reading?AI_ROLE_TIMEOUTS.reading:AI_ROLE_TIMEOUTS.text):enabled?(reading?AI_ROLE_TIMEOUTS.heavyReading:AI_ROLE_TIMEOUTS.complex):(reading?AI_TIMEOUTS.reading:AI_TIMEOUTS.text),
   backupTimeoutMs:enabled&&role==='xkiro'?AI_ROLE_TIMEOUTS.gemini:AI_TIMEOUTS.backup,
-  validateData,onProvider
+  validateData,onProvider,onAttempt
  });
 }
