@@ -9,6 +9,7 @@ Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-
 | Navigation | `studio.js`, `studio-layout.css` | Existing panels, sidebar, mobile routes |
 | Home 2.16 | `home-overview.js/css`, `docs/OVERVIEW-2.16.md` | Single learning CTA, 2×2 shortcuts, real progress and compact vocabulary. Daily-word summary has persistent 8px vertical / 12px horizontal padding so purple press/focus never hugs the text (2.18). |
 | Mobile | `mobile-ux.js/css`, `mobile-layout.js/css`, `mobile-dock.js` | Focus modes, original fixed quiz/exam/SRS actions, in-place lesson word popover, grouped account controls and notebook hierarchy. Landscape phone navigation sits on the right with safe areas on both edges; dock buttons include label padding. See `docs/MOBILE-FLOW-2.19.md`. |
+| Shared press surfaces | `ui-buttons.css`, `tools/check-shared-press-ui.cjs` | Framed disclosures keep body padding while their headers fill the closed frame, match its corners and retain text inset. Browser regression checks geometry and toggles across 15 routes in both themes and phone portrait/landscape/desktop. |
 | Visual tokens | `style.css`, `ui-buttons.css` | Neutral buttons, purple active state; light/dark. Disclosure press states follow their parent card radius, standalone summaries use the button radius; no global overflow clipping (2.17). |
 | HSK target/filter | `planner.js`, `planner-core.js`, `studio.js` | Learning goal and vocabulary search filter are intentionally independent |
 

@@ -10,7 +10,30 @@ body.studio-enabled :is(input,textarea,select):focus-visible{outline:2px solid v
 
 /* A disclosure is a real touch target, not an unshaped rectangle inside its card.
    Do not clip the whole details element: expanded content and focus rings must remain visible. */
-body.studio-enabled summary{border-radius:var(--radius-btn);background-clip:padding-box;-webkit-tap-highlight-color:var(--palette-clear);transition:background-color .12s ease,color .12s ease}
+body.studio-enabled summary{box-sizing:border-box;min-height:44px;padding:12px 14px;color:var(--ink);border-radius:var(--radius-btn);background-clip:border-box;-webkit-tap-highlight-color:var(--palette-clear);transition:background-color .12s ease,color .12s ease}
+body.studio-enabled #homeDailyWord summary{padding:8px 12px}
+/* Padded frames used to leave a white rim around a pressed header. Keep body
+   spacing, but let the header itself reach all four edges when collapsed. */
+body.studio-enabled details:is(.lesson-sources,.mobile-account-group,.memory-schedule,.ocr-panel,.dictionary-summary,.mobile-home-stats,.word-relations,.confusion-candidate,.confusion-char-section,.details,.compare-lesson,.exam-sources,.rr-sources,.exam-feedback details,.plan-panel){padding:12px!important;--press-frame-radius:var(--radius-btn)}
+body.studio-enabled details:is(.lesson-sources,.mobile-account-group,.memory-schedule,.ocr-panel,.dictionary-summary,.mobile-home-stats,.word-relations,.confusion-candidate,.confusion-char-section,.details,.compare-lesson,.exam-sources,.rr-sources,.exam-feedback details,.plan-panel)>summary{margin:-12px!important;padding:14px!important;border-radius:var(--press-frame-radius)!important}
+body.studio-enabled details:is(.lesson-sources,.mobile-account-group,.memory-schedule,.ocr-panel,.dictionary-summary,.mobile-home-stats,.word-relations,.confusion-candidate,.confusion-char-section,.details,.compare-lesson,.exam-sources,.rr-sources,.exam-feedback details,.plan-panel)[open]>summary{margin-bottom:12px!important;border-bottom-left-radius:0!important;border-bottom-right-radius:0!important}
+body.studio-enabled details.mobile-account-group{--press-frame-radius:var(--radius-card)!important}
+body.studio-enabled details.plan-panel{--press-frame-radius:var(--radius-18px)!important}
+body.studio-enabled details:is(.update-push-settings,.push-settings,.lesson-vocab){padding:12px!important;--press-frame-radius:var(--radius-btn)}
+body.studio-enabled details.update-push-settings{--press-frame-radius:var(--radius-14px)}
+body.studio-enabled details:is(.update-push-settings,.push-settings,.lesson-vocab)>summary{margin:-12px!important;padding:14px!important;border-radius:var(--press-frame-radius)!important}
+body.studio-enabled details:is(.update-push-settings,.push-settings,.lesson-vocab)[open]>summary{margin-bottom:12px!important;border-bottom-left-radius:0!important;border-bottom-right-radius:0!important}
+body.studio-enabled details.memory-schedule{--press-frame-radius:var(--radius-10px)!important}
+body.studio-enabled details.ocr-panel{--press-frame-radius:var(--radius-14px)!important}
+body.studio-enabled details.exam-sources{--press-frame-radius:var(--radius-14px)!important}
+body.studio-enabled details.details{--press-frame-radius:var(--radius-13px)!important}
+body.studio-enabled details.word-relations{--press-frame-radius:var(--radius-16px)!important}
+body.studio-enabled details.confusion-candidate,body.studio-enabled details.confusion-char-section{--press-frame-radius:var(--radius-btn)}
+body.studio-enabled .ps-disclosure>summary{border-radius:var(--radius-card)}
+body.studio-enabled .ps-disclosure[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0}
+/* Decorative child tiles must not mask the single purple interaction surface. */
+html body.studio-enabled :is(button:not(.correct):not(.wrong),summary):is(:hover,:active,:focus-visible) :is(span,strong,small,em,i,p,div){background-color:var(--palette-clear)!important;background-image:none!important}
+html body.studio-enabled button{background-clip:border-box;-webkit-tap-highlight-color:var(--palette-clear)}
 /* Use the same tokens as each frame. `inherit` is unreliable through the native details shadow tree. */
 body.studio-enabled :is(.overview-search,.clean-disclosure,.mobile-home-stats)>summary{border-radius:var(--radius-btn)}
 body.studio-enabled .dictionary-row>summary{border-radius:var(--radius-14px)}
