@@ -1,4 +1,4 @@
-import { createAiFailoverFetch } from './ai-backup.mjs';
+import { createAiFailoverFetch, AI_TIMEOUTS } from './ai-backup.mjs';
 // Real-world reading adaptation. Source URLs are allowlisted and checked on server; no arbitrary URL fetches.
 export const READING_SOURCES=Object.freeze([
  {id:'what-study',hskMin:1,hskMax:2,topic:'Trường học',site:'Mandarin Bean',url:'https://mandarinbean.com/what-are-you-studying/'},
@@ -76,7 +76,7 @@ export function extractReadingText(page){
 }
 export async function buildReadingStory(body,{fetchFn,env,signal,model,random=Math.random}){
  if(!checkReadingBody(body))return {status:400,data:{error:'Yêu cầu bài đọc chưa hợp lệ.'}};
- fetchFn=createAiFailoverFetch(fetchFn,env,{timeoutMs:30000});
+ fetchFn=createAiFailoverFetch(fetchFn,env,{timeoutMs:AI_TIMEOUTS.reading});
  const source=chooseReadingSource(body,random);
  if(!source)return {status:404,data:{error:'Chưa có nguồn phù hợp cấp HSK này.'}};
  const canonical=new URL(source.url);

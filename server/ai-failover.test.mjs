@@ -1,11 +1,14 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {createAiFailoverFetch} from './ai-backup.mjs';
+import {createAiFailoverFetch,AI_TIMEOUTS} from './ai-backup.mjs';
 import {createHandler} from './translator-worker-bundled.mjs';
 const env={AI_BACKUP_ENABLED:'true',SECONDARY_AI_PROVIDER:'xkiro',SECONDARY_AI_API_KEY:'test-only-not-a-real-key-12345',SECONDARY_AI_MODEL:'text-model'};
 const url='https://generativelanguage.googleapis.com/v1beta/models/test:generateContent';
 const init={body:JSON.stringify({systemInstruction:{parts:[{text:'Answer in Vietnamese'}]},contents:[{role:'user',parts:[{text:'question'}]}],generationConfig:{responseSchema:{type:'OBJECT',properties:{answer:{type:'STRING'}},required:['answer']}}})};
 const good=()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:'{"answer":"Đúng"}'}]}}]});
 const backup=()=>Response.json({choices:[{message:{content:'{"answer":"Dự phòng"}'}}]});
+test('fast deadlines share one policy across text and reading',()=>{
+ assert.deepEqual(AI_TIMEOUTS,{text:6000,reading:12000,backup:25000});assert.ok(Object.isFrozen(AI_TIMEOUTS));
+});
 test('transient/provider errors fail over once, successful Gemini never calls backup',async()=>{
  for(const status of [401,403,404,408,429,500,502,503,504]){
   const calls=[];const f=createAiFailoverFetch(async u=>{calls.push(u);return u===url?new Response('',{status}):backup()},env);

@@ -128,7 +128,8 @@ export async function requestBackupJSON({fetchFn,env,signal,instruction,prompt,m
 
 // One sequential failover, never a parallel paid request. Authentication/source fetches
 // bypass this adapter. A caller abort cancels both stages and never starts a backup.
-export function createAiFailoverFetch(fetchFn,env,{timeoutMs=15000,backupTimeoutMs=25000}={}){
+export const AI_TIMEOUTS=Object.freeze({text:6000,reading:12000,backup:25000});
+export function createAiFailoverFetch(fetchFn,env,{timeoutMs=AI_TIMEOUTS.text,backupTimeoutMs=AI_TIMEOUTS.backup}={}){
  if(fetchFn.hskFailover)return fetchFn;
  const wrapped=async(url,init={})=>{
   if(!String(url).startsWith('https://generativelanguage.googleapis.com/v1beta/models/')||!backupConfigured(env))return fetchFn(url,init);
@@ -260,7 +261,7 @@ export function extractReadingText(page){
 }
 export async function buildReadingStory(body,{fetchFn,env,signal,model,random=Math.random}){
  if(!checkReadingBody(body))return {status:400,data:{error:'Yêu cầu bài đọc chưa hợp lệ.'}};
- fetchFn=createAiFailoverFetch(fetchFn,env,{timeoutMs:30000});
+ fetchFn=createAiFailoverFetch(fetchFn,env,{timeoutMs:AI_TIMEOUTS.reading});
  const source=chooseReadingSource(body,random);
  if(!source)return {status:404,data:{error:'Chưa có nguồn phù hợp cấp HSK này.'}};
  const canonical=new URL(source.url);
@@ -320,7 +321,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-ai-failover-3-3-4';
+export const WORKER_REVISION='hsk-ai-fast-failover-3-3-5';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -334,7 +335,7 @@ async function geminiFailure(response,model,env,operation='existing'){
 export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
  const cooldowns=new Map();
  return async(request,env)=>{
-  const fetchFn=createAiFailoverFetch(rawFetchFn,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?30000:15000});
+  const fetchFn=createAiFailoverFetch(rawFetchFn,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
   const origin=request.headers.get('Origin')||'',allowed=(env.ALLOWED_ORIGINS||'https://trungxemcode.github.io').split(',').map(s=>s.trim());
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin','X-HSK-Worker-Version':WORKER_REVISION};
   const reply=(value,status=200)=>new Response(JSON.stringify(value),{status,headers});
