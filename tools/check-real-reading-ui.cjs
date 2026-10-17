@@ -11,7 +11,7 @@ const SAMPLE={
  {speaker:'小李',stageNote:'微笑',hanzi:'谢谢你，我们一起吃吧。',pinyin:'Xièxie nǐ, wǒmen yìqǐ chī ba.',vi:'Cảm ơn, cùng ăn nhé.'}
  ],paragraphMode:[{hanzi:'今天两个朋友在公司一起吃早餐。',pinyin:'Jīntiān liǎng gè péngyou zài gōngsī yìqǐ chī zǎocān.',vi:'Hôm nay hai người bạn cùng ăn sáng tại công ty.'}],
  quiz:[
- {question:'谁没有吃早饭？',options:['小王','小李','老师'],answerIndex:1,explanationVi:'Tiểu Lý chưa ăn sáng.'},
+ {question:'谁没有吃早饭？',options:['小王','小李','老师'],answerIndex:1,explanationVi:'Đúng vì Tiểu Lý chưa ăn sáng.'},
  {question:'小王买了什么？',options:['包子','书','衣服'],answerIndex:0,explanationVi:'Tiểu Vương đã mua bánh bao.'},
  {question:'他们在哪里？',options:['学校','机场','公司'],answerIndex:2,explanationVi:'Họ đang ở công ty.'}
  ]};
@@ -69,9 +69,14 @@ const SAMPLE={
    await page.locator('#rrArticle .rr-reading-switches button').filter({hasText:'Văn bản'}).click();
    assert.equal(await page.locator('#rrArticle .rr-line').count(),1);
    await page.locator('#rrArticle .rr-reading-switches button').filter({hasText:'Kịch bản'}).click();
-   for(let i=0;i<3;i++)await page.locator('#rrArticle fieldset').nth(i).locator('input').nth(SAMPLE.quiz[i].answerIndex).check();
+   for(let i=0;i<3;i++)await page.locator('#rrArticle fieldset').nth(i).locator('input').nth(i===0?0:SAMPLE.quiz[i].answerIndex).check();
    await page.locator('#rrArticle .rr-quiz .rr-primary').click();
-   assert.match(await page.locator('#rrArticle .rr-quiz-result').innerText(),/Đúng 3\/3/);
+   assert.match(await page.locator('#rrArticle .rr-quiz-result').innerText(),/Đúng 2\/3/);
+   const wrong=page.locator('#rrArticle .rr-quiz-result [data-correct=false]');
+   assert.equal(await wrong.count(),1);assert.match(await wrong.innerText(),/Câu 1: Sai/);
+   assert.match(await wrong.innerText(),/Bạn chọn: 小王/);assert.match(await wrong.innerText(),/Đáp án đúng: 小李/);
+   assert.doesNotMatch(await wrong.innerText(),/Đúng vì/);
+   assert.equal(await page.locator('#rrArticle .rr-quiz-result [data-correct=true]').count(),2);
    assert.match(await page.locator('#rrStats').innerText(),/Hoàn thành 1/);
    assert.equal(await page.locator('#rrArticle .rr-quiz .rr-primary').isDisabled(),true);
    const count=await page.evaluate(()=>window.HSKRealReading.history.entries.length);assert.ok(count>=1);

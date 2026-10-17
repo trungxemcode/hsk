@@ -75,12 +75,19 @@
    q.options.forEach((answer,j)=>{const label=make('label',null,'rr-answer'),radio=document.createElement('input');radio.type='radio';radio.name='rr-q'+i;radio.value=String(j);label.append(radio,document.createTextNode(answer));field.append(label);});
    quiz.append(field);
   }
-  const result=make('p','','rr-quiz-result');result.setAttribute('role','status');
+  const result=make('div','','rr-quiz-result');result.setAttribute('role','status');
   const check=controlButton('Xác nhận 3 câu',()=>{
    const answer=story.quiz.map((q,i)=>quiz.querySelector('input[name="rr-q'+i+'"]:checked'));
    if(answer.some(a=>!a)){result.textContent='Hãy chọn đủ 3 đáp án.';return;}
    const score=answer.filter((a,i)=>Number(a.value)===story.quiz[i].answerIndex).length;
-   result.textContent='Đúng '+score+'/3. '+story.quiz.map((q,i)=>(i+1)+'. '+q.explanationVi).join(' ');
+   result.replaceChildren(make('p','Đúng '+score+'/3.'));
+   story.quiz.forEach((q,i)=>{
+    const chosen=Number(answer[i].value),correct=chosen===q.answerIndex;
+    // AI explains the answer key; only the actual selection determines the verdict.
+    const explanation=String(q.explanationVi||'').replace(/^\s*(?:(?:đúng|sai)\s+(?:bởi vì|vì|do)\s*[:：]?\s*|(?:đúng|sai)\s*[.!:：]\s*)/iu,'');
+    const row=make('p','Câu '+(i+1)+': '+(correct?'Đúng. ':'Sai. ')+ 'Bạn chọn: '+q.options[chosen]+'. Đáp án đúng: '+q.options[q.answerIndex]+'. Giải thích đáp án: '+explanation);
+    row.dataset.correct=String(correct);result.append(row);
+   });
    history=C.record(history,story,{completed:true});persist(historyKey,history);caption();check.disabled=true;
   },'rr-primary');
   quiz.append(check,result);article.append(quiz);
