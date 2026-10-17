@@ -102,8 +102,7 @@ export async function controlCall(env,action,data={}){
  return {status:response.status,...result};
 }
 
-// Optional secondary provider. Kept OFF until the user confirms vendor/model
-// and installs a newly rotated credential as a Cloudflare secret.
+// Configured text provider; credentials remain in server secrets.
 // Never echo secrets, provider responses, prompts or source content into logs.
 export function backupConfigured(env){
  return env.AI_BACKUP_ENABLED==='true'&&env.SECONDARY_AI_PROVIDER==='xkiro'&&
@@ -121,21 +120,49 @@ export async function requestBackupJSON({fetchFn,env,signal,instruction,prompt,m
  });
  if(!response.ok)return {ok:false,status:response.status};
  const payload=await response.json();
+ if(payload?.choices?.[0]?.message?.refusal||payload?.choices?.[0]?.finish_reason==='content_filter')return {ok:false,refusal:true};
+ if(payload?.choices?.[0]?.finish_reason&&payload.choices[0].finish_reason!=='stop')return {ok:false,status:502};
  const content=payload?.choices?.[0]?.message?.content;
  if(typeof content!=='string'||content.length>50000)return {ok:false,status:502};
  try{return {ok:true,data:JSON.parse(content)}}catch{return {ok:false,status:502}}
 }
 
-// One sequential failover, never a parallel paid request. Authentication/source fetches
-// bypass this adapter. A caller abort cancels both stages and never starts a backup.
+// Server-owned routing: callers cannot select providers or bypass budget/auth gates.
 export const AI_TIMEOUTS=Object.freeze({text:6000,reading:12000,backup:25000});
-export function createAiFailoverFetch(fetchFn,env,{timeoutMs=AI_TIMEOUTS.text,backupTimeoutMs=AI_TIMEOUTS.backup}={}){
+export const AI_ROLE_TIMEOUTS=Object.freeze({text:10000,reading:18000,gemini:25000,complex:15000,heavyReading:25000});
+export function aiTaskRole(route,body={}){
+ if(['/ocr','/handwriting-recognize','/study-plan-review'].includes(route))return 'gemini';
+ if(route==='/reading-next')return body.hsk>=5||['news','explainer'].includes(body.genre)?'gemini':'xkiro';
+ if(route==='/dictionary-translate')return body.entries?.length>15?'gemini':'xkiro';
+ const question=String(body.question||body.query||'');
+ const complex=/phân tích|phan tich|chuyên sâu|chuyen sau|sắc thái|sac thai|ngữ dụng|ngu dung|nhiều nghĩa|nhieu nghia|ẩn dụ|an du|thành ngữ|thanh ngu|分析|语用|隐喻|细微|nuance|in.depth/i.test(question);
+ if(complex||(['/ask','/lesson-ask'].includes(route)&&body.hsk>=5)||question.length>250||(body.history?.length||0)>=6)return 'gemini';
+ if(route==='/translate'&&(String(body.text||'').length>180||body.hsk>=5))return 'gemini';
+ return ['/translate','/dictionary-lookup','/dictionary-translate','/ask','/lesson-ask'].includes(route)?'xkiro':'gemini';
+}
+function aiSchemaMatches(value,s){
+ if(!s)return !!value&&typeof value==='object';
+ const type=String(s.type||'').toUpperCase();
+ if(type==='OBJECT')return !!value&&typeof value==='object'&&!Array.isArray(value)&&(s.required||[]).every(k=>Object.hasOwn(value,k))&&Object.entries(s.properties||{}).every(([k,v])=>!Object.hasOwn(value,k)||aiSchemaMatches(value[k],v));
+ if(type==='ARRAY')return Array.isArray(value)&&(s.minItems==null||value.length>=s.minItems)&&(s.maxItems==null||value.length<=s.maxItems)&&value.every(v=>aiSchemaMatches(v,s.items));
+ if(type==='STRING')return typeof value==='string'&&(!s.enum||s.enum.includes(value));
+ if(type==='INTEGER')return Number.isInteger(value)&&(s.minimum==null||value>=s.minimum)&&(s.maximum==null||value<=s.maximum);
+ if(type==='NUMBER')return Number.isFinite(value);
+ if(type==='BOOLEAN')return typeof value==='boolean';
+ return true;
+}
+// At most two sequential provider attempts. Never retry refusals or caller cancellation.
+export function createAiFailoverFetch(fetchFn,env,{
+ timeoutMs=AI_TIMEOUTS.text,backupTimeoutMs=AI_TIMEOUTS.backup,
+ preferSecondary=false,validateData=()=>true,onProvider=()=>{}
+}={}){
  if(fetchFn.hskFailover)return fetchFn;
  const wrapped=async(url,init={})=>{
-  if(!String(url).startsWith('https://generativelanguage.googleapis.com/v1beta/models/')||!backupConfigured(env))return fetchFn(url,init);
+  if(!String(url).startsWith('https://generativelanguage.googleapis.com/v1beta/models/'))return fetchFn(url,init);
+  if(!backupConfigured(env)){const response=await fetchFn(url,init);if(response.ok)onProvider('gemini');return response;}
   let body;try{body=JSON.parse(init.body)}catch{return fetchFn(url,init)}
   const contents=body.contents||[];
-  if(contents.some(c=>c.parts?.some(p=>p.inlineData||p.fileData)))return fetchFn(url,init);
+  if(contents.some(c=>c.parts?.some(p=>p.inlineData||p.fileData))){const response=await fetchFn(url,init);if(response.ok)onProvider('gemini');return response;}
   const parent=init.signal;
   const stage=async(fn,ms)=>{
    const controller=new AbortController(),abort=()=>controller.abort();
@@ -147,41 +174,48 @@ export function createAiFailoverFetch(fetchFn,env,{timeoutMs=AI_TIMEOUTS.text,ba
     new Promise((_,reject)=>{listener=()=>reject(new DOMException('Canceled','AbortError'));controller.signal.addEventListener('abort',listener,{once:true});timer=setTimeout(()=>controller.abort(),ms);})
    ])}finally{clearTimeout(timer);controller.signal.removeEventListener('abort',listener);parent?.removeEventListener('abort',abort);}
   };
+  const valid=data=>aiSchemaMatches(data,body.generationConfig?.responseSchema)&&validateData(data);
+  const instruction=(body.systemInstruction?.parts||[]).map(p=>p.text||'').join('\n')+'\nReturn JSON only matching this response schema: '+JSON.stringify(body.generationConfig?.responseSchema||{});
+  const gemini=async signal=>{
+   const response=await fetchFn(url,{...init,signal});
+   if(!response.ok)return {response,retry:[401,403,404,408,429,500,502,503,504].includes(response.status)};
+   let json;try{json=await response.clone().json()}catch{return {response,retry:true}}
+   const candidate=json.candidates?.[0];
+   if(json.promptFeedback?.blockReason||candidate?.finishReason&&!['STOP','MAX_TOKENS'].includes(candidate.finishReason))return {response,retry:false};
+   try{
+    const text=(candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('');
+    return {response,retry:!valid(JSON.parse(text))||(candidate?.finishReason&&candidate.finishReason!=='STOP'),success:!candidate?.finishReason||candidate.finishReason==='STOP'};
+   }catch{return {response,retry:true}}
+  };
+  const xkiro=async signal=>{
+   const result=await requestBackupJSON({fetchFn,env,signal,instruction,prompt:{contents},maxTokens:body.generationConfig?.maxOutputTokens});
+   if(result?.refusal)return {response:Response.json({error:{status:'SAFETY'}},{status:422}),retry:false};
+   if(result?.ok&&valid(result.data))return {response:Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(result.data)}]}}]}),retry:false,success:true};
+   return {response:Response.json({error:{status:'UNAVAILABLE'}},{status:result?.status===429?429:503}),retry:result?.status!==400};
+  };
   let original;
-  try{
-   const result=await stage(async signal=>{
-    const response=await fetchFn(url,{...init,signal});
-    if(!response.ok)return {response,retry:[401,403,404,408,429,500,502,503,504].includes(response.status)};
-    let json;try{json=await response.clone().json()}catch{return {response,retry:true}}
-    const candidate=json.candidates?.[0];
-    if(json.promptFeedback?.blockReason||candidate?.finishReason&&!['STOP','MAX_TOKENS'].includes(candidate.finishReason))return {response,retry:false};
-    try{
-     const text=(candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('');
-     const parsed=JSON.parse(text);
-     const shape=(value,s)=>{
-      if(!s)return !!value&&typeof value==='object';
-      if(s.type==='OBJECT')return !!value&&typeof value==='object'&&!Array.isArray(value)&&(s.required||[]).every(k=>Object.hasOwn(value,k))&&Object.entries(s.properties||{}).every(([k,v])=>!Object.hasOwn(value,k)||shape(value[k],v));
-      if(s.type==='ARRAY')return Array.isArray(value)&&value.every(v=>shape(v,s.items));
-      if(s.type==='STRING')return typeof value==='string';
-      if(s.type==='INTEGER')return Number.isInteger(value);
-      if(s.type==='NUMBER')return Number.isFinite(value);
-      if(s.type==='BOOLEAN')return typeof value==='boolean';
-      return true;
-     };
-     return {response,retry:!shape(parsed,body.generationConfig?.responseSchema)||(candidate?.finishReason&&candidate.finishReason!=='STOP')};
-    }catch{return {response,retry:true}}
-   },timeoutMs);
-   original=result.response;if(!result.retry)return original;
-  }catch(error){if(parent?.aborted)throw error;}
-  if(parent?.aborted)throw new DOMException('Canceled','AbortError');
-  try{
-   const instruction=(body.systemInstruction?.parts||[]).map(p=>p.text||'').join('\n')+'\nReturn JSON only matching this response schema: '+JSON.stringify(body.generationConfig?.responseSchema||{});
-   const result=await stage(signal=>requestBackupJSON({fetchFn,env,signal,instruction,prompt:{contents},maxTokens:body.generationConfig?.maxOutputTokens}),backupTimeoutMs);
-   if(result?.ok)return Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(result.data)}]}}]});
-  }catch(error){if(parent?.aborted)throw error;}
-  return original||Response.json({error:{status:'UNAVAILABLE'}},{status:503});
+  const order=preferSecondary?[['xkiro',xkiro,timeoutMs],['gemini',gemini,backupTimeoutMs]]:[['gemini',gemini,timeoutMs],['xkiro',xkiro,backupTimeoutMs]];
+  for(let i=0;i<order.length;i++){
+   const [provider,call,ms]=order[i];
+   try{
+    const result=await stage(call,ms);original=result.response;
+    if(!result.retry){if(result.success)onProvider(provider);return result.response;}
+   }catch(error){if(parent?.aborted)throw error;}
+   if(parent?.aborted)throw new DOMException('Canceled','AbortError');
+  }
+  // Never let malformed final output escape as a successful response.
+  return original&&!original.ok?original:Response.json({error:{status:'UNAVAILABLE'}},{status:503});
  };
  wrapped.hskFailover=true;return wrapped;
+}
+export function createAiRoleFetch(fetchFn,env,{route,body,validateData,onProvider}={}){
+ const reading=route==='/reading-next',enabled=env.AI_TASK_ROUTING==='true',role=aiTaskRole(route,body);
+ return createAiFailoverFetch(fetchFn,env,{
+  preferSecondary:enabled&&role==='xkiro',
+  timeoutMs:enabled&&role==='xkiro'?(reading?AI_ROLE_TIMEOUTS.reading:AI_ROLE_TIMEOUTS.text):enabled?(reading?AI_ROLE_TIMEOUTS.heavyReading:AI_ROLE_TIMEOUTS.complex):(reading?AI_TIMEOUTS.reading:AI_TIMEOUTS.text),
+  backupTimeoutMs:enabled&&role==='xkiro'?AI_ROLE_TIMEOUTS.gemini:AI_TIMEOUTS.backup,
+  validateData,onProvider
+ });
 }
 
 // Real-world reading adaptation. Source URLs are allowlisted and checked on server; no arbitrary URL fetches.
@@ -261,7 +295,7 @@ export function extractReadingText(page){
 }
 export async function buildReadingStory(body,{fetchFn,env,signal,model,random=Math.random}){
  if(!checkReadingBody(body))return {status:400,data:{error:'Yêu cầu bài đọc chưa hợp lệ.'}};
- fetchFn=createAiFailoverFetch(fetchFn,env,{timeoutMs:AI_TIMEOUTS.reading});
+ fetchFn=createAiRoleFetch(fetchFn,env,{route:'/reading-next',body,validateData:data=>validReadingStory(data,{genre:body.genre||'dialogue',hsk:body.hsk,quality:!!body.genre})});
  const source=chooseReadingSource(body,random);
  if(!source)return {status:404,data:{error:'Chưa có nguồn phù hợp cấp HSK này.'}};
  const canonical=new URL(source.url);
@@ -321,7 +355,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-ai-fast-failover-3-3-5';
+export const WORKER_REVISION='hsk-ai-task-roles-3-3-6';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -335,12 +369,12 @@ async function geminiFailure(response,model,env,operation='existing'){
 export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
  const cooldowns=new Map();
  return async(request,env)=>{
-  const fetchFn=createAiFailoverFetch(rawFetchFn,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
+  let fetchFn=createAiFailoverFetch(rawFetchFn,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
   const origin=request.headers.get('Origin')||'',allowed=(env.ALLOWED_ORIGINS||'https://trungxemcode.github.io').split(',').map(s=>s.trim());
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin','X-HSK-Worker-Version':WORKER_REVISION};
   const reply=(value,status=200)=>new Response(JSON.stringify(value),{status,headers});
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
-  Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version'});
+  Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
   const route=new URL(request.url).pathname,isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
   if(route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading)return reply({error:'Không tìm thấy dịch vụ.'},404);
@@ -383,6 +417,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    const t=body.translation,h=body.history;
    if(typeof body.question!=='string'||!body.question.trim()||body.question.length>500||!t||typeof t.vietnamese!=='string'||!t.vietnamese.trim()||t.vietnamese.length>4000||typeof t.chinese!=='string'||!t.chinese.trim()||t.chinese.length>2000||typeof t.pinyin!=='string'||t.pinyin.length>2000||typeof t.explanation!=='string'||t.explanation.length>2000||!Array.isArray(h)||h.length>8||!h.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.text==='string'&&m.text.length<=1000))return reply({error:'Câu hỏi hoặc ngữ cảnh không hợp lệ.'},400);
   }else if(typeof body.text!=='string'||!body.text.trim()||body.text.length>500)return reply({error:'Nhập câu tối đa 500 ký tự.'},400);
+  fetchFn=createAiRoleFetch(rawFetchFn,env,{route,body,validateData:isReading?data=>validReadingStory(data,{genre:body.genre||'dialogue',hsk:body.hsk,quality:!!body.genre}):undefined,onProvider:provider=>{headers['X-HSK-AI-Provider']=provider;}});
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isOcr?110000:isReading?85000:isAsk?45000:60000);
   try{
    const auth=await fetchFn('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(env.FIREBASE_API_KEY),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token}),signal:controller.signal});
