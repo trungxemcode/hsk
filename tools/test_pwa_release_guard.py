@@ -30,7 +30,8 @@ class PwaReleaseGuardTests(unittest.TestCase):
     def test_actual_checkout_is_consistent(self):
         data = guard.ensure_release_integrity()
         self.assertGreaterEqual(len(data['assets']), 150)
-        self.assertEqual(data['version'], 'hsk-offline-3-3-6')
+        self.assertRegex(data['release'], r'^3\.\d+\.\d+$')
+        self.assertEqual(data['version'], 'hsk-offline-' + data['release'].replace('.', '-'))
 
     def test_assets_classify_ui_and_backend(self):
         names = set(guard.ensure_release_integrity()['assets'])
