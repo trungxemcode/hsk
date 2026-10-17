@@ -24,7 +24,8 @@ export async function requestBackupJSON({fetchFn,env,signal,instruction,prompt,m
 
 // One sequential failover, never a parallel paid request. Authentication/source fetches
 // bypass this adapter. A caller abort cancels both stages and never starts a backup.
-export function createAiFailoverFetch(fetchFn,env,{timeoutMs=15000,backupTimeoutMs=25000}={}){
+export const AI_TIMEOUTS=Object.freeze({text:6000,reading:12000,backup:25000});
+export function createAiFailoverFetch(fetchFn,env,{timeoutMs=AI_TIMEOUTS.text,backupTimeoutMs=AI_TIMEOUTS.backup}={}){
  if(fetchFn.hskFailover)return fetchFn;
  const wrapped=async(url,init={})=>{
   if(!String(url).startsWith('https://generativelanguage.googleapis.com/v1beta/models/')||!backupConfigured(env))return fetchFn(url,init);

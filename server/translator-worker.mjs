@@ -2,7 +2,7 @@ import { vocabulary } from './hsk-vocabulary.mjs';
 import { validateHandwritingSample, submitHandwritingSample } from './handwriting-samples.mjs';
 import { checkReadingBody, buildReadingStory } from './reading-service.mjs';
 import { controlCall, readingCacheKey, HSkaIControl } from './ai-control.mjs';
-import { createAiFailoverFetch } from './ai-backup.mjs';
+import { createAiFailoverFetch, AI_TIMEOUTS } from './ai-backup.mjs';
 
 const schema = {type:'OBJECT',properties:{chinese:{type:'STRING'},pinyin:{type:'STRING'},explanation:{type:'STRING'},note:{type:'STRING'}},required:['chinese','pinyin','explanation','note']};
 const chineseSchema={...schema,properties:{...schema.properties,vietnamese:{type:'STRING'}},required:[...schema.required,'vietnamese']};
@@ -25,7 +25,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-ai-failover-3-3-4';
+export const WORKER_REVISION='hsk-ai-fast-failover-3-3-5';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -39,7 +39,7 @@ async function geminiFailure(response,model,env,operation='existing'){
 export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
  const cooldowns=new Map();
  return async(request,env)=>{
-  const fetchFn=createAiFailoverFetch(rawFetchFn,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?30000:15000});
+  const fetchFn=createAiFailoverFetch(rawFetchFn,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
   const origin=request.headers.get('Origin')||'',allowed=(env.ALLOWED_ORIGINS||'https://trungxemcode.github.io').split(',').map(s=>s.trim());
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin','X-HSK-Worker-Version':WORKER_REVISION};
   const reply=(value,status=200)=>new Response(JSON.stringify(value),{status,headers});
