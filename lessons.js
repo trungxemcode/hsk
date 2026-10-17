@@ -124,9 +124,13 @@ function languageLine(x){
 }
 function contentShell(l,p){
  const c=l.content,nav=el('div',undefined,'lesson-section-nav'),views={};nav.setAttribute('aria-label','Các phần của bài học');root.append(nav);
+ const picker=el('label',undefined,'lesson-section-picker'),select=el('select');
+ picker.append(el('span','Chọn mục bài học'),select);select.setAttribute('aria-label','Chọn mục bài học');
+ for(const [id,label] of lessonSteps){const option=el('option',label);option.value=id;select.append(option);}
+ select.value=lessonSection;select.addEventListener('change',()=>changeSection(select.value));nav.append(picker);
  for(const [id,label] of lessonSteps){
   const v=el('section',undefined,'lesson-section');v.hidden=lessonSection!==id;v.setAttribute('aria-label',label);views[id]=v;
-  v.dataset.lessonSection=id;const b=button(label,()=>changeSection(id));b.setAttribute('aria-pressed',String(!v.hidden));const evidence=measure(l,p),complete=id==='overview'?evidence.quiz===1:id==='reading'?evidence.read:id==='practice'?evidence.content===1&&evidence.mini===1:evidence.mastered;b.dataset.complete=String(complete);if(complete)b.title='Có bằng chứng hoàn thành trong tiến độ bài';nav.append(b);root.append(v);
+  v.dataset.lessonSection=id;const b=button(label,()=>changeSection(id));b.setAttribute('aria-pressed',String(!v.hidden));const evidence=measure(l,p),complete=id==='overview'?evidence.quiz===1:id==='reading'?evidence.read:id==='practice'?evidence.content===1&&evidence.mini===1:evidence.mastered;b.dataset.complete=String(complete);if(complete){b.title='Có bằng chứng hoàn thành trong tiến độ bài';[...select.options].find(option=>option.value===id).textContent=label+' · Đã hoàn thành';}nav.append(b);root.append(v);
  }
  views.overview.append(el('h4','Tổng quan & từ vựng'),el('p',c.objectives.join(' ')));const summary=el('details',undefined,'lesson-sources');summary.append(el('summary','Nội dung trọng tâm'),el('p',c.summary));views.overview.append(summary);views.vocabulary=views.overview;
  const readingGroup=views.reading;views.dialogue=el('section',undefined,'lesson-dialogues');views.dialogue.append(el('h4','Hội thoại'));views.reading=el('section',undefined,'lesson-reading');readingGroup.append(views.dialogue,views.reading);

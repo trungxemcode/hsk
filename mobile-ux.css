@@ -1,4 +1,5 @@
 /* Mobile-only layout. Color and geometry tokens are owned by style.css. */
+.lesson-section-picker{display:none}
 .mobile-today-hero,.mobile-account-settings,.mobile-focus-bar,.mobile-card-actions,.mobile-swipe-hint,.mobile-passive-toggle,.mobile-add-word,.mobile-notebook-games,.mobile-notebook-tools-toggle,.mobile-dialog-focushead,.mobile-feedback-open,.writing-mode-bar{display:none}
 .mobile-home-stats{display:contents}.mobile-home-stats>summary{display:none}
 html[data-theme=dark] body.studio-enabled :is(.drawer,.drawer-head,.drawer-body){background:var(--surface);color:var(--ink)}
@@ -70,7 +71,7 @@ details.drawer-group:not([open])>.drawer-group-content{display:none!important}
  body.mobile-ux #flashcard .mastery-tools,body.mobile-ux #flashcard .mastery-btn{display:none!important}body.mobile-ux #flashcard .mean{max-height:none;overflow:visible;flex:none}
  body.mobile-ux .mobile-swipe-hint{display:block;font-size:12px;line-height:1.5;color:var(--sub);margin:10px 0}
  body.mobile-swipe-known #flashcard{outline:3px solid var(--green)}body.mobile-swipe-unknown #flashcard{outline:3px solid var(--mobile-review-ink)}
- body.mobile-ux .lesson-section-nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;position:sticky;top:0;z-index:2;background:var(--surface);padding:8px 0}
+ body.mobile-ux .lesson-section-nav{position:static;display:block;overflow:visible;background:var(--surface);padding:8px 0}
  body.mobile-ux .lesson-section-nav button{flex:none;min-height:44px;white-space:nowrap;padding:8px 14px;border-radius:var(--radius-pill)}
  body.mobile-ux .lesson-section-nav button[data-complete=true]::after{content:'●';font-size:8px;margin-left:6px}
  body.mobile-ux .lesson-chat-button{width:auto;max-width:calc(100% - 32px);height:auto;min-height:44px;padding:10px 14px;font-size:13px;border-radius:var(--radius-pill);bottom:calc(var(--mobile-dock-height,72px) + 12px)}
@@ -230,7 +231,10 @@ body.studio-enabled #aboutPanel .mobile-home-stats{display:block;margin-top:16px
  body.mobile-ux .mobile-mastery-details{margin-top:8px}
  body.mobile-ux .mobile-mastery-details>summary{padding:10px 8px;min-height:44px;font-size:13px;cursor:pointer}
  body.mobile-ux .mobile-mastery-details :is(p,small){font-size:12px!important;line-height:1.6}
- body.mobile-ux .lesson-section-nav{position:sticky;top:0;z-index:3;display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;padding:8px 0;background:var(--paper);margin:0 0 12px}
+ body.mobile-ux .lesson-section-nav{position:static;display:block;overflow:visible;padding:8px 0;background:var(--paper);margin:0 0 12px}
+ body.mobile-ux .lesson-section-nav>button{display:none}
+ body.mobile-ux .lesson-section-picker{display:grid;gap:6px;width:100%;margin:0;font-size:13px;font-weight:650;color:var(--ink)}
+ body.mobile-ux .lesson-section-picker select{appearance:auto;box-sizing:border-box;width:100%;min-width:0;min-height:48px;margin:0;padding:10px 12px;font:inherit;font-size:16px;line-height:1.5;color:var(--ink);background-color:var(--surface);border:1px solid var(--line-dark);border-radius:var(--radius-btn);touch-action:manipulation}
  body.mobile-ux .lesson-section-nav button{flex:none;min-height:44px;padding:10px 14px;border-radius:var(--radius-pill);font-size:13px;white-space:nowrap}
  body.mobile-ux .lesson-tap-word{cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:5px;border-radius:var(--radius-4px)}
  body.mobile-ux .lesson-tap-word:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
