@@ -897,6 +897,17 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "gemini-key-pool",
+      "name": "Luân phiên tối đa 10 khóa Gemini phía máy chủ",
+      "checks": [
+        { "kind": "file", "file": "server/gemini-keys.mjs", "value": "" },
+        { "kind": "contains", "file": "server/gemini-keys.mjs", "value": "export function createGeminiKeyFetch" },
+        { "kind": "contains", "file": "server/ai-control.mjs", "value": "gemini-pick" },
+        { "kind": "contains", "file": "server/translator-worker.mjs", "value": "createGeminiKeyFetch(rawFetchFn" },
+        { "kind": "file", "file": "server/gemini-keys.test.mjs", "value": "" }
+      ]
     }
   ]
 }

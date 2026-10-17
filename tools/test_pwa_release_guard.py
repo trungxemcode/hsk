@@ -76,7 +76,10 @@ class PwaReleaseGuardTests(unittest.TestCase):
 
     def test_semantic_release_cannot_go_backwards(self):
         current = guard.ensure_release_integrity()
-        previous = {'version': 'hsk-offline-3-4-1', 'release': '3.4.1',
+        parts = [int(part) for part in current['release'].split('.')]
+        parts[-1] += 1
+        future = '.'.join(map(str, parts))
+        previous = {'version': 'hsk-offline-' + future.replace('.', '-'), 'release': future,
                     'assets': current['assets']}
         with patch.object(guard, '_run', side_effect=[json.dumps(previous), 'index.html']):
             with self.assertRaisesRegex(ValueError, 'newer semantic release'):

@@ -5,9 +5,27 @@ export class HSkaIControl {
  async fetch(request){
   if(request.method!=='POST')return Response.json({error:'method'},{status:405});
   let data;try{data=await request.json()}catch{return Response.json({error:'payload'},{status:400})}
-  if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock'].includes(data.action))
+  if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock','gemini-pick','gemini-report'].includes(data.action))
    return Response.json({error:'action'},{status:400});
   const time=Date.now();
+  if(data.action==='gemini-pick'){
+   const validId=id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id);
+   if(!Array.isArray(data.ids)||data.ids.length<2||data.ids.length>10||!data.ids.every(validId)||new Set(data.ids).size!==data.ids.length||!Array.isArray(data.excluded)||data.excluded.length>10||!data.excluded.every(id=>data.ids.includes(id)))return Response.json({error:'keys'},{status:400});
+   const result=await this.state.storage.transaction(async t=>{
+    const previous=await t.get('gemini:pool')||{},pool={cursor:Number(previous.cursor)||0,ids:data.ids,blocked:{}};
+    for(const id of data.ids)if(previous.blocked?.[id]>time)pool.blocked[id]=previous.blocked[id];
+    let index=-1,retryAt=Infinity;
+    for(let n=0;n<data.ids.length;n++){const i=(pool.cursor+n)%data.ids.length,id=data.ids[i];if(data.excluded.includes(id))continue;if(!pool.blocked[id]){index=i;break;}retryAt=Math.min(retryAt,pool.blocked[id]);}
+    if(index>=0)pool.cursor=(index+1)%data.ids.length;
+    await t.put('gemini:pool',pool);
+    return {index,retryAfter:Number.isFinite(retryAt)?Math.max(1,Math.ceil((retryAt-time)/1000)):60};
+   });return Response.json(result);
+  }
+  if(data.action==='gemini-report'){
+   if(typeof data.id!=='string'||!/^[a-f0-9]{64}$/.test(data.id)||!Number.isFinite(data.delay)||data.delay<1000||data.delay>Number.MAX_SAFE_INTEGER-time)return Response.json({error:'key-report'},{status:400});
+   await this.state.storage.transaction(async t=>{const pool=await t.get('gemini:pool');if(pool?.ids?.includes(data.id)){pool.blocked||={};pool.blocked[data.id]=Math.max(pool.blocked[data.id]||0,time+data.delay);await t.put('gemini:pool',pool);}});
+   return Response.json({ok:true});
+  }
   if(data.action==='reserve'){
    if(typeof data.uid!=='string'||!/^[-\w:]{1,150}$/.test(data.uid)||typeof data.route!=='string'||!/^[-\w:]{1,55}$/.test(data.route))return Response.json({error:'input'},{status:400});
    // UID comes only from the Worker's Firebase-verified account, never a client role flag.
