@@ -1,0 +1,48 @@
+name: PWA release safety net
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pwa-release-check-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  release-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test release guard
+        run: python -m unittest discover -s tools -p 'test_pwa_release*.py'
+      - name: Check every PWA file and reject forgotten version bumps
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+        run: |
+          if [ -n "$BASE_REF" ] && git cat-file -e "$BASE_REF^{commit}" 2>/dev/null; then
+            python tools/check-pwa-release.py --base "$BASE_REF"
+          else
+            python tools/check-pwa-release.py
+          fi
+  verify-pages:
+    if: github.event_name == 'push'
+    needs: release-guard
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify deployed GitHub Pages files match commit
+        run: python tools/verify-live-pwa.py --attempts 22 --delay 20
