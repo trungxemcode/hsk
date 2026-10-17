@@ -60,9 +60,9 @@ export class HSkaIControl {
 export async function readingCacheKey(body){
  // No UID or Firebase ID token; shared educational story across accounts with same lesson vocabulary.
  const lesson=(body.lessonWords||[]).slice(0,20).map(x=>({han:x.han,mean:x.mean}));
- const canonical=JSON.stringify({v:2,hsk:body.hsk,lessonId:body.lessonId||'',lesson,sourceId:body.sourceId||'',topic:body.topic||'',angle:body.angle||''});
+ const canonical=JSON.stringify({v:3,hsk:body.hsk,genre:body.genre||'legacy-dialogue',lessonId:body.lessonId||'',lesson,sourceId:body.sourceId||'',topic:body.topic||'',angle:body.angle||''});
  const bytes=new TextEncoder().encode(canonical),digest=await crypto.subtle.digest('SHA-256',bytes);
- return 'v2_'+Array.from(new Uint8Array(digest)).map(x=>x.toString(16).padStart(2,'0')).join('');
+ return 'v3_'+Array.from(new Uint8Array(digest)).map(x=>x.toString(16).padStart(2,'0')).join('');
 }
 export async function controlCall(env,action,data={}){
  const obj=env.AI_CONTROL;
