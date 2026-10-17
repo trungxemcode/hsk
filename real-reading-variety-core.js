@@ -4,6 +4,7 @@
   const VERSION=1;
   const HISTORY_KEY='hsk-real-reading-history-v1';
   const MAX_HISTORY=400;
+  const GENRES={dialogue:'Hội thoại',story:'Truyện ngắn',news:'Bài báo luyện đọc',email:'Email / Tin nhắn',explainer:'Kiến thức ngắn'};
   const TOPICS=['ăn uống','giao thông','công việc','gia đình','mua sắm','trường học','du lịch','công nghệ','sức khỏe','bạn bè'];
   const ANGLES=['hỏi đáp','giải quyết vấn đề','so sánh lựa chọn','hiểu lầm nhỏ','chia sẻ kinh nghiệm','thay đổi kế hoạch','tình huống bất ngờ','kể lại một ngày'];
   const ntext=value=>String(value??'').normalize('NFKC').trim();
@@ -66,7 +67,7 @@
     const latest=recent(history);
     const offered=[];
     for(const item of catalog||[]){
-      if(!eligible(item,hsk,lessonId)||seenIds.has(String(item.id)))continue;
+      if(!eligible(item,hsk,lessonId)||scope.genre&&(item.genre||'dialogue')!==scope.genre||seenIds.has(String(item.id)))continue;
       const text=storyText(item);
       if(shownTexts.some(s=>similarity(s,text)>=.76))continue;
       offered.push(item);
@@ -99,7 +100,7 @@
     const choices=items.map(src=>{
       const source=sourceKey(src),combinations=[];
       for(const t of topicsClean.length?topicsClean:TOPICS)for(const angle of ANGLES){
-        const key=hash(source+'|'+hsk+'|'+(lessonId||'')+'|'+t+'|'+angle);
+        const key=hash(source+'|'+hsk+'|'+(lessonId||'')+'|'+t+'|'+angle+(scope.genre?'|'+scope.genre:''));
         if(!past.some(x=>x.variantKey===key))combinations.push({topic:t,angle,variantKey:key});
       }
       return {src,combinations};
@@ -127,7 +128,7 @@
     const id=ntext(item?.id);
     if(!id||!storyText(item))throw Error('Cannot track a reading without content');
     const entries=historyEntries(history).map(x=>({...x})),index=entries.findIndex(x=>String(x.id)===id);
-    const entry={id,hsk:item.hsk,lessonId:item.lessonId||null,title:ntext(item.titleZh||item.titleVi||'').slice(0,140),
+    const entry={id,hsk:item.hsk,genre:item.genre||'dialogue',lessonId:item.lessonId||null,title:ntext(item.titleZh||item.titleVi||'').slice(0,140),
       topic:ntext(item.topic).slice(0,80),angle:ntext(item.angle).slice(0,80),sourceKey:sourceKey(item),
       variantKey:ntext(item.variantKey),fingerprint:fingerprint(item),sample:storyText(item).slice(0,320),
       lastOpenedAt:now,openedCount:1,completedCount:completed?1:0,lastCompletedAt:completed?now:null};
@@ -142,7 +143,7 @@
     return {version:VERSION,entries:entries.slice(-MAX_HISTORY)};
   }
   function stats(history,scope){
-    const entries=historyEntries(history).filter(e=>e.hsk===scope.hsk&&(!scope.lessonId||e.lessonId===scope.lessonId));
+    const entries=historyEntries(history).filter(e=>e.hsk===scope.hsk&&(!scope.lessonId||e.lessonId===scope.lessonId)&&(!scope.genre||(e.genre||'dialogue')===scope.genre));
     return {opened:entries.length,completed:entries.filter(e=>e.completedCount>0).length,
       topics:new Set(entries.map(e=>e.topic).filter(Boolean)).size,
       sources:new Set(entries.map(e=>e.sourceKey).filter(Boolean)).size};
@@ -157,7 +158,7 @@
       seen.add(han);out.push({han,mean});if(out.length===20)break;
     }return out;
   }
-  const api={requestWords,VERSION,HISTORY_KEY,MAX_HISTORY,TOPICS,ANGLES,canonicalUrl,storyText,hash,fingerprint,similarity,
+  const api={GENRES,requestWords,VERSION,HISTORY_KEY,MAX_HISTORY,TOPICS,ANGLES,canonicalUrl,storyText,hash,fingerprint,similarity,
     sourceKey,nextCached,nextGeneration,next,isNovel,record,stats};
   root.HSKRealReadingVariety=api;
   if(typeof module==='object'&&module.exports)module.exports=api;

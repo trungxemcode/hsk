@@ -6,7 +6,7 @@
 .rr-subtitle{color:var(--sub);font-size:14px;line-height:1.6;margin:7px 0 16px}
 .rr-back,.rr-secondary,.rr-reading-switches button{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-btn);color:var(--ink);min-height:44px;padding:10px 14px;font-size:13px;font-weight:650;cursor:pointer}
 .rr-badge{background:var(--accent-light);color:var(--accent-dark);padding:9px 13px;border-radius:var(--radius-btn);font-size:13px;font-weight:750;white-space:nowrap}
-.rr-settings{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.rr-settings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
 .rr-settings label{display:grid;gap:6px;font-size:13px;color:var(--muted);font-weight:650;min-width:0}
 .rr-settings select{border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);min-height:44px;padding:10px 12px;font-size:14px;max-width:100%;width:100%}
 .rr-ops{display:flex;flex-wrap:wrap;gap:9px}
@@ -42,6 +42,7 @@
  .rr-panel{width:100%;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
  .rr-ops .rr-primary{flex:1;min-width:140px}
  .rr-ops .rr-secondary{flex:1;min-width:140px}
- .rr-settings{gap:8px}
+ .rr-settings{gap:8px;grid-template-columns:1fr 1fr}
+ .rr-settings .rr-genre{grid-column:1/-1}
  .rr-line{gap:6px}
 }

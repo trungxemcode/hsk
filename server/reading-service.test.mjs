@@ -71,7 +71,7 @@ test('extracts only verified public source and generates a labeled educational a
  assert.equal(x.data.story.hsk,3);
  assert.equal(x.data.story.source.url,'https://mandarinbean.com/ask-for-leave/');
  assert.equal(x.data.story.status,'adapted');
- assert.match(x.data.story.attribution,/chuyển thể/);
+ assert.match(x.data.story.attribution,/biên soạn|chuyển thể/);
  assert.equal(x.data.story.quiz.length,3);
  assert.equal(calls.length,2);
  assert.equal(calls[0].url,'https://mandarinbean.com/ask-for-leave/');
@@ -101,4 +101,24 @@ test('worker enables authenticated reading and applies per-user cooldown',async(
  const answer=await first.json();assert.equal(answer.story.scriptMode.length,4);
  assert.ok(calls.some(x=>x.url==='https://mandarinbean.com/ask-for-leave/'));
  assert.equal((await handler(make(),env)).status,429);
+});
+
+const prose={...story,scriptMode:[],paragraphMode:[
+ {hanzi:'今天早上，小王来到学校。他先复习昨天学习的汉字，然后和朋友一起讨论新的课程。上课前，他把不明白的问题写在本子上。',pinyin:'Jīntiān zǎoshang, Xiǎo Wáng láidào xuéxiào. Tā xiān fùxí zuótiān xuéxí de Hànzì, ránhòu hé péngyou yìqǐ tǎolùn xīn de kèchéng. Shàngkè qián, tā bǎ bù míngbai de wèntí xiě zài běnzi shàng.',vi:'Sáng nay Tiểu Vương đến trường, ôn chữ Hán rồi trao đổi với bạn về bài học mới. Trước giờ học, cậu ghi những điều chưa hiểu vào vở.'},
+ {hanzi:'老师让大家先读课文，再回答问题。小王发现，昨天不懂的几个词今天已经能看懂了。下课后，他决定每天用十分钟复习，不再只在考试前学习。',pinyin:'Lǎoshī ràng dàjiā xiān dú kèwén, zài huídá wèntí. Xiǎo Wáng fāxiàn, zuótiān bù dǒng de jǐ ge cí jīntiān yǐjīng néng kàndǒng le. Xiàkè hòu, tā juédìng měitiān yòng shí fēnzhōng fùxí, bú zài zhǐ zài kǎoshì qián xuéxí.',vi:'Thầy yêu cầu đọc trước rồi trả lời. Tiểu Vương đã hiểu vài từ hôm qua chưa hiểu. Cậu quyết định ôn mười phút mỗi ngày thay vì chỉ học trước kỳ thi.'}
+]};
+test('genres are validated and prose is not forced into a dialogue',async()=>{
+ for(const genre of ['dialogue','story','news','email','explainer'])assert.ok(checkReadingBody({...valid,genre}));
+ for(const genre of ['__proto__','toString','fake',{},42])assert.equal(checkReadingBody({...valid,genre}),false);
+ for(const genre of ['story','news','email','explainer']){
+  const {fetchFn,calls}=provider({ai:()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(prose)}]}}]})});
+  const r=await buildReadingStory({...valid,genre},{fetchFn,env,model:'test'});assert.equal(r.status,200);assert.equal(r.data.story.genre,genre);assert.equal(r.data.story.scriptMode.length,0);
+  const body=JSON.parse(calls[1].options.body),prompt=JSON.parse(body.contents[0].parts[0].text);assert.equal(prompt.genre,genre);assert.match(body.systemInstruction.parts[0].text,/pinyin|Vietnamese/);assert.ok(prompt.targetChineseCharacters[0]<prompt.targetChineseCharacters[1]);
+ }
+ assert.equal(validReadingStory(prose,{genre:'dialogue',quality:true}),false);
+ assert.equal(validReadingStory({...prose,quiz:[story.quiz[0],story.quiz[0],story.quiz[0]]},{genre:'news',quality:true}),false);
+ assert.equal(validReadingStory({...prose,paragraphMode:[prose.paragraphMode[0],prose.paragraphMode[0]]},{genre:'news',quality:true}),false);
+ assert.equal(validReadingStory({...prose,quiz:[{...story.quiz[0],options:['trùng','trùng','khác']},...story.quiz.slice(1)]},{genre:'news',quality:true}),false);
+ assert.equal(validReadingStory({...prose,paragraphMode:prose.paragraphMode.map(x=>({...x,hanzi:'我读书。'}))},{genre:'news',hsk:6,quality:true}),false);
+ assert.equal(validReadingStory(prose,{genre:'news',hsk:8,quality:true}),false);
 });

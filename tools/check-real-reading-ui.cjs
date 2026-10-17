@@ -35,7 +35,10 @@ const SAMPLE={
   await page.route('https://example-worker.test/reading-next',async r=>{
    submissions.push(r.request().postDataJSON());
    assert.equal(checkReadingBody(submissions.at(-1)),true,'actual frontend payload must satisfy Worker validation');
-   await r.fulfill({contentType:'application/json',body:JSON.stringify({story:{...SAMPLE,id:'mock-generated-'+submissions.length,lessonId:null}})});
+   const genre=r.request().postDataJSON().genre||'dialogue';
+   const value={...SAMPLE,id:'mock-generated-'+submissions.length,lessonId:null,genre};
+   if(genre!=='dialogue'){value.scriptMode=[];value.paragraphMode=[...SAMPLE.paragraphMode,{hanzi:'他们一边吃早饭，一边讨论今天的工作。',pinyin:'Tāmen yìbiān chī zǎofàn, yìbiān tǎolùn jīntiān de gōngzuò.',vi:'Họ vừa ăn sáng vừa trao đổi công việc hôm nay.'}];}
+   await r.fulfill({contentType:'application/json',body:JSON.stringify({story:value})});
   });
   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
   await page.waitForFunction(()=>!!window.HSKRealReading&&!!window.HSKStudio&&!!window.HSKLessons,{timeout:25000});
@@ -81,6 +84,15 @@ const SAMPLE={
    assert.equal(overflow,false);
    await page.evaluate(()=>{window.HSKRealReading.cancel();window.HSKStudio.navigate('practice')});
   }
+  for(const genre of ['story','news','email','explainer']){
+   await page.evaluate(()=>{localStorage.removeItem('hsk-real-reading-history-v1:guest');localStorage.removeItem('hsk-real-reading-cache-v1:guest');window.dispatchEvent(new Event('hsk-account-ready'));HSKRealReading.leaveLesson();HSKStudio.navigate('real-reading');});
+   await page.locator('#rrGenre').selectOption(genre);const before=submissions.length;await page.locator('#rrNew').click();await page.waitForFunction(()=>!document.querySelector('#rrNew').disabled);
+   assert.equal(submissions.length,before+1);assert.equal(submissions.at(-1).genre,genre);assert.equal(await page.locator('#rrArticle .rr-line').count(),2);
+   assert.equal(await page.locator('#rrArticle .rr-reading-switches button').filter({hasText:'Kịch bản'}).count(),0);
+   await page.locator('#rrOld').click();assert.match(await page.locator('#rrStatus').innerText(),/bài cũ/);
+   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);assert.equal(overflow,false);
+  }
+  await page.locator('#rrGenre').selectOption('dialogue');await page.locator('#rrOld').click();assert.match(await page.locator('#rrStatus').innerText(),/Chưa có/);
   // From a real HSK lesson, the new reading route retains the lesson ID.
   await page.evaluate(async()=>{window.HSKRealReading.leaveLesson();window.HSKStudio.navigate('lessons');history.replaceState(null,'','#lesson/standard-3-01');await window.HSKLessonNav.open();});
   await page.locator('.lesson-reading-entry').waitFor({state:'visible',timeout:18000});

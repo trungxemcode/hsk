@@ -44,7 +44,10 @@ test('cache is shared, locked while generating and reject oversize payload',asyn
 test('reading cache fingerprints include lesson topic and source, no ID token',async()=>{
  const body={hsk:3,lessonId:'3-01',sourceId:'ask-leave',topic:'Công việc',angle:'xin phép',lessonWords:[{han:'请假',mean:'xin nghỉ'}]};
  const k=await readingCacheKey(body);
- assert.match(k,/^v2_[a-f0-9]{64}$/);
+ assert.match(k,/^v3_[a-f0-9]{64}$/);
+ const dialogue=await readingCacheKey({...body,genre:'dialogue'});
+ assert.notEqual(dialogue,k,'legacy results cannot bypass the new quality gate');
+ for(const genre of ['story','news','email','explainer'])assert.notEqual(await readingCacheKey({...body,genre}),dialogue);
  assert.equal(await readingCacheKey({...body,uid:'someone',idToken:'secret'}),k);
  assert.notEqual(await readingCacheKey({...body,angle:'bàn kế hoạch'}),k);
  assert.notEqual(await readingCacheKey({...body,hsk:5}),k);
