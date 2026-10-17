@@ -1,8 +1,8 @@
 # Kết nối dịch Việt → Trung theo HSK
 
-## AI dự phòng cho Đọc thực tế
+## AI dự phòng cho các tác vụ văn bản (3.3.4)
 
-Gemini là dịch vụ chính. Khi provider Gemini trả 429 hoặc lỗi máy chủ 500/502/503/504, `/reading-next` thử xKiro **một lần**, không gọi song song và không bỏ qua giới hạn AI của app. Nội dung dự phòng vẫn phải qua cùng kiểm tra cấu trúc bài đọc.
+Gemini là dịch vụ chính. Các luồng dịch, hỏi đáp, giải thích, từ điển, kế hoạch và tạo bài đọc chuyển sang xKiro **một lần** khi Gemini lỗi kết nối, HTTP 401/403/404/408/429/500/502/503/504, JSON rỗng/sai cấu trúc hoặc bị cắt. Ngắt chờ Gemini sau 15 giây (bài đọc 30 giây), dành tối đa 25 giây cho dự phòng, vẫn chịu deadline toàn route. Không gọi song song, không tự lặp lại và không bỏ qua Firebase, quota hay kiểm tra kết quả hiện có. Hủy từ signal cha không kích hoạt dự phòng. Không chuyển khi yêu cầu sai HTTP400 hoặc provider từ chối an toàn. Ảnh/OCR/nhận dạng chữ không chuyển sang model dự phòng chỉ hỗ trợ văn bản. Các ngưỡng là giới hạn chờ, không phải cam kết tốc độ thực tế.
 
 Worker cần secret `SECONDARY_AI_API_KEY`; tạo/cập nhật trong Cloudflare → Worker `hsk-vietnamese-translator` → Settings → Variables and Secrets → Add → Secret. Hoặc chạy `npx wrangler secret put SECONDARY_AI_API_KEY` trong thư mục `server` và nhập key ở prompt riêng. Không đặt key trong Git, frontend, biến thường hoặc gửi lại qua chat. Nếu key đã từng được chia sẻ công khai, thu hồi và tạo key mới trước khi cài.
 
