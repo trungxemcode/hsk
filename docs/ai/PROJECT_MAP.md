@@ -55,7 +55,10 @@ Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-
 - Browser CI mocks transport; it is not evidence of working real Gemini, real Firebase or physical iPhone devices.
 
 ## AI task routing (3.3.6)
-Server ai-backup.mjs: aiTaskRole + createAiRoleFetch select xKiro for routine text, Gemini for heavy/multimodal work; one sequential fallback, schema/reading validation, X-HSK-AI-Provider response header. AI_TASK_ROUTING controls policy. See ai-roles.test.mjs for routing and safety regression tests.
+Server ai-backup.mjs: aiTaskRole + createAiRoleFetch select xKiro for routine text, Gemini for all reading generation and heavy/multimodal work (Worker 3.4.2); one sequential fallback, schema/reading validation, X-HSK-AI-Provider response header. AI_TASK_ROUTING controls policy. See ai-roles.test.mjs for routing and safety regression tests.
 
 ## AI account quotas (server3.3.9)
 server/ai-control.mjs reserve: normal50 total/day,35 queries,15 readings; trusted ADMIN_UIDS exemption. translator-worker.mjs derives UID from verified Firebase lookup and exempts verified admins from cooldown. Existing global ordinary-user caps/cache/auth stay. Wrangler owns limits and UID allowlist; no frontend role flags grant access.
+
+## Reading latency — Worker 3.4.2
+Gemini-first reading avoids the measured 18-second xKiro timeout. Source text is verified before a bounded per-handler 30-minute cache; no learner/auth data cached. Existing target lengths/quality checks, 3 questions, pinyin, Vietnamese, Firebase gates, quotas, key rotation and xKiro fallback remain. Sanitized timing callbacks identify original key slots even after deduplication; no keys, prompts or UID logged. Benchmark route is temporary, guarded, and must be removed before completion; never commit it. Backend-only: do not bump PWA or rebuild offline assets.
