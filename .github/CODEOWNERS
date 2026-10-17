@@ -1,0 +1,13 @@
+# These files control which HSK features AI coding agents may remove.
+# Enable "Require review from Code Owners" and protect main in GitHub Rulesets.
+# GitHub enforces this only when branch protection/rulesets are enabled.
+/tools/feature-contract.json @trungxemcode
+/tools/approved-feature-removals.json @trungxemcode
+/tools/check-feature-preservation.py @trungxemcode
+/tools/test_feature_preservation.py @trungxemcode
+/tools/check-feature-runtime.cjs @trungxemcode
+/.github/workflows/feature-preservation.yml @trungxemcode
+/.github/CODEOWNERS @trungxemcode
+/tools/check-*.cjs @trungxemcode
+/server/*.test.mjs @trungxemcode
+/.github/workflows/*.yml @trungxemcode

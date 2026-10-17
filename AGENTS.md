@@ -18,6 +18,11 @@ The older `C:\New folder\hsk` is a secondary checkout, not a separate app or sou
 - Firebase/Auth/Firestore and Cloudflare/Gemini Worker are distinct from the static site. Never commit secrets.
 - Keep stable storage keys, Firebase data contracts, existing UI controls, score/SRS behavior and genuine HSK goal/filter separation.
 
+## Feature preservation (non-negotiable)
+- The user prohibits accidental feature removal. Read `docs/ai/FEATURE_PRESERVATION.md` and `tools/feature-contract.json` before editing a feature. Preserve the existing route, public API, behavior, storage keys and tests unless the user explicitly requests deletion.
+- Run `python tools/check-feature-preservation.py --base origin/main` and `node tools/check-feature-runtime.cjs` (with Playwright) before PR. Add an entry/test for every new feature. Do NOT delete or weaken contracts, skip tests, or add an inline removal exception to satisfy CI.
+- An intentional deletion requires a SEPARATE, owner-reviewed approval-only PR for `tools/approved-feature-removals.json`, merged before any code deletion PR. Protect `main` with required CI and CODEOWNERS reviews as documented. No direct-to-main pushes.
+
 ## Quality gates
 - Run narrow unit/DOM tests for edited modules first, then regression checks for shared UI/data changes.
 - Server tests: `node --test server/*.test.mjs` (PowerShell: `node --test (Get-ChildItem server -Filter '*.test.mjs').FullName`).
