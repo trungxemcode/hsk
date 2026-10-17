@@ -73,6 +73,14 @@ class PwaReleaseGuardTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'new release'):
                 guard.compare_with_base('old-head', current)
 
+    def test_semantic_release_cannot_go_backwards(self):
+        current = guard.ensure_release_integrity()
+        previous = {'version': 'hsk-offline-3-4-1', 'release': '3.4.1',
+                    'assets': current['assets']}
+        with patch.object(guard, '_run', side_effect=[json.dumps(previous), 'index.html']):
+            with self.assertRaisesRegex(ValueError, 'newer semantic release'):
+                guard.compare_with_base('old-head', current)
+
     def test_hash_mismatch_caught_with_single_changed_asset(self):
         current = guard.ensure_release_integrity()
         with patch.object(guard, 'source_assets', return_value=['index.html']):
