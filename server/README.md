@@ -1,5 +1,36 @@
 # Kết nối dịch Việt → Trung theo HSK
 
+## Luân phiên tối đa 10 khóa Gemini — 3.4.1
+
+Worker chia các lượt gọi Gemini theo round robin. Durable Object `AI_CONTROL` giữ con trỏ và thời gian nghỉ chung giữa các Worker; chỉ lưu mã SHA-256 của khóa, không lưu khóa, prompt hoặc token đăng nhập. Phân vai xKiro/Gemini, xác thực Firebase, quota 35 truy vấn + 15 bài đọc/ngày cho tài khoản thường và quyền admin giữ nguyên. Không tự tăng giới hạn chung của app.
+
+Thêm tối đa 10 **Secrets** tại Cloudflare → Workers & Pages → `hsk-vietnamese-translator` → Settings → Variables and Secrets:
+
+| Vị trí | Tên Secret |
+| --- | --- |
+| 1 | `GEMINI_API_KEY_1` hoặc `GEMINI_API_KEY` hiện có |
+| 2–10 | `GEMINI_API_KEY_2` đến `GEMINI_API_KEY_10` |
+
+Nếu đặt cả `_1` và tên cũ, `_1` được ưu tiên. Bỏ qua vị trí trống và khóa trùng. Chỉ một khóa vẫn hoạt động như trước. Các khóa phải thuộc những project bạn có quyền dùng; quota Google tính theo **project**, không theo số khóa hay số Gmail. Không mặc định các con số 150 RPM / 15.000 RPD trong tài liệu tham khảo; xem hạn mức thật trong từng project tại AI Studio: https://ai.google.dev/gemini-api/docs/rate-limits.
+
+Từ thư mục repo trên Windows, nhập từng khóa ở prompt riêng của Wrangler:
+
+```powershell
+npx wrangler secret put GEMINI_API_KEY_1 --config server/wrangler.jsonc
+npx wrangler secret put GEMINI_API_KEY_2 --config server/wrangler.jsonc
+# Lặp lại tên tương ứng đến GEMINI_API_KEY_10.
+npx wrangler secret list --config server/wrangler.jsonc
+npx wrangler deploy --config server/wrangler.jsonc
+```
+
+Không đưa giá trị khóa vào lệnh, Git, biến frontend hoặc chat. Giữ `FIREBASE_API_KEY`, `SECONDARY_AI_API_KEY` và binding `AI_CONTROL`. Nếu triển khai bằng Edit code, dùng toàn bộ `translator-worker-bundled.mjs` mới rồi thêm các Secrets ở Settings. Không cần tạo thêm Worker hay migration DO.
+
+Mỗi lượt Gemini thử tối đa hai khóa tuần tự, trong deadline của tác vụ; không gọi song song. HTTP 429 nghỉ ít nhất 60 giây, tôn trọng `Retry-After`/`RetryInfo`; quota ngày nghỉ ít nhất 24 giờ. Lỗi khóa/quyền 400 `API_KEY_INVALID`, 401, 403 nghỉ 15 phút; 500/502/503/504 nghỉ 15 giây. Khóa đang nghỉ được bỏ qua. Hết khóa khả dụng trả 429 hoặc dùng xKiro theo cơ chế dự phòng sẵn có. Lỗi nội dung, từ chối an toàn, hủy yêu cầu và JSON sai không kích hoạt thử thêm khóa. Lỗi mạng/timeout giao cho cơ chế dự phòng provider hiện có. Các chốt này vẫn áp dụng cho admin ở cấp provider.
+
+Xác nhận Worker bằng header `X-HSK-Worker-Version: hsk-gemini-key-pool-3-4-1`. Kiểm thử dùng khóa giả và mô phỏng provider, không tiêu quota thật. Sau khi thêm đủ Secrets, cần kiểm tra một yêu cầu thực trên Worker để xác nhận quyền/quota các project; code không thể xác nhận 10 tài khoản chỉ từ tên Secrets.
+
+Phạm vi bản này là xoay khóa. Không triển khai SQLite, tạo sẵn nội dung hay cache hỏi đáp từ tài liệu tham khảo; cache bài đọc và quota hiện có tiếp tục được giữ.
+
 ## AI dự phòng cho các tác vụ văn bản (3.3.5)
 
 Gemini là dịch vụ chính. Các luồng dịch, hỏi đáp, giải thích, từ điển, kế hoạch và tạo bài đọc chuyển sang xKiro **một lần** khi Gemini lỗi kết nối, HTTP 401/403/404/408/429/500/502/503/504, JSON rỗng/sai cấu trúc hoặc bị cắt. Ngắt chờ Gemini sau 6 giây (bài đọc 12 giây), dành tối đa 25 giây cho dự phòng, vẫn chịu deadline toàn route. Không gọi song song, không tự lặp lại và không bỏ qua Firebase, quota hay kiểm tra kết quả hiện có. Hủy từ signal cha không kích hoạt dự phòng. Không chuyển khi yêu cầu sai HTTP400 hoặc provider từ chối an toàn. Ảnh/OCR/nhận dạng chữ không chuyển sang model dự phòng chỉ hỗ trợ văn bản. Các ngưỡng là giới hạn chờ, không phải cam kết tốc độ thực tế.

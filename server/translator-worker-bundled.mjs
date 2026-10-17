@@ -34,9 +34,27 @@ export class HSkaIControl {
  async fetch(request){
   if(request.method!=='POST')return Response.json({error:'method'},{status:405});
   let data;try{data=await request.json()}catch{return Response.json({error:'payload'},{status:400})}
-  if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock'].includes(data.action))
+  if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock','gemini-pick','gemini-report'].includes(data.action))
    return Response.json({error:'action'},{status:400});
   const time=Date.now();
+  if(data.action==='gemini-pick'){
+   const validId=id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id);
+   if(!Array.isArray(data.ids)||data.ids.length<2||data.ids.length>10||!data.ids.every(validId)||new Set(data.ids).size!==data.ids.length||!Array.isArray(data.excluded)||data.excluded.length>10||!data.excluded.every(id=>data.ids.includes(id)))return Response.json({error:'keys'},{status:400});
+   const result=await this.state.storage.transaction(async t=>{
+    const previous=await t.get('gemini:pool')||{},pool={cursor:Number(previous.cursor)||0,ids:data.ids,blocked:{}};
+    for(const id of data.ids)if(previous.blocked?.[id]>time)pool.blocked[id]=previous.blocked[id];
+    let index=-1,retryAt=Infinity;
+    for(let n=0;n<data.ids.length;n++){const i=(pool.cursor+n)%data.ids.length,id=data.ids[i];if(data.excluded.includes(id))continue;if(!pool.blocked[id]){index=i;break;}retryAt=Math.min(retryAt,pool.blocked[id]);}
+    if(index>=0)pool.cursor=(index+1)%data.ids.length;
+    await t.put('gemini:pool',pool);
+    return {index,retryAfter:Number.isFinite(retryAt)?Math.max(1,Math.ceil((retryAt-time)/1000)):60};
+   });return Response.json(result);
+  }
+  if(data.action==='gemini-report'){
+   if(typeof data.id!=='string'||!/^[a-f0-9]{64}$/.test(data.id)||!Number.isFinite(data.delay)||data.delay<1000||data.delay>Number.MAX_SAFE_INTEGER-time)return Response.json({error:'key-report'},{status:400});
+   await this.state.storage.transaction(async t=>{const pool=await t.get('gemini:pool');if(pool?.ids?.includes(data.id)){pool.blocked||={};pool.blocked[data.id]=Math.max(pool.blocked[data.id]||0,time+data.delay);await t.put('gemini:pool',pool);}});
+   return Response.json({ok:true});
+  }
   if(data.action==='reserve'){
    if(typeof data.uid!=='string'||!/^[-\w:]{1,150}$/.test(data.uid)||typeof data.route!=='string'||!/^[-\w:]{1,55}$/.test(data.route))return Response.json({error:'input'},{status:400});
    // UID comes only from the Worker's Firebase-verified account, never a client role flag.
@@ -223,6 +241,74 @@ export function createAiRoleFetch(fetchFn,env,{route,body,validateData,onProvide
  });
 }
 
+
+// Slot 1 accepts the existing secret. Remaining slots are optional, server-only.
+export function configuredGeminiKeys(env){
+ return [...new Set(Array.from({length:10},(_,i)=>env['GEMINI_API_KEY_'+(i+1)]||(i===0?env.GEMINI_API_KEY:''))
+  .filter(k=>typeof k==='string'&&k.trim()&&k.trim().length<=300).map(k=>k.trim()))];
+}
+async function geminiKeyId(key){
+ const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(key));
+ return Array.from(new Uint8Array(bytes),b=>b.toString(16).padStart(2,'0')).join('');
+}
+async function geminiCooldown(response,now){
+ const status=response.status;
+ if(![400,401,403,429,500,502,503,504].includes(status))return 0;
+ const data=await response.clone().json().catch(()=>null),details=data?.error?.details||[];
+ if(status===400&&!details.some(d=>d.reason==='API_KEY_INVALID'))return 0;
+ if(status===400||status===401||status===403)return 15*60*1000;
+ if(status>=500)return 15000;
+ const retry=response.headers.get('Retry-After');
+ let ms=retry?(Number.isFinite(Number(retry))?Number(retry)*1000:Date.parse(retry)-now):0;
+ for(const d of details){const seconds=typeof d.retryDelay==='string'?Number(d.retryDelay.replace(/s$/,'')):Number(d.retryDelay?.seconds);if(Number.isFinite(seconds))ms=Math.max(ms,seconds*1000);}
+ // Daily exhaustion should not be retried once per minute. A conservative 24h
+ // pause avoids assuming a UTC reset for Google's Pacific-time daily quota.
+ const daily=details.some(d=>d.violations?.some(v=>/perday|daily/i.test(String(v.quotaId)+' '+String(v.quotaMetric))));
+ return Math.max(daily?86400000:60000,Number.isFinite(ms)?ms:0);
+}
+export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={cursor:0,blocked:new Map()}}={}){
+ const keys=configuredGeminiKeys(env);
+ let idsPromise;
+ return async(url,init={})=>{
+  if(!String(url).startsWith('https://generativelanguage.googleapis.com/v1beta/models/'))return fetchFn(url,init);
+  const canceled=()=>{if(init.signal?.aborted)throw new DOMException('Canceled','AbortError');};
+  canceled();
+  if(!keys.length)return Response.json({error:{status:'UNAVAILABLE'}},{status:503});
+  // Legacy single-key installations retain one attempt and existing behavior.
+  if(keys.length===1){const headers=new Headers(init.headers);headers.set('x-goog-api-key',keys[0]);return fetchFn(url,{...init,headers});}
+  const ids=await (idsPromise||=Promise.all(keys.map(geminiKeyId))),excluded=[];
+  let last;
+  // Never fan out or scan ten accounts for one prompt: max two sequential calls.
+  for(let attempt=0;attempt<2;attempt++){
+   canceled();
+   let picked=await controlCall(env,'gemini-pick',{ids,excluded});
+   canceled();
+   if(!picked){
+    let index=-1,retryAt=Infinity;
+    for(let n=0;n<ids.length;n++){const i=(state.cursor+n)%ids.length;if(excluded.includes(ids[i]))continue;const until=state.blocked.get(ids[i])||0;if(until<=now()){index=i;break;}retryAt=Math.min(retryAt,until);}
+    if(index>=0)state.cursor=(index+1)%ids.length;
+    picked={index,retryAfter:Math.max(1,Math.ceil((retryAt-now())/1000))};
+   }
+   if(!Number.isInteger(picked.index)||picked.index<0||picked.index>=keys.length){
+    if(last)return last;
+    return Response.json({error:{status:'RESOURCE_EXHAUSTED'}},{status:429,headers:{'Retry-After':String(Number.isFinite(picked.retryAfter)?Math.max(1,picked.retryAfter):60)}});
+   }
+   const index=picked.index;excluded.push(ids[index]);
+   const headers=new Headers(init.headers);headers.set('x-goog-api-key',keys[index]);
+   let response;
+   try{response=await fetchFn(url,{...init,headers});}catch(error){canceled();throw error;}
+   canceled();
+   const delay=await geminiCooldown(response,now());
+   canceled();
+   if(!delay)return response; // Includes refusals, malformed successes and bad input.
+   state.blocked.set(ids[index],now()+delay);
+   await controlCall(env,'gemini-report',{id:ids[index],delay});
+   last=response;
+  }
+  return last;
+ };
+}
+
 // Real-world reading adaptation. Source URLs are allowlisted and checked on server; no arbitrary URL fetches.
 export const READING_SOURCES=Object.freeze([
  {id:'what-study',hskMin:1,hskMax:2,topic:'Trường học',site:'Mandarin Bean',url:'https://mandarinbean.com/what-are-you-studying/'},
@@ -360,11 +446,11 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-ai-account-quotas-3-3-9';
+export const WORKER_REVISION='hsk-gemini-key-pool-3-4-1';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
- for(const secret of [env.GEMINI_API_KEY,env.FIREBASE_API_KEY])if(secret)detail=detail.split(secret).join('[redacted]');
+ for(const secret of [...configuredGeminiKeys(env),env.FIREBASE_API_KEY])if(secret)detail=detail.split(secret).join('[redacted]');
  detail=detail.replace(/AIza[\w-]{20,}/g,'[redacted]').replace(/[\u0000-\u001f\u007f]/g,' ').trim().slice(0,500);
  console.warn('Gemini request rejected',{httpStatus:status,providerStatus,model,workerRevision:WORKER_REVISION});
  const message=status===429?'Đã chạm hạn mức AI. Đợi rồi thử lại.':status===401||status===403?'Gemini từ chối API key hoặc quyền truy cập.':status===404?'Không tìm thấy mô hình Gemini '+model+'.':status===400?'Gemini '+model+' từ chối yêu cầu (HTTP 400)'+(detail?': '+detail:'. Dịch vụ không trả lý do chi tiết.'):'Gemini chưa trả lời được (HTTP '+status+'). Hãy thử lại sau.';
@@ -373,8 +459,10 @@ async function geminiFailure(response,model,env,operation='existing'){
 }
 export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
  const cooldowns=new Map();
+ const geminiState={cursor:0,blocked:new Map()};
  return async(request,env)=>{
-  let fetchFn=createAiFailoverFetch(rawFetchFn,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
+  const keyFetch=createGeminiKeyFetch(rawFetchFn,env,{now,state:geminiState});
+  let fetchFn=createAiFailoverFetch(keyFetch,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
   const origin=request.headers.get('Origin')||'',allowed=(env.ALLOWED_ORIGINS||'https://trungxemcode.github.io').split(',').map(s=>s.trim());
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin','X-HSK-Worker-Version':WORKER_REVISION};
   const reply=(value,status=200)=>new Response(JSON.stringify(value),{status,headers});
@@ -384,7 +472,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
   const route=new URL(request.url).pathname,isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
   if(route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading)return reply({error:'Không tìm thấy dịch vụ.'},404);
   if(request.method!=='POST')return reply({error:'Yêu cầu không hợp lệ.'},405);
-  if(!env.FIREBASE_API_KEY||!isSample&&!env.GEMINI_API_KEY)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
+  if(!env.FIREBASE_API_KEY||!isSample&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
   const token=request.headers.get('Authorization')?.match(/^Bearer ([^\s]+)$/)?.[1],c=token&&token.length<5000?claims(token):null,project=env.FIREBASE_PROJECT_ID||'hsk-flashcards-44631';
   if(!c||c.aud!==project||c.iss!=='https://securetoken.google.com/'+project||typeof c.sub!=='string'||!c.sub||typeof c.exp!=='number'||c.exp<=now()/1000)return reply({error:'Hãy đăng nhập tài khoản app để dịch.'},401);
   let body;try{body=await readBody(request,isSample?4096:isOcr?2100000:isHandwriting?550000:isLessonAsk?120000:isDictionaryTranslate?60000:20000);}catch{return reply({error:isOcr||isHandwriting?'Ảnh quá lớn hoặc không hợp lệ.':'Câu nhập không hợp lệ hoặc quá dài.'},400);}
@@ -422,7 +510,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    const t=body.translation,h=body.history;
    if(typeof body.question!=='string'||!body.question.trim()||body.question.length>500||!t||typeof t.vietnamese!=='string'||!t.vietnamese.trim()||t.vietnamese.length>4000||typeof t.chinese!=='string'||!t.chinese.trim()||t.chinese.length>2000||typeof t.pinyin!=='string'||t.pinyin.length>2000||typeof t.explanation!=='string'||t.explanation.length>2000||!Array.isArray(h)||h.length>8||!h.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.text==='string'&&m.text.length<=1000))return reply({error:'Câu hỏi hoặc ngữ cảnh không hợp lệ.'},400);
   }else if(typeof body.text!=='string'||!body.text.trim()||body.text.length>500)return reply({error:'Nhập câu tối đa 500 ký tự.'},400);
-  fetchFn=createAiRoleFetch(rawFetchFn,env,{route,body,validateData:isReading?data=>validReadingStory(data,{genre:body.genre||'dialogue',hsk:body.hsk,quality:!!body.genre}):undefined,onProvider:provider=>{headers['X-HSK-AI-Provider']=provider;}});
+  fetchFn=createAiRoleFetch(keyFetch,env,{route,body,validateData:isReading?data=>validReadingStory(data,{genre:body.genre||'dialogue',hsk:body.hsk,quality:!!body.genre}):undefined,onProvider:provider=>{headers['X-HSK-AI-Provider']=provider;}});
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isOcr?110000:isReading?85000:isAsk?45000:60000);
   try{
    const auth=await fetchFn('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(env.FIREBASE_API_KEY),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token}),signal:controller.signal});
