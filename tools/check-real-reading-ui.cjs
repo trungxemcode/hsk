@@ -16,6 +16,7 @@ const SAMPLE={
  {question:'他们在哪里？',options:['学校','机场','公司'],answerIndex:2,explanationVi:'Họ đang ở công ty.'}
  ]};
 (async()=>{
+ const {checkReadingBody}=await import('../server/reading-service.mjs');
  const root=process.cwd(),server=http.createServer((req,res)=>{
   const f=path.resolve(root,'.'+new URL(req.url,'http://local').pathname);
   if(!f.startsWith(root+path.sep)||!fs.existsSync(f)||!fs.statSync(f).isFile()){res.writeHead(404);res.end();return;}
@@ -33,10 +34,12 @@ const SAMPLE={
   let submissions=[];
   await page.route('https://example-worker.test/reading-next',async r=>{
    submissions.push(r.request().postDataJSON());
+   assert.equal(checkReadingBody(submissions.at(-1)),true,'actual frontend payload must satisfy Worker validation');
    await r.fulfill({contentType:'application/json',body:JSON.stringify({story:{...SAMPLE,id:'mock-generated-'+submissions.length,lessonId:null}})});
   });
   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
   await page.waitForFunction(()=>!!window.HSKRealReading&&!!window.HSKStudio&&!!window.HSKLessons,{timeout:25000});
+  if(width===320){const bodies=await page.evaluate(async()=>{const catalog=await fetch('./lessons-data.json').then(r=>r.json());return catalog.courses.flatMap(c=>c.lessons.map(l=>({hsk:c.hsk,lessonId:l.id,lessonWords:HSKRealReadingVariety.requestWords(HSKLessons.match(l.words))})));});assert.equal(bodies.length,146);assert.ok(bodies.every(checkReadingBody),'all real lesson vocabularies must satisfy the Worker contract');}
   for(const theme of ['light','dark']){
    const baseline=submissions.length;
    await page.evaluate(()=>{localStorage.removeItem('hsk-real-reading-history-v1:guest');localStorage.removeItem('hsk-real-reading-cache-v1:guest');window.HSKAccountDashboard=null;window.dispatchEvent(new Event('hsk-account-ready'));});
@@ -84,6 +87,25 @@ const SAMPLE={
   await page.locator('.lesson-reading-entry').click();
   assert.equal(await page.locator('#realReadingPanel').isVisible(),true);
   assert.match(await page.locator('#rrContext').innerText(),/bài học/i);
+  const originals=await page.evaluate(()=>HSKRealReading.lastLesson.words);
+  assert.ok(originals.some(w=>w.mean.length>80),'reproduce long actual HSK3 meanings rejected by old payload');
+  await page.locator('#rrNew').click();await page.waitForFunction(()=>!document.querySelector('#rrNew').disabled);
+  assert.equal(submissions.at(-1).lessonId,'standard-3-01');
+  assert.ok(submissions.at(-1).lessonWords.every(w=>w.mean.length<=80));
+  // A hanging token can be canceled; errors never trap navigation under a modal.
+  await page.evaluate(()=>{HSKAccountDashboard.user.getIdToken=()=>new Promise(()=>{});HSKRealReading.openFromLesson({...HSKRealReading.lastLesson,id:'standard-3-02'});});
+  const before=submissions.length;await page.locator('#rrNew').click();await page.locator('#rrCancel').waitFor({state:'visible'});
+  assert.equal(await page.evaluate(()=>!!window.HSKLoading?.active),false);
+  await page.locator('#rrCancel').click();await page.waitForFunction(()=>!document.querySelector('#rrNew').disabled);
+  assert.equal(submissions.length,before);assert.match(await page.locator('#rrStatus').innerText(),/Đã hủy/);
+  await page.locator('#rrNew').click();await page.locator('#rrCancel').waitFor({state:'visible'});await page.locator('#rrTopic').selectOption('Đời sống');
+  assert.equal(await page.locator('#rrNew').isDisabled(),false);assert.equal(await page.locator('#rrStatus').innerText(),'');assert.equal(submissions.length,before);
+  await page.evaluate(()=>{HSKAccountDashboard.user.getIdToken=async()=>'mock-token';});
+  await page.unroute('https://example-worker.test/reading-next');
+  await page.route('https://example-worker.test/reading-next',r=>r.fulfill({status:400,contentType:'application/json',body:JSON.stringify({error:'Yêu cầu bài đọc chưa hợp lệ.'})}));
+  await page.locator('#rrNew').click();await page.waitForFunction(()=>!document.querySelector('#rrNew').disabled);
+  assert.match(await page.locator('#rrStatus').innerText(),/chưa hợp lệ/);assert.equal(await page.locator('#rrCancel').isVisible(),false);
+  assert.equal(await page.evaluate(()=>!!window.HSKLoading?.active),false);
   assert.deepEqual(errors,[]);
   console.log('PASS real reading '+width+'px: source attribution, auth, mocked AI, toggles, quiz, no duplicate, per-lesson routing');
   await page.close();
