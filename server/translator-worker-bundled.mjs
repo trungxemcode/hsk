@@ -39,11 +39,15 @@ export class HSkaIControl {
   const time=Date.now();
   if(data.action==='reserve'){
    if(typeof data.uid!=='string'||!/^[-\w:]{1,150}$/.test(data.uid)||typeof data.route!=='string'||!/^[-\w:]{1,55}$/.test(data.route))return Response.json({error:'input'},{status:400});
+   // UID comes only from the Worker's Firebase-verified account, never a client role flag.
+   const admins=(this.env.ADMIN_UIDS||'').split(',').map(uid=>uid.trim()).filter(Boolean);
+   if(admins.includes(data.uid))return Response.json({allowed:true,unlimited:true});
    const day=new Date(time).toISOString().slice(0,10),minute=Math.floor(time/60000);
    const globalDayLimit=Math.max(1,Math.min(10000,Number(this.env.AI_GLOBAL_DAILY_LIMIT)||180));
    const globalMinuteLimit=Math.max(1,Math.min(1000,Number(this.env.AI_GLOBAL_MINUTE_LIMIT)||10));
-   const userDayLimit=Math.max(1,Math.min(500,Number(this.env.AI_USER_DAILY_LIMIT)||15));
-   const readingDayLimit=Math.max(1,Math.min(100,Number(this.env.AI_USER_READING_DAILY_LIMIT)||5));
+   const userDayLimit=Math.max(1,Math.min(500,Number(this.env.AI_USER_DAILY_LIMIT)||50));
+   const readingDayLimit=Math.max(1,Math.min(100,Number(this.env.AI_USER_READING_DAILY_LIMIT)||15));
+   const queryDayLimit=Math.max(1,Math.min(500,Number(this.env.AI_USER_QUERY_DAILY_LIMIT)||35));
    const userKey='u:'+day+':'+data.uid,readingKey='r:'+day+':'+data.uid;
    const dayKey='g:'+day,minuteKey='m:'+minute;
    const result=await this.state.storage.transaction(async t=>{
@@ -52,6 +56,7 @@ export class HSkaIControl {
     if(count[0]>=globalDayLimit)return {allowed:false,reason:'global-daily'};
     if(count[1]>=globalMinuteLimit)return {allowed:false,reason:'global-minute'};
     if(count[2]>=userDayLimit)return {allowed:false,reason:'user-daily'};
+    if(data.route!=='reading'&&Math.max(0,count[2]-count[3])>=queryDayLimit)return {allowed:false,reason:'user-query-daily'};
     if(data.route==='reading'&&count[3]>=readingDayLimit)return {allowed:false,reason:'user-reading-daily'};
     const updates={[dayKey]:count[0]+1,[minuteKey]:count[1]+1,[userKey]:count[2]+1};
     if(data.route==='reading')updates[readingKey]=count[3]+1;
@@ -355,7 +360,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-ai-task-roles-3-3-6';
+export const WORKER_REVISION='hsk-ai-account-quotas-3-3-9';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -425,11 +430,12 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    const account=(await auth.json()).users?.[0];if(!account||account.localId!==c.sub||account.disabled)return reply({error:'Tài khoản không được phép dịch.'},401);
    const restricted=(env.ALLOWED_UIDS||'').split(',').filter(Boolean);if(restricted.length&&!restricted.includes(c.sub))return reply({error:'Tài khoản chưa được bật dịch câu.'},403);
    if(isSample){const result=await submitHandwritingSample(body,c.sub,env,now());return reply(result.body,result.status);}
+   const isAdmin=(env.ADMIN_UIDS||'').split(',').map(uid=>uid.trim()).filter(Boolean).includes(account.localId);
    // Per-isolate cooldown reduces double submissions; provider free-tier quotas remain the global limit.
    const cooldownKey=(isReading?'reading:':isDictionaryTranslate?'dictionary-translate:':isHandwriting?'handwriting:':isOcr?'ocr:':isAsk?'ask:':'translate:')+c.sub;
-   if((cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
+   if(!isAdmin&&(cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
    if(cooldowns.size>1000)for(const [uid,t] of cooldowns)if(t<=now())cooldowns.delete(uid);
-   cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
+   if(!isAdmin)cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
    const level=body.hsk,model=env.GEMINI_MODEL||'gemini-3.5-flash-lite';
    let readingKey=null,readingLocked=false;
    if(isReading){
@@ -443,7 +449,10 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    }
    try{
     const budget=await controlCall(env,'reserve',{uid:c.sub,route:isReading?'reading':isOcr?'ocr':isHandwriting?'handwriting':isPlan?'study-plan':isAsk?'ask':'translate'});
-    if(budget&&!budget.allowed)return reply({error:'Đã đạt giới hạn AI an toàn. Bạn vẫn có thể dùng bài học và các tính năng không cần AI.',code:'AI_BUDGET_EXHAUSTED',reason:budget.reason},429);
+    if(budget&&!budget.allowed){
+     const message=budget.reason==='user-reading-daily'?'Bạn đã dùng hết 15 lượt tạo bài đọc hôm nay. Vẫn có thể đọc lại bài đã lưu.':budget.reason==='user-query-daily'?'Bạn đã dùng hết 35 lượt truy vấn AI hôm nay. Vẫn có thể tạo bài đọc nếu còn lượt.':budget.reason==='user-daily'?'Bạn đã dùng hết 50 lượt AI hôm nay.':budget.reason==='global-minute'?'App đang có nhiều yêu cầu AI. Hãy thử lại sau một phút.':'App đã đạt giới hạn AI chung trong ngày.';
+     return reply({error:message,code:'AI_BUDGET_EXHAUSTED',reason:budget.reason},429);
+    }
     if(isReading){
      const result=await buildReadingStory(body,{fetchFn,env,signal:controller.signal,model});
      if(result.status===200&&result.data.story)await controlCall(env,'put',{key:readingKey,story:result.data.story});

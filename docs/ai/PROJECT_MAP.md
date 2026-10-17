@@ -54,3 +54,6 @@ Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-
 
 ## AI task routing (3.3.6)
 Server ai-backup.mjs: aiTaskRole + createAiRoleFetch select xKiro for routine text, Gemini for heavy/multimodal work; one sequential fallback, schema/reading validation, X-HSK-AI-Provider response header. AI_TASK_ROUTING controls policy. See ai-roles.test.mjs for routing and safety regression tests.
+
+## AI account quotas (server3.3.9)
+server/ai-control.mjs reserve: normal50 total/day,35 queries,15 readings; trusted ADMIN_UIDS exemption. translator-worker.mjs derives UID from verified Firebase lookup and exempts verified admins from cooldown. Existing global ordinary-user caps/cache/auth stay. Wrangler owns limits and UID allowlist; no frontend role flags grant access.
