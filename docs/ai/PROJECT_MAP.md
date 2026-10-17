@@ -44,7 +44,7 @@ Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-
 | Translation / lesson chat | `translator.js`, `lesson-chat.js` | Authenticated server-mediated Gemini |
 | AI learning review / story | `ai-coach.js`, `planner.js`, `notebook-factory.js` | Cancellable authenticated requests |
 | Adaptive AI loading | `mobile-ux.js::HSKLoading.showAI` | Request lifetime controls visibility; no fake percentage |
-| Gemini server | `server/translator-worker.mjs`, `server/translator-worker-bundled.mjs`, `server/README.md` | Separate Cloudflare deployment; no API secrets in repo |
+| Gemini server | `server/translator-worker.mjs`, `server/translator-worker-bundled.mjs`, `server/ai-backup.mjs`, `server/README.md` | 3.3.4: sequential text failover on provider/network/malformed output; primary deadline15s (reading30s), backup25s within route deadline. No image-to-text-model fallback or safety bypass. Separate Cloudflare deployment; no API secrets in repo |
 
 ## Offline release and regression
 - Offline/PWA: `offline.js`, `offline-worker.js`, `OneSignalSDKWorker.js`, `app-version.json`, `build-version.py`. Updating app assets requires a new PWA release/version and correct SHA-256 hashes so installed phones update.

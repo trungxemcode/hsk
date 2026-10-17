@@ -1,4 +1,4 @@
-import { requestBackupJSON } from './ai-backup.mjs';
+import { createAiFailoverFetch } from './ai-backup.mjs';
 // Real-world reading adaptation. Source URLs are allowlisted and checked on server; no arbitrary URL fetches.
 export const READING_SOURCES=Object.freeze([
  {id:'what-study',hskMin:1,hskMax:2,topic:'Trường học',site:'Mandarin Bean',url:'https://mandarinbean.com/what-are-you-studying/'},
@@ -76,6 +76,7 @@ export function extractReadingText(page){
 }
 export async function buildReadingStory(body,{fetchFn,env,signal,model,random=Math.random}){
  if(!checkReadingBody(body))return {status:400,data:{error:'Yêu cầu bài đọc chưa hợp lệ.'}};
+ fetchFn=createAiFailoverFetch(fetchFn,env,{timeoutMs:30000});
  const source=chooseReadingSource(body,random);
  if(!source)return {status:404,data:{error:'Chưa có nguồn phù hợp cấp HSK này.'}};
  const canonical=new URL(source.url);
@@ -102,13 +103,7 @@ export async function buildReadingStory(body,{fetchFn,env,signal,model,random=Ma
  try{
   const r=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal,body:JSON.stringify({systemInstruction:{parts:[{text:instruction}]},contents:[{role:'user',parts:[{text:JSON.stringify(prompt)}]}],generationConfig:{temperature:0.65,maxOutputTokens:3200,responseMimeType:'application/json',responseSchema:schema}})});
   if(!r.ok){
-   // Explicit opt-in only: never spend secondary-provider credits without confirmation.
-   let fallback=null;
-   if([429,500,502,503,504].includes(r.status)){
-    fallback=await requestBackupJSON({fetchFn,env,signal,instruction,prompt});
-    if(fallback?.ok)data=fallback.data;
-   }
-   if(!data)return {status:r.status===429?429:502,data:{code:r.status===429?'READING_PROVIDER_QUOTA':'READING_PROVIDER_UNAVAILABLE',error:r.status===429?(fallback===null?'Gemini đã hết hạn mức. AI dự phòng chưa được cấu hình trên máy chủ.':'Gemini đã hết hạn mức và AI dự phòng chưa trả được bài. Hãy thử lại sau.'):'AI chưa tạo được bài đọc. Hãy thử lại sau.'}};
+   return {status:r.status===429?429:502,data:{code:r.status===429?'READING_PROVIDER_QUOTA':'READING_PROVIDER_UNAVAILABLE',error:r.status===429?'AI đã chạm hạn mức; dự phòng chưa được cấu hình hoặc chưa trả được bài.':'AI chính và dự phòng chưa trả được bài đọc. Hãy thử lại sau.'}};
   }else{
    const json=await r.json(),candidate=json.candidates?.[0];
    if(candidate?.finishReason&&candidate.finishReason!=='STOP')return {status:502,data:{error:'AI chưa hoàn thành bài đọc.'}};
