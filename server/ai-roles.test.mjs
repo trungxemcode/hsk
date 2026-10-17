@@ -14,7 +14,7 @@ test('server routes ordinary tasks to xKiro and complex/multimodal tasks to Gemi
  assert.equal(aiTaskRole('/ask',{question:'分析语用'}),'gemini');
  assert.equal(aiTaskRole('/translate',{text:'a'.repeat(181),hsk:3}),'gemini');
  assert.equal(aiTaskRole('/translate',{text:'xin chào',hsk:5}),'gemini');
- assert.equal(aiTaskRole('/reading-next',{hsk:3,genre:'story'}),'xkiro');
+ assert.equal(aiTaskRole('/reading-next',{hsk:3,genre:'story'}),'gemini');
  for(const genre of ['news','explainer'])assert.equal(aiTaskRole('/reading-next',{hsk:3,genre}),'gemini');
  assert.equal(aiTaskRole('/reading-next',{hsk:5,genre:'story'}),'gemini');
 });
@@ -25,7 +25,7 @@ test('ordinary success uses xKiro only and reports its actual provider',async()=
 });
 test('xKiro error, truncation, schema and semantic failures use Gemini exactly once',async()=>{
  for(const first of [()=>new Response('',{status:503}),()=>x({},'stop'),()=>x({answer:'short'}),()=>x({answer:'long enough'},'length'),()=>{throw TypeError('network')}]){
- const calls=[];const f=createAiRoleFetch(async u=>{calls.push(u);return u===url?gem({answer:'long enough'}):first()},env,{route:'/reading-next',body:{hsk:3,genre:'story'},validateData:d=>d.answer.length>6});
+ const calls=[];const f=createAiRoleFetch(async u=>{calls.push(u);return u===url?gem({answer:'long enough'}):first()},env,{route:'/ask',body:{hsk:3},validateData:d=>d.answer.length>6});
  assert.equal((await f(url,init)).status,200);assert.equal(calls.length,2);assert.equal(calls[1],url);
  }
 });
@@ -62,4 +62,16 @@ test('bundled auth gate and actual provider response header work with routing en
  const req=auth=>new Request('https://worker.test/dictionary-lookup',{method:'POST',headers:{Origin:'https://trungxemcode.github.io',...(auth?{Authorization:'Bearer '+token}:{})},body:JSON.stringify({query:'xin chào'})});
  assert.equal((await handler(req(false),{...env,GEMINI_API_KEY:'fake',FIREBASE_API_KEY:'fake'})).status,401);assert.equal(calls.length,0);
  const r=await handler(req(true),{...env,GEMINI_API_KEY:'fake',FIREBASE_API_KEY:'fake'});assert.equal(r.status,200);assert.equal(r.headers.get('X-HSK-AI-Provider'),'xkiro');assert.equal(calls.length,2);
+});
+test('reading skips the slow text provider, preserves complete validation and reports timings safely',async()=>{
+ for(const genre of ['dialogue','story','news','email','explainer']){
+  const calls=[],attempts=[];
+  const f=createAiRoleFetch(async u=>{calls.push(u===url?'gemini':'xkiro');return gem()},env,{route:'/reading-next',body:{hsk:3,genre},onAttempt:e=>attempts.push(e)});
+  assert.equal((await f(url,init)).status,200);assert.deepEqual(calls,['gemini']);
+  assert.equal(attempts[0].provider,'gemini');assert.equal(attempts[0].outcome,'success');assert.ok(attempts[0].ms>=0);
+  assert.equal(JSON.stringify(attempts).includes('hello'),false);assert.equal(JSON.stringify(attempts).includes(env.SECONDARY_AI_API_KEY),false);
+ }
+ const calls=[];
+ const fallback=createAiRoleFetch(async u=>{calls.push(u===url?'gemini':'xkiro');return u===url?new Response('',{status:429}):x()},env,{route:'/reading-next',body:{hsk:3,genre:'story'}});
+ assert.equal((await fallback(url,init)).status,200);assert.deepEqual(calls,['gemini','xkiro']);
 });

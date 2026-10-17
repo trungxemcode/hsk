@@ -98,3 +98,11 @@ test('Worker error messages redact every configured slot, not only the legacy se
  const request=new Request('https://worker.test/translate',{method:'POST',headers:{Origin:'https://trungxemcode.github.io',Authorization:'Bearer '+token},body:JSON.stringify({hsk:1,text:'Xin chào'})});
  const response=await handler(request,{...pool,FIREBASE_API_KEY:'fake-firebase'}),body=await response.text();assert.equal(response.status,502);for(const key of keys)assert.equal(body.includes(key),false);assert.match(body,/redacted/);
 });
+test('timing exposes original slot numbers after deduplication, never credentials or prompt data',async()=>{
+ const events=[],env={GEMINI_API_KEY_2:keys[1],GEMINI_API_KEY_3:keys[1],GEMINI_API_KEY_9:keys[8]};
+ const f=createGeminiKeyFetch(async()=>ok(),env,{onAttempt:e=>events.push(e)});
+ await f(url);await f(url);assert.deepEqual(events.map(e=>e.slot),[2,9]);
+ const single=createGeminiKeyFetch(async()=>ok(),{GEMINI_API_KEY_9:keys[8]},{onAttempt:e=>events.push(e)});await single(url);
+ assert.equal(events[2].slot,9);for(const key of keys)assert.equal(JSON.stringify(events).includes(key),false);
+ const brokenObserver=createGeminiKeyFetch(async()=>ok(),pool,{onAttempt:()=>{throw Error('telemetry failure')}});assert.equal((await brokenObserver(url)).status,200);
+});

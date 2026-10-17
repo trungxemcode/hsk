@@ -1,3 +1,13 @@
+## Tạo bài đọc nhanh — Worker 3.4.2
+
+`/reading-next` ưu tiên Gemini ở cả 5 thể loại và HSK 1–6, xKiro vẫn dự phòng khi lỗi; hỏi đáp/tra cứu nhẹ giữ phân vai cũ. Đo thật phát hiện cấu hình cũ chờ xKiro hết 18 giây rồi Gemini tạo bài khoảng 3 giây. Không gọi nhiều AI song song, không tạo bài nền, không rút giới hạn độ dài hay bỏ pinyin/dịch Việt/câu hỏi để lấy tốc độ.
+
+Nội dung nguồn công khai đã xác minh được giữ trong bộ nhớ Worker tối đa 30 phút, theo ID nguồn trong danh mục cố định; không lưu token/UID hay nội dung riêng của người học. Cache có giới hạn tự nhiên là số nguồn trong danh mục, hết hạn phải kiểm tra nguồn lại. Khác với cache bài đọc hiện có, cache nguồn vẫn tạo một bài mới qua AI. Cold start có thể tải lại nguồn.
+
+Prompt chia mục tiêu độ dài theo lượt thoại/đoạn, giữ nguyên validator chất lượng; schema ràng buộc 3 câu hỏi, 3 lựa chọn và chỉ số đáp án 0–2. Giữ nguyên cấu hình suy luận mặc định của Gemini và giới hạn 3.200 token đầu ra.
+
+Log `hsk-reading-timing` chỉ ghi thời gian nguồn, cache hit, nhà cung cấp, kết quả và số thứ tự khóa đã cấu hình. Thời gian `gemini-key` là tới response headers; thời gian provider bao gồm đọc/kiểm tra response body. Không log API key, UID, token, câu hỏi hay bài đọc. Cần deploy Worker; đây là thay đổi backend, không cần tải lại PWA. Các biến quota và Secrets giữ nguyên. Vị trí 10 có thể để trống.
+
 # Kết nối dịch Việt → Trung theo HSK
 
 ## Luân phiên tối đa 10 khóa Gemini — 3.4.1

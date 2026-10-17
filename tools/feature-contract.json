@@ -902,11 +902,52 @@
       "id": "gemini-key-pool",
       "name": "Luân phiên tối đa 10 khóa Gemini phía máy chủ",
       "checks": [
-        { "kind": "file", "file": "server/gemini-keys.mjs", "value": "" },
-        { "kind": "contains", "file": "server/gemini-keys.mjs", "value": "export function createGeminiKeyFetch" },
-        { "kind": "contains", "file": "server/ai-control.mjs", "value": "gemini-pick" },
-        { "kind": "contains", "file": "server/translator-worker.mjs", "value": "createGeminiKeyFetch(rawFetchFn" },
-        { "kind": "file", "file": "server/gemini-keys.test.mjs", "value": "" }
+        {
+          "kind": "file",
+          "file": "server/gemini-keys.mjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/gemini-keys.mjs",
+          "value": "export function createGeminiKeyFetch"
+        },
+        {
+          "kind": "contains",
+          "file": "server/ai-control.mjs",
+          "value": "gemini-pick"
+        },
+        {
+          "kind": "contains",
+          "file": "server/translator-worker.mjs",
+          "value": "createGeminiKeyFetch(rawFetchFn"
+        },
+        {
+          "kind": "file",
+          "file": "server/gemini-keys.test.mjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "reading-generation-performance",
+      "name": "Tạo bài đọc nhanh, đủ nội dung và dự phòng AI",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "server/reading-service.mjs",
+          "value": "sourceCache"
+        },
+        {
+          "kind": "file",
+          "file": "server/ai-roles.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/translator-worker.mjs",
+          "value": "hsk-reading-timing"
+        }
       ]
     }
   ]
