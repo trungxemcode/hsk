@@ -51,3 +51,6 @@ Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-
 - CI: `.github/workflows/studio-ui.yml`, `mobile-dock.yml`, `update-notifications.yml`.
 - Tests: `node --test server/*.test.mjs`, targeted `tools/check-*-dom.cjs` and Playwright `tools/check-*-ui.cjs`; key responsive/goal/home/loading tests listed in `AGENTS.md`.
 - Browser CI mocks transport; it is not evidence of working real Gemini, real Firebase or physical iPhone devices.
+
+## AI task routing (3.3.6)
+Server ai-backup.mjs: aiTaskRole + createAiRoleFetch select xKiro for routine text, Gemini for heavy/multimodal work; one sequential fallback, schema/reading validation, X-HSK-AI-Provider response header. AI_TASK_ROUTING controls policy. See ai-roles.test.mjs for routing and safety regression tests.

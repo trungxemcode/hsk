@@ -1,8 +1,8 @@
 import { vocabulary } from './hsk-vocabulary.mjs';
 import { validateHandwritingSample, submitHandwritingSample } from './handwriting-samples.mjs';
-import { checkReadingBody, buildReadingStory } from './reading-service.mjs';
+import { checkReadingBody, buildReadingStory, validReadingStory } from './reading-service.mjs';
 import { controlCall, readingCacheKey, HSkaIControl } from './ai-control.mjs';
-import { createAiFailoverFetch, AI_TIMEOUTS } from './ai-backup.mjs';
+import { createAiFailoverFetch, createAiRoleFetch, AI_TIMEOUTS } from './ai-backup.mjs';
 
 const schema = {type:'OBJECT',properties:{chinese:{type:'STRING'},pinyin:{type:'STRING'},explanation:{type:'STRING'},note:{type:'STRING'}},required:['chinese','pinyin','explanation','note']};
 const chineseSchema={...schema,properties:{...schema.properties,vietnamese:{type:'STRING'}},required:[...schema.required,'vietnamese']};
@@ -25,7 +25,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-ai-fast-failover-3-3-5';
+export const WORKER_REVISION='hsk-ai-task-roles-3-3-6';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -39,12 +39,12 @@ async function geminiFailure(response,model,env,operation='existing'){
 export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
  const cooldowns=new Map();
  return async(request,env)=>{
-  const fetchFn=createAiFailoverFetch(rawFetchFn,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
+  let fetchFn=createAiFailoverFetch(rawFetchFn,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
   const origin=request.headers.get('Origin')||'',allowed=(env.ALLOWED_ORIGINS||'https://trungxemcode.github.io').split(',').map(s=>s.trim());
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin','X-HSK-Worker-Version':WORKER_REVISION};
   const reply=(value,status=200)=>new Response(JSON.stringify(value),{status,headers});
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
-  Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version'});
+  Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
   const route=new URL(request.url).pathname,isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
   if(route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading)return reply({error:'Không tìm thấy dịch vụ.'},404);
@@ -87,6 +87,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    const t=body.translation,h=body.history;
    if(typeof body.question!=='string'||!body.question.trim()||body.question.length>500||!t||typeof t.vietnamese!=='string'||!t.vietnamese.trim()||t.vietnamese.length>4000||typeof t.chinese!=='string'||!t.chinese.trim()||t.chinese.length>2000||typeof t.pinyin!=='string'||t.pinyin.length>2000||typeof t.explanation!=='string'||t.explanation.length>2000||!Array.isArray(h)||h.length>8||!h.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.text==='string'&&m.text.length<=1000))return reply({error:'Câu hỏi hoặc ngữ cảnh không hợp lệ.'},400);
   }else if(typeof body.text!=='string'||!body.text.trim()||body.text.length>500)return reply({error:'Nhập câu tối đa 500 ký tự.'},400);
+  fetchFn=createAiRoleFetch(rawFetchFn,env,{route,body,validateData:isReading?data=>validReadingStory(data,{genre:body.genre||'dialogue',hsk:body.hsk,quality:!!body.genre}):undefined,onProvider:provider=>{headers['X-HSK-AI-Provider']=provider;}});
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isOcr?110000:isReading?85000:isAsk?45000:60000);
   try{
    const auth=await fetchFn('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(env.FIREBASE_API_KEY),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token}),signal:controller.signal});
