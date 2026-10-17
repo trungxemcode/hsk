@@ -1,0 +1,902 @@
+{
+  "schema": 1,
+  "baseline": "HSK 3.3.6",
+  "policy": "append-only; remove only after a separate user-authorized approval PR has landed on main",
+  "features": [
+    {
+      "id": "navigation-home",
+      "name": "Trang tổng quan",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "home"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "studioHome"
+        },
+        {
+          "kind": "contains",
+          "file": "studio.js",
+          "value": "window.HSKStudio="
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-home-overview-ui.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "navigation-lessons",
+      "name": "Bài học HSK",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "lessons"
+        },
+        {
+          "kind": "contains",
+          "file": "lessons.js",
+          "value": "window.HSKLessonNav="
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-lesson-guided-ui.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "navigation-practice",
+      "name": "Luyện và ôn",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "practice"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "studioPractice"
+        },
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "window.HSKPracticeSelection="
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-practice-picker-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "review"
+        }
+      ]
+    },
+    {
+      "id": "navigation-search",
+      "name": "Tra cứu",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "search"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "searchInput"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "searchResults"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-search-tabs-ui.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "navigation-notebook",
+      "name": "Sổ từ vựng",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "notebook"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "notebookPanel"
+        },
+        {
+          "kind": "contains",
+          "file": "notebook.js",
+          "value": "window.HSKNotebook="
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-notebook-ui.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "navigation-account",
+      "name": "Tài khoản",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "account"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "accountForm"
+        },
+        {
+          "kind": "file",
+          "file": "account.js",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "flashcards",
+      "name": "Flashcards và lật thẻ",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "learn"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "flashcard"
+        },
+        {
+          "kind": "contains",
+          "file": "app.js",
+          "value": "hsk-flashcards-progress-v1"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-studio-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['learn'"
+        }
+      ]
+    },
+    {
+      "id": "quiz",
+      "name": "Trắc nghiệm",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "quiz"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "quizOptions"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-studio-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['quiz'"
+        }
+      ]
+    },
+    {
+      "id": "srs",
+      "name": "Ôn tập giãn cách SRS",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "srs"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "srsCard"
+        },
+        {
+          "kind": "contains",
+          "file": "app.js",
+          "value": "hsk-flashcards-progress-v1"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-studio-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['srs'"
+        }
+      ]
+    },
+    {
+      "id": "mistakes",
+      "name": "Ôn câu sai",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "mistakes"
+        },
+        {
+          "kind": "contains",
+          "file": "app.js",
+          "value": "hsk-flashcards-mistakes-v1"
+        },
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['mistakes'"
+        }
+      ]
+    },
+    {
+      "id": "compare",
+      "name": "Từ dễ nhầm",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "compare"
+        },
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['compare'"
+        }
+      ]
+    },
+    {
+      "id": "match-game",
+      "name": "Đối chiếu Hán-Pinyin-nghĩa",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['match-game'"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "matchGamePanel"
+        },
+        {
+          "kind": "contains",
+          "file": "practice-games.js",
+          "value": "window.HSKPracticeGames="
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-practice-games-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "match-game"
+        }
+      ]
+    },
+    {
+      "id": "sentence-game",
+      "name": "Sắp xếp câu",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['sentence-game'"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "sentenceGamePanel"
+        },
+        {
+          "kind": "file",
+          "file": "practice-games-core.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-practice-games-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "sentence-game"
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Luyện viết chữ Hán",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['writing'"
+        },
+        {
+          "kind": "file",
+          "file": "writing-practice.js",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "writing-practice.js",
+          "value": "window.HSKWritingPractice="
+        }
+      ]
+    },
+    {
+      "id": "passive",
+      "name": "Học rảnh tay",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['passive'"
+        },
+        {
+          "kind": "contains",
+          "file": "passive.js",
+          "value": "window.HSKPassive="
+        }
+      ]
+    },
+    {
+      "id": "exam",
+      "name": "Bài tập và luyện thi HSK",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['exam'"
+        },
+        {
+          "kind": "contains",
+          "file": "exam.js",
+          "value": "window.HSKExam="
+        },
+        {
+          "kind": "file",
+          "file": "exam-bank.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-exam-dom.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "placement",
+      "name": "Thi đầu vào thích ứng",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['placement'"
+        },
+        {
+          "kind": "contains",
+          "file": "placement.js",
+          "value": "window.HSKPlacement="
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-placement-ui.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "study4",
+      "name": "Nguồn đề nghe Study4",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['study4'"
+        },
+        {
+          "kind": "contains",
+          "file": "study4-practice.js",
+          "value": "window.HSKStudy4="
+        }
+      ]
+    },
+    {
+      "id": "real-reading",
+      "name": "Đọc thực tế AI có chống lặp",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "practice-selector.js",
+          "value": "['real-reading'"
+        },
+        {
+          "kind": "contains",
+          "file": "real-reading.js",
+          "value": "window.HSKRealReading="
+        },
+        {
+          "kind": "file",
+          "file": "real-reading-variety-core.js",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/translator-worker.mjs",
+          "value": "/reading-next"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-real-reading-ui.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "lesson-guided",
+      "name": "Học bài tự động",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "lesson-guided.js",
+          "value": "window.HSKLessonGuided="
+        },
+        {
+          "kind": "file",
+          "file": "lesson-guided-core.js",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "lesson-mini",
+      "name": "Luyện tập trong bài học",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "lesson-mini.js",
+          "value": "window.HSKLessonMini="
+        },
+        {
+          "kind": "file",
+          "file": "lesson-mini-data.json",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "handwriting",
+      "name": "Nhận dạng chữ viết tay và hoàn tác",
+      "checks": [
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "handwritingCanvas"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "handwritingUndo"
+        },
+        {
+          "kind": "file",
+          "file": "handwriting-core.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "handwriting-learning.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-handwriting.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "translation",
+      "name": "Dịch văn bản AI",
+      "checks": [
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "translationInput"
+        },
+        {
+          "kind": "file",
+          "file": "translator.js",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/translator-worker.mjs",
+          "value": "/translate"
+        },
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "translator"
+        }
+      ]
+    },
+    {
+      "id": "ocr",
+      "name": "Đọc ảnh OCR",
+      "checks": [
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "ocrFile"
+        },
+        {
+          "kind": "file",
+          "file": "ocr.js",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "dictionary",
+      "name": "Từ điển mở",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "open-dictionary.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "open-dictionary-core.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "content/open-dictionary",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "notebook-factory",
+      "name": "Tạo sổ từ vựng",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "notebook-factory.js",
+          "value": "window.HSKNotebookFactory="
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-notebook-factory-ui.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "backup",
+      "name": "Sao lưu và khôi phục",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "backup-restore.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "backup-core.js",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "sync",
+      "name": "Đồng bộ tiến độ học",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "study-sync.js",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "study-sync.js",
+          "value": "window.HSKStudyStore="
+        },
+        {
+          "kind": "file",
+          "file": "firestore.rules",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "planner",
+      "name": "Lộ trình HSK và kế hoạch học",
+      "checks": [
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "planForm"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "planToday"
+        },
+        {
+          "kind": "file",
+          "file": "planner.js",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "ai-coach",
+      "name": "Huấn luyện viên AI",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "ai-coach.js",
+          "value": "window.HSKAICoach="
+        },
+        {
+          "kind": "file",
+          "file": "coach-profile.js",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "drive-exam",
+      "name": "Đề thi và âm thanh HSK",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "drive-exam.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "drive-audio.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "drive-exam-data.json.gz",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "notifications",
+      "name": "Thông báo OneSignal và quyền riêng biệt",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "push.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "OneSignalSDKWorker.js",
+          "value": ""
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "updateNotice"
+        }
+      ]
+    },
+    {
+      "id": "offline-pwa",
+      "name": "Học offline và cập nhật PWA",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "offline-worker.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "offline.js",
+          "value": ""
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "offlineCheck"
+        },
+        {
+          "kind": "file",
+          "file": "app-version.json",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-update-dom.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "theme",
+      "name": "Giao diện sáng/tối",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "studio.js",
+          "value": "hsk-theme-v1"
+        },
+        {
+          "kind": "file",
+          "file": "style.css",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "hsk-curriculum",
+      "name": "HSK 1-6 146 bài chuẩn",
+      "checks": [
+        {
+          "kind": "lessons",
+          "file": "lessons-data.json",
+          "value": "1:15,2:15,3:20,4:20,5:36,6:40"
+        }
+      ]
+    },
+    {
+      "id": "study-storage-progress",
+      "name": "Giữ khóa tiến độ và điểm",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "studio.js",
+          "value": "hsk-flashcards-progress-v1"
+        },
+        {
+          "kind": "contains",
+          "file": "studio.js",
+          "value": "hsk-course-lessons-v1"
+        }
+      ]
+    },
+    {
+      "id": "study-storage-mistakes",
+      "name": "Giữ khóa câu sai",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "studio.js",
+          "value": "hsk-flashcards-mistakes-v1"
+        }
+      ]
+    },
+    {
+      "id": "push-update-optin",
+      "name": "Thông báo update chỉ khi tự bật",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "push.js",
+          "value": "hsk_update_on"
+        },
+        {
+          "kind": "file",
+          "file": "send-update-notification.py",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-ios-push-ui.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "feature-preservation",
+      "name": "B?o v? t?nh n?ng tr??c khi merge",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "tools/check-feature-preservation.py",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/feature-contract.json",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/approved-feature-removals.json",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": ".github/workflows/feature-preservation.yml",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-feature-runtime.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/test_feature_preservation.py",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": ".github/CODEOWNERS",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "admin-dashboard",
+      "name": "Dashboard qu?n tr? h?c vi?n",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "admin"
+        },
+        {
+          "kind": "file",
+          "file": "admin.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "admin-core.js",
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

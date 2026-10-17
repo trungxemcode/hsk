@@ -1,0 +1,89 @@
+name: Preserve existing HSK features
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: preserve-features-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  contracts:
+    name: feature-contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests for deletion protection (including deliberate sabotage)
+        run: python -m unittest discover -s tools -p 'test_feature_preservation.py'
+      - name: Preserve all previously protected capabilities
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+        run: |
+          if [ -n "$BASE_SHA" ] && git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
+            if git cat-file -e "$BASE_SHA:tools/feature-contract.json" 2>/dev/null; then
+              python tools/check-feature-preservation.py --base "$BASE_SHA"
+            else
+              echo "Initial contract bootstrap: no registry in base, checking implementation and inventory."
+              python tools/check-feature-preservation.py
+            fi
+          else
+            # Missing base SHA must fail once the registry is in main.
+            echo "Cannot verify parent commit; refusing to skip feature preservation."
+            exit 1
+          fi
+  functional-regressions:
+    name: protected-flows
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix /tmp/hsk-tests jsdom@26.1.0 playwright@1.56.1
+      - name: Protected core behavior, data and server tests
+        env:
+          NODE_PATH: /tmp/hsk-tests/node_modules
+        run: |
+          node --test server/*.test.mjs
+          node tools/check-reading-dom.cjs
+          node tools/check-studio-dom.cjs
+          node tools/check-notebook-dom.cjs
+          node tools/check-exam-dom.cjs
+          node tools/check-practice-games-core.cjs
+          node tools/check-study-sync-dom.cjs
+          node tools/check-update-dom.cjs
+          node tools/check-real-reading-variety.cjs
+  browser-regressions:
+    name: mobile-and-learning
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix /tmp/hsk-tests playwright@1.56.1 jsdom@26.1.0
+      - name: Keep real interaction flows working on phone and desktop
+        env:
+          NODE_PATH: /tmp/hsk-tests/node_modules
+        run: |
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-feature-runtime.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-practice-picker-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-practice-games-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-real-reading-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-studio-ui.cjs
