@@ -42,7 +42,7 @@ export function decodeVoiceAudio(data){
  }
  return {audioBase64:btoa(binary),mimeType:format==='pcm'?'audio/L16;codec=pcm;rate=24000':'audio/wav'};
 }
-export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.now()){
+export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.now(),slotFetch){
  return async function voicePrecache(request,env){
   if(request.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);
   if(!env.HSK_VOICE_GOOGLE_SUB_SHA256)return json({ok:false,error:'voice_not_configured'},503);
@@ -78,7 +78,8 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    input=JSON.parse(data);
   }catch{return json({ok:false,error:'invalid_request'},400);}
   if(!input||typeof input!=='object'||Array.isArray(input)
-   ||Object.keys(input).some(k=>!['text','language'].includes(k))
+   ||Object.keys(input).some(k=>!['text','language','keySlot'].includes(k))
+   ||(input.keySlot!==undefined&&(!Number.isInteger(input.keySlot)||input.keySlot<1||input.keySlot>9||!slotFetch))
    ||(input.language!==undefined&&input.language!=='zh-CN')
    ||typeof input.text!=='string')return json({ok:false,error:'invalid_request'},400);
   const text=input.text.normalize('NFC').replace(/\s+/g,' ').trim();
@@ -90,14 +91,15 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    contents:[{role:'user',parts:[{text:prompt}]}],
    generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:'Kore'}}}}
   };
+  const provider=input.keySlot===undefined?geminiFetch:slotFetch(input.keySlot);
   const controller=new AbortController(),cancel=()=>controller.abort();
   if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',cancel,{once:true});
   const deadline=setTimeout(cancel,80000);
   try{
    for(let attempt=0;attempt<2;attempt++){
     let response;
-    try{response=await geminiFetch('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});}catch{return json({ok:false,error:'tts_provider_unavailable'},503);}
-    if(!response.ok)return json({ok:false,error:'tts_provider_unavailable',upstreamStatus:response.status},[429,503].includes(response.status)?response.status:502);
+    try{response=await provider('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});}catch{return json({ok:false,error:'tts_provider_unavailable'},503);}
+    if(!response.ok)return json({ok:false,error:'tts_provider_unavailable',upstreamStatus:response.status,retryAfter:Math.min(86400,Math.max(60,Number(response.headers.get('Retry-After'))||600))},[429,503].includes(response.status)?response.status:502);
     let data;try{data=await response.json();}catch{return json({ok:false,error:'invalid_tts_response'},502);}
     const audio=decodeVoiceAudio(data);
     if(!audio.error)return json({ok:true,...audio,voice:'Kore',model});

@@ -32,7 +32,7 @@ async function geminiCooldown(response,now){
  const daily=details.some(d=>d.violations?.some(v=>/perday|daily/i.test(String(v.quotaId)+' '+String(v.quotaMetric))));
  return Math.max(daily?86400000:60000,Number.isFinite(ms)?ms:0);
 }
-export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={cursor:0,blocked:new Map()},onAttempt=()=>{}}={}){
+export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={cursor:0,blocked:new Map()},onAttempt=()=>{},slot}={}){
  const slots=configuredGeminiSlots(env),keys=slots.map(entry=>entry.key);
  const callKey=async(index,url,init)=>{
   const headers=new Headers(init.headers);headers.set('x-goog-api-key',keys[index]);const started=Date.now();
@@ -47,11 +47,12 @@ export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={curs
   canceled();
   if(!keys.length)return Response.json({error:{status:'UNAVAILABLE'}},{status:503});
   // Legacy single-key installations retain one attempt and existing behavior.
+  if(slot!==undefined&&!slots.some(entry=>entry.slot===slot))return Response.json({error:{status:'UNAVAILABLE'}},{status:503});
   if(keys.length===1)return callKey(0,url,init);
-  const ids=await (idsPromise||=Promise.all(keys.map(geminiKeyId))),excluded=[];
+  const ids=await (idsPromise||=Promise.all(keys.map(geminiKeyId))),excluded=ids.filter((id,i)=>slot!==undefined&&slots[i].slot!==slot);
   let last;
   // Never fan out or scan ten accounts for one prompt: max two sequential calls.
-  for(let attempt=0;attempt<2;attempt++){
+  for(let attempt=0;attempt<(slot===undefined?2:1);attempt++){
    canceled();
    let picked=await controlCall(env,'gemini-pick',{ids,excluded});
    canceled();

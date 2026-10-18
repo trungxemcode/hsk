@@ -318,7 +318,7 @@ async function geminiCooldown(response,now){
  const daily=details.some(d=>d.violations?.some(v=>/perday|daily/i.test(String(v.quotaId)+' '+String(v.quotaMetric))));
  return Math.max(daily?86400000:60000,Number.isFinite(ms)?ms:0);
 }
-export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={cursor:0,blocked:new Map()},onAttempt=()=>{}}={}){
+export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={cursor:0,blocked:new Map()},onAttempt=()=>{},slot}={}){
  const slots=configuredGeminiSlots(env),keys=slots.map(entry=>entry.key);
  const callKey=async(index,url,init)=>{
   const headers=new Headers(init.headers);headers.set('x-goog-api-key',keys[index]);const started=Date.now();
@@ -333,11 +333,12 @@ export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={curs
   canceled();
   if(!keys.length)return Response.json({error:{status:'UNAVAILABLE'}},{status:503});
   // Legacy single-key installations retain one attempt and existing behavior.
+  if(slot!==undefined&&!slots.some(entry=>entry.slot===slot))return Response.json({error:{status:'UNAVAILABLE'}},{status:503});
   if(keys.length===1)return callKey(0,url,init);
-  const ids=await (idsPromise||=Promise.all(keys.map(geminiKeyId))),excluded=[];
+  const ids=await (idsPromise||=Promise.all(keys.map(geminiKeyId))),excluded=ids.filter((id,i)=>slot!==undefined&&slots[i].slot!==slot);
   let last;
   // Never fan out or scan ten accounts for one prompt: max two sequential calls.
-  for(let attempt=0;attempt<2;attempt++){
+  for(let attempt=0;attempt<(slot===undefined?2:1);attempt++){
    canceled();
    let picked=await controlCall(env,'gemini-pick',{ids,excluded});
    canceled();
@@ -535,7 +536,7 @@ export function decodeVoiceAudio(data){
  }
  return {audioBase64:btoa(binary),mimeType:format==='pcm'?'audio/L16;codec=pcm;rate=24000':'audio/wav'};
 }
-export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.now()){
+export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.now(),slotFetch){
  return async function voicePrecache(request,env){
   if(request.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);
   if(!env.HSK_VOICE_GOOGLE_SUB_SHA256)return json({ok:false,error:'voice_not_configured'},503);
@@ -571,7 +572,8 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    input=JSON.parse(data);
   }catch{return json({ok:false,error:'invalid_request'},400);}
   if(!input||typeof input!=='object'||Array.isArray(input)
-   ||Object.keys(input).some(k=>!['text','language'].includes(k))
+   ||Object.keys(input).some(k=>!['text','language','keySlot'].includes(k))
+   ||(input.keySlot!==undefined&&(!Number.isInteger(input.keySlot)||input.keySlot<1||input.keySlot>9||!slotFetch))
    ||(input.language!==undefined&&input.language!=='zh-CN')
    ||typeof input.text!=='string')return json({ok:false,error:'invalid_request'},400);
   const text=input.text.normalize('NFC').replace(/\s+/g,' ').trim();
@@ -583,14 +585,15 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    contents:[{role:'user',parts:[{text:prompt}]}],
    generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:'Kore'}}}}
   };
+  const provider=input.keySlot===undefined?geminiFetch:slotFetch(input.keySlot);
   const controller=new AbortController(),cancel=()=>controller.abort();
   if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',cancel,{once:true});
   const deadline=setTimeout(cancel,80000);
   try{
    for(let attempt=0;attempt<2;attempt++){
     let response;
-    try{response=await geminiFetch('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});}catch{return json({ok:false,error:'tts_provider_unavailable'},503);}
-    if(!response.ok)return json({ok:false,error:'tts_provider_unavailable',upstreamStatus:response.status},[429,503].includes(response.status)?response.status:502);
+    try{response=await provider('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});}catch{return json({ok:false,error:'tts_provider_unavailable'},503);}
+    if(!response.ok)return json({ok:false,error:'tts_provider_unavailable',upstreamStatus:response.status,retryAfter:Math.min(86400,Math.max(60,Number(response.headers.get('Retry-After'))||600))},[429,503].includes(response.status)?response.status:502);
     let data;try{data=await response.json();}catch{return json({ok:false,error:'invalid_tts_response'},502);}
     const audio=decodeVoiceAudio(data);
     if(!audio.error)return json({ok:true,...audio,voice:'Kore',model});
@@ -625,7 +628,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-tts-audio-3-5-2';
+export const WORKER_REVISION='hsk-tts-parallel-3-5-3';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -648,7 +651,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin','X-HSK-Worker-Version':WORKER_REVISION};
   const reply=(value,status=200)=>{responseStatus=status;return new Response(JSON.stringify(value),{status,headers});};
   // Server-to-server only: verified Google Apps Script identity, no browser CORS.
-  if(new URL(request.url).pathname==='/voice-precache')return createVoicePrecacheHandler(rawFetchFn,keyFetch,now)(request,env);
+  if(new URL(request.url).pathname==='/voice-precache')return createVoicePrecacheHandler(rawFetchFn,keyFetch,now,slot=>createGeminiKeyFetch(rawFetchFn,env,{now,state:geminiState,slot}))(request,env);
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
   Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});

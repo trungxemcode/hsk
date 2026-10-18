@@ -1,3 +1,9 @@
+## Nine parallel voice slots — 2026-10-18
+- User authorized nine concurrent keys and hourly progress. Parallel.gs sends one fetchAll batch of up to nine unique Mandarin clips, keySlot1..9 pinned behind verified Google identity. Existing Gemini keys remain in Worker. Timer every minute, existing60min/24h runtime ceiling retained.
+- Shared script lock covers cache/reservation/generation/write. Persistent PROCESSING rows, deterministic filenames, duplicate-text filtering and interrupted-file reconciliation prevent repeated files/calls. Ambiguous transport/interruption without file goes to REVIEW rather than automatic rebilling. Definitive temporary failures deferred per phrase; cooling slot does not stop other slots.
+- Tien_do counts actual unique READY hashes. Existing cursor/retry queue preserved. Hourly ChatGPT task reads only A3:B3 and reports one sentence, without controlling generation.
+- Validation:210 server tests pass, including9 new concurrency/dedup/auth/cooldown/crash cases; feature preservation45/162; browser runtime390/1440 passes in installed Edge. Worker3.5.3 and Apps Script deployed; first real nine-request batch produced6 READY and3 incomplete items;31 READY hashes unique. One minute trigger confirmed. No frontend changes, no PWA bump.
+
 ## Autonomous voice queue — 2026-10-18
 - User requested unattended generation to avoid spending ChatGPT usage on per-phrase operations. Apps Script scheduler runs independently; Gemini generation still consumes provider quota.
 - WarmBatch: four phrases per5min trigger; READY cache reuse; per-item cursor; rolling60min/24h runtime ceiling; provider/quota backoff30min–6h; incomplete audio deferred24h with three attempts total; refusals retained as REVIEW without blocking later phrases. Voice_Retry stores unresolved items; Tien_do reports real ready/remaining/review counts. No keys moved or new frontend integration.

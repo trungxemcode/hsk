@@ -1033,6 +1033,27 @@
         {"kind":"file","file":"server/voice-bundle.test.mjs","value":""},
         {"kind":"file","file":"server/voice-tts.test.mjs","value":""}
       ]
+    },
+    {
+      "id": "voice-cache-parallel-nine",
+      "name": "Kho audio nền chín luồng chống trùng",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/Parallel.gs",
+          "value": "function hskWarmParallelTick()"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/Parallel.gs",
+          "value": "UrlFetchApp.fetchAll(requests)"
+        },
+        {
+          "kind": "contains",
+          "file": "server/voice-parallel.test.mjs",
+          "value": "uncertain batch transport never automatically regenerates reserved sentences"
+        }
+      ]
     }
   ]
 }

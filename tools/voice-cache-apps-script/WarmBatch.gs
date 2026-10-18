@@ -9,7 +9,7 @@ function hskWarmStatus() {
   return {total:all.length,completed:Math.min(done,all.length),remaining:Math.max(0,all.length-done),
     enabled:p.getProperty('HSK_WARM_ENABLED')==='true',
     configuredKeys:configured,keyTransport:p.getProperty('HSK_VOICE_TTS_TRANSPORT')==='direct'?'direct':'cloudflare',retryAt:Number(p.getProperty('HSK_WARM_RETRY_AT')||0),lastError:p.getProperty('HSK_WARM_LAST_ERROR')||'',
-    lastRun:p.getProperty('HSK_WARM_LAST_RUN')||'',mode:'background-cache-first',
+    lastRun:p.getProperty('HSK_WARM_LAST_RUN')||'',mode:p.getProperty('HSK_WARM_PARALLEL')==='true'?'parallel-nine-key-slots':'background-cache-first',
     callsToday:Number(p.getProperty('HSK_WARM_CALLS')||0),runtimeMinutes:Math.round(Number(p.getProperty('HSK_WARM_RUNTIME_MS')||0)/6000)/10};
 }
 function hskWarmStart() {
@@ -56,7 +56,9 @@ function hskWarmProgress_(storage,p) {
   if(!sheet)sheet=book.insertSheet('Tien_do');
   var q=hskWarmQueue_(storage),rows=q.getLastRow()>1?q.getRange(2,1,q.getLastRow()-1,6).getValues():[];
   var pending=rows.filter(function(r){return r[4]==='PENDING';}).length,review=rows.filter(function(r){return r[4]==='REVIEW';}).length;
-  var s=hskWarmStatus(),ready=Math.max(0,s.completed-pending-review);
+  var s=hskWarmStatus(),readyKeys=new Set();
+  if(storage.sheet.getLastRow()>1)storage.sheet.getRange(2,1,storage.sheet.getLastRow()-1,13).getValues().forEach(function(r){if(r[0]&&r[4]&&r[11]==='READY')readyKeys.add(String(r[0]));});
+  var ready=readyKeys.size;
   sheet.getRange(1,1,13,2).setValues([
     ['Kho voice tự động','Gemini Kore / tiếng Trung'],['Tổng câu',s.total],['Đã có audio',ready],
     ['Chưa duyệt',s.remaining],['Sẽ thử lại',pending],['Cần kiểm tra',review],
@@ -66,6 +68,7 @@ function hskWarmProgress_(storage,p) {
     ['Lỗi gần nhất',s.lastError],['Cơ chế','Chỉ tạo câu chưa có; không dùng ChatGPT; không cần mở máy']]);
 }
 function hskWarmTick() {
+  if(hskSettings_().getProperty('HSK_WARM_PARALLEL')==='true')return hskWarmParallelTick();
   var p=hskSettings_(),now=Date.now();
   if(p.getProperty('HSK_WARM_ENABLED')!=='true'||p.getProperty('HSK_VOICE_PAUSED')==='true')return;
   if(Number(p.getProperty('HSK_WARM_RETRY_AT')||0)>now)return;
