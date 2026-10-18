@@ -5,6 +5,43 @@ async function sha256(value){
  const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value));
  return Array.from(new Uint8Array(digest),x=>x.toString(16).padStart(2,'0')).join('');
 }
+export function decodeVoiceAudio(data){
+ if(data?.promptFeedback?.blockReason)return {error:'tts_blocked'};
+ const candidate=data?.candidates?.[0],finish=candidate?.finishReason;
+ if(finish&&finish!=='STOP')return {error:['OTHER','MAX_TOKENS','FINISH_REASON_UNSPECIFIED'].includes(finish)?'tts_generation_incomplete':'tts_blocked',retryable:['OTHER','MAX_TOKENS','FINISH_REASON_UNSPECIFIED'].includes(finish)};
+ const parts=candidate?.content?.parts?.filter(p=>p?.inlineData?.data)||[];
+ if(!parts.length)return {error:'tts_generation_incomplete',retryable:true};
+ let binary='',format;
+ for(const part of parts){
+  const {data:value,mimeType:mime}=part.inlineData;
+  if(typeof value!=='string'||value.length>2000000||typeof mime!=='string')return {error:'invalid_tts_audio'};
+  const base64=value.replace(/[\r\n\t ]/g,'');
+  if(!base64||base64.length%4!==0||!/^[A-Za-z0-9+/]+={0,2}$/.test(base64))return {error:'invalid_tts_audio'};
+  const type=mime.split(';')[0].trim().toLowerCase(),pcm=['audio/l16','audio/pcm','audio/x-pcm'].includes(type),wav=['audio/wav','audio/wave','audio/x-wav'].includes(type);
+  if(!pcm&&!wav)return {error:'invalid_tts_audio'};
+  if(pcm){for(const parameter of mime.split(';').slice(1)){const [name,val]=parameter.trim().toLowerCase().split('=');if(name==='rate'&&val!=='24000'||name==='channels'&&val!=='1'||name==='codec'&&val!=='pcm')return {error:'invalid_tts_audio'};}}
+  const current=pcm?'pcm':'wav';if(format&&format!==current||current==='wav'&&parts.length!==1)return {error:'invalid_tts_audio'};format=current;
+  let decoded;try{decoded=atob(base64);}catch{return {error:'invalid_tts_audio'};}
+  if(!decoded.length||decoded.length%2||decoded.length+(binary.length)>1500000-44)return {error:'invalid_tts_audio'};binary+=decoded;
+ }
+ if(format==='wav'){
+  if(binary.length<46||binary.slice(0,4)!=='RIFF'||binary.slice(8,12)!=='WAVE')return {error:'invalid_tts_audio'};
+  const u32=at=>[0,1,2,3].reduce((n,i)=>n+binary.charCodeAt(at+i)*2**(8*i),0);
+  const u16=at=>binary.charCodeAt(at)+binary.charCodeAt(at+1)*256;
+  if(u32(4)!==binary.length-8)return {error:'invalid_tts_audio'};
+  let foundFormat=false,foundData=false;
+  for(let offset=12;offset<binary.length;){
+   if(offset+8>binary.length)return {error:'invalid_tts_audio'};
+   const name=binary.slice(offset,offset+4),size=u32(offset+4),start=offset+8;
+   if(start+size>binary.length)return {error:'invalid_tts_audio'};
+   if(name==='fmt '){if(foundFormat||size<16||u16(start)!==1||u16(start+2)!==1||u32(start+4)!==24000||u32(start+8)!==48000||u16(start+12)!==2||u16(start+14)!==16)return {error:'invalid_tts_audio'};foundFormat=true;}
+   if(name==='data'){if(foundData||!size||size%2)return {error:'invalid_tts_audio'};foundData=true;}
+   offset=start+size+(size%2);
+  }
+  if(!foundFormat||!foundData)return {error:'invalid_tts_audio'};
+ }
+ return {audioBase64:btoa(binary),mimeType:format==='pcm'?'audio/L16;codec=pcm;rate=24000':'audio/wav'};
+}
 export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.now()){
  return async function voicePrecache(request,env){
   if(request.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);
@@ -48,24 +85,28 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
   if(!text||Array.from(text).length>220||/[<>\u0000-\u001f]/.test(text)||!/[\u3400-\u9fff]/u.test(text))return json({ok:false,error:'invalid_text'},400);
   const model=env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
   if(!/^gemini-[a-z0-9.-]+-tts$/.test(model))return json({ok:false,error:'invalid_model'},503);
-  const prompt='Đọc nguyên văn tiếng Trung phổ thông sau, chính xác, tự nhiên, không đọc thêm từ nào: '+text;
+  const prompt='Read the following Mandarin Chinese text naturally and accurately. Read only the Chinese text, with no introduction or extra words:\n'+text;
   const payload={
    contents:[{role:'user',parts:[{text:prompt}]}],
    generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:'Kore'}}}}
   };
-  let response;
-  try{response=await geminiFetch('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{
-   method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)
-  });}catch{return json({ok:false,error:'tts_provider_unavailable'},503);}
-  if(!response.ok)return json({ok:false,error:'tts_provider_unavailable',upstreamStatus:response.status},[429,503].includes(response.status)?response.status:502);
-  let data;
-  try{data=await response.json();}catch{return json({ok:false,error:'invalid_tts_response'},502);}
-  const candidate=data?.candidates?.[0]?.content?.parts?.find(p=>p?.inlineData?.data);
-  const base64=candidate?.inlineData?.data,mime=candidate?.inlineData?.mimeType;
-  if(typeof base64!=='string'||base64.length<8||base64.length>2000000
-   ||!/^[A-Za-z0-9+/]+={0,2}$/.test(base64)
-   ||typeof mime!=='string'||!/^audio\/(?:l16|pcm|x-pcm|wav)/i.test(mime))return json({ok:false,error:'invalid_tts_audio'},502);
-  // Never log the prompt, the Google bearer, a provider key, or the audio payload.
-  return json({ok:true,audioBase64:base64,mimeType:mime,voice:'Kore',model});
+  const controller=new AbortController(),cancel=()=>controller.abort();
+  if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',cancel,{once:true});
+  const deadline=setTimeout(cancel,80000);
+  try{
+   for(let attempt=0;attempt<2;attempt++){
+    let response;
+    try{response=await geminiFetch('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});}catch{return json({ok:false,error:'tts_provider_unavailable'},503);}
+    if(!response.ok)return json({ok:false,error:'tts_provider_unavailable',upstreamStatus:response.status},[429,503].includes(response.status)?response.status:502);
+    let data;try{data=await response.json();}catch{return json({ok:false,error:'invalid_tts_response'},502);}
+    const audio=decodeVoiceAudio(data);
+    if(!audio.error)return json({ok:true,...audio,voice:'Kore',model});
+    // Fixed categories only: no prompts, ID tokens, API keys, vendor messages or audio in logs.
+    console.warn('hsk-voice-generation-failed',{reason:audio.error,attempt:attempt+1});
+    if(!audio.retryable||attempt===1)return json({ok:false,error:audio.error},502);
+    // A short word can produce OTHER with an instructional prompt. Retry the literal transcript.
+    payload.contents[0].parts[0].text=text;
+   }
+  }finally{clearTimeout(deadline);request.signal.removeEventListener('abort',cancel);}
  };
 }
