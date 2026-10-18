@@ -113,12 +113,13 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    await summaries.filter({hasText:'Ôn luyện'}).click();await page.locator('#drawer [data-drawer-mode="quiz"]').click();assert.ok(await page.locator('#quizPanel').isVisible());
    await page.waitForTimeout(350);await page.screenshot({path:'/tmp/studio-quiz-'+width+'.png',fullPage:true});
   }
-  // Create a goal and prove task launches and progress use the real learning handlers.
+  // Exercise an active learning day on every weekday, including Sunday rest-day defaults.
+  // Seven study days is an explicit fixture choice, not a change to planner behavior.
   await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.locator('#mobileTodayHero button').first().click();await page.locator('#planSetup').evaluate(d=>d.open=true);
-  await page.locator('#planLevel').selectOption('2');await page.locator('#planBudget').fill('120');await page.locator('#planBudget').dispatchEvent('change');await page.locator('#planAI').check();
+  await page.locator('#planLevel').selectOption('2');await page.locator('#planDays').selectOption('7');await page.locator('#planBudget').fill('120');await page.locator('#planBudget').dispatchEvent('change');await page.locator('#planAI').check();
   assert.equal(await page.locator('.plan-choice').count(),3);await page.locator('#planForm button[type="submit"]').click();
-  assert.equal(await page.evaluate(()=>window.HSKPlanner.plan.target),2);assert.equal(await page.locator('#planAIToggle').isChecked(),true);
-  await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.evaluate(()=>{const d=document.querySelector('.overview-tasks');if(document.body.classList.contains('mobile-ux'))d.open=true;});await page.locator('#planTasks button').nth(1).click();assert.ok(await page.locator('#flashcard').isVisible());
+  assert.equal(await page.evaluate(()=>window.HSKPlanner.plan.target),2);assert.equal(await page.evaluate(()=>window.HSKPlanner.plan.days),7);assert.equal(await page.locator('#planAIToggle').isChecked(),true);
+  await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.evaluate(()=>{const d=document.querySelector('.overview-tasks');if(document.body.classList.contains('mobile-ux'))d.open=true;});await page.locator('#planTasks article').filter({hasText:'Học từ mới'}).getByRole('button',{name:'Bắt đầu',exact:true}).click();assert.ok(await page.locator('#flashcard').isVisible());
   await page.locator('.mobile-card-actions button').nth(1).click();await page.waitForTimeout(250);assert.equal(await page.evaluate(()=>Object.values(window.HSKPlanner.plan.journal).flatMap(r=>r.new).length),1);
   await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.evaluate(()=>{const d=document.querySelector('.overview-tasks');if(document.body.classList.contains('mobile-ux'))d.open=true;});await page.locator('#planTasks button').nth(3).click();assert.ok(await page.locator('#quizOptions button').count()>0);
   const correct=await page.evaluate(()=>question.options.findIndex(x=>x.correct));await page.locator('#quizOptions button').nth(correct).click();await page.waitForTimeout(250);
