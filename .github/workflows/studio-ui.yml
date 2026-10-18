@@ -72,6 +72,7 @@ jobs:
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-goal-scope-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-ios-push-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-studio-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-dark-contrast-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-factory-ui.cjs
       - name: Keep layout screenshots

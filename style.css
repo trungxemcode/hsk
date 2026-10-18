@@ -458,6 +458,9 @@
   --legacy-hex-25253b22:#25253b22;
   /* Theme roles and interaction states. */
   --accent:var(--palette-violet);
+  --accent-ink:var(--accent);
+  --progress-track:var(--legacy-hex-e5eaf1);
+  --progress-fill:var(--legacy-hex-16965a);
   --accent-dark:var(--palette-violet-deep);
   --accent-light:var(--palette-violet-soft);
   --ink:var(--palette-ink);
@@ -557,6 +560,9 @@ html[data-theme="dark"]{
   --line:var(--palette-dark-line);
   --line-dark:var(--palette-dark-line-strong);
   --accent-dark:var(--palette-dark-violet);
+  --accent-ink:var(--palette-dark-violet);
+  --progress-track:var(--palette-dark-line);
+  --progress-fill:var(--palette-dark-violet);
   --accent-light:var(--palette-dark-violet-soft);
   --green:var(--legacy-hex-92deb3);
   --red:var(--legacy-hex-ffabb3);
