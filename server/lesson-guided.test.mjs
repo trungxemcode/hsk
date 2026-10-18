@@ -6,10 +6,11 @@ test('pacing uses visible content, not hidden dictionary metadata',()=>{const a=
 
 test('hands-free slides teach each word and every example in order without interactive gates',()=>{
  const words=[{han:'你',pin:'nǐ',mean:'bạn'},{han:'我',pin:'wǒ',mean:'tôi'}],examples=[{cn:'你好。',pin:'nǐ hǎo',vi:'Xin chào.'},{cn:'你好吗？',pin:'nǐ hǎo ma',vi:'Bạn khỏe không?'}];
- const slides=C.presentation({},words,()=>examples),first=slides.slice(0,6);
- assert.deepEqual(first.map(s=>s.kind),['word','meaning','chinese','meaning','chinese','meaning']);
- assert.deepEqual(first.map(s=>s.text),['你','bạn','你好。','Xin chào.','你好吗？','Bạn khỏe không?']);
- assert.deepEqual(first.filter(s=>s.speak).map(s=>s.speak),['你','你好。','你好吗？']);assert.equal(slides[6].text,'我');
+ const slides=C.presentation({},words,()=>examples),first=slides.slice(0,9);
+ assert.deepEqual(first.map(s=>s.kind),['word','strokes','meaning','chinese','repeat','meaning','chinese','repeat','meaning']);
+ assert.deepEqual(first.map(s=>s.text),['你','你','bạn','你好。','你好。','Xin chào.','你好吗？','你好吗？','Bạn khỏe không?']);
+ assert.equal(first[1].loops,3);assert.ok(first.filter(s=>s.kind==='repeat').every(s=>!s.speak),'practice turn is silent');
+ assert.deepEqual(first.filter(s=>s.speak).map(s=>s.speak),['你','你好。','你好吗？']);assert.equal(slides[9].text,'我');
  assert.equal(new Set(slides.map(s=>s.id)).size,slides.length);assert.ok(slides.every(s=>!['recall','check'].includes(s.kind)));assert.equal(words[0].mean,'bạn');
 });
 test('presentation chunks long source text without dropping it, and keeps all supplied context',()=>{
@@ -20,4 +21,12 @@ test('presentation chunks long source text without dropping it, and keeps all su
  assert.equal(slides.filter(s=>s.label==='Hội thoại · Nghĩa').map(s=>s.text).join(''),vi.trim());
  assert.ok(slides.every(s=>Array.from(s.text).length<=120));assert.ok(slides.some(s=>s.text==='因为…所以…'));assert.ok(slides.some(s=>s.text==='Không đảo trật tự.'));
  assert.deepEqual(C.presentation({},[]),[]);assert.ok(C.slideDuration(slides[0],.75)>C.slideDuration(slides[0],1.5));
+});
+test('beginner pacing holds short meanings, leaves preparation time and never offers a fast timeline',()=>{
+ assert.ok(C.slideDuration({text:'bạn',kind:'meaning'})>=8000);
+ assert.ok(C.slideDuration({text:'bạn'},.65)>C.slideDuration({text:'bạn'},1));
+ assert.equal(C.slideDuration({text:'bạn'},2),C.slideDuration({text:'bạn'},1));
+ assert.ok(C.practiceLead()>=2500);assert.ok(C.transitionPause()>=2000);
+ assert.ok(C.karaokeDuration({text:'你好。'})>=10000);
+ assert.ok(C.karaokeDuration({text:'你好。'},.75,20000)>20000);
 });

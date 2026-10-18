@@ -10,7 +10,7 @@ test('prefers local Mainland Mandarin and does not use English or Cantonese',()=
  const e=setup([{lang:'en-US',name:'English'}]);e.player.play('你好',button());assert.equal(e.spoken.length,0);assert.match(e.messages.at(-1),/giọng tiếng Trung/);
 });
 test('word pronunciation sets Mandarin and repeated click stops instead of overlapping',()=>{
- const e=setup(),b=button();e.player.play('你好',b);assert.equal(e.spoken[0].text,'你好');assert.equal(e.spoken[0].voice,zh);assert.equal(e.spoken[0].lang,'zh-CN');
+ const e=setup(),b=button();e.player.play('你好',b);assert.equal(e.spoken[0].text,'你好');assert.equal(e.spoken[0].voice,zh);assert.equal(e.spoken[0].lang,'zh-CN');assert.equal(e.spoken[0].rate,.85);
  e.player.play('你好',b);assert.equal(e.spoken.length,1);e.spoken[0].onend();assert.equal(e.spoken.length,1);
 });
 test('reads passage chunks in order and prevents stale callbacks replaying after a new request',()=>{
@@ -20,4 +20,8 @@ test('reads passage chunks in order and prevents stale callbacks replaying after
 test('long passages are split without dropping text and errors reset playback',()=>{
  const text='学'.repeat(351)+'。';assert.equal(speech.chunks(text).join(''),text);assert.ok(speech.chunks(text).every(x=>Array.from(x).length<=100));
  const e=setup();e.player.play('你好',button());e.spoken[0].onerror({error:'network'});assert.match(e.messages.at(-1),/kết nối/);assert.ok(e.cancellations()>0);
+});
+test('guided playback can select a slower live rate without changing the shared default',()=>{
+ const spoken=[];let rate=.6;const player=speech.createPlayer({synth:{getVoices:()=>[zh],cancel(){},speak:u=>spoken.push(u)},Utterance:class{constructor(text){this.text=text;}},rate:()=>rate});
+ player.play('你好');assert.equal(spoken[0].rate,.6);rate=.7;player.play('再见');assert.equal(spoken[1].rate,.7);
 });

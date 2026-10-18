@@ -14,7 +14,7 @@
    if(current)result.push(current);
   }return result;
  }
- function createPlayer({synth,Utterance,notify=()=>{}}){
+ function createPlayer({synth,Utterance,notify=()=>{},rate=.85}){
   let token=0,active=null,held=null;
   const reset=button=>{if(button){button.classList.remove('is-speaking');button.setAttribute('aria-pressed','false');button.setAttribute('aria-label',button.dataset.speechLabel);}};
   function stop(){token++;reset(active);active=null;held=null;synth?.cancel();}
@@ -29,7 +29,7 @@
    function next(){
     if(id!==token)return;
     if(index===parts.length){reset(active);active=null;held=null;notify('Đã nghe xong.');return;}
-    const utterance=new Utterance(parts[index++]);held=utterance;utterance.voice=voice;utterance.lang=voice.lang||'zh-CN';utterance.rate=.85;utterance.pitch=1;utterance.volume=1;
+    const utterance=new Utterance(parts[index++]);held=utterance;utterance.voice=voice;utterance.lang=voice.lang||'zh-CN';utterance.rate=Math.max(.5,Math.min(1.5,Number(typeof rate==='function'?rate():rate)||.85));utterance.pitch=1;utterance.volume=1;
     utterance.onend=next;utterance.onerror=event=>{if(id!==token)return;stop();notify(event.error==='network'?'Giọng đọc này cần kết nối mạng. Hãy kết nối hoặc cài giọng tiếng Trung offline.':'Không phát được âm thanh. Kiểm tra âm lượng và giọng tiếng Trung của thiết bị.');};
     try{synth.speak(utterance);}catch{if(id===token){stop();notify('Không phát được âm thanh. Hãy thử lại.');}}
    }next();
