@@ -507,10 +507,16 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
   // Google authenticates the signer. Do not trust claims decoded without validation.
   let identity;
   try{
-   const verify=await googleFetch('https://oauth2.googleapis.com/tokeninfo?id_token='+encodeURIComponent(token),{method:'GET',redirect:'error'});
+   const verify=await googleFetch('https://oauth2.googleapis.com/tokeninfo?id_token='+encodeURIComponent(token),{method:'GET',redirect:'manual'});
    if(!verify.ok)return json({ok:false,error:'unauthorized'},401);
    identity=await verify.json();
-  }catch{return json({ok:false,error:'identity_unavailable'},503);}
+  }catch(error){
+   // Log only a fixed category, never a Google ID token or the exception's URL/message.
+   const detail=String(error?.message||'').toLowerCase();
+   const category=detail.includes('redirect')?'redirect':detail.includes('dns')?'dns':detail.includes('network')?'network':detail.includes('fetch')?'fetch':detail.includes('timeout')?'timeout':'other';
+   console.warn('hsk-voice-identity-verify-failed',category);
+   return json({ok:false,error:'identity_unavailable'},503);
+  }
   if(!identity||!['accounts.google.com','https://accounts.google.com'].includes(identity.iss)
    ||identity.email_verified!==true&&identity.email_verified!=='true'
    ||typeof identity.sub!=='string'||!/^[0-9]{8,32}$/.test(identity.sub)
