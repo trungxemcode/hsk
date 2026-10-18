@@ -39,9 +39,12 @@ function presentation(lesson,words,examples=()=>[]){
   if(x.vi)text('meaning',label+' · Nghĩa',x.vi,120);
   for(const cn of cnParts)slides.push({kind:'repeat',label:label+' · Bạn đọc theo',text:(x.speaker?x.speaker+': ':'')+cn,pin:inlinePin?x.pin||'':'',id:slides.length+':repeat'});
  }
+ const wordPractice={repetitions:3};
  for(const [i,w] of unique.entries()){
-  slides.push({kind:'word',label:`Từ ${i+1}/${unique.length} · Nghe 3 lượt`,text:w.han,pin:w.pin||'',speak:w.han,repetitions:3,id:slides.length+':word:'+w.han});
-  text('meaning',w.han+' · Nghĩa',w.mean,120);
+  for(let turn=0;turn<wordPractice.repetitions;turn++){
+   slides.push({kind:'word',label:`Từ ${i+1}/${unique.length} · Trung → Việt · Lượt ${turn+1}/3`,text:w.han,pin:w.pin||'',speak:w.han,id:slides.length+':word:'+w.han+':'+turn});
+   text('meaning',w.han+` · Nghĩa · Lượt ${turn+1}/3`,w.mean,120);
+  }
   for(const han of [...new Set(Array.from(w.han).filter(c=>/\p{Script=Han}/u.test(c)))])slides.push({kind:'strokes',label:w.han+' · Xem nét viết 3 lượt',text:han,loops:3,id:slides.length+':strokes:'+han});
   const list=examples(w)||[];for(const [j,x] of list.entries())line(x,`${w.han} · Ví dụ ${j+1}/${list.length}`);
  }
