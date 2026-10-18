@@ -1,8 +1,8 @@
 /* Device speech: Mandarin by default, Vietnamese when explicitly requested. */
 (function(root){
  'use strict';
- function chooseVoice(voices,language='zh-CN'){
-  if(/^vi(?:-|_|$)/i.test(language)){const choices=voices.filter(v=>/^vi(?:-|_|$)/i.test(v.lang));return choices.find(v=>v.localService)||choices[0]||null;}
+ function chooseVoice(voices,language='zh-CN',preferredURI=''){
+  if(/^vi(?:-|_|$)/i.test(language)){const choices=voices.filter(v=>/^vi(?:-|_|$)/i.test(v.lang));const selected=choices.find(v=>v.voiceURI===preferredURI);if(selected)return selected;const quality=v=>/natural|neural|premium|enhanced/i.test(v.name)?3:!v.localService?2:1;return choices.slice().sort((a,b)=>quality(b)-quality(a))[0]||null;}
   const mandarin=voices.filter(v=>/^(zh|cmn)(-|_|$)/i.test(v.lang)&&!/^zh[-_]hk/i.test(v.lang)&&!/(cantonese|yue)/i.test(v.name));
   const preferred=mandarin.filter(v=>/^(zh[-_](cn|hans)|cmn[-_]cn)/i.test(v.lang));
   const choices=preferred.length?preferred:mandarin;
@@ -15,7 +15,7 @@
    if(current)result.push(current);
   }return result;
  }
- function createPlayer({synth,Utterance,notify=()=>{},rate=.85,gapMs=0}){
+ function createPlayer({synth,Utterance,notify=()=>{},rate=.85,gapMs=0,voiceURI=''}){
   let token=0,active=null,held=null,queueTimer;
   const reset=button=>{if(button){button.classList.remove('is-speaking');button.setAttribute('aria-pressed','false');button.setAttribute('aria-label',button.dataset.speechLabel);}};
   function stop(){token++;clearTimeout(queueTimer);reset(active);active=null;held=null;synth?.cancel();}
@@ -23,7 +23,7 @@
    if(active===button&&active){stop();notify('Đã dừng phát âm.');return;}
    stop();if(!synth||!Utterance){notify('Trình duyệt chưa hỗ trợ phát âm. Hãy thử Chrome, Edge hoặc Safari.');return;}
    const vietnamese=/^vi(?:-|_|$)/i.test(language),parts=chunks(input,vietnamese?500:100);if(!parts.length)return;
-   const voice=chooseVoice(synth.getVoices(),language);
+   const voice=chooseVoice(synth.getVoices(),language,typeof voiceURI==='function'?voiceURI():voiceURI);
    if(!voice){notify(vietnamese?'Chưa tìm thấy giọng tiếng Việt. Hãy thêm giọng Vietnamese trong cài đặt giọng nói của thiết bị, rồi thử lại.':'Chưa tìm thấy giọng tiếng Trung. Hãy thêm giọng Mandarin / Chinese trong cài đặt giọng nói của thiết bị, rồi thử lại.');return;}
    const id=token;active=button;if(button){button.classList.add('is-speaking');button.setAttribute('aria-pressed','true');button.setAttribute('aria-label','Dừng phát âm');}
    let index=0;notify(vietnamese?'Đang phát âm tiếng Việt…':'Đang phát âm tiếng Trung…');
