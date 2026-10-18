@@ -479,6 +479,16 @@
         {
           "kind": "contains",
           "file": "lesson-guided-core.js",
+          "value": "repetitions:3"
+        },
+        {
+          "kind": "contains",
+          "file": "lesson-guided-core.js",
+          "value": "language:'vi-VN'"
+        },
+        {
+          "kind": "contains",
+          "file": "lesson-guided-core.js",
           "value": "function karaokeDuration("
         },
         {
