@@ -534,6 +534,8 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
   const origin=request.headers.get('Origin')||'',allowed=(env.ALLOWED_ORIGINS||'https://trungxemcode.github.io').split(',').map(s=>s.trim());
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin','X-HSK-Worker-Version':WORKER_REVISION};
   const reply=(value,status=200)=>{responseStatus=status;return new Response(JSON.stringify(value),{status,headers});};
+  // Server-to-server only: verified Google Apps Script identity, no browser CORS.
+  if(new URL(request.url).pathname==='/voice-precache')return createVoicePrecacheHandler(rawFetchFn,keyFetch,now)(request,env);
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
   Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
