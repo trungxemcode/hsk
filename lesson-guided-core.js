@@ -42,10 +42,9 @@ function presentation(lesson,words,examples=()=>[]){
  const wordPractice={repetitions:3};
  for(const [i,w] of unique.entries()){
   for(let turn=0;turn<wordPractice.repetitions;turn++){
-   slides.push({kind:'word',label:`Từ ${i+1}/${unique.length} · Trung → Việt · Lượt ${turn+1}/3`,text:w.han,pin:w.pin||'',speak:w.han,id:slides.length+':word:'+w.han+':'+turn});
+   slides.push({kind:'word',strokes:true,label:`Từ ${i+1}/${unique.length} · Trung → Việt · Lượt ${turn+1}/3`,text:w.han,pin:w.pin||'',speak:w.han,id:slides.length+':word:'+w.han+':'+turn});
    text('meaning',w.han+` · Nghĩa · Lượt ${turn+1}/3`,w.mean,120);
   }
-  for(const han of [...new Set(Array.from(w.han).filter(c=>/\p{Script=Han}/u.test(c)))])slides.push({kind:'strokes',label:w.han+' · Xem nét viết 3 lượt',text:han,loops:3,id:slides.length+':strokes:'+han});
   const list=examples(w)||[];for(const [j,x] of list.entries())line(x,`${w.han} · Ví dụ ${j+1}/${list.length}`);
  }
  const c=lesson.content||{};
@@ -54,10 +53,10 @@ function presentation(lesson,words,examples=()=>[]){
  for(const g of c.grammar||[]){text('grammar',g.title,g.pattern,60);text('meaning',g.title,g.usage,120);for(const x of g.examples||[])line(x,g.title+' · Ví dụ');text('meaning',g.title+' · Lưu ý',g.error,120);}
  return slides;
 }
-function slideDuration(slide,speed=.75){return Math.max(6500,Math.min(24000,Array.from(slide.text||'').length*(slide.kind==='meaning'?130:180)))/Math.max(.65,Math.min(1,Number(speed)||.75));}
-function practiceLead(){return 2500;}
-function transitionPause(){return 2200;}
-function pronunciationGap(){return 1400;}
+function slideDuration(slide,speed=.75){return Math.max(1800,Math.min(18000,Array.from(slide.text||'').length*(slide.kind==='meaning'?85:150)))/Math.max(.65,Math.min(1,Number(speed)||.75));}
+function practiceLead(){return 900;}
+function transitionPause(){return 300;}
+function pronunciationGap(){return 300;}
 function karaokeDuration(slide,speed=.75,modelMs=0){const count=Array.from(slide.text||'').filter(c=>/\p{Script=Han}/u.test(c)).length;return Math.max(8000,count*650,modelMs*1.4)/Math.max(.65,Math.min(1,Number(speed)||.75));}
 const api={plan,duration,presentation,slideDuration,practiceLead,transitionPause,pronunciationGap,karaokeDuration};root.HSKGuidedCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window==='object'?window:globalThis);

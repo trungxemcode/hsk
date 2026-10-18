@@ -6,12 +6,12 @@ test('pacing uses visible content, not hidden dictionary metadata',()=>{const a=
 
 test('hands-free slides teach each word and every example in order without interactive gates',()=>{
  const words=[{han:'你',pin:'nǐ',mean:'bạn'},{han:'我',pin:'wǒ',mean:'tôi'}],examples=[{cn:'你好。',pin:'nǐ hǎo',vi:'Xin chào.'},{cn:'你好吗？',pin:'nǐ hǎo ma',vi:'Bạn khỏe không?'}];
- const slides=C.presentation({},words,()=>examples),first=slides.slice(0,13);
- assert.deepEqual(first.map(s=>s.kind),['word','meaning','word','meaning','word','meaning','strokes','chinese','meaning','repeat','chinese','meaning','repeat']);
- assert.deepEqual(first.map(s=>s.text),['你','bạn','你','bạn','你','bạn','你','你好。','Xin chào.','你好。','你好吗？','Bạn khỏe không?','你好吗？']);
- assert.equal(first.filter(s=>s.kind==='word').length,3);assert.equal(first[6].loops,3);assert.ok(first.filter(s=>s.kind==='repeat').every(s=>!s.speak),'practice turn is silent');
+ const slides=C.presentation({},words,()=>examples),first=slides.slice(0,12);
+ assert.deepEqual(first.map(s=>s.kind),['word','meaning','word','meaning','word','meaning','chinese','meaning','repeat','chinese','meaning','repeat']);
+ assert.deepEqual(first.map(s=>s.text),['你','bạn','你','bạn','你','bạn','你好。','Xin chào.','你好。','你好吗？','Bạn khỏe không?','你好吗？']);
+ assert.equal(first.filter(s=>s.kind==='word').length,3);assert.ok(first.filter(s=>s.kind==='word').every(s=>s.strokes),'each of three word rounds animates strokes');assert.ok(first.filter(s=>s.kind==='repeat').every(s=>!s.speak),'practice turn is silent');
  assert.ok(first.filter(s=>s.kind==='meaning').every(s=>s.language==='vi-VN'&&s.speak===s.text));
- assert.deepEqual(first.filter(s=>s.speak).map(s=>s.speak),['你','bạn','你','bạn','你','bạn','你好。','Xin chào.','你好吗？','Bạn khỏe không?']);assert.equal(slides[13].text,'我');
+ assert.deepEqual(first.filter(s=>s.speak).map(s=>s.speak),['你','bạn','你','bạn','你','bạn','你好。','Xin chào.','你好吗？','Bạn khỏe không?']);assert.equal(slides[12].text,'我');
  assert.equal(new Set(slides.map(s=>s.id)).size,slides.length);assert.ok(slides.every(s=>!['recall','check'].includes(s.kind)));assert.equal(words[0].mean,'bạn');
 });
 test('presentation chunks long source text without dropping it, and keeps all supplied context',()=>{
@@ -23,11 +23,11 @@ test('presentation chunks long source text without dropping it, and keeps all su
  assert.ok(slides.every(s=>Array.from(s.text).length<=120));assert.ok(slides.some(s=>s.text==='因为…所以…'));assert.ok(slides.some(s=>s.text==='Không đảo trật tự.'));
  assert.deepEqual(C.presentation({},[]),[]);assert.ok(C.slideDuration(slides[0],.75)>C.slideDuration(slides[0],1.5));
 });
-test('beginner pacing holds short meanings, leaves preparation time and never offers a fast timeline',()=>{
- assert.ok(C.slideDuration({text:'bạn',kind:'meaning'})>=8000);
+test('pacing removes idle waits while retaining silent reading time and a deliberate karaoke pace',()=>{
+ assert.ok(C.slideDuration({text:'bạn',kind:'meaning'})>=2000);
  assert.ok(C.slideDuration({text:'bạn'},.65)>C.slideDuration({text:'bạn'},1));
  assert.equal(C.slideDuration({text:'bạn'},2),C.slideDuration({text:'bạn'},1));
- assert.ok(C.practiceLead()>=2500);assert.ok(C.transitionPause()>=2000);
+ assert.ok(C.practiceLead()>=700&&C.practiceLead()<=1200);assert.ok(C.transitionPause()>=200&&C.transitionPause()<=500);
  assert.ok(C.karaokeDuration({text:'你好。'})>=10000);
  assert.ok(C.karaokeDuration({text:'你好。'},.75,20000)>20000);
 });

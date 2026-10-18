@@ -2,6 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import speech from '../speech.js';
 const zh={lang:'zh-CN',name:'Mandarin',localService:true};
+test('Vietnamese prefers a natural voice, honors saved choices and isolates Mandarin',()=>{
+ const basic={lang:'vi-VN',name:'Vietnamese',localService:true,voiceURI:'basic'},natural={lang:'vi-VN',name:'Vietnamese Natural',localService:false,voiceURI:'natural'},online={lang:'vi-VN',name:'Vietnamese online',localService:false,voiceURI:'online'},voices=[basic,online,natural,zh];
+ assert.equal(speech.chooseVoice(voices,'vi-VN'),natural);assert.equal(speech.chooseVoice(voices,'vi-VN','basic'),basic);assert.equal(speech.chooseVoice(voices,'vi-VN','missing'),natural);assert.equal(speech.chooseVoice(voices,'zh-CN','basic'),zh);
+ let selected='basic';const spoken=[],player=speech.createPlayer({synth:{getVoices:()=>voices,cancel(){},speak:u=>spoken.push(u)},Utterance:class{},voiceURI:()=>selected});player.play('bạn',undefined,'vi-VN');assert.equal(spoken.at(-1).voice,basic);selected='natural';player.play('xin chào',undefined,'vi-VN');assert.equal(spoken.at(-1).voice,natural);player.play('你');assert.equal(spoken.at(-1).voice,zh);
+});
 const button=()=>({dataset:{speechLabel:'Nghe phát âm'},classList:{add(){},remove(){}},setAttribute(){}});
 function setup(voices=[zh]){const spoken=[],messages=[];let cancellations=0;const player=speech.createPlayer({synth:{getVoices:()=>voices,cancel:()=>{cancellations++;},speak:u=>spoken.push(u)},Utterance:class{constructor(text){this.text=text;}},notify:m=>messages.push(m)});return {player,spoken,messages,cancellations:()=>cancellations};}
 test('prefers local Mainland Mandarin and does not use English or Cantonese',()=>{

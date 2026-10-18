@@ -29,7 +29,11 @@ body.guided-presenting{overflow:hidden}
 .guided-slide[data-slide-kind=word] .guided-slide-text{font-size:calc(64px * var(--slide-scale));line-height:1.3}
 .guided-presentation .guided-slide-pin{font-size:calc(21px * var(--slide-scale));line-height:1.5;color:var(--sub);margin:0;max-width:960px}
 .guided-slide-pin:empty{display:none}
-.guided-stroke-stage{flex:none;display:grid;place-items:center;max-width:100%}
+.guided-stroke-stage{flex:none;display:flex;align-items:center;justify-content:center;max-width:100%}
+.guided-stroke-stage>div{min-width:0}
+.guided-voice-dialog{max-width:min(90vw,460px);max-height:85dvh;overflow:auto;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius-card);padding:20px}
+.guided-presentation .guided-voice-dialog select{max-width:100%;width:100%;min-height:44px}
+.guided-voice-dialog button{margin:4px}
 .guided-stroke-stage svg{width:auto;height:auto;max-width:100%;stroke:none;fill:currentColor}
 .guided-karaoke-char{color:var(--sub);transition:color .12s ease,background-color .12s ease}
 .guided-karaoke-char.is-read{color:var(--accent-ink)}

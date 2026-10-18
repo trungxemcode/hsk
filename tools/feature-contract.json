@@ -515,6 +515,16 @@
           "kind": "file",
           "file": "lesson-guided-core.js",
           "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "lesson-guided-core.js",
+          "value": "strokes:true"
+        },
+        {
+          "kind": "contains",
+          "file": "lesson-guided.js",
+          "value": "hsk-guided-vi-voice"
         }
       ]
     },

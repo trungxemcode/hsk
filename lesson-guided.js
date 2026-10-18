@@ -4,10 +4,11 @@ const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefine
 const button=(text,fn)=>{const b=el('button',text);b.type='button';b.onclick=fn;return b;};
 function presentation(lesson,words,store){
  const frames=window.HSKGuidedCore.presentation(lesson,words,w=>window.HSKLessons.examples(w));
- let pos=0,playing=true,closed=false,timer,watchdog,karaokeTimer,writer=null,epoch=0,wake=null,ownedFullscreen=false,spokenStarted=0;
+ let pos=0,playing=true,closed=false,timer,watchdog,karaokeTimer,writer=null,epoch=0,wake=null,ownedFullscreen=false,spokenStarted=0,audioDone=false,strokesDone=false;
+ let vietnameseVoice='';try{vietnameseVoice=localStorage.getItem('hsk-guided-vi-voice')||'';}catch{}
  const modelTimes=new Map(),strokeData=new Map();
  const priorFocus=document.activeElement,saved=store.read().guidedShow;
- if(saved?.version===4){const found=frames.findIndex(f=>f.id===saved.frameId);if(found>=0)pos=found;}
+ if(saved?.version===5){const found=frames.findIndex(f=>f.id===saved.frameId);if(found>=0)pos=found;}
  const dialog=el('dialog',undefined,'guided-presentation'),head=el('header'),label=el('p'),progress=el('progress'),stage=el('div',undefined,'guided-slide'),caption=el('p',undefined,'guided-slide-label'),text=el('p',undefined,'guided-slide-text'),pin=el('p',undefined,'guided-slide-pin'),status=el('p',undefined,'guided-slide-status'),foot=el('footer'),actions=el('div',undefined,'guided-slide-actions');
  dialog.setAttribute('aria-label','Trình chiếu học tự động');stage.setAttribute('aria-live','off');status.setAttribute('role','status');progress.max=frames.length||1;progress.setAttribute('aria-label','Tiến độ trình chiếu');
  const pause=button('Tạm dừng',()=>{if(pos>=frames.length){pos=0;playing=true;render();return;}playing=!playing;stop();update();if(playing)run();});
@@ -15,46 +16,59 @@ function presentation(lesson,words,store){
  const sound=el('input'),soundLabel=el('label','Âm thanh ');sound.type='checkbox';sound.checked=true;soundLabel.append(sound);sound.onchange=()=>{stop();if(playing)run();};
  const speed=el('select');speed.setAttribute('aria-label','Tốc độ trình chiếu');for(const [value,name] of [[.65,'Rất chậm'],[.75,'Chậm'],[1,'Vừa']]){const o=el('option',name);o.value=value;speed.append(o);}speed.value='0.75';speed.onchange=()=>{stop();if(playing)run();};
  const strokeHost=el('div',undefined,'guided-stroke-stage');strokeHost.hidden=true;strokeHost.setAttribute('aria-label','Mẫu thứ tự nét viết');
- head.append(label,exit);stage.append(caption,text,strokeHost,pin);actions.append(previous,pause,next);foot.append(status,actions,soundLabel,speed,manual);dialog.append(head,progress,stage,foot);document.body.append(dialog);document.body.classList.add('guided-presenting');dialog.showModal();
- function save(){if(!closed)store.persist({guidedShow:{version:4,frameId:frames[pos]?.id||'done',updatedAt:Date.now()}});}
+ const voiceDialog=el('dialog',undefined,'guided-voice-dialog'),voiceSelect=el('select'),voiceNote=el('p'),voiceStatus=el('p');voiceSelect.setAttribute('aria-label','Giọng tiếng Việt');voiceDialog.setAttribute('aria-label','Chọn giọng tiếng Việt');voiceStatus.setAttribute('role','status');
+ const previewPlayer=window.HSKSpeech?.createPlayer({synth:window.speechSynthesis,Utterance:window.SpeechSynthesisUtterance,voiceURI:()=>vietnameseVoice,rate:1,notify:m=>voiceStatus.textContent=m});
+ function refreshVoices(){const voices=(window.speechSynthesis?.getVoices()||[]).filter(v=>/^vi(?:-|_|$)/i.test(v.lang));voiceSelect.replaceChildren();const auto=el('option','Tự động · ưu tiên giọng tự nhiên');auto.value='';voiceSelect.append(auto);for(const v of voices){const o=el('option',v.name+(v.localService?' · trên thiết bị':' · trực tuyến'));o.value=v.voiceURI;voiceSelect.append(o);}voiceSelect.value=voices.some(v=>v.voiceURI===vietnameseVoice)?vietnameseVoice:'';voiceNote.textContent=voices.length>1?'Nghe thử và chọn giọng bạn thích. Giọng trực tuyến cần có mạng.':voices.length===1?'Thiết bị hiện chỉ có một giọng Việt. Có thể thêm giọng Vietnamese chất lượng cao trong cài đặt thiết bị.':'Chưa có giọng Việt. Thêm giọng Vietnamese trong cài đặt thiết bị.';}
+ voiceSelect.onchange=()=>{previewPlayer?.stop();vietnameseVoice=voiceSelect.value;try{localStorage.setItem('hsk-guided-vi-voice',vietnameseVoice);}catch{}voiceStatus.textContent='Đã chọn giọng. Bấm Nghe thử để kiểm tra.';};
+ const voiceSettings=button('Giọng Việt',()=>{playing=false;stop();update();refreshVoices();voiceStatus.textContent='';voiceDialog.showModal();});
+ const closeVoice=()=>{previewPlayer?.stop();voiceDialog.close();voiceSettings.focus();};
+ voiceDialog.append(el('h2','Giọng tiếng Việt'),voiceSelect,voiceNote,voiceStatus,button('Nghe thử',()=>previewPlayer?.play('Xin chào, chúng ta cùng học tiếng Trung nhé.',undefined,'vi-VN')),button('Xong',closeVoice));voiceDialog.addEventListener('cancel',e=>{e.preventDefault();closeVoice();});
+ window.speechSynthesis?.addEventListener?.('voiceschanged',refreshVoices);
+ head.append(label,exit);stage.append(caption,text,strokeHost,pin);actions.append(previous,pause,next);foot.append(status,actions,soundLabel,speed,voiceSettings,manual);dialog.append(head,progress,stage,foot,voiceDialog);document.body.append(dialog);document.body.classList.add('guided-presenting');dialog.showModal();
+ function save(){if(!closed)store.persist({guidedShow:{version:5,frameId:frames[pos]?.id||'done',updatedAt:Date.now()}});}
  function releaseWake(){const old=wake;wake=null;old?.release().catch(()=>{});}
  function keepAwake(){if(!playing||closed||document.hidden||!navigator.wakeLock||wake)return;const id=epoch;navigator.wakeLock.request('screen').then(lock=>{if(closed||!playing||id!==epoch)lock.release().catch(()=>{});else wake=lock;}).catch(()=>{});}
  function stop(){epoch++;clearTimeout(timer);clearTimeout(watchdog);clearTimeout(karaokeTimer);writer?.pauseAnimation();writer=null;player?.stop();releaseWake();}
  function update(){pause.textContent=pos>=frames.length?'Học lại':playing?'Tạm dừng':'Tiếp tục';pause.setAttribute('aria-pressed',String(playing));previous.disabled=pos===0;next.disabled=pos>=frames.length;}
  function schedule(ms){const id=epoch;clearTimeout(timer);timer=setTimeout(()=>{if(!closed&&playing&&id===epoch)move(1);},ms);}
- const player=window.HSKSpeech?.createPlayer({synth:window.speechSynthesis,Utterance:window.SpeechSynthesisUtterance,rate:()=>frames[pos]?.language==='vi-VN' ? .95 : .8*Number(speed.value),gapMs:()=>window.HSKGuidedCore.pronunciationGap()/Number(speed.value),notify:message=>{
+ function complete(){if(audioDone&&strokesDone)schedule(window.HSKGuidedCore.transitionPause()/Number(speed.value));}
+ const player=window.HSKSpeech?.createPlayer({synth:window.speechSynthesis,Utterance:window.SpeechSynthesisUtterance,voiceURI:()=>vietnameseVoice,rate:()=>frames[pos]?.language==='vi-VN' ? 1 : .8*Number(speed.value),gapMs:()=>window.HSKGuidedCore.pronunciationGap()/Number(speed.value),notify:message=>{
   if(closed||!playing)return;
-  if(message==='Đã nghe xong.'){clearTimeout(watchdog);status.textContent='';const f=frames[pos],elapsed=Date.now()-spokenStarted;if(f.kind==='chinese')modelTimes.set(f.text,elapsed);schedule(Math.max(window.HSKGuidedCore.transitionPause()/Number(speed.value),window.HSKGuidedCore.slideDuration(f,Number(speed.value))-elapsed));}
+  if(message==='Đã nghe xong.'){clearTimeout(watchdog);audioDone=true;status.textContent=strokesDone?'':'Đang hoàn tất nét viết…';const f=frames[pos],elapsed=Date.now()-spokenStarted;if(f.kind==='chinese')modelTimes.set(f.text,elapsed);complete();}
   else if(message.startsWith('Đang phát âm'))status.textContent=frames[pos]?.language==='vi-VN'?'Đang đọc nghĩa tiếng Việt…':'Đang đọc tiếng Trung…';
   else{playing=false;stop();status.title=message;status.textContent=message.includes('Chưa tìm thấy')?(frames[pos]?.language==='vi-VN'?'Chưa có giọng tiếng Việt. Thêm giọng Vietnamese rồi bấm Tiếp tục.':'Chưa có giọng Mandarin. Thêm giọng vào thiết bị, rồi bấm Tiếp tục.'):'Chưa phát được âm thanh. Bấm Tiếp tục để thử lại hoặc tắt Âm thanh.';update();}
  }});
  function run(){
   if(closed||!playing||pos>=frames.length)return;keepAwake();const f=frames[pos];status.textContent='';
-  if(f.kind==='strokes'){animateStrokes(f,epoch);return;}
   if(f.kind==='repeat'){readAlong(f,epoch);return;}
+  audioDone=!sound.checked||!f.speak;strokesDone=!f.strokes;spokenStarted=0;
+  if(f.strokes){animateStrokes(f,epoch);return;}
+  speak(f,epoch);
+ }
+ function speak(f,id){
+  if(closed||!playing||id!==epoch)return;
   if(sound.checked&&f.speak){
    if(!player){playing=false;status.textContent='Thiết bị chưa hỗ trợ giọng đọc. Tắt Âm thanh để xem tự động.';update();return;}
    const id=epoch,repetitions=Math.max(1,Math.min(3,f.repetitions||1));spokenStarted=Date.now();watchdog=setTimeout(()=>{if(!closed&&playing&&id===epoch){playing=false;stop();status.textContent='Giọng đọc chưa kết thúc. Bấm Tiếp tục để thử lại.';update();}},Math.min(240000,15000+f.speak.length*1600*repetitions+window.HSKGuidedCore.pronunciationGap()/Number(speed.value)*(repetitions-1)));player.play(Array(repetitions).fill(f.speak),undefined,f.language||'zh-CN');
-  }else schedule(window.HSKGuidedCore.slideDuration(f,Number(speed.value)));
+  }else if(f.strokes)complete();else schedule(window.HSKGuidedCore.slideDuration(f,Number(speed.value)));
  }
  async function animateStrokes(f,id){
   const active=()=>!closed&&playing&&id===epoch;
   status.textContent='Đang tải mẫu nét viết…';
   try{
    if(!window.HanziWriter||!window.HSKWritingPractice?.characterData)throw Error('no stroke engine');
-   let data=strokeData.get(f.text);if(!data){data=await window.HSKWritingPractice.characterData(f.text);strokeData.set(f.text,data);}if(!active())return;
+   const chars=Array.from(f.text).filter(c=>/\p{Script=Han}/u.test(c));if(!chars.length)throw Error('no Han characters');
+   const data=await Promise.all(chars.map(async han=>{if(!strokeData.has(han))strokeData.set(han,await window.HSKWritingPractice.characterData(han));return strokeData.get(han);}));if(!active())return;
    strokeHost.replaceChildren();strokeHost.hidden=false;text.hidden=true;fit();
-   const size=Math.max(64,Math.min(240,stage.clientHeight-90,stage.clientWidth-40)),css=getComputedStyle(document.documentElement);
+   const layout=getComputedStyle(stage),availableHeight=stage.clientHeight-caption.offsetHeight-pin.offsetHeight-parseFloat(layout.paddingTop)-parseFloat(layout.paddingBottom)-2*parseFloat(layout.rowGap)-4;
+   const size=Math.max(24,Math.min(200,availableHeight,(stage.clientWidth-40)/chars.length)),css=getComputedStyle(document.documentElement);
    const ink=css.getPropertyValue(document.documentElement.dataset.theme==='dark'?'--palette-dark-violet':'--palette-violet-deep').trim(),outline=css.getPropertyValue('--line-dark').trim();
-   writer=HanziWriter.create(strokeHost,f.text,{width:size,height:size,padding:12,showCharacter:false,showOutline:true,strokeColor:ink,outlineColor:outline,strokeAnimationSpeed:.6*Number(speed.value),delayBetweenStrokes:450/Number(speed.value),charDataLoader:()=>data});
-   const currentWriter=writer;
-   for(let loop=0;loop<f.loops;loop++){
-    if(!active())return;status.textContent=`${f.text} · Nét viết lượt ${loop+1}/${f.loops}`;await currentWriter.hideCharacter({duration:0});if(!active())return;
-    await currentWriter.animateCharacter();if(!active())return;
-    await new Promise(resolve=>{karaokeTimer=setTimeout(resolve,window.HSKGuidedCore.transitionPause()/Number(speed.value));});
-   }
-   if(active())move(1);
-  }catch{if(!active())return;text.hidden=false;strokeHost.hidden=true;status.textContent='Chưa tải được mẫu nét. Giữ chữ để bạn quan sát; có thể xem lại khi có mạng.';schedule(window.HSKGuidedCore.slideDuration(f,Number(speed.value)));}
+   const writers=chars.map((han,i)=>{const host=el('div');strokeHost.append(host);return HanziWriter.create(host,han,{width:size,height:size,padding:8,showCharacter:false,showOutline:true,strokeColor:ink,outlineColor:outline,strokeAnimationSpeed:.6*Number(speed.value),delayBetweenStrokes:180/Number(speed.value),charDataLoader:()=>data[i]});});
+   writer={pauseAnimation:()=>writers.forEach(w=>w.pauseAnimation())};fit();
+   await Promise.all(writers.map(w=>w.hideCharacter({duration:0})));if(!active())return;
+   const animations=writers.map(w=>w.animateCharacter());speak(f,id);
+   await Promise.all(animations);if(active()){strokesDone=true;complete();}
+  }catch{if(!active())return;writer?.pauseAnimation();writer=null;text.hidden=false;strokeHost.hidden=true;strokesDone=true;status.textContent='Chưa tải được mẫu nét. Vẫn đọc từ để tiếp tục học.';if(!spokenStarted)speak(f,id);else complete();}
  }
  function readAlong(f,id){
   const chars=Array.from(f.text).map(c=>el('span',c,'guided-karaoke-char'));text.replaceChildren(...chars);fit();status.textContent='Chuẩn bị đọc theo…';
@@ -77,8 +91,8 @@ function presentation(lesson,words,store){
   update();fit();if(playing)run();
  }
  function move(delta){if(closed)return;pos=Math.max(0,Math.min(frames.length,pos+delta));render();}
- function close(){if(closed)return;save();closed=true;playing=false;stop();observer.disconnect();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('resize',fit);window.visualViewport?.removeEventListener('resize',fit);window.removeEventListener('pagehide',close);window.removeEventListener('hsk-account-ready',close);dialog.removeEventListener('cancel',cancel);dialog.close();dialog.remove();document.body.classList.remove('guided-presenting');if(ownedFullscreen&&document.fullscreenElement===document.documentElement)document.exitFullscreen?.().catch(()=>{});if(priorFocus?.isConnected)priorFocus.focus({preventScroll:true});}
- function visibility(){if(document.hidden){playing=false;stop();status.textContent='Đã tạm dừng khi rời màn hình.';update();}}
+ function close(){if(closed)return;save();closed=true;playing=false;stop();previewPlayer?.stop();voiceDialog.close();window.speechSynthesis?.removeEventListener?.('voiceschanged',refreshVoices);observer.disconnect();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('resize',fit);window.visualViewport?.removeEventListener('resize',fit);window.removeEventListener('pagehide',close);window.removeEventListener('hsk-account-ready',close);dialog.removeEventListener('cancel',cancel);dialog.close();dialog.remove();document.body.classList.remove('guided-presenting');if(ownedFullscreen&&document.fullscreenElement===document.documentElement)document.exitFullscreen?.().catch(()=>{});if(priorFocus?.isConnected)priorFocus.focus({preventScroll:true});}
+ function visibility(){if(document.hidden){playing=false;stop();previewPlayer?.stop();status.textContent='Đã tạm dừng khi rời màn hình.';update();}}
  function cancel(event){event.preventDefault();close();}
  const observer=new ResizeObserver(fit);observer.observe(stage);document.addEventListener('visibilitychange',visibility);window.addEventListener('resize',fit);window.visualViewport?.addEventListener('resize',fit);window.addEventListener('pagehide',close);window.addEventListener('hsk-account-ready',close);dialog.addEventListener('cancel',cancel);
  // CSS fills the viewport on iPhone; supported browsers can also hide browser chrome.
