@@ -34,13 +34,18 @@ export class HSkaIControl {
  async fetch(request){
   if(request.method!=='POST')return Response.json({error:'method'},{status:405});
   let data;try{data=await request.json()}catch{return Response.json({error:'payload'},{status:400})}
-  if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock','gemini-pick','gemini-report','abuse-start','abuse-finish'].includes(data.action))
+  if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock','gemini-pick','gemini-report','gemini-status','abuse-start','abuse-finish'].includes(data.action))
    return Response.json({error:'action'},{status:400});
   const time=Date.now();
   if(data.action==='abuse-start'||data.action==='abuse-finish')return abuseControl(this.state.storage,this.env,data,time);
+  if(data.action==='gemini-status'){
+   if(!Array.isArray(data.ids)||data.ids.length>10||!data.ids.every(id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id)))return Response.json({error:'keys'},{status:400});
+   const pool=await this.state.storage.get('gemini:pool')||{};
+   return Response.json({slots:data.ids.map((id,index)=>({index,retryAfter:Math.max(0,Math.ceil(((pool.blocked?.[id]||0)-time)/1000))}))});
+  }
   if(data.action==='gemini-pick'){
    const validId=id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id);
-   if(!Array.isArray(data.ids)||data.ids.length<2||data.ids.length>10||!data.ids.every(validId)||new Set(data.ids).size!==data.ids.length||!Array.isArray(data.excluded)||data.excluded.length>10||!data.excluded.every(id=>data.ids.includes(id)))return Response.json({error:'keys'},{status:400});
+   if(!Array.isArray(data.ids)||data.ids.length<1||data.ids.length>10||!data.ids.every(validId)||new Set(data.ids).size!==data.ids.length||!Array.isArray(data.excluded)||data.excluded.length>10||!data.excluded.every(id=>data.ids.includes(id)))return Response.json({error:'keys'},{status:400});
    const result=await this.state.storage.transaction(async t=>{
     const previous=await t.get('gemini:pool')||{},pool={cursor:Number(previous.cursor)||0,ids:data.ids,blocked:{}};
     for(const id of data.ids)if(previous.blocked?.[id]>time)pool.blocked[id]=previous.blocked[id];
@@ -118,10 +123,10 @@ export async function readingCacheKey(body){
  const bytes=new TextEncoder().encode(canonical),digest=await crypto.subtle.digest('SHA-256',bytes);
  return 'v3_'+Array.from(new Uint8Array(digest)).map(x=>x.toString(16).padStart(2,'0')).join('');
 }
-export async function controlCall(env,action,data={}){
+export async function controlCall(env,action,data={},namespace='global-hsk-budget-v1'){
  const obj=env.AI_CONTROL;
  if(!obj){if(env.AI_CONTROL_REQUIRED==='true')throw Error('AI_CONTROL binding required');return null;}
- const stub=obj.get(obj.idFromName('global-hsk-budget-v1'));
+ const stub=obj.get(obj.idFromName(namespace));
  const response=await stub.fetch('https://internal.hsk/control',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,...data})});
  const result=await response.json();
  return {status:response.status,...result};
@@ -303,7 +308,7 @@ async function geminiKeyId(key){
  const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(key));
  return Array.from(new Uint8Array(bytes),b=>b.toString(16).padStart(2,'0')).join('');
 }
-async function geminiCooldown(response,now){
+export async function geminiCooldown(response,now){
  const status=response.status;
  if(![400,401,403,429,500,502,503,504].includes(status))return 0;
  const data=await response.clone().json().catch(()=>null),details=data?.error?.details||[];
@@ -315,10 +320,10 @@ async function geminiCooldown(response,now){
  for(const d of details){const seconds=typeof d.retryDelay==='string'?Number(d.retryDelay.replace(/s$/,'')):Number(d.retryDelay?.seconds);if(Number.isFinite(seconds))ms=Math.max(ms,seconds*1000);}
  // Daily exhaustion should not be retried once per minute. A conservative 24h
  // pause avoids assuming a UTC reset for Google's Pacific-time daily quota.
- const daily=details.some(d=>d.violations?.some(v=>/perday|daily/i.test(String(v.quotaId)+' '+String(v.quotaMetric))));
+ const daily=details.some(d=>d.violations?.some(v=>/perday|daily/i.test(String(v.quotaId)+' '+String(v.quotaMetric))||String(v.quotaValue)==='0'));
  return Math.max(daily?86400000:60000,Number.isFinite(ms)?ms:0);
 }
-export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={cursor:0,blocked:new Map()},onAttempt=()=>{},slot}={}){
+export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={cursor:0,blocked:new Map()},onAttempt=()=>{},slot,namespace='global-hsk-budget-v1'}={}){
  const slots=configuredGeminiSlots(env),keys=slots.map(entry=>entry.key);
  const callKey=async(index,url,init)=>{
   const headers=new Headers(init.headers);headers.set('x-goog-api-key',keys[index]);const started=Date.now();
@@ -327,20 +332,20 @@ export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={curs
   catch(error){report(0,init.signal?.aborted?'canceled':'network');throw error;}
  };
  let idsPromise;
- return async(url,init={})=>{
+ const requestWithKeys=async(url,init={})=>{
   if(!String(url).startsWith('https://generativelanguage.googleapis.com/v1beta/models/'))return fetchFn(url,init);
   const canceled=()=>{if(init.signal?.aborted)throw new DOMException('Canceled','AbortError');};
   canceled();
   if(!keys.length)return Response.json({error:{status:'UNAVAILABLE'}},{status:503});
   // Legacy single-key installations retain one attempt and existing behavior.
   if(slot!==undefined&&!slots.some(entry=>entry.slot===slot))return Response.json({error:{status:'UNAVAILABLE'}},{status:503});
-  if(keys.length===1)return callKey(0,url,init);
+  if(keys.length===1&&namespace==='global-hsk-budget-v1')return callKey(0,url,init);
   const ids=await (idsPromise||=Promise.all(keys.map(geminiKeyId))),excluded=ids.filter((id,i)=>slot!==undefined&&slots[i].slot!==slot);
   let last;
   // Never fan out or scan ten accounts for one prompt: max two sequential calls.
   for(let attempt=0;attempt<(slot===undefined?2:1);attempt++){
    canceled();
-   let picked=await controlCall(env,'gemini-pick',{ids,excluded});
+   let picked=await controlCall(env,'gemini-pick',{ids,excluded},namespace);
    canceled();
    if(!picked){
     let index=-1,retryAt=Infinity;
@@ -350,7 +355,7 @@ export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={curs
    }
    if(!Number.isInteger(picked.index)||picked.index<0||picked.index>=keys.length){
     if(last)return last;
-    return Response.json({error:{status:'RESOURCE_EXHAUSTED'}},{status:429,headers:{'Retry-After':String(Number.isFinite(picked.retryAfter)?Math.max(1,picked.retryAfter):60)}});
+    return Response.json({error:{status:'RESOURCE_EXHAUSTED'}},{status:429,headers:{'Retry-After':String(Number.isFinite(picked.retryAfter)?Math.max(1,picked.retryAfter):60),'X-HSK-Provider-Attempted':'0'}});
    }
    const index=picked.index;excluded.push(ids[index]);
    let response;
@@ -360,11 +365,20 @@ export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={curs
    canceled();
    if(!delay)return response; // Includes refusals, malformed successes and bad input.
    state.blocked.set(ids[index],now()+delay);
-   await controlCall(env,'gemini-report',{id:ids[index],delay});
-   last=response;
+   await controlCall(env,'gemini-report',{id:ids[index],delay},namespace);
+   // Preserve the computed cooldown on the FIRST failure as well as later local rejections.
+   const responseHeaders=new Headers(response.headers);responseHeaders.set('Retry-After',String(Math.ceil(delay/1000)));responseHeaders.set('X-HSK-Provider-Attempted','1');
+   last=new Response(response.body,{status:response.status,statusText:response.statusText,headers:responseHeaders});
   }
   return last;
  };
+ requestWithKeys.availability=async()=>{
+  const ids=await (idsPromise||=Promise.all(keys.map(geminiKeyId)));
+  const result=await controlCall(env,'gemini-status',{ids},namespace);
+  if(result&&result.status!==200)throw Error('key_status_unavailable');
+  return slots.map((entry,index)=>({slot:entry.slot,retryAfter:result?Number(result.slots?.find(s=>s.index===index)?.retryAfter)||0:Math.max(0,Math.ceil(((state.blocked.get(ids[index])||0)-now())/1000))}));
+ };
+ return requestWithKeys;
 }
 
 // Real-world reading adaptation. Source URLs are allowlisted and checked on server; no arbitrary URL fetches.
@@ -536,6 +550,20 @@ export function decodeVoiceAudio(data){
  }
  return {audioBase64:btoa(binary),mimeType:format==='pcm'?'audio/L16;codec=pcm;rate=24000':'audio/wav'};
 }
+export async function voiceProviderFailure(response){
+ const data=await response.clone().json().catch(()=>null),details=data?.error?.details||[],message=String(data?.error?.message||'');
+ const code=response.status,attempted=response.headers.get('X-HSK-Provider-Attempted')!=='0';
+ const daily=details.some(d=>d.violations?.some(v=>/perday|daily/i.test(String(v.quotaId)+' '+String(v.quotaMetric))));
+ const unavailable=details.some(d=>d.violations?.some(v=>String(v.quotaValue)==='0'));
+ let reason='tts_provider_unavailable',retryable=true,retryAfter=Math.min(604800,Math.max(60,Number(response.headers.get('Retry-After'))||300));
+ if(code===429){reason=unavailable?'tts_quota_unavailable':daily?'tts_daily_limit':'tts_rate_limited';retryAfter=Math.max(retryAfter,daily||unavailable?86400:60);retryable=!unavailable;}
+ else if(code===400&&/location.*not supported|region.*not supported/i.test(message)){reason='tts_region_unavailable';retryable=false;retryAfter=86400;}
+ else if(code===401||details.some(d=>d.reason==='API_KEY_INVALID')){reason='tts_key_invalid';retryable=false;retryAfter=86400;}
+ else if(code===403){reason='tts_permission_denied';retryable=false;retryAfter=86400;}
+ else if(code===404){reason='tts_model_unavailable';retryable=false;retryAfter=86400;}
+ else if(code>=400&&code<500){reason='tts_request_rejected';retryable=false;retryAfter=86400;}
+ return {ok:false,error:reason,upstreamStatus:code,providerAttempts:attempted?1:0,retryable,retryAfter};
+}
 export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.now(),slotFetch){
  return async function voicePrecache(request,env){
   if(request.method!=='POST')return json({ok:false,error:'method_not_allowed'},405);
@@ -572,34 +600,41 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    input=JSON.parse(data);
   }catch{return json({ok:false,error:'invalid_request'},400);}
   if(!input||typeof input!=='object'||Array.isArray(input)
-   ||Object.keys(input).some(k=>!['text','language','keySlot'].includes(k))
+   ||Object.keys(input).some(k=>!['text','language','keySlot','action','isolated','items'].includes(k))
    ||(input.keySlot!==undefined&&(!Number.isInteger(input.keySlot)||input.keySlot<1||input.keySlot>9||!slotFetch))
    ||(input.language!==undefined&&input.language!=='zh-CN')
-   ||typeof input.text!=='string')return json({ok:false,error:'invalid_request'},400);
-  const text=input.text.normalize('NFC').replace(/\s+/g,' ').trim();
+   ||(input.isolated!==undefined&&(typeof input.isolated!=='boolean'||input.keySlot===undefined))
+   ||(input.action!==undefined&&input.action!=='status')
+   ||(input.items!==undefined&&(!input.isolated||!Array.isArray(input.items)||input.items.length<1||input.items.length>10||input.text!==undefined||input.items.some(t=>typeof t!=='string'||!t.trim()||/[<>\u0000-\u001f]/.test(t)||!/[\u3400-\u9fff]/u.test(t))))
+   ||(input.action!=='status'&&input.items===undefined&&typeof input.text!=='string'))return json({ok:false,error:'invalid_request'},400);
+  if(input.action==='status'){
+   if(input.text!==undefined||input.items!==undefined||input.keySlot!==undefined||!slotFetch)return json({ok:false,error:'invalid_request'},400);
+   try{return json({ok:true,slots:await slotFetch(1).availability()});}catch{return json({ok:false,error:'key_status_unavailable'},503);}
+  }
+  const text=(input.items?input.items.join('。 '):input.text).normalize('NFC').replace(/\s+/g,' ').trim();
   if(!text||Array.from(text).length>220||/[<>\u0000-\u001f]/.test(text)||!/[\u3400-\u9fff]/u.test(text))return json({ok:false,error:'invalid_text'},400);
-  const model=env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
-  if(!/^gemini-[a-z0-9.-]+-tts$/.test(model))return json({ok:false,error:'invalid_model'},503);
-  const prompt='Read the following Mandarin Chinese text naturally and accurately. Read only the Chinese text, with no introduction or extra words:\n'+text;
+  const model=(!input.items&&input.isolated&&env.HSK_VOICE_ISOLATED_MODEL)||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
+  if(!/^gemini-[a-z0-9.-]+-tts(?:-preview)?$/.test(model))return json({ok:false,error:'invalid_model'},503);
+  const prompt=(input.items?'Read every Mandarin Chinese item below exactly once in order, as an independent dictionary entry in citation form. Use standard Mandarin tones and natural word-internal tone sandhi. Do not connect neighbouring entries. Finish each entry fully, then leave 1.2 seconds of silence. Do not read punctuation or instructions. Speak only these entries:\n':input.isolated?'Read each Mandarin Chinese item separated by a full stop independently and clearly. Pause silently for one full second between items. Do not connect items or read these instructions. Speak only the items:\n':input.keySlot===undefined?'Read the following Mandarin Chinese text naturally and accurately. Read only the Chinese text, with no introduction or extra words:\n':'Say in Mandarin Chinese: ')+(input.items?input.items.map(t=>t.normalize('NFC').trim()+'。 ...').join('\n'):text);
   const payload={
    contents:[{role:'user',parts:[{text:prompt}]}],
    generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:'Kore'}}}}
   };
-  const provider=input.keySlot===undefined?geminiFetch:slotFetch(input.keySlot);
+  const provider=input.keySlot===undefined?geminiFetch:slotFetch(input.keySlot,input.isolated===true&&!input.items);
   const controller=new AbortController(),cancel=()=>controller.abort();
   if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',cancel,{once:true});
   const deadline=setTimeout(cancel,80000);
   try{
-   for(let attempt=0;attempt<2;attempt++){
+   for(let attempt=0;attempt<(input.keySlot===undefined?2:1);attempt++){
     let response;
-    try{response=await provider('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});}catch{return json({ok:false,error:'tts_provider_unavailable'},503);}
-    if(!response.ok)return json({ok:false,error:'tts_provider_unavailable',upstreamStatus:response.status,retryAfter:Math.min(86400,Math.max(60,Number(response.headers.get('Retry-After'))||600))},[429,503].includes(response.status)?response.status:502);
-    let data;try{data=await response.json();}catch{return json({ok:false,error:'invalid_tts_response'},502);}
+    try{response=await provider('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});}catch{return json({ok:false,error:'tts_transport_uncertain',providerAttempts:1,retryable:false},503);}
+    if(!response.ok)return json(await voiceProviderFailure(response),[429,503].includes(response.status)?response.status:502);
+    let data;try{data=await response.json();}catch{return json({ok:false,error:'invalid_tts_response',providerAttempts:1},502);}
     const audio=decodeVoiceAudio(data);
-    if(!audio.error)return json({ok:true,...audio,voice:'Kore',model});
+    if(!audio.error)return json({ok:true,...audio,voice:'Kore',model,providerAttempts:attempt+1});
     // Fixed categories only: no prompts, ID tokens, API keys, vendor messages or audio in logs.
     console.warn('hsk-voice-generation-failed',{reason:audio.error,attempt:attempt+1});
-    if(!audio.retryable||attempt===1)return json({ok:false,error:audio.error},502);
+    if(!audio.retryable||attempt===1||input.keySlot!==undefined)return json({ok:false,error:audio.error,providerAttempts:attempt+1,retryable:!!audio.retryable,retryAfter:600},502);
     // A short word can produce OTHER with an instructional prompt. Retry the literal transcript.
     payload.contents[0].parts[0].text=text;
    }
@@ -628,7 +663,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-tts-parallel-3-5-3';
+export const WORKER_REVISION='hsk-tts-efficient-3-5-5';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -641,7 +676,7 @@ async function geminiFailure(response,model,env,operation='existing'){
 }
 export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
  const cooldowns=new Map();
- const geminiState={cursor:0,blocked:new Map()};
+ const geminiState={cursor:0,blocked:new Map()},voiceState={cursor:0,blocked:new Map()},voicePilotState={cursor:0,blocked:new Map()};
  const sourceCache=new Map();
  return async(request,env)=>{
   const timings=[];let abuseLease=null,abuseUid='',responseStatus=500;
@@ -651,7 +686,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin','X-HSK-Worker-Version':WORKER_REVISION};
   const reply=(value,status=200)=>{responseStatus=status;return new Response(JSON.stringify(value),{status,headers});};
   // Server-to-server only: verified Google Apps Script identity, no browser CORS.
-  if(new URL(request.url).pathname==='/voice-precache')return createVoicePrecacheHandler(rawFetchFn,keyFetch,now,slot=>createGeminiKeyFetch(rawFetchFn,env,{now,state:geminiState,slot}))(request,env);
+  if(new URL(request.url).pathname==='/voice-precache')return createVoicePrecacheHandler(rawFetchFn,createGeminiKeyFetch(rawFetchFn,env,{now,state:voiceState,namespace:'hsk-tts-pool-v1'}),now,(slot,isolated)=>createGeminiKeyFetch(rawFetchFn,env,{now,state:isolated?voicePilotState:voiceState,slot,namespace:isolated?'hsk-tts-isolated-pool-v1':'hsk-tts-pool-v1'}))(request,env);
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
   Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});

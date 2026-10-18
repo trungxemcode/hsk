@@ -1,4 +1,4 @@
-﻿import test from 'node:test';
+import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
@@ -8,30 +8,30 @@ import {createVoicePrecacheHandler} from './voice-tts.mjs';
 globalThis.crypto ||= webcrypto;
 const source=fs.readFileSync(new URL('../tools/voice-cache-apps-script/Parallel.gs',import.meta.url),'utf8');
 function fixture(texts=['爱','八','爱','九','十','好','我','你','他','她','它','们']){
- const props=new Map([['HSK_WARM_ENABLED','true']]),rows=[],deferred=[];let calls=[],locked=false,failSlot=0,throwTransport=false;
+ let time=Date.now();const props=new Map([['HSK_WARM_ENABLED','true'],['HSK_WARM_CONCURRENCY','9']]),rows=[],deferred=[];let calls=[],locked=false,failSlot=0,throwTransport=false;const health={};
  const p={getProperty:k=>props.get(k)||null,setProperty:(k,v)=>props.set(k,String(v)),deleteProperty:k=>props.delete(k)};
  const table=data=>({getLastRow:()=>data.length+1,appendRow:r=>data.push([...r]),getRange:(row,col,n=1,width=13)=>({getValues:()=>data.slice(row-2,row-2+n).map(r=>r.slice(col-1,col-1+width)),setValues:values=>values.forEach((v,i)=>{data[row-2+i] ||= [];v.forEach((x,j)=>data[row-2+i][col-1+j]=x);})})});
  const files=new Map(),sheet=table(rows),queue=table(deferred);
  const folder={getFilesByName:name=>({hasNext:()=>files.has(name),next:()=>files.get(name)}),createFile:blob=>{const f={getId:()=>blob.name};files.set(blob.name,f);return f;}};
- const c=vm.createContext({Date,Set,Map,hskSettings_:()=>p,hskWarmCorpus_:()=>texts,hskDigest_:s=>createHash('sha256').update(s).digest('hex'),hskCheck_:()=>({sheet,folder}),hskWarmQueue_:()=>queue,hskWarmProgress_:()=>{},hskWarmStop:()=>p.setProperty('HSK_WARM_ENABLED','false'),ScriptApp:{getIdentityToken:()=> 'test'},SpreadsheetApp:{flush(){}},LockService:{getScriptLock:()=>({tryLock:()=>!locked,releaseLock(){}})},Utilities:{base64Decode:s=>[...Buffer.from(s,'base64')],newBlob:(bytes,mime,name)=>({bytes,mime,name})},hskWav_:bytes=>bytes,
- UrlFetchApp:{fetchAll:requests=>{calls.push(requests.map(r=>JSON.parse(r.payload)));if(throwTransport)throw Error('network');return requests.map(r=>{const body=JSON.parse(r.payload),bad=body.keySlot===failSlot;return {getResponseCode:()=>bad?429:200,getContentText:()=>JSON.stringify(bad?{ok:false,error:'tts_provider_unavailable',retryAfter:600}:{ok:true,audioBase64:'AQIDBA==',mimeType:'audio/L16'})};});}}});
+ const c=vm.createContext({Date:class extends Date{static now(){return time;}},Set,Map,hskSettings_:()=>p,hskWarmCorpus_:()=>texts,hskDigest_:s=>createHash('sha256').update(s).digest('hex'),hskCheck_:()=>({sheet,folder}),hskWarmQueue_:()=>queue,hskWarmProgress_:()=>{},hskWarmStop:()=>p.setProperty('HSK_WARM_ENABLED','false'),ScriptApp:{getIdentityToken:()=> 'test'},SpreadsheetApp:{flush(){}},LockService:{getScriptLock:()=>({tryLock:()=>!locked,releaseLock(){}})},Utilities:{base64Decode:s=>[...Buffer.from(s,'base64')],newBlob:(bytes,mime,name)=>({bytes,mime,name})},hskWav_:bytes=>bytes,
+ UrlFetchApp:{fetch:()=>({getResponseCode:()=>200,getContentText:()=>JSON.stringify({ok:true,slots:Array.from({length:9},(_,i)=>({slot:i+1,retryAfter:health[i+1]||0}))})}),fetchAll:requests=>{calls.push(requests.map(r=>JSON.parse(r.payload)));if(throwTransport)throw Error('network');return requests.map(r=>{const body=JSON.parse(r.payload),bad=failSlot===-1||body.keySlot===failSlot;return {getResponseCode:()=>bad?429:200,getContentText:()=>JSON.stringify(bad?{ok:false,error:'tts_provider_unavailable',retryAfter:600}:{ok:true,audioBase64:'AQIDBA==',mimeType:'audio/L16'})};});}}});
  vm.runInContext(source,c);
- return {c,p,props,rows,deferred,files,get calls(){return calls},lock:()=>locked=true,fail:slot=>failSlot=slot,transportFail:()=>throwTransport=true};
+ return {c,p,props,rows,deferred,files,get calls(){return calls},lock:()=>locked=true,fail:slot=>failSlot=slot,transportFail:()=>throwTransport=true,advance:ms=>time+=ms,health:(slot,seconds)=>health[slot]=seconds};
 }
 test('parallel batch sends nine distinct sentences on nine distinct key slots, caches repeats across ticks',()=>{
  const f=fixture();f.c.hskWarmParallelTick();assert.equal(f.calls[0].length,9);assert.deepEqual(Array.from(f.calls[0],r=>r.keySlot),[1,2,3,4,5,6,7,8,9]);assert.equal(new Set(f.calls[0].map(r=>r.text)).size,9);
- f.c.hskWarmParallelTick();assert.equal(f.rows.filter(r=>r[11]==='READY').length,11);assert.equal(f.files.size,11);assert.equal(new Set(f.rows.map(r=>r[0])).size,f.rows.length);
+ f.advance(90001);f.c.hskWarmParallelTick();assert.equal(f.rows.filter(r=>r[11]==='READY').length,11);assert.equal(f.files.size,11);assert.equal(new Set(f.rows.map(r=>r[0])).size,f.rows.length);
  f.c.hskWarmParallelTick();assert.equal(f.calls.length,2);assert.equal(f.props.get('HSK_WARM_ENABLED'),'false');
 });
 test('quota on one slot defers only its sentence and lets eight others save; later tick skips its cooldown',()=>{
  const f=fixture();f.fail(4);f.c.hskWarmParallelTick();assert.equal(f.rows.filter(r=>r[11]==='READY').length,8);assert.equal(f.deferred.length,1);assert.equal(f.deferred[0][4],'PENDING');
- f.c.hskWarmParallelTick();assert.ok(f.calls[1].every(r=>r.keySlot!==4));assert.equal(f.rows.filter(r=>r[11]==='READY').length,10);assert.notEqual(f.props.get('HSK_WARM_ENABLED'),'false');
+ f.advance(90001);f.c.hskWarmParallelTick();assert.equal(f.calls.length,2);assert.ok(f.calls[1].every(r=>r.keySlot!==4));assert.equal(f.deferred[0][4],'DONE');assert.equal(f.rows.filter(r=>r[11]==='READY').length,9);f.advance(90001);f.c.hskWarmParallelTick();assert.equal(f.rows.filter(r=>r[11]==='READY').length,11);
 });
 test('uncertain batch transport never automatically regenerates reserved sentences',()=>{
- const f=fixture();f.transportFail();f.c.hskWarmParallelTick();assert.equal(f.deferred.length,9);assert.ok(f.deferred.every(r=>r[4]==='REVIEW'));f.c.hskWarmParallelTick();const all=f.calls.flat().map(r=>r.text);assert.equal(all.length,new Set(all).size);
+ const f=fixture();f.transportFail();f.c.hskWarmParallelTick();assert.equal(f.deferred.length,9);assert.ok(f.deferred.every(r=>r[4]==='REVIEW'));f.advance(1800001);f.c.hskWarmParallelTick();const all=f.calls.flat().map(r=>r.text);assert.equal(all.length,new Set(all).size);
 });
 test('legacy transient provider errors in REVIEW return to the bounded retry queue',()=>{
- const f=fixture(['爱','八']);f.deferred.push([0,'爱',1,Date.now()+86400000,'REVIEW','cloudflare_tts_502_tts_provider_unavailable']);f.props.set('HSK_WARM_CURSOR','0');f.c.hskWarmParallelTick();assert.equal(f.deferred[0][4],'PENDING');assert.equal(f.deferred[0][2],1);assert.equal(f.calls.length,1);
+ const f=fixture(['爱','八']);f.deferred.push([0,'爱',1,Date.now()+86400000,'REVIEW','cloudflare_tts_502_tts_provider_unavailable']);f.props.set('HSK_WARM_CURSOR','0');f.c.hskWarmParallelTick();assert.equal(f.deferred[0][4],'DONE');assert.equal(f.deferred[0][2],1);assert.equal(f.calls.length,1);assert.equal(f.calls[0].length,1);assert.equal(f.calls[0][0].text,'爱');
 });
 test('interrupted reservation behind cursor recovers existing file without another paid call',()=>{
  const f=fixture(['爱']);const key=createHash('sha256').update(JSON.stringify(['zh-CN','Kore','gemini-2.5-flash-preview-tts','爱'])).digest('hex'),name='hsk-tts-'+key.slice(0,24)+'.wav';
@@ -63,3 +63,35 @@ test('voice slot selection is validated after verified Google identity and never
 
 
 
+
+
+test('preflight skips cooling keys without advancing cursor, reserving audio or spending an attempt',()=>{
+ const f=fixture();for(let slot=1;slot<=9;slot++)f.health(slot,86400);f.c.hskWarmParallelTick();assert.equal(f.calls.length,0);assert.equal(f.rows.length,0);assert.equal(f.deferred.length,0);assert.equal(f.props.get('HSK_WARM_CURSOR'),'0');assert.equal(Number(f.props.get('HSK_WARM_VENDOR_CALLS')||0),0);assert.ok(Number(f.props.get('HSK_WARM_RETRY_AT'))>Date.now());
+});
+test('preflight uses only healthy key slots and never routes work to an unavailable slot',()=>{
+ const f=fixture();for(let slot=2;slot<=8;slot++)f.health(slot,86400);f.c.hskWarmParallelTick();assert.deepEqual(Array.from(f.calls[0],r=>r.keySlot),[1,9]);assert.equal(f.rows.length,2);
+});
+test('adaptive loading starts at one lane and increases only after three entirely successful batches',()=>{
+ const f=fixture();f.props.delete('HSK_WARM_CONCURRENCY');for(let n=0;n<3;n++){f.c.hskWarmParallelTick();f.advance(90001);}assert.deepEqual(f.calls.map(r=>r.length),[1,1,1]);assert.equal(f.props.get('HSK_WARM_CONCURRENCY'),'2');assert.equal(Number(f.props.get('HSK_WARM_VENDOR_CALLS')),3);assert.equal(Number(f.props.get('HSK_WARM_SAVED_SINCE_FIX')),3);
+});
+test('all-failing batches cut concurrency and open a circuit after three failed batches',()=>{
+ const f=fixture(Array.from({length:100},(_,i)=>'字'+i));f.props.set('HSK_WARM_CONCURRENCY','1');f.c.UrlFetchApp.fetchAll=requests=>{f.calls.push(requests.map(r=>JSON.parse(r.payload)));return requests.map(()=>({getResponseCode:()=>503,getContentText:()=>JSON.stringify({ok:false,error:'tts_provider_unavailable',retryable:true,retryAfter:600,providerAttempts:1})}));};for(let n=0;n<3;n++){f.c.hskWarmParallelTick();if(n<2)f.advance(600001);}assert.equal(f.calls.length,3);assert.equal(f.props.get('HSK_WARM_CONCURRENCY'),'1');assert.ok(Number(f.props.get('HSK_WARM_RETRY_AT'))>Date.now()+1700000);
+});
+test('coordinator rejection preserves daily delay without counting a Gemini attempt or spending phrase retries',()=>{
+ const f=fixture(['爱']);f.props.set('HSK_WARM_CONCURRENCY','1');f.c.UrlFetchApp.fetchAll=()=>[{getResponseCode:()=>429,getContentText:()=>JSON.stringify({ok:false,error:'tts_daily_limit',retryable:true,retryAfter:86400,providerAttempts:0})}];f.c.hskWarmParallelTick();assert.equal(Number(f.props.get('HSK_WARM_VENDOR_CALLS')),0);assert.equal(f.deferred[0][2],0);assert.equal(f.deferred[0][4],'PENDING');assert.ok(Number(f.props.get('HSK_WARM_SLOT_1_AFTER'))>Date.now()+86300000);
+});
+
+test('one invalid key or exhausted daily quota does not stop healthy keys globally',()=>{
+ const f=fixture(Array.from({length:100},(_,i)=>'字'+i));f.props.set('HSK_WARM_CONCURRENCY','1');f.c.UrlFetchApp.fetchAll=requests=>requests.map(()=>({getResponseCode:()=>429,getContentText:()=>JSON.stringify({ok:false,error:'tts_daily_limit',retryable:true,retryAfter:86400,providerAttempts:1})}));for(let n=0;n<3;n++){f.c.hskWarmParallelTick();f.advance(90001);}assert.equal(f.props.has('HSK_WARM_RETRY_AT'),false);assert.equal(f.props.get('HSK_WARM_ENABLED'),'true');
+});
+
+test('a waiting failed phrase blocks fresh work until its retry is due',()=>{
+ const f=fixture();f.props.set('HSK_WARM_RETRY_POLICY','backlog-first-v2');f.props.set('HSK_WARM_CURSOR','5');f.deferred.push([0,'爱',1,Date.now()+86400000,'PENDING','cloudflare_tts_502_tts_generation_incomplete']);f.c.hskWarmParallelTick();assert.equal(f.calls.length,0);assert.equal(f.rows.length,0);assert.equal(f.props.get('HSK_WARM_CURSOR'),'5');assert.ok(Number(f.props.get('HSK_WARM_RETRY_AT'))>Date.now());
+});
+test('a phrase previously failed by an invalid key is retried before new text, using a healthy lane',()=>{
+ const f=fixture();f.props.set('HSK_WARM_CURSOR','5');f.deferred.push([0,'爱',1,Date.now()+86400000,'REVIEW','cloudflare_tts_502_tts_key_invalid']);f.c.hskWarmParallelTick();assert.equal(f.calls.length,1);assert.equal(f.calls[0].length,1);assert.equal(f.calls[0][0].text,'爱');assert.equal(f.deferred[0][4],'DONE');assert.equal(f.props.get('HSK_WARM_CURSOR'),'5');
+});
+
+test('unresolved review items pause the queue instead of silently moving on to fresh text',()=>{
+ const f=fixture();f.props.set('HSK_WARM_CURSOR','5');f.deferred.push([0,'爱',1,0,'REVIEW','batch_transport_uncertain']);f.c.hskWarmParallelTick();assert.equal(f.calls.length,0);assert.equal(f.props.get('HSK_WARM_CURSOR'),'5');assert.equal(f.props.get('HSK_WARM_ENABLED'),'false');assert.equal(f.props.get('HSK_WARM_LAST_ERROR'),'tts_review_required');
+});

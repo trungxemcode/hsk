@@ -27,7 +27,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-tts-parallel-3-5-3';
+export const WORKER_REVISION='hsk-tts-efficient-3-5-5';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -40,7 +40,7 @@ async function geminiFailure(response,model,env,operation='existing'){
 }
 export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
  const cooldowns=new Map();
- const geminiState={cursor:0,blocked:new Map()};
+ const geminiState={cursor:0,blocked:new Map()},voiceState={cursor:0,blocked:new Map()},voicePilotState={cursor:0,blocked:new Map()};
  const sourceCache=new Map();
  return async(request,env)=>{
   const timings=[];let abuseLease=null,abuseUid='',responseStatus=500;
@@ -50,7 +50,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin','X-HSK-Worker-Version':WORKER_REVISION};
   const reply=(value,status=200)=>{responseStatus=status;return new Response(JSON.stringify(value),{status,headers});};
   // Server-to-server only: verified Google Apps Script identity, no browser CORS.
-  if(new URL(request.url).pathname==='/voice-precache')return createVoicePrecacheHandler(rawFetchFn,keyFetch,now,slot=>createGeminiKeyFetch(rawFetchFn,env,{now,state:geminiState,slot}))(request,env);
+  if(new URL(request.url).pathname==='/voice-precache')return createVoicePrecacheHandler(rawFetchFn,createGeminiKeyFetch(rawFetchFn,env,{now,state:voiceState,namespace:'hsk-tts-pool-v1'}),now,(slot,isolated)=>createGeminiKeyFetch(rawFetchFn,env,{now,state:isolated?voicePilotState:voiceState,slot,namespace:isolated?'hsk-tts-isolated-pool-v1':'hsk-tts-pool-v1'}))(request,env);
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
   Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});

@@ -91,9 +91,9 @@ function hskWorkerTts_(text) {
   if(response.getResponseCode()!==200){
     // Only include predefined safe backend error codes; never echo credentials or a provider body.
     var reason='request_failed';
-    try{var result=JSON.parse(response.getContentText());if(/^(identity_unavailable|unauthorized|voice_not_configured|tts_provider_unavailable|invalid_model|invalid_tts_audio|invalid_tts_response|tts_generation_incomplete|tts_blocked)$/.test(String(result.error||'')))reason=result.error;}catch(ignored){}
+    try{var result=JSON.parse(response.getContentText());if(/^(identity_unavailable|unauthorized|voice_not_configured|tts_provider_unavailable|invalid_model|invalid_tts_audio|invalid_tts_response|tts_generation_incomplete|tts_blocked|tts_rate_limited|tts_daily_limit|tts_quota_unavailable|tts_key_invalid|tts_permission_denied|tts_region_unavailable|tts_model_unavailable|tts_request_rejected|tts_transport_uncertain)$/.test(String(result.error||'')))reason=result.error;}catch(ignored){}
     var failure=new Error('cloudflare_tts_'+response.getResponseCode()+'_'+reason);
-    failure.retryable=[429,503,504].indexOf(response.getResponseCode())>=0||reason==='tts_generation_incomplete'||reason==='tts_provider_unavailable';
+    failure.retryable=typeof result==='object'&&typeof result.retryable==='boolean'?result.retryable:[429,503,504].indexOf(response.getResponseCode())>=0||reason==='tts_generation_incomplete'||reason==='tts_provider_unavailable';
     throw failure;
   }
   var json=JSON.parse(response.getContentText());

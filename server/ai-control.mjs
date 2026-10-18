@@ -5,13 +5,18 @@ export class HSkaIControl {
  async fetch(request){
   if(request.method!=='POST')return Response.json({error:'method'},{status:405});
   let data;try{data=await request.json()}catch{return Response.json({error:'payload'},{status:400})}
-  if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock','gemini-pick','gemini-report','abuse-start','abuse-finish'].includes(data.action))
+  if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock','gemini-pick','gemini-report','gemini-status','abuse-start','abuse-finish'].includes(data.action))
    return Response.json({error:'action'},{status:400});
   const time=Date.now();
   if(data.action==='abuse-start'||data.action==='abuse-finish')return abuseControl(this.state.storage,this.env,data,time);
+  if(data.action==='gemini-status'){
+   if(!Array.isArray(data.ids)||data.ids.length>10||!data.ids.every(id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id)))return Response.json({error:'keys'},{status:400});
+   const pool=await this.state.storage.get('gemini:pool')||{};
+   return Response.json({slots:data.ids.map((id,index)=>({index,retryAfter:Math.max(0,Math.ceil(((pool.blocked?.[id]||0)-time)/1000))}))});
+  }
   if(data.action==='gemini-pick'){
    const validId=id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id);
-   if(!Array.isArray(data.ids)||data.ids.length<2||data.ids.length>10||!data.ids.every(validId)||new Set(data.ids).size!==data.ids.length||!Array.isArray(data.excluded)||data.excluded.length>10||!data.excluded.every(id=>data.ids.includes(id)))return Response.json({error:'keys'},{status:400});
+   if(!Array.isArray(data.ids)||data.ids.length<1||data.ids.length>10||!data.ids.every(validId)||new Set(data.ids).size!==data.ids.length||!Array.isArray(data.excluded)||data.excluded.length>10||!data.excluded.every(id=>data.ids.includes(id)))return Response.json({error:'keys'},{status:400});
    const result=await this.state.storage.transaction(async t=>{
     const previous=await t.get('gemini:pool')||{},pool={cursor:Number(previous.cursor)||0,ids:data.ids,blocked:{}};
     for(const id of data.ids)if(previous.blocked?.[id]>time)pool.blocked[id]=previous.blocked[id];
@@ -89,10 +94,10 @@ export async function readingCacheKey(body){
  const bytes=new TextEncoder().encode(canonical),digest=await crypto.subtle.digest('SHA-256',bytes);
  return 'v3_'+Array.from(new Uint8Array(digest)).map(x=>x.toString(16).padStart(2,'0')).join('');
 }
-export async function controlCall(env,action,data={}){
+export async function controlCall(env,action,data={},namespace='global-hsk-budget-v1'){
  const obj=env.AI_CONTROL;
  if(!obj){if(env.AI_CONTROL_REQUIRED==='true')throw Error('AI_CONTROL binding required');return null;}
- const stub=obj.get(obj.idFromName('global-hsk-budget-v1'));
+ const stub=obj.get(obj.idFromName(namespace));
  const response=await stub.fetch('https://internal.hsk/control',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,...data})});
  const result=await response.json();
  return {status:response.status,...result};

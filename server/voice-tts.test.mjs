@@ -58,7 +58,7 @@ test('WAV validation rejects wrong rates, broken RIFF sizes and missing PCM/data
 test('respect upstream rate exhaustion and malformed response',async()=>{
  for(const status of [429,503,403]){
   const b=build({providerStatus:status}),r=await b.handler(req(),await env());
-  assert.equal(r.status,status===403?502:status);assert.equal((await r.json()).error,'tts_provider_unavailable');
+  assert.equal(r.status,status===403?502:status);assert.equal((await r.json()).error,status===429?'tts_rate_limited':status===403?'tts_permission_denied':'tts_provider_unavailable');
  }
  for(const bad of [{data:'!!!'},{mime:'text/plain'}]){
   const b=build(bad),r=await b.handler(req(),await env());assert.equal(r.status,502);assert.equal(b.stats().modelCalls,1);

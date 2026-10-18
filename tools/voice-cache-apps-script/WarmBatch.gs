@@ -9,7 +9,7 @@ function hskWarmStatus() {
   return {total:all.length,completed:Math.min(done,all.length),remaining:Math.max(0,all.length-done),
     enabled:p.getProperty('HSK_WARM_ENABLED')==='true',
     configuredKeys:configured,keyTransport:p.getProperty('HSK_VOICE_TTS_TRANSPORT')==='direct'?'direct':'cloudflare',retryAt:Number(p.getProperty('HSK_WARM_RETRY_AT')||0),lastError:p.getProperty('HSK_WARM_LAST_ERROR')||'',
-    lastRun:p.getProperty('HSK_WARM_LAST_RUN')||'',mode:p.getProperty('HSK_WARM_PARALLEL')==='true'?'parallel-nine-key-slots':'background-cache-first',
+    lastRun:p.getProperty('HSK_WARM_LAST_RUN')||'',mode:p.getProperty('HSK_WARM_ISOLATED')==='true'?'isolated-batch-repair-first':p.getProperty('HSK_WARM_PARALLEL')==='true'?'parallel-nine-key-slots':'background-cache-first',
     callsToday:Number(p.getProperty('HSK_WARM_CALLS')||0),runtimeMinutes:Math.round(Number(p.getProperty('HSK_WARM_RUNTIME_MS')||0)/6000)/10};
 }
 function hskWarmStart() {
@@ -28,14 +28,14 @@ function hskWarmStart() {
   return hskWarmStatus();
 }
 function hskWarmStop() {
-  var p=hskSettings_();p.setProperty('HSK_WARM_ENABLED','false');
+  var p=hskSettings_();p.setProperty('HSK_WARM_ENABLED','false');p.deleteProperty('HSK_WARM_PAUSE_REASON');
   ScriptApp.getProjectTriggers().filter(function(t){return t.getHandlerFunction()==='hskWarmTick';})
     .forEach(function(t){ScriptApp.deleteTrigger(t);});
   return hskWarmStatus();
 }
 /** Install once. All later work runs on Google's scheduler, without ChatGPT. */
 function hskWarmConfigureBackground() {
-  var p=hskSettings_();
+  var p=hskSettings_();p.deleteProperty('HSK_WARM_ISOLATED');
   p.setProperty('HSK_WARM_BATCH_SIZE','4');
   p.setProperty('HSK_WARM_RUNTIME_LIMIT_MS','3600000');
   p.setProperty('HSK_WARM_ENABLED','true');
@@ -59,15 +59,19 @@ function hskWarmProgress_(storage,p) {
   var s=hskWarmStatus(),readyKeys=new Set();
   if(storage.sheet.getLastRow()>1)storage.sheet.getRange(2,1,storage.sheet.getLastRow()-1,13).getValues().forEach(function(r){if(r[0]&&r[4]&&r[11]==='READY')readyKeys.add(String(r[0]));});
   var ready=readyKeys.size;
-  sheet.getRange(1,1,13,2).setValues([
+  sheet.getRange(1,1,16,2).setValues([
     ['Kho voice tự động','Gemini Kore / tiếng Trung'],['Tổng câu',s.total],['Đã có audio',ready],
     ['Chưa duyệt',s.remaining],['Sẽ thử lại',pending],['Cần kiểm tra',review],
-    ['Trạng thái',s.enabled?(s.retryAt>Date.now()?'Đang nghỉ, sẽ tự chạy tiếp':'Đang chạy nền'):(s.remaining?'Tạm dừng; kiểm tra cấu hình':pending||review?'Đã duyệt hết; xem Voice_Retry':'Hoàn tất')],
+    ['Trạng thái',s.enabled?(s.retryAt>Date.now()?'Đang nghỉ, sẽ tự chạy tiếp':'Đang chạy nền'):(p.getProperty('HSK_WARM_PAUSE_REASON')==='batch-pilot'?'Tạm dừng có chủ đích để kiểm tra tạo theo lô':s.remaining?'Tạm dừng; kiểm tra cấu hình':pending||review?'Đã duyệt hết; xem Voice_Retry':'Hoàn tất')],
     ['Lần chạy gần nhất',p.getProperty('HSK_WARM_LAST_RUN')||''],['Chạy lại sau',s.retryAt?new Date(s.retryAt).toISOString():''],
     ['Lượt gọi tạo audio / chu kỳ 24h',s.callsToday],['Phút đã dùng / tối đa 60',s.runtimeMinutes],
-    ['Lỗi gần nhất',s.lastError],['Cơ chế','Chỉ tạo câu chưa có; không dùng ChatGPT; không cần mở máy']]);
+    ['Lỗi gần nhất',s.lastError],['Cơ chế','Kiểm tra key trước; tăng/giảm tải theo kết quả; chống trùng'],
+    ['Gọi Gemini thực từ bản sửa',Number(p.getProperty('HSK_WARM_VENDOR_CALLS')||0)],
+    ['Audio lưu từ bản sửa',Number(p.getProperty('HSK_WARM_SAVED_SINCE_FIX')||0)],
+    ['Luồng đang cho phép / tối đa 9',Number(p.getProperty('HSK_WARM_CONCURRENCY')||1)]]);
 }
 function hskWarmTick() {
+  if(hskSettings_().getProperty('HSK_WARM_ISOLATED')==='true')return hskWarmIsolatedTick();
   if(hskSettings_().getProperty('HSK_WARM_PARALLEL')==='true')return hskWarmParallelTick();
   var p=hskSettings_(),now=Date.now();
   if(p.getProperty('HSK_WARM_ENABLED')!=='true'||p.getProperty('HSK_VOICE_PAUSED')==='true')return;
