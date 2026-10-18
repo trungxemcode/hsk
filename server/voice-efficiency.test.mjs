@@ -78,3 +78,13 @@ test('authenticated provider detail redacts configured credentials',async()=>{
  const result=await voiceProviderFailure(Response.json({error:{status:'INVALID_ARGUMENT',message:'Model rejected '+value}},{status:400}),{GEMINI_API_KEY:value});
  assert.ok(result.diagnostic.detail.includes('[redacted]'));assert.ok(!JSON.stringify(result).includes(value));
 });
+
+test('TTS text-mode confusion is bounded transient generation failure, not a bad key',async()=>{
+ const r=await voiceProviderFailure(Response.json({error:{status:'INVALID_ARGUMENT',message:'Model tried to generate text, but it should only be used for TTS.'}},{status:400}));
+ assert.equal(r.error,'tts_generation_incomplete');assert.equal(r.retryable,true);assert.equal(r.retryAfter,90);
+});
+test('single-item repair uses concise Mandarin prompt and one upstream request',async()=>{
+ let calls=0,prompt='';const raw=async(url,init)=>{calls++;prompt=JSON.parse(init.body).contents[0].parts[0].text;return Response.json({candidates:[{finishReason:'STOP',content:{parts:[{inlineData:{mimeType:'audio/L16',data:'AQIDBA=='}}]}}]});};
+ const h=createVoicePrecacheHandler(identity,raw,()=>Date.now(),()=>raw);const response=await h(req({items:['\u8bfb'],keySlot:1,isolated:true}),env);
+ assert.equal(response.status,200);assert.equal(calls,1);assert.equal(prompt,'Say in Mandarin Chinese: \u8bfb');
+});

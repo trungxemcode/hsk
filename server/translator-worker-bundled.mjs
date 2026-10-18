@@ -627,6 +627,7 @@ export async function voiceProviderFailure(response,env){
  const unavailable=details.some(d=>d.violations?.some(v=>String(v.quotaValue)==='0'));
  let reason='tts_provider_unavailable',retryable=true,retryAfter=Math.min(604800,Math.max(60,Number(response.headers.get('Retry-After'))||300));
  if(code===429){reason=unavailable?'tts_quota_unavailable':daily?'tts_daily_limit':'tts_rate_limited';retryAfter=Math.max(retryAfter,daily||unavailable?86400:60);retryable=!unavailable;}
+ else if(code===400&&/model tried to generate text|only be used for TTS/i.test(message)){reason='tts_generation_incomplete';retryable=true;retryAfter=90;}
  else if(code===400&&/location.*not supported|region.*not supported/i.test(message)){reason='tts_region_unavailable';retryable=false;retryAfter=86400;}
  else if(code===401||details.some(d=>d.reason==='API_KEY_INVALID')){reason='tts_key_invalid';retryable=false;retryAfter=86400;}
  else if(code===403){reason='tts_permission_denied';retryable=false;retryAfter=86400;}
@@ -700,7 +701,9 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
   if(!text||Array.from(text).length>220||/[<>\u0000-\u001f]/.test(text)||!/[\u3400-\u9fff]/u.test(text))return json({ok:false,error:'invalid_text'},400);
   const model=(!input.items&&input.isolated&&env.HSK_VOICE_ISOLATED_MODEL)||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
   if(!/^gemini-[a-z0-9.-]+-tts(?:-preview)?$/.test(model))return json({ok:false,error:'invalid_model'},503);
-  const prompt=(input.items?'Read every Mandarin Chinese item below exactly once in order, as an independent dictionary entry in citation form. Use standard Mandarin tones and natural word-internal tone sandhi. Do not connect neighbouring entries. Finish each entry fully, then leave 1.2 seconds of silence. Do not read punctuation or instructions. Speak only these entries:\n':input.isolated?'Read each Mandarin Chinese item separated by a full stop independently and clearly. Pause silently for one full second between items. Do not connect items or read these instructions. Speak only the items:\n':input.keySlot===undefined?'Read the following Mandarin Chinese text naturally and accurately. Read only the Chinese text, with no introduction or extra words:\n':'Say in Mandarin Chinese: ')+(input.items?input.items.map(t=>t.normalize('NFC').trim()+'。 ...').join('\n'):text);
+  let prompt=(input.items?'Read every Mandarin Chinese item below exactly once in order, as an independent dictionary entry in citation form. Use standard Mandarin tones and natural word-internal tone sandhi. Do not connect neighbouring entries. Finish each entry fully, then leave 1.2 seconds of silence. Do not read punctuation or instructions. Speak only these entries:\n':input.isolated?'Read each Mandarin Chinese item separated by a full stop independently and clearly. Pause silently for one full second between items. Do not connect items or read these instructions. Speak only the items:\n':input.keySlot===undefined?'Read the following Mandarin Chinese text naturally and accurately. Read only the Chinese text, with no introduction or extra words:\n':'Say in Mandarin Chinese: ')+(input.items?input.items.map(t=>t.normalize('NFC').trim()+'。 ...').join('\n'):text);
+  // A single transcript needs no dictionary-list instruction.
+  if(input.items?.length===1)prompt='Say in Mandarin Chinese: '+text;
   const payload={
    contents:[{role:'user',parts:[{text:prompt}]}],
    generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:'Kore'}}}}
