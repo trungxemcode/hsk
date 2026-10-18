@@ -48,6 +48,8 @@ function hskWarmParallelTick() {
     var sheet=storage.sheet,records=sheet.getLastRow()>1?sheet.getRange(2,1,sheet.getLastRow()-1,13).getValues():[],byKey=new Map();
     records.forEach(function(r,i){byKey.set(String(r[0]),{row:i+2,values:r});});
     var queue=hskWarmQueue_(storage),deferred=queue.getLastRow()>1?queue.getRange(2,1,queue.getLastRow()-1,6).getValues():[];
+    // Older sequential runs mislabeled transient provider outages as REVIEW; safely return those with fewer than three attempts to the retry queue.
+    deferred.forEach(function(r,i){if(r[4]==='REVIEW'&&Number(r[2])<3&&/tts_provider_unavailable/.test(String(r[5]))){r[3]=Math.min(Number(r[3])||Date.now(),Date.now());r[4]='PENDING';queue.getRange(i+2,1,1,6).setValues([r]);}});
     // Reconcile all interrupted reservations, including those behind the saved cursor.
     byKey.forEach(function(entry,key){
       if(entry.values[11]!=='PROCESSING')return;

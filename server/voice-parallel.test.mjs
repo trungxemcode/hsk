@@ -1,4 +1,4 @@
-import test from 'node:test';
+﻿import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
@@ -30,6 +30,9 @@ test('quota on one slot defers only its sentence and lets eight others save; lat
 test('uncertain batch transport never automatically regenerates reserved sentences',()=>{
  const f=fixture();f.transportFail();f.c.hskWarmParallelTick();assert.equal(f.deferred.length,9);assert.ok(f.deferred.every(r=>r[4]==='REVIEW'));f.c.hskWarmParallelTick();const all=f.calls.flat().map(r=>r.text);assert.equal(all.length,new Set(all).size);
 });
+test('legacy transient provider errors in REVIEW return to the bounded retry queue',()=>{
+ const f=fixture(['爱','八']);f.deferred.push([0,'爱',1,Date.now()+86400000,'REVIEW','cloudflare_tts_502_tts_provider_unavailable']);f.props.set('HSK_WARM_CURSOR','0');f.c.hskWarmParallelTick();assert.equal(f.deferred[0][4],'PENDING');assert.equal(f.deferred[0][2],1);assert.equal(f.calls.length,1);
+});
 test('interrupted reservation behind cursor recovers existing file without another paid call',()=>{
  const f=fixture(['爱']);const key=createHash('sha256').update(JSON.stringify(['zh-CN','Kore','gemini-2.5-flash-preview-tts','爱'])).digest('hex'),name='hsk-tts-'+key.slice(0,24)+'.wav';
  f.rows.push([key,'zh-CN','Kore','gemini-2.5-flash-preview-tts','','audio/wav',0,'','',0,1,'PROCESSING','']);f.props.set('HSK_WARM_CURSOR','1');f.files.set(name,{getId:()=>name});f.c.hskWarmParallelTick();assert.equal(f.rows[0][11],'READY');assert.equal(f.calls.length,0);
@@ -57,4 +60,6 @@ test('voice slot selection is validated after verified Google identity and never
  for(const slot of [0,10,'1',1.5])assert.equal((await h(req(slot),env)).status,400);
  assert.equal((await h(req(2,false),env)).status,401);assert.equal(selected,9);
 });
+
+
 
