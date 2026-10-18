@@ -8,7 +8,7 @@ const digest=async s=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',ne
 const identity={iss:'https://accounts.google.com',email_verified:true,sub,exp:Math.floor(Date.now()/1000)+3600,aud:'test-oauth-client-id'};
 function build({google=identity,providerStatus=200,data='AQIDBA==',mime='audio/L16;rate=24000'}={}){
  let identityCalls=0,modelCalls=0,payload,requestUrl;
- const googleFetch=async url=>{identityCalls++;assert.ok(url.startsWith('https://oauth2.googleapis.com/tokeninfo?id_token='));return google===null?new Response('{}',{status:401}):Response.json(google);};
+ const googleFetch=async (url,init)=>{identityCalls++;assert.ok(url.startsWith('https://oauth2.googleapis.com/tokeninfo?id_token='));assert.equal(init.redirect,'manual','Google ID verification must never follow a redirect');return google===null?new Response('{}',{status:401}):Response.json(google);};
  const geminiFetch=async (url,init)=>{modelCalls++;requestUrl=url;payload=JSON.parse(init.body);return providerStatus!==200?Response.json({error:'fail'},{status:providerStatus}):Response.json({candidates:[{content:{parts:[{inlineData:{mimeType:mime,data}}]}}]});};
  return {handler:createVoicePrecacheHandler(googleFetch,geminiFetch),stats:()=>({identityCalls,modelCalls,payload,requestUrl})};
 }
