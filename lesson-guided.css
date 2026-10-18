@@ -5,12 +5,12 @@
 .guided-body p{line-height:1.65;margin-block:8px}
 .guided-word+.guided-word,.guided-line+.guided-line{border-top:1px solid var(--line);margin-top:16px;padding-top:16px}
 .guided-word .lesson-han{font-size:2rem}
-.guided-controls{display:grid;grid-template-columns:minmax(70px,1fr) minmax(120px,1.6fr) minmax(70px,1fr);gap:8px;position:sticky;bottom:calc(84px + env(safe-area-inset-bottom));padding:10px 0;background:var(--surface);z-index:2}
+/* Non-floating lesson toolbar: keep controls in document flow above the lesson card. Never use sticky/fixed here. */
+.guided-controls{display:grid;grid-template-columns:minmax(70px,1fr) minmax(120px,1.6fr) minmax(70px,1fr);gap:8px;position:static;bottom:auto;z-index:auto;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-card);margin:12px 0 16px}
 .guided-controls button,.guided-options button,.lesson-guided>button{min-height:48px;border-radius:var(--radius-btn);padding:10px 14px;white-space:normal;line-height:1.4;overflow-wrap:anywhere}
 .guided-options{display:grid;gap:10px}
 .lesson-guided details{margin-block:12px}
 .lesson-guided details label{display:flex;align-items:center;gap:10px;margin-block:12px;flex-wrap:wrap}
 .lesson-guided input[type=checkbox]{width:22px;height:22px}
 @media(max-width:600px){.guided-body{padding:14px}.guided-controls{grid-template-columns:1fr 1fr}.guided-controls button:nth-child(2){grid-column:1/-1;grid-row:1}}
-@media(min-width:721px){.guided-controls{bottom:12px}}
 @media(prefers-reduced-motion:no-preference){.guided-body{animation:guided-enter .18s ease-out}@keyframes guided-enter{from{opacity:.6;transform:translateY(4px)}to{opacity:1;transform:none}}}
