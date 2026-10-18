@@ -1,3 +1,4 @@
+import { hskVoiceVerifyPartial } from './voice-partial-verify.mjs';
 // Private Apps Script-to-Cloudflare TTS bridge. Google identity tokens, never browser API keys.
 const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'};
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers});
@@ -74,9 +75,15 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
   let input;
   try{
    const data=await request.text();
-   if(data.length>1500)return json({ok:false,error:'invalid_request'},400);
+   if(data.length>700000)return json({ok:false,error:'invalid_request'},400);
    input=JSON.parse(data);
+   if(input?.action!=='verify'&&data.length>1500)return json({ok:false,error:'invalid_request'},400);
   }catch{return json({ok:false,error:'invalid_request'},400);}
+  if(input?.action==='verify'){
+   if(Object.keys(input).some(k=>!['action','items','clips'].includes(k)))return json({ok:false,error:'invalid_request'},400);
+   const checked=await hskVoiceVerifyPartial(input,geminiFetch,request.signal);
+   return json(checked.result,checked.status);
+  }
   if(!input||typeof input!=='object'||Array.isArray(input)
    ||Object.keys(input).some(k=>!['text','language'].includes(k))
    ||(input.language!==undefined&&input.language!=='zh-CN')
