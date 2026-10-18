@@ -100,7 +100,7 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    if(input?.action!=='verify'&&data.length>1500)return json({ok:false,error:'invalid_request'},400);
   }catch{return json({ok:false,error:'invalid_request'},400);}
   if(input?.action==='diagnose'){
-   if(Object.keys(input).some(k=>!['action','keySlot'].includes(k))||!Number.isInteger(input.keySlot)||input.keySlot<1||input.keySlot>9||!slotFetch)return json({ok:false,error:'invalid_request'},400);
+   if(Object.keys(input).some(k=>!['action','keySlot'].includes(k))||!Number.isInteger(input.keySlot)||input.keySlot<0||input.keySlot>9||!slotFetch)return json({ok:false,error:'invalid_request'},400);
    const model=env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
    try{
     const response=await slotFetch(input.keySlot).inspect(model);
@@ -115,7 +115,7 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
   }
   if(!input||typeof input!=='object'||Array.isArray(input)
    ||Object.keys(input).some(k=>!['text','language','keySlot','action','isolated','items'].includes(k))
-   ||(input.keySlot!==undefined&&(!Number.isInteger(input.keySlot)||input.keySlot<1||input.keySlot>9||!slotFetch))
+   ||(input.keySlot!==undefined&&(!Number.isInteger(input.keySlot)||input.keySlot<0||input.keySlot>9||!slotFetch))
    ||(input.language!==undefined&&input.language!=='zh-CN')
    ||(input.isolated!==undefined&&(typeof input.isolated!=='boolean'||input.keySlot===undefined))
    ||(input.action!==undefined&&input.action!=='status')
@@ -150,7 +150,11 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
     if(!audio.error)return json({ok:true,...audio,voice:'Kore',model,providerAttempts:attempt+1});
     // Fixed categories only: no prompts, ID tokens, API keys, vendor messages or audio in logs.
     console.warn('hsk-voice-generation-failed',{reason:audio.error,attempt:attempt+1});
-    if(!audio.retryable||attempt===1||input.keySlot!==undefined)return json({ok:false,error:audio.error,providerAttempts:attempt+1,retryable:!!audio.retryable,retryAfter:600},502);
+    if(!audio.retryable||attempt===1||input.keySlot!==undefined){
+     const c=data?.candidates?.[0],parts=c?.content?.parts||[];
+     const finish=String(c?.finishReason||'MISSING');
+     return json({ok:false,error:audio.error,providerAttempts:attempt+1,retryable:!!audio.retryable,retryAfter:600,diagnostic:{finishReason:/^[A-Z_]{1,40}$/.test(finish)?finish:'UNKNOWN',candidateCount:Array.isArray(data?.candidates)?data.candidates.length:0,audioParts:parts.filter(p=>!!p?.inlineData?.data).length,textParts:parts.filter(p=>typeof p?.text==='string').length,model}},502);
+    }
     // A short word can produce OTHER with an instructional prompt. Retry the literal transcript.
     payload.contents[0].parts[0].text=text;
    }

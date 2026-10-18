@@ -198,3 +198,9 @@ Do not store secrets, API keys, personal data, or entire chat logs. This file is
 - Added authenticated read-only key metadata diagnosis; bounded provider detail redacts all configured credentials. No keys, identity tokens or audio in source notes.
 - Validation: 246 server tests; append-only preservation47 capabilities/170 guards; real Chromium feature runtime390/1440 passed. Worker deployed; PR115 holds source. Existing READY audio preserved.
 - After final prompt fix, resume saved one real audio: READY59->60,37 pending,0 review; enabled=true with next-run backoff. Slot2 isolated for invalid key and slot7 for confirmed daily quota. Manual generating diagnostic removed from editor, retained metadata-only diagnostic.
+
+## Voice slot 0 and incomplete-response diagnostics — 2026-10-19
+- Distinct GEMINI_API_KEY was previously shadowed by GEMINI_API_KEY_1. Preserve numbered slots and add the distinct legacy primary as slot 0, deduplicated within the 10-key bound. Private bridge, availability filter and both queue rotations accept slot 0; a selected zero is not treated as missing.
+- Incomplete TTS errors now expose only finishReason, candidate count, audio/text part counts and model. No transcript, key or audio payload is included.
+- Live: slot 0 produced valid audio on Gemini 2.5 TTS; slots 6/9 returned OTHER with zero audio and text parts. This does not establish that those keys are invalid. Other cooldowns remain intact.
+- 249 server tests and feature contracts pass; runtime checks at 390/1440 pass using installed Edge. Worker and Apps Script deployed; queue resumed repair-first. Final READY count must be verified from live sheet.

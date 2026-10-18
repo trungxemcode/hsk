@@ -66,3 +66,9 @@ test('300ms word-internal silence stays inside the same clip',()=>{
 test('saved master resumes after interruption without regeneration or duplicate individual files',()=>{
  const f=fixture();f.c.hskWarmIsolatedTick();const journal=f.tables.get('Voice_Batches');journal.rows[0][3]='MASTER';f.props.set('HSK_WARM_ENABLED','true');f.props.delete('HSK_WARM_RETRY_AT');f.c.hskWarmIsolatedTick();assert.equal(f.calls,1);assert.equal(f.files.size,6);assert.equal(journal.rows[0][3],'DONE');assert.equal(f.storage.sheet.rows.length,5);
 });
+
+test('repair queue can use legacy slot zero and treats it as a valid selected key',()=>{
+ const f=fixture();f.c.hskParallelAvailability_=()=>[{slot:0,retryAfter:0}];f.c.hskWarmIsolatedTick();
+ assert.equal(f.calls,1);assert.equal(f.tables.get('Voice_Batches').rows[0][6],0);
+ assert.equal(f.storage.sheet.rows.filter(r=>r[11]==='READY').length,5);
+});

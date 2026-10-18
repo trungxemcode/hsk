@@ -64,7 +64,7 @@ test('metadata diagnostics authenticate and never generate or mutate cooldown',a
  assert.equal(result.status,200);assert.equal((await result.json()).generateContent,true);assert.equal(calls,0);assert.equal(probes,1);
  const bad=new Request('https://worker.test/voice-precache',{method:'POST',body:JSON.stringify({action:'diagnose',keySlot:2})});
  assert.equal((await h(bad,env)).status,401);assert.equal(probes,1);
- assert.equal((await h(req({action:'diagnose',keySlot:0}),env)).status,400);assert.equal(probes,1);
+ assert.equal((await h(req({action:'diagnose',keySlot:-1}),env)).status,400);assert.equal(probes,1);
 });
 test('pinned metadata probe uses GET and does not consume cooldown selection',async()=>{
  let calls=0;const state={cursor:0,blocked:new Map()};

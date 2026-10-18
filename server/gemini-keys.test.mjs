@@ -106,3 +106,12 @@ test('timing exposes original slot numbers after deduplication, never credential
  assert.equal(events[2].slot,9);for(const key of keys)assert.equal(JSON.stringify(events).includes(key),false);
  const brokenObserver=createGeminiKeyFetch(async()=>ok(),pool,{onAttempt:()=>{throw Error('telemetry failure')}});assert.equal((await brokenObserver(url)).status,200);
 });
+
+test('distinct legacy primary remains reachable as slot zero without displacing slot one',async()=>{
+ const env={GEMINI_API_KEY:'legacy-primary',GEMINI_API_KEY_1:'numbered-one',GEMINI_API_KEY_9:'numbered-nine'};
+ assert.deepEqual(configuredGeminiKeys(env),['numbered-one','numbered-nine','legacy-primary']);
+ const used=[],f=createGeminiKeyFetch(async(u,i)=>{used.push(selected(i));return ok();},env,{slot:0,namespace:'hsk-tts-pool-v1'});
+ assert.deepEqual((await f.availability()).map(x=>x.slot),[1,9,0]);
+ assert.equal((await f(url,{})).status,200);assert.deepEqual(used,['legacy-primary']);
+ assert.deepEqual(configuredGeminiKeys({...env,GEMINI_API_KEY:'numbered-one'}),['numbered-one','numbered-nine']);
+});

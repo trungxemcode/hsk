@@ -69,3 +69,11 @@ test('matches configured OAuth client audience when provided',async()=>{
  assert.equal((await b.handler(req(),e)).status,401);
  assert.equal(b.stats().modelCalls,0);
 });
+
+test('incomplete audio diagnostics expose finish metadata without transcript or payload',async()=>{
+ const raw={candidates:[{finishReason:'OTHER',content:{parts:[{text:'private-transcript'}]}}]};
+ const b=build({responses:[raw]}),r=await b.handler(req(),await env()),d=await r.json();
+ assert.equal(d.error,'tts_generation_incomplete');assert.equal(d.diagnostic.finishReason,'OTHER');
+ assert.equal(d.diagnostic.textParts,1);assert.equal(d.diagnostic.audioParts,0);
+ assert.equal(JSON.stringify(d).includes('private-transcript'),false);
+});
