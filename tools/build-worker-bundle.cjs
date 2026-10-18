@@ -8,7 +8,8 @@ const reading=fs.readFileSync(path.join(server,'reading-service.mjs'),'utf8').re
 const aiControl=fs.readFileSync(path.join(server,'ai-control.mjs'),'utf8').replace(/\r\n/g,'\n');
 const aiBackup=fs.readFileSync(path.join(server,'ai-backup.mjs'),'utf8').replace(/\r\n/g,'\n');
 const geminiKeys=fs.readFileSync(path.join(server,'gemini-keys.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
+const voiceVerify=fs.readFileSync(path.join(server,'voice-partial-verify.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
 const voiceTts=fs.readFileSync(path.join(server,'voice-tts.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
 const handler=fs.readFileSync(path.join(server,'translator-worker.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'').trimStart();
-fs.writeFileSync(target,'// Standalone Cloudflare Worker. Generated from vocabulary + translator-worker.mjs.\nexport const vocabulary='+JSON.stringify(vocabulary)+';\n\n'+collector+'\n'+aiControl+'\n'+aiBackup+'\n'+geminiKeys+'\n'+reading+'\n'+voiceTts+'\n'+handler);
+fs.writeFileSync(target,'// Standalone Cloudflare Worker. Generated from vocabulary + translator-worker.mjs.\nexport const vocabulary='+JSON.stringify(vocabulary)+';\n\n'+collector+'\n'+aiControl+'\n'+aiBackup+'\n'+geminiKeys+'\n'+reading+'\n'+voiceVerify+'\n'+voiceTts+'\n'+handler);
 console.log('Bundled worker synchronized; '+vocabulary.length+' vocabulary entries preserved.');
