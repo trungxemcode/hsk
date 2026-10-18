@@ -24,5 +24,28 @@ function duration(step,speed=1){let ms;
  else {const g=step.grammar||{};ms=5000+[(g.pattern||''),(g.usage||''),(g.error||''),...(g.examples||[]).map(x=>x.cn+' '+x.vi)].join(' ').length*65;}
  return Math.max(6000,Math.min(90000,ms))/Math.max(.75,Math.min(1.5,Number(speed)||1));}
 
-const api={plan,duration};root.HSKGuidedCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
+// Short, single-purpose slides keep every supplied example visible without scrolling.
+function presentation(lesson,words,examples=()=>[]){
+ const slides=[],unique=[...new Map(words.filter(w=>w.han&&w.mean).map(w=>[w.han,w])).values()];
+ function parts(text,max){const chars=Array.from(String(text||'').trim()),out=[];while(chars.length)out.push(chars.splice(0,max).join(''));return out;}
+ function text(kind,label,value,max=100){for(const [i,part] of parts(value,max).entries())slides.push({kind,label,text:part,id:slides.length+':'+kind+':'+i});}
+ function line(x,label){
+  const cnParts=parts(x.cn,40),inlinePin=cnParts.length===1&&Array.from(x.pin||'').length<=100;
+  for(const cn of cnParts)slides.push({kind:'chinese',label,text:(x.speaker?x.speaker+': ':'')+cn,pin:inlinePin?x.pin||'':'',speak:cn,id:slides.length+':chinese'});
+  if(x.pin&&!inlinePin)text('pinyin',label+' · Pinyin',x.pin,100);
+  if(x.vi)text('meaning',label+' · Nghĩa',x.vi,120);
+ }
+ for(const [i,w] of unique.entries()){
+  slides.push({kind:'word',label:`Từ ${i+1}/${unique.length}`,text:w.han,pin:w.pin||'',speak:w.han,id:slides.length+':word:'+w.han});
+  text('meaning',w.han+' · Nghĩa',w.mean,120);
+  const list=examples(w)||[];for(const [j,x] of list.entries())line(x,`${w.han} · Ví dụ ${j+1}/${list.length}`);
+ }
+ const c=lesson.content||{};
+ for(const d of c.dialogues||[])for(const x of d.lines||[])line(x,d.title||'Hội thoại');
+ for(const x of c.reading?.lines||[])line(x,c.reading.title||'Bài đọc');
+ for(const g of c.grammar||[]){text('grammar',g.title,g.pattern,60);text('meaning',g.title,g.usage,120);for(const x of g.examples||[])line(x,g.title+' · Ví dụ');text('meaning',g.title+' · Lưu ý',g.error,120);}
+ return slides;
+}
+function slideDuration(slide,speed=1){return Math.max(2200,Math.min(10000,Array.from(slide.text||'').length*(slide.kind==='meaning'?65:95)))/Math.max(.75,Math.min(1.5,Number(speed)||1));}
+const api={plan,duration,presentation,slideDuration};root.HSKGuidedCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window==='object'?window:globalThis);

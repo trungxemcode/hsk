@@ -478,6 +478,16 @@
       "checks": [
         {
           "kind": "contains",
+          "file": "lesson-guided-core.js",
+          "value": "function presentation(lesson,words,examples"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-guided-presentation-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
           "file": "lesson-guided.js",
           "value": "window.HSKLessonGuided="
         },
