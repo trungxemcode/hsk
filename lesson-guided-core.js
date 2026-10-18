@@ -31,12 +31,17 @@ function presentation(lesson,words,examples=()=>[]){
  function text(kind,label,value,max=100){for(const [i,part] of parts(value,max).entries())slides.push({kind,label,text:part,id:slides.length+':'+kind+':'+i});}
  function line(x,label){
   const cnParts=parts(x.cn,40),inlinePin=cnParts.length===1&&Array.from(x.pin||'').length<=100;
-  for(const cn of cnParts)slides.push({kind:'chinese',label,text:(x.speaker?x.speaker+': ':'')+cn,pin:inlinePin?x.pin||'':'',speak:cn,id:slides.length+':chinese'});
+  for(const cn of cnParts){
+   const value=(x.speaker?x.speaker+': ':'')+cn,pin=inlinePin?x.pin||'':'';
+   slides.push({kind:'chinese',label:label+' · Nghe mẫu',text:value,pin,speak:cn,id:slides.length+':chinese'});
+   slides.push({kind:'repeat',label:label+' · Bạn đọc theo',text:value,pin,id:slides.length+':repeat'});
+  }
   if(x.pin&&!inlinePin)text('pinyin',label+' · Pinyin',x.pin,100);
   if(x.vi)text('meaning',label+' · Nghĩa',x.vi,120);
  }
  for(const [i,w] of unique.entries()){
   slides.push({kind:'word',label:`Từ ${i+1}/${unique.length}`,text:w.han,pin:w.pin||'',speak:w.han,id:slides.length+':word:'+w.han});
+  for(const han of [...new Set(Array.from(w.han).filter(c=>/\p{Script=Han}/u.test(c)))])slides.push({kind:'strokes',label:w.han+' · Xem nét viết 3 lượt',text:han,loops:3,id:slides.length+':strokes:'+han});
   text('meaning',w.han+' · Nghĩa',w.mean,120);
   const list=examples(w)||[];for(const [j,x] of list.entries())line(x,`${w.han} · Ví dụ ${j+1}/${list.length}`);
  }
@@ -46,6 +51,9 @@ function presentation(lesson,words,examples=()=>[]){
  for(const g of c.grammar||[]){text('grammar',g.title,g.pattern,60);text('meaning',g.title,g.usage,120);for(const x of g.examples||[])line(x,g.title+' · Ví dụ');text('meaning',g.title+' · Lưu ý',g.error,120);}
  return slides;
 }
-function slideDuration(slide,speed=1){return Math.max(2200,Math.min(10000,Array.from(slide.text||'').length*(slide.kind==='meaning'?65:95)))/Math.max(.75,Math.min(1.5,Number(speed)||1));}
-const api={plan,duration,presentation,slideDuration};root.HSKGuidedCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
+function slideDuration(slide,speed=.75){return Math.max(6500,Math.min(24000,Array.from(slide.text||'').length*(slide.kind==='meaning'?130:180)))/Math.max(.65,Math.min(1,Number(speed)||.75));}
+function practiceLead(){return 2500;}
+function transitionPause(){return 2200;}
+function karaokeDuration(slide,speed=.75,modelMs=0){const count=Array.from(slide.text||'').filter(c=>/\p{Script=Han}/u.test(c)).length;return Math.max(8000,count*650,modelMs*1.4)/Math.max(.65,Math.min(1,Number(speed)||.75));}
+const api={plan,duration,presentation,slideDuration,practiceLead,transitionPause,karaokeDuration};root.HSKGuidedCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window==='object'?window:globalThis);

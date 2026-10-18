@@ -479,6 +479,16 @@
         {
           "kind": "contains",
           "file": "lesson-guided-core.js",
+          "value": "function karaokeDuration("
+        },
+        {
+          "kind": "contains",
+          "file": "writing-practice.js",
+          "value": "characterData:charData"
+        },
+        {
+          "kind": "contains",
+          "file": "lesson-guided-core.js",
           "value": "function presentation(lesson,words,examples"
         },
         {
