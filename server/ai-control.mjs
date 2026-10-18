@@ -5,9 +5,10 @@ export class HSkaIControl {
  async fetch(request){
   if(request.method!=='POST')return Response.json({error:'method'},{status:405});
   let data;try{data=await request.json()}catch{return Response.json({error:'payload'},{status:400})}
-  if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock','gemini-pick','gemini-report'].includes(data.action))
+  if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock','gemini-pick','gemini-report','abuse-start','abuse-finish'].includes(data.action))
    return Response.json({error:'action'},{status:400});
   const time=Date.now();
+  if(data.action==='abuse-start'||data.action==='abuse-finish')return abuseControl(this.state.storage,this.env,data,time);
   if(data.action==='gemini-pick'){
    const validId=id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id);
    if(!Array.isArray(data.ids)||data.ids.length<2||data.ids.length>10||!data.ids.every(validId)||new Set(data.ids).size!==data.ids.length||!Array.isArray(data.excluded)||data.excluded.length>10||!data.excluded.every(id=>data.ids.includes(id)))return Response.json({error:'keys'},{status:400});
@@ -34,9 +35,10 @@ export class HSkaIControl {
    const day=new Date(time).toISOString().slice(0,10),minute=Math.floor(time/60000);
    const globalDayLimit=Math.max(1,Math.min(10000,Number(this.env.AI_GLOBAL_DAILY_LIMIT)||180));
    const globalMinuteLimit=Math.max(1,Math.min(1000,Number(this.env.AI_GLOBAL_MINUTE_LIMIT)||10));
-   const userDayLimit=Math.max(1,Math.min(500,Number(this.env.AI_USER_DAILY_LIMIT)||50));
-   const readingDayLimit=Math.max(1,Math.min(100,Number(this.env.AI_USER_READING_DAILY_LIMIT)||15));
-   const queryDayLimit=Math.max(1,Math.min(500,Number(this.env.AI_USER_QUERY_DAILY_LIMIT)||35));
+   const fresh=this.env.AI_ABUSE_ENABLED==='true'&&data.newAccount===true;
+   const userDayLimit=Math.max(1,Math.min(fresh?13:500,Number(this.env.AI_USER_DAILY_LIMIT)||50));
+   const readingDayLimit=Math.max(1,Math.min(fresh?3:100,Number(this.env.AI_USER_READING_DAILY_LIMIT)||15));
+   const queryDayLimit=Math.max(1,Math.min(fresh?10:500,Number(this.env.AI_USER_QUERY_DAILY_LIMIT)||35));
    const userKey='u:'+day+':'+data.uid,readingKey='r:'+day+':'+data.uid;
    const dayKey='g:'+day,minuteKey='m:'+minute;
    const result=await this.state.storage.transaction(async t=>{
@@ -44,9 +46,9 @@ export class HSkaIControl {
     const count=[globalDay||0,globalMinute||0,userDay||0,userReading||0];
     if(count[0]>=globalDayLimit)return {allowed:false,reason:'global-daily'};
     if(count[1]>=globalMinuteLimit)return {allowed:false,reason:'global-minute'};
-    if(count[2]>=userDayLimit)return {allowed:false,reason:'user-daily'};
-    if(data.route!=='reading'&&Math.max(0,count[2]-count[3])>=queryDayLimit)return {allowed:false,reason:'user-query-daily'};
-    if(data.route==='reading'&&count[3]>=readingDayLimit)return {allowed:false,reason:'user-reading-daily'};
+    if(count[2]>=userDayLimit)return {allowed:false,reason:fresh?'new-user-daily':'user-daily'};
+    if(data.route!=='reading'&&Math.max(0,count[2]-count[3])>=queryDayLimit)return {allowed:false,reason:fresh?'new-user-query-daily':'user-query-daily'};
+    if(data.route==='reading'&&count[3]>=readingDayLimit)return {allowed:false,reason:fresh?'new-user-reading-daily':'user-reading-daily'};
     const updates={[dayKey]:count[0]+1,[minuteKey]:count[1]+1,[userKey]:count[2]+1};
     if(data.route==='reading')updates[readingKey]=count[3]+1;
     await t.put(updates);
@@ -74,7 +76,7 @@ export class HSkaIControl {
   if(data.action==='put'){
    if(!data.story||typeof data.story!=='object'||JSON.stringify(data.story).length>30000)return Response.json({error:'story'},{status:400});
    await this.state.storage.put(key,{story:data.story,expiresAt:time+14*86400000});
-   await this.state.storage.delete(lock);
+   if(data.keepLock!==true)await this.state.storage.delete(lock);
    return Response.json({ok:true});
   }
   return Response.json({error:'unknown'},{status:400});
@@ -94,4 +96,44 @@ export async function controlCall(env,action,data={}){
  const response=await stub.fetch('https://internal.hsk/control',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,...data})});
  const result=await response.json();
  return {status:response.status,...result};
+}
+
+// Only the authenticated Worker calls these actions. Never trust a browser admin flag.
+async function abuseControl(storage,env,data,time){
+ if(typeof data.uid!=='string'||!/^[-\w:]{1,150}$/.test(data.uid))return Response.json({error:'input'},{status:400});
+ if((env.ADMIN_UIDS||'').split(',').map(s=>s.trim()).includes(data.uid))return Response.json({allowed:true,unlimited:true});
+ if(env.AI_ABUSE_ENABLED!=='true')return Response.json({allowed:true,disabled:true});
+ if(typeof data.lease!=='string'||!/^[a-f0-9-]{36}$/.test(data.lease))return Response.json({error:'lease'},{status:400});
+ const owner=await abuseFingerprint('owner',data.uid),key='abuse:u:'+owner;
+ if(data.action==='abuse-start'){
+  if(typeof data.fingerprint!=='string'||!/^[a-f0-9]{64}$/.test(data.fingerprint)||!['reading','query'].includes(data.kind))return Response.json({error:'input'},{status:400});
+  const result=await storage.transaction(async t=>{
+   if(env.AI_PAUSED==='true')return {allowed:false,reason:'paused',retryAfter:60};
+   const trip=await t.get('abuse:trip:'+data.kind);
+   if(trip?.until>time)return {allowed:false,reason:'circuit-open',retryAfter:Math.ceil((trip.until-time)/1000)};
+   const current=await t.get(key)||{};
+   if(current.lease&&current.expiresAt>time)return {allowed:false,reason:current.fingerprint===data.fingerprint?'duplicate':'concurrent',retryAfter:Math.max(1,Math.ceil((current.expiresAt-time)/1000))};
+   const next=Math.max(current.nextAt||0,data.kind==='reading'?current.readingAt||0:0);
+   if(next>time)return {allowed:false,reason:'rate',retryAfter:Math.max(1,Math.ceil((next-time)/1000))};
+   await t.put(key,{lease:data.lease,kind:data.kind,fingerprint:data.fingerprint,expiresAt:time+150000,nextAt:time+3000,readingAt:data.kind==='reading'?time+10000:current.readingAt||0});
+   return {allowed:true,lease:data.lease};
+  });return Response.json(result,{status:result.allowed?200:429});
+ }
+ if(!Number.isInteger(data.status)||data.status<200||data.status>599)return Response.json({error:'status'},{status:400});
+ await storage.transaction(async t=>{
+  const current=await t.get(key);
+  // A stale completion must not release a replacement request or alter its circuit.
+  if(current?.lease!==data.lease)return;
+  await t.put(key,{nextAt:current.nextAt,readingAt:current.readingAt});
+  if(data.status>=500){
+   const tripKey='abuse:trip:'+current.kind,prior=await t.get(tripKey)||{},fresh=prior.windowAt>time-120000;
+   const failures=fresh?(prior.failures||0)+1:1;
+   await t.put(tripKey,{windowAt:fresh?prior.windowAt:time,failures,until:failures>=8?Math.max(prior.until||0,time+60000):prior.until||0});
+  }
+ });return Response.json({ok:true});
+}
+export async function abuseFingerprint(route,value){
+ const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
+ const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify([route,canonical(value)])));
+ return Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
 }

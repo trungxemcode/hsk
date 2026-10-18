@@ -1,7 +1,7 @@
 import { vocabulary } from './hsk-vocabulary.mjs';
 import { validateHandwritingSample, submitHandwritingSample } from './handwriting-samples.mjs';
 import { checkReadingBody, buildReadingStory, validReadingStory } from './reading-service.mjs';
-import { controlCall, readingCacheKey, HSkaIControl } from './ai-control.mjs';
+import { controlCall, readingCacheKey, HSkaIControl, abuseFingerprint } from './ai-control.mjs';
 import { createAiFailoverFetch, createAiRoleFetch, AI_TIMEOUTS } from './ai-backup.mjs';
 import { configuredGeminiKeys, createGeminiKeyFetch } from './gemini-keys.mjs';
 
@@ -26,7 +26,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-reading-fast-3-4-2';
+export const WORKER_REVISION='hsk-ai-abuse-guard-3-5-1';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -42,12 +42,12 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
  const geminiState={cursor:0,blocked:new Map()};
  const sourceCache=new Map();
  return async(request,env)=>{
-  const timings=[];
+  const timings=[];let abuseLease=null,abuseUid='',responseStatus=500;
   const keyFetch=createGeminiKeyFetch(rawFetchFn,env,{now,state:geminiState,onAttempt:entry=>timings.push(entry)});
   let fetchFn=createAiFailoverFetch(keyFetch,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
   const origin=request.headers.get('Origin')||'',allowed=(env.ALLOWED_ORIGINS||'https://trungxemcode.github.io').split(',').map(s=>s.trim());
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin','X-HSK-Worker-Version':WORKER_REVISION};
-  const reply=(value,status=200)=>new Response(JSON.stringify(value),{status,headers});
+  const reply=(value,status=200)=>{responseStatus=status;return new Response(JSON.stringify(value),{status,headers});};
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
   Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
@@ -94,6 +94,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
   }else if(typeof body.text!=='string'||!body.text.trim()||body.text.length>500)return reply({error:'Nhập câu tối đa 500 ký tự.'},400);
   fetchFn=createAiRoleFetch(keyFetch,env,{route,body,validateData:isReading?data=>validReadingStory(data,{genre:body.genre||'dialogue',hsk:body.hsk,quality:!!body.genre}):undefined,onProvider:provider=>{headers['X-HSK-AI-Provider']=provider;},onAttempt:entry=>{if(isReading)timings.push(entry);}});
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isOcr?110000:isReading?85000:isAsk?45000:60000);
+  const abortRequest=()=>controller.abort();if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',abortRequest,{once:true});
   try{
    const auth=await fetchFn('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(env.FIREBASE_API_KEY),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token}),signal:controller.signal});
    if(!auth.ok)return reply({error:'Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại.'},401);
@@ -101,11 +102,22 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    const restricted=(env.ALLOWED_UIDS||'').split(',').filter(Boolean);if(restricted.length&&!restricted.includes(c.sub))return reply({error:'Tài khoản chưa được bật dịch câu.'},403);
    if(isSample){const result=await submitHandwritingSample(body,c.sub,env,now());return reply(result.body,result.status);}
    const isAdmin=(env.ADMIN_UIDS||'').split(',').map(uid=>uid.trim()).filter(Boolean).includes(account.localId);
+   if(!isAdmin&&env.AI_ABUSE_ENABLED==='true'){
+    if(env.AI_REQUIRE_VERIFIED_EMAIL==='true'&&account.emailVerified!==true)return reply({error:'Hãy xác minh email trong trang Tài khoản trước khi dùng AI.',code:'AI_EMAIL_UNVERIFIED'},403);
+    if(!env.AI_CONTROL)return reply({error:'Dịch vụ bảo vệ AI chưa sẵn sàng. Hãy thử lại sau.',code:'AI_GUARD_UNAVAILABLE'},503);
+    const lease=crypto.randomUUID(),guard=await controlCall(env,'abuse-start',{uid:account.localId,lease,kind:isReading?'reading':'query',fingerprint:await abuseFingerprint(route,body)});
+    if(!guard?.allowed){
+     if(guard?.retryAfter)headers['Retry-After']=String(guard.retryAfter);
+     const reason=guard?.reason||'unavailable';console.info('hsk-ai-abuse-block',{route,reason});
+     return reply({error:reason==='duplicate'?'Yêu cầu này đang được xử lý. Đợi kết quả hiện tại.':reason==='concurrent'?'Một yêu cầu AI khác của tài khoản đang chạy. Hãy đợi hoàn tất.':reason==='rate'?'Bạn gửi yêu cầu quá nhanh. Hãy đợi vài giây.':'AI đang tạm nghỉ để bảo vệ hạn mức. Bạn vẫn có thể học và đọc lại bài đã lưu.',code:'AI_ABUSE_BLOCKED',reason},['paused','circuit-open','unavailable'].includes(reason)?503:429);
+    }
+    abuseLease=lease;abuseUid=account.localId;
+   }
    // Per-isolate cooldown reduces double submissions; provider free-tier quotas remain the global limit.
    const cooldownKey=(isReading?'reading:':isDictionaryTranslate?'dictionary-translate:':isHandwriting?'handwriting:':isOcr?'ocr:':isAsk?'ask:':'translate:')+c.sub;
-   if(!isAdmin&&(cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
+   if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true'&&(cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
    if(cooldowns.size>1000)for(const [uid,t] of cooldowns)if(t<=now())cooldowns.delete(uid);
-   if(!isAdmin)cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
+   if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true')cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
    const level=body.hsk,model=env.GEMINI_MODEL||'gemini-3.5-flash-lite';
    let readingKey=null,readingLocked=false;
    if(isReading){
@@ -114,20 +126,20 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
     const cached=await controlCall(env,'get',{key:readingKey});
     if(cached?.hit)return reply({story:cached.story,cached:true});
     const lock=await controlCall(env,'lock',{key:readingKey});
-    if(lock&&!lock.acquired)return reply({error:'Bài đọc này đang được tạo. Hãy thử lại sau ít giây.'},429);
+    if(lock&&!lock.acquired&&!isAdmin)return reply({error:'Bài đọc này đang được tạo. Hãy thử lại sau ít giây.'},429);
     readingLocked=!!lock?.acquired;
    }
    try{
-    const budget=await controlCall(env,'reserve',{uid:c.sub,route:isReading?'reading':isOcr?'ocr':isHandwriting?'handwriting':isPlan?'study-plan':isAsk?'ask':'translate'});
+    const budget=await controlCall(env,'reserve',{uid:c.sub,newAccount:Number(account.createdAt)>now()-86400000,route:isReading?'reading':isOcr?'ocr':isHandwriting?'handwriting':isPlan?'study-plan':isAsk?'ask':'translate'});
     if(budget&&!budget.allowed){
-     const message=budget.reason==='user-reading-daily'?'Bạn đã dùng hết 15 lượt tạo bài đọc hôm nay. Vẫn có thể đọc lại bài đã lưu.':budget.reason==='user-query-daily'?'Bạn đã dùng hết 35 lượt truy vấn AI hôm nay. Vẫn có thể tạo bài đọc nếu còn lượt.':budget.reason==='user-daily'?'Bạn đã dùng hết 50 lượt AI hôm nay.':budget.reason==='global-minute'?'App đang có nhiều yêu cầu AI. Hãy thử lại sau một phút.':'App đã đạt giới hạn AI chung trong ngày.';
+     const message=budget.reason==='new-user-reading-daily'?'Tài khoản trong 24 giờ đầu có tối đa 3 lượt tạo bài đọc/ngày.':budget.reason==='new-user-query-daily'?'Tài khoản trong 24 giờ đầu có tối đa 10 lượt truy vấn AI/ngày.':budget.reason==='new-user-daily'?'Tài khoản trong 24 giờ đầu có tối đa 13 lượt AI/ngày.':budget.reason==='user-reading-daily'?'Bạn đã dùng hết 15 lượt tạo bài đọc hôm nay. Vẫn có thể đọc lại bài đã lưu.':budget.reason==='user-query-daily'?'Bạn đã dùng hết 35 lượt truy vấn AI hôm nay. Vẫn có thể tạo bài đọc nếu còn lượt.':budget.reason==='user-daily'?'Bạn đã dùng hết 50 lượt AI hôm nay.':budget.reason==='global-minute'?'App đang có nhiều yêu cầu AI. Hãy thử lại sau một phút.':'App đã đạt giới hạn AI chung trong ngày.';
      return reply({error:message,code:'AI_BUDGET_EXHAUSTED',reason:budget.reason},429);
     }
     if(isReading){
      const started=Date.now();
      const result=await buildReadingStory(body,{fetchFn,env,signal:controller.signal,model,sourceCache,onTiming:entry=>timings.push(entry)});
      console.info('hsk-reading-timing',{revision:WORKER_REVISION,ms:Date.now()-started,status:result.status,steps:timings});
-     if(result.status===200&&result.data.story)await controlCall(env,'put',{key:readingKey,story:result.data.story});
+     if(result.status===200&&result.data.story)await controlCall(env,'put',{key:readingKey,story:result.data.story,keepLock:!readingLocked});
      return reply(result.data,result.status);
     }
    }finally{
@@ -217,7 +229,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    if(!['chinese','pinyin','explanation','note'].every(k=>typeof result[k]==='string'&&result[k].length<=4000)||!result.chinese.trim()||!result.pinyin.trim())return reply({error:'Bản dịch chưa đầy đủ. Hãy thử lại.'},502);
    if(zhToVi&&(typeof result.vietnamese!=='string'||!result.vietnamese.trim()||result.vietnamese.length>4000))return reply({error:'Bản dịch tiếng Việt chưa đầy đủ.'},502);
    return reply({direction:zhToVi?'zh-vi':'vi-zh',...(zhToVi?{vietnamese:result.vietnamese}:{}),chinese:zhToVi?body.text.trim():result.chinese,pinyin:result.pinyin,explanation:result.explanation,note:result.note,hsk:level,outOfVocabulary:outOfVocabulary(zhToVi?body.text.trim():result.chinese,level)});
-  }catch(error){return reply({error:error.name==='AbortError'?(isOcr?'Gemini chưa đọc xong ảnh. Hãy chọn vùng có chữ và thử lại.':'Dịch quá lâu. Hãy thử lại.'):'Không kết nối được dịch vụ dịch.'},504);}finally{clearTimeout(timer);}
+  }catch(error){return reply({error:error.name==='AbortError'?(isOcr?'Gemini chưa đọc xong ảnh. Hãy chọn vùng có chữ và thử lại.':'Dịch quá lâu. Hãy thử lại.'):'Không kết nối được dịch vụ dịch.'},504);}finally{clearTimeout(timer);request.signal.removeEventListener('abort',abortRequest);if(abuseLease)await controlCall(env,'abuse-finish',{uid:abuseUid,lease:abuseLease,status:request.signal.aborted?499:responseStatus}).catch(()=>console.warn('hsk-ai-guard-release-failed'));}
  };
 }
 export default {fetch:createHandler()};

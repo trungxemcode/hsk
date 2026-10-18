@@ -34,9 +34,10 @@ export class HSkaIControl {
  async fetch(request){
   if(request.method!=='POST')return Response.json({error:'method'},{status:405});
   let data;try{data=await request.json()}catch{return Response.json({error:'payload'},{status:400})}
-  if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock','gemini-pick','gemini-report'].includes(data.action))
+  if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock','gemini-pick','gemini-report','abuse-start','abuse-finish'].includes(data.action))
    return Response.json({error:'action'},{status:400});
   const time=Date.now();
+  if(data.action==='abuse-start'||data.action==='abuse-finish')return abuseControl(this.state.storage,this.env,data,time);
   if(data.action==='gemini-pick'){
    const validId=id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id);
    if(!Array.isArray(data.ids)||data.ids.length<2||data.ids.length>10||!data.ids.every(validId)||new Set(data.ids).size!==data.ids.length||!Array.isArray(data.excluded)||data.excluded.length>10||!data.excluded.every(id=>data.ids.includes(id)))return Response.json({error:'keys'},{status:400});
@@ -63,9 +64,10 @@ export class HSkaIControl {
    const day=new Date(time).toISOString().slice(0,10),minute=Math.floor(time/60000);
    const globalDayLimit=Math.max(1,Math.min(10000,Number(this.env.AI_GLOBAL_DAILY_LIMIT)||180));
    const globalMinuteLimit=Math.max(1,Math.min(1000,Number(this.env.AI_GLOBAL_MINUTE_LIMIT)||10));
-   const userDayLimit=Math.max(1,Math.min(500,Number(this.env.AI_USER_DAILY_LIMIT)||50));
-   const readingDayLimit=Math.max(1,Math.min(100,Number(this.env.AI_USER_READING_DAILY_LIMIT)||15));
-   const queryDayLimit=Math.max(1,Math.min(500,Number(this.env.AI_USER_QUERY_DAILY_LIMIT)||35));
+   const fresh=this.env.AI_ABUSE_ENABLED==='true'&&data.newAccount===true;
+   const userDayLimit=Math.max(1,Math.min(fresh?13:500,Number(this.env.AI_USER_DAILY_LIMIT)||50));
+   const readingDayLimit=Math.max(1,Math.min(fresh?3:100,Number(this.env.AI_USER_READING_DAILY_LIMIT)||15));
+   const queryDayLimit=Math.max(1,Math.min(fresh?10:500,Number(this.env.AI_USER_QUERY_DAILY_LIMIT)||35));
    const userKey='u:'+day+':'+data.uid,readingKey='r:'+day+':'+data.uid;
    const dayKey='g:'+day,minuteKey='m:'+minute;
    const result=await this.state.storage.transaction(async t=>{
@@ -73,9 +75,9 @@ export class HSkaIControl {
     const count=[globalDay||0,globalMinute||0,userDay||0,userReading||0];
     if(count[0]>=globalDayLimit)return {allowed:false,reason:'global-daily'};
     if(count[1]>=globalMinuteLimit)return {allowed:false,reason:'global-minute'};
-    if(count[2]>=userDayLimit)return {allowed:false,reason:'user-daily'};
-    if(data.route!=='reading'&&Math.max(0,count[2]-count[3])>=queryDayLimit)return {allowed:false,reason:'user-query-daily'};
-    if(data.route==='reading'&&count[3]>=readingDayLimit)return {allowed:false,reason:'user-reading-daily'};
+    if(count[2]>=userDayLimit)return {allowed:false,reason:fresh?'new-user-daily':'user-daily'};
+    if(data.route!=='reading'&&Math.max(0,count[2]-count[3])>=queryDayLimit)return {allowed:false,reason:fresh?'new-user-query-daily':'user-query-daily'};
+    if(data.route==='reading'&&count[3]>=readingDayLimit)return {allowed:false,reason:fresh?'new-user-reading-daily':'user-reading-daily'};
     const updates={[dayKey]:count[0]+1,[minuteKey]:count[1]+1,[userKey]:count[2]+1};
     if(data.route==='reading')updates[readingKey]=count[3]+1;
     await t.put(updates);
@@ -103,7 +105,7 @@ export class HSkaIControl {
   if(data.action==='put'){
    if(!data.story||typeof data.story!=='object'||JSON.stringify(data.story).length>30000)return Response.json({error:'story'},{status:400});
    await this.state.storage.put(key,{story:data.story,expiresAt:time+14*86400000});
-   await this.state.storage.delete(lock);
+   if(data.keepLock!==true)await this.state.storage.delete(lock);
    return Response.json({ok:true});
   }
   return Response.json({error:'unknown'},{status:400});
@@ -123,6 +125,46 @@ export async function controlCall(env,action,data={}){
  const response=await stub.fetch('https://internal.hsk/control',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,...data})});
  const result=await response.json();
  return {status:response.status,...result};
+}
+
+// Only the authenticated Worker calls these actions. Never trust a browser admin flag.
+async function abuseControl(storage,env,data,time){
+ if(typeof data.uid!=='string'||!/^[-\w:]{1,150}$/.test(data.uid))return Response.json({error:'input'},{status:400});
+ if((env.ADMIN_UIDS||'').split(',').map(s=>s.trim()).includes(data.uid))return Response.json({allowed:true,unlimited:true});
+ if(env.AI_ABUSE_ENABLED!=='true')return Response.json({allowed:true,disabled:true});
+ if(typeof data.lease!=='string'||!/^[a-f0-9-]{36}$/.test(data.lease))return Response.json({error:'lease'},{status:400});
+ const owner=await abuseFingerprint('owner',data.uid),key='abuse:u:'+owner;
+ if(data.action==='abuse-start'){
+  if(typeof data.fingerprint!=='string'||!/^[a-f0-9]{64}$/.test(data.fingerprint)||!['reading','query'].includes(data.kind))return Response.json({error:'input'},{status:400});
+  const result=await storage.transaction(async t=>{
+   if(env.AI_PAUSED==='true')return {allowed:false,reason:'paused',retryAfter:60};
+   const trip=await t.get('abuse:trip:'+data.kind);
+   if(trip?.until>time)return {allowed:false,reason:'circuit-open',retryAfter:Math.ceil((trip.until-time)/1000)};
+   const current=await t.get(key)||{};
+   if(current.lease&&current.expiresAt>time)return {allowed:false,reason:current.fingerprint===data.fingerprint?'duplicate':'concurrent',retryAfter:Math.max(1,Math.ceil((current.expiresAt-time)/1000))};
+   const next=Math.max(current.nextAt||0,data.kind==='reading'?current.readingAt||0:0);
+   if(next>time)return {allowed:false,reason:'rate',retryAfter:Math.max(1,Math.ceil((next-time)/1000))};
+   await t.put(key,{lease:data.lease,kind:data.kind,fingerprint:data.fingerprint,expiresAt:time+150000,nextAt:time+3000,readingAt:data.kind==='reading'?time+10000:current.readingAt||0});
+   return {allowed:true,lease:data.lease};
+  });return Response.json(result,{status:result.allowed?200:429});
+ }
+ if(!Number.isInteger(data.status)||data.status<200||data.status>599)return Response.json({error:'status'},{status:400});
+ await storage.transaction(async t=>{
+  const current=await t.get(key);
+  // A stale completion must not release a replacement request or alter its circuit.
+  if(current?.lease!==data.lease)return;
+  await t.put(key,{nextAt:current.nextAt,readingAt:current.readingAt});
+  if(data.status>=500){
+   const tripKey='abuse:trip:'+current.kind,prior=await t.get(tripKey)||{},fresh=prior.windowAt>time-120000;
+   const failures=fresh?(prior.failures||0)+1:1;
+   await t.put(tripKey,{windowAt:fresh?prior.windowAt:time,failures,until:failures>=8?Math.max(prior.until||0,time+60000):prior.until||0});
+  }
+ });return Response.json({ok:true});
+}
+export async function abuseFingerprint(route,value){
+ const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
+ const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify([route,canonical(value)])));
+ return Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
 }
 
 // Configured text provider; credentials remain in server secrets.
@@ -470,7 +512,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-reading-fast-3-4-2';
+export const WORKER_REVISION='hsk-ai-abuse-guard-3-5-1';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -486,12 +528,12 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
  const geminiState={cursor:0,blocked:new Map()};
  const sourceCache=new Map();
  return async(request,env)=>{
-  const timings=[];
+  const timings=[];let abuseLease=null,abuseUid='',responseStatus=500;
   const keyFetch=createGeminiKeyFetch(rawFetchFn,env,{now,state:geminiState,onAttempt:entry=>timings.push(entry)});
   let fetchFn=createAiFailoverFetch(keyFetch,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
   const origin=request.headers.get('Origin')||'',allowed=(env.ALLOWED_ORIGINS||'https://trungxemcode.github.io').split(',').map(s=>s.trim());
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin','X-HSK-Worker-Version':WORKER_REVISION};
-  const reply=(value,status=200)=>new Response(JSON.stringify(value),{status,headers});
+  const reply=(value,status=200)=>{responseStatus=status;return new Response(JSON.stringify(value),{status,headers});};
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
   Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
@@ -538,6 +580,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
   }else if(typeof body.text!=='string'||!body.text.trim()||body.text.length>500)return reply({error:'Nhập câu tối đa 500 ký tự.'},400);
   fetchFn=createAiRoleFetch(keyFetch,env,{route,body,validateData:isReading?data=>validReadingStory(data,{genre:body.genre||'dialogue',hsk:body.hsk,quality:!!body.genre}):undefined,onProvider:provider=>{headers['X-HSK-AI-Provider']=provider;},onAttempt:entry=>{if(isReading)timings.push(entry);}});
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isOcr?110000:isReading?85000:isAsk?45000:60000);
+  const abortRequest=()=>controller.abort();if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',abortRequest,{once:true});
   try{
    const auth=await fetchFn('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(env.FIREBASE_API_KEY),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token}),signal:controller.signal});
    if(!auth.ok)return reply({error:'Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại.'},401);
@@ -545,11 +588,22 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    const restricted=(env.ALLOWED_UIDS||'').split(',').filter(Boolean);if(restricted.length&&!restricted.includes(c.sub))return reply({error:'Tài khoản chưa được bật dịch câu.'},403);
    if(isSample){const result=await submitHandwritingSample(body,c.sub,env,now());return reply(result.body,result.status);}
    const isAdmin=(env.ADMIN_UIDS||'').split(',').map(uid=>uid.trim()).filter(Boolean).includes(account.localId);
+   if(!isAdmin&&env.AI_ABUSE_ENABLED==='true'){
+    if(env.AI_REQUIRE_VERIFIED_EMAIL==='true'&&account.emailVerified!==true)return reply({error:'Hãy xác minh email trong trang Tài khoản trước khi dùng AI.',code:'AI_EMAIL_UNVERIFIED'},403);
+    if(!env.AI_CONTROL)return reply({error:'Dịch vụ bảo vệ AI chưa sẵn sàng. Hãy thử lại sau.',code:'AI_GUARD_UNAVAILABLE'},503);
+    const lease=crypto.randomUUID(),guard=await controlCall(env,'abuse-start',{uid:account.localId,lease,kind:isReading?'reading':'query',fingerprint:await abuseFingerprint(route,body)});
+    if(!guard?.allowed){
+     if(guard?.retryAfter)headers['Retry-After']=String(guard.retryAfter);
+     const reason=guard?.reason||'unavailable';console.info('hsk-ai-abuse-block',{route,reason});
+     return reply({error:reason==='duplicate'?'Yêu cầu này đang được xử lý. Đợi kết quả hiện tại.':reason==='concurrent'?'Một yêu cầu AI khác của tài khoản đang chạy. Hãy đợi hoàn tất.':reason==='rate'?'Bạn gửi yêu cầu quá nhanh. Hãy đợi vài giây.':'AI đang tạm nghỉ để bảo vệ hạn mức. Bạn vẫn có thể học và đọc lại bài đã lưu.',code:'AI_ABUSE_BLOCKED',reason},['paused','circuit-open','unavailable'].includes(reason)?503:429);
+    }
+    abuseLease=lease;abuseUid=account.localId;
+   }
    // Per-isolate cooldown reduces double submissions; provider free-tier quotas remain the global limit.
    const cooldownKey=(isReading?'reading:':isDictionaryTranslate?'dictionary-translate:':isHandwriting?'handwriting:':isOcr?'ocr:':isAsk?'ask:':'translate:')+c.sub;
-   if(!isAdmin&&(cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
+   if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true'&&(cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
    if(cooldowns.size>1000)for(const [uid,t] of cooldowns)if(t<=now())cooldowns.delete(uid);
-   if(!isAdmin)cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
+   if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true')cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
    const level=body.hsk,model=env.GEMINI_MODEL||'gemini-3.5-flash-lite';
    let readingKey=null,readingLocked=false;
    if(isReading){
@@ -558,20 +612,20 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
     const cached=await controlCall(env,'get',{key:readingKey});
     if(cached?.hit)return reply({story:cached.story,cached:true});
     const lock=await controlCall(env,'lock',{key:readingKey});
-    if(lock&&!lock.acquired)return reply({error:'Bài đọc này đang được tạo. Hãy thử lại sau ít giây.'},429);
+    if(lock&&!lock.acquired&&!isAdmin)return reply({error:'Bài đọc này đang được tạo. Hãy thử lại sau ít giây.'},429);
     readingLocked=!!lock?.acquired;
    }
    try{
-    const budget=await controlCall(env,'reserve',{uid:c.sub,route:isReading?'reading':isOcr?'ocr':isHandwriting?'handwriting':isPlan?'study-plan':isAsk?'ask':'translate'});
+    const budget=await controlCall(env,'reserve',{uid:c.sub,newAccount:Number(account.createdAt)>now()-86400000,route:isReading?'reading':isOcr?'ocr':isHandwriting?'handwriting':isPlan?'study-plan':isAsk?'ask':'translate'});
     if(budget&&!budget.allowed){
-     const message=budget.reason==='user-reading-daily'?'Bạn đã dùng hết 15 lượt tạo bài đọc hôm nay. Vẫn có thể đọc lại bài đã lưu.':budget.reason==='user-query-daily'?'Bạn đã dùng hết 35 lượt truy vấn AI hôm nay. Vẫn có thể tạo bài đọc nếu còn lượt.':budget.reason==='user-daily'?'Bạn đã dùng hết 50 lượt AI hôm nay.':budget.reason==='global-minute'?'App đang có nhiều yêu cầu AI. Hãy thử lại sau một phút.':'App đã đạt giới hạn AI chung trong ngày.';
+     const message=budget.reason==='new-user-reading-daily'?'Tài khoản trong 24 giờ đầu có tối đa 3 lượt tạo bài đọc/ngày.':budget.reason==='new-user-query-daily'?'Tài khoản trong 24 giờ đầu có tối đa 10 lượt truy vấn AI/ngày.':budget.reason==='new-user-daily'?'Tài khoản trong 24 giờ đầu có tối đa 13 lượt AI/ngày.':budget.reason==='user-reading-daily'?'Bạn đã dùng hết 15 lượt tạo bài đọc hôm nay. Vẫn có thể đọc lại bài đã lưu.':budget.reason==='user-query-daily'?'Bạn đã dùng hết 35 lượt truy vấn AI hôm nay. Vẫn có thể tạo bài đọc nếu còn lượt.':budget.reason==='user-daily'?'Bạn đã dùng hết 50 lượt AI hôm nay.':budget.reason==='global-minute'?'App đang có nhiều yêu cầu AI. Hãy thử lại sau một phút.':'App đã đạt giới hạn AI chung trong ngày.';
      return reply({error:message,code:'AI_BUDGET_EXHAUSTED',reason:budget.reason},429);
     }
     if(isReading){
      const started=Date.now();
      const result=await buildReadingStory(body,{fetchFn,env,signal:controller.signal,model,sourceCache,onTiming:entry=>timings.push(entry)});
      console.info('hsk-reading-timing',{revision:WORKER_REVISION,ms:Date.now()-started,status:result.status,steps:timings});
-     if(result.status===200&&result.data.story)await controlCall(env,'put',{key:readingKey,story:result.data.story});
+     if(result.status===200&&result.data.story)await controlCall(env,'put',{key:readingKey,story:result.data.story,keepLock:!readingLocked});
      return reply(result.data,result.status);
     }
    }finally{
@@ -661,7 +715,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    if(!['chinese','pinyin','explanation','note'].every(k=>typeof result[k]==='string'&&result[k].length<=4000)||!result.chinese.trim()||!result.pinyin.trim())return reply({error:'Bản dịch chưa đầy đủ. Hãy thử lại.'},502);
    if(zhToVi&&(typeof result.vietnamese!=='string'||!result.vietnamese.trim()||result.vietnamese.length>4000))return reply({error:'Bản dịch tiếng Việt chưa đầy đủ.'},502);
    return reply({direction:zhToVi?'zh-vi':'vi-zh',...(zhToVi?{vietnamese:result.vietnamese}:{}),chinese:zhToVi?body.text.trim():result.chinese,pinyin:result.pinyin,explanation:result.explanation,note:result.note,hsk:level,outOfVocabulary:outOfVocabulary(zhToVi?body.text.trim():result.chinese,level)});
-  }catch(error){return reply({error:error.name==='AbortError'?(isOcr?'Gemini chưa đọc xong ảnh. Hãy chọn vùng có chữ và thử lại.':'Dịch quá lâu. Hãy thử lại.'):'Không kết nối được dịch vụ dịch.'},504);}finally{clearTimeout(timer);}
+  }catch(error){return reply({error:error.name==='AbortError'?(isOcr?'Gemini chưa đọc xong ảnh. Hãy chọn vùng có chữ và thử lại.':'Dịch quá lâu. Hãy thử lại.'):'Không kết nối được dịch vụ dịch.'},504);}finally{clearTimeout(timer);request.signal.removeEventListener('abort',abortRequest);if(abuseLease)await controlCall(env,'abuse-finish',{uid:abuseUid,lease:abuseLease,status:request.signal.aborted?499:responseStatus}).catch(()=>console.warn('hsk-ai-guard-release-failed'));}
  };
 }
 export default {fetch:createHandler()};
