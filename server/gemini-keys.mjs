@@ -87,5 +87,12 @@ export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={curs
   if(result&&result.status!==200)throw Error('key_status_unavailable');
   return slots.map((entry,index)=>({slot:entry.slot,retryAfter:result?Number(result.slots?.find(s=>s.index===index)?.retryAfter)||0:Math.max(0,Math.ceil(((state.blocked.get(ids[index])||0)-now())/1000))}));
  };
+ // Metadata probe never generates audio or changes generation cooldowns.
+ requestWithKeys.inspect=async(model)=>{
+  if(slot===undefined||!/^gemini-[a-z0-9.-]+-tts(?:-preview)?$/.test(model))throw Error('invalid_inspection');
+  const index=slots.findIndex(entry=>entry.slot===slot);
+  if(index<0)return Response.json({error:{status:'NOT_FOUND'}},{status:404});
+  return callKey(index,'https://generativelanguage.googleapis.com/v1beta/models/'+model,{method:'GET'});
+ };
  return requestWithKeys;
 }

@@ -43,8 +43,13 @@ export function decodeVoiceAudio(data){
  }
  return {audioBase64:btoa(binary),mimeType:format==='pcm'?'audio/L16;codec=pcm;rate=24000':'audio/wav'};
 }
-export async function voiceProviderFailure(response){
+export async function voiceProviderFailure(response,env){
  const data=await response.clone().json().catch(()=>null),details=data?.error?.details||[],message=String(data?.error?.message||'');
+ let detail=message;
+ if(env){
+  for(const [name,value] of Object.entries(env))if(/KEY|TOKEN|SECRET/i.test(name)&&typeof value==='string'&&value)detail=detail.split(value).join('[redacted]');
+  detail=detail.replace(/AIza[\w-]{20,}/g,'[redacted]').replace(/[\u0000-\u001f\u007f]/g,' ').slice(0,400);
+ }
  const code=response.status,attempted=response.headers.get('X-HSK-Provider-Attempted')!=='0';
  const daily=details.some(d=>d.violations?.some(v=>/perday|daily/i.test(String(v.quotaId)+' '+String(v.quotaMetric))));
  const unavailable=details.some(d=>d.violations?.some(v=>String(v.quotaValue)==='0'));
@@ -55,7 +60,7 @@ export async function voiceProviderFailure(response){
  else if(code===403){reason='tts_permission_denied';retryable=false;retryAfter=86400;}
  else if(code===404){reason='tts_model_unavailable';retryable=false;retryAfter=86400;}
  else if(code>=400&&code<500){reason='tts_request_rejected';retryable=false;retryAfter=86400;}
- return {ok:false,error:reason,upstreamStatus:code,providerAttempts:attempted?1:0,retryable,retryAfter};
+ return {ok:false,error:reason,upstreamStatus:code,providerAttempts:attempted?1:0,retryable,retryAfter,diagnostic:{...(env?{detail}:{}),expired:/expired/i.test(message),apiKey:/api.?key/i.test(message),model:/model/i.test(message),parameter:/field|parameter|generation|responseModalit/i.test(message),billing:/bill/i.test(message),unsupported:/support/i.test(message),status:['INVALID_ARGUMENT','FAILED_PRECONDITION','PERMISSION_DENIED','NOT_FOUND'].includes(data?.error?.status)?data.error.status:'OTHER'}};
 }
 export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.now(),slotFetch){
  return async function voicePrecache(request,env){
@@ -93,6 +98,15 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    input=JSON.parse(data);
    if(input?.action!=='verify'&&data.length>1500)return json({ok:false,error:'invalid_request'},400);
   }catch{return json({ok:false,error:'invalid_request'},400);}
+  if(input?.action==='diagnose'){
+   if(Object.keys(input).some(k=>!['action','keySlot'].includes(k))||!Number.isInteger(input.keySlot)||input.keySlot<1||input.keySlot>9||!slotFetch)return json({ok:false,error:'invalid_request'},400);
+   const model=env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
+   try{
+    const response=await slotFetch(input.keySlot).inspect(model);
+    if(response.ok){const metadata=await response.json();return json({ok:true,slot:input.keySlot,http:response.status,model,generateContent:metadata.supportedGenerationMethods?.includes('generateContent')===true});}
+    const failed=await voiceProviderFailure(response,env);return json({ok:false,slot:input.keySlot,model,metadataOnly:true,...failed});
+   }catch{return json({ok:false,slot:input.keySlot,error:'metadata_probe_unavailable'},503);}
+  }
   if(input?.action==='verify'){
    if(Object.keys(input).some(k=>!['action','items','clips'].includes(k)))return json({ok:false,error:'invalid_request'},400);
    const checked=await hskVoiceVerifyPartial(input,geminiFetch,request.signal);
@@ -127,7 +141,7 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    for(let attempt=0;attempt<(input.keySlot===undefined?2:1);attempt++){
     let response;
     try{response=await provider('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});}catch{return json({ok:false,error:'tts_transport_uncertain',providerAttempts:1,retryable:false},503);}
-    if(!response.ok)return json(await voiceProviderFailure(response),[429,503].includes(response.status)?response.status:502);
+    if(!response.ok)return json(await voiceProviderFailure(response,env),[429,503].includes(response.status)?response.status:502);
     let data;try{data=await response.json();}catch{return json({ok:false,error:'invalid_tts_response',providerAttempts:1},502);}
     const audio=decodeVoiceAudio(data);
     if(!audio.error)return json({ok:true,...audio,voice:'Kore',model,providerAttempts:attempt+1});

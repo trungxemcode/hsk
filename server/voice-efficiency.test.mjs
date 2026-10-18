@@ -46,3 +46,35 @@ test('isolated pilot is explicit, bounded by existing text limits and uses one p
  let calls=0,prompt='',target='';const raw=async(url,init)=>{calls++;target=url;prompt=JSON.parse(init.body).contents[0].parts[0].text;return Response.json({candidates:[{finishReason:'STOP',content:{parts:[{inlineData:{mimeType:'audio/L16',data:'AQIDBA=='}}]}}]});};
  const h=createVoicePrecacheHandler(identity,raw,()=>Date.now(),()=>raw);assert.equal((await h(req({text:'你好。谢谢。',keySlot:1,isolated:true}),{...env,HSK_VOICE_ISOLATED_MODEL:'gemini-3.1-flash-tts-preview'})).status,200);assert.equal(calls,1);assert.match(prompt,/one full second/);assert.match(target,/gemini-3.1-flash-tts-preview:generateContent/);assert.equal((await h(req({text:'你好',isolated:true}),env)).status,400);assert.equal((await h(req({text:'你好',keySlot:1,isolated:'yes'}),env)).status,400);assert.equal(calls,1);
 });
+
+test('provider diagnostic exposes only fixed flags and never raw error text or credentials', async()=>{
+ const raw='API key expired SECRET_PRIVATE_TOKEN';
+ const result=await voiceProviderFailure(Response.json({error:{status:'INVALID_ARGUMENT',message:raw}},{status:400}));
+ assert.equal(result.diagnostic.expired,true); assert.equal(result.diagnostic.apiKey,true);
+ assert.equal(result.diagnostic.status,'INVALID_ARGUMENT');
+ assert.ok(!JSON.stringify(result).includes('SECRET_PRIVATE_TOKEN'));
+ assert.ok(!JSON.stringify(result).includes(raw));
+});
+
+test('metadata diagnostics authenticate and never generate or mutate cooldown',async()=>{
+ let calls=0,probes=0;
+ const factory=slot=>Object.assign(async()=>{calls++;throw Error('no generation');},{inspect:async model=>{probes++;assert.equal(slot,2);return Response.json({supportedGenerationMethods:['generateContent']});}});
+ const h=createVoicePrecacheHandler(identity,async()=>{throw Error('no generation');},()=>Date.now(),factory);
+ const result=await h(req({action:'diagnose',keySlot:2}),env);
+ assert.equal(result.status,200);assert.equal((await result.json()).generateContent,true);assert.equal(calls,0);assert.equal(probes,1);
+ const bad=new Request('https://worker.test/voice-precache',{method:'POST',body:JSON.stringify({action:'diagnose',keySlot:2})});
+ assert.equal((await h(bad,env)).status,401);assert.equal(probes,1);
+ assert.equal((await h(req({action:'diagnose',keySlot:0}),env)).status,400);assert.equal(probes,1);
+});
+test('pinned metadata probe uses GET and does not consume cooldown selection',async()=>{
+ let calls=0;const state={cursor:0,blocked:new Map()};
+ const f=createGeminiKeyFetch(async(url,init)=>{calls++;assert.match(url,/models\/gemini-2.5-flash-preview-tts$/);assert.equal(init.method,'GET');assert.equal(init.body,undefined);return Response.json({});},{GEMINI_API_KEY:'test-key'},{slot:1,state});
+ assert.equal((await f.inspect('gemini-2.5-flash-preview-tts')).status,200);assert.equal(calls,1);assert.equal(state.blocked.size,0);assert.equal(state.cursor,0);
+ await assert.rejects(f.inspect('bad/model'));assert.equal(calls,1);
+});
+
+test('authenticated provider detail redacts configured credentials',async()=>{
+ const value='private-key-value-for-test';
+ const result=await voiceProviderFailure(Response.json({error:{status:'INVALID_ARGUMENT',message:'Model rejected '+value}},{status:400}),{GEMINI_API_KEY:value});
+ assert.ok(result.diagnostic.detail.includes('[redacted]'));assert.ok(!JSON.stringify(result).includes(value));
+});
