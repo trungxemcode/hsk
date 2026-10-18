@@ -1,9 +1,9 @@
 /* Default policy for all existing and future buttons; feedback colors remain semantic. */
 
 html body.studio-enabled button:not(.correct):not(.wrong){background:var(--button-bg)!important;color:var(--button-text)!important;border-color:var(--button-border)!important;box-shadow:none}
-html body.studio-enabled button:is(.active,[aria-pressed=true],[aria-current=page]):not(:disabled),html body.studio-enabled button:is(:hover,:active,:focus-visible):not(:disabled){background:var(--button-active-bg)!important;color:var(--button-active-text)!important;border-color:var(--button-active-bg)!important}
-html body.studio-enabled button:is(.active,[aria-pressed=true],[aria-current=page],:hover,:active,:focus-visible):not(:disabled) :is(strong,small,span,p,em,i,svg){color:var(--button-active-text)!important}
-html body.studio-enabled button:disabled{background:var(--button-disabled-bg)!important;color:var(--button-disabled-text)!important;border-color:var(--button-disabled-bg)!important;cursor:not-allowed}
+html body.studio-enabled button:not(.correct):not(.wrong):is(.active,[aria-pressed=true],[aria-current=page]):not(:disabled),html body.studio-enabled button:not(.correct):not(.wrong):is(:hover,:active,:focus-visible):not(:disabled){background:var(--button-active-bg)!important;color:var(--button-active-text)!important;border-color:var(--button-active-bg)!important}
+html body.studio-enabled button:not(.correct):not(.wrong):is(.active,[aria-pressed=true],[aria-current=page],:hover,:active,:focus-visible):not(:disabled) :is(strong,small,span,p,em,i,svg){color:var(--button-active-text)!important}
+html body.studio-enabled button:disabled:not(.correct):not(.wrong){background:var(--button-disabled-bg)!important;color:var(--button-disabled-text)!important;border-color:var(--button-disabled-bg)!important;cursor:not-allowed}
 html body.studio-enabled button:focus-visible{outline:2px solid var(--button-active-bg);outline-offset:3px}
 body.studio-enabled :is(input[type=checkbox],input[type=radio],progress){accent-color:var(--button-active-bg)}
 body.studio-enabled :is(input,textarea,select):focus-visible{outline:2px solid var(--button-active-bg);outline-offset:2px}
@@ -40,3 +40,9 @@ body.studio-enabled .dictionary-row>summary{border-radius:var(--radius-14px)}
 body.studio-enabled .hub-group>summary{border-radius:var(--radius-18px)}
 body.studio-enabled :is(.overview-search,.clean-disclosure,.dictionary-row,.hub-group,.mobile-home-stats)[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0}
 @media(prefers-reduced-motion:reduce){body.studio-enabled summary{transition:none}}
+
+/* Answer verdicts must remain legible after grading, including disabled buttons in dark mode. */
+html body.studio-enabled .answers button.correct:disabled{background:var(--legacy-hex-e8f6ef)!important;color:var(--legacy-hex-145b37)!important;border-color:var(--legacy-hex-bee1c9)!important;opacity:1}
+html body.studio-enabled .answers button.wrong:disabled{background:var(--legacy-hex-fff0f0)!important;color:var(--legacy-hex-9a3038)!important;border-color:var(--legacy-hex-f0cccc)!important;opacity:1}
+html[data-theme=dark] body.studio-enabled .answers button.correct:disabled{background:var(--legacy-hex-203c32)!important;color:var(--legacy-hex-a2ecc3)!important;border-color:var(--legacy-hex-446d59)!important;opacity:1}
+html[data-theme=dark] body.studio-enabled .answers button.wrong:disabled{background:var(--legacy-hex-442a33)!important;color:var(--legacy-hex-ffc0c7)!important;border-color:var(--legacy-hex-795160)!important;opacity:1}

@@ -14,7 +14,7 @@ html body.studio-enabled .overview-v216 .mobile-today-hero .mobile-hero-cta{min-
 .overview-v216 .mobile-today-hero .mobile-hero-cta:active{transform:translateY(3px);box-shadow:var(--shadow-home-cta-pressed)}
 html body.studio-enabled #studioHome.overview-v216 .mobile-hero-cta:not(:disabled){background:var(--palette-white)!important;color:var(--palette-violet-deep)!important}
 html body.studio-enabled #studioHome.overview-v216 .mobile-hero-cta:is(:active,:focus-visible):not(:disabled){background:var(--palette-violet)!important;color:var(--palette-white)!important}
-.overview-v216 .mobile-today-hero>p:not(.overview-lesson),.overview-v216 #homeDueReview{display:none!important}
+.overview-v216 .mobile-today-hero>p:not(.overview-lesson){display:none!important}
 .overview-tasks,.overview-extras{margin-top:10px;color:inherit}
 .overview-tasks>summary,.overview-extras>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-size:13px;gap:6px}
 .overview-tasks>summary::after,.overview-extras>summary::after{content:'⌄';margin-left:auto}
@@ -47,6 +47,7 @@ body.studio-enabled .overview-search .clean-home-search{margin:0;border:0;paddin
 .overview-v216 #updateNotice button{min-height:44px;padding:6px;font-size:12px}
 @media(max-width:720px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
  body.mobile-ux #studioHome.overview-v216 .mobile-today-hero{padding:16px;margin-bottom:12px;background:linear-gradient(130deg,var(--palette-violet),var(--palette-violet-deep))}
+ body.mobile-ux #studioHome.overview-v216 #homeDueReview:not([hidden]){display:block!important;width:100%;min-height:44px;margin-top:8px}
  body.mobile-ux #studioHome.overview-v216 .mobile-today-hero :is(.overview-time,.overview-lesson,.overview-tasks>summary,.overview-extras>summary){color:var(--palette-white)!important}
  body.mobile-ux #studioHome.overview-v216 .mobile-hero-top h2{font-size:20px;line-height:1.3}
  body.mobile-ux #studioHome.overview-v216 .mobile-hero-top button{min-height:44px;max-width:110px;padding:7px;font-size:12px;white-space:normal}
