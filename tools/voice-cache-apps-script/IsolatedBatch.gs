@@ -88,7 +88,16 @@ function hskWarmIsolatedTick(){
     var journal=hskBatchTable_(storage),batches=hskBatchRows_(journal,7),queue=hskWarmQueue_(storage),deferred=hskBatchRows_(queue,6);
     // Recover saved masters FIRST. An interrupted save/cut never calls Gemini again.
     for(var b=0;b<batches.length;b++){
-      var prior=batches[b];if(prior[3]==='DONE'||prior[3]==='REJECTED'||prior[3]==='PARTIAL')continue;
+      var prior=batches[b];
+      // Earlier versions overwrote definitive vendor rejections with an uncertain-transport label.
+      // Reconcile only when EVERY original item has matching zero-attempt rejection evidence.
+      if(prior[3]==='REVIEW'&&!prior[2]&&prior[4]==='batch_transport_uncertain'){
+        var rejected=JSON.parse(prior[1]);
+        if(rejected.length&&rejected.every(function(j){return deferred.some(function(r){return Number(r[0])===j.index&&Number(r[2])===0&&r[4]==='PENDING'&&/tts_request_rejected/.test(String(r[5]));});})){
+          prior[3]='FAILED';prior[4]='reconciled_definitive_request_rejection';journal.getRange(b+2,1,1,7).setValues([prior]);
+        }
+      }
+      if(prior[3]==='DONE'||prior[3]==='REJECTED'||prior[3]==='PARTIAL')continue;
       if(!prior[2]){var files=storage.folder.getFilesByName('MASTER_BATCH_'+prior[0]+'.wav');if(files.hasNext())prior[2]=files.next().getId();}
       if(prior[2]){
         try{var recovered=hskBatchCommit_(storage,journal,b+2,prior,queue,deferred);p.setProperty('HSK_WARM_SAVED_SINCE_FIX',String(Number(p.getProperty('HSK_WARM_SAVED_SINCE_FIX')||0)+recovered));}

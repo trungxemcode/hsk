@@ -94,3 +94,8 @@ test('model rejection defers only the selected key and never stops other keys',(
  const f=fixture();f.c.UrlFetchApp.fetch=()=>({getResponseCode:()=>502,getContentText:()=>JSON.stringify({ok:false,error:'tts_request_rejected',providerAttempts:1,retryable:false,retryAfter:86400,diagnostic:{status:'INVALID_ARGUMENT'}})});
  f.c.hskWarmIsolatedTick();assert.equal(f.props.get('HSK_WARM_ENABLED'),'true');assert.ok(f.queue.rows.every(r=>r[4]==='PENDING'&&r[2]===0));assert.ok(f.props.get('HSK_WARM_LAST_DIAGNOSTIC').includes('INVALID_ARGUMENT'));
 });
+
+test('legacy uncertain label is reconciled only with matching definitive rejection evidence for every job',()=>{
+ const f=fixture();f.p.setProperty('HSK_BATCH_REPAIR_POLICY','isolated-v1');const j=f.c.hskBatchTable_(f.storage);j.appendRow(['prior',JSON.stringify([{index:0}]),'','REVIEW','batch_transport_uncertain','',6]);f.queue.rows.push([0,'x',0,0,'PENDING','cloudflare_tts_502_tts_request_rejected']);f.c.hskWarmIsolatedTick();assert.equal(j.rows[0][3],'FAILED');assert.equal(f.calls,1);
+ const g=fixture(),k=g.c.hskBatchTable_(g.storage);k.appendRow(['prior',JSON.stringify([{index:0},{index:1}]),'','REVIEW','batch_transport_uncertain','',6]);g.queue.rows.push([0,'x',0,0,'PENDING','cloudflare_tts_502_tts_request_rejected']);g.c.hskWarmIsolatedTick();assert.equal(g.calls,0);assert.equal(g.props.get('HSK_WARM_ENABLED'),'false');
+});
