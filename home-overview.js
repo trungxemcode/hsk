@@ -8,6 +8,7 @@ const meter=make('div',null,'overview-time'),time=make('span'),progress=make('pr
 const lesson=make('p',null,'overview-lesson');hero.querySelector('.mobile-hero-cta').before(meter,lesson);
 const planAnchor=document.createComment('overview plan original');$('planToday').before(planAnchor);
 const tasks=make('details',null,'overview-tasks');tasks.append(make('summary','Nhiệm vụ hôm nay'));hero.append(tasks);
+const desktopHero=home.querySelector('.feature-hero .hero-button');if(desktopHero)desktopHero.addEventListener('click',e=>{if(!window.HSKPlanner?.plan||!$('planContinue'))return;e.preventDefault();e.stopImmediatePropagation();$('planContinue').click();},true);
 const notice=$('updateNotice'),noticeAnchor=document.createComment('overview update original');notice.before(noticeAnchor);
 const extras=make('details',null,'overview-extras');extras.append(make('summary','Lộ trình & đánh giá'),$('homeAssessment'),$('mobileHeroResult'));hero.append(extras);
 const quick=$('homeQuickSearch'),searchDetails=make('details',null,'overview-search');quick.before(searchDetails);searchDetails.append(make('summary','Tra cứu nhanh · Vẽ chữ · Dịch'),quick);
@@ -27,6 +28,7 @@ if(mobile!==lastMobile){searchDetails.open=!mobile;lastMobile=mobile;}
 if(document.body.dataset.studioHub==='home'){if(notice.parentElement!==home)home.prepend(notice);}else if(notice.parentElement===home)noticeAnchor.after(notice);
 meter.hidden=!p;tasks.hidden=!p;if(p){write(time,`${minutes} / ${p.minutes} phút hôm nay`);const value=Math.min(1,seconds/(Math.max(1,p.minutes)*60));if(progress.value!==value)progress.value=value;}
 const task=$('planTasks')?.children[2]?.querySelector('p');write(lesson,p?(task?.textContent||'Chọn bài tiếp theo trong lộ trình'):'Từ vựng, hội thoại và bài tập theo từng bài.');
+if(desktopHero){const match=task?.textContent.match(/^Bài\s+(\d+)/),label=p?(match?'Học tiếp · Bài '+match[1]+' ':'Học tiếp · HSK '+p.target+' '):'Khám phá bài học ';if(desktopHero.firstChild?.nodeType===Node.TEXT_NODE&&desktopHero.firstChild.nodeValue!==label)desktopHero.firstChild.nodeValue=label;const heading=home.querySelector('.feature-copy h3');if(heading)write(heading,p?'Hôm nay · HSK '+p.target:'Bài học HSK 1–6');}
 const title=hero.querySelector('h2');if(p)title.setAttribute('aria-label','Mục tiêu hôm nay · HSK '+p.target);
 const due=Number($('studioHomeDue').textContent)||0;write(badge,String(due));badge.hidden=!due;write(srs.querySelector('small'),due?`${due} từ đến hạn`:'Chưa có từ đến hạn');
 write(flash.querySelector('small'),$('studioProgressLabel').textContent+' · '+$('studioKnownCount').textContent.split(' · ')[0]);const count=Object.values(window.HSKNotebook?.items||{}).filter(w=>w&&typeof w.han==='string'&&typeof w.mean==='string').length;write(saved.querySelector('small'),`${count} từ đã lưu`);
