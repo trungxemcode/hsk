@@ -1020,6 +1020,19 @@
           "value": "AI_ABUSE_ENABLED"
         }
       ]
+    },
+    {
+      "id": "gemini-voice-precache",
+      "name": "Kho audio Kore xác thực Google và bảo vệ dữ liệu âm thanh",
+      "checks": [
+        {"kind":"contains","file":"server/voice-tts.mjs","value":"createVoicePrecacheHandler"},
+        {"kind":"contains","file":"server/voice-tts.mjs","value":"decodeVoiceAudio"},
+        {"kind":"contains","file":"server/voice-tts.mjs","value":"tts_generation_incomplete"},
+        {"kind":"contains","file":"tools/voice-cache-apps-script/WarmBatch.gs","value":"HSK_WARM_RETRY_AT"},
+        {"kind":"file","file":"server/voice-apps-script.test.mjs","value":""},
+        {"kind":"file","file":"server/voice-bundle.test.mjs","value":""},
+        {"kind":"file","file":"server/voice-tts.test.mjs","value":""}
+      ]
     }
   ]
 }
