@@ -1,3 +1,7 @@
+## Alternating Chinese/Vietnamese word pairs — 2026-10-18
+- Base main947f550 (3.4.7). Word study now alternates Chinese word -> spoken Vietnamese meaning, repeated as three complete pairs, before stroke demos/examples. Examples remain Chinese -> Vietnamese meaning -> silent karaoke. Per-slide audio completion, slow pacing, stroke repetitions, pause and mastery behavior retained.
+- guidedShow v4 matches the expanded sequence. Core and browser regression assert the exact six-utterance language/text prefix; no repeated Chinese block before the first Vietnamese meaning. Validation/PR/deployment status in response.
+
 ## Repeated word audio and spoken Vietnamese meanings — 2026-10-18
 - Base main d421475 (3.4.6). Presentation word audio now repeats3 times with a1.4s gap before pace scaling, then reads Vietnamese meaning, shows3-pass strokes and starts examples. Example/context order: Chinese model -> Vietnamese meaning -> silent karaoke learner turn. Long meanings use bounded Vietnamese speech chunks and are gated on actual audio completion.
 - Device speech explicitly selects vi-VN for meanings and Mandarin otherwise, never a Chinese fallback for Vietnamese. Missing Vietnamese voice pauses with an actionable notice. Shared speech defaults remain Mandarin0.85 and no inter-chunk gap; presentation opts into language/rate/gaps. Completion callbacks are one-shot; stop cancels pending repetitions and stale endings cannot replay audio.

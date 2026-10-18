@@ -6,12 +6,12 @@ test('pacing uses visible content, not hidden dictionary metadata',()=>{const a=
 
 test('hands-free slides teach each word and every example in order without interactive gates',()=>{
  const words=[{han:'你',pin:'nǐ',mean:'bạn'},{han:'我',pin:'wǒ',mean:'tôi'}],examples=[{cn:'你好。',pin:'nǐ hǎo',vi:'Xin chào.'},{cn:'你好吗？',pin:'nǐ hǎo ma',vi:'Bạn khỏe không?'}];
- const slides=C.presentation({},words,()=>examples),first=slides.slice(0,9);
- assert.deepEqual(first.map(s=>s.kind),['word','meaning','strokes','chinese','meaning','repeat','chinese','meaning','repeat']);
- assert.deepEqual(first.map(s=>s.text),['你','bạn','你','你好。','Xin chào.','你好。','你好吗？','Bạn khỏe không?','你好吗？']);
- assert.equal(first[0].repetitions,3);assert.equal(first[2].loops,3);assert.ok(first.filter(s=>s.kind==='repeat').every(s=>!s.speak),'practice turn is silent');
+ const slides=C.presentation({},words,()=>examples),first=slides.slice(0,13);
+ assert.deepEqual(first.map(s=>s.kind),['word','meaning','word','meaning','word','meaning','strokes','chinese','meaning','repeat','chinese','meaning','repeat']);
+ assert.deepEqual(first.map(s=>s.text),['你','bạn','你','bạn','你','bạn','你','你好。','Xin chào.','你好。','你好吗？','Bạn khỏe không?','你好吗？']);
+ assert.equal(first.filter(s=>s.kind==='word').length,3);assert.equal(first[6].loops,3);assert.ok(first.filter(s=>s.kind==='repeat').every(s=>!s.speak),'practice turn is silent');
  assert.ok(first.filter(s=>s.kind==='meaning').every(s=>s.language==='vi-VN'&&s.speak===s.text));
- assert.deepEqual(first.filter(s=>s.speak).map(s=>s.speak),['你','bạn','你好。','Xin chào.','你好吗？','Bạn khỏe không?']);assert.equal(slides[9].text,'我');
+ assert.deepEqual(first.filter(s=>s.speak).map(s=>s.speak),['你','bạn','你','bạn','你','bạn','你好。','Xin chào.','你好吗？','Bạn khỏe không?']);assert.equal(slides[13].text,'我');
  assert.equal(new Set(slides.map(s=>s.id)).size,slides.length);assert.ok(slides.every(s=>!['recall','check'].includes(s.kind)));assert.equal(words[0].mean,'bạn');
 });
 test('presentation chunks long source text without dropping it, and keeps all supplied context',()=>{

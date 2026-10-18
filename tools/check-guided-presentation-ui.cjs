@@ -19,8 +19,11 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    }
    if(width===390){
     const frame=await show.locator('.guided-slide').getAttribute('data-frame-id');await p.waitForTimeout(1100);assert.equal(await show.locator('.guided-slide').getAttribute('data-frame-id'),frame,'never advance before speech ends');assert.equal(await p.evaluate(()=>__spoken.length),1);
-    for(let i=0;i<3;i++){await p.evaluate(()=>__spoken.at(-1).onend());if(i<2)await p.waitForFunction(n=>__spoken.length===n,i+2);}
-    await p.waitForFunction(()=>__spoken.at(-1).text==='bạn');assert.deepEqual(await p.evaluate(()=>__spoken.map(u=>[u.text,u.lang])),[['你','zh-CN'],['你','zh-CN'],['你','zh-CN'],['bạn','vi-VN']]);
+    for(let turn=0;turn<3;turn++){
+     assert.equal(await p.evaluate(()=>__spoken.at(-1).text),'你');await p.evaluate(()=>__spoken.at(-1).onend());await p.waitForFunction(()=>__spoken.at(-1).text==='bạn');
+     if(turn<2){await p.evaluate(()=>__spoken.at(-1).onend());await p.waitForFunction(()=>__spoken.at(-1).text==='你');}
+    }
+    assert.deepEqual(await p.evaluate(()=>__spoken.map(u=>[u.text,u.lang])),[['你','zh-CN'],['bạn','vi-VN'],['你','zh-CN'],['bạn','vi-VN'],['你','zh-CN'],['bạn','vi-VN']]);
     const meaningFrame=await show.locator('.guided-slide').getAttribute('data-frame-id');await p.waitForTimeout(600);assert.equal(await show.locator('.guided-slide').getAttribute('data-frame-id'),meaningFrame,'wait for meaning voice before stroke demo');
     await p.evaluate(()=>__spoken.at(-1).onend());await p.waitForFunction(()=>document.querySelector('.guided-slide')?.dataset.slideKind==='strokes');await show.locator('.guided-stroke-stage svg').waitFor();await p.screenshot({path:'/tmp/guided-strokes-390.png'});
     const strokeFits=await show.locator('.guided-stroke-stage svg').evaluate(n=>{const r=n.getBoundingClientRect(),s=n.closest('.guided-slide').getBoundingClientRect();return r.top>=s.top&&r.bottom<=s.bottom&&r.left>=s.left&&r.right<=s.right;});assert.ok(strokeFits,'real stroke SVG fits');
@@ -36,12 +39,12 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
     await show.getByRole('button',{name:'Học lại',exact:true}).waitFor();assert.equal(await p.evaluate(()=>__evidence),0);assert.equal(await p.evaluate(()=>__spoken.filter(u=>u.text==='我').length),3);
    }else{
     await show.getByRole('button',{name:'Tạm dừng',exact:true}).click();
-    for(let i=0;i<6;i++){
+    for(let i=0;i<10;i++){
      const overflow=await show.locator('.guided-slide').evaluate(n=>{const box=n.getBoundingClientRect();return [...n.children].filter(x=>x.textContent).map(x=>{const r=x.getBoundingClientRect();return {top:r.top-box.top,bottom:box.bottom-r.bottom,left:r.left-box.left,right:box.right-r.right};});});assert.ok(overflow.every(r=>Object.values(r).every(v=>v>=-1)),JSON.stringify({width,height,overflow}));await show.getByRole('button',{name:'Tiếp →',exact:true}).click();
     }
    }
    await p.evaluate(()=>HSKStudio.navigate('home'));await show.waitFor({state:'detached'});assert.equal(await p.evaluate(()=>document.body.classList.contains('guided-presenting')),false);const spoken=await p.evaluate(()=>__spoken.length);await p.waitForTimeout(450);assert.equal(await p.evaluate(()=>__spoken.length),spoken,'navigation cancels timers and audio');assert.deepEqual(errors,[]);await p.close();
   }
-  console.log('PASS hands-free presentation: three Mandarin word repetitions, Vietnamese word/example meanings, real stroke passes, silent karaoke, speech-end gating, pause/resume, complete playback without taps, no mastery writes, route cleanup and light/dark portrait/landscape fit.');
+  console.log('PASS hands-free presentation: three alternating Mandarin/Vietnamese word pairs, bilingual examples, real stroke passes, silent karaoke, speech-end gating, pause/resume, complete playback without taps, no mastery writes, route cleanup and light/dark portrait/landscape fit.');
  }finally{await browser.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
