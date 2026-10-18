@@ -949,6 +949,32 @@
           "value": "hsk-reading-timing"
         }
       ]
+    },
+    {
+      "id": "ai-abuse-guard",
+      "name": "Chống lạm dụng AI, miễn giới hạn cho admin xác thực",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "server/ai-control.mjs",
+          "value": "abuse-start"
+        },
+        {
+          "kind": "contains",
+          "file": "server/translator-worker.mjs",
+          "value": "AI_EMAIL_UNVERIFIED"
+        },
+        {
+          "kind": "file",
+          "file": "server/ai-abuse.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/wrangler.jsonc",
+          "value": "AI_ABUSE_ENABLED"
+        }
+      ]
     }
   ]
 }

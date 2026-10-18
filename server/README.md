@@ -1,3 +1,15 @@
+## Chống lạm dụng AI — Worker 3.5.1
+
+Chỉ bật sau khi deploy Worker mới cùng cấu hình `AI_ABUSE_ENABLED=true`. Với tài khoản thường: Firebase phải trả `emailVerified=true` khi `AI_REQUIRE_VERIFIED_EMAIL=true`; dùng nút xác minh email có sẵn trong trang Tài khoản. Tài khoản đã tồn tại từ 24 giờ trở lên giữ 35 truy vấn + 15 bài đọc/ngày; trong 24 giờ đầu là 10 truy vấn + 3 bài đọc/ngày. Tuổi và UID lấy từ kết quả Firebase lookup trên máy chủ, không từ payload/claim vai trò của trình duyệt.
+
+Durable Object thực thi nguyên tử một yêu cầu AI đang chạy/tài khoản, cách các lượt ít nhất 3 giây và hai lượt tạo bài đọc ít nhất 10 giây, dùng chung giữa các tab/thiết bị/Worker. Yêu cầu trùng đang chạy nhận 429 và `Retry-After`, không có lời gọi provider thứ hai và không trừ lượt AI. Không lưu kết quả hỏi đáp riêng tư trong Durable Object để chia sẻ giữa các phiên. Cache bài đọc công khai hiện có vẫn hoạt động. Khóa xử lý được giải phóng trong `finally` cả khi trả lỗi/hủy; khóa bị bỏ dở hết hạn sau 150 giây, completion cũ không thể mở khóa của yêu cầu thay thế. Thiếu binding khi bật bảo vệ thì từ chối trước khi gọi AI.
+
+Ngắt tự động từng nhóm reading/query trong 60 giây sau 8 lỗi máy chủ/nhà cung cấp (HTTP 5xx) trong 2 phút. Người dùng tự hủy và hết hạn mức không được tính vào bộ ngắt. `AI_PAUSED=true` tạm ngắt AI cho tài khoản thường; học offline và lịch sử đọc cục bộ không phụ thuộc đường gọi này. Các biến trong wrangler.jsonc là cấu hình triển khai: nếu bật ngắt thủ công trên Dashboard, cập nhật lại tệp cấu hình trước lần deploy sau để giữ trạng thái đó.
+
+**Admin trong `ADMIN_UIDS`, sau khi Firebase xác thực, được miễn toàn bộ hạn mức chống lạm dụng trong app:** không giới hạn lượt/ngày/phút, số yêu cầu đồng thời, thời gian chờ, xác minh email, tuổi tài khoản hay bộ ngắt tự động/thủ công; cũng không bị chặn bởi khóa bài đọc đang tạo. Không trừ hoặc ghi bộ đếm của tài khoản thường. Xác thực, kiểm tra dữ liệu đầu vào và hạn mức thực tế của nhà cung cấp vẫn giữ nguyên.
+
+Chỉ lưu hash UID/fingerprint cùng trạng thái khóa và cửa sổ đếm lỗi; log lý do chặn + route, không log prompt, token, UID hay API key. Không thêm chặn IP cứng hoặc CAPTCHA trong bản này: triển khai lớp ưu tiên xác thực/tài khoản, gửi trùng, tốc độ, đồng thời và ngắt khẩn cấp. Không cần Secret, binding hay migration mới. Thay đổi backend, không cần tải lại PWA.
+
 ## Tạo bài đọc nhanh — Worker 3.4.2
 
 `/reading-next` ưu tiên Gemini ở cả 5 thể loại và HSK 1–6, xKiro vẫn dự phòng khi lỗi; hỏi đáp/tra cứu nhẹ giữ phân vai cũ. Đo thật phát hiện cấu hình cũ chờ xKiro hết 18 giây rồi Gemini tạo bài khoảng 3 giây. Không gọi nhiều AI song song, không tạo bài nền, không rút giới hạn độ dài hay bỏ pinyin/dịch Việt/câu hỏi để lấy tốc độ.
