@@ -93,7 +93,7 @@ function hskWorkerTts_(text) {
     var reason='request_failed';
     try{var result=JSON.parse(response.getContentText());if(/^(identity_unavailable|unauthorized|voice_not_configured|tts_provider_unavailable|invalid_model|invalid_tts_audio|invalid_tts_response|tts_generation_incomplete|tts_blocked)$/.test(String(result.error||'')))reason=result.error;}catch(ignored){}
     var failure=new Error('cloudflare_tts_'+response.getResponseCode()+'_'+reason);
-    failure.retryable=[429,503,504].indexOf(response.getResponseCode())>=0||reason==='tts_generation_incomplete';
+    failure.retryable=[429,503,504].indexOf(response.getResponseCode())>=0||reason==='tts_generation_incomplete'||reason==='tts_provider_unavailable';
     throw failure;
   }
   var json=JSON.parse(response.getContentText());
