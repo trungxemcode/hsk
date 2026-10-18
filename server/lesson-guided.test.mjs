@@ -6,15 +6,17 @@ test('pacing uses visible content, not hidden dictionary metadata',()=>{const a=
 
 test('hands-free slides teach each word and every example in order without interactive gates',()=>{
  const words=[{han:'你',pin:'nǐ',mean:'bạn'},{han:'我',pin:'wǒ',mean:'tôi'}],examples=[{cn:'你好。',pin:'nǐ hǎo',vi:'Xin chào.'},{cn:'你好吗？',pin:'nǐ hǎo ma',vi:'Bạn khỏe không?'}];
- const slides=C.presentation({},words,()=>examples),first=slides.slice(0,12);
- assert.deepEqual(first.map(s=>s.kind),['word','meaning','word','meaning','word','meaning','chinese','meaning','repeat','chinese','meaning','repeat']);
- assert.deepEqual(first.map(s=>s.text),['你','bạn','你','bạn','你','bạn','你好。','Xin chào.','你好。','你好吗？','Bạn khỏe không?','你好吗？']);
- assert.equal(first.filter(s=>s.kind==='word').length,3);assert.ok(first.filter(s=>s.kind==='word').every(s=>s.strokes),'each of three word rounds animates strokes');assert.ok(first.filter(s=>s.kind==='repeat').every(s=>!s.speak),'practice turn is silent');
+ const slides=C.presentation({},words,()=>examples),first=slides.slice(0,10);
+ assert.deepEqual(first.map(s=>s.kind),['word','meaning','meaning','meaning','chinese','meaning','repeat','chinese','meaning','repeat']);
+ assert.deepEqual(first.map(s=>s.text),['你','bạn','bạn','bạn','你好。','Xin chào.','你好。','你好吗？','Bạn khỏe không?','你好吗？']);
+ assert.equal(first.filter(s=>s.kind==='word').length,1);assert.ok(first[0].strokes&&first[0].loopWhileStrokes);assert.equal(first[0].loops,3);assert.ok(first.filter(s=>s.kind==='repeat').every(s=>!s.speak),'practice turn is silent');
  assert.ok(first.filter(s=>s.kind==='meaning').every(s=>s.language==='vi-VN'&&s.speak===s.text));
- assert.deepEqual(first.filter(s=>s.speak).map(s=>s.speak),['你','bạn','你','bạn','你','bạn','你好。','Xin chào.','你好吗？','Bạn khỏe không?']);assert.equal(slides[12].text,'我');
+ assert.deepEqual(first.filter(s=>s.speak).map(s=>s.speak),['你','bạn','bạn','bạn','你好。','Xin chào.','你好吗？','Bạn khỏe không?']);assert.equal(slides[10].text,'我');
  assert.equal(new Set(slides.map(s=>s.id)).size,slides.length);assert.ok(slides.every(s=>!['recall','check'].includes(s.kind)));assert.equal(words[0].mean,'bạn');
 });
 test('presentation chunks long source text without dropping it, and keeps all supplied context',()=>{
+ const meaning='Nghĩa dài cần đọc đủ nội dung. '.repeat(10),wordSlides=C.presentation({},[{han:'学习',pin:'xué xí',mean:meaning}]);
+ assert.equal(wordSlides.filter(s=>s.kind==='word').length,1);assert.equal(wordSlides[0].loopWhileStrokes,true);assert.equal(wordSlides[0].loops,3);assert.equal(wordSlides[0].repetitions,undefined,'Mandarin count follows animation completion');assert.equal(wordSlides.filter(s=>s.kind==='meaning').map(s=>s.speak).join(''),meaning.trim().repeat(3),'three complete meaning passes, including long meanings');
  const cn='周末我们一起学习中文。'.repeat(20),pin='zhōu mò '.repeat(50),vi='Cuối tuần cùng học tiếng Trung. '.repeat(20);
  const slides=C.presentation({content:{dialogues:[{title:'Hội thoại',lines:[{cn,pin,vi}]}],grammar:[{title:'Mẫu câu',pattern:'因为…所以…',usage:'Nêu nguyên nhân.',error:'Không đảo trật tự.',examples:[]}] }},[]);
  assert.equal(slides.filter(s=>s.kind==='chinese').map(s=>s.speak).join(''),cn);

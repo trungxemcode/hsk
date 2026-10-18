@@ -41,8 +41,8 @@ function presentation(lesson,words,examples=()=>[]){
  }
  const wordPractice={repetitions:3};
  for(const [i,w] of unique.entries()){
+  slides.push({kind:'word',strokes:true,loopWhileStrokes:true,loops:wordPractice.repetitions,label:`Từ ${i+1}/${unique.length} · Vừa viết vừa đọc`,text:w.han,pin:w.pin||'',speak:w.han,id:slides.length+':word:'+w.han});
   for(let turn=0;turn<wordPractice.repetitions;turn++){
-   slides.push({kind:'word',strokes:true,label:`Từ ${i+1}/${unique.length} · Trung → Việt · Lượt ${turn+1}/3`,text:w.han,pin:w.pin||'',speak:w.han,id:slides.length+':word:'+w.han+':'+turn});
    text('meaning',w.han+` · Nghĩa · Lượt ${turn+1}/3`,w.mean,120);
   }
   const list=examples(w)||[];for(const [j,x] of list.entries())line(x,`${w.han} · Ví dụ ${j+1}/${list.length}`);

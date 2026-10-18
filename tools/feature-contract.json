@@ -525,6 +525,11 @@
           "kind": "contains",
           "file": "lesson-guided.js",
           "value": "hsk-guided-vi-voice"
+        },
+        {
+          "kind": "contains",
+          "file": "lesson-guided-core.js",
+          "value": "loopWhileStrokes:true"
         }
       ]
     },
