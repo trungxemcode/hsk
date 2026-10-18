@@ -25,3 +25,15 @@ test('guided playback can select a slower live rate without changing the shared 
  const spoken=[];let rate=.6;const player=speech.createPlayer({synth:{getVoices:()=>[zh],cancel(){},speak:u=>spoken.push(u)},Utterance:class{constructor(text){this.text=text;}},rate:()=>rate});
  player.play('你好');assert.equal(spoken[0].rate,.6);rate=.7;player.play('再见');assert.equal(spoken[1].rate,.7);
 });
+test('Vietnamese meanings use a Vietnamese voice and never fall back to Mandarin',()=>{
+ const vi={lang:'vi-VN',name:'Vietnamese',localService:true},e=setup([zh,vi]),text='Bạn là người tôi thường gặp ở trường. '.repeat(4);
+ e.player.play(text,undefined,'vi-VN');assert.equal(e.spoken[0].voice,vi);assert.equal(e.spoken[0].lang,'vi-VN');assert.equal(e.spoken[0].text,text.trim());
+ e.player.stop();e.player.play('你好');assert.equal(e.spoken.at(-1).voice,zh);
+ const missing=setup([zh]);missing.player.play('bạn',undefined,'vi-VN');assert.equal(missing.spoken.length,0);assert.match(missing.messages.at(-1),/giọng tiếng Việt/);
+});
+test('repeated word audio has a gap, ignores duplicate endings and cancels pending repeats',async()=>{
+ const spoken=[],messages=[],player=speech.createPlayer({synth:{getVoices:()=>[zh],cancel(){},speak:u=>spoken.push(u)},Utterance:class{constructor(text){this.text=text;}},gapMs:25,notify:m=>messages.push(m)});
+ player.play(['你','你','你']);spoken[0].onend();spoken[0].onend();assert.equal(spoken.length,1);await new Promise(r=>setTimeout(r,40));assert.equal(spoken.length,2);
+ spoken[1].onend();await new Promise(r=>setTimeout(r,40));assert.equal(spoken.length,3);spoken[2].onend();assert.equal(messages.at(-1),'Đã nghe xong.');
+ player.play(['我','我','我']);spoken.at(-1).onend();player.stop();const count=spoken.length;await new Promise(r=>setTimeout(r,40));assert.equal(spoken.length,count);
+});

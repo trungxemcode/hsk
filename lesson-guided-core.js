@@ -28,21 +28,21 @@ function duration(step,speed=1){let ms;
 function presentation(lesson,words,examples=()=>[]){
  const slides=[],unique=[...new Map(words.filter(w=>w.han&&w.mean).map(w=>[w.han,w])).values()];
  function parts(text,max){const chars=Array.from(String(text||'').trim()),out=[];while(chars.length)out.push(chars.splice(0,max).join(''));return out;}
- function text(kind,label,value,max=100){for(const [i,part] of parts(value,max).entries())slides.push({kind,label,text:part,id:slides.length+':'+kind+':'+i});}
+ function text(kind,label,value,max=100){for(const [i,part] of parts(value,max).entries())slides.push({kind,label,text:part,...(kind==='meaning'?{speak:part,language:'vi-VN'}:{}),id:slides.length+':'+kind+':'+i});}
  function line(x,label){
   const cnParts=parts(x.cn,40),inlinePin=cnParts.length===1&&Array.from(x.pin||'').length<=100;
   for(const cn of cnParts){
    const value=(x.speaker?x.speaker+': ':'')+cn,pin=inlinePin?x.pin||'':'';
    slides.push({kind:'chinese',label:label+' · Nghe mẫu',text:value,pin,speak:cn,id:slides.length+':chinese'});
-   slides.push({kind:'repeat',label:label+' · Bạn đọc theo',text:value,pin,id:slides.length+':repeat'});
   }
   if(x.pin&&!inlinePin)text('pinyin',label+' · Pinyin',x.pin,100);
   if(x.vi)text('meaning',label+' · Nghĩa',x.vi,120);
+  for(const cn of cnParts)slides.push({kind:'repeat',label:label+' · Bạn đọc theo',text:(x.speaker?x.speaker+': ':'')+cn,pin:inlinePin?x.pin||'':'',id:slides.length+':repeat'});
  }
  for(const [i,w] of unique.entries()){
-  slides.push({kind:'word',label:`Từ ${i+1}/${unique.length}`,text:w.han,pin:w.pin||'',speak:w.han,id:slides.length+':word:'+w.han});
-  for(const han of [...new Set(Array.from(w.han).filter(c=>/\p{Script=Han}/u.test(c)))])slides.push({kind:'strokes',label:w.han+' · Xem nét viết 3 lượt',text:han,loops:3,id:slides.length+':strokes:'+han});
+  slides.push({kind:'word',label:`Từ ${i+1}/${unique.length} · Nghe 3 lượt`,text:w.han,pin:w.pin||'',speak:w.han,repetitions:3,id:slides.length+':word:'+w.han});
   text('meaning',w.han+' · Nghĩa',w.mean,120);
+  for(const han of [...new Set(Array.from(w.han).filter(c=>/\p{Script=Han}/u.test(c)))])slides.push({kind:'strokes',label:w.han+' · Xem nét viết 3 lượt',text:han,loops:3,id:slides.length+':strokes:'+han});
   const list=examples(w)||[];for(const [j,x] of list.entries())line(x,`${w.han} · Ví dụ ${j+1}/${list.length}`);
  }
  const c=lesson.content||{};
@@ -54,6 +54,7 @@ function presentation(lesson,words,examples=()=>[]){
 function slideDuration(slide,speed=.75){return Math.max(6500,Math.min(24000,Array.from(slide.text||'').length*(slide.kind==='meaning'?130:180)))/Math.max(.65,Math.min(1,Number(speed)||.75));}
 function practiceLead(){return 2500;}
 function transitionPause(){return 2200;}
+function pronunciationGap(){return 1400;}
 function karaokeDuration(slide,speed=.75,modelMs=0){const count=Array.from(slide.text||'').filter(c=>/\p{Script=Han}/u.test(c)).length;return Math.max(8000,count*650,modelMs*1.4)/Math.max(.65,Math.min(1,Number(speed)||.75));}
-const api={plan,duration,presentation,slideDuration,practiceLead,transitionPause,karaokeDuration};root.HSKGuidedCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
+const api={plan,duration,presentation,slideDuration,practiceLead,transitionPause,pronunciationGap,karaokeDuration};root.HSKGuidedCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window==='object'?window:globalThis);

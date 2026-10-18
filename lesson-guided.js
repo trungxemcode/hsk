@@ -7,7 +7,7 @@ function presentation(lesson,words,store){
  let pos=0,playing=true,closed=false,timer,watchdog,karaokeTimer,writer=null,epoch=0,wake=null,ownedFullscreen=false,spokenStarted=0;
  const modelTimes=new Map(),strokeData=new Map();
  const priorFocus=document.activeElement,saved=store.read().guidedShow;
- if(saved?.version===2){const found=frames.findIndex(f=>f.id===saved.frameId);if(found>=0)pos=found;}
+ if(saved?.version===3){const found=frames.findIndex(f=>f.id===saved.frameId);if(found>=0)pos=found;}
  const dialog=el('dialog',undefined,'guided-presentation'),head=el('header'),label=el('p'),progress=el('progress'),stage=el('div',undefined,'guided-slide'),caption=el('p',undefined,'guided-slide-label'),text=el('p',undefined,'guided-slide-text'),pin=el('p',undefined,'guided-slide-pin'),status=el('p',undefined,'guided-slide-status'),foot=el('footer'),actions=el('div',undefined,'guided-slide-actions');
  dialog.setAttribute('aria-label','Trình chiếu học tự động');stage.setAttribute('aria-live','off');status.setAttribute('role','status');progress.max=frames.length||1;progress.setAttribute('aria-label','Tiến độ trình chiếu');
  const pause=button('Tạm dừng',()=>{if(pos>=frames.length){pos=0;playing=true;render();return;}playing=!playing;stop();update();if(playing)run();});
@@ -16,17 +16,17 @@ function presentation(lesson,words,store){
  const speed=el('select');speed.setAttribute('aria-label','Tốc độ trình chiếu');for(const [value,name] of [[.65,'Rất chậm'],[.75,'Chậm'],[1,'Vừa']]){const o=el('option',name);o.value=value;speed.append(o);}speed.value='0.75';speed.onchange=()=>{stop();if(playing)run();};
  const strokeHost=el('div',undefined,'guided-stroke-stage');strokeHost.hidden=true;strokeHost.setAttribute('aria-label','Mẫu thứ tự nét viết');
  head.append(label,exit);stage.append(caption,text,strokeHost,pin);actions.append(previous,pause,next);foot.append(status,actions,soundLabel,speed,manual);dialog.append(head,progress,stage,foot);document.body.append(dialog);document.body.classList.add('guided-presenting');dialog.showModal();
- function save(){if(!closed)store.persist({guidedShow:{version:2,frameId:frames[pos]?.id||'done',updatedAt:Date.now()}});}
+ function save(){if(!closed)store.persist({guidedShow:{version:3,frameId:frames[pos]?.id||'done',updatedAt:Date.now()}});}
  function releaseWake(){const old=wake;wake=null;old?.release().catch(()=>{});}
  function keepAwake(){if(!playing||closed||document.hidden||!navigator.wakeLock||wake)return;const id=epoch;navigator.wakeLock.request('screen').then(lock=>{if(closed||!playing||id!==epoch)lock.release().catch(()=>{});else wake=lock;}).catch(()=>{});}
  function stop(){epoch++;clearTimeout(timer);clearTimeout(watchdog);clearTimeout(karaokeTimer);writer?.pauseAnimation();writer=null;player?.stop();releaseWake();}
  function update(){pause.textContent=pos>=frames.length?'Học lại':playing?'Tạm dừng':'Tiếp tục';pause.setAttribute('aria-pressed',String(playing));previous.disabled=pos===0;next.disabled=pos>=frames.length;}
  function schedule(ms){const id=epoch;clearTimeout(timer);timer=setTimeout(()=>{if(!closed&&playing&&id===epoch)move(1);},ms);}
- const player=window.HSKSpeech?.createPlayer({synth:window.speechSynthesis,Utterance:window.SpeechSynthesisUtterance,rate:()=>.8*Number(speed.value),notify:message=>{
+ const player=window.HSKSpeech?.createPlayer({synth:window.speechSynthesis,Utterance:window.SpeechSynthesisUtterance,rate:()=>frames[pos]?.language==='vi-VN' ? .95 : .8*Number(speed.value),gapMs:()=>window.HSKGuidedCore.pronunciationGap()/Number(speed.value),notify:message=>{
   if(closed||!playing)return;
   if(message==='Đã nghe xong.'){clearTimeout(watchdog);status.textContent='';const f=frames[pos],elapsed=Date.now()-spokenStarted;if(f.kind==='chinese')modelTimes.set(f.text,elapsed);schedule(Math.max(window.HSKGuidedCore.transitionPause()/Number(speed.value),window.HSKGuidedCore.slideDuration(f,Number(speed.value))-elapsed));}
-  else if(message==='Đang phát âm tiếng Trung…')status.textContent='Đang đọc…';
-  else{playing=false;stop();status.title=message;status.textContent=message.includes('Chưa tìm thấy')?'Chưa có giọng Mandarin. Thêm giọng vào thiết bị, rồi bấm Tiếp tục.':'Chưa phát được âm thanh. Bấm Tiếp tục để thử lại hoặc tắt Âm thanh.';update();}
+  else if(message.startsWith('Đang phát âm'))status.textContent=frames[pos]?.language==='vi-VN'?'Đang đọc nghĩa tiếng Việt…':'Đang đọc tiếng Trung…';
+  else{playing=false;stop();status.title=message;status.textContent=message.includes('Chưa tìm thấy')?(frames[pos]?.language==='vi-VN'?'Chưa có giọng tiếng Việt. Thêm giọng Vietnamese rồi bấm Tiếp tục.':'Chưa có giọng Mandarin. Thêm giọng vào thiết bị, rồi bấm Tiếp tục.'):'Chưa phát được âm thanh. Bấm Tiếp tục để thử lại hoặc tắt Âm thanh.';update();}
  }});
  function run(){
   if(closed||!playing||pos>=frames.length)return;keepAwake();const f=frames[pos];status.textContent='';
@@ -34,7 +34,7 @@ function presentation(lesson,words,store){
   if(f.kind==='repeat'){readAlong(f,epoch);return;}
   if(sound.checked&&f.speak){
    if(!player){playing=false;status.textContent='Thiết bị chưa hỗ trợ giọng đọc. Tắt Âm thanh để xem tự động.';update();return;}
-   const id=epoch;spokenStarted=Date.now();watchdog=setTimeout(()=>{if(!closed&&playing&&id===epoch){playing=false;stop();status.textContent='Giọng đọc chưa kết thúc. Bấm Tiếp tục để thử lại.';update();}},Math.min(120000,15000+f.speak.length*1600));player.play(f.speak);
+   const id=epoch,repetitions=Math.max(1,Math.min(3,f.repetitions||1));spokenStarted=Date.now();watchdog=setTimeout(()=>{if(!closed&&playing&&id===epoch){playing=false;stop();status.textContent='Giọng đọc chưa kết thúc. Bấm Tiếp tục để thử lại.';update();}},Math.min(240000,15000+f.speak.length*1600*repetitions+window.HSKGuidedCore.pronunciationGap()/Number(speed.value)*(repetitions-1)));player.play(Array(repetitions).fill(f.speak),undefined,f.language||'zh-CN');
   }else schedule(window.HSKGuidedCore.slideDuration(f,Number(speed.value)));
  }
  async function animateStrokes(f,id){
