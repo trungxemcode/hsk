@@ -115,6 +115,7 @@ function hskWarmIsolatedTick(){
       p.setProperty('HSK_BATCH_REPAIR_POLICY','isolated-v1');
     }
     var jobs=[],seen=new Set(),characters=0,max=Math.max(1,Math.min(10,Number(p.getProperty('HSK_WARM_ISOLATED_SIZE')||5)));
+    if(model==='gemini-3.1-flash-tts-preview')max=1;
     function choose(index){
       var text=texts[index];if(typeof text!=='string')return false;
       var key=hskDigest_(JSON.stringify(['zh-CN','Kore',model,text]));if(isReady(text)||seen.has(key))return true;
@@ -139,8 +140,9 @@ function hskWarmIsolatedTick(){
     }catch(e){
       var reason=String(e.message||'batch_transport_uncertain').replace(/[^a-z0-9_]/gi,'_').slice(0,90),attempts=e.providerAttempts===undefined?1:e.providerAttempts,delay=Math.max(60000,Number(e.retryAfter||600)*1000);
       ['HSK_WARM_VENDOR_CALLS','HSK_WARM_CALLS'].forEach(function(k){p.setProperty(k,String(Number(p.getProperty(k)||0)+attempts));});
-      var keyOnly=/_429_|tts_daily_limit|tts_rate_limited|tts_key_invalid|tts_permission_denied|tts_quota_unavailable/.test(reason);
+      var keyOnly=/_429_|tts_daily_limit|tts_rate_limited|tts_key_invalid|tts_permission_denied|tts_quota_unavailable|tts_request_rejected|tts_model_unavailable|tts_region_unavailable/.test(reason);
       var retryable=keyOnly||e.retryable===true;
+      if(e.diagnostic)p.setProperty('HSK_WARM_LAST_DIAGNOSTIC',JSON.stringify(e.diagnostic));
       row[3]=retryable?'FAILED':'REVIEW';row[4]=reason;journal.getRange(rowNumber,1,1,7).setValues([row]);
       jobs.forEach(function(j){hskParallelQueue_(queue,deferred,j.index,j.text,reason,retryable,delay,keyOnly?0:attempts);});
       p.setProperty('HSK_WARM_SLOT_'+slot+'_AFTER',String(now+delay));p.setProperty('HSK_WARM_LAST_ERROR',reason);p.setProperty('HSK_WARM_RETRY_AT',String(now+60000));

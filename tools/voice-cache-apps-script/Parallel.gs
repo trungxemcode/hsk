@@ -31,6 +31,7 @@ function hskParallelDecode_(response) {
   if(status!==200||!data.ok){
     var known=/^(identity_unavailable|unauthorized|voice_not_configured|tts_provider_unavailable|invalid_model|invalid_tts_audio|invalid_tts_response|tts_generation_incomplete|tts_blocked|tts_rate_limited|tts_daily_limit|tts_quota_unavailable|tts_key_invalid|tts_permission_denied|tts_region_unavailable|tts_model_unavailable|tts_request_rejected|tts_transport_uncertain)$/.test(String(data.error||''))?data.error:'request_failed';
     var error=Error('cloudflare_tts_'+status+'_'+known);
+    error.diagnostic=data.diagnostic||null;
     error.status=status;error.retryable=typeof data.retryable==='boolean'?data.retryable:[429,503,504].indexOf(status)>=0||known==='tts_generation_incomplete'||known==='tts_provider_unavailable';
     error.providerAttempts=Number.isInteger(data.providerAttempts)?Math.max(0,Math.min(2,data.providerAttempts)):/^(unauthorized|identity_unavailable|voice_not_configured|invalid_model)$/.test(known)?0:1;
     error.retryAfter=Math.min(604800,Math.max(60,Number(data.retryAfter)||600));

@@ -82,6 +82,15 @@ test('verified successful key wins over unproven key without bypassing cooldown'
 
 test('recovered model has correct cache identity and existing audio is reused across models',()=>{
  const f=fixture();f.p.setProperty('HSK_WARM_SLOT_6_MODEL','gemini-3.1-flash-tts-preview');f.c.hskParallelAvailability_=()=>[{slot:6,retryAfter:0}];
- f.c.hskWarmIsolatedTick();assert.equal(f.calls,1);assert.ok(f.storage.sheet.rows.every(r=>r[3]==='gemini-3.1-flash-tts-preview'));
- f.props.delete('HSK_WARM_RETRY_AT');f.c.hskParallelAvailability_=()=>[{slot:0,retryAfter:0}];f.c.hskWarmIsolatedTick();assert.equal(f.calls,1);assert.equal(f.files.size,6);
+ for(let i=0;i<5;i++){f.props.delete('HSK_WARM_RETRY_AT');f.props.delete('HSK_WARM_SLOT_6_AFTER');f.c.hskWarmIsolatedTick();}assert.equal(f.calls,5);assert.ok(f.storage.sheet.rows.every(r=>r[3]==='gemini-3.1-flash-tts-preview'));
+ f.props.delete('HSK_WARM_RETRY_AT');f.c.hskParallelAvailability_=()=>[{slot:0,retryAfter:0}];f.c.hskWarmIsolatedTick();assert.equal(f.calls,5);assert.equal(f.files.size,10);
+});
+
+test('recovered model starts with one item matching the verified live probe',()=>{
+ const f=fixture();f.p.setProperty('HSK_WARM_SLOT_6_MODEL','gemini-3.1-flash-tts-preview');f.c.hskParallelAvailability_=()=>[{slot:6,retryAfter:0}];f.c.hskWarmIsolatedTick();assert.equal(f.sent,1);assert.equal(f.storage.sheet.rows.length,1);
+});
+
+test('model rejection defers only the selected key and never stops other keys',()=>{
+ const f=fixture();f.c.UrlFetchApp.fetch=()=>({getResponseCode:()=>502,getContentText:()=>JSON.stringify({ok:false,error:'tts_request_rejected',providerAttempts:1,retryable:false,retryAfter:86400,diagnostic:{status:'INVALID_ARGUMENT'}})});
+ f.c.hskWarmIsolatedTick();assert.equal(f.props.get('HSK_WARM_ENABLED'),'true');assert.ok(f.queue.rows.every(r=>r[4]==='PENDING'&&r[2]===0));assert.ok(f.props.get('HSK_WARM_LAST_DIAGNOSTIC').includes('INVALID_ARGUMENT'));
 });
