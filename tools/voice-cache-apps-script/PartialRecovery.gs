@@ -72,13 +72,15 @@ function hskPartialHandleMismatch_(storage,journal,rowNumber,row,queue,deferred,
  }
  return false; // Use original safe full-retry/rejection behavior.
 }
+/** Log only short, safe result metadata — never audio, Gemini keys or Google tokens. */
+function hskRepairReport_(result){console.log('HSK_PARTIAL_REPAIR '+JSON.stringify(result));return result;}
 /** Manually invoked ONE rejected master per run. Never auto-launch on live jobs or regenerate audio. */
 function hskRepairOneRejectedMaster(){
  var p=hskSettings_();p.setProperty('HSK_WARM_ENABLED','false');
- var lock=LockService.getScriptLock();if(!lock.tryLock(1000))return {ok:false,error:'busy'};
+ var lock=LockService.getScriptLock();if(!lock.tryLock(1000))return hskRepairReport_({ok:false,status:'BUSY',error:'busy'});
  try{
   var storage=hskCheck_(p),journal=hskBatchTable_(storage),batches=hskBatchRows_(journal,7),
-    queue=hskWarmQueue_(storage),deferred=hskBatchRows_(queue,6);
+    queue=hskWarmQueue_(storage),deferred=hskBatchRows_(queue,6),inspected=[];
   for(var i=0;i<batches.length;i++){
    var row=batches[i];
    if(row[3]!=='REJECTED'||!row[2]||!/^batch_segment_count_mismatch/.test(String(row[4])))continue;
@@ -86,10 +88,11 @@ function hskRepairOneRejectedMaster(){
    if(result.kind==='partial'){
     p.setProperty('HSK_WARM_SAVED_SINCE_FIX',String(Number(p.getProperty('HSK_WARM_SAVED_SINCE_FIX')||0)+result.saved));
     hskWarmProgress_(storage,p);
-    return {ok:true,status:'PARTIAL',saved:result.saved,missing:result.missing,batch:String(row[0]).slice(0,12)};
+    return hskRepairReport_({ok:true,status:'PARTIAL',saved:result.saved,missing:result.missing,batch:String(row[0]).slice(0,12)});
    }
-   if(result.kind==='review')return {ok:false,status:'REVIEW',error:result.reason,batch:String(row[0]).slice(0,12)};
+   if(result.kind==='review')return hskRepairReport_({ok:false,status:'REVIEW',error:result.reason,batch:String(row[0]).slice(0,12)});
+   inspected.push({batch:String(row[0]).slice(0,12),reason:result.reason||'unmatched_segment_count'});
   }
-  return {ok:true,status:'NOTHING_ELIGIBLE'};
+  return hskRepairReport_({ok:false,status:'NOTHING_ELIGIBLE',inspected:inspected});
  }finally{lock.releaseLock();}
 }
