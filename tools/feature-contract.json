@@ -1025,13 +1025,114 @@
       "id": "gemini-voice-precache",
       "name": "Kho audio Kore xác thực Google và bảo vệ dữ liệu âm thanh",
       "checks": [
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"createVoicePrecacheHandler"},
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"decodeVoiceAudio"},
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"tts_generation_incomplete"},
-        {"kind":"contains","file":"tools/voice-cache-apps-script/WarmBatch.gs","value":"HSK_WARM_RETRY_AT"},
-        {"kind":"file","file":"server/voice-apps-script.test.mjs","value":""},
-        {"kind":"file","file":"server/voice-bundle.test.mjs","value":""},
-        {"kind":"file","file":"server/voice-tts.test.mjs","value":""}
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "createVoicePrecacheHandler"
+        },
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "decodeVoiceAudio"
+        },
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "tts_generation_incomplete"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/WarmBatch.gs",
+          "value": "HSK_WARM_RETRY_AT"
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-apps-script.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-bundle.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-tts.test.mjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "voice-cache-parallel-nine",
+      "name": "Kho audio nền chín luồng chống trùng",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/Parallel.gs",
+          "value": "function hskWarmParallelTick()"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/Parallel.gs",
+          "value": "UrlFetchApp.fetchAll(requests)"
+        },
+        {
+          "kind": "contains",
+          "file": "server/voice-parallel.test.mjs",
+          "value": "uncertain batch transport never automatically regenerates reserved sentences"
+        }
+      ]
+    },
+    {
+      "id": "voice-cache-efficient-quota",
+      "name": "Kho voice tiết kiệm quota và tự điều chỉnh tải",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "voiceProviderFailure"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/Parallel.gs",
+          "value": "hskParallelAvailability_"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/Parallel.gs",
+          "value": "HSK_WARM_CONCURRENCY"
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-efficiency.test.mjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "voice-isolated-batch",
+      "name": "Voice batch isolation, DSP and failed-clip repair",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "tools/voice-cache-apps-script/IsolatedBatch.gs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/IsolatedBatch.gs",
+          "value": "function hskWarmIsolatedTick()"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/IsolatedBatch.gs",
+          "value": "function hskBatchSplit_"
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-isolated.test.mjs",
+          "value": ""
+        }
       ]
     }
   ]
