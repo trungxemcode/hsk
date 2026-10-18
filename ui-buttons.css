@@ -1,9 +1,9 @@
 /* Default policy for all existing and future buttons; feedback colors remain semantic. */
 
 html body.studio-enabled button:not(.correct):not(.wrong){background:var(--button-bg)!important;color:var(--button-text)!important;border-color:var(--button-border)!important;box-shadow:none}
-html body.studio-enabled button:is(.active,[aria-pressed=true],[aria-current=page]):not(:disabled),html body.studio-enabled button:is(:hover,:active,:focus-visible):not(:disabled){background:var(--button-active-bg)!important;color:var(--button-active-text)!important;border-color:var(--button-active-bg)!important}
-html body.studio-enabled button:is(.active,[aria-pressed=true],[aria-current=page],:hover,:active,:focus-visible):not(:disabled) :is(strong,small,span,p,em,i,svg){color:var(--button-active-text)!important}
-html body.studio-enabled button:disabled{background:var(--button-disabled-bg)!important;color:var(--button-disabled-text)!important;border-color:var(--button-disabled-bg)!important;cursor:not-allowed}
+html body.studio-enabled button:not(.correct):not(.wrong):is(.active,[aria-pressed=true],[aria-current=page]):not(:disabled),html body.studio-enabled button:not(.correct):not(.wrong):is(:hover,:active,:focus-visible):not(:disabled){background:var(--button-active-bg)!important;color:var(--button-active-text)!important;border-color:var(--button-active-bg)!important}
+html body.studio-enabled button:not(.correct):not(.wrong):is(.active,[aria-pressed=true],[aria-current=page],:hover,:active,:focus-visible):not(:disabled) :is(strong,small,span,p,em,i,svg){color:var(--button-active-text)!important}
+html body.studio-enabled button:disabled:not(.correct):not(.wrong){background:var(--button-disabled-bg)!important;color:var(--button-disabled-text)!important;border-color:var(--button-disabled-bg)!important;cursor:not-allowed}
 html body.studio-enabled button:focus-visible{outline:2px solid var(--button-active-bg);outline-offset:3px}
 body.studio-enabled :is(input[type=checkbox],input[type=radio],progress){accent-color:var(--button-active-bg)}
 body.studio-enabled :is(input,textarea,select):focus-visible{outline:2px solid var(--button-active-bg);outline-offset:2px}
