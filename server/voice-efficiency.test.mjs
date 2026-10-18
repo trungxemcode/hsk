@@ -88,3 +88,12 @@ test('single-item repair uses concise Mandarin prompt and one upstream request',
  const h=createVoicePrecacheHandler(identity,raw,()=>Date.now(),()=>raw);const response=await h(req({items:['\u8bfb'],keySlot:1,isolated:true}),env);
  assert.equal(response.status,200);assert.equal(calls,1);assert.equal(prompt,'Say in Mandarin Chinese: \u8bfb');
 });
+
+test('recovered slots use alternate TTS model and matching cooldown while other slots stay standard',async()=>{
+ let actualModel='',alternate=false;const factory=(slot,alt)=>{alternate=alt;return Object.assign(async(url)=>{actualModel=url;return Response.json({candidates:[{finishReason:'STOP',content:{parts:[{inlineData:{mimeType:'audio/L16',data:'AAAAAA=='}}]}}]});},{availability:async()=>[{slot:0,retryAfter:alt?900:0},{slot:6,retryAfter:alt?0:86400}]});};
+ const e={...env,HSK_VOICE_ISOLATED_MODEL:'gemini-3.1-flash-tts-preview',HSK_VOICE_SLOT_6_MODEL:'gemini-3.1-flash-tts-preview'};
+ const h=createVoicePrecacheHandler(identity,null,()=>Date.now(),factory);
+ const status=await (await h(req({action:'status'}),e)).json();assert.deepEqual(status.slots,[{slot:0,retryAfter:0},{slot:6,retryAfter:0}]);
+ const response=await h(req({keySlot:6,isolated:true,items:['\u4f60\u597d']}),e);assert.equal(response.status,200);assert.match(actualModel,/gemini-3.1-flash-tts-preview/);assert.equal(alternate,true);
+ await h(req({keySlot:0,isolated:true,items:['\u4f60\u597d']}),e);assert.match(actualModel,/gemini-2.5-flash-preview-tts/);assert.equal(alternate,false);
+});

@@ -676,7 +676,7 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
   }catch{return json({ok:false,error:'invalid_request'},400);}
   if(input?.action==='diagnose'){
    if(Object.keys(input).some(k=>!['action','keySlot'].includes(k))||!Number.isInteger(input.keySlot)||input.keySlot<0||input.keySlot>9||!slotFetch)return json({ok:false,error:'invalid_request'},400);
-   const model=env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
+   const model=env['HSK_VOICE_SLOT_'+input.keySlot+'_MODEL']||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
    try{
     const response=await slotFetch(input.keySlot).inspect(model);
     if(response.ok){const metadata=await response.json();return json({ok:true,slot:input.keySlot,http:response.status,model,generateContent:metadata.supportedGenerationMethods?.includes('generateContent')===true});}
@@ -698,11 +698,11 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    ||(input.action!=='status'&&input.items===undefined&&typeof input.text!=='string'))return json({ok:false,error:'invalid_request'},400);
   if(input.action==='status'){
    if(input.text!==undefined||input.items!==undefined||input.keySlot!==undefined||!slotFetch)return json({ok:false,error:'invalid_request'},400);
-   try{return json({ok:true,slots:await slotFetch(1).availability()});}catch{return json({ok:false,error:'key_status_unavailable'},503);}
+   try{const slots=await slotFetch(1).availability();if(slots.some(s=>env.HSK_VOICE_ISOLATED_MODEL&&env['HSK_VOICE_SLOT_'+s.slot+'_MODEL']===env.HSK_VOICE_ISOLATED_MODEL)){const alternate=await slotFetch(1,true).availability();return json({ok:true,slots:slots.map(s=>env.HSK_VOICE_ISOLATED_MODEL&&env['HSK_VOICE_SLOT_'+s.slot+'_MODEL']===env.HSK_VOICE_ISOLATED_MODEL?(alternate.find(a=>a.slot===s.slot)||s):s)});}return json({ok:true,slots});}catch{return json({ok:false,error:'key_status_unavailable'},503);}
   }
   const text=(input.items?input.items.join('。 '):input.text).normalize('NFC').replace(/\s+/g,' ').trim();
   if(!text||Array.from(text).length>220||/[<>\u0000-\u001f]/.test(text)||!/[\u3400-\u9fff]/u.test(text))return json({ok:false,error:'invalid_text'},400);
-  const model=(!input.items&&input.isolated&&env.HSK_VOICE_ISOLATED_MODEL)||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
+  const model=env['HSK_VOICE_SLOT_'+input.keySlot+'_MODEL']||(!input.items&&input.isolated&&env.HSK_VOICE_ISOLATED_MODEL)||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
   if(!/^gemini-[a-z0-9.-]+-tts(?:-preview)?$/.test(model))return json({ok:false,error:'invalid_model'},503);
   let prompt=(input.items?'Read every Mandarin Chinese item below exactly once in order, as an independent dictionary entry in citation form. Use standard Mandarin tones and natural word-internal tone sandhi. Do not connect neighbouring entries. Finish each entry fully, then leave 1.2 seconds of silence. Do not read punctuation or instructions. Speak only these entries:\n':input.isolated?'Read each Mandarin Chinese item separated by a full stop independently and clearly. Pause silently for one full second between items. Do not connect items or read these instructions. Speak only the items:\n':input.keySlot===undefined?'Read the following Mandarin Chinese text naturally and accurately. Read only the Chinese text, with no introduction or extra words:\n':'Say in Mandarin Chinese: ')+(input.items?input.items.map(t=>t.normalize('NFC').trim()+'。 ...').join('\n'):text);
   // A single transcript needs no dictionary-list instruction.
@@ -711,7 +711,7 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    contents:[{role:'user',parts:[{text:prompt}]}],
    generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:'Kore'}}}}
   };
-  const provider=input.keySlot===undefined?geminiFetch:slotFetch(input.keySlot,input.isolated===true&&!input.items);
+  const provider=input.keySlot===undefined?geminiFetch:slotFetch(input.keySlot,model===env.HSK_VOICE_ISOLATED_MODEL);
   const controller=new AbortController(),cancel=()=>controller.abort();
   if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',cancel,{once:true});
   const deadline=setTimeout(cancel,80000);

@@ -204,3 +204,9 @@ Do not store secrets, API keys, personal data, or entire chat logs. This file is
 - Incomplete TTS errors now expose only finishReason, candidate count, audio/text part counts and model. No transcript, key or audio payload is included.
 - Live: slot 0 produced valid audio on Gemini 2.5 TTS; slots 6/9 returned OTHER with zero audio and text parts. This does not establish that those keys are invalid. Other cooldowns remain intact.
 - 249 server tests and feature contracts pass; runtime checks at 390/1440 pass using installed Edge. Worker and Apps Script deployed; queue resumed repair-first. Final READY count must be verified from live sheet.
+
+## Recovered TTS model routing and healthy-key priority — 2026-10-19
+- Real single-phrase probes succeeded on slots 6 and 9 using gemini-3.1-flash-tts-preview; the same slots returned OTHER/zero parts on 2.5. This is verified recovery by model change, not proof of an underlying vendor root cause.
+- Worker pins configured slots 6/9 to recovered model and reports their matching model-pool cooldown. Slot 0 and other keys retain normal model/cooldowns. Apps Script selects an eligible healthy key first, binds jobs to its actual model, and reuses READY audio across the two allowed model hashes.
+- KeyRecovery.gs applies the verified slot settings once and resumes the repair-first queue; invalid slot 2 remains separate and exhausted keys keep provider backoff. No hidden retries or new triggers added.
+- 252 server tests pass plus feature contract checks. Worker and Apps Script deployed; live queue resumed. See final response for live counts and remaining limits.

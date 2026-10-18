@@ -66,3 +66,6 @@ Gemini-first reading avoids the measured 18-second xKiro timeout. Source text is
 
 ## AI abuse guard — Worker 3.5.1
 `server/ai-control.mjs` abuse-start/finish uses atomic per-account leases, canonical hashes (no private result cache), central 3s/10s pacing and reading/query-specific temporary breakers. `translator-worker.mjs` applies only after Firebase lookup, requires verified email for regular accounts, derives the <24h starter 10+3 budget from Firebase createdAt, releases on all exits/cancel, and fails closed without the coordinator. Trusted ADMIN_UIDS bypass ALL app quotas, pacing, concurrency, verification/starter rules and breakers, including existing reading lock contention. Payload/auth/provider constraints remain. Flags and rollback in server/README.md; tests server/ai-abuse.test.mjs; no PWA or new infrastructure.
+
+### Voice key/model recovery (2026-10-19)
+`server/voice-tts.mjs` supports server-owned `HSK_VOICE_SLOT_N_MODEL` overrides and model-pool health; distinct primary key is slot 0 (`gemini-keys.mjs`). `IsolatedBatch.gs` prioritizes proven eligible slots, records actual job model and reuses READY clips across standard/recovery model hashes. `KeyRecovery.gs` enables verified slots 6/9 on 3.1 after deployment. Keep secrets in Worker; no key values belong in scripts or logs.

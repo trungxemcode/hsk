@@ -72,3 +72,16 @@ test('repair queue can use legacy slot zero and treats it as a valid selected ke
  assert.equal(f.calls,1);assert.equal(f.tables.get('Voice_Batches').rows[0][6],0);
  assert.equal(f.storage.sheet.rows.filter(r=>r[11]==='READY').length,5);
 });
+
+test('verified successful key wins over unproven key without bypassing cooldown',()=>{
+ const f=fixture(),j=f.c.hskBatchTable_(f.storage);j.appendRow(['prior','[]','','DONE','',new Date().toISOString(),0]);
+ f.c.hskParallelAvailability_=()=>[{slot:0,retryAfter:0},{slot:6,retryAfter:0}];f.props.set('HSK_WARM_NEXT_SLOT','6');f.c.hskWarmIsolatedTick();assert.equal(j.rows.at(-1)[6],0);
+ const g=fixture(),k=g.c.hskBatchTable_(g.storage);k.appendRow(['prior','[]','','DONE','',new Date().toISOString(),0]);
+ g.c.hskParallelAvailability_=()=>[{slot:0,retryAfter:900},{slot:6,retryAfter:0}];g.c.hskWarmIsolatedTick();assert.equal(k.rows.at(-1)[6],6);
+});
+
+test('recovered model has correct cache identity and existing audio is reused across models',()=>{
+ const f=fixture();f.p.setProperty('HSK_WARM_SLOT_6_MODEL','gemini-3.1-flash-tts-preview');f.c.hskParallelAvailability_=()=>[{slot:6,retryAfter:0}];
+ f.c.hskWarmIsolatedTick();assert.equal(f.calls,1);assert.ok(f.storage.sheet.rows.every(r=>r[3]==='gemini-3.1-flash-tts-preview'));
+ f.props.delete('HSK_WARM_RETRY_AT');f.c.hskParallelAvailability_=()=>[{slot:0,retryAfter:0}];f.c.hskWarmIsolatedTick();assert.equal(f.calls,1);assert.equal(f.files.size,6);
+});

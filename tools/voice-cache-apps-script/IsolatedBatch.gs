@@ -97,8 +97,18 @@ function hskWarmIsolatedTick(){
         prior[3]='REVIEW';prior[4]='batch_transport_uncertain';journal.getRange(b+2,1,1,7).setValues([prior]);p.setProperty('HSK_WARM_LAST_ERROR',prior[4]);p.setProperty('HSK_WARM_ENABLED','false');return;
       }
     }
-    var texts=hskWarmCorpus_(),model=p.getProperty('HSK_VOICE_MODEL')||'gemini-2.5-flash-preview-tts',records=hskBatchRows_(storage.sheet,13),ready=new Set();
+    var token=ScriptApp.getIdentityToken(),health=hskParallelAvailability_(token),earliest=Infinity,slot=null;
+    var next=Number(p.getProperty('HSK_WARM_NEXT_SLOT')||1);
+    // Prefer keys with verified completed batches; inspect unhealthy keys separately.
+    var scores={},candidates=[];
+    batches.forEach(function(r){var n=Number(r[6]);if(r[6]===''||!Number.isInteger(n)||n<0||n>9)return;var delta=r[3]==='DONE'?1:r[3]==='FAILED'?-1:0;scores[n]=(scores[n]||0)+delta;});
+    for(var lane=0;lane<10;lane++){var n=(next+lane)%10,item=health.filter(function(s){return s.slot===n;})[0];if(!item)continue;var until=Math.max(now+Number(item.retryAfter||0)*1000,Number(p.getProperty('HSK_WARM_SLOT_'+n+'_AFTER')||0));if(until<=now)candidates.push({slot:n,score:scores[n]||0,order:lane});else earliest=Math.min(earliest,until);}
+    candidates.sort(function(a,b){return b.score-a.score||a.order-b.order;});
+    if(candidates.length)slot=candidates[0].slot;
+    if(slot===null){p.setProperty('HSK_WARM_RETRY_AT',String(earliest<Infinity?earliest:now+3600000));p.setProperty('HSK_WARM_LAST_ERROR','tts_keys_cooling');return;}
+    var texts=hskWarmCorpus_(),model=p.getProperty('HSK_WARM_SLOT_'+slot+'_MODEL')||p.getProperty('HSK_VOICE_MODEL')||'gemini-2.5-flash-preview-tts',records=hskBatchRows_(storage.sheet,13),ready=new Set();
     records.forEach(function(r){if(r[11]==='READY'&&r[4])ready.add(String(r[0]));});
+    function isReady(text){return [model,p.getProperty('HSK_VOICE_MODEL')||'gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview'].some(function(m){return ready.has(hskDigest_(JSON.stringify(['zh-CN','Kore',m,text])));});}
     // Repair known failed TTS outputs, including old REVIEW/attempt-exhausted errors, once under this new strategy.
     if(p.getProperty('HSK_BATCH_REPAIR_POLICY')!=='isolated-v1'){
       deferred.forEach(function(r,i){if(r[4]!=='DONE'&&/tts_generation_incomplete|invalid_tts_audio|tts_provider_unavailable|tts_daily_limit|tts_rate_limited|tts_key_invalid|tts_permission_denied|tts_quota_unavailable/.test(String(r[5]))){r[2]=0;r[3]=now;r[4]='PENDING';queue.getRange(i+2,1,1,6).setValues([r]);}});
@@ -107,22 +117,18 @@ function hskWarmIsolatedTick(){
     var jobs=[],seen=new Set(),characters=0,max=Math.max(1,Math.min(10,Number(p.getProperty('HSK_WARM_ISOLATED_SIZE')||5)));
     function choose(index){
       var text=texts[index];if(typeof text!=='string')return false;
-      var key=hskDigest_(JSON.stringify(['zh-CN','Kore',model,text]));if(ready.has(key)||seen.has(key))return true;
+      var key=hskDigest_(JSON.stringify(['zh-CN','Kore',model,text]));if(isReady(text)||seen.has(key))return true;
       // Existing bridge has a 31-second PCM bound. Keep short batches; long sentences use one request.
       if(jobs.length>=max||characters+text.length+4>220||jobs.length&&characters+text.length+4>55)return false;
       seen.add(key);characters+=text.length+4;jobs.push({index:index,text:text,key:key,model:model});return true;
     }
-    deferred.forEach(function(r){if(r[4]==='PENDING'&&Number(r[3])<=now){var index=Number(r[0]),text=texts[index],key=hskDigest_(JSON.stringify(['zh-CN','Kore',model,text]));if(ready.has(key)){r[4]='DONE';queue.getRange(deferred.indexOf(r)+2,1,1,6).setValues([r]);}else choose(index);}});
+    deferred.forEach(function(r){if(r[4]==='PENDING'&&Number(r[3])<=now){var index=Number(r[0]),text=texts[index],key=hskDigest_(JSON.stringify(['zh-CN','Kore',model,text]));if(isReady(text)){r[4]='DONE';queue.getRange(deferred.indexOf(r)+2,1,1,6).setValues([r]);}else choose(index);}});
     var pending=deferred.filter(function(r){return r[4]==='PENDING';});
     if(!jobs.length&&pending.length){p.setProperty('HSK_WARM_RETRY_AT',String(Math.max(now+60000,Math.min.apply(null,pending.map(function(r){return Number(r[3])||now;})))));return;}
     if(!jobs.length&&deferred.some(function(r){return r[4]==='REVIEW';})){p.setProperty('HSK_WARM_ENABLED','false');p.setProperty('HSK_WARM_LAST_ERROR','tts_review_required');return;}
     var cursor=Number(p.getProperty('HSK_WARM_CURSOR')||0);
     if(!pending.length)while(cursor<texts.length){if(!choose(cursor))break;cursor++;}
     if(!jobs.length){if(cursor>=texts.length)hskWarmStop();return;}
-    var token=ScriptApp.getIdentityToken(),health=hskParallelAvailability_(token),earliest=Infinity,slot=null;
-    var next=Number(p.getProperty('HSK_WARM_NEXT_SLOT')||1);
-    for(var lane=0;lane<10;lane++){var n=(next+lane)%10,item=health.filter(function(s){return s.slot===n;})[0];if(!item)continue;var until=Math.max(now+Number(item.retryAfter||0)*1000,Number(p.getProperty('HSK_WARM_SLOT_'+n+'_AFTER')||0));if(until<=now){slot=n;break;}earliest=Math.min(earliest,until);}
-    if(slot===null){p.setProperty('HSK_WARM_RETRY_AT',String(earliest<Infinity?earliest:now+3600000));p.setProperty('HSK_WARM_LAST_ERROR','tts_keys_cooling');return;}
     var id=hskDigest_(JSON.stringify(jobs.map(function(j){return j.key;}))+':'+now),stamp=new Date().toISOString(),row=[id,JSON.stringify(jobs),'','RESERVED','',stamp,slot];
     journal.appendRow(row);var rowNumber=journal.getLastRow();SpreadsheetApp.flush();
     var response,decoded;
