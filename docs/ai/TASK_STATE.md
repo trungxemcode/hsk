@@ -1,3 +1,10 @@
+## Autonomous voice queue — 2026-10-18
+- User requested unattended generation to avoid spending ChatGPT usage on per-phrase operations. Apps Script scheduler runs independently; Gemini generation still consumes provider quota.
+- WarmBatch: four phrases per5min trigger; READY cache reuse; per-item cursor; rolling60min/24h runtime ceiling; provider/quota backoff30min–6h; incomplete audio deferred24h with three attempts total; refusals retained as REVIEW without blocking later phrases. Voice_Retry stores unresolved items; Tien_do reports real ready/remaining/review counts. No keys moved or new frontend integration.
+- Installed and verified one hskWarmTick trigger, enabled=true. First observed pass advanced cursor11→15, with13 ready, one pending and one review. Sources preserved on feat/autonomous-voice-queue. Eight focused tests and feature guard pass; runtime check recorded with PR.
+
+## Alternating Chinese/Vietnamese word pairs — 2026-10-18
+
 ## Alternating Chinese/Vietnamese word pairs — 2026-10-18
 - Base main947f550 (3.4.7). Word study now alternates Chinese word -> spoken Vietnamese meaning, repeated as three complete pairs, before stroke demos/examples. Examples remain Chinese -> Vietnamese meaning -> silent karaoke. Per-slide audio completion, slow pacing, stroke repetitions, pause and mastery behavior retained.
 - guidedShow v4 matches the expanded sequence. Core and browser regression assert the exact six-utterance language/text prefix; no repeated Chinese block before the first Vietnamese meaning. Validation/PR/deployment status in response.

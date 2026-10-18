@@ -79,6 +79,8 @@ function hskWarmTick() {
     storage=hskCheck_(p);
     var texts=hskWarmCorpus_(),cursor=Number(p.getProperty('HSK_WARM_CURSOR')||0),model=p.getProperty('HSK_VOICE_MODEL')||'gemini-2.5-flash-preview-tts';
     var queue=hskWarmQueue_(storage),deferred=queue.getLastRow()>1?queue.getRange(2,1,queue.getLastRow()-1,6).getValues():[];
+    // Reclassify provider outages recorded by the previous non-retryable bridge.
+    deferred.forEach(function(r,i){if(r[4]==='REVIEW'&&Number(r[2])<3&&/tts_provider_unavailable/.test(String(r[5]))){r[4]='PENDING';queue.getRange(i+2,1,1,6).setValues([r]);}});
     var existing=new Set(),old=storage.sheet.getLastRow();
     if(old>1)storage.sheet.getRange(2,1,old-1,13).getValues().forEach(function(r){if(r[0]&&r[4]&&r[11]==='READY')existing.add(String(r[0]));});
     var stopAt=started+Math.min(180000,limit-used-10000),batch=Math.min(12,Math.max(1,Number(p.getProperty('HSK_WARM_BATCH_SIZE')||4)));
