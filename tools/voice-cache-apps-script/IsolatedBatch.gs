@@ -88,11 +88,11 @@ function hskWarmIsolatedTick(){
     var journal=hskBatchTable_(storage),batches=hskBatchRows_(journal,7),queue=hskWarmQueue_(storage),deferred=hskBatchRows_(queue,6);
     // Recover saved masters FIRST. An interrupted save/cut never calls Gemini again.
     for(var b=0;b<batches.length;b++){
-      var prior=batches[b];if(prior[3]==='DONE'||prior[3]==='REJECTED')continue;
+      var prior=batches[b];if(prior[3]==='DONE'||prior[3]==='REJECTED'||prior[3]==='PARTIAL')continue;
       if(!prior[2]){var files=storage.folder.getFilesByName('MASTER_BATCH_'+prior[0]+'.wav');if(files.hasNext())prior[2]=files.next().getId();}
       if(prior[2]){
         try{var recovered=hskBatchCommit_(storage,journal,b+2,prior,queue,deferred);p.setProperty('HSK_WARM_SAVED_SINCE_FIX',String(Number(p.getProperty('HSK_WARM_SAVED_SINCE_FIX')||0)+recovered));}
-        catch(e){if(/^batch_segment_count_mismatch$|^batch_unstable_boundaries$|^batch_silent_audio$/.test(String(e.message))){hskBatchReject_(journal,b+2,prior,queue,deferred,p,e.message);return;}prior[3]='REVIEW';prior[4]=/^batch_/.test(String(e.message))?e.message:'batch_save_failed';journal.getRange(b+2,1,1,7).setValues([prior]);p.setProperty('HSK_WARM_LAST_ERROR',prior[4]);p.setProperty('HSK_WARM_ENABLED','false');return;}
+        catch(e){if(/^batch_segment_count_mismatch$|^batch_unstable_boundaries$|^batch_silent_audio$/.test(String(e.message))){if(e.message==='batch_segment_count_mismatch'&&hskPartialHandleMismatch_(storage,journal,b+2,prior,queue,deferred,p))return;hskBatchReject_(journal,b+2,prior,queue,deferred,p,e.message);return;}prior[3]='REVIEW';prior[4]=/^batch_/.test(String(e.message))?e.message:'batch_save_failed';journal.getRange(b+2,1,1,7).setValues([prior]);p.setProperty('HSK_WARM_LAST_ERROR',prior[4]);p.setProperty('HSK_WARM_ENABLED','false');return;}
       }else if(prior[3]!=='FAILED'){
         prior[3]='REVIEW';prior[4]='batch_transport_uncertain';journal.getRange(b+2,1,1,7).setValues([prior]);p.setProperty('HSK_WARM_LAST_ERROR',prior[4]);p.setProperty('HSK_WARM_ENABLED','false');return;
       }
@@ -143,7 +143,7 @@ function hskWarmIsolatedTick(){
     ['HSK_WARM_VENDOR_CALLS','HSK_WARM_CALLS'].forEach(function(k){p.setProperty(k,String(Number(p.getProperty(k)||0)+decoded.providerAttempts));});
     var name='MASTER_BATCH_'+id+'.wav',master=storage.folder.createFile(Utilities.newBlob(decoded.bytes,'audio/wav',name));
     row[2]=master.getId();row[3]='MASTER';journal.getRange(rowNumber,1,1,7).setValues([row]);SpreadsheetApp.flush();
-    var saved;try{saved=hskBatchCommit_(storage,journal,rowNumber,row,queue,deferred);}catch(e){if(/^batch_segment_count_mismatch$|^batch_unstable_boundaries$|^batch_silent_audio$/.test(String(e.message))){hskBatchReject_(journal,rowNumber,row,queue,deferred,p,e.message);return;}throw e;}
+    var saved;try{saved=hskBatchCommit_(storage,journal,rowNumber,row,queue,deferred);}catch(e){if(/^batch_segment_count_mismatch$|^batch_unstable_boundaries$|^batch_silent_audio$/.test(String(e.message))){if(e.message==='batch_segment_count_mismatch'&&hskPartialHandleMismatch_(storage,journal,rowNumber,row,queue,deferred,p))return;hskBatchReject_(journal,rowNumber,row,queue,deferred,p,e.message);return;}throw e;}
     p.setProperty('HSK_WARM_CURSOR',String(cursor));p.setProperty('HSK_WARM_SAVED_SINCE_FIX',String(Number(p.getProperty('HSK_WARM_SAVED_SINCE_FIX')||0)+saved));
     p.setProperty('HSK_WARM_SLOT_'+slot+'_AFTER',String(Date.now()+90000));p.deleteProperty('HSK_WARM_LAST_ERROR');p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+90000));
   }catch(e){p.setProperty('HSK_WARM_LAST_ERROR',/^batch_/.test(String(e.message))?e.message:'batch_storage_or_runtime_error');p.setProperty('HSK_WARM_ENABLED','false');}
