@@ -3,3 +3,21 @@ test('all 146 lesson sequences cover supplied material and teach context vocabul
 test('empty/partial content is safe and speed controls bounded nonzero dwell time',()=>{assert.deepEqual(C.plan({},[]),[]);const s={kind:'words',words:[{han:'你',mean:'bạn'}]};assert.ok(C.duration(s,.75)>C.duration(s,1.5));assert.ok(C.duration(s)>0);assert.equal(C.plan({content:{}},[{han:'你',mean:'bạn'}])[0].words[0].han,'你');});
 
 test('pacing uses visible content, not hidden dictionary metadata',()=>{const a={kind:'words',words:[{han:'你',mean:'bạn'}]};assert.equal(C.duration(a),C.duration({words:[{...a.words[0],practice:{examples:Array(1000).fill('hidden')}}]}));assert.ok(C.duration({lines:[{cn:'你',vi:'bạn'}]})<C.duration({lines:[{cn:'你'.repeat(100),vi:'bạn'.repeat(100)}]}));});
+
+test('hands-free slides teach each word and every example in order without interactive gates',()=>{
+ const words=[{han:'你',pin:'nǐ',mean:'bạn'},{han:'我',pin:'wǒ',mean:'tôi'}],examples=[{cn:'你好。',pin:'nǐ hǎo',vi:'Xin chào.'},{cn:'你好吗？',pin:'nǐ hǎo ma',vi:'Bạn khỏe không?'}];
+ const slides=C.presentation({},words,()=>examples),first=slides.slice(0,6);
+ assert.deepEqual(first.map(s=>s.kind),['word','meaning','chinese','meaning','chinese','meaning']);
+ assert.deepEqual(first.map(s=>s.text),['你','bạn','你好。','Xin chào.','你好吗？','Bạn khỏe không?']);
+ assert.deepEqual(first.filter(s=>s.speak).map(s=>s.speak),['你','你好。','你好吗？']);assert.equal(slides[6].text,'我');
+ assert.equal(new Set(slides.map(s=>s.id)).size,slides.length);assert.ok(slides.every(s=>!['recall','check'].includes(s.kind)));assert.equal(words[0].mean,'bạn');
+});
+test('presentation chunks long source text without dropping it, and keeps all supplied context',()=>{
+ const cn='周末我们一起学习中文。'.repeat(20),pin='zhōu mò '.repeat(50),vi='Cuối tuần cùng học tiếng Trung. '.repeat(20);
+ const slides=C.presentation({content:{dialogues:[{title:'Hội thoại',lines:[{cn,pin,vi}]}],grammar:[{title:'Mẫu câu',pattern:'因为…所以…',usage:'Nêu nguyên nhân.',error:'Không đảo trật tự.',examples:[]}] }},[]);
+ assert.equal(slides.filter(s=>s.kind==='chinese').map(s=>s.speak).join(''),cn);
+ assert.equal(slides.filter(s=>s.kind==='pinyin').map(s=>s.text).join(''),pin.trim());
+ assert.equal(slides.filter(s=>s.label==='Hội thoại · Nghĩa').map(s=>s.text).join(''),vi.trim());
+ assert.ok(slides.every(s=>Array.from(s.text).length<=120));assert.ok(slides.some(s=>s.text==='因为…所以…'));assert.ok(slides.some(s=>s.text==='Không đảo trật tự.'));
+ assert.deepEqual(C.presentation({},[]),[]);assert.ok(C.slideDuration(slides[0],.75)>C.slideDuration(slides[0],1.5));
+});

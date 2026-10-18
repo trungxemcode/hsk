@@ -51,6 +51,7 @@ jobs:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: |
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-lesson-guided-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-guided-presentation-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-press-shape-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-shared-press-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-home-overview-ui.cjs
