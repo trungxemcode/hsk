@@ -6,8 +6,35 @@
  * Do not persist or log keys, audio or Google identity tokens in Sheets.
  */
 function hskVoiceFailoverKeyCount_(p){
- var n=0;for(var i=1;i<=9;i++)if(p.getProperty('GEMINI_TTS_KEY_'+i))n++;
+ // Keys configured as Cloudflare Worker secrets cannot be read by Apps Script.
+ // Count local-only keys, including all 12 slots and either legacy property name.
+ var n=0;for(var i=1;i<=12;i++){
+  if(p.getProperty('GEMINI_TTS_KEY_'+i)||p.getProperty('GEMINI_API_KEY_'+i))n++;
+ }
  return n;
+}
+/** Read non-secret Cloudflare slot availability, never fetch secret values. */
+function hskVoiceFailoverCloudflareKeys_(p){
+ var now=Date.now(),until=Number(p.getProperty('HSK_VOICE_CF_KEY_COUNT_CHECK_AT')||0);
+ if(until>now)return p.getProperty('HSK_VOICE_CF_KEY_COUNT')||'unknown';
+ p.setProperty('HSK_VOICE_CF_KEY_COUNT_CHECK_AT',String(now+300000));
+ try{
+  var token=ScriptApp.getIdentityToken();
+  if(!token)return p.getProperty('HSK_VOICE_CF_KEY_COUNT')||'unknown';
+  var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',
+   contentType:'application/json',headers:{Authorization:'Bearer '+token},
+   payload:JSON.stringify({action:'status',model:'gemini-3.1-flash-tts-preview'}),
+   muteHttpExceptions:true});
+  if(response.getResponseCode()!==200)return p.getProperty('HSK_VOICE_CF_KEY_COUNT')||'unknown';
+  var data=JSON.parse(response.getContentText());
+  if(!data.ok||!Array.isArray(data.slots))return p.getProperty('HSK_VOICE_CF_KEY_COUNT')||'unknown';
+  var distinct=new Set();
+  data.slots.forEach(function(s){
+   if(Number.isInteger(s.slot)&&s.slot>=1&&s.slot<=12)distinct.add(s.slot);
+  });
+  p.setProperty('HSK_VOICE_CF_KEY_COUNT',String(distinct.size));
+ }catch(e){}
+ return p.getProperty('HSK_VOICE_CF_KEY_COUNT')||'unknown';
 }
 function hskVoiceFailoverMode_(p){return p.getProperty('HSK_VOICE_FAILOVER_MODE')||'WORKER';}
 function hskVoiceFailoverMark_(p,reason){
@@ -131,11 +158,16 @@ function hskVoiceFailoverPoll_(p,book,control){
  }
  try{
   // Independent dashboard. Does not modify AUTO_CYCLE, queue or existing fields.
-  control.getRange(80,1,7,2).setValues([
+  var cloudflareKeySlots=hskVoiceFailoverCloudflareKeys_(p);
+  control.getRange(80,1,9,2).setValues([
    ['Failover_route',mode],['Failover_last_real_progress',new Date(last).toISOString()],
    ['Failover_idle_minutes',Math.floor((now-last)/60000)],
-   ['Failover_direct_key_count',keys],['Failover_worker_probe_count',Number(p.getProperty('HSK_VOICE_WORKER_HEALTHY_POLLS')||0)],
-   ['Failover_reason',reason],['Failover_current_job','Worker/GAS serialized; READY requires double ASR']
+   ['Failover_direct_key_count',keys],
+   ['Failover_worker_probe_count',Number(p.getProperty('HSK_VOICE_WORKER_HEALTHY_POLLS')||0)],
+   ['Failover_reason',reason],
+   ['Failover_current_job','Worker/GAS serialized; READY requires double ASR'],
+   ['Cloudflare_numbered_key_slots',cloudflareKeySlots],
+   ['Key_locations','Cloudflare GEMINI_API_KEY_1..12 / Apps Script GEMINI_TTS_KEY_1..12 (separate secrets)']
   ]);
  }catch(e){p.setProperty('HSK_VOICE_FAILOVER_LOG_ERROR',String(e.message||e).slice(0,100));}
 }

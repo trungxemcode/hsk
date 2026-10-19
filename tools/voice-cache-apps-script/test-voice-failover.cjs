@@ -52,7 +52,8 @@ test('requires two healthy Worker polls then an actual successful canary before 
  assert.equal(w.props.get('HSK_VOICE_FAILOVER_MODE'),'DIRECT');
  w.advance(300001);w.run();assert.equal(w.props.get('HSK_VOICE_FAILOVER_MODE'),'DIRECT');
  w.advance(300001);w.run();assert.equal(w.props.get('HSK_VOICE_FAILOVER_MODE'),'WORKER_PROBE');
- assert.equal(w.polls(),2);
+ assert.ok(w.polls()>=2); // Dashboard separately polls Worker slot availability.
+ assert.equal(w.props.get('HSK_VOICE_WORKER_HEALTHY_POLLS'),'2');
  w.ctx.hskVoiceFailoverOutcome_(w.p,'WORKER_PROBE',true);
  assert.equal(w.props.get('HSK_VOICE_FAILOVER_MODE'),'WORKER');
 });
@@ -92,4 +93,14 @@ test('direct fallback uses existing local TTS keys and blind independent ASR cal
  assert.notEqual(calls[1].url,calls[2].url);
  assert.equal(JSON.stringify(calls[1].payload).includes('告别'),false);
  assert.equal(JSON.stringify(calls[2].payload).includes('gàobié'),false);
+});
+
+test('dashboard distinguishes twelve Cloudflare slots from local direct keys',()=>{
+ const w=world();w.run();
+ assert.equal(w.props.get('HSK_VOICE_CF_KEY_COUNT'),'1'); // Mock status has one numbered slot.
+ assert.equal(w.writes.at(-1).rows[3][0],'Failover_direct_key_count');
+ assert.equal(w.writes.at(-1).rows[7][0],'Cloudflare_numbered_key_slots');
+ assert.equal(w.writes.at(-1).rows[8][0],'Key_locations');
+ for(let n=1;n<=12;n++)w.props.set('GEMINI_API_KEY_'+n,'local-key-'+n);
+ assert.equal(w.ctx.hskVoiceFailoverKeyCount_(w.p),12);
 });

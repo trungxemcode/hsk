@@ -6,8 +6,8 @@
  */
 function hskVoiceDirectKey_(p){
  var keys=[];
- for(var i=1;i<=9;i++){
-  var k=p.getProperty('GEMINI_TTS_KEY_'+i);
+ for(var i=1;i<=12;i++){
+  var k=p.getProperty('GEMINI_TTS_KEY_'+i)||p.getProperty('GEMINI_API_KEY_'+i);
   if(k&&Number(p.getProperty('HSK_VOICE_DIRECT_KEY_'+i+'_AFTER')||0)<=Date.now())keys.push({slot:i,key:k});
  }
  if(!keys.length)throw Error('direct_tts_keys_unavailable');
