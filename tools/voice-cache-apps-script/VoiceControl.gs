@@ -47,7 +47,13 @@ function hskVoiceControlPoll_(p){
   }
   if(Number(p.getProperty('HSK_VOICE_CONTROL_AFTER')||0)>Date.now())return true;
   control.getRange(7,2).setValue(new Date().toISOString());
-  hskVoiceRecoverTick_(p,book,control);
+  // Process at most three independent clips per tick; stop on provider backoff or time budget.
+  var started=Date.now();
+  for(var step=0;step<3&&Date.now()-started<140000;step++){
+   if(String(control.getRange(2,2).getValue())!=='RECOVER_50')break;
+   if(Number(p.getProperty('HSK_VOICE_CONTROL_AFTER')||0)>Date.now())break;
+   hskVoiceRecoverTick_(p,book,control);
+  }
   var progress=book.getSheetByName('Tien_do_tu_vung');
   if(progress)progress.getRange(2,2).setValue(String(control.getRange(2,2).getValue())==='RECOVER_50'?'Đang xác minh master (không tạo TTS)':'Đang dừng');
   return true;
