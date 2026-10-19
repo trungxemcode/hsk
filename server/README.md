@@ -1,3 +1,15 @@
+## Mở rộng Gemini pool lên 12 key (2026-10-19)
+
+Worker hiện hỗ trợ **12 vị trí Cloudflare Secret**: `GEMINI_API_KEY_1` ... `GEMINI_API_KEY_12`, với `GEMINI_API_KEY` là tên tương thích cũ của vị trí 1. Để thêm key 11 và 12 mà không thay 10 key cũ, vào thư mục `server` và nhập trực tiếp trong Wrangler:
+
+```powershell
+npx wrangler secret put GEMINI_API_KEY_11
+npx wrangler secret put GEMINI_API_KEY_12
+npx wrangler secret list
+```
+
+Giá trị bí mật được nhập trong terminal, không đưa vào chat hoặc Git. Durable Object phân phối tối đa 12 key và vẫn giữ nguyên hai lượt thử tuần tự tối đa cho mỗi lời gọi, bỏ qua key đang cooldown. Các hạn mức của Google tính theo project/model, không tự tăng chỉ vì có thêm key; phải tuân thủ giới hạn sử dụng của nhà cung cấp. Các mô tả “10 key” bên dưới ghi lại cấu hình lịch sử phiên bản 3.4.1.
+
 ## Chống lạm dụng AI — Worker 3.5.1
 
 Chỉ bật sau khi deploy Worker mới cùng cấu hình `AI_ABUSE_ENABLED=true`. Với tài khoản thường: Firebase phải trả `emailVerified=true` khi `AI_REQUIRE_VERIFIED_EMAIL=true`; dùng nút xác minh email có sẵn trong trang Tài khoản. Tài khoản đã tồn tại từ 24 giờ trở lên giữ 35 truy vấn + 15 bài đọc/ngày; trong 24 giờ đầu là 10 truy vấn + 3 bài đọc/ngày. Tuổi và UID lấy từ kết quả Firebase lookup trên máy chủ, không từ payload/claim vai trò của trình duyệt.
