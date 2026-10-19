@@ -58,7 +58,8 @@ function hskVocabTick(){
  var lock=LockService.getScriptLock();if(!lock.tryLock(100))return;var started=Date.now(),storage,tables;
  try{
  var win=Number(p.getProperty('HSK_VOCAB_WINDOW')||0);if(!win||now>=win+86400000){p.setProperty('HSK_VOCAB_WINDOW',String(now));p.setProperty('HSK_VOCAB_RUNTIME_MS','0');p.setProperty('HSK_VOCAB_WINDOW_CALLS','0');win=now;}
- if(Number(p.getProperty('HSK_VOCAB_RUNTIME_MS')||0)+300000>4500000||Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0)>=100){p.setProperty('HSK_VOCAB_RETRY_AT',String(win+86400000));p.setProperty('HSK_VOCAB_ERROR','daily_runtime_or_call_budget');return;}
+ // Internal daily runtime and provider-call limits removed by owner request.
+ // Keep usage counters for diagnosis; real Google/Gemini/Cloudflare quotas still apply.
  storage=hskCheck_(p);tables=hskVocabTables_(storage);var rows=hskVocabRows_(tables.queue,17),batches=hskVocabRows_(tables.batches,11),token=ScriptApp.getIdentityToken();
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'&&p.getProperty('HSK_VOCAB_PILOT_ID')){
   var trial=batches.find(function(b){return b[0]===p.getProperty('HSK_VOCAB_PILOT_ID');});

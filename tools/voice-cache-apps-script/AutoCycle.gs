@@ -147,7 +147,7 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
 function hskAuto50Poll_(p,book,control){
  // Read-only heartbeat for diagnosing API cooldown and script runtime limits. No credentials.
  var retryMs=Number(p.getProperty('HSK_VOCAB_RETRY_AT')||0),windowMs=Number(p.getProperty('HSK_VOCAB_WINDOW')||0);
- control.getRange(36,1,9,2).setValues([
+ control.getRange(36,1,10,2).setValues([
   ['Auto_heartbeat',new Date().toISOString()],
   ['Auto_last_error',String(p.getProperty('HSK_VOCAB_ERROR')||'').slice(0,90)],
   ['Auto_retry_at',retryMs?new Date(retryMs).toISOString():'none'],
@@ -156,7 +156,8 @@ function hskAuto50Poll_(p,book,control){
   ['Auto_window_calls',p.getProperty('HSK_VOCAB_WINDOW_CALLS')||'0'],
   ['Auto_queue_enabled',p.getProperty('HSK_VOCAB_ENABLED')||'false'],
   ['Auto_pilot_only',p.getProperty('HSK_VOCAB_PILOT_ONLY')||'false'],
-  ['Auto_pause',p.getProperty('HSK_VOICE_PAUSED')||'false']
+  ['Auto_pause',p.getProperty('HSK_VOICE_PAUSED')||'false'],
+  ['Auto_internal_daily_cap','OFF; real Google and provider quotas remain']
  ]);
  var manifest=book.getSheetByName('Voice_Recovery_50');
  var segments=manifest?manifest.getRange(2,1,49,14).getValues():[];
@@ -189,14 +190,13 @@ function hskAuto50Poll_(p,book,control){
  if(p.getProperty('HSK_VOICE_PAUSED')==='true'){
   control.getRange(6,2).setValue('AUTO_CYCLE_PAUSED');return true;
  }
- // One-time migration from a conservative 60-minute internal cap to 75 minutes.
- // Google's consumer-account trigger quota is 90 minutes/day; leave room for other triggers.
- if(p.getProperty('HSK_AUTO50_RUNTIME_CAP_UPGRADE')!=='75M_V1'){
-  p.setProperty('HSK_AUTO50_RUNTIME_CAP_UPGRADE','75M_V1');
-  var spent=Number(p.getProperty('HSK_VOCAB_RUNTIME_MS')||0);
-  var calls=Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0);
-  if(p.getProperty('HSK_VOCAB_ERROR')==='daily_runtime_or_call_budget'&&spent+300000<4500000&&calls<100){
-   p.deleteProperty('HSK_VOCAB_RETRY_AT');p.deleteProperty('HSK_VOCAB_ERROR');
+ // The previous internal 60/75-minute and 100-call caps are now disabled.
+ // Clear only the backoff created by those obsolete caps. Never override provider cooldowns.
+ if(p.getProperty('HSK_AUTO50_RUNTIME_POLICY')!=='NO_INTERNAL_DAILY_CAP_V1'){
+  p.setProperty('HSK_AUTO50_RUNTIME_POLICY','NO_INTERNAL_DAILY_CAP_V1');
+  if(p.getProperty('HSK_VOCAB_ERROR')==='daily_runtime_or_call_budget'){
+   p.deleteProperty('HSK_VOCAB_RETRY_AT');
+   p.deleteProperty('HSK_VOCAB_ERROR');
   }
  }
  var blockedUntil=Number(p.getProperty('HSK_VOCAB_RETRY_AT')||0);
