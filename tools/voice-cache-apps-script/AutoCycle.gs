@@ -39,6 +39,25 @@ function hskAuto50Detect_(master,expected){
  if(!selected||selected.ranges.length<20||selected.ranges.length>expected+5)throw Error('auto50_unreliable_segmentation');
  return {ranges:selected.ranges,duration:pcm.length/48000,gap:selected.gap,ratio:selected.ratio};
 }
+/** Opt-in remote segmentation; fail safely back to local CPU detection. */
+function hskAuto50DetectRemote_(master,expected,token){
+ var p=hskSettings_();
+ if(p.getProperty('HSK_VOICE_REMOTE_SEGMENT')!=='true')return hskAuto50Detect_(master,expected);
+ try{
+  var response=hskVocabCall_(token,{action:'segment-wav',audioBase64:Utilities.base64Encode(master),expected:expected});
+  if(!response||!Array.isArray(response.ranges)||response.ranges.length<Math.min(20,expected)||response.ranges.length>expected+5)throw Error('invalid_remote_ranges');
+  var max=hskBatchPcm_(master).length/2,prev=0;
+  response.ranges.forEach(function(range){
+   if(!Array.isArray(range)||range.length!==2||!range.every(function(n){return Number.isInteger(n);})||range[0]<prev||range[1]<=range[0]||range[1]>max)throw Error('invalid_remote_ranges');
+   prev=range[1];
+  });
+  p.setProperty('HSK_VOICE_SEGMENT_LAST','worker');
+  return response;
+ }catch(e){
+  p.setProperty('HSK_VOICE_SEGMENT_LAST','local_fallback');
+  return hskAuto50Detect_(master,expected);
+ }
+}
 function hskAuto50Cache_(storage,job,masterId,bytes,slot,batchId){
  var duplicate=['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview'].map(function(model){
   return hskGetRow_(storage.sheet,hskVocabKey_(model,job.text));
@@ -73,7 +92,7 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
  var master=DriveApp.getFileById(batch[2]).getBlob().getBytes();
  if(!entries.length){
   var report;
-  try{report=hskAuto50Detect_(master,jobs.length);}
+  try{report=hskAuto50DetectRemote_(master,jobs.length,token);}
   catch(e){
    batch[3]='REVIEW';batch[4]=String(e.message||'unreliable_master');
    tables.batches.getRange(index+2,1,1,11).setValues([batch]);

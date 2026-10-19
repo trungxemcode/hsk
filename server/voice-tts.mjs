@@ -1,3 +1,4 @@
+import { detectVoiceSegments } from './voice-segmentation.mjs';
 import { hskVoiceVerifyPartial } from './voice-partial-verify.mjs';
 // Private Apps Script-to-Cloudflare TTS bridge. Google identity tokens, never browser API keys.
 const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'};
@@ -75,10 +76,15 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
   let input;
   try{
    const data=await request.text();
-   if(data.length>700000)return json({ok:false,error:'invalid_request'},400);
+   if(data.length>12000000)return json({ok:false,error:'invalid_request'},400);
    input=JSON.parse(data);
-   if(input?.action!=='verify'&&data.length>1500)return json({ok:false,error:'invalid_request'},400);
+   if(input?.action!=='verify'&&input?.action!=='segment-wav'&&data.length>1500)return json({ok:false,error:'invalid_request'},400);
   }catch{return json({ok:false,error:'invalid_request'},400);}
+  if(input?.action==='segment-wav'){
+   if(!input||Object.keys(input).some(k=>!['action','audioBase64','expected'].includes(k)))return json({ok:false,error:'invalid_request'},400);
+   try {return json({ok:true,...detectVoiceSegments(input.audioBase64,input.expected)});}
+   catch(e){return json({ok:false,error:['invalid_expected','invalid_audio','invalid_wav','unsupported_wav','silent_master','unreliable_segmentation'].includes(e.message)?e.message:'invalid_audio'},400);}
+  }
   if(input?.action==='verify'){
    if(Object.keys(input).some(k=>!['action','items','clips'].includes(k)))return json({ok:false,error:'invalid_request'},400);
    const checked=await hskVoiceVerifyPartial(input,geminiFetch,request.signal);
