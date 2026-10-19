@@ -11,8 +11,8 @@
  *   HSK_VOICE_NEXT_KEY
  */
 var HSK_VOICE_MAX_CHARS = 220;
-// 180 seconds, 24 kHz mono PCM16 plus WAV header.
-var HSK_VOICE_MAX_AUDIO_BYTES = 180 * 48000 + 44;
+// 600 seconds, 24 kHz mono PCM16 plus WAV header.
+var HSK_VOICE_MAX_AUDIO_BYTES = 600 * 48000 + 44;
 var HSK_VOICE_COLUMNS = 13;
 function hskResult_(value) {return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON);}
 function hskSettings_() {return PropertiesService.getScriptProperties();}

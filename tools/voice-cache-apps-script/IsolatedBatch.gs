@@ -173,5 +173,5 @@ function hskWarmConfigureLongBatch() {
  var p=hskSettings_();
  p.setProperty("HSK_WARM_LONG_BATCH","true");
  p.setProperty("HSK_WARM_ISOLATED_SIZE","20");
- return {maxAudioSeconds:180,maxItems:60,batchSize:20};
+ return {maxAudioSeconds:600,maxItems:60,batchSize:20};
 }

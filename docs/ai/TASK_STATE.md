@@ -214,6 +214,6 @@ Do not store secrets, API keys, personal data, or entire chat logs. This file is
 
 ## 2026-10-19: longer TTS processing
 - Branch fix/long-audio-limits, based on fix/voice-resume-integration (80fecb0); preserves unpublished queue repairs.
-- Worker and Apps Script audio bound: 180 seconds; long-batch opt-in: 20 entries, hard max 60 / 1200 characters, request timeout 240 seconds.
+- Worker and Apps Script audio bound: 600 seconds; long-batch opt-in: 20 entries, hard max 60 / 1200 characters, request timeout 240 seconds.
 - 257 server tests pass; feature preservation passes. Browser runtime blocked by missing Playwright Chromium executable.
 - No live deployment or real Gemini call yet: cloud browser has no Apps Script session; no deployment credentials available in this workspace.

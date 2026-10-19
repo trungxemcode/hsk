@@ -78,8 +78,8 @@ test('incomplete audio diagnostics expose finish metadata without transcript or 
  assert.equal(JSON.stringify(d).includes('private-transcript'),false);
 });
 
-test("accepts three-minute PCM and rejects aggregate overflow",()=>{
- const data=Buffer.alloc(180*48000).toString("base64");
+test("accepts ten-minute PCM and rejects aggregate overflow",()=>{
+ const data=Buffer.alloc(600*48000).toString("base64");
  const part=data=>({inlineData:{data,mimeType:"audio/L16;rate=24000"}});
  const result=decodeVoiceAudio({candidates:[{finishReason:"STOP",content:{parts:[part(data)]}}]});
  assert.equal(Buffer.from(result.audioBase64,"base64").length,VOICE_MAX_AUDIO_BYTES-44);

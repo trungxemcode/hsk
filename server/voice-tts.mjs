@@ -6,7 +6,7 @@ async function sha256(value){
  const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value));
  return Array.from(new Uint8Array(digest),x=>x.toString(16).padStart(2,'0')).join('');
 }
-export const VOICE_MAX_AUDIO_BYTES = 180 * 48000 + 44;
+export const VOICE_MAX_AUDIO_BYTES = 600 * 48000 + 44;
 const VOICE_MAX_BASE64_CHARS = 4 * Math.ceil(VOICE_MAX_AUDIO_BYTES / 3);
 export function decodeVoiceAudio(data){
  if(data?.promptFeedback?.blockReason)return {error:'tts_blocked'};
