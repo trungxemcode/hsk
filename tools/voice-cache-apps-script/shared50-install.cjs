@@ -3,8 +3,10 @@ module.exports=function install(dir){
  const lib=fs.readFileSync(path.join(__dirname,'Shared50.gs'),'utf8');fs.writeFileSync(path.join(dir,'Shared50.js'),lib);
  let f=path.join(dir,'VoiceControl.js'),s=fs.readFileSync(f,'utf8');
  if(!s.includes('hskShared50QueuedCommand_(p,control)')){
-  s=s.replace(" if(!control)return false;"," if(!control)return false;\n if(typeof hskShared50QueuedCommand_==='function')hskShared50QueuedCommand_(p,control);\n var shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());\n if(shared!==null)return shared;");
+  s=s.replace(" if(!control)return false;"," if(!control)return false;\n if(typeof hskShared50QueuedCommand_==='function')hskShared50QueuedCommand_(p,control);\n var shared;try{control.getRange(27,1,1,2).setValues([['Test_last_poll',new Date().toISOString()]]);shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());}catch(e){control.getRange(18,2).setValue('SHARED50_ERROR');control.getRange(19,2).setValue(String(e.message||'shared_error').slice(0,120));return true;}\n if(shared!==null)return shared;");
  }
+ s=s.replace(" var shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());"," var shared;try{control.getRange(27,1,1,2).setValues([['Test_last_poll',new Date().toISOString()]]);shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());}catch(e){control.getRange(18,2).setValue('SHARED50_ERROR');control.getRange(19,2).setValue(String(e.message||'shared_error').slice(0,120));return true;}");
+ for(const fn of ['hskVoiceControlTick','hskVoiceControlFastTick'])s=s.replace('function '+fn+'(){return hskVoiceControlPoll_(hskSettings_());}',"function "+fn+"(){var p=hskSettings_(),handled=hskVoiceControlPoll_(p);if(handled===false&&p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'&&p.getProperty('HSK_VOCAB_ENABLED')==='true')return hskVocabTick();return handled;}");
  fs.writeFileSync(f,s);
  f=path.join(dir,'Vocabulary.js');s=fs.readFileSync(f,'utf8');
  if(!s.includes('var pair=hskShared50Pair_')){
