@@ -167,3 +167,10 @@ Do not store secrets, API keys, personal data, or entire chat logs. This file is
 - Validate actual decoded PCM bytes, supported rate/channels/MIME, size and all audio parts; normalize base64 whitespace and join PCM parts. Safe categorical failures distinguish incomplete generation, refusal and invalid bytes without logging content/tokens/audio.
 - Real Apps Script→Worker→Gemini→Drive/Sheets probes:2/4/22-character clips created35130/60090/192570-byte WAV24kHz with correct RIFF/data lengths; every second call cached=true and byte-identical. Warm-up initially advanced4 phrases then hit another empty generation. Literal-transcript second attempt plus Apps Script retryable categories and checkpointed1–60min backoff prevent permanently disabling the queue on transient errors. Safety/configuration faults still pause without skipping items.
 - Track the reusable Code.gs/WarmBatch.gs sources and regression tests in Git, without storage IDs, Setup.gs, corpus, OAuth or secret files. Signed-byte WAV headers, unchanged key custody and cache reuse retained. Full197 server tests and browser feature runtime390/1440 pass. Temporary fixed-phrase probes must be removed after verification. Backend-only; app stays3.4.10.
+
+## Shared 50-word Commander execution (2026-10-19)
+- Shared entry: tools/voice-cache-apps-script/commander50.cjs run50, same command for Plus and Work. Google owner trigger executes; clasp run is denied and is not used.
+- Voice_Control B15:B26 belongs to one-shot tests; B2 remains older recovery command. Fresh clasp pull + adapter merge prevents stale source replacement. A shared local lock serializes the two clients.
+- New commands join an in-flight one-shot instead of making another master. Preserve all existing READY records and provider cooldowns. Preview cuts are UNVERIFIED; cache promotion still requires blind double ASR.
+- Validation: shared command/known master/partial preview tests, existing controller tests, feature contracts and mobile/desktop runtime. Live provider outcome belongs in README-SHARED50.md after completion.
+

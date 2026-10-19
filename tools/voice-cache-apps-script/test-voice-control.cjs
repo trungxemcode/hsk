@@ -7,11 +7,11 @@ const g={console,Date,String,Array,Number,Math,JSON,Set,Error,
  LockService:{getScriptLock(){return {tryLock(){return true},releaseLock(){}}}},
  ScriptApp:{getProjectTriggers(){return triggers},newTrigger(name){return {timeBased(){return {everyMinutes(n){assert(n===1||n===5);return {create(){triggers.push({getHandlerFunction:()=>name})}}}}}}},deleteTrigger(t){triggers=triggers.filter(x=>x!==t)}}
 };
-vm.createContext(g);vm.runInContext(code,g);
+vm.createContext(g);vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'Shared50.gs'),'utf8'),g);vm.runInContext(code,g);
 const p={getProperty(k){return k==='HSK_VOICE_SHEET_ID'?'sheet-id':state[k]},setProperty(k,v){state[k]=v}};
 assert.equal(g.hskVoiceRecHanzi_(' 大 家。 '),'大家');assert.equal(g.hskVoiceRecPinyin_(' dǎ lánqiú '),'dǎlánqiú');
 assert.equal(g.hskVoiceControlPoll_(p),true);assert.equal(state.HSK_VOCAB_ENABLED,'false');
-assert(triggers.some(t=>t.getHandlerFunction()==='hskVoiceControlTick'));assert(!triggers.some(t=>t.getHandlerFunction()==='hskVocabTick'));
+assert(triggers.some(t=>t.getHandlerFunction()==='hskVoiceControlFastTick'));assert(!triggers.some(t=>t.getHandlerFunction()==='hskVocabTick'));
 assert.equal(cells[6],'PAUSED_BY_SHEET');
 cells[2]='RUN_VOCAB';assert.equal(g.hskVoiceControlPoll_(p),true);assert.equal(cells[2],'RUNNING');assert.equal(state.HSK_VOCAB_ENABLED,'true');
 assert(triggers.some(t=>t.getHandlerFunction()==='hskVocabTick'));

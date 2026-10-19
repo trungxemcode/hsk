@@ -7,15 +7,20 @@ function hskVoiceControlPoll_(p){
  var book=SpreadsheetApp.openById(p.getProperty('HSK_VOICE_SHEET_ID'));
  var control=book.getSheetByName('Voice_Control');
  if(!control)return false;
+ if(typeof hskShared50QueuedCommand_==='function')hskShared50QueuedCommand_(p,control);
+ var shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());
+ if(shared!==null)return shared;
  var command=String(control.getRange(2,2).getValue()||'').trim();
  if(['PAUSE','RECOVER_50','RUN_VOCAB'].indexOf(command)<0)return false;
  var lock=LockService.getScriptLock();
  if(!lock.tryLock(100))return true;
  try{
   var triggers=ScriptApp.getProjectTriggers();
-  if(!triggers.some(function(t){return t.getHandlerFunction()==='hskVoiceControlTick';})){
-   ScriptApp.newTrigger('hskVoiceControlTick').timeBased().everyMinutes(5).create();
+  if(!triggers.some(function(t){return t.getHandlerFunction()==='hskVoiceControlFastTick';})){
+   ScriptApp.newTrigger('hskVoiceControlFastTick').timeBased().everyMinutes(1).create();
   }
+  triggers.filter(function(t){return t.getHandlerFunction()==='hskVoiceControlTick';})
+   .forEach(function(t){ScriptApp.deleteTrigger(t);});
   if(command==='RUN_VOCAB'){
    control.getRange(2,2).setValue('RUNNING');
    p.setProperty('HSK_VOCAB_ENABLED','true');
@@ -38,9 +43,20 @@ function hskVoiceControlPoll_(p){
     control.getRange(6,2).setValue('PAUSED_BY_SHEET');
    return true;
   }
+  if(p.getProperty('HSK_VOICE_ASR_REPAIR_VERSION')!=='single-clip-v2'){
+   p.setProperty('HSK_VOICE_ASR_REPAIR_VERSION','single-clip-v2');
+   p.deleteProperty('HSK_VOICE_CONTROL_ASR_FAILURES');
+   p.deleteProperty('HSK_VOICE_CONTROL_AFTER');
+  }
   if(Number(p.getProperty('HSK_VOICE_CONTROL_AFTER')||0)>Date.now())return true;
   control.getRange(7,2).setValue(new Date().toISOString());
-  hskVoiceRecoverTick_(p,book,control);
+  // Process at most three independent clips per tick; stop on provider backoff or time budget.
+  var started=Date.now();
+  for(var step=0;step<3&&Date.now()-started<140000;step++){
+   if(String(control.getRange(2,2).getValue())!=='RECOVER_50')break;
+   if(Number(p.getProperty('HSK_VOICE_CONTROL_AFTER')||0)>Date.now())break;
+   hskVoiceRecoverTick_(p,book,control);
+  }
   var progress=book.getSheetByName('Tien_do_tu_vung');
   if(progress)progress.getRange(2,2).setValue(String(control.getRange(2,2).getValue())==='RECOVER_50'?'Đang xác minh master (không tạo TTS)':'Đang dừng');
   return true;
@@ -52,6 +68,7 @@ function hskVoiceControlPoll_(p){
  }finally{lock.releaseLock();}
 }
 function hskVoiceControlTick(){return hskVoiceControlPoll_(hskSettings_());}
+function hskVoiceControlFastTick(){return hskVoiceControlPoll_(hskSettings_());}
 function hskVoiceRecHanzi_(x){return String(x||'').normalize('NFKC').replace(/[\s\p{P}\p{S}]/gu,'').trim();}
 function hskVoiceRecPinyin_(x){return String(x||'').normalize('NFC').toLowerCase().replace(/[\s\p{P}]/gu,'');}
 function hskVoiceRecoverTick_(p,book,control){
@@ -62,7 +79,11 @@ function hskVoiceRecoverTick_(p,book,control){
  if(jobs.length!==50||batch[2]!==masterId)throw Error('recovery_source_mismatch');
  var rec=book.getSheetByName('Voice_Recovery_50'),all=rec.getRange(2,1,49,14).getValues();
  if(all.length!==49||all.some(function(r,i){return Number(r[0])!==i+1||!(Number(r[2])>Number(r[1]));}))throw Error('invalid_segment_manifest');
- var candidates=all.map(function(r,i){return {i:i,row:r};}).filter(function(x){return ['PENDING','RECHECK'].indexOf(x.row[3])>=0;}).slice(0,4);
+ // Single-clip blind ASR prevents one uncertain response invalidating three valid clips.
+ // Prioritize unseen clips so a bad clip cannot stall the remaining master.
+ var candidates=all.map(function(r,i){return {i:i,row:r};})
+  .filter(function(x){return ['PENDING','RECHECK'].indexOf(x.row[3])>=0;})
+  .sort(function(a,b){return (a.row[3]==='PENDING'?0:1)-(b.row[3]==='PENDING'?0:1)||a.i-b.i;}).slice(0,1);
  var passed=all.filter(function(r){return r[3]==='READY'||r[3]==='EXISTING';}).length;
  var rejected=all.filter(function(r){return r[3]==='REVIEW';}).length;
  if(!candidates.length){
@@ -71,10 +92,12 @@ function hskVoiceRecoverTick_(p,book,control){
   control.getRange(8,2,2,1).setValues([[passed],[rejected]]);
   batch[3]='RECOVERED_PARTIAL';batch[4]='only_blind_double_asr_verified_segments_saved';
   batches.getRange(batchIndex+2,1,1,11).setValues([batch]);
-  // Provider rejection alone is not a pronunciation failure: keep missing words in the next TTS queue.
+  // Every dictionary entry not uniquely proved by double-blind Hanzi+pinyin ASR stays in the next TTS queue.
+  // Never regenerate or overwrite any READY/EXISTING word.
   var stored=hskCheck_(p),tables=hskVocabTables_(stored),vocab=hskVocabRows_(tables.queue,17);
-  jobs.forEach(function(j){var r=vocab[j.row];if(r[3]==='REVIEW'&&r[11]==='provider_refused_batch'){
-   r[3]='RETRY';r[5]=0;r[11]='pending_next_batch_after_unverified_master';hskVocabWrite_(tables.queue,j.row,r);
+  var proved=new Set(all.filter(function(r){return ['READY','EXISTING'].indexOf(r[3])>=0;}).map(function(r){return Number(r[9]);}));
+  jobs.forEach(function(j){var r=vocab[j.row];if(!proved.has(j.row+2)&&['READY','EXISTING'].indexOf(r[3])<0){
+   r[3]='RETRY';r[5]=0;r[11]='needs_new_batch_after_unverified_master';hskVocabWrite_(tables.queue,j.row,r);
   }});
   hskVocabSummary_(stored,tables);
   return;
@@ -88,7 +111,9 @@ function hskVoiceRecoverTick_(p,book,control){
  var result;
  try{
   p.setProperty('HSK_VOCAB_ASR_CALLS',String(Number(p.getProperty('HSK_VOCAB_ASR_CALLS')||0)+2));
-  result=hskVocabCall_(ScriptApp.getIdentityToken(),{action:'verify-words',keySlot:batch[6],items:selected.map(function(j){return j.text;}),pinyin:selected.map(function(j){return j.pinyin;}),clips:clips});
+  var slots=[10,0,2,3,4,5,6,7,8,9,11,1],next=Number(p.getProperty('HSK_VOICE_ASR_NEXT')||0),slot=slots[next%slots.length];
+  p.setProperty('HSK_VOICE_ASR_NEXT',String((next+1)%slots.length));
+  result=hskVocabCall_(ScriptApp.getIdentityToken(),{action:'verify-words',keySlot:slot,items:selected.map(function(j){return j.text;}),pinyin:selected.map(function(j){return j.pinyin;}),clips:clips});
   if(!Array.isArray(result.transcripts)||result.transcripts.length!==2||!Array.isArray(result.pinyin)||result.pinyin.length!==2)throw Error('invalid_asr_response');
  }catch(error){
   var failures=Number(p.getProperty('HSK_VOICE_CONTROL_ASR_FAILURES')||0)+1;
@@ -99,7 +124,7 @@ function hskVoiceRecoverTick_(p,book,control){
    control.getRange(6,2).setValue('ASR_PAUSED_AFTER_3_PROVIDER_FAILURES');
    p.deleteProperty('HSK_VOICE_CONTROL_AFTER');
   }else{
-   p.setProperty('HSK_VOICE_CONTROL_AFTER',String(Date.now()+900000));
+   p.setProperty('HSK_VOICE_CONTROL_AFTER',String(Date.now()+120000));
    control.getRange(6,2).setValue('WAITING_ASR_RETRY_'+failures+'_OF_3');
   }
   return;
