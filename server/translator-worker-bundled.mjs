@@ -601,7 +601,9 @@ function hskBuildInteractionRequest(model,transcript){
   throw Error('invalid_model');
  return {
   endpoint:'https://generativelanguage.googleapis.com/v1beta/interactions',
-  payload:{model,input:transcript,response_format:{type:'audio'},
+  payload:{model,
+   input:[{type:'user_input',content:[{type:'text',text:transcript,annotations:[{type:'speech_metadata',style:'Read in clear standard Mandarin and leave a full silent pause between vocabulary entries.'}]}]}],
+   response_format:{type:'audio',mime_type:'audio/l16',sample_rate:24000},
    generation_config:{speech_config:[{voice:'Kore'}]}}
  };
 }
@@ -612,7 +614,7 @@ function hskInteractionAsLegacyAudio(result){
  const out=result?.output_audio;
  if(typeof out?.data!=='string'||!out.data) return {error:'tts_generation_incomplete'};
  const mime=out.mime_type||out.mimeType||'audio/L16;codec=pcm;rate=24000';
- if(!['audio/L16;codec=pcm;rate=24000','audio/pcm','audio/wav'].includes(mime))
+ if(!['audio/l16','audio/l16;codec=pcm;rate=24000','audio/pcm','audio/wav'].includes(mime.toLowerCase()))
   return {error:'invalid_tts_audio'};
  return {candidates:[{finishReason:'STOP',content:{parts:[{inlineData:{data:out.data,mimeType:mime}}]}}]};
 }
@@ -767,7 +769,7 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
   try{
    for(let attempt=0;attempt<(input.keySlot===undefined?2:1);attempt++){
     let response;
-    try{const requestData=modelInfo.api==='interactions'?hskBuildInteractionRequest(model,input.items?input.items.map(t=>t.normalize('NFC').trim()).join('\n\n'):text):{endpoint:'https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',payload};
+    try{const requestData=modelInfo.api==='interactions'?hskBuildInteractionRequest(model,input.items?input.items.map(t=>t.normalize('NFC').trim()).join('\n<short pause>\n'):text):{endpoint:'https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',payload};
      response=await provider(requestData.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(requestData.payload),signal:controller.signal});}catch{return json({ok:false,error:'tts_transport_uncertain',providerAttempts:1,retryable:false},503);}
     if(!response.ok)return json(await voiceProviderFailure(response,env),[429,503].includes(response.status)?response.status:502);
     let data;try{data=await response.json();}catch{return json({ok:false,error:'invalid_tts_response',providerAttempts:1},502);}

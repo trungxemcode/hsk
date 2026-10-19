@@ -150,7 +150,7 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
   try{
    for(let attempt=0;attempt<(input.keySlot===undefined?2:1);attempt++){
     let response;
-    try{const requestData=modelInfo.api==='interactions'?hskBuildInteractionRequest(model,input.items?input.items.map(t=>t.normalize('NFC').trim()).join('\n\n'):text):{endpoint:'https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',payload};
+    try{const requestData=modelInfo.api==='interactions'?hskBuildInteractionRequest(model,input.items?input.items.map(t=>t.normalize('NFC').trim()).join('\n<short pause>\n'):text):{endpoint:'https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',payload};
      response=await provider(requestData.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(requestData.payload),signal:controller.signal});}catch{return json({ok:false,error:'tts_transport_uncertain',providerAttempts:1,retryable:false},503);}
     if(!response.ok)return json(await voiceProviderFailure(response,env),[429,503].includes(response.status)?response.status:502);
     let data;try{data=await response.json();}catch{return json({ok:false,error:'invalid_tts_response',providerAttempts:1},502);}

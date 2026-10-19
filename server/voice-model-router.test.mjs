@@ -11,7 +11,7 @@ function setup(result){
  const calls=[],googleFetch=async()=>Response.json(identity);
  const slotFetch=(slot,isolated,model)=>{
   calls.push({type:'select',slot,isolated,model});
-  const provider=async(u,init)=>{calls.push({type:'provider',url:u,payload:JSON.parse(init.body)});return Response.json(result||{output_audio:{data:'AQIDBA==',mime_type:'audio/L16;codec=pcm;rate=24000'}})};
+  const provider=async(u,init)=>{calls.push({type:'provider',url:u,payload:JSON.parse(init.body)});return Response.json(result||{output_audio:{data:'AQIDBA==',mime_type:'audio/l16'}})};
   provider.availability=async()=>{calls.push({type:'status'});return [{slot:11,retryAfter:0},{slot:12,retryAfter:200}]};
   provider.inspect=async()=>Response.json({name:model,supportedGenerationMethods:['generateContent']});
   return provider;
@@ -36,7 +36,7 @@ test('3.8 Interactions use verbatim Chinese input, Kore voice, and validate retu
  assert.equal(result.audioBase64,'AQIDBA==');const p=h.calls.find(x=>x.type==='provider');
  assert.equal(p.url,'https://generativelanguage.googleapis.com/v1beta/interactions');
  assert.equal(p.payload.model,'gemini-3.8-flash-lite-tts');
- assert.equal(p.payload.input,'帮助\n\n报纸');assert.deepEqual(p.payload.generation_config.speech_config,[{voice:'Kore'}]);
+ assert.equal(p.payload.input[0].type,'user_input');assert.equal(p.payload.input[0].content[0].text,'帮助\n<short pause>\n报纸');assert.equal(p.payload.input[0].content[0].annotations[0].type,'speech_metadata');assert.equal(p.payload.response_format.mime_type,'audio/l16');assert.deepEqual(p.payload.generation_config.speech_config,[{voice:'Kore'}]);
  assert.deepEqual(h.calls.find(x=>x.type==='select'),{type:'select',slot:11,isolated:false,model:'gemini-3.8-flash-lite-tts'});
 });
 test('model-scoped status never generates TTS and paid model requires explicit server flag',async()=>{
@@ -54,6 +54,6 @@ test('3.8 response must contain one valid audio block; refusals and malformed te
   const h=setup(bad),res=await h.handler(req({model:'gemini-3.8-flash-tts',keySlot:12,isolated:true,text:'你好'}),env);
   assert.equal(res.status,502);assert.equal(h.calls.filter(x=>x.type==='provider').length,1);
  }
- assert.equal(hskInteractionAsLegacyAudio({output_audio:{data:'AQIDBA==',mime_type:'audio/L16;codec=pcm;rate=24000'}}).candidates.length,1);
+ assert.equal(hskInteractionAsLegacyAudio({output_audio:{data:'AQIDBA==',mime_type:'audio/l16'}}).candidates.length,1);
  assert.equal(hskBuildInteractionRequest('gemini-3.8-flash-tts','你好').payload.model,'gemini-3.8-flash-tts');
 });

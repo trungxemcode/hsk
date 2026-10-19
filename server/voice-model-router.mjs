@@ -25,7 +25,9 @@ export function hskBuildInteractionRequest(model,transcript){
   throw Error('invalid_model');
  return {
   endpoint:'https://generativelanguage.googleapis.com/v1beta/interactions',
-  payload:{model,input:transcript,response_format:{type:'audio'},
+  payload:{model,
+   input:[{type:'user_input',content:[{type:'text',text:transcript,annotations:[{type:'speech_metadata',style:'Read in clear standard Mandarin and leave a full silent pause between vocabulary entries.'}]}]}],
+   response_format:{type:'audio',mime_type:'audio/l16',sample_rate:24000},
    generation_config:{speech_config:[{voice:'Kore'}]}}
  };
 }
@@ -36,7 +38,7 @@ export function hskInteractionAsLegacyAudio(result){
  const out=result?.output_audio;
  if(typeof out?.data!=='string'||!out.data) return {error:'tts_generation_incomplete'};
  const mime=out.mime_type||out.mimeType||'audio/L16;codec=pcm;rate=24000';
- if(!['audio/L16;codec=pcm;rate=24000','audio/pcm','audio/wav'].includes(mime))
+ if(!['audio/l16','audio/l16;codec=pcm;rate=24000','audio/pcm','audio/wav'].includes(mime.toLowerCase()))
   return {error:'invalid_tts_audio'};
  return {candidates:[{finishReason:'STOP',content:{parts:[{inlineData:{data:out.data,mimeType:mime}}]}}]};
 }
