@@ -19,11 +19,14 @@ function hskLegacyCandidates_(cacheRows,corpus){
   if(state==='READY'&&r[4]&&Number(r[6])>44)return;
   if(['DEFERRED','VERIFY_PENDING','REPAIR_REQUESTED'].indexOf(state)>=0 ||
     state==='REVIEW'&&/tts_key_invalid/.test(error)){
-   out.push({at:at,row:r,index:item[0],text:text,pinyin:item[1],key:key,state:state});
+   var alternativeKey=hskVocabKey_('gemini-3.1-flash-tts-preview',text);
+   var alternative=cacheRows.find(function(entry){return entry[0]===alternativeKey&&entry[11]==='READY'&&entry[4]&&Number(entry[6])>44;});
+   out.push({at:at,row:r,index:item[0],text:text,pinyin:item[1],key:key,state:state,
+    alternative:['DEFERRED','REVIEW'].indexOf(state)>=0?alternative:null});
   }
  });
  return out.sort(function(a,b){
-  function priority(x){return x.state==='VERIFY_PENDING'?0:x.state==='REPAIR_REQUESTED'?1:2;}
+  function priority(x){return x.state==='VERIFY_PENDING'?0:x.state==='REPAIR_REQUESTED'?1:x.alternative?2:3;}
   return priority(a)-priority(b)||a.index-b.index;
  });
 }
@@ -31,6 +34,12 @@ function hskLegacyCacheRepairTick_(p,book,control){
  if(String(control.getRange(55,2).getValue()||'')!=='ON')return;
  if(String(control.getRange(2,2).getValue()||'')!=='AUTO_CYCLE'||p.getProperty('HSK_VOICE_PAUSED')==='true')return;
  var now=Date.now();
+ // Once, release only the former 2.5 TTS generation-error global backoff.
+ // Per-item and provider-key cooldowns remain in force; cached 3.1 files can be reused now.
+ if(p.getProperty('HSK_LEGACY_REPAIR_POLICY')!=='prefer_verified_alternates_v2'){
+  p.setProperty('HSK_LEGACY_REPAIR_POLICY','prefer_verified_alternates_v2');
+  if(/^tts_wait_/.test(p.getProperty('HSK_LEGACY_REPAIR_LAST')||''))p.deleteProperty('HSK_LEGACY_REPAIR_NEXT');
+ }
  if(Number(p.getProperty('HSK_LEGACY_REPAIR_NEXT')||0)>now)return;
  var lock=LockService.getScriptLock();if(!lock.tryLock(100))return;
  try{
@@ -80,6 +89,16 @@ function hskLegacyCacheRepairTick_(p,book,control){
    retryStatus(t,'REVIEW','repair_transport_or_save_uncertain');
    next(120000,'quarantined_uncertain_'+t.index);return;
   }
+  if(t.alternative){
+   try{
+    var alternate=DriveApp.getFileById(String(t.alternative[4])),altAudio=alternate.getBlob().getBytes();
+    if(altAudio.length<=44||altAudio.length>600000)throw Error('invalid_alternate_audio');
+    hskBatchPcm_(altAudio);
+    save(t,{4:alternate.getId(),6:altAudio.length,11:'VERIFY_PENDING',12:'reused_alternate_model_3_1_pending_double_asr'});
+    retryStatus(t,'PENDING','reused_alternate_model_pending_asr');
+    next(30000,'reused_alternate_model_'+t.index);return;
+   }catch(e){next(300000,'alternate_file_unavailable_'+t.index+'_'+String(e.message||'unknown').slice(0,65));return;}
+  }
   var token=ScriptApp.getIdentityToken();
   if(!token){next(600000,'identity_token_missing');return;}
   if(t.state==='VERIFY_PENDING'){
@@ -98,7 +117,7 @@ function hskLegacyCacheRepairTick_(p,book,control){
      transcript.every(function(x){return hskVoiceRecHanzi_(x[0])===hskVoiceRecHanzi_(t.text);}) &&
      pronunciation.every(function(x){return hskVoiceRecPinyin_(x[0])===hskVoiceRecPinyin_(t.pinyin);});
     if(match){
-     save(t,{11:'READY',12:'legacy_repair_double_asr_exact'});
+     save(t,{11:'READY',12:('legacy_repair_double_asr_exact;'+String(t.row[12]||'')).slice(0,120)});
      retryStatus(t,'DONE','legacy_repair_double_asr_exact');
      next(30000,'ready_'+t.index+'_'+t.text);
     }else{
@@ -122,22 +141,30 @@ function hskLegacyCacheRepairTick_(p,book,control){
    save(t,{4:file.getId(),6:existingBytes.length,11:'VERIFY_PENDING',12:'existing_wav_requires_asr'});
    next(30000,'reuse_saved_wav_'+t.index);return;
   }
-  var statuses=hskVocabCall_(token,{action:'status',model:String(t.row[3])});
-  var slots=Array.isArray(statuses.slots)?statuses.slots.filter(function(s){
-   return Number.isInteger(s.slot)&&Number(s.retryAfter||0)<=0&&
-    Number(p.getProperty('HSK_LEGACY_SLOT_'+s.slot+'_AFTER')||0)<=Date.now();
-  }):[];
-  if(!slots.length){next(600000,'tts_model_or_keys_cooling');return;}
-  var slot=slots[0].slot;
+  // Gemini 3.1 is preferred for prior Gemini 2.5 generation_incomplete/429 failures.
+  // Keep the original cache key as the requested model and record fallback provenance.
+  var generationModel=null,slot=-1;
+  var preferred=['gemini-3.1-flash-tts-preview',String(t.row[3])];
+  for(var mi=0;mi<preferred.length&&slot<0;mi++){
+   try{
+    var status=hskVocabCall_(token,{action:'status',model:preferred[mi]});
+    var available=Array.isArray(status.slots)?status.slots.filter(function(s){
+     return Number.isInteger(s.slot)&&Number(s.retryAfter||0)<=0&&
+      Number(p.getProperty('HSK_LEGACY_SLOT_'+s.slot+'_AFTER')||0)<=Date.now();
+    }):[];
+    if(available.length){slot=available[0].slot;generationModel=preferred[mi];}
+   }catch(ignored){}
+  }
+  if(slot<0){next(600000,'tts_models_or_keys_cooling');return;}
   // Reserve durably before contacting Gemini.
-  save(t,{10:slot,11:'REPAIR_REQUESTED',12:'tts_request_journaled'});
+  save(t,{10:slot,11:'REPAIR_REQUESTED',12:'tts_request_journaled_model_'+(generationModel.indexOf('3.1')>=0?'3_1':'2_5')});
   retryStatus(t,'PENDING','legacy_tts_repair_journaled');
   SpreadsheetApp.flush();
   var response;
   try{
    response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',
     headers:{Authorization:'Bearer '+token},
-    payload:JSON.stringify({text:t.text,isolated:true,keySlot:slot,model:String(t.row[3]),language:'zh-CN'}),
+    payload:JSON.stringify({text:t.text,isolated:true,keySlot:slot,model:generationModel,language:'zh-CN'}),
     muteHttpExceptions:true});
   }catch(e){
    save(t,{11:'UNCERTAIN',12:'tts_transport_uncertain_no_duplicate'});
@@ -169,7 +196,7 @@ function hskLegacyCacheRepairTick_(p,book,control){
    if(decoded.bytes.length<=44||decoded.bytes.length>600000)throw Error('invalid_legacy_audio_size');
    hskBatchPcm_(decoded.bytes);
    var created=storage.folder.createFile(Utilities.newBlob(decoded.bytes,'audio/wav',name));
-   save(t,{4:created.getId(),6:decoded.bytes.length,10:slot,11:'VERIFY_PENDING',12:'tts_saved_pending_double_asr'});
+   save(t,{4:created.getId(),6:decoded.bytes.length,10:slot,11:'VERIFY_PENDING',12:'generated_model_'+(generationModel.indexOf('3.1')>=0?'3_1':'2_5')+'_pending_double_asr'});
    p.deleteProperty('HSK_LEGACY_ITEM_'+t.index+'_ATTEMPTS');
    next(90000,'tts_saved_'+t.index+'_awaiting_double_asr');
   }catch(e){

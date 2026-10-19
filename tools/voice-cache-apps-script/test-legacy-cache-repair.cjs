@@ -23,7 +23,7 @@ function setup(){
   hskVoiceRecHanzi_:x=>String(x).replace(/[\\s\\p{P}]/gu,''),hskVoiceRecPinyin_:x=>String(x).replace(/[\\s\\p{P}]/gu,''),
   UrlFetchApp:{fetch:()=>({getResponseCode:()=>200,getContentText:()=>'{}'})},
   Utilities:{base64Encode:()=> 'AA==',newBlob:(bytes,mime,name)=>({bytes,mime,name})},
-  DriveApp:{getFileById:id=>({getBlob:()=>({getBytes:()=>fileMap.get(id).getBlob().getBytes()})})}};
+  DriveApp:{getFileById:id=>({getId:()=>id,getBlob:()=>({getBytes:()=>fileMap.get(id).getBlob().getBytes()})})}};
  vm.runInNewContext(src,env);
  const p={getProperty:k=>props.get(k),setProperty:(k,v)=>props.set(k,v),deleteProperty:k=>props.delete(k)};
  return {env,p,rows,props,cache,queue,retry,control,controlState,folder,fileMap,saves,run:()=>env.hskLegacyCacheRepairTick_(p,null,control)};
@@ -53,4 +53,21 @@ test('journaled transport-uncertain request is never resent',()=>{
 });
 test('feature flag OFF does no work and cannot mutate cache',()=>{
  const w=setup();w.controlState.B55='OFF';w.run();assert.equal(w.rows[0][11],'DEFERRED');assert.equal(w.retry.length,0);
+});
+
+test('existing READY 3.1 audio is reused and ASR-verified without additional TTS',()=>{
+ const w=setup(),sha=crypto.createHash('sha256').update(JSON.stringify(['zh-CN','Kore','gemini-3.1-flash-tts-preview','饭馆'])).digest('hex');
+ w.rows.push([sha,'zh-CN','Kore','gemini-3.1-flash-tts-preview','cached-3.1.wav','audio/wav',100,'time','time',0,4,'READY','']);
+ w.fileMap.set('cached-3.1.wav',{getId:()=> 'cached-3.1.wav',getBlob:()=>({getBytes:()=>Array(100).fill(1)})});
+ let calls=0;w.env.UrlFetchApp.fetch=()=>{calls++;throw Error('TTS should not be called');};
+ w.run();assert.equal(w.rows[0][11],'VERIFY_PENDING','repair_state='+w.props.get('HSK_LEGACY_REPAIR_LAST'));assert.equal(w.rows[0][4],'cached-3.1.wav');
+ assert.equal(calls,0);
+ w.props.set('HSK_LEGACY_REPAIR_NEXT','0');w.run();assert.equal(w.rows[0][11],'READY');
+ assert.match(w.rows[0][12],/reused_alternate_model/);
+});
+test('new legacy TTS requests prefer available 3.1 rather than failing original 2.5',()=>{
+ const w=setup();let body;
+ w.env.UrlFetchApp.fetch=(url,args)=>{body=JSON.parse(args.payload);return {getResponseCode:()=>200,getContentText:()=>'{}'};};
+ w.run();assert.equal(body.model,'gemini-3.1-flash-tts-preview');
+ assert.equal(w.rows[0][11],'VERIFY_PENDING');
 });
