@@ -36,9 +36,18 @@ function hskVocabStart(){
 function hskVocabStop(){hskSettings_().setProperty('HSK_VOCAB_ENABLED','false');ScriptApp.getProjectTriggers().filter(function(t){return t.getHandlerFunction()==='hskVocabTick';}).forEach(function(t){ScriptApp.deleteTrigger(t);});}
 function hskVocabCall_(token,body){
  body=hskAsrPrepareBody_(body);
+ var cache=null,cacheKey='';
+ if(body.action==='verify-words'&&Array.isArray(body.clips)){
+  cache=CacheService.getScriptCache();
+  cacheKey='hsk_asr_v2_'+hskDigest_(JSON.stringify([body.action,body.keySlot,body.items,body.pinyin,body.clips]));
+  var cached=cache.get(cacheKey);
+  if(cached){try{var replay=JSON.parse(cached);if(replay.ok&&Array.isArray(replay.transcripts)&&replay.transcripts.length===2&&Array.isArray(replay.pinyin)&&replay.pinyin.length===2)return replay;}catch(ignored){}}
+ }
  var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(body),muteHttpExceptions:true});
  var data;try{data=JSON.parse(response.getContentText());}catch(e){throw Error('response_uncertain');}
- if(response.getResponseCode()!==200||!data.ok){var error=Error(String(data.error||'provider_failure'));error.detail=data;throw error;}return data;
+ if(response.getResponseCode()!==200||!data.ok){var error=Error(String(data.error||'provider_failure'));error.detail=data;throw error;}
+ if(cache&&cacheKey&&Array.isArray(data.transcripts)&&data.transcripts.length===2&&Array.isArray(data.pinyin)&&data.pinyin.length===2){var serialized=JSON.stringify(data);if(serialized.length<70000)cache.put(cacheKey,serialized,21600);}
+ return data;
 }
 /** Require >=1.2s silence and agreement at multiple noise thresholds; pauses are measured, never presumed. */
 function hskVocabRanges_(bytes,expected){

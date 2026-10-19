@@ -204,6 +204,7 @@ function hskAuto50Poll_(p,book,control){
   control.getRange(6,2).setValue('AUTO_CYCLE_WAITING_UNTIL_'+new Date(blockedUntil).toISOString());
   return true;
  }
+ if(typeof hskAuto50Watchdog_==='function')hskAuto50Watchdog_(p,book,control);
  var source=hskCheck_(p),tables=hskVocabTables_(source),queue=hskVocabRows_(tables.queue,17),batchRows=hskVocabRows_(tables.batches,11);
  if(!queue.some(function(r){return ['PENDING','RETRY','MASTER','CHECK_AGAIN'].indexOf(r[3])>=0;})&&
     !batchRows.some(function(b){return ['MASTER','AUTO_VERIFY','VERIFY','RESERVED','UNCERTAIN'].indexOf(b[3])>=0;})){
@@ -214,7 +215,7 @@ function hskAuto50Poll_(p,book,control){
  p.setProperty('HSK_VOCAB_PILOT_ONLY','false');
  p.setProperty('HSK_SHARED50_LITERAL','true');
  p.setProperty('HSK_VOCAB_FIXED_BATCH','true');
- p.setProperty('HSK_VOCAB_BATCH_SIZE','50');
+ p.setProperty('HSK_VOCAB_BATCH_SIZE',String(typeof hskAuto50BatchSize_==='function'?hskAuto50BatchSize_(batchRows):50));
  p.setProperty('HSK_VOCAB_PAUSE','4');
  p.setProperty('HSK_WARM_ENABLED','false');
  p.setProperty('HSK_VOCAB_ENABLED','true');
