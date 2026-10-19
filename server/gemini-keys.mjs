@@ -6,7 +6,7 @@ export function configuredGeminiKeys(env){
 }
 function configuredGeminiSlots(env){
  const seen=new Set(),entries=[];
- for(let slot=1;slot<=10;slot++){
+ for(let slot=1;slot<=12;slot++){
   const raw=env['GEMINI_API_KEY_'+slot]||(slot===1?env.GEMINI_API_KEY:'');
   if(typeof raw!=='string'||!raw.trim()||raw.trim().length>300)continue;
   const key=raw.trim();if(seen.has(key))continue;seen.add(key);entries.push({slot,key});
@@ -50,7 +50,7 @@ export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={curs
   if(keys.length===1)return callKey(0,url,init);
   const ids=await (idsPromise||=Promise.all(keys.map(geminiKeyId))),excluded=[];
   let last;
-  // Never fan out or scan ten accounts for one prompt: max two sequential calls.
+  // Never fan out or scan the full key pool for one prompt: max two sequential calls.
   for(let attempt=0;attempt<2;attempt++){
    canceled();
    let picked=await controlCall(env,'gemini-pick',{ids,excluded});

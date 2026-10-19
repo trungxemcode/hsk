@@ -6,7 +6,7 @@ import {createAiRoleFetch} from './ai-backup.mjs';
 import {createHandler} from './translator-worker-bundled.mjs';
 
 const url='https://generativelanguage.googleapis.com/v1beta/models/gemini-test:generateContent';
-const keys=Array.from({length:10},(_,i)=>'fake-gemini-key-slot-'+(i+1));
+const keys=Array.from({length:12},(_,i)=>'fake-gemini-key-slot-'+(i+1));
 const pool=Object.fromEntries(keys.map((k,i)=>['GEMINI_API_KEY_'+(i+1),k]));
 const selected=init=>new Headers(init.headers).get('x-goog-api-key');
 const ok=()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:'{"answer":"Xin chào"}'}]}}]});
@@ -16,20 +16,32 @@ function central(env=pool){
  const instance=new HSkaIControl({storage},env);
  return {map,env:{...env,AI_CONTROL_REQUIRED:'true',AI_CONTROL:{idFromName:n=>n,get:()=>({fetch:(u,i)=>instance.fetch(new Request(u,i))})}}};
 }
-test('ten server-owned slots support legacy key, deduplicate, and ignore extra slots',()=>{
+test('twelve server-owned slots support legacy key, deduplicate, and ignore extra slots',()=>{
  assert.deepEqual(configuredGeminiKeys({GEMINI_API_KEY:keys[0]}),[keys[0]]);
- assert.deepEqual(configuredGeminiKeys({...pool,GEMINI_API_KEY:'legacy',GEMINI_API_KEY_11:'extra'}),keys);
+ assert.deepEqual(configuredGeminiKeys({...pool,GEMINI_API_KEY:'legacy',GEMINI_API_KEY_13:'extra'}),keys);
  assert.deepEqual(configuredGeminiKeys({GEMINI_API_KEY:keys[0],GEMINI_API_KEY_2:' '+keys[0]+' ',GEMINI_API_KEY_3:'  ',GEMINI_API_KEY_4:23}),[keys[0]]);
 });
-test('two Worker instances share atomic round robin across ten slots',async()=>{
+test('two Worker instances share atomic round robin across twelve slots',async()=>{
  const {env,map}=central(),calls=[],raw=async(u,i)=>{calls.push(selected(i));return ok();};
  const workers=[createGeminiKeyFetch(raw,env),createGeminiKeyFetch(raw,env)];
- await Promise.all(Array.from({length:20},(_,i)=>workers[i%2](url,{})));
+ await Promise.all(Array.from({length:24},(_,i)=>workers[i%2](url,{})));
  assert.deepEqual(calls,[...keys,...keys]);assert.equal(map.size,1);
  const stored=JSON.stringify([...map]);for(const key of keys)assert.equal(stored.includes(key),false,'DO must never store raw keys');
 });
+test('Gemini slots eleven and twelve are individually selectable and keep secret values server-side',async()=>{
+ const events=[];
+ const env={GEMINI_API_KEY_11:keys[10],GEMINI_API_KEY_12:keys[11]};
+ const selectedKeys=[];
+ const run=createGeminiKeyFetch(async(u,init)=>{selectedKeys.push(selected(init));return ok();},env,{onAttempt:e=>events.push(e)});
+ assert.deepEqual(configuredGeminiKeys(env),keys.slice(10));
+ assert.equal((await run(url)).status,200);
+ assert.equal((await run(url)).status,200);
+ assert.deepEqual(selectedKeys,keys.slice(10));
+ assert.deepEqual(events.map(e=>e.slot),[11,12]);
+ assert.equal(events.every(e=>!Object.values(e).some(v=>keys.includes(v))),true);
+});
 test('central cooldown is visible to another Worker and respects Retry-After',async()=>{
- const {env,map}=central({...pool,GEMINI_API_KEY_3:'',GEMINI_API_KEY_4:'',GEMINI_API_KEY_5:'',GEMINI_API_KEY_6:'',GEMINI_API_KEY_7:'',GEMINI_API_KEY_8:'',GEMINI_API_KEY_9:'',GEMINI_API_KEY_10:''});
+ const {env,map}=central({...pool,GEMINI_API_KEY_3:'',GEMINI_API_KEY_4:'',GEMINI_API_KEY_5:'',GEMINI_API_KEY_6:'',GEMINI_API_KEY_7:'',GEMINI_API_KEY_8:'',GEMINI_API_KEY_9:'',GEMINI_API_KEY_10:'',GEMINI_API_KEY_11:'',GEMINI_API_KEY_12:''});
  const calls=[],raw=async(u,i)=>{const key=selected(i);calls.push(key);return key===keys[0]?Response.json({error:{details:[{retryDelay:'120s'}]}},{status:429}):ok();};
  assert.equal((await createGeminiKeyFetch(raw,env)(url,{})).status,200);
  assert.equal((await createGeminiKeyFetch(raw,env)(url,{})).status,200);
@@ -40,7 +52,7 @@ test('local fallback rotates, skips cooling keys and recovers after the pause',a
  const f=createGeminiKeyFetch(async(u,i)=>{calls.push(selected(i));return calls.length===1?new Response('',{status:429,headers:{'Retry-After':'90'}}):ok();},env,{now:()=>time,state});
  await f(url);await f(url);assert.deepEqual(calls,[keys[0],keys[1],keys[1]]);time=91000;await f(url);assert.equal(calls.at(-1),keys[0]);
 });
-test('one request makes at most two Gemini calls, without probing ten accounts',async()=>{
+test('one request makes at most two Gemini calls, without probing twelve accounts',async()=>{
  const calls=[];const f=createGeminiKeyFetch(async(u,i)=>{calls.push(selected(i));return new Response('',{status:503});},pool);
  assert.equal((await f(url)).status,503);assert.deepEqual(calls,keys.slice(0,2));
 });
