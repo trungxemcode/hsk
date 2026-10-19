@@ -30,10 +30,12 @@ test('15 min stall switches to Apps Script direct and clears only stale Worker c
  assert.equal(w.props.has('HSK_VOCAB_RETRY_AT'),false);
  assert.equal(w.writes.at(-1).rows[0][1],'DIRECT');
 });
-test('missing direct key cannot be mistaken for a working failover',()=>{
+test('missing direct key switches to CPU-local segmentation, but not direct TTS',()=>{
  const w=world();w.props.delete('GEMINI_TTS_KEY_1');w.run();w.advance(901000);w.run();
- assert.equal(w.props.get('HSK_VOICE_FAILOVER_MODE'),'WORKER');
- assert.equal(w.props.get('HSK_VOICE_FAILOVER_REASON'),'stalled_direct_keys_not_configured');
+ assert.equal(w.props.get('HSK_VOICE_FAILOVER_MODE'),'LOCAL');
+ assert.equal(w.props.get('HSK_VOICE_REMOTE_SEGMENT'),'false');
+ assert.equal(w.props.get('HSK_VOICE_FAILOVER_REASON'),'15m_gas_local_segment;tts_asr_still_worker_gateway');
+ assert.ok(w.props.has('HSK_VOCAB_RETRY_AT')); // Preserve Gemini gateway cooldown.
 });
 test('new READY progress resets 15-minute window and heartbeat alone does not',()=>{
  const w=world();w.run();w.advance(700000);w.setReady(11);w.run();
@@ -103,4 +105,45 @@ test('dashboard distinguishes twelve Cloudflare slots from local direct keys',()
  assert.equal(w.writes.at(-1).rows[8][0],'Key_locations');
  for(let n=1;n<=12;n++)w.props.set('GEMINI_API_KEY_'+n,'local-key-'+n);
  assert.equal(w.ctx.hskVoiceFailoverKeyCount_(w.p),12);
+});
+
+test('LOCAL recovers to Cloudflare only after real saved-WAV segmentation parity',()=>{
+ const w=world();w.props.delete('GEMINI_TTS_KEY_1');
+ w.batch[1]=JSON.stringify([{text:'语'}]);w.batch[2]='saved-master-id';
+ w.ctx.DriveApp={getFileById:()=>({getBlob:()=>({getBytes:()=>Array(100).fill(0)})})};
+ w.ctx.hskAuto50Detect_=()=>({ranges:[[0,100]]});
+ w.ctx.Utilities={base64Encode:()=> 'synthetic-audio'};
+ const initialFetch=w.ctx.UrlFetchApp.fetch;
+ let canaryCount=0;
+ w.ctx.UrlFetchApp.fetch=(url,args)=>{
+  if(String(url).includes('segment-wav')){
+   canaryCount++;
+   assert.equal(args.headers.Authorization,'Bearer fake-token');
+   assert.equal(JSON.parse(args.payload).expected,1);
+   return {getResponseCode:()=>200,getContentText:()=>JSON.stringify({ok:true,ranges:[[0,100]]})};
+  }
+  return initialFetch(url,args);
+ };
+ w.run();w.advance(901000);w.run();
+ assert.equal(w.props.get('HSK_VOICE_FAILOVER_MODE'),'LOCAL');
+ w.advance(300001);w.run();assert.equal(w.props.get('HSK_VOICE_FAILOVER_MODE'),'LOCAL');
+ w.advance(300001);w.run();
+ assert.equal(canaryCount,1);
+ assert.equal(w.props.get('HSK_VOICE_FAILOVER_MODE'),'WORKER');
+ assert.equal(w.props.get('HSK_VOICE_REMOTE_SEGMENT'),'true');
+ assert.equal(w.props.get('HSK_VOICE_FAILOVER_REASON'),'worker_restored_after_real_wav_segment_parity');
+});
+test('LOCAL keeps local segmentation when remote WAV canary has wrong ranges',()=>{
+ const w=world();w.props.delete('GEMINI_TTS_KEY_1');
+ w.batch[1]=JSON.stringify([{text:'语'}]);w.batch[2]='saved-master-id';
+ w.ctx.DriveApp={getFileById:()=>({getBlob:()=>({getBytes:()=>Array(100).fill(0)})})};
+ w.ctx.hskAuto50Detect_=()=>({ranges:[[0,100]]});
+ w.ctx.Utilities={base64Encode:()=> 'synthetic-audio'};
+ const initialFetch=w.ctx.UrlFetchApp.fetch;
+ w.ctx.UrlFetchApp.fetch=(url,args)=>String(url).includes('segment-wav')?
+  {getResponseCode:()=>200,getContentText:()=>JSON.stringify({ok:true,ranges:[[500,800]]})}:initialFetch(url,args);
+ w.run();w.advance(901000);w.run();w.advance(300001);w.run();w.advance(300001);w.run();
+ assert.equal(w.props.get('HSK_VOICE_FAILOVER_MODE'),'LOCAL');
+ assert.equal(w.props.get('HSK_VOICE_REMOTE_SEGMENT'),'false');
+ assert.equal(w.props.get('HSK_VOICE_FAILOVER_REASON'),'worker_health_ok_but_wav_canary_failed');
 });

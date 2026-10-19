@@ -1,8 +1,9 @@
 /**
  * HSK voice circuit breaker — genuine output, never trigger timestamps.
- * 15 min without a saved WAV/master or newly verified READY/EXISTING => GAS
- * direct Gemini provider if (and only if) keys already exist in Script Properties.
- * Cloudflare re-enters via 2 health probes + a real unsent-work canary.
+ * 15 min without a saved WAV/master or newly verified READY/EXISTING =>
+ * DIRECT Gemini only when Apps Script owns a key, otherwise LOCAL segmenter.
+ * Cloudflare re-enters after two health probes and a real WAV parity check.
+ * LOCAL still needs the authenticated gateway for TTS/ASR; never claim otherwise.
  * Do not persist or log keys, audio or Google identity tokens in Sheets.
  */
 function hskVoiceFailoverKeyCount_(p){
@@ -57,6 +58,49 @@ function hskVoiceFailoverOutcome_(p,route,ok,reason){
   p.setProperty('HSK_VOICE_WORKER_HEALTHY_POLLS','0');
   p.setProperty('HSK_VOICE_WORKER_NEXT_PROBE',String(Date.now()+300000));
  }
+}
+/**
+ * Probe Cloudflare's dedicated segmentation Worker using a SAVED master.
+ * Local and remote segment boundaries must agree before the remote path
+ * can be restored. No new audio is created and no ASR credits are spent.
+ */
+function hskVoiceFailoverLocalCanary_(p,book){
+ try{
+  var sheet=book.getSheetByName('Voice_Vocab_Batches');
+  if(!sheet||sheet.getLastRow()<2)return false;
+  var total=sheet.getLastRow(),from=Math.max(2,total-19);
+  var sample=sheet.getRange(from,1,total-from+1,3).getValues();
+  var master=null,expected=0;
+  for(var i=sample.length-1;i>=0;i--){
+   if(!sample[i][2])continue;
+   var jobs=JSON.parse(String(sample[i][1]||'[]'));
+   if(!Array.isArray(jobs)||jobs.length<1||jobs.length>100)continue;
+   master=String(sample[i][2]);expected=jobs.length;break;
+  }
+  if(!master)return false;
+  var bytes=DriveApp.getFileById(master).getBlob().getBytes();
+  if(bytes.length<44||bytes.length>8500000)return false;
+  var local=hskAuto50Detect_(bytes,expected);
+  if(!local||!Array.isArray(local.ranges)||local.ranges.length!==expected)return false;
+  var token=ScriptApp.getIdentityToken();if(!token)return false;
+  var response=UrlFetchApp.fetch('https://hsk-voice-segmenter.trung-hsk668.workers.dev/segment-wav',{
+   method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},
+   payload:JSON.stringify({action:'segment-wav',audioBase64:Utilities.base64Encode(bytes),expected:expected}),
+   muteHttpExceptions:true
+  });
+  if(response.getResponseCode()!==200)return false;
+  var remote=JSON.parse(response.getContentText());
+  if(!remote.ok||!Array.isArray(remote.ranges)||remote.ranges.length!==expected)return false;
+  var lastEnd=0;
+  for(var j=0;j<expected;j++){
+   var a=local.ranges[j],b=remote.ranges[j];
+   if(!Array.isArray(a)||!Array.isArray(b)||b.length!==2)return false;
+   if(!Number.isInteger(b[0])||!Number.isInteger(b[1])||b[0]<lastEnd||b[1]<=b[0])return false;
+   if(Math.abs(a[0]-b[0])>480||Math.abs(a[1]-b[1])>480)return false;
+   lastEnd=b[1];
+  }
+  return true;
+ }catch(e){return false;}
 }
 function hskVoiceFailoverPoll_(p,book,control){
  if(p.getProperty('HSK_VOICE_FAILOVER_ENABLED')==='false')return;
@@ -121,9 +165,19 @@ function hskVoiceFailoverPoll_(p,book,control){
    if(/^cloudflare_tts_|^asr_provider_error|^vocabulary_verification_uncertain|^tts_keys_cooling/.test(oldError)){
     p.deleteProperty('HSK_VOCAB_RETRY_AT');
    }
-  }else{reason='stalled_direct_keys_not_configured';p.setProperty('HSK_VOICE_FAILOVER_REASON',reason);}
+  }else{
+   // A valid fallback still exists without Gemini keys: CPU-local WAV segmentation.
+   // TTS/ASR continue via the existing gateway with safe provider backoff.
+   mode='LOCAL';reason='15m_gas_local_segment;tts_asr_still_worker_gateway';
+   p.setProperty('HSK_VOICE_FAILOVER_MODE',mode);
+   p.setProperty('HSK_VOICE_REMOTE_SEGMENT','false');
+   p.setProperty('HSK_VOICE_FAILOVER_CHANGED_AT',String(now));
+   p.setProperty('HSK_VOICE_FAILOVER_REASON',reason);
+   p.setProperty('HSK_VOICE_WORKER_NEXT_PROBE',String(now+300000));
+   p.setProperty('HSK_VOICE_WORKER_HEALTHY_POLLS','0');
+  }
  }
- if(mode==='DIRECT'&&keys&&Number(p.getProperty('HSK_VOICE_WORKER_NEXT_PROBE')||0)<=now){
+ if((mode==='DIRECT'&&keys||mode==='LOCAL')&&Number(p.getProperty('HSK_VOICE_WORKER_NEXT_PROBE')||0)<=now){
   var healthy=false;
   try{
    var identity=ScriptApp.getIdentityToken();
@@ -142,10 +196,25 @@ function hskVoiceFailoverPoll_(p,book,control){
   p.setProperty('HSK_VOICE_WORKER_NEXT_PROBE',String(now+300000));
   // Status alone never restores Cloudflare. A real next-work canary must succeed.
   if(count>=2&&now-Number(p.getProperty('HSK_VOICE_FAILOVER_CHANGED_AT')||now)>=300000){
-   mode='WORKER_PROBE';reason='two_health_probes_waiting_for_real_canary';
-   p.setProperty('HSK_VOICE_WORKER_PROBE_AT',String(now));
-   p.setProperty('HSK_VOICE_FAILOVER_MODE',mode);
-   p.setProperty('HSK_VOICE_FAILOVER_REASON',reason);
+   if(mode==='LOCAL'){
+    if(hskVoiceFailoverLocalCanary_(p,book)){
+     mode='WORKER';reason='worker_restored_after_real_wav_segment_parity';
+     p.setProperty('HSK_VOICE_FAILOVER_MODE',mode);
+     p.setProperty('HSK_VOICE_REMOTE_SEGMENT','true');
+     p.setProperty('HSK_VOICE_FAILOVER_CHANGED_AT',String(now));
+     p.setProperty('HSK_VOICE_FAILOVER_REASON',reason);
+     p.setProperty('HSK_VOICE_WORKER_HEALTHY_POLLS','0');
+    }else{
+     reason='worker_health_ok_but_wav_canary_failed';
+     p.setProperty('HSK_VOICE_FAILOVER_REASON',reason);
+     p.setProperty('HSK_VOICE_WORKER_HEALTHY_POLLS','0');
+    }
+   }else{
+    mode='WORKER_PROBE';reason='two_health_probes_waiting_for_real_canary';
+    p.setProperty('HSK_VOICE_WORKER_PROBE_AT',String(now));
+    p.setProperty('HSK_VOICE_FAILOVER_MODE',mode);
+    p.setProperty('HSK_VOICE_FAILOVER_REASON',reason);
+   }
   }
  }
  if(mode==='WORKER_PROBE'&&now-Number(p.getProperty('HSK_VOICE_WORKER_PROBE_AT')||now)>=900000&&idle>=900000){
@@ -165,7 +234,9 @@ function hskVoiceFailoverPoll_(p,book,control){
    ['Failover_direct_key_count',keys],
    ['Failover_worker_probe_count',Number(p.getProperty('HSK_VOICE_WORKER_HEALTHY_POLLS')||0)],
    ['Failover_reason',reason],
-   ['Failover_current_job','Worker/GAS serialized; READY requires double ASR'],
+   ['Failover_current_job',mode==='LOCAL'?
+    'Apps Script local WAV segmentation; TTS/ASR still require Gemini gateway':
+    'Worker and Apps Script serialized; READY requires double ASR'],
    ['Cloudflare_numbered_key_slots',cloudflareKeySlots],
    ['Key_locations','Cloudflare GEMINI_API_KEY_1..12 / Apps Script GEMINI_TTS_KEY_1..12 (separate secrets)']
   ]);
