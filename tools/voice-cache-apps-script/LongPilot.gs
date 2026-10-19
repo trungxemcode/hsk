@@ -38,3 +38,34 @@ function hskLongPilotRun(){
   console.log(JSON.stringify({ok:false,error:String(e.message||'pilot_failed').replace(/[^a-z0-9_]/gi,'_').slice(0,120),masterSaved:!!(row&&row[2]),providerAttempts:e.providerAttempts,diagnostic:e.diagnostic}));
  }finally{lock.releaseLock();}
 }
+/** Inspect/cut the saved master only. Candidate clips never enter the verified word cache. */
+function hskLongPilotAnalyze(){
+ var lock=LockService.getScriptLock();if(!lock.tryLock(1000))throw Error('busy');
+ try{
+ var storage=hskCheck_(hskSettings_()),sheet=storage.sheet.getParent().getSheetByName('Voice_Long_Pilots'),rows=hskBatchRows_(sheet,7),row=rows.filter(function(r){return !!r[2];}).pop();
+ if(!row)throw Error('no_saved_master');
+ var master=DriveApp.getFileById(row[2]),bytes=master.getBlob().getBytes(),pcm=hskBatchPcm_(bytes),levels=[],peak=0;
+ for(var i=0;i<pcm.length;i+=960){var end=Math.min(pcm.length,i+960),sum=0;for(var j=i;j<end;j+=2){var v=(pcm[j]&255)+(pcm[j+1]&255)*256;if(v>=32768)v-=65536;sum+=v*v;}var rms=Math.sqrt(sum/((end-i)/2))/32768;levels.push(rms);peak=Math.max(peak,rms);}
+ var candidates=[0.012,0.02,0.03,0.035,0.04,0.045,0.05].map(function(ratio){var threshold=Math.max(0.002,peak*ratio),segments=[],begin=-1,last=-1;levels.forEach(function(rms,k){if(rms>threshold){if(begin<0)begin=k;last=k;}else if(begin>=0&&(k-last)*20>=460){segments.push([begin*480,(last+1)*480]);begin=-1;}});if(begin>=0)segments.push([begin*480,Math.min(pcm.length/2,(last+1)*480)]);return segments;});
+ var stable=candidates.every(function(s){return s.length===candidates[0].length&&s.every(function(v,i){return Math.abs(v[0]-candidates[0][i][0])<=2400&&Math.abs(v[1]-candidates[0][i][1])<=2400;});}),folder=null,saved=0;
+ var preview=candidates.filter(function(s){return s.length===JSON.parse(row[1]).length;})[0];
+ if(preview&&preview.length){
+ var name='UNVERIFIED_LONG_CUTS_'+row[0],folders=storage.folder.getFoldersByName(name);folder=folders.hasNext()?folders.next():storage.folder.createFolder(name);
+ preview.forEach(function(s,i){var clipName='segment_'+('000'+(i+1)).slice(-3)+'.wav';if(!folder.getFilesByName(clipName).hasNext()){var raw=pcm.slice(Math.max(0,s[0]-2880)*2,Math.min(pcm.length/2,s[1]+4800)*2);folder.createFile(Utilities.newBlob(hskWav_(raw,'audio/l16'),'audio/wav',clipName));}saved++;});
+ }
+ var duration=pcm.length/48000;
+ console.log(JSON.stringify({durationSeconds:duration,inRequestedRange:duration>=300&&duration<=480,bytes:bytes.length,expected:JSON.parse(row[1]).length,segmentCounts:candidates.map(function(s){return s.length;}),stableBoundaries:stable,candidateClips:saved,verifiedClips:0,masterUrl:master.getUrl(),cutsUrl:folder?folder.getUrl():null,providerCalls:0}));
+ }finally{lock.releaseLock();}
+}
+
+/** Commit only after the original master passes count and boundary agreement. */
+function hskLongPilotFinalize(){
+ var lock=LockService.getScriptLock();if(!lock.tryLock(1000))throw Error('busy');
+ try{
+ var storage=hskCheck_(hskSettings_()),sheet=storage.sheet.getParent().getSheetByName('Voice_Long_Pilots'),rows=hskBatchRows_(sheet,7),index=-1;
+ rows.forEach(function(r,i){if(r[2])index=i;});if(index<0)throw Error('no_saved_master');
+ var row=rows[index],master=DriveApp.getFileById(row[2]),bytes=master.getBlob().getBytes(),queue=hskWarmQueue_(storage),deferred=hskBatchRows_(queue,6);
+ var saved=hskBatchCommit_(storage,sheet,index+2,row,queue,deferred);
+ console.log(JSON.stringify({ok:true,slot:row[6],durationSeconds:hskBatchPcm_(bytes).length/48000,items:JSON.parse(row[1]).length,saved:saved,masterUrl:master.getUrl(),providerCalls:0}));
+ }catch(e){console.log(JSON.stringify({ok:false,error:String(e.message),providerCalls:0}));}finally{lock.releaseLock();}
+}

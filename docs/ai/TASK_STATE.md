@@ -232,3 +232,9 @@ Do not store secrets, API keys, personal data, or entire chat logs. This file is
 - 180-item attempt on slot 6/3.1 rejected INVALID_ARGUMENT; slot 2/2.5 then explicitly rejected text-mode generation. No master saved in either attempt.
 - Large-pilot prompt changed to literal punctuated transcript. Final slot 2 trial started at 09:04:43 local; result pending at this checkpoint. No duplicate request during pending run.
 - LongPilot.gs uses separate Voice_Long_Pilots journal and saves master before splitting. It changes no triggers or main queue order.
+
+### Live long-master result
+- Final 2.5 / slot 2 literal-transcript generation succeeded: 300.21095833333334 seconds, 14,410,170 WAV bytes, expected 180 entries. Master saved before processing.
+- Original noise thresholds detected 147 / 174 / 180 segments. Additional long-only thresholds still failed boundary agreement, so zero clips were indexed READY.
+- Added isolated unverified preview cuts selected only from an expected-count segmentation; no automatic association with dictionary words. Preview save started 09:13:25 local. Final result pending at checkpoint.
+- 261 server tests pass, including long quiet-background-noise splitting and wrong-count rejection.

@@ -30,7 +30,7 @@ function hskBatchSplit_(bytes,expected){
   if(peak<0.004)throw Error('batch_silent_audio');
   // Reanalyse the SAME master at conservative thresholds; never regenerate to tune DSP.
   var matches=[];
-  [0.012,0.02,0.03].forEach(function(ratio){
+  (expected>60?[0.012,0.02,0.03,0.035,0.04,0.045,0.05]:[0.012,0.02,0.03]).forEach(function(ratio){
     var threshold=Math.max(0.002,peak*ratio),segments=[],begin=-1,last=-1;
     levels.forEach(function(rms,k){
       if(rms>threshold){if(begin<0)begin=k;last=k;}

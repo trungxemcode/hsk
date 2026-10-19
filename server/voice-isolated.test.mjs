@@ -112,3 +112,10 @@ test('large pilot sends a literal audio transcript without dictionary task instr
  assert.equal(response.status,200);assert.equal(payload.contents[0].parts[0].text,Array(180).fill('你好。').join('\n\n'));
  assert.deepEqual(payload.generationConfig.responseModalities,['AUDIO']);
 });
+test('long master with quiet background noise needs multiple consistent higher thresholds',()=>{
+ const f=fixture(),bytes=f.audio(70);
+ // Quiet DC background prevents the old lower thresholds from finding the gaps.
+ for(let i=44;i<bytes.length;i+=2)if(bytes[i]===0&&bytes[i+1]===0){bytes[i]=160;bytes[i+1]=0;}
+ assert.equal(f.c.hskBatchSplit_(bytes,70).length,70);
+ assert.throws(()=>f.c.hskBatchSplit_(bytes,69),/count_mismatch/);
+});
