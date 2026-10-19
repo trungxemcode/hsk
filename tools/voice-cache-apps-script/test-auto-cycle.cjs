@@ -31,3 +31,46 @@ test('detector fails closed for silent or sparse audio',()=>{
  context.hskBatchPcm_=()=>new Array(48000).fill(0);
  assert.throws(()=>context.hskAuto50Detect_([],50),/silent_master/);
 });
+
+function remoteSandbox(){
+ const c={Date,Math,Number,String,Set,Array,JSON,Utilities:{base64Encode:()=> 'encodedwav'}};
+ vm.runInNewContext(src,c,{filename:'AutoCycle.gs'});
+ const store=new Map([['HSK_VOICE_REMOTE_SEGMENT','true']]);
+ c.hskSettings_=()=>({getProperty:k=>store.get(k),setProperty:(k,v)=>store.set(k,v)});
+ c.hskBatchPcm_=()=>new Array(4800).fill(0);
+ return {c,store};
+}
+test('Worker is preferred when remote ranges pass validation',()=>{
+ const {c,store}=remoteSandbox();
+ let calls=0;
+ c.UrlFetchApp={fetch:(url,args)=>{calls++;assert.match(url,/hsk-voice-segmenter/);assert.equal(args.headers.Authorization,'Bearer good-token');return {getResponseCode:()=>200,getContentText:()=>JSON.stringify({ok:true,ranges:[[50,500]],duration:1})};}};
+ c.hskAuto50Detect_=()=>{throw Error('local path should not run');};
+ const result=c.hskAuto50DetectRemote_([],1,'good-token');
+ assert.equal(result.ranges.length,1);
+ assert.equal(calls,1);
+ assert.equal(store.get('HSK_VOICE_SEGMENT_LAST'),'worker');
+});
+test('Worker failure automatically falls back to Apps Script detector',()=>{
+ const {c,store}=remoteSandbox();
+ c.UrlFetchApp={fetch:()=>({getResponseCode:()=>503,getContentText:()=>JSON.stringify({ok:false,error:'temporarily_unavailable'})})};
+ let localCalls=0;
+ c.hskAuto50Detect_=()=>{localCalls++;return {ranges:[[25,400]],duration:1};};
+ const result=c.hskAuto50DetectRemote_([],1,'good-token');
+ assert.equal(result.ranges[0][0],25);
+ assert.equal(localCalls,1);
+ assert.equal(store.get('HSK_VOICE_SEGMENT_LAST'),'local_fallback');
+});
+test('Disabled Worker uses local detector without network request',()=>{
+ const {c,store}=remoteSandbox();
+ store.set('HSK_VOICE_REMOTE_SEGMENT','false');
+ c.UrlFetchApp={fetch:()=>{throw Error('no remote request expected');}};
+ c.hskAuto50Detect_=()=>({ranges:[[25,400]],duration:1});
+ assert.equal(c.hskAuto50DetectRemote_([],1,'good-token').ranges.length,1);
+});
+test('Worker malformed or out-of-bounds ranges cannot bypass local fallback',()=>{
+ const {c,store}=remoteSandbox();
+ c.UrlFetchApp={fetch:()=>({getResponseCode:()=>200,getContentText:()=>JSON.stringify({ok:true,ranges:[[0,9999999999]]})})};
+ c.hskAuto50Detect_=()=>({ranges:[[25,400]],duration:1});
+ assert.equal(c.hskAuto50DetectRemote_([],1,'good-token').ranges[0][0],25);
+ assert.equal(store.get('HSK_VOICE_SEGMENT_LAST'),'local_fallback');
+});
