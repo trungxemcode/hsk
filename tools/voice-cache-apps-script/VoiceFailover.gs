@@ -50,12 +50,27 @@ function hskVoiceFailoverPoll_(p,book,control){
  }
  if(signature!==previous){
   p.setProperty('HSK_VOICE_LAST_VERIFIED_SIGNATURE',signature);
-  if(previous){hskVoiceFailoverMark_(p,'sheet_ready_existing_increment');last=now;}
+  if(previous){
+   var old=previous.split('|').map(Number);
+   if(ready>Number(old[0]||0)||existing>Number(old[1]||0)){
+    hskVoiceFailoverMark_(p,'sheet_ready_existing_increment');last=now;
+   }
+  }
  }
  // Detect saved master of last batch even if the control progress sheet is stale.
  var batches=book.getSheetByName('Voice_Vocab_Batches');
  if(batches&&batches.getLastRow()>1){
-  var lastBatch=batches.getRange(batches.getLastRow(),1,1,3).getValues()[0];
+  var lastBatch=batches.getRange(batches.getLastRow(),1,1,5).getValues()[0];
+  // Only a *saved* chunk is progress; GENERATING/FAILED/heartbeats do not count.
+  var savedMarker=/^SAVED_\d+-\d+_OF_/.test(String(lastBatch[4]||''))?
+    String(lastBatch[0])+'|'+String(lastBatch[4]):'';
+  if(savedMarker){
+   var previousSaved=String(p.getProperty('HSK_VOICE_LAST_SAVED_CHUNK')||'');
+   if(savedMarker!==previousSaved){
+    p.setProperty('HSK_VOICE_LAST_SAVED_CHUNK',savedMarker);
+    hskVoiceFailoverMark_(p,'sheet_wav_chunk_saved');last=now;
+   }
+  }
   if(lastBatch[2]){
    var seen=String(p.getProperty('HSK_VOICE_LAST_SAVED_MASTER')||'');
    if(seen!==String(lastBatch[2])){
@@ -101,11 +116,12 @@ function hskVoiceFailoverPoll_(p,book,control){
   // Status alone never restores Cloudflare. A real next-work canary must succeed.
   if(count>=2&&now-Number(p.getProperty('HSK_VOICE_FAILOVER_CHANGED_AT')||now)>=300000){
    mode='WORKER_PROBE';reason='two_health_probes_waiting_for_real_canary';
+   p.setProperty('HSK_VOICE_WORKER_PROBE_AT',String(now));
    p.setProperty('HSK_VOICE_FAILOVER_MODE',mode);
    p.setProperty('HSK_VOICE_FAILOVER_REASON',reason);
   }
  }
- if(mode==='WORKER_PROBE'&&now-Number(p.getProperty('HSK_VOICE_FAILOVER_CHANGED_AT')||now)>=900000&&idle>=900000){
+ if(mode==='WORKER_PROBE'&&now-Number(p.getProperty('HSK_VOICE_WORKER_PROBE_AT')||now)>=900000&&idle>=900000){
   mode='DIRECT';reason='worker_canary_no_progress';
   p.setProperty('HSK_VOICE_FAILOVER_MODE',mode);
   p.setProperty('HSK_VOICE_FAILOVER_REASON',reason);

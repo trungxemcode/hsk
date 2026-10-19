@@ -143,8 +143,11 @@ function hskLegacyCacheRepairTick_(p,book,control){
   }
   // Gemini 3.1 is preferred for prior Gemini 2.5 generation_incomplete/429 failures.
   // Keep the original cache key as the requested model and record fallback provenance.
-  var generationModel=null,slot=-1;
+  var generationModel=null,slot=-1,route=typeof hskVoiceFailoverMode_==='function'?hskVoiceFailoverMode_(p):'WORKER',direct=route==='DIRECT';
   var preferred=['gemini-3.1-flash-tts-preview',String(t.row[3])];
+  if(direct&&typeof hskVoiceFailoverKeyCount_==='function'&&hskVoiceFailoverKeyCount_(p)>0){
+   generationModel=preferred[0];slot=0;
+  }
   for(var mi=0;mi<preferred.length&&slot<0;mi++){
    try{
     var status=hskVocabCall_(token,{action:'status',model:preferred[mi]});
@@ -160,19 +163,35 @@ function hskLegacyCacheRepairTick_(p,book,control){
   save(t,{10:slot,11:'REPAIR_REQUESTED',12:'tts_request_journaled_model_'+(generationModel.indexOf('3.1')>=0?'3_1':'2_5')});
   retryStatus(t,'PENDING','legacy_tts_repair_journaled');
   SpreadsheetApp.flush();
-  var response;
-  try{
-   response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',
-    headers:{Authorization:'Bearer '+token},
-    payload:JSON.stringify({text:t.text,isolated:true,keySlot:slot,model:generationModel,language:'zh-CN'}),
-    muteHttpExceptions:true});
-  }catch(e){
-   save(t,{11:'UNCERTAIN',12:'tts_transport_uncertain_no_duplicate'});
-   retryStatus(t,'REVIEW','tts_transport_uncertain_no_duplicate');
-   next(600000,'tts_transport_uncertain_'+t.index);return;
+  var response,decoded;
+  if(direct){
+   try{decoded=hskVoiceDirectTts_(p,t.text,generationModel);}
+   catch(e){
+    var message=String(e.message||'direct_tts_uncertain');
+    if(/provider_\d+|missing_audio|direct_tts_keys_unavailable/.test(message)){
+     save(t,{11:'DEFERRED',12:message.slice(0,120)});
+     retryStatus(t,'PENDING',message);
+     var delay=/provider_429/.test(message)?600000:300000;
+     p.setProperty('HSK_LEGACY_ITEM_'+t.index+'_AFTER',String(Date.now()+delay));
+     next(delay,'direct_tts_wait_'+t.index+'_'+message.slice(0,55));return;
+    }
+    save(t,{11:'UNCERTAIN',12:'direct_tts_transport_uncertain_no_duplicate'});
+    retryStatus(t,'REVIEW','direct_tts_transport_uncertain_no_duplicate');
+    next(600000,'direct_tts_uncertain_'+t.index);return;
+   }
+  }else{
+   try{
+    response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',
+     headers:{Authorization:'Bearer '+token},
+     payload:JSON.stringify({text:t.text,isolated:true,keySlot:slot,model:generationModel,language:'zh-CN'}),
+     muteHttpExceptions:true});
+   }catch(e){
+    save(t,{11:'UNCERTAIN',12:'tts_transport_uncertain_no_duplicate'});
+    retryStatus(t,'REVIEW','tts_transport_uncertain_no_duplicate');
+    next(600000,'tts_transport_uncertain_'+t.index);return;
+   }
   }
-  var decoded;
-  try{decoded=hskParallelDecode_(response);}catch(e){
+  try{if(!decoded)decoded=hskParallelDecode_(response);}catch(e){
    var reason=String(e.message||'tts_response_uncertain');
    if(/response_uncertain|transport_uncertain/.test(reason)){
     save(t,{11:'UNCERTAIN',12:'tts_response_uncertain_no_duplicate'});

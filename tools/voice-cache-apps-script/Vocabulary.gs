@@ -36,6 +36,11 @@ function hskVocabStart(){
 function hskVocabStop(){hskSettings_().setProperty('HSK_VOCAB_ENABLED','false');ScriptApp.getProjectTriggers().filter(function(t){return t.getHandlerFunction()==='hskVocabTick';}).forEach(function(t){ScriptApp.deleteTrigger(t);});}
 function hskVocabCall_(token,body){
  body=hskAsrPrepareBody_(body);
+ var mode=typeof hskVoiceFailoverMode_==='function'?hskVoiceFailoverMode_(hskSettings_()):'WORKER';
+ if(body.action==='verify-words'&&mode==='DIRECT'){
+  // Direct Gemini performs two distinct blind ASR calls for the one clip.
+  return hskVoiceDirectVerify_(hskSettings_(),body);
+ }
  var cache=null,cacheKey='';
  if(body.action==='verify-words'&&Array.isArray(body.clips)){
   cache=CacheService.getScriptCache();
@@ -43,9 +48,19 @@ function hskVocabCall_(token,body){
   var cached=cache.get(cacheKey);
   if(cached){try{var replay=JSON.parse(cached);if(replay.ok&&Array.isArray(replay.transcripts)&&replay.transcripts.length===2&&Array.isArray(replay.pinyin)&&replay.pinyin.length===2)return replay;}catch(ignored){}}
  }
- var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(body),muteHttpExceptions:true});
- var data;try{data=JSON.parse(response.getContentText());}catch(e){throw Error('response_uncertain');}
- if(response.getResponseCode()!==200||!data.ok){var error=Error(String(data.error||'provider_failure'));error.detail=data;throw error;}
+ var response,data,route=mode==='WORKER_PROBE'&&body.action==='verify-words'?'WORKER_PROBE':'WORKER';
+ try{
+  response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(body),muteHttpExceptions:true});
+  try{data=JSON.parse(response.getContentText());}catch(e){throw Error('response_uncertain');}
+  if(response.getResponseCode()!==200||!data.ok){var error=Error(String(data.error||'provider_failure'));error.detail=data;throw error;}
+  if(route==='WORKER_PROBE')hskVoiceFailoverOutcome_(hskSettings_(),route,true,'verified_worker_response');
+ }catch(e){
+  if(route==='WORKER_PROBE'&&!/response_uncertain|transport_uncertain/.test(String(e.message||e))){
+   hskVoiceFailoverOutcome_(hskSettings_(),route,false,String(e.message||e));
+   return hskVoiceDirectVerify_(hskSettings_(),body);
+  }
+  throw e;
+ }
  if(cache&&cacheKey&&Array.isArray(data.transcripts)&&data.transcripts.length===2&&Array.isArray(data.pinyin)&&data.pinyin.length===2){var serialized=JSON.stringify(data);if(serialized.length<70000)cache.put(cacheKey,serialized,21600);}
  return data;
 }

@@ -53,6 +53,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
    row[8]=file.getId();row[11]='';hskVocabWrite_(tables.queue,job.row,row);
   });
   p.deleteProperty('HSK_VOCAB_ERROR');p.deleteProperty('HSK_VOCAB_RETRY_AT');
+  if(typeof hskVoiceFailoverMark_==='function')hskVoiceFailoverMark_(p,'master_wav_saved');
   p.setProperty('HSK_AUTO50_LAST_RECOVERED',id+':'+kept.length+'/'+jobs.length);
  }
  var existingMaster=fileNamed(masterName);
@@ -106,8 +107,14 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   report('SKIPPED_ONLY_'+excluded.text+'_OTHER_AUDIO_PRESERVED');
   return;
  }
+ var route=typeof hskVoiceFailoverMode_==='function'?hskVoiceFailoverMode_(p):'WORKER';
+ var direct=route==='DIRECT';
+ if(direct&&typeof hskVoiceFailoverKeyCount_==='function'&&hskVoiceFailoverKeyCount_(p)<1){
+  p.setProperty('HSK_VOCAB_ERROR','direct_keys_not_configured');
+  p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+300000));return;
+ }
  var slot=Number(batch[6]);
- if(g.model!==batch[7]){
+ if(!direct&&g.model!==batch[7]){
   // Respect live per-key quota and model cooldown, rather than blindly reusing
   // a key that just failed on Gemini 2.5.
   var status;
@@ -135,17 +142,38 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
  if(Number.isInteger(g.from)&&g.from%10===0&&g.to-g.from===10)
   (info.attempts||(info.attempts={}))[g.from/10]=g.tries;
  report('GENERATING_'+(g.from+1)+'-'+g.to+'_TRY_'+g.tries+'_MODEL_'+(g.model===fallback?'3_1':'2_5'));
- var response;
- try{
-  response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',
-   headers:{Authorization:'Bearer '+token},payload:JSON.stringify(payload),muteHttpExceptions:true});
- }catch(e){
-  batch[3]='UNCERTAIN';report('tts_chunk_transport_uncertain_'+g.from+'_'+g.to);
-  p.setProperty('HSK_VOCAB_ERROR','tts_chunk_transport_uncertain');
-  p.setProperty('HSK_VOCAB_ENABLED','false');return;
+ var response,decoded;
+ if(direct){
+  try{decoded=hskVoiceDirectTts_(p,joined,g.model);}
+  catch(e){
+   var msg=String(e.message||'direct_tts_error');
+   if(/direct_tts_keys_unavailable/.test(msg)){
+    p.setProperty('HSK_VOCAB_ERROR',msg);
+    p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+300000));return;
+   }
+   // HTTP responses and missing_audio explicitly contain no usable voice.
+   // Quota/key errors should not penalize a word; generation failures can split.
+   if(/provider_\d+|missing_audio/.test(msg)){
+    if(/provider_(401|403|429)/.test(msg))g.tries=Math.max(0,g.tries-1);
+    if(g.model!==fallback&&/provider_5\d\d|missing_audio/.test(msg))g.model=fallback;
+    report('DIRECT_FAILED_'+(g.from+1)+'-'+g.to+'_'+msg);
+    p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+300000));
+    p.setProperty('HSK_VOCAB_ERROR',msg);return;
+   }
+   batch[3]='UNCERTAIN';report('direct_tts_uncertain_'+g.from);
+   p.setProperty('HSK_VOCAB_ENABLED','false');return;
+  }
+ }else{
+  try{
+   response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',
+    headers:{Authorization:'Bearer '+token},payload:JSON.stringify(payload),muteHttpExceptions:true});
+  }catch(e){
+   batch[3]='UNCERTAIN';report('tts_chunk_transport_uncertain_'+g.from+'_'+g.to);
+   p.setProperty('HSK_VOCAB_ERROR','tts_chunk_transport_uncertain');
+   p.setProperty('HSK_VOCAB_ENABLED','false');return;
+  }
  }
- var decoded;
- try{decoded=hskParallelDecode_(response);}
+ try{if(!decoded)decoded=hskParallelDecode_(response);}
  catch(e){
   var reason=String(e.message||'tts_chunk_error'),attempts=Number(e.providerAttempts||0);
   p.setProperty('HSK_VOCAB_TTS_CALLS',String(Number(p.getProperty('HSK_VOCAB_TTS_CALLS')||0)+attempts));
@@ -154,6 +182,8 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
    batch[3]='UNCERTAIN';report('tts_chunk_response_uncertain_'+g.from);
    p.setProperty('HSK_VOCAB_ENABLED','false');return;
   }
+  if(route==='WORKER_PROBE'&&typeof hskVoiceFailoverOutcome_==='function')
+   hskVoiceFailoverOutcome_(p,route,false,reason);
   // After a definite Gemini 2.5 failure, let 3.1 retry, then split as needed.
   if(g.model!==fallback&&/tts_generation_incomplete|tts_provider_unavailable|tts_blocked|tts_model_unavailable/.test(reason))
    g.model=fallback;
@@ -176,6 +206,9 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   p.setProperty('HSK_VOCAB_ENABLED','false');return;
  }
  report('SAVED_'+(g.from+1)+'-'+g.to+'_OF_'+jobs.length);
+ if(typeof hskVoiceFailoverMark_==='function')hskVoiceFailoverMark_(p,'saved_chunk_wav');
+ if(route==='WORKER_PROBE'&&typeof hskVoiceFailoverOutcome_==='function')
+  hskVoiceFailoverOutcome_(p,route,true,'chunk_wav_saved');
  p.deleteProperty('HSK_VOCAB_ERROR');p.deleteProperty('HSK_VOCAB_RETRY_AT');
 }
 
