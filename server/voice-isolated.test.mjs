@@ -54,7 +54,7 @@ test('batch bridge preserves separate transcript lines and uses normal configure
  const env={HSK_VOICE_GOOGLE_SUB_SHA256:hash,HSK_VOICE_ISOLATED_MODEL:'gemini-3.1-flash-tts-preview'};
  const req=x=>new Request('https://x/voice-precache',{method:'POST',headers:{Authorization:'Bearer test'},body:JSON.stringify(x)});
  assert.equal((await h(req({items:['你好','谢谢'],keySlot:1,isolated:true}),env)).status,200);assert.equal(calls,1);assert.match(url,/gemini-2.5-flash-preview-tts/);assert.match(payload.contents[0].parts[0].text,/你好。 \.\.\.\n谢谢。 \.\.\./);assert.match(payload.contents[0].parts[0].text,/1.2 seconds/);
- for(const body of [{items:['你好'],keySlot:1},{items:['你好\n谢谢'],keySlot:1,isolated:true},{items:['你好'],text:'谢谢',keySlot:1,isolated:true},{items:Array(61).fill('你好'),keySlot:1,isolated:true}])assert.equal((await h(req(body),env)).status,400);assert.equal(calls,1);
+ for(const body of [{items:['你好'],keySlot:1},{items:['你好\n谢谢'],keySlot:1,isolated:true},{items:['你好'],text:'谢谢',keySlot:1,isolated:true},{items:Array(241).fill('你好'),keySlot:1,isolated:true}])assert.equal((await h(req(body),env)).status,400);assert.equal(calls,1);
 });
 test('300ms word-internal silence stays inside the same clip',()=>{
  const f=fixture(),raw=[];

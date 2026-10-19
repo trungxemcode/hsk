@@ -6,14 +6,14 @@ export function configuredGeminiKeys(env){
 }
 function configuredGeminiSlots(env){
  const seen=new Set(),entries=[];
- for(let slot=1;slot<=10;slot++){
+ for(let slot=1;slot<=12;slot++){
   const raw=env['GEMINI_API_KEY_'+slot]||(slot===1?env.GEMINI_API_KEY:'');
   if(typeof raw!=='string'||!raw.trim()||raw.trim().length>300)continue;
   const key=raw.trim();if(seen.has(key))continue;seen.add(key);entries.push({slot,key});
  }
  // Preserve existing numbered slots; include the distinct legacy primary as slot 0.
  const primary=env.GEMINI_API_KEY;
- if(typeof primary==='string'&&primary.trim()&&primary.trim().length<=300&&!seen.has(primary.trim())&&entries.length<10)entries.push({slot:0,key:primary.trim()});
+ if(typeof primary==='string'&&primary.trim()&&primary.trim().length<=300&&!seen.has(primary.trim())&&entries.length<13)entries.push({slot:0,key:primary.trim()});
  return entries;
 }
 async function geminiKeyId(key){

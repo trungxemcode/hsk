@@ -297,14 +297,14 @@ export function configuredGeminiKeys(env){
 }
 function configuredGeminiSlots(env){
  const seen=new Set(),entries=[];
- for(let slot=1;slot<=10;slot++){
+ for(let slot=1;slot<=12;slot++){
   const raw=env['GEMINI_API_KEY_'+slot]||(slot===1?env.GEMINI_API_KEY:'');
   if(typeof raw!=='string'||!raw.trim()||raw.trim().length>300)continue;
   const key=raw.trim();if(seen.has(key))continue;seen.add(key);entries.push({slot,key});
  }
  // Preserve existing numbered slots; include the distinct legacy primary as slot 0.
  const primary=env.GEMINI_API_KEY;
- if(typeof primary==='string'&&primary.trim()&&primary.trim().length<=300&&!seen.has(primary.trim())&&entries.length<10)entries.push({slot:0,key:primary.trim()});
+ if(typeof primary==='string'&&primary.trim()&&primary.trim().length<=300&&!seen.has(primary.trim())&&entries.length<13)entries.push({slot:0,key:primary.trim()});
  return entries;
 }
 async function geminiKeyId(key){
@@ -674,10 +674,10 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    const data=await request.text();
    if(data.length>700000)return json({ok:false,error:'invalid_request'},400);
    input=JSON.parse(data);
-   if(input?.action!=='verify'&&data.length>(Array.isArray(input?.items)?12000:1500))return json({ok:false,error:'invalid_request'},400);
+   if(input?.action!=='verify'&&data.length>(Array.isArray(input?.items)?24000:1500))return json({ok:false,error:'invalid_request'},400);
   }catch{return json({ok:false,error:'invalid_request'},400);}
   if(input?.action==='diagnose'){
-   if(Object.keys(input).some(k=>!['action','keySlot'].includes(k))||!Number.isInteger(input.keySlot)||input.keySlot<0||input.keySlot>9||!slotFetch)return json({ok:false,error:'invalid_request'},400);
+   if(Object.keys(input).some(k=>!['action','keySlot'].includes(k))||!Number.isInteger(input.keySlot)||input.keySlot<0||input.keySlot>12||!slotFetch)return json({ok:false,error:'invalid_request'},400);
    const model=env['HSK_VOICE_SLOT_'+input.keySlot+'_MODEL']||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
    try{
     const response=await slotFetch(input.keySlot).inspect(model);
@@ -692,18 +692,18 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
   }
   if(!input||typeof input!=='object'||Array.isArray(input)
    ||Object.keys(input).some(k=>!['text','language','keySlot','action','isolated','items'].includes(k))
-   ||(input.keySlot!==undefined&&(!Number.isInteger(input.keySlot)||input.keySlot<0||input.keySlot>9||!slotFetch))
+   ||(input.keySlot!==undefined&&(!Number.isInteger(input.keySlot)||input.keySlot<0||input.keySlot>12||!slotFetch))
    ||(input.language!==undefined&&input.language!=='zh-CN')
    ||(input.isolated!==undefined&&(typeof input.isolated!=='boolean'||input.keySlot===undefined))
    ||(input.action!==undefined&&input.action!=='status')
-   ||(input.items!==undefined&&(!input.isolated||!Array.isArray(input.items)||input.items.length<1||input.items.length>60||input.text!==undefined||input.items.some(t=>typeof t!=='string'||!t.trim()||/[<>\u0000-\u001f]/.test(t)||!/[\u3400-\u9fff]/u.test(t))))
+   ||(input.items!==undefined&&(!input.isolated||!Array.isArray(input.items)||input.items.length<1||input.items.length>240||input.text!==undefined||input.items.some(t=>typeof t!=='string'||!t.trim()||/[<>\u0000-\u001f]/.test(t)||!/[\u3400-\u9fff]/u.test(t))))
    ||(input.action!=='status'&&input.items===undefined&&typeof input.text!=='string'))return json({ok:false,error:'invalid_request'},400);
   if(input.action==='status'){
    if(input.text!==undefined||input.items!==undefined||input.keySlot!==undefined||!slotFetch)return json({ok:false,error:'invalid_request'},400);
    try{const slots=await slotFetch(1).availability();if(slots.some(s=>env.HSK_VOICE_ISOLATED_MODEL&&env['HSK_VOICE_SLOT_'+s.slot+'_MODEL']===env.HSK_VOICE_ISOLATED_MODEL)){const alternate=await slotFetch(1,true).availability();return json({ok:true,slots:slots.map(s=>env.HSK_VOICE_ISOLATED_MODEL&&env['HSK_VOICE_SLOT_'+s.slot+'_MODEL']===env.HSK_VOICE_ISOLATED_MODEL?(alternate.find(a=>a.slot===s.slot)||s):s)});}return json({ok:true,slots});}catch{return json({ok:false,error:'key_status_unavailable'},503);}
   }
   const text=(input.items?input.items.join('。 '):input.text).normalize('NFC').replace(/\s+/g,' ').trim();
-  if(!text||Array.from(text).length>(input.items?1200:220)||/[<>\u0000-\u001f]/.test(text)||!/[\u3400-\u9fff]/u.test(text))return json({ok:false,error:'invalid_text'},400);
+  if(!text||Array.from(text).length>(input.items?4800:220)||/[<>\u0000-\u001f]/.test(text)||!/[\u3400-\u9fff]/u.test(text))return json({ok:false,error:'invalid_text'},400);
   const model=env['HSK_VOICE_SLOT_'+input.keySlot+'_MODEL']||(!input.items&&input.isolated&&env.HSK_VOICE_ISOLATED_MODEL)||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
   if(!/^gemini-[a-z0-9.-]+-tts(?:-preview)?$/.test(model))return json({ok:false,error:'invalid_model'},503);
   let prompt=(input.items?'Read every Mandarin Chinese item below exactly once in order, as an independent dictionary entry in citation form. Use standard Mandarin tones and natural word-internal tone sandhi. Do not connect neighbouring entries. Finish each entry fully, then leave 1.2 seconds of silence. Do not read punctuation or instructions. Speak only these entries:\n':input.isolated?'Read each Mandarin Chinese item separated by a full stop independently and clearly. Pause silently for one full second between items. Do not connect items or read these instructions. Speak only the items:\n':input.keySlot===undefined?'Read the following Mandarin Chinese text naturally and accurately. Read only the Chinese text, with no introduction or extra words:\n':'Say in Mandarin Chinese: ')+(input.items?input.items.map(t=>t.normalize('NFC').trim()+'。 ...').join('\n'):text);

@@ -57,7 +57,7 @@ test('voice slot selection is validated after verified Google identity and never
  const h=createVoicePrecacheHandler(identity,provider,()=>Date.now(),slot=>{selected=slot;return provider;});
  const req=(slot,auth=true)=>new Request('https://test/voice-precache',{method:'POST',headers:auth?{Authorization:'Bearer test'}:{},body:JSON.stringify({text:'你好',keySlot:slot})});
  assert.equal((await h(req(9),env)).status,200);assert.equal(selected,9);
- for(const slot of [-1,10,'1',1.5])assert.equal((await h(req(slot),env)).status,400);
+ for(const slot of [-1,13,'1',1.5])assert.equal((await h(req(slot),env)).status,400);
  assert.equal((await h(req(2,false),env)).status,401);assert.equal(selected,9);
 });
 

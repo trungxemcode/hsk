@@ -23,7 +23,7 @@ function hskParallelAvailability_(token) {
   if(response.getResponseCode()!==200)throw Error('tts_key_status_unavailable');
   var data=JSON.parse(response.getContentText());
   if(!data.ok||!Array.isArray(data.slots))throw Error('tts_key_status_unavailable');
-  return data.slots.filter(function(s){return Number.isInteger(s.slot)&&s.slot>=0&&s.slot<=9;});
+  return data.slots.filter(function(s){return Number.isInteger(s.slot)&&s.slot>=0&&s.slot<=12;});
 }
 function hskParallelDecode_(response) {
   var status=response.getResponseCode(),data;
@@ -94,9 +94,9 @@ function hskWarmParallelTick() {
       sheet.getRange(entry.row,1,1,13).setValues([entry.values]);
     });
     var jobs=[],requests=[],chosen=new Set(),earliest=Infinity;
-    var firstSlot=Math.max(0,Math.min(9,Number(p.getProperty('HSK_WARM_NEXT_SLOT')||1)));
-    for(var lane=0;lane<10&&jobs.length<concurrency;lane++){
-      var slot=(firstSlot+lane)%10,health=available.get(slot);
+    var firstSlot=Math.max(0,Math.min(12,Number(p.getProperty('HSK_WARM_NEXT_SLOT')||1)));
+    for(var lane=0;lane<13&&jobs.length<concurrency;lane++){
+      var slot=(firstSlot+lane)%13,health=available.get(slot);
       if(!health)continue;
       var until=Math.max(Number(p.getProperty('HSK_WARM_SLOT_'+slot+'_AFTER')||0),now+Math.max(0,Number(health.retryAfter)||0)*1000);
       if(until>now){earliest=Math.min(earliest,until);continue;}
@@ -147,7 +147,7 @@ function hskWarmParallelTick() {
       requests.push({url:'https://hsk-vietnamese-translator.trung-hsk668.workers.dev/voice-precache',method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify({text:text,language:'zh-CN',keySlot:slot}),muteHttpExceptions:true});
     }
     p.setProperty('HSK_WARM_CURSOR',String(cursor));
-    if(jobs.length)p.setProperty('HSK_WARM_NEXT_SLOT',String((jobs[jobs.length-1].slot+1)%10));
+    if(jobs.length)p.setProperty('HSK_WARM_NEXT_SLOT',String((jobs[jobs.length-1].slot+1)%13));
     if(!jobs.length){
       if(cursor>=texts.length&&!deferred.some(function(r){return r[4]==='PENDING';}))hskWarmStop();
       else if(earliest<Infinity){p.setProperty('HSK_WARM_RETRY_AT',String(earliest));p.setProperty('HSK_WARM_LAST_ERROR','tts_keys_cooling');}

@@ -18,7 +18,7 @@ function central(env=pool){
 }
 test('ten server-owned slots support legacy key, deduplicate, and ignore extra slots',()=>{
  assert.deepEqual(configuredGeminiKeys({GEMINI_API_KEY:keys[0]}),[keys[0]]);
- assert.deepEqual(configuredGeminiKeys({...pool,GEMINI_API_KEY:'legacy',GEMINI_API_KEY_11:'extra'}),keys);
+ assert.deepEqual(configuredGeminiKeys({...pool,GEMINI_API_KEY:'legacy',GEMINI_API_KEY_11:'extra',GEMINI_API_KEY_12:' '}),[...keys,'extra','legacy']);
  assert.deepEqual(configuredGeminiKeys({GEMINI_API_KEY:keys[0],GEMINI_API_KEY_2:' '+keys[0]+' ',GEMINI_API_KEY_3:'  ',GEMINI_API_KEY_4:23}),[keys[0]]);
 });
 test('two Worker instances share atomic round robin across ten slots',async()=>{
@@ -114,4 +114,11 @@ test('distinct legacy primary remains reachable as slot zero without displacing 
  assert.deepEqual((await f.availability()).map(x=>x.slot),[1,9,0]);
  assert.equal((await f(url,{})).status,200);assert.deepEqual(used,['legacy-primary']);
  assert.deepEqual(configuredGeminiKeys({...env,GEMINI_API_KEY:'numbered-one'}),['numbered-one','numbered-nine']);
+});
+
+test("slot 12 blank is skipped and replacement slot 2 uses new credential",async()=>{
+ const env={GEMINI_API_KEY_2:"replacement-2",GEMINI_API_KEY_11:"eleven",GEMINI_API_KEY_12:"  "};
+ assert.deepEqual(configuredGeminiKeys(env),["replacement-2","eleven"]);
+ const called=[];const f=createGeminiKeyFetch(async(u,i)=>{called.push(selected(i));return ok();},env,{slot:2});
+ await f(url);assert.deepEqual(called,["replacement-2"]);
 });

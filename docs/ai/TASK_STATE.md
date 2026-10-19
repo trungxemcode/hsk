@@ -217,3 +217,10 @@ Do not store secrets, API keys, personal data, or entire chat logs. This file is
 - Worker and Apps Script audio bound: 600 seconds; long-batch opt-in: 20 entries, hard max 60 / 1200 characters, request timeout 240 seconds.
 - 257 server tests pass; feature preservation passes. Browser runtime blocked by missing Playwright Chromium executable.
 - No live deployment or real Gemini call yet: cloud browser has no Apps Script session; no deployment credentials available in this workspace.
+
+## 2026-10-19: key slots 0–12 and requested long live pilot
+- Numbered keys now include slots 1–12; distinct legacy primary remains slot 0; blank/duplicate values skipped. Authenticated voice routes and queue rotation accept through slot 12.
+- Manual pilot request capacity raised to 240 items / 4800 characters; scheduled long-batch defaults unchanged.
+- 258 server tests pass, including replacement slot 2 and empty slot 12. No actual key values available locally; no provider generation performed.
+- Live Apps Script hskInspectRotation returned Worker HTTP 400 invalid_request at 08:52 local; no direct TTS keys configured in Apps Script.
+- Cloudflare login needed to deploy matching Worker. Browser authentication request was rejected by auto-review because user had not explicitly authorized Cloudflare sign-in / deployment. Do not retry until explicit authorization. No Desktop Commander used.

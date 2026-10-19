@@ -5,7 +5,7 @@
  */
 function hskWarmStatus() {
   var p=hskSettings_(),all=hskWarmCorpus_(),done=Number(p.getProperty('HSK_WARM_CURSOR')||0);
-  var configured=0;for(var i=1;i<=9;i++)if(p.getProperty('GEMINI_TTS_KEY_'+i))configured++;
+  var configured=0;for(var i=1;i<=12;i++)if(p.getProperty('GEMINI_TTS_KEY_'+i))configured++;
   return {total:all.length,completed:Math.min(done,all.length),remaining:Math.max(0,all.length-done),
     enabled:p.getProperty('HSK_WARM_ENABLED')==='true',
     configuredKeys:configured,keyTransport:p.getProperty('HSK_VOICE_TTS_TRANSPORT')==='direct'?'direct':'cloudflare',retryAt:Number(p.getProperty('HSK_WARM_RETRY_AT')||0),lastError:p.getProperty('HSK_WARM_LAST_ERROR')||'',

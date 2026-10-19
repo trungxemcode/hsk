@@ -111,7 +111,7 @@ function hskWarmIsolatedTick(){
     // Prefer keys with verified completed batches; inspect unhealthy keys separately.
     var scores={},candidates=[];
     batches.forEach(function(r){var n=Number(r[6]);if(r[6]===''||!Number.isInteger(n)||n<0||n>9)return;var delta=r[3]==='DONE'?1:r[3]==='FAILED'?-1:0;scores[n]=(scores[n]||0)+delta;});
-    for(var lane=0;lane<10;lane++){var n=(next+lane)%10,item=health.filter(function(s){return s.slot===n;})[0];if(!item)continue;var until=Math.max(now+Number(item.retryAfter||0)*1000,Number(p.getProperty('HSK_WARM_SLOT_'+n+'_AFTER')||0));if(until<=now)candidates.push({slot:n,score:scores[n]||0,order:lane});else earliest=Math.min(earliest,until);}
+    for(var lane=0;lane<13;lane++){var n=(next+lane)%13,item=health.filter(function(s){return s.slot===n;})[0];if(!item)continue;var until=Math.max(now+Number(item.retryAfter||0)*1000,Number(p.getProperty('HSK_WARM_SLOT_'+n+'_AFTER')||0));if(until<=now)candidates.push({slot:n,score:scores[n]||0,order:lane});else earliest=Math.min(earliest,until);}
     candidates.sort(function(a,b){return b.score-a.score||a.order-b.order;});
     if(candidates.length)slot=candidates[0].slot;
     if(slot===null){p.setProperty('HSK_WARM_RETRY_AT',String(earliest<Infinity?earliest:now+3600000));p.setProperty('HSK_WARM_LAST_ERROR','tts_keys_cooling');return;}
@@ -143,7 +143,7 @@ function hskWarmIsolatedTick(){
     var id=hskDigest_(JSON.stringify(jobs.map(function(j){return j.key;}))+':'+now),stamp=new Date().toISOString(),row=[id,JSON.stringify(jobs),'','RESERVED','',stamp,slot];
     journal.appendRow(row);var rowNumber=journal.getLastRow();SpreadsheetApp.flush();
     var response,decoded;
-    p.setProperty('HSK_WARM_NEXT_SLOT',String((slot+1)%10));
+    p.setProperty('HSK_WARM_NEXT_SLOT',String((slot+1)%13));
     try{
       response=UrlFetchApp.fetch('https://hsk-vietnamese-translator.trung-hsk668.workers.dev/voice-precache',{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify({items:jobs.map(function(j){return j.text;}),language:'zh-CN',keySlot:slot,isolated:true}),muteHttpExceptions:true});
       decoded=hskParallelDecode_(response);
