@@ -74,8 +74,9 @@ function hskVocabTick(){
   var trial=batches.find(function(b){return b[0]===p.getProperty('HSK_VOCAB_PILOT_ID');});
   if(trial&&['DONE','PARTIAL','REVIEW','REJECTED','UNCERTAIN'].indexOf(trial[3])>=0){hskVocabStop();return;}
  }
- var active=batches.findIndex(function(b){return ['MASTER','VERIFY','AUTO_VERIFY'].indexOf(b[3])>=0;});
+ var active=batches.findIndex(function(b){return ['TTS_CHUNKS','MASTER','VERIFY','AUTO_VERIFY'].indexOf(b[3])>=0;});
  if(active>=0){
+  if(batches[active][3]==='TTS_CHUNKS'){hskVoiceChunkedStep_(p,storage,tables,rows,batches,active,token);return;}
   if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskAuto50VerifyTick_==='function')hskAuto50VerifyTick_(storage,tables,rows,batches,active,token,started);
   else hskVocabProcess_(storage,tables,rows,batches,active,token,started);
   return;
@@ -93,10 +94,12 @@ function hskVocabTick(){
  if(!pair){p.setProperty('HSK_VOCAB_RETRY_AT',String(now+300000));p.setProperty('HSK_VOCAB_ERROR','tts_keys_cooling');return;}
  var slot=pair.slot,model=pair.model,size=Math.max(1,Math.min(90,Number(p.getProperty('HSK_VOCAB_BATCH_SIZE')||10))),seen=new Set(),jobs=[];
  pending.forEach(function(x){if(jobs.length>=size||seen.has(x.r[1]))return;seen.add(x.r[1]);jobs.push({row:x.i,text:x.r[1],pinyin:x.r[2],level:x.r[0],model:model,key:hskVocabKey_(model,x.r[1])});});
- var id=hskDigest_(JSON.stringify(jobs)+':'+now),pause=Number(p.getProperty('HSK_VOCAB_PAUSE')||3),batch=[id,JSON.stringify(jobs),'','RESERVED','',new Date().toISOString(),slot,model,pause,0,''];tables.batches.appendRow(batch);var number=tables.batches.getLastRow();
+ var id=hskDigest_(JSON.stringify(jobs)+':'+now),pause=Number(p.getProperty('HSK_VOCAB_PAUSE')||3),chunked=p.getProperty('HSK_AUTO50_ENABLED')==='true'&&p.getProperty('HSK_VOCAB_TTS_STRATEGY')==='chunks-v1'&&jobs.length>1;
+ var batch=[id,JSON.stringify(jobs),'',chunked?'TTS_CHUNKS':'RESERVED','',new Date().toISOString(),slot,model,pause,0,chunked?JSON.stringify({mode:'chunked_v1',attempts:{}}):''];tables.batches.appendRow(batch);var number=tables.batches.getLastRow();
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true')p.setProperty('HSK_VOCAB_PILOT_ID',id);
  SpreadsheetApp.flush();
  p.setProperty('HSK_VOCAB_NEXT_SLOT',String((slot+1)%13));p.setProperty('HSK_VOCAB_NEXT_MODEL',String((pair.mi+1)%2));
+ if(chunked)return; // Next trigger will process durable TTS_CHUNKS journal before selecting any new jobs.
  try{
  var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(p.getProperty('HSK_SHARED50_LITERAL')==='true'&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&Array.from(jobs.map(function(j){return j.text;}).join('。')).length<=220?{text:jobs.map(function(j){return j.text;}).join('。'),isolated:true,keySlot:slot,model:model,language:'zh-CN'}:{items:jobs.map(function(j){return j.text;}),isolated:true,keySlot:slot,model:model,language:'zh-CN',pauseSeconds:pause}),muteHttpExceptions:true});
  var decoded=hskParallelDecode_(response);p.setProperty('HSK_VOCAB_TTS_CALLS',String(Number(p.getProperty('HSK_VOCAB_TTS_CALLS')||0)+decoded.providerAttempts));p.setProperty('HSK_VOCAB_WINDOW_CALLS',String(Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0)+decoded.providerAttempts));

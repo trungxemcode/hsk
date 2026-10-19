@@ -10,9 +10,12 @@ function hskAuto50Sheet_(storage){
  return hskVocabTable_(storage.sheet.getParent(),'Voice_Auto_Clips',HSK_AUTO50_CLIP_COLUMNS_);
 }
 function hskAuto50Choose_(pending){
- // Failed pronunciation from preceding master comes first, then untouched vocabulary, then older retries.
+ // Definitive TTS/provider failures first, then all other retries; only then untouched words.
+ // Never queue an already READY/EXISTING word and never reset REVIEW safety limits.
  return pending.sort(function(a,b){
-  function priority(x){return /^needs_new_batch_after_unverified_master|^auto50_unverified_master/.test(String(x.r[11]||''))?0:x.r[3]==='PENDING'?1:2;}
+  function priority(x){var error=String(x.r[11]||'');return x.r[3]==='RETRY'&&/provider_refused_batch|cloudflare_tts_|^tts_/.test(error)?0:
+   x.r[3]==='RETRY'&&/^needs_new_batch_after_unverified_master|^auto50_unverified_master/.test(error)?1:
+   x.r[3]==='RETRY'?2:3;}
   return priority(a)-priority(b)||Number(a.r[0])-Number(b.r[0])||
    Number(a.r[4])-Number(b.r[4])||a.i-b.i;
  });
@@ -237,8 +240,10 @@ function hskAuto50Poll_(p,book,control){
  p.setProperty('HSK_VOCAB_PILOT_ONLY','false');
  p.setProperty('HSK_SHARED50_LITERAL','true');
  p.setProperty('HSK_VOCAB_FIXED_BATCH','true');
- p.setProperty('HSK_VOCAB_BATCH_SIZE',String(typeof hskAuto50BatchSize_==='function'?hskAuto50BatchSize_(batchRows):50));
- p.setProperty('HSK_VOCAB_PAUSE','4');
+ // Keep 50 distinct queued words even when Gemini TTS is produced in smaller requests.
+ p.setProperty('HSK_VOCAB_BATCH_SIZE','50');
+ p.setProperty('HSK_VOCAB_TTS_STRATEGY','chunks-v1');
+ p.setProperty('HSK_VOCAB_PAUSE','1');
  p.setProperty('HSK_WARM_ENABLED','false');
  p.setProperty('HSK_VOCAB_ENABLED','true');
  var triggers=ScriptApp.getProjectTriggers();

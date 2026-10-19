@@ -14,7 +14,11 @@ function hskVoiceControlPoll_(p){
  if(shared!==null)return shared;
  var command=String(control.getRange(2,2).getValue()||'').trim();
  if(['PAUSE','RECOVER_50','RUN_VOCAB','AUTO_CYCLE'].indexOf(command)<0)return false;
- if(command==='AUTO_CYCLE')return hskAuto50Poll_(p,book,control);
+ if(command==='AUTO_CYCLE'){
+  // Explicit sheet resume re-enables the queue, but not the separate shared one-shot flow.
+  if(p.getProperty('HSK_VOICE_PAUSED')==='true')p.setProperty('HSK_VOICE_PAUSED','false');
+  return hskAuto50Poll_(p,book,control);
+ }
  var lock=LockService.getScriptLock();
  if(!lock.tryLock(100))return true;
  try{

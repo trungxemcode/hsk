@@ -10,8 +10,8 @@ test('three failed words plus 47 untouched produce exactly one 50-word batch wit
  const selected=context.hskAuto50Choose_([...b,...c,...a]).slice(0,50);
  assert.equal(selected.length,50);
  assert.deepEqual(selected.slice(0,3).map(x=>x.r[1]),a.map(x=>x.r[1]));
- assert.equal(selected.filter(x=>x.r[3]==='PENDING').length,47);
- assert.equal(selected.filter(x=>/^旧试/.test(x.r[1])).length,0);
+ assert.equal(selected.filter(x=>x.r[3]==='PENDING').length,43);
+ assert.equal(selected.filter(x=>x.r[3]==='RETRY').length,7);
 });
 test('detector accepts 50 independent speech clips and does not depend on requested four-second gaps',()=>{
  const frames=48000,parts=[];
@@ -73,4 +73,15 @@ test('Worker malformed or out-of-bounds ranges cannot bypass local fallback',()=
  c.hskAuto50Detect_=()=>({ranges:[[25,400]],duration:1});
  assert.equal(c.hskAuto50DetectRemote_([],1,'good-token').ranges[0][0],25);
  assert.equal(store.get('HSK_VOICE_SEGMENT_LAST'),'local_fallback');
+});
+
+test('definitive TTS errors precede ASR retries and new PENDING; 50 slots get filled',()=>{
+ const tts=Array.from({length:12},(_,i)=>({r:[2,'tts'+i,'','RETRY',0,0,'','','','','','provider_refused_batch'],i:i+200}));
+ const asr=Array.from({length:17},(_,i)=>({r:[2,'asr'+i,'','RETRY',1,0,'','','','','','auto50_unverified_master'],i:i+50}));
+ const untouched=Array.from({length:80},(_,i)=>({r:[2,'new'+i,'','PENDING',0,0,'','','','','',''],i:i+300}));
+ const chosen=context.hskAuto50Choose_([...untouched,...asr,...tts]).slice(0,50);
+ assert.equal(chosen.length,50);
+ assert.equal(chosen.slice(0,12).every(x=>x.r[11]==='provider_refused_batch'),true);
+ assert.equal(chosen.slice(12,29).every(x=>x.r[3]==='RETRY'),true);
+ assert.equal(chosen.slice(29).every(x=>x.r[3]==='PENDING'),true);
 });
