@@ -44,7 +44,10 @@ function hskAuto50DetectRemote_(master,expected,token){
  var p=hskSettings_();
  if(p.getProperty('HSK_VOICE_REMOTE_SEGMENT')!=='true')return hskAuto50Detect_(master,expected);
  try{
-  var response=hskVocabCall_(token,{action:'segment-wav',audioBase64:Utilities.base64Encode(master),expected:expected});
+  var url='https://hsk-voice-segmenter.trung-hsk668.workers.dev/segment-wav';
+  var raw=UrlFetchApp.fetch(url,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify({action:'segment-wav',audioBase64:Utilities.base64Encode(master),expected:expected}),muteHttpExceptions:true});
+  if(raw.getResponseCode()!==200)throw Error('remote_segment_http_'+raw.getResponseCode());
+  var response=JSON.parse(raw.getContentText());
   if(!response||!Array.isArray(response.ranges)||response.ranges.length<Math.min(20,expected)||response.ranges.length>expected+5)throw Error('invalid_remote_ranges');
   var max=hskBatchPcm_(master).length/2,prev=0;
   response.ranges.forEach(function(range){
