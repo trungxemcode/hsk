@@ -18,6 +18,7 @@ function hskVoiceControlPoll_(p){
   // Explicit sheet resume re-enables the queue, but not the separate shared one-shot flow.
   if(p.getProperty('HSK_VOICE_PAUSED')==='true')p.setProperty('HSK_VOICE_PAUSED','false');
   // Separate, rate-limited repair of old Kho_Voice errors; never blocks HSK2-4 auto pipeline.
+  if(typeof hskVoiceFailoverPoll_==='function')hskVoiceFailoverPoll_(p,book,control);
   if(typeof hskLegacyCacheRepairTick_==='function')hskLegacyCacheRepairTick_(p,book,control);
   return hskAuto50Poll_(p,book,control);
  }
