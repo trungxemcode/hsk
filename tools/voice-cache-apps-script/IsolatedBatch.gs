@@ -123,13 +123,14 @@ function hskWarmIsolatedTick(){
       deferred.forEach(function(r,i){if(r[4]!=='DONE'&&/tts_generation_incomplete|invalid_tts_audio|tts_provider_unavailable|tts_daily_limit|tts_rate_limited|tts_key_invalid|tts_permission_denied|tts_quota_unavailable/.test(String(r[5]))){r[2]=0;r[3]=now;r[4]='PENDING';queue.getRange(i+2,1,1,6).setValues([r]);}});
       p.setProperty('HSK_BATCH_REPAIR_POLICY','isolated-v1');
     }
-    var jobs=[],seen=new Set(),characters=0,max=Math.max(1,Math.min(10,Number(p.getProperty('HSK_WARM_ISOLATED_SIZE')||5)));
-    if(model==='gemini-3.1-flash-tts-preview')max=1;
+    var jobs=[],seen=new Set(),characters=0,max=Math.max(1,Math.min(60,Number(p.getProperty('HSK_WARM_ISOLATED_SIZE')||5)));
+    var longBatch=p.getProperty('HSK_WARM_LONG_BATCH')==='true';
+    if(model==='gemini-3.1-flash-tts-preview'&&!longBatch)max=1;
     function choose(index){
       var text=texts[index];if(typeof text!=='string')return false;
       var key=hskDigest_(JSON.stringify(['zh-CN','Kore',model,text]));if(isReady(text)||seen.has(key))return true;
-      // Existing bridge has a 31-second PCM bound. Keep short batches; long sentences use one request.
-      if(jobs.length>=max||characters+text.length+4>220||jobs.length&&characters+text.length+4>55)return false;
+      // Long batches share the Worker 1200-character and 60-item bounds.
+      if(jobs.length>=max||characters+text.length+4>(longBatch?1200:220)||jobs.length&&characters+text.length+4>(longBatch?1200:55))return false;
       seen.add(key);characters+=text.length+4;jobs.push({index:index,text:text,key:key,model:model});return true;
     }
     deferred.forEach(function(r){if(r[4]==='PENDING'&&Number(r[3])<=now){var index=Number(r[0]),text=texts[index],key=hskDigest_(JSON.stringify(['zh-CN','Kore',model,text]));if(isReady(text)){r[4]='DONE';queue.getRange(deferred.indexOf(r)+2,1,1,6).setValues([r]);}else choose(index);}});
@@ -165,4 +166,12 @@ function hskWarmIsolatedTick(){
     p.setProperty('HSK_WARM_SLOT_'+slot+'_AFTER',String(Date.now()+90000));p.deleteProperty('HSK_WARM_LAST_ERROR');p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+90000));
   }catch(e){p.setProperty('HSK_WARM_LAST_ERROR',/^batch_/.test(String(e.message))?e.message:'batch_storage_or_runtime_error');p.setProperty('HSK_WARM_ENABLED','false');}
   finally{p.setProperty('HSK_WARM_RUNTIME_MS',String(Number(p.getProperty('HSK_WARM_RUNTIME_MS')||0)+Date.now()-started));p.setProperty('HSK_WARM_LAST_RUN',new Date().toISOString());try{if(storage)hskWarmProgress_(storage,p);}finally{lock.releaseLock();}}
+}
+
+/** Configure after deploying the matching Worker; does not start a trigger. */
+function hskWarmConfigureLongBatch() {
+ var p=hskSettings_();
+ p.setProperty("HSK_WARM_LONG_BATCH","true");
+ p.setProperty("HSK_WARM_ISOLATED_SIZE","20");
+ return {maxAudioSeconds:180,maxItems:60,batchSize:20};
 }

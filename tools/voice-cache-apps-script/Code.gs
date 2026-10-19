@@ -11,7 +11,8 @@
  *   HSK_VOICE_NEXT_KEY
  */
 var HSK_VOICE_MAX_CHARS = 220;
-var HSK_VOICE_MAX_AUDIO_BYTES = 1500000;
+// 180 seconds, 24 kHz mono PCM16 plus WAV header.
+var HSK_VOICE_MAX_AUDIO_BYTES = 180 * 48000 + 44;
 var HSK_VOICE_COLUMNS = 13;
 function hskResult_(value) {return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON);}
 function hskSettings_() {return PropertiesService.getScriptProperties();}
@@ -57,8 +58,9 @@ function hskCached_(storage,cacheKey) {
 }
 function hskLE_(arr,n,bytes){for(var i=0;i<bytes;i++){arr.push(n&255);n=Math.floor(n/256);}}
 function hskWav_(raw,mime) {
-  if(!raw.length||raw.length>HSK_VOICE_MAX_AUDIO_BYTES-44||raw.length%2)throw new Error('invalid_audio');
+  if(!raw.length||raw.length>HSK_VOICE_MAX_AUDIO_BYTES||raw.length%2)throw new Error('invalid_audio');
   if(raw.length>12&&(raw[0]&255)===82&&(raw[1]&255)===73&&(raw[2]&255)===70&&(raw[3]&255)===70)return raw;
+  if(raw.length>HSK_VOICE_MAX_AUDIO_BYTES-44)throw new Error('invalid_audio');
   if(!/audio\/(?:l16|pcm|x-pcm)/i.test(mime))throw new Error('unsupported_audio_format');
   var header=[];
   function str(s){for(var i=0;i<s.length;i++)header.push(s.charCodeAt(i));}

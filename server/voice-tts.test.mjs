@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { webcrypto } from 'node:crypto';
-import { createVoicePrecacheHandler,decodeVoiceAudio } from './voice-tts.mjs';
+import { createVoicePrecacheHandler,decodeVoiceAudio,VOICE_MAX_AUDIO_BYTES } from './voice-tts.mjs';
 globalThis.crypto ||= webcrypto;
 const sub='113615575809199186059';
 const digest=async s=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)))].map(b=>b.toString(16).padStart(2,'0')).join('');
@@ -76,4 +76,12 @@ test('incomplete audio diagnostics expose finish metadata without transcript or 
  assert.equal(d.error,'tts_generation_incomplete');assert.equal(d.diagnostic.finishReason,'OTHER');
  assert.equal(d.diagnostic.textParts,1);assert.equal(d.diagnostic.audioParts,0);
  assert.equal(JSON.stringify(d).includes('private-transcript'),false);
+});
+
+test("accepts three-minute PCM and rejects aggregate overflow",()=>{
+ const data=Buffer.alloc(180*48000).toString("base64");
+ const part=data=>({inlineData:{data,mimeType:"audio/L16;rate=24000"}});
+ const result=decodeVoiceAudio({candidates:[{finishReason:"STOP",content:{parts:[part(data)]}}]});
+ assert.equal(Buffer.from(result.audioBase64,"base64").length,VOICE_MAX_AUDIO_BYTES-44);
+ assert.equal(decodeVoiceAudio({candidates:[{content:{parts:[part(data),part("AAAAAA==")]}}]}).error,"invalid_tts_audio");
 });

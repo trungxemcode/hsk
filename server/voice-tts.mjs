@@ -6,6 +6,8 @@ async function sha256(value){
  const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value));
  return Array.from(new Uint8Array(digest),x=>x.toString(16).padStart(2,'0')).join('');
 }
+export const VOICE_MAX_AUDIO_BYTES = 180 * 48000 + 44;
+const VOICE_MAX_BASE64_CHARS = 4 * Math.ceil(VOICE_MAX_AUDIO_BYTES / 3);
 export function decodeVoiceAudio(data){
  if(data?.promptFeedback?.blockReason)return {error:'tts_blocked'};
  const candidate=data?.candidates?.[0],finish=candidate?.finishReason;
@@ -15,7 +17,7 @@ export function decodeVoiceAudio(data){
  let binary='',format;
  for(const part of parts){
   const {data:value,mimeType:mime}=part.inlineData;
-  if(typeof value!=='string'||value.length>2000000||typeof mime!=='string')return {error:'invalid_tts_audio'};
+  if(typeof value!=='string'||value.length>VOICE_MAX_BASE64_CHARS||typeof mime!=='string')return {error:'invalid_tts_audio'};
   const base64=value.replace(/[\r\n\t ]/g,'');
   if(!base64||base64.length%4!==0||!/^[A-Za-z0-9+/]+={0,2}$/.test(base64))return {error:'invalid_tts_audio'};
   const type=mime.split(';')[0].trim().toLowerCase(),pcm=['audio/l16','audio/pcm','audio/x-pcm'].includes(type),wav=['audio/wav','audio/wave','audio/x-wav'].includes(type);
@@ -23,7 +25,7 @@ export function decodeVoiceAudio(data){
   if(pcm){for(const parameter of mime.split(';').slice(1)){const [name,val]=parameter.trim().toLowerCase().split('=');if(name==='rate'&&val!=='24000'||name==='channels'&&val!=='1'||name==='codec'&&val!=='pcm')return {error:'invalid_tts_audio'};}}
   const current=pcm?'pcm':'wav';if(format&&format!==current||current==='wav'&&parts.length!==1)return {error:'invalid_tts_audio'};format=current;
   let decoded;try{decoded=atob(base64);}catch{return {error:'invalid_tts_audio'};}
-  if(!decoded.length||decoded.length%2||decoded.length+(binary.length)>1500000-44)return {error:'invalid_tts_audio'};binary+=decoded;
+  if(!decoded.length||decoded.length%2||decoded.length+(binary.length)>VOICE_MAX_AUDIO_BYTES-(current==='pcm'?44:0))return {error:'invalid_tts_audio'};binary+=decoded;
  }
  if(format==='wav'){
   if(binary.length<46||binary.slice(0,4)!=='RIFF'||binary.slice(8,12)!=='WAVE')return {error:'invalid_tts_audio'};
@@ -97,7 +99,7 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    const data=await request.text();
    if(data.length>700000)return json({ok:false,error:'invalid_request'},400);
    input=JSON.parse(data);
-   if(input?.action!=='verify'&&data.length>1500)return json({ok:false,error:'invalid_request'},400);
+   if(input?.action!=='verify'&&data.length>(Array.isArray(input?.items)?12000:1500))return json({ok:false,error:'invalid_request'},400);
   }catch{return json({ok:false,error:'invalid_request'},400);}
   if(input?.action==='diagnose'){
    if(Object.keys(input).some(k=>!['action','keySlot'].includes(k))||!Number.isInteger(input.keySlot)||input.keySlot<0||input.keySlot>9||!slotFetch)return json({ok:false,error:'invalid_request'},400);
@@ -119,14 +121,14 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    ||(input.language!==undefined&&input.language!=='zh-CN')
    ||(input.isolated!==undefined&&(typeof input.isolated!=='boolean'||input.keySlot===undefined))
    ||(input.action!==undefined&&input.action!=='status')
-   ||(input.items!==undefined&&(!input.isolated||!Array.isArray(input.items)||input.items.length<1||input.items.length>10||input.text!==undefined||input.items.some(t=>typeof t!=='string'||!t.trim()||/[<>\u0000-\u001f]/.test(t)||!/[\u3400-\u9fff]/u.test(t))))
+   ||(input.items!==undefined&&(!input.isolated||!Array.isArray(input.items)||input.items.length<1||input.items.length>60||input.text!==undefined||input.items.some(t=>typeof t!=='string'||!t.trim()||/[<>\u0000-\u001f]/.test(t)||!/[\u3400-\u9fff]/u.test(t))))
    ||(input.action!=='status'&&input.items===undefined&&typeof input.text!=='string'))return json({ok:false,error:'invalid_request'},400);
   if(input.action==='status'){
    if(input.text!==undefined||input.items!==undefined||input.keySlot!==undefined||!slotFetch)return json({ok:false,error:'invalid_request'},400);
    try{const slots=await slotFetch(1).availability();if(slots.some(s=>env.HSK_VOICE_ISOLATED_MODEL&&env['HSK_VOICE_SLOT_'+s.slot+'_MODEL']===env.HSK_VOICE_ISOLATED_MODEL)){const alternate=await slotFetch(1,true).availability();return json({ok:true,slots:slots.map(s=>env.HSK_VOICE_ISOLATED_MODEL&&env['HSK_VOICE_SLOT_'+s.slot+'_MODEL']===env.HSK_VOICE_ISOLATED_MODEL?(alternate.find(a=>a.slot===s.slot)||s):s)});}return json({ok:true,slots});}catch{return json({ok:false,error:'key_status_unavailable'},503);}
   }
   const text=(input.items?input.items.join('。 '):input.text).normalize('NFC').replace(/\s+/g,' ').trim();
-  if(!text||Array.from(text).length>220||/[<>\u0000-\u001f]/.test(text)||!/[\u3400-\u9fff]/u.test(text))return json({ok:false,error:'invalid_text'},400);
+  if(!text||Array.from(text).length>(input.items?1200:220)||/[<>\u0000-\u001f]/.test(text)||!/[\u3400-\u9fff]/u.test(text))return json({ok:false,error:'invalid_text'},400);
   const model=env['HSK_VOICE_SLOT_'+input.keySlot+'_MODEL']||(!input.items&&input.isolated&&env.HSK_VOICE_ISOLATED_MODEL)||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
   if(!/^gemini-[a-z0-9.-]+-tts(?:-preview)?$/.test(model))return json({ok:false,error:'invalid_model'},503);
   let prompt=(input.items?'Read every Mandarin Chinese item below exactly once in order, as an independent dictionary entry in citation form. Use standard Mandarin tones and natural word-internal tone sandhi. Do not connect neighbouring entries. Finish each entry fully, then leave 1.2 seconds of silence. Do not read punctuation or instructions. Speak only these entries:\n':input.isolated?'Read each Mandarin Chinese item separated by a full stop independently and clearly. Pause silently for one full second between items. Do not connect items or read these instructions. Speak only the items:\n':input.keySlot===undefined?'Read the following Mandarin Chinese text naturally and accurately. Read only the Chinese text, with no introduction or extra words:\n':'Say in Mandarin Chinese: ')+(input.items?input.items.map(t=>t.normalize('NFC').trim()+'。 ...').join('\n'):text);
@@ -139,7 +141,7 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
   const provider=input.keySlot===undefined?geminiFetch:slotFetch(input.keySlot,model===env.HSK_VOICE_ISOLATED_MODEL);
   const controller=new AbortController(),cancel=()=>controller.abort();
   if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',cancel,{once:true});
-  const deadline=setTimeout(cancel,80000);
+  const deadline=setTimeout(cancel,input.items?240000:80000);
   try{
    for(let attempt=0;attempt<(input.keySlot===undefined?2:1);attempt++){
     let response;

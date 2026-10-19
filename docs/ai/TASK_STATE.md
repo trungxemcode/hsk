@@ -211,3 +211,9 @@ Do not store secrets, API keys, personal data, or entire chat logs. This file is
 - KeyRecovery.gs applies the verified slot settings once and resumes the repair-first queue; invalid slot 2 remains separate and exhausted keys keep provider backoff. No hidden retries or new triggers added.
 - 252 server tests pass plus feature contract checks. Worker and Apps Script deployed; live queue resumed. See final response for live counts and remaining limits.
 - Follow-up live batch exposed a request rejection that paused all work. Recovered 3.1 slots now start with one item using the exact successful probe prompt. Key/model/region request rejection defers the affected slot instead of stopping healthy keys; safe last diagnostic is retained. V2 migration requeues prior incomplete/rejected items once. 254 server tests pass; deployed to Worker and Apps Script.
+
+## 2026-10-19: longer TTS processing
+- Branch fix/long-audio-limits, based on fix/voice-resume-integration (80fecb0); preserves unpublished queue repairs.
+- Worker and Apps Script audio bound: 180 seconds; long-batch opt-in: 20 entries, hard max 60 / 1200 characters, request timeout 240 seconds.
+- 257 server tests pass; feature preservation passes. Browser runtime blocked by missing Playwright Chromium executable.
+- No live deployment or real Gemini call yet: cloud browser has no Apps Script session; no deployment credentials available in this workspace.
