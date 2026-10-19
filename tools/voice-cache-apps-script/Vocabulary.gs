@@ -29,12 +29,13 @@ function hskVocabStart(){
  hskVocabPrepare();var p=hskSettings_();
  if(p.getProperty('HSK_VOCAB_PILOT_REQUESTED')!=='true'){p.deleteProperty('HSK_VOCAB_PILOT_ONLY');p.deleteProperty('HSK_VOCAB_PILOT_ID');}
  p.setProperty('HSK_VOCAB_PREVIOUS_WARM_ENABLED',p.getProperty('HSK_WARM_ENABLED')||'false');p.setProperty('HSK_WARM_ENABLED','false');
- p.setProperty('HSK_VOCAB_ENABLED','true');p.setProperty('HSK_VOCAB_INITIAL_FAILURES','0');[2,10,11].forEach(function(slot){p.deleteProperty('HSK_VOCAB_SLOT_'+slot+'_AFTER');});p.deleteProperty('HSK_VOCAB_RETRY_AT');p.deleteProperty('HSK_VOCAB_ERROR');
+ p.setProperty('HSK_VOCAB_ENABLED','true');p.setProperty('HSK_VOCAB_INITIAL_FAILURES','0');[2,10,11].forEach(function(slot){p.deleteProperty('HSK_VOCAB_PAIR_'+slot+'_'+model+'_AFTER');});p.deleteProperty('HSK_VOCAB_RETRY_AT');p.deleteProperty('HSK_VOCAB_ERROR');
  if(!ScriptApp.getProjectTriggers().some(function(t){return t.getHandlerFunction()==='hskVocabTick';}))ScriptApp.newTrigger('hskVocabTick').timeBased().everyMinutes(1).create();
  hskVocabTick();
 }
 function hskVocabStop(){hskSettings_().setProperty('HSK_VOCAB_ENABLED','false');ScriptApp.getProjectTriggers().filter(function(t){return t.getHandlerFunction()==='hskVocabTick';}).forEach(function(t){ScriptApp.deleteTrigger(t);});}
 function hskVocabCall_(token,body){
+ body=hskAsrPrepareBody_(body);
  var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(body),muteHttpExceptions:true});
  var data;try{data=JSON.parse(response.getContentText());}catch(e){throw Error('response_uncertain');}
  if(response.getResponseCode()!==200||!data.ok){var error=Error(String(data.error||'provider_failure'));error.detail=data;throw error;}return data;
@@ -63,36 +64,45 @@ function hskVocabTick(){
   var trial=batches.find(function(b){return b[0]===p.getProperty('HSK_VOCAB_PILOT_ID');});
   if(trial&&['DONE','PARTIAL','REVIEW','REJECTED','UNCERTAIN'].indexOf(trial[3])>=0){hskVocabStop();return;}
  }
- var active=batches.findIndex(function(b){return b[3]==='MASTER'||b[3]==='VERIFY';});
- if(active>=0){hskVocabProcess_(storage,tables,rows,batches,active,token,started);return;}
+ var active=batches.findIndex(function(b){return ['MASTER','VERIFY','AUTO_VERIFY'].indexOf(b[3])>=0;});
+ if(active>=0){
+  if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskAuto50VerifyTick_==='function')hskAuto50VerifyTick_(storage,tables,rows,batches,active,token,started);
+  else hskVocabProcess_(storage,tables,rows,batches,active,token,started);
+  return;
+ }
  // A RESERVED request may already have produced audio: recover a named master, never resubmit blindly.
  var unresolved=batches.findIndex(function(b){return b[3]==='RESERVED'||b[3]==='UNCERTAIN';});
  if(unresolved>=0){var prior=batches[unresolved],files=storage.folder.getFilesByName('VOCAB_MASTER_'+prior[0]+'.wav');if(files.hasNext()){prior[2]=files.next().getId();prior[3]='MASTER';tables.batches.getRange(unresolved+2,1,1,11).setValues([prior]);return;}p.setProperty('HSK_VOCAB_ERROR','uncertain_batch_requires_review');hskVocabStop();return;}
  var existing=hskVocabRows_(storage.sheet,13),ready=new Map();existing.forEach(function(r){if(r[11]==='READY'&&r[4])ready.set(String(r[0]),r);});
  rows.forEach(function(r,i){if(['PENDING','RETRY'].indexOf(r[3])<0)return;var found=['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview'].map(function(m){return ready.get(hskVocabKey_(m,r[1]));}).find(Boolean);if(found){r[3]='EXISTING';r[7]=found[3];r[9]=found[4];r[16]='https://drive.google.com/file/d/'+found[4]+'/view';hskVocabWrite_(tables.queue,i,r);}});
- var pending=rows.map(function(r,i){return {r:r,i:i};}).filter(function(x){return ['PENDING','RETRY'].indexOf(x.r[3])>=0&&Number(x.r[5]||0)<=now;}).sort(function(a,b){return Number(a.r[0])-Number(b.r[0])||(String(a.r[1]).length<2?1:0)-(String(b.r[1]).length<2?1:0)||Number(a.r[4])-Number(b.r[4])||a.i-b.i;});
+ var pending=rows.map(function(r,i){return {r:r,i:i};}).filter(function(x){return ['PENDING','RETRY'].indexOf(x.r[3])>=0&&Number(x.r[5]||0)<=now;});
+ if(p.getProperty('HSK_AUTO50_ENABLED')==='true')pending=hskAuto50Choose_(pending);
+ else pending.sort(function(a,b){return Number(a.r[0])-Number(b.r[0])||(String(a.r[1]).length<2?1:0)-(String(b.r[1]).length<2?1:0)||Number(a.r[4])-Number(b.r[4])||a.i-b.i;});
  if(!pending.length){var waiting=rows.some(function(r){return ['PENDING','RETRY'].indexOf(r[3])>=0;});if(!waiting)hskVocabStop();return;}
- var health=hskParallelAvailability_(token),next=Number(p.getProperty('HSK_VOCAB_NEXT_SLOT')||2),slots=health.filter(function(s){return !Number(s.retryAfter)&&Number(p.getProperty('HSK_VOCAB_SLOT_'+s.slot+'_AFTER')||0)<=now;}).sort(function(a,b){return ([6,9].indexOf(a.slot)>=0?100:0)+(a.slot-next+13)%13-([6,9].indexOf(b.slot)>=0?100:0)-(b.slot-next+13)%13;});
- if(!slots.length){p.setProperty('HSK_VOCAB_RETRY_AT',String(now+300000));p.setProperty('HSK_VOCAB_ERROR','tts_keys_cooling');return;}
- var slot=slots[0].slot,info=hskVocabCall_(token,{action:'diagnose',keySlot:slot}),model=info.model,size=Math.max(1,Math.min(90,Number(p.getProperty('HSK_VOCAB_BATCH_SIZE')||10))),seen=new Set(),jobs=[];
+ var pair=hskShared50Pair_(token,now);
+ if(!pair){p.setProperty('HSK_VOCAB_RETRY_AT',String(now+300000));p.setProperty('HSK_VOCAB_ERROR','tts_keys_cooling');return;}
+ var slot=pair.slot,model=pair.model,size=Math.max(1,Math.min(90,Number(p.getProperty('HSK_VOCAB_BATCH_SIZE')||10))),seen=new Set(),jobs=[];
  pending.forEach(function(x){if(jobs.length>=size||seen.has(x.r[1]))return;seen.add(x.r[1]);jobs.push({row:x.i,text:x.r[1],pinyin:x.r[2],level:x.r[0],model:model,key:hskVocabKey_(model,x.r[1])});});
  var id=hskDigest_(JSON.stringify(jobs)+':'+now),pause=Number(p.getProperty('HSK_VOCAB_PAUSE')||3),batch=[id,JSON.stringify(jobs),'','RESERVED','',new Date().toISOString(),slot,model,pause,0,''];tables.batches.appendRow(batch);var number=tables.batches.getLastRow();
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true')p.setProperty('HSK_VOCAB_PILOT_ID',id);
  SpreadsheetApp.flush();
- p.setProperty('HSK_VOCAB_NEXT_SLOT',String((slot+1)%13));
+ p.setProperty('HSK_VOCAB_NEXT_SLOT',String((slot+1)%13));p.setProperty('HSK_VOCAB_NEXT_MODEL',String((pair.mi+1)%2));
  try{
- var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify({items:jobs.map(function(j){return j.text;}),isolated:true,keySlot:slot,language:'zh-CN',pauseSeconds:pause}),muteHttpExceptions:true});
+ var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(p.getProperty('HSK_SHARED50_LITERAL')==='true'&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&Array.from(jobs.map(function(j){return j.text;}).join('。')).length<=220?{text:jobs.map(function(j){return j.text;}).join('。'),isolated:true,keySlot:slot,model:model,language:'zh-CN'}:{items:jobs.map(function(j){return j.text;}),isolated:true,keySlot:slot,model:model,language:'zh-CN',pauseSeconds:pause}),muteHttpExceptions:true});
  var decoded=hskParallelDecode_(response);p.setProperty('HSK_VOCAB_TTS_CALLS',String(Number(p.getProperty('HSK_VOCAB_TTS_CALLS')||0)+decoded.providerAttempts));p.setProperty('HSK_VOCAB_WINDOW_CALLS',String(Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0)+decoded.providerAttempts));
  var file=storage.folder.createFile(Utilities.newBlob(decoded.bytes,'audio/wav','VOCAB_MASTER_'+id+'.wav'));batch[2]=file.getId();batch[3]='MASTER';tables.batches.getRange(number,1,1,11).setValues([batch]);
  jobs.forEach(function(j){var r=rows[j.row];r[3]='MASTER';r[4]=Number(r[4])+1;r[6]=id;r[7]=model;r[8]=file.getId();r[11]='';hskVocabWrite_(tables.queue,j.row,r);});
  p.setProperty('HSK_VOCAB_INITIAL_FAILURES','0');p.deleteProperty('HSK_VOCAB_ERROR');p.deleteProperty('HSK_VOCAB_RETRY_AT');console.log(JSON.stringify({stage:'master_saved',items:jobs.length,slot:slot,model:model,pauseSeconds:pause,bytes:decoded.bytes.length}));
- }catch(e){if(e.diagnostic)p.setProperty('HSK_VOCAB_LAST_DIAGNOSTIC',JSON.stringify(e.diagnostic));var reason=String(e.message||'transport_uncertain'),definite=/tts_(request_rejected|generation_incomplete|key_invalid|permission_denied|daily_limit|rate_limited|quota_unavailable|model_unavailable|region_unavailable)/.test(reason);batch[3]=definite?'REJECTED':'UNCERTAIN';batch[4]=reason;tables.batches.getRange(number,1,1,11).setValues([batch]);p.setProperty('HSK_VOCAB_TTS_CALLS',String(Number(p.getProperty('HSK_VOCAB_TTS_CALLS')||0)+(e.providerAttempts||0)));p.setProperty('HSK_VOCAB_WINDOW_CALLS',String(Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0)+(e.providerAttempts||0)));p.setProperty('HSK_VOCAB_SLOT_'+slot+'_AFTER',String(now+Math.max(300,Number(e.retryAfter)||300)*1000));p.setProperty('HSK_VOCAB_ERROR',reason);var failures=Number(p.getProperty('HSK_VOCAB_INITIAL_FAILURES')||0)+1;p.setProperty('HSK_VOCAB_INITIAL_FAILURES',String(failures));if(!definite||failures>=3&&p.getProperty('HSK_VOCAB_PILOT_PASSED')!=='true')hskVocabStop();}
+ }catch(e){if(e.diagnostic)p.setProperty('HSK_VOCAB_LAST_DIAGNOSTIC',JSON.stringify(e.diagnostic));var reason=String(e.message||'transport_uncertain'),definite=/tts_(blocked|request_rejected|generation_incomplete|key_invalid|permission_denied|daily_limit|rate_limited|quota_unavailable|model_unavailable|region_unavailable)/.test(reason);batch[3]=definite?'REJECTED':'UNCERTAIN';batch[4]=reason;tables.batches.getRange(number,1,1,11).setValues([batch]);p.setProperty('HSK_VOCAB_TTS_CALLS',String(Number(p.getProperty('HSK_VOCAB_TTS_CALLS')||0)+(e.providerAttempts||0)));p.setProperty('HSK_VOCAB_WINDOW_CALLS',String(Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0)+(e.providerAttempts||0)));p.setProperty('HSK_VOCAB_PAIR_'+slot+'_'+model+'_AFTER',String(now+Math.max(300,Number(e.retryAfter)||300)*1000));p.setProperty('HSK_VOCAB_ERROR',reason);var failures=Number(p.getProperty('HSK_VOCAB_INITIAL_FAILURES')||0)+1;p.setProperty('HSK_VOCAB_INITIAL_FAILURES',String(failures));if(p.getProperty('HSK_AUTO50_ENABLED')==='true'){
+ if(!definite)hskVocabStop();
+ else if(failures>=3){p.setProperty('HSK_VOCAB_RETRY_AT',String(now+1800000));p.setProperty('HSK_VOCAB_INITIAL_FAILURES','0');}
+}else if(!definite||failures>=3&&p.getProperty('HSK_VOCAB_PILOT_PASSED')!=='true')hskVocabStop();}
  }catch(e){p.setProperty('HSK_VOCAB_ERROR',String(e.message||'vocab_error').replace(/[^a-z0-9_]/gi,'_').slice(0,120));p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+90000));}
  finally{p.setProperty('HSK_VOCAB_RUNTIME_MS',String(Number(p.getProperty('HSK_VOCAB_RUNTIME_MS')||0)+Date.now()-started));if(storage&&tables)console.log(JSON.stringify(hskVocabSummary_(storage,tables)));lock.releaseLock();}
 }
 function hskVocabProcess_(storage,tables,rows,batches,index,token,started){
  var p=hskSettings_(),batch=batches[index],jobs=JSON.parse(batch[1]),master=DriveApp.getFileById(batch[2]).getBlob().getBytes(),report;
- try{report=batch[10]?JSON.parse(batch[10]):hskVocabRanges_(master,jobs.length);}catch(e){batch[3]='REVIEW';batch[4]=String(e.message);tables.batches.getRange(index+2,1,1,11).setValues([batch]);jobs.forEach(function(j){var r=rows[j.row];r[3]=Number(r[4])<3?'RETRY':'REVIEW';r[5]=Date.now()+300000;r[11]=String(e.message);hskVocabWrite_(tables.queue,j.row,r);});p.setProperty('HSK_VOCAB_BATCH_SIZE',String(Math.max(3,Math.floor(jobs.length/2))));p.setProperty('HSK_VOCAB_ERROR',String(e.message));if(p.getProperty('HSK_VOCAB_PILOT_PASSED')!=='true')hskVocabStop();return;}
+ try{report=batch[10]?JSON.parse(batch[10]):hskVocabRanges_(master,jobs.length);}catch(e){batch[3]='REVIEW';batch[4]=String(e.message);tables.batches.getRange(index+2,1,1,11).setValues([batch]);jobs.forEach(function(j){var r=rows[j.row];r[3]=Number(r[4])<3?'RETRY':'REVIEW';r[5]=Date.now()+300000;r[11]=String(e.message);hskVocabWrite_(tables.queue,j.row,r);});p.setProperty('HSK_VOCAB_BATCH_SIZE',String(p.getProperty('HSK_VOCAB_FIXED_BATCH')==='true'?50:Math.max(3,Math.floor(jobs.length/2))));p.setProperty('HSK_VOCAB_ERROR',String(e.message));if(p.getProperty('HSK_VOCAB_PILOT_PASSED')!=='true')hskVocabStop();return;}
  batch[3]='VERIFY';batch[9]=report.duration;batch[10]=JSON.stringify(report);tables.batches.getRange(index+2,1,1,11).setValues([batch]);
  // Recover interruptions between saving the master journal and checkpointing its queue rows.
  jobs.forEach(function(j){var r=rows[j.row];if(['READY','EXISTING'].indexOf(r[3])<0&&r[6]!==batch[0]){r[3]='MASTER';r[4]=Number(r[4])+1;r[6]=batch[0];r[7]=j.model;r[8]=batch[2];hskVocabWrite_(tables.queue,j.row,r);}});
@@ -119,7 +129,7 @@ function hskVocabProcess_(storage,tables,rows,batches,index,token,started){
  }
  if(!jobs.some(function(j){return ['MASTER','CHECK_AGAIN'].indexOf(rows[j.row][3])>=0;})){
  batch[3]=jobs.every(function(j){return ['READY','EXISTING'].indexOf(rows[j.row][3])>=0;})?'DONE':'PARTIAL';tables.batches.getRange(index+2,1,1,11).setValues([batch]);
- if(batch[3]==='DONE')p.setProperty('HSK_VOCAB_BATCH_SIZE',String(Math.min(90,jobs.length<20?30:jobs.length<60?60:90,Math.max(3,Math.floor(360/(report.duration/jobs.length))))));
+ if(batch[3]==='DONE'&&p.getProperty('HSK_VOCAB_FIXED_BATCH')!=='true')p.setProperty('HSK_VOCAB_BATCH_SIZE',String(Math.min(90,jobs.length<20?30:jobs.length<60?60:90,Math.max(3,Math.floor(360/(report.duration/jobs.length))))));
  }
  if(passed)p.setProperty('HSK_VOCAB_PILOT_PASSED','true');p.deleteProperty('HSK_VOCAB_RETRY_AT');p.deleteProperty('HSK_VOCAB_ERROR');console.log(JSON.stringify({stage:'checked_and_saved',checked:done,passed:passed,retry:failed,masterSeconds:report.duration,minGap:report.minGap,maxGap:report.maxGap,batchState:batch[3]}));
 }

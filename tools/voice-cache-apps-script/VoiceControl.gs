@@ -7,8 +7,13 @@ function hskVoiceControlPoll_(p){
  var book=SpreadsheetApp.openById(p.getProperty('HSK_VOICE_SHEET_ID'));
  var control=book.getSheetByName('Voice_Control');
  if(!control)return false;
+ try{hskAsrPaddingAudit_(p,control);}catch(e){control.getRange(29,1,1,2).setValues([['ASR_silence_audit',String(e.message||'audit_failed').slice(0,100)]]);}
+ if(typeof hskShared50QueuedCommand_==='function')hskShared50QueuedCommand_(p,control);
+ var shared;try{control.getRange(27,1,1,2).setValues([['Test_last_poll',new Date().toISOString()]]);shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());}catch(e){control.getRange(18,2).setValue('SHARED50_ERROR');control.getRange(19,2).setValue(String(e.message||'shared_error').slice(0,120));return true;}
+ if(shared!==null)return shared;
  var command=String(control.getRange(2,2).getValue()||'').trim();
- if(['PAUSE','RECOVER_50','RUN_VOCAB'].indexOf(command)<0)return false;
+ if(['PAUSE','RECOVER_50','RUN_VOCAB','AUTO_CYCLE'].indexOf(command)<0)return false;
+ if(command==='AUTO_CYCLE')return hskAuto50Poll_(p,book,control);
  var lock=LockService.getScriptLock();
  if(!lock.tryLock(100))return true;
  try{
@@ -16,8 +21,10 @@ function hskVoiceControlPoll_(p){
   if(!triggers.some(function(t){return t.getHandlerFunction()==='hskVoiceControlFastTick';})){
    ScriptApp.newTrigger('hskVoiceControlFastTick').timeBased().everyMinutes(1).create();
   }
-  triggers.filter(function(t){return t.getHandlerFunction()==='hskVoiceControlTick';})
-   .forEach(function(t){ScriptApp.deleteTrigger(t);});
+  // Keep the proven five-minute trigger as a safety fallback if Google's new one-minute schedule is delayed.
+  if(!triggers.some(function(t){return t.getHandlerFunction()==='hskVoiceControlTick';})){
+   ScriptApp.newTrigger('hskVoiceControlTick').timeBased().everyMinutes(5).create();
+  }
   if(command==='RUN_VOCAB'){
    control.getRange(2,2).setValue('RUNNING');
    p.setProperty('HSK_VOCAB_ENABLED','true');
@@ -64,8 +71,8 @@ function hskVoiceControlPoll_(p){
   return true;
  }finally{lock.releaseLock();}
 }
-function hskVoiceControlTick(){return hskVoiceControlPoll_(hskSettings_());}
-function hskVoiceControlFastTick(){return hskVoiceControlPoll_(hskSettings_());}
+function hskVoiceControlTick(){var p=hskSettings_(),handled=hskVoiceControlPoll_(p);if(handled===false&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&p.getProperty('HSK_VOCAB_ENABLED')==='true')return hskVocabTick();return handled;}
+function hskVoiceControlFastTick(){var p=hskSettings_(),handled=hskVoiceControlPoll_(p);if(handled===false&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&p.getProperty('HSK_VOCAB_ENABLED')==='true')return hskVocabTick();return handled;}
 function hskVoiceRecHanzi_(x){return String(x||'').normalize('NFKC').replace(/[\s\p{P}\p{S}]/gu,'').trim();}
 function hskVoiceRecPinyin_(x){return String(x||'').normalize('NFC').toLowerCase().replace(/[\s\p{P}]/gu,'');}
 function hskVoiceRecoverTick_(p,book,control){
@@ -84,7 +91,7 @@ function hskVoiceRecoverTick_(p,book,control){
  var passed=all.filter(function(r){return r[3]==='READY'||r[3]==='EXISTING';}).length;
  var rejected=all.filter(function(r){return r[3]==='REVIEW';}).length;
  if(!candidates.length){
-  control.getRange(2,2).setValue('PAUSE');
+  if(String(control.getRange(2,2).getValue())!=='AUTO_CYCLE')control.getRange(2,2).setValue('PAUSE');
   control.getRange(6,2).setValue('RECOVERED_'+passed+'_CONFIRMED_'+rejected+'_REVIEW');
   control.getRange(8,2,2,1).setValues([[passed],[rejected]]);
   batch[3]='RECOVERED_PARTIAL';batch[4]='only_blind_double_asr_verified_segments_saved';
