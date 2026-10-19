@@ -10,13 +10,13 @@ export class HSkaIControl {
   const time=Date.now();
   if(data.action==='abuse-start'||data.action==='abuse-finish')return abuseControl(this.state.storage,this.env,data,time);
   if(data.action==='gemini-status'){
-   if(!Array.isArray(data.ids)||data.ids.length>10||!data.ids.every(id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id)))return Response.json({error:'keys'},{status:400});
+   if(!Array.isArray(data.ids)||data.ids.length>13||!data.ids.every(id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id)))return Response.json({error:'keys'},{status:400});
    const pool=await this.state.storage.get('gemini:pool')||{};
    return Response.json({slots:data.ids.map((id,index)=>({index,retryAfter:Math.max(0,Math.ceil(((pool.blocked?.[id]||0)-time)/1000))}))});
   }
   if(data.action==='gemini-pick'){
    const validId=id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id);
-   if(!Array.isArray(data.ids)||data.ids.length<1||data.ids.length>10||!data.ids.every(validId)||new Set(data.ids).size!==data.ids.length||!Array.isArray(data.excluded)||data.excluded.length>10||!data.excluded.every(id=>data.ids.includes(id)))return Response.json({error:'keys'},{status:400});
+   if(!Array.isArray(data.ids)||data.ids.length<1||data.ids.length>13||!data.ids.every(validId)||new Set(data.ids).size!==data.ids.length||!Array.isArray(data.excluded)||data.excluded.length>13||!data.excluded.every(id=>data.ids.includes(id)))return Response.json({error:'keys'},{status:400});
    const result=await this.state.storage.transaction(async t=>{
     const previous=await t.get('gemini:pool')||{},pool={cursor:Number(previous.cursor)||0,ids:data.ids,blocked:{}};
     for(const id of data.ids)if(previous.blocked?.[id]>time)pool.blocked[id]=previous.blocked[id];

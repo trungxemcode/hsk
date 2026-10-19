@@ -122,3 +122,11 @@ test("slot 12 blank is skipped and replacement slot 2 uses new credential",async
  const called=[];const f=createGeminiKeyFetch(async(u,i)=>{called.push(selected(i));return ok();},env,{slot:2});
  await f(url);assert.deepEqual(called,["replacement-2"]);
 });
+
+test("central coordinator supports thirteen distinct slots and availability",async()=>{
+ const expanded=Object.fromEntries(Array.from({length:12},(_,i)=>["GEMINI_API_KEY_"+(i+1),"expanded-key-"+(i+1)]));
+ const {env}=central({...expanded,GEMINI_API_KEY:"primary-distinct"});
+ const f=createGeminiKeyFetch(async()=>ok(),env,{slot:11});
+ const slots=await f.availability();assert.equal(slots.length,13);
+ assert.equal((await f(url)).status,200);
+});

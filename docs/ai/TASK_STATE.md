@@ -224,3 +224,11 @@ Do not store secrets, API keys, personal data, or entire chat logs. This file is
 - 258 server tests pass, including replacement slot 2 and empty slot 12. No actual key values available locally; no provider generation performed.
 - Live Apps Script hskInspectRotation returned Worker HTTP 400 invalid_request at 08:52 local; no direct TTS keys configured in Apps Script.
 - Cloudflare login needed to deploy matching Worker. Browser authentication request was rejected by auto-review because user had not explicitly authorized Cloudflare sign-in / deployment. Do not retry until explicit authorization. No Desktop Commander used.
+
+## 2026-10-19 live deployment and long pilot
+- User explicitly authorized Desktop Commander Cloudflare updates. Isolated Windows worktree C:\Users\LENOVO\hsk-long-audio; Apps Script pulled into hsk-long-pilot, preserving live source.
+- Worker 8184fab7-485d-4dd6-82dd-9961f1514d79 deployed; central coordinator expanded from 10 to 13 IDs after live status exposed missed cap. 260 server tests pass.
+- Live status returns slots 0–11, skips empty 12. Replacement key 2 metadata check returns 200. This does not establish generation quota.
+- 180-item attempt on slot 6/3.1 rejected INVALID_ARGUMENT; slot 2/2.5 then explicitly rejected text-mode generation. No master saved in either attempt.
+- Large-pilot prompt changed to literal punctuated transcript. Final slot 2 trial started at 09:04:43 local; result pending at this checkpoint. No duplicate request during pending run.
+- LongPilot.gs uses separate Voice_Long_Pilots journal and saves master before splitting. It changes no triggers or main queue order.

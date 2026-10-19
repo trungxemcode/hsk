@@ -39,13 +39,13 @@ export class HSkaIControl {
   const time=Date.now();
   if(data.action==='abuse-start'||data.action==='abuse-finish')return abuseControl(this.state.storage,this.env,data,time);
   if(data.action==='gemini-status'){
-   if(!Array.isArray(data.ids)||data.ids.length>10||!data.ids.every(id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id)))return Response.json({error:'keys'},{status:400});
+   if(!Array.isArray(data.ids)||data.ids.length>13||!data.ids.every(id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id)))return Response.json({error:'keys'},{status:400});
    const pool=await this.state.storage.get('gemini:pool')||{};
    return Response.json({slots:data.ids.map((id,index)=>({index,retryAfter:Math.max(0,Math.ceil(((pool.blocked?.[id]||0)-time)/1000))}))});
   }
   if(data.action==='gemini-pick'){
    const validId=id=>typeof id==='string'&&/^[a-f0-9]{64}$/.test(id);
-   if(!Array.isArray(data.ids)||data.ids.length<1||data.ids.length>10||!data.ids.every(validId)||new Set(data.ids).size!==data.ids.length||!Array.isArray(data.excluded)||data.excluded.length>10||!data.excluded.every(id=>data.ids.includes(id)))return Response.json({error:'keys'},{status:400});
+   if(!Array.isArray(data.ids)||data.ids.length<1||data.ids.length>13||!data.ids.every(validId)||new Set(data.ids).size!==data.ids.length||!Array.isArray(data.excluded)||data.excluded.length>13||!data.excluded.every(id=>data.ids.includes(id)))return Response.json({error:'keys'},{status:400});
    const result=await this.state.storage.transaction(async t=>{
     const previous=await t.get('gemini:pool')||{},pool={cursor:Number(previous.cursor)||0,ids:data.ids,blocked:{}};
     for(const id of data.ids)if(previous.blocked?.[id]>time)pool.blocked[id]=previous.blocked[id];
@@ -707,6 +707,8 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
   const model=env['HSK_VOICE_SLOT_'+input.keySlot+'_MODEL']||(!input.items&&input.isolated&&env.HSK_VOICE_ISOLATED_MODEL)||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
   if(!/^gemini-[a-z0-9.-]+-tts(?:-preview)?$/.test(model))return json({ok:false,error:'invalid_model'},503);
   let prompt=(input.items?'Read every Mandarin Chinese item below exactly once in order, as an independent dictionary entry in citation form. Use standard Mandarin tones and natural word-internal tone sandhi. Do not connect neighbouring entries. Finish each entry fully, then leave 1.2 seconds of silence. Do not read punctuation or instructions. Speak only these entries:\n':input.isolated?'Read each Mandarin Chinese item separated by a full stop independently and clearly. Pause silently for one full second between items. Do not connect items or read these instructions. Speak only the items:\n':input.keySlot===undefined?'Read the following Mandarin Chinese text naturally and accurately. Read only the Chinese text, with no introduction or extra words:\n':'Say in Mandarin Chinese: ')+(input.items?input.items.map(t=>t.normalize('NFC').trim()+'。 ...').join('\n'):text);
+  // Large pilots use a literal transcript to avoid the provider interpreting list instructions as a text task.
+  if(input.items?.length>60)prompt=input.items.map(t=>t.normalize('NFC').trim()+'。').join('\n\n');
   // A single transcript needs no dictionary-list instruction.
   if(input.items?.length===1)prompt=model===env.HSK_VOICE_ISOLATED_MODEL?'Read each Mandarin Chinese item separated by a full stop independently and clearly. Pause silently for one full second between items. Do not connect items or read these instructions. Speak only the items:\n'+text:'Say in Mandarin Chinese: '+text;
   const payload={

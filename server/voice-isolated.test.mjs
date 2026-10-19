@@ -105,3 +105,10 @@ test("long batch saves twenty new entries in one request",()=>{
  f.c.hskWarmConfigureLongBatch();f.c.hskWarmIsolatedTick();
  assert.equal(f.calls,1);assert.equal(f.sent,20);assert.equal(f.storage.sheet.rows.length,20);
 });
+test('large pilot sends a literal audio transcript without dictionary task instructions',async()=>{
+ const sub='123456789123456789',hash=createHash('sha256').update(sub).digest('hex');let payload;
+ const h=createVoicePrecacheHandler(async()=>Response.json({iss:'https://accounts.google.com',sub,email_verified:true,exp:Date.now()/1000+3600,aud:'test'}),null,()=>Date.now(),()=>async(u,init)=>{payload=JSON.parse(init.body);return Response.json({candidates:[{finishReason:'STOP',content:{parts:[{inlineData:{data:'AAAAAA==',mimeType:'audio/L16'}}]}}]});});
+ const response=await h(new Request('https://x/voice-precache',{method:'POST',headers:{Authorization:'Bearer test'},body:JSON.stringify({items:Array(180).fill('你好'),keySlot:11,isolated:true})}),{HSK_VOICE_GOOGLE_SUB_SHA256:hash});
+ assert.equal(response.status,200);assert.equal(payload.contents[0].parts[0].text,Array(180).fill('你好。').join('\n\n'));
+ assert.deepEqual(payload.generationConfig.responseModalities,['AUDIO']);
+});
