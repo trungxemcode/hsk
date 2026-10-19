@@ -11,7 +11,7 @@
  *   HSK_VOICE_NEXT_KEY
  */
 var HSK_VOICE_MAX_CHARS = 220;
-var HSK_VOICE_MAX_AUDIO_BYTES = 1500000;
+var HSK_VOICE_MAX_AUDIO_BYTES = 600 * 48000 + 44;
 var HSK_VOICE_COLUMNS = 13;
 function hskResult_(value) {return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON);}
 function hskSettings_() {return PropertiesService.getScriptProperties();}
@@ -68,7 +68,7 @@ function hskWav_(raw,mime) {
   return header.map(function(b){return b>127?b-256:b;}).concat(raw);
 }
 function hskGemini_(key,text,model) {
-  var prompt='Đọc nguyên văn tiếng Trung phổ thông sau, rõ ràng và tự nhiên. Không thêm hoặc thay chữ: '+text;
+  var prompt='Äá»c nguyÃªn vÄƒn tiáº¿ng Trung phá»• thÃ´ng sau, rÃµ rÃ ng vÃ  tá»± nhiÃªn. KhÃ´ng thÃªm hoáº·c thay chá»¯: '+text;
   var body={contents:[{role:'user',parts:[{text:prompt}]}],
     generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:'Kore'}}}}};
   var res=UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent',{
@@ -91,9 +91,9 @@ function hskWorkerTts_(text) {
   if(response.getResponseCode()!==200){
     // Only include predefined safe backend error codes; never echo credentials or a provider body.
     var reason='request_failed';
-    try{var result=JSON.parse(response.getContentText());if(/^(identity_unavailable|unauthorized|voice_not_configured|tts_provider_unavailable|invalid_model|invalid_tts_audio|invalid_tts_response|tts_generation_incomplete|tts_blocked)$/.test(String(result.error||'')))reason=result.error;}catch(ignored){}
+    try{var result=JSON.parse(response.getContentText());if(/^(identity_unavailable|unauthorized|voice_not_configured|tts_provider_unavailable|invalid_model|invalid_tts_audio|invalid_tts_response|tts_generation_incomplete|tts_blocked|tts_rate_limited|tts_daily_limit|tts_quota_unavailable|tts_key_invalid|tts_permission_denied|tts_region_unavailable|tts_model_unavailable|tts_request_rejected|tts_transport_uncertain)$/.test(String(result.error||'')))reason=result.error;}catch(ignored){}
     var failure=new Error('cloudflare_tts_'+response.getResponseCode()+'_'+reason);
-    failure.retryable=[429,503,504].indexOf(response.getResponseCode())>=0||reason==='tts_generation_incomplete';
+    failure.retryable=typeof result==='object'&&typeof result.retryable==='boolean'?result.retryable:[429,503,504].indexOf(response.getResponseCode())>=0||reason==='tts_generation_incomplete'||reason==='tts_provider_unavailable';
     throw failure;
   }
   var json=JSON.parse(response.getContentText());
