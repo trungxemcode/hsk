@@ -1,4 +1,5 @@
 import { hskVoiceVerifyPartial } from './voice-partial-verify.mjs';
+import { hskTtsModelInfo, hskBuildInteractionRequest, hskInteractionAsLegacyAudio } from './voice-model-router.mjs';
 // Private Apps Script-to-Cloudflare TTS bridge. Google identity tokens, never browser API keys.
 const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'};
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers});
@@ -102,8 +103,9 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    if(input?.action!=='verify'&&data.length>(Array.isArray(input?.items)?24000:1500))return json({ok:false,error:'invalid_request'},400);
   }catch{return json({ok:false,error:'invalid_request'},400);}
   if(input?.action==='diagnose'){
-   if(Object.keys(input).some(k=>!['action','keySlot'].includes(k))||!Number.isInteger(input.keySlot)||input.keySlot<0||input.keySlot>12||!slotFetch)return json({ok:false,error:'invalid_request'},400);
-   const model=env['HSK_VOICE_SLOT_'+input.keySlot+'_MODEL']||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
+   if(Object.keys(input).some(k=>!['action','keySlot','model'].includes(k))||!Number.isInteger(input.keySlot)||input.keySlot<0||input.keySlot>12||!slotFetch)return json({ok:false,error:'invalid_request'},400);
+   const model=input.model||env['HSK_VOICE_SLOT_'+input.keySlot+'_MODEL']||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
+   if(!hskTtsModelInfo(model,{allowPaid:env.HSK_VOICE_ALLOW_PAID_TTS==='true'}))return json({ok:false,error:'invalid_model'},400);
    try{
     const response=await slotFetch(input.keySlot).inspect(model);
     if(response.ok){const metadata=await response.json();return json({ok:true,slot:input.keySlot,http:response.status,model,generateContent:metadata.supportedGenerationMethods?.includes('generateContent')===true});}
@@ -116,7 +118,7 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    return json(checked.result,checked.status);
   }
   if(!input||typeof input!=='object'||Array.isArray(input)
-   ||Object.keys(input).some(k=>!['text','language','keySlot','action','isolated','items'].includes(k))
+   ||Object.keys(input).some(k=>!['text','language','keySlot','action','isolated','items','model'].includes(k))
    ||(input.keySlot!==undefined&&(!Number.isInteger(input.keySlot)||input.keySlot<0||input.keySlot>12||!slotFetch))
    ||(input.language!==undefined&&input.language!=='zh-CN')
    ||(input.isolated!==undefined&&(typeof input.isolated!=='boolean'||input.keySlot===undefined))
@@ -124,13 +126,14 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    ||(input.items!==undefined&&(!input.isolated||!Array.isArray(input.items)||input.items.length<1||input.items.length>240||input.text!==undefined||input.items.some(t=>typeof t!=='string'||!t.trim()||/[<>\u0000-\u001f]/.test(t)||!/[\u3400-\u9fff]/u.test(t))))
    ||(input.action!=='status'&&input.items===undefined&&typeof input.text!=='string'))return json({ok:false,error:'invalid_request'},400);
   if(input.action==='status'){
-   if(input.text!==undefined||input.items!==undefined||input.keySlot!==undefined||!slotFetch)return json({ok:false,error:'invalid_request'},400);
-   try{const slots=await slotFetch(1).availability();if(slots.some(s=>env.HSK_VOICE_ISOLATED_MODEL&&env['HSK_VOICE_SLOT_'+s.slot+'_MODEL']===env.HSK_VOICE_ISOLATED_MODEL)){const alternate=await slotFetch(1,true).availability();return json({ok:true,slots:slots.map(s=>env.HSK_VOICE_ISOLATED_MODEL&&env['HSK_VOICE_SLOT_'+s.slot+'_MODEL']===env.HSK_VOICE_ISOLATED_MODEL?(alternate.find(a=>a.slot===s.slot)||s):s)});}return json({ok:true,slots});}catch{return json({ok:false,error:'key_status_unavailable'},503);}
+   if(input.text!==undefined||input.items!==undefined||input.keySlot!==undefined||!slotFetch||input.model!==undefined&&!hskTtsModelInfo(input.model,{allowPaid:env.HSK_VOICE_ALLOW_PAID_TTS==='true'}))return json({ok:false,error:'invalid_request'},400);
+   try{const slots=await slotFetch(1,false,input.model).availability();if(!input.model&&slots.some(s=>env.HSK_VOICE_ISOLATED_MODEL&&env['HSK_VOICE_SLOT_'+s.slot+'_MODEL']===env.HSK_VOICE_ISOLATED_MODEL)){const alternate=await slotFetch(1,true).availability();return json({ok:true,slots:slots.map(s=>env.HSK_VOICE_ISOLATED_MODEL&&env['HSK_VOICE_SLOT_'+s.slot+'_MODEL']===env.HSK_VOICE_ISOLATED_MODEL?(alternate.find(a=>a.slot===s.slot)||s):s)});}return json({ok:true,slots});}catch{return json({ok:false,error:'key_status_unavailable'},503);}
   }
   const text=(input.items?input.items.join('。 '):input.text).normalize('NFC').replace(/\s+/g,' ').trim();
   if(!text||Array.from(text).length>(input.items?4800:220)||/[<>\u0000-\u001f]/.test(text)||!/[\u3400-\u9fff]/u.test(text))return json({ok:false,error:'invalid_text'},400);
-  const model=env['HSK_VOICE_SLOT_'+input.keySlot+'_MODEL']||(!input.items&&input.isolated&&env.HSK_VOICE_ISOLATED_MODEL)||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
-  if(!/^gemini-[a-z0-9.-]+-tts(?:-preview)?$/.test(model))return json({ok:false,error:'invalid_model'},503);
+  const model=input.model||env['HSK_VOICE_SLOT_'+input.keySlot+'_MODEL']||(!input.items&&input.isolated&&env.HSK_VOICE_ISOLATED_MODEL)||env.HSK_VOICE_TTS_MODEL||'gemini-2.5-flash-preview-tts';
+  const modelInfo=hskTtsModelInfo(model,{allowPaid:env.HSK_VOICE_ALLOW_PAID_TTS==='true'});
+  if(!modelInfo||input.model&&(!input.isolated||input.keySlot===undefined))return json({ok:false,error:'invalid_model'},400);
   let prompt=(input.items?'Read every Mandarin Chinese item below exactly once in order, as an independent dictionary entry in citation form. Use standard Mandarin tones and natural word-internal tone sandhi. Do not connect neighbouring entries. Finish each entry fully, then leave 1.2 seconds of silence. Do not read punctuation or instructions. Speak only these entries:\n':input.isolated?'Read each Mandarin Chinese item separated by a full stop independently and clearly. Pause silently for one full second between items. Do not connect items or read these instructions. Speak only the items:\n':input.keySlot===undefined?'Read the following Mandarin Chinese text naturally and accurately. Read only the Chinese text, with no introduction or extra words:\n':'Say in Mandarin Chinese: ')+(input.items?input.items.map(t=>t.normalize('NFC').trim()+'。 ...').join('\n'):text);
   // Large pilots use a literal transcript to avoid the provider interpreting list instructions as a text task.
   if(input.items?.length>60)prompt=input.items.map(t=>t.normalize('NFC').trim()+'。').join('\n\n');
@@ -140,17 +143,18 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
    contents:[{role:'user',parts:[{text:prompt}]}],
    generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:'Kore'}}}}
   };
-  const provider=input.keySlot===undefined?geminiFetch:slotFetch(input.keySlot,model===env.HSK_VOICE_ISOLATED_MODEL);
+  const provider=input.keySlot===undefined?geminiFetch:slotFetch(input.keySlot,model===env.HSK_VOICE_ISOLATED_MODEL, input.model);
   const controller=new AbortController(),cancel=()=>controller.abort();
   if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',cancel,{once:true});
   const deadline=setTimeout(cancel,input.items?240000:80000);
   try{
    for(let attempt=0;attempt<(input.keySlot===undefined?2:1);attempt++){
     let response;
-    try{response=await provider('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});}catch{return json({ok:false,error:'tts_transport_uncertain',providerAttempts:1,retryable:false},503);}
+    try{const requestData=modelInfo.api==='interactions'?hskBuildInteractionRequest(model,input.items?input.items.map(t=>t.normalize('NFC').trim()).join('\n\n'):text):{endpoint:'https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',payload};
+     response=await provider(requestData.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(requestData.payload),signal:controller.signal});}catch{return json({ok:false,error:'tts_transport_uncertain',providerAttempts:1,retryable:false},503);}
     if(!response.ok)return json(await voiceProviderFailure(response,env),[429,503].includes(response.status)?response.status:502);
     let data;try{data=await response.json();}catch{return json({ok:false,error:'invalid_tts_response',providerAttempts:1},502);}
-    const audio=decodeVoiceAudio(data);
+    const audio=decodeVoiceAudio(modelInfo.api==='interactions'?hskInteractionAsLegacyAudio(data):data);
     if(!audio.error)return json({ok:true,...audio,voice:'Kore',model,providerAttempts:attempt+1});
     // Fixed categories only: no prompts, ID tokens, API keys, vendor messages or audio in logs.
     console.warn('hsk-voice-generation-failed',{reason:audio.error,attempt:attempt+1});

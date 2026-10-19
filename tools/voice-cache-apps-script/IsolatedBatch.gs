@@ -106,7 +106,7 @@ function hskWarmIsolatedTick(){
         prior[3]='REVIEW';prior[4]='batch_transport_uncertain';journal.getRange(b+2,1,1,7).setValues([prior]);p.setProperty('HSK_WARM_LAST_ERROR',prior[4]);p.setProperty('HSK_WARM_ENABLED','false');return;
       }
     }
-    var token=ScriptApp.getIdentityToken(),health=hskParallelAvailability_(token),earliest=Infinity,slot=null;
+    var token=ScriptApp.getIdentityToken(),multi=p.getProperty('HSK_WARM_MULTI_MODEL_ENABLED')==='true',health=multi?[]:hskParallelAvailability_(token),earliest=Infinity,slot=null;
     var next=Number(p.getProperty('HSK_WARM_NEXT_SLOT')||1);
     // Prefer keys with verified completed batches; inspect unhealthy keys separately.
     var scores={},candidates=[];
@@ -114,10 +114,12 @@ function hskWarmIsolatedTick(){
     for(var lane=0;lane<13;lane++){var n=(next+lane)%13,item=health.filter(function(s){return s.slot===n;})[0];if(!item)continue;var until=Math.max(now+Number(item.retryAfter||0)*1000,Number(p.getProperty('HSK_WARM_SLOT_'+n+'_AFTER')||0));if(until<=now)candidates.push({slot:n,score:scores[n]||0,order:lane});else earliest=Math.min(earliest,until);}
     candidates.sort(function(a,b){return b.score-a.score||a.order-b.order;});
     if(candidates.length)slot=candidates[0].slot;
-    if(slot===null){p.setProperty('HSK_WARM_RETRY_AT',String(earliest<Infinity?earliest:now+3600000));p.setProperty('HSK_WARM_LAST_ERROR','tts_keys_cooling');return;}
-    var texts=hskWarmCorpus_(),model=p.getProperty('HSK_WARM_SLOT_'+slot+'_MODEL')||p.getProperty('HSK_VOICE_MODEL')||'gemini-2.5-flash-preview-tts',records=hskBatchRows_(storage.sheet,13),ready=new Set();
+    if(!multi&&slot===null){p.setProperty('HSK_WARM_RETRY_AT',String(earliest<Infinity?earliest:now+3600000));p.setProperty('HSK_WARM_LAST_ERROR','tts_keys_cooling');return;}
+    var choice=multi?hskVoicePickModel_(token,p,now):null;
+    if(multi){if(!choice.chosen){p.setProperty('HSK_WARM_RETRY_AT',String(choice.retryAt));p.setProperty('HSK_WARM_LAST_ERROR','tts_models_cooling');return;}slot=choice.chosen.slot;}
+    var texts=hskWarmCorpus_(),model=multi?choice.chosen.model:p.getProperty('HSK_WARM_SLOT_'+slot+'_MODEL')||p.getProperty('HSK_VOICE_MODEL')||'gemini-2.5-flash-preview-tts',records=hskBatchRows_(storage.sheet,13),ready=new Set();
     records.forEach(function(r){if(r[11]==='READY'&&r[4])ready.add(String(r[0]));});
-    function isReady(text){return [model,p.getProperty('HSK_VOICE_MODEL')||'gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview'].some(function(m){return ready.has(hskDigest_(JSON.stringify(['zh-CN','Kore',m,text])));});}
+    function isReady(text){var alternatives=typeof hskVoiceFreeModelIds_==='function'?hskVoiceFreeModelIds_():['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview','gemini-3.8-flash-lite-tts','gemini-3.8-flash-tts'];return [model].concat(alternatives).some(function(m){return ready.has(hskDigest_(JSON.stringify(['zh-CN','Kore',m,text])));});}
     // Repair known failed TTS outputs, including old REVIEW/attempt-exhausted errors, once under this new strategy.
     if(p.getProperty('HSK_BATCH_REPAIR_POLICY')!=='isolated-v1'){
       deferred.forEach(function(r,i){if(r[4]!=='DONE'&&/tts_generation_incomplete|invalid_tts_audio|tts_provider_unavailable|tts_daily_limit|tts_rate_limited|tts_key_invalid|tts_permission_denied|tts_quota_unavailable/.test(String(r[5]))){r[2]=0;r[3]=now;r[4]='PENDING';queue.getRange(i+2,1,1,6).setValues([r]);}});
@@ -125,7 +127,7 @@ function hskWarmIsolatedTick(){
     }
     var jobs=[],seen=new Set(),characters=0,max=Math.max(1,Math.min(60,Number(p.getProperty('HSK_WARM_ISOLATED_SIZE')||5)));
     var longBatch=p.getProperty('HSK_WARM_LONG_BATCH')==='true';
-    if(model==='gemini-3.1-flash-tts-preview'&&!longBatch)max=1;
+    if((model==='gemini-3.1-flash-tts-preview'||model.indexOf('gemini-3.8-')===0)&&!longBatch)max=1;
     function choose(index){
       var text=texts[index];if(typeof text!=='string')return false;
       var key=hskDigest_(JSON.stringify(['zh-CN','Kore',model,text]));if(isReady(text)||seen.has(key))return true;
@@ -135,17 +137,17 @@ function hskWarmIsolatedTick(){
     }
     deferred.forEach(function(r){if(r[4]==='PENDING'&&Number(r[3])<=now){var index=Number(r[0]),text=texts[index],key=hskDigest_(JSON.stringify(['zh-CN','Kore',model,text]));if(isReady(text)){r[4]='DONE';queue.getRange(deferred.indexOf(r)+2,1,1,6).setValues([r]);}else choose(index);}});
     var pending=deferred.filter(function(r){return r[4]==='PENDING';});
-    if(!jobs.length&&pending.length){p.setProperty('HSK_WARM_RETRY_AT',String(Math.max(now+60000,Math.min.apply(null,pending.map(function(r){return Number(r[3])||now;})))));return;}
+    if(!jobs.length&&pending.length&&!multi){p.setProperty('HSK_WARM_RETRY_AT',String(Math.max(now+60000,Math.min.apply(null,pending.map(function(r){return Number(r[3])||now;})))));return;}
     if(!jobs.length&&deferred.some(function(r){return r[4]==='REVIEW';})){p.setProperty('HSK_WARM_ENABLED','false');p.setProperty('HSK_WARM_LAST_ERROR','tts_review_required');return;}
     var cursor=Number(p.getProperty('HSK_WARM_CURSOR')||0);
-    if(!pending.length)while(cursor<texts.length){if(!choose(cursor))break;cursor++;}
+    if(!pending.length||multi)while(cursor<texts.length){if(!choose(cursor))break;cursor++;}
     if(!jobs.length){if(cursor>=texts.length)hskWarmStop();return;}
     var id=hskDigest_(JSON.stringify(jobs.map(function(j){return j.key;}))+':'+now),stamp=new Date().toISOString(),row=[id,JSON.stringify(jobs),'','RESERVED','',stamp,slot];
     journal.appendRow(row);var rowNumber=journal.getLastRow();SpreadsheetApp.flush();
     var response,decoded;
     p.setProperty('HSK_WARM_NEXT_SLOT',String((slot+1)%13));
     try{
-      response=UrlFetchApp.fetch('https://hsk-vietnamese-translator.trung-hsk668.workers.dev/voice-precache',{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify({items:jobs.map(function(j){return j.text;}),language:'zh-CN',keySlot:slot,isolated:true}),muteHttpExceptions:true});
+      response=UrlFetchApp.fetch('https://hsk-vietnamese-translator.trung-hsk668.workers.dev/voice-precache',{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(multi?{items:jobs.map(function(j){return j.text;}),language:'zh-CN',keySlot:slot,isolated:true,model:model}:{items:jobs.map(function(j){return j.text;}),language:'zh-CN',keySlot:slot,isolated:true}),muteHttpExceptions:true});
       decoded=hskParallelDecode_(response);
     }catch(e){
       var reason=String(e.message||'batch_transport_uncertain').replace(/[^a-z0-9_]/gi,'_').slice(0,90),attempts=e.providerAttempts===undefined?1:e.providerAttempts,delay=Math.max(60000,Number(e.retryAfter||600)*1000);
@@ -155,7 +157,7 @@ function hskWarmIsolatedTick(){
       if(e.diagnostic)p.setProperty('HSK_WARM_LAST_DIAGNOSTIC',JSON.stringify(e.diagnostic));
       row[3]=retryable?'FAILED':'REVIEW';row[4]=reason;journal.getRange(rowNumber,1,1,7).setValues([row]);
       jobs.forEach(function(j){hskParallelQueue_(queue,deferred,j.index,j.text,reason,retryable,delay,keyOnly?0:attempts);});
-      p.setProperty('HSK_WARM_SLOT_'+slot+'_AFTER',String(now+delay));p.setProperty('HSK_WARM_LAST_ERROR',reason);p.setProperty('HSK_WARM_RETRY_AT',String(now+60000));
+      if(multi){p.setProperty(hskVoiceModelPairAfterKey_(slot,model),String(now+delay));if(/tts_key_invalid|tts_permission_denied/.test(reason))p.setProperty('HSK_WARM_SLOT_'+slot+'_AFTER',String(now+delay));}else p.setProperty('HSK_WARM_SLOT_'+slot+'_AFTER',String(now+delay));p.setProperty('HSK_WARM_LAST_ERROR',reason);p.setProperty('HSK_WARM_RETRY_AT',String(now+60000));
       if(!retryable)p.setProperty('HSK_WARM_ENABLED','false');return;
     }
     ['HSK_WARM_VENDOR_CALLS','HSK_WARM_CALLS'].forEach(function(k){p.setProperty(k,String(Number(p.getProperty(k)||0)+decoded.providerAttempts));});
@@ -163,7 +165,7 @@ function hskWarmIsolatedTick(){
     row[2]=master.getId();row[3]='MASTER';journal.getRange(rowNumber,1,1,7).setValues([row]);SpreadsheetApp.flush();
     var saved;try{saved=hskBatchCommit_(storage,journal,rowNumber,row,queue,deferred);}catch(e){if(/^batch_segment_count_mismatch$|^batch_unstable_boundaries$|^batch_silent_audio$/.test(String(e.message))){if(e.message==='batch_segment_count_mismatch'&&hskPartialHandleMismatch_(storage,journal,rowNumber,row,queue,deferred,p))return;hskBatchReject_(journal,rowNumber,row,queue,deferred,p,e.message);return;}throw e;}
     p.setProperty('HSK_WARM_CURSOR',String(cursor));p.setProperty('HSK_WARM_SAVED_SINCE_FIX',String(Number(p.getProperty('HSK_WARM_SAVED_SINCE_FIX')||0)+saved));
-    p.setProperty('HSK_WARM_SLOT_'+slot+'_AFTER',String(Date.now()+90000));p.deleteProperty('HSK_WARM_LAST_ERROR');p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+90000));
+    if(multi){p.setProperty(hskVoiceModelPairAfterKey_(slot,model),String(Date.now()+90000));p.setProperty('HSK_WARM_MODEL_CURSOR',String((hskVoiceFreeModelIds_().indexOf(model)+1)%hskVoiceFreeModelIds_().length));}else p.setProperty('HSK_WARM_SLOT_'+slot+'_AFTER',String(Date.now()+90000));p.deleteProperty('HSK_WARM_LAST_ERROR');p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+90000));
   }catch(e){p.setProperty('HSK_WARM_LAST_ERROR',/^batch_/.test(String(e.message))?e.message:'batch_storage_or_runtime_error');p.setProperty('HSK_WARM_ENABLED','false');}
   finally{p.setProperty('HSK_WARM_RUNTIME_MS',String(Number(p.getProperty('HSK_WARM_RUNTIME_MS')||0)+Date.now()-started));p.setProperty('HSK_WARM_LAST_RUN',new Date().toISOString());try{if(storage)hskWarmProgress_(storage,p);}finally{lock.releaseLock();}}
 }

@@ -20,6 +20,16 @@ Generated WarmCorpus.gs is pushed via clasp. corpus.json is local-only inspectio
 4. Monitor `hskWarmStatus` in the editor (completed/remaining/configuredKeys); inspect the Kho_Voice sheet. To stop, run `hskWarmStop`; resume by running `hskWarmStart`. Store cursor and hashes prevent duplicate billing or restart from zero.
 5. If it pauses on all keys exhausted or vendor error, check `hskWarmStatus`, API quota in AI Studio, then resume. Script itself never creates chargeable key or enables billing.
 
+## Multi-model TTS (opt-in, backend branch)
+
+Supported free-tier generation targets: `gemini-2.5-flash-preview-tts` (baseline), `gemini-3.1-flash-tts-preview`, `gemini-3.8-flash-lite-tts` (bulk throughput), and `gemini-3.8-flash-tts` (difficult pronunciation/quality). Google **Gemini 3.5 Flash is NOT a TTS model**; `gemini-3.5-transcribe` is speech-to-text and may be integrated as a separate pronunciation verifier, not as voice generation. `gemini-2.5-pro-preview-tts` has no free tier and is disabled unless the Worker has an explicit paid opt-in.
+
+Google 3.8 audio uses the Interactions API (`/v1beta/interactions`) instead of the legacy `models/*:generateContent` request/response. The Worker uses separate validated adapters and refuses unsupported models. A per-model Durable Object pool tracks server-side key cooldown. Separate namespaced cooldowns **do not guarantee additive RPD**: any per-project or cross-model restriction returned by Google must still be respected.
+
+After the matching Worker is deployed and Apps Script source is synced with the active project, call `hskWarmEnableFreeModelRotation()` once to opt in to scheduled multi-model routing. This only changes a script property; it doesn't start another scheduler, regenerate successful cache entries, or enable billing. `hskWarmDisableFreeModelRotation()` returns to legacy routing. The existing `hskWarmTick` trigger chooses healthy key/model pairs, respects model-pair cooldowns and keeps a separate audio hash for each model; it reuses any existing READY audio of the same text across supported models. Until live 3.8 validation, scheduled 3.8 batches default to one item to avoid mismatched split boundaries.
+
+Offline tests: `node test-model-rotation.cjs` and `node --test server/voice-model-router.test.mjs` (from repository root). Real provider RPD and free-tier eligibility are account/project/model-specific; never rotate keys to bypass hard restrictions.
+
 ## Safety
 - V8 source includes no credentials; keys and gateway token reside in Script Properties, not the PWA.
 - Do NOT deploy a public web app without Cloudflare Worker authenticating Firebase callers and handling quotas.

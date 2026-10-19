@@ -45,7 +45,7 @@ export function createGeminiKeyFetch(fetchFn,env,{now=()=>Date.now(),state={curs
  };
  let idsPromise;
  const requestWithKeys=async(url,init={})=>{
-  if(!String(url).startsWith('https://generativelanguage.googleapis.com/v1beta/models/'))return fetchFn(url,init);
+  if(!String(url).startsWith('https://generativelanguage.googleapis.com/v1beta/models/')&&!(namespace.startsWith('hsk-tts-model-v1:')&&String(url)==='https://generativelanguage.googleapis.com/v1beta/interactions'))return fetchFn(url,init);
   const canceled=()=>{if(init.signal?.aborted)throw new DOMException('Canceled','AbortError');};
   canceled();
   if(!keys.length)return Response.json({error:{status:'UNAVAILABLE'}},{status:503});
