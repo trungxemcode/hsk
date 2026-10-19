@@ -27,6 +27,10 @@ function hskVoiceControlPoll_(p){
   }
   p.setProperty('HSK_VOCAB_ENABLED','false');
   p.setProperty('HSK_WARM_ENABLED','false');
+  if(command==='RECOVER_50'){
+   var progress=book.getSheetByName('Tien_do_tu_vung');
+   if(progress)progress.getRange(2,2).setValue('Đang xác minh master (không tạo TTS)');
+  }
   triggers.filter(function(t){return t.getHandlerFunction()==='hskVocabTick';})
    .forEach(function(t){ScriptApp.deleteTrigger(t);});
   if(command==='PAUSE'){
