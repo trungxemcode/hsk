@@ -8,7 +8,7 @@ function hskVoiceControlPoll_(p){
  var control=book.getSheetByName('Voice_Control');
  if(!control)return false;
  if(typeof hskShared50QueuedCommand_==='function')hskShared50QueuedCommand_(p,control);
- var shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());
+ var shared;try{control.getRange(27,1,1,2).setValues([['Test_last_poll',new Date().toISOString()]]);shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());}catch(e){control.getRange(18,2).setValue('SHARED50_ERROR');control.getRange(19,2).setValue(String(e.message||'shared_error').slice(0,120));return true;}
  if(shared!==null)return shared;
  var command=String(control.getRange(2,2).getValue()||'').trim();
  if(['PAUSE','RECOVER_50','RUN_VOCAB'].indexOf(command)<0)return false;
@@ -67,8 +67,8 @@ function hskVoiceControlPoll_(p){
   return true;
  }finally{lock.releaseLock();}
 }
-function hskVoiceControlTick(){return hskVoiceControlPoll_(hskSettings_());}
-function hskVoiceControlFastTick(){return hskVoiceControlPoll_(hskSettings_());}
+function hskVoiceControlTick(){var p=hskSettings_(),handled=hskVoiceControlPoll_(p);if(handled===false&&p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'&&p.getProperty('HSK_VOCAB_ENABLED')==='true')return hskVocabTick();return handled;}
+function hskVoiceControlFastTick(){var p=hskSettings_(),handled=hskVoiceControlPoll_(p);if(handled===false&&p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'&&p.getProperty('HSK_VOCAB_ENABLED')==='true')return hskVocabTick();return handled;}
 function hskVoiceRecHanzi_(x){return String(x||'').normalize('NFKC').replace(/[\s\p{P}\p{S}]/gu,'').trim();}
 function hskVoiceRecPinyin_(x){return String(x||'').normalize('NFC').toLowerCase().replace(/[\s\p{P}]/gu,'');}
 function hskVoiceRecoverTick_(p,book,control){

@@ -31,3 +31,6 @@ Do not push stale hsk-long-pilot or hsk-voice-exec-refresh sources over this pro
 ## Tests
 
 Run test-shared50.cjs, test-voice-control.cjs and the required feature preservation/runtime checks. Synthetic splitting tests are not evidence of provider audio quality.
+
+## Live result 2026-10-19
+The shared Commander entry produced a real 66.61095833-second master and saved 50 individually numbered preview WAVs. The strict vocabulary verifier returned vocab_pause_or_count_mismatch, so these 50 remain UNVERIFIED in a separate Drive folder and were not promoted to READY. The one-shot stopped after that master; no automatic regeneration. Requested separation was reduced to the existing one-second literal-transcript style for this pilot; it does not demonstrate four-second gaps.

@@ -173,4 +173,3 @@ Do not store secrets, API keys, personal data, or entire chat logs. This file is
 - Voice_Control B15:B26 belongs to one-shot tests; B2 remains older recovery command. Fresh clasp pull + adapter merge prevents stale source replacement. A shared local lock serializes the two clients.
 - New commands join an in-flight one-shot instead of making another master. Preserve all existing READY records and provider cooldowns. Preview cuts are UNVERIFIED; cache promotion still requires blind double ASR.
 - Validation: shared command/known master/partial preview tests, existing controller tests, feature contracts and mobile/desktop runtime. Live provider outcome belongs in README-SHARED50.md after completion.
-
