@@ -215,6 +215,14 @@ function hskAuto50Poll_(p,book,control){
  if(p.getProperty('HSK_VOICE_PAUSED')==='true'){
   control.getRange(6,2).setValue('AUTO_CYCLE_PAUSED');return true;
  }
+ // One-time migration of a definitively invalid chunk request payload (HTTP 400).
+ // Do not clear unrelated provider cooldowns, ASR backoffs or ambiguous failures.
+ if(p.getProperty('HSK_VOCAB_CHUNK_SCHEMA')!=='short_text_v2'){
+  p.setProperty('HSK_VOCAB_CHUNK_SCHEMA','short_text_v2');
+  if(p.getProperty('HSK_VOCAB_ERROR')==='cloudflare_tts_400_request_failed'){
+   p.deleteProperty('HSK_VOCAB_RETRY_AT');p.deleteProperty('HSK_VOCAB_ERROR');
+  }
+ }
  // The previous internal 60/75-minute and 100-call caps are now disabled.
  // Clear only the backoff created by those obsolete caps. Never override provider cooldowns.
  if(p.getProperty('HSK_AUTO50_RUNTIME_POLICY')!=='NO_INTERNAL_DAILY_CAP_V1'){

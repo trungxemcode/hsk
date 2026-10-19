@@ -39,7 +39,8 @@ test('a saved first chunk is reused and next TTS request covers only remaining w
  w.ctx.UrlFetchApp={fetch:(url,args)=>{body=JSON.parse(args.payload);return {getResponseCode:()=>200,getContentText:()=>''};}};
  w.ctx.hskParallelDecode_=()=>({bytes:[3,4,5,6],providerAttempts:1});
  w.call();
- assert.deepEqual(body.items,['word10','word11']);
+ assert.equal(body.text,'word10?word11');
+ assert.equal(body.items,undefined);
  assert.equal(w.fileMap.has('VOCAB_CHUNK_id_1.wav'),true);
  assert.equal(w.batch[3],'TTS_CHUNKS');
  assert.equal(w.p.getProperty('HSK_VOCAB_TTS_CALLS'),'1');

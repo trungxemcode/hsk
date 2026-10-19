@@ -54,6 +54,11 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   return;
  }
  var start=missing*size,subset=jobs.slice(start,start+size),now=Date.now();
+ // Match the deployed shared Worker's proven short-text contract; only large pieces use items.
+ var chunkText=subset.map(function(j){return j.text;}).join('?');
+ var chunkPayload=Array.from(chunkText).length<=220?
+  {text:chunkText,isolated:true,keySlot:batch[6],model:batch[7],language:'zh-CN'}:
+  {items:subset.map(function(j){return j.text;}),isolated:true,keySlot:batch[6],model:batch[7],language:'zh-CN',pauseSeconds:1};
  // A request is journaled before the network call. Definitive provider failures
  // may be retried; ambiguous transport failures MUST be quarantined.
  attempts[missing]=used+1;info.attempts=attempts;info.lastChunk=missing;
@@ -62,8 +67,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
  try{
   response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',
    headers:{Authorization:'Bearer '+token},
-   payload:JSON.stringify({items:subset.map(function(j){return j.text;}),isolated:true,
-    keySlot:batch[6],model:batch[7],language:'zh-CN',pauseSeconds:1}),
+   payload:JSON.stringify(chunkPayload),
    muteHttpExceptions:true});
  }catch(e){
   batch[3]='UNCERTAIN';batch[4]='tts_chunk_transport_uncertain_'+missing;write();
