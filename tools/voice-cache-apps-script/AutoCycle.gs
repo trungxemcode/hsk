@@ -36,7 +36,7 @@ function hskAuto50Detect_(master,expected){
   var score=Math.abs(ranges.length-expected)*100+Math.abs(gap-0.55)*6+factor*4;
   if(!selected||score<selected.score)selected={ranges:ranges,score:score,gap:gap,ratio:factor};
  });});
- if(!selected||selected.ranges.length<20||selected.ranges.length>expected+5)throw Error('auto50_unreliable_segmentation');
+ if(!selected||selected.ranges.length<Math.min(20,expected)||selected.ranges.length>expected+5)throw Error('auto50_unreliable_segmentation');
  return {ranges:selected.ranges,duration:pcm.length/48000,gap:selected.gap,ratio:selected.ratio};
 }
 /** Opt-in remote segmentation; fail safely back to local CPU detection. */
