@@ -89,14 +89,22 @@ function hskVoiceRecoverTick_(p,book,control){
  try{
   p.setProperty('HSK_VOCAB_ASR_CALLS',String(Number(p.getProperty('HSK_VOCAB_ASR_CALLS')||0)+2));
   result=hskVocabCall_(ScriptApp.getIdentityToken(),{action:'verify-words',keySlot:batch[6],items:selected.map(function(j){return j.text;}),pinyin:selected.map(function(j){return j.pinyin;}),clips:clips});
+  if(!Array.isArray(result.transcripts)||result.transcripts.length!==2||!Array.isArray(result.pinyin)||result.pinyin.length!==2)throw Error('invalid_asr_response');
  }catch(error){
-  p.setProperty('HSK_VOICE_CONTROL_AFTER',String(Date.now()+900000));
-  control.getRange(6,2).setValue('WAITING_ASR_RETRY');
+  var failures=Number(p.getProperty('HSK_VOICE_CONTROL_ASR_FAILURES')||0)+1;
+  p.setProperty('HSK_VOICE_CONTROL_ASR_FAILURES',String(failures));
   control.getRange(13,2).setValue(String(error.message||'asr_unavailable').replace(/[^a-z0-9_]/gi,'_').slice(0,90));
+  if(failures>=3){
+   control.getRange(2,2).setValue('PAUSE');
+   control.getRange(6,2).setValue('ASR_PAUSED_AFTER_3_PROVIDER_FAILURES');
+   p.deleteProperty('HSK_VOICE_CONTROL_AFTER');
+  }else{
+   p.setProperty('HSK_VOICE_CONTROL_AFTER',String(Date.now()+900000));
+   control.getRange(6,2).setValue('WAITING_ASR_RETRY_'+failures+'_OF_3');
+  }
   return;
  }
- if(!Array.isArray(result.transcripts)||result.transcripts.length!==2||!Array.isArray(result.pinyin)||result.pinyin.length!==2)
-  throw Error('invalid_asr_response');
+ p.deleteProperty('HSK_VOICE_CONTROL_ASR_FAILURES');
  candidates.forEach(function(candidate,k){
   var i=candidate.i,r=candidate.row,heard1=String(result.transcripts[0][k]||''),heard2=String(result.transcripts[1][k]||''),
    pin1=String(result.pinyin[0][k]||''),pin2=String(result.pinyin[1][k]||'');
