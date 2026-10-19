@@ -1,6 +1,12 @@
 /** Shared one-shot command for Plus/Work. Existing Google owner executes; no public endpoint. */
 function hskShared50Pair_(token,now){
  var p=hskSettings_(),models=['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview'],all=[];
+ // Cloudflare is not a dependency for opening a new batch during DIRECT failover.
+ if(typeof hskVoiceFailoverMode_==='function'&&hskVoiceFailoverMode_(p)==='DIRECT'){
+  if(typeof hskVoiceFailoverKeyCount_==='function'&&hskVoiceFailoverKeyCount_(p)>0)
+   return {slot:0,model:'gemini-3.1-flash-tts-preview',mi:1};
+  return null;
+ }
  models.forEach(function(model,mi){hskVocabCall_(token,{action:'status',model:model}).slots.forEach(function(s){
   if(!Number(s.retryAfter)&&Number(p.getProperty('HSK_VOCAB_PAIR_'+s.slot+'_'+model+'_AFTER')||0)<=now)
    all.push({slot:s.slot,model:model,mi:mi});
