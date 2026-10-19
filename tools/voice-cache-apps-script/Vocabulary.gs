@@ -35,6 +35,7 @@ function hskVocabStart(){
 }
 function hskVocabStop(){hskSettings_().setProperty('HSK_VOCAB_ENABLED','false');ScriptApp.getProjectTriggers().filter(function(t){return t.getHandlerFunction()==='hskVocabTick';}).forEach(function(t){ScriptApp.deleteTrigger(t);});}
 function hskVocabCall_(token,body){
+ body=hskAsrPrepareBody_(body);
  var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(body),muteHttpExceptions:true});
  var data;try{data=JSON.parse(response.getContentText());}catch(e){throw Error('response_uncertain');}
  if(response.getResponseCode()!==200||!data.ok){var error=Error(String(data.error||'provider_failure'));error.detail=data;throw error;}return data;

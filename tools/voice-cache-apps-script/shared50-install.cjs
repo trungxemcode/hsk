@@ -26,6 +26,13 @@ module.exports=function install(dir){
    "payload:JSON.stringify(p.getProperty('HSK_SHARED50_LITERAL')==='true'&&p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'&&Array.from(jobs.map(function(j){return j.text;}).join('。')).length<=220?{text:jobs.map(function(j){return j.text;}).join('。'),isolated:true,keySlot:slot,model:model,language:'zh-CN'}:{items:jobs.map(function(j){return j.text;}),isolated:true,keySlot:slot,model:model,language:'zh-CN',pauseSeconds:pause})");
  }
  fs.writeFileSync(f,s);
+ fs.copyFileSync(path.join(__dirname,'AsrSilence.gs'),path.join(dir,'AsrSilence.js'));
+ let vf=path.join(dir,'Vocabulary.js'),vs=fs.readFileSync(vf,'utf8');
+ if(!vs.includes('body=hskAsrPrepareBody_(body)'))vs=vs.replace('function hskVocabCall_(token,body){','function hskVocabCall_(token,body){\n body=hskAsrPrepareBody_(body);');
+ fs.writeFileSync(vf,vs);
+ let cf=path.join(dir,'VoiceControl.js'),cs=fs.readFileSync(cf,'utf8');
+ if(!cs.includes('hskAsrPaddingAudit_(p,control)'))cs=cs.replace(' if(!control)return false;', " if(!control)return false;\n try{hskAsrPaddingAudit_(p,control);}catch(e){control.getRange(29,1,1,2).setValues([['ASR_silence_audit',String(e.message||'audit_failed').slice(0,100)]]);}");
+ fs.writeFileSync(cf,cs);
  for(const name of ['Shared50.js','Vocabulary.js','VoiceControl.js'])new(require('vm').Script)(fs.readFileSync(path.join(dir,name),'utf8'),{filename:name});
 };
 if(require.main===module){module.exports(process.argv[2]);console.log('Merged shared adapter into fresh Google source, preserving recovery changes.');}

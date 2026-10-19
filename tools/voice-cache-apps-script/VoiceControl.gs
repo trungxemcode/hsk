@@ -7,6 +7,7 @@ function hskVoiceControlPoll_(p){
  var book=SpreadsheetApp.openById(p.getProperty('HSK_VOICE_SHEET_ID'));
  var control=book.getSheetByName('Voice_Control');
  if(!control)return false;
+ try{hskAsrPaddingAudit_(p,control);}catch(e){control.getRange(29,1,1,2).setValues([['ASR_silence_audit',String(e.message||'audit_failed').slice(0,100)]]);}
  if(typeof hskShared50QueuedCommand_==='function')hskShared50QueuedCommand_(p,control);
  var shared;try{control.getRange(27,1,1,2).setValues([['Test_last_poll',new Date().toISOString()]]);shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());}catch(e){control.getRange(18,2).setValue('SHARED50_ERROR');control.getRange(19,2).setValue(String(e.message||'shared_error').slice(0,120));return true;}
  if(shared!==null)return shared;

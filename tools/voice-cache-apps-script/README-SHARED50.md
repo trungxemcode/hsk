@@ -34,3 +34,7 @@ Run test-shared50.cjs, test-voice-control.cjs and the required feature preservat
 
 ## Live result 2026-10-19
 The shared Commander entry produced a real 66.61095833-second master and saved 50 individually numbered preview WAVs. The strict vocabulary verifier returned vocab_pause_or_count_mismatch, so these 50 remain UNVERIFIED in a separate Drive folder and were not promoted to READY. The one-shot stopped after that master; no automatic regeneration. Requested separation was reduced to the existing one-second literal-transcript style for this pilot; it does not demonstrate four-second gaps.
+
+## ASR silence padding
+AsrSilence.gs inserts up to 2 seconds of zero PCM on each side of each verify-words clip in the outbound request only. It keeps the original speech byte-identical and never alters the saved clip. Padding shrinks to respect the Worker's 350,000-character per-clip and 650,000-character aggregate base64 limits. Hanzi/pinyin double-ASR agreement is still required; silence itself proves no pronunciation quality.
+The next existing owner trigger audits one saved preview without a TTS or ASR provider call; Voice_Control A29:B29 records measured duration, actual padding and byte preservation.
