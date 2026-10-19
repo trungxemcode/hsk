@@ -51,7 +51,8 @@ function hskLongPilotAnalyze(){
  var preview=candidates.filter(function(s){return s.length===JSON.parse(row[1]).length;})[0];
  if(preview&&preview.length){
  var name='UNVERIFIED_LONG_CUTS_'+row[0],folders=storage.folder.getFoldersByName(name);folder=folders.hasNext()?folders.next():storage.folder.createFolder(name);
- preview.forEach(function(s,i){var clipName='segment_'+('000'+(i+1)).slice(-3)+'.wav';if(!folder.getFilesByName(clipName).hasNext()){var raw=pcm.slice(Math.max(0,s[0]-2880)*2,Math.min(pcm.length/2,s[1]+4800)*2);folder.createFile(Utilities.newBlob(hskWav_(raw,'audio/l16'),'audio/wav',clipName));}saved++;});
+ var existingFiles=folder.getFiles(),existingNames=new Set();while(existingFiles.hasNext())existingNames.add(existingFiles.next().getName());
+ preview.forEach(function(s,i){var clipName='segment_'+('000'+(i+1)).slice(-3)+'.wav';if(!existingNames.has(clipName)){var raw=pcm.slice(Math.max(0,s[0]-2880)*2,Math.min(pcm.length/2,s[1]+4800)*2);folder.createFile(Utilities.newBlob(hskWav_(raw,'audio/l16'),'audio/wav',clipName));}saved++;});
  }
  var duration=pcm.length/48000;
  console.log(JSON.stringify({durationSeconds:duration,inRequestedRange:duration>=300&&duration<=480,bytes:bytes.length,expected:JSON.parse(row[1]).length,segmentCounts:candidates.map(function(s){return s.length;}),stableBoundaries:stable,candidateClips:saved,verifiedClips:0,masterUrl:master.getUrl(),cutsUrl:folder?folder.getUrl():null,providerCalls:0}));

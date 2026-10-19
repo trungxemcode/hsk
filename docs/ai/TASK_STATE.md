@@ -238,3 +238,8 @@ Do not store secrets, API keys, personal data, or entire chat logs. This file is
 - Original noise thresholds detected 147 / 174 / 180 segments. Additional long-only thresholds still failed boundary agreement, so zero clips were indexed READY.
 - Added isolated unverified preview cuts selected only from an expected-count segmentation; no automatic association with dictionary words. Preview save started 09:13:25 local. Final result pending at checkpoint.
 - 261 server tests pass, including long quiet-background-noise splitting and wrong-count rejection.
+
+### Completed 09:18:39 local
+- Saved all 180 candidate preview WAV files in a separate UNVERIFIED folder. Confirmed duration 300.210958 seconds; threshold counts 147 / 174 / 180 / 180 / 180 / 180 / 180, but boundary agreement still fails. Zero entries added as verified READY. No provider calls during analysis/cutting.
+- User proposes 3–4-second gaps. Explained that longer silence improves boundary separation but prompt timing must be measured; no new pause-controlled generation submitted yet.
+- Preview saving completed in about 5m14s; local helper now lists existing names once to reduce repeated Drive queries on future resumes.
