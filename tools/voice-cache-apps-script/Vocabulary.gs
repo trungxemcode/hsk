@@ -63,7 +63,7 @@ function hskVocabRanges_(bytes,expected){
 function hskVocabTick(){
  var p=hskSettings_(),now=Date.now();
  if(typeof hskVoiceControlPoll_==='function'&&hskVoiceControlPoll_(p))return;
- if(p.getProperty('HSK_VOCAB_ENABLED')!=='true'||p.getProperty('HSK_VOICE_PAUSED')==='true'||Number(p.getProperty('HSK_VOCAB_RETRY_AT')||0)>now)return;
+ if(p.getProperty('HSK_VOCAB_ENABLED')!=='true'||p.getProperty('HSK_VOICE_PAUSED')==='true')return;
  var lock=LockService.getScriptLock();if(!lock.tryLock(100))return;var started=Date.now(),storage,tables;
  try{
  var win=Number(p.getProperty('HSK_VOCAB_WINDOW')||0);if(!win||now>=win+86400000){p.setProperty('HSK_VOCAB_WINDOW',String(now));p.setProperty('HSK_VOCAB_RUNTIME_MS','0');p.setProperty('HSK_VOCAB_WINDOW_CALLS','0');win=now;}
@@ -74,6 +74,10 @@ function hskVocabTick(){
   var trial=batches.find(function(b){return b[0]===p.getProperty('HSK_VOCAB_PILOT_ID');});
   if(trial&&['DONE','PARTIAL','REVIEW','REJECTED','UNCERTAIN'].indexOf(trial[3])>=0){hskVocabStop();return;}
  }
+ // Reopen only a proven chunk-journal REJECTED batch, salvaging its saved WAVs.
+ if(typeof hskVoiceChunkedResumeRejected_==='function'&&hskVoiceChunkedResumeRejected_(p,storage,tables,batches))return;
+ // Provider cooldown still applies to new TTS/ASR calls; recovery bookkeeping is safe above.
+ if(Number(p.getProperty('HSK_VOCAB_RETRY_AT')||0)>now)return;
  var active=batches.findIndex(function(b){return ['TTS_CHUNKS','MASTER','VERIFY','AUTO_VERIFY'].indexOf(b[3])>=0;});
  if(active>=0){
   if(batches[active][3]==='TTS_CHUNKS'){hskVoiceChunkedStep_(p,storage,tables,rows,batches,active,token);return;}
