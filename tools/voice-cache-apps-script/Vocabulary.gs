@@ -109,6 +109,7 @@ function hskVocabTickWork_(){
  var existing=hskVocabRows_(storage.sheet,13),ready=new Map();existing.forEach(function(r){if(r[11]==='READY'&&r[4])ready.set(String(r[0]),r);});
  rows.forEach(function(r,i){if(['PENDING','RETRY'].indexOf(r[3])<0)return;var found=hskVoiceTtsModels_().map(function(m){return ready.get(hskVocabKey_(m,r[1]));}).find(Boolean);if(found){r[3]='EXISTING';r[7]=found[3];r[9]=found[4];r[16]='https://drive.google.com/file/d/'+found[4]+'/view';hskVocabWrite_(tables.queue,i,r);}});
  var pending=rows.map(function(r,i){return {r:r,i:i};}).filter(function(x){return ['PENDING','RETRY'].indexOf(x.r[3])>=0&&Number(x.r[5]||0)<=now;});
+ if(typeof hskVoicePhasedCandidates_==='function')pending=hskVoicePhasedCandidates_(pending,p);
  if(p.getProperty('HSK_AUTO50_ENABLED')==='true')pending=hskAuto50Choose_(pending);
  else pending.sort(function(a,b){return Number(a.r[0])-Number(b.r[0])||(String(a.r[1]).length<2?1:0)-(String(b.r[1]).length<2?1:0)||Number(a.r[4])-Number(b.r[4])||a.i-b.i;});
  if(!pending.length){var waiting=rows.some(function(r){return ['PENDING','RETRY'].indexOf(r[3])>=0;});if(!waiting)hskVocabStop();return;}

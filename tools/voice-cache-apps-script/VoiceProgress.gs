@@ -38,6 +38,8 @@ function hskVoiceProgressRefresh_(storage,p){
 }
 /** Keep the existing owner trigger and entry point. Refresh even on early return or failure. */
 function hskVocabTick(){
+ if(typeof hskVoicePhasedTick_==='function'&&hskVoicePhasedTick_())return;
+ if(hskSettings_().getProperty('HSK_PHASE_AUTO_20261020_V1')!=='true'&&typeof hskQualityTrialTick_==='function'&&hskQualityTrialTick_())return;
  try{return hskVocabTickWork_();}
  finally{try{hskVoiceProgressRefresh_();}catch(e){console.warn('voice_progress_refresh_failed');}}
 }

@@ -15,12 +15,32 @@ function hskVoiceControlPoll_(p){
  var command=String(control.getRange(2,2).getValue()||'').trim();
  if(['PAUSE','RECOVER_50','RUN_VOCAB','AUTO_CYCLE'].indexOf(command)<0)return false;
  if(command==='AUTO_CYCLE'){
+  // One-time owner-approved resume after converting an existing one-shot into AUTO_CYCLE.
+  // During RUN_ONCE_50 the shared flow disabled warm without setting HSK_VOICE_PAUSED;
+  // the old conditional resume therefore left Kho_Voice permanently stopped.
+  if(p.getProperty('HSK_AUTO_RESUME_BOTH_20261020_V1')!=='true'){
+   p.setProperty('HSK_AUTO_RESUME_BOTH_20261020_V1','true');
+   p.setProperty('HSK_WARM_ENABLED','true');
+   p.setProperty('HSK_VOCAB_ENABLED','true');
+   p.setProperty('HSK_AUTO50_ENABLED','true');
+   p.setProperty('HSK_VOICE_PAUSED','false');
+   if(!ScriptApp.getProjectTriggers().some(function(t){return t.getHandlerFunction()==='hskWarmTick';}))
+    ScriptApp.newTrigger('hskWarmTick').timeBased().everyMinutes(1).create();
+  }
   // Explicit sheet resume re-enables the queue, but not the separate shared one-shot flow.
-  if(p.getProperty('HSK_VOICE_PAUSED')==='true')p.setProperty('HSK_VOICE_PAUSED','false');
+  if(p.getProperty('HSK_VOICE_PAUSED')==='true'){
+   p.setProperty('HSK_VOICE_PAUSED','false');
+   p.setProperty('HSK_WARM_ENABLED','true');
+   p.setProperty('HSK_VOCAB_ENABLED','true');
+   p.setProperty('HSK_AUTO50_ENABLED','true');
+   var resumeTriggers=ScriptApp.getProjectTriggers();
+   if(!resumeTriggers.some(function(t){return t.getHandlerFunction()==='hskWarmTick';}))
+    ScriptApp.newTrigger('hskWarmTick').timeBased().everyMinutes(1).create();
+  }
   // Separate, rate-limited repair of old Kho_Voice errors; never blocks HSK2-4 auto pipeline.
   if(typeof hskVoiceFailoverPoll_==='function')hskVoiceFailoverPoll_(p,book,control);
-  if(typeof hskVoice38CanaryTick_==='function')hskVoice38CanaryTick_(p,book,control);
-  if(typeof hskLegacyCacheRepairTick_==='function')hskLegacyCacheRepairTick_(p,book,control);
+   if(p.getProperty('HSK_PHASE_AUTO_20261020_V1')!=='true'&&typeof hskVoice38CanaryTick_==='function')hskVoice38CanaryTick_(p,book,control);
+   if(p.getProperty('HSK_PHASE_AUTO_20261020_V1')!=='true'&&typeof hskLegacyCacheRepairTick_==='function')hskLegacyCacheRepairTick_(p,book,control);
   return hskAuto50Poll_(p,book,control);
  }
  var lock=LockService.getScriptLock();

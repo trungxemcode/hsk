@@ -1057,6 +1057,16 @@
           "kind": "contains",
           "file": "tools/voice-cache-apps-script/test-quality-integration.cjs",
           "value": "unsegmentable saved chunk alone requeues"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/PhasedVocabularyAuto.gs",
+          "value": "var next={'234':'1','1':'5','5':'6','6':'DONE'}"
+        },
+        {
+          "kind": "file",
+          "file": "tools/voice-cache-apps-script/test-phased-auto.cjs",
+          "value": ""
         }
       ]
     }
