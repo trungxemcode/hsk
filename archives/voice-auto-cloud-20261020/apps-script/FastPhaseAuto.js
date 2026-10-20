@@ -4,6 +4,17 @@
  * historic batches are untouched. This module never calls a provider.
  * Sequence: existing HSK2/3/4 -> HSK1 -> HSK5 -> HSK6.
  */
+function hskFastPhasePolyphonic_(text) {
+ // Only words with multiple distinct dictionary pronunciations need a
+ // pronunciation-specific cache key; other legacy keys stay unchanged.
+ return ['长','还','葡萄','脾气','地道','嗯','小气','伺候'].indexOf(String(text))>=0;
+}
+function hskFastPhaseKey_(model,text,pinyin,level) {
+ // Preserve every legacy HSK2/3/4 cache key exactly as it was.
+ return ![2,3,4].includes(Number(level))&&hskFastPhasePolyphonic_(text)
+  ?hskDigest_(JSON.stringify(['zh-CN','Kore',model,String(text),hskVoiceRecPinyin_(pinyin)]))
+  :hskVocabKey_(model,text);
+}
 function hskFastPhaseLevels_(stage) {
  return stage==='234'?[2,3,4]:[Number(stage)];
 }

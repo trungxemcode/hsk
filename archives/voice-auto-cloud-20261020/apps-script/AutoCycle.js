@@ -74,10 +74,10 @@ function hskAuto50DetectRemote_(master,expected,token){
 }
 function hskAuto50Cache_(storage,job,masterId,bytes,slot,batchId,method){
  var duplicate=['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview'].map(function(model){
-  return hskGetRow_(storage.sheet,hskVocabKey_(model,job.text));
+  return hskGetRow_(storage.sheet,hskFastPhaseKey_(model,job.text,job.pinyin,job.level));
  }).find(function(hit){return hit&&hit.values[11]==='READY'&&hit.values[4];});
  if(duplicate)return {file:String(duplicate.values[4]),existing:true,model:String(duplicate.values[3])};
- var key=hskVocabKey_(job.model,job.text),old=hskGetRow_(storage.sheet,key);
+ var key=hskFastPhaseKey_(job.model,job.text,job.pinyin,job.level),old=hskGetRow_(storage.sheet,key);
  if(old&&old.values[11]==='READY'&&old.values[4])return {file:String(old.values[4]),existing:true,model:job.model};
  var filename='hsk-tts-'+key.slice(0,24)+'.wav',files=storage.folder.getFilesByName(filename);
  var file=files.hasNext()?files.next():storage.folder.createFile(Utilities.newBlob(bytes,'audio/wav',filename));
