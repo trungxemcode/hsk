@@ -169,6 +169,10 @@ function hskLegacyCacheRepairTick_(p,book,control){
   // combination. A failed word does not block unattempted legacy words.
   var generationModel=null,slot=-1,route=typeof hskVoiceFailoverMode_==='function'?hskVoiceFailoverMode_(p):'WORKER',direct=route==='DIRECT';
   var requested=String(p.getProperty('HSK_LEGACY_ITEM_'+t.index+'_NEXT_MODEL')||t.row[3]);
+  // One-shot production canary on an actual missing legacy word. Any WAV
+  // still requires blind double-ASR, and a failed request stays DEFERRED.
+  var canary38=String(control.getRange(94,4).getValue()||'')==='TRY_38_ONCE';
+  if(canary38)requested='gemini-3.8-flash-lite-tts';
   if(hskVoiceTtsModels_().indexOf(requested)<0)requested=hskVoiceTtsModels_()[0];
   if(direct&&typeof hskVoiceFailoverKeyCount_==='function'&&hskVoiceFailoverKeyCount_(p)>0){
    generationModel=requested;slot=0;
@@ -179,7 +183,8 @@ function hskLegacyCacheRepairTick_(p,book,control){
    });
    if(options.length){slot=options[0].slot;generationModel=options[0].model;}
   }
-  if(slot<0){next(60000,'tts_models_or_keys_cooling');return;}
+  if(slot<0){if(canary38)control.getRange(94,4).setValue('MODEL_3_8_NO_ELIGIBLE_KEY');next(60000,'tts_models_or_keys_cooling');return;}
+  if(canary38)control.getRange(94,4).setValue('MODEL_3_8_GENERATING_WORD_'+t.index);
   // Reserve durably before contacting Gemini.
   save(t,{10:slot,11:'REPAIR_REQUESTED',12:'tts_request_journaled_model_'+hskVoiceModelTag_(generationModel)});
   retryStatus(t,'PENDING','legacy_tts_repair_journaled');
@@ -214,6 +219,7 @@ function hskLegacyCacheRepairTick_(p,book,control){
   }
   try{if(!decoded)decoded=hskParallelDecode_(response);}catch(e){
    var reason=String(e.message||'tts_response_uncertain');
+   if(canary38)control.getRange(94,4).setValue('MODEL_3_8_FAILED_'+reason.slice(0,70));
    if(/response_uncertain|transport_uncertain/.test(reason)){
     save(t,{11:'UNCERTAIN',12:'tts_response_uncertain_no_duplicate'});
     retryStatus(t,'REVIEW','tts_response_uncertain_no_duplicate');
@@ -248,6 +254,7 @@ function hskLegacyCacheRepairTick_(p,book,control){
    hskBatchPcm_(decoded.bytes);
    var created=storage.folder.createFile(Utilities.newBlob(decoded.bytes,'audio/wav',name));
    save(t,{4:created.getId(),6:decoded.bytes.length,10:slot,11:'VERIFY_PENDING',12:'generated_model_'+hskVoiceModelTag_(generationModel)+'_pending_double_asr'});
+   if(canary38)control.getRange(94,4).setValue('MODEL_3_8_WAV_SAVED_ASR_PENDING_'+t.index);
    p.deleteProperty('HSK_LEGACY_ITEM_'+t.index+'_ATTEMPTS');
    next(90000,'tts_saved_'+t.index+'_awaiting_double_asr');
   }catch(e){

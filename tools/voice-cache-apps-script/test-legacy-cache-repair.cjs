@@ -10,10 +10,10 @@ function setup(){
  const rows=[27,30,67,68].map((i,j)=>[key(model,corpus[i]),'zh-CN','Kore',model,'','audio/wav',0,'time','time',0,0,j===1?'READY':'DEFERRED',j===1?'':'tts_provider_unavailable']);
  rows[1][4]='already-ready';rows[1][6]=888;
  const props=new Map();const fileMap=new Map(),retry=[];
- const saves=[], controlState={B2:'AUTO_CYCLE',B55:'ON'};
+ const saves=[], controlState={B2:'AUTO_CYCLE',B55:'ON',D94:''};
  const cache={getLastRow:()=>rows.length+1,getRange:(r,c,h,w)=>({getValues:()=>rows,getValue:()=>null,setValues:v=>{if(w===13){rows[r-2]=v[0];saves.push({at:r,values:v[0].slice()})}}})};
  const queue={getLastRow:()=>retry.length+1,getRange:(r,c,h,w)=>({getValues:()=>retry,setValues:v=>{retry[r-2]=v[0]}}),appendRow:r=>retry.push(r)};
- const control={getRange:(r,c,h,w)=>({getValue:()=>r===2?controlState.B2:r===55?controlState.B55:'',setValue:v=>{if(r===55)controlState.B55=v},setValues:v=>{}})};
+ const control={getRange:(r,c,h,w)=>({getValue:()=>r===2?controlState.B2:r===55?controlState.B55:r===94&&c===4?controlState.D94:'',setValue:v=>{if(r===55)controlState.B55=v;if(r===94&&c===4)controlState.D94=v},setValues:v=>{}})};
  const folder={getFilesByName:name=>({hasNext:()=>fileMap.has(name),next:()=>fileMap.get(name)}),createFile:blob=>{const f={getId:()=>blob.name,getBlob:()=>({getBytes:()=>blob.bytes})};fileMap.set(blob.name,f);return f;}};
  const env={Date,Array,Number,Math,String,Object,JSON,SpreadsheetApp:{flush:()=>{}},LockService:{getScriptLock:()=>({tryLock:()=>true,releaseLock:()=>{}})},ScriptApp:{getIdentityToken:()=>'identity'},
   hskVocabKey_:key,hskWarmCorpus_:()=>corpus,hskWarmQueue_:()=>queue,hskVocabRows_:sheet=>retry,
@@ -122,4 +122,17 @@ test('provider quota 429 after third attempt defers only failed word, respects 2
  assert.equal(w.rows[2][11],'VERIFY_PENDING');
  assert.ok(w.rows[2][4]);
  assert.equal(w.rows[0][11],'DEFERRED');
+});
+
+test('one-shot Gemini 3.8 canary uses an actually missing legacy word and saves unverified WAV',()=>{
+ const w=setup();w.controlState.D94='TRY_38_ONCE';let payload=null;
+ w.env.UrlFetchApp.fetch=(url,args)=>{payload=JSON.parse(args.payload);return {getResponseCode:()=>200,getContentText:()=>'{}'};};
+ w.run();
+ assert.equal(payload.model,'gemini-3.8-flash-lite-tts');
+ assert.equal(w.rows[0][11],'VERIFY_PENDING');
+ assert.match(w.rows[0][12],/generated_model_3_8_pending_double_asr/);
+ assert.equal(w.controlState.D94,'MODEL_3_8_WAV_SAVED_ASR_PENDING_27');
+ assert.ok(w.rows[0][4]);assert.equal(w.rows[1][4],'already-ready');
+ w.props.set('HSK_LEGACY_REPAIR_NEXT','0');w.run();
+ assert.equal(w.rows[0][11],'READY');
 });
