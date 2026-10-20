@@ -6,7 +6,7 @@ function build(){
  const rows=[[4,'别的','bié de','READY',0,0,'','','','old-file','','','', '', '', '', ''],
   [4,'生活','shēng huó','PENDING',0,0,'','','','','','','','','','',''],
   [4,'生命','shēng mìng','PENDING',0,0,'','','','','','','','','','','']];
- const cache=[],blobs=new Map();let ttsCalls=0,asrCalls=0,sheetsUpdated=0,exact=true,unknown=false,oversized=false;
+ const cache=[],blobs=new Map();let ttsCalls=0,asrCalls=0,sheetsUpdated=0,exact=true,unknown=false,oversized=false,longSpeech=false;
  const folder={getFilesByName:name=>({hasNext:()=>blobs.has(name),next:()=>blobs.get(name)}),createFile:blob=>{
    if(blobs.has(blob.name))throw Error('duplicate_file');
    const f={getId:()=>blob.name,getBlob:()=>({getBytes:()=>blob.bytes})};
@@ -32,7 +32,7 @@ function build(){
   hskBatchPcm_:bytes=>{assert.ok(bytes.length>44);return bytes;},
   hskParallelDecode_:response=>unknown?(()=>{throw Error('response_uncertain');})():{
     bytes:new Array(oversized?700000:120).fill(0),providerAttempts:1},
-  hskAuto50Detect_:()=>({ranges:[[1000,4500]]}),
+  hskAuto50Detect_:()=>({ranges:longSpeech?[[1000,160000]]:[[1000,4500]]}),
   hskWav_:pcm=>pcm,
   hskVocabCall_:(tok,body)=>{if(body.action==='verify-words'){asrCalls++;return {
     verification:'double_asr_exact',verified:[exact],
@@ -51,7 +51,7 @@ function build(){
  };
  vm.runInNewContext(source,env);
  return {p,env,queue,rows,cache,blobs,control,state,props,run:()=>env.hskVoice38CanaryTick_(p,{},control),
-  counts:()=>({ttsCalls,asrCalls,sheetsUpdated}),setExact:v=>exact=v,setUnknown:v=>unknown=v,setOversized:v=>oversized=v};
+  counts:()=>({ttsCalls,asrCalls,sheetsUpdated}),setExact:v=>exact=v,setUnknown:v=>unknown=v,setOversized:v=>oversized=v,setLongSpeech:v=>longSpeech=v};
 }
 test('real 3.8 route saves WAV first, then promotes only after blind double ASR',()=>{
  const x=build();
@@ -118,4 +118,23 @@ test('a new, different canary word does not resend the preceding UNCERTAIN word'
  assert.equal(x.rows[1][3],'CANARY38_HOLD');
  assert.equal(x.rows[2][3],'CANARY38_VERIFY');
  assert.equal(x.counts().ttsCalls,2);
+});
+
+test('salvages long 3.8 WAV already on Drive without a second TTS request, then double-ASR confirms',()=>{
+ const x=build();x.setOversized(true);x.setLongSpeech(true);
+ x.run();
+ assert.equal(x.state.command,'CANARY38_AUDIO_REVIEW');
+ assert.equal(x.rows[1][3],'REVIEW');
+ assert.ok(x.rows[1][9].includes('CANARY38_ORIGINAL_'));
+ assert.equal(x.counts().ttsCalls,1);
+ x.run();
+ assert.equal(x.state.command,'CANARY38_VERIFY');
+ assert.equal(x.rows[1][3],'CANARY38_VERIFY');
+ assert.equal(x.cache[0][11],'VERIFY_PENDING');
+ assert.ok(x.cache[0][6]<=245000);
+ assert.equal(x.counts().ttsCalls,1);
+ x.props.set('HSK_VOICE_38_CANARY_NEXT','0');x.run();
+ assert.equal(x.state.command,'CANARY38_CONFIRMED_DOUBLE_ASR_PREFERRED');
+ assert.equal(x.cache[0][11],'READY');
+ assert.equal(x.counts().ttsCalls,1);
 });

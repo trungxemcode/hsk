@@ -30,7 +30,7 @@ function hskVoice38CanaryTick_(p,book,control){
   var safeError=String(p.getProperty('HSK_VOICE_38_CANARY_LAST_ERROR')||'no_runtime_error_recorded').replace(/[^a-zA-Z0-9_:-]/g,'_').slice(0,115);
   control.getRange(95,3,1,2).setValues([['Canary38_last_error',safeError]]);
  }
- if(['RUN_38_HSK_ONCE','CANARY38_VERIFY','CANARY38_UNCERTAIN'].indexOf(command)<0&&
+ if(['RUN_38_HSK_ONCE','CANARY38_VERIFY','CANARY38_UNCERTAIN','CANARY38_AUDIO_REVIEW'].indexOf(command)<0&&
     command.indexOf('CANARY38_TTS_REQUESTED_')!==0)return;
  if(String(control.getRange(2,2).getValue()||'')!=='AUTO_CYCLE'||p.getProperty('HSK_VOICE_PAUSED')==='true')return;
  if(Number(p.getProperty('HSK_VOICE_38_CANARY_NEXT')||0)>Date.now())return;
@@ -147,6 +147,45 @@ function hskVoice38CanaryTick_(p,book,control){
    else storage.sheet.appendRow(record);
    row[3]='CANARY38_VERIFY';row[9]=file.getId();row[11]='canary38_wav_saved_pending_two_asr';
    hskVocabWrite_(list,idx,row);
+   control.getRange(94,4).setValue('CANARY38_VERIFY');
+   p.setProperty('HSK_VOICE_38_CANARY_NEXT',String(Date.now()+1000));
+   return;
+  }
+  if(command==='CANARY38_AUDIO_REVIEW'){
+   // Salvage the original 3.8 WAV without another TTS request. The source
+   // remains on Drive; only a short spoken excerpt goes through blind ASR.
+   if(!chosen||chosen.row[3]!=='REVIEW'||!chosen.row[9]){
+    control.getRange(94,4).setValue('CANARY38_NO_SAVED_SOURCE');return;
+   }
+   var source=DriveApp.getFileById(String(chosen.row[9])).getBlob().getBytes();
+   var samples=hskBatchPcm_(source),voice=hskAuto50Detect_(source,1);
+   if(!voice||!Array.isArray(voice.ranges)||voice.ranges.length!==1){
+    control.getRange(94,4).setValue('CANARY38_SOURCE_NOT_ONE_REGION');return;
+   }
+   var start=Math.max(0,voice.ranges[0][0]-2400);
+   var end=Math.min(samples.length/2,start+4*24000);
+   var excerpt=hskWav_(samples.slice(start*2,end*2),'audio/l16');
+   if(excerpt.length<=44||excerpt.length>245000){
+    control.getRange(94,4).setValue('CANARY38_EXCERPT_INVALID');return;
+   }
+   var sourceKey=hskVocabKey_(model,chosen.row[1]);
+   var shortName='hsk-tts-'+sourceKey.slice(0,24)+'.wav';
+   var shorter=storage.folder.getFilesByName(shortName);
+   var clipFile=shorter.hasNext()?shorter.next():storage.folder.createFile(
+    Utilities.newBlob(excerpt,'audio/wav',shortName));
+   var existing=hskGetRow_(storage.sheet,sourceKey),entry=[
+    sourceKey,'zh-CN','Kore',model,clipFile.getId(),'audio/wav',
+    excerpt.length,new Date().toISOString(),new Date().toISOString(),0,0,
+    'VERIFY_PENDING','canary38_salvaged_from_long_audio_pending_double_asr'
+   ];
+   if(existing)storage.sheet.getRange(existing.index,1,1,13).setValues([entry]);
+   else storage.sheet.appendRow(entry);
+   chosen.row[3]='CANARY38_VERIFY';chosen.row[9]=clipFile.getId();
+   chosen.row[11]='canary38_short_excerpt_pending_asr';
+   hskVocabWrite_(list,chosen.idx,chosen.row);
+   control.getRange(96,3,2,2).setValues([
+    ['Canary38_original_bytes',source.length],['Canary38_asr_clip_bytes',excerpt.length]
+   ]);
    control.getRange(94,4).setValue('CANARY38_VERIFY');
    p.setProperty('HSK_VOICE_38_CANARY_NEXT',String(Date.now()+1000));
    return;
