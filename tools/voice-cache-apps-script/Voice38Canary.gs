@@ -23,7 +23,7 @@ function hskVoice38CanaryTick_(p,book,control){
   }
   if(command==='RUN_38_HSK_ONCE'){
    if(!chosen){
-    var all=hskVocabRows_(list,17),preferred=['生活','生命','失败','世纪','适合'];
+    var all=hskVocabRows_(list,17),preferred=['正确','正常','直接','知识','语言','友好','生活','生命','失败','世纪','适合'];
     for(var i=0;i<preferred.length&&!chosen;i++){
      var j=all.findIndex(function(r){return r[1]===preferred[i]&&r[3]==='PENDING';});
      if(j>=0)chosen={idx:j,row:all[j]};
