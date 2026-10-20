@@ -1,0 +1,227 @@
+diff --git a/server/voice-tts.mjs b/server/voice-tts.mjs
+index 9e467da..ed585a6 100644
+--- a/server/voice-tts.mjs
++++ b/server/voice-tts.mjs
+@@ -59,41 +59,53 @@ export async function voiceProviderFailure(response){
+ }
+ // Independent Mandarin word verification; expected dictionary answers stay server-side
+ // and are never included in Gemini ASR requests.
+-async function hskVerifyVocabularyAudio(input,provider,signal){
+- const {clips,items,pinyin}=input;
+- let invalid='';
+- if(!Array.isArray(clips)||!Array.isArray(items)||!Array.isArray(pinyin))invalid='arrays';
+- else if(clips.length<1||clips.length>5||clips.length!==items.length||clips.length!==pinyin.length)invalid='count';
+- else if(items.some(w=>typeof w!=='string'||!w.trim()||Array.from(w).length>60))invalid='items';
+- else if(pinyin.some(w=>typeof w!=='string'||!w.trim()||w.length>140))invalid='pinyin';
+- else if(clips.some(s=>typeof s!=='string'||s.length<80||s.length>650000))invalid='clip_size';
+- else if(clips.some(s=>!s.startsWith('UklG')||s.length%4!==0||!/^[A-Za-z0-9+/]+={0,2}$/.test(s)))invalid='clip_format';
+- if(invalid)return {status:400,result:{ok:false,error:'invalid_verification_'+invalid}};
+- const endpoint='https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent';
+- const answers=[];
+- for(let pass=0;pass<2;pass++){
+-  const instruction=pass===0?
+-   'Transcribe each Mandarin Chinese audio clip independently and literally. Respond ONLY as JSON with two arrays: hanzi (spoken Chinese characters) and pinyin (Hanyu Pinyin with tone marks). Give one entry per numbered clip, empty string when unsure. Never infer unspoken words.':
+-   'Listen again independently. Identify precisely the Mandarin words you hear in each numbered WAV clip. Return ONLY a JSON object with equal-length hanzi and pinyin arrays, using accurate tone-marked Hanyu Pinyin. Leave uncertain entries blank; never guess.';
+-  const parts=[{text:instruction}];
+-  clips.forEach((clip,i)=>parts.push({text:'Clip '+(i+1)},{inlineData:{mimeType:'audio/wav',data:clip}}));
+-  let response;
+-  try{response=await provider(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+-   contents:[{role:'user',parts}],generationConfig:{responseMimeType:'application/json',temperature:0,maxOutputTokens:360}
+-  }),signal});}catch{return {status:503,result:{ok:false,error:'asr_provider_unavailable'}};}
+-  if(!response.ok)return {status:503,result:{ok:false,error:'asr_provider_unavailable'}};
+-  let parsed;
+-  try{
+-   const data=await response.json(),candidate=data?.candidates?.[0];
+-   if(candidate?.finishReason!=='STOP')throw Error('no_stop');
+-   parsed=JSON.parse((candidate.content?.parts||[]).map(p=>p.text||'').join(''));
+-  }catch{return {status:422,result:{ok:false,error:'asr_unverified_audio'}};}
+-  if(!Array.isArray(parsed?.hanzi)||!Array.isArray(parsed?.pinyin)||parsed.hanzi.length!==clips.length||parsed.pinyin.length!==clips.length
+-    ||parsed.hanzi.some(v=>typeof v!=='string'||v.length>90)||parsed.pinyin.some(v=>typeof v!=='string'||v.length>160))
+-   return {status:422,result:{ok:false,error:'asr_unverified_audio'}};
+-  answers.push({hanzi:parsed.hanzi,pinyin:parsed.pinyin});
+- }
+- return {status:200,result:{ok:true,transcripts:answers.map(x=>x.hanzi),pinyin:answers.map(x=>x.pinyin)}};
++async function hskVerifyVocabularyAudio(input, provider, signal, model = "gemini-3.5-flash-lite") {
++  const { clips, items, pinyin } = input;
++  let invalid = "";
++  if (!Array.isArray(clips) || !Array.isArray(items) || !Array.isArray(pinyin)) invalid = "arrays";
++  else if (clips.length < 1 || clips.length > 5 || clips.length !== items.length || clips.length !== pinyin.length) invalid = "count";
++  else if (items.some((w) => typeof w !== "string" || !w.trim() || Array.from(w).length > 60)) invalid = "items";
++  else if (pinyin.some((w) => typeof w !== "string" || !w.trim() || w.length > 140)) invalid = "pinyin";
++  else if (clips.some((s) => typeof s !== "string" || s.length < 80 || s.length > 65e4)) invalid = "clip_size";
++  else if (clips.some((s) => !s.startsWith("UklG") || s.length % 4 !== 0 || !/^[A-Za-z0-9+/]+={0,2}$/.test(s))) invalid = "clip_format";
++  if (invalid) return { status: 400, result: { ok: false, error: "invalid_verification_" + invalid } };
++  const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent";
++  const answers = [];
++  for (let pass = 0; pass < 2; pass++) {
++    const instruction = pass === 0 ? "Transcribe each Mandarin Chinese audio clip independently and literally. Respond ONLY as JSON with two arrays: hanzi (spoken Chinese characters) and pinyin (Hanyu Pinyin with tone marks). Give one entry per numbered clip, empty string when unsure. Never infer unspoken words." : "Listen again independently. Identify precisely the Mandarin words you hear in each numbered WAV clip. Return ONLY a JSON object with equal-length hanzi and pinyin arrays, using accurate tone-marked Hanyu Pinyin. Leave uncertain entries blank; never guess.";
++    const parts = [{ text: instruction }];
++    clips.forEach((clip, i) => parts.push({ text: "Clip " + (i + 1) }, { inlineData: { mimeType: "audio/wav", data: clip } }));
++    let response;
++    try {
++      response = await provider(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
++        contents: [{ role: "user", parts }],
++        generationConfig: { responseMimeType: "application/json", responseSchema: { type: "OBJECT", properties: { hanzi: { type: "ARRAY", items: { type: "STRING" } }, pinyin: { type: "ARRAY", items: { type: "STRING" } } }, required: ["hanzi", "pinyin"] }, temperature: 0, maxOutputTokens: 1024, .../^gemini-3[.-]/.test(model) ? { thinkingConfig: { thinkingLevel: "minimal" } } : {} }
++      }), signal });
++    } catch {
++      return { status: 503, result: { ok: false, error: "asr_provider_unavailable" } };
++    }
++    if (!response.ok) {
++      const failure = await voiceProviderFailure(response);
++      return { status: response.status === 429 ? 429 : 503, result: {
++        ok: false, error: "asr_provider_unavailable", model,
++        upstreamStatus: failure.upstreamStatus, providerReason: failure.error.replace(/^tts_/, "asr_"),
++        retryAfter: failure.retryAfter, retryable: failure.retryable, providerAttempts: failure.providerAttempts
++      } };
++    }
++    let parsed, finishReason = "invalid_json";
++    try {
++      const data = await response.json(), candidate = data?.candidates?.[0];
++      finishReason = String(candidate?.finishReason || data?.promptFeedback?.blockReason || "empty_response").slice(0,60);
++      if (candidate?.finishReason !== "STOP") throw Error("no_stop");
++      parsed = JSON.parse((candidate.content?.parts || []).filter((p) => !p.thought).map((p) => p.text || "").join(""));
++    } catch {
++      return { status: 422, result: { ok: false, error: "asr_unverified_audio", model, providerReason: finishReason } };
++    }
++    if (!Array.isArray(parsed?.hanzi) || !Array.isArray(parsed?.pinyin) || parsed.hanzi.length !== clips.length || parsed.pinyin.length !== clips.length || parsed.hanzi.some((v) => typeof v !== "string" || v.length > 90) || parsed.pinyin.some((v) => typeof v !== "string" || v.length > 160))
++      return { status: 422, result: { ok: false, error: "asr_unverified_audio", model, providerReason: finishReason } };
++    answers.push({ hanzi: parsed.hanzi, pinyin: parsed.pinyin });
++  }
++  return { status: 200, result: { ok: true, transcripts: answers.map((x) => x.hanzi), pinyin: answers.map((x) => x.pinyin) } };
+ }
+ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.now(),slotFetch){
+  return async function voicePrecache(request,env){
+@@ -131,19 +143,23 @@ export function createVoicePrecacheHandler(googleFetch,geminiFetch,now=()=>Date.
+    input=JSON.parse(data);
+    if(input?.action!=='verify'&&input?.action!=='verify-words'&&data.length>1500)return json({ok:false,error:'invalid_request'},400);
+   }catch{return json({ok:false,error:'invalid_request'},400);}
+-  if(input?.action==='verify'){
+-   if(Object.keys(input).some(k=>!['action','items','clips'].includes(k)))return json({ok:false,error:'invalid_request'},400);
+-   const validated=await hskVoiceVerifyPartial(input,geminiFetch,request.signal);
+-   return json(validated.result,validated.status);
+-  }
+-  if(input?.action==='verify-words'){
+-   if(!input||Object.keys(input).some(k=>!['action','clips','items','pinyin','keySlot'].includes(k))
+-     ||(input.keySlot!==undefined&&(!Number.isInteger(input.keySlot)||input.keySlot<0||input.keySlot>12)))
+-    return json({ok:false,error:'invalid_request'},400);
+-   const selected=input.keySlot>0&&slotFetch?slotFetch(input.keySlot,false,'gemini-2.5-flash-lite'):geminiFetch;
+-   const validated=await hskVerifyVocabularyAudio(input,selected,request.signal);
+-   return json(validated.result,validated.status);
+-  }
++    if (input?.action === "verify") {
++      if (Object.keys(input).some((k) => !["action", "items", "clips"].includes(k))) return json({ ok: false, error: "invalid_request" }, 400);
++      const asrModel = env.HSK_VOICE_ASR_MODEL || "gemini-3.5-flash-lite";
++      if (!/^gemini-[a-z0-9.-]+$/.test(asrModel) || /tts/.test(asrModel)) return json({ ok: false, error: "invalid_verification_model" }, 503);
++      const provider = slotFetch ? slotFetch(void 0, false, asrModel) : geminiFetch;
++      const validated = await hskVoiceVerifyPartial(input, provider, request.signal, asrModel, voiceProviderFailure);
++      return json(validated.result, validated.status);
++    }
++    if (input?.action === "verify-words") {
++      if (!input || Object.keys(input).some((k) => !["action", "clips", "items", "pinyin", "keySlot"].includes(k)) || input.keySlot !== void 0 && (!Number.isInteger(input.keySlot) || input.keySlot < 0 || input.keySlot > 12))
++        return json({ ok: false, error: "invalid_request" }, 400);
++      const asrModel = env.HSK_VOICE_ASR_MODEL || "gemini-3.5-flash-lite";
++      if (!/^gemini-[a-z0-9.-]+$/.test(asrModel) || /tts/.test(asrModel)) return json({ ok: false, error: "invalid_verification_model" }, 503);
++      const selected = slotFetch ? slotFetch(input.keySlot > 0 ? input.keySlot : void 0, false, asrModel) : geminiFetch;
++      const validated = await hskVerifyVocabularyAudio(input, selected, request.signal, asrModel);
++      return json(validated.result, validated.status);
++    }
+   if(!input||typeof input!=='object'||Array.isArray(input)
+    ||Object.keys(input).some(k=>!['text','language','keySlot','action','isolated','items','model'].includes(k))
+    ||(input.keySlot!==undefined&&(!Number.isInteger(input.keySlot)||input.keySlot<1||input.keySlot>12||!slotFetch))
+diff --git a/server/voice-partial-verify.mjs b/server/voice-partial-verify.mjs
+index 010cd4c..372f223 100644
+--- a/server/voice-partial-verify.mjs
++++ b/server/voice-partial-verify.mjs
+@@ -17,41 +17,56 @@ export function hskVoiceMapTranscripts(expected,transcripts){
+  }
+  return matches.length===heard.length?matches:null;
+ }
+-export async function hskVoiceVerifyPartial(input,provider,signal){
+- const {items,clips}=input||{};
+- if(!Array.isArray(items)||!Array.isArray(clips)||items.length<2||items.length>6||clips.length!==items.length-1
+-  ||items.some(x=>typeof x!=='string'||!x.trim()||Array.from(x).length>55||/[<>\u0000-\u001f]/.test(x))
+-  ||clips.some(c=>typeof c!=='string'||c.length<64||c.length>350000||c.length%4!==0||!/^[A-Za-z0-9+/]+={0,2}$/.test(c))
+-  ||clips.reduce((n,c)=>n+c.length,0)>650000){
+-  return {status:400,result:{ok:false,error:'invalid_verification_request'}};
+- }
+- // Expected text is intentionally NOT included in either provider request.
+- const instructions='Transcribe each supplied Mandarin Chinese WAV independently and exactly, in its spoken Chinese characters. Do not infer context, guess missing audio, or combine clips. If unsure, return an empty string for that clip. Respond with a JSON object containing only transcripts: an array with one string per numbered clip.';
+- const parts=[{text:instructions}];
+- clips.forEach((clip,i)=>{parts.push({text:'Clip '+(i+1)+':'},{inlineData:{mimeType:'audio/wav',data:clip}});});
+- const model='gemini-2.5-flash-lite',endpoint='https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent';
+- let first;
+- for(let pass=0;pass<2;pass++){
+-  let response;
+-  try{response=await provider(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+-   contents:[{role:'user',parts}],generationConfig:{responseMimeType:'application/json',temperature:0,maxOutputTokens:260}
+-  }),signal});}
+-  catch{return {status:503,result:{ok:false,error:'batch_verification_unavailable'}};}
+-  if(!response.ok)return {status:503,result:{ok:false,error:'batch_verification_unavailable'}};
+-  let data;try{data=await response.json();}catch{return {status:503,result:{ok:false,error:'batch_verification_unavailable'}};}
+-  if(data?.candidates?.[0]?.finishReason!=='STOP')return {status:422,result:{ok:false,error:'batch_verification_uncertain'}};
+-  let decoded;
+-  try{decoded=JSON.parse(data.candidates[0].content.parts.filter(p=>p.text).map(p=>p.text).join(''));}
+-  catch{return {status:422,result:{ok:false,error:'batch_verification_uncertain'}};}
+-  if(!decoded||!Array.isArray(decoded.transcripts)||decoded.transcripts.length!==clips.length||decoded.transcripts.some(t=>typeof t!=='string')){
+-   return {status:422,result:{ok:false,error:'batch_verification_uncertain'}};
++export async function hskVoiceVerifyPartial(input, provider, signal, model = "gemini-3.5-flash-lite", classifyFailure) {
++  const { items, clips } = input || {};
++  if (!Array.isArray(items) || !Array.isArray(clips) || items.length < 2 || items.length > 6 || clips.length !== items.length - 1 || items.some((x) => typeof x !== "string" || !x.trim() || Array.from(x).length > 55 || /[<>\u0000-\u001f]/.test(x)) || clips.some((c) => typeof c !== "string" || c.length < 64 || c.length > 35e4 || c.length % 4 !== 0 || !/^[A-Za-z0-9+/]+={0,2}$/.test(c)) || clips.reduce((n, c) => n + c.length, 0) > 65e4) {
++    return { status: 400, result: { ok: false, error: "invalid_verification_request" } };
+   }
+-  const current=decoded.transcripts.map(hskVoiceNormalizeTranscript);
+-  const mapped=hskVoiceMapTranscripts(items,current);
+-  if(!mapped)return {status:422,result:{ok:false,error:'batch_verification_uncertain'}};
+-  if(first&&JSON.stringify(first.mapped)!==JSON.stringify(mapped))return {status:422,result:{ok:false,error:'batch_verification_uncertain'}};
+-  if(first&&JSON.stringify(first.current)!==JSON.stringify(current))return {status:422,result:{ok:false,error:'batch_verification_uncertain'}};
+-  first={mapped,current};
+- }
+- return {status:200,result:{ok:true,indices:first.mapped,verification:'double_asr_exact'}};
++  const instructions = "Transcribe each supplied Mandarin Chinese WAV independently and exactly, in its spoken Chinese characters. Do not infer context, guess missing audio, or combine clips. If unsure, return an empty string for that clip. Respond with a JSON object containing only transcripts: an array with one string per numbered clip.";
++  const parts = [{ text: instructions }];
++  clips.forEach((clip, i) => {
++    parts.push({ text: "Clip " + (i + 1) + ":" }, { inlineData: { mimeType: "audio/wav", data: clip } });
++  });
++  const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent";
++  let first;
++  for (let pass = 0; pass < 2; pass++) {
++    let response;
++    try {
++      response = await provider(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
++        contents: [{ role: "user", parts }],
++        generationConfig: { responseMimeType: "application/json", temperature: 0, maxOutputTokens: 1024, .../^gemini-3[.-]/.test(model) ? { thinkingConfig: { thinkingLevel: "minimal" } } : {} }
++      }), signal });
++    } catch {
++      return { status: 503, result: { ok: false, error: "batch_verification_unavailable" } };
++    }
++    if (!response.ok) {
++      const failure = classifyFailure ? await classifyFailure(response) : { upstreamStatus: response.status, error: "asr_provider_unavailable", retryAfter: 60, retryable: true, providerAttempts: 1 };
++      return { status: response.status === 429 ? 429 : 503, result: { ok: false, error: "batch_verification_unavailable",
++        model, upstreamStatus: failure.upstreamStatus, providerReason: failure.error.replace(/^tts_/, "asr_"),
++        retryAfter: failure.retryAfter, retryable: failure.retryable, providerAttempts: failure.providerAttempts } };
++    }
++    let data;
++    try {
++      data = await response.json();
++    } catch {
++      return { status: 503, result: { ok: false, error: "batch_verification_unavailable" } };
++    }
++    if (data?.candidates?.[0]?.finishReason !== "STOP") return { status: 422, result: { ok: false, error: "batch_verification_uncertain" } };
++    let decoded;
++    try {
++      decoded = JSON.parse(data.candidates[0].content.parts.filter((p) => p.text).map((p) => p.text).join(""));
++    } catch {
++      return { status: 422, result: { ok: false, error: "batch_verification_uncertain" } };
++    }
++    if (!decoded || !Array.isArray(decoded.transcripts) || decoded.transcripts.length !== clips.length || decoded.transcripts.some((t) => typeof t !== "string")) {
++      return { status: 422, result: { ok: false, error: "batch_verification_uncertain" } };
++    }
++    const current = decoded.transcripts.map(hskVoiceNormalizeTranscript);
++    const mapped = hskVoiceMapTranscripts(items, current);
++    if (!mapped) return { status: 422, result: { ok: false, error: "batch_verification_uncertain" } };
++    if (first && JSON.stringify(first.mapped) !== JSON.stringify(mapped)) return { status: 422, result: { ok: false, error: "batch_verification_uncertain" } };
++    if (first && JSON.stringify(first.current) !== JSON.stringify(current)) return { status: 422, result: { ok: false, error: "batch_verification_uncertain" } };
++    first = { mapped, current };
++  }
++  return { status: 200, result: { ok: true, indices: first.mapped, verification: "double_asr_exact" } };
+ }

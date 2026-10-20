@@ -175,3 +175,5 @@ Do not store secrets, API keys, personal data, or entire chat logs. This file is
 - Apps Script reset stale model-failure cooldowns exactly once and distinguishes unverified audio from provider outage. Stored masters and two-pass Hanzi+pinyin matching remain mandatory.
 - Real existing batch resumed: READY clips include 陪,破,巧克力,甚至,生意; mismatches remain RECHECK. Full52-segment batch not yet complete. Heartbeat resumed without provider error/retry delay.
 - Narrow ASR/AutoCycle regression suite and append-only preservation guard pass. Browser runtime remains blocked by missing Playwright Chromium binary; no frontend changes. Keep branch unmerged pending review.
+
+Canonical Windows modular sources have now been reconciled without replacing prior dirty edits; bundle rebuilt and17 voice/auth/TTS/partial regressions pass. tools/voice-asr-source-recovery.patch records only these source edits against the live-source baseline; retain recovery snapshot for production provenance. PR123 is draft; browser runtime requires Playwright installation.
