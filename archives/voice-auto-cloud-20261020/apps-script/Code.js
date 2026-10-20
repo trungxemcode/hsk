@@ -48,7 +48,7 @@ function hskCached_(storage,cacheKey) {
   if(!found||found.values[11]!=='READY'||!found.values[4])return null;
   try {
     var f=DriveApp.getFileById(String(found.values[4])),result=hskResponse_(f,true,0);
-    storage.sheet.getRange(found.index,9,1,2).setValues([[hskVNTime_(new Date()),Number(found.values[9]||0)+1]]);
+    storage.sheet.getRange(found.index,9,1,2).setValues([[new Date().toISOString(),Number(found.values[9]||0)+1]]);
     return result;
   } catch(error) {
     // Missing/corrupt Drive objects are rebuilt; don't mistake them for a cache hit.
@@ -140,7 +140,7 @@ function hskHandle_(req,p) {
     var generated=hskGenerate_(p,text,model);
     var filename='hsk-tts-'+cacheKey.slice(0,24)+'.wav';
     var file=storage.folder.createFile(Utilities.newBlob(generated.bytes,'audio/wav',filename));
-    var stamp=hskVNTime_(new Date());
+    var stamp=new Date().toISOString();
     storage.sheet.appendRow([cacheKey,'zh-CN','Kore',model,file.getId(),'audio/wav',
       generated.bytes.length,stamp,stamp,0,generated.index,'READY','']);
     return {ok:true,cached:false,mime:'audio/wav',audioBase64:Utilities.base64Encode(generated.bytes),bytes:generated.bytes.length,keyIndex:generated.index};

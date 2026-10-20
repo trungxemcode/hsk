@@ -63,7 +63,7 @@ function hskWarmProgress_(storage,p) {
     ['Kho voice tự động','Gemini Kore / tiếng Trung'],['Tổng câu',s.total],['Đã có audio',ready],
     ['Chưa duyệt',s.remaining],['Sẽ thử lại',pending],['Cần kiểm tra',review],
     ['Trạng thái',s.enabled?(s.retryAt>Date.now()?'Đang nghỉ, sẽ tự chạy tiếp':'Đang chạy nền'):(p.getProperty('HSK_WARM_PAUSE_REASON')==='batch-pilot'?'Tạm dừng có chủ đích để kiểm tra tạo theo lô':s.remaining?'Tạm dừng; kiểm tra cấu hình':pending||review?'Đã duyệt hết; xem Voice_Retry':'Hoàn tất')],
-    ['Lần chạy gần nhất',p.getProperty('HSK_WARM_LAST_RUN')||''],['Chạy lại sau',s.retryAt?hskVNTime_(new Date(s.retryAt)):''],
+    ['Lần chạy gần nhất',p.getProperty('HSK_WARM_LAST_RUN')||''],['Chạy lại sau',s.retryAt?new Date(s.retryAt).toISOString():''],
     ['Lượt gọi tạo audio / chu kỳ 24h',s.callsToday],['Phút đã dùng / tối đa 60',s.runtimeMinutes],
     ['Lỗi gần nhất',s.lastError],['Cơ chế','Kiểm tra key trước; tăng/giảm tải theo kết quả; chống trùng'],
     ['Gọi Gemini thực từ bản sửa',Number(p.getProperty('HSK_WARM_VENDOR_CALLS')||0)],
@@ -71,7 +71,6 @@ function hskWarmProgress_(storage,p) {
     ['Luồng đang cho phép / tối đa 9',Number(p.getProperty('HSK_WARM_CONCURRENCY')||1)]]);
 }
 function hskWarmTick() {
-  if(typeof hskVoicePhasedTick_==='function'&&hskSettings_().getProperty('HSK_PHASE_AUTO_20261020_V1')!=='true')hskVoicePhasedTick_();
   // Pause both generators before editing displayed workbook timestamps.
   var tzSettings=hskSettings_(),tzBookId=tzSettings.getProperty('HSK_VOICE_SHEET_ID');
   if(tzBookId){
@@ -148,7 +147,7 @@ function hskWarmTick() {
       try {
         if(!existing.has(key)){
           p.setProperty('HSK_WARM_CALLS',String(Number(p.getProperty('HSK_WARM_CALLS')||0)+1));
-          var rendered=hskGenerate_(p,text,model),stamp=hskVNTime_(new Date());
+          var rendered=hskGenerate_(p,text,model),stamp=new Date().toISOString();
           var file=storage.folder.createFile(Utilities.newBlob(rendered.bytes,'audio/wav','hsk-tts-'+key.slice(0,24)+'.wav'));
           storage.sheet.appendRow([key,'zh-CN','Kore',model,file.getId(),'audio/wav',rendered.bytes.length,stamp,stamp,0,rendered.index,'READY','']);existing.add(key);
         }
@@ -173,7 +172,7 @@ function hskWarmTick() {
     p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+3600000));
   }finally{
     p.setProperty('HSK_WARM_RUNTIME_MS',String(Number(p.getProperty('HSK_WARM_RUNTIME_MS')||0)+Math.max(0,Date.now()-started)));
-    p.setProperty('HSK_WARM_LAST_RUN',hskVNTime_(new Date()));
+    p.setProperty('HSK_WARM_LAST_RUN',new Date().toISOString());
     try{if(storage)hskWarmProgress_(storage,p);}finally{lock.releaseLock();}
   }
 }

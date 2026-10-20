@@ -37,16 +37,27 @@ function hskAuto50NormalizedHanzi_(text){
  return Array.from(hskVoiceRecHanzi_(text)).map(function(c){return chars[c]||c;}).join('');
 }
 /** Returns {index,method}; a negative index means unverified. */
-function hskAuto50QualityMatch_(jobs,segment,segmentCount,checks,hanziA,hanziB,pinyinA,pinyinB,boundaryProven){
- var failure={index:-1,method:'unverified'},p1=hskVoiceRecPinyin_(pinyinA),p2=hskVoiceRecPinyin_(pinyinB);
+function hskAuto50QualityMatch_(jobs,segment,segmentCount,checks,hanziA,hanziB,pinyinA,pinyinB){
+ var failure={index:-1,method:'unverified'};
+ var p1=hskVoiceRecPinyin_(pinyinA),p2=hskVoiceRecPinyin_(pinyinB);
  if(!p1||p1!==p2)return failure;
- var h1=hskAuto50NormalizedHanzi_(hanziA),h2=hskAuto50NormalizedHanzi_(hanziB),around=Number(segment)-1,matching=[];
- if(h1&&h1===h2)jobs.forEach(function(job,j){
-  if((boundaryProven===true?j===around:Math.abs(j-around)<=4)&&hskAuto50NormalizedHanzi_(job.text)===h1&&hskVoiceRecPinyin_(job.pinyin)===p1)matching.push(j);
+ var h1=hskAuto50NormalizedHanzi_(hanziA),h2=hskAuto50NormalizedHanzi_(hanziB);
+ var sameHanzi=!!h1&&h1===h2,around=Number(segment)-1;
+ var matching=[];
+ if(sameHanzi)jobs.forEach(function(job,j){
+  if(Math.abs(j-around)>4)return;
+  if(hskAuto50NormalizedHanzi_(job.text)===h1&&hskAuto50PinyinMatches_(job.text,job.pinyin,p1))matching.push(j);
  });
  if(matching.length===1)return {index:matching[0],method:'hanzi_pinyin_double_asr'};
- if(Number(checks)!==3||boundaryProven===false||segmentCount!==jobs.length||!Number.isInteger(around)||around<0||around>=jobs.length)return failure;
- var target=jobs[around],expected=typeof hskVoiceQualityCommonPinyin_==='function'?hskVoiceQualityCommonPinyin_(target):hskAuto50ExpectedPinyin_(target.text,target.pinyin);
- if(p1!==hskVoiceRecPinyin_(target.pinyin)&&p1!==hskVoiceRecPinyin_(expected))return failure;
+ if(Number(checks)<3||segmentCount!==jobs.length||around<0||around>=jobs.length)return failure;
+ // Third check only: two independent ASR pinyin readings must agree
+ // with the reference pronunciation at the exact segmented position.
+ // Never approve a homophone when another item in this batch shares pinyin.
+ var target=jobs[around];
+ if(!hskAuto50PinyinMatches_(target.text,target.pinyin,p1))return failure;
+ var samePinyin=jobs.filter(function(job){
+  return hskAuto50PinyinMatches_(job.text,job.pinyin,p1);
+ });
+ if(samePinyin.length!==1)return failure;
  return {index:around,method:'pinyin_third_check'};
 }

@@ -21,7 +21,6 @@ function hskShared50Pair_(token,now){
    return Number(a.model.indexOf('3.8')>=0)-Number(b.model.indexOf('3.8')>=0);
   });
  }
- if(typeof hskVoiceQualityOrderPairs_==='function')available.pairs=hskVoiceQualityOrderPairs_(p,available.pairs);
  return available.pairs[0]||null;
 }
 function hskShared50Control_(p,book,control,command){

@@ -22,7 +22,6 @@ function hskVNColumn_(sheet,col,quiet){
  return modified;
 }
 function hskVNApplySheetTimes_(book){
- if(book.getSpreadsheetTimeZone()!=='Asia/Ho_Chi_Minh')book.setSpreadsheetTimeZone('Asia/Ho_Chi_Minh');
  var targets={
   'Kho_Voice':[8,9],
   'Voice_Auto_Clips':[15],

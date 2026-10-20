@@ -55,7 +55,7 @@ function hskBatchCommit_(storage,journal,rowNumber,row,queue,deferred){
     var found=hskGetRow_(storage.sheet,job.key),old=found&&found.values;
     if(!old||old[11]!=='READY'){
       var name='hsk-tts-'+job.key.slice(0,24)+'.wav',files=storage.folder.getFilesByName(name),file=files.hasNext()?files.next():storage.folder.createFile(Utilities.newBlob(clips[i],'audio/wav',name));
-      var stamp=hskVNTime_(new Date()),values=[job.key,'zh-CN','Kore',job.model,file.getId(),'audio/wav',clips[i].length,stamp,stamp,0,row[6],'READY','isolated_batch:'+row[0]+':'+(job.generatedModel||job.model)];
+      var stamp=new Date().toISOString(),values=[job.key,'zh-CN','Kore',job.model,file.getId(),'audio/wav',clips[i].length,stamp,stamp,0,row[6],'READY','isolated_batch:'+row[0]+':'+(job.generatedModel||job.model)];
       if(found)storage.sheet.getRange(found.index,1,1,13).setValues([values]);else storage.sheet.appendRow(values);saved++;
     }
     deferred.forEach(function(r,k){if(Number(r[0])===job.index&&r[4]!=='DONE'){r[4]='DONE';queue.getRange(k+2,1,1,6).setValues([r]);}});
@@ -135,7 +135,7 @@ function hskWarmIsolatedTick(){
     for(var lane=0;lane<36;lane++){var pos=(next-1+lane)%36,n=Math.floor(pos/3)+1,mi=pos%3,m=['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview','gemini-3.8-flash-tts'][mi],item=health.filter(function(s){return s.slot===n&&(s.model===m||!s.model&&mi===0);})[0];if(!item)continue;var until=Math.max(now+Number(item.retryAfter||0)*1000,Number(p.getProperty('HSK_WARM_MODEL_'+n+'_'+mi+'_AFTER')||0));if(until<=now){slot=n;selectedModel=m;break;}earliest=Math.min(earliest,until);}
     if(!slot){p.setProperty('HSK_WARM_RETRY_AT',String(now+60000));p.setProperty('HSK_WARM_LAST_ERROR','tts_keys_cooling');return;}
     jobs.forEach(function(j){j.generatedModel=selectedModel;});
-    var id=hskDigest_(JSON.stringify(jobs.map(function(j){return j.key;}))+':'+now),stamp=hskVNTime_(new Date()),row=[id,JSON.stringify(jobs),'','RESERVED','',stamp,slot];
+    var id=hskDigest_(JSON.stringify(jobs.map(function(j){return j.key;}))+':'+now),stamp=new Date().toISOString(),row=[id,JSON.stringify(jobs),'','RESERVED','',stamp,slot];
     phase='reserve';journal.appendRow(row);var rowNumber=journal.getLastRow();SpreadsheetApp.flush();
     var response,decoded;
     p.setProperty('HSK_WARM_NEXT_SLOT',String((next+lane)%36+1));p.setProperty('HSK_WARM_LAST_MODEL',selectedModel);
@@ -165,5 +165,5 @@ function hskWarmIsolatedTick(){
     p.setProperty('HSK_WARM_LAST_ERROR',phase+':'+safe);
     if(statusFault){p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+60000));}else p.setProperty('HSK_WARM_ENABLED','false');
   }
-  finally{p.setProperty('HSK_WARM_RUNTIME_MS',String(Number(p.getProperty('HSK_WARM_RUNTIME_MS')||0)+Date.now()-started));p.setProperty('HSK_WARM_LAST_RUN',hskVNTime_(new Date()));try{if(storage)hskWarmProgress_(storage,p);}finally{lock.releaseLock();}}
+  finally{p.setProperty('HSK_WARM_RUNTIME_MS',String(Number(p.getProperty('HSK_WARM_RUNTIME_MS')||0)+Date.now()-started));p.setProperty('HSK_WARM_LAST_RUN',new Date().toISOString());try{if(storage)hskWarmProgress_(storage,p);}finally{lock.releaseLock();}}
 }

@@ -1,6 +1,6 @@
 /**
  * Direct GAS -> Gemini fallback, no Cloudflare gateway used. Only reads
- * optional GEMINI_TTS_KEY_1..12 Script Properties, only when DIRECT is explicitly selected. Worker mode always uses its own GEMINI_API_KEY_1..12 secrets; no secret is logged or copied.
+ * existing GEMINI_TTS_KEY_1..9 Script Properties; no key is logged or copied.
  * ASR runs twice, with two different Gemini models and independent requests.
  * Expected Hanzi/pinyin are NEVER included in the ASR prompts.
  */

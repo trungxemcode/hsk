@@ -44,11 +44,11 @@ function hskLegacyCacheRepairTick_(p,book,control){
   var item68=Number(p.getProperty('HSK_LEGACY_ITEM_68_AFTER')||0);
   // Voice_Control has 88 rows and four columns; use the empty C80:D85 area.
   control.getRange(80,3,6,2).setValues([
-   ['Legacy_diag_at',hskVNTime_(new Date(now))],
-   ['Legacy_diag_next',notBefore?hskVNTime_(new Date(notBefore)):'READY'],
+   ['Legacy_diag_at',new Date(now).toISOString()],
+   ['Legacy_diag_next',notBefore?new Date(notBefore).toISOString():'READY'],
    ['Legacy_diag_warm_enabled',String(p.getProperty('HSK_WARM_ENABLED')||'false')],
    ['Legacy_diag_last',String(p.getProperty('HSK_LEGACY_REPAIR_LAST')||'none').slice(0,120)],
-   ['Legacy_diag_item68_next',item68?hskVNTime_(new Date(item68)):'READY'],
+   ['Legacy_diag_item68_next',item68?new Date(item68).toISOString():'READY'],
    ['Legacy_diag_voice_paused',String(p.getProperty('HSK_VOICE_PAUSED')||'false')]
   ]);
  }catch(diagError){}
@@ -102,7 +102,7 @@ function hskLegacyCacheRepairTick_(p,book,control){
    else{retry.appendRow(row);retryRows.push(row);}
   }
   function save(t,changes){var row=t.row;Object.keys(changes).forEach(function(k){row[Number(k)]=changes[k];});
-   row[8]=hskVNTime_(new Date());cache.getRange(t.at+2,1,1,13).setValues([row]);}
+   row[8]=new Date().toISOString();cache.getRange(t.at+2,1,1,13).setValues([row]);}
   function next(ms,summary){p.setProperty('HSK_LEGACY_REPAIR_NEXT',String(Date.now()+ms));
    p.setProperty('HSK_LEGACY_REPAIR_LAST',summary);control.getRange(56,1,1,2).setValues([['Legacy_cache_progress',summary]]);}
   if(!tasks.length&&allTasks.length){
@@ -262,7 +262,7 @@ function hskLegacyCacheRepairTick_(p,book,control){
     save(t,{11:'REVIEW',12:'legacy_tts_nonretryable_failure_after_3_attempts'});
     retryStatus(t,'REVIEW','legacy_tts_nonretryable_failure_after_3_attempts');
    }else if(transient){
-    retryStatus(t,'PENDING','tts_provider_backoff_until_'+hskVNTime_(new Date(wordRetryAt)),wordRetryAt);
+    retryStatus(t,'PENDING','tts_provider_backoff_until_'+new Date(wordRetryAt).toISOString(),wordRetryAt);
    }
    p.setProperty('HSK_LEGACY_SLOT_'+slot+'_AFTER',String(Date.now()+wait));
    p.setProperty('HSK_VOCAB_PAIR_'+slot+'_'+generationModel+'_AFTER',String(Date.now()+wait));

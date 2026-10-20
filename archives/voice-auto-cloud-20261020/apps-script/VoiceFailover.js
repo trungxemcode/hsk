@@ -229,7 +229,7 @@ function hskVoiceFailoverPoll_(p,book,control){
   // Independent dashboard. Does not modify AUTO_CYCLE, queue or existing fields.
   var cloudflareKeySlots=hskVoiceFailoverCloudflareKeys_(p);
   control.getRange(80,1,9,2).setValues([
-   ['Failover_route',mode],['Failover_last_real_progress',hskVNTime_(new Date(last))],
+   ['Failover_route',mode],['Failover_last_real_progress',new Date(last).toISOString()],
    ['Failover_idle_minutes',Math.floor((now-last)/60000)],
    ['Failover_direct_key_count',keys],
    ['Failover_worker_probe_count',Number(p.getProperty('HSK_VOICE_WORKER_HEALTHY_POLLS')||0)],

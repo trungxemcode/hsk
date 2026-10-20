@@ -11,12 +11,10 @@ function hskVoiceModelTag_(name){
 }
 function hskVoiceRoutePairs_(p,token,at,firstModel,skip){
  var models=hskVoiceTtsModels_(),out=[],waitUntil=0,errors={};
- var begin=Math.max(0,models.indexOf(firstModel)),combined=null;
- try{combined=hskVocabCall_(token,{action:'status'});}catch(ignore){}
-
+ var begin=Math.max(0,models.indexOf(firstModel));
  for(var shift=0;shift<models.length;shift++){
   var model=models[(begin+shift)%models.length],data;
-  try{data=combined&&Array.isArray(combined.modelSlots)?{ok:combined.ok,slots:combined.modelSlots.filter(function(x){return x.model===model;})}:hskVocabCall_(token,{action:'status',model:model});}
+  try{data=hskVocabCall_(token,{action:'status',model:model});}
   catch(e){errors[model]=String(e.message||'status_unavailable').slice(0,90);continue;}
   if(!data||!data.ok||!Array.isArray(data.slots))continue;
   for(var j=0;j<data.slots.length;j++){
@@ -56,7 +54,7 @@ function hskVoiceTtsHealthTick_(p,control){
  var now=Date.now();
  if(Number(p.getProperty('HSK_VOICE_MODELS_HEALTH_NEXT')||0)>now)return;
  p.setProperty('HSK_VOICE_MODELS_HEALTH_NEXT',String(now+300000));
- var models=hskVoiceTtsModels_(),rows=[['Model_scan_UTC',hskVNTime_(new Date(now))]];
+ var models=hskVoiceTtsModels_(),rows=[['Model_scan_UTC',new Date(now).toISOString()]];
  var token=ScriptApp.getIdentityToken();
  for(var i=0;i<models.length;i++){
   var model=models[i],tag=hskVoiceModelTag_(model),value='STATUS_UNAVAILABLE';

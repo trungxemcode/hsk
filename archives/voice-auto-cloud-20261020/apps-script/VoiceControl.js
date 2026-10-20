@@ -10,7 +10,7 @@ function hskVoiceControlPoll_(p){
  if(typeof hskVoiceSegmentScheduledSmoke_==='function')hskVoiceSegmentScheduledSmoke_(p,control);
  try{hskAsrPaddingAudit_(p,control);}catch(e){control.getRange(29,1,1,2).setValues([['ASR_silence_audit',String(e.message||'audit_failed').slice(0,100)]]);}
  if(typeof hskShared50QueuedCommand_==='function')hskShared50QueuedCommand_(p,control);
- var shared;try{control.getRange(27,1,1,2).setValues([['Test_last_poll',hskVNTime_(new Date())]]);shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());}catch(e){control.getRange(18,2).setValue('SHARED50_ERROR');control.getRange(19,2).setValue(String(e.message||'shared_error').slice(0,120));return true;}
+ var shared;try{control.getRange(27,1,1,2).setValues([['Test_last_poll',new Date().toISOString()]]);shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());}catch(e){control.getRange(18,2).setValue('SHARED50_ERROR');control.getRange(19,2).setValue(String(e.message||'shared_error').slice(0,120));return true;}
  if(shared!==null)return shared;
  var command=String(control.getRange(2,2).getValue()||'').trim();
  if(['PAUSE','RECOVER_50','RUN_VOCAB','AUTO_CYCLE'].indexOf(command)<0)return false;
@@ -39,8 +39,8 @@ function hskVoiceControlPoll_(p){
   }
   // Separate, rate-limited repair of old Kho_Voice errors; never blocks HSK2-4 auto pipeline.
   if(typeof hskVoiceFailoverPoll_==='function')hskVoiceFailoverPoll_(p,book,control);
-   if(p.getProperty('HSK_PHASE_AUTO_20261020_V1')!=='true'&&typeof hskVoice38CanaryTick_==='function')hskVoice38CanaryTick_(p,book,control);
-   if(p.getProperty('HSK_PHASE_AUTO_20261020_V1')!=='true'&&typeof hskLegacyCacheRepairTick_==='function')hskLegacyCacheRepairTick_(p,book,control);
+  if(typeof hskVoice38CanaryTick_==='function')hskVoice38CanaryTick_(p,book,control);
+  if(typeof hskLegacyCacheRepairTick_==='function')hskLegacyCacheRepairTick_(p,book,control);
   return hskAuto50Poll_(p,book,control);
  }
  var lock=LockService.getScriptLock();
@@ -82,7 +82,7 @@ function hskVoiceControlPoll_(p){
    p.deleteProperty('HSK_VOICE_CONTROL_AFTER');
   }
   if(Number(p.getProperty('HSK_VOICE_CONTROL_AFTER')||0)>Date.now())return true;
-  control.getRange(7,2).setValue(hskVNTime_(new Date()));
+  control.getRange(7,2).setValue(new Date().toISOString());
   // Process at most three independent clips per tick; stop on provider backoff or time budget.
   var started=Date.now();
   for(var step=0;step<3&&Date.now()-started<140000;step++){
@@ -100,8 +100,8 @@ function hskVoiceControlPoll_(p){
   return true;
  }finally{lock.releaseLock();}
 }
-function hskVoiceControlTick(){var p=hskSettings_();if(typeof hskVoicePhasedTick_==='function'&&p.getProperty('HSK_PHASE_AUTO_20261020_V1')!=='true')hskVoicePhasedTick_();var handled=hskVoiceControlPoll_(p);if(handled===false&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&p.getProperty('HSK_VOCAB_ENABLED')==='true')return hskVocabTick();return handled;}
-function hskVoiceControlFastTick(){var p=hskSettings_();if(typeof hskVoicePhasedTick_==='function'&&p.getProperty('HSK_PHASE_AUTO_20261020_V1')!=='true')hskVoicePhasedTick_();var handled=hskVoiceControlPoll_(p);if(handled===false&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&p.getProperty('HSK_VOCAB_ENABLED')==='true')return hskVocabTick();return handled;}
+function hskVoiceControlTick(){var p=hskSettings_(),handled=hskVoiceControlPoll_(p);if(handled===false&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&p.getProperty('HSK_VOCAB_ENABLED')==='true')return hskVocabTick();return handled;}
+function hskVoiceControlFastTick(){var p=hskSettings_(),handled=hskVoiceControlPoll_(p);if(handled===false&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&p.getProperty('HSK_VOCAB_ENABLED')==='true')return hskVocabTick();return handled;}
 function hskVoiceRecHanzi_(x){return String(x||'').normalize('NFKC').replace(/[\s\p{P}\p{S}]/gu,'').trim();}
 function hskVoiceRecPinyin_(x){return String(x||'').normalize('NFC').toLowerCase().replace(/[\s\p{P}]/gu,'');}
 function hskVoiceRecoverTick_(p,book,control){
@@ -186,7 +186,7 @@ function hskVoiceRecoverTick_(p,book,control){
     else{
      var bytes=Utilities.base64Decode(clips[k]),name='hsk-tts-'+key.slice(0,24)+'.wav',
       f=storage.folder.createFile(Utilities.newBlob(bytes,'audio/wav',name));fileId=f.getId();
-     var stamp=hskVNTime_(new Date()),entry=[key,'zh-CN','Kore',job.model,fileId,'audio/wav',bytes.length,stamp,stamp,0,batch[6],'READY','salvaged_double_asr_exact:'+id];
+     var stamp=new Date().toISOString(),entry=[key,'zh-CN','Kore',job.model,fileId,'audio/wav',bytes.length,stamp,stamp,0,batch[6],'READY','salvaged_double_asr_exact:'+id];
      if(old)storage.sheet.getRange(old.index,1,1,13).setValues([entry]);else storage.sheet.appendRow(entry);
     }
    }
@@ -199,7 +199,7 @@ function hskVoiceRecoverTick_(p,book,control){
    r[3]=r[4]<3?'RECHECK':'REVIEW';
    r[12]=match<0?'asr_mismatch_or_unproven_mapping':'duplicate_mapping';
   }
-  r[13]=hskVNTime_(new Date());
+  r[13]=new Date().toISOString();
   rec.getRange(i+2,1,1,14).setValues([r]);all[i]=r;
  });
  control.getRange(6,2).setValue('VERIFYING_SEGMENTS');
