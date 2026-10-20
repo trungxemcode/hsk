@@ -107,7 +107,7 @@ function hskVocabTick(){
  var unresolved=batches.findIndex(function(b){return b[3]==='RESERVED'||b[3]==='UNCERTAIN';});
  if(unresolved>=0){var prior=batches[unresolved],files=storage.folder.getFilesByName('VOCAB_MASTER_'+prior[0]+'.wav');if(files.hasNext()){prior[2]=files.next().getId();prior[3]='MASTER';tables.batches.getRange(unresolved+2,1,1,11).setValues([prior]);return;}p.setProperty('HSK_VOCAB_ERROR','uncertain_batch_requires_review');hskVocabStop();return;}
  var existing=hskVocabRows_(storage.sheet,13),ready=new Map();existing.forEach(function(r){if(r[11]==='READY'&&r[4])ready.set(String(r[0]),r);});
- rows.forEach(function(r,i){if(['PENDING','RETRY'].indexOf(r[3])<0)return;var found=['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview'].map(function(m){return ready.get(hskVocabKey_(m,r[1]));}).find(Boolean);if(found){r[3]='EXISTING';r[7]=found[3];r[9]=found[4];r[16]='https://drive.google.com/file/d/'+found[4]+'/view';hskVocabWrite_(tables.queue,i,r);}});
+ rows.forEach(function(r,i){if(['PENDING','RETRY'].indexOf(r[3])<0)return;var found=hskVoiceTtsModels_().map(function(m){return ready.get(hskVocabKey_(m,r[1]));}).find(Boolean);if(found){r[3]='EXISTING';r[7]=found[3];r[9]=found[4];r[16]='https://drive.google.com/file/d/'+found[4]+'/view';hskVocabWrite_(tables.queue,i,r);}});
  var pending=rows.map(function(r,i){return {r:r,i:i};}).filter(function(x){return ['PENDING','RETRY'].indexOf(x.r[3])>=0&&Number(x.r[5]||0)<=now;});
  if(p.getProperty('HSK_AUTO50_ENABLED')==='true')pending=hskAuto50Choose_(pending);
  else pending.sort(function(a,b){return Number(a.r[0])-Number(b.r[0])||(String(a.r[1]).length<2?1:0)-(String(b.r[1]).length<2?1:0)||Number(a.r[4])-Number(b.r[4])||a.i-b.i;});
@@ -120,7 +120,7 @@ function hskVocabTick(){
  var batch=[id,JSON.stringify(jobs),'',chunked?'TTS_CHUNKS':'RESERVED','',new Date().toISOString(),slot,model,pause,0,chunked?JSON.stringify({mode:'chunked_v1',attempts:{}}):''];tables.batches.appendRow(batch);var number=tables.batches.getLastRow();
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true')p.setProperty('HSK_VOCAB_PILOT_ID',id);
  SpreadsheetApp.flush();
- p.setProperty('HSK_VOCAB_NEXT_SLOT',String((slot+1)%13));p.setProperty('HSK_VOCAB_NEXT_MODEL',String((pair.mi+1)%2));
+ p.setProperty('HSK_VOCAB_NEXT_SLOT',String((slot+1)%13));p.setProperty('HSK_VOCAB_NEXT_MODEL',String((pair.mi+1)%hskVoiceTtsModels_().length));
  if(chunked)return; // Next trigger will process durable TTS_CHUNKS journal before selecting any new jobs.
  try{
  var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(p.getProperty('HSK_SHARED50_LITERAL')==='true'&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&Array.from(jobs.map(function(j){return j.text;}).join('。')).length<=220?{text:jobs.map(function(j){return j.text;}).join('。'),isolated:true,keySlot:slot,model:model,language:'zh-CN'}:{items:jobs.map(function(j){return j.text;}),isolated:true,keySlot:slot,model:model,language:'zh-CN',pauseSeconds:pause}),muteHttpExceptions:true});
@@ -151,7 +151,7 @@ function hskVocabProcess_(storage,tables,rows,batches,index,token,started){
  if(verified.verification!=='double_asr_exact'||!Array.isArray(verified.verified)||verified.verified.length!==part.length)throw Error('invalid_verifier_result');
  part.forEach(function(x,i){var j=x.job,r=rows[j.row],s=report.ranges[x.clipIndex];r[10]=JSON.stringify(verified.transcripts.map(function(pass){return pass[i];}));r[13]=JSON.stringify(verified.pinyin.map(function(pass){return pass[i];}));r[14]=Math.round(s[0]/24);r[15]=Math.round(s[1]/24);
  if(verified.verified[i]===true){
- var duplicate=['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview'].map(function(m){return hskGetRow_(storage.sheet,hskVocabKey_(m,j.text));}).find(function(x){return x&&x.values[11]==='READY'&&x.values[4];});
+ var duplicate=hskVoiceTtsModels_().map(function(m){return hskGetRow_(storage.sheet,hskVocabKey_(m,j.text));}).find(function(x){return x&&x.values[11]==='READY'&&x.values[4];});
  var found=duplicate||hskGetRow_(storage.sheet,j.key),old=found&&found.values,fileId=old&&old[11]==='READY'?old[4]:null;
  if(!fileId){var name='hsk-tts-'+j.key.slice(0,24)+'.wav',files=storage.folder.getFilesByName(name),file=files.hasNext()?files.next():storage.folder.createFile(Utilities.newBlob(Utilities.base64Decode(clips[i]),'audio/wav',name));fileId=file.getId();var stamp=new Date().toISOString(),entry=[j.key,'zh-CN','Kore',j.model,fileId,'audio/wav',Utilities.base64Decode(clips[i]).length,stamp,stamp,0,batch[6],'READY','vocabulary_double_asr_exact:'+batch[0]];if(found)storage.sheet.getRange(found.index,1,1,13).setValues([entry]);else storage.sheet.appendRow(entry);}
  r[3]=duplicate?'EXISTING':'READY';if(duplicate)r[7]=old[3];r[9]=fileId;r[16]='https://drive.google.com/file/d/'+fileId+'/view';r[11]='';passed++;

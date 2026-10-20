@@ -184,6 +184,7 @@ function hskAuto50Poll_(p,book,control){
   ['Auto_pause',p.getProperty('HSK_VOICE_PAUSED')||'false'],
   ['Auto_internal_daily_cap','OFF; real Google and provider quotas remain']
  ]);
+ if(typeof hskVoiceTtsHealthTick_==='function')hskVoiceTtsHealthTick_(p,control);
  var manifest=book.getSheetByName('Voice_Recovery_50');
  var segments=manifest?manifest.getRange(2,1,49,14).getValues():[];
  if(segments.length!==49)throw Error('auto50_manifest_missing');
@@ -233,6 +234,19 @@ function hskAuto50Poll_(p,book,control){
   }
  }
  var blockedUntil=Number(p.getProperty('HSK_VOCAB_RETRY_AT')||0);
+ // A failed 502 for one key/model must not stall the entire queue when
+ // another eligible 2.5 / 3.1 / 3.8 combination is available. This only probes
+ // status (no generation). HTTP 429 Retry-After is never forcibly cleared.
+ if(blockedUntil>Date.now()&&/^cloudflare_tts_502_/.test(String(p.getProperty('HSK_VOCAB_ERROR')||''))){
+  try{
+   var scan=hskVoiceRoutePairs_(p,ScriptApp.getIdentityToken(),Date.now(),
+     hskVoiceTtsModels_()[Math.max(0,Math.min(2,Number(p.getProperty('HSK_VOCAB_NEXT_MODEL')||0)))]);
+   if(scan.pairs.length){
+    p.deleteProperty('HSK_VOCAB_RETRY_AT');blockedUntil=0;
+    control.getRange(87,4).setValue('AUTO_RETRY_'+hskVoiceModelTag_(scan.pairs[0].model)+'_KEY_'+scan.pairs[0].slot);
+   }else control.getRange(87,4).setValue('ALL_MODELS_COOLING');
+  }catch(e){control.getRange(87,4).setValue('MODEL_STATUS_UNAVAILABLE_KEEP_WAIT');}
+ }
  if(blockedUntil>Date.now()){
   control.getRange(6,2).setValue('AUTO_CYCLE_WAITING_UNTIL_'+new Date(blockedUntil).toISOString());
   return true;

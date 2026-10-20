@@ -1,6 +1,7 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto');
 const src=fs.readFileSync(__dirname+'/LegacyCacheRepair.gs','utf8');
+const routing=fs.readFileSync(__dirname+'/VoiceModelRotation.gs','utf8');
 function setup(){
  const corpus=Array(120).fill('unused');
  corpus[27]='饭馆';corpus[30]='高兴';corpus[67]='名字';corpus[68]='哪里 (哪儿)';
@@ -19,11 +20,12 @@ function setup(){
   hskCheck_:()=>({sheet:cache,folder}),HSK_VOCAB_URL_:'https://worker.example/voice-precache',
   hskParallelDecode_:()=>({bytes:Array(100).fill(1),providerAttempts:1}),
   hskBatchPcm_:()=>[1,2],
-  hskVocabCall_:(token,body)=>body.action==='status'?{slots:[{slot:4,retryAfter:0}]}:{verification:'double_asr_exact',verified:[true],transcripts:[['饭馆'],['饭馆']],pinyin:[['fànguǎn'],['fànguǎn']]},
+  hskVocabCall_:(token,body)=>body.action==='status'?{ok:true,slots:[{slot:4,retryAfter:0}]}:{verification:'double_asr_exact',verified:[true],transcripts:[['饭馆'],['饭馆']],pinyin:[['fànguǎn'],['fànguǎn']]},
   hskVoiceRecHanzi_:x=>String(x).replace(/[\\s\\p{P}]/gu,''),hskVoiceRecPinyin_:x=>String(x).replace(/[\\s\\p{P}]/gu,''),
   UrlFetchApp:{fetch:()=>({getResponseCode:()=>200,getContentText:()=>'{}'})},
   Utilities:{base64Encode:()=> 'AA==',newBlob:(bytes,mime,name)=>({bytes,mime,name})},
   DriveApp:{getFileById:id=>({getId:()=>id,getBlob:()=>({getBytes:()=>fileMap.get(id).getBlob().getBytes()})})}};
+ vm.runInNewContext(routing,env);
  vm.runInNewContext(src,env);
  const p={getProperty:k=>props.get(k),setProperty:(k,v)=>props.set(k,v),deleteProperty:k=>props.delete(k)};
  return {env,p,rows,props,cache,queue,retry,control,controlState,folder,fileMap,saves,run:()=>env.hskLegacyCacheRepairTick_(p,null,control)};
@@ -65,10 +67,10 @@ test('existing READY 3.1 audio is reused and ASR-verified without additional TTS
  w.props.set('HSK_LEGACY_REPAIR_NEXT','0');w.run();assert.equal(w.rows[0][11],'READY');
  assert.match(w.rows[0][12],/reused_alternate_model/);
 });
-test('new legacy TTS requests prefer available 3.1 rather than failing original 2.5',()=>{
+test('new legacy TTS requests begin at available 2.5 before rotating to 3.1 and 3.8',()=>{
  const w=setup();let body;
  w.env.UrlFetchApp.fetch=(url,args)=>{body=JSON.parse(args.payload);return {getResponseCode:()=>200,getContentText:()=>'{}'};};
- w.run();assert.equal(body.model,'gemini-3.1-flash-tts-preview');
+ w.run();assert.equal(body.model,'gemini-2.5-flash-preview-tts');
  assert.equal(w.rows[0][11],'VERIFY_PENDING');
 });
 
@@ -100,7 +102,7 @@ test('provider quota 429 after third attempt defers only failed word, respects 2
  w.props.set('HSK_LEGACY_ITEM_27_ATTEMPTS','2');
  const original=w.env.hskVocabCall_;
  w.env.hskVocabCall_=(token,body)=>body.action==='status'?
-  {slots:[{slot:4,retryAfter:0},{slot:5,retryAfter:0}]}:original(token,body);
+  {ok:true,slots:[{slot:4,retryAfter:0},{slot:5,retryAfter:0}]}:original(token,body);
  w.env.UrlFetchApp.fetch=()=>({getResponseCode:()=>429,getContentText:()=>'{}'});
  let attempts=0;
  w.env.hskParallelDecode_=()=>{

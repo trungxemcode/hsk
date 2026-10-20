@@ -1,13 +1,14 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const src=fs.readFileSync(__dirname+'/VoiceChunkedTTS.gs','utf8');
+const routing=fs.readFileSync(__dirname+'/VoiceModelRotation.gs','utf8');
 function world(jobsCount=12,existingChunks=[]){
  const store=new Map(),record=[];
  const fileMap=new Map(existingChunks.map(([name,bytes])=>[name,{getId:()=>name,getBlob:()=>({getBytes:()=>bytes})}]));
  const folder={getFilesByName:name=>({hasNext:()=>fileMap.has(name),next:()=>fileMap.get(name)}),
  createFile(blob){const name=blob.name;assert.ok(!fileMap.has(name));const f={getId:()=>name,getBlob:()=>({getBytes:()=>blob.bytes})};fileMap.set(name,f);return f;}};
  const jobs=Array.from({length:jobsCount},(_,i)=>({text:'word'+i,pinyin:'test',row:i}));
- const batch=['id',JSON.stringify(jobs),'','TTS_CHUNKS','','today',2,'model',1,0,JSON.stringify({mode:'chunked_v1',attempts:{}})];
+ const batch=['id',JSON.stringify(jobs),'','TTS_CHUNKS','','today',2,'gemini-2.5-flash-preview-tts',1,0,JSON.stringify({mode:'chunked_v1',attempts:{}})];
  const rows=jobs.map(()=>['HSK','text','pin','PENDING',0,0,'','','','','','','']);
  const tables={batches:{getRange:()=>({setValues:values=>{record.push(values[0].slice());}})},queue:{}};
  const storage={folder};
@@ -17,6 +18,8 @@ function world(jobsCount=12,existingChunks=[]){
   hskVocabWrite_:(sheet,index,row)=>{},
   Utilities:{newBlob:(bytes,mime,name)=>({bytes,mime,name})},
   HSK_VOCAB_URL_:'https://example.invalid'};
+ vm.runInNewContext(routing,ctx);
+ ctx.hskVocabCall_=(token,body)=>({ok:true,slots:[{slot:2,retryAfter:0},{slot:9,retryAfter:0}]});
  vm.runInNewContext(src,ctx);
  const props={getProperty:k=>store.get(k),setProperty:(k,v)=>store.set(k,v),deleteProperty:k=>store.delete(k)};
  return {ctx,p:props,batch,rows,tables,storage,record,fileMap,call:()=>ctx.hskVoiceChunkedStep_(props,storage,tables,rows,[batch],0,'token')};
@@ -51,7 +54,8 @@ test('definitive rejected chunk stays resumable and backs off',()=>{
  w.call();
  assert.equal(w.batch[3],'TTS_CHUNKS');
  assert.equal(w.batch[10].includes('"0":1'),true);
- assert.ok(Number(w.p.getProperty('HSK_VOCAB_RETRY_AT'))>Date.now());
+ assert.equal(w.p.getProperty('HSK_VOCAB_RETRY_AT'),undefined);
+ assert.equal(w.p.getProperty('HSK_VOCAB_PAIR_2_gemini-2.5-flash-preview-tts_AFTER')>Date.now(),true);
 });
 test('ambiguous transport error is quarantined, never automatically resent',()=>{
  const w=world(10);w.ctx.UrlFetchApp={fetch:()=>{throw Error('network error');}};
@@ -73,10 +77,10 @@ test('previously REJECTED 50-word batch restores only when a checkpointed chunk 
 });
 test('reuses original 20 saved words and splits the failed third ten into two fives',()=>{
  const w=world(50,[['VOCAB_CHUNK_id_0.wav',[1,2,3,4]],['VOCAB_CHUNK_id_1.wav',[5,6,7,8]]]);
- w.batch[10]=JSON.stringify({mode:'chunked_v1',attempts:{0:1,1:2,2:3}});
+ w.batch[10]=JSON.stringify({mode:'chunked_v1',attempts:{0:1,1:2,2:12}});
  let called=0;
- w.ctx.hskVocabCall_=()=>({slots:[{slot:9,retryAfter:0}]});
- w.ctx.UrlFetchApp={fetch:(url,args)=>{called++;const body=JSON.parse(args.payload);assert.equal(body.model,'gemini-3.1-flash-tts-preview');assert.equal(body.keySlot,9);assert.ok(body.text);return {getResponseCode:()=>200,getContentText:()=>''};}};
+ w.ctx.hskVocabCall_=()=>({ok:true,slots:[{slot:9,retryAfter:0}]});
+ w.ctx.UrlFetchApp={fetch:(url,args)=>{called++;const body=JSON.parse(args.payload);assert.equal(body.model,called<=2?'gemini-3.8-flash-lite-tts':'gemini-2.5-flash-preview-tts');assert.equal(body.keySlot,9);assert.ok(body.text);return {getResponseCode:()=>200,getContentText:()=>''};}};
  w.ctx.hskParallelDecode_=()=>({bytes:[10,11,12,13],providerAttempts:1});
  w.call();const plan=JSON.parse(w.batch[10]).plan;
  assert.equal(plan.length,6);assert.equal(plan[0].name,'VOCAB_CHUNK_id_0.wav');
@@ -91,8 +95,8 @@ test('reuses original 20 saved words and splits the failed third ten into two fi
  w.call();assert.equal(w.batch[3],'MASTER');
  assert.equal(w.fileMap.has('VOCAB_MASTER_id.wav'),true);
  assert.equal(JSON.parse(w.batch[1]).length,50);
- assert.equal(JSON.parse(w.batch[1])[0].model,'model');
- assert.equal(JSON.parse(w.batch[1])[20].model,'gemini-3.1-flash-tts-preview');
+ assert.equal(JSON.parse(w.batch[1])[0].model,'gemini-2.5-flash-preview-tts');
+ assert.equal(JSON.parse(w.batch[1])[20].model,'gemini-3.8-flash-lite-tts');
  assert.equal(w.rows.every(row=>row[3]==='MASTER'),true);
  assert.equal(w.rows.filter(row=>row[3]==='READY').length,0);
  assert.equal(w.fileMap.get('VOCAB_CHUNK_id_0.wav').getBlob().getBytes().length,4);
@@ -100,8 +104,8 @@ test('reuses original 20 saved words and splits the failed third ten into two fi
 test('one repeatedly unspoken word is excluded, original successful four preserved and ready awaits ASR',()=>{
  const w=world(5,[['VOCAB_CHUNK_id_0_4.wav',[1,2,3,4]]]);
  w.batch[10]=JSON.stringify({mode:'chunked_v1',version:'adaptive_v2',attempts:{},
-  plan:[{from:0,to:4,name:'VOCAB_CHUNK_id_0_4.wav',model:'model',tries:1,slot:2},
-   {from:4,to:5,name:'VOCAB_CHUNK_id_4_5.wav',model:'gemini-3.1-flash-tts-preview',tries:2,slot:9}],
+  plan:[{from:0,to:4,name:'VOCAB_CHUNK_id_0_4.wav',model:'gemini-2.5-flash-preview-tts',tries:1,slot:2},
+   {from:4,to:5,name:'VOCAB_CHUNK_id_4_5.wav',model:'gemini-3.8-flash-lite-tts',tries:36,slot:9}],
   omitted:[]});
  w.ctx.UrlFetchApp={fetch:()=>{throw Error('no further provider calls');}};
  w.call();

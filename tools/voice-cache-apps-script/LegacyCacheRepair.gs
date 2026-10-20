@@ -19,8 +19,11 @@ function hskLegacyCandidates_(cacheRows,corpus){
   if(state==='READY'&&r[4]&&Number(r[6])>44)return;
   if(['DEFERRED','VERIFY_PENDING','REPAIR_REQUESTED'].indexOf(state)>=0 ||
     state==='REVIEW'&&/tts_key_invalid/.test(error)){
-   var alternativeKey=hskVocabKey_('gemini-3.1-flash-tts-preview',text);
-   var alternative=cacheRows.find(function(entry){return entry[0]===alternativeKey&&entry[11]==='READY'&&entry[4]&&Number(entry[6])>44;});
+   var alternative=hskVoiceTtsModels_().filter(function(model){return model!==r[3];})
+    .map(function(model){return hskVocabKey_(model,text);})
+    .map(function(key){return cacheRows.find(function(entry){
+     return entry[0]===key&&entry[11]==='READY'&&entry[4]&&Number(entry[6])>44;
+    });}).find(Boolean);
    out.push({at:at,row:r,index:item[0],text:text,pinyin:item[1],key:key,state:state,
     alternative:['DEFERRED','REVIEW'].indexOf(state)>=0?alternative:null});
   }
@@ -162,26 +165,23 @@ function hskLegacyCacheRepairTick_(p,book,control){
    save(t,{4:file.getId(),6:existingBytes.length,11:'VERIFY_PENDING',12:'existing_wav_requires_asr'});
    next(30000,'reuse_saved_wav_'+t.index);return;
   }
-  // Gemini 3.1 is preferred for prior Gemini 2.5 generation_incomplete/429 failures.
-  // Keep the original cache key as the requested model and record fallback provenance.
+  // Start with 2.5, then 3.1, then 3.8 Flash-Lite on the next available
+  // combination. A failed word does not block unattempted legacy words.
   var generationModel=null,slot=-1,route=typeof hskVoiceFailoverMode_==='function'?hskVoiceFailoverMode_(p):'WORKER',direct=route==='DIRECT';
-  var preferred=['gemini-3.1-flash-tts-preview',String(t.row[3])];
+  var requested=String(p.getProperty('HSK_LEGACY_ITEM_'+t.index+'_NEXT_MODEL')||t.row[3]);
+  if(hskVoiceTtsModels_().indexOf(requested)<0)requested=hskVoiceTtsModels_()[0];
   if(direct&&typeof hskVoiceFailoverKeyCount_==='function'&&hskVoiceFailoverKeyCount_(p)>0){
-   generationModel=preferred[0];slot=0;
+   generationModel=requested;slot=0;
+  }else{
+   var options=hskVoiceRoutePairs_(p,token,Date.now(),requested,null).pairs;
+   options=options.filter(function(pair){
+    return Number(p.getProperty('HSK_LEGACY_SLOT_'+pair.slot+'_AFTER')||0)<=Date.now();
+   });
+   if(options.length){slot=options[0].slot;generationModel=options[0].model;}
   }
-  for(var mi=0;mi<preferred.length&&slot<0;mi++){
-   try{
-    var status=hskVocabCall_(token,{action:'status',model:preferred[mi]});
-    var available=Array.isArray(status.slots)?status.slots.filter(function(s){
-     return Number.isInteger(s.slot)&&Number(s.retryAfter||0)<=0&&
-      Number(p.getProperty('HSK_LEGACY_SLOT_'+s.slot+'_AFTER')||0)<=Date.now();
-    }):[];
-    if(available.length){slot=available[0].slot;generationModel=preferred[mi];}
-   }catch(ignored){}
-  }
-  if(slot<0){next(600000,'tts_models_or_keys_cooling');return;}
+  if(slot<0){next(60000,'tts_models_or_keys_cooling');return;}
   // Reserve durably before contacting Gemini.
-  save(t,{10:slot,11:'REPAIR_REQUESTED',12:'tts_request_journaled_model_'+(generationModel.indexOf('3.1')>=0?'3_1':'2_5')});
+  save(t,{10:slot,11:'REPAIR_REQUESTED',12:'tts_request_journaled_model_'+hskVoiceModelTag_(generationModel)});
   retryStatus(t,'PENDING','legacy_tts_repair_journaled');
   SpreadsheetApp.flush();
   var response,decoded;
@@ -237,6 +237,8 @@ function hskLegacyCacheRepairTick_(p,book,control){
     retryStatus(t,'PENDING','tts_provider_backoff_until_'+new Date(wordRetryAt).toISOString(),wordRetryAt);
    }
    p.setProperty('HSK_LEGACY_SLOT_'+slot+'_AFTER',String(Date.now()+wait));
+   p.setProperty('HSK_VOCAB_PAIR_'+slot+'_'+generationModel+'_AFTER',String(Date.now()+wait));
+   p.setProperty('HSK_LEGACY_ITEM_'+t.index+'_NEXT_MODEL',hskVoiceNextModel_(generationModel));
    // Advance through the remaining legacy backlog after one short scheduler
    // interval. Do not send an early retry for the same word or provider slot.
    next(60000,'tts_deferred_'+t.index+'_'+reason.slice(0,55));return;
@@ -245,7 +247,7 @@ function hskLegacyCacheRepairTick_(p,book,control){
    if(decoded.bytes.length<=44||decoded.bytes.length>600000)throw Error('invalid_legacy_audio_size');
    hskBatchPcm_(decoded.bytes);
    var created=storage.folder.createFile(Utilities.newBlob(decoded.bytes,'audio/wav',name));
-   save(t,{4:created.getId(),6:decoded.bytes.length,10:slot,11:'VERIFY_PENDING',12:'generated_model_'+(generationModel.indexOf('3.1')>=0?'3_1':'2_5')+'_pending_double_asr'});
+   save(t,{4:created.getId(),6:decoded.bytes.length,10:slot,11:'VERIFY_PENDING',12:'generated_model_'+hskVoiceModelTag_(generationModel)+'_pending_double_asr'});
    p.deleteProperty('HSK_LEGACY_ITEM_'+t.index+'_ATTEMPTS');
    next(90000,'tts_saved_'+t.index+'_awaiting_double_asr');
   }catch(e){

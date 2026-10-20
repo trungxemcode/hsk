@@ -9,7 +9,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
  var batch=batches[index],jobs=JSON.parse(batch[1]),id=String(batch[0]),folder=storage.folder;
  var info={};try{info=JSON.parse(String(batch[10]||'{}'));}catch(ignore){}
  if(info.mode!=='chunked_v1')throw Error('invalid_tts_chunk_journal');
- var fallback='gemini-3.1-flash-tts-preview';
+ var fallback='gemini-3.8-flash-lite-tts';
  function fileNamed(name){var found=folder.getFilesByName(name);return found.hasNext()?found.next():null;}
  function write(){batch[10]=JSON.stringify(info);tables.batches.getRange(index+2,1,1,11).setValues([batch]);}
  function report(msg){batch[4]=msg.slice(0,110);write();}
@@ -22,8 +22,10 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
    plan.push({from:base,to:Math.min(jobs.length,base+10),name:savedName,
     model:batch[7],tries:Number((info.attempts||{})[k]||0),slot:Number(batch[6])});
   }
-  if(batch[7]!==fallback && plan.some(function(g){return g.tries>=3;})){
-   plan.forEach(function(g){if(!fileNamed(g.name))g.model=fallback;});
+  // Older attempts are preserved but can try the other two models before
+  // deciding the recorded word group is too difficult.
+  if(plan.some(function(g){return g.tries>=3;})){
+   plan.forEach(function(g){if(!fileNamed(g.name)&&g.tries>0)g.model=hskVoiceNextModel_(g.model);});
   }
   info.plan=plan;info.omitted=Array.isArray(info.omitted)?info.omitted:[];
   info.version='adaptive_v2';write();
@@ -84,7 +86,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   }
   commitMaster(file);return;
  }
- var g=plan[missing],length=g.to-g.from,maxTries=length===1?2:3;
+ var g=plan[missing],length=g.to-g.from,maxTries=length===1?36:12;
  if(g.tries>=maxTries){
   if(length>1){
    var half=g.from+Math.floor(length/2);
@@ -114,23 +116,18 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+300000));return;
  }
  var slot=Number(batch[6]);
- if(!direct&&g.model!==batch[7]){
-  // Respect live per-key quota and model cooldown, rather than blindly reusing
-  // a key that just failed on Gemini 2.5.
-  var status;
-  try{status=hskVocabCall_(token,{action:'status',model:g.model});}
-  catch(e){p.setProperty('HSK_VOCAB_ERROR','alternate_tts_status_unavailable');p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+300000));return;}
-  var available=(status.slots||[]).filter(function(s){
-   return Number.isInteger(s.slot)&&!Number(s.retryAfter||0)&&
-    Number(p.getProperty('HSK_VOCAB_PAIR_'+s.slot+'_'+g.model+'_AFTER')||0)<=Date.now();
-  });
-  if(!available.length){
-   p.setProperty('HSK_VOCAB_ERROR','alternate_tts_keys_cooling');
-   p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+300000));return;
+ if(!direct){
+  var scan=hskVoiceRoutePairs_(p,token,Date.now(),g.model,
+   g.tries>0?{model:g.model,slot:g.slot}:null);
+  if(!scan.pairs.length){
+   var when=hskVoiceEarliestProviderRetry_(Date.now(),scan.waitUntil);
+   p.setProperty('HSK_VOCAB_ERROR','all_tts_models_or_keys_cooling');
+   p.setProperty('HSK_VOCAB_RETRY_AT',String(when));
+   report('WAIT_ALL_MODELS_2_5_3_1_3_8');
+   return;
   }
-  var hint=Number(info.slotHint||0);
-  available.sort(function(a,b){return (a.slot-hint+13)%13-(b.slot-hint+13)%13;});
-  slot=available[0].slot;info.slotHint=(slot+1)%13;
+  slot=scan.pairs[0].slot;g.model=scan.pairs[0].model;
+  info.slotHint=(slot+1)%13;
  }
  var selected=jobs.slice(g.from,g.to),joined=selected.map(function(job){return job.text;}).join('?');
  var payload=Array.from(joined).length<=220?
@@ -141,7 +138,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
  g.tries++;g.slot=slot;
  if(Number.isInteger(g.from)&&g.from%10===0&&g.to-g.from===10)
   (info.attempts||(info.attempts={}))[g.from/10]=g.tries;
- report('GENERATING_'+(g.from+1)+'-'+g.to+'_TRY_'+g.tries+'_MODEL_'+(g.model===fallback?'3_1':'2_5'));
+ report('GENERATING_'+(g.from+1)+'-'+g.to+'_TRY_'+g.tries+'_MODEL_'+hskVoiceModelTag_(g.model)+'_KEY_'+slot);
  var response,decoded;
  if(direct){
   try{decoded=hskVoiceDirectTts_(p,joined,g.model);}
@@ -184,15 +181,26 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   }
   if(route==='WORKER_PROBE'&&typeof hskVoiceFailoverOutcome_==='function')
    hskVoiceFailoverOutcome_(p,route,false,reason);
-  // After a definite Gemini 2.5 failure, let 3.1 retry, then split as needed.
-  if(g.model!==fallback&&/tts_generation_incomplete|tts_provider_unavailable|tts_blocked|tts_model_unavailable/.test(reason))
-   g.model=fallback;
+  var usedModel=payload.model;
+  // A safety refusal must not be treated as quota exhaustion or retried on
+  // another provider identity. Isolate only the refused word/group.
+  if(/tts_blocked|tts_permission_denied/.test(reason)){
+   p.setProperty('HSK_VOCAB_PAIR_'+slot+'_'+usedModel+'_AFTER',String(now+3600000));
+   batch[3]='REVIEW';report('TTS_BLOCKED_REQUIRES_REVIEW_'+g.from+'_'+g.to);
+   jobs.slice(g.from,g.to).forEach(function(job){
+    var row=rows[job.row];if(['READY','EXISTING'].indexOf(row[3])>=0)return;
+    row[3]='REVIEW';row[11]='tts_provider_refused_content';hskVocabWrite_(tables.queue,job.row,row);
+   });
+   return;
+  }
   report('FAILED_'+(g.from+1)+'-'+g.to+'_TRY_'+g.tries+'_'+reason);
-  var wait=Math.max(120000,Math.min(1800000,Number(e.retryAfter||120)*1000));
-  if(g.model===fallback&&batch[7]!==fallback)wait=Math.min(wait,120000);
-  p.setProperty('HSK_VOCAB_RETRY_AT',String(now+wait));
+  // Restrict Retry-After to the failed key+model pair, NOT the whole HSK queue.
+  // The next scheduler tick scans all other eligible model/key pairs.
+  var wait=Math.max(60000,Math.min(604800000,Number(e.retryAfter||120)*1000));
+  p.setProperty('HSK_VOCAB_PAIR_'+slot+'_'+usedModel+'_AFTER',String(now+wait));
+  g.model=hskVoiceNextModel_(usedModel);
   p.setProperty('HSK_VOCAB_ERROR',reason.slice(0,100));
-  p.setProperty('HSK_VOCAB_PAIR_'+slot+'_'+payload.model+'_AFTER',String(now+wait));
+  p.deleteProperty('HSK_VOCAB_RETRY_AT');
   return;
  }
  p.setProperty('HSK_VOCAB_TTS_CALLS',String(Number(p.getProperty('HSK_VOCAB_TTS_CALLS')||0)+decoded.providerAttempts));

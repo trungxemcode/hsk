@@ -1,19 +1,17 @@
 /** Shared one-shot command for Plus/Work. Existing Google owner executes; no public endpoint. */
 function hskShared50Pair_(token,now){
- var p=hskSettings_(),models=['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview'],all=[];
- // Cloudflare is not a dependency for opening a new batch during DIRECT failover.
+ var p=hskSettings_(),models=hskVoiceTtsModels_();
  if(typeof hskVoiceFailoverMode_==='function'&&hskVoiceFailoverMode_(p)==='DIRECT'){
   if(typeof hskVoiceFailoverKeyCount_==='function'&&hskVoiceFailoverKeyCount_(p)>0)
-   return {slot:0,model:'gemini-3.1-flash-tts-preview',mi:1};
+   return {slot:0,model:'gemini-3.8-flash-lite-tts',mi:2};
   return null;
  }
- models.forEach(function(model,mi){hskVocabCall_(token,{action:'status',model:model}).slots.forEach(function(s){
-  if(!Number(s.retryAfter)&&Number(p.getProperty('HSK_VOCAB_PAIR_'+s.slot+'_'+model+'_AFTER')||0)<=now)
-   all.push({slot:s.slot,model:model,mi:mi});
- });});
- var next=Number(p.getProperty('HSK_VOCAB_NEXT_MODEL')||0),slot=Number(p.getProperty('HSK_VOCAB_NEXT_SLOT')||2);
- all.sort(function(a,b){return (a.mi-next+2)%2-(b.mi-next+2)%2||(a.slot-slot+13)%13-(b.slot-slot+13)%13;});
- return all[0]||null;
+ var next=Math.max(0,Math.min(2,Number(p.getProperty('HSK_VOCAB_NEXT_MODEL')||0)));
+ var available=hskVoiceRoutePairs_(p,token,now,models[next]);
+ p.setProperty('HSK_VOICE_LAST_MODEL_SCAN',available.pairs.map(function(x){
+  return hskVoiceModelTag_(x.model)+':'+x.slot;
+ }).slice(0,20).join(',')||'none');
+ return available.pairs[0]||null;
 }
 function hskShared50Control_(p,book,control,command){
  if(command!=='RUN_ONCE_50'&&command!=='RUNNING_ONCE_50')return null;
