@@ -249,7 +249,11 @@ function hskVoice38CanaryTick_(p,book,control){
   hskVocabWrite_(list,idx,row);
   p.deleteProperty('HSK_VOICE_38_CANARY_QUEUE_INDEX');
  }catch(e){
-  p.setProperty('HSK_VOICE_38_CANARY_LAST_ERROR',String(e.message||e).slice(0,110));
+  var msg=String(e.message||e).replace(/[^a-zA-Z0-9_:-]/g,'_').slice(0,100);
+  p.setProperty('HSK_VOICE_38_CANARY_LAST_ERROR',msg);
   p.setProperty('HSK_VOICE_38_CANARY_NEXT',String(Date.now()+120000));
+  if(command==='CANARY38_AUDIO_REVIEW'){
+   try{control.getRange(94,4).setValue('CANARY38_SALVAGE_FAILED_'+msg.slice(0,62));}catch(ignore){}
+  }
  }finally{lock.releaseLock();}
 }
