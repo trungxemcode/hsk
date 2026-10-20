@@ -6,7 +6,7 @@ function build(){
  const rows=[[4,'别的','bié de','READY',0,0,'','','','old-file','','','', '', '', '', ''],
   [4,'生活','shēng huó','PENDING',0,0,'','','','','','','','','','',''],
   [4,'生命','shēng mìng','PENDING',0,0,'','','','','','','','','','','']];
- const cache=[],blobs=new Map();let ttsCalls=0,asrCalls=0,sheetsUpdated=0,exact=true,unknown=false;
+ const cache=[],blobs=new Map();let ttsCalls=0,asrCalls=0,sheetsUpdated=0,exact=true,unknown=false,oversized=false;
  const folder={getFilesByName:name=>({hasNext:()=>blobs.has(name),next:()=>blobs.get(name)}),createFile:blob=>{
    if(blobs.has(blob.name))throw Error('duplicate_file');
    const f={getId:()=>blob.name,getBlob:()=>({getBytes:()=>blob.bytes})};
@@ -16,7 +16,7 @@ function build(){
  const cacheSheet={appendRow:record=>cache.push(record),
   getRange:(r,c,h,w)=>({setValues:values=>{cache[r-2]=values[0];sheetsUpdated++;}})};
  const control={getRange:(r,c)=>({getValue:()=>r===94&&c===4?state.command:r===2&&c===2?'AUTO_CYCLE':'',
-   setValue:value=>{if(r===94&&c===4)state.command=value;}})};
+   setValue:value=>{if(r===94&&c===4)state.command=value;},setValues:()=>{}})};
  const p={getProperty:k=>props.get(k),setProperty:(k,v)=>props.set(k,String(v)),deleteProperty:k=>props.delete(k)};
  const env={Date,Math,JSON,Array,Number,String,Object,Set,
   LockService:{getScriptLock:()=>({tryLock:()=>true,releaseLock:()=>{}})},
@@ -29,9 +29,11 @@ function build(){
   hskVocabWrite_:(sheet,idx,row)=>{rows[idx]=row;sheetsUpdated++;},
   hskVoiceRoutePairs_:()=>({pairs:[{model:'gemini-3.8-flash-lite-tts',slot:12}]}),
   hskGetRow_:(sheet,key)=>{let i=cache.findIndex(x=>x[0]===key);return i<0?null:{index:i+2,values:cache[i]};},
-  hskBatchPcm_:bytes=>{assert.ok(bytes.length>44);},
+  hskBatchPcm_:bytes=>{assert.ok(bytes.length>44);return bytes;},
   hskParallelDecode_:response=>unknown?(()=>{throw Error('response_uncertain');})():{
-    bytes:new Array(120).fill(0),providerAttempts:1},
+    bytes:new Array(oversized?700000:120).fill(0),providerAttempts:1},
+  hskAuto50Detect_:()=>({ranges:[[1000,4500]]}),
+  hskWav_:pcm=>pcm,
   hskVocabCall_:(tok,body)=>{if(body.action==='verify-words'){asrCalls++;return {
     verification:'double_asr_exact',verified:[exact],
     transcripts:exact?[['生活'],['生活']]:[['生命'],['生命']],
@@ -40,7 +42,7 @@ function build(){
   hskVoiceRecHanzi_:s=>String(s).replace(/\\s/g,''),
   hskVoiceRecPinyin_:s=>String(s).replace(/\\s/g,''),
   UrlFetchApp:{fetch:(url,opts)=>{ttsCalls++;const b=JSON.parse(opts.payload);
-    assert.equal(b.model,'gemini-3.8-flash-lite-tts');assert.equal(b.text,'生活');
+    assert.equal(b.model,'gemini-3.8-flash-lite-tts');assert.ok(['生活','生命'].includes(b.text));
     assert.equal(b.keySlot,12);assert.equal(opts.headers.Authorization,'Bearer token-not-persisted');
     return {getResponseCode:()=>200,getContentText:()=> '{}'};}},
   HSK_VOCAB_URL_:'https://unit-test.invalid',
@@ -49,7 +51,7 @@ function build(){
  };
  vm.runInNewContext(source,env);
  return {p,env,queue,rows,cache,blobs,control,state,props,run:()=>env.hskVoice38CanaryTick_(p,{},control),
-  counts:()=>({ttsCalls,asrCalls,sheetsUpdated}),setExact:v=>exact=v,setUnknown:v=>unknown=v};
+  counts:()=>({ttsCalls,asrCalls,sheetsUpdated}),setExact:v=>exact=v,setUnknown:v=>unknown=v,setOversized:v=>oversized=v};
 }
 test('real 3.8 route saves WAV first, then promotes only after blind double ASR',()=>{
  const x=build();
@@ -96,4 +98,24 @@ test('a previously sent TTS request interrupted before response is quarantined, 
  assert.equal(x.counts().ttsCalls,0);
  x.run();
  assert.equal(x.counts().ttsCalls,0);
+});
+
+test('oversized 3.8 PCM is trimmed to one safe speech region before ASR and saved',()=>{
+ const x=build();x.setOversized(true);x.run();
+ assert.equal(x.state.command,'CANARY38_VERIFY');
+ assert.equal(x.cache[0][11],'VERIFY_PENDING');
+ assert.equal(x.cache[0][6],(4500+4800-(1000-2400>0?1000-2400:0))*2);
+ assert.ok(x.cache[0][6]<245000);
+ assert.equal(x.props.get('HSK_VOICE_TTS_PREFERRED_MODEL'),undefined);
+ x.props.set('HSK_VOICE_38_CANARY_NEXT','0');x.run();
+ assert.equal(x.state.command,'CANARY38_CONFIRMED_DOUBLE_ASR_PREFERRED');
+ assert.equal(x.cache[0][11],'READY');
+});
+test('a new, different canary word does not resend the preceding UNCERTAIN word',()=>{
+ const x=build();x.setUnknown(true);x.run();
+ assert.equal(x.rows[1][3],'CANARY38_HOLD');
+ x.setUnknown(false);x.state.command='RUN_38_HSK_NEW';x.run();
+ assert.equal(x.rows[1][3],'CANARY38_HOLD');
+ assert.equal(x.rows[2][3],'CANARY38_VERIFY');
+ assert.equal(x.counts().ttsCalls,2);
 });

@@ -4,8 +4,28 @@
  * BEFORE verifying, and never resends an ambiguous Gemini request.
  * Preference changes only after two independent blind ASR passes agree.
  */
+/** Take just the voiced region from an oversized Gemini 3.8 WAV. Never drop any speech blindly. */
+function hskVoice38PreparedWav_(wav){
+ var pcm=hskBatchPcm_(wav),originalBytes=wav.length;
+ if(originalBytes<=245000)return {bytes:wav,sourceBytes:originalBytes,trimmed:false};
+ var r=hskAuto50Detect_(wav,1);
+ if(!r||!Array.isArray(r.ranges)||r.ranges.length!==1)throw Error('canary38_not_single_speech_segment');
+ var s=r.ranges[0],start=Math.max(0,s[0]-2400),end=Math.min(pcm.length/2,s[1]+4800);
+ if(!Number.isInteger(start)||!Number.isInteger(end)||end<=start)throw Error('canary38_invalid_speech_bounds');
+ var clip=hskWav_(pcm.slice(start*2,end*2),'audio/l16');
+ if(clip.length<=44||clip.length>245000)throw Error('canary38_speech_too_long');
+ return {bytes:clip,sourceBytes:originalBytes,trimmed:true};
+}
 function hskVoice38CanaryTick_(p,book,control){
  var command=String(control.getRange(94,4).getValue()||'');
+ if(command==='RUN_38_HSK_NEW'){
+  // Start one distinct word; never release or regenerate the prior uncertain one.
+  p.deleteProperty('HSK_VOICE_38_CANARY_QUEUE_INDEX');
+  p.deleteProperty('HSK_VOICE_38_CANARY_ATTEMPTS');
+  p.deleteProperty('HSK_VOICE_38_CANARY_NEXT');
+  p.deleteProperty('HSK_VOICE_38_CANARY_LAST_ERROR');
+  command='RUN_38_HSK_ONCE';control.getRange(94,4).setValue(command);
+ }
  if(command==='CANARY38_UNCERTAIN'){
   var safeError=String(p.getProperty('HSK_VOICE_38_CANARY_LAST_ERROR')||'no_runtime_error_recorded').replace(/[^a-zA-Z0-9_:-]/g,'_').slice(0,115);
   control.getRange(95,3,1,2).setValues([['Canary38_last_error',safeError]]);
@@ -97,10 +117,21 @@ function hskVoice38CanaryTick_(p,book,control){
      }
      return;
     }
-    var wav=decoded.bytes;
-    if(wav.length<=44||wav.length>600000)throw Error('canary38_bad_audio_size');
-    hskBatchPcm_(wav);
-    try{file=storage.folder.createFile(Utilities.newBlob(wav,'audio/wav',filename));}
+    var wav=decoded.bytes,prepared;
+    try{prepared=hskVoice38PreparedWav_(wav);}catch(audioError){
+     var sourceName='CANARY38_ORIGINAL_'+key.slice(0,24)+'.wav';
+     var sourceFiles=storage.folder.getFilesByName(sourceName);
+     var rawFile=sourceFiles.hasNext()?sourceFiles.next():storage.folder.createFile(Utilities.newBlob(wav,'audio/wav',sourceName));
+     row[3]='REVIEW';row[9]=rawFile.getId();row[11]='canary38_audio_needs_review_'+String(audioError.message||'').slice(0,55);
+     hskVocabWrite_(list,idx,row);
+     control.getRange(94,4).setValue('CANARY38_AUDIO_REVIEW');
+     return;
+    }
+    control.getRange(96,3,2,2).setValues([
+     ['Canary38_original_bytes',prepared.sourceBytes],
+     ['Canary38_asr_clip_bytes',prepared.bytes.length]
+    ]);
+    try{file=storage.folder.createFile(Utilities.newBlob(prepared.bytes,'audio/wav',filename));}
     catch(e){
      row[3]='CANARY38_HOLD';row[11]='tts_drive_save_uncertain';
      hskVocabWrite_(list,idx,row);control.getRange(94,4).setValue('CANARY38_UNCERTAIN');
