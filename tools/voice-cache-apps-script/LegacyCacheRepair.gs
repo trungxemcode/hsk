@@ -34,6 +34,20 @@ function hskLegacyCacheRepairTick_(p,book,control){
  if(String(control.getRange(55,2).getValue()||'')!=='ON')return;
  if(String(control.getRange(2,2).getValue()||'')!=='AUTO_CYCLE'||p.getProperty('HSK_VOICE_PAUSED')==='true')return;
  var now=Date.now();
+ // Non-secret, low-cost diagnostics so every owner's timer tick shows precisely
+ // why the independent legacy queue is or isn't making progress.
+ try{
+  var notBefore=Number(p.getProperty('HSK_LEGACY_REPAIR_NEXT')||0);
+  var item68=Number(p.getProperty('HSK_LEGACY_ITEM_68_AFTER')||0);
+  control.getRange(95,1,6,2).setValues([
+   ['Legacy_diag_at',new Date(now).toISOString()],
+   ['Legacy_diag_next',notBefore?new Date(notBefore).toISOString():'READY'],
+   ['Legacy_diag_warm_enabled',String(p.getProperty('HSK_WARM_ENABLED')||'false')],
+   ['Legacy_diag_last',String(p.getProperty('HSK_LEGACY_REPAIR_LAST')||'none').slice(0,120)],
+   ['Legacy_diag_item68_next',item68?new Date(item68).toISOString():'READY'],
+   ['Legacy_diag_voice_paused',String(p.getProperty('HSK_VOICE_PAUSED')||'false')]
+  ]);
+ }catch(diagError){}
  // Once, release only the former 2.5 TTS generation-error global backoff.
  // Per-item and provider-key cooldowns remain in force; cached 3.1 files can be reused now.
  if(p.getProperty('HSK_LEGACY_REPAIR_POLICY')!=='prefer_verified_alternates_v2'){
