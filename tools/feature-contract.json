@@ -1025,13 +1025,41 @@
       "id": "gemini-voice-precache",
       "name": "Kho audio Kore xác thực Google và bảo vệ dữ liệu âm thanh",
       "checks": [
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"createVoicePrecacheHandler"},
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"decodeVoiceAudio"},
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"tts_generation_incomplete"},
-        {"kind":"contains","file":"tools/voice-cache-apps-script/WarmBatch.gs","value":"HSK_WARM_RETRY_AT"},
-        {"kind":"file","file":"server/voice-apps-script.test.mjs","value":""},
-        {"kind":"file","file":"server/voice-bundle.test.mjs","value":""},
-        {"kind":"file","file":"server/voice-tts.test.mjs","value":""}
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "createVoicePrecacheHandler"
+        },
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "decodeVoiceAudio"
+        },
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "tts_generation_incomplete"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/WarmBatch.gs",
+          "value": "HSK_WARM_RETRY_AT"
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-apps-script.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-bundle.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-tts.test.mjs",
+          "value": ""
+        }
       ]
     },
     {
@@ -1066,6 +1094,37 @@
         {
           "kind": "file",
           "file": "tools/voice-cache-apps-script/test-phased-auto.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "voice-single-producer-dual-asr",
+      "name": "Opt-in single TTS producer and two fenced ASR consumers",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/VoicePipeline.gs",
+          "value": "function hskPipelineVerify1"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/VoicePipeline.gs",
+          "value": "function hskPipelineVerify2"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/VoicePipeline.gs",
+          "value": "pipeline_stale_audio_version"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/Vocabulary.gs",
+          "value": "hskPipelineVerifyBatches_(batches).length>=2"
+        },
+        {
+          "kind": "file",
+          "file": "tools/voice-cache-apps-script/test-pipeline.cjs",
           "value": ""
         }
       ]

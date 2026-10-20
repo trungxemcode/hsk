@@ -37,7 +37,7 @@ function hskBatchPartialRecover_(storage,journal,rowNumber,row,queue,deferred,p)
  }
  if(seen.size!==jobs.length-1)return {kind:'review',reason:'batch_verification_ambiguous'};
  // Verification succeeded for ALL surviving utterances; save each idempotently under its actual word's hash.
- var saved=0,now=new Date().toISOString();
+ var saved=0,now=hskVNTime_(new Date());
  for(var c=0;c<clips.length;c++){
   var j=jobs[match.indices[c]],found=hskGetRow_(storage.sheet,j.key);
   if(!found||found.values[11]!=='READY'){

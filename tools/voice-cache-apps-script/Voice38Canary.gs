@@ -142,7 +142,7 @@ function hskVoice38CanaryTick_(p,book,control){
    if(!file)throw Error('canary38_file_missing');
    var saved=file.getBlob().getBytes();hskBatchPcm_(saved);
    var record=[key,'zh-CN','Kore',model,file.getId(),'audio/wav',saved.length,
-    new Date().toISOString(),new Date().toISOString(),0,0,'VERIFY_PENDING','canary38_tts_saved_pending_two_asr'];
+    hskVNTime_(new Date()),hskVNTime_(new Date()),0,0,'VERIFY_PENDING','canary38_tts_saved_pending_two_asr'];
    if(prior)storage.sheet.getRange(prior.index,1,1,13).setValues([record]);
    else storage.sheet.appendRow(record);
    row[3]='CANARY38_VERIFY';row[9]=file.getId();row[11]='canary38_wav_saved_pending_two_asr';
@@ -175,7 +175,7 @@ function hskVoice38CanaryTick_(p,book,control){
     Utilities.newBlob(excerpt,'audio/wav',shortName));
    var existing=hskGetRow_(storage.sheet,sourceKey),entry=[
     sourceKey,'zh-CN','Kore',model,clipFile.getId(),'audio/wav',
-    excerpt.length,new Date().toISOString(),new Date().toISOString(),0,0,
+    excerpt.length,hskVNTime_(new Date()),hskVNTime_(new Date()),0,0,
     'VERIFY_PENDING','canary38_salvaged_from_long_audio_pending_double_asr'
    ];
    if(existing)storage.sheet.getRange(existing.index,1,1,13).setValues([entry]);
@@ -207,7 +207,7 @@ function hskVoice38CanaryTick_(p,book,control){
    hskVocabWrite_(list,idx,row);
    var key2=hskVocabKey_(model,row[1]),prior2=hskGetRow_(storage.sheet,key2);
    var recovery=[key2,'zh-CN','Kore',model,recovered.getId(),'audio/wav',
-    recovered.getBlob().getBytes().length,new Date().toISOString(),new Date().toISOString(),0,0,
+    recovered.getBlob().getBytes().length,hskVNTime_(new Date()),hskVNTime_(new Date()),0,0,
     'VERIFY_PENDING','recovered_3_8_wav_pending_asr'];
    if(prior2)storage.sheet.getRange(prior2.index,1,1,13).setValues([recovery]);
    else storage.sheet.appendRow(recovery);

@@ -4,7 +4,7 @@
  */
 function hskVoiceSegmentDiagnostic(){
  var p=hskSettings_(),sheet=SpreadsheetApp.openById(p.getProperty('HSK_VOICE_SHEET_ID')).getSheetByName('Voice_Control');
- var lines=[['Segment_diagnostic_at',new Date().toISOString()]];
+ var lines=[['Segment_diagnostic_at',hskVNTime_(new Date())]];
  try{
   var identity=ScriptApp.getIdentityToken();
   if(!identity)throw Error('identity_token_missing');

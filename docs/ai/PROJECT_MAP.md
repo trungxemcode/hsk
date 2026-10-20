@@ -69,3 +69,5 @@ Gemini-first reading avoids the measured 18-second xKiro timeout. Source text is
 
 ## Auto50 quality profile (20 October 2026)
 New batch profile and bounded per-model outcomes: tools/voice-cache-apps-script/QualityEnhancements.gs; staged matching: AsrQualityGate.gs; checkpointed chunks: VoiceChunkedTTS.gs. Current live comparison, rollback and limitations: README-QUALITY-INTEGRATION.md. Private trial never imports into production automatically.
+
+Voice pipeline candidate (OFF): VoicePipeline.gs adds one producer and two ASR lanes with lease/version fencing and a two-batch bound. Provider calls release the shared mutation lock. Existing quality criteria and phased HSK order remain. Sandbox tests: test-pipeline.cjs; read README before activation.

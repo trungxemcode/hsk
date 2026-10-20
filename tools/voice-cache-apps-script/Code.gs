@@ -48,7 +48,7 @@ function hskCached_(storage,cacheKey) {
   if(!found||found.values[11]!=='READY'||!found.values[4])return null;
   try {
     var f=DriveApp.getFileById(String(found.values[4])),result=hskResponse_(f,true,0);
-    storage.sheet.getRange(found.index,9,1,2).setValues([[new Date().toISOString(),Number(found.values[9]||0)+1]]);
+    storage.sheet.getRange(found.index,9,1,2).setValues([[hskVNTime_(new Date()),Number(found.values[9]||0)+1]]);
     return result;
   } catch(error) {
     // Missing/corrupt Drive objects are rebuilt; don't mistake them for a cache hit.
@@ -71,7 +71,7 @@ function hskGemini_(key,text,model) {
   var prompt='Äá»c nguyÃªn vÄƒn tiáº¿ng Trung phá»• thÃ´ng sau, rÃµ rÃ ng vÃ  tá»± nhiÃªn. KhÃ´ng thÃªm hoáº·c thay chá»¯: '+text;
   var body={contents:[{role:'user',parts:[{text:prompt}]}],
     generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:'Kore'}}}}};
-  var res=UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent',{
+  var res=(typeof hskPipelineFetch_==='function'?hskPipelineFetch_:UrlFetchApp.fetch)('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent',{
     method:'post',contentType:'application/json',headers:{'x-goog-api-key':key},
     payload:JSON.stringify(body),muteHttpExceptions:true});
   var code=res.getResponseCode();
@@ -86,7 +86,7 @@ function hskWorkerTts_(text) {
   var idToken=ScriptApp.getIdentityToken();
   if(!idToken)throw new Error('google_identity_missing');
   var url='https://hsk-vietnamese-translator.trung-hsk668.workers.dev/voice-precache';
-  var response=UrlFetchApp.fetch(url,{method:'post',contentType:'application/json',
+  var response=(typeof hskPipelineFetch_==='function'?hskPipelineFetch_:UrlFetchApp.fetch)(url,{method:'post',contentType:'application/json',
     headers:{Authorization:'Bearer '+idToken},payload:JSON.stringify({text:text,language:'zh-CN'}),muteHttpExceptions:true});
   if(response.getResponseCode()!==200){
     // Only include predefined safe backend error codes; never echo credentials or a provider body.
@@ -113,7 +113,7 @@ function hskGenerate_(p,text,model) {
     var item=keys[(start+attempt)%keys.length],mark='HSK_TTS_COOLDOWN_'+item.index;
     if(cache.get(mark))continue;
     try{return {bytes:hskGemini_(item.key,text,model),index:item.index};}
-    catch(error){
+    catch(error){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(error);
       if(!error.retryable)throw error;
       cache.put(mark,'1',error.message==='provider_429'?600:60);
     }
@@ -140,7 +140,7 @@ function hskHandle_(req,p) {
     var generated=hskGenerate_(p,text,model);
     var filename='hsk-tts-'+cacheKey.slice(0,24)+'.wav';
     var file=storage.folder.createFile(Utilities.newBlob(generated.bytes,'audio/wav',filename));
-    var stamp=new Date().toISOString();
+    var stamp=hskVNTime_(new Date());
     storage.sheet.appendRow([cacheKey,'zh-CN','Kore',model,file.getId(),'audio/wav',
       generated.bytes.length,stamp,stamp,0,generated.index,'READY','']);
     return {ok:true,cached:false,mime:'audio/wav',audioBase64:Utilities.base64Encode(generated.bytes),bytes:generated.bytes.length,keyIndex:generated.index};

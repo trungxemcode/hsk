@@ -55,7 +55,7 @@ function hskBatchCommit_(storage,journal,rowNumber,row,queue,deferred){
     var found=hskGetRow_(storage.sheet,job.key),old=found&&found.values;
     if(!old||old[11]!=='READY'){
       var name='hsk-tts-'+job.key.slice(0,24)+'.wav',files=storage.folder.getFilesByName(name),file=files.hasNext()?files.next():storage.folder.createFile(Utilities.newBlob(clips[i],'audio/wav',name));
-      var stamp=new Date().toISOString(),values=[job.key,'zh-CN','Kore',job.model,file.getId(),'audio/wav',clips[i].length,stamp,stamp,0,row[6],'READY','isolated_batch:'+row[0]];
+      var stamp=hskVNTime_(new Date()),values=[job.key,'zh-CN','Kore',job.model,file.getId(),'audio/wav',clips[i].length,stamp,stamp,0,row[6],'READY','isolated_batch:'+row[0]];
       if(found)storage.sheet.getRange(found.index,1,1,13).setValues([values]);else storage.sheet.appendRow(values);saved++;
     }
     deferred.forEach(function(r,k){if(Number(r[0])===job.index&&r[4]!=='DONE'){r[4]='DONE';queue.getRange(k+2,1,1,6).setValues([r]);}});
@@ -139,7 +139,7 @@ function hskWarmIsolatedTick(){
     var cursor=Number(p.getProperty('HSK_WARM_CURSOR')||0);
     if(!pending.length)while(cursor<texts.length){if(!choose(cursor))break;cursor++;}
     if(!jobs.length){if(cursor>=texts.length)hskWarmStop();return;}
-    var id=hskDigest_(JSON.stringify(jobs.map(function(j){return j.key;}))+':'+now),stamp=new Date().toISOString(),row=[id,JSON.stringify(jobs),'','RESERVED','',stamp,slot];
+    var id=hskDigest_(JSON.stringify(jobs.map(function(j){return j.key;}))+':'+now),stamp=hskVNTime_(new Date()),row=[id,JSON.stringify(jobs),'','RESERVED','',stamp,slot];
     journal.appendRow(row);var rowNumber=journal.getLastRow();SpreadsheetApp.flush();
     var response,decoded;
     p.setProperty('HSK_WARM_NEXT_SLOT',String((slot+1)%10));
@@ -164,5 +164,5 @@ function hskWarmIsolatedTick(){
     p.setProperty('HSK_WARM_CURSOR',String(cursor));p.setProperty('HSK_WARM_SAVED_SINCE_FIX',String(Number(p.getProperty('HSK_WARM_SAVED_SINCE_FIX')||0)+saved));
     p.setProperty('HSK_WARM_SLOT_'+slot+'_AFTER',String(Date.now()+90000));p.deleteProperty('HSK_WARM_LAST_ERROR');p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+90000));
   }catch(e){p.setProperty('HSK_WARM_LAST_ERROR',/^batch_/.test(String(e.message))?e.message:'batch_storage_or_runtime_error');p.setProperty('HSK_WARM_ENABLED','false');}
-  finally{p.setProperty('HSK_WARM_RUNTIME_MS',String(Number(p.getProperty('HSK_WARM_RUNTIME_MS')||0)+Date.now()-started));p.setProperty('HSK_WARM_LAST_RUN',new Date().toISOString());try{if(storage)hskWarmProgress_(storage,p);}finally{lock.releaseLock();}}
+  finally{p.setProperty('HSK_WARM_RUNTIME_MS',String(Number(p.getProperty('HSK_WARM_RUNTIME_MS')||0)+Date.now()-started));p.setProperty('HSK_WARM_LAST_RUN',hskVNTime_(new Date()));try{if(storage)hskWarmProgress_(storage,p);}finally{lock.releaseLock();}}
 }

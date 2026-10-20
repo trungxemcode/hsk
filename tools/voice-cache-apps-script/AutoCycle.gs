@@ -1,3 +1,4 @@
+var HSK_PIPELINE_CONTEXT_;var HSK_PIPELINE_PRODUCER_;
 /**
  * HSK vocabulary continuous 50-item pilot scheduler.
  * Invoked only by the private Google Apps Script owner time trigger via Voice_Control!B2=AUTO_CYCLE.
@@ -56,7 +57,7 @@ function hskAuto50DetectRemote_(master,expected,token){
  if(p.getProperty('HSK_VOICE_REMOTE_SEGMENT')!=='true')return hskAuto50Detect_(master,expected);
  try{
   var url='https://hsk-voice-segmenter.trung-hsk668.workers.dev/segment-wav';
-  var raw=UrlFetchApp.fetch(url,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify({action:'segment-wav',audioBase64:Utilities.base64Encode(master),expected:expected}),muteHttpExceptions:true});
+  var raw=(typeof hskPipelineFetch_==='function'?hskPipelineFetch_:UrlFetchApp.fetch)(url,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify({action:'segment-wav',audioBase64:Utilities.base64Encode(master),expected:expected}),muteHttpExceptions:true});
   if(raw.getResponseCode()!==200)throw Error('remote_segment_http_'+raw.getResponseCode());
   var response=JSON.parse(raw.getContentText());
   if(!response||!Array.isArray(response.ranges)||response.ranges.length<Math.min(20,expected)||response.ranges.length>expected+5)throw Error('invalid_remote_ranges');
@@ -67,7 +68,7 @@ function hskAuto50DetectRemote_(master,expected,token){
   });
   p.setProperty('HSK_VOICE_SEGMENT_LAST','worker');
   return response;
- }catch(e){
+ }catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);
   p.setProperty('HSK_VOICE_SEGMENT_LAST','local_fallback');
   return hskAuto50Detect_(master,expected);
  }
@@ -81,7 +82,7 @@ function hskAuto50Cache_(storage,job,masterId,bytes,slot,batchId,method){
  if(old&&old.values[11]==='READY'&&old.values[4])return {file:String(old.values[4]),existing:true,model:job.model};
  var filename='hsk-tts-'+key.slice(0,24)+'.wav',files=storage.folder.getFilesByName(filename);
  var file=files.hasNext()?files.next():storage.folder.createFile(Utilities.newBlob(bytes,'audio/wav',filename));
- var fileId=file.getId(),stamp=new Date().toISOString(),entry=[key,'zh-CN','Kore',job.model,fileId,'audio/wav',bytes.length,stamp,stamp,0,slot,'READY',(method==='pinyin_third_check'?'auto50_double_asr_pinyin_round3:':'auto50_double_asr_exact:')+batchId];
+ var fileId=file.getId(),stamp=hskVNTime_(new Date()),entry=[key,'zh-CN','Kore',job.model,fileId,'audio/wav',bytes.length,stamp,stamp,0,slot,'READY',(method==='pinyin_third_check'?'auto50_double_asr_pinyin_round3:':'auto50_double_asr_exact:')+batchId];
  if(old)storage.sheet.getRange(old.index,1,1,13).setValues([entry]);else storage.sheet.appendRow(entry);
  return {file:fileId,existing:false,model:job.model};
 }
@@ -105,7 +106,8 @@ function hskAuto50Finalize_(p,storage,tables,rows,batches,index,clipRows){
  hskVocabSummary_(storage,tables);
 }
 function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
- var p=hskSettings_(),batch=batches[index],jobs=JSON.parse(batch[1]),sheet=hskAuto50Sheet_(storage),all=hskVocabRows_(sheet,15);
+ var p=hskSettings_(),batch=batches[index];if(HSK_PIPELINE_CONTEXT_)p=hskPipelineVerifierProps_(p,batch[0]);
+ var jobs=JSON.parse(batch[1]),sheet=hskAuto50Sheet_(storage),all=hskVocabRows_(sheet,15);
  var entries=all.filter(function(r){return r[0]===batch[0];});
  var master=DriveApp.getFileById(batch[2]).getBlob().getBytes();
  if(!entries.length){
@@ -117,7 +119,7 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
     report=cached;
    }else report=hskAuto50DetectRemote_(master,jobs.length,token);
   }
-  catch(e){
+  catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);
    batch[3]='REVIEW';batch[4]=String(e.message||'unreliable_master');
    tables.batches.getRange(index+2,1,1,11).setValues([batch]);
    jobs.forEach(function(j){var r=rows[j.row];if(['READY','EXISTING'].indexOf(r[3])>=0)return;
@@ -125,7 +127,7 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
    });
    return;
   }
-  var init=report.ranges.map(function(range,i){return [batch[0],i+1,Math.round(range[0]/24),Math.round(range[1]/24),'PENDING',0,'','','','',0,'','','',new Date().toISOString()];});
+  var init=report.ranges.map(function(range,i){return [batch[0],i+1,Math.round(range[0]/24),Math.round(range[1]/24),'PENDING',0,'','','','',0,'','','',hskVNTime_(new Date())];});
   sheet.getRange(sheet.getLastRow()+1,1,init.length,15).setValues(init);
   batch[3]='AUTO_VERIFY';batch[9]=report.duration;batch[10]=JSON.stringify({segments:init.length,gap:report.gap,ratio:report.ratio,qualityProfile:report.qualityProfile||'',boundaryProven:report.boundaryProven});
   tables.batches.getRange(index+2,1,1,11).setValues([batch]);
@@ -152,10 +154,10 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
   // its master, defer its words, and continue other clips without an API call.
   if(clip.length>350000){
    r[4]='REVIEW';r[13]='verification_clip_too_large_next_batch';
-   r[14]=new Date().toISOString();
+   r[14]=hskVNTime_(new Date());
    sheet.getRange(all.indexOf(r)+2,1,1,15).setValues([r]);updates++;continue;
   }
-  var slotCandidates=[10,0,2,3,4,5,6,7,8,9,11,1],rotation=Number(p.getProperty('HSK_AUTO50_ASR_NEXT')||0),slot=slotCandidates[rotation%slotCandidates.length];
+  var slotCandidates=HSK_PIPELINE_CONTEXT_?(HSK_PIPELINE_CONTEXT_.lane===1?[0,2,4,6,8,10]:[1,3,5,7,9,11]):[10,0,2,3,4,5,6,7,8,9,11,1],rotation=Number(p.getProperty('HSK_AUTO50_ASR_NEXT')||0),slot=slotCandidates[rotation%slotCandidates.length];
   p.setProperty('HSK_AUTO50_ASR_NEXT',String(rotation+1));
   var decoded;
   try{
@@ -164,17 +166,18 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
    decoded=hskVocabCall_(token,{action:'verify-words',keySlot:slot,items:[jobs[approx].text],pinyin:[jobs[approx].pinyin],clips:[clip]});
    if(!Array.isArray(decoded.transcripts)||decoded.transcripts.length!==2||!Array.isArray(decoded.pinyin)||decoded.pinyin.length!==2)
     throw Error('asr_invalid_response');
+   if(HSK_PIPELINE_CONTEXT_){hskPipelineAssertBatch_(tables,batch);rows=hskVocabRows_(tables.queue,17);}
    p.deleteProperty('HSK_AUTO50_ASR_ERRORS');
    delete backoff.clips[r[1]];p.setProperty('HSK_AUTO50_ASR_BACKOFF',JSON.stringify(backoff));
    p.deleteProperty('HSK_VOCAB_ERROR');p.deleteProperty('HSK_VOCAB_RETRY_AT');
-  }catch(e){
+  }catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);
    var reason=String(e.message||'asr_provider_error').slice(0,100),detail=e.detail||{};
    p.setProperty('HSK_AUTO50_LAST_ASR_ERROR',reason);
    if(/invalid_verification_clip_size/.test(reason)){
-    r[4]='REVIEW';r[13]='verification_clip_too_large_next_batch';r[14]=new Date().toISOString();sheet.getRange(all.indexOf(r)+2,1,1,15).setValues([r]);updates++;continue;
+    r[4]='REVIEW';r[13]='verification_clip_too_large_next_batch';r[14]=hskVNTime_(new Date());sheet.getRange(all.indexOf(r)+2,1,1,15).setValues([r]);updates++;continue;
    }
    if(/asr_invalid_response|asr_unverified_audio|verification_uncertain/.test(reason)){
-    r[5]=Number(r[5]||0)+1;r[4]=r[5]>=3?'REVIEW':'RECHECK';r[13]=reason;r[14]=new Date().toISOString();sheet.getRange(all.indexOf(r)+2,1,1,15).setValues([r]);updates++;continue;
+    r[5]=Number(r[5]||0)+1;r[4]=r[5]>=3?'REVIEW':'RECHECK';r[13]=reason;r[14]=hskVNTime_(new Date());sheet.getRange(all.indexOf(r)+2,1,1,15).setValues([r]);updates++;continue;
    }
    if(/unauthorized|identity_missing|permission_denied|not_configured|invalid_request|invalid_verification_model/.test(reason)){
     p.setProperty('HSK_VOCAB_ERROR',reason);p.setProperty('HSK_VOCAB_ENABLED','false');
@@ -209,7 +212,7 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
   }else{
    r[4]=r[5]>=3?'REVIEW':'RECHECK';r[13]=already?'duplicate_mapping':'asr_mismatch_or_unproven_mapping';
   }
-  r[14]=new Date().toISOString();
+  r[14]=hskVNTime_(new Date());
   var sheetRow=all.indexOf(r)+2;
   sheet.getRange(sheetRow,1,1,15).setValues([r]);updates++;
  }
@@ -221,10 +224,10 @@ function hskAuto50Poll_(p,book,control){
  // Read-only heartbeat for diagnosing API cooldown and script runtime limits. No credentials.
  var retryMs=Number(p.getProperty('HSK_VOCAB_RETRY_AT')||0),windowMs=Number(p.getProperty('HSK_VOCAB_WINDOW')||0);
  control.getRange(36,1,10,2).setValues([
-  ['Auto_heartbeat',new Date().toISOString()],
+  ['Auto_heartbeat',hskVNTime_(new Date())],
   ['Auto_last_error',String(p.getProperty('HSK_VOCAB_ERROR')||'').slice(0,90)],
-  ['Auto_retry_at',retryMs?new Date(retryMs).toISOString():'none'],
-  ['Auto_window_starts',windowMs?new Date(windowMs).toISOString():'none'],
+  ['Auto_retry_at',retryMs?hskVNTime_(new Date(retryMs)):'none'],
+  ['Auto_window_starts',windowMs?hskVNTime_(new Date(windowMs)):'none'],
   ['Auto_runtime_ms',p.getProperty('HSK_VOCAB_RUNTIME_MS')||'0'],
   ['Auto_window_calls',p.getProperty('HSK_VOCAB_WINDOW_CALLS')||'0'],
   ['Auto_queue_enabled',p.getProperty('HSK_VOCAB_ENABLED')||'false'],
@@ -314,10 +317,10 @@ function hskAuto50Poll_(p,book,control){
     p.deleteProperty('HSK_VOCAB_RETRY_AT');blockedUntil=0;
     control.getRange(87,4).setValue('AUTO_RETRY_'+hskVoiceModelTag_(scan.pairs[0].model)+'_KEY_'+scan.pairs[0].slot);
    }else control.getRange(87,4).setValue('ALL_MODELS_COOLING');
-  }catch(e){control.getRange(87,4).setValue('MODEL_STATUS_UNAVAILABLE_KEEP_WAIT');}
+  }catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);control.getRange(87,4).setValue('MODEL_STATUS_UNAVAILABLE_KEEP_WAIT');}
  }
  if(blockedUntil>Date.now()){
-  control.getRange(6,2).setValue('AUTO_CYCLE_WAITING_UNTIL_'+new Date(blockedUntil).toISOString());
+  control.getRange(6,2).setValue('AUTO_CYCLE_WAITING_UNTIL_'+hskVNTime_(new Date(blockedUntil)));
   return true;
  }
  if(typeof hskAuto50Watchdog_==='function')hskAuto50Watchdog_(p,book,control);

@@ -15,7 +15,7 @@ function hskOfflineRecoverOnce_() {
   if(p.getProperty(flag)==='done')return true;
   p.setProperty(flag+'_attempts',String(Number(p.getProperty(flag+'_attempts')||0)+1));
   var storage=hskCheck_(p),journal=hskBatchTable_(storage),queue=hskWarmQueue_(storage);
-  var batches=hskBatchRows_(journal,7),deferred=hskBatchRows_(queue,6),now=new Date().toISOString(),saved=0;
+  var batches=hskBatchRows_(journal,7),deferred=hskBatchRows_(queue,6),now=hskVNTime_(new Date()),saved=0;
   var specs=[
    {id:'a6d4dac2b97efb8c0bdee570c0304ec934734c1f08a5c67d20ef657094d0c2cd',
     sha:'a07c6fc6760b3768603a9871298aba78262a2d311053dc464e365f0dbea7d779',

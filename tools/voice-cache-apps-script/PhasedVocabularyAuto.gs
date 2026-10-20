@@ -17,7 +17,7 @@ function hskVoicePhasedEnroll_(p,storage,tables,rows,stage){
   if(levels.indexOf(Number(w.level))<0)return;
   var identity=w.text+'\0'+hskVoiceRecPinyin_(w.pinyin);if(seen.has(identity))return;seen.add(identity);
   var hit=models.map(function(m){return cache.get(hskVocabKey_(m,w.text));}).find(Boolean);
-  var row=[w.level,w.text,w.pinyin,hit?'EXISTING':'PENDING',0,0,'',hit?hit[3]:'','',hit?hit[4]:'','','',new Date().toISOString(),'','','',hit?'https://drive.google.com/file/d/'+hit[4]+'/view':''];
+  var row=[w.level,w.text,w.pinyin,hit?'EXISTING':'PENDING',0,0,'',hit?hit[3]:'','',hit?hit[4]:'','','',hskVNTime_(new Date()),'','','',hit?'https://drive.google.com/file/d/'+hit[4]+'/view':''];
   added.push(row);rows.push(row);
  });
  if(added.length){var end=tables.queue.getLastRow()+added.length;if(end>tables.queue.getMaxRows())tables.queue.insertRowsAfter(tables.queue.getMaxRows(),end-tables.queue.getMaxRows());tables.queue.getRange(tables.queue.getLastRow()+1,1,added.length,17).setValues(added);}
@@ -55,7 +55,7 @@ function hskVoicePhasedRecoverOldHolds_(p,storage,tables,rows,batches){
   models.some(function(m){file=named('hsk-tts-'+hskVocabKey_(m,r[1]).slice(0,24)+'.wav');if(file){model=m;return true;}return false;});
   if(file){
    hskBatchPcm_(file.getBlob().getBytes());var id='phased_reuse_'+hskDigest_(r[1]+':'+i),job={row:i,text:r[1],pinyin:r[2],level:r[0],model:model,key:hskVocabKey_(model,r[1])};
-   tables.batches.appendRow([id,JSON.stringify([job]),file.getId(),'MASTER','phased_reused_canary_wav',new Date().toISOString(),0,model,1,0,'']);
+   tables.batches.appendRow([id,JSON.stringify([job]),file.getId(),'MASTER','phased_reused_canary_wav',hskVNTime_(new Date()),0,model,1,0,'']);
    r[3]='MASTER';r[6]=id;r[7]=model;r[8]=file.getId();r[9]=file.getId();recovered++;
   }else{r[3]='RETRY';r[5]=0;r[11]='phased_owner_resume_missing_canary_after_file_audit';released++;}
   write(i,r);
@@ -64,7 +64,7 @@ function hskVoicePhasedRecoverOldHolds_(p,storage,tables,rows,batches){
 }
 function hskVoicePhasedProgress_(p,book,rows,stage,status){
  var levels=hskVoicePhasedLevels_(stage),group=rows.filter(function(r){return levels.indexOf(Number(r[0]))>=0;}),ready=group.filter(function(r){return ['READY','EXISTING'].indexOf(r[3])>=0;}).length;
- p.setProperty('HSK_PHASE_AUTO_STATUS',status);p.setProperty('HSK_PHASE_AUTO_UPDATED',new Date().toISOString());
+ p.setProperty('HSK_PHASE_AUTO_STATUS',status);p.setProperty('HSK_PHASE_AUTO_UPDATED',hskVNTime_(new Date()));
  var progress=book.getSheetByName('Tien_do');if(progress)progress.getRange(19,1,6,2).setValues([
  ['Thu tu HSK','2-4 -> 1 -> 5 -> 6'],['Giai doan HSK',stage],['So tu giai doan',group.length],
  ['Da co voice giai doan',ready],['Con thieu giai doan',group.length-ready],['Trang thai giai doan',status]

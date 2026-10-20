@@ -102,7 +102,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   var master=hskWav_(pcm,'audio/l16');
   var file;
   try{file=folder.createFile(Utilities.newBlob(master,'audio/wav',masterName));}
-  catch(e){
+  catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);
    // A file may have been saved even if Google Drive returned an exception.
    file=fileNamed(masterName);
    if(!file){batch[3]='UNCERTAIN';report('adaptive_master_drive_save_uncertain');p.setProperty('HSK_VOCAB_ENABLED','false');return;}
@@ -165,7 +165,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
  var response,decoded;
  if(direct){
   try{decoded=hskVoiceDirectTts_(p,joined,g.model);}
-  catch(e){
+  catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);
    var msg=String(e.message||'direct_tts_error');
    if(/direct_tts_keys_unavailable/.test(msg)){
     p.setProperty('HSK_VOCAB_ERROR',msg);
@@ -185,16 +185,16 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   }
  }else{
   try{
-   response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',
+   response=(typeof hskPipelineFetch_==='function'?hskPipelineFetch_:UrlFetchApp.fetch)(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',
     headers:{Authorization:'Bearer '+token},payload:JSON.stringify(payload),muteHttpExceptions:true});
-  }catch(e){
+  }catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);
    batch[3]='UNCERTAIN';report('tts_chunk_transport_uncertain_'+g.from+'_'+g.to);
    p.setProperty('HSK_VOCAB_ERROR','tts_chunk_transport_uncertain');
    p.setProperty('HSK_VOCAB_ENABLED','false');return;
   }
  }
  try{if(!decoded)decoded=hskParallelDecode_(response);}
- catch(e){
+ catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);
   var reason=String(e.message||'tts_chunk_error'),attempts=Number(e.providerAttempts||0);
   p.setProperty('HSK_VOCAB_TTS_CALLS',String(Number(p.getProperty('HSK_VOCAB_TTS_CALLS')||0)+attempts));
   p.setProperty('HSK_VOCAB_WINDOW_CALLS',String(Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0)+attempts));
@@ -236,7 +236,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
  // Drive is ambiguous; inspect the deterministic filename on next review.
  try{
   if(!fileNamed(g.name))folder.createFile(Utilities.newBlob(decoded.bytes,'audio/wav',g.name));
- }catch(e){
+ }catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);
   batch[3]='UNCERTAIN';report('tts_chunk_drive_save_uncertain_'+g.from+'_'+g.to);
   p.setProperty('HSK_VOCAB_ENABLED','false');return;
  }

@@ -1,0 +1,17 @@
+name: Voice pipeline sandbox checks
+on:
+  pull_request:
+    paths:
+      - 'tools/voice-cache-apps-script/**'
+      - '.github/workflows/voice-pipeline.yml'
+permissions:
+  contents: read
+jobs:
+  gas-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --require ./tools/voice-cache-apps-script/gas-test-runtime.cjs --test tools/voice-cache-apps-script/test-*.cjs

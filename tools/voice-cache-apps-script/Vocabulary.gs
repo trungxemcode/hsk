@@ -1,8 +1,9 @@
+var HSK_PIPELINE_CONTEXT_;var HSK_PIPELINE_PRODUCER_;
 /** Vocabulary-only HSK 2 -> 3 -> 4 queue. A saved master is reused; only blind-ASR-approved clips become READY. */
 var HSK_VOCAB_URL_='https://hsk-vietnamese-translator.trung-hsk668.workers.dev/voice-precache';
 function hskVocabTable_(book,name,columns){var s=book.getSheetByName(name);if(!s){s=book.insertSheet(name);s.appendRow(columns);s.setFrozenRows(1);}return s;}
 function hskVocabRows_(s,n){return s.getLastRow()>1?s.getRange(2,1,s.getLastRow()-1,n).getValues():[];}
-function hskVocabWrite_(sheet,index,row){row[12]=new Date().toISOString();sheet.getRange(index+2,1,1,17).setValues([row]);}
+function hskVocabWrite_(sheet,index,row){row[12]=hskVNTime_(new Date());sheet.getRange(index+2,1,1,17).setValues([row]);}
 function hskVocabKey_(model,text){return hskDigest_(JSON.stringify(['zh-CN','Kore',model,text]));}
 function hskVocabTables_(storage){var book=storage.sheet.getParent();return {queue:hskVocabTable_(book,'Voice_Vocabulary',['HSK','Text','Pinyin','State','Attempts','Retry_after','Batch','Model','Master','File','Heard','Error','Updated','Heard_pinyin','Clip_start_ms','Clip_end_ms','Audio_URL']),batches:hskVocabTable_(book,'Voice_Vocab_Batches',['Batch','Jobs_JSON','Master','State','Error','Created','Slot','Model','Pause_seconds','Duration_seconds','Ranges_JSON'])};}
 function hskVocabSummary_(storage,tables){
@@ -10,7 +11,7 @@ function hskVocabSummary_(storage,tables){
  [2,3,4].forEach(function(level){var group=rows.filter(function(r){return Number(r[0])===level;});out.levels[level]={total:group.length,ready:group.filter(function(r){return r[3]==='READY';}).length,existing:group.filter(function(r){return r[3]==='EXISTING';}).length,review:group.filter(function(r){return r[3]==='REVIEW';}).length};});
  rows.forEach(function(r){if(r[3]==='READY')out.ready++;else if(r[3]==='EXISTING')out.existing++;else if(r[3]==='REVIEW')out.review++;else out.pending++;});
  var progress=hskVocabTable_(storage.sheet.getParent(),'Tien_do_tu_vung',['Mục','Giá trị']);
- progress.getRange(1,1,13,2).setValues([['Từ vựng HSK 2 → 3 → 4','Kiểm tra âm thanh + hai lượt ASR không có đáp án'],['Trạng thái',out.enabled?'Đang chạy':'Đang dừng'],['Tổng mục',out.total],['Mới tạo và đạt kiểm tra',out.ready],['Đã có sẵn trong kho',out.existing],['Cần kiểm tra',out.review],['Đang chờ',out.pending],['Lượt TTS',out.ttsCalls],['Lượt ASR',out.asrCalls],['HSK 2',JSON.stringify(out.levels[2])],['HSK 3',JSON.stringify(out.levels[3])],['HSK 4',JSON.stringify(out.levels[4])],['Lỗi / chờ',out.lastError+(out.retryAt?' | '+new Date(out.retryAt).toISOString():'')]]);
+ progress.getRange(1,1,13,2).setValues([['Từ vựng HSK 2 → 3 → 4','Kiểm tra âm thanh + hai lượt ASR không có đáp án'],['Trạng thái',out.enabled?'Đang chạy':'Đang dừng'],['Tổng mục',out.total],['Mới tạo và đạt kiểm tra',out.ready],['Đã có sẵn trong kho',out.existing],['Cần kiểm tra',out.review],['Đang chờ',out.pending],['Lượt TTS',out.ttsCalls],['Lượt ASR',out.asrCalls],['HSK 2',JSON.stringify(out.levels[2])],['HSK 3',JSON.stringify(out.levels[3])],['HSK 4',JSON.stringify(out.levels[4])],['Lỗi / chờ',out.lastError+(out.retryAt?' | '+hskVNTime_(new Date(out.retryAt)):'')]]);
  return out;
 }
 function hskVocabStatus(){var storage=hskCheck_(hskSettings_()),tables=hskVocabTables_(storage);console.log(JSON.stringify(hskVocabSummary_(storage,tables)));}
@@ -18,7 +19,7 @@ function hskVocabPrepare(){
  var p=hskSettings_(),storage=hskCheck_(p),tables=hskVocabTables_(storage),corpus=hskVocabularyCorpus_();
  if(tables.queue.getLastRow()===1){
  var variants={};corpus.forEach(function(w){var pin=w.pinyin.normalize('NFC').replace(/\s+/g,'').toLowerCase();if(!variants[w.text])variants[w.text]=new Set();variants[w.text].add(pin);});
- var rows=corpus.map(function(w){return [w.level,w.text,w.pinyin,variants[w.text].size>1?'REVIEW':'PENDING',0,0,'','','','','',variants[w.text].size>1?'polyphonic_or_conflicting_pinyin_cache_key':'',new Date().toISOString(),'','','',''];});
+ var rows=corpus.map(function(w){return [w.level,w.text,w.pinyin,variants[w.text].size>1?'REVIEW':'PENDING',0,0,'','','','','',variants[w.text].size>1?'polyphonic_or_conflicting_pinyin_cache_key':'',hskVNTime_(new Date()),'','','',''];});
  tables.queue.getRange(2,1,rows.length,17).setValues(rows);
  }
  if(!p.getProperty('HSK_VOCAB_BATCH_SIZE'))p.setProperty('HSK_VOCAB_BATCH_SIZE','10');
@@ -50,11 +51,11 @@ function hskVocabCall_(token,body){
  }
  var response,data,route=mode==='WORKER_PROBE'&&body.action==='verify-words'?'WORKER_PROBE':'WORKER';
  try{
-  response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(body),muteHttpExceptions:true});
-  try{data=JSON.parse(response.getContentText());}catch(e){throw Error('response_uncertain');}
+  response=(typeof hskPipelineFetch_==='function'?hskPipelineFetch_:UrlFetchApp.fetch)(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(body),muteHttpExceptions:true});
+  try{data=JSON.parse(response.getContentText());}catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);throw Error('response_uncertain');}
   if(response.getResponseCode()!==200||!data.ok){var error=Error(String(data.error||'provider_failure'));error.detail=data;throw error;}
   if(route==='WORKER_PROBE')hskVoiceFailoverOutcome_(hskSettings_(),route,true,'verified_worker_response');
- }catch(e){
+ }catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);
   if(route==='WORKER_PROBE'&&!/response_uncertain|transport_uncertain/.test(String(e.message||e))){
    hskVoiceFailoverOutcome_(hskSettings_(),route,false,String(e.message||e));
    return hskVoiceDirectVerify_(hskSettings_(),body);
@@ -77,10 +78,11 @@ function hskVocabRanges_(bytes,expected){
 }
 function hskVocabTickWork_(){
  var p=hskSettings_(),now=Date.now();
- if(typeof hskVoiceControlPoll_==='function'&&hskVoiceControlPoll_(p))return;
+ if(!HSK_PIPELINE_PRODUCER_&&typeof hskVoiceControlPoll_==='function'&&hskVoiceControlPoll_(p))return;
  if(p.getProperty('HSK_VOCAB_ENABLED')!=='true'||p.getProperty('HSK_VOICE_PAUSED')==='true')return;
  var lock=LockService.getScriptLock();if(!lock.tryLock(100))return;var started=Date.now(),storage,tables;
  try{
+ if(HSK_PIPELINE_PRODUCER_){if(!hskPipelineOwns_(p,HSK_PIPELINE_PRODUCER_,Date.now()))return;HSK_PIPELINE_CONTEXT_={lock:lock,held:true,lease:HSK_PIPELINE_PRODUCER_,lane:0};}
  var win=Number(p.getProperty('HSK_VOCAB_WINDOW')||0);if(!win||now>=win+86400000){p.setProperty('HSK_VOCAB_WINDOW',String(now));p.setProperty('HSK_VOCAB_RUNTIME_MS','0');p.setProperty('HSK_VOCAB_WINDOW_CALLS','0');win=now;}
  // Internal daily runtime and provider-call limits removed by owner request.
  // Keep usage counters for diagnosis; real Google/Gemini/Cloudflare quotas still apply.
@@ -96,7 +98,7 @@ function hskVocabTickWork_(){
  if(typeof hskVoiceQuarantineUncertainChunks_==='function'&&hskVoiceQuarantineUncertainChunks_(p,storage,tables,rows,batches))return;
  // Provider cooldown still applies to new TTS/ASR calls; recovery bookkeeping is safe above.
  if(Number(p.getProperty('HSK_VOCAB_RETRY_AT')||0)>now)return;
- var active=batches.findIndex(function(b){return ['TTS_CHUNKS','MASTER','VERIFY','AUTO_VERIFY'].indexOf(b[3])>=0;});
+ var active=batches.findIndex(function(b){return (HSK_PIPELINE_PRODUCER_?['TTS_CHUNKS']:['TTS_CHUNKS','MASTER','VERIFY','AUTO_VERIFY']).indexOf(b[3])>=0;});
  if(active>=0){
   if(batches[active][3]==='TTS_CHUNKS'){hskVoiceChunkedStep_(p,storage,tables,rows,batches,active,token);return;}
   if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskAuto50VerifyTick_==='function')hskAuto50VerifyTick_(storage,tables,rows,batches,active,token,started);
@@ -106,39 +108,41 @@ function hskVocabTickWork_(){
  // A RESERVED request may already have produced audio: recover a named master, never resubmit blindly.
  var unresolved=batches.findIndex(function(b){return b[3]==='RESERVED'||b[3]==='UNCERTAIN';});
  if(unresolved>=0){var prior=batches[unresolved],files=storage.folder.getFilesByName('VOCAB_MASTER_'+prior[0]+'.wav');if(files.hasNext()){prior[2]=files.next().getId();prior[3]='MASTER';tables.batches.getRange(unresolved+2,1,1,11).setValues([prior]);return;}p.setProperty('HSK_VOCAB_ERROR','uncertain_batch_requires_review');hskVocabStop();return;}
+ if(HSK_PIPELINE_PRODUCER_&&hskPipelineVerifyBatches_(batches).length>=2)return;
  var existing=hskVocabRows_(storage.sheet,13),ready=new Map();existing.forEach(function(r){if(r[11]==='READY'&&r[4])ready.set(String(r[0]),r);});
  rows.forEach(function(r,i){if(['PENDING','RETRY'].indexOf(r[3])<0)return;var found=hskVoiceTtsModels_().map(function(m){return ready.get(hskVocabKey_(m,r[1]));}).find(Boolean);if(found){r[3]='EXISTING';r[7]=found[3];r[9]=found[4];r[16]='https://drive.google.com/file/d/'+found[4]+'/view';hskVocabWrite_(tables.queue,i,r);}});
  var pending=rows.map(function(r,i){return {r:r,i:i};}).filter(function(x){return ['PENDING','RETRY'].indexOf(x.r[3])>=0&&Number(x.r[5]||0)<=now;});
+ if(HSK_PIPELINE_PRODUCER_){var reserved=hskPipelineReservedRows_(batches);pending=pending.filter(function(x){return !reserved[x.i]&&!reserved['text:'+x.r[1]];});}
  if(typeof hskVoicePhasedCandidates_==='function')pending=hskVoicePhasedCandidates_(pending,p);
  if(p.getProperty('HSK_AUTO50_ENABLED')==='true')pending=hskAuto50Choose_(pending);
  else pending.sort(function(a,b){return Number(a.r[0])-Number(b.r[0])||(String(a.r[1]).length<2?1:0)-(String(b.r[1]).length<2?1:0)||Number(a.r[4])-Number(b.r[4])||a.i-b.i;});
- if(!pending.length){var waiting=rows.some(function(r){return ['PENDING','RETRY'].indexOf(r[3])>=0;});if(!waiting)hskVocabStop();return;}
+ if(!pending.length){var waiting=rows.some(function(r){return ['PENDING','RETRY'].indexOf(r[3])>=0;});if(!waiting&&!(HSK_PIPELINE_PRODUCER_&&hskPipelineVerifyBatches_(batches).length))hskVocabStop();return;}
  var pair=hskShared50Pair_(token,now);
  if(!pair){p.setProperty('HSK_VOCAB_RETRY_AT',String(now+300000));p.setProperty('HSK_VOCAB_ERROR','tts_keys_cooling');return;}
  var slot=pair.slot,model=pair.model,size=Math.max(1,Math.min(90,Number(p.getProperty('HSK_VOCAB_BATCH_SIZE')||10))),seen=new Set(),jobs=[];
  pending.forEach(function(x){if(jobs.length>=size||seen.has(x.r[1]))return;seen.add(x.r[1]);jobs.push({row:x.i,text:x.r[1],pinyin:x.r[2],level:x.r[0],model:model,key:hskVocabKey_(model,x.r[1])});});
  var id=hskDigest_(JSON.stringify(jobs)+':'+now),pause=Number(p.getProperty('HSK_VOCAB_PAUSE')||3),chunked=p.getProperty('HSK_AUTO50_ENABLED')==='true'&&p.getProperty('HSK_VOCAB_TTS_STRATEGY')==='chunks-v1'&&jobs.length>1;
- var batch=[id,JSON.stringify(jobs),'',chunked?'TTS_CHUNKS':'RESERVED','',new Date().toISOString(),slot,model,pause,0,chunked?JSON.stringify({mode:'chunked_v1',attempts:{},qualityProfile:typeof hskVoiceQualityEnabled_==='function'&&hskVoiceQualityEnabled_(p)?'dictionary_v1':''}):''];tables.batches.appendRow(batch);var number=tables.batches.getLastRow();
+ var batch=[id,JSON.stringify(jobs),'',chunked?'TTS_CHUNKS':'RESERVED','',hskVNTime_(new Date()),slot,model,pause,0,chunked?JSON.stringify({mode:'chunked_v1',attempts:{},qualityProfile:typeof hskVoiceQualityEnabled_==='function'&&hskVoiceQualityEnabled_(p)?'dictionary_v1':''}):''];tables.batches.appendRow(batch);var number=tables.batches.getLastRow();
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true')p.setProperty('HSK_VOCAB_PILOT_ID',id);
  SpreadsheetApp.flush();
  p.setProperty('HSK_VOCAB_NEXT_SLOT',String((slot+1)%13));p.setProperty('HSK_VOCAB_NEXT_MODEL',String((pair.mi+1)%hskVoiceTtsModels_().length));
  if(chunked)return; // Next trigger will process durable TTS_CHUNKS journal before selecting any new jobs.
  try{
- var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(p.getProperty('HSK_SHARED50_LITERAL')==='true'&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&Array.from(jobs.map(function(j){return j.text;}).join('。')).length<=220?{text:jobs.map(function(j){return j.text;}).join('。'),isolated:true,keySlot:slot,model:model,language:'zh-CN'}:{items:jobs.map(function(j){return j.text;}),isolated:true,keySlot:slot,model:model,language:'zh-CN',pauseSeconds:pause}),muteHttpExceptions:true});
+ var response=(typeof hskPipelineFetch_==='function'?hskPipelineFetch_:UrlFetchApp.fetch)(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(p.getProperty('HSK_SHARED50_LITERAL')==='true'&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&Array.from(jobs.map(function(j){return j.text;}).join('。')).length<=220?{text:jobs.map(function(j){return j.text;}).join('。'),isolated:true,keySlot:slot,model:model,language:'zh-CN'}:{items:jobs.map(function(j){return j.text;}),isolated:true,keySlot:slot,model:model,language:'zh-CN',pauseSeconds:pause}),muteHttpExceptions:true});
  var decoded=hskParallelDecode_(response);p.setProperty('HSK_VOCAB_TTS_CALLS',String(Number(p.getProperty('HSK_VOCAB_TTS_CALLS')||0)+decoded.providerAttempts));p.setProperty('HSK_VOCAB_WINDOW_CALLS',String(Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0)+decoded.providerAttempts));
  var file=storage.folder.createFile(Utilities.newBlob(decoded.bytes,'audio/wav','VOCAB_MASTER_'+id+'.wav'));batch[2]=file.getId();batch[3]='MASTER';tables.batches.getRange(number,1,1,11).setValues([batch]);
  jobs.forEach(function(j){var r=rows[j.row];r[3]='MASTER';r[4]=Number(r[4])+1;r[6]=id;r[7]=model;r[8]=file.getId();r[11]='';hskVocabWrite_(tables.queue,j.row,r);});
  p.setProperty('HSK_VOCAB_INITIAL_FAILURES','0');p.deleteProperty('HSK_VOCAB_ERROR');p.deleteProperty('HSK_VOCAB_RETRY_AT');console.log(JSON.stringify({stage:'master_saved',items:jobs.length,slot:slot,model:model,pauseSeconds:pause,bytes:decoded.bytes.length}));
- }catch(e){if(e.diagnostic)p.setProperty('HSK_VOCAB_LAST_DIAGNOSTIC',JSON.stringify(e.diagnostic));var reason=String(e.message||'transport_uncertain'),definite=/tts_(blocked|request_rejected|generation_incomplete|key_invalid|permission_denied|daily_limit|rate_limited|quota_unavailable|model_unavailable|region_unavailable)/.test(reason);batch[3]=definite?'REJECTED':'UNCERTAIN';batch[4]=reason;tables.batches.getRange(number,1,1,11).setValues([batch]);p.setProperty('HSK_VOCAB_TTS_CALLS',String(Number(p.getProperty('HSK_VOCAB_TTS_CALLS')||0)+(e.providerAttempts||0)));p.setProperty('HSK_VOCAB_WINDOW_CALLS',String(Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0)+(e.providerAttempts||0)));p.setProperty('HSK_VOCAB_PAIR_'+slot+'_'+model+'_AFTER',String(now+Math.max(300,Number(e.retryAfter)||300)*1000));p.setProperty('HSK_VOCAB_ERROR',reason);var failures=Number(p.getProperty('HSK_VOCAB_INITIAL_FAILURES')||0)+1;p.setProperty('HSK_VOCAB_INITIAL_FAILURES',String(failures));if(p.getProperty('HSK_AUTO50_ENABLED')==='true'){
+ }catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);if(e.diagnostic)p.setProperty('HSK_VOCAB_LAST_DIAGNOSTIC',JSON.stringify(e.diagnostic));var reason=String(e.message||'transport_uncertain'),definite=/tts_(blocked|request_rejected|generation_incomplete|key_invalid|permission_denied|daily_limit|rate_limited|quota_unavailable|model_unavailable|region_unavailable)/.test(reason);batch[3]=definite?'REJECTED':'UNCERTAIN';batch[4]=reason;tables.batches.getRange(number,1,1,11).setValues([batch]);p.setProperty('HSK_VOCAB_TTS_CALLS',String(Number(p.getProperty('HSK_VOCAB_TTS_CALLS')||0)+(e.providerAttempts||0)));p.setProperty('HSK_VOCAB_WINDOW_CALLS',String(Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0)+(e.providerAttempts||0)));p.setProperty('HSK_VOCAB_PAIR_'+slot+'_'+model+'_AFTER',String(now+Math.max(300,Number(e.retryAfter)||300)*1000));p.setProperty('HSK_VOCAB_ERROR',reason);var failures=Number(p.getProperty('HSK_VOCAB_INITIAL_FAILURES')||0)+1;p.setProperty('HSK_VOCAB_INITIAL_FAILURES',String(failures));if(p.getProperty('HSK_AUTO50_ENABLED')==='true'){
  if(!definite)hskVocabStop();
  else if(failures>=3){p.setProperty('HSK_VOCAB_RETRY_AT',String(now+1800000));p.setProperty('HSK_VOCAB_INITIAL_FAILURES','0');}
 }else if(!definite||failures>=3&&p.getProperty('HSK_VOCAB_PILOT_PASSED')!=='true')hskVocabStop();}
- }catch(e){p.setProperty('HSK_VOCAB_ERROR',String(e.message||'vocab_error').replace(/[^a-z0-9_]/gi,'_').slice(0,120));p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+90000));}
- finally{p.setProperty('HSK_VOCAB_RUNTIME_MS',String(Number(p.getProperty('HSK_VOCAB_RUNTIME_MS')||0)+Date.now()-started));if(storage&&tables)console.log(JSON.stringify(hskVocabSummary_(storage,tables)));lock.releaseLock();}
+ }catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);p.setProperty('HSK_VOCAB_ERROR',String(e.message||'vocab_error').replace(/[^a-z0-9_]/gi,'_').slice(0,120));p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+90000));}
+ finally{if(!HSK_PIPELINE_CONTEXT_||HSK_PIPELINE_CONTEXT_.held){p.setProperty('HSK_VOCAB_RUNTIME_MS',String(Number(p.getProperty('HSK_VOCAB_RUNTIME_MS')||0)+Date.now()-started));if(storage&&tables)console.log(JSON.stringify(hskVocabSummary_(storage,tables)));lock.releaseLock();}HSK_PIPELINE_CONTEXT_=null;}
 }
 function hskVocabProcess_(storage,tables,rows,batches,index,token,started){
  var p=hskSettings_(),batch=batches[index],jobs=JSON.parse(batch[1]),master=DriveApp.getFileById(batch[2]).getBlob().getBytes(),report;
- try{report=batch[10]?JSON.parse(batch[10]):hskVocabRanges_(master,jobs.length);}catch(e){batch[3]='REVIEW';batch[4]=String(e.message);tables.batches.getRange(index+2,1,1,11).setValues([batch]);jobs.forEach(function(j){var r=rows[j.row];r[3]=Number(r[4])<3?'RETRY':'REVIEW';r[5]=Date.now()+300000;r[11]=String(e.message);hskVocabWrite_(tables.queue,j.row,r);});p.setProperty('HSK_VOCAB_BATCH_SIZE',String(p.getProperty('HSK_VOCAB_FIXED_BATCH')==='true'?50:Math.max(3,Math.floor(jobs.length/2))));p.setProperty('HSK_VOCAB_ERROR',String(e.message));if(p.getProperty('HSK_VOCAB_PILOT_PASSED')!=='true')hskVocabStop();return;}
+ try{report=batch[10]?JSON.parse(batch[10]):hskVocabRanges_(master,jobs.length);}catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);batch[3]='REVIEW';batch[4]=String(e.message);tables.batches.getRange(index+2,1,1,11).setValues([batch]);jobs.forEach(function(j){var r=rows[j.row];r[3]=Number(r[4])<3?'RETRY':'REVIEW';r[5]=Date.now()+300000;r[11]=String(e.message);hskVocabWrite_(tables.queue,j.row,r);});p.setProperty('HSK_VOCAB_BATCH_SIZE',String(p.getProperty('HSK_VOCAB_FIXED_BATCH')==='true'?50:Math.max(3,Math.floor(jobs.length/2))));p.setProperty('HSK_VOCAB_ERROR',String(e.message));if(p.getProperty('HSK_VOCAB_PILOT_PASSED')!=='true')hskVocabStop();return;}
  batch[3]='VERIFY';batch[9]=report.duration;batch[10]=JSON.stringify(report);tables.batches.getRange(index+2,1,1,11).setValues([batch]);
  // Recover interruptions between saving the master journal and checkpointing its queue rows.
  jobs.forEach(function(j){var r=rows[j.row];if(['READY','EXISTING'].indexOf(r[3])<0&&r[6]!==batch[0]){r[3]='MASTER';r[4]=Number(r[4])+1;r[6]=batch[0];r[7]=j.model;r[8]=batch[2];hskVocabWrite_(tables.queue,j.row,r);}});
@@ -148,13 +152,13 @@ function hskVocabProcess_(storage,tables,rows,batches,index,token,started){
  var clips=part.map(function(x){var s=report.ranges[x.clipIndex];return Utilities.base64Encode(hskWav_(pcm.slice(Math.max(0,s[0]-2880)*2,Math.min(pcm.length/2,s[1]+4800)*2),'audio/l16'));});
  // Keep the private verifier body within its byte budget; fewer clips do not regenerate TTS.
  while(clips.reduce(function(n,c){return n+c.length;},0)>640000&&part.length>1){part.pop();clips.pop();}
- var verified;try{p.setProperty('HSK_VOCAB_ASR_CALLS',String(Number(p.getProperty('HSK_VOCAB_ASR_CALLS')||0)+2));verified=hskVocabCall_(token,{action:'verify-words',keySlot:batch[6],items:part.map(function(x){return x.job.text;}),pinyin:part.map(function(x){return x.job.pinyin;}),clips:clips});}catch(e){p.setProperty('HSK_VOCAB_LAST_ASR_DIAGNOSTIC',JSON.stringify(e.detail||{error:String(e.message)}));console.log(JSON.stringify({stage:'asr_error',detail:e.detail||{error:String(e.message)}}));p.setProperty('HSK_VOCAB_ERROR',String(e.message));p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+300000));return;}
+ var verified;try{p.setProperty('HSK_VOCAB_ASR_CALLS',String(Number(p.getProperty('HSK_VOCAB_ASR_CALLS')||0)+2));verified=hskVocabCall_(token,{action:'verify-words',keySlot:batch[6],items:part.map(function(x){return x.job.text;}),pinyin:part.map(function(x){return x.job.pinyin;}),clips:clips});}catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);p.setProperty('HSK_VOCAB_LAST_ASR_DIAGNOSTIC',JSON.stringify(e.detail||{error:String(e.message)}));console.log(JSON.stringify({stage:'asr_error',detail:e.detail||{error:String(e.message)}}));p.setProperty('HSK_VOCAB_ERROR',String(e.message));p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+300000));return;}
  if(verified.verification!=='double_asr_exact'||!Array.isArray(verified.verified)||verified.verified.length!==part.length)throw Error('invalid_verifier_result');
  part.forEach(function(x,i){var j=x.job,r=rows[j.row],s=report.ranges[x.clipIndex];r[10]=JSON.stringify(verified.transcripts.map(function(pass){return pass[i];}));r[13]=JSON.stringify(verified.pinyin.map(function(pass){return pass[i];}));r[14]=Math.round(s[0]/24);r[15]=Math.round(s[1]/24);
  if(verified.verified[i]===true){
  var duplicate=hskVoiceTtsModels_().map(function(m){return hskGetRow_(storage.sheet,hskVocabKey_(m,j.text));}).find(function(x){return x&&x.values[11]==='READY'&&x.values[4];});
  var found=duplicate||hskGetRow_(storage.sheet,j.key),old=found&&found.values,fileId=old&&old[11]==='READY'?old[4]:null;
- if(!fileId){var name='hsk-tts-'+j.key.slice(0,24)+'.wav',files=storage.folder.getFilesByName(name),file=files.hasNext()?files.next():storage.folder.createFile(Utilities.newBlob(Utilities.base64Decode(clips[i]),'audio/wav',name));fileId=file.getId();var stamp=new Date().toISOString(),entry=[j.key,'zh-CN','Kore',j.model,fileId,'audio/wav',Utilities.base64Decode(clips[i]).length,stamp,stamp,0,batch[6],'READY','vocabulary_double_asr_exact:'+batch[0]];if(found)storage.sheet.getRange(found.index,1,1,13).setValues([entry]);else storage.sheet.appendRow(entry);}
+ if(!fileId){var name='hsk-tts-'+j.key.slice(0,24)+'.wav',files=storage.folder.getFilesByName(name),file=files.hasNext()?files.next():storage.folder.createFile(Utilities.newBlob(Utilities.base64Decode(clips[i]),'audio/wav',name));fileId=file.getId();var stamp=hskVNTime_(new Date()),entry=[j.key,'zh-CN','Kore',j.model,fileId,'audio/wav',Utilities.base64Decode(clips[i]).length,stamp,stamp,0,batch[6],'READY','vocabulary_double_asr_exact:'+batch[0]];if(found)storage.sheet.getRange(found.index,1,1,13).setValues([entry]);else storage.sheet.appendRow(entry);}
  r[3]=duplicate?'EXISTING':'READY';if(duplicate)r[7]=old[3];r[9]=fileId;r[16]='https://drive.google.com/file/d/'+fileId+'/view';r[11]='';passed++;
  }else{var previous=Number((String(r[11]).match(/^asr_check_(\d+)$/)||[])[1]||0),checks=previous+1;
   if(checks<3){r[3]='CHECK_AGAIN';r[11]='asr_check_'+checks;}

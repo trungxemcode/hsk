@@ -25,8 +25,8 @@ function hskVoiceProgressRefresh_(storage,p){
  ['Đã có audio',ready],['Chưa có audio',Math.max(0,total-ready)],
  ['Sẽ thử lại',words.filter(function(r){return r[3]==='RETRY';}).length],
  ['Cần kiểm tra',words.filter(function(r){return r[3]==='REVIEW';}).length],
- ['Trạng thái',status],['Cập nhật gần nhất',new Date(now).toISOString()],
- ['Chạy lại sau',retry>now?new Date(retry).toISOString():''],
+ ['Trạng thái',status],['Cập nhật gần nhất',hskVNTime_(new Date(now))],
+ ['Chạy lại sau',retry>now?hskVNTime_(new Date(retry)):''],
  ['Lượt gọi tạo audio / chu kỳ 24h',Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0)],
  ['Phút đã dùng / chu kỳ 24h',Math.round(Number(p.getProperty('HSK_VOCAB_RUNTIME_MS')||0)/6000)/10],
  ['Lỗi hiện tại',error],['Cơ chế','Lô 50; lưu sau hai lượt ASR; từ chưa đạt chuyển lô sau'],
@@ -38,8 +38,9 @@ function hskVoiceProgressRefresh_(storage,p){
 }
 /** Keep the existing owner trigger and entry point. Refresh even on early return or failure. */
 function hskVocabTick(){
+ if(typeof hskPipelineDraining_==='function'&&hskPipelineDraining_())return;
  if(typeof hskVoicePhasedTick_==='function'&&hskVoicePhasedTick_())return;
  if(hskSettings_().getProperty('HSK_PHASE_AUTO_20261020_V1')!=='true'&&typeof hskQualityTrialTick_==='function'&&hskQualityTrialTick_())return;
- try{return hskVocabTickWork_();}
+ try{return typeof hskPipelineEnabled_==='function'&&hskPipelineEnabled_()?hskPipelineProducerTick_():hskVocabTickWork_();}
  finally{try{hskVoiceProgressRefresh_();}catch(e){console.warn('voice_progress_refresh_failed');}}
 }

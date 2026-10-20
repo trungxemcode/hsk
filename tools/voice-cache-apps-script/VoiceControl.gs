@@ -4,13 +4,15 @@
  * All recoveries reuse an existing WAV and issue ASR only. Never call TTS from this module.
  */
 function hskVoiceControlPoll_(p){
+ if(typeof hskPipelineDraining_==='function'&&hskPipelineDraining_())return true;
+ if(typeof hskPipelineEnabled_==='function'&&hskPipelineEnabled_())return true;
  var book=SpreadsheetApp.openById(p.getProperty('HSK_VOICE_SHEET_ID'));
  var control=book.getSheetByName('Voice_Control');
  if(!control)return false;
  if(typeof hskVoiceSegmentScheduledSmoke_==='function')hskVoiceSegmentScheduledSmoke_(p,control);
  try{hskAsrPaddingAudit_(p,control);}catch(e){control.getRange(29,1,1,2).setValues([['ASR_silence_audit',String(e.message||'audit_failed').slice(0,100)]]);}
  if(typeof hskShared50QueuedCommand_==='function')hskShared50QueuedCommand_(p,control);
- var shared;try{control.getRange(27,1,1,2).setValues([['Test_last_poll',new Date().toISOString()]]);shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());}catch(e){control.getRange(18,2).setValue('SHARED50_ERROR');control.getRange(19,2).setValue(String(e.message||'shared_error').slice(0,120));return true;}
+ var shared;try{control.getRange(27,1,1,2).setValues([['Test_last_poll',hskVNTime_(new Date())]]);shared=hskShared50Control_(p,book,control,String(control.getRange(15,2).getValue()||'').trim());}catch(e){control.getRange(18,2).setValue('SHARED50_ERROR');control.getRange(19,2).setValue(String(e.message||'shared_error').slice(0,120));return true;}
  if(shared!==null)return shared;
  var command=String(control.getRange(2,2).getValue()||'').trim();
  if(['PAUSE','RECOVER_50','RUN_VOCAB','AUTO_CYCLE'].indexOf(command)<0)return false;
@@ -82,7 +84,7 @@ function hskVoiceControlPoll_(p){
    p.deleteProperty('HSK_VOICE_CONTROL_AFTER');
   }
   if(Number(p.getProperty('HSK_VOICE_CONTROL_AFTER')||0)>Date.now())return true;
-  control.getRange(7,2).setValue(new Date().toISOString());
+  control.getRange(7,2).setValue(hskVNTime_(new Date()));
   // Process at most three independent clips per tick; stop on provider backoff or time budget.
   var started=Date.now();
   for(var step=0;step<3&&Date.now()-started<140000;step++){
@@ -186,7 +188,7 @@ function hskVoiceRecoverTick_(p,book,control){
     else{
      var bytes=Utilities.base64Decode(clips[k]),name='hsk-tts-'+key.slice(0,24)+'.wav',
       f=storage.folder.createFile(Utilities.newBlob(bytes,'audio/wav',name));fileId=f.getId();
-     var stamp=new Date().toISOString(),entry=[key,'zh-CN','Kore',job.model,fileId,'audio/wav',bytes.length,stamp,stamp,0,batch[6],'READY','salvaged_double_asr_exact:'+id];
+     var stamp=hskVNTime_(new Date()),entry=[key,'zh-CN','Kore',job.model,fileId,'audio/wav',bytes.length,stamp,stamp,0,batch[6],'READY','salvaged_double_asr_exact:'+id];
      if(old)storage.sheet.getRange(old.index,1,1,13).setValues([entry]);else storage.sheet.appendRow(entry);
     }
    }
@@ -199,7 +201,7 @@ function hskVoiceRecoverTick_(p,book,control){
    r[3]=r[4]<3?'RECHECK':'REVIEW';
    r[12]=match<0?'asr_mismatch_or_unproven_mapping':'duplicate_mapping';
   }
-  r[13]=new Date().toISOString();
+  r[13]=hskVNTime_(new Date());
   rec.getRange(i+2,1,1,14).setValues([r]);all[i]=r;
  });
  control.getRange(6,2).setValue('VERIFYING_SEGMENTS');

@@ -13,7 +13,7 @@ function hskVoiceSegmentScheduledSmoke_(p,control){
    control.getRange(57,2).setValue('BLOCKED_VOICE_NOT_PAUSED');return;
   }
   control.getRange(57,2).setValue('RUNNING');
-  var report=[['Segment_smoke_time',new Date().toISOString()]], successful=false, attempts=[];
+  var report=[['Segment_smoke_time',hskVNTime_(new Date())]], successful=false, attempts=[];
   try{
    var token=ScriptApp.getIdentityToken();
    if(!token)throw Error('identity_token_missing');

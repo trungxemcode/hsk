@@ -139,7 +139,7 @@ function hskWarmParallelTick() {
       }
       if(typeof text!=='string'||chosen.has(key))continue;
       chosen.add(key);
-      var stamp=new Date().toISOString(),row=[key,'zh-CN','Kore',model,'','audio/wav',0,stamp,stamp,0,slot,'PROCESSING','parallel_reserved'];
+      var stamp=hskVNTime_(new Date()),row=[key,'zh-CN','Kore',model,'','audio/wav',0,stamp,stamp,0,slot,'PROCESSING','parallel_reserved'];
       var rowNumber=entry?entry.row:sheet.getLastRow()+1;
       if(entry)sheet.getRange(rowNumber,1,1,13).setValues([row]);else sheet.appendRow(row);
       byKey.set(key,{row:rowNumber,values:row});
@@ -211,7 +211,7 @@ function hskWarmParallelTick() {
     p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+3600000));
   }finally{
     p.setProperty('HSK_WARM_RUNTIME_MS',String(Number(p.getProperty('HSK_WARM_RUNTIME_MS')||0)+Math.max(0,Date.now()-started)));
-    p.setProperty('HSK_WARM_LAST_RUN',new Date().toISOString());
+    p.setProperty('HSK_WARM_LAST_RUN',hskVNTime_(new Date()));
     try{if(storage)hskWarmProgress_(storage,p);}finally{lock.releaseLock();}
   }
 }

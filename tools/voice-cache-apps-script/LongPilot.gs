@@ -26,7 +26,7 @@ function hskLongPilotRun(){
   sheet=book.getSheetByName('Voice_Long_Pilots');if(!sheet){sheet=book.insertSheet('Voice_Long_Pilots');sheet.appendRow(['Batch','Jobs_JSON','Master_file','State','Error','Created','Slot']);}
   // Never resubmit an unresolved pilot after an uncertain transport or interrupted save.
   var prior=hskBatchRows_(sheet,7);prior.forEach(function(r,i){if(!r[2]&&(r[4]==='cloudflare_tts_502_tts_request_rejected'||r[6]===2&&r[4]==='cloudflare_tts_502_tts_generation_incomplete'&&/^2026-10-19T02:01:/.test(String(r[5])))){r[3]='FAILED';sheet.getRange(i+2,1,1,7).setValues([r]);}});if(prior.some(function(r){return ['RESERVED','MASTER','REVIEW'].indexOf(r[3])>=0;}))throw Error('unresolved_pilot_no_generation_sent');
-  var id=hskDigest_(JSON.stringify(jobs)+':'+Date.now());row=[id,JSON.stringify(jobs),'','RESERVED','',new Date().toISOString(),chosen];sheet.appendRow(row);number=sheet.getLastRow();SpreadsheetApp.flush();
+  var id=hskDigest_(JSON.stringify(jobs)+':'+Date.now());row=[id,JSON.stringify(jobs),'','RESERVED','',hskVNTime_(new Date()),chosen];sheet.appendRow(row);number=sheet.getLastRow();SpreadsheetApp.flush();
   var response=UrlFetchApp.fetch(url,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify({items:jobs.map(function(j){return j.text;}),keySlot:chosen,language:'zh-CN',isolated:true}),muteHttpExceptions:true});
   var decoded=hskParallelDecode_(response),master=storage.folder.createFile(Utilities.newBlob(decoded.bytes,'audio/wav','LONG_PILOT_'+id+'.wav'));
   row[2]=master.getId();row[3]='MASTER';sheet.getRange(number,1,1,7).setValues([row]);SpreadsheetApp.flush();

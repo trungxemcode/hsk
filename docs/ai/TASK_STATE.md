@@ -196,3 +196,9 @@ Owner requests strict Hanzi+pinyin on checks1/2; only check3 may accept homophon
 - Private trial checkpoints/audio remain private and unchanged; normal production gets the existing timer. Independent warm/legacy/canary generation yields to this vocabulary plan. Source corpus matches existing app corpus: 150 HSK1, 150 HSK2, 294 HSK3, 600 HSK4, 1294 HSK5, 2440 HSK6 references (classification is app metadata).
 - One initial owner-authorized audit recovers saved masters/chunks before releasing settled (>30 minutes), genuinely absent WAV requests for new generation. Existing provider cooldowns, passed voices and source pinyin are retained. Conflicting-pinyin/failed-canary reviews enter staged quality checking; no private trial results imported.
 - Validation: 77 Apps Script/Worker tests pass, including phase order, no early level mixing, preserving private trial/key cooldowns, PAUSE and reuse of saved WAVs. Live activation/readback follows. Rollback source: C:/Users/LENOVO/hsk-auto-quality-integration-20261020/backup-before-phased.
+
+## Voice pipeline sandbox — 2026-10-20
+- Isolated branch feat/voice-pipeline-20261020; production source/triggers/properties untouched. Candidate is opt-in, disabled by default.
+- One producer lease; two lane leases and per-master batch fencing; shared lock released only during provider requests, reacquired before commits. Two unfinished ASR batches maximum. Existing verification rules and 2-4 -> 1 -> 5 -> 6 remain.
+- 15 new interleaving/failure tests and full 92 GAS cases pass using gas-test-runtime.cjs for shared Vietnam timestamp dependency. Mocked provider tests are not live Gemini/GAS validation.
+- Activation requires tested-version property and a nine-minute drain; rollback refuses active leases. Do not activate until separate GAS sandbox smoke passes.

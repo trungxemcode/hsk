@@ -56,7 +56,7 @@ function hskVoiceTtsHealthTick_(p,control){
  var now=Date.now();
  if(Number(p.getProperty('HSK_VOICE_MODELS_HEALTH_NEXT')||0)>now)return;
  p.setProperty('HSK_VOICE_MODELS_HEALTH_NEXT',String(now+300000));
- var models=hskVoiceTtsModels_(),rows=[['Model_scan_UTC',new Date(now).toISOString()]];
+ var models=hskVoiceTtsModels_(),rows=[['Model_scan_UTC',hskVNTime_(new Date(now))]];
  var token=ScriptApp.getIdentityToken();
  for(var i=0;i<models.length;i++){
   var model=models[i],tag=hskVoiceModelTag_(model),value='STATUS_UNAVAILABLE';

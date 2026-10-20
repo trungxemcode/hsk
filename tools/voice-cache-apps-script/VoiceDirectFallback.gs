@@ -23,7 +23,7 @@ function hskVoiceDirectCooldown_(p,slot,error){
 function hskVoiceDirectTts_(p,text,model){
  var chosen=hskVoiceDirectKey_(p),bytes;
  try{bytes=hskGemini_(chosen.key,text,model);}
- catch(error){hskVoiceDirectCooldown_(p,chosen.slot,error);throw error;}
+ catch(error){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(error);hskVoiceDirectCooldown_(p,chosen.slot,error);throw error;}
  if(!Array.isArray(bytes)||bytes.length<=44)throw Error('direct_tts_empty_audio');
  // Generation is not acceptance: ASR will separately check every clip.
  hskBatchPcm_(bytes);
@@ -38,7 +38,7 @@ function hskVoiceDirectTranscribe_(key,clip,model){
   {text:instructions},{inlineData:{mimeType:'audio/wav',data:clip}}
  ]}],generationConfig:{temperature:0,responseMimeType:'application/json'}};
  var url='https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent';
- var r=UrlFetchApp.fetch(url,{method:'post',contentType:'application/json',
+ var r=(typeof hskPipelineFetch_==='function'?hskPipelineFetch_:UrlFetchApp.fetch)(url,{method:'post',contentType:'application/json',
   headers:{'x-goog-api-key':key},payload:JSON.stringify(payload),muteHttpExceptions:true});
  if(r.getResponseCode()!==200)throw Error('direct_asr_http_'+r.getResponseCode());
  var result;
@@ -48,7 +48,7 @@ function hskVoiceDirectTranscribe_(key,clip,model){
   var raw=parts.map(function(part){return part.text||'';}).join('').trim();
   if(raw.length>3000)throw Error('direct_asr_long_response');
   result=JSON.parse(raw);
- }catch(e){throw Error('direct_asr_invalid_json');}
+ }catch(e){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(e);throw Error('direct_asr_invalid_json');}
  if(typeof result.hanzi!=='string'||typeof result.pinyin!=='string'||
     result.hanzi.length>100||result.pinyin.length>200)throw Error('direct_asr_invalid_transcript');
  return {hanzi:result.hanzi,pinyin:result.pinyin};
@@ -64,7 +64,7 @@ function hskVoiceDirectVerify_(p,body){
  for(var i=0;i<2;i++){
   var key=hskVoiceDirectKey_(p);
   try{passes.push(hskVoiceDirectTranscribe_(key.key,body.clips[0],models[i]));}
-  catch(error){hskVoiceDirectCooldown_(p,key.slot,error);throw error;}
+  catch(error){if(typeof hskPipelineFenceError_==='function')hskPipelineFenceError_(error);hskVoiceDirectCooldown_(p,key.slot,error);throw error;}
  }
  var a=passes[0],b=passes[1];
  var normalizeHanzi=function(s){return String(s||'').normalize('NFKC').replace(/[\s\p{P}\p{S}]/gu,'').trim();};
