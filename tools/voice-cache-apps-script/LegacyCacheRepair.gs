@@ -58,6 +58,12 @@ function hskLegacyCacheRepairTick_(p,book,control){
   p.setProperty('HSK_LEGACY_REPAIR_POLICY','prefer_verified_alternates_v2');
   if(/^tts_wait_/.test(p.getProperty('HSK_LEGACY_REPAIR_LAST')||''))p.deleteProperty('HSK_LEGACY_REPAIR_NEXT');
  }
+ // Upgrade old word-level backoffs (legacy 2.5/3.1): do not make the same
+ // word wait 30 minutes when the next TTS model has free capacity.
+ if(p.getProperty('HSK_LEGACY_MODEL_ROTATION_POLICY')!=='key_model_v3'){
+  p.setProperty('HSK_LEGACY_MODEL_ROTATION_POLICY','key_model_v3');
+  p.deleteProperty('HSK_LEGACY_REPAIR_NEXT');
+ }
  if(Number(p.getProperty('HSK_LEGACY_REPAIR_NEXT')||0)>now)return;
  var lock=LockService.getScriptLock();if(!lock.tryLock(100))return;
  try{
@@ -69,6 +75,13 @@ function hskLegacyCacheRepairTick_(p,book,control){
   var storage=hskCheck_(p),cache=storage.sheet;
   var data=cache.getLastRow()>1?cache.getRange(2,1,cache.getLastRow()-1,13).getValues():[];
   var allTasks=hskLegacyCandidates_(data,hskWarmCorpus_());
+  if(p.getProperty('HSK_LEGACY_MODEL_ROTATION_MIGRATED')!=='true'){
+   allTasks.forEach(function(t){
+    if(t.state==='DEFERRED'&&/^cloudflare_tts_502_/.test(String(t.row[12]||'')))
+     p.deleteProperty('HSK_LEGACY_ITEM_'+t.index+'_AFTER');
+   });
+   p.setProperty('HSK_LEGACY_MODEL_ROTATION_MIGRATED','true');
+  }
   var tasks=allTasks.filter(function(t){return Number(p.getProperty('HSK_LEGACY_ITEM_'+t.index+'_AFTER')||0)<=now;});
   var retry=hskWarmQueue_(storage),retryRows=hskVocabRows_(retry,6);
   function retryStatus(t,state,note,notBefore){
@@ -178,9 +191,7 @@ function hskLegacyCacheRepairTick_(p,book,control){
    generationModel=requested;slot=0;
   }else{
    var options=hskVoiceRoutePairs_(p,token,Date.now(),requested,null).pairs;
-   options=options.filter(function(pair){
-    return Number(p.getProperty('HSK_LEGACY_SLOT_'+pair.slot+'_AFTER')||0)<=Date.now();
-   });
+   if(canary38)options=options.filter(function(pair){return pair.model===requested;});
    if(options.length){slot=options[0].slot;generationModel=options[0].model;}
   }
   if(slot<0){if(canary38)control.getRange(94,4).setValue('MODEL_3_8_NO_ELIGIBLE_KEY');next(60000,'tts_models_or_keys_cooling');return;}
@@ -233,7 +244,9 @@ function hskLegacyCacheRepairTick_(p,book,control){
    var attempts=Number(p.getProperty('HSK_LEGACY_ITEM_'+t.index+'_ATTEMPTS')||0)+1;
    var transient=/cloudflare_tts_(429|502|503|504)_|tts_(provider_unavailable|daily_limit|rate_limited|quota_unavailable|generation_incomplete|model_unavailable)/.test(reason);
    p.setProperty('HSK_LEGACY_ITEM_'+t.index+'_ATTEMPTS',String(attempts));
-   var itemWait=transient&&attempts>=3?Math.max(wait,21600000):wait;
+   // Retry the word on a DIFFERENT eligible model/key soon; the provider's
+   // full Retry-After is retained on the specific failed pair below.
+   var itemWait=transient?60000:wait;
    var wordRetryAt=Date.now()+itemWait;
    p.setProperty('HSK_LEGACY_ITEM_'+t.index+'_AFTER',String(wordRetryAt));
    if(attempts>=3&&!transient&&t.row[11]==='DEFERRED'){

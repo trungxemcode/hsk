@@ -97,7 +97,7 @@ test('ASR provider outage defers only one VERIFY_PENDING item and creates next m
  assert.equal(w.rows[1][4],'already-ready');
 });
 
-test('provider quota 429 after third attempt defers only failed word, respects 2h Retry-After and retains other words',()=>{
+test('429 cools down failed key/model for full Retry-After while the word may try a different model',()=>{
  const w=setup(),start=Date.now();
  w.props.set('HSK_LEGACY_ITEM_27_ATTEMPTS','2');
  const original=w.env.hskVocabCall_;
@@ -113,9 +113,11 @@ test('provider quota 429 after third attempt defers only failed word, respects 2
  w.run();
  assert.equal(w.rows[0][11],'DEFERRED');
  assert.equal(w.retry.find(x=>x[0]===27)[4],'PENDING');
- assert.ok(Number(w.retry.find(x=>x[0]===27)[3])>=start+21600000-2000);
- assert.ok(Number(w.props.get('HSK_LEGACY_ITEM_27_AFTER'))>=start+21600000-2000);
+ assert.ok(Number(w.retry.find(x=>x[0]===27)[3])>=start+300000-2000);
+ assert.ok(Number(w.props.get('HSK_LEGACY_ITEM_27_AFTER'))>=start+60000-2000);
+ assert.equal(w.props.get('HSK_LEGACY_ITEM_27_NEXT_MODEL'),'gemini-3.1-flash-tts-preview');
  assert.ok(Number(w.props.get('HSK_LEGACY_SLOT_4_AFTER'))>=start+7200000-2000);
+ assert.ok(Number(w.props.get('HSK_VOCAB_PAIR_4_gemini-2.5-flash-preview-tts_AFTER'))>=start+7200000-2000);
  assert.ok(Number(w.props.get('HSK_LEGACY_REPAIR_NEXT'))<Date.now()+120000);
  w.props.set('HSK_LEGACY_REPAIR_NEXT','0');
  w.run();
@@ -135,4 +137,25 @@ test('one-shot Gemini 3.8 canary uses an actually missing legacy word and saves 
  assert.ok(w.rows[0][4]);assert.equal(w.rows[1][4],'already-ready');
  w.props.set('HSK_LEGACY_REPAIR_NEXT','0');w.run();
  assert.equal(w.rows[0][11],'READY');
+});
+
+test('legacy 502 rotates 2.5 then 3.1 then 3.8 on same missing word without duplicating WAV',()=>{
+ const w=setup(),attempted=[];
+ w.env.UrlFetchApp.fetch=(url,options)=>{attempted.push(JSON.parse(options.payload).model);return {getResponseCode:()=>502,getContentText:()=>'{}'};};
+ let calls=0;
+ w.env.hskParallelDecode_=()=>{
+  calls++;
+  if(calls<3){const e=Error('cloudflare_tts_502_tts_request_rejected');e.retryAfter=120;throw e;}
+  return {bytes:Array(100).fill(1),providerAttempts:1};
+ };
+ for(let i=0;i<3;i++){
+  w.props.set('HSK_LEGACY_REPAIR_NEXT','0');
+  w.props.set('HSK_LEGACY_ITEM_27_AFTER','0');
+  w.run();
+ }
+ assert.deepEqual(attempted,['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview','gemini-3.8-flash-lite-tts']);
+ assert.equal(w.rows[0][11],'VERIFY_PENDING');
+ assert.equal(w.rows[1][4],'already-ready');
+ assert.equal(w.fileMap.size,1);
+ assert.match(w.rows[0][12],/generated_model_3_8/);
 });
