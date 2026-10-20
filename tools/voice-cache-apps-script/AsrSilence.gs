@@ -17,6 +17,10 @@ function hskAsrPrepareBody_(body){
 }
 /** Once per version: audit one already-saved preview; no TTS or ASR request. */
 function hskAsrPaddingAudit_(p,control){
+ if(p.getProperty('HSK_ASR_RETRY_POLICY')!=='per_clip_v1'){
+  p.setProperty('HSK_ASR_RETRY_POLICY','per_clip_v1');
+  if(/^(asr_provider_unavailable|vocabulary_verification_unavailable)$/.test(p.getProperty('HSK_VOCAB_ERROR')||'')){p.deleteProperty('HSK_VOCAB_RETRY_AT');p.deleteProperty('HSK_AUTO50_ASR_ERRORS');}
+ }
  if(p.getProperty('HSK_CLIP_SIZE_FIX')!=='v2'&&p.getProperty('HSK_VOCAB_ERROR')==='invalid_verification_clip_size'){p.setProperty('HSK_CLIP_SIZE_FIX','v2');p.deleteProperty('HSK_VOCAB_RETRY_AT');p.deleteProperty('HSK_VOCAB_ERROR');p.deleteProperty('HSK_AUTO50_ASR_ERRORS');}
  if(p.getProperty('HSK_ASR_SILENCE_AUDIT')==='v1')return;
  var url=String(control.getRange(20,2).getValue()||''),id=(url.match(/folders\/([A-Za-z0-9_-]+)/)||[])[1];

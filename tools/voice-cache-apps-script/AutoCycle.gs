@@ -103,7 +103,7 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
    batch[3]='REVIEW';batch[4]=String(e.message||'unreliable_master');
    tables.batches.getRange(index+2,1,1,11).setValues([batch]);
    jobs.forEach(function(j){var r=rows[j.row];if(['READY','EXISTING'].indexOf(r[3])>=0)return;
-    r[3]=Number(r[4]||0)>=5?'REVIEW':'RETRY';r[5]=Date.now()+300000;r[11]='auto50_unverified_master';hskVocabWrite_(tables.queue,j.row,r);
+    r[3]='RETRY';r[5]=0;r[11]='needs_new_batch_after_unverified_master';hskVocabWrite_(tables.queue,j.row,r);
    });
    return;
   }
@@ -114,16 +114,22 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
   entries=init;
   all=all.concat(init);
  }
- var pending=entries.map(function(r,i){return {r:r,i:i};}).filter(function(x){return ['PENDING','RECHECK'].indexOf(x.r[4])>=0;})
-  .sort(function(a,b){return (a.r[4]==='PENDING'?0:1)-(b.r[4]==='PENDING'?0:1)||a.i-b.i;});
- if(!pending.length){hskAuto50Finalize_(p,storage,tables,rows,batches,index,entries);return;}
+ var backoff={batch:batch[0],clips:{}};
+ try{var prior=JSON.parse(p.getProperty('HSK_AUTO50_ASR_BACKOFF')||'{}');if(prior.batch===batch[0]&&prior.clips)backoff=prior;}catch(ignore){}
+ var waiting=entries.filter(function(r){return ['PENDING','RECHECK'].indexOf(r[4])>=0;});
+ var pending=entries.map(function(r,i){return {r:r,i:i};}).filter(function(x){return ['PENDING','RECHECK'].indexOf(x.r[4])>=0&&Number((backoff.clips[x.r[1]]||{}).after||0)<=Date.now();})
+  .sort(function(a,b){return Number((backoff.clips[a.r[1]]||{}).count||0)-Number((backoff.clips[b.r[1]]||{}).count||0)||(a.r[4]==='PENDING'?0:1)-(b.r[4]==='PENDING'?0:1)||a.i-b.i;});
+ if(!pending.length){
+  if(waiting.length){var earliest=Math.min.apply(null,waiting.map(function(r){return Number((backoff.clips[r[1]]||{}).after||Date.now()+60000);}));p.setProperty('HSK_VOCAB_RETRY_AT',String(earliest));return;}
+  p.deleteProperty('HSK_AUTO50_ASR_BACKOFF');hskAuto50Finalize_(p,storage,tables,rows,batches,index,entries);return;
+ }
  var pcm=hskBatchPcm_(master),updates=0;
  for(var n=0;n<pending.length&&updates<5&&Date.now()-started<170000;n++){
   var item=pending[n],r=item.r,number=Number(r[1]),approx=Math.min(jobs.length-1,number-1);
   var begin=Math.max(0,Math.round((Number(r[2])-120)*24)),end=Math.min(pcm.length/2,Math.round((Number(r[3])+200)*24));
   var clip=Utilities.base64Encode(hskWav_(pcm.slice(begin*2,end*2),'audio/l16'));
-  // Oversized merged speech cannot be certified as one word. Keep its master
-  // and let finalization carry unverified words into the next 50-item batch.
+  // A merged/long utterance is not a single-word verification clip. Preserve
+  // its master, defer its words, and continue other clips without an API call.
   if(clip.length>350000){
    r[4]='REVIEW';r[13]='verification_clip_too_large_next_batch';
    r[14]=new Date().toISOString();
@@ -139,12 +145,29 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
    if(!Array.isArray(decoded.transcripts)||decoded.transcripts.length!==2||!Array.isArray(decoded.pinyin)||decoded.pinyin.length!==2)
     throw Error('asr_invalid_response');
    p.deleteProperty('HSK_AUTO50_ASR_ERRORS');
+   delete backoff.clips[r[1]];p.setProperty('HSK_AUTO50_ASR_BACKOFF',JSON.stringify(backoff));
+   p.deleteProperty('HSK_VOCAB_ERROR');p.deleteProperty('HSK_VOCAB_RETRY_AT');
   }catch(e){
-   var consecutive=Number(p.getProperty('HSK_AUTO50_ASR_ERRORS')||0)+1;
-   p.setProperty('HSK_AUTO50_ASR_ERRORS',String(consecutive));
-   p.setProperty('HSK_VOCAB_ERROR',String(e.message||'asr_provider_error').slice(0,80));
-   p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+(consecutive>=3?1800000:120000)));
-   if(consecutive>=3)p.setProperty('HSK_AUTO50_ASR_ERRORS','0');
+   var reason=String(e.message||'asr_provider_error').slice(0,100),detail=e.detail||{};
+   p.setProperty('HSK_AUTO50_LAST_ASR_ERROR',reason);
+   if(/invalid_verification_clip_size/.test(reason)){
+    r[4]='REVIEW';r[13]='verification_clip_too_large_next_batch';r[14]=new Date().toISOString();sheet.getRange(all.indexOf(r)+2,1,1,15).setValues([r]);updates++;continue;
+   }
+   if(/asr_invalid_response|verification_uncertain/.test(reason)){
+    r[5]=Number(r[5]||0)+1;r[4]=r[5]>=3?'REVIEW':'RECHECK';r[13]=reason;r[14]=new Date().toISOString();sheet.getRange(all.indexOf(r)+2,1,1,15).setValues([r]);updates++;continue;
+   }
+   if(/unauthorized|identity_missing|permission_denied|not_configured|invalid_request|invalid_verification_model/.test(reason)){
+    p.setProperty('HSK_VOCAB_ERROR',reason);p.setProperty('HSK_VOCAB_ENABLED','false');
+    storage.sheet.getParent().getSheetByName('Voice_Control').getRange(2,2).setValue('PAUSE');return;
+   }
+   // Provider outages do not count as a wrong pronunciation or trigger new TTS.
+   // Persist per-clip retries, try other clips/keys first, honor Retry-After.
+   var count=Number((backoff.clips[r[1]]||{}).count||0)+1;
+   var delay=Math.max(Math.min(300000,60000*Math.pow(2,Math.min(3,count-1))),Number(detail.retryAfter||0)*1000);
+   backoff.clips[r[1]]={count:count,after:Date.now()+delay};
+   p.setProperty('HSK_AUTO50_ASR_BACKOFF',JSON.stringify(backoff));
+   p.setProperty('HSK_VOCAB_ERROR','asr_waiting_provider');
+   p.setProperty('HSK_VOCAB_RETRY_AT',String(Date.now()+60000));
    return;
   }
   r[5]=Number(r[5]||0)+1;r[6]=String(decoded.transcripts[0][0]||'');r[7]=String(decoded.transcripts[1][0]||'');
