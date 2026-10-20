@@ -85,6 +85,7 @@ function hskVoicePhasedTick_(){
    p.setProperty('HSK_VOCAB_ENABLED','true');p.setProperty('HSK_AUTO50_ENABLED','true');p.setProperty('HSK_VOCAB_PILOT_ONLY','false');p.setProperty('HSK_VOCAB_TTS_STRATEGY','chunks-v1');p.setProperty('HSK_VOCAB_BATCH_SIZE','50');
    p.setProperty('HSK_AUTO_RESUME_BOTH_20261020_V1','true');
    control.getRange(2,2).setValue('AUTO_CYCLE');control.getRange(15,2).setValue('AUTO_CYCLE');
+   if(!ScriptApp.getProjectTriggers().some(function(t){return t.getHandlerFunction()==='hskVocabTick';}))ScriptApp.newTrigger('hskVocabTick').timeBased().everyMinutes(1).create();
    p.setProperty(HSK_PHASE_AUTO_ID_,'true');
   }
   if(String(control.getRange(2,2).getValue())!=='AUTO_CYCLE'||p.getProperty('HSK_VOICE_PAUSED')==='true')return false;
@@ -97,5 +98,12 @@ function hskVoicePhasedTick_(){
   var blocked=missing.length&&!missing.some(function(r){return ['PENDING','RETRY','MASTER','CHECK_AGAIN'].indexOf(r[3])>=0;});
   hskVoicePhasedProgress_(p,book,rows,stage,blocked?'WAITING_HELD_AUDIO_REVIEW':'AUTO_RUNNING_QUALITY_V1');
   return !!blocked;
+ }catch(e){
+  p.setProperty('HSK_PHASE_AUTO_ERROR',String(e.message||e).slice(0,180));
+  if(book&&book.getSheetByName('Tien_do'))book.getSheetByName('Tien_do').getRange(24,1,1,2).setValues([['Trang thai giai doan','PHASE_INIT_ERROR:'+String(e.message||e).slice(0,140)]]);
+  console.warn('phased_auto_initialization_error');return true;
  }finally{lock.releaseLock();}
 }
+
+/** Owner-only API/manual activation helper; no synthesis is performed here. */
+function hskVoicePhasedActivate(){return hskVoicePhasedTick_();}

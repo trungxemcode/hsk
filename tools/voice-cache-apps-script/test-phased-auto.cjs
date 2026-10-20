@@ -9,7 +9,7 @@ function world(rows=[],files=new Map(),batches=[]){
  let stored=rows.length;const cache={getParent:()=>book},queue={getLastRow:()=>stored+1,getMaxRows:()=>5000,insertRowsAfter:()=>{},getRange:(r,c,n)=>({setValues:added=>added.forEach((x,i)=>{rows[r-2+i]=x;stored=Math.max(stored,r-1+i);})})};
  const journal={getRange:(r)=>({setValues:x=>batches[r-2]=x[0]}),appendRow:r=>batches.push(r)};
  const storage={sheet:cache,folder:{getFilesByName:n=>({hasNext:()=>files.has(n),next:()=>files.get(n)})}};
- const c={Date,JSON,Math,Map,Set,Array,Object,String,Number,hskSettings_:()=>p,LockService:{getScriptLock:()=>({tryLock:()=>true,releaseLock:()=>{}})},
+ const c={ScriptApp:{getProjectTriggers:()=>[{getHandlerFunction:()=> 'hskVocabTick'}]},Date,JSON,Math,Map,Set,Array,Object,String,Number,hskSettings_:()=>p,LockService:{getScriptLock:()=>({tryLock:()=>true,releaseLock:()=>{}})},
  hskCheck_:()=>storage,hskVocabTables_:()=>({queue,batches:journal}),hskVocabRows_:s=>s===queue?rows:s===journal?batches:[],
  hskVoiceRecPinyin_:x=>String(x||'').replace(/\s/g,''),hskVoiceTtsModels_:()=>['m'],hskVocabKey_:(m,t)=>m+':'+t,
  hskTrialCorpus_:()=>[1,2,3,4,5,6].map(level=>({level,text:'word'+level,pinyin:'pin'+level})),

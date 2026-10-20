@@ -52,7 +52,6 @@ function hskWarmQueue_(storage) {
   return sheet;
 }
 function hskWarmProgress_(storage,p) {
-  if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskVoiceProgressRefresh_==='function')return hskVoiceProgressRefresh_(storage,p);
   var book=storage.sheet.getParent(),sheet=book.getSheetByName('Tien_do');
   if(!sheet)sheet=book.insertSheet('Tien_do');
   var q=hskWarmQueue_(storage),rows=q.getLastRow()>1?q.getRange(2,1,q.getLastRow()-1,6).getValues():[];
@@ -72,7 +71,50 @@ function hskWarmProgress_(storage,p) {
     ['Luồng đang cho phép / tối đa 9',Number(p.getProperty('HSK_WARM_CONCURRENCY')||1)]]);
 }
 function hskWarmTick() {
-  if(typeof hskVoiceControlPoll_==='function'&&hskVoiceControlPoll_(hskSettings_()))return;
+  if(typeof hskVoicePhasedTick_==='function'&&hskSettings_().getProperty('HSK_PHASE_AUTO_20261020_V1')!=='true')hskVoicePhasedTick_();
+  // Pause both generators before editing displayed workbook timestamps.
+  var tzSettings=hskSettings_(),tzBookId=tzSettings.getProperty('HSK_VOICE_SHEET_ID');
+  if(tzBookId){
+   var tzBook=SpreadsheetApp.openById(tzBookId),tzControl=tzBook.getSheetByName('Voice_Control');
+   if(tzControl&&String(tzControl.getRange(2,2).getValue()).trim()==='PAUSE'){
+    var once=String(tzControl.getRange(15,2).getValue()||'').trim();
+    if(once==='RUN_ONCE_50'||once==='RUNNING_ONCE_50'){
+     // Only the isolated 50-word trial is allowed through a global PAUSE.
+     // Never activate the separate warm/corpus pipeline.
+     tzSettings.setProperty('HSK_WARM_ENABLED','false');
+     tzSettings.setProperty('HSK_VOICE_PAUSED','false');
+     return;
+    }
+    tzSettings.setProperty('HSK_VOICE_PAUSED','true');
+    tzSettings.setProperty('HSK_WARM_ENABLED','false');
+    tzSettings.setProperty('HSK_VOCAB_ENABLED','false');
+    tzSettings.setProperty('HSK_AUTO50_ENABLED','false');
+    if(typeof hskVNPausedMigration_==='function')hskVNPausedMigration_(tzSettings,tzBook);
+    return;
+   }
+  }
+  // New rows will keep displaying Vietnam time after the generators are resumed.
+  if(tzBookId&&typeof hskVNPeriodicNormalize_==='function')hskVNPeriodicNormalize_(tzSettings,tzBook);
+  // Bootstrap the restored 50-word vocabulary scheduler using the existing owner trigger.
+  // Do not enable anything if the Sheet owner explicitly selected PAUSE.
+  var coordinator=hskSettings_();
+  if(typeof hskVoiceControlPoll_==='function'&&coordinator.getProperty('HSK_AUTO50_RESTORE_SCHEDULER_V1')!=='true'){
+    var sheetId=coordinator.getProperty('HSK_VOICE_SHEET_ID');
+    if(sheetId){
+      var commandSheet=SpreadsheetApp.openById(sheetId).getSheetByName('Voice_Control');
+      if(commandSheet&&String(commandSheet.getRange(2,2).getValue()).trim()==='AUTO_CYCLE'){
+        hskVoiceControlPoll_(coordinator);
+        if(ScriptApp.getProjectTriggers().some(function(t){return t.getHandlerFunction()==='hskVocabTick';})){
+          coordinator.setProperty('HSK_AUTO50_RESTORE_SCHEDULER_V1','true');
+        }
+      }
+    }
+  }
+  // Resume exactly once after the obsolete model-rejection stop, using the installed timer.
+  var boot=hskSettings_();
+  if(boot.getProperty('HSK_WARM_ISOLATED')==='true'&&boot.getProperty('HSK_WARM_ENABLED')!=='true'&&boot.getProperty('HSK_VOICE_PAUSED')!=='true'&&boot.getProperty('HSK_WARM_PAUSE_REASON')!=='batch-pilot'&&['cloudflare_tts_502_tts_request_rejected','batch_transport_uncertain','batch_storage_or_runtime_error'].indexOf(boot.getProperty('HSK_WARM_LAST_ERROR'))>=0&&boot.getProperty('HSK_ROTATION_DIAGNOSTIC_V3')!=='true'){
+    boot.setProperty('HSK_ROTATION_DIAGNOSTIC_V3','true');boot.setProperty('HSK_WARM_ENABLED','true');boot.deleteProperty('HSK_WARM_RETRY_AT');
+  }
   // One-time, checksum-verified salvage of already generated masters; never calls TTS.
   if(typeof hskOfflineRecoverOnce_==='function'&&hskOfflineRecoverOnce_())return;
   if(hskSettings_().getProperty('HSK_WARM_ISOLATED')==='true')return hskWarmIsolatedTick();
