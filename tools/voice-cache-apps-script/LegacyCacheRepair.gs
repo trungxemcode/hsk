@@ -39,7 +39,8 @@ function hskLegacyCacheRepairTick_(p,book,control){
  try{
   var notBefore=Number(p.getProperty('HSK_LEGACY_REPAIR_NEXT')||0);
   var item68=Number(p.getProperty('HSK_LEGACY_ITEM_68_AFTER')||0);
-  control.getRange(95,1,6,2).setValues([
+  // Voice_Control has 88 rows and four columns; use the empty C80:D85 area.
+  control.getRange(80,3,6,2).setValues([
    ['Legacy_diag_at',new Date(now).toISOString()],
    ['Legacy_diag_next',notBefore?new Date(notBefore).toISOString():'READY'],
    ['Legacy_diag_warm_enabled',String(p.getProperty('HSK_WARM_ENABLED')||'false')],
