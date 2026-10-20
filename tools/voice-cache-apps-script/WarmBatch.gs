@@ -52,6 +52,7 @@ function hskWarmQueue_(storage) {
   return sheet;
 }
 function hskWarmProgress_(storage,p) {
+  if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskVoiceProgressRefresh_==='function')return hskVoiceProgressRefresh_(storage,p);
   var book=storage.sheet.getParent(),sheet=book.getSheetByName('Tien_do');
   if(!sheet)sheet=book.insertSheet('Tien_do');
   var q=hskWarmQueue_(storage),rows=q.getLastRow()>1?q.getRange(2,1,q.getLastRow()-1,6).getValues():[];

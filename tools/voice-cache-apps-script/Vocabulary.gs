@@ -75,7 +75,7 @@ function hskVocabRanges_(bytes,expected){
  var gaps=ranges.slice(1).map(function(s,i){return (s[0]-ranges[i][1])/24000;});
  return {ranges:ranges,duration:pcm.length/48000,minGap:gaps.length?Math.min.apply(null,gaps):null,maxGap:gaps.length?Math.max.apply(null,gaps):null};
 }
-function hskVocabTick(){
+function hskVocabTickWork_(){
  var p=hskSettings_(),now=Date.now();
  if(typeof hskVoiceControlPoll_==='function'&&hskVoiceControlPoll_(p))return;
  if(p.getProperty('HSK_VOCAB_ENABLED')!=='true'||p.getProperty('HSK_VOICE_PAUSED')==='true')return;
