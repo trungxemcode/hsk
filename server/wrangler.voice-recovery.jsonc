@@ -1,0 +1,23 @@
+﻿{
+  "name": "hsk-vietnamese-translator",
+  "main": "voice-worker-recovery.mjs",
+  "compatibility_date": "2026-10-12",
+  "workers_dev": true,
+  "keep_vars": true,
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "AI_CONTROL",
+        "class_name": "HSkaIControl"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "ai_budget_control_v1",
+      "new_sqlite_classes": [
+        "HSkaIControl"
+      ]
+    }
+  ]
+}

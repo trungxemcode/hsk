@@ -22,3 +22,19 @@ function setup(){
 {
  const x=setup();x.c.hskVocabCall_=()=>{throw Error('unauthorized')};x.run();assert.equal(x.props.get('HSK_VOCAB_ENABLED'),'false');assert.equal(x.isPaused(),true);assert.equal(x.rows[0][3],'MASTER');console.log('PASS authentication fault pauses control and preserves master');
 }
+
+{
+ const x=setup();x.c.hskVocabCall_=()=>{throw Error('asr_unverified_audio')};x.run();
+ assert.equal(x.entries[0][4],'RECHECK');assert.equal(x.entries[0][5],1);
+ assert.equal(x.props.has('HSK_AUTO50_ASR_BACKOFF'),false);
+ console.log('PASS malformed or uncertain transcription counts as quality recheck, not provider outage');
+}
+{
+ const props=new Map([['HSK_ASR_SILENCE_AUDIT','v1'],['HSK_ASR_RETRY_POLICY','per_clip_v1'],['HSK_VOCAB_ERROR','asr_waiting_provider'],['HSK_AUTO50_ASR_BACKOFF','old model cooldown'],['HSK_VOCAB_RETRY_AT','9999999999999']]);
+ const p={getProperty:k=>props.get(k),setProperty:(k,v)=>props.set(k,v),deleteProperty:k=>props.delete(k)};
+ const c={};vm.runInNewContext(fs.readFileSync(__dirname+'/AsrSilence.gs','utf8'),c);
+ c.hskAsrPaddingAudit_(p,{});assert(!props.has('HSK_AUTO50_ASR_BACKOFF'));assert(!props.has('HSK_VOCAB_RETRY_AT'));
+ props.set('HSK_AUTO50_ASR_BACKOFF','new valid cooldown');c.hskAsrPaddingAudit_(p,{});
+ assert.equal(props.get('HSK_AUTO50_ASR_BACKOFF'),'new valid cooldown');
+ console.log('PASS old-model cooldown migration runs once and preserves later genuine cooldowns');
+}

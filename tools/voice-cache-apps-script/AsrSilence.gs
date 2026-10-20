@@ -17,6 +17,14 @@ function hskAsrPrepareBody_(body){
 }
 /** Once per version: audit one already-saved preview; no TTS or ASR request. */
 function hskAsrPaddingAudit_(p,control){
+ // Release stale cooldowns once after the retired ASR model is replaced.
+ if(p.getProperty('HSK_ASR_MODEL_FIX')!=='3.5_v1'){
+  p.setProperty('HSK_ASR_MODEL_FIX','3.5_v1');
+  p.deleteProperty('HSK_AUTO50_ASR_BACKOFF');
+  if(/asr_|verification_unavailable/.test(p.getProperty('HSK_VOCAB_ERROR')||'')){
+   p.deleteProperty('HSK_VOCAB_RETRY_AT');p.deleteProperty('HSK_VOCAB_ERROR');
+  }
+ }
  if(p.getProperty('HSK_ASR_RETRY_POLICY')!=='per_clip_v1'){
   p.setProperty('HSK_ASR_RETRY_POLICY','per_clip_v1');
   if(/^(asr_provider_unavailable|vocabulary_verification_unavailable)$/.test(p.getProperty('HSK_VOCAB_ERROR')||'')){p.deleteProperty('HSK_VOCAB_RETRY_AT');p.deleteProperty('HSK_AUTO50_ASR_ERRORS');}

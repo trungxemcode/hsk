@@ -12,13 +12,21 @@ function hskAuto50Sheet_(storage){
 function hskAuto50Choose_(pending){
  // Definitive TTS/provider failures first, then all other retries; only then untouched words.
  // Never queue an already READY/EXISTING word and never reset REVIEW safety limits.
- return pending.sort(function(a,b){
+ var sorted=pending.sort(function(a,b){
   function priority(x){var error=String(x.r[11]||'');return x.r[3]==='RETRY'&&/provider_refused_batch|cloudflare_tts_|^tts_/.test(error)?0:
    x.r[3]==='RETRY'&&/^needs_new_batch_after_unverified_master|^auto50_unverified_master/.test(error)?1:
    x.r[3]==='RETRY'?2:3;}
-  return priority(a)-priority(b)||Number(a.r[0])-Number(b.r[0])||
-   Number(a.r[4])-Number(b.r[4])||a.i-b.i;
+  return priority(a)-priority(b)||Number(a.r[4]||0)-Number(b.r[4]||0)||
+   Number(a.r[0])-Number(b.r[0])||a.i-b.i;
  });
+ // Failed words are carried into the next 50-word batch, but leave room for
+ // fresh words when the backlog is large. Never duplicate any queue item.
+ var retry=sorted.filter(function(x){return x.r[3]==='RETRY';});
+ var fresh=sorted.filter(function(x){return x.r[3]==='PENDING';});
+ if(retry.length<=30||!fresh.length)return sorted;
+ var first=retry.slice(0,30).concat(fresh.slice(0,20));
+ if(first.length<50)first=first.concat(sorted.filter(function(x){return first.indexOf(x)<0;}).slice(0,50-first.length));
+ return first.concat(sorted.filter(function(x){return first.indexOf(x)<0;}));
 }
 function hskAuto50Detect_(master,expected){
  var pcm=hskBatchPcm_(master),levels=[],peak=0;
@@ -82,8 +90,9 @@ function hskAuto50Finalize_(p,storage,tables,rows,batches,index,clipRows){
  var proved=new Set(clipRows.filter(function(r){return ['READY','EXISTING'].indexOf(r[4])>=0;}).map(function(r){return Number(r[10]);}));
  jobs.forEach(function(job){
   var r=rows[job.row];if(proved.has(job.row+2)||['READY','EXISTING'].indexOf(r[3])>=0)return;
-  if(Number(r[4]||0)>=5){r[3]='REVIEW';r[11]='auto50_max_5_generation_attempts';}
-  else{r[3]='RETRY';r[5]=0;r[11]='auto50_unverified_master';}
+  // Every unverified word is eligible for the NEXT logical 50-word batch.
+  // Prior generation attempts remain auditable; a failed ASR is not a final pronunciation verdict.
+  r[3]='RETRY';r[5]=0;r[11]='needs_new_batch_after_unverified_master';
   hskVocabWrite_(tables.queue,job.row,r);
  });
  batch[3]=proved.size===jobs.length?'DONE':'PARTIAL';
@@ -153,7 +162,7 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
    if(/invalid_verification_clip_size/.test(reason)){
     r[4]='REVIEW';r[13]='verification_clip_too_large_next_batch';r[14]=new Date().toISOString();sheet.getRange(all.indexOf(r)+2,1,1,15).setValues([r]);updates++;continue;
    }
-   if(/asr_invalid_response|verification_uncertain/.test(reason)){
+   if(/asr_invalid_response|asr_unverified_audio|verification_uncertain/.test(reason)){
     r[5]=Number(r[5]||0)+1;r[4]=r[5]>=3?'REVIEW':'RECHECK';r[13]=reason;r[14]=new Date().toISOString();sheet.getRange(all.indexOf(r)+2,1,1,15).setValues([r]);updates++;continue;
    }
    if(/unauthorized|identity_missing|permission_denied|not_configured|invalid_request|invalid_verification_model/.test(reason)){
@@ -243,6 +252,20 @@ function hskAuto50Poll_(p,book,control){
    p.setProperty('HSK_AUTO50_PREVIOUS_BATCH',String(control.getRange(3,2).getValue()));
   }finally{lock.releaseLock();}
  }
+ // One-time recovery of verified ASR failures which an old five-attempt limit parked.
+ // Leave polyphonic conflicts, policy refusals and uncertain provider calls untouched.
+ if(p.getProperty('HSK_AUTO50_REQUEUE_EXHAUSTED_V1')!=='true'){
+  var recoveryStorage=hskCheck_(p),recoveryTables=hskVocabTables_(recoveryStorage);
+  var oldWords=hskVocabRows_(recoveryTables.queue,17),restored=0;
+  oldWords.forEach(function(r,i){
+   if(r[3]!=='REVIEW'||r[11]!=='auto50_max_5_generation_attempts')return;
+   r[3]='RETRY';r[5]=0;r[11]='needs_new_batch_after_unverified_master';
+   hskVocabWrite_(recoveryTables.queue,i,r);restored++;
+  });
+  p.setProperty('HSK_AUTO50_REQUEUE_EXHAUSTED_V1','true');
+  p.setProperty('HSK_AUTO50_REQUEUED_FAILED',String(restored));
+  if(restored)hskVocabSummary_(recoveryStorage,recoveryTables);
+ }
  if(p.getProperty('HSK_VOICE_PAUSED')==='true'){
   control.getRange(6,2).setValue('AUTO_CYCLE_PAUSED');return true;
  }
@@ -262,6 +285,13 @@ function hskAuto50Poll_(p,book,control){
    p.deleteProperty('HSK_VOCAB_RETRY_AT');
    p.deleteProperty('HSK_VOCAB_ERROR');
   }
+ }
+ // The old Worker rejected the ASR request schema before reaching Gemini.
+ // Its obsolete cooldown is safe to clear once now that verify-words is supported.
+ if(p.getProperty('HSK_AUTO50_ASR_BRIDGE_RESUMED_V1')!=='true'&&p.getProperty('HSK_VOCAB_ERROR')==='invalid_request'){
+  p.setProperty('HSK_AUTO50_ASR_BRIDGE_RESUMED_V1','true');
+  p.deleteProperty('HSK_VOCAB_RETRY_AT');p.deleteProperty('HSK_VOCAB_ERROR');
+  p.deleteProperty('HSK_AUTO50_ASR_ERRORS');
  }
  var blockedUntil=Number(p.getProperty('HSK_VOCAB_RETRY_AT')||0);
  // A failed 502 for one key/model must not stall the entire queue when
