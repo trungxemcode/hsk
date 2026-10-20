@@ -187,6 +187,10 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
    if(hskVoiceRecHanzi_(job.text)===h1&&hskVoiceRecPinyin_(job.pinyin)===p1&&Math.abs(j-(number-1))<=4)matching.push(j);
   });
   var indexMatched=matching.length===1?matching[0]:-1;
+  if(indexMatched<0&&typeof hskAuto50ThirdPassMatch_==='function'){
+   indexMatched=hskAuto50ThirdPassMatch_(jobs,number,r[5],p1,p2,entries.length);
+   if(indexMatched>=0)console.log(JSON.stringify({stage:'third_pass_pinyin_verified',segment:number}));
+  }
   var already= indexMatched<0?false:entries.some(function(other){
    return other!==r&&['READY','EXISTING'].indexOf(other[4])>=0&&Number(other[10])===jobs[indexMatched].row+2;
   });

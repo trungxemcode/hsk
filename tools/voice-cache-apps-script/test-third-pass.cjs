@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
+const c={Number,hskVoiceRecPinyin_:x=>String(x||'').normalize('NFC').toLowerCase().replace(/[\s\p{P}]/gu,'')};
+vm.runInNewContext(fs.readFileSync(__dirname+'/ThirdPassPinyin.gs','utf8'),c);
+const jobs=[{text:'完',pinyin:'wán'},{text:'新',pinyin:'xīn'},{text:'心',pinyin:'xīn'}],f=c.hskAuto50ThirdPassMatch_;
+assert.equal(f(jobs,1,1,'wán','wán',3),-1);assert.equal(f(jobs,1,2,'wán','wán',3),-1);
+assert.equal(f(jobs,1,3,'wán','wán',3),0);assert.equal(f(jobs,2,3,'xīn','xīn',3),1);assert.equal(f(jobs,3,3,'xīn','xīn',3),2);
+assert.equal(f(jobs,1,3,'wǎn','wǎn',3),-1);assert.equal(f(jobs,1,3,'wan','wan',3),-1);
+assert.equal(f(jobs,1,3,'wán','wǎn',3),-1);assert.equal(f(jobs,1,3,'','',3),-1);
+assert.equal(f(jobs,1,3,'wán','wán',2),-1);assert.equal(f(jobs,4,3,'wán','wán',3),-1);
+assert.equal(f([{pinyin:'shōu shí'}],1,3,'shōushi','shōushi',1),-1);
+console.log('PASS only third check accepts exact marked pinyin; first2 strict, tones/neutral-tone differences and unproven segmentation rejected; homophones anchored by position.');

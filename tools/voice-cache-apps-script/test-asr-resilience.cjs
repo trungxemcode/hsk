@@ -38,3 +38,13 @@ function setup(){
  assert.equal(props.get('HSK_AUTO50_ASR_BACKOFF'),'new valid cooldown');
  console.log('PASS old-model cooldown migration runs once and preserves later genuine cooldowns');
 }
+
+{
+ const x=setup();vm.runInNewContext(fs.readFileSync(__dirname+'/ThirdPassPinyin.gs','utf8'),x.c);
+ x.entries[1][4]='REVIEW';
+ x.c.hskVocabCall_=()=>({transcripts:[['同音字'],['另一字']],pinyin:[['jia'],['jia']]});
+ x.run();assert.equal(x.entries[0][4],'RECHECK');assert.equal(x.entries[0][5],1);
+ x.run();assert.equal(x.entries[0][4],'RECHECK');assert.equal(x.entries[0][5],2);
+ x.run();assert.equal(x.entries[0][4],'READY');assert.equal(x.entries[0][5],3);
+ console.log('PASS actual verification tick rejects homophone Hanzi on first2 checks, accepts exact pinyin on third, then saves once');
+}
