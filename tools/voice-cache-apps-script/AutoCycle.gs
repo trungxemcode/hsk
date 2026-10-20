@@ -122,6 +122,13 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
   var item=pending[n],r=item.r,number=Number(r[1]),approx=Math.min(jobs.length-1,number-1);
   var begin=Math.max(0,Math.round((Number(r[2])-120)*24)),end=Math.min(pcm.length/2,Math.round((Number(r[3])+200)*24));
   var clip=Utilities.base64Encode(hskWav_(pcm.slice(begin*2,end*2),'audio/l16'));
+  // Oversized merged speech cannot be certified as one word. Keep its master
+  // and let finalization carry unverified words into the next 50-item batch.
+  if(clip.length>350000){
+   r[4]='REVIEW';r[13]='verification_clip_too_large_next_batch';
+   r[14]=new Date().toISOString();
+   sheet.getRange(all.indexOf(r)+2,1,1,15).setValues([r]);updates++;continue;
+  }
   var slotCandidates=[10,0,2,3,4,5,6,7,8,9,11,1],rotation=Number(p.getProperty('HSK_AUTO50_ASR_NEXT')||0),slot=slotCandidates[rotation%slotCandidates.length];
   p.setProperty('HSK_AUTO50_ASR_NEXT',String(rotation+1));
   var decoded;
