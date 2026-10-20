@@ -64,6 +64,8 @@ function hskLegacyCacheRepairTick_(p,book,control){
   p.setProperty('HSK_LEGACY_MODEL_ROTATION_POLICY','key_model_v3');
   p.deleteProperty('HSK_LEGACY_REPAIR_NEXT');
  }
+ var canaryRequested=String(control.getRange(94,4).getValue()||'')==='TRY_38_ONCE';
+ if(canaryRequested)p.deleteProperty('HSK_LEGACY_REPAIR_NEXT');
  if(Number(p.getProperty('HSK_LEGACY_REPAIR_NEXT')||0)>now)return;
  var lock=LockService.getScriptLock();if(!lock.tryLock(100))return;
  try{
@@ -83,6 +85,13 @@ function hskLegacyCacheRepairTick_(p,book,control){
    p.setProperty('HSK_LEGACY_MODEL_ROTATION_MIGRATED','true');
   }
   var tasks=allTasks.filter(function(t){return Number(p.getProperty('HSK_LEGACY_ITEM_'+t.index+'_AFTER')||0)<=now;});
+  // Explicit once-only 3.8 canary targets a missing WAV, rather than waiting
+  // for an old 2.5/3.1 word-level cooldown that is unrelated to this model.
+  if(canaryRequested){
+   var missing=allTasks.filter(function(t){return t.state==='DEFERRED'&&Number(t.row[6]||0)===0;});
+   if(missing.length)tasks=[missing[0]];
+   else control.getRange(94,4).setValue('MODEL_3_8_NO_MISSING_WORD');
+  }
   var retry=hskWarmQueue_(storage),retryRows=hskVocabRows_(retry,6);
   function retryStatus(t,state,note,notBefore){
    var at=retryRows.findIndex(function(r){return Number(r[0])===t.index;});
@@ -269,6 +278,7 @@ function hskLegacyCacheRepairTick_(p,book,control){
    save(t,{4:created.getId(),6:decoded.bytes.length,10:slot,11:'VERIFY_PENDING',12:'generated_model_'+hskVoiceModelTag_(generationModel)+'_pending_double_asr'});
    if(canary38)control.getRange(94,4).setValue('MODEL_3_8_WAV_SAVED_ASR_PENDING_'+t.index);
    p.deleteProperty('HSK_LEGACY_ITEM_'+t.index+'_ATTEMPTS');
+   p.deleteProperty('HSK_LEGACY_ITEM_'+t.index+'_AFTER'); // New WAV can be independently verified now.
    next(90000,'tts_saved_'+t.index+'_awaiting_double_asr');
   }catch(e){
    // A successful TTS request must never be resent because Drive failed.

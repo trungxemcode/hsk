@@ -128,6 +128,8 @@ test('429 cools down failed key/model for full Retry-After while the word may tr
 
 test('one-shot Gemini 3.8 canary uses an actually missing legacy word and saves unverified WAV',()=>{
  const w=setup();w.controlState.D94='TRY_38_ONCE';let payload=null;
+ w.props.set('HSK_LEGACY_REPAIR_NEXT',String(Date.now()+1800000));
+ w.props.set('HSK_LEGACY_ITEM_27_AFTER',String(Date.now()+1800000));
  w.env.UrlFetchApp.fetch=(url,args)=>{payload=JSON.parse(args.payload);return {getResponseCode:()=>200,getContentText:()=>'{}'};};
  w.run();
  assert.equal(payload.model,'gemini-3.8-flash-lite-tts');
