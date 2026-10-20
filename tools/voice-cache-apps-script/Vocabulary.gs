@@ -91,6 +91,9 @@ function hskVocabTick(){
  }
  // Reopen only a proven chunk-journal REJECTED batch, salvaging its saved WAVs.
  if(typeof hskVoiceChunkedResumeRejected_==='function'&&hskVoiceChunkedResumeRejected_(p,storage,tables,batches))return;
+ // A malformed TTS response must not stop unrelated work overnight. Preserve
+ // already-attempted words without sending duplicate requests; release unsent.
+ if(typeof hskVoiceQuarantineUncertainChunks_==='function'&&hskVoiceQuarantineUncertainChunks_(p,storage,tables,rows,batches))return;
  // Provider cooldown still applies to new TTS/ASR calls; recovery bookkeeping is safe above.
  if(Number(p.getProperty('HSK_VOCAB_RETRY_AT')||0)>now)return;
  var active=batches.findIndex(function(b){return ['TTS_CHUNKS','MASTER','VERIFY','AUTO_VERIFY'].indexOf(b[3])>=0;});

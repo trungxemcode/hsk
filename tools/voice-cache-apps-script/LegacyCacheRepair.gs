@@ -130,7 +130,13 @@ function hskLegacyCacheRepairTick_(p,book,control){
     if(/invalid_legacy_audio|verified_audio_file_missing|batch_invalid/.test(err)){
      save(t,{11:'REVIEW',12:err.slice(0,120)});retryStatus(t,'REVIEW',err);
     }
-    next(300000,'asr_wait_'+t.index+'_'+err.slice(0,65));
+    // A single verifier outage must never block all other zero-byte TTS repairs.
+    // Preserve the saved WAV, defer ONLY this item's next ASR and select others.
+    var strikes=Number(p.getProperty('HSK_LEGACY_ITEM_'+t.index+'_ASR_ERRORS')||0)+1;
+    var itemWait=Math.min(3600000,900000*Math.min(4,strikes));
+    p.setProperty('HSK_LEGACY_ITEM_'+t.index+'_ASR_ERRORS',String(strikes));
+    p.setProperty('HSK_LEGACY_ITEM_'+t.index+'_AFTER',String(Date.now()+itemWait));
+    next(60000,'asr_deferred_'+t.index+'_'+err.slice(0,65));
    }
    return;
   }

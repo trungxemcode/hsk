@@ -71,3 +71,26 @@ test('new legacy TTS requests prefer available 3.1 rather than failing original 
  w.run();assert.equal(body.model,'gemini-3.1-flash-tts-preview');
  assert.equal(w.rows[0][11],'VERIFY_PENDING');
 });
+
+test('ASR provider outage defers only one VERIFY_PENDING item and creates next missing WAV',()=>{
+ const w=setup();
+ w.rows[0][11]='VERIFY_PENDING';w.rows[0][4]='existing-asr.wav';w.rows[0][6]=100;
+ w.fileMap.set('existing-asr.wav',{getId:()=> 'existing-asr.wav',getBlob:()=>({getBytes:()=>Array(100).fill(1)})});
+ const original=w.env.hskVocabCall_;
+ w.env.hskVocabCall_=(token,body)=>{
+  if(body.action==='verify-words')throw Error('vocabulary_verification_uncertain');
+  return original(token,body);
+ };
+ let tts=0;w.env.UrlFetchApp.fetch=()=>{tts++;return {getResponseCode:()=>200,getContentText:()=>''};};
+ w.run();
+ assert.equal(w.rows[0][11],'VERIFY_PENDING');
+ assert.equal(tts,0);
+ assert.ok(Number(w.props.get('HSK_LEGACY_ITEM_27_AFTER'))>Date.now());
+ assert.match(w.props.get('HSK_LEGACY_REPAIR_LAST'),/asr_deferred_27/);
+ w.props.set('HSK_LEGACY_REPAIR_NEXT','0');
+ w.run();
+ assert.equal(w.rows[2][11],'VERIFY_PENDING');
+ assert.equal(tts,1);
+ assert.equal(w.rows[0][11],'VERIFY_PENDING');
+ assert.equal(w.rows[1][4],'already-ready');
+});
