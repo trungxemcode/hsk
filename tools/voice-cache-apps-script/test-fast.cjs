@@ -1,0 +1,12 @@
+const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
+const props=new Map([['HSK_VOCAB_ENABLED','true']]),p={getProperty:k=>props.get(k)};
+const c={Date,Number,JSON,Math,String};vm.runInNewContext(fs.readFileSync(__dirname+'/FastRotation.gs','utf8'),c);
+let calls=0,batch=['id','','','TTS_CHUNKS'];c.hskVoiceChunkedStep_=()=>{calls++;batch[4]='failed '+calls;};
+c.hskVoiceChunkedFastTick_(p,{}, {},[],[batch],0,'token');assert.equal(calls,3);
+calls=0;c.hskVoiceChunkedStep_=()=>{calls++;batch[3]='UNCERTAIN';};c.hskVoiceChunkedFastTick_(p,{}, {},[],[batch],0,'token');assert.equal(calls,1);
+batch[3]='TTS_CHUNKS';calls=0;props.set('HSK_VOCAB_RETRY_AT',String(Date.now()+60000));c.hskVoiceChunkedFastTick_(p,{}, {},[],[batch],0,'token');assert.equal(calls,0);props.delete('HSK_VOCAB_RETRY_AT');
+vm.runInNewContext(fs.readFileSync(__dirname+'/VoiceModelRotation.gs','utf8'),c);let scans=0;
+c.hskVocabCall_=()=>{scans++;return {ok:true,slots:[{slot:1,retryAfter:0}],modelSlots:[{slot:1,model:'gemini-2.5-flash-preview-tts',retryAfter:600},{slot:2,model:'gemini-3.1-flash-tts-preview',retryAfter:0},{slot:3,model:'gemini-3.8-flash-tts',retryAfter:0}]}};
+const scan=c.hskVoiceRoutePairs_(p,'token',Date.now(),'gemini-2.5-flash-preview-tts');
+assert.equal(scans,1);assert.equal(scan.pairs[0].slot,2);assert(!scan.pairs.some(x=>x.slot===1));
+console.log('PASS same-tick3 handoffs, uncertainty stop, global retry respected, one status request, model-specific cooldown selects next eligible key.');

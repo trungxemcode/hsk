@@ -98,7 +98,7 @@ function hskVocabTickWork_(){
  if(Number(p.getProperty('HSK_VOCAB_RETRY_AT')||0)>now)return;
  var active=batches.findIndex(function(b){return ['TTS_CHUNKS','MASTER','VERIFY','AUTO_VERIFY'].indexOf(b[3])>=0;});
  if(active>=0){
-  if(batches[active][3]==='TTS_CHUNKS'){hskVoiceChunkedStep_(p,storage,tables,rows,batches,active,token);return;}
+  if(batches[active][3]==='TTS_CHUNKS'){hskVoiceChunkedFastTick_(p,storage,tables,rows,batches,active,token);return;}
   if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskAuto50VerifyTick_==='function')hskAuto50VerifyTick_(storage,tables,rows,batches,active,token,started);
   else hskVocabProcess_(storage,tables,rows,batches,active,token,started);
   return;

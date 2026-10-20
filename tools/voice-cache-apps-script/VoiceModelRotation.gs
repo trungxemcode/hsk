@@ -4,21 +4,24 @@
  * provider Retry-After. A save checkpoint is always independent of provider.
  */
 function hskVoiceTtsModels_(){
- return ['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview','gemini-3.8-flash-lite-tts'];
+ return ['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview','gemini-3.8-flash-tts'];
 }
 function hskVoiceModelTag_(name){
  return name.indexOf('3.8')>=0?'3_8':name.indexOf('3.1')>=0?'3_1':'2_5';
 }
 function hskVoiceRoutePairs_(p,token,at,firstModel,skip){
  var models=hskVoiceTtsModels_(),out=[],waitUntil=0,errors={};
- var begin=Math.max(0,models.indexOf(firstModel));
+ var begin=Math.max(0,models.indexOf(firstModel)),data;
+ // One status request returns all model-specific cooldowns; never reuse2.5 status for3.1/3.8.
+ try{data=hskVocabCall_(token,{action:'status'});}
+ catch(e){return {pairs:[],waitUntil:at+60000,errors:{status:String(e.message||'status_unavailable').slice(0,90)}};}
  for(var shift=0;shift<models.length;shift++){
-  var model=models[(begin+shift)%models.length],data;
-  try{data=hskVocabCall_(token,{action:'status',model:model});}
-  catch(e){errors[model]=String(e.message||'status_unavailable').slice(0,90);continue;}
-  if(!data||!data.ok||!Array.isArray(data.slots))continue;
-  for(var j=0;j<data.slots.length;j++){
-   var s=data.slots[j],slot=Number(s.slot),seconds=Number(s.retryAfter||0);
+  var model=models[(begin+shift)%models.length];
+  var slots=Array.isArray(data.modelSlots)?data.modelSlots.filter(function(x){return x.model===model;}):[];
+  // Old gateways cannot prove availability for other models.
+  if(!slots.length&&model===models[0]&&Array.isArray(data.slots))slots=data.slots;
+  for(var j=0;j<slots.length;j++){
+   var slot=Number(slots[j].slot),seconds=Number(slots[j].retryAfter||0);
    if(!Number.isInteger(slot)||slot<0||slot>12)continue;
    var local=Number(p.getProperty('HSK_VOCAB_PAIR_'+slot+'_'+model+'_AFTER')||0);
    var available=Math.max(local,at+Math.max(0,seconds)*1000);
