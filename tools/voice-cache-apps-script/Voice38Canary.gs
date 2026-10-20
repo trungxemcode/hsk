@@ -6,6 +6,10 @@
  */
 function hskVoice38CanaryTick_(p,book,control){
  var command=String(control.getRange(94,4).getValue()||'');
+ if(command==='CANARY38_UNCERTAIN'){
+  var safeError=String(p.getProperty('HSK_VOICE_38_CANARY_LAST_ERROR')||'no_runtime_error_recorded').replace(/[^a-zA-Z0-9_:-]/g,'_').slice(0,115);
+  control.getRange(95,3,1,2).setValues([['Canary38_last_error',safeError]]);
+ }
  if(['RUN_38_HSK_ONCE','CANARY38_VERIFY','CANARY38_UNCERTAIN'].indexOf(command)<0&&
     command.indexOf('CANARY38_TTS_REQUESTED_')!==0)return;
  if(String(control.getRange(2,2).getValue()||'')!=='AUTO_CYCLE'||p.getProperty('HSK_VOICE_PAUSED')==='true')return;
