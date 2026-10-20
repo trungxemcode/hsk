@@ -85,6 +85,7 @@ function hskVocabTick(){
  // Internal daily runtime and provider-call limits removed by owner request.
  // Keep usage counters for diagnosis; real Google/Gemini/Cloudflare quotas still apply.
  storage=hskCheck_(p);tables=hskVocabTables_(storage);var rows=hskVocabRows_(tables.queue,17),batches=hskVocabRows_(tables.batches,11),token=ScriptApp.getIdentityToken();
+ if(p.getProperty('HSK_VOCAB_PILOT_ONLY')!=='true'&&typeof hskFastPhaseInit_==='function')hskFastPhaseInit_(p,storage,rows);
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'&&p.getProperty('HSK_VOCAB_PILOT_ID')){
   var trial=batches.find(function(b){return b[0]===p.getProperty('HSK_VOCAB_PILOT_ID');});
   if(trial&&['DONE','PARTIAL','REVIEW','REJECTED','UNCERTAIN'].indexOf(trial[3])>=0){hskVocabStop();return;}
@@ -103,6 +104,8 @@ function hskVocabTick(){
   else hskVocabProcess_(storage,tables,rows,batches,active,token,started);
   return;
  }
+ // Enroll the next HSK stage in bounded, resumable Sheet writes, not during TTS/ASR.
+ if(typeof hskFastPhaseEnrollTick_==='function'&&hskFastPhaseEnrollTick_(p,storage,tables,rows))return;
  // A RESERVED request may already have produced audio: recover a named master, never resubmit blindly.
  var unresolved=batches.findIndex(function(b){return b[3]==='RESERVED'||b[3]==='UNCERTAIN';});
  if(unresolved>=0){var prior=batches[unresolved],files=storage.folder.getFilesByName('VOCAB_MASTER_'+prior[0]+'.wav');if(files.hasNext()){prior[2]=files.next().getId();prior[3]='MASTER';tables.batches.getRange(unresolved+2,1,1,11).setValues([prior]);return;}p.setProperty('HSK_VOCAB_ERROR','uncertain_batch_requires_review');hskVocabStop();return;}
@@ -111,7 +114,11 @@ function hskVocabTick(){
  var pending=rows.map(function(r,i){return {r:r,i:i};}).filter(function(x){return ['PENDING','RETRY'].indexOf(x.r[3])>=0&&Number(x.r[5]||0)<=now;});
  if(p.getProperty('HSK_AUTO50_ENABLED')==='true')pending=hskAuto50Choose_(pending);
  else pending.sort(function(a,b){return Number(a.r[0])-Number(b.r[0])||(String(a.r[1]).length<2?1:0)-(String(b.r[1]).length<2?1:0)||Number(a.r[4])-Number(b.r[4])||a.i-b.i;});
- if(!pending.length){var waiting=rows.some(function(r){return ['PENDING','RETRY'].indexOf(r[3])>=0;});if(!waiting)hskVocabStop();return;}
+ if(!pending.length){
+  var waiting=rows.some(function(r){return ['PENDING','RETRY'].indexOf(r[3])>=0;});
+  if(!waiting&&typeof hskFastPhaseOnEmpty_==='function'&&hskFastPhaseOnEmpty_(p,storage,tables,rows))return;
+  if(!waiting)hskVocabStop();return;
+ }
  var pair=hskShared50Pair_(token,now);
  if(!pair){p.setProperty('HSK_VOCAB_RETRY_AT',String(now+300000));p.setProperty('HSK_VOCAB_ERROR','tts_keys_cooling');return;}
  var slot=pair.slot,model=pair.model,size=Math.max(1,Math.min(90,Number(p.getProperty('HSK_VOCAB_BATCH_SIZE')||10))),seen=new Set(),jobs=[];

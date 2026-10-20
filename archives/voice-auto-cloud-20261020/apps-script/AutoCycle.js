@@ -312,8 +312,18 @@ function hskAuto50Poll_(p,book,control){
  }
  if(typeof hskAuto50Watchdog_==='function')hskAuto50Watchdog_(p,book,control);
  var source=hskCheck_(p),tables=hskVocabTables_(source),queue=hskVocabRows_(tables.queue,17),batchRows=hskVocabRows_(tables.batches,11);
+ // The owner scheduler always reaches this poll, including when vocabulary
+ // triggers are delayed. Initialize lightweight stages here once, not in
+ // any TTS, ASR or provider path.
+ if(typeof hskFastPhaseInit_==='function'&&p.getProperty('HSK_VOCAB_PILOT_ONLY')!=='true')hskFastPhaseInit_(p,source,queue);
  if(!queue.some(function(r){return ['PENDING','RETRY','MASTER','CHECK_AGAIN'].indexOf(r[3])>=0;})&&
     !batchRows.some(function(b){return ['MASTER','AUTO_VERIFY','VERIFY','RESERVED','UNCERTAIN'].indexOf(b[3])>=0;})){
+  // Keep the fast scheduler alive so the vocabulary tick can safely enqueue
+  // HSK1, then HSK5 and HSK6 under its existing script lock.
+  if(typeof hskFastPhaseOnEmpty_==='function'&&p.getProperty('HSK_FAST_PHASE_STAGE')!=='DONE'){
+   control.getRange(6,2).setValue('AUTO_CYCLE_PHASE_HANDOFF');
+   return false;
+  }
   control.getRange(2,2).setValue('PAUSE');control.getRange(6,2).setValue('AUTO_CYCLE_COMPLETE');
   p.setProperty('HSK_AUTO50_ENABLED','false');p.setProperty('HSK_VOCAB_ENABLED','false');return true;
  }
