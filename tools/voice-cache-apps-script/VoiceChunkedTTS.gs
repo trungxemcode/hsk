@@ -46,7 +46,18 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   if(!kept.length)throw Error('adaptive_master_no_words');
   batch[1]=JSON.stringify(kept);batch[2]=file.getId();batch[3]='MASTER';
   batch[4]=info.omitted.length?'adaptive_master_kept_'+kept.length+'_omitted_'+info.omitted.length:'';
-  batch[10]='';tables.batches.getRange(index+2,1,1,11).setValues([batch]);
+  var qualityReport=null;
+  if(info.qualityProfile==='dictionary_v1'){
+   var offset=0,ranges=[],proven=true;
+   plan.forEach(function(g,k){
+    var wav=fileNamed(g.name),bytes=hskBatchPcm_(wav.getBlob().getBytes());
+    if(!Array.isArray(g.ranges)||g.ranges.length!==g.to-g.from)proven=false;
+    else g.ranges.forEach(function(r){ranges.push([r[0]+offset,r[1]+offset]);});
+    offset+=bytes.length/2+(k<plan.length-1?28800:0);
+   });
+   qualityReport={qualityProfile:'dictionary_v1',boundaryProven:proven,ranges:proven?ranges:[],duration:offset/24000};
+  }
+  batch[10]=qualityReport?JSON.stringify(qualityReport):'';tables.batches.getRange(index+2,1,1,11).setValues([batch]);
   kept.forEach(function(job){
    var row=rows[job.row];
    if(['READY','EXISTING'].indexOf(row[3])>=0)return;
@@ -62,6 +73,18 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
  if(existingMaster){commitMaster(existingMaster);return;}
  var missing=plan.findIndex(function(g){return !fileNamed(g.name);});
  if(missing<0){
+  if(info.qualityProfile==='dictionary_v1'){
+   for(var q=0;q<plan.length;q++){
+    var part=plan[q];if(Array.isArray(part.ranges)&&part.ranges.length===part.to-part.from)continue;
+    var found=hskVoiceQualityDetect_(fileNamed(part.name).getBlob().getBytes(),part.to-part.from);
+    if(found){part.ranges=found.ranges;continue;}
+    for(var word=part.from;word<part.to;word++){
+     var job=jobs[word],row=rows[job.row];if(['READY','EXISTING'].indexOf(row[3])<0){row[3]='RETRY';row[5]=0;row[7]=part.model;row[11]='needs_new_batch_after_unverified_master;unproven_boundaries';hskVocabWrite_(tables.queue,job.row,row);}
+     if(info.omitted.indexOf(word)<0)info.omitted.push(word);
+    }
+    plan.splice(q,1);report('DEFER_UNPROVEN_BOUNDARIES_KEEP_MASTER_CHUNK');return;
+   }
+  }
   if(!plan.length){
    batch[3]='PARTIAL';report('adaptive_zero_audio_all_words_requeued');return;
   }
@@ -86,27 +109,20 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   }
   commitMaster(file);return;
  }
- var g=plan[missing],length=g.to-g.from,maxTries=length===1?36:12;
+ var g=plan[missing],length=g.to-g.from,maxTries=3;
  if(g.tries>=maxTries){
-  if(length>1){
-   var half=g.from+Math.floor(length/2);
-   if(half<=g.from||half>=g.to)throw Error('adaptive_split_invalid');
-   var pieces=[{from:g.from,to:half},{from:half,to:g.to}].map(function(x){
-    return {from:x.from,to:x.to,name:'VOCAB_CHUNK_'+id+'_'+x.from+'_'+x.to+'.wav',
-     model:fallback,tries:0,slot:null};
-   });
-   plan.splice.apply(plan,[missing,1].concat(pieces));
-   report('SPLIT_FAILED_'+length+'_WORDS_INTO_'+(half-g.from)+'_AND_'+(g.to-half));
-   return;
+  // Never shrink a failed group. Keep the proven audio chunks and carry every
+  // unsynthesized word into the next 50-word logical batch.
+  for(var omitted=g.from;omitted<g.to;omitted++){
+   var excluded=jobs[omitted],row=rows[excluded.row];
+   if(['READY','EXISTING'].indexOf(row[3])<0){
+    row[3]='RETRY';row[5]=0;
+    row[11]='tts_chunk_unavailable_next_batch';hskVocabWrite_(tables.queue,excluded.row,row);
+   }
+   if(info.omitted.indexOf(omitted)<0)info.omitted.push(omitted);
   }
-  // Only the unspoken word is postponed. All previously saved groups remain.
-  var excluded=jobs[g.from],row=rows[excluded.row];
-  if(['READY','EXISTING'].indexOf(row[3])<0){
-   row[3]='RETRY';row[5]=Date.now()+1800000;
-   row[11]='tts_single_word_unavailable_next_batch';hskVocabWrite_(tables.queue,excluded.row,row);
-  }
-  info.omitted.push(g.from);plan.splice(missing,1);
-  report('SKIPPED_ONLY_'+excluded.text+'_OTHER_AUDIO_PRESERVED');
+  plan.splice(missing,1);
+  report('DEFERRED_'+length+'_WORDS_TO_NEXT_50_KEEP_SAVED_CHUNKS');
   return;
  }
  var route=typeof hskVoiceFailoverMode_==='function'?hskVoiceFailoverMode_(p):'WORKER';
@@ -126,6 +142,12 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
    report('WAIT_ALL_MODELS_2_5_3_1_3_8');
    return;
   }
+  if(info.qualityProfile==='dictionary_v1'&&typeof hskVoiceQualityOrderPairs_==='function'){
+   var selectedRows=jobs.slice(g.from,g.to).map(function(j){return rows[j.row];}),avoid={};
+   selectedRows.forEach(function(r){if(/^needs_new_batch_after_unverified_master/.test(String(r[11]||''))&&r[7])avoid[r[7]]=(avoid[r[7]]||0)+1;});
+   var bad=Object.keys(avoid).sort(function(a,b){return avoid[b]-avoid[a];})[0];
+   scan.pairs=hskVoiceQualityOrderPairs_(p,scan.pairs,bad);
+  }
   slot=scan.pairs[0].slot;g.model=scan.pairs[0].model;
   info.slotHint=(slot+1)%13;
  }
@@ -133,6 +155,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
  var payload=Array.from(joined).length<=220?
   {text:joined,isolated:true,keySlot:slot,model:g.model,language:'zh-CN'}:
   {items:selected.map(function(job){return job.text;}),isolated:true,keySlot:slot,model:g.model,language:'zh-CN',pauseSeconds:1};
+ if(info.qualityProfile==='dictionary_v1'&&!direct)payload={items:selected.map(function(job){return job.text;}),isolated:true,keySlot:slot,model:g.model,language:'zh-CN',dictionaryStyle:true};
  var now=Date.now();
  // Journal the attempt before sending it. Any ambiguous response is quarantined.
  g.tries++;g.slot=slot;
@@ -205,6 +228,10 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
  }
  p.setProperty('HSK_VOCAB_TTS_CALLS',String(Number(p.getProperty('HSK_VOCAB_TTS_CALLS')||0)+decoded.providerAttempts));
  p.setProperty('HSK_VOCAB_WINDOW_CALLS',String(Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0)+decoded.providerAttempts));
+ if(info.qualityProfile==='dictionary_v1'&&typeof hskVoiceQualityDetect_==='function'){
+  var detected=hskVoiceQualityDetect_(decoded.bytes,length);
+  g.ranges=detected?detected.ranges:null;g.boundaryReason=detected?'stable_exact_count':'unproven_boundaries';
+ }
  // Saving the chunk is a separate commit point. Never repeat paid TTS when
  // Drive is ambiguous; inspect the deterministic filename on next review.
  try{

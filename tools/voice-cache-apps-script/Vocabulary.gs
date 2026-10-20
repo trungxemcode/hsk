@@ -98,7 +98,7 @@ function hskVocabTickWork_(){
  if(Number(p.getProperty('HSK_VOCAB_RETRY_AT')||0)>now)return;
  var active=batches.findIndex(function(b){return ['TTS_CHUNKS','MASTER','VERIFY','AUTO_VERIFY'].indexOf(b[3])>=0;});
  if(active>=0){
-  if(batches[active][3]==='TTS_CHUNKS'){hskVoiceChunkedFastTick_(p,storage,tables,rows,batches,active,token);return;}
+  if(batches[active][3]==='TTS_CHUNKS'){hskVoiceChunkedStep_(p,storage,tables,rows,batches,active,token);return;}
   if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskAuto50VerifyTick_==='function')hskAuto50VerifyTick_(storage,tables,rows,batches,active,token,started);
   else hskVocabProcess_(storage,tables,rows,batches,active,token,started);
   return;
@@ -117,7 +117,7 @@ function hskVocabTickWork_(){
  var slot=pair.slot,model=pair.model,size=Math.max(1,Math.min(90,Number(p.getProperty('HSK_VOCAB_BATCH_SIZE')||10))),seen=new Set(),jobs=[];
  pending.forEach(function(x){if(jobs.length>=size||seen.has(x.r[1]))return;seen.add(x.r[1]);jobs.push({row:x.i,text:x.r[1],pinyin:x.r[2],level:x.r[0],model:model,key:hskVocabKey_(model,x.r[1])});});
  var id=hskDigest_(JSON.stringify(jobs)+':'+now),pause=Number(p.getProperty('HSK_VOCAB_PAUSE')||3),chunked=p.getProperty('HSK_AUTO50_ENABLED')==='true'&&p.getProperty('HSK_VOCAB_TTS_STRATEGY')==='chunks-v1'&&jobs.length>1;
- var batch=[id,JSON.stringify(jobs),'',chunked?'TTS_CHUNKS':'RESERVED','',new Date().toISOString(),slot,model,pause,0,chunked?JSON.stringify({mode:'chunked_v1',attempts:{}}):''];tables.batches.appendRow(batch);var number=tables.batches.getLastRow();
+ var batch=[id,JSON.stringify(jobs),'',chunked?'TTS_CHUNKS':'RESERVED','',new Date().toISOString(),slot,model,pause,0,chunked?JSON.stringify({mode:'chunked_v1',attempts:{},qualityProfile:typeof hskVoiceQualityEnabled_==='function'&&hskVoiceQualityEnabled_(p)?'dictionary_v1':''}):''];tables.batches.appendRow(batch);var number=tables.batches.getLastRow();
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true')p.setProperty('HSK_VOCAB_PILOT_ID',id);
  SpreadsheetApp.flush();
  p.setProperty('HSK_VOCAB_NEXT_SLOT',String((slot+1)%13));p.setProperty('HSK_VOCAB_NEXT_MODEL',String((pair.mi+1)%hskVoiceTtsModels_().length));

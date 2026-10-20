@@ -13,6 +13,15 @@ function hskShared50Pair_(token,now){
  p.setProperty('HSK_VOICE_LAST_MODEL_SCAN',available.pairs.map(function(x){
   return hskVoiceModelTag_(x.model)+':'+x.slot;
  }).slice(0,20).join(',')||'none');
+ // Quality control for NEW vocabulary batches only. Historical replay shows that
+ // 2.5/3.1 verify more consistently; 3.8 stays as fallback if neither is available.
+ // Never change the global model list or an already RESERVED batch.
+ if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&p.getProperty('HSK_AUTO50_QUALITY_MODE')!=='DISABLED'){
+  available.pairs.sort(function(a,b){
+   return Number(a.model.indexOf('3.8')>=0)-Number(b.model.indexOf('3.8')>=0);
+  });
+ }
+ if(typeof hskVoiceQualityOrderPairs_==='function')available.pairs=hskVoiceQualityOrderPairs_(p,available.pairs);
  return available.pairs[0]||null;
 }
 function hskShared50Control_(p,book,control,command){
@@ -38,12 +47,16 @@ function hskShared50Control_(p,book,control,command){
  try{
   // A second caller must not restart an already claimed command.
   if(String(control.getRange(15,2).getValue())!=='RUN_ONCE_50')return true;
+  // Authorised one-off bypasses the global PAUSE only for this vocabulary trial.
+  p.setProperty('HSK_VOICE_PAUSED','false');
+  p.setProperty('HSK_WARM_ENABLED','false');
   var storage=hskCheck_(p),tables=hskVocabTables_(storage),batches=hskVocabRows_(tables.batches,11);
   if(batches.some(function(b){return ['MASTER','VERIFY','RESERVED','UNCERTAIN'].indexOf(b[3])>=0;})){
    control.getRange(15,2).setValue('PAUSE');control.getRange(6,2).setValue('BLOCKED_UNRESOLVED_MASTER');return true;
   }
   p.setProperty('HSK_VOCAB_BATCH_SIZE','50');p.setProperty('HSK_VOCAB_FIXED_BATCH','true');
   p.setProperty('HSK_VOCAB_PAUSE','1');p.setProperty('HSK_SHARED50_LITERAL','true');p.setProperty('HSK_VOCAB_PILOT_ONLY','true');
+  p.setProperty('HSK_AUTO50_ENABLED','true');p.setProperty('HSK_VOCAB_TTS_STRATEGY','chunks-v1');
   p.deleteProperty('HSK_VOCAB_PILOT_ID');p.setProperty('HSK_VOICE_PAUSED','false');
   p.setProperty('HSK_WARM_ENABLED','false');p.setProperty('HSK_VOCAB_ENABLED','true');
   // Per-key/model cooldown and daily counters remain untouched.

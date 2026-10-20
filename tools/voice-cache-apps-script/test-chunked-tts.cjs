@@ -75,32 +75,19 @@ test('previously REJECTED 50-word batch restores only when a checkpointed chunk 
  const later=w.ctx.hskVoiceChunkedResumeRejected_(w.p,w.storage,w.tables,[w.batch]);
  assert.equal(later,false);
 });
-test('reuses original 20 saved words and splits the failed third ten into two fives',()=>{
+test('failed ten return to next logical batch; original twenty WAVs survive without paid repeat',()=>{
  const w=world(50,[['VOCAB_CHUNK_id_0.wav',[1,2,3,4]],['VOCAB_CHUNK_id_1.wav',[5,6,7,8]]]);
  w.batch[10]=JSON.stringify({mode:'chunked_v1',attempts:{0:1,1:2,2:12}});
- let called=0;
- w.ctx.hskVocabCall_=()=>({ok:true,slots:[{slot:9,retryAfter:0}]});
- w.ctx.UrlFetchApp={fetch:(url,args)=>{called++;const body=JSON.parse(args.payload);assert.equal(body.model,called<=2?'gemini-3.8-flash-lite-tts':'gemini-2.5-flash-preview-tts');assert.equal(body.keySlot,9);assert.ok(body.text);return {getResponseCode:()=>200,getContentText:()=>''};}};
- w.ctx.hskParallelDecode_=()=>({bytes:[10,11,12,13],providerAttempts:1});
- w.call();const plan=JSON.parse(w.batch[10]).plan;
- assert.equal(plan.length,6);assert.equal(plan[0].name,'VOCAB_CHUNK_id_0.wav');
- assert.equal(plan[1].name,'VOCAB_CHUNK_id_1.wav');
- assert.equal(plan[2].name,'VOCAB_CHUNK_id_20_25.wav');
- assert.equal(plan[3].name,'VOCAB_CHUNK_id_25_30.wav');
- assert.equal(called,0);
- for(let i=0;i<4;i++)w.call();
- assert.equal(called,4);
- assert.equal(w.fileMap.has('VOCAB_CHUNK_id_20_25.wav'),true);
- assert.equal(w.fileMap.has('VOCAB_CHUNK_id_25_30.wav'),true);
- w.call();assert.equal(w.batch[3],'MASTER');
- assert.equal(w.fileMap.has('VOCAB_MASTER_id.wav'),true);
- assert.equal(JSON.parse(w.batch[1]).length,50);
- assert.equal(JSON.parse(w.batch[1])[0].model,'gemini-2.5-flash-preview-tts');
- assert.equal(JSON.parse(w.batch[1])[20].model,'gemini-3.8-flash-lite-tts');
- assert.equal(w.rows.every(row=>row[3]==='MASTER'),true);
- assert.equal(w.rows.filter(row=>row[3]==='READY').length,0);
+ let called=0;w.ctx.UrlFetchApp={fetch:()=>{called++;return {};}};w.ctx.hskParallelDecode_=()=>({bytes:[10,11,12,13],providerAttempts:1});
+ w.call();const plan=JSON.parse(w.batch[10]).plan;assert.equal(plan.length,4);assert.equal(called,0);
+ assert.equal(plan[0].name,'VOCAB_CHUNK_id_0.wav');assert.equal(plan[1].name,'VOCAB_CHUNK_id_1.wav');
+ assert.equal(w.rows.slice(20,30).every(r=>r[3]==='RETRY'),true);
+ w.call();w.call();w.call();assert.equal(called,2);assert.equal(w.batch[3],'MASTER');
+ assert.equal(JSON.parse(w.batch[1]).length,40);assert.equal(w.rows.slice(20,30).every(r=>r[3]==='RETRY'),true);
  assert.equal(w.fileMap.get('VOCAB_CHUNK_id_0.wav').getBlob().getBytes().length,4);
+ assert.equal(w.rows.some(r=>r[3]==='READY'),false);
 });
+
 test('one repeatedly unspoken word is excluded, original successful four preserved and ready awaits ASR',()=>{
  const w=world(5,[['VOCAB_CHUNK_id_0_4.wav',[1,2,3,4]]]);
  w.batch[10]=JSON.stringify({mode:'chunked_v1',version:'adaptive_v2',attempts:{},
@@ -109,7 +96,7 @@ test('one repeatedly unspoken word is excluded, original successful four preserv
   omitted:[]});
  w.ctx.UrlFetchApp={fetch:()=>{throw Error('no further provider calls');}};
  w.call();
- assert.equal(w.rows[4][3],'RETRY');assert.match(w.rows[4][11],/single_word/);
+ assert.equal(w.rows[4][3],'RETRY');assert.match(w.rows[4][11],/tts_chunk_unavailable_next_batch/);
  const saved=JSON.parse(w.batch[10]);assert.deepEqual(Array.from(saved.omitted),[4]);
  assert.equal(saved.plan.length,1);
  w.call();

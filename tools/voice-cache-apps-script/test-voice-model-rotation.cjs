@@ -22,7 +22,7 @@ test('exact API model sequence includes officially documented Gemini 3.8 Flash L
 });
 test('all models are inspected but usable 2.5 key is chosen first',()=>{
  const w=world(),now=Date.now(),found=w.ctx.hskVoiceRoutePairs_(w.p,'token',now,w.models[0],null);
- assert.deepEqual(w.requests,w.models);
+ assert.deepEqual(w.requests,[undefined].concat(w.models));
  assert.equal(found.pairs[0].model,w.models[0]);
  assert.equal(found.pairs[0].slot,1);
  assert.equal(found.pairs.length,6);

@@ -1033,6 +1033,32 @@
         {"kind":"file","file":"server/voice-bundle.test.mjs","value":""},
         {"kind":"file","file":"server/voice-tts.test.mjs","value":""}
       ]
+    },
+    {
+      "id": "voice-auto50-quality",
+      "name": "Auto50 staged pronunciation quality with durable saved audio",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/QualityEnhancements.gs",
+          "value": "function hskVoiceQualityRecord_"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/AsrQualityGate.gs",
+          "value": "Number(checks)!==3"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/VoiceChunkedTTS.gs",
+          "value": "qualityProfile==='dictionary_v1'"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/test-quality-integration.cjs",
+          "value": "unsegmentable saved chunk alone requeues"
+        }
+      ]
     }
   ]
 }

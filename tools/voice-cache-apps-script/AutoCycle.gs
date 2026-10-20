@@ -72,7 +72,7 @@ function hskAuto50DetectRemote_(master,expected,token){
   return hskAuto50Detect_(master,expected);
  }
 }
-function hskAuto50Cache_(storage,job,masterId,bytes,slot,batchId){
+function hskAuto50Cache_(storage,job,masterId,bytes,slot,batchId,method){
  var duplicate=['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview'].map(function(model){
   return hskGetRow_(storage.sheet,hskVocabKey_(model,job.text));
  }).find(function(hit){return hit&&hit.values[11]==='READY'&&hit.values[4];});
@@ -81,7 +81,7 @@ function hskAuto50Cache_(storage,job,masterId,bytes,slot,batchId){
  if(old&&old.values[11]==='READY'&&old.values[4])return {file:String(old.values[4]),existing:true,model:job.model};
  var filename='hsk-tts-'+key.slice(0,24)+'.wav',files=storage.folder.getFilesByName(filename);
  var file=files.hasNext()?files.next():storage.folder.createFile(Utilities.newBlob(bytes,'audio/wav',filename));
- var fileId=file.getId(),stamp=new Date().toISOString(),entry=[key,'zh-CN','Kore',job.model,fileId,'audio/wav',bytes.length,stamp,stamp,0,slot,'READY','auto50_double_asr_exact:'+batchId];
+ var fileId=file.getId(),stamp=new Date().toISOString(),entry=[key,'zh-CN','Kore',job.model,fileId,'audio/wav',bytes.length,stamp,stamp,0,slot,'READY',(method==='pinyin_third_check'?'auto50_double_asr_pinyin_round3:':'auto50_double_asr_exact:')+batchId];
  if(old)storage.sheet.getRange(old.index,1,1,13).setValues([entry]);else storage.sheet.appendRow(entry);
  return {file:fileId,existing:false,model:job.model};
 }
@@ -92,12 +92,15 @@ function hskAuto50Finalize_(p,storage,tables,rows,batches,index,clipRows){
   var r=rows[job.row];if(proved.has(job.row+2)||['READY','EXISTING'].indexOf(r[3])>=0)return;
   // Every unverified word is eligible for the NEXT logical 50-word batch.
   // Prior generation attempts remain auditable; a failed ASR is not a final pronunciation verdict.
-  r[3]='RETRY';r[5]=0;r[11]='needs_new_batch_after_unverified_master';
+  var clip=clipRows.find(function(c){return Number(c[1])===jobs.indexOf(job)+1;});
+  var reason=clip&&typeof hskVoiceQualityReason_==='function'?hskVoiceQualityReason_(clip):'unproven_mapping';
+  r[3]='RETRY';r[5]=0;r[11]='needs_new_batch_after_unverified_master;'+reason;
   hskVocabWrite_(tables.queue,job.row,r);
  });
  batch[3]=proved.size===jobs.length?'DONE':'PARTIAL';
- batch[4]='auto50_saved_'+proved.size+'_of_'+jobs.length+'_double_asr_verified';
+ batch[4]='auto50_saved_'+proved.size+'_of_'+jobs.length+'_double_asr_verified'+(jobs.length===50&&proved.size<35?';quality_below_35_retry_unverified':'');
  tables.batches.getRange(index+2,1,1,11).setValues([batch]);
+ if(typeof hskVoiceQualityRecord_==='function')hskVoiceQualityRecord_(p,batch,jobs,clipRows);
  p.setProperty('HSK_AUTO50_LAST_BATCH',batch[0]);
  hskVocabSummary_(storage,tables);
 }
@@ -107,7 +110,13 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
  var master=DriveApp.getFileById(batch[2]).getBlob().getBytes();
  if(!entries.length){
   var report;
-  try{report=hskAuto50DetectRemote_(master,jobs.length,token);}
+  try{
+   var cached={};try{cached=JSON.parse(batch[10]||'{}');}catch(ignore){}
+   if(cached.qualityProfile==='dictionary_v1'){
+    if(!cached.boundaryProven||cached.ranges.length!==jobs.length)throw Error('quality_unproven_boundaries');
+    report=cached;
+   }else report=hskAuto50DetectRemote_(master,jobs.length,token);
+  }
   catch(e){
    batch[3]='REVIEW';batch[4]=String(e.message||'unreliable_master');
    tables.batches.getRange(index+2,1,1,11).setValues([batch]);
@@ -118,7 +127,7 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
   }
   var init=report.ranges.map(function(range,i){return [batch[0],i+1,Math.round(range[0]/24),Math.round(range[1]/24),'PENDING',0,'','','','',0,'','','',new Date().toISOString()];});
   sheet.getRange(sheet.getLastRow()+1,1,init.length,15).setValues(init);
-  batch[3]='AUTO_VERIFY';batch[9]=report.duration;batch[10]=JSON.stringify({segments:init.length,gap:report.gap,ratio:report.ratio});
+  batch[3]='AUTO_VERIFY';batch[9]=report.duration;batch[10]=JSON.stringify({segments:init.length,gap:report.gap,ratio:report.ratio,qualityProfile:report.qualityProfile||'',boundaryProven:report.boundaryProven});
   tables.batches.getRange(index+2,1,1,11).setValues([batch]);
   entries=init;
   all=all.concat(init);
@@ -136,7 +145,9 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
  for(var n=0;n<pending.length&&updates<5&&Date.now()-started<170000;n++){
   var item=pending[n],r=item.r,number=Number(r[1]),approx=Math.min(jobs.length-1,number-1);
   var begin=Math.max(0,Math.round((Number(r[2])-120)*24)),end=Math.min(pcm.length/2,Math.round((Number(r[3])+200)*24));
-  var clip=Utilities.base64Encode(hskWav_(pcm.slice(begin*2,end*2),'audio/l16'));
+  var speech=pcm.slice(begin*2,end*2),dictionary=JSON.parse(batch[10]||'{}').qualityProfile==='dictionary_v1';
+  var clipBytes=hskWav_(dictionary?new Array(7200).fill(0).concat(speech,new Array(12000).fill(0)):speech,'audio/l16');
+  var clip=Utilities.base64Encode(clipBytes);
   // A merged/long utterance is not a single-word verification clip. Preserve
   // its master, defer its words, and continue other clips without an API call.
   if(clip.length>350000){
@@ -181,26 +192,20 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
   }
   r[5]=Number(r[5]||0)+1;r[6]=String(decoded.transcripts[0][0]||'');r[7]=String(decoded.transcripts[1][0]||'');
   r[8]=String(decoded.pinyin[0][0]||'');r[9]=String(decoded.pinyin[1][0]||'');
-  var h1=hskVoiceRecHanzi_(r[6]),h2=hskVoiceRecHanzi_(r[7]),p1=hskVoiceRecPinyin_(r[8]),p2=hskVoiceRecPinyin_(r[9]);
-  var matching=[];
-  if(h1&&h1===h2&&p1&&p1===p2)jobs.forEach(function(job,j){
-   if(hskVoiceRecHanzi_(job.text)===h1&&hskVoiceRecPinyin_(job.pinyin)===p1&&Math.abs(j-(number-1))<=4)matching.push(j);
-  });
-  var indexMatched=matching.length===1?matching[0]:-1;
-  if(indexMatched<0&&typeof hskAuto50ThirdPassMatch_==='function'){
-   indexMatched=hskAuto50ThirdPassMatch_(jobs,number,r[5],p1,p2,entries.length);
-   if(indexMatched>=0)console.log(JSON.stringify({stage:'third_pass_pinyin_verified',segment:number}));
-  }
+  // First two checks require both Hanzi and pinyin; the third may use uniquely
+  // confirmed phonetics at the exact position if boundaries are 1:1.
+  var proof=hskAuto50QualityMatch_(jobs,number,entries.length,r[5],r[6],r[7],r[8],r[9],JSON.parse(batch[10]||'{}').boundaryProven);
+  var indexMatched=proof.index;
   var already= indexMatched<0?false:entries.some(function(other){
    return other!==r&&['READY','EXISTING'].indexOf(other[4])>=0&&Number(other[10])===jobs[indexMatched].row+2;
   });
   if(indexMatched>=0&&!already){
-   var job=jobs[indexMatched],bytes=hskWav_(pcm.slice(begin*2,end*2),'audio/l16'),saved=hskAuto50Cache_(storage,job,batch[2],bytes,batch[6],batch[0]);
+   var job=jobs[indexMatched],bytes=clipBytes,saved=hskAuto50Cache_(storage,job,batch[2],bytes,batch[6],batch[0],proof.method);
    var q=rows[job.row];q[3]=saved.existing?'EXISTING':'READY';q[6]=batch[0];q[7]=saved.model;q[8]=batch[2];q[9]=saved.file;
    q[10]=JSON.stringify([r[6],r[7]]);q[11]='';q[13]=JSON.stringify([r[8],r[9]]);
    q[14]=r[2];q[15]=r[3];q[16]='https://drive.google.com/file/d/'+saved.file+'/view';
    hskVocabWrite_(tables.queue,job.row,q);
-   r[4]=saved.existing?'EXISTING':'READY';r[10]=job.row+2;r[11]=job.text;r[12]=saved.file;r[13]='';
+   r[4]=saved.existing?'EXISTING':'READY';r[10]=job.row+2;r[11]=job.text;r[12]=saved.file;r[13]=proof.method==='pinyin_third_check'?'pinyin_third_check':'';
   }else{
    r[4]=r[5]>=3?'REVIEW':'RECHECK';r[13]=already?'duplicate_mapping':'asr_mismatch_or_unproven_mapping';
   }
@@ -330,7 +335,8 @@ function hskAuto50Poll_(p,book,control){
  p.setProperty('HSK_VOCAB_BATCH_SIZE','50');
  p.setProperty('HSK_VOCAB_TTS_STRATEGY','chunks-v1');
  p.setProperty('HSK_VOCAB_PAUSE','1');
- p.setProperty('HSK_WARM_ENABLED','false');
+ // The independent Kho_Voice warm-up may run alongside 50-word vocabulary batches.
+ // Shared script locking protects commits without globally disabling the other queue.
  p.setProperty('HSK_VOCAB_ENABLED','true');
  var triggers=ScriptApp.getProjectTriggers();
  if(!triggers.some(function(t){return t.getHandlerFunction()==='hskVocabTick';}))

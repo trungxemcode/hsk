@@ -7,7 +7,7 @@ function setup(){
  const range={setValues:()=>{},setValue:v=>paused=v==='PAUSE'},sheet={getRange:()=>range};
  const p={getProperty:k=>props.get(k),setProperty:(k,v)=>props.set(k,v),deleteProperty:k=>props.delete(k)};
  const c={Date,Math,Number,String,Set,Array,JSON,Utilities:{base64Encode:b=>Buffer.alloc(b.length).toString('base64')},DriveApp:{getFileById:()=>({getBlob:()=>({getBytes:()=>[]})})}};
- vm.runInNewContext(fs.readFileSync(__dirname+'/AutoCycle.gs','utf8'),c);
+ vm.runInNewContext(fs.readFileSync(__dirname+'/AsrQualityGate.gs','utf8'),c);vm.runInNewContext(fs.readFileSync(__dirname+'/AutoCycle.gs','utf8'),c);
  c.hskSettings_=()=>p;c.hskAuto50Sheet_=()=>sheet;c.hskVocabRows_=()=>entries;c.hskBatchPcm_=()=>Array(96000).fill(0);c.hskWav_=pcm=>Array(pcm.length+44).fill(0);
  c.hskVoiceRecHanzi_=x=>x;c.hskVoiceRecPinyin_=x=>x;c.hskAuto50Cache_=()=>({file:'verified',model:'m'});c.hskVocabWrite_=()=>{};c.hskVocabSummary_=()=>{};
  const run=()=>c.hskAuto50VerifyTick_({sheet:{getParent:()=>({getSheetByName:()=>sheet})}},{queue:sheet,batches:sheet},rows,[batch],0,'token',Date.now());

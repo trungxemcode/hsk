@@ -6,7 +6,7 @@ const batch=['b',JSON.stringify(jobs),'master','AUTO_VERIFY','','',0,'m',0,15,''
 const range={setValues:()=>{},setValue:()=>{}};const sheet={getRange:()=>range};
 const p={getProperty:k=>props.get(k),setProperty:(k,v)=>props.set(k,v),deleteProperty:k=>props.delete(k)};
 const c={Date,Math,Number,String,Set,Array,JSON,Utilities:{base64Encode:b=>Buffer.alloc(b.length).toString('base64')},DriveApp:{getFileById:()=>({getBlob:()=>({getBytes:()=>[]})})}};
-vm.runInNewContext(fs.readFileSync(__dirname+'/AutoCycle.gs','utf8'),c);
+vm.runInNewContext(fs.readFileSync(__dirname+'/AsrQualityGate.gs','utf8'),c);vm.runInNewContext(fs.readFileSync(__dirname+'/AutoCycle.gs','utf8'),c);
 c.hskSettings_=()=>p;c.hskAuto50Sheet_=()=>sheet;c.hskVocabRows_=()=>entries;
 c.hskBatchPcm_=()=>Array(720000).fill(0);c.hskWav_=pcm=>Array(pcm.length+44).fill(0);
 c.hskVocabCall_=()=>{calls++;return {transcripts:[['乙'],['乙']],pinyin:[['yi'],['yi']]};};
