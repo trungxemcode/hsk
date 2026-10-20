@@ -68,11 +68,11 @@ function hskLegacyCacheRepairTick_(p,book,control){
   var allTasks=hskLegacyCandidates_(data,hskWarmCorpus_());
   var tasks=allTasks.filter(function(t){return Number(p.getProperty('HSK_LEGACY_ITEM_'+t.index+'_AFTER')||0)<=now;});
   var retry=hskWarmQueue_(storage),retryRows=hskVocabRows_(retry,6);
-  function retryStatus(t,state,note){
+  function retryStatus(t,state,note,notBefore){
    var at=retryRows.findIndex(function(r){return Number(r[0])===t.index;});
    var row=at>=0?retryRows[at]:[t.index,t.text,0,0,'PENDING',''];
    row[1]=t.text;row[4]=state;row[5]=String(note).slice(0,120);
-   row[3]=state==='DONE'?0:Date.now()+300000;
+   row[3]=state==='DONE'?0:Math.max(Date.now()+300000,Number(notBefore)||0);
    if(at>=0)retry.getRange(at+2,1,1,6).setValues([row]);
    else{retry.appendRow(row);retryRows.push(row);}
   }
@@ -221,16 +221,25 @@ function hskLegacyCacheRepairTick_(p,book,control){
     save(t,{11:'DEFERRED',12:reason.slice(0,120)});
     retryStatus(t,'PENDING',reason);
    }
-   var wait=Math.max(180000,Math.min(1800000,Number(e.retryAfter||300)*1000));
+   // A transient provider outage must only cool down THIS word and key slot.
+   // Honor the Retry-After supplied by Cloudflare/Gemini, up to seven days.
+   var wait=Math.max(180000,Math.min(604800000,Number(e.retryAfter||300)*1000));
    var attempts=Number(p.getProperty('HSK_LEGACY_ITEM_'+t.index+'_ATTEMPTS')||0)+1;
+   var transient=/cloudflare_tts_(429|502|503|504)_|tts_(provider_unavailable|daily_limit|rate_limited|quota_unavailable|generation_incomplete|model_unavailable)/.test(reason);
    p.setProperty('HSK_LEGACY_ITEM_'+t.index+'_ATTEMPTS',String(attempts));
-   p.setProperty('HSK_LEGACY_ITEM_'+t.index+'_AFTER',String(Date.now()+wait));
-   if(attempts>=3&&t.row[11]==='DEFERRED'){
-    save(t,{11:'REVIEW',12:'legacy_tts_definite_failure_after_3_attempts'});
-    retryStatus(t,'REVIEW','legacy_tts_definite_failure_after_3_attempts');
+   var itemWait=transient&&attempts>=3?Math.max(wait,21600000):wait;
+   var wordRetryAt=Date.now()+itemWait;
+   p.setProperty('HSK_LEGACY_ITEM_'+t.index+'_AFTER',String(wordRetryAt));
+   if(attempts>=3&&!transient&&t.row[11]==='DEFERRED'){
+    save(t,{11:'REVIEW',12:'legacy_tts_nonretryable_failure_after_3_attempts'});
+    retryStatus(t,'REVIEW','legacy_tts_nonretryable_failure_after_3_attempts');
+   }else if(transient){
+    retryStatus(t,'PENDING','tts_provider_backoff_until_'+new Date(wordRetryAt).toISOString(),wordRetryAt);
    }
    p.setProperty('HSK_LEGACY_SLOT_'+slot+'_AFTER',String(Date.now()+wait));
-   next(wait,'tts_wait_'+t.index+'_'+reason.slice(0,55));return;
+   // Advance through the remaining legacy backlog after one short scheduler
+   // interval. Do not send an early retry for the same word or provider slot.
+   next(60000,'tts_deferred_'+t.index+'_'+reason.slice(0,55));return;
   }
   try{
    if(decoded.bytes.length<=44||decoded.bytes.length>600000)throw Error('invalid_legacy_audio_size');

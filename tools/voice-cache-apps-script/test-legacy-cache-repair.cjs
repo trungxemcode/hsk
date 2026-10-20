@@ -94,3 +94,30 @@ test('ASR provider outage defers only one VERIFY_PENDING item and creates next m
  assert.equal(w.rows[0][11],'VERIFY_PENDING');
  assert.equal(w.rows[1][4],'already-ready');
 });
+
+test('provider quota 429 after third attempt defers only failed word, respects 2h Retry-After and retains other words',()=>{
+ const w=setup(),start=Date.now();
+ w.props.set('HSK_LEGACY_ITEM_27_ATTEMPTS','2');
+ const original=w.env.hskVocabCall_;
+ w.env.hskVocabCall_=(token,body)=>body.action==='status'?
+  {slots:[{slot:4,retryAfter:0},{slot:5,retryAfter:0}]}:original(token,body);
+ w.env.UrlFetchApp.fetch=()=>({getResponseCode:()=>429,getContentText:()=>'{}'});
+ let attempts=0;
+ w.env.hskParallelDecode_=()=>{
+  attempts++;
+  if(attempts===1){const e=Error('cloudflare_tts_429_tts_daily_limit');e.retryAfter=7200;throw e;}
+  return {bytes:Array(100).fill(1),providerAttempts:1};
+ };
+ w.run();
+ assert.equal(w.rows[0][11],'DEFERRED');
+ assert.equal(w.retry.find(x=>x[0]===27)[4],'PENDING');
+ assert.ok(Number(w.retry.find(x=>x[0]===27)[3])>=start+21600000-2000);
+ assert.ok(Number(w.props.get('HSK_LEGACY_ITEM_27_AFTER'))>=start+21600000-2000);
+ assert.ok(Number(w.props.get('HSK_LEGACY_SLOT_4_AFTER'))>=start+7200000-2000);
+ assert.ok(Number(w.props.get('HSK_LEGACY_REPAIR_NEXT'))<Date.now()+120000);
+ w.props.set('HSK_LEGACY_REPAIR_NEXT','0');
+ w.run();
+ assert.equal(w.rows[2][11],'VERIFY_PENDING');
+ assert.ok(w.rows[2][4]);
+ assert.equal(w.rows[0][11],'DEFERRED');
+});
