@@ -190,7 +190,7 @@ function hskLegacyCacheRepairTick_(p,book,control){
   // Start with 2.5, then 3.1, then 3.8 Flash-Lite on the next available
   // combination. A failed word does not block unattempted legacy words.
   var generationModel=null,slot=-1,route=typeof hskVoiceFailoverMode_==='function'?hskVoiceFailoverMode_(p):'WORKER',direct=route==='DIRECT';
-  var requested=String(p.getProperty('HSK_LEGACY_ITEM_'+t.index+'_NEXT_MODEL')||t.row[3]);
+  var requested=String(p.getProperty('HSK_LEGACY_ITEM_'+t.index+'_NEXT_MODEL')||p.getProperty('HSK_VOICE_TTS_PREFERRED_MODEL')||t.row[3]);
   // One-shot production canary on an actual missing legacy word. Any WAV
   // still requires blind double-ASR, and a failed request stays DEFERRED.
   var canary38=String(control.getRange(94,4).getValue()||'')==='TRY_38_ONCE';

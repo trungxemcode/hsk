@@ -6,7 +6,9 @@ function hskShared50Pair_(token,now){
    return {slot:0,model:'gemini-3.8-flash-lite-tts',mi:2};
   return null;
  }
+ var preferred=String(p.getProperty('HSK_VOICE_TTS_PREFERRED_MODEL')||'');
  var next=Math.max(0,Math.min(2,Number(p.getProperty('HSK_VOCAB_NEXT_MODEL')||0)));
+ if(models.indexOf(preferred)>=0)next=models.indexOf(preferred);
  var available=hskVoiceRoutePairs_(p,token,now,models[next]);
  p.setProperty('HSK_VOICE_LAST_MODEL_SCAN',available.pairs.map(function(x){
   return hskVoiceModelTag_(x.model)+':'+x.slot;
