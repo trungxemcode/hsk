@@ -36,7 +36,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   var included=[];
   plan.forEach(function(g){
    for(var q=g.from;q<g.to;q++){
-    var job=Object.assign({},jobs[q]);job.model=g.model||batch[7];
+    var job=Object.assign({},jobs[q]);job.model=g.model||batch[7];job.slot=Number(g.slot);
     included.push(job);
    }
   });
@@ -116,7 +116,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
  var slot=Number(batch[6]);
  if(!direct){
   var scan=hskVoiceRoutePairs_(p,token,Date.now(),g.model,
-   g.tries>0?{model:g.model,slot:g.slot}:null);
+   typeof hskStablePreferTts_==='function'?null:g.tries>0?{model:g.model,slot:g.slot}:null);
   if(!scan.pairs.length){
    var when=hskVoiceEarliestProviderRetry_(Date.now(),scan.waitUntil);
    p.setProperty('HSK_VOCAB_ERROR','all_tts_models_or_keys_cooling');
@@ -204,9 +204,12 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   report('FAILED_'+(g.from+1)+'-'+g.to+'_TRY_'+g.tries+'_'+reason);
   // Restrict Retry-After to the failed key+model pair, NOT the whole HSK queue.
   // The next scheduler tick scans all other eligible model/key pairs.
-  var wait=/tts_request_rejected/.test(reason)&&Number(e.upstreamStatus)===400?300000:Math.max(60000,Math.min(604800000,Number(e.retryAfter||120)*1000));
-  p.setProperty('HSK_VOCAB_PAIR_'+slot+'_'+usedModel+'_AFTER',String(now+wait));
-  g.model=hskVoiceNextModel_(usedModel);
+  var unavailable=typeof hskStableTtsUnavailable_==='function'?hskStableTtsUnavailable_(reason):true;
+  if(unavailable){
+   var wait=/tts_request_rejected/.test(reason)&&Number(e.upstreamStatus)===400?300000:Math.max(60000,Math.min(604800000,Number(e.retryAfter||120)*1000));
+   p.setProperty('HSK_VOCAB_PAIR_'+slot+'_'+usedModel+'_AFTER',String(now+wait));
+   g.model=hskVoiceNextModel_(usedModel);
+  }
   write(); // Persist model rotation before returning to Google's next timer.
   p.setProperty('HSK_VOCAB_ERROR',reason.slice(0,100));
   p.deleteProperty('HSK_VOCAB_RETRY_AT');
@@ -224,6 +227,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   p.setProperty('HSK_VOCAB_ENABLED','false');return;
  }
  report('SAVED_'+(g.from+1)+'-'+g.to+'_OF_'+jobs.length);
+ if(typeof hskStableTtsSuccess_==='function')hskStableTtsSuccess_(p,g.model,slot);
  if(typeof hskVoiceFailoverMark_==='function')hskVoiceFailoverMark_(p,'saved_chunk_wav');
  if(route==='WORKER_PROBE'&&typeof hskVoiceFailoverOutcome_==='function')
   hskVoiceFailoverOutcome_(p,route,true,'chunk_wav_saved');

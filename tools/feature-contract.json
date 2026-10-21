@@ -1064,6 +1064,32 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "voice-stable-cohort-and-sticky-keys",
+      "name": "Hold voice cohort until 30 verified words and retain eligible provider keys",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/StableAutoPolicy.js",
+          "value": "function hskStableCycleFilter_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/StableAutoPolicy.js",
+          "value": "function hskStableAsrSlot_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/VoiceModelRotation.js",
+          "value": "hskStablePreferTts_"
+        },
+        {
+          "kind": "file",
+          "file": "archives/voice-auto-cloud-20261021/test-stable-policy.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }

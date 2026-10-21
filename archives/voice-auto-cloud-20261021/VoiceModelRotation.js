@@ -38,6 +38,7 @@ function hskVoiceRoutePairs_(p,token,at,firstModel,skip){
   var alternatives=out.filter(function(x){return x.model!==skip.model||x.slot!==Number(skip.slot);});
   if(alternatives.length)out=alternatives;
  }
+ if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskStablePreferTts_==='function')out=hskStablePreferTts_(p,out);
  return {pairs:out,waitUntil:waitUntil,errors:errors};
 }
 function hskVoiceNextModel_(model){

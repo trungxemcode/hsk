@@ -73,6 +73,7 @@ function hskAuto50DetectRemote_(master,expected,token){
  }
 }
 function hskAuto50Cache_(storage,job,masterId,bytes,slot,batchId,method){
+ if(Number(job.slot)>=1&&Number(job.slot)<=12)slot=Number(job.slot);
  var duplicate=['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview'].map(function(model){
   return hskGetRow_(storage.sheet,hskFastPhaseKey_(model,job.text,job.pinyin,job.level));
  }).find(function(hit){return hit&&hit.values[11]==='READY'&&hit.values[4];});
@@ -150,8 +151,15 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
   var speech=pcm.slice(begin*2,end*2),clipBytes=hskWav_(dictionary?new Array(7200).fill(0).concat(speech,new Array(12000).fill(0)):speech,'audio/l16');
   var clip=Utilities.base64Encode(clipBytes);
   if(clip.length>350000){r[4]='REVIEW';r[13]='verification_clip_too_large_next_batch';r[14]=hskVNTime_(new Date());sheet.getRange(all.indexOf(r)+2,1,1,15).setValues([r]);updates++;continue;}
-  var slotCandidates=[10,12,1,2,3,4,5,6,7,8,9,11],rotation=Number(p.getProperty('HSK_AUTO50_ASR_NEXT')||0),slot=slotCandidates[rotation%slotCandidates.length];
-  p.setProperty('HSK_AUTO50_ASR_NEXT',String(rotation+1));
+  var slot;
+  if(typeof hskStableAsrSlot_==='function'){
+   var picked=hskStableAsrSlot_(p,Date.now());
+   if(!picked.slot){p.setProperty('HSK_VOCAB_RETRY_AT',String(picked.retryAt));break;}
+   slot=picked.slot;
+  }else{
+   var slotCandidates=[10,12,1,2,3,4,5,6,7,8,9,11],rotation=Number(p.getProperty('HSK_AUTO50_ASR_NEXT')||0);slot=slotCandidates[rotation%slotCandidates.length];
+   p.setProperty('HSK_AUTO50_ASR_NEXT',String(rotation+1));
+  }
   var decoded,asrStarted=Date.now(),asrStatus='ok';
   try{
    attemptedCalls++;
@@ -165,6 +173,7 @@ function hskAuto50VerifyTick_(storage,tables,rows,batches,index,token,started){
   }catch(e){
    asrStatus=String(e.message||'asr_provider_error');
    var reason=String(e.message||'asr_provider_error').slice(0,100),detail=e.detail||{};
+   if(typeof hskStableAsrError_==='function')hskStableAsrError_(p,slot,detail,reason);
    if(/invalid_verification_clip_size/.test(reason)){
     r[4]='REVIEW';r[13]='verification_clip_too_large_next_batch';r[14]=hskVNTime_(new Date());sheet.getRange(all.indexOf(r)+2,1,1,15).setValues([r]);updates++;continue;
    }

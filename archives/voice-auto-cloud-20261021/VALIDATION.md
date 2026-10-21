@@ -15,3 +15,13 @@ The older legacy FAST test bundle had two baseline failures before modification 
 Native profile v2: confirmed provider error 'Model tried to generate text' prompted short literal fallback for legacy models, plus literal Hanzi transcript and pronunciation in speech_metadata for 3.8 Lite. The Worker now accepts both 3.8 models. Repair jobs prefer native Lite; saved WAVs are never regenerated. The improved input profile has a fresh bounded verification budget.
 
 Final deployed Apps Script version26 was read back with native_dictionary_v2 and Lite routing. Live native Lite generation at08:33 VN saved three consecutive WAVs on first attempts within one serialized timer. Generation success does not grant READY; blind ASR remains required.
+
+## Stable cohorts and provider keys - 2026-10-21
+
+The 08H release now holds a durable logical cohort of up to 50 source rows until at least 30 are READY/EXISTING. Physical repair journals remain append-only children of that cohort. A stage tail below 30 must finish all remaining members; REVIEW or changed source identity never counts as verified. Active journals finish before a new cohort opens. HSK order remains 2-4 -> 1 -> 5 -> 6.
+
+Successful TTS key/model and ASR key stay pinned while eligible. Round-robin after each ASR clip and automatic rotation after each AUTO50 journal are removed. Provider/model cooldowns and Retry-After remain authoritative; pronunciation/format failures do not cool another key. Actual TTS chunk slot is recorded in new cache entries; existing READY files stay unchanged. Tien_do shows actual stage, cohort progress and pinned keys; release label rows33-34 are reserved.
+
+Validation: 33 focused tests pass (24 existing plus 9 new policy tests), including actual routing cooldown exclusion, 30-pass barrier, 13-word stage tail, in-flight adoption, source identity, ASR sticky/failover, and cache provenance. Full app contracts and browser runtime must also pass before commit. Production source backup and immutable Apps Script version27/tag run-20261021-0800 remain available.
+
+Release evidence: Apps Script version29 pushed as36 production files; immutable version27 and original release tag retained. All33 focused tests,46 capability/168 contract guards and Chromium390/1440 pass. Live09:01 VN retained TTS key7 for consecutive saved chunks; one12-word tail cohort is active. Provider model cooldown may change models on the same key. ASR sticky behavior is covered by tests; live confirmation follows when the master reaches ASR. Original user release label is preserved.

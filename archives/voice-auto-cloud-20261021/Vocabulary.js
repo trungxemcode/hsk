@@ -86,6 +86,7 @@ function hskVocabTick(){
  // Keep usage counters for diagnosis; real Google/Gemini/Cloudflare quotas still apply.
  storage=hskCheck_(p);tables=hskVocabTables_(storage);var rows=hskVocabRows_(tables.queue,17),batches=hskVocabRows_(tables.batches,11),token=ScriptApp.getIdentityToken();
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')!=='true'&&typeof hskFastPhaseInit_==='function')hskFastPhaseInit_(p,storage,rows);
+ if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskStableCycleObserve_==='function')hskStableCycleObserve_(p,rows,batches);
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'&&p.getProperty('HSK_VOCAB_PILOT_ID')){
   var trial=batches.find(function(b){return b[0]===p.getProperty('HSK_VOCAB_PILOT_ID');});
   if(trial&&['DONE','PARTIAL','REVIEW','REJECTED','UNCERTAIN'].indexOf(trial[3])>=0){hskVocabStop();return;}
@@ -118,12 +119,13 @@ function hskVocabTick(){
  var pending=rows.map(function(r,i){return {r:r,i:i};}).filter(function(x){return ['PENDING','RETRY'].indexOf(x.r[3])>=0&&Number(x.r[5]||0)<=now;});
  if(p.getProperty('HSK_AUTO50_ENABLED')==='true')pending=hskAuto50Choose_(pending);
  else pending.sort(function(a,b){return Number(a.r[0])-Number(b.r[0])||(String(a.r[1]).length<2?1:0)-(String(b.r[1]).length<2?1:0)||Number(a.r[4])-Number(b.r[4])||a.i-b.i;});
+ if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskStableCycleFilter_==='function')pending=hskStableCycleFilter_(p,rows,pending);
  if(!pending.length){
   var waiting=rows.some(function(r){return ['PENDING','RETRY'].indexOf(r[3])>=0;});
   if(!waiting&&typeof hskFastPhaseOnEmpty_==='function'&&hskFastPhaseOnEmpty_(p,storage,tables,rows))return;
   if(!waiting)hskVocabStop();return;
  }
- var pair=hskShared50Pair_(token,now);
+ var pair=p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskStableTtsPair_==='function'?hskStableTtsPair_(p,token,now):hskShared50Pair_(token,now);
  if(!pair){p.setProperty('HSK_VOCAB_RETRY_AT',String(now+300000));p.setProperty('HSK_VOCAB_ERROR','tts_keys_cooling');return;}
  var slot=pair.slot,model=pair.model,size=Math.max(1,Math.min(90,Number(p.getProperty('HSK_VOCAB_BATCH_SIZE')||10))),seen=new Set(),jobs=[];
  pending.forEach(function(x){if(jobs.length>=size||seen.has(x.r[1]))return;seen.add(x.r[1]);jobs.push({row:x.i,text:x.r[1],pinyin:x.r[2],level:x.r[0],model:model,key:hskFastPhaseKey_(model,x.r[1],x.r[2],x.r[0]),repairProfile:typeof hskCongestionRepairProfile_==='function'&&hskCongestionRepairProfile_(x.r)});});
@@ -131,7 +133,7 @@ function hskVocabTick(){
  var batch=[id,JSON.stringify(jobs),'',chunked?'TTS_CHUNKS':'RESERVED','',hskVNTime_(new Date()),slot,model,pause,0,chunked?JSON.stringify({mode:'chunked_v1',attempts:{}}):''];tables.batches.appendRow(batch);var number=tables.batches.getLastRow();
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true')p.setProperty('HSK_VOCAB_PILOT_ID',id);
  SpreadsheetApp.flush();
- p.setProperty('HSK_VOCAB_NEXT_SLOT',String((slot+1)%13));p.setProperty('HSK_VOCAB_NEXT_MODEL',String((pair.mi+1)%hskVoiceTtsModels_().length));
+ if(p.getProperty('HSK_AUTO50_ENABLED')!=='true'||typeof hskStableTtsPair_!=='function'){p.setProperty('HSK_VOCAB_NEXT_SLOT',String((slot+1)%13));p.setProperty('HSK_VOCAB_NEXT_MODEL',String((pair.mi+1)%hskVoiceTtsModels_().length));}
  if(chunked)return; // Next trigger will process durable TTS_CHUNKS journal before selecting any new jobs.
  try{
  var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(p.getProperty('HSK_SHARED50_LITERAL')==='true'&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&Array.from(jobs.map(function(j){return typeof hskCongestionSpeech_==='function'?hskCongestionSpeech_(j.text):j.text;}).join('。')).length<=220?{text:jobs.map(function(j){return typeof hskCongestionSpeech_==='function'?hskCongestionSpeech_(j.text):j.text;}).join('。'),isolated:true,keySlot:slot,model:model,language:'zh-CN'}:{items:jobs.map(function(j){return typeof hskCongestionSpeech_==='function'?hskCongestionSpeech_(j.text):j.text;}),isolated:true,keySlot:slot,model:model,language:'zh-CN',pauseSeconds:pause}),muteHttpExceptions:true});

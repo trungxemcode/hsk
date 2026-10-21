@@ -165,4 +165,5 @@ function hskCongestionProgress_(storage,p){
  var phaseStates={};group.forEach(function(r){if(['READY','EXISTING'].indexOf(r[3])<0)phaseStates[r[3]]=(phaseStates[r[3]]||0)+1;});
  var phaseStatus=group.length===complete?'PHASE_COMPLETE':p.getProperty('HSK_VOICE_PAUSED')==='true'?'PAUSED':phaseStates.REVIEW?'WAITING_REVIEW_'+phaseStates.REVIEW:'AUTO_RUNNING_'+JSON.stringify(phaseStates);
  s.getRange(20,2,5,1).setValues([[stage],[group.length],[complete],[group.length-complete],[phaseStatus]]);
+ if(typeof hskStableProgress_==='function')hskStableProgress_(storage,p,queue,hskVocabRows_(hskVocabTables_(storage).batches,11));
 }
