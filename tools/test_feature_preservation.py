@@ -2,6 +2,8 @@
 import copy
 import importlib.util
 import json
+import subprocess
+import tempfile
 from pathlib import Path
 from unittest import TestCase, main
 from unittest.mock import patch
@@ -98,6 +100,69 @@ class FeaturePreservationTests(TestCase):
   self.assertEqual(mod.ensure_no_unapproved_removals(baseline,baseline,approvals,[mod.APPROVALS]),len(baseline['features']))
   with self.assertRaisesRegex(ValueError,'SEPARATE'):
    mod.ensure_no_unapproved_removals(baseline,baseline,approvals,[mod.APPROVALS,'docs/ai/notes.md'])
+
+
+class VerifiedRelocationTests(TestCase):
+ def setUp(self):
+  self.tmp=tempfile.TemporaryDirectory()
+  self.addCleanup(self.tmp.cleanup)
+  self.root=Path(self.tmp.name)
+  self.run_git('init','-q')
+  self.run_git('config','user.name','Test')
+  self.run_git('config','user.email','test@example.invalid')
+  (self.root/'old.js').write_bytes(b'window.Backup={restore:true};\n')
+  (self.root/'existing.js').write_bytes(b'window.Backup={restore:true};\n')
+  self.run_git('add','.')
+  self.run_git('commit','-qm','baseline')
+  self.base=self.run_git('rev-parse','HEAD').strip()
+  self.before={'schema':1,'features':[{'id':'backup','name':'Backup','checks':[
+   {'kind':'contains','file':'old.js','value':'restore:true'}]}]}
+  self.after=copy.deepcopy(self.before)
+  self.after['features'][0]['checks'][0]['file']='src/backup.js'
+  (self.root/'src').mkdir()
+  (self.root/'old.js').rename(self.root/'src/backup.js')
+
+ def run_git(self,*args):
+  return subprocess.check_output(['git','-C',str(self.root),*args],text=True)
+
+ def verify(self):
+  return mod.ensure_no_unapproved_removals(self.after,self.before,approvals,
+   ['old.js','src/backup.js'],base_ref=self.base,root=self.root)
+
+ def test_exact_move_preserves_contract(self):
+  self.assertEqual(self.verify(),1)
+
+ def test_windows_line_endings_are_not_a_logic_change(self):
+  p=self.root/'src/backup.js';p.write_bytes(p.read_bytes().replace(b'\n',b'\r\n'))
+  self.assertEqual(self.verify(),1)
+
+ def test_move_plus_code_change_is_rejected(self):
+  (self.root/'src/backup.js').write_text('window.Backup={restore:false};')
+  with self.assertRaisesRegex(ValueError,'WEAKENED'): self.verify()
+
+ def test_copy_with_original_retained_is_not_a_move(self):
+  (self.root/'old.js').write_bytes((self.root/'src/backup.js').read_bytes())
+  with self.assertRaisesRegex(ValueError,'WEAKENED'): self.verify()
+
+ def test_existing_identical_destination_cannot_disguise_deletion(self):
+  self.after['features'][0]['checks'][0]['file']='existing.js'
+  with self.assertRaisesRegex(ValueError,'WEAKENED'): self.verify()
+
+ def test_cannot_change_check_kind_or_expected_content(self):
+  for field,value in [('kind','file'),('value','restore:false')]:
+   with self.subTest(field=field):
+    original=self.after['features'][0]['checks'][0][field]
+    self.after['features'][0]['checks'][0][field]=value
+    with self.assertRaisesRegex(ValueError,'WEAKENED'): self.verify()
+    self.after['features'][0]['checks'][0][field]=original
+
+ def test_missing_git_base_cannot_authorize_move(self):
+  self.base='missing-ref'
+  with self.assertRaisesRegex(ValueError,'WEAKENED'): self.verify()
+
+ def test_no_base_keeps_original_append_only_behavior(self):
+  with self.assertRaisesRegex(ValueError,'WEAKENED'):
+   mod.ensure_no_unapproved_removals(self.after,self.before,approvals,[])
 
 
 if __name__=='__main__':

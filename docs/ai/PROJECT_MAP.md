@@ -69,3 +69,8 @@ Gemini-first reading avoids the measured 18-second xKiro timeout. Source text is
 
 ## Tutor lookup cost cache — backend3.6.1 (2026-10-21)
 `server/tutor-cache.mjs`, `tutor-cache-store.mjs`, generated `tutor-curriculum.mjs`: scoped exact responses for dictionary lookup/batch translation/sentence and lesson questions; shared only for canonical public request shapes, otherwise account isolation or bypass. Firebase/abuse gates precede hits; generation budgets/provider calls follow misses. Nonce leases, TTL alarms,2048-answer bound, fail-open cache outage; no history/report caching. Semantic pilot is observe-only,20text embeddings/day maximum,64vectors and no semantic response reuse. Stable prompt/generation settings and provider failover retained; token counts logged. Existing AI_CONTROL class, separate tutor-qa-cache-v1 instance. Live-source additive patch/check tools preserve independently deployed voice code. No Apps Script, auto voice state, frontend or PWA change. Rollback flags in server/README.md.
+
+## Structure refactor phase 1–3 (3.4.12, branch only)
+- Backup core/UI moved unchanged to `src/modules/backup/backup-core.js` and `backup-restore.js`; same globals, script order, account/SRS/storage contracts. Account itself stays at root.
+- PWA static assets/legacy aliases: `tools/pwa-assets.json`; derived Drive files/loader pair validation: `tools/pwa_assets.py`. Generated inline worker arrays retain startup/offline behavior. Root `build-version.py` is still the build entrypoint.
+- Feature gate permits path-only contract updates only with exact old Git contents at a fresh destination; deletion/weakening protections remain. CI runs backup/PWA upgrade browser checks. No backend or auto voice deployment.

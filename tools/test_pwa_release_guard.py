@@ -88,7 +88,7 @@ class PwaReleaseGuardTests(unittest.TestCase):
     def test_hash_mismatch_caught_with_single_changed_asset(self):
         current = guard.ensure_release_integrity()
         with patch.object(guard, 'source_assets', return_value=['index.html']):
-            with self.assertRaisesRegex(ValueError, 'Manifest assets'):
+            with self.assertRaisesRegex(ValueError, 'OFFLINE_FILES differs'):
                 guard.ensure_release_integrity()
 
     def test_public_verifier_rejects_stale_deployment(self):
@@ -102,7 +102,7 @@ class PwaReleaseGuardTests(unittest.TestCase):
         def mock_site(url):
             if 'app-version.json' in url:
                 return json.dumps(current).encode()
-            name = url.split('?')[0].rsplit('/', 1)[-1]
+            name = url.split('?')[0].split('/hsk/', 1)[1]
             return (ROOT / name).read_bytes()
         self.assertEqual(live.inspect(live.DEFAULT_SITE, current, mock_site),
                          current['version'])
@@ -112,7 +112,7 @@ class PwaReleaseGuardTests(unittest.TestCase):
         def partial(url):
             if 'app-version.json' in url:
                 return json.dumps(current).encode()
-            name = url.split('?')[0].rsplit('/', 1)[-1]
+            name = url.split('?')[0].split('/hsk/', 1)[1]
             if name == 'offline-worker.js':
                 return b'old cached worker'
             return (ROOT / name).read_bytes()

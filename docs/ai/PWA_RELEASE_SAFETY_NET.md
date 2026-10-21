@@ -26,3 +26,12 @@ Các commit 3.3.4–3.3.6 trước đó chỉ cập nhật Cloudflare Worker. iP
 - iPhone hoàn toàn offline, ứng dụng bị đóng, thiết bị bị hạn chế dữ liệu hoặc người dùng chưa cho phép Push: **không thể bảo đảm nhận cập nhật ngay lập tức**. Khi iPhone mở HSK và có internet, `offline.js` có thể kiểm tra bản mới; cập nhật offline chỉ áp dụng sau khi tải và xác minh trọn vẹn.
 - Cache cũ và localStorage/Firebase không bị xóa để ép cập nhật.
 - Với GitHub Pages, hiện repo phục vụ từ nhánh `main`; không tự commit bump bằng `GITHUB_TOKEN` trong Actions vì bot commit có thể không kích hoạt Pages build/notify. CI yêu cầu bump ở commit PR mà người dùng merge thật.
+
+
+## Danh mục tài nguyên và chuyển module (3.4.12)
+
+`tools/pwa-assets.json` là nguồn khai báo duy nhất cho danh sách file tĩnh và URL tương thích. `tools/pwa_assets.py` thêm đúng các audio/đề thi từ hai danh mục Drive hiện có, xác minh file tồn tại, đường dẫn an toàn và cặp dữ liệu loader `.js` / `.js.gz` byte-identical. `build-version.py` sinh `OFFLINE_FILES`, `OFFLINE_ALIASES` và checksum; không lấy danh sách cũ trong worker rồi tự thêm lại đường dẫn gốc. Guard đối chiếu nguồn khai báo, worker và manifest, kiểm tra cả việc xóa file khi so với base.
+
+Khi chuyển module: dùng `git mv`, cập nhật HTML và consumer/test, thay đường dẫn trong catalog và giữ alias URL cũ → file mới. Worker mới phục vụ alias từ cache mới, giúp tab cũ còn yêu cầu URL cũ. Không chuyển các worker hay manifest khỏi gốc; không đổi scope, storage hoặc cơ chế kích hoạt. Chạy `python tools/prepare-pwa-release.py --note "Mô tả"`, guard theo base, rồi browser checks. `verify-live-pwa.py` kiểm tra thêm các đích alias trên Pages sau merge.
+
+Hai kiểm tra Chromium trong workflow bảo toàn tính năng: `check-backup-relocation-ui.cjs` chạy nhập thật bằng dữ liệu giả, bảo toàn bản trùng/đổi tài khoản ở390/1440px; `check-pwa-relocation-ui.cjs` chạy mã worker thật với bộ tài nguyên giả nhỏ tại `/hsk/`, kiểm tra waiting/activate, cache reuse, alias, offline reload, cài mới và giữ localStorage. Đây không phải kiểm thử trên iPhone vật lý hay xác minh bản live chưa được triển khai.

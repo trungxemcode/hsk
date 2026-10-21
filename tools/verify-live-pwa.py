@@ -11,6 +11,7 @@ import sys
 import time
 import urllib.parse
 import urllib.request
+from pwa_assets import read_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SITE = 'https://trungxemcode.github.io/hsk/'
@@ -40,7 +41,7 @@ def inspect(site, manifest, fetch_fn=fetch):
         raise ValueError('Stale public PWA version: ' + str(remote.get('version')))
     if remote.get('release') != manifest.get('release'):
         raise ValueError('Public semantic version does not match')
-    for name in CRITICAL_FILES:
+    for name in dict.fromkeys((*CRITICAL_FILES, *read_catalog(ROOT)['aliases'].values())):
         local = (ROOT / name).read_bytes()
         if Path(name).suffix.lower() not in ('.png', '.gz', '.webp', '.mp3'):
             local = local.replace(b'\r\n', b'\n')

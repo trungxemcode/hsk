@@ -1,5 +1,6 @@
 """Run after modifying site files; optional --version bumps all worker/client revisions."""
-import argparse, hashlib, json, re, gzip
+import argparse, hashlib, json, re
+from tools.pwa_assets import collect_assets, read_catalog
 from pathlib import Path
 root=Path(__file__).resolve().parent
 parser=argparse.ArgumentParser();parser.add_argument('--version');parser.add_argument('--release');parser.add_argument('--note');args=parser.parse_args()
@@ -15,30 +16,14 @@ if args.version:
   if name=='OneSignalSDKWorker.js':s=re.sub(r'(?<=v=)[a-zA-Z0-9-]+',args.version.removeprefix('hsk-offline-'),s)
   p.write_text(s,encoding='utf-8',newline='')
 worker=(root/'offline-worker.js').read_text(encoding='utf-8');version=re.search(r"OFFLINE_VERSION='([^']+)'",worker).group(1)
-files=json.loads(re.search(r'const OFFLINE_FILES=(\[.*?\]);',worker).group(1))
-for name in ('real-reading-variety-core.js','real-reading.js','real-reading.css'):
- if name not in files:files.append(name)
-for name in ('lesson-guided-core.js','lesson-guided.js','lesson-guided.css','practice-selector.js','practice-selector.css','study4-practice.js'):
- if name not in files:files.append(name)
-for name in ('practice-games-core.js','practice-games.js','practice-games.css'):
- if name not in files:files.append(name)
-for name in ('home-overview.js','home-overview.css','passive-core.js','passive.js','passive.css'):
- if name not in files:files.append(name)
-for name in ('placement-core.js','placement.js','placement.css'):
- if name not in files:files.append(name)
-for name in ('hanzi-writer.min.js','writing-practice.js','writing-practice.css','writing-starter.json','writing-library-LICENSE.txt','writing-data-LICENSE.txt'):
- if name not in files:files.append(name)
-for name in ('notebook-tools-core.js','notebook-factory.js','notebook-factory.css','backup-core.js','backup-restore.js','study-sync-core.js','study-sync.js','ui-buttons.css','notebook.js','notebook.css','exam-bank.js','exam-core.js','exam.js','exam.css','lesson-mini.js','lesson-mini-data.json','ai-coach-core.js','ai-coach.js','mobile-dock.js','mobile-ux.js','mobile-ux.css','exam-expansion.js','coach-profile.js','drive-exam.js','drive-exam-data.json.gz'):
- if name not in files:files.append(name)
-files=[f for f in files if not f.startswith('content/drive-hsk/') and f not in ('drive-exam-data.json','drive-exam-images.json','ios-transfer.html')]
-for name in ('drive-audio.js','drive-audio-data.json','open-dictionary-core.js','open-dictionary.js','open-dictionary.css','open-dictionary-notice.html'):
- if name not in files:files.append(name)
-for question in json.loads((root/'drive-audio-data.json').read_text(encoding='utf-8'))['items']:
- if question['audioFile'] not in files:files.append(question['audioFile'])
-for code in sorted({p.split('/')[-1].split('-')[0] for p in json.loads(gzip.decompress((root/'drive-exam-data.json.gz').read_bytes()))['report']['images']}):
- path='content/drive-hsk/'+code+'.json'
- if path not in files:files.append(path)
+files=collect_assets(root)
+aliases=read_catalog(root)['aliases']
 worker=re.sub(r'const OFFLINE_FILES=\[.*?\];','const OFFLINE_FILES='+json.dumps(files,ensure_ascii=False)+';',worker,count=1)
+alias_line='const OFFLINE_ALIASES='+json.dumps(aliases,ensure_ascii=False,separators=(',',':'))+';'
+if re.search(r'^const OFFLINE_ALIASES=.*?;$',worker,re.M):
+ worker=re.sub(r'^const OFFLINE_ALIASES=.*?;$',lambda _:alias_line,worker,count=1,flags=re.M)
+else:
+ worker=worker.replace('let download=',alias_line+'\nlet download=',1)
 (root/'offline-worker.js').write_text(worker,encoding='utf-8',newline='')
 def asset_metadata(name):
  path=root/name;data=path.read_bytes()
