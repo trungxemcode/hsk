@@ -4,7 +4,7 @@
  * provider Retry-After. A save checkpoint is always independent of provider.
  */
 function hskVoiceTtsModels_(){
- return ['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview','gemini-3.8-flash-tts'];
+ return ['gemini-2.5-flash-preview-tts','gemini-3.1-flash-tts-preview','gemini-3.8-flash-lite-tts'];
 }
 function hskVoiceModelTag_(name){
  return name.indexOf('3.8')>=0?'3_8':name.indexOf('3.1')>=0?'3_1':'2_5';

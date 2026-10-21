@@ -9,7 +9,7 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
  var batch=batches[index],jobs=JSON.parse(batch[1]),id=String(batch[0]),folder=storage.folder;
  var info={};try{info=JSON.parse(String(batch[10]||'{}'));}catch(ignore){}
  if(info.mode!=='chunked_v1')throw Error('invalid_tts_chunk_journal');
- var fallback='gemini-3.8-flash-tts';
+ var fallback='gemini-3.8-flash-lite-tts';
  function fileNamed(name){var found=folder.getFilesByName(name);return found.hasNext()?found.next():null;}
  function write(){batch[10]=JSON.stringify(info);tables.batches.getRange(index+2,1,1,11).setValues([batch]);}
  function report(msg){batch[4]=msg.slice(0,110);write();}
@@ -88,6 +88,9 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   commitMaster(file);return;
  }
  var g=plan[missing],length=g.to-g.from,maxTries=3;
+ if(g.profile!=='native_dictionary_v2'&&jobs.slice(g.from,g.to).some(function(j){return j.repairProfile;})){
+  g.profile='native_dictionary_v2';g.model=fallback;g.tries=0;write();
+ }
  if(g.tries>=maxTries){
   // Never shrink a failed group. Keep the proven audio chunks and carry every
   // unsynthesized word into the next 50-word logical batch.

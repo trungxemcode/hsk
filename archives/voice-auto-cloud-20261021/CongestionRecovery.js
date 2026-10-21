@@ -1,5 +1,5 @@
 /** Focused recovery for FAST Auto50. Existing READY audio is never replaced. */
-var HSK_CONGESTION_VERSION_='fast-recovery-20261021-v1';
+var HSK_CONGESTION_VERSION_='fast-recovery-20261021-v2';
 function hskCongestionSpeech_(value){return String(value||'').normalize('NFC').replace(/[\uff08(][^\uff09)]*[\uff09)]/g,'').trim();}
 function hskCongestionSourcePin_(value){return hskVoiceRecPinyin_(hskCongestionSpeech_(value));}
 function hskCongestionThirdPin_(job){
