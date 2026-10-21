@@ -1099,7 +1099,9 @@
           "kind": "file",
           "file": "tools/check-account-roles-ui.cjs",
           "value": ""
-        }
+        },
+        {"kind":"file","file":"server/image-quota.test.mjs","value":""},
+        {"kind":"contains","file":"server/ai-control.mjs","value":"user-image-daily"}
       ]
     }
   ]

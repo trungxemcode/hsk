@@ -297,11 +297,15 @@ export class HSkaIControl {
    const userDayLimit=Math.max(1,Math.min(fresh?13:500,Number(this.env.AI_USER_DAILY_LIMIT)||50));
    const readingDayLimit=Math.max(1,Math.min(fresh?3:100,Number(this.env.AI_USER_READING_DAILY_LIMIT)||15));
    const queryDayLimit=Math.max(1,Math.min(fresh?10:500,Number(this.env.AI_USER_QUERY_DAILY_LIMIT)||35));
+   const imageLimited=data.imageLimited===true&&['ocr','handwriting'].includes(data.route);
+   const imageDay=new Date(time+7*3600000).toISOString().slice(0,10),imageKey='img:'+imageDay+':'+data.uid;
    const userKey='u:'+day+':'+data.uid,readingKey='r:'+day+':'+data.uid;
    const dayKey='g:'+day,minuteKey='m:'+minute;
    const result=await this.state.storage.transaction(async t=>{
     const [globalDay,globalMinute,userDay,userReading]=await Promise.all([t.get(dayKey),t.get(minuteKey),t.get(userKey),t.get(readingKey)]);
     const count=[globalDay||0,globalMinute||0,userDay||0,userReading||0];
+    const imageCount=imageLimited?Number(await t.get(imageKey))||0:0;
+    if(imageLimited&&imageCount>=10)return {allowed:false,reason:'user-image-daily',remainingImageDay:0};
     if(count[0]>=globalDayLimit)return {allowed:false,reason:'global-daily'};
     if(count[1]>=globalMinuteLimit)return {allowed:false,reason:'global-minute'};
     if(count[2]>=userDayLimit)return {allowed:false,reason:fresh?'new-user-daily':'user-daily'};
@@ -309,8 +313,9 @@ export class HSkaIControl {
     if(data.route==='reading'&&count[3]>=readingDayLimit)return {allowed:false,reason:fresh?'new-user-reading-daily':'user-reading-daily'};
     const updates={[dayKey]:count[0]+1,[minuteKey]:count[1]+1,[userKey]:count[2]+1};
     if(data.route==='reading')updates[readingKey]=count[3]+1;
+    if(imageLimited)updates[imageKey]=imageCount+1;
     await t.put(updates);
-    return {allowed:true,remainingGlobalDay:globalDayLimit-count[0]-1,remainingUserDay:userDayLimit-count[2]-1};
+    return {allowed:true,...(imageLimited?{remainingImageDay:9-imageCount}:{}),remainingGlobalDay:globalDayLimit-count[0]-1,remainingUserDay:userDayLimit-count[2]-1};
    });
    return Response.json(result,{status:result.allowed?200:429});
   }
@@ -509,7 +514,7 @@ export function createAiFailoverFetch(fetchFn,env,{
  wrapped.hskFailover=true;return wrapped;
 }
 export function createAiRoleFetch(fetchFn,env,{route,body,accountRole,validateData,onProvider,onAttempt}={}){
- if(accountRole){const providerOnly=['admin','vip'].includes(accountRole)?'gemini':'xkiro';return createAiFailoverFetch(fetchFn,env,{providerOnly,preferSecondary:providerOnly==='xkiro',timeoutMs:route==='/reading-next'?60000:30000,backupTimeoutMs:route==='/reading-next'?60000:30000,validateData,onProvider,onAttempt});}
+ if(accountRole){const providerOnly=['admin','vip'].includes(accountRole)||['/ocr','/handwriting-recognize'].includes(route)?'gemini':'xkiro';return createAiFailoverFetch(fetchFn,env,{providerOnly,preferSecondary:providerOnly==='xkiro',timeoutMs:route==='/reading-next'?60000:30000,backupTimeoutMs:route==='/reading-next'?60000:30000,validateData,onProvider,onAttempt});}
  const reading=route==='/reading-next',enabled=env.AI_TASK_ROUTING==='true',role=aiTaskRole(route,body);
  return createAiFailoverFetch(fetchFn,env,{
   preferSecondary:enabled&&role==='xkiro',
@@ -948,7 +953,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
   // Server-to-server only: verified Google Apps Script identity, no browser CORS.
   if(new URL(request.url).pathname==='/voice-precache')return createVoicePrecacheHandler(rawFetchFn,keyFetch,now)(request,env);
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
-  Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider, X-HSK-AI-Cache'});
+  Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider, X-HSK-AI-Cache, X-HSK-Image-Remaining'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
   const route=new URL(request.url).pathname,isRole=['/account-role','/admin/accounts','/admin/account-role'].includes(route),isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
   if(!isRole&&route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading)return reply({error:'Không tìm thấy dịch vụ.'},404);
@@ -1013,11 +1018,10 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
      }
      verifiedRole=(await accountRoleCall(env,'roles-self',{actor:account.localId,email:account.email||''},controller.signal)).account.role;
     }catch{return reply({error:'Chưa xác minh được quyền tài khoản. Hãy thử lại.',code:'ACCOUNT_ROLES_UNAVAILABLE'},503);}
-    if(verifiedRole==='regular'&&(isOcr||isHandwriting))return reply({error:'Nhận dạng ảnh bằng Gemini dành cho VIP và admin.',code:'VIP_REQUIRED'},403);
    }
    fetchFn=createAiRoleFetch(keyFetch,env,{route,body,accountRole:verifiedRole,validateData:isReading?data=>validReadingStory(data,{genre:body.genre||'dialogue',hsk:body.hsk,quality:!!body.genre}):undefined,onProvider:provider=>{headers['X-HSK-AI-Provider']=provider;},onAttempt:entry=>{if(isReading)timings.push(entry);}});
    const roleEnv=verifiedRole?{...env,QA_ACCOUNT_PROVIDER:roleProvider(verifiedRole),QA_SHADOW_MODE:'off'}:env;
-   const providerFailure=(response,model,env,operation)=>verifiedRole==='regular'?{error:response.status===429?'xKiro đã đạt giới hạn lượt dùng. Hãy thử lại sau.':'xKiro chưa trả lời được. Hãy thử lại sau.',code:'AI_PROVIDER_ERROR',provider:'xkiro',workerRevision:WORKER_REVISION}:geminiFailure(response,model,env,operation);
+   const providerFailure=(response,model,env,operation)=>verifiedRole==='regular'&&!isOcr&&!isHandwriting?{error:response.status===429?'xKiro đã đạt giới hạn lượt dùng. Hãy thử lại sau.':'xKiro chưa trả lời được. Hãy thử lại sau.',code:'AI_PROVIDER_ERROR',provider:'xkiro',workerRevision:WORKER_REVISION}:geminiFailure(response,model,env,operation);
    if(!isAdmin&&env.AI_ABUSE_ENABLED==='true'){
     if(env.AI_REQUIRE_VERIFIED_EMAIL==='true'&&account.emailVerified!==true)return reply({error:'Hãy xác minh email trong trang Tài khoản trước khi dùng AI.',code:'AI_EMAIL_UNVERIFIED'},403);
     if(!env.AI_CONTROL)return reply({error:'Dịch vụ bảo vệ AI chưa sẵn sàng. Hãy thử lại sau.',code:'AI_GUARD_UNAVAILABLE'},503);
@@ -1056,9 +1060,10 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
     readingLocked=!!lock?.acquired;
    }
    try{
-    const budget=await controlCall(env,'reserve',{uid:c.sub,newAccount:Number(account.createdAt)>now()-86400000,route:isReading?'reading':isOcr?'ocr':isHandwriting?'handwriting':isPlan?'study-plan':isAsk?'ask':'translate'});
+    const budget=await controlCall(env,'reserve',{uid:c.sub,imageLimited:verifiedRole==='regular'&&(isOcr||isHandwriting),newAccount:Number(account.createdAt)>now()-86400000,route:isReading?'reading':isOcr?'ocr':isHandwriting?'handwriting':isPlan?'study-plan':isAsk?'ask':'translate'});
+    if(budget&&Number.isInteger(budget.remainingImageDay))headers['X-HSK-Image-Remaining']=String(budget.remainingImageDay);
     if(budget&&!budget.allowed){
-     const message=budget.reason==='new-user-reading-daily'?'Tài khoản trong 24 giờ đầu có tối đa 3 lượt tạo bài đọc/ngày.':budget.reason==='new-user-query-daily'?'Tài khoản trong 24 giờ đầu có tối đa 10 lượt truy vấn AI/ngày.':budget.reason==='new-user-daily'?'Tài khoản trong 24 giờ đầu có tối đa 13 lượt AI/ngày.':budget.reason==='user-reading-daily'?'Bạn đã dùng hết 15 lượt tạo bài đọc hôm nay. Vẫn có thể đọc lại bài đã lưu.':budget.reason==='user-query-daily'?'Bạn đã dùng hết 35 lượt truy vấn AI hôm nay. Vẫn có thể tạo bài đọc nếu còn lượt.':budget.reason==='user-daily'?'Bạn đã dùng hết 50 lượt AI hôm nay.':budget.reason==='global-minute'?'App đang có nhiều yêu cầu AI. Hãy thử lại sau một phút.':'App đã đạt giới hạn AI chung trong ngày.';
+     const message=budget.reason==='user-image-daily'?'Bạn đã dùng hết 10 lượt AI hình ảnh hôm nay. Hạn mức được đặt lại lúc 00:00 giờ Việt Nam.':budget.reason==='new-user-reading-daily'?'Tài khoản trong 24 giờ đầu có tối đa 3 lượt tạo bài đọc/ngày.':budget.reason==='new-user-query-daily'?'Tài khoản trong 24 giờ đầu có tối đa 10 lượt truy vấn AI/ngày.':budget.reason==='new-user-daily'?'Tài khoản trong 24 giờ đầu có tối đa 13 lượt AI/ngày.':budget.reason==='user-reading-daily'?'Bạn đã dùng hết 15 lượt tạo bài đọc hôm nay. Vẫn có thể đọc lại bài đã lưu.':budget.reason==='user-query-daily'?'Bạn đã dùng hết 35 lượt truy vấn AI hôm nay. Vẫn có thể tạo bài đọc nếu còn lượt.':budget.reason==='user-daily'?'Bạn đã dùng hết 50 lượt AI hôm nay.':budget.reason==='global-minute'?'App đang có nhiều yêu cầu AI. Hãy thử lại sau một phút.':'App đã đạt giới hạn AI chung trong ngày.';
      return reply({error:message,code:'AI_BUDGET_EXHAUSTED',reason:budget.reason},429);
     }
     if(isReading){

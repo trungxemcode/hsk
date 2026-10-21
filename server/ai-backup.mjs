@@ -111,7 +111,7 @@ export function createAiFailoverFetch(fetchFn,env,{
  wrapped.hskFailover=true;return wrapped;
 }
 export function createAiRoleFetch(fetchFn,env,{route,body,accountRole,validateData,onProvider,onAttempt}={}){
- if(accountRole){const providerOnly=['admin','vip'].includes(accountRole)?'gemini':'xkiro';return createAiFailoverFetch(fetchFn,env,{providerOnly,preferSecondary:providerOnly==='xkiro',timeoutMs:route==='/reading-next'?60000:30000,backupTimeoutMs:route==='/reading-next'?60000:30000,validateData,onProvider,onAttempt});}
+ if(accountRole){const providerOnly=['admin','vip'].includes(accountRole)||['/ocr','/handwriting-recognize'].includes(route)?'gemini':'xkiro';return createAiFailoverFetch(fetchFn,env,{providerOnly,preferSecondary:providerOnly==='xkiro',timeoutMs:route==='/reading-next'?60000:30000,backupTimeoutMs:route==='/reading-next'?60000:30000,validateData,onProvider,onAttempt});}
  const reading=route==='/reading-next',enabled=env.AI_TASK_ROUTING==='true',role=aiTaskRole(route,body);
  return createAiFailoverFetch(fetchFn,env,{
   preferSecondary:enabled&&role==='xkiro',

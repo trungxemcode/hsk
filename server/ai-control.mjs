@@ -44,11 +44,15 @@ export class HSkaIControl {
    const userDayLimit=Math.max(1,Math.min(fresh?13:500,Number(this.env.AI_USER_DAILY_LIMIT)||50));
    const readingDayLimit=Math.max(1,Math.min(fresh?3:100,Number(this.env.AI_USER_READING_DAILY_LIMIT)||15));
    const queryDayLimit=Math.max(1,Math.min(fresh?10:500,Number(this.env.AI_USER_QUERY_DAILY_LIMIT)||35));
+   const imageLimited=data.imageLimited===true&&['ocr','handwriting'].includes(data.route);
+   const imageDay=new Date(time+7*3600000).toISOString().slice(0,10),imageKey='img:'+imageDay+':'+data.uid;
    const userKey='u:'+day+':'+data.uid,readingKey='r:'+day+':'+data.uid;
    const dayKey='g:'+day,minuteKey='m:'+minute;
    const result=await this.state.storage.transaction(async t=>{
     const [globalDay,globalMinute,userDay,userReading]=await Promise.all([t.get(dayKey),t.get(minuteKey),t.get(userKey),t.get(readingKey)]);
     const count=[globalDay||0,globalMinute||0,userDay||0,userReading||0];
+    const imageCount=imageLimited?Number(await t.get(imageKey))||0:0;
+    if(imageLimited&&imageCount>=10)return {allowed:false,reason:'user-image-daily',remainingImageDay:0};
     if(count[0]>=globalDayLimit)return {allowed:false,reason:'global-daily'};
     if(count[1]>=globalMinuteLimit)return {allowed:false,reason:'global-minute'};
     if(count[2]>=userDayLimit)return {allowed:false,reason:fresh?'new-user-daily':'user-daily'};
@@ -56,8 +60,9 @@ export class HSkaIControl {
     if(data.route==='reading'&&count[3]>=readingDayLimit)return {allowed:false,reason:fresh?'new-user-reading-daily':'user-reading-daily'};
     const updates={[dayKey]:count[0]+1,[minuteKey]:count[1]+1,[userKey]:count[2]+1};
     if(data.route==='reading')updates[readingKey]=count[3]+1;
+    if(imageLimited)updates[imageKey]=imageCount+1;
     await t.put(updates);
-    return {allowed:true,remainingGlobalDay:globalDayLimit-count[0]-1,remainingUserDay:userDayLimit-count[2]-1};
+    return {allowed:true,...(imageLimited?{remainingImageDay:9-imageCount}:{}),remainingGlobalDay:globalDayLimit-count[0]-1,remainingUserDay:userDayLimit-count[2]-1};
    });
    return Response.json(result,{status:result.allowed?200:429});
   }
