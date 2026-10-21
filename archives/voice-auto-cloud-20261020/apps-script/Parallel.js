@@ -23,7 +23,7 @@ function hskParallelAvailability_(token) {
   if(response.getResponseCode()!==200)throw Error('tts_key_status_unavailable');
   var data=JSON.parse(response.getContentText());
   if(!data.ok||!Array.isArray(data.slots))throw Error('tts_key_status_unavailable');
-  return (hskSettings_().getProperty('HSK_WARM_ISOLATED')==='true'&&Array.isArray(data.modelSlots)?data.modelSlots:data.slots).filter(function(s){return Number.isInteger(s.slot)&&s.slot>=1&&s.slot<=12;});
+  return data.slots.filter(function(s){return Number.isInteger(s.slot)&&s.slot>=0&&s.slot<=12;});
 }
 function hskParallelDecode_(response) {
   var status=response.getResponseCode(),data;
@@ -31,6 +31,7 @@ function hskParallelDecode_(response) {
   if(status!==200||!data.ok){
     var known=/^(identity_unavailable|unauthorized|voice_not_configured|tts_provider_unavailable|invalid_model|invalid_tts_audio|invalid_tts_response|tts_generation_incomplete|tts_blocked|tts_rate_limited|tts_daily_limit|tts_quota_unavailable|tts_key_invalid|tts_permission_denied|tts_region_unavailable|tts_model_unavailable|tts_request_rejected|tts_transport_uncertain)$/.test(String(data.error||''))?data.error:'request_failed';
     var error=Error('cloudflare_tts_'+status+'_'+known);
+    error.diagnostic=data.diagnostic||null;
     error.status=status;error.retryable=typeof data.retryable==='boolean'?data.retryable:[429,503,504].indexOf(status)>=0||known==='tts_generation_incomplete'||known==='tts_provider_unavailable';
     error.providerAttempts=Number.isInteger(data.providerAttempts)?Math.max(0,Math.min(2,data.providerAttempts)):/^(unauthorized|identity_unavailable|voice_not_configured|invalid_model)$/.test(known)?0:1;
     error.retryAfter=Math.min(604800,Math.max(60,Number(data.retryAfter)||600));
@@ -61,7 +62,7 @@ function hskWarmParallelTick() {
     var availability=hskParallelAvailability_(token),available=new Map();
     availability.forEach(function(item){available.set(item.slot,item);});
     p.setProperty('HSK_WARM_KEY_HEALTH',JSON.stringify(availability));
-    var concurrency=Math.max(1,Math.min(12,Number(p.getProperty('HSK_WARM_CONCURRENCY')||1)));
+    var concurrency=Math.max(1,Math.min(9,Number(p.getProperty('HSK_WARM_CONCURRENCY')||1)));
     var texts=hskWarmCorpus_(),cursor=Number(p.getProperty('HSK_WARM_CURSOR')||0),model=p.getProperty('HSK_VOICE_MODEL')||'gemini-2.5-flash-preview-tts';
     var sheet=storage.sheet,records=sheet.getLastRow()>1?sheet.getRange(2,1,sheet.getLastRow()-1,13).getValues():[],byKey=new Map();
     records.forEach(function(r,i){byKey.set(String(r[0]),{row:i+2,values:r});});
@@ -93,9 +94,9 @@ function hskWarmParallelTick() {
       sheet.getRange(entry.row,1,1,13).setValues([entry.values]);
     });
     var jobs=[],requests=[],chosen=new Set(),earliest=Infinity;
-    var firstSlot=Math.max(1,Math.min(12,Number(p.getProperty('HSK_WARM_NEXT_SLOT')||1)));
-    for(var lane=0;lane<12&&jobs.length<concurrency;lane++){
-      var slot=(firstSlot-1+lane)%12+1,health=available.get(slot);
+    var firstSlot=Math.max(0,Math.min(9,Number(p.getProperty('HSK_WARM_NEXT_SLOT')||1)));
+    for(var lane=0;lane<10&&jobs.length<concurrency;lane++){
+      var slot=(firstSlot+lane)%10,health=available.get(slot);
       if(!health)continue;
       var until=Math.max(Number(p.getProperty('HSK_WARM_SLOT_'+slot+'_AFTER')||0),now+Math.max(0,Number(health.retryAfter)||0)*1000);
       if(until>now){earliest=Math.min(earliest,until);continue;}
@@ -146,10 +147,10 @@ function hskWarmParallelTick() {
       requests.push({url:'https://hsk-vietnamese-translator.trung-hsk668.workers.dev/voice-precache',method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify({text:text,language:'zh-CN',keySlot:slot}),muteHttpExceptions:true});
     }
     p.setProperty('HSK_WARM_CURSOR',String(cursor));
-    if(jobs.length)p.setProperty('HSK_WARM_NEXT_SLOT',String(jobs[jobs.length-1].slot%12+1));
+    if(jobs.length)p.setProperty('HSK_WARM_NEXT_SLOT',String((jobs[jobs.length-1].slot+1)%10));
     if(!jobs.length){
       if(cursor>=texts.length&&!deferred.some(function(r){return r[4]==='PENDING';}))hskWarmStop();
-      else if(earliest<Infinity){p.setProperty('HSK_WARM_RETRY_AT',String(Math.min(earliest,Date.now()+60000)));p.setProperty('HSK_WARM_LAST_ERROR','tts_keys_cooling');}
+      else if(earliest<Infinity){p.setProperty('HSK_WARM_RETRY_AT',String(earliest));p.setProperty('HSK_WARM_LAST_ERROR','tts_keys_cooling');}
       else if(!availability.length){p.setProperty('HSK_WARM_ENABLED','false');p.setProperty('HSK_WARM_LAST_ERROR','tts_keys_not_configured');}
       return;
     }
@@ -159,7 +160,7 @@ function hskWarmParallelTick() {
     try{responses=UrlFetchApp.fetchAll(requests);}catch(e){
       // Transport failure is ambiguous: a request may already have generated audio.
       jobs.forEach(function(job){job.values[11]='REVIEW';job.values[12]='batch_transport_uncertain';sheet.getRange(job.row,1,1,13).setValues([job.values]);hskParallelQueue_(queue,deferred,job.index,job.text,'batch_transport_uncertain',false,86400000);});
-      p.setProperty('HSK_WARM_LAST_ERROR','batch_transport_uncertain');p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+60000));p.setProperty('HSK_WARM_CONCURRENCY','1');return;
+      p.setProperty('HSK_WARM_LAST_ERROR','batch_transport_uncertain');p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+1800000));p.setProperty('HSK_WARM_CONCURRENCY','1');return;
     }
     var successes=0,vendorCalls=0,serviceFailure=false;
     responses.forEach(function(response,i){
@@ -201,7 +202,7 @@ function hskWarmParallelTick() {
     }else{
       concurrency=Math.max(1,Math.floor(concurrency/2));p.setProperty('HSK_WARM_GOOD_BATCHES','0');
       var bad=successes||!serviceFailure?0:Number(p.getProperty('HSK_WARM_BAD_BATCHES')||0)+1;p.setProperty('HSK_WARM_BAD_BATCHES',String(bad));
-      if(bad>=3){p.deleteProperty('HSK_WARM_RETRY_AT');p.setProperty('HSK_WARM_BAD_BATCHES','0');}
+      if(bad>=3){p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+1800000));p.setProperty('HSK_WARM_BAD_BATCHES','0');}
     }
     p.setProperty('HSK_WARM_CONCURRENCY',String(concurrency));
     if(cursor>=texts.length&&!deferred.some(function(r){return r[4]==='PENDING';}))hskWarmStop();

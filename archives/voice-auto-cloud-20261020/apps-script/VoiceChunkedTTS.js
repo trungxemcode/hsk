@@ -86,20 +86,27 @@ function hskVoiceChunkedStep_(p,storage,tables,rows,batches,index,token){
   }
   commitMaster(file);return;
  }
- var g=plan[missing],length=g.to-g.from,maxTries=3;
+ var g=plan[missing],length=g.to-g.from,maxTries=length===1?36:12;
  if(g.tries>=maxTries){
-  // Never shrink a failed group. Keep the proven audio chunks and carry every
-  // unsynthesized word into the next 50-word logical batch.
-  for(var omitted=g.from;omitted<g.to;omitted++){
-   var excluded=jobs[omitted],row=rows[excluded.row];
-   if(['READY','EXISTING'].indexOf(row[3])<0){
-    row[3]='RETRY';row[5]=0;
-    row[11]='tts_chunk_unavailable_next_batch';hskVocabWrite_(tables.queue,excluded.row,row);
-   }
-   if(info.omitted.indexOf(omitted)<0)info.omitted.push(omitted);
+  if(length>1){
+   var half=g.from+Math.floor(length/2);
+   if(half<=g.from||half>=g.to)throw Error('adaptive_split_invalid');
+   var pieces=[{from:g.from,to:half},{from:half,to:g.to}].map(function(x){
+    return {from:x.from,to:x.to,name:'VOCAB_CHUNK_'+id+'_'+x.from+'_'+x.to+'.wav',
+     model:fallback,tries:0,slot:null};
+   });
+   plan.splice.apply(plan,[missing,1].concat(pieces));
+   report('SPLIT_FAILED_'+length+'_WORDS_INTO_'+(half-g.from)+'_AND_'+(g.to-half));
+   return;
   }
-  plan.splice(missing,1);
-  report('DEFERRED_'+length+'_WORDS_TO_NEXT_50_KEEP_SAVED_CHUNKS');
+  // Only the unspoken word is postponed. All previously saved groups remain.
+  var excluded=jobs[g.from],row=rows[excluded.row];
+  if(['READY','EXISTING'].indexOf(row[3])<0){
+   row[3]='RETRY';row[5]=Date.now()+1800000;
+   row[11]='tts_single_word_unavailable_next_batch';hskVocabWrite_(tables.queue,excluded.row,row);
+  }
+  info.omitted.push(g.from);plan.splice(missing,1);
+  report('SKIPPED_ONLY_'+excluded.text+'_OTHER_AUDIO_PRESERVED');
   return;
  }
  var route=typeof hskVoiceFailoverMode_==='function'?hskVoiceFailoverMode_(p):'WORKER';

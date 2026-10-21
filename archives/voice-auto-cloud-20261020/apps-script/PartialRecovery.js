@@ -61,8 +61,7 @@ function hskPartialHandleMismatch_(storage,journal,rowNumber,row,queue,deferred,
  var result=hskBatchPartialRecover_(storage,journal,rowNumber,row,queue,deferred,p);
  if(result.kind==='partial'){
   p.setProperty('HSK_WARM_SAVED_SINCE_FIX',String(Number(p.getProperty('HSK_WARM_SAVED_SINCE_FIX')||0)+result.saved));
-  // No adaptive reduction: keep five items in the next batch.
-  p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+90000));
+  p.setProperty('HSK_WARM_ISOLATED_SIZE','2');p.setProperty('HSK_WARM_RETRY_AT',String(Date.now()+90000));
   return true;
  }
  if(result.kind==='review'){

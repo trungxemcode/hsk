@@ -75,7 +75,7 @@ function hskVocabRanges_(bytes,expected){
  var gaps=ranges.slice(1).map(function(s,i){return (s[0]-ranges[i][1])/24000;});
  return {ranges:ranges,duration:pcm.length/48000,minGap:gaps.length?Math.min.apply(null,gaps):null,maxGap:gaps.length?Math.max.apply(null,gaps):null};
 }
-function hskVocabTick(){
+function hskVocabTickWork_(){
  var p=hskSettings_(),now=Date.now();
  if(typeof hskVoiceControlPoll_==='function'&&hskVoiceControlPoll_(p))return;
  if(p.getProperty('HSK_VOCAB_ENABLED')!=='true'||p.getProperty('HSK_VOICE_PAUSED')==='true')return;
@@ -85,7 +85,9 @@ function hskVocabTick(){
  // Internal daily runtime and provider-call limits removed by owner request.
  // Keep usage counters for diagnosis; real Google/Gemini/Cloudflare quotas still apply.
  storage=hskCheck_(p);tables=hskVocabTables_(storage);var rows=hskVocabRows_(tables.queue,17),batches=hskVocabRows_(tables.batches,11),token=ScriptApp.getIdentityToken();
- if(p.getProperty('HSK_VOCAB_PILOT_ONLY')!=='true'&&typeof hskFastPhaseInit_==='function')hskFastPhaseInit_(p,storage,rows);
+ // One-time, owner-authorized manual acceptance. Logs failed ASR as such;
+ // never silently recertifies another word or modifies existing READY.
+ if(typeof hskOwnerApprove8_20261021_==='function'&&hskOwnerApprove8_20261021_(p,storage,tables,rows,batches))return;
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'&&p.getProperty('HSK_VOCAB_PILOT_ID')){
   var trial=batches.find(function(b){return b[0]===p.getProperty('HSK_VOCAB_PILOT_ID');});
   if(trial&&['DONE','PARTIAL','REVIEW','REJECTED','UNCERTAIN'].indexOf(trial[3])>=0){hskVocabStop();return;}
@@ -99,38 +101,60 @@ function hskVocabTick(){
  if(Number(p.getProperty('HSK_VOCAB_RETRY_AT')||0)>now)return;
  var active=batches.findIndex(function(b){return ['TTS_CHUNKS','MASTER','VERIFY','AUTO_VERIFY'].indexOf(b[3])>=0;});
  if(active>=0){
-  if(batches[active][3]==='TTS_CHUNKS'){hskVoiceChunkedStep_(p,storage,tables,rows,batches,active,token);return;}
+  if(batches[active][3]==='TTS_CHUNKS'){hskVoiceChunkedFastTick_(p,storage,tables,rows,batches,active,token);return;}
   if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskAuto50VerifyTick_==='function')hskAuto50VerifyTick_(storage,tables,rows,batches,active,token,started);
   else hskVocabProcess_(storage,tables,rows,batches,active,token,started);
   return;
  }
- // Enroll the next HSK stage in bounded, resumable Sheet writes, not during TTS/ASR.
- if(typeof hskFastPhaseEnrollTick_==='function'&&hskFastPhaseEnrollTick_(p,storage,tables,rows))return;
  // A RESERVED request may already have produced audio: recover a named master, never resubmit blindly.
  var unresolved=batches.findIndex(function(b){return b[3]==='RESERVED'||b[3]==='UNCERTAIN';});
  if(unresolved>=0){var prior=batches[unresolved],files=storage.folder.getFilesByName('VOCAB_MASTER_'+prior[0]+'.wav');if(files.hasNext()){prior[2]=files.next().getId();prior[3]='MASTER';tables.batches.getRange(unresolved+2,1,1,11).setValues([prior]);return;}p.setProperty('HSK_VOCAB_ERROR','uncertain_batch_requires_review');hskVocabStop();return;}
+ // Enroll the next HSK level while carrying failed clips forward to the
+ // next logical 50-word batch. No worker/ASR calls are done by this step.
+ if(typeof hskRollingPhaseTick_==='function'&&hskRollingPhaseTick_(p,storage,tables,rows))return;
  var existing=hskVocabRows_(storage.sheet,13),ready=new Map();existing.forEach(function(r){if(r[11]==='READY'&&r[4])ready.set(String(r[0]),r);});
- rows.forEach(function(r,i){if(['PENDING','RETRY'].indexOf(r[3])<0)return;var found=hskVoiceTtsModels_().map(function(m){return ready.get(hskFastPhaseKey_(m,r[1],r[2],r[0]));}).find(Boolean);if(found){r[3]='EXISTING';r[7]=found[3];r[9]=found[4];r[16]='https://drive.google.com/file/d/'+found[4]+'/view';hskVocabWrite_(tables.queue,i,r);}});
+ rows.forEach(function(r,i){if(['PENDING','RETRY'].indexOf(r[3])<0)return;var found=hskVoiceTtsModels_().map(function(m){return ready.get(hskRollingCacheKey_(m,r[1],r[2],r[0]));}).find(Boolean);if(found){r[3]='EXISTING';r[7]=found[3];r[9]=found[4];r[16]='https://drive.google.com/file/d/'+found[4]+'/view';hskVocabWrite_(tables.queue,i,r);}});
  var pending=rows.map(function(r,i){return {r:r,i:i};}).filter(function(x){return ['PENDING','RETRY'].indexOf(x.r[3])>=0&&Number(x.r[5]||0)<=now;});
  if(p.getProperty('HSK_AUTO50_ENABLED')==='true')pending=hskAuto50Choose_(pending);
  else pending.sort(function(a,b){return Number(a.r[0])-Number(b.r[0])||(String(a.r[1]).length<2?1:0)-(String(b.r[1]).length<2?1:0)||Number(a.r[4])-Number(b.r[4])||a.i-b.i;});
- if(!pending.length){
-  var waiting=rows.some(function(r){return ['PENDING','RETRY'].indexOf(r[3])>=0;});
-  if(!waiting&&typeof hskFastPhaseOnEmpty_==='function'&&hskFastPhaseOnEmpty_(p,storage,tables,rows))return;
-  if(!waiting)hskVocabStop();return;
+ if(!pending.length){var waiting=rows.some(function(r){return ['PENDING','RETRY'].indexOf(r[3])>=0;});if(!waiting)hskVocabStop();return;}
+ // The last eight unresolved HSK2-4 monosyllables repeatedly fail in mixed
+ // masters (wrong Mandarin tones). For these eight ONLY, force one standalone
+ // TTS item and prefer a healthy 2.5 slot. READY files are never touched.
+ var eight={'晴':1,'着':1,'地':1,'还':1,'极':1,'节':1,'无':1,'由':1};
+ var isolatedEight=p.getProperty('HSK_AUTO50_ENABLED')==='true'&&pending.length>0&&pending.length<=8&&
+  pending.every(function(x){return !!eight[String(x.r[1])]&&['PENDING','RETRY'].indexOf(x.r[3])>=0;})&&
+  rows.every(function(r){return ['READY','EXISTING'].indexOf(r[3])>=0||!!eight[String(r[1])]&&['PENDING','RETRY'].indexOf(r[3])>=0;});
+ var force8Counts={};
+ if(isolatedEight){
+  try{force8Counts=JSON.parse(p.getProperty('HSK_FORCE8_GUIDED_TRIALS')||'{}');}catch(ignore){}
+  pending=pending.filter(function(x){return Number(force8Counts[String(x.r[1])+'|'+String(x.r[2])]||0)<3;});
+  pending.sort(function(a,b){var ka=String(a.r[1])+'|'+String(a.r[2]),kb=String(b.r[1])+'|'+String(b.r[2]);return Number(force8Counts[ka]||0)-Number(force8Counts[kb]||0)||a.i-b.i;});
+  if(!pending.length){
+   p.setProperty('HSK_VOCAB_ERROR','force8_guided_max_trials_without_quality_pass');
+   p.setProperty('HSK_VOCAB_ENABLED','false');
+   storage.sheet.getParent().getSheetByName('Voice_Control').getRange(2,2).setValue('PAUSE');
+   return;
+  }
  }
- var pair=hskShared50Pair_(token,now);
+ var pair;
+ if(isolatedEight&&typeof hskVoiceFailoverMode_==='function'&&hskVoiceFailoverMode_(p)!=='DIRECT'){
+  var singleRoutes=hskVoiceRoutePairs_(p,token,now,'gemini-3.8-flash-tts');
+  // Live Worker supports Pinyin pronunciation metadata on Gemini 3.8 speech.
+  pair=singleRoutes.pairs.find(function(x){return x.model==='gemini-3.8-flash-tts';})||singleRoutes.pairs[0]||null;
+ }else pair=hskShared50Pair_(token,now);
  if(!pair){p.setProperty('HSK_VOCAB_RETRY_AT',String(now+300000));p.setProperty('HSK_VOCAB_ERROR','tts_keys_cooling');return;}
- var slot=pair.slot,model=pair.model,size=Math.max(1,Math.min(90,Number(p.getProperty('HSK_VOCAB_BATCH_SIZE')||10))),seen=new Set(),jobs=[];
- pending.forEach(function(x){if(jobs.length>=size||seen.has(x.r[1]))return;seen.add(x.r[1]);jobs.push({row:x.i,text:x.r[1],pinyin:x.r[2],level:x.r[0],model:model,key:hskFastPhaseKey_(model,x.r[1],x.r[2],x.r[0])});});
+ var slot=pair.slot,model=pair.model,size=isolatedEight?1:Math.max(1,Math.min(90,Number(p.getProperty('HSK_VOCAB_BATCH_SIZE')||10))),seen=new Set(),jobs=[];
+ pending.forEach(function(x){if(jobs.length>=size||seen.has(x.r[1]))return;seen.add(x.r[1]);jobs.push({row:x.i,text:x.r[1],pinyin:x.r[2],level:x.r[0],model:model,key:hskRollingCacheKey_(model,x.r[1],x.r[2],x.r[0])});});
  var id=hskDigest_(JSON.stringify(jobs)+':'+now),pause=Number(p.getProperty('HSK_VOCAB_PAUSE')||3),chunked=p.getProperty('HSK_AUTO50_ENABLED')==='true'&&p.getProperty('HSK_VOCAB_TTS_STRATEGY')==='chunks-v1'&&jobs.length>1;
  var batch=[id,JSON.stringify(jobs),'',chunked?'TTS_CHUNKS':'RESERVED','',new Date().toISOString(),slot,model,pause,0,chunked?JSON.stringify({mode:'chunked_v1',attempts:{}}):''];tables.batches.appendRow(batch);var number=tables.batches.getLastRow();
+ if(isolatedEight){var k=jobs[0].text+'|'+jobs[0].pinyin;force8Counts[k]=Number(force8Counts[k]||0)+1;p.setProperty('HSK_FORCE8_GUIDED_TRIALS',JSON.stringify(force8Counts));}
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true')p.setProperty('HSK_VOCAB_PILOT_ID',id);
  SpreadsheetApp.flush();
  p.setProperty('HSK_VOCAB_NEXT_SLOT',String((slot+1)%13));p.setProperty('HSK_VOCAB_NEXT_MODEL',String((pair.mi+1)%hskVoiceTtsModels_().length));
  if(chunked)return; // Next trigger will process durable TTS_CHUNKS journal before selecting any new jobs.
  try{
- var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(p.getProperty('HSK_SHARED50_LITERAL')==='true'&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&Array.from(jobs.map(function(j){return j.text;}).join('。')).length<=220?{text:jobs.map(function(j){return j.text;}).join('。'),isolated:true,keySlot:slot,model:model,language:'zh-CN'}:{items:jobs.map(function(j){return j.text;}),isolated:true,keySlot:slot,model:model,language:'zh-CN',pauseSeconds:pause}),muteHttpExceptions:true});
+ var response=UrlFetchApp.fetch(HSK_VOCAB_URL_,{method:'post',contentType:'application/json',headers:{Authorization:'Bearer '+token},payload:JSON.stringify(isolatedEight?{items:jobs.map(function(j){return j.text;}),pronunciations:jobs.map(function(j){return j.pinyin;}),dictionaryStyle:true,isolated:true,keySlot:slot,model:model,language:'zh-CN'}:p.getProperty('HSK_SHARED50_LITERAL')==='true'&&(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'||p.getProperty('HSK_AUTO50_ENABLED')==='true')&&Array.from(jobs.map(function(j){return j.text;}).join('。')).length<=220?{text:jobs.map(function(j){return j.text;}).join('。'),isolated:true,keySlot:slot,model:model,language:'zh-CN'}:{items:jobs.map(function(j){return j.text;}),isolated:true,keySlot:slot,model:model,language:'zh-CN',pauseSeconds:pause}),muteHttpExceptions:true});
  var decoded=hskParallelDecode_(response);p.setProperty('HSK_VOCAB_TTS_CALLS',String(Number(p.getProperty('HSK_VOCAB_TTS_CALLS')||0)+decoded.providerAttempts));p.setProperty('HSK_VOCAB_WINDOW_CALLS',String(Number(p.getProperty('HSK_VOCAB_WINDOW_CALLS')||0)+decoded.providerAttempts));
  var file=storage.folder.createFile(Utilities.newBlob(decoded.bytes,'audio/wav','VOCAB_MASTER_'+id+'.wav'));batch[2]=file.getId();batch[3]='MASTER';tables.batches.getRange(number,1,1,11).setValues([batch]);
  jobs.forEach(function(j){var r=rows[j.row];r[3]='MASTER';r[4]=Number(r[4])+1;r[6]=id;r[7]=model;r[8]=file.getId();r[11]='';hskVocabWrite_(tables.queue,j.row,r);});
