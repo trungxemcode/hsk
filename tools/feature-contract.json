@@ -1025,13 +1025,41 @@
       "id": "gemini-voice-precache",
       "name": "Kho audio Kore xác thực Google và bảo vệ dữ liệu âm thanh",
       "checks": [
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"createVoicePrecacheHandler"},
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"decodeVoiceAudio"},
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"tts_generation_incomplete"},
-        {"kind":"contains","file":"tools/voice-cache-apps-script/WarmBatch.gs","value":"HSK_WARM_RETRY_AT"},
-        {"kind":"file","file":"server/voice-apps-script.test.mjs","value":""},
-        {"kind":"file","file":"server/voice-bundle.test.mjs","value":""},
-        {"kind":"file","file":"server/voice-tts.test.mjs","value":""}
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "createVoicePrecacheHandler"
+        },
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "decodeVoiceAudio"
+        },
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "tts_generation_incomplete"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/WarmBatch.gs",
+          "value": "HSK_WARM_RETRY_AT"
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-apps-script.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-bundle.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-tts.test.mjs",
+          "value": ""
+        }
       ]
     },
     {
@@ -1128,6 +1156,37 @@
         {
           "kind": "file",
           "file": "archives/voice-auto-cloud-20261021/worker-fixture/full50-worker.mjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "voice-one-producer-two-verifiers",
+      "name": "One TTS producer and two leased ASR consumers without duplicate queue work",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "archives/voice-parallel-1tts-2asr-20261021/ParallelVerify.js",
+          "value": "function hskPVProducerEnter_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-parallel-1tts-2asr-20261021/ParallelVerify.js",
+          "value": "function hskPVClaim_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-parallel-1tts-2asr-20261021/ParallelVerify.js",
+          "value": "function hskPVOutside_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-parallel-1tts-2asr-20261021/ParallelVerifyBatch.js",
+          "value": "hskAuto50ThirdPassMatch_"
+        },
+        {
+          "kind": "file",
+          "file": "archives/voice-parallel-1tts-2asr-20261021/test-parallel.cjs",
           "value": ""
         }
       ]
