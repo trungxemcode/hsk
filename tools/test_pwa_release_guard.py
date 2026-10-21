@@ -102,7 +102,7 @@ class PwaReleaseGuardTests(unittest.TestCase):
         def mock_site(url):
             if 'app-version.json' in url:
                 return json.dumps(current).encode()
-            name = url.split('?')[0].rsplit('/', 1)[-1]
+            name = url.split('?')[0].split('/hsk/', 1)[1]
             return (ROOT / name).read_bytes()
         self.assertEqual(live.inspect(live.DEFAULT_SITE, current, mock_site),
                          current['version'])
@@ -112,7 +112,7 @@ class PwaReleaseGuardTests(unittest.TestCase):
         def partial(url):
             if 'app-version.json' in url:
                 return json.dumps(current).encode()
-            name = url.split('?')[0].rsplit('/', 1)[-1]
+            name = url.split('?')[0].split('/hsk/', 1)[1]
             if name == 'offline-worker.js':
                 return b'old cached worker'
             return (ROOT / name).read_bytes()

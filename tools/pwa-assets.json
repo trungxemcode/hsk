@@ -107,8 +107,8 @@
     "notebook-tools-core.js",
     "notebook-factory.js",
     "notebook-factory.css",
-    "backup-core.js",
-    "backup-restore.js",
+    "src/modules/backup/backup-core.js",
+    "src/modules/backup/backup-restore.js",
     "hanzi-writer.min.js",
     "writing-practice.js",
     "writing-practice.css",
@@ -138,5 +138,8 @@
     "real-reading.js",
     "real-reading.css"
   ],
-  "aliases": {}
+  "aliases": {
+    "backup-core.js": "src/modules/backup/backup-core.js",
+    "backup-restore.js": "src/modules/backup/backup-restore.js"
+  }
 }

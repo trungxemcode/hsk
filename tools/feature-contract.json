@@ -665,12 +665,12 @@
       "checks": [
         {
           "kind": "file",
-          "file": "backup-restore.js",
+          "file": "src/modules/backup/backup-restore.js",
           "value": ""
         },
         {
           "kind": "file",
-          "file": "backup-core.js",
+          "file": "src/modules/backup/backup-core.js",
           "value": ""
         }
       ]
