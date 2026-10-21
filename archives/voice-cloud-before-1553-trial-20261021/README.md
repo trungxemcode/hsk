@@ -1,0 +1,1 @@
+﻿Source snapshot: 37 Apps Script modules retrieved directly from production on 2026-10-21 ~10:10 VN. Precedes temporary restoration of Git commit 1e26f1f (2026-10-20 15:53 VN). Archive only, no deploy; no secret values; Restore script and staged backup remain locally at C:\Users\LENOVO\hsk-restore-1553-trial-20261021. Do not merge blindly.
