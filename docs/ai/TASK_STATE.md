@@ -1,3 +1,7 @@
+
+## Live FAST voice recovery v2 — 2026-10-21
+Production source: archives/voice-auto-cloud-20261021 (PR126 archive; not a frontend deployment). Apps Script verified version26; rollback baseline23. Worker uses native 3.8 Flash/Lite structured speech_metadata, literal Hanzi transcript and short literal legacy fallback, addressing confirmed provider error that the model tried to generate text. All38 bindings preserved. FAST still uses one generator, up to3 sequential successful checkpoints per tick, and up to10 ASR clips within existing runtime; quality gates and real quotas remain.24 focused tests, append-only contracts and390/1440 Chromium checks pass. Live native Lite profile saved3 consecutive WAVs on first attempts in one timer at08:33 VN; those files still require blind double-ASR approval. HSK2-4 currently1029/1044 certified; HOLD_UNCERTAIN0. HSK order2-4 ->1 ->5 ->6. No extra parallel-ASR pipeline deployed.
+
 ## Alternating Chinese/Vietnamese word pairs — 2026-10-18
 - Base main947f550 (3.4.7). Word study now alternates Chinese word -> spoken Vietnamese meaning, repeated as three complete pairs, before stroke demos/examples. Examples remain Chinese -> Vietnamese meaning -> silent karaoke. Per-slide audio completion, slow pacing, stroke repetitions, pause and mastery behavior retained.
 - guidedShow v4 matches the expanded sequence. Core and browser regression assert the exact six-utterance language/text prefix; no repeated Chinese block before the first Vietnamese meaning. Validation/PR/deployment status in response.

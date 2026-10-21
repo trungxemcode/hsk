@@ -13,3 +13,5 @@
 The older legacy FAST test bundle had two baseline failures before modification (an obsolete ASR migration and an old model-scan expectation). Those tests do not describe the new model-routing contract; the focused suite verifies the actual deployed API contract explicitly.
 
 Native profile v2: confirmed provider error 'Model tried to generate text' prompted short literal fallback for legacy models, plus literal Hanzi transcript and pronunciation in speech_metadata for 3.8 Lite. The Worker now accepts both 3.8 models. Repair jobs prefer native Lite; saved WAVs are never regenerated. The improved input profile has a fresh bounded verification budget.
+
+Final deployed Apps Script version26 was read back with native_dictionary_v2 and Lite routing. Live native Lite generation at08:33 VN saved three consecutive WAVs on first attempts within one serialized timer. Generation success does not grant READY; blind ASR remains required.
