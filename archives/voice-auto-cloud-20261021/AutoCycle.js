@@ -82,7 +82,8 @@ function hskAuto50Cache_(storage,job,masterId,bytes,slot,batchId,method){
  if(old&&old.values[11]==='READY'&&old.values[4])return {file:String(old.values[4]),existing:true,model:job.model};
  var filename='hsk-tts-'+key.slice(0,24)+'.wav',files=storage.folder.getFilesByName(filename);
  var file=files.hasNext()?files.next():storage.folder.createFile(Utilities.newBlob(bytes,'audio/wav',filename));
- var fileId=file.getId(),stamp=hskVNTime_(new Date()),entry=[key,'zh-CN','Kore',job.model,fileId,'audio/wav',bytes.length,stamp,stamp,0,slot,'READY',(method==='pinyin_third_check'?'auto50_double_asr_pinyin_round3:':'auto50_double_asr_exact:')+batchId];
+ var proofPrefix=method==='gemini_text_judge'?'full50_blind_asr_gemini_judge:':method==='pinyin_third_check'?'auto50_double_asr_pinyin_round3:':'auto50_double_asr_exact:';
+ var fileId=file.getId(),stamp=hskVNTime_(new Date()),entry=[key,'zh-CN','Kore',job.model,fileId,'audio/wav',bytes.length,stamp,stamp,0,slot,'READY',proofPrefix+batchId];
  if(old)storage.sheet.getRange(old.index,1,1,13).setValues([entry]);else storage.sheet.appendRow(entry);
  return {file:fileId,existing:false,model:job.model};
 }

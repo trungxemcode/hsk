@@ -86,6 +86,7 @@ function hskVocabTick(){
  // Keep usage counters for diagnosis; real Google/Gemini/Cloudflare quotas still apply.
  storage=hskCheck_(p);tables=hskVocabTables_(storage);var rows=hskVocabRows_(tables.queue,17),batches=hskVocabRows_(tables.batches,11),token=ScriptApp.getIdentityToken();
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')!=='true'&&typeof hskFastPhaseInit_==='function')hskFastPhaseInit_(p,storage,rows);
+ if(typeof hskFull50Route_==='function'&&hskFull50Route_(p,storage,tables,rows,batches,token,started))return;
  if(p.getProperty('HSK_AUTO50_ENABLED')==='true'&&typeof hskStableCycleObserve_==='function')hskStableCycleObserve_(p,rows,batches);
  if(p.getProperty('HSK_VOCAB_PILOT_ONLY')==='true'&&p.getProperty('HSK_VOCAB_PILOT_ID')){
   var trial=batches.find(function(b){return b[0]===p.getProperty('HSK_VOCAB_PILOT_ID');});

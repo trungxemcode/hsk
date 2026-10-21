@@ -55,6 +55,7 @@ function hskStableAsrError_(p,slot,detail,reason){
  }
 }
 function hskStableProgress_(storage,p,rows,batches){
+ if(typeof hskFull50Progress_==='function'&&hskFull50Progress_(storage,p,rows,batches))return;
  var s=storage.sheet.getParent().getSheetByName('Tien_do');if(!s)return;
  var c=hskStableRead_(p,'HSK_STABLE_CYCLE',null),n=c?hskStableCycleCount_(c,rows):null;
  var active=batches.find(function(b){return ['TTS_CHUNKS','MASTER','VERIFY','AUTO_VERIFY','RESERVED','UNCERTAIN'].indexOf(b[3])>=0;});
