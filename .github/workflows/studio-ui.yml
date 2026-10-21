@@ -77,6 +77,8 @@ jobs:
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-dark-contrast-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-factory-ui.cjs
+      - name: Verify mobile lesson chat
+        run: CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-chat-mobile-ui.cjs
       - name: Keep layout screenshots
         if: always()
         uses: actions/upload-artifact@v4
