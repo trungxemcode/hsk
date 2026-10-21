@@ -1,3 +1,4 @@
+import {accountRoleControl} from './account-roles.mjs';
 import {qaCacheControl,qaCacheAlarm} from './tutor-cache-store.mjs';
 // Cloudflare Durable Object: centralized, atomic AI budget and reusable reading cache.
 // Never stores provider keys, Firebase ID tokens, private translation prompts or images.
@@ -7,6 +8,7 @@ export class HSkaIControl {
  async fetch(request){
   if(request.method!=='POST')return Response.json({error:'method'},{status:405});
   let data;try{data=await request.json()}catch{return Response.json({error:'payload'},{status:400})}
+  if(data&&typeof data.action==='string'&&data.action.startsWith('roles-'))return accountRoleControl(this.state.storage,data);
   if(data&&typeof data.action==='string'&&data.action.startsWith('qa-'))return qaCacheControl(this.state.storage,this.env,data);
   if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock','gemini-pick','gemini-report','abuse-start','abuse-finish'].includes(data.action))
    return Response.json({error:'action'},{status:400});

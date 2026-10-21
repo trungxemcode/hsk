@@ -1,3 +1,8 @@
+## Account roles — 2026-10-21
+- Candidate 3.5.1, feat/account-roles-20261021 from origin/main 9ae727d. Owner fixed to existing account-config UID/email; only owner grants/revokes VIP. Admin/VIP Gemini-only, regular xKiro-only, multimodal requires VIP/admin, existing quotas preserved. No real users promoted.
+- Roles persisted through AI_CONTROL in separate object; authenticated management routes and dashboard. Cache partitioning prevents cross-provider reuse. Voice code and active dirty voice checkout untouched.
+- Tests: Final validation PASS:244 server tests, account-role UI390/1440, feature runtime390/1440,46 features/175 guards,163 PWA assets, shared design-token checks. Management/provider transports mocked, no live Gemini speed benchmark. Separate Worker deployment required and must preserve independently deployed voice changes. PR132 chat remains separate.
+
 ## Alternating Chinese/Vietnamese word pairs — 2026-10-18
 - Base main947f550 (3.4.7). Word study now alternates Chinese word -> spoken Vietnamese meaning, repeated as three complete pairs, before stroke demos/examples. Examples remain Chinese -> Vietnamese meaning -> silent karaoke. Per-slide audio completion, slow pacing, stroke repetitions, pause and mastery behavior retained.
 - guidedShow v4 matches the expanded sequence. Core and browser regression assert the exact six-utterance language/text prefix; no repeated Chinese block before the first Vietnamese meaning. Validation/PR/deployment status in response.
