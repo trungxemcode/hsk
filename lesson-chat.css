@@ -13,9 +13,9 @@ body.drawer-open .lesson-chat-button,body.drawer-open .lesson-chat-panel,body.dr
 /* Keep iOS focus at the current zoom and fit the keyboard's visual viewport. */
 body.studio-enabled #lessonChatInput,body.studio-enabled #lessonSelectionInput{font-size:16px}
 .lesson-chat-panel[aria-busy=true] .lesson-chat-status{display:flex;align-items:center;gap:8px}
-.lesson-chat-panel[aria-busy=true] .lesson-chat-status::before{content:"";flex:none;width:16px;height:16px;border:2px solid var(--line-dark);border-top-color:var(--accent);border-radius:50%;animation:hsk-chat-spin .85s linear infinite;will-change:transform}
+.lesson-chat-panel[aria-busy=true] .lesson-chat-status::before{content:"";flex:none;width:16px;height:16px;border:2px solid var(--line-dark);border-top-color:var(--accent);border-radius:var(--radius-round);animation:hsk-chat-spin .85s linear infinite;will-change:transform}
 @keyframes hsk-chat-spin{to{transform:rotate(360deg)}}
 @media(max-width:700px),(pointer:coarse){
- .lesson-chat-panel{top:calc(var(--chat-view-top,0px) + env(safe-area-inset-top,0px) + 8px);bottom:auto;height:calc(var(--chat-view-height,100dvh) - env(safe-area-inset-top,0px) - 16px);max-height:560px;right:max(10px,env(safe-area-inset-right,0px));width:calc(100% - max(10px,env(safe-area-inset-right,0px)) - max(10px,env(safe-area-inset-left,0px)))}
+ .lesson-chat-panel{top:calc(var(--chat-view-top,0px) + env(safe-area-inset-top,0px) + 8px);bottom:auto;height:calc(var(--chat-view-height,100dvh) - env(safe-area-inset-top,0px) - 16px);max-height:min(560px,65dvh);right:max(10px,env(safe-area-inset-right,0px));width:calc(100% - max(10px,env(safe-area-inset-right,0px)) - max(10px,env(safe-area-inset-left,0px)))}
 }
 @media(prefers-reduced-motion:reduce){.lesson-chat-panel[aria-busy=true] .lesson-chat-status::before{animation-duration:2s}}

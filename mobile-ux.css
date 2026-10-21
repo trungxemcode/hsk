@@ -277,6 +277,6 @@ body.studio-enabled #aboutPanel .mobile-home-stats{display:block;margin-top:16px
 
 
 /* A progress ring remains legible without decorative pulsing. */
-.hsk-loading-spinner{border-radius:50%;will-change:transform}
+.hsk-loading-spinner{border-radius:var(--radius-round);will-change:transform}
 .hsk-loading-glyph{animation:none}
 @media(prefers-reduced-motion:reduce){.hsk-loading-spinner{animation:hsk-loader-spin 2s linear infinite!important}}
