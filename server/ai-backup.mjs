@@ -50,14 +50,17 @@ function aiSchemaMatches(value,s){
 // At most two sequential provider attempts. Never retry refusals or caller cancellation.
 export function createAiFailoverFetch(fetchFn,env,{
  timeoutMs=AI_TIMEOUTS.text,backupTimeoutMs=AI_TIMEOUTS.backup,
- preferSecondary=false,validateData=()=>true,onProvider=()=>{},onAttempt=()=>{}
+ preferSecondary=false,providerOnly=null,validateData=()=>true,onProvider=()=>{},onAttempt=()=>{}
 }={}){
  if(fetchFn.hskFailover)return fetchFn;
  const wrapped=async(url,init={})=>{
   if(!String(url).startsWith('https://generativelanguage.googleapis.com/v1beta/models/'))return fetchFn(url,init);
+  if(providerOnly==='gemini'){const response=await fetchFn(url,init);if(response.ok)onProvider('gemini');return response;}
+  if(providerOnly==='xkiro'&&!backupConfigured(env))return Response.json({error:{status:'UNAVAILABLE'}},{status:503});
   if(!backupConfigured(env)){const response=await fetchFn(url,init);if(response.ok)onProvider('gemini');return response;}
   let body;try{body=JSON.parse(init.body)}catch{return fetchFn(url,init)}
   const contents=body.contents||[];
+  if(providerOnly==='xkiro'&&contents.some(c=>c.parts?.some(p=>p.inlineData||p.fileData)))return Response.json({error:{status:'VIP_REQUIRED'}},{status:403});
   if(contents.some(c=>c.parts?.some(p=>p.inlineData||p.fileData))){const response=await fetchFn(url,init);if(response.ok)onProvider('gemini');return response;}
   const parent=init.signal;
   const stage=async(fn,ms)=>{
@@ -91,6 +94,7 @@ export function createAiFailoverFetch(fetchFn,env,{
   };
   let original;
   const order=preferSecondary?[['xkiro',xkiro,timeoutMs],['gemini',gemini,backupTimeoutMs]]:[['gemini',gemini,timeoutMs],['xkiro',xkiro,backupTimeoutMs]];
+  if(providerOnly)order.splice(0,order.length,...order.filter(([provider])=>provider===providerOnly));
   for(let i=0;i<order.length;i++){
    const [provider,call,ms]=order[i],started=Date.now();
    const report=(outcome,status=0)=>{try{onAttempt({provider,ms:Date.now()-started,outcome,status})}catch{}};
@@ -106,7 +110,8 @@ export function createAiFailoverFetch(fetchFn,env,{
  };
  wrapped.hskFailover=true;return wrapped;
 }
-export function createAiRoleFetch(fetchFn,env,{route,body,validateData,onProvider,onAttempt}={}){
+export function createAiRoleFetch(fetchFn,env,{route,body,accountRole,validateData,onProvider,onAttempt}={}){
+ if(accountRole){const providerOnly=['admin','vip'].includes(accountRole)||['/ocr','/handwriting-recognize'].includes(route)?'gemini':'xkiro';return createAiFailoverFetch(fetchFn,env,{providerOnly,preferSecondary:providerOnly==='xkiro',timeoutMs:route==='/reading-next'?60000:30000,backupTimeoutMs:route==='/reading-next'?60000:30000,validateData,onProvider,onAttempt});}
  const reading=route==='/reading-next',enabled=env.AI_TASK_ROUTING==='true',role=aiTaskRole(route,body);
  return createAiFailoverFetch(fetchFn,env,{
   preferSecondary:enabled&&role==='xkiro',

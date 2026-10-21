@@ -54,6 +54,7 @@ jobs:
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-guided-presentation-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-press-shape-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-shared-press-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-account-roles-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-home-overview-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-clean-ux-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-ai-loading-ui.cjs

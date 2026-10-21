@@ -1075,6 +1075,34 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "account-role-management",
+      "name": "Owner-managed VIP accounts and AI provider access",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/admin/admin.js",
+          "value": "adminAccountRoles"
+        },
+        {
+          "kind": "file",
+          "file": "server/account-roles.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/account-roles.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-account-roles-ui.cjs",
+          "value": ""
+        },
+        {"kind":"file","file":"server/image-quota.test.mjs","value":""},
+        {"kind":"contains","file":"server/ai-control.mjs","value":"user-image-daily"}
+      ]
     }
   ]
 }
