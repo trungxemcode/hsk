@@ -1025,13 +1025,170 @@
       "id": "gemini-voice-precache",
       "name": "Kho audio Kore xác thực Google và bảo vệ dữ liệu âm thanh",
       "checks": [
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"createVoicePrecacheHandler"},
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"decodeVoiceAudio"},
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"tts_generation_incomplete"},
-        {"kind":"contains","file":"tools/voice-cache-apps-script/WarmBatch.gs","value":"HSK_WARM_RETRY_AT"},
-        {"kind":"file","file":"server/voice-apps-script.test.mjs","value":""},
-        {"kind":"file","file":"server/voice-bundle.test.mjs","value":""},
-        {"kind":"file","file":"server/voice-tts.test.mjs","value":""}
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "createVoicePrecacheHandler"
+        },
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "decodeVoiceAudio"
+        },
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "tts_generation_incomplete"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/WarmBatch.gs",
+          "value": "HSK_WARM_RETRY_AT"
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-apps-script.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-bundle.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-tts.test.mjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "voice-fast-production-queue-recovery",
+      "name": "Recover FAST voice queue without replacing verified audio",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/CongestionRecovery.js",
+          "value": "function hskCongestionHeld_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/CongestionRecovery.js",
+          "value": "function hskCongestionSynthesizeTick_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/VoiceModelRotation.js",
+          "value": "shared.modelSlots"
+        },
+        {
+          "kind": "file",
+          "file": "archives/voice-auto-cloud-20261021/test-pronunciation.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "archives/voice-auto-cloud-20261021/test-worker-contract.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "voice-stable-cohort-and-sticky-keys",
+      "name": "Hold voice cohort until 30 verified words and retain eligible provider keys",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/StableAutoPolicy.js",
+          "value": "function hskStableCycleFilter_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/StableAutoPolicy.js",
+          "value": "function hskStableAsrSlot_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/VoiceModelRotation.js",
+          "value": "hskStablePreferTts_"
+        },
+        {
+          "kind": "file",
+          "file": "archives/voice-auto-cloud-20261021/test-stable-policy.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "voice-full50-master-gemini-judge",
+      "name": "One full50 TTS master, measured silence, blind ASR, Gemini adjudication, isolated rollout",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/FullBatch50.js",
+          "value": "function hskFull50Synthesize_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/FullBatch50.js",
+          "value": "function hskFull50Normalize_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/FullBatch50.js",
+          "value": "function hskFull50ValidateJudgment_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/FullBatch50Rollout.js",
+          "value": "gate==='PASS'"
+        },
+        {
+          "kind": "file",
+          "file": "archives/voice-auto-cloud-20261021/test-full50.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "archives/voice-auto-cloud-20261021/test-full50-worker.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "archives/voice-auto-cloud-20261021/worker-fixture/full50-worker.mjs",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "voice-one-producer-two-verifiers",
+      "name": "One TTS producer and two leased ASR consumers without duplicate queue work",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "archives/voice-parallel-1tts-2asr-20261021/ParallelVerify.js",
+          "value": "function hskPVProducerEnter_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-parallel-1tts-2asr-20261021/ParallelVerify.js",
+          "value": "function hskPVClaim_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-parallel-1tts-2asr-20261021/ParallelVerify.js",
+          "value": "function hskPVOutside_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-parallel-1tts-2asr-20261021/ParallelVerifyBatch.js",
+          "value": "hskAuto50ThirdPassMatch_"
+        },
+        {
+          "kind": "file",
+          "file": "archives/voice-parallel-1tts-2asr-20261021/test-parallel.cjs",
+          "value": ""
+        }
       ]
     }
   ]
