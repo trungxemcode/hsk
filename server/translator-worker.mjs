@@ -1,3 +1,4 @@
+import {qaBegin,qaFinish,qaRelease,qaUsage} from './tutor-cache.mjs';
 import { vocabulary } from './hsk-vocabulary.mjs';
 import { validateHandwritingSample, submitHandwritingSample } from './handwriting-samples.mjs';
 import { checkReadingBody, buildReadingStory, validReadingStory } from './reading-service.mjs';
@@ -27,7 +28,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-tts-audio-3-5-2';
+export const WORKER_REVISION='hsk-ai-cache-3-6-1';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';
@@ -42,8 +43,8 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
  const cooldowns=new Map();
  const geminiState={cursor:0,blocked:new Map()};
  const sourceCache=new Map();
- return async(request,env)=>{
-  const timings=[];let abuseLease=null,abuseUid='',responseStatus=500;
+ return async(request,env,ctx)=>{
+  const timings=[];let abuseLease=null,abuseUid='',responseStatus=500,qaSession=null;
   const keyFetch=createGeminiKeyFetch(rawFetchFn,env,{now,state:geminiState,onAttempt:entry=>timings.push(entry)});
   let fetchFn=createAiFailoverFetch(keyFetch,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
   const origin=request.headers.get('Origin')||'',allowed=(env.ALLOWED_ORIGINS||'https://trungxemcode.github.io').split(',').map(s=>s.trim());
@@ -52,7 +53,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
   // Server-to-server only: verified Google Apps Script identity, no browser CORS.
   if(new URL(request.url).pathname==='/voice-precache')return createVoicePrecacheHandler(rawFetchFn,keyFetch,now)(request,env);
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
-  Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider'});
+  Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider, X-HSK-AI-Cache'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
   const route=new URL(request.url).pathname,isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
   if(route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading)return reply({error:'Không tìm thấy dịch vụ.'},404);
@@ -122,6 +123,16 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    if(cooldowns.size>1000)for(const [uid,t] of cooldowns)if(t<=now())cooldowns.delete(uid);
    if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true')cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
    const level=body.hsk,model=env.GEMINI_MODEL||'gemini-3.5-flash-lite';
+   if(env.QA_CACHE_ENABLED==='true'&&['/ask','/lesson-ask','/dictionary-lookup','/dictionary-translate'].includes(route)){
+    qaSession=await qaBegin(route,body,account.localId,env,isAdmin);
+    headers['X-HSK-AI-Cache']=qaSession.state;
+    if(controller.signal.aborted)throw new DOMException('Canceled','AbortError');
+    if(qaSession.state==='hit'){
+     if(qaSession.provider)headers['X-HSK-AI-Provider']=qaSession.provider;
+     return reply(qaSession.value);
+    }
+    if(qaSession.state==='busy'){headers['Retry-After']='2';return reply({error:'Nội dung này đang được tra cứu. Hãy thử lại sau ít giây.',code:'AI_CACHE_IN_FLIGHT'},429);}
+   }
    let readingKey=null,readingLocked=false;
    if(isReading){
     if(!/^[a-z0-9.-]+$/.test(model))return reply({error:'Cấu hình AI chưa hợp lệ.'},503);
@@ -195,6 +206,8 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
     const payload=await response.json(),candidate=payload.candidates?.[0];if(candidate?.finishReason&&candidate.finishReason!=='STOP')return reply({error:'AI chưa dịch xong nhóm từ. Hãy thử lại.'},502);
     let data;try{data=JSON.parse((candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join(''));}catch{return reply({error:'Nhóm bản dịch chưa đúng định dạng.'},502);}
     const ids=new Set(body.entries.map(e=>e.id));if(!Array.isArray(data.translations)||data.translations.length!==ids.size||new Set(data.translations.map(t=>t?.id)).size!==ids.size||!data.translations.every(t=>t&&ids.has(t.id)&&typeof t.meaning==='string'&&t.meaning.trim()&&t.meaning.length<=240))return reply({error:'Bản dịch thiếu hoặc sai mục từ.'},502);
+    await qaUsage(env,payload);
+    await qaFinish(env,qaSession,{translations:data.translations,source:'ai',language:'vi'},headers['X-HSK-AI-Provider'],{rawFetch:rawFetchFn,ctx,signal:controller.signal});
     return reply({translations:data.translations,source:'ai',language:'vi'});
    }
    const isDictionary=isDictionaryRoute||isLessonAsk&&body.lesson.id==='open-dictionary';
@@ -207,6 +220,8 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
     const payload=await response.json(),candidate=payload.candidates?.[0];if(candidate?.finishReason&&candidate.finishReason!=='STOP')return reply({error:'AI chưa hoàn thành tra cứu. Hãy thử lại với từ/cụm ngắn hơn.'},502);
     let data;try{data=JSON.parse((candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join(''));}catch{return reply({error:'AI tra cứu chưa trả kết quả hợp lệ.'},502);}
     if(typeof data.answer!=='string'||!data.answer.trim()||data.answer.length>5000||!Array.isArray(data.terms)||data.terms.length>6||!data.terms.every(t=>t&&['han','pinyin','meaning'].every(k=>typeof t[k]==='string'&&t[k].trim()&&t[k].length<600)&&/\p{Script=Han}/u.test(t.han)))return reply({error:'AI tra cứu chưa trả kết quả đầy đủ.'},502);
+    await qaUsage(env,payload);
+    await qaFinish(env,qaSession,{answer:data.answer,terms:data.terms,source:'ai',scope:'general'},headers['X-HSK-AI-Provider'],{rawFetch:rawFetchFn,ctx,signal:controller.signal});
     return reply({answer:data.answer,terms:data.terms,source:'ai',scope:'general'});
    }
    if(isAsk){
@@ -219,6 +234,8 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
     if(candidate?.finishReason&&candidate.finishReason!=='STOP')return reply({error:'AI chưa hoàn thành câu trả lời. Hãy thử hỏi ngắn hơn.'},502);
     let answer;try{answer=JSON.parse((candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('')).answer;}catch{return reply({error:'AI trả lời chưa đúng định dạng. Hãy thử lại.'},502);}
     if(typeof answer!=='string'||!answer.trim()||answer.length>5000)return reply({error:'Câu trả lời chưa đầy đủ. Hãy thử lại.'},502);
+    await qaUsage(env,payload);
+    await qaFinish(env,qaSession,{answer},headers['X-HSK-AI-Provider'],{rawFetch:rawFetchFn,ctx,signal:controller.signal});
     return reply({answer});
    }
    const list=[...levels[level]].join('、');
@@ -232,7 +249,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    if(!['chinese','pinyin','explanation','note'].every(k=>typeof result[k]==='string'&&result[k].length<=4000)||!result.chinese.trim()||!result.pinyin.trim())return reply({error:'Bản dịch chưa đầy đủ. Hãy thử lại.'},502);
    if(zhToVi&&(typeof result.vietnamese!=='string'||!result.vietnamese.trim()||result.vietnamese.length>4000))return reply({error:'Bản dịch tiếng Việt chưa đầy đủ.'},502);
    return reply({direction:zhToVi?'zh-vi':'vi-zh',...(zhToVi?{vietnamese:result.vietnamese}:{}),chinese:zhToVi?body.text.trim():result.chinese,pinyin:result.pinyin,explanation:result.explanation,note:result.note,hsk:level,outOfVocabulary:outOfVocabulary(zhToVi?body.text.trim():result.chinese,level)});
-  }catch(error){return reply({error:error.name==='AbortError'?(isOcr?'Gemini chưa đọc xong ảnh. Hãy chọn vùng có chữ và thử lại.':'Dịch quá lâu. Hãy thử lại.'):'Không kết nối được dịch vụ dịch.'},504);}finally{clearTimeout(timer);request.signal.removeEventListener('abort',abortRequest);if(abuseLease)await controlCall(env,'abuse-finish',{uid:abuseUid,lease:abuseLease,status:request.signal.aborted?499:responseStatus}).catch(()=>console.warn('hsk-ai-guard-release-failed'));}
+  }catch(error){return reply({error:error.name==='AbortError'?(isOcr?'Gemini chưa đọc xong ảnh. Hãy chọn vùng có chữ và thử lại.':'Dịch quá lâu. Hãy thử lại.'):'Không kết nối được dịch vụ dịch.'},504);}finally{clearTimeout(timer);request.signal.removeEventListener('abort',abortRequest);await qaRelease(env,qaSession);if(abuseLease)await controlCall(env,'abuse-finish',{uid:abuseUid,lease:abuseLease,status:request.signal.aborted?499:responseStatus}).catch(()=>console.warn('hsk-ai-guard-release-failed'));}
  };
 }
 export default {fetch:createHandler()};

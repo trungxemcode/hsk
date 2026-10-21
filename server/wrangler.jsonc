@@ -6,7 +6,7 @@
   "workers_dev": true,
   "placement": { "region": "gcp:us-east4" },
   "keep_vars": true,
-  "vars": { "AI_CONTROL_REQUIRED": "true", "AI_ABUSE_ENABLED": "true", "AI_REQUIRE_VERIFIED_EMAIL": "true", "AI_PAUSED": "false", "AI_GLOBAL_DAILY_LIMIT": "180", "AI_GLOBAL_MINUTE_LIMIT": "10", "AI_USER_DAILY_LIMIT": "50", "AI_USER_QUERY_DAILY_LIMIT": "35", "AI_USER_READING_DAILY_LIMIT": "15", "ADMIN_UIDS": "BIvUyItDYJWcLvlhhtYFyj5csBH2", "AI_BACKUP_ENABLED": "true", "AI_TASK_ROUTING": "true", "SECONDARY_AI_PROVIDER": "xkiro", "SECONDARY_AI_MODEL": "qwen/qwen-plus-2025-07-28:free" },
+  "vars": { "QA_CACHE_ENABLED": "true", "QA_SHADOW_MODE": "observe", "QA_SHADOW_DAILY_LIMIT": "20", "AI_CONTROL_REQUIRED": "true", "AI_ABUSE_ENABLED": "true", "AI_REQUIRE_VERIFIED_EMAIL": "true", "AI_PAUSED": "false", "AI_GLOBAL_DAILY_LIMIT": "180", "AI_GLOBAL_MINUTE_LIMIT": "10", "AI_USER_DAILY_LIMIT": "50", "AI_USER_QUERY_DAILY_LIMIT": "35", "AI_USER_READING_DAILY_LIMIT": "15", "ADMIN_UIDS": "BIvUyItDYJWcLvlhhtYFyj5csBH2", "AI_BACKUP_ENABLED": "true", "AI_TASK_ROUTING": "true", "SECONDARY_AI_PROVIDER": "xkiro", "SECONDARY_AI_MODEL": "qwen/qwen-plus-2025-07-28:free" },
   "durable_objects": { "bindings": [{ "name": "AI_CONTROL", "class_name": "HSkaIControl" }] },
   "migrations": [{ "tag": "ai_budget_control_v1", "new_sqlite_classes": ["HSkaIControl"] }]
 }
