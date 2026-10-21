@@ -104,7 +104,13 @@
           "kind": "file",
           "file": "tools/check-search-tabs-ui.cjs",
           "value": ""
-        }
+        },
+        {"kind":"contains","file":"src/utils/text.js","value":"const fold ="},
+        {"kind":"contains","file":"src/utils/format.js","value":"function memoryDate("},
+        {"kind":"contains","file":"src/modules/dictionary/search-core.js","value":"function splitSenses("},
+        {"kind":"contains","file":"src/ui/dictionary-relations.js","value":"function allPairExplanation("},
+        {"kind":"file","file":"server/app-helpers.test.mjs","value":""},
+        {"kind":"file","file":"tools/check-module-loading-ui.cjs","value":""}
       ]
     },
     {

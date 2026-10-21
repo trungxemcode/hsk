@@ -32,6 +32,14 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(collect_assets(self.root), self.catalog['files'] +
                          ['content/audio.mp3', 'content/drive-hsk/H10001.json'])
 
+    def test_relocated_loader_pairs_use_the_configured_data_root(self):
+        for name in ('data.js', 'data.js.gz'):
+            (self.root / name).rename(self.root / 'content' / name)
+        self.catalog['files'] = ['index.html', 'content/data.js', 'content/data.js.gz']
+        self.save()
+        (self.root / 'loader.js').write_text("const dataRoot='./content/';const names=['data'];")
+        self.assertIn('content/data.js.gz', collect_assets(self.root))
+
     def test_missing_file_stops_build(self):
         (self.root / 'data.js').unlink()
         with self.assertRaisesRegex(ValueError, 'Missing or unsafe'): collect_assets(self.root)

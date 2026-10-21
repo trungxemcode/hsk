@@ -87,6 +87,8 @@ def ensure_release_integrity(root=ROOT):
     # catalog. External CDNs and hash/query suffixes are never required.
     index = (root / 'index.html').read_text(encoding='utf-8')
     refs = re.findall(r'<(?:script|link)\b[^>]*(?:src|href)=[\'"]([^\'"]+)[\'"]', index, re.I)
+    loader = (root / 'loader.js').read_text(encoding='utf-8')
+    refs += re.findall(r"scriptFile\(['\"]([^'\"]+)['\"]\)", loader)
     for ref in refs:
         parsed = urlparse(ref)
         if parsed.scheme or parsed.netloc or ref.startswith('/'):

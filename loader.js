@@ -10,6 +10,6 @@
  try{
   const texts=await Promise.all(names.map(dataText));
   for(let i=0;i<names.length;i++){status.textContent='Dữ liệu học HSK ('+(i+1)+'/'+names.length+') đang load…';window.HSKLoading?.show('Dữ liệu học HSK đang load...','Đang nạp gói dữ liệu '+(i+1)+' / '+names.length+'...');if(texts[i]!==null){const el=document.createElement('script');el.textContent=texts[i];document.body.append(el);}else await scriptFile(dataRoot+names[i]+'.js');}
-  await scriptFile('./src/modules/dictionary/open-dictionary-core.js');await scriptFile('./app.js?v=push-2');await scriptFile('./src/modules/dictionary/open-dictionary.js');await scriptFile('./push.js?v=push-2');status.hidden=true;window.HSKLoading?.hide(true);
+  await scriptFile('./src/modules/dictionary/open-dictionary-core.js');await scriptFile('./src/utils/text.js');await scriptFile('./src/utils/format.js');await scriptFile('./src/modules/dictionary/search-core.js');await scriptFile('./src/ui/dictionary-relations.js');await scriptFile('./app.js?v=push-2');await scriptFile('./src/modules/dictionary/open-dictionary.js');await scriptFile('./push.js?v=push-2');status.hidden=true;window.HSKLoading?.hide(true);
  }catch(e){status.textContent='Chưa tải được dữ liệu. Kiểm tra mạng và việc đã tải đủ các file dữ liệu lên GitHub. ';const retry=document.createElement('button');retry.textContent='Tải lại';retry.onclick=()=>location.reload();status.append(retry);window.HSKLoading?.hide(true);}
 })();

@@ -136,7 +136,11 @@
     "lesson-guided.css",
     "src/modules/reading/real-reading-variety-core.js",
     "src/modules/reading/real-reading.js",
-    "real-reading.css"
+    "real-reading.css",
+    "src/utils/text.js",
+    "src/utils/format.js",
+    "src/modules/dictionary/search-core.js",
+    "src/ui/dictionary-relations.js"
   ],
   "aliases": {
     "backup-core.js": "src/modules/backup/backup-core.js",
