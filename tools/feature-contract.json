@@ -1033,6 +1033,37 @@
         {"kind":"file","file":"server/voice-bundle.test.mjs","value":""},
         {"kind":"file","file":"server/voice-tts.test.mjs","value":""}
       ]
+    },
+    {
+      "id": "voice-fast-production-queue-recovery",
+      "name": "Recover FAST voice queue without replacing verified audio",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/CongestionRecovery.js",
+          "value": "function hskCongestionHeld_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/CongestionRecovery.js",
+          "value": "function hskCongestionSynthesizeTick_"
+        },
+        {
+          "kind": "contains",
+          "file": "archives/voice-auto-cloud-20261021/VoiceModelRotation.js",
+          "value": "shared.modelSlots"
+        },
+        {
+          "kind": "file",
+          "file": "archives/voice-auto-cloud-20261021/test-pronunciation.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "archives/voice-auto-cloud-20261021/test-worker-contract.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }
