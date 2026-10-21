@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SITE = 'https://trungxemcode.github.io/hsk/'
 CRITICAL_FILES = (
     'index.html', 'offline.js', 'offline-worker.js',
-    'OneSignalSDKWorker.js', 'real-reading.js', 'push.js',
+    'OneSignalSDKWorker.js', 'src/modules/reading/real-reading.js', 'push.js',
 )
 
 

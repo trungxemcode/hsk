@@ -33,7 +33,7 @@ class FeaturePreservationTests(TestCase):
   old=next(f for f in corrupted['features'] if f['id']=='notebook-factory')
   old['checks'].pop()
   with self.assertRaisesRegex(ValueError,'FEATURE CONTRACT WEAKENED'):
-   mod.ensure_no_unapproved_removals(corrupted,baseline,approvals,['notebook-factory.js'])
+   mod.ensure_no_unapproved_removals(corrupted,baseline,approvals,['src/modules/notebook/notebook-factory.js'])
 
  def test_fails_when_code_deleted_but_registry_kept(self):
   corrupted=copy.deepcopy(baseline)
@@ -70,7 +70,7 @@ class FeaturePreservationTests(TestCase):
   damaged=copy.deepcopy(baseline)
   feature=next(f for f in damaged['features'] if f['id']=='real-reading')
   feature['checks']=[c for c in feature['checks'] if not (
-    c['file']=='practice-selector.js' and c['value']=="['real-reading'")]
+    c['file']=='src/modules/practice/practice-selector.js' and c['value']=="['real-reading'")]
   with self.assertRaisesRegex(ValueError,'New/unprotected practice mode'):
    mod.inspect_implementation(damaged)
 
@@ -93,7 +93,7 @@ class FeaturePreservationTests(TestCase):
 
  def test_baseline_is_append_only_without_approval(self):
   extended=copy.deepcopy(baseline)
-  extended['features'].append({'id':'new-feature','name':'Additive','checks':[{'kind':'file','file':'studio.js','value':''}]})
+  extended['features'].append({'id':'new-feature','name':'Additive','checks':[{'kind':'file','file':'src/modules/shell/studio.js','value':''}]})
   self.assertEqual(mod.ensure_no_unapproved_removals(extended,baseline,approvals,['new-feature.js']),len(baseline['features']))
 
  def test_approval_changes_are_only_separate_pull_requests(self):

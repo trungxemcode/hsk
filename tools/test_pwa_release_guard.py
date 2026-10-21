@@ -36,7 +36,7 @@ class PwaReleaseGuardTests(unittest.TestCase):
     def test_assets_classify_ui_and_backend(self):
         names = set(guard.ensure_release_integrity()['assets'])
         self.assertTrue(guard.is_client_change('index.html', names))
-        self.assertTrue(guard.is_client_change('real-reading.js', names))
+        self.assertTrue(guard.is_client_change('src/modules/reading/real-reading.js', names))
         self.assertTrue(guard.is_client_change('fresh-client-feature.js', names))
         self.assertFalse(guard.is_client_change('server/reading-service.mjs', names))
         self.assertFalse(guard.is_client_change('docs/ai/TASK_STATE.md', names))

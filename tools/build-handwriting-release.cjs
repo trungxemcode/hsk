@@ -1,4 +1,4 @@
-const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),learning=require('../handwriting-learning.js');
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),learning=require('../src/modules/handwriting/handwriting-learning.js');
 function buildRelease(input,characters,revision){
  if(!/^[a-zA-Z0-9_.-]{1,80}$/.test(revision))throw Error('Invalid release revision');
  const allowed=new Set(Array.from(characters));

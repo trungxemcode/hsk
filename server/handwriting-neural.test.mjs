@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import {webcrypto} from 'node:crypto';
-import core from '../handwriting-neural-core.js';
+import core from '../src/modules/handwriting/handwriting-neural-core.js';
 
 test('single glyph decoder filters supported characters, skips blank and ranks max CTC evidence',()=>{
  const out={dims:[1,2,4],data:Float32Array.from([.9,.05,.04,.01,.1,.2,.3,.4])};
@@ -34,7 +34,7 @@ function environment({corrupt=false,cached=false}={}){
   const config={assets:Object.fromEntries(['runtime','module','wasm','model'].map(name=>[name,{url:'https://assets.example/'+name,sha256:sha,bytes:bytes.length,type:'application/octet-stream'}]))};
   if(cached)for(const name of Object.keys(config.assets))items.set(config.assets[name].url,new Response(bytes));
   ctx.fetch=async url=>{requests.push(String(url));if(url==='./handwriting-neural-config.json')return Response.json(config);if(url==='./handwriting-neural-characters.json')return Response.json(['','你']);return new Response(corrupt?'wrong':bytes);};
-  vm.createContext(ctx);vm.runInContext(fs.readFileSync(new URL('../handwriting-neural.js',import.meta.url),'utf8'),ctx);
+  vm.createContext(ctx);vm.runInContext(fs.readFileSync(new URL('../src/modules/handwriting/handwriting-neural.js',import.meta.url),'utf8'),ctx);
  };
  return {ctx,requests,items};
 }
@@ -55,7 +55,7 @@ test('worker uses enabled neural results and falls back safely after inference f
   postMessage:message=>{messages.push(message);if(message.type==='ready')readyResolve();}
  };
  ctx.self=ctx;vm.createContext(ctx);
- ctx.importScripts=(...files)=>{for(const file of files){if(file==='./handwriting-neural.js'){ctx.HSKHandwritingNeural={load:async()=>true,recognize:async()=>{if(fail)throw Error('runtime failure');return [{character:'你',score:.9}];}};}else vm.runInContext(fs.readFileSync(new URL('../'+file.slice(2),import.meta.url),'utf8'),ctx);}};
+ ctx.importScripts=(...files)=>{for(const file of files){if(file==='./src/modules/handwriting/handwriting-neural.js'){ctx.HSKHandwritingNeural={load:async()=>true,recognize:async()=>{if(fail)throw Error('runtime failure');return [{character:'你',score:.9}];}};}else vm.runInContext(fs.readFileSync(new URL('../'+file.slice(2),import.meta.url),'utf8'),ctx);}};
  vm.runInContext(fs.readFileSync(new URL('../handwriting-worker.js',import.meta.url),'utf8'),ctx);await ready;
  await ctx.onmessage({data:{type:'neural-enable',enabled:true,download:false}});
  const query={type:'recognize',id:1,strokes:[[[0,0],[1,1]],[[1,0],[0,1]]],samples:[]};

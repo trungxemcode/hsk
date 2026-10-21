@@ -1,4 +1,4 @@
-const assert=require('node:assert/strict'),C=require('../real-reading-variety-core.js');
+const assert=require('node:assert/strict'),C=require('../src/modules/reading/real-reading-variety-core.js');
 const text=(seed)=>[
   {hanzi:'小李今天下班以后要去超市买菜，他的朋友想一起做饭。'+seed},
   {hanzi:'他们准备买米饭、鸡蛋和一些新鲜的水果，然后回家。'},

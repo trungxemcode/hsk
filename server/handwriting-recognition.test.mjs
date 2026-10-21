@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import core from '../handwriting-core.js';
-import learning from '../handwriting-learning.js';
+import core from '../src/modules/handwriting/handwriting-core.js';
+import learning from '../src/modules/handwriting/handwriting-learning.js';
 import fs from 'node:fs';
 import fixturesModule from '../tools/handwriting-fixtures.cjs';
 const {fixtures}=fixturesModule;

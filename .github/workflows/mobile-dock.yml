@@ -1,7 +1,7 @@
 name: Mobile dock touch checks
 on:
   pull_request:
-    paths: ['mobile-ux*', 'index.html', 'mobile-dock.js', 'studio-layout.css', 'tools/check-mobile-dock.cjs', '.github/workflows/mobile-dock.yml']
+    paths: ['src/**', 'content/data/**', 'loader.js', 'tools/pwa-assets.json', 'mobile-ux*', 'index.html', 'mobile-dock.js', 'studio-layout.css', 'tools/check-mobile-dock.cjs', '.github/workflows/mobile-dock.yml']
 permissions:
   contents: read
 jobs:

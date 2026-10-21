@@ -25,7 +25,7 @@ for entry in ET.fromstring(raw).findall('character'):
     if strokes and all(strokes):
         rows.append({'label': label, 'strokes': strokes})
 script = """
-const fs=require('node:fs'),core=require('./handwriting-core.js'),learning=require('./handwriting-learning.js');
+const fs=require('node:fs'),core=require('./src/modules/handwriting/handwriting-core.js'),learning=require('./src/modules/handwriting/handwriting-learning.js');
 const seen=new Set(),samples=[];
 for(const row of JSON.parse(fs.readFileSync(0,'utf8'))){
  const bitmap=learning.pack(core.rasterize(row.strokes));
