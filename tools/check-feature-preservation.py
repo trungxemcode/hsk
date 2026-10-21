@@ -148,7 +148,36 @@ def parse_approvals(data):
     return result
 
 
-def ensure_no_unapproved_removals(current, base, old_approvals, changed):
+def exact_relocation(base_ref, old, new, root=ROOT):
+    """Only an unmodified, deleted-source move to a fresh tracked path qualifies.
+
+    No manifest/flag can authorize a weaker check. Read the old bytes from Git,
+    not from a caller-supplied hash, and compare against the actual destination.
+    """
+    if not base_ref or old == new:
+        return False
+    root = root.resolve()
+    source, target = root / old, root / new
+    if source.exists() or source.is_symlink() or target.is_symlink() or not target.is_file():
+        return False
+    if not target.resolve().is_relative_to(root):
+        return False
+    prefix = ['git', '-C', str(root)]
+    # A pre-existing destination is a replacement, not a relocation.
+    exists = subprocess.run(prefix + ['cat-file', '-e', base_ref + ':' + new],
+                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    if exists.returncode == 0:
+        return False
+    try:
+        old_bytes = subprocess.check_output(prefix + ['show', base_ref + ':' + old],
+                                            stderr=subprocess.DEVNULL)
+    except subprocess.CalledProcessError:
+        return False
+    # Git may check text out with CRLF on Windows. No other changes are allowed.
+    return old_bytes.replace(b'\r\n', b'\n') == target.read_bytes().replace(b'\r\n', b'\n')
+
+
+def ensure_no_unapproved_removals(current, base, old_approvals, changed, base_ref=None, root=ROOT):
     old = validate_contract(base)
     now = validate_contract(current)
     # A separate first PR must add a documented authorization to main. The
@@ -161,7 +190,16 @@ def ensure_no_unapproved_removals(current, base, old_approvals, changed):
                                  '. First get a separately merged, owner-approved removal authorization.')
             continue
         curr = now[fid]
-        removed_checks = [ch for ch in prev['checks'] if ch not in curr['checks']]
+        removed_checks = []
+        for check in prev['checks']:
+            if check in curr['checks']:
+                continue
+            candidates = [candidate for candidate in curr['checks']
+                          if candidate['kind'] == check['kind']
+                          and candidate['value'] == check['value']
+                          and exact_relocation(base_ref, check['file'], candidate['file'], root)]
+            if len(candidates) != 1:
+                removed_checks.append(check)
         if removed_checks or curr['name'] != prev['name']:
             if fid not in permissions:
                 raise ValueError('FEATURE CONTRACT WEAKENED: ' + fid + '. Removal approval required.')
@@ -189,7 +227,7 @@ def main():
             previous_approvals = from_base(opts.base, APPROVALS)
             if previous_approvals is None:
                 raise ValueError('Unable to read approved removals from base')
-            kept = ensure_no_unapproved_removals(current, earlier, previous_approvals, changed_files(opts.base))
+            kept = ensure_no_unapproved_removals(current, earlier, previous_approvals, changed_files(opts.base), base_ref=opts.base)
             print('PASS append-only feature contract:', kept, 'existing features preserved')
         print('PASS feature preservation:', a, 'capabilities;', checks, 'implementation guards')
     except (ValueError, OSError, KeyError, TypeError, json.JSONDecodeError) as exc:
