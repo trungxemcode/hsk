@@ -62,11 +62,12 @@ function hskVoiceTtsHealthTick_(p,control){
   try{
    var res=hskVocabCall_(token,{action:'status',model:model}),available=0;
    if(Array.isArray(res.slots)){
-    res.slots.forEach(function(s){
-     if(Number.isInteger(s.slot)&&!Number(s.retryAfter||0)&&
+    var slots=Array.isArray(res.modelSlots)?res.modelSlots.filter(function(s){return s.model===model;}):res.slots;
+    slots.forEach(function(s){
+     if(Number.isInteger(s.slot)&&s.slot>=1&&s.slot<=12&&!Number(s.retryAfter||0)&&
       Number(p.getProperty('HSK_VOCAB_PAIR_'+s.slot+'_'+model+'_AFTER')||0)<=now)available++;
     });
-    value=String(available)+'_READY_SLOTS_OF_'+res.slots.length;
+    value=String(available)+'_READY_SLOTS_OF_'+slots.length;
    }
   }catch(e){value='STATUS_ERROR_'+String(e.message||'worker').replace(/[^a-z0-9_]/gi,'_').slice(0,42);}
   rows.push(['Model_'+tag+'_health',value]);
