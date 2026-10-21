@@ -1,6 +1,6 @@
 const fs=require('node:fs'), vm=require('node:vm'), assert=require('node:assert/strict'), cp=require('node:child_process'), zlib=require('node:zlib'), crypto=require('node:crypto');
 const ctx={};vm.createContext(ctx);
-for(const name of ['words','dictionarySupplement','checkedPracticeExamples'])vm.runInContext(fs.readFileSync(name+'.js','utf8')+';globalThis.'+name+'Data='+name,ctx);
+for(const name of ['words','dictionarySupplement','checkedPracticeExamples'])vm.runInContext(fs.readFileSync('content/data/'+name+'.js','utf8')+';globalThis.'+name+'Data='+name,ctx);
 const words=ctx.wordsData,supp=ctx.dictionarySupplementData,examples=ctx.checkedPracticeExamplesData;
 const old={};vm.createContext(old);vm.runInContext(cp.execFileSync('git',['show','dfdd13080d47e4e944c47950f7ed2659964cd44b:words.js'],{encoding:'utf8'})+';globalThis.data=words',old);
 for(let i=0;i<old.data.length;i++)assert.equal(JSON.stringify(words[i]),JSON.stringify(old.data[i]),'Existing word changed: '+old.data[i].han);
@@ -9,7 +9,7 @@ assert.equal(new Set(words.map(key)).size,words.length,'Duplicate learning keys'
 const added=words.slice(old.data.length);assert.equal(added.length,83);
 assert.equal(added.filter(w=>w.vocabularyProvenance.kind==='hanzii-lexical-check').length,76);
 for(const w of added){const x=examples.entries[key(w)];assert.equal(x.examples.length,3);for(const e of x.examples)for(const k of ['cn','pin','vi'])assert.ok(e[k]);if(w.entryKind==='vocabulary')assert.equal(x.checkedAgainst,w.vocabularyProvenance.url);else assert.equal(x.checkedAgainst,null);}
-for(const name of ['words','dictionarySupplement','checkedPracticeExamples'])assert.deepEqual(zlib.gunzipSync(fs.readFileSync(name+'.js.gz')),fs.readFileSync(name+'.js'));
+for(const name of ['words','dictionarySupplement','checkedPracticeExamples'])assert.deepEqual(zlib.gunzipSync(fs.readFileSync('content/data/'+name+'.js.gz')),fs.readFileSync('content/data/'+name+'.js'));
 const catalog=JSON.parse(fs.readFileSync('lessons-data.json'));const aliases=new Map([['贏','赢'],['內容','内容'],['勺（子）','勺子']]);const hans=new Set(words.map(w=>w.han));
 for(const course of catalog.courses.filter(c=>c.hsk<=2))for(const l of course.lessons)for(const han of l.words)assert.ok(hans.has(aliases.get(han)||han),'Missing entry '+han);
 let long=0,dialogues=0,questions=0,grammar=0;

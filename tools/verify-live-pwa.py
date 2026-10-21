@@ -46,7 +46,8 @@ def inspect(site, manifest, fetch_fn=fetch):
         if Path(name).suffix.lower() not in ('.png', '.gz', '.webp', '.mp3'):
             local = local.replace(b'\r\n', b'\n')
         public = fetch_fn(urllib.parse.urljoin(site, name) + '?check=' + nonce)
-        public = public.replace(b'\r\n', b'\n')
+        if Path(name).suffix.lower() not in ('.png', '.gz', '.webp', '.mp3'):
+            public = public.replace(b'\r\n', b'\n')
         if hashlib.sha256(public).digest() != hashlib.sha256(local).digest():
             raise ValueError('Public Pages asset out of sync: ' + name)
     return manifest['version']

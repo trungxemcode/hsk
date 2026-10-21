@@ -1,7 +1,7 @@
 // Reproduce the published lesson payload, then pin it without shipping learner data.
 const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
 const root=path.resolve(__dirname,'..'),read=n=>fs.readFileSync(path.join(root,n),'utf8');
-const c={};vm.createContext(c);for(const n of ['words','exampleMetadata','checkedPracticeExamples','dictionarySupplement'])vm.runInContext(read(n+'.js')+'\nglobalThis.'+n+'='+n+';',c);
+const c={};vm.createContext(c);for(const n of ['words','exampleMetadata','checkedPracticeExamples','dictionarySupplement'])vm.runInContext(read('content/data/'+n+'.js')+'\nglobalThis.'+n+'='+n+';',c);
 for(const w of c.words){const key=`${w.hsk}|${w.han}|${w.pin}`;w.learningKey=key;Object.assign(w,c.exampleMetadata.corrections[key]||{});let base=w.mean;const m=base.match(/^([^()]+)\(([^()]+)\)\s*$/);if(m&&m[1].trim().toLocaleLowerCase('vi')===w.hv.toLocaleLowerCase('vi'))base=m[2];w.mean=[...new Set([base,...(c.dictionarySupplement.entries[key]?.meanings||[]).map(x=>x.gloss),...(c.checkedPracticeExamples.entries[key]?.meanings||[]),c.dictionarySupplement.entries[key]?.example?.meaning,c.exampleMetadata.original[key]?.meaning].filter(Boolean))].join('; ');}
 const index=new Map();for(const w of c.words)for(const han of new Set([w.han,...w.han.split(/[()（）]/).map(s=>s.trim()).filter(Boolean)])){const xs=index.get(han)||[];xs.push(w);index.set(han,xs);}
 const aliases=new Map([['贏','赢'],['內容','内容'],['勺（子）','勺子']]);
