@@ -1033,6 +1033,42 @@
         {"kind":"file","file":"server/voice-bundle.test.mjs","value":""},
         {"kind":"file","file":"server/voice-tts.test.mjs","value":""}
       ]
+    },
+    {
+      "id": "tutor-qa-cost-cache",
+      "name": "Scoped exact AI lookup cache and observe-only semantic pilot",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "server/tutor-cache.mjs",
+          "value": "export async function qaDescriptor"
+        },
+        {
+          "kind": "contains",
+          "file": "server/tutor-cache.mjs",
+          "value": "servedSemantic:false"
+        },
+        {
+          "kind": "contains",
+          "file": "server/tutor-cache-store.mjs",
+          "value": "staleWritesRejected"
+        },
+        {
+          "kind": "contains",
+          "file": "server/translator-worker.mjs",
+          "value": "qaBegin(route,body,account.localId,env,isAdmin)"
+        },
+        {
+          "kind": "file",
+          "file": "server/tutor-cache.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/patch-tutor-cache-live.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }
