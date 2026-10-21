@@ -67,5 +67,3 @@ function detailedPairExplanation(w,item){
  box.append(relationElement('p',guide.takeaway));
  const sources=relationElement('div','','source-links');for(const [title,url] of [['Hanzii: 爱','https://hanzii.net/search/word/%E7%88%B1?hl=vi'],['Hanzii: 喜','https://hanzii.net/search/word/%E5%96%9C?hl=vi'],['Đối chiếu thêm: 喜 · Hán Điển','https://zdic.net/hans/%E5%96%9C']]){const a=relationElement('a',title);a.href=url;a.target='_blank';a.rel='noopener noreferrer';sources.append(a);}box.append(sources);return box;
 }
-
-

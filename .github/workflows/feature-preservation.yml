@@ -83,6 +83,7 @@ jobs:
         run: |
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-feature-runtime.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-module-loading-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-drive-images-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-backup-relocation-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-pwa-relocation-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-lesson-picker-ui.cjs
