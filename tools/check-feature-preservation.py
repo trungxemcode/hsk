@@ -116,7 +116,7 @@ def inspect_implementation(data, root=ROOT):
                       for check in feat['checks'] if check['kind'] == 'data_go'}
     for route in sorted(html.routes - covered_routes):
         failures.append('New/unprotected navigation route: ' + route)
-    chooser = (root / 'practice-selector.js').read_text(encoding='utf-8')
+    chooser = (root / 'src/modules/practice/practice-selector.js').read_text(encoding='utf-8')
     match = re.search(r'const MODES=\[(.*?)\];', chooser, re.S)
     if not match:
         failures.append('Practice mode registry MODES has disappeared')
@@ -124,7 +124,7 @@ def inspect_implementation(data, root=ROOT):
         mode_names = set(re.findall(r"\['([^']+)'", match.group(1)))
         guarded_modes = {check['value'][2:-1] for feat in ids.values()
                          for check in feat['checks']
-                         if check['kind'] == 'contains' and check['file'] == 'practice-selector.js'
+                         if check['kind'] == 'contains' and check['file'] == 'src/modules/practice/practice-selector.js'
                          and check['value'].startswith("['")}
         for mode in sorted(mode_names - guarded_modes):
             failures.append('New/unprotected practice mode: ' + mode)

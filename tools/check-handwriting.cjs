@@ -2,7 +2,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
 const source=process.argv[2];if(!source)throw Error('Usage: node tools/check-handwriting.cjs model.json [report.json]');
 const data=JSON.parse(fs.readFileSync(source)),start=performance.now(),templates=core.prepare(data),prepareMs=performance.now()-start;
 // Optional licensed external release; geometric fixtures below remain independent.
-if(process.argv[4]){const learning=require('../handwriting-learning.js'),release=JSON.parse(fs.readFileSync(process.argv[4]));for(const sample of release.samples)templates.push(core.fromBitmap(sample.label,learning.unpack(sample.bitmap),'published'));}
+if(process.argv[4]){const learning=require('../src/modules/handwriting/handwriting-learning.js'),release=JSON.parse(fs.readFileSync(process.argv[4]));for(const sample of release.samples)templates.push(core.fromBitmap(sample.label,learning.unpack(sample.bitmap),'published'));}
 // Independently drawn geometric handwriting; these are not copied from model medians.
 const {fixtures}=require('./handwriting-fixtures.cjs');
 let seed=9173;function random(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;}

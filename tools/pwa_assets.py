@@ -57,7 +57,10 @@ def collect_assets(root):
         raise ValueError('Cannot verify loader data names')
     # Existing loader uses single-quoted identifiers, not arbitrary JS expressions.
     names = json.loads(match[1].replace("'", '"'))
+    prefix_match = re.search(r"const dataRoot='([^']+)';", loader)
+    prefix = prefix_match[1].removeprefix('./') if prefix_match else ''
     for name in names:
+        name = prefix + name
         for suffix in ('.js', '.js.gz'):
             if name + suffix not in files:
                 raise ValueError('Missing loader data variant: ' + name + suffix)

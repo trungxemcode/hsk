@@ -12,11 +12,17 @@ The older `C:\New folder\hsk` is a secondary checkout, not a separate app or sou
 5. Verify affected behavior, commit to an appropriate feature branch, and open a PR. Merge/deploy only when the user authorizes it. Never silently force-push or reset `main`.
 
 ## Architecture shortcuts
-- This is a static browser HSK 1–6 app (HTML/CSS/vanilla JS), GitHub Pages + PWA, not a frontend npm build. Primary shell `index.html`, `loader.js`, `app.js`, `studio.js`.
-- Home/mobile UX: `home-overview.js/css`, `mobile-ux.js/css`, `studio-layout.css`, `ui-buttons.css`. Latest verified release in this note: **2.16**; check GitHub for newer releases.
+- This is a static browser HSK 1–6 app (HTML/CSS/vanilla JS), GitHub Pages + PWA, not a frontend npm build. Primary shell `index.html`, `loader.js`, `app.js`, `src/modules/shell/studio.js`.
+- Home/mobile JS: `src/modules/shell/`; root CSS: `home-overview.css`, `mobile-ux.css`, `studio-layout.css`, `ui-buttons.css`. Published baseline: **3.4.12**; module-refactor candidate **3.4.16** is branch-only until explicitly merged. Check GitHub for newer releases.
 - Lessons, study plan, exams, SRS, notebook, auth/sync and AI have separate modules: use `docs/ai/PROJECT_MAP.md` for paths and data boundaries.
 - Firebase/Auth/Firestore and Cloudflare/Gemini Worker are distinct from the static site. Never commit secrets.
 - Keep stable storage keys, Firebase data contracts, existing UI controls, score/SRS behavior and genuine HSK goal/filter separation.
+
+## Source layout after phase 4–5
+- Feature JS lives under `src/modules/<feature>/`; account and study-sync share `src/modules/account/` because their CommonJS cores depend on each other. CSS/config URLs stay at root.
+- Ten static learning packs and their gzip variants live in `content/data/`. `loader.js` loads ordered classic scripts, including `src/utils/text.js`, `src/utils/format.js`, dictionary search-core and `src/ui/dictionary-relations.js`, before `app.js`.
+- Keep root `index.html`, `loader.js`, `app.js`, workers, PWA/push entrypoints and vendor URLs stable. `app.js` still owns state, storage and SRS scheduling; extracted helpers keep the original shared scope.
+- Change paths in `tools/pwa-assets.json` and consumers, rebuild hashes, preserve legacy aliases. The installer can reuse verified old-URL cached bytes after a move. Run `tools/check-module-loading-ui.cjs` for gzip/fallback and worker imports under `/hsk/`.
 
 ## Feature preservation (non-negotiable)
 - The user prohibits accidental feature removal. Read `docs/ai/FEATURE_PRESERVATION.md` and `tools/feature-contract.json` before editing a feature. Preserve the existing route, public API, behavior, storage keys and tests unless the user explicitly requests deletion.

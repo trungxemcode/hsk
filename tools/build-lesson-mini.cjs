@@ -1,6 +1,6 @@
 // Deterministic short reviews derived from each lesson's own sources and word list.
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
-const root=path.resolve(__dirname,'..'),box={};vm.createContext(box);for(const [file,name] of [['words.js','words'],['checkedPracticeExamples.js','checkedPracticeExamples']])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8')+';this.'+name+'Export='+name,box);
+const root=path.resolve(__dirname,'..'),box={};vm.createContext(box);for(const [file,name] of [['content/data/words.js','words'],['content/data/checkedPracticeExamples.js','checkedPracticeExamples']])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8')+';this.'+name+'Export='+name,box);
 const words=box.wordsExport,examples=box.checkedPracticeExamplesExport.entries,catalog=JSON.parse(fs.readFileSync(path.join(root,'lessons-data.json'),'utf8')),result={version:1,lessons:{}},segmenter=new Intl.Segmenter('zh',{granularity:'word'});
 const clean=s=>String(s).normalize('NFC').replace(/[\s'’·]/g,'').toLowerCase(),literal=w=>/^[\p{Script=Han}]+$/u.test(w.han),source=w=>(examples[`${w.hsk}|${w.han}|${w.pin}`]?.examples||[]).find(e=>e.cn.includes(w.han)&&e.cn.length<=120&&e.vi&&e.pin);
 function choices(correct,candidates){const out=[correct];for(const x of candidates)if(x&&x!==correct&&!out.includes(x))out.push(x);assert.ok(out.length>=3,'Not enough distractors for '+correct);return out.slice(0,4);}

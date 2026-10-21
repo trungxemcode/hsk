@@ -1,5 +1,5 @@
 const fs=require('node:fs'),path=require('node:path'),{createCanvas}=require('@napi-rs/canvas');
-const root=path.resolve(__dirname,'..'),assetDir=path.resolve(process.argv[2]||'');if(!process.argv[2])throw Error('Usage: node tools/check-handwriting-neural.cjs ASSET_DIRECTORY [report.json]');const core=require(path.join(root,'handwriting-neural-core.js')),ort=require(path.join(assetDir,'ort.wasm.min.js'));
+const root=path.resolve(__dirname,'..'),assetDir=path.resolve(process.argv[2]||'');if(!process.argv[2])throw Error('Usage: node tools/check-handwriting-neural.cjs ASSET_DIRECTORY [report.json]');const core=require(path.join(root,'src/modules/handwriting/handwriting-neural-core.js')),ort=require(path.join(assetDir,'ort.wasm.min.js'));
 (async()=>{
  ort.env.wasm.numThreads=1;ort.env.logLevel='error';
  const s=await ort.InferenceSession.create(fs.readFileSync(path.join(assetDir,'inference.onnx')),{executionProviders:['wasm']});

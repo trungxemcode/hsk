@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import zlib from 'node:zlib';
 import crypto from 'node:crypto';
 import {createRequire} from 'node:module';
-const require=createRequire(import.meta.url),C=require('../open-dictionary-core.js'),A=require('../account-core.js');
+const require=createRequire(import.meta.url),C=require('../src/modules/dictionary/open-dictionary-core.js'),A=require('../src/modules/account/account-core.js');
 test('semantic intent and tone-sensitive readings avoid cross-reading meaning contamination',()=>{
  for(const q of ['tam thuong','binh thuong','thong tin','chú thuật','live streaming room','university'])assert.equal(C.semanticQuery(q),true,q);
  for(const q of ['ping fan','zhi2 bo1','nǐ hǎo','lv4','直播间'])assert.equal(C.semanticQuery(q),false,q);

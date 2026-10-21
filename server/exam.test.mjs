@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
-const require=createRequire(import.meta.url),B=require('../exam-bank.js'),C=require('../exam-core.js'),A=require('../account-core.js');
+const require=createRequire(import.meta.url),B=require('../src/modules/exams/exam-bank.js'),C=require('../src/modules/exams/exam-core.js'),A=require('../src/modules/account/account-core.js');
 test('all original questions have consistent grade metadata and level-specific types',()=>{assert.equal(C.validate(B),true);assert.equal(B.items.length,182);assert.equal(B.types.length,17);for(let level=1;level<=6;level++)assert.ok(C.eligible(B,level).length>=16);for(const q of B.items){if(q.options){assert.equal(C.grade(q,q.answer),true);assert.equal(C.grade(q,(q.answer+1)%q.options.length),false);}if(q.tokens){assert.equal(C.grade(q,q.tokens.map((_,i)=>i)),true);assert.equal(C.grade(q,q.tokens.map(()=>0)),false);}}});
 test('per-level competency selection follows researched edition',()=>{assert.equal(C.eligible(B,1,'Viết').length,0);assert.equal(C.eligible(B,2,'Viết').length,0);assert.equal(C.eligible(B,3,'Viết','character').length,8);assert.equal(C.eligible(B,3,'Đọc','error').length,0);assert.equal(C.eligible(B,6,'Đọc','error').length,6);assert.equal(C.eligible(B,4,'Đọc','paragraph').length,6);assert.equal(C.eligible(B,5,'Viết','summary').length,0);assert.equal(C.eligible(B,6,'Viết','summary').length,2);});
 test('order accepts reviewed alternative while requiring every token exactly once',()=>{const q=B.items.find(q=>q.type==='order'&&q.level===3);assert.equal(C.grade(q,[1,0,2,3]),true);assert.equal(C.grade(q,[0,1,2]),false);assert.equal(C.grade(q,[0,1,2,2]),false);assert.equal(C.grade(q,[0,1,2,7]),false);});

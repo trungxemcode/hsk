@@ -1,5 +1,5 @@
 // Repeatable held-out perturbations of geometric fixtures; NOT real-writer accuracy.
-const fs=require('node:fs'),core=require('../handwriting-core.js'),{fixtures}=require('./handwriting-fixtures.cjs');
+const fs=require('node:fs'),core=require('../src/modules/handwriting/handwriting-core.js'),{fixtures}=require('./handwriting-fixtures.cjs');
 const base=core.prepare(JSON.parse(fs.readFileSync('handwriting-data.json')));
 const results=[];let seed=60212;
 const random=()=>((seed=(seed*1664525+1013904223)>>>0)/4294967296);

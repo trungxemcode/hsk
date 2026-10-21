@@ -19,7 +19,7 @@
         },
         {
           "kind": "contains",
-          "file": "studio.js",
+          "file": "src/modules/shell/studio.js",
           "value": "window.HSKStudio="
         },
         {
@@ -40,7 +40,7 @@
         },
         {
           "kind": "contains",
-          "file": "lessons.js",
+          "file": "src/modules/lessons/lessons.js",
           "value": "window.HSKLessonNav="
         },
         {
@@ -66,7 +66,7 @@
         },
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "window.HSKPracticeSelection="
         },
         {
@@ -104,7 +104,13 @@
           "kind": "file",
           "file": "tools/check-search-tabs-ui.cjs",
           "value": ""
-        }
+        },
+        {"kind":"contains","file":"src/utils/text.js","value":"const fold ="},
+        {"kind":"contains","file":"src/utils/format.js","value":"function memoryDate("},
+        {"kind":"contains","file":"src/modules/dictionary/search-core.js","value":"function splitSenses("},
+        {"kind":"contains","file":"src/ui/dictionary-relations.js","value":"function allPairExplanation("},
+        {"kind":"file","file":"server/app-helpers.test.mjs","value":""},
+        {"kind":"file","file":"tools/check-module-loading-ui.cjs","value":""}
       ]
     },
     {
@@ -123,7 +129,7 @@
         },
         {
           "kind": "contains",
-          "file": "notebook.js",
+          "file": "src/modules/notebook/notebook.js",
           "value": "window.HSKNotebook="
         },
         {
@@ -149,7 +155,7 @@
         },
         {
           "kind": "file",
-          "file": "account.js",
+          "file": "src/modules/account/account.js",
           "value": ""
         }
       ]
@@ -180,7 +186,7 @@
         },
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['learn'"
         }
       ]
@@ -206,7 +212,7 @@
         },
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['quiz'"
         }
       ]
@@ -237,7 +243,7 @@
         },
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['srs'"
         }
       ]
@@ -258,7 +264,7 @@
         },
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['mistakes'"
         }
       ]
@@ -274,7 +280,7 @@
         },
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['compare'"
         }
       ]
@@ -285,7 +291,7 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['match-game'"
         },
         {
@@ -295,7 +301,7 @@
         },
         {
           "kind": "contains",
-          "file": "practice-games.js",
+          "file": "src/modules/practice/practice-games.js",
           "value": "window.HSKPracticeGames="
         },
         {
@@ -316,7 +322,7 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['sentence-game'"
         },
         {
@@ -326,7 +332,7 @@
         },
         {
           "kind": "file",
-          "file": "practice-games-core.js",
+          "file": "src/modules/practice/practice-games-core.js",
           "value": ""
         },
         {
@@ -347,17 +353,17 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['writing'"
         },
         {
           "kind": "file",
-          "file": "writing-practice.js",
+          "file": "src/modules/handwriting/writing-practice.js",
           "value": ""
         },
         {
           "kind": "contains",
-          "file": "writing-practice.js",
+          "file": "src/modules/handwriting/writing-practice.js",
           "value": "window.HSKWritingPractice="
         }
       ]
@@ -368,12 +374,12 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['passive'"
         },
         {
           "kind": "contains",
-          "file": "passive.js",
+          "file": "src/modules/passive/passive.js",
           "value": "window.HSKPassive="
         }
       ]
@@ -384,17 +390,17 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['exam'"
         },
         {
           "kind": "contains",
-          "file": "exam.js",
+          "file": "src/modules/exams/exam.js",
           "value": "window.HSKExam="
         },
         {
           "kind": "file",
-          "file": "exam-bank.js",
+          "file": "src/modules/exams/exam-bank.js",
           "value": ""
         },
         {
@@ -410,12 +416,12 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['placement'"
         },
         {
           "kind": "contains",
-          "file": "placement.js",
+          "file": "src/modules/placement/placement.js",
           "value": "window.HSKPlacement="
         },
         {
@@ -431,12 +437,12 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['study4'"
         },
         {
           "kind": "contains",
-          "file": "study4-practice.js",
+          "file": "src/modules/practice/study4-practice.js",
           "value": "window.HSKStudy4="
         }
       ]
@@ -447,17 +453,17 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "practice-selector.js",
+          "file": "src/modules/practice/practice-selector.js",
           "value": "['real-reading'"
         },
         {
           "kind": "contains",
-          "file": "real-reading.js",
+          "file": "src/modules/reading/real-reading.js",
           "value": "window.HSKRealReading="
         },
         {
           "kind": "file",
-          "file": "real-reading-variety-core.js",
+          "file": "src/modules/reading/real-reading-variety-core.js",
           "value": ""
         },
         {
@@ -478,27 +484,27 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "lesson-guided-core.js",
+          "file": "src/modules/lessons/lesson-guided-core.js",
           "value": "repetitions:3"
         },
         {
           "kind": "contains",
-          "file": "lesson-guided-core.js",
+          "file": "src/modules/lessons/lesson-guided-core.js",
           "value": "language:'vi-VN'"
         },
         {
           "kind": "contains",
-          "file": "lesson-guided-core.js",
+          "file": "src/modules/lessons/lesson-guided-core.js",
           "value": "function karaokeDuration("
         },
         {
           "kind": "contains",
-          "file": "writing-practice.js",
+          "file": "src/modules/handwriting/writing-practice.js",
           "value": "characterData:charData"
         },
         {
           "kind": "contains",
-          "file": "lesson-guided-core.js",
+          "file": "src/modules/lessons/lesson-guided-core.js",
           "value": "function presentation(lesson,words,examples"
         },
         {
@@ -508,27 +514,27 @@
         },
         {
           "kind": "contains",
-          "file": "lesson-guided.js",
+          "file": "src/modules/lessons/lesson-guided.js",
           "value": "window.HSKLessonGuided="
         },
         {
           "kind": "file",
-          "file": "lesson-guided-core.js",
+          "file": "src/modules/lessons/lesson-guided-core.js",
           "value": ""
         },
         {
           "kind": "contains",
-          "file": "lesson-guided-core.js",
+          "file": "src/modules/lessons/lesson-guided-core.js",
           "value": "strokes:true"
         },
         {
           "kind": "contains",
-          "file": "lesson-guided.js",
+          "file": "src/modules/lessons/lesson-guided.js",
           "value": "hsk-guided-vi-voice"
         },
         {
           "kind": "contains",
-          "file": "lesson-guided-core.js",
+          "file": "src/modules/lessons/lesson-guided-core.js",
           "value": "loopWhileStrokes:true"
         }
       ]
@@ -539,7 +545,7 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "lesson-mini.js",
+          "file": "src/modules/lessons/lesson-mini.js",
           "value": "window.HSKLessonMini="
         },
         {
@@ -565,12 +571,12 @@
         },
         {
           "kind": "file",
-          "file": "handwriting-core.js",
+          "file": "src/modules/handwriting/handwriting-core.js",
           "value": ""
         },
         {
           "kind": "file",
-          "file": "handwriting-learning.js",
+          "file": "src/modules/handwriting/handwriting-learning.js",
           "value": ""
         },
         {
@@ -591,7 +597,7 @@
         },
         {
           "kind": "file",
-          "file": "translator.js",
+          "file": "src/modules/translation/translator.js",
           "value": ""
         },
         {
@@ -617,7 +623,7 @@
         },
         {
           "kind": "file",
-          "file": "ocr.js",
+          "file": "src/modules/translation/ocr.js",
           "value": ""
         }
       ]
@@ -628,12 +634,12 @@
       "checks": [
         {
           "kind": "file",
-          "file": "open-dictionary.js",
+          "file": "src/modules/dictionary/open-dictionary.js",
           "value": ""
         },
         {
           "kind": "file",
-          "file": "open-dictionary-core.js",
+          "file": "src/modules/dictionary/open-dictionary-core.js",
           "value": ""
         },
         {
@@ -649,7 +655,7 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "notebook-factory.js",
+          "file": "src/modules/notebook/notebook-factory.js",
           "value": "window.HSKNotebookFactory="
         },
         {
@@ -681,12 +687,12 @@
       "checks": [
         {
           "kind": "file",
-          "file": "study-sync.js",
+          "file": "src/modules/account/study-sync.js",
           "value": ""
         },
         {
           "kind": "contains",
-          "file": "study-sync.js",
+          "file": "src/modules/account/study-sync.js",
           "value": "window.HSKStudyStore="
         },
         {
@@ -712,7 +718,7 @@
         },
         {
           "kind": "file",
-          "file": "planner.js",
+          "file": "src/modules/planner/planner.js",
           "value": ""
         }
       ]
@@ -723,12 +729,12 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "ai-coach.js",
+          "file": "src/modules/ai-coach/ai-coach.js",
           "value": "window.HSKAICoach="
         },
         {
           "kind": "file",
-          "file": "coach-profile.js",
+          "file": "src/modules/ai-coach/coach-profile.js",
           "value": ""
         }
       ]
@@ -739,12 +745,12 @@
       "checks": [
         {
           "kind": "file",
-          "file": "drive-exam.js",
+          "file": "src/modules/exams/drive-exam.js",
           "value": ""
         },
         {
           "kind": "file",
-          "file": "drive-audio.js",
+          "file": "src/modules/exams/drive-audio.js",
           "value": ""
         },
         {
@@ -812,7 +818,7 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "studio.js",
+          "file": "src/modules/shell/studio.js",
           "value": "hsk-theme-v1"
         },
         {
@@ -839,12 +845,12 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "studio.js",
+          "file": "src/modules/shell/studio.js",
           "value": "hsk-flashcards-progress-v1"
         },
         {
           "kind": "contains",
-          "file": "studio.js",
+          "file": "src/modules/shell/studio.js",
           "value": "hsk-course-lessons-v1"
         }
       ]
@@ -855,7 +861,7 @@
       "checks": [
         {
           "kind": "contains",
-          "file": "studio.js",
+          "file": "src/modules/shell/studio.js",
           "value": "hsk-flashcards-mistakes-v1"
         }
       ]
@@ -933,12 +939,12 @@
         },
         {
           "kind": "file",
-          "file": "admin.js",
+          "file": "src/modules/admin/admin.js",
           "value": ""
         },
         {
           "kind": "file",
-          "file": "admin-core.js",
+          "file": "src/modules/admin/admin-core.js",
           "value": ""
         }
       ]

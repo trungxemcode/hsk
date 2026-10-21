@@ -1,5 +1,5 @@
 'use strict';
-importScripts('./handwriting-core.js','./handwriting-learning.js','./handwriting-neural-core.js','./handwriting-neural.js');
+importScripts('./src/modules/handwriting/handwriting-core.js','./src/modules/handwriting/handwriting-learning.js','./src/modules/handwriting/handwriting-neural-core.js','./src/modules/handwriting/handwriting-neural.js');
 const core=HSKHandwritingCore,learning=HSKHandwritingLearning;
 let templates=[],supported=new Set(),revision='',ready=false,neuralEnabled=false,enableGeneration=0;
 (async()=>{

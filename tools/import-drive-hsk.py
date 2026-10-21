@@ -144,12 +144,24 @@ for c,files in sorted(grouped.items()):
  sets.append({**source,'imported':len(items)-before,'keyQuestions':len(keys),'fileName':f['title']})
 # Count and provenance without embedding signed transport URLs or user account metadata.
 report={'sourceFolder':'https://drive.google.com/drive/folders/14sqSlPydbPS7VetvbVMxVuLOlyB1sahj','pdfFiles':len(manifest),'tests':sets,'excluded':audit,'imported':len(items),'byLevel':{str(l):sum(q['level']==l for q in items) for l in range(1,7)},'images':list(dict.fromkeys(imagepaths))}
-(ROOT/'drive-exam-data.json').write_text(json.dumps({'version':1,'items':items,'report':report},ensure_ascii=False,separators=(',',':')))
 import base64,gzip
+def image_uri(path):
+ payload=(ROOT/path).read_bytes()
+ if len(payload)<12 or payload[:4]!=b'RIFF' or payload[8:12]!=b'WEBP':
+  raise ValueError('Invalid or empty rendered Drive image: '+path)
+ # Decode before packing; an empty base64 prefix must never become an app asset.
+ from io import BytesIO
+ from PIL import Image
+ with Image.open(BytesIO(payload)) as image:
+  image.load()
+  if image.width<1 or image.height<1:raise ValueError('Empty Drive image dimensions: '+path)
+ return 'data:image/webp;base64,'+base64.b64encode(payload).decode()
+packed_images={path:image_uri(path) for path in report['images']}
+(ROOT/'drive-exam-data.json').write_text(json.dumps({'version':1,'items':items,'report':report},ensure_ascii=False,separators=(',',':')))
 (ROOT/'drive-exam-data.json.gz').write_bytes(gzip.compress((ROOT/'drive-exam-data.json').read_bytes(),mtime=0))
-(ROOT/'drive-exam-images.json').write_text(json.dumps({p:'data:image/webp;base64,'+base64.b64encode((ROOT/p).read_bytes()).decode() for p in report['images']},separators=(',',':')))
+(ROOT/'drive-exam-images.json').write_text(json.dumps(packed_images,separators=(',',':')))
 imageGroups={}
 for p in report['images']:
- imageGroups.setdefault(p.split('/')[-1].split('-')[0],{})[p]='data:image/webp;base64,'+base64.b64encode((ROOT/p).read_bytes()).decode()
+ imageGroups.setdefault(p.split('/')[-1].split('-')[0],{})[p]=packed_images[p]
 for code,imageGroup in imageGroups.items():(ROOT/f'content/drive-hsk/{code}.json').write_text(json.dumps(imageGroup,separators=(',',':')))
 (SRC/'import-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2));print(json.dumps({k:report[k] for k in ['pdfFiles','imported','byLevel','excluded']},ensure_ascii=False,indent=2))

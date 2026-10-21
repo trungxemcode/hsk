@@ -1,7 +1,7 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),crypto=require('node:crypto'),zlib=require('node:zlib');
 const root=path.resolve(__dirname,'..'),source=process.argv[2],output=process.argv[3]||path.join(root,'handwriting-data.json');
 if(!source)throw Error('Usage: node tools/build-handwriting-data.cjs graphics.txt [output.json]');
-const vocabulary=vm.runInNewContext(fs.readFileSync(path.join(root,'words.js'),'utf8')+';words',{}, {timeout:10000});
+const vocabulary=vm.runInNewContext(fs.readFileSync(path.join(root,'content/data/words.js'),'utf8')+';words',{}, {timeout:10000});
 const wanted=new Set(vocabulary.flatMap(w=>Array.from(w.han).filter(c=>/[\u3400-\u9fff\u3007]/.test(c))));
 const sourceBytes=fs.readFileSync(source),entries=new Map();
 for(const line of sourceBytes.toString('utf8').split('\n')){if(!line.trim())continue;const data=JSON.parse(line);if(wanted.has(data.character)&&data.medians?.length)entries.set(data.character,data.medians.map(stroke=>stroke.map(([x,y])=>[x,900-y])));}

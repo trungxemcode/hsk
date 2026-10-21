@@ -1,5 +1,5 @@
 /* Pure regressions for HSK comparison triples and real sentence tile generation. */
-const assert=require('node:assert/strict'),C=require('../practice-games-core.js');
+const assert=require('node:assert/strict'),C=require('../src/modules/practice/practice-games-core.js');
 const source=[
  {han:'中国',pin:'Zhōngguó',mean:'Trung Quốc',hsk:3,practice:{examples:[{cn:'我喜欢学习汉语。',pin:'Wǒ xǐhuan xuéxí Hànyǔ.',vi:'Tôi thích học tiếng Trung.'},{cn:'他的位置很高。',pin:'Tā de dìwèi hěn gāo.',vi:'Địa vị của anh ấy rất cao.'}]}},
  {han:'今天',pin:'jīntiān',mean:'hôm nay',hsk:3,practice:{examples:[{cn:'今天天气很好。',pin:'Jīntiān tiānqì hěn hǎo.',vi:'Hôm nay thời tiết rất tốt.'}]}},

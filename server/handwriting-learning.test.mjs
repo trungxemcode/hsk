@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import learning from '../handwriting-learning.js';
+import learning from '../src/modules/handwriting/handwriting-learning.js';
 
 const bitmap=(()=>{const data=new Uint8Array(1024);data.set([1,1,1,1]);return learning.pack(data);})();
 function makeStore(owner){

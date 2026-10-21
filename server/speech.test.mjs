@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import speech from '../speech.js';
+import speech from '../src/modules/speech/speech.js';
 const zh={lang:'zh-CN',name:'Mandarin',localService:true};
 test('Vietnamese prefers a natural voice, honors saved choices and isolates Mandarin',()=>{
  const basic={lang:'vi-VN',name:'Vietnamese',localService:true,voiceURI:'basic'},natural={lang:'vi-VN',name:'Vietnamese Natural',localService:false,voiceURI:'natural'},online={lang:'vi-VN',name:'Vietnamese online',localService:false,voiceURI:'online'},voices=[basic,online,natural,zh];

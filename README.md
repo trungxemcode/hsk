@@ -1,5 +1,18 @@
 # HSK 1–6
 
+## Cấu trúc mã nguồn
+
+| Vị trí | Vai trò |
+| --- | --- |
+| `index.html`, `loader.js`, `app.js` | Điểm vào, thứ tự tải và trạng thái học/SRS |
+| `src/modules/<tính năng>/` | Module tài khoản, bài học, đề thi, tra cứu và các tính năng khác |
+| `content/data/` | Mười gói dữ liệu học, mỗi gói có bản JS và gzip |
+| `src/utils/`, `src/ui/` | Hàm xử lý chuỗi/định dạng và hiển thị đối chiếu từ |
+| `tools/pwa-assets.json` | Danh mục tài nguyên offline và ánh xạ URL cũ |
+| `server/`, `tools/`, `docs/ai/` | Backend, công cụ/kiểm thử và bản đồ dành cho công cụ AI |
+
+Sau khi sửa frontend, chuẩn bị bản PWA bằng `python tools/prepare-pwa-release.py --note "Mô tả"`; kiểm tra bảo toàn tính năng và phát hành trước PR theo `AGENTS.md`. Không tự triển khai bundle Worker chỉ để cập nhật frontend: mã voice live có thể mới hơn bundle trong nhánh.
+
 ## Nội dung bổ sung ngày 11/10/2026
 
 Đợt này thêm 83 mục từ theo bài học (76 mục đối chiếu nghĩa/phiên âm với Hanzii, 6 tên riêng và 1 mẫu ngữ pháp chưa đối chiếu mục từ), cùng 249 câu ví dụ tự biên soạn. Lấp đủ các mục chưa có thẻ của danh sách giáo trình HSK 1–2; HSK 3–6 bổ sung chọn lọc, vẫn còn các mục thiếu. Cấp HSK của thẻ bổ sung là cấp bài học đầu tiên sử dụng, không khẳng định phân loại trong danh sách từ thi chính thức. Giữ nguyên thẻ và khóa tiến độ cũ..
@@ -12,7 +25,7 @@ Nguồn biên tập và báo cáo phạm vi nằm trong `content/`. Chạy `pyth
 
 App từ vựng: thẻ học, tìm kiếm, kiểm tra tổng hợp, học trong ngữ cảnh và lịch ôn SRS.
 
-Mở index.html qua GitHub Pages hoặc rawcdn.githack.com. Các file JS, CSS và dữ liệu .js.gz nằm cùng thư mục với index.html; tải đủ tất cả file. Trình duyệt tự tải dữ liệu nén, hoặc dùng bản JS dự phòng. Không cần build.
+Mở `index.html` qua GitHub Pages hoặc HTTP server. Khi sao chép/triển khai, giữ nguyên toàn bộ cây thư mục: module ở `src/modules/`, dữ liệu JS/gzip ở `content/data/`, tiện ích ở `src/utils/` và phần hiển thị đối chiếu từ ở `src/ui/`. CSS, cấu hình và các điểm vào PWA/worker vẫn ở gốc. Trình duyệt tự tải dữ liệu nén hoặc dùng bản JS dự phòng; không cần frontend bundler.
 
 Chưa đăng nhập: tiến độ và lịch ôn lưu trên trình duyệt. Đăng nhập bằng email/mật khẩu: tiến độ từng từ, lịch SRS, lỗi sai, thống kê học và tùy chọn ghi nhớ đồng bộ theo tài khoản; bản offline được giữ trên thiết bị và tự gửi khi có mạng. Nhắc ôn khi mở app; thông báo khi đóng app cần kết nối OneSignal và bật quyền.
 
