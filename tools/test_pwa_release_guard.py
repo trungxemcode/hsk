@@ -88,7 +88,7 @@ class PwaReleaseGuardTests(unittest.TestCase):
     def test_hash_mismatch_caught_with_single_changed_asset(self):
         current = guard.ensure_release_integrity()
         with patch.object(guard, 'source_assets', return_value=['index.html']):
-            with self.assertRaisesRegex(ValueError, 'Manifest assets'):
+            with self.assertRaisesRegex(ValueError, 'OFFLINE_FILES differs'):
                 guard.ensure_release_integrity()
 
     def test_public_verifier_rejects_stale_deployment(self):

@@ -11,6 +11,7 @@ import re
 import subprocess
 import sys
 from urllib.parse import urlparse
+from pwa_assets import collect_assets, read_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 IGNORE_PREFIXES = ('server/', 'tools/', 'docs/', '.github/', '.serena/', '.git/')
@@ -56,6 +57,13 @@ def ensure_release_integrity(root=ROOT):
     if version != 'hsk-offline-' + release.replace('.', '-'):
         raise ValueError('PWA version must match semantic release')
     assets = source_assets() if root == ROOT else read_asset_list(root)
+    expected = collect_assets(root)
+    if assets != expected:
+        raise ValueError('OFFLINE_FILES differs from tools/pwa-assets.json and derived assets')
+    worker_text = (root / 'offline-worker.js').read_text(encoding='utf-8')
+    alias_match = re.search(r'^const OFFLINE_ALIASES=(.*?);$', worker_text, re.M)
+    if not alias_match or json.loads(alias_match[1]) != read_catalog(root)['aliases']:
+        raise ValueError('Worker aliases differ from PWA catalog')
     catalog = manifest.get('assets')
     if not isinstance(catalog, dict) or set(catalog) != set(assets):
         raise ValueError('Manifest assets do not match OFFLINE_FILES')
@@ -100,7 +108,7 @@ def compare_with_base(base, manifest):
         return []
     try:
         old = json.loads(_run('show', base + ':app-version.json'))
-        changed = _run('diff', '--name-only', '--diff-filter=ACMRT', base, 'HEAD').splitlines()
+        changed = _run('diff', '--name-only', '--diff-filter=ACMRTD', base, 'HEAD').splitlines()
     except subprocess.CalledProcessError as exc:
         raise ValueError('Cannot compare release to base reference: ' + base) from exc
     all_assets = set(manifest['assets']) | set(old.get('assets') or {})
