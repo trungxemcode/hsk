@@ -48,6 +48,7 @@ renderIcons();
  decorateControls();new MutationObserver(decorateControls).observe(main,{subtree:true,childList:true});
  const labels={'real-reading':'Đọc thực tế','study4':'Luyện thi HSK','match-game':'Đối chiếu 3 cột','sentence-game':'Sắp xếp câu',home:'Trang chủ',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện & Ôn',exam:'Bài tập HSK',review:'Luyện & Ôn',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn theo lịch',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
  const parents={'real-reading':'lessons','study4':'practice','match-game':'practice','sentence-game':'practice',learn:'practice',quiz:'practice',compare:'practice',exam:'practice',srs:'practice',mistakes:'practice',translator:'search',about:'home'};
+ labels.music='Nghe nhạc học HSK';parents.music='practice';
  let ready=false,route='home',lastOwner='',fingerprint='',activityTimer,refreshTimer,lastGoalScope='';
  function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||'null')||fallback;}catch{return fallback;}}
  function owner(){return read('hsk-account-meta-v1',{}).uid||'guest';}
@@ -83,13 +84,14 @@ renderIcons();
  }
  function coreView(){for(const [cls,name] of [['show-account','account'],['show-admin','admin'],['show-translator','translator'],['show-about','about'],['show-lessons','lessons']])if(document.body.classList.contains(cls))return name;return document.querySelector('.app-tabs [data-mode].active')?.dataset.mode||'learn';}
  function navigate(name){
+  if(name==='music'&&!window.HSKMusic)return;
   if(name==='review')name='practice';
   if(!ready&&!['account','translator','about','admin'].includes(name))return;
   clearHub();
-  if(['home','practice','review','exam','notebook','match-game','sentence-game','study4','real-reading'].includes(name)){
+  if(['home','practice','review','exam','notebook','match-game','sentence-game','study4','real-reading','music'].includes(name)){
    document.querySelector('.app-tabs [data-mode="learn"]').click();document.body.classList.remove('show-lessons','lesson-focus');document.body.dataset.studioHub=name;document.querySelector(`[data-studio-hub-panel="${name}"]`).hidden=false;title(name);
   }else{const special={account:'accountBtn',translator:'translatorBtn',admin:'adminBtn',about:'aboutBtn'};const trigger=special[name]?$(special[name]):document.querySelector(`.app-tabs [data-mode="${name}"]`);if(!trigger||trigger.hidden)return;trigger.click();title(name);}
-  closeDrawer();main.scrollTop=0;window.scrollTo({top:0,behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});refresh();if(name==='exam')window.dispatchEvent(new Event('hsk-exam-open'));if(name==='match-game'||name==='sentence-game')window.HSKPracticeGames?.start(name);if(name==='study4')window.HSKStudy4?.open();if(name==='real-reading')window.HSKRealReading?.enter();window.HSKPracticeSelection?.onNavigate?.(name);
+  closeDrawer();main.scrollTop=0;window.scrollTo({top:0,behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});refresh();if(name==='exam')window.dispatchEvent(new Event('hsk-exam-open'));if(name==='match-game'||name==='sentence-game')window.HSKPracticeGames?.start(name);if(name==='study4')window.HSKStudy4?.open();if(name==='real-reading')window.HSKRealReading?.enter();if(name==='music')window.HSKMusic?.enter();window.HSKPracticeSelection?.onNavigate?.(name);
  }
  window.addEventListener('hsk-lesson-context',()=>refresh());
  function snapshot(){return ['hsk-flashcards-progress-v1','hsk-flashcards-mistakes-v1','hsk-course-lessons-v1','hsk-adaptive-learning-v1','hsk-exam-practice-v1'].map(k=>localStorage.getItem(k)||'').join('|');}
