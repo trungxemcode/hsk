@@ -1113,7 +1113,10 @@
         {"kind":"contains","file":"src/modules/music/music-core.js","value":"hsk-music-history-v1"},
         {"kind":"file","file":"server/music.test.mjs","value":""},
         {"kind":"file","file":"tools/check-music-ui.cjs","value":""},
-        {"kind":"file","file":"server/music/worker.mjs","value":""}
+        {"kind":"file","file":"server/music/worker.mjs","value":""},
+        {"kind":"contains","file":"src/modules/music/music-core.js","value":"function parseLink(input)"},
+        {"kind":"file","file":"src/modules/music/music-soundcloud.js","value":""},
+        {"kind":"file","file":"tools/check-music-links-ui.cjs","value":""}
       ]
     }
   ]
