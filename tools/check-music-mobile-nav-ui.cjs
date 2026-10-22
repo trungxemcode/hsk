@@ -39,6 +39,9 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    });
    assert.equal(playerCheck.auxBg,'rgba(0, 0, 0, 0)','aux button has transparent ghost background');
    await page.locator('#musicMenuBtn').click();
+   assert.equal(await page.locator('#musicMenuLibraryRow').isVisible(),true,'entertainment mode main sheet lists library row');
+   assert.equal(await page.locator('#musicPlaylistsBox').isVisible(),false,'compact main sheet hides playlist details');
+   await page.locator('#musicMenuLibraryRow').click();
    assert.equal(await page.locator('#musicPlaylistsBox').isVisible(),true,'entertainment mode shows playlists');
    assert.equal(await page.locator('.music-filter-row').isVisible(),false,'entertainment mode hides HSK filter');
    await page.locator('#musicMenuClose').click();

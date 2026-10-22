@@ -1,3 +1,28 @@
+## Music Spotify-style compact menu and dedicated sub-views — 2026-10-22
+- Release 3.10.20 on branch feat/music-spotify-compact-menu from origin/main 19833e1 (3.10.19).
+- Re-architected bottom sheet into Spotify-style compact action sheet with dedicated sub-views:
+  1. Main compact sheet view (`data-view="main"`): Contains only the primary action rows (Song info head, Share row, Add to playlist, Paste new song link, Library & playlists with chevron `>`, Open source link). Eliminates deep nested configuration clutter from the initial view.
+  2. Dedicated "Đã lưu vào" sub-view (`data-view="save"`): Exact replica of Spotify playlist save sheet:
+     - Top bar with "Hủy" (left) and "Xong" (right).
+     - Section title "Đã lưu vào" with green text action "Danh sách phát mới".
+     - Interactive playlist selection list: 56x56 thumbnail, bold title, song count, green circle checkmark for saved playlists and outline plus for unsaved playlists. Pending changes are committed only upon tapping "Xong"; "Hủy" cancels cleanly.
+     - Inline collapsible new playlist creation form and full-row "+ Danh sách phát mới" action.
+     - Centered large green pill "Xong" button (`var(--legacy-hex-27ae60)`) at bottom.
+  3. Dedicated library view (`data-view="library"`): "‹ Quay lại" / "Thư viện của bạn" header, collapsible playlist items with inline track management and "+ Tạo playlist mới".
+  4. Dedicated link view (`data-view="link"`): "‹ Quay lại" / "Dán link bài hát mới" header with focused URL import form.
+  5. Scoped ID CSS rules preventing display cascade bleed-through across sub-views while keeping design token compliance.
+- Validation: PASS design tokens (0 violations), PASS DOM tests (`check-music-dom.cjs`, `check-music-links-dom.cjs`), PASS Playwright UI tests across 320/390/844/1440px light & dark modes, PASS feature preservation (47 capabilities, 189 guards), PASS PWA release guard with 169 verified assets.
+
+## Music Spotify-style Flat Action Bottom Sheet — 2026-10-22
+- Release 3.10.19 merged to main (commit 19833e1) via PR #151 from feat/music-spotify-bottom-sheet.
+- Redesigned `#musicMenuSheet` and playlist bottom sheet according to Spotify Flat Action Sheet pattern:
+  1. Top header: Centered drag handle (36x4px, rounded), Now Playing Track Info header (48x48px thumbnail, 16px bold title, 13px artist/channel) with a subtle full-width bottom divider line. Removed verbose tutorial/guidance text blocks.
+  2. "Zero Boxes" principle: Eliminated all rectangular purple buttons and boxed card containers. Every action is a flat menu row (`.music-flat-row`) with left 22x22 outline SVG icon, clean 16px white label, and subtle hover/active highlight.
+  3. Four flat action rows: Row 1 dynamic save state ("Đã lưu trong playlist Yêu thích" / "Thêm vào danh sách phát"), Row 2 collapsible link import, Row 3 open source link in external tab, Row 4 collapsible playlist creation.
+  4. Flat playlist section: "Danh sách phát của bạn" with 48x48 thumbnail cards, track count, chevron `>` expander, and flat track rows with 40x40 thumbnail and minimal delete button.
+  5. Dark paper theme (`var(--palette-dark-paper)`), hidden scrollbars, rounded top corners (16px), 16px inputs avoiding mobile auto-zoom.
+- Verification: PASS token check (0 violations), PASS unit DOM tests (`check-music-dom.cjs`, `check-music-links-dom.cjs`), PASS browser Playwright checks (`check-music-links-ui.cjs`, `check-music-ui.cjs`, `check-music-mobile-nav-ui.cjs`), PASS feature preservation (47 features, 189 guards), PASS PWA release guard (169 assets). All CI checks on PR #151 passed (including `layout`, `touch`, `release-guard`, `feature-contracts`, `protected-flows`, `mobile-and-learning`). PR merged and local `main` fast-forwarded to `19833e1`.
+
 ## Music player UX responsiveness & home cards balance — 2026-10-22
 - Release 3.10.18 on branch feat/music-player-latency-and-home-grid from origin/main adfaaaf (3.10.17).
 - Root causes identified and resolved:

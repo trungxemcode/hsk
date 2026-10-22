@@ -12,11 +12,26 @@ const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),pat
  }
  await page.locator('#musicMenuBtn').click();
  assert.equal(await page.locator('#musicSavedLinks .music-saved-item').count(),3);
- // Create a named playlist, add tracks directly and from preview, rename, and cycle with << / >>.
+ // Create a named playlist from the library sub-view, save the current track via the
+ // Spotify-style "Đã lưu vào" picker, add a track directly, then cycle with << / >>.
+ await page.locator('#musicMenuLibraryRow').click();
+ assert.equal(await page.locator('#musicPlaylistsBox').isVisible(),true,'library sub-view shows playlists');
+ assert.equal(await page.locator('#musicLinkImport').isVisible(),false,'library sub-view hides main actions');
  if(await page.locator('#musicPlaylistCreateBox').count()){if(!(await page.locator('#musicPlaylistCreateBox').evaluate(d=>d.open)))await page.locator('#musicPlaylistCreateBox>summary').click();}
  await page.locator('#musicPlaylistName').fill('Nhạc Hoa chill');await page.locator('#musicPlaylistCreateBtn').click();
  assert.equal(await page.locator('#musicPlaylistList .music-playlist-card').count(),1);
+ await page.locator('#musicMenuSubCancel').click();
+ assert.equal(await page.locator('#musicPlaylistsBox').isVisible(),false,'main view is compact');
  await page.locator('#musicPreviewPlaylistAdd').click();
+ assert.equal(await page.locator('#musicSaveView').isVisible(),true,'save picker opens as its own sheet');
+ await page.locator('#musicSavePicker .music-save-row').first().click();
+ assert.equal(await page.locator('#musicSavePicker .music-save-row').first().getAttribute('aria-checked'),'true');
+ await page.locator('#musicSaveDone').click();
+ assert.equal(await page.locator('#musicMenuSheet').isVisible(),false,'Xong closes the sheet');
+ assert.equal(await page.locator('#musicQuickSaveBtn').getAttribute('aria-pressed'),'true');
+ await page.locator('#musicMenuBtn').click();
+ await page.locator('#musicMenuLibraryRow').click();
+ await page.locator('#musicPlaylistList .music-playlist-head').first().click();
  await page.locator('#musicPlaylistList .music-playlist-add-track input[type=url]').fill('https://youtu.be/abcdefghijk');
  await page.locator('#musicPlaylistList .music-playlist-add-track input[type=text]').fill('Bài YouTube số 1');
  await page.locator('#musicPlaylistList .music-playlist-add-track button[type=submit]').click();
