@@ -249,3 +249,49 @@ body.studio-enabled .music-panel details>summary:is(:active,:focus-visible){back
 @media (max-width:1024px){
   body.studio-enabled .music-panel :is(input:not([type=checkbox]):not([type=radio]),select,textarea){font-size:16px}
 }
+
+/* Spotify-style compact action sheet: only primary rows in the main view, details live in sub-views. */
+html body.studio-enabled #musicMenuSheet[data-view=main] [data-menu-view]:not([data-menu-view~=main]),
+html body.studio-enabled #musicMenuSheet[data-view=save] [data-menu-view]:not([data-menu-view~=save]),
+html body.studio-enabled #musicMenuSheet[data-view=link] [data-menu-view]:not([data-menu-view~=link]),
+html body.studio-enabled #musicMenuSheet[data-view=library] [data-menu-view]:not([data-menu-view~=library]){display:none!important}
+.music-menu-sheet[data-view=link] #musicLinkImport>summary{display:none!important}
+.music-menu-sheet[data-view=link] #musicLinkImport>.music-flat-expand-body{padding-top:12px}
+.music-menu-sheet:not([data-view=main]) .music-status{display:none!important}
+#musicMenuSheet .music-flat-chev{width:20px;height:20px;flex:none;color:var(--legacy-rgb-9);display:grid;place-items:center}
+#musicMenuSheet .music-flat-chev svg{width:18px;height:18px;display:block}
+.music-sub-head{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr) minmax(72px,auto);align-items:center;gap:8px;padding:4px 12px 6px}
+.music-sub-title{font-size:16px;font-weight:700;color:var(--palette-white);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#musicMenuSheet button.music-sub-link:not(.correct):not(.wrong){justify-self:start;min-height:40px;padding:8px!important;border:0!important;border-radius:var(--radius-8px)!important;background:var(--palette-clear)!important;color:var(--palette-white)!important;box-shadow:none!important;font-size:16px;font-weight:600}
+#musicMenuSheet button.music-sub-link.music-sub-done:not(.correct):not(.wrong){justify-self:end;font-weight:700}
+#musicMenuSheet button.music-sub-link[hidden]{display:block!important;visibility:hidden}
+.music-save-view{padding:0 0 8px}
+.music-save-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px 14px}
+.music-save-head h3{margin:0;font-size:22px;font-weight:800;color:var(--palette-white)}
+#musicMenuSheet button.music-save-new-link:not(.correct):not(.wrong){padding:4px 0!important;min-height:0;border:0!important;background:var(--palette-clear)!important;color:var(--legacy-hex-27ae60)!important;box-shadow:none!important;font-size:15px;font-weight:700}
+.music-save-picker{display:grid}
+#musicMenuSheet button.music-save-row:not(.correct):not(.wrong){display:grid!important;grid-template-columns:56px minmax(0,1fr) 28px;align-items:center;gap:14px;width:100%;min-height:72px;padding:8px 20px!important;border:0!important;border-radius:var(--radius-none)!important;background:var(--palette-clear)!important;color:var(--palette-white)!important;box-shadow:none!important;text-align:left}
+#musicMenuSheet button.music-save-row:not(.correct):not(.wrong):is(:hover,:active,:focus-visible){background:var(--legacy-hex-ffffff1f)!important}
+.music-save-thumb{width:56px;height:56px;border-radius:var(--radius-4px);object-fit:cover;background:var(--palette-dark-surface)}
+.music-save-copy{display:grid;gap:3px;min-width:0}
+.music-save-copy strong{font-size:17px;font-weight:700;color:var(--palette-white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.music-save-copy small{font-size:14px;font-weight:600;color:var(--legacy-rgb-9)}
+.music-save-mark{width:26px;height:26px;display:grid;place-items:center;color:var(--legacy-rgb-9)}
+.music-save-mark svg{width:26px;height:26px;display:block}
+.music-save-mark.is-on{color:var(--legacy-hex-27ae60)}
+.music-save-mark.is-on path{stroke:var(--palette-dark-paper)}
+#musicMenuSheet button.music-save-new-row:not(.correct):not(.wrong){display:flex!important;align-items:center;gap:16px;width:100%;min-height:72px;padding:8px 20px!important;border:0!important;border-radius:var(--radius-none)!important;background:var(--palette-clear)!important;color:var(--palette-white)!important;box-shadow:none!important;font-size:17px;font-weight:700;text-align:left}
+#musicMenuSheet button.music-save-new-row:not(.correct):not(.wrong):is(:hover,:active,:focus-visible){background:var(--legacy-hex-ffffff1f)!important}
+.music-save-new-ico{width:56px;height:56px;flex:none;display:grid;place-items:center;border-radius:var(--radius-4px);background:var(--palette-dark-surface);color:var(--legacy-rgb-9)}
+.music-save-new-ico svg{width:30px;height:30px;display:block}
+.music-save-done-wrap{display:flex;justify-content:center;padding:28px 20px 8px}
+#musicMenuSheet button.music-save-done:not(.correct):not(.wrong){min-width:136px;min-height:52px;padding:10px 36px!important;border:0!important;border-radius:var(--radius-pill)!important;background:var(--legacy-hex-27ae60)!important;color:var(--palette-dark-paper)!important;box-shadow:none!important;font-size:17px;font-weight:800}
+#musicMenuSheet button.music-save-done:not(.correct):not(.wrong):is(:hover,:active,:focus-visible){filter:brightness(1.08)}
+/* Library view: playlists collapse until tapped; add-track form stacks instead of overflowing. */
+#musicPlaylistList [hidden]{display:none!important}
+#musicMenuSheet button.music-row-main:not(.correct):not(.wrong){display:flex!important;align-items:center;gap:12px;flex:1;min-width:0;min-height:48px;padding:4px 0!important;border:0!important;border-radius:var(--radius-none)!important;background:var(--palette-clear)!important;color:var(--palette-white)!important;box-shadow:none!important;text-align:left}
+#musicMenuSheet .music-playlist-add-track{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:6px 20px 14px 82px}
+#musicMenuSheet .music-playlist-add-track input[type=url]{grid-column:1/-1}
+#musicMenuSheet .music-playlist-add-track input{width:100%;min-width:0;box-sizing:border-box}
+#musicMenuSheet .music-playlist-tracks{padding:2px 12px 6px 74px}
+@media(max-width:600px){#musicMenuSheet .music-playlist-add-track{padding-left:20px}#musicMenuSheet .music-playlist-tracks{padding-left:20px}}
