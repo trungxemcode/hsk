@@ -10,7 +10,13 @@ function wav(){const samples=44100*11,b=Buffer.alloc(44+samples*2);b.write('RIFF
  await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
  await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKMusic&&window.HSKStudio&&window.HSKLessons);
  await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;window.HSKAccountDashboard={user:{uid:'music-test'}};window.HSKStudio.navigate('music');},theme);
- assert.equal(await page.locator('#musicPanel').isVisible(),true);await page.locator('#musicImport summary').click();
+ assert.equal(await page.locator('#musicPanel').isVisible(),true);
+ if(width<=1024){
+  const fields=await page.evaluate(()=>['musicLinkUrl','musicLinkName','musicLevel','musicLinkLyrics'].map(id=>({id,font:parseFloat(getComputedStyle(document.getElementById(id)).fontSize)})));
+  assert.ok(fields.every(({font})=>font>=16),'iOS input focus must not auto-zoom: '+JSON.stringify(fields));
+ }
+ assert.ok(!/user-scalable\s*=\s*no|maximum-scale\s*=\s*1(?:\D|$)/i.test(await page.locator('meta[name=viewport]').getAttribute('content')||''),'pinch zoom remains enabled');
+ await page.locator('#musicImport summary').click();
  await page.locator('#musicManifest').setInputFiles(path.join(root,'content/music/lesson-template.json'));
  await page.locator('#musicFile').setInputFiles({name:'test.wav',mimeType:'audio/wav',buffer:wav()});await page.locator('#musicImportApply').click();await page.waitForFunction(()=>document.getElementById('musicPlayer').readyState>=1);
  assert.equal(await page.locator('#musicLoop').getAttribute('aria-pressed'),'false','Loop is opt-in on every opened song');
