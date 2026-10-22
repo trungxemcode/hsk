@@ -28,7 +28,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await page.locator('.ps-extras').count(),0,'no redundant direct-mode section');
    await disclosure.locator('summary').click();
    assert.equal(await disclosure.evaluate(el=>el.open),true);
-   const amount=await picker.locator('.ps-option input').count();assert.equal(amount,12);
+   const amount=await picker.locator('.ps-option input').count();assert.equal(amount,11,'music has its own top-level page');assert.equal(await picker.locator('[data-practice-option=music]').count(),0);
    if(width<721){
     const layout=await picker.locator('.ps-options').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length);
     assert.equal(layout,2,'mobile mode choices form a compact two-column grid');
@@ -49,7 +49,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await picker.locator('#practiceStartModes').isDisabled(),true);
    await picker.locator('[data-practice-option=match-game] input').check();
    await picker.locator('[data-practice-option=sentence-game] input').check();
-   assert.match(await picker.locator('#practiceSelectedCount').innerText(),/2 \/ 12/);
+   assert.match(await picker.locator('#practiceSelectedCount').innerText(),/2 \/ 11/);
    await disclosure.locator('summary').click();
    assert.equal(await disclosure.evaluate(el=>el.open),false,'can collapse after choosing');
    assert.equal(await picker.locator('#practiceStartModes').isVisible(),false,'start hidden with its collapsed group');await disclosure.locator('summary').click();
