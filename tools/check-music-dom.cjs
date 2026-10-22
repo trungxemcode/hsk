@@ -1,7 +1,8 @@
 const {JSDOM}=require('jsdom'),fs=require('fs'),assert=require('node:assert/strict');
 const root=process.cwd();
 const dom=new JSDOM('<main class="workspace"></main>',{url:'https://hsk.example/hsk/',runScripts:'outside-only'}),w=dom.window;
-w.HTMLMediaElement.prototype.pause=function(){};w.HTMLMediaElement.prototype.load=function(){};
+let idleMediaCalls=0;
+w.HTMLMediaElement.prototype.pause=function(){idleMediaCalls++;};w.HTMLMediaElement.prototype.load=function(){idleMediaCalls++;};
 w.HTMLMediaElement.prototype.play=function(){return Promise.resolve();};
 w.URL.createObjectURL=()=> 'blob:test';w.URL.revokeObjectURL=()=>{};
 w.HSKAccountDashboard={user:{uid:'first',getIdToken:async()=> 'fake'}};
@@ -11,6 +12,7 @@ w.eval('var words=[{han:"今天",hsk:"1"},{han:"我们",hsk:"1"},{han:"一起",h
 w.eval(fs.readFileSync('src/modules/music/music.js','utf8'));
 const $=id=>w.document.getElementById(id),song=JSON.parse(fs.readFileSync('content/music/lesson-template.json'));
 async function run(){
+ w.dispatchEvent(new w.Event('hsk-account-ready'));assert.equal(idleMediaCalls,0,'Pristine account initialization must not pause/load an unused media element');
  $('musicPanel').hidden=false;w.HSKMusic.enter();await new Promise(r=>setImmediate(r));
  assert.match($('musicStatus').textContent,/chưa được kết nối/);
  Object.defineProperty($('musicManifest'),'files',{configurable:true,value:[{size:500,text:async()=>JSON.stringify(song)}]});
