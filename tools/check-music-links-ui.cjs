@@ -22,11 +22,11 @@ const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),pat
  assert.equal(await page.locator('#musicPlaylistList .music-playlist-track').count(),2);
  await page.locator('#musicPlaylistList .music-playlist-actions button').first().click();
  assert.equal(await page.locator('#musicMenuSheet').isVisible(),false);
- assert.equal(await page.locator('#musicLinkTitle').innerText(),'Bài YouTube số 1');
+ assert.equal(await page.locator('#musicLinkTitle').innerText(),'Bài YouTube Số 1');
  await page.locator('#musicLinkNext').click();
- assert.equal(await page.locator('#musicLinkTitle').innerText(),'Bài thử từ link');
+ assert.equal(await page.locator('#musicLinkTitle').innerText(),'Bài Thử Từ Link');
  await page.locator('#musicLinkPrev').click();
- assert.equal(await page.locator('#musicLinkTitle').innerText(),'Bài YouTube số 1');
+ assert.equal(await page.locator('#musicLinkTitle').innerText(),'Bài YouTube Số 1');
  // A reviewed SoundCloud lesson uses official widget events in milliseconds.
  await page.evaluate(()=>{
  window.scTest={seek:0,handlers:{},unbinds:0};function Widget(){const state=window.scTest;return {bind(name,fn){state.handlers[name]=fn;if(name==='READY')setTimeout(fn,0);},unbind(){state.unbinds++;},seekTo(ms){state.seek=ms;},play(){state.handlers.PLAY?.();},pause(){state.handlers.PAUSE?.();}};}Widget.Events=Object.fromEntries(['READY','PLAY','PAUSE','FINISH','PLAY_PROGRESS','SEEK','ERROR'].map(n=>[n,n]));window.SC={Widget};
