@@ -14,7 +14,8 @@
   ['exam','Bài tập HSK','Luyện Nghe, Đọc, Viết theo dạng.','clipboard'],
   ['placement','Đánh giá trình độ','Kiểm tra và gợi ý lộ trình.','chart'],
   ['study4','Luyện thi HSK','Đề thi và bài nghe từ Study4.','exam'],
-  ['real-reading','Đọc thực tế','Đọc kịch bản mới từ bài báo và truyện.','cards']
+  ['real-reading','Đọc thực tế','Đọc kịch bản mới từ bài báo và truyện.','cards'],
+  ['music','Nghe nhạc học HSK','Nghe từng câu, đoán ý và học từ mới.','headphones']
  ];
  const paths={
   cards:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
