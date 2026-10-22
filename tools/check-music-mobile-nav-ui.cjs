@@ -33,6 +33,9 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
     await page.locator('.side-nav [data-studio-go=music]').click();
     assert.equal(await page.locator('#musicPanel').isVisible(),true,'desktop side nav has independent music link');
    }
+   assert.equal(await page.locator('#musicMenuSheet').isVisible(),false,'menu sheet hidden by default');
+   await page.locator('#musicMenuBtn').click();
+   assert.equal(await page.locator('#musicMenuSheet').isVisible(),true,'menu sheet opens from top-right 3-dots');
    const geom=await page.evaluate(()=>{
     const select=document.getElementById('musicLevel').getBoundingClientRect();
     const button=document.getElementById('musicRefresh').getBoundingClientRect();
@@ -44,6 +47,8 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    assert.ok(Math.abs(geom.detailWidth-geom.summaryWidth)<4,'purple press surface reaches card edges');
    assert.ok(Math.abs(geom.detailX-geom.summaryX)<3,'no white strip left of the active header');
    assert.equal(geom.overflow,false,'music UI has no horizontal overflow');
+   await page.locator('#musicMenuClose').click();
+   assert.equal(await page.locator('#musicMenuSheet').isVisible(),false,'menu close button hides sheet');
    await page.evaluate(()=>window.HSKStudio.navigate('practice'));
    const picker=page.locator('#practiceModeDisclosure');await picker.locator('summary').click();
    assert.equal(await page.locator('[data-practice-option=music]').count(),0,'music does not belong to practice');
