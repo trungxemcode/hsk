@@ -18,3 +18,9 @@ body.studio-enabled .music-panel details[open]>summary{border-bottom-left-radius
 body.studio-enabled .music-panel details:not([open])>summary{margin-bottom:-14px}
 body.studio-enabled .music-panel details>summary:is(:active,:focus-visible){background:var(--button-active-bg,var(--accent))!important;color:var(--button-active-text,var(--palette-white))!important}
 @media(max-width:600px){.music-filter-row{gap:8px}.music-filter-row #musicRefresh{padding:8px 10px}.home-music-entry{margin-top:8px}}
+
+/* Safari iOS zooms on focus when editable controls render below 16px.
+   Outrank the shared 14px form rule without disabling pinch-to-zoom. */
+@media (max-width:1024px){
+  body.studio-enabled .music-panel :is(input:not([type=checkbox]):not([type=radio]),select,textarea){font-size:16px}
+}
