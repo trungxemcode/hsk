@@ -9,6 +9,20 @@ const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),pat
  await page.locator('#musicLinkUrl').fill(url);await page.locator('#musicLinkName').fill('Bài thử từ link');await page.locator('#musicLinkApply').click();await page.waitForFunction(()=>!document.getElementById('musicLinkApply').disabled);assert.equal(await page.locator('#musicLinkPreview').isVisible(),true);assert.equal(new URL(await page.locator('#musicLinkPlayer iframe').getAttribute('src')).hostname,host);assert.equal(await page.locator('#musicLesson').isVisible(),false);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
  }
  assert.equal(await page.locator('#musicSavedLinks .music-saved-item').count(),3);
+ // Create a named playlist, add tracks directly and from preview, rename, and cycle with << / >>.
+ await page.locator('#musicPlaylistName').fill('Nhạc Hoa chill');await page.locator('#musicPlaylistCreateBtn').click();
+ assert.equal(await page.locator('#musicPlaylistList .music-playlist-card').count(),1);
+ await page.locator('#musicPreviewPlaylistAdd').click();
+ await page.locator('#musicPlaylistList .music-playlist-add-track input[type=url]').fill('https://youtu.be/abcdefghijk');
+ await page.locator('#musicPlaylistList .music-playlist-add-track input[type=text]').fill('Bài YouTube số 1');
+ await page.locator('#musicPlaylistList .music-playlist-add-track button[type=submit]').click();
+ assert.equal(await page.locator('#musicPlaylistList .music-playlist-track').count(),2);
+ await page.locator('#musicPlaylistList .music-playlist-actions button').first().click();
+ assert.equal(await page.locator('#musicLinkTitle').innerText(),'Bài YouTube số 1');
+ await page.locator('#musicLinkNext').click();
+ assert.equal(await page.locator('#musicLinkTitle').innerText(),'Bài thử từ link');
+ await page.locator('#musicLinkPrev').click();
+ assert.equal(await page.locator('#musicLinkTitle').innerText(),'Bài YouTube số 1');
  // A reviewed SoundCloud lesson uses official widget events in milliseconds.
  await page.evaluate(()=>{
  window.scTest={seek:0,handlers:{},unbinds:0};function Widget(){const state=window.scTest;return {bind(name,fn){state.handlers[name]=fn;if(name==='READY')setTimeout(fn,0);},unbind(){state.unbinds++;},seekTo(ms){state.seek=ms;},play(){state.handlers.PLAY?.();},pause(){state.handlers.PAUSE?.();}};}Widget.Events=Object.fromEntries(['READY','PLAY','PAUSE','FINISH','PLAY_PROGRESS','SEEK','ERROR'].map(n=>[n,n]));window.SC={Widget};
