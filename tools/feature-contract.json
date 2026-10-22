@@ -1118,6 +1118,7 @@
         {"kind":"file","file":"src/modules/music/music-soundcloud.js","value":""},
         {"kind":"file","file":"tools/check-music-links-ui.cjs","value":""},
         {"kind":"data_go","file":"index.html","value":"music"},
+        {"kind":"data_go","file":"index.html","value":"music-play"},
         {"kind":"file","file":"tools/check-music-mobile-nav-ui.cjs","value":""}
       ]
     }

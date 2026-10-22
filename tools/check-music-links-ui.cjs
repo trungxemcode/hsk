@@ -4,7 +4,7 @@ const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),pat
  try{browser=await chromium.launch({headless:true,...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
  for(const width of [390,1440]){
  const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKMusic&&window.HSKStudio&&window.HSKLessons);
- await page.evaluate(()=>{window.HSKAccountDashboard={user:{uid:'links-user'}};window.HSKStudio.navigate('music');});
+ await page.evaluate(()=>{window.HSKAccountDashboard={user:{uid:'links-user'}};window.HSKStudio.navigate('music-play');});
  for(const [url,host] of [['https://youtu.be/abcdefghijk?si=x','www.youtube-nocookie.com'],['https://open.spotify.com/track/0123456789ABCDEFGHIJKL?si=x','open.spotify.com'],['https://soundcloud.com/artist/song?si=x','w.soundcloud.com']]){
  if(!(await page.locator('#musicMenuSheet').isVisible()))await page.locator('#musicMenuBtn').click();
  if(!(await page.locator('#musicLinkImport').evaluate(d=>d.open)))await page.locator('#musicLinkImport>summary').click();
