@@ -19,7 +19,9 @@ jobs:
       - name: Install test dependencies
         run: npm install --prefix /tmp/hsk-tests jsdom@26.1.0 playwright@1.56.1
       - name: Install Chinese fonts for visual checks
-        run: sudo apt-get update -qq && sudo apt-get install -y fonts-noto-cjk
+        continue-on-error: true
+        timeout-minutes: 2
+        run: sudo apt-get update -qq -o Acquire::ForceIPv4=true -o Acquire::http::Timeout=15 && sudo apt-get install -y --no-install-recommends fonts-noto-cjk || true
       - name: Verify mobile lesson chat
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules
