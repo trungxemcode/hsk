@@ -163,8 +163,8 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
     const disclosure=page.locator('#practiceModeDisclosure');
     await disclosure.evaluate(el=>el.open=true);
     const tiles=page.locator('#practiceModeOptions .ps-option');
-    assert.equal(await tiles.count(),12);
-    assert.equal(await page.locator('#practiceModeOptions [data-practice-option="music"]').count(),1,'music listening remains reachable in the chooser');
+    assert.equal(await tiles.count(),11);
+    assert.equal(await page.locator('#practiceModeOptions [data-practice-option="music"]').count(),0,'music has moved to standalone navigation');
     const sizing=await tiles.evaluateAll(cards=>cards.map(c=>{const r=c.getBoundingClientRect();return {height:r.height,width:r.width}}));
     for(const tile of sizing){assert.ok(tile.height>=44,'compact tile still finger-friendly');assert.ok(tile.width>40,'tile remains legible');}
     if(width<=720)assert.equal(await page.locator('#practiceModeOptions').evaluate(n=>getComputedStyle(n).gridTemplateColumns.split(' ').length),2);

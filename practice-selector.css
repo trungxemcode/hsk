@@ -31,7 +31,7 @@
 #studioPractice .hub-card .ps-hub-icon{width:54px;min-width:54px;height:54px;min-height:54px}
 #studioPractice .hub-card .hub-symbol.ps-hub-icon,#studioPractice .hub-card .hub-visual.ps-hub-icon{background:var(--accent-light)!important;color:var(--accent-dark)!important}
 #practiceSessionBar[hidden]{display:none!important}
-#practiceSessionBar{display:flex;position:sticky;top:0;z-index:25;justify-content:space-between;align-items:center;gap:12px;margin:0 0 14px;padding:12px 15px;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-btn)}
+#practiceSessionBar{display:flex;position:static;z-index:auto;justify-content:space-between;align-items:center;gap:12px;margin:0 0 14px;padding:12px 15px;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-btn)}
 #practiceSessionBar .ps-session-label{display:grid;gap:4px}
 #practiceSessionBar .ps-session-label strong{font-size:13px;color:var(--accent-ink)}
 #practiceSessionBar .ps-session-label span{color:var(--ink);font-size:14px}
@@ -62,7 +62,7 @@
  #studioPractice .ps-option{min-height:80px}
  #studioPractice .ps-tools{gap:8px}
  #studioPractice .ps-option .ps-icon{width:52px;height:52px;min-width:52px;min-height:52px}
- #practiceSessionBar{position:sticky;top:0;flex-wrap:wrap;padding:10px}
+ #practiceSessionBar{position:static;flex-wrap:wrap;padding:10px}
  #practiceSessionBar .ps-session-actions{width:100%}
  #practiceSessionBar .ps-session-actions button{flex:1}
  .study4-exam-panel .s4-controls{align-items:stretch}

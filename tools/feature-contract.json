@@ -1116,7 +1116,9 @@
         {"kind":"file","file":"server/music/worker.mjs","value":""},
         {"kind":"contains","file":"src/modules/music/music-core.js","value":"function parseLink(input)"},
         {"kind":"file","file":"src/modules/music/music-soundcloud.js","value":""},
-        {"kind":"file","file":"tools/check-music-links-ui.cjs","value":""}
+        {"kind":"file","file":"tools/check-music-links-ui.cjs","value":""},
+        {"kind":"data_go","file":"index.html","value":"music"},
+        {"kind":"file","file":"tools/check-music-mobile-nav-ui.cjs","value":""}
       ]
     }
   ]

@@ -41,7 +41,7 @@
  const practice=document.getElementById('studioPractice');
  if(!practice)return;
  const reviewIDs=new Set(['srs','mistakes']);
- const groups=[{prefix:'practice',name:'luyện',modes:MODES.filter(m=>!reviewIDs.has(m[0]))},{prefix:'review',name:'ôn',modes:MODES.filter(m=>reviewIDs.has(m[0]))}];
+ const groups=[{prefix:'practice',name:'luyện',modes:MODES.filter(m=>!reviewIDs.has(m[0])&&m[0]!=='music')},{prefix:'review',name:'ôn',modes:MODES.filter(m=>reviewIDs.has(m[0]))}];
  for(const group of groups){
   const {prefix,name}=group,picker=document.createElement('div');picker.id=prefix+'ModePicker';picker.className='ps-picker';group.picker=picker;
   picker.innerHTML=`<details id="${prefix}ModeDisclosure" class="ps-disclosure">
