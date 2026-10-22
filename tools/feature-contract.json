@@ -1103,6 +1103,18 @@
         {"kind":"file","file":"server/image-quota.test.mjs","value":""},
         {"kind":"contains","file":"server/ai-control.mjs","value":"user-image-daily"}
       ]
+    },
+    {
+      "id": "music-listening",
+      "name": "Nghe nhạc theo câu và phân loại tỷ lệ HSK",
+      "checks": [
+        {"kind":"contains","file":"src/modules/practice/practice-selector.js","value":"['music'"},
+        {"kind":"contains","file":"src/modules/music/music.js","value":"window.HSKMusic="},
+        {"kind":"contains","file":"src/modules/music/music-core.js","value":"hsk-music-history-v1"},
+        {"kind":"file","file":"server/music.test.mjs","value":""},
+        {"kind":"file","file":"tools/check-music-ui.cjs","value":""},
+        {"kind":"file","file":"server/music/worker.mjs","value":""}
+      ]
     }
   ]
 }
