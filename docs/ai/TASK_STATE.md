@@ -1,3 +1,27 @@
+## Music Home Button Animation Sync & Spotify-style Recent Tracks with Mini Player — 2026-10-22
+- Release 3.10.21 on branch feat/music-spotify-home from origin/main 5d27e9a (3.10.20).
+- Addressed two specific user requirements sequentially:
+  1. Synchronized Home button active animation:
+     - Fixed CSS rules in `music.css` lines 213–222 for `.home-music-grid :is(.home-music-entry,.home-music-chill)`.
+     - Idle state keeps standard theme card colors. When pressed/active (`:is(:hover,:active,:focus-visible,.active,[aria-pressed=true])`), card background turns purple (`var(--button-active-bg)`), border turns purple, icon pill turns translucent white (`var(--legacy-rgb-11)`), and text/icon turns crisp white (`var(--button-active-text)`), perfectly matching "Sổ từ vựng" and the other home cards.
+  2. Spotify-style Browse View & Floating Mini Player in "Nghe nhạc giải trí" (`currentMode === 'chill'`):
+     - Entering "Nghe nhạc giải trí" displays `#musicBrowseView` (Browse mode) instead of an empty full-screen player placeholder:
+       - Header with back button returning to Home (`window.HSKStudio?.navigate('home')`), title "Nghe nhạc giải trí", and `⋯` options button.
+       - Category filter pills: "Tất cả", "Bài hát", "Playlist".
+       - Section "Nội dung bạn hay nghe gần đây" rendered from `savedLinks()` with square 52x52px thumbnails, bold capitalized titles, artist/source subtitles, and `⋯` options button opening the action sheet.
+       - Section "Danh sách phát của bạn" showing saved playlists.
+     - Floating Mini Player (`#musicMiniPlayer`):
+       - Docked near the bottom of the screen (`bottom: calc(12px + env(safe-area-inset-bottom))`), without a bottom navigation bar per user requirement: "( không cần thanh điều hướng ở đáy )".
+       - Displays the last played / paused song (or most recent track) with 42x42px square thumbnail, track title, artist, quick save check/plus button, and Play / Pause button.
+       - Thin 2px bottom progress bar synchronized with current playback position.
+       - Tapping the mini player body expands to the full-screen now-playing player (`setPlayerExpanded(true)`); tapping the top-left chevron collapses back down to the browse view (`setPlayerExpanded(false)`).
+- Quality Gates & Validation:
+  - PASS design tokens (0 hex/rgba violations).
+  - PASS DOM tests (`check-music-dom.cjs`, `check-music-links-dom.cjs`).
+  - PASS Playwright UI tests: `check-music-mobile-nav-ui.cjs` (320, 390, 1440px), `check-music-links-ui.cjs` (390, 1440px), `check-music-ui.cjs` (390, 844, 1440px, light & dark), `check-home-overview-ui.cjs`, `check-mobile-ux-ui.cjs`.
+  - PASS feature preservation (47 capabilities, 189 guards).
+  - PASS PWA release guard: 169 assets verified, version **3.10.21**.
+
 ## Music Spotify-style compact menu and dedicated sub-views — 2026-10-22
 - Release 3.10.20 on branch feat/music-spotify-compact-menu from origin/main 19833e1 (3.10.19).
 - Re-architected bottom sheet into Spotify-style compact action sheet with dedicated sub-views:
