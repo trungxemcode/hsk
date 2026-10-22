@@ -9,3 +9,13 @@ body.drawer-open .lesson-chat-button,body.drawer-open .lesson-chat-panel,body.dr
 .lesson-selection-prompt form{display:grid;gap:8px}.lesson-selection-prompt label{font-weight:700}.lesson-selection-prompt textarea{width:100%;min-height:66px;resize:none;padding:9px 10px;border:1px solid var(--legacy-hex-bdcce4);border-radius:var(--radius-10px);font:16px/1.4 system-ui}.lesson-selection-prompt form>div{display:flex;justify-content:flex-end;gap:8px}.lesson-selection-prompt button{min-height:40px;padding:7px 12px;border:0;border-radius:var(--radius-10px);background:var(--legacy-hex-173d91);color:var(--palette-white);font:600 14px system-ui}.lesson-selection-prompt #lessonSelectionClose{width:40px;padding:0;background:var(--legacy-hex-edf2fc);color:var(--legacy-hex-193256);font-size:20px}
 @media(min-width:701px){.lesson-chat-button{bottom:24px}.lesson-chat-panel{bottom:86px;height:min(540px,calc(100dvh - 110px))}}
 @media(max-height:650px){.lesson-chat-panel{top:max(calc(var(--safe-t,env(safe-area-inset-top,0px)) + 10px),20px);bottom:calc(82px + env(safe-area-inset-bottom,0px));height:auto;max-height:none}}
+
+/* Keep iOS focus at the current zoom and fit the keyboard's visual viewport. */
+body.studio-enabled #lessonChatInput,body.studio-enabled #lessonSelectionInput{font-size:16px}
+.lesson-chat-panel[aria-busy=true] .lesson-chat-status{display:flex;align-items:center;gap:8px}
+.lesson-chat-panel[aria-busy=true] .lesson-chat-status::before{content:"";flex:none;width:16px;height:16px;border:2px solid var(--line-dark);border-top-color:var(--accent);border-radius:var(--radius-round);animation:hsk-chat-spin .85s linear infinite;will-change:transform}
+@keyframes hsk-chat-spin{to{transform:rotate(360deg)}}
+@media(max-width:700px),(pointer:coarse){
+ .lesson-chat-panel{top:calc(var(--chat-view-top,0px) + env(safe-area-inset-top,0px) + 8px);bottom:auto;height:calc(var(--chat-view-height,100dvh) - env(safe-area-inset-top,0px) - 16px);max-height:min(560px,65dvh);right:max(10px,env(safe-area-inset-right,0px));width:calc(100% - max(10px,env(safe-area-inset-right,0px)) - max(10px,env(safe-area-inset-left,0px)))}
+}
+@media(prefers-reduced-motion:reduce){.lesson-chat-panel[aria-busy=true] .lesson-chat-status::before{animation-duration:2s}}
