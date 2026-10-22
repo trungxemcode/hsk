@@ -13,6 +13,7 @@ const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),pat
  await page.locator('#musicMenuBtn').click();
  assert.equal(await page.locator('#musicSavedLinks .music-saved-item').count(),3);
  // Create a named playlist, add tracks directly and from preview, rename, and cycle with << / >>.
+ if(await page.locator('#musicPlaylistCreateBox').count()){if(!(await page.locator('#musicPlaylistCreateBox').evaluate(d=>d.open)))await page.locator('#musicPlaylistCreateBox>summary').click();}
  await page.locator('#musicPlaylistName').fill('Nhạc Hoa chill');await page.locator('#musicPlaylistCreateBtn').click();
  assert.equal(await page.locator('#musicPlaylistList .music-playlist-card').count(),1);
  await page.locator('#musicPreviewPlaylistAdd').click();
