@@ -1,3 +1,9 @@
+## Music dual modes separation — 2026-10-22
+- Merged PR #147 (`d9a82f9`, `Bản 3.10.16`) to `main`. Split music into two distinct entrypoints and mechanisms:
+  1. **Nghe nhạc giải trí (`music-play` / `chill`)**: Pure Spotify-like entertainment player with custom link input (YouTube, Spotify, SoundCloud), custom playlists, quick save (`+`/`✓`), 5s seek, loop, speed controls (`0.75x / 1x / 1.25x`), and Media Session API. All academic HSK elements (lyrics comparison card, HSK level filters, quizzes, study history) are 100% hidden.
+  2. **Nghe nhạc học HSK (`music` / `study`)**: Strictly for studying App-provided songs (`BUILTIN_SONGS`: *月亮代表我的心*, *甜蜜蜜*, *朋友* and server catalog) with sentence-by-sentence playback, HSK level filters, Hanzi / Pinyin / Vietnamese reveal toggles, HSK vocabulary distribution, new words outside HSK, listening comprehension quizzes, and study history.
+- Verification: All 6 CI jobs pass (`layout`, `mobile-and-learning`, `protected-flows`, `feature-contracts`, `release-guard`, `touch`). PWA release `3.10.16` prepared with 169 offline assets.
+
 ## Music URL import — 2026-10-22
 - Branch feat/music-link-import-20261022 from merged main9be0164/3.10.1. Add full HTTPS song link input, source validation/canonicalization, official YouTube/Spotify/SoundCloud previews,30 saved links per account and deletion of saved entries. Bare links do not invent HSK lyrics/grades. Optional reviewed JSON enables timed YouTube/SoundCloud learning; SoundCloud Widget adapter handles ms/seconds, pause/seek and cleanup. Spotify remains listen-only with explicit preview/session limitations; redirect shortlinks need full URL. Loop stays opt-in.
 - No harvesting, Googlevideo resolver, metadata/lyrics scraping, AI generation, role/quota changes or Worker voice deployments. Cloud catalogue remains default off; personal links function independently. Detailed limits and external references: MUSIC_PILOT.md.
