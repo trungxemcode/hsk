@@ -1,0 +1,23 @@
+const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),path=require('path'),assert=require('node:assert/strict');
+(async()=>{
+ const root=process.cwd(),server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new URL(req.url,'http://local').pathname);if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){res.writeHead(404);res.end();return;}res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'})[path.extname(file)]||'application/octet-stream');res.end(fs.readFileSync(file));});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
+ try{browser=await chromium.launch({headless:true,...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
+ for(const width of [390,1440]){
+ const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKMusic&&window.HSKStudio&&window.HSKLessons);
+ await page.evaluate(()=>{window.HSKAccountDashboard={user:{uid:'links-user'}};window.HSKStudio.navigate('music');});
+ for(const [url,host] of [['https://youtu.be/abcdefghijk?si=x','www.youtube-nocookie.com'],['https://open.spotify.com/track/0123456789ABCDEFGHIJKL?si=x','open.spotify.com'],['https://soundcloud.com/artist/song?si=x','w.soundcloud.com']]){
+ await page.locator('#musicLinkUrl').fill(url);await page.locator('#musicLinkName').fill('Bài thử từ link');await page.locator('#musicLinkApply').click();await page.waitForFunction(()=>!document.getElementById('musicLinkApply').disabled);assert.equal(await page.locator('#musicLinkPreview').isVisible(),true);assert.equal(new URL(await page.locator('#musicLinkPlayer iframe').getAttribute('src')).hostname,host);assert.equal(await page.locator('#musicLesson').isVisible(),false);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
+ }
+ assert.equal(await page.locator('#musicSavedLinks .music-saved-item').count(),3);
+ // A reviewed SoundCloud lesson uses official widget events in milliseconds.
+ await page.evaluate(()=>{
+ window.scTest={seek:0,handlers:{},unbinds:0};function Widget(){const state=window.scTest;return {bind(name,fn){state.handlers[name]=fn;if(name==='READY')setTimeout(fn,0);},unbind(){state.unbinds++;},seekTo(ms){state.seek=ms;},play(){state.handlers.PLAY?.();},pause(){state.handlers.PAUSE?.();}};}Widget.Events=Object.fromEntries(['READY','PLAY','PAUSE','FINISH','PLAY_PROGRESS','SEEK','ERROR'].map(n=>[n,n]));window.SC={Widget};
+ });
+ await page.locator('#musicLinkUrl').fill('https://soundcloud.com/artist/song');await page.locator('#musicLinkLyrics').setInputFiles(path.join(root,'content/music/lesson-template.json'));await page.locator('#musicLinkApply').click();await page.waitForFunction(()=>!document.getElementById('musicLesson').hidden);assert.equal(await page.locator('#musicRate').isDisabled(),true);assert.equal(await page.locator('#musicLoop').getAttribute('aria-pressed'),'false');
+ await page.locator('#musicNext').click();assert.equal(await page.evaluate(()=>scTest.seek),5000);await page.locator('#musicLoop').click();await page.evaluate(()=>scTest.handlers.PLAY_PROGRESS({currentPosition:10020}));assert.equal(await page.evaluate(()=>scTest.seek),5000);
+ await page.evaluate(()=>window.HSKStudio.navigate('practice'));await page.evaluate(()=>window.HSKStudio.navigate('music'));await page.waitForFunction(()=>window.scTest.unbinds>0);await page.locator('#musicPlay').click();await page.evaluate(()=>scTest.handlers.PLAY_PROGRESS({currentPosition:5200}));
+ await page.evaluate(()=>{window.HSKAccountDashboard={user:{uid:'other'}};window.dispatchEvent(new Event('hsk-account-ready'));});assert.equal(await page.locator('#musicLinkPlayer iframe').count(),0);assert.equal(await page.locator('#musicYoutube iframe').count(),0);assert.equal(await page.locator('#musicSavedLinks .music-saved-item').count(),0);
+ assert.deepEqual(errors,[]);console.log('PASS music links UI',width,'three official embeds, optional timed SoundCloud lesson, seek/loop and account cleanup; providers mocked');await page.close();
+ }
+ }finally{await browser?.close();server.close();}
+})().catch(e=>{console.error(e);process.exitCode=1});
