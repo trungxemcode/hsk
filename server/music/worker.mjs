@@ -52,7 +52,7 @@ export async function handleMusic(request,env,ctx,{fetchFn=fetch}={}){
    const size=Number(request.headers.get('Content-Length'));if(size>500000)return json({error:'File lời quá lớn.'},413);
    const bytes=await request.arrayBuffer();if(bytes.byteLength>500000)return json({error:'File lời quá lớn.'},413);
    let song;try{song=C.validateSong(JSON.parse(new TextDecoder().decode(bytes)));}catch(e){return json({error:e.message},400);}
-   if(song.source.kind==='local')return json({error:'Kho chung chỉ chấp nhận R2 hoặc mã YouTube.'},400);
+   if(song.source.kind==='local')return json({error:'Kho chung nhận R2, YouTube hoặc SoundCloud kèm dữ liệu bài học.'},400);
    if(!song.credit)return json({error:'Cần ghi nguồn và quyền sử dụng trong credit.'},400);
    let fileSize=0;
    if(song.source.kind==='r2'){const asset=await env.MUSIC_BUCKET.head(song.source.key);if(!asset||asset.size>52428800)return json({error:'Tệp R2 chưa có hoặc vượt 50 MB của bản thử.'},400);fileSize=asset.size;}
