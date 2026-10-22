@@ -1,6 +1,11 @@
 {
   "schema": 1,
   "files": [
+    "src/modules/music/music-core.js",
+    "src/modules/music/music.js",
+    "music.css",
+    "music-config.json",
+    "content/music/lesson-template.json",
     "src/modules/planner/planner-core.js",
     "src/modules/planner/planner.js",
     "index.html",
