@@ -13,6 +13,7 @@ function wav(){const samples=44100*11,b=Buffer.alloc(44+samples*2);b.write('RIFF
  assert.equal(await page.locator('#musicPanel').isVisible(),true);await page.locator('#musicImport summary').click();
  await page.locator('#musicManifest').setInputFiles(path.join(root,'content/music/lesson-template.json'));
  await page.locator('#musicFile').setInputFiles({name:'test.wav',mimeType:'audio/wav',buffer:wav()});await page.locator('#musicImportApply').click();await page.waitForFunction(()=>document.getElementById('musicPlayer').readyState>=1);
+ assert.equal(await page.locator('#musicLoop').getAttribute('aria-pressed'),'false','Loop is opt-in on every opened song');
  assert.equal(await page.locator('#musicLyrics').isVisible(),false);await page.locator('#musicHold').focus();await page.keyboard.down('Space');assert.equal(await page.locator('#musicLyrics').isVisible(),true);await page.keyboard.up('Space');assert.equal(await page.locator('#musicLyrics').isVisible(),false);
  await page.locator('#musicPlay').click();await page.waitForFunction(()=>!document.getElementById('musicPlayer').paused);
  await page.locator('#musicLoop').click();await page.evaluate(()=>document.getElementById('musicPlayer').currentTime=4.99);await page.waitForFunction(()=>document.getElementById('musicPlayer').currentTime<2);
