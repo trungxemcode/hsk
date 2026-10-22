@@ -1,3 +1,15 @@
+## Music Player & Home Shortcuts UX Polish — 2026-10-22
+- Release 3.10.17 merged to main (#149) from branch `feat/music-player-ux-polish`.
+- Fixed asymmetrical home entry buttons: scoped CSS override suppresses touch sticky active/hover background so `.home-music-chill` and `.home-music-entry` stay perfectly symmetrical and consistent; icons remain visible across all viewport sizes.
+- Player UI refined according to Spotify design principles:
+  - Artwork: cover expanded (~85% viewport width, 1:1 square), aligned with title and progress bar; scale factor 1.42 eliminates YouTube thumbnail black letterbox bands.
+  - Quick Save Button: compact 28px circular button with subtle border; scrubber thumb shrunk to 7px (gently expanding to 11px on touch/focus).
+  - Transport & Controls: ghost icon style for Loop, 1x (no border, clean typography) and Queue buttons.
+  - Added Peek Card rising from the bottom with frosted glass background and drag bar to eliminate dead void and provide depth.
+  - Song title capitalized automatically via CSS `text-transform: capitalize;`.
+  - Bottom Sheet: dark semi-transparent inputs, no nested boxed frames, compact 1-line link input form, hidden browser scrollbar.
+- Validation: Passed all quality gates (`check-design-tokens.cjs`, `check-feature-preservation.py`, `check-music-dom.cjs`, `check-music-links-dom.cjs`, `check-music-mobile-nav-ui.cjs`, `check-music-links-ui.cjs`, `check-music-ui.cjs`, `check-home-overview-ui.cjs`, `check-responsive-goal-ui.cjs`, 262 server tests).
+
 ## Music URL import — 2026-10-22
 - Branch feat/music-link-import-20261022 from merged main9be0164/3.10.1. Add full HTTPS song link input, source validation/canonicalization, official YouTube/Spotify/SoundCloud previews,30 saved links per account and deletion of saved entries. Bare links do not invent HSK lyrics/grades. Optional reviewed JSON enables timed YouTube/SoundCloud learning; SoundCloud Widget adapter handles ms/seconds, pause/seek and cleanup. Spotify remains listen-only with explicit preview/session limitations; redirect shortlinks need full URL. Loop stays opt-in.
 - No harvesting, Googlevideo resolver, metadata/lyrics scraping, AI generation, role/quota changes or Worker voice deployments. Cloud catalogue remains default off; personal links function independently. Detailed limits and external references: MUSIC_PILOT.md.
