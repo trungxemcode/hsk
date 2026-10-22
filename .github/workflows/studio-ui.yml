@@ -29,6 +29,7 @@ jobs:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: |
           node tools/check-music-dom.cjs
+          node tools/check-music-links-dom.cjs
           node tools/check-design-tokens.cjs
           node tools/check-placement-dom.cjs
           node tools/check-placement-route-dom.cjs
@@ -56,6 +57,7 @@ jobs:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: |
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-links-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-lesson-guided-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-guided-presentation-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-press-shape-ui.cjs

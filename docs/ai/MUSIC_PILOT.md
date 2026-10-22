@@ -4,6 +4,18 @@ Scope: first music lesson workflow adapted from the user-supplied `test folder.z
 
 ## What works
 
+### Link import (3.10.2)
+
+The music route accepts full HTTPS song links from YouTube (watch, youtu.be, Shorts/live/embed, music.youtube.com), Spotify (track, including localized/embed paths), and public SoundCloud track pages. It canonicalizes allowed hosts/IDs and discards tracking parameters. Arbitrary domains, credentials, playlist/channel links and private SoundCloud secret links are rejected. Short redirect links such as on.soundcloud.com and spotify.link require opening in a browser and copying the full track URL; no arbitrary URL resolver or server fetch is introduced.
+
+Without a lesson file the link opens in its provider's official visible iframe, with a source-page fallback. It has no invented lyrics, HSK classification, questions or score. Spotify is currently listen-only and may deliver a preview depending on content/session/provider restrictions. No claim of full-track, ad-free or offline playback. Normal provider settings and consent/login requirements remain.
+
+YouTube and SoundCloud links may be paired with a reviewed timed lesson JSON. The supplied source overrides the local source in the template; a canonical-URL SHA-256 derived ID isolates progress across different tracks. SoundCloud's official Widget API provides play/pause/seek/time events; positions convert milliseconds to seconds. Speed selection is disabled for SoundCloud because the widget does not expose a playback-rate control. Loop remains off by default and is enabled only by the learner. This path does not download media, query AI or require the Cloudflare music catalogue to be enabled.
+
+Up to30 canonical links/titles are saved per account under hsk-music-links-v1:<uid>. Saved links contain no provider tracking/secret parameters; they reopen as listening links. Reattach the reviewed JSON to start a timed lesson again. Local history/progress remains separate. Preview iframes are removed on route exit/account switch; timed players pause and reinitialize on route reentry. Late imports/API callbacks cannot mount under a different account. Provider scripts load only for a timed external lesson, not at app startup.
+
+Official integration references: [Spotify embeds](https://developer.spotify.com/documentation/embeds), [Spotify troubleshooting](https://developer.spotify.com/documentation/embeds/tutorials/troubleshooting), [SoundCloud Widget API](https://developers.soundcloud.com/docs/api/html5-widget).
+
 - Local audio/video + validated lesson JSON, without uploading the user's media. 50 MB/file, 500 KB lesson input, 250 non-overlapping timed lines, maximum end 30 minutes. Local files are not persisted; select them again after reload. Text progress/history is per Firebase UID (or guest), bounded to 30 songs/200 answered segments and does not modify SRS, mastery, notebook or account study score.
 - One reused native media element, explicit play, line selection/replay/loop, native controls, playback speed, hidden lyrics with pointer/keyboard hold or persistent reveal, independent pinyin/translation switches, per-line multiple choice and real selected-answer grading. Imported answers are client-visible practice data, not trusted assessment evidence.
 - Progress is saved periodically, on visibility/navigation changes, and restored after metadata loads; playback resumes only on user action. Failed playback has a reload-source action; no infinite auto-retry or claim of 100% uninterrupted playback.

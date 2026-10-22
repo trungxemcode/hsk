@@ -3,13 +3,38 @@
  'use strict';
  const VERSION=1, HISTORY_KEY='hsk-music-history-v1';
  const text=(s,max)=>typeof s==='string'&&s.trim().length>0&&s.length<=max;
+ function parseLink(input){
+  if(typeof input!=='string'||input.length>2048)throw Error('Dán link bài hát YouTube, Spotify hoặc SoundCloud.');
+  let url;try{url=new URL(input.trim());}catch{throw Error('Link chưa đúng. Hãy sao chép liên kết HTTPS của bài hát.');}
+  if(url.protocol!=='https:'||url.username||url.password||url.port||/[\\\s]/.test(input.trim()))throw Error('Chỉ nhận link HTTPS công khai, không kèm thông tin đăng nhập.');
+  const host=url.hostname.toLowerCase(),path=url.pathname.replace(/\/$/,'');
+  if(['youtube.com','www.youtube.com','m.youtube.com','music.youtube.com','youtu.be','www.youtu.be','youtube-nocookie.com','www.youtube-nocookie.com'].includes(host)){
+   const id=host.endsWith('youtu.be')?path.slice(1):path==='/watch'?url.searchParams.get('v'):path.match(/^\/(?:embed|shorts|live)\/([^/]+)$/)?.[1];
+   if(!/^[\w-]{11}$/.test(id||''))throw Error('Cần link một video YouTube, không phải kênh hoặc playlist.');
+   return {kind:'youtube',label:'YouTube',url:'https://www.youtube.com/watch?v='+id,embedUrl:'https://www.youtube-nocookie.com/embed/'+id,source:{kind:'youtube',videoId:id}};
+  }
+  if(host==='open.spotify.com'){
+   const id=path.match(/^\/(?:intl-[a-z]{2}\/)?(?:embed\/)?track\/([A-Za-z0-9]{22})$/)?.[1];
+   if(!id)throw Error('Cần link một bài hát Spotify dạng open.spotify.com/track/…');
+   return {kind:'spotify',label:'Spotify',url:'https://open.spotify.com/track/'+id,embedUrl:'https://open.spotify.com/embed/track/'+id,source:{kind:'spotify',trackId:id}};
+  }
+  if(host==='soundcloud.com'||host==='www.soundcloud.com'){
+   const match=path.match(/^\/([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+)$/);
+   if(!match||['sets','likes','reposts','tracks','albums','popular-tracks'].includes(match[2])||['discover','search','you','stations'].includes(match[1])||url.searchParams.has('secret_token'))throw Error('Cần link một bài SoundCloud công khai dạng soundcloud.com/nghe-si/ten-bai.');
+   const canonical='https://soundcloud.com/'+match[1]+'/'+match[2];
+   return {kind:'soundcloud',label:'SoundCloud',url:canonical,embedUrl:'https://w.soundcloud.com/player/?url='+encodeURIComponent(canonical)+'&auto_play=false',source:{kind:'soundcloud',url:canonical}};
+  }
+  if(['on.soundcloud.com','spotify.link','spoti.fi'].includes(host))throw Error('Đây là link rút gọn. Mở link trong trình duyệt rồi sao chép địa chỉ đầy đủ của bài hát.');
+  throw Error('Hiện hỗ trợ link bài hát từ YouTube, Spotify và SoundCloud.');
+ }
  function validateSong(value){
   if(!value||value.version!==VERSION||!/^[-a-zA-Z0-9_]{1,80}$/.test(value.id||'')||!text(value.title,120))throw Error('Bài hát cần version=1, mã id và tên hợp lệ.');
   if(!Array.isArray(value.segments)||!value.segments.length||value.segments.length>250)throw Error('Mỗi bài cần 1–250 câu có mốc thời gian.');
   const source=value.source;
-  if(!source||!['local','r2','youtube'].includes(source.kind))throw Error('Chọn nguồn local, r2 hoặc youtube.');
+  if(!source||!['local','r2','youtube','soundcloud'].includes(source.kind))throw Error('Chọn nguồn local, r2, youtube hoặc soundcloud.');
   if(source.kind==='r2'&&!/^music\/[a-f0-9]{64}\.(mp4|mp3|m4a|wav)$/.test(source.key||''))throw Error('Khóa R2 phải dùng music/<sha256>.<đuôi tệp>.');
   if(source.kind==='youtube'&&!/^[a-zA-Z0-9_-]{11}$/.test(source.videoId||''))throw Error('Mã video YouTube không hợp lệ.');
+  if(source.kind==='soundcloud'&&parseLink(source.url).kind!=='soundcloud')throw Error('Nguồn SoundCloud không hợp lệ.');
   const ids=new Set();let end=0;
   const segments=value.segments.map((s,i)=>{
    if(!s||!/^[-a-zA-Z0-9_]{1,80}$/.test(s.id||'')||ids.has(s.id))throw Error('Mã câu không được trùng.');ids.add(s.id);
@@ -20,7 +45,7 @@
    if(!q||!text(q.question,300)||!Array.isArray(q.options)||q.options.length<2||q.options.length>4||q.options.some(o=>!text(o,300))||new Set(q.options).size!==q.options.length||!Number.isInteger(q.answer)||q.answer<0||q.answer>=q.options.length)throw Error('Mỗi câu cần câu hỏi, 2–4 lựa chọn khác nhau và chỉ số đáp án.');
    return {id:s.id,start:s.start,end:s.end,hanzi:s.hanzi,pinyin:s.pinyin,vi:s.vi,...(s.tokens?{tokens:s.tokens.slice()}:{}),quiz:{question:q.question,options:q.options.slice(),answer:q.answer}};
   });
-  return {version:VERSION,id:value.id,title:value.title,artist:String(value.artist||'').slice(0,120),credit:String(value.credit||'').slice(0,500),revision:String(value.revision||'1').slice(0,80),source:{kind:source.kind,...(source.kind==='r2'?{key:source.key}:source.kind==='youtube'?{videoId:source.videoId}:{})},segments};
+  return {version:VERSION,id:value.id,title:value.title,artist:String(value.artist||'').slice(0,120),credit:String(value.credit||'').slice(0,500),revision:String(value.revision||'1').slice(0,80),source:{kind:source.kind,...(source.kind==='r2'?{key:source.key}:source.kind==='youtube'?{videoId:source.videoId}:source.kind==='soundcloud'?{url:parseLink(source.url).url}:{})},segments};
  }
  function dictionary(words){
   const map=new Map();
@@ -53,6 +78,6 @@
   const scale=fit==='cover'?Math.max(cw/vw,ch/vh):Math.min(cw/vw,ch/vh);
   return {width:vw*scale,height:vh*scale,x:(cw-vw*scale)/2,y:(ch-vh*scale)/2};
  }
- const api={VERSION,HISTORY_KEY,validateSong,dictionary,tokenize,classify,activeSegment,grade,record,renderedRect};
+ const api={VERSION,HISTORY_KEY,parseLink,validateSong,dictionary,tokenize,classify,activeSegment,grade,record,renderedRect};
  root.HSKMusicCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof globalThis==='object'?globalThis:this);
