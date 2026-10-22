@@ -1,0 +1,12 @@
+{
+  "name": "hsk-music-pilot",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGINS": "https://trungxemcode.github.io",
+    "MAX_PILOT_SONGS": "20"
+  },
+  "d1_databases": [{"binding":"DB","database_name":"hsk-music-pilot","database_id":"REPLACE_WITH_CREATED_D1_ID"}],
+  "r2_buckets": [{"binding":"MUSIC_BUCKET","bucket_name":"hsk-music-pilot"}]
+}
