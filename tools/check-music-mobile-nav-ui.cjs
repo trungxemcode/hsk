@@ -21,8 +21,23 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic&&window.HSKPracticeSelection);
    assert.equal(await page.locator('.home-music-chill').isVisible(),true,'entertainment music has a home shortcut');
    assert.equal(await page.locator('.home-music-entry').isVisible(),true,'music has a home shortcut');
+   const chillBox=await page.locator('.home-music-chill').boundingBox();
+   const entryBox=await page.locator('.home-music-entry').boundingBox();
+   assert.ok(Math.abs(chillBox.height-entryBox.height)<2,'home music cards have equal height');
+   assert.ok(Math.abs(chillBox.y-entryBox.y)<2,'home music cards are top-aligned on same row');
+   assert.equal(await page.locator('.home-music-chill [data-icon=headphones] svg').isVisible(),true,'headphones icon is rendered in chill shortcut');
+   assert.equal(await page.locator('.home-music-entry [data-icon=volume-2] svg').isVisible(),true,'volume-2 icon is rendered in study shortcut');
    await page.locator('.home-music-chill').click();
    assert.equal(await page.locator('#musicPanel').getAttribute('data-music-mode'),'chill','home chill shortcut opens entertainment mode');
+   const playerCheck=await page.evaluate(()=>{
+    const play=document.getElementById('musicLinkPlay');
+    const aux=document.getElementById('musicQuickLoop');
+    return {
+     playBg:getComputedStyle(play).backgroundColor,
+     auxBg:getComputedStyle(aux).backgroundColor
+    };
+   });
+   assert.equal(playerCheck.auxBg,'rgba(0, 0, 0, 0)','aux button has transparent ghost background');
    await page.locator('#musicMenuBtn').click();
    assert.equal(await page.locator('#musicPlaylistsBox').isVisible(),true,'entertainment mode shows playlists');
    assert.equal(await page.locator('.music-filter-row').isVisible(),false,'entertainment mode hides HSK filter');

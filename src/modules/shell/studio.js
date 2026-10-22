@@ -20,6 +20,7 @@ const iconPaths={
 'arrow-up-right':'<path d="M7 17 17 7M8 7h9v9"/>',
 'arrow-right':'<path d="M5 12h14m-7-7 7 7-7 7"/>',
 'volume-2':'<path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>',
+'headphones':'<path d="M4 13v-2a8 8 0 0 1 16 0v2M4 13h4v8H6a2 2 0 0 1-2-2v-6ZM20 13h-4v8h2a2 2 0 0 0 2-2v-6Z"/>',
 'layout-grid':'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
 'circle-help':'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 1c0 2-2.5 2.1-2.5 4"/><path d="M12 17h.01"/>',
 'mouse-pointer-click':'<path d="m5 3 12 8-6 1-2.5 6L5 3ZM16 2v3M19 5l2-2M19 12h3"/>',

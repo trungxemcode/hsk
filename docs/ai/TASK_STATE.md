@@ -1,3 +1,18 @@
+## Music player UX responsiveness & home cards balance — 2026-10-22
+- Release 3.10.18 on branch feat/music-player-latency-and-home-grid from origin/main adfaaaf (3.10.17).
+- Root causes identified and resolved:
+  1. Home page 2-column shortcut misalignment:
+     - `iconPaths` in `src/modules/shell/studio.js` lacked `headphones`, leaving `.home-music-chill` icon box completely empty. Added SVG path.
+     - `music.css` line 214 previously injected `.home-music-entry{margin-top:8px}` on max-width 600px, pushing the right button down by 8px. Removed this rule.
+     - Mobile touch tap triggered `:focus`/`:active` which was caught by `ui-buttons.css` turning the card purple and erasing the icon background. Added explicit scoped `:not(.correct):not(.wrong):is(:hover,:active,:focus,:focus-visible)` rules keeping `--surface`/`--ink` and `--accent-light` icon box under all tap states.
+     - Both cards now use `align-items: stretch`, `min-height: 60px`, `height: 100%`, and flexible text wrapping with `overflow-wrap: anywhere` passing all responsive goal tests down to 320px at 200% text scale.
+  2. Music player responsiveness & latency elimination:
+     - Play/pause button SVG fill was previously overridden to white under active/hover states by `ui-buttons.css`. Added scoped `!important` rule on `:is(svg,path,rect)` and explicit inline/attribute fills for `var(--palette-dark-paper)`.
+     - Clicking play had a 2-3s freeze because YouTube iframe API takes 1-3s to buffer and report state 1 (`PLAYING`). Added optimistic state tracking (`linkOptimisticPlay`, `linkPendingPlay`) providing instant 0ms toggle feedback from Play to Pause upon user touch.
+     - Added `&autoplay=1` and `linkPendingPlay` when opening tracks from playlist/form to pre-buffer media without idle delay.
+     - Scoped `.music-aux-btn` to override `ui-buttons.css` with transparent ghost icons.
+- Validation: PASS design tokens, PASS feature preservation (47 capabilities, 189 guards), PASS DOM unit tests, PASS Playwright UI checks (320/390/844/1440px), PASS responsive goal UI at 100/150/200% text scale, PASS PWA release 3.10.18 with 169 verified assets.
+
 ## Music URL import — 2026-10-22
 - Branch feat/music-link-import-20261022 from merged main9be0164/3.10.1. Add full HTTPS song link input, source validation/canonicalization, official YouTube/Spotify/SoundCloud previews,30 saved links per account and deletion of saved entries. Bare links do not invent HSK lyrics/grades. Optional reviewed JSON enables timed YouTube/SoundCloud learning; SoundCloud Widget adapter handles ms/seconds, pause/seek and cleanup. Spotify remains listen-only with explicit preview/session limitations; redirect shortlinks need full URL. Loop stays opt-in.
 - No harvesting, Googlevideo resolver, metadata/lyrics scraping, AI generation, role/quota changes or Worker voice deployments. Cloud catalogue remains default off; personal links function independently. Detailed limits and external references: MUSIC_PILOT.md.
