@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "id": "ngay-moi-mau",
+  "title": "Ngày mới — mẫu cấu trúc lời, chưa kèm nhạc",
+  "artist": "Nội dung mẫu HSK",
+  "credit": "Lời mẫu tự soạn; thay bằng lời khớp file nhạc của bạn.",
+  "revision": "1",
+  "source": {"kind": "local"},
+  "segments": [
+    {"id":"line-1","start":0,"end":5,"hanzi":"今天我们一起唱歌。","pinyin":"Jīntiān wǒmen yìqǐ chànggē.","vi":"Hôm nay chúng ta cùng hát.","tokens":["今天","我们","一起","唱歌"],"quiz":{"question":"Câu này nói về việc gì?","options":["Cùng hát hôm nay","Đi mua đồ ngày mai","Đọc sách một mình"],"answer":0}},
+    {"id":"line-2","start":5,"end":10,"hanzi":"听见风中的星河。","pinyin":"Tīngjiàn fēng zhōng de xīnghé.","vi":"Nghe thấy dải ngân hà trong gió — hình ảnh thơ.","tokens":["听见","风","中","的","星河"],"quiz":{"question":"Hình ảnh nào xuất hiện trong câu?","options":["Một nhà ga","Dải ngân hà trong gió","Một cửa hàng"],"answer":1}}
+  ]
+}
