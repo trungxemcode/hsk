@@ -34,7 +34,7 @@
  const ICONS={play:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M8.8 6.2v11.6L18 12z"/></svg>',pause:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="6" width="3" height="12" rx="1" fill="currentColor" stroke="none"/><rect x="13.5" y="6" width="3" height="12" rx="1" fill="currentColor" stroke="none"/></svg>'};
  function paintScrub(input,cur,dur){const pct=dur>0?Math.max(0,Math.min(100,cur/dur*100)):0;input.style.setProperty('--pct',pct+'%');}
  const remaining=(cur,dur)=>'-'+fmtTime(Math.max(0,dur-cur));
- function setArt(thumb,bg,src){const stage=$('musicStageBg'),fall=()=>{thumb.onerror=bg.onerror=stage.onerror=null;thumb.src=bg.src=stage.src=fallbackArt;};thumb.onerror=bg.onerror=stage.onerror=fall;thumb.src=bg.src=stage.src=src;bg.hidden=true;stage.hidden=false;}
+ function setArt(thumb,bg,src){const stage=$('musicStageBg'),fall=()=>{thumb.onerror=bg.onerror=stage.onerror=null;thumb.classList.remove('music-thumb-yt');thumb.src=bg.src=stage.src=fallbackArt;};thumb.onerror=bg.onerror=stage.onerror=fall;thumb.classList.toggle('music-thumb-yt',src!==fallbackArt);thumb.src=bg.src=stage.src=src;bg.hidden=true;stage.hidden=false;}
  const ytThumb=id=>'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg';
  const fallbackArt='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1e1b4b"/><stop offset="100%" stop-color="#4338ca"/></linearGradient></defs><rect width="640" height="360" fill="url(#g)"/><circle cx="320" cy="170" r="58" fill="rgba(255,255,255,0.14)"/><text x="320" y="188" text-anchor="middle" font-size="52" fill="#ffffff" font-family="sans-serif">♪</text></svg>');
  $('musicEmptyThumb').src=$('musicStageBg').src=fallbackArt;
@@ -43,6 +43,7 @@
   panel.classList.toggle('music-menu-open',menuOpen);
   $('musicMenuBtn').setAttribute('aria-expanded',String(menuOpen));
   $('musicMenuBackdrop').hidden=!menuOpen;
+  if(menuOpen)$('musicMenuSheet').scrollTop=0;
  }
  function syncEmptyState(){
   const hasActive=!$('musicLinkPreview').hidden||!$('musicLesson').hidden;
@@ -124,15 +125,20 @@
    else{
     pl.items.forEach((entry,idx)=>{
      let link;try{link=C.parseLink(entry.url);}catch{return;}
-     const row=el('div',undefined,'music-playlist-track'+(currentLinkUrl===link.url&&activePlaylistId===pl.id?' music-track-current':''));
-     const open=el('button',(idx+1)+'. '+String(entry.title||link.label).slice(0,120)+' · '+link.label);open.type='button';
+     const isCurrent=currentLinkUrl===link.url&&activePlaylistId===pl.id;
+     const row=el('div',undefined,'music-playlist-track'+(isCurrent?' music-track-current':''));
+     const open=el('button',undefined,'music-row-main');open.type='button';
+     const thumb=el('img',undefined,'music-row-thumb');thumb.alt='';thumb.src=link.kind==='youtube'?ytThumb(link.source.videoId):fallbackArt;thumb.onerror=()=>{thumb.onerror=null;thumb.src=fallbackArt;};
+     const copy=el('span',undefined,'music-row-copy');
+     copy.append(el('strong',(idx+1)+'. '+String(entry.title||link.label).slice(0,120)),el('small',(isCurrent?'♫ Đang phát · ':'')+link.label));
+     open.append(thumb,copy);
      open.onclick=()=>{$('musicLinkUrl').value=link.url;$('musicLinkName').value=String(entry.title||'').slice(0,120);openLink(link,entry.title,false,pl.id);};
-     const remove=el('button','Gỡ');remove.type='button';
+     const remove=el('button','Gỡ','music-row-del');remove.type='button';
      remove.onclick=()=>{const all=savedPlaylists(),found=all.find(x=>x.id===pl.id);if(!found)return;found.items=found.items.filter(x=>x.url!==entry.url);save('playlists',all);drawPlaylists();};
      row.append(open,remove);trackList.append(row);
     });
    }
-   card.append(head,renameRow,addForm,trackList);box.append(card);
+   card.append(head,renameRow,trackList,addForm);box.append(card);
   }
  }
  $('musicPlaylistCreateForm').onsubmit=e=>{
@@ -162,19 +168,24 @@
   const box=$('musicSavedLinks'),lists=savedPlaylists();box.replaceChildren();
   for(const entry of savedLinks().slice(0,30)){
    let link;try{link=C.parseLink(entry.url);}catch{continue;}
-   const item=el('div',undefined,'music-saved-item'),open=el('button',String(entry.title||link.label).slice(0,120)+' · '+link.label),remove=el('button','Xóa link đã lưu');
-   open.type=remove.type='button';
+   const isCurrent=currentLinkUrl===link.url&&!activePlaylistId;
+   const item=el('div',undefined,'music-saved-item'+(isCurrent?' music-track-current':'')),open=el('button',undefined,'music-row-main'),remove=el('button','Xóa','music-row-del');
+   open.type=remove.type='button';remove.title='Xóa link đã lưu';
+   const thumb=el('img',undefined,'music-row-thumb');thumb.alt='';thumb.src=link.kind==='youtube'?ytThumb(link.source.videoId):fallbackArt;thumb.onerror=()=>{thumb.onerror=null;thumb.src=fallbackArt;};
+   const copy=el('span',undefined,'music-row-copy');
+   copy.append(el('strong',String(entry.title||link.label).slice(0,120)),el('small',(isCurrent?'♫ Đang phát · ':'')+link.label));
+   open.append(thumb,copy);
    open.onclick=()=>{$('musicLinkUrl').value=link.url;$('musicLinkName').value=String(entry.title||'').slice(0,120);$('musicLinkLyrics').value='';openLink(link,entry.title);};
    remove.onclick=()=>{save('links',savedLinks().filter(x=>x.url!==entry.url));drawLinks();};
-   item.append(open);
+   const actions=el('div',undefined,'music-saved-actions');
    if(lists.length){
     const addRow=el('div',undefined,'music-saved-add-pl');
-    const sel=el('select');sel.setAttribute('aria-label','Chọn playlist');sel.add(new Option('+ Thêm vào playlist…',''));
+    const sel=el('select');sel.setAttribute('aria-label','Chọn playlist');sel.add(new Option('+ Playlist…',''));
     for(const p of lists)sel.add(new Option(p.name,p.id));
     sel.onchange=()=>{if(!sel.value)return;const pl=lists.find(x=>x.id===sel.value);addTrackToPlaylist(sel.value,link,entry.title);sel.value='';status('Đã thêm vào playlist "'+(pl?.name||'')+'".');};
-    addRow.append(sel);item.append(addRow);
+    addRow.append(sel);actions.append(addRow);
    }
-   item.append(remove);box.append(item);
+   actions.append(remove);item.append(open,actions);box.append(item);
   }
   if(!box.children.length)box.append(el('p','Chưa có link bài hát.'));
  }
