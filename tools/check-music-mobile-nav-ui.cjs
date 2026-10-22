@@ -22,9 +22,13 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    assert.equal(await page.locator('.home-music-entry').isVisible(),true,'music has a home shortcut');
    await page.locator('.home-music-entry').click();
    assert.equal(await page.locator('#musicPanel').isVisible(),true,'home shortcut opens music');
+   assert.equal(await page.locator('.topbar').isVisible(),false,'fullscreen music hides topbar');
+   assert.equal(await page.locator('.bottom-nav').isVisible(),false,'fullscreen music hides bottom nav');
    assert.equal(await page.locator('.bottom-nav [data-studio-go=practice].active').count(),0,'music is not highlighted as practice');
    await page.locator('#musicBack').click();
    assert.equal(await page.locator('#studioHome').isVisible(),true,'music back returns to home');
+   assert.equal(await page.locator('.topbar').isVisible(),true,'topbar returns on home');
+   if(mobile)assert.equal(await page.locator('.bottom-nav').isVisible(),true,'bottom nav returns on home');
    if(mobile){
     await page.locator('#menuBtn').click();
     await page.locator('.drawer-body>.music-nav-entry').click();
