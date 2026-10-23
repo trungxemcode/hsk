@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "engine": "sherpa-onnx-1.13.8-kokoro-1.0-fp16",
+  "shared": [
+    {
+      "role": "engine",
+      "url": "../../../vendor/chinese-voices/engine.js",
+      "bytes": 79421,
+      "sha256": "0c936699fada8f0a83ff152c92417f3f2931001915f7c05ef501a8889f11b0cd",
+      "type": "text/javascript"
+    },
+    {
+      "role": "bindings",
+      "url": "../../../vendor/chinese-voices/bindings.js",
+      "bytes": 33771,
+      "sha256": "99f2ffe791e93352b9b4b9bf999839db58f69a603e26e9adedc74504f1762814",
+      "type": "text/javascript"
+    },
+    {
+      "role": "wasm",
+      "url": "../../../vendor/chinese-voices/engine.wasm.gz",
+      "bytes": 3800632,
+      "sha256": "a50d7f951a3a0197973ab6319b05b90be0752c8d401ffeaa196145401b4db6b4",
+      "type": "application/octet-stream"
+    },
+    {
+      "role": "resources",
+      "url": "../../../vendor/chinese-voices/resources.json.gz",
+      "bytes": 2098939,
+      "sha256": "0514e8bbbd659b6f22ccf21ebcf95074c969be11631b62f0a95fdfe02fb7d7fe",
+      "type": "application/octet-stream"
+    },
+    {
+      "role": "model",
+      "url": "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/1939ad2a8e416c0acfeecc08a694d14ef25f2231/onnx/model_fp16.onnx",
+      "bytes": 163234740,
+      "sha256": "ba4527a874b42b21e35f468c10d326fdff3c7fc8cac1f85e9eb6c0dfc35c334a"
+    }
+  ],
+  "voices": [
+    {
+      "id": "zf_xiaobei",
+      "label": "Kokoro · Nữ · Xiaobei",
+      "asset": {
+        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zf_xiaobei.pt",
+        "bytes": 523435,
+        "sha256": "9b76be63dab4f4f96962030acc0126a9aee9728608fbbe115e2b58a2bd504df6"
+      }
+    },
+    {
+      "id": "zf_xiaoni",
+      "label": "Kokoro · Nữ · Xiaoni",
+      "asset": {
+        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zf_xiaoni.pt",
+        "bytes": 523430,
+        "sha256": "95b49f169bf1640f4f43c25e13daa39f7b98d15d00823e83ef5c14b3ced59e49"
+      }
+    },
+    {
+      "id": "zf_xiaoxiao",
+      "label": "Kokoro · Nữ · Xiaoxiao",
+      "asset": {
+        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zf_xiaoxiao.pt",
+        "bytes": 523440,
+        "sha256": "cfaf6f2ded1ee56f1ff94fcd2b0e6cdf32e5b794bdc05b44e7439d44aef5887c"
+      }
+    },
+    {
+      "id": "zf_xiaoyi",
+      "label": "Kokoro · Nữ · Xiaoyi",
+      "asset": {
+        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zf_xiaoyi.pt",
+        "bytes": 523430,
+        "sha256": "b5235dbaeef85a4c613bf78af9a88ff63c25bac5f26ba77e36186d8b7ebf05e2"
+      }
+    },
+    {
+      "id": "zm_yunjian",
+      "label": "Kokoro · Nam · Yunjian",
+      "asset": {
+        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zm_yunjian.pt",
+        "bytes": 523435,
+        "sha256": "76cbf8bad35901d011d9628a2fdceb7b4f1f127e7a3269cb393b3941eb7fc417"
+      }
+    },
+    {
+      "id": "zm_yunxi",
+      "label": "Kokoro · Nam · Yunxi",
+      "asset": {
+        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zm_yunxi.pt",
+        "bytes": 523425,
+        "sha256": "dbe6e1ce7c3dbaf2f5667432947b638b1c6831ccbe154c4610dbcc44f431e27b"
+      }
+    },
+    {
+      "id": "zm_yunxia",
+      "label": "Kokoro · Nam · Yunxia",
+      "asset": {
+        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zm_yunxia.pt",
+        "bytes": 523430,
+        "sha256": "bb2b03b08e84d64e1214440ce3b624987fac177f2eeb5bab8571799a3d980acd"
+      }
+    },
+    {
+      "id": "zm_yunyang",
+      "label": "Kokoro · Nam · Yunyang",
+      "asset": {
+        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zm_yunyang.pt",
+        "bytes": 523435,
+        "sha256": "5238ac22e0c7f8b6cdd2eddd6e444b8a700b73c4674d9a047d59a94ff96379a2"
+      }
+    }
+  ]
+}

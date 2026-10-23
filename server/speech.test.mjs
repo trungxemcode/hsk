@@ -42,3 +42,12 @@ test('repeated word audio has a gap, ignores duplicate endings and cancels pendi
  spoken[1].onend();await new Promise(r=>setTimeout(r,40));assert.equal(spoken.length,3);spoken[2].onend();assert.equal(messages.at(-1),'Đã nghe xong.');
  player.play(['我','我','我']);spoken.at(-1).onend();player.stop();const count=spoken.length;await new Promise(r=>setTimeout(r,40));assert.equal(spoken.length,count);
 });
+test('saved Mandarin voice is honored across locales without affecting Vietnamese',()=>{
+ const tw={lang:'zh-TW',name:'Taiwan Mandarin',voiceURI:'tw',localService:true},cn={...zh,voiceURI:'cn'},hk={lang:'zh-HK',name:'Cantonese',voiceURI:'hk'};
+ assert.equal(speech.chooseVoice([cn,tw,hk],'zh-CN','tw'),tw);assert.equal(speech.chooseVoice([cn,tw,hk],'zh-CN','hk'),cn);
+});
+test('downloaded Chinese voice uses central choice, preserves chunk order, and cancels stale playback',async()=>{
+ const calls=[],messages=[];globalThis.HSKVoiceManager={selection:{source:'pack'},unlock(){},stop(){},speak(text,rate,signal){return new Promise((resolve,reject)=>{calls.push({text,rate,resolve});signal.addEventListener('abort',()=>reject(Object.assign(Error('cancel'),{name:'AbortError'})),{once:true});});}};
+ try{const player=speech.createPlayer({notify:m=>messages.push(m),rate:.7});player.play(['你好。','再见。']);assert.equal(calls[0].text,'你好。');assert.equal(calls[0].rate,.7);calls[0].resolve();await new Promise(r=>setImmediate(r));assert.equal(calls[1].text,'再见。');player.stop();calls[1].resolve();await new Promise(r=>setImmediate(r));assert.ok(!messages.includes('Đã nghe xong.'));
+ }finally{delete globalThis.HSKVoiceManager;}
+});

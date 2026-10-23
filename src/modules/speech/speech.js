@@ -4,6 +4,7 @@
  function chooseVoice(voices,language='zh-CN',preferredURI=''){
   if(/^vi(?:-|_|$)/i.test(language)){const choices=voices.filter(v=>/^vi(?:-|_|$)/i.test(v.lang));const selected=choices.find(v=>v.voiceURI===preferredURI);if(selected)return selected;const quality=v=>/natural|neural|premium|enhanced/i.test(v.name)?3:!v.localService?2:1;return choices.slice().sort((a,b)=>quality(b)-quality(a))[0]||null;}
   const mandarin=voices.filter(v=>/^(zh|cmn)(-|_|$)/i.test(v.lang)&&!/^zh[-_]hk/i.test(v.lang)&&!/(cantonese|yue)/i.test(v.name));
+  const selected=mandarin.find(v=>v.voiceURI===preferredURI);if(selected)return selected;
   const preferred=mandarin.filter(v=>/^(zh[-_](cn|hans)|cmn[-_]cn)/i.test(v.lang));
   const choices=preferred.length?preferred:mandarin;
   return choices.find(v=>v.localService)||choices[0]||null;
@@ -16,14 +17,24 @@
   }return result;
  }
  function createPlayer({synth,Utterance,notify=()=>{},rate=.85,gapMs=0,voiceURI=''}){
-  let token=0,active=null,held=null,queueTimer;
+  let token=0,active=null,held=null,queueTimer,packController;
   const reset=button=>{if(button){button.classList.remove('is-speaking');button.setAttribute('aria-pressed','false');button.setAttribute('aria-label',button.dataset.speechLabel);}};
-  function stop(){token++;clearTimeout(queueTimer);reset(active);active=null;held=null;synth?.cancel();}
+  function stop(){token++;packController?.abort();packController=null;if(root.HSKVoiceManager?.selection.source==='pack')root.HSKVoiceManager.stop();clearTimeout(queueTimer);reset(active);active=null;held=null;synth?.cancel();}
   function play(input,button,language='zh-CN'){
    if(active===button&&active){stop();notify('Đã dừng phát âm.');return;}
-   stop();if(!synth||!Utterance){notify('Trình duyệt chưa hỗ trợ phát âm. Hãy thử Chrome, Edge hoặc Safari.');return;}
-   const vietnamese=/^vi(?:-|_|$)/i.test(language),parts=chunks(input,vietnamese?500:100);if(!parts.length)return;
-   const voice=chooseVoice(synth.getVoices(),language,typeof voiceURI==='function'?voiceURI():voiceURI);
+   stop();
+   const manager=root.HSKVoiceManager,vietnamese=/^vi(?:-|_|$)/i.test(language);
+   if(!vietnamese&&manager?.selection.source==='pack'){
+    const parts=chunks(input,60);if(!parts.length)return;manager.unlock();const controller=new AbortController();packController=controller;const id=token;active=button;
+    if(button){button.classList.add('is-speaking');button.setAttribute('aria-pressed','true');button.setAttribute('aria-label','Dừng phát âm');}
+    notify('Đang phát âm tiếng Trung…');let index=0;
+    const next=()=>{if(id!==token)return;if(index===parts.length){reset(active);active=null;packController=null;notify('Đã nghe xong.');return;}
+     manager.speak(parts[index++],typeof rate==='function'?rate():rate,controller.signal).then(()=>{if(id!==token)return;const gap=Math.max(0,Math.min(10000,Number(typeof gapMs==='function'?gapMs():gapMs)||0));if(index<parts.length&&gap)queueTimer=setTimeout(next,gap);else next();}).catch(e=>{if(id!==token)return;stop();if(e.name!=='AbortError')notify(e.message||'Không phát được giọng mở rộng. Hãy thử giọng thiết bị.');});};next();return;
+   }
+   if(!synth||!Utterance){notify('Trình duyệt chưa hỗ trợ phát âm. Hãy thử Chrome, Edge hoặc Safari.');return;}
+   const parts=chunks(input,vietnamese?500:100);if(!parts.length)return;
+   const requested=typeof voiceURI==='function'?voiceURI():voiceURI;
+   const voice=chooseVoice(synth.getVoices(),language,vietnamese?requested:(manager?.selection.voiceURI||requested));
    if(!voice){notify(vietnamese?'Chưa tìm thấy giọng tiếng Việt. Hãy thêm giọng Vietnamese trong cài đặt giọng nói của thiết bị, rồi thử lại.':'Chưa tìm thấy giọng tiếng Trung. Hãy thêm giọng Mandarin / Chinese trong cài đặt giọng nói của thiết bị, rồi thử lại.');return;}
    const id=token;active=button;if(button){button.classList.add('is-speaking');button.setAttribute('aria-pressed','true');button.setAttribute('aria-label','Dừng phát âm');}
    let index=0;notify(vietnamese?'Đang phát âm tiếng Việt…':'Đang phát âm tiếng Trung…');

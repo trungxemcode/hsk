@@ -1141,6 +1141,47 @@
         {"kind":"file","file":"tools/check-music-codec.cjs","value":""},
         {"kind":"contains","file":"src/modules/music/music.js","value":"id=\"musicOfflineQuality\""}
       ]
+    },
+    {
+      "id": "chinese-voice-packs",
+      "name": "Chọn giọng Quan thoại, gói tải riêng trên máy và tự xóa giọng cũ",
+      "checks": [
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "chineseVoiceSettings"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/speech/voice-store.js",
+          "value": "hsk-chinese-voices-v1"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/speech/voice-manager.js",
+          "value": "root.HSKVoiceManager="
+        },
+        {
+          "kind": "file",
+          "file": "src/modules/speech/voice-model.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-chinese-voices-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-chinese-voice-runtime.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/chinese-voice-model.test.mjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }

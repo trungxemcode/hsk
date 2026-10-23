@@ -24,7 +24,7 @@ function presentation(lesson,words,store){
  const closeVoice=()=>{previewPlayer?.stop();voiceDialog.close();voiceSettings.focus();};
  voiceDialog.append(el('h2','Giọng tiếng Việt'),voiceSelect,voiceNote,voiceStatus,button('Nghe thử',()=>previewPlayer?.play('Xin chào, chúng ta cùng học tiếng Trung nhé.',undefined,'vi-VN')),button('Xong',closeVoice));voiceDialog.addEventListener('cancel',e=>{e.preventDefault();closeVoice();});
  window.speechSynthesis?.addEventListener?.('voiceschanged',refreshVoices);
- head.append(label,exit);stage.append(caption,text,strokeHost,pin);actions.append(previous,pause,next);foot.append(status,actions,soundLabel,speed,voiceSettings,manual);dialog.append(head,progress,stage,foot,voiceDialog);document.body.append(dialog);document.body.classList.add('guided-presenting');dialog.showModal();
+ head.append(label,exit);stage.append(caption,text,strokeHost,pin);actions.append(previous,pause,next);foot.append(status,actions,soundLabel,speed,button('Giọng Trung',()=>{playing=false;stop();update();window.HSKChineseVoices?.open();}),voiceSettings,manual);dialog.append(head,progress,stage,foot,voiceDialog);document.body.append(dialog);document.body.classList.add('guided-presenting');dialog.showModal();
  function save(){if(!closed)store.persist({guidedShow:{version:6,frameId:frames[pos]?.id||'done',updatedAt:Date.now()}});}
  function releaseWake(){const old=wake;wake=null;old?.release().catch(()=>{});}
  function keepAwake(){if(!playing||closed||document.hidden||!navigator.wakeLock||wake)return;const id=epoch;navigator.wakeLock.request('screen').then(lock=>{if(closed||!playing||id!==epoch)lock.release().catch(()=>{});else wake=lock;}).catch(()=>{});}
