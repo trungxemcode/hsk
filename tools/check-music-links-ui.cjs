@@ -8,7 +8,8 @@ const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),pat
  for(const [url,host] of [['https://youtu.be/abcdefghijk?si=x','www.youtube-nocookie.com'],['https://open.spotify.com/track/0123456789ABCDEFGHIJKL?si=x','open.spotify.com'],['https://soundcloud.com/artist/song?si=x','w.soundcloud.com']]){
  if(!(await page.locator('#musicMenuSheet').isVisible()))await page.locator('#musicMenuBtn').click();
  if(!(await page.locator('#musicLinkImport').evaluate(d=>d.open)))await page.locator('#musicLinkImport>summary').click();
- await page.locator('#musicLinkUrl').fill(url);await page.locator('#musicLinkName').fill('Bài thử từ link');await page.locator('#musicLinkApply').click();await page.waitForFunction(()=>!document.getElementById('musicLinkApply').disabled);assert.equal(await page.locator('#musicMenuSheet').isVisible(),false);assert.equal(await page.locator('#musicLinkPreview').isVisible(),true);assert.equal(new URL(await page.locator('#musicLinkPlayer iframe').getAttribute('src')).hostname,host);assert.equal(await page.locator('#musicLesson').isVisible(),false);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
+ await page.locator('#musicLinkUrl').fill(url);await page.locator('#musicLinkName').fill('Bài thử từ link');await page.locator('#musicLinkApply').click();await page.waitForFunction(()=>!document.getElementById('musicLinkApply').disabled);await page.waitForFunction(()=>getComputedStyle(document.getElementById('musicMenuSheet')).visibility==='hidden');assert.equal(await page.locator('#musicMenuSheet').isVisible(),false);assert.equal(await page.locator('#musicLinkPreview').isVisible(),true);assert.equal(new URL(await page.locator('#musicLinkPlayer iframe').getAttribute('src')).hostname,host);assert.equal(await page.locator('#musicLesson').isVisible(),false);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false);
+ if(url==='https://youtu.be/abcdefghijk?si=x'){const peek=page.locator('#musicChillPeekToggle'),peekBox=await peek.boundingBox();assert.ok(peekBox,'bottom sheet handle is present in the expanded player');await page.mouse.move(peekBox.x+peekBox.width/2,peekBox.y+peekBox.height/2);await page.mouse.down();await page.mouse.move(peekBox.x+peekBox.width/2,peekBox.y+peekBox.height/2-42,{steps:5});await page.mouse.up();await page.waitForFunction(()=>document.getElementById('musicMenuBtn').getAttribute('aria-expanded')==='true');assert.match(await page.locator('#musicMenuSheet').evaluate(n=>getComputedStyle(n).transitionDuration),/0\.3/,'sheet has a smooth transition');await page.locator('#musicMenuClose').click();await page.waitForFunction(()=>getComputedStyle(document.getElementById('musicMenuSheet')).visibility==='hidden');}
  }
  await page.locator('#musicMenuBtn').click();
  assert.equal(await page.locator('#musicSavedLinks .music-saved-item').count(),3);
@@ -27,6 +28,7 @@ const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),pat
  await page.locator('#musicSavePicker .music-save-row').first().click();
  assert.equal(await page.locator('#musicSavePicker .music-save-row').first().getAttribute('aria-checked'),'true');
  await page.locator('#musicSaveDone').click();
+ await page.waitForFunction(()=>getComputedStyle(document.getElementById('musicMenuSheet')).visibility==='hidden');
  assert.equal(await page.locator('#musicMenuSheet').isVisible(),false,'Xong closes the sheet');
  assert.equal(await page.locator('#musicQuickSaveBtn').getAttribute('aria-pressed'),'true');
  await page.locator('#musicMenuBtn').click();
@@ -37,6 +39,7 @@ const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),pat
  await page.locator('#musicPlaylistList .music-playlist-add-track button[type=submit]').click();
  assert.equal(await page.locator('#musicPlaylistList .music-playlist-track').count(),2);
  await page.locator('#musicPlaylistList .music-playlist-actions button').first().click();
+ await page.waitForFunction(()=>getComputedStyle(document.getElementById('musicMenuSheet')).visibility==='hidden');
  assert.equal(await page.locator('#musicMenuSheet').isVisible(),false);
  assert.equal(await page.locator('#musicLinkTitle').innerText(),'Bài YouTube Số 1');
  await page.locator('#musicLinkNext').click();

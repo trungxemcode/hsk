@@ -1,5 +1,6 @@
 const {JSDOM}=require('jsdom'),fs=require('fs'),assert=require('node:assert/strict');
 const dom=new JSDOM('<main class="workspace"></main>',{url:'https://hsk.example/hsk/',runScripts:'outside-only'}),w=dom.window;
+ w.requestAnimationFrame=callback=>setImmediate(callback);w.cancelAnimationFrame=clearImmediate;
 const tick=()=>new Promise(r=>setImmediate(r));
 w.HTMLMediaElement.prototype.pause=function(){};w.HTMLMediaElement.prototype.load=function(){};w.fetch=async()=>({ok:true,json:async()=>({enabled:false})});w.HSKAccountDashboard={user:{uid:'one'}};w.TextEncoder=TextEncoder;Object.defineProperty(w.crypto,'subtle',{value:crypto.subtle});
 for(const file of ['music-core.js','music-soundcloud.js','music.js'])w.eval(fs.readFileSync('src/modules/music/'+file,'utf8'));
@@ -14,7 +15,7 @@ async function run(){
  // Route exit removes the cross-origin iframe so it cannot continue audio in the background.
  $('musicPanel').hidden=true;await tick();assert.equal($('musicLinkPlayer').children.length,0);
  $('musicPanel').hidden=false;w.HSKMusic.enter();await tick();assert.equal($('musicSavedLinks').querySelectorAll('.music-saved-item').length,3);
- w.HSKAccountDashboard={user:{uid:'two'}};w.dispatchEvent(new w.Event('hsk-account-ready'));await tick();assert.match($('musicSavedLinks').textContent,/Chưa có/);assert.equal($('musicLinkUrl').value,'');assert.equal($('musicLinkPlayer').children.length,0);
+ w.HSKAccountDashboard={user:{uid:'two'}};w.dispatchEvent(new w.Event('hsk-account-ready'));await tick();assert.equal(w.localStorage.getItem('hsk-music-links-v1:two'),null);assert.equal($('musicSavedLinks').querySelectorAll('.music-saved-item').length,0,'A second account must not display the first account saved links');assert.equal($('musicLinkUrl').value,'');assert.equal($('musicLinkPlayer').children.length,0);
  // A late lyrics read must not mount a player in the next account.
  let done;Object.defineProperty($('musicLinkLyrics'),'files',{configurable:true,value:[{size:100,text:()=>new Promise(r=>done=r)}]});$('musicLinkUrl').value=links[0];const pending=submit();w.dispatchEvent(new w.Event('hsk-account-ready'));done(fs.readFileSync('content/music/lesson-template.json','utf8'));await pending;await tick();assert.equal($('musicLesson').hidden,true);
  // Spotify is listen-only: never fabricate HSK questions or grades from a URL.

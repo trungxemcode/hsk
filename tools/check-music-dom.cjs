@@ -1,6 +1,7 @@
 const {JSDOM}=require('jsdom'),fs=require('fs'),assert=require('node:assert/strict');
 const root=process.cwd();
 const dom=new JSDOM('<main class="workspace"></main>',{url:'https://hsk.example/hsk/',runScripts:'outside-only'}),w=dom.window;
+w.requestAnimationFrame=callback=>setImmediate(callback);w.cancelAnimationFrame=clearImmediate;
 let idleMediaCalls=0;
 w.HTMLMediaElement.prototype.pause=function(){idleMediaCalls++;};w.HTMLMediaElement.prototype.load=function(){idleMediaCalls++;};
 w.HTMLMediaElement.prototype.play=function(){return Promise.resolve();};
@@ -28,7 +29,7 @@ async function run(){
  $('musicNext').click();assert.equal($('musicLine').value,'1');assert.match($('musicNewWords').textContent,/星河/);
  $('musicPlayer').currentTime=7;
  w.HSKAccountDashboard={user:{uid:'second'}};w.dispatchEvent(new w.Event('hsk-account-ready'));await new Promise(r=>setImmediate(r));
- assert.equal($('musicLesson').hidden,true);assert.equal(w.localStorage.getItem('hsk-music-progress-v1:second'),null);assert.match($('musicHistory').textContent,/Chưa có/);
+ assert.equal($('musicLesson').hidden,true);assert.equal(w.localStorage.getItem('hsk-music-progress-v1:second'),null);assert.equal(w.localStorage.getItem('hsk-music-history-v1:second'),null,'A second account must not inherit the first account history');
  assert.equal(w.localStorage.getItem('hsk-flashcards-progress-v1'),null);
  // Malformed late import must not open a lesson under a different account.
  let resolve;Object.defineProperty($('musicManifest'),'files',{value:[{size:500,text:()=>new Promise(r=>resolve=r)}]});const pending=$('musicImportApply').onclick();w.dispatchEvent(new w.Event('hsk-account-ready'));resolve(JSON.stringify(song));await pending;assert.equal($('musicLesson').hidden,true);

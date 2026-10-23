@@ -4,6 +4,17 @@
  const C=window.HSKMusicCore;if(!C)return;
  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
  const $=id=>document.getElementById(id);
+ function animateDisclosure(node,open){
+  if(!node||node.hidden===!open)return;
+  const height=node.getBoundingClientRect().height;
+  node._musicDisclosureAnimation?.cancel();
+  if(open)node.hidden=false;
+  const targetHeight=node.scrollHeight;
+  node.style.overflow='hidden';
+  const frames=open?[{height:'0px',opacity:0,transform:'translateY(-5px)'},{height:targetHeight+'px',opacity:1,transform:'translateY(0)'}]:[{height:height+'px',opacity:1,transform:'translateY(0)'},{height:'0px',opacity:0,transform:'translateY(-5px)'}];
+  const animation=node.animate(frames,{duration:220,easing:'cubic-bezier(.22,1,.36,1)'});node._musicDisclosureAnimation=animation;
+  animation.onfinish=()=>{if(node._musicDisclosureAnimation!==animation)return;node.style.removeProperty('height');node.style.removeProperty('overflow');node.style.removeProperty('opacity');node.style.removeProperty('transform');node.hidden=!open;node._musicDisclosureAnimation=null;};
+ }
  const panel=el('section',undefined,'panel music-panel');panel.id='musicPanel';panel.dataset.studioHubPanel='music';panel.dataset.musicMode='study';panel.hidden=true;
  panel.innerHTML=`<div class="music-stage music-np"><img id="musicStageBg" class="music-np-bg" alt="" aria-hidden="true"><div class="music-top-bar"><button type="button" id="musicBack" class="music-top-btn" aria-label="Quay về trang chủ" title="Trang chủ"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M6.5 9.5 12 15l5.5-5.5"/></svg><span class="music-sr">← Trang chủ</span></button><div class="music-top-heading"><span id="musicTopEyebrow" class="music-top-eyebrow">ĐANG PHÁT TỪ</span><h2 id="musicHeaderLabel" class="music-top-title">Danh sách phát HSK</h2></div><button type="button" id="musicMenuBtn" class="music-top-btn" aria-expanded="false" aria-controls="musicMenuSheet" aria-label="Mở menu nhạc và danh sách" title="Menu tùy chọn & danh sách bài"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="18.5" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg></button></div>
  <div id="musicEmptyNowPlaying" class="music-np-body music-np-empty"><div class="music-cover"><img id="musicEmptyThumb" class="music-thumb" alt="Đĩa nhạc HSK" loading="lazy"></div><div class="music-np-meta"><h3 id="musicEmptyTitle">Chưa phát bài hát</h3><p id="musicEmptySub" class="music-np-sub">Bấm nút <strong>⋯</strong> ở góc phải trên để mở danh sách bài hát.</p></div><div id="musicStudyQuickCatalog" class="music-study-quick-list music-study-only"></div><button type="button" id="musicEmptyOpenMenu" class="music-primary">⋯ Mở danh sách &amp; tùy chọn</button></div>
@@ -15,7 +26,7 @@
  <div class="music-study"><div class="music-actions"><button type="button" id="musicHold">Giữ để xem lời</button><button type="button" id="musicReveal" aria-pressed="false">Hiện lời</button><button type="button" id="musicPin" aria-pressed="false">Pinyin</button><button type="button" id="musicVi" aria-pressed="false">Nghĩa Việt</button></div><div class="music-caption"><p id="musicHidden">Lời đang ẩn. Nghe và chọn ý bên dưới.</p><div id="musicLyrics" hidden><p id="musicHanzi" class="music-hanzi" lang="zh"></p><p id="musicPinyin" class="music-pin"></p><p id="musicMeaning" class="music-vi"></p></div></div><p id="musicDistribution" class="music-distribution"></p><div id="musicNewWords" class="music-new" hidden></div><form id="musicQuiz" class="music-quiz"><fieldset id="musicAnswers"></fieldset><button type="submit" id="musicCheck" class="music-primary">Xác nhận đáp án</button><p id="musicResult" class="music-result" role="status" aria-live="polite"></p></form></div></section>
  <div id="musicBottomDock" class="music-bottom-dock"><div class="music-aux-bar"><button type="button" id="musicQuickLoop" class="music-aux-btn" aria-pressed="false" title="Lặp lại bài"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M17 2l4 4-4 4"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M21 13v2a4 4 0 0 1-4 4H3"/></svg><span id="musicQuickLoopLabel" class="music-aux-text">Lặp lại</span></button><button type="button" id="musicQuickRate" class="music-aux-btn" aria-pressed="false" title="Đổi tốc độ phát (0.75x / 1x / 1.25x)"><span id="musicQuickRateLabel">1×</span></button><button type="button" id="musicQuickQueue" class="music-aux-btn" title="Mở danh sách chờ &amp; Playlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span class="music-aux-text">Danh sách</span></button></div><div id="musicChillPeekCard" class="music-lyrics-peek-card music-chill-only"><button type="button" id="musicChillPeekToggle" class="music-lyrics-peek-btn" aria-label="Mở danh sách bài và tùy chọn"><span class="music-lyrics-pill-bar" aria-hidden="true"></span><span class="music-lyrics-peek-row"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg><strong>Danh sách &amp; Tùy chọn</strong></span></button></div><div id="musicLyricsDrawerCard" class="music-lyrics-card music-study-only" hidden><button type="button" id="musicLyricsDrawerToggle" class="music-lyrics-head" aria-expanded="false"><span class="music-lyrics-pill-bar" aria-hidden="true"></span><span class="music-lyrics-head-row"><strong>Lời bài hát &amp; Đối chiếu HSK</strong><span id="musicLyricsDrawerState" class="music-lyrics-badge">Vuốt / chạm để mở</span></span></button><div id="musicLyricsDrawerBody" class="music-lyrics-body" hidden><div class="music-lyrics-toggles"><button type="button" id="musicDrawerHanziBtn" class="music-lyrics-chip" aria-pressed="true">Chữ Hán</button><button type="button" id="musicDrawerPinBtn" class="music-lyrics-chip" aria-pressed="false">Pinyin</button><button type="button" id="musicDrawerViBtn" class="music-lyrics-chip" aria-pressed="false">Nghĩa Việt</button></div><div class="music-lyrics-lines"><p id="musicDrawerHanzi" class="music-drawer-hanzi" lang="zh"></p><p id="musicDrawerPinyin" class="music-drawer-pin" hidden></p><p id="musicDrawerVi" class="music-drawer-vi" hidden></p></div></div></div></div></div>
  <div id="musicMiniPlayer" class="music-mini-player music-chill-only" hidden><div class="music-mini-inner"><button type="button" id="musicMiniMain" class="music-mini-main" aria-label="Mở trình phát toàn màn hình"><img id="musicMiniThumb" class="music-mini-thumb" alt="" src=""><div class="music-mini-copy"><strong id="musicMiniTitle">Chưa chọn bài hát</strong><small id="musicMiniSub">Nghệ sĩ · YouTube / SoundCloud</small></div></button><div class="music-mini-actions"><button type="button" id="musicMiniSave" class="music-mini-btn music-mini-save" aria-label="Lưu nhanh vào playlist" title="Lưu nhanh vào playlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg></button><button type="button" id="musicMiniPlay" class="music-mini-btn music-mini-play" aria-label="Phát hoặc tạm dừng" title="Phát / tạm dừng"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M8.8 6.2v11.6L18 12z"/></svg></button></div></div><div class="music-mini-progress-track"><div id="musicMiniProgress" class="music-mini-progress-bar" style="width:0%"></div></div></div>
- <div id="musicMenuBackdrop" class="music-menu-backdrop" hidden></div>
+ <div id="musicMenuBackdrop" class="music-menu-backdrop" aria-hidden="true"></div>
  <div id="musicMenuSheet" class="music-menu-sheet" data-view="main" role="region" aria-label="Tùy chọn nhạc và danh sách"><div class="music-sheet-drag-area"><button type="button" id="musicMenuClose" class="music-menu-close" aria-label="Đóng menu"><span class="music-drag-bar" aria-hidden="true"></span><span class="music-sr">✕ Đóng</span></button><strong id="musicMenuTitle" class="music-sr">Tùy chọn &amp; Danh sách nhạc</strong></div>
  <div id="musicMenuTrackHead" class="music-menu-track-head" data-menu-view="main"><img id="musicMenuTrackThumb" class="music-menu-track-thumb" alt="" src=""><div class="music-menu-track-copy"><strong id="musicMenuTrackTitle">Chưa chọn bài hát</strong><small id="musicMenuTrackSub">Nghệ sĩ · YouTube / SoundCloud</small></div></div>
  <hr class="music-sheet-divider" data-menu-view="main">
@@ -115,7 +126,9 @@
   menuOpen=typeof force==='boolean'?force:!menuOpen;
   panel.classList.toggle('music-menu-open',menuOpen);
   $('musicMenuBtn').setAttribute('aria-expanded',String(menuOpen));
-  $('musicMenuBackdrop').hidden=!menuOpen;
+  const sheet=$('musicMenuSheet'),backdrop=$('musicMenuBackdrop');
+  sheet.setAttribute('aria-hidden',String(!menuOpen));sheet.inert=!menuOpen;
+  backdrop.setAttribute('aria-hidden',String(!menuOpen));
   setMenuView('main');
   if(menuOpen){$('musicMenuSheet').scrollTop=0;syncMenuTrackHead();syncQuickSaveBtn();}
  }
@@ -130,6 +143,11 @@
   $('musicMenuSubDone').hidden=view!=='save';
   if(view==='main'&&currentMode==='chill')$('musicLinkImport').open=false;
   if(view==='save'){$('musicSaveNewForm').hidden=true;drawSavePicker(true);}
+  requestAnimationFrame(()=>sheet.querySelectorAll('[data-menu-view]').forEach(node=>{
+   if((node.dataset.menuView||'').split(/\s+/).includes(view)&&node.getClientRects().length){
+    try{node.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:220,easing:'cubic-bezier(.22,1,.36,1)'});}catch{}
+   }
+  }));
  }
  function toggleLyricsDrawer(force){
   drawerOpen=typeof force==='boolean'?force:!drawerOpen;
@@ -374,7 +392,15 @@
   const data={title:currentLinkTitle||'Bài hát',url:currentLinkUrl};
   try{if(navigator.share){await navigator.share(data);}else{await navigator.clipboard.writeText(currentLinkUrl);status('Đã sao chép link bài hát.');}}catch{}
  };
- if($('musicChillPeekToggle'))$('musicChillPeekToggle').onclick=()=>toggleMenu(true);
+ let peekSuppressClick=false;
+ if($('musicChillPeekToggle')){
+  const peek=$('musicChillPeekToggle');let pointerId=null,startY=0,lastY=0,dragging=false;
+  peek.onclick=e=>{if(peekSuppressClick){peekSuppressClick=false;e.preventDefault();return;}toggleMenu(true);};
+  peek.addEventListener('pointerdown',e=>{if(e.button!==undefined&&e.button!==0)return;pointerId=e.pointerId;startY=lastY=e.clientY;dragging=false;peek.style.transition='none';peek.setPointerCapture?.(pointerId);});
+  peek.addEventListener('pointermove',e=>{if(pointerId!==e.pointerId)return;lastY=e.clientY;const dy=Math.min(0,lastY-startY);if(Math.abs(dy)>4)dragging=true;if(dragging)peek.style.setProperty('--music-peek-drag',Math.max(-34,dy*.42)+'px');});
+  const finishPeekDrag=e=>{if(pointerId!==e.pointerId)return;const dy=lastY-startY;pointerId=null;peek.style.transition='';peek.style.removeProperty('--music-peek-drag');if(dragging){peekSuppressClick=true;setTimeout(()=>{peekSuppressClick=false;},400);if(dy<-26)toggleMenu(true);}};
+  peek.addEventListener('pointerup',finishPeekDrag);peek.addEventListener('pointercancel',finishPeekDrag);
+ }
  $('musicLyricsDrawerToggle').onclick=()=>toggleLyricsDrawer();
  if($('musicMiniMain'))$('musicMiniMain').onclick=()=>setPlayerExpanded(true);
  if($('musicMiniPlay'))$('musicMiniPlay').onclick=e=>{e.stopPropagation();$('musicLinkPlay').click();};
@@ -398,11 +424,6 @@
   let startY=0;
   $('musicMenuSheet').addEventListener('touchstart',e=>{if($('musicMenuSheet').scrollTop<=4)startY=e.touches?.[0]?.clientY||0;},{passive:true});
   $('musicMenuSheet').addEventListener('touchend',e=>{if(!startY)return;const dy=(e.changedTouches?.[0]?.clientY||0)-startY;startY=0;if(dy>52)toggleMenu(false);},{passive:true});
-  if($('musicChillPeekCard')){
-   let peekStartY=0;
-   $('musicChillPeekCard').addEventListener('touchstart',e=>{peekStartY=e.touches?.[0]?.clientY||0;},{passive:true});
-   $('musicChillPeekCard').addEventListener('touchend',e=>{if(!peekStartY)return;const dy=(e.changedTouches?.[0]?.clientY||0)-peekStartY;peekStartY=0;if(dy<-24)toggleMenu(true);},{passive:true});
-  }
   let drawerStartY=0;
   $('musicLyricsDrawerCard').addEventListener('touchstart',e=>{drawerStartY=e.touches?.[0]?.clientY||0;},{passive:true});
   $('musicLyricsDrawerCard').addEventListener('touchend',e=>{if(!drawerStartY)return;const dy=(e.changedTouches?.[0]?.clientY||0)-drawerStartY;drawerStartY=0;if(dy<-30)toggleLyricsDrawer(true);else if(dy>30)toggleLyricsDrawer(false);},{passive:true});
@@ -515,7 +536,7 @@
    const trackList=el('div',undefined,'music-playlist-tracks');
    const expanded=expandedPlaylists.has(pl.id);
    trackList.hidden=!expanded;head.classList.toggle('music-playlist-head-open',expanded);
-   head.onclick=()=>{const open=trackList.hidden;trackList.hidden=addForm.hidden=!open;if(open)expandedPlaylists.add(pl.id);else expandedPlaylists.delete(pl.id);head.classList.toggle('music-playlist-head-open',open);};
+   head.onclick=()=>{const open=trackList.hidden;animateDisclosure(trackList,open);animateDisclosure(addForm,open);if(open)expandedPlaylists.add(pl.id);else expandedPlaylists.delete(pl.id);head.classList.toggle('music-playlist-head-open',open);};
 
    if(!pl.items.length){trackList.append(el('p','Playlist trống. Dán link để thêm bài vào playlist.','music-empty-note'));}
    else{
