@@ -328,3 +328,6 @@ Branch fix/music-download-progress from main9e67edb: visible download status out
 
 ## Offline fallback update
 Branch fix/music-source-fallback from main01dc3e9. Discovery tries HTTPS despite unknown/false api/cors flags with bounded seeds. GET network failures try AllOrigins once. Smart title+artist NetEase matching experimental; GDStudio live403, Noembed200, proxy timeout. Three quality buttons and hidden long help. No promise of live YouTube download or same-recording proof.
+
+## Background music save
+Branch fix/music-background-save from maincd1561e. Save survives music route exit/player stop/track changes, retains owner and explicit cancel guards, shows a global status button. Pending per-owner metadata restarts interrupted saves on next load; no guarantee while iOS suspends/kills the web app, no byte-range resume. Quality shows selected checkmark and distinct color even while disabled. Directory cache5min, working origin priority6hours, failed metadata cooldown30sec. Chromium390/1440 passed background-route save, interrupted restart, real WASM32/64/96, visual selected colors, owner isolation, cancel, import and offline playback. Feature runtime390/1440, source/discovery tests, feature guards and design tokens passed. No external service deployment or auto voice changes.

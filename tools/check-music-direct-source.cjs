@@ -6,6 +6,10 @@ function environment(handler){const calls=[];const root={HSKMusicCore:core,HSKMu
 const json=d=>new Response(JSON.stringify(d),{headers:{'Content-Type':'application/json'}}),audio=()=>new Response(new Uint8Array([1,2,3]),{headers:{'Content-Type':'audio/webm'}});
 (async()=>{
  for(const [quality,selected] of [[32,48],[64,70],[96,128]]){const env=environment(url=>url.includes('/streams/')?json(metadata):audio());await env.run([first],quality);assert.equal(env.calls[1].url,'https://media.example.com/'+selected);}
+ const preferred=environment(url=>url.includes('/streams/')?json(metadata):audio());
+ await preferred.run([first,second]);
+ const callsBefore=preferred.calls.length;await preferred.run([second,first]);
+ assert(preferred.calls[callsBefore].url.startsWith(first.url),'working provider is prioritized even if directory ordering changes');
  let env=environment(url=>url.startsWith(first.url)?new Response('',{status:503}):url.includes('/streams/')?json(metadata):audio());assert.equal((await env.run([first,second])).byteLength,3);assert.equal(env.calls.length,3);
  env=environment(url=>url.startsWith(first.url)?new Response('',{status:429,headers:{'Retry-After':'120'}}):url.includes('/streams/')?json(metadata):audio());await env.run([first,second]);await env.run([first,second]);assert.equal(env.calls.filter(c=>c.url.startsWith(first.url)).length,1,'429 starts provider cooldown');
  env=environment(()=>{throw Error('must not fetch');});const aborted=new AbortController();aborted.abort();await assert.rejects(env.run([first],64,aborted.signal),{name:'AbortError'});await assert.rejects(env.run([first],64,undefined,'https://open.spotify.com/track/1234567890123456789012'),/Spotify/);assert.equal(env.calls.length,0);
