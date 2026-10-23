@@ -4126,7 +4126,19 @@ html body:not(#_rd).studio-enabled .shortcut[data-studio-go]:is(:focus-visible,:
 }
 html body:not(#_rd).studio-enabled .shortcut[data-studio-go]:is(:focus-visible,:active) :is(strong,small,span) { color:var(--palette-white) !important; }
 @media (max-width:720px) {
-  html body:not(#_rd).studio-enabled .pathway { grid-template-columns:minmax(0,1fr) !important; }
+  html body:not(#_rd).studio-enabled .pathway {
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:8px !important;
+  }
+  html body:not(#_rd).studio-enabled .path-step {
+    min-width:0;
+    flex-direction:column;
+    text-align:center;
+    gap:8px;
+    padding:12px 6px !important;
+  }
+  html body:not(#_rd).studio-enabled .path-step > div { flex:initial; width:100%; }
+  html body:not(#_rd).studio-enabled .path-step > i { display:none; }
   html body.studio-enabled .path-step :is(strong,small) { overflow-wrap:anywhere; }
 }
 html body.studio-enabled .about-logo { background-color:var(--press-active-bg) !important; color:var(--palette-white); }

@@ -28,6 +28,9 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
      if(i===2)assert(await page.locator('.app-tabs [data-mode=srs]').evaluate(n=>n.classList.contains('active')));
     }
     await page.evaluate(()=>HSKStudio.navigate('home'));await page.mouse.move(0,0);
+    const steps=await page.locator('.path-step').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width};}));
+    assert(steps.every(r=>Math.abs(r.y-steps[0].y)<2),'three pathway cards share one horizontal row');
+    assert(steps[1].x>=steps[0].x+steps[0].width&&steps[2].x>=steps[1].x+steps[1].width,'pathway cards do not overlap');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'no horizontal overflow');
     await page.screenshot({path:'/tmp/hsk-redesign-'+width+'-'+theme+'.png',fullPage:true});
    }
