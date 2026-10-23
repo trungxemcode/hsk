@@ -1119,7 +1119,9 @@
         {"kind":"file","file":"tools/check-music-links-ui.cjs","value":""},
         {"kind":"data_go","file":"index.html","value":"music"},
         {"kind":"data_go","file":"index.html","value":"music-play"},
-        {"kind":"file","file":"tools/check-music-mobile-nav-ui.cjs","value":""}
+        {"kind":"file","file":"tools/check-music-mobile-nav-ui.cjs","value":""},
+        {"kind":"contains","file":"src/modules/music/music.js","value":"id=\"musicQueueSheet\""},
+        {"kind":"contains","file":"src/modules/music/music.js","value":"function playbackList()"}
       ]
     }
   ]
