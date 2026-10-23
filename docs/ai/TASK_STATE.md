@@ -1,3 +1,6 @@
+## Owner redesign integration — 2026-10-23
+- Branch feat/redesign-integration from main83f532b (PR166 merged). Owner's Windows CSS/JS applied over latest shell; no route/storage/music feature replacement. Tokens consolidated, Inter subsets self-hosted and precached. See REDESIGN_INTEGRATION.md for source backup and compatibility boundaries. Publish and Windows synchronization status reported in task response.
+
 ## Kokoro Yunjian single-voice deployment — 2026-10-23
 - Request: Use only Kokoro male Yunjian for Chinese TTS; minimize downloads. Branch `feat/kokoro-yunjian-only` from merged main.
 - Exactly one new installable voice `zm_yunjian`; ONNX 8-bit model pinned at 92,361,116 bytes, speaker weights 523,435 bytes, Mandarin resources + shared Sherpa WASM. First full install ~94.3 MiB; only the small Yunjian MP3 demo precached by PWA. Users explicitly download the large package once; then the voice is the selection for all app Chinese TTS through HSKVoiceManager, Vietnamese stays unchanged. Unsupported devices retain OS TTS fallback. Previously installed packs are kept until successful replacement.

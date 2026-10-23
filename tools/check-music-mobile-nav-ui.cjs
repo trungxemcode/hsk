@@ -24,7 +24,10 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    const chillBox=await page.locator('.home-music-chill').boundingBox();
    const entryBox=await page.locator('.home-music-entry').boundingBox();
    assert.ok(Math.abs(chillBox.height-entryBox.height)<2,'home music cards have equal height');
-   assert.ok(Math.abs(chillBox.y-entryBox.y)<2,'home music cards are top-aligned on same row');
+   if(width<=980){
+    assert.ok(entryBox.y>=chillBox.y+chillBox.height,'owner redesign stacks phone music shortcuts without overlap');
+    assert.ok(Math.abs(chillBox.x-entryBox.x)<2&&Math.abs(chillBox.width-entryBox.width)<2,'stacked music shortcuts align and share width');
+   }else assert.ok(Math.abs(chillBox.y-entryBox.y)<2,'desktop home music cards are top-aligned on same row');
    assert.equal(await page.locator('.home-music-chill [data-icon=headphones] svg').isVisible(),true,'headphones icon is rendered in chill shortcut');
    assert.equal(await page.locator('.home-music-entry [data-icon=volume-2] svg').isVisible(),true,'volume-2 icon is rendered in study shortcut');
    await page.locator('.home-music-chill').click();
