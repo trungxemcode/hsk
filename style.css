@@ -910,7 +910,7 @@ html[data-theme="dark"]{
   --rd-shadow-md:0 1px 2px rgba(0,0,0,.3), 0 14px 34px -18px rgba(0,0,0,.7);
   --rd-shadow-lg:0 28px 64px -32px rgba(0,0,0,.8);
   --rd-ring:0 0 0 3px rgba(124,107,255,.25);
-  --palette-violet:#7c6bff;
+  --palette-violet:var(--press-active-bg);
   --palette-violet-deep:#5b4be8;
   --palette-violet-soft:#241f45;
   --palette-dark-paper:#0f0f18;
@@ -922,8 +922,8 @@ html[data-theme="dark"]{
   --palette-dark-violet:#9e92ff;
   --palette-dark-violet-soft:#241f45;
   --accent:#7c6bff;
-  --button-active-bg:#7c6bff;
-  --button-active-text:#12121c;
+  --button-active-bg:var(--press-active-bg);
+  --button-active-text:var(--palette-white);
 }
 
 

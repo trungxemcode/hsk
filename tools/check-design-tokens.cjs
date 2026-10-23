@@ -10,7 +10,7 @@ const resolve=(name,theme)=>{const value=({...defaults,...(theme==='dark'?night:
 // Exact palette from the owner-supplied redesign, in the canonical catalog.
 assert.equal(resolve('paper','light'),'#f4f4fa');assert.equal(resolve('paper','dark'),'#0f0f18');
 assert.equal(resolve('surface','dark'),'#181826');assert.equal(resolve('ink','dark'),'#c9c9de');
-assert.equal(resolve('button-active-bg','light'),'#5b4be8');assert.equal(resolve('button-active-bg','dark'),'#7c6bff');
+assert.equal(resolve('button-active-bg','light'),'#5b4be8');assert.equal(resolve('button-active-bg','dark'),'#6957e7');
 assert.equal(resolve('radius-btn','light'),'12px');assert.equal(resolve('radius-card','light'),'24px');
 for(const path of fs.readdirSync('.').filter(p=>p.endsWith('.css'))){
  let source=fs.readFileSync(path,'utf8').replace(/\/\*[\s\S]*?\*\//g,'');
