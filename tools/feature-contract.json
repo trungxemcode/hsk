@@ -1139,6 +1139,8 @@
         {"kind":"file","file":"src/modules/music/music-codec-worker.js","value":""},
         {"kind":"contains","file":"src/modules/music/music-codec-worker.js","value":"aac_he_v2"},
         {"kind":"file","file":"tools/check-music-codec.cjs","value":""},
+        {"kind":"file","file":"src/modules/music/music-direct-source.js","value":""},
+        {"kind":"file","file":"tools/check-music-direct-source.cjs","value":""},
         {"kind":"contains","file":"src/modules/music/music.js","value":"id=\"musicOfflineQuality\""}
       ]
     }

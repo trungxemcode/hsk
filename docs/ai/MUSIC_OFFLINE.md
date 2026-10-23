@@ -2,13 +2,23 @@
 
 Menu ba chấm → Nghe ngoại tuyến → chọn Thấp 32 / Trung bình 64 / Cao 96 kbps → Lưu link. Bộ lấy nguồn (khi đã cấu hình) trả âm thanh gốc; trình duyệt nén HE-AAC v2 stereo 48 kHz bằng FFmpeg.wasm trong Web Worker, kiểm tra profile và ghi IndexedDB. Không cần người nghe chọn file cho luồng này. Có tiến trình/hủy; nguồn lỗi, hủy, đổi tài khoản hoặc đổi bài không ghi đè bản cũ. Mỗi lượt tối đa 15 phút và 50 MiB nguồn. Tùy chọn chất lượng nhớ riêng theo tài khoản, mặc định 64. Dung lượng âm thanh xấp xỉ 0,24/0,48/0,72 MB/phút cộng container; tải nguồn ban đầu vẫn có thể lớn hơn file cuối.
 
-## Trạng thái tích hợp
+## Tải trực tiếp qua dịch vụ bên ngoài (thử nghiệm)
 
-**Chưa bật lấy link thật:** `music-config.json.offlineSourceResolver` đang trống. Bộ nén và luồng lưu đã được thử bằng nguồn thật do resolver mô phỏng cung cấp; chưa có dịch vụ lấy nguồn công khai được triển khai. Không coi kiểm thử này là tải thành công từ YouTube/SoundCloud thật. FFmpeg.wasm không lấy audio từ iframe hoặc vượt CORS/DRM; Spotify bị từ chối rõ ràng.
+`music-config.json.offlineDirect.enabled=true` cho trình duyệt gọi Piped/Cobalt và tải bytes thẳng từ proxy/tunnel của instance. Audio không qua Cloudflare hay VPS HSK; app/config/codec vẫn tải bình thường từ hosting. Không gửi Firebase token, cookie, Authorization hay referrer cho bên thứ ba. Chế độ trực tiếp không âm thầm chuyển về resolver HSK khi thất bại.
 
-`server/music/source_resolver.py` cung cấp POST `/v1/jobs` (`{url}`), GET `/v1/jobs/{id}`, GET `/v1/jobs/{id}/file`, DELETE `/v1/jobs/{id}`. Nó dùng yt-dlp cho một bài YouTube/SoundCloud công khai, không cookie/đăng nhập, giữ nguyên bytes, kiểm tra độ dài bằng ffprobe. Không chạy nén server. Firebase ID token kiểm tra bằng Identity Toolkit; job/file phân tách UID. Giới hạn 2 worker, 4 job đang chạy/chờ, 20 job giữ tạm, 10 lượt/UID/giờ (admin ngoại lệ), TTL 15 phút và xóa sau nhận file. Nguồn chặn tải/yêu cầu đăng nhập có thể thất bại.
+Module `music-direct-source.js` nhận allowlist tối đa 4 endpoint `{type:"piped"|"cobalt",url:"https://..."}` trong `offlineDirect.instances`. Cấu hình thử nghiệm ban đầu có 3 Piped API trong danh sách công khai chính thức: adminforge.de, kavin.rocks và leptons.xyz. Đây không phải danh sách được chứng nhận đang hoạt động. Không tự quét hay thu thập API ngẫu nhiên; không bật Cobalt mặc định vì chưa xác minh instance cho phép tích hợp và tải thành công.
 
-Triển khai container `docker build -f server/music/Dockerfile.source -t hsk-source .`, chạy HTTPS reverse proxy với `FIREBASE_API_KEY`, `ALLOWED_ORIGINS` (đúng origin app), tùy chọn `ADMIN_UID`, `SOURCE_TEMP`; đặt URL HTTPS vào `offlineSourceResolver`. Service cần Python/yt-dlp/ffprobe, không chạy trực tiếp trên GitHub Pages hay Cloudflare Worker JS. Chỉ dùng nguồn được phép tải. Khi chưa cấu hình, UI báo thiếu kết nối và vẫn giữ tính năng nhập file cũ.
+Piped: đọc `/streams/{videoId}`, chọn audio-only tương thích, ưu tiên bitrate nguồn đủ cho đích; chỉ dùng audio URL cùng origin với `proxyUrl` của phản hồi. Cobalt: POST `{url,downloadMode:"audio",audioFormat:"best",alwaysProxy:true,localProcessing:"forced"}`, nhận `tunnel` hoặc một tunnel audio/remux không HLS. Không chạy mã do extractor trả về, không xử lý captcha, không tự dùng raw redirect Googlevideo, multi-track merge hay HLS. SoundCloud cần Cobalt endpoint được phép tích hợp; danh sách Piped mặc định chỉ phục vụ YouTube. Spotify không được hỗ trợ.
+
+Lookup timeout 8 giây/instance, tải tối đa 90 giây/stream, tối đa 2 stream ứng viên/instance, 50 MiB nguồn và 15 phút âm thanh. 429 tạo cooldown theo Retry-After (tối thiểu 60 giây) trong phiên; không gọi lại instance đang cooldown. Hủy/đổi owner vẫn bảo toàn file cũ. Sau tải luôn nén HE-AACv2 đúng mức 32/64/96 bằng WASM trên thiết bị, không đổi MIME để giả định dạng.
+
+**Kết quả live 2026-10-23 chưa đạt:** từ môi trường kiểm tra, kavin/leptons trả 403, private.coffee trả 500, nosebs/privacy.com.de/drgns trả 503, adminforge/piped.yt timeout. Cobalt rue-cobalt.xenon.zone trả 403, cobaltapi.cjs.nz timeout ở GET metadata. Đây là quan sát từ một môi trường mạng, không kết luận mọi người dùng đều thất bại. Browser của môi trường không truy cập được hosting HSK để chạy phép thử live CORS. Chưa tải đủ một bài thật qua instance công khai và chưa nghiệm thu SoundCloud. Không coi test mock là bằng chứng live.
+
+## Resolver HSK tùy chọn (giữ tương thích)
+
+Khi `offlineDirect.enabled` tắt, app giữ luồng `offlineSourceResolver` cũ. Trường resolver hiện trống, dịch vụ Python/container chưa được triển khai. `server/music/source_resolver.py` cung cấp POST `/v1/jobs` (`{url}`), GET `/v1/jobs/{id}`, GET `/v1/jobs/{id}/file`, DELETE `/v1/jobs/{id}`. Nó dùng yt-dlp cho một bài YouTube/SoundCloud công khai, không cookie/đăng nhập, giữ nguyên bytes, kiểm tra độ dài bằng ffprobe; không nén server. Firebase ID token và job/file tách UID. Giới hạn 2 worker, 4 job đang chạy/chờ, 20 job giữ tạm, 10 lượt/UID/giờ (admin ngoại lệ), TTL 15 phút.
+
+Triển khai tùy chọn: `docker build -f server/music/Dockerfile.source -t hsk-source .`, HTTPS reverse proxy với `FIREBASE_API_KEY`, `ALLOWED_ORIGINS`, tùy chọn `ADMIN_UID`, `SOURCE_TEMP`. Không cần dịch vụ này cho chế độ direct.
 
 ## Bộ nén trên thiết bị
 
@@ -23,3 +33,5 @@ Triển khai container `docker build -f server/music/Dockerfile.source -t hsk-so
 ## Kiểm thử
 
 `node tools/check-music-codec.cjs` chạy đúng worker và WASM được ship: nén HE-AACv2 thật 32/64/96, xác minh output, cache dùng lại, nguồn/chất lượng sai. `node tools/check-music-offline.cjs` cần fake-indexeddb: owner, dedup, quota atomic, hủy stale. `node tools/check-music-offline-ui.cjs` dùng Playwright 390/1440: resolver giả trả bytes HE-AACv2 thật → WASM thật → lưu cả ba chất lượng; gắn/import, đổi owner, reload, ngắt mạng, play/pause/seek và xóa. `python tools/check-music-source-resolver.py` (cần fastapi/httpx): auth, link validation, owner, giữ nguyên bytes và cleanup. Cold start PWA và hiệu năng trên iPhone/Android cũ thật chưa được nghiệm thu.
+
+Kiểm thử direct: `node tools/check-music-direct-source.cjs` kiểm tra chọn chất lượng nguồn, failover, 429 cooldown, hủy, URL riêng tư, Cobalt tunnel, không gửi credentials và không nhận raw redirect/HTML. Browser offline UI 390/1440 bổ sung Piped failover + Cobalt tunnel với CORS mô phỏng, WASM thật, bảo toàn bản cũ khi hủy và xác nhận không gọi resolver HSK.

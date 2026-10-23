@@ -1,3 +1,9 @@
+## Browser-direct offline sources — 2026-10-23
+- Branch `feat/music-direct-download`, based on merged PR158/main `3843aa0`.
+- Added browser-direct Piped/Cobalt adapter; no media/credentials through HSK servers, bounded API/download timeouts, 429 cooldown, direct download progress, cancellation, no fallback to own resolver when direct is enabled. Existing optional resolver path preserved.
+- Config enables experimental direct YouTube lookup through 3 officially listed Piped APIs. Cobalt adapter available but no default Cobalt endpoint because none has been verified for integration; default SoundCloud direct remains unavailable.
+- Live probes from this environment failed (403/500/503/timeout); no public-instance full download or live browser CORS success claimed. Browser direct mock integration + real WASM passed at 390/1440, as did direct source unit, previous offline playback/import suite, feature runtime, music DOM, design tokens and 48/205 guards. See MUSIC_OFFLINE.md for exact observations and limitations.
+
 ## On-device offline quality — 2026-10-23
 - Added 32/64/96 quality selector and cancelable link save pipeline; true HE-AACv2 encoding runs in a single-use browser Worker with a custom 2.1 MiB audio-only FFmpeg.wasm/FDK build. Lazy SHA-verified codec cache stays separate from music storage and initial PWA precache.
 - Original-audio resolver Python/container prepared; no server encoding. **Not deployed/configured**: `offlineSourceResolver` stays empty. Live provider downloads are not claimed; Spotify is unsupported. See MUSIC_OFFLINE.md for deployment contract.

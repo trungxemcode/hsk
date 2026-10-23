@@ -1,1 +1,25 @@
-{"version":1,"enabled":false,"endpoint":"","maxLocalBytes":52428800,"offlineSourceResolver":""}
+{
+  "version": 1,
+  "enabled": false,
+  "endpoint": "",
+  "maxLocalBytes": 52428800,
+  "offlineSourceResolver": "",
+  "offlineDirect": {
+    "enabled": true,
+    "experimental": true,
+    "instances": [
+      {
+        "type": "piped",
+        "url": "https://pipedapi.adminforge.de"
+      },
+      {
+        "type": "piped",
+        "url": "https://pipedapi.kavin.rocks"
+      },
+      {
+        "type": "piped",
+        "url": "https://pipedapi.leptons.xyz"
+      }
+    ]
+  }
+}

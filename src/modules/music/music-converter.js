@@ -2,11 +2,11 @@
 (function(root){
  'use strict';
  const MAX=50*1024*1024;
- async function readSource(response,signal){
+ async function readSource(response,signal,onProgress=()=>{}){
   if(!response.ok)throw Error('Không tải được nguồn âm thanh ('+response.status+').');
   if(Number(response.headers.get('Content-Length'))>MAX)throw Error('Nguồn vượt 50 MB.');
   const reader=response.body.getReader(),chunks=[];let size=0;
-  try{while(true){if(signal.aborted)throw new DOMException('Đã hủy.','AbortError');const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>MAX)throw Error('Nguồn vượt 50 MB.');chunks.push(value);}}
+  try{while(true){if(signal.aborted)throw new DOMException('Đã hủy.','AbortError');const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>MAX)throw Error('Nguồn vượt 50 MB.');chunks.push(value);onProgress(size,Number(response.headers.get('Content-Length'))||0);}}
   catch(e){await reader.cancel().catch(()=>{});throw e;}
   if(!size)throw Error('Nguồn âm thanh trống.');
   const bytes=new Uint8Array(size);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}return bytes.buffer;
