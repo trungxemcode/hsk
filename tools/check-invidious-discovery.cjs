@@ -21,18 +21,34 @@ function env(handler){
  assert.equal((await a.run()).byteLength,3);
  assert.equal(a.calls.length,3,'directory, metadata, stream');
  assert.equal(a.calls[1].url.includes('fields=adaptiveFormats'),true);
- assert.equal(a.calls[2].url,'https://inv0.example/latest_version?id=abcdefghijk&itag=250&local=true');
+ assert.equal(a.calls[2].url,'https://inv-off.example/latest_version?id=abcdefghijk&itag=250&local=true');
  const eligible=await a.root.HSKMusicDirectSource.discover(new AbortController().signal);
- assert.equal(eligible.length,5,'only five healthy CORS+API instances selected');
- assert.equal(eligible[0].url,'https://inv0.example');
- a=env(url=>url===directory?j(rows.slice(0,3)):bin());
- await assert.rejects(a.run(),/Chưa có Invidious hỗ trợ API và CORS/);
- assert.equal(a.calls.length,1,'no invalid fallback host');
- a=env(url=>url===directory?new Response('',{status:403}):bin());
- await assert.rejects(a.run(),/Chưa có Invidious hỗ trợ API và CORS/);
- assert.equal(a.calls.length,1,'blocked discovery returns actionable failure');
+ assert.equal(eligible.length,5,'at most five HTTPS candidates selected');
+ assert.equal(eligible[0].url,'https://inv-off.example','API flag is not proof of actual availability');
+ assert.equal(eligible[1].url,'https://inv-cors.example','false CORS flag still permits an actual attempt');
+ const unknown=[['unknown',{type:'https',uri:'https://unknown.example',api:null,cors:null}]];
+ a=env(url=>url===directory?j(unknown):url.includes('/api/v1/videos/')?j({lengthSeconds:200,adaptiveFormats:formats}):bin());
+ await a.run();assert(a.calls.some(x=>x.url.startsWith('https://unknown.example/latest_version')),'unknown flags are probed');
+ const unsafe=[
+  ['private',{type:'https',uri:'https://127.0.0.1'}],
+  ['local',{type:'https',uri:'https://localhost'}],
+  ['http',{type:'http',uri:'http://plain.example'}],
+  ['down',{type:'https',uri:'https://down.example',monitor:{down:true}}],
+  ...unknown,...unknown
+ ];
+ a=env(url=>url===directory?j(unsafe):url.includes('/api/v1/videos/')?j({lengthSeconds:200,adaptiveFormats:formats}):bin());
+ const safe=await a.root.HSKMusicDirectSource.discover(new AbortController().signal);
+ assert.equal(safe.filter(x=>x.url==='https://unknown.example').length,1,'duplicate hosts removed');
+ assert(safe.every(x=>!/(127\.0\.0\.1|localhost|plain\.example|down\.example)/.test(x.url)),'private/non-HTTPS/down hosts excluded');
+ for(const response of [()=>j([]),()=>new Response('',{status:403})]){
+  a=env(url=>url===directory?response():url.includes('/api/v1/videos/')?j({lengthSeconds:200,adaptiveFormats:formats}):bin());
+  await a.run();assert(a.calls.some(x=>x.url.startsWith('https://inv.nadeko.net/api/v1/videos/')),'empty/blocked directory tries bounded seed fallback');
+ }
+ a=env(url=>url===directory?j(rows):url.startsWith('https://inv-off.example')?new Response('',{status:503}):url.includes('/api/v1/videos/')?j({lengthSeconds:200,adaptiveFormats:formats}):bin());
+ await a.run();assert(a.calls.at(-1).url.startsWith('https://inv-cors.example/latest_version'),'failed candidate advances to next source');
  a=env(url=>url===directory?j(rows):url.includes('/api/v1/videos/')?j({lengthSeconds:901,adaptiveFormats:formats}):bin());
  await assert.rejects(a.run(),/Các máy chủ nhạc/);
  assert.equal(a.calls.every(x=>!x.url.includes('/latest_version')),true,'15 minute limit blocks all audio');
- console.log('PASS dynamic discovery: health/API/CORS, top 5, metadata formats, local=true audio proxy, blocked/empty directory, duration, no credentials');
+ assert.equal(a.calls.filter(x=>x.url.includes('/api/v1/videos/')).length,5,'failed metadata probes remain capped at five');
+ console.log('PASS dynamic discovery: false/null flags probed, top 5, private/down/duplicate rejection, local=true, seed fallback, failover, duration, no credentials');
 })().catch(e=>{console.error(e);process.exitCode=1});
