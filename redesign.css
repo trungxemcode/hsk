@@ -4095,6 +4095,27 @@ html body:not(#_rd)[data-studio-hub="music"] .music-study-quick-list .music-card
 
 /* Preserve the app's safe-area-aware landscape navigation rail. */
 /* Retain full-frame disclosure hit areas and readable keyboard feedback. */
+/* Lesson height follows its content; the workspace owns scrolling in this mode.
+   Bound the SoundCloud iframe instead of inheriting YouTube's 16:9 / 100% height. */
+html body[data-studio-hub="music"] #musicPanel.music-lesson-mode .music-stage {
+  height:auto !important;
+  min-height:100dvh;
+  overflow:visible !important;
+  overflow-anchor:none;
+}
+html body[data-studio-hub="music"] #musicYoutube.music-soundcloud {
+  aspect-ratio:auto;
+  height:166px;
+  min-height:166px;
+  overflow:hidden;
+  flex:none;
+}
+html body[data-studio-hub="music"] #musicYoutube.music-soundcloud iframe {
+  position:static;
+  display:block;
+  height:166px;
+  max-height:166px;
+}
 html body:not(#_rd)[data-studio-hub="music"] #musicPanel [hidden] { display:none !important; }
 @media (max-width:980px) {
   html body:not(#_rd)[data-studio-hub="music"] #musicPanel :is(input:not([type=range]):not([type=checkbox]):not([type=radio]),select,textarea) { font-size:16px !important; }

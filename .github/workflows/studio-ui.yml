@@ -100,6 +100,7 @@ jobs:
           name: studio-layout-screenshots
           path: |
             /tmp/studio-*.png
+            /tmp/music-*.png
             /tmp/mobile-ux-*.png
             /tmp/mobile-flow-*.png
             /tmp/clean-*.png

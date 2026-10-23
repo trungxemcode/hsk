@@ -103,6 +103,9 @@ const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),pat
  // Selecting a lesson renders its controls before the asynchronous widget mount
  // finishes. Wait for READY before testing transport, as the real SDK requires.
  await page.waitForFunction(()=>window.scTest?.ready===true);
+ const widgetBox=await page.locator('#musicYoutube iframe').boundingBox(),transportBox=await page.locator('#musicLesson .music-transport').boundingBox();
+ assert.ok(widgetBox&&transportBox&&Math.abs(widgetBox.height-166)<1&&widgetBox.y+widgetBox.height<=transportBox.y,'SoundCloud embed stays bounded above real transport touch targets');
+ await page.screenshot({path:'/tmp/music-soundcloud-'+width+'.png'});
  await page.locator('#musicNext').click();assert.equal(await page.evaluate(()=>scTest.seek),5000);
  await page.locator('#musicForward10').click();
  const forwardState=await page.evaluate(()=>({seek:Math.round(scTest.seek),seeks:scTest.seeks,clicks:scTest.clicks,pointer:scTest.pointer,widgets:scTest.widgets,ready:scTest.ready,scrub:document.getElementById('musicScrub').value,rect:document.getElementById('musicForward10').getBoundingClientRect().toJSON()}));
