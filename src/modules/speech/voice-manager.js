@@ -32,8 +32,8 @@ async function engine(){await ready;if(selection.source!=='pack')throw aborted()
 async function install(voiceId,onProgress=()=>{}){
  if(!support())throw Error('Thiết bị chưa hỗ trợ gói giọng mở rộng. Bạn vẫn có thể chọn giọng thiết bị.');
  installController?.abort();const controller=new AbortController(),signal=controller.signal,run=++operation;installController=controller;let candidate;
- try{await ready;const before=await store.snapshot(),c=await catalog(),voice=c.voices.find(v=>v.id===voiceId);if(!voice)throw Error('Không tìm thấy giọng.');
- const specs=[...c.shared,{...voice.asset,role:'voice'}],blobs=new Map(),files=[];let total=0,loaded=0;
+ try{await ready;const before=await store.snapshot(),c=await catalog(),voice=c.voices.find(v=>v.id===voiceId);if(!voice)throw Error('Không tìm thấy giọng.');if(voice.downloadable===false)throw Error(voice.unavailableReason||'Giọng này hiện chỉ có demo.');
+ const specs=[...c.shared,...(voice.assets||[{...voice.asset,role:'voice'}])],blobs=new Map(),files=[];let total=0,loaded=0;
  for(const spec of specs){const saved=await store.asset(spec.sha256);if(saved&&saved.size===spec.bytes)blobs.set(spec.sha256,saved);else total+=spec.bytes;files.push([spec.role,spec.sha256]);}
  const quota=await navigator.storage?.estimate?.().catch(()=>null);if(quota?.quota&&quota.quota-quota.usage<total*1.2)throw Error('Máy chưa đủ dung lượng trống để đổi giọng. Giọng cũ vẫn được giữ.');
  onProgress({phase:'download',loaded,total});

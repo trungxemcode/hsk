@@ -34,42 +34,68 @@ here. The source/build links above cover the unmodified binary and its pinned
 transitive dependencies; this repository supplies the loader changes and all
 app-side glue. Preserve these notices and source access when redistributing.
 
-## Pinned neural model and voices
+## Current independent small model
 
-- Model: `onnx-community/Kokoro-82M-v1.0-ONNX`, revision
+- Quantized Huayan medium model and original Piper config:
+  `IhorShevchuk/piper1-voices-fp16-quantized`, revision
+  `7fb50e46b26367633c599b9da5128fd2883ef3e7`, files
+  `zh/zh_CN/huayan/medium/zh_CN-huayan-medium.int8.onnx` and
+  `zh/zh_CN/huayan/medium/zh_CN-huayan-medium.onnx.json`.
+- This source is the publisher of the conversion; the upstream Piper model is
+  `rhasspy/piper-voices`, revision `5041a7a49ae5b3a0f30e6837769eb03fdbb231bd`.
+  Its Huayan model card identifies the dataset as PlayVoice/HuaYan_TTS and lists
+  the dataset license as Unknown. Do not invent an Apache/CC0 grant for Huayan
+  from the separate Kokoro license. Preserve upstream notices and attribution.
+- `huayan-medium.json` contains the original phoneme map rendered as Sherpa tokens
+  and minimal VITS metadata. The model is unmodified on disk; on initialization,
+  FP16 types are expanded to FP32 and metadata appended. Quantized parameters
+  remain quantized. Real WASM inference is checked before default replacement.
+- `piper-resources.json.gz` is a lossless subset of the legacy resources below,
+  retaining only the eight eSpeak files required by the Chinese/English frontend.
+  Common runtime/resources total ~4.9 MiB; Huayan model/config ~17.8 MiB.
+  Unlike Kokoro, the common runtime contains no neural weights.
+
+## Small prerecorded auditions
+
+`content/voice-demos/*.mp3` are generated locally with these pinned models,
+using the phrase `你好，欢迎学习中文。`, encoded mono MP3 at 24 kbit/s / 24 kHz.
+All nine combined fit 0.1 MiB; exact size/hash is recorded per catalog entry.
+No synthesis API or quota is used to audition: playback is of the recorded clip.
+Auditions are PWA assets; full models/runtimes are not.
+
+## Legacy Kokoro compatibility
+
+The eight Kokoro entries are demo-only for new installations. Existing stored
+Kokoro blobs still play, so users can replace/remove them without losing access.
+These sources are retained for reproducibility, not advertised as small packs:
+
+- `onnx-community/Kokoro-82M-v1.0-ONNX`, revision
   `1939ad2a8e416c0acfeecc08a694d14ef25f2231`, `onnx/model_fp16.onnx`.
 - Voice tensors: `hexgrad/Kokoro-82M`, revision
-  `f3ff3571791e39611d31c381e3a41a3af07b4987`, eight `voices/z*.pt` files.
-  Only the selected tensor is downloaded. ZIP parsing reads the stored
-  `data/0` tensor bytes; Python pickle is never executed in the app.
-- Chinese tokens/lexicon: `csukuangfj/kokoro-int8-multi-lang-v1_0`, revision
+  `f3ff3571791e39611d31c381e3a41a3af07b4987`, eight `voices/z*.pt` files;
+  Apache-2.0 per the publisher model card. ZIP reads only stored `data/0` tensor
+  bytes; the app never executes pickle.
+- Tokens/lexicon: `csukuangfj/kokoro-int8-multi-lang-v1_0`, revision
   `2a360693d79b88b49b88e29aec2b53577f41f206`.
-- Normalization FSTs and reduced eSpeak resources:
-  `csukuangfj/kokoro-int8-multi-lang-v1_1`, revision
+- FSTs and eSpeak files: `csukuangfj/kokoro-int8-multi-lang-v1_1`, revision
   `155831f1b4ba23b1f5c058be6a61df90cefb2a37`.
-- Kokoro model/voices: Apache-2.0 per the publisher's model card:
-  https://huggingface.co/hexgrad/Kokoro-82M/tree/f3ff3571791e39611d31c381e3a41a3af07b4987
+- The ~162 MiB first download was mostly a shared neural model. It is not eight
+  separable 20 MiB models. No such size claim is made in the app.
 
-All asset sizes and SHA-256 values are in the catalog. The first selected voice
-requires about 162 MiB; another voice reuses the model/runtime and downloads about
-0.5 MiB. The compact FP16 model stays on disk. On initialization the worker
-expands weights, graph types, and Cast operations to FP32 and appends Sherpa
-metadata for one speaker. This avoids non-finite samples found in real browser
-inference with the int8 and direct FP16 paths. Inference therefore needs much more
-RAM than the on-disk size; successful use on old iPhones is not guaranteed.
-Device speech remains the default. There is no academic/HSK certification claim.
+## Reproduce current catalog
 
-## Reproduce
-
-1. Download/extract the pinned runtime archive above.
-2. Download the listed lexicon/tokens, three FSTs, the eight eSpeak files named in
-   `tools/build-chinese-voice-runtime.py`, model, and eight `.pt` files.
-   Save the model as `model.web-fp16.onnx`; preserve resource paths.
-3. Create `voice-hashes.json` as `[id, bytes, sha256]` rows for the eight voice
-   files (catalog values provide the expected values).
-4. Run `python tools/build-chinese-voice-runtime.py RUNTIME_DIR RESOURCE_DIR`.
-   The result is deterministic; compare the regenerated catalog/hashes.
-5. Run `HSK_CHINESE_VOICE_FIXTURE=RESOURCE_DIR node tools/check-chinese-voice-runtime.cjs`
-   with Playwright and `CHROME_EXECUTABLE` when needed. This uses real local
-   weights and checks finite, non-silent PCM for all eight voices, dates and
-   several sentence lengths. It does not claim listening validation or iOS QA.
+1. Runtime provenance/build is above. The unchanged WASM and bindings remain
+   those of v1.13.8; the loader modifications remain the same two changes.
+2. Download the pinned Huayan model/config as `huayan.onnx` and
+   `huayan-config.json` in a fixture directory. The existing catalog contains
+   expected hashes; do not silently update them to unverified upstream files.
+3. Run `python tools/prepare-light-chinese-voices.py FIXTURE_DIR`. This rebuilds
+   the small resource bundle/config/catalog and hashes the checked-in auditions.
+4. For a full legacy runtime rebuild, first follow
+   `tools/build-chinese-voice-runtime.py` with its pinned inputs, then run the
+   lightweight preparation script. The latter replaces the large catalog policy.
+5. For actual WASM checks, also name/symlink the model using its upstream basename
+   `zh_CN-huayan-medium.int8.onnx`, then run
+   `HSK_CHINESE_VOICE_FIXTURE=FIXTURE_DIR node tools/check-chinese-voice-runtime.cjs`
+   with Playwright and `CHROME_EXECUTABLE` when needed. This checks finite PCM,
+   not subjective listening quality or real-iPhone behavior.

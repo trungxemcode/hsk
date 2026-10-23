@@ -21,12 +21,21 @@ async function initialize(assets){
  const binding=URL.createObjectURL(files.bindings);try{importScripts(binding);}finally{URL.revokeObjectURL(binding);}
  const resources=JSON.parse(new TextDecoder().decode(await unzip(files.resources))),FS=Module.FS;
  for(const [path,b64] of Object.entries(resources)){if(path==='/model-metadata.bin')continue;FS.mkdirTree(path.slice(0,path.lastIndexOf('/'))||'/');const raw=atob(b64);FS.writeFile(path,Uint8Array.from(raw,c=>c.charCodeAt(0)));}
+ if(files.config){
+  const config=JSON.parse(await files.config.text());if(config.type!=='piper')throw Error('Loại gói giọng chưa được hỗ trợ.');
+  const varint=n=>{const b=[];do{const v=n%128;n=Math.floor(n/128);b.push(v+(n?128:0));}while(n);return b;},field=(n,b)=>[...varint(n*8+2),...varint(b.length),...b],enc=s=>Array.from(new TextEncoder().encode(s));
+  const metadata=Uint8Array.from(Object.entries(config.metadata).flatMap(([k,v])=>field(14,[...field(1,enc(k)),...field(2,enc(v))])));
+  FS.writeFile('/tokens.txt',config.tokens);FS.writeFile('/model.onnx',HSKVoiceModel.expand(new Uint8Array(await files.model.arrayBuffer()),metadata),{canOwn:true});
+  tts=createOfflineTts(Module,{offlineTtsModelConfig:{vits:{model:'/model.onnx',tokens:'/tokens.txt',lexicon:'',dataDir:'/espeak-ng-data',noiseScale:.667,noiseScaleW:.8,lengthScale:1},numThreads:1,debug:0,provider:'cpu'},ruleFsts:'',ruleFars:'',maxNumSentences:1});
+ }else{
  // Add Sherpa metadata to the unmodified web export; keep only one speaker.
  const model=new Uint8Array(await files.model.arrayBuffer()),raw=atob(resources['/model-metadata.bin']),metadata=Uint8Array.from(raw,c=>c.charCodeAt(0)),combined=HSKVoiceModel.expand(model,metadata);
  FS.writeFile('/model.onnx',combined,{canOwn:true});
  FS.writeFile('/voices.bin',voiceData(await files.voice.arrayBuffer()));
  tts=createOfflineTts(Module,{offlineTtsModelConfig:{kokoro:{model:'/model.onnx',voices:'/voices.bin',tokens:'/tokens.txt',dataDir:'/espeak-ng-data',lexicon:'/lexicon-zh.txt',lang:'en-us'},numThreads:1,debug:0,provider:'cpu'},ruleFsts:'/phone-zh.fst,/date-zh.fst,/number-zh.fst',ruleFars:'',maxNumSentences:1});
+
+ }
  FS.unlink('/model.onnx');
 }
-function generate(text,rate){const a=tts.generate({text:String(text).replace(/〇/g,'零'),sid:0,speed:rate});if(a.sampleRate!==24000||a.samples.length<100||a.samples.some(v=>!Number.isFinite(v))||!a.samples.some(v=>Math.abs(v)>.0001))throw Error('Giọng chưa tạo được âm thanh hợp lệ. Hãy thử giọng khác.');return a;}
+function generate(text,rate){const a=tts.generate({text:String(text).replace(/〇/g,'零'),sid:0,speed:rate});if(![16000,22050,24000].includes(a.sampleRate)||a.samples.length<100||a.samples.some(v=>!Number.isFinite(v))||!a.samples.some(v=>Math.abs(v)>.0001))throw Error('Giọng chưa tạo được âm thanh hợp lệ. Hãy thử giọng khác.');return a;}
 self.onmessage=async({data})=>{const {id,type}=data;try{if(type==='init'){await initialize(data.assets);generate('你好。',1);self.postMessage({id,ok:true});}else{const a=generate(data.text,data.rate);self.postMessage({id,samples:a.samples,sampleRate:a.sampleRate},[a.samples.buffer]);}}catch(e){self.postMessage({id,error:e.message||'Không mở được giọng đọc.'});}};

@@ -1,19 +1,20 @@
-## Chinese voices — feat/chinese-voice-packs
+## Chinese voices — feat/chinese-voice-packs / PR160 (Draft)
 
-Adds account/guided Chinese voice settings: OS voices default; optional eight
-Kokoro voices downloaded one at a time. Download ~162 MiB first time, ~0.5 MiB
-when reusing the common model. Atomic replacement deletes the old voice only
-after checks + local synthesis succeed; choosing device speech clears pack data.
-Existing Vietnamese selection, study/music storage and cloud quota are untouched.
+User corrected size policy: tiny demos before download, only chosen voice's
+package, auto-delete previous app voice on successful replacement, keep OS
+voices. Current catalog offers Huayan (~17.8 MiB model/config + ~4.9 MiB common
+runtime = ~22.8 MiB first install). All 9 MP3 auditions together fit 0.1 MiB.
+The original 8 Kokoro entries are demo-only for new downloads: the 162 MiB
+shared model cannot be divided into 8 independent 20 MiB models. Existing
+legacy Kokoro selections remain playable until replaced/removed.
 
-Actual int8/direct-FP16 inference produced non-finite samples. Final worker
-upcasts the compact FP16 model to FP32 before inference; eight real voices passed
-finite/non-silent PCM checks in Chromium. RAM is much higher than storage; iPhone
-real-device QA remains necessary. Details, data boundaries, tests and license
-provenance: CHINESE_VOICES.md and vendor/chinese-voices/SOURCES.md.
-
-This work is separate from the older draft music-direct-download PR159. No merge
-or production iOS verification has been performed for Chinese voices.
+Huayan actual WASM passed several Chinese/date phrases with finite non-silent
+PCM and no skipped tone-symbol messages. Small x_low candidate was not selected
+because its frontend skipped tone symbols. Fast UI tests include selected demos
+without installs/default changes, quota/network/runtime/cancel rollback,
+old-model deletion, warm workers, offline and real MP3 decoding. Sources and
+reproduction: CHINESE_VOICES.md and vendor/chinese-voices/SOURCES.md. Real iPhone
+and subjective listening QA still pending. No merge/deploy or Auto50 changes.
 
 ## On-device offline quality — 2026-10-23
 - Added 32/64/96 quality selector and cancelable link save pipeline; true HE-AACv2 encoding runs in a single-use browser Worker with a custom 2.1 MiB audio-only FFmpeg.wasm/FDK build. Lazy SHA-verified codec cache stays separate from music storage and initial PWA precache.

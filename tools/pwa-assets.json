@@ -157,7 +157,16 @@
     "src/modules/speech/voice-settings.js",
     "src/modules/speech/voice-pack-worker.js",
     "src/modules/speech/voice-catalog.json",
-    "src/modules/speech/voice-model.js"
+    "src/modules/speech/voice-model.js",
+    "content/voice-demos/piper_huayan.mp3",
+    "content/voice-demos/zf_xiaobei.mp3",
+    "content/voice-demos/zf_xiaoni.mp3",
+    "content/voice-demos/zf_xiaoxiao.mp3",
+    "content/voice-demos/zf_xiaoyi.mp3",
+    "content/voice-demos/zm_yunjian.mp3",
+    "content/voice-demos/zm_yunxi.mp3",
+    "content/voice-demos/zm_yunxia.mp3",
+    "content/voice-demos/zm_yunyang.mp3"
   ],
   "aliases": {
     "backup-core.js": "src/modules/backup/backup-core.js",

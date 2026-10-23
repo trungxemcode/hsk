@@ -1182,6 +1182,32 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "chinese-voice-auditions",
+      "name": "Demo giọng nhỏ trước khi tải gói giọng độc lập",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "content/voice-demos",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/chinese-voice-catalog.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/speech/voice-manager.js",
+          "value": "voice.downloadable===false"
+        },
+        {
+          "kind": "file",
+          "file": "tools/prepare-light-chinese-voices.py",
+          "value": ""
+        }
+      ]
     }
   ]
 }
