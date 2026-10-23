@@ -20,8 +20,8 @@ body.studio-enabled[data-studio-hub=music] main.workspace{width:100%!important;m
 .music-np-empty #musicEmptyOpenMenu{justify-self:center}
 .music-menu-backdrop{position:fixed;top:0;right:0;bottom:0;left:0;z-index:90;background:var(--legacy-rgb-12);backdrop-filter:blur(8px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility .28s ease}
 .music-menu-sheet{position:fixed;left:50%;bottom:0;top:auto;transform:translate(-50%,calc(100% + 18px));opacity:.96;visibility:hidden;pointer-events:none;transition:transform .38s cubic-bezier(.22,1,.36,1),opacity .26s ease,visibility .38s;will-change:transform;width:min(100%,560px);max-height:86dvh;overflow-y:auto;overscroll-behavior:contain;z-index:95;box-sizing:border-box;padding:0 0 max(24px,env(safe-area-inset-bottom));border-radius:var(--radius-16px);border-bottom-left-radius:var(--radius-none);border-bottom-right-radius:var(--radius-none);background:var(--palette-dark-paper);color:var(--palette-white);border:0;box-shadow:var(--shadow);scrollbar-width:none;-ms-overflow-style:none}
-.music-panel.music-menu-open .music-menu-sheet{transform:translate(-50%,0);opacity:1;visibility:visible;pointer-events:auto}
-.music-panel.music-menu-open .music-menu-backdrop{opacity:1;visibility:visible;pointer-events:auto}
+.music-panel.music-menu-open #musicMenuSheet{transform:translate(-50%,0);opacity:1;visibility:visible;pointer-events:auto}
+.music-panel.music-menu-open #musicMenuBackdrop{opacity:1;visibility:visible;pointer-events:auto}
 .music-menu-sheet::-webkit-scrollbar{display:none}
 .music-sheet-drag-area{display:flex;justify-content:center;align-items:center;padding:8px 0 2px}
 .music-drag-bar{display:block;width:36px;height:4px;border-radius:var(--radius-pill);background:var(--legacy-hex-ffffff38)}
@@ -369,10 +369,30 @@ html body.studio-enabled button.music-mini-save[aria-pressed=true]:not(.correct)
 @media(prefers-reduced-motion:reduce){.music-menu-backdrop,.music-menu-sheet,.music-lyrics-peek-btn,.music-playlist-card,.music-playlist-head,.music-playlist-track{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}}
 
 /* Finger tracking disables easing until release; scrolling inside the sheet is preserved. */
-.music-panel.music-sheet-dragging .music-menu-sheet,.music-panel.music-sheet-dragging .music-menu-backdrop{transition:none!important;visibility:visible}
+.music-panel.music-sheet-dragging #musicMenuSheet,.music-panel.music-sheet-dragging #musicMenuBackdrop{transition:none!important;visibility:visible}
 .music-sheet-drag-area{touch-action:none}
 .music-panel.music-player-dragging .music-stage{position:fixed;inset:0;z-index:85;overflow:auto;background:var(--palette-dark-paper);will-change:transform}
 .music-panel.music-player-dragging #musicMiniPlayer{display:block!important}
 html body.studio-enabled .music-mini-inner{padding:0 8px 0 0;gap:0}
 html body.studio-enabled button.music-mini-main:not(.correct):not(.wrong){align-self:stretch;padding:8px 12px!important;border-radius:var(--radius-none)!important;touch-action:none}
 html body.studio-enabled button.music-mini-main:not(.correct):not(.wrong):is(:hover,:active,:focus-visible){background:var(--button-active-bg)!important}
+
+/* The queue has its own surface; the ellipsis remains a separate action menu. */
+.music-queue-sheet{height: min(78dvh,720px);max-height:86dvh;border-radius:var(--radius-22px-22px-0-0)}
+.music-panel.music-queue-open #musicQueueSheet{transform:translate(-50%,0);opacity:1;visibility:visible;pointer-events:auto}
+.music-panel.music-queue-open #musicQueueBackdrop{opacity:1;visibility:visible;pointer-events:auto}
+.music-panel.music-queue-dragging #musicQueueSheet,.music-panel.music-queue-dragging #musicQueueBackdrop{transition:none!important;visibility:visible;opacity:1}
+.music-panel:is(.music-queue-open,.music-queue-dragging) #musicChillPeekCard{visibility:hidden}
+html body.studio-enabled .music-panel #musicQueueClose{display:grid;justify-items:center;gap:8px;min-height:56px;padding:10px 16px!important;touch-action:none;background:var(--palette-dark-paper)!important}
+.music-queue-handle{position:sticky;top:0;z-index:1;background:var(--palette-dark-paper)!important}
+.music-queue-content{padding:0 20px 20px}
+.music-queue-content h3{font-size:16px;margin:20px 0 12px;color:var(--palette-white)}
+html body.studio-enabled .music-panel #musicQueueSheet button.music-queue-track{width:100%;min-height:64px;padding:10px 8px!important;border:0!important;border-radius:var(--radius-8px)!important;text-align:left}
+html body.studio-enabled .music-panel #musicQueueSheet .music-queue-track[aria-current=true]{background:var(--legacy-hex-ffffff1f)!important}
+html body.studio-enabled .music-panel #musicQueueSheet .music-queue-track[aria-current=true] strong{color:var(--accent)}
+@media(prefers-reduced-motion:reduce){#musicQueueSheet,#musicQueueBackdrop{transition:none}}
+
+/* Fullscreen sheets use viewport coordinates; panel transforms/hidden scrolling shift fixed children. */
+.music-panel:not(.music-lesson-mode){animation:none;overflow:clip}
+
+.music-queue-track strong{text-transform:capitalize}

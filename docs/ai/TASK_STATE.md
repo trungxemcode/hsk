@@ -1,3 +1,11 @@
+## Independent playback queue drawer — 2026-10-23
+- Branch `fix/music-queue-drawer`, based on main `c5753ad` (PR #155).
+- Bottom handle renamed “Danh sách chờ phát”; it and the queue icon open `musicQueueSheet`, independent of ellipsis actions.
+- Queue shows current track + upcoming playlist/saved-link items; shared `playbackList()` keeps its order consistent with Next, including wraparound. Selecting a queued track retains its playlist.
+- Drag begins at the collapsed handle and tracks mouse/touch 1:1; supports cancel, snap and scrollable content. Scoped fullscreen panel CSS removes transformed containing block/hidden scrolling that displaced fixed sheets.
+- Verified: DOM music tests; 10 server music tests; design tokens; Playwright queue/link UI at 390/1440 (mouse hold, touch opening, touch closing/cancel, playlist order/select, separate ellipsis); feature runtime 390/1440; music/nav 320/390/1440; music lesson UI 390/844/1440 light+dark. External music providers mocked; no live credentials.
+- Added queue guards to existing music feature contract. PWA metadata regenerated before commit. PR only; merge awaits user instruction.
+
 ## Music Home Button Animation Sync & Spotify-style Recent Tracks with Mini Player — 2026-10-22
 - Release 3.10.21 on branch feat/music-spotify-home from origin/main 5d27e9a (3.10.20).
 - Addressed two specific user requirements sequentially:
