@@ -1,3 +1,21 @@
+## Chinese voices — feat/chinese-voice-packs / PR160 (Draft)
+
+User corrected size policy: tiny demos before download, only chosen voice's
+package, auto-delete previous app voice on successful replacement, keep OS
+voices. Current catalog offers Huayan (~17.8 MiB model/config + ~4.9 MiB common
+runtime = ~22.8 MiB first install). All 9 MP3 auditions together fit 0.1 MiB.
+The original 8 Kokoro entries are demo-only for new downloads: the 162 MiB
+shared model cannot be divided into 8 independent 20 MiB models. Existing
+legacy Kokoro selections remain playable until replaced/removed.
+
+Huayan actual WASM passed several Chinese/date phrases with finite non-silent
+PCM and no skipped tone-symbol messages. Small x_low candidate was not selected
+because its frontend skipped tone symbols. Fast UI tests include selected demos
+without installs/default changes, quota/network/runtime/cancel rollback,
+old-model deletion, warm workers, offline and real MP3 decoding. Sources and
+reproduction: CHINESE_VOICES.md and vendor/chinese-voices/SOURCES.md. Real iPhone
+and subjective listening QA still pending. No merge/deploy or Auto50 changes.
+
 ## On-device offline quality — 2026-10-23
 - Added 32/64/96 quality selector and cancelable link save pipeline; true HE-AACv2 encoding runs in a single-use browser Worker with a custom 2.1 MiB audio-only FFmpeg.wasm/FDK build. Lazy SHA-verified codec cache stays separate from music storage and initial PWA precache.
 - Original-audio resolver Python/container prepared; no server encoding. **Not deployed/configured**: `offlineSourceResolver` stays empty. Live provider downloads are not claimed; Spotify is unsupported. See MUSIC_OFFLINE.md for deployment contract.

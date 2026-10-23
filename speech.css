@@ -10,3 +10,15 @@
 .lesson-language-heading .lesson-cn{flex:1;min-width:0;margin-top:0}
 .speech-status{position:fixed;bottom:max(14px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);max-width:min(90vw,640px);padding:10px 16px;border-radius:var(--radius-btn);background:var(--legacy-hex-17315b);color:var(--palette-white);z-index:1000;font-size:14px;box-shadow:var(--shadow-speech-15);pointer-events:none}
 .speech-status:empty{display:none}
+
+.chinese-voice-dialog{box-sizing:border-box;width:min(560px,calc(100vw - 24px));max-height:calc(100dvh - 32px);overflow:auto;padding:24px;border:1px solid var(--line);border-radius:var(--radius-dialog);background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.chinese-voice-dialog label{display:block;margin:14px 0 6px;font-weight:600}
+.chinese-voice-dialog select{width:100%;min-height:44px;font:inherit;font-size:16px;color:var(--ink);background:var(--surface);border:1px solid var(--line-dark);border-radius:var(--radius-btn);padding:8px}
+.chinese-voice-dialog progress{width:100%;margin-top:16px}
+.chinese-voice-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chinese-voice-actions button{min-height:44px}
+.chinese-voice-dialog [hidden]{display:none!important}
+.chinese-voice-dialog{margin:auto}
+.chinese-voice-actions button{padding:10px 14px;border:1px solid var(--button-border);border-radius:var(--radius-btn);background:var(--button-bg);color:var(--button-text);font:inherit;cursor:pointer}
+#chineseVoiceApply{background:var(--button-active-bg);color:var(--button-active-text)}
+.chinese-voice-actions button:disabled{background:var(--button-disabled-bg);color:var(--button-disabled-text);cursor:default}
