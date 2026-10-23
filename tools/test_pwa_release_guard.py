@@ -1,4 +1,5 @@
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 import unittest
@@ -38,9 +39,19 @@ class PwaReleaseGuardTests(unittest.TestCase):
         self.assertTrue(guard.is_client_change('index.html', names))
         self.assertTrue(guard.is_client_change('src/modules/reading/real-reading.js', names))
         self.assertTrue(guard.is_client_change('fresh-client-feature.js', names))
+        self.assertTrue(guard.is_client_change('vendor/fonts/fresh-font.woff2', names))
         self.assertFalse(guard.is_client_change('server/reading-service.mjs', names))
         self.assertFalse(guard.is_client_change('docs/ai/TASK_STATE.md', names))
         self.assertFalse(guard.is_client_change('.github/workflows/pwa-release-guard.yml', names))
+
+    def test_font_metadata_preserves_binary_bytes(self):
+        manifest = guard.ensure_release_integrity()
+        fonts = [name for name in manifest['assets'] if name.endswith('.woff2')]
+        self.assertTrue(fonts)
+        for name in fonts:
+            raw = (ROOT / name).read_bytes()
+            self.assertEqual(manifest['assets'][name]['bytes'], len(raw), name)
+            self.assertEqual(manifest['assets'][name]['sha256'], hashlib.sha256(raw).hexdigest(), name)
 
     def test_unversioned_frontend_change_is_rejected(self):
         current = guard.ensure_release_integrity()
@@ -118,6 +129,17 @@ class PwaReleaseGuardTests(unittest.TestCase):
             return (ROOT / name).read_bytes()
         with self.assertRaisesRegex(ValueError, 'Public Pages asset out of sync'):
             live.inspect(live.DEFAULT_SITE, current, partial)
+
+    def test_public_verifier_rejects_normalized_binary_font(self):
+        current = guard.ensure_release_integrity()
+        def corrupted(url):
+            if 'app-version.json' in url:
+                return json.dumps(current).encode()
+            name = url.split('?')[0].split('/hsk/', 1)[1]
+            raw = (ROOT / name).read_bytes()
+            return raw.replace(b'\r\n', b'\n') if name.endswith('.woff2') else raw
+        with self.assertRaisesRegex(ValueError, 'Public Pages asset out of sync: vendor/fonts/'):
+            live.inspect(live.DEFAULT_SITE, current, corrupted)
 
 
 if __name__ == '__main__':

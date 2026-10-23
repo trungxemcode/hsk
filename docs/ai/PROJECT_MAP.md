@@ -5,7 +5,7 @@ Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-
 ## App and UX
 | Area | Primary files | Boundaries |
 | --- | --- | --- |
-| Entry/shell | `index.html`, `loader.js`, `app.js` | Static HTML, CSS, vanilla JS; no frontend build required |
+| Entry/shell | `index.html`, `loader.js`, `app.js`, `redesign.css`, `redesign.js` | Static HTML, CSS, vanilla JS; owner-supplied visual layer, existing routes retained. Local Inter subsets; design tokens remain in `style.css`. See `REDESIGN_INTEGRATION.md`. |
 | Navigation | `src/modules/shell/studio.js`, `studio-layout.css` | Existing panels, sidebar, mobile routes |
 | Home 2.16 | `src/modules/shell/home-overview.js`, `home-overview.css`, `docs/OVERVIEW-2.16.md` | Single learning CTA, 2×2 shortcuts, real progress and compact vocabulary. Daily-word summary has persistent 8px vertical / 12px horizontal padding so purple press/focus never hugs the text (2.18). |
 | Mobile | `src/modules/shell/mobile-ux.js`, `mobile-ux.css`, `src/modules/shell/mobile-layout.js`, `mobile-layout.css`, `src/modules/shell/mobile-dock.js` | Focus modes, original fixed quiz/exam/SRS actions, in-place lesson word popover, grouped account controls and notebook hierarchy. Landscape phone navigation sits on the right with safe areas on both edges; dock buttons include label padding. See `docs/MOBILE-FLOW-2.19.md`. |

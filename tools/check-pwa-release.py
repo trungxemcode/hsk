@@ -15,7 +15,7 @@ from pwa_assets import collect_assets, read_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 IGNORE_PREFIXES = ('server/', 'tools/', 'docs/', '.github/', '.serena/', '.git/')
-CLIENT_SUFFIXES = ('.js', '.css', '.html', '.json', '.webmanifest', '.png', '.svg', '.webp', '.mp3', '.gz')
+CLIENT_SUFFIXES = ('.js', '.css', '.html', '.json', '.webmanifest', '.png', '.svg', '.webp', '.mp3', '.gz', '.woff', '.woff2')
 CLIENT_SHELL = ('offline.js', 'offline-worker.js', 'OneSignalSDKWorker.js', 'app-version.json')
 RELEASE_RE = re.compile(r'^\d+\.\d+\.\d+$')
 VERSION_RE = re.compile(r'^hsk-offline-[A-Za-z0-9-]+$')
@@ -69,7 +69,7 @@ def ensure_release_integrity(root=ROOT):
         raise ValueError('Manifest assets do not match OFFLINE_FILES')
     for name in assets:
         data = (root / name).read_bytes()
-        if Path(name).suffix.lower() not in ('.png', '.gz', '.webp', '.mp3'):
+        if Path(name).suffix.lower() not in ('.png', '.gz', '.webp', '.mp3', '.woff', '.woff2'):
             data = data.replace(b'\r\n', b'\n')
         recorded = catalog[name]
         if recorded.get('sha256') != hashlib.sha256(data).hexdigest() or recorded.get('bytes') != len(data):

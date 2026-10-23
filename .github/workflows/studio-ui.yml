@@ -26,6 +26,10 @@ jobs:
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-chat-mobile-ui.cjs
+      - name: Verify music link controls
+        env:
+          NODE_PATH: /tmp/hsk-tests/node_modules
+        run: CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-links-ui.cjs
       - name: Functional regression checks
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules
@@ -59,8 +63,8 @@ jobs:
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: |
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-redesign-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-links-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-mobile-nav-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-lesson-guided-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-guided-presentation-ui.cjs
@@ -96,6 +100,7 @@ jobs:
           name: studio-layout-screenshots
           path: |
             /tmp/studio-*.png
+            /tmp/music-*.png
             /tmp/mobile-ux-*.png
             /tmp/mobile-flow-*.png
             /tmp/clean-*.png

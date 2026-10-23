@@ -1210,6 +1210,18 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "owner-redesign",
+      "name": "Giao diện mới và điều hướng lộ trình",
+      "checks": [
+        {"kind":"file","file":"redesign.css","value":""},
+        {"kind":"file","file":"redesign.js","value":""},
+        {"kind":"contains","file":"index.html","value":"./redesign.css"},
+        {"kind":"contains","file":"index.html","value":"./redesign.js"},
+        {"kind":"file","file":"tools/check-redesign-ui.cjs","value":""},
+        {"kind":"file","file":"vendor/fonts/Inter-OFL.txt","value":""}
+      ]
     }
   ]
 }

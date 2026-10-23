@@ -1,6 +1,12 @@
 {
   "schema": 1,
   "files": [
+    "redesign.css",
+    "redesign.js",
+    "vendor/fonts/inter-latin.woff2",
+    "vendor/fonts/inter-latin-ext.woff2",
+    "vendor/fonts/inter-vietnamese.woff2",
+    "vendor/fonts/Inter-OFL.txt",
     "src/modules/music/music-core.js",
     "src/modules/music/music-soundcloud.js",
     "src/modules/music/music-offline.js",
