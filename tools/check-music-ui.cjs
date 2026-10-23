@@ -18,6 +18,7 @@ function wav(){const samples=44100*11,b=Buffer.alloc(44+samples*2);b.write('RIFF
  assert.ok(!/user-scalable\s*=\s*no|maximum-scale\s*=\s*1(?:\D|$)/i.test(await page.locator('meta[name=viewport]').getAttribute('content')||''),'pinch zoom remains enabled');
  assert.equal(await page.locator('#musicMenuSheet').isVisible(),false,'secondary controls tucked inside 3-dots menu by default');
  await page.locator('#musicMenuBtn').click();
+ await page.waitForFunction(()=>getComputedStyle(document.getElementById('musicMenuSheet')).visibility==='visible');
  assert.equal(await page.locator('#musicMenuSheet').isVisible(),true,'3-dots button opens menu sheet');
  await page.locator('#musicImport summary').click();
  await page.locator('#musicManifest').setInputFiles(path.join(root,'content/music/lesson-template.json'));
