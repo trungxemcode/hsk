@@ -7,19 +7,6 @@
   "offlineDirect": {
     "enabled": true,
     "experimental": true,
-    "instances": [
-      {
-        "type": "piped",
-        "url": "https://pipedapi.adminforge.de"
-      },
-      {
-        "type": "piped",
-        "url": "https://pipedapi.kavin.rocks"
-      },
-      {
-        "type": "piped",
-        "url": "https://pipedapi.leptons.xyz"
-      }
-    ]
+    "instances": []
   }
 }
