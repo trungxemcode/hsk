@@ -11,6 +11,15 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    const url='http://127.0.0.1:'+server.address().port+'/index.html';
    await page.goto(url);await page.waitForFunction(()=>window.HSKMusic&&window.HSKMusicOffline&&window.HSKStudio);
    await page.evaluate(()=>{localStorage.setItem('hsk-account-meta-v1',JSON.stringify({uid:'offline-one'}));window.HSKAccountDashboard={user:{uid:'offline-one',getIdToken:async()=> 'test-token'}};window.HSKStudio.navigate('music-play');});
+   // Users may open offline without selecting a currently playing track.
+   await page.locator('#musicMenuBtn').click();await page.locator('#musicMenuOfflineRow').click();
+   assert.equal(await page.locator('#musicOfflineAddCurrent').isDisabled(),false,'save action must not look dead with no track');
+   await page.locator('#musicOfflineAddCurrent').click();
+   assert.match(await page.locator('#musicOfflineUsage').innerText(),/dán link/i,'empty selection shows feedback');
+   await page.locator('#musicOfflineLinkUrl').fill('not-a-link');
+   await page.locator('#musicOfflineAddCurrent').click();
+   assert.match(await page.locator('#musicOfflineUsage').innerText(),/link|HTTPS/i,'invalid link shows feedback');
+   await page.locator('#musicMenuClose').click();
    await page.locator('#musicMenuBtn').click();await page.locator('#musicLinkImport>summary').click();await page.locator('#musicLinkUrl').fill('https://youtu.be/abcdefghijk');await page.locator('#musicLinkName').fill('Bài nhạc đã chọn');await page.locator('#musicLinkApply').click();
    await page.waitForFunction(()=>getComputedStyle(document.getElementById('musicMenuSheet')).visibility==='hidden');
    const openOffline=async()=>{await page.locator('#musicMenuBtn').click();await page.locator('#musicMenuOfflineRow').click();await page.waitForFunction(()=>!document.getElementById('musicOfflineUsage').textContent.includes('Đang đọc'));};
@@ -27,6 +36,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
     await page.waitForFunction(()=>!document.getElementById('musicOfflineCancel').hidden);
     await page.waitForFunction(()=>document.getElementById('musicOfflineCancel').hidden,{},{timeout:120000});
     const row=await page.evaluate(async()=> (await HSKMusicOffline.list('offline-one'))[0]);
+    assert.match(await page.locator('#musicOfflineUsage').innerText(),/Đã lưu thành công/,'successful save confirms the stored file');
     assert.equal(row?.bitrate,Number(quality),await page.locator('#musicOfflineUsage').innerText());assert.ok(row.size>lastSize);lastSize=row.size;
    }
    // Direct mode fetches API + proxy bytes from the browser, never the HSK resolver.

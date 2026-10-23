@@ -408,3 +408,7 @@ html body.studio-enabled .music-panel #musicQueueSheet .music-queue-track[aria-c
 .music-offline-quality{display:grid;gap:8px;margin:16px 20px;color:var(--palette-white);font-size:14px}
 .music-offline-quality select{width:100%;min-height:44px}
 #musicOfflineCancel[hidden]{display:none!important}
+
+/* Pasted URL is actionable even when no music is playing. */
+.music-offline-link{display:grid;gap:8px;margin:4px 20px 14px;color:var(--palette-white);font-size:14px}
+.music-offline-link input{box-sizing:border-box;width:100%;min-width:0;min-height:46px;padding:10px 12px;border:1px solid var(--legacy-hex-ffffff38);border-radius:var(--radius-btn);background:var(--palette-dark-surface);color:var(--palette-white);font:inherit;font-size:16px}

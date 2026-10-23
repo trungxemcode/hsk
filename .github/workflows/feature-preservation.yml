@@ -68,6 +68,7 @@ jobs:
           node tools/check-music-codec.cjs
           node tools/check-music-direct-source.cjs
           node tools/check-invidious-discovery.cjs
+          node tools/check-voice-demo-offline-range.cjs
           node tools/check-reading-dom.cjs
           node tools/check-studio-dom.cjs
           node tools/check-notebook-dom.cjs
