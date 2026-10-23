@@ -9,13 +9,15 @@ Raw source SHA256:
 - redesign.css: `FDFB3E70BCBE79E0C549121263E2CB0723D231606F683E22FCA80099528391E7`
 - redesign.js: `31134B19730178BD5BBB0B9795E3442BC87B28F84119E76DB45E94D0EBE66FA4`
 
+During final synchronization the PC stylesheet had an additional ROUND 5 music design (existing normalized content unchanged). That append-only revision was preserved as `redesign-latest-music.css` in the same backup folder, SHA256 `E8313BA7F3730CD69A1F34FED3E50BC7B3C528B57BC68143BD054F29563A3C6B`, and integrated into the visual layer with its tokens centralized. Hidden sections still follow app state; music form controls retain 16px mobile text.
+
 ## Integration boundaries
 
 - Preserved design selector order, visual surfaces, layout and animations. Mechanically consolidated source tokens and fixed color/radius/shadow literals into the existing single `style.css` catalog.
 - Official Inter Latin, Latin extended/pinyin and Vietnamese WOFF2 subsets, with OFL license. No Google font network dependency; Chinese retains system font fallback. All six new runtime/license assets enter the offline catalog.
 - Pathway cards navigate through existing `HSKStudio.navigate`, with click, Enter and Space support; no duplicate routing implementation.
 - Compatibility fixes preserve hidden mobile controls, 16px mobile form text, dock label padding, landscape safe-area rail, dark badge contrast and SRS hard-button contrast. Reduced-motion preferences retained. Long lesson titles wrap; phone pathway cards stack and music cards shrink/wrap when text is enlarged. Gradient logo/planner buttons have solid fallback colors.
-- Home visual assertion now permits the owner's taller scrollable layout, while requiring the main learning CTA above the fold. Music shortcuts stack on phones and retain equal width/height and real navigation. No feature, accessibility or interaction checks removed. Exact palette and shortcut focus assertions follow the requested new palette; disclosure focus retains the existing readable purple. Token catalog restrictions remain enforced.
+- Home visual assertion now permits the owner's taller scrollable layout, while requiring the main learning CTA above the fold. Music shortcuts stack on phones and retain equal width/height and real navigation. No feature, accessibility or interaction checks removed. Exact palette assertions follow the requested new palette; disclosure and shortcut press/focus retain the existing readable purple. Token catalog restrictions remain enforced.
 - New browser regression checks local fonts, pathway routes, both themes, reduced motion and overflow at 390/1440px. Existing functional and responsive checks remain enabled.
 
 No Firebase, Worker, Auto50, Apps Script, API key, curriculum or account storage changes. Browser tests mock external services and cannot prove physical iPhone behavior.

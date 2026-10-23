@@ -3271,8 +3271,839 @@ body.studio-enabled .feature-hero:hover .hero-character{
   body.studio-enabled .feature-hero .hero-character{ animation:none !important; }
 }
 
+
+/* ==================================================================
+   ROUND 5 — TRÌNH NHẠC (giữ tinh thần Spotify, đồng bộ hệ thống app)
+   ================================================================== */
+
+/* ---------- Khung trang ---------- */
+html body[data-studio-hub="music"] .music-panel{
+  background:
+    radial-gradient(120% 60% at 50% -10%, var(--rd-music-color-001) 0%, var(--rd-music-color-002) 60%),
+    linear-gradient(180deg,var(--rd-music-color-003) 0%, var(--rd-music-color-004) 60%, var(--rd-music-color-005) 100%) !important;
+  color:var(--mu-text) !important;
+}
+html body[data-studio-hub="music"] .music-stage{
+  display:flex !important;
+  flex-direction:column;
+  height:100%;
+  min-height:0;
+  padding:0 !important;
+}
+html body[data-studio-hub="music"] .music-np-bg{
+  opacity:.28 !important;
+  filter:blur(64px) saturate(1.2);
+}
+
+/* ---------- Top bar ---------- */
+html body[data-studio-hub="music"] .music-top-bar{
+  position:relative !important;
+  top:auto !important;
+  left:auto !important;
+  right:auto !important;
+  flex:0 0 auto;
+  display:grid !important;
+  grid-template-columns:44px minmax(0,1fr) 44px;
+  align-items:center;
+  gap:10px;
+  height:64px;
+  padding:0 16px !important;
+  background:linear-gradient(180deg, var(--rd-music-color-006), var(--rd-music-color-007)) !important;
+  border:0 !important;
+  backdrop-filter:none !important;
+}
+html body[data-studio-hub="music"] .music-top-btn{
+  width:40px !important;
+  height:40px !important;
+  min-height:40px !important;
+  border-radius:var(--radius-rd-music-001) !important;
+  background:var(--rd-music-color-008) !important;
+  border:0 !important;
+  color:var(--rd-music-color-009) !important;
+  display:grid !important;
+  place-items:center;
+  padding:0 !important;
+  box-shadow:none !important;
+}
+html body[data-studio-hub="music"] .music-top-btn:hover{
+  background:var(--rd-music-color-010) !important;
+  color:var(--rd-music-color-009) !important;
+}
+html body[data-studio-hub="music"] .music-top-btn svg{ width:19px;height:19px; }
+html body[data-studio-hub="music"] .music-top-heading{
+  text-align:center;
+  min-width:0;
+}
+html body[data-studio-hub="music"] .music-top-eyebrow{
+  display:block;
+  font-size:9.5px !important;
+  font-weight:700 !important;
+  letter-spacing:.16em !important;
+  text-transform:uppercase;
+  color:var(--mu-text-3) !important;
+  margin-bottom:2px;
+}
+html body[data-studio-hub="music"] .music-top-title{
+  font-size:15px !important;
+  font-weight:700 !important;
+  letter-spacing:-.02em;
+  color:var(--rd-music-color-009) !important;
+  margin:0 !important;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* ---------- Nội dung cuộn ---------- */
+html body[data-studio-hub="music"] .music-np-body,
+html body[data-studio-hub="music"] .music-browse-view{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:8px 20px 120px !important;
+  scrollbar-width:thin;
+  scrollbar-color:var(--rd-music-color-010) var(--rd-music-color-011);
+}
+html body[data-studio-hub="music"] .music-browse-view{
+  width:min(100%,760px) !important;
+  margin:0 auto !important;
+}
+html body[data-studio-hub="music"] .music-np-body{
+  width:min(100%,760px);
+  margin:0 auto;
+}
+html body[data-studio-hub="music"] .music-np-body::-webkit-scrollbar,
+html body[data-studio-hub="music"] .music-browse-view::-webkit-scrollbar{ width:8px; }
+html body[data-studio-hub="music"] .music-np-body::-webkit-scrollbar-thumb,
+html body[data-studio-hub="music"] .music-browse-view::-webkit-scrollbar-thumb{
+  background:var(--rd-music-color-010);border-radius:var(--radius-rd-music-002);
+}
+
+/* ---------- Now playing (trạng thái trống) ---------- */
+html body[data-studio-hub="music"] .music-np-empty{
+  display:flex !important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  text-align:center;
+  padding-top:36px !important;
+  gap:0;
+}
+html body[data-studio-hub="music"] .music-cover{
+  width:132px !important;
+  height:132px !important;
+  border-radius:var(--radius-rd-music-003) !important;
+  overflow:hidden;
+  box-shadow:var(--shadow-rd-music-001);
+  background:linear-gradient(150deg,var(--rd-music-color-014),var(--rd-music-color-015));
+  margin-bottom:20px;
+}
+html body[data-studio-hub="music"] .music-cover .music-thumb{
+  width:100% !important;height:100% !important;object-fit:cover;display:block;
+}
+html body[data-studio-hub="music"] .music-np-meta{ max-width:100%; }
+html body[data-studio-hub="music"] .music-np-meta h3{
+  font-size:21px !important;
+  font-weight:750 !important;
+  letter-spacing:-.03em;
+  color:var(--rd-music-color-009) !important;
+  margin:0 0 6px !important;
+  padding:0 4px;
+  line-height:1.3;
+}
+html body[data-studio-hub="music"] .music-np-sub{
+  font-size:13px !important;
+  color:var(--mu-text-2) !important;
+  margin:0 0 20px !important;
+  padding:0 8px;
+  line-height:1.55;
+}
+html body[data-studio-hub="music"] .music-primary{
+  display:inline-flex !important;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:46px !important;
+  padding:0 22px !important;
+  border-radius:var(--radius-rd-music-004) !important;
+  background:linear-gradient(180deg,var(--mu-accent-2),var(--mu-accent)) !important;
+  border:0 !important;
+  color:var(--rd-music-color-009) !important;
+  font-size:14px !important;
+  font-weight:650 !important;
+  letter-spacing:-.01em;
+  box-shadow:var(--shadow-rd-music-002) !important;
+  transition:transform .18s var(--rd-ease), box-shadow .24s var(--rd-ease), filter .18s var(--rd-ease) !important;
+}
+html body[data-studio-hub="music"] .music-primary:hover{
+  filter:brightness(1.07);
+  transform:translateY(-1px);
+  box-shadow:var(--shadow-rd-music-003) !important;
+}
+html body[data-studio-hub="music"] .music-primary:active{ transform:translateY(0) scale(.985); }
+html body[data-studio-hub="music"] .music-primary svg{ width:17px;height:17px; }
+
+/* ---------- Pill lọc ---------- */
+html body[data-studio-hub="music"] .music-browse-pills{
+  display:flex !important;
+  flex-wrap:wrap;
+  gap:8px !important;
+  margin:6px 0 26px !important;
+  padding:0 !important;
+}
+html body[data-studio-hub="music"] .music-pill{
+  min-height:34px !important;
+  padding:0 15px !important;
+  border-radius:var(--radius-rd-music-004) !important;
+  border:1px solid var(--mu-line) !important;
+  background:var(--rd-music-color-013) !important;
+  color:var(--rd-music-color-018) !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+  letter-spacing:-.01em;
+  box-shadow:none !important;
+  transition:background-color .18s var(--rd-ease), color .18s var(--rd-ease), border-color .18s var(--rd-ease) !important;
+}
+html body[data-studio-hub="music"] .music-pill:hover{
+  background:var(--rd-music-color-019) !important;
+  color:var(--rd-music-color-009) !important;
+  border-color:var(--rd-music-color-011) !important;
+}
+html body[data-studio-hub="music"] .music-pill.active{
+  background:var(--rd-music-color-009) !important;
+  color:var(--rd-music-color-020) !important;
+  border-color:var(--rd-music-color-009) !important;
+  font-weight:700 !important;
+}
+
+/* ---------- Tiêu đề mục ---------- */
+html body[data-studio-hub="music"] .music-browse-section-title{
+  font-size:11px !important;
+  font-weight:750 !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase;
+  color:var(--mu-text-3) !important;
+  margin:0 0 10px !important;
+  padding:0 2px;
+}
+html body[data-studio-hub="music"] .music-browse-view > div + div{
+  margin-top:26px;
+}
+
+/* ---------- Danh sách bài gần đây ---------- */
+html body[data-studio-hub="music"] .music-recent-list{
+  display:flex !important;
+  flex-direction:column;
+  gap:2px !important;
+}
+html body[data-studio-hub="music"] .music-recent-row{
+  display:grid !important;
+  grid-template-columns:48px minmax(0,1fr) 36px;
+  align-items:center;
+  gap:14px !important;
+  padding:8px 10px !important;
+  border-radius:var(--radius-rd-music-005) !important;
+  background:var(--rd-music-color-011) !important;
+  border:0 !important;
+  cursor:pointer;
+  transition:background-color .16s var(--rd-ease) !important;
+}
+html body[data-studio-hub="music"] .music-recent-row:hover{
+  background:var(--rd-music-color-021) !important;
+}
+html body[data-studio-hub="music"] .music-recent-thumb{
+  width:48px !important;
+  height:48px !important;
+  border-radius:var(--radius-rd-music-006) !important;
+  object-fit:cover;
+  background:var(--rd-music-color-022);
+  box-shadow:var(--shadow-rd-music-004);
+}
+html body[data-studio-hub="music"] .music-recent-meta{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+html body[data-studio-hub="music"] .music-recent-title{
+  font-size:14.5px !important;
+  font-weight:600 !important;
+  letter-spacing:-.015em;
+  color:var(--rd-music-color-009) !important;
+  line-height:1.35;
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+html body[data-studio-hub="music"] .music-recent-sub{
+  font-size:12px !important;
+  color:var(--mu-text-3) !important;
+  line-height:1.4;
+}
+html body[data-studio-hub="music"] .music-recent-more{
+  width:34px !important;
+  height:34px !important;
+  min-height:34px !important;
+  border-radius:var(--radius-rd-music-001) !important;
+  border:0 !important;
+  background:var(--rd-music-color-011) !important;
+  color:var(--mu-text-2) !important;
+  display:grid;place-items:center;
+  opacity:0;
+  transition:opacity .16s var(--rd-ease), background-color .16s var(--rd-ease), color .16s var(--rd-ease) !important;
+  box-shadow:none !important;
+}
+html body[data-studio-hub="music"] .music-recent-row:hover .music-recent-more{
+  opacity:1;
+}
+html body[data-studio-hub="music"] .music-recent-more:hover{
+  background:var(--rd-music-color-023) !important;
+  color:var(--rd-music-color-009) !important;
+}
+html body[data-studio-hub="music"] .music-recent-more svg{ width:17px;height:17px; }
+
+/* ---------- Danh sách phát trống ---------- */
+html body[data-studio-hub="music"] .music-browse-playlist-list,
+html body[data-studio-hub="music"] .music-playlist-list{
+  display:flex !important;
+  flex-direction:column;
+  gap:8px;
+}
+html body[data-studio-hub="music"] .music-empty-note,
+html body[data-studio-hub="music"] .music-browse-playlist-list p{
+  font-size:12.5px !important;
+  color:var(--mu-text-3) !important;
+  line-height:1.6;
+  padding:18px 16px !important;
+  border:1px dashed var(--rd-music-color-024);
+  border-radius:var(--radius-rd-music-007);
+  text-align:center;
+  background:var(--rd-music-color-025);
+}
+
+/* ================= SHEET (danh sách & tùy chọn) ================= */
+html body[data-studio-hub="music"] .music-menu-sheet{
+  position:fixed !important;
+  bottom:0 !important;
+  width:min(100%,520px) !important;
+  max-height:82dvh;
+  overflow-y:auto;
+  padding:8px 20px calc(26px + env(safe-area-inset-bottom)) !important;
+  background:linear-gradient(180deg,var(--rd-music-color-026) 0%, var(--rd-music-color-027) 100%) !important;
+  border:1px solid var(--rd-music-color-028) !important;
+  border-bottom:0 !important;
+  border-radius:var(--radius-rd-music-008) !important;
+  box-shadow:var(--shadow-rd-music-005) !important;
+  color:var(--mu-text) !important;
+  scrollbar-width:thin;
+  scrollbar-color:var(--rd-music-color-010) var(--rd-music-color-011);
+}
+html body[data-studio-hub="music"] .music-sheet-drag-area{
+  position:sticky;
+  top:-8px;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:26px;
+  background:linear-gradient(180deg,var(--rd-music-color-026) 60%, var(--rd-music-color-030));
+}
+html body[data-studio-hub="music"] .music-menu-close{
+  width:100% !important;
+  height:26px !important;
+  min-height:26px !important;
+  background:var(--rd-music-color-011) !important;
+  border:0 !important;
+  padding:0 !important;
+  display:grid;place-items:center;
+  box-shadow:none !important;
+}
+html body[data-studio-hub="music"] .music-drag-bar{
+  width:38px !important;
+  height:4px !important;
+  border-radius:var(--radius-rd-music-002) !important;
+  background:var(--rd-music-color-031) !important;
+  display:block;
+}
+html body[data-studio-hub="music"] .music-menu-close:hover .music-drag-bar{
+  background:var(--rd-music-color-032) !important;
+}
+
+/* Đầu sheet: bài đang chọn */
+html body[data-studio-hub="music"] .music-menu-track-head{
+  display:flex !important;
+  align-items:center;
+  gap:13px;
+  padding:10px 2px 16px !important;
+  margin:0 !important;
+  background:var(--rd-music-color-011) !important;
+  border:0 !important;
+}
+html body[data-studio-hub="music"] .music-menu-track-thumb{
+  width:52px !important;
+  height:52px !important;
+  border-radius:var(--radius-rd-music-009) !important;
+  object-fit:cover;
+  flex:0 0 auto;
+  box-shadow:var(--shadow-rd-music-006);
+  background:var(--rd-music-color-022);
+}
+html body[data-studio-hub="music"] .music-menu-track-copy{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+html body[data-studio-hub="music"] .music-menu-track-copy strong{
+  font-size:14.5px !important;
+  font-weight:650 !important;
+  color:var(--rd-music-color-009) !important;
+  letter-spacing:-.015em;
+  line-height:1.35;
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+html body[data-studio-hub="music"] .music-menu-track-copy small{
+  font-size:12px !important;
+  color:var(--mu-text-3) !important;
+  line-height:1.4;
+}
+html body[data-studio-hub="music"] .music-sheet-divider{
+  height:1px !important;
+  border:0 !important;
+  background:var(--mu-line) !important;
+  margin:0 0 6px !important;
+}
+
+/* Sub header (Quay lại / tiêu đề / Xong) */
+html body[data-studio-hub="music"] .music-sub-head{
+  display:grid !important;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:10px;
+  padding:6px 0 14px !important;
+  margin:0 !important;
+  border-bottom:1px solid var(--mu-line);
+}
+html body[data-studio-hub="music"] .music-sub-title{
+  text-align:center;
+  font-size:14px !important;
+  font-weight:700 !important;
+  color:var(--rd-music-color-009) !important;
+  letter-spacing:-.01em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+html body[data-studio-hub="music"] .music-sub-link{
+  min-height:32px !important;
+  padding:0 8px !important;
+  border-radius:var(--radius-rd-music-010) !important;
+  border:0 !important;
+  background:var(--rd-music-color-011) !important;
+  color:var(--mu-text-2) !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+  box-shadow:none !important;
+  white-space:nowrap;
+}
+html body[data-studio-hub="music"] .music-sub-link:hover{
+  background:var(--rd-music-color-008) !important;
+  color:var(--rd-music-color-009) !important;
+}
+html body[data-studio-hub="music"] .music-sub-done{ color:var(--mu-accent-2) !important; }
+
+/* ---------- Hàng phẳng trong sheet (Chia sẻ, Thêm vào..., Thư viện...) ---------- */
+html body[data-studio-hub="music"] .music-flat-row{
+  display:flex !important;
+  align-items:center;
+  gap:14px !important;
+  width:100%;
+  min-height:50px !important;
+  padding:0 8px !important;
+  border-radius:var(--radius-rd-music-005) !important;
+  border:0 !important;
+  background:var(--rd-music-color-011) !important;
+  color:var(--rd-music-color-033) !important;
+  font-size:14px !important;
+  font-weight:550 !important;
+  letter-spacing:-.01em;
+  text-align:left;
+  box-shadow:none !important;
+  transition:background-color .16s var(--rd-ease), color .16s var(--rd-ease) !important;
+}
+html body[data-studio-hub="music"] .music-flat-row:hover{
+  background:var(--rd-music-color-021) !important;
+  color:var(--rd-music-color-009) !important;
+}
+html body[data-studio-hub="music"] .music-flat-row:hover *{ color:var(--rd-music-color-009) !important; }
+html body[data-studio-hub="music"] .music-flat-ico{
+  width:20px;height:20px;flex:0 0 auto;
+  display:grid;place-items:center;
+  color:var(--mu-text-2);
+}
+html body[data-studio-hub="music"] .music-flat-ico svg{ width:19px;height:19px; }
+html body[data-studio-hub="music"] .music-flat-row > svg,
+html body[data-studio-hub="music"] .music-flat-row .music-chev{
+  margin-left:auto;
+  width:16px;height:16px;
+  color:var(--mu-text-3);
+  flex:0 0 auto;
+}
+html body[data-studio-hub="music"] .music-flat-row > span:not(.music-flat-ico){
+  flex:1;
+  min-width:0;
+}
+html body[data-studio-hub="music"] details.music-flat-details{
+  border:0 !important;
+  background:var(--rd-music-color-011) !important;
+  padding:0 !important;
+  margin:0 !important;
+  border-radius:var(--radius-rd-music-005);
+}
+html body[data-studio-hub="music"] details.music-flat-details > summary{
+  list-style:none;
+  cursor:pointer;
+}
+html body[data-studio-hub="music"] details.music-flat-details > summary::-webkit-details-marker{ display:none; }
+html body[data-studio-hub="music"] details.music-flat-details > summary::after{
+  content:"";
+  width:15px;height:15px;flex:none;
+  margin-left:auto;
+  background:currentColor;
+  opacity:.5;
+  -webkit-mask:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform .2s var(--rd-ease);
+}
+html body[data-studio-hub="music"] details.music-flat-details[open] > summary::after{
+  transform:rotate(180deg);
+}
+html body[data-studio-hub="music"] details.music-flat-details[open] > summary{
+  background:var(--rd-music-color-034) !important;
+}
+
+/* ---------- Form dán link / tạo playlist ---------- */
+html body[data-studio-hub="music"] .music-flat-expand-body,
+html body[data-studio-hub="music"] #musicLinkForm{
+  display:flex !important;
+  flex-direction:column;
+  gap:14px !important;
+  padding:14px 8px 6px !important;
+  margin:0 !important;
+  border:0 !important;
+  background:var(--rd-music-color-011) !important;
+}
+html body[data-studio-hub="music"] .music-link-main-row{
+  display:flex !important;
+  align-items:center;
+  gap:8px !important;
+}
+html body[data-studio-hub="music"] .music-link-main-row input{ flex:1; min-width:0; }
+html body[data-studio-hub="music"] .music-link-main-row .music-primary{
+  flex:0 0 auto;
+  min-height:46px !important;
+  padding:0 20px !important;
+  border-radius:var(--radius-rd-music-011) !important;
+  font-size:13.5px !important;
+}
+html body[data-studio-hub="music"] .music-link-sub-row{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:12px !important;
+}
+html body[data-studio-hub="music"] .music-link-sub-row > label,
+html body[data-studio-hub="music"] #musicLinkForm > label{
+  display:flex !important;
+  flex-direction:column;
+  gap:7px !important;
+  font-size:11.5px !important;
+  font-weight:650 !important;
+  letter-spacing:.01em;
+  color:var(--mu-text-3) !important;
+  min-width:0;
+}
+html body[data-studio-hub="music"] .music-link-sub-row > label > :is(input,select),
+html body[data-studio-hub="music"] #musicLinkForm > label > input{
+  width:100%;
+}
+
+/* Ô nhập trong khung tối */
+html body[data-studio-hub="music"] :is(
+  #musicMenuSheet input:not([type=file]):not([type=range]):not([type=checkbox]),
+  #musicMenuSheet select,
+  #musicMenuSheet textarea
+){
+  background:var(--rd-music-color-021) !important;
+  border:1px solid var(--rd-music-color-024) !important;
+  border-radius:var(--radius-rd-music-005) !important;
+  min-height:46px !important;
+  padding:0 13px !important;
+  color:var(--rd-music-color-009) !important;
+  font-size:13.5px !important;
+  font-weight:500 !important;
+  box-shadow:none !important;
+}
+html body[data-studio-hub="music"] :is(#musicMenuSheet input,#musicMenuSheet select):hover{
+  border-color:var(--rd-music-color-035) !important;
+}
+html body[data-studio-hub="music"] :is(#musicMenuSheet input,#musicMenuSheet select):focus{
+  outline:none !important;
+  border-color:var(--mu-accent-2) !important;
+  background:var(--rd-music-color-036) !important;
+  box-shadow:var(--shadow-rd-music-007) !important;
+}
+html body[data-studio-hub="music"] #musicMenuSheet input::placeholder{
+  color:var(--rd-music-color-038) !important;
+}
+html body[data-studio-hub="music"] #musicMenuSheet select{
+  appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23b6b0c6' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat:no-repeat !important;
+  background-position:right 12px center !important;
+  padding-right:34px !important;
+  text-overflow:ellipsis;
+}
+html body[data-studio-hub="music"] #musicMenuSheet option{
+  background:var(--rd-music-color-026);color:var(--rd-music-color-009);
+}
+html body[data-studio-hub="music"] #musicMenuSheet input[type=file]{
+  min-height:auto !important;
+  padding:10px !important;
+  font-size:12px !important;
+  color:var(--mu-text-2) !important;
+}
+
+/* ---------- Trạng thái / ghi chú ---------- */
+html body[data-studio-hub="music"] .music-status{
+  font-size:12px !important;
+  line-height:1.6;
+  color:var(--mu-text-3) !important;
+  background:var(--rd-music-color-039);
+  border:1px solid var(--mu-line-2);
+  border-radius:var(--radius-rd-music-005);
+  padding:10px 12px !important;
+  margin:8px 0 6px !important;
+}
+html body[data-studio-hub="music"] .music-intro{
+  font-size:12.5px !important;
+  color:var(--mu-text-2) !important;
+  line-height:1.6;
+}
+
+/* ---------- Hàng tạo playlist / lưu ---------- */
+html body[data-studio-hub="music"] .music-playlist-create-row,
+html body[data-studio-hub="music"] .music-save-picker,
+html body[data-studio-hub="music"] .music-new{
+  display:flex !important;
+  align-items:center;
+  gap:10px !important;
+  padding:4px 8px 8px !important;
+}
+html body[data-studio-hub="music"] .music-playlist-create-row input,
+html body[data-studio-hub="music"] .music-new input{ flex:1;min-width:0; }
+html body[data-studio-hub="music"] .music-save-new-link,
+html body[data-studio-hub="music"] .music-save-new-row,
+html body[data-studio-hub="music"] .music-aux-btn,
+html body[data-studio-hub="music"] .music-quick-save-btn{
+  min-height:40px !important;
+  padding:0 14px !important;
+  border-radius:var(--radius-rd-music-005) !important;
+  border:1px solid var(--mu-line) !important;
+  background:var(--rd-music-color-013) !important;
+  color:var(--rd-music-color-040) !important;
+  font-size:12.5px !important;
+  font-weight:600 !important;
+  box-shadow:none !important;
+}
+html body[data-studio-hub="music"] .music-save-new-link:hover,
+html body[data-studio-hub="music"] .music-aux-btn:hover,
+html body[data-studio-hub="music"] .music-quick-save-btn:hover{
+  background:var(--rd-music-color-019) !important;
+  color:var(--rd-music-color-009) !important;
+}
+
+/* ---------- 5b. Sửa bố cục: một vùng cuộn duy nhất, top bar sticky ---------- */
+html body[data-studio-hub="music"] .music-stage{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  height:100% !important;
+  min-height:0 !important;
+  padding:0 !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  scrollbar-color:var(--rd-music-color-010) var(--rd-music-color-011);
+}
+html body[data-studio-hub="music"] .music-stage::-webkit-scrollbar{ width:9px; }
+html body[data-studio-hub="music"] .music-stage::-webkit-scrollbar-thumb{
+  background:var(--rd-music-color-010);border-radius:var(--radius-rd-music-002);
+}
+
+html body[data-studio-hub="music"] .music-top-bar{
+  position:sticky !important;
+  top:0 !important;
+  z-index:6;
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:0 max(16px, calc((100% - 760px) / 2)) !important;
+  background:var(--rd-music-color-041) !important;
+  backdrop-filter:blur(18px) saturate(150%) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(150%) !important;
+  border-bottom:1px solid var(--rd-music-color-013) !important;
+}
+
+html body[data-studio-hub="music"] .music-np-body,
+html body[data-studio-hub="music"] .music-browse-view{
+  flex:0 0 auto !important;
+  width:100% !important;
+  max-width:760px !important;
+  margin:0 auto !important;
+  overflow:visible !important;
+  padding:10px 20px 24px !important;
+}
+html body[data-studio-hub="music"] .music-browse-view{
+  padding-bottom:120px !important;
+}
+
+/* Nút chính của trình nhạc: đè rule button toàn cục */
+html body:not(#_rd)[data-studio-hub="music"] .music-primary{
+  background:linear-gradient(180deg,var(--mu-accent-2),var(--mu-accent)) !important;
+  color:var(--rd-music-color-009) !important;
+  border:1px solid var(--rd-music-color-023) !important;
+  box-shadow:var(--shadow-rd-music-008) !important;
+}
+html body:not(#_rd)[data-studio-hub="music"] .music-primary:hover{
+  background:linear-gradient(180deg,var(--rd-music-color-043),var(--rd-music-color-044)) !important;
+  color:var(--rd-music-color-009) !important;
+  border-color:var(--rd-music-color-045) !important;
+}
+html body:not(#_rd)[data-studio-hub="music"] .music-primary *{ color:var(--rd-music-color-009) !important; }
+
+/* ---------- Danh sách bài học trong kho nhạc ---------- */
+html body[data-studio-hub="music"] .music-study-quick-list{
+  width:100% !important;
+  max-width:none !important;
+  margin:18px 0 0 !important;
+  gap:4px !important;
+  max-height:none !important;
+  overflow:visible !important;
+  display:flex !important;
+  flex-direction:column;
+}
+html body[data-studio-hub="music"] .music-card.music-study-card{
+  display:flex !important;
+  align-items:center;
+  gap:13px !important;
+  width:100%;
+  padding:8px 10px !important;
+  border-radius:var(--radius-rd-music-005) !important;
+  border:0 !important;
+  background:var(--rd-music-color-011) !important;
+  text-align:left;
+  box-shadow:none !important;
+  transition:background-color .16s var(--rd-ease) !important;
+}
+html body[data-studio-hub="music"] .music-card.music-study-card:hover{
+  background:var(--rd-music-color-021) !important;
+}
+html body[data-studio-hub="music"] .music-card.music-study-card:hover *{ color:inherit !important; }
+html body[data-studio-hub="music"] .music-row-thumb{
+  width:44px !important;
+  height:44px !important;
+  border-radius:var(--radius-rd-music-006) !important;
+  object-fit:cover;
+  flex:0 0 auto;
+  background:var(--rd-music-color-022);
+  box-shadow:var(--shadow-rd-music-004);
+}
+html body[data-studio-hub="music"] .music-row-copy{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+  flex:1;
+}
+html body[data-studio-hub="music"] .music-row-copy strong{
+  font-size:13.5px !important;
+  font-weight:600 !important;
+  color:var(--rd-music-color-009) !important;
+  letter-spacing:-.01em;
+  line-height:1.35;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+html body[data-studio-hub="music"] .music-row-copy small{
+  font-size:11.5px !important;
+  color:var(--mu-text-3) !important;
+  line-height:1.4;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* ---------- Nút "..." phải luôn thấy trên thiết bị cảm ứng ---------- */
+@media (hover:none){
+  html body[data-studio-hub="music"] .music-recent-more{ opacity:.85 !important; }
+}
+
+/* ---------- Ô chọn file ---------- */
+html body[data-studio-hub="music"] #musicMenuSheet input[type=file]::file-selector-button{
+  margin-right:10px;
+  min-height:32px;
+  padding:0 12px;
+  border-radius:var(--radius-rd-music-010);
+  border:1px solid var(--rd-music-color-010);
+  background:var(--rd-music-color-036);
+  color:var(--rd-music-color-009);
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+html body[data-studio-hub="music"] #musicMenuSheet input[type=file]::file-selector-button:hover{
+  background:var(--rd-music-color-046);
+}
+
+/* ---------- Nút Phát trong form gọn lại ---------- */
+html body:not(#_rd)[data-studio-hub="music"] .music-link-main-row .music-primary{
+  border-radius:var(--radius-rd-music-011) !important;
+  min-width:76px;
+  padding:0 18px !important;
+}
+
+/* Danh sách bài học: hàng phẳng, không tô nền */
+html body:not(#_rd)[data-studio-hub="music"] .music-study-quick-list .music-card.music-study-card{
+  background:var(--rd-music-color-011) !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+html body:not(#_rd)[data-studio-hub="music"] .music-study-quick-list .music-card.music-study-card:hover{
+  background:var(--rd-music-color-021) !important;
+}
+
+/* 5c: đã bỏ — không can thiệp transform của sheet (app tự canh giữa + animate) */
+
+
+
 /* Preserve the app's safe-area-aware landscape navigation rail. */
 /* Retain full-frame disclosure hit areas and readable keyboard feedback. */
+html body:not(#_rd)[data-studio-hub="music"] #musicPanel [hidden] { display:none !important; }
+@media (max-width:980px) {
+  html body:not(#_rd)[data-studio-hub="music"] #musicPanel :is(input:not([type=range]):not([type=checkbox]):not([type=radio]),select,textarea) { font-size:16px !important; }
+}
+html body:not(#_rd).studio-enabled .shortcut[data-studio-go]:is(:focus-visible,:active) {
+  background:var(--press-active-bg) !important;
+  color:var(--palette-white) !important;
+}
+html body:not(#_rd).studio-enabled .shortcut[data-studio-go]:is(:focus-visible,:active) :is(strong,small,span) { color:var(--palette-white) !important; }
 @media (max-width:720px) {
   html body:not(#_rd).studio-enabled .pathway { grid-template-columns:minmax(0,1fr) !important; }
   html body.studio-enabled .path-step :is(strong,small) { overflow-wrap:anywhere; }
