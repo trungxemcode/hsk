@@ -258,6 +258,7 @@ body.studio-enabled .music-panel details>summary:is(:active,:focus-visible){back
 html body.studio-enabled #musicMenuSheet[data-view=main] [data-menu-view]:not([data-menu-view~=main]),
 html body.studio-enabled #musicMenuSheet[data-view=save] [data-menu-view]:not([data-menu-view~=save]),
 html body.studio-enabled #musicMenuSheet[data-view=link] [data-menu-view]:not([data-menu-view~=link]),
+html body.studio-enabled #musicMenuSheet[data-view=offline] [data-menu-view]:not([data-menu-view~=offline]),
 html body.studio-enabled #musicMenuSheet[data-view=library] [data-menu-view]:not([data-menu-view~=library]){display:none!important}
 .music-menu-sheet[data-view=link] #musicLinkImport>summary{display:none!important}
 .music-menu-sheet[data-view=link] #musicLinkImport>.music-flat-expand-body{padding-top:12px}
@@ -396,3 +397,14 @@ html body.studio-enabled .music-panel #musicQueueSheet .music-queue-track[aria-c
 .music-panel:not(.music-lesson-mode){animation:none;overflow:clip}
 
 .music-queue-track strong{text-transform:capitalize}
+
+.music-offline-view{padding:0 0 16px}
+.music-offline-view>.music-empty-note,.music-offline-help{padding:0 20px;font-size:13px;color:var(--legacy-rgb-9);line-height:1.5}
+.music-offline-list{padding:0 20px;display:grid;gap:8px}
+.music-offline-item{display:flex;align-items:center;gap:12px;min-height:60px}
+.music-offline-item>.music-row-main{min-width:0;min-height:56px;flex:1}
+#musicMenuSheet[data-view=offline] #musicOfflineUsage{display:block!important}
+
+.music-offline-quality{display:grid;gap:8px;margin:16px 20px;color:var(--palette-white);font-size:14px}
+.music-offline-quality select{width:100%;min-height:44px}
+#musicOfflineCancel[hidden]{display:none!important}

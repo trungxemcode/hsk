@@ -1,3 +1,17 @@
+## On-device offline quality — 2026-10-23
+- Added 32/64/96 quality selector and cancelable link save pipeline; true HE-AACv2 encoding runs in a single-use browser Worker with a custom 2.1 MiB audio-only FFmpeg.wasm/FDK build. Lazy SHA-verified codec cache stays separate from music storage and initial PWA precache.
+- Original-audio resolver Python/container prepared; no server encoding. **Not deployed/configured**: `offlineSourceResolver` stays empty. Live provider downloads are not claimed; Spotify is unsupported. See MUSIC_OFFLINE.md for deployment contract.
+- Real shipped WASM passes all three quality/profile tests, reuse cache and invalid input. Resolver auth/owner/source byte/cleanup tests pass. Browser at 390/1440 passed real device-side conversion from mocked original source plus prior offline playback suite. Existing feature runtime passed at 390/1440; storage, music DOM, design tokens and 48/203 feature guards pass. PWA 3.11.4 / 174 precached assets; codec WASM is lazy.
+
+## Offline music collection — 2026-10-23
+- Branch `feat/music-offline` from main `7ff181e`.
+- Ellipsis “Nghe ngoại tuyến” sub-view: attach a corresponding M4A file to current provider track, standalone local import, stored list, remove and usage. No fake download from provider iframe. HE-AAC v2/64 kbps preparation provided by `tools/prepare-offline-music.py`; local imports retain original bytes and the UI explains this.
+- IndexedDB is stable across PWA releases: per-owner references, shared hash-addressed blobs, 100 MiB global budget, 50 MiB/file, atomic add/quota failure, reference-count cleanup, no automatic deletion of user-saved tracks. Never stores audio in localStorage/Firebase.
+- Native local player reuses current full player, progress, seek, pause, rate and optional repeat. End of offline collection stops unless repeat is enabled. Object URLs released on source/route/account change. Account race guard protects async file import/read.
+- Verified storage unit test (dedup, separate owners, final-reference deletion, bad format, stale operation and atomic quota), DOM music regression, design tokens and real HE-AACv2 64 kbps converter output. Browser offline UI at 390/1440 passes: attach/import, reload persistence, wrong-account exclusion, offline real play/pause/seek and delete. Provider/link UI, feature runtime and music lesson UI light/dark also passed; route re-entry native-source restoration passed offline browser coverage at both 390/1440.
+- Fixture is a six-second excerpt of generated synthetic music; no third-party recording. Physical iPhone and cold-start PWA in airplane mode still require device acceptance; browser playback test loads app shell online, reloads to verify DB persistence, then disconnects before playback.
+- Provider URLs remain online until a user supplies the matching owned file. No hosted transcoding/download backend or R2 deployment added.
+
 ## Stable entertainment recents — 2026-10-23
 - Branch `fix/music-stable-recents` from main `4b5ed59`.
 - Evidence: `drawRecentBrowse()` previously substituted three demo tracks when `savedLinks()` was empty. `owner()` previously defaulted to guest until Firebase finished; account module emits transient user:null while restoring cloud state.
