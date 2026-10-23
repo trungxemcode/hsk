@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "engine": "sherpa-onnx-1.13.8-per-voice",
+  "engine": "sherpa-onnx-1.13.8-yunjian-int8",
   "shared": [
     {
       "role": "engine",
@@ -25,161 +25,33 @@
     },
     {
       "role": "resources",
-      "url": "../../../vendor/chinese-voices/piper-resources.json.gz",
-      "bytes": 1264867,
-      "sha256": "4f851098b14010edc696e1567fa137b88209595b54c55184a2b3c4f450ce3f49"
+      "url": "../../../vendor/chinese-voices/resources.json.gz",
+      "bytes": 2098939,
+      "sha256": "0514e8bbbd659b6f22ccf21ebcf95074c969be11631b62f0a95fdfe02fb7d7fe"
     }
   ],
   "voices": [
     {
-      "id": "piper_huayan",
-      "label": "Huayan · gói riêng khoảng 18 MiB",
+      "id": "zm_yunjian",
+      "label": "Kokoro · Nam · Yunjian",
       "assets": [
         {
           "role": "model",
-          "url": "https://huggingface.co/IhorShevchuk/piper1-voices-fp16-quantized/resolve/7fb50e46b26367633c599b9da5128fd2883ef3e7/zh/zh_CN/huayan/medium/zh_CN-huayan-medium.int8.onnx",
-          "bytes": 18681619,
-          "sha256": "adc6be62616a3d32b310b15aa9c43477c1be89847c4f86d6dc7a7859aa7ac8fc"
+          "url": "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/1939ad2a8e416c0acfeecc08a694d14ef25f2231/onnx/model_quantized.onnx",
+          "bytes": 92361116,
+          "sha256": "fbae9257e1e05ffc727e951ef9b9c98418e6d79f1c9b6b13bd59f5c9028a1478"
         },
         {
-          "role": "config",
-          "url": "../../../vendor/chinese-voices/huayan-medium.json",
-          "bytes": 1321,
-          "sha256": "c96c8d4302e777422a9b6248207ea96bce8325383bbad2f09aeb055b3ceed21b"
+          "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zm_yunjian.pt",
+          "bytes": 523435,
+          "sha256": "76cbf8bad35901d011d9628a2fdceb7b4f1f127e7a3269cb393b3941eb7fc417",
+          "role": "voice"
         }
       ],
-      "demo": {
-        "url": "../../../content/voice-demos/piper_huayan.mp3",
-        "bytes": 6069,
-        "sha256": "738929c3d045cc853ff0d86a521d499a7aa7a1e56c56bb66c70ba2a12cd23d5d"
-      }
-    },
-    {
-      "id": "zf_xiaobei",
-      "label": "Kokoro · Nữ · Xiaobei",
-      "asset": {
-        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zf_xiaobei.pt",
-        "bytes": 523435,
-        "sha256": "9b76be63dab4f4f96962030acc0126a9aee9728608fbbe115e2b58a2bd504df6"
-      },
-      "downloadable": false,
-      "unavailableReason": "Giọng này cần mô hình dùng chung khoảng 162 MiB, chưa có gói nhỏ độc lập. Hiện chỉ nghe demo.",
-      "demo": {
-        "url": "../../../content/voice-demos/zf_xiaobei.mp3",
-        "bytes": 8373,
-        "sha256": "f6d0d6beb7aa77b3dad0baed77fd7de885cb674c4f8c558d609fc95f8ca5e456"
-      }
-    },
-    {
-      "id": "zf_xiaoni",
-      "label": "Kokoro · Nữ · Xiaoni",
-      "asset": {
-        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zf_xiaoni.pt",
-        "bytes": 523430,
-        "sha256": "95b49f169bf1640f4f43c25e13daa39f7b98d15d00823e83ef5c14b3ced59e49"
-      },
-      "downloadable": false,
-      "unavailableReason": "Giọng này cần mô hình dùng chung khoảng 162 MiB, chưa có gói nhỏ độc lập. Hiện chỉ nghe demo.",
-      "demo": {
-        "url": "../../../content/voice-demos/zf_xiaoni.mp3",
-        "bytes": 6861,
-        "sha256": "de8c336881e32a9ce2cab9eb3aad49a9cd64999b8738fd0269387ab153ae9178"
-      }
-    },
-    {
-      "id": "zf_xiaoxiao",
-      "label": "Kokoro · Nữ · Xiaoxiao",
-      "asset": {
-        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zf_xiaoxiao.pt",
-        "bytes": 523440,
-        "sha256": "cfaf6f2ded1ee56f1ff94fcd2b0e6cdf32e5b794bdc05b44e7439d44aef5887c"
-      },
-      "downloadable": false,
-      "unavailableReason": "Giọng này cần mô hình dùng chung khoảng 162 MiB, chưa có gói nhỏ độc lập. Hiện chỉ nghe demo.",
-      "demo": {
-        "url": "../../../content/voice-demos/zf_xiaoxiao.mp3",
-        "bytes": 7293,
-        "sha256": "0878b7cd67dea3b4ea4c0bff43c664dbbed9ac55107babebca38b1e1263b88ac"
-      }
-    },
-    {
-      "id": "zf_xiaoyi",
-      "label": "Kokoro · Nữ · Xiaoyi",
-      "asset": {
-        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zf_xiaoyi.pt",
-        "bytes": 523430,
-        "sha256": "b5235dbaeef85a4c613bf78af9a88ff63c25bac5f26ba77e36186d8b7ebf05e2"
-      },
-      "downloadable": false,
-      "unavailableReason": "Giọng này cần mô hình dùng chung khoảng 162 MiB, chưa có gói nhỏ độc lập. Hiện chỉ nghe demo.",
-      "demo": {
-        "url": "../../../content/voice-demos/zf_xiaoyi.mp3",
-        "bytes": 6357,
-        "sha256": "3e716945d933710f5deda635d6ac9bf52eec1dadf7e6956859d062c0d7940d29"
-      }
-    },
-    {
-      "id": "zm_yunjian",
-      "label": "Kokoro · Nam · Yunjian",
-      "asset": {
-        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zm_yunjian.pt",
-        "bytes": 523435,
-        "sha256": "76cbf8bad35901d011d9628a2fdceb7b4f1f127e7a3269cb393b3941eb7fc417"
-      },
-      "downloadable": false,
-      "unavailableReason": "Giọng này cần mô hình dùng chung khoảng 162 MiB, chưa có gói nhỏ độc lập. Hiện chỉ nghe demo.",
       "demo": {
         "url": "../../../content/voice-demos/zm_yunjian.mp3",
         "bytes": 6861,
         "sha256": "93cac7ddc14d3ec8b6dd737558f0d4d8e6b0de189872262aee9e3c377e5a6f76"
-      }
-    },
-    {
-      "id": "zm_yunxi",
-      "label": "Kokoro · Nam · Yunxi",
-      "asset": {
-        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zm_yunxi.pt",
-        "bytes": 523425,
-        "sha256": "dbe6e1ce7c3dbaf2f5667432947b638b1c6831ccbe154c4610dbcc44f431e27b"
-      },
-      "downloadable": false,
-      "unavailableReason": "Giọng này cần mô hình dùng chung khoảng 162 MiB, chưa có gói nhỏ độc lập. Hiện chỉ nghe demo.",
-      "demo": {
-        "url": "../../../content/voice-demos/zm_yunxi.mp3",
-        "bytes": 6357,
-        "sha256": "902c27c6cf7f28655c560cb026d3d47c25f59e71debd9b3a7a70d7710f5dc759"
-      }
-    },
-    {
-      "id": "zm_yunxia",
-      "label": "Kokoro · Nam · Yunxia",
-      "asset": {
-        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zm_yunxia.pt",
-        "bytes": 523430,
-        "sha256": "bb2b03b08e84d64e1214440ce3b624987fac177f2eeb5bab8571799a3d980acd"
-      },
-      "downloadable": false,
-      "unavailableReason": "Giọng này cần mô hình dùng chung khoảng 162 MiB, chưa có gói nhỏ độc lập. Hiện chỉ nghe demo.",
-      "demo": {
-        "url": "../../../content/voice-demos/zm_yunxia.mp3",
-        "bytes": 6861,
-        "sha256": "be840ec47f19355513a4bc70f851992f68ec6c9ce13a98ce6c17ba7340ff7430"
-      }
-    },
-    {
-      "id": "zm_yunyang",
-      "label": "Kokoro · Nam · Yunyang",
-      "asset": {
-        "url": "https://huggingface.co/hexgrad/Kokoro-82M/resolve/f3ff3571791e39611d31c381e3a41a3af07b4987/voices/zm_yunyang.pt",
-        "bytes": 523435,
-        "sha256": "5238ac22e0c7f8b6cdd2eddd6e444b8a700b73c4674d9a047d59a94ff96379a2"
-      },
-      "downloadable": false,
-      "unavailableReason": "Giọng này cần mô hình dùng chung khoảng 162 MiB, chưa có gói nhỏ độc lập. Hiện chỉ nghe demo.",
-      "demo": {
-        "url": "../../../content/voice-demos/zm_yunyang.mp3",
-        "bytes": 6501,
-        "sha256": "0b27255594bea5a3c9bed37c2c6a905f43989d12451ea01723777c3522459e93"
       }
     }
   ]
