@@ -52,12 +52,20 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --prefix /tmp/hsk-tests jsdom@26.1.0 playwright@1.56.1 fake-indexeddb@6.2.4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Original audio resolver contract
+        run: |
+          pip install -r server/music/source-requirements.txt httpx
+          python tools/check-music-source-resolver.py
       - name: Protected core behavior, data and server tests
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: |
           node --test server/*.test.mjs
           node tools/check-music-offline.cjs
+          node tools/check-music-codec.cjs
           node tools/check-reading-dom.cjs
           node tools/check-studio-dom.cjs
           node tools/check-notebook-dom.cjs

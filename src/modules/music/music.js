@@ -38,7 +38,7 @@
  <div id="musicLinkExtraActions" class="music-chill-only" data-menu-view="main"><button type="button" id="musicMenuShareRow" class="music-flat-row"><span class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></span><span class="music-flat-label">Chia sẻ</span></button><button type="button" id="musicPreviewPlaylistAdd" class="music-flat-row"><span id="musicMenuSaveIco" class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 8v8M8 12h8"/></svg></span><span id="musicMenuSaveLabel" class="music-flat-label">Thêm vào danh sách phát</span></button><select id="musicPreviewPlaylistSelect" class="music-sr" aria-label="Chọn playlist lưu"><option value="">— Mặc định —</option></select><div id="musicQuickPlaylistPills" class="music-quick-pills" hidden></div></div>
  <details id="musicLinkImport" class="music-flat-details music-chill-only" data-menu-view="main link"><summary class="music-flat-row"><span class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span><span class="music-flat-label">Dán link bài hát mới (YouTube / SoundCloud)</span></summary><form id="musicLinkForm" class="music-flat-expand-body"><div class="music-link-main-row"><input id="musicLinkUrl" type="url" inputmode="url" required maxlength="2048" placeholder="Dán link YouTube, Spotify, SoundCloud…" autocomplete="off"><button type="submit" id="musicLinkApply" class="music-primary">Phát</button></div><div class="music-link-sub-row"><label>Tên bài hát (tùy chọn) <input id="musicLinkName" maxlength="120" placeholder="Tự lấy từ link nếu để trống" autocomplete="off"></label><label>Thêm vào playlist <select id="musicLinkPlaylist"><option value="">— Không thêm vào playlist —</option></select></label></div><label class="music-study-only">Lời và bài tập JSON (không bắt buộc) <input id="musicLinkLyrics" type="file" accept=".json,application/json"></label></form></details>
  <button type="button" id="musicMenuOfflineRow" class="music-flat-row music-chill-only" data-menu-view="main"><span class="music-flat-ico" aria-hidden="true">↓</span><span class="music-flat-label">Nghe ngoại tuyến</span><span class="music-flat-chev" aria-hidden="true">›</span></button>
- <section id="musicOfflineView" class="music-offline-view music-chill-only" data-menu-view="offline" aria-label="Nghe ngoại tuyến"><p id="musicOfflineUsage" class="music-empty-note" role="status" aria-live="polite"></p><button type="button" id="musicOfflineAddCurrent" class="music-flat-row"><span class="music-flat-ico" aria-hidden="true">＋</span><span id="musicOfflineAddLabel" class="music-flat-label">Thêm bài đang chọn</span></button><button type="button" id="musicOfflineImport" class="music-flat-row"><span class="music-flat-label">Thêm file M4A từ thiết bị</span></button><input id="musicOfflineFile" class="music-sr" type="file" accept=".m4a,audio/mp4" aria-label="Chọn file M4A nghe ngoại tuyến"><p class="music-offline-help">Chọn file âm thanh bạn có quyền sử dụng. Chuẩn tiết kiệm: HE-AAC v2 64 kbps. File được lưu nguyên bản; hãy chuyển đổi trước nếu cần giảm dung lượng. Với bài từ link, chọn file tương ứng để lưu vào thiết bị; app không tải âm thanh từ trình phát YouTube, Spotify hoặc SoundCloud.</p><div id="musicOfflineList" class="music-offline-list"></div></section>
+ <section id="musicOfflineView" class="music-offline-view music-chill-only" data-menu-view="offline" aria-label="Nghe ngoại tuyến"><p id="musicOfflineUsage" class="music-empty-note" role="status" aria-live="polite"></p><label class="music-offline-quality">Chất lượng âm thanh<select id="musicOfflineQuality"><option value="32">Thấp · 32 kbps</option><option value="64" selected>Trung bình · 64 kbps</option><option value="96">Cao · 96 kbps</option></select></label><button type="button" id="musicOfflineAddCurrent" class="music-flat-row"><span class="music-flat-ico" aria-hidden="true">＋</span><span id="musicOfflineAddLabel" class="music-flat-label">Thêm bài đang chọn</span></button><button type="button" id="musicOfflineCancel" class="music-flat-row" hidden>Hủy lưu từ link</button><button type="button" id="musicOfflineAttachFile" class="music-flat-row">Gắn file có sẵn vào bài đang chọn</button><button type="button" id="musicOfflineImport" class="music-flat-row"><span class="music-flat-label">Thêm file M4A từ thiết bị</span></button><input id="musicOfflineFile" class="music-sr" type="file" accept=".m4a,audio/mp4" aria-label="Chọn file M4A nghe ngoại tuyến"><p class="music-offline-help">Chọn chất lượng rồi lưu bài từ link để nghe khi mất mạng. Nén HE-AAC v2 trên thiết bị · giới hạn 100 MB trên thiết bị. Bạn vẫn có thể thêm file M4A có sẵn.</p><div id="musicOfflineList" class="music-offline-list"></div></section>
  <button type="button" id="musicMenuLibraryRow" class="music-flat-row music-chill-only" data-menu-view="main"><span class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 4v16M9 4v16M14 4.5l6 15"/></svg></span><span class="music-flat-label">Thư viện &amp; danh sách phát</span><span class="music-flat-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg></span></button>
  <a id="musicSourceLink" class="music-flat-row music-np-source music-chill-only" data-menu-view="main" target="_blank" rel="noopener noreferrer"><span class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="music-flat-label">Mở bài trên trang nguồn</span></a>
  <details id="musicPlaylistCreateBox" class="music-flat-details music-chill-only" data-menu-view="library"><summary class="music-flat-row"><span class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg></span><span class="music-flat-label">Tạo playlist mới</span></summary><form id="musicPlaylistCreateForm" class="music-flat-expand-body"><div class="music-playlist-create-row"><input id="musicPlaylistName" maxlength="80" placeholder="VD: Nhạc Hoa chill, HSK 3 nghe mỗi ngày…" autocomplete="off" required><button type="submit" id="musicPlaylistCreateBtn" class="music-primary">Tạo</button></div></form></details>
@@ -53,7 +53,7 @@
  const video=$('musicPlayer');
  let song=null,index=0,loop=false,linkLoop=false,linkRate=1,reveal=false,holding=false,pin=false,vi=false,drawerHanzi=true,drawerOpen=false,hideYt=true,menuOpen=false,queueOpen=false,currentMode='study',objectUrl=null,yt=null,ytTimer=null,linkYt=null,linkTimer=null,linkOptimisticPlay=false,linkPendingPlay=false,studyOptimisticPlay=false,currentLinkUrl='',currentLinkTitle='',currentLinkAuthor='',activePlaylistId='',playerExpanded=false,serial=0,fetcher=null,opened=false,checked=false,lastSaved=0,lastTime=0;
  const expandedPlaylists=new Set();
- let offlineRows=[],offlineRequest=0,offlinePlayRequest=0,offlineSelection=null,offlineContext=false;
+ let offlineRows=[],offlineRequest=0,offlinePlayRequest=0,offlineDownload=null,offlineSelection=null,offlineContext=false;
  const BUILTIN_SONGS=[
   {version:1,id:'app-hsk12-yueliang',title:'月亮代表我的心 (Ánh Trăng Nói Hộ Lòng Tôi)',artist:'鄧麗君 · Kho nhạc học HSK App',credit:'Bài học chuẩn HSK 1–2 do App cung cấp',revision:'1',source:{kind:'youtube',videoId:'bv_cEeDlop0'},segments:[
    {id:'yl-1',start:14,end:21,hanzi:'你问我爱你有多深，我爱你有几分。',pinyin:'Nǐ wèn wǒ ài nǐ yǒu duō shēn, wǒ ài nǐ yǒu jǐ fēn.',vi:'Người hỏi tôi yêu người sâu đậm nhường nào, yêu người được mấy phần.',quiz:{question:'Động từ "问" (wèn) trong câu mang nghĩa gì?',options:['Hỏi','Nghe','Nhìn'],answer:0}},
@@ -442,29 +442,81 @@
  async function drawOffline(){
   const uid=owner(),request=++offlineRequest,box=$('musicOfflineList');box.replaceChildren();
   $('musicOfflineUsage').textContent='Đang đọc nhạc trên thiết bị…';
-  $('musicOfflineAddCurrent').disabled=!currentLinkUrl;
-  $('musicOfflineAddLabel').textContent=offlineRows.some(row=>row.url===currentLinkUrl)?'Thay file cho bài đang chọn':'Thêm bài đang chọn';
+  $('musicOfflineAddCurrent').disabled=Boolean(offlineDownload)||!currentLinkUrl||currentLinkUrl.startsWith('offline:');$('musicOfflineAttachFile').disabled=Boolean(offlineDownload)||!currentLinkUrl||currentLinkUrl.startsWith('offline:');
+  $('musicOfflineAddLabel').textContent=offlineRows.some(row=>row.url===currentLinkUrl)?'Lưu lại theo chất lượng đã chọn':'Lưu link để nghe ngoại tuyến';
   if(!window.HSKMusicOffline){$('musicOfflineUsage').textContent='Chưa mở được bộ nhớ ngoại tuyến. Thử tải lại app.';return;}
   try{
    const [rows,bytes]=await Promise.all([HSKMusicOffline.list(uid),HSKMusicOffline.usage()]);
    if(uid!==owner()||request!==offlineRequest)return;offlineRows=rows;box.replaceChildren();
    $('musicOfflineUsage').textContent=rows.length+' bài đã lưu · '+(bytes/1048576).toFixed(1)+' / 100 MB trên thiết bị';
-   $('musicOfflineAddLabel').textContent=rows.some(row=>row.url===currentLinkUrl)?'Thay file cho bài đang chọn':'Thêm bài đang chọn';
+   $('musicOfflineAddLabel').textContent=rows.some(row=>row.url===currentLinkUrl)?'Lưu lại theo chất lượng đã chọn':'Lưu link để nghe ngoại tuyến';
    for(const entry of rows){
     const row=el('div',undefined,'music-offline-item'),play=el('button',undefined,'music-row-main'),copy=el('span',undefined,'music-row-copy');play.type='button';
-    copy.append(el('strong',entry.title),el('small','Đã lưu trên thiết bị · '+(entry.size/1048576).toFixed(1)+' MB'));play.append(copy);play.onclick=()=>playOffline(entry.url,'',true);
+    copy.append(el('strong',entry.title),el('small','Đã lưu trên thiết bị'+(entry.bitrate?' · '+entry.bitrate+' kbps':'')+' · '+(entry.size/1048576).toFixed(1)+' MB'));play.append(copy);play.onclick=()=>playOffline(entry.url,'',true);
     const remove=el('button','Xóa','music-row-del');remove.type='button';remove.setAttribute('aria-label','Xóa bản ngoại tuyến '+entry.title);remove.onclick=async()=>{try{await HSKMusicOffline.remove(uid,entry.url);if(uid===owner())drawOffline();}catch(e){$('musicOfflineUsage').textContent=e.message;}};
     row.append(play,remove);box.append(row);
    }
    if(!rows.length)box.append(el('p','Chưa có nhạc ngoại tuyến. Thêm bài đang chọn hoặc chọn file M4A từ thiết bị.','music-empty-note'));
   }catch(e){if(uid===owner())$('musicOfflineUsage').textContent=e.message;}
  }
+ function offlineBusy(busy){
+  for(const id of ['musicOfflineImport','musicOfflineAttachFile','musicOfflineQuality'])$(id).disabled=busy;
+  $('musicOfflineAddCurrent').disabled=busy||!currentLinkUrl||currentLinkUrl.startsWith('offline:');
+  $('musicOfflineCancel').hidden=!busy;
+ }
+ async function downloadOfflineLink(){
+  if(offlineDownload||!currentLinkUrl||currentLinkUrl.startsWith('offline:'))return;
+  const uid=owner(),epoch=serial,track={url:currentLinkUrl,title:currentLinkTitle,author:currentLinkAuthor,bitrate:Number($('musicOfflineQuality').value)};
+  if(![32,64,96].includes(track.bitrate))return;
+  const controller=new AbortController();offlineDownload=controller;offlineBusy(true);
+  const valid=()=>uid===owner()&&epoch===serial&&!controller.signal.aborted;
+  let base='',job='',token='';const timeout=setTimeout(()=>controller.abort(),360000);
+  const check=()=>{if(!valid())throw new DOMException('Đã hủy lưu bài.','AbortError');};
+  const call=async(path,options={})=>{
+   check();const response=await fetch(base+path,{...options,credentials:'omit',headers:{Authorization:'Bearer '+token,...options.headers},signal:controller.signal});
+   if(!response.ok){const body=await response.json().catch(()=>({}));throw Error(typeof body.detail==='string'?body.detail:body.error||'Chưa xử lý được bài nhạc ('+response.status+'). Thử lại sau.');}
+   return response;
+  };
+  try{
+   $('musicOfflineUsage').textContent='Đang chuẩn bị lưu bài…';
+   const cfg=await fetch('./music-config.json',{signal:controller.signal}).then(r=>{if(!r.ok)throw Error('Chưa đọc được cấu hình nhạc.');return r.json();});check();
+   if(!cfg.offlineSourceResolver)throw Error('Chưa kết nối dịch vụ lấy âm thanh từ link. Bộ nén chạy trên thiết bị; bạn vẫn có thể thêm file M4A có sẵn.');
+   const endpoint=new URL(cfg.offlineSourceResolver);
+   if(endpoint.protocol!=='https:'||endpoint.username||endpoint.password||endpoint.search||endpoint.hash)throw Error('Địa chỉ xử lý nhạc chưa hợp lệ.');base=endpoint.href.replace(/\/$/,'');
+   const user=window.HSKAccountDashboard?.user;if(!user?.getIdToken)throw Error('Đăng nhập tài khoản HSK để lưu nhạc từ link.');
+   token=await user.getIdToken();check();
+   const submitted=await (await call('/v1/jobs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:track.url})})).json();
+   if(typeof submitted.id!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(submitted.id))throw Error('Chưa tạo được lượt lưu bài.');job=submitted.id;
+   while(true){
+    check();const state=await (await call('/v1/jobs/'+job)).json();check();
+    if(state.status==='ready')break;
+    if(state.status==='error'||state.status==='cancelled')throw Error(state.error||'Chưa chuyển được âm thanh. Thử link khác hoặc thêm file có sẵn.');
+    $('musicOfflineUsage').textContent=({pending:'Đang chờ xử lý…',downloading:'Đang lấy âm thanh từ link…',encoding:'Đang nén HE-AAC v2 · '+track.bitrate+' kbps…'})[state.status]||'Đang xử lý bài nhạc…';
+    await new Promise((resolve,reject)=>{const abort=()=>{clearTimeout(timer);reject(new DOMException('Đã hủy lưu bài.','AbortError'));};const timer=setTimeout(()=>{controller.signal.removeEventListener('abort',abort);resolve();},1500);controller.signal.addEventListener('abort',abort,{once:true});});
+   }
+   $('musicOfflineUsage').textContent='Đang tải âm thanh gốc…';
+   const response=await call('/v1/jobs/'+job+'/file');
+   if(response.headers.get('X-Audio-Source')!=='original')throw Error('Dịch vụ chưa trả về nguồn âm thanh gốc.');
+   const bytes=await HSKMusicConverter.readSource(response,controller.signal);check();
+   const file=await HSKMusicConverter.encode(bytes,track.bitrate,{signal:controller.signal,onStatus:(state,progress)=>{if(valid())$('musicOfflineUsage').textContent=state==='loading'?'Đang tải bộ nén trên thiết bị…':'Đang nén trên thiết bị · '+track.bitrate+' kbps'+(Number.isFinite(progress)?' · '+Math.round(progress*100)+'%':'')+'…';}});check();
+   await HSKMusicOffline.put(uid,track,file,valid);check();await drawOffline();
+   try{await navigator.storage?.persist?.();}catch{}
+  }catch(e){if(uid===owner()&&epoch===serial)$('musicOfflineUsage').textContent=e.name==='AbortError'?'Đã hủy lượt lưu. Những bài đã lưu vẫn được giữ.':e.message;}
+  finally{
+   clearTimeout(timeout);
+   if(job){const cleanup=new AbortController(),timer=setTimeout(()=>cleanup.abort(),5000);try{await fetch(base+'/v1/jobs/'+job,{method:'DELETE',headers:{Authorization:'Bearer '+token},credentials:'omit',signal:cleanup.signal});}catch{}finally{clearTimeout(timer);}}
+   if(offlineDownload===controller){offlineDownload=null;offlineBusy(false);}
+  }
+ }
  function chooseOfflineFile(current){
   offlineSelection={owner:owner(),epoch:serial,track:current&&currentLinkUrl?{url:currentLinkUrl,title:currentLinkTitle,author:currentLinkAuthor}: {}};
   $('musicOfflineFile').value='';$('musicOfflineFile').click();
  }
- $('musicMenuOfflineRow').onclick=()=>setMenuView('offline');
- $('musicOfflineAddCurrent').onclick=()=>chooseOfflineFile(true);
+ $('musicMenuOfflineRow').onclick=()=>{const quality=Number(read('offline-quality',64));$('musicOfflineQuality').value=String([32,64,96].includes(quality)?quality:64);setMenuView('offline');};
+ $('musicOfflineQuality').onchange=()=>save('offline-quality',Number($('musicOfflineQuality').value));
+ $('musicOfflineAddCurrent').onclick=()=>downloadOfflineLink();
+ $('musicOfflineAttachFile').onclick=()=>chooseOfflineFile(true);
+ $('musicOfflineCancel').onclick=()=>offlineDownload?.abort();
  $('musicOfflineImport').onclick=()=>chooseOfflineFile(false);
  $('musicOfflineFile').onchange=async()=>{
   const selection=offlineSelection,file=$('musicOfflineFile').files?.[0];if(!selection||!file)return;
@@ -481,7 +533,7 @@
    try{await navigator.storage?.persist?.();}catch{}
    await drawOffline();
   }catch(e){if(valid())$('musicOfflineUsage').textContent=e.name==='QuotaExceededError'?'Thiết bị không đủ chỗ. Xóa bớt nhạc rồi thử lại.':e.message;}
-  finally{if(audio){audio.removeAttribute('src');audio.load();}if(url)URL.revokeObjectURL(url);if(valid()){buttons.forEach(b=>b.disabled=false);$('musicOfflineAddCurrent').disabled=!currentLinkUrl;}}
+  finally{if(audio){audio.removeAttribute('src');audio.load();}if(url)URL.revokeObjectURL(url);if(valid()){buttons.forEach(b=>b.disabled=false);$('musicOfflineAddCurrent').disabled=Boolean(offlineDownload)||!currentLinkUrl||currentLinkUrl.startsWith('offline:');$('musicOfflineAttachFile').disabled=Boolean(offlineDownload)||!currentLinkUrl||currentLinkUrl.startsWith('offline:');}}
  };
  async function playOffline(url,playlistId='',autoPlay=true){
   const uid=owner(),epoch=serial,request=++offlinePlayRequest;
@@ -634,7 +686,7 @@
  function pauseNative(){if(video.hasAttribute('src'))video.pause();}
  function clearPreview(){linkOptimisticPlay=false;linkPendingPlay=false;$('musicLinkScrubRow').hidden=true;$('musicLinkExtraActions').hidden=true;linkYt?.destroy?.();linkYt=null;clearInterval(linkTimer);linkTimer=null;$('musicLinkPlayer').replaceChildren();$('musicLinkCover').hidden=true;$('musicLinkControls').hidden=true;$('musicLinkPreview').hidden=true;syncEmptyState();}
  function release(savePosition=true){if(savePosition)checkpoint(true);if(video.hasAttribute('src')){video.pause();video.removeAttribute('src');video.load();}yt?.destroy?.();yt=null;clearInterval(ytTimer);ytTimer=null;clearPreview();if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=null;}}
- function stop(){toggleQueue(false);studyOptimisticPlay=false;checkpoint(true);pauseNative();yt?.pauseVideo?.();linkYt?.pauseVideo?.();clearPreview();holding=false;renderReveal();updatePlayButton();}
+ function stop(){offlineDownload?.abort();toggleQueue(false);studyOptimisticPlay=false;checkpoint(true);pauseNative();yt?.pauseVideo?.();linkYt?.pauseVideo?.();clearPreview();holding=false;renderReveal();updatePlayButton();}
  function savedLinks(){const value=read('links',[]);return Array.isArray(value)?value:[];}
  function savedPlaylists(){const value=read('playlists',[]);return Array.isArray(value)?value.filter(p=>p&&typeof p.id==='string'&&typeof p.name==='string'&&Array.isArray(p.items)):[];}
  function renderQuickPlaylistPills(){
@@ -1115,7 +1167,7 @@
  video.addEventListener('timeupdate',tick);video.addEventListener('play',updatePlayButton);video.addEventListener('pause',updatePlayButton);video.addEventListener('error',()=>{if(song)status('Chưa phát được nguồn nhạc. Kiểm tra mạng, định dạng hoặc bấm tải lại nguồn.');});
  document.addEventListener('visibilitychange',()=>{if(document.hidden)checkpoint(true);});window.addEventListener('pagehide',()=>checkpoint(true));
  new MutationObserver(()=>{if(panel.hidden&&opened){opened=false;stop();fetcher?.abort();++serial;}}).observe(panel,{attributes:true,attributeFilter:['hidden']});
- window.addEventListener('hsk-account-ready',()=>{offlineRows=[];offlineContext=false;++offlineRequest;metaCache={};fetcher?.abort();++serial;release(false);song=null;catalog=BUILTIN_SONGS.map(C.validateSong);progress={};currentLinkUrl='';currentLinkTitle='';currentLinkAuthor='';activePlaylistId='';playerExpanded=false;toggleQueue(false);panel.classList.remove('music-player-expanded');$('musicLesson').hidden=true;toggleMenu(false);toggleLyricsDrawer(false);syncEmptyState();$('musicLinkUrl').value='';$('musicLinkName').value='';$('musicLinkLyrics').value='';drawCatalog();drawPlaylists();drawLinks();drawRecentBrowse();drawBrowsePlaylists();history();loadOffline();if(opened)refresh();});
+ window.addEventListener('hsk-account-ready',()=>{offlineDownload?.abort();offlineRows=[];offlineContext=false;++offlineRequest;metaCache={};fetcher?.abort();++serial;release(false);song=null;catalog=BUILTIN_SONGS.map(C.validateSong);progress={};currentLinkUrl='';currentLinkTitle='';currentLinkAuthor='';activePlaylistId='';playerExpanded=false;toggleQueue(false);panel.classList.remove('music-player-expanded');$('musicLesson').hidden=true;toggleMenu(false);toggleLyricsDrawer(false);syncEmptyState();$('musicLinkUrl').value='';$('musicLinkName').value='';$('musicLinkLyrics').value='';drawCatalog();drawPlaylists();drawLinks();drawRecentBrowse();drawBrowsePlaylists();history();loadOffline();if(opened)refresh();});
  window.HSKMusic={enter(mode){
   opened=true;
   toggleQueue(false);

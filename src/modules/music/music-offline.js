@@ -37,7 +37,7 @@
    if(!isCurrent())throw new DOMException('Đã đổi tài khoản hoặc bài hát.','AbortError');
    if(discard)s.assets.delete(discard);
    s.assets.put({id:hash,blob,size:blob.size});
-   s.tracks.put({id,owner,url,asset:hash,title:String(track.title||file.name.replace(/\.m4a$/i,'')).slice(0,120),author:String(track.author||'Nhạc trên thiết bị').slice(0,120),size:blob.size,addedAt:Date.now()});
+   s.tracks.put({id,owner,url,asset:hash,title:String(track.title||file.name.replace(/\.m4a$/i,'')).slice(0,120),author:String(track.author||'Nhạc trên thiết bị').slice(0,120),bitrate:[32,64,96].includes(track.bitrate)?track.bitrate:null,size:blob.size,addedAt:Date.now()});
   });return url;
  }
  async function get(owner,url){return transaction('readonly',async s=>{const track=await request(s.tracks.get(identity(owner,url)));if(!track)return null;const asset=await request(s.assets.get(track.asset));return asset?.blob?.size===track.size?{...track,blob:asset.blob}:null;});}

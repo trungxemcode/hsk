@@ -1,3 +1,8 @@
+## On-device offline quality — 2026-10-23
+- Added 32/64/96 quality selector and cancelable link save pipeline; true HE-AACv2 encoding runs in a single-use browser Worker with a custom 2.1 MiB audio-only FFmpeg.wasm/FDK build. Lazy SHA-verified codec cache stays separate from music storage and initial PWA precache.
+- Original-audio resolver Python/container prepared; no server encoding. **Not deployed/configured**: `offlineSourceResolver` stays empty. Live provider downloads are not claimed; Spotify is unsupported. See MUSIC_OFFLINE.md for deployment contract.
+- Real shipped WASM passes all three quality/profile tests, reuse cache and invalid input. Resolver auth/owner/source byte/cleanup tests pass. Browser at 390/1440 passed real device-side conversion from mocked original source plus prior offline playback suite. Existing feature runtime passed at 390/1440; storage, music DOM, design tokens and 48/203 feature guards pass. PWA 3.11.4 / 174 precached assets; codec WASM is lazy.
+
 ## Offline music collection — 2026-10-23
 - Branch `feat/music-offline` from main `7ff181e`.
 - Ellipsis “Nghe ngoại tuyến” sub-view: attach a corresponding M4A file to current provider track, standalone local import, stored list, remove and usage. No fake download from provider iframe. HE-AAC v2/64 kbps preparation provided by `tools/prepare-offline-music.py`; local imports retain original bytes and the UI explains this.

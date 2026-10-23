@@ -10,13 +10,27 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
    const url='http://127.0.0.1:'+server.address().port+'/index.html';
    await page.goto(url);await page.waitForFunction(()=>window.HSKMusic&&window.HSKMusicOffline&&window.HSKStudio);
-   await page.evaluate(()=>{localStorage.setItem('hsk-account-meta-v1',JSON.stringify({uid:'offline-one'}));window.HSKAccountDashboard={user:{uid:'offline-one'}};window.HSKStudio.navigate('music-play');});
+   await page.evaluate(()=>{localStorage.setItem('hsk-account-meta-v1',JSON.stringify({uid:'offline-one'}));window.HSKAccountDashboard={user:{uid:'offline-one',getIdToken:async()=> 'test-token'}};window.HSKStudio.navigate('music-play');});
    await page.locator('#musicMenuBtn').click();await page.locator('#musicLinkImport>summary').click();await page.locator('#musicLinkUrl').fill('https://youtu.be/abcdefghijk');await page.locator('#musicLinkName').fill('Bài nhạc đã chọn');await page.locator('#musicLinkApply').click();
    await page.waitForFunction(()=>getComputedStyle(document.getElementById('musicMenuSheet')).visibility==='hidden');
    const openOffline=async()=>{await page.locator('#musicMenuBtn').click();await page.locator('#musicMenuOfflineRow').click();await page.waitForFunction(()=>!document.getElementById('musicOfflineUsage').textContent.includes('Đang đọc'));};
    const upload=async button=>{const chooser=page.waitForEvent('filechooser');await page.locator(button).click();await (await chooser).setFiles(path.join(root,'tools/fixtures/music-heaacv2-64k.m4a'));await page.waitForFunction(()=>!document.getElementById('musicOfflineImport').disabled);};
    await openOffline();assert.equal(await page.locator('#musicOfflineView').isVisible(),true);assert.equal(await page.locator('#musicMenuLibraryRow').isVisible(),false,'offline sub-view is separate from main actions');
-   await upload('#musicOfflineAddCurrent');assert.equal(await page.locator('#musicOfflineList .music-offline-item').count(),1);
+   // Original bytes come from a mocked resolver; the browser runs the real WASM encoder.
+   await page.route('**/music-config.json',r=>r.fulfill({json:{offlineSourceResolver:'https://source.test'}}));
+   let sourceRequests=0;
+   await page.route('https://source.test/**',async r=>{const request=r.request(),pathname=new URL(request.url()).pathname;if(request.method()==='DELETE')return r.fulfill({json:{cancelled:true}});if(pathname.endsWith('/file')){sourceRequests++;return r.fulfill({headers:{'X-Audio-Source':'original','Access-Control-Allow-Origin':'*','Access-Control-Expose-Headers':'X-Audio-Source'},body:fs.readFileSync(path.join(root,'tools/fixtures/music-heaacv2-64k.m4a'))});}return r.fulfill({json:{id:'test-job',status:'ready'}});});
+   let lastSize=0;
+   for(const quality of ['32','64','96']){
+    await page.locator('#musicOfflineQuality').selectOption(quality);
+    await page.locator('#musicOfflineAddCurrent').click();
+    await page.waitForFunction(()=>!document.getElementById('musicOfflineCancel').hidden);
+    await page.waitForFunction(()=>document.getElementById('musicOfflineCancel').hidden,{},{timeout:120000});
+    const row=await page.evaluate(async()=> (await HSKMusicOffline.list('offline-one'))[0]);
+    assert.equal(row?.bitrate,Number(quality),await page.locator('#musicOfflineUsage').innerText());assert.ok(row.size>lastSize);lastSize=row.size;
+   }
+   assert.equal(sourceRequests,3);await page.locator('#musicOfflineList .music-row-del').click();await page.waitForFunction(()=>!document.querySelector('#musicOfflineList .music-offline-item'));
+   await upload('#musicOfflineAttachFile');assert.equal(await page.locator('#musicOfflineList .music-offline-item').count(),1);
    const bytes=await page.evaluate(()=>HSKMusicOffline.usage());assert.ok(bytes>0&&bytes<100*1024*1024);
    await upload('#musicOfflineImport');assert.equal(await page.locator('#musicOfflineList .music-offline-item').count(),2);assert.equal(await page.evaluate(()=>HSKMusicOffline.usage()),bytes,'same file imported twice occupies only one asset');
    // A different account sees no personal downloads; returning owner keeps them.
@@ -40,7 +54,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await page.evaluate(()=>window.__offlineAudio.paused),true,'route re-entry restores local source without autoplay');
    await openOffline();await page.locator('#musicOfflineList .music-row-del').first().click();await page.waitForFunction(()=>document.querySelectorAll('#musicOfflineList .music-offline-item').length===1);assert.equal(await page.evaluate(()=>HSKMusicOffline.usage()),bytes,'deleting one shared reference retains the file');
    await page.locator('#musicOfflineList .music-row-del').click();await page.waitForFunction(()=>document.querySelectorAll('#musicOfflineList .music-offline-item').length===0);assert.equal(await page.evaluate(()=>HSKMusicOffline.usage()),0);
-   await page.context().setOffline(false);assert.deepEqual(errors,[]);console.log('PASS offline music UI',width,'M4A add-to-current/import, dedup, account isolation, reload persistence, real offline play/pause/seek, delete');await page.close();
+   await page.context().setOffline(false);assert.deepEqual(errors,[]);console.log('PASS offline music UI',width,'real WASM 32/64/96 link conversion, M4A import, dedup, account isolation, reload persistence, real offline play/pause/seek, delete');await page.close();
   }
  }finally{await browser?.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

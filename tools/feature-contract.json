@@ -1134,7 +1134,12 @@
         {"kind":"contains","file":"loader.js","value":"./src/modules/music/music-offline.js"},
         {"kind":"file","file":"tools/check-music-offline.cjs","value":""},
         {"kind":"file","file":"tools/check-music-offline-ui.cjs","value":""},
-        {"kind":"file","file":"tools/prepare-offline-music.py","value":""}
+        {"kind":"file","file":"tools/prepare-offline-music.py","value":""},
+        {"kind":"file","file":"src/modules/music/music-converter.js","value":""},
+        {"kind":"file","file":"src/modules/music/music-codec-worker.js","value":""},
+        {"kind":"contains","file":"src/modules/music/music-codec-worker.js","value":"aac_he_v2"},
+        {"kind":"file","file":"tools/check-music-codec.cjs","value":""},
+        {"kind":"contains","file":"src/modules/music/music.js","value":"id=\"musicOfflineQuality\""}
       ]
     }
   ]
