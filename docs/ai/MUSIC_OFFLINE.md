@@ -1,5 +1,10 @@
 # Nhạc ngoại tuyến
 
+## Sửa lưu link và demo giọng Trung — PWA 3.12.5
+
+Mục nghe offline có ô dán URL trực tiếp, nút hoạt động khi chưa có bài đang phát, báo rõ lỗi hoặc xác nhận sau khi file được lưu vào IndexedDB. Chưa bảo đảm nhà cung cấp YouTube/SoundCloud có nguồn CORS hoạt động khi bị 403. Cả 9 MP3 demo giọng Trung được tự tải trong gói cập nhật PWA; service worker hỗ trợ audio Range 206/416 từ cache, phục vụ Safari khi không có mạng. Kiểm thử bằng tools/check-music-offline-ui.cjs và tools/check-voice-demo-offline-range.cjs.
+
+
 Menu ba chấm → Nghe ngoại tuyến → chọn Thấp 32 / Trung bình 64 / Cao 96 kbps → Lưu link. Bộ lấy nguồn (khi đã cấu hình) trả âm thanh gốc; trình duyệt nén HE-AAC v2 stereo 48 kHz bằng FFmpeg.wasm trong Web Worker, kiểm tra profile và ghi IndexedDB. Không cần người nghe chọn file cho luồng này. Có tiến trình/hủy; nguồn lỗi, hủy, đổi tài khoản hoặc đổi bài không ghi đè bản cũ. Mỗi lượt tối đa 15 phút và 50 MiB nguồn. Tùy chọn chất lượng nhớ riêng theo tài khoản, mặc định 64. Dung lượng âm thanh xấp xỉ 0,24/0,48/0,72 MB/phút cộng container; tải nguồn ban đầu vẫn có thể lớn hơn file cuối.
 
 ## Tải trực tiếp qua dịch vụ bên ngoài (thử nghiệm)
