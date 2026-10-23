@@ -39,6 +39,7 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    });
    assert.equal(playerCheck.auxBg,'rgba(0, 0, 0, 0)','aux button has transparent ghost background');
    await page.locator('#musicMenuBtn').click();
+   await page.waitForFunction(()=>getComputedStyle(document.getElementById('musicMenuSheet')).visibility==='visible');
    assert.equal(await page.locator('#musicMenuLibraryRow').isVisible(),true,'entertainment mode main sheet lists library row');
    assert.equal(await page.locator('#musicPlaylistsBox').isVisible(),false,'compact main sheet hides playlist details');
    await page.locator('#musicMenuLibraryRow').click();
@@ -67,6 +68,7 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    }
    assert.equal(await page.locator('#musicMenuSheet').isVisible(),false,'menu sheet hidden by default');
    await page.locator('#musicMenuBtn').click();
+   await page.waitForFunction(()=>getComputedStyle(document.getElementById('musicMenuSheet')).visibility==='visible');
    assert.equal(await page.locator('#musicMenuSheet').isVisible(),true,'menu sheet opens from top-right 3-dots');
    const geom=await page.evaluate(()=>{
     const select=document.getElementById('musicLevel').getBoundingClientRect();
@@ -80,6 +82,7 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    assert.ok(Math.abs(geom.detailX-geom.summaryX)<3,'no white strip left of the active header');
    assert.equal(geom.overflow,false,'music UI has no horizontal overflow');
    await page.locator('#musicMenuClose').click();
+   await page.waitForFunction(()=>getComputedStyle(document.getElementById('musicMenuSheet')).visibility==='hidden');
    assert.equal(await page.locator('#musicMenuSheet').isVisible(),false,'menu close button hides sheet');
    await page.evaluate(()=>window.HSKStudio.navigate('practice'));
    const picker=page.locator('#practiceModeDisclosure');await picker.locator('summary').click();
