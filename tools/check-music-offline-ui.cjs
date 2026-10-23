@@ -28,16 +28,18 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    // Original bytes come from a mocked resolver; the browser runs the real WASM encoder.
    await page.route('**/music-config.json',r=>r.fulfill({json:{offlineSourceResolver:'https://source.test'}}));
    let sourceRequests=0;
-   await page.route('https://source.test/**',async r=>{const request=r.request(),pathname=new URL(request.url()).pathname;if(request.method()==='DELETE')return r.fulfill({json:{cancelled:true}});if(pathname.endsWith('/file')){sourceRequests++;return r.fulfill({headers:{'X-Audio-Source':'original','Access-Control-Allow-Origin':'*','Access-Control-Expose-Headers':'X-Audio-Source'},body:fs.readFileSync(path.join(root,'tools/fixtures/music-heaacv2-64k.m4a'))});}return r.fulfill({json:{id:'test-job',status:'ready'}});});
+   await page.route('https://source.test/**',async r=>{const request=r.request(),pathname=new URL(request.url()).pathname;if(request.method()==='DELETE')return r.fulfill({json:{cancelled:true}});if(pathname.endsWith('/file')){await new Promise(resolve=>setTimeout(resolve,350));sourceRequests++;return r.fulfill({headers:{'X-Audio-Source':'original','Access-Control-Allow-Origin':'*','Access-Control-Expose-Headers':'X-Audio-Source'},body:fs.readFileSync(path.join(root,'tools/fixtures/music-heaacv2-64k.m4a'))});}return r.fulfill({json:{id:'test-job',status:'ready'}});});
    let lastSize=0;
    for(const quality of ['32','64','96']){
     await page.locator('#musicOfflineQuality').selectOption(quality);
     await page.locator('#musicOfflineAddCurrent').click();
+    await page.waitForFunction(()=>!document.getElementById('musicOfflineProgress').hidden);
+    assert.match(await page.locator('#musicDownloadMessage').textContent(),/Đang/);
     await page.waitForFunction(()=>!document.getElementById('musicOfflineCancel').hidden);
     await page.waitForFunction(()=>document.getElementById('musicOfflineCancel').hidden,{},{timeout:120000});
     const row=await page.evaluate(async()=> (await HSKMusicOffline.list('offline-one'))[0]);
     assert.match(await page.locator('#musicOfflineUsage').innerText(),/Đã lưu thành công/,'successful save confirms the stored file');
-    assert.equal(row?.bitrate,Number(quality),await page.locator('#musicOfflineUsage').innerText());assert.ok(row.size>lastSize);lastSize=row.size;
+    assert.equal(row?.bitrate,Number(quality),await page.locator('#musicOfflineUsage').innerText());assert.equal(await page.locator('#musicOfflineProgress').getAttribute('value'),'100');assert.match(await page.locator('#musicDownloadMessage').textContent(),/Đã lưu thành công/);assert.ok(row.size>lastSize);lastSize=row.size;
    }
    // Direct mode fetches API + proxy bytes from the browser, never the HSK resolver.
    let directMode='piped',cancelProbe=false,directFetches=0;
