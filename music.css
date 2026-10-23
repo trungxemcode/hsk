@@ -18,9 +18,10 @@ body.studio-enabled[data-studio-hub=music] main.workspace{width:100%!important;m
 .music-np-body{display:grid;grid-template-columns:minmax(0,1fr);align-content:center;gap:10px;width:min(100%,340px);margin:0 auto;padding:2px 0;min-height:0}
 .music-np-empty{text-align:center;padding:4px 0;overflow:hidden}
 .music-np-empty #musicEmptyOpenMenu{justify-self:center}
-.music-panel:not(.music-menu-open) .music-menu-sheet,.music-panel:not(.music-menu-open) .music-menu-backdrop{display:none!important}
-.music-menu-backdrop{position:fixed;top:0;right:0;bottom:0;left:0;z-index:90;background:var(--legacy-rgb-12);backdrop-filter:blur(8px)}
-.music-menu-sheet{position:fixed;left:50%;bottom:0;top:auto;transform:translateX(-50%);width:min(100%,560px);max-height:86dvh;overflow-y:auto;overscroll-behavior:contain;z-index:95;box-sizing:border-box;padding:0 0 max(24px,env(safe-area-inset-bottom));border-radius:var(--radius-16px);border-bottom-left-radius:var(--radius-none);border-bottom-right-radius:var(--radius-none);background:var(--palette-dark-paper);color:var(--palette-white);border:0;box-shadow:var(--shadow);scrollbar-width:none;-ms-overflow-style:none}
+.music-menu-backdrop{position:fixed;top:0;right:0;bottom:0;left:0;z-index:90;background:var(--legacy-rgb-12);backdrop-filter:blur(8px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility .28s ease}
+.music-menu-sheet{position:fixed;left:50%;bottom:0;top:auto;transform:translate(-50%,calc(100% + 18px));opacity:.96;visibility:hidden;pointer-events:none;transition:transform .38s cubic-bezier(.22,1,.36,1),opacity .26s ease,visibility .38s;will-change:transform;width:min(100%,560px);max-height:86dvh;overflow-y:auto;overscroll-behavior:contain;z-index:95;box-sizing:border-box;padding:0 0 max(24px,env(safe-area-inset-bottom));border-radius:var(--radius-16px);border-bottom-left-radius:var(--radius-none);border-bottom-right-radius:var(--radius-none);background:var(--palette-dark-paper);color:var(--palette-white);border:0;box-shadow:var(--shadow);scrollbar-width:none;-ms-overflow-style:none}
+.music-panel.music-menu-open .music-menu-sheet{transform:translate(-50%,0);opacity:1;visibility:visible;pointer-events:auto}
+.music-panel.music-menu-open .music-menu-backdrop{opacity:1;visibility:visible;pointer-events:auto}
 .music-menu-sheet::-webkit-scrollbar{display:none}
 .music-sheet-drag-area{display:flex;justify-content:center;align-items:center;padding:8px 0 2px}
 .music-drag-bar{display:block;width:36px;height:4px;border-radius:var(--radius-pill);background:var(--legacy-hex-ffffff38)}
@@ -170,6 +171,7 @@ html body.studio-enabled .music-panel .music-menu-sheet :is(.music-flat-row,butt
 html body.studio-enabled .music-panel .music-np button.music-lyrics-chip[aria-pressed=true]:not(.correct):not(.wrong){background:var(--palette-white)!important;color:var(--palette-dark-paper)!important}
 .music-np .music-quick-playlist{margin:0}
 @media(max-width:600px){.music-np{padding:max(10px,env(safe-area-inset-top)) 16px max(12px,env(safe-area-inset-bottom))}.music-np h3{font-size:19px}.music-menu-sheet{padding:0 0 max(20px,env(safe-area-inset-bottom))}}
+
 
 .music-playlist-list{display:grid;gap:0}
 .music-playlist-card{display:grid;gap:0;padding:0;border:0;border-radius:var(--radius-none);background:var(--palette-clear)}
@@ -343,3 +345,25 @@ html body.studio-enabled button.music-mini-save[aria-pressed=true]:not(.correct)
 .music-panel.music-player-expanded #musicMiniPlayer{display:none!important}
 .music-panel:not(.music-player-expanded)[data-music-mode=chill] #musicLinkPreview{display:none!important}
 .music-panel:not(.music-player-expanded)[data-music-mode=chill] #musicBottomDock{display:none!important}
+
+/* Motion and playlist hierarchy polish for the Spotify-inspired music surfaces. */
+.music-menu-open .music-menu-sheet{overscroll-behavior-y:contain}
+.music-sheet-drag-area{touch-action:pan-y}
+.music-lyrics-peek-btn{touch-action:none;transform:translateY(var(--music-peek-drag,0px));transition:transform .22s cubic-bezier(.22,1,.36,1);will-change:transform}
+.music-playlist-card{margin:0 12px 8px;overflow:hidden;border:1px solid var(--legacy-hex-ffffff1f);border-radius:var(--radius-14px);background:var(--legacy-hex-ffffff1f);transition:background .18s ease,border-color .18s ease}
+.music-playlist-card.music-playlist-active{border-color:var(--legacy-hex-ffffff38);background:var(--legacy-hex-ffffff1f)}
+.music-playlist-head{min-height:68px;padding:10px 12px!important;border-radius:var(--radius-14px)!important;transition:background .18s ease,border-radius .18s ease}
+.music-playlist-head-open{border-bottom-right-radius:0!important;border-bottom-left-radius:0!important;background:var(--legacy-hex-ffffff1f)!important}
+.music-playlist-thumb{width:48px;height:48px;border-radius:var(--radius-8px);box-shadow:var(--shadow-studio-layout-19)}
+.music-playlist-meta strong{font-size:15px;line-height:1.3}
+.music-playlist-meta small{font-size:12px}
+#musicMenuSheet .music-playlist-tracks{display:grid;gap:4px;margin:0 10px 2px 28px;padding:8px 6px 8px 10px;border-left:2px solid var(--legacy-hex-ffffff38);background:var(--legacy-hex-ffffff1f)}
+.music-playlist-track{min-height:52px;padding:5px 8px;border-radius:var(--radius-8px);transition:background .16s ease}
+.music-playlist-track.music-track-current{background:var(--legacy-hex-ffffff1f)}
+#musicMenuSheet .music-playlist-add-track{padding:10px 12px 12px 38px;background:var(--legacy-hex-ffffff1f)}
+.music-playlist-add-track input{min-width:0}
+.music-playlist-add-track button{white-space:nowrap}
+.music-save-picker{gap:2px}
+#musicMenuSheet button.music-save-row[aria-checked=true]{background:var(--legacy-hex-ffffff1f)!important}
+.music-sub-head{position:sticky;top:0;z-index:2;padding:8px 12px;background:var(--palette-dark-paper);border-bottom:1px solid var(--legacy-hex-ffffff1f)}
+@media(prefers-reduced-motion:reduce){.music-menu-backdrop,.music-menu-sheet,.music-lyrics-peek-btn,.music-playlist-card,.music-playlist-head,.music-playlist-track{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}}
