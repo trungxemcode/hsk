@@ -437,7 +437,7 @@
  async function loadOffline(){
   if(!window.HSKMusicOffline)return;
   const uid=owner(),request=++offlineRequest;
-  try{const rows=await HSKMusicOffline.list(uid);if(uid!==owner()||request!==offlineRequest)return;offlineRows=rows;if($('musicMenuSheet').dataset.view==='offline')drawOffline();}catch(e){if(uid===owner()&&$('musicMenuSheet').dataset.view==='offline')$('musicOfflineUsage').textContent=e.message;}
+  try{const rows=await HSKMusicOffline.list(uid);if(uid!==owner()||request!==offlineRequest)return;offlineRows=rows;if(opened&&currentMode==='chill'&&currentLinkUrl&&$('musicLinkPreview').hidden&&rows.some(row=>row.url===currentLinkUrl))playOffline(currentLinkUrl,activePlaylistId,false);if($('musicMenuSheet').dataset.view==='offline')drawOffline();}catch(e){if(uid===owner()&&$('musicMenuSheet').dataset.view==='offline')$('musicOfflineUsage').textContent=e.message;}
  }
  async function drawOffline(){
   const uid=owner(),request=++offlineRequest,box=$('musicOfflineList');box.replaceChildren();
@@ -1131,7 +1131,6 @@
    $('musicBrowseView').querySelector('[data-browse-filter=all]').click();
    drawRecentBrowse();
    drawBrowsePlaylists();
-   if(currentLinkUrl&&$('musicLinkPreview').hidden&&offlineRows.some(row=>row.url===currentLinkUrl))playOffline(currentLinkUrl,activePlaylistId,false);
    if(!currentLinkUrl){const recent=savedLinks()[0];if(recent){try{const link=C.parseLink(recent.url);$('musicLinkUrl').value=link.url;$('musicLinkName').value=String(recent.title||'').slice(0,120);openLink(link,recent.title,false,'',false);}catch{}}}
    syncMiniPlayer();
   }else{
