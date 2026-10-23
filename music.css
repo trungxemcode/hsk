@@ -419,3 +419,8 @@ html body.studio-enabled .music-panel #musicQueueSheet .music-queue-track[aria-c
 
 .music-menu-open #musicDownloadStatus, .music-queue-open #musicDownloadStatus { display: none; }
 .music-download-status { pointer-events: none; }
+
+.music-offline-quality { border: 0; padding: 0; margin: 12px 0; min-width: 0; }
+.music-quality-segments { display: flex; gap: 8px; }
+.music-quality-segments button { flex: 1; min-height: 44px; padding: 8px; border: 1px solid var(--line); border-radius: var(--radius-btn); background: var(--surface); color: var(--ink); }
+.music-quality-segments button[aria-pressed=true] { background: var(--accent); color: var(--palette-white); }
