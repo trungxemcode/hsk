@@ -1123,6 +1123,19 @@
         {"kind":"contains","file":"src/modules/music/music.js","value":"id=\"musicQueueSheet\""},
         {"kind":"contains","file":"src/modules/music/music.js","value":"function playbackList()"}
       ]
+    },
+    {
+      "id": "music-offline",
+      "name": "Nhạc ngoại tuyến trên thiết bị, giới hạn dung lượng và phân tách tài khoản",
+      "checks": [
+        {"kind":"file","file":"src/modules/music/music-offline.js","value":""},
+        {"kind":"contains","file":"src/modules/music/music-offline.js","value":"hsk-music-offline-v1"},
+        {"kind":"contains","file":"src/modules/music/music.js","value":"id=\"musicMenuOfflineRow\""},
+        {"kind":"contains","file":"loader.js","value":"./src/modules/music/music-offline.js"},
+        {"kind":"file","file":"tools/check-music-offline.cjs","value":""},
+        {"kind":"file","file":"tools/check-music-offline-ui.cjs","value":""},
+        {"kind":"file","file":"tools/prepare-offline-music.py","value":""}
+      ]
     }
   ]
 }

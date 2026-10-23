@@ -51,12 +51,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm install --prefix /tmp/hsk-tests jsdom@26.1.0 playwright@1.56.1
+      - run: npm install --prefix /tmp/hsk-tests jsdom@26.1.0 playwright@1.56.1 fake-indexeddb@6.2.4
       - name: Protected core behavior, data and server tests
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: |
           node --test server/*.test.mjs
+          node tools/check-music-offline.cjs
           node tools/check-reading-dom.cjs
           node tools/check-studio-dom.cjs
           node tools/check-notebook-dom.cjs
@@ -82,6 +83,7 @@ jobs:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: |
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-feature-runtime.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-offline-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-module-loading-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-drive-images-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-backup-relocation-ui.cjs
