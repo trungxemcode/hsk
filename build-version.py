@@ -27,7 +27,7 @@ else:
 (root/'offline-worker.js').write_text(worker,encoding='utf-8',newline='')
 def asset_metadata(name):
  path=root/name;data=path.read_bytes()
- if path.suffix.lower() not in {'.png','.gz','.webp','.mp3'}:data=data.replace(b'\r\n',b'\n')
+ if path.suffix.lower() not in {'.png','.gz','.webp','.mp3','.woff','.woff2'}:data=data.replace(b'\r\n',b'\n')
  return {'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data)}
 assets={n:asset_metadata(n) for n in files}
 (root/'app-version.json').write_text(json.dumps({'version':version,'release':args.release or previous.get('release',''),'releaseNote':args.note or previous.get('releaseNote',''),'label':('Bản '+(args.release or previous.get('release',''))+' ('+(args.note or previous.get('releaseNote',''))+')') if (args.release or previous.get('release')) else version.removeprefix('hsk-offline-'),'assets':assets},ensure_ascii=False),encoding='utf-8')

@@ -18,6 +18,8 @@ DEFAULT_SITE = 'https://trungxemcode.github.io/hsk/'
 CRITICAL_FILES = (
     'index.html', 'offline.js', 'offline-worker.js',
     'OneSignalSDKWorker.js', 'src/modules/reading/real-reading.js', 'push.js',
+    'redesign.css', 'redesign.js', 'vendor/fonts/inter-latin.woff2',
+    'vendor/fonts/inter-latin-ext.woff2', 'vendor/fonts/inter-vietnamese.woff2',
 )
 
 
@@ -43,10 +45,10 @@ def inspect(site, manifest, fetch_fn=fetch):
         raise ValueError('Public semantic version does not match')
     for name in dict.fromkeys((*CRITICAL_FILES, *read_catalog(ROOT)['aliases'].values())):
         local = (ROOT / name).read_bytes()
-        if Path(name).suffix.lower() not in ('.png', '.gz', '.webp', '.mp3'):
+        if Path(name).suffix.lower() not in ('.png', '.gz', '.webp', '.mp3', '.woff', '.woff2'):
             local = local.replace(b'\r\n', b'\n')
         public = fetch_fn(urllib.parse.urljoin(site, name) + '?check=' + nonce)
-        if Path(name).suffix.lower() not in ('.png', '.gz', '.webp', '.mp3'):
+        if Path(name).suffix.lower() not in ('.png', '.gz', '.webp', '.mp3', '.woff', '.woff2'):
             public = public.replace(b'\r\n', b'\n')
         if hashlib.sha256(public).digest() != hashlib.sha256(local).digest():
             raise ValueError('Public Pages asset out of sync: ' + name)

@@ -6,17 +6,22 @@ const fs=require('node:fs'),http=require('node:http'),crypto=require('node:crypt
  const aliases={'backup-core.js':newCore,'backup-restore.js':newUI,'words.js.gz':'content/data/words.js.gz'};
  const compressed=require('node:zlib').gzipSync(Buffer.from('const words=[];\r\n'));
  const core=fs.readFileSync(newCore),ui=fs.readFileSync(newUI),requests=[];
+ const fontName='vendor/fonts/inter-latin-ext.woff2',font=fs.readFileSync(fontName),fontMetadata=JSON.parse(fs.readFileSync('app-version.json','utf8')).assets[fontName];
+ assert.ok(font.includes(Buffer.from([13,10])),'real binary font exercises embedded CRLF bytes');
+ assert.equal(fontMetadata.bytes,font.length,'release metadata must retain raw font length');
+ assert.equal(fontMetadata.sha256,crypto.createHash('sha256').update(font).digest('hex'),'release metadata must retain raw font hash');
  let stage='old';
  function fixture(which){
   const old=which==='old',version='hsk-offline-900-0-'+(old?'1':'2');
   const files={'index.html':Buffer.from('<!doctype html><meta charset="utf-8"><p>'+which+'</p><script src="./'+(old?'backup-core.js':newCore)+'"></script><script src="./'+(old?'backup-restore.js':newUI)+'"></script>'),
-   'unchanged.txt':Buffer.from('same bytes'),[old?'words.js.gz':'content/data/words.js.gz']:compressed,[old?'backup-core.js':newCore]:core,[old?'backup-restore.js':newUI]:ui};
+   'unchanged.txt':Buffer.from('same bytes'),[fontName]:font,[old?'words.js.gz':'content/data/words.js.gz']:compressed,[old?'backup-core.js':newCore]:core,[old?'backup-restore.js':newUI]:ui};
   let worker=source.replace(/const OFFLINE_VERSION='[^']+';/,"const OFFLINE_VERSION='"+version+"';")
    .replace(/const OFFLINE_FILES=\[.*?\];/,'const OFFLINE_FILES='+JSON.stringify(Object.keys(files))+';')
    .replace(/^const OFFLINE_ALIASES=.*?;$/m,'const OFFLINE_ALIASES='+JSON.stringify(old?{}:aliases)+';');
   if(old)worker=worker.replace(/ const asset=Object\.prototype[^\n]+\n if\(OFFLINE_FILES\.includes\(asset\)\)event\.respondWith\(serve\(event\.request,asset,false\)\);/,
    ' if(OFFLINE_FILES.includes(relative))event.respondWith(serve(event.request,relative,false));');
   const assets=Object.fromEntries(Object.entries(files).map(([name,data])=>[name,{bytes:data.length,sha256:crypto.createHash('sha256').update(data).digest('hex')}]));
+  assets[fontName]=fontMetadata; // Exercise the real release metadata with the actual worker.
   return {files,worker,version,manifest:{version,assets}};
  }
  const fixtures={old:fixture('old'),new:fixture('new')};
@@ -53,7 +58,8 @@ const fs=require('node:fs'),http=require('node:http'),crypto=require('node:crypt
   },[newCore,newUI]);
   assert.match(result.shell,/<p>new<\/p>/);assert.equal(result.oldCore,result.newCore);assert.equal(result.oldUI,result.newUI);assert.equal(result.progress,'keep-me');
   const packed=await page.evaluate(async()=>Array.from(new Uint8Array(await (await fetch('./words.js.gz')).arrayBuffer())));assert.deepEqual(packed,[...compressed]);
-  for(const name of ['unchanged.txt',newCore,newUI,'content/data/words.js.gz'])assert.equal(requests.filter(q=>q.stage==='new'&&q.name===name).length,0,'Verified unchanged/moved cached asset must be reused: '+name);
+  const cachedFont=await page.evaluate(async name=>Array.from(new Uint8Array(await (await fetch('./'+name)).arrayBuffer())),fontName);assert.deepEqual(cachedFont,[...font],'offline font keeps every binary byte');
+  for(const name of ['unchanged.txt',fontName,newCore,newUI,'content/data/words.js.gz'])assert.equal(requests.filter(q=>q.stage==='new'&&q.name===name).length,0,'Verified unchanged/moved cached asset must be reused: '+name);
   await page.goto(origin+'/hsk/index.html');await page.waitForFunction(()=>!!window.HSKBackupCore);
   assert.equal(await page.evaluate(()=>localStorage.getItem('fixture-progress')),'keep-me');
   const fresh=await browser.newContext({serviceWorkers:'allow'}),freshPage=await fresh.newPage();
