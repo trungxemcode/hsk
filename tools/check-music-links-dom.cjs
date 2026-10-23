@@ -7,6 +7,25 @@ for(const file of ['music-core.js','music-soundcloud.js','music.js'])w.eval(fs.r
 const $=id=>w.document.getElementById(id),submit=()=>$('musicLinkForm').onsubmit({preventDefault(){}});
 const links=['https://youtu.be/abcdefghijk?si=x','https://open.spotify.com/track/0123456789ABCDEFGHIJKL?si=x','https://soundcloud.com/artist/song?si=x'];
 async function run(){
+ // A cached signed-in account must not flash guest tracks while auth restores.
+ w.localStorage.setItem('hsk-account-meta-v1',JSON.stringify({uid:'one'}));
+ w.localStorage.setItem('hsk-music-links-v1:one',JSON.stringify([{url:links[0],title:'Lịch sử của tôi'}]));
+ w.localStorage.setItem('hsk-music-links-v1:guest',JSON.stringify([{url:links[2],title:'Bài của khách'}]));
+ delete w.HSKAccountDashboard;$('musicPanel').hidden=false;w.HSKMusic.enter('chill');await tick();
+ const recentTitles=()=>[...$('musicRecentList').querySelectorAll('.music-recent-title')].map(n=>n.textContent);
+ assert.deepEqual(recentTitles(),['Lịch sử của tôi'],'cached account history is stable before auth');
+ w.HSKAccountDashboard={user:null};w.dispatchEvent(new w.Event('hsk-account-ready'));await tick();
+ assert.deepEqual(recentTitles(),['Lịch sử của tôi'],'transient null auth never substitutes guest history');
+ w.HSKAccountDashboard={user:{uid:'one'}};w.dispatchEvent(new w.Event('hsk-account-ready'));await tick();
+ assert.deepEqual(recentTitles(),['Lịch sử của tôi']);
+ $('musicBrowseView').querySelector('[data-browse-filter=playlists]').click();w.HSKMusic.enter('chill');await tick();
+ assert.equal($('musicBrowseRecentSection').hidden,false,'re-entry starts in All consistently');
+ assert.deepEqual(recentTitles(),['Lịch sử của tôi']);
+ w.HSKAccountDashboard={user:{uid:'empty'}};w.dispatchEvent(new w.Event('hsk-account-ready'));await tick();
+ assert.deepEqual(recentTitles(),[],'empty accounts do not get sample tracks disguised as recents');
+ assert.match($('musicRecentList').textContent,/Chưa có bài nghe gần đây/);
+ w.localStorage.removeItem('hsk-music-links-v1:one');w.localStorage.removeItem('hsk-music-links-v1:guest');w.localStorage.removeItem('hsk-account-meta-v1');
+ w.HSKAccountDashboard={user:{uid:'one'}};w.dispatchEvent(new w.Event('hsk-account-ready'));await tick();
  $('musicPanel').hidden=false;w.HSKMusic.enter();await tick();
  for(const link of links){$('musicLinkUrl').value=link;$('musicLinkName').value='<img src=x onerror=alert(1)>';await submit();assert.equal($('musicLinkPreview').hidden,false);assert.equal($('musicLesson').hidden,true);assert.equal($('musicLinkPlayer').children.length,1);assert.equal($('musicLinkTitle').querySelector('img'),null);assert.equal($('musicLoop').getAttribute('aria-pressed'),'false');}
  assert.match($('musicSourceLink').href,/^https:\/\/soundcloud.com/);assert.equal(JSON.parse(w.localStorage.getItem('hsk-music-links-v1:one')).length,3);

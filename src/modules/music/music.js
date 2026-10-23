@@ -67,7 +67,13 @@
   ]}
  ];
  let catalog=BUILTIN_SONGS.map(C.validateSong),config={enabled:false,endpoint:''},lexicon=C.dictionary([]),lexiconSource=null,progress={},metaCache={};
- const owner=()=>window.HSKAccountDashboard?.user?.uid||'guest';
+ // The account module restores this local owner before cloud auth is ready.
+ // Keep the same local library during its transient user:null notifications.
+ const owner=()=>{
+  const uid=window.HSKAccountDashboard?.user?.uid;if(uid)return uid;
+  try{const uid=JSON.parse(localStorage.getItem('hsk-account-meta-v1')||'null')?.uid;if(typeof uid==='string'&&uid)return uid;}catch{}
+  return 'guest';
+ };
  const key=type=>'hsk-music-'+type+'-v1:'+owner();
  const fmtTime=sec=>{const s=Math.max(0,Math.floor(Number(sec)||0));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');};
  const ICONS={
@@ -311,11 +317,8 @@
   const list=$('musicRecentList');if(!list)return;
   list.replaceChildren();
   const recents=savedLinks();
-  const tracks=recents.length?recents:[
-   {url:'https://youtu.be/bv_cEeDlop0',title:'Ánh Trăng Nói Hộ Lòng Tôi (月亮代表我的心)'},
-   {url:'https://youtu.be/tc2tW0j9P2I',title:'Ngọt Ngào (甜蜜蜜)'},
-   {url:'https://youtu.be/6lbPgfKK7m4',title:'Bạn Bè (朋友)'}
-  ];
+  const tracks=recents;
+  if(!tracks.length){list.append(el('p','Chưa có bài nghe gần đây. Những bài bạn mở sẽ xuất hiện ở đây.','music-empty-note'));return;}
   for(const entry of tracks.slice(0,20)){
    let link;try{link=C.parseLink(entry.url);}catch{continue;}
    const isCurrent=currentLinkUrl===link.url;
@@ -1029,7 +1032,7 @@
  video.addEventListener('timeupdate',tick);video.addEventListener('play',updatePlayButton);video.addEventListener('pause',updatePlayButton);video.addEventListener('error',()=>{if(song)status('Chưa phát được nguồn nhạc. Kiểm tra mạng, định dạng hoặc bấm tải lại nguồn.');});
  document.addEventListener('visibilitychange',()=>{if(document.hidden)checkpoint(true);});window.addEventListener('pagehide',()=>checkpoint(true));
  new MutationObserver(()=>{if(panel.hidden&&opened){opened=false;stop();fetcher?.abort();++serial;}}).observe(panel,{attributes:true,attributeFilter:['hidden']});
- window.addEventListener('hsk-account-ready',()=>{fetcher?.abort();++serial;release(false);song=null;catalog=BUILTIN_SONGS.map(C.validateSong);progress={};currentLinkUrl='';currentLinkTitle='';currentLinkAuthor='';activePlaylistId='';playerExpanded=false;toggleQueue(false);panel.classList.remove('music-player-expanded');$('musicLesson').hidden=true;toggleMenu(false);toggleLyricsDrawer(false);syncEmptyState();$('musicLinkUrl').value='';$('musicLinkName').value='';$('musicLinkLyrics').value='';drawCatalog();drawPlaylists();drawLinks();drawRecentBrowse();drawBrowsePlaylists();history();if(opened)refresh();});
+ window.addEventListener('hsk-account-ready',()=>{metaCache={};fetcher?.abort();++serial;release(false);song=null;catalog=BUILTIN_SONGS.map(C.validateSong);progress={};currentLinkUrl='';currentLinkTitle='';currentLinkAuthor='';activePlaylistId='';playerExpanded=false;toggleQueue(false);panel.classList.remove('music-player-expanded');$('musicLesson').hidden=true;toggleMenu(false);toggleLyricsDrawer(false);syncEmptyState();$('musicLinkUrl').value='';$('musicLinkName').value='';$('musicLinkLyrics').value='';drawCatalog();drawPlaylists();drawLinks();drawRecentBrowse();drawBrowsePlaylists();history();if(opened)refresh();});
  window.HSKMusic={enter(mode){
   opened=true;
   toggleQueue(false);
@@ -1041,6 +1044,7 @@
    $('musicLinkImport').open=false;$('musicPlaylistsBox').open=true;$('musicSavedLinksBox').open=false;if($('musicPlaylistCreateBox'))$('musicPlaylistCreateBox').open=false;
    playerExpanded=false;
    panel.classList.remove('music-player-expanded');
+   $('musicBrowseView').querySelector('[data-browse-filter=all]').click();
    drawRecentBrowse();
    drawBrowsePlaylists();
    if(!currentLinkUrl){const recent=savedLinks()[0];if(recent){try{const link=C.parseLink(recent.url);$('musicLinkUrl').value=link.url;$('musicLinkName').value=String(recent.title||'').slice(0,120);openLink(link,recent.title,false,'',false);}catch{}}}
