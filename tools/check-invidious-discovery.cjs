@@ -26,6 +26,7 @@ function env(handler){
  assert.equal(eligible.length,5,'at most five HTTPS candidates selected');
  assert.equal(eligible[0].url,'https://inv-off.example','API flag is not proof of actual availability');
  assert.equal(eligible[1].url,'https://inv-cors.example','false CORS flag still permits an actual attempt');
+ assert.equal(a.calls.filter(x=>x.url===directory).length,1,'directory reused within the five-minute cache window');
  const unknown=[['unknown',{type:'https',uri:'https://unknown.example',api:null,cors:null}]];
  a=env(url=>url===directory?j(unknown):url.includes('/api/v1/videos/')?j({lengthSeconds:200,adaptiveFormats:formats}):bin());
  await a.run();assert(a.calls.some(x=>x.url.startsWith('https://unknown.example/latest_version')),'unknown flags are probed');

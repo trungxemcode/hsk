@@ -2,6 +2,9 @@
 (function(root){
  'use strict';
  const cooldown=new Map(),MAX_JSON=1024*1024,DISCOVERY='https://api.invidious.io/instances.json?sort_by=health';
+ let directoryCache=null,directoryAt=0,lastWorking=null;
+ try{const saved=JSON.parse(root.localStorage?.getItem('hsk-music-working-source-v1')||'null');if(saved&&Date.now()-saved.at<21600000)lastWorking=endpoint(saved);}catch{}
+ function remember(item){lastWorking={type:item.type,url:item.url,at:Date.now()};try{root.localStorage?.setItem('hsk-music-working-source-v1',JSON.stringify(lastWorking));}catch{}}
  function publicUrl(value){
   const u=new URL(value);
   if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash||!u.hostname.includes('.')||/^[\d.]+$/.test(u.hostname)||u.hostname.includes(':')||/(^|\.)(localhost|local|internal|test|invalid)$/.test(u.hostname))throw Error('Địa chỉ nguồn không hợp lệ.');
@@ -45,7 +48,8 @@
   return JSON.parse(new TextDecoder().decode(bytes));
  }
  async function discover(signal){
-  // Fetched afresh per save attempt; the directory already ranks results by health.
+  abortCheck(signal);
+  if(directoryCache&&Date.now()-directoryAt<300000)return directoryCache.slice();
   const lookup=scope(signal,8000),directory={url:DISCOVERY};
   try{
    const data=await json(await request(DISCOVERY,{headers:{Accept:'application/json'},signal:lookup.signal},directory),lookup.signal);
@@ -57,7 +61,7 @@
     try{const item=endpoint({type:'invidious',url:info.uri});if(unique.has(item.url))continue;unique.add(item.url);ready.push(item);if(ready.length===5)break;}catch{}
    }
    for(const url of ['https://inv.nadeko.net','https://invidious.nerdvpn.de','https://inv.tux.pizza','https://yewtu.be']){if(ready.length===5)break;if(!unique.has(url)){unique.add(url);ready.push(endpoint({type:'invidious',url}));}}
-   return ready;
+   directoryCache=ready;directoryAt=Date.now();return ready.slice();
   }finally{lookup.close();}
  }
  function pipedCandidates(data,target){
@@ -141,13 +145,14 @@
   }
   // An explicitly configured, authorized service remains a fallback; no dead Piped URLs shipped.
   list.push(...(Array.isArray(instances)?instances:[]).slice(0,4).map(endpoint).filter(i=>i.type==='cobalt'||source.kind==='youtube'));
+  if(lastWorking&&Date.now()-lastWorking.at<21600000){const index=list.findIndex(item=>item.url===lastWorking.url&&item.type===lastWorking.type);if(index>0)list.unshift(...list.splice(index,1));}
   let matchError='';
   let tried=0,blocked=0;
   for(const item of list){
    if((cooldown.get(item.url)||0)>Date.now())continue;
    abortCheck(signal);const lookup=scope(signal,8000);let candidates=[];
    try{onStatus('resolving',new URL(item.url).hostname);candidates=await resolve(source,target,item,lookup.signal);}
-   catch(e){abortCheck(signal);blocked++;continue;}
+   catch(e){abortCheck(signal);if(!(cooldown.get(item.url)>Date.now()))cooldown.set(item.url,Date.now()+30000);blocked++;continue;}
    finally{lookup.close();}
    for(const candidate of candidates){
     abortCheck(signal);const transfer=scope(signal,90000);
@@ -157,7 +162,7 @@
      const type=response.headers.get('Content-Type')||'';
      if(/text\/|json|mpegurl|html/i.test(type)){await response.body?.cancel().catch(()=>{});throw Error('Nguồn không trả file âm thanh.');}
      tried++;
-     const bytes=await root.HSKMusicConverter.readSource(response,transfer.signal,(received,total)=>onStatus('progress',{received,total}));abortCheck(signal);return bytes;
+     const bytes=await root.HSKMusicConverter.readSource(response,transfer.signal,(received,total)=>onStatus('progress',{received,total}));abortCheck(signal);remember(item);return bytes;
     }catch(e){abortCheck(signal);blocked++;if((cooldown.get(item.url)||0)>Date.now())break;}
     finally{transfer.close();}
    }

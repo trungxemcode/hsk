@@ -35,11 +35,26 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
     await page.locator('#musicOfflineAddCurrent').click();
     await page.waitForFunction(()=>!document.getElementById('musicOfflineProgress').hidden);
     assert.match(await page.locator('#musicDownloadMessage').textContent(),/Đang/);
+    assert.equal(await page.locator('[data-quality="'+quality+'"]').getAttribute('aria-pressed'),'true');
+    assert.match(await page.locator('[data-quality="'+quality+'"]').textContent(),/✓/);
+    const selectedColor=await page.locator('[data-quality="'+quality+'"]').evaluate(n=>getComputedStyle(n).backgroundColor);
+    const otherColor=await page.locator('[data-quality="'+(quality==='32'?'64':'32')+'"]').evaluate(n=>getComputedStyle(n).backgroundColor);
+    assert.notEqual(selectedColor,otherColor,'busy selected quality remains visibly highlighted');
+    if(quality==='32'){
+     await page.evaluate(()=>window.HSKStudio.navigate('practice'));
+     await page.evaluate(()=>window.dispatchEvent(new Event('hsk-account-ready')));
+     await page.waitForFunction(()=>!document.getElementById('musicBackgroundDownload').hidden);
+    }
     await page.waitForFunction(()=>!document.getElementById('musicOfflineCancel').hidden);
     await page.waitForFunction(()=>document.getElementById('musicOfflineCancel').hidden,{},{timeout:120000});
     const row=await page.evaluate(async()=> (await HSKMusicOffline.list('offline-one'))[0]);
     assert.match(await page.locator('#musicOfflineUsage').innerText(),/Đã lưu thành công/,'successful save confirms the stored file');
     assert.equal(row?.bitrate,Number(quality),await page.locator('#musicOfflineUsage').innerText());assert.equal(await page.locator('#musicOfflineProgress').getAttribute('value'),'100');assert.match(await page.locator('#musicDownloadMessage').textContent(),/Đã lưu thành công/);assert.ok(row.size>lastSize);lastSize=row.size;
+    if(quality==='32'){
+     assert.match(await page.locator('#musicBackgroundDownload').textContent(),/Đã lưu thành công/,'save continues after leaving music');
+     await page.locator('#musicBackgroundDownload').click();
+     await page.waitForFunction(()=>document.getElementById('musicMenuSheet').dataset.view==='offline');
+    }
    }
    // Direct mode fetches API + proxy bytes from the browser, never the HSK resolver.
    let directMode='piped',cancelProbe=false,directFetches=0;
@@ -93,7 +108,11 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await page.evaluate(()=>window.__offlineAudio.paused),true,'route re-entry restores local source without autoplay');
    await openOffline();await page.locator('#musicOfflineList .music-row-del').first().click();await page.waitForFunction(()=>document.querySelectorAll('#musicOfflineList .music-offline-item').length===1);assert.equal(await page.evaluate(()=>HSKMusicOffline.usage()),bytes,'deleting one shared reference retains the file');
    await page.locator('#musicOfflineList .music-row-del').click();await page.waitForFunction(()=>document.querySelectorAll('#musicOfflineList .music-offline-item').length===0);assert.equal(await page.evaluate(()=>HSKMusicOffline.usage()),0);
-   await page.context().setOffline(false);assert.deepEqual(errors,[]);console.log('PASS offline music UI',width,'real WASM 32/64/96, browser-direct Piped/Cobalt, cancel, M4A import, dedup, account isolation, reload persistence, real offline play/pause/seek, delete');await page.close();
+   await page.context().setOffline(false);
+   await page.evaluate(()=>localStorage.setItem('hsk-music-pending-download-v1:offline-one',JSON.stringify({url:'https://youtu.be/abcdefghijk',title:'Interrupted save',author:'',bitrate:32})));
+   await page.reload();await page.waitForFunction(async()=> (await window.HSKMusicOffline?.list('offline-one'))?.some(r=>r.bitrate===32),{},{timeout:120000});
+   await page.waitForFunction(()=>localStorage.getItem('hsk-music-pending-download-v1:offline-one')===null);
+   assert.deepEqual(errors,[]);console.log('PASS offline music UI',width,'real WASM, background route save, visible quality, interrupted task restart, direct sources, cancel, import, owner isolation, offline playback');await page.close();
   }
  }finally{await browser?.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
