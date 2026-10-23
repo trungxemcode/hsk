@@ -99,3 +99,23 @@ These sources are retained for reproducibility, not advertised as small packs:
    `HSK_CHINESE_VOICE_FIXTURE=FIXTURE_DIR node tools/check-chinese-voice-runtime.cjs`
    with Playwright and `CHROME_EXECUTABLE` when needed. This checks finite PCM,
    not subjective listening quality or real-iPhone behavior.
+
+
+## Default single Kokoro voice: Yunjian (October 2026)
+
+Only `zm_yunjian` is offered for new downloads. The app uses the original
+pinned and SHA-verified `hexgrad/Kokoro-82M` voice tensor (~0.50 MiB) and
+the onnx-community `Kokoro-82M-v1.0-ONNX` `model_quantized.onnx`
+(92,361,116 bytes; revision `1939ad2a8e416c0acfeecc08a694d14ef25f2231`,
+SHA-256 `fbae9257e1e05ffc727e951ef9b9c98418e6d79f1c9b6b13bd59f5c9028a1478`).
+Shared Sherpa/ONNX WASM and the original Mandarin resource bundle remain.
+Total first-install download: 98,897,314 bytes (~94.3 MiB);
+the first app/PWA update downloads only the Yunjian demo, not the model.
+Full synthesis occurs offline after the user opts to install the package.
+A separate 86,033,585-byte q8f16 candidate failed the current WASM
+FP16 initialization gate and was rejected. No false claim of a 0.5 MiB
+standalone synthesizer. Real Chromium WASM inference with Mandarin PCM
+passed; physical Safari/iPhone and human listening remain to be verified.
+Keep third-party notices and pinned provenance above.
+Existing installed voice assets are not silently purged on version change;
+the selected voice is replaced atomically on successful Yunjian install.

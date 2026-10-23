@@ -1,6 +1,6 @@
 /* Single-thread WASM SIMD; no cloud synthesis or cross-origin isolation required. */
 'use strict';
-importScripts('./voice-model.js');
+importScripts('./voice-model.js','./voice-model-transport.js');
 let tts;
 async function unzip(blob){return new Response(blob.stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();}
 function voiceData(buffer){
@@ -29,7 +29,7 @@ async function initialize(assets){
   tts=createOfflineTts(Module,{offlineTtsModelConfig:{vits:{model:'/model.onnx',tokens:'/tokens.txt',lexicon:'',dataDir:'/espeak-ng-data',noiseScale:.667,noiseScaleW:.8,lengthScale:1},numThreads:1,debug:0,provider:'cpu'},ruleFsts:'',ruleFars:'',maxNumSentences:1});
  }else{
  // Add Sherpa metadata to the unmodified web export; keep only one speaker.
- const model=new Uint8Array(await files.model.arrayBuffer()),raw=atob(resources['/model-metadata.bin']),metadata=Uint8Array.from(raw,c=>c.charCodeAt(0)),combined=HSKVoiceModel.expand(model,metadata);
+ const model=await HSKVoiceModelTransport.unpackModel(files.model),raw=atob(resources['/model-metadata.bin']),metadata=Uint8Array.from(raw,c=>c.charCodeAt(0)),combined=HSKVoiceModel.expand(model,metadata);
  FS.writeFile('/model.onnx',combined,{canOwn:true});
  FS.writeFile('/voices.bin',voiceData(await files.voice.arrayBuffer()));
  tts=createOfflineTts(Module,{offlineTtsModelConfig:{kokoro:{model:'/model.onnx',voices:'/voices.bin',tokens:'/tokens.txt',dataDir:'/espeak-ng-data',lexicon:'/lexicon-zh.txt',lang:'en-us'},numThreads:1,debug:0,provider:'cpu'},ruleFsts:'/phone-zh.fst,/date-zh.fst,/number-zh.fst',ruleFars:'',maxNumSentences:1});

@@ -9,7 +9,7 @@ for(const asset of demoPaths){
  assert.ok(sw.includes(JSON.stringify(asset)),'Demo must install automatically with PWA: '+asset);
  assert.equal(release.assets[asset]?.sha256,crypto.createHash('sha256').update(buf).digest('hex'),'Demo must match update checksum: '+asset);
 }
-const sample=demoPaths[1],body=fs.readFileSync(sample),site='https://example.org/hsk/';
+const sample=demoPaths[0],body=fs.readFileSync(sample),site='https://example.org/hsk/';
 const fake={self:{location:{origin:'https://example.org'},registration:{scope:site},addEventListener:(name,fn)=>listeners[name]=fn},caches:{open:async()=>({match:async url=>url===site+sample?new Response(body,{headers:{'Content-Type':'audio/mpeg'}}):undefined})},Request,Response,Headers,URL,AbortController,TextDecoder,crypto:crypto.webcrypto,setTimeout,clearTimeout,console};
 vm.runInNewContext(sw,fake);
 async function fetchCached(range){
