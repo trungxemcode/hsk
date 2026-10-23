@@ -325,3 +325,6 @@ Release evidence:25 new /229 full server tests PASS;45 capabilities/165 guards a
 
 ## Music download feedback fix
 Branch fix/music-download-progress from main9e67edb: visible download status outside menu plus native progress inside offline menu, indeterminate discovery/codec stages and byte/encode percentages, final committed success100%, errors/cancel retained. Avoid re-creating same active player; handle YouTube buffering/init/error/autoplay-block feedback. External provider availability still controls online latency. Test adds visible progress and committed success checks.
+
+## Offline fallback update
+Branch fix/music-source-fallback from main01dc3e9. Discovery tries HTTPS despite unknown/false api/cors flags with bounded seeds. GET network failures try AllOrigins once. Smart title+artist NetEase matching experimental; GDStudio live403, Noembed200, proxy timeout. Three quality buttons and hidden long help. No promise of live YouTube download or same-recording proof.

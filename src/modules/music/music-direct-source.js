@@ -24,7 +24,13 @@
   if(response.status===403)cooldown.set(url,Date.now()+120000);
  }
  async function request(url,options,item){
-  const response=await fetch(url,{...options,mode:'cors',credentials:'omit',referrerPolicy:'no-referrer',cache:'no-store'});
+  let response;
+  const opts={...options,mode:'cors',credentials:'omit',referrerPolicy:'no-referrer',cache:'no-store'};
+  try{response=await fetch(url,opts);}catch(e){
+   abortCheck(options.signal);
+   if(e.name!=='TypeError'||options.method==='POST')throw e;
+   response=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(publicUrl(url).href),opts);
+  }
   setCooldown(item.url,response);
   if(!response.ok){await response.body?.cancel().catch(()=>{});throw Error('Dịch vụ nguồn từ chối yêu cầu (HTTP '+response.status+').');}
   return response;
@@ -47,9 +53,10 @@
    const unique=new Set(),ready=[];
    for(const row of data){
     if(!Array.isArray(row)||row.length<2)continue;
-    const info=row[1];if(info?.api!==true||info?.cors!==true||info?.monitor?.down===true||info?.type!=='https')continue;
+    const info=row[1];if(info?.monitor?.down===true||info?.type!=='https')continue;
     try{const item=endpoint({type:'invidious',url:info.uri});if(unique.has(item.url))continue;unique.add(item.url);ready.push(item);if(ready.length===5)break;}catch{}
    }
+   for(const url of ['https://inv.nadeko.net','https://invidious.nerdvpn.de','https://inv.tux.pizza','https://yewtu.be']){if(ready.length===5)break;if(!unique.has(url)){unique.add(url);ready.push(endpoint({type:'invidious',url}));}}
    return ready;
   }finally{lookup.close();}
  }
@@ -96,18 +103,45 @@
   if(data.status==='local-processing'&&!data.isHLS&&['audio','remux'].includes(data.type)&&data.tunnel?.length===1)urls=data.tunnel;
   return urls.map(value=>publicUrl(value)).filter(u=>u.origin===item.origin).map(u=>({url:u.href}));
  }
- async function download(url,target,{instances=[],signal,onStatus=()=>{}}){
+ function matchQuery(title){
+  const text=String(title||'').replace(/\[[^\]]*\]|【[^】]*】/g,' ').replace(/\b(?:official|lyrics?|video|vietsub|pinyin|mv)\b/gi,' ').trim();
+  const han=text.match(/[\u3400-\u9fff]+/g);return (han?han.join(' '):text).slice(0,100);
+ }
+ async function musicMatch(source,signal,onStatus){
+  const lookup=scope(signal,16000),item={url:'https://music-api.gdstudio.xyz'};
+  try{
+   onStatus('resolving','tên bài hát và kho nhạc Trung Quốc');
+   const meta=await json(await request('https://noembed.com/embed?url='+encodeURIComponent(source.url),{signal:lookup.signal,headers:{Accept:'application/json'}},item),lookup.signal);
+   const query=matchQuery(meta.title);if(!query)throw Error('Chưa xác định được tên bài hát.');
+   const api=item.url+'/api.php?';
+   const rows=await json(await request(api+'types=search&source=netease&count=5&pages=1&name='+encodeURIComponent(query),{signal:lookup.signal,headers:{Accept:'application/json'}},item),lookup.signal);
+   const compact=x=>String(x||'').toLowerCase().replace(/[^a-z0-9\u3400-\u9fff]/g,'');
+   const title=compact(meta.title);
+   const matches=(Array.isArray(rows)?rows:[]).filter(row=>{
+    const name=compact(row.name),artists=Array.isArray(row.artist)?row.artist:[];
+    return name.length>=2&&title.includes(name)&&artists.some(a=>compact(a).length>=2&&title.includes(compact(a)))&&!/cover|live|remix|翻唱|伴奏|试听/i.test(row.name||'');
+   });
+   if(matches.length!==1)throw Error('Chưa tìm được một bản khớp rõ tên bài và ca sĩ.');
+   const row=matches[0];if(!/^[a-zA-Z0-9_-]+$/.test(String(row.id)))throw Error('Mã bài hát không hợp lệ.');
+   const data=await json(await request(api+'types=url&source=netease&br=320&id='+encodeURIComponent(row.id),{signal:lookup.signal,headers:{Accept:'application/json'}},item),lookup.signal);
+   if(Number(data.br)<128||!(Number(data.size)>0)||!data.url)throw Error('Nguồn nhạc chỉ có bản nghe thử hoặc thiếu thông tin chất lượng.');
+   const url=publicUrl(data.url).href;
+   onStatus('matched',{title:row.name,artist:row.artist.join(', '),provider:'NetEase'});
+   return {url,title:row.name};
+  }finally{lookup.close();}
+ }
+ async function download(url,target,{instances=[],signal,onStatus=()=>{},smartMatch=true}){
   abortCheck(signal);if(![32,64,96].includes(target))throw Error('Chất lượng nhạc chưa hợp lệ.');
   const source=root.HSKMusicCore.parseLink(url);
   if(source.kind==='spotify')throw Error('Spotify chưa hỗ trợ lưu trực tiếp. Chọn link YouTube hoặc SoundCloud tương ứng.');
   let list=[];
   if(source.kind==='youtube' && !(Array.isArray(instances)&&instances.length)){
    onStatus('resolving','danh sách Invidious');
-   try{list=await discover(signal);}catch(e){abortCheck(signal);onStatus('resolving','nguồn dự phòng');}
+   try{list=await discover(signal);}catch(e){abortCheck(signal);onStatus('resolving','nguồn dự phòng');list=['https://inv.nadeko.net','https://invidious.nerdvpn.de','https://inv.tux.pizza','https://yewtu.be'].map(url=>endpoint({type:'invidious',url}));}
   }
   // An explicitly configured, authorized service remains a fallback; no dead Piped URLs shipped.
   list.push(...(Array.isArray(instances)?instances:[]).slice(0,4).map(endpoint).filter(i=>i.type==='cobalt'||source.kind==='youtube'));
-  if(!list.length)throw Error(source.kind==='youtube'?'Chưa có Invidious hỗ trợ API và CORS tại thời điểm này. Bạn có thể gắn file M4A có sẵn hoặc thử lại sau.':'Chưa có dịch vụ SoundCloud được phép tải trực tiếp. Bạn có thể gắn file M4A có sẵn.');
+  let matchError='';
   let tried=0,blocked=0;
   for(const item of list){
    if((cooldown.get(item.url)||0)>Date.now())continue;
@@ -128,7 +162,12 @@
     finally{transfer.close();}
    }
   }
-  throw Error('Các máy chủ nhạc đang chặn tải hoặc không hỗ trợ CORS ('+blocked+' lượt lỗi). Hãy thử lại sau hoặc gắn file M4A từ thiết bị; nhạc đã lưu vẫn được giữ.');
+  if(smartMatch&&source.kind==='youtube'){
+   try{const candidate=await musicMatch(source,signal,onStatus),transfer=scope(signal,90000);
+    try{const response=await request(candidate.url,{signal:transfer.signal,headers:{Accept:'audio/*'}},{url:'https://music-api.gdstudio.xyz'});if(/text|json|html/i.test(response.headers.get('Content-Type')||''))throw Error('Kho nhạc không trả file âm thanh.');return await root.HSKMusicConverter.readSource(response,transfer.signal,(received,total)=>onStatus('progress',{received,total}));}finally{transfer.close();}
+   }catch(e){abortCheck(signal);matchError=' Kho nhạc thay thế: '+e.message;}
+  }
+  throw Error(matchError+' Các máy chủ nhạc đang chặn tải hoặc không hỗ trợ CORS ('+blocked+' lượt lỗi). Hãy thử lại sau hoặc gắn file M4A từ thiết bị; nhạc đã lưu vẫn được giữ.');
  }
- root.HSKMusicDirectSource={download,discover,invidiousCandidates};
+ root.HSKMusicDirectSource={download,discover,invidiousCandidates,matchQuery};
 })(window);
