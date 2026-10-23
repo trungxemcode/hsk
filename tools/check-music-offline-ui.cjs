@@ -21,7 +21,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await upload('#musicOfflineImport');assert.equal(await page.locator('#musicOfflineList .music-offline-item').count(),2);assert.equal(await page.evaluate(()=>HSKMusicOffline.usage()),bytes,'same file imported twice occupies only one asset');
    // A different account sees no personal downloads; returning owner keeps them.
    await page.evaluate(()=>{window.HSKAccountDashboard={user:{uid:'offline-two'}};window.dispatchEvent(new Event('hsk-account-ready'));});
-   await page.locator('#musicMenuOfflineRow').click();await page.waitForFunction(()=>document.getElementById('musicOfflineUsage').textContent.startsWith('0 bài'));
+   await openOffline();await page.waitForFunction(()=>document.getElementById('musicOfflineUsage').textContent.startsWith('0 bài'));
    assert.equal(await page.locator('#musicOfflineList .music-offline-item').count(),0);
    await page.reload();await page.waitForFunction(()=>window.HSKMusic&&window.HSKStudio);
    await page.evaluate(()=>window.HSKStudio.navigate('music-play'));await openOffline();assert.equal(await page.locator('#musicOfflineList .music-offline-item').count(),2,'downloads survive reload and cached account restoration');
@@ -33,6 +33,11 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.locator('#musicLinkScrub').evaluate(n=>{n.value='2';n.dispatchEvent(new Event('input',{bubbles:true}));});
    await page.waitForFunction(()=>window.__offlineAudio.currentTime>=1.9);assert.equal(await page.locator('#musicQuickLoop').getAttribute('aria-pressed'),'false');
    await page.locator('#musicLinkPlay').click();await page.waitForFunction(()=>window.__offlineAudio.paused);
+   await page.evaluate(()=>window.HSKStudio.navigate('practice'));
+   await page.waitForFunction(()=>window.__offlineAudio.getAttribute('src')===null);
+   await page.evaluate(()=>window.HSKStudio.navigate('music-play'));
+   await page.waitForFunction(()=>window.__offlineAudio?.src?.startsWith('blob:')&&window.__offlineAudio.readyState>=1);
+   assert.equal(await page.evaluate(()=>window.__offlineAudio.paused),true,'route re-entry restores local source without autoplay');
    await openOffline();await page.locator('#musicOfflineList .music-row-del').first().click();await page.waitForFunction(()=>document.querySelectorAll('#musicOfflineList .music-offline-item').length===1);assert.equal(await page.evaluate(()=>HSKMusicOffline.usage()),bytes,'deleting one shared reference retains the file');
    await page.locator('#musicOfflineList .music-row-del').click();await page.waitForFunction(()=>document.querySelectorAll('#musicOfflineList .music-offline-item').length===0);assert.equal(await page.evaluate(()=>HSKMusicOffline.usage()),0);
    await page.context().setOffline(false);assert.deepEqual(errors,[]);console.log('PASS offline music UI',width,'M4A add-to-current/import, dedup, account isolation, reload persistence, real offline play/pause/seek, delete');await page.close();
