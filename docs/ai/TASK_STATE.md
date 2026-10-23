@@ -1,3 +1,9 @@
+## Stable entertainment recents — 2026-10-23
+- Branch `fix/music-stable-recents` from main `4b5ed59`.
+- Evidence: `drawRecentBrowse()` previously substituted three demo tracks when `savedLinks()` was empty. `owner()` previously defaulted to guest until Firebase finished; account module emits transient user:null while restoring cloud state.
+- Recents now contain only owner history or an explicit empty state. Local cached account UID keeps library ownership stable during auth restoration/offline. Real account switches still clear media and invalidate pending imports. Re-entry resets browse filter to All.
+- Regression tests cover startup before auth, repeated null/ready events, different guest history, empty account and route re-entry; existing import/account isolation checks retained.
+
 ## Independent playback queue drawer — 2026-10-23
 - Branch `fix/music-queue-drawer`, based on main `c5753ad` (PR #155).
 - Bottom handle renamed “Danh sách chờ phát”; it and the queue icon open `musicQueueSheet`, independent of ellipsis actions.

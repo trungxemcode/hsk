@@ -4,7 +4,27 @@ const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),pat
  try{browser=await chromium.launch({headless:true,...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
  for(const width of [390,1440]){
  const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKMusic&&window.HSKStudio&&window.HSKLessons);
- await page.evaluate(()=>{window.HSKAccountDashboard={user:{uid:'links-user'}};window.HSKStudio.navigate('music-play');});
+ // Reproduce cold-start auth timing with deliberately different guest history.
+ await page.evaluate(()=>{
+  localStorage.setItem('hsk-account-meta-v1',JSON.stringify({uid:'stable-recents'}));
+  localStorage.setItem('hsk-music-links-v1:stable-recents',JSON.stringify([{url:'https://youtu.be/abcdefghijk',title:'Bài đã nghe của tôi'}]));
+  localStorage.setItem('hsk-music-links-v1:guest',JSON.stringify([{url:'https://soundcloud.com/guest/track',title:'Bài của khách'}]));
+  window.HSKAccountDashboard={user:null};window.HSKStudio.navigate('music-play');
+ });
+ const recentTitles=()=>page.locator('#musicRecentList .music-recent-title').allTextContents();
+ assert.deepEqual(await recentTitles(),['Bài đã nghe của tôi'],'cold entry uses the cached account, never guest/sample songs');
+ for(const user of [null,{uid:'stable-recents'},null,{uid:'stable-recents'}]){
+  await page.evaluate(user=>{window.HSKAccountDashboard={user};window.dispatchEvent(new Event('hsk-account-ready'));},user);
+  assert.deepEqual(await recentTitles(),['Bài đã nghe của tôi'],'history stays unchanged across account restore notifications');
+ }
+ await page.locator('[data-browse-filter=playlists]').click();
+ await page.evaluate(()=>{window.HSKStudio.navigate('practice');window.HSKStudio.navigate('music-play');});
+ assert.equal(await page.locator('#musicBrowseRecentSection').isVisible(),true);
+ assert.deepEqual(await recentTitles(),['Bài đã nghe của tôi'],'route re-entry retains the same history and default view');
+ await page.evaluate(()=>{localStorage.removeItem('hsk-account-meta-v1');localStorage.removeItem('hsk-music-links-v1:guest');window.HSKAccountDashboard={user:{uid:'links-user'}};window.dispatchEvent(new Event('hsk-account-ready'));window.HSKStudio.navigate('music-play');});
+ assert.equal(await page.locator('#musicRecentList .music-recent-row').count(),0,'empty history never substitutes recommended songs');
+ assert.match(await page.locator('#musicRecentList').innerText(),/Chưa có bài nghe gần đây/);
+
  for(const [url,host] of [['https://youtu.be/abcdefghijk?si=x','www.youtube-nocookie.com'],['https://open.spotify.com/track/0123456789ABCDEFGHIJKL?si=x','open.spotify.com'],['https://soundcloud.com/artist/song?si=x','w.soundcloud.com']]){
  if(!(await page.locator('#musicMenuSheet').isVisible()))await page.locator('#musicMenuBtn').click();
  if(!(await page.locator('#musicLinkImport').evaluate(d=>d.open)))await page.locator('#musicLinkImport>summary').click();
