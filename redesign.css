@@ -3273,7 +3273,12 @@ body.studio-enabled .feature-hero:hover .hero-character{
 
 /* Preserve the app's safe-area-aware landscape navigation rail. */
 /* Retain full-frame disclosure hit areas and readable keyboard feedback. */
-html body.studio-enabled .about-logo { background:var(--press-active-bg); color:var(--palette-white); }
+@media (max-width:720px) {
+  html body:not(#_rd).studio-enabled .pathway { grid-template-columns:minmax(0,1fr) !important; }
+  html body.studio-enabled .path-step :is(strong,small) { overflow-wrap:anywhere; }
+}
+html body.studio-enabled .about-logo { background-color:var(--press-active-bg) !important; color:var(--palette-white); }
+html body:not(#_rd).studio-enabled :is(#planGoSetup,#planForm button[type=submit]) { background-color:var(--rd-static-color-041) !important; }
 html body:not(#_rd).studio-enabled summary { padding:12px 14px !important; }
 html body:not(#_rd).studio-enabled details:is(#homePlanSettings,#planSetup,.ps-disclosure,.hub-group,.dictionary-row,.lesson-sources,.mobile-account-group,.memory-schedule,.ocr-panel,.dictionary-summary,.mobile-home-stats,.word-relations,.confusion-candidate,.confusion-char-section,.details,.compare-lesson,.exam-sources,.rr-sources,.exam-feedback details,.plan-panel,.update-push-settings,.push-settings,.lesson-vocab,.clean-disclosure,.overview-search) {
   padding:12px !important;

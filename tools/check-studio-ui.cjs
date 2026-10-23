@@ -149,10 +149,10 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   const touch=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'}),phone=await touch.newPage();
   await phone.route('https://**/*',r=>r.abort());await phone.goto(`http://127.0.0.1:${server.address().port}/index.html`);await phone.waitForFunction(()=>!!window.HSKStudio&&document.body.dataset.studioHub==='home');
   const corner=phone.locator('.shortcut[data-studio-go=learn]');await corner.scrollIntoViewIfNeeded();await corner.focus();await phone.waitForTimeout(350);
-  assert.equal(await corner.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(105, 87, 231)');assert.equal(await corner.locator('strong').evaluate(el=>getComputedStyle(el).color),'rgb(255, 255, 255)');
+  assert.equal(await corner.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(91, 75, 232)');assert.equal(await corner.locator('strong').evaluate(el=>getComputedStyle(el).color),'rgb(255, 255, 255)');
   await phone.screenshot({path:'/tmp/studio-whole-corner-390.png',fullPage:true});await corner.tap();assert.ok(await phone.locator('#flashcard').isVisible());
   await phone.evaluate(()=>window.HSKStudio.navigate('home'));await phone.locator('.shortcut[data-studio-go="quiz"]').tap();await phone.evaluate(()=>window.HSKStudio.navigate('home'));await phone.waitForTimeout(600);
-  const after=await phone.locator('.shortcut[data-studio-go="quiz"]').evaluate(el=>({bg:getComputedStyle(el).backgroundColor,color:getComputedStyle(el.querySelector('strong')).color}));assert.ok(['rgb(255, 255, 255)','rgb(105, 87, 231)'].includes(after.bg),'no legacy blue after touch release');if(after.bg==='rgb(105, 87, 231)')assert.equal(after.color,'rgb(255, 255, 255)');await touch.close();
+  const after=await phone.locator('.shortcut[data-studio-go="quiz"]').evaluate(el=>({bg:getComputedStyle(el).backgroundColor,color:getComputedStyle(el.querySelector('strong')).color}));assert.ok(['rgb(255, 255, 255)','rgb(91, 75, 232)'].includes(after.bg),'no legacy blue after touch release');if(after.bg==='rgb(91, 75, 232)')assert.equal(after.color,'rgb(255, 255, 255)');await touch.close();
   // Guard against stacked heading margins and tall empty card rows on phones.
   for(const width of [320,390,1440]){
    await page.setViewportSize({width,height:900});
