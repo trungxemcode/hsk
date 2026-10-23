@@ -392,17 +392,53 @@
   const data={title:currentLinkTitle||'Bài hát',url:currentLinkUrl};
   try{if(navigator.share){await navigator.share(data);}else{await navigator.clipboard.writeText(currentLinkUrl);status('Đã sao chép link bài hát.');}}catch{}
  };
- let peekSuppressClick=false;
- if($('musicChillPeekToggle')){
-  const peek=$('musicChillPeekToggle');let pointerId=null,startY=0,lastY=0,dragging=false;
-  peek.onclick=e=>{if(peekSuppressClick){peekSuppressClick=false;e.preventDefault();return;}toggleMenu(true);};
-  peek.addEventListener('pointerdown',e=>{if(e.button!==undefined&&e.button!==0)return;pointerId=e.pointerId;startY=lastY=e.clientY;dragging=false;peek.style.transition='none';peek.setPointerCapture?.(pointerId);});
-  peek.addEventListener('pointermove',e=>{if(pointerId!==e.pointerId)return;lastY=e.clientY;const dy=Math.min(0,lastY-startY);if(Math.abs(dy)>4)dragging=true;if(dragging)peek.style.setProperty('--music-peek-drag',Math.max(-34,dy*.42)+'px');});
-  const finishPeekDrag=e=>{if(pointerId!==e.pointerId)return;const dy=lastY-startY;pointerId=null;peek.style.transition='';peek.style.removeProperty('--music-peek-drag');if(dragging){peekSuppressClick=true;setTimeout(()=>{peekSuppressClick=false;},400);if(dy<-26)toggleMenu(true);}};
-  peek.addEventListener('pointerup',finishPeekDrag);peek.addEventListener('pointercancel',finishPeekDrag);
+ // Drag surfaces follow the pointer every frame; only snapping is animated.
+ function bindMusicDrag(node,handlers){
+  let gesture=null,suppress=false;
+  node.addEventListener('click',e=>{if(suppress){e.preventDefault();e.stopImmediatePropagation();}},true);
+  const start=(y,x)=>{gesture={y,x,last:y,time:performance.now(),moved:false,data:null};};
+  const move=(y,x,e)=>{
+   if(!gesture)return;const g=gesture,dy=y-g.y;
+   if(!g.moved){if(Math.abs(dy)<4)return;if(Math.abs(x-g.x)>Math.abs(dy)){gesture=null;return;}g.data=handlers.start(dy);if(g.data===false){gesture=null;return;}g.moved=true;}
+   if(e.cancelable)e.preventDefault();if(e.pointerId!==undefined)node.setPointerCapture?.(e.pointerId);g.last=y;handlers.move(dy,g.data);
+  };
+  const end=cancel=>{if(!gesture)return;const g=gesture;gesture=null;if(g.moved){suppress=!cancel;setTimeout(()=>suppress=false,400);handlers.end(g.last-g.y,g.data,cancel,(g.last-g.y)/Math.max(1,performance.now()-g.time));}};
+  node.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'||e.button!==0)return;start(e.clientY,e.clientX);e.target.setPointerCapture?.(e.pointerId);});
+  node.addEventListener('pointermove',e=>{if(e.pointerType!=='touch')move(e.clientY,e.clientX,e);});
+  node.addEventListener('pointerup',e=>{if(e.pointerType!=='touch')end(false);});
+  node.addEventListener('pointercancel',e=>{if(e.pointerType!=='touch')end(true);});
+  node.addEventListener('touchstart',e=>{if(e.touches.length===1)start(e.touches[0].clientY,e.touches[0].clientX);else end(true);},{passive:true});
+  node.addEventListener('touchmove',e=>{if(e.touches.length===1)move(e.touches[0].clientY,e.touches[0].clientX,e);},{passive:false});
+  node.addEventListener('touchend',()=>end(false));node.addEventListener('touchcancel',()=>end(true));
  }
+ const menuSheet=$('musicMenuSheet'),menuBackdrop=$('musicMenuBackdrop');
+ const sheetDrag=opening=>({
+  start(dy){
+   if(opening&&dy>=0||!opening&&(dy<=0||menuSheet.scrollTop>0))return false;
+   if(opening){setMenuView('main');syncMenuTrackHead();menuSheet.scrollTop=0;}
+   const height=menuSheet.getBoundingClientRect().height+18;
+   panel.classList.add('music-sheet-dragging');menuSheet.style.visibility='visible';menuSheet.inert=false;
+   return {height,opening};
+  },
+  move(dy,g){const offset=Math.max(0,Math.min(g.height,(g.opening?g.height:0)+dy));menuSheet.style.transform='translate(-50%,'+offset+'px)';menuBackdrop.style.opacity=String(1-offset/g.height);menuBackdrop.style.visibility='visible';},
+  end(dy,g,cancel,velocity){
+   const open=cancel?!g.opening:g.opening?(-dy>Math.min(90,g.height*.25)||velocity<-.45):!(dy>Math.min(90,g.height*.25)||velocity>.45);
+   // Commit the finger position before enabling the snap transition.
+   void menuSheet.offsetHeight;panel.classList.remove('music-sheet-dragging');toggleMenu(open);
+   menuSheet.style.removeProperty('transform');menuSheet.style.removeProperty('visibility');menuBackdrop.style.removeProperty('opacity');menuBackdrop.style.removeProperty('visibility');
+  }
+ });
+ bindMusicDrag(menuSheet,sheetDrag(false));
+ if($('musicChillPeekToggle')){const peek=$('musicChillPeekToggle');peek.onclick=()=>toggleMenu(true);bindMusicDrag(peek,sheetDrag(true));}
  $('musicLyricsDrawerToggle').onclick=()=>toggleLyricsDrawer();
- if($('musicMiniMain'))$('musicMiniMain').onclick=()=>setPlayerExpanded(true);
+ if($('musicMiniMain')){
+  const mini=$('musicMiniMain'),stage=panel.querySelector('.music-stage');mini.onclick=()=>setPlayerExpanded(true);
+  bindMusicDrag(mini,{
+   start(dy){if(dy>=0)return false;const height=window.innerHeight;panel.classList.add('music-player-dragging');setPlayerExpanded(true);stage.style.transition='none';return {height};},
+   move(dy,g){stage.style.transform='translateY('+Math.max(0,g.height+dy)+'px)';},
+   end(dy,g,cancel,velocity){const open=!cancel&&(-dy>g.height*.25||velocity<-.45);void stage.offsetHeight;stage.style.transition='transform .32s cubic-bezier(.22,1,.36,1)';stage.style.transform='translateY('+(open?0:g.height)+'px)';setTimeout(()=>{setPlayerExpanded(open);panel.classList.remove('music-player-dragging');stage.style.removeProperty('transition');stage.style.removeProperty('transform');},340);}
+  });
+ }
  if($('musicMiniPlay'))$('musicMiniPlay').onclick=e=>{e.stopPropagation();$('musicLinkPlay').click();};
  if($('musicMiniSave'))$('musicMiniSave').onclick=e=>{e.stopPropagation();$('musicQuickSaveBtn').click();};
  if($('musicBrowseView')){
@@ -421,9 +457,6 @@
   });
  }
  {
-  let startY=0;
-  $('musicMenuSheet').addEventListener('touchstart',e=>{if($('musicMenuSheet').scrollTop<=4)startY=e.touches?.[0]?.clientY||0;},{passive:true});
-  $('musicMenuSheet').addEventListener('touchend',e=>{if(!startY)return;const dy=(e.changedTouches?.[0]?.clientY||0)-startY;startY=0;if(dy>52)toggleMenu(false);},{passive:true});
   let drawerStartY=0;
   $('musicLyricsDrawerCard').addEventListener('touchstart',e=>{drawerStartY=e.touches?.[0]?.clientY||0;},{passive:true});
   $('musicLyricsDrawerCard').addEventListener('touchend',e=>{if(!drawerStartY)return;const dy=(e.changedTouches?.[0]?.clientY||0)-drawerStartY;drawerStartY=0;if(dy<-30)toggleLyricsDrawer(true);else if(dy>30)toggleLyricsDrawer(false);},{passive:true});
