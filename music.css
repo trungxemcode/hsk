@@ -367,3 +367,12 @@ html body.studio-enabled button.music-mini-save[aria-pressed=true]:not(.correct)
 #musicMenuSheet button.music-save-row[aria-checked=true]{background:var(--legacy-hex-ffffff1f)!important}
 .music-sub-head{position:sticky;top:0;z-index:2;padding:8px 12px;background:var(--palette-dark-paper);border-bottom:1px solid var(--legacy-hex-ffffff1f)}
 @media(prefers-reduced-motion:reduce){.music-menu-backdrop,.music-menu-sheet,.music-lyrics-peek-btn,.music-playlist-card,.music-playlist-head,.music-playlist-track{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Finger tracking disables easing until release; scrolling inside the sheet is preserved. */
+.music-panel.music-sheet-dragging .music-menu-sheet,.music-panel.music-sheet-dragging .music-menu-backdrop{transition:none!important;visibility:visible}
+.music-sheet-drag-area{touch-action:none}
+.music-panel.music-player-dragging .music-stage{position:fixed;inset:0;z-index:85;overflow:auto;background:var(--palette-dark-paper);will-change:transform}
+.music-panel.music-player-dragging #musicMiniPlayer{display:block!important}
+html body.studio-enabled .music-mini-inner{padding:0 8px 0 0;gap:0}
+html body.studio-enabled button.music-mini-main:not(.correct):not(.wrong){align-self:stretch;padding:8px 12px!important;border-radius:0!important;touch-action:none}
+html body.studio-enabled button.music-mini-main:not(.correct):not(.wrong):is(:hover,:active,:focus-visible){background:var(--button-active-bg)!important}
