@@ -157,6 +157,7 @@
     "src/modules/speech/voice-manager.js",
     "src/modules/speech/voice-settings.js",
     "src/modules/speech/voice-pack-worker.js",
+    "src/modules/speech/voice-model-transport.js",
     "src/modules/speech/voice-catalog.json",
     "src/modules/speech/voice-model.js",
     "content/voice-demos/zm_yunjian.mp3"

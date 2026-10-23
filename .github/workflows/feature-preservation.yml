@@ -70,6 +70,7 @@ jobs:
           node tools/check-invidious-discovery.cjs
           node tools/check-voice-demo-offline-range.cjs
           node tools/check-yunjian-only.cjs
+          node tools/check-yunjian-model-transport.cjs
           node tools/check-reading-dom.cjs
           node tools/check-studio-dom.cjs
           node tools/check-notebook-dom.cjs
