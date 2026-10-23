@@ -29,6 +29,29 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
     const row=await page.evaluate(async()=> (await HSKMusicOffline.list('offline-one'))[0]);
     assert.equal(row?.bitrate,Number(quality),await page.locator('#musicOfflineUsage').innerText());assert.ok(row.size>lastSize);lastSize=row.size;
    }
+   // Direct mode fetches API + proxy bytes from the browser, never the HSK resolver.
+   let directMode='piped',cancelProbe=false,directFetches=0;
+   const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'GET,POST,OPTIONS','Access-Control-Allow-Headers':'Content-Type'};
+   await page.route('**/music-config.json',r=>r.fulfill({json:{offlineDirect:{enabled:true,instances:directMode==='piped'?[{type:'piped',url:'https://unavailable.example.com'},{type:'piped',url:'https://piped.example.com'}]:[{type:'cobalt',url:'https://cobalt.example.com'}]}}}));
+   await page.route('https://unavailable.example.com/**',r=>r.fulfill({status:503,headers:cors,body:'unavailable'}));
+   const directHandler=async r=>{
+    assert.equal(r.request().headers().authorization,undefined,'HSK account token never reaches a third-party API');
+    if(r.request().method()==='OPTIONS')return r.fulfill({status:204,headers:cors});
+    if(cancelProbe)await new Promise(resolve=>setTimeout(resolve,1000));
+    const pathname=new URL(r.request().url()).pathname;
+    if(pathname.startsWith('/streams/'))return r.fulfill({headers:cors,json:{duration:6,proxyUrl:'https://media.example.com',audioStreams:[{quality:'128 kbps',mimeType:'audio/mp4',url:'https://media.example.com/audio'}]}});
+    if(pathname==='/')return r.fulfill({headers:cors,json:{status:'tunnel',url:'https://cobalt.example.com/tunnel?id=test'}});
+    directFetches++;return r.fulfill({headers:{...cors,'Content-Type':'audio/mp4'},body:fs.readFileSync(path.join(root,'tools/fixtures/music-heaacv2-64k.m4a'))});
+   };
+   await page.route('https://piped.example.com/**',directHandler);await page.route('https://media.example.com/**',directHandler);await page.route('https://cobalt.example.com/**',directHandler);
+   for(const mode of ['piped','cobalt']){
+    directMode=mode;await page.locator('#musicOfflineQuality').selectOption('64');await page.locator('#musicOfflineAddCurrent').click();
+    await page.waitForFunction(()=>document.getElementById('musicOfflineCancel').hidden,{},{timeout:120000});
+    assert.equal((await page.evaluate(async()=> (await HSKMusicOffline.list('offline-one'))[0])).bitrate,64,await page.locator('#musicOfflineUsage').innerText());
+   }
+   assert.equal(directFetches,2);assert.equal(sourceRequests,3,'direct mode never contacts HSK source resolver');
+   const beforeCancel=await page.evaluate(()=>HSKMusicOffline.usage());cancelProbe=true;await page.locator('#musicOfflineAddCurrent').click();await page.locator('#musicOfflineCancel').click();await page.waitForFunction(()=>document.getElementById('musicOfflineCancel').hidden);
+   assert.equal(await page.evaluate(()=>HSKMusicOffline.usage()),beforeCancel,'cancel preserves the prior offline audio');cancelProbe=false;
    assert.equal(sourceRequests,3);await page.locator('#musicOfflineList .music-row-del').click();await page.waitForFunction(()=>!document.querySelector('#musicOfflineList .music-offline-item'));
    await upload('#musicOfflineAttachFile');assert.equal(await page.locator('#musicOfflineList .music-offline-item').count(),1);
    const bytes=await page.evaluate(()=>HSKMusicOffline.usage());assert.ok(bytes>0&&bytes<100*1024*1024);
@@ -54,7 +77,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await page.evaluate(()=>window.__offlineAudio.paused),true,'route re-entry restores local source without autoplay');
    await openOffline();await page.locator('#musicOfflineList .music-row-del').first().click();await page.waitForFunction(()=>document.querySelectorAll('#musicOfflineList .music-offline-item').length===1);assert.equal(await page.evaluate(()=>HSKMusicOffline.usage()),bytes,'deleting one shared reference retains the file');
    await page.locator('#musicOfflineList .music-row-del').click();await page.waitForFunction(()=>document.querySelectorAll('#musicOfflineList .music-offline-item').length===0);assert.equal(await page.evaluate(()=>HSKMusicOffline.usage()),0);
-   await page.context().setOffline(false);assert.deepEqual(errors,[]);console.log('PASS offline music UI',width,'real WASM 32/64/96 link conversion, M4A import, dedup, account isolation, reload persistence, real offline play/pause/seek, delete');await page.close();
+   await page.context().setOffline(false);assert.deepEqual(errors,[]);console.log('PASS offline music UI',width,'real WASM 32/64/96, browser-direct Piped/Cobalt, cancel, M4A import, dedup, account isolation, reload persistence, real offline play/pause/seek, delete');await page.close();
   }
  }finally{await browser?.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
