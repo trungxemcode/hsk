@@ -65,6 +65,7 @@ jobs:
         run: |
           node --test server/*.test.mjs
           node tools/check-music-offline.cjs
+          node tools/check-music-local-files-only.cjs
           node tools/check-music-codec.cjs
           node tools/check-music-direct-source.cjs
           node tools/check-invidious-discovery.cjs

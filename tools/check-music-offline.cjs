@@ -16,8 +16,13 @@ const O=w.HSKMusicOffline,bytes=fs.readFileSync('tools/fixtures/music-heaacv2-64
  assert.equal((await O.get('b','https://youtu.be/abcdefghijk')).blob.size,size);
  await O.remove('a','https://youtu.be/abcdefghijk');await O.remove('a','https://youtu.be/123456789ab');assert.equal(await O.usage(),size,'do not delete another account shared asset');
  await O.remove('b','https://youtu.be/abcdefghijk');assert.equal(await O.usage(),0,'last reference frees actual bytes');
- await assert.rejects(O.put('a',{},new File(['not audio'],'bad.mp3')),/m4a/);
+ await assert.rejects(O.put('a',{},new File(['not audio'],'bad.mp3')),/không hợp lệ/);
  await assert.rejects(O.put('a',{},new File(['not audio'],'bad.m4a')),/hợp lệ/);
+ const mp3=new File([new Uint8Array([73,68,51,4,0,0,0,0,0,0,255,251,144,100])],'test.mp3',{type:'audio/mpeg'});
+ const mp3url=await O.put('a',{title:'Bản MP3 người dùng chọn'},mp3);
+ const mp3entry=await O.get('a',mp3url);
+ assert.equal(mp3entry.blob.type,'audio/mpeg','locally uploaded MP3 stays playable without transcoding');
+ await O.remove('a',mp3url);
  await assert.rejects(O.put('a',{},file,()=>false),/Đã đổi/);assert.equal(await O.usage(),0,'cancelled account/import cannot write');
  // Reserve the storage budget without allocating a 100 MB test recording.
  const db=await new Promise((resolve,reject)=>{const r=indexedDB.open('hsk-music-offline-v1',1);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});

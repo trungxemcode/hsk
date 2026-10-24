@@ -1,3 +1,10 @@
+## 2026-10-24: Bỏ tải nhạc từ link, giữ nghe ngoại tuyến bằng file do người dùng chọn
+- User quyết định không dùng AWS/Oracle/R2/yt-dlp cho nhạc. PR #173 đã đóng, chưa merge.
+- Nhánh \`fix/remove-music-offline-20261024\` dựa trên main: gỡ link-to-offline (nút, URL form, nguồn downloader, trạng thái background, tự resume), giữ lại IndexedDB + phát offline + file M4A cũ, thêm hỗ trợ file MP3 do người dùng chọn.
+- Giữ nguyên nghe nhạc trực tuyến, playlist, nhập nguồn URL để phát, audio học HSK, offline của các tính năng học khác. Không xóa kho người dùng.
+- Không tải WASM transcode cho music khi khởi động. Server source resolver giữ mã lịch sử nhưng không được gọi và chưa triển khai.
+- Cần CI bảo toàn chức năng, kiểm thử trình duyệt 390/1440, PWA release.
+
 ## Four direct search tools — 2026-10-24
 - Branch feat/search-four-tools from main01fcea8 (3.14.1). Owner asked to split combined vocabulary/handwriting and translation/OCR controls into four compact buttons. One equal-width row: Từ vựng, Vẽ chữ, Dịch câu, Đọc ảnh; selection and header follow exact tool, global Search remains active.
 - Preserve all routes/IDs/API/storage. Original handwritingOpen button moves into the first toolbar and keeps its worker/handlers. Handwriting hides vocabulary entry/scope controls; image view opens existing OCR while sentence view keeps its form separate. OCR→translation transfer and legacy home/image entry remain supported. No auto API call, picker or keyboard on tool selection.

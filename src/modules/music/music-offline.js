@@ -21,13 +21,16 @@
  });}
  async function usage(){return transaction('readonly',async s=>(await request(s.assets.getAll())).reduce((n,a)=>n+a.size,0));}
  async function put(owner,track,file,isCurrent=()=>true){
-  if(!file||file.size<=0||file.size>50*1024*1024)throw Error('Chọn file M4A từ 1 byte đến 50 MB.');
-  if(!/\.m4a$/i.test(file.name||''))throw Error('Chọn file .m4a đã chuẩn bị để nghe ngoại tuyến.');
+  if(!file||file.size<=0||file.size>50*1024*1024)throw Error('Chọn file MP3 hoặc M4A dưới 50 MB.');
+  const ext=(file.name||'').toLowerCase().match(/\.(mp3|m4a)$/)?.[1];
+  if(!ext)throw Error('Chỉ hỗ trợ file MP3 hoặc M4A để nghe ngoại tuyến.');
   const bytes=await file.arrayBuffer();const h=new Uint8Array(bytes,0,Math.min(64,bytes.byteLength));
-  if(!String.fromCharCode(...h).includes('ftyp'))throw Error('File này không phải tệp M4A/MP4 hợp lệ.');
+  const isM4a=ext==='m4a'&&String.fromCharCode(...h).includes('ftyp');
+  const isMp3=ext==='mp3'&&((h[0]===73&&h[1]===68&&h[2]===51)||(h[0]===255&&(h[1]&0xe0)===0xe0));
+  if(!isM4a&&!isMp3)throw Error('File âm thanh không hợp lệ hoặc không khớp định dạng MP3/M4A.');
   const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join('');
   if(!isCurrent())throw new DOMException('Đã đổi tài khoản hoặc bài hát.','AbortError');
-  const url=track.url||'offline:'+hash,id=identity(owner,url),blob=new Blob([bytes],{type:'audio/mp4'});
+  const url=track.url||'offline:'+hash,id=identity(owner,url),blob=new Blob([bytes],{type:isMp3?'audio/mpeg':'audio/mp4'});
   await transaction('readwrite',async s=>{
    const [assets,tracks]=await Promise.all([request(s.assets.getAll()),request(s.tracks.getAll())]);
    const previous=tracks.find(t=>t.id===id),other=tracks.filter(t=>t.id!==id);
@@ -37,7 +40,7 @@
    if(!isCurrent())throw new DOMException('Đã đổi tài khoản hoặc bài hát.','AbortError');
    if(discard)s.assets.delete(discard);
    s.assets.put({id:hash,blob,size:blob.size});
-   s.tracks.put({id,owner,url,asset:hash,title:String(track.title||file.name.replace(/\.m4a$/i,'')).slice(0,120),author:String(track.author||'Nhạc trên thiết bị').slice(0,120),bitrate:[32,64,96].includes(track.bitrate)?track.bitrate:null,size:blob.size,addedAt:Date.now()});
+   s.tracks.put({id,owner,url,asset:hash,title:String(track.title||file.name.replace(/\.(m4a|mp3)$/i,'')).slice(0,120),author:String(track.author||'Nhạc trên thiết bị').slice(0,120),bitrate:[32,64,96].includes(track.bitrate)?track.bitrate:null,size:blob.size,addedAt:Date.now()});
   });return url;
  }
  async function get(owner,url){return transaction('readonly',async s=>{const track=await request(s.tracks.get(identity(owner,url)));if(!track)return null;const asset=await request(s.assets.get(track.asset));return asset?.blob?.size===track.size?{...track,blob:asset.blob}:null;});}
