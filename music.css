@@ -447,3 +447,129 @@ body.music-background-active .workspace { padding-bottom:calc(170px + env(safe-a
 .music-coccoc-row[hidden],.music-coccoc-note[hidden]{display:none!important}
 .music-coccoc-mode{font-weight:600}
 .music-coccoc-mode-note{padding:0 14px 6px;margin:0;line-height:1.4;font-size:12px;white-space:normal}
+
+/* 3.15.9: iPhone full-player geometry. Keep every action inside the viewport. */
+html body.studio-enabled .music-panel.music-player-expanded .music-np{
+ display:grid;grid-template-rows:minmax(50px,auto) minmax(0,1fr) auto;
+ height:100dvh;max-height:100dvh;min-height:0;
+ padding:max(12px,env(safe-area-inset-top)) clamp(14px,4vw,24px) max(16px,env(safe-area-inset-bottom));
+ row-gap:clamp(6px,1.6dvh,12px);
+ overflow:hidden;
+}
+.music-panel.music-player-expanded #musicLinkPreview{
+ box-sizing:border-box;min-height:0;max-height:100%;overflow-y:auto;overscroll-behavior:contain;
+ align-content:safe center;scrollbar-width:none;
+ width:min(100%,440px);padding-inline:0;
+}
+.music-panel.music-player-expanded #musicLinkPreview::-webkit-scrollbar{display:none}
+.music-panel.music-player-expanded .music-cover{
+ width:min(100%,min(44dvh,310px));max-width:100%;margin-inline:auto;flex:none;
+}
+.music-panel.music-player-expanded .music-np-title-row{
+ grid-template-columns:minmax(0,1fr) 44px;align-items:start;column-gap:12px;min-width:0
+}
+.music-panel.music-player-expanded .music-np-title-copy{min-width:0;overflow-wrap:break-word}
+.music-panel.music-player-expanded #musicLinkTitle{font-size:clamp(18px,4.9vw,25px);line-height:1.27}
+html body.studio-enabled .music-panel .music-np button.music-quick-save-btn:not(.correct):not(.wrong){
+ width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;
+ max-width:44px!important;max-height:44px!important;
+ padding:0!important;margin:0!important;align-self:start;justify-self:end;
+ border-radius:var(--radius-14px)!important;display:grid!important;place-items:center!important;
+}
+.music-panel .music-np button.music-quick-save-btn svg{width:22px;height:22px;flex:none}
+.music-panel.music-player-expanded #musicBottomDock{
+ box-sizing:border-box;width:min(100%,440px);min-height:0;max-height:100%;
+ align-self:end;margin:0 auto;padding:4px 0 0;gap:8px
+}
+.music-panel.music-player-expanded .music-aux-bar{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-items:center;align-items:center;
+ gap:0;width:100%;min-height:46px;
+}
+html body.studio-enabled .music-panel .music-np .music-aux-bar button.music-aux-btn:not(.correct):not(.wrong){
+ display:grid!important;place-items:center!important;width:48px!important;height:44px!important;
+ padding:0!important;margin:0!important;min-width:48px!important;max-width:48px!important;
+}
+.music-panel.music-player-expanded .music-lyrics-peek-card{
+ flex:none;margin:0;min-height:58px;max-height:76px;overflow:hidden;
+ padding:5px 10px 8px;border-radius:var(--radius-22px-22px-0-0);
+}
+.music-panel.music-player-expanded .music-lyrics-peek-btn{
+ min-height:44px!important;width:100%;display:grid;align-content:center;justify-items:center;
+ gap:3px;padding:0!important;margin:0!important;
+}
+.music-panel.music-player-expanded .music-lyrics-peek-row{min-height:28px;align-items:center;justify-content:center}
+.music-panel.music-player-expanded .music-lyrics-pill-bar{height:4px}
+@media(max-height:760px){
+ .music-panel.music-player-expanded .music-cover{width:min(100%,min(35dvh,250px))}
+ .music-panel.music-player-expanded #musicLinkPreview{gap:5px}
+ .music-panel.music-player-expanded .music-lyrics-peek-card{min-height:52px}
+}
+@media(max-width:360px){
+ .music-panel.music-player-expanded #musicLinkTitle{font-size:18px}
+ .music-panel.music-player-expanded .music-transport{gap:3px}
+}
+/* Compact, aligned background mini-player outside the music route */
+html body.studio-enabled #musicBackgroundPlayer{
+ display:grid;grid-template-columns:minmax(0,1fr) 44px 44px;
+ gap:6px;align-items:center;box-sizing:border-box;min-height:68px;
+ padding:8px 10px;right:12px;left:12px;width:auto;max-width:430px;margin-inline:auto;
+ bottom:calc(86px + env(safe-area-inset-bottom));
+ border-radius:var(--radius-18px);
+}
+html body.studio-enabled #musicBackgroundPlayer[hidden]{display:none!important}
+html body.studio-enabled #musicBackgroundPlayer .music-background-title{
+ display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+ text-align:left;min-width:0;min-height:44px;height:44px;
+ line-height:28px;padding:8px!important;margin:0!important;
+ font-size:14px;font-weight:600;box-sizing:border-box;
+}
+html body.studio-enabled #musicBackgroundPlayer button.music-background-control{
+ display:grid!important;place-items:center!important;box-sizing:border-box!important;
+ width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;
+ padding:0!important;margin:0!important;border:0!important;border-radius:var(--radius-btn)!important;
+ background:var(--palette-clear)!important;color:var(--ink)!important;line-height:1;
+}
+html body.studio-enabled #musicBackgroundPlayer .music-background-control svg{
+ display:block!important;width:22px;height:22px;fill:none;
+}
+@media(max-width:420px){html body.studio-enabled #musicBackgroundPlayer{grid-template-columns:minmax(0,1fr) 40px 40px;gap:4px}html body.studio-enabled #musicBackgroundPlayer button.music-background-control{width:40px!important;height:44px!important;min-width:40px!important}}
+
+/* Queue-peek must contribute real intrinsic height to the grid's bottom row.
+   Otherwise the visible button overflows the 90px dock and clips on iPhone. */
+html body.studio-enabled .music-panel.music-player-expanded #musicBottomDock{
+ height:112px!important;min-height:112px!important;max-height:112px!important;
+ grid-template-rows:44px 60px!important;grid-auto-rows:auto;
+ gap:8px!important;align-content:start!important;overflow:visible!important;
+}
+html body.studio-enabled .music-panel.music-player-expanded #musicChillPeekCard{
+ display:block;box-sizing:border-box;height:60px!important;min-height:60px!important;
+ max-height:60px!important;padding:6px 10px 8px!important;margin:0!important;overflow:hidden
+}
+html body.studio-enabled .music-panel.music-player-expanded #musicChillPeekToggle{
+ box-sizing:border-box;height:44px!important;min-height:44px!important;max-height:44px!important;
+ padding:0!important;align-content:center!important
+}
+
+/* Use a viewport-anchored dock rather than an implicit grid row. iOS Safari
+   can size the intrinsic row smaller than its queue-handle descendants. */
+html body.studio-enabled .music-panel.music-player-expanded .music-np{
+ grid-template-rows:50px minmax(0,1fr)!important;
+}
+html body.studio-enabled .music-panel.music-player-expanded #musicLinkPreview{
+ grid-row:2;align-self:stretch;height:100%;max-height:100%;
+ padding-bottom:128px!important;overflow-y:auto!important;
+}
+html body.studio-enabled .music-panel.music-player-expanded #musicBottomDock{
+ position:absolute!important;z-index:9;
+ inset:auto clamp(14px,4vw,24px) max(12px,env(safe-area-inset-bottom))!important;
+ width:auto!important;margin:0!important;box-sizing:border-box!important;
+ background:linear-gradient(180deg,transparent,var(--palette-dark-paper) 25%,var(--palette-dark-paper));
+ border-radius:var(--radius-22px-22px-0-0);
+}
+
+html body.studio-enabled .music-panel.music-player-expanded #musicLinkPreview{
+ box-sizing:border-box!important;height:calc(100dvh - 100px)!important;
+ min-height:0!important;max-height:calc(100dvh - 100px)!important;
+ overflow-y:auto!important;overflow-x:hidden!important;
+ align-content:safe start!important;
+}

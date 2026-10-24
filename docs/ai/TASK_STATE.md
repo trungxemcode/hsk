@@ -1,3 +1,10 @@
+## 2026-10-24 — iOS music UX + truthful Cốc Cốc offline-link flow
+- Address full-player bottom queue clipping, unaligned mini-player controls and quick-save plus button.
+- Replace Cốc Cốc-specific MP3-import shortcut with URL handoff for Cốc Cốc-managed Listening List offline audio. A downloaded file in Cốc Cốc's browser-private store is not accessible to HSK PWA/IndexedDB.
+- iOS YouTube official iframe cannot be forced by website JavaScript to keep playing on app exit/lock screen. Avoid simulated continuous playback and scraping.
+- 24 Windows Cốc Cốc YouTube video pages probed: 24 players loaded, 0 early ad markers; not conclusive of ad-blocking on iOS/through iframe.
+- Regression checks: Playwright 320/390/430 for viewport and controls plus old online/offline and browser declaration checks.
+
 ## 2026-10-24 — Cốc Cốc self-declaration supersedes UA-only experiment
 - User explicitly approved self-declaration after real Cốc Cốc Windows exposed only Chrome identifiers. Branch PR #181 updated with reversible "Tôi đang dùng Cốc Cốc" button in Music 3-dot menu.
 - Only browser-specific actions hidden by default elsewhere, but the opt-in setting is visible so users whose Coc Coc UA looks like Chrome can enable them. Stored under \`hsk-music-coccoc-mode-v1\` in the local origin storage for the browser/PWA installation; explicit on/off overrides auto detection.

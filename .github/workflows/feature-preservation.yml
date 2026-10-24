@@ -104,6 +104,7 @@ jobs:
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-offline-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-online-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-coccoc-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-ios-layout.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-module-loading-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-drive-images-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-backup-relocation-ui.cjs

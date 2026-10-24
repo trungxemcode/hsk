@@ -90,21 +90,34 @@
    // HSK neither controls those extensions nor downloads provider media.
    coccocOpen.href=url;
   };
-  const coccocImport=el('button','Nhập MP3/M4A đã lưu trên máy','music-flat-row music-chill-only music-coccoc-row');
-  coccocImport.id='musicCocCocImport';coccocImport.type='button';coccocImport.dataset.menuView='main';
-  coccocImport.onclick=()=>{if(coccocEnabled)chooseOfflineFile(false);};
-  const coccocNote=el('p','Mở trang nguồn trong Cốc Cốc để dùng chức năng trình duyệt nếu được hỗ trợ. Sau khi có file MP3/M4A hợp lệ, chọn Nhập file. HSK không tự tải âm thanh hoặc bật chặn quảng cáo; Cốc Cốc trên iPhone có giới hạn.','music-empty-note music-chill-only music-coccoc-note');
+  // Cốc Cốc iPhone offers its own playlist with offline downloads, but
+  // websites cannot access that private media store or start its download API.
+  const coccocOffline=el('a','Lưu link để nghe ngoại tuyến trong Cốc Cốc','music-flat-row music-chill-only music-coccoc-row');
+  coccocOffline.id='musicCocCocOffline';coccocOffline.dataset.menuView='main';
+  coccocOffline.target='_blank';coccocOffline.rel='noopener noreferrer';coccocOffline.href='#';
+  coccocOffline.onclick=e=>{
+   if(!coccocEnabled){e.preventDefault();return;}
+   const url=coccocBridge?.providerSource(currentLinkUrl,C.parseLink);
+   if(!url){e.preventDefault();status('Chọn bài YouTube hoặc SoundCloud để lưu trong Danh sách nghe Cốc Cốc trước.');return;}
+   coccocOffline.href=url;
+  };
+  const coccocNote=el('p',
+   'Cốc Cốc iPhone: mở trang bài hát → chạm Thêm trên thanh địa chỉ → chọn Danh sách nghe → tại bài hát chọn Cho phép nghe ngoại tuyến. File được Cốc Cốc quản lý và phát trong Cốc Cốc, KHÔNG tự chuyển sang kho HSK. HSK không thể tự nhấn Tải hoặc chặn quảng cáo cho trình duyệt.',
+   'music-empty-note music-chill-only music-coccoc-note');
   coccocNote.id='musicCocCocNote';coccocNote.dataset.menuView='main';
-  $('musicMenuOfflineRow').before(coccocMode,coccocModeNote,coccocOpen,coccocImport,coccocNote);
+  $('musicMenuOfflineRow').before(coccocMode,coccocModeNote,coccocOpen,coccocOffline,coccocNote);
   function syncCocCoc(){
    coccocMode.textContent='Tôi đang dùng Cốc Cốc: '+(coccocEnabled?'Bật':'Tắt');
    coccocMode.setAttribute('aria-pressed',String(coccocEnabled));
-   coccocOpen.hidden=coccocImport.hidden=coccocNote.hidden=!coccocEnabled;
-   if(!coccocEnabled){coccocOpen.href='#';return;}
+   coccocOpen.hidden=coccocOffline.hidden=coccocNote.hidden=!coccocEnabled;
+   if(!coccocEnabled){coccocOpen.href='#';coccocOffline.href='#';return;}
    const url=coccocBridge?.providerSource(currentLinkUrl,C.parseLink);
    coccocOpen.href=url||'#';
+   coccocOffline.href=url||'#';
    coccocOpen.setAttribute('aria-disabled',String(!url));
+   coccocOffline.setAttribute('aria-disabled',String(!url));
    coccocOpen.classList.toggle('music-coccoc-disabled',!url);
+   coccocOffline.classList.toggle('music-coccoc-disabled',!url);
   }
   coccocMode.onclick=()=>{
    const next=!coccocEnabled;
@@ -116,7 +129,11 @@
   syncCocCoc();
  const backgroundPlayer=el('div',undefined,'music-background-player');
  backgroundPlayer.id='musicBackgroundPlayer';backgroundPlayer.hidden=true;backgroundPlayer.setAttribute('role','region');backgroundPlayer.setAttribute('aria-label','Nhạc đang phát');
- const backgroundTitle=el('button'),backgroundPlay=el('button'),backgroundClose=el('button','×');
+ const backgroundTitle=el('button'),backgroundPlay=el('button'),backgroundClose=el('button');
+  backgroundPlay.className='music-background-control music-background-play';
+  backgroundClose.className='music-background-control music-background-stop';
+  backgroundClose.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+  backgroundClose.setAttribute('aria-label','Dừng nhạc');
  for(const button of [backgroundTitle,backgroundPlay,backgroundClose])button.type='button';
  backgroundTitle.className='music-background-title';backgroundTitle.onclick=()=>window.HSKStudio?.navigate('music-play');
  backgroundPlay.onclick=()=>$('musicLinkPlay').click();

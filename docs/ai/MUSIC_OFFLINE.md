@@ -1,3 +1,31 @@
+## 2026-10-24 — iOS player UX + Cốc Cốc Listening List handoff
+
+User clarified: saving a URL in Cốc Cốc means opening the song's official
+provider page and letting the browser itself add/download it to Cốc Cốc's
+Listening List for offline play; not selecting an MP3 file manually.
+The Cốc Cốc-only action is now named 'Lưu link để nghe ngoại tuyến trong
+Cốc Cốc'. HSK cannot call a browser download API or read Cốc Cốc's private
+audio files; a source URL by itself is NOT an offline file in HSK IndexedDB.
+HSK's separate user-uploaded MP3/M4A library continues to work.
+
+iOS YouTube iframe background playback: browser and official embed dependent.
+An installed iPhone PWA cannot reliably keep YouTube playback when screen
+locks or user exits. There is no honest JavaScript fix or native audio
+extraction in this change. Native HTMLAudioElement backed by permitted direct
+audio/file can use browser background playback where supported; for YouTube,
+recommend browser-owned Cốc Cốc Listening List rather than falsely promising
+automatic continuation in HSK.
+
+UI fixes: properly sized 44x44 plus button, queue peek inside viewport,
+3-column aligned controls, aligned icon buttons in external mini-player.
+Geometric Playwright tests on 320px, 390px and 430px verify button bounds,
+dock, mini-player. Real iOS safe area may differ from Chromium emulation.
+
+Ad-block probe: 24 YouTube pages on Windows Cốc Cốc automation, 24 player
+containers loaded; no *early visible* ad indicators in 3.6 second windows.
+This is NOT proof of zero ads; no claim for mid-rolls, iPhone or PWA iframe.
+See project conversation for probe and limitations.
+
 ## 2026-10-24 — Updated design: optional manual Cốc Cốc declaration (3.15.7)
 
 The user approved a manual browser declaration because Cốc Cốc can deliberately
