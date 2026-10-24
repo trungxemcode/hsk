@@ -131,3 +131,9 @@ The expanded chill player uses a fixed `100dvh` grid in `redesign.css` with clip
 
 ### Background guard adapter (3.15.14)
 `music.js::BackgroundPlaybackGuard` routes center-button and MediaSession intent through the existing keep-alive lifecycle; onReady/state callbacks attach it without duplicate audio/timers. Real visibility and bounded retry remain intact. YouTube container is created inside `musicLinkCover`, min200px iframe under thumbnail with opacity.01 (`music.css`), preserving route instance and music artwork UI. Online browser tests assert computed geometry and gesture-time audio play; real-device lock-screen testing remains required.
+
+### AWS online audio (3.16.1)
+`music-config.json::onlineResolver` enables `music.js::mountOnlineYouTube` for chill YouTube links: exact-ID authenticated resolve, persistent native audio primed in gesture, direct googlevideo first, short-lived relay then bounded exact-source refresh on failure/stall. No media downloads/IndexedDB or catalogue substitution. `server/music/online_resolver.py` runs on AWS behind existing HTTPS with bounded extraction/rate/cache/relay. See ONLINE-PLAYBACK.md; tests check-music-aws-ui.cjs and check-music-online-resolver.py. Physical device suspension/lock-screen remains a separate check.
+
+### Device offline save restored (3.16.1 scope update)
+Owner cancelled VPS disk-cache proposal before deployment. `music.js::readDeviceAudio`/musicDeviceSave explicitly fetch original resolved M4A (direct or relay) into existing HSKMusicOffline owner-specific library; streamed progress/global banner/cancel,50MB file and100MB library bounds, complete-file validation. In-app routes do not cancel saving; account changes do. No server media storage, transcoding or new provider search. AWS UI covers device persistence and real offline blob playback.

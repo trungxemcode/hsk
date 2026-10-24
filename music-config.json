@@ -8,5 +8,6 @@
     "enabled": false,
     "experimental": false,
     "instances": []
-  }
+  },
+  "onlineResolver": "https://flamboyant-curran.13-211-174-192.plesk.page"
 }
