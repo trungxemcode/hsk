@@ -1286,7 +1286,8 @@
  document.addEventListener('visibilitychange',()=>{if(document.hidden)checkpoint(true);syncBackgroundPlayer();});window.addEventListener('pagehide',()=>checkpoint(true));
  new MutationObserver(()=>{if(panel.hidden&&opened){opened=false;toggleMenu(false);toggleQueue(false);if(!canPlayBackground()){stop();fetcher?.abort();++serial;}}syncBackgroundPlayer();backgroundDownload.hidden=!panel.hidden||!backgroundDownload.textContent;}).observe(panel,{attributes:true,attributeFilter:['hidden']});
 window.addEventListener('hsk-account-ready',()=>{onlineQueueMode=false;onlineNote.hidden=true;onlineNote.textContent='';if(offlineDownload&&offlineDownload.owner!==owner())offlineDownload.abort();offlineRows=[];offlineContext=false;++offlineRequest;metaCache={};fetcher?.abort();++serial;release(false);song=null;catalog=BUILTIN_SONGS.map(C.validateSong);progress={};currentLinkUrl='';currentLinkTitle='';currentLinkAuthor='';activePlaylistId='';playerExpanded=false;toggleQueue(false);panel.classList.remove('music-player-expanded');$('musicLesson').hidden=true;toggleMenu(false);toggleLyricsDrawer(false);syncEmptyState();$('musicLinkUrl').value='';$('musicLinkName').value='';$('musicLinkLyrics').value='';drawCatalog();drawPlaylists();drawLinks();drawRecentBrowse();drawBrowsePlaylists();history();loadOffline();if(opened)refresh();});
- window.HSKMusic={enter(mode){
+ window.addEventListener('hsk-storage-cleaned',event=>{if(event.detail?.musicUrls){if(offlineContext&&event.detail.musicUrls.includes(currentLinkUrl)){++serial;clearPreview();offlineContext=false;syncMiniPlayer();}loadOffline();}});
+ window.HSKMusic={get downloadingOffline(){return !!offlineDownload;},enter(mode){
   opened=true;
   toggleQueue(false);
   loadOffline();

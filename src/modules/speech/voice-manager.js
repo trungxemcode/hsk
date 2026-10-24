@@ -46,7 +46,7 @@ async function install(voiceId,onProgress=()=>{}){
  }finally{candidate?.close();if(installController===controller)installController=null;}
 }
 function cancelInstall(){operation++;installController?.abort();}
-async function chooseDevice(voiceURI=''){cancelInstall();await ready;if(!store){persist({source:'device',voiceURI,voiceId:'',assets:[],revision:selection.revision+1});return;}const before=await store.snapshot(),next=await store.replace(before.revision,{source:'device',voiceURI,voiceId:'',assets:[],files:[]},new Map());stopAudio();dispose();persist(next);}
+async function chooseDevice(voiceURI='',expectedRevision){cancelInstall();await ready;if(!store){persist({source:'device',voiceURI,voiceId:'',assets:[],revision:selection.revision+1});return;}const before=await store.snapshot();if(expectedRevision!==undefined&&before.revision!==expectedRevision)throw Error('Giọng đã thay đổi. Hãy xem lại danh sách trước khi xóa.');const next=await store.replace(before.revision,{source:'device',voiceURI,voiceId:'',assets:[],files:[]},new Map());stopAudio();dispose();persist(next);}
 function scheduleIdle(){clearTimeout(idleTimer);idleTimer=setTimeout(()=>{if(workerClient?.busy||playReject)scheduleIdle();else dispose();},45000);}
 async function speak(text,rate=.85,signal){
  const run=++speechRun;
@@ -57,7 +57,7 @@ async function speak(text,rate=.85,signal){
  await new Promise((resolve,reject)=>{source=ac.createBufferSource();source.buffer=buffer;source.connect(ac.destination);playReject=reject;source.onended=()=>{source?.disconnect();source=null;playReject=null;resolve(true);};source.start();});
  }finally{signal?.removeEventListener('abort',abort);scheduleIdle();}
 }
-root.HSKVoiceManager={ready,catalog,support,install,cancelInstall,chooseDevice,speak,unlock,stop(){speechRun++;stopAudio();if(workerClient?.busy)dispose();else scheduleIdle();},get selection(){return {...selection};}};
+root.HSKVoiceManager={ready,catalog,support,install,cancelInstall,chooseDevice,speak,unlock,async downloaded(){await ready;return {selection:store?await store.snapshot():{...selection},bytes:store?await store.usage():0};},get installing(){return !!installController;},stop(){speechRun++;stopAudio();if(workerClient?.busy)dispose();else scheduleIdle();},get selection(){return {...selection};}};
 root.addEventListener('storage',event=>{if(event.key===key&&store)store.snapshot().then(v=>{stopAudio();dispose();selection=v;emit();}).catch(()=>{});});
 root.addEventListener('pagehide',()=>{cancelInstall();stopAudio();dispose();context?.close().catch(()=>{});context=null;});
 })(window);

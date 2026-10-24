@@ -5,6 +5,10 @@ const O=w.HSKMusicOffline,bytes=fs.readFileSync('tools/fixtures/music-heaacv2-64
  assert.deepEqual(await O.list('a'),[]);
  await O.put('a',{url:'https://youtu.be/abcdefghijk',title:'A'},file);
  const size=await O.usage();assert.equal(size,file.size);
+ const saved=await O.get('a','https://youtu.be/abcdefghijk');
+ await assert.rejects(O.remove('a',saved.url,{asset:'stale',addedAt:saved.addedAt}),/đã thay đổi/);
+ await assert.rejects(O.remove('a',saved.url,{asset:saved.asset,addedAt:saved.addedAt-1}),/đã thay đổi/);
+ assert.equal((await O.list('a')).length,1,'stale cleanup cannot delete a newly replaced song');
  await O.put('a',{url:'https://youtu.be/123456789ab',title:'B'},file);
  await O.put('b',{url:'https://youtu.be/abcdefghijk',title:'Owner B'},file);
  assert.equal(await O.usage(),size,'same bytes stored only once across playlists/accounts');

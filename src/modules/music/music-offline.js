@@ -41,6 +41,6 @@
   });return url;
  }
  async function get(owner,url){return transaction('readonly',async s=>{const track=await request(s.tracks.get(identity(owner,url)));if(!track)return null;const asset=await request(s.assets.get(track.asset));return asset?.blob?.size===track.size?{...track,blob:asset.blob}:null;});}
- async function remove(owner,url){return transaction('readwrite',async s=>{const id=identity(owner,url),track=await request(s.tracks.get(id));if(!track)return;s.tracks.delete(id);const all=await request(s.tracks.getAll());if(!all.some(t=>t.asset===track.asset))s.assets.delete(track.asset);});}
+ async function remove(owner,url,expected){return transaction('readwrite',async s=>{const id=identity(owner,url),track=await request(s.tracks.get(id));if(!track)return;if(expected&&(track.asset!==expected.asset||track.addedAt!==expected.addedAt))throw Error('Bản nhạc đã thay đổi. Hãy xem lại danh sách trước khi xóa.');s.tracks.delete(id);const all=await request(s.tracks.getAll());if(!all.some(t=>t.asset===track.asset))s.assets.delete(track.asset);});}
  window.HSKMusicOffline={list,usage,put,get,remove,limit:LIMIT};
 })();
