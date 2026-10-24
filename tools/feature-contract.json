@@ -1239,6 +1239,32 @@
         {"kind":"file","file":"tools/check-music-online-ui.cjs","value":""},
         {"kind":"contains","file":"src/modules/music/music-direct-source.js","value":"async function stream("}
       ]
+    },
+    {
+      "id": "optional-download-cleanup",
+      "name": "Dọn dẹp dữ liệu tải thêm theo lựa chọn",
+      "checks": [
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "storageCleanupOpen"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/shell/storage-cleanup.js",
+          "value": "storageCleanupDelete"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/shell/storage-cleanup.js",
+          "value": "hsk-music-codec-v1"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/speech/voice-store.js",
+          "value": "async function usage()"
+        }
+      ]
     }
   ]
 }

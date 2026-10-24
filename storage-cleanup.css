@@ -1,0 +1,10 @@
+.storage-cleanup{box-sizing:border-box;margin:auto;width:min(600px,calc(100vw - 24px));max-height:calc(100dvh - 32px);overflow:auto;border:1px solid var(--line);border-radius:var(--radius-dialog);padding:20px;background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.storage-cleanup::backdrop{background:var(--mobile-backdrop)}
+.storage-cleanup h2{margin-top:0}.storage-cleanup-list{display:grid;gap:10px;margin:16px 0}
+.storage-cleanup-row{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:var(--radius-btn);cursor:pointer;min-height:48px}
+.storage-cleanup-row:has(input:checked){border-color:var(--accent);background:var(--button-active-bg);color:var(--button-active-text)}
+.storage-cleanup-row input{flex:0 0 auto;width:22px;height:22px;accent-color:var(--accent)}
+.storage-cleanup-copy{flex:1;min-width:0;overflow-wrap:anywhere}.storage-cleanup-copy strong,.storage-cleanup-copy small{display:block}.storage-cleanup-copy small{margin-top:4px;opacity:.8}
+.storage-cleanup-actions{display:flex;flex-wrap:wrap;gap:8px}.storage-cleanup button{font:inherit;min-height:44px;padding:10px 14px;border:1px solid var(--button-border);border-radius:var(--radius-btn);background:var(--button-bg);color:var(--button-text);cursor:pointer}
+#storageCleanupDelete{background:var(--button-active-bg);color:var(--button-active-text)}.storage-cleanup button:disabled{opacity:.5;cursor:default}.storage-cleanup button:focus-visible,.storage-cleanup input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.storage-cleanup [hidden]{display:none!important}

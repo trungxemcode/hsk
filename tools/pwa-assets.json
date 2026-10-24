@@ -166,7 +166,9 @@
     "src/modules/speech/voice-model-transport.js",
     "src/modules/speech/voice-catalog.json",
     "src/modules/speech/voice-model.js",
-    "content/voice-demos/zm_yunjian.mp3"
+    "content/voice-demos/zm_yunjian.mp3",
+    "storage-cleanup.css",
+    "src/modules/shell/storage-cleanup.js"
   ],
   "aliases": {
     "backup-core.js": "src/modules/backup/backup-core.js",
