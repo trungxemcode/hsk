@@ -1,3 +1,9 @@
+## 2026-10-24 — Cốc Cốc self-declaration supersedes UA-only experiment
+- User explicitly approved self-declaration after real Cốc Cốc Windows exposed only Chrome identifiers. Branch PR #181 updated with reversible "Tôi đang dùng Cốc Cốc" button in Music 3-dot menu.
+- Only browser-specific actions hidden by default elsewhere, but the opt-in setting is visible so users whose Coc Coc UA looks like Chrome can enable them. Stored under \`hsk-music-coccoc-mode-v1\` in the local origin storage for the browser/PWA installation; explicit on/off overrides auto detection.
+- Browser-native ad blocking/media downloading cannot be remotely controlled by HSK; official source page and user-selected file import only. No yt-dlp, server cache or automatic file import. Keep other HSK functions/data unchanged.
+- New browser tests include Chrome, iOS Safari, branded Cốc Cốc, Chrome-looking Cốc Cốc, reload persistence, opt-out override and offline file retention.
+
 ## 2026-10-24 — Conditional Cốc Cốc handoff for music (release 3.15.7)
 - Add an optional Cốc Cốc-only set of actions in HSK music menu to open a verified original song URL so Cốc Cốc may apply its own ad blocker/download media toolbar, then import locally downloaded MP3/M4A.
 - No direct HSK browser adblock/download API exists; no server downloads or music ripping. UA Chrome masquerading can make some real Coc Coc builds indistinguishable. Fail closed and hide optional controls unless a positive marker is exposed.

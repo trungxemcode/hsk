@@ -19,6 +19,19 @@
   // It is a UX hint, not proof of identity and never grants privileges.
   return Boolean((win.coccoc&&typeof win.coccoc==='object')||(nav.coccoc&&typeof nav.coccoc==='object'));
  }
+ const PREF_KEY='hsk-music-coccoc-mode-v1';
+ // Scoped to this browser/PWA storage partition, not to the HSK account or cloud.
+ function readChoice(storage){
+  try{const value=storage?.getItem(PREF_KEY);return value==='on'||value==='off'?value:null;}catch{return null;}
+ }
+ function writeChoice(storage,value){
+  if(value!=='on'&&value!=='off')return false;
+  try{storage?.setItem(PREF_KEY,value);return storage?.getItem(PREF_KEY)===value;}catch{return false;}
+ }
+ function modeEnabled(storage,navigatorLike,windowLike){
+  const value=readChoice(storage);
+  return value==='on'||(value===null&&isCocCoc(navigatorLike,windowLike));
+ }
  function providerSource(raw,parseLink){
   if(typeof raw!=='string'||typeof parseLink!=='function')return null;
   try{
@@ -30,5 +43,5 @@
    return url.href;
   }catch{return null;}
  }
- return Object.freeze({isCocCoc,providerSource});
+ return Object.freeze({isCocCoc,providerSource,readChoice,writeChoice,modeEnabled});
 });

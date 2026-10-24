@@ -1,3 +1,31 @@
+## 2026-10-24 — Updated design: optional manual Cốc Cốc declaration (3.15.7)
+
+The user approved a manual browser declaration because Cốc Cốc can deliberately
+expose the same User-Agent and Client Hints as Chrome. In HSK's **Music →
+3-dot menu**, a small control **"Tôi đang dùng Cốc Cốc: Tắt/Bật"** is visible
+in all browsers. **Actual Cốc Cốc-specific actions remain hidden by default**
+unless automatic browser evidence is positive **or the user actively turns
+the toggle on**. One click persists \`on\` or \`off\` in origin-local
+\`localStorage\`, **not the HSK account/cloud**, so Safari/other browsers
+retain independent settings. Users can turn it off; explicit \`off\` overrides
+automatic detection. If localStorage is denied the UI reports that the choice
+could not be saved rather than claiming persistence.
+
+When enabled, the actions only (1) open the sanitized official song page so
+Cốc Cốc **may** apply its built-in ad-block and show native download options
+if supported and (2) open the file picker for MP3/M4A stored on the user's
+device. No website API exists to turn on the browser's ad-blocker or downloader,
+no automatic copying of browser downloads, no audio extraction backend, and
+no guarantee on iOS or that new tab opens in the same browser/PWA context.
+User-uploaded music, offline playback and core HSK data remain untouched.
+
+Tests: \`tools/check-music-coccoc.cjs\` and
+\`tools/check-music-coccoc-ui.cjs\` check manual opt-in, account-independent
+browser persistence through reload, opt-out even with a branded UA, positive
+auto-detection, validated URLs, unchanged local file import, and Safari/Chrome
+action visibility defaults. Earlier notes below refer to the initial
+auto-detection-only prototype, superseded by this manual opt-in behavior.
+
 ## 2026-10-24 — Cốc Cốc native media handoff (conditional)
 
 - HSK music menu in chill mode includes *Cốc Cốc · mở bài tại trang nguồn* and

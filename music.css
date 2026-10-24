@@ -442,3 +442,8 @@ body.music-background-active .workspace { padding-bottom:calc(170px + env(safe-a
 .music-coccoc-row{border-inline-start:3px solid var(--accent);padding-inline-start:14px}
 .music-coccoc-disabled{opacity:.55;cursor:default}
 .music-coccoc-note{padding:0 14px 8px;margin:0;line-height:1.5;font-size:12px;white-space:normal}
+
+/* Optional Cốc Cốc actions stay hidden on other browsers until explicit opt-in. */
+.music-coccoc-row[hidden],.music-coccoc-note[hidden]{display:none!important}
+.music-coccoc-mode{font-weight:600}
+.music-coccoc-mode-note{padding:0 14px 6px;margin:0;line-height:1.4;font-size:12px;white-space:normal}
