@@ -1,3 +1,8 @@
+## Music offline: official yt-dlp only — 2026-10-24
+- Branch `fix/music-yt-dlp-only` based on GitHub main 71ee579. Disabled browser-direct offline Invidious/Piped/Cobalt entirely, kept only authenticated original-source yt-dlp resolver route. Removed Noembed/NetEase same-title substitute matching from online stream. Spotify original embed remains, not a downloaded substitute.
+- Preserves IndexedDB data, HE-AACv2 32/64/96, cancel/background progress/restart, M4A import, owner isolation. Tests: check-music-yt-dlp-only + source resolver, offline/online browser 390px/1440px, feature preservation.
+- Deployment **not yet done**: music-config.json.offlineSourceResolver is empty; official yt-dlp Python service has no verified HTTPS endpoint. The app must report actionable unavailable service, not pretend it can fetch files on GitHub Pages.
+
 ## Four direct search tools — 2026-10-24
 - Branch feat/search-four-tools from main01fcea8 (3.14.1). Owner asked to split combined vocabulary/handwriting and translation/OCR controls into four compact buttons. One equal-width row: Từ vựng, Vẽ chữ, Dịch câu, Đọc ảnh; selection and header follow exact tool, global Search remains active.
 - Preserve all routes/IDs/API/storage. Original handwritingOpen button moves into the first toolbar and keeps its worker/handlers. Handwriting hides vocabulary entry/scope controls; image view opens existing OCR while sentence view keeps its form separate. OCR→translation transfer and legacy home/image entry remain supported. No auto API call, picker or keyboard on tool selection.

@@ -21,7 +21,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
     if(r.request().method()==='POST'){if(late)await new Promise(resolve=>setTimeout(resolve,600));return r.fulfill({headers:cors,json:{status:'tunnel',url:'https://cobalt.example.com/tunnel'}});}
     mediaRequests++;return r.fulfill({headers:{...cors,'Content-Type':'audio/mp4'},body:fs.readFileSync(path.join(root,'tools/fixtures/music-heaacv2-64k.m4a'))});
    });
-   await page.route('https://music-api.gdstudio.xyz/**',r=>r.fulfill({headers:cors,json:r.request().url().includes('types=search')?[{id:'123',name:'游山恋',artist:[wrongArtist?'其他歌手':'海伦']}]:{url:'https://cobalt.example.com/tunnel',br:320,size:4000000}}));
+   let catalogueRequests=0;await page.route('https://music-api.gdstudio.xyz/**',r=>{catalogueRequests++;return r.abort();});
    await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKMusic&&window.HSKStudio&&window.HSKMusicDirectSource);
    await page.evaluate(()=>HSKStudio.navigate('music-play'));
    const importLink=async(url,title)=>{
@@ -29,7 +29,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
     await page.locator('#musicLinkUrl').fill(url);await page.locator('#musicLinkName').fill(title);await page.locator('#musicLinkApply').click();
    };
    const start=async()=>{await page.locator('#musicMenuBtn').click();await page.locator('#musicMenuBackgroundRow').click();};
-   for(const [url,title] of [['https://youtu.be/abcdefghijk','YouTube trực tuyến'],['https://soundcloud.com/artist/song','SoundCloud trực tuyến'],['https://open.spotify.com/track/1234567890ABCDEFGHIJKL','游山恋 海伦']]){
+   for(const [url,title] of [['https://youtu.be/abcdefghijk','YouTube trực tuyến'],['https://soundcloud.com/artist/song','SoundCloud trực tuyến']]){
     await importLink(url,title);await start();
     await page.waitForFunction(()=>document.getElementById('musicBackgroundAudio')?.currentTime>.1&&!document.getElementById('musicBackgroundAudio').paused);
     assert.match(await page.locator('#musicBackgroundAudio').getAttribute('src'),/^https:\/\//,'native player streams remote URL rather than a saved blob');
@@ -59,8 +59,8 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.waitForTimeout(800);
    assert.equal(await page.locator('#musicBackgroundAudio').getAttribute('src'),null,'late source cannot play for a different account');
    assert.equal(await page.locator('#musicBackgroundPlayer').isVisible(),false);
-   assert(mediaRequests>=6,'probe and actual native media requests were exercised');assert.equal(wasmRequests,0,'no transcoder downloaded for streaming');
-   assert.deepEqual(errors,[]);await page.close();console.log('PASS online background',width,'YouTube/SoundCloud streams, labelled Spotify catalogue match, real audio, no offline/WASM, route continuity, failure and cancellation');
+   assert(mediaRequests>=4,'probe and actual native media requests were exercised');assert.equal(catalogueRequests,0,'never queries a similar song catalogue');assert.equal(wasmRequests,0,'no transcoder downloaded for streaming');
+   assert.deepEqual(errors,[]);await page.close();console.log('PASS online background',width,'YouTube/SoundCloud streams, no cross-catalogue matching, real audio, no offline/WASM, route continuity, failure and cancellation');
   }
  }finally{await browser?.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

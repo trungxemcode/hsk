@@ -5,7 +5,7 @@
   "maxLocalBytes": 52428800,
   "offlineSourceResolver": "",
   "offlineDirect": {
-    "enabled": true,
+    "enabled": false,
     "experimental": true,
     "instances": []
   }

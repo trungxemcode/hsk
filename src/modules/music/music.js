@@ -97,7 +97,7 @@
   try{
    report('Đang tìm nguồn nghe nền…');
    const response=await fetch('./music-config.json',{signal:controller.signal});if(!response.ok)throw Error('Chưa đọc được cấu hình nhạc.');const cfg=await response.json();if(!valid())return;
-   const media=await HSKMusicDirectSource.stream(link.url,{instances:cfg.offlineDirect?.instances||[],signal:controller.signal,title:title&&title!==link.label&&title!=='Bài hát đang phát'?title:'',test:testOnlineStream,onStatus:(phase,value)=>report(phase==='matched'?'Đã tìm bản tương ứng từ '+value.provider:'Đang tìm nguồn qua '+value+'…')});
+   const media=await HSKMusicDirectSource.stream(link.url,{instances:cfg.offlineDirect?.instances||[],signal:controller.signal,test:testOnlineStream,onStatus:(_phase,value)=>report('Đang mở nguồn từ đúng link qua '+value+'…')});
    if(!valid())return;
    onlineStreamRequest=null;streamStatus='';onlineQueueMode=true;
    openLink(link,media.title||title,false,playlistId,true,{streamUrl:media.url,title:media.title||title,author:media.artist||currentLinkAuthor,provider:media.provider});
@@ -561,9 +561,6 @@
    await new Promise(resolve=>setTimeout(resolve,0));
    const cfg=await fetch('./music-config.json',{signal:controller.signal}).then(r=>{if(!r.ok)throw Error('Chưa đọc được cấu hình nhạc.');return r.json();});check();
    let bytes;
-   if(cfg.offlineDirect?.enabled){
-    bytes=await HSKMusicDirectSource.download(track.url,track.bitrate,{instances:cfg.offlineDirect.instances,signal:controller.signal,onStatus:(phase,value)=>{if(!valid())return;downloadFeedback(phase==='resolving'?'Đang tìm âm thanh qua '+value+'…':phase==='progress'?'Đang tải trực tiếp về thiết bị · '+(value.total?Math.min(100,Math.round(value.received/value.total*100))+'%':(value.received/1048576).toFixed(1)+' MB'):'Đang tải trực tiếp về thiết bị…',phase==='progress'&&value.total?value.received/value.total*100:undefined);}});check();
-   }else{
    if(!cfg.offlineSourceResolver)throw Error('Chưa kết nối dịch vụ lấy âm thanh từ link. Bộ nén chạy trên thiết bị; bạn vẫn có thể thêm file M4A có sẵn.');
    const endpoint=new URL(cfg.offlineSourceResolver);
    if(endpoint.protocol!=='https:'||endpoint.username||endpoint.password||endpoint.search||endpoint.hash)throw Error('Địa chỉ xử lý nhạc chưa hợp lệ.');base=endpoint.href.replace(/\/$/,'');
@@ -582,7 +579,6 @@
    const response=await call('/v1/jobs/'+job+'/file');
    if(response.headers.get('X-Audio-Source')!=='original')throw Error('Dịch vụ chưa trả về nguồn âm thanh gốc.');
    bytes=await HSKMusicConverter.readSource(response,controller.signal,(received,total)=>{if(valid())downloadFeedback('Đang tải âm thanh · '+(total?Math.round(received/total*100)+'%':(received/1048576).toFixed(1)+' MB'),total?received/total*100:undefined);});check();
-   }
    const file=await HSKMusicConverter.encode(bytes,track.bitrate,{signal:controller.signal,onStatus:(state,progress)=>{if(valid())downloadFeedback(state==='loading'?'Đang tải bộ nén trên thiết bị…':'Đang nén trên thiết bị · '+track.bitrate+' kbps'+(Number.isFinite(progress)?' · '+Math.round(progress*100)+'%':'')+'…',state==='loading'?undefined:Number.isFinite(progress)?progress*100:undefined);}});check();
    downloadFeedback('Đang lưu bản nhạc vào thiết bị…');
    await HSKMusicOffline.put(uid,track,file,valid);check();offlineRows=await HSKMusicOffline.list(uid);check();if(opened)await drawOffline();check();downloadFeedback('Đã lưu thành công “'+track.title+'” · '+track.bitrate+' kbps · '+(file.size/1048576).toFixed(2)+' MB. Có thể nghe khi không có mạng.',100);

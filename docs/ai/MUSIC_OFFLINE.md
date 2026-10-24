@@ -1,5 +1,31 @@
 # Nhạc ngoại tuyến
 
+## Quyết định 2026-10-24: Lưu offline chỉ theo đúng link bằng yt-dlp
+
+Yêu cầu chủ sở hữu: **xóa cơ chế tìm bài cùng/tương tự từ kho khác** và chỉ
+dùng downloader chính thức của repo [yt-dlp](https://github.com/yt-dlp/yt-dlp)
+cho tính năng lưu nhạc từ URL. Nút lưu offline đi **duy nhất** tới
+`offlineSourceResolver` qua POST /v1/jobs, GET trạng thái, GET /file,
+sau đó nén HE-AACv2 32/64/96 trên thiết bị và ghi IndexedDB. Server
+`server/music/source_resolver.py` dùng `python -m yt_dlp` với extractor
+YouTube/SoundCloud và so sánh ID/URL cuối với link yêu cầu; từ chối kết quả
+khác bài. Không gọi Invidious/Piped/Cobalt, Noembed/NetEase để *lưu offline*.
+Đồng thời đã bỏ nhánh gợi ý **bài tương tự qua NetEase** ở chế độ phát nền
+trực tuyến; phát nền vẫn có thể phân giải *đúng URL* bằng các endpoint cũ
+và giữ iframe gốc nếu không lấy được nguồn.
+
+**Trạng thái vận hành**: `offlineDirect.enabled=false`; trường
+`offlineSourceResolver` vẫn **trống**, vì server yt-dlp chưa được triển khai
+lên HTTPS. Do đó bấm Lưu link lúc này báo cần kết nối dịch vụ, **chưa thể
+tải thật**; không giả vờ đã lưu thành công và không fallback ngầm sang kho
+khác. Cần triển khai container `server/music/Dockerfile.source` trên một
+dịch vụ luôn chạy, cấu hình Firebase/ALLOWED_ORIGINS, xác nhận download
+thật + CORS rồi mới điền endpoint. GitHub Pages không tự chạy Python yt-dlp.
+Kho ngoại tuyến đã lưu, nhạc M4A nhập trực tiếp, phát ngoại tuyến, codec và
+bản ghi theo tài khoản đều được giữ nguyên. Các mục dưới đây mô tả lịch sử
+thử nghiệm của những cơ chế đã ngừng áp dụng cho nút Lưu offline.
+
+
 ## yt-dlp chính thức — bản thử tích hợp 2026-10-24
 
 Dịch vụ Python dùng bản phát hành chính thức `yt-dlp[default]==2026.10.21` từ dự án `https://github.com/yt-dlp/yt-dlp`, kèm EJS và Deno 2.9.6 trong container. Không fork hay sửa mã yt-dlp. Deno chạy với cache ghi được trong `/tmp`; không chạy bộ nén trên server. CLI tải duy nhất một nguồn, giới hạn 50 MiB/15 phút và kiểm tra ID/URL do yt-dlp báo sau tải trước khi chấp nhận file. Sai nguồn hoặc nhiều kết quả đều bị từ chối. Giữ kiểm tra ffprobe, xác thực và tách file theo UID như cũ.

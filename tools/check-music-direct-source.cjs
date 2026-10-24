@@ -29,8 +29,8 @@ const json=d=>new Response(JSON.stringify(d),{headers:{'Content-Type':'applicati
  let matchEnv=environment(url=>url.startsWith(first.url)?new Response('',{status:503}):url.startsWith('https://noembed.com')?json({title:'[Vietsub + Pinyin] Du Son Luyen || 游山恋 - 海伦'}):url.includes('types=search')?json([{id:'123',name:'游山恋',artist:['海伦']}]):url.includes('types=url')?json({url:'https://audio.example.com/song.mp3',br:320,size:4000000}):audio());
  await assert.rejects(matchEnv.run([first],64,undefined,source,true),/đúng link/);
  assert.equal(matchEnv.calls.length,1,'offline save never searches another catalogue, even when legacy smartMatch=true is supplied');
- const onlineMatch=environment(url=>url.startsWith(first.url)?new Response('',{status:503}):url.startsWith('https://noembed.com')?json({title:'游山恋 海伦'}):url.includes('types=search')?json([{id:'123',name:'游山恋',artist:['海伦']}]):json({url:'https://audio.example.com/song.mp3',br:320,size:4000000}));
- const matched=await onlineMatch.stream(source,{instances:[first],test:async()=>true});assert.equal(matched.provider,'NetEase','explicit online mode still labels a cross-catalogue match');
- let wrongEnv=environment(url=>url.startsWith(first.url)?new Response('',{status:503}):url.startsWith('https://noembed.com')?json({title:'游山恋 海伦'}):json([{id:'123',name:'游山恋',artist:['其他歌手']}]));await assert.rejects(wrongEnv.stream(source,{instances:[first]}),/khớp/);assert(!wrongEnv.calls.some(c=>c.url.includes('types=url')),'wrong artist never streamed');
- console.log('PASS direct source: quality selection, original bytes, API fallback, provider 429 cooldown, cancel, Spotify, private URL rejection, Cobalt local-processing tunnel, no raw redirect/HTML and no credentials');
+ const onlineNoSubstitution=environment(url=>url.startsWith(first.url)?new Response('',{status:503}):(()=>{throw Error('same-name lookup must not run')})());
+ await assert.rejects(onlineNoSubstitution.stream(source,{instances:[first],test:async()=>true}),/nguồn|trực tuyến/i);
+ assert.equal(onlineNoSubstitution.calls.length,1,'online streaming must not search other music catalogues');
+  console.log('PASS direct source: quality selection, original bytes, API fallback, provider 429 cooldown, cancel, Spotify, private URL rejection, Cobalt local-processing tunnel, no raw redirect/HTML and no credentials');
 })().catch(e=>{console.error(e);process.exitCode=1});
