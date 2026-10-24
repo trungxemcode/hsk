@@ -1,3 +1,9 @@
+## Button release icon regression — 2026-10-24
+- Branch fix/button-release-icons from main e504551 (3.15.3). Owner screenshot: SRS home tile loses icon after touch hold/release. Generic :hover forced white descendants/transparent tiles while higher-specificity home card remained white; mobile sticky hover kept the bad state. Legacy studio dark/press rules had the same unguarded hover behavior.
+- Limit generic hover paint to hover-capable devices in ui-buttons.css/studio-layout.css; keep active, keyboard focus, selected and disabled semantics. Match home base specificity for complete purple active/focus surface with white icons. No music/player/data logic changed.
+- Extend existing press-shape browser regression: actual touch release/cancel and sticky hover, forced active CSS state (CDP touch does not consistently expose :active), desktop hold/release outside, keyboard focus on six home actions;320/390/1440 light/dark. Existing route behavior remains covered separately.
+- Validation: press-shape320/390/1440 light/dark, shared press116 headers/15 routes/4 viewports/both themes, dark contrast17 routes, feature runtime, redesign route/reduced-motion, design tokens and feature preservation passed. Browser touch is emulated; physical iPhone unverified. No merge requested for this new task.
+
 ## Restore music UI scope — 2026-10-24
 - Correct PR176 unsolicited visible YouTube/mini-video UI: remove body portal and forced cover size; restore the original in-panel music presentation. Keep actual provider timeline, seek and stale-poll protection, nocookie and SponsorBlock unchanged. Keep handwriting improvements.
 - Native/direct audio and SoundCloud background behavior unchanged. YouTube background behavior returns to the previous baseline; no new screen-lock guarantee.

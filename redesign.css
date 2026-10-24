@@ -4260,3 +4260,8 @@ html body:not(#_rd).studio-enabled #musicPanel input.music-scrub[type=range]{app
 html body:not(#_rd).studio-enabled #musicPanel input.music-scrub::-webkit-slider-thumb{width:12px;height:12px;margin-top:3px;background:var(--palette-white);box-shadow:none}
 
 html body:not(#_rd).studio-enabled #handwritingOptions .handwriting-advanced-settings > summary:not(:active):not(:focus-visible){color:var(--ink)!important}
+
+/* Match the home card's base specificity so its white surface cannot override
+   active/keyboard feedback. Child icons share the same purple surface. */
+html body:not(#_rd).studio-enabled #studioHome.overview-v216 :is(.shortcut[data-studio-go],.home-music-chill,.home-music-entry):is(:active,:focus-visible){background:var(--press-active-bg)!important;color:var(--palette-white)!important}
+html body:not(#_rd).studio-enabled #studioHome.overview-v216 :is(.shortcut[data-studio-go],.home-music-chill,.home-music-entry):is(:active,:focus-visible) :is(strong,small,span,svg){color:var(--palette-white)!important;background-color:var(--palette-clear)!important;background-image:none!important}
