@@ -1,4 +1,23 @@
 {
-    "schema": 1,
-    "approved": []
+  "schema": 1,
+  "approved": [
+    {
+      "id": "music-offline",
+      "approvedBy": "trungxemcode",
+      "approvalUrl": "https://github.com/trungxemcode/hsk/pull/189",
+      "reason": "Owner requested replacing entertainment YouTube/yt-dlp/VPS and device-offline music with owner-uploaded R2 streaming. Preserve study lessons, native background controls, playlists/history and account isolation with new R2 guards."
+    },
+    {
+      "id": "music-background-playback",
+      "approvedBy": "trungxemcode",
+      "approvalUrl": "https://github.com/trungxemcode/hsk/pull/189",
+      "reason": "Owner requested replacing entertainment YouTube/yt-dlp/VPS and device-offline music with owner-uploaded R2 streaming. Preserve study lessons, native background controls, playlists/history and account isolation with new R2 guards."
+    },
+    {
+      "id": "music-official-online",
+      "approvedBy": "trungxemcode",
+      "approvalUrl": "https://github.com/trungxemcode/hsk/pull/189",
+      "reason": "Owner requested replacing entertainment YouTube/yt-dlp/VPS and device-offline music with owner-uploaded R2 streaming. Preserve study lessons, native background controls, playlists/history and account isolation with new R2 guards."
+    }
+  ]
 }
