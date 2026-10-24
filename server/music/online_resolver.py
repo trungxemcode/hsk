@@ -2,6 +2,8 @@
 import hashlib
 import json
 import os
+import logging
+from urllib.error import HTTPError, URLError
 import re
 import secrets
 import threading
@@ -22,8 +24,8 @@ extract_slots = threading.BoundedSemaphore(2)
 relay_slots = threading.BoundedSemaphore(20)
 
 class ResolverError(Exception):
-    def __init__(self, status, message):
-        self.status, self.message = status, message
+    def __init__(self, status, message, code=""):
+        self.status, self.message, self.code = status, message, code
 
 def video_id(url):
     u = urlsplit(url)
@@ -72,21 +74,84 @@ def rate_limit(uid):
         if len(history) >= 12: raise ResolverError(429, 'Bạn đổi bài quá nhanh. Chờ một chút rồi thử lại.')
         history.append(now); rates.move_to_end(uid); trim(rates, 512)
 
+def choose_direct_audio_formats(data):
+    """Only direct HTTPS audio-only M4A. Never mistake HLS/SABR for a file."""
+    candidates = []
+    seen = set()
+    for entry in [data, *(data.get('formats') or [])]:
+        if not isinstance(entry, dict):
+            continue
+        url = entry.get('url', '')
+        if (not isinstance(url, str) or not audio_url(url)
+                or entry.get('ext') != 'm4a'
+                or entry.get('protocol') not in ('https', None)
+                or entry.get('vcodec') not in (None, 'none')
+                or entry.get('acodec') == 'none'
+                or entry.get('has_drm')):
+            continue
+        if url in seen:
+            continue
+        seen.add(url)
+        candidates.append(entry)
+    return sorted(candidates, key=lambda f: (float(f.get('abr') or 0), float(f.get('tbr') or 0)), reverse=True)
+
+
+def source_probe(entry):
+    """Validate an original source with one ranged request, not a whole download."""
+    headers = {key: value for key, value in (entry.get('http_headers') or {}).items()
+               if key.lower() in ('user-agent', 'referer', 'accept-language', 'accept')
+               and isinstance(value, str)}
+    headers['Range'] = 'bytes=0-1'
+    with urlopen(Request(entry['url'], headers=headers), timeout=6) as upstream:
+        if not audio_url(upstream.url):
+            raise ValueError('Media redirect outside trusted Google Video hosts')
+        if upstream.status not in (200, 206):
+            raise ValueError('Audio source responded with a non-success status')
+        upstream.read(2)
+
+
+def classify_source_error(exc):
+    text = str(exc).lower()
+    if any(needle in text for needle in ('http error 403', 'forbidden', 'po token', 'po_token')):
+        return 'SOURCE_FORBIDDEN', 'YouTube từ chối luồng audio (403 hoặc PO Token). Thử bài khác hoặc mở trang nguồn.'
+    if any(needle in text for needle in ('429', 'too many requests', 'rate limit')):
+        return 'UPSTREAM_RATE_LIMIT', 'YouTube đang giới hạn kết nối từ máy chủ. Hãy thử lại sau.'
+    if any(needle in text for needle in ('sign in', 'not a bot', 'captcha', 'cookies')):
+        return 'UPSTREAM_SIGNIN', 'YouTube yêu cầu xác minh truy cập máy chủ. Mở bài tại trang nguồn.'
+    if 'no direct' in text or 'no m4a' in text or 'requested format is not available' in text:
+        return 'M4A_UNAVAILABLE', 'Không tìm thấy luồng M4A tương thích cho bài này.'
+    if isinstance(exc, (TimeoutError, URLError)):
+        return 'UPSTREAM_TIMEOUT', 'Kết nối nguồn audio bị chậm hoặc gián đoạn. Hãy thử lại.'
+    return 'EXTRACTOR_ERROR', 'VPS chưa lấy được audio từ YouTube. Thử bài khác hoặc mở trang nguồn.'
+
+
 def extract(ident):
     import yt_dlp
+    # Listing all formats is essential: yt-dlp's default format selector may
+    # choose an HLS/SABR stream, or fail early even when direct M4A exists.
     opts = {'quiet': True, 'no_warnings': True, 'skip_download': True, 'noplaylist': True,
             'cachedir': False, 'socket_timeout': 10, 'retries': 0, 'extractor_retries': 0,
-            'js_runtimes': {'deno': {'path': os.environ.get('DENO_PATH', '/home/ubuntu/.deno/bin/deno')}},
-            'format': 'bestaudio[ext=m4a][protocol=https]/bestaudio[ext=m4a]'}
+            'js_runtimes': {'deno': {'path': os.environ.get('DENO_PATH', '/home/ubuntu/.deno/bin/deno')}}}
     with yt_dlp.YoutubeDL(opts) as y:
         data = y.extract_info('https://www.youtube.com/watch?v=' + ident, download=False)
     if data.get('id') != ident or data.get('is_live') or not 0 < float(data.get('duration') or 0) <= 7200:
-        raise ValueError('Nguồn không khớp hoặc là livestream/quá 2 giờ.')
-    if not audio_url(data.get('url', '')) or data.get('ext') != 'm4a':
-        raise ValueError('Chưa có luồng M4A tương thích cho bài này.')
-    return {'id': ident, 'url': data['url'], 'title': str(data.get('title') or '')[:120],
-            'artist': str(data.get('artist') or data.get('uploader') or 'YouTube')[:80],
-            'duration': data['duration'], 'headers': data.get('http_headers', {})}
+        raise ValueError('Video ID mismatch or video duration not allowed')
+    candidates = choose_direct_audio_formats(data)
+    if not candidates:
+        raise ValueError('No direct HTTPS M4A format found')
+    last_error = None
+    # Probing at most two original URLs detects a 403 before the PWA shows
+    # "playing" or attempts to save a file. Never cache failed candidates.
+    for fmt in candidates[:2]:
+        try:
+            source_probe(fmt)
+        except Exception as error:
+            last_error = error
+            continue
+        return {'id': ident, 'url': fmt['url'], 'title': str(data.get('title') or '')[:120],
+                'artist': str(data.get('artist') or data.get('uploader') or 'YouTube')[:80],
+                'duration': data['duration'], 'headers': fmt.get('http_headers') or data.get('http_headers') or {}}
+    raise last_error or ValueError('No M4A source passed reachability check')
 
 def resolve(ident, refresh=False):
     with lock:
@@ -100,7 +165,13 @@ def resolve(ident, refresh=False):
     future = pool.submit(task)
     try: data = future.result(timeout=35)
     except TimeoutError as e: raise ResolverError(504, 'Nguồn nhạc phản hồi chậm. Chạm Phát để thử lại.') from e
-    except Exception as e: raise ResolverError(502, 'YouTube chưa cung cấp được audio cho bài này. Thử lại sau hoặc mở trang nguồn.') from e
+    except Exception as e:
+        code, message = classify_source_error(e)
+        # Logs contain only a hashed video reference and a bounded error code.
+        # Do not log authentication tokens or signed googlevideo URLs.
+        logging.warning('music_resolve_error video=%s code=%s class=%s',
+                        hashlib.sha256(ident.encode()).hexdigest()[:10], code, type(e).__name__)
+        raise ResolverError(502, message, code) from e
     with lock:
         cache[ident] = (time.time() + 120, data); trim(cache, 128)
     return data
@@ -141,7 +212,7 @@ class Handler(BaseHTTPRequestHandler):
                 sessions[ticket] = (time.time() + 1800, data); trim(sessions, 256)
             self.json(200, {k: data[k] for k in ('id', 'url', 'title', 'artist', 'duration')} |
                       {'expiresAt': int((time.time() + 120) * 1000), 'relayUrl': PUBLIC + '/api/online/stream/' + ticket})
-        except ResolverError as e: self.json(e.status, {'error': e.message})
+        except ResolverError as e: self.json(e.status, {'error': e.message, 'code': e.code})
         except (ValueError, TypeError, KeyError): self.json(400, {'error': 'Link hoặc yêu cầu chưa hợp lệ.'})
         except (BrokenPipeError, ConnectionResetError): pass
         except Exception: self.json(500, {'error': 'Dịch vụ đang bận. Thử lại sau.'})
