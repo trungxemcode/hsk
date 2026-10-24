@@ -110,3 +110,6 @@ Account entry `storageCleanupOpen` → `src/modules/shell/storage-cleanup.js`, `
 
 ## Four search tools
 `index.html` toolbars use `data-search-tool` vocabulary/handwriting/translate/image. `src/modules/shell/studio.js` owns local tool selection and public `HSKSearchTools.open`; existing search/translator routes remain. `handwritingOpen` stays the original control moved into the search toolbar. `redesign.css` gives four equal compact columns and tool-specific content visibility; mobile image entry opens image mode before picker. `tools/check-search-tabs-ui.cjs` tests320/390/1440, both themes, selection, independent content, picker and OCR→translation transfer.
+
+## Official online music playback
+`music.js` defaults to YouTube nocookie Iframe API / official SoundCloud Widget (`music-soundcloud.js`) / native direct HTTPS MP3/M4A audio. `music-sponsor.js` supplies browser-only content segment skips with undo/toggle/cancellation; it never suppresses platform-served ads and is not applied to timestamped HSK lessons. No app source-discovery or catalogue substitution; direct-source extractor removed from loader, retained only as unused compatibility code. Provider metadata replaces Noembed. User file-only offline library is unchanged. Tests: `check-music-sponsor.cjs`, `check-music-online-ui.cjs`, existing provider/offline UI.

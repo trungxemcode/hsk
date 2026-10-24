@@ -434,3 +434,6 @@ html body.studio-enabled #musicBackgroundDownload { position: fixed; bottom: cal
 #musicBackgroundPlayer svg { width:22px; height:22px; }
 body.music-background-active #musicBackgroundDownload { bottom:calc(166px + env(safe-area-inset-bottom)); }
 body.music-background-active .workspace { padding-bottom:calc(170px + env(safe-area-inset-bottom)) !important; }
+.music-sponsor-notice{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--sub)}
+.music-sponsor-notice[hidden]{display:none!important}
+.music-sponsor-notice button{min-height:44px;padding:6px 12px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);font:inherit}

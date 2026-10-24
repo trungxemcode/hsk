@@ -3,6 +3,7 @@ const dom=new JSDOM('<main class="workspace"></main>',{url:'https://hsk.example/
  w.requestAnimationFrame=callback=>setImmediate(callback);w.cancelAnimationFrame=clearImmediate;
 const tick=()=>new Promise(r=>setImmediate(r));
 w.HTMLMediaElement.prototype.pause=function(){};w.HTMLMediaElement.prototype.load=function(){};w.fetch=async()=>({ok:true,json:async()=>({enabled:false})});w.HSKAccountDashboard={user:{uid:'one'}};w.TextEncoder=TextEncoder;Object.defineProperty(w.crypto,'subtle',{value:crypto.subtle});
+function Widget(){return {bind(n,f){if(n==='READY')setImmediate(f);},unbind(){},play(){},pause(){},seekTo(){},getDuration(f){f(6000);}};}Widget.Events=Object.fromEntries(['READY','PLAY','PAUSE','FINISH','PLAY_PROGRESS','SEEK','ERROR'].map(n=>[n,n]));w.SC={Widget};
 for(const file of ['music-core.js','music-soundcloud.js','music.js'])w.eval(fs.readFileSync('src/modules/music/'+file,'utf8'));
 const $=id=>w.document.getElementById(id),submit=()=>$('musicLinkForm').onsubmit({preventDefault(){}});
 const links=['https://youtu.be/abcdefghijk?si=x','https://open.spotify.com/track/0123456789ABCDEFGHIJKL?si=x','https://soundcloud.com/artist/song?si=x'];
@@ -27,12 +28,12 @@ async function run(){
  w.localStorage.removeItem('hsk-music-links-v1:one');w.localStorage.removeItem('hsk-music-links-v1:guest');w.localStorage.removeItem('hsk-account-meta-v1');
  w.HSKAccountDashboard={user:{uid:'one'}};w.dispatchEvent(new w.Event('hsk-account-ready'));await tick();
  $('musicPanel').hidden=false;w.HSKMusic.enter();await tick();
- for(const link of links){$('musicLinkUrl').value=link;$('musicLinkName').value='<img src=x onerror=alert(1)>';await submit();assert.equal($('musicLinkPreview').hidden,false);assert.equal($('musicLesson').hidden,true);assert.equal($('musicLinkPlayer').children.length,1);assert.equal($('musicLinkTitle').querySelector('img'),null);assert.equal($('musicLoop').getAttribute('aria-pressed'),'false');}
+ for(const link of links){$('musicLinkUrl').value=link;$('musicLinkName').value='<img src=x onerror=alert(1)>';await submit();await tick();assert.equal($('musicLinkPreview').hidden,false);assert.equal($('musicLesson').hidden,true);assert.equal($('musicLinkPlayer').children.length,1);assert.equal($('musicLinkTitle').querySelector('img'),null);assert.equal($('musicLoop').getAttribute('aria-pressed'),'false');}
  assert.match($('musicSourceLink').href,/^https:\/\/soundcloud.com/);assert.equal(JSON.parse(w.localStorage.getItem('hsk-music-links-v1:one')).length,3);
  assert.equal(w.localStorage.getItem('hsk-music-history-v1:one'),null);
- const old=$('musicLinkPlayer').firstChild;$('musicLinkUrl').value='https://evil.test/watch';await submit();assert.equal($('musicLinkPlayer').firstChild,old);assert.match($('musicStatus').textContent,/hỗ trợ/);
- // Route exit removes the cross-origin iframe so it cannot continue audio in the background.
- $('musicPanel').hidden=true;await tick();assert.equal($('musicLinkPlayer').children.length,0);
+ const old=$('musicLinkPlayer').firstChild;$('musicLinkUrl').value='https://evil.test/watch';await submit();assert.equal($('musicLinkPlayer').firstChild,old);assert.match($('musicStatus').textContent,/hỗ trợ/i);
+ // The official SoundCloud widget stays mounted across navigation; account changes below release it.
+ $('musicPanel').hidden=true;await tick();assert.equal($('musicLinkPlayer').children.length,1);
  $('musicPanel').hidden=false;w.HSKMusic.enter();await tick();assert.equal($('musicSavedLinks').querySelectorAll('.music-saved-item').length,3);
  w.HSKAccountDashboard={user:{uid:'two'}};w.dispatchEvent(new w.Event('hsk-account-ready'));await tick();assert.equal(w.localStorage.getItem('hsk-music-links-v1:two'),null);assert.equal($('musicSavedLinks').querySelectorAll('.music-saved-item').length,0,'A second account must not display the first account saved links');assert.equal($('musicLinkUrl').value,'');assert.equal($('musicLinkPlayer').children.length,0);
  // A late lyrics read must not mount a player in the next account.

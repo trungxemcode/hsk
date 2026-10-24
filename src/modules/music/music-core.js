@@ -24,8 +24,13 @@
    const canonical='https://soundcloud.com/'+match[1]+'/'+match[2];
    return {kind:'soundcloud',label:'SoundCloud',url:canonical,embedUrl:'https://w.soundcloud.com/player/?url='+encodeURIComponent(canonical)+'&auto_play=false',source:{kind:'soundcloud',url:canonical}};
   }
+  if(/\.(mp3|m4a)$/i.test(path)){
+   if(host==='localhost'||host.endsWith('.localhost')||host.endsWith('.local')||!host.includes('.')||/^\d+(?:\.\d+)*$/.test(host)||host.includes(':'))throw Error('Cần link file âm thanh HTTPS công khai.');
+   url.hash='';let name;try{name=decodeURIComponent(path.split('/').pop());}catch{name='File âm thanh';}
+   return {kind:'audio',label:name.slice(0,120),url:url.href,source:{kind:'audio',url:url.href}};
+  }
   if(['on.soundcloud.com','spotify.link','spoti.fi'].includes(host))throw Error('Đây là link rút gọn. Mở link trong trình duyệt rồi sao chép địa chỉ đầy đủ của bài hát.');
-  throw Error('Hiện hỗ trợ link bài hát từ YouTube, Spotify và SoundCloud.');
+  throw Error('Hỗ trợ YouTube, Spotify, SoundCloud hoặc link file MP3/M4A qua HTTPS.');
  }
  function validateSong(value){
   if(!value||value.version!==VERSION||!/^[-a-zA-Z0-9_]{1,80}$/.test(value.id||'')||!text(value.title,120))throw Error('Bài hát cần version=1, mã id và tên hợp lệ.');
