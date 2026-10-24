@@ -54,10 +54,8 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
    await page.screenshot({path:'/tmp/hsk-fixed-mini-'+width+'-'+height+'.png',fullPage:true});
    await page.evaluate(()=>HSKStudio.navigate('music-play'));
    await page.locator('#musicMenuBtn').click();await page.locator('#musicCocCocModeToggle').click();
-   assert.equal(await page.locator('#musicCocCocOffline').isVisible(),true);
-   assert.equal(await page.locator('#musicCocCocOffline').getAttribute('href'),'https://www.youtube.com/watch?v=abcdefghijk');
+   assert.equal(await page.locator('#musicCocCocOffline,#musicCocCocNote').count(),0,'Coc Coc download action removed at owner request');
    assert.equal(await page.locator('#musicCocCocImport').count(),0,'no misleading MP3 import button');
-   assert.match(await page.locator('#musicCocCocNote').textContent(),/Danh sách nghe/);
    assert.deepEqual(errors,[],'no browser JS errors');
    console.log('PASS Music iOS layout '+width+'x'+height,JSON.stringify({plus,peek,dock,auxY:[loop.y,rate.y,queue.y],miniCenters:centers}));
    await page.close();
