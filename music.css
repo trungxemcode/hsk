@@ -437,3 +437,10 @@ body.music-background-active .workspace { padding-bottom:calc(170px + env(safe-a
 .music-sponsor-notice{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--sub)}
 .music-sponsor-notice[hidden]{display:none!important}
 .music-sponsor-notice button{min-height:44px;padding:6px 12px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);font:inherit}
+/* The official YouTube iframe is born in this stable host; navigation never reloads it. */
+body > #musicLinkPlayer.music-youtube-surface{display:block!important;position:fixed!important;z-index:85;min-width:200px!important;min-height:200px!important;max-width:calc(100vw - 32px);margin:0!important;padding:0!important;overflow:hidden;opacity:1!important;pointer-events:auto!important;border-radius:var(--radius-btn);background:var(--palette-dark-paper)}
+body > #musicLinkPlayer.music-youtube-surface iframe{display:block!important;position:static!important;width:100%!important;height:100%!important;min-width:200px!important;min-height:200px!important;opacity:1!important;pointer-events:auto!important;clip-path:none!important}
+
+body > #musicLinkPlayer.music-youtube-menu-open,body > #musicLinkPlayer.music-youtube-menu-open iframe{pointer-events:none!important}
+
+html body.studio-enabled #musicPanel.music-official-youtube #musicLinkCover{width:200px!important;min-width:200px!important;max-width:200px!important;height:200px!important;min-height:200px!important}

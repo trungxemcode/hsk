@@ -109,6 +109,7 @@
         {"kind":"contains","file":"index.html","value":"data-search-tool=\"handwriting\""},
         {"kind":"contains","file":"index.html","value":"data-search-tool=\"translate\""},
         {"kind":"contains","file":"index.html","value":"data-search-tool=\"image\""},
+        {"kind":"contains","file":"src/modules/shell/mobile-ux.js","value":"handwritingOptions"},
         {"kind":"contains","file":"src/utils/text.js","value":"const fold ="},
         {"kind":"contains","file":"src/utils/format.js","value":"function memoryDate("},
         {"kind":"contains","file":"src/modules/dictionary/search-core.js","value":"function splitSenses("},
@@ -1237,6 +1238,8 @@
       "checks": [
         {"kind":"contains","file":"src/modules/music/music.js","value":"musicBackgroundPlayer"},
         {"kind":"contains","file":"src/modules/music/music.js","value":"function canPlayBackground()"},
+        {"kind":"contains","file":"src/modules/music/music.js","value":"function linkTimeline("},
+        {"kind":"contains","file":"src/modules/music/music.js","value":"linkYt.officialYouTube=true"},
         {"kind":"contains","file":"src/modules/music/music.js","value":"navigator.audioSession.type='playback'"},
         {"kind":"file","file":"tools/check-music-background-ui.cjs","value":""},
         {"kind":"contains","file":"src/modules/music/music.js","value":"musicMenuBackgroundRow"},

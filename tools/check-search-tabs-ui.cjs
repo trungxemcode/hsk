@@ -49,9 +49,17 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
     assert.equal(boxes.length,4);assert(boxes.every(b=>Math.abs(b.y-boxes[0].y)<1&&b.h>=44),'four compact buttons on one row');
     assert(boxes[3].x+boxes[3].w<=width,'tools fit the viewport');
     await page.locator('#handwritingOpen').click();await page.waitForFunction(()=>document.body.dataset.searchTool==='handwriting');
+    assert.equal(await page.locator('#handwritingOptions').getAttribute('open'),null,'secondary controls collapsed');
+    assert.equal(await page.locator('#handwritingCandidates').isVisible(),false,'empty results do not reserve a blank toolbar');
+    if(width<721){assert.equal(await page.locator('.mobile-focus-bar progress').isVisible(),false,'drawing has no fake session progress');assert.equal(await page.locator('.handwriting-head').isVisible(),true,'drawing keeps its own compact close/title bar');assert.equal(await page.locator('.mobile-focus-bar').isVisible(),false,'no duplicate focus header');}
     assert.equal(await page.locator('#handwritingCanvas').isVisible(),true);assert.equal(await page.locator('.dictionary-modes').isVisible(),false);assert.equal(await page.locator('#searchForm').isVisible(),false);
     assert.equal(await page.locator('#handwritingOpen').getAttribute('aria-pressed'),'true');
     if(process.env.HSK_SCREENSHOT_DIR&&width===390&&theme==='light'){fs.mkdirSync(process.env.HSK_SCREENSHOT_DIR,{recursive:true});await page.screenshot({path:path.join(process.env.HSK_SCREENSHOT_DIR,'search-four-tools.png')});}
+    const canvas=await page.locator('#handwritingCanvas').boundingBox();assert(canvas.width<=300&&canvas.height<=300,'drawing canvas stays compact');
+    await page.mouse.move(canvas.x+canvas.width*.25,canvas.y+canvas.height*.25);await page.mouse.down();await page.mouse.move(canvas.x+canvas.width*.7,canvas.y+canvas.height*.7,{steps:8});await page.mouse.up();
+    assert.equal(await page.locator('#handwritingUndo').isDisabled(),false,'real stroke enables undo');await page.waitForFunction(()=>!document.getElementById('handwritingRecognize').disabled);assert.equal(await page.locator('#handwritingRecognize').isDisabled(),false);
+    await page.locator('#handwritingClear').click();assert.equal(await page.locator('#handwritingUndo').isDisabled(),true,'clear resets drawing state');
+    await page.locator('#handwritingOptions>summary').click();assert.equal(await page.locator('#handwritingForget').isVisible(),true,'sample controls remain reachable');await page.locator('#handwritingOptions>summary').click();
     await page.locator('#handwritingClose').click();await check('search');
     await page.locator('#searchPanel [data-search-tool="image"]').click();await page.waitForFunction(()=>document.body.dataset.searchTool==='image');
     assert.equal(await page.locator('#ocrChoose').isVisible(),true);assert.equal(await page.locator('#translationForm').isVisible(),false);

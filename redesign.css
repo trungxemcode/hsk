@@ -395,7 +395,7 @@ html body.studio-enabled :is(#prev,#exampleBtn,#shuffle,#reset,#passivePause,#pa
 }
 
 /* --------------------------------------------------------- 6. FORM CONTROLS */
-html body.studio-enabled :is(input:not([type=checkbox]):not([type=radio]),select,textarea){
+html body.studio-enabled :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea){
   background:var(--rd-surface);
   border:1px solid var(--rd-line);
   border-radius:var(--radius-rd-004);
@@ -3129,7 +3129,7 @@ body.studio-enabled .feature-hero:hover .hero-character{
 
 /* Current app compatibility: touch inputs must not trigger Safari focus zoom. */
 @media (max-width:980px) {
-  html body.studio-enabled :is(input:not([type=checkbox]):not([type=radio]),select,textarea) { font-size:16px!important; }
+  html body.studio-enabled :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea) { font-size:16px!important; }
 }
 html body.studio-enabled .mobile-card-actions[hidden],
 html body.studio-enabled .mobile-focus-bar[hidden] { display:none!important; }
@@ -4238,3 +4238,25 @@ html body:not(#_rd).studio-enabled .studio-search-tabs #handwritingOpen:is(.acti
   color:var(--palette-white) !important;
   border-color:var(--press-active-bg) !important;
 }
+
+/* Compact drawing workflow; secondary settings remain available in one disclosure. */
+html body:not(#_rd).studio-enabled #handwritingPanel{margin:8px 0;padding:12px;background:var(--surface);border-color:var(--line);color:var(--ink)}
+html body:not(#_rd).studio-enabled #handwritingPanel .handwriting-board{width:min(100%,300px,38dvh);margin:8px auto}
+html body:not(#_rd).studio-enabled #handwritingCandidates:empty{display:none!important}
+html body:not(#_rd).studio-enabled #handwritingPanel :is(.handwriting-head strong,p.hint){font-size:13px;line-height:1.5}
+html body:not(#_rd).studio-enabled #handwritingPanel > p.hint{margin:6px 0}
+html body:not(#_rd).studio-enabled #handwritingPanel > .handwriting-edit-actions{margin:8px 0 4px}
+html body:not(#_rd).studio-enabled #handwritingPanel .handwriting-actions{margin:8px 0;gap:8px}
+html body:not(#_rd).studio-enabled #handwritingPanel button{min-height:44px;padding:8px;font-size:13px}
+html body:not(#_rd).studio-enabled #handwritingOptions{margin-top:10px;border-top:1px solid var(--line);font-size:13px}
+html body:not(#_rd).studio-enabled #handwritingOptions > summary{min-height:44px;padding:10px 0;cursor:pointer;font-weight:600}
+html body:not(#_rd).studio-enabled #handwritingOptions .handwriting-advanced-settings{margin-top:0;border-top:0;padding-top:0}
+html body:not(#_rd).studio-enabled[data-mobile-focus-kind=handwriting] .mobile-focus-bar progress{display:none!important}
+html body:not(#_rd).studio-enabled[data-mobile-focus-kind=handwriting] .mobile-focus-bar{display:none!important}
+html body:not(#_rd).studio-enabled[data-mobile-focus-kind=handwriting] .mobile-focus-bar > button{width:44px!important;height:44px!important;min-height:44px!important;max-width:44px;padding:0!important;flex:none}
+html body:not(#_rd).studio-enabled[data-mobile-focus-kind=handwriting] main.workspace{padding-top:8px!important}
+/* Range controls are real timelines, not text-field boxes. */
+html body:not(#_rd).studio-enabled #musicPanel input.music-scrub[type=range]{appearance:none!important;-webkit-appearance:none!important;height:32px!important;min-height:32px!important;max-height:32px!important;width:100%;padding:0!important;margin:0!important;border:0!important;box-shadow:none!important;border-radius:var(--radius-pill)!important;background:linear-gradient(to right,var(--palette-white) 0 var(--pct,0%),var(--legacy-hex-ffffff38) var(--pct,0%) 100%) center/100% 4px no-repeat!important;touch-action:pan-y}
+html body:not(#_rd).studio-enabled #musicPanel input.music-scrub::-webkit-slider-thumb{width:12px;height:12px;margin-top:3px;background:var(--palette-white);box-shadow:none}
+
+html body:not(#_rd).studio-enabled #handwritingOptions .handwriting-advanced-settings > summary:not(:active):not(:focus-visible){color:var(--ink)!important}
