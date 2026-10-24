@@ -4126,9 +4126,17 @@ html body:not(#_rd).studio-enabled .shortcut[data-studio-go]:is(:focus-visible,:
 }
 html body:not(#_rd).studio-enabled .shortcut[data-studio-go]:is(:focus-visible,:active) :is(strong,small,span) { color:var(--palette-white) !important; }
 @media (max-width:720px) {
+  html body:not(#_rd).studio-enabled #studioHome .dashboard-primary {
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  html body:not(#_rd).studio-enabled #studioHome .dashboard-primary > * { margin:0 !important; }
+  html body:not(#_rd).studio-enabled #studioHome :is(.shortcut-grid,.home-music-grid,.pathway) { gap:12px !important; }
+  html body:not(#_rd).studio-enabled #studioHome :is(#homeDailyWord,.overview-search) { margin:12px 0 0 !important; }
   html body:not(#_rd).studio-enabled .pathway {
     grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-    gap:8px !important;
+    gap:12px !important;
   }
   html body:not(#_rd).studio-enabled .path-step {
     min-width:0;

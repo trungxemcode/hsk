@@ -9,7 +9,7 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
  await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
  try{
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_EXECUTABLE});
-  for(const width of [390,1440]){
+  for(const width of [320,390,1440]){
    const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'}),errors=[];
    page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>r.abort());
    await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
@@ -31,6 +31,13 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
     const steps=await page.locator('.path-step').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width};}));
     assert(steps.every(r=>Math.abs(r.y-steps[0].y)<2),'three pathway cards share one horizontal row');
     assert(steps[1].x>=steps[0].x+steps[0].width&&steps[2].x>=steps[1].x+steps[1].width,'pathway cards do not overlap');
+    if(width<=720){
+     const gaps=await page.evaluate(()=>{
+      const rect=s=>document.querySelector(s).getBoundingClientRect(),gap=(a,b)=>rect(b).top-rect(a).bottom;
+      return [gap('.shortcut-grid','.home-music-grid'),gap('.home-music-chill','.home-music-entry'),gap('.home-music-grid','.pathway'),gap('.pathway','#homeDailyWord'),gap('#homeDailyWord','.overview-search')];
+     });
+     assert(gaps.every(g=>Math.abs(g-12)<2),'mobile home uses consistent 12px card spacing: '+gaps.join(','));
+    }
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'no horizontal overflow');
     await page.screenshot({path:'/tmp/hsk-redesign-'+width+'-'+theme+'.png',fullPage:true});
    }

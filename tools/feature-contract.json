@@ -1222,6 +1222,19 @@
         {"kind":"file","file":"tools/check-redesign-ui.cjs","value":""},
         {"kind":"file","file":"vendor/fonts/Inter-OFL.txt","value":""}
       ]
+    },
+    {
+      "id": "music-background-playback",
+      "name": "Nghe nhạc ngoại tuyến dưới nền và điều khiển hệ thống",
+      "checks": [
+        {"kind":"contains","file":"src/modules/music/music.js","value":"musicBackgroundPlayer"},
+        {"kind":"contains","file":"src/modules/music/music.js","value":"function canPlayBackground()"},
+        {"kind":"contains","file":"src/modules/music/music.js","value":"navigator.audioSession.type='playback'"},
+        {"kind":"file","file":"tools/check-music-background-ui.cjs","value":""},
+        {"kind":"contains","file":"src/modules/music/music.js","value":"musicMenuBackgroundRow"},
+        {"kind":"file","file":"tools/check-music-online-ui.cjs","value":""},
+        {"kind":"contains","file":"src/modules/music/music-direct-source.js","value":"async function stream("}
+      ]
     }
   ]
 }

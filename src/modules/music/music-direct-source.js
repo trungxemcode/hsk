@@ -111,11 +111,11 @@
   const text=String(title||'').replace(/\[[^\]]*\]|【[^】]*】/g,' ').replace(/\b(?:official|lyrics?|video|vietsub|pinyin|mv)\b/gi,' ').trim();
   const han=text.match(/[\u3400-\u9fff]+/g);return (han?han.join(' '):text).slice(0,100);
  }
- async function musicMatch(source,signal,onStatus){
+ async function musicMatch(source,signal,onStatus,metadata){
   const lookup=scope(signal,16000),item={url:'https://music-api.gdstudio.xyz'};
   try{
    onStatus('resolving','tên bài hát và kho nhạc Trung Quốc');
-   const meta=await json(await request('https://noembed.com/embed?url='+encodeURIComponent(source.url),{signal:lookup.signal,headers:{Accept:'application/json'}},item),lookup.signal);
+   const meta=metadata?.title?metadata:await json(await request('https://noembed.com/embed?url='+encodeURIComponent(source.url),{signal:lookup.signal,headers:{Accept:'application/json'}},item),lookup.signal);
    const query=matchQuery(meta.title);if(!query)throw Error('Chưa xác định được tên bài hát.');
    const api=item.url+'/api.php?';
    const rows=await json(await request(api+'types=search&source=netease&count=5&pages=1&name='+encodeURIComponent(query),{signal:lookup.signal,headers:{Accept:'application/json'}},item),lookup.signal);
@@ -131,7 +131,7 @@
    if(Number(data.br)<128||!(Number(data.size)>0)||!data.url)throw Error('Nguồn nhạc chỉ có bản nghe thử hoặc thiếu thông tin chất lượng.');
    const url=publicUrl(data.url).href;
    onStatus('matched',{title:row.name,artist:row.artist.join(', '),provider:'NetEase'});
-   return {url,title:row.name};
+   return {url,title:row.name,artist:row.artist.join(', '),provider:'NetEase'};
   }finally{lookup.close();}
  }
  async function download(url,target,{instances=[],signal,onStatus=()=>{},smartMatch=true}){
@@ -174,5 +174,42 @@
   }
   throw Error(matchError+' Các máy chủ nhạc đang chặn tải hoặc không hỗ trợ CORS ('+blocked+' lượt lỗi). Hãy thử lại sau hoặc gắn file M4A từ thiết bị; nhạc đã lưu vẫn được giữ.');
  }
- root.HSKMusicDirectSource={download,discover,invidiousCandidates,matchQuery};
+ // Resolve a progressive media URL. The audio element streams it; no full-file
+ // fetch, WASM conversion, IndexedDB write or saved expiring URL is involved.
+ async function stream(url,{instances=[],signal,onStatus=()=>{},test=async()=>true,title=''}={}){
+  abortCheck(signal);const source=root.HSKMusicCore.parseLink(url),budget=scope(signal,30000);
+  try{
+   let list=[];
+   if(source.kind==='youtube'){
+    if(!instances.length){onStatus('resolving','danh sách nguồn');try{list=await discover(budget.signal);}catch{abortCheck(budget.signal);}}
+   }
+   list.push(...instances.slice(0,4).map(endpoint).filter(i=>i.type==='cobalt'||source.kind==='youtube'));
+   // Spotify's protected stream is not a Cobalt source. A named cross-catalogue
+   // match below is a different provider and must be labelled as such.
+   if(source.kind==='spotify')list=[];
+   if(lastWorking&&Date.now()-lastWorking.at<21600000){const i=list.findIndex(x=>x.url===lastWorking.url&&x.type===lastWorking.type);if(i>0)list.unshift(...list.splice(i,1));}
+   for(const item of list){
+    abortCheck(budget.signal);if((cooldown.get(item.url)||0)>Date.now())continue;
+    const lookup=scope(budget.signal,6000);
+    try{
+     onStatus('resolving',new URL(item.url).hostname);
+     const candidates=await resolve(source,64,item,lookup.signal);
+     for(const candidate of candidates){abortCheck(lookup.signal);if(await test(candidate.url,lookup.signal)){remember(item);return {...candidate,provider:new URL(item.url).hostname};}}
+    }catch{abortCheck(budget.signal);}finally{lookup.close();}
+   }
+   // Match only a single clear song + artist; never silently use a preview.
+   const metadata=source.kind==='spotify'?{title}:undefined;
+   if(source.kind!=='spotify'||title){
+    const candidate=await musicMatch(source,budget.signal,onStatus,metadata);
+    if(await test(candidate.url,budget.signal))return candidate;
+   }
+   throw Error('Chưa có nguồn âm thanh trực tuyến phù hợp.');
+  }catch(e){
+   abortCheck(signal);
+   if(source.kind==='spotify')throw Error('Chưa tìm được bản tương ứng khớp cả tên bài và ca sĩ. Spotify không cấp luồng toàn bài từ link nhúng; hãy mở trong Spotify hoặc dùng link YouTube/SoundCloud.');
+   if(budget.signal.aborted)throw Error('Tìm nguồn nghe nền quá lâu. Thử lại hoặc tiếp tục bằng trình phát gốc.');
+   throw Error('Chưa mở được nguồn nghe nền. Trình phát gốc vẫn được giữ. '+e.message);
+  }finally{budget.close();}
+ }
+ root.HSKMusicDirectSource={download,stream,discover,invidiousCandidates,matchQuery};
 })(window);
