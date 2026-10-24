@@ -92,14 +92,18 @@
   };
   // Cốc Cốc iPhone offers its own playlist with offline downloads, but
   // websites cannot access that private media store or start its download API.
-  const coccocOffline=el('a','Lưu link để nghe ngoại tuyến trong Cốc Cốc','music-flat-row music-chill-only music-coccoc-row');
+  const coccocOffline=el('a','Cách lưu ngoại tuyến trong Cốc Cốc','music-flat-row music-chill-only music-coccoc-row');
   coccocOffline.id='musicCocCocOffline';coccocOffline.dataset.menuView='main';
   coccocOffline.target='_blank';coccocOffline.rel='noopener noreferrer';coccocOffline.href='#';
+  coccocOffline.setAttribute('role','button');coccocOffline.onkeydown=e=>{if(e.key===' '){e.preventDefault();coccocOffline.click();}};
+  coccocOffline.setAttribute('aria-controls','musicCocCocNote');coccocOffline.setAttribute('aria-expanded','false');
+  let coccocHelpOpen=false;
   coccocOffline.onclick=e=>{
+   e.preventDefault();
    if(!coccocEnabled){e.preventDefault();return;}
    const url=coccocBridge?.providerSource(currentLinkUrl,C.parseLink);
    if(!url){e.preventDefault();status('Chọn bài YouTube hoặc SoundCloud để lưu trong Danh sách nghe Cốc Cốc trước.');return;}
-   coccocOffline.href=url;
+   coccocOffline.href=url;coccocHelpOpen=!coccocHelpOpen;coccocOffline.setAttribute('aria-expanded',String(coccocHelpOpen));coccocNote.hidden=!coccocHelpOpen;if(coccocHelpOpen)coccocNote.scrollIntoView({block:'nearest'});
   };
   const coccocNote=el('p',
    'Cốc Cốc iPhone: mở trang bài hát → chạm Thêm trên thanh địa chỉ → chọn Danh sách nghe → tại bài hát chọn Cho phép nghe ngoại tuyến. File được Cốc Cốc quản lý và phát trong Cốc Cốc, KHÔNG tự chuyển sang kho HSK. HSK không thể tự nhấn Tải hoặc chặn quảng cáo cho trình duyệt.',
@@ -109,7 +113,7 @@
   function syncCocCoc(){
    coccocMode.textContent='Tôi đang dùng Cốc Cốc: '+(coccocEnabled?'Bật':'Tắt');
    coccocMode.setAttribute('aria-pressed',String(coccocEnabled));
-   coccocOpen.hidden=coccocOffline.hidden=coccocNote.hidden=!coccocEnabled;
+   coccocOpen.hidden=coccocOffline.hidden=!coccocEnabled;coccocNote.hidden=!coccocEnabled||!coccocHelpOpen;
    if(!coccocEnabled){coccocOpen.href='#';coccocOffline.href='#';return;}
    const url=coccocBridge?.providerSource(currentLinkUrl,C.parseLink);
    coccocOpen.href=url||'#';
@@ -651,11 +655,11 @@ if(view==='offline')drawOffline();
    if(e.cancelable)e.preventDefault();if(e.pointerId!==undefined)node.setPointerCapture?.(e.pointerId);g.last=y;handlers.move(dy,g.data);
   };
   const end=cancel=>{if(!gesture)return;const g=gesture;gesture=null;if(g.moved){suppress=!cancel;setTimeout(()=>suppress=false,400);handlers.end(g.last-g.y,g.data,cancel,(g.last-g.y)/Math.max(1,performance.now()-g.time));}};
-  node.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'||e.button!==0)return;start(e.clientY,e.clientX);e.target.setPointerCapture?.(e.pointerId);});
+  node.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'||e.button!==0||handlers.accept?.(e)===false)return;start(e.clientY,e.clientX);e.target.setPointerCapture?.(e.pointerId);});
   node.addEventListener('pointermove',e=>{if(e.pointerType!=='touch')move(e.clientY,e.clientX,e);});
   node.addEventListener('pointerup',e=>{if(e.pointerType!=='touch')end(false);});
   node.addEventListener('pointercancel',e=>{if(e.pointerType!=='touch')end(true);});
-  node.addEventListener('touchstart',e=>{if(e.touches.length===1)start(e.touches[0].clientY,e.touches[0].clientX);else end(true);},{passive:true});
+  node.addEventListener('touchstart',e=>{if(handlers.accept?.(e)===false)return;if(e.touches.length===1)start(e.touches[0].clientY,e.touches[0].clientX);else end(true);},{passive:true});
   node.addEventListener('touchmove',e=>{if(e.touches.length===1)move(e.touches[0].clientY,e.touches[0].clientX,e);},{passive:false});
   node.addEventListener('touchend',()=>end(false));node.addEventListener('touchcancel',()=>end(true));
  }
@@ -696,6 +700,14 @@ if(view==='offline')drawOffline();
  });
  peek.onclick=()=>toggleQueue(true);bindMusicDrag(peek,queueDrag(true));
  bindMusicDrag(queueSheet,queueDrag(false));
+ const fullStage=panel.querySelector('.music-stage'),stageQueueDrag=queueDrag(true);
+ bindMusicDrag(fullStage,{
+  accept:e=>!e.target.closest('button,a,input,select,textarea,iframe,[role="button"]'),
+  start:dy=>currentMode==='chill'&&playerExpanded&&!menuOpen&&!queueOpen?stageQueueDrag.start(dy):false,
+  move:(dy,g)=>stageQueueDrag.move(dy,g),end:(dy,g,cancel,velocity)=>stageQueueDrag.end(dy,g,cancel,velocity)
+ });
+ fullStage.addEventListener('wheel',e=>{if(currentMode==='chill'&&playerExpanded&&!menuOpen&&!queueOpen&&e.deltaY>8&&!e.target.closest('input,select,textarea')){e.preventDefault();toggleQueue(true);}},{passive:false});
+
  $('musicLyricsDrawerToggle').onclick=()=>toggleLyricsDrawer();
  if($('musicMiniMain')){
   const mini=$('musicMiniMain'),stage=panel.querySelector('.music-stage');mini.onclick=()=>setPlayerExpanded(true);

@@ -1,3 +1,10 @@
+## Fixed music viewport / Cốc Cốc limits — 2026-10-24
+- Branch fix/music-locked-viewport from main dc840a3 (owner merged PR182,3.15.12). Owner requests non-scrolling full player, upward body swipe to queue, no source-tab jump from offline action, and asks whether MediaSession can borrow Coc Coc background/download permissions.
+- Expanded chill only: fixed dynamic viewport, clipped backdrop/preview, bounded cover/title, dedicated dock grid. Short landscape uses two columns. Browse, study, menu and queue retain independent scroll. Existing gesture binding now supports an event accept guard; body/cover upward swipe uses existing queue drag mechanics, excluding controls and leaving menu separate. No iframe reparent/source change.
+- Offline Coc Coc action now expands local instructions without opening a tab; explicit Open source action remains. No undocumented native download API, bridge privileges or fabricated offline file. Existing browser choice/storage and source validation retained.
+- MediaSession metadata, handlers, position and audio session already present for actual audio; this standard does not grant a website access to browser-private downloading or native YouTube playback. Official Coc Coc playlist docs confirm browser-owned offline/background capabilities, but no public website download/permission bridge was found. No claim of autonomous download or physical iPhone lock-screen verification.
+- Checks: layout/touch swipe/cancel, independently scrolling long queue, square cover and fixed controls at320x568/667,390x844,430x932,844x390,1440x900; Coc Coc no-popup/help/declaration; provider online/links, real native background/MediaSession, feature runtime, tokens and preservation. Release prepared after validation; no merge requested for this task.
+
 ## 2026-10-24 — iOS music UX + truthful Cốc Cốc offline-link flow
 - Address full-player bottom queue clipping, unaligned mini-player controls and quick-save plus button.
 - Replace Cốc Cốc-specific MP3-import shortcut with URL handoff for Cốc Cốc-managed Listening List offline audio. A downloaded file in Cốc Cốc's browser-private store is not accessible to HSK PWA/IndexedDB.

@@ -54,6 +54,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
     assert.equal(await offlineLink.getAttribute('href'),'https://www.youtube.com/watch?v=abcdefghijk');
     assert.equal(await offlineLink.getAttribute('target'),'_blank');
     assert.equal(await offlineLink.getAttribute('rel'),'noopener noreferrer');
+    const beforePages=context.pages().length,beforeURL=page.url();await offlineLink.click();await page.waitForTimeout(150);assert.equal(context.pages().length,beforePages,'offline help cannot open a browser tab');assert.equal(page.url(),beforeURL,'offline help cannot navigate away');assert.equal(await page.locator('#musicCocCocNote').isVisible(),true);assert.equal(await offlineLink.getAttribute('aria-expanded'),'true');await offlineLink.press('Space');assert.equal(await offlineLink.getAttribute('aria-expanded'),'false');await offlineLink.press('Enter');assert.equal(await offlineLink.getAttribute('aria-expanded'),'true');assert.equal(context.pages().length,beforePages,'keyboard help cannot open a browser tab');
     assert.match(await page.locator('#musicCocCocNote').textContent(),/Danh sách nghe/);
     assert.equal(await page.locator('#musicCocCocImport').count(),0,'Cốc Cốc option must not impersonate the device file import');
     assert.equal(await page.evaluate(async()=>(await HSKMusicOffline.list('guest')).length),0,'Saving a link in the Coc Coc browser must not pretend a file is available offline in HSK');
