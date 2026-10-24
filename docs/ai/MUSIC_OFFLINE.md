@@ -1,3 +1,6 @@
+## Current playback policy — 2026-10-24
+Official YouTube nocookie Iframe API and SoundCloud Widget only; direct public HTTPS MP3/M4A streams use native audio. No Invidious/Piped/Cobalt or similar-title source matching in the app playback path. Browser SponsorBlock can skip community-tagged sponsor/intro/outro/non-music content with undo and an account-local toggle; it does not remove YouTube-inserted ads or guarantee provider availability. No VPS/backend used for media. User-selected MP3/M4A files continue to be stored in IndexedDB for offline listening; no URL-to-file downloader or automatic codec usage. Some legacy helper/server files remain for compatibility but are not loaded by the app player. The notes below record earlier implementation stages where applicable.
+
 ## Quyết định mới — 24/10/2026: chỉ giữ ngoại tuyến với file người dùng tự chọn
 
 **Tắt tính năng tự tải nhạc từ link YouTube/SoundCloud/Spotify về kho ngoại tuyến**;

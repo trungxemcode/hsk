@@ -22,3 +22,8 @@ test('SoundCloud accepts one public track, strips tracking and encodes its widge
 test('rejects arbitrary domains, credentials, deceptive hosts, scripts, playlists, private tracks and short links',()=>{
  for(const url of ['https://youtube.com.evil.test/watch?v=abcdefghijk','https://youtube.com@evil.test/watch?v=abcdefghijk','https://evil.test','javascript:alert(1)','http://youtu.be/abcdefghijk','https://youtu.be:444/abcdefghijk','https://www.youtube.com/playlist?list=x','https://www.youtube.com/@channel','https://open.spotify.com/album/0123456789ABCDEFGHIJKL','https://soundcloud.com/artist/sets','https://soundcloud.com/artist/song?secret_token=s-secret','https://soundcloud.com/artist/song/s-secret','https://on.soundcloud.com/abc','https://spotify.link/abc','https://soundcloud.com/discover/song'])assert.throws(()=>C.parseLink(url),url);
 });
+
+test('public HTTPS MP3/M4A URLs play as direct audio, with no provider substitution',()=>{
+ for(const url of ['https://media.example.com/song.mp3','https://media.example.com/song.M4A?token=example']){const p=C.parseLink(url);assert.equal(p.kind,'audio');assert.equal(p.url,url);assert.equal(p.source.url,url);}
+ for(const url of ['https://localhost/track.mp3','https://127.0.0.1/a.mp3','https://[::1]/a.m4a','https://host.local/a.mp3','http://media.example.com/a.mp3','https://user:pass@media.example.com/a.mp3'])assert.throws(()=>C.parseLink(url));
+});

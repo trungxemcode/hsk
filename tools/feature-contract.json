@@ -1269,6 +1269,37 @@
           "value": "async function usage()"
         }
       ]
+    },
+    {
+      "id": "music-official-online",
+      "name": "Nguồn phát online chính thức và SponsorBlock",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "src/modules/music/music-sponsor.js",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "musicSponsorToggle"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music-soundcloud.js",
+          "value": "officialWidget:true"
+        },
+        {
+          "kind": "contains",
+          "file": "loader.js",
+          "value": "./src/modules/music/music-sponsor.js"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-sponsor.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }
