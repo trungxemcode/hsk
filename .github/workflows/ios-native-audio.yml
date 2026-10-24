@@ -1,0 +1,45 @@
+name: iOS native background audio
+on:
+  pull_request:
+    paths:
+      - 'ios/HSKMusic/**'
+      - 'src/modules/music/music.js'
+      - 'tools/check-music-ios-native-ui.cjs'
+      - '.github/workflows/ios-native-audio.yml'
+  workflow_dispatch:
+
+jobs:
+  ios-build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        run: xcodegen generate --spec ios/HSKMusic/project.yml --project ios/HSKMusic
+      - name: Compile unsigned for simulator
+        run: >
+          xcodebuild -project ios/HSKMusic/HSKMusic.xcodeproj
+          -scheme HSKMusic -configuration Debug
+          -destination 'generic/platform=iOS Simulator'
+          -derivedDataPath /tmp/hsk-ios-simulator
+          CODE_SIGNING_ALLOWED=NO build
+      - name: Compile unsigned for real iPhone
+        run: >
+          xcodebuild -project ios/HSKMusic/HSKMusic.xcodeproj
+          -scheme HSKMusic -configuration Release
+          -destination 'generic/platform=iOS'
+          -derivedDataPath /tmp/hsk-ios-device
+          CODE_SIGNING_ALLOWED=NO build
+      - name: Package unsigned IPA for local signing
+        run: |
+          mkdir -p /tmp/hsk-ipa/Payload
+          cp -R /tmp/hsk-ios-device/Build/Products/Release-iphoneos/HSKMusic.app /tmp/hsk-ipa/Payload/
+          cd /tmp/hsk-ipa
+          zip -qry "$GITHUB_WORKSPACE/HSKMusic-unsigned.ipa" Payload
+      - name: Upload unsigned IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: HSKMusic-unsigned-iphone
+          path: HSKMusic-unsigned.ipa
+          retention-days: 7

@@ -55,6 +55,7 @@
  const expandedPlaylists=new Set();
  let offlineRows=[],offlineRequest=0,offlinePlayRequest=0,offlineSelection=null,offlineContext=false;
  let nativeLinkAudio=null,persistentLinkAudio=null,previousAudioSessionType=null,onlineStreamRequest=null,onlineQueueMode=false,streamStatus='';
+ let nativeOnlineActive=false;
  const onlineButton=el('button',undefined,'music-flat-row music-chill-only');onlineButton.id='musicMenuBackgroundRow';onlineButton.type='button';onlineButton.dataset.menuView='main';onlineButton.setAttribute('aria-pressed','false');
  const onlineLabel=el('span','Phát bài đang chọn','music-flat-label');onlineLabel.setAttribute('aria-live','polite');onlineButton.append(el('span','♫','music-flat-ico'),onlineLabel);
  const onlineNote=el('p',undefined,'music-empty-note music-chill-only');onlineNote.id='musicOnlineStatus';onlineNote.dataset.menuView='main';onlineNote.setAttribute('role','status');onlineNote.hidden=true;$('musicMenuOfflineRow').before(onlineButton,onlineNote);
@@ -153,7 +154,7 @@
   const audio=document.createElement('audio');audio.id='musicYouTubeKeepAlive';audio.hidden=true;audio.loop=true;audio.preload='auto';audio.setAttribute('playsinline','');audio.setAttribute('aria-hidden','true');audio.src='data:audio/wav;base64,'+btoa(String.fromCharCode(...bytes));document.body.append(audio);youtubeKeepAlive=audio;return audio;
  }
  function startYouTubeKeepAlive(prime=false){
-  if(linkKind!=='youtube'||nativeLinkAudio||onlineStreamRequest||!linkWantedPlay||navigator.audioSession?.state==='interrupted')return;
+  if(linkKind!=='youtube'||nativeLinkAudio||nativeOnlineActive||onlineStreamRequest||!linkWantedPlay||navigator.audioSession?.state==='interrupted')return;
   if(prime&&navigator.userActivation&&!navigator.userActivation.isActive)return;
   const audio=keepAliveElement();if(!audio.paused)return;
   const token=++keepAliveToken;prepareAudioSession();
@@ -395,6 +396,8 @@ if(view==='offline')drawOffline();
   $('musicQuickRate').setAttribute('aria-pressed',String(rate!==1));
  }
  function syncMediaSession(){
+  // AVPlayer owns lock-screen media controls within the native iOS shell.
+  if(nativeOnlineActive&&window.HSKNativeAudio?.available)return;
   if(!('mediaSession' in navigator)||typeof MediaMetadata==='undefined')return;
   try{
    const activePl=activePlaylistId?savedPlaylists().find(p=>p.id===activePlaylistId):null;
@@ -725,6 +728,95 @@ if(view==='offline')drawOffline();
   task.catch(()=>{prefetchCooldowns.set(key,Date.now()+30000);while(prefetchCooldowns.size>4)prefetchCooldowns.delete(prefetchCooldowns.keys().next().value);}).finally(()=>{if(nextSourceRequest===task)nextSourceRequest=null;});
  }
  // Resolve only the exact YouTube ID. Native audio lives outside route panels.
+ // Native iOS shell: authenticated HSK browser obtains the original audio URL,
+ // and AVPlayer (not WKWebView or PWA) owns real background playback.
+ // No audio downloading, no silent looping, no YouTube iframe fallback.
+ function mountSystemOnlineYouTube(link,title,epoch,autoPlay){
+  const bridge=window.HSKNativeAudio,session=String(epoch)+':'+link.source.videoId;
+  if(!bridge?.available)return mountOnlineYouTube(link,title,epoch,autoPlay);
+  stopYouTubeKeepAlive(true);nativeOnlineActive=true;onlineQueueMode=true;
+  linkKind='youtube';
+  let state=3,position=0,duration=0,hasSource=false,resolving=false,dead=false;
+  let request=null;
+  const valid=()=>!dead&&epoch===serial&&nativeOnlineActive;
+  const send=(action,more={})=>bridge.send({action,session,...more});
+  const fail=(message)=>{
+   if(!valid())return;
+   resolving=false;hasSource=false;state=2;linkWantedPlay=false;
+   linkPendingPlay=false;linkOptimisticPlay=false;clearTimeout(linkStartTimer);
+   status(message);updateLinkPlayButton();syncBackgroundPlayer();
+  };
+  const load=async(refresh=false)=>{
+   if(!valid()||resolving)return;
+   resolving=true;state=3;
+   const controller=new AbortController();request=controller;
+   onlineStreamRequest=controller;
+   status(refresh?'Đang kết nối lại audio…':'Đang lấy nguồn âm thanh cho iPhone…');
+   try{
+    const data=await onlineSource(link,refresh);
+    if(!valid()||controller.signal.aborted)return;
+    hasSource=true;resolving=false;
+    fetchLinkMetadata(link,title,epoch,{title:data.title,author:data.artist});
+    send('load',{url:data.url,relayUrl:data.relayUrl,
+     title:data.title||currentLinkTitle,artist:data.artist||currentLinkAuthor,
+     autoPlay:linkWantedPlay,loop:linkLoop,rate:linkRate});
+    $('musicLinkNotice').textContent='Trình phát iPhone · Nghe dưới nền';
+    status('');syncBackgroundPlayer();
+   }catch(e){
+    if(valid())fail(e.name==='AbortError'?'Kết nối nguồn nhạc bị gián đoạn. Chạm Phát để thử lại.':e.message);
+   }finally{
+    if(request===controller)request=null;
+    if(onlineStreamRequest===controller)onlineStreamRequest=null;
+    if(valid())resolving=false;
+    syncBackgroundPlayer();
+   }
+  };
+  const events=e=>{
+   const d=e.detail;
+   if(!valid()||d?.session!==session)return;
+   if(d.event==='error')return fail(d.message||'Trình phát iPhone không mở được audio này.');
+   if(d.event==='stopped')return;
+   if(Number.isFinite(d.position))position=d.position;
+   if(Number.isFinite(d.duration))duration=d.duration;
+   if(d.event==='ended'){
+    state=0;linkWantedPlay=false;linkPendingPlay=false;linkOptimisticPlay=false;
+    // Native engine owns completed-track state. JS next-track handoff
+    // requires foreground web availability and cannot be guaranteed locked.
+    if(!document.hidden&&!linkLoop)finishLinkTrack();
+   }else if(d.event==='loading'){state=3;}
+   else {
+    state=d.playing?1:2;
+    if(d.playing){linkOptimisticPlay=true;linkPendingPlay=false;clearTimeout(linkStartTimer);status('');}
+    else if(!resolving){linkOptimisticPlay=false;linkPendingPlay=false;}
+   }
+   linkTimeline(position,duration);updateLinkPlayButton();syncBackgroundPlayer();
+  };
+  window.addEventListener('hsk-native-audio',events);
+  linkReady=true;
+  linkYt={
+   getCurrentTime:()=>position,
+   getDuration:()=>duration,
+   getPlayerState:()=>state,
+   seekTo:t=>{if(hasSource)send('seek',{position:Math.max(0,Number(t)||0)});},
+   playVideo:()=>{if(resolving)return;if(hasSource)send('play');else load(true);},
+   pauseVideo:()=>{send('pause');state=2;},
+   setPlaybackRate:r=>send('rate',{value:r}),
+   getAvailablePlaybackRates:()=>[.75,1,1.25],
+   destroy:()=>{
+    dead=true;request?.abort();window.removeEventListener('hsk-native-audio',events);
+    send('stop');nativeOnlineActive=false;onlineQueueMode=false;
+    if(onlineStreamRequest===request)onlineStreamRequest=null;
+   }
+  };
+  $('musicLinkPlayer').classList.remove('music-youtube-stealth');
+  $('musicLinkControls').hidden=false;
+  for(const id of ['musicLinkBack10','musicLinkPlay','musicLinkFwd10'])$(id).disabled=false;
+  setArt($('musicLinkThumb'),$('musicLinkBg'),ytMaxThumb(link.source.videoId),ytThumb(link.source.videoId));
+  $('musicLinkCover').hidden=false;$('musicLinkScrubRow').hidden=false;
+  $('musicLinkNotice').textContent='Đang chuẩn bị trình phát iPhone';
+  linkTimeline(0,0);updateLinkPlayButton();syncBackgroundPlayer();
+  load();
+ }
  function mountOnlineYouTube(link,title,epoch,autoPlay){
   // Use the real M4A for native audio. A looping silent WAV deceptively
    // marks playback active and can take over iOS lock-screen media controls.
@@ -1223,7 +1315,7 @@ if(view==='offline')drawOffline();
   syncMediaSession();
   if(linkKind!=='youtube')stopYouTubeKeepAlive(true);
   if(offline){mountOfflineLink(offline,link,epoch,autoPlay);}
-  else if(link.kind==='youtube'&&config.onlineResolver){mountOnlineYouTube(link,cleanTitle,epoch,autoPlay);}
+  else if(link.kind==='youtube'&&config.onlineResolver){if(window.HSKNativeAudio?.available)mountSystemOnlineYouTube(link,cleanTitle,epoch,autoPlay);else mountOnlineYouTube(link,cleanTitle,epoch,autoPlay);}
   else if(link.kind==='soundcloud'){
    onlineQueueMode=true;$('musicLinkCover').hidden=true;$('musicLinkControls').hidden=false;$('musicLinkScrubRow').hidden=false;
    for(const id of ['musicLinkBack10','musicLinkPlay','musicLinkFwd10'])$(id).disabled=false;
