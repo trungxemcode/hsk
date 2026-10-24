@@ -28,21 +28,19 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    }
    await page.goto(base);await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic&&window.HSKMusicOffline);
    await openMenu();
-   const mode=page.locator('#musicCocCocModeToggle'),link=page.locator('#musicCocCocOpen'),offlineLink=page.locator('#musicCocCocOffline');
+   const mode=page.locator('#musicCocCocModeToggle'),link=page.locator('#musicCocCocOpen');
    assert.equal(await mode.isVisible(),true,'declaration is always accessible');
+   assert.equal(await page.locator('#musicCocCocOffline,#musicCocCocNote').count(),0,'removed Coc Coc offline handoff/help per owner request; no download action remains');
    assert.equal(await mode.getAttribute('aria-pressed'),String(data.auto));
    assert.equal(await link.isVisible(),data.auto,'source link hidden until verified or declared');
-   assert.equal(await offlineLink.isVisible(),data.auto,'import shortcut hidden until verified or declared');
    if(!data.auto){
     await mode.click();
     assert.equal(await mode.getAttribute('aria-pressed'),'true');
     assert.equal(await link.isVisible(),true);
-    assert.equal(await offlineLink.isVisible(),true);
     assert.equal(await page.evaluate(()=>localStorage.getItem('hsk-music-coccoc-mode-v1')),'on');
    }
    assert.equal(await link.getAttribute('aria-disabled'),'true','no provider chosen');
    assert.equal(await link.getAttribute('href'),'#');
-   assert.match(await page.locator('#musicCocCocNote').textContent(),/trình duyệt/);
    await page.locator('#musicLinkImport>summary').click();
    await page.locator('#musicLinkUrl').fill('https://youtu.be/abcdefghijk');
    await page.locator('#musicLinkApply').click();
@@ -51,10 +49,6 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await link.getAttribute('target'),'_blank');
    assert.equal(await link.getAttribute('rel'),'noopener noreferrer');
    assert.equal(await link.getAttribute('aria-disabled'),'false');
-    assert.equal(await offlineLink.getAttribute('href'),'https://www.youtube.com/watch?v=abcdefghijk');
-    assert.equal(await offlineLink.getAttribute('target'),'_blank');
-    assert.equal(await offlineLink.getAttribute('rel'),'noopener noreferrer');
-    assert.match(await page.locator('#musicCocCocNote').textContent(),/Danh sách nghe/);
     assert.equal(await page.locator('#musicCocCocImport').count(),0,'Cốc Cốc option must not impersonate the device file import');
     assert.equal(await page.evaluate(async()=>(await HSKMusicOffline.list('guest')).length),0,'Saving a link in the Coc Coc browser must not pretend a file is available offline in HSK');
    assert.ok(!requests.some(u=>/v1.jobs|invidious|piped|cobalt|source-resolver|googlevideo/.test(u)),JSON.stringify(requests));
@@ -65,7 +59,6 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await page.evaluate(async()=>(await HSKMusicOffline.list('guest')).length),0,'no fake offline file after reload');
    await page.locator('#musicCocCocModeToggle').click();
    assert.equal(await page.locator('#musicCocCocOpen').isVisible(),false,'off switch hides optional actions');
-   assert.equal(await page.locator('#musicCocCocOffline').isVisible(),false);
    assert.equal(await page.evaluate(()=>localStorage.getItem('hsk-music-coccoc-mode-v1')),'off');
    await page.reload();await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic);
    await openMenu();
@@ -73,7 +66,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await page.locator('#musicCocCocModeToggle').getAttribute('aria-pressed'),'false');
    assert.deepEqual(errors,[],'no browser exceptions');
    await context.close();
-   console.log('PASS '+data.label+': manual switch/auto, conditional visibility, validated source, Cốc Cốc browser-managed offline handoff, persistence and reversible off');
+   console.log('PASS '+data.label+': manual switch/auto, conditional visibility, validated source, removed Coc Coc offline action, persistence and reversible off');
   }
  }finally{await browser?.close();await new Promise(resolve=>server.close(resolve));}
 })().catch(err=>{console.error(err);process.exitCode=1;});
