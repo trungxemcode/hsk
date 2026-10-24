@@ -22,13 +22,8 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   await page.locator('#musicLinkScrub').dispatchEvent('pointerdown');await page.locator('#musicLinkScrub').evaluate(n=>{n.value='60';n.dispatchEvent(new Event('input',{bubbles:true}));});assert.equal(await page.evaluate(()=>window.testMusicYT.time),60,'scrub seeks the actual player');
   await page.evaluate(()=>window.testMusicYT.time=22);await page.waitForTimeout(350);assert.equal(await page.locator('#musicLinkScrub').inputValue(),'60','polling cannot snap back an active drag');
   await page.evaluate(()=>window.dispatchEvent(new PointerEvent('pointerup')));await page.evaluate(()=>window.testMusicYT.time=60.2);await page.waitForFunction(()=>Number(document.getElementById('musicLinkScrub').value)>60);
-  await page.evaluate(()=>{window.retainedMusicFrame=document.querySelector('#musicLinkPlayer iframe');window.retainedYT=window.testMusicYT;HSKStudio.navigate('practice');});
-  await page.waitForFunction(()=>!document.getElementById('musicBackgroundPlayer').hidden);assert.equal(await page.locator('#musicLinkPlayer iframe').isVisible(),true,'official YouTube remains visibly embedded outside music route');
-  const retainedBox=await page.locator('#musicLinkPlayer iframe').boundingBox();assert(retainedBox.width>=200&&retainedBox.height>=200);
-  assert.equal(await page.evaluate(()=>window.retainedMusicFrame===document.querySelector('#musicLinkPlayer iframe')&&window.retainedYT===window.testMusicYT&&window.testMusicYT.state===1),true,'route exit neither destroys nor remounts the playing iframe');
-  await page.locator('#musicBackgroundPlayer [aria-label="Tạm dừng nhạc"]').click();assert.equal(await page.evaluate(()=>window.testMusicYT.state),2);await page.locator('#musicBackgroundPlayer [aria-label="Phát nhạc"]').click();
-  await page.evaluate(()=>HSKStudio.navigate('music-play'));assert.equal(await page.evaluate(()=>window.retainedYT===window.testMusicYT),true);
-const seeks=await page.evaluate(()=>window.testMusicYT.seeks.length);await page.waitForTimeout(350);assert.equal(await page.evaluate(()=>window.testMusicYT.seeks.length),seeks);
+  assert.equal(await page.locator('.music-youtube-surface').count(),0,'no added visible video/portal UI');assert.equal(await page.locator('#musicLinkPlayer').evaluate(n=>!!n.closest('#musicPanel')),true,'original player stays inside music panel');
+  const seeks=await page.evaluate(()=>window.testMusicYT.seeks.length);await page.waitForTimeout(350);assert.equal(await page.evaluate(()=>window.testMusicYT.seeks.length),seeks);
   await page.locator('#musicMenuBtn').click();await page.locator('#musicSponsorToggle').click();assert.equal(await page.locator('#musicSponsorToggle').getAttribute('aria-pressed'),'false');await page.locator('#musicMenuClose').click();
   await add('https://soundcloud.com/artist/song');await page.waitForFunction(()=>window.scOfficialTest.plays>0);
   assert.equal(new URL(await page.locator('#musicLinkPlayer iframe').getAttribute('src')).hostname,'w.soundcloud.com');
