@@ -51,14 +51,14 @@
  document.querySelector('main.workspace').append(panel);
  for(let n=1;n<=6;n++)$('musicLevel').add(new Option('HSK '+n,String(n)));
  const video=$('musicPlayer');
- let song=null,index=0,loop=false,linkLoop=false,linkRate=1,reveal=false,holding=false,pin=false,vi=false,drawerHanzi=true,drawerOpen=false,hideYt=true,menuOpen=false,queueOpen=false,currentMode='study',objectUrl=null,yt=null,ytTimer=null,linkYt=null,linkTimer=null,linkOptimisticPlay=false,linkPendingPlay=false,studyOptimisticPlay=false,currentLinkUrl='',currentLinkTitle='',currentLinkAuthor='',activePlaylistId='',playerExpanded=false,serial=0,fetcher=null,opened=false,checked=false,lastSaved=0,lastTime=0;
+ let song=null,index=0,loop=false,linkLoop=false,linkRate=1,reveal=false,holding=false,pin=false,vi=false,drawerHanzi=true,drawerOpen=false,hideYt=true,menuOpen=false,queueOpen=false,currentMode='study',objectUrl=null,yt=null,ytTimer=null,linkYt=null,linkTimer=null,linkOptimisticPlay=false,linkPendingPlay=false,linkReady=false,linkKind='',linkStartTimer=null,studyOptimisticPlay=false,currentLinkUrl='',currentLinkTitle='',currentLinkAuthor='',activePlaylistId='',playerExpanded=false,serial=0,fetcher=null,opened=false,checked=false,lastSaved=0,lastTime=0;
  const expandedPlaylists=new Set();
  let offlineRows=[],offlineRequest=0,offlinePlayRequest=0,offlineSelection=null,offlineContext=false;
  let nativeLinkAudio=null,persistentLinkAudio=null,previousAudioSessionType=null,onlineStreamRequest=null,onlineQueueMode=false,streamStatus='';
  const onlineButton=el('button',undefined,'music-flat-row music-chill-only');onlineButton.id='musicMenuBackgroundRow';onlineButton.type='button';onlineButton.dataset.menuView='main';onlineButton.setAttribute('aria-pressed','false');
  const onlineLabel=el('span','Phát bài đang chọn','music-flat-label');onlineLabel.setAttribute('aria-live','polite');onlineButton.append(el('span','♫','music-flat-ico'),onlineLabel);
  const onlineNote=el('p',undefined,'music-empty-note music-chill-only');onlineNote.id='musicOnlineStatus';onlineNote.dataset.menuView='main';onlineNote.setAttribute('role','status');onlineNote.hidden=true;$('musicMenuOfflineRow').before(onlineButton,onlineNote);
- onlineButton.onclick=()=>{if(onlineStreamRequest){onlineStreamRequest.abort();return;}if(!currentLinkUrl){status('Chọn bài hát hoặc dán link trước khi bật nghe nền.');onlineLabel.textContent='Chọn bài hát trước';return;}if(canPlayBackground()&&!nativeLinkAudio?.error){linkYt?.playVideo?.();toggleMenu(false);return;}try{startOnlineBackground(C.parseLink(currentLinkUrl),currentLinkTitle,activePlaylistId);}catch(e){status(e.message);}};
+ onlineButton.onclick=()=>{if(onlineStreamRequest){onlineStreamRequest.abort();return;}if(!currentLinkUrl){status('Chọn bài hát hoặc dán link trước khi bật nghe nền.');onlineLabel.textContent='Chọn bài hát trước';return;}if(canPlayBackground()&&!nativeLinkAudio?.error){requestLinkPlayback(true);toggleMenu(false);return;}try{startOnlineBackground(C.parseLink(currentLinkUrl),currentLinkTitle,activePlaylistId);}catch(e){status(e.message);}};
  let sponsorEnabled=read('sponsor-skip','on')!=='off';
  const sponsorButton=el('button',undefined,'music-flat-row music-chill-only');sponsorButton.id='musicSponsorToggle';sponsorButton.type='button';sponsorButton.title='Mốc cộng đồng SponsorBlock; không chặn quảng cáo do YouTube chèn.';sponsorButton.dataset.menuView='main';
  const sponsorNotice=el('p',undefined,'music-sponsor-notice'),sponsorUndo=el('button','Nghe lại');sponsorNotice.hidden=true;sponsorUndo.type='button';sponsorUndo.id='musicSponsorUndo';
@@ -73,10 +73,11 @@
  const backgroundTitle=el('button'),backgroundPlay=el('button'),backgroundClose=el('button','×');
  for(const button of [backgroundTitle,backgroundPlay,backgroundClose])button.type='button';
  backgroundTitle.className='music-background-title';backgroundTitle.onclick=()=>window.HSKStudio?.navigate('music-play');
- backgroundPlay.onclick=()=>{if(linkYt?.getPlayerState?.()===1)linkYt?.pauseVideo?.();else linkYt?.playVideo?.();};
+ backgroundPlay.onclick=()=>$('musicLinkPlay').click();
  backgroundClose.setAttribute('aria-label','Dừng nhạc');backgroundClose.onclick=()=>stop();
  backgroundPlayer.append(backgroundTitle,backgroundPlay,backgroundClose);document.body.append(backgroundPlayer);
- function canPlayBackground(){return currentMode==='chill'&&Boolean(nativeLinkAudio||linkYt?.officialWidget);}
+ // Retain the existing player on app navigation; OS lock-screen playback is provider-dependent.
+ function canPlayBackground(){return currentMode==='chill'&&Boolean(nativeLinkAudio||linkYt?.officialWidget||['youtube','soundcloud'].includes(linkKind));}
  function prepareAudioSession(){try{if(navigator.audioSession){if(previousAudioSessionType===null)previousAudioSessionType=navigator.audioSession.type;navigator.audioSession.type='playback';}}catch{}}
  function syncBackgroundPlayer(){
   const active=canPlayBackground();backgroundPlayer.hidden=!active||!panel.hidden;
@@ -86,7 +87,7 @@
   if(!onlineStreamRequest)onlineLabel.textContent=active?'Đang phát bằng nguồn gốc':'Phát bài đang chọn';
   const playing=active&&(nativeLinkAudio?!nativeLinkAudio.paused&&!nativeLinkAudio.ended:linkYt?.getPlayerState?.()===1);
   backgroundPlay.innerHTML=playing?ICONS.pause:ICONS.play;backgroundPlay.setAttribute('aria-label',playing?'Tạm dừng nhạc':'Phát nhạc');
-  if(active){try{navigator.mediaSession.playbackState=playing?'playing':'paused';const d=nativeLinkAudio?.duration;if(Number.isFinite(d)&&d>0)navigator.mediaSession.setPositionState?.({duration:d,playbackRate:nativeLinkAudio.playbackRate,position:Math.max(0,Math.min(d,nativeLinkAudio.currentTime))});}catch{}}
+  if(active){try{navigator.mediaSession.playbackState=playing?'playing':'paused';const d=Number(nativeLinkAudio?.duration??linkYt?.getDuration?.()),c=Number(nativeLinkAudio?.currentTime??linkYt?.getCurrentTime?.());if(Number.isFinite(d)&&d>0&&Number.isFinite(c))navigator.mediaSession.setPositionState?.({duration:d,playbackRate:nativeLinkAudio?.playbackRate||linkRate,position:Math.max(0,Math.min(d,c))});}catch{}}
  }
  // Official embeds or user-provided file URLs only; no source discovery or substitution.
  function startOnlineBackground(link,title,playlistId=''){
@@ -306,8 +307,8 @@
    const seekDelta=delta=>{if(song)seekBy(delta);else if(linkYt){const c=Number(linkYt.getCurrentTime?.()||0),d=Number(linkYt.getDuration?.()||0);linkYt.seekTo?.(Math.max(0,d>0?Math.min(d,c+delta):c+delta),true);}};
    const actions={
     stop:()=>stop(),
-    play:()=>{if(song)play();else linkYt?.playVideo?.();},
-    pause:()=>{if(song){pauseNative();yt?.pauseVideo?.();updatePlayButton();}else{linkYt?.pauseVideo?.();updateLinkPlayButton();}},
+    play:()=>{if(song)play();else requestLinkPlayback(true);},
+    pause:()=>{if(song){pauseNative();yt?.pauseVideo?.();updatePlayButton();}else requestLinkPlayback(false);},
     previoustrack:()=>{if(song)stepLessonTrack(-1);else stepSavedLink(-1);},
     nexttrack:()=>{if(song)stepLessonTrack(1);else stepSavedLink(1);},
     seekbackward:d=>seekDelta(-(d?.seekOffset||5)),
@@ -554,15 +555,15 @@
   const listeners=[];
   const listen=(name,fn)=>{audio.addEventListener(name,fn);listeners.push([name,fn]);};
   audio.preload='auto';audio.crossOrigin='anonymous';audio.src=url;audio.playbackRate=linkRate;audio.loop=linkLoop;
-  linkYt={getCurrentTime:()=>audio.currentTime,getDuration:()=>audio.duration,getPlayerState:()=>audio.ended?0:audio.paused?2:1,seekTo:t=>{audio.currentTime=Math.max(0,Math.min(Number(t)||0,Number.isFinite(audio.duration)?audio.duration:Number(t)||0));},playVideo:()=>{prepareAudioSession();audio.play().catch(()=>{if(epoch===serial){linkOptimisticPlay=false;updateLinkPlayButton();status('Chạm nút Phát để nghe nhạc trên thiết bị.');}});},pauseVideo:()=>audio.pause(),setPlaybackRate:r=>{audio.playbackRate=r;},getAvailablePlaybackRates:()=>[.75,1,1.25],destroy:()=>{if(destroyed)return;destroyed=true;for(const [name,fn] of listeners)audio.removeEventListener(name,fn);audio.pause();audio.removeAttribute('src');audio.load();if(!entry.streamUrl)URL.revokeObjectURL(url);nativeLinkAudio=null;try{if(navigator.mediaSession)navigator.mediaSession.playbackState='none';if(navigator.audioSession?.type==='playback'&&previousAudioSessionType!==null)navigator.audioSession.type=previousAudioSessionType;}catch{}previousAudioSessionType=null;syncBackgroundPlayer();}};
+  linkReady=true;linkYt={getCurrentTime:()=>audio.currentTime,getDuration:()=>audio.duration,getPlayerState:()=>audio.ended?0:audio.paused?2:1,seekTo:t=>{audio.currentTime=Math.max(0,Math.min(Number(t)||0,Number.isFinite(audio.duration)?audio.duration:Number(t)||0));},playVideo:()=>{prepareAudioSession();audio.play().catch(()=>{if(epoch===serial){linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();status('Chạm nút Phát để nghe nhạc trên thiết bị.');}});},pauseVideo:()=>audio.pause(),setPlaybackRate:r=>{audio.playbackRate=r;},getAvailablePlaybackRates:()=>[.75,1,1.25],destroy:()=>{if(destroyed)return;destroyed=true;for(const [name,fn] of listeners)audio.removeEventListener(name,fn);audio.pause();audio.removeAttribute('src');audio.load();if(!entry.streamUrl)URL.revokeObjectURL(url);nativeLinkAudio=null;try{if(navigator.mediaSession)navigator.mediaSession.playbackState='none';if(navigator.audioSession?.type==='playback'&&previousAudioSessionType!==null)navigator.audioSession.type=previousAudioSessionType;}catch{}previousAudioSessionType=null;syncBackgroundPlayer();}};
   const tick=()=>{if(epoch!==serial||destroyed)return;const c=audio.currentTime,d=Number.isFinite(audio.duration)?audio.duration:0;linkTimeline(c,d);updateLinkPlayButton();};
   for(const name of ['timeupdate','loadedmetadata','seeked','ratechange'])listen(name,()=>{tick();syncBackgroundPlayer();});
   for(const name of ['play','pause'])listen(name,()=>{if(epoch===serial){linkOptimisticPlay=!audio.paused;linkPendingPlay=false;updateLinkPlayButton();}});
   listen('ended',()=>{if(epoch!==serial)return;if(linkLoop){audio.currentTime=0;linkYt?.playVideo();}else{linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();const list=playbackList().list,index=list.findIndex(row=>row.url===currentLinkUrl);if(index>=0&&index<list.length-1)stepSavedLink(1);}});
-  listen('error',()=>{if(epoch===serial){linkOptimisticPlay=false;updateLinkPlayButton();status(entry.streamUrl?'Link âm thanh bị gián đoạn. Kiểm tra mạng hoặc mở lại link nguồn.':'Chưa phát được file ngoại tuyến. Thử thêm lại file M4A.');}});
+  listen('error',()=>{if(epoch===serial){linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();status(entry.streamUrl?'Link âm thanh bị gián đoạn. Kiểm tra mạng hoặc mở lại link nguồn.':'Chưa phát được file ngoại tuyến. Thử thêm lại file M4A.');}});
   $('musicLinkPlayer').classList.remove('music-youtube-stealth');$('musicLinkControls').hidden=false;for(const id of ['musicLinkBack10','musicLinkPlay','musicLinkFwd10'])$(id).disabled=false;
   setArt($('musicLinkThumb'),$('musicLinkBg'),fallbackArt,fallbackArt);$('musicLinkCover').hidden=false;$('musicLinkScrubRow').hidden=false;$('musicLinkNotice').textContent=entry.author+(entry.streamUrl?' · Trực tuyến từ '+entry.provider+' · Không lưu ngoại tuyến':' · Đang dùng bản ngoại tuyến');
-  $('musicLinkElapsed').textContent='00:00';$('musicLinkTime').textContent='-00:00';tick();if(autoPlay)linkYt.playVideo();
+  $('musicLinkElapsed').textContent='00:00';$('musicLinkTime').textContent='-00:00';tick();if(autoPlay)requestLinkPlayback(true);
   syncMediaSession();syncBackgroundPlayer();
  }
  $('musicMenuLibraryRow').onclick=()=>{setMenuView('library');$('musicPlaylistsBox').open=true;};
@@ -677,8 +678,9 @@
  function updateLinkPlayButton(){
   syncBackgroundPlayer();
   const s=linkYt?.getPlayerState?.();
-  if(s===1){linkOptimisticPlay=true;linkPendingPlay=false;}
-  else if(s===2||s===0){linkOptimisticPlay=false;linkPendingPlay=false;}
+  if(s===1){linkOptimisticPlay=true;linkPendingPlay=false;clearTimeout(linkStartTimer);}
+  else if((s===2||s===0)&&!linkPendingPlay)linkOptimisticPlay=false;
+  $('musicLinkPlay').setAttribute('aria-busy',String(Boolean(linkPendingPlay&&s!==1)));
   const p=Boolean(linkOptimisticPlay);
   $('musicLinkPlay').innerHTML=p?ICONS.pause:ICONS.play;
   $('musicLinkPlay').setAttribute('aria-pressed',String(p));
@@ -695,9 +697,9 @@
  function updateScrubUI(){const cur=time(),dur=duration();if(dur>0){$('musicScrub').max=String(dur);$('musicScrub').value=String(Math.min(cur,dur));}paintScrub($('musicScrub'),cur,dur);$('musicElapsed').textContent=fmtTime(cur);$('musicTimeLabel').textContent=remaining(cur,dur);updatePlayButton();}
  function checkpoint(force=false){if(!song||(!force&&Date.now()-lastSaved<2000))return;lastSaved=Date.now();progress=read('progress',{});progress[song.id]={revision:song.revision,index,time:time()};const entries=Object.entries(progress).slice(-30);save('progress',Object.fromEntries(entries));}
  function pauseNative(){if(video.hasAttribute('src'))video.pause();}
- function clearPreview(){linkScrubbing=false;linkSeekTarget=null;sponsor?.stop();sponsorNotice.hidden=true;onlineStreamRequest?.abort();linkOptimisticPlay=false;linkPendingPlay=false;$('musicLinkScrubRow').hidden=true;$('musicLinkExtraActions').hidden=true;linkYt?.destroy?.();linkYt=null;clearInterval(linkTimer);linkTimer=null;$('musicLinkPlayer').replaceChildren();$('musicLinkCover').hidden=true;$('musicLinkControls').hidden=true;$('musicLinkPreview').hidden=true;syncEmptyState();}
+ function clearPreview(){clearTimeout(linkStartTimer);linkReady=false;linkKind='';linkScrubbing=false;linkSeekTarget=null;sponsor?.stop();sponsorNotice.hidden=true;onlineStreamRequest?.abort();linkOptimisticPlay=false;linkPendingPlay=false;$('musicLinkScrubRow').hidden=true;$('musicLinkExtraActions').hidden=true;linkYt?.destroy?.();linkYt=null;try{if(navigator.mediaSession){navigator.mediaSession.playbackState='none';navigator.mediaSession.setPositionState?.();}}catch{}clearInterval(linkTimer);linkTimer=null;$('musicLinkPlayer').replaceChildren();$('musicLinkCover').hidden=true;$('musicLinkControls').hidden=true;$('musicLinkPreview').hidden=true;syncEmptyState();}
  function release(savePosition=true){if(savePosition)checkpoint(true);if(video.hasAttribute('src')){video.pause();video.removeAttribute('src');video.load();}yt?.destroy?.();yt=null;clearInterval(ytTimer);ytTimer=null;clearPreview();if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=null;}}
- function stop(){onlineQueueMode=false;onlineStreamRequest?.abort();toggleQueue(false);studyOptimisticPlay=false;checkpoint(true);pauseNative();yt?.pauseVideo?.();linkYt?.pauseVideo?.();clearPreview();holding=false;renderReveal();updatePlayButton();}
+ function stop(){onlineQueueMode=false;onlineStreamRequest?.abort();toggleQueue(false);studyOptimisticPlay=false;checkpoint(true);pauseNative();yt?.pauseVideo?.();if(linkReady)linkYt?.pauseVideo?.();clearPreview();holding=false;renderReveal();updatePlayButton();}
  function savedLinks(){const value=read('links',[]);return Array.isArray(value)?value:[];}
  function savedPlaylists(){const value=read('playlists',[]);return Array.isArray(value)?value.filter(p=>p&&typeof p.id==='string'&&typeof p.name==='string'&&Array.isArray(p.items)):[];}
  function renderQuickPlaylistPills(){
@@ -958,13 +960,13 @@
  }
  function openLink(link,title,saveOrder=true,playlistId='',autoPlay=false,offline=null){
   if(!offline&&currentMode==='chill'&&currentLinkUrl===link.url&&linkYt){
-   activePlaylistId=playlistId;if(autoPlay){linkPendingPlay=true;linkOptimisticPlay=true;linkYt.playVideo?.();updateLinkPlayButton();}toggleMenu(false);return;
+   activePlaylistId=playlistId;if(autoPlay)requestLinkPlayback(true);toggleMenu(false);return;
   }
   if(!offline&&window.HSKMusicOffline&&offlineRows.some(row=>row.url===link.url)){playOffline(link.url,playlistId,autoPlay);return;}
   if(!offline&&link.kind==='audio')offline={streamUrl:link.url,provider:'Link âm thanh',author:link.label};
   if(!offline&&navigator.onLine===false){status('Bài này chưa được lưu ngoại tuyến. Mở mục Nghe ngoại tuyến để chọn bài đã lưu.');return;}
   offlineContext=Boolean(offline&&!offline.streamUrl);
-  currentMode='chill';release();song=null;const epoch=++serial;currentLinkUrl=link.url;
+  currentMode='chill';release();song=null;const epoch=++serial;currentLinkUrl=link.url;linkKind=link.kind;
   if(autoPlay)playerExpanded=true;
   panel.classList.toggle('music-player-expanded',playerExpanded);
   linkOptimisticPlay=Boolean(autoPlay);linkPendingPlay=Boolean(autoPlay);
@@ -981,7 +983,7 @@
    onlineQueueMode=true;$('musicLinkCover').hidden=true;$('musicLinkControls').hidden=false;$('musicLinkScrubRow').hidden=false;
    for(const id of ['musicLinkBack10','musicLinkPlay','musicLinkFwd10'])$(id).disabled=false;
    const widgetTick=()=>{if(epoch!==serial||!linkYt)return;linkTimeline(linkYt.getCurrentTime(),linkYt.getDuration());updateLinkPlayButton();syncBackgroundPlayer();};
-   window.HSKMusicSoundCloud.mount(link.source,$('musicLinkPlayer'),{isCurrent:()=>epoch===serial,onReady:adapter=>{if(epoch!==serial)return;linkYt=adapter;adapter.getMetadata?.(data=>fetchLinkMetadata(link,title,epoch,{title:data?.title,author_name:data?.user?.username}));if(autoPlay||linkPendingPlay)adapter.playVideo();syncMediaSession();widgetTick();},onTick:widgetTick,onStateChange:state=>{if(epoch!==serial)return;linkOptimisticPlay=state===1;linkPendingPlay=false;widgetTick();if(state===0){if(linkLoop){linkYt.seekTo(0);linkYt.playVideo();}else if(activePlaylistId)stepSavedLink(1);}},onError:message=>{if(epoch===serial){linkOptimisticPlay=false;linkPendingPlay=false;status(message);}}}).then(adapter=>{if(epoch!==serial)adapter?.destroy();}).catch(e=>{if(epoch===serial)status(e.message);});
+   window.HSKMusicSoundCloud.mount(link.source,$('musicLinkPlayer'),{isCurrent:()=>epoch===serial,onReady:adapter=>{if(epoch!==serial)return;linkYt=adapter;linkReady=true;adapter.getMetadata?.(data=>fetchLinkMetadata(link,title,epoch,{title:data?.title,author_name:data?.user?.username}));if(linkPendingPlay)requestLinkPlayback(true);syncMediaSession();widgetTick();},onTick:widgetTick,onStateChange:state=>{if(epoch!==serial)return;if(state===1){linkOptimisticPlay=true;linkPendingPlay=false;}else if(!linkPendingPlay)linkOptimisticPlay=false;widgetTick();if(state===0&&!linkPendingPlay){if(linkLoop){linkYt.seekTo(0);linkYt.playVideo();}else if(activePlaylistId)stepSavedLink(1);}},onError:message=>{if(epoch===serial){linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();status(message);}}}).then(adapter=>{if(epoch!==serial)adapter?.destroy();}).catch(e=>{if(epoch===serial)status(e.message);});
   }
   else {
   const frame=el('iframe');frame.title='Trình phát '+link.label;frame.src=link.embedUrl+(link.kind==='youtube'?'?controls=0&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&rel=0&enablejsapi=1'+(autoPlay?'&autoplay=1':''):'');frame.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';frame.setAttribute('allowfullscreen','');frame.referrerPolicy='strict-origin-when-cross-origin';frame.height=link.kind==='youtube'?'200':link.kind==='spotify'?'352':'166';frame.width='100%';
@@ -994,26 +996,27 @@
    setArt($('musicLinkThumb'),$('musicLinkBg'),ytMaxThumb(link.source.videoId),ytThumb(link.source.videoId));
    $('musicLinkCover').hidden=false;$('musicLinkScrubRow').hidden=false;$('musicLinkScrub').value='0';paintScrub($('musicLinkScrub'),0,0);$('musicLinkElapsed').textContent='00:00';$('musicLinkTime').textContent='-00:00';updateLinkPlayButton();
    youtubeApi().then(()=>{
-    if(epoch!==serial||!opened)return;
+    if(epoch!==serial||(!opened&&!canPlayBackground()))return;
     linkYt=new YT.Player(frame,{
      events:{
       onReady:()=>{
        if(epoch===serial){
+        linkReady=true;
         fetchLinkMetadata(link,title,epoch,linkYt.getVideoData?.());
         if(linkRate!==1)linkYt.setPlaybackRate?.(linkRate);
-        if(linkPendingPlay){linkYt.playVideo?.();linkPendingPlay=false;}
-        updateLinkPlayButton();
+        if(linkPendingPlay)requestLinkPlayback(true);else if(autoPlay)linkYt.pauseVideo?.();
+        syncMediaSession();updateLinkPlayButton();
        }
       },
       onAutoplayBlocked:()=>{if(epoch===serial){linkPendingPlay=false;linkOptimisticPlay=false;updateLinkPlayButton();status('Trình duyệt cần bạn chạm Phát để bắt đầu nghe.');}},
-      onError:()=>{if(epoch===serial){linkPendingPlay=false;linkOptimisticPlay=false;updateLinkPlayButton();status('YouTube chưa phát được bài này. Thử lại hoặc chọn bản đã lưu ngoại tuyến.');}},
+      onError:()=>{if(epoch===serial){linkPendingPlay=false;linkOptimisticPlay=false;updateLinkPlayButton();status('YouTube chưa phát được bài này. Thử lại hoặc mở link nguồn.');}},
       onStateChange:ev=>{
        if(epoch!==serial)return;
        if(ev?.data===1){linkOptimisticPlay=true;linkPendingPlay=false;status('');}
        else if(ev?.data===3)status('Đang nạp âm thanh…');
-       else if(ev?.data===2||ev?.data===0){linkOptimisticPlay=false;linkPendingPlay=false;}
+       else if((ev?.data===2||ev?.data===0)&&!linkPendingPlay)linkOptimisticPlay=false;
        updateLinkPlayButton();
-       if(ev?.data===0){
+       if(ev?.data===0&&!linkPendingPlay){
         if(linkLoop){linkYt.seekTo?.(0,true);linkYt.playVideo?.();}
         else if(activePlaylistId)stepSavedLink(1);
        }
@@ -1046,24 +1049,17 @@
   syncQuickSaveBtn();
   status(autoPlay&&!offline?'Đang kết nối trình phát…':'');
  }
- $('musicLinkPlay').onclick=()=>{
-  if(!linkYt){
-   linkOptimisticPlay=true;
-   linkPendingPlay=true;
-   updateLinkPlayButton();
-   return;
-  }
-  const isPlaying=linkOptimisticPlay||linkYt.getPlayerState?.()===1||linkYt.getPlayerState?.()===3;
-  if(isPlaying){
-   linkOptimisticPlay=false;
-   linkPendingPlay=false;
-   linkYt.pauseVideo?.();
-  }else{
-   linkOptimisticPlay=true;
-   linkPendingPlay=true;
-   linkYt.playVideo?.();
-  }
+ function requestLinkPlayback(wanted){
+  clearTimeout(linkStartTimer);
+  linkPendingPlay=Boolean(wanted);linkOptimisticPlay=Boolean(wanted);
+  status(wanted?(linkReady?'Đang bắt đầu phát…':'Đang kết nối trình phát…'):'');
+  if(wanted){const epoch=serial;linkStartTimer=setTimeout(()=>{if(epoch!==serial||!linkPendingPlay)return;linkPendingPlay=false;linkOptimisticPlay=false;updateLinkPlayButton();status('Chưa bắt đầu phát. Chạm Phát để thử lại hoặc mở link nguồn.');},12000);}
+  if(linkReady){if(wanted)linkYt?.playVideo?.();else linkYt?.pauseVideo?.();}
   updateLinkPlayButton();
+ }
+ $('musicLinkPlay').onclick=()=>{
+  const state=linkYt?.getPlayerState?.();
+  requestLinkPlayback(!(linkPendingPlay||state===1||(state===3&&linkOptimisticPlay)));
  };
  $('musicLinkBack10').onclick=()=>{if(!linkYt)return;const cur=Number(linkYt.getCurrentTime?.()||0),dur=Number(linkYt.getDuration?.()||0),next=Math.max(0,dur>0?Math.min(dur,cur-5):cur-5);linkYt.seekTo?.(next,true);};
  $('musicLinkFwd10').onclick=()=>{if(!linkYt)return;const cur=Number(linkYt.getCurrentTime?.()||0),dur=Number(linkYt.getDuration?.()||0),next=Math.max(0,dur>0?Math.min(dur,cur+5):cur+5);linkYt.seekTo?.(next,true);};

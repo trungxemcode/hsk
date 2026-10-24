@@ -119,3 +119,6 @@ Account entry `storageCleanupOpen` → `src/modules/shell/storage-cleanup.js`, `
 
 ### Button transient state ownership
 `ui-buttons.css` and legacy `studio-layout.css` restrict generic hover paint to `(hover:hover)`, so touch release cannot retain white icons on an idle white card. Active/keyboard feedback remains separate from persistent selected state. `redesign.css` matches the home card base specificity for a complete filled press surface. Regression: `check-press-shape-ui.cjs` includes touch end/cancel, mouse release outside and keyboard focus; shared disclosure geometry and dark contrast checks remain intact.
+
+### Music playback intent and navigation
+`music.js::requestLinkPlayback` keeps requested playback separate from readiness and observed provider state. Paused startup samples cannot discard a pending request; user cancellation, autoplay blocking and stalled initialization restore truthful controls. Original YouTube player now survives app route changes without a visible video portal or iframe reparenting; MediaSession shares transport intent/position and clears on release. This prevents app-triggered interruption, not OS/provider suspension. `check-music-online-ui.cjs` covers delayed/blocked/stalled start, cancellation, route persistence and unchanged SponsorBlock/no-extractor behavior.
