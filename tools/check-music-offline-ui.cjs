@@ -6,7 +6,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   browser=await chromium.launch({headless:true,...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
   for(const width of [390,1440]){
    const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
-   await page.addInitScript(()=>{const AudioOriginal=window.Audio;window.Audio=function(...args){const audio=new AudioOriginal(...args);window.__offlineAudio=audio;return audio;};window.Audio.prototype=AudioOriginal.prototype;});
+   await page.addInitScript(()=>Object.defineProperty(window,'__offlineAudio',{get:()=>document.getElementById('musicBackgroundAudio')}));
    await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
    const url='http://127.0.0.1:'+server.address().port+'/index.html';
    await page.goto(url);await page.waitForFunction(()=>window.HSKMusic&&window.HSKMusicOffline&&window.HSKStudio);
@@ -101,8 +101,10 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.locator('#musicLinkScrub').evaluate(n=>{n.value='2';n.dispatchEvent(new Event('input',{bubbles:true}));});
    await page.waitForFunction(()=>window.__offlineAudio.currentTime>=1.9);assert.equal(await page.locator('#musicQuickLoop').getAttribute('aria-pressed'),'false');
    await page.locator('#musicLinkPlay').click();await page.waitForFunction(()=>window.__offlineAudio.paused);
+   const pausedSource=await page.evaluate(()=>window.__offlineAudio.src);
    await page.evaluate(()=>window.HSKStudio.navigate('practice'));
-   await page.waitForFunction(()=>window.__offlineAudio.getAttribute('src')===null);
+   await page.waitForFunction(()=>!document.getElementById('musicBackgroundPlayer').hidden);
+   assert.equal(await page.evaluate(()=>window.__offlineAudio.src),pausedSource,'route exit retains paused native player for background controls');
    await page.evaluate(()=>window.HSKStudio.navigate('music-play'));
    await page.waitForFunction(()=>window.__offlineAudio?.src?.startsWith('blob:')&&window.__offlineAudio.readyState>=1);
    assert.equal(await page.evaluate(()=>window.__offlineAudio.paused),true,'route re-entry restores local source without autoplay');

@@ -3,6 +3,8 @@
 Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-16); re-check code touched by later commits. Read only the section relevant to the task.
 
 ## App and UX
+
+- Background music (3.13.3 candidate): `src/modules/music/music.js` keeps a single native offline audio player outside route panels; `musicBackgroundPlayer` provides global controls, MediaSession metadata/actions and AudioSession playback where supported. Owner changes and entering study music release it. Hidden-route queue only uses downloaded items; embeds retain route-stop behavior. Real-device iOS lock test still required. `tools/check-music-background-ui.cjs` exercises real local audio across route changes and simulated visibility, not OS suspension.
 | Area | Primary files | Boundaries |
 | --- | --- | --- |
 | Entry/shell | `index.html`, `loader.js`, `app.js`, `redesign.css`, `redesign.js` | Static HTML, CSS, vanilla JS; owner-supplied visual layer, existing routes retained. Local Inter subsets; design tokens remain in `style.css`. See `REDESIGN_INTEGRATION.md`. |
