@@ -1,0 +1,27 @@
+name: yt-dlp resolver runtime
+on:
+  pull_request:
+    paths:
+      - 'server/music/Dockerfile.source'
+      - 'server/music/source-requirements.txt'
+      - 'server/music/source_resolver.py'
+      - 'tools/check-music-source-resolver.py'
+      - '.github/workflows/yt-dlp-runtime.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Build official yt-dlp and Deno/EJS runtime
+        run: docker build -f server/music/Dockerfile.source -t hsk-source-runtime .
+      - name: Verify installed runtime as non-root user
+        run: |
+          docker run --rm hsk-source-runtime deno --version
+          docker run --rm hsk-source-runtime python -m yt_dlp --version
+          docker run --rm hsk-source-runtime python -c "import yt_dlp_ejs,source_resolver; assert source_resolver.canonical_url('https://youtu.be/abcdefghijk') == 'https://www.youtube.com/watch?v=abcdefghijk'"

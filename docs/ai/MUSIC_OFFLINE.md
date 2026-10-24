@@ -1,5 +1,13 @@
 # Nhạc ngoại tuyến
 
+## yt-dlp chính thức — bản thử tích hợp 2026-10-24
+
+Dịch vụ Python dùng bản phát hành chính thức `yt-dlp[default]==2026.10.21` từ dự án `https://github.com/yt-dlp/yt-dlp`, kèm EJS và Deno 2.9.6 trong container. Không fork hay sửa mã yt-dlp. Deno chạy với cache ghi được trong `/tmp`; không chạy bộ nén trên server. CLI tải duy nhất một nguồn, giới hạn 50 MiB/15 phút và kiểm tra ID/URL do yt-dlp báo sau tải trước khi chấp nhận file. Sai nguồn hoặc nhiều kết quả đều bị từ chối. Giữ kiểm tra ffprobe, xác thực và tách file theo UID như cũ.
+
+Thử trực tiếp từ môi trường phát triển: yt-dlp 2026.10.21 + EJS 0.8.0 + Deno 2.9.6 đọc được video `bv_cEeDlop0`, 203 giây, format 251/Opus. Video thử `BaW_jenozKc` báo unavailable. Môi trường có proxy chứng chỉ riêng: phép thử metadata dùng kho CA hệ thống qua `--compat-options no-certifi`, không tắt xác minh TLS. Lượt tải media đầy đủ bị hủy ở bước phê duyệt mạng của môi trường; chưa có file tải thật để nghiệm thu đầu-cuối. Container chưa build được cục bộ do không có Docker, có workflow riêng để kiểm tra build/runtime trên GitHub.
+
+Build từ gốc repo: `docker build -f server/music/Dockerfile.source -t hsk-audio-source .`. Khi triển khai cần cấu hình `FIREBASE_API_KEY`, `ALLOWED_ORIGINS`, tùy chọn `ADMIN_UID` và HTTPS cho dịch vụ. Kiểm tra `/health`, sau đó mới đặt `music-config.json.offlineSourceResolver` thành URL HTTPS và tắt `offlineDirect.enabled`. Hiện endpoint vẫn trống và cấu hình frontend không đổi: chưa triển khai lên VPS hay chuyển app đang chạy sang dịch vụ này. Cookies/PO Token provider chưa cấu hình; một số nguồn vẫn có thể bị chặn. Cập nhật phiên bản yt-dlp/Deno cần chạy lại kiểm thử trước phát hành.
+
 ## Giữ đúng phiên bản từ link gốc — 3.13.4
 
 Lưu ngoại tuyến không tự đối chiếu sang NetEase hay kho nhạc khác khi nguồn gốc bị chặn. Trùng tên bài và ca sĩ không chứng minh cùng bản thu, hòa âm, remix hoặc tốc độ. Nếu chưa lấy được nguồn từ chính link đã nhập, app báo lỗi và giữ nguyên bản cũ; người dùng có thể thử lại hoặc nhập đúng file. Nhánh đối chiếu có nhãn nguồn của chế độ nghe nền trực tuyến vẫn tách biệt. Những file lưu bằng nhánh đối chiếu ở bản cũ không tự đổi lại âm thanh; chỉ thay sau khi tải lại thành công.

@@ -1142,6 +1142,9 @@
         {"kind":"file","file":"src/modules/music/music-direct-source.js","value":""},
         {"kind":"file","file":"tools/check-music-direct-source.cjs","value":""},
         {"kind":"contains","file":"src/modules/music/music-direct-source.js","value":"Offline bytes must belong to the submitted source."},
+        {"kind":"file","file":"server/music/source_resolver.py","value":""},
+        {"kind":"file","file":"tools/check-music-source-resolver.py","value":""},
+        {"kind":"contains","file":"server/music/source_resolver.py","value":"def downloader_command("},
         {"kind":"contains","file":"src/modules/music/music.js","value":"id=\"musicOfflineQuality\""}
       ]
     },
