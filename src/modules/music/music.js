@@ -183,7 +183,7 @@
   backgroundTitle.textContent=streamStatus||currentLinkTitle||'Nhạc đang phát';backgroundTitle.title='Mở trình phát: '+backgroundTitle.textContent;
   onlineButton.setAttribute('aria-pressed',String(active));onlineButton.setAttribute('aria-busy',String(Boolean(onlineStreamRequest)));
   if(!onlineStreamRequest)onlineLabel.textContent=active?'Đang phát bằng nguồn gốc':'Phát bài đang chọn';
-  const playing=active&&(nativeLinkAudio?!nativeLinkAudio.paused&&!nativeLinkAudio.ended:linkYt?.getPlayerState?.()===1);
+  const playing=active&&(nativeLinkAudio?Boolean(nativeLinkAudio.currentSrc)&&!nativeLinkAudio.paused&&!nativeLinkAudio.ended:linkYt?.getPlayerState?.()===1);
   backgroundPlay.innerHTML=playing?ICONS.pause:ICONS.play;backgroundPlay.setAttribute('aria-label',playing?'Tạm dừng nhạc':'Phát nhạc');
   if(active){try{navigator.mediaSession.playbackState=playing?'playing':'paused';const d=Number(nativeLinkAudio?.duration??linkYt?.getDuration?.()),c=Number(nativeLinkAudio?.currentTime??linkYt?.getCurrentTime?.());if(Number.isFinite(d)&&d>0&&Number.isFinite(c))navigator.mediaSession.setPositionState?.({duration:d,playbackRate:nativeLinkAudio?.playbackRate||linkRate,position:Math.max(0,Math.min(d,c))});}catch{}}
  }
@@ -714,7 +714,7 @@ if(view==='offline')drawOffline();
   return row.promise;
  }
  function prefetchNextSource(){
-  if(!config.onlineResolver||!nativeLinkAudio||nativeLinkAudio.paused||linkLoop||onlineStreamRequest||nextSourceRequest)return;
+  if(!config.onlineResolver||!nativeLinkAudio||nativeLinkAudio.paused||!nativeLinkAudio.currentSrc||linkLoop||onlineStreamRequest||nextSourceRequest)return;
   const list=playbackList().list,index=list.findIndex(row=>row.url===currentLinkUrl),next=list[index+1];
   if(index<0||!next||offlineRows.some(row=>row.url===next.url))return;
   let link;try{link=C.parseLink(next.url);}catch{return;}if(link.kind!=='youtube')return;
@@ -726,8 +726,10 @@ if(view==='offline')drawOffline();
  }
  // Resolve only the exact YouTube ID. Native audio lives outside route panels.
  function mountOnlineYouTube(link,title,epoch,autoPlay){
-  const silent=keepAliveElement().src;stopYouTubeKeepAlive(true);
-  const entry={streamUrl:silent,provider:'YouTube',author:currentLinkAuthor,resolving:true,onlineYouTube:true};
+  // Use the real M4A for native audio. A looping silent WAV deceptively
+   // marks playback active and can take over iOS lock-screen media controls.
+   stopYouTubeKeepAlive(true);
+   const entry={streamUrl:'',provider:'YouTube',author:currentLinkAuthor,resolving:true,onlineYouTube:true};
   let attempts=0,relayUrl='',position=0,stallTimer=null;
   linkKind='audio';onlineQueueMode=true;
   mountOfflineLink(entry,link,epoch,autoPlay);
@@ -741,7 +743,7 @@ if(view==='offline')drawOffline();
   audio.addEventListener('waiting',watchStall);audio.addEventListener('stalled',watchStall);
   for(const event of ['playing','pause','ended'])audio.addEventListener(event,cancelStall);
   const destroy=linkYt.destroy;linkYt.destroy=()=>{cancelStall();audio.removeEventListener('playing',prefetch);audio.removeEventListener('timeupdate',prefetch);audio.removeEventListener('waiting',watchStall);audio.removeEventListener('stalled',watchStall);for(const event of ['playing','pause','ended'])audio.removeEventListener(event,cancelStall);destroy();};
-  const fail=message=>{if(!valid())return;entry.resolving=false;entry.failed=true;audio.pause();linkWantedPlay=false;linkPendingPlay=false;linkOptimisticPlay=false;clearTimeout(linkStartTimer);status(message);updateLinkPlayButton();};
+  const fail=message=>{if(!valid())return;entry.resolving=false;entry.failed=true;audio.pause();try{navigator.mediaSession.playbackState='paused';}catch{}linkWantedPlay=false;linkPendingPlay=false;linkOptimisticPlay=false;clearTimeout(linkStartTimer);status(message);updateLinkPlayButton();};
   const load=async(refresh=false)=>{
    if(!valid())return;
    onlineStreamRequest?.abort();const controller=new AbortController();onlineStreamRequest=controller;
@@ -752,7 +754,7 @@ if(view==='offline')drawOffline();
     const relay=new URL(data.relayUrl),stream=new URL(data.url);
     if(!valid()||controller.signal.aborted)return;
     relayUrl=relay.href;entry.streamUrl=stream.href;entry.sourceUntil=Number(stream.searchParams.get('expire'))*1000||Date.now()+120000;entry.resolving=false;
-    audio.loop=linkLoop;audio.src=entry.streamUrl;
+    audio.loop=linkLoop;prepareAudioSession();audio.src=entry.streamUrl;
     if(position>0)audio.addEventListener('loadedmetadata',()=>{if(valid())audio.currentTime=Math.min(position,Math.max(0,audio.duration-.1));},{once:true});
     fetchLinkMetadata(link,title,epoch,{title:data.title,author:data.artist});
     $('musicLinkNotice').textContent=currentLinkAuthor+' · Trực tuyến';
@@ -772,12 +774,22 @@ if(view==='offline')drawOffline();
   load();
  }
  function mountOfflineLink(entry,link,epoch,autoPlay){
-  const audio=persistentLinkAudio||(persistentLinkAudio=new Audio()),url=entry.streamUrl||URL.createObjectURL(entry.blob);let destroyed=false;
+  const audio=persistentLinkAudio||(persistentLinkAudio=new Audio()),url=entry.streamUrl||(entry.blob?URL.createObjectURL(entry.blob):'');let destroyed=false;
   nativeLinkAudio=audio;audio.id='musicBackgroundAudio';audio.setAttribute('playsinline','');if(!audio.isConnected)document.body.append(audio);
   const listeners=[];
   const listen=(name,fn)=>{audio.addEventListener(name,fn);listeners.push([name,fn]);};
-  audio.preload='auto';audio.crossOrigin='anonymous';audio.src=url;audio.playbackRate=linkRate;audio.loop=linkLoop;
-  linkReady=true;linkYt={getCurrentTime:()=>audio.currentTime,getDuration:()=>audio.duration,getPlayerState:()=>audio.ended?0:audio.paused?2:1,seekTo:t=>{audio.currentTime=Math.max(0,Math.min(Number(t)||0,Number.isFinite(audio.duration)?audio.duration:Number(t)||0));},playVideo:()=>{prepareAudioSession();if(entry.onlineYouTube&&(audio.error||entry.failed||(!entry.resolving&&entry.sourceUntil<Date.now()+30000))){entry.retry?.();return;}audio.play().catch(()=>{if(epoch===serial){linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();status('Chạm nút Phát để nghe nhạc trên thiết bị.');}});},pauseVideo:()=>audio.pause(),setPlaybackRate:r=>{audio.playbackRate=r;},getAvailablePlaybackRates:()=>[.75,1,1.25],destroy:()=>{if(destroyed)return;destroyed=true;for(const [name,fn] of listeners)audio.removeEventListener(name,fn);audio.pause();audio.removeAttribute('src');audio.load();if(!entry.streamUrl)URL.revokeObjectURL(url);nativeLinkAudio=null;try{if(navigator.mediaSession)navigator.mediaSession.playbackState='none';if(navigator.audioSession?.type==='playback'&&previousAudioSessionType!==null)navigator.audioSession.type=previousAudioSessionType;}catch{}previousAudioSessionType=null;syncBackgroundPlayer();}};
+  audio.preload='auto';audio.crossOrigin='anonymous';
+   if(url)audio.src=url;else audio.removeAttribute('src');
+   audio.playbackRate=linkRate;audio.loop=linkLoop;
+  linkReady=true;linkYt={getCurrentTime:()=>audio.currentTime,getDuration:()=>audio.duration,getPlayerState:()=>audio.ended?0:audio.paused?2:1,seekTo:t=>{audio.currentTime=Math.max(0,Math.min(Number(t)||0,Number.isFinite(audio.duration)?audio.duration:Number(t)||0));},playVideo:()=>{prepareAudioSession();if(entry.onlineYouTube&&entry.resolving){
+    // Retain the explicit user-gesture play request without fabricating
+    // audible progress. An empty media element may pend until src arrives.
+    // If iOS rejects this before source resolution, the normal play button
+    // remains available; never switch to silent looping audio.
+    if(navigator.userActivation?.isActive&&!audio.hasAttribute('src'))Promise.resolve(audio.play()).catch(()=>{});
+    return;
+   }
+   if(entry.onlineYouTube&&(audio.error||entry.failed||(!entry.resolving&&entry.sourceUntil<Date.now()+30000))){entry.retry?.();return;}audio.play().catch(()=>{if(epoch===serial){linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();status('Chạm nút Phát để nghe nhạc trên thiết bị.');}});},pauseVideo:()=>audio.pause(),setPlaybackRate:r=>{audio.playbackRate=r;},getAvailablePlaybackRates:()=>[.75,1,1.25],destroy:()=>{if(destroyed)return;destroyed=true;for(const [name,fn] of listeners)audio.removeEventListener(name,fn);audio.pause();audio.removeAttribute('src');audio.load();if(!entry.streamUrl)URL.revokeObjectURL(url);nativeLinkAudio=null;try{if(navigator.mediaSession)navigator.mediaSession.playbackState='none';if(navigator.audioSession?.type==='playback'&&previousAudioSessionType!==null)navigator.audioSession.type=previousAudioSessionType;}catch{}previousAudioSessionType=null;syncBackgroundPlayer();}};
   const tick=()=>{if(epoch!==serial||destroyed)return;const c=entry.resolving?0:audio.currentTime,d=entry.resolving?0:Number.isFinite(audio.duration)?audio.duration:0;linkTimeline(c,d);updateLinkPlayButton();};
   for(const name of ['timeupdate','loadedmetadata','seeked','ratechange'])listen(name,()=>{tick();syncBackgroundPlayer();});
   for(const name of ['play','pause'])listen(name,()=>{if(epoch===serial){linkOptimisticPlay=!audio.paused;if(!entry.resolving)linkPendingPlay=false;updateLinkPlayButton();}});
@@ -1417,7 +1429,7 @@ if(view==='offline')drawOffline();
  $('musicImportApply').onclick=async()=>{const epoch=serial,json=$('musicManifest').files[0],file=$('musicFile').files[0];try{if(!json||json.size>500000)throw Error('Chọn file lời JSON tối đa 500 KB.');if(!file||file.size>52428800||!(/^(audio\/|video\/mp4)/.test(file.type)||/\.(mp3|mp4|m4a|wav|ogg)$/i.test(file.name)))throw Error('Chọn file nhạc/video tối đa 50 MB.');const value=C.validateSong(JSON.parse(await json.text()));if(epoch!==serial)return;if(value.source.kind!=='local')throw Error('Bài nhập từ thiết bị cần source.kind="local".');await openSong(value,file);}catch(e){if(epoch===serial)status(e.message);}};
  $('musicRecover').onclick=()=>{if(!song)return;const saved=time(),epoch=serial;if(yt){yt.seekTo(saved,true);play();return;}video.addEventListener('loadedmetadata',()=>{if(epoch===serial){seek(saved);status('Nguồn đã tải lại. Bấm phát để tiếp tục.');}},{once:true});video.load();};
  video.addEventListener('timeupdate',tick);video.addEventListener('play',updatePlayButton);video.addEventListener('pause',updatePlayButton);video.addEventListener('error',()=>{if(song)status('Chưa phát được nguồn nhạc. Kiểm tra mạng, định dạng hoặc bấm tải lại nguồn.');});
- document.addEventListener('visibilitychange',()=>{if(document.hidden){hiddenAt=Date.now();hiddenRetryUsed=false;checkpoint(true);resumeHiddenYouTube();}else{hiddenAt=0;hiddenRetryUsed=false;clearTimeout(hiddenResumeTimer);hiddenResumeTimer=null;}syncBackgroundPlayer();});window.addEventListener('pagehide',()=>checkpoint(true));
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){hiddenAt=Date.now();hiddenRetryUsed=false;checkpoint(true);resumeHiddenYouTube();}else{hiddenAt=0;hiddenRetryUsed=false;clearTimeout(hiddenResumeTimer);hiddenResumeTimer=null;if(nativeLinkAudio?.currentSrc&&nativeLinkAudio.paused&&linkWantedPlay)status('iPhone đã tạm dừng audio khi rời app. Chạm Phát để tiếp tục.');}syncBackgroundPlayer();});window.addEventListener('pagehide',()=>checkpoint(true));
  new MutationObserver(()=>{if(panel.hidden&&opened){opened=false;toggleMenu(false);toggleQueue(false);if(!canPlayBackground()){stop();fetcher?.abort();++serial;}}syncBackgroundPlayer();}).observe(panel,{attributes:true,attributeFilter:['hidden']});
 window.addEventListener('hsk-account-ready',()=>{clearOnlineSources();onlineQueueMode=false;onlineNote.hidden=true;onlineNote.textContent='';offlineRows=[];offlineContext=false;++offlineRequest;metaCache={};fetcher?.abort();++serial;release(false);song=null;catalog=BUILTIN_SONGS.map(C.validateSong);progress={};currentLinkUrl='';currentLinkTitle='';currentLinkAuthor='';activePlaylistId='';playerExpanded=false;toggleQueue(false);panel.classList.remove('music-player-expanded');$('musicLesson').hidden=true;toggleMenu(false);toggleLyricsDrawer(false);syncEmptyState();$('musicLinkUrl').value='';$('musicLinkName').value='';$('musicLinkLyrics').value='';drawCatalog();drawPlaylists();drawLinks();drawRecentBrowse();drawBrowsePlaylists();history();loadOffline();if(opened)refresh();});
  window.addEventListener('hsk-storage-cleaned',event=>{if(event.detail?.musicUrls){if(offlineContext&&event.detail.musicUrls.includes(currentLinkUrl)){++serial;clearPreview();offlineContext=false;syncMiniPlayer();}loadOffline();}});
