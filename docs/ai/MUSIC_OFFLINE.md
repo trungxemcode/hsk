@@ -1,3 +1,24 @@
+## Quyết định mới — 24/10/2026: chỉ giữ ngoại tuyến với file người dùng tự chọn
+
+**Tắt tính năng tự tải nhạc từ link YouTube/SoundCloud/Spotify về kho ngoại tuyến**;
+không triển khai server yt-dlp, AWS, Oracle hay R2 cho chức năng này.
+
+Người dùng vẫn mở menu **Nghe ngoại tuyến**, chọn **Thêm file MP3 / M4A
+từ thiết bị**, hoặc **Gắn file từ thiết bị cho bài đang chọn**. Tệp
+được kiểm tra định dạng rồi lưu trực tiếp vào IndexedDB trên thiết bị,
+không upload lên máy chủ. Giữ nguyên các bản lưu M4A trước đó; không
+tự động xóa file của người dùng. Giữ khả năng phát khi không có mạng,
+phát nền, danh sách và cách ly theo tài khoản. Không còn tải codec
+FFmpeg/WebAssembly dành riêng cho chuyển link thành file offline.
+
+**Lưu ý:** MP3/M4A gốc được lưu nguyên bytes, không tự nén lại. Giới
+hạn 50 MiB mỗi file và 100 MiB kho nhạc trên thiết bị như trước. Chế
+độ nghe trực tuyến, nhập link để nghe và playlist vẫn hoạt động.
+
+Các phần dưới đây ghi lại lịch sử thí nghiệm; cơ chế tải nhạc từ link
+đã ngừng áp dụng. Các mã server cũ được giữ trong repo như tài liệu
+lịch sử/để bảo toàn kiểm thử, không có endpoint đang chạy.
+
 # Nhạc ngoại tuyến
 
 ## yt-dlp chính thức — bản thử tích hợp 2026-10-24
