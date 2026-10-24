@@ -1,3 +1,12 @@
+## 2026-10-24 — Native iPhone AVPlayer background playback preparation (3.16.3)
+
+- The deployed 3.16.2 PWA still stops audio on a real iPhone when leaving the standalone app, confirming the platform limitation. Never advertise Web Media Session or silent WAV keepalive as a guaranteed iOS background mode.
+- Added `ios/HSKMusic` SwiftUI + WKWebView shell with native `AVPlayer`, an active `AVAudioSession.Category.playback` and `UIBackgroundModes=audio`. The native `MPRemoteCommandCenter` and `MPNowPlayingInfoCenter` own lock-screen controls. GitHub Actions on macOS compiles Simulator and physical-device targets and produces an **unsigned IPA** for local signing.
+- The browser JS bridge is injected only for the app main frame, native messages are accepted only from `https://trungxemcode.github.io`, and native stream URLs are restricted to HTTPS `*.googlevideo.com` or HSK's existing short-lived HTTPS relay. The web app still obtains audio metadata and authenticated URLs using its existing Firebase identity; no additional login secrets or persistent media storage are introduced. The current PWA remains backward compatible.
+- Native AVPlayer preserves one playing M4A track while web JS is suspended. Track-to-track automatic advancement while the iPhone is locked is not guaranteed yet (a native queue would be required). Force quit and incoming calls may interrupt playback. No guarantee for blocked YouTube videos; AWS yt-dlp sign-in challenge is unchanged.
+- Local JS validation: native bridge simulation 390/1440 PASS, existing AWS browser playback 390/1440 PASS, 189 PWA files integrity PASS, 54 feature contracts PASS. Actual Swift compile must pass macOS CI and actual iPhone lock-screen behavior still requires device testing.
+- This is NOT an installable iOS app until the unsigned IPA is signed for the owner's iPhone; repo merge alone cannot change iOS PWA background privileges.
+
 ## 2026-10-24 — Background-only music priority, iPhone lock screen best effort (3.16.2)
 - User explicitly prioritizes **background/locked-screen playback**, not offline music development. Kept all existing user data and did not delete offline audio blobs; no new offline feature added.
 - Fixed current AWS YouTube/native M4A client flow: initial resolution no longer plays silent 8 KB looping WAV to fake/prime playback; same single persistent `<audio>` receives only real M4A when a resolver response succeeds.
