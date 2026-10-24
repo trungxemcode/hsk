@@ -1,3 +1,63 @@
+## 2026-10-24 — Updated design: optional manual Cốc Cốc declaration (3.15.7)
+
+The user approved a manual browser declaration because Cốc Cốc can deliberately
+expose the same User-Agent and Client Hints as Chrome. In HSK's **Music →
+3-dot menu**, a small control **"Tôi đang dùng Cốc Cốc: Tắt/Bật"** is visible
+in all browsers. **Actual Cốc Cốc-specific actions remain hidden by default**
+unless automatic browser evidence is positive **or the user actively turns
+the toggle on**. One click persists \`on\` or \`off\` in origin-local
+\`localStorage\`, **not the HSK account/cloud**, so Safari/other browsers
+retain independent settings. Users can turn it off; explicit \`off\` overrides
+automatic detection. If localStorage is denied the UI reports that the choice
+could not be saved rather than claiming persistence.
+
+When enabled, the actions only (1) open the sanitized official song page so
+Cốc Cốc **may** apply its built-in ad-block and show native download options
+if supported and (2) open the file picker for MP3/M4A stored on the user's
+device. No website API exists to turn on the browser's ad-blocker or downloader,
+no automatic copying of browser downloads, no audio extraction backend, and
+no guarantee on iOS or that new tab opens in the same browser/PWA context.
+User-uploaded music, offline playback and core HSK data remain untouched.
+
+Tests: \`tools/check-music-coccoc.cjs\` and
+\`tools/check-music-coccoc-ui.cjs\` check manual opt-in, account-independent
+browser persistence through reload, opt-out even with a branded UA, positive
+auto-detection, validated URLs, unchanged local file import, and Safari/Chrome
+action visibility defaults. Earlier notes below refer to the initial
+auto-detection-only prototype, superseded by this manual opt-in behavior.
+
+## 2026-10-24 — Cốc Cốc native media handoff (conditional)
+
+- HSK music menu in chill mode includes *Cốc Cốc · mở bài tại trang nguồn* and
+  *Nhập MP3/M4A đã tải vào HSK* **only when the browser provides a positive
+  Cốc Cốc identity marker** (distinct UA token, User-Agent Client Hints brand,
+  or a page-exposed proprietary \`coccoc\` object). Other browsers see neither
+  action. This is progressive enhancement only; identity signals are not a
+  security boundary.
+- **Cốc Cốc switched its User-Agent to Chrome in 2021.** A genuine Cốc Cốc
+  build may look identical to Chrome and suppress page-visible markers, in
+  which case the optional section remains hidden (fail closed). The actual
+  Cốc Cốc iPhone/PWA UI must be verified on device before guaranteeing
+  automatic detection. We do not spoof a Coc Coc user-agent or enumerate
+  extensions/fingerprint users.
+- Opening a provider's original, validated HTTPS URL in a real Cốc Cốc
+  tab allows the **browser itself** to apply its built-in ad blocking and,
+  for supported sources, display its media toolbar with download controls.
+  HSK has no official JavaScript API to enable Cốc Cốc's blocker or downloader.
+  Embedded YouTube frames in HSK are not guaranteed ad-free. On iOS,
+  downloading YouTube media through Cốc Cốc is not generally supported
+  by the ordinary mobile download toolbar.
+- Importing a user-owned/authorized MP3 or M4A uses the existing local
+  file picker and IndexedDB. Files are not pulled automatically from Cốc Cốc's
+  downloads or uploaded to an HSK server. No yt-dlp, scraping, CORS bypass,
+  adblock script or provider proxy is enabled.
+- Existing player, playlists, music from local files, music-study, Safari,
+  browser PWA cache and HSK progress are unchanged.
+
+Tests: \`tools/check-music-coccoc.cjs\` and
+\`tools/check-music-coccoc-ui.cjs\` cover other-browser hiding, positive
+marker exposure, HTTPS-source validation and local file import.
+
 ## Current playback policy — 2026-10-24
 Official YouTube nocookie Iframe API and SoundCloud Widget only; direct public HTTPS MP3/M4A streams use native audio. No Invidious/Piped/Cobalt or similar-title source matching in the app playback path. Browser SponsorBlock can skip community-tagged sponsor/intro/outro/non-music content with undo and an account-local toggle; it does not remove YouTube-inserted ads or guarantee provider availability. No VPS/backend used for media. User-selected MP3/M4A files continue to be stored in IndexedDB for offline listening; no URL-to-file downloader or automatic codec usage. Some legacy helper/server files remain for compatibility but are not loaded by the app player. The notes below record earlier implementation stages where applicable.
 

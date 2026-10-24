@@ -68,6 +68,52 @@
  sponsorButton.onclick=()=>{sponsorEnabled=!sponsorEnabled;save('sponsor-skip',sponsorEnabled?'on':'off');syncSponsor();sponsorNotice.hidden=true;sponsor?.stop();try{const l=C.parseLink(currentLinkUrl);if(sponsorEnabled&&l.kind==='youtube'&&!offlineContext)sponsor?.load(l.source.videoId);}catch{}};
  sponsorUndo.onclick=()=>{sponsor?.undo(linkYt);sponsorNotice.hidden=true;};$('musicMenuOfflineRow').before(sponsorButton);syncSponsor();
  window.addEventListener('hsk-account-ready',()=>{sponsorEnabled=read('sponsor-skip','on')!=='off';syncSponsor();sponsor?.stop();sponsorNotice.hidden=true;});
+   // Cốc Cốc intentionally uses a Chrome-like UA in some builds. One explicit
+  // opt-in stored in THIS browser is a reliable alternative to false detection.
+  const coccocBridge=window.HSKCocCocBridge;
+  let coccocEnabled=Boolean(coccocBridge?.modeEnabled(localStorage,navigator,window));
+  const coccocMode=el('button',undefined,'music-flat-row music-chill-only music-coccoc-mode');
+  coccocMode.id='musicCocCocModeToggle';coccocMode.type='button';coccocMode.dataset.menuView='main';
+  coccocMode.setAttribute('aria-label','Khai báo đang sử dụng trình duyệt Cốc Cốc');
+  const coccocModeNote=el('p','Chỉ bật trên Cốc Cốc. HSK không thể nhận biết chắc chắn hoặc điều khiển trình chặn quảng cáo và công cụ tải.','music-empty-note music-chill-only music-coccoc-mode-note');
+  coccocModeNote.id='musicCocCocModeNote';coccocModeNote.dataset.menuView='main';
+  const coccocOpen=el('a','Cốc Cốc · Mở bài ở trang nguồn','music-flat-row music-chill-only music-coccoc-row');
+  coccocOpen.id='musicCocCocOpen';coccocOpen.dataset.menuView='main';
+  coccocOpen.target='_blank';coccocOpen.rel='noopener noreferrer';
+  coccocOpen.setAttribute('aria-label','Mở bài hát tại trang nguồn để sử dụng các tiện ích của Cốc Cốc');
+  coccocOpen.href='#';
+  coccocOpen.onclick=event=>{
+   if(!coccocEnabled){event.preventDefault();return;}
+   const url=coccocBridge?.providerSource(currentLinkUrl,C.parseLink);
+   if(!url){event.preventDefault();status('Chọn một bài YouTube, SoundCloud hoặc Spotify trước.');return;}
+   // The actual browser may block ads or offer downloads on the provider page.
+   // HSK neither controls those extensions nor downloads provider media.
+   coccocOpen.href=url;
+  };
+  const coccocImport=el('button','Nhập MP3/M4A đã lưu trên máy','music-flat-row music-chill-only music-coccoc-row');
+  coccocImport.id='musicCocCocImport';coccocImport.type='button';coccocImport.dataset.menuView='main';
+  coccocImport.onclick=()=>{if(coccocEnabled)chooseOfflineFile(false);};
+  const coccocNote=el('p','Mở trang nguồn trong Cốc Cốc để dùng chức năng trình duyệt nếu được hỗ trợ. Sau khi có file MP3/M4A hợp lệ, chọn Nhập file. HSK không tự tải âm thanh hoặc bật chặn quảng cáo; Cốc Cốc trên iPhone có giới hạn.','music-empty-note music-chill-only music-coccoc-note');
+  coccocNote.id='musicCocCocNote';coccocNote.dataset.menuView='main';
+  $('musicMenuOfflineRow').before(coccocMode,coccocModeNote,coccocOpen,coccocImport,coccocNote);
+  function syncCocCoc(){
+   coccocMode.textContent='Tôi đang dùng Cốc Cốc: '+(coccocEnabled?'Bật':'Tắt');
+   coccocMode.setAttribute('aria-pressed',String(coccocEnabled));
+   coccocOpen.hidden=coccocImport.hidden=coccocNote.hidden=!coccocEnabled;
+   if(!coccocEnabled){coccocOpen.href='#';return;}
+   const url=coccocBridge?.providerSource(currentLinkUrl,C.parseLink);
+   coccocOpen.href=url||'#';
+   coccocOpen.setAttribute('aria-disabled',String(!url));
+   coccocOpen.classList.toggle('music-coccoc-disabled',!url);
+  }
+  coccocMode.onclick=()=>{
+   const next=!coccocEnabled;
+   let saved=false;
+   try{saved=Boolean(coccocBridge?.writeChoice(localStorage,next?'on':'off'));}catch{}
+   if(!saved){status('Trình duyệt không cho lưu lựa chọn. Hãy bật quyền lưu dữ liệu website.');return;}
+   coccocEnabled=next;syncCocCoc();
+  };
+  syncCocCoc();
  const backgroundPlayer=el('div',undefined,'music-background-player');
  backgroundPlayer.id='musicBackgroundPlayer';backgroundPlayer.hidden=true;backgroundPlayer.setAttribute('role','region');backgroundPlayer.setAttribute('aria-label','Nhạc đang phát');
  const backgroundTitle=el('button'),backgroundPlay=el('button'),backgroundClose=el('button','×');
@@ -241,7 +287,8 @@
   $('musicMenuSubCancel').textContent=view==='save'?'Hủy':'‹ Quay lại';
   $('musicMenuSubDone').hidden=view!=='save';
   if(view==='main'&&currentMode==='chill')$('musicLinkImport').open=false;
-  if(view==='offline')drawOffline();
+     if(view==='main')syncCocCoc();
+if(view==='offline')drawOffline();
   if(view==='save'){$('musicSaveNewForm').hidden=true;drawSavePicker(true);}
   requestAnimationFrame(()=>sheet.querySelectorAll('[data-menu-view]').forEach(node=>{
    if((node.dataset.menuView||'').split(/\s+/).includes(view)&&node.getClientRects().length){
