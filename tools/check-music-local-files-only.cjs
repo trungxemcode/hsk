@@ -1,4 +1,4 @@
-/* Link-to-audio download retired. Device-owned files still persist offline. */
+/* Legacy conversion stays retired; explicit original-audio device save is supported. */
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const music=fs.readFileSync('src/modules/music/music.js','utf8'),
  offline=fs.readFileSync('src/modules/music/music-offline.js','utf8'),
@@ -15,6 +15,7 @@ assert.ok(offline.includes("DB='hsk-music-offline-v1'")&&offline.includes("s.tra
 assert.ok(offline.includes("ext==='mp3'")&&offline.includes("ext==='m4a'"),'supports uploaded MP3 + M4A');
 assert.ok(loader.includes('music-offline.js')&&!loader.includes('music-converter.js'),'no codec loaded, local device store loaded');
 assert.ok(!assets.some(x=>/music-(?:converter|codec-worker)|vendor\/music-codec/.test(x)),'link converter not pre-cached');
-assert.equal(config.offlineSourceResolver,'','no VPS endpoint');
+assert.equal(config.offlineSourceResolver,'','no legacy offline resolver endpoint');
 assert.equal(config.offlineDirect.enabled,false,'no experimental link audio downloading');
-console.log('PASS local music file offline only: uploaded MP3/M4A stay; no link downloader, server, codec pre-cache');
+assert.ok(music.includes('musicDeviceSave')&&music.includes('musicDeviceSaveBanner')&&music.includes('readDeviceAudio('),'explicit device save has progress and bounded transfer');
+console.log('PASS device music: uploaded files and explicit original-audio saving; no retired converter or experimental download providers');

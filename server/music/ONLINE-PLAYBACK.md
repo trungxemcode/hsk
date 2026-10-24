@@ -1,6 +1,6 @@
 # Online audio deployment
 
-The `onlineResolver` URL in `music-config.json` enables exact-ID YouTube audio playback through the single native audio adapter. Without that URL, official embeds remain available. SoundCloud, direct audio, study lessons and uploaded device files retain their existing paths. No URL-to-offline download or catalogue matching is enabled.
+The `onlineResolver` URL in `music-config.json` enables exact-ID YouTube audio playback through the single native audio adapter. Without that URL, official embeds remain available. SoundCloud, direct audio, study lessons and uploaded device files retain their existing paths. Catalogue matching and legacy conversion remain disabled. The owner-restored explicit device-save action can download the original M4A to the existing IndexedDB library; this does not create server media files.
 
 The resolver is `online_resolver.py`, Python 3.12 + `yt-dlp[default]` (see source-requirements.txt) + Deno. Run one process, bound to 127.0.0.1:8765, with:
 - `FIREBASE_API_KEY`: the app's Firebase project public API key; Firebase verifies incoming ID tokens.
@@ -9,7 +9,7 @@ The resolver is `online_resolver.py`, Python 3.12 + `yt-dlp[default]` (see sourc
 - `DENO_PATH`: the installed Deno binary.
 - `DENO_DIR`: writable runtime cache, e.g. `/tmp/hsk-deno-cache` under systemd PrivateTmp; no media is stored there.
 
-Routes: GET `/api/online/health`, authenticated POST `/api/online/resolve` with `{url, refresh?}`, and short-lived opaque `/api/online/stream/{ticket}` for fallback. Resolve returns the original M4A URL, exact video ID, title/artist/duration and relay URL. Account credentials never go to YouTube. Input cannot select arbitrary sites or filesystem paths. Limit: two extraction jobs, 12 resolve requests/min/account, 20 simultaneous relay responses. Metadata/source URLs are bounded in RAM only; no media files, transcoding, IndexedDB writes or disk cache.
+Routes: GET `/api/online/health`, authenticated POST `/api/online/resolve` with `{url, refresh?}`, and short-lived opaque `/api/online/stream/{ticket}` for fallback. Resolve returns the original M4A URL, exact video ID, title/artist/duration and relay URL. Account credentials never go to YouTube. Input cannot select arbitrary sites or filesystem paths. Limit: two extraction jobs, 12 resolve requests/min/account, 20 simultaneous relay responses. Metadata/source URLs are bounded in RAM only; no server media files, transcoding or disk cache. Explicit offline saving writes only on the listener device.
 
 Current AWS service: `/opt/hsk-music/online_resolver.py`, `/etc/hsk-music.env` (mode600), `hsk-music.service` running as ubuntu, restart-on-failure, MemoryMax500M, no new privileges, read-only system/home. Nginx `/etc/nginx/conf.d/hsk-music.conf` proxies `/api/online/` to localhost with buffering/temp files/access logs disabled, 4KB request bodies and request-rate limits. It uses the existing Plesk HTTPS certificate. Keep certificate paths in sync after Plesk renewal/reconfiguration. The current hostname is instance/IP based: if its public IP changes, update the hostname/config and verify TLS before publishing; do not assume it is a reserved static IP.
 

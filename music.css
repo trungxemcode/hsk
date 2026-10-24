@@ -575,3 +575,9 @@ html body.studio-enabled .music-panel.music-player-expanded #musicLinkPreview{
  overflow-y:auto!important;overflow-x:hidden!important;
  align-content:safe start!important;
 }
+
+/* Device download status survives in-app route changes. */
+.music-device-save-banner{position:fixed;left:12px;right:12px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:2500;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:12px;border-radius:var(--radius-14px);background:var(--palette-dark-surface);color:var(--palette-white);box-shadow:var(--shadow);font-size:14px}
+.music-device-save-banner[hidden]{display:none}
+.music-device-save-banner progress{grid-column:1;width:100%;height:8px;accent-color:var(--palette-white)}
+.music-device-save-banner button{grid-column:2;grid-row:1/3;min-width:44px;min-height:44px}
