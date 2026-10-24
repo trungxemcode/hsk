@@ -22,7 +22,7 @@ async function refresh(message=''){
  const token=++scan,uid=owner();q('storageCleanupAll').textContent='Chọn tất cả';scanOwner=uid;busy=true;rows=[];list.replaceChildren();status.textContent='Đang tính dung lượng tải thêm…';controls();const found=[],errors=[];
  try{
   if(root.HSKVoiceManager){try{const v=await root.HSKVoiceManager.downloaded();if(v.bytes>0){let name=v.selection.voiceId||'Gói giọng đã tải';try{const c=await root.HSKVoiceManager.catalog();name=c.voices.find(x=>x.id===v.selection.voiceId)?.label||name;}catch{}found.push({id:'voice',name:'Giọng tiếng Trung · '+name,bytes:v.bytes,revision:v.selection.revision,voiceURI:v.selection.source==='device'?v.selection.voiceURI:'',note:'Xóa gói giọng và bộ chạy tải thêm; trở về giọng thiết bị.'});}}catch{errors.push('gói giọng');}}
-  if(root.HSKMusicOffline){try{for(const t of await root.HSKMusicOffline.list(uid))found.push({id:'music:'+t.url,name:t.title,bytes:t.size,asset:t.asset,addedAt:t.addedAt,url:t.url,note:'Nhạc ngoại tuyến · '+(t.author||'Trên thiết bị')});}catch{errors.push('nhạc ngoại tuyến');}}
+  if(root.HSKLegacyMusicCleanup){try{for(const t of await root.HSKLegacyMusicCleanup.list(uid))found.push({id:'music:'+t.url,name:t.title,bytes:t.size,asset:t.asset,addedAt:t.addedAt,url:t.url,note:'Nhạc đã lưu từ bản cũ · '+(t.author||'Trên thiết bị')});}catch{errors.push('nhạc ngoại tuyến');}}
   if(root.caches){let names;try{names=await caches.keys();}catch{errors.push('gói bổ sung');names=[];}for(const [id,name,note] of packages){if(!names.includes(id))continue;try{const cache=await caches.open(id),keys=await cache.keys();let bytes=0;for(const key of keys){const r=await cache.match(key);if(r){if(r.type==='opaque')throw Error('Không đo được');bytes+=(await r.blob()).size;}}if(keys.length)found.push({id,name,note,bytes,keys});}catch{errors.push(name);}}}
   if(token!==scan)return;if(uid!==owner())return refresh('Tài khoản đã thay đổi.');
   for(const row of found)add(row);
@@ -130,7 +130,7 @@ q('storageCleanupDelete').onclick=async()=>{
  busy=true;controls();status.textContent='Đang xóa '+selected.length+' mục…';let deleted=0;const errors=[],musicUrls=[],cleanedPackages=[],uid=scanOwner;
  for(const row of selected){if(uid!==owner()){errors.push('Tài khoản đã thay đổi');break;}try{
   if(row.id==='voice')await root.HSKVoiceManager.chooseDevice(row.voiceURI,row.revision);
-  else if(row.url){await root.HSKMusicOffline.remove(uid,row.url,row);musicUrls.push(row.url);}
+  else if(row.url){await root.HSKLegacyMusicCleanup.remove(uid,row.url,row);musicUrls.push(row.url);}
   else{if(!packages.some(p=>p[0]===row.id))throw Error('Gói không được phép dọn');const cache=await caches.open(row.id);for(const key of row.keys)await cache.delete(key);cleanedPackages.push(row.id);}
   deleted++;
  }catch(e){errors.push(row.name+': '+e.message);}}

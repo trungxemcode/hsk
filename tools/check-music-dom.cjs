@@ -15,7 +15,7 @@ const $=id=>w.document.getElementById(id),song=JSON.parse(fs.readFileSync('conte
 async function run(){
  w.dispatchEvent(new w.Event('hsk-account-ready'));assert.equal(idleMediaCalls,0,'Pristine account initialization must not pause/load an unused media element');
  $('musicPanel').hidden=false;w.HSKMusic.enter();await new Promise(r=>setImmediate(r));
- assert.match($('musicStatus').textContent,/chưa được kết nối/);
+ assert.match($('musicStatus').textContent,/Chọn bài học/);
  Object.defineProperty($('musicManifest'),'files',{configurable:true,value:[{size:500,text:async()=>JSON.stringify(song)}]});
  Object.defineProperty($('musicFile'),'files',{configurable:true,value:[{size:100,type:'audio/wav',name:'song.wav'}]});
  await $('musicImportApply').onclick();

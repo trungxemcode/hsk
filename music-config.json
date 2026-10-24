@@ -1,13 +1,6 @@
 {
-  "version": 1,
+  "version": 2,
   "enabled": false,
   "endpoint": "",
-  "maxLocalBytes": 52428800,
-  "offlineSourceResolver": "",
-  "offlineDirect": {
-    "enabled": false,
-    "experimental": false,
-    "instances": []
-  },
-  "onlineResolver": "https://flamboyant-curran.13-211-174-192.plesk.page"
+  "cloudEndpoint": ""
 }
