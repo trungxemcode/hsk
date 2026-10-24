@@ -107,3 +107,6 @@ Direct download extension: `music-direct-source.js` uses configured Piped/Cobalt
 
 ## Optional download cleanup
 Account entry `storageCleanupOpen` → `src/modules/shell/storage-cleanup.js`, `storage-cleanup.css`. Explicit allowlist of optional voice/music/neural/writing/dictionary/codec downloads; payload-byte counts and per-item selection. PWA/app/demo caches, learning/auth/localStorage data remain protected. Voice manager supplies installed usage and revision-checked device fallback; music removal checks asset/timestamp and preserves shared refs. Integration coverage: `tools/check-storage-cleanup-ui.cjs` with real browser storage at390/1440, wired into feature-preservation CI.
+
+## Four search tools
+`index.html` toolbars use `data-search-tool` vocabulary/handwriting/translate/image. `src/modules/shell/studio.js` owns local tool selection and public `HSKSearchTools.open`; existing search/translator routes remain. `handwritingOpen` stays the original control moved into the search toolbar. `redesign.css` gives four equal compact columns and tool-specific content visibility; mobile image entry opens image mode before picker. `tools/check-search-tabs-ui.cjs` tests320/390/1440, both themes, selection, independent content, picker and OCR→translation transfer.

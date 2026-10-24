@@ -4204,3 +4204,37 @@ html body:not(#_rd).studio-enabled summary:is(:active,:focus-visible) * { color:
     padding: 8px !important;
   }
 }
+/* Four direct lookup tools, with one compact row on phones. */
+html body:not(#_rd).studio-enabled .studio-search-tabs {
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  width:100% !important;
+  gap:6px !important;
+  padding:0 !important;
+  border:0 !important;
+  background:var(--palette-clear) !important;
+  margin:0 0 16px !important;
+}
+html body:not(#_rd).studio-enabled .studio-search-tabs button {
+  min-width:0 !important;
+  min-height:44px !important;
+  padding:8px 4px !important;
+  font-size:13px !important;
+  line-height:1.3 !important;
+  white-space:nowrap !important;
+  border:1px solid var(--line) !important;
+  border-radius:var(--radius-btn) !important;
+  background:var(--surface) !important;
+  color:var(--ink) !important;
+}
+body.studio-enabled #searchForm .mobile-search-image,
+body.studio-enabled[data-search-tool="handwriting"] #searchPanel > :is(h2,.dictionary-modes,#dictionaryModeHint,#searchForm),
+body.studio-enabled[data-search-tool="translate"] #translatorPanel > .ocr-panel,
+body.studio-enabled[data-search-tool="image"] #translatorPanel > :is(h2,p,#translationForm,#translationStatus),
+body.studio-enabled[data-search-tool="image"] .ocr-panel > summary {display:none !important;}
+
+html body:not(#_rd).studio-enabled .studio-search-tabs #handwritingOpen:is(.active,[aria-pressed="true"]) {
+  background:var(--press-active-bg) !important;
+  color:var(--palette-white) !important;
+  border-color:var(--press-active-bg) !important;
+}
