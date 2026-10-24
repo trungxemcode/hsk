@@ -4258,3 +4258,5 @@ html body:not(#_rd).studio-enabled[data-mobile-focus-kind=handwriting] main.work
 /* Range controls are real timelines, not text-field boxes. */
 html body:not(#_rd).studio-enabled #musicPanel input.music-scrub[type=range]{appearance:none!important;-webkit-appearance:none!important;height:32px!important;min-height:32px!important;max-height:32px!important;width:100%;padding:0!important;margin:0!important;border:0!important;box-shadow:none!important;border-radius:var(--radius-pill)!important;background:linear-gradient(to right,var(--palette-white) 0 var(--pct,0%),var(--legacy-hex-ffffff38) var(--pct,0%) 100%) center/100% 4px no-repeat!important;touch-action:pan-y}
 html body:not(#_rd).studio-enabled #musicPanel input.music-scrub::-webkit-slider-thumb{width:12px;height:12px;margin-top:3px;background:var(--palette-white);box-shadow:none}
+
+html body:not(#_rd).studio-enabled #handwritingOptions .handwriting-advanced-settings > summary:not(:active):not(:focus-visible){color:var(--ink)!important}
