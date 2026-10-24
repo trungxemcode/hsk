@@ -1,3 +1,11 @@
+## 2026-10-24 — Background-only music priority, iPhone lock screen best effort (3.16.2)
+- User explicitly prioritizes **background/locked-screen playback**, not offline music development. Kept all existing user data and did not delete offline audio blobs; no new offline feature added.
+- Fixed current AWS YouTube/native M4A client flow: initial resolution no longer plays silent 8 KB looping WAV to fake/prime playback; same single persistent `<audio>` receives only real M4A when a resolver response succeeds.
+- On user play gesture, a pending media-element play is attempted if the native source is still loading; a rejected promise does not fake playback state. Actual `MediaSession.playbackState='playing'` requires real `currentSrc`, plus unpaused audio.
+- On loading real source, retain `navigator.audioSession.type='playback'`, native body-level `HTMLAudioElement`, lock-screen action handlers and per-user account cleanup. Visibility/pagehide never intentionally pauses it; on return, if iOS interrupted playing, show an actionable tap-Play prompt rather than autoplay looping hacks.
+- No guarantee of continued playback if iOS force-quits/terminates a PWA, or for provider iframes (YouTube/SoundCloud). Real iPhone lock-screen acceptance still needs user device testing. Individual YouTube videos rejected by VPS's 403/sign-in bot check still cannot play with native audio. PR #186 backend improvements are separate and not deployed on AWS.
+- Browser regression uses mocked direct M4A, covering mobile 390 and desktop 1440, visibility hidden and pagehide, lock-screen MediaSession actions, source refresh and account cleanup. Added assertion silent WAV is never assigned to online M4A player; no network source is faked.
+
 ## Device offline saving restored, server disk cache cancelled — 2026-10-24
 - Owner supersedes proposed VPS file cache: download original audio to listener device, restore offline mode. Experimental uncommitted server disk cache was reverted before any deployment; AWS remains metadata resolver/optional memory-buffered relay only.
 - New musicDeviceSave action in offline menu downloads exact resolved M4A to IndexedDB through existing owner/hash/dedup/100MB quota library. Max50MB per file, streamed byte progress, cancellation, validated full size and MP4 signature via put. Direct fetch first, relay fallback when CORS/network blocks direct. Snapshot source/owner permits route/song navigation while downloading; account change aborts/cancels write. Global progress banner persists across in-app routes and confirms completion; offline playback reuses native player.
@@ -51,7 +59,7 @@
 
 ## 2026-10-24 — Cốc Cốc self-declaration supersedes UA-only experiment
 - User explicitly approved self-declaration after real Cốc Cốc Windows exposed only Chrome identifiers. Branch PR #181 updated with reversible "Tôi đang dùng Cốc Cốc" button in Music 3-dot menu.
-- Only browser-specific actions hidden by default elsewhere, but the opt-in setting is visible so users whose Coc Coc UA looks like Chrome can enable them. Stored under \`hsk-music-coccoc-mode-v1\` in the local origin storage for the browser/PWA installation; explicit on/off overrides auto detection.
+- Only browser-specific actions hidden by default elsewhere, but the opt-in setting is visible so users whose Coc Coc UA looks like Chrome can enable them. Stored under `hsk-music-coccoc-mode-v1` in the local origin storage for the browser/PWA installation; explicit on/off overrides auto detection.
 - Browser-native ad blocking/media downloading cannot be remotely controlled by HSK; official source page and user-selected file import only. No yt-dlp, server cache or automatic file import. Keep other HSK functions/data unchanged.
 - New browser tests include Chrome, iOS Safari, branded Cốc Cốc, Chrome-looking Cốc Cốc, reload persistence, opt-out override and offline file retention.
 
@@ -65,7 +73,7 @@
 - Account > Dọn dẹp dung lượng now offers a **two-step bulk deletion** of ONLY extra download caches and voice model. Preserve the PWA core cache, offline MP3/M4A, user progress, account and unrelated caches. Existing per-item deletion remains available.
 - In new PWA browser environment, base HSK files are downloaded automatically by the existing versioned service worker. Large extras (YunJian voice ~99 MB + handwriting neural ~28 MB) require one explicit confirmation to download and verify *in that browser*, sequentially; dictionary shards and handwriting stroke data continue loading on demand. Do not promise automatic reuse of Safari CacheStorage/IndexedDB from Cốc Cốc. Keep foreground open while installing.
 - Reinstallation does not automatically restore unsynced local progress, music or private files. Users should use the existing progress backup/sync feature before deleting Safari PWA or site data.
-- New tests: \`tools/check-storage-migration-ui.cjs\` verifies two-step confirmation, user data preservation, selected CacheStorage cleanup, fake verified SHA-256 model transfer, and opt-in voice install on 390/1440 viewports.
+- New tests: `tools/check-storage-migration-ui.cjs` verifies two-step confirmation, user data preservation, selected CacheStorage cleanup, fake verified SHA-256 model transfer, and opt-in voice install on 390/1440 viewports.
 
 ## Music start/navigation regression — 2026-10-24
 - Branch fix/music-start-navigation from main d17edfc (owner merged PR178,3.15.4). Owner reports lost background playback, first play needing two presses and ads. Code proves route observer stopped/destroyed YouTube through canPlayBackground exclusion; paused polling could clear pending play before delayed onReady.
@@ -100,7 +108,7 @@
 
 ## 2026-10-24: Bỏ tải nhạc từ link, giữ nghe ngoại tuyến bằng file do người dùng chọn
 - User quyết định không dùng AWS/Oracle/R2/yt-dlp cho nhạc. PR #173 đã đóng, chưa merge.
-- Nhánh \`fix/remove-music-offline-20261024\` dựa trên main: gỡ link-to-offline (nút, URL form, nguồn downloader, trạng thái background, tự resume), giữ lại IndexedDB + phát offline + file M4A cũ, thêm hỗ trợ file MP3 do người dùng chọn.
+- Nhánh `fix/remove-music-offline-20261024` dựa trên main: gỡ link-to-offline (nút, URL form, nguồn downloader, trạng thái background, tự resume), giữ lại IndexedDB + phát offline + file M4A cũ, thêm hỗ trợ file MP3 do người dùng chọn.
 - Giữ nguyên nghe nhạc trực tuyến, playlist, nhập nguồn URL để phát, audio học HSK, offline của các tính năng học khác. Không xóa kho người dùng.
 - Không tải WASM transcode cho music khi khởi động. Server source resolver giữ mã lịch sử nhưng không được gọi và chưa triển khai.
 - Cần CI bảo toàn chức năng, kiểm thử trình duyệt 390/1440, PWA release.

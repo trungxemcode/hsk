@@ -24,7 +24,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   await page.evaluate(()=>{window.HSKAccountDashboard={user:{getIdToken:async()=> 'fake-test-token'}};HSKStudio.navigate('music-play');});
   await page.waitForResponse(r=>r.url().endsWith('/music-config.json'));
   const add=async (id,playlist='')=>{await page.locator('#musicMenuBtn').click();await page.locator('#musicLinkImport>summary').click();await page.locator('#musicLinkUrl').fill('https://youtu.be/'+id);if(playlist)await page.locator('#musicLinkPlaylist').selectOption(playlist);await page.locator('#musicLinkApply').click();};
-  await add('dQw4w9WgXcQ');assert.equal(await page.evaluate(()=>window.gestureStarts[0]),true,'native audio primed in original trusted click');
+  await add('dQw4w9WgXcQ');assert.equal(await page.evaluate(()=>Boolean(document.getElementById('musicBackgroundAudio')?.getAttribute('src')?.startsWith('data:'))),false,'never pre-play fake silent WAV while VPS resolves');assert.equal(await page.evaluate(()=>window.gestureStarts[0]),true,'native audio primed in original trusted click');
   await page.evaluate(()=>HSKStudio.navigate('practice'));
   await page.waitForFunction(()=>document.getElementById('musicBackgroundAudio')?.src.includes('rr-test.googlevideo.com')&&!document.getElementById('musicBackgroundAudio').paused&&document.getElementById('musicBackgroundAudio').currentTime>.1);
   assert.equal(await page.locator('#musicLinkPlayer iframe').count(),0,'YouTube resolver uses native audio, no iframe');

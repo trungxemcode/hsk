@@ -1,3 +1,30 @@
+## 2026-10-24 — Music playback priority: background + iOS locked screen
+
+The user asked to stop investing in music offline downloads and focus on
+continuous playback while switching apps or locking iPhone. Existing offline
+audio/library remains intact to avoid destructive regressions. No new offline
+audio download or server extractor is introduced in this change.
+
+**Important source restrictions:** An iOS PWA cannot register Xcode native
+`Background Modes` or promise to outlive OS process termination. Continuous
+playback may work for legitimate direct M4A in a persistent
+`HTMLAudioElement` with `navigator.audioSession.type='playback'`,
+`navigator.mediaSession` controls and no playback pause on visibility loss,
+but MUST be validated using an unlocked phone, then Home, then lock screen,
+then playback controls. The official YouTube/SoundCloud iframe cannot be
+forced to continue when iOS suspends a web process. Extractor errors from
+the AWS IP (including `Sign in to confirm you're not a bot`) prevent a
+direct audio source entirely; they are independent from the playback UI.
+
+**Regression fixed:** Previously online YouTube started by assigning a
+looping silent WAV source to the permanent audio player while waiting for
+the VPS. This sometimes made the media session appear playing before a real
+audio URL arrived. Now we keep the persistent element, try to capture
+play intent under the user's initial gesture, and only load the actual
+M4A URL. The lock-screen session reports playing only when
+`HTMLMediaElement.currentSrc` exists and `paused` is false. If iOS
+interrupts audio, the UI prompts a real tap rather than hiding failure.
+
 ## 2026-10-24 — iOS player UX + Cốc Cốc Listening List handoff
 
 User clarified: saving a URL in Cốc Cốc means opening the song's official
@@ -33,9 +60,9 @@ expose the same User-Agent and Client Hints as Chrome. In HSK's **Music →
 3-dot menu**, a small control **"Tôi đang dùng Cốc Cốc: Tắt/Bật"** is visible
 in all browsers. **Actual Cốc Cốc-specific actions remain hidden by default**
 unless automatic browser evidence is positive **or the user actively turns
-the toggle on**. One click persists \`on\` or \`off\` in origin-local
-\`localStorage\`, **not the HSK account/cloud**, so Safari/other browsers
-retain independent settings. Users can turn it off; explicit \`off\` overrides
+the toggle on**. One click persists `on` or `off` in origin-local
+`localStorage`, **not the HSK account/cloud**, so Safari/other browsers
+retain independent settings. Users can turn it off; explicit `off` overrides
 automatic detection. If localStorage is denied the UI reports that the choice
 could not be saved rather than claiming persistence.
 
@@ -47,8 +74,8 @@ no automatic copying of browser downloads, no audio extraction backend, and
 no guarantee on iOS or that new tab opens in the same browser/PWA context.
 User-uploaded music, offline playback and core HSK data remain untouched.
 
-Tests: \`tools/check-music-coccoc.cjs\` and
-\`tools/check-music-coccoc-ui.cjs\` check manual opt-in, account-independent
+Tests: `tools/check-music-coccoc.cjs` and
+`tools/check-music-coccoc-ui.cjs` check manual opt-in, account-independent
 browser persistence through reload, opt-out even with a branded UA, positive
 auto-detection, validated URLs, unchanged local file import, and Safari/Chrome
 action visibility defaults. Earlier notes below refer to the initial
@@ -59,7 +86,7 @@ auto-detection-only prototype, superseded by this manual opt-in behavior.
 - HSK music menu in chill mode includes *Cốc Cốc · mở bài tại trang nguồn* and
   *Nhập MP3/M4A đã tải vào HSK* **only when the browser provides a positive
   Cốc Cốc identity marker** (distinct UA token, User-Agent Client Hints brand,
-  or a page-exposed proprietary \`coccoc\` object). Other browsers see neither
+  or a page-exposed proprietary `coccoc` object). Other browsers see neither
   action. This is progressive enhancement only; identity signals are not a
   security boundary.
 - **Cốc Cốc switched its User-Agent to Chrome in 2021.** A genuine Cốc Cốc
@@ -82,8 +109,8 @@ auto-detection-only prototype, superseded by this manual opt-in behavior.
 - Existing player, playlists, music from local files, music-study, Safari,
   browser PWA cache and HSK progress are unchanged.
 
-Tests: \`tools/check-music-coccoc.cjs\` and
-\`tools/check-music-coccoc-ui.cjs\` cover other-browser hiding, positive
+Tests: `tools/check-music-coccoc.cjs` and
+`tools/check-music-coccoc-ui.cjs` cover other-browser hiding, positive
 marker exposure, HTTPS-source validation and local file import.
 
 ## Current playback policy — 2026-10-24
