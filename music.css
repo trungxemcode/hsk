@@ -563,7 +563,7 @@ html body.studio-enabled .music-panel.music-player-expanded #musicBottomDock{
  position:absolute!important;z-index:9;
  inset:auto clamp(14px,4vw,24px) max(12px,env(safe-area-inset-bottom))!important;
  width:auto!important;margin:0!important;box-sizing:border-box!important;
- background:linear-gradient(180deg,transparent,rgba(18,18,36,.86) 25%,rgba(18,18,36,.95));
+ background:linear-gradient(180deg,transparent,var(--palette-dark-paper) 25%,var(--palette-dark-paper));
  border-radius:18px 18px 0 0;
 }
 
