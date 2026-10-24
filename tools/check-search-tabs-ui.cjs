@@ -24,10 +24,10 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
      const selected=mode==='search'?'search':'translator';
      const panel='#'+(mode==='search'?'searchPanel':'translatorPanel');
      assert.equal(await page.locator(panel).isVisible(),true,mode+' panel visible');
-     for(const tab of ['search','translator']){
-      const button=page.locator(panel+' .studio-search-tabs [data-studio-go="'+tab+'"]');
-      assert.equal(await button.getAttribute('aria-pressed'),String(tab===selected),mode+'/'+tab+' aria-pressed');
-      assert.equal(await button.evaluate(el=>el.classList.contains('active')),tab===selected,mode+'/'+tab+' active class');
+     for(const tab of ['vocabulary','handwriting','translate','image']){
+      const button=page.locator(panel+' .studio-search-tabs [data-search-tool="'+tab+'"]');
+      assert.equal(await button.getAttribute('aria-pressed'),String(tab===(selected==='search'?'vocabulary':'translate')),mode+'/'+tab+' aria-pressed');
+      assert.equal(await button.evaluate(el=>el.classList.contains('active')),tab===(selected==='search'?'vocabulary':'translate'),mode+'/'+tab+' active class');
      }
      const buttons=page.locator(panel+' .studio-search-tabs button');
      await page.evaluate(()=>document.activeElement?.blur?.());
@@ -35,16 +35,34 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
      // Wait for actual visual contrast rather than asserting in the first animation frame.
      await page.waitForFunction(selector=>{
       const buttons=[...document.querySelectorAll(selector)];
-      return buttons.length===2&&getComputedStyle(buttons[0]).backgroundColor!==getComputedStyle(buttons[1]).backgroundColor;
+      const active=buttons.find(b=>b.getAttribute('aria-pressed')==='true'),idle=buttons.find(b=>b.getAttribute('aria-pressed')==='false');return buttons.length===4&&active&&idle&&getComputedStyle(active).backgroundColor!==getComputedStyle(idle).backgroundColor;
      },panel+' .studio-search-tabs button',{timeout:4000});
      const colors=await buttons.evaluateAll(bs=>bs.map(el=>getComputedStyle(el).backgroundColor));
-     assert.notEqual(colors[0],colors[1],mode+' visually distinguishes chosen tab');
-     const chosen=await buttons.nth(mode==='search'?0:1).getAttribute('aria-current');
+     assert.notEqual(colors[mode==='search'?0:2],colors[mode==='search'?2:0],mode+' visually distinguishes chosen tab');
+     const chosen=await buttons.nth(mode==='search'?0:2).getAttribute('aria-current');
      assert.equal(chosen,'page',mode+' current');
      const nav=page.locator(width<721?'#mobileDock [data-studio-go="search"]':'.sidebar [data-studio-go="search"]');
      assert.equal(await nav.evaluate(el=>el.classList.contains('active')),true,'parent search stays selected');
     }
     await check('search');
+    const tabs=page.locator('#searchPanel .studio-search-tabs button'),boxes=await tabs.evaluateAll(bs=>bs.map(b=>{const r=b.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height};}));
+    assert.equal(boxes.length,4);assert(boxes.every(b=>Math.abs(b.y-boxes[0].y)<1&&b.h>=44),'four compact buttons on one row');
+    assert(boxes[3].x+boxes[3].w<=width,'tools fit the viewport');
+    await page.locator('#handwritingOpen').click();await page.waitForFunction(()=>document.body.dataset.searchTool==='handwriting');
+    assert.equal(await page.locator('#handwritingCanvas').isVisible(),true);assert.equal(await page.locator('.dictionary-modes').isVisible(),false);assert.equal(await page.locator('#searchForm').isVisible(),false);
+    assert.equal(await page.locator('#handwritingOpen').getAttribute('aria-pressed'),'true');
+    if(process.env.HSK_SCREENSHOT_DIR&&width===390&&theme==='light'){fs.mkdirSync(process.env.HSK_SCREENSHOT_DIR,{recursive:true});await page.screenshot({path:path.join(process.env.HSK_SCREENSHOT_DIR,'search-four-tools.png')});}
+    await page.locator('#handwritingClose').click();await check('search');
+    await page.locator('#searchPanel [data-search-tool="image"]').click();await page.waitForFunction(()=>document.body.dataset.searchTool==='image');
+    assert.equal(await page.locator('#ocrChoose').isVisible(),true);assert.equal(await page.locator('#translationForm').isVisible(),false);
+    assert.equal(await page.locator('#translatorPanel [data-search-tool="image"]').getAttribute('aria-pressed'),'true');
+    const picker=page.waitForEvent('filechooser');await page.locator('#ocrChoose').click();await (await picker).setFiles([]);
+    await page.evaluate(()=>{document.getElementById('ocrOutput').hidden=false;document.getElementById('ocrText').value='你好';});
+    await page.locator('#ocrUse').click();await check('translator');
+    assert.equal(await page.locator('#translationInput').inputValue(),'你好','OCR text still transfers into translation');
+
+    assert.equal(await page.locator('#translationForm').isVisible(),true);assert.equal(await page.locator('.ocr-panel').isVisible(),false);
+    await page.locator('#translatorPanel [data-search-tool="vocabulary"]').click();await check('search');
     await page.locator('#searchPanel .studio-search-tabs [data-studio-go="translator"]').click();
     await check('translator');
     await page.locator('#translatorPanel .studio-search-tabs [data-studio-go="search"]').click();
