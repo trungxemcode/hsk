@@ -101,4 +101,6 @@ Admin dashboard includes group filter, email/UID search, paginated registry, own
 
 Offline quality pipeline: `src/modules/music/music-converter.js` → `music-codec-worker.js` → lazy `vendor/music-codec` custom FFmpeg/FDK WASM; optional original-byte service `server/music/source_resolver.py` configured via `music-config.json.offlineSourceResolver` (currently empty). Architecture/deployment/tests: `docs/ai/MUSIC_OFFLINE.md`.
 
+Original-source resolver: `server/music/source_resolver.py` uses pinned official yt-dlp + Deno/EJS from `Dockerfile.source`; validates post-download ID/URL, retains source bytes and existing owner/auth/quota boundaries. Contract test: `tools/check-music-source-resolver.py`; container smoke: `.github/workflows/yt-dlp-runtime.yml`. Candidate only: no VPS endpoint configured, full live media download not yet verified.
+
 Direct download extension: `music-direct-source.js` uses configured Piped/Cobalt browser-to-proxy/tunnel fetches, no own-server audio fallback. `music-config.json.offlineDirect` is experimental; tests in `tools/check-music-direct-source.cjs` and browser offline UI. Live public-source success not yet verified; default Cobalt/SoundCloud endpoint not configured.

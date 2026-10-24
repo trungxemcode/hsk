@@ -45,9 +45,24 @@ def run(args,timeout=120):
     if result.returncode: raise RuntimeError(result.stderr[-1600:] or 'Không xử lý được nguồn nhạc.')
     return result.stdout
 
-def download_source(url,directory):
+def downloader_command(url,directory):
     # Fixed provider-only extractors; no config, cookies, arbitrary URLs or playlist runs.
-    run([sys.executable,'-m','yt_dlp','--ignore-config','--no-playlist','--no-cache-dir','--no-progress','--no-warnings','--socket-timeout','15','--retries','1','--fragment-retries','1','--max-filesize',str(MAX_SOURCE),'--match-filter','!is_live & duration <= 900','--use-extractors','youtube,soundcloud','-f','bestaudio/best','-o',str(directory/'source.%(ext)s'),'--',url],timeout=120)
+    # EJS scripts are installed by yt-dlp[default]; no runtime script downloads.
+    return [sys.executable,'-m','yt_dlp','--ignore-config','--no-playlist','--no-cache-dir','--no-progress','--no-warnings','--no-simulate','--js-runtimes',os.environ.get('YTDLP_JS_RUNTIME','deno'),'--socket-timeout','15','--retries','1','--extractor-retries','1','--fragment-retries','1','--max-filesize',str(MAX_SOURCE),'--match-filter','!is_live & duration <= 900','--use-extractors','youtube,soundcloud','-f','bestaudio/best','--print','after_move:{"id":%(id)j,"webpage_url":%(webpage_url)j}','-o',str(directory/'source.%(ext)s'),'--',url]
+
+def download_source(url,directory):
+    requested=canonical_url(url)
+    output=run(downloader_command(requested,directory),timeout=120)
+    # Check the source reported by the official downloader after the file is
+    # written. Search results and a different video ID must never be accepted.
+    try:
+        records=[json.loads(line) for line in output.splitlines() if line.strip()]
+        if len(records)!=1:raise ValueError('Expected one media source')
+        media=records[0]
+        if canonical_url(media['webpage_url'])!=requested:raise ValueError('Different source URL')
+        if urlsplit(requested).hostname=='www.youtube.com' and media['id']!=parse_qs(urlsplit(requested).query)['v'][0]:raise ValueError('Different video ID')
+    except (ValueError,TypeError,KeyError) as error:
+        raise RuntimeError('Nguồn trả về không khớp đúng link đã chọn; chưa lưu file.') from error
     files=[p for p in directory.glob('source.*') if p.suffix not in ('.part','.ytdl') and p.is_file()]
     if len(files)!=1 or not 0<files[0].stat().st_size<=MAX_SOURCE:
         raise RuntimeError('Nguồn chưa tải đủ hoặc vượt giới hạn của dịch vụ.')
