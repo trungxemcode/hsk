@@ -25,20 +25,18 @@
  <div class="music-settings"><label>Câu đang học <select id="musicLine"></select></label><label>Tốc độ <select id="musicRate"><option value="0.75">0,75×</option><option value="1" selected>1×</option><option value="1.25">1,25×</option></select></label><button type="button" id="musicNext">Câu tiếp →</button></div></div>
  <div class="music-study"><div class="music-actions"><button type="button" id="musicHold">Giữ để xem lời</button><button type="button" id="musicReveal" aria-pressed="false">Hiện lời</button><button type="button" id="musicPin" aria-pressed="false">Pinyin</button><button type="button" id="musicVi" aria-pressed="false">Nghĩa Việt</button></div><div class="music-caption"><p id="musicHidden">Lời đang ẩn. Nghe và chọn ý bên dưới.</p><div id="musicLyrics" hidden><p id="musicHanzi" class="music-hanzi" lang="zh"></p><p id="musicPinyin" class="music-pin"></p><p id="musicMeaning" class="music-vi"></p></div></div><p id="musicDistribution" class="music-distribution"></p><div id="musicNewWords" class="music-new" hidden></div><form id="musicQuiz" class="music-quiz"><fieldset id="musicAnswers"></fieldset><button type="submit" id="musicCheck" class="music-primary">Xác nhận đáp án</button><p id="musicResult" class="music-result" role="status" aria-live="polite"></p></form></div></section>
  <div id="musicBottomDock" class="music-bottom-dock"><div class="music-aux-bar"><button type="button" id="musicQuickLoop" class="music-aux-btn" aria-pressed="false" title="Lặp lại bài"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M17 2l4 4-4 4"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M21 13v2a4 4 0 0 1-4 4H3"/></svg><span id="musicQuickLoopLabel" class="music-aux-text">Lặp lại</span></button><button type="button" id="musicQuickRate" class="music-aux-btn" aria-pressed="false" title="Đổi tốc độ phát (0.75x / 1x / 1.25x)"><span id="musicQuickRateLabel">1×</span></button><button type="button" id="musicQuickQueue" class="music-aux-btn" aria-controls="musicQueueSheet" aria-expanded="false" title="Mở danh sách chờ &amp; Playlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span class="music-aux-text">Danh sách</span></button></div><div id="musicChillPeekCard" class="music-lyrics-peek-card music-chill-only"><button type="button" id="musicChillPeekToggle" class="music-lyrics-peek-btn" aria-label="Mở danh sách chờ phát" aria-controls="musicQueueSheet" aria-expanded="false"><span class="music-lyrics-pill-bar" aria-hidden="true"></span><span class="music-lyrics-peek-row"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg><strong>Danh sách chờ phát</strong></span></button></div><div id="musicLyricsDrawerCard" class="music-lyrics-card music-study-only" hidden><button type="button" id="musicLyricsDrawerToggle" class="music-lyrics-head" aria-expanded="false"><span class="music-lyrics-pill-bar" aria-hidden="true"></span><span class="music-lyrics-head-row"><strong>Lời bài hát &amp; Đối chiếu HSK</strong><span id="musicLyricsDrawerState" class="music-lyrics-badge">Vuốt / chạm để mở</span></span></button><div id="musicLyricsDrawerBody" class="music-lyrics-body" hidden><div class="music-lyrics-toggles"><button type="button" id="musicDrawerHanziBtn" class="music-lyrics-chip" aria-pressed="true">Chữ Hán</button><button type="button" id="musicDrawerPinBtn" class="music-lyrics-chip" aria-pressed="false">Pinyin</button><button type="button" id="musicDrawerViBtn" class="music-lyrics-chip" aria-pressed="false">Nghĩa Việt</button></div><div class="music-lyrics-lines"><p id="musicDrawerHanzi" class="music-drawer-hanzi" lang="zh"></p><p id="musicDrawerPinyin" class="music-drawer-pin" hidden></p><p id="musicDrawerVi" class="music-drawer-vi" hidden></p></div></div></div></div></div>
- <div id="musicMiniPlayer" class="music-mini-player music-chill-only" hidden><div class="music-mini-inner"><button type="button" id="musicMiniMain" class="music-mini-main" aria-label="Mở trình phát toàn màn hình"><img id="musicMiniThumb" class="music-mini-thumb" alt="" src=""><div class="music-mini-copy"><strong id="musicMiniTitle">Chưa chọn bài hát</strong><small id="musicMiniSub">Nghệ sĩ · YouTube / SoundCloud</small></div></button><div class="music-mini-actions"><button type="button" id="musicMiniSave" class="music-mini-btn music-mini-save" aria-label="Lưu nhanh vào playlist" title="Lưu nhanh vào playlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg></button><button type="button" id="musicMiniPlay" class="music-mini-btn music-mini-play" aria-label="Phát hoặc tạm dừng" title="Phát / tạm dừng"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M8.8 6.2v11.6L18 12z"/></svg></button></div></div><div class="music-mini-progress-track"><div id="musicMiniProgress" class="music-mini-progress-bar" style="width:0%"></div></div></div>
+ <div id="musicMiniPlayer" class="music-mini-player music-chill-only" hidden><div class="music-mini-inner"><button type="button" id="musicMiniMain" class="music-mini-main" aria-label="Mở trình phát toàn màn hình"><img id="musicMiniThumb" class="music-mini-thumb" alt="" src=""><div class="music-mini-copy"><strong id="musicMiniTitle">Chưa chọn bài hát</strong><small id="musicMiniSub">Kho nhạc HSK</small></div></button><div class="music-mini-actions"><button type="button" id="musicMiniSave" class="music-mini-btn music-mini-save" aria-label="Lưu nhanh vào playlist" title="Lưu nhanh vào playlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg></button><button type="button" id="musicMiniPlay" class="music-mini-btn music-mini-play" aria-label="Phát hoặc tạm dừng" title="Phát / tạm dừng"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M8.8 6.2v11.6L18 12z"/></svg></button></div></div><div class="music-mini-progress-track"><div id="musicMiniProgress" class="music-mini-progress-bar" style="width:0%"></div></div></div>
  <div id="musicQueueBackdrop" class="music-menu-backdrop" aria-hidden="true"></div>
  <section id="musicQueueSheet" class="music-menu-sheet music-queue-sheet" role="region" aria-label="Danh sách chờ phát" aria-hidden="true" inert><button type="button" id="musicQueueClose" class="music-menu-close music-queue-handle" aria-label="Thu gọn danh sách chờ phát"><span class="music-drag-bar" aria-hidden="true"></span><strong>Danh sách chờ phát</strong></button><div class="music-queue-content"><h3>Đang phát</h3><div id="musicQueueCurrent"></div><h3 id="musicQueueNextTitle">Tiếp theo</h3><div id="musicQueueNext"></div><button type="button" id="musicQueueLibrary" class="music-flat-row">Chọn playlist khác</button></div></section>
  <div id="musicMenuBackdrop" class="music-menu-backdrop" aria-hidden="true"></div>
  <div id="musicMenuSheet" class="music-menu-sheet" data-view="main" role="region" aria-label="Tùy chọn nhạc và danh sách"><div class="music-sheet-drag-area"><button type="button" id="musicMenuClose" class="music-menu-close" aria-label="Đóng menu"><span class="music-drag-bar" aria-hidden="true"></span><span class="music-sr">✕ Đóng</span></button><strong id="musicMenuTitle" class="music-sr">Tùy chọn &amp; Danh sách nhạc</strong></div>
- <div id="musicMenuTrackHead" class="music-menu-track-head" data-menu-view="main"><img id="musicMenuTrackThumb" class="music-menu-track-thumb" alt="" src=""><div class="music-menu-track-copy"><strong id="musicMenuTrackTitle">Chưa chọn bài hát</strong><small id="musicMenuTrackSub">Nghệ sĩ · YouTube / SoundCloud</small></div></div>
+ <div id="musicMenuTrackHead" class="music-menu-track-head" data-menu-view="main"><img id="musicMenuTrackThumb" class="music-menu-track-thumb" alt="" src=""><div class="music-menu-track-copy"><strong id="musicMenuTrackTitle">Chưa chọn bài hát</strong><small id="musicMenuTrackSub">Kho nhạc HSK</small></div></div>
  <hr class="music-sheet-divider" data-menu-view="main">
- <div id="musicMenuSubHead" class="music-sub-head music-chill-only" data-menu-view="save link library offline"><button type="button" id="musicMenuSubCancel" class="music-sub-link">Hủy</button><strong id="musicMenuSubTitle" class="music-sub-title"></strong><button type="button" id="musicMenuSubDone" class="music-sub-link music-sub-done">Xong</button></div>
+ <div id="musicMenuSubHead" class="music-sub-head music-chill-only" data-menu-view="save link library"><button type="button" id="musicMenuSubCancel" class="music-sub-link">Hủy</button><strong id="musicMenuSubTitle" class="music-sub-title"></strong><button type="button" id="musicMenuSubDone" class="music-sub-link music-sub-done">Xong</button></div>
 <p id="musicStatus" class="music-status" role="status" aria-live="polite"></p>
  <p class="music-intro" hidden>Nghe từng câu, tự đoán ý rồi đối chiếu lời. Lịch sử luyện nhạc được lưu riêng trên thiết bị.</p>
  <div id="musicLinkExtraActions" class="music-chill-only" data-menu-view="main"><button type="button" id="musicMenuShareRow" class="music-flat-row"><span class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></span><span class="music-flat-label">Chia sẻ</span></button><button type="button" id="musicPreviewPlaylistAdd" class="music-flat-row"><span id="musicMenuSaveIco" class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 8v8M8 12h8"/></svg></span><span id="musicMenuSaveLabel" class="music-flat-label">Thêm vào danh sách phát</span></button><select id="musicPreviewPlaylistSelect" class="music-sr" aria-label="Chọn playlist lưu"><option value="">— Mặc định —</option></select><div id="musicQuickPlaylistPills" class="music-quick-pills" hidden></div></div>
- <details id="musicLinkImport" class="music-flat-details music-chill-only" data-menu-view="main link"><summary class="music-flat-row"><span class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span><span class="music-flat-label">Dán link hoặc file âm thanh online</span></summary><form id="musicLinkForm" class="music-flat-expand-body"><div class="music-link-main-row"><input id="musicLinkUrl" type="url" inputmode="url" required maxlength="2048" placeholder="YouTube, SoundCloud hoặc link MP3/M4A…" autocomplete="off"><button type="submit" id="musicLinkApply" class="music-primary">Phát</button></div><div class="music-link-sub-row"><label>Tên bài hát (tùy chọn) <input id="musicLinkName" maxlength="120" placeholder="Tự lấy từ link nếu để trống" autocomplete="off"></label><label>Thêm vào playlist <select id="musicLinkPlaylist"><option value="">— Không thêm vào playlist —</option></select></label></div><label class="music-study-only">Lời và bài tập JSON (không bắt buộc) <input id="musicLinkLyrics" type="file" accept=".json,application/json"></label></form></details>
- <button type="button" id="musicMenuOfflineRow" class="music-flat-row music-chill-only" data-menu-view="main"><span class="music-flat-ico" aria-hidden="true">↓</span><span class="music-flat-label">Nghe ngoại tuyến</span><span class="music-flat-chev" aria-hidden="true">›</span></button>
-  <section id="musicOfflineView" class="music-offline-view music-chill-only" data-menu-view="offline" aria-label="Nghe ngoại tuyến"><button type="button" id="musicDeviceSave" class="music-flat-row music-primary">Lưu bài đang chọn để nghe ngoại tuyến</button><p id="musicOfflineUsage" class="music-empty-note" role="status" aria-live="polite"></p><fieldset id="musicOfflineQuality" hidden style="display:none"><legend>Chất lượng nguồn gốc của file</legend></fieldset><button type="button" id="musicOfflineAttachFile" class="music-flat-row">Gắn file từ thiết bị cho bài đang chọn</button><button type="button" id="musicOfflineImport" class="music-flat-row music-primary"><span class="music-flat-label">Thêm file MP3 / M4A từ thiết bị</span></button><input id="musicOfflineFile" class="music-sr" type="file" accept=".mp3,.m4a,audio/mpeg,audio/mp4" aria-label="Chọn file MP3 hoặc M4A để nghe ngoại tuyến"><p class="music-offline-help">File MP3/M4A bạn thêm sẽ được lưu trên máy để nghe khi mất mạng.</p><div id="musicOfflineList" class="music-offline-list"></div></section>
+ <details id="musicLinkImport" class="music-flat-details music-study-only" data-menu-view="main link"><summary class="music-flat-row"><span class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span><span class="music-flat-label">Nhập bài học từ link</span></summary><form id="musicLinkForm" class="music-flat-expand-body"><div class="music-link-main-row"><input id="musicLinkUrl" type="url" inputmode="url" required maxlength="2048" placeholder="YouTube, SoundCloud hoặc link MP3/M4A…" autocomplete="off"><button type="submit" id="musicLinkApply" class="music-primary">Phát</button></div><div class="music-link-sub-row"><label>Tên bài hát (tùy chọn) <input id="musicLinkName" maxlength="120" placeholder="Tự lấy từ link nếu để trống" autocomplete="off"></label><label>Thêm vào playlist <select id="musicLinkPlaylist"><option value="">— Không thêm vào playlist —</option></select></label></div><label class="music-study-only">Lời và bài tập JSON cho bài học <input id="musicLinkLyrics" type="file" accept=".json,application/json"></label></form></details>
  <button type="button" id="musicMenuLibraryRow" class="music-flat-row music-chill-only" data-menu-view="main"><span class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 4v16M9 4v16M14 4.5l6 15"/></svg></span><span class="music-flat-label">Thư viện &amp; danh sách phát</span><span class="music-flat-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg></span></button>
  <a id="musicSourceLink" class="music-flat-row music-np-source music-chill-only" data-menu-view="main" target="_blank" rel="noopener noreferrer"><span class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="14" x2="21" y2="3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="music-flat-label">Mở bài trên trang nguồn</span></a>
  <details id="musicPlaylistCreateBox" class="music-flat-details music-chill-only" data-menu-view="library"><summary class="music-flat-row"><span class="music-flat-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg></span><span class="music-flat-label">Tạo playlist mới</span></summary><form id="musicPlaylistCreateForm" class="music-flat-expand-body"><div class="music-playlist-create-row"><input id="musicPlaylistName" maxlength="80" placeholder="VD: Nhạc Hoa chill, HSK 3 nghe mỗi ngày…" autocomplete="off" required><button type="submit" id="musicPlaylistCreateBtn" class="music-primary">Tạo</button></div></form></details>
@@ -53,62 +51,7 @@
  const video=$('musicPlayer');
  let song=null,index=0,loop=false,linkLoop=false,linkRate=1,reveal=false,holding=false,pin=false,vi=false,drawerHanzi=true,drawerOpen=false,hideYt=true,menuOpen=false,queueOpen=false,currentMode='study',objectUrl=null,yt=null,ytTimer=null,linkYt=null,linkTimer=null,linkOptimisticPlay=false,linkPendingPlay=false,linkReady=false,linkKind='',linkStartTimer=null,studyOptimisticPlay=false,currentLinkUrl='',currentLinkTitle='',currentLinkAuthor='',activePlaylistId='',playerExpanded=false,serial=0,fetcher=null,opened=false,checked=false,lastSaved=0,lastTime=0;
  const expandedPlaylists=new Set();
- let offlineRows=[],offlineRequest=0,offlinePlayRequest=0,offlineSelection=null,offlineContext=false;
- let nativeLinkAudio=null,persistentLinkAudio=null,previousAudioSessionType=null,onlineStreamRequest=null,onlineQueueMode=false,streamStatus='';
- const onlineButton=el('button',undefined,'music-flat-row music-chill-only');onlineButton.id='musicMenuBackgroundRow';onlineButton.type='button';onlineButton.dataset.menuView='main';onlineButton.setAttribute('aria-pressed','false');
- const onlineLabel=el('span','Phát bài đang chọn','music-flat-label');onlineLabel.setAttribute('aria-live','polite');onlineButton.append(el('span','♫','music-flat-ico'),onlineLabel);
- const onlineNote=el('p',undefined,'music-empty-note music-chill-only');onlineNote.id='musicOnlineStatus';onlineNote.dataset.menuView='main';onlineNote.setAttribute('role','status');onlineNote.hidden=true;$('musicMenuOfflineRow').before(onlineButton,onlineNote);
- onlineButton.onclick=()=>{if(onlineStreamRequest){onlineStreamRequest.abort();return;}if(!currentLinkUrl){status('Chọn bài hát hoặc dán link trước khi bật nghe nền.');onlineLabel.textContent='Chọn bài hát trước';return;}if(canPlayBackground()&&!nativeLinkAudio?.error){requestLinkPlayback(true);toggleMenu(false);return;}try{startOnlineBackground(C.parseLink(currentLinkUrl),currentLinkTitle,activePlaylistId);}catch(e){status(e.message);}};
- let sponsorEnabled=read('sponsor-skip','on')!=='off';
- const sponsorButton=el('button',undefined,'music-flat-row music-chill-only');sponsorButton.id='musicSponsorToggle';sponsorButton.type='button';sponsorButton.title='Mốc cộng đồng SponsorBlock; không chặn quảng cáo do YouTube chèn.';sponsorButton.dataset.menuView='main';
- const sponsorNotice=el('p',undefined,'music-sponsor-notice'),sponsorUndo=el('button','Nghe lại');sponsorNotice.hidden=true;sponsorUndo.type='button';sponsorUndo.id='musicSponsorUndo';
- const sponsorText=el('span','Đã bỏ qua đoạn tài trợ / ngoài nhạc.');sponsorNotice.append(sponsorText,sponsorUndo);$('musicLinkControls').after(sponsorNotice);
- const sponsor=window.HSKMusicSponsor?.create({onSkip:()=>{sponsorNotice.hidden=false;}});
- function syncSponsor(){sponsorButton.textContent='Bỏ qua tài trợ & đoạn ngoài nhạc: '+(sponsorEnabled?'bật':'tắt');sponsorButton.setAttribute('aria-pressed',String(sponsorEnabled));}
- sponsorButton.onclick=()=>{sponsorEnabled=!sponsorEnabled;save('sponsor-skip',sponsorEnabled?'on':'off');syncSponsor();sponsorNotice.hidden=true;sponsor?.stop();try{const l=C.parseLink(currentLinkUrl);if(sponsorEnabled&&l.kind==='youtube'&&!offlineContext)sponsor?.load(l.source.videoId);}catch{}};
- sponsorUndo.onclick=()=>{sponsor?.undo(linkYt);sponsorNotice.hidden=true;};$('musicMenuOfflineRow').before(sponsorButton);syncSponsor();
- window.addEventListener('hsk-account-ready',()=>{sponsorEnabled=read('sponsor-skip','on')!=='off';syncSponsor();sponsor?.stop();sponsorNotice.hidden=true;});
-   // Cốc Cốc intentionally uses a Chrome-like UA in some builds. One explicit
-  // opt-in stored in THIS browser is a reliable alternative to false detection.
-  const coccocBridge=window.HSKCocCocBridge;
-  let coccocEnabled=Boolean(coccocBridge?.modeEnabled(localStorage,navigator,window));
-  const coccocMode=el('button',undefined,'music-flat-row music-chill-only music-coccoc-mode');
-  coccocMode.id='musicCocCocModeToggle';coccocMode.type='button';coccocMode.dataset.menuView='main';
-  coccocMode.setAttribute('aria-label','Khai báo đang sử dụng trình duyệt Cốc Cốc');
-  const coccocModeNote=el('p','Chỉ bật trên Cốc Cốc. HSK không thể nhận biết chắc chắn hoặc điều khiển trình chặn quảng cáo và công cụ tải.','music-empty-note music-chill-only music-coccoc-mode-note');
-  coccocModeNote.id='musicCocCocModeNote';coccocModeNote.dataset.menuView='main';
-  const coccocOpen=el('a','Cốc Cốc · Mở bài ở trang nguồn','music-flat-row music-chill-only music-coccoc-row');
-  coccocOpen.id='musicCocCocOpen';coccocOpen.dataset.menuView='main';
-  coccocOpen.target='_blank';coccocOpen.rel='noopener noreferrer';
-  coccocOpen.setAttribute('aria-label','Mở bài hát tại trang nguồn để sử dụng các tiện ích của Cốc Cốc');
-  coccocOpen.href='#';
-  coccocOpen.onclick=event=>{
-   if(!coccocEnabled){event.preventDefault();return;}
-   const url=coccocBridge?.providerSource(currentLinkUrl,C.parseLink);
-   if(!url){event.preventDefault();status('Chọn một bài YouTube, SoundCloud hoặc Spotify trước.');return;}
-   // The actual browser may block ads or offer downloads on the provider page.
-   // HSK neither controls those extensions nor downloads provider media.
-   coccocOpen.href=url;
-  };
-  $('musicMenuOfflineRow').before(coccocMode,coccocModeNote,coccocOpen);
-  function syncCocCoc(){
-   coccocMode.textContent='Tôi đang dùng Cốc Cốc: '+(coccocEnabled?'Bật':'Tắt');
-   coccocMode.setAttribute('aria-pressed',String(coccocEnabled));
-   coccocOpen.hidden=!coccocEnabled;
-   if(!coccocEnabled){coccocOpen.href='#';return;}
-   const url=coccocBridge?.providerSource(currentLinkUrl,C.parseLink);
-   coccocOpen.href=url||'#';
-   coccocOpen.setAttribute('aria-disabled',String(!url));
-   coccocOpen.classList.toggle('music-coccoc-disabled',!url);
-  }
-  coccocMode.onclick=()=>{
-   const next=!coccocEnabled;
-   let saved=false;
-   try{saved=Boolean(coccocBridge?.writeChoice(localStorage,next?'on':'off'));}catch{}
-   if(!saved){status('Trình duyệt không cho lưu lựa chọn. Hãy bật quyền lưu dữ liệu website.');return;}
-   coccocEnabled=next;syncCocCoc();
-  };
-  syncCocCoc();
+ let nativeLinkAudio=null,persistentLinkAudio=null,previousAudioSessionType=null,linkWantedPlay=false;
  const backgroundPlayer=el('div',undefined,'music-background-player');
  backgroundPlayer.id='musicBackgroundPlayer';backgroundPlayer.hidden=true;backgroundPlayer.setAttribute('role','region');backgroundPlayer.setAttribute('aria-label','Nhạc đang phát');
  const backgroundTitle=el('button'),backgroundPlay=el('button'),backgroundClose=el('button');
@@ -122,77 +65,67 @@
  backgroundClose.setAttribute('aria-label','Dừng nhạc');backgroundClose.onclick=()=>stop();
  backgroundPlayer.append(backgroundTitle,backgroundPlay,backgroundClose);document.body.append(backgroundPlayer);
  // Retain the existing player on app navigation; OS lock-screen playback is provider-dependent.
- function canPlayBackground(){return currentMode==='chill'&&Boolean(nativeLinkAudio||linkYt?.officialWidget||['youtube','soundcloud'].includes(linkKind));}
+ function canPlayBackground(){return currentMode==='chill'&&Boolean(nativeLinkAudio);}
  function prepareAudioSession(){try{if(navigator.audioSession){if(previousAudioSessionType===null)previousAudioSessionType=navigator.audioSession.type;navigator.audioSession.type='playback';}}catch{}}
- // Best-effort audio session support, not a grant of native/background privileges.
- let youtubeKeepAlive=null,keepAliveToken=0,keepAliveHandoff=false;
- let linkWantedPlay=false,youtubeHasPlayed=false,youtubeEndHandled=false,hiddenAt=0,hiddenRetryUsed=false,hiddenResumeTimer=null;
- // Adapt the supplied guard to the app's single audio/session lifecycle. Never
- // spoof visibility or poll forever: explicit pause and interruptions must win.
- class BackgroundPlaybackGuard {
-  get keepAliveAudio(){return youtubeKeepAlive;}
-  userPlay(){requestLinkPlayback(true);}
-  userPause(){requestLinkPlayback(false);}
-  attachYouTubePlayer(player,iframe){
-   this.ytPlayer=player;
-   iframe?.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');
-   iframe?.setAttribute('playsinline','1');
-  }
-  handleYouTubeStateChange(state){
-   if(state===1)startYouTubeKeepAlive();
-   else if(state===2){if(!resumeHiddenYouTube()){linkWantedPlay=false;stopYouTubeKeepAlive();}}
-   else if(state===3)stopYouTubeKeepAlive();
-  }
-  detach(){this.ytPlayer=null;}
- }
- const guard=new BackgroundPlaybackGuard();
- function keepAliveElement(){
-  if(youtubeKeepAlive)return youtubeKeepAlive;
-  const bytes=new Uint8Array(8044),view=new DataView(bytes.buffer),word=(at,value)=>{for(let i=0;i<value.length;i++)bytes[at+i]=value.charCodeAt(i);};
-  word(0,'RIFF');view.setUint32(4,8036,true);word(8,'WAVEfmt ');view.setUint32(16,16,true);view.setUint16(20,1,true);view.setUint16(22,1,true);view.setUint32(24,8000,true);view.setUint32(28,8000,true);view.setUint16(32,1,true);view.setUint16(34,8,true);word(36,'data');view.setUint32(40,8000,true);bytes.fill(128,44);
-  const audio=document.createElement('audio');audio.id='musicYouTubeKeepAlive';audio.hidden=true;audio.loop=true;audio.preload='auto';audio.setAttribute('playsinline','');audio.setAttribute('aria-hidden','true');audio.src='data:audio/wav;base64,'+btoa(String.fromCharCode(...bytes));document.body.append(audio);youtubeKeepAlive=audio;return audio;
- }
- function startYouTubeKeepAlive(prime=false){
-  if(linkKind!=='youtube'||nativeLinkAudio||onlineStreamRequest||!linkWantedPlay||navigator.audioSession?.state==='interrupted')return;
-  if(prime&&navigator.userActivation&&!navigator.userActivation.isActive)return;
-  const audio=keepAliveElement();if(!audio.paused)return;
-  const token=++keepAliveToken;prepareAudioSession();
-  try{Promise.resolve(audio.play()).then(()=>{if(token!==keepAliveToken)return;if(prime&&linkYt?.getPlayerState?.()!==1&&!keepAliveHandoff){audio.pause();audio.dataset.state='primed';}else audio.dataset.state='playing';}).catch(()=>{if(token===keepAliveToken)audio.dataset.state='blocked';});}catch{audio.dataset.state='blocked';}
- }
- function stopYouTubeKeepAlive(release=false){
-  ++keepAliveToken;clearTimeout(hiddenResumeTimer);hiddenResumeTimer=null;
-  if(youtubeKeepAlive){youtubeKeepAlive.pause();youtubeKeepAlive.dataset.state='paused';if(release){youtubeKeepAlive.removeAttribute('src');youtubeKeepAlive.load();youtubeKeepAlive.remove();youtubeKeepAlive=null;}}
-  if(!nativeLinkAudio&&previousAudioSessionType!==null){try{if(navigator.audioSession?.type==='playback')navigator.audioSession.type=previousAudioSessionType;}catch{}previousAudioSessionType=null;}
- }
- function resumeHiddenYouTube(){
-  if(hiddenResumeTimer&&document.hidden&&linkWantedPlay)return true;
-  if(!document.hidden||!hiddenAt||Date.now()-hiddenAt>2000||hiddenRetryUsed||!youtubeHasPlayed||!linkWantedPlay||linkKind!=='youtube'||!linkReady||linkYt?.getPlayerState?.()!==2||navigator.audioSession?.state==='interrupted')return false;
-  hiddenRetryUsed=true;const epoch=serial,player=linkYt;
-  hiddenResumeTimer=setTimeout(()=>{hiddenResumeTimer=null;if(epoch!==serial||player!==linkYt||!document.hidden||!linkWantedPlay||player.getPlayerState?.()!==2||navigator.audioSession?.state==='interrupted')return;requestLinkPlayback(true);},150);return true;
- }
- function finishLinkTrack(){
-  if(linkLoop){linkYt?.seekTo?.(0,true);requestLinkPlayback(true);return;}
-  const list=playbackList().list,index=list.findIndex(row=>row.url===currentLinkUrl);
-  if(index>=0&&index<list.length-1){let carry=false;try{carry=!offlineRows.some(row=>row.url===list[index+1].url)&&C.parseLink(list[index+1].url).kind==='youtube';}catch{}if(!carry)stopYouTubeKeepAlive(true);keepAliveHandoff=carry;try{stepSavedLink(1);}finally{keepAliveHandoff=false;}if(linkKind!=='youtube')stopYouTubeKeepAlive(true);}
-  else{linkWantedPlay=false;stopYouTubeKeepAlive(true);}
- }
- navigator.audioSession?.addEventListener?.('statechange',()=>{if(navigator.audioSession.state==='interrupted'&&linkKind==='youtube'){linkWantedPlay=false;linkPendingPlay=false;linkOptimisticPlay=false;stopYouTubeKeepAlive();if(linkReady)linkYt?.pauseVideo?.();updateLinkPlayButton();}});
  function syncBackgroundPlayer(){
   const active=canPlayBackground();backgroundPlayer.hidden=!active||!panel.hidden;
   document.body.classList.toggle('music-background-active',!backgroundPlayer.hidden);
-  backgroundTitle.textContent=streamStatus||currentLinkTitle||'Nhạc đang phát';backgroundTitle.title='Mở trình phát: '+backgroundTitle.textContent;
-  onlineButton.setAttribute('aria-pressed',String(active));onlineButton.setAttribute('aria-busy',String(Boolean(onlineStreamRequest)));
-  if(!onlineStreamRequest)onlineLabel.textContent=active?'Đang phát bằng nguồn gốc':'Phát bài đang chọn';
+  backgroundTitle.textContent=currentLinkTitle||'Nhạc đang phát';backgroundTitle.title='Mở trình phát: '+backgroundTitle.textContent;
   const playing=active&&(nativeLinkAudio?Boolean(nativeLinkAudio.currentSrc)&&!nativeLinkAudio.paused&&!nativeLinkAudio.ended:linkYt?.getPlayerState?.()===1);
   backgroundPlay.innerHTML=playing?ICONS.pause:ICONS.play;backgroundPlay.setAttribute('aria-label',playing?'Tạm dừng nhạc':'Phát nhạc');
   if(active){try{navigator.mediaSession.playbackState=playing?'playing':'paused';const d=Number(nativeLinkAudio?.duration??linkYt?.getDuration?.()),c=Number(nativeLinkAudio?.currentTime??linkYt?.getCurrentTime?.());if(Number.isFinite(d)&&d>0&&Number.isFinite(c))navigator.mediaSession.setPositionState?.({duration:d,playbackRate:nativeLinkAudio?.playbackRate||linkRate,position:Math.max(0,Math.min(d,c))});}catch{}}
  }
- // Official embeds or user-provided file URLs only; no source discovery or substitution.
- function startOnlineBackground(link,title,playlistId=''){
-  onlineQueueMode=link.kind==='audio'||link.kind==='soundcloud';
-  openLink(link,title,false,playlistId,true);
-  if(link.kind==='youtube'&&!config.onlineResolver)status('Phát bằng YouTube chính thức. Khóa màn hình có thể làm trình duyệt dừng phát.');
+ // Owner-uploaded R2 catalogue; audio URLs are served by the configured Worker.
+ const cloudSection=el('section',undefined,'music-cloud-section'),cloudHead=el('h3','Kho nhạc HSK','music-browse-section-title'),cloudStatus=el('p','Đang kết nối kho nhạc…','music-empty-note'),cloudList=el('div',undefined,'music-recent-list');
+ cloudSection.id='musicCloudSection';cloudList.id='musicCloudList';cloudStatus.id='musicCloudStatus';cloudStatus.setAttribute('role','status');cloudSection.append(cloudHead,cloudStatus,cloudList);$('musicBrowseRecentSection').before(cloudSection);
+ const cloudRefresh=el('button','Làm mới kho nhạc','music-flat-row music-chill-only');cloudRefresh.id='musicCloudRefresh';cloudRefresh.type='button';cloudRefresh.dataset.menuView='main';cloudRefresh.onclick=()=>refreshCloud();$('musicMenuSheet').append(cloudRefresh);
+ const cloudAdmin=el('section',undefined,'music-cloud-admin music-chill-only');cloudAdmin.id='musicCloudAdmin';cloudAdmin.dataset.menuView='main';cloudAdmin.hidden=true;
+ cloudAdmin.innerHTML='<h3>Thêm nhạc vào kho</h3><form id="musicCloudUploadForm"><label>Tên bài hát<input id="musicCloudUploadTitle" required maxlength="120" autocomplete="off"></label><label>Nghệ sĩ<input id="musicCloudUploadArtist" maxlength="80" autocomplete="off"></label><label>File MP3 / M4A (tối đa 50 MB)<input id="musicCloudUploadFile" type="file" accept=".mp3,.m4a,audio/mpeg,audio/mp4" required></label><button type="submit" id="musicCloudUpload" class="music-primary">Tải lên kho</button><button type="button" id="musicCloudUploadCancel" hidden>Hủy tải lên</button><progress id="musicCloudUploadProgress" max="100" value="0" hidden aria-label="Tiến trình tải lên kho"></progress><p id="musicCloudUploadStatus" role="status" aria-live="polite"></p></form>';
+ $('musicMenuSheet').append(cloudAdmin);let cloudRequest=null,cloudUpload=null;
+ const cloudOwner='BIvUyItDYJWcLvlhhtYFyj5csBH2';
+ function cloudEndpoint(){if(!config.cloudEndpoint)return '';const u=new URL(config.cloudEndpoint);if(u.protocol!=='https:'||u.username||u.password||u.search||u.hash)throw Error('Địa chỉ kho R2 chưa hợp lệ.');return u.origin;}
+ function syncCloudOwner(){cloudAdmin.hidden=window.HSKAccountDashboard?.user?.uid!==cloudOwner;}
+ function drawCloud(){
+  cloudList.replaceChildren();
+  for(const track of cloudTracks){
+   const b=el('button',undefined,'music-row-main music-cloud-track');b.type='button';b.dataset.trackId=track.id;
+   const image=el('img',undefined,'music-row-thumb');image.src=fallbackArt;image.alt='';const copy=el('span',undefined,'music-row-copy');copy.append(el('strong',track.title),el('small',track.artist));b.append(image,copy);
+   b.onclick=()=>openLink(C.parseLink(track.url),track.title,true,'',true);cloudList.append(b);metaCache[track.url]={title:track.title,author:track.artist};
+  }
+  cloudStatus.textContent=cloudTracks.length?cloudTracks.length+' bài hát trong kho':'Kho chưa có bài hát. Chủ kho có thể tải nhạc lên trong menu ⋯.';
  }
+ async function refreshCloud(){
+  syncCloudOwner();cloudRequest?.abort();const controller=new AbortController();cloudRequest=controller;cloudStatus.textContent='Đang kết nối kho nhạc…';
+  try{
+   const endpoint=cloudEndpoint();if(!endpoint){cloudStatus.textContent='Kho R2 chưa được cấu hình. Chủ kho cần kích hoạt R2 và kết nối dịch vụ.';return;}
+   let cursor='',rows=[];
+   for(let page=0;page<20;page++){
+    const r=await fetch(endpoint+'/api/library'+(cursor?'?cursor='+encodeURIComponent(cursor):''),{signal:controller.signal,cache:'no-store'});if(!r.ok)throw Error('Không tải được kho nhạc ('+r.status+').');const data=await r.json();
+    if(!Array.isArray(data.tracks))throw Error('Danh sách kho nhạc chưa hợp lệ.');
+    for(const row of data.tracks){const u=new URL(row.url);if(!/^[a-f0-9]{64}\.(mp3|m4a)$/.test(row.id)||u.origin!==endpoint||u.pathname!=='/audio/'+row.id)throw Error('Bài hát trả về chưa hợp lệ.');rows.push({id:row.id,url:u.href,title:String(row.title||'Bài hát').slice(0,120),artist:String(row.artist||'HSK Music').slice(0,80)});}
+    cursor=data.cursor;if(!cursor)break;
+   }
+   if(controller.signal.aborted)return;cloudTracks=rows;drawCloud();drawRecentBrowse();drawBrowsePlaylists();
+  }catch(e){if(e.name!=='AbortError')cloudStatus.textContent=e.message;}
+  finally{if(cloudRequest===controller)cloudRequest=null;}
+ }
+ $('musicCloudUploadCancel').onclick=()=>cloudUpload?.abort();
+ $('musicCloudUploadForm').onsubmit=async event=>{
+  event.preventDefault();if(cloudUpload)return;const button=$('musicCloudUpload'),progress=$('musicCloudUploadProgress'),note=$('musicCloudUploadStatus'),cancel=$('musicCloudUploadCancel'),user=window.HSKAccountDashboard?.user;
+  try{
+   if(user?.uid!==cloudOwner)throw Error('Chỉ chủ kho được tải nhạc lên.');const endpoint=cloudEndpoint();if(!endpoint)throw Error('Kho R2 chưa được cấu hình.');
+   const file=$('musicCloudUploadFile').files[0],title=$('musicCloudUploadTitle').value.trim(),artist=$('musicCloudUploadArtist').value.trim();if(!file||file.size<=0||file.size>50*1024*1024||! /\.(mp3|m4a)$/i.test(file.name))throw Error('Chọn file MP3/M4A tối đa 50 MB.');if(!title)throw Error('Nhập tên bài hát.');
+   button.disabled=true;note.textContent='Đang tải lên kho…';progress.hidden=false;progress.value=0;cancel.hidden=false;
+   const token=await user.getIdToken();if(user!==window.HSKAccountDashboard?.user)throw Error('Tài khoản đã thay đổi.');
+   await new Promise((resolve,reject)=>{
+    const xhr=new XMLHttpRequest();cloudUpload=xhr;xhr.open('POST',endpoint+'/api/admin/upload');xhr.setRequestHeader('Authorization','Bearer '+token);xhr.setRequestHeader('Content-Type',file.type||'application/octet-stream');xhr.setRequestHeader('X-Music-Title',encodeURIComponent(title));xhr.setRequestHeader('X-Music-Artist',encodeURIComponent(artist));xhr.timeout=180000;
+    xhr.upload.onprogress=e=>{if(e.lengthComputable)progress.value=Math.min(99,e.loaded/e.total*100);};
+    xhr.onerror=()=>reject(Error('Mất kết nối khi tải lên.'));xhr.onabort=()=>reject(Error('Đã hủy tải lên.'));xhr.ontimeout=()=>reject(Error('Tải lên quá lâu. Thử lại.'));
+    xhr.onload=()=>{let data;try{data=JSON.parse(xhr.responseText);}catch{return reject(Error('Dịch vụ phản hồi chưa hợp lệ.'));}if(xhr.status<200||xhr.status>=300)return reject(Error(data.error||'Chưa tải được bài hát.'));resolve(data);};xhr.send(file);
+   });progress.value=100;note.textContent='Đã thêm bài hát vào kho.';$('musicCloudUploadFile').value='';await refreshCloud();
+  }catch(e){note.textContent=e.message;}
+  finally{cloudUpload=null;button.disabled=false;cancel.hidden=true;}
+ };
  const BUILTIN_SONGS=[
   {version:1,id:'app-hsk12-yueliang',title:'月亮代表我的心 (Ánh Trăng Nói Hộ Lòng Tôi)',artist:'鄧麗君 · Kho nhạc học HSK App',credit:'Bài học chuẩn HSK 1–2 do App cung cấp',revision:'1',source:{kind:'youtube',videoId:'bv_cEeDlop0'},segments:[
    {id:'yl-1',start:14,end:21,hanzi:'你问我爱你有多深，我爱你有几分。',pinyin:'Nǐ wèn wǒ ài nǐ yǒu duō shēn, wǒ ài nǐ yǒu jǐ fēn.',vi:'Người hỏi tôi yêu người sâu đậm nhường nào, yêu người được mấy phần.',quiz:{question:'Động từ "问" (wèn) trong câu mang nghĩa gì?',options:['Hỏi','Nghe','Nhìn'],answer:0}},
@@ -208,7 +141,7 @@
    {id:'py-2',start:36,end:44,hanzi:'一句话，一辈子，一生情，一杯酒。',pinyin:'Yí jù huà, yíbèizi, yìshēng qíng, yì bēi jiǔ.',vi:'Một lời nói, một đời người, một kiếp tình, một chén rượu.',quiz:{question:'Từ "一辈子" (yíbèizi) chỉ khoảng thời gian nào?',options:['Cả một đời','Một ngày','Một năm'],answer:0}}
   ]}
  ];
- let catalog=BUILTIN_SONGS.map(C.validateSong),config={enabled:false,endpoint:''},lexicon=C.dictionary([]),lexiconSource=null,progress={},metaCache={};
+ let catalog=BUILTIN_SONGS.map(C.validateSong),config={enabled:false,endpoint:'',cloudEndpoint:''},cloudTracks=[],lexicon=C.dictionary([]),lexiconSource=null,progress={},metaCache={};
  // The account module restores this local owner before cloud auth is ready.
  // Keep the same local library during its transient user:null notifications.
  const owner=()=>{
@@ -275,10 +208,10 @@
   }else if(currentLinkUrl){
    title.textContent=currentLinkTitle||$('musicLinkTitle').textContent||'Bài hát đang phát';
    const activePl=activePlaylistId?savedPlaylists().find(p=>p.id===activePlaylistId):null;
-   sub.textContent=activePl?currentLinkAuthor+' · '+activePl.name:(currentLinkAuthor||'Nghệ sĩ · YouTube / SoundCloud');
+   sub.textContent=activePl?currentLinkAuthor+' · '+activePl.name:(currentLinkAuthor||'Kho nhạc HSK');
   }else{
    title.textContent='Chưa chọn bài hát';
-   sub.textContent='Dán link hoặc chọn playlist bên dưới';
+   sub.textContent='Chọn bài trong kho nhạc hoặc playlist';
   }
  }
  function toggleMenu(force){
@@ -304,8 +237,9 @@
  }
  function playbackList(){
   const playlist=activePlaylistId?savedPlaylists().find(p=>p.id===activePlaylistId):null;
-  let list=playlist?.items?.length?playlist.items:offlineContext?offlineRows:savedLinks();
-  if(panel.hidden&&canPlayBackground()&&!onlineQueueMode&&offlineContext)list=list.filter(entry=>offlineRows.some(row=>row.url===entry.url));
+  let list=playlist?.items?.length?playlist.items:cloudTracks;
+  list=list.filter(row=>cloudTracks.some(track=>track.url===row.url));
+
   return {playlist,list};
  }
  function drawQueue(){
@@ -313,12 +247,12 @@
   current.replaceChildren();next.replaceChildren();
   const {playlist,list}=playbackList(),idx=list.findIndex(entry=>entry.url===currentLinkUrl);
   const row=(entry,now)=>{
-   let link;try{link=offlineLink(entry);}catch{return;}
+   let link;try{link=C.parseLink(entry.url);}catch{return;}
    const button=el('button',undefined,'music-row-main music-queue-track'+(now?' music-track-current':''));button.type='button';
    if(now)button.setAttribute('aria-current','true');
    const thumb=el('img');thumb.className='music-row-thumb';thumb.alt='';thumb.src=link.kind==='youtube'?ytThumb(link.source.videoId):fallbackArt;
    const copy=el('span',undefined,'music-row-copy');copy.append(el('strong',now?currentLinkTitle||entry.title||link.label:entry.title||metaCache[link.url]?.title||link.label),el('small',now?'Đang phát':metaCache[link.url]?.author||link.label));
-   button.append(thumb,copy);button.onclick=()=>{if(now){toggleQueue(false);return;}if(offlineRows.some(row=>row.url===entry.url)){playOffline(entry.url,playlist?.id||'',true);toggleQueue(false);return;}$('musicLinkUrl').value=link.url;$('musicLinkName').value=String(entry.title||'').slice(0,120);openLink(link,entry.title,false,playlist?.id||'',true);toggleQueue(false);};
+   button.append(thumb,copy);button.onclick=()=>{if(now){toggleQueue(false);return;}$('musicLinkUrl').value=link.url;$('musicLinkName').value=String(entry.title||'').slice(0,120);openLink(link,entry.title,false,playlist?.id||'',true);toggleQueue(false);};
    (now?current:next).append(button);
   };
   if(currentLinkUrl)row({url:currentLinkUrl,title:currentLinkTitle},true);
@@ -335,12 +269,11 @@
   const sheet=$('musicMenuSheet');if(!sheet)return;
   if(currentMode!=='chill')view='main';
   sheet.dataset.view=view;sheet.scrollTop=0;
-  $('musicMenuSubTitle').textContent=({link:'Dán link bài hát mới',library:'Thư viện của bạn',offline:'Nhạc từ thiết bị'})[view]||'';
+  $('musicMenuSubTitle').textContent=({link:'Dán link bài hát mới',library:'Thư viện của bạn',cloud:'Kho nhạc Cloudflare'})[view]||'';
   $('musicMenuSubCancel').textContent=view==='save'?'Hủy':'‹ Quay lại';
   $('musicMenuSubDone').hidden=view!=='save';
   if(view==='main'&&currentMode==='chill')$('musicLinkImport').open=false;
-     if(view==='main')syncCocCoc();
-if(view==='offline')drawOffline();
+
   if(view==='save'){$('musicSaveNewForm').hidden=true;drawSavePicker(true);}
   requestAnimationFrame(()=>sheet.querySelectorAll('[data-menu-view]').forEach(node=>{
    if((node.dataset.menuView||'').split(/\s+/).includes(view)&&node.getClientRects().length){
@@ -357,7 +290,7 @@ if(view==='offline')drawOffline();
  }
  function syncQuickSaveBtn(){
   const lists=savedPlaylists();
-  for(const id of ['musicQuickSaveBtn','musicMiniSave','musicPreviewPlaylistAdd'])if($(id))$(id).disabled=currentLinkUrl.startsWith('offline:');
+  for(const id of ['musicQuickSaveBtn','musicMiniSave','musicPreviewPlaylistAdd'])if($(id))$(id).disabled=false;
   const inPlaylist=Boolean(currentLinkUrl&&lists.some(pl=>pl.items.some(it=>it.url===currentLinkUrl)));
   const plFound=inPlaylist?lists.find(pl=>pl.items.some(it=>it.url===currentLinkUrl)):null;
   const btn=$('musicQuickSaveBtn');
@@ -406,8 +339,8 @@ if(view==='offline')drawOffline();
    const seekDelta=delta=>{if(song)seekBy(delta);else if(linkYt){const c=Number(linkYt.getCurrentTime?.()||0),d=Number(linkYt.getDuration?.()||0);linkYt.seekTo?.(Math.max(0,d>0?Math.min(d,c+delta):c+delta),true);}};
    const actions={
     stop:()=>stop(),
-    play:()=>{if(song)play();else guard.userPlay();},
-    pause:()=>{if(song){pauseNative();yt?.pauseVideo?.();updatePlayButton();}else guard.userPause();},
+    play:()=>{if(song)play();else requestLinkPlayback(true);},
+    pause:()=>{if(song){pauseNative();yt?.pauseVideo?.();updatePlayButton();}else requestLinkPlayback(false);},
     previoustrack:()=>{if(song)stepLessonTrack(-1);else stepSavedLink(-1);},
     nexttrack:()=>{if(song)stepLessonTrack(1);else stepSavedLink(1);},
     seekbackward:()=>seekDelta(-5),
@@ -448,7 +381,7 @@ if(view==='offline')drawOffline();
   const recents=savedLinks();
   let activeLink=null,activeTitle='',activeAuthor='';
   if(currentLinkUrl){
-   try{activeLink=offlineLink({url:currentLinkUrl});activeTitle=currentLinkTitle;activeAuthor=currentLinkAuthor;}catch{}
+   try{activeLink=C.parseLink(currentLinkUrl);activeTitle=currentLinkTitle;activeAuthor=currentLinkAuthor;}catch{}
   }else if(recents.length){
    try{
     const r=recents[0];activeLink=C.parseLink(r.url);
@@ -474,7 +407,7 @@ if(view==='offline')drawOffline();
   const list=$('musicRecentList');if(!list)return;
   list.replaceChildren();
   const recents=savedLinks();
-  const tracks=recents;
+  const tracks=recents.filter(row=>cloudTracks.some(track=>track.url===row.url));
   if(!tracks.length){list.append(el('p','Chưa có bài nghe gần đây. Những bài bạn mở sẽ xuất hiện ở đây.','music-empty-note'));return;}
   for(const entry of tracks.slice(0,20)){
    let link;try{link=C.parseLink(entry.url);}catch{continue;}
@@ -553,7 +486,7 @@ if(view==='offline')drawOffline();
    $('musicLinkPreview').hidden=!playerExpanded;
    $('musicBottomDock').hidden=!playerExpanded;
    $('musicMiniPlayer').hidden=playerExpanded||(!currentLinkUrl&&!savedLinks().length);
-   $('musicMenuTitle').textContent='Playlist & Nhập nhạc giải trí';
+   $('musicMenuTitle').textContent='Kho nhạc & Playlist';
    updateBrowseBackIcon();
    syncMiniPlayer();
   }else{
@@ -585,218 +518,22 @@ if(view==='offline')drawOffline();
  $('musicQueueBackdrop').onclick=()=>toggleQueue(false);
  $('musicQueueLibrary').onclick=()=>{toggleMenu(true);setMenuView('library');$('musicPlaylistsBox').open=true;};
  panel.addEventListener('keydown',e=>{if(e.key==='Escape'&&queueOpen){toggleQueue(false);$('musicChillPeekToggle').focus();}});
- function offlineLink(entry){return entry.url?.startsWith('offline:')?{url:entry.url,kind:'offline',label:'Ngoại tuyến',source:{}}:C.parseLink(entry.url);}
- async function loadOffline(){
-  if(!window.HSKMusicOffline)return;
-  const uid=owner(),request=++offlineRequest;
-  try{const rows=await HSKMusicOffline.list(uid);if(uid!==owner()||request!==offlineRequest)return;offlineRows=rows;if(opened&&currentMode==='chill'&&currentLinkUrl&&!linkYt&&!nativeLinkAudio&&$('musicLinkPreview').hidden&&rows.some(row=>row.url===currentLinkUrl))playOffline(currentLinkUrl,activePlaylistId,false);if($('musicMenuSheet').dataset.view==='offline')drawOffline();}catch(e){if(uid===owner()&&$('musicMenuSheet').dataset.view==='offline')$('musicOfflineUsage').textContent=e.message;}
- }
- async function drawOffline(){
-  const uid=owner(),request=++offlineRequest,box=$('musicOfflineList');box.replaceChildren();
-  $('musicOfflineUsage').textContent='Đang đọc nhạc trên thiết bị…';
-  $('musicOfflineAttachFile').disabled=!currentLinkUrl||currentLinkUrl.startsWith('offline:');
-
-  if(!window.HSKMusicOffline){$('musicOfflineUsage').textContent='Chưa mở được bộ nhớ ngoại tuyến. Thử tải lại app.';return;}
-  try{
-   const [rows,bytes]=await Promise.all([HSKMusicOffline.list(uid),HSKMusicOffline.usage()]);
-   if(uid!==owner()||request!==offlineRequest)return;offlineRows=rows;box.replaceChildren();
-   $('musicOfflineUsage').textContent=rows.length+' file đã lưu · '+(bytes/1048576).toFixed(1)+' / 100 MB trên thiết bị';
-   for(const entry of rows){
-    const row=el('div',undefined,'music-offline-item'),play=el('button',undefined,'music-row-main'),copy=el('span',undefined,'music-row-copy');play.type='button';
-    copy.append(el('strong',entry.title),el('small','Đã lưu trên thiết bị'+(entry.bitrate?' · '+entry.bitrate+' kbps':'')+' · '+(entry.size/1048576).toFixed(1)+' MB'));play.append(copy);play.onclick=()=>playOffline(entry.url,'',true);
-    const remove=el('button','Xóa','music-row-del');remove.type='button';remove.setAttribute('aria-label','Xóa bản ngoại tuyến '+entry.title);remove.onclick=async()=>{try{await HSKMusicOffline.remove(uid,entry.url);if(uid===owner())drawOffline();}catch(e){$('musicOfflineUsage').textContent=e.message;}};
-    row.append(play,remove);box.append(row);
-   }
-   if(!rows.length)box.append(el('p','Chưa có nhạc ngoại tuyến. Chọn file MP3 hoặc M4A từ thiết bị.','music-empty-note'));
-  }catch(e){if(uid===owner())$('musicOfflineUsage').textContent=e.message;}
- }
- function chooseOfflineFile(current){
-  let track={};
-  if(current){
-   if(!currentLinkUrl||currentLinkUrl.startsWith('offline:')){
-    $('musicOfflineUsage').textContent='Chọn một bài trong danh sách trước khi gắn file, hoặc dùng nút Thêm file từ thiết bị.';return;
-   }
-   track={url:currentLinkUrl,title:currentLinkTitle||'Bài đã chọn',author:currentLinkAuthor||''};
-  }
-  offlineSelection={owner:owner(),epoch:serial,track};
-  $('musicOfflineFile').value='';$('musicOfflineFile').click();
- }
- let deviceSaveTask=null;
- const saveBanner=el('section',undefined,'music-device-save-banner');saveBanner.id='musicDeviceSaveBanner';saveBanner.hidden=true;saveBanner.setAttribute('aria-label','Tiến trình lưu nhạc ngoại tuyến');
- const saveMessage=el('span'),saveProgress=el('progress'),saveCancel=el('button','Hủy');saveMessage.setAttribute('role','status');saveMessage.setAttribute('aria-live','polite');saveProgress.max=100;saveProgress.setAttribute('aria-label','Tiến trình tải nhạc');saveCancel.type='button';saveBanner.append(saveMessage,saveProgress,saveCancel);document.body.append(saveBanner);
- saveCancel.onclick=()=>{if(deviceSaveTask)deviceSaveTask.controller.abort();else saveBanner.hidden=true;};
- function deviceSaveState(message,percent=null){saveMessage.textContent=message;if(percent===null)saveProgress.removeAttribute('value');else saveProgress.value=percent;saveBanner.hidden=false;}
- async function readDeviceAudio(url,task){
-  const response=await fetch(url,{signal:task.controller.signal,cache:'no-store'});if(!response.ok)throw Error('Nguồn âm thanh chưa tải được ('+response.status+').');
-  const max=50*1024*1024,total=Number(response.headers.get('content-length'))||0;
-  if(total>max)throw Error('Bài này vượt giới hạn 50 MB trên thiết bị.');
-  if(!response.body)throw Error('Trình duyệt chưa hỗ trợ tải nguồn này.');
-  const reader=response.body.getReader(),chunks=[];let size=0;
-  try{while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>max)throw Error('Bài này vượt giới hạn 50 MB trên thiết bị.');chunks.push(value);deviceSaveState('Đang tải · '+(size/1048576).toFixed(1)+' MB'+(total?' / '+(total/1048576).toFixed(1)+' MB':''),total?Math.min(99,size/total*100):null);}}
-  catch(e){await reader.cancel().catch(()=>{});throw e;}
-  finally{reader.releaseLock();}
-  if(!size||(total&&size!==total))throw Error('File chưa tải đủ. Thử lưu lại bài.');
-  return new File(chunks,'youtube-audio.m4a',{type:'audio/mp4'});
- }
- $('musicDeviceSave').onclick=async()=>{
-  if(deviceSaveTask){saveBanner.hidden=false;return;}
-  let link;try{link=C.parseLink(currentLinkUrl);if(link.kind!=='youtube'||!config.onlineResolver)throw Error('Chọn một bài YouTube để lưu ngoại tuyến.');}catch(e){status(e.message);return;}
-  const task={controller:new AbortController(),owner:owner(),url:link.url,title:currentLinkTitle,author:currentLinkAuthor};deviceSaveTask=task;saveCancel.textContent='Hủy';saveCancel.disabled=false;$('musicDeviceSave').disabled=true;deviceSaveState('Đang chuẩn bị lưu bài hát…');
-  const valid=()=>deviceSaveTask===task&&owner()===task.owner&&!task.controller.signal.aborted;
-  try{
-   const abortSource=new Promise((_,reject)=>task.controller.signal.addEventListener('abort',()=>reject(new DOMException('Aborted','AbortError')),{once:true}));
-   const source=await Promise.race([onlineSource(link),abortSource]);if(!valid())throw new DOMException('Aborted','AbortError');
-   let file;try{file=await readDeviceAudio(source.url,task);}catch(e){if(!valid()||source.url===source.relayUrl||e.message.includes('50 MB'))throw e;deviceSaveState('Đang kết nối nguồn dự phòng…');file=await readDeviceAudio(source.relayUrl,task);}
-   if(!valid())throw new DOMException('Aborted','AbortError');deviceSaveState('Đang lưu vào thiết bị…',99);saveCancel.disabled=true;
-   await HSKMusicOffline.put(task.owner,{url:task.url,title:task.title&&task.title!=='Bài hát đang phát'?task.title:source.title,author:source.artist||task.author},file,valid);
-   if(!valid())throw new DOMException('Aborted','AbortError');
-   await loadOffline();try{await navigator.storage?.persist?.();}catch{}
-   deviceSaveState('Đã lưu ngoại tuyến · '+(file.size/1048576).toFixed(1)+' MB',100);
-  }catch(e){if(owner()!==task.owner){saveBanner.hidden=true;return;}deviceSaveState(e.name==='AbortError'?'Đã hủy lưu ngoại tuyến':e.name==='QuotaExceededError'?'Thiết bị không đủ dung lượng. Hãy dọn bớt nhạc.':e.message,0);}
-  finally{if(deviceSaveTask===task)deviceSaveTask=null;$('musicDeviceSave').disabled=false;saveCancel.textContent='Đóng';saveCancel.disabled=false;}
- };
- window.addEventListener('hsk-account-ready',()=>{deviceSaveTask?.controller.abort();saveBanner.hidden=true;});
- $('musicMenuOfflineRow').onclick=()=>setMenuView('offline');
- $('musicOfflineAttachFile').onclick=()=>chooseOfflineFile(true);
- $('musicOfflineImport').onclick=()=>chooseOfflineFile(false);
- $('musicOfflineFile').onchange=async()=>{
-  const selection=offlineSelection,file=$('musicOfflineFile').files?.[0];if(!selection||!file)return;
-  const valid=()=>selection.owner===owner()&&selection.epoch===serial;
-  if(!valid())return;
-  const buttons=[$('musicOfflineAttachFile'),$('musicOfflineImport')];buttons.forEach(b=>b.disabled=true);$('musicOfflineUsage').textContent='Đang kiểm tra và lưu file…';
-  let url,audio;
-  try{
-   url=URL.createObjectURL(file);audio=new Audio();
-   await new Promise((resolve,reject)=>{const timer=setTimeout(()=>{audio.onerror=null;audio.onloadedmetadata=null;reject(Error('Chưa đọc được file âm thanh.'));},10000);audio.onloadedmetadata=()=>{clearTimeout(timer);resolve();};audio.onerror=()=>{clearTimeout(timer);reject(Error('Trình duyệt không phát được file này. Chọn file âm thanh khác.'));};audio.src=url;});
-   if(!valid())return;
-   await HSKMusicOffline.put(selection.owner,selection.track,file,valid);
-   if(!valid())return;
-   try{await navigator.storage?.persist?.();}catch{}
-   await drawOffline();
-  }catch(e){if(valid())$('musicOfflineUsage').textContent=e.name==='QuotaExceededError'?'Thiết bị không đủ chỗ. Xóa bớt nhạc rồi thử lại.':e.message;}
-  finally{if(audio){audio.removeAttribute('src');audio.load();}if(url)URL.revokeObjectURL(url);if(valid()){buttons.forEach(b=>b.disabled=false);$('musicOfflineAttachFile').disabled=!currentLinkUrl||currentLinkUrl.startsWith('offline:');}}
- };
- async function playOffline(url,playlistId='',autoPlay=true){
-  const uid=owner(),epoch=serial,request=++offlinePlayRequest;
-   try{const entry=await HSKMusicOffline.get(uid,url);if(uid!==owner()||epoch!==serial||request!==offlinePlayRequest||(!opened&&!canPlayBackground()))return;
-   if(!entry){offlineRows=offlineRows.filter(row=>row.url!==url);status('File ngoại tuyến không còn trên thiết bị. Thêm lại file để nghe.');return;}
-   const link=offlineLink(entry);metaCache[url]={title:entry.title,author:entry.author};openLink(link,entry.title,false,playlistId,autoPlay,entry);toggleQueue(false);
-  }catch(e){if(uid===owner()&&epoch===serial)status(e.message);}
- }
- // Short-lived source URLs stay in RAM only; persisted playlists keep original links.
- const onlineSources=new Map(),prefetchCooldowns=new Map();let nextSourceRequest=null;
- function clearOnlineSources(){for(const row of onlineSources.values())row.controller?.abort();onlineSources.clear();prefetchCooldowns.clear();nextSourceRequest=null;}
- async function onlineSource(link,refresh=false){
-  const user=window.HSKAccountDashboard?.user;if(!user)throw Error('Đăng nhập HSK để nghe YouTube dưới nền.');
-  const endpoint=new URL(config.onlineResolver);if(endpoint.protocol!=='https:'||endpoint.username||endpoint.password||endpoint.search||endpoint.hash)throw Error('Địa chỉ phát nhạc chưa hợp lệ.');
-  const key=endpoint.origin+'|'+link.url,old=onlineSources.get(key);
-  if(!refresh&&old?.user===user){if(old.promise)return old.promise;if(old.until>Date.now())return old.data;}
-  old?.controller?.abort();
-  const controller=new AbortController(),row={user,controller};onlineSources.set(key,row);
-  while(onlineSources.size>4){const first=onlineSources.keys().next().value;if(first===key)break;onlineSources.get(first)?.controller?.abort();onlineSources.delete(first);}
-  row.promise=(async()=>{
-   const timer=setTimeout(()=>controller.abort(),40000);
-   try{
-    const token=await user.getIdToken();if(controller.signal.aborted)throw new DOMException('Aborted','AbortError');
-    const r=await fetch(endpoint.href.replace(/\/$/,'')+'/api/online/resolve',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({url:link.url,refresh}),signal:controller.signal,cache:'no-store'});
-    const data=await r.json();if(!r.ok)throw Error(data.error||'Chưa lấy được luồng âm thanh.');
-    if(data.id!==link.source.videoId)throw Error('Nguồn trả về không khớp bài hát đã chọn.');
-    const stream=new URL(data.url),relay=new URL(data.relayUrl);
-    if(stream.protocol!=='https:'||stream.username||stream.password||!stream.hostname.endsWith('.googlevideo.com'))throw Error('Luồng âm thanh chưa hợp lệ.');
-    if(relay.origin!==endpoint.origin||!relay.pathname.startsWith('/api/online/stream/'))throw Error('Địa chỉ kết nối lại chưa hợp lệ.');
-    if(controller.signal.aborted||user!==window.HSKAccountDashboard?.user)throw new DOMException('Aborted','AbortError');
-    const actualExpiry=Number(stream.searchParams.get('expire'))*1000;
-    row.until=Math.min(Date.now()+15*60000,actualExpiry>Date.now()?actualExpiry-60000:Number(data.expiresAt)||Date.now()+60000);
-    row.data=data;return data;
-   }catch(e){if(onlineSources.get(key)===row)onlineSources.delete(key);throw e;}
-   finally{clearTimeout(timer);row.promise=null;}
-  })();
-  return row.promise;
- }
- function prefetchNextSource(){
-  if(!config.onlineResolver||!nativeLinkAudio||nativeLinkAudio.paused||!nativeLinkAudio.currentSrc||linkLoop||onlineStreamRequest||nextSourceRequest)return;
-  const list=playbackList().list,index=list.findIndex(row=>row.url===currentLinkUrl),next=list[index+1];
-  if(index<0||!next||offlineRows.some(row=>row.url===next.url))return;
-  let link;try{link=C.parseLink(next.url);}catch{return;}if(link.kind!=='youtube')return;
-  const key=new URL(config.onlineResolver).origin+'|'+link.url;if((prefetchCooldowns.get(key)||0)>Date.now())return;
-  const cached=onlineSources.get(key);
-  if(cached?.user===window.HSKAccountDashboard?.user&&(cached.promise||cached.until>Date.now()+30000))return;
-  const task=onlineSource(link);nextSourceRequest=task;
-  task.catch(()=>{prefetchCooldowns.set(key,Date.now()+30000);while(prefetchCooldowns.size>4)prefetchCooldowns.delete(prefetchCooldowns.keys().next().value);}).finally(()=>{if(nextSourceRequest===task)nextSourceRequest=null;});
- }
- // Resolve only the exact YouTube ID. Native audio lives outside route panels.
- function mountOnlineYouTube(link,title,epoch,autoPlay){
-  // Use the real M4A for native audio. A looping silent WAV deceptively
-   // marks playback active and can take over iOS lock-screen media controls.
-   stopYouTubeKeepAlive(true);
-   const entry={streamUrl:'',provider:'YouTube',author:currentLinkAuthor,resolving:true,onlineYouTube:true};
-  let attempts=0,relayUrl='',position=0,stallTimer=null;
-  linkKind='audio';onlineQueueMode=true;
-  mountOfflineLink(entry,link,epoch,autoPlay);
-  const audio=nativeLinkAudio;audio.loop=true;
-  setArt($('musicLinkThumb'),$('musicLinkBg'),ytMaxThumb(link.source.videoId),ytThumb(link.source.videoId));
-  const valid=()=>epoch===serial&&audio===nativeLinkAudio;
-  const cancelStall=()=>{clearTimeout(stallTimer);stallTimer=null;};
-  const watchStall=()=>{cancelStall();if(entry.resolving)return;stallTimer=setTimeout(()=>{if(valid()&&linkWantedPlay&&!audio.paused)entry.recover?.();},15000);};
-  const prefetch=()=>{if(valid()&&!entry.resolving)prefetchNextSource();};
-  audio.addEventListener('playing',prefetch);audio.addEventListener('timeupdate',prefetch);
-  audio.addEventListener('waiting',watchStall);audio.addEventListener('stalled',watchStall);
-  for(const event of ['playing','pause','ended'])audio.addEventListener(event,cancelStall);
-  const destroy=linkYt.destroy;linkYt.destroy=()=>{cancelStall();audio.removeEventListener('playing',prefetch);audio.removeEventListener('timeupdate',prefetch);audio.removeEventListener('waiting',watchStall);audio.removeEventListener('stalled',watchStall);for(const event of ['playing','pause','ended'])audio.removeEventListener(event,cancelStall);destroy();};
-  const fail=message=>{if(!valid())return;entry.resolving=false;entry.failed=true;audio.pause();try{navigator.mediaSession.playbackState='paused';}catch{}linkWantedPlay=false;linkPendingPlay=false;linkOptimisticPlay=false;clearTimeout(linkStartTimer);status(message);updateLinkPlayButton();};
-  const load=async(refresh=false)=>{
-   if(!valid())return;
-   onlineStreamRequest?.abort();const controller=new AbortController();onlineStreamRequest=controller;
-   const timeout=setTimeout(()=>controller.abort(),40000);
-   entry.resolving=true;status(refresh?'Đang kết nối lại bài hát…':'Đang lấy luồng âm thanh…');
-   try{
-    const data=await onlineSource(link,refresh);
-    const relay=new URL(data.relayUrl),stream=new URL(data.url);
-    if(!valid()||controller.signal.aborted)return;
-    relayUrl=relay.href;entry.streamUrl=stream.href;entry.sourceUntil=Number(stream.searchParams.get('expire'))*1000||Date.now()+120000;entry.resolving=false;
-    audio.loop=linkLoop;prepareAudioSession();audio.src=entry.streamUrl;
-    if(position>0)audio.addEventListener('loadedmetadata',()=>{if(valid())audio.currentTime=Math.min(position,Math.max(0,audio.duration-.1));},{once:true});
-    fetchLinkMetadata(link,title,epoch,{title:data.title,author:data.artist});
-    $('musicLinkNotice').textContent=currentLinkAuthor+' · Trực tuyến';
-    if(linkWantedPlay)requestLinkPlayback(true);else audio.pause();
-    status('');syncMediaSession();
-   }catch(e){if(valid())fail(e.name==='AbortError'?'Kết nối nguồn nhạc quá lâu. Chạm Phát để thử lại.':e.message);}
-   finally{clearTimeout(timeout);if(onlineStreamRequest===controller)onlineStreamRequest=null;syncBackgroundPlayer();}
-  };
-  entry.recover=()=>{
-   if(!valid()||entry.resolving)return;
-   cancelStall();position=Number(audio.currentTime)||position;
-   if(attempts++===0&&relayUrl){entry.streamUrl=relayUrl;entry.sourceUntil=Date.now()+60000;audio.src=relayUrl;if(position>0)audio.addEventListener('loadedmetadata',()=>{if(valid())audio.currentTime=Math.min(position,Math.max(0,audio.duration-.1));},{once:true});if(linkWantedPlay)linkYt.playVideo();status('Đang kết nối lại âm thanh…');}
-   else if(attempts===2)load(true);
-   else fail('Chưa phát được bài này. Chạm Phát để thử lại hoặc mở trang nguồn.');
-  };
-  entry.retry=()=>{attempts=0;entry.failed=false;load(true);};
-  load();
- }
- function mountOfflineLink(entry,link,epoch,autoPlay){
-  const audio=persistentLinkAudio||(persistentLinkAudio=new Audio()),url=entry.streamUrl||(entry.blob?URL.createObjectURL(entry.blob):'');let destroyed=false;
+ function mountCloudAudio(entry,link,epoch,autoPlay){
+  const audio=persistentLinkAudio||(persistentLinkAudio=new Audio()),url=entry.streamUrl;let destroyed=false;
   nativeLinkAudio=audio;audio.id='musicBackgroundAudio';audio.setAttribute('playsinline','');if(!audio.isConnected)document.body.append(audio);
   const listeners=[];
   const listen=(name,fn)=>{audio.addEventListener(name,fn);listeners.push([name,fn]);};
-  audio.preload='auto';audio.crossOrigin='anonymous';
+  audio.preload='metadata';audio.crossOrigin='anonymous';
    if(url)audio.src=url;else audio.removeAttribute('src');
    audio.playbackRate=linkRate;audio.loop=linkLoop;
-  linkReady=true;linkYt={getCurrentTime:()=>audio.currentTime,getDuration:()=>audio.duration,getPlayerState:()=>audio.ended?0:audio.paused?2:1,seekTo:t=>{audio.currentTime=Math.max(0,Math.min(Number(t)||0,Number.isFinite(audio.duration)?audio.duration:Number(t)||0));},playVideo:()=>{prepareAudioSession();if(entry.onlineYouTube&&entry.resolving){
-    // Retain the explicit user-gesture play request without fabricating
-    // audible progress. An empty media element may pend until src arrives.
-    // If iOS rejects this before source resolution, the normal play button
-    // remains available; never switch to silent looping audio.
-    if(navigator.userActivation?.isActive&&!audio.hasAttribute('src'))Promise.resolve(audio.play()).catch(()=>{});
-    return;
-   }
-   if(entry.onlineYouTube&&(audio.error||entry.failed||(!entry.resolving&&entry.sourceUntil<Date.now()+30000))){entry.retry?.();return;}audio.play().catch(()=>{if(epoch===serial){linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();status('Chạm nút Phát để nghe nhạc trên thiết bị.');}});},pauseVideo:()=>audio.pause(),setPlaybackRate:r=>{audio.playbackRate=r;},getAvailablePlaybackRates:()=>[.75,1,1.25],destroy:()=>{if(destroyed)return;destroyed=true;for(const [name,fn] of listeners)audio.removeEventListener(name,fn);audio.pause();audio.removeAttribute('src');audio.load();if(!entry.streamUrl)URL.revokeObjectURL(url);nativeLinkAudio=null;try{if(navigator.mediaSession)navigator.mediaSession.playbackState='none';if(navigator.audioSession?.type==='playback'&&previousAudioSessionType!==null)navigator.audioSession.type=previousAudioSessionType;}catch{}previousAudioSessionType=null;syncBackgroundPlayer();}};
-  const tick=()=>{if(epoch!==serial||destroyed)return;const c=entry.resolving?0:audio.currentTime,d=entry.resolving?0:Number.isFinite(audio.duration)?audio.duration:0;linkTimeline(c,d);updateLinkPlayButton();};
+  linkReady=true;linkYt={getCurrentTime:()=>audio.currentTime,getDuration:()=>audio.duration,getPlayerState:()=>audio.ended?0:audio.paused?2:1,seekTo:t=>{audio.currentTime=Math.max(0,Math.min(Number(t)||0,Number.isFinite(audio.duration)?audio.duration:Number(t)||0));},playVideo:()=>{prepareAudioSession();   audio.play().catch(()=>{if(epoch===serial){linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();status('Chạm nút Phát để nghe nhạc trên thiết bị.');}});},pauseVideo:()=>audio.pause(),setPlaybackRate:r=>{audio.playbackRate=r;},getAvailablePlaybackRates:()=>[.75,1,1.25],destroy:()=>{if(destroyed)return;destroyed=true;for(const [name,fn] of listeners)audio.removeEventListener(name,fn);audio.pause();audio.removeAttribute('src');audio.load();nativeLinkAudio=null;try{if(navigator.mediaSession)navigator.mediaSession.playbackState='none';if(navigator.audioSession?.type==='playback'&&previousAudioSessionType!==null)navigator.audioSession.type=previousAudioSessionType;}catch{}previousAudioSessionType=null;syncBackgroundPlayer();}};
+  const tick=()=>{if(epoch!==serial||destroyed)return;const c=audio.currentTime,d=Number.isFinite(audio.duration)?audio.duration:0;linkTimeline(c,d);updateLinkPlayButton();};
   for(const name of ['timeupdate','loadedmetadata','seeked','ratechange'])listen(name,()=>{tick();syncBackgroundPlayer();});
-  for(const name of ['play','pause'])listen(name,()=>{if(epoch===serial){linkOptimisticPlay=!audio.paused;if(!entry.resolving)linkPendingPlay=false;updateLinkPlayButton();}});
+  for(const name of ['play','pause'])listen(name,()=>{if(epoch===serial){linkOptimisticPlay=!audio.paused;linkPendingPlay=false;updateLinkPlayButton();}});
   listen('ended',()=>{if(epoch!==serial)return;if(linkLoop){audio.currentTime=0;linkYt?.playVideo();}else{linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();const list=playbackList().list,index=list.findIndex(row=>row.url===currentLinkUrl);if(index>=0&&index<list.length-1)stepSavedLink(1);}});
-  listen('error',()=>{if(epoch===serial&&entry.onlineYouTube){entry.recover?.();return;}if(epoch===serial){linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();status(entry.streamUrl?'Link âm thanh bị gián đoạn. Kiểm tra mạng hoặc mở lại link nguồn.':'Chưa phát được file ngoại tuyến. Thử thêm lại file M4A.');}});
+  listen('error',()=>{if(epoch===serial){linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();status('Chưa phát được bài trong kho. Kiểm tra kết nối rồi chạm Phát để thử lại.');}});
   $('musicLinkPlayer').classList.remove('music-youtube-stealth');$('musicLinkControls').hidden=false;for(const id of ['musicLinkBack10','musicLinkPlay','musicLinkFwd10'])$(id).disabled=false;
-  setArt($('musicLinkThumb'),$('musicLinkBg'),fallbackArt,fallbackArt);$('musicLinkCover').hidden=false;$('musicLinkScrubRow').hidden=false;$('musicLinkNotice').textContent=entry.author+(entry.streamUrl?' · Trực tuyến từ '+entry.provider+' · Không lưu ngoại tuyến':' · Đang dùng bản ngoại tuyến');
+  setArt($('musicLinkThumb'),$('musicLinkBg'),fallbackArt,fallbackArt);$('musicLinkCover').hidden=false;$('musicLinkScrubRow').hidden=false;$('musicLinkNotice').textContent=entry.author+' · Kho nhạc HSK';
   $('musicLinkElapsed').textContent='00:00';$('musicLinkTime').textContent='-00:00';tick();if(autoPlay)requestLinkPlayback(true);
   syncMediaSession();syncBackgroundPlayer();
  }
@@ -805,7 +542,6 @@ if(view==='offline')drawOffline();
  $('musicMenuSubDone').onclick=()=>commitSavePicker();
  $('musicLinkImport').addEventListener('toggle',()=>{if(currentMode==='chill'&&menuOpen&&$('musicLinkImport').open)setMenuView('link');});
  $('musicMenuShareRow').onclick=async()=>{
-  if(currentLinkUrl.startsWith('offline:')){status('Bài này là file trên thiết bị, chưa có link để chia sẻ.');return;}
   if(!currentLinkUrl){status('Mở một bài hát trước khi chia sẻ.');return;}
   const data={title:currentLinkTitle||'Bài hát',url:currentLinkUrl};
   try{if(navigator.share){await navigator.share(data);}else{await navigator.clipboard.writeText(currentLinkUrl);status('Đã sao chép link bài hát.');}}catch{}
@@ -895,7 +631,7 @@ if(view==='offline')drawOffline();
     btn.classList.add('active');
     btn.setAttribute('aria-selected','true');
     const f=btn.dataset.browseFilter;
-    $('musicBrowseRecentSection').hidden=f==='playlists';
+    $('musicBrowseRecentSection').hidden=f==='playlists';cloudSection.hidden=f==='playlists';
     $('musicBrowsePlaylistsSection').hidden=f==='tracks';
    };
   });
@@ -939,9 +675,9 @@ if(view==='offline')drawOffline();
  function updateScrubUI(){const cur=time(),dur=duration();if(dur>0){$('musicScrub').max=String(dur);$('musicScrub').value=String(Math.min(cur,dur));}paintScrub($('musicScrub'),cur,dur);$('musicElapsed').textContent=fmtTime(cur);$('musicTimeLabel').textContent=remaining(cur,dur);updatePlayButton();}
  function checkpoint(force=false){if(!song||(!force&&Date.now()-lastSaved<2000))return;lastSaved=Date.now();progress=read('progress',{});progress[song.id]={revision:song.revision,index,time:time()};const entries=Object.entries(progress).slice(-30);save('progress',Object.fromEntries(entries));}
  function pauseNative(){if(video.hasAttribute('src'))video.pause();}
- function clearPreview(){guard.detach();if($('musicLinkPlayer').parentElement===$('musicLinkCover'))$('musicLinkPreview').append($('musicLinkPlayer'));if(!keepAliveHandoff)stopYouTubeKeepAlive(true);linkWantedPlay=false;youtubeHasPlayed=false;youtubeEndHandled=false;clearTimeout(hiddenResumeTimer);clearTimeout(linkStartTimer);linkReady=false;linkKind='';linkScrubbing=false;linkSeekTarget=null;sponsor?.stop();sponsorNotice.hidden=true;onlineStreamRequest?.abort();linkOptimisticPlay=false;linkPendingPlay=false;$('musicLinkScrubRow').hidden=true;$('musicLinkExtraActions').hidden=true;linkYt?.destroy?.();linkYt=null;try{if(navigator.mediaSession){navigator.mediaSession.playbackState='none';navigator.mediaSession.setPositionState?.();}}catch{}clearInterval(linkTimer);linkTimer=null;$('musicLinkPlayer').replaceChildren();$('musicLinkCover').hidden=true;$('musicLinkControls').hidden=true;$('musicLinkPreview').hidden=true;syncEmptyState();}
+ function clearPreview(){if($('musicLinkPlayer').parentElement===$('musicLinkCover'))$('musicLinkPreview').append($('musicLinkPlayer'));linkWantedPlay=false;clearTimeout(linkStartTimer);linkReady=false;linkKind='';linkScrubbing=false;linkSeekTarget=null;linkOptimisticPlay=false;linkPendingPlay=false;$('musicLinkScrubRow').hidden=true;$('musicLinkExtraActions').hidden=true;linkYt?.destroy?.();linkYt=null;try{if(navigator.mediaSession){navigator.mediaSession.playbackState='none';navigator.mediaSession.setPositionState?.();}}catch{}clearInterval(linkTimer);linkTimer=null;$('musicLinkPlayer').replaceChildren();$('musicLinkCover').hidden=true;$('musicLinkControls').hidden=true;$('musicLinkPreview').hidden=true;syncEmptyState();}
  function release(savePosition=true){if(savePosition)checkpoint(true);if(video.hasAttribute('src')){video.pause();video.removeAttribute('src');video.load();}yt?.destroy?.();yt=null;clearInterval(ytTimer);ytTimer=null;clearPreview();if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=null;}}
- function stop(){onlineQueueMode=false;onlineStreamRequest?.abort();toggleQueue(false);studyOptimisticPlay=false;checkpoint(true);pauseNative();yt?.pauseVideo?.();if(linkReady)linkYt?.pauseVideo?.();clearPreview();holding=false;renderReveal();updatePlayButton();}
+ function stop(){toggleQueue(false);studyOptimisticPlay=false;checkpoint(true);pauseNative();yt?.pauseVideo?.();if(linkReady)linkYt?.pauseVideo?.();clearPreview();holding=false;renderReveal();updatePlayButton();}
  function savedLinks(){const value=read('links',[]);return Array.isArray(value)?value:[];}
  function savedPlaylists(){const value=read('playlists',[]);return Array.isArray(value)?value.filter(p=>p&&typeof p.id==='string'&&typeof p.name==='string'&&Array.isArray(p.items)):[];}
  function renderQuickPlaylistPills(){
@@ -1018,7 +754,7 @@ if(view==='offline')drawOffline();
    trackList.hidden=!expanded;head.classList.toggle('music-playlist-head-open',expanded);
    head.onclick=()=>{const open=trackList.hidden;animateDisclosure(trackList,open);animateDisclosure(addForm,open);if(open)expandedPlaylists.add(pl.id);else expandedPlaylists.delete(pl.id);head.classList.toggle('music-playlist-head-open',open);};
 
-   if(!pl.items.length){trackList.append(el('p','Playlist trống. Dán link để thêm bài vào playlist.','music-empty-note'));}
+   if(!pl.items.length){trackList.append(el('p','Playlist trống. Chọn bài trong kho để thêm vào playlist.','music-empty-note'));}
    else{
     pl.items.forEach((entry,idx)=>{
      let link;try{link=C.parseLink(entry.url);}catch{return;}
@@ -1039,11 +775,11 @@ if(view==='offline')drawOffline();
    }
 
    const addForm=el('form',undefined,'music-playlist-add-track');
-   const urlIn=el('input');urlIn.type='url';urlIn.inputMode='url';urlIn.required=true;urlIn.maxLength=2048;urlIn.placeholder='Dán link YouTube / Spotify / SoundCloud…';
-   const titleIn=el('input');titleIn.type='text';titleIn.maxLength=120;titleIn.placeholder='Tên bài hát (tùy chọn)';
-   const addBtn=el('button','+ Thêm bài','music-primary');addBtn.type='submit';
-   addForm.append(urlIn,titleIn,addBtn);addForm.hidden=!expanded;
-   addForm.onsubmit=e=>{e.preventDefault();try{const link=C.parseLink(urlIn.value),t=titleIn.value.trim()||link.label;rememberLink(link,t);addTrackToPlaylist(pl.id,link,t);urlIn.value='';titleIn.value='';status('Đã thêm "'+t+'" vào playlist "'+pl.name+'".');}catch(err){status(err.message);}};
+   const urlIn=el('select');urlIn.required=true;urlIn.setAttribute('aria-label','Chọn bài trong kho');
+   urlIn.append(new Option('Chọn bài trong kho…',''));for(const track of cloudTracks)urlIn.append(new Option(track.title,track.url));
+   const addBtn=el('button','+ Thêm bài','music-primary');addBtn.type='submit';addBtn.disabled=!cloudTracks.length;
+   addForm.append(urlIn,addBtn);addForm.hidden=!expanded;
+   addForm.onsubmit=e=>{e.preventDefault();try{const track=cloudTracks.find(t=>t.url===urlIn.value);if(!track)throw Error('Chọn bài trong kho.');const link=C.parseLink(track.url);rememberLink(link,track.title);addTrackToPlaylist(pl.id,link,track.title);status('Đã thêm bài vào playlist.');}catch(err){status(err.message);}};
 
    card.append(head,trackList,addForm);box.append(card);
   }
@@ -1148,13 +884,9 @@ if(view==='offline')drawOffline();
  }
  function rememberLink(link,title){save('links',[{url:link.url,title:String(title||link.label).slice(0,120)},...savedLinks().filter(x=>x.url!==link.url)].slice(0,30));drawLinks();drawRecentBrowse();syncMiniPlayer();}
  function stepSavedLink(dir){
-  const {playlist:activePl,list}=playbackList();
-  if(!list.length)return;
-  const idx=list.findIndex(x=>x.url===currentLinkUrl);
-  const nextIdx=idx<0?0:(idx+dir+list.length)%list.length;
-  const entry=list[nextIdx];
-  if(onlineQueueMode&&canPlayBackground()&&!offlineRows.some(row=>row.url===entry.url)){try{startOnlineBackground(C.parseLink(entry.url),entry.title,activePl?.id||'');}catch{}return;}
-  try{if(offlineRows.some(row=>row.url===entry.url)){playOffline(entry.url,activePl?.id||'',true);return;}const link=C.parseLink(entry.url);$('musicLinkUrl').value=link.url;$('musicLinkName').value=String(entry.title||'').slice(0,120);openLink(link,entry.title,false,activePl?.id||'',true);}catch{}
+  const {playlist,list}=playbackList();if(!list.length)return;
+  const index=list.findIndex(row=>row.url===currentLinkUrl),next=list[(Math.max(0,index)+dir+list.length)%list.length];
+  try{openLink(C.parseLink(next.url),next.title,false,playlist?.id||'',true);}catch(e){status(e.message);}
  }
  function fetchLinkMetadata(link,customTitle,epoch,data){
   if(link.kind==='audio')return;
@@ -1200,110 +932,27 @@ if(view==='offline')drawOffline();
    $('musicDrawerVi').textContent='Nghĩa tiếng Việt đối chiếu trực tiếp giúp luyện phản xạ nghe hiểu.';
   }
  }
- function openLink(link,title,saveOrder=true,playlistId='',autoPlay=false,offline=null){
-  if(!offline&&currentMode==='chill'&&currentLinkUrl===link.url&&linkYt){
-   activePlaylistId=playlistId;if(autoPlay)requestLinkPlayback(true);toggleMenu(false);return;
-  }
-  if(!offline&&window.HSKMusicOffline&&offlineRows.some(row=>row.url===link.url)){playOffline(link.url,playlistId,autoPlay);return;}
-  if(!offline&&link.kind==='audio')offline={streamUrl:link.url,provider:'Link âm thanh',author:link.label};
-  if(!offline&&navigator.onLine===false){status('Bài này chưa được lưu ngoại tuyến. Mở mục Nghe ngoại tuyến để chọn bài đã lưu.');return;}
-  offlineContext=Boolean(offline&&!offline.streamUrl);
-  currentMode='chill';release();song=null;const epoch=++serial;currentLinkUrl=link.url;linkKind=link.kind;
-  if(autoPlay)playerExpanded=true;
-  panel.classList.toggle('music-player-expanded',playerExpanded);
-  linkOptimisticPlay=Boolean(autoPlay);linkPendingPlay=Boolean(autoPlay);linkWantedPlay=Boolean(autoPlay);if(link.kind==='youtube'&&autoPlay&&!config.onlineResolver)startYouTubeKeepAlive(true);
-  const cached=metaCache[link.url];
-  const cleanTitle=title&&title!==link.label?title:cached?.title||'';
-  currentLinkTitle=String(cleanTitle||'Bài hát đang phát').slice(0,120);
-  currentLinkAuthor=offline?.author||cached?.author||('Nghệ sĩ · '+link.label);
-  activePlaylistId=playlistId;loop=false;$('musicLoop').setAttribute('aria-pressed','false');$('musicLoop').textContent='Lặp câu: tắt';$('musicLesson').hidden=true;$('musicLinkPreview').hidden=false;$('musicLinkExtraActions').hidden=false;$('musicLinkTitle').textContent=currentLinkTitle;$('musicSourceLink').href=link.url;
-  $('musicSourceLink').hidden=link.kind==='offline';
-  const activePl=playlistId?savedPlaylists().find(p=>p.id===playlistId):null;
-  $('musicLinkNotice').textContent=activePl?currentLinkAuthor+' · '+activePl.name:currentLinkAuthor;
-  syncMediaSession();
-  if(linkKind!=='youtube')stopYouTubeKeepAlive(true);
-  if(offline){mountOfflineLink(offline,link,epoch,autoPlay);}
-  else if(link.kind==='youtube'&&config.onlineResolver){mountOnlineYouTube(link,cleanTitle,epoch,autoPlay);}
-  else if(link.kind==='soundcloud'){
-   onlineQueueMode=true;$('musicLinkCover').hidden=true;$('musicLinkControls').hidden=false;$('musicLinkScrubRow').hidden=false;
-   for(const id of ['musicLinkBack10','musicLinkPlay','musicLinkFwd10'])$(id).disabled=false;
-   const widgetTick=()=>{if(epoch!==serial||!linkYt)return;linkTimeline(linkYt.getCurrentTime(),linkYt.getDuration());updateLinkPlayButton();syncBackgroundPlayer();};
-   window.HSKMusicSoundCloud.mount(link.source,$('musicLinkPlayer'),{isCurrent:()=>epoch===serial,onReady:adapter=>{if(epoch!==serial)return;linkYt=adapter;linkReady=true;adapter.getMetadata?.(data=>fetchLinkMetadata(link,title,epoch,{title:data?.title,author_name:data?.user?.username}));if(linkPendingPlay)requestLinkPlayback(true);syncMediaSession();widgetTick();},onTick:widgetTick,onStateChange:state=>{if(epoch!==serial)return;if(state===1){linkOptimisticPlay=true;linkPendingPlay=false;}else if(!linkPendingPlay)linkOptimisticPlay=false;widgetTick();if(state===0&&!linkPendingPlay){if(linkLoop){linkYt.seekTo(0);linkYt.playVideo();}else if(activePlaylistId)stepSavedLink(1);}},onError:message=>{if(epoch===serial){linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();status(message);}}}).then(adapter=>{if(epoch!==serial)adapter?.destroy();}).catch(e=>{if(epoch===serial)status(e.message);});
-  }
-  else {
-  const frame=el('iframe');frame.title='Trình phát '+link.label;frame.src=link.embedUrl+(link.kind==='youtube'?'?controls=0&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&rel=0&enablejsapi=1'+(autoPlay?'&autoplay=1':''):'');frame.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';frame.setAttribute('allowfullscreen','');frame.referrerPolicy='strict-origin-when-cross-origin';frame.height=link.kind==='youtube'?'200':link.kind==='spotify'?'352':'166';frame.width='100%';
-  $('musicLinkPlayer').classList.toggle('music-youtube-stealth',link.kind==='youtube');$('musicLinkPlayer').append(frame);if(link.kind==='youtube')$('musicLinkCover').append($('musicLinkPlayer'));
-  const isYt=link.kind==='youtube';
-  $('musicLinkControls').hidden=false;
-  for(const id of ['musicLinkBack10','musicLinkPlay','musicLinkFwd10'])$(id).disabled=!isYt;
-  if(isYt){
-   if(sponsorEnabled)sponsor?.load(link.source.videoId);
-   setArt($('musicLinkThumb'),$('musicLinkBg'),ytMaxThumb(link.source.videoId),ytThumb(link.source.videoId));
-   $('musicLinkCover').hidden=false;$('musicLinkScrubRow').hidden=false;$('musicLinkScrub').value='0';paintScrub($('musicLinkScrub'),0,0);$('musicLinkElapsed').textContent='00:00';$('musicLinkTime').textContent='-00:00';updateLinkPlayButton();
-   youtubeApi().then(()=>{
-    if(epoch!==serial||(!opened&&!canPlayBackground()))return;
-    linkYt=new YT.Player(frame,{
-     events:{
-      onReady:()=>{
-       if(epoch===serial){
-        linkReady=true;guard.attachYouTubePlayer(linkYt,frame);
-        fetchLinkMetadata(link,title,epoch,linkYt.getVideoData?.());
-        if(linkRate!==1)linkYt.setPlaybackRate?.(linkRate);
-        if(linkPendingPlay)requestLinkPlayback(true);else if(autoPlay)linkYt.pauseVideo?.();
-        syncMediaSession();updateLinkPlayButton();
-       }
-      },
-      onAutoplayBlocked:()=>{if(epoch===serial){linkPendingPlay=false;linkOptimisticPlay=false;linkWantedPlay=false;stopYouTubeKeepAlive();updateLinkPlayButton();status('Trình duyệt cần bạn chạm Phát để bắt đầu nghe.');}},
-      onError:()=>{if(epoch===serial){linkPendingPlay=false;linkOptimisticPlay=false;linkWantedPlay=false;stopYouTubeKeepAlive(true);updateLinkPlayButton();status('YouTube chưa phát được bài này. Thử lại hoặc mở link nguồn.');}},
-      onStateChange:ev=>{
-       if(epoch!==serial)return;
-       if(ev?.data===1){linkOptimisticPlay=true;linkPendingPlay=false;linkWantedPlay=true;youtubeHasPlayed=true;youtubeEndHandled=false;guard.handleYouTubeStateChange(1);fetchLinkMetadata(link,title,epoch,linkYt.getVideoData?.());syncMediaSession();status('');}
-       else if(ev?.data===2)guard.handleYouTubeStateChange(2);
-       else if(ev?.data===3){guard.handleYouTubeStateChange(3);status('Đang nạp âm thanh…');}
-       else if((ev?.data===2||ev?.data===0)&&!linkPendingPlay)linkOptimisticPlay=false;
-       updateLinkPlayButton();
-       if(ev?.data===0&&linkWantedPlay&&!linkPendingPlay&&!youtubeEndHandled){youtubeEndHandled=true;finishLinkTrack();}
-
-      }
-     }
-    });
-    linkYt.officialYouTube=true;syncBackgroundPlayer();
-    linkTimer=setInterval(()=>{
-     if(epoch!==serial||!linkYt)return;
-     syncBackgroundPlayer();
-     if(sponsorEnabled)sponsor?.tick(linkYt);
-     const c=Number(linkYt.getCurrentTime?.()||0),d=Number(linkYt.getDuration?.()||0);
-     linkTimeline(c,d);
-     updateLinkPlayButton();
-    },250);
-   }).catch(()=>{if(epoch===serial){linkPendingPlay=false;linkOptimisticPlay=false;linkWantedPlay=false;stopYouTubeKeepAlive(true);updateLinkPlayButton();status('Chưa kết nối được trình phát YouTube. Kiểm tra mạng rồi chọn lại bài.');}});
-  }else{
-   $('musicLinkCover').hidden=true;$('musicLinkBg').hidden=true;$('musicStageBg').src=fallbackArt;$('musicLinkScrubRow').hidden=true;updateLinkPlayButton();
-  }
-  }
-  if(saveOrder)rememberLink(link,cleanTitle||link.label);else drawLinks();
-  drawPlaylists();
-  drawRecentBrowse();
-  drawBrowsePlaylists();
-  syncMiniPlayer();
-  if(autoPlay||!offline||$('musicMenuSheet').dataset.view!=='offline')toggleMenu(false);
-  syncDrawerLyrics();
-  syncEmptyState();
-  syncMenuTrackHead();
-  syncQuickSaveBtn();
-  if(autoPlay&&!offline)requestLinkPlayback(true);else status('');
+ function openLink(link,title,saveOrder=true,playlistId='',autoPlay=false){
+  if(!cloudTracks.some(row=>row.url===link.url)){status('Bài này thuộc nguồn cũ. Chọn bài trong kho nhạc Cloudflare.');return;}
+  if(currentLinkUrl===link.url&&nativeLinkAudio){activePlaylistId=playlistId;if(autoPlay)requestLinkPlayback(true);toggleMenu(false);return;}
+  currentMode='chill';release();song=null;const epoch=++serial,track=cloudTracks.find(row=>row.url===link.url);
+  currentLinkUrl=link.url;currentLinkTitle=track.title;currentLinkAuthor=track.artist;activePlaylistId=playlistId;linkKind='audio';linkWantedPlay=autoPlay;linkOptimisticPlay=autoPlay;linkPendingPlay=autoPlay;
+  if(autoPlay)playerExpanded=true;panel.classList.toggle('music-player-expanded',playerExpanded);
+  $('musicLesson').hidden=true;$('musicLinkPreview').hidden=false;$('musicLinkExtraActions').hidden=false;$('musicLinkTitle').textContent=track.title;$('musicSourceLink').href=link.url;$('musicSourceLink').hidden=false;
+  metaCache[link.url]={title:track.title,author:track.artist};mountCloudAudio({streamUrl:link.url,author:track.artist,provider:'R2'},link,epoch,autoPlay);
+  if(saveOrder)rememberLink(link,track.title);drawPlaylists();drawRecentBrowse();drawBrowsePlaylists();syncMiniPlayer();toggleMenu(false);syncEmptyState();syncMenuTrackHead();syncQuickSaveBtn();syncMediaSession();
  }
  function requestLinkPlayback(wanted){
-  clearTimeout(linkStartTimer);linkWantedPlay=Boolean(wanted);if(wanted)startYouTubeKeepAlive(true);else stopYouTubeKeepAlive();
+  clearTimeout(linkStartTimer);linkWantedPlay=Boolean(wanted);
   linkPendingPlay=Boolean(wanted);linkOptimisticPlay=Boolean(wanted);
   status(wanted?(linkReady?'Đang bắt đầu phát…':'Đang kết nối trình phát…'):'');
-  if(wanted){const epoch=serial;linkStartTimer=setTimeout(()=>{if(epoch!==serial||!linkPendingPlay)return;linkPendingPlay=false;linkOptimisticPlay=false;linkWantedPlay=false;stopYouTubeKeepAlive();updateLinkPlayButton();status('Chưa bắt đầu phát. Chạm Phát để thử lại hoặc mở link nguồn.');},onlineStreamRequest?45000:12000);}
+  if(wanted){const epoch=serial;linkStartTimer=setTimeout(()=>{if(epoch!==serial||!linkPendingPlay)return;linkPendingPlay=false;linkOptimisticPlay=false;linkWantedPlay=false;updateLinkPlayButton();status('Chưa bắt đầu phát. Chạm Phát để thử lại hoặc mở link nguồn.');},12000);}
   if(linkReady){if(wanted)linkYt?.playVideo?.();else linkYt?.pauseVideo?.();}
   updateLinkPlayButton();
  }
  $('musicLinkPlay').onclick=()=>{
   const state=linkYt?.getPlayerState?.();
-  if(linkPendingPlay||state===1||(state===3&&linkOptimisticPlay))guard.userPause();else guard.userPlay();
+  if(linkPendingPlay||state===1||(state===3&&linkOptimisticPlay))requestLinkPlayback(false);else requestLinkPlayback(true);
  };
  $('musicLinkBack10').onclick=()=>{if(!linkYt)return;const cur=Number(linkYt.getCurrentTime?.()||0),dur=Number(linkYt.getDuration?.()||0),next=Math.max(0,dur>0?Math.min(dur,cur-5):cur-5);linkYt.seekTo?.(next,true);};
  $('musicLinkFwd10').onclick=()=>{if(!linkYt)return;const cur=Number(linkYt.getCurrentTime?.()||0),dur=Number(linkYt.getDuration?.()||0),next=Math.max(0,dur>0?Math.min(dur,cur+5):cur+5);linkYt.seekTo?.(next,true);};
@@ -1313,7 +962,7 @@ if(view==='offline')drawOffline();
  linkScrub.addEventListener('pointerdown',()=>{linkScrubbing=true;});
  const endScrub=()=>{linkScrubbing=false;};window.addEventListener('pointerup',endScrub);window.addEventListener('pointercancel',endScrub);
  linkScrub.oninput=()=>{if(!linkYt||linkScrub.disabled)return;linkSeekTarget=Number(linkScrub.value)||0;linkSeekUntil=Date.now()+1500;linkYt.seekTo?.(linkSeekTarget,true);paintScrub(linkScrub,linkSeekTarget,Number(linkScrub.max));$('musicLinkElapsed').textContent=fmtTime(linkSeekTarget);$('musicLinkTime').textContent=remaining(linkSeekTarget,Number(linkScrub.max));};
- $('musicLinkForm').onsubmit=async event=>{event.preventDefault();const epoch=serial,button=$('musicLinkApply');button.disabled=true;try{const link=C.parseLink($('musicLinkUrl').value),name=$('musicLinkName').value.trim(),playlistId=$('musicLinkPlaylist').value,file=$('musicLinkLyrics').files[0];if(playlistId)addTrackToPlaylist(playlistId,link,name||link.label);if(!file){openLink(link,name,true,playlistId,true);return;}if(link.kind==='spotify')throw Error('Spotify hiện hỗ trợ mở nghe. Học theo câu cần link YouTube, SoundCloud hoặc file nhạc.');if(file.size>500000)throw Error('File lời tối đa 500 KB.');const raw=JSON.parse(await file.text());const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(link.url));if(epoch!==serial||!opened)return;const id='link-'+[...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,48);const lesson=C.validateSong({...raw,id,title:name||raw.title,source:link.source});rememberLink(link,name||lesson.title);await openSong(lesson);}catch(e){if(epoch===serial)status(e.message);}finally{button.disabled=false;}};
+ $('musicLinkForm').onsubmit=async event=>{event.preventDefault();const epoch=serial,button=$('musicLinkApply');button.disabled=true;try{const link=C.parseLink($('musicLinkUrl').value),name=$('musicLinkName').value.trim(),playlistId=$('musicLinkPlaylist').value,file=$('musicLinkLyrics').files[0];if(playlistId)addTrackToPlaylist(playlistId,link,name||link.label);if(!file)throw Error('Chọn file lời JSON để mở bài học từ link.');if(link.kind==='spotify')throw Error('Spotify hiện hỗ trợ mở nghe. Học theo câu cần link YouTube, SoundCloud hoặc file nhạc.');if(file.size>500000)throw Error('File lời tối đa 500 KB.');const raw=JSON.parse(await file.text());const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(link.url));if(epoch!==serial||!opened)return;const id='link-'+[...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,48);const lesson=C.validateSong({...raw,id,title:name||raw.title,source:link.source});rememberLink(link,name||lesson.title);await openSong(lesson);}catch(e){if(epoch===serial)status(e.message);}finally{button.disabled=false;}};
  function history(){const box=$('musicHistory');box.replaceChildren();const rows=read('history',[]);if(!rows.length){box.append(el('li','Chưa có câu đã trả lời.'));return;}for(const r of rows.slice(0,30))box.append(el('li',r.title+' · '+r.segmentId+' · '+(r.correct?'Đúng':'Cần ôn')+' · '+new Date(r.at).toLocaleString('vi-VN',{timeZone:'Asia/Ho_Chi_Minh'})));}
  function renderReveal(){const visible=reveal||holding;$('musicLyrics').hidden=!visible;$('musicHidden').hidden=visible;$('musicPinyin').hidden=!pin;$('musicMeaning').hidden=!vi;syncDrawerLyrics();}
  function classify(s){return C.classify(s,vocab());}
@@ -1375,7 +1024,7 @@ if(view==='offline')drawOffline();
   video.load();
  }
  async function authenticated(path){const user=window.HSKAccountDashboard?.user;if(!user)throw Error('Đăng nhập tài khoản app để mở kho nhạc.');fetcher?.abort();fetcher=new AbortController();const signal=fetcher.signal;const token=await user.getIdToken();if(signal.aborted)throw new DOMException('Aborted','AbortError');const r=await fetch(config.endpoint+path,{headers:{Authorization:'Bearer '+token},signal});if(!r.ok)throw Error(r.status===401?'Phiên đăng nhập hết hạn. Đăng nhập lại để tải kho.':'Không tải được kho nhạc ('+r.status+').');return r.json();}
- async function refresh(){const epoch=serial;status('Đang tải kho nhạc…');try{const r=await fetch('./music-config.json');if(!r.ok)throw Error('Không tải được cấu hình nhạc.');const cfg=await r.json();if(epoch!==serial||!opened)return;config=cfg;if(cfg.enabled){const endpoint=new URL(cfg.endpoint);if(endpoint.protocol!=='https:'||endpoint.username||endpoint.password||endpoint.search||endpoint.hash)throw Error('Địa chỉ kho nhạc chưa hợp lệ.');config.endpoint=endpoint.href.replace(/\/$/,'');const data=await authenticated('/api/songs');if(epoch!==serial||!opened)return;catalog=data.songs.map(C.validateSong);}else catalog=BUILTIN_SONGS.map(C.validateSong);drawCatalog();status(cfg.enabled&&catalog.length?'Chọn bài để bắt đầu.':'Kho nhạc chưa được kết nối. Bạn có thể chọn bài học có sẵn của App hoặc thử bằng file trên thiết bị.');}catch(e){if(epoch===serial&&e.name!=='AbortError')status(e.message);}}
+ async function refresh(){const epoch=serial;status('Đang tải kho nhạc…');try{const r=await fetch('./music-config.json');if(!r.ok)throw Error('Không tải được cấu hình nhạc.');const cfg=await r.json();if(epoch!==serial||!opened)return;config=cfg;if(currentMode==='chill')refreshCloud();if(cfg.enabled){const endpoint=new URL(cfg.endpoint);if(endpoint.protocol!=='https:'||endpoint.username||endpoint.password||endpoint.search||endpoint.hash)throw Error('Địa chỉ kho nhạc chưa hợp lệ.');config.endpoint=endpoint.href.replace(/\/$/,'');const data=await authenticated('/api/songs');if(epoch!==serial||!opened)return;catalog=data.songs.map(C.validateSong);}else catalog=BUILTIN_SONGS.map(C.validateSong);drawCatalog();if(currentMode==='study')status(cfg.enabled&&catalog.length?'Chọn bài để bắt đầu.':'Chọn bài học có sẵn hoặc mở file trên thiết bị.');}catch(e){if(epoch===serial&&e.name!=='AbortError')status(e.message);}}
  function drawCatalog(){
   for(const boxId of ['musicCatalog','musicStudyQuickCatalog']){
    const list=$(boxId);if(!list)continue;list.replaceChildren();
@@ -1429,14 +1078,12 @@ if(view==='offline')drawOffline();
  $('musicImportApply').onclick=async()=>{const epoch=serial,json=$('musicManifest').files[0],file=$('musicFile').files[0];try{if(!json||json.size>500000)throw Error('Chọn file lời JSON tối đa 500 KB.');if(!file||file.size>52428800||!(/^(audio\/|video\/mp4)/.test(file.type)||/\.(mp3|mp4|m4a|wav|ogg)$/i.test(file.name)))throw Error('Chọn file nhạc/video tối đa 50 MB.');const value=C.validateSong(JSON.parse(await json.text()));if(epoch!==serial)return;if(value.source.kind!=='local')throw Error('Bài nhập từ thiết bị cần source.kind="local".');await openSong(value,file);}catch(e){if(epoch===serial)status(e.message);}};
  $('musicRecover').onclick=()=>{if(!song)return;const saved=time(),epoch=serial;if(yt){yt.seekTo(saved,true);play();return;}video.addEventListener('loadedmetadata',()=>{if(epoch===serial){seek(saved);status('Nguồn đã tải lại. Bấm phát để tiếp tục.');}},{once:true});video.load();};
  video.addEventListener('timeupdate',tick);video.addEventListener('play',updatePlayButton);video.addEventListener('pause',updatePlayButton);video.addEventListener('error',()=>{if(song)status('Chưa phát được nguồn nhạc. Kiểm tra mạng, định dạng hoặc bấm tải lại nguồn.');});
- document.addEventListener('visibilitychange',()=>{if(document.hidden){hiddenAt=Date.now();hiddenRetryUsed=false;checkpoint(true);resumeHiddenYouTube();}else{hiddenAt=0;hiddenRetryUsed=false;clearTimeout(hiddenResumeTimer);hiddenResumeTimer=null;if(nativeLinkAudio?.currentSrc&&nativeLinkAudio.paused&&linkWantedPlay)status('iPhone đã tạm dừng audio khi rời app. Chạm Phát để tiếp tục.');}syncBackgroundPlayer();});window.addEventListener('pagehide',()=>checkpoint(true));
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)checkpoint(true);syncBackgroundPlayer();});window.addEventListener('pagehide',()=>checkpoint(true));
  new MutationObserver(()=>{if(panel.hidden&&opened){opened=false;toggleMenu(false);toggleQueue(false);if(!canPlayBackground()){stop();fetcher?.abort();++serial;}}syncBackgroundPlayer();}).observe(panel,{attributes:true,attributeFilter:['hidden']});
-window.addEventListener('hsk-account-ready',()=>{clearOnlineSources();onlineQueueMode=false;onlineNote.hidden=true;onlineNote.textContent='';offlineRows=[];offlineContext=false;++offlineRequest;metaCache={};fetcher?.abort();++serial;release(false);song=null;catalog=BUILTIN_SONGS.map(C.validateSong);progress={};currentLinkUrl='';currentLinkTitle='';currentLinkAuthor='';activePlaylistId='';playerExpanded=false;toggleQueue(false);panel.classList.remove('music-player-expanded');$('musicLesson').hidden=true;toggleMenu(false);toggleLyricsDrawer(false);syncEmptyState();$('musicLinkUrl').value='';$('musicLinkName').value='';$('musicLinkLyrics').value='';drawCatalog();drawPlaylists();drawLinks();drawRecentBrowse();drawBrowsePlaylists();history();loadOffline();if(opened)refresh();});
- window.addEventListener('hsk-storage-cleaned',event=>{if(event.detail?.musicUrls){if(offlineContext&&event.detail.musicUrls.includes(currentLinkUrl)){++serial;clearPreview();offlineContext=false;syncMiniPlayer();}loadOffline();}});
- window.HSKMusic={get downloadingOffline(){return Boolean(deviceSaveTask);},enter(mode){
+window.addEventListener('hsk-account-ready',()=>{cloudUpload?.abort();cloudRequest?.abort();syncCloudOwner();metaCache={};fetcher?.abort();++serial;release(false);song=null;catalog=BUILTIN_SONGS.map(C.validateSong);progress={};currentLinkUrl='';currentLinkTitle='';currentLinkAuthor='';activePlaylistId='';playerExpanded=false;toggleQueue(false);panel.classList.remove('music-player-expanded');$('musicLesson').hidden=true;toggleMenu(false);toggleLyricsDrawer(false);syncEmptyState();$('musicLinkUrl').value='';$('musicLinkName').value='';$('musicLinkLyrics').value='';drawCatalog();drawPlaylists();drawLinks();drawRecentBrowse();drawBrowsePlaylists();history();if(opened)refresh();});
+ window.HSKMusic={enter(mode){
   opened=true;
   toggleQueue(false);
-  loadOffline();
   if(mode==='chill'||mode==='study')currentMode=mode;
   panel.dataset.musicMode=currentMode;
   history();drawPlaylists();drawLinks();drawCatalog();
@@ -1448,10 +1095,9 @@ window.addEventListener('hsk-account-ready',()=>{clearOnlineSources();onlineQueu
    $('musicBrowseView').querySelector('[data-browse-filter=all]').click();
    drawRecentBrowse();
    drawBrowsePlaylists();
-   if(!currentLinkUrl){const recent=savedLinks()[0];if(recent){try{const link=C.parseLink(recent.url);$('musicLinkUrl').value=link.url;$('musicLinkName').value=String(recent.title||'').slice(0,120);openLink(link,recent.title,false,'',false);}catch{}}}
+   if(!currentLinkUrl){const recent=savedLinks().find(row=>cloudTracks.some(track=>track.url===row.url));if(recent){try{const link=C.parseLink(recent.url);$('musicLinkUrl').value=link.url;$('musicLinkName').value=String(recent.title||'').slice(0,120);openLink(link,recent.title,false,'',false);}catch{}}}
    syncMiniPlayer();
   }else{
-   onlineQueueMode=false;
    if(currentLinkUrl||!$('musicLinkPreview').hidden){linkYt?.pauseVideo?.();clearPreview();currentLinkUrl='';}
    // Mark hidden chill <details> open so queries for the first closed <details> in study mode match #musicImport.
    $('musicLinkImport').open=true;$('musicPlaylistsBox').open=true;$('musicSavedLinksBox').open=true;if($('musicPlaylistCreateBox'))$('musicPlaylistCreateBox').open=true;$('musicImport').open=false;
@@ -1459,5 +1105,5 @@ window.addEventListener('hsk-account-ready',()=>{clearOnlineSources();onlineQueu
   }
   syncEmptyState();refresh();
  },stop};
- // Legacy link-download jobs are intentionally never resumed. User-owned files remain saved.
+ // The entertainment library streams R2 audio; legacy device databases are not modified.
 })();

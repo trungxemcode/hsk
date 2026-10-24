@@ -7,14 +7,10 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
    const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:1,isMobile:width<900,hasTouch:width<900,serviceWorkers:'block'}),errors=[];
    page.on('pageerror',e=>errors.push(e.message));
    await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
-   await page.addInitScript(()=>{if(window.top!==window)return;localStorage.setItem('hsk-music-links-v1:guest',JSON.stringify(Array.from({length:25},(_,i)=>({url:'https://www.youtube.com/watch?v=abcdefghij'+String.fromCharCode(65+i),title:'Bài tiếp theo '+i}))));});
+   const cloudTracks=await require('./music-cloud-fixture.cjs')(page,25);await page.addInitScript(tracks=>localStorage.setItem('hsk-music-links-v1:guest',JSON.stringify(tracks)),cloudTracks);
    await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic);
    await page.evaluate(()=>HSKStudio.navigate('music-play'));
-   await page.locator('#musicMenuBtn').click();await page.locator('#musicLinkImport>summary').click();
-   await page.locator('#musicLinkUrl').fill('https://youtu.be/abcdefghijk');
-   await page.locator('#musicLinkName').fill('[Vietsub] Bích Thượng Quan - Đặng Ngụ Quan | 壁上观 - 邓寓君');
-   await page.locator('#musicLinkApply').click();
-   await page.evaluate(()=>{if(!document.querySelector('#musicPanel').classList.contains('music-player-expanded'))document.getElementById('musicMiniMain').click();});
+   await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList button').length===25);await page.locator('#musicCloudList button').first().click();
    await page.waitForFunction(()=>document.querySelector('#musicPanel').classList.contains('music-player-expanded'));
    await page.waitForFunction(()=>getComputedStyle(document.getElementById('musicMenuSheet')).visibility==='hidden');
    const metrics=await page.evaluate(()=>{
@@ -53,7 +49,7 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
    assert(mini.children[1].rect.width>=40&&mini.children[2].rect.width>=40,'mini actions touch size');
    await page.screenshot({path:'/tmp/hsk-fixed-mini-'+width+'-'+height+'.png',fullPage:true});
    await page.evaluate(()=>HSKStudio.navigate('music-play'));
-   await page.locator('#musicMenuBtn').click();await page.locator('#musicCocCocModeToggle').click();
+   await page.locator('#musicMenuBtn').click();
    assert.equal(await page.locator('#musicCocCocOffline,#musicCocCocNote').count(),0,'Coc Coc download action removed at owner request');
    assert.equal(await page.locator('#musicCocCocImport').count(),0,'no misleading MP3 import button');
    assert.deepEqual(errors,[],'no browser JS errors');

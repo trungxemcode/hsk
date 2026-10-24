@@ -1,21 +1,8 @@
-/* Legacy conversion stays retired; explicit original-audio device save is supported. */
+/* Rebuilt entertainment music streams owner-published R2 audio only. */
 const fs=require('node:fs'),assert=require('node:assert/strict');
-const music=fs.readFileSync('src/modules/music/music.js','utf8'),
- offline=fs.readFileSync('src/modules/music/music-offline.js','utf8'),
- loader=fs.readFileSync('loader.js','utf8'),
- assets=JSON.parse(fs.readFileSync('tools/pwa-assets.json','utf8')).files,
- config=JSON.parse(fs.readFileSync('music-config.json','utf8'));
-for(const forbidden of ['downloadOfflineLink','HSKMusicConverter','offlineSourceResolver','musicOfflineLinkUrl','musicOfflineAddCurrent','musicOfflineCancel','resumePendingDownload','musicBackgroundDownload']){
- assert.ok(!music.includes(forbidden),'retired link download path remains '+forbidden);
-}
-assert.ok(music.includes('id="musicMenuOfflineRow"')&&music.includes('id="musicOfflineView"'));
-assert.ok(music.includes('id="musicOfflineImport"')&&music.includes('id="musicOfflineFile"'));
-assert.ok(music.includes('id="musicOfflineAttachFile"')&&music.includes('playOffline('),'local file upload and playback remain');
-assert.ok(offline.includes("DB='hsk-music-offline-v1'")&&offline.includes("s.tracks.put("),'existing IndexedDB kept');
-assert.ok(offline.includes("ext==='mp3'")&&offline.includes("ext==='m4a'"),'supports uploaded MP3 + M4A');
-assert.ok(loader.includes('music-offline.js')&&!loader.includes('music-converter.js'),'no codec loaded, local device store loaded');
-assert.ok(!assets.some(x=>/music-(?:converter|codec-worker)|vendor\/music-codec/.test(x)),'link converter not pre-cached');
-assert.equal(config.offlineSourceResolver,'','no legacy offline resolver endpoint');
-assert.equal(config.offlineDirect.enabled,false,'no experimental link audio downloading');
-assert.ok(music.includes('musicDeviceSave')&&music.includes('musicDeviceSaveBanner')&&music.includes('readDeviceAudio('),'explicit device save has progress and bounded transfer');
-console.log('PASS device music: uploaded files and explicit original-audio saving; no retired converter or experimental download providers');
+const music=fs.readFileSync('src/modules/music/music.js','utf8'),loader=fs.readFileSync('loader.js','utf8'),config=JSON.parse(fs.readFileSync('music-config.json','utf8'));
+for(const name of ['musicDeviceSave','musicMenuOfflineRow','onlineResolver','yt-dlp','HSKMusicOffline','keepAliveAudio'])assert.ok(!music.includes(name),'removed music path: '+name);
+assert.ok(music.includes('musicCloudSection')&&music.includes('mountCloudAudio('));
+assert.ok(!loader.includes('music-offline.js')&&!loader.includes('music-converter.js'));
+assert.equal(config.version,2);assert.ok(!('onlineResolver' in config));
+console.log('PASS R2-only entertainment music; no offline/VPS/yt-dlp paths');

@@ -9,9 +9,6 @@
     "vendor/fonts/Inter-OFL.txt",
     "src/modules/music/music-core.js",
     "src/modules/music/music-soundcloud.js",
-    "src/modules/music/music-offline.js",
-    "src/modules/music/music-direct-source.js",
-    "src/modules/music/music-coccoc.js",
     "src/modules/music/music.js",
     "music.css",
     "music-config.json",
@@ -166,7 +163,7 @@
     "content/voice-demos/zm_yunjian.mp3",
     "storage-cleanup.css",
     "src/modules/shell/storage-cleanup.js",
-    "src/modules/music/music-sponsor.js"
+    "src/modules/shell/legacy-music-cleanup.js"
   ],
   "aliases": {
     "backup-core.js": "src/modules/backup/backup-core.js",
