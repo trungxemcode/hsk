@@ -81,6 +81,18 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
     assert.equal((await page.evaluate(async()=> (await HSKMusicOffline.list('offline-one'))[0])).bitrate,64,await page.locator('#musicOfflineUsage').innerText());
    }
    assert.equal(directFetches,3);assert.equal(sourceRequests,3,'direct mode never contacts HSK source resolver');
+   // A same-name recording in another catalogue must never replace this asset.
+   const beforeFailure=await page.evaluate(async()=>{const row=(await HSKMusicOffline.list('offline-one'))[0];return HSKMusicOffline.get('offline-one',row.url).then(({asset,title,size})=>({asset,title,size}));});
+   let catalogueLookups=0;
+   const blockedConfig=r=>r.fulfill({json:{offlineDirect:{enabled:true,instances:[{type:'cobalt',url:'https://blocked-source.example.com'}]}}});
+   await page.route('**/music-config.json',blockedConfig);
+   await page.route('https://blocked-source.example.com/**',r=>r.fulfill({status:503,headers:cors,body:'blocked'}));
+   await page.route('https://music-api.gdstudio.xyz/**',r=>{catalogueLookups++;return r.fulfill({headers:cors,json:[{id:'123',name:'同名歌曲',artist:['同一歌手']}]});});
+   await page.locator('#musicOfflineAddCurrent').click();await page.waitForFunction(()=>document.getElementById('musicOfflineCancel').hidden);
+   assert.match(await page.locator('#musicOfflineUsage').textContent(),/đúng link.*không tự thay/i);
+   const afterFailure=await page.evaluate(async()=>{const row=(await HSKMusicOffline.list('offline-one'))[0];return HSKMusicOffline.get('offline-one',row.url).then(({asset,title,size})=>({asset,title,size}));});
+   assert.deepEqual(afterFailure,beforeFailure,'failed exact-source save preserves the previous bytes and title');assert.equal(catalogueLookups,0,'offline save never searches a substitute recording');
+   await page.unroute('**/music-config.json',blockedConfig);
    const beforeCancel=await page.evaluate(()=>HSKMusicOffline.usage());cancelProbe=true;await page.locator('#musicOfflineAddCurrent').click();await page.locator('#musicOfflineCancel').click();await page.waitForFunction(()=>document.getElementById('musicOfflineCancel').hidden);
    assert.equal(await page.evaluate(()=>HSKMusicOffline.usage()),beforeCancel,'cancel preserves the prior offline audio');cancelProbe=false;
    assert.equal(sourceRequests,3);await page.locator('#musicOfflineList .music-row-del').click();await page.waitForFunction(()=>!document.querySelector('#musicOfflineList .music-offline-item'));

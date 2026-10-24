@@ -562,7 +562,7 @@
    const cfg=await fetch('./music-config.json',{signal:controller.signal}).then(r=>{if(!r.ok)throw Error('Chưa đọc được cấu hình nhạc.');return r.json();});check();
    let bytes;
    if(cfg.offlineDirect?.enabled){
-    bytes=await HSKMusicDirectSource.download(track.url,track.bitrate,{instances:cfg.offlineDirect.instances,signal:controller.signal,onStatus:(phase,value)=>{if(!valid())return;if(phase==='matched'){track.title=value.title+' · '+value.artist+' (NetEase)';track.author=value.artist;downloadFeedback('Đã tìm bản đối chiếu: '+track.title);return;}downloadFeedback(phase==='resolving'?'Đang tìm âm thanh qua '+value+'…':phase==='progress'?'Đang tải trực tiếp về thiết bị · '+(value.total?Math.min(100,Math.round(value.received/value.total*100))+'%':(value.received/1048576).toFixed(1)+' MB'):'Đang tải trực tiếp về thiết bị…',phase==='progress'&&value.total?value.received/value.total*100:undefined);}});check();
+    bytes=await HSKMusicDirectSource.download(track.url,track.bitrate,{instances:cfg.offlineDirect.instances,signal:controller.signal,onStatus:(phase,value)=>{if(!valid())return;downloadFeedback(phase==='resolving'?'Đang tìm âm thanh qua '+value+'…':phase==='progress'?'Đang tải trực tiếp về thiết bị · '+(value.total?Math.min(100,Math.round(value.received/value.total*100))+'%':(value.received/1048576).toFixed(1)+' MB'):'Đang tải trực tiếp về thiết bị…',phase==='progress'&&value.total?value.received/value.total*100:undefined);}});check();
    }else{
    if(!cfg.offlineSourceResolver)throw Error('Chưa kết nối dịch vụ lấy âm thanh từ link. Bộ nén chạy trên thiết bị; bạn vẫn có thể thêm file M4A có sẵn.');
    const endpoint=new URL(cfg.offlineSourceResolver);

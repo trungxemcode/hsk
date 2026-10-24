@@ -1,5 +1,9 @@
 # Nhạc ngoại tuyến
 
+## Giữ đúng phiên bản từ link gốc — 3.13.4
+
+Lưu ngoại tuyến không tự đối chiếu sang NetEase hay kho nhạc khác khi nguồn gốc bị chặn. Trùng tên bài và ca sĩ không chứng minh cùng bản thu, hòa âm, remix hoặc tốc độ. Nếu chưa lấy được nguồn từ chính link đã nhập, app báo lỗi và giữ nguyên bản cũ; người dùng có thể thử lại hoặc nhập đúng file. Nhánh đối chiếu có nhãn nguồn của chế độ nghe nền trực tuyến vẫn tách biệt. Những file lưu bằng nhánh đối chiếu ở bản cũ không tự đổi lại âm thanh; chỉ thay sau khi tải lại thành công.
+
 ## Sửa lưu link và demo giọng Trung — PWA 3.12.5
 
 Mục nghe offline có ô dán URL trực tiếp, nút hoạt động khi chưa có bài đang phát, báo rõ lỗi hoặc xác nhận sau khi file được lưu vào IndexedDB. Chưa bảo đảm nhà cung cấp YouTube/SoundCloud có nguồn CORS hoạt động khi bị 403. Cả 9 MP3 demo giọng Trung được tự tải trong gói cập nhật PWA; service worker hỗ trợ audio Range 206/416 từ cache, phục vụ Safari khi không có mạng. Kiểm thử bằng tools/check-music-offline-ui.cjs và tools/check-voice-demo-offline-range.cjs.

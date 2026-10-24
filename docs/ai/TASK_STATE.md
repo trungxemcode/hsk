@@ -1,3 +1,8 @@
+## Offline source fidelity — 2026-10-24
+- Branch `fix/offline-source-fidelity` from merged main `b38ce08` (3.13.3). Root cause consistent with report: download() defaulted to a same-title/artist NetEase match when the YouTube source failed; app stored those different recording bytes under the original YouTube URL.
+- Remove cross-catalogue fallback from offline download entirely, including legacy smartMatch=true callers; stop rewriting saved title/artist to a match. On source failure show an explicit exact-link error and preserve old assets. Labelled online catalogue matching stays available, unchanged. No stored music is deleted or repaired automatically.
+- Tests: direct-source regression rejects replacement even with legacy smartMatch=true; real offline browser/WASM tests 390/1440 verify no catalogue request and unchanged prior asset/title/size when original source is blocked. Existing offline and online background tests pass. Public source and physical iPhone checks remain outside mocked tests.
+
 ## Home spacing and background music — 2026-10-24
 - Branch `fix/home-spacing-background-music` from main `dc22b9c` (3.13.2). Mobile Home uses a shared 12px rhythm across shortcuts, music entries, pathway, daily word and search.
 - Offline chill tracks use one persistent native audio element outside the route panel. Leaving the route retains playback and offers a global open/play/pause/stop bar. MediaSession play/pause/seek/next/previous/stop, actual state/position and feature-detected AudioSession playback category; owner change and study-mode entry release the player. Native loop remains opt-in.

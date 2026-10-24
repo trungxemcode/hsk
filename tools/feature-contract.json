@@ -1141,6 +1141,7 @@
         {"kind":"file","file":"tools/check-music-codec.cjs","value":""},
         {"kind":"file","file":"src/modules/music/music-direct-source.js","value":""},
         {"kind":"file","file":"tools/check-music-direct-source.cjs","value":""},
+        {"kind":"contains","file":"src/modules/music/music-direct-source.js","value":"Offline bytes must belong to the submitted source."},
         {"kind":"contains","file":"src/modules/music/music.js","value":"id=\"musicOfflineQuality\""}
       ]
     },

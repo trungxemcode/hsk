@@ -134,7 +134,7 @@
    return {url,title:row.name,artist:row.artist.join(', '),provider:'NetEase'};
   }finally{lookup.close();}
  }
- async function download(url,target,{instances=[],signal,onStatus=()=>{},smartMatch=true}){
+ async function download(url,target,{instances=[],signal,onStatus=()=>{}}){
   abortCheck(signal);if(![32,64,96].includes(target))throw Error('Chất lượng nhạc chưa hợp lệ.');
   const source=root.HSKMusicCore.parseLink(url);
   if(source.kind==='spotify')throw Error('Spotify chưa hỗ trợ lưu trực tiếp. Chọn link YouTube hoặc SoundCloud tương ứng.');
@@ -146,7 +146,6 @@
   // An explicitly configured, authorized service remains a fallback; no dead Piped URLs shipped.
   list.push(...(Array.isArray(instances)?instances:[]).slice(0,4).map(endpoint).filter(i=>i.type==='cobalt'||source.kind==='youtube'));
   if(lastWorking&&Date.now()-lastWorking.at<21600000){const index=list.findIndex(item=>item.url===lastWorking.url&&item.type===lastWorking.type);if(index>0)list.unshift(...list.splice(index,1));}
-  let matchError='';
   let tried=0,blocked=0;
   for(const item of list){
    if((cooldown.get(item.url)||0)>Date.now())continue;
@@ -167,12 +166,9 @@
     finally{transfer.close();}
    }
   }
-  if(smartMatch&&source.kind==='youtube'){
-   try{const candidate=await musicMatch(source,signal,onStatus),transfer=scope(signal,90000);
-    try{const response=await request(candidate.url,{signal:transfer.signal,headers:{Accept:'audio/*'}},{url:'https://music-api.gdstudio.xyz'});if(/text|json|html/i.test(response.headers.get('Content-Type')||''))throw Error('Kho nhạc không trả file âm thanh.');return await root.HSKMusicConverter.readSource(response,transfer.signal,(received,total)=>onStatus('progress',{received,total}));}finally{transfer.close();}
-   }catch(e){abortCheck(signal);matchError=' Kho nhạc thay thế: '+e.message;}
-  }
-  throw Error(matchError+' Các máy chủ nhạc đang chặn tải hoặc không hỗ trợ CORS ('+blocked+' lượt lỗi). Hãy thử lại sau hoặc gắn file M4A từ thiết bị; nhạc đã lưu vẫn được giữ.');
+  // Offline bytes must belong to the submitted source. A title/artist match
+  // cannot establish the same recording, arrangement, remix or playback speed.
+  throw Error('Chưa lấy được âm thanh từ đúng link đã chọn ('+blocked+' lượt lỗi). App không tự thay bằng bản cùng tên ở nguồn khác. Hãy thử lại sau hoặc thêm file M4A đúng phiên bản; nhạc đã lưu vẫn được giữ.');
  }
  // Resolve a progressive media URL. The audio element streams it; no full-file
  // fetch, WASM conversion, IndexedDB write or saved expiring URL is involved.
