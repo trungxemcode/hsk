@@ -48,7 +48,7 @@ function env(handler){
  a=env(url=>url===directory?j(rows):url.startsWith('https://inv-off.example')?new Response('',{status:503}):url.includes('/api/v1/videos/')?j({lengthSeconds:200,adaptiveFormats:formats}):bin());
  await a.run();assert(a.calls.at(-1).url.startsWith('https://inv-cors.example/latest_version'),'failed candidate advances to next source');
  a=env(url=>url===directory?j(rows):url.includes('/api/v1/videos/')?j({lengthSeconds:901,adaptiveFormats:formats}):bin());
- await assert.rejects(a.run(),/Các máy chủ nhạc/);
+ await assert.rejects(a.run(),/Chưa lấy được âm thanh từ đúng link đã chọn \(5 lượt lỗi\)/);
  assert.equal(a.calls.every(x=>!x.url.includes('/latest_version')),true,'15 minute limit blocks all audio');
  assert.equal(a.calls.filter(x=>x.url.includes('/api/v1/videos/')).length,5,'failed metadata probes remain capped at five');
  console.log('PASS dynamic discovery: false/null flags probed, top 5, private/down/duplicate rejection, local=true, seed fallback, failover, duration, no credentials');
