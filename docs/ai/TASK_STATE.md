@@ -1,3 +1,8 @@
+## 2026-10-24 — Conditional Cốc Cốc handoff for music (release 3.15.7)
+- Add an optional Cốc Cốc-only set of actions in HSK music menu to open a verified original song URL so Cốc Cốc may apply its own ad blocker/download media toolbar, then import locally downloaded MP3/M4A.
+- No direct HSK browser adblock/download API exists; no server downloads or music ripping. UA Chrome masquerading can make some real Coc Coc builds indistinguishable. Fail closed and hide optional controls unless a positive marker is exposed.
+- New Playwright and unit checks guard Chrome/Safari invisibility, branded/mock Cốc Cốc visibility, valid provider sources, local-file-only import.
+
 ## 2026-10-24 — Bridge update for Safari → Cốc Cốc re-install (HSK 3.15.6)
 - Owner asked for an intermediate update: safely remove downloaded resource packs before installing HSK from another browser. No cross-browser storage sharing exists on iOS.
 - Account > Dọn dẹp dung lượng now offers a **two-step bulk deletion** of ONLY extra download caches and voice model. Preserve the PWA core cache, offline MP3/M4A, user progress, account and unrelated caches. Existing per-item deletion remains available.

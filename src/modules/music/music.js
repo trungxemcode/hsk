@@ -68,7 +68,44 @@
  sponsorButton.onclick=()=>{sponsorEnabled=!sponsorEnabled;save('sponsor-skip',sponsorEnabled?'on':'off');syncSponsor();sponsorNotice.hidden=true;sponsor?.stop();try{const l=C.parseLink(currentLinkUrl);if(sponsorEnabled&&l.kind==='youtube'&&!offlineContext)sponsor?.load(l.source.videoId);}catch{}};
  sponsorUndo.onclick=()=>{sponsor?.undo(linkYt);sponsorNotice.hidden=true;};$('musicMenuOfflineRow').before(sponsorButton);syncSponsor();
  window.addEventListener('hsk-account-ready',()=>{sponsorEnabled=read('sponsor-skip','on')!=='off';syncSponsor();sponsor?.stop();sponsorNotice.hidden=true;});
- const backgroundPlayer=el('div',undefined,'music-background-player');
+   // Progressive enhancement: only show on positive Cốc Cốc browser signals.
+  // No browser exposes a supported website API for its ad blocker or media downloader.
+  const coccocBridge=window.HSKCocCocBridge;
+  const hasCocCoc=Boolean(coccocBridge?.isCocCoc(navigator,window));
+  let coccocOpen=null,coccocImport=null,coccocNote=null;
+  if(hasCocCoc){
+   coccocOpen=el('a','Cốc Cốc · mở bài tại trang nguồn','music-flat-row music-chill-only music-coccoc-row');
+   coccocOpen.id='musicCocCocOpen';
+   coccocOpen.dataset.menuView='main';
+   coccocOpen.target='_blank';
+   coccocOpen.rel='noopener noreferrer';
+   coccocOpen.setAttribute('aria-label','Mở bài hát ở trang nguồn để dùng tính năng Cốc Cốc');
+   coccocOpen.href='#';
+   coccocOpen.onclick=event=>{
+    const url=coccocBridge.providerSource(currentLinkUrl,C.parseLink);
+    if(!url){event.preventDefault();status('Hãy chọn bài YouTube, SoundCloud hoặc Spotify trước.');return;}
+    // The native Cốc Cốc toolbar, if available, runs on the actual provider page.
+    // HSK does not inject/block ads, scrape streams or initiate downloads.
+    coccocOpen.href=url;
+   };
+   coccocImport=el('button','Nhập MP3/M4A đã tải vào HSK','music-flat-row music-chill-only music-coccoc-row');
+   coccocImport.id='musicCocCocImport';
+   coccocImport.type='button';
+   coccocImport.dataset.menuView='main';
+   coccocImport.onclick=()=>chooseOfflineFile(false);
+   coccocNote=el('p','Chặn quảng cáo và nút Tải thuộc trình duyệt Cốc Cốc. Mở trang nguồn rồi dùng thanh công cụ của trình duyệt (nếu được hỗ trợ). HSK không thể bật hoặc điều khiển chúng; riêng YouTube trên iPhone có giới hạn tải.','music-empty-note music-chill-only music-coccoc-note');
+   coccocNote.id='musicCocCocNote';
+   coccocNote.dataset.menuView='main';
+   $('musicMenuOfflineRow').before(coccocOpen,coccocImport,coccocNote);
+  }
+  function syncCocCoc(){
+   if(!coccocOpen)return;
+   const url=coccocBridge.providerSource(currentLinkUrl,C.parseLink);
+   coccocOpen.href=url||'#';
+   coccocOpen.setAttribute('aria-disabled',String(!url));
+   coccocOpen.classList.toggle('music-coccoc-disabled',!url);
+  }
+const backgroundPlayer=el('div',undefined,'music-background-player');
  backgroundPlayer.id='musicBackgroundPlayer';backgroundPlayer.hidden=true;backgroundPlayer.setAttribute('role','region');backgroundPlayer.setAttribute('aria-label','Nhạc đang phát');
  const backgroundTitle=el('button'),backgroundPlay=el('button'),backgroundClose=el('button','×');
  for(const button of [backgroundTitle,backgroundPlay,backgroundClose])button.type='button';
@@ -241,7 +278,8 @@
   $('musicMenuSubCancel').textContent=view==='save'?'Hủy':'‹ Quay lại';
   $('musicMenuSubDone').hidden=view!=='save';
   if(view==='main'&&currentMode==='chill')$('musicLinkImport').open=false;
-  if(view==='offline')drawOffline();
+     if(view==='main')syncCocCoc();
+if(view==='offline')drawOffline();
   if(view==='save'){$('musicSaveNewForm').hidden=true;drawSavePicker(true);}
   requestAnimationFrame(()=>sheet.querySelectorAll('[data-menu-view]').forEach(node=>{
    if((node.dataset.menuView||'').split(/\s+/).includes(view)&&node.getClientRects().length){

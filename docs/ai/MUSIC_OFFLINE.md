@@ -1,3 +1,35 @@
+## 2026-10-24 — Cốc Cốc native media handoff (conditional)
+
+- HSK music menu in chill mode includes *Cốc Cốc · mở bài tại trang nguồn* and
+  *Nhập MP3/M4A đã tải vào HSK* **only when the browser provides a positive
+  Cốc Cốc identity marker** (distinct UA token, User-Agent Client Hints brand,
+  or a page-exposed proprietary \`coccoc\` object). Other browsers see neither
+  action. This is progressive enhancement only; identity signals are not a
+  security boundary.
+- **Cốc Cốc switched its User-Agent to Chrome in 2021.** A genuine Cốc Cốc
+  build may look identical to Chrome and suppress page-visible markers, in
+  which case the optional section remains hidden (fail closed). The actual
+  Cốc Cốc iPhone/PWA UI must be verified on device before guaranteeing
+  automatic detection. We do not spoof a Coc Coc user-agent or enumerate
+  extensions/fingerprint users.
+- Opening a provider's original, validated HTTPS URL in a real Cốc Cốc
+  tab allows the **browser itself** to apply its built-in ad blocking and,
+  for supported sources, display its media toolbar with download controls.
+  HSK has no official JavaScript API to enable Cốc Cốc's blocker or downloader.
+  Embedded YouTube frames in HSK are not guaranteed ad-free. On iOS,
+  downloading YouTube media through Cốc Cốc is not generally supported
+  by the ordinary mobile download toolbar.
+- Importing a user-owned/authorized MP3 or M4A uses the existing local
+  file picker and IndexedDB. Files are not pulled automatically from Cốc Cốc's
+  downloads or uploaded to an HSK server. No yt-dlp, scraping, CORS bypass,
+  adblock script or provider proxy is enabled.
+- Existing player, playlists, music from local files, music-study, Safari,
+  browser PWA cache and HSK progress are unchanged.
+
+Tests: \`tools/check-music-coccoc.cjs\` and
+\`tools/check-music-coccoc-ui.cjs\` cover other-browser hiding, positive
+marker exposure, HTTPS-source validation and local file import.
+
 ## Current playback policy — 2026-10-24
 Official YouTube nocookie Iframe API and SoundCloud Widget only; direct public HTTPS MP3/M4A streams use native audio. No Invidious/Piped/Cobalt or similar-title source matching in the app playback path. Browser SponsorBlock can skip community-tagged sponsor/intro/outro/non-music content with undo and an account-local toggle; it does not remove YouTube-inserted ads or guarantee provider availability. No VPS/backend used for media. User-selected MP3/M4A files continue to be stored in IndexedDB for offline listening; no URL-to-file downloader or automatic codec usage. Some legacy helper/server files remain for compatibility but are not loaded by the app player. The notes below record earlier implementation stages where applicable.
 

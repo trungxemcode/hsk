@@ -11,6 +11,7 @@
     "src/modules/music/music-soundcloud.js",
     "src/modules/music/music-offline.js",
     "src/modules/music/music-direct-source.js",
+    "src/modules/music/music-coccoc.js",
     "src/modules/music/music.js",
     "music.css",
     "music-config.json",
