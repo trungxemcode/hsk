@@ -8,3 +8,9 @@
 .storage-cleanup-actions{display:flex;flex-wrap:wrap;gap:8px}.storage-cleanup button{font:inherit;min-height:44px;padding:10px 14px;border:1px solid var(--button-border);border-radius:var(--radius-btn);background:var(--button-bg);color:var(--button-text);cursor:pointer}
 #storageCleanupDelete{background:var(--button-active-bg);color:var(--button-active-text)}.storage-cleanup button:disabled{opacity:.5;cursor:default}.storage-cleanup button:focus-visible,.storage-cleanup input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .storage-cleanup [hidden]{display:none!important}
+
+.storage-transfer-panel{padding:14px;border:1px solid var(--line);border-radius:var(--radius-btn);margin-block:14px;background:var(--surface);line-height:1.5}
+.storage-transfer-panel strong{display:block}.storage-transfer-panel p{margin:8px 0}
+.storage-transfer-controls{display:flex;flex-wrap:wrap;gap:8px}.storage-transfer-controls button{flex:1 1 190px}
+#storageCleanupResetExtras{border-color:var(--accent)}
+#storageTransferStatus{overflow-wrap:anywhere}

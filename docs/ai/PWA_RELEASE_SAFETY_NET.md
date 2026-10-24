@@ -35,3 +35,22 @@ Các commit 3.3.4–3.3.6 trước đó chỉ cập nhật Cloudflare Worker. iP
 Khi chuyển module: dùng `git mv`, cập nhật HTML và consumer/test, thay đường dẫn trong catalog và giữ alias URL cũ → file mới. Worker mới phục vụ alias từ cache mới, giúp tab cũ còn yêu cầu URL cũ. Không chuyển các worker hay manifest khỏi gốc; không đổi scope, storage hoặc cơ chế kích hoạt. Chạy `python tools/prepare-pwa-release.py --note "Mô tả"`, guard theo base, rồi browser checks. `verify-live-pwa.py` kiểm tra thêm các đích alias trên Pages sau merge.
 
 Hai kiểm tra Chromium trong workflow bảo toàn tính năng: `check-backup-relocation-ui.cjs` chạy nhập thật bằng dữ liệu giả, bảo toàn bản trùng/đổi tài khoản ở390/1440px; `check-pwa-relocation-ui.cjs` chạy mã worker thật với bộ tài nguyên giả nhỏ tại `/hsk/`, kiểm tra waiting/activate, cache reuse, alias, offline reload, cài mới và giữ localStorage. Đây không phải kiểm thử trên iPhone vật lý hay xác minh bản live chưa được triển khai.
+
+### Browser switch: Safari to Cốc Cốc (2026-10-24)
+
+The PWA core resources are downloaded **once per browser/storage container** via
+its versioned service worker. Safari and Cốc Cốc cannot transparently access
+one another's CacheStorage, IndexedDB, or user-uploaded audio. For migration,
+open **Account > Dọn dẹp dung lượng > Xóa tất cả gói tải thêm** on Safari,
+confirm twice, and only then install HSK through the desired browser. This
+bulk action deletes selected optional packages only; it never invokes
+\`caches.delete\` on unallowlisted cache namespaces or deletes user progress,
+account state, local music, or the PWA core cache. After installation, on
+Cốc Cốc use the new **Tải lại gói mở rộng tại đây** button (with explicit
+mobile-data/storage consent) to download verified voice and handwriting packs.
+
+The extension download is **not an automatic zero-click migration**: browser
+isolation prevents discovering old Safari cache inventory, and ~127 MB should
+not be silently downloaded to every one of 1,000 users. Stroke samples and
+dictionary shards are fetched on demand. Back up unsynced progress before
+uninstalling Safari PWA or clearing Safari's entire site data.
