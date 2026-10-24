@@ -1,3 +1,8 @@
+## Prefetch online sources — 2026-10-24
+- Extend PR185 (still open) with RAM-only source cache, exact original-link lookup from saved links/history/playlists, one next-track prefetch after real native playback starts. Share an in-flight lookup with foreground play; max4 cached sources, honor source expire minus60s (max15min) or conservative server hint. No media preloading, URL persistence or data writes.
+- Refresh expired sources on user resume, cancel/clear pending/cache on account change. Prefetch errors stay silent with30s cooldown, never interrupt current audio. Current AWS backend remains2 extraction slots,20 optional relay streams,12 resolve/min/account; no global queue/load benchmark.
+- AWS UI asserts one prefetched next-source request, hidden auto-next reuse without new request, original YouTube links only in localStorage, existing failure/pause/account cleanup preserved.
+
 ## AWS exact-source online audio — 2026-10-24
 - Branch feat/music-aws-stream, main785ecca (PR184 merged), candidate3.16.1. Owner authorizes completing online background playback using newly provisioned AWS Lightsail1GB; no offline downloading. Isolated worktree preserves another local branch and untracked files.
 - Deployed authenticated online_resolver.py on AWS with systemd/localhost binding, existing valid Plesk HTTPS origin, no media disk/cache/transcoding. Two extraction slots, per-account quotas, bounded in-memory source cache and short-lived relay tickets. Exact video ID and HTTPS googlevideo M4A validation; Firebase token checked server-side, never sent upstream. Config onlineResolver enables native YouTube audio for chill mode; official embeds still used when unconfigured; SoundCloud/study/local files retained.
