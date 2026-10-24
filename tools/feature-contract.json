@@ -1240,6 +1240,8 @@
         {"kind":"contains","file":"src/modules/music/music.js","value":"function canPlayBackground()"},
         {"kind":"contains","file":"src/modules/music/music.js","value":"function linkTimeline("},
         {"kind":"contains","file":"src/modules/music/music.js","value":"function startYouTubeKeepAlive("},
+        {"kind":"contains","file":"src/modules/music/music.js","value":"class BackgroundPlaybackGuard"},
+        {"kind":"contains","file":"src/modules/music/music.js","value":"guard.userPause();else guard.userPlay();"},
         {"kind":"contains","file":"src/modules/music/music.js","value":"function resumeHiddenYouTube("},
         {"kind":"contains","file":"src/modules/music/music.js","value":"function finishLinkTrack("},
         {"kind":"contains","file":"src/modules/music/music.js","value":"linkYt.officialYouTube=true"},
