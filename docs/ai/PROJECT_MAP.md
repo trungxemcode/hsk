@@ -116,3 +116,6 @@ Account entry `storageCleanupOpen` → `src/modules/shell/storage-cleanup.js`, `
 
 ## Compact drawing and music transport
 `mobile-ux.js` groups handwriting secondary controls into `handwritingOptions` without changing IDs/storage/recognition. `redesign.css` scopes compact drawing and excludes ranges from form-box styling. `music.js::linkTimeline` renders actual native/widget/YouTube time and protects active scrubs against stale polling. YouTube retains its original in-panel music presentation; the PR176 visible body portal/mini-video UI was removed at owner request. Native/direct audio and SoundCloud retain existing background support; no new YouTube lock-screen guarantee. Regression coverage extends search-tabs, mobile-ux and music-online browser tests.
+
+### Button transient state ownership
+`ui-buttons.css` and legacy `studio-layout.css` restrict generic hover paint to `(hover:hover)`, so touch release cannot retain white icons on an idle white card. Active/keyboard feedback remains separate from persistent selected state. `redesign.css` matches the home card base specificity for a complete filled press surface. Regression: `check-press-shape-ui.cjs` includes touch end/cancel, mouse release outside and keyboard focus; shared disclosure geometry and dark contrast checks remain intact.
