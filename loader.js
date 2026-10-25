@@ -8,8 +8,8 @@
  const measure=(name,start,end)=>{try{performance.clearMeasures('music:'+name);performance.measure('music:'+name,'music:'+start,'music:'+end);const entries=performance.getEntriesByName('music:'+name,'measure'),entry=entries[entries.length-1];timings[name]=Math.round(entry.duration*10)/10;}catch{}};
  window.HSKMusicPerf={mark,measure,report:()=>({timings:{...timings},longTasks:[...longTasks]})};
  try{if(PerformanceObserver.supportedEntryTypes?.includes('longtask'))new PerformanceObserver(list=>{if(document.body.dataset.studioHub!=='music')return;for(const e of list.getEntries()){longTasks.push(Math.round(e.duration));if(longTasks.length>20)longTasks.shift();}}).observe({type:'longtask'});}catch{}
- const scripts=new Map();
- function scriptFile(url){if(scripts.has(url))return scripts.get(url);const pending=new Promise((resolve,reject)=>{const el=document.createElement('script');el.src=url;el.onload=resolve;el.onerror=()=>{el.remove();reject(Error('Không tải được '+url));};document.body.append(el);});scripts.set(url,pending);pending.catch(()=>scripts.delete(url));return pending;}
+ const scripts=new Map(),scriptFailures=new Map();
+ function scriptFile(url){if(scripts.has(url))return scripts.get(url);const pending=new Promise((resolve,reject)=>{const el=document.createElement('script'),attempt=scriptFailures.get(url)||0;el.src=attempt?url+(url.includes('?')?'&':'?')+'hsk-retry='+attempt:url;el.onload=resolve;el.onerror=()=>{scriptFailures.set(url,attempt+1);el.remove();reject(Error('Không tải được '+url));};document.body.append(el);});scripts.set(url,pending);pending.catch(()=>scripts.delete(url));return pending;}
  let musicLoad;
  function startMusic(){
   if(window.HSKMusic)return Promise.resolve(window.HSKMusic);if(musicLoad)return musicLoad;
