@@ -20,7 +20,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Claim one admin import
         id: claim
-        run: python3 tools/music-import-runner.py
+        run: |
+          python3 -m unittest discover -s tools -p 'test_music_import*.py'
+          python3 tools/music-import-runner.py
       - uses: actions/setup-python@v5
         if: steps.claim.outputs.has_job == 'true'
         with:
