@@ -16,19 +16,20 @@ export async function handleCloudMusic(request,env,ctx={},deps={}){
   if(u.pathname==='/api/library'&&request.method==='GET'){
    const cursor=u.searchParams.get('cursor')||undefined;if(cursor&&cursor.length>2048)return json({error:'Trang chưa hợp lệ.'},400);
    const page=await env.MUSIC_BUCKET.list({prefix:'audio/',limit:100,include:['customMetadata'],cursor});
-   const tracks=page.objects.filter(o=>keyPattern.test(o.key.slice(6))&&o.customMetadata?.published==='true').map(o=>({id:o.key.slice(6),title:o.customMetadata.title||'Bài hát',artist:o.customMetadata.artist||'HSK Music',bytes:o.size,url:u.origin+'/audio/'+o.key.slice(6),addedAt:o.uploaded?.toISOString?.()||''}));
+   const tracks=page.objects.filter(o=>keyPattern.test(o.key.slice(6))&&o.customMetadata?.published==='true').map(o=>({id:o.key.slice(6),title:o.customMetadata.title||'Bài hát',artist:o.customMetadata.artist||'HSK Music',composer:o.customMetadata.composer||'',sourceUrl:o.customMetadata.sourceUrl||'',bytes:o.size,url:u.origin+'/audio/'+o.key.slice(6),addedAt:o.uploaded?.toISOString?.()||''}));
    tracks.sort((a,b)=>b.addedAt.localeCompare(a.addedAt));return json({tracks,cursor:page.truncated?page.cursor:null});
   }
   if((u.pathname==='/api/admin/upload'||imported?.job)&&request.method==='POST'){
    const actor=imported?.job?{admin:true}:await identity(request,env,deps.fetchFn||fetch);if(!actor.admin)return json({error:'Chỉ chủ kho được tải nhạc lên.'},403);
    const size=Number(request.headers.get('Content-Length'));if(!Number.isSafeInteger(size)||size<=0||size>MAX)return json({error:'Chọn file MP3/M4A tối đa 50 MB.'},413);
    const title=titleHeader(request,'X-Music-Title',120),artist=titleHeader(request,'X-Music-Artist',80)||'HSK Music';if(!title)return json({error:'Nhập tên bài hát.'},400);
+   const composer=titleHeader(request,'X-Music-Composer',120);const sourceUrl=imported?.job?.url||'';
    const bytes=await request.arrayBuffer();if(bytes.byteLength!==size||bytes.byteLength>MAX)return json({error:'File chưa tải đủ hoặc quá lớn.'},413);
    const h=new Uint8Array(bytes,0,Math.min(bytes.byteLength,64));
    const m4a=String.fromCharCode(...h).includes('ftyp'),mp3=(h[0]===73&&h[1]===68&&h[2]===51)||(h[0]===255&&(h[1]&0xe0)===0xe0);
    if(!m4a&&!mp3)return json({error:'File không phải MP3/M4A hợp lệ.'},400);
    const ext=m4a?'m4a':'mp3',hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join(''),id=hash+'.'+ext;
-   await env.MUSIC_BUCKET.put('audio/'+id,bytes,{httpMetadata:{contentType:m4a?'audio/mp4':'audio/mpeg',cacheControl:'public, max-age=86400'},customMetadata:{title,artist,published:'true'}});
+   await env.MUSIC_BUCKET.put('audio/'+id,bytes,{httpMetadata:{contentType:m4a?'audio/mp4':'audio/mpeg',cacheControl:'public, max-age=86400'},customMetadata:{title,artist,composer,sourceUrl,published:'true'}});
    if(imported?.job){imported.job.state='completed';imported.job.trackId=id;await writeJob(env,imported.job);}
    return json({uploaded:true,track:{id,title,artist,bytes:size,url:u.origin+'/audio/'+id}});
   }

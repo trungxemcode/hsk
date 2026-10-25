@@ -1,7 +1,9 @@
-# Current task: admin import to R2 + personal YouTube links
+# Current task: compact music menu UX
 
-Base main61de982 (3.17.1). User confirmed R2 audio background works on their phone. User requested admin-only library imports using successful yt-dlp Actions test, while all listeners retain personal YouTube links and R2 background audio.
+Base main9322ad9, live3.18.1. Admin YouTube→GitHub Actions→R2 is verified by run40163262374; importer User-Agent fix #192 merged. User confirmed native R2 background playback on phone.
 
-3.18.1 candidate: private R2 queue; Firebase owner create/status/upload; GitHub Actions signature-verified OIDC claim/complete/fail; scheduled/manual runner with YTB_Cookies, no PAT; visible progress states. All listeners can play/save personal official YouTube embeds, actual progress/seek/playlist, best-effort route persistence. Native R2 audio kept. No app-side downloader or VPS changes.
+3.18.2 candidate: main sheet has short actions instead of stacked forms; personal links and owner library imports use subviews, admin YouTube/File tabs, collapsed optional metadata, readable dark labels/white action text, inline personal errors, no stale loading status. Existing playback, queue and owner restrictions are preserved.
 
-Validation: 275 server tests, new role/OIDC/queue tests and UI, R2 background tests, feature runtime; complete results in PR. Main merge needed for scheduled import runner; live end-to-end verification pending deployment. Queue scans first1000 records; owner-scale pilot. No cookies/secrets in source or logs.
+Checks: menu/import/native background UI390/1440, feature runtime390/1440, music DOM, token catalog and feature preservation53capabilities/235guards. Screenshots inspected locally. PR/release status should be checked on GitHub before resuming.
+
+Smart music imports (3.18.2): owner import prefills the current YouTube URL. Debounced owner-only oEmbed lookup provides title/channel; existing lesson AI extracts only credits evidenced in the title, never treating channel as performer. Manual edits survive late responses; account changes abort/reset lookup. Composer persists through runner/R2 catalogue. Lookup failure remains nonblocking. Smart UI and metadata authorization tests cover these paths.
