@@ -15,7 +15,7 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - name: Claim one admin import
@@ -36,9 +36,17 @@ jobs:
         run: |
           python -m pip install --upgrade "yt-dlp[default]"
           command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
-      - name: Download and publish one audio
+      - name: Download and publish up to three queued audios
         if: steps.claim.outputs.has_job == 'true'
         env:
           IMPORT_MODE: download
           COOKIE_INPUT: ${{ secrets.YTB_Cookies }}
-        run: python tools/music-import-runner.py
+        run: |
+          failed=0
+          for attempt in 1 2 3; do
+            if ! python tools/music-import-runner.py; then failed=1; fi
+            if [ "$attempt" = 3 ]; then break; fi
+            IMPORT_MODE=claim python tools/music-import-runner.py
+            if [ ! -f "$RUNNER_TEMP/hsk-import-job.json" ]; then break; fi
+          done
+          exit "$failed"

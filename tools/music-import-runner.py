@@ -34,13 +34,13 @@ if __name__=='__main__':
   try:
    with tempfile.TemporaryDirectory() as td:
     folder=pathlib.Path(td);cookie=folder/'cookies.txt';cookies(os.environ.get('COOKIE_INPUT',''),cookie)
-    args=['yt-dlp','--ignore-config','--cookies',str(cookie),'--no-playlist','--no-progress','--socket-timeout','20','--retries','1','--extractor-retries','1','--js-runtimes','node','--max-filesize','50M','--match-filter','duration <= 1200','--write-info-json','-f','bestaudio','-x','--audio-format','mp3','--audio-quality','128K','-o',str(folder/'audio.%(ext)s'),job['url']]
+    args=['yt-dlp','--ignore-config','--cookies',str(cookie),'--no-playlist','--no-progress','--socket-timeout','20','--retries','1','--extractor-retries','1','--js-runtimes','node','--max-filesize','50M','--match-filter','duration <= 1200','--write-info-json','-f','bestaudio[ext=m4a]/bestaudio','--concurrent-fragments','4','-x','--audio-format','m4a','--audio-quality','128K','-o',str(folder/'audio.%(ext)s'),job['url']]
     result=subprocess.run(args,capture_output=True,timeout=420)
     if result.returncode:raise RuntimeError('Source refused download')
-    audio=(folder/'audio.mp3').read_bytes()
+    audio=(folder/'audio.m4a').read_bytes()
     if not 0<len(audio)<=50*1024*1024:raise ValueError('Invalid audio size')
     meta=json.loads((folder/'audio.info.json').read_text());from urllib.parse import quote
-    data=api(root+'/upload',audio,{'Content-Type':'audio/mpeg','X-Music-Title':quote(job['title'] or str(meta.get('track') or meta.get('title') or 'YouTube audio')[:120],safe=''),'X-Music-Composer':quote(job.get('composer') or str(meta.get('composer') or '')[:120],safe=''),'X-Music-Artist':quote(job['artist'] or str(meta.get('artist') or meta.get('uploader') or 'HSK Music')[:80],safe='')})
+    data=api(root+'/upload',audio,{'Content-Type':'audio/mp4','X-Music-Title':quote(job['title'] or str(meta.get('track') or meta.get('title') or 'YouTube audio')[:120],safe=''),'X-Music-Composer':quote(job.get('composer') or str(meta.get('composer') or '')[:120],safe=''),'X-Music-Artist':quote(job['artist'] or str(meta.get('artist') or meta.get('uploader') or 'HSK Music')[:80],safe='')})
     print('Import completed; audio published to R2')
   except Exception:
    api(root+'/fail');raise SystemExit('Import failed. Source may require fresh cookies; inspect admin job status.')
