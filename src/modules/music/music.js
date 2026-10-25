@@ -1199,5 +1199,6 @@ window.addEventListener('hsk-account-ready',()=>{pendingImportLink='';pendingImp
   }
   syncEmptyState();refresh();
  },stop};
+ window.dispatchEvent(new Event('hsk-music-ready'));
  // The entertainment library streams R2 audio; legacy device databases are not modified.
 })();
