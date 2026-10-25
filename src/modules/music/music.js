@@ -137,6 +137,22 @@
  $('musicAdminImportForm').onsubmit=async e=>{e.preventDefault();if(importBusy)return;const b=$('musicAdminImportSubmit');b.disabled=true;try{const link=C.parseLink($('musicAdminImportUrl').value);if(link.kind!=='youtube')throw Error('Nhập link YouTube.');const j=await importAPI('/api/admin/imports',{url:link.url,title:$('musicAdminImportTitle').value.trim(),artist:$('musicAdminImportArtist').value.trim(),composer:$('musicAdminImportComposer').value.trim()});save('import-job',j.id);await pollImport();}catch(err){$('musicAdminImportStatus').textContent=err.message;b.disabled=false;}};
  $('musicPersonalForm').onsubmit=e=>{e.preventDefault();$('musicPersonalStatus').textContent='';try{const link=C.parseLink($('musicPersonalUrl').value);if(link.kind!=='youtube')throw Error('Nhập link YouTube.');openLink(link,$('musicPersonalTitle').value.trim()||'YouTube',true,'',true);}catch(err){$('musicPersonalStatus').textContent=err.message;}};
  let cloudRequest=null,cloudUpload=null;
+
+ const searchControllers=new Set();
+ function addNameSearch(host,admin){
+  const box=el('section',undefined,'music-name-search'),form=el('form'),label=el('label','Tìm nhạc trên YouTube'),input=el('input'),submit=el('button','Tìm kiếm','music-primary'),note=el('p'),results=el('div',undefined,'music-recent-list');
+  input.type='search';input.required=true;input.minLength=2;input.maxLength=100;input.placeholder='Tên bài hát, ca sĩ…';input.setAttribute('aria-label','Tên bài hát hoặc ca sĩ');submit.type='submit';label.append(input);form.append(label,submit);note.setAttribute('role','status');note.setAttribute('aria-live','polite');box.append(form,note,results);host.prepend(box);let controller=null,sequence=0;
+  form.onsubmit=async e=>{e.preventDefault();controller?.abort();controller=new AbortController();searchControllers.add(controller);const own=controller,seq=++sequence,user=window.HSKAccountDashboard?.user;submit.disabled=true;results.replaceChildren();note.textContent='Đang tìm trên YouTube…';
+   try{const endpoint=cloudEndpoint();if(!endpoint)throw Error('Kho nhạc chưa được cấu hình.');const r=await fetch(endpoint+'/api/search/youtube?q='+encodeURIComponent(input.value.trim()),{signal:own.signal});const data=await r.json();if(!r.ok)throw Error(data.error||'Chưa tìm được bài hát.');if(seq!==sequence||user!==window.HSKAccountDashboard?.user)return;
+    const tracks=Array.isArray(data.tracks)?data.tracks:[];for(const t of tracks){if(!/^[\w-]{11}$/.test(t.id||''))continue;const url='https://www.youtube.com/watch?v='+t.id,b=el('button',undefined,'music-row-main'),img=el('img',undefined,'music-row-thumb'),copy=el('span',undefined,'music-row-copy');b.type='button';img.src='https://i.ytimg.com/vi/'+t.id+'/mqdefault.jpg';img.alt='';img.loading='lazy';copy.append(el('strong',String(t.title||'YouTube')),el('small',String(t.channel||'YouTube')+(t.duration?' · '+t.duration:'')));b.append(img,copy);b.onclick=()=>{if(admin){if(window.HSKAccountDashboard?.user?.uid!==cloudOwner)return;$('musicAdminImportUrl').value=url;$('musicAdminImportUrl').oninput();applyMusicInfo({Title:String(t.title||'')});$('musicAdminImportUrl').focus();note.textContent='Đã chọn bài. Kiểm tra thông tin rồi thêm vào kho.';}else openLink(C.parseLink(url),String(t.title||'YouTube'),true,'',true);};results.append(b);}
+    note.textContent=results.children.length?results.children.length+' kết quả · chọn một bài':'Không tìm thấy bài phù hợp. Thử thêm tên ca sĩ.';
+   }catch(err){if(err.name!=='AbortError'&&seq===sequence)note.textContent=err.message;}
+   finally{searchControllers.delete(own);if(seq===sequence)submit.disabled=false;}
+  };
+  window.addEventListener('hsk-account-ready',()=>{controller?.abort();++sequence;submit.disabled=false;input.value='';note.textContent='';results.replaceChildren();});
+ }
+ addNameSearch(personal,false);addNameSearch(importBox,true);
+
  const cloudOwner='BIvUyItDYJWcLvlhhtYFyj5csBH2';
  function cloudEndpoint(){if(!config.cloudEndpoint)return '';const u=new URL(config.cloudEndpoint);if(u.protocol!=='https:'||u.username||u.password||u.search||u.hash)throw Error('Địa chỉ kho R2 chưa hợp lệ.');return u.origin;}
  function syncCloudOwner(){cloudAdmin.hidden=window.HSKAccountDashboard?.user?.uid!==cloudOwner;adminAction.hidden=cloudAdmin.hidden;clearTimeout(importPoll);if(!cloudAdmin.hidden)pollImport();else{importBusy=false;$('musicAdminImportStatus').textContent='';$('musicAdminImportSubmit').disabled=false;}}

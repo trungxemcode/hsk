@@ -1,4 +1,5 @@
 // Owner-uploaded R2 audio library. Independent of AI, voice and study services.
+import {searchRoute} from './youtube-search.mjs';
 import {importRoute,writeJob} from './import-jobs.mjs';
 import {identity,byteRange} from './worker.mjs';
 const keyPattern=/^[a-f0-9]{64}\.(mp3|m4a)$/;
@@ -11,6 +12,7 @@ export async function handleCloudMusic(request,env,ctx={},deps={}){
  const json=(body,status=200)=>Response.json(body,{status,headers:{...cors,'Cache-Control':'no-store'}});
  if(request.method==='OPTIONS')return new Response(null,{status:204,headers:cors});
  try{
+  const search=await searchRoute(request,json,deps.fetchFn||fetch);if(search)return search;
   if(!env.MUSIC_BUCKET)return json({error:'Kho R2 chưa được kết nối.'},503);
   const imported=await importRoute(request,env,json,deps.fetchFn||fetch);if(imported instanceof Response)return imported;
   if(u.pathname==='/api/library'&&request.method==='GET'){
