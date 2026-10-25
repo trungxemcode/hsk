@@ -1454,6 +1454,42 @@
           "value": "async function usage()"
         }
       ]
+    },
+    {
+      "id": "music-admin-import",
+      "name": "Admin nhập YouTube vào R2; link YouTube cá nhân cho mọi người",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "musicAdminImportForm"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "musicPersonalForm"
+        },
+        {
+          "kind": "file",
+          "file": "server/music-import.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/music/import-jobs.mjs",
+          "value": "runnerIdentity"
+        },
+        {
+          "kind": "file",
+          "file": ".github/workflows/music-import.yml",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-import-ui.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }
