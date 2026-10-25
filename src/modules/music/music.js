@@ -1079,14 +1079,17 @@
   if(catalog.length>1){const cIdx=catalog.findIndex(s=>s.id===song.id);if(cIdx>=0){openSong(catalog[(cIdx+dir+catalog.length)%catalog.length]);return;}}
   status(dir>0?'Đã đến câu cuối trong bộ lọc.':'Đã ở câu đầu tiên trong bộ lọc.');
  }
- async function youtubeApi(){
-  if(window.YT?.Player)return;
-  if(!youtubeApi.loading)youtubeApi.loading=new Promise((resolve,reject)=>{const script=el('script');script.src='https://www.youtube.com/iframe_api';const previous=window.onYouTubeIframeAPIReady;window.onYouTubeIframeAPIReady=()=>{previous?.();resolve();};script.onerror=()=>reject(Error('Không tải được player YouTube.'));document.head.append(script);setTimeout(()=>{if(!window.YT?.Player)reject(Error('Player YouTube chưa sẵn sàng.'));},12000);}).catch(e=>{youtubeApi.loading=null;throw e;});
-  return youtubeApi.loading;
- }
+ async function youtubeApi(){throw Error('Ứng dụng chỉ phát audio trong kho, không mở trình phát YouTube.');}
  async function mountYoutube(value,epoch,resume){
-  await youtubeApi();if(epoch!==serial||!opened)return;
-  const mount=el('div');$('musicYoutube').replaceChildren(mount);yt=new YT.Player(mount,{host:'https://www.youtube-nocookie.com',videoId:value.source.videoId,width:'100%',height:'100%',playerVars:{playsinline:1,controls:0,disablekb:1,fs:0,iv_load_policy:3,rel:0,origin:location.origin},events:{onReady:event=>{if(epoch!==serial)return;event.target.seekTo(index>0?segment().start:resume,true);updateScrubUI();},onStateChange:()=>{if(epoch===serial)tick();},onAutoplayBlocked:()=>{if(epoch===serial)status('Bấm nút ▶ để tiếp tục phát.');},onError:()=>{if(epoch===serial)status('Video YouTube không khả dụng hoặc không cho phép nhúng. Hãy chọn bài khác.');}}});ytTimer=setInterval(tick,200);
+  if(!cloudTracks.length)await refreshCloud();if(epoch!==serial||!opened)return;
+  $('musicYoutube').replaceChildren();$('musicYoutube').hidden=true;$('musicHideVideo').hidden=true;
+  const track=cloudTracks.find(t=>{try{return C.parseLink(t.sourceUrl).source?.videoId===value.source.videoId;}catch{return false;}});
+  if(!track){status('Bài học chưa có audio trong kho. Admin cần nhập đúng bài để nghe; lời và bài tập vẫn có thể sử dụng.');return;}
+  const audio=new Audio(track.url);audio.id='musicStudyBackgroundAudio';audio.preload='metadata';audio.crossOrigin='anonymous';document.body.append(audio);
+  yt={getCurrentTime:()=>audio.currentTime,getDuration:()=>Number.isFinite(audio.duration)?audio.duration:0,getPlayerState:()=>audio.ended?0:audio.paused?2:1,seekTo:t=>{audio.currentTime=Math.max(0,Number(t)||0);},playVideo:()=>{prepareAudioSession();audio.play().catch(()=>status('Chạm Phát để nghe audio trong kho.'));},pauseVideo:()=>audio.pause(),setPlaybackRate:r=>{audio.playbackRate=r;},getAvailablePlaybackRates:()=>[.75,1,1.25],destroy:()=>{audio.pause();audio.removeAttribute('src');audio.load();audio.remove();}};
+  audio.addEventListener('loadedmetadata',()=>{if(epoch!==serial)return;audio.currentTime=index>0?segment().start:resume;updateScrubUI();},{once:true});
+  audio.addEventListener('timeupdate',()=>{if(epoch===serial)tick();});audio.addEventListener('error',()=>{if(epoch===serial)status('Chưa phát được audio trong kho.');});
+  status('Audio từ kho HSK · không mở trình phát YouTube.');
  }
  async function openSong(value,file=null){
   let valid;try{valid=C.validateSong(value);}catch(e){status(e.message);return;}
