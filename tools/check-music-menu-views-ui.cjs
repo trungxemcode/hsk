@@ -8,7 +8,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  });await new Promise(r=>server.listen(0,'127.0.0.1',r));
  const browser=await chromium.launch({headless:true,...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
  try{
-  for(const width of [390,820,1440]){
+  for(const width of [390,430,820,1440]){
    const page=await browser.newPage({viewport:{width,height:844},serviceWorkers:'block'}),errors=[];
    page.on('pageerror',e=>errors.push(e.message));
    await page.route('https://**/*',r=>r.abort());
@@ -42,7 +42,20 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.locator('#musicPlaylistName').fill('Playlist UI check');
    await page.locator('#musicPlaylistCreateBtn').click();
    await page.waitForFunction(()=>document.getElementById('musicPlaylistList').textContent.includes('Playlist UI check'));
+   await page.locator('#musicPlaylistName').fill('Nhạc Hoa chill');
+   await page.locator('#musicPlaylistCreateBtn').click();
+   await page.waitForFunction(()=>document.querySelectorAll('#musicPlaylistList .music-playlist-head').length===2);
+   await page.locator('#musicPlaylistCreateBox summary').click();
+   assert.equal(await page.locator('#musicPlaylistCreateBox').evaluate(n=>n.open),false);
+   assert.equal(await page.locator('#musicPlaylistsBox summary .music-library-chevron').count(),1);
+   assert.equal(await page.locator('#musicPlaylistList .music-playlist-thumb').count(),0,'compact reference rows have no cover');
+   assert.equal(await page.locator('#musicPlaylistList .music-playlist-head').count(),2);
+   assert.equal(await page.locator('#musicPlaylistList .music-playlist-tools button').count(),4,'play/delete handlers retained inside expanded rows');
    await page.screenshot({path:'/tmp/music-menu-fixed-library-'+width+'.png'});
+   await page.locator('#musicPlaylistList .music-playlist-head').first().click();
+   assert.equal(await page.locator('#musicPlaylistList .music-playlist-head').first().getAttribute('aria-expanded'),'true');
+   assert.equal(await page.locator('#musicPlaylistList .music-playlist-tools').first().isVisible(),true);
+   await page.locator('#musicPlaylistList .music-playlist-head').first().click();
    await page.locator('#musicMenuSubCancel').click();
    assert.equal(await view(),'main');
    assert.equal(await visible('#musicMenuLibraryRow'),true);
@@ -75,9 +88,12 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.locator('#musicPreviewPlaylistAdd').click();
    assert.equal(await visible('#musicQuickPlaylistPanel'),true);
    assert.equal(await page.locator('#musicPreviewPlaylistAdd').getAttribute('aria-expanded'),'true');
-   assert.equal(await page.locator('.music-quick-pick').count(),1);
-   await page.locator('.music-quick-pick').click();
-   assert.equal(await page.locator('.music-quick-pick').getAttribute('aria-pressed'),'true');
+   assert.equal(await page.locator('.music-quick-pick').count(),3,'two playlist pills plus add-new chip');
+   assert.equal(await page.locator('.music-quick-pick-new').textContent(),'＋ Playlist mới');
+   assert.equal(await page.locator('.music-quick-select-more > span').first().isVisible(),true,'multi-playlist link text must not be suppressed');
+   await page.screenshot({path:'/tmp/music-menu-fixed-quick-'+width+'.png'});
+   await page.locator('.music-quick-pick:not(.music-quick-pick-new)').first().click();
+   assert.equal(await page.locator('.music-quick-pick:not(.music-quick-pick-new)').first().getAttribute('aria-pressed'),'true');
    assert.equal(await page.evaluate(()=>JSON.stringify(localStorage).includes('Playlist UI check')),true);
    await page.locator('.music-quick-select-more').click();
    assert.equal(await view(),'save');
@@ -86,6 +102,11 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await visible('#musicMenuLibraryRow'),false);
    assert.equal(await visible('#musicCloudRefresh'),false);
    assert.equal(await visible('#musicMenuSubDone'),true);
+   await page.locator('#musicMenuSubCancel').click();
+   await page.locator('#musicPreviewPlaylistAdd').click();
+   await page.locator('.music-quick-pick-new').click();
+   assert.equal(await view(),'library','new playlist chip opens original creation form');
+   assert.equal(await page.locator('#musicPlaylistCreateBox').evaluate(n=>n.open),true);
    await page.locator('#musicMenuSubCancel').click();
    assert.equal(await visible('#musicQuickPlaylistPanel'),false);
    assert.equal(await page.locator('#musicPreviewPlaylistAdd').getAttribute('aria-expanded'),'false');
