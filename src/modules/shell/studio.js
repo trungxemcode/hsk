@@ -94,10 +94,18 @@ renderIcons();
   if(tool==='image')document.querySelector('.ocr-panel').open=true;
   title(tool==='translate'||tool==='image'?'translator':'search');
  }
+ let pendingMusic='',musicWaitTimer=0,musicWaitControls=[],routeChosenBeforeReady=false;
+ function clearMusicWait(failed=false){clearTimeout(musicWaitTimer);pendingMusic='';for(const [node,small,label] of musicWaitControls){node.removeAttribute('aria-busy');node.classList.remove('music-entry-pending');if(small)small.textContent=failed?'Chưa mở được. Chạm để thử lại.':label;}musicWaitControls=[];}
+ function earlyMusicHome(){if(!ready&&!pendingMusic&&!['account','translator','about','admin'].includes(route)&&(!document.body.dataset.studioHub||document.body.dataset.studioHub==='home')){document.body.dataset.studioHub='home';$('studioHome').hidden=false;title('home');refresh();}}
+ window.addEventListener('hsk-music-ready',()=>{const next=pendingMusic;clearMusicWait();if(next)navigate(next);else earlyMusicHome();});
+ window.addEventListener('hsk-music-load-error',()=>clearMusicWait(true));
  function navigate(name){
-  if((name==='music'||name==='music-play')&&!window.HSKMusic)return;
+  const musicRoute=name==='music'||name==='music-play';
+  if(musicRoute&&!window.HSKMusic){clearMusicWait();pendingMusic=name;document.querySelectorAll('[data-studio-go="'+name+'"]').forEach(node=>{const small=node.querySelector('small');musicWaitControls.push([node,small,small?.textContent||'']);node.setAttribute('aria-busy','true');node.classList.add('music-entry-pending');if(small)small.textContent='Đang mở trình phát…';});musicWaitTimer=setTimeout(()=>clearMusicWait(true),20000);window.HSKMusicLoad?.start();return;}
+  clearMusicWait();
   if(name==='review')name='practice';
-  if(!ready&&!['account','translator','about','admin'].includes(name))return;
+  if(!ready&&!['account','translator','about','admin','music','music-play'].includes(name))return;
+  if(!ready)routeChosenBeforeReady=true;
   if(name==='search'&&!$('handwritingPanel').hidden)$('handwritingClose').click();
   if(name==='search'||name==='translator')document.body.dataset.searchTool=name==='search'?'vocabulary':'translate';
   clearHub();
@@ -105,7 +113,7 @@ renderIcons();
    const hub=name==='music-play'?'music':name;
    document.querySelector('.app-tabs [data-mode="learn"]').click();document.body.classList.remove('show-lessons','lesson-focus');document.body.dataset.studioHub=hub;document.querySelector(`[data-studio-hub-panel="${hub}"]`).hidden=false;title(name);
   }else{const special={account:'accountBtn',translator:'translatorBtn',admin:'adminBtn',about:'aboutBtn'};const trigger=special[name]?$(special[name]):document.querySelector(`.app-tabs [data-mode="${name}"]`);if(!trigger||trigger.hidden)return;trigger.click();title(name);}
-  closeDrawer();main.scrollTop=0;window.scrollTo({top:0,behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});refresh();if(name==='exam')window.dispatchEvent(new Event('hsk-exam-open'));if(name==='match-game'||name==='sentence-game')window.HSKPracticeGames?.start(name);if(name==='study4')window.HSKStudy4?.open();if(name==='real-reading')window.HSKRealReading?.enter();if(name==='music'||name==='music-play')window.HSKMusic?.enter(name==='music-play'?'chill':'study');window.HSKPracticeSelection?.onNavigate?.(name);
+  closeDrawer();if(musicRoute)main.scrollTo({top:0,behavior:'instant'});else main.scrollTop=0;window.scrollTo({top:0,behavior:musicRoute?'instant':window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});refresh();if(name==='exam')window.dispatchEvent(new Event('hsk-exam-open'));if(name==='match-game'||name==='sentence-game')window.HSKPracticeGames?.start(name);if(name==='study4')window.HSKStudy4?.open();if(name==='real-reading')window.HSKRealReading?.enter();if(name==='music'||name==='music-play'){window.HSKMusic?.enter(name==='music-play'?'chill':'study');$('musicPanel')?.querySelector('.music-stage')?.scrollTo({top:0,behavior:'instant'});}window.HSKPracticeSelection?.onNavigate?.(name);
  }
  window.addEventListener('hsk-lesson-context',()=>refresh());
  function snapshot(){return ['hsk-flashcards-progress-v1','hsk-flashcards-mistakes-v1','hsk-course-lessons-v1','hsk-adaptive-learning-v1','hsk-exam-practice-v1'].map(k=>localStorage.getItem(k)||'').join('|');}
@@ -164,8 +172,8 @@ renderIcons();
  updateAvailability();new MutationObserver(updateAvailability).observe(update,{attributes:true,attributeFilter:['hidden']});
  fetch('./app-version.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(m=>{$('studioVersion').textContent=m.label||m.version;}).catch(()=>{$('studioVersion').textContent='Chưa đọc được phiên bản · kiểm tra kết nối';});
  fetch('./lessons-data.json').then(r=>r.json()).then(data=>{const count=(data.courses||[]).reduce((sum,c)=>sum+(c.lessons||[]).length,0);$('studioHomeLessons').textContent=count?String(count):'—';}).catch(()=>{$('studioHomeLessons').textContent='—';});
- function init(){if(ready)return;ready=true;lastOwner=owner();fingerprint=snapshot();navigate(location.hash.startsWith('#lesson/')?'lessons':'home');if(location.hash.startsWith('#lesson/'))window.HSKLessonNav?.open();refreshTimer=setInterval(()=>{if(!document.hidden)refresh();},30000);}
+ function init(){if(ready)return;ready=true;lastOwner=owner();fingerprint=snapshot();if(!pendingMusic&&!routeChosenBeforeReady)navigate(location.hash.startsWith('#lesson/')?'lessons':'home');if(location.hash.startsWith('#lesson/')&&!routeChosenBeforeReady)window.HSKLessonNav?.open();refreshTimer=setInterval(()=>{if(!document.hidden)refresh();},30000);}
  window.addEventListener('hsk-lessons-ready',init);if(window.HSKLessons)init();
  window.addEventListener('pagehide',()=>{clearInterval(refreshTimer);clearTimeout(activityTimer);});
- window.HSKStudio={navigate,refresh};
+ window.HSKStudio={navigate,refresh};if(window.HSKMusic)earlyMusicHome();
 })();

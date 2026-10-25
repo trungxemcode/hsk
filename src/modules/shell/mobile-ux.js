@@ -168,9 +168,9 @@ $('planForm').addEventListener('submit',()=>{const before=window.HSKPlanner?.pla
   get label(){return loadingTitle.textContent;}
  };
  const bootStatus=$('appLoadStatus');
- if(bootStatus&&!bootStatus.hidden&&!window.HSKLessons){
+ if(bootStatus&&!bootStatus.hidden&&!window.HSKLessons&&!window.HSKMusic){
   const stopBoot=HSKLoading.show('Dữ liệu học HSK đang load...',bootStatus.textContent||'Đang nạp từ vựng và giáo trình HSK 1–6...');
-  window.addEventListener('hsk-lessons-ready',()=>stopBoot(),{once:true});
+  window.addEventListener('hsk-lessons-ready',()=>stopBoot(),{once:true});window.addEventListener('hsk-music-ready',()=>stopBoot(),{once:true});window.addEventListener('hsk-data-load-error',()=>stopBoot(),{once:true});
  }
  schedule();window.HSKLoading=HSKLoading;window.HSKMobileUX={refresh:schedule,openPlan,word:openWord,loading:HSKLoading};
 })();

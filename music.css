@@ -628,3 +628,13 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuShe
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet details.music-optional-fields>summary{min-height:36px!important;background:var(--palette-transparent)!important;border:0!important;box-shadow:none!important;padding:8px 0!important;font-size:13px!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet h3{font-size:16px!important;line-height:1.4!important;margin:18px 0 12px!important;}
 @media(prefers-reduced-motion:reduce){#musicPanel #musicQueueSheet,#musicPanel #musicQueueBackdrop{transition:none!important;}}
+
+/* Browse scrolls below a stationary header; player mode keeps its existing layout. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel:not(.music-player-expanded)[data-music-mode=chill] .music-stage{overflow:hidden!important;overflow:clip!important;height:100dvh!important;max-height:100dvh!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel:not(.music-player-expanded)[data-music-mode=chill] .music-top-bar{position:relative!important;top:auto!important;flex:0 0 64px!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel:not(.music-player-expanded)[data-music-mode=chill] #musicBrowseView{flex:1 1 auto!important;min-height:0!important;max-height:none!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;scrollbar-width:none;align-content:start;}
+html body.studio-enabled .music-entry-pending{cursor:progress;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicCloudList .music-row-copy strong{color:var(--palette-white)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicCloudList .music-row-copy small{color:var(--legacy-rgb-9)!important;}
+/* Background study loading stays visible on learning pages, outside the music viewport. */
+body.studio-enabled[data-studio-hub=music] :is(#appLoadStatus,.memory-reminder){display:none!important;}
