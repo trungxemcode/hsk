@@ -1,0 +1,28 @@
+name: yt-dlp Actions probe
+on:
+  push:
+    branches: [test/ytdlp-actions-probe]
+    paths: [.github/workflows/ytdlp-actions-probe.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install downloader
+        run: |
+          python -m pip install --upgrade "yt-dlp[default]"
+          command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
+          yt-dlp --version
+      - name: Try one short public video without cookies
+        run: |
+          mkdir -p /tmp/audio-probe
+          timeout 180 yt-dlp --ignore-config --no-playlist --no-progress --socket-timeout 20 --retries 1 --extractor-retries 1 --js-runtimes node -f bestaudio -x --audio-format mp3 --audio-quality 128K --max-filesize 20M --match-filter "duration <= 120" -o "/tmp/audio-probe/%(id)s.%(ext)s" "https://www.youtube.com/watch?v=jNQXAC9IVRw"
+          ffprobe -v error -show_entries format=duration,size -of json /tmp/audio-probe/jNQXAC9IVRw.mp3
