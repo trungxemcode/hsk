@@ -895,15 +895,15 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-track-
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-playlist-section-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-pl-new{
   width:auto!important;min-width:0!important;min-height:32px!important;padding:4px 0 4px 10px!important;
-  border:0!important;background:transparent!important;box-shadow:none!important;
+  border:0!important;background:var(--palette-transparent)!important;box-shadow:none!important;
   color:var(--mb-palette-dark-violet)!important;font-size:13px!important;font-weight:600!important;
 }
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicBrowsePlaylistsSection.state-noplaylist .music-pl-empty{display:flex!important}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-pl-empty-cta{
   width:auto!important;min-height:40px!important;padding:8px 18px!important;
-  border:0!important;border-radius:999px!important;
+  border:0!important;border-radius:var(--radius-pill)!important;
   background:var(--mb-rd-brand)!important;color:var(--mb-rd-on-hero)!important;
-  box-shadow:0 8px 24px rgba(59,47,176,.32)!important;font-weight:650!important;
+  box-shadow:var(--mb-rd-shadow-lg)!important;font-weight:650!important;
 }
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-pl-hint{
   margin:10px 0 0!important;text-align:center!important;font-size:12px!important;
@@ -915,4 +915,64 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-pl-emp
 }
 @media(prefers-reduced-motion:reduce){
  html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel :is(.music-pl-new,.music-pl-empty-cta,.music-eq i){transition:none!important;animation:none!important}
+}
+
+/* Music design: mutually exclusive bottom-sheet views. More specific than the
+   legacy !important .music-flat-row rules, which were leaking main actions
+   into library/save/import subviews on iOS and desktop. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="main"] [data-menu-view]:not([data-menu-view~="main"]),
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] [data-menu-view]:not([data-menu-view~="library"]),
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="save"] [data-menu-view]:not([data-menu-view~="save"]),
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="personal"] [data-menu-view]:not([data-menu-view~="personal"]),
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="admin"] [data-menu-view]:not([data-menu-view~="admin"]),
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="link"] [data-menu-view]:not([data-menu-view~="link"]){display:none!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicQuickPlaylistPanel[hidden]{display:none!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-menu-quick-panel{
+ padding:4px 10px 14px 42px!important;
+ border-bottom:1px solid var(--mb-rd-line-soft)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-quick-caption{
+ margin:0 0 8px!important;
+ font-size:12px!important;font-weight:600!important;color:var(--mb-rd-muted)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-quick-pick-list{
+ display:flex!important;flex-wrap:wrap!important;gap:8px!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-quick-pick{
+ min-height:34px!important;padding:6px 10px!important;border-radius:var(--radius-pill)!important;
+ border:1px solid var(--mb-rd-line)!important;background:var(--mb-rd-surface-soft)!important;
+ color:var(--mb-rd-ink-2)!important;font-size:12px!important;font-weight:600!important;
+ box-shadow:none!important;max-width:100%!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-quick-pick[aria-pressed="true"]{
+ border-color:var(--mb-rd-brand-2)!important;color:var(--mb-rd-brand-2)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-quick-select-more{
+ display:flex!important;justify-content:space-between!important;align-items:center!important;
+ width:100%!important;min-height:40px!important;margin-top:6px!important;padding:6px 0!important;
+ border:0!important;background:var(--palette-transparent)!important;color:var(--mb-rd-muted)!important;
+ font-size:13px!important;text-align:left!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-quick-pick:focus-visible,
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-quick-select-more:focus-visible{
+ outline:2px solid var(--mb-rd-brand-2)!important;outline-offset:2px!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-menu-quick-panel{animation:none!important}
+}
+
+/* Owner-only destructive action: 3.2s arm window; reset is handled in JS. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicCloudDelete.is-armed{
+ position:relative!important;overflow:hidden!important;
+ background:var(--mb-rd-danger-soft)!important;color:var(--mb-rd-danger)!important;
+ outline:1px solid var(--mb-rd-danger)!important;outline-offset:-1px!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicCloudDelete.is-armed::after{
+ content:"";position:absolute;bottom:0;left:0;height:2px;width:100%;
+ background:var(--mb-rd-danger);transform-origin:left;
+ animation:musicDeleteArm 3.2s linear forwards;
+}
+@keyframes musicDeleteArm{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+@media(prefers-reduced-motion:reduce){
+ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicCloudDelete.is-armed::after{animation:none!important}
 }
