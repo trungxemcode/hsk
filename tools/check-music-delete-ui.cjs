@@ -1,0 +1,20 @@
+/* Smart import: source provenance, current-track context, edit/account isolation. */
+const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:http'),path=require('node:path'),assert=require('node:assert/strict'),fixture=require('./music-cloud-fixture.cjs');
+(async()=>{
+ const root=process.cwd(),server=http.createServer((q,r)=>{const f=path.resolve(root,'.'+new URL(q.url,'http://local').pathname);if(!f.startsWith(root+path.sep)||!fs.existsSync(f)||!fs.statSync(f).isFile()){r.writeHead(404);return r.end();}r.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'})[path.extname(f)]||'application/octet-stream');r.end(fs.readFileSync(f));});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
+ try{browser=await chromium.launch({headless:true,...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
+ for(const width of [390,1440]){
+  const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'}),errors=[],external=[];page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>{external.push(r.request().url());return r.abort();});await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));const tracks=await fixture(page);
+  await page.addInitScript(()=>{window.YT={Player:class{constructor(mount,opts){this.t=0;this.s=2;this.opts=opts;this.frame=document.createElement('iframe');mount.replaceWith(this.frame);window.testYT=this;setTimeout(()=>opts.events.onReady({target:this}),0);}getIframe(){return this.frame}playVideo(){this.s=1;this.opts.events.onStateChange({data:1})}pauseVideo(){this.s=2}getPlayerState(){return this.s}getCurrentTime(){return this.t}getDuration(){return 120}seekTo(t){this.t=t}destroy(){this.frame.remove()}}};});
+  let deletes=0;await page.route('https://music.example/api/admin/tracks/*/delete',r=>{assert.equal(r.request().headers().authorization,'Bearer owner');deletes++;return r.fulfill({json:{deleted:true}})});
+  await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKMusic&&window.HSKStudio);await page.evaluate(()=>{HSKAccountDashboard={user:{uid:'listener'}};HSKStudio.navigate('music-play');});await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList button').length===3);
+  await page.locator('#musicCloudList button').first().click();await page.locator('#musicMenuBtn').click();assert.equal(await page.locator('#musicCloudDelete').isVisible(),false);
+  await page.reload();await page.waitForFunction(()=>window.HSKMusic&&window.HSKStudio);await page.evaluate(()=>{HSKAccountDashboard={user:{uid:'BIvUyItDYJWcLvlhhtYFyj5csBH2',getIdToken:async()=> 'owner'}};HSKStudio.navigate('music-play');});await page.waitForFunction(()=>document.getElementById('musicCloudStatus').textContent==='3 bài hát trong kho');
+  await page.locator('#musicCloudList button').first().click();await page.locator('#musicMenuBtn').click();await page.locator('#musicCloudDelete').waitFor({state:'visible'});
+  page.once('dialog',d=>d.dismiss());await page.locator('#musicCloudDelete').click();assert.equal(deletes,0);assert.equal(await page.locator('#musicCloudList button').count(),3);
+  page.once('dialog',d=>{assert.match(d.message(),/Bài kho R2 1/);return d.accept()});await page.locator('#musicCloudDelete').click();await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList button').length===2);assert.equal(deletes,1);assert.equal(await page.locator('#musicCloudList [data-track-id="'+tracks[0].id+'"]').count(),0);
+  await page.locator('#musicMenuBtn').click();assert.equal(await page.locator('#musicCloudDelete').isVisible(),false);assert.deepEqual(errors,[]);await page.close();console.log('PASS owner delete '+width+': listener hidden, confirmation cancel, authenticated delete, list and current track cleared');
+
+ }
+ }finally{await browser?.close();await new Promise(r=>server.close(r));}
+})().catch(e=>{console.error(e);process.exitCode=1});

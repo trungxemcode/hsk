@@ -1500,6 +1500,27 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "music-admin-delete",
+      "name": "Chủ kho xóa bài nhạc với xác nhận và xác thực server",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "musicCloudDelete"
+        },
+        {
+          "kind": "contains",
+          "file": "server/music/cloud-worker.mjs",
+          "value": "MUSIC_BUCKET.delete(key)"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-delete-ui.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }

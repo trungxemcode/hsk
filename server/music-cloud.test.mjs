@@ -7,6 +7,7 @@ function setup(){
   async list(){return {objects:[...objects].map(([key,o])=>({key,...o})),truncated:false};},
   async head(key){return objects.get(key)||null;},
   async get(key,options){const o=objects.get(key);if(!o)return null;const b=options?.range?o.bytes.subarray(options.range.offset,options.range.offset+options.range.length):o.bytes;return {body:new Response(b).body};},
+  async delete(key){objects.delete(key);},
   async put(key,value,options){const bytes=new Uint8Array(value);objects.set(key,{bytes,size:bytes.length,httpEtag:'"hash"',uploaded:new Date('2026-10-25'),customMetadata:options.customMetadata});}
  }};
  const deps={fetchFn:async(_u,init)=>{const token=JSON.parse(init.body).idToken;return Response.json({users:[{localId:token==='owner'?OWNER_UID:'listener'}]});}};
@@ -32,4 +33,14 @@ test('Native audio supports full GET, HEAD, byte and suffix ranges, conditional 
  r=await t.handle(t.req(path,{headers:{'If-None-Match':'"hash"'}}));assert.equal(r.status,304);
  assert.equal((await t.handle(new Request('https://music.example/api/library',{headers:{Origin:'https://evil.example'}}))).status,403);
  assert.equal((await t.handle(t.req('/audio/../../private'))).status,404);
+});
+
+test('only owner may delete published audio; private keys and malformed IDs remain protected',async()=>{
+ const t=setup(),track=(await (await t.handle(upload(t))).json()).track;
+ const route='/api/admin/tracks/'+track.id+'/delete';
+ const remove=token=>t.handle(t.req(route,{method:'POST',headers:token?{Authorization:'Bearer '+token}:{}}));
+ assert.equal((await remove()).status,401);assert.equal((await remove('listener')).status,403);assert.equal(t.objects.size,1);
+ assert.equal((await t.handle(t.req('/api/admin/tracks/private.json/delete',{method:'POST',headers:{Authorization:'Bearer owner'}}))).status,400);assert.equal(t.objects.size,1);
+ const r=await remove('owner');assert.equal(r.status,200);assert.equal((await r.json()).deleted,true);assert.equal(t.objects.size,0);
+ assert.equal((await (await t.handle(t.req('/api/library'))).json()).tracks.length,0);assert.equal((await t.handle(t.req('/audio/'+track.id))).status,404);assert.equal((await remove('owner')).status,404);
 });
