@@ -531,7 +531,13 @@
      toggleMenu(true);
     }catch{}
    };
-   row.append(thumb,meta,moreBtn);
+   // Design: the active track has animated equalizer bars, not an extra menu
+   // button. Removing the button also removes an invisible keyboard tab stop.
+   if(isCurrent){
+    const eq=el('span',undefined,'music-eq');eq.setAttribute('aria-hidden','true');
+    eq.innerHTML='<i></i><i></i><i></i>';
+    row.append(thumb,meta,eq);
+   }else row.append(thumb,meta,moreBtn);
    row.onclick=()=>{
     $('musicLinkUrl').value=link.url;
     $('musicLinkName').value=displayTitle;
@@ -547,7 +553,14 @@
   box.replaceChildren();
   const pls=savedPlaylists();
   if(!pls.length){
-   box.append(el('p','Chưa có playlist nào. Bấm nút ⋯ ở trên để tạo playlist mới.','music-empty-note'));
+   // The supplied prototype uses an illustrated empty card with a direct CTA.
+   // The CTA delegates to the existing playlist form and persistence handlers.
+   const empty=el('div',undefined,'music-pl-empty');
+   empty.innerHTML='<svg class="ic-lg ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h11M4 12h11M4 17.5h7"/><circle cx="17.5" cy="16" r="2.6"/><path d="M20.1 16V7.2l-3.4.9"/></svg>';
+   const create=el('button','Tạo playlist','music-pl-empty-cta music-aux-btn');create.type='button';
+   create.onclick=()=>{toggleMenu(true);setMenuView('library');const form=$('musicPlaylistCreateBox');if(form){form.open=true;form.querySelector('input')?.focus();}};
+   empty.append(el('h4','Chưa có playlist nào'),el('p','Gom những bài bạn hay nghe thành một danh sách riêng.'),create);
+   box.append(empty);
    return;
   }
   for(const pl of pls){
@@ -1258,11 +1271,22 @@ window.addEventListener('hsk-account-ready',()=>{pendingImportLink='';pendingImp
   const groupLabel=el('p','KHO NHẠC HSK','music-menu-group-label music-chill-only');groupLabel.dataset.menuView='main';adminAction.before(groupLabel);adminAction.before(cloudRefresh);cloudRefresh.after(personalAction);personalAction.after(adminAction);adminAction.after(deleteAction);
   const skeleton=el('div',undefined,'music-cloud-skeleton');skeleton.id='musicCloudSkeleton';skeleton.setAttribute('aria-hidden','true');skeleton.innerHTML='<span></span><span></span>';cloudList.before(skeleton);
   function createPlaylist(){toggleMenu(true);setMenuView('library');const box=$('musicPlaylistCreateBox');if(box){box.open=true;box.querySelector('input')?.focus();}}
+  // Same always-visible header shortcut as the design reference.
+  const playlistHeading=$('musicBrowsePlaylistsSection').querySelector('h3');
+  const playlistHead=el('div',undefined,'music-section-head music-playlist-section-head');
+  const playlistNew=el('button','Tạo mới','music-pl-new music-aux-btn');
+  playlistNew.type='button';playlistNew.onclick=createPlaylist;
+  playlistHeading.before(playlistHead);playlistHead.append(playlistHeading,playlistNew);
   function decorate(){
    sheetStatus.classList.toggle('music-status-transient',Boolean(nativeLinkAudio&&!nativeLinkAudio.paused&&/^Đang (bắt đầu phát|kết nối trình phát)/.test(sheetStatus.textContent)));
    const playlistSection=$('musicBrowsePlaylistsSection');playlistSection.querySelector('h3').textContent='Playlist của bạn';
+   playlistSection.classList.toggle('state-noplaylist',!savedPlaylists().length);
    applyRecent();for(const row of recent.querySelectorAll('.music-recent-row')){if(!row.hasAttribute('role')){row.setAttribute('role','group');row.tabIndex=0;row.onkeydown=e=>{if(e.target===row&&(e.key==='Enter'||e.key===' ')){e.preventDefault();row.click();}};}if(row.classList.contains('music-track-current')&&!row.querySelector('.music-eq')){const eq=el('span',undefined,'music-eq');eq.setAttribute('aria-hidden','true');eq.innerHTML='<i></i><i></i><i></i>';row.append(eq);}}
-   const box=$('musicBrowsePlaylistList');if(!box.querySelector('.music-pl-add')){const empty=box.querySelector('.music-empty-note');if(empty){empty.classList.add('music-pl-empty');empty.textContent='Gom những bài bạn thích vào danh sách riêng.';}const add=el('button','＋ Tạo playlist mới','music-pl-add music-aux-btn');add.type='button';add.onclick=createPlaylist;box.append(add);}
+   const box=$('musicBrowsePlaylistList');
+   if(savedPlaylists().length&&!box.querySelector('.music-pl-add')){
+    const add=el('button','＋ Tạo playlist mới','music-pl-add music-aux-btn');add.type='button';add.onclick=createPlaylist;
+    box.append(add,el('p','Gom những bài bạn hay nghe thành danh sách riêng để mở lại nhanh.','music-pl-hint'));
+   }
    const n=cloudList.querySelectorAll('.music-cloud-track').length;count.textContent=n+' bài';const text=cloudStatus.textContent,loading=/Đang (kết nối|cập nhật)/.test(text),error=/Không|không|Chưa|chưa|Đang dùng danh sách/.test(text)&&!loading;count.hidden=!n||error;cloudStatus.classList.toggle('music-cloud-normal',Boolean(n&&!error&&!loading));cloudSection.classList.toggle('music-cloud-loading',loading&&!n);refresh.setAttribute('aria-busy',String(loading));
   }
   let frame=0;const schedule=()=>{if(!frame)frame=requestAnimationFrame(()=>{frame=0;if(!panel.ownerDocument.defaultView?.document||!hero.isConnected)return;decorate();sync();});};

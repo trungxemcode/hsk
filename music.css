@@ -885,3 +885,34 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-browse-
 @media(prefers-reduced-motion:reduce){html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel :is(.music-wb-pill-ind,.music-eq i){transition:none!important;animation:none!important;}}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet .music-flat-label{color:var(--mb-rd-ink-2)!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet .music-status-transient{display:none!important;}
+
+/* Exact design-reference states: playing equalizer, empty playlists and CTAs.
+   Scoped to entertainment browsing; no audio transport or service endpoints. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-track-current .music-eq{
+  display:flex!important;order:0!important;align-items:flex-end!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-track-current .music-recent-more{display:none!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-playlist-section-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-pl-new{
+  width:auto!important;min-width:0!important;min-height:32px!important;padding:4px 0 4px 10px!important;
+  border:0!important;background:transparent!important;box-shadow:none!important;
+  color:var(--mb-palette-dark-violet)!important;font-size:13px!important;font-weight:600!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicBrowsePlaylistsSection.state-noplaylist .music-pl-empty{display:flex!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-pl-empty-cta{
+  width:auto!important;min-height:40px!important;padding:8px 18px!important;
+  border:0!important;border-radius:999px!important;
+  background:var(--mb-rd-brand)!important;color:var(--mb-rd-on-hero)!important;
+  box-shadow:0 8px 24px rgba(59,47,176,.32)!important;font-weight:650!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-pl-hint{
+  margin:10px 0 0!important;text-align:center!important;font-size:12px!important;
+  line-height:1.5!important;color:var(--mb-rd-muted)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-pl-new:focus-visible,
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-pl-empty-cta:focus-visible{
+  outline:2px solid var(--mb-rd-brand-2)!important;outline-offset:3px!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel :is(.music-pl-new,.music-pl-empty-cta,.music-eq i){transition:none!important;animation:none!important}
+}
