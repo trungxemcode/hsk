@@ -160,3 +160,5 @@ Import throughput: prefer source M4A/AAC and publish M4A to avoid MP3 re-encodin
 Strict no-YouTube-UI instruction also covers study lesson playback: YouTube lesson sources resolve exact video-ID R2 audio through a native adapter, preserving text/segment controls. No YT.Player constructor or iframe API loading remains active. Missing library audio has explicit status instead of embed fallback.
 
 Artwork-only correction: derive R2 track thumbnails from existing sourceUrl video ID for cover, list, mini player, playlist and queue; use default art if source/image missing. Audio routes, playback events, media controls, importer and backend are unchanged.
+
+Music visual polish only: transparent shared header, bounded browse grid for long titles, plain empty/status text, readable queue typography and compact playlist/peek actions. Scoped CSS overrides obsolete redesign surfaces. No application JS, source resolution, audio events or import/backend changes. Surface screenshots390/1440 and playback regression checks cover this update.

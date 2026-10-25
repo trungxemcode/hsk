@@ -1560,6 +1560,11 @@
           "kind": "file",
           "file": "tools/check-music-artwork-ui.cjs",
           "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-surfaces-ui.cjs",
+          "value": ""
         }
       ]
     }
