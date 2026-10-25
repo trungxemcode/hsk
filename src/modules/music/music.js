@@ -331,7 +331,7 @@
   const sheet=$('musicMenuSheet'),backdrop=$('musicMenuBackdrop');
   sheet.setAttribute('aria-hidden',String(!menuOpen));sheet.inert=!menuOpen;
   backdrop.setAttribute('aria-hidden',String(!menuOpen));
-  setMenuView('main');
+  if(menuOpen)setMenuView('main');else resetDeleteArm();
   if(menuOpen){
    ($('musicMenuBody')||sheet).scrollTop=0;syncMenuTrackHead();syncQuickSaveBtn();
    requestAnimationFrame(()=>{if(menuOpen)$('musicMenuClose').focus({preventScroll:true});});
@@ -386,6 +386,7 @@
  }
  // Spotify-style compact action sheet: the main view lists only primary actions;
  // details (save picker, link import, library) open as dedicated sub-views.
+ let menuViewAnimation=null;
  function setMenuView(view){
   const sheet=$('musicMenuSheet');if(!sheet)return;
   if(currentMode!=='chill')view='main';
@@ -397,14 +398,13 @@
   if(view==='main'&&currentMode==='chill')$('musicLinkImport').open=false;
 
   if(view==='save'){$('musicSaveNewForm').hidden=true;drawSavePicker(true);}
-  requestAnimationFrame(()=>{
-   sheet.querySelectorAll('[data-menu-view]').forEach(node=>{
-    if((node.dataset.menuView||'').split(/\s+/).includes(view)&&node.getClientRects().length){
-     try{node.animate([{opacity:0,transform:'translateX('+(view==='main'?-14:14)+'px)'},{opacity:1,transform:'translateX(0)'}],{duration:220,easing:'cubic-bezier(.22,1,.36,1)'});}catch{}
-    }
-   });
-   if(menuOpen)(view==='main'?$('musicMenuClose'):$('musicMenuSubCancel')).focus({preventScroll:true});
-  });
+  // One compositor animation for the view, never read/write layout per row.
+  const body=$('musicMenuBody')||sheet;
+  menuViewAnimation?.cancel();menuViewAnimation=null;
+  if(menuOpen&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+   menuViewAnimation=body.animate([{opacity:0,transform:'translateX('+(view==='main'?-14:14)+'px)'},{opacity:1,transform:'translateX(0)'}],{duration:220,easing:'cubic-bezier(.22,.61,.36,1)'});
+  }
+  if(menuOpen)(view==='main'?$('musicMenuClose'):$('musicMenuSubCancel')).focus({preventScroll:true});
  }
  function toggleLyricsDrawer(force){
   drawerOpen=typeof force==='boolean'?force:!drawerOpen;
@@ -715,6 +715,8 @@
  }
  const menuSheet=$('musicMenuSheet'),menuBackdrop=$('musicMenuBackdrop');
  const sheetDrag=opening=>({
+  // A tap on a live control must not capture its pointer for sheet dragging.
+  accept(e){return Boolean(e.target.closest('.music-sheet-drag-area'))||!e.target.closest('button,a,input,select,textarea,summary');},
   start(dy){
    if(opening&&dy>=0||!opening&&(dy<=0||($('musicMenuBody')||menuSheet).scrollTop>0))return false;
    if(opening){setMenuView('main');syncMenuTrackHead();($('musicMenuBody')||menuSheet).scrollTop=0;}
@@ -1023,7 +1025,8 @@
  $('musicPreviewPlaylistAdd').after(quickPanel);
  $('musicPreviewPlaylistAdd').setAttribute('aria-controls',quickPanel.id);
  $('musicPreviewPlaylistAdd').setAttribute('aria-expanded','false');
- const quickChevron=el('span','›','music-flat-chev');
+ const quickChevron=el('span',undefined,'music-flat-chev');
+ quickChevron.innerHTML='<svg viewBox="0 0 24 24" class="ic" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>';
  quickChevron.setAttribute('aria-hidden','true');
  $('musicPreviewPlaylistAdd').append(quickChevron);
  function closeQuickMenu(){
@@ -1038,7 +1041,8 @@
   const options=el('div',undefined,'music-quick-pick-list');
   for(const playlist of lists){
    const assigned=playlist.items.some(row=>row.url===url);
-   const button=el('button',(assigned?'✓ ':'')+playlist.name,'music-quick-pick music-aux-btn');
+   const button=el('button',undefined,'music-quick-pick music-aux-btn');
+   button.innerHTML='<svg class="music-pill-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg>';button.append(document.createTextNode(playlist.name));
    button.type='button';button.setAttribute('aria-pressed',String(assigned));
    button.onclick=()=>{
     let link;try{link=C.parseLink(menuURL());}catch{return;}
@@ -1058,7 +1062,8 @@
   };
   options.append(createNew);quickPanel.append(options);
   const more=el('button',undefined,'music-quick-select-more music-aux-btn');
-  more.type='button';more.append(el('span','Chọn nhiều playlist…'),el('span','›','music-quick-more-chevron'));
+  more.type='button';more.append(el('span','Chọn nhiều playlist…'),el('span',undefined,'music-quick-more-chevron'));
+  more.lastElementChild.innerHTML=quickChevron.innerHTML;
   more.onclick=()=>setMenuView('save');quickPanel.append(more);
  }
  $('musicPreviewPlaylistAdd').onclick=()=>{
@@ -1334,6 +1339,15 @@ window.addEventListener('hsk-account-ready',()=>{pendingImportLink='';pendingImp
  function installBrowsePresentation(){
   const browse=$('musicBrowseView'),mini=$('musicMiniPlayer');if(!browse||!mini)return null;
   const sheet=$('musicMenuSheet'),subHead=$('musicMenuSubHead'),sheetStatus=$('musicStatus'),handle=sheet.querySelector('.music-sheet-drag-area'),body=el('div',undefined,'music-wb-sheet-body');body.id='musicMenuBody';
+  // Icons copied verbatim from the supplied WorkBuddy ZIP (presentation only).
+  const sourceIcons={"musicMenuShareRow": "<svg viewBox=\"0 0 24 24\" class=\"ic\"><path d=\"M12 15.5V4M8 7.5 12 3.5l4 4M5 12v6.5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V12\"/></svg>", "musicSourceLink": "<svg viewBox=\"0 0 24 24\" class=\"ic\"><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"/><path d=\"M15 3h6v6\"/><path d=\"M10 14 21 3\"/></svg>", "musicMenuLibraryRow": "<svg viewBox=\"0 0 24 24\" class=\"ic\"><path d=\"M4 4v16M9 4v16M14 4.5l6 15\"/></svg>", "musicCloudRefresh": "<svg viewBox=\"0 0 24 24\" class=\"ic\"><path d=\"M19.5 12a7.5 7.5 0 1 1-2.2-5.3\"/><path d=\"M19.8 4.5v4.2h-4.2\"/></svg>", "musicPersonalOpen": "<svg viewBox=\"0 0 24 24\" class=\"ic\"><path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\"/></svg>", "musicAdminOpen": "<svg viewBox=\"0 0 24 24\" class=\"ic\"><path d=\"M12 16V4M7.5 8.5 12 4l4.5 4.5M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15\"/></svg>", "musicCloudDelete": "<svg viewBox=\"0 0 24 24\" class=\"ic\"><path d=\"M4 7h16M9.5 7V4.5h5V7M6.5 7l1 12.5h9L17.5 7\"/><path d=\"M10 11v5M14 11v5\"/></svg>"};
+  for(const [id,svg] of Object.entries(sourceIcons)){const icon=$(id)?.querySelector('.music-flat-ico');if(icon)icon.innerHTML=svg;}
+  const sourceChevron="<svg viewBox=\"0 0 24 24\" class=\"ic\"><path d=\"M9.5 5.5 16 12l-6.5 6.5\"/></svg>";
+  for(const id of ['musicSourceLink','musicMenuLibraryRow']){
+   const row=$(id);let chev=row.querySelector('.music-flat-chev');if(!chev){chev=el('span',undefined,'music-flat-chev');chev.setAttribute('aria-hidden','true');row.append(chev);}chev.innerHTML=sourceChevron;
+  }
+  for(const id of ['musicPersonalOpen','musicAdminOpen'])$(id).querySelector('.music-flat-chev')?.remove();
+  $('musicMenuSubCancel').setAttribute('aria-label','Quay lại');
   subHead.removeAttribute('data-menu-view');
   const contents=[...sheet.children].filter(n=>![handle,subHead,sheetStatus].includes(n));body.append(...contents);sheet.append(subHead,sheetStatus,body);sheet.setAttribute('role','dialog');
   // Reference ZIP: three isolated rounded library groups with standard
