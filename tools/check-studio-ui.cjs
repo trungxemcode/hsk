@@ -183,7 +183,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
     if(width===390&&['home','learn','account','lessons'].includes(mode))await page.screenshot({path:'/tmp/studio-dark-'+mode+'.png',fullPage:true});
    }
   }
-  await page.reload();await page.waitForFunction(()=>!!window.HSKStudio&&document.body.dataset.studioHub==='home');assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');assert.equal(await page.locator('#themeToggle').getAttribute('aria-pressed'),'true');await page.locator('#themeToggle').evaluate(b=>b.click());assert.equal(await page.locator('html').getAttribute('data-theme'),'light');
+  await page.reload();await page.waitForFunction(()=>!!window.HSKLessons&&!!window.HSKStudio&&document.body.dataset.studioHub==='home');assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');assert.equal(await page.locator('#themeToggle').getAttribute('aria-pressed'),'true');await page.locator('#themeToggle').evaluate(b=>b.click());assert.equal(await page.locator('html').getAttribute('data-theme'),'light');
   // New competency practice uses real controls, stable grading and persistent writing drafts.
   await page.mouse.move(0,0);await page.evaluate(()=>window.HSKStudio.navigate('practice'));await page.evaluate(()=>window.HSKStudio.navigate('exam'));assert.equal(await page.locator('#activeTitle').innerText(),'Bài tập HSK');
   const examSelect=async(level,type)=>{await page.evaluate(()=>window.HSKExam.catalogue());await page.locator('#examLevel').selectOption(String(level));await page.locator('[data-exam-type="'+type+'"]').click();};
