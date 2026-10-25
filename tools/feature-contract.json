@@ -1565,6 +1565,11 @@
           "kind": "file",
           "file": "tools/check-music-surfaces-ui.cjs",
           "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-queue-motion-ui.cjs",
+          "value": ""
         }
       ]
     }

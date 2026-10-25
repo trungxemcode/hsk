@@ -301,8 +301,15 @@
   setMenuView('main');
   if(menuOpen){$('musicMenuSheet').scrollTop=0;syncMenuTrackHead();syncQuickSaveBtn();}
  }
+ function queueOrigin(){
+  const sheet=$('musicQueueSheet'),anchor=$('musicChillPeekToggle'),r=anchor.getBoundingClientRect();
+  const bottom=Math.max(12,innerHeight-r.bottom);sheet.style.setProperty('--queue-origin-bottom',bottom+'px');sheet.style.setProperty('--queue-origin-width',Math.min(520,r.width)+'px');sheet.style.setProperty('--queue-origin-left',(r.left+r.width/2)+'px');
+  const offset=Math.max(0,sheet.getBoundingClientRect().height-r.height);sheet.style.setProperty('--queue-collapsed-offset',offset+'px');return offset;
+ }
  function toggleQueue(force){
-  queueOpen=typeof force==='boolean'?force:!queueOpen;
+  const next=typeof force==='boolean'?force:!queueOpen;
+  if(next&&!queueOpen&&!panel.classList.contains('music-queue-dragging')){const offset=queueOrigin();$('musicQueueSheet').style.transform='translate(-50%,'+offset+'px)';void $('musicQueueSheet').offsetHeight;$('musicQueueSheet').style.removeProperty('transform');}
+  queueOpen=next;
   if(queueOpen)toggleMenu(false);
   panel.classList.toggle('music-queue-open',queueOpen);
   $('musicQueueSheet').inert=!queueOpen;
@@ -664,15 +671,15 @@
   start(dy){
    if(opening&&dy>=0||!opening&&(dy<=0||queueSheet.scrollTop>0))return false;
    drawQueue();
+   const offset=opening?queueOrigin():Math.max(0,queueSheet.getBoundingClientRect().height-peek.getBoundingClientRect().height);
    const height=queueSheet.getBoundingClientRect().height;
-   const offset=opening?Math.max(0,peek.getBoundingClientRect().top-(innerHeight-height)):height;
    panel.classList.add('music-queue-dragging');queueSheet.inert=false;
    return {height,offset,opening};
   },
-  move(dy,g){const offset=Math.max(0,Math.min(g.height,(g.opening?g.offset:0)+dy));queueSheet.style.transform='translate(-50%,'+offset+'px)';queueBackdrop.style.opacity=String(1-offset/g.height);},
+  move(dy,g){const offset=Math.max(0,Math.min(g.offset,(g.opening?g.offset:0)+dy));queueSheet.style.transform='translate(-50%,'+offset+'px)';queueBackdrop.style.opacity=String(1-offset/Math.max(1,g.offset));},
   end(dy,g,cancel,velocity){
    const open=cancel?!g.opening:g.opening?(-dy>Math.min(90,g.height*.25)||velocity<-.45):!(dy>Math.min(90,g.height*.25)||velocity>.45);
-   void queueSheet.offsetHeight;panel.classList.remove('music-queue-dragging');toggleQueue(open);
+   void queueSheet.offsetHeight;toggleQueue(open);panel.classList.remove('music-queue-dragging');
    queueSheet.style.removeProperty('transform');queueBackdrop.style.removeProperty('opacity');
   }
  });
