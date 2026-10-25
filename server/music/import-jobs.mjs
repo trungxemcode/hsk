@@ -16,9 +16,14 @@ export async function writeJob(env,j){await env.MUSIC_BUCKET.put(path(j.id),JSON
 export async function importRoute(request,env,json,fetchFn=fetch){
  const u=new URL(request.url),admin=u.pathname.startsWith('/api/admin/import'),runner=u.pathname.startsWith('/api/runner/');if(!admin&&!runner)return null;
  if(admin){const actor=await identity(request,env,fetchFn);if(!actor.admin)fail(403,'Chỉ admin được thêm nhạc vào kho.');
+  if(u.pathname==='/api/admin/imports/metadata'&&request.method==='POST'){
+   const raw=await request.text();if(raw.length>4096)fail(413,'Yêu cầu quá lớn.');let data;try{data=JSON.parse(raw)}catch{fail(400,'Yêu cầu không hợp lệ.');}const id=youtubeId(data.url),url='https://www.youtube.com/watch?v='+id;
+   const r=await fetchFn('https://www.youtube.com/oembed?format=json&url='+encodeURIComponent(url),{headers:{'User-Agent':'HSK-Music-Importer/1.0'},signal:AbortSignal.timeout(10000)});if(!r.ok)fail(502,'Chưa lấy được thông tin. Bạn vẫn có thể thêm link và nhập tên thủ công.');const meta=await r.json();
+   return json({videoId:id,url,title:String(meta.title||'').slice(0,120),channel:String(meta.author_name||'').slice(0,80),artist:'',composer:'',source:'YouTube'});
+  }
   if(u.pathname==='/api/admin/imports'&&request.method==='POST'){
    if(Number(request.headers.get('Content-Length'))>4096)fail(413,'Yêu cầu quá lớn.');const b=await request.text();if(b.length>4096)fail(413,'Yêu cầu quá lớn.');let data;try{data=JSON.parse(b)}catch{fail(400,'Yêu cầu không hợp lệ.');}const videoId=youtubeId(data.url),id=crypto.randomUUID().replace(/-/g,'');
-   const j={id,videoId,url:'https://www.youtube.com/watch?v='+videoId,title:String(data.title||'').trim().slice(0,120),artist:String(data.artist||'').trim().slice(0,80),state:'queued',createdAt:Date.now()};await writeJob(env,j);return json(j,202);
+   const j={id,videoId,url:'https://www.youtube.com/watch?v='+videoId,title:String(data.title||'').trim().slice(0,120),artist:String(data.artist||'').trim().slice(0,80),composer:String(data.composer||'').trim().slice(0,120),state:'queued',createdAt:Date.now()};await writeJob(env,j);return json(j,202);
   }
   const m=u.pathname.match(/^\/api\/admin\/imports\/([a-f0-9]{32})$/);if(m&&request.method==='GET')return json(await readJob(env,m[1]));return json({error:'Không có API này.'},404);
  }

@@ -22,3 +22,11 @@ test('admin alone can queue jobs; only signed main workflow can claim/publish',a
  const status=await (await t.handle(t.request('/api/admin/imports/'+j.id,'admin'))).json();assert.equal(status.state,'completed');assert.ok([...t.objects.keys()].some(k=>k.startsWith('audio/')));
 });
 test('reject forged signatures and unrelated URL hosts',async()=>{const t=await setup();const token=await t.jwt();const parts=token.split('.');parts[1]=enc({fake:true});await assert.rejects(runnerIdentity(t.request('/api/runner/claim',parts.join('.'),{}),t.fetchFn));for(const u of ['https://youtube.com.evil/watch?v=jNQXAC9IVRw','http://youtu.be/jNQXAC9IVRw','https://youtube.com/watch?v=bad'])assert.throws(()=>youtubeId(u));assert.equal(youtubeId('https://www.youtube.com/shorts/jNQXAC9IVRw'),'jNQXAC9IVRw');});
+test('source metadata is owner-only and never treats channel as artist/composer',async()=>{
+ const t=await setup();let sourceCalls=0;
+ const fetchFn=async(url,init)=>{if(url.startsWith('https://www.youtube.com/oembed?')){sourceCalls++;assert.ok(url.includes(encodeURIComponent('https://www.youtube.com/watch?v=jNQXAC9IVRw')));return Response.json({title:'游山恋 - 海伦',author_name:'A fan channel'});}return t.fetchFn(url,init);};
+ const handle=r=>handleCloudMusic(r,t.env,{}, {fetchFn});const body={url:'https://youtu.be/jNQXAC9IVRw'};
+ assert.equal((await handle(t.request('/api/admin/imports/metadata','listener',body))).status,403);assert.equal(sourceCalls,0);
+ const r=await handle(t.request('/api/admin/imports/metadata','admin',body));assert.equal(r.status,200);const d=await r.json();assert.equal(d.title,'游山恋 - 海伦');assert.equal(d.channel,'A fan channel');assert.equal(d.artist,'');assert.equal(d.composer,'');
+ assert.equal((await handle(t.request('/api/admin/imports/metadata','admin',{url:'https://evil.example/file'}))).status,400);assert.equal(sourceCalls,1);
+});

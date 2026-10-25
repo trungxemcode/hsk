@@ -1493,6 +1493,11 @@
           "kind": "file",
           "file": "tools/check-music-menu-ui.cjs",
           "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-smart-ui.cjs",
+          "value": ""
         }
       ]
     }

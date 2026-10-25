@@ -40,7 +40,7 @@ if __name__=='__main__':
     audio=(folder/'audio.mp3').read_bytes()
     if not 0<len(audio)<=50*1024*1024:raise ValueError('Invalid audio size')
     meta=json.loads((folder/'audio.info.json').read_text());from urllib.parse import quote
-    data=api(root+'/upload',audio,{'Content-Type':'audio/mpeg','X-Music-Title':quote(job['title'] or str(meta.get('title') or 'YouTube audio')[:120],safe=''),'X-Music-Artist':quote(job['artist'] or str(meta.get('uploader') or 'HSK Music')[:80],safe='')})
+    data=api(root+'/upload',audio,{'Content-Type':'audio/mpeg','X-Music-Title':quote(job['title'] or str(meta.get('track') or meta.get('title') or 'YouTube audio')[:120],safe=''),'X-Music-Composer':quote(job.get('composer') or str(meta.get('composer') or '')[:120],safe=''),'X-Music-Artist':quote(job['artist'] or str(meta.get('artist') or meta.get('uploader') or 'HSK Music')[:80],safe='')})
     print('Import completed; audio published to R2')
   except Exception:
    api(root+'/fail');raise SystemExit('Import failed. Source may require fresh cookies; inspect admin job status.')

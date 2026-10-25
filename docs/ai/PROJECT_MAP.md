@@ -146,3 +146,5 @@ Entertainment music now uses `music-config.json.cloudEndpoint` → `server/music
 
 ### Compact music menu (3.18.2)
 `music.js` moves personal YouTube and owner import controls into dedicated `personal`/`admin` sheet views. Admin has keyboard-operable YouTube/File tabs; optional metadata stays collapsed. Existing form IDs, upload/import handlers and owner checks remain. `music.css` scopes readable dark-sheet labels/buttons and16px inputs; source/share/save hide when no track is active. Chill refresh no longer leaves a stale loading status. `check-music-menu-ui.cjs` verifies views, tabs, labels, optional fields and inline errors; existing import/background tests navigate the new views.
+
+Smart music imports (3.18.2): owner import prefills the current YouTube URL. Debounced owner-only oEmbed lookup provides title/channel; existing lesson AI extracts only credits evidenced in the title, never treating channel as performer. Manual edits survive late responses; account changes abort/reset lookup. Composer persists through runner/R2 catalogue. Lookup failure remains nonblocking. Smart UI and metadata authorization tests cover these paths.

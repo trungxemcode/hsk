@@ -14,13 +14,13 @@ function setup(){
  return {objects,env,deps,req,handle:(r)=>handleCloudMusic(r,env,{},deps)};
 }
 const mp3=new Uint8Array([73,68,51,0,0,0,1,2,3,4]);
-function upload(t,token='owner',body=mp3){return t.req('/api/admin/upload',{method:'POST',body,headers:{Authorization:'Bearer '+token,'Content-Length':String(body.length),'X-Music-Title':encodeURIComponent('月亮'),'X-Music-Artist':encodeURIComponent('Ca sĩ')}});}
+function upload(t,token='owner',body=mp3){return t.req('/api/admin/upload',{method:'POST',body,headers:{Authorization:'Bearer '+token,'Content-Length':String(body.length),'X-Music-Title':encodeURIComponent('月亮'),'X-Music-Artist':encodeURIComponent('Ca sĩ'),'X-Music-Composer':encodeURIComponent('Tác giả')}});}
 test('R2 upload is owner-only; published library accepts valid audio and deduplicates by hash',async()=>{
  const t=setup();assert.equal((await t.handle(t.req('/api/admin/upload',{method:'POST'}))).status,401);assert.equal((await t.handle(upload(t,'listener'))).status,403);
  assert.equal((await t.handle(upload(t,'owner',new Uint8Array([1,2,3])))).status,400);
  const r=await t.handle(upload(t));assert.equal(r.status,200);const data=await r.json();assert.match(data.track.id,/^[a-f0-9]{64}\.mp3$/);
  await t.handle(upload(t));assert.equal(t.objects.size,1);
- const library=await (await t.handle(t.req('/api/library'))).json();assert.equal(library.tracks[0].title,'月亮');assert.equal(library.tracks[0].artist,'Ca sĩ');
+ const library=await (await t.handle(t.req('/api/library'))).json();assert.equal(library.tracks[0].title,'月亮');assert.equal(library.tracks[0].artist,'Ca sĩ');assert.equal(library.tracks[0].composer,'Tác giả');
  t.objects.set('private/secret.mp3',{size:1,customMetadata:{published:'true'}});const filtered=await (await t.handle(t.req('/api/library'))).json();assert.equal(filtered.tracks.length,1);
 });
 test('Native audio supports full GET, HEAD, byte and suffix ranges, conditional requests and CORS',async()=>{
