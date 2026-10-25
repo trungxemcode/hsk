@@ -105,17 +105,61 @@
           "file": "tools/check-search-tabs-ui.cjs",
           "value": ""
         },
-        {"kind":"contains","file":"index.html","value":"data-search-tool=\"vocabulary\""},
-        {"kind":"contains","file":"index.html","value":"data-search-tool=\"handwriting\""},
-        {"kind":"contains","file":"index.html","value":"data-search-tool=\"translate\""},
-        {"kind":"contains","file":"index.html","value":"data-search-tool=\"image\""},
-        {"kind":"contains","file":"src/modules/shell/mobile-ux.js","value":"handwritingOptions"},
-        {"kind":"contains","file":"src/utils/text.js","value":"const fold ="},
-        {"kind":"contains","file":"src/utils/format.js","value":"function memoryDate("},
-        {"kind":"contains","file":"src/modules/dictionary/search-core.js","value":"function splitSenses("},
-        {"kind":"contains","file":"src/ui/dictionary-relations.js","value":"function allPairExplanation("},
-        {"kind":"file","file":"server/app-helpers.test.mjs","value":""},
-        {"kind":"file","file":"tools/check-module-loading-ui.cjs","value":""}
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "data-search-tool=\"vocabulary\""
+        },
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "data-search-tool=\"handwriting\""
+        },
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "data-search-tool=\"translate\""
+        },
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "data-search-tool=\"image\""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/shell/mobile-ux.js",
+          "value": "handwritingOptions"
+        },
+        {
+          "kind": "contains",
+          "file": "src/utils/text.js",
+          "value": "const fold ="
+        },
+        {
+          "kind": "contains",
+          "file": "src/utils/format.js",
+          "value": "function memoryDate("
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/dictionary/search-core.js",
+          "value": "function splitSenses("
+        },
+        {
+          "kind": "contains",
+          "file": "src/ui/dictionary-relations.js",
+          "value": "function allPairExplanation("
+        },
+        {
+          "kind": "file",
+          "file": "server/app-helpers.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-module-loading-ui.cjs",
+          "value": ""
+        }
       ]
     },
     {
@@ -1036,13 +1080,41 @@
       "id": "gemini-voice-precache",
       "name": "Kho audio Kore xác thực Google và bảo vệ dữ liệu âm thanh",
       "checks": [
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"createVoicePrecacheHandler"},
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"decodeVoiceAudio"},
-        {"kind":"contains","file":"server/voice-tts.mjs","value":"tts_generation_incomplete"},
-        {"kind":"contains","file":"tools/voice-cache-apps-script/WarmBatch.gs","value":"HSK_WARM_RETRY_AT"},
-        {"kind":"file","file":"server/voice-apps-script.test.mjs","value":""},
-        {"kind":"file","file":"server/voice-bundle.test.mjs","value":""},
-        {"kind":"file","file":"server/voice-tts.test.mjs","value":""}
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "createVoicePrecacheHandler"
+        },
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "decodeVoiceAudio"
+        },
+        {
+          "kind": "contains",
+          "file": "server/voice-tts.mjs",
+          "value": "tts_generation_incomplete"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/voice-cache-apps-script/WarmBatch.gs",
+          "value": "HSK_WARM_RETRY_AT"
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-apps-script.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-bundle.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/voice-tts.test.mjs",
+          "value": ""
+        }
       ]
     },
     {
@@ -1105,52 +1177,92 @@
           "file": "tools/check-account-roles-ui.cjs",
           "value": ""
         },
-        {"kind":"file","file":"server/image-quota.test.mjs","value":""},
-        {"kind":"contains","file":"server/ai-control.mjs","value":"user-image-daily"}
+        {
+          "kind": "file",
+          "file": "server/image-quota.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/ai-control.mjs",
+          "value": "user-image-daily"
+        }
       ]
     },
     {
       "id": "music-listening",
       "name": "Nghe nhạc theo câu và phân loại tỷ lệ HSK",
       "checks": [
-        {"kind":"contains","file":"src/modules/practice/practice-selector.js","value":"['music'"},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"window.HSKMusic="},
-        {"kind":"contains","file":"src/modules/music/music-core.js","value":"hsk-music-history-v1"},
-        {"kind":"file","file":"server/music.test.mjs","value":""},
-        {"kind":"file","file":"tools/check-music-ui.cjs","value":""},
-        {"kind":"file","file":"server/music/worker.mjs","value":""},
-        {"kind":"contains","file":"src/modules/music/music-core.js","value":"function parseLink(input)"},
-        {"kind":"file","file":"src/modules/music/music-soundcloud.js","value":""},
-        {"kind":"file","file":"tools/check-music-links-ui.cjs","value":""},
-        {"kind":"data_go","file":"index.html","value":"music"},
-        {"kind":"data_go","file":"index.html","value":"music-play"},
-        {"kind":"file","file":"tools/check-music-mobile-nav-ui.cjs","value":""},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"id=\"musicQueueSheet\""},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"function playbackList()"}
-      ]
-    },
-    {
-      "id": "music-offline",
-      "name": "Nhạc ngoại tuyến trên thiết bị, giới hạn dung lượng và phân tách tài khoản",
-      "checks": [
-        {"kind":"file","file":"src/modules/music/music-offline.js","value":""},
-        {"kind":"contains","file":"src/modules/music/music-offline.js","value":"hsk-music-offline-v1"},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"id=\"musicMenuOfflineRow\""},
-        {"kind":"contains","file":"loader.js","value":"./src/modules/music/music-offline.js"},
-        {"kind":"file","file":"tools/check-music-offline.cjs","value":""},
-        {"kind":"file","file":"tools/check-music-offline-ui.cjs","value":""},
-        {"kind":"file","file":"tools/prepare-offline-music.py","value":""},
-        {"kind":"file","file":"src/modules/music/music-converter.js","value":""},
-        {"kind":"file","file":"src/modules/music/music-codec-worker.js","value":""},
-        {"kind":"contains","file":"src/modules/music/music-codec-worker.js","value":"aac_he_v2"},
-        {"kind":"file","file":"tools/check-music-codec.cjs","value":""},
-        {"kind":"file","file":"src/modules/music/music-direct-source.js","value":""},
-        {"kind":"file","file":"tools/check-music-direct-source.cjs","value":""},
-        {"kind":"contains","file":"src/modules/music/music-direct-source.js","value":"Offline bytes must belong to the submitted source."},
-        {"kind":"file","file":"server/music/source_resolver.py","value":""},
-        {"kind":"file","file":"tools/check-music-source-resolver.py","value":""},
-        {"kind":"contains","file":"server/music/source_resolver.py","value":"def downloader_command("},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"id=\"musicOfflineQuality\""}
+        {
+          "kind": "contains",
+          "file": "src/modules/practice/practice-selector.js",
+          "value": "['music'"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "window.HSKMusic="
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music-core.js",
+          "value": "hsk-music-history-v1"
+        },
+        {
+          "kind": "file",
+          "file": "server/music.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/music/worker.mjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music-core.js",
+          "value": "function parseLink(input)"
+        },
+        {
+          "kind": "file",
+          "file": "src/modules/music/music-soundcloud.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-links-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "music"
+        },
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "music-play"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-mobile-nav-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "id=\"musicQueueSheet\""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "function playbackList()"
+        }
       ]
     },
     {
@@ -1224,36 +1336,97 @@
       "id": "owner-redesign",
       "name": "Giao diện mới và điều hướng lộ trình",
       "checks": [
-        {"kind":"file","file":"redesign.css","value":""},
-        {"kind":"file","file":"redesign.js","value":""},
-        {"kind":"contains","file":"index.html","value":"./redesign.css"},
-        {"kind":"contains","file":"index.html","value":"./redesign.js"},
-        {"kind":"file","file":"tools/check-redesign-ui.cjs","value":""},
-        {"kind":"file","file":"vendor/fonts/Inter-OFL.txt","value":""}
+        {
+          "kind": "file",
+          "file": "redesign.css",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "redesign.js",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "./redesign.css"
+        },
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "./redesign.js"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-redesign-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "vendor/fonts/Inter-OFL.txt",
+          "value": ""
+        }
       ]
     },
     {
       "id": "music-background-playback",
-      "name": "Nghe nhạc ngoại tuyến dưới nền và điều khiển hệ thống",
+      "name": "Phát audio R2 trực tuyến, dưới nền và điều khiển hệ thống",
       "checks": [
-        {"kind":"contains","file":"src/modules/music/music.js","value":"musicBackgroundPlayer"},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"function canPlayBackground()"},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"function linkTimeline("},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"function startYouTubeKeepAlive("},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"class BackgroundPlaybackGuard"},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"guard.userPause();else guard.userPlay();"},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"function resumeHiddenYouTube("},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"function finishLinkTrack("},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"function mountOnlineYouTube("},
-        {"kind":"file","file":"server/music/online_resolver.py","value":""},
-        {"kind":"file","file":"tools/check-music-aws-ui.cjs","value":""},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"musicDeviceSave"},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"linkYt.officialYouTube=true"},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"navigator.audioSession.type='playback'"},
-        {"kind":"file","file":"tools/check-music-background-ui.cjs","value":""},
-        {"kind":"contains","file":"src/modules/music/music.js","value":"musicMenuBackgroundRow"},
-        {"kind":"file","file":"tools/check-music-online-ui.cjs","value":""},
-        {"kind":"contains","file":"src/modules/music/music-direct-source.js","value":"async function stream("}
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "musicBackgroundPlayer"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "function canPlayBackground()"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "function linkTimeline("
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "function mountCloudAudio("
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "navigator.audioSession.type='playback'"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "musicCloudUploadForm"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "musicCloudSection"
+        },
+        {
+          "kind": "file",
+          "file": "server/music/cloud-worker.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-background-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-online-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/music-cloud.test.mjs",
+          "value": ""
+        }
       ]
     },
     {
@@ -1279,37 +1452,6 @@
           "kind": "contains",
           "file": "src/modules/speech/voice-store.js",
           "value": "async function usage()"
-        }
-      ]
-    },
-    {
-      "id": "music-official-online",
-      "name": "Nguồn phát online chính thức và SponsorBlock",
-      "checks": [
-        {
-          "kind": "file",
-          "file": "src/modules/music/music-sponsor.js",
-          "value": ""
-        },
-        {
-          "kind": "contains",
-          "file": "src/modules/music/music.js",
-          "value": "musicSponsorToggle"
-        },
-        {
-          "kind": "contains",
-          "file": "src/modules/music/music-soundcloud.js",
-          "value": "officialWidget:true"
-        },
-        {
-          "kind": "contains",
-          "file": "loader.js",
-          "value": "./src/modules/music/music-sponsor.js"
-        },
-        {
-          "kind": "file",
-          "file": "tools/check-music-sponsor.cjs",
-          "value": ""
         }
       ]
     }

@@ -4278,7 +4278,6 @@ html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[d
 html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[data-music-mode="chill"] #musicLinkScrubRow{grid-row:3;margin:0!important;}
 html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[data-music-mode="chill"] #musicLinkControls{grid-row:4;min-height:64px!important;margin:0!important;}
 html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[data-music-mode="chill"] #musicLinkPlayer{grid-row:1;max-height:100%;min-height:0!important;align-self:center;}
-html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[data-music-mode="chill"] .music-sponsor-notice{grid-row:5;margin:0!important;}
 html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[data-music-mode="chill"] #musicBottomDock{position:static!important;grid-row:3;inset:auto!important;width:min(100%,440px)!important;height:112px!important;min-height:112px!important;max-height:112px!important;margin:0 auto!important;padding:0!important;overflow:hidden!important;overflow:clip!important;}
 @media(max-height:500px) and (orientation:landscape){
 html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[data-music-mode="chill"] .music-np{grid-template-rows:44px minmax(0,1fr) 52px!important;gap:4px!important;}

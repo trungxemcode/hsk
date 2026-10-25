@@ -13,11 +13,11 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.route('**/handwriting-neural-config.json',route=>route.fulfill({json:{assets:{runtime:{url:'https://cdn.jsdelivr.net/npm/hsk-migration-fixture.js',sha256,bytes:resource.length,type:'text/javascript'}}}}));
    await page.route('https://cdn.jsdelivr.net/npm/hsk-migration-fixture.js',route=>route.fulfill({status:200,headers:{'Access-Control-Allow-Origin':'*','Content-Type':'text/javascript'},body:resource}));
    await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
-   await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusicOffline&&window.HSKVoiceManager);
+   await page.waitForFunction(()=>window.HSKStudio&&window.HSKLegacyMusicCleanup&&window.HSKVoiceManager);await require('./legacy-music-fixture.cjs')(page);
    await page.evaluate(async bytes=>{
     localStorage.setItem('hsk-account-meta-v1',JSON.stringify({uid:'migration-owner'}));window.HSKAccountDashboard={user:{uid:'migration-owner'}};localStorage.setItem('hsk-user-progress-test','untouched');
     const music=new File([new Uint8Array(bytes)],'owner.m4a',{type:'audio/mp4'});
-    await HSKMusicOffline.put('migration-owner',{},music);
+    await HSKLegacyMusicCleanup.put('migration-owner',{},music);
     const voice=HSKVoiceStore.createStore(indexedDB),v=await voice.snapshot();
     await voice.replace(v.revision,{source:'pack',voiceId:'zm_yunjian',assets:['fixture'],files:[['model','fixture']]},new Map([['fixture',new Blob([new Uint8Array(1024)])]]));
     for(const cacheName of ['hsk-open-dictionary-cedict-v1','hsk-writing-data-2','hsk-handwriting-neural-ppocrv5-ort122-v1','hsk-offline-sentinel','unrelated-cache']){
@@ -35,7 +35,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.waitForFunction(()=>document.querySelector('#storageTransferStatus').textContent.includes('Đã dọn xong'));
    const before=await page.evaluate(async()=>({
     voice:(await HSKVoiceManager.downloaded()).bytes,
-    music:(await HSKMusicOffline.list('migration-owner')).length,
+    music:(await HSKLegacyMusicCleanup.list('migration-owner')).length,
     progress:localStorage.getItem('hsk-user-progress-test'),
     core:!!(await (await caches.open('hsk-offline-sentinel')).match('/hsk-offline-sentinel')),
     other:!!(await (await caches.open('unrelated-cache')).match('/unrelated-cache')),
@@ -52,7 +52,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    const after=await page.evaluate(async()=>({
     calls:window.__voiceInstallCalls,
     neural:(await (await caches.open('hsk-handwriting-neural-ppocrv5-ort122-v1')).keys()).length,
-    music:(await HSKMusicOffline.list('migration-owner')).length,
+    music:(await HSKLegacyMusicCleanup.list('migration-owner')).length,
     progress:localStorage.getItem('hsk-user-progress-test')
    }));
    assert.equal(after.calls,1);assert.equal(after.neural,1);assert.equal(after.music,1);assert.equal(after.progress,'untouched');

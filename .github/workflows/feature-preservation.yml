@@ -55,22 +55,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Original audio resolver contract
-        run: |
-          pip install -r server/music/source-requirements.txt httpx
-          python tools/check-music-source-resolver.py
       - name: Protected core behavior, data and server tests
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: |
           node --test server/*.test.mjs
-          node tools/check-music-sponsor.cjs
-          node tools/check-music-offline.cjs
-          node tools/check-music-coccoc.cjs
           node tools/check-music-local-files-only.cjs
-          node tools/check-music-codec.cjs
-          node tools/check-music-direct-source.cjs
-          node tools/check-invidious-discovery.cjs
           node tools/check-voice-demo-offline-range.cjs
           node tools/check-yunjian-only.cjs
           node tools/check-yunjian-model-transport.cjs
@@ -101,9 +91,7 @@ jobs:
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-feature-runtime.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-storage-cleanup-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-storage-migration-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-offline-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-online-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-coccoc-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-ios-layout.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-module-loading-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-drive-images-ui.cjs
