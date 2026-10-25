@@ -1,6 +1,50 @@
 /* Shared design tokens. New components use semantic tokens below.
    Legacy palette entries preserve existing feature-specific shades during migration. */
 :root{
+/* WorkBuddy music presentation palette; independent of app theme. */
+
+  --mb-rd-canvas:#0f0f18; --mb-rd-canvas-2:#13131f;
+  --mb-rd-surface:#181826; --mb-rd-surface-soft:#1d1d2e;
+  --mb-rd-ink:#ededf7; --mb-rd-ink-2:#c9c9de; --mb-rd-muted:#9c9cb8; --mb-rd-faint:#7a7a96;
+  --mb-rd-line:#2a2a3f; --mb-rd-line-soft:#232338;
+  --mb-rd-brand:#5b4be8; --mb-rd-brand-2:#7c6bff; --mb-rd-brand-deep:#3b2fb0;
+  --mb-rd-brand-soft:#241f45; --mb-rd-brand-tint:#1c1930;
+  --mb-palette-dark-violet:#9e92ff;
+  --mb-rd-hero-grad:linear-gradient(158deg,#2a2350 0%,#241f45 38%,#1c1930 70%,#13131f 100%);
+  --mb-rd-hero-glow:radial-gradient(120% 90% at 12% 0%,rgba(124,107,255,.26) 0%,rgba(124,107,255,0) 62%);
+  --mb-rd-on-hero:#ffffff; --mb-rd-on-hero-2:rgba(237,237,247,.80); --mb-rd-on-hero-3:rgba(237,237,247,.62);
+  --mb-rd-glass:rgba(19,19,31,.74); --mb-rd-glass-solid:#13131f; --mb-rd-glass-line:rgba(237,237,247,.09);
+  --mb-rd-track:rgba(237,237,247,.16);
+  --mb-rd-track-fill:linear-gradient(90deg,#5b4be8 0%,#7c6bff 55%,#9e92ff 100%);
+  --mb-rd-playing:#9e92ff; --mb-rd-playing-bg:rgba(124,107,255,.10); --mb-rd-playing-line:rgba(124,107,255,.34);
+  --mb-rd-skeleton:#232338; --mb-rd-skeleton-sheen:rgba(237,237,247,.07);
+  --mb-rd-scrim:rgba(15,15,24,.86);
+  --mb-rd-shadow-hero:0 18px 44px -22px rgba(59,47,176,.55),0 2px 6px rgba(0,0,0,.34);
+  --mb-rd-shadow-lg:0 28px 64px -32px rgba(0,0,0,.8);
+  --mb-rd-ring:0 0 0 3px rgba(124,107,255,.25);
+  --mb-radius-8px:8px; --mb-radius-btn:12px; --mb-radius-card:24px; --mb-radius-pill:999px;
+  --mb-radius-cover:16px; --mb-radius-row:14px;
+  --mb-sp-1:4px;--mb-sp-2:8px;--mb-sp-3:12px;--mb-sp-4:16px;--mb-sp-5:20px;--mb-sp-6:24px;--mb-sp-7:28px;--mb-sp-8:32px;
+  --mb-gutter:20px;
+  --mb-font-ui:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Noto Sans",Arial,sans-serif;
+  --mb-safe-top:0px; --mb-safe-bottom:0px;
+  --mb-h-header:56px; --mb-h-pills:44px; --mb-h-mini:64px;
+
+  --mb-row-pad:clamp(8px,.8vw,12px);
+  --mb-row-h:calc(44px + var(--mb-row-pad) * 2);
+
+  --mb-h-sticky:106px;
+  --mb-ease-out:cubic-bezier(.22,.61,.36,1);
+  --mb-ease-in-out:cubic-bezier(.4,0,.2,1);
+  --mb-ease-spring:cubic-bezier(.34,1.32,.5,1);
+  --mb-dur-fast:120ms; --mb-dur-base:200ms; --mb-dur-slow:320ms; --mb-dur-morph:420ms; --mb-stagger:36ms;
+
+  --mb-rd-sheet-bg:var(--mb-rd-surface);
+  --mb-rd-danger:#dd6b76;
+  --mb-rd-danger-soft:rgba(221,107,118,.10);
+  --mb-dur-view:220ms;
+  --mb-sheet-pad:12px;
+
   color-scheme:light;
   --shell:520px;--safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px);
   --palette-clear:transparent;
@@ -1138,7 +1182,7 @@ html[data-theme="dark"]{
       color: var(--legacy-hex-555555);
       margin-top: 4px;
     }
-  
+
     body { padding: 24px 12px 36px; }
     h1 { font-size: clamp(22px,4vw,30px); }
     [hidden] { display: none !important; }
@@ -1233,7 +1277,7 @@ html[data-theme="dark"]{
     .example { width:min(340px,100%); box-sizing:border-box; overflow-wrap:anywhere; }
     @media(max-width:500px) { .panel-box { padding:16px; } .result-grid,.answers { grid-template-columns:1fr; } .ratings { grid-template-columns:repeat(2,1fr); } .filter-buttons { max-width:100%; } }
 
-  
+
 .relation-pair-guides{display:grid;gap:10px;margin-top:12px}.relation-pair{border:1px solid var(--legacy-hex-d7e3ee);border-radius:var(--radius-btn);padding:12px;background:var(--legacy-hex-f8fafc);color:var(--legacy-hex-162b42)}.relation-pair h5{font-size:16px;margin:0 0 6px}.relation-pair-guide>h6{margin:8px 0;font-size:14px;font-weight:600;color:var(--legacy-hex-285b91);line-height:1.5}.relation-pair-guide p{line-height:1.65;overflow-wrap:anywhere}.relation-pair-example{padding:10px;margin:8px 0;background:var(--palette-white);border-radius:var(--radius-8px)}.relation-pair-example>span,.relation-pair-example>strong{display:block;margin:5px 0}.relation-pair-guide small{display:block;line-height:1.6}
 
 .memory-reminder{margin:12px auto;padding:14px;border:1px solid var(--legacy-hex-b6d4ef);border-radius:var(--radius-btn);background:var(--legacy-hex-eff6ff);color:var(--legacy-hex-173b60);max-width:1100px;line-height:1.6}.memory-options{display:grid;gap:10px;margin:12px 0}.memory-options label{display:flex;align-items:center;gap:10px;min-height:44px}.memory-options input{width:22px;height:22px;flex-shrink:0}.memory-schedule{margin:12px 0;padding:12px;border:1px solid var(--legacy-hex-d7e3ee);border-radius:var(--radius-10px)}.memory-schedule summary{min-height:44px;cursor:pointer}.memory-sentence{font-size:24px;line-height:1.8;overflow-wrap:anywhere}#memoryRecall{box-sizing:border-box;max-width:100%;width:100%;min-height:48px;padding:10px;font-size:18px}.memory-context-answer{padding:12px;margin-top:12px;background:var(--legacy-hex-eff6ff);color:var(--legacy-hex-173b60);border-radius:var(--radius-10px)}#memoryUpcoming p{overflow-wrap:anywhere}#memoryLearnCurrent{min-height:48px;margin:12px 0}
