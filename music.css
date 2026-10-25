@@ -839,3 +839,5 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-recent
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero[hidden]{display:none!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-cover{object-fit:cover!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-play :is(svg,path,rect){color:var(--palette-white)!important;fill:var(--palette-white)!important;}
+/* Ported display rules must never reveal role-gated or collapsed controls. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel :is(#musicMenuSheet,#musicBrowseView) [hidden]{display:none!important;}
