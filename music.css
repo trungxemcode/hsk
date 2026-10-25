@@ -976,3 +976,162 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicCloudDe
 @media(prefers-reduced-motion:reduce){
  html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicCloudDelete.is-armed::after{animation:none!important}
 }
+
+/* Reference ZIP fidelity — only the nested music sheet; the browse page is unchanged. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] #musicMenuBody{
+ padding:10px 12px 20px!important;display:flex!important;flex-direction:column!important;gap:12px!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] details.music-flat-details[data-menu-view~="library"]{
+ display:block!important;margin:0!important;padding:0!important;
+ background:var(--mb-rd-canvas)!important;border:0!important;
+ border-radius:var(--mb-radius-row)!important;overflow:hidden!important;
+ box-shadow:none!important;flex:none!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] details.music-flat-details>summary{
+ display:flex!important;align-items:center!important;gap:12px!important;
+ width:100%!important;min-height:48px!important;padding:8px 12px!important;
+ margin:0!important;background:var(--palette-transparent)!important;
+ border:0!important;border-radius:var(--mb-radius-row)!important;
+ color:var(--mb-rd-ink-2)!important;font-size:13px!important;
+ font-weight:650!important;line-height:1.4!important;cursor:pointer!important;list-style:none!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] details.music-flat-details>summary::-webkit-details-marker{display:none!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] .music-flat-ico{
+ width:20px!important;height:20px!important;min-width:20px!important;display:grid!important;place-items:center!important;
+ color:var(--mb-rd-muted)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] .music-flat-ico svg{
+ width:20px!important;height:20px!important;display:block!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] .music-library-chevron{
+ width:18px!important;height:18px!important;flex:none!important;margin-left:auto!important;
+ display:grid!important;place-items:center!important;color:var(--mb-rd-muted)!important;
+ transition:transform var(--mb-dur-base) var(--mb-ease-out)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] details[open]>summary .music-library-chevron{transform:rotate(90deg)!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistList{
+ display:grid!important;gap:0!important;padding:0 10px 12px 40px!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistList .music-playlist-card{
+ background:var(--palette-transparent)!important;border:0!important;border-radius:var(--radius-none)!important;margin:0!important;padding:0!important;gap:0!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistList button.music-playlist-head{
+ display:flex!important;width:100%!important;min-height:54px!important;align-items:center!important;
+ padding:8px 8px!important;gap:8px!important;text-align:left!important;border:0!important;
+ border-radius:var(--mb-radius-8px)!important;background:var(--palette-transparent)!important;
+ box-shadow:none!important;cursor:pointer!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistList .music-playlist-meta{
+ display:grid!important;gap:2px!important;min-width:0!important;flex:1!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistList .music-playlist-meta strong{
+ font-size:13.5px!important;font-weight:650!important;line-height:18px!important;color:var(--mb-rd-ink)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistList .music-playlist-meta small{
+ font-size:12px!important;line-height:16px!important;color:var(--mb-rd-muted)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistList .music-playlist-actions{
+ display:flex!important;align-items:center!important;justify-content:flex-end!important;margin-left:auto!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistList .music-playlist-chevron{
+ width:18px!important;height:18px!important;color:var(--mb-rd-muted)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistList .music-playlist-tracks{
+ margin:0!important;padding:8px 4px 10px!important;border:0!important;border-top:1px solid var(--mb-rd-line-soft)!important;
+ background:var(--palette-transparent)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistList .music-playlist-tools{
+ display:flex!important;flex-wrap:wrap!important;gap:8px!important;margin:0 4px 10px!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistList .music-playlist-tools button.music-playlist-ghost-btn{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ width:auto!important;min-width:0!important;min-height:32px!important;height:auto!important;
+ padding:6px 12px!important;border:1px solid var(--mb-rd-line)!important;
+ border-radius:var(--mb-radius-pill)!important;background:var(--mb-rd-surface-soft)!important;
+ color:var(--mb-rd-ink-2)!important;font-size:12px!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistsBox .music-empty-note{
+ margin:0!important;padding:12px 14px 18px 42px!important;line-height:1.5!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPlaylistCreateBox .music-flat-expand-body,
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicSavedLinksBox .music-flat-expand-body{
+ padding:8px 12px 14px!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicPreviewPlaylistAdd[aria-expanded="true"]{
+ background:var(--mb-rd-surface-soft)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet .music-menu-quick-panel{
+ padding:0 10px 10px 42px!important;border:0!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet .music-quick-caption{
+ margin:4px 0 4px!important;padding:0!important;font-size:11px!important;font-weight:700!important;
+ line-height:14px!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet .music-quick-pick-list{
+ display:flex!important;flex-wrap:wrap!important;gap:6px!important;padding:0!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet button.music-quick-pick{
+ display:inline-flex!important;align-items:center!important;flex:none!important;
+ min-height:32px!important;height:32px!important;max-width:100%!important;
+ padding:0 12px!important;border-radius:var(--mb-radius-pill)!important;
+ border:1px solid var(--mb-rd-line)!important;background:var(--mb-rd-surface-soft)!important;
+ color:var(--mb-rd-ink-2)!important;font-size:12.5px!important;font-weight:600!important;line-height:1!important;
+ white-space:nowrap!important;transition:border-color var(--mb-dur-fast) var(--mb-ease-out)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet button.music-quick-pick[aria-pressed="true"]{
+ border-color:var(--mb-rd-brand-2)!important;color:var(--mb-rd-ink)!important;
+ background:var(--mb-rd-brand-tint)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet button.music-quick-pick-new{
+ color:var(--mb-rd-muted)!important;background:var(--mb-rd-surface-soft)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet button.music-quick-select-more{
+ margin-top:8px!important;padding:6px 0!important;min-height:36px!important;
+ width:100%!important;display:flex!important;align-items:center!important;justify-content:space-between!important;
+ color:var(--mb-rd-muted)!important;background:var(--palette-transparent)!important;border:0!important;
+ font-size:13px!important;font-weight:500!important;text-align:left!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-quick-more-chevron{
+ font-size:24px!important;line-height:1!important;flex:none!important;color:var(--mb-rd-muted)!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel :is(.music-library-chevron,.music-quick-pick){transition:none!important}
+}
+
+/* Keep the reference's centered title and single-arrow back control. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] #musicMenuSubHead{
+ position:relative!important;min-height:56px!important;
+ padding:0 12px!important;align-items:center!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] #musicMenuSubCancel{
+ width:38px!important;min-width:38px!important;height:38px!important;min-height:38px!important;
+ padding:0!important;font-size:0!important;text-align:center!important;display:grid!important;place-items:center!important;
+ background:var(--palette-transparent)!important;color:var(--mb-rd-ink)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] #musicMenuSubCancel::before{
+ content:"‹";font-size:30px!important;font-weight:400!important;line-height:1!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] #musicMenuSubTitle{
+ position:absolute!important;left:50%!important;top:50%!important;
+ transform:translate(-50%,-50%)!important;display:block!important;flex:none!important;
+ max-width:calc(100% - 100px)!important;width:max-content!important;
+ white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+ text-align:center!important;color:var(--mb-rd-ink)!important;font-size:16px!important;font-weight:700!important;
+}
+/* Older music transport styles suppress all spans directly inside aux buttons.
+   The reference's multi-playlist action uses two visible spans. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet button.music-quick-select-more>span{
+ display:inline!important;visibility:visible!important;opacity:1!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] .music-library-chevron svg{
+ display:block!important;stroke:var(--mb-rd-muted)!important;fill:none!important;
+}
+
+/* Restore reference summary icon against legacy music SVG overrides. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] #musicPlaylistsBox>summary .music-flat-ico{
+ display:grid!important;visibility:visible!important;opacity:1!important;color:var(--mb-rd-muted)!important;
+}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] #musicPlaylistsBox>summary .music-flat-ico svg,
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet[data-view="library"] #musicPlaylistsBox>summary .music-flat-ico svg :is(path,circle){
+ visibility:visible!important;opacity:1!important;stroke:var(--mb-rd-muted)!important;fill:none!important;
+}

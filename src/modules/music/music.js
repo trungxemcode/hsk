@@ -891,10 +891,8 @@
   if(!lists.length){box.append(el('p','Chưa có playlist nào. Hãy bấm "Tạo playlist mới" ở trên để bắt đầu.','music-empty-note'));return;}
   for(const pl of lists){
    const card=el('div',undefined,'music-playlist-card'+(activePlaylistId===pl.id?' music-playlist-active':''));
-   const head=el('div',undefined,'music-playlist-head music-flat-row');
-   let coverSrc=fallbackArt;
-   for(const item of pl.items){const src=artworkForUrl(item.url);if(src!==fallbackArt){coverSrc=src;break;}}
-   const img=el('img',undefined,'music-playlist-thumb');img.alt=pl.name;img.src=coverSrc;img.onerror=()=>{img.onerror=null;img.src=fallbackArt;};
+   const head=el('button',undefined,'music-playlist-head music-flat-row');
+   head.type='button';head.setAttribute('aria-label','Mở playlist '+pl.name);
    const meta=el('div',undefined,'music-playlist-meta');
    meta.append(el('strong',pl.name),el('small',pl.items.length+' bài hát'+(activePlaylistId===pl.id?' · Đang phát':'')));
    const actions=el('div',undefined,'music-playlist-actions');
@@ -907,13 +905,19 @@
    delBtn.onclick=e=>{e.stopPropagation();if(activePlaylistId===pl.id)activePlaylistId='';save('playlists',savedPlaylists().filter(x=>x.id!==pl.id));drawPlaylists();drawLinks();syncEmptyState();status('Đã xóa playlist "'+pl.name+'".');};
    const chevron=el('span',undefined,'music-playlist-chevron');
    chevron.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></svg>';
-   actions.append(playBtn,delBtn,chevron);
-   head.append(img,meta,actions);
-
+   actions.append(chevron);head.append(meta,actions);
    const trackList=el('div',undefined,'music-playlist-tracks');
+   const toolRow=el('div',undefined,'music-playlist-tools');
+   playBtn.textContent='▶ Phát playlist';delBtn.textContent='Xóa playlist';
+   toolRow.append(playBtn,delBtn);trackList.append(toolRow);
    const expanded=expandedPlaylists.has(pl.id);
    trackList.hidden=!expanded;head.classList.toggle('music-playlist-head-open',expanded);
-   head.onclick=()=>{const open=trackList.hidden;animateDisclosure(trackList,open);animateDisclosure(addForm,open);if(open)expandedPlaylists.add(pl.id);else expandedPlaylists.delete(pl.id);head.classList.toggle('music-playlist-head-open',open);};
+   head.setAttribute('aria-expanded',String(expanded));
+   head.onclick=()=>{
+    const open=trackList.hidden;animateDisclosure(trackList,open);animateDisclosure(addForm,open);
+    if(open)expandedPlaylists.add(pl.id);else expandedPlaylists.delete(pl.id);
+    head.classList.toggle('music-playlist-head-open',open);head.setAttribute('aria-expanded',String(open));
+   };
 
    if(!pl.items.length){trackList.append(el('p','Playlist trống. Chọn bài trong kho để thêm vào playlist.','music-empty-note'));}
    else{
@@ -1047,10 +1051,15 @@
    options.append(button);
   }
   if(!lists.length)options.append(el('p','Chưa có playlist. Hãy tạo danh sách phát mới.','music-quick-caption'));
-  quickPanel.append(options);
-  const more=el('button','Chọn nhiều playlist…','music-quick-select-more music-aux-btn');
-  more.type='button';more.onclick=()=>setMenuView('save');
-  quickPanel.append(more);
+  const createNew=el('button','＋ Playlist mới','music-quick-pick music-quick-pick-new music-aux-btn');
+  createNew.type='button';createNew.onclick=()=>{
+   setMenuView('library');const form=$('musicPlaylistCreateBox');
+   form.open=true;form.querySelector('input')?.focus();
+  };
+  options.append(createNew);quickPanel.append(options);
+  const more=el('button',undefined,'music-quick-select-more music-aux-btn');
+  more.type='button';more.append(el('span','Chọn nhiều playlist…'),el('span','›','music-quick-more-chevron'));
+  more.onclick=()=>setMenuView('save');quickPanel.append(more);
  }
  $('musicPreviewPlaylistAdd').onclick=()=>{
   if(!menuURL()){status('Mở một bài hát từ link trước khi lưu vào playlist.');return;}
@@ -1326,7 +1335,19 @@ window.addEventListener('hsk-account-ready',()=>{pendingImportLink='';pendingImp
   const browse=$('musicBrowseView'),mini=$('musicMiniPlayer');if(!browse||!mini)return null;
   const sheet=$('musicMenuSheet'),subHead=$('musicMenuSubHead'),sheetStatus=$('musicStatus'),handle=sheet.querySelector('.music-sheet-drag-area'),body=el('div',undefined,'music-wb-sheet-body');body.id='musicMenuBody';
   subHead.removeAttribute('data-menu-view');
-  const contents=[...sheet.children].filter(n=>![handle,subHead,sheetStatus].includes(n));body.append(...contents);sheet.append(subHead,sheetStatus,body);sheet.setAttribute('role','dialog');sheet.setAttribute('aria-modal','true');sheet.setAttribute('aria-labelledby','musicMenuTitle');
+  const contents=[...sheet.children].filter(n=>![handle,subHead,sheetStatus].includes(n));body.append(...contents);sheet.append(subHead,sheetStatus,body);sheet.setAttribute('role','dialog');
+  // Reference ZIP: three isolated rounded library groups with standard
+  // row icons and a single right/down chevron; controls keep their native handlers.
+  const arrow='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
+  const attachArrow=summary=>{
+   const icon=el('span',undefined,'music-library-chevron');icon.setAttribute('aria-hidden','true');icon.innerHTML=arrow;
+   summary.append(icon);
+  };
+  const createSummary=$('musicPlaylistCreateBox').querySelector('summary');attachArrow(createSummary);
+  const plSummary=$('musicPlaylistsBox').querySelector('summary');
+  plSummary.classList.add('music-flat-row','music-library-group-summary');
+  plSummary.innerHTML='<span class="music-flat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6.5h11M4 12h11M4 17.5h7"/><circle cx="17.5" cy="16" r="2.6"/><path d="M20.1 16V7.2l-3.4.9"/></svg></span><span class="music-flat-label">Danh sách phát của bạn</span>';
+  attachArrow(plSummary);attachArrow($('musicSavedLinksBox').querySelector('summary'));sheet.setAttribute('aria-modal','true');sheet.setAttribute('aria-labelledby','musicMenuTitle');
   $('musicMenuLibraryRow').before($('musicSourceLink'));
   const mask=()=>body.classList.toggle('is-scrollable',body.scrollHeight-body.clientHeight-body.scrollTop>2);body.addEventListener('scroll',mask,{passive:true});sheet.addEventListener('toggle',mask,true);window.addEventListener('resize',mask);
   new MutationObserver(()=>requestAnimationFrame(()=>{if(sheet.ownerDocument.defaultView?.document)mask();})).observe(sheet,{attributes:true,attributeFilter:['data-view','aria-hidden']});
