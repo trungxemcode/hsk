@@ -96,10 +96,12 @@ renderIcons();
  }
  let pendingMusic='',musicWaitTimer=0,musicWaitControls=[];
  function clearMusicWait(failed=false){clearTimeout(musicWaitTimer);pendingMusic='';for(const [node,small,label] of musicWaitControls){node.removeAttribute('aria-busy');node.classList.remove('music-entry-pending');if(small)small.textContent=failed?'Chưa mở được. Chạm để thử lại.':label;}musicWaitControls=[];}
- window.addEventListener('hsk-music-ready',()=>{const next=pendingMusic;clearMusicWait();if(next)navigate(next);});
+ function earlyMusicHome(){if(!ready&&!pendingMusic&&!['account','translator','about','admin'].includes(route)&&(!document.body.dataset.studioHub||document.body.dataset.studioHub==='home')){document.body.dataset.studioHub='home';$('studioHome').hidden=false;title('home');refresh();}}
+ window.addEventListener('hsk-music-ready',()=>{const next=pendingMusic;clearMusicWait();if(next)navigate(next);else earlyMusicHome();});
+ window.addEventListener('hsk-music-load-error',()=>clearMusicWait(true));
  function navigate(name){
   const musicRoute=name==='music'||name==='music-play';
-  if(musicRoute&&!window.HSKMusic){clearMusicWait();pendingMusic=name;document.querySelectorAll('[data-studio-go="'+name+'"]').forEach(node=>{const small=node.querySelector('small');musicWaitControls.push([node,small,small?.textContent||'']);node.setAttribute('aria-busy','true');node.classList.add('music-entry-pending');if(small)small.textContent='Đang mở trình phát…';});musicWaitTimer=setTimeout(()=>clearMusicWait(true),20000);return;}
+  if(musicRoute&&!window.HSKMusic){clearMusicWait();pendingMusic=name;document.querySelectorAll('[data-studio-go="'+name+'"]').forEach(node=>{const small=node.querySelector('small');musicWaitControls.push([node,small,small?.textContent||'']);node.setAttribute('aria-busy','true');node.classList.add('music-entry-pending');if(small)small.textContent='Đang mở trình phát…';});musicWaitTimer=setTimeout(()=>clearMusicWait(true),20000);window.HSKMusicLoad?.start();return;}
   clearMusicWait();
   if(name==='review')name='practice';
   if(!ready&&!['account','translator','about','admin','music','music-play'].includes(name))return;
@@ -172,5 +174,5 @@ renderIcons();
  function init(){if(ready)return;ready=true;lastOwner=owner();fingerprint=snapshot();if(!pendingMusic&&!['music','music-play'].includes(route))navigate(location.hash.startsWith('#lesson/')?'lessons':'home');if(location.hash.startsWith('#lesson/'))window.HSKLessonNav?.open();refreshTimer=setInterval(()=>{if(!document.hidden)refresh();},30000);}
  window.addEventListener('hsk-lessons-ready',init);if(window.HSKLessons)init();
  window.addEventListener('pagehide',()=>{clearInterval(refreshTimer);clearTimeout(activityTimer);});
- window.HSKStudio={navigate,refresh};
+ window.HSKStudio={navigate,refresh};if(window.HSKMusic)earlyMusicHome();
 })();

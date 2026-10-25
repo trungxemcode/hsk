@@ -636,3 +636,5 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel:not(.music-pl
 html body.studio-enabled .music-entry-pending{cursor:progress;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicCloudList .music-row-copy strong{color:var(--palette-white)!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicCloudList .music-row-copy small{color:var(--legacy-rgb-9)!important;}
+/* Background study loading stays visible on learning pages, outside the music viewport. */
+body.studio-enabled[data-studio-hub=music] :is(#appLoadStatus,.memory-reminder){display:none!important;}

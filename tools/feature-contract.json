@@ -1577,6 +1577,37 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "music-independent-startup",
+      "name": "Tải nhạc độc lập, preload, cache danh sách công khai và đo hiệu năng",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "loader.js",
+          "value": "window.HSKMusicLoad={start:startMusic}"
+        },
+        {
+          "kind": "contains",
+          "file": "loader.js",
+          "value": "window.HSKMusicPerf="
+        },
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "rel=\"preload\" as=\"script\" href=\"./src/modules/music/music.js\""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "hsk-music-catalog-v1:"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-startup-ui.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }
