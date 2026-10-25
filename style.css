@@ -1,6 +1,31 @@
 /* Shared design tokens. New components use semantic tokens below.
    Legacy palette entries preserve existing feature-specific shades during migration. */
 :root{
+--wb-exact-0:transparent;
+--wb-exact-1:inherit;
+--wb-exact-2:rgba(158,146,255,.16);
+--wb-exact-3:50%;
+--wb-exact-4:0 0 0 3px var(--wb-exact-2);
+--wb-exact-5:#fff;
+--wb-exact-6:#7c6bff;
+--wb-exact-7:#5b4be8;
+--wb-exact-8:rgba(91,75,232,.95);
+--wb-exact-9:50%;
+--wb-exact-10:0 12px 26px -12px var(--wb-exact-8);
+--wb-exact-11:rgba(237,237,247,.10);
+--wb-exact-12:50%;
+--wb-exact-13:8px;
+--wb-exact-14:8px;
+--wb-exact-15:6px;
+--wb-exact-16:0 3px 3px 0;
+--wb-exact-17:transparent;
+--wb-exact-18:10px;
+--wb-exact-19:1.5px;
+--wb-exact-20:20px;
+--wb-exact-21:transparent;
+--wb-exact-22:rgba(237,237,247,.16);
+--wb-exact-23:transparent;
+
 /* WorkBuddy music presentation palette; independent of app theme. */
 
   --mb-rd-canvas:#0f0f18; --mb-rd-canvas-2:#13131f;

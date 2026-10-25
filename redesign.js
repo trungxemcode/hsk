@@ -87,3 +87,6 @@
     boot();
   }
 })();
+
+// Match browser/status-bar chrome to the active surface; presentation only.
+(()=>{const sync=()=>{const music=document.body.dataset.studioHub==='music',root=getComputedStyle(document.documentElement),color=root.getPropertyValue(music?'--mb-rd-canvas':'--paper').trim();if(!color)return;for(const meta of document.querySelectorAll('meta[name="theme-color"]'))meta.content=color;document.documentElement.style.setProperty('background-color',color,'important');};new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['data-studio-hub']});new MutationObserver(sync).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});sync();})();
