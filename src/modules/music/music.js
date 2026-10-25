@@ -2,7 +2,9 @@
 (()=>{
  'use strict';
  const C=window.HSKMusicCore;if(!C)return;
- let browsePresentation=null;
+ let browsePresentation=null,menuSelection=null;
+ const menuURL=()=>menuSelection?.url||currentLinkUrl;
+ const menuTitle=()=>menuSelection?.title||currentLinkTitle;
  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
  const $=id=>document.getElementById(id);
  function animateDisclosure(node,open){
@@ -90,7 +92,7 @@
  const personalAction=menuAction('musicPersonalOpen','Thêm link YouTube','＋','personal'),adminAction=menuAction('musicAdminOpen','Thêm nhạc vào kho','♫','admin');adminAction.hidden=true;$('musicMenuLibraryRow').before(personalAction);cloudRefresh.before(adminAction);
  const deleteAction=el('button','Xóa bài khỏi kho','music-flat-row music-chill-only');deleteAction.id='musicCloudDelete';deleteAction.type='button';deleteAction.dataset.menuView='main';deleteAction.hidden=true;cloudRefresh.after(deleteAction);
  deleteAction.onclick=async()=>{
-  const user=window.HSKAccountDashboard?.user,track=cloudTracks.find(t=>t.url===currentLinkUrl);if(user?.uid!==cloudOwner||!track)return;
+  const user=window.HSKAccountDashboard?.user,track=cloudTracks.find(t=>t.url===menuURL());if(user?.uid!==cloudOwner||!track)return;
   if(!window.confirm('Xóa “'+track.title+'” khỏi kho chung? Mọi người sẽ không thể phát bài này từ kho nữa.'))return;
   deleteAction.disabled=true;
   try{await importAPI('/api/admin/tracks/'+encodeURIComponent(track.id)+'/delete',{});cloudRequest?.abort();cloudTracks=cloudTracks.filter(t=>t.id!==track.id);cacheCloud();delete metaCache[track.url];
@@ -134,7 +136,7 @@
   finally{clearTimeout(timer);}
  }
  $('musicAdminImportUrl').oninput=()=>{clearTimeout(infoTimer);infoController?.abort();++infoSequence;const url=$('musicAdminImportUrl').value.trim();if(url!==infoURL){for(const field of ['Title','Artist','Composer']){const n=$('musicAdminImport'+field);if(n.value===autoInfo[field])n.value='';delete autoInfo[field];}infoURL=url;$('musicImportMetadataStatus').textContent='';}infoTimer=setTimeout(lookupImportInfo,650);};
- function prepareCurrentImport(){try{const source=pendingImportLink||cloudTracks.find(t=>t.url===currentLinkUrl)?.sourceUrl||currentLinkUrl;const link=C.parseLink(source);if(link.kind!=='youtube')return;$('musicImportTab-youtube').click();if($('musicAdminImportUrl').value!==link.url){$('musicAdminImportUrl').value=link.url;prefillURL=link.url;infoURL=link.url;for(const field of ['Title','Artist','Composer']){$('musicAdminImport'+field).value='';delete autoInfo[field];}applyMusicInfo({Title:pendingImportTitle||(currentLinkTitle==='YouTube'?'':currentLinkTitle)});}lookupImportInfo();}catch{}}
+ function prepareCurrentImport(){try{const source=menuSelection?(cloudTracks.find(t=>t.url===menuSelection.url)?.sourceUrl||menuSelection.url):pendingImportLink||cloudTracks.find(t=>t.url===currentLinkUrl)?.sourceUrl||currentLinkUrl;const link=C.parseLink(source);if(link.kind!=='youtube')return;$('musicImportTab-youtube').click();if($('musicAdminImportUrl').value!==link.url){$('musicAdminImportUrl').value=link.url;prefillURL=link.url;infoURL=link.url;for(const field of ['Title','Artist','Composer']){$('musicAdminImport'+field).value='';delete autoInfo[field];}applyMusicInfo({Title:menuSelection?.title||pendingImportTitle||(currentLinkTitle==='YouTube'?'':currentLinkTitle)});}lookupImportInfo();}catch{}}
  $('musicAdminImportForm').onsubmit=async e=>{e.preventDefault();if(importBusy)return;const b=$('musicAdminImportSubmit');b.disabled=true;try{const link=C.parseLink($('musicAdminImportUrl').value);if(link.kind!=='youtube')throw Error('Nhập link YouTube.');const j=await importAPI('/api/admin/imports',{url:link.url,title:$('musicAdminImportTitle').value.trim(),artist:$('musicAdminImportArtist').value.trim(),composer:$('musicAdminImportComposer').value.trim()});save('import-job',j.id);await pollImport();}catch(err){$('musicAdminImportStatus').textContent=err.message;b.disabled=false;}};
  $('musicPersonalForm').onsubmit=e=>{e.preventDefault();$('musicPersonalStatus').textContent='';try{const link=C.parseLink($('musicPersonalUrl').value);if(link.kind!=='youtube')throw Error('Nhập link YouTube.');openLink(link,$('musicPersonalTitle').value.trim()||'YouTube',true,'',true);}catch(err){$('musicPersonalStatus').textContent=err.message;}};
  let cloudRequest=null,cloudUpload=null;
@@ -283,6 +285,7 @@
  function syncMenuTrackHead(){
   const thumb=$('musicMenuTrackThumb'),title=$('musicMenuTrackTitle'),sub=$('musicMenuTrackSub');
   if(!thumb||!title||!sub)return;
+  if(menuSelection){thumb.src=artworkForUrl(menuSelection.url);title.textContent=menuSelection.title;sub.textContent=menuSelection.author||'Kho nhạc HSK';return;}
   const artSrc=(song?$('musicStageBg')?.src:$('musicLinkThumb')?.src)||fallbackArt;
   thumb.src=artSrc;
   thumb.onerror=()=>{thumb.onerror=null;thumb.src=fallbackArt;};
@@ -299,7 +302,7 @@
   }
  }
  function toggleMenu(force){
-  menuOpen=typeof force==='boolean'?force:!menuOpen;
+  menuOpen=typeof force==='boolean'?force:!menuOpen;if(!menuOpen)menuSelection=null;
   if(menuOpen)toggleQueue(false);
   panel.classList.toggle('music-menu-open',menuOpen);
   $('musicMenuBtn').setAttribute('aria-expanded',String(menuOpen));
@@ -307,7 +310,7 @@
   sheet.setAttribute('aria-hidden',String(!menuOpen));sheet.inert=!menuOpen;
   backdrop.setAttribute('aria-hidden',String(!menuOpen));
   setMenuView('main');
-  if(menuOpen){$('musicMenuSheet').scrollTop=0;syncMenuTrackHead();syncQuickSaveBtn();}
+  if(menuOpen){($('musicMenuBody')||$('musicMenuSheet')).scrollTop=0;syncMenuTrackHead();syncQuickSaveBtn();}
  }
  function queueOrigin(){
   const sheet=$('musicQueueSheet'),anchor=$('musicChillPeekToggle'),r=anchor.getBoundingClientRect();
@@ -359,16 +362,16 @@
  function setMenuView(view){
   const sheet=$('musicMenuSheet');if(!sheet)return;
   if(currentMode!=='chill')view='main';
-  sheet.dataset.view=view;sheet.scrollTop=0;deleteAction.hidden=window.HSKAccountDashboard?.user?.uid!==cloudOwner||!cloudTracks.some(t=>t.url===currentLinkUrl);$('musicSourceLink').hidden=!currentLinkUrl;$('musicLinkExtraActions').hidden=!currentLinkUrl;
-  $('musicMenuSubTitle').textContent=({link:'Dán link bài hát mới',library:'Thư viện của bạn',cloud:'Kho nhạc Cloudflare',personal:'Link cá nhân',admin:'Thêm vào kho'})[view]||'';
-  $('musicMenuSubCancel').textContent=view==='save'?'Hủy':'‹ Quay lại';
+  sheet.dataset.view=view;($('musicMenuBody')||sheet).scrollTop=0;deleteAction.hidden=window.HSKAccountDashboard?.user?.uid!==cloudOwner||!cloudTracks.some(t=>t.url===menuURL());$('musicSourceLink').hidden=!menuURL();if(menuURL())$('musicSourceLink').href=menuURL();$('musicLinkExtraActions').hidden=!menuURL();
+  $('musicMenuSubTitle').textContent=({link:'Dán link bài hát mới',library:'Thư viện của bạn',cloud:'Kho nhạc Cloudflare',personal:'Link cá nhân',admin:'Thêm vào kho'})[view]||'Tùy chọn';
+  $('musicMenuSubCancel').textContent=view==='save'?'Hủy':'‹ Quay lại';$('musicMenuSubCancel').hidden=view==='main';
   $('musicMenuSubDone').hidden=view!=='save';
   if(view==='main'&&currentMode==='chill')$('musicLinkImport').open=false;
 
   if(view==='save'){$('musicSaveNewForm').hidden=true;drawSavePicker(true);}
   requestAnimationFrame(()=>sheet.querySelectorAll('[data-menu-view]').forEach(node=>{
    if((node.dataset.menuView||'').split(/\s+/).includes(view)&&node.getClientRects().length){
-    try{node.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:220,easing:'cubic-bezier(.22,1,.36,1)'});}catch{}
+    try{node.animate([{opacity:0,transform:'translateX('+(view==='main'?-14:14)+'px)'},{opacity:1,transform:'translateX(0)'}],{duration:220,easing:'cubic-bezier(.22,1,.36,1)'});}catch{}
    }
   }));
  }
@@ -470,7 +473,7 @@
   browsePresentation?.sync();
   const mini=$('musicMiniPlayer');if(!mini)return;
   if(currentMode!=='chill'||playerExpanded){mini.hidden=true;return;}
-  const recents=savedLinks();
+  const recents=recentMusicRows();
   let activeLink=null,activeTitle='',activeAuthor='';
   if(currentLinkUrl){
    try{activeLink=C.parseLink(currentLinkUrl);activeTitle=currentLinkTitle;activeAuthor=currentLinkAuthor;}catch{}
@@ -498,7 +501,7 @@
  function drawRecentBrowse(){
   const list=$('musicRecentList');if(!list)return;
   list.replaceChildren();
-  const recents=savedLinks();
+  const recents=recentMusicRows();
   const tracks=recents.filter(row=>playablePersonal(row.url));
   if(!tracks.length){list.append(el('p','Chưa có bài nghe gần đây. Những bài bạn mở sẽ xuất hiện ở đây.','music-empty-note'));return;}
   for(const entry of tracks.slice(0,20)){
@@ -523,9 +526,7 @@
     try{
      $('musicLinkUrl').value=link.url;
      $('musicLinkName').value=displayTitle;
-     currentLinkUrl=link.url;
-     currentLinkTitle=displayTitle;
-     currentLinkAuthor=displayAuthor;
+     menuSelection={url:link.url,title:displayTitle,author:displayAuthor};
      syncMenuTrackHead();
      toggleMenu(true);
     }catch{}
@@ -600,7 +601,7 @@
   syncAuxControls();
   syncMediaSession();
  }
- $('musicMenuBtn').onclick=()=>toggleMenu();
+ $('musicMenuBtn').onclick=()=>{menuSelection=null;toggleMenu();};
  $('musicMenuClose').onclick=()=>toggleMenu(false);
  $('musicMenuBackdrop').onclick=()=>toggleMenu(false);
  $('musicSourceLink').onclick=e=>{if(!currentLinkUrl){e.preventDefault();status('Mở một bài hát từ link để xem trang nguồn.');}};
@@ -634,9 +635,9 @@
  $('musicMenuSubDone').onclick=()=>commitSavePicker();
  $('musicLinkImport').addEventListener('toggle',()=>{if(currentMode==='chill'&&menuOpen&&$('musicLinkImport').open)setMenuView('link');});
  $('musicMenuShareRow').onclick=async()=>{
-  if(!currentLinkUrl){status('Mở một bài hát trước khi chia sẻ.');return;}
-  const data={title:currentLinkTitle||'Bài hát',url:currentLinkUrl};
-  try{if(navigator.share){await navigator.share(data);}else{await navigator.clipboard.writeText(currentLinkUrl);status('Đã sao chép link bài hát.');}}catch{}
+  if(!menuURL()){status('Mở một bài hát trước khi chia sẻ.');return;}
+  const data={title:menuTitle()||'Bài hát',url:menuURL()};
+  try{if(navigator.share){await navigator.share(data);}else{await navigator.clipboard.writeText(menuURL());status('Đã sao chép link bài hát.');}}catch{}
  };
  // Drag surfaces follow the pointer every frame; only snapping is animated.
  function bindMusicDrag(node,handlers){
@@ -660,8 +661,8 @@
  const menuSheet=$('musicMenuSheet'),menuBackdrop=$('musicMenuBackdrop');
  const sheetDrag=opening=>({
   start(dy){
-   if(opening&&dy>=0||!opening&&(dy<=0||menuSheet.scrollTop>0))return false;
-   if(opening){setMenuView('main');syncMenuTrackHead();menuSheet.scrollTop=0;}
+   if(opening&&dy>=0||!opening&&(dy<=0||($('musicMenuBody')||menuSheet).scrollTop>0))return false;
+   if(opening){setMenuView('main');syncMenuTrackHead();($('musicMenuBody')||menuSheet).scrollTop=0;}
    const height=menuSheet.getBoundingClientRect().height+18;
    panel.classList.add('music-sheet-dragging');menuSheet.style.visibility='visible';menuSheet.inert=false;
    return {height,opening};
@@ -711,7 +712,7 @@
    end(dy,g,cancel,velocity){const open=!cancel&&(-dy>g.height*.25||velocity<-.45);void stage.offsetHeight;stage.style.transition='transform .32s cubic-bezier(.22,1,.36,1)';stage.style.transform='translateY('+(open?0:g.height)+'px)';setTimeout(()=>{setPlayerExpanded(open);panel.classList.remove('music-player-dragging');stage.style.removeProperty('transition');stage.style.removeProperty('transform');},340);}
   });
  }
- if($('musicMiniPlay'))$('musicMiniPlay').onclick=e=>{e.stopPropagation();$('musicLinkPlay').click();};
+ if($('musicMiniPlay'))$('musicMiniPlay').onclick=e=>{e.stopPropagation();playSelectedFromUI();};
  if($('musicMiniSave'))$('musicMiniSave').onclick=e=>{e.stopPropagation();$('musicQuickSaveBtn').click();};
  if($('musicBrowseView')){
   panel.querySelectorAll('.music-pill').forEach(btn=>{
@@ -770,6 +771,19 @@
  function clearPreview(){if($('musicLinkPlayer').parentElement===$('musicLinkCover'))$('musicLinkPreview').append($('musicLinkPlayer'));linkWantedPlay=false;clearTimeout(linkStartTimer);linkReady=false;linkKind='';linkScrubbing=false;linkSeekTarget=null;linkOptimisticPlay=false;linkPendingPlay=false;$('musicLinkScrubRow').hidden=true;$('musicLinkExtraActions').hidden=true;linkYt?.destroy?.();linkYt=null;try{if(navigator.mediaSession){navigator.mediaSession.playbackState='none';navigator.mediaSession.setPositionState?.();}}catch{}clearInterval(linkTimer);linkTimer=null;$('musicLinkPlayer').replaceChildren();$('musicLinkPlayer').classList.remove('music-personal-youtube');$('musicLinkCover').hidden=true;$('musicLinkControls').hidden=true;$('musicLinkPreview').hidden=true;syncEmptyState();}
  function release(savePosition=true){if(savePosition)checkpoint(true);if(video.hasAttribute('src')){video.pause();video.removeAttribute('src');video.load();}yt?.destroy?.();yt=null;clearInterval(ytTimer);ytTimer=null;clearPreview();if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=null;}}
  function stop(){toggleQueue(false);studyOptimisticPlay=false;checkpoint(true);pauseNative();yt?.pauseVideo?.();if(linkReady)linkYt?.pauseVideo?.();clearPreview();holding=false;renderReveal();updatePlayButton();}
+ function canonicalMusicRow(row){
+  if(!row||typeof row.url!=='string')return null;
+  let parsed;try{parsed=C.parseLink(row.url);}catch{return null;}
+  const track=cloudTracks.find(t=>t.url===parsed.url)||(parsed.kind==='youtube'?cloudTracks.find(t=>{try{return C.parseLink(t.sourceUrl).source?.videoId===parsed.source.videoId;}catch{return false;}}):null);
+  return track?{...row,url:track.url,title:track.title}: {...row,url:parsed.url};
+ }
+ function recentMusicRows(){const seen=new Set();return savedLinks().map(canonicalMusicRow).filter(row=>{if(!row||seen.has(row.url))return false;seen.add(row.url);return true;});}
+ function playSelectedFromUI(){
+  const selected=canonicalMusicRow(currentLinkUrl?{url:currentLinkUrl,title:currentLinkTitle}:recentMusicRows()[0]);
+  if(!selected){status('Chọn một bài trong kho nhạc để nghe.');return;}
+  if(!nativeLinkAudio||nativeLinkAudio.getAttribute('src')!==selected.url){openLink(C.parseLink(selected.url),selected.title,true,'',true);return;}
+  $('musicLinkPlay').click();
+ }
  function savedLinks(){const value=read('links',[]);return Array.isArray(value)?value:[];}
  function savedPlaylists(){const value=read('playlists',[]);return Array.isArray(value)?value.filter(p=>p&&typeof p.id==='string'&&typeof p.name==='string'&&Array.isArray(p.items)):[];}
  function renderQuickPlaylistPills(){
@@ -899,7 +913,7 @@
  }
  function drawSavePicker(reset){
   const lists=savedPlaylists();
-  if(reset){saveInitial=new Set(lists.filter(p=>currentLinkUrl&&p.items.some(it=>it.url===currentLinkUrl)).map(p=>p.id));savePending=new Set(saveInitial);}
+  if(reset){saveInitial=new Set(lists.filter(p=>menuURL()&&p.items.some(it=>it.url===menuURL())).map(p=>p.id));savePending=new Set(saveInitial);}
   const box=$('musicSavePicker');box.replaceChildren();
   if(!lists.length){box.append(el('p','Chưa có danh sách phát nào. Bấm "Danh sách phát mới" để tạo.','music-empty-note'));return;}
   const ordered=[...lists].sort((a,b)=>Number(saveInitial.has(b.id))-Number(saveInitial.has(a.id)));
@@ -918,9 +932,9 @@
   }
  }
  function commitSavePicker(){
-  if(!currentLinkUrl){toggleMenu(false);return;}
+  if(!menuURL()){toggleMenu(false);return;}
   try{
-   const link=C.parseLink(currentLinkUrl),title=String(currentLinkTitle||$('musicLinkTitle').textContent||link.label).slice(0,120);
+   const link=C.parseLink(menuURL()),title=String(menuTitle()||$('musicLinkTitle').textContent||link.label).slice(0,120);
    const lists=savedPlaylists();let added=0,removed=0;
    for(const pl of lists){
     const has=pl.items.some(x=>x.url===link.url),want=savePending.has(pl.id);
@@ -939,12 +953,12 @@
   e.preventDefault();
   const id=createPlaylist($('musicSaveNewName').value);if(!id)return;
   $('musicSaveNewName').value='';$('musicSaveNewForm').hidden=true;
-  if(currentLinkUrl)savePending.add(id);
+  if(menuURL())savePending.add(id);
   drawSavePicker(false);
  };
  $('musicSaveDone').onclick=()=>commitSavePicker();
  $('musicPreviewPlaylistAdd').onclick=()=>{
-  if(!currentLinkUrl){status('Mở một bài hát từ link trước khi lưu vào playlist.');return;}
+  if(!menuURL()){status('Mở một bài hát từ link trước khi lưu vào playlist.');return;}
   setMenuView('save');
  };
  function drawLinks(){
@@ -974,7 +988,7 @@
   }
   if(!box.children.length)box.append(el('p','Chưa có link bài hát.'));
  }
- function rememberLink(link,title){save('links',[{url:link.url,title:String(title||link.label).slice(0,120)},...savedLinks().filter(x=>x.url!==link.url)].slice(0,30));drawLinks();drawRecentBrowse();syncMiniPlayer();}
+ function rememberLink(link,title){const row=canonicalMusicRow({url:link.url,title:String(title||link.label).slice(0,120)});if(!row)return;save('links',[row,...recentMusicRows().filter(x=>x.url!==row.url)].slice(0,30));drawLinks();drawRecentBrowse();syncMiniPlayer();}
  function stepSavedLink(dir){
   const {playlist,list}=playbackList();if(!list.length)return;
   const index=list.findIndex(row=>row.url===currentLinkUrl),next=list[(Math.max(0,index)+dir+list.length)%list.length];
@@ -1033,7 +1047,7 @@
    const message='Bài này chưa có audio trong kho. Đã lưu link; admin cần nhập bài vào kho để nghe nền.';$('musicPersonalStatus').textContent=message;status(message);drawRecentBrowse();drawBrowsePlaylists();return false;
   }
   if(!cloudTracks.some(row=>row.url===link.url)){status('Bài này thuộc nguồn cũ. Chọn bài trong kho nhạc Cloudflare.');return;}
-  if(currentLinkUrl===link.url&&nativeLinkAudio){activePlaylistId=playlistId;if(autoPlay)requestLinkPlayback(true);toggleMenu(false);return;}
+  if(currentLinkUrl===link.url&&nativeLinkAudio&&nativeLinkAudio.getAttribute('src')===link.url){activePlaylistId=playlistId;if(autoPlay)requestLinkPlayback(true);toggleMenu(false);return;}
   currentMode='chill';release();song=null;const epoch=++serial,track=cloudTracks.find(row=>row.url===link.url);
   currentLinkUrl=link.url;currentLinkTitle=track.title;currentLinkAuthor=track.artist;activePlaylistId=playlistId;linkKind='audio';linkWantedPlay=autoPlay;linkOptimisticPlay=autoPlay;linkPendingPlay=autoPlay;
   if(autoPlay)playerExpanded=true;panel.classList.toggle('music-player-expanded',playerExpanded);
@@ -1213,15 +1227,26 @@ window.addEventListener('hsk-account-ready',()=>{pendingImportLink='';pendingImp
  // WorkBuddy presentation adapter. Existing source, transport and storage handlers remain authoritative.
  function installBrowsePresentation(){
   const browse=$('musicBrowseView'),mini=$('musicMiniPlayer');if(!browse||!mini)return null;
+  const sheet=$('musicMenuSheet'),subHead=$('musicMenuSubHead'),sheetStatus=$('musicStatus'),handle=sheet.querySelector('.music-sheet-drag-area'),body=el('div',undefined,'music-wb-sheet-body');body.id='musicMenuBody';
+  subHead.removeAttribute('data-menu-view');
+  const contents=[...sheet.children].filter(n=>![handle,subHead,sheetStatus].includes(n));body.append(...contents);sheet.append(subHead,sheetStatus,body);sheet.setAttribute('role','dialog');sheet.setAttribute('aria-modal','true');sheet.setAttribute('aria-labelledby','musicMenuTitle');
+  $('musicMenuLibraryRow').before($('musicSourceLink'));
+  const mask=()=>body.classList.toggle('is-scrollable',body.scrollHeight-body.clientHeight-body.scrollTop>2);body.addEventListener('scroll',mask,{passive:true});sheet.addEventListener('toggle',mask,true);window.addEventListener('resize',mask);
+  new MutationObserver(()=>requestAnimationFrame(()=>{if(sheet.ownerDocument.defaultView?.document)mask();})).observe(sheet,{attributes:true,attributeFilter:['data-view','aria-hidden']});
+
   const page=el('div',undefined,'music-browse-page'),col=el('div',undefined,'music-browse-col');
   const sticky=el('div',undefined,'music-wb-sticky'),inner=el('div',undefined,'music-wb-sticky-inner'),bar=panel.querySelector('.music-top-bar'),pills=browse.querySelector('.music-browse-pills');bar.before(sticky);sticky.append(inner);inner.append(bar,pills);
+  const pillInner=el('div',undefined,'music-wb-pills-inner'),indicator=el('span',undefined,'music-wb-pill-ind');indicator.setAttribute('aria-hidden','true');pillInner.append(...pills.children);pillInner.prepend(indicator);pills.append(pillInner);
+  const moveIndicator=()=>{if(!pillInner.isConnected)return;const buttons=[...pillInner.querySelectorAll('.music-pill')],active=buttons.find(n=>n.getAttribute('aria-selected')==='true');if(!active)return;const base=Math.max(1,...buttons.map(n=>n.offsetWidth));indicator.style.width=base+'px';indicator.style.transform='translateX('+active.offsetLeft+'px) scaleX('+(active.offsetWidth/base)+')';};
+  new MutationObserver(()=>requestAnimationFrame(()=>{if(pills.ownerDocument.defaultView?.document)moveIndicator();})).observe(pills,{subtree:true,attributes:true,attributeFilter:['aria-selected']});window.addEventListener('resize',moveIndicator);requestAnimationFrame(moveIndicator);
+
 
   const progressTrack=$('musicMiniProgress')?.parentElement;if(progressTrack){progressTrack.classList.add('music-browse-progress');panel.append(progressTrack);}
   const hero=el('section',undefined,'music-hero');hero.id='musicHero';hero.hidden=true;
   hero.innerHTML="\n          <!-- FIX 2: vùng bấm phủ thân card, thay cho role=\"button\" trên <section> -->\n          <button type=\"button\" class=\"music-hero-hit\" aria-label=\"Mở trình phát\" id=\"musicHeroHit\"></button>\n\n          <!-- trạng thái có bài -->\n          <div class=\"music-hero-live\">\n            <div class=\"music-hero-top\">\n              <span class=\"cover music-hero-cover\">\n                <img class=\"cover-img\" alt=\"\" id=\"musicHeroThumb\">\n                \n              </span>\n              <div class=\"music-hero-text\">\n                <p class=\"music-hero-eyebrow\" id=\"musicHeroEyebrow\"><span class=\"dot\"></span>Đang phát</p>\n                <h2 class=\"music-hero-title\" id=\"musicHeroTitle\">[Vietsub] Bích Thượng Quan - Đằng Ngụy Qu...</h2>\n                <p class=\"music-hero-artist\" id=\"musicHeroArtist\">Moah · Nhạc Trung Channel</p>\n                <!-- nguồn phát suy ra từ data thật (playlist > YouTube > kho) -->\n                <p class=\"music-hero-note\" id=\"musicHeroSource\">Nguồn: <b>YouTube</b></p>\n              </div>\n            </div>\n\n            <div class=\"music-hero-bar\">\n              <div class=\"bar-times music-hero-times\">\n                <span id=\"musicHeroCur\">01:24</span>\n                <span id=\"musicHeroDur\">03:48</span>\n              </div>\n            </div>\n\n            <!-- FIX 3: căn giữa, thứ tự \"+\" · play · mở rộng -->\n            <div class=\"music-hero-actions\">\n              <button type=\"button\" class=\"ghost-btn music-hero-ghost music-aux-btn\" aria-label=\"Thêm vào playlist\" id=\"musicHeroSave\">\n                <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"ic\"><path d=\"M12 5.5v13M5.5 12h13\"></path></svg>\n              </button>\n              <button type=\"button\" class=\"play-btn music-hero-play music-transport-btn music-transport-play\" data-play=\"\" aria-label=\"Tạm dừng\" id=\"musicHeroPlay\">\n                <svg class=\"ic-fill i-play\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\"><path d=\"M8 5.2v13.6c0 .8.9 1.3 1.6.9l10.6-6.8a1 1 0 0 0 0-1.8L9.6 4.3A1.1 1.1 0 0 0 8 5.2Z\"></path></svg>\n                <svg class=\"ic-fill i-pause\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\"><rect x=\"7\" y=\"4.5\" width=\"3.6\" height=\"15\" rx=\"1.4\"></rect><rect x=\"13.4\" y=\"4.5\" width=\"3.6\" height=\"15\" rx=\"1.4\"></rect></svg>\n              </button>\n              <button type=\"button\" class=\"ghost-btn music-hero-ghost music-aux-btn\" aria-label=\"Mở rộng trình phát\" id=\"musicHeroExpand\">\n                <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"ic\"><path d=\"M9.5 4.5H4.5v5M14.5 19.5h5v-5M19.5 9.5v-5h-5M4.5 14.5v5h5\"></path></svg>\n              </button>\n            </div>\n          </div>\n\n          <!-- trạng thái chưa có bài -->\n          \n        ";
   page.append(hero,col);col.append($('musicBrowseRecentSection'),cloudSection,$('musicBrowsePlaylistsSection'));browse.append(page);
   const proxy=(id,target)=>{const b=$(id),t=$(target);if(!b||!t)return;b.onclick=()=>t.click();};
-  proxy('musicHeroSave','musicMiniSave');proxy('musicHeroPlay','musicMiniPlay');
+  proxy('musicHeroSave','musicMiniSave');$('musicHeroPlay').onclick=()=>playSelectedFromUI();
   const expand=$('musicHeroExpand');expand.onclick=()=>setPlayerExpanded(true);hero.querySelector('.music-hero-hit').onclick=()=>setPlayerExpanded(true);
   const recent=$('musicRecentList'),section=$('musicBrowseRecentSection'),heading=section.querySelector('h3');
   const head=el('div',undefined,'music-section-head'),toggle=el('button','Nghe gần đây','music-sec-toggle music-aux-btn'),more=el('button','Xem tất cả','music-sec-more music-aux-btn');toggle.id='musicRecentToggle';toggle.innerHTML='<span class="music-sec-title">Nghe gần đây</span><span id="musicRecentCount" class="music-sec-count"></span><svg class="music-sec-chev" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5 12 15.5l6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';toggle.type=more.type='button';toggle.setAttribute('aria-controls','musicRecentList');more.id='musicRecentMore';heading.textContent='';heading.append(toggle);heading.before(head);head.append(heading,more);
@@ -1234,20 +1259,23 @@ window.addEventListener('hsk-account-ready',()=>{pendingImportLink='';pendingImp
   const skeleton=el('div',undefined,'music-cloud-skeleton');skeleton.id='musicCloudSkeleton';skeleton.setAttribute('aria-hidden','true');skeleton.innerHTML='<span></span><span></span>';cloudList.before(skeleton);
   function createPlaylist(){toggleMenu(true);setMenuView('library');const box=$('musicPlaylistCreateBox');if(box){box.open=true;box.querySelector('input')?.focus();}}
   function decorate(){
+   sheetStatus.classList.toggle('music-status-transient',Boolean(nativeLinkAudio&&!nativeLinkAudio.paused&&/^Đang (bắt đầu phát|kết nối trình phát)/.test(sheetStatus.textContent)));
    const playlistSection=$('musicBrowsePlaylistsSection');playlistSection.querySelector('h3').textContent='Playlist của bạn';
    applyRecent();for(const row of recent.querySelectorAll('.music-recent-row')){if(!row.hasAttribute('role')){row.setAttribute('role','group');row.tabIndex=0;row.onkeydown=e=>{if(e.target===row&&(e.key==='Enter'||e.key===' ')){e.preventDefault();row.click();}};}if(row.classList.contains('music-track-current')&&!row.querySelector('.music-eq')){const eq=el('span',undefined,'music-eq');eq.setAttribute('aria-hidden','true');eq.innerHTML='<i></i><i></i><i></i>';row.append(eq);}}
    const box=$('musicBrowsePlaylistList');if(!box.querySelector('.music-pl-add')){const empty=box.querySelector('.music-empty-note');if(empty){empty.classList.add('music-pl-empty');empty.textContent='Gom những bài bạn thích vào danh sách riêng.';}const add=el('button','＋ Tạo playlist mới','music-pl-add music-aux-btn');add.type='button';add.onclick=createPlaylist;box.append(add);}
-   const n=cloudList.querySelectorAll('.music-cloud-track').length;count.textContent=n+' bài';const text=cloudStatus.textContent,loading=/Đang (kết nối|cập nhật)/.test(text),error=/Không|không|Chưa|chưa|Đang dùng danh sách/.test(text)&&!loading;count.hidden=!n||error;cloudSection.classList.toggle('music-cloud-loading',loading&&!n);refresh.setAttribute('aria-busy',String(loading));
+   const n=cloudList.querySelectorAll('.music-cloud-track').length;count.textContent=n+' bài';const text=cloudStatus.textContent,loading=/Đang (kết nối|cập nhật)/.test(text),error=/Không|không|Chưa|chưa|Đang dùng danh sách/.test(text)&&!loading;count.hidden=!n||error;cloudStatus.classList.toggle('music-cloud-normal',Boolean(n&&!error&&!loading));cloudSection.classList.toggle('music-cloud-loading',loading&&!n);refresh.setAttribute('aria-busy',String(loading));
   }
   let frame=0;const schedule=()=>{if(!frame)frame=requestAnimationFrame(()=>{frame=0;if(!panel.ownerDocument.defaultView?.document||!hero.isConnected)return;decorate();sync();});};
   new MutationObserver(schedule).observe(recent,{childList:true});new MutationObserver(schedule).observe($('musicBrowsePlaylistList'),{childList:true});new MutationObserver(schedule).observe(cloudList,{childList:true});new MutationObserver(schedule).observe(cloudStatus,{childList:true,characterData:true,subtree:true});
   function miniVisible(){return hero.hidden||$('musicHeroTitle').getBoundingClientRect().bottom< browse.getBoundingClientRect().top+8;}
   function handoff(){if(currentMode==='chill'&&!playerExpanded)mini.hidden=(!currentLinkUrl&&!savedLinks().length)||!miniVisible();}
   browse.addEventListener('scroll',handoff,{passive:true});window.addEventListener('resize',handoff);
-  function progress(){const cur=$('musicLinkElapsed').textContent,dur=$('musicLinkScrub').max;const a=$('musicHeroCur'),b=$('musicHeroDur');if(a.textContent!==cur)a.textContent=cur;const total=!$('musicLinkScrub').disabled?fmtTime(Number(dur)): '--:--';if(b.textContent!==total)b.textContent=total;}
+  function progress(){const cur=$('musicLinkElapsed').textContent,dur=$('musicLinkScrub').max;const a=$('musicHeroCur'),b=$('musicHeroDur');if(a.textContent!==cur)a.textContent=cur;const duration=Number(nativeLinkAudio?.duration);const total=Number.isFinite(duration)&&duration>0?fmtTime(duration):'--:--';if(b.textContent!==total)b.textContent=total;}
+  let wasBrowse=false;
   function sync(){
-   const active=currentLinkUrl||savedLinks()[0]?.url;hero.hidden=currentMode!=='chill'||!active;
-   if(hero.hidden)return;let parsed;try{parsed=C.parseLink(active);}catch{hero.hidden=true;return;}const cached=metaCache[active],title=currentLinkUrl?currentLinkTitle:(savedLinks()[0]?.title||cached?.title),artist=currentLinkUrl?currentLinkAuthor:cached?.author;
+   const nowBrowse=!panel.hidden&&currentMode==='chill'&&!playerExpanded;if(nowBrowse&&!wasBrowse&&!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches){for(const [i,node]of [hero,...col.children].entries())node.animate?.([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,delay:i*36,easing:'cubic-bezier(.22,.61,.36,1)',fill:'backwards'});}wasBrowse=nowBrowse;
+   const active=currentLinkUrl||recentMusicRows()[0]?.url;hero.hidden=currentMode!=='chill'||!active;
+   if(hero.hidden)return;let parsed;try{parsed=C.parseLink(active);}catch{hero.hidden=true;return;}const cached=metaCache[active],title=currentLinkUrl?currentLinkTitle:(recentMusicRows()[0]?.title||cached?.title),artist=currentLinkUrl?currentLinkAuthor:cached?.author;
    for(const [id,text] of [['musicHeroTitle',title||'Chọn bài để nghe'],['musicHeroArtist',artist||'HSK Music'],['musicHeroEyebrow',linkOptimisticPlay?'ĐANG PHÁT':'TIẾP TỤC NGHE']])if($(id).textContent!==text)$(id).textContent=text;
    const pl=activePlaylistId&&savedPlaylists().find(p=>p.id===activePlaylistId);const source=pl?'Playlist: '+pl.name:cloudTracks.some(t=>t.url===active)?'Nguồn: Kho nhạc HSK':'Nguồn: '+(parsed.label||'Nhạc cá nhân');$('musicHeroSource').textContent=source;
    const image=$('musicHeroThumb'),src=artworkForUrl(active);if(image.dataset.art!==src){image.dataset.art=src;image.src=src;image.onerror=()=>{image.onerror=null;image.src=fallbackArt;};}

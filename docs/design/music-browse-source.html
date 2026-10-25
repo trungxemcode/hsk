@@ -1,0 +1,3143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>HSK · Nghe nhạc Giải trí — Prototype</title>
+<!--
+  ============================================================================
+  HSK Music — Màn hình nghe nhạc chính (Browse / Chill)
+  Design system: "rd" tokens (design-engine / design-system-expert)
+  Single file · no external asset · no CDN · no webfont · no JS lib
+  Icons = inline SVG · Cover art = pure CSS gradient (no image files)
+
+  v3 — bỏ khung giả lập, bỏ 3 chế độ:
+    · App-shell phủ kín viewport: html/body overflow:hidden, .app height:100dvh.
+      CHỈ .app-scroll cuộn → trang không bao giờ bị cuộn theo.
+    · .mini-player + thanh tiến trình của nó = position:fixed → đứng yên tuyệt đối.
+    · Layout fluid: .page grid auto-fit minmax + clamp() typography/space.
+      Không còn html[data-view], không còn nút chọn khổ.
+    · Chỉ 1 media query cấu trúc (hero sticky khi ≥820px) + 1 MQ cho review dock.
+
+  v18 — BOTTOM SHEET "Tùy chọn" (nút ⋯ ở header):
+    · #musicMenuSheet + #musicMenuBackdrop đặt ở BODY LEVEL (sau .app) để
+      position:fixed không bị tổ tiên tạo containing block.
+    · 5 view: main / library / save / personal / admin (map setMenuView() của
+      app thật; view "link" của chế độ học KHÔNG port).
+    · Nền ĐẶC, không backdrop-filter; scrim 80 / sheet 90.
+    · Token mới: --rd-sheet-bg, --rd-danger, --rd-danger-soft, --dur-view,
+      --sheet-pad (palette gốc chưa có token danger).
+  ============================================================================
+-->
+<style>
+/* ===========================================================================
+   1. DESIGN TOKENS — dùng nguyên văn từ design system, không tự bịa màu
+   =========================================================================== */
+:root{
+  --rd-canvas:#0f0f18; --rd-canvas-2:#13131f;
+  --rd-surface:#181826; --rd-surface-soft:#1d1d2e;
+  --rd-ink:#ededf7; --rd-ink-2:#c9c9de; --rd-muted:#9c9cb8; --rd-faint:#7a7a96;
+  --rd-line:#2a2a3f; --rd-line-soft:#232338;
+  --rd-brand:#5b4be8; --rd-brand-2:#7c6bff; --rd-brand-deep:#3b2fb0;
+  --rd-brand-soft:#241f45; --rd-brand-tint:#1c1930;
+  --palette-dark-violet:#9e92ff;
+  --rd-hero-grad:linear-gradient(158deg,#2a2350 0%,#241f45 38%,#1c1930 70%,#13131f 100%);
+  --rd-hero-glow:radial-gradient(120% 90% at 12% 0%,rgba(124,107,255,.26) 0%,rgba(124,107,255,0) 62%);
+  --rd-on-hero:#ffffff; --rd-on-hero-2:rgba(237,237,247,.80); --rd-on-hero-3:rgba(237,237,247,.62);
+  --rd-glass:rgba(19,19,31,.74); --rd-glass-solid:#13131f; --rd-glass-line:rgba(237,237,247,.09);
+  --rd-track:rgba(237,237,247,.16);
+  --rd-track-fill:linear-gradient(90deg,#5b4be8 0%,#7c6bff 55%,#9e92ff 100%);
+  --rd-playing:#9e92ff; --rd-playing-bg:rgba(124,107,255,.10); --rd-playing-line:rgba(124,107,255,.34);
+  --rd-skeleton:#232338; --rd-skeleton-sheen:rgba(237,237,247,.07);
+  --rd-scrim:rgba(15,15,24,.86);
+  --rd-shadow-hero:0 18px 44px -22px rgba(59,47,176,.55),0 2px 6px rgba(0,0,0,.34);
+  --rd-shadow-lg:0 28px 64px -32px rgba(0,0,0,.8);
+  --rd-ring:0 0 0 3px rgba(124,107,255,.25);
+  --radius-8px:8px; --radius-btn:12px; --radius-card:24px; --radius-pill:999px;
+  --radius-cover:16px; --radius-row:14px;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;--sp-6:24px;--sp-7:28px;--sp-8:32px;
+  --gutter:20px;
+  --font-ui:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Noto Sans",Arial,sans-serif;
+  --safe-top:0px; --safe-bottom:0px;
+  --h-header:56px; --h-pills:44px; --h-mini:64px;
+  /* nhịp dọc của hàng track — fluid, và chiều cao hàng suy ra từ nó
+     (44px = cover; dùng để tính max-height CHÍNH XÁC cho danh sách thu gọn,
+     nếu không sẽ thừa khoảng trống dưới 5 hàng) */
+  --row-pad:clamp(8px,.8vw,12px);
+  --row-h:calc(44px + var(--row-pad) * 2);
+  /* chiều cao khối header (header 56 + pills ~50) — chỉ để tham chiếu, layout
+     fluid hiện tại không cần trừ số này ra nữa */
+  --h-sticky:106px;
+  --ease-out:cubic-bezier(.22,.61,.36,1);
+  --ease-in-out:cubic-bezier(.4,0,.2,1);
+  --ease-spring:cubic-bezier(.34,1.32,.5,1);
+  --dur-fast:120ms; --dur-base:200ms; --dur-slow:320ms; --dur-morph:420ms; --stagger:36ms;
+  /* --- bổ sung cho bottom sheet "Tùy chọn" (v18) ---------------------------
+     --rd-danger #dd6b76: 5.38:1 trên nền sheet (--rd-surface) và 4.75:1 trên
+     chính nền hover của nó → đạt AA mà không chói trên nền tối.
+     Palette gốc CHƯA có token danger, nên đây là token mới bắt buộc khai báo. */
+  --rd-sheet-bg:var(--rd-surface);
+  --rd-danger:#dd6b76;
+  --rd-danger-soft:rgba(221,107,118,.10);
+  --dur-view:220ms;
+  --sheet-pad:12px;
+}
+
+/* ===========================================================================
+   2. BASE — khoá trang: KHÔNG cho <html>/<body> cuộn.
+   Đây là điều kiện bắt buộc để mini player (position:fixed) đứng yên.
+   =========================================================================== */
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%; overflow:hidden; overscroll-behavior:none}
+body{
+  margin:0;
+  background:var(--rd-canvas);
+  font-family:var(--font-ui);
+  color:var(--rd-ink);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+button{font-family:inherit;color:inherit}
+p,h1,h2,h3,h4{margin:0}
+:focus-visible{outline:none;box-shadow:var(--rd-ring)}
+
+/* generic press feedback (≤300ms) */
+.press{transition:transform var(--dur-fast) var(--ease-out)}
+.press:active{transform:scale(.96)}
+
+/* icon primitives */
+.ic{display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ic-fill{display:block;fill:currentColor;stroke:none}
+
+/* ===========================================================================
+   3. APP SHELL — app phủ kín viewport, chỉ .app-scroll cuộn
+   =========================================================================== */
+.app{
+  position:relative;
+  height:100vh; height:100dvh;      /* fallback cho trình duyệt chưa có dvh */
+  display:flex; flex-direction:column;
+  background:var(--rd-canvas);
+  overflow:hidden;
+}
+
+/* vùng cuộn DUY NHẤT của app */
+.app-scroll{
+  flex:1 1 auto; min-height:0;
+  overflow-y:auto; overflow-x:hidden;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.app-scroll::-webkit-scrollbar{display:none}
+
+/* --- page: 1 cột khi hẹp, 2 cột khi đủ chỗ — hoàn toàn tự động --- */
+.page{
+  width:min(100%,1120px);
+  margin-inline:auto;
+  /* 88px = chừa chỗ cho mini player (64) + 24 thở.
+     +44px nữa = chừa chỗ cho review dock nổi phía trên mini player, để panel
+     review không bao giờ đè lên hàng cuối. */
+  padding:0 clamp(16px,3.5vw,32px) calc(88px + 44px + env(safe-area-inset-bottom));
+  padding-top:clamp(12px,1.6vw,20px);
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));
+  gap:clamp(20px,3vw,36px);
+  align-content:start;
+}
+/* cột danh sách: 3 section xếp dọc, nhịp dọc fluid.
+   minmax(0,1fr) là BẮT BUỘC: mặc định cột grid là `auto` nên lấy min-content
+   của section (tiêu đề bài hát white-space:nowrap) làm sàn → tràn ngang.
+   min-width:0 trên item cũng cần để flex/grid con được phép co. */
+.col-list{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:clamp(20px,2.4vw,32px);
+  align-content:start;
+  min-width:0;
+}
+.page > .hero,.page > .col-list,.col-list > .section{min-width:0}
+
+/* ===========================================================================
+   3b. REVIEW PANEL — công cụ đổi state.
+   Mặc định CHỈ có một nút tròn nhỏ ở góc dưới-phải (không chiếm chỗ trên mặt
+   thiết kế); bấm vào mới bung popover lên trên. Trước đây thanh này luôn hiện
+   thành một dải nằm trơ ở góc nên rất khó coi trên màn rộng.
+   =========================================================================== */
+.review-dock{
+  position:fixed; right:16px; z-index:100;
+  /* mặc định sát đáy; chỉ nhấc lên khi mini player đang hiện (body.mini-on) */
+  bottom:16px;
+  display:flex; flex-direction:column; align-items:flex-end;
+  max-width:calc(100vw - 32px);
+  transition:bottom var(--dur-base) var(--ease-out);
+}
+body.mini-on .review-dock{
+  bottom:calc(var(--h-mini) + 16px + env(safe-area-inset-bottom));
+}
+
+/* popover: mở LÊN TRÊN nút tròn, canh phải, có animation nhẹ */
+.review-panel{
+  position:absolute; right:0; bottom:calc(100% + 10px);
+  display:flex; flex-direction:column; align-items:stretch; gap:2px;
+  min-width:184px; padding:6px;
+  border-radius:16px;
+  background:rgba(24,24,38,.97);
+  border:1px solid var(--rd-line);
+  box-shadow:0 26px 52px -26px rgba(0,0,0,.98);
+  visibility:hidden; opacity:0; pointer-events:none;
+  transform:translateY(6px) scale(.98); transform-origin:bottom right;
+  transition:opacity var(--dur-base) var(--ease-out),
+             transform var(--dur-base) var(--ease-out),
+             visibility 0s linear var(--dur-base);
+}
+.review-dock.is-open .review-panel{
+  visibility:visible; opacity:1; pointer-events:auto;
+  transform:translateY(0) scale(1);
+  transition-delay:0s;
+}
+.review-label{
+  padding:6px 10px 8px;
+  font-size:9.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--rd-faint);
+  border-bottom:1px solid var(--rd-line-soft);
+  margin-bottom:4px;
+}
+.review-panel button{
+  border:0; background:transparent; color:var(--rd-muted); text-align:left;
+  font-size:12.5px; font-weight:600; letter-spacing:0;
+  padding:8px 10px; border-radius:10px; cursor:pointer;
+  transition:background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.review-panel button:hover{color:var(--rd-ink); background:var(--rd-surface-soft)}
+.review-panel button.on{background:var(--rd-brand-soft); color:var(--palette-dark-violet)}
+
+/* nút tròn — hiện ở MỌI khổ, là thứ duy nhất nằm trên mặt thiết kế */
+.review-fab{
+  display:grid; place-items:center;
+  width:34px; height:34px; border-radius:50%;
+  background:var(--rd-surface-soft); border:1px solid rgba(237,237,247,.10);
+  color:var(--rd-ink-2); cursor:pointer;
+  opacity:.32;
+  box-shadow:0 8px 20px -14px rgba(0,0,0,.9);
+  transition:transform var(--dur-fast) var(--ease-out),
+             background var(--dur-fast) var(--ease-out),
+             opacity var(--dur-fast) var(--ease-out);
+}
+.review-fab:hover,.review-fab:focus-visible,.review-dock.is-open .review-fab{opacity:1}
+.review-fab svg{width:15px; height:15px}
+.review-fab:active{transform:scale(.92)}
+.review-fab .ic-x{display:none}
+.review-dock.is-open .review-fab{background:var(--rd-brand-soft); color:var(--palette-dark-violet)}
+.review-dock.is-open .review-fab .ic-x{display:block}
+.review-dock.is-open .review-fab .ic-menu{display:none}
+
+/* ===========================================================================
+   4. HEADER BLOCK — header (56) + filter pills, flex:0 0 auto trên .app-scroll
+   (không cần position:sticky nữa: nó là sibling đứng trên vùng cuộn)
+   =========================================================================== */
+.sticky-wrap{
+  flex:0 0 auto; z-index:30;
+  background:var(--rd-glass-solid);            /* fallback, đặt TRƯỚC */
+  border-bottom:1px solid var(--rd-glass-line);
+}
+@supports ((backdrop-filter:blur(4px)) or (-webkit-backdrop-filter:blur(4px))){
+  .sticky-wrap{
+    background:var(--rd-glass);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    backdrop-filter:blur(18px) saturate(160%);
+  }
+}
+/* canh hàng với .page (cùng max-width 1120, cùng padding-inline fluid) */
+.sticky-inner{width:min(100%,1120px); margin-inline:auto}
+
+.app-header{
+  height:var(--h-header);
+  display:grid; grid-template-columns:44px 1fr 44px; align-items:center;
+  padding:0 clamp(8px,2.2vw,20px);
+}
+.hd-btn{
+  width:44px; height:44px; display:grid; place-items:center;
+  border:0; background:transparent; color:var(--rd-ink-2);
+  border-radius:var(--radius-btn); cursor:pointer;
+  transition:transform var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.hd-btn:active{transform:scale(.92)}
+.hd-mid{min-width:0; text-align:center; padding:0 4px}
+.hd-eyebrow{
+  font-size:10.5px; font-weight:700; line-height:13px;
+  letter-spacing:.08em; text-transform:uppercase;
+  color:var(--palette-dark-violet);
+  margin-bottom:1px;
+}
+.hd-title{
+  font-size:16.5px; font-weight:700; line-height:1.25; letter-spacing:-.01em;
+  color:var(--rd-ink);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+/* --- filter pills (đủ padding-top để không bị cắt) --- */
+.pills{padding:8px clamp(16px,3.5vw,32px) 10px}
+.pills-inner{position:relative; display:flex; gap:8px}
+/* FIX 6: không animate layout property.
+   Indicator giữ width CỐ ĐỊNH (= pill rộng nhất) và chỉ animate
+   transform: translateX() + scaleX() với transform-origin:left. */
+.pill-ind{
+  position:absolute; left:0; top:0; height:32px; width:72px;
+  border-radius:16px;
+  background:var(--rd-brand-soft);
+  border:1px solid var(--rd-playing-line);
+  transform:translateX(0) scaleX(1);
+  transform-origin:left center;
+  transition:transform var(--dur-base) var(--ease-in-out);
+  z-index:0; pointer-events:none;
+}
+.pill{
+  position:relative; z-index:1;
+  height:32px; padding:0 15px;
+  border:1px solid transparent; border-radius:var(--radius-pill);
+  background:transparent; color:var(--rd-muted);
+  font-size:13px; font-weight:500; letter-spacing:.01em; white-space:nowrap;
+  cursor:pointer;
+  transition:color var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out),
+             background var(--dur-fast) var(--ease-out);
+}
+.pill:active{transform:scale(.96)}
+.pill.is-active{color:var(--palette-dark-violet); font-weight:600}
+
+/* ===========================================================================
+   5. COVER ART — gradient tự sinh + noise + ký tự Hán mờ
+   =========================================================================== */
+/* FIX 5 — cover: <img> là lớp chính, gradient + glyph CHỈ là fallback.
+   .no-img được set khi không có thumbnail hoặc khi img lỗi (onerror).
+   Có ảnh → không gradient, không noise, không glyph. */
+.cover{
+  position:relative; flex:none; overflow:hidden; display:block;
+  border-radius:10px;
+  background:var(--rd-surface-soft);
+}
+.cover-img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block;
+}
+.cover.no-img .cover-img{display:none}
+.cover.no-img{
+  background:linear-gradient(148deg,var(--c1,#241f45) 0%,var(--c2,#6a58e8) 58%,var(--c3,#171331) 100%);
+}
+.cover.no-img::after{
+  content:""; position:absolute; inset:0;
+  background:
+    repeating-linear-gradient(118deg,rgba(255,255,255,.035) 0 1px,rgba(255,255,255,0) 1px 4px),
+    radial-gradient(82% 62% at 16% 4%,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 58%),
+    radial-gradient(60% 40% at 92% 96%,rgba(0,0,0,.34) 0%,rgba(0,0,0,0) 70%),
+    linear-gradient(0deg,rgba(0,0,0,.40) 0%,rgba(0,0,0,0) 58%);
+}
+.cover-fallback{
+  display:none;
+  position:absolute; right:3px; bottom:-6px;
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+  font-weight:700; line-height:1;
+  color:rgba(255,255,255,.22);
+  letter-spacing:-.04em;
+  z-index:1;
+}
+.cover.no-img .cover-fallback{display:block}
+
+/* ===========================================================================
+   6. HERO "Đang phát"
+   =========================================================================== */
+.hero{
+  position:relative;
+  margin:0;
+  padding:clamp(14px,1.6vw,20px);
+  border-radius:var(--radius-card);
+  background:var(--rd-hero-grad);
+  border:1px solid var(--rd-glass-line);
+  box-shadow:var(--rd-shadow-hero);
+  overflow:hidden;
+  transition:transform var(--dur-fast) var(--ease-out);
+}
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background:var(--rd-hero-glow);
+  pointer-events:none;
+}
+.hero:active{transform:scale(.985)}
+/* FIX 2: .hero không còn role="button" (chứa button con là invalid).
+   Một <button> phủ toàn thân card đảm nhận việc "bấm hero = mở player". */
+.hero-hit{
+  position:absolute; inset:0; z-index:1;
+  border:0; background:transparent; padding:0;
+  border-radius:inherit; cursor:pointer;
+}
+.hero-live,.hero-empty{position:relative; z-index:2; pointer-events:none}
+.hero-live button,.hero-empty button{pointer-events:auto; position:relative; z-index:3}
+
+.hero-eyebrow{
+  display:flex; align-items:center; gap:7px;
+  font-size:11px; line-height:13px; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase;
+  color:var(--palette-dark-violet);
+  margin-bottom:6px;
+}
+.hero-eyebrow .dot{
+  width:5px; height:5px; border-radius:50%;
+  background:var(--rd-playing);
+  box-shadow:0 0 0 3px rgba(158,146,255,.16);
+}
+.hero-title{
+  font-size:clamp(20px,1.1vw + 15px,26px); line-height:1.2; font-weight:700; letter-spacing:-.015em;
+  color:var(--rd-on-hero);
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  overflow:hidden;
+  margin-bottom:3px;
+}
+.hero-artist{
+  font-size:clamp(13px,.4vw + 12px,15px); line-height:1.35; font-weight:500; color:var(--rd-on-hero-2);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+/* gộp khối text vào CẠNH cover (một tầng duy nhất) — hết void bên phải */
+.hero-top{
+  display:grid; grid-template-columns:clamp(88px,8vw,128px) minmax(0,1fr);
+  gap:clamp(12px,1.4vw,16px); align-items:center;
+}
+.hero-text{display:grid; gap:4px; min-width:0}
+.hero-text > *{margin:0}
+.hero-cover{
+  width:clamp(88px,8vw,128px); height:clamp(88px,8vw,128px);
+  border-radius:var(--radius-cover); box-shadow:var(--rd-shadow-lg);
+}
+.hero-cover .cover-fallback{font-size:clamp(52px,4.6vw,78px); right:1px; bottom:-14px}
+/* nguồn phát suy ra từ data thật (playlist > YouTube > kho) */
+.hero-note{
+  font-size:clamp(11.5px,.25vw + 11px,12.5px); line-height:1.35; color:var(--rd-on-hero-3);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.hero-note b{font-weight:600; color:var(--rd-on-hero)}
+
+.hero-bar{margin-top:clamp(12px,1.5vw,16px)}
+/* Thanh tiến trình KHÔNG còn nằm trong hero — đã tách ra #npProgress (fixed).
+   Ở đây chỉ giữ mốc thời gian để thẻ hero vẫn có thông tin. */
+.bar-times{
+  display:flex; justify-content:flex-end; align-items:baseline; gap:6px;
+  font-size:12px; font-variant-numeric:tabular-nums; color:var(--rd-on-hero-3);
+}
+.bar-times span + span::before{content:'/'; margin-right:6px; opacity:.55}
+
+/* FIX 3: căn giữa, hết void 172px. Thứ tự: "+" 40 · play 52 · mở rộng 40 */
+.hero-actions{display:flex; align-items:center; justify-content:center; gap:18px; margin-top:16px}
+.play-btn{
+  width:52px; height:52px; border-radius:50%; border:0;
+  display:grid; place-items:center; color:#fff;
+  background:linear-gradient(145deg,#7c6bff,#5b4be8);
+  box-shadow:0 12px 26px -12px rgba(91,75,232,.95);
+  cursor:pointer;
+  transition:transform var(--dur-fast) var(--ease-out), filter var(--dur-fast) var(--ease-out);
+}
+.play-btn:active{transform:scale(.94)}
+.ghost-btn{
+  width:40px; height:40px; border-radius:50%; border:0;
+  background:rgba(237,237,247,.10); color:var(--rd-on-hero-2);
+  display:grid; place-items:center; cursor:pointer;
+  transition:transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.ghost-btn:active{transform:scale(.92)}
+
+/* play / pause icon swap */
+[data-play] .i-pause{display:none}
+[data-play].is-paused .i-play{display:none}
+[data-play].is-paused .i-pause{display:block}
+
+/* hero empty variant (state "Chưa có bài") */
+.hero-empty{display:none; padding:6px 0 2px}
+.hero-empty .hero-title{white-space:normal}
+.hero-empty .hero-artist{max-width:250px; white-space:normal; overflow:visible; text-overflow:clip}
+.hero-empty .hero-actions{justify-content:flex-start; margin-top:18px}
+
+/* ===========================================================================
+   7. SECTIONS  +  COLLAPSE PATTERN
+   ---------------------------------------------------------------------------
+   .sec-collapsible[data-state] = normal | open | collapsed
+   Phần đầu (chip đếm + chevron + nút phụ) đọc state từ chính <section>,
+   danh sách đọc state từ #recentList[data-state] (cùng giá trị, JS set cả 2).
+   =========================================================================== */
+.section{padding:0; margin-top:0}
+.sec-head{display:flex; align-items:center; gap:8px; margin-bottom:10px}
+
+.sec-h3{
+  margin:0; min-width:0;
+  font-size:clamp(15px,.35vw + 14px,17px); font-weight:650; letter-spacing:-.01em; line-height:1.25;
+}
+/* vùng bấm = cả tiêu đề + chip + chevron. <h3> giữ nguyên ngữ nghĩa heading,
+   <button> bên trong đảm nhận focus/Enter/Space. Padding 0 + ::after mở rộng
+   vùng chạm 8px mà KHÔNG làm đổi chiều cao .sec-head. */
+.sec-toggle{
+  position:relative;
+  display:flex; align-items:center; gap:8px; min-width:0;
+  padding:0; margin:0; border:0; background:none;
+  color:inherit; font-size:clamp(15px,.35vw + 14px,17px); font-weight:650; letter-spacing:-.01em;
+  line-height:1.25; cursor:pointer; border-radius:8px;
+  transition:color var(--dur-fast) var(--ease-out);
+}
+.sec-toggle::after{content:""; position:absolute; inset:-8px -4px; border-radius:8px}
+.sec-title{
+  font-size:clamp(15px,.35vw + 14px,17px); font-weight:650; letter-spacing:-.01em; color:var(--rd-ink);
+  min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  transition:color var(--dur-fast) var(--ease-out);
+}
+.sec-chev{
+  flex:none; color:var(--rd-muted);
+  transform:rotate(0deg);
+  transition:transform var(--dur-base) var(--ease-in-out), color var(--dur-fast) var(--ease-out);
+}
+.sec-count{
+  display:none; flex:none;
+  font-size:12px; font-weight:500; line-height:1.5;
+  color:var(--rd-muted); background:var(--rd-surface-soft);
+  border-radius:var(--radius-8px); padding:2px 8px;
+}
+.sec-collapsible[data-state="collapsed"] .sec-count{display:inline-block}
+.sec-collapsible[data-state="collapsed"] .sec-chev{transform:rotate(-90deg)}
+.sec-collapsible[data-state="collapsed"] .sec-action{display:none}
+
+.sec-action{
+  margin-left:auto; border:0; background:none;
+  color:var(--palette-dark-violet);
+  font-size:13px; font-weight:600; padding:6px 2px; cursor:pointer;
+  border-radius:6px;
+  transition:opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.sec-action:active{transform:scale(.96)}
+.sec-action[hidden]{display:none}
+.count-chip{
+  font-size:12px; font-weight:500; line-height:1.5;
+  color:var(--rd-muted); background:var(--rd-surface-soft);
+  border-radius:var(--radius-8px); padding:2px 8px;
+}
+.icon-btn{
+  width:32px; height:32px; border:0; border-radius:10px; background:transparent;
+  color:var(--rd-muted); display:grid; place-items:center; cursor:pointer;
+  transition:transform var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.icon-btn:active{transform:scale(.92)}
+.ml-auto{margin-left:auto}
+
+/* --- track row --- */
+.track-row{
+  position:relative;
+  display:flex; align-items:center; gap:12px;
+  min-height:var(--row-h); padding:var(--row-pad);
+  border-radius:var(--radius-row);
+  cursor:pointer;
+  transition:background var(--dur-fast) var(--ease-out),
+             transform var(--dur-fast) var(--ease-out),
+             opacity var(--dur-slow) var(--ease-out);
+}
+.track-row:active{transform:scale(.985)}
+/* accent bar: dùng pseudo thay cho inset box-shadow để animate được (scaleY 200ms) */
+.track-row::before{
+  content:""; position:absolute; left:0; top:12px; bottom:12px; width:3px;
+  border-radius:0 3px 3px 0; background:var(--rd-playing);
+  transform:scaleY(0); transform-origin:center;
+  transition:transform var(--dur-base) var(--ease-out);
+}
+.track-row.is-playing{background:var(--rd-playing-bg)}
+.track-row.is-playing::before{transform:scaleY(1)}
+.track-row.is-playing .track-title{color:var(--rd-playing)}
+.row-cover{width:44px; height:44px; border-radius:10px}
+.row-cover .cover-fallback{font-size:22px; bottom:-3px; right:2px}
+.track-body{flex:1; min-width:0}
+.track-title{
+  font-size:clamp(14px,.3vw + 13px,15.5px); font-weight:600; line-height:1.25;
+  color:var(--rd-ink); margin-bottom:2px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.track-sub{
+  font-size:13px; font-weight:450; line-height:1.3;
+  color:var(--rd-muted);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.row-more{
+  flex:none; width:32px; height:32px; border:0; border-radius:10px;
+  background:transparent; color:var(--rd-ink); opacity:.55;
+  display:grid; place-items:center; cursor:pointer;
+  transition:opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.row-more:active{transform:scale(.9)}
+
+/* --- equalizer (hàng đang phát) --- */
+.eq{display:none; flex:none; width:32px; height:32px; align-items:flex-end; justify-content:center; gap:2.5px; padding-bottom:9px}
+.eq i{width:3px; height:14px; border-radius:1.5px; background:var(--rd-playing); transform-origin:bottom; animation:eqBounce 900ms var(--ease-in-out) infinite}
+.eq i:nth-child(1){animation-delay:-200ms}
+.eq i:nth-child(2){animation-delay:-500ms}
+.eq i:nth-child(3){animation-delay:-80ms}
+.track-row.is-playing .eq{display:flex}
+.track-row.is-playing .row-more{display:none}
+@keyframes eqBounce{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+
+/* --- recent list: 3 trạng thái normal(5) / open(8) / collapsed(0) ---
+   Hàng 6–8 khi không mở không chỉ mờ đi mà còn visibility:hidden (+ inert
+   do JS set) để không còn focus được bằng bàn phím.
+   Ngoại lệ được cấp phép: animate max-height + opacity (không animate height). */
+.recent-list{
+  max-height:calc(var(--row-h) * 5);   /* khít đúng 5 hàng — không thừa khoảng trống */
+  opacity:1;
+  overflow:hidden;
+  transition:max-height var(--dur-slow) var(--ease-out),
+             opacity var(--dur-slow) var(--ease-out);
+}
+.recent-list[data-state="open"]{max-height:calc(var(--row-h) * 8)}
+.recent-list[data-state="collapsed"]{max-height:0; opacity:0}
+.recent-list .track-row:nth-child(n+6){
+  opacity:0; visibility:hidden;
+  transition:background var(--dur-fast) var(--ease-out),
+             transform var(--dur-fast) var(--ease-out),
+             opacity var(--dur-slow) var(--ease-out),
+             visibility 0s linear var(--dur-slow);
+}
+.recent-list[data-state="open"] .track-row:nth-child(n+6){
+  opacity:1; visibility:visible;
+  transition:background var(--dur-fast) var(--ease-out),
+             transform var(--dur-fast) var(--ease-out),
+             opacity var(--dur-slow) var(--ease-out),
+             visibility 0s linear 0s;
+}
+
+/* ===========================================================================
+   8. LIBRARY (Kho nhạc HSK) — ok / loading / error
+   =========================================================================== */
+.lib-error{
+  display:none; align-items:center; gap:12px;
+  padding:14px 12px; border-radius:var(--radius-row);
+  background:var(--rd-surface); border:1px solid var(--rd-line-soft);
+}
+.lib-error p{flex:1; font-size:13px; line-height:1.45; color:var(--rd-muted)}
+.retry-btn{
+  flex:none; height:32px; padding:0 12px; border-radius:var(--radius-8px);
+  background:transparent; border:1px solid var(--rd-line);
+  color:var(--rd-ink-2); font-size:12.5px; font-weight:600; cursor:pointer;
+  transition:transform var(--dur-fast) var(--ease-out), border-color var(--dur-fast);
+}
+.retry-btn:active{transform:scale(.96)}
+
+.lib-loading{display:none}
+.sk-row{display:flex; align-items:center; gap:12px; min-height:var(--row-h); padding:var(--row-pad)}
+.sk{position:relative; overflow:hidden; background:var(--rd-skeleton); border-radius:8px}
+.sk::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(90deg,transparent 0%,var(--rd-skeleton-sheen) 50%,transparent 100%);
+  transform:translateX(-100%);
+  animation:shimmer 1400ms linear infinite;
+}
+.sk-thumb{width:44px; height:44px; border-radius:10px; flex:none}
+.sk-lines{flex:1; min-width:0}
+.sk-l1{height:11px; width:74%; margin-bottom:8px}
+.sk-l2{height:9px; width:44%}
+@keyframes shimmer{to{transform:translateX(100%)}}
+
+/* ===========================================================================
+   9. PLAYLISTS — empty state / list
+   =========================================================================== */
+.pl-empty{
+  display:none; flex-direction:column; align-items:center; text-align:center;
+  padding:24px; border:1px dashed var(--rd-line); border-radius:20px;
+}
+.pl-empty .ic-lg{width:40px; height:40px; color:var(--rd-faint); margin-bottom:10px}
+.pl-empty h4{font-size:15px; font-weight:600; color:var(--rd-ink-2); margin-bottom:6px}
+.pl-empty p{font-size:13px; line-height:18px; color:var(--rd-muted); max-width:252px}
+.cta-pill{
+  margin-top:14px; height:40px; padding:0 18px; border:0; border-radius:var(--radius-pill);
+  background:var(--rd-brand); color:#fff; font-size:14px; font-weight:600; cursor:pointer;
+  box-shadow:0 12px 24px -14px rgba(91,75,232,.95);
+  transition:transform var(--dur-fast) var(--ease-out), filter var(--dur-fast) var(--ease-out);
+}
+.cta-pill:active{transform:scale(.96)}
+
+.pl-list{display:block}
+.pl-row{
+  display:flex; align-items:center; gap:12px;
+  min-height:var(--row-h); padding:var(--row-pad); border-radius:var(--radius-row);
+  cursor:pointer;
+  transition:background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.pl-row:active{transform:scale(.985)}
+.pl-ic{
+  flex:none; width:44px; height:44px; border-radius:12px;
+  display:grid; place-items:center;
+  background:var(--rd-surface-soft); border:1px solid var(--rd-line-soft);
+  color:var(--palette-dark-violet);
+}
+.pl-chev{flex:none; color:var(--rd-faint); display:grid; place-items:center}
+
+/* Hàng "Tạo playlist mới" — nằm trong .pl-list nên tự ẩn ở state noplaylist
+   (khi đó đã có .pl-empty dashed to, tránh 2 khối dashed trùng nhau). */
+.pl-add{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  width:100%; height:56px; margin-top:2px;
+  border:1px dashed var(--rd-line); border-radius:var(--radius-row);
+  background:transparent; color:var(--rd-ink-2);
+  font-size:14px; font-weight:600; letter-spacing:.01em;
+  cursor:pointer;
+  transition:background var(--dur-fast) var(--ease-out),
+             border-color var(--dur-fast) var(--ease-out),
+             transform var(--dur-fast) var(--ease-out);
+}
+.pl-add .ic{color:var(--palette-dark-violet)}
+.pl-add:active{background:var(--rd-surface); transform:scale(.99)}
+.pl-hint{
+  padding-top:12px;
+  font-size:12px; line-height:16px; color:var(--rd-muted);
+  text-align:left;
+}
+
+/* ===========================================================================
+   10. MINI PLAYER — position:fixed ⇒ đứng yên tuyệt đối ở mọi vị trí cuộn.
+   Căn giữa bằng margin-inline:auto (KHÔNG dùng transform, để animation
+   translateY của mini player không bị giành quyền điều khiển transform).
+   =========================================================================== */
+/* FIX 2: khi ẩn thì visibility:hidden (delay 420ms để không cắt animation
+   trượt xuống) + inert do JS set → không focus được. */
+.mini-player{
+  position:fixed; left:0; right:0; bottom:3px;   /* 3px = bề dày thanh tiến trình độc lập */
+  margin-inline:auto; max-width:1120px;
+  z-index:40;
+  min-height:var(--h-mini);
+  display:flex; align-items:center; gap:10px;
+  padding:0 clamp(10px,2vw,16px) env(safe-area-inset-bottom) clamp(12px,2vw,16px);
+  background:var(--rd-glass-solid);            /* fallback, đặt TRƯỚC */
+  border-top:1px solid var(--rd-glass-line);
+  border-radius:16px 16px 0 0;
+  overflow:hidden;
+  opacity:0; visibility:hidden; transform:translateY(100%);
+  transition:transform var(--dur-morph) var(--ease-spring),
+             opacity var(--dur-base) var(--ease-out),
+             visibility 0s linear var(--dur-morph);
+  will-change:transform;
+  touch-action:none;
+}
+@supports ((backdrop-filter:blur(4px)) or (-webkit-backdrop-filter:blur(4px))){
+  .mini-player{
+    background:var(--rd-glass);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    backdrop-filter:blur(18px) saturate(160%);
+  }
+}
+.mini-player.is-visible{
+  opacity:1; visibility:visible; transform:translateY(0);
+  transition:transform var(--dur-morph) var(--ease-spring),
+             opacity var(--dur-base) var(--ease-out),
+             visibility 0s linear 0s;
+}
+/* thanh tiến trình nằm BÊN TRONG thẻ, sát mép trên — không bao giờ lơ lửng */
+/* Thanh tiến trình ĐỘC LẬP — fixed theo viewport, ngoài mọi vùng cuộn.
+   Đây là nơi duy nhất hiển thị tiến trình; hero và mini player không còn
+   thanh riêng nên không thể bị cuộn kéo theo. */
+.np-progress{
+  position:fixed; left:0; right:0; bottom:0; z-index:70;
+  margin-inline:auto; max-width:1120px;      /* thẳng hàng với thẻ mini player */
+  height:3px; background:var(--rd-track); overflow:hidden;
+  pointer-events:none;
+  transition:opacity var(--dur-base) var(--ease-out);
+}
+.np-progress .np-fill{
+  display:block; height:100%; width:100%;
+  background:var(--rd-track-fill);
+  transform:scaleX(.37); transform-origin:left center;
+  transition:transform 900ms linear;
+}
+body.state-empty .np-progress{opacity:0}
+.mini-cover{width:40px; height:40px; border-radius:10px}
+.mini-cover .cover-fallback{font-size:19px; bottom:-3px; right:2px}
+.mini-body{flex:1; min-width:0}
+.mini-title{
+  font-size:13px; font-weight:600; line-height:1.3; color:var(--rd-ink);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.mini-sub{
+  font-size:11.5px; line-height:15px; color:var(--rd-muted);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.mini-btn{
+  flex:none; width:32px; height:32px; border-radius:50%; border:0;
+  background:rgba(237,237,247,.08); color:var(--rd-ink-2);
+  display:grid; place-items:center; cursor:pointer;
+  transition:transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.mini-btn:active{transform:scale(.9)}
+.mini-play{
+  flex:none; width:32px; height:32px; border-radius:50%; border:0;
+  background:var(--rd-brand-2); color:#fff;
+  display:grid; place-items:center; cursor:pointer;
+  transition:transform var(--dur-fast) var(--ease-out), filter var(--dur-fast) var(--ease-out);
+}
+.mini-play:active{transform:scale(.9)}
+
+/* ===========================================================================
+   11. TOAST
+   =========================================================================== */
+.toast{
+  position:fixed; left:50%; bottom:calc(88px + env(safe-area-inset-bottom));
+  transform:translate(-50%,8px); opacity:0; pointer-events:none; z-index:60;
+  max-width:calc(100vw - 32px);
+  background:rgba(19,19,31,.94); border:1px solid var(--rd-glass-line);
+  color:var(--rd-ink-2); font-size:12.5px; font-weight:500; white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis;
+  padding:9px 14px; border-radius:var(--radius-pill);
+  box-shadow:0 14px 30px -16px rgba(0,0,0,.95);
+  transition:opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+.toast.show{opacity:1; transform:translate(-50%,0)}
+
+/* ===========================================================================
+   12. SECTION TRANSITION (filter tabs)
+   =========================================================================== */
+.sec-out{opacity:0; transform:translateY(-4px); transition:opacity 120ms linear, transform 120ms linear; pointer-events:none}
+.sec-in{animation:secIn 200ms var(--ease-out) both}
+@keyframes secIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)}}
+
+/* ===========================================================================
+   13. STATE CLASSES (review toolbar)
+   =========================================================================== */
+/* state-empty: không có bài đang phát — CHỈ đổi hero + ẩn mini.
+   FIX 4: KHÔNG đụng tới playlist (đó là state riêng "noplaylist"). */
+.state-empty .hero-live{display:none}
+.state-empty .hero-empty{display:block}
+.state-empty .mini-player{display:none}
+
+/* state-noplaylist: vẫn đang phát bình thường nhưng chưa có playlist nào */
+.state-noplaylist .pl-list{display:none}
+.state-noplaylist .pl-empty{display:flex}
+
+/* state-error: kho nhạc lỗi — mất kết nối thì KHÔNG khẳng định số lượng,
+   nên ẩn count chip (chỉ hiện số khi có danh sách cache thật) */
+.state-error .lib-ok{display:none}
+.state-error .lib-error{display:flex}
+.state-error .count-chip{display:none}
+
+/* state-loading: skeleton */
+.state-loading .lib-ok{display:none}
+.state-loading .lib-error{display:none}
+.state-loading .lib-loading{display:block}
+
+/* ===========================================================================
+   14. ENTRY ANIMATION (chỉ chạy khi body.booting — gỡ sau 1s để không
+       tranh chấp transform với :active / section transition)
+   =========================================================================== */
+body.booting .anim-in{animation:enterIn 240ms var(--ease-out) backwards; animation-delay:calc(var(--i,0) * var(--stagger))}
+@keyframes enterIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)}}
+
+/* ===========================================================================
+   15. FLUID — không còn mốc cố định nào trong CSS layout.
+   Số cột do `grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))`
+   tự quyết định; typography/space do clamp(). Chỉ 1 media query CẤU TRÚC:
+   hero sticky khi .page đã thành 2 cột.
+   =========================================================================== */
+
+/* Khi chỉ có 1 cột mà sticky thì hero sẽ che danh sách → chỉ bật từ 820px.
+   .app-scroll là scroller DUY NHẤT và header nằm NGOÀI nó, nên `top` tính từ
+   đỉnh scrollport (16px) — không cộng thêm chiều cao header nữa. */
+@media (min-width:820px){
+  .hero{position:sticky; top:16px; align-self:start}
+}
+
+/* ---------- 15a. HOVER — chỉ khi thiết bị thật sự có hover ---------------
+   Không còn điều kiện theo bề rộng: hover chạy ở mọi khổ, nhưng gói trong
+   @media (hover:hover) để cảm ứng không dính "hover giả" sau khi tap. */
+@media (hover:hover){
+  .hd-btn:hover{color:var(--rd-ink)}
+  .track-row:hover{background:var(--rd-surface)}
+  .track-row:hover .row-more{opacity:1}
+  .row-more:hover{opacity:1}
+  .icon-btn:hover{color:var(--rd-ink-2); background:var(--rd-surface)}
+  .pl-row:hover{background:var(--rd-surface)}
+  .pl-add:hover{background:var(--rd-surface); border-color:var(--rd-playing-line)}
+  .retry-btn:hover{border-color:var(--rd-playing-line)}
+  .pill:hover{color:var(--rd-ink-2); background:var(--rd-surface-soft)}
+  .pill.is-active:hover{color:var(--palette-dark-violet); background:var(--rd-brand-soft)}
+  .play-btn:hover{filter:brightness(1.10)}
+  .mini-play:hover{filter:brightness(1.10)}
+  .ghost-btn:hover{background:rgba(237,237,247,.16)}
+  .mini-btn:hover{background:rgba(237,237,247,.16)}
+  .sec-action:hover{opacity:.72}
+  .cta-pill:hover{filter:brightness(1.08)}
+  .sec-toggle:hover .sec-title{color:var(--palette-dark-violet)}
+  .sec-toggle:hover .sec-chev{color:var(--rd-ink-2)}
+}
+
+/* ---------- 15b. Review dock: nút tròn + popover dùng chung mọi khổ -------- */
+/* (đã gộp vào mục 3b — không còn media query riêng cho dock) */
+
+/* ---------- 15c. BOTTOM SHEET "Tùy chọn" (v18) ---------------------------
+   Tầng z-index: header 30 · mini 40 · toast 60 · np-progress 70 ·
+                 scrim 80 · SHEET 90 · review dock 100.
+   Nền ĐẶC, không backdrop-filter: scrim đã .86 nên blur vô nghĩa + tốn GPU
+   khi kéo. KHÔNG set height — chỉ max-height, để sheet ôm nội dung.
+   ------------------------------------------------------------------------ */
+.sheet-sr{
+  position:absolute; width:1px; height:1px; margin:-1px; padding:0;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+/* --- scrim --- */
+.sheet-scrim{
+  position:fixed; inset:0; z-index:80;
+  background:var(--rd-scrim);
+  opacity:0; visibility:hidden;
+  transition:opacity var(--dur-base) var(--ease-out), visibility 0s linear var(--dur-base);
+}
+.sheet-scrim.is-open{
+  opacity:1; visibility:visible;
+  transition:opacity var(--dur-base) var(--ease-out), visibility 0s linear 0s;
+}
+
+/* --- khung sheet --- */
+.sheet{
+  position:fixed; left:0; right:0; bottom:0; z-index:90;
+  margin-inline:auto; width:100%; max-width:520px;
+  max-height:min(86dvh,720px);              /* KHÔNG set height */
+  display:flex; flex-direction:column;
+  background:var(--rd-sheet-bg);
+  border:1px solid var(--rd-glass-line); border-bottom:0;
+  border-radius:24px 24px 0 0;
+  box-shadow:var(--rd-shadow-lg);
+  padding-bottom:calc(8px + env(safe-area-inset-bottom));   /* ngoài vùng cuộn */
+  transform:translateY(100%); opacity:0; visibility:hidden;
+  transition:transform var(--dur-slow) var(--ease-spring),
+             opacity var(--dur-base) var(--ease-out),
+             visibility 0s linear var(--dur-slow);
+  will-change:transform;
+}
+.sheet.is-open{
+  transform:translateY(0); opacity:1; visibility:visible;
+  transition:transform var(--dur-slow) var(--ease-spring),
+             opacity var(--dur-base) var(--ease-out),
+             visibility 0s linear 0s;
+}
+.sheet.is-dragging{transition:none}
+.sheet [hidden]{display:none !important}
+
+/* --- tay kéo --- */
+.sheet-handle{
+  flex:none; height:32px; padding-top:8px;
+  display:flex; justify-content:center; align-items:flex-start;
+  cursor:grab; touch-action:none;
+}
+.sheet-handle:active{cursor:grabbing}
+.sheet-handle::before{
+  content:""; width:36px; height:4px; border-radius:var(--radius-pill);
+  background:var(--rd-track);
+}
+
+/* --- sub-head --- */
+.sheet-subhead{
+  flex:none; display:flex; align-items:center; gap:8px;
+  min-height:52px; padding:0 var(--sheet-pad) 8px;
+  border-bottom:1px solid var(--rd-line-soft);
+}
+.sheet-title{
+  flex:1; min-width:0; text-align:center;
+  font-size:16px; font-weight:650; line-height:1.3; color:var(--rd-ink);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.sheet-back{
+  flex:none; width:36px; height:36px; border-radius:var(--radius-pill);
+  border:0; background:transparent; color:var(--rd-ink-2);
+  display:grid; place-items:center; cursor:pointer;
+  transition:background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.sheet-back:active{background:var(--rd-surface-soft); transform:scale(.94)}
+/* view save: nút trái là chữ "Hủy" (đúng app thật), không phải icon */
+.sheet-back .sb-text{display:none}
+.sheet-back.is-text{width:auto; min-width:44px; padding:0 10px; display:flex}
+.sheet-back.is-text .sb-ico{display:none}
+.sheet-back.is-text .sb-text{display:inline; font-size:14px; font-weight:600; color:var(--rd-ink-2)}
+/* "Xong" = hành động ghi lựa chọn */
+.sheet-back--done{
+  width:auto; min-width:44px; padding:0 10px;
+  font-size:14px; font-weight:650; color:var(--palette-dark-violet);
+}
+
+/* --- status (aria-live) — giữ 18px thường trực để nội dung không nhảy --- */
+.sheet-status{
+  flex:none; margin:0; padding:0 var(--sheet-pad);
+  min-height:18px;
+  font-size:12.5px; line-height:18px; color:var(--rd-muted);
+}
+
+/* --- vùng cuộn duy nhất của sheet --- */
+.sheet-body{
+  flex:1 1 auto; min-height:0;
+  overflow-y:auto; overscroll-behavior:contain;
+  padding:4px var(--sheet-pad) 0;
+  scrollbar-width:none;
+}
+.sheet-body::-webkit-scrollbar{display:none}
+/* còn nội dung phía dưới → fade đáy (scrollbar đã bị ẩn, đây là chỉ báo duy nhất) */
+.sheet-body.is-scrollable{
+  -webkit-mask-image:linear-gradient(#000 calc(100% - 22px), transparent);
+  mask-image:linear-gradient(#000 calc(100% - 22px), transparent);
+}
+
+/* --- view + chuyển view --- */
+.sheet-view{display:none; flex-direction:column; gap:2px; padding-bottom:8px}
+.sheet-view.is-active{display:flex}
+.sheet-view.is-in-fwd{animation:sheetInFwd var(--dur-view) var(--ease-out) both}
+.sheet-view.is-in-back{animation:sheetInBack var(--dur-view) var(--ease-out) both}
+@keyframes sheetInFwd{from{opacity:0; transform:translateX(14px)} to{opacity:1; transform:translateX(0)}}
+@keyframes sheetInBack{from{opacity:0; transform:translateX(-14px)} to{opacity:1; transform:translateX(0)}}
+
+/* --- row dùng chung --- */
+.s-row{
+  display:flex; align-items:center; gap:12px; width:100%;
+  min-height:52px; padding:8px 10px;
+  border:0; border-radius:var(--radius-row); background:transparent;
+  font-family:inherit; font-size:14.5px; font-weight:600; color:var(--rd-ink-2);
+  text-align:left; cursor:pointer;
+  transition:background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.s-row:active{transform:scale(.99); background:var(--rd-surface-soft)}
+.s-ico{flex:none; width:20px; height:20px; color:var(--rd-muted); display:grid; place-items:center}
+.s-ico svg{width:20px; height:20px}
+.s-label{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.s-chev{flex:none; width:16px; height:16px; color:var(--rd-faint); display:grid; place-items:center}
+.s-chev svg{width:16px; height:16px}
+.s-copy{flex:1; min-width:0; display:block}
+.s-title{
+  display:block; font-size:14px; font-weight:650; line-height:1.3; color:var(--rd-ink);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.s-sub{
+  display:block; margin-top:2px;
+  font-size:12px; line-height:16px; color:var(--rd-muted);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+/* track head: không bấm được */
+.s-row--stack{cursor:default; min-height:56px; padding:6px 10px}
+.s-row--stack:active{transform:none; background:transparent}
+.s-cover{width:44px; height:44px; border-radius:10px}
+.s-cover .cover-fallback{font-size:20px; bottom:-3px; right:2px}
+
+/* row nguy hiểm */
+.s-row--danger{color:var(--rd-danger)}
+.s-row--danger .s-ico{color:var(--rd-danger)}
+.s-row--danger:active{background:var(--rd-danger-soft)}
+/* đã arm: trạng thái chờ xác nhận phải NHÌN THẤY ngay tại hàng, không chỉ ở
+   #musicStatus (12.5px ở đỉnh sheet, cách hàng ~600px) */
+.s-row--danger.is-armed{
+  position:relative; overflow:hidden;
+  background:var(--rd-danger-soft);
+  box-shadow:inset 0 0 0 1px var(--rd-danger);
+}
+.s-row--danger.is-armed::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
+  background:var(--rd-danger); transform-origin:left center;
+  animation:sArmCount 3200ms linear forwards;
+}
+@keyframes sArmCount{from{transform:scaleX(1)} to{transform:scaleX(0)}}
+
+/* view main cao hơn các view form → hàng thấp hơn 4px + gap 0 để không tràn
+   màn 390 khi bật is-owner (13 hàng). gap:0 không đổi gì về hình vì row trong
+   suốt; khoảng thở nằm trong padding của từng hàng. */
+.sheet-view[data-view="main"] .s-row{min-height:48px}
+.sheet-view[data-view="main"]{gap:0}
+
+/* 2 hàng admin: chỉ hiện khi body.is-owner */
+.s-row--owner{display:none}
+body.is-owner .s-row--owner{display:flex}
+
+/* row bị disable (state-empty) */
+.s-row.is-disabled{opacity:.42; pointer-events:none}
+
+/* row con trong danh sách (playlist, link đã lưu) */
+.s-row--sub{min-height:48px}
+.s-row--link{cursor:default; min-height:48px}
+.s-row--link:active{transform:none; background:transparent}
+.s-more{
+  flex:none; width:30px; height:30px; border-radius:50%; border:0;
+  background:transparent; color:var(--rd-muted);
+  display:grid; place-items:center; cursor:pointer;
+  transition:background var(--dur-fast) var(--ease-out);
+}
+.s-more svg{width:18px; height:18px}
+.s-more:active{background:var(--rd-surface-soft)}
+
+/* group label — TUYỆT ĐỐI không dùng --rd-faint (chỉ 4.22:1, trượt AA ở 11px) */
+.s-group-label{
+  margin:0; padding:14px 10px 6px;
+  font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--rd-muted);
+}
+/* nhóm không có label (chỉ 1 hàng) → ngăn cách bằng border-top, tiết kiệm
+   ~37px chiều cao cho view main */
+.s-group{border-top:1px solid var(--rd-line-soft); margin-top:2px; padding-top:2px}
+.s-divider{height:1px; margin:4px 10px; background:var(--rd-line-soft)}
+
+/* dải pill GÁN NHANH — nằm trong view main, ngay dưới hàng "Thêm vào danh
+   sách phát". Thụt trái 42px = 10px padding row + 20px icon + 12px gap ⇒
+   thẳng gutter nhãn của hàng trên (tín hiệu "thuộc về hàng trên"), nên không
+   còn bị đọc thành bộ lọc ở đầu màn hình. wrap (không cuộn ngang) để chip
+   cuối không bao giờ bị cắt cụt ở 390px. */
+.s-pills-label{
+  margin:0; padding:4px 10px 0 42px;
+  font-size:11px; font-weight:700; line-height:14px;
+  color:var(--rd-muted);          /* KHÔNG --rd-faint (4.22:1, trượt AA ở 11px) */
+}
+.s-pills{
+  display:flex; flex-wrap:wrap; gap:6px; padding:4px 10px 6px 42px;
+}
+.s-pill{
+  flex:none; height:32px; padding:0 12px; border-radius:var(--radius-pill);
+  border:1px solid var(--rd-line); background:var(--rd-surface-soft);
+  color:var(--rd-ink-2); font-family:inherit; font-size:12.5px; font-weight:600;
+  display:inline-flex; align-items:center; gap:6px;
+  white-space:nowrap; cursor:pointer;
+  transition:border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+/* chọn = VIỀN brand-2 + dấu ✓, KHÔNG fill brand-soft (fill đó là của .pill lọc) */
+.s-pill.is-on{border-color:var(--rd-brand-2); color:var(--rd-ink)}
+.s-pill-ic{
+  width:12px; height:12px; flex:none; fill:none; stroke:currentColor;
+  stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round;
+  color:var(--palette-dark-violet); opacity:0;
+  transition:opacity var(--dur-fast) var(--ease-out);
+}
+.s-pill.is-on .s-pill-ic{opacity:1}
+.s-pill--new{color:var(--rd-muted)}
+
+/* ===== DISCLOSURE "Thêm vào danh sách phát" =====
+   Mặc định [hidden] — KHÔNG bày sẵn playlist. Bấm hàng mới xổ ra.
+   Chỉ animate opacity + transform (không animate height/max-height). */
+.s-disc[hidden]{display:none}
+.s-disc:not([hidden]){animation:sDiscIn var(--dur-base) var(--ease-out) both}
+@keyframes sDiscIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+.s-row .s-chev{transition:transform var(--dur-base) var(--ease-out)}
+.s-row[aria-expanded="true"] > .s-chev{transform:rotate(90deg)}
+/* hàng phụ bên trong disclosure: thụt cùng gutter với nhãn/chip */
+.s-row--sub{
+  min-height:44px; padding-left:42px; font-size:13.5px; font-weight:600;
+  color:var(--rd-muted);
+}
+.s-row--sub:active{background:var(--rd-surface-soft)}
+.s-row--sub .s-label{flex:1 1 auto; min-width:0}
+
+/* checkbox row */
+.s-check{
+  display:flex; align-items:center; gap:12px; width:100%;
+  min-height:52px; padding:8px 10px; border:0; border-radius:var(--radius-row);
+  background:transparent; font-family:inherit; font-size:14.5px; font-weight:600;
+  color:var(--rd-ink-2); text-align:left; cursor:pointer;
+  transition:background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.s-check:active{transform:scale(.99); background:var(--rd-surface-soft)}
+.s-box{
+  flex:none; width:20px; height:20px; border-radius:6px;
+  border:1.5px solid var(--rd-line); color:transparent;
+  display:grid; place-items:center;
+  transition:background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.s-box svg{width:14px; height:14px; stroke-width:2.4}
+.s-check.is-checked .s-box{
+  background:var(--rd-brand); border-color:var(--rd-brand); color:var(--rd-on-hero);
+}
+
+/* segmented control */
+.s-seg{
+  display:flex; gap:3px; height:36px; padding:3px;
+  margin:6px 0 10px; border-radius:var(--radius-pill);
+  background:var(--rd-canvas-2); border:1px solid var(--rd-line);
+}
+.s-seg-tab{
+  flex:1; height:30px; border:0; border-radius:var(--radius-pill);
+  background:transparent; color:var(--rd-muted);
+  font-family:inherit; font-size:12.5px; font-weight:600; cursor:pointer;
+  transition:background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.s-seg-tab.is-on{background:var(--rd-brand-soft); color:var(--palette-dark-violet)}
+
+/* tab pane */
+.s-pane{display:flex; flex-direction:column; gap:2px}
+.s-pane[hidden]{display:none !important}
+
+/* field */
+.s-field{display:flex; flex-direction:column; gap:6px; padding:6px 0 4px}
+.s-field--flush{padding:0 0 8px}
+.s-flabel{font-size:12px; font-weight:600; color:var(--rd-muted)}
+.s-input{
+  width:100%; height:46px; padding:0 14px;
+  border-radius:12px; border:1px solid var(--rd-line);
+  background:var(--rd-canvas-2); color:var(--rd-ink);
+  font-family:inherit; font-size:14px; font-weight:500;
+  transition:border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.s-input::placeholder{color:var(--rd-muted)}
+.s-input:focus{outline:none; border-color:var(--rd-brand-2); box-shadow:var(--rd-ring)}
+.s-input--file{
+  height:auto; min-height:46px; padding:11px 12px;
+  font-size:12.5px; color:var(--rd-muted); cursor:pointer;
+}
+/* nút chọn file mặc định của OS là hộp trắng → style lại theo token */
+.s-input--file::file-selector-button{
+  background:var(--rd-surface-soft); color:var(--rd-ink);
+  border:1px solid var(--rd-line); border-radius:8px;
+  padding:6px 10px; margin-right:10px; font:inherit;
+}
+.s-inline{display:flex; gap:8px; align-items:center}
+.s-inline .s-input{flex:1; min-width:0}
+.s-save-new{padding:0 10px 8px}
+.s-field-hint{
+  margin:0; padding:8px 0 0;
+  font-size:12px; line-height:16px; color:var(--rd-muted);
+}
+
+/* details (field tùy chọn) */
+.s-details{
+  margin:6px 0; border-radius:var(--radius-row);
+  background:var(--rd-canvas-2); overflow:hidden;
+}
+.s-details-summary{
+  display:flex; align-items:center; gap:12px;
+  min-height:44px; padding:0 12px; list-style:none;
+  font-size:13px; font-weight:600; color:var(--rd-ink-2); cursor:pointer;
+}
+.s-details-summary::-webkit-details-marker{display:none}
+/* Chevron: MỘT kiểu duy nhất trong toàn sheet = .s-chev 16px dùng chung
+   (không còn border-chevron 8px). Xoay 90° khi <details> mở. */
+.s-details-summary .s-chev{transition:transform var(--dur-base) var(--ease-out)}
+.s-details[open] > .s-details-summary .s-chev{transform:rotate(90deg)}
+/* summary dạng HÀNG (view library): cùng gutter với .s-row của main */
+.s-details-summary--row{padding:0 10px; min-height:48px}
+.s-details-body{padding:0 12px 10px}
+.s-details-body:last-child{padding-bottom:12px}
+
+/* nút primary — nền ĐẶC, không gradient (chữ trắng trên đầu gradient chỉ 3.88:1) */
+.s-primary{
+  width:100%; height:48px; border:0; border-radius:var(--radius-btn);
+  background:var(--rd-brand); color:var(--rd-on-hero);
+  font-family:inherit; font-size:14.5px; font-weight:650; cursor:pointer;
+  transition:transform var(--dur-fast) var(--ease-out), filter var(--dur-fast) var(--ease-out);
+}
+.s-primary:active{transform:scale(.985)}
+.s-primary--inline{width:auto; height:46px; padding:0 20px; flex:none}
+
+/* text button */
+.s-textbtn{
+  align-self:flex-start; margin:2px 10px 4px; padding:6px 2px;
+  border:0; background:transparent; color:var(--palette-dark-violet);
+  font-family:inherit; font-size:12.5px; font-weight:600; cursor:pointer;
+  transition:opacity var(--dur-fast) var(--ease-out);
+}
+.s-textbtn:active{opacity:.7}
+
+/* thanh action đáy view */
+.s-actions{
+  position:sticky; bottom:0; margin-top:auto;
+  padding:10px 0 6px; background:var(--rd-sheet-bg);
+}
+.s-actions--flat{position:static; padding:8px 0 0}
+.s-actions .s-textbtn{margin:6px 0 0}
+
+/* progress */
+.s-progress{
+  width:100%; height:6px; margin:10px 0 0;
+  appearance:none; -webkit-appearance:none;
+  border:0; border-radius:var(--radius-pill); overflow:hidden;
+  background:var(--rd-track);
+}
+.s-progress::-webkit-progress-bar{background:var(--rd-track); border-radius:var(--radius-pill)}
+.s-progress::-webkit-progress-value{background:var(--rd-brand); border-radius:var(--radius-pill)}
+
+/* empty state playlist trong sheet — dùng lại .pl-empty, chỉ bỏ viền dashed cho gọn */
+.s-pl-empty{display:none; padding:18px 12px; text-align:center; border-radius:var(--radius-row)}
+
+/* state ảnh hưởng sheet */
+body.state-empty .s-pills{display:none}
+body.state-empty .s-pills-label{display:none}
+body.state-noplaylist .s-pl-rows{display:none}
+body.state-noplaylist .s-pl-empty{display:flex}
+body.state-noplaylist .s-check[data-pl]{display:none}
+
+/* review dock là công cụ prototype (z-index 100) — ẩn khi sheet mở để không
+   đè lên hàng cuối của sheet. Đóng sheet là dùng lại được ngay. */
+body.sheet-open .review-dock{opacity:0; pointer-events:none}
+
+@media (hover:hover){
+  /* :not(.is-armed) — nếu không, hover (0,4,0) sẽ đè background danger-soft
+     của trạng thái armed (0,2,0) ngay sau khi người dùng vừa chạm */
+  .s-row:not(.s-row--stack):not(.s-row--link):not(.is-armed):hover{background:var(--rd-surface-soft)}
+  .s-row--danger:not(.is-armed):hover{background:var(--rd-danger-soft)}
+  .s-row--danger.is-armed:hover{background:var(--rd-danger-soft)}
+  .s-check:hover{background:var(--rd-surface-soft)}
+  .s-pill:hover{color:var(--rd-ink)}
+  .s-pill.is-on:hover{color:var(--palette-dark-violet)}
+  .s-seg-tab:not(.is-on):hover{color:var(--rd-ink-2)}
+  .sheet-back:hover{background:var(--rd-surface-soft)}
+  .s-details-summary:hover{color:var(--rd-ink)}
+  .s-more:hover{background:var(--rd-surface-soft); color:var(--rd-ink-2)}
+  .s-primary:hover{filter:brightness(1.06)}
+}
+
+/* ===========================================================================
+   15d. DESKTOP — sheet thành panel nổi, không phải sheet bị cắt đáy
+   =========================================================================== */
+@media (min-width:768px){
+  .sheet{
+    bottom:24px;
+    border-radius:24px;
+    border-bottom:1px solid var(--rd-glass-line);
+  }
+}
+
+/* ===========================================================================
+   16. REDUCED MOTION
+   =========================================================================== */
+@media (prefers-reduced-motion: reduce){
+  .eq i{animation:none; transform:scaleY(.6)}
+  .sk::after{animation:none; transform:none; background:none}
+  body.booting .anim-in{animation:none}
+  .sec-in{animation:none}
+  .sec-out{transition:none}
+  .np-fill{transition:none}
+  .mini-player,.mini-player.is-visible{transition:opacity var(--dur-base) linear, visibility 0s linear 0s}
+  /* collapse + mọi hover transition đều tắt */
+  .recent-list,.recent-list .track-row,
+  .sec-chev,.sec-title,.sec-toggle,.sec-action,.sec-count{transition:none}
+  .track-row,.pl-row,.pl-add,.pill,.play-btn,.ghost-btn,.mini-btn,.mini-play,
+  .cta-pill,.icon-btn,.hd-btn,.retry-btn,.row-more,.hero{transition:none}
+  .recent-list[data-state="collapsed"] .sec-chev{transform:rotate(-90deg)}
+  /* bottom sheet: CHỈ đổi opacity 120ms, không translate; view không slide.
+     Lưu ý: khi kéo, JS cũng KHÔNG ghi transform (inline style sẽ thắng MQ). */
+  .sheet{transform:none; transition:opacity 120ms linear, visibility 0s linear 120ms}
+  .sheet.is-open{transform:none; transition:opacity 120ms linear, visibility 0s linear 0s}
+  .sheet-scrim{transition:opacity 120ms linear, visibility 0s linear 120ms}
+  .sheet-scrim.is-open{transition:opacity 120ms linear, visibility 0s linear 0s}
+  .sheet-view.is-in-fwd,.sheet-view.is-in-back{animation:none}
+  /* armed: chỉ đổi label, KHÔNG chạy vạch đếm ngược */
+  .s-row--danger.is-armed::after{animation:none; display:none}
+  .s-pill-ic{transition:none}
+  *{animation-iteration-count:1 !important}
+}
+</style>
+</head>
+<body class="booting state-playing">
+
+<!-- ==========================================================================
+     REVIEW PANEL — công cụ đổi state. Góc dưới-trái, mờ 55% để không tranh
+     chú ý; <520px thu thành nút tròn mở/đóng. KHÔNG còn nút chọn khổ.
+     ========================================================================== -->
+<div class="review-dock" id="reviewDock">
+  <button type="button" class="review-fab" id="reviewFab" aria-expanded="false" aria-controls="reviewPanel" aria-label="Công cụ review">
+    <svg class="ic ic-menu" width="18" height="18" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.2"/><circle cx="10" cy="17" r="2.2"/></svg>
+    <svg class="ic ic-x" width="18" height="18" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="review-panel" id="reviewPanel" role="group" aria-label="Đổi trạng thái prototype">
+    <span class="review-label" aria-hidden="true">Trạng thái demo</span>
+    <button type="button" data-state="playing" class="on">Đang phát</button>
+    <button type="button" data-state="empty">Chưa có bài</button>
+    <button type="button" data-state="error">Kho lỗi</button>
+    <button type="button" data-state="noplaylist">Playlist rỗng</button>
+    <!-- state thứ 5: quyền chủ kho — bật/tắt body.is-owner (2 hàng admin trong sheet) -->
+    <button type="button" id="reviewOwner" aria-pressed="false">Chủ kho</button>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     APP SHELL — phủ kín viewport. Header đứng trên, CHỈ .app-scroll cuộn.
+     ========================================================================== -->
+<div class="app">
+
+  <!-- ===== HEADER: header + filter pills (khối flex:0 0 auto) ===== -->
+  <div class="sticky-wrap">
+    <div class="sticky-inner">
+      <header class="app-header anim-in" style="--i:0">
+        <button type="button" class="hd-btn" aria-label="Quay lại" data-toast="Quay lại">
+          <svg width="24" height="24" viewBox="0 0 24 24" class="ic"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>
+        </button>
+        <div class="hd-mid">
+          <p class="hd-eyebrow">Bộ sưu tập</p>
+          <h1 class="hd-title">Nghe nhạc Giải trí</h1>
+        </div>
+        <!-- Nút ⋯ MỞ BOTTOM SHEET (không còn data-toast: nếu giữ, toast sẽ bắn
+             cùng lúc với sheet). -->
+        <button type="button" class="hd-btn" id="musicMenuBtn" aria-label="Tùy chọn khác"
+                aria-expanded="false" aria-controls="musicMenuSheet">
+          <svg width="24" height="24" viewBox="0 0 24 24" class="ic-fill">
+            <circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/>
+          </svg>
+        </button>
+      </header>
+
+      <div class="pills">
+        <div class="pills-inner">
+          <span class="pill-ind" aria-hidden="true"></span>
+          <button type="button" class="pill is-active" data-tab="all">Tất cả</button>
+          <button type="button" class="pill" data-tab="songs">Bài hát</button>
+          <button type="button" class="pill" data-tab="playlists">Playlist</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-scroll" id="appScroll">
+    <div class="page">
+
+      <!-- ===== HERO "Đang phát" ===== -->
+      <section class="hero anim-in" id="hero" style="--i:1">
+          <!-- FIX 2: vùng bấm phủ thân card, thay cho role="button" trên <section> -->
+          <button type="button" class="hero-hit" id="heroHit" aria-label="Mở trình phát"></button>
+
+          <!-- trạng thái có bài -->
+          <div class="hero-live">
+            <div class="hero-top">
+              <span class="cover hero-cover no-img" style="--c1:#241f45;--c2:#6a58e8;--c3:#171331">
+                <img class="cover-img" alt="" onerror="this.parentNode.classList.add('no-img')">
+                <span class="cover-fallback" aria-hidden="true"></span>
+              </span>
+              <div class="hero-text">
+                <p class="hero-eyebrow"><span class="dot"></span>Đang phát</p>
+                <h2 class="hero-title" id="heroTitle">[Vietsub] Bích Thượng Quan - Đằng Ngụy Qu...</h2>
+                <p class="hero-artist">Moah · Nhạc Trung Channel</p>
+                <!-- nguồn phát suy ra từ data thật (playlist > YouTube > kho) -->
+                <p class="hero-note" id="heroSource">Nguồn: <b>YouTube</b></p>
+              </div>
+            </div>
+
+            <div class="hero-bar">
+              <div class="bar-times">
+                <span id="heroCur">01:24</span>
+                <span id="heroDur">03:48</span>
+              </div>
+            </div>
+
+            <!-- FIX 3: căn giữa, thứ tự "+" · play · mở rộng -->
+            <div class="hero-actions">
+              <button type="button" class="ghost-btn" aria-label="Thêm vào playlist" data-toast="Đã thêm vào playlist">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic"><path d="M12 5.5v13M5.5 12h13"/></svg>
+              </button>
+              <button type="button" class="play-btn" data-play aria-label="Tạm dừng">
+                <svg class="ic-fill i-play" width="20" height="20" viewBox="0 0 24 24"><path d="M8 5.2v13.6c0 .8.9 1.3 1.6.9l10.6-6.8a1 1 0 0 0 0-1.8L9.6 4.3A1.1 1.1 0 0 0 8 5.2Z"/></svg>
+                <svg class="ic-fill i-pause" width="20" height="20" viewBox="0 0 24 24"><rect x="7" y="4.5" width="3.6" height="15" rx="1.4"/><rect x="13.4" y="4.5" width="3.6" height="15" rx="1.4"/></svg>
+              </button>
+              <button type="button" class="ghost-btn" aria-label="Mở rộng trình phát" data-toast="Mở trình phát">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic"><path d="M9.5 4.5H4.5v5M14.5 19.5h5v-5M19.5 9.5v-5h-5M4.5 14.5v5h5"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- trạng thái chưa có bài -->
+          <div class="hero-empty">
+            <p class="hero-eyebrow"><span class="dot"></span>Sẵn sàng</p>
+            <h2 class="hero-title">Chưa có bài nào đang phát</h2>
+            <p class="hero-artist">Chọn một bài trong kho nhạc HSK để bắt đầu nghe.</p>
+            <div class="hero-actions">
+              <button type="button" class="cta-pill" data-toast="Chọn bài trong kho nhạc">Chọn bài để nghe</button>
+            </div>
+          </div>
+        </section>
+
+      <!-- ===== CỘT DANH SÁCH: 3 section (tự thành cột 2 khi đủ chỗ) ===== -->
+      <div class="col-list">
+
+        <!-- ===== Nghe gần đây — section thu gọn/mở rộng được ===== -->
+        <section class="section sec-collapsible anim-in" id="secRecent" data-section="songs" data-vis="1" data-state="normal" style="--i:2">
+          <div class="sec-head">
+            <h3 class="sec-h3">
+              <button type="button" class="sec-toggle" id="recentToggle" aria-expanded="true" aria-controls="recentList">
+                <span class="sec-title">Nghe gần đây</span>
+                <span class="sec-count">5 bài</span>
+                <svg class="sec-chev" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5 12 15.5l6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </h3>
+            <button type="button" class="sec-action" id="recentMore" aria-expanded="false" aria-controls="recentList">Xem tất cả</button>
+          </div>
+
+          <div class="recent-list" id="recentList" data-state="normal">
+            <!-- 1 — đang phát -->
+            <div class="track-row is-playing" tabindex="0">
+              <span class="cover row-cover no-img" style="--c1:#241f45;--c2:#6a58e8;--c3:#171331"><img class="cover-img" alt="" onerror="this.parentNode.classList.add('no-img')"><span class="cover-fallback" aria-hidden="true"></span></span>
+              <div class="track-body">
+                <p class="track-title">[Vietsub] Bích Thượng Quan - Đằng Ngụy Qu...</p>
+                <p class="track-sub">Đang phát · Moah · Nhạc Trung Channel</p>
+              </div>
+              <div class="eq" aria-hidden="true"><i></i><i></i><i></i></div>
+              <button type="button" class="row-more" aria-label="Tùy chọn bài hát">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic-fill"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+              </button>
+            </div>
+
+            <!-- 2 -->
+            <div class="track-row" tabindex="0">
+              <span class="cover row-cover no-img" style="--c1:#122e35;--c2:#2b7f8f;--c3:#0e1a1e"><img class="cover-img" alt="" onerror="this.parentNode.classList.add('no-img')"><span class="cover-fallback" aria-hidden="true"></span></span>
+              <div class="track-body">
+                <p class="track-title">[Vietsub] Sử Thanh Hoa 青花瓷</p>
+                <p class="track-sub">Jay Chou · YouTube</p>
+              </div>
+              <button type="button" class="row-more" aria-label="Tùy chọn bài hát">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic-fill"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+              </button>
+            </div>
+
+            <!-- 3 -->
+            <div class="track-row" tabindex="0">
+              <span class="cover row-cover no-img" style="--c1:#241f45;--c2:#6a58e8;--c3:#171331"><img class="cover-img" alt="" onerror="this.parentNode.classList.add('no-img')"><span class="cover-fallback" aria-hidden="true"></span></span>
+              <div class="track-body">
+                <p class="track-title">[Vietsub] Bích Thượng Quan - Đằng Ngụy Qu...</p>
+                <p class="track-sub">Moah · Nhạc Trung Channel</p>
+              </div>
+              <button type="button" class="row-more" aria-label="Tùy chọn bài hát">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic-fill"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+              </button>
+            </div>
+
+            <!-- 4 -->
+            <div class="track-row" tabindex="0">
+              <span class="cover row-cover no-img" style="--c1:#35260f;--c2:#a8721f;--c3:#1c1409"><img class="cover-img" alt="" onerror="this.parentNode.classList.add('no-img')"><span class="cover-fallback" aria-hidden="true"></span></span>
+              <div class="track-body">
+                <p class="track-title">[Vietsub] Nguyệt Bán Tiểu Dạ Khúc 月半小夜曲</p>
+                <p class="track-sub">Lâm Tử Tường · YouTube</p>
+              </div>
+              <button type="button" class="row-more" aria-label="Tùy chọn bài hát">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic-fill"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+              </button>
+            </div>
+
+            <!-- 5 -->
+            <div class="track-row" tabindex="0">
+              <span class="cover row-cover no-img" style="--c1:#17233d;--c2:#3a5bb5;--c3:#101828"><img class="cover-img" alt="" onerror="this.parentNode.classList.add('no-img')"><span class="cover-fallback" aria-hidden="true"></span></span>
+              <div class="track-body">
+                <p class="track-title">[Vietsub] Thiên Niên 千年</p>
+                <p class="track-sub">Tang Duy · YouTube</p>
+              </div>
+              <button type="button" class="row-more" aria-label="Tùy chọn bài hát">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic-fill"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+              </button>
+            </div>
+
+            <!-- 6 — chỉ hiện khi mở rộng -->
+            <div class="track-row" tabindex="0">
+              <span class="cover row-cover no-img" style="--c1:#33203a;--c2:#8b4a8a;--c3:#1a101d"><img class="cover-img" alt="" onerror="this.parentNode.classList.add('no-img')"><span class="cover-fallback" aria-hidden="true"></span></span>
+              <div class="track-body">
+                <p class="track-title">[Vietsub] Hồng Chiêu Nguyện 红昭愿</p>
+                <p class="track-sub">Âm Khuyết Thi Thính · YouTube</p>
+              </div>
+              <button type="button" class="row-more" aria-label="Tùy chọn bài hát">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic-fill"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+              </button>
+            </div>
+
+            <!-- 7 -->
+            <div class="track-row" tabindex="0">
+              <span class="cover row-cover no-img" style="--c1:#122e35;--c2:#2b7f8f;--c3:#0e1a1e"><img class="cover-img" alt="" onerror="this.parentNode.classList.add('no-img')"><span class="cover-fallback" aria-hidden="true"></span></span>
+              <div class="track-body">
+                <p class="track-title">[Vietsub] Cố Mộng 故梦</p>
+                <p class="track-sub">Luân Tang · YouTube</p>
+              </div>
+              <button type="button" class="row-more" aria-label="Tùy chọn bài hát">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic-fill"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+              </button>
+            </div>
+
+            <!-- 8 -->
+            <div class="track-row" tabindex="0">
+              <span class="cover row-cover no-img" style="--c1:#35260f;--c2:#a8721f;--c3:#1c1409"><img class="cover-img" alt="" onerror="this.parentNode.classList.add('no-img')"><span class="cover-fallback" aria-hidden="true"></span></span>
+              <div class="track-body">
+                <p class="track-title">[Vietsub] Túy Xích Bích 醉赤壁</p>
+                <p class="track-sub">Lâm Tuấn Kiệt · YouTube</p>
+              </div>
+              <button type="button" class="row-more" aria-label="Tùy chọn bài hát">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic-fill"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Kho nhạc HSK ===== -->
+        <section class="section anim-in" id="secLibrary" data-section="songs" data-vis="1" style="--i:3">
+          <div class="sec-head">
+            <h3 class="sec-title">Kho nhạc HSK</h3>
+            <span class="count-chip">1 bài</span>
+            <button type="button" class="icon-btn ml-auto" id="libRefresh" aria-label="Làm mới kho nhạc">
+              <svg width="18" height="18" viewBox="0 0 24 24" class="ic"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.8 4.5v4.2h-4.2"/></svg>
+            </button>
+          </div>
+
+          <!-- ok -->
+          <div class="lib-ok">
+            <div class="track-row" tabindex="0">
+              <span class="cover row-cover no-img" style="--c1:#241f45;--c2:#6a58e8;--c3:#171331"><img class="cover-img" alt="" onerror="this.parentNode.classList.add('no-img')"><span class="cover-fallback" aria-hidden="true"></span></span>
+              <div class="track-body">
+                <p class="track-title">[Vietsub] Bích Thượng Quan - Đằng Ngụy Qu...</p>
+                <p class="track-sub">Moah · Nhạc Trung Channel</p>
+              </div>
+              <button type="button" class="row-more" aria-label="Tùy chọn bài hát">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic-fill"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- loading -->
+          <div class="lib-loading" aria-hidden="true">
+            <div class="sk-row">
+              <div class="sk sk-thumb"></div>
+              <div class="sk-lines"><div class="sk sk-l1"></div><div class="sk sk-l2"></div></div>
+            </div>
+            <div class="sk-row">
+              <div class="sk sk-thumb"></div>
+              <div class="sk-lines"><div class="sk sk-l1"></div><div class="sk sk-l2"></div></div>
+            </div>
+          </div>
+
+          <!-- error -->
+          <div class="lib-error">
+            <p>Không tải được kho nhạc. Kiểm tra kết nối rồi thử lại.</p>
+            <button type="button" class="retry-btn" id="libRetry">Làm mới kho</button>
+          </div>
+        </section>
+
+        <!-- ===== Playlist của bạn ===== -->
+        <section class="section anim-in" id="secPlaylists" data-section="playlists" data-vis="1" style="--i:4">
+          <div class="sec-head">
+            <h3 class="sec-title">Playlist của bạn</h3>
+            <button type="button" class="sec-action" data-toast="Tạo playlist mới">Tạo mới</button>
+          </div>
+
+          <!-- có dữ liệu -->
+          <div class="pl-list">
+            <div class="pl-row" tabindex="0">
+              <span class="pl-ic">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.2"/></svg>
+              </span>
+              <div class="track-body">
+                <p class="track-title">Nhạc Trung chậm</p>
+                <p class="track-sub">12 bài hát</p>
+              </div>
+              <span class="pl-chev"><svg width="18" height="18" viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+            </div>
+            <div class="pl-row" tabindex="0">
+              <span class="pl-ic">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.2"/></svg>
+              </span>
+              <div class="track-body">
+                <p class="track-title">Ôn từ vựng HSK 3</p>
+                <p class="track-sub">8 bài hát</p>
+              </div>
+              <span class="pl-chev"><svg width="18" height="18" viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+            </div>
+
+            <!-- hàng tạo playlist: chức năng thật, đồng thời lấp khoảng trống chết ở tab Playlist -->
+            <button type="button" class="pl-add" data-toast="Tạo playlist mới">
+              <svg width="20" height="20" viewBox="0 0 24 24" class="ic"><path d="M12 5.5v13M5.5 12h13"/></svg>
+              <span>Tạo playlist mới</span>
+            </button>
+            <p class="pl-hint">Gom những bài bạn hay nghe thành danh sách riêng để mở lại nhanh.</p>
+          </div>
+
+          <!-- rỗng -->
+          <div class="pl-empty">
+            <svg class="ic-lg ic" viewBox="0 0 24 24" stroke-width="1.6">
+              <path d="M4 6.5h11M4 12h11M4 17.5h7"/>
+              <circle cx="17.5" cy="16" r="2.6"/>
+              <path d="M20.1 16V7.2l-3.4.9"/>
+            </svg>
+            <h4>Chưa có playlist nào</h4>
+            <p>Gom những bài bạn hay nghe thành một danh sách riêng.</p>
+            <button type="button" class="cta-pill" data-toast="Tạo playlist mới">Tạo playlist</button>
+          </div>
+        </section>
+
+      </div><!-- /col-list -->
+    </div><!-- /page -->
+  </div><!-- /app-scroll -->
+
+  <!-- ===== THANH TIẾN TRÌNH ĐỘC LẬP =====
+       Tách khỏi mọi khối cuộn: position:fixed theo viewport, KHÔNG nằm trong
+       .app-scroll và không nằm trong thẻ hero/mini. Vì vậy kéo lên/xuống
+       không thể làm nó xê dịch 1px nào. -->
+  <div class="np-progress" id="npProgress" role="progressbar" aria-label="Tiến trình phát" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37">
+    <i class="np-fill" id="npFill"></i>
+  </div>
+
+  <!-- ===== MINI PLAYER — fixed, đứng yên tuyệt đối ở mọi vị trí cuộn ===== -->
+  <div class="mini-player" id="miniPlayer" aria-hidden="true" inert>
+    <span class="cover mini-cover no-img" style="--c1:#241f45;--c2:#6a58e8;--c3:#171331"><img class="cover-img" alt="" onerror="this.parentNode.classList.add('no-img')"><span class="cover-fallback" aria-hidden="true"></span></span>
+    <div class="mini-body">
+      <p class="mini-title">[Vietsub] Bích Thượng Quan - Đằng Ngụy Qu...</p>
+      <p class="mini-sub">Moah · Nhạc Trung Channel</p>
+    </div>
+    <button type="button" class="mini-btn" aria-label="Thêm vào playlist" data-toast="Đã thêm vào playlist">
+      <svg width="16" height="16" viewBox="0 0 24 24" class="ic"><path d="M12 5.5v13M5.5 12h13"/></svg>
+    </button>
+    <button type="button" class="mini-play" data-play aria-label="Tạm dừng">
+      <svg class="ic-fill i-play" width="15" height="15" viewBox="0 0 24 24"><path d="M8 5.2v13.6c0 .8.9 1.3 1.6.9l10.6-6.8a1 1 0 0 0 0-1.8L9.6 4.3A1.1 1.1 0 0 0 8 5.2Z"/></svg>
+      <svg class="ic-fill i-pause" width="15" height="15" viewBox="0 0 24 24"><rect x="7" y="4.5" width="3.6" height="15" rx="1.4"/><rect x="13.4" y="4.5" width="3.6" height="15" rx="1.4"/></svg>
+    </button>
+  </div>
+
+  <!-- toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div><!-- /app -->
+
+<!-- ==========================================================================
+     BOTTOM SHEET "Tùy chọn" — 5 view (main / library / save / personal / admin)
+     Đặt Ở BODY LEVEL (sau .app) để position:fixed không bị tổ tiên nào tạo
+     containing block. Nền ĐẶC (không kính, không backdrop-filter): scrim đã
+     86% nên blur vô nghĩa + tốn GPU khi kéo.
+     Nội dung map từ sheet thật #musicMenuSheet + setMenuView() trong music.js.
+     ========================================================================== -->
+<div class="sheet-scrim" id="musicMenuBackdrop" aria-hidden="true"></div>
+
+<section class="sheet" id="musicMenuSheet" role="dialog" aria-modal="true"
+         aria-labelledby="musicMenuTitle" aria-hidden="true" inert>
+  <span class="sheet-sr" id="musicMenuTitle">Tùy chọn bài hát và danh sách phát</span>
+
+  <!-- tay kéo -->
+  <div class="sheet-handle" id="musicMenuHandle" role="button" tabindex="0"
+       aria-label="Kéo xuống để đóng"></div>
+
+  <!-- sub-head: đổi tiêu đề theo view. View save: trái = "Hủy" (chữ, đúng app),
+       phải = "Xong" (hành động ghi lựa chọn). View library: ẩn "Xong". -->
+  <div class="sheet-subhead" id="musicMenuSubHead">
+    <button type="button" class="sheet-back" id="musicMenuSubCancel" aria-label="Quay lại" hidden>
+      <span class="sb-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" class="ic"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></span>
+      <span class="sb-text">Hủy</span>
+    </button>
+    <h2 class="sheet-title" id="musicMenuSubTitle">Tùy chọn</h2>
+    <button type="button" class="sheet-back sheet-back--done" id="musicMenuSubDone" hidden>Xong</button>
+  </div>
+
+  <p class="sheet-status" id="musicStatus" role="status" aria-live="polite"></p>
+
+  <div class="sheet-body">
+
+    <!-- ==================================================================
+         VIEW main — 3 cụm: head · nhóm A (không label) · nhóm B · nhóm C
+         ================================================================== -->
+    <div class="sheet-view is-active" data-view="main">
+
+      <!-- 1. TRACK HEAD — không bấm được -->
+      <div class="s-row s-row--stack">
+        <span class="cover s-cover no-img" style="--c1:#241f45;--c2:#6a58e8;--c3:#171331">
+          <img class="cover-img" alt="" onerror="this.parentNode.classList.add('no-img')">
+          <span class="cover-fallback" aria-hidden="true">碧</span>
+        </span>
+        <div class="s-copy">
+          <p class="s-title" id="musicMenuTrackTitle">[Vietsub] Bích Thượng Quan - Đằng Ngụy Qu...</p>
+          <p class="s-sub" id="musicMenuTrackSub">Moah · Nhạc Trung Channel</p>
+        </div>
+      </div>
+
+      <div class="s-divider" aria-hidden="true"></div>
+
+      <!-- 2. NHÓM A — hành động trên bài đang phát (không có group label) -->
+      <button type="button" class="s-row" id="musicMenuShareRow">
+        <span class="s-ico" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M12 15.5V4M8 7.5 12 3.5l4 4M5 12v6.5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V12"/></svg></span>
+        <span class="s-label">Chia sẻ</span>
+      </button>
+
+      <button type="button" class="s-row" id="musicPreviewPlaylistAdd" aria-expanded="false" aria-controls="quickPlaylistPanel">
+        <span class="s-ico" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/></svg></span>
+        <span class="s-label">Thêm vào danh sách phát</span>
+        <span class="s-chev" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+      </button>
+
+      <!-- DANH SÁCH CHỈ HIỆN KHI BẤM (disclosure). Mặc định `hidden` — không
+           bày sẵn playlist ra mặt menu. Bấm hàng trên mới xổ ra. -->
+      <div class="s-disc" id="quickPlaylistPanel" hidden>
+        <p class="s-pills-label" id="musicQuickPillsLabel">Gán nhanh</p>
+        <div class="s-pills" id="musicQuickPlaylistPills" role="group" aria-labelledby="musicQuickPillsLabel">
+          <button type="button" class="s-pill is-on" aria-pressed="true">
+            <svg class="s-pill-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg>Nhạc Hoa chill
+          </button>
+          <button type="button" class="s-pill" aria-pressed="false">
+            <svg class="s-pill-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg>HSK 3 nghe mỗi ngày
+          </button>
+          <button type="button" class="s-pill s-pill--new" id="musicQuickPlaylistNew">＋ Playlist mới</button>
+        </div>
+        <button type="button" class="s-row s-row--sub" id="musicPreviewPlaylistMore">
+          <span class="s-label">Chọn nhiều playlist…</span>
+          <span class="s-chev" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+        </button>
+      </div>
+
+      <button type="button" class="s-row" id="musicSourceLink">
+        <span class="s-ico" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></span>
+        <span class="s-label">Mở bài trên trang nguồn</span>
+        <span class="s-chev" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+      </button>
+
+      <!-- 3. NHÓM B — chỉ 1 hàng nên KHÔNG có group label (tránh tràn view main);
+           ngăn cách bằng border-top của .s-group -->
+      <div class="s-group">
+        <button type="button" class="s-row" id="musicMenuLibraryRow">
+          <span class="s-ico" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M4 4v16M9 4v16M14 4.5l6 15"/></svg></span>
+          <span class="s-label">Thư viện &amp; danh sách phát</span>
+          <span class="s-chev" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+        </button>
+      </div>
+
+      <!-- 4. NHÓM C -->
+      <p class="s-group-label">Kho nhạc HSK</p>
+      <button type="button" class="s-row" id="musicCloudRefresh">
+        <span class="s-ico" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.8 4.5v4.2h-4.2"/></svg></span>
+        <span class="s-label">Làm mới kho nhạc</span>
+      </button>
+
+      <button type="button" class="s-row" id="musicPersonalOpen">
+        <span class="s-ico" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+        <span class="s-label">Thêm link YouTube</span>
+      </button>
+
+      <!-- chỉ hiện khi body.is-owner -->
+      <button type="button" class="s-row s-row--owner" id="musicAdminOpen">
+        <span class="s-ico" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M12 16V4M7.5 8.5 12 4l4.5 4.5M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></svg></span>
+        <span class="s-label">Thêm nhạc vào kho</span>
+      </button>
+
+      <!-- chỉ hiện khi body.is-owner, LUÔN ở cuối.
+           aria-live trên label để trạng thái "chạm lần nữa" được đọc tại hàng. -->
+      <button type="button" class="s-row s-row--owner s-row--danger" id="musicCloudDelete">
+        <span class="s-ico" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M4 7h16M9.5 7V4.5h5V7M6.5 7l1 12.5h9L17.5 7"/><path d="M10 11v5M14 11v5"/></svg></span>
+        <span class="s-label" id="musicCloudDeleteLabel" aria-live="polite">Xóa bài khỏi kho</span>
+      </button>
+    </div>
+
+    <!-- ==================================================================
+         VIEW library — thư viện & danh sách phát
+         ================================================================== -->
+    <div class="sheet-view" data-view="library">
+
+      <details class="s-details">
+        <summary class="s-details-summary s-details-summary--row">
+          <span class="s-ico" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M12 5.5v13M5.5 12h13"/></svg></span>
+          <span class="s-label">Tạo playlist mới</span>
+          <span class="s-chev" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+        </summary>
+        <div class="s-details-body">
+          <div class="s-inline">
+            <input class="s-input" id="musicPlaylistName" maxlength="80" autocomplete="off"
+                   placeholder="VD: Nhạc Hoa chill, HSK 3 nghe mỗi ngày…" aria-label="Tên playlist mới">
+            <button type="button" class="s-primary s-primary--inline" id="musicPlaylistCreate">Tạo</button>
+          </div>
+        </div>
+      </details>
+
+      <details class="s-details" open>
+        <summary class="s-details-summary s-details-summary--row">
+          <span class="s-ico" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M4 6.5h11M4 12h11M4 17.5h7"/><circle cx="17.5" cy="16" r="2.6"/><path d="M20.1 16V7.2l-3.4.9"/></svg></span>
+          <span class="s-label">Danh sách phát của bạn</span>
+          <span class="s-chev" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+        </summary>
+        <div class="s-details-body s-pl-rows">
+          <button type="button" class="s-row s-row--sub" data-pl-row>
+            <span class="s-copy">
+              <span class="s-title">Nhạc Hoa chill</span>
+              <span class="s-sub">12 bài hát</span>
+            </span>
+            <span class="s-chev" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+          </button>
+          <button type="button" class="s-row s-row--sub" data-pl-row>
+            <span class="s-copy">
+              <span class="s-title">HSK 3 nghe mỗi ngày</span>
+              <span class="s-sub">8 bài hát</span>
+            </span>
+            <span class="s-chev" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+          </button>
+        </div>
+        <div class="s-details-body">
+          <div class="pl-empty s-pl-empty">
+            <h4>Chưa có playlist nào</h4>
+            <p>Tạo danh sách đầu tiên để gom những bài bạn hay nghe.</p>
+            <button type="button" class="cta-pill" id="musicPlEmptyCreate">Tạo playlist</button>
+          </div>
+        </div>
+      </details>
+
+      <details class="s-details">
+        <summary class="s-details-summary s-details-summary--row">
+          <span class="s-ico" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15z"/></svg></span>
+          <span class="s-label">Link đã lưu trên thiết bị</span>
+          <span class="s-chev" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+        </summary>
+        <div class="s-details-body">
+          <div class="s-row s-row--link">
+            <span class="s-copy"><span class="s-title">[Vietsub] Sử Thanh Hoa 青花瓷</span></span>
+            <button type="button" class="s-more" aria-label="Tùy chọn cho Sử Thanh Hoa">
+              <svg viewBox="0 0 24 24" class="ic-fill" aria-hidden="true"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+            </button>
+          </div>
+          <div class="s-row s-row--link">
+            <span class="s-copy"><span class="s-title">[Vietsub] Thiên Niên 千年</span></span>
+            <button type="button" class="s-more" aria-label="Tùy chọn cho Thiên Niên">
+              <svg viewBox="0 0 24 24" class="ic-fill" aria-hidden="true"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+            </button>
+          </div>
+          <div class="s-row s-row--link">
+            <span class="s-copy"><span class="s-title">[Vietsub] Cố Mộng 故梦</span></span>
+            <button type="button" class="s-more" aria-label="Tùy chọn cho Cố Mộng">
+              <svg viewBox="0 0 24 24" class="ic-fill" aria-hidden="true"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg>
+            </button>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- ==================================================================
+         VIEW save — "Đã lưu vào"
+         ================================================================== -->
+    <div class="sheet-view" data-view="save">
+      <!-- giữ đúng app thật: 2 lối vào tạo playlist, không xoá cái nào -->
+      <button type="button" class="s-textbtn" id="musicSaveNewToggle">Danh sách phát mới</button>
+
+      <!-- form inline NGAY TRONG view save (giữ ngữ cảnh, không nhảy view) -->
+      <form class="s-inline s-save-new" id="musicSaveNewForm" hidden>
+        <input class="s-input" id="musicSaveNewName" maxlength="80" autocomplete="off"
+               placeholder="Tên danh sách phát mới" aria-label="Tên danh sách phát mới">
+        <button type="button" class="s-primary s-primary--inline" id="musicSaveNewCreate">Tạo</button>
+      </form>
+
+      <!-- view save = CHỌN NHIỀU (picker). Không có pill "gán nhanh" ở đây:
+           đó là chức năng khác, nằm ở view main. -->
+      <button type="button" class="s-check is-checked" data-pl aria-pressed="true">
+        <span class="s-box" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M5 12.5 10 17.5 19 7"/></svg></span>
+        <span class="s-label">Nhạc Hoa chill · 12 bài</span>
+      </button>
+      <button type="button" class="s-check" data-pl aria-pressed="false">
+        <span class="s-box" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M5 12.5 10 17.5 19 7"/></svg></span>
+        <span class="s-label">HSK 3 nghe mỗi ngày · 8 bài</span>
+      </button>
+
+      <button type="button" class="s-row" id="musicSaveNewRow">
+        <span class="s-ico" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M12 5.5v13M5.5 12h13"/></svg></span>
+        <span class="s-label">Danh sách phát mới</span>
+      </button>
+
+      <div class="s-actions">
+        <button type="button" class="s-primary" id="musicSaveDone">Xong</button>
+      </div>
+    </div>
+
+    <!-- ==================================================================
+         VIEW personal — "Link YouTube của bạn"
+         ================================================================== -->
+    <div class="sheet-view" data-view="personal">
+      <div class="s-field">
+        <label class="s-flabel" for="musicPersonalUrl">Link YouTube</label>
+        <input class="s-input" id="musicPersonalUrl" type="url" inputmode="url" autocomplete="off"
+               placeholder="https://www.youtube.com/watch?v=…">
+      </div>
+
+      <details class="s-details">
+        <summary class="s-details-summary">
+          <span class="s-label">Đặt tên · tùy chọn</span>
+          <span class="s-chev" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+        </summary>
+        <div class="s-details-body">
+          <div class="s-field s-field--flush">
+            <label class="s-flabel" for="musicPersonalTitle">Tên bài</label>
+            <input class="s-input" id="musicPersonalTitle" maxlength="120" autocomplete="off" placeholder="Tên tùy chọn">
+          </div>
+        </div>
+      </details>
+
+      <div class="s-actions s-actions--flat">
+        <button type="button" class="s-primary" id="musicPersonalSubmit">Thêm và nghe</button>
+      </div>
+
+      <p class="s-field-hint">Link YouTube phát trực tuyến.</p>
+      <p class="s-field-hint">Nghe nền tùy trình duyệt; nhạc trong kho HSK hỗ trợ audio nền.</p>
+    </div>
+
+    <!-- ==================================================================
+         VIEW admin — "Thêm nhạc vào kho" (chỉ chủ kho)
+         ================================================================== -->
+    <div class="sheet-view" data-view="admin">
+      <div class="s-seg" role="tablist" aria-label="Nguồn thêm vào kho">
+        <button type="button" class="s-seg-tab is-on" role="tab" aria-selected="true" data-admin-tab="youtube">Link YouTube</button>
+        <button type="button" class="s-seg-tab" role="tab" aria-selected="false" tabindex="-1" data-admin-tab="file">File thiết bị</button>
+      </div>
+
+      <div class="s-pane" data-pane="youtube">
+        <div class="s-field">
+          <label class="s-flabel" for="musicAdminImportUrl">Link YouTube</label>
+          <input class="s-input" id="musicAdminImportUrl" type="url" inputmode="url" autocomplete="off"
+                 placeholder="https://www.youtube.com/watch?v=…">
+        </div>
+
+        <details class="s-details">
+          <summary class="s-details-summary">
+            <span class="s-label">Thông tin bài hát · tùy chọn</span>
+            <span class="s-chev" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+          </summary>
+          <div class="s-details-body">
+            <div class="s-field s-field--flush">
+              <label class="s-flabel" for="musicAdminImportTitle">Tên bài</label>
+              <input class="s-input" id="musicAdminImportTitle" maxlength="120" autocomplete="off" placeholder="Tên bài">
+            </div>
+            <div class="s-field s-field--flush">
+              <label class="s-flabel" for="musicAdminImportArtist">Ca sĩ</label>
+              <input class="s-input" id="musicAdminImportArtist" maxlength="80" autocomplete="off" placeholder="Ca sĩ / nghệ sĩ">
+            </div>
+            <div class="s-field s-field--flush">
+              <label class="s-flabel" for="musicAdminImportComposer">Người sáng tác</label>
+              <input class="s-input" id="musicAdminImportComposer" maxlength="120" autocomplete="off" placeholder="Người sáng tác">
+            </div>
+          </div>
+        </details>
+
+        <div class="s-actions s-actions--flat">
+          <button type="button" class="s-primary" id="musicAdminImportSubmit">Thêm vào kho</button>
+        </div>
+      </div>
+
+      <div class="s-pane" data-pane="file" hidden>
+        <div class="s-field">
+          <label class="s-flabel" for="musicCloudUploadTitle">Tên bài hát</label>
+          <input class="s-input" id="musicCloudUploadTitle" maxlength="120" autocomplete="off" placeholder="Tên bài hát">
+        </div>
+
+        <details class="s-details">
+          <summary class="s-details-summary">
+            <span class="s-label">Thông tin thêm · tùy chọn</span>
+            <span class="s-chev" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></span>
+          </summary>
+          <div class="s-details-body">
+            <div class="s-field s-field--flush">
+              <label class="s-flabel" for="musicCloudUploadArtist">Nghệ sĩ</label>
+              <input class="s-input" id="musicCloudUploadArtist" maxlength="80" autocomplete="off" placeholder="Nghệ sĩ">
+            </div>
+          </div>
+        </details>
+
+        <div class="s-field">
+          <label class="s-flabel" for="musicCloudUploadFile">File MP3 / M4A (tối đa 50 MB)</label>
+          <input class="s-input s-input--file" id="musicCloudUploadFile" type="file" accept=".mp3,.m4a,audio/mpeg,audio/mp4">
+        </div>
+
+        <div class="s-actions s-actions--flat">
+          <button type="button" class="s-primary" id="musicCloudUpload">Tải lên kho</button>
+          <button type="button" class="s-textbtn" id="musicCloudUploadCancel" hidden>Hủy tải lên</button>
+          <progress class="s-progress" id="musicCloudUploadProgress" max="100" value="0" hidden aria-label="Tiến trình tải lên kho"></progress>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /sheet-body -->
+</section>
+
+
+<script>
+(function(){
+  'use strict';
+
+  var d = document, body = d.body;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ------------------------------------------------------------------
+     A. FILTER PILLS + sliding indicator
+     ------------------------------------------------------------------ */
+  var pills = [].slice.call(d.querySelectorAll('.pill'));
+  var ind = d.querySelector('.pill-ind');
+  var sections = [].slice.call(d.querySelectorAll('[data-section]'));
+  var scrollEl = d.getElementById('appScroll');
+
+  /* FIX 6: indicator giữ width cố định (= pill rộng nhất) và chỉ animate
+     transform: translateX + scaleX, transform-origin:left. Không animate width. */
+  var indBase = 0;
+  function measureIndBase(){
+    var m = 0;
+    pills.forEach(function(p){ m = Math.max(m, p.offsetWidth); });
+    indBase = m;
+    if(ind && m) ind.style.width = m + 'px';
+  }
+  function moveInd(){
+    var a = d.querySelector('.pill.is-active');
+    if(!a || !ind) return;
+    if(!indBase) measureIndBase();
+    if(!indBase) return;
+    var sx = a.offsetWidth / indBase;
+    ind.style.transform = 'translateX(' + a.offsetLeft + 'px) scaleX(' + sx.toFixed(4) + ')';
+  }
+
+  function showSection(el){
+    if(el.dataset.vis !== '0') return;
+    el.dataset.vis = '1';
+    el.style.display = '';
+    el.classList.add('sec-in');
+    setTimeout(function(){ el.classList.remove('sec-in'); }, 260);
+  }
+  function hideSection(el){
+    if(el.dataset.vis === '0') return;
+    el.dataset.vis = '0';
+    el.classList.add('sec-out');
+    setTimeout(function(){
+      if(el.dataset.vis === '0'){ el.style.display = 'none'; el.classList.remove('sec-out'); }
+    }, 120);
+  }
+
+  function setTab(key){
+    pills.forEach(function(p){ p.classList.toggle('is-active', p.dataset.tab === key); });
+    moveInd();
+    sections.forEach(function(s){
+      var k = s.dataset.section;
+      var show = (key === 'all') || (key === 'songs' && k === 'songs') || (key === 'playlists' && k === 'playlists');
+      if(show) showSection(s); else hideSection(s);
+    });
+    // Hero + mini player KHÔNG bao giờ bị filter ẩn.
+  }
+
+  pills.forEach(function(p){
+    p.addEventListener('click', function(){ setTab(p.dataset.tab); });
+  });
+
+  /* ------------------------------------------------------------------
+     B. TOAST
+     ------------------------------------------------------------------ */
+  var toastEl = d.getElementById('toast'), toastTimer;
+  function toast(msg){
+    if(!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 1700);
+  }
+  d.addEventListener('click', function(e){
+    var t = e.target.closest ? e.target.closest('[data-toast]') : null;
+    if(t) toast(t.getAttribute('data-toast'));
+  });
+
+  /* ------------------------------------------------------------------
+     C. PROGRESS DEMO — thanh tiến trình ĐỘC LẬP tự chạy (1s / lần)
+     Thanh này là #npProgress (position:fixed, ngoài vùng cuộn), không phải
+     một phần của hero/mini player ⇒ cuộn không ảnh hưởng.
+     ------------------------------------------------------------------ */
+  var npFill = d.getElementById('npFill');
+  var npBar  = d.getElementById('npProgress');
+  var heroCur  = d.getElementById('heroCur');
+  var heroDur  = d.getElementById('heroDur');
+  var TOTAL = 228, cur = 84, paused = false;
+
+  function fmt(s){
+    var m = Math.floor(s / 60), r = s % 60;
+    return (m < 10 ? '0' : '') + m + ':' + (r < 10 ? '0' : '') + r;
+  }
+  function paint(){
+    var p = Math.max(0, Math.min(1, cur / TOTAL));
+    if(npFill) npFill.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    if(npBar) npBar.setAttribute('aria-valuenow', String(Math.round(p * 100)));
+    if(heroCur) heroCur.textContent = fmt(cur);
+    if(heroDur) heroDur.textContent = fmt(TOTAL);
+  }
+  paint();
+  if(!reduce){
+    setInterval(function(){
+      if(paused) return;
+      cur = (cur + 1) % (TOTAL + 1);
+      paint();
+    }, 1000);
+  }
+
+  /* ------------------------------------------------------------------
+     D. PLAY / PAUSE
+     ------------------------------------------------------------------ */
+  var playBtns = [].slice.call(d.querySelectorAll('[data-play]'));
+  function applyPlay(){
+    playBtns.forEach(function(b){
+      b.classList.toggle('is-paused', paused);
+      b.setAttribute('aria-label', paused ? 'Phát' : 'Tạm dừng');
+    });
+  }
+  playBtns.forEach(function(b){
+    b.addEventListener('click', function(e){
+      e.stopPropagation();
+      paused = !paused;
+      applyPlay();
+      toast(paused ? 'Tạm dừng phát' : 'Tiếp tục phát');
+    });
+  });
+
+  /* ------------------------------------------------------------------
+     E. HERO → MINI PLAYER handoff
+     FIX 1: nguồn sự thật = TIÊU ĐỀ hero có bị cụm sticky che không,
+     không phải ratio của cả hộp hero.
+     ------------------------------------------------------------------ */
+  var hero = d.getElementById('hero');
+  var heroTitle = d.getElementById('heroTitle');
+  var stickyWrap = d.querySelector('.sticky-wrap');
+  var mini = d.getElementById('miniPlayer');
+  var state = 'playing';
+
+  function syncMini(show){
+    mini.classList.toggle('is-visible', show);
+    mini.setAttribute('aria-hidden', show ? 'false' : 'true');
+    if(show) mini.removeAttribute('inert');
+    else mini.setAttribute('inert', '');
+    /* Nút review hạ xuống sát đáy khi không có mini player (nếu không sẽ đè lên
+       hàng nhạc cuối). */
+    d.body.classList.toggle('mini-on', !!show);
+  }
+
+  var rafPending = false;
+  function measureHero(){
+    rafPending = false;
+    var show = false;
+    if(state !== 'empty' && heroTitle && stickyWrap){
+      var hb = heroTitle.getBoundingClientRect().bottom;
+      var sb = stickyWrap.getBoundingClientRect().bottom;
+      show = hb < sb + 8;
+    }
+    syncMini(show);
+  }
+  function scheduleMeasure(){
+    if(rafPending) return;
+    rafPending = true;
+    if(window.requestAnimationFrame) window.requestAnimationFrame(measureHero);
+    else setTimeout(measureHero, 16);
+  }
+  scrollEl.addEventListener('scroll', scheduleMeasure, { passive: true });
+  window.addEventListener('resize', scheduleMeasure);
+
+  /* IO chỉ đóng vai trò trigger bổ sung (layout đổi mà không scroll) */
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(scheduleMeasure, { root: scrollEl, threshold: [0, 0.2, 0.5, 1] }).observe(hero);
+  }
+  measureHero();
+
+  /* FIX 2: bấm vùng phủ = mở player (không còn click handler trên <section>) */
+  var heroHit = d.getElementById('heroHit');
+  if(heroHit){
+    heroHit.addEventListener('click', function(){ toast('Mở trình phát'); });
+  }
+
+  /* ------------------------------------------------------------------
+     F. MINI PLAYER — tap = mở player, kéo lên 1:1 rồi spring về
+     ------------------------------------------------------------------ */
+  var dragging = false, startY = 0, dragY = 0, moved = false;
+
+  mini.addEventListener('pointerdown', function(e){
+    if(e.target.closest('button')) return;
+    dragging = true; moved = false; startY = e.clientY; dragY = 0;
+    mini.style.transition = 'none';
+    if(mini.setPointerCapture){ try{ mini.setPointerCapture(e.pointerId); }catch(err){} }
+  });
+  mini.addEventListener('pointermove', function(e){
+    if(!dragging) return;
+    dragY = Math.min(0, e.clientY - startY);
+    mini.style.transform = 'translateY(' + dragY + 'px)';
+    if(dragY < -6) moved = true;
+  });
+  function endDrag(){
+    if(!dragging) return;
+    dragging = false;
+    mini.style.transition = '';
+    mini.style.transform = '';
+    if(dragY < -48){ toast('Mở trình phát'); moved = true; }
+    dragY = 0;
+  }
+  mini.addEventListener('pointerup', endDrag);
+  mini.addEventListener('pointercancel', endDrag);
+  mini.addEventListener('click', function(e){
+    if(e.target.closest('button')) return;
+    if(moved){ moved = false; return; }
+    toast('Mở trình phát');
+  });
+
+  /* ------------------------------------------------------------------
+     G. COLLAPSE PATTERN — dùng chung cho mọi section .sec-collapsible
+        #recentList[data-state] = normal (5 hàng) | open (8 hàng) | collapsed
+        <section data-state> cùng giá trị → style chip đếm / chevron / nút phụ.
+        Thêm section khác về sau: chỉ cần .sec-collapsible + .sec-toggle
+        + danh sách có data-state (không phải sửa JS).
+     ------------------------------------------------------------------ */
+  var list = d.getElementById('recentList');
+  var moreBtn = d.getElementById('recentMore');
+  var recentToggle = d.getElementById('recentToggle');
+  var extraRows = list ? [].slice.call(list.querySelectorAll('.track-row')).slice(5) : [];
+  var lastExpanded = 'normal';
+
+  function recentState(){
+    return list ? (list.getAttribute('data-state') || 'normal') : 'normal';
+  }
+  function applyRowInert(){
+    var open = recentState() === 'open';
+    extraRows.forEach(function(r){
+      if(open) r.removeAttribute('inert'); else r.setAttribute('inert', '');
+    });
+  }
+  function setRecentState(st){
+    if(!list) return;
+    if(st !== 'collapsed') lastExpanded = st;
+    list.setAttribute('data-state', st);
+    var sec = list.closest('.sec-collapsible');
+    if(sec) sec.setAttribute('data-state', st);
+    if(recentToggle) recentToggle.setAttribute('aria-expanded', st === 'collapsed' ? 'false' : 'true');
+    if(moreBtn){
+      moreBtn.textContent = (st === 'open') ? 'Thu gọn' : 'Xem tất cả';
+      moreBtn.setAttribute('aria-expanded', st === 'open' ? 'true' : 'false');
+      if(st === 'collapsed') moreBtn.setAttribute('hidden', '');
+      else moreBtn.removeAttribute('hidden');
+    }
+    applyRowInert();
+  }
+
+  if(recentToggle && list){
+    recentToggle.addEventListener('click', function(){
+      setRecentState(recentState() === 'collapsed' ? lastExpanded : 'collapsed');
+    });
+  }
+  if(moreBtn && list){
+    moreBtn.addEventListener('click', function(){
+      var st = recentState();
+      if(st === 'collapsed'){ setRecentState('open'); return; }
+      setRecentState(st === 'open' ? 'normal' : 'open');
+    });
+  }
+  if(list) setRecentState('normal');
+
+  /* ------------------------------------------------------------------
+     H. LIBRARY refresh / retry → skeleton 1400ms
+     ------------------------------------------------------------------ */
+  var stateBtns = [].slice.call(d.querySelectorAll('.review-panel [data-state]'));
+
+  function refreshLibrary(){
+    body.classList.remove('state-error');
+    if(state === 'error'){
+      state = 'playing';
+      stateBtns.forEach(function(b){ b.classList.toggle('on', b.dataset.state === 'playing'); });
+    }
+    body.classList.add('state-loading');
+    setTimeout(function(){ body.classList.remove('state-loading'); }, 1400);
+  }
+  var libRefresh = d.getElementById('libRefresh');
+  var libRetry = d.getElementById('libRetry');
+  if(libRefresh) libRefresh.addEventListener('click', refreshLibrary);
+  if(libRetry) libRetry.addEventListener('click', refreshLibrary);
+
+  /* ------------------------------------------------------------------
+     I. STATE SWITCHER (review toolbar, ngoài khung)
+     ------------------------------------------------------------------ */
+  function setState(s){
+    state = s;
+    body.classList.remove('state-playing', 'state-empty', 'state-error', 'state-loading', 'state-noplaylist');
+    body.classList.add('state-' + s);
+    stateBtns.forEach(function(b){ b.classList.toggle('on', b.dataset.state === s); });
+
+    var row = d.querySelector('#recentList .track-row');
+    if(row){
+      var on = (s !== 'empty');
+      row.classList.toggle('is-playing', on);
+      var sub = row.querySelector('.track-sub');
+      if(sub) sub.textContent = on ? 'Đang phát · Moah · Nhạc Trung Channel' : 'Moah · Nhạc Trung Channel';
+    }
+    if(s === 'empty'){ paused = false; applyPlay(); }
+    syncSheetState(s);          /* sheet phản ánh state-empty (head + row disable) */
+    scheduleMeasure();
+    setTimeout(moveInd, 0);
+  }
+  stateBtns.forEach(function(b){
+    b.addEventListener('click', function(){ setState(b.dataset.state); });
+  });
+
+  /* ------------------------------------------------------------------
+     J. COVER — FIX 5: glyph suy ra từ title, gradient chỉ là fallback
+     ------------------------------------------------------------------ */
+  function glyphOf(title){
+    var m = title.match(/[\u4e00-\u9fff]/);          /* CJK đầu tiên */
+    if(m) return m[0];
+    var t = title.replace(/^\s*\[[^\]]*\]\s*/, '').trim();   /* bỏ tiền tố [Vietsub] */
+    return (t.charAt(0) || '♪').toUpperCase();
+  }
+  [].slice.call(d.querySelectorAll('.cover')).forEach(function(cv){
+    var host = cv.closest('.hero-live, .hero-empty, .track-row, .mini-player, .pl-row');
+    var tEl = host ? host.querySelector('.hero-title, .track-title, .mini-title') : null;
+    var fb = cv.querySelector('.cover-fallback');
+    if(fb && tEl) fb.textContent = glyphOf(tEl.textContent);
+
+    var img = cv.querySelector('.cover-img');
+    if(!img) return;
+    /* có thumbnail thật & load được → bỏ fallback; ngược lại giữ gradient + glyph */
+    if(img.getAttribute('src') && img.naturalWidth > 0) cv.classList.remove('no-img');
+    else cv.classList.add('no-img');
+    img.addEventListener('load', function(){ cv.classList.remove('no-img'); });
+  });
+
+  /* ------------------------------------------------------------------
+     K. REVIEW DOCK — không còn nút chọn khổ.
+        <520px CSS thu panel thành nút tròn; JS chỉ mở/đóng + đóng khi
+        bấm ra ngoài hoặc nhấn Escape.
+     ------------------------------------------------------------------ */
+  var dock = d.getElementById('reviewDock');
+  var fab  = d.getElementById('reviewFab');
+
+  function closeDock(){
+    if(!dock) return;
+    dock.classList.remove('is-open');
+    if(fab) fab.setAttribute('aria-expanded', 'false');
+  }
+  if(fab && dock){
+    fab.addEventListener('click', function(){
+      var open = dock.classList.toggle('is-open');
+      fab.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    d.addEventListener('click', function(e){
+      if(!dock.classList.contains('is-open')) return;
+      if(dock.contains(e.target)) return;
+      closeDock();
+    });
+    d.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && dock.classList.contains('is-open')){
+        closeDock();
+        fab.focus();
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     M. BOTTOM SHEET "Tùy chọn" — 5 view (main / library / save / personal /
+        admin), map từ #musicMenuSheet + setMenuView() của app thật.
+        Vanilla, null-guard mọi node: music.js là IIFE chạy 1 lần, một
+        TypeError là mất toàn bộ 17 chức năng cũ.
+     ------------------------------------------------------------------ */
+  var sheet     = d.getElementById('musicMenuSheet');
+  var scrim     = d.getElementById('musicMenuBackdrop');
+  var menuBtn   = d.getElementById('musicMenuBtn');
+  var handle    = d.getElementById('musicMenuHandle');
+  var subTitle  = d.getElementById('musicMenuSubTitle');
+  var subCancel = d.getElementById('musicMenuSubCancel');
+  var subDone   = d.getElementById('musicMenuSubDone');
+  var sheetBody = sheet ? sheet.querySelector('.sheet-body') : null;
+  var statusEl  = d.getElementById('musicStatus');
+  var sheetOpen = false;
+  var currentView = 'main';
+  var savedScroll = 0;
+  var statusTimer = null;
+
+  var VIEW_TITLE = {
+    main: 'Tùy chọn',
+    library: 'Thư viện của bạn',
+    save: 'Đã lưu vào',
+    personal: 'Nghe từ YouTube',      /* đúng chữ app thật dùng */
+    admin: 'Thêm nhạc vào kho'
+  };
+  var TRACK_TITLE = '[Vietsub] Bích Thượng Quan - Đằng Ngụy Qu...';
+  var TRACK_SUB   = 'Moah · Nhạc Trung Channel';
+  var DELETE_LABEL = 'Xóa bài khỏi kho';
+  var DELETE_LABEL_ARMED = 'Chạm lần nữa để xóa';
+
+  function sheetStatus(msg){
+    if(!statusEl) return;
+    statusEl.textContent = msg || '';
+    clearTimeout(statusTimer);
+    if(msg) statusTimer = setTimeout(function(){ statusEl.textContent = ''; }, 2400);
+  }
+
+  /* các phần tử focus được, chỉ trong sheet + chỉ trong view/pane đang hiện */
+  function focusables(){
+    if(!sheet) return [];
+    var nodes = sheet.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])');
+    return [].filter.call(nodes, function(n){
+      if(n.closest('[hidden]')) return false;
+      var view = n.closest('.sheet-view');
+      if(view && !view.classList.contains('is-active')) return false;
+      if(n.closest('.s-pane[hidden]')) return false;
+      return n.getClientRects().length > 0;
+    });
+  }
+  function firstInView(){
+    var active = sheet ? sheet.querySelector('.sheet-view.is-active') : null;
+    if(!active) return null;
+    var nodes = active.querySelectorAll('button:not([disabled]), input:not([disabled]), a[href], summary, [tabindex]:not([tabindex="-1"])');
+    for(var i = 0; i < nodes.length; i++){
+      if(nodes[i].closest('[hidden]')) continue;
+      if(nodes[i].getClientRects().length) return nodes[i];
+    }
+    return null;
+  }
+
+  /* --- chỉ báo cuộn: scrollbar đã ẩn nên còn nội dung dưới phải fade đáy --- */
+  var scrollRaf = false;
+  function updateScrollMask(){
+    scrollRaf = false;
+    if(!sheetBody) return;
+    var more = (sheetBody.scrollHeight - sheetBody.clientHeight - sheetBody.scrollTop) > 2;
+    sheetBody.classList.toggle('is-scrollable', more);
+  }
+  function scheduleScrollMask(){
+    if(scrollRaf) return;
+    scrollRaf = true;
+    if(window.requestAnimationFrame) window.requestAnimationFrame(updateScrollMask);
+    else setTimeout(updateScrollMask, 16);
+  }
+  if(sheetBody){
+    sheetBody.addEventListener('scroll', scheduleScrollMask, { passive: true });
+    window.addEventListener('resize', scheduleScrollMask);
+    /* <details> mở/đóng làm đổi chiều cao nội dung */
+    sheet.addEventListener('toggle', scheduleScrollMask, true);
+  }
+
+  /* dir: 'fwd' | 'back' | null — view cũ ẩn NGAY, view mới trượt 14px + fade */
+  function setView(name, dir, moveFocus){
+    if(!sheet || !VIEW_TITLE[name]) return;
+    var views = sheet.querySelectorAll('.sheet-view');
+    var i, v, on;
+    for(i = 0; i < views.length; i++){
+      v = views[i];
+      v.classList.remove('is-in-fwd', 'is-in-back');
+      on = v.getAttribute('data-view') === name;
+      v.classList.toggle('is-active', on);
+    }
+    currentView = name;
+    if(subTitle) subTitle.textContent = VIEW_TITLE[name];
+    if(subCancel){
+      subCancel.hidden = (name === 'main');
+      /* view save: nút trái là chữ "Hủy" (app thật), view khác là chevron back */
+      subCancel.classList.toggle('is-text', name === 'save');
+      subCancel.setAttribute('aria-label', name === 'save' ? 'Hủy' : 'Quay lại');
+    }
+    /* "Xong" CHỈ ở view save (app thật không hiện ở library) */
+    if(subDone) subDone.hidden = (name !== 'save');
+    /* RỜI main ⇒ huỷ trạng thái chờ xác nhận xoá. Không có bước này thì
+       arm → Esc → mở lại → 1 cú chạm là xoá (port sang app = DELETE thật). */
+    if(name !== 'main') resetDeleteArm();
+    /* RỜI main ⇒ gập lại disclosure playlist (không để nó mở sẵn lần sau) */
+    if(name !== 'main') collapsePlaylistPanel();
+    if(name !== 'save') hideSaveNewForm();
+    if(dir){
+      var active = sheet.querySelector('.sheet-view.is-active');
+      if(active){
+        void active.offsetWidth;                      /* restart animation */
+        active.classList.add(dir === 'back' ? 'is-in-back' : 'is-in-fwd');
+        setTimeout(function(){
+          if(active) active.classList.remove('is-in-fwd', 'is-in-back');
+        }, 260);
+      }
+    }
+    if(sheetBody) sheetBody.scrollTop = 0;
+    scheduleScrollMask();
+    if(moveFocus){
+      var f = firstInView() || focusables()[0];
+      if(f) f.focus();
+    }
+  }
+
+  function openSheet(){
+    if(!sheet || sheetOpen) return;
+    sheetOpen = true;
+    savedScroll = scrollEl ? scrollEl.scrollTop : 0;
+    setView('main');
+    closeDock();                       /* đóng popover review nếu đang mở */
+    body.classList.add('sheet-open');
+    sheet.classList.add('is-open');
+    if(scrim) scrim.classList.add('is-open');
+    sheet.setAttribute('aria-hidden', 'false');
+    sheet.removeAttribute('inert');
+    if(menuBtn) menuBtn.setAttribute('aria-expanded', 'true');
+    /* chặn nền: chỉ .app-scroll + .mini-player (header phải giữ được để trả focus) */
+    if(scrollEl) scrollEl.setAttribute('inert', '');
+    if(mini) mini.setAttribute('inert', '');
+    var f = firstInView() || focusables()[0];
+    if(f) f.focus();
+    scheduleScrollMask();
+  }
+
+  function closeSheet(){
+    if(!sheet || !sheetOpen) return;
+    sheetOpen = false;
+    /* B1: đóng sheet phải huỷ trạng thái chờ xác nhận xoá */
+    resetDeleteArm();
+    collapsePlaylistPanel();
+    body.classList.remove('sheet-open');
+    sheet.classList.remove('is-open');
+    if(scrim) scrim.classList.remove('is-open');
+    sheet.setAttribute('aria-hidden', 'true');
+    sheet.setAttribute('inert', '');
+    if(menuBtn){
+      menuBtn.setAttribute('aria-expanded', 'false');
+      /* defer 1 nhịp: khi đóng bằng cách KÉO, cú click sinh ra sau pointerup
+         có thể cướp focus sang phần tử nằm dưới con trỏ (vd .hero-hit). */
+      setTimeout(function(){ if(!sheetOpen) menuBtn.focus(); }, 0);
+    }
+    if(scrollEl){
+      scrollEl.removeAttribute('inert');
+      scrollEl.scrollTop = savedScroll;               /* khôi phục vị trí cuộn */
+    }
+    if(mini){
+      if(mini.classList.contains('is-visible')) mini.removeAttribute('inert');
+      else mini.setAttribute('inert', '');
+    }
+    sheetStatus('');
+  }
+
+  if(menuBtn) menuBtn.addEventListener('click', openSheet);
+  if(scrim) scrim.addEventListener('click', closeSheet);
+  if(subCancel) subCancel.addEventListener('click', function(){
+    if(currentView === 'main'){ closeSheet(); return; }
+    setView('main', 'back', true);
+  });
+  if(subDone) subDone.addEventListener('click', function(){
+    if(currentView === 'save'){ commitSave(); return; }
+    closeSheet();
+  });
+
+  /* --- kéo tay nắm để đóng: translateY bám 1:1, nhả >25% hoặc velocity >.5 --- */
+  var dragOn = false, dragStart = 0, dragStartT = 0, dragY = 0, dragLastT = 0;
+
+  function endDrag(){
+    if(!dragOn) return;
+    dragOn = false;
+    sheet.classList.remove('is-dragging');
+    sheet.style.transform = '';
+    if(scrim) scrim.style.opacity = '';
+    var h = sheet.offsetHeight || 1;
+    var now = Date.now();
+    var dur = Math.max(1, now - dragStartT);
+    /* velocity = TRUNG BÌNH cả cú kéo, không lấy 2 mẫu cuối (2 mẫu cuối rất dễ
+       nhiễu: vài pointermove cách nhau 0–1ms tạo ra "vận tốc" phi thực tế).
+       Dừng tay >160ms trước khi nhả ⇒ coi như velocity 0, chỉ xét quãng đường. */
+    var v = (now - dragLastT > 160) ? 0 : dragY / dur;
+    var shouldClose = dragY > h * 0.25 || v > 0.5;
+    dragY = 0;
+    if(shouldClose) closeSheet();
+  }
+  if(handle && sheet){
+    handle.addEventListener('pointerdown', function(e){
+      if(!sheetOpen) return;
+      dragOn = true; dragY = 0; dragStart = e.clientY;
+      dragStartT = Date.now(); dragLastT = dragStartT;
+      sheet.classList.add('is-dragging');
+      if(handle.setPointerCapture){ try{ handle.setPointerCapture(e.pointerId); }catch(err){} }
+      e.preventDefault();
+    });
+    handle.addEventListener('pointermove', function(e){
+      if(!dragOn) return;
+      dragY = Math.max(0, e.clientY - dragStart);
+      dragLastT = Date.now();
+      if(reduce) return;             /* reduced-motion: KHÔNG ghi transform (inline thắng MQ) */
+      sheet.style.transform = 'translateY(' + dragY + 'px)';
+      if(scrim) scrim.style.opacity = String(Math.max(0, 1 - dragY / (sheet.offsetHeight || 1)));
+    });
+    handle.addEventListener('pointerup', endDrag);
+    handle.addEventListener('pointercancel', endDrag);
+    handle.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar' || e.key === 'ArrowDown'){
+        e.preventDefault();
+        closeSheet();
+      }
+    });
+  }
+
+  /* --- Esc + focus trap --- */
+  d.addEventListener('keydown', function(e){
+    if(!sheetOpen) return;
+    if(e.key === 'Escape'){ e.preventDefault(); closeSheet(); return; }
+    if(e.key !== 'Tab') return;
+    var f = focusables();
+    if(!f.length) return;
+    var first = f[0], last = f[f.length - 1], cur = d.activeElement;
+    if(!sheet.contains(cur)){ e.preventDefault(); first.focus(); return; }
+    if(e.shiftKey && cur === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && cur === last){ e.preventDefault(); first.focus(); }
+  });
+
+  /* --- view main: hành động trên bài đang phát --- */
+  var shareRow = d.getElementById('musicMenuShareRow');
+  if(shareRow) shareRow.addEventListener('click', function(){
+    sheetStatus('Đã sao chép liên kết bài hát.');
+  });
+
+  var addRow = d.getElementById('musicPreviewPlaylistAdd');
+  var quickPanel = d.getElementById('quickPlaylistPanel');
+  function collapsePlaylistPanel(){
+    if(!quickPanel || !addRow) return;
+    quickPanel.hidden = true;
+    addRow.setAttribute('aria-expanded', 'false');
+  }
+  if(addRow && quickPanel){
+    addRow.addEventListener('click', function(){
+      var willOpen = quickPanel.hidden;
+      quickPanel.hidden = !willOpen;
+      addRow.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      /* KHÔNG bắn gợi ý vào #musicStatus: nó nằm ở đỉnh sheet, cách hàng ~600px.
+         Bản thân danh sách vừa xổ ra đã là tín hiệu rõ ràng. */
+    });
+  }
+  var addMoreRow = d.getElementById('musicPreviewPlaylistMore');
+  if(addMoreRow) addMoreRow.addEventListener('click', function(){ setView('save', 'fwd', true); });
+
+  var sourceRow = d.getElementById('musicSourceLink');
+  if(sourceRow) sourceRow.addEventListener('click', function(){
+    sheetStatus('Đang mở bài trên trang nguồn…');
+  });
+
+  var libRow = d.getElementById('musicMenuLibraryRow');
+  if(libRow) libRow.addEventListener('click', function(){ setView('library', 'fwd', true); });
+
+  var refreshRow = d.getElementById('musicCloudRefresh');
+  if(refreshRow) refreshRow.addEventListener('click', function(){
+    sheetStatus('Đang làm mới kho nhạc…');
+    setTimeout(function(){ if(sheetOpen) sheetStatus('Kho nhạc đã cập nhật.'); }, 1100);
+  });
+
+  var personalOpen = d.getElementById('musicPersonalOpen');
+  if(personalOpen) personalOpen.addEventListener('click', function(){ setView('personal', 'fwd', true); });
+
+  var adminOpen = d.getElementById('musicAdminOpen');
+  if(adminOpen) adminOpen.addEventListener('click', function(){ setView('admin', 'fwd', true); });
+
+  /* xoá = 2 bước, tránh một cú chạm xoá luôn.
+     Trạng thái chờ xác nhận chỉ sống Ở CHÍNH HÀNG (.is-armed + label đổi +
+     vạch đếm ngược). #musicStatus KHÔNG nhắc lại câu armed: hàng đã tự nói rõ,
+     còn dòng status nằm cách hàng ~600px nên chỉ gây nhiễu. #musicStatus chỉ
+     dùng cho KẾT QUẢ ("Đã xóa…") và lỗi. */
+  var deleteRow = d.getElementById('musicCloudDelete');
+  var deleteLabel = d.getElementById('musicCloudDeleteLabel');
+  var deleteArmed = false, deleteTimer = null;
+
+  function resetDeleteArm(){
+    clearTimeout(deleteTimer);
+    deleteTimer = null;
+    deleteArmed = false;
+    if(deleteRow) deleteRow.classList.remove('is-armed');
+    if(deleteLabel) deleteLabel.textContent = DELETE_LABEL;
+  }
+  function armDelete(){
+    deleteArmed = true;
+    if(deleteRow) deleteRow.classList.add('is-armed');
+    if(deleteLabel) deleteLabel.textContent = DELETE_LABEL_ARMED;
+    clearTimeout(deleteTimer);
+    deleteTimer = setTimeout(function(){ resetDeleteArm(); }, 3200);
+  }
+  if(deleteRow) deleteRow.addEventListener('click', function(){
+    if(!deleteArmed){ armDelete(); return; }
+    resetDeleteArm();
+    sheetStatus('Đã xóa bài khỏi kho.');
+  });
+
+  /* --- dải pill gán nhanh playlist (nằm trong view save) --- */
+  var quickPills = d.getElementById('musicQuickPlaylistPills');
+  if(quickPills) quickPills.addEventListener('click', function(e){
+    var b = e.target.closest ? e.target.closest('.s-pill') : null;
+    if(!b) return;
+    if(b.classList.contains('s-pill--new')){ setView('save', 'fwd', true); openSaveNewForm(); return; }
+    var on = b.classList.toggle('is-on');
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    sheetStatus((on ? 'Đã thêm vào ' : 'Đã bỏ khỏi ') + b.textContent.trim() + '.');
+  });
+
+  /* --- view save: checkbox, form tạo playlist inline, nút Xong = ghi lựa chọn --- */
+  function checkHandler(){
+    var on = this.classList.toggle('is-checked');
+    this.setAttribute('aria-pressed', on ? 'true' : 'false');
+    var label = this.querySelector('.s-label');
+    var name = label ? label.textContent.split('·')[0].trim() : 'playlist';
+    sheetStatus(on ? 'Đã lưu vào ' + name + '.' : 'Đã bỏ lưu.');
+  }
+  [].slice.call(d.querySelectorAll('.sheet .s-check')).forEach(function(row){
+    row.addEventListener('click', checkHandler);
+  });
+
+  var saveNewForm  = d.getElementById('musicSaveNewForm');
+  var saveNewName  = d.getElementById('musicSaveNewName');
+  var saveNewCreate = d.getElementById('musicSaveNewCreate');
+
+  function openSaveNewForm(){
+    if(!saveNewForm) return;
+    saveNewForm.hidden = false;
+    if(saveNewName) saveNewName.focus();
+    scheduleScrollMask();
+  }
+  function hideSaveNewForm(){
+    if(!saveNewForm || saveNewForm.hidden) return;
+    saveNewForm.hidden = true;
+    if(saveNewName) saveNewName.value = '';
+    scheduleScrollMask();
+  }
+
+  /* "Xong" = ghi lựa chọn (không chỉ đóng sheet) */
+  function commitSave(){
+    var checked = d.querySelector('.sheet-view[data-view="save"] .s-check.is-checked .s-label');
+    if(!checked){ sheetStatus('Chọn một danh sách phát trước đã.'); return; }
+    var name = checked.textContent.split('·')[0].trim();
+    closeSheet();
+    toast('Đã lưu vào ' + name);
+  }
+
+  var saveNewToggle = d.getElementById('musicSaveNewToggle');
+  if(saveNewToggle) saveNewToggle.addEventListener('click', function(){
+    if(saveNewForm && saveNewForm.hidden) openSaveNewForm();
+    else hideSaveNewForm();
+  });
+  var saveNewRow = d.getElementById('musicSaveNewRow');
+  if(saveNewRow) saveNewRow.addEventListener('click', openSaveNewForm);
+
+  if(saveNewCreate) saveNewCreate.addEventListener('click', function(){
+    var name = saveNewName ? saveNewName.value.trim() : '';
+    if(!name){ if(saveNewName) saveNewName.focus(); sheetStatus('Nhập tên danh sách phát trước đã.'); return; }
+    /* thêm hàng vào đúng danh sách checkbox, ngay trên hàng "Danh sách phát mới" */
+    var newRow = d.getElementById('musicSaveNewRow');
+    if(newRow && newRow.parentNode){
+      var row = d.createElement('button');
+      row.type = 'button';
+      row.className = 's-check is-checked';
+      row.setAttribute('data-pl', '');
+      row.setAttribute('aria-pressed', 'true');
+      row.innerHTML = '<span class="s-box" aria-hidden="true"><svg viewBox="0 0 24 24" class="ic"><path d="M5 12.5 10 17.5 19 7"/></svg></span><span class="s-label"></span>';
+      row.querySelector('.s-label').textContent = name + ' · 0 bài';
+      row.addEventListener('click', checkHandler);
+      newRow.parentNode.insertBefore(row, newRow);
+    }
+    hideSaveNewForm();
+    sheetStatus('Đã tạo và lưu vào “' + name + '”.');
+  });
+
+  var saveDone = d.getElementById('musicSaveDone');
+  if(saveDone) saveDone.addEventListener('click', commitSave);
+
+  /* --- view library --- */
+  function openLibraryCreate(){
+    var det = d.querySelector('.sheet-view[data-view="library"] .s-details');
+    if(det) det.open = true;
+    var input = d.getElementById('musicPlaylistName');
+    if(input){ input.focus(); if(input.scrollIntoView) input.scrollIntoView({ block: 'center' }); }
+    scheduleScrollMask();
+  }
+  var plCreate = d.getElementById('musicPlaylistCreate');
+  if(plCreate) plCreate.addEventListener('click', function(){
+    var input = d.getElementById('musicPlaylistName');
+    var name = input ? input.value.trim() : '';
+    if(!name){ if(input) input.focus(); sheetStatus('Nhập tên playlist trước đã.'); return; }
+    input.value = '';
+    sheetStatus('Đã tạo playlist “' + name + '”.');
+  });
+  [].slice.call(d.querySelectorAll('[data-pl-row]')).forEach(function(row){
+    row.addEventListener('click', function(){ sheetStatus('Đang mở playlist…'); });
+  });
+  var plEmptyCreate = d.getElementById('musicPlEmptyCreate');
+  if(plEmptyCreate) plEmptyCreate.addEventListener('click', openLibraryCreate);
+
+  /* --- view personal --- */
+  var personalSubmit = d.getElementById('musicPersonalSubmit');
+  if(personalSubmit) personalSubmit.addEventListener('click', function(){
+    var url = d.getElementById('musicPersonalUrl');
+    if(url && !url.value.trim()){ url.focus(); sheetStatus('Dán link YouTube trước đã.'); return; }
+    sheetStatus('Đang mở link YouTube…');
+    setTimeout(function(){ if(sheetOpen) closeSheet(); }, 900);
+  });
+
+  /* --- view admin: segmented 2 tab --- */
+  var adminTabs = [].slice.call(d.querySelectorAll('[data-admin-tab]'));
+  function setAdminTab(key){
+    adminTabs.forEach(function(t){
+      var on = t.getAttribute('data-admin-tab') === key;
+      t.classList.toggle('is-on', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+    [].slice.call(d.querySelectorAll('.sheet .s-pane')).forEach(function(p){
+      p.hidden = p.getAttribute('data-pane') !== key;
+    });
+  }
+  adminTabs.forEach(function(t){
+    t.addEventListener('click', function(){ setAdminTab(t.getAttribute('data-admin-tab')); });
+  });
+  var adminSeg = d.querySelector('.sheet .s-seg');
+  if(adminSeg) adminSeg.addEventListener('keydown', function(e){
+    if(['ArrowLeft', 'ArrowRight', 'Home', 'End'].indexOf(e.key) < 0) return;
+    e.preventDefault();
+    var i = adminTabs.indexOf(d.activeElement);
+    var n = e.key === 'Home' ? 0
+          : e.key === 'End' ? adminTabs.length - 1
+          : e.key === 'ArrowLeft' ? (i - 1 + adminTabs.length) % adminTabs.length
+          : (i + 1) % adminTabs.length;
+    adminTabs[n].click();
+    adminTabs[n].focus();
+  });
+
+  var adminSubmit = d.getElementById('musicAdminImportSubmit');
+  if(adminSubmit) adminSubmit.addEventListener('click', function(){
+    var url = d.getElementById('musicAdminImportUrl');
+    if(url && !url.value.trim()){ url.focus(); sheetStatus('Dán link YouTube trước đã.'); return; }
+    sheetStatus('Đang thêm bài vào kho…');
+  });
+
+  var uploadTimer = null;
+  function stopUpload(){ if(uploadTimer){ clearInterval(uploadTimer); uploadTimer = null; } }
+  var uploadBtn = d.getElementById('musicCloudUpload');
+  if(uploadBtn) uploadBtn.addEventListener('click', function(){
+    var t = d.getElementById('musicCloudUploadTitle');
+    var f = d.getElementById('musicCloudUploadFile');
+    if(t && !t.value.trim()){ t.focus(); sheetStatus('Nhập tên bài hát trước đã.'); return; }
+    if(f && !(f.files && f.files.length)){ f.focus(); sheetStatus('Chọn file MP3 / M4A trước đã.'); return; }
+    var bar = d.getElementById('musicCloudUploadProgress');
+    var cancel = d.getElementById('musicCloudUploadCancel');
+    if(bar){ bar.hidden = false; bar.value = 0; }
+    if(cancel) cancel.hidden = false;
+    sheetStatus('Đang tải lên kho…');
+    stopUpload();
+    uploadTimer = setInterval(function(){
+      if(!bar || !sheetOpen){ stopUpload(); return; }
+      bar.value = Math.min(100, (bar.value || 0) + 7);
+      if(bar.value >= 100){ stopUpload(); sheetStatus('Đã tải bài lên kho.'); }
+    }, 90);
+  });
+  var uploadCancel = d.getElementById('musicCloudUploadCancel');
+  if(uploadCancel) uploadCancel.addEventListener('click', function(){
+    stopUpload();
+    var bar = d.getElementById('musicCloudUploadProgress');
+    if(bar){ bar.hidden = true; bar.value = 0; }
+    uploadCancel.hidden = true;
+    sheetStatus('Đã hủy tải lên.');
+  });
+
+  /* --- state ảnh hưởng sheet: state-empty / is-owner --- */
+  var sheetTrackTitle = d.getElementById('musicMenuTrackTitle');
+  var sheetTrackSub   = d.getElementById('musicMenuTrackSub');
+
+  function syncSheetState(s){
+    var empty = (s === 'empty');
+    if(sheetTrackTitle) sheetTrackTitle.textContent = empty ? 'Chưa chọn bài hát' : TRACK_TITLE;
+    if(sheetTrackSub) sheetTrackSub.textContent = empty ? 'Kho nhạc HSK' : TRACK_SUB;
+    ['musicMenuShareRow', 'musicPreviewPlaylistAdd', 'musicSourceLink', 'musicCloudDelete'].forEach(function(id){
+      var row = d.getElementById(id);
+      if(!row) return;
+      row.classList.toggle('is-disabled', empty);
+      if(empty){ row.setAttribute('aria-disabled', 'true'); row.setAttribute('tabindex', '-1'); }
+      else { row.removeAttribute('aria-disabled'); row.removeAttribute('tabindex'); }
+    });
+    /* đổi state ⇒ huỷ chờ xác nhận xoá + đo lại chỉ báo cuộn */
+    resetDeleteArm();
+    scheduleScrollMask();
+  }
+
+  var ownerBtn = d.getElementById('reviewOwner');
+  if(ownerBtn) ownerBtn.addEventListener('click', function(){
+    var on = body.classList.toggle('is-owner');
+    ownerBtn.classList.toggle('on', on);
+    ownerBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if(!on && currentView === 'admin') setView('main', 'back');
+    resetDeleteArm();
+    scheduleScrollMask();
+  });
+
+  /* ------------------------------------------------------------------
+     L. BOOT
+     ------------------------------------------------------------------ */
+  setTab('all');
+  setState('playing');
+  applyPlay();
+  setRecentState('normal');
+
+  moveInd();
+  requestAnimationFrame(function(){ moveInd(); setTimeout(moveInd, 80); });
+  window.addEventListener('load', function(){ measureIndBase(); moveInd(); scheduleMeasure(); });
+  window.addEventListener('resize', function(){ measureIndBase(); moveInd(); scheduleMeasure(); });
+
+  setTimeout(function(){ body.classList.remove('booting'); }, 1000);
+})();
+</script>
+
+<!--
+  ============================================================================
+  FEATURE CHECKLIST (18 chức năng → selector)
+  01 Header kính mờ (fallback solid) ............... .sticky-wrap > .sticky-inner > .app-header
+  02 Filter pills + indicator trượt ................. .pills-inner / .pill-ind
+  03 Logic lọc section (3 tab) ..................... [data-tab] → [data-section]
+  04 Hero card "Đang phát" + press-scale ........... .hero / .hero-hit
+  05 Play/pause đồng bộ hero + mini ................ [data-play].is-paused
+  06 Progress demo tự chạy (1s) .................... #npFill / #npProgress
+  07 Equalizer hàng đang phát ...................... .track-row.is-playing .eq
+  08 Nghe gần đây mở rộng 5 → 8 hàng ............... #recentMore / #recentList[data-state="open"]
+  09 Kho nhạc HSK + count chip + refresh ........... .lib-ok / #libRefresh
+  10 Loading skeleton shimmer ...................... .lib-loading / .sk
+  11 Trạng thái lỗi kho + "Làm mới kho" ............ .lib-error / #libRetry
+  12 Playlist rỗng (empty state + CTA) ............. .pl-empty / .cta-pill
+  13 Playlist có dữ liệu (2 hàng) .................. .pl-list / .pl-row
+  14 Mini player handoff (tiêu đề hero bị che) ..... #heroTitle vs .sticky-wrap → #miniPlayer.is-visible
+  15 Mini player kéo lên 1:1 rồi spring về ......... #miniPlayer pointer events
+  16 Toast + review state switcher (4 state) ....... #toast / .review-panel [data-state]
+  17 Thu gọn/mở rộng "Nghe gần đây" ................ .sec-toggle[aria-expanded] / #recentList[data-state]
+  18 Bottom sheet Tùy chọn (5 view) ......... #musicMenuSheet[data-view] / #musicMenuBtn
+
+  Ngoài checklist: app-shell 100dvh + chỉ .app-scroll cuộn (.app / .app-scroll / .page),
+  thanh tiến trình TÁCH RIÊNG và position:fixed (#npProgress / #npFill),
+  mini player position:fixed (.mini-player),
+  entry stagger (body.booting .anim-in), focus-visible ring (:focus-visible),
+  reduced-motion (@media prefers-reduced-motion),
+  cover fallback suy ra glyph từ title (.cover.no-img / .cover-fallback),
+  layout fluid (.page grid auto-fit + clamp()), hover trong @media (hover:hover),
+  review dock thu thành nút tròn ở <520px (#reviewFab / .review-dock.is-open).
+  ============================================================================
+-->
+
+<!--
+  ============================================================================
+  PORT NOTES — 7 điểm PHẢI đổi khi port sang app thật (music.js)
+  ============================================================================
+  0) LAYOUT FLUID / APP-SHELL (thay cho mục "RESPONSIVE / BREAKPOINT" cũ)
+     KHÔNG còn `html[data-view]`, KHÔNG còn nút chọn khổ. Layout tự thích ứng:
+       - `.app{height:100dvh; display:flex; flex-direction:column}` phủ kín
+         viewport; `html,body{height:100%; overflow:hidden}` → BODY KHÔNG BAO
+         GIỜ CUỘN. Đây là điều kiện để mini player đứng yên.
+       - CHỈ `.app-scroll` cuộn (`flex:1 1 auto; min-height:0; overflow-y:auto`).
+         Mọi listener `scroll` phải gắn vào `.app-scroll`, KHÔNG gắn vào
+         `window` — nếu gắn nhầm, handoff hero→mini sẽ không bao giờ chạy.
+       - `.page` là grid `repeat(auto-fit,minmax(min(100%,360px),1fr))`:
+         1 cột khi hẹp, 2 cột khi đủ chỗ (≈800px), không có mốc cố định nào.
+         Typography/space dùng `clamp()`.
+       - Chỉ MỘT media query cấu trúc: `@media (min-width:820px){.hero{
+         position:sticky; top:16px; align-self:start}}`. `top` là 16px (tính từ
+         đỉnh scrollport) vì header nằm NGOÀI vùng cuộn; đừng cộng chiều cao
+         header vào nữa.
+       - Thanh tiến trình đã TÁCH thành phần tử riêng `#npProgress`
+         (`position:fixed; bottom:0; z-index:70`), nằm NGOÀI `.app-scroll` và
+         ngoài thẻ hero/mini ⇒ cuộn không thể làm nó xê dịch. Đây là chỗ duy
+         nhất cập nhật tiến trình (`transform:scaleX` trên `#npFill`).
+       - `.mini-player` dùng `position:fixed; bottom:3px` (3px = bề dày thanh
+         tiến trình) nên thẻ mini luôn nằm ngay trên vạch, không có khe hở.
+         Căn giữa bằng `margin-inline:auto` (không dùng `transform`, vì
+         `transform` đã dành cho animation ẩn/hiện translateY).
+
+  1) SCROLL CONTAINER
+     Prototype cuộn trong `#appScroll` (div overflow-y:auto của app-shell).
+     App thật cũng nên giữ MỘT scroller duy nhất như vậy:
+       - KHÔNG còn `.device` / `.screen` / `.status-bar` / `.win-bar` (đã xoá);
+       - `.app{height:100dvh}` (dvh, không phải vh, để thanh địa chỉ động của
+         mobile không ăn mất đáy);
+       - nếu app thật cuộn ở `document.scrollingElement` thay vì một div thì
+         phải đổi mọi `scrollEl.getBoundingClientRect()` / `scrollTop` /
+         `addEventListener('scroll')` đang trỏ vào #appScroll — và khi đó
+         mini player phải chuyển sang `position:sticky` đáy hoặc giữ `fixed`;
+       - `.page{padding-bottom:calc(88px + 44px + env(safe-area-inset-bottom))}`:
+         88px = mini player (64) + 24 thở; +44px = chừa chỗ cho review dock nổi
+         phía trên mini player. App thật không có review dock thì bỏ 44px.
+
+
+  2) SAFE AREA
+     `.mini-player` đã dùng thẳng `env(safe-area-inset-bottom)` trong
+     `padding-bottom` và `.page` dùng trong `padding-bottom` — trên thiết bị
+     thật không phải sửa gì. Nếu header ăn vào tai thỏ, cộng thêm
+     `padding-top:env(safe-area-inset-top)` cho `.sticky-wrap`
+     (`<meta name="viewport" … viewport-fit=cover>` đã bật sẵn).
+     Token `--safe-bottom` / `--safe-top` giờ chỉ còn là chỗ giữ chỗ, không
+     còn được rule nào dùng tới.
+
+  3) NULL-GUARD MỌI NODE
+     music.js là IIFE chạy 1 lần: nếu một `getElementById` trả null mà code
+     gọi thẳng `.addEventListener` / `.classList` → TypeError giết toàn bộ
+     17 feature còn lại (không có error boundary). Trước khi port phải:
+       - bọc mọi lookup trong `if(el){...}` hoặc early-return;
+       - các hàm `measureHero`, `paint`, `moveInd`, `syncMini`, `applyRowInert`,
+         `setRecentState`, `closeDock` đều đọc node trực tiếp → thêm guard;
+       - `setInterval` progress và `requestAnimationFrame` phải có cờ
+         "đã destroy" để không chạy tiếp sau khi rời màn hình.
+
+  4) KHÔNG TẠO BỘ ĐIỀU KHIỂN THỨ HAI
+     App thật ĐÃ có mini player + nút play trong music.js. Các selector dưới
+     đây trong prototype sẽ đụng đúng những node đó, nên phải MAP sang id cũ
+     thay vì render thêm một bộ mới:
+       - `.mini-player` / `#miniPlayer`   → `musicMiniPlayer`
+       - `.mini-play`   / `[data-play]`   → `musicMiniPlay`
+       - nút play trong hero              → `musicLinkPlay`
+       - `.np-fill` / `#npFill`            → thanh progress của app (nếu giữ
+                                            thanh riêng) hoặc dùng
+                                            `#musicMiniProgress` có sẵn — chỉ
+                                            chọn MỘT nguồn, đừng set
+                                            transform:scaleX lên cả hai
+     Chỉ giữ MỘT nguồn state phát (một biến `isPlaying` / một audio element);
+     hero, mini player và danh sách hàng đang phát phải cùng subscribe vào đó.
+     Tương tự: cover `<img>` phải nhận `thumbnail` từ data thật
+     (`title, artist, composer, sourceUrl, activePlaylistId, link.kind`) —
+     `.cover.no-img` + `.cover-fallback` chỉ là đường lui khi thiếu/lỗi ảnh.
+
+  5) COLLAPSE PATTERN (.sec-collapsible)
+     State nằm ở 2 chỗ cùng giá trị: danh sách `[data-state]` và `<section
+     data-state>`. JS (`setRecentState`) là nguồn duy nhất — đừng set class
+     trực tiếp. Khi port, thay `#recentList` / `#recentToggle` / `#recentMore`
+     bằng id của app thật, và giữ nguyên `lastExpanded` để thu gọn từ trạng
+     thái `open` rồi mở lại vẫn về `open`.
+     Hàng 6–8 phải `inert` khi không mở — nếu bỏ, bàn phím sẽ tab vào hàng
+     đang bị `visibility:hidden`.
+
+  6) BOTTOM SHEET "Tùy chọn" (v18) — 5 view
+     a) SHEET THẬT trong app là `#musicMenuSheet` (music.js dòng ~32–48 và
+        80–90) và nó KHÔNG dùng route/URL — chuyển view bằng `setMenuView(view)`
+        với các view: `main`, `library`, `save`, `personal`, `admin`.
+        Prototype map đúng 5 view đó qua `.sheet-view[data-view]`; view `link`
+        của app (chỉ dùng ở chế độ học) KHÔNG port. Khi port: gọi `setMenuView`
+        trong `setView()` thay vì tự toggle class, và đừng quên 2 node app tự
+        chèn vào sheet (`#musicCloudRefresh`, `#musicAdminOpen`,
+        `#musicPersonalOpen`, `#musicCloudDelete`) — chúng đang `append` trực
+        tiếp vào `#musicMenuSheet` nên phải chuyển vào đúng `.sheet-view`.
+     b) NỀN ĐẶC, KHÔNG KÍNH. `.sheet` dùng `--rd-sheet-bg` (nền đặc), tuyệt đối
+        không `backdrop-filter`: scrim đã 86% nên blur không nhìn thấy, mà còn
+        tốn GPU mỗi frame khi kéo tay nắm. `z-index` chốt: scrim 80 · sheet 90
+        (header 30 · mini 40 · toast 60 · np-progress 70 · review dock 100).
+        Sheet phải nằm ở BODY LEVEL (sau `.app`), nếu đặt trong `.app` hay
+        `.page` thì tổ tiên có `transform`/`filter` sẽ tạo containing block và
+        `position:fixed` bám sai.
+     c) 3 TOKEN MỚI BẮT BUỘC khai báo trong palette app: `--rd-sheet-bg`,
+        `--rd-danger` (#dd6b76), `--rd-danger-soft`, cộng `--dur-view` và
+        `--sheet-pad`. Palette app **CHƯA CÓ** `--rd-danger` — thiếu token này
+        hàng "Xóa bài khỏi kho" sẽ rơi về màu chữ mặc định và mất tín hiệu
+        nguy hiểm. #dd6b76 đo được 5.38:1 trên `--rd-surface` và 4.75:1 trên
+        nền hover của chính nó → AA cho chữ 14.5px.
+     d) CẢNH BÁO TƯƠNG PHẢN: group label 11px/700 **KHÔNG được** dùng
+        `--rd-faint` (chỉ 4.22:1 — trượt AA cho chữ nhỏ); phải dùng
+        `--rd-muted`. Tương tự placeholder của `.s-input` dùng `--rd-muted`,
+        không dùng `--rd-faint`.
+     e) Nút primary nền ĐẶC `--rd-brand`, chữ `--rd-on-hero`. Không gradient:
+        chữ trắng trên đầu gradient chỉ 3.88:1 (trượt AA).
+     f) `body.state-empty` phải disable (không chỉ ẩn) 4 hàng: Chia sẻ, Thêm
+        vào playlist, Mở trang nguồn, Xóa — app thật còn phải ẩn hẳn hàng
+        "Mở bài trên trang nguồn" khi bài không có `sourceUrl`.
+        `body.state-noplaylist` ẩn 2 hàng playlist trong view `library` và 2
+        `.s-check` trong view `save`, đồng thời hiện `.pl-empty`.
+     g) HAI LỐI VÀO tạo playlist trong view `save` (text button + row cuối) là
+        CỐ Ý — app thật có cả `#musicSaveNewToggle` và `#musicSaveNewRow`.
+        Đừng gộp lại một.
+     h) `prefers-reduced-motion`: sheet chỉ đổi opacity 120ms, KHÔNG translate;
+        view không slide; và khi kéo, JS **không ghi `transform`** vì inline
+        style sẽ thắng media query. `--sheet-pad` = 12px dùng cho padding
+        inline của sub-head + body để hai bên luôn thẳng hàng.
+     i) SCROLL CONTAINER KHI ĐỔI VIEW: app cuộn trên chính `.music-menu-sheet`
+        và reset `scrollTop = 0` mỗi lần đổi view; prototype tách vùng cuộn ra
+        `.sheet-body` (để handle + sub-head + status đứng yên). Khi port phải
+        map lại chỗ reset: `setMenuView()` đang set `scrollTop` trên sheet, còn
+        prototype set trên `.sheet-body` — đừng để cả hai cùng set, và nếu app
+        giữ cuộn trên sheet thì `.sheet-body` phải bỏ `overflow-y:auto`.
+        Chỉ báo cuộn (`.is-scrollable` + mask 22px) cũng phải gắn vào đúng
+        phần tử cuộn thật.
+     j) STATUS THEO TỪNG VIEW: app ẩn `#musicStatus` ở mọi view ≠ main
+        (`music.css:267`) và mỗi view có status riêng — phải map
+        `#musicPersonalStatus` (view personal) và `#musicCloudUploadStatus`
+        (view admin, tab File). Đừng dùng một `#musicStatus` cho cả 5 view như
+        prototype; nếu giữ thì phải tự clear khi đổi view.
+     k) LUỒNG XOÁ THẬT gate theo TỪNG BÀI, không theo `is-owner`:
+        `uid === cloudOwner && cloudTracks.some(t => t.url === currentLinkUrl)`
+        (music.js ~dòng 91–99), kèm `confirm()` và gọi
+        `/api/admin/tracks/:id/delete`. `body.is-owner` trong prototype chỉ là
+        công tắc demo để thấy 2 hàng admin; đừng port nó thành điều kiện xoá.
+        Trạng thái "chạm lần nữa" (`.is-armed`) cũng phải reset ở cả 3 đường:
+        đóng sheet, rời view main, và đổi state.
+     l) ASYNC CỦA ADMIN KHÔNG NẰM TRONG PHẠM VI PROTOTYPE: `pollImport()` có 4
+        trạng thái (queued / running / completed / failed), disable nút submit
+        và đổi label `#musicAdminOpen`; `importAPI()` gate bằng
+        `user.uid === cloudOwner` + Firebase ID token. Prototype chỉ mô phỏng
+        progress bar của tab File, KHÔNG mô phỏng polling — khi port phải bỏ
+        phần giả lập và nối vào `pollImport`.
+     m) "GÁN NHANH" ≠ "CHỌN NHIỀU" — TUYỆT ĐỐI KHÔNG GỘP. Hai khối này là hai
+        chức năng khác nhau ở hai view, gọi hai API khác nhau:
+          · view `main`, ngay dưới hàng "Thêm vào danh sách phát":
+            `.s-pills` (`#musicQuickPlaylistPills`, nhãn "Gán nhanh") =
+            gán 1 CHẠM vào một playlist, KHÔNG mở picker, gọi `quickAssign()`
+            (app: `#musicQuickPlaylistPills` nằm trong `#musicLinkExtraActions`).
+          · view `save`: `.s-check` (`#musicSavePicker`) = CHỌN NHIỀU rồi bấm
+            "Xong" mới ghi, gọi `commitSavePicker()`.
+        Đừng dùng chung một mảng state cho hai khối này, và đừng chuyển pill
+        sang view save (sẽ trùng tên playlist + sai ngữ cảnh). Nhãn "Gán nhanh"
+        cố ý KHÔNG uppercase/không tracking rộng để không bị đọc thành group
+        label; `padding-left:42px` = 10px row padding + 20px icon + 12px gap,
+        tức thẳng gutter nhãn của hàng phía trên.
+  ============================================================================
+-->
+</body>
+</html>

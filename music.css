@@ -864,3 +864,24 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-player-
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicRecentToggle .music-sec-title{display:block!important;visibility:visible!important;opacity:1!important;font-size:clamp(15px,.35vw + 14px,17px)!important;color:var(--mb-rd-ink)!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-ghost svg.ic{display:block!important;fill:none!important;stroke:currentColor!important;stroke-width:2!important;stroke-linecap:round!important;stroke-linejoin:round!important;color:var(--mb-rd-on-hero-2)!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-ghost svg.ic path{stroke:currentColor!important;fill:none!important;}
+/* Original WorkBuddy menu structure: fixed heading, one scrolling body. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet{display:flex!important;flex-direction:column!important;overflow:hidden!important;padding:0 12px calc(8px + env(safe-area-inset-bottom))!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet .music-sheet-drag-area{flex:none!important;min-height:28px!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet #musicMenuSubHead{display:flex!important;flex:none!important;align-items:center!important;gap:8px!important;min-height:52px!important;margin:0!important;padding:0 12px 8px!important;border-bottom:1px solid var(--mb-rd-line-soft)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet #musicMenuSubTitle{flex:1!important;min-width:0!important;text-align:center!important;font-size:16px!important;font-weight:650!important;line-height:1.3!important;color:var(--mb-rd-ink)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuBody{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain!important;padding:4px 12px 0!important;scrollbar-width:none!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuBody::-webkit-scrollbar{display:none!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-cloud-normal{display:none!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet [hidden]{display:none!important;}
+@media(min-width:768px){html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet{bottom:24px!important;border-radius:var(--mb-radius-card)!important;border-bottom:1px solid var(--mb-rd-glass-line)!important;}}
+@media(prefers-reduced-motion:reduce){html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel :is(.music-hero,.music-menu-sheet,.music-menu-backdrop){transition:none!important;animation:none!important;}}
+/* WorkBuddy filter indicator: fixed base width, transform only. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-wb-pills-inner{position:relative!important;display:flex!important;gap:8px!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-wb-pill-ind{position:absolute!important;left:0!important;top:0!important;height:32px!important;width:72px;border-radius:var(--mb-radius-cover)!important;background:var(--mb-rd-brand-soft)!important;border:1px solid var(--mb-rd-playing-line)!important;transform-origin:left center!important;transition:transform 200ms cubic-bezier(.4,0,.2,1)!important;z-index:0!important;pointer-events:none!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-wb-pills-inner .music-pill{position:relative!important;z-index:1!important;height:32px!important;min-height:32px!important;padding:0 15px!important;border-color:var(--palette-transparent)!important;background:var(--palette-transparent)!important;font-weight:500!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-wb-pills-inner .music-pill.active{font-weight:600!important;color:var(--mb-palette-dark-violet)!important;}
+@keyframes musicWbEqBounce{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-browse-playing .music-eq i{animation:musicWbEqBounce 900ms ease-in-out infinite!important;}
+@media(prefers-reduced-motion:reduce){html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel :is(.music-wb-pill-ind,.music-eq i){transition:none!important;animation:none!important;}}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet .music-flat-label{color:var(--mb-rd-ink-2)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet .music-status-transient{display:none!important;}
