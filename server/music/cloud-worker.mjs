@@ -19,6 +19,12 @@ export async function handleCloudMusic(request,env,ctx={},deps={}){
    const tracks=page.objects.filter(o=>keyPattern.test(o.key.slice(6))&&o.customMetadata?.published==='true').map(o=>({id:o.key.slice(6),title:o.customMetadata.title||'Bài hát',artist:o.customMetadata.artist||'HSK Music',composer:o.customMetadata.composer||'',sourceUrl:o.customMetadata.sourceUrl||'',bytes:o.size,url:u.origin+'/audio/'+o.key.slice(6),addedAt:o.uploaded?.toISOString?.()||''}));
    tracks.sort((a,b)=>b.addedAt.localeCompare(a.addedAt));return json({tracks,cursor:page.truncated?page.cursor:null});
   }
+  if(u.pathname.startsWith('/api/admin/tracks/')&&request.method==='POST'){
+   const actor=await identity(request,env,deps.fetchFn||fetch);if(!actor.admin)return json({error:'Chỉ chủ kho được xóa nhạc.'},403);
+   const match=u.pathname.match(/^\/api\/admin\/tracks\/([a-f0-9]{64}\.(?:mp3|m4a))\/delete$/);if(!match)return json({error:'Bài hát chưa hợp lệ.'},400);
+   const id=match[1],key='audio/'+id,head=await env.MUSIC_BUCKET.head(key);if(!head||head.customMetadata?.published!=='true')return json({error:'Bài hát không còn trong kho.'},404);
+   await env.MUSIC_BUCKET.delete(key);return json({deleted:true,id});
+  }
   if((u.pathname==='/api/admin/upload'||imported?.job)&&request.method==='POST'){
    const actor=imported?.job?{admin:true}:await identity(request,env,deps.fetchFn||fetch);if(!actor.admin)return json({error:'Chỉ chủ kho được tải nhạc lên.'},403);
    const size=Number(request.headers.get('Content-Length'));if(!Number.isSafeInteger(size)||size<=0||size>MAX)return json({error:'Chọn file MP3/M4A tối đa 50 MB.'},413);
