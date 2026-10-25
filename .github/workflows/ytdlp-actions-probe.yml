@@ -21,8 +21,39 @@ jobs:
           python -m pip install --upgrade "yt-dlp[default]"
           command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
           yt-dlp --version
-      - name: Try one short public video without cookies
+      - name: Prepare private cookies
+        env:
+          COOKIE_INPUT: ${{ secrets.YTB_Cookies }}
+        run: |
+          python - <<'PY'
+          import os,json,pathlib
+          raw=os.environ.get("COOKIE_INPUT","").strip()
+          if not raw: raise SystemExit("Secret YTB_Cookies is empty or unavailable")
+          out=pathlib.Path(os.environ["RUNNER_TEMP"])/"youtube-cookies.txt"
+          if raw.startswith("# Netscape") or raw.startswith("# HTTP Cookie"):
+              text=raw
+          else:
+              try: data=json.loads(raw)
+              except ValueError: data=None
+              if isinstance(data,list):
+                  rows=[(c.get("domain",".youtube.com"),c.get("path","/"),str(c.get("name","")),str(c.get("value",""))) for c in data if isinstance(c,dict) and (c.get("domain","").lstrip(".")=="youtube.com")]
+              else:
+                  header=(data.get("youtube",[""])[0] if isinstance(data,dict) and "youtube" in data else raw)
+                  if header.lower().startswith("cookie:"): header=header[7:].strip()
+                  rows=[(".youtube.com","/",k.strip(),v.strip()) for pair in header.split(";") if "=" in pair for k,v in [pair.strip().split("=",1)]]
+              if not rows: raise SystemExit("No YouTube cookies found in secret")
+              if any("\n" in x or "\t" in x for row in rows for x in row): raise SystemExit("Invalid cookie fields")
+              text="# Netscape HTTP Cookie File\n"+"\n".join("\t".join([domain,"TRUE" if domain.startswith(".") else "FALSE",path,"TRUE","0",name,value]) for domain,path,name,value in rows)+"\n"
+          out.write_text(text)
+          out.chmod(0o600)
+          print("Temporary cookie file prepared; values hidden")
+          
+          PY
+      - name: Try one short public video with private cookies
         run: |
           mkdir -p /tmp/audio-probe
-          timeout 180 yt-dlp --ignore-config --no-playlist --no-progress --socket-timeout 20 --retries 1 --extractor-retries 1 --js-runtimes node -f bestaudio -x --audio-format mp3 --audio-quality 128K --max-filesize 20M --match-filter "duration <= 120" -o "/tmp/audio-probe/%(id)s.%(ext)s" "https://www.youtube.com/watch?v=jNQXAC9IVRw"
+          timeout 180 yt-dlp --cookies "$RUNNER_TEMP/youtube-cookies.txt" --ignore-config --no-playlist --no-progress --socket-timeout 20 --retries 1 --extractor-retries 1 --js-runtimes node -f bestaudio -x --audio-format mp3 --audio-quality 128K --max-filesize 20M --match-filter "duration <= 120" -o "/tmp/audio-probe/%(id)s.%(ext)s" "https://www.youtube.com/watch?v=jNQXAC9IVRw"
           ffprobe -v error -show_entries format=duration,size -of json /tmp/audio-probe/jNQXAC9IVRw.mp3
+      - name: Remove private cookies
+        if: always()
+        run: rm -f "$RUNNER_TEMP/youtube-cookies.txt"
