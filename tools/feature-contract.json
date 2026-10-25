@@ -1521,6 +1521,32 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "music-name-search",
+      "name": "Mọi người tìm bài YouTube theo tên, admin nhập vào kho",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "server/music/youtube-search.mjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "addNameSearch(personal,false)"
+        },
+        {
+          "kind": "file",
+          "file": "server/music-search.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-search-ui.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }
