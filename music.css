@@ -841,3 +841,26 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-c
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-play :is(svg,path,rect){color:var(--palette-white)!important;fill:var(--palette-white)!important;}
 /* Ported display rules must never reveal role-gated or collapsed controls. */
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel :is(#musicMenuSheet,#musicBrowseView) [hidden]{display:none!important;}
+/* Supplied app-shell structure: header + filters share the same fixed top region. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel:not(.music-player-expanded) .music-wb-sticky{flex:0 0 auto!important;background:var(--mb-rd-canvas-2)!important;border-bottom:1px solid var(--mb-rd-line-soft)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-wb-sticky-inner{width:min(100%,1120px)!important;margin-inline:auto!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-wb-sticky .music-top-bar{height:56px!important;min-height:56px!important;display:grid!important;grid-template-columns:44px 1fr 44px!important;align-items:center!important;padding:0 clamp(8px,2.2vw,20px)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-wb-sticky .music-top-title{font-size:16.5px!important;line-height:1.25!important;letter-spacing:-.01em!important;font-weight:700!important;text-transform:none!important;color:var(--mb-rd-ink)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-wb-sticky .music-top-eyebrow{font-size:10.5px!important;line-height:13px!important;color:var(--mb-palette-dark-violet)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-wb-sticky .music-browse-pills{padding:8px clamp(16px,3.5vw,32px) 10px!important;margin:0!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero .cover-img{width:100%!important;height:100%!important;object-fit:cover!important;border-radius:var(--mb-radius-cover)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero .music-hero-cover{display:block!important;overflow:hidden!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-play .i-pause,html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-play.is-paused .i-play{display:none!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-play.is-paused .i-pause{display:block!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-sec-toggle::after{content:none!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-sec-toggle{display:flex!important;align-items:center!important;gap:8px!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-sec-count{display:none!important;font-size:12px!important;font-weight:500!important;line-height:1.5!important;color:var(--mb-rd-muted)!important;background:var(--mb-rd-surface-soft)!important;border-radius:var(--mb-radius-8px)!important;padding:2px 8px!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel [data-state=collapsed] .music-sec-count{display:inline-block!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel [data-state=collapsed] .music-sec-chev{transform:rotate(-90deg)!important;}
+
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-player-expanded :is(.music-wb-sticky,.music-wb-sticky-inner){display:contents!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-player-expanded .music-browse-pills{display:none!important;}
+/* Original SVG primitives and section-label nodes from the supplied markup. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicRecentToggle .music-sec-title{display:block!important;visibility:visible!important;opacity:1!important;font-size:clamp(15px,.35vw + 14px,17px)!important;color:var(--mb-rd-ink)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-ghost svg.ic{display:block!important;fill:none!important;stroke:currentColor!important;stroke-width:2!important;stroke-linecap:round!important;stroke-linejoin:round!important;color:var(--mb-rd-on-hero-2)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-ghost svg.ic path{stroke:currentColor!important;fill:none!important;}
