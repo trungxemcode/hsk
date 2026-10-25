@@ -14,5 +14,5 @@ class TransportTest(unittest.TestCase):
    request=send.call_args.args[0]
    self.assertEqual(request.get_header('User-agent'),'HSK-Music-Importer/1.0')
    self.assertEqual(request.get_header('Authorization'),'Bearer test-token')
-   self.assertEqual(request.method,'POST')
+   self.assertEqual(request.get_method(),'POST')
 if __name__=='__main__':unittest.main()
