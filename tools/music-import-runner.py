@@ -2,10 +2,10 @@
 import os,json,pathlib,urllib.request,subprocess,tempfile
 BASE='https://hsk-music-library.trung-hsk668.workers.dev'
 def token():
- req=urllib.request.Request(os.environ['ACTIONS_ID_TOKEN_REQUEST_URL']+'&audience=hsk-music-import',headers={'Authorization':'Bearer '+os.environ['ACTIONS_ID_TOKEN_REQUEST_TOKEN']})
+ req=urllib.request.Request(os.environ['ACTIONS_ID_TOKEN_REQUEST_URL']+'&audience=hsk-music-import',headers={'Authorization':'Bearer '+os.environ['ACTIONS_ID_TOKEN_REQUEST_TOKEN'],'User-Agent':'HSK-Music-Importer/1.0'})
  with urllib.request.urlopen(req,timeout=30) as r:return json.load(r)['value']
 def api(path,body=b'',headers=None):
- req=urllib.request.Request(BASE+path,data=body,headers={'Authorization':'Bearer '+token(),**(headers or {})})
+ req=urllib.request.Request(BASE+path,data=body,headers={'Authorization':'Bearer '+token(),'User-Agent':'HSK-Music-Importer/1.0',**(headers or {})})
  with urllib.request.urlopen(req,timeout=180) as r:return json.load(r)
 def cookies(raw,target):
  raw=raw.strip()
