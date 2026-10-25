@@ -65,6 +65,7 @@ jobs:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: |
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-background-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-import-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-online-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-redesign-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-ui.cjs

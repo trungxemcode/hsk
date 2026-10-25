@@ -1,9 +1,7 @@
-# Current task: R2 music rebuild
+# Current task: admin import to R2 + personal YouTube links
 
-Base: merged main82431c4 (3.16.2). Owner requested removing entertainment offline/yt-dlp/VPS and uploading own music to Cloudflare R2.
+Base main61de982 (3.17.1). User confirmed R2 audio background works on their phone. User requested admin-only library imports using successful yt-dlp Actions test, while all listeners retain personal YouTube links and R2 background audio.
 
-Implemented candidate3.17.1: R2 Worker catalogue/range streaming/owner-only uploads; native persistent audio with MediaSession/progress; playlists choose catalogue; removed download/extractor/codec/browser handoff code. Study music, account storage and cleanup preserved. Old audio data is not auto-deleted.
+3.18.1 candidate: private R2 queue; Firebase owner create/status/upload; GitHub Actions signature-verified OIDC claim/complete/fail; scheduled/manual runner with YTB_Cookies, no PAT; visible progress states. All listeners can play/save personal official YouTube embeds, actual progress/seek/playlist, best-effort route persistence. Native R2 audio kept. No app-side downloader or VPS changes.
 
-R2 activated and deployed via laptop Wrangler: bucket hsk-music-library, Worker https://hsk-music-library.trung-hsk668.workers.dev. Firebase secret configured without printing credentials. Live catalogue HTTP200, expected CORS, empty tracks. cloudEndpoint configured. Remaining: owner uploads real audio; physical-device validation. Separate removal-only PR189 requires owner review/merge per AGENTS before code-removal PR targets main. No production cutover or AWS resource deletion.
-
-Checks: server unit tests and browser suites (see implementation PR for final results). Device lock-screen validation still required; no guarantee after force quit/power off.
+Validation: 275 server tests, new role/OIDC/queue tests and UI, R2 background tests, feature runtime; complete results in PR. Main merge needed for scheduled import runner; live end-to-end verification pending deployment. Queue scans first1000 records; owner-scale pilot. No cookies/secrets in source or logs.

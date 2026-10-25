@@ -1,0 +1,39 @@
+name: Admin music import to R2
+on:
+  schedule:
+    - cron: '2-57/5 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: hsk-music-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Claim one admin import
+        id: claim
+        run: python3 tools/music-import-runner.py
+      - uses: actions/setup-python@v5
+        if: steps.claim.outputs.has_job == 'true'
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        if: steps.claim.outputs.has_job == 'true'
+        with:
+          node-version: '22'
+      - name: Install downloader
+        if: steps.claim.outputs.has_job == 'true'
+        run: |
+          python -m pip install --upgrade "yt-dlp[default]"
+          command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
+      - name: Download and publish one audio
+        if: steps.claim.outputs.has_job == 'true'
+        env:
+          IMPORT_MODE: download
+          COOKIE_INPUT: ${{ secrets.YTB_Cookies }}
+        run: python tools/music-import-runner.py
