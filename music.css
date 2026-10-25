@@ -553,3 +553,33 @@ html body.studio-enabled .music-panel.music-player-expanded #musicLinkPreview{
 #musicPersonalForm label,#musicAdminImportForm label{display:grid;gap:6px}
 #musicPersonalForm p,#musicAdminImportStatus{font-size:13px;line-height:1.5;white-space:normal}
 #musicLinkCover>.music-personal-youtube{position:absolute;inset:0;height:100%;aspect-ratio:auto}
+
+/* Compact music menu: each task has its own view; admin sources use two tabs. */
+html body.studio-enabled #musicMenuSheet[data-view=personal] [data-menu-view]:not([data-menu-view~=personal]),
+html body.studio-enabled #musicMenuSheet[data-view=admin] [data-menu-view]:not([data-menu-view~=admin]){display:none!important}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin{border:0;padding:8px 18px 20px;color:var(--palette-white)}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin h3{color:var(--palette-white);font-size:17px;line-height:1.3;margin:4px 0 16px}
+html body:not(#_rd) #musicMenuSheet #musicCloudAdmin h3{display:none}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin form{gap:14px}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin label{color:var(--palette-white);font-size:14px;line-height:1.5;gap:6px}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin input{min-height:46px;padding:10px 12px;font-size:16px!important;line-height:1.4;color:var(--palette-white);background:var(--palette-dark-surface);border:1px solid var(--legacy-hex-ffffff38);border-radius:var(--radius-btn)}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin input::placeholder{color:var(--legacy-rgb-9);opacity:1}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin input[type=file]{padding:8px;font-size:13px;max-width:100%}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin button.music-primary{min-height:46px;padding:10px 16px;margin:0;font-size:15px;line-height:1.4}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin p{margin:12px 0 0;font-size:13px;line-height:1.5;color:var(--legacy-rgb-9);white-space:normal}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin p:empty{display:none}
+.music-import-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin:0 0 20px;background:var(--palette-dark-surface);border-radius:var(--radius-btn)}
+html body:not(#_rd) #musicMenuSheet .music-import-tabs button{min-height:44px;padding:8px;font-size:14px;font-weight:600;border:0;border-radius:var(--radius-btn);background:var(--palette-transparent)!important;color:var(--legacy-rgb-9)!important;box-shadow:none!important}
+html body:not(#_rd) #musicMenuSheet .music-import-tabs button[aria-selected=true]{background:var(--accent)!important;color:var(--palette-white)!important}
+#musicCloudAdmin[data-source=youtube] #musicCloudUploadForm,#musicCloudAdmin[data-source=file] #musicAdminImportForm{display:none!important}
+.music-optional-fields{padding:0!important;margin:0!important;border:0!important}
+html body:not(#_rd) #musicMenuSheet .music-optional-fields summary{padding:8px 0;font-size:13px;color:var(--legacy-rgb-9);cursor:pointer}
+.music-optional-fields[open] label{margin-top:10px}
+html body:not(#_rd) #musicMenuSheet .music-sub-head{position:sticky;top:0;z-index:3;background:var(--palette-dark-surface);padding:8px 12px;margin-bottom:12px}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin input[type=file]::file-selector-button{font:inherit;color:var(--palette-white);background:var(--palette-dark-surface);border:1px solid var(--legacy-hex-ffffff38);border-radius:var(--radius-btn);padding:7px 10px;margin-right:8px}
+#musicMenuSheet #musicLinkExtraActions[hidden],#musicMenuSheet #musicSourceLink[hidden]{display:none!important}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin button.music-primary{color:var(--palette-white)!important;background:var(--accent)!important}
+html body:not(#_rd) #musicMenuSheet .music-cloud-admin button.music-primary :is(span,svg){color:inherit!important}
+html body:not(#_rd) #musicMenuSheet details.music-optional-fields>summary{min-height:36px!important;margin:0!important;padding:8px 0!important;border:0!important;background:var(--palette-transparent)!important;color:var(--legacy-rgb-9)!important;box-shadow:none!important;font-size:13px!important;line-height:1.5!important}
+html body:not(#_rd) #musicMenuSheet details.music-optional-fields>summary *{color:inherit!important}
+html body:not(#_rd) #musicMenuSheet details.music-optional-fields>summary::before,html body:not(#_rd) #musicMenuSheet details.music-optional-fields>summary::after{background:var(--palette-transparent)!important;box-shadow:none!important}

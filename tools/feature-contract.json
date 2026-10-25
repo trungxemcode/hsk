@@ -1488,6 +1488,11 @@
           "kind": "file",
           "file": "tools/check-music-import-ui.cjs",
           "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-menu-ui.cjs",
+          "value": ""
         }
       ]
     }
