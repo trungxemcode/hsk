@@ -1,4 +1,4 @@
-/* Smart import: source provenance, current-track context, edit/account isolation. */
+﻿/* Smart import: source provenance, current-track context, edit/account isolation. */
 const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:http'),path=require('node:path'),assert=require('node:assert/strict'),fixture=require('./music-cloud-fixture.cjs');
 (async()=>{
  const root=process.cwd(),server=http.createServer((q,r)=>{const f=path.resolve(root,'.'+new URL(q.url,'http://local').pathname);if(!f.startsWith(root+path.sep)||!fs.existsSync(f)||!fs.statSync(f).isFile()){r.writeHead(404);return r.end();}r.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'})[path.extname(f)]||'application/octet-stream');r.end(fs.readFileSync(f));});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
@@ -11,10 +11,17 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   await page.locator('#musicCloudList button').first().click();await page.locator('#musicMenuBtn').click();assert.equal(await page.locator('#musicCloudDelete').isVisible(),false);
   await page.reload();await page.waitForFunction(()=>window.HSKMusic&&window.HSKStudio);await page.evaluate(()=>{HSKAccountDashboard={user:{uid:'BIvUyItDYJWcLvlhhtYFyj5csBH2',getIdToken:async()=> 'owner'}};HSKStudio.navigate('music-play');});await page.waitForFunction(()=>document.getElementById('musicCloudStatus').textContent==='3 bài hát trong kho');
   await page.locator('#musicCloudList button').first().click();await page.locator('#musicMenuBtn').click();await page.locator('#musicCloudDelete').waitFor({state:'visible'});
-  page.once('dialog',d=>d.dismiss());await page.locator('#musicCloudDelete').click();assert.equal(deletes,0);assert.equal(await page.locator('#musicCloudList button').count(),3);
-  page.once('dialog',d=>{assert.match(d.message(),/Bài kho R2 1/);return d.accept()});await page.locator('#musicCloudDelete').click();await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList button').length===2);assert.equal(deletes,1);assert.equal(await page.locator('#musicCloudList [data-track-id="'+tracks[0].id+'"]').count(),0);
-  await page.locator('#musicMenuBtn').click();assert.equal(await page.locator('#musicCloudDelete').isVisible(),false);assert.deepEqual(errors,[]);await page.close();console.log('PASS owner delete '+width+': listener hidden, confirmation cancel, authenticated delete, list and current track cleared');
+  await page.locator('#musicCloudDelete').click();assert.equal(deletes,0);assert.equal(await page.locator('#musicCloudList button').count(),3);assert.equal(await page.locator('#musicCloudDelete').textContent(),'Chạm lần nữa để xóa');
+  await page.locator('#musicMenuLibraryRow').click();await page.locator('#musicMenuSubCancel').click();
+  assert.equal(await page.locator('#musicCloudDelete').textContent(),'Xóa bài khỏi kho','changing view disarms delete');
+  await page.locator('#musicCloudDelete').click();assert.equal(deletes,0);
+  await page.locator('#musicMenuClose').click();await page.locator('#musicMenuBtn').click();
+  assert.equal(await page.locator('#musicCloudDelete').textContent(),'Xóa bài khỏi kho','closing sheet disarms delete');
+  await page.locator('#musicCloudDelete').click();assert.equal(deletes,0);
+  await page.locator('#musicCloudDelete').click();await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList button').length===2);assert.equal(deletes,1);assert.equal(await page.locator('#musicCloudList [data-track-id="'+tracks[0].id+'"]').count(),0);
+  await page.locator('#musicMenuBtn').click();assert.equal(await page.locator('#musicCloudDelete').isVisible(),false);assert.deepEqual(errors,[]);await page.close();console.log('PASS owner delete '+width+': listener hidden, timed two-tap guard and reset, authenticated delete, list and current track cleared');
 
  }
  }finally{await browser?.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1});
+
