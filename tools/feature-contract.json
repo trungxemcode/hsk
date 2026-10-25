@@ -1545,6 +1545,16 @@
           "kind": "file",
           "file": "tools/check-music-search-ui.cjs",
           "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "sourceUrl:String(row.sourceUrl"
+        },
+        {
+          "kind": "file",
+          "file": "tools/test_music_import_audio.py",
+          "value": ""
         }
       ]
     }
