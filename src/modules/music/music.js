@@ -161,7 +161,7 @@
   cloudList.replaceChildren();
   for(const track of cloudTracks){
    const b=el('button',undefined,'music-row-main music-cloud-track');b.type='button';b.dataset.trackId=track.id;
-   const image=el('img',undefined,'music-row-thumb');image.src=fallbackArt;image.alt='';const copy=el('span',undefined,'music-row-copy');copy.append(el('strong',track.title),el('small',track.artist+(track.composer?' · Sáng tác: '+track.composer:'')));b.append(image,copy);
+   const image=el('img',undefined,'music-row-thumb');image.src=artworkForUrl(track.url);image.onerror=()=>{image.onerror=null;image.src=fallbackArt;};image.alt='';const copy=el('span',undefined,'music-row-copy');copy.append(el('strong',track.title),el('small',track.artist+(track.composer?' · Sáng tác: '+track.composer:'')));b.append(image,copy);
    b.onclick=()=>openLink(C.parseLink(track.url),track.title,true,'',true);cloudList.append(b);metaCache[track.url]={title:track.title,author:track.artist};
   }
   cloudStatus.textContent=cloudTracks.length?cloudTracks.length+' bài hát trong kho':'Kho chưa có bài hát. Chủ kho có thể tải nhạc lên trong menu ⋯.';
@@ -247,6 +247,10 @@
  const ytMaxThumb=id=>'https://i.ytimg.com/vi/'+id+'/maxresdefault.jpg';
  const ytThumb=id=>'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg';
  const fallbackArt='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1e1b4b"/><stop offset="100%" stop-color="#4338ca"/></linearGradient></defs><rect width="640" height="360" fill="url(#g)"/><circle cx="320" cy="170" r="58" fill="rgba(255,255,255,0.14)"/><text x="320" y="188" text-anchor="middle" font-size="52" fill="#ffffff" font-family="sans-serif">♪</text></svg>');
+ function artworkForUrl(url){
+  try{const track=cloudTracks.find(t=>t.url===url),link=C.parseLink(track?.sourceUrl||url);if(link.kind==='youtube')return ytThumb(link.source.videoId);}catch{}
+  return fallbackArt;
+ }
  function setArt(thumb,bg,src,hqFallback=''){
   const stage=$('musicStageBg');
   const applyFallback=()=>{
@@ -322,7 +326,7 @@
    let link;try{link=C.parseLink(entry.url);}catch{return;}
    const button=el('button',undefined,'music-row-main music-queue-track'+(now?' music-track-current':''));button.type='button';
    if(now)button.setAttribute('aria-current','true');
-   const thumb=el('img');thumb.className='music-row-thumb';thumb.alt='';thumb.src=link.kind==='youtube'?ytThumb(link.source.videoId):fallbackArt;
+   const thumb=el('img');thumb.className='music-row-thumb';thumb.alt='';thumb.src=artworkForUrl(link.url);
    const copy=el('span',undefined,'music-row-copy');copy.append(el('strong',now?currentLinkTitle||entry.title||link.label:entry.title||metaCache[link.url]?.title||link.label),el('small',now?'Đang phát':metaCache[link.url]?.author||link.label));
    button.append(thumb,copy);button.onclick=()=>{if(now){toggleQueue(false);return;}$('musicLinkUrl').value=link.url;$('musicLinkName').value=String(entry.title||'').slice(0,120);openLink(link,entry.title,false,playlist?.id||'',true);toggleQueue(false);};
    (now?current:next).append(button);
@@ -468,7 +472,7 @@
   $('musicMiniSub').textContent=activeAuthor||'YouTube / SoundCloud';
   const miniThumb=$('musicMiniThumb');
   if(miniThumb){
-   const src=activeLink.kind==='youtube'?ytThumb(activeLink.source.videoId):fallbackArt;
+   const src=artworkForUrl(activeLink.url);
    miniThumb.src=src;
    miniThumb.onerror=()=>{miniThumb.onerror=null;miniThumb.src=fallbackArt;};
   }
@@ -486,7 +490,7 @@
    const isCurrent=currentLinkUrl===link.url;
    const row=el('div',undefined,'music-recent-row'+(isCurrent?' music-track-current':''));
    const thumb=el('img',undefined,'music-recent-thumb');
-   thumb.alt='';thumb.src=link.kind==='youtube'?ytThumb(link.source.videoId):fallbackArt;
+   thumb.alt='';thumb.src=artworkForUrl(link.url);
    thumb.onerror=()=>{thumb.onerror=null;thumb.src=fallbackArt;};
    const meta=el('div',undefined,'music-recent-meta');
    const cached=metaCache[link.url];
@@ -605,7 +609,7 @@
   listen('ended',()=>{if(epoch!==serial)return;if(linkLoop){audio.currentTime=0;linkYt?.playVideo();}else{linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();const list=playbackList().list,index=list.findIndex(row=>row.url===currentLinkUrl);if(index>=0&&index<list.length-1)stepSavedLink(1);}});
   listen('error',()=>{if(epoch===serial){linkOptimisticPlay=false;linkPendingPlay=false;updateLinkPlayButton();status('Chưa phát được bài trong kho. Kiểm tra kết nối rồi chạm Phát để thử lại.');}});
   $('musicLinkPlayer').classList.remove('music-youtube-stealth');$('musicLinkControls').hidden=false;for(const id of ['musicLinkBack10','musicLinkPlay','musicLinkFwd10'])$(id).disabled=false;
-  $('musicLinkThumb').hidden=false;setArt($('musicLinkThumb'),$('musicLinkBg'),fallbackArt,fallbackArt);$('musicLinkCover').hidden=false;$('musicLinkScrubRow').hidden=false;$('musicLinkNotice').textContent=entry.author+' · Kho nhạc HSK';
+  $('musicLinkThumb').hidden=false;setArt($('musicLinkThumb'),$('musicLinkBg'),artworkForUrl(link.url),fallbackArt);$('musicLinkCover').hidden=false;$('musicLinkScrubRow').hidden=false;$('musicLinkNotice').textContent=entry.author+' · Kho nhạc HSK';
   $('musicLinkElapsed').textContent='00:00';$('musicLinkTime').textContent='-00:00';tick();if(autoPlay)requestLinkPlayback(true);
   syncMediaSession();syncBackgroundPlayer();
  }
@@ -804,7 +808,7 @@
    const card=el('div',undefined,'music-playlist-card'+(activePlaylistId===pl.id?' music-playlist-active':''));
    const head=el('div',undefined,'music-playlist-head music-flat-row');
    let coverSrc=fallbackArt;
-   for(const item of pl.items){try{const l=C.parseLink(item.url);if(l.kind==='youtube'){coverSrc=ytThumb(l.source.videoId);break;}}catch{}}
+   for(const item of pl.items){const src=artworkForUrl(item.url);if(src!==fallbackArt){coverSrc=src;break;}}
    const img=el('img',undefined,'music-playlist-thumb');img.alt=pl.name;img.src=coverSrc;img.onerror=()=>{img.onerror=null;img.src=fallbackArt;};
    const meta=el('div',undefined,'music-playlist-meta');
    meta.append(el('strong',pl.name),el('small',pl.items.length+' bài hát'+(activePlaylistId===pl.id?' · Đang phát':'')));
@@ -833,7 +837,7 @@
      const isCurrent=currentLinkUrl===link.url&&activePlaylistId===pl.id;
      const row=el('div',undefined,'music-playlist-track'+(isCurrent?' music-track-current':''));
      const open=el('button',undefined,'music-row-main');open.type='button';
-     const thumb=el('img',undefined,'music-row-thumb');thumb.alt='';thumb.src=link.kind==='youtube'?ytThumb(link.source.videoId):fallbackArt;thumb.onerror=()=>{thumb.onerror=null;thumb.src=fallbackArt;};
+     const thumb=el('img',undefined,'music-row-thumb');thumb.alt='';thumb.src=artworkForUrl(link.url);thumb.onerror=()=>{thumb.onerror=null;thumb.src=fallbackArt;};
      const copy=el('span',undefined,'music-row-copy');
      const cached=metaCache[link.url];
      copy.append(el('strong',(idx+1)+'. '+String(entry.title||cached?.title||link.label).slice(0,120)),el('small',(isCurrent?'♫ Đang phát · ':'')+(cached?.author||link.label)));
@@ -874,7 +878,7 @@
  // "Đã lưu vào" picker (Spotify style): choices stay pending until Xong; Hủy discards them.
  let savePending=new Set(),saveInitial=new Set();
  function playlistCover(pl){
-  for(const item of pl.items){try{const l=C.parseLink(item.url);if(l.kind==='youtube')return ytThumb(l.source.videoId);}catch{}}
+  for(const item of pl.items){const src=artworkForUrl(item.url);if(src!==fallbackArt)return src;}
   return fallbackArt;
  }
  function drawSavePicker(reset){
@@ -935,7 +939,7 @@
    const isCurrent=currentLinkUrl===link.url&&!activePlaylistId;
    const item=el('div',undefined,'music-saved-item'+(isCurrent?' music-track-current':'')),open=el('button',undefined,'music-row-main'),remove=el('button','Xóa','music-row-del');
    open.type=remove.type='button';remove.title='Xóa link đã lưu';
-   const thumb=el('img',undefined,'music-row-thumb');thumb.alt='';thumb.src=link.kind==='youtube'?ytThumb(link.source.videoId):fallbackArt;thumb.onerror=()=>{thumb.onerror=null;thumb.src=fallbackArt;};
+   const thumb=el('img',undefined,'music-row-thumb');thumb.alt='';thumb.src=artworkForUrl(link.url);thumb.onerror=()=>{thumb.onerror=null;thumb.src=fallbackArt;};
    const copy=el('span',undefined,'music-row-copy');
    const cached=metaCache[link.url];
    copy.append(el('strong',String(entry.title||cached?.title||link.label).slice(0,120)),el('small',(isCurrent?'♫ Đang phát · ':'')+(cached?.author||link.label)));

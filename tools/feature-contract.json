@@ -1555,6 +1555,11 @@
           "kind": "file",
           "file": "tools/test_music_import_audio.py",
           "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-artwork-ui.cjs",
+          "value": ""
         }
       ]
     }

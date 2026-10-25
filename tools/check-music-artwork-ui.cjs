@@ -1,0 +1,19 @@
+/* Real AAC via R2 routes; simulated visibility is not a physical lock-screen test. */
+const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:http'),path=require('node:path'),assert=require('node:assert/strict'),fixture=require('./music-cloud-fixture.cjs');
+(async()=>{
+ const root=process.cwd(),server=http.createServer((q,r)=>{const f=path.resolve(root,'.'+new URL(q.url,'http://local').pathname);if(!f.startsWith(root+path.sep)||!fs.existsSync(f)||!fs.statSync(f).isFile()){r.writeHead(404);return r.end();}r.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'})[path.extname(f)]||'application/octet-stream');r.end(fs.readFileSync(f));});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
+ try{browser=await chromium.launch({headless:true,...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
+ for(const width of [390,1440]){
+  const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'}),errors=[],external=[];page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>{external.push(r.request().url());return r.abort();});await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));const tracks=await fixture(page);
+  tracks[0].sourceUrl='https://www.youtube.com/watch?v=UV7kfq47Sqw';tracks[1].sourceUrl='https://youtu.be/9bZkp7q19f0';
+  await page.route('https://i.ytimg.com/vi/UV7kfq47Sqw/hqdefault.jpg',r=>r.fulfill({contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="480" height="360"><rect width="480" height="360" fill="purple"/></svg>'}));
+  await page.route('https://i.ytimg.com/vi/9bZkp7q19f0/hqdefault.jpg',r=>r.fulfill({status:404}));
+  await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic);await page.evaluate(()=>HSKStudio.navigate('music-play'));await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList button').length===3);
+  assert.equal(await page.locator('#musicCloudList button img').first().getAttribute('src'),'https://i.ytimg.com/vi/UV7kfq47Sqw/hqdefault.jpg');await page.locator('#musicCloudList button').first().click();await page.waitForFunction(()=>document.getElementById('musicBackgroundAudio')?.currentTime>.1);await page.waitForFunction(()=>document.getElementById('musicLinkThumb').naturalWidth===480);
+  const cover='https://i.ytimg.com/vi/UV7kfq47Sqw/hqdefault.jpg';assert.equal(await page.locator('#musicLinkThumb').getAttribute('src'),cover);assert.equal(await page.locator('#musicStageBg').getAttribute('src'),cover);assert.equal(await page.evaluate(()=>navigator.mediaSession.metadata.artwork[0].src),cover);
+  await page.locator('#musicBack').click();assert.equal(await page.locator('#musicMiniThumb').getAttribute('src'),cover);const audio=await page.locator('#musicBackgroundAudio').elementHandle();await page.evaluate(()=>HSKStudio.navigate('home'));await page.waitForTimeout(300);assert.equal(await audio.evaluate(n=>n.isConnected&&!n.paused),true);await page.evaluate(()=>HSKStudio.navigate('music-play'));
+  await page.locator('#musicCloudList button').nth(1).click();await page.waitForFunction(()=>document.getElementById('musicLinkThumb').src.startsWith('data:image/svg+xml'));assert.equal(await page.evaluate(()=>document.getElementById('musicBackgroundAudio').paused),false);assert.equal(await page.locator('#musicPanel iframe').count(),0);assert.ok(!external.some(u=>/iframe_api|googlevideo|youtube-nocookie|youtube.com\/embed/.test(u)));assert.deepEqual(errors,[]);await page.close();console.log('PASS artwork '+width+': exact source cover, list/mini/lock metadata, missing image fallback, native audio preserved');
+
+ }
+ }finally{await browser?.close();await new Promise(r=>server.close(r));}
+})().catch(e=>{console.error(e);process.exitCode=1});

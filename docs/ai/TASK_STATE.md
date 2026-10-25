@@ -17,3 +17,5 @@ Native-only correction: personal YouTube/search selections never mount a YouTube
 Import throughput: prefer source M4A/AAC and publish M4A to avoid MP3 re-encoding when possible; fallback sources transcode to AAC. Fragment concurrency4. Each workflow drains up to3 jobs sequentially with one setup, fresh signed claims per job; no extra fourth claim/lease. Schedule still roughly5min and GitHub can delay it. No dispatch credential added.
 
 Strict no-YouTube-UI instruction also covers study lesson playback: YouTube lesson sources resolve exact video-ID R2 audio through a native adapter, preserving text/segment controls. No YT.Player constructor or iframe API loading remains active. Missing library audio has explicit status instead of embed fallback.
+
+Artwork-only correction: derive R2 track thumbnails from existing sourceUrl video ID for cover, list, mini player, playlist and queue; use default art if source/image missing. Audio routes, playback events, media controls, importer and backend are unchanged.
