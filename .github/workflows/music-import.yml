@@ -1,5 +1,8 @@
 name: Admin music import to R2
 on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/music-import.yml]
   schedule:
     - cron: '2-57/5 * * * *'
   workflow_dispatch:
