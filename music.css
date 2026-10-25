@@ -539,11 +539,11 @@ html body.studio-enabled .music-panel.music-player-expanded #musicLinkPreview{
 .music-device-save-banner button{grid-column:2;grid-row:1/3;min-width:44px;min-height:44px}
 
 /* Owner-managed R2 library; listener controls stay compact on phones. */
-.music-cloud-admin{padding:16px;border-top:1px solid var(--border,#deddea)}
+.music-cloud-admin{padding:16px;border-top:1px solid var(--line)}
 .music-cloud-admin form,.music-cloud-admin label{display:grid;gap:8px}
 .music-cloud-admin form{gap:14px}
-.music-cloud-admin input,.music-playlist-add-track select{box-sizing:border-box;width:100%;min-width:0;font-size:16px;padding:10px;border:1px solid #c8c5df;border-radius:12px;color:inherit;background:transparent}
-.music-cloud-admin progress{width:100%;accent-color:#6654ee}
-#musicCloudStatus{font-size:14px;color:var(--muted,#9390a8)}
+.music-cloud-admin input,.music-playlist-add-track select{box-sizing:border-box;width:100%;min-width:0;font-size:16px;padding:10px;border:1px solid var(--line);border-radius:var(--radius-btn);color:inherit;background:var(--palette-transparent)}
+.music-cloud-admin progress{width:100%;accent-color:var(--accent)}
+#musicCloudStatus{font-size:14px;color:var(--muted)}
 #musicCloudList{display:grid;gap:8px}
 #musicCloudList button{width:100%;text-align:left}
