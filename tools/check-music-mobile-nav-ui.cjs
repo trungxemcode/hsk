@@ -20,16 +20,8 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
    await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic&&window.HSKPracticeSelection);
    assert.equal(await page.locator('.home-music-chill').isVisible(),true,'entertainment music has a home shortcut');
-   assert.equal(await page.locator('.home-music-entry').isVisible(),true,'music has a home shortcut');
-   const chillBox=await page.locator('.home-music-chill').boundingBox();
-   const entryBox=await page.locator('.home-music-entry').boundingBox();
-   assert.ok(Math.abs(chillBox.height-entryBox.height)<2,'home music cards have equal height');
-   if(width<=980){
-    assert.ok(entryBox.y>=chillBox.y+chillBox.height,'owner redesign stacks phone music shortcuts without overlap');
-    assert.ok(Math.abs(chillBox.x-entryBox.x)<2&&Math.abs(chillBox.width-entryBox.width)<2,'stacked music shortcuts align and share width');
-   }else assert.ok(Math.abs(chillBox.y-entryBox.y)<2,'desktop home music cards are top-aligned on same row');
-   assert.equal(await page.locator('.home-music-chill [data-icon=headphones] svg').isVisible(),true,'headphones icon is rendered in chill shortcut');
-   assert.equal(await page.locator('.home-music-entry [data-icon=volume-2] svg').isVisible(),true,'volume-2 icon is rendered in study shortcut');
+   assert.equal(await page.locator('#studioHome .home-music-entry').count(),0,'shared music entry replaces two home shortcuts');
+   assert.equal(await page.locator('.home-music-chill [data-icon=headphones] svg').isVisible(),true,'shared entry renders headphones');
    await page.locator('.home-music-chill').click();
    assert.equal(await page.locator('#musicPanel').getAttribute('data-music-mode'),'chill','home chill shortcut opens entertainment mode');
    const playerCheck=await page.evaluate(()=>{
@@ -50,7 +42,9 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    assert.equal(await page.locator('.music-filter-row').isVisible(),false,'entertainment mode hides HSK filter');
    await page.locator('#musicMenuClose').click();
    await page.locator('#musicBack').click();
-   await page.locator('.home-music-entry').click();
+   await page.locator('.home-music-chill').click();
+   await page.locator('[data-browse-filter=hsk]').click();
+   await page.locator('#musicLegacyLessons .home-music-entry').click();
    assert.equal(await page.locator('#musicPanel').isVisible(),true,'home shortcut opens music');
    assert.equal(await page.locator('#musicPanel').getAttribute('data-music-mode'),'study','home study shortcut opens HSK study mode');
    assert.equal(await page.locator('#musicStudyQuickCatalog .music-study-card').count(),3,'study mode provides built-in App HSK songs');
@@ -63,12 +57,13 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    if(mobile)assert.equal(await page.locator('.bottom-nav').isVisible(),true,'bottom nav returns on home');
    if(mobile){
     await page.locator('#menuBtn').click();
-    await page.locator('.drawer-body>.music-nav-entry').click();
-    assert.equal(await page.locator('#musicPanel').isVisible(),true,'phone menu has independent music link');
+    assert.equal(await page.locator('.drawer-body>.music-nav-entry').isVisible(),false,'one shared music entry in drawer');
+    await page.locator('.drawer-body>.music-chill-nav-entry').click();
    }else{
-    await page.locator('.side-nav [data-studio-go=music]').click();
-    assert.equal(await page.locator('#musicPanel').isVisible(),true,'desktop side nav has independent music link');
+    assert.equal(await page.locator('.side-nav [data-studio-go=music]').isVisible(),false,'one shared music entry in sidebar');
+    await page.locator('.side-nav [data-studio-go="music-play"]').click();
    }
+   await page.evaluate(()=>HSKStudio.navigate('music'));
    assert.equal(await page.locator('#musicMenuSheet').isVisible(),false,'menu sheet hidden by default');
    await page.locator('#musicMenuBtn').click();
    await page.waitForFunction(()=>getComputedStyle(document.getElementById('musicMenuSheet')).visibility==='visible');

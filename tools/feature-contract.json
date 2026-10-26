@@ -1608,6 +1608,52 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "music-timed-lyrics",
+      "name": "Kho nhạc chung và script theo thời gian để tra cứu AI",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "src/modules/music/music-lyrics-core.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "src/modules/music/music-lyrics-ui.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "music-lyrics.css",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music.js",
+          "value": "data-browse-filter=\"hsk\""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music-lyrics-ui.js",
+          "value": "musicTimedLyrics"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/translation/lesson-chat.js",
+          "value": "hsk-music-ask"
+        },
+        {
+          "kind": "file",
+          "file": "server/music-lyrics.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-lyrics-ui.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }

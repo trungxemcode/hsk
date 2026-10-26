@@ -33,6 +33,8 @@ async function sendQuestion(question){
  finally{stopLoading?.();clearTimeout(timer);if(current===serial){pending=null;send.disabled=false;input.disabled=false;}}
 }
 window.addEventListener('hsk-lesson-context',event=>{const next=event.detail;if(next?.id!==lesson?.id){reset();close();hideSelectionPrompt();}lesson=next;syncLauncher();title.textContent=lesson?'Bài '+lesson.number+' · '+lesson.vi:'Hỏi đáp bài học';if(!lesson)close();});
+window.addEventListener('hsk-music-ask',event=>{const value=event.detail;if(!value?.lesson?.id?.startsWith('music-')||!value.question)return;if(lesson?.id!==value.lesson.id){reset();hideSelectionPrompt();}lesson=value.lesson;title.textContent='Tra cứu lời · '+lesson.title;ask(value.question);});
+window.addEventListener('hsk-music-context-end',()=>{if(lesson?.id?.startsWith('music-')){reset();close();hideSelectionPrompt();lesson=null;syncLauncher();}});
 window.addEventListener('hsk-account-ready',()=>{reset();close();});
 launcher.addEventListener('click',()=>{open();input.focus({preventScroll:true});});
 document.getElementById('lessonChatClose').addEventListener('click',()=>{close();launcher.focus();});

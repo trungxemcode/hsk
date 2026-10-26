@@ -24,3 +24,8 @@ Primary interactions: create playlist, expand playlist, quick assign/unassign, m
 Physical iPhone frame pacing and lock-screen playback were not measured; no physical-device smoothness claim. Remaining P3: system font rasterization varies by platform.
 
 final result: passed
+
+## Unified lyrics player iteration (2026-10-26)
+Source: owner screenshot image(20261026-002453).png, lyrical current-line emphasis and artwork/player alongside lyrics on desktop. Preserve existing player appearance; mobile stacks artwork/transport above lyrics. Desktop screenshot `/tmp/unified-lyrics-1440.png`, mobile `/tmp/unified-lyrics-390.png`, landscape/tablet `/tmp/unified-lyrics-844.png`, browser-rendered with Google Chrome Headless Shell141, viewport heights844, DPR1. Source is a photograph/video crop inside a TikTok screen, not a pixel-aligned app frame; no pixel-exact comparison claimed. Browser fixture tracks intentionally replace production audio/artwork. Chinese test font installed locally (not added to app assets).
+Typography: native Chinese fonts, current line700 weight/20-32px, secondary pinyin/translation13px. Spacing: bounded independent text scroll area, preserved controls; desktop two-column/mobile single-column. Color: existing shared tokens, current bright/other lines muted. Images: original R2 artwork path remains; fixture cover only in screenshots. Copy: real song titles/cues, no editable listener fields. Earlier missing-CJK-glyph test-environment issue fixed by installing Noto CJK in the test environment; post-fix screenshots reviewed. Native selection remains unchanged across real AAC timeupdates/seeks; AI prompt and publication authorization covered by UI tests. Physical iOS gestures/frame timing not verified.
+final result: passed

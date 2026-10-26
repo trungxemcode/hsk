@@ -34,3 +34,17 @@ Chưa kích hoạt R2 thì app báo kho chưa được cấu hình; không dùng
 `.github/workflows/music-import.yml` runs manually or every5minutes on main and processes one queued job. GitHub may delay scheduled runs. Cookie secret is `YTB_Cookies`; no PAT or R2 credentials are needed in frontend/Actions. The Worker verifies the GitHub OIDC signature, audience, immutable repository/owner IDs, main ref, workflow path and event type before claiming/uploading. The queue is private R2 JSON; Firebase owner-only reads status. A job has a15minute lease, errors are shown in the admin panel, and a new request is required after failure. MP3 output128kbps,20minute source/50MB file maximum; source title/artist are defaults, admin overrides supported. No media/cookie artifacts are uploaded to GitHub. Temporary cookie/audio files disappear after the job.
 
 The queue pilot scans the first1000 task records per claim. This is a small owner-operated import workflow; archive old job records before exceeding that scale. For immediate processing, use Actions → Admin music import to R2 → Run workflow. GitHub schedules only execute after the workflow reaches main.
+
+## Script LRC / SRT / JSON (3.19.1)
+
+Deploy the updated library Worker before releasing the frontend script-upload feature:
+
+```sh
+npx wrangler deploy --config server/music/wrangler-cloud.jsonc
+```
+
+No new secret, binding or database migration. Deployment preserves audio objects and existing routes. Scripts are separate `lyrics/{audioId}.json` objects, capped at500KB and2000 non-overlapping timestamped cues. Public catalogue adds `hasLyrics` and `lyricsRevision`; audio bytes/URLs are unchanged. Reading a script requires the corresponding audio still be published. Only the verified fixed owner may publish/replace a script; deleting audio removes its sidecar.
+
+In the app: Nghe nhạc & học HSK → open the song's ⋯ menu → Gắn script LRC / SRT / JSON. After successful upload the song also appears in Học HSK. Listener accounts cannot edit. LRC supports repeated timestamps, metadata and offset; SRT preserves explicit ends/gaps; JSON accepts `cues:[{start,end,text,pinyin,vi}]` or the previous `segments:[{start,end,hanzi,pinyin,vi}]`. Times are seconds for JSON. Plain text without timestamps is rejected. No ASR/automatic alignment.
+
+Use the new Worker with the current frontend safely: existing uploads/playback still work. Rolling back the frontend leaves sidecars intact. A physical iPhone native text-selection/lock-screen check is still required after release.
