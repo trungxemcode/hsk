@@ -30,3 +30,6 @@ Nguồn chính thức:
 - https://ai.google.dev/gemini-api/docs/available-regions
 - https://developers.cloudflare.com/workers/configuration/placement/
 - https://developers.cloudflare.com/workers/wrangler/configuration/
+
+### Music transcripts
+Rebuild `node tools/build-worker-bundle.cjs` and deploy `npx wrangler deploy --config server/wrangler.jsonc` to enable `/music-transcript`. Reuses Gemini keys and AI_CONTROL; optional `MUSIC_TRANSCRIPT_MODEL` defaults to `gemini-2.5-flash`. The route sends media to Gemini directly for every role because the text-only secondary provider cannot transcribe audio. Each successful two-pass generation reserves two existing query slots. Inputs limited to 6 MiB and declared 480 seconds; generated timestamps are checked against duration, but client-declared duration is not a media probe. All results are drafts and cannot guarantee exact lyrics. Personal edits remain on the device; file media is not stored by the Worker. Cloud library publication additionally requires the music library Worker deployed per `server/music/R2-DEPLOYMENT.md`.

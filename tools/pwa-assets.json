@@ -10,6 +10,7 @@
     "src/modules/music/music-core.js",
     "src/modules/music/music-lyrics-core.js",
     "src/modules/music/music-lyrics-ui.js",
+    "src/modules/music/music-transcript.js",
     "src/modules/music/music-soundcloud.js",
     "src/modules/music/music.js",
     "music.css",

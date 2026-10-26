@@ -32,3 +32,15 @@ html body.studio-enabled #lessonChatPanel:not([hidden]){z-index:160!important}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-has-script.music-player-expanded .music-stage{touch-action:pan-y!important}
 
 html body.studio-enabled .home-music-grid .home-music-entry[hidden]{display:none!important}
+
+/* Transcript review uses native fields and keeps Chinese text selectable. */
+.music-transcript-dialog{width:min(760px,calc(100vw - 24px));max-height:90dvh;box-sizing:border-box;overflow:auto;background:var(--palette-dark-surface);color:var(--palette-white);border:1px solid var(--legacy-hex-ffffff1f);border-radius:var(--radius-8px);padding:20px;z-index:180}
+.music-transcript-dialog::backdrop{background:var(--mb-rd-scrim)}
+.music-transcript-dialog video{display:block;width:100%;max-height:200px;margin-block:12px}
+.music-transcript-dialog label{display:block;margin-block:8px}
+.music-transcript-dialog input:not([type=checkbox]),.music-transcript-dialog textarea{box-sizing:border-box;width:100%;font:inherit;font-size:16px;padding:10px;color:inherit;background:var(--palette-clear);border:1px solid var(--legacy-hex-ffffff1f);border-radius:var(--radius-8px)}
+.music-transcript-dialog button{font:inherit;font-size:16px;min-height:44px;padding:8px 12px;border-radius:var(--radius-8px);cursor:pointer}
+.music-transcript-dialog .music-transcript-actions{display:flex;gap:8px;flex-wrap:wrap}
+.music-transcript-dialog fieldset{min-width:0;border:1px solid var(--legacy-hex-ffffff1f);border-radius:var(--radius-8px);margin-block:16px}
+.music-transcript-dialog p{line-height:1.55}
+.music-transcript-dialog input[type=checkbox]{width:20px;height:20px;vertical-align:middle;margin-right:8px}

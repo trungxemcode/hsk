@@ -183,13 +183,13 @@
  function syncCloudOwner(){cloudAdmin.hidden=window.HSKAccountDashboard?.user?.uid!==cloudOwner;adminAction.hidden=cloudAdmin.hidden;clearTimeout(importPoll);if(!cloudAdmin.hidden)pollImport();else{importBusy=false;$('musicAdminImportStatus').textContent='';$('musicAdminImportSubmit').disabled=false;}}
  function drawCloud(){
   cloudList.replaceChildren();
-  for(const track of cloudTracks.filter(t=>panel.dataset.libraryFilter!=='hsk'||t.hasLyrics)){
+  for(const track of cloudTracks.filter(t=>panel.dataset.libraryFilter!=='hsk'||t.hasLyrics||window.HSKMusicTranscript?.read(t.id))){
    const b=el('button',undefined,'music-row-main music-cloud-track');b.type='button';b.dataset.trackId=track.id;b.dataset.hasLyrics=String(Boolean(track.hasLyrics));
    const image=el('img',undefined,'music-row-thumb');image.loading='lazy';image.decoding='async';image.src=artworkForUrl(track.url);image.onerror=()=>{image.onerror=null;image.src=fallbackArt;};image.alt='';const copy=el('span',undefined,'music-row-copy');copy.append(el('strong',track.title),el('small',track.artist+(track.composer?' · Sáng tác: '+track.composer:'')));b.append(image,copy);
    b.onclick=()=>openLink(C.parseLink(track.url),track.title,true,'',true);cloudList.append(b);metaCache[track.url]={title:track.title,author:track.artist};
   }
   cloudHead.textContent=panel.dataset.libraryFilter==='hsk'?'Học HSK · Bài hát có script':'Kho nhạc HSK';
-  if(panel.dataset.libraryFilter==='hsk'){const count=cloudTracks.filter(t=>t.hasLyrics).length;cloudStatus.textContent=count?count+' bài có lời theo thời gian':'Chưa có bài kèm script. Chủ kho có thể gắn LRC/SRT/JSON từ menu bài hát.';return;}
+  if(panel.dataset.libraryFilter==='hsk'){const count=cloudTracks.filter(t=>t.hasLyrics||window.HSKMusicTranscript?.read(t.id)).length;cloudStatus.textContent=count?count+' bài có lời theo thời gian':'Chưa có bài kèm script. Chủ kho có thể gắn LRC/SRT/JSON từ menu bài hát.';return;}
   cloudStatus.textContent=cloudTracks.length?cloudTracks.length+' bài hát trong kho':'Kho chưa có bài hát. Chủ kho có thể tải nhạc lên trong menu ⋯.';
  }
  const cloudCacheKey=endpoint=>'hsk-music-catalog-v1:'+endpoint;
@@ -1434,7 +1434,7 @@ window.addEventListener('hsk-account-ready',()=>{pendingImportLink='';pendingImp
  const legacy=el('section',undefined,'music-legacy-lessons');legacy.id='musicLegacyLessons';legacy.hidden=true;
  const oldEntry=document.querySelector('.home-music-entry');if(oldEntry){oldEntry.hidden=false;oldEntry.querySelector('strong').textContent='Bài luyện tập theo câu';oldEntry.querySelector('small').textContent='Bài có sẵn, nhập file và bài tập HSK';legacy.append(oldEntry);}
  cloudSection.append(legacy);
- timedLyrics=window.HSKMusicLyricsUI?.install({mode:()=>currentMode,track:()=>cloudTracks.find(t=>t.url===currentLinkUrl),menuTrack:()=>cloudTracks.find(t=>t.url===menuURL()),endpoint:cloudEndpoint,isOwner:()=>window.HSKAccountDashboard?.user?.uid===cloudOwner,publish:(id,value)=>importAPI('/api/admin/tracks/'+encodeURIComponent(id)+'/lyrics',value),refresh:refreshCloud,time:()=>nativeLinkAudio?.currentTime||0,duration:()=>nativeLinkAudio?.duration||0});
+ timedLyrics=window.HSKMusicLyricsUI?.install({pause:()=>nativeLinkAudio?.pause(),privateChanged:()=>drawCloud(),mode:()=>currentMode,track:()=>cloudTracks.find(t=>t.url===currentLinkUrl),menuTrack:()=>cloudTracks.find(t=>t.url===menuURL()),endpoint:cloudEndpoint,isOwner:()=>window.HSKAccountDashboard?.user?.uid===cloudOwner,publish:(id,value)=>importAPI('/api/admin/tracks/'+encodeURIComponent(id)+'/lyrics',value),refresh:refreshCloud,time:()=>nativeLinkAudio?.currentTime||0,duration:()=>nativeLinkAudio?.duration||0});
 
  window.dispatchEvent(new Event('hsk-music-ready'));
  // The entertainment library streams R2 audio; legacy device databases are not modified.

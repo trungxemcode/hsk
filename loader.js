@@ -13,7 +13,7 @@
  let musicLoad;
  function startMusic(){
   if(window.HSKMusic)return Promise.resolve(window.HSKMusic);if(musicLoad)return musicLoad;
-  mark('module-start');musicLoad=(async()=>{for(const url of ['./src/modules/music/music-core.js','./src/modules/music/music-lyrics-core.js','./src/modules/music/music-lyrics-ui.js','./src/modules/music/music-soundcloud.js','./src/modules/shell/legacy-music-cleanup.js','./src/modules/music/music.js'])await scriptFile(url);if(!window.HSKMusic)throw Error('Trình phát chưa sẵn sàng.');mark('module-ready');measure('module-load','module-start','module-ready');return window.HSKMusic;})().catch(()=>{musicLoad=null;window.dispatchEvent(new Event('hsk-music-load-error'));return null;});return musicLoad;
+  mark('module-start');musicLoad=(async()=>{for(const url of ['./src/modules/music/music-core.js','./src/modules/music/music-lyrics-core.js','./src/modules/music/music-transcript.js','./src/modules/music/music-lyrics-ui.js','./src/modules/music/music-soundcloud.js','./src/modules/shell/legacy-music-cleanup.js','./src/modules/music/music.js'])await scriptFile(url);if(!window.HSKMusic)throw Error('Trình phát chưa sẵn sàng.');mark('module-ready');measure('module-load','module-start','module-ready');return window.HSKMusic;})().catch(()=>{musicLoad=null;window.dispatchEvent(new Event('hsk-music-load-error'));return null;});return musicLoad;
  }
  window.HSKMusicLoad={start:startMusic};
  window.HSKMusicBootstrap={config:fetch('./music-config.json').then(r=>r.ok?r.json():null).catch(()=>null)};

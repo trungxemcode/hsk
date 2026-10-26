@@ -1654,6 +1654,42 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "music-personal-transcripts",
+      "name": "Transcript chữ Hán riêng cho mọi tài khoản, duyệt từng câu trước khi xuất bản",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "server/music-transcript.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/music-transcript.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "src/modules/music/music-transcript.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-transcript-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/translator-worker.mjs",
+          "value": "/music-transcript"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music-transcript.js",
+          "value": "hsk_music_private_scripts_v1:"
+        }
+      ]
     }
   ]
 }
