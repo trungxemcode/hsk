@@ -401,6 +401,64 @@ export async function abuseFingerprint(route,value){
  return Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
 }
 
+// Provider diagnostics contain no user content, keys or raw upstream messages.
+export async function aiErrorKind(response){
+ if(response.ok)return 'success';
+ const data=await response.clone().json().catch(()=>null),message=String(data?.error?.message||'');
+ if(response.status===400&&/user location.*not supported|free tier.*not available.*country/i.test(message))return 'region';
+ if([400,401,403].includes(response.status)&&(data?.error?.details||[]).some(d=>d.reason==='API_KEY_INVALID'))return 'key';
+ if([403,404].includes(response.status)&&/model/i.test(message)&&/not found|not available|no longer|permission|access|not supported/i.test(message))return 'model';
+ if(response.status===429)return 'quota';
+ if([408,500,502,503,504].includes(response.status))return 'temporary';
+ if([401,403].includes(response.status))return 'key';
+ return 'input';
+}
+const supported=new Set(['gemini-2.5-flash','gemini-2.5-flash-lite','gemini-3.1-flash-lite','gemini-3.5-flash-lite','gemini-3.6-flash','gemini-3.8-flash']);
+const synthetic=kind=>Response.json({error:{status:kind==='region'?'FAILED_PRECONDITION':'NOT_FOUND',message:kind==='region'?'User location is not supported for the API use.':'Configured model is temporarily not available.'}},{status:kind==='region'?400:404});
+export function createGeminiModelFallback(fetchFn,env,{state=new Map(),now=()=>Date.now(),wait=abortableWait,onResult=()=>{}}={}){
+ return async function resilient(url,init={}){
+  let parsed;try{parsed=new URL(String(url));}catch{return fetchFn(url,init);}
+  const match=parsed.pathname.match(/^\/v1beta\/models\/(gemini-[a-z0-9.-]+):generateContent$/);
+  if(env.AI_MODEL_FAILOVER_ENABLED!=='true'||parsed.origin!=='https://generativelanguage.googleapis.com'||!match||!supported.has(match[1]))return fetchFn(url,init);
+  let body;try{body=JSON.parse(init.body);}catch{return fetchFn(url,init);}
+  // Text and image understanding only; speech, video, audio and generation keep their original engines.
+  if(body.generationConfig?.speechConfig||body.generationConfig?.responseModalities?.some(x=>x!=='TEXT')||body.contents?.some(c=>c.parts?.some(p=>/^(?:audio|video)\//.test(p.inlineData?.mimeType||p.fileData?.mimeType||''))))return fetchFn(url,init);
+  const fallbacks=String(env.AI_GEMINI_FALLBACK_MODELS||'').split(',').map(s=>s.trim()).filter(m=>supported.has(m));
+  const models=[...new Set([match[1],...fallbacks])].slice(0,3),header=new Headers(init.headers),key=header.get('x-goog-api-key');
+  if(!key)return fetchFn(url,init);
+  const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(key))),n=>n.toString(16).padStart(2,'0')).join('');
+  const started=now();let attempts=0,last,reason='input',effective=match[1];
+  const canceled=()=>{if(init.signal?.aborted)throw new DOMException('Canceled','AbortError');};
+  for(const model of models){
+   canceled();
+   if(attempts>=2)break;
+   const stateKey=hash+':'+model,cached=state.get(stateKey);
+   if(cached?.until>now()){reason=cached.kind;last=synthetic(reason);if(reason==='region')break;continue;}
+   state.delete(stateKey);
+   effective=model;
+   if(attempts&&reason==='temporary')await wait(200,init.signal);
+   canceled();attempts++;
+   const target=new URL(parsed);target.pathname=parsed.pathname.replace(match[1],model);
+   // Identical credentials, payload, schema and cancellation signal; only a server-approved model may change.
+   last=await fetchFn(target.href,{...init});
+   canceled();reason=await aiErrorKind(last);
+   if(reason==='success'||reason==='quota'||reason==='key'||reason==='input')break;
+   if(reason==='model'||reason==='region'){
+    if(state.size>=512){for(const [k,v] of state)if(v.until<=now())state.delete(k);if(state.size>=512)state.delete(state.keys().next().value);}
+    state.set(stateKey,{kind:reason,until:now()+(reason==='model'?300000:30000)});
+   }
+   if(reason==='region')break; // A different model does not repair an unsupported egress region.
+  }
+  const event={requestedModel:match[1],effectiveModel:effective,status:last?.status||503,reason,attempts,ms:now()-started};
+  try{onResult(event);}catch{}
+  return last||synthetic('model');
+ };
+}
+async function abortableWait(ms,signal){
+ if(signal?.aborted)throw new DOMException('Canceled','AbortError');
+ return new Promise((resolve,reject)=>{const abort=()=>{clearTimeout(timer);signal?.removeEventListener('abort',abort);reject(new DOMException('Canceled','AbortError'));};const timer=setTimeout(()=>{signal?.removeEventListener('abort',abort);resolve();},ms);signal?.addEventListener('abort',abort,{once:true});});
+}
+
 // Configured text provider; credentials remain in server secrets.
 // Never echo secrets, provider responses, prompts or source content into logs.
 export function backupConfigured(env){
@@ -480,7 +538,7 @@ export function createAiFailoverFetch(fetchFn,env,{
   const instruction=(body.systemInstruction?.parts||[]).map(p=>p.text||'').join('\n')+'\nReturn JSON only matching this response schema: '+JSON.stringify(body.generationConfig?.responseSchema||{});
   const gemini=async signal=>{
    const response=await fetchFn(url,{...init,signal});
-   if(!response.ok)return {response,retry:[401,403,404,408,429,500,502,503,504].includes(response.status)};
+   if(!response.ok)return {response,retry:[401,403,404,408,429,500,502,503,504].includes(response.status)||(response.status===400&&await aiErrorKind(response)==='region')};
    let json;try{json=await response.clone().json()}catch{return {response,retry:true}}
    const candidate=json.candidates?.[0];
    if(json.promptFeedback?.blockReason||candidate?.finishReason&&!['STOP','MAX_TOKENS'].includes(candidate.finishReason))return {response,retry:false};
@@ -1044,12 +1102,14 @@ async function geminiFailure(response,model,env,operation='existing'){
  const locationRejected=status===400&&/user location is not supported/i.test(detail);
  return {error:locationRejected?(operation==='handwriting'?'Google từ chối khu vực của kết nối máy chủ AI cho nhận dạng chữ. Cần kiểm tra vị trí chạy Cloudflare Worker và quyền khu vực của dự án Gemini.':'Google từ chối khu vực của kết nối máy chủ AI. Cả hỏi đáp, dịch và đọc ảnh đang tạm ngừng. Cần kiểm tra vị trí chạy Cloudflare Worker và quyền khu vực của dự án Gemini.'):message,code:locationRejected?'AI_LOCATION_UNSUPPORTED':'AI_PROVIDER_ERROR',providerStatus,model,workerRevision:WORKER_REVISION};
 }
-export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
+export function createHandler(providerFetch=fetch,now=()=>Date.now()){
+ const resilienceState=new Map();
  const cooldowns=new Map();
  const geminiState={cursor:0,blocked:new Map()};
  const sourceCache=new Map();
  return async(request,env,ctx)=>{
   const timings=[];let abuseLease=null,abuseUid='',responseStatus=500,qaSession=null;
+  const rawFetchFn=new URL(request.url).pathname==='/voice-precache'?providerFetch:createGeminiModelFallback(providerFetch,env,{state:resilienceState,now,onResult:entry=>console.info('hsk-ai-provider-result',entry)});
   const keyFetch=createGeminiKeyFetch(rawFetchFn,env,{now,state:geminiState,onAttempt:entry=>timings.push(entry)});
   let fetchFn=createAiFailoverFetch(keyFetch,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
   const origin=request.headers.get('Origin')||'',allowed=(env.ALLOWED_ORIGINS||'https://trungxemcode.github.io').split(',').map(s=>s.trim());
@@ -1063,6 +1123,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
   const route=new URL(request.url).pathname,isTranscript=route==='/music-transcript',isRole=['/account-role','/admin/accounts','/admin/account-role'].includes(route),isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
   if(!isTranscript&&!isRole&&route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading)return reply({error:'Không tìm thấy dịch vụ.'},404);
   if(request.method!=='POST')return reply({error:'Yêu cầu không hợp lệ.'},405);
+  if(isTranscript&&env.MUSIC_TRANSCRIPT_ENABLED==='false')return reply({error:'Tự tạo script bằng AI đã được tắt. Hãy gắn script LRC/SRT/JSON có sẵn.',code:'MUSIC_TRANSCRIPT_DISABLED'},503);
   if(!env.FIREBASE_API_KEY||!isRole&&!isSample&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
   const token=request.headers.get('Authorization')?.match(/^Bearer ([^\s]+)$/)?.[1],c=token&&token.length<5000?claims(token):null,project=env.FIREBASE_PROJECT_ID||'hsk-flashcards-44631';
   if(!c||c.aud!==project||c.iss!=='https://securetoken.google.com/'+project||typeof c.sub!=='string'||!c.sub||typeof c.exp!=='number'||c.exp<=now()/1000)return reply({error:'Hãy đăng nhập tài khoản app để dịch.'},401);

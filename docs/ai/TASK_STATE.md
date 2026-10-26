@@ -1,5 +1,12 @@
 # Current task: compact music menu UX
 
+## AI failure recovery (2026-10-26)
+Owner stopped AI music transcription; live `/music-transcript` is disabled before provider/quota/R2 work. Manual LRC/SRT/JSON remains. Actual failures: 2.5 Flash 404/new-user access restriction; Gemini region400; then 3.8 overload503. Main text model stays3.5 Flash-Lite. Google states2.5 remains available to established users, not universally retired.
+
+Branch fix/ai-resilience-20261026 adds classified region400→existing eligible text backup, compatible model fallback for model-access/temporary failure, per-key/model five-minute circuit and 30-second region circuit, no retries of caller400/refusal/cancellation; retains429 Retry-After/daily cooldown. Typed payload/schema stay unchanged. Scope excludes speech/video/audio generation and preserves Gemini-only policy. Logs contain model/status/category/timing only. No historical error-rate percentage established.
+
+Live deploy a3c97ec6-7a41-435f-86b0-5cc6ff200f74 is additive over downloaded source SHA3405ae474e1cd05bc7e4bbbbfb3a1473b6a835f753a8db8d17b1c513981ed389. Six voice functions byte-identical; original class/bindings and voice route retained. Wrapper module is in E:\\download\\HSK-transcript-live-preserved on the authorized device. Canonical GitHub bundle remains separate and must not blindly overwrite live voice patches. Recovery flags true, fallback models3.1 Flash-Lite/3.6 Flash, transcript false. 301 server and12 live-package mocked checks pass; feature-preservation58/270 passes. Browser runtime and PR status should be verified from current results.
+
 Base main9322ad9, live3.18.1. Admin YouTube→GitHub Actions→R2 is verified by run40163262374; importer User-Agent fix #192 merged. User confirmed native R2 background playback on phone.
 
 3.18.2 candidate: main sheet has short actions instead of stacked forms; personal links and owner library imports use subviews, admin YouTube/File tabs, collapsed optional metadata, readable dark labels/white action text, inline personal errors, no stale loading status. Existing playback, queue and owner restrictions are preserved.

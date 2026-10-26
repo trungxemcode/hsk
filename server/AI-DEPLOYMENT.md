@@ -1,5 +1,15 @@
 # Khắc phục AI_LOCATION_UNSUPPORTED
 
+## Recovery policy (2026-10-26)
+
+`AI_MODEL_FAILOVER_ENABLED=true` enables bounded text/image-understanding model recovery. `AI_GEMINI_FALLBACK_MODELS` is a server-only list; the deployed list is `gemini-3.1-flash-lite,gemini-3.6-flash`. An unavailable model (403/404 with model-access evidence) or transient 408/5xx can try one compatible replacement, with at most two network calls per existing key attempt. Model-access failures are cached for five minutes per key/model in the Worker isolate; this is not a global or permanent key ban. Temporary fallback waits 200 ms and respects the existing request deadline and cancellation.
+
+A recognized region 400 does not fan out across models. Text requests may use the existing configured secondary provider where policy allows; images never go to a text-only provider, and explicit Gemini-only policy stays Gemini-only. Bad-input 400 and safety refusals never retry. 429 responses and Retry-After are left unchanged for the existing key pool and daily-quota cooldowns. No billing, quota counters, roles, credentials or TTS models change.
+
+The live Worker has independent voice patches. Never deploy the canonical bundle over it. `node tools/prepare-ai-resilience-live.cjs BASELINE.mjs EXISTING_DEPLOY_DIRECTORY` validates exact anchors, backs up the downloaded source, patches only text failover, preserves six live voice functions and adds a voice-bypassing adapter. Deploy the prepared directory with its preserved config/secrets/bindings. Disable recovery with `AI_MODEL_FAILOVER_ENABLED=false`; keep `MUSIC_TRANSCRIPT_ENABLED=false` as requested. Manual music-script publication stays available.
+
+`hsk-ai-provider-result` emits requested/effective model, status, category, bounded attempt count and elapsed milliseconds, never keys, account IDs, prompts or raw provider messages. Existing historic samples do not establish an error-frequency percentage; retained aggregate logs are needed for that. Reference: https://ai.google.dev/gemini-api/docs/troubleshooting and https://ai.google.dev/gemini-api/docs/deprecations.
+
 Ảnh lỗi cho thấy Google Gemini trả HTTP 400: User location is not supported for the API use. Cả /ask, /lesson-ask, /translate và /ocr dùng cùng upstream. Không phải bằng chứng lỗi layout, model hoặc pinyin.
 
 Cấu hình wrangler.jsonc yêu cầu Cloudflare đặt Worker gần gcp:us-east4, một vùng ở Hoa Kỳ. Đây là biện pháp kiểm tra đường đi máy chủ, không bảo đảm Google chấp nhận IP hoặc dự án. Cloudflare không cam kết IP egress cố định. Việt Nam cũng nằm trong danh sách Gemini hỗ trợ, nên không kết luận tài khoản ở Việt Nam bị cấm.

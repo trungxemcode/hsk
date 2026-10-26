@@ -1,4 +1,5 @@
 import {validTranscriptInput,transcribeMusic,libraryTranscriptMedia,saveGeneratedTranscript} from './music-transcript.mjs';
+import {createGeminiModelFallback} from './ai-resilience.mjs';
 import {OWNER_UID,accountRoleCall,roleProvider} from './account-roles.mjs';
 import {qaBegin,qaFinish,qaRelease,qaUsage} from './tutor-cache.mjs';
 import { vocabulary } from './hsk-vocabulary.mjs';
@@ -41,12 +42,14 @@ async function geminiFailure(response,model,env,operation='existing'){
  const locationRejected=status===400&&/user location is not supported/i.test(detail);
  return {error:locationRejected?(operation==='handwriting'?'Google từ chối khu vực của kết nối máy chủ AI cho nhận dạng chữ. Cần kiểm tra vị trí chạy Cloudflare Worker và quyền khu vực của dự án Gemini.':'Google từ chối khu vực của kết nối máy chủ AI. Cả hỏi đáp, dịch và đọc ảnh đang tạm ngừng. Cần kiểm tra vị trí chạy Cloudflare Worker và quyền khu vực của dự án Gemini.'):message,code:locationRejected?'AI_LOCATION_UNSUPPORTED':'AI_PROVIDER_ERROR',providerStatus,model,workerRevision:WORKER_REVISION};
 }
-export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
+export function createHandler(providerFetch=fetch,now=()=>Date.now()){
+ const resilienceState=new Map();
  const cooldowns=new Map();
  const geminiState={cursor:0,blocked:new Map()};
  const sourceCache=new Map();
  return async(request,env,ctx)=>{
   const timings=[];let abuseLease=null,abuseUid='',responseStatus=500,qaSession=null;
+  const rawFetchFn=new URL(request.url).pathname==='/voice-precache'?providerFetch:createGeminiModelFallback(providerFetch,env,{state:resilienceState,now,onResult:entry=>console.info('hsk-ai-provider-result',entry)});
   const keyFetch=createGeminiKeyFetch(rawFetchFn,env,{now,state:geminiState,onAttempt:entry=>timings.push(entry)});
   let fetchFn=createAiFailoverFetch(keyFetch,env,{timeoutMs:new URL(request.url).pathname==='/reading-next'?AI_TIMEOUTS.reading:AI_TIMEOUTS.text});
   const origin=request.headers.get('Origin')||'',allowed=(env.ALLOWED_ORIGINS||'https://trungxemcode.github.io').split(',').map(s=>s.trim());
@@ -60,6 +63,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
   const route=new URL(request.url).pathname,isTranscript=route==='/music-transcript',isRole=['/account-role','/admin/accounts','/admin/account-role'].includes(route),isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
   if(!isTranscript&&!isRole&&route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading)return reply({error:'Không tìm thấy dịch vụ.'},404);
   if(request.method!=='POST')return reply({error:'Yêu cầu không hợp lệ.'},405);
+  if(isTranscript&&env.MUSIC_TRANSCRIPT_ENABLED==='false')return reply({error:'Tự tạo script bằng AI đã được tắt. Hãy gắn script LRC/SRT/JSON có sẵn.',code:'MUSIC_TRANSCRIPT_DISABLED'},503);
   if(!env.FIREBASE_API_KEY||!isRole&&!isSample&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
   const token=request.headers.get('Authorization')?.match(/^Bearer ([^\s]+)$/)?.[1],c=token&&token.length<5000?claims(token):null,project=env.FIREBASE_PROJECT_ID||'hsk-flashcards-44631';
   if(!c||c.aud!==project||c.iss!=='https://securetoken.google.com/'+project||typeof c.sub!=='string'||!c.sub||typeof c.exp!=='number'||c.exp<=now()/1000)return reply({error:'Hãy đăng nhập tài khoản app để dịch.'},401);
