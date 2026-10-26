@@ -10,10 +10,11 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   await page.route('https://ai.example/music-transcript',r=>{requested=r.request().postDataJSON();return r.fulfill({json:{version:1,status:'draft',reviewed:false,cues:[{start:0,end:1,text:'再见',uncertain:true,reason:'Hai lượt nhận diện khác nhau.'}]}});});
   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic);
   await page.evaluate(()=>{HSKAccountDashboard={user:{uid:'listener',getIdToken:async()=> 'listener'}};HSKStudio.navigate('music-play');});await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList .music-cloud-track').length===3);
+  await page.locator('#musicMenuBtn').click();assert.equal(await page.locator('#musicTranscriptOpen').isVisible(),false,'no transcript for non-library selection');await page.locator('#musicMenuClose').click();
   await page.locator('#musicCloudList .music-cloud-track').first().click();await page.locator('#musicMenuBtn').click();await page.locator('#musicTranscriptOpen').click();
-  const dialog=page.locator('#musicTranscriptDialog');await dialog.waitFor({state:'visible'});await page.waitForFunction(()=>!document.querySelector('#musicTranscriptDialog button').disabled&&document.querySelector('#musicTranscriptDialog video').readyState>=1);
+  const dialog=page.locator('#musicTranscriptDialog');assert.equal(await dialog.locator('input[type=file]').count(),0);await dialog.waitFor({state:'visible'});await page.waitForFunction(()=>!document.querySelector('#musicTranscriptDialog button').disabled&&document.querySelector('#musicTranscriptDialog video').readyState>=1);
   await dialog.getByRole('button',{name:'Tạo script',exact:true}).click();await page.locator('#musicTranscriptRows fieldset').waitFor();
-  assert.equal(requested.media.mimeType,'audio/mp4');assert.ok(requested.media.data.length>100);assert.equal(requested.reference,'');
+  assert.equal(requested.trackId,tracks[0].id);assert.equal(requested.media,undefined);assert.equal(requested.url,undefined);assert.equal(requested.reference,'');
   assert.equal(await dialog.getByRole('button',{name:'Xuất bản vào kho chung'}).isVisible(),false);
   await dialog.getByRole('button',{name:'Lưu script riêng'}).click();await page.waitForFunction(()=>HSKMusicTranscript.read(document.querySelector('#musicCloudList .music-cloud-track').dataset.trackId)?.value.status==='draft');
   const field=dialog.locator('fieldset');await field.locator('input[type=checkbox]').check();await field.locator('textarea').fill('明天见');assert.equal(await field.locator('input[type=checkbox]').isChecked(),false,'editing clears manual review');

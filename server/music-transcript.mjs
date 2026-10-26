@@ -1,10 +1,20 @@
 import Lyrics from '../src/modules/music/music-lyrics-core.js';
 export const MEDIA_LIMIT=6*1024*1024;
-const types=new Set(['audio/mpeg','audio/mp4','audio/wav','audio/ogg','audio/flac','video/mp4','video/webm']);
 export function validTranscriptInput(b){
- if(!b||Object.keys(b).some(k=>!['media','duration','reference'].includes(k))||!Number.isFinite(b.duration)||b.duration<=0||b.duration>480||typeof b.reference!=='string'||b.reference.length>12000)return false;
- const m=b.media;if(!m||!types.has(m.mimeType)||typeof m.data!=='string'||m.data.length<16||m.data.length>MEDIA_LIMIT/3*4||m.data.length%4||!/^[A-Za-z0-9+/]+={0,2}$/.test(m.data))return false;
- const s=atob(m.data.slice(0,64));return m.mimeType==='audio/mpeg'?s.startsWith('ID3')||s.charCodeAt(0)===255:m.mimeType.endsWith('/mp4')?s.slice(4,8)==='ftyp':m.mimeType==='audio/wav'?s.startsWith('RIFF')&&s.slice(8,12)==='WAVE':m.mimeType==='audio/ogg'?s.startsWith('OggS'):m.mimeType==='audio/flac'?s.startsWith('fLaC'):s.startsWith('\x1aE\xdf\xa3');
+ return !!b&&Object.keys(b).every(k=>['trackId','duration','reference'].includes(k))&&typeof b.trackId==='string'&&/^[a-f0-9]{64}\.(mp3|m4a)$/.test(b.trackId)&&Number.isFinite(b.duration)&&b.duration>0&&b.duration<=480&&typeof b.reference==='string'&&b.reference.length<=12000;
+}
+// Only the configured owner library may provide media. Never accept browser bytes or URLs.
+export async function libraryTranscriptMedia(trackId,{fetchFn,env,signal}){
+ const base=new URL(env.MUSIC_LIBRARY_ENDPOINT||'https://hsk-music-library.trung-hsk668.workers.dev');
+ if(base.protocol!=='https:'||base.username||base.password||base.pathname!=='/'||base.search||base.hash)throw Error('Cấu hình kho nhạc chưa hợp lệ.');
+ const response=await fetchFn(base.origin+'/audio/'+trackId,{signal,redirect:'error'});
+ if(response.status===404)throw Object.assign(Error('Chỉ bài do chủ kho tải lên và còn được xuất bản mới được tạo transcript.'),{status:404});
+ if(!response.ok)throw Error('Chưa tải được audio từ kho.');
+ if(Number(response.headers.get('Content-Length'))>MEDIA_LIMIT)throw Object.assign(Error('Bài trong kho vượt giới hạn transcript 6 MB.'),{status:413});
+ const reader=response.body?.getReader();if(!reader)throw Error('Bài trong kho chưa có audio.');
+ let size=0,binary='';while(true){const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>MEDIA_LIMIT){await reader.cancel();throw Object.assign(Error('Bài trong kho vượt giới hạn transcript 6 MB.'),{status:413});}for(let i=0;i<value.length;i+=8192)binary+=String.fromCharCode(...value.subarray(i,i+8192));}
+ if(!size)throw Error('Bài trong kho chưa có audio.');
+ return {mimeType:trackId.endsWith('.m4a')?'audio/mp4':'audio/mpeg',data:btoa(binary)};
 }
 const schema={type:'OBJECT',properties:{cues:{type:'ARRAY',items:{type:'OBJECT',properties:{start:{type:'NUMBER'},end:{type:'NUMBER'},text:{type:'STRING'},uncertain:{type:'BOOLEAN'},reason:{type:'STRING'}},required:['start','end','text','uncertain','reason']}}},required:['cues']};
 function checked(data,duration){
