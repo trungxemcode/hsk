@@ -377,7 +377,7 @@ html body.studio-enabled button.music-mini-save[aria-pressed=true]:not(.correct)
 .music-panel.music-player-dragging .music-stage{position:fixed;inset:0;z-index:85;overflow:auto;background:var(--palette-dark-paper);will-change:transform}
 .music-panel.music-player-dragging #musicMiniPlayer{display:block!important}
 html body.studio-enabled .music-mini-inner{padding:0 8px 0 0;gap:0}
-html body.studio-enabled button.music-mini-main:not(.correct):not(.wrong){align-self:stretch;padding:8px 12px!important;border-radius:var(--radius-none)!important;touch-action:none}
+html body.studio-enabled button.music-mini-main:not(.correct):not(.wrong){align-self:stretch;padding:8px 12px!important;border-radius:var(--radius-8px)!important;overflow:hidden;isolation:isolate;touch-action:none}
 html body.studio-enabled button.music-mini-main:not(.correct):not(.wrong):is(:hover,:active,:focus-visible){background:var(--button-active-bg)!important}
 
 /* The queue has its own surface; the ellipsis remains a separate action menu. */
