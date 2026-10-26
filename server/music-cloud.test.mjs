@@ -8,7 +8,7 @@ function setup(){
   async head(key){return objects.get(key)||null;},
   async get(key,options){const o=objects.get(key);if(!o)return null;const b=options?.range?o.bytes.subarray(options.range.offset,options.range.offset+options.range.length):o.bytes;return {body:new Response(b).body};},
   async delete(key){objects.delete(key);},
-  async put(key,value,options){const bytes=new Uint8Array(value);objects.set(key,{bytes,size:bytes.length,httpEtag:'"hash"',uploaded:new Date('2026-10-25'),customMetadata:options.customMetadata});}
+  async put(key,value,options){const bytes=typeof value==='string'?new TextEncoder().encode(value):new Uint8Array(value);objects.set(key,{bytes,size:bytes.length,httpEtag:'"hash"',uploaded:new Date('2026-10-25'),customMetadata:options.customMetadata});}
  }};
  const deps={fetchFn:async(_u,init)=>{const token=JSON.parse(init.body).idToken;return Response.json({users:[{localId:token==='owner'?OWNER_UID:'listener'}]});}};
  const req=(p,options={})=>new Request('https://music.example'+p,{...options,headers:{Origin:'https://hsk.example',...options.headers}});
@@ -43,4 +43,19 @@ test('only owner may delete published audio; private keys and malformed IDs rema
  assert.equal((await t.handle(t.req('/api/admin/tracks/private.json/delete',{method:'POST',headers:{Authorization:'Bearer owner'}}))).status,400);assert.equal(t.objects.size,1);
  const r=await remove('owner');assert.equal(r.status,200);assert.equal((await r.json()).deleted,true);assert.equal(t.objects.size,0);
  assert.equal((await (await t.handle(t.req('/api/library'))).json()).tracks.length,0);assert.equal((await t.handle(t.req('/audio/'+track.id))).status,404);assert.equal((await remove('owner')).status,404);
+});
+
+test('published lyrics sidecar is public-read, owner-write, bounded and deleted with audio',async()=>{
+ const t=setup(),track=(await (await t.handle(upload(t))).json()).track;
+ const path='/api/admin/tracks/'+track.id+'/lyrics',publicPath='/api/tracks/'+track.id+'/lyrics';
+ const body=JSON.stringify({cues:[{start:0,end:2,text:'你好',pinyin:'nǐ hǎo',vi:'Xin chào'}]});
+ const publish=(token,content=body)=>t.handle(t.req(path,{method:'POST',body:content,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'}}));
+ assert.equal((await publish('listener')).status,403);assert.equal((await t.handle(t.req(publicPath))).status,404);
+ assert.equal((await publish('owner','x'.repeat(500001))).status,413);
+ assert.equal((await publish('owner','{"cues":[]}')).status,400);
+ assert.equal((await publish('owner')).status,200);const value=await (await t.handle(t.req(publicPath))).json();assert.equal(value.cues[0].text,'你好');
+ const list=await (await t.handle(t.req('/api/library'))).json();assert.equal(list.tracks[0].hasLyrics,true);
+ const key='audio/'+track.id,original=t.objects.get(key).bytes;assert.deepEqual(original,mp3,'script publication never rewrites audio');
+ t.objects.get(key).customMetadata.published='false';assert.equal((await t.handle(t.req(publicPath))).status,404);t.objects.get(key).customMetadata.published='true';
+ await t.handle(t.req('/api/admin/tracks/'+track.id+'/delete',{method:'POST',headers:{Authorization:'Bearer owner'}}));assert.equal(t.objects.size,0);assert.equal((await t.handle(t.req(publicPath))).status,404);
 });

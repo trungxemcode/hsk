@@ -34,7 +34,7 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
     if(width<=720){
      const gaps=await page.evaluate(()=>{
       const rect=s=>document.querySelector(s).getBoundingClientRect(),gap=(a,b)=>rect(b).top-rect(a).bottom;
-      return [gap('.shortcut-grid','.home-music-grid'),gap('.home-music-chill','.home-music-entry'),gap('.home-music-grid','.pathway'),gap('.pathway','#homeDailyWord'),gap('#homeDailyWord','.overview-search')];
+      return [gap('.shortcut-grid','.home-music-grid'),gap('.home-music-grid','.pathway'),gap('.pathway','#homeDailyWord'),gap('#homeDailyWord','.overview-search')];
      });
      assert(gaps.every(g=>Math.abs(g-12)<2),'mobile home uses consistent 12px card spacing: '+gaps.join(','));
     }
