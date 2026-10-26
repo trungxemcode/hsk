@@ -1,4 +1,9 @@
-# Current task: compact music menu UX
+# Current task: mobile animation performance
+
+## Mobile animation performance (2026-10-26)
+Branch `fix/ios-animation-performance-20261026`, candidate 3.20.4. Stop the mobile shell observer self-loop with idempotent hidden setters; ignore independently rendered music/loading mutations. Decorate added controls incrementally instead of scanning the workspace on every text update. Coalesce music drag/scroll work with requestAnimationFrame; avoid playlist decoration on play-state changes and redundant nested menu entrance. Loading stage transitions use cancellable opacity WAAPI instead of forced offsetWidth layout. Audio lifecycle, MediaSession, sources and background playback are unchanged.
+
+Deterministic Chromium touch-viewport check: 30 clock updates went from 32 shell updates / 30 global button scans to 0 / 0; one burst of 10 drag events went from 11 style writes to 2. These are work counts, not physical iPhone FPS. New regression check runs in studio UI CI and is protected in feature contract. Passed mobile UX, loading, feature runtime390/1440, music DOM, design tokens, real AAC background/MediaSession and queue motion390/1440, compact menu390/1440. AAC checks require the Google Chrome headless-shell runtime, since stock Playwright Chromium lacks the fixture codec. Physical iPhone/Safari validation remains outstanding; local WebKit runtime cannot launch without missing system libraries. No live deployment or merge performed.
 
 ## AI failure recovery (2026-10-26)
 Owner stopped AI music transcription; live `/music-transcript` is disabled before provider/quota/R2 work. Manual LRC/SRT/JSON remains. Actual failures: 2.5 Flash 404/new-user access restriction; Gemini region400; then 3.8 overload503. Main text model stays3.5 Flash-Lite. Google states2.5 remains available to established users, not universally retired.
