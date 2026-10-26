@@ -34,8 +34,10 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
     if(width<=720){
      const gaps=await page.evaluate(()=>{
       const rect=s=>document.querySelector(s).getBoundingClientRect(),gap=(a,b)=>rect(b).top-rect(a).bottom;
-      return [gap('.shortcut-grid','.home-music-grid'),gap('.home-music-grid','.pathway'),gap('.pathway','#homeDailyWord'),gap('#homeDailyWord','.overview-search')];
+      return [gap('.shortcut-grid','.home-music-grid'),gap('.home-music-grid','.pathway'),gap('.pathway','.overview-search')];
      });
+     assert.equal(await page.locator('#mobileTodayHero').evaluate(n=>n.firstElementChild.id),'homeDailyWord','daily word leads mobile hero');
+     assert.equal(await page.locator('#homeDailyWord').count(),1,'one daily word with original controls');
      assert(gaps.every(g=>Math.abs(g-12)<2),'mobile home uses consistent 12px card spacing: '+gaps.join(','));
     }
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'no horizontal overflow');
