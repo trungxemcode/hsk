@@ -51,6 +51,9 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await page.locator('#musicPlaylistList .music-playlist-thumb').count(),0,'compact reference rows have no cover');
    assert.equal(await page.locator('#musicPlaylistList .music-playlist-head').count(),2);
    assert.equal(await page.locator('#musicPlaylistList .music-playlist-tools button').count(),4,'play/delete handlers retained inside expanded rows');
+   await page.locator('#musicMenuSheet').evaluate(n=>Promise.all(n.getAnimations({subtree:true}).filter(a=>a.effect?.getTiming().iterations!==Infinity).map(a=>a.finished.catch(()=>{}))));
+   const geometry=await page.locator('#musicPlaylistCreateBox summary').evaluate(n=>({height:n.getBoundingClientRect().height,pseudo:getComputedStyle(n,'::after').display,size:getComputedStyle(n).fontSize}));
+   assert.equal(geometry.pseudo,'none','one source chevron, no legacy pseudo-chevron');assert.equal(geometry.size,'13px');assert.equal(geometry.height,48);
    await page.screenshot({path:'/tmp/music-menu-fixed-library-'+width+'.png'});
    await page.locator('#musicPlaylistList .music-playlist-head').first().click();
    assert.equal(await page.locator('#musicPlaylistList .music-playlist-head').first().getAttribute('aria-expanded'),'true');
@@ -91,6 +94,8 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await page.locator('.music-quick-pick').count(),3,'two playlist pills plus add-new chip');
    assert.equal(await page.locator('.music-quick-pick-new').textContent(),'＋ Playlist mới');
    assert.equal(await page.locator('.music-quick-select-more > span').first().isVisible(),true,'multi-playlist link text must not be suppressed');
+   const icon=await page.locator('#musicPreviewPlaylistAdd .music-flat-chev svg path').evaluate(n=>({fill:getComputedStyle(n).fill,stroke:getComputedStyle(n).stroke}));assert.equal(icon.fill,'none');assert.notEqual(icon.stroke,'none');
+   await page.locator('#musicMenuSheet').evaluate(n=>Promise.all(n.getAnimations({subtree:true}).filter(a=>a.effect?.getTiming().iterations!==Infinity).map(a=>a.finished.catch(()=>{}))));
    await page.screenshot({path:'/tmp/music-menu-fixed-quick-'+width+'.png'});
    await page.locator('.music-quick-pick:not(.music-quick-pick-new)').first().click();
    assert.equal(await page.locator('.music-quick-pick:not(.music-quick-pick-new)').first().getAttribute('aria-pressed'),'true');
