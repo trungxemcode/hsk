@@ -115,7 +115,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
   }
   // Exercise an active learning day on every weekday, including Sunday rest-day defaults.
   // Seven study days is an explicit fixture choice, not a change to planner behavior.
-  await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.locator('#mobileTodayHero button').first().click();await page.locator('#planSetup').evaluate(d=>d.open=true);
+  await page.evaluate(()=>window.HSKStudio.navigate('home'));await page.locator('#mobileTodayHero .mobile-hero-top button').click();await page.locator('#planSetup').evaluate(d=>d.open=true);
   await page.locator('#planLevel').selectOption('2');await page.locator('#planDays').selectOption('7');await page.locator('#planBudget').fill('120');await page.locator('#planBudget').dispatchEvent('change');await page.locator('#planAI').check();
   assert.equal(await page.locator('.plan-choice').count(),3);await page.locator('#planForm button[type="submit"]').click();
   assert.equal(await page.evaluate(()=>window.HSKPlanner.plan.target),2);assert.equal(await page.evaluate(()=>window.HSKPlanner.plan.days),7);assert.equal(await page.locator('#planAIToggle').isChecked(),true);
