@@ -683,6 +683,9 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-browse
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-browse-col .music-recent-sub,html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-browse-col .music-row-copy small{display:block!important;font-size:12px!important;line-height:1.4!important;color:var(--mb-rd-muted)!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-recent-row.music-track-current{background:var(--mb-rd-playing-bg)!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-track-current::before{content:""!important;position:absolute!important;left:0!important;top:12px!important;bottom:12px!important;width:3px!important;border-radius:var(--mb-radius-8px)!important;background:var(--mb-rd-playing)!important;}
+/* The active queue entry already has a shaded row. Prevent the shared
+   playing marker from using the full-screen sheet as positioning parent. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicQueueSheet .music-queue-track.music-track-current::before{content:none!important;display:none!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-track-current .music-recent-title{color:var(--mb-rd-playing)!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-browse-col .music-recent-more{width:32px!important;height:36px!important;min-width:32px!important;padding:6px!important;border:0!important;background:var(--palette-transparent)!important;color:var(--mb-rd-muted)!important;box-shadow:none!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-eq{display:flex!important;gap:2px!important;align-items:center!important;height:18px!important;order:-1!important;}
