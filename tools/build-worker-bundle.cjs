@@ -10,12 +10,13 @@ const tutorCache=fs.readFileSync(path.join(server,'tutor-cache.mjs'),'utf8').rep
 const tutorStore=fs.readFileSync(path.join(server,'tutor-cache-store.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
 const accountRoles=fs.readFileSync(path.join(server,'account-roles.mjs'),'utf8').replace(/\r\n/g,'\n');
 const aiControl=fs.readFileSync(path.join(server,'ai-control.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
-const aiBackup=fs.readFileSync(path.join(server,'ai-backup.mjs'),'utf8').replace(/\r\n/g,'\n');
+const aiResilience=fs.readFileSync(path.join(server,'ai-resilience.mjs'),'utf8').replace(/\r\n/g,'\n');
+const aiBackup=fs.readFileSync(path.join(server,'ai-backup.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
 const geminiKeys=fs.readFileSync(path.join(server,'gemini-keys.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
 const voiceVerify=fs.readFileSync(path.join(server,'voice-partial-verify.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
 const voiceTts=fs.readFileSync(path.join(server,'voice-tts.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
 const lyricsCore=fs.readFileSync(path.join(root,'src/modules/music/music-lyrics-core.js'),'utf8').replace("typeof window!=='undefined'?window:globalThis",'holder');
 const transcript="const MusicTranscript=(()=>{const holder={};\n"+lyricsCore+"\nconst Lyrics=holder.HSKMusicLyricsCore;\n"+fs.readFileSync(path.join(server,'music-transcript.mjs'),'utf8').replace(/^import .*;\n/gm,'').replace(/^export /gm,'')+"\nreturn {validTranscriptInput,transcribeMusic,libraryTranscriptMedia,saveGeneratedTranscript};})();\nconst {validTranscriptInput,transcribeMusic,libraryTranscriptMedia,saveGeneratedTranscript}=MusicTranscript;\n";
 const handler=fs.readFileSync(path.join(server,'translator-worker.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'').trimStart();
-fs.writeFileSync(target,'// Standalone Cloudflare Worker. Generated from vocabulary + translator-worker.mjs.\nexport const vocabulary='+JSON.stringify(vocabulary)+';\n\n'+collector+'\n'+tutorCurriculum+'\n'+tutorCache+'\n'+tutorStore+'\n'+accountRoles+'\n'+aiControl+'\n'+aiBackup+'\n'+geminiKeys+'\n'+reading+'\n'+voiceVerify+'\n'+voiceTts+'\n'+transcript+'\n'+handler);
+fs.writeFileSync(target,'// Standalone Cloudflare Worker. Generated from vocabulary + translator-worker.mjs.\nexport const vocabulary='+JSON.stringify(vocabulary)+';\n\n'+collector+'\n'+tutorCurriculum+'\n'+tutorCache+'\n'+tutorStore+'\n'+accountRoles+'\n'+aiControl+'\n'+aiResilience+'\n'+aiBackup+'\n'+geminiKeys+'\n'+reading+'\n'+voiceVerify+'\n'+voiceTts+'\n'+transcript+'\n'+handler);
 console.log('Bundled worker synchronized; '+vocabulary.length+' vocabulary entries preserved.');

@@ -658,6 +658,21 @@
           "kind": "data_go",
           "file": "index.html",
           "value": "translator"
+        },
+        {
+          "kind": "file",
+          "file": "server/ai-resilience.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/ai-resilience.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/prepare-ai-resilience-live.cjs",
+          "value": ""
         }
       ]
     },

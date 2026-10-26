@@ -1,3 +1,4 @@
+import {aiErrorKind} from './ai-resilience.mjs';
 // Configured text provider; credentials remain in server secrets.
 // Never echo secrets, provider responses, prompts or source content into logs.
 export function backupConfigured(env){
@@ -77,7 +78,7 @@ export function createAiFailoverFetch(fetchFn,env,{
   const instruction=(body.systemInstruction?.parts||[]).map(p=>p.text||'').join('\n')+'\nReturn JSON only matching this response schema: '+JSON.stringify(body.generationConfig?.responseSchema||{});
   const gemini=async signal=>{
    const response=await fetchFn(url,{...init,signal});
-   if(!response.ok)return {response,retry:[401,403,404,408,429,500,502,503,504].includes(response.status)};
+   if(!response.ok)return {response,retry:[401,403,404,408,429,500,502,503,504].includes(response.status)||(response.status===400&&await aiErrorKind(response)==='region')};
    let json;try{json=await response.clone().json()}catch{return {response,retry:true}}
    const candidate=json.candidates?.[0];
    if(json.promptFeedback?.blockReason||candidate?.finishReason&&!['STOP','MAX_TOKENS'].includes(candidate.finishReason))return {response,retry:false};
