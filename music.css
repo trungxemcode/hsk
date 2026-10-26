@@ -1205,3 +1205,8 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuShe
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet#musicMenuSheet[data-view="library"] #musicMenuBody{padding-top:4px!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet#musicMenuSheet #musicStatus{background:var(--palette-transparent)!important;border:0!important;border-radius:var(--radius-none)!important;box-shadow:none!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet#musicMenuSheet #musicStatus.music-status-transient{visibility:hidden!important;}
+
+/* One rounded mini-player control, with a divider between song and actions. */
+html body.studio-enabled #musicMiniPlayer .music-mini-inner{padding:0!important;gap:0!important;border:1px solid var(--legacy-hex-ffffff1f);border-radius:var(--radius-8px);overflow:hidden;isolation:isolate;align-items:stretch}
+html body.studio-enabled #musicMiniPlayer button.music-mini-main:not(.correct):not(.wrong){border-radius:var(--radius-8px) 0 0 var(--radius-8px)!important}
+html body.studio-enabled #musicMiniPlayer .music-mini-actions{align-self:stretch;align-items:center;padding:8px;gap:4px;border-left:1px solid var(--legacy-hex-ffffff1f)}
