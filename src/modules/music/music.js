@@ -333,7 +333,7 @@
   const sheet=$('musicMenuSheet'),backdrop=$('musicMenuBackdrop');
   sheet.setAttribute('aria-hidden',String(!menuOpen));sheet.inert=!menuOpen;
   backdrop.setAttribute('aria-hidden',String(!menuOpen));
-  if(menuOpen)setMenuView('main');else resetDeleteArm();
+  if(menuOpen)setMenuView('main',false);else resetDeleteArm();
   if(menuOpen){
    ($('musicMenuBody')||sheet).scrollTop=0;syncMenuTrackHead();syncQuickSaveBtn();
    requestAnimationFrame(()=>{if(menuOpen)$('musicMenuClose').focus({preventScroll:true});});
@@ -389,7 +389,7 @@
  // Spotify-style compact action sheet: the main view lists only primary actions;
  // details (save picker, link import, library) open as dedicated sub-views.
  let menuViewAnimation=null;
- function setMenuView(view){
+ function setMenuView(view,animate=true){
   const sheet=$('musicMenuSheet');if(!sheet)return;
   if(currentMode!=='chill')view='main';
   closeQuickMenu();resetDeleteArm();
@@ -403,7 +403,7 @@
   // One compositor animation for the view, never read/write layout per row.
   const body=$('musicMenuBody')||sheet;
   menuViewAnimation?.cancel();menuViewAnimation=null;
-  if(menuOpen&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  if(animate&&menuOpen&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
    menuViewAnimation=body.animate([{opacity:0,transform:'translateX('+(view==='main'?-14:14)+'px)'},{opacity:1,transform:'translateX(0)'}],{duration:220,easing:'cubic-bezier(.22,.61,.36,1)'});
   }
   if(menuOpen)(view==='main'?$('musicMenuClose'):$('musicMenuSubCancel')).focus({preventScroll:true});
@@ -698,15 +698,16 @@
  };
  // Drag surfaces follow the pointer every frame; only snapping is animated.
  function bindMusicDrag(node,handlers){
-  let gesture=null,suppress=false;
+  let gesture=null,suppress=false,moveFrame=0;
+  const renderMove=()=>{moveFrame=0;const g=gesture;if(g?.moved)handlers.move(g.last-g.y,g.data);};
   node.addEventListener('click',e=>{if(suppress){e.preventDefault();e.stopImmediatePropagation();}},true);
   const start=(y,x)=>{gesture={y,x,last:y,time:performance.now(),moved:false,data:null};};
   const move=(y,x,e)=>{
    if(!gesture)return;const g=gesture,dy=y-g.y;
    if(!g.moved){if(Math.abs(dy)<4)return;if(Math.abs(x-g.x)>Math.abs(dy)){gesture=null;return;}g.data=handlers.start(dy);if(g.data===false){gesture=null;return;}g.moved=true;}
-   if(e.cancelable)e.preventDefault();if(e.pointerId!==undefined)node.setPointerCapture?.(e.pointerId);g.last=y;handlers.move(dy,g.data);
+   if(e.cancelable)e.preventDefault();if(e.pointerId!==undefined)node.setPointerCapture?.(e.pointerId);g.last=y;if(!moveFrame)moveFrame=requestAnimationFrame(renderMove);
   };
-  const end=cancel=>{if(!gesture)return;const g=gesture;gesture=null;if(g.moved){suppress=!cancel;setTimeout(()=>suppress=false,400);handlers.end(g.last-g.y,g.data,cancel,(g.last-g.y)/Math.max(1,performance.now()-g.time));}};
+  const end=cancel=>{if(!gesture)return;const g=gesture;if(moveFrame){cancelAnimationFrame(moveFrame);renderMove();}gesture=null;if(g.moved){suppress=!cancel;setTimeout(()=>suppress=false,400);handlers.end(g.last-g.y,g.data,cancel,(g.last-g.y)/Math.max(1,performance.now()-g.time));}};
   node.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'||e.button!==0||handlers.accept?.(e)===false)return;start(e.clientY,e.clientX);e.target.setPointerCapture?.(e.pointerId);});
   node.addEventListener('pointermove',e=>{if(e.pointerType!=='touch')move(e.clientY,e.clientX,e);});
   node.addEventListener('pointerup',e=>{if(e.pointerType!=='touch')end(false);});
@@ -1410,11 +1411,13 @@ window.addEventListener('hsk-account-ready',()=>{pendingImportLink='';pendingImp
    }
    const n=cloudList.querySelectorAll('.music-cloud-track').length;count.textContent=n+' bài';const text=cloudStatus.textContent,loading=/Đang (kết nối|cập nhật)/.test(text),error=/Không|không|Chưa|chưa|Đang dùng danh sách/.test(text)&&!loading;count.hidden=!n||error;cloudStatus.classList.toggle('music-cloud-normal',Boolean(n&&!error&&!loading));cloudSection.classList.toggle('music-cloud-loading',loading&&!n);refresh.setAttribute('aria-busy',String(loading));
   }
-  let frame=0;const schedule=()=>{if(!frame)frame=requestAnimationFrame(()=>{frame=0;if(!panel.ownerDocument.defaultView?.document||!hero.isConnected)return;decorate();sync();});};
-  new MutationObserver(schedule).observe(recent,{childList:true});new MutationObserver(schedule).observe($('musicBrowsePlaylistList'),{childList:true});new MutationObserver(schedule).observe(cloudList,{childList:true});new MutationObserver(schedule).observe(cloudStatus,{childList:true,characterData:true,subtree:true});
+  let frame=0,needsDecoration=false;const schedule=(decorateRows=false)=>{needsDecoration=needsDecoration||decorateRows;if(!frame)frame=requestAnimationFrame(()=>{frame=0;if(!panel.ownerDocument.defaultView?.document||!hero.isConnected)return;if(needsDecoration){needsDecoration=false;decorate();}sync();});};
+  const listChanged=()=>schedule(true);
+  new MutationObserver(listChanged).observe(recent,{childList:true});new MutationObserver(listChanged).observe($('musicBrowsePlaylistList'),{childList:true});new MutationObserver(listChanged).observe(cloudList,{childList:true});new MutationObserver(listChanged).observe(cloudStatus,{childList:true,characterData:true,subtree:true});
   function miniVisible(){return hero.hidden||$('musicHeroTitle').getBoundingClientRect().bottom< browse.getBoundingClientRect().top+8;}
   function handoff(){if(currentMode==='chill'&&!playerExpanded)mini.hidden=(!currentLinkUrl&&!savedLinks().length)||!miniVisible();}
-  browse.addEventListener('scroll',handoff,{passive:true});window.addEventListener('resize',handoff);
+  let handoffFrame=0;const scheduleHandoff=()=>{if(!handoffFrame)handoffFrame=requestAnimationFrame(()=>{handoffFrame=0;handoff();});};
+  browse.addEventListener('scroll',scheduleHandoff,{passive:true});window.addEventListener('resize',scheduleHandoff);
   function progress(){const cur=$('musicLinkElapsed').textContent,dur=$('musicLinkScrub').max;const a=$('musicHeroCur'),b=$('musicHeroDur');if(a.textContent!==cur)a.textContent=cur;const duration=Number(nativeLinkAudio?.duration);const total=Number.isFinite(duration)&&duration>0?fmtTime(duration):'--:--';if(b.textContent!==total)b.textContent=total;}
   let wasBrowse=false;
   function sync(){
@@ -1422,12 +1425,12 @@ window.addEventListener('hsk-account-ready',()=>{pendingImportLink='';pendingImp
    const active=currentLinkUrl||recentMusicRows()[0]?.url;hero.hidden=currentMode!=='chill'||!active;
    if(hero.hidden)return;let parsed;try{parsed=C.parseLink(active);}catch{hero.hidden=true;return;}const cached=metaCache[active],title=currentLinkUrl?currentLinkTitle:(recentMusicRows()[0]?.title||cached?.title),artist=currentLinkUrl?currentLinkAuthor:cached?.author;
    for(const [id,text] of [['musicHeroTitle',title||'Chọn bài để nghe'],['musicHeroArtist',artist||'HSK Music'],['musicHeroEyebrow',linkOptimisticPlay?'ĐANG PHÁT':'TIẾP TỤC NGHE']])if($(id).textContent!==text)$(id).textContent=text;
-   const pl=activePlaylistId&&savedPlaylists().find(p=>p.id===activePlaylistId);const source=pl?'Playlist: '+pl.name:cloudTracks.some(t=>t.url===active)?'Nguồn: Kho nhạc HSK':'Nguồn: '+(parsed.label||'Nhạc cá nhân');$('musicHeroSource').textContent=source;
+   const pl=activePlaylistId&&savedPlaylists().find(p=>p.id===activePlaylistId);const source=pl?'Playlist: '+pl.name:cloudTracks.some(t=>t.url===active)?'Nguồn: Kho nhạc HSK':'Nguồn: '+(parsed.label||'Nhạc cá nhân');if($('musicHeroSource').textContent!==source)$('musicHeroSource').textContent=source;
    const image=$('musicHeroThumb'),src=artworkForUrl(active);if(image.dataset.art!==src){image.dataset.art=src;image.src=src;image.onerror=()=>{image.onerror=null;image.src=fallbackArt;};}
-   const play=$('musicHeroPlay'),original=$('musicMiniPlay');play.classList.toggle('is-paused',original.getAttribute('aria-pressed')==='true');for(const attr of ['aria-pressed','aria-label','aria-busy']){const value=original.getAttribute(attr);if(value!==null)play.setAttribute(attr,value);}
+   const play=$('musicHeroPlay'),original=$('musicMiniPlay');play.classList.toggle('is-paused',original.getAttribute('aria-pressed')==='true');for(const attr of ['aria-pressed','aria-label','aria-busy']){const value=original.getAttribute(attr);if(value!==null&&play.getAttribute(attr)!==value)play.setAttribute(attr,value);}
    $('musicHeroSave').setAttribute('aria-pressed',$('musicMiniSave').getAttribute('aria-pressed')||'false');panel.classList.toggle('music-browse-playing',Boolean(linkOptimisticPlay));progress();handoff();
   }
-  new MutationObserver(schedule).observe($('musicMiniPlay'),{childList:true,attributes:true,attributeFilter:['aria-pressed','aria-label']});
+  new MutationObserver(()=>schedule()).observe($('musicMiniPlay'),{childList:true,attributes:true,attributeFilter:['aria-pressed','aria-label']});
   decorate();sync();return {sync,progress,miniVisible};
  }
  browsePresentation=installBrowsePresentation();

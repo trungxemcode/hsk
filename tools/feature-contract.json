@@ -159,6 +159,11 @@
           "kind": "file",
           "file": "tools/check-module-loading-ui.cjs",
           "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-ios-animation-ui.cjs",
+          "value": ""
         }
       ]
     },
