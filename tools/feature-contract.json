@@ -1654,6 +1654,52 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "music-admin-transcripts",
+      "name": "Admin tạo script chung trên máy chủ; người nghe lật ảnh bìa xem lời",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "server/music-transcript.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/music-transcript.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "src/modules/music/music-transcript.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-transcript-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/translator-worker.mjs",
+          "value": "/music-transcript"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music-lyrics-ui.js",
+          "value": "musicLyricsFlip"
+        },
+        {
+          "kind": "contains",
+          "file": "server/music-transcript.mjs",
+          "value": "saveGeneratedTranscript"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music-transcript.js",
+          "value": "api.isOwner()"
+        }
+      ]
     }
   ]
 }

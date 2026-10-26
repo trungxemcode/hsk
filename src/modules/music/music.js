@@ -1434,7 +1434,7 @@ window.addEventListener('hsk-account-ready',()=>{pendingImportLink='';pendingImp
  const legacy=el('section',undefined,'music-legacy-lessons');legacy.id='musicLegacyLessons';legacy.hidden=true;
  const oldEntry=document.querySelector('.home-music-entry');if(oldEntry){oldEntry.hidden=false;oldEntry.querySelector('strong').textContent='Bài luyện tập theo câu';oldEntry.querySelector('small').textContent='Bài có sẵn, nhập file và bài tập HSK';legacy.append(oldEntry);}
  cloudSection.append(legacy);
- timedLyrics=window.HSKMusicLyricsUI?.install({mode:()=>currentMode,track:()=>cloudTracks.find(t=>t.url===currentLinkUrl),menuTrack:()=>cloudTracks.find(t=>t.url===menuURL()),endpoint:cloudEndpoint,isOwner:()=>window.HSKAccountDashboard?.user?.uid===cloudOwner,publish:(id,value)=>importAPI('/api/admin/tracks/'+encodeURIComponent(id)+'/lyrics',value),refresh:refreshCloud,time:()=>nativeLinkAudio?.currentTime||0,duration:()=>nativeLinkAudio?.duration||0});
+ timedLyrics=window.HSKMusicLyricsUI?.install({expand:()=>setPlayerExpanded(true),pause:()=>nativeLinkAudio?.pause(),mode:()=>currentMode,track:()=>cloudTracks.find(t=>t.url===currentLinkUrl),menuTrack:()=>cloudTracks.find(t=>t.url===menuURL()),endpoint:cloudEndpoint,isOwner:()=>window.HSKAccountDashboard?.user?.uid===cloudOwner,publish:(id,value)=>importAPI('/api/admin/tracks/'+encodeURIComponent(id)+'/lyrics',value),refresh:refreshCloud,time:()=>nativeLinkAudio?.currentTime||0,duration:()=>nativeLinkAudio?.duration||0});
 
  window.dispatchEvent(new Event('hsk-music-ready'));
  // The entertainment library streams R2 audio; legacy device databases are not modified.

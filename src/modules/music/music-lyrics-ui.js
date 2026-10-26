@@ -9,14 +9,22 @@ root.HSKMusicLyricsUI={install(api){
  const head=el('div',undefined,'music-timed-head'),heading=el('h3','Lời bài hát'),follow=el('button','Theo nhạc'),lookup=el('button','Tra cứu AI');follow.type=lookup.type='button';follow.id='musicLyricsFollow';lookup.id='musicLyricsAsk';lookup.hidden=true;
  const note=el('p','','music-timed-note');note.id='musicTimedStatus';note.setAttribute('role','status');
  const words=el('div',undefined,'music-timed-words');words.id='musicTimedLyrics';words.tabIndex=0;words.lang='zh';words.setAttribute('aria-label','Lời bài hát chỉ đọc; nhấn giữ hoặc kéo để chọn chữ');
- head.append(heading,follow,lookup);box.append(head,note,words);$('musicLinkPreview').append(box);
+ head.append(heading,follow,lookup);box.append(head,note,words);const cover=$('musicLinkCover'),thumb=$('musicLinkThumb'),front=el('button','Lật xem lời','music-cover-flip-open'),back=el('button','Ảnh bìa');front.id='musicLyricsFlip';back.id='musicLyricsBack';front.type=back.type='button';front.hidden=true;front.setAttribute('aria-controls','musicTimedPanel');front.setAttribute('aria-expanded','false');back.setAttribute('aria-label','Lật lại ảnh bìa');head.prepend(back);cover.append(front,box);box.inert=true;box.setAttribute('aria-hidden','true');
+ function flip(show,focus=true){if(show&&!track?.hasLyrics)return;cover.classList.toggle('is-script-flipped',show);box.inert=!show;box.setAttribute('aria-hidden',String(!show));front.setAttribute('aria-expanded',String(show));thumb.setAttribute('aria-hidden',String(show));if(show){active=-1;tick(api.time(),api.duration());if(focus)back.focus({preventScroll:true});}else if(focus&&!front.hidden)front.focus({preventScroll:true});}
+ front.onclick=()=>flip(true);back.onclick=()=>flip(false);box.addEventListener('keydown',event=>{if(event.key==='Escape'){event.stopPropagation();flip(false);}});
+ const heroCover=$('musicHeroThumb')?.parentElement;
+ function openFromAvatar(event){if(!api.track()?.hasLyrics)return;event?.preventDefault();event?.stopPropagation();api.expand?.();flip(true);}
+ if(heroCover){heroCover.addEventListener('click',openFromAvatar);heroCover.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){openFromAvatar(event);}});}
+ $('musicMiniThumb')?.addEventListener('click',openFromAvatar);
+ function coverEligibility(has){front.hidden=!has;cover.classList.toggle('has-script-cover',has);if(heroCover){heroCover.dataset.script=String(has);if(has){heroCover.setAttribute('role','button');heroCover.tabIndex=0;heroCover.setAttribute('aria-label','Lật ảnh bìa để xem lời bài hát');}else{heroCover.removeAttribute('role');heroCover.removeAttribute('tabindex');heroCover.removeAttribute('aria-label');}}}
+
  const upload=el('button','Gắn script LRC / SRT / JSON','music-flat-row music-chill-only');upload.id='musicLyricsUpload';upload.type='button';upload.dataset.menuView='main';upload.hidden=true;
  const file=el('input');file.type='file';file.accept='.lrc,.srt,.json,text/plain,application/json';file.id='musicLyricsFile';file.hidden=true;
  const uploadStatus=el('p','','music-status');uploadStatus.id='musicLyricsUploadStatus';uploadStatus.dataset.menuView='main';uploadStatus.hidden=true;uploadStatus.setAttribute('role','status');
  $('musicMenuBody').append(upload,file,uploadStatus);
  const sourceIcon=$('musicMenuLibraryRow').querySelector('.music-flat-ico').cloneNode(true),uploadLabel=el('span',upload.textContent,'music-flat-label');upload.replaceChildren(sourceIcon,uploadLabel);
  function selection(){const s=getSelection();return s&&s.rangeCount&&!s.isCollapsed&&words.contains(s.anchorNode)&&words.contains(s.focusNode)?s.toString().trim().slice(0,280):'';}
- function clear(){request?.abort();request=null;++sequence;script=null;active=-1;selected='';selectionTrack='';lookup.hidden=true;words.replaceChildren();box.hidden=true;panel.classList.remove('music-has-script');root.dispatchEvent(new Event('hsk-music-context-end'));}
+ function clear(){flip(false,false);coverEligibility(false);request?.abort();request=null;++sequence;script=null;active=-1;selected='';selectionTrack='';lookup.hidden=true;words.replaceChildren();box.hidden=true;panel.classList.remove('music-has-script');root.dispatchEvent(new Event('hsk-music-context-end'));}
  function tick(time,duration){
   if(!script||panel.hidden||api.mode()!=='chill')return;
   const next=C.active(script.cues,time,duration||Infinity);if(next===active)return;
@@ -27,10 +35,10 @@ root.HSKMusicLyricsUI={install(api){
  async function load(next){
   if(next?.id===track?.id&&next?.lyricsRevision===track?.lyricsRevision)return;
   clear();track=next?{...next}:null;if(!next?.hasLyrics)return;
-  box.hidden=false;panel.classList.add('music-has-script');note.textContent='Đang tải lời bài hát…';const epoch=sequence,controller=new AbortController();request=controller;
+  box.hidden=false;coverEligibility(true);panel.classList.add('music-has-script');note.textContent='Đang tải lời bài hát…';const epoch=sequence,controller=new AbortController();request=controller;
   try{const response=await fetch(api.endpoint()+'/api/tracks/'+encodeURIComponent(next.id)+'/lyrics',{signal:controller.signal,cache:'no-store'});if(!response.ok)throw Error(response.status===404?'Chưa có script cho bài này.':'Chưa tải được lời bài hát.');const text=await response.text();if(controller.signal.aborted||epoch!==sequence)return;script=C.parse(text,'lyrics.json');
    words.replaceChildren(...script.cues.map((cue,i)=>{const row=el('p',undefined,'music-timed-line');row.dataset.cue=String(i);row.append(el('span',cue.text,'music-timed-text'));if(cue.pinyin)row.append(el('small',cue.pinyin,'music-timed-pinyin'));if(cue.vi)row.append(el('small',cue.vi,'music-timed-vi'));return row;}));
-   note.textContent='Nhấn giữ hoặc kéo chọn lời để tra cứu AI.';tick(api.time(),api.duration());
+   const shared=JSON.parse(text);note.textContent=(shared.status==='draft'?'Script AI · Chưa được admin duyệt. ':shared.reviewed===true?'Script đã được admin duyệt. ':'')+'Nhấn giữ hoặc kéo chọn lời để tra cứu AI.';tick(api.time(),api.duration());
   }catch(error){if(epoch===sequence&&error.name!=='AbortError'){note.textContent=error.message;const retry=el('button','Thử tải lại');retry.type='button';retry.onclick=()=>{track=null;load(next);};words.append(retry);}}
   finally{if(request===controller)request=null;}
  }
@@ -62,6 +70,8 @@ root.HSKMusicLyricsUI={install(api){
  new MutationObserver(sync).observe(panel,{attributes:true,attributeFilter:['class','hidden','data-music-mode']});
  new MutationObserver(sync).observe($('musicMenuSheet'),{attributes:true,attributeFilter:['data-view','aria-hidden']});
  root.addEventListener('hsk-account-ready',()=>{++uploadSequence;uploadBusy=false;upload.disabled=false;uploadStatus.hidden=true;file.value='';track=null;clear();});
- return {sync,tick,reset(){track=null;clear();}};
+ root.HSKMusicTranscript?.install({...api,sync:()=>{track=null;sync();}});
+
+ return {sync,tick,showLyrics:()=>flip(true),reset(){track=null;clear();}};
 }};
 })(window);

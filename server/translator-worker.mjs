@@ -1,3 +1,4 @@
+import {validTranscriptInput,transcribeMusic,libraryTranscriptMedia,saveGeneratedTranscript} from './music-transcript.mjs';
 import {OWNER_UID,accountRoleCall,roleProvider} from './account-roles.mjs';
 import {qaBegin,qaFinish,qaRelease,qaUsage} from './tutor-cache.mjs';
 import { vocabulary } from './hsk-vocabulary.mjs';
@@ -56,17 +57,18 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
   Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider, X-HSK-AI-Cache, X-HSK-Image-Remaining'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
-  const route=new URL(request.url).pathname,isRole=['/account-role','/admin/accounts','/admin/account-role'].includes(route),isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
-  if(!isRole&&route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading)return reply({error:'Không tìm thấy dịch vụ.'},404);
+  const route=new URL(request.url).pathname,isTranscript=route==='/music-transcript',isRole=['/account-role','/admin/accounts','/admin/account-role'].includes(route),isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
+  if(!isTranscript&&!isRole&&route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading)return reply({error:'Không tìm thấy dịch vụ.'},404);
   if(request.method!=='POST')return reply({error:'Yêu cầu không hợp lệ.'},405);
   if(!env.FIREBASE_API_KEY||!isRole&&!isSample&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
   const token=request.headers.get('Authorization')?.match(/^Bearer ([^\s]+)$/)?.[1],c=token&&token.length<5000?claims(token):null,project=env.FIREBASE_PROJECT_ID||'hsk-flashcards-44631';
   if(!c||c.aud!==project||c.iss!=='https://securetoken.google.com/'+project||typeof c.sub!=='string'||!c.sub||typeof c.exp!=='number'||c.exp<=now()/1000)return reply({error:'Hãy đăng nhập tài khoản app để dịch.'},401);
-  let body;try{body=await readBody(request,isSample?4096:isOcr?2100000:isHandwriting?550000:isLessonAsk?120000:isDictionaryTranslate?60000:20000);}catch{return reply({error:isOcr||isHandwriting?'Ảnh quá lớn hoặc không hợp lệ.':'Câu nhập không hợp lệ hoặc quá dài.'},400);}
+  let body;try{body=await readBody(request,isTranscript?60000:isSample?4096:isOcr?2100000:isHandwriting?550000:isLessonAsk?120000:isDictionaryTranslate?60000:20000);}catch{return reply({error:isOcr||isHandwriting?'Ảnh quá lớn hoặc không hợp lệ.':'Câu nhập không hợp lệ hoặc quá dài.'},400);}
   if(!body||typeof body!=='object')return reply({error:'Yêu cầu không hợp lệ.'},400);
-  if(!isRole&&!isDictionaryRoute&&!isDictionaryTranslate&&!isOcr&&!isSample&&!isHandwriting&&!isReading&&(!Number.isInteger(body.hsk)||body.hsk<1||body.hsk>6))return reply({error:'Chọn trình độ HSK 1–6.'},400);
+  if(!isTranscript&&!isRole&&!isDictionaryRoute&&!isDictionaryTranslate&&!isOcr&&!isSample&&!isHandwriting&&!isReading&&(!Number.isInteger(body.hsk)||body.hsk<1||body.hsk>6))return reply({error:'Chọn trình độ HSK 1–6.'},400);
   if(!isRole&&!isOcr&&!isAsk&&!isSample&&body.direction!==undefined&&!['vi-zh','zh-vi'].includes(body.direction))return reply({error:'Chọn chiều dịch hợp lệ.'},400);
-  if(isRole){if(Object.keys(body).some(k=>!['uid','email','role','cursor'].includes(k)))return reply({error:'Yêu cầu quản lý quyền không hợp lệ.'},400);}
+  if(isTranscript){if(!validTranscriptInput(body))return reply({error:'Chỉ bài đã xuất bản trong kho của chủ app mới được tạo transcript (tối đa 8 phút).'},400);if(!env.AI_CONTROL)return reply({error:'Chưa kết nối hạn mức transcript.'},503);}
+  else if(isRole){if(Object.keys(body).some(k=>!['uid','email','role','cursor'].includes(k)))return reply({error:'Yêu cầu quản lý quyền không hợp lệ.'},400);}
   else if(isSample){if(!validateHandwritingSample(body))return reply({error:'Mẫu góp phải là một chữ Hán đã xác nhận và ảnh nét hợp lệ.'},400);}
   else if(isHandwriting){
    const im=body.image;
@@ -99,12 +101,13 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    if(typeof body.question!=='string'||!body.question.trim()||body.question.length>500||!t||typeof t.vietnamese!=='string'||!t.vietnamese.trim()||t.vietnamese.length>4000||typeof t.chinese!=='string'||!t.chinese.trim()||t.chinese.length>2000||typeof t.pinyin!=='string'||t.pinyin.length>2000||typeof t.explanation!=='string'||t.explanation.length>2000||!Array.isArray(h)||h.length>8||!h.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.text==='string'&&m.text.length<=1000))return reply({error:'Câu hỏi hoặc ngữ cảnh không hợp lệ.'},400);
   }else if(typeof body.text!=='string'||!body.text.trim()||body.text.length>500)return reply({error:'Nhập câu tối đa 500 ký tự.'},400);
 
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isOcr?110000:isReading?85000:isAsk?45000:60000);
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isTranscript?140000:isOcr?110000:isReading?85000:isAsk?45000:60000);
   const abortRequest=()=>controller.abort();if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',abortRequest,{once:true});
   try{
    const auth=await fetchFn('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(env.FIREBASE_API_KEY),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token}),signal:controller.signal});
    if(!auth.ok)return reply({error:'Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại.'},401);
    const account=(await auth.json()).users?.[0];if(!account||account.localId!==c.sub||account.disabled)return reply({error:'Tài khoản không được phép dịch.'},401);
+   if(isTranscript&&account.localId!==OWNER_UID)return reply({error:'Chỉ admin được tạo và cập nhật script bài hát.'},403);
    const restricted=(env.ALLOWED_UIDS||'').split(',').filter(Boolean);if(restricted.length&&!restricted.includes(c.sub))return reply({error:'Tài khoản chưa được bật dịch câu.'},403);
    if(isSample){const result=await submitHandwritingSample(body,c.sub,env,now());return reply(result.body,result.status);}
    const isAdmin=(isRole||env.AI_ACCOUNT_ROLES_ENABLED==='true')?account.localId===OWNER_UID:(env.ADMIN_UIDS||'').split(',').map(uid=>uid.trim()).filter(Boolean).includes(account.localId);
@@ -134,8 +137,10 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
     }
     abuseLease=lease;abuseUid=account.localId;
    }
+   let previousMusicScript=null;
+   if(isTranscript){try{previousMusicScript=await env.MUSIC_BUCKET?.head('lyrics/'+body.trackId+'.json');body.media=await libraryTranscriptMedia(body.trackId,{fetchFn:rawFetchFn,env,signal:controller.signal});}catch(e){return reply({error:e.message||'Chưa xác minh được bài trong kho.'},e.status||502);}}
    // Per-isolate cooldown reduces double submissions; provider free-tier quotas remain the global limit.
-   const cooldownKey=(isReading?'reading:':isDictionaryTranslate?'dictionary-translate:':isHandwriting?'handwriting:':isOcr?'ocr:':isAsk?'ask:':'translate:')+c.sub;
+   const cooldownKey=(isTranscript?'transcript:':isReading?'reading:':isDictionaryTranslate?'dictionary-translate:':isHandwriting?'handwriting:':isOcr?'ocr:':isAsk?'ask:':'translate:')+c.sub;
    if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true'&&(cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
    if(cooldowns.size>1000)for(const [uid,t] of cooldowns)if(t<=now())cooldowns.delete(uid);
    if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true')cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
@@ -161,7 +166,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
     readingLocked=!!lock?.acquired;
    }
    try{
-    const budget=await controlCall(env,'reserve',{uid:c.sub,imageLimited:verifiedRole==='regular'&&(isOcr||isHandwriting),newAccount:Number(account.createdAt)>now()-86400000,route:isReading?'reading':isOcr?'ocr':isHandwriting?'handwriting':isPlan?'study-plan':isAsk?'ask':'translate'});
+    const budget=await controlCall(env,'reserve',{uid:c.sub,imageLimited:verifiedRole==='regular'&&(isOcr||isHandwriting),newAccount:Number(account.createdAt)>now()-86400000,route:isTranscript?'music-transcript':isReading?'reading':isOcr?'ocr':isHandwriting?'handwriting':isPlan?'study-plan':isAsk?'ask':'translate'});
     if(budget&&Number.isInteger(budget.remainingImageDay))headers['X-HSK-Image-Remaining']=String(budget.remainingImageDay);
     if(budget&&!budget.allowed){
      const message=budget.reason==='user-image-daily'?'Bạn đã dùng hết 10 lượt AI hình ảnh hôm nay. Hạn mức được đặt lại lúc 00:00 giờ Việt Nam.':budget.reason==='new-user-reading-daily'?'Tài khoản trong 24 giờ đầu có tối đa 3 lượt tạo bài đọc/ngày.':budget.reason==='new-user-query-daily'?'Tài khoản trong 24 giờ đầu có tối đa 10 lượt truy vấn AI/ngày.':budget.reason==='new-user-daily'?'Tài khoản trong 24 giờ đầu có tối đa 13 lượt AI/ngày.':budget.reason==='user-reading-daily'?'Bạn đã dùng hết 15 lượt tạo bài đọc hôm nay. Vẫn có thể đọc lại bài đã lưu.':budget.reason==='user-query-daily'?'Bạn đã dùng hết 35 lượt truy vấn AI hôm nay. Vẫn có thể tạo bài đọc nếu còn lượt.':budget.reason==='user-daily'?'Bạn đã dùng hết 50 lượt AI hôm nay.':budget.reason==='global-minute'?'App đang có nhiều yêu cầu AI. Hãy thử lại sau một phút.':'App đã đạt giới hạn AI chung trong ngày.';
@@ -176,6 +181,10 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
     }
    }finally{
     if(readingLocked)await controlCall(env,'unlock',{key:readingKey}).catch(()=>{});
+   }
+   if(isTranscript){
+    const reserve=async()=>{const budget=await controlCall(env,'reserve',{uid:c.sub,route:'music-transcript',newAccount:Number(account.createdAt)>now()-86400000});if(!budget?.allowed)throw Object.assign(Error('Không đủ lượt AI cho bước đối chiếu. Transcript chưa được lưu.'),{status:429});};
+    try{const result=await transcribeMusic(body,{fetchFn:keyFetch,env,signal:controller.signal,reserve});return reply(await saveGeneratedTranscript(body.trackId,result,env,previousMusicScript,controller.signal));}catch(e){return reply({error:e.name==='AbortError'?'Transcript quá lâu. Hãy thử đoạn ngắn hơn.':e.message||'Chưa nhận diện được lời bài hát.'},e.status||502);}
    }
    if(isPlan){
     if(!/^[a-z0-9.-]+$/.test(model))return reply({error:'Cấu hình mô hình chưa hợp lệ.'},503);
