@@ -24,7 +24,7 @@ wordBox.id='homeDailyWord';wordHead.append(make('h3','Từ vựng hôm nay'),but
 const wordHome=document.createComment('daily word desktop position');wordBox.before(wordHome);
 function pool(){try{return typeof words!=='undefined'?words:[];}catch{return [];}}
 function render(){frame=0;const p=window.HSKPlanner?.plan,key=new Date(Date.now()+7*3600000).toISOString().slice(0,10),seconds=Math.max(0,Number(p?.journal?.[key]?.seconds)||0),minutes=Math.floor(seconds/60);
-const mobile=document.body.classList.contains('mobile-ux');if(mobile&&wordBox.parentElement!==hero)hero.prepend(wordBox);else if(!mobile&&wordBox.parentElement===hero)wordHome.after(wordBox);if(mobile&&$('planToday').parentElement!==tasks)tasks.append($('planToday'));else if(!mobile&&$('planToday').parentElement===tasks)planAnchor.after($('planToday'));
+const mobile=document.body.classList.contains('mobile-ux');if(mobile&&hero.previousElementSibling!==wordBox)hero.before(wordBox);else if(!mobile&&wordHome.nextSibling!==wordBox)wordHome.after(wordBox);if(mobile&&$('planToday').parentElement!==tasks)tasks.append($('planToday'));else if(!mobile&&$('planToday').parentElement===tasks)planAnchor.after($('planToday'));
 if(mobile!==lastMobile){searchDetails.open=!mobile;lastMobile=mobile;}
 if(document.body.dataset.studioHub==='home'){if(notice.parentElement!==home)home.prepend(notice);}else if(notice.parentElement===home)noticeAnchor.after(notice);
 meter.hidden=!p;tasks.hidden=!p;if(p){write(time,`${minutes} / ${p.minutes} phút hôm nay`);const value=Math.min(1,seconds/(Math.max(1,p.minutes)*60));if(progress.value!==value)progress.value=value;}
