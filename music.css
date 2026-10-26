@@ -377,7 +377,7 @@ html body.studio-enabled button.music-mini-save[aria-pressed=true]:not(.correct)
 .music-panel.music-player-dragging .music-stage{position:fixed;inset:0;z-index:85;overflow:auto;background:var(--palette-dark-paper);will-change:transform}
 .music-panel.music-player-dragging #musicMiniPlayer{display:block!important}
 html body.studio-enabled .music-mini-inner{padding:0 8px 0 0;gap:0}
-html body.studio-enabled button.music-mini-main:not(.correct):not(.wrong){align-self:stretch;padding:8px 12px!important;border-radius:var(--radius-none)!important;touch-action:none}
+html body.studio-enabled button.music-mini-main:not(.correct):not(.wrong){align-self:stretch;padding:8px 12px!important;border-radius:var(--radius-8px)!important;overflow:hidden;isolation:isolate;touch-action:none}
 html body.studio-enabled button.music-mini-main:not(.correct):not(.wrong):is(:hover,:active,:focus-visible){background:var(--button-active-bg)!important}
 
 /* The queue has its own surface; the ellipsis remains a separate action menu. */
@@ -1205,3 +1205,8 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuShe
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet#musicMenuSheet[data-view="library"] #musicMenuBody{padding-top:4px!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet#musicMenuSheet #musicStatus{background:var(--palette-transparent)!important;border:0!important;border-radius:var(--radius-none)!important;box-shadow:none!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicMenuSheet#musicMenuSheet #musicStatus.music-status-transient{visibility:hidden!important;}
+
+/* One rounded mini-player control, with a divider between song and actions. */
+html body.studio-enabled #musicMiniPlayer .music-mini-inner{padding:0!important;gap:0!important;border:1px solid var(--legacy-hex-ffffff1f);border-radius:var(--radius-8px);overflow:hidden;isolation:isolate;align-items:stretch}
+html body.studio-enabled #musicMiniPlayer button.music-mini-main:not(.correct):not(.wrong){border-radius:var(--radius-8px) 0 0 var(--radius-8px)!important}
+html body.studio-enabled #musicMiniPlayer .music-mini-actions{align-self:stretch;align-items:center;padding:8px;gap:4px;border-left:1px solid var(--legacy-hex-ffffff1f)}
