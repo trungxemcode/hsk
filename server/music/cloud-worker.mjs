@@ -35,7 +35,7 @@ export async function handleCloudMusic(request,env,ctx={},deps={}){
     const reader=request.body?.getReader();if(!reader)return json({error:'Chưa có script.'},400);let size=0;const chunks=[];
     while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>Lyrics.MAX_BYTES){await reader.cancel();return json({error:'Script tối đa 500 KB.'},413);}chunks.push(value);}
     const bytes=new Uint8Array(size);let at=0;for(const chunk of chunks){bytes.set(chunk,at);at+=chunk.length;}
-    let value;try{value=Lyrics.validate(JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes)));}catch(error){return json({error:error.message||'Script chưa hợp lệ.'},400);}
+    let value;try{const input=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));value=Lyrics.validate(input);if(input.reviewed===true&&input.status==='reviewed')value={...value,status:'reviewed',reviewed:true};}catch(error){return json({error:error.message||'Script chưa hợp lệ.'},400);}
     const revision=crypto.randomUUID();await env.MUSIC_BUCKET.put(key,JSON.stringify(value),{httpMetadata:{contentType:'application/json; charset=utf-8',cacheControl:'no-store'},customMetadata:{revision}});
     return json({saved:true,id,revision,cues:value.cues.length});
    }

@@ -1,4 +1,4 @@
-import {validTranscriptInput,transcribeMusic,libraryTranscriptMedia} from './music-transcript.mjs';
+import {validTranscriptInput,transcribeMusic,libraryTranscriptMedia,saveGeneratedTranscript} from './music-transcript.mjs';
 import {OWNER_UID,accountRoleCall,roleProvider} from './account-roles.mjs';
 import {qaBegin,qaFinish,qaRelease,qaUsage} from './tutor-cache.mjs';
 import { vocabulary } from './hsk-vocabulary.mjs';
@@ -107,6 +107,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    const auth=await fetchFn('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(env.FIREBASE_API_KEY),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token}),signal:controller.signal});
    if(!auth.ok)return reply({error:'Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại.'},401);
    const account=(await auth.json()).users?.[0];if(!account||account.localId!==c.sub||account.disabled)return reply({error:'Tài khoản không được phép dịch.'},401);
+   if(isTranscript&&account.localId!==OWNER_UID)return reply({error:'Chỉ admin được tạo và cập nhật script bài hát.'},403);
    const restricted=(env.ALLOWED_UIDS||'').split(',').filter(Boolean);if(restricted.length&&!restricted.includes(c.sub))return reply({error:'Tài khoản chưa được bật dịch câu.'},403);
    if(isSample){const result=await submitHandwritingSample(body,c.sub,env,now());return reply(result.body,result.status);}
    const isAdmin=(isRole||env.AI_ACCOUNT_ROLES_ENABLED==='true')?account.localId===OWNER_UID:(env.ADMIN_UIDS||'').split(',').map(uid=>uid.trim()).filter(Boolean).includes(account.localId);
@@ -136,7 +137,8 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
     }
     abuseLease=lease;abuseUid=account.localId;
    }
-   if(isTranscript){try{body.media=await libraryTranscriptMedia(body.trackId,{fetchFn:rawFetchFn,env,signal:controller.signal});}catch(e){return reply({error:e.message||'Chưa xác minh được bài trong kho.'},e.status||502);}}
+   let previousMusicScript=null;
+   if(isTranscript){try{previousMusicScript=await env.MUSIC_BUCKET?.head('lyrics/'+body.trackId+'.json');body.media=await libraryTranscriptMedia(body.trackId,{fetchFn:rawFetchFn,env,signal:controller.signal});}catch(e){return reply({error:e.message||'Chưa xác minh được bài trong kho.'},e.status||502);}}
    // Per-isolate cooldown reduces double submissions; provider free-tier quotas remain the global limit.
    const cooldownKey=(isTranscript?'transcript:':isReading?'reading:':isDictionaryTranslate?'dictionary-translate:':isHandwriting?'handwriting:':isOcr?'ocr:':isAsk?'ask:':'translate:')+c.sub;
    if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true'&&(cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
@@ -182,7 +184,7 @@ export function createHandler(rawFetchFn=fetch,now=()=>Date.now()){
    }
    if(isTranscript){
     const reserve=async()=>{const budget=await controlCall(env,'reserve',{uid:c.sub,route:'music-transcript',newAccount:Number(account.createdAt)>now()-86400000});if(!budget?.allowed)throw Object.assign(Error('Không đủ lượt AI cho bước đối chiếu. Transcript chưa được lưu.'),{status:429});};
-    try{return reply(await transcribeMusic(body,{fetchFn:keyFetch,env,signal:controller.signal,reserve}));}catch(e){return reply({error:e.name==='AbortError'?'Transcript quá lâu. Hãy thử đoạn ngắn hơn.':e.message||'Chưa nhận diện được lời bài hát.'},e.status||502);}
+    try{const result=await transcribeMusic(body,{fetchFn:keyFetch,env,signal:controller.signal,reserve});return reply(await saveGeneratedTranscript(body.trackId,result,env,previousMusicScript,controller.signal));}catch(e){return reply({error:e.name==='AbortError'?'Transcript quá lâu. Hãy thử đoạn ngắn hơn.':e.message||'Chưa nhận diện được lời bài hát.'},e.status||502);}
    }
    if(isPlan){
     if(!/^[a-z0-9.-]+$/.test(model))return reply({error:'Cấu hình mô hình chưa hợp lệ.'},503);

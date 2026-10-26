@@ -3,18 +3,24 @@ export const MEDIA_LIMIT=6*1024*1024;
 export function validTranscriptInput(b){
  return !!b&&Object.keys(b).every(k=>['trackId','duration','reference'].includes(k))&&typeof b.trackId==='string'&&/^[a-f0-9]{64}\.(mp3|m4a)$/.test(b.trackId)&&Number.isFinite(b.duration)&&b.duration>0&&b.duration<=480&&typeof b.reference==='string'&&b.reference.length<=12000;
 }
-// Only the configured owner library may provide media. Never accept browser bytes or URLs.
-export async function libraryTranscriptMedia(trackId,{fetchFn,env,signal}){
- const base=new URL(env.MUSIC_LIBRARY_ENDPOINT||'https://hsk-music-library.trung-hsk668.workers.dev');
- if(base.protocol!=='https:'||base.username||base.password||base.pathname!=='/'||base.search||base.hash)throw Error('Cấu hình kho nhạc chưa hợp lệ.');
- const response=await fetchFn(base.origin+'/audio/'+trackId,{signal,redirect:'error'});
- if(response.status===404)throw Object.assign(Error('Chỉ bài do chủ kho tải lên và còn được xuất bản mới được tạo transcript.'),{status:404});
- if(!response.ok)throw Error('Chưa tải được audio từ kho.');
- if(Number(response.headers.get('Content-Length'))>MEDIA_LIMIT)throw Object.assign(Error('Bài trong kho vượt giới hạn transcript 6 MB.'),{status:413});
- const reader=response.body?.getReader();if(!reader)throw Error('Bài trong kho chưa có audio.');
- let size=0,binary='';while(true){const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>MEDIA_LIMIT){await reader.cancel();throw Object.assign(Error('Bài trong kho vượt giới hạn transcript 6 MB.'),{status:413});}for(let i=0;i<value.length;i+=8192)binary+=String.fromCharCode(...value.subarray(i,i+8192));}
+// Read only owner-published R2 audio; clients cannot provide bytes or source URLs.
+export async function libraryTranscriptMedia(trackId,{env,signal}){
+ const bucket=env.MUSIC_BUCKET;if(!bucket)throw Object.assign(Error('Chưa kết nối kho nhạc với dịch vụ transcript.'),{status:503});
+ const head=await bucket.head('audio/'+trackId);
+ if(!head||head.customMetadata?.published!=='true')throw Object.assign(Error('Chỉ bài do chủ kho tải lên và còn được xuất bản mới được tạo transcript.'),{status:404});
+ if(head.size>MEDIA_LIMIT)throw Object.assign(Error('Bài trong kho vượt giới hạn transcript 6 MB.'),{status:413});
+ const object=await bucket.get('audio/'+trackId),reader=object?.body?.getReader();if(!reader)throw Error('Bài trong kho chưa có audio.');
+ let size=0,binary='';while(true){if(signal?.aborted){await reader.cancel();throw new DOMException('Canceled','AbortError');}const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>MEDIA_LIMIT){await reader.cancel();throw Object.assign(Error('Bài trong kho vượt giới hạn transcript 6 MB.'),{status:413});}for(let i=0;i<value.length;i+=8192)binary+=String.fromCharCode(...value.subarray(i,i+8192));}
  if(!size)throw Error('Bài trong kho chưa có audio.');
  return {mimeType:trackId.endsWith('.m4a')?'audio/mp4':'audio/mpeg',data:btoa(binary)};
+}
+export async function saveGeneratedTranscript(trackId,value,env,previous,signal){
+ if(signal?.aborted)throw new DOMException('Canceled','AbortError');
+ const head=await env.MUSIC_BUCKET.head('audio/'+trackId);if(!head||head.customMetadata?.published!=='true')throw Object.assign(Error('Bài hát đã bị gỡ; không lưu script.'),{status:404});
+ const source=JSON.stringify({...value,status:'draft',reviewed:false});if(new TextEncoder().encode(source).length>Lyrics.MAX_BYTES)throw Error('Script vượt giới hạn 500 KB; chưa lưu.');
+ const revision=crypto.randomUUID(),saved=await env.MUSIC_BUCKET.put('lyrics/'+trackId+'.json',source,{httpMetadata:{contentType:'application/json; charset=utf-8',cacheControl:'no-store'},customMetadata:{revision},onlyIf:previous?{etagMatches:previous.etag}:{etagDoesNotMatch:'*'}});
+ if(!saved)throw Object.assign(Error('Script đã thay đổi trong khi tạo. Hãy tải lại để giữ bản mới nhất.'),{status:409});
+ return {...value,status:'draft',reviewed:false,saved:true,revision};
 }
 const schema={type:'OBJECT',properties:{cues:{type:'ARRAY',items:{type:'OBJECT',properties:{start:{type:'NUMBER'},end:{type:'NUMBER'},text:{type:'STRING'},uncertain:{type:'BOOLEAN'},reason:{type:'STRING'}},required:['start','end','text','uncertain','reason']}}},required:['cues']};
 function checked(data,duration){

@@ -54,6 +54,7 @@ test('published lyrics sidecar is public-read, owner-write, bounded and deleted 
  assert.equal((await publish('owner','x'.repeat(500001))).status,413);
  assert.equal((await publish('owner','{"cues":[]}')).status,400);
  assert.equal((await publish('owner')).status,200);const value=await (await t.handle(t.req(publicPath))).json();assert.equal(value.cues[0].text,'你好');
+ const reviewed=JSON.stringify({...JSON.parse(body),status:'reviewed',reviewed:true});assert.equal((await publish('owner',reviewed)).status,200);assert.equal((await (await t.handle(t.req(publicPath))).json()).reviewed,true);
  const list=await (await t.handle(t.req('/api/library'))).json();assert.equal(list.tracks[0].hasLyrics,true);
  const key='audio/'+track.id,original=t.objects.get(key).bytes;assert.deepEqual(original,mp3,'script publication never rewrites audio');
  t.objects.get(key).customMetadata.published='false';assert.equal((await t.handle(t.req(publicPath))).status,404);t.objects.get(key).customMetadata.published='true';

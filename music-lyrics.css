@@ -4,8 +4,6 @@ html body.studio-enabled .home-music-grid{grid-template-columns:minmax(0,1fr)!im
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLegacyLessons{margin:16px 0 0;padding:12px 0;border-top:1px solid var(--mb-rd-line-soft)}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLegacyLessons[hidden]{display:none!important}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLegacyLessons .home-music-entry{width:100%;margin:0}
-html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-has-script.music-player-expanded #musicLinkPreview:not([hidden]){width:min(100%,1040px)!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,.6fr) auto auto auto minmax(160px,1fr)!important;gap:8px!important;touch-action:pan-y!important}
-html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-has-script #musicTimedPanel{display:flex!important;flex-direction:column!important;min-height:0!important;width:100%!important;overflow:hidden!important;align-self:stretch!important;grid-column:1!important;grid-row:5!important;touch-action:pan-y!important;text-align:left!important;padding:8px 4px!important;gap:6px!important}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicTimedPanel[hidden]{display:none!important}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-head{display:flex!important;gap:8px!important;align-items:center!important;flex-wrap:wrap!important;flex:none!important}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-head h3{font-size:14px!important;line-height:1.4!important;font-weight:650!important;color:var(--mb-rd-ink)!important;margin:0 auto 0 0!important}
@@ -19,14 +17,6 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line small{display:block!important;font-size:13px!important;font-weight:400!important;line-height:1.5!important;color:var(--mb-rd-muted)!important;margin-top:4px!important}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLyricsUploadStatus:empty{display:none!important}
 html body.studio-enabled #lessonChatPanel:not([hidden]){z-index:160!important}
-@media(min-width:900px){
- html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-has-script.music-player-expanded #musicLinkPreview:not([hidden]){grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)!important;grid-template-rows:minmax(0,1fr) auto auto auto!important;column-gap:40px!important}
- html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-has-script #musicLinkCover{grid-column:1!important;grid-row:1!important;width:min(100%,320px)!important}
- html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-has-script #musicLinkPreview>.music-np-meta{grid-column:1!important;grid-row:2!important}
- html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-has-script #musicLinkScrubRow{grid-column:1!important;grid-row:3!important}
- html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-has-script #musicLinkControls{grid-column:1!important;grid-row:4!important}
- html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-has-script #musicTimedPanel{grid-column:2!important;grid-row:1/5!important}
-}
 @media(prefers-reduced-motion:reduce){html body #musicTimedLyrics *,html body .music-timed-line{transition:none!important;scroll-behavior:auto!important}}
 
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel.music-has-script.music-player-expanded .music-stage{touch-action:pan-y!important}
@@ -44,3 +34,17 @@ html body.studio-enabled .home-music-grid .home-music-entry[hidden]{display:none
 .music-transcript-dialog fieldset{min-width:0;border:1px solid var(--legacy-hex-ffffff1f);border-radius:var(--radius-8px);margin-block:16px}
 .music-transcript-dialog p{line-height:1.55}
 .music-transcript-dialog input[type=checkbox]{width:20px;height:20px;vertical-align:middle;margin-right:8px}
+
+/* The cover and read-only lyrics are two faces of the same card. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover.has-script-cover{perspective:1100px!important;overflow:hidden!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover.has-script-cover #musicLinkThumb{backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;transform:rotateY(0deg);transition:transform 460ms cubic-bezier(.2,.7,.2,1)!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicLyricsFlip{position:absolute!important;inset:0!important;z-index:3!important;width:100%!important;height:100%!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;padding:14px!important;border:0!important;border-radius:var(--radius-18px)!important;box-shadow:none!important;background:var(--palette-clear)!important;color:var(--mb-rd-ink)!important;font-size:12px!important;cursor:pointer!important;touch-action:manipulation!important;backface-visibility:hidden;transition:visibility 0s 230ms!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicLyricsFlip[hidden]{display:none!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicTimedPanel{box-sizing:border-box!important;position:absolute!important;inset:0!important;z-index:2!important;display:flex!important;flex-direction:column!important;min-height:0!important;width:100%!important;height:100%!important;overflow:hidden!important;touch-action:pan-y!important;text-align:left!important;padding:12px!important;gap:6px!important;background:var(--mb-rd-sheet-bg)!important;border-radius:var(--radius-18px)!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;transform:rotateY(180deg);visibility:hidden;transition:transform 460ms cubic-bezier(.2,.7,.2,1),visibility 0s 230ms!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover.is-script-flipped #musicLinkThumb{transform:rotateY(-180deg)}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover.is-script-flipped #musicLyricsFlip{visibility:hidden!important;pointer-events:none!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover.is-script-flipped #musicTimedPanel{transform:rotateY(0deg);visibility:visible;transition:transform 460ms cubic-bezier(.2,.7,.2,1),visibility 0s!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicTimedLyrics{padding:12px 4px 32px!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover .music-timed-line{font-size:clamp(18px,2.7vw,26px)!important}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-cover[data-script=true]{position:relative!important;z-index:3!important;pointer-events:auto!important;cursor:pointer!important}
+@media(prefers-reduced-motion:reduce){html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicLinkThumb,html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicTimedPanel,html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicLyricsFlip{transition:none!important}}

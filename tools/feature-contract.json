@@ -1656,8 +1656,8 @@
       ]
     },
     {
-      "id": "music-personal-transcripts",
-      "name": "Transcript chữ Hán riêng cho mọi tài khoản, duyệt từng câu trước khi xuất bản",
+      "id": "music-admin-transcripts",
+      "name": "Admin tạo script chung trên máy chủ; người nghe lật ảnh bìa xem lời",
       "checks": [
         {
           "kind": "file",
@@ -1686,8 +1686,18 @@
         },
         {
           "kind": "contains",
+          "file": "src/modules/music/music-lyrics-ui.js",
+          "value": "musicLyricsFlip"
+        },
+        {
+          "kind": "contains",
+          "file": "server/music-transcript.mjs",
+          "value": "saveGeneratedTranscript"
+        },
+        {
+          "kind": "contains",
           "file": "src/modules/music/music-transcript.js",
-          "value": "hsk_music_private_scripts_v1:"
+          "value": "api.isOwner()"
         }
       ]
     }
