@@ -690,9 +690,9 @@
  $('musicMenuSubDone').onclick=()=>commitSavePicker();
  $('musicLinkImport').addEventListener('toggle',()=>{if(currentMode==='chill'&&menuOpen&&$('musicLinkImport').open)setMenuView('link');});
  $('musicMenuShareRow').onclick=async()=>{
-  if(!menuURL()){status('Mở một bài hát trước khi chia sẻ.');return;}
-  const data={title:menuTitle()||'Bài hát',url:menuURL()};
-  try{if(navigator.share){await navigator.share(data);}else{await navigator.clipboard.writeText(menuURL());status('Đã sao chép link bài hát.');}}catch{}
+  const url=menuURL()||new URL(location.pathname,location.origin).href;
+  const data={title:menuURL()?(menuTitle()||'Bài hát'):'HSK Free Learning AI',url};
+  try{if(navigator.share){await navigator.share(data);}else{await navigator.clipboard.writeText(url);status('Đã sao chép liên kết.');}}catch{}
  };
  // Drag surfaces follow the pointer every frame; only snapping is animated.
  function bindMusicDrag(node,handlers){
@@ -1348,6 +1348,9 @@ window.addEventListener('hsk-account-ready',()=>{pendingImportLink='';pendingImp
   }
   for(const id of ['musicPersonalOpen','musicAdminOpen'])$(id).querySelector('.music-flat-chev')?.remove();
   $('musicMenuSubCancel').setAttribute('aria-label','Quay lại');
+  // Sharing remains available even when no track is selected.
+  const shareRow=$('musicMenuShareRow');shareRow.dataset.menuView='main';
+  $('musicLinkExtraActions').before(shareRow);
   subHead.removeAttribute('data-menu-view');
   const contents=[...sheet.children].filter(n=>![handle,subHead,sheetStatus].includes(n));body.append(...contents);sheet.append(subHead,sheetStatus,body);sheet.setAttribute('role','dialog');
   // Reference ZIP: three isolated rounded library groups with standard

@@ -23,6 +23,10 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    if(!(await visible('#musicMenuSheet')))await page.locator('#musicMenuBtn').click();
    await page.locator('#musicMenuSheet').waitFor({state:'visible'});
    assert.equal(await view(),'main');
+   assert.equal(await visible('#musicMenuShareRow'),true,'share remains visible without a selected track');
+   await page.evaluate(()=>{window.shareCalls=[];Object.defineProperty(navigator,'share',{configurable:true,value:async data=>window.shareCalls.push(data)});});
+   await page.locator('#musicMenuShareRow').click();
+   assert.equal(await page.evaluate(()=>shareCalls.at(-1).url),new URL('/index.html',page.url()).href,'empty-state sharing uses the app URL');
    await page.locator('#musicMenuClose').focus();await page.keyboard.press('Escape');
    assert.equal(await page.locator('#musicMenuSheet').getAttribute('aria-hidden'),'true');
    await page.waitForFunction(()=>document.activeElement?.id==='musicMenuBtn');
@@ -87,6 +91,9 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.locator('#musicMenuSheet').waitFor({state:'visible'});
    await page.waitForTimeout(450);
    assert.equal(await visible('#musicPreviewPlaylistAdd'),true);
+   assert.equal(await visible('#musicMenuShareRow'),true,'share available for the playing track');
+   await page.locator('#musicMenuShareRow').click();
+   assert.equal(await page.evaluate(()=>shareCalls.at(-1).url),await page.locator('#musicSourceLink').getAttribute('href'),'share uses the selected song URL');
    assert.equal(await visible('#musicQuickPlaylistPanel'),false);
    await page.locator('#musicPreviewPlaylistAdd').click();
    assert.equal(await visible('#musicQuickPlaylistPanel'),true);
