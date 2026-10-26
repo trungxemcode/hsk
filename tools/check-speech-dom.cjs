@@ -4,7 +4,7 @@ const {JSDOM,VirtualConsole}=require('jsdom'),fs=require('node:fs'),assert=requi
  const root=process.cwd(),spoken=[],errors=[];let resolveReady;const ready=new Promise(r=>resolveReady=r),console=new VirtualConsole();console.on('jsdomError',e=>errors.push(e.message));
  const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new URL(req.url,'http://localhost').pathname);if(!file.startsWith(root+path.sep)||!fs.existsSync(file)){res.writeHead(404);res.end();return;}res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'})[path.extname(file)]||'application/octet-stream');res.end(fs.readFileSync(file));});
  await new Promise(r=>server.listen(0,'127.0.0.1',r));let timeout;
- const dom=await JSDOM.fromURL(`http://127.0.0.1:${server.address().port}/index.html`,{runScripts:'dangerously',resources:'usable',pretendToBeVisual:true,virtualConsole:console,beforeParse(w){
+ const dom=await JSDOM.fromURL(`http://127.0.0.1:${server.address().port}/index.html`,{runScripts:'dangerously',resources:'usable',pretendToBeVisual:true,virtualConsole:console,beforeParse(w){/* Use cancellable frame timers in jsdom 26: native RAF may fire after window.close(). */w.requestAnimationFrame=cb=>w.setTimeout(()=>cb(w.performance.now()),16);w.cancelAnimationFrame=id=>w.clearTimeout(id);
   w.fetch=(url,options)=>fetch(new URL(url,w.location.href),options);for(const name of ['Response','Request','Headers','DecompressionStream','TextDecoder','TextEncoder'])w[name]=globalThis[name];
   w.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});w.scrollTo=()=>{};
   w.HTMLCanvasElement.prototype.getContext=()=>({});
