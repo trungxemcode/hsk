@@ -42,7 +42,7 @@ def main():
             if ready.stat().st_size>12*1024*1024 or duration>480:raise RuntimeError('audio-limit')
             kind=track.get('referenceKind');kind=kind if kind in ('hanzi','pinyin') else 'asr'
             title=track['title'];artist=title.split('|')[-1].split(' - ')[-1] if '|' in title else track.get('channel','Moah')
-            job={'id':jobid,'batchId':'moah-popular-2026-10-27','state':'queued','createdAt':int(time.time()*1000),'videoId':video,'url':'https://www.youtube.com/watch?v='+video,'title':title[:120],'artist':artist[:80],'composer':'','duration':duration,'audioSha256':hashlib.sha256(ready.read_bytes()).hexdigest(),'referenceKind':kind,'referenceLines':track.get('referenceLines',[]),'permission':manifest['permission']}
+            job={'id':jobid,'batchId':'moah-popular-2026-10-27','state':'queued','createdAt':int(time.time()*1000),'videoId':video,'url':'https://www.youtube.com/watch?v='+video,'title':title[:120],'artist':artist[:80],'composer':'','duration':duration,'audioSha256':hashlib.sha256(ready.read_bytes()).hexdigest(),'referenceKind':kind,'referenceLines':track.get('referenceLines',[]),'pinyinLines':track.get('originalPinyin',[]),'permission':manifest['permission']}
             jobfile=root/(jobid+'.json');jobfile.write_text(json.dumps(job,ensure_ascii=False),encoding='utf-8')
             put('batch-audio/'+jobid+'.m4a',ready,'audio/mp4');put('batch-staging/'+jobid+'.json',jobfile,'application/json')
             status[video]={'state':'uploaded','jobId':jobid,'duration':duration,'referenceKind':kind};save();print(f'Staged {index}/{len(manifest["tracks"])}: {video}',flush=True)
