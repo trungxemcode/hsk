@@ -37,3 +37,12 @@ test('a segment cannot be reused for two repeated lines or assigned outside its 
 });
 
 test('oversized 429 does not freeze other songs or rotate keys',async()=>{let calls=0;await assert.rejects(prepareBatchReference({kind:'pinyin',lines:['nǐ hǎo']},{words:[]},['one','two'],async(_url,init)=>{calls++;assert.equal(JSON.parse(init.body).max_completion_tokens,2000);return Response.json({error:{message:'Request too large for model: token limit exceeded'}},{status:429});}),e=>e.status===413);assert.equal(calls,1);});
+test('one reference repair corrects only failed pinyin lines and preserves the others',async()=>{
+ let calls=0;const candidates=[];const out=await prepareBatchReference({kind:'pinyin',lines:['nǐ hǎo','shì jiè']},{words:[]},['key'],async(_url,init)=>{calls++;const b=JSON.parse(init.body);if(calls===1)return Response.json({choices:[{message:{content:JSON.stringify({line0:'再见',line1:'世界'})}}]});assert.deepEqual(b.response_format.json_schema.schema.required,['line0']);assert.equal(JSON.parse(b.messages[1].content).asr,undefined);return Response.json({choices:[{message:{content:JSON.stringify({line0:'你好'})}}]});},undefined,c=>candidates.push(c));assert.equal(calls,2);assert.deepEqual(out.cues.map(c=>c.text),['你好','世界']);assert.equal(candidates.at(-1).referenceRepairAttempted,true);
+});
+test('cached bad candidate resumes only its short repair after a quota wait',async()=>{
+ const cached={model:'qwen/qwen3.8-27b',lines:['再见','世界'],referenceRepairAttempted:false};let calls=0;const fetchFn=async(_url,init)=>{calls++;assert.deepEqual(JSON.parse(init.body).response_format.json_schema.schema.required,['line0']);if(calls===1)return Response.json({}, {status:429,headers:{'Retry-After':'60'}});return Response.json({choices:[{message:{content:JSON.stringify({line0:'你好'})}}]});};const args=[{kind:'pinyin',lines:['nǐ hǎo','shì jiè']},{words:[]},['key'],fetchFn,undefined,async()=>{},cached];await assert.rejects(prepareBatchReference(...args),e=>e.status===429);const out=await prepareBatchReference(...args);assert.equal(out.cues[0].text,'你好');assert.equal(calls,2);
+});
+test('umlaut pinyin is distinguished correctly and literal English lyrics stay literal',()=>{
+ const out=checkRestoration(['绿灯','铃铃铃'],['lǜ dēng','Ring Ring Ring']);assert.equal(out.cues[0].text,'绿灯');assert.equal(out.cues[1].text,'Ring Ring Ring');assert.throws(()=>checkRestoration(['路灯'],['lǜ dēng']));
+});

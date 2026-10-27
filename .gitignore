@@ -19,3 +19,6 @@ __pycache__/
 /.serena_cache/
 /tmp-ai/
 /.ai-cache/
+
+# Local Cloudflare development state
+.wrangler/

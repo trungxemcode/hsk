@@ -113,23 +113,23 @@ async function processGroq(id,input,env,json,fetchFn,signal){
   if(data instanceof Response)return data;
   }
   // Cache recognition before restoration so retries do not transcribe the same audio.
-  await bucket.put('lyrics-drafts/'+id+'/groq-raw.json',JSON.stringify({words:data.words,segments:data.segments,duration:data.duration,repairAttempted:data.repairAttempted===true,chunkRepairs:data.chunkRepairs||[],model:MODEL}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
+  await bucket.put('lyrics-drafts/'+id+'/groq-raw.json',JSON.stringify({words:data.words,segments:data.segments,duration:data.duration,repairAttempted:data.repairAttempted===true,chunkRepairs:data.chunkRepairs||[],chunkRepairStrategy:data.chunkRepairStrategy,model:MODEL}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
   if(batch){
-   let prepared;const referenceKey='lyrics-drafts/'+id+'/groq-reference.json',candidateHead=reference.kind==='pinyin'?await bucket.head(referenceKey):null;
-   if(candidateHead?.customMetadata?.sourceEtag===sourceHead.httpEtag&&candidateHead.customMetadata.audioEtag===head.httpEtag){try{const candidate=JSON.parse(new TextDecoder().decode(await bounded((await bucket.get(referenceKey)).body,Lyrics.MAX_BYTES)));if(candidate.model===REFERENCE_MODEL)prepared=checkRestoration(candidate.lines,reference.lines);}catch{}}
-   reference=prepared||await prepareBatchReference(reference,data,keys,fetchFn,controller.signal,candidate=>bucket.put(referenceKey,JSON.stringify(candidate),{httpMetadata:{contentType:'application/json; charset=utf-8',cacheControl:'no-store'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}}));
+   let prepared,cachedCandidate;const referenceKey='lyrics-drafts/'+id+'/groq-reference.json',candidateHead=reference.kind==='pinyin'?await bucket.head(referenceKey):null;
+   if(candidateHead?.customMetadata?.sourceEtag===sourceHead.httpEtag&&candidateHead.customMetadata.audioEtag===head.httpEtag){try{const candidate=JSON.parse(new TextDecoder().decode(await bounded((await bucket.get(referenceKey)).body,Lyrics.MAX_BYTES)));if(candidate.model===REFERENCE_MODEL){cachedCandidate=candidate;prepared=checkRestoration(candidate.lines,reference.lines);}}catch{}}
+   reference=prepared||await prepareBatchReference(reference,data,keys,fetchFn,controller.signal,candidate=>bucket.put(referenceKey,JSON.stringify(candidate),{httpMetadata:{contentType:'application/json; charset=utf-8',cacheControl:'no-store'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}}),cachedCandidate);
   }
   let value;
   while(!value){try{value=matchGroq(reference,data,input.duration);}catch(error){
    const window=error.repairWindow;if(!batch||!window||window.end-window.start<.5||window.end-window.start>90)throw error;
-   const used=Array.isArray(data.chunkRepairs)?data.chunkRepairs:[],clip=used.length<2?await loadRepairChunk(bucket,id,window,used):null;
+   const used=data.chunkRepairStrategy==='full-clip-v1'&&Array.isArray(data.chunkRepairs)?data.chunkRepairs:[],clip=used.length<2?await loadRepairChunk(bucket,id,window,used):null;
    if(!clip&&data.repairAttempted)throw error;
    const prompt=reference.cues.slice(Math.max(0,window.cue-1),window.cue+2).map(c=>c.text).join(' ').slice(0,160),retry=await transcribeGroqAudio(bucket,audioKey,id,keys,prompt,.2,fetchFn,controller.signal,json,clip);
    if(retry instanceof Response)return retry;
-   const start=clip?Math.max(window.start,clip.start):window.start,end=clip?Math.min(window.end,clip.start+clip.duration):window.end;
+   const start=clip?clip.start:window.start,end=clip?Math.min(input.duration,clip.start+clip.duration):window.end;
    const inside=w=>Number.isFinite(w.start)&&Number.isFinite(w.end)&&w.start>=start&&w.end<=end,replacement=(retry.words||[]).filter(inside);
-   data={...data,repairAttempted:true,chunkRepairs:clip?[...used,clip.index]:used,...(replacement.length?{words:[...data.words.filter(w=>w.end<=start||w.start>=end),...replacement].sort((a,b)=>a.start-b.start),segments:[...(data.segments||[]).filter(w=>w.end<=start||w.start>=end),...(retry.segments||[]).filter(inside)].sort((a,b)=>a.start-b.start)}:{})};
-   await bucket.put(rawKey,JSON.stringify({words:data.words,segments:data.segments,duration:data.duration,repairAttempted:true,chunkRepairs:data.chunkRepairs,model:MODEL}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
+   data={...data,repairAttempted:true,chunkRepairStrategy:clip?'full-clip-v1':data.chunkRepairStrategy,chunkRepairs:clip?[...used,clip.index]:used,...(replacement.length?{words:[...data.words.filter(w=>w.end<=start||w.start>=end),...replacement].sort((a,b)=>a.start-b.start),segments:[...(data.segments||[]).filter(w=>w.end<=start||w.start>=end),...(retry.segments||[]).filter(inside)].sort((a,b)=>a.start-b.start)}:{})};
+   await bucket.put(rawKey,JSON.stringify({words:data.words,segments:data.segments,duration:data.duration,repairAttempted:true,chunkRepairs:data.chunkRepairs,chunkRepairStrategy:data.chunkRepairStrategy,model:MODEL}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
   }}
   value.repairAttempted=data.repairAttempted===true;value.chunkRepairsUsed=data.chunkRepairs?.length||0;
   if(batch){value.referenceRestored=reference.restored;value.generatedFromAudio=reference.generatedFromAudio===true;value.batchId=batchSource.batchId;value.referenceSource=batchSource.sourceUrl;}
