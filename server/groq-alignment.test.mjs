@@ -39,3 +39,5 @@ test('429 keeps published lyrics and returns cooldown without retrying or leakin
 });
 
 test('deletion during Groq processing rejects stale result and releases lock',async()=>{const f=fixture();const custom=async(url,init)=>{const r=await f.fetchFn(url,init);if(url.includes('api.groq.com'))f.records.delete(f.audio);return r;};await assert.rejects(groqRoute(f.req(),f.env,f.json,custom),e=>e.status===409);assert.equal(f.records.has('lyrics-drafts/'+f.id+'/groq.json'),false);assert.equal(f.records.has('groq-locks/'+f.id),false);});
+
+test('authentication failure uses backup key, while 429 does not rotate',async()=>{const f=fixture();f.env.GROQ_API_KEY_2='backup';let tries=0;const call=async(url,init)=>{if(!url.includes('api.groq.com'))return f.fetchFn(url,init);tries++;if(tries===1)return Response.json({error:'bad key'},{status:401});assert.equal(init.headers.Authorization,'Bearer backup');return Response.json({words});};assert.equal((await groqRoute(f.req(),f.env,f.json,call)).status,200);assert.equal(tries,2);const limited=fixture(429);limited.env.GROQ_API_KEY_2='backup';assert.equal((await limited.run()).status,429);assert.equal(limited.groqCalls(),1);});

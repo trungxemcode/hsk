@@ -43,7 +43,8 @@ export async function groqRoute(request,env,json,fetchFn=fetch){
  const route=new URL(request.url).pathname.match(/^\/api\/admin\/tracks\/([a-f0-9]{64}\.(?:mp3|m4a))\/align$/);if(!route)return null;
  if(request.method!=='POST')return json({error:'Chỉ hỗ trợ POST.'},405);
  const actor=await identity(request,env,fetchFn);if(!actor.admin)return json({error:'Chỉ chủ kho được căn lời.'},403);
- if(env.MUSIC_GROQ_ENABLED!=='true'||!env.GROQ_API_KEY)return json({error:'Chưa cấu hình Groq trên Worker kho nhạc.'},503);
+ const keys=[...new Set([env.GROQ_API_KEY,env.GROQ_API_KEY_2,env.GROQ_API_KEY_3].filter(Boolean))];
+ if(env.MUSIC_GROQ_ENABLED!=='true'||!keys.length)return json({error:'Chưa cấu hình Groq trên Worker kho nhạc.'},503);
  let input;try{input=JSON.parse(new TextDecoder().decode(await bounded(request.body,1024)));}catch(e){if(e.status)throw e;throw fail('Yêu cầu chưa hợp lệ.',400);}if(!input||typeof input!=='object'||Array.isArray(input))throw fail('Yêu cầu chưa hợp lệ.',400);
  if(Object.keys(input).some(k=>k!=='duration')||!Number.isFinite(input.duration)||input.duration<=0||input.duration>480)return json({error:'Chỉ hỗ trợ bài không quá 8 phút.'},400);
  const id=route[1],bucket=env.MUSIC_BUCKET,audioKey='audio/'+id,lyricsKey='lyrics/'+id+'.json',draftKey='lyrics-drafts/'+id+'/groq.json';
@@ -63,7 +64,7 @@ export async function groqRoute(request,env,json,fetchFn=fetch){
   form.set('file',new Blob([bytes],{type:id.endsWith('.m4a')?'audio/mp4':'audio/mpeg'}),id);form.set('model',MODEL);form.set('language','zh');form.set('response_format','verbose_json');form.append('timestamp_granularities[]','word');form.append('timestamp_granularities[]','segment');form.set('temperature','0');
   // Context only. Supplying lyrics is not forced phoneme alignment.
   form.set('prompt',reference.cues.map(c=>c.text).join(' ').slice(0,160));
-  const response=await fetchFn('https://api.groq.com/openai/v1/audio/transcriptions',{method:'POST',headers:{Authorization:'Bearer '+env.GROQ_API_KEY},body:form,signal:controller.signal});
+  let response;for(const key of keys){response=await fetchFn('https://api.groq.com/openai/v1/audio/transcriptions',{method:'POST',headers:{Authorization:'Bearer '+key},body:form,signal:controller.signal});if(![401,403].includes(response.status))break;await response.body?.cancel();}
   if(!response.ok){const retryAfter=response.headers.get('Retry-After');return json({error:response.status===429?'Groq đạt hạn mức; chờ rồi thử lại.':'Groq chưa xử lý được audio.',...(retryAfter?{retryAfter}:{} )},response.status===429?429:502);}
   const data=JSON.parse(new TextDecoder().decode(await bounded(response.body,1024*1024))),value=matchGroq(reference,data,input.duration);
   if(controller.signal.aborted)throw fail('Đã hủy hoặc quá thời gian.',408);
