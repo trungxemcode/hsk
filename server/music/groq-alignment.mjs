@@ -128,9 +128,9 @@ async function processGroq(id,input,env,json,fetchFn,signal){
   }
   let value;
   while(!value){try{value=matchGroq(reference,data,input.duration);}catch(error){
-   const window=repairSearchWindow(error.repairWindow,input.duration);if(!batch||!window||window.end-window.start<.5||window.end-window.start>90)throw error;
+   const window=repairSearchWindow(error.repairWindow,input.duration);if(!batch||!window||window.end-window.start<.5)throw error;
    const used=data.chunkRepairStrategy==='full-clip-v1'&&Array.isArray(data.chunkRepairs)?data.chunkRepairs:[],clip=used.length<2?await loadRepairChunk(bucket,id,window,used):null;
-   if(!clip&&data.repairAttempted)throw error;
+   if(!clip&&(data.repairAttempted||window.end-window.start>90))throw error;
    const prompt=reference.cues.slice(Math.max(0,window.cue-1),window.cue+2).map(c=>c.text).join(' ').slice(0,160),retry=await transcribeGroqAudio(bucket,audioKey,id,keys,prompt,.2,fetchFn,controller.signal,json,clip);
    if(retry instanceof Response)return retry;
    const start=clip?clip.start:window.start,end=clip?Math.min(input.duration,clip.start+clip.duration):window.end;
