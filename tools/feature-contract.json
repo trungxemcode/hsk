@@ -1766,6 +1766,37 @@
           "value": "draftKey='lyrics-drafts/'"
         }
       ]
+    },
+    {
+      "id": "music-groq-durable-queue",
+      "name": "Hàng đợi Groq bền vững, chạy một bài trên cloud khi tắt máy",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "server/music/groq-queue.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/groq-queue.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/music/cloud-worker.mjs",
+          "value": "async scheduled("
+        },
+        {
+          "kind": "contains",
+          "file": "server/music/wrangler-cloud.jsonc",
+          "value": "* * * * *"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music-transcript.js",
+          "value": "musicGroqJobStatus"
+        }
+      ]
     }
   ]
 }

@@ -50,16 +50,29 @@ export function matchGroq(reference,data,duration){
  diagnostics.renderableCharacters=value.cues.reduce((n,c)=>n+(c.characters?.length||0),0);
  return {...value,status:'draft',reviewed:false,method:'groq-word-timestamps',model:MODEL,diagnostics};
 }
-async function bounded(body,max){const reader=body?.getReader();if(!reader)throw fail('Không đọc được dữ liệu.',502);let size=0;const chunks=[];while(true){const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>max){await reader.cancel();throw fail('Dữ liệu vượt giới hạn.',413);}chunks.push(value);}const all=new Uint8Array(size);let offset=0;for(const c of chunks){all.set(c,offset);offset+=c.length;}return all;}
+export async function bounded(body,max){const reader=body?.getReader();if(!reader)throw fail('Không đọc được dữ liệu.',502);let size=0;const chunks=[];while(true){const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>max){await reader.cancel();throw fail('Dữ liệu vượt giới hạn.',413);}chunks.push(value);}const all=new Uint8Array(size);let offset=0;for(const c of chunks){all.set(c,offset);offset+=c.length;}return all;}
 export async function groqRoute(request,env,json,fetchFn=fetch){
  const route=new URL(request.url).pathname.match(/^\/api\/admin\/tracks\/([a-f0-9]{64}\.(?:mp3|m4a))\/align$/);if(!route)return null;
  if(request.method!=='POST')return json({error:'Chỉ hỗ trợ POST.'},405);
  const actor=await identity(request,env,fetchFn);if(!actor.admin)return json({error:'Chỉ chủ kho được căn lời.'},403);
- const keys=[...new Set([env.GROQ_API_KEY,env.GROQ_API_KEY_2,env.GROQ_API_KEY_3].filter(Boolean))];
- if(env.MUSIC_GROQ_ENABLED!=='true'||!keys.length)return json({error:'Chưa cấu hình Groq trên Worker kho nhạc.'},503);
  let input;try{input=JSON.parse(new TextDecoder().decode(await bounded(request.body,1024)));}catch(e){if(e.status)throw e;throw fail('Yêu cầu chưa hợp lệ.',400);}if(!input||typeof input!=='object'||Array.isArray(input))throw fail('Yêu cầu chưa hợp lệ.',400);
  if(Object.keys(input).some(k=>k!=='duration')||!Number.isFinite(input.duration)||input.duration<=0||input.duration>480)return json({error:'Chỉ hỗ trợ bài không quá 8 phút.'},400);
- const id=route[1],bucket=env.MUSIC_BUCKET,audioKey='audio/'+id,lyricsKey='lyrics/'+id+'.json',draftKey='lyrics-drafts/'+id+'/groq.json';
+ return alignGroq(route[1],input.duration,env,json,fetchFn,request.signal);
+}
+export async function alignGroq(id,duration,env,json,fetchFn=fetch,signal=new AbortController().signal){
+ const input={duration};
+ const keys=[...new Set([env.GROQ_API_KEY,env.GROQ_API_KEY_2,env.GROQ_API_KEY_3].filter(Boolean))];
+ if(env.MUSIC_GROQ_ENABLED!=='true'||!keys.length)return json({error:'Chưa cấu hình Groq trên Worker kho nhạc.'},503);
+ const bucket=env.MUSIC_BUCKET;
+ const old=await bucket.head('groq-locks/global');
+ if(old&&Date.now()-Number(old.customMetadata?.createdAt||Date.now())<600000)return json({error:'Đang xử lý bài khác; đã giới hạn một bài mỗi lần.'},409);
+ const lock=await bucket.put('groq-locks/global','busy',{onlyIf:old?{etagMatches:old.etag}:{etagDoesNotMatch:'*'},customMetadata:{createdAt:String(Date.now())}});
+ if(!lock)return json({error:'Đang xử lý bài khác.'},409);
+ try{return await processGroq(id,input,env,json,fetchFn,signal);}finally{await bucket.delete('groq-locks/global');}
+}
+async function processGroq(id,input,env,json,fetchFn,signal){
+ const keys=[...new Set([env.GROQ_API_KEY,env.GROQ_API_KEY_2,env.GROQ_API_KEY_3].filter(Boolean))];
+ const bucket=env.MUSIC_BUCKET,audioKey='audio/'+id,lyricsKey='lyrics/'+id+'.json',draftKey='lyrics-drafts/'+id+'/groq.json';
  const head=await bucket.head(audioKey),sourceHead=await bucket.head(lyricsKey);
  if(!head||head.customMetadata?.published!=='true'||!sourceHead)return json({error:'Cần bài đã xuất bản và script chuẩn trong kho.'},404);
  if(head.size>MAX_AUDIO)return json({error:'Groq thử nghiệm hỗ trợ audio tối đa 6 MB.'},413);
@@ -69,16 +82,16 @@ export async function groqRoute(request,env,json,fetchFn=fetch){
  if(oldLock&&Date.now()-Number(oldLock.customMetadata?.createdAt||Date.now())<600000)return json({error:'Bài này đang được căn lời. Chờ xử lý xong.'},409);
  const lock=await bucket.put(lockKey,'busy',{onlyIf:oldLock?{etagMatches:oldLock.etag}:{etagDoesNotMatch:'*'},customMetadata:{createdAt:String(Date.now())}});
  if(!lock)return json({error:'Bài này đang được xử lý.'},409);
- const controller=new AbortController(),cancel=()=>controller.abort();request.signal.addEventListener('abort',cancel,{once:true});const timer=setTimeout(cancel,150000);
+ const controller=new AbortController(),cancel=()=>controller.abort();signal.addEventListener('abort',cancel,{once:true});const timer=setTimeout(cancel,150000);
  try{
   const source=await bucket.get(lyricsKey),reference=Lyrics.parse(new TextDecoder().decode(await bounded(source.body,Lyrics.MAX_BYTES)),'lyrics.json');
+  let data;const rawKey='lyrics-drafts/'+id+'/groq-raw.json',rawHead=await bucket.head(rawKey);
+  if(rawHead?.customMetadata?.sourceEtag===sourceHead.httpEtag&&rawHead.customMetadata.audioEtag===head.httpEtag){const raw=await bucket.get(rawKey),prior=JSON.parse(new TextDecoder().decode(await bounded(raw.body,1024*1024)));if(prior.model===MODEL)data=prior;}
+  if(!data){
   const object=await bucket.get(audioKey),bytes=await bounded(object.body,MAX_AUDIO),form=new FormData();
   form.set('file',new Blob([bytes],{type:id.endsWith('.m4a')?'audio/mp4':'audio/mpeg'}),id);form.set('model',MODEL);form.set('language','zh');form.set('response_format','verbose_json');form.append('timestamp_granularities[]','word');form.append('timestamp_granularities[]','segment');form.set('temperature','0');
   // Context only. Supplying lyrics is not forced phoneme alignment.
   form.set('prompt',reference.cues.map(c=>c.text).join(' ').slice(0,160));
-  let data;const rawKey='lyrics-drafts/'+id+'/groq-raw.json',rawHead=await bucket.head(rawKey);
-  if(rawHead?.customMetadata?.sourceEtag===sourceHead.httpEtag&&rawHead.customMetadata.audioEtag===head.httpEtag){const raw=await bucket.get(rawKey),prior=JSON.parse(new TextDecoder().decode(await bounded(raw.body,1024*1024)));if(prior.model===MODEL)data=prior;}
-  if(!data){
   let response;for(const key of keys){response=await fetchFn('https://api.groq.com/openai/v1/audio/transcriptions',{method:'POST',headers:{Authorization:'Bearer '+key},body:form,signal:controller.signal});if(![401,403].includes(response.status))break;await response.body?.cancel();}
   if(!response.ok){const retryAfter=response.headers.get('Retry-After');return json({error:response.status===429?'Groq đạt hạn mức; chờ rồi thử lại.':'Groq chưa xử lý được audio.',...(retryAfter?{retryAfter}:{} )},response.status===429?429:502);}
   data=JSON.parse(new TextDecoder().decode(await bounded(response.body,1024*1024)));
@@ -90,5 +103,5 @@ export async function groqRoute(request,env,json,fetchFn=fetch){
   await bucket.put('lyrics-drafts/'+id+'/groq-raw.json',JSON.stringify({words:data.words,duration:data.duration,model:MODEL}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
   await bucket.put(draftKey,JSON.stringify(value),{httpMetadata:{contentType:'application/json; charset=utf-8',cacheControl:'no-store'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag,duration:String(input.duration),model:MODEL,matcher:'lcs-v3'}});
   return json({...value,saved:true});
- }catch(e){if(e.name==='AbortError')throw fail('Đã hủy hoặc quá thời gian.',408);throw e;}finally{clearTimeout(timer);request.signal.removeEventListener('abort',cancel);await bucket.delete(lockKey);}
+ }catch(e){if(e.name==='AbortError')throw fail('Đã hủy hoặc quá thời gian.',408);throw e;}finally{clearTimeout(timer);signal.removeEventListener('abort',cancel);await bucket.delete(lockKey);}
 }

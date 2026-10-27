@@ -1,5 +1,6 @@
 // Owner-uploaded R2 audio library. Independent of AI, voice and study services.
 import Lyrics from '../../src/modules/music/music-lyrics-core.js';
+import {groqQueueRoute,enqueueGroqJob,runGroqQueue} from './groq-queue.mjs';
 import {groqRoute} from './groq-alignment.mjs';
 import {searchRoute} from './youtube-search.mjs';
 import {importRoute,writeJob} from './import-jobs.mjs';
@@ -16,6 +17,7 @@ export async function handleCloudMusic(request,env,ctx={},deps={}){
  try{
   const search=await searchRoute(request,json,deps.fetchFn||fetch);if(search)return search;
   if(!env.MUSIC_BUCKET)return json({error:'Kho R2 chưa được kết nối.'},503);
+  const queued=await groqQueueRoute(request,env,json,deps.fetchFn||fetch);if(queued)return queued;
   const alignment=await groqRoute(request,env,json,deps.fetchFn||fetch);if(alignment)return alignment;
   const imported=await importRoute(request,env,json,deps.fetchFn||fetch);if(imported instanceof Response)return imported;
   if(u.pathname==='/api/library'&&request.method==='GET'){
@@ -39,7 +41,10 @@ export async function handleCloudMusic(request,env,ctx={},deps={}){
     const bytes=new Uint8Array(size);let at=0;for(const chunk of chunks){bytes.set(chunk,at);at+=chunk.length;}
     let value;try{const input=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));value=Lyrics.validate(input);if(input.reviewed===true&&input.status==='reviewed')value={...value,status:'reviewed',reviewed:true};}catch(error){return json({error:error.message||'Script chưa hợp lệ.'},400);}
     const revision=crypto.randomUUID();await env.MUSIC_BUCKET.put(key,JSON.stringify(value),{httpMetadata:{contentType:'application/json; charset=utf-8',cacheControl:'no-store'},customMetadata:{revision}});
-    return json({saved:true,id,revision,cues:value.cues.length});
+    if(value.reviewed===true)await env.MUSIC_BUCKET.delete('groq-pending/'+id+'.json');
+    let alignmentQueued=false,alignmentError;
+    if(env.MUSIC_GROQ_ENABLED==='true'&&value.reviewed!==true&&!value.cues.some(c=>c.characters?.length)){try{const duration=value.cues.some(c=>c.end===null)?480:Math.max(...value.cues.map(c=>c.end));const q=await enqueueGroqJob(id,duration,env);alignmentQueued=q.queued;alignmentError=q.error;}catch{alignmentError='Script đã lưu; chưa xếp được hàng Groq.';}}
+    return json({saved:true,id,revision,cues:value.cues.length,alignmentQueued,...(alignmentError?{alignmentError}:{})});
    }
    const object=await env.MUSIC_BUCKET.get(key);if(!object)return json({error:'Bài này chưa có script.'},404);
    return new Response(object.body,{headers:{...cors,'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}});
@@ -48,7 +53,7 @@ export async function handleCloudMusic(request,env,ctx={},deps={}){
    const actor=await identity(request,env,deps.fetchFn||fetch);if(!actor.admin)return json({error:'Chỉ chủ kho được xóa nhạc.'},403);
    const match=u.pathname.match(/^\/api\/admin\/tracks\/([a-f0-9]{64}\.(?:mp3|m4a))\/delete$/);if(!match)return json({error:'Bài hát chưa hợp lệ.'},400);
    const id=match[1],key='audio/'+id,head=await env.MUSIC_BUCKET.head(key);if(!head||head.customMetadata?.published!=='true')return json({error:'Bài hát không còn trong kho.'},404);
-   await env.MUSIC_BUCKET.delete(key);await env.MUSIC_BUCKET.delete('lyrics/'+id+'.json');await env.MUSIC_BUCKET.delete('lyrics-drafts/'+id+'/groq.json');await env.MUSIC_BUCKET.delete('lyrics-drafts/'+id+'/groq-raw.json');return json({deleted:true,id});
+   await env.MUSIC_BUCKET.delete(key);await env.MUSIC_BUCKET.delete('lyrics/'+id+'.json');await env.MUSIC_BUCKET.delete('lyrics-drafts/'+id+'/groq.json');await env.MUSIC_BUCKET.delete('lyrics-drafts/'+id+'/groq-raw.json');await env.MUSIC_BUCKET.delete('groq-pending/'+id+'.json');await env.MUSIC_BUCKET.delete('groq-jobs/'+id+'.json');return json({deleted:true,id});
   }
   if((u.pathname==='/api/admin/upload'||imported?.job)&&request.method==='POST'){
    const actor=imported?.job?{admin:true}:await identity(request,env,deps.fetchFn||fetch);if(!actor.admin)return json({error:'Chỉ chủ kho được tải nhạc lên.'},403);
@@ -78,4 +83,4 @@ export async function handleCloudMusic(request,env,ctx={},deps={}){
   return json({error:'Không có API này.'},404);
  }catch(e){return json({error:e.status?e.message:'Kho nhạc tạm thời chưa sẵn sàng.'},e.status||503);}
 }
-export default {fetch:handleCloudMusic};
+export default {fetch:handleCloudMusic,async scheduled(_controller,env){return runGroqQueue(env);}};
