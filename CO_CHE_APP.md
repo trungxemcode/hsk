@@ -289,3 +289,5 @@ Thiếu hoàn toàn mốc một dòng: một bài được thử ASR thêm tối
 Nhận dạng lại bằng đoạn ngắn: tools/music_audio_chunks.py tạo M4A riêng cho ASR (60s, bước 50s), đóng gói header JSON và bytes vào audio-chunks/{audioId}.bin trên R2 riêng. Không thay audio phát. Worker đọc range, kiểm parent id/SHA-256, dùng tối đa 2 đoạn/bài, cộng đúng start của đoạn vào timestamp Groq; chỉ thay mốc trong khoảng hở quan sát được. Cache chunkRepairs để không lặp phí. tools/stage-music-batch.py chuẩn bị archive trước khi xếp hàng; stage-music-chunks.py bổ sung cho lô cũ. Xóa bài cũng xóa archive và nguồn lời riêng.
 
 Các mốc ASR mới trong một clip có thể sửa cả mốc câu lân cận bị gán nhầm trong clip; giữ nguyên mốc ngoài clip. Cache chiến lược full-clip-v1, tối đa 2 clip/chiến lược, không lặp mãi. Phục hồi pinyin giữ nguyên dòng tiếng Anh, phân biệt ü/v đúng, chỉ thử sửa những dòng lệch âm một lượt. Candidate được lưu trước khi chờ quota để lần sau tiếp tục phần sửa ngắn, không tạo lại toàn bài.
+
+Collapsed neighboring ASR anchors expand only the clip search region by 25s on each side; lyric timestamps still come exclusively from observed Groq output.

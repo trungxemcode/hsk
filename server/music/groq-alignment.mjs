@@ -8,6 +8,13 @@ const MAX_AUDIO=12*1024*1024,MODEL='whisper-large-v3';
 const fail=(message,status)=>Object.assign(Error(message),{status});
 const letters=s=>Array.from(s).filter(c=>!/[\s\p{P}\p{S}]/u.test(c));
 const sound=c=>(Pinyin.polyphonic(c,{toneType:'none',type:'array'})[0]?.[0]||c).toLowerCase();
+export function repairSearchWindow(window,duration){
+ if(!window||!Number.isFinite(window.start)||!Number.isFinite(window.end))return null;
+ const left=Math.max(0,Math.min(duration,window.start)),right=Math.max(0,Math.min(duration,window.end));
+ // A collapsed anchor gap is evidence of a bad neighboring match. Expand only
+ // the ASR search region; this never supplies or shifts a lyric timestamp.
+ return right-left<.5?{...window,start:Math.max(0,Math.min(left,right)-25),end:Math.min(duration,Math.max(left,right)+25)}:{...window,start:left,end:right};
+}
 export function matchGroq(reference,data,duration){
  const source=reference.untimed?{cues:reference.cues.map(c=>({...c}))}:Lyrics.validate(reference),units=[],sounds=new Map();source.cues=source.cues.filter(c=>letters(c.text).length);const keyOf=c=>{if(!sounds.has(c))sounds.set(c,sound(c));return sounds.get(c);};
  if(!Array.isArray(data.words)||!data.words.length||data.words.length>4000)throw fail('Groq chưa trả mốc từng từ.',502);
@@ -121,7 +128,7 @@ async function processGroq(id,input,env,json,fetchFn,signal){
   }
   let value;
   while(!value){try{value=matchGroq(reference,data,input.duration);}catch(error){
-   const window=error.repairWindow;if(!batch||!window||window.end-window.start<.5||window.end-window.start>90)throw error;
+   const window=repairSearchWindow(error.repairWindow,input.duration);if(!batch||!window||window.end-window.start<.5||window.end-window.start>90)throw error;
    const used=data.chunkRepairStrategy==='full-clip-v1'&&Array.isArray(data.chunkRepairs)?data.chunkRepairs:[],clip=used.length<2?await loadRepairChunk(bucket,id,window,used):null;
    if(!clip&&data.repairAttempted)throw error;
    const prompt=reference.cues.slice(Math.max(0,window.cue-1),window.cue+2).map(c=>c.text).join(' ').slice(0,160),retry=await transcribeGroqAudio(bucket,audioKey,id,keys,prompt,.2,fetchFn,controller.signal,json,clip);
