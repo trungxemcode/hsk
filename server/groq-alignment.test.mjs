@@ -7,9 +7,9 @@ const words=[{word:'你',start:.2,end:.5},{word:'好',start:.6,end:2},{word:'世
 test('Groq times are retained exactly, including long pauses; pinyin/script stay canonical',()=>{
  const out=matchGroq(reference,{words},8);assert.equal(out.diagnostics.precise,4);assert.equal(out.cues[0].start,.2);assert.equal(out.cues[0].end,7);assert.deepEqual(out.cues[0].characters.map(c=>c.start),[.2,.6,4,6]);assert.equal(out.cues[0].pinyin,reference.cues[0].pinyin);assert.equal(out.reviewed,false);
 });
-test('groups are never split evenly; missing words keep old timing, not fabricated characters',()=>{
+test('groups are never split evenly; incomplete lines use observed anchors, not fabricated character times',()=>{
  const grouped=matchGroq(reference,{words:[{word:'你好',start:.2,end:2},...words.slice(2)]},8);assert.equal(grouped.cues[0].characters,undefined);assert.equal(grouped.diagnostics.grouped,2);
- const missing=matchGroq(reference,{words:words.slice(0,3)},8);assert.equal(missing.diagnostics.missing,1);assert.equal(missing.cues[0].start,0);assert.equal(missing.cues[0].characters,undefined);
+ const missing=matchGroq(reference,{words:words.slice(0,3)},8);assert.equal(missing.diagnostics.missing,1);assert.equal(missing.cues[0].start,.2);assert.equal(missing.cues[0].characters,undefined);
  assert.equal(matchGroq(reference,{words:[{word:'你',start:2,end:1}]},8).diagnostics.rejectedWordTimes,1);
  const repeat=matchGroq({cues:[{start:0,end:3,text:'你好'},{start:4,end:8,text:'你好'}]},{words:[...words.slice(0,2),{word:'你',start:4,end:5},{word:'好',start:6,end:7}]},8);assert.deepEqual(repeat.cues.map(c=>c.start),[.2,4]);
 });
@@ -45,3 +45,8 @@ test('authentication failure uses backup key, while 429 does not rotate',async()
 test('punctuation and zero-length provider words do not erase valid timestamps',()=>{const r=matchGroq(reference,{words:[{word:'。',start:0,end:0},{word:'呀',start:0,end:0},...words]},8);assert.equal(r.diagnostics.rejectedWordTimes,1);assert.equal(r.diagnostics.precise,4);assert.deepEqual(r.cues[0].characters.map(c=>c.start),[.2,.6,4,6]);});
 
 test('matching recovers across long extra recognition text without shifting the reference',()=>{const noise=Array.from({length:25},(_,i)=>({word:'呀',start:.01+i*.004,end:.014+i*.004}));const r=matchGroq(reference,{words:[...noise,...words]},8);assert.equal(r.diagnostics.matched,4);assert.deepEqual(r.cues[0].characters.map(c=>c.start),[.2,.6,4,6]);});
+
+test('reprocessing raw timestamps does not call Groq again after matcher changes',async()=>{const f=fixture();await f.run();f.records.get('lyrics-drafts/'+f.id+'/groq.json').customMetadata.matcher='old';await f.run();assert.equal(f.groqCalls(),1);});
+
+test('short anchored recognition substitutions reuse observed onsets without interpolation',()=>{const r=matchGroq(reference,{words:[words[0],words[1],{word:'某',start:4,end:4.3},words[3]]},8);assert.equal(r.diagnostics.substitutions,1);assert.deepEqual(r.cues[0].characters.map(c=>c.start),[.2,.6,4,6]);});
+test('overlapping provider ends are bounded by next onset, without changing any onset',()=>{const r=matchGroq(reference,{words:words.map((w,i)=>i===1?{...w,end:4.02}:w)},8);assert.equal(r.cues[0].characters[1].start,.6);assert.equal(r.cues[0].characters[1].end,4);assert.equal(r.cues[0].characters[2].start,4);});

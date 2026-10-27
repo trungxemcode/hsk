@@ -21,7 +21,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   await dialog.getByRole('button',{name:'Tạo script và lưu lên máy chủ',exact:true}).click();await page.waitForFunction(()=>document.querySelector('#musicTranscriptStatus').textContent.includes('Đã tạo và lưu'));
   assert.equal(requested.trackId,tracks[0].id);assert.equal(requested.media,undefined);assert.equal(published,null,'generation already saved server-side; browser does not upload a second time');
   assert.equal(scripts.get(tracks[0].id).status,'draft');
-  await dialog.getByRole('button',{name:'Căn thời gian bằng Groq',exact:true}).click();await page.waitForFunction(()=>document.querySelector('#musicTranscriptStatus').textContent.includes('Nháp Groq: 2/2'));
+  await dialog.getByRole('button',{name:'Căn thời gian bằng Groq',exact:true}).click();await page.waitForFunction(()=>document.querySelector('#musicTranscriptStatus').textContent.includes('Nháp Groq: 1/1 câu'));
   assert.ok(aligned.duration>0);assert.equal(aligned.url,undefined);assert.equal(published,null,'Groq draft never auto-publishes');
   assert.equal(scripts.get(tracks[0].id).cues[0].characters,undefined,'live lyrics unchanged by private draft');
   await dialog.getByRole('button',{name:'Lưu bản đã duyệt'}).click();assert.equal(published,null,'unreviewed draft cannot claim manual approval');

@@ -47,7 +47,7 @@ root.HSKMusicTranscript={install(api){
    const response=await fetch(api.endpoint()+'/api/admin/tracks/'+encodeURIComponent(target.id)+'/align',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},signal:controller.signal,body:JSON.stringify({duration:audio.duration})});
    const result=await response.json();if(!response.ok)throw Error(result.error||'Chưa căn được lời.');if(epoch!==serial||owner!==uid())return;
    C().validate(result);if(!result.saved)throw Error('Máy chủ chưa lưu bản nháp.');value=result;value.cues.forEach(c=>c.reviewed=false);render();busy(true);
-   const d=result.diagnostics||{};message('Nháp Groq: '+(d.precise||0)+'/'+(d.total||0)+' chữ có mốc riêng · '+(d.missing||0)+' chữ chưa khớp'+(d.grouped?' · '+d.grouped+' chữ chung mốc cụm':'')+(d.invalidTimeline?' · Mốc chồng nhau; giữ bản gốc':'')+'. Script đang phát chưa đổi. Nghe và duyệt trước khi lưu.');
+   const d=result.diagnostics||{};message('Nháp Groq: '+value.cues.filter(c=>c.characters?.length).length+'/'+value.cues.length+' câu có mốc từng chữ · '+(d.missing||0)+' chữ chưa khớp'+(d.grouped?' · '+d.grouped+' chữ chung mốc cụm':'')+(d.substitutions?' · '+d.substitutions+' chữ đối chiếu lại theo script':'')+(d.invalidTimeline?' · Mốc chồng nhau; giữ bản gốc':'')+'. Script đang phát chưa đổi. Nghe và duyệt trước khi lưu.');
   }catch(e){if(epoch===serial)message(e.name==='AbortError'?'Đã hủy hoặc quá thời gian.':e.message);}finally{clearTimeout(timer);if(epoch===serial){request=null;busy(false);}}
  };
  generate.onclick=async()=>{
