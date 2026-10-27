@@ -35,3 +35,5 @@ test('missing word times can use a matching observed segment, with no character 
 test('a segment cannot be reused for two repeated lines or assigned outside its observed gap',()=>{
  assert.throws(()=>matchGroq({untimed:true,cues:[{text:'世界和平'},{text:'世界和平'}]},{words:[{word:'你',start:1,end:2}],segments:[{text:'世界和平',start:4,end:7}]},10),e=>e.status===422);
 });
+
+test('oversized 429 does not freeze other songs or rotate keys',async()=>{let calls=0;await assert.rejects(prepareBatchReference({kind:'pinyin',lines:['nǐ hǎo']},{words:[]},['one','two'],async(_url,init)=>{calls++;assert.equal(JSON.parse(init.body).max_completion_tokens,2000);return Response.json({error:{message:'Request too large for model: token limit exceeded'}},{status:429});}),e=>e.status===413);assert.equal(calls,1);});
