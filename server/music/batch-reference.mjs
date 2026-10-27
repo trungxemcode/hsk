@@ -28,11 +28,14 @@ export async function prepareBatchReference(source,data,keys,fetchFn,signal,onCa
  if(source.kind==='hanzi')return {untimed:true,cues:lines.map((text,i)=>({text:plain(text),pinyin:plain(source.pinyinLines?.[i])})),restored:false};
  if(source.kind!=='pinyin')throw error('Bài này chưa có lời tham chiếu; cần bổ sung lời.');
  let candidate=initialCandidate?.model===REFERENCE_MODEL&&Array.isArray(initialCandidate.lines)&&initialCandidate.lines.length===lines.length?initialCandidate:null;
- if(!candidate){candidate={...await requestReference(source,data,lines,lines.map((_,i)=>i),keys,fetchFn,signal),model:REFERENCE_MODEL,referenceRepairAttempted:false};await onCandidate(candidate);}
+ if(!candidate)candidate={lines:new Array(lines.length).fill(null),model:REFERENCE_MODEL,referenceRepairAttempted:false};
+ const missing=candidate.lines.flatMap((line,i)=>typeof line==='string'?[ ]:[i]);
+ for(let start=0;start<missing.length;start+=12){const indices=missing.slice(start,start+12),part=await requestReference(source,data,lines,indices,keys,fetchFn,signal);indices.forEach((index,i)=>{candidate.lines[index]=part.lines[i];});candidate.finishReason=part.finishReason;await onCandidate({...candidate,lines:[...candidate.lines]});}
  try{return checkRestoration(candidate.lines,lines);}catch(err){
-  if(!err.badIndices||err.badIndices.length>24||candidate.referenceRepairAttempted)throw err;
-  const repair=await requestReference(source,data,lines,err.badIndices,keys,fetchFn,signal,candidate.lines),restored=[...candidate.lines];err.badIndices.forEach((index,i)=>{restored[index]=repair.lines[i];});
-  candidate={lines:restored,model:REFERENCE_MODEL,finishReason:repair.finishReason,referenceRepairAttempted:true};await onCandidate(candidate);return checkRestoration(restored,lines);
+  if(!err.badIndices||candidate.referenceRepairAttempted)throw err;
+  const restored=[...candidate.lines],completed=new Set(candidate.repairedIndices||[]),remaining=err.badIndices.filter(i=>!completed.has(i));
+  for(let start=0;start<remaining.length;start+=12){const indices=remaining.slice(start,start+12),repair=await requestReference(source,data,lines,indices,keys,fetchFn,signal,candidate.lines);indices.forEach((index,i)=>{restored[index]=repair.lines[i];completed.add(index);});await onCandidate({...candidate,lines:[...restored],repairedIndices:[...completed]});}
+  candidate={lines:restored,model:REFERENCE_MODEL,finishReason:candidate.finishReason,referenceRepairAttempted:true};await onCandidate(candidate);return checkRestoration(restored,lines);
  }
 }
 export async function stageImportReference(env,job,id,enqueue){

@@ -291,3 +291,5 @@ Nhận dạng lại bằng đoạn ngắn: tools/music_audio_chunks.py tạo M4A
 Các mốc ASR mới trong một clip có thể sửa cả mốc câu lân cận bị gán nhầm trong clip; giữ nguyên mốc ngoài clip. Cache chiến lược full-clip-v1, tối đa 2 clip/chiến lược, không lặp mãi. Phục hồi pinyin giữ nguyên dòng tiếng Anh, phân biệt ü/v đúng, chỉ thử sửa những dòng lệch âm một lượt. Candidate được lưu trước khi chờ quota để lần sau tiếp tục phần sửa ngắn, không tạo lại toàn bài.
 
 Collapsed neighboring ASR anchors expand only the clip search region by 25s on each side; lyric timestamps still come exclusively from observed Groq output.
+
+Pinyin restoration sends at most 12 line IDs per request and checkpoints each part; quota retries resume missing parts without regenerating completed lines.

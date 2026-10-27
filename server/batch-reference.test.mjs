@@ -46,3 +46,7 @@ test('cached bad candidate resumes only its short repair after a quota wait',asy
 test('umlaut pinyin is distinguished correctly and literal English lyrics stay literal',()=>{
  const out=checkRestoration(['绿灯','铃铃铃'],['lǜ dēng','Ring Ring Ring']);assert.equal(out.cues[0].text,'绿灯');assert.equal(out.cues[1].text,'Ring Ring Ring');assert.throws(()=>checkRestoration(['路灯'],['lǜ dēng']));
 });
+
+test('long references resume after quota without regenerating completed line batches',async()=>{
+ const source={kind:'pinyin',lines:Array(25).fill('ni hao')};let saved=null,calls=0;const fetchFn=async(_url,init)=>{const ids=JSON.parse(init.body).response_format.json_schema.schema.required;assert.ok(ids.length<=12);calls++;if(calls===2)return Response.json({}, {status:429,headers:{'Retry-After':'60'}});if(calls===3)assert.equal(ids[0],'line12');return Response.json({choices:[{message:{content:JSON.stringify(Object.fromEntries(ids.map(id=>[id,'\u4f60\u597d'])))}}]});};const save=c=>{saved=JSON.parse(JSON.stringify(c));};await assert.rejects(prepareBatchReference(source,{words:[]},['key'],fetchFn,undefined,save),e=>e.status===429);assert.equal(saved.lines.filter(x=>typeof x==='string').length,12);const out=await prepareBatchReference(source,{words:[]},['key'],fetchFn,undefined,save,saved);assert.equal(out.cues.length,25);assert.equal(calls,4);
+});
