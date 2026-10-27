@@ -61,9 +61,9 @@ root.HSKMusicLyricsUI={install(api){
   const f=file.files?.[0],target=api.menuTrack(),uid=root.HSKAccountDashboard?.user?.uid;if(!f||!target||!api.isOwner()||uploadBusy)return;
   const epoch=++uploadSequence;uploadBusy=true;upload.disabled=true;uploadStatus.hidden=false;uploadStatus.textContent='Đang kiểm tra script…';
   try{if(f.size>C.MAX_BYTES)throw Error('Script tối đa 500 KB.');const value=C.parse(await f.text(),f.name);if(epoch!==uploadSequence||root.HSKAccountDashboard?.user?.uid!==uid)return;
-   uploadStatus.textContent='Đang lưu '+value.cues.length+' câu vào kho…';await api.publish(target.id,value);
+   uploadStatus.textContent='Đang lưu '+value.cues.length+' câu vào kho…';const publication=await api.publish(target.id,value);
    if(epoch!==uploadSequence||root.HSKAccountDashboard?.user?.uid!==uid)return;
-   await api.refresh();uploadStatus.textContent='Đã gắn script. Bài hát có trong mục Học HSK.';track=null;sync();
+   await api.refresh();uploadStatus.textContent='Đã gắn script. Bài hát có trong mục Học HSK.'+(publication?.alignmentQueued?' Đã xếp hàng Groq; có thể tắt máy.':publication?.alignmentError?' '+publication.alignmentError:'');track=null;sync();
   }catch(error){if(epoch===uploadSequence)uploadStatus.textContent=error.message;}finally{if(epoch===uploadSequence){uploadBusy=false;upload.disabled=false;}}
  };
  words.addEventListener('pointerdown',()=>{pointer=true;centered=-1;});document.addEventListener('pointerup',()=>{pointer=false;});document.addEventListener('pointercancel',()=>{pointer=false;});

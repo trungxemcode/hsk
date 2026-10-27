@@ -268,4 +268,10 @@ Apps Script/Drive/Sheets của pipeline voice là một hệ thống riêng; đ�
 4. Đổi URL có kiểm soát, giữ rollback; client config đổi phải bump PWA. Server secret/binding đổi không tự làm frontend nhận endpoint mới.
 5. Sau triển khai xác nhận request thực tế từ tab/PWA tới đúng server và đúng phiên bản. Chỉ báo “đã live/đã kiểm tra” nếu có bằng chứng tương ứng.
 
+Karaoke: chỉ dùng mốc chữ từ dữ liệu căn audio, không chia đều thời gian trong câu. Pinyin ưu tiên script; thiếu thì chuyển bằng vendor/pinyin-pro trên máy. Không gọi AI, không đổi cue hoặc audio lifecycle.
+
+Căn nhạc Groq: Worker kho nhạc gọi Groq bằng secret GROQ_API_KEY; bật MUSIC_GROQ_ENABLED=true. Route admin POST /api/admin/tracks/{id}/align chỉ nhận duration, audio/script lấy từ R2. Nháp lưu riêng lyrics-drafts/{id}/groq.json, không thay script đang phát. Chỉ xuất bản sau khi chủ kho nghe duyệt. Không chia timestamp cụm thành từng chữ đều nhau. Lỗi Groq không tác động AI chat/voice/phát nhạc. Triển khai bằng server/music/wrangler-cloud.jsonc, không ghi đè Worker dịch/voice. Karaoke chỉ dùng timestamp riêng, không chia đều khoảng câu.
+
+Hàng đợi Groq: sau khi audio và script chuẩn lưu trên R2, script mới chưa có timestamp chữ tự xếp hàng. Cron mỗi phút xử lý một bài; không cần mở máy hay app. Worker giữ khóa toàn cục, chờ 429 và retry lỗi tạm thời có giới hạn. API alignment-job xem trạng thái, suffix /cancel để hủy bài. Nháp vẫn cần duyệt trước khi xuất bản.
+
 Karaoke: chỉ sáng từng chữ khi có mốc riêng (JSON characters hoặc Enhanced LRC); không chia đều thời gian. Script chỉ có mốc câu thì theo câu. Mốc phải căn đúng bản audio trong kho; mốc của bản thu khác không tự khớp. Pinyin ưu tiên script; thiếu thì chuyển bằng vendor/pinyin-pro trên máy. Không gọi AI, không đổi cue hoặc audio lifecycle.

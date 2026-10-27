@@ -4,12 +4,13 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  const browser=await chromium.launch({headless:true,...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
  try{for(const width of [390,844,1440]){
   const page=await browser.newPage({viewport:{width,height:844},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
-  const tracks=await fixture(page),scripts=new Map();let requested=null,published=null;
+  const tracks=await fixture(page),scripts=new Map();let requested=null,published=null,aligned=null,queued=false,queueReady=false;
   await page.route('https://music.example/api/library*',r=>r.fulfill({json:{tracks,cursor:null}}));
   await page.route('https://music.example/api/tracks/*/lyrics',r=>{const id=new URL(r.request().url()).pathname.split('/')[3];return r.fulfill({status:scripts.has(id)?200:404,json:scripts.get(id)||{error:'missing'}});});
   await page.route('https://music.example/api/admin/tracks/*/lyrics',r=>{published=r.request().postDataJSON();scripts.set(tracks[0].id,published);tracks[0].lyricsRevision='reviewed';return r.fulfill({json:{saved:true}});});
   await page.route('**/translation-config.json',r=>r.fulfill({json:{enabled:true,endpoint:'https://ai.example/translate'}}));
   await page.route('https://ai.example/music-transcript',r=>{requested=r.request().postDataJSON();const value={version:1,status:'draft',reviewed:false,saved:true,cues:[{start:0,end:1,text:'再见',uncertain:true,reason:'Hai lượt nhận diện khác nhau.'}]};scripts.set(tracks[0].id,value);tracks[0].hasLyrics=true;tracks[0].lyricsRevision='generated';return r.fulfill({json:value});});
+  await page.route('https://music.example/api/admin/tracks/*/alignment-job',r=>{if(r.request().method()==='POST'){aligned=r.request().postDataJSON();queued=true;return r.fulfill({status:202,json:{queued:true,job:{state:'queued'}}});}return r.fulfill({json:!queued?{state:'none'}:!queueReady?{state:'queued'}:{state:'done',result:{version:1,status:'draft',reviewed:false,saved:true,diagnostics:{total:2,matched:2,precise:2,missing:0,grouped:0},cues:[{start:.1,end:1,text:'再见',characters:[{start:.1,end:.4,text:'再'},{start:.8,end:1,text:'见'}],uncertain:true,reason:'Groq draft'}]}}});});
   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic);
   await page.evaluate(()=>{HSKAccountDashboard={user:{uid:'listener',getIdToken:async()=> 'listener'}};HSKStudio.navigate('music-play');});await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList .music-cloud-track').length===3);
   await page.locator('#musicCloudList .music-cloud-track').first().click();await page.locator('#musicMenuBtn').click();assert.equal(await page.locator('#musicTranscriptOpen').isVisible(),false,'listener cannot generate even on library songs');
@@ -20,14 +21,20 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   await dialog.getByRole('button',{name:'Tạo script và lưu lên máy chủ',exact:true}).click();await page.waitForFunction(()=>document.querySelector('#musicTranscriptStatus').textContent.includes('Đã tạo và lưu'));
   assert.equal(requested.trackId,tracks[0].id);assert.equal(requested.media,undefined);assert.equal(published,null,'generation already saved server-side; browser does not upload a second time');
   assert.equal(scripts.get(tracks[0].id).status,'draft');
+  await dialog.getByRole('button',{name:'Căn thời gian bằng Groq',exact:true}).click();await page.waitForFunction(()=>document.querySelector('#musicTranscriptStatus').textContent.includes('Có thể đóng app'));
+  assert.equal(await page.locator('#musicGroqJobCancel').isVisible(),true);
+  await dialog.getByRole('button',{name:'Đóng',exact:true}).click();queueReady=true;
+  await page.locator('#musicTranscriptOpen').click();await page.waitForFunction(()=>document.querySelector('#musicTranscriptStatus').textContent.includes('Nháp Groq: 1/1 câu'));
+  assert.ok(aligned.duration>0);assert.equal(aligned.url,undefined);assert.equal(published,null,'Groq draft never auto-publishes');
+  assert.equal(scripts.get(tracks[0].id).cues[0].characters,undefined,'live lyrics unchanged by private draft');
   await dialog.getByRole('button',{name:'Lưu bản đã duyệt'}).click();assert.equal(published,null,'unreviewed draft cannot claim manual approval');
   const field=dialog.locator('fieldset');await field.locator('input[type=checkbox]').check();await field.locator('textarea').fill('明天见');assert.equal(await field.locator('input[type=checkbox]').isChecked(),false,'editing clears review');await field.locator('input[type=checkbox]').check();
-  await dialog.getByRole('button',{name:'Lưu bản đã duyệt'}).click();await page.waitForFunction(()=>document.querySelector('#musicTranscriptStatus').textContent.includes('Đã lưu bản đã duyệt'));assert.equal(published.reviewed,true);
+  await dialog.getByRole('button',{name:'Lưu bản đã duyệt'}).click();await page.waitForFunction(()=>document.querySelector('#musicTranscriptStatus').textContent.includes('Đã lưu bản đã duyệt'));assert.equal(published.reviewed,true);assert.equal(published.cues[0].characters,undefined,'editing text drops stale character timings');
   assert.ok(await dialog.evaluate(n=>n.scrollWidth<=n.clientWidth+1));await dialog.getByRole('button',{name:'Đóng',exact:true}).click();
   await page.evaluate(()=>{HSKAccountDashboard={user:{uid:'listener',getIdToken:async()=> 'listener'}};dispatchEvent(new Event('hsk-account-ready'));HSKStudio.navigate('music-play');});await page.locator('#musicCloudList .music-cloud-track').first().click();await page.waitForFunction(()=>document.querySelectorAll('#musicTimedLyrics .music-timed-line').length===1);
   const audio=page.locator('#musicBackgroundAudio');await audio.evaluate(n=>{n.currentTime=.2;return n.play();});
   assert.equal(await page.locator('#musicTimedPanel').getAttribute('aria-hidden'),'true');if(await page.locator('#musicPanel').evaluate(n=>n.classList.contains('music-player-expanded')))await page.locator('#musicBack').click();await page.locator('#musicHeroThumb').click();await page.waitForFunction(()=>!document.querySelector('#musicTimedPanel').inert);
-  assert.equal(await page.locator('#musicTimedLyrics').textContent(),'明天见');assert.match(await page.locator('#musicTimedStatus').textContent(),/admin duyệt/);assert.equal(await page.locator('#musicTimedLyrics').evaluate(n=>n.isContentEditable),false);
+  assert.equal(await page.locator('#musicTimedLyrics .music-timed-text').textContent(),'明天见');assert.match(await page.locator('#musicTimedStatus').textContent(),/admin duyệt/);assert.equal(await page.locator('#musicTimedLyrics').evaluate(n=>n.isContentEditable),false);
   assert.equal(await audio.evaluate(n=>!n.paused),true,'flip does not interrupt native playback');await page.locator('#musicLyricsBack').click();assert.equal(await page.locator('#musicTimedPanel').getAttribute('aria-hidden'),'true');
   await page.locator('#musicBack').click();await page.locator('#musicHeroThumb').click();await page.waitForFunction(()=>document.querySelector('#musicLinkCover').classList.contains('is-script-flipped'));
   await page.screenshot({path:'/tmp/music-flip-'+width+'.png'});assert.ok(await page.locator('#musicTimedLyrics').evaluate(n=>n.clientHeight>70),'back face has usable lyrics area');
