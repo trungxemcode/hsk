@@ -4,13 +4,13 @@
 root.HSKMusicLyricsUI={install(api){
  const C=root.HSKMusicLyricsCore,$=id=>document.getElementById(id),panel=$('musicPanel');
  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
- let track=null,script=null,request=null,sequence=0,active=-1,pointer=false,manualUntil=0,selected='',selectionTrack='',uploadSequence=0,uploadBusy=false;
+ let track=null,script=null,request=null,sequence=0,active=-1,centered=-1,pointer=false,manualUntil=0,selected='',selectionTrack='',uploadSequence=0,uploadBusy=false;
  const box=el('section',undefined,'music-timed-panel');box.id='musicTimedPanel';box.hidden=true;box.setAttribute('aria-label','Lời bài hát theo thời gian');
  const head=el('div',undefined,'music-timed-head'),heading=el('h3','Lời bài hát'),follow=el('button','Theo nhạc'),lookup=el('button','Tra cứu AI');follow.type=lookup.type='button';follow.id='musicLyricsFollow';lookup.id='musicLyricsAsk';lookup.hidden=true;
  const note=el('p','','music-timed-note');note.id='musicTimedStatus';note.setAttribute('role','status');
  const words=el('div',undefined,'music-timed-words');words.id='musicTimedLyrics';words.tabIndex=0;words.lang='zh';words.setAttribute('aria-label','Lời bài hát chỉ đọc; nhấn giữ hoặc kéo để chọn chữ');
  head.append(heading,follow,lookup);box.append(head,note,words);const cover=$('musicLinkCover'),thumb=$('musicLinkThumb'),front=el('button','Lật xem lời','music-cover-flip-open'),back=el('button','Ảnh bìa');front.id='musicLyricsFlip';back.id='musicLyricsBack';front.type=back.type='button';front.hidden=true;front.setAttribute('aria-controls','musicTimedPanel');front.setAttribute('aria-expanded','false');back.setAttribute('aria-label','Lật lại ảnh bìa');head.prepend(back);cover.append(front,box);box.inert=true;box.setAttribute('aria-hidden','true');
- function flip(show,focus=true){if(show&&!track?.hasLyrics)return;cover.classList.toggle('is-script-flipped',show);box.inert=!show;box.setAttribute('aria-hidden',String(!show));front.setAttribute('aria-expanded',String(show));thumb.setAttribute('aria-hidden',String(show));if(show){active=-1;tick(api.time(),api.duration());if(focus)back.focus({preventScroll:true});}else if(focus&&!front.hidden)front.focus({preventScroll:true});}
+ function flip(show,focus=true){if(show&&!track?.hasLyrics)return;cover.classList.toggle('is-script-flipped',show);box.inert=!show;box.setAttribute('aria-hidden',String(!show));front.setAttribute('aria-expanded',String(show));thumb.setAttribute('aria-hidden',String(show));if(show){active=-1;centered=-1;tick(api.time(),api.duration());if(focus)back.focus({preventScroll:true});}else if(focus&&!front.hidden)front.focus({preventScroll:true});}
  front.onclick=()=>flip(true);back.onclick=()=>flip(false);box.addEventListener('keydown',event=>{if(event.key==='Escape'){event.stopPropagation();flip(false);}});
  const heroCover=$('musicHeroThumb')?.parentElement;
  function openFromAvatar(event){if(!api.track()?.hasLyrics)return;event?.preventDefault();event?.stopPropagation();api.expand?.();flip(true);}
@@ -24,13 +24,13 @@ root.HSKMusicLyricsUI={install(api){
  $('musicMenuBody').append(upload,file,uploadStatus);
  const sourceIcon=$('musicMenuLibraryRow').querySelector('.music-flat-ico').cloneNode(true),uploadLabel=el('span',upload.textContent,'music-flat-label');upload.replaceChildren(sourceIcon,uploadLabel);
  function selection(){const s=getSelection();return s&&s.rangeCount&&!s.isCollapsed&&words.contains(s.anchorNode)&&words.contains(s.focusNode)?s.toString().trim().slice(0,280):'';}
- function clear(){flip(false,false);coverEligibility(false);request?.abort();request=null;++sequence;script=null;active=-1;selected='';selectionTrack='';lookup.hidden=true;words.replaceChildren();box.hidden=true;panel.classList.remove('music-has-script');root.dispatchEvent(new Event('hsk-music-context-end'));}
+ function clear(){flip(false,false);coverEligibility(false);request?.abort();request=null;++sequence;script=null;active=-1;centered=-1;selected='';selectionTrack='';lookup.hidden=true;words.replaceChildren();box.hidden=true;panel.classList.remove('music-has-script');root.dispatchEvent(new Event('hsk-music-context-end'));}
  function tick(time,duration){
   if(!script||panel.hidden||api.mode()!=='chill')return;
-  const next=C.active(script.cues,time,duration||Infinity);if(next===active)return;
+  const next=C.active(script.cues,time,duration||Infinity);if(next===active&&centered===next)return;
   if(active>=0){const n=words.children[active];n?.classList.remove('is-current');n?.removeAttribute('aria-current');}
   active=next;if(next<0)return;const row=words.children[next];row.classList.add('is-current');row.setAttribute('aria-current','true');
-  if(!pointer&&!selection()&&Date.now()>manualUntil){const top=Math.max(0,row.offsetTop-words.offsetTop-(words.clientHeight-row.clientHeight)/2);words.scrollTo({top,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+  if(!box.inert&&!pointer&&!selection()&&Date.now()>manualUntil){const r=row.getBoundingClientRect(),w=words.getBoundingClientRect();const top=Math.max(0,words.scrollTop+r.top-w.top-(words.clientHeight-r.height)/2);words.scrollTo({top,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});centered=next;}
  }
  async function load(next){
   if(next?.id===track?.id&&next?.lyricsRevision===track?.lyricsRevision)return;
@@ -57,8 +57,8 @@ root.HSKMusicLyricsUI={install(api){
    await api.refresh();uploadStatus.textContent='Đã gắn script. Bài hát có trong mục Học HSK.';track=null;sync();
   }catch(error){if(epoch===uploadSequence)uploadStatus.textContent=error.message;}finally{if(epoch===uploadSequence){uploadBusy=false;upload.disabled=false;}}
  };
- words.addEventListener('pointerdown',()=>{pointer=true;});document.addEventListener('pointerup',()=>{pointer=false;});document.addEventListener('pointercancel',()=>{pointer=false;});
- for(const event of ['wheel','touchmove'])words.addEventListener(event,()=>{manualUntil=Date.now()+5000;},{passive:true});
+ words.addEventListener('pointerdown',()=>{pointer=true;centered=-1;});document.addEventListener('pointerup',()=>{pointer=false;});document.addEventListener('pointercancel',()=>{pointer=false;});
+ for(const event of ['wheel','touchmove'])words.addEventListener(event,()=>{manualUntil=Date.now()+5000;centered=-1;},{passive:true});
  document.addEventListener('selectionchange',()=>{const value=selection();if(value){selected=value;selectionTrack=track?.id||'';lookup.hidden=false;}else if(document.activeElement!==lookup){selected='';lookup.hidden=true;}});
  lookup.addEventListener('pointerdown',event=>event.preventDefault());
  lookup.onclick=()=>{
@@ -66,7 +66,7 @@ root.HSKMusicLyricsUI={install(api){
   const cues=script.cues,context=cues.filter(c=>c.text&&(c.text.includes(text)||text.includes(c.text))).slice(0,3);const excerpt=(context.length?context:cues.slice(Math.max(0,active-1),Math.max(0,active-1)+3)).map(c=>({hanzi:c.text,pinyin:c.pinyin,vi:c.vi}));
   root.dispatchEvent(new CustomEvent('hsk-music-ask',{detail:{lesson:{id:'music-'+track.id,title:track.title,vi:track.title,number:'Âm nhạc',hsk:1,words:[],content:{lyrics:excerpt}},question:('Giải thích nghĩa, pinyin và cách dùng trong lời bài hát của đoạn: “'+text+'”.').slice(0,500)}}));
  };
- follow.onclick=()=>{manualUntil=0;pointer=false;getSelection()?.removeAllRanges();active=-1;tick(api.time(),api.duration());};
+ follow.onclick=()=>{manualUntil=0;pointer=false;getSelection()?.removeAllRanges();active=-1;centered=-1;tick(api.time(),api.duration());};
  new MutationObserver(sync).observe(panel,{attributes:true,attributeFilter:['class','hidden','data-music-mode']});
  new MutationObserver(sync).observe($('musicMenuSheet'),{attributes:true,attributeFilter:['data-view','aria-hidden']});
  root.addEventListener('hsk-account-ready',()=>{++uploadSequence;uploadBusy=false;upload.disabled=false;uploadStatus.hidden=true;file.value='';track=null;clear();});

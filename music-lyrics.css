@@ -48,3 +48,8 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCov
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover .music-timed-line{font-size:clamp(18px,2.7vw,26px)!important}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-cover[data-script=true]{position:relative!important;z-index:3!important;pointer-events:auto!important;cursor:pointer!important}
 @media(prefers-reduced-motion:reduce){html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicLinkThumb,html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicTimedPanel,html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicLyricsFlip{transition:none!important}}
+
+/* Center active lyrics with room for the first/last cue; keep selection native. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicTimedLyrics{padding-block:50%!important;scroll-padding-block:50%;overflow-anchor:none;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line{opacity:.48;transition:color 180ms ease,opacity 180ms ease!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line.is-current{opacity:1;}
