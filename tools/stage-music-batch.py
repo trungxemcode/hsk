@@ -41,7 +41,7 @@ def main():
             duration=sum(float(n)*factor for n,factor in zip(match.groups(),[3600,60,1])) if match else float(track['duration'])
             if ready.stat().st_size>12*1024*1024 or duration>480:raise RuntimeError('audio-limit')
             kind=track.get('referenceKind');kind=kind if kind in ('hanzi','pinyin') else 'asr'
-            title=track['title'];artist=title.split('|')[-1].split(' - ')[-1] if '|' in title else track.get('channel','Moah')
+            title=track['title'];parts=title.split('|');credit=parts[-1] if ' - ' in parts[-1] else parts[0];artist=' - '.join(credit.split(' - ')[1:]).strip() or track.get('channel','Moah')
             job={'id':jobid,'batchId':'moah-popular-2026-10-27','state':'queued','createdAt':int(time.time()*1000),'videoId':video,'url':'https://www.youtube.com/watch?v='+video,'title':title[:120],'artist':artist[:80],'composer':'','duration':duration,'audioSha256':hashlib.sha256(ready.read_bytes()).hexdigest(),'referenceKind':kind,'referenceLines':track.get('referenceLines',[]),'pinyinLines':track.get('originalPinyin',[]),'permission':manifest['permission']}
             jobfile=root/(jobid+'.json');jobfile.write_text(json.dumps(job,ensure_ascii=False),encoding='utf-8')
             put('batch-audio/'+jobid+'.m4a',ready,'audio/mp4');put('batch-staging/'+jobid+'.json',jobfile,'application/json')
