@@ -1735,6 +1735,37 @@
           "value": "api.isOwner()"
         }
       ]
+    },
+    {
+      "id": "music-groq-alignment",
+      "name": "Chủ kho căn thời gian nhạc bằng Groq, lưu nháp riêng",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "server/music/groq-alignment.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/groq-alignment.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/music/cloud-worker.mjs",
+          "value": "groqRoute(request"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music-transcript.js",
+          "value": "musicGroqAlign"
+        },
+        {
+          "kind": "contains",
+          "file": "server/music/groq-alignment.mjs",
+          "value": "draftKey='lyrics-drafts/'"
+        }
+      ]
     }
   ]
 }

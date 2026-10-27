@@ -3,6 +3,6 @@
   "main": "cloud-worker.mjs",
   "compatibility_date": "2026-10-01",
   "workers_dev": true,
-  "vars": {"ALLOWED_ORIGINS":"https://trungxemcode.github.io"},
+  "vars": {"MUSIC_GROQ_ENABLED":"true","ALLOWED_ORIGINS":"https://trungxemcode.github.io"},
   "r2_buckets": [{"binding":"MUSIC_BUCKET","bucket_name":"hsk-music-library"}]
 }

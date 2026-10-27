@@ -23,6 +23,7 @@ root.HSKMusicLyricsUI={install(api){
  function pinyinReady(){if(root.pinyinPro)return Promise.resolve();if(pronunciation)return pronunciation;pronunciation=new Promise(resolve=>{const n=document.createElement('script');n.src='./vendor/pinyin-pro/pinyin-pro.js';n.onload=n.onerror=()=>{n.remove();resolve();};document.head.append(n);setTimeout(resolve,5000);});return pronunciation;}
  function pronunciationOf(cue){if(cue.pinyin)return cue.pinyin;try{return root.pinyinPro?.pinyin(cue.text,{toneType:'symbol',traditional:true})||'';}catch{return '';}}
  function glow(row,cue,time,duration){
+  row.dataset.timing=cue.characters?.length?'character':'line';
   const count=C.characterCount(cue,time,duration);if(row.dataset.lit===String(count))return;
   row.dataset.lit=String(count);let n=0;for(const char of row.querySelectorAll('.music-timed-char')){const spoken=!/[\s\p{P}\p{S}]/u.test(char.textContent);if(spoken)n++;char.classList.toggle('is-sung',n>0&&n<=count);}
  }

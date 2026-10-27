@@ -48,12 +48,12 @@ test('only owner may delete published audio; private keys and malformed IDs rema
 test('published lyrics sidecar is public-read, owner-write, bounded and deleted with audio',async()=>{
  const t=setup(),track=(await (await t.handle(upload(t))).json()).track;
  const path='/api/admin/tracks/'+track.id+'/lyrics',publicPath='/api/tracks/'+track.id+'/lyrics';
- const body=JSON.stringify({cues:[{start:0,end:2,text:'你好',pinyin:'nǐ hǎo',vi:'Xin chào'}]});
+ const body=JSON.stringify({cues:[{start:0,end:2,text:'你好',pinyin:'nǐ hǎo',vi:'Xin chào',characters:[{start:.2,text:'你'},{start:1.7,text:'好'}]}]});
  const publish=(token,content=body)=>t.handle(t.req(path,{method:'POST',body:content,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'}}));
  assert.equal((await publish('listener')).status,403);assert.equal((await t.handle(t.req(publicPath))).status,404);
  assert.equal((await publish('owner','x'.repeat(500001))).status,413);
  assert.equal((await publish('owner','{"cues":[]}')).status,400);
- assert.equal((await publish('owner')).status,200);const value=await (await t.handle(t.req(publicPath))).json();assert.equal(value.cues[0].text,'你好');
+ assert.equal((await publish('owner')).status,200);const value=await (await t.handle(t.req(publicPath))).json();assert.equal(value.cues[0].text,'你好');assert.deepEqual(value.cues[0].characters,[{start:.2,end:null,text:'你'},{start:1.7,end:null,text:'好'}],'publication retains real character timestamps');
  const reviewed=JSON.stringify({...JSON.parse(body),status:'reviewed',reviewed:true});assert.equal((await publish('owner',reviewed)).status,200);assert.equal((await (await t.handle(t.req(publicPath))).json()).reviewed,true);
  const list=await (await t.handle(t.req('/api/library'))).json();assert.equal(list.tracks[0].hasLyrics,true);
  const key='audio/'+track.id,original=t.objects.get(key).bytes;assert.deepEqual(original,mp3,'script publication never rewrites audio');
