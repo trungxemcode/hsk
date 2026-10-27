@@ -102,7 +102,7 @@ async function processGroq(id,input,env,json,fetchFn,signal){
   }
   // Cache recognition before restoration so retries do not transcribe the same audio.
   await bucket.put('lyrics-drafts/'+id+'/groq-raw.json',JSON.stringify({words:data.words,segments:data.segments,duration:data.duration,model:MODEL}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
-  if(batch)reference=await prepareBatchReference(reference,data,keys,fetchFn,controller.signal);
+  if(batch)reference=await prepareBatchReference(reference,data,keys,fetchFn,controller.signal,candidate=>bucket.put('lyrics-drafts/'+id+'/groq-reference.json',JSON.stringify(candidate),{httpMetadata:{contentType:'application/json; charset=utf-8',cacheControl:'no-store'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}}));
   const value=matchGroq(reference,data,input.duration);
   if(batch){value.referenceRestored=reference.restored;value.generatedFromAudio=reference.generatedFromAudio===true;value.batchId=batchSource.batchId;value.referenceSource=batchSource.sourceUrl;}
   if(controller.signal.aborted)throw fail('Đã hủy hoặc quá thời gian.',408);
