@@ -28,3 +28,10 @@ test('strict per-line fields preserve repeated lyrics instead of merging duplica
  const r=await prepareBatchReference({kind:'pinyin',lines:['nǐ hǎo','nǐ hǎo']},{words:[]},['key'],async(_url,init)=>{const b=JSON.parse(init.body);assert.equal(b.response_format.json_schema.strict,true);assert.deepEqual(b.response_format.json_schema.schema.required,['line0','line1']);return Response.json({choices:[{message:{content:JSON.stringify({line0:'你好',line1:'你好'})}}]});});assert.equal(r.cues.length,2);
 });
 test('line ends may be clipped at a real onset without changing either line onset',()=>{const r=matchGroq({untimed:true,cues:[{text:'你'},{text:'好'}]},{words:[{word:'你',start:1,end:3},{word:'好',start:2,end:4}]},5);assert.deepEqual(r.cues.map(c=>c.start),[1,2]);assert.equal(r.cues[0].end,2);});
+test('missing word times can use a matching observed segment, with no character interpolation',()=>{
+ const r=matchGroq({untimed:true,cues:[{text:'世界和平'}]},{words:[{word:'你',start:1,end:2}],segments:[{text:'世界和平',start:4,end:7}]},10);assert.equal(r.cues[0].start,4);assert.equal(r.cues[0].end,7);assert.equal(r.cues[0].characters,undefined);assert.equal(r.diagnostics.segmentAnchoredCharacters,4);
+ assert.throws(()=>matchGroq({untimed:true,cues:[{text:'世界和平'}]},{words:[{word:'你',start:1,end:2}],segments:[{text:'完全不同',start:4,end:7}]},10),e=>e.status===422);
+});
+test('a segment cannot be reused for two repeated lines or assigned outside its observed gap',()=>{
+ assert.throws(()=>matchGroq({untimed:true,cues:[{text:'世界和平'},{text:'世界和平'}]},{words:[{word:'你',start:1,end:2}],segments:[{text:'世界和平',start:4,end:7}]},10),e=>e.status===422);
+});

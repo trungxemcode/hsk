@@ -1,4 +1,5 @@
 """Owner-run public audio import fallback. Wrangler handles Cloudflare authentication.
+Requires Node/Wrangler login and pip install yt-dlp imageio-ffmpeg.
 Input: {permission: str, tracks: [{videoId, importJobId, title, duration,
 referenceKind, referenceLines, url, ...}]}. No cookies or API secrets are read.
 After staging, Worker Cron publishes/checksums audio and processes Groq serially.
