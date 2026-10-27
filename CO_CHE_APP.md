@@ -283,3 +283,5 @@ Fallback nhập được chủ kho cho phép khi GitHub bị nguồn từ chối
 Phục hồi pinyin dùng Qwen preview chỉ cho bản nhập riêng có kiểm tra âm; nếu provider/model hoặc chất lượng không đạt thì không xuất bản. Ưu tiên lời Trung từ nguồn nhạc liên kết, đối chiếu với pinyin mô tả, trước khi dùng phục hồi AI.
 
 Nếu thiếu hoàn toàn word timestamp cho một dòng, chỉ dùng mốc segment ASR quan sát được khi âm khớp >=94%, độ dài gần tương đương, đúng khoảng thời gian giữa hai dòng và segment chưa dùng cho dòng khác. Dòng này không có highlight từng chữ; không tự chia đều. Candidate chữ Trung đã qua kiểm âm được cache riêng theo audio/source ETag để retry căn không gọi model tạo lời lại.
+
+Thiếu hoàn toàn mốc một dòng: một bài được thử ASR thêm tối đa một lượt với ngữ cảnh dòng thiếu (cùng audio R2, temperature 0.2). Chỉ thay word/segment timestamp nằm trong khoảng hở giữa hai mốc quan sát được; giữ nguyên mọi mốc bên ngoài. Cache repairAttempted để không gọi lại tốn phí khi vẫn thiếu. 429 vẫn chờ chung, không xoay key để né quota. Không đạt ngưỡng xuất bản thì giữ nháp, trả cần kiểm tra thay vì báo đã hoàn tất.

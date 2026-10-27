@@ -55,3 +55,15 @@ test('a private untimed batch reference can publish a validated automatic draft 
  const f=fixture();f.records.delete(f.lyrics);await f.env.MUSIC_BUCKET.put('lyrics-sources/'+f.id+'.json',JSON.stringify({kind:'hanzi',lines:['你好世界'],autoPublish:true,batchId:'test',sourceUrl:'https://www.youtube.com/watch?v=aaaaaaaaaaa'}));
  const r=await f.run();assert.equal(r.status,200);const published=JSON.parse(new TextDecoder().decode(f.records.get(f.lyrics).bytes));assert.equal(published.reviewed,false);assert.equal(published.publication,'automatic-draft');assert.deepEqual(published.cues[0].characters.map(c=>c.start),[.2,.6,4,6]);
 });
+
+test('one bounded recognition repair fills a missing line using real word times from the same audio',async()=>{
+ const f=fixture();f.records.delete(f.lyrics);await f.env.MUSIC_BUCKET.put('lyrics-sources/'+f.id+'.json',JSON.stringify({kind:'hanzi',lines:['你好','世界和平'],autoPublish:true,batchId:'repair'}));
+ let requests=0;const repaired=[{word:'世',start:3,end:3.3},{word:'界',start:4,end:4.3},{word:'和',start:5,end:5.3},{word:'平',start:6,end:6.3}];
+ const call=async(url,init)=>{if(!url.includes('api.groq.com'))return f.fetchFn(url,init);requests++;assert.equal(init.body.get('file').size,3);if(requests===1)return Response.json({words:words.slice(0,2)});assert.equal(init.body.get('temperature'),'0.2');return Response.json({words:[...words.slice(0,2),...repaired]});};
+ const r=await groqRoute(f.req(),f.env,f.json,call),out=await r.json();assert.equal(r.status,200);assert.equal(requests,2);assert.equal(out.repairAttempted,true);assert.deepEqual(out.cues[1].characters.map(c=>c.start),[3,4,5,6]);
+});
+test('failed recognition repair is cached and cannot loop paid recognition on later retries',async()=>{
+ const f=fixture();f.records.delete(f.lyrics);await f.env.MUSIC_BUCKET.put('lyrics-sources/'+f.id+'.json',JSON.stringify({kind:'hanzi',lines:['你好','世界和平'],autoPublish:true,batchId:'repair'}));let requests=0;
+ const call=async(url,init)=>{if(!url.includes('api.groq.com'))return f.fetchFn(url,init);requests++;return Response.json({words:words.slice(0,2)});};
+ await assert.rejects(groqRoute(f.req(),f.env,f.json,call),e=>e.status===422);assert.equal(requests,2);await assert.rejects(groqRoute(f.req(),f.env,f.json,call),e=>e.status===422);assert.equal(requests,2);assert.equal(f.records.has(f.lyrics),false);
+});
