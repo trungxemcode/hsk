@@ -19,3 +19,14 @@ test('malformed/oversized/overlapping scripts rejected; no synthetic alignment',
  assert.throws(()=>C.validate({cues:[{start:NaN,text:'x'}]}));
  assert.equal(C.active([{start:1,end:null,text:'a'}],5,10),0);assert.equal(C.active([{start:1,end:null,text:'a'}],10,10),-1);
 });
+test('character sweep uses media time, handles seeks and unknown final duration without mutating cues',()=>{
+ const cue={start:10,end:14,text:'你，好世界！'};
+ assert.equal(C.characterCount(cue,9),0);
+ assert.equal(C.characterCount(cue,10),1);
+ assert.equal(C.characterCount(cue,12),3);
+ assert.equal(C.characterCount(cue,13.9),4);
+ assert.equal(C.characterCount(cue,10.1),1);
+ assert.equal(C.characterCount({...cue,end:null},12),0);
+ assert.equal(C.characterCount({...cue,end:null},12,14),3);
+ assert.deepEqual(cue,{start:10,end:14,text:'你，好世界！'});
+});

@@ -267,3 +267,5 @@ Apps Script/Drive/Sheets của pipeline voice là một hệ thống riêng; đ�
 3. Thử lỗi auth, URL không hợp lệ, mạng chậm/đứt và phản hồi sai schema. Với audio thử HEAD/Range/seek và phát nền; với model kiểm bytes/hash/runtime.
 4. Đổi URL có kiểm soát, giữ rollback; client config đổi phải bump PWA. Server secret/binding đổi không tự làm frontend nhận endpoint mới.
 5. Sau triển khai xác nhận request thực tế từ tab/PWA tới đúng server và đúng phiên bản. Chỉ báo “đã live/đã kiểm tra” nếu có bằng chứng tương ứng.
+
+Karaoke: chữ sáng dần ước tính theo khoảng thời gian từng câu, không phải timestamp từng âm. Pinyin ưu tiên script; thiếu thì chuyển bằng vendor/pinyin-pro trên máy. Không gọi AI, không đổi cue hoặc audio lifecycle.

@@ -1672,6 +1672,21 @@
           "kind": "file",
           "file": "tools/check-music-lyrics-ui.cjs",
           "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music-lyrics-core.js",
+          "value": "function characterCount("
+        },
+        {
+          "kind": "file",
+          "file": "vendor/pinyin-pro/pinyin-pro.js",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/music/music-lyrics-ui.js",
+          "value": "function pronunciationOf("
         }
       ]
     },

@@ -18,6 +18,14 @@ root.HSKMusicLyricsUI={install(api){
  $('musicMiniThumb')?.addEventListener('click',openFromAvatar);
  function coverEligibility(has){front.hidden=!has;cover.classList.toggle('has-script-cover',has);if(heroCover){heroCover.dataset.script=String(has);if(has){heroCover.setAttribute('role','button');heroCover.tabIndex=0;heroCover.setAttribute('aria-label','Lật ảnh bìa để xem lời bài hát');}else{heroCover.removeAttribute('role');heroCover.removeAttribute('tabindex');heroCover.removeAttribute('aria-label');}}}
 
+ // Local, lazy pronunciation data. Failure leaves supplied pinyin and playback usable.
+ let pronunciation;
+ function pinyinReady(){if(root.pinyinPro)return Promise.resolve();if(pronunciation)return pronunciation;pronunciation=new Promise(resolve=>{const n=document.createElement('script');n.src='./vendor/pinyin-pro/pinyin-pro.js';n.onload=n.onerror=()=>{n.remove();resolve();};document.head.append(n);setTimeout(resolve,5000);});return pronunciation;}
+ function pronunciationOf(cue){if(cue.pinyin)return cue.pinyin;try{return root.pinyinPro?.pinyin(cue.text,{toneType:'symbol',traditional:true})||'';}catch{return '';}}
+ function glow(row,cue,time,duration){
+  const count=C.characterCount(cue,time,duration);if(row.dataset.lit===String(count))return;
+  row.dataset.lit=String(count);let n=0;for(const char of row.querySelectorAll('.music-timed-char')){const spoken=!/[\s\p{P}\p{S}]/u.test(char.textContent);if(spoken)n++;char.classList.toggle('is-sung',n>0&&n<=count);}
+ }
  const upload=el('button','Gắn script LRC / SRT / JSON','music-flat-row music-chill-only');upload.id='musicLyricsUpload';upload.type='button';upload.dataset.menuView='main';upload.hidden=true;
  const file=el('input');file.type='file';file.accept='.lrc,.srt,.json,text/plain,application/json';file.id='musicLyricsFile';file.hidden=true;
  const uploadStatus=el('p','','music-status');uploadStatus.id='musicLyricsUploadStatus';uploadStatus.dataset.menuView='main';uploadStatus.hidden=true;uploadStatus.setAttribute('role','status');
@@ -27,8 +35,8 @@ root.HSKMusicLyricsUI={install(api){
  function clear(){flip(false,false);coverEligibility(false);request?.abort();request=null;++sequence;script=null;active=-1;centered=-1;selected='';selectionTrack='';lookup.hidden=true;words.replaceChildren();box.hidden=true;panel.classList.remove('music-has-script');root.dispatchEvent(new Event('hsk-music-context-end'));}
  function tick(time,duration){
   if(!script||panel.hidden||api.mode()!=='chill')return;
-  const next=C.active(script.cues,time,duration||Infinity);if(next===active&&centered===next)return;
-  if(active>=0){const n=words.children[active];n?.classList.remove('is-current');n?.removeAttribute('aria-current');}
+  const next=C.active(script.cues,time,duration||Infinity);if(next>=0)glow(words.children[next],script.cues[next],time,duration||Infinity);if(next===active&&centered===next)return;
+  if(active>=0){const n=words.children[active];n?.classList.remove('is-current');n?.removeAttribute('aria-current');if(n&&active!==next){n.removeAttribute('data-lit');for(const c of n.querySelectorAll('.is-sung'))c.classList.remove('is-sung');}}
   active=next;if(next<0)return;const row=words.children[next];row.classList.add('is-current');row.setAttribute('aria-current','true');
   if(!box.inert&&!pointer&&!selection()&&Date.now()>manualUntil){const r=row.getBoundingClientRect(),w=words.getBoundingClientRect();const top=Math.max(0,words.scrollTop+r.top-w.top-(words.clientHeight-r.height)/2);words.scrollTo({top,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});centered=next;}
  }
@@ -36,8 +44,8 @@ root.HSKMusicLyricsUI={install(api){
   if(next?.id===track?.id&&next?.lyricsRevision===track?.lyricsRevision)return;
   clear();track=next?{...next}:null;if(!next?.hasLyrics)return;
   box.hidden=false;note.hidden=false;coverEligibility(true);panel.classList.add('music-has-script');note.textContent='Đang tải lời bài hát…';const epoch=sequence,controller=new AbortController();request=controller;
-  try{const response=await fetch(api.endpoint()+'/api/tracks/'+encodeURIComponent(next.id)+'/lyrics',{signal:controller.signal,cache:'no-store'});if(!response.ok)throw Error(response.status===404?'Chưa có script cho bài này.':'Chưa tải được lời bài hát.');const text=await response.text();if(controller.signal.aborted||epoch!==sequence)return;script=C.parse(text,'lyrics.json');
-   words.replaceChildren(...script.cues.map((cue,i)=>{const row=el('p',undefined,'music-timed-line');row.dataset.cue=String(i);row.append(el('span',cue.text,'music-timed-text'));if(cue.pinyin)row.append(el('small',cue.pinyin,'music-timed-pinyin'));if(cue.vi)row.append(el('small',cue.vi,'music-timed-vi'));return row;}));
+  try{const response=await fetch(api.endpoint()+'/api/tracks/'+encodeURIComponent(next.id)+'/lyrics',{signal:controller.signal,cache:'no-store'});if(!response.ok)throw Error(response.status===404?'Chưa có script cho bài này.':'Chưa tải được lời bài hát.');const text=await response.text();if(controller.signal.aborted||epoch!==sequence)return;const parsed=C.parse(text,'lyrics.json');await pinyinReady();if(controller.signal.aborted||epoch!==sequence)return;script=parsed;
+   words.replaceChildren(...script.cues.map((cue,i)=>{const row=el('p',undefined,'music-timed-line');row.dataset.cue=String(i);const han=el('span',undefined,'music-timed-text');han.append(...Array.from(cue.text,c=>el('span',c,'music-timed-char')));row.append(han);const pin=pronunciationOf(cue);if(pin){const small=el('small',pin,'music-timed-pinyin');small.lang='zh-Latn';row.append(small);}if(cue.vi)row.append(el('small',cue.vi,'music-timed-vi'));return row;}));
    const shared=JSON.parse(text);note.hidden=!(shared.status==='draft');note.textContent=(shared.status==='draft'?'Script AI · Chưa được admin duyệt. ':shared.reviewed===true?'Script đã được admin duyệt. ':'')+'Nhấn giữ hoặc kéo chọn lời để tra cứu AI.';tick(api.time(),api.duration());
   }catch(error){if(epoch===sequence&&error.name!=='AbortError'){note.hidden=false;note.textContent=error.message;const retry=el('button','Thử tải lại');retry.type='button';retry.onclick=()=>{track=null;load(next);};words.append(retry);}}
   finally{if(request===controller)request=null;}
