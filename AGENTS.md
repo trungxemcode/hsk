@@ -4,6 +4,9 @@ Source of truth: `https://github.com/trungxemcode/hsk`, branch `main`.
 Preferred workspace on this Windows PC: `C:\Users\LENOVO\hsk`.
 The older `C:\New folder\hsk` is a secondary checkout, not a separate app or source of truth.
 
+## Cơ chế app
+Đọc [CO_CHE_APP.md](CO_CHE_APP.md) để hiểu điểm cắm module, dữ liệu, PWA iOS/Android, backend và quy trình sửa an toàn. Khi thay đổi cơ chế, cập nhật mục tương ứng theo code đã kiểm chứng.
+
 ## Start a coding task (fast)
 1. Read this file. Run `git status -sb`, `git branch --show-current`, and `git log -1 --oneline` in the current checkout.
 2. Check `docs/ai/TASK_STATE.md` only when resuming work; inspect the relevant section of `docs/ai/PROJECT_MAP.md` only for the feature being changed.

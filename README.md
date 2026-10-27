@@ -1,5 +1,8 @@
 # HSK 1–6
 
+## Cơ chế app
+Hướng dẫn cho AI và người bảo trì: [Cơ chế app HSK](CO_CHE_APP.md). Đọc trước khi sửa code hoặc triển khai.
+
 ## Cấu trúc mã nguồn
 
 | Vị trí | Vai trò |
