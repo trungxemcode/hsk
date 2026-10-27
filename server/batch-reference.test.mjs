@@ -1,0 +1,26 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {checkRestoration,stageImportReference,prepareBatchReference} from './music/batch-reference.mjs';
+import {matchGroq} from './music/groq-alignment.mjs';
+test('pinyin restoration preserves lines and rejects invented or missing syllables',()=>{
+ const r=checkRestoration(['你好世界'],['nǐ hǎo shìjiè']);assert.equal(r.untimed,true);assert.equal(r.cues[0].pinyin,'nǐ hǎo shìjiè');assert.equal(r.cues[0].start,undefined);
+ assert.throws(()=>checkRestoration(['你好世界'],['zài jiàn']));assert.throws(()=>checkRestoration([],['nǐ hǎo']));
+});
+test('untimed lyrics require observed onsets and never receive guessed original times',()=>{
+ const r=matchGroq({untimed:true,cues:[{text:'你好'}]},{words:[{word:'你',start:5,end:6},{word:'好',start:8,end:10}]},12);assert.deepEqual(r.cues[0].characters.map(c=>c.start),[5,8]);
+ assert.throws(()=>matchGroq({untimed:true,cues:[{text:'你好'},{text:'世界'}]},{words:[{word:'你',start:5,end:6}]},12),e=>e.status===422);
+});
+test('import staging is opt-in, private, and leaves ordinary imports unchanged',async()=>{
+ const writes=[],calls=[],bucket={async head(){return null;},async put(...args){writes.push(args);return {};}};const env={MUSIC_BUCKET:bucket},enqueue=async(...args)=>{calls.push(args);return {queued:true};};
+ assert.equal(await stageImportReference(env,{},'id',enqueue),null);assert.equal(writes.length,0);
+ const job={batchId:'batch',referenceKind:'hanzi',referenceLines:['你好'],duration:10,title:'test',url:'https://www.youtube.com/watch?v=aaaaaaaaaaa'};
+ assert.equal((await stageImportReference(env,job,'id',enqueue)).queued,true);assert.equal(writes[0][0],'lyrics-sources/id.json');assert.equal(JSON.parse(writes[0][1]).lines[0],'你好');assert.equal(writes[0][2].onlyIf.etagDoesNotMatch,'*');assert.equal(calls.length,1);
+ assert.equal((await stageImportReference(env,{...job,referenceKind:'missing'},'other',enqueue)).queued,false);
+});
+test('restoration uses configured Groq keys and retains 429 without rotating keys',async()=>{
+ let calls=0;await assert.rejects(prepareBatchReference({kind:'pinyin',lines:['nǐ hǎo']},{words:[]},['one','two'],async()=>{calls++;return Response.json({}, {status:429,headers:{'Retry-After':'120'}});}),e=>e.status===429&&e.retryAfter==='120');assert.equal(calls,1);
+});
+test('audio-only drafts use observed ASR segments and do not invent absent lyrics',async()=>{
+ const r=await prepareBatchReference({kind:'asr'},{segments:[{text:'你好',start:1,end:3}]},[],()=>{throw Error('unexpected LLM call');});assert.equal(r.generatedFromAudio,true);assert.equal(r.cues[0].text,'你好');assert.equal(r.cues[0].start,undefined);
+ await assert.rejects(prepareBatchReference({kind:'asr'},{segments:[]},[],()=>{}),e=>e.status===422);
+});

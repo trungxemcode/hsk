@@ -1,3 +1,5 @@
+import {runStagedImport} from './staged-imports.mjs';
+import {stageImportReference} from './batch-reference.mjs';
 // Owner-uploaded R2 audio library. Independent of AI, voice and study services.
 import Lyrics from '../../src/modules/music/music-lyrics-core.js';
 import {groqQueueRoute,enqueueGroqJob,runGroqQueue} from './groq-queue.mjs';
@@ -66,7 +68,7 @@ export async function handleCloudMusic(request,env,ctx={},deps={}){
    if(!m4a&&!mp3)return json({error:'File không phải MP3/M4A hợp lệ.'},400);
    const ext=m4a?'m4a':'mp3',hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join(''),id=hash+'.'+ext;
    await env.MUSIC_BUCKET.put('audio/'+id,bytes,{httpMetadata:{contentType:m4a?'audio/mp4':'audio/mpeg',cacheControl:'public, max-age=86400'},customMetadata:{title,artist,composer,sourceUrl,published:'true'}});
-   if(imported?.job){imported.job.state='completed';imported.job.trackId=id;await writeJob(env,imported.job);}
+   if(imported?.job){try{imported.job.alignment=await stageImportReference(env,imported.job,id,enqueueGroqJob);}catch{imported.job.alignment={queued:false,error:'Chưa xếp được lời vào hàng đợi.'};}imported.job.state='completed';imported.job.trackId=id;await writeJob(env,imported.job);}
    return json({uploaded:true,track:{id,title,artist,bytes:size,url:u.origin+'/audio/'+id}});
   }
   if(u.pathname.startsWith('/audio/')&&['GET','HEAD'].includes(request.method)){
@@ -83,4 +85,4 @@ export async function handleCloudMusic(request,env,ctx={},deps={}){
   return json({error:'Không có API này.'},404);
  }catch(e){return json({error:e.status?e.message:'Kho nhạc tạm thời chưa sẵn sàng.'},e.status||503);}
 }
-export default {fetch:handleCloudMusic,async scheduled(_controller,env){return runGroqQueue(env);}};
+export default {fetch:handleCloudMusic,async scheduled(_controller,env){await runStagedImport(env);return runGroqQueue(env);}};

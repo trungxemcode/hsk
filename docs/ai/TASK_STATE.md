@@ -62,3 +62,7 @@ PR #212 is being revised to admin-only generation. The AI Worker verifies fixed 
 Validation: server suite 290 pass; owner-only creation, R2 autosave/public read, draft labels, deletion/cancellation/concurrent-write protection covered with mocked AI. Admin/listener flip UI and existing lyrics/selection/background checks pass at 390/844/1440. Browser font setup is test-only.
 
 Final checks: existing feature runtime passes at 390/1440; flip screenshots inspected with CJK font; design tokens, 58-feature/270-guard preservation and PWA 190-asset integrity pass. Candidate 3.20.3 remains on PR #212.
+
+
+## Moah popular 50 (27 Oct 2026)
+User confirms download/redistribution permission. Remote manifest at C:/Users/LENOVO/hsk-lyrics/moah-batch-50.json contains 50 popular single songs (mashup removed), descriptions and references. GitHub first import 465821a19453de72a1ff2be5c9160e78 failed; local anonymous yt-dlp with EJS successfully downloaded P9mqCv1yhBE. Private staged R2 importer permits owner-authorized fallback, one audio/Cron then sequential Groq. Never claim 50 ready until staging/import/alignment status is checked. Pinyin restoration is machine-derived, not verified original lyrics; generated and restored drafts retain reviewed=false.

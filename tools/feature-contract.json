@@ -1797,6 +1797,42 @@
           "value": "musicGroqJobStatus"
         }
       ]
+    },
+    {
+      "id": "music-batch-private-references",
+      "name": "Nhập nhạc theo lô với nguồn lời riêng và mốc Groq thực",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "server/music/batch-reference.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/batch-reference.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/music/cloud-worker.mjs",
+          "value": "stageImportReference(env"
+        },
+        {
+          "kind": "contains",
+          "file": "server/music/groq-alignment.mjs",
+          "value": "etagDoesNotMatch:'*'"
+        },
+        {
+          "kind": "file",
+          "file": "server/music/staged-imports.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/staged-imports.test.mjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }

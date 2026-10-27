@@ -30,7 +30,7 @@ test('only owner sends published R2 audio; draft cache never changes live lyrics
 });
 test('missing key, private audio, oversized audio, arbitrary URLs and concurrency cannot trigger Groq',async()=>{
  const f=fixture();delete f.env.GROQ_API_KEY;assert.equal((await f.run()).status,503);f.env.GROQ_API_KEY='test-secret';
- f.records.get(f.audio).customMetadata.published='false';assert.equal((await f.run()).status,404);f.records.get(f.audio).customMetadata.published='true';f.records.get(f.audio).size=7*1024*1024;assert.equal((await f.run()).status,413);f.records.get(f.audio).size=3;
+ f.records.get(f.audio).customMetadata.published='false';assert.equal((await f.run()).status,404);f.records.get(f.audio).customMetadata.published='true';f.records.get(f.audio).size=13*1024*1024;assert.equal((await f.run()).status,413);f.records.get(f.audio).size=3;
  assert.equal((await f.run(f.req('owner',{duration:8,url:'https://attacker.invalid'}))).status,400);
  f.records.set('groq-locks/'+f.id,{customMetadata:{createdAt:String(Date.now())}});assert.equal((await f.run()).status,409);assert.equal(f.groqCalls(),0);
 });
@@ -50,3 +50,8 @@ test('reprocessing raw timestamps does not call Groq again after matcher changes
 
 test('short anchored recognition substitutions reuse observed onsets without interpolation',()=>{const r=matchGroq(reference,{words:[words[0],words[1],{word:'某',start:4,end:4.3},words[3]]},8);assert.equal(r.diagnostics.substitutions,1);assert.deepEqual(r.cues[0].characters.map(c=>c.start),[.2,.6,4,6]);});
 test('overlapping provider ends are bounded by next onset, without changing any onset',()=>{const r=matchGroq(reference,{words:words.map((w,i)=>i===1?{...w,end:4.02}:w)},8);assert.equal(r.cues[0].characters[1].start,.6);assert.equal(r.cues[0].characters[1].end,4);assert.equal(r.cues[0].characters[2].start,4);});
+
+test('a private untimed batch reference can publish a validated automatic draft without invented timings',async()=>{
+ const f=fixture();f.records.delete(f.lyrics);await f.env.MUSIC_BUCKET.put('lyrics-sources/'+f.id+'.json',JSON.stringify({kind:'hanzi',lines:['你好世界'],autoPublish:true,batchId:'test',sourceUrl:'https://www.youtube.com/watch?v=aaaaaaaaaaa'}));
+ const r=await f.run();assert.equal(r.status,200);const published=JSON.parse(new TextDecoder().decode(f.records.get(f.lyrics).bytes));assert.equal(published.reviewed,false);assert.equal(published.publication,'automatic-draft');assert.deepEqual(published.cues[0].characters.map(c=>c.start),[.2,.6,4,6]);
+});

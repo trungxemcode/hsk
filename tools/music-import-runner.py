@@ -33,10 +33,16 @@ if __name__=='__main__':
   job=json.loads(jobfile.read_text());root='/api/runner/jobs/'+job['id']
   try:
    with tempfile.TemporaryDirectory() as td:
-    folder=pathlib.Path(td);cookie=folder/'cookies.txt';cookies(os.environ.get('COOKIE_INPUT',''),cookie)
-    args=['yt-dlp','--ignore-config','--cookies',str(cookie),'--no-playlist','--no-progress','--socket-timeout','20','--retries','1','--extractor-retries','1','--js-runtimes','node','--max-filesize','50M','--match-filter','duration <= 1200','--write-info-json','-f','bestaudio[ext=m4a]/bestaudio','--concurrent-fragments','4','-x','--audio-format','m4a','--audio-quality','128K','-o',str(folder/'audio.%(ext)s'),job['url']]
+    folder=pathlib.Path(td);cookie=folder/'cookies.txt';raw_cookie=os.environ.get('COOKIE_INPUT','').strip();cookie_args=[]
+    if raw_cookie:
+     cookies(raw_cookie,cookie);cookie_args=['--cookies',str(cookie)]
+    args=['yt-dlp','--ignore-config',*cookie_args,'--no-playlist','--no-progress','--socket-timeout','20','--retries','1','--extractor-retries','1','--js-runtimes','node','--max-filesize','50M','--match-filter','duration <= 1200','--write-info-json','-f','bestaudio[ext=m4a]/bestaudio','--concurrent-fragments','4','-x','--audio-format','m4a','--audio-quality','128K','-o',str(folder/'audio.%(ext)s'),job['url']]
     result=subprocess.run(args,capture_output=True,timeout=420)
-    if result.returncode:raise RuntimeError('Source refused download')
+    if result.returncode:
+     # Report only a fixed category; downloader stderr may contain private URLs.
+     detail=result.stderr.decode('utf-8','replace').lower()
+     category='youtube-login-required' if 'sign in' in detail or 'cookies' in detail else 'youtube-403' if '403' in detail else 'javascript-challenge' if 'challenge' in detail else 'source-unavailable'
+     print('Download blocked: '+category);raise RuntimeError('Source refused download')
     audio=(folder/'audio.m4a').read_bytes()
     if not 0<len(audio)<=50*1024*1024:raise ValueError('Invalid audio size')
     meta=json.loads((folder/'audio.info.json').read_text());from urllib.parse import quote
