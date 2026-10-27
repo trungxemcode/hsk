@@ -4,7 +4,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  const browser=await chromium.launch({headless:true,...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
  try{for(const width of [390,844,1440]){
   const page=await browser.newPage({viewport:{width,height:844},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));
-  const tracks=await fixture(page);tracks[0].hasLyrics=true;tracks[0].lyricsRevision='v1';const scripts=new Map([[tracks[0].id,{cues:[{start:0,end:1,text:'你好世界',pinyin:'nǐ hǎo shì jiè',vi:'Xin chào thế giới'},{start:1,end:5,text:'我们一起学习'}]}]]);let published=null,ai=null;
+  const tracks=await fixture(page);tracks[0].hasLyrics=true;tracks[0].lyricsRevision='v1';const scripts=new Map([[tracks[0].id,{cues:[{start:0,end:1,text:'你好世界',pinyin:'nǐ hǎo shì jiè',vi:'Xin chào thế giới'},{start:1,end:5,text:'我们一起学习',characters:[{start:1.2,text:'我'},{start:1.4,text:'们'},{start:2.9,text:'一'},{start:3.6,text:'起'},{start:3.7,text:'学'},{start:4.7,text:'习'}]}]}]]);let published=null,ai=null;
   await page.route('https://music.example/api/library*',r=>r.fulfill({json:{tracks,cursor:null}}));
   await page.route('https://music.example/api/tracks/*/lyrics',r=>{const id=new URL(r.request().url()).pathname.split('/')[3];return r.fulfill({status:scripts.has(id)?200:404,json:scripts.get(id)||{error:'missing'}});});
   await page.route('https://music.example/api/admin/tracks/*/lyrics',r=>{published=r.request().postDataJSON();const id=new URL(r.request().url()).pathname.split('/')[4];scripts.set(id,published);const t=tracks.find(t=>t.id===id);t.hasLyrics=true;t.lyricsRevision='v2';return r.fulfill({json:{saved:true,id,revision:'v2'}});});
@@ -22,7 +22,11 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   await audio.evaluate(n=>{n.currentTime=3.9;n.dispatchEvent(new Event('timeupdate'));});
   assert.equal(await page.locator('.is-current .is-sung').count(),5);
   await audio.evaluate(n=>{n.currentTime=1.05;n.dispatchEvent(new Event('timeupdate'));});
-  assert.equal(await page.locator('.is-current .is-sung').count(),1,'backwards seek resets character sweep');
+  assert.equal(await page.locator('.is-current .is-sung').count(),0,'backwards seek waits until the first actual onset');
+  await audio.evaluate(n=>{n.currentTime=.5;n.dispatchEvent(new Event('timeupdate'));});
+  assert.equal(await page.locator('.is-current').getAttribute('data-timing'),'line');
+  assert.equal(await page.locator('.is-current .is-sung').count(),0,'line-only scripts have no synthetic sweep');
+  await audio.evaluate(n=>{n.currentTime=1.05;n.dispatchEvent(new Event('timeupdate'));});
   assert.equal(await page.locator('.music-timed-pinyin .is-sung').count(),0);
   await audio.evaluate(n=>n.play());
   assert.equal(await page.locator('#musicTimedLyrics').evaluate(n=>n.isContentEditable),false);assert.equal(await page.locator('#musicTimedLyrics').evaluate(n=>getComputedStyle(n).userSelect),'text');

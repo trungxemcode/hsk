@@ -268,4 +268,4 @@ Apps Script/Drive/Sheets của pipeline voice là một hệ thống riêng; đ�
 4. Đổi URL có kiểm soát, giữ rollback; client config đổi phải bump PWA. Server secret/binding đổi không tự làm frontend nhận endpoint mới.
 5. Sau triển khai xác nhận request thực tế từ tab/PWA tới đúng server và đúng phiên bản. Chỉ báo “đã live/đã kiểm tra” nếu có bằng chứng tương ứng.
 
-Karaoke: chữ sáng dần ước tính theo khoảng thời gian từng câu, không phải timestamp từng âm. Pinyin ưu tiên script; thiếu thì chuyển bằng vendor/pinyin-pro trên máy. Không gọi AI, không đổi cue hoặc audio lifecycle.
+Karaoke: chỉ sáng từng chữ khi có mốc riêng (JSON characters hoặc Enhanced LRC); không chia đều thời gian. Script chỉ có mốc câu thì theo câu. Mốc phải căn đúng bản audio trong kho; mốc của bản thu khác không tự khớp. Pinyin ưu tiên script; thiếu thì chuyển bằng vendor/pinyin-pro trên máy. Không gọi AI, không đổi cue hoặc audio lifecycle.
