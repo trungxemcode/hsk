@@ -85,4 +85,4 @@ export async function handleCloudMusic(request,env,ctx={},deps={}){
   return json({error:'Không có API này.'},404);
  }catch(e){return json({error:e.status?e.message:'Kho nhạc tạm thời chưa sẵn sàng.'},e.status||503);}
 }
-export default {fetch:handleCloudMusic,async scheduled(_controller,env){await runStagedImport(env);return runGroqQueue(env);}};
+export default {fetch:handleCloudMusic,async scheduled(_controller,env){try{await runStagedImport(env);}catch{}return runGroqQueue(env);}};

@@ -106,7 +106,7 @@ async function processGroq(id,input,env,json,fetchFn,signal){
   if(controller.signal.aborted)throw fail('Đã hủy hoặc quá thời gian.',408);
   const nowAudio=await bucket.head(audioKey),nowSource=await bucket.head(sourceKey);
   if(!nowAudio||nowAudio.customMetadata?.published!=='true'||nowAudio.httpEtag!==head.httpEtag||nowSource?.httpEtag!==sourceHead.httpEtag)throw fail('Audio hoặc script đã đổi; chưa lưu kết quả cũ.',409);
-  await bucket.put('lyrics-drafts/'+id+'/groq-raw.json',JSON.stringify({words:data.words,segments:data.segments,duration:data.duration,model:MODEL}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
+
   await bucket.put(draftKey,JSON.stringify(value),{httpMetadata:{contentType:'application/json; charset=utf-8',cacheControl:'no-store'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag,duration:String(input.duration),model:MODEL,matcher:'lcs-v3'}});
   if(batch&&batchSource.autoPublish&&!value.diagnostics.invalidTimeline&&value.diagnostics.matched/value.diagnostics.total>=.94){const publicValue={...value,reviewed:false,publication:'automatic-draft'};await bucket.put(lyricsKey,JSON.stringify(publicValue),{onlyIf:{etagDoesNotMatch:'*'},httpMetadata:{contentType:'application/json; charset=utf-8',cacheControl:'public, max-age=60'},customMetadata:{reviewed:'false',batchId:batchSource.batchId}});}
   return json({...value,saved:true});
