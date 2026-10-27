@@ -5,7 +5,7 @@ let lesson=null,history=[],pending=null,serial=0,config=null,selectedText='',sel
 function syncLauncher(){launcher.hidden=!lesson||!panel.hidden;}
 function fitViewport(){if(panel.hidden)return;const view=window.visualViewport;if(!view||!matchMedia('(max-width:700px), (pointer:coarse)').matches)return;panel.style.setProperty('--chat-view-top',view.offsetTop+'px');panel.style.setProperty('--chat-view-height',view.height+'px');}
 function open(){panel.hidden=false;syncLauncher();launcher.setAttribute('aria-expanded','true');fitViewport();}
-function close(){input.blur();panel.hidden=true;syncLauncher();launcher.setAttribute('aria-expanded','false');}
+function close(){input.blur();panel.hidden=true;panel.style.removeProperty('--chat-view-top');panel.style.removeProperty('--chat-view-height');syncLauncher();launcher.setAttribute('aria-expanded','false');}
 window.visualViewport?.addEventListener('resize',fitViewport);
 window.visualViewport?.addEventListener('scroll',fitViewport);
 window.addEventListener('resize',fitViewport);
