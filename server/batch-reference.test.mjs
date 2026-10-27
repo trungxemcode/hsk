@@ -24,3 +24,7 @@ test('audio-only drafts use observed ASR segments and do not invent absent lyric
  const r=await prepareBatchReference({kind:'asr'},{segments:[{text:'你好',start:1,end:3}]},[],()=>{throw Error('unexpected LLM call');});assert.equal(r.generatedFromAudio,true);assert.equal(r.cues[0].text,'你好');assert.equal(r.cues[0].start,undefined);
  await assert.rejects(prepareBatchReference({kind:'asr'},{segments:[]},[],()=>{}),e=>e.status===422);
 });
+test('strict per-line fields preserve repeated lyrics instead of merging duplicate verses',async()=>{
+ const r=await prepareBatchReference({kind:'pinyin',lines:['nǐ hǎo','nǐ hǎo']},{words:[]},['key'],async(_url,init)=>{const b=JSON.parse(init.body);assert.equal(b.response_format.json_schema.strict,true);assert.deepEqual(b.response_format.json_schema.schema.required,['line0','line1']);return Response.json({choices:[{message:{content:JSON.stringify({line0:'你好',line1:'你好'})}}]});});assert.equal(r.cues.length,2);
+});
+test('line ends may be clipped at a real onset without changing either line onset',()=>{const r=matchGroq({untimed:true,cues:[{text:'你'},{text:'好'}]},{words:[{word:'你',start:1,end:3},{word:'好',start:2,end:4}]},5);assert.deepEqual(r.cues.map(c=>c.start),[1,2]);assert.equal(r.cues[0].end,2);});

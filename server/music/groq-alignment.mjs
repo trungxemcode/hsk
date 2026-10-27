@@ -44,6 +44,8 @@ export function matchGroq(reference,data,duration){
   if(!absent.length&&found.every(x=>x.group===1))row.characters=found.map(({text,start,end},i)=>({text,start,end:Math.min(end,found[i+1]?.start??end)}));
   return row;
  });
+ // Bound observed ends at the next observed onset; never move or invent an onset.
+ if(reference.untimed)for(let i=0;i<cues.length-1;i++){const cue=cues[i],next=cues[i+1];if(cue.start>=next.start)throw fail('Mốc dòng bị trùng; cần kiểm tra.',422);cue.end=Math.min(cue.end,next.start);if(cue.characters){const last=cue.characters.at(-1);if(last.start>=cue.end)throw fail('Mốc chữ vượt dòng; cần kiểm tra.',422);last.end=Math.min(last.end,cue.end);}}
  const diagnostics={total,matched,precise,grouped:groups,missing:total-matched,rejectedWordTimes:rejected,substitutions,missingCues};
  // Incomplete recognition can shift whole verses. Do not mix guessed original times
  // with new times or expose a partially aligned transcript as a finished karaoke.
