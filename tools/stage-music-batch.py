@@ -5,6 +5,7 @@ referenceKind, referenceLines, url, ...}]}. No cookies or API secrets are read.
 After staging, Worker Cron publishes/checksums audio and processes Groq serially.
 """
 import argparse, hashlib, json, pathlib, re, subprocess, sys, time
+from music_audio_chunks import make_chunks
 
 def run(args, cwd=None, timeout=420):
     result = subprocess.run(args, cwd=cwd, capture_output=True, timeout=timeout)
@@ -45,6 +46,7 @@ def main():
             title=track['title'];parts=title.split('|');credit=parts[-1] if ' - ' in parts[-1] else parts[0];artist=' - '.join(credit.split(' - ')[1:]).strip() or track.get('channel','Moah')
             job={'id':jobid,'batchId':'moah-popular-2026-10-27','state':'queued','createdAt':int(time.time()*1000),'videoId':video,'url':'https://www.youtube.com/watch?v='+video,'title':title[:120],'artist':artist[:80],'composer':'','duration':duration,'audioSha256':hashlib.sha256(ready.read_bytes()).hexdigest(),'referenceKind':kind,'referenceLines':track.get('referenceLines',[]),'pinyinLines':track.get('originalPinyin',[]),'permission':manifest['permission']}
             jobfile=root/(jobid+'.json');jobfile.write_text(json.dumps(job,ensure_ascii=False),encoding='utf-8')
+            archive=root/(jobid+'.clips.bin');make_chunks(ready,job['audioSha256']+'.m4a',duration,archive,ffmpeg);put('audio-chunks/'+job['audioSha256']+'.m4a.bin',archive,'application/octet-stream')
             put('batch-audio/'+jobid+'.m4a',ready,'audio/mp4');put('batch-staging/'+jobid+'.json',jobfile,'application/json')
             status[video]={'state':'uploaded','jobId':jobid,'duration':duration,'referenceKind':kind};save();print(f'Staged {index}/{len(manifest["tracks"])}: {video}',flush=True)
         except Exception as exc:

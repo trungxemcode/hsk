@@ -1,3 +1,4 @@
+import {loadRepairChunk} from './audio-chunks.mjs';
 // Owner-only, one-off Groq alignment. Published lyrics are never overwritten here.
 import Lyrics from '../../src/modules/music/music-lyrics-core.js';
 import Pinyin from '../../vendor/pinyin-pro/pinyin-pro.js';
@@ -82,12 +83,12 @@ export async function alignGroq(id,duration,env,json,fetchFn=fetch,signal=new Ab
  try{return await processGroq(id,input,env,json,fetchFn,signal);}finally{await bucket.delete('groq-locks/global');}
 }
 
-async function transcribeGroqAudio(bucket,audioKey,id,keys,prompt,temperature,fetchFn,signal,json){
- const bytes=await bounded((await bucket.get(audioKey)).body,MAX_AUDIO),form=new FormData();
- form.set('file',new Blob([bytes],{type:id.endsWith('.m4a')?'audio/mp4':'audio/mpeg'}),id);form.set('model',MODEL);form.set('language','zh');form.set('response_format','verbose_json');form.append('timestamp_granularities[]','word');form.append('timestamp_granularities[]','segment');form.set('temperature',String(temperature));form.set('prompt',prompt);
+async function transcribeGroqAudio(bucket,audioKey,id,keys,prompt,temperature,fetchFn,signal,json,clip=null){
+ const bytes=await bounded((await bucket.get(clip?clip.key:audioKey,clip?{range:clip.range}:undefined)).body,MAX_AUDIO),form=new FormData();if(clip){const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(v=>v.toString(16).padStart(2,'0')).join('');if(hash!==clip.sha256)throw fail('Đoạn audio bị lỗi kiểm tra.',422);}
+ form.set('file',new Blob([bytes],{type:clip||id.endsWith('.m4a')?'audio/mp4':'audio/mpeg'}),clip?'clip.m4a':id);form.set('model',MODEL);form.set('language','zh');form.set('response_format','verbose_json');form.append('timestamp_granularities[]','word');form.append('timestamp_granularities[]','segment');form.set('temperature',String(temperature));form.set('prompt',prompt);
  let response;for(const key of keys){response=await fetchFn('https://api.groq.com/openai/v1/audio/transcriptions',{method:'POST',headers:{Authorization:'Bearer '+key},body:form,signal});if(![401,403].includes(response.status))break;await response.body?.cancel();}
  if(!response.ok){const retryAfter=response.headers.get('Retry-After');return json({error:response.status===429?'Groq đạt hạn mức; chờ rồi thử lại.':'Groq chưa xử lý được audio.',...(retryAfter?{retryAfter}:{} )},response.status===429?429:502);}
- return JSON.parse(new TextDecoder().decode(await bounded(response.body,1024*1024)));
+ const data=JSON.parse(new TextDecoder().decode(await bounded(response.body,1024*1024)));if(clip){for(const kind of ['words','segments'])if(Array.isArray(data[kind]))data[kind]=data[kind].map(w=>({...w,start:w.start+clip.start,end:w.end+clip.start}));}return data;
 }
 
 async function processGroq(id,input,env,json,fetchFn,signal){
@@ -112,25 +113,25 @@ async function processGroq(id,input,env,json,fetchFn,signal){
   if(data instanceof Response)return data;
   }
   // Cache recognition before restoration so retries do not transcribe the same audio.
-  await bucket.put('lyrics-drafts/'+id+'/groq-raw.json',JSON.stringify({words:data.words,segments:data.segments,duration:data.duration,repairAttempted:data.repairAttempted===true,model:MODEL}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
+  await bucket.put('lyrics-drafts/'+id+'/groq-raw.json',JSON.stringify({words:data.words,segments:data.segments,duration:data.duration,repairAttempted:data.repairAttempted===true,chunkRepairs:data.chunkRepairs||[],model:MODEL}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
   if(batch){
    let prepared;const referenceKey='lyrics-drafts/'+id+'/groq-reference.json',candidateHead=reference.kind==='pinyin'?await bucket.head(referenceKey):null;
    if(candidateHead?.customMetadata?.sourceEtag===sourceHead.httpEtag&&candidateHead.customMetadata.audioEtag===head.httpEtag){try{const candidate=JSON.parse(new TextDecoder().decode(await bounded((await bucket.get(referenceKey)).body,Lyrics.MAX_BYTES)));if(candidate.model===REFERENCE_MODEL)prepared=checkRestoration(candidate.lines,reference.lines);}catch{}}
    reference=prepared||await prepareBatchReference(reference,data,keys,fetchFn,controller.signal,candidate=>bucket.put(referenceKey,JSON.stringify(candidate),{httpMetadata:{contentType:'application/json; charset=utf-8',cacheControl:'no-store'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}}));
   }
   let value;
-  try{value=matchGroq(reference,data,input.duration);}catch(error){
-   const window=error.repairWindow;
-   if(!batch||data.repairAttempted||!window||window.end-window.start<.5||window.end-window.start>90)throw error;
-   const prompt=reference.cues.slice(Math.max(0,window.cue-1),window.cue+2).map(c=>c.text).join(' ').slice(0,160),retry=await transcribeGroqAudio(bucket,audioKey,id,keys,prompt,.2,fetchFn,controller.signal,json);
+  while(!value){try{value=matchGroq(reference,data,input.duration);}catch(error){
+   const window=error.repairWindow;if(!batch||!window||window.end-window.start<.5||window.end-window.start>90)throw error;
+   const used=Array.isArray(data.chunkRepairs)?data.chunkRepairs:[],clip=used.length<2?await loadRepairChunk(bucket,id,window,used):null;
+   if(!clip&&data.repairAttempted)throw error;
+   const prompt=reference.cues.slice(Math.max(0,window.cue-1),window.cue+2).map(c=>c.text).join(' ').slice(0,160),retry=await transcribeGroqAudio(bucket,audioKey,id,keys,prompt,.2,fetchFn,controller.signal,json,clip);
    if(retry instanceof Response)return retry;
-   const inside=w=>Number.isFinite(w.start)&&Number.isFinite(w.end)&&w.start>=window.start&&w.end<=window.end;
-   const replacement=(retry.words||[]).filter(inside);
-   data={...data,repairAttempted:true,...(replacement.length?{words:[...data.words.filter(w=>w.end<=window.start||w.start>=window.end),...replacement].sort((a,b)=>a.start-b.start),segments:[...(data.segments||[]).filter(w=>w.end<=window.start||w.start>=window.end),...(retry.segments||[]).filter(inside)].sort((a,b)=>a.start-b.start)}:{})};
-   await bucket.put(rawKey,JSON.stringify({words:data.words,segments:data.segments,duration:data.duration,repairAttempted:true,model:MODEL}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
-   value=matchGroq(reference,data,input.duration);
-  }
-  value.repairAttempted=data.repairAttempted===true;
+   const start=clip?Math.max(window.start,clip.start):window.start,end=clip?Math.min(window.end,clip.start+clip.duration):window.end;
+   const inside=w=>Number.isFinite(w.start)&&Number.isFinite(w.end)&&w.start>=start&&w.end<=end,replacement=(retry.words||[]).filter(inside);
+   data={...data,repairAttempted:true,chunkRepairs:clip?[...used,clip.index]:used,...(replacement.length?{words:[...data.words.filter(w=>w.end<=start||w.start>=end),...replacement].sort((a,b)=>a.start-b.start),segments:[...(data.segments||[]).filter(w=>w.end<=start||w.start>=end),...(retry.segments||[]).filter(inside)].sort((a,b)=>a.start-b.start)}:{})};
+   await bucket.put(rawKey,JSON.stringify({words:data.words,segments:data.segments,duration:data.duration,repairAttempted:true,chunkRepairs:data.chunkRepairs,model:MODEL}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
+  }}
+  value.repairAttempted=data.repairAttempted===true;value.chunkRepairsUsed=data.chunkRepairs?.length||0;
   if(batch){value.referenceRestored=reference.restored;value.generatedFromAudio=reference.generatedFromAudio===true;value.batchId=batchSource.batchId;value.referenceSource=batchSource.sourceUrl;}
   if(controller.signal.aborted)throw fail('Đã hủy hoặc quá thời gian.',408);
   const nowAudio=await bucket.head(audioKey),nowSource=await bucket.head(sourceKey);

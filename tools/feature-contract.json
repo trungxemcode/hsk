@@ -1831,6 +1831,21 @@
           "kind": "file",
           "file": "server/staged-imports.test.mjs",
           "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/music/audio-chunks.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/audio-chunks.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/music_audio_chunks.py",
+          "value": ""
         }
       ]
     }
