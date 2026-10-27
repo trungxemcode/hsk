@@ -62,3 +62,11 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicTimedPa
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicTimedPanel .music-timed-head button{min-height:44px!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicTimedLyrics{padding-inline:8px!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover .music-timed-line{font-size:clamp(24px,3.6vw,38px)!important;line-height:1.5!important;}
+
+/* Character sweep follows native media time; pinyin stays steady below the Hanzi. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover .music-timed-line{font-size:clamp(21px,3vw,32px)!important;font-weight:650!important;line-height:1.5!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-text{display:block!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-char{color:inherit;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line.is-current .music-timed-char{color:var(--mb-rd-muted)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line.is-current .music-timed-char.is-sung{color:var(--mb-rd-ink)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover .music-timed-pinyin{font-size:clamp(12px,1.4vw,15px)!important;line-height:1.6!important;font-weight:400!important;margin-top:3px!important;color:var(--mb-rd-muted)!important;}

@@ -51,5 +51,13 @@ function active(cues,time,duration=Infinity){
  while(lo<=hi){const m=(lo+hi)>>1;if(cues[m].start<=time){best=m;lo=m+1;}else hi=m-1;}
  return best>=0&&time<(cues[best].end??duration)?best:-1;
 }
-const api={parse,validate,active,MAX_BYTES};root.HSKMusicLyricsCore=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+// Line-only scripts have no phoneme timing: distribute visible characters evenly.
+// This estimate never changes the uploaded cue times or invents an end time.
+function characterCount(cue,time,duration=Infinity){
+ const count=Array.from(cue.text).filter(c=>!/[\s\p{P}\p{S}]/u.test(c)).length,end=cue.end??duration;
+ if(!count||time<cue.start||!Number.isFinite(end)||end<=cue.start)return 0;
+ if(time>=end)return count;
+ return Math.min(count,Math.floor((time-cue.start)/(end-cue.start)*count)+1);
+}
+const api={parse,validate,active,characterCount,MAX_BYTES};root.HSKMusicLyricsCore=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

@@ -9,6 +9,7 @@
     "vendor/fonts/Inter-OFL.txt",
     "src/modules/music/music-core.js",
     "src/modules/music/music-lyrics-core.js",
+    "vendor/pinyin-pro/pinyin-pro.js",
     "src/modules/music/music-lyrics-ui.js",
     "src/modules/music/music-transcript.js",
     "src/modules/music/music-soundcloud.js",
