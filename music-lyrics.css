@@ -53,3 +53,12 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-hero-c
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicTimedLyrics{padding-block:50%!important;scroll-padding-block:50%;overflow-anchor:none;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line{opacity:.48;transition:color 180ms ease,opacity 180ms ease!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line.is-current{opacity:1;}
+
+/* Borderless, full-width karaoke face; no duplicate title/status toolbar. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover.is-script-flipped{width:100%!important;max-width:none!important;aspect-ratio:auto!important;height:clamp(260px,48dvh,540px)!important;background:var(--palette-clear)!important;border:0!important;border-radius:var(--radius-none)!important;box-shadow:none!important;perspective:none!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover.is-script-flipped #musicTimedPanel{background:var(--palette-clear)!important;border:0!important;border-radius:var(--radius-none)!important;box-shadow:none!important;padding:0!important;gap:0!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicTimedPanel :is(h3,#musicLyricsFollow,#musicTimedStatus)[hidden]{display:none!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicTimedPanel .music-timed-head{position:absolute!important;right:0;top:0;z-index:4;background:var(--palette-clear)!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicTimedPanel .music-timed-head button{min-height:44px!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicTimedLyrics{padding-inline:8px!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover .music-timed-line{font-size:clamp(24px,3.6vw,38px)!important;line-height:1.5!important;}
