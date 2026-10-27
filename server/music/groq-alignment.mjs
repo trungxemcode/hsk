@@ -1,3 +1,4 @@
+import {recoverVerifiedLrc} from './lrc-recovery.mjs';
 import {loadRepairChunk} from './audio-chunks.mjs';
 // Owner-only, one-off Groq alignment. Published lyrics are never overwritten here.
 import Lyrics from '../../src/modules/music/music-lyrics-core.js';
@@ -87,7 +88,7 @@ export async function alignGroq(id,duration,env,json,fetchFn=fetch,signal=new Ab
  if(old&&Date.now()-Number(old.customMetadata?.createdAt||Date.now())<600000)return json({error:'Đang xử lý bài khác; đã giới hạn một bài mỗi lần.'},409);
  const lock=await bucket.put('groq-locks/global','busy',{onlyIf:old?{etagMatches:old.etag}:{etagDoesNotMatch:'*'},customMetadata:{createdAt:String(Date.now())}});
  if(!lock)return json({error:'Đang xử lý bài khác.'},409);
- try{return await processGroq(id,input,env,json,fetchFn,signal);}finally{await bucket.delete('groq-locks/global');}
+ try{let response;try{response=await processGroq(id,input,env,json,fetchFn,signal);}catch(error){if(![422,413].includes(error.status))throw error;const recovered=await recoverVerifiedLrc(id,duration,env);if(recovered)return json(recovered);throw error;}if([422,413].includes(response.status)){const recovered=await recoverVerifiedLrc(id,duration,env);if(recovered)return json(recovered);}return response;}finally{await bucket.delete('groq-locks/global');}
 }
 
 async function transcribeGroqAudio(bucket,audioKey,id,keys,prompt,temperature,fetchFn,signal,json,clip=null){

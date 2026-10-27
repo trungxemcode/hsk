@@ -293,3 +293,5 @@ Các mốc ASR mới trong một clip có thể sửa cả mốc câu lân cận
 Collapsed neighboring ASR anchors expand only the clip search region by 25s on each side; lyric timestamps still come exclusively from observed Groq output.
 
 Pinyin restoration sends at most 12 line IDs per request and checkpoints each part; quota retries resume missing parts without regenerating completed lines.
+
+LRC fallback for owner-authorized batches: private lyrics-lrc-sources/{id}.json holds candidate lyrics with source/audio ETags. Worker uses it only after 422/413 alignment failure, never on 429. Requires canonical phonetics >=98%, at least 8 independent ASR anchors, >=50% of cues, >=75% temporal span, an anchor in each third, bounded offset/deviation/tempo drift. Keeps original LRC onsets and line-follow only; no invented character times. Conditional publication preserves existing scripts. Source/audio changes reject stale candidates. Ordinary/manual alignment remains private. Deletion removes private candidates too.

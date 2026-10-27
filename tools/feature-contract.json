@@ -1846,6 +1846,26 @@
           "kind": "file",
           "file": "tools/music_audio_chunks.py",
           "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/music/lrc-proof.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/music/lrc-recovery.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/music-lrc-proof.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/music-lrc-recovery.test.mjs",
+          "value": ""
         }
       ]
     }
