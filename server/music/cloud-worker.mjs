@@ -48,7 +48,7 @@ export async function handleCloudMusic(request,env,ctx={},deps={}){
    const actor=await identity(request,env,deps.fetchFn||fetch);if(!actor.admin)return json({error:'Chỉ chủ kho được xóa nhạc.'},403);
    const match=u.pathname.match(/^\/api\/admin\/tracks\/([a-f0-9]{64}\.(?:mp3|m4a))\/delete$/);if(!match)return json({error:'Bài hát chưa hợp lệ.'},400);
    const id=match[1],key='audio/'+id,head=await env.MUSIC_BUCKET.head(key);if(!head||head.customMetadata?.published!=='true')return json({error:'Bài hát không còn trong kho.'},404);
-   await env.MUSIC_BUCKET.delete(key);await env.MUSIC_BUCKET.delete('lyrics/'+id+'.json');await env.MUSIC_BUCKET.delete('lyrics-drafts/'+id+'/groq.json');return json({deleted:true,id});
+   await env.MUSIC_BUCKET.delete(key);await env.MUSIC_BUCKET.delete('lyrics/'+id+'.json');await env.MUSIC_BUCKET.delete('lyrics-drafts/'+id+'/groq.json');await env.MUSIC_BUCKET.delete('lyrics-drafts/'+id+'/groq-raw.json');return json({deleted:true,id});
   }
   if((u.pathname==='/api/admin/upload'||imported?.job)&&request.method==='POST'){
    const actor=imported?.job?{admin:true}:await identity(request,env,deps.fetchFn||fetch);if(!actor.admin)return json({error:'Chỉ chủ kho được tải nhạc lên.'},403);

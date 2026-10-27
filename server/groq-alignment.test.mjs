@@ -10,7 +10,7 @@ test('Groq times are retained exactly, including long pauses; pinyin/script stay
 test('groups are never split evenly; missing words keep old timing, not fabricated characters',()=>{
  const grouped=matchGroq(reference,{words:[{word:'你好',start:.2,end:2},...words.slice(2)]},8);assert.equal(grouped.cues[0].characters,undefined);assert.equal(grouped.diagnostics.grouped,2);
  const missing=matchGroq(reference,{words:words.slice(0,3)},8);assert.equal(missing.diagnostics.missing,1);assert.equal(missing.cues[0].start,0);assert.equal(missing.cues[0].characters,undefined);
- assert.throws(()=>matchGroq(reference,{words:[{word:'你',start:2,end:1}]},8));
+ assert.equal(matchGroq(reference,{words:[{word:'你',start:2,end:1}]},8).diagnostics.rejectedWordTimes,1);
  const repeat=matchGroq({cues:[{start:0,end:3,text:'你好'},{start:4,end:8,text:'你好'}]},{words:[...words.slice(0,2),{word:'你',start:4,end:5},{word:'好',start:6,end:7}]},8);assert.deepEqual(repeat.cues.map(c=>c.start),[.2,4]);
 });
 function fixture(status=200){
@@ -41,3 +41,7 @@ test('429 keeps published lyrics and returns cooldown without retrying or leakin
 test('deletion during Groq processing rejects stale result and releases lock',async()=>{const f=fixture();const custom=async(url,init)=>{const r=await f.fetchFn(url,init);if(url.includes('api.groq.com'))f.records.delete(f.audio);return r;};await assert.rejects(groqRoute(f.req(),f.env,f.json,custom),e=>e.status===409);assert.equal(f.records.has('lyrics-drafts/'+f.id+'/groq.json'),false);assert.equal(f.records.has('groq-locks/'+f.id),false);});
 
 test('authentication failure uses backup key, while 429 does not rotate',async()=>{const f=fixture();f.env.GROQ_API_KEY_2='backup';let tries=0;const call=async(url,init)=>{if(!url.includes('api.groq.com'))return f.fetchFn(url,init);tries++;if(tries===1)return Response.json({error:'bad key'},{status:401});assert.equal(init.headers.Authorization,'Bearer backup');return Response.json({words});};assert.equal((await groqRoute(f.req(),f.env,f.json,call)).status,200);assert.equal(tries,2);const limited=fixture(429);limited.env.GROQ_API_KEY_2='backup';assert.equal((await limited.run()).status,429);assert.equal(limited.groqCalls(),1);});
+
+test('punctuation and zero-length provider words do not erase valid timestamps',()=>{const r=matchGroq(reference,{words:[{word:'。',start:0,end:0},{word:'呀',start:0,end:0},...words]},8);assert.equal(r.diagnostics.rejectedWordTimes,1);assert.equal(r.diagnostics.precise,4);assert.deepEqual(r.cues[0].characters.map(c=>c.start),[.2,.6,4,6]);});
+
+test('matching recovers across long extra recognition text without shifting the reference',()=>{const noise=Array.from({length:25},(_,i)=>({word:'呀',start:.01+i*.004,end:.014+i*.004}));const r=matchGroq(reference,{words:[...noise,...words]},8);assert.equal(r.diagnostics.matched,4);assert.deepEqual(r.cues[0].characters.map(c=>c.start),[.2,.6,4,6]);});

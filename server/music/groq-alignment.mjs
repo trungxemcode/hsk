@@ -9,21 +9,26 @@ const sound=c=>(Pinyin.polyphonic(c,{toneType:'none',type:'array'})[0]?.[0]||c).
 export function matchGroq(reference,data,duration){
  const source=Lyrics.validate(reference),units=[],sounds=new Map();source.cues=source.cues.filter(c=>letters(c.text).length);const keyOf=c=>{if(!sounds.has(c))sounds.set(c,sound(c));return sounds.get(c);};
  if(!Array.isArray(data.words)||!data.words.length||data.words.length>4000)throw fail('Groq chưa trả mốc từng từ.',502);
- let previous=-1;
+ let previous=-1,rejected=0;
  for(const w of data.words){
-  if(typeof w.word!=='string'||!Number.isFinite(w.start)||!Number.isFinite(w.end)||w.start<0||w.end<=w.start||w.end>duration+.5||w.start<previous)throw fail('Mốc Groq không hợp lệ; chưa lưu.',502);
-  previous=w.start;const chars=letters(w.word);for(const char of chars)units.push({text:char,key:keyOf(char),start:w.start,end:w.end,group:chars.length});
+  if(typeof w.word!=='string'){rejected++;continue;}const chars=letters(w.word);if(!chars.length)continue;
+  if(!Number.isFinite(w.start)||!Number.isFinite(w.end)||w.start<0||w.end<=w.start||w.end>duration+.5||w.start<previous){rejected++;continue;}
+  previous=w.start;for(const char of chars)units.push({text:char,key:keyOf(char),start:w.start,end:w.end,group:chars.length});
  }
  const total=source.cues.reduce((n,c)=>n+letters(c.text).length,0);
  if(!total)throw fail('Script chưa có lời để căn.',400);
  if(total>1200||units.length>2400)throw fail('Lời quá dài; hãy xử lý bài ngắn hơn.',413);
+ const referenceChars=source.cues.flatMap(c=>letters(c.text)),keys=referenceChars.map(keyOf),width=units.length+1;
+ if((referenceChars.length+1)*width>1000000)throw fail('Lời nhận dạng quá dài; cần chia đoạn.',413);
+ const table=new Uint16Array((referenceChars.length+1)*width);
+ for(let i=referenceChars.length-1;i>=0;i--)for(let j=units.length-1;j>=0;j--){const same=referenceChars[i]===units[j].text||keys[i]===units[j].key;table[i*width+j]=same?table[(i+1)*width+j+1]+1:Math.max(table[(i+1)*width+j],table[i*width+j+1]);}
+ const mapping=new Array(referenceChars.length).fill(null);let ri=0,ui=0;
+ while(ri<referenceChars.length&&ui<units.length){if(referenceChars[ri]===units[ui].text||keys[ri]===units[ui].key){mapping[ri++]=units[ui++];}else if(table[(ri+1)*width+ui]>=table[ri*width+ui+1])ri++;else ui++;}
  let cursor=0,matched=0,precise=0,groups=0;
  const cues=source.cues.map(cue=>{
   const found=[];for(const char of letters(cue.text)){
-   const key=keyOf(char);let index=-1;
-   // Bounded monotonic matching, never stretch timestamps across missing words.
-   for(let i=cursor;i<Math.min(units.length,cursor+20);i++)if(units[i].text===char||units[i].key===key){index=i;break;}
-   if(index<0){found.push(null);continue;}const unit=units[index];cursor=index+1;found.push({...unit,text:char});matched++;if(unit.group===1)precise++;else groups++;
+   const unit=mapping[cursor++];if(!unit){found.push(null);continue;}found.push({...unit,text:char});matched++;if(unit.group===1)precise++;else groups++;
+
   }
   if(!found.length||found.some(x=>!x))return {...cue,uncertain:true,reason:'Chưa khớp đủ lời; giữ mốc câu gốc, cần nghe đối chiếu.'};
   const row={...cue,start:found[0].start,end:found.at(-1).end,uncertain:true,reason:found.some(x=>x.group>1)?'Groq trả mốc theo cụm; chưa có mốc riêng cho mọi chữ.':'Mốc lấy từ Groq; cần nghe kiểm tra.'};
@@ -31,7 +36,7 @@ export function matchGroq(reference,data,duration){
   if(found.every(x=>x.group===1))row.characters=found.map(({text,start,end})=>({text,start,end}));
   return row;
  });
- const diagnostics={total,matched,precise,grouped:groups,missing:total-matched};
+ const diagnostics={total,matched,precise,grouped:groups,missing:total-matched,rejectedWordTimes:rejected};
  // Incomplete recognition can shift whole verses. Do not mix guessed original times
  // with new times or expose a partially aligned transcript as a finished karaoke.
  let value={version:1,cues:source.cues.map(c=>({...c,uncertain:true,reason:'Groq chưa khớp đủ lời; chưa thay mốc gốc.'}))};
@@ -66,10 +71,12 @@ export async function groqRoute(request,env,json,fetchFn=fetch){
   form.set('prompt',reference.cues.map(c=>c.text).join(' ').slice(0,160));
   let response;for(const key of keys){response=await fetchFn('https://api.groq.com/openai/v1/audio/transcriptions',{method:'POST',headers:{Authorization:'Bearer '+key},body:form,signal:controller.signal});if(![401,403].includes(response.status))break;await response.body?.cancel();}
   if(!response.ok){const retryAfter=response.headers.get('Retry-After');return json({error:response.status===429?'Groq đạt hạn mức; chờ rồi thử lại.':'Groq chưa xử lý được audio.',...(retryAfter?{retryAfter}:{} )},response.status===429?429:502);}
-  const data=JSON.parse(new TextDecoder().decode(await bounded(response.body,1024*1024))),value=matchGroq(reference,data,input.duration);
+  const data=JSON.parse(new TextDecoder().decode(await bounded(response.body,1024*1024)));
+  const value=matchGroq(reference,data,input.duration);
   if(controller.signal.aborted)throw fail('Đã hủy hoặc quá thời gian.',408);
   const nowAudio=await bucket.head(audioKey),nowSource=await bucket.head(lyricsKey);
   if(!nowAudio||nowAudio.customMetadata?.published!=='true'||nowAudio.httpEtag!==head.httpEtag||nowSource?.httpEtag!==sourceHead.httpEtag)throw fail('Audio hoặc script đã đổi; chưa lưu kết quả cũ.',409);
+  await bucket.put('lyrics-drafts/'+id+'/groq-raw.json',JSON.stringify({words:data.words,duration:data.duration}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
   await bucket.put(draftKey,JSON.stringify(value),{httpMetadata:{contentType:'application/json; charset=utf-8',cacheControl:'no-store'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag,duration:String(input.duration)}});
   return json({...value,saved:true});
  }catch(e){if(e.name==='AbortError')throw fail('Đã hủy hoặc quá thời gian.',408);throw e;}finally{clearTimeout(timer);request.signal.removeEventListener('abort',cancel);await bucket.delete(lockKey);}
