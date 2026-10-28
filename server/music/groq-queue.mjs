@@ -7,12 +7,13 @@ function metadata(j){return {state:j.state||'cooldown',nextAt:String(j.nextAt||0
 async function save(bucket,key,j,onlyIf){return bucket.put(key,JSON.stringify(j),{httpMetadata:{contentType:'application/json; charset=utf-8',cacheControl:'no-store'},customMetadata:metadata(j),...(onlyIf?{onlyIf}:{})});}
 export async function enqueueGroqJob(id,duration,env,now=Date.now()){
  if(env.MUSIC_GROQ_ENABLED!=='true')return {queued:false,error:'Groq chưa bật.'};
- const b=env.MUSIC_BUCKET,audio=await b.head('audio/'+id),source=await b.head('lyrics/'+id+'.json');
+ const b=env.MUSIC_BUCKET,audio=await b.head('audio/'+id),source=await b.head('lyrics/'+id+'.json')||await b.head('lyrics-sources/'+id+'.json');
  if(!audio||audio.customMetadata?.published!=='true'||!source)return {queued:false,error:'Cần audio và script trong kho.'};
- if(audio.size>6*1024*1024||!Number.isFinite(duration)||duration<=0||duration>480)return {queued:false,error:'Audio/script vượt giới hạn Groq.'};
+ if(audio.size>12*1024*1024||!Number.isFinite(duration)||duration<=0||duration>480)return {queued:false,error:'Audio/script vượt giới hạn Groq.'};
  const key=PREFIX+id+'.json',old=await b.head(key),prior=old?await read(await b.get(key)):null;
  if(prior?.sourceEtag===source.httpEtag)return {queued:true,job:prior,duplicate:true};
- const job={jobId:crypto.randomUUID(),trackId:id,duration,sourceEtag:source.httpEtag,state:'queued',createdAt:now,nextAt:now,attempts:0};
+ const sourceKey=await b.head('lyrics/'+id+'.json')?'lyrics/'+id+'.json':'lyrics-sources/'+id+'.json';
+ const job={sourceKey,jobId:crypto.randomUUID(),trackId:id,duration,sourceEtag:source.httpEtag,state:'queued',createdAt:now,nextAt:now,attempts:0};
  const written=await save(b,key,job,old?{etagMatches:old.etag}:{etagDoesNotMatch:'*'});
  if(!written)return {queued:true,duplicate:true};
  return {queued:true,job};
@@ -31,7 +32,7 @@ export async function groqQueueRoute(request,env,json,fetchFn=fetch){
  const job=await read(await b.get(PREFIX+id+'.json'))||await read(await b.get(HISTORY+id+'.json'));
  if(!job)return json({state:'none'});
  if(job.state==='done'){
-  const source=await b.head('lyrics/'+id+'.json');
+  const source=await b.head(job.sourceKey||'lyrics/'+id+'.json');
   if(source?.httpEtag!==job.sourceEtag)return json({...job,state:'stale'});
   return json({...job,result:await read(await b.get('lyrics-drafts/'+id+'/groq.json'))});
  }
@@ -49,10 +50,10 @@ export async function runGroqQueue(env,{fetchFn=fetch,now=Date.now()}={}){
  const claimed={...job,state:'running',attempts:job.attempts+1,leaseUntil:now+LEASE};if(!await save(b,item.key,claimed,{etagMatches:head.etag}))return {state:'busy'};
  let result,status;
  try{
-  const source=await b.head('lyrics/'+job.trackId+'.json');
+  const source=await b.head(job.sourceKey||'lyrics/'+job.trackId+'.json');
   if(source?.httpEtag!==job.sourceEtag){status=410;result={error:'Script đã thay đổi; không xử lý bản cũ.'};}
   else{const response=await alignGroq(job.trackId,job.duration,env,(v,s=200)=>Response.json(v,{status:s}),fetchFn);status=response.status;result=await response.json();}
- }catch(e){status=e.status||503;result={error:e.status?e.message:'Chưa xử lý được bài; sẽ thử lại.'};}
+ }catch(e){status=e.status||503;result={error:e.status?e.message:'Chưa xử lý được bài; sẽ thử lại.',...(e.retryAfter?{retryAfter:e.retryAfter}:{})};}
  // A newer script can replace a pending job while this invocation is running.
  const currentHead=await b.head(item.key),current=await read(await b.get(item.key));if(current?.jobId!==job.jobId)return {state:'superseded'};
  if(status===429){const nextAt=retryTime(result.retryAfter,Date.now());await save(b,COOLDOWN,{until:nextAt,createdAt:now});await save(b,item.key,{...claimed,state:'waiting',nextAt,leaseUntil:0,error:result.error},{etagMatches:currentHead.etag});return {state:'waiting',until:nextAt};}

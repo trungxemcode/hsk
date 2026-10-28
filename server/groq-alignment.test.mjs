@@ -17,7 +17,7 @@ function fixture(status=200){
  const records=new Map(),id='a'.repeat(64)+'.m4a',audio='audio/'+id,lyrics='lyrics/'+id+'.json';let groqCalls=0;const calls=[];
  function set(key,bytes,metadata={}){const encoded=typeof bytes==='string'?new TextEncoder().encode(bytes):bytes;const old=records.get(key);const etag=String(Number(old?.etag||0)+1);records.set(key,{bytes:encoded,size:encoded.length,etag,httpEtag:'"'+etag+'"',customMetadata:metadata});}
  set(audio,new Uint8Array([1,2,3]),{published:'true'});set(lyrics,JSON.stringify(reference));
- const bucket={async head(k){return records.get(k)||null;},async get(k){const v=records.get(k);return v?{body:new Response(v.bytes).body}:null;},async put(k,value,options={}){const old=records.get(k);if(options.onlyIf?.etagDoesNotMatch==='*'&&old)return null;if(options.onlyIf?.etagMatches&&options.onlyIf.etagMatches!==old?.etag)return null;set(k,value,options.customMetadata);return records.get(k);},async delete(k){records.delete(k);}};
+ const bucket={async head(k){return records.get(k)||null;},async get(k,options={}){const v=records.get(k);if(!v)return null;const bytes=options.range?v.bytes.slice(options.range.offset,options.range.offset+options.range.length):v.bytes;return {size:v.size,body:new Response(bytes).body};},async put(k,value,options={}){const old=records.get(k);if(options.onlyIf?.etagDoesNotMatch==='*'&&old)return null;if(options.onlyIf?.etagMatches&&options.onlyIf.etagMatches!==old?.etag)return null;set(k,value,options.customMetadata);return records.get(k);},async delete(k){records.delete(k);}};
  const env={MUSIC_BUCKET:bucket,FIREBASE_API_KEY:'public',GROQ_API_KEY:'test-secret',MUSIC_GROQ_ENABLED:'true'};
  const fetchFn=async(url,init)=>{calls.push(url);if(url.includes('accounts:lookup'))return Response.json({users:[{localId:JSON.parse(init.body).idToken==='owner'?OWNER_UID:'listener'}]});groqCalls++;assert.equal(url,'https://api.groq.com/openai/v1/audio/transcriptions');assert.equal(init.headers.Authorization,'Bearer test-secret');assert.equal(init.body.get('language'),'zh');assert.equal(init.body.get('response_format'),'verbose_json');assert.deepEqual(init.body.getAll('timestamp_granularities[]'),['word','segment']);assert.equal(init.body.get('file').size,3);return Response.json(status===200?{words}:{error:{message:'private upstream detail'}},{status,headers:{'Retry-After':'30'}});};
  const req=(token='owner',body={duration:8})=>new Request('https://music.example/api/admin/tracks/'+id+'/align',{method:'POST',headers:{Authorization:'Bearer '+token},body:JSON.stringify(body)});
@@ -30,7 +30,7 @@ test('only owner sends published R2 audio; draft cache never changes live lyrics
 });
 test('missing key, private audio, oversized audio, arbitrary URLs and concurrency cannot trigger Groq',async()=>{
  const f=fixture();delete f.env.GROQ_API_KEY;assert.equal((await f.run()).status,503);f.env.GROQ_API_KEY='test-secret';
- f.records.get(f.audio).customMetadata.published='false';assert.equal((await f.run()).status,404);f.records.get(f.audio).customMetadata.published='true';f.records.get(f.audio).size=7*1024*1024;assert.equal((await f.run()).status,413);f.records.get(f.audio).size=3;
+ f.records.get(f.audio).customMetadata.published='false';assert.equal((await f.run()).status,404);f.records.get(f.audio).customMetadata.published='true';f.records.get(f.audio).size=13*1024*1024;assert.equal((await f.run()).status,413);f.records.get(f.audio).size=3;
  assert.equal((await f.run(f.req('owner',{duration:8,url:'https://attacker.invalid'}))).status,400);
  f.records.set('groq-locks/'+f.id,{customMetadata:{createdAt:String(Date.now())}});assert.equal((await f.run()).status,409);assert.equal(f.groqCalls(),0);
 });
@@ -50,3 +50,33 @@ test('reprocessing raw timestamps does not call Groq again after matcher changes
 
 test('short anchored recognition substitutions reuse observed onsets without interpolation',()=>{const r=matchGroq(reference,{words:[words[0],words[1],{word:'某',start:4,end:4.3},words[3]]},8);assert.equal(r.diagnostics.substitutions,1);assert.deepEqual(r.cues[0].characters.map(c=>c.start),[.2,.6,4,6]);});
 test('overlapping provider ends are bounded by next onset, without changing any onset',()=>{const r=matchGroq(reference,{words:words.map((w,i)=>i===1?{...w,end:4.02}:w)},8);assert.equal(r.cues[0].characters[1].start,.6);assert.equal(r.cues[0].characters[1].end,4);assert.equal(r.cues[0].characters[2].start,4);});
+
+test('a private untimed batch reference can publish a validated automatic draft without invented timings',async()=>{
+ const f=fixture();f.records.delete(f.lyrics);await f.env.MUSIC_BUCKET.put('lyrics-sources/'+f.id+'.json',JSON.stringify({kind:'hanzi',lines:['你好世界'],autoPublish:true,batchId:'test',sourceUrl:'https://www.youtube.com/watch?v=aaaaaaaaaaa'}));
+ const r=await f.run();assert.equal(r.status,200);const published=JSON.parse(new TextDecoder().decode(f.records.get(f.lyrics).bytes));assert.equal(published.reviewed,false);assert.equal(published.publication,'automatic-draft');assert.deepEqual(published.cues[0].characters.map(c=>c.start),[.2,.6,4,6]);
+});
+
+test('one bounded recognition repair fills a missing line using real word times from the same audio',async()=>{
+ const f=fixture();f.records.delete(f.lyrics);await f.env.MUSIC_BUCKET.put('lyrics-sources/'+f.id+'.json',JSON.stringify({kind:'hanzi',lines:['你好','世界和平'],autoPublish:true,batchId:'repair'}));
+ let requests=0;const repaired=[{word:'世',start:3,end:3.3},{word:'界',start:4,end:4.3},{word:'和',start:5,end:5.3},{word:'平',start:6,end:6.3}];
+ const call=async(url,init)=>{if(!url.includes('api.groq.com'))return f.fetchFn(url,init);requests++;assert.equal(init.body.get('file').size,3);if(requests===1)return Response.json({words:words.slice(0,2)});assert.equal(init.body.get('temperature'),'0.2');return Response.json({words:[...words.slice(0,2),...repaired]});};
+ const r=await groqRoute(f.req(),f.env,f.json,call),out=await r.json();assert.equal(r.status,200);assert.equal(requests,2);assert.equal(out.repairAttempted,true);assert.deepEqual(out.cues[1].characters.map(c=>c.start),[3,4,5,6]);
+});
+test('failed recognition repair is cached and cannot loop paid recognition on later retries',async()=>{
+ const f=fixture();f.records.delete(f.lyrics);await f.env.MUSIC_BUCKET.put('lyrics-sources/'+f.id+'.json',JSON.stringify({kind:'hanzi',lines:['你好','世界和平'],autoPublish:true,batchId:'repair'}));let requests=0;
+ const call=async(url,init)=>{if(!url.includes('api.groq.com'))return f.fetchFn(url,init);requests++;return Response.json({words:words.slice(0,2)});};
+ await assert.rejects(groqRoute(f.req(),f.env,f.json,call),e=>e.status===422);assert.equal(requests,2);await assert.rejects(groqRoute(f.req(),f.env,f.json,call),e=>e.status===422);assert.equal(requests,2);assert.equal(f.records.has(f.lyrics),false);
+});
+
+test('chunk ASR timestamps are shifted by the known cut offset, never spread over the lyric',async()=>{
+ const f=fixture();f.records.delete(f.lyrics);await f.env.MUSIC_BUCKET.put('lyrics-sources/'+f.id+'.json',JSON.stringify({kind:'hanzi',lines:['你好','世界和平'],autoPublish:true,batchId:'clip'}));
+ const payload=new Uint8Array(100),sha=Buffer.from(await crypto.subtle.digest('SHA-256',payload)).toString('hex'),header=new TextEncoder().encode(JSON.stringify({version:1,audioId:f.id,chunks:[{start:2.5,duration:5.5,offset:0,length:100,sha256:sha}]})),archive=new Uint8Array(4+header.length+100);new DataView(archive.buffer).setUint32(0,header.length);archive.set(header,4);archive.set(payload,4+header.length);await f.env.MUSIC_BUCKET.put('audio-chunks/'+f.id+'.bin',archive);
+ let requests=0;const call=async(url,init)=>{if(!url.includes('api.groq.com'))return f.fetchFn(url,init);requests++;if(requests===1)return Response.json({words:words.slice(0,2)});assert.equal(init.body.get('file').size,100);assert.equal(init.body.get('file').name,'clip.m4a');assert.equal(init.body.get('temperature'),'0');return Response.json({words:[{word:'世',start:.5,end:.8},{word:'界',start:1.5,end:1.8},{word:'和',start:2.5,end:2.8},{word:'平',start:3.5,end:3.8}]});};
+ const response=await groqRoute(f.req(),f.env,f.json,call),out=await response.json();assert.equal(response.status,200);assert.equal(out.chunkRepairsUsed,1);assert.deepEqual(out.cues[1].characters.map(c=>c.start),[3,4,5,6]);assert.equal(requests,2);
+});
+test('focused clip can correct a neighboring misassigned anchor while keeping outside audio times',async()=>{
+ const f=fixture();f.records.delete(f.lyrics);await f.env.MUSIC_BUCKET.put('lyrics-sources/'+f.id+'.json',JSON.stringify({kind:'hanzi',lines:['你好','世界和平','你好'],autoPublish:true,batchId:'clip'}));
+ const payload=new Uint8Array(100),sha=Buffer.from(await crypto.subtle.digest('SHA-256',payload)).toString('hex'),header=new TextEncoder().encode(JSON.stringify({version:1,audioId:f.id,chunks:[{start:2.5,duration:5.5,offset:0,length:100,sha256:sha}]})),archive=new Uint8Array(4+header.length+100);new DataView(archive.buffer).setUint32(0,header.length);archive.set(header,4);archive.set(payload,4+header.length);await f.env.MUSIC_BUCKET.put('audio-chunks/'+f.id+'.bin',archive);let requests=0;
+ const call=async(url,init)=>{if(!url.includes('api.groq.com'))return f.fetchFn(url,init);requests++;if(requests===1)return Response.json({words:[...words.slice(0,2),{word:'你',start:4,end:4.3},{word:'好',start:5,end:5.3}]});return Response.json({words:[{word:'世',start:.5,end:.8},{word:'界',start:1.5,end:1.8},{word:'和',start:2.5,end:2.8},{word:'平',start:3.5,end:3.8},{word:'你',start:4.5,end:4.8},{word:'好',start:5,end:5.3}]});};
+ const r=await groqRoute(f.req(),f.env,f.json,call),out=await r.json();assert.equal(r.status,200);assert.deepEqual(out.cues[0].characters.map(c=>c.start),[.2,.6]);assert.deepEqual(out.cues[1].characters.map(c=>c.start),[3,4,5,6]);assert.equal(out.cues[2].start,7);assert.equal(requests,2);
+});
