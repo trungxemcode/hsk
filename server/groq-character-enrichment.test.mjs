@@ -1,0 +1,5 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {enrichFromGroq} from './music/groq-character-enrichment.mjs';
+const source=()=>({cues:[{start:0,end:3,text:'你好'}]});const words=()=>({words:[{word:'你',start:1,end:1.4},{word:'好',start:1.5,end:2}],segments:[],model:'whisper-large-v3'});
+test('publishes observed onsets verbatim, never equal divisions',()=>{const x=enrichFromGroq(source(),words(),3);assert.equal(x.wordTiming.complete,true);assert.deepEqual(x.cues[0].characters.map(c=>c.start),[1,1.5]);});
+test('grouped words stay line-only without individual onsets',()=>{const x=enrichFromGroq(source(),{words:[{word:'你好',start:1,end:2}]},3);assert.equal(x.cues[0].characters,undefined);assert.equal(x.wordTiming.complete,false);});
+test('preserves previously published character timing',()=>{const s=source();s.cues[0].characters=[{text:'你',start:.5,end:1},{text:'好',start:1.1,end:2}];const x=enrichFromGroq(s,words(),3);assert.deepEqual(x.cues[0].characters,s.cues[0].characters);assert.deepEqual(x.wordTiming.addedCues,[]);});
