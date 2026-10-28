@@ -305,3 +305,6 @@ Kho nhạc tự cập nhật: khi màn nghe nhạc đang mở và có mạng, cl
 `music-lyrics.css` giữ màu trung tính cho câu chỉ có mốc dòng (`data-timing=line`). Chỉ `.music-timed-char.is-sung` trong câu có `characters` được tô sáng theo thời gian audio. Không nội suy đều hoặc tô trắng cả câu thay cho mốc từng chữ. Kiểm thử: `tools/check-music-karaoke-ui.cjs` (390/844/1440, tua tiến/lùi, pinyin giữ nguyên).
 
 Khi chọn bài mới có `characters`, tự mở mặt lời/karaoke. Giữ nút quay về ảnh bìa; cập nhật script của cùng bài không ép mở lại nếu người dùng đang xem bìa. Phạm vi căn chữ: toàn bộ 51 bài hiện có, gồm 50 Moah và Bích Thượng Quan cũ. Chỉ hoàn tất khi dữ liệu mốc từng chữ của toàn bộ lời được kiểm chứng; mốc dòng không được tính là hoàn tất.
+
+### Tra cứu lời nhạc và đồng hồ karaoke
+Music UI vẫn giữ `music-<trackId>` làm ngữ cảnh giao diện. Khi gửi hỏi đáp, `transportContext` chọn nhánh `open-dictionary` đã được backend hỗ trợ, giữ `sourceId`, `scope:music`, từ được chọn, pinyin và ngữ cảnh lời tối đa 600 ký tự. Không áp dụng prompt bài học HSK1 cho nhạc. Cache 32 câu trả lời chỉ trong bộ nhớ, theo UID/ngữ cảnh/lịch sử và xóa khi đổi tài khoản. Đồng hồ karaoke đọc currentTime thật; RAF chỉ chạy khi audio đang phát và mặt lời đang mở/hiện trên trang. Tính vị trí cuộn được gom một frame, không đổi nguồn audio hay mốc hát.
