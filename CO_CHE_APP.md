@@ -300,3 +300,6 @@ Local repair fallback: see docs/ai/LOCAL_MUSIC_ALIGNMENT.md and tools/align-musi
 
 
 Kho nhạc tự cập nhật: khi màn nghe nhạc đang mở và có mạng, client làm mới metadata sau khi trở lại foreground, khi nhận online và tối đa mỗi phút. Chặn yêu cầu nền trùng nhau và trong 30 giây sau một lần thành công. Không polling khi app bị ẩn. lyricsRevision thay đổi làm tải lại lời, giữ audio và mặt lời đang mở; đang chọn chữ thì trì hoãn thay nội dung để bảo toàn tra cứu. Lỗi mạng giữ danh sách hiện có. Mốc từng chữ vẫn chỉ đọc từ dữ liệu đã căn audio, không tự chia thời gian theo độ dài câu.
+
+### Hiển thị karaoke khi thiếu mốc chữ
+`music-lyrics.css` giữ màu trung tính cho câu chỉ có mốc dòng (`data-timing=line`). Chỉ `.music-timed-char.is-sung` trong câu có `characters` được tô sáng theo thời gian audio. Không nội suy đều hoặc tô trắng cả câu thay cho mốc từng chữ. Kiểm thử: `tools/check-music-karaoke-ui.cjs` (390/844/1440, tua tiến/lùi, pinyin giữ nguyên).

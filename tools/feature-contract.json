@@ -1692,6 +1692,11 @@
           "kind": "contains",
           "file": "src/modules/music/music-lyrics-ui.js",
           "value": "function pronunciationOf("
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-karaoke-ui.cjs",
+          "value": ""
         }
       ]
     },

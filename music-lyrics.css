@@ -70,3 +70,6 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line.is-current[data-timing=character] .music-timed-char{color:var(--mb-rd-muted)!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line.is-current[data-timing=character] .music-timed-char.is-sung{color:var(--mb-rd-ink)!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover .music-timed-pinyin{font-size:clamp(12px,1.4vw,15px)!important;line-height:1.6!important;font-weight:400!important;margin-top:3px!important;color:var(--mb-rd-muted)!important;}
+
+/* A line anchor is not evidence for character karaoke. Keep untimed characters neutral. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line.is-current[data-timing=line]{color:var(--mb-rd-muted)!important;opacity:.48;}

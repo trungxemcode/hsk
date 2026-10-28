@@ -72,3 +72,6 @@ All 50 audio tracks are public. The remaining 36 were uploaded as private 60s AS
 
 
 2026-10-28 VPS word timing / catalogue refresh: baseline Moah batch50/50 published line scripts (public51 including older song), character audit483/2125 cues; zero fully word-timed songs. Owner requests true word-level completion and live refresh. Work on VPS only. Branch feat/music-word-sync-refresh adds foreground/online/minute metadata refresh with throttle and preserves current lyrics flip/audio and text selection. New browser regression passes390/1440. Word alignment raw checkpoints /home/ubuntu/hsk-alignment/word-sync, hsk-word-align.service; candidates are not publication. Inspect actual services/results before status claims. No fabricated character timings.
+
+## Character karaoke display correction (2026-10-28)
+Owner reported whole-line white text on Bích Thượng Quan. Anonymous API confirmed 34 cues and zero character-timed cues. Keep auto-scroll and text selection, but line-only cues retain neutral text and opacity; only observed character onsets light characters. No synthetic interpolation. Add focused 390/844/1440 browser regression. Word enrichment remains partial; do not report all 50 as word-complete.
