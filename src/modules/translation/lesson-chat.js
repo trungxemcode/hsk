@@ -2,6 +2,8 @@
 'use strict';
 const launcher=document.getElementById('lessonChatButton'),panel=document.getElementById('lessonChatPanel'),title=document.getElementById('lessonChatTitle'),messages=document.getElementById('lessonChatMessages'),form=document.getElementById('lessonChatForm'),input=document.getElementById('lessonChatInput'),send=document.getElementById('lessonChatSend'),status=document.getElementById('lessonChatStatus'),selectionPrompt=document.getElementById('lessonSelectionPrompt'),selectionForm=document.getElementById('lessonSelectionForm'),selectionInput=document.getElementById('lessonSelectionInput');
 let lesson=null,history=[],pending=null,serial=0,config=null,selectedText='',selectionTimer=0;
+const musicAnswers=new Map();
+function transportContext(context){if(!context.id.startsWith('music-'))return context;return {...context,id:'open-dictionary',sourceId:context.id,scope:'music',content:{...context.content,context:('Lời bài hát: '+context.title+'\n'+(context.content.lyrics||[]).map(c=>[c.hanzi,c.pinyin,c.vi].filter(Boolean).join(' · ')).join('\n')).slice(0,600)}};}
 function syncLauncher(){launcher.hidden=!lesson||!panel.hidden;}
 function fitViewport(){if(panel.hidden)return;const view=window.visualViewport;if(!view||!matchMedia('(max-width:700px), (pointer:coarse)').matches)return;panel.style.setProperty('--chat-view-top',view.offsetTop+'px');panel.style.setProperty('--chat-view-height',view.height+'px');}
 function open(){panel.hidden=false;syncLauncher();launcher.setAttribute('aria-expanded','true');fitViewport();}
@@ -19,15 +21,18 @@ async function sendQuestion(question){
  if(!question||!lesson||pending)return;
  if(!config){status.textContent='Chưa kết nối được dịch vụ AI. Hãy thử lại sau.';return;}
  const user=window.HSKAccountDashboard?.user;if(!user){status.textContent='Hãy đăng nhập tài khoản app để hỏi AI.';return;}
- const current=serial,context=lesson,controller=new AbortController();pending=controller;send.disabled=true;panel.setAttribute('aria-busy','true');message('user',question);input.value='';status.textContent='AI hỏi đáp bài học đang load…';
+ const context=lesson,wireContext=transportContext(context),cacheKey=context.id.startsWith('music-')?JSON.stringify([user.uid,wireContext,question,history.slice(-8)]):null;
+ if(cacheKey&&musicAnswers.has(cacheKey)){message('user',question);const answer=musicAnswers.get(cacheKey);message('assistant',answer);history.push({role:'user',text:question},{role:'assistant',text:answer});history=history.slice(-8);input.value='';status.textContent='';return;}
+ const current=serial,controller=new AbortController();pending=controller;send.disabled=true;panel.setAttribute('aria-busy','true');message('user',question);input.value='';status.textContent='AI hỏi đáp bài học đang load…';
  const stopLoading=()=>{if(current===serial)panel.removeAttribute('aria-busy');};
  const timer=setTimeout(()=>controller.abort(),55000);
  try{
   const token=await user.getIdToken();if(current!==serial)return;
-  const response=await fetch(config.endpoint.replace(/\/translate$/,'/lesson-ask'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({question,hsk:context.hsk,lesson:context,history:history.slice(-8)}),signal:controller.signal});
+  const response=await fetch(config.endpoint.replace(/\/translate$/,'/lesson-ask'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({question,hsk:context.hsk,lesson:wireContext,history:history.slice(-8)}),signal:controller.signal});
   const data=await response.json();if(current!==serial)return;
   if(!response.ok)throw Error(response.status===404?'Dịch vụ hỏi đáp bài học chưa được kích hoạt.':data.error||'AI chưa trả lời được. Hãy thử lại.');
   if(typeof data.answer!=='string'||!data.answer.trim()||data.answer.length>5000)throw Error('Câu trả lời chưa đầy đủ. Hãy thử lại.');
+  if(cacheKey){musicAnswers.set(cacheKey,data.answer);if(musicAnswers.size>32)musicAnswers.delete(musicAnswers.keys().next().value);}
   history.push({role:'user',text:question},{role:'assistant',text:data.answer});history=history.slice(-8);message('assistant',data.answer);status.textContent='';
  }catch(error){if(current===serial)status.textContent=error.name==='AbortError'?'Hỏi đáp quá lâu. Hãy thử lại.':error.message;}
  finally{stopLoading?.();clearTimeout(timer);if(current===serial){pending=null;send.disabled=false;input.disabled=false;}}
@@ -35,7 +40,7 @@ async function sendQuestion(question){
 window.addEventListener('hsk-lesson-context',event=>{const next=event.detail;if(next?.id!==lesson?.id){reset();close();hideSelectionPrompt();}lesson=next;syncLauncher();title.textContent=lesson?'Bài '+lesson.number+' · '+lesson.vi:'Hỏi đáp bài học';if(!lesson)close();});
 window.addEventListener('hsk-music-ask',event=>{const value=event.detail;if(!value?.lesson?.id?.startsWith('music-')||!value.question)return;if(lesson?.id!==value.lesson.id){reset();hideSelectionPrompt();}lesson=value.lesson;title.textContent='Tra cứu lời · '+lesson.title;ask(value.question);});
 window.addEventListener('hsk-music-context-end',()=>{if(lesson?.id?.startsWith('music-')){reset();close();hideSelectionPrompt();lesson=null;syncLauncher();}});
-window.addEventListener('hsk-account-ready',()=>{reset();close();});
+window.addEventListener('hsk-account-ready',()=>{musicAnswers.clear();reset();close();});
 launcher.addEventListener('click',()=>{open();input.focus({preventScroll:true});});
 document.getElementById('lessonChatClose').addEventListener('click',()=>{close();launcher.focus();});
 panel.addEventListener('keydown',event=>{if(event.key==='Escape'){close();launcher.focus();}});

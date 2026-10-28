@@ -1,0 +1,2733 @@
+{
+  "scope": 51,
+  "method": "web-search-existing-human-translations",
+  "translationGenerationUsed": false,
+  "tracks": [
+    {
+      "trackId": "d964d115088c0959771c081365fce629a3a2803ad4e814362b01a691673e77bd.m4a",
+      "title": "[Vietsub] Bạch Nguyệt Quang Và Nốt Chu Sa (full Tiktok) - Đại Tử |  白月光与朱砂痣 - 大籽",
+      "preferredSource": "https://www.youtube.com/watch?v=m6yytX2gHxs",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "3dfaa09eccf3e337f9f8f1f16db10a299bc93f67577a2883d20ddf8ed4027ab6.m4a",
+      "title": "[Vietsub] Tát Dã (ca khúc truyện) - Kaiser Meow, Tư Nam | 撒野 -  凱瑟喵, 司南",
+      "preferredSource": "https://www.youtube.com/watch?v=Ekr2F5mM9AI",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "57bd97da60983871ab89eef2f8fb632338c6b5b1885f5be2713da95fbc36af0b.m4a",
+      "title": "[Vietsub] Bất Phụ Thế Gian - AYueYue | 不负人间 - 阿YueYue",
+      "preferredSource": "https://www.youtube.com/watch?v=jFiDVy5n6BI",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "c8ef1fa9d76e56b64f653da753c1325059d225a3ff3575b7f86e3b569399008f.m4a",
+      "title": "[Vietsub] Trong Mắt Đều Là Anh - Tiểu Lam Bối Tâm | 目及皆是你 - 小蓝背心",
+      "preferredSource": "https://www.youtube.com/watch?v=htlKvOXmOTs",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "501ec8b67371fed9daa2e5c542a5564f2b9beac60d8eef5862e51d1ad0cec634.m4a",
+      "title": "[Vietsub] Vây Giữ - Vương Tĩnh Văn Không Mập | 沦陷 - 王靖雯不胖",
+      "preferredSource": "https://www.youtube.com/watch?v=G_fVwdpLKZ4",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "03ad4278cb39a6fca43ac5703584be63f869b17259c962bd14fa5f77a196f37d.m4a",
+      "title": "[Vietsub + Tiktok] Chấp Mê Bất Ngộ - Tiểu Nhạc Ca | 执迷不悟 - 小乐哥",
+      "preferredSource": "https://www.youtube.com/watch?v=rCcQh0b7pAI",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "17148c27a872fdb8a06340cfb431b2e1747027de6d700eaaa8b3f9e630d69b54.m4a",
+      "title": "[Vietsub] Yến Vô Hiết ( Remix)- Tưởng Tuyết Nhi | 燕无歇 DJ - 蒋雪儿",
+      "preferredSource": "https://www.youtube.com/watch?v=XCFfyW-MbT0",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "ae9ee5299d6665fd588dfcc45960db154deeccc5bebd7660336a53c1de6a01ec.m4a",
+      "title": "[Vietsub + Tiktok] Yến Vô Hiết - Tưởng Tuyết Nhi | 燕无歇 - 蒋雪儿",
+      "preferredSource": "https://www.youtube.com/watch?v=f1l9uzt_AVs",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "48475929e6666f37380485602f1bdd0959db51fc1d58d1114cfbc0de2280c938.m4a",
+      "title": "[Vietsub] Thanh Trừ - Vương Hân Thần, Tô Tinh Tiệp | 清空 - 王忻辰/蘇星婕",
+      "preferredSource": "https://www.youtube.com/watch?v=Y4pmmQkm9n8",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "d2b17a52d1c5b0411eb49e617a71b2985a276f44746e1cda7d687c080e16f80d.m4a",
+      "title": "[ Vietsub + Hot Tiktok ] Em Yêu Anh - Trình Giai Giai | 我爱你 - 程佳佳",
+      "preferredSource": "https://www.youtube.com/watch?v=lru1gOr_pXk",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "bc66c29657128282714ca24ed494e0c507593499dd37086655b27a4c550a4cd4.m4a",
+      "title": "[Vietsub+Tiktok] Mỹ Nhân Họa Quyển - Văn Nhân Thính Thư  | 美人畫卷 - 闻人听書",
+      "preferredSource": "https://www.youtube.com/watch?v=1sMplkHwm4k",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "573e396edb6207da512a7247c71ad87f6ad90ce8e10d028591949c87d0635b3a.m4a",
+      "title": "[Vietsub] Khách Mời - Lộ Phi Văn | 嘉宾 - 路飞文",
+      "preferredSource": "https://www.youtube.com/watch?v=Kfktebzfgbw",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "67861619062d93db1fea83c9a27c72b396b7043295e63e15737929674454610d.m4a",
+      "title": "[Vietsub TikTok] Sau Này Gặp Được Anh Ấy - Hồ 66 | 后来遇见他 - 胡66",
+      "preferredSource": "https://www.youtube.com/watch?v=xaif0Yj0sYs",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "f3f022fe65e1011438d3760350c39645e9a9fff9319396cf4406c062f2a9dc00.m4a",
+      "title": "[Vietsub+Hot tiktok ] Đáy Biển - Nhất Chi Lựu Liên ( Bản Gốc ) | 海底 - 一支榴莲",
+      "preferredSource": "https://www.youtube.com/watch?v=ugMi2cbXC_U",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "fb8965f7a3a3b93355e37b5b95dd3621798dab0801949e87609bbf2747aef23f.m4a",
+      "title": "[Vietsub] Tầm Dữ - A YueYue | 寻屿 - 阿YueYue",
+      "preferredSource": "https://www.youtube.com/watch?v=ldrqlpay9UA",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "293deae3b48fb45e030c8af6f56447b009444fc0982bb6fdc4aaef0f02060e3e.m4a",
+      "title": "[Vietsub] Ring Ring Ring - Bất Thị Hoa Hỏa Nha | Ring Ring Ring - 不是花火呀",
+      "preferredSource": "https://www.youtube.com/watch?v=eXZo1Xo2ioc",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "7ae17f479231eabf813cef65bc6b8223656bdc4f9dd35db0c48d7a10f68763bf.m4a",
+      "title": "[Vietsub] Nhiệt Tâm 105°C Của Cậu - A Tứ | 热爱105°C的你 - 阿肆",
+      "preferredSource": "https://www.youtube.com/watch?v=_IXpL83nE2Q",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "8d89469d7664df23d1dd613ca0b1878a36aba70b71c12a386b04bba3450048ed.m4a",
+      "title": "[Vietsub] Tháp Rơi Tự Do - LBI Lợi Bỉ | 跳楼机 - LBI利比",
+      "preferredSource": "https://www.youtube.com/watch?v=Icq1mZFekTg",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "17254a5cdc32058e6f0b6fb5f18513e359bb47f9b79efdd543bbf9cc2e742d94.m4a",
+      "title": "[Vietsub] Thủy Triều (remix) - Phó Mộng Đồng | 潮汐 DJ -  傅梦彤",
+      "preferredSource": "https://www.youtube.com/watch?v=QXKwXb1NZ6I",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "8a8286f72095d8a3a3c45c4b2f97ca4393bca245e349bf81c3b7f7c7038288eb.m4a",
+      "title": "[Vietsub]  Khó Sinh Hận - Lễ Việt | 难生恨 - 礼越",
+      "preferredSource": "https://www.youtube.com/watch?v=mkslCrFQcjg",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "9ff35f3f2c1bb0c253805e708d173194757936a350b8d7795fbf7738aa6b930b.m4a",
+      "title": "[Vietsub] Phong Dạ Hành - Tưởng Tuyết Nhi | 风夜行 - 蒋雪儿",
+      "preferredSource": "https://www.youtube.com/watch?v=UwF4Igcc91s",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "ba466c08bf6f2254b2e3e30f52b8444ba386223230c4ac6f0569237560159a2f.m4a",
+      "title": "[Vietsub] Chẩm Thán - Trịnh Ngư | 怎叹 - 郑鱼",
+      "preferredSource": "https://www.youtube.com/watch?v=jfXVGv6Q-oE",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "f28567f4bc02312b98f8dd8b1add1106cd04e6560dd6ea3845efbf7f691b2465.m4a",
+      "title": "[Vietsub] Anh Có Thể Đừng Rời Xa Em Được Không - Mạc Khiếu Tỷ Tỷ | 你能不能不要离开我 - 莫叫姐姐",
+      "preferredSource": "https://www.youtube.com/watch?v=Ik2i84IrRoc",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "be2429a62761ebe529808f27662ec5e054ade016356b43e7920cb24d137ae569.m4a",
+      "title": "[Vietsub] Mạc Vấn Quy Kỳ - Tưởng Tuyết Nhi, Là Thất Thúc Đây | 莫问归期 - 蒋雪儿/七叔",
+      "preferredSource": "https://www.youtube.com/watch?v=ZcKE58BcxAY",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "73462406411e463eee6c4ea77313a1e1043a5c94de62a4ea48c76a0ae2f3a869.m4a",
+      "title": "[Vietsub] Bầu Trời Đầy Sao Không Bằng Anh - Ycccc | 满天星辰不及你 - ycccc",
+      "preferredSource": "https://www.youtube.com/watch?v=B-Bzk6gRIKs",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "a1c2c57877cdf29a45c5f64dde07a537943230efac76965d625b9426fee60d02.m4a",
+      "title": "[Vietsub] TA - Bất Thị Hoa Hỏa Nha | TA - 不是花火呀",
+      "preferredSource": "https://www.youtube.com/watch?v=X9Nut0FxYc0",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "a9fae3dceac5556b7a0955a01eda665db3c327b6570ed6d0c5cb2a1be5ff74f1.m4a",
+      "title": "[Vietsub+Tiktok] Túy Khuynh Thành Remix - Tiểu A Phong | 醉倾城DJ - 小阿枫",
+      "preferredSource": "https://www.youtube.com/watch?v=7HplOwsgBsk",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "c91947eea3e12e2aff5a9a832893a250afcd0ab40b70266c2c4d33ace010d6a5.m4a",
+      "title": "[Vietsub] Yêu Anh Đến Khoảnh Khắc Cuối Cùng - Mạc Khiếu Tỷ Tỷ | 爱你到最后一刻 - 莫叫姐姐",
+      "preferredSource": "https://www.youtube.com/watch?v=G-OgggCc88Y",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "9fd5a1f55515691b6e41fd9afc98a4a0fed22124470e5f6d2f456f0db31607db.m4a",
+      "title": "[Vietsub + Tiktok] Hắn Chỉ Là Lướt Qua - h3R3, Thái Duật Blazo | 他只是经过 - h3R3, 蔡燏Blazo",
+      "preferredSource": "https://www.youtube.com/watch?v=DAq3HaifL4I",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "b7baa0f53ca509ec0cd330d447c38f46973bf7ac964a0549c9bad12693130a6f.m4a",
+      "title": "[Vietsub] Giấc Mơ Không Thể Đánh Thức (Full Tiktok) - Thập Nhị! | 醒不来的梦 - 拾贰！",
+      "preferredSource": "https://www.youtube.com/watch?v=96KHRlisbcY",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "bed559e6a1007ebc7609e0dac920adbd68e35f1386f22eaa8d3461a5f934b688.m4a",
+      "title": "[Vietsub] Dễ Thay Đổi - Vương Tĩnh Văn Không Mập |  善變 - 王靖雯不胖",
+      "preferredSource": "https://www.youtube.com/watch?v=hhLrMco0WFg",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "069052a8dec5f046da4024b01774aef11a548ca944dc5728d07dd46fdacf0fd4.m4a",
+      "title": "[Vietsub + Tiktok] Yêu, Tồn Tại - Lư Lư Mau Im Lặng | 爱，存在 - 卢卢快闭嘴",
+      "preferredSource": "https://www.youtube.com/watch?v=AaH3u6JHBUQ",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "b775e0cdfd154a53204a9a4c900d672dfe2c99047f5e4e489b5da4438983a541.m4a",
+      "title": "[Vietsub] Trời Quang Mây Tạnh - Vương Hân Thần, Tô Tinh Tiệp | 放晴 - 王忻辰/苏星婕",
+      "preferredSource": "https://www.youtube.com/watch?v=oaFu8AMvZ3E",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "beaa64788e4868411e673e5e43af3242d6e1149b71df8188b417c1ce52bd92be.m4a",
+      "title": "[Vietsub] Thời Không Ngân Hà - Ngải Thần | 时空银河 - 艾辰",
+      "preferredSource": "https://www.youtube.com/watch?v=vephpF5xReo",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "79e87bb06eeafab63e485459e3f7375ad8b22425d35a4f09add0e652471d8277.m4a",
+      "title": "[Vietsub] Không Bằng (full bản nữ) - Dã Khả | 不如 - 也可",
+      "preferredSource": "https://www.youtube.com/watch?v=UFvunYkej64",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "82f422cb67243ae72448e6c9e21ff71074b46da0d4770119939338827b6aa385.m4a",
+      "title": "[Vietsub] Nhạc Tàn Người Cũng Tan - En | 曲终人亦散 - en",
+      "preferredSource": "https://www.youtube.com/watch?v=1vVOusBoECM",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "9372905d20051406f7f8d2d6e5a97d55ee1e9ec1a3f3cd075cbc63b0fc3c8dd1.m4a",
+      "title": "[Vietsub] Thẩm Viên Ngoại - A YueYue, Lệ Cách, Tiểu Điền Âm Nhạc Xã | 沈園外 - 阿YueYue / 戾格 / 小田音樂社",
+      "preferredSource": "https://www.youtube.com/watch?v=8DkOxbwOlnI",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "90cae3c1d4c8af0181318bafdbe954ad84261e0962c95d94fdd926da14ec6724.m4a",
+      "title": "[Vietsub] Hồng Mã - Hứa Lam Tâm | 红马 (女版) - 一颗狼星_许篮心",
+      "preferredSource": "https://www.youtube.com/watch?v=jJtPrjzNwh0",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "77bd746950e1bd3057365f37fd82cc2d76c82ae340ac3eb3aac3390a1f99e38a.m4a",
+      "title": "[Vietsub] Người Ta - Ngải Thần | 他他他 - 艾辰",
+      "preferredSource": "https://www.youtube.com/watch?v=99uabJJUFX4",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "152fef1e907b1a6fbbff8369011c53d66e4729ef27bacdeb3187406e85d21267.m4a",
+      "title": "[Vietsub] Tây Lâu Biệt Tự - Doãn Tích Miên/Tiểu Điền Âm Nhạc Xã | 西楼别序 - 尹昔眠/小田音乐社",
+      "preferredSource": "https://www.youtube.com/watch?v=UCzokzQwE4I",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "7f59990c1d8ab17ee895e5df77cb4cd0436bdd5940ba17166c2d0051be586c7e.m4a",
+      "title": "[Vietsub] Xóa đi - Yên ( Hứa Giai Hào) | 删了吧 - 烟(许佳豪)",
+      "preferredSource": "https://www.youtube.com/watch?v=WiwdKNrXB0U",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "127e28fe186efae1ea5bef15b77e0d4d52ae5f0daadc527c166f0e971a847771.m4a",
+      "title": "[Vietsub] Nếu Ánh Trăng Không Đến - Vương Vũ Trụ Leto/ Kiều Tuấn Thừa | 若月亮没来  - 王宇宙Leto/乔浚丞",
+      "preferredSource": "https://www.youtube.com/watch?v=DYwTleYQc9U",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "4ee7ffd5b46df122e01b813d4f1879a54ce6ddd6416d871a1de8fb5b221560ff.m4a",
+      "title": "[Vietsub] Không Bằng - Tần Hải Thanh | 不如 - 秦海清",
+      "preferredSource": "https://www.youtube.com/watch?v=r57VfwRdxFA",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "80da30e03f73d1f8b50c38dd044acf262bc61972217b0b36efd4ba1dc617b8ad.m4a",
+      "title": "[Vietsub] Vịnh Alaska - Lam Tâm Vũ | 阿拉斯加海湾 - 蓝心羽",
+      "preferredSource": "https://www.youtube.com/watch?v=_3asPtqsDII",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "61c112757c4bdcfe5d90ba2ac27d24ca2098de952f1315f392f5179e9f5e07b8.m4a",
+      "title": "[Vietsub] Xem Như Tôi Từng Cưới Được Cô Ấy - Mạc Khiếu Tỷ Tỷ | 当我娶过她 - 莫叫姐姐",
+      "preferredSource": "https://www.youtube.com/watch?v=x2veKun0qJ4",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "a031aaec4d0d593ed7c01c16d1b05b6955cfe5a9e81978ae6c10281610aeb38e.m4a",
+      "title": "[Vietsub] Nửa Đời Tuyết - Là Thất Thúc Đây | 半生雪 - 是七叔呢V",
+      "preferredSource": "https://www.youtube.com/watch?v=W7UdVKa8gK0",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "67ed3dcc79477f36fccca34477e38eec1ac9c83b29b0326b0e0cf16ba9ab3704.m4a",
+      "title": "[Vietsub + Tiktok] Ngu Hề Thán - Văn Nhân Thính Thư | 虞兮叹 - 闻人听書",
+      "preferredSource": "https://www.youtube.com/watch?v=XxutYA4stMA",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "1ff295ee354894ed38993e670d394693a552f4cd0c2f9471ead148d27851ef27.m4a",
+      "title": "[Vietsub] Ta Tên Trường An, Chàng Tên Cố Lý - Doãn Tích Miên/ Tiểu Điền Âm Nhạc Xã | 我叫长安,你叫故里",
+      "preferredSource": "https://www.youtube.com/watch?v=Gc4LUVm7Wvk",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "653e6c9027843e971a953502e9035a566ebb9adb7654eddd8c62dd01cb32d302.m4a",
+      "title": "[Vietsub] Một Đường Nở Hoa - Ôn Dịch Tâm | 一路生花 - 温奕心",
+      "preferredSource": "https://www.youtube.com/watch?v=S1ElLh_hf3k",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "28b326bfb15907722084019d4ccfd7811a5e4a103ef78871e71c84dc36c62868.m4a",
+      "title": "[Vietsub] Thời Không Sai Lệch - Ngải Thần |  错位时空 - 艾辰",
+      "preferredSource": "https://www.youtube.com/watch?v=P9mqCv1yhBE",
+      "status": "source-located-text-not-imported"
+    },
+    {
+      "trackId": "4069174745a632dfb7e9f47c7a0ab04d102a8ea969445efeb86bc1061e470ed0.m4a",
+      "title": "[Vietsub] Bích Thượng Quan - Đặng Ngụ Quân | 壁上观 - 邓寓君",
+      "preferredSource": "https://www.youtube.com/watch?v=UV7kfq47Sqw",
+      "status": "source-located-text-not-imported"
+    }
+  ],
+  "searchGroups": [
+    {
+      "trackIds": [
+        "d964d115088c0959771c081365fce629a3a2803ad4e814362b01a691673e77bd.m4a",
+        "3dfaa09eccf3e337f9f8f1f16db10a299bc93f67577a2883d20ddf8ed4027ab6.m4a",
+        "57bd97da60983871ab89eef2f8fb632338c6b5b1885f5be2713da95fbc36af0b.m4a",
+        "c8ef1fa9d76e56b64f653da753c1325059d225a3ff3575b7f86e3b569399008f.m4a"
+      ],
+      "queries": [
+        "[Vietsub] Bạch Nguyệt Quang Và Nốt Chu Sa (full Tiktok) - Đại Tử |  白月光与朱砂痣 - 大籽 lời dịch tiếng Việt",
+        "[Vietsub] Tát Dã (ca khúc truyện) - Kaiser Meow, Tư Nam | 撒野 -  凱瑟喵, 司南 lời dịch tiếng Việt",
+        "[Vietsub] Bất Phụ Thế Gian - AYueYue | 不负人间 - 阿YueYue lời dịch tiếng Việt",
+        "[Vietsub] Trong Mắt Đều Là Anh - Tiểu Lam Bối Tâm | 目及皆是你 - 小蓝背心 lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub] Bạch Nguyệt Quang Và Nốt Chu Sa (full Tiktok) - Đại Tử |  白月光与朱砂痣 - 大籽 - YouTube",
+          "url": "https://www.youtube.com/watch?v=m6yytX2gHxs"
+        },
+        {
+          "title": "[Vietsub] Trong Mắt Đều Là Anh - Tiểu Lam Bối Tâm | 目及皆是你 - 小蓝背心 - YouTube",
+          "url": "https://www.youtube.com/watch?v=htlKvOXmOTs"
+        },
+        {
+          "title": "[Vietsub] Tát Dã (ca khúc truyện) - Kaiser Meow, Tư Nam | 撒野 - 凱瑟喵, 司南",
+          "url": "https://hoidap.edu.vn/detail/vietsub-tat-da-ca-khuc-truyen-kaiser-meow-tu-nam-sa-ye-kai-se-miao-si-nan"
+        },
+        {
+          "title": "[Vietsub] Trong Mắt Đều Là Anh - Tiểu Lam Bối Tâm | 目及皆是你 - BiliBili",
+          "url": "https://www.bilibili.tv/vi/video/2005948968"
+        },
+        {
+          "title": "[Vietsub] Bạch Nguyệt Quang và Nốt Chu Sa (白月光与朱砂痣) - Đại Tử (大籽) - BiliBili",
+          "url": "https://www.bilibili.tv/vi/video/2003832194"
+        },
+        {
+          "title": "[Vietsub] Bạch Nguyệt Quang và Nốt Chu Sa (白月光与朱砂痣) - Đại Tử (大籽) - BiliBili",
+          "url": "https://www.bilibili.tv/video/2003832194"
+        },
+        {
+          "title": "[Vietsub] Trong Mắt Đều Là Anh - Tiểu Lam Bối Tâm | 目及皆是你 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2005948968"
+        },
+        {
+          "title": "Tôi đang tìm hiểu về Tát Dã Review các bạn gặp, tư vấn giúp đỡ tôi. Xin cảm ơn",
+          "url": "https://hoidap.edu.vn/k/tat-da-review"
+        },
+        {
+          "title": "[Vietsub] Bạch Nguyệt Quang Và Nốt Chu Sa - Đại Tử | 白月光与朱砂痣 - 大籽 (Anime) - BiliBili",
+          "url": "https://www.bilibili.tv/video/2049993912"
+        },
+        {
+          "title": "Tát Dã #review #dammy #TetNoiDay",
+          "url": "https://hoidap.edu.vn/video/tat-da-review-dammy-tetnoiday"
+        },
+        {
+          "title": "Bài hát chờ duyệt - Hợp Âm Chuẩn - Thư viện hợp âm lớn nhất Việt Nam",
+          "url": "https://hopamchuan.com/manage/song/approve/49753/trong-mat-deu-la-anh"
+        },
+        {
+          "title": "Only You are in My Eyes目及皆是你(Mu Ji Jie Shi Ni) By Xiao Lan Bei Xin小蓝背心",
+          "url": "https://chinesemusicwiki.com/only-you-are-in-my-eyes%E7%9B%AE%E5%8F%8A%E7%9A%86%E6%98%AF%E4%BD%A0mu-ji-jie-shi-ni-by-xiao-lan-bei-xin%E5%B0%8F%E8%93%9D%E8%83%8C%E5%BF%83/"
+        },
+        {
+          "title": "Bạch nguyệt quang là gì? Nguồn gốc, ý nghĩa và cách dùng trend TikTok - Thegioididong.com",
+          "url": "https://www.thegioididong.com/hoi-dap/bach-nguyet-quang-la-gi-1587609"
+        },
+        {
+          "title": "[Vietsub] Tát Dã (ca khúc truyện) - Kaiser Meow, Tư Nam | 撒野 - 凱瑟喵, 司南 Acordes - Chordify",
+          "url": "https://chordify.net/chords/vietsub-tat-da-ca-khuc-truyen-kaiser-meow-tu-nam-sa-ye-kai-se-miao-si-nan-moah-nhac-trung-channel"
+        },
+        {
+          "title": "Lời Bài Hát Ánh Mắt Đều Là Em (目及皆是你) – Tiểu Lam Bối Tâm | Pinyin + Lời Dịch",
+          "url": "https://foxhsk.com/blog/loi-bai-hat-anh-mat-deu-la-em-tieu-lam-boi-tam"
+        },
+        {
+          "title": "[Vietsub] Bạch Nguyệt Quang và Nốt Chu Sa (白月光与朱砂痣) - Đại Tử (大籽) - BiliBili",
+          "url": "https://www.bilibili.tv/ms/video/2003832194"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Trong Mắt Đều Là Anh - Tiểu Lam Bối Tâm - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/trong-mat-deu-la-anh-tieu-lam-boi-tam.83704/"
+        },
+        {
+          "title": "Bất Phụ Thế Gian / 不负人间 (Vietsub, Kara) | NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/video/4PrMeRvsr50mr"
+        },
+        {
+          "title": "[Vietsub]不负人间/Bất Phụ Thế Gian- A Yue Yue - BiliBili",
+          "url": "https://www.bilibili.tv/video/2007016215"
+        },
+        {
+          "title": "[Vietsub] Em sợ người đến không phải là anh • Tiểu Lam Bối Tâm ♪ 我怕来者不是你 • 小蓝背心 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2001748636"
+        },
+        {
+          "title": "[Vietsub+Pinyin] Trong mắt đều là anh -Tiểu Lam Bối Tâm ||目及皆是你 -小蓝背心 (Tiktok song) - BiliBili",
+          "url": "https://www.bilibili.tv/video/2005015772"
+        },
+        {
+          "title": "Trend bạch nguyệt quang là gì mà hot rần rần cõi mạng?",
+          "url": "https://kienthuc.net.vn/trend-bach-nguyet-quang-la-gi-ma-hot-ran-ran-coi-mang-post1022771.html"
+        },
+        {
+          "title": "Bạch Nguyệt Quang Và Nốt Chu Sa / 白月光与朱砂痣 (Vietsub, Kara) | NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/video/opXQdpnnd8aLy"
+        },
+        {
+          "title": "[Vietsub - Cover] Bạch Nguyệt Quang Và Nốt Chu Sa - 白月光与朱砂痣 | Ổ nhỏ của Hoài - BiliBili",
+          "url": "https://www.bilibili.tv/video/2005755638"
+        },
+        {
+          "title": "Hợp âm Trong Mắt Đều Là Anh (目及皆是你 - 小蓝背心) - Tiểu Lam Bối Tâm (Phiên bản 1) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/49753/trong-mat-deu-la-anh/tee_ng"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Trong Mắt Đều Là Anh 目及皆是你",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-trong-mat-deu-la-anh.html"
+        },
+        {
+          "title": "[Dịch lời bài hát] Bạch nguyệt quang và nốt chu sa (白月光与朱砂痣) – Đại Tử (大籽) – Na's World",
+          "url": "https://naxiaholic.wordpress.com/2021/04/23/translate-lyrics-bach-nguyet-quang-va-not-chu-sa-%E7%99%BD%E6%9C%88%E5%85%89%E4%B8%8E%E6%9C%B1%E7%A0%82%E7%97%A3-dai-tu-%E5%A4%A7%E7%B1%BD/"
+        },
+        {
+          "title": "Hướng dẫn: BẠCH NGUYỆT QUANG VÀ NỐT CHU SA - Đại Tử | 白月光与朱砂痣 - 大籽 | Guitar Solo Level 1 - BiliBili",
+          "url": "https://www.bilibili.tv/en/video/2008931348"
+        },
+        {
+          "title": "Mv Múa \" Bạch Nguyệt Quang Và Nốt Chu Sa - 白月光与朱砂痣 \" - Tiktok Hot Song - Múa Cổ Trang Trung Quốc | Gan Jing World",
+          "url": "https://www.ganjingworld.com/video/1g8juujjj485pyEgpzZncXqAm1es1c"
+        },
+        {
+          "title": "[Vietsub] Anh đi vội vàng hơn cả tình yêu • Tiểu Lam Bối Tâm ♪ 你比愛走得匆匆 • 小藍背心 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2048057948"
+        },
+        {
+          "title": "[Lyrics + Vietsub] - Bất Phụ Thế Gian - A Yue Yue - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/bat-phu-the-gian-a-yue-yue.82246/"
+        },
+        {
+          "title": "Hợp âm Trong mắt đều là anh (Anh ở khắp mọi nơi - Mù jí jiē shì nǐ - 目及皆是你) - Tiểu Lam Bối Tâm",
+          "url": "https://hopamviet.vn/chord/song/trong-mat-deu-la-anh-anh-o-khap-moi-noi-mu-ji-ji-shi-n/W8IU8EA8.html"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Bạch Nguyệt Quang Và Nốt Chu Sa - Đại Tử - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/bach-nguyet-quang-va-not-chu-sa-dai-tu.66859/"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Bất Phụ Thế Gian 不负人间 Bù fù rénjiān",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-bat-phu-the-gian-bu-fu-renjian.html"
+        },
+        {
+          "title": "Live Up To The World不负人间(Bu Fu Ren Jian) By A YueYue阿YueYue",
+          "url": "https://chinesemusicwiki.com/live-up-to-the-world%E4%B8%8D%E8%B4%9F%E4%BA%BA%E9%97%B4bu-fu-ren-jian-by-a-yueyue%E9%98%BFyueyue/"
+        },
+        {
+          "title": "A Yue Yue - Nghe và tải nhạc mới nhất - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/artist/302515"
+        },
+        {
+          "title": "Nhạc phim Trung - Hàn - Viên Á Duy, Ngạo Thất Gia (Ao Qi Ye), Nhậm Nhiên - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/playlist/1711002317IBI5"
+        },
+        {
+          "title": "Review Nhạc - Bất Phụ Nhân Gian - AYueYue - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/bat-phu-nhan-gian-ayueyue.94775/"
+        },
+        {
+          "title": "ost phim - Diễn Đàn Chia Sẻ",
+          "url": "https://chiase.org/tags/ost-phim/"
+        },
+        {
+          "title": "阿YueYue - 不負人間『我墜入萬丈紅塵的一個平凡人，執一盞孤燈照亮清淨六根。』〖動態歌詞/Vietsub/Pinyin Lyrics〗 | 天天要聞",
+          "url": "https://daydaynews.cc/video/3044926.html"
+        },
+        {
+          "title": "阿YueYue - 不負人間『我墜入萬丈紅塵的一個平凡人，執一盞孤燈照亮清淨六根。』〖動態歌詞/Vietsub/Pinyin Lyrics〗 | 天天要聞",
+          "url": "https://daydaynews.cc/video/3741170.html"
+        },
+        {
+          "title": "Nhạc Phim - Diễn Đàn Chia Sẻ",
+          "url": "https://chiase.org/tags/nhac-phim/"
+        }
+      ]
+    },
+    {
+      "trackIds": [
+        "501ec8b67371fed9daa2e5c542a5564f2b9beac60d8eef5862e51d1ad0cec634.m4a",
+        "03ad4278cb39a6fca43ac5703584be63f869b17259c962bd14fa5f77a196f37d.m4a",
+        "17148c27a872fdb8a06340cfb431b2e1747027de6d700eaaa8b3f9e630d69b54.m4a",
+        "ae9ee5299d6665fd588dfcc45960db154deeccc5bebd7660336a53c1de6a01ec.m4a"
+      ],
+      "queries": [
+        "[Vietsub] Vây Giữ - Vương Tĩnh Văn Không Mập | 沦陷 - 王靖雯不胖 lời dịch tiếng Việt",
+        "[Vietsub + Tiktok] Chấp Mê Bất Ngộ - Tiểu Nhạc Ca | 执迷不悟 - 小乐哥 lời dịch tiếng Việt",
+        "[Vietsub] Yến Vô Hiết ( Remix)- Tưởng Tuyết Nhi | 燕无歇 DJ - 蒋雪儿 lời dịch tiếng Việt",
+        "[Vietsub + Tiktok] Yến Vô Hiết - Tưởng Tuyết Nhi | 燕无歇 - 蒋雪儿 lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub + Tiktok] Chấp Mê Bất Ngộ - Tiểu Nhạc Ca | 执迷不悟 - 小乐哥 - YouTube",
+          "url": "https://www.youtube.com/watch?v=rCcQh0b7pAI"
+        },
+        {
+          "title": "[Vietsub] Yến Vô Hiết ( Remix)- Tưởng Tuyết Nhi | 燕无歇 DJ - 蒋雪儿 - YouTube",
+          "url": "https://www.youtube.com/watch?v=XCFfyW-MbT0"
+        },
+        {
+          "title": "[Vietsub] Vây Giữ - Vương Tĩnh Văn Không Mập | 沦陷 - 王靖雯不胖 - GTDB Videos gtdb.org",
+          "url": "https://gtdb.org/video/G_fVwdpLKZ4"
+        },
+        {
+          "title": "The Swallow Never Rests燕无歇(Yan Wu Xie) By Snow.J蒋雪儿",
+          "url": "https://chinesemusicwiki.com/the-swallow-never-rests%E7%87%95%E6%97%A0%E6%AD%87yan-wu-xie-by-snow-j%E8%92%8B%E9%9B%AA%E5%84%BF/"
+        },
+        {
+          "title": "[Vietsub] Vây Giữ - Vương Tĩnh Văn Không Mập _ 沦陷 - 王靖雯不胖 | ziuthu10",
+          "url": "https://ziuthu10.bandcamp.com/track/vietsub-v-y-gi-v-ng-t-nh-v-n-kh-ng-m-p"
+        },
+        {
+          "title": "Nhạc Tik Tok Trung Quốc - Tiểu Lạc Ca (Vương Duy Lạc), Mộng Nhiên (Meng Ran), Trần Phương Ngữ (Kimberley Chen) - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/playlist/K59opOSpzOpc"
+        },
+        {
+          "title": "Lời Bài Hát Vây Giữ (沦陷) - Vương Tĩnh Văn | Pinyin & Lời Dịch",
+          "url": "https://foxhsk.com/blog/loi-bai-hat-vay-giu-vuong-tinh-van"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Chấp Mê Bất Ngộ Remix - Tiểu Nhạc Ca / 执迷不悟 (DJ抖音版) - 小乐哥 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2006383395"
+        },
+        {
+          "title": "Chấp Mê Bất Ngộ 执迷不悟 | Học Tiếng Trung Qua Bài Hát",
+          "url": "https://hsk.edmicro.vn/tin-tuc/hoc-tieng-trung-qua-bai-hat-chap-me-bat-ngo"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Yến Vô Hiết - Tương Tuyết Nhi / 燕无歇 -蒋雪儿 / Mỹ nhân cổ trang múa kiếm đẹp nhất - BiliBili",
+          "url": "https://www.bilibili.tv/vi/video/2009358749"
+        },
+        {
+          "title": "小乐哥(王唯乐) | Lyrics, Song Meanings & Music Videos",
+          "url": "https://sonichits.com/artist/%E5%B0%8F%E4%B9%90%E5%93%A5%28%E7%8E%8B%E5%94%AF%E4%B9%90%29"
+        },
+        {
+          "title": "Get chords for tracks by 蒋婴",
+          "url": "https://chordu.com/artist-chords-%E8%92%8B%E5%A9%B4"
+        },
+        {
+          "title": "Toplist những bài hát tiếng Trung hot trên tiktok Trung Việt",
+          "url": "https://tuhoctiengtrung.vn/toplist-nhung-bai-hat-tieng-trung-hot-tren-tiktok/"
+        },
+        {
+          "title": "[Vietsub] Vây Giữ - Vương Tĩnh Văn Không Mập | 沦陷 Chords - 王靖雯不胖 - ChordU",
+          "url": "https://chordu.com/chords-tabs--vietsub-v%C3%A2y-gi%E1%BB%AF-v%C6%B0%C6%A1ng-t%C4%A9nh-v%C4%83n-kh%C3%B4ng-m%E1%BA%ADp-%E6%B2%A6%E9%99%B7-%E7%8E%8B%E9%9D%96%E9%9B%AF%E4%B8%8D%E8%83%96-id_G_fVwdpLKZ4"
+        },
+        {
+          "title": "[Vietsub] Yến Vô Hiết - Tưởng Tuyết Nhi 🎤 Những bản cover hay nhất trên Tiktok《燕无歌 - 蒋雪儿》 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2008185165"
+        },
+        {
+          "title": "[Vietsub] Chấp mê bất ngộ (执迷不悟) - Thiết Não Đại - BiliBili",
+          "url": "https://www.bilibili.tv/vi/video/2007232588"
+        },
+        {
+          "title": "Lời Bài Hát Yến Vô Hiết (燕无歇) – Tưởng Tuyết Nhi (Pinyin + Lời Dịch) | FoxHSK",
+          "url": "https://foxhsk.com/blog/loi-bai-hat-yen-vo-hiet-tuong-tuyet-nhi"
+        },
+        {
+          "title": "Get chords for tracks by 蒋雪儿 刘涛 刘涛 堇临",
+          "url": "https://chordu.com/artist-chords-%E8%92%8B%E9%9B%AA%E5%84%BF-%E5%88%98%E6%B6%9B-%E5%88%98%E6%B6%9B-%E5%A0%87%E4%B8%B4"
+        },
+        {
+          "title": "Tuyển Tập Những Bài Hát Tiếng Trung Hay Nhất Mọi Thời Đại (Pinyin + Lời Dịch) | FoxHSK",
+          "url": "https://foxhsk.com/blog/tuyen-tap-bai-hat-tieng-trung-hay-nhat-kem-pinyin-va-dich-nghia"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Yến Vô Hiết - Tương Tuyết Nhi / 燕无歇 -蒋雪儿 / Mỹ nhân cổ trang múa kiếm đẹp nhất - BiliBili",
+          "url": "https://www.bilibili.tv/video/2009358749"
+        },
+        {
+          "title": "沦陷 | 王靖雯 Lyrics, Meaning & Videos",
+          "url": "https://sonichits.com/video/%E7%8E%8B%E9%9D%96%E9%9B%AF/%E6%B2%A6%E9%99%B7"
+        },
+        {
+          "title": "风夜行 | 蒋雪儿 Lyrics, Meaning & Videos",
+          "url": "https://sonichits.com/album/%E8%92%8B%E9%9B%AA%E5%84%BF/%E9%A3%8E%E5%A4%9C%E8%A1%8C"
+        },
+        {
+          "title": "Bài hát chờ duyệt - Hợp Âm Chuẩn - Thư viện hợp âm lớn nhất Việt Nam",
+          "url": "https://hopamchuan.com/manage/song/approve/77718/chap-me-bat-ngo"
+        },
+        {
+          "title": "[Vietsub+Tiktok] Yến Vô Hiết ( Remix) - Là Thất Thúc Đây | 燕无歇DJ - 是七叔呢 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2008452313"
+        },
+        {
+          "title": "Yến Vô Hiết Tương Tuyết Nhi 燕无歇_江富也、琛佬_高音质在线试听_Yến Vô Hiết Tương Tuyết Nhi 燕无歇歌词|歌曲下载_酷狗音乐",
+          "url": "https://www.kugou.com/mixsong/4tbgp7ec.html"
+        },
+        {
+          "title": "沦陷 (DJ动感版) | Wang Jingwen Lyrics, Meaning & Videos",
+          "url": "https://sonichits.com/video/Wang_Jingwen/%E6%B2%A6%E9%99%B7_%28DJ%E5%8A%A8%E6%84%9F%E7%89%88%29"
+        },
+        {
+          "title": "Học tiếng Trung qua bài hát Yến Vô Hiết - vietsub + pinyin",
+          "url": "https://tiengtrung.com/hoc-tieng-trung-qua-video/hoc-tieng-trung-qua-bai-hat/yen-vo-hiet.html"
+        },
+        {
+          "title": "[Vietsub] Yến Vô Hiết - Tưởng Tuyết Nhi 🎤 Những bản cover hay nhất trên Tiktok《燕无歌 - 蒋雪儿》 - BiliBili",
+          "url": "https://www.bilibili.tv/th/video/2008185165"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Chấp mê bất ngộ 执迷不悟 Zhímíbùwù",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-chap-me-bat-ngo-zhimibuwu.html"
+        },
+        {
+          "title": "蒋雪儿 | Lyrics, Song Meanings & Music Videos",
+          "url": "https://sonichits.com/artist/%E8%92%8B%E9%9B%AA%E5%84%BF"
+        },
+        {
+          "title": "Mạc Vấn Quy Kỳ | Tưởng Tuyết Nhi Lyrics, Meaning & Videos",
+          "url": "https://sonichits.com/video/T%C6%B0%E1%BB%9Fng_Tuy%E1%BA%BFt_Nhi/M%E1%BA%A1c_V%E1%BA%A5n_Quy_K%E1%BB%B3"
+        },
+        {
+          "title": "王靖雯 | Lyrics, Song Meanings & Music Videos",
+          "url": "https://sonichits.com/artist/%E7%8E%8B%E9%9D%96%E9%9B%AF"
+        },
+        {
+          "title": "[KARAOKE] VÂY GIỮ - Vương Tĩnh Văn Không Mập | 沦陷 - 王靖雯不胖 | | Nguyễn Hoài Thu",
+          "url": "https://studio.okara.vn/ban-thu/karaoke-vay-giu-vuong-tinh-van-khong-map-6603471"
+        },
+        {
+          "title": "[Vietsub] Chấp mê bất ngộ (执迷不悟) - Thiết Não Đại - BiliBili",
+          "url": "https://www.bilibili.tv/video/2007232588"
+        },
+        {
+          "title": "Hợp âm Chấp Mê Bất Ngộ (执迷不悟) - Tiểu Nhạc Ca (小乐哥) (Phiên bản 1) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/77718/chap-me-bat-ngo/"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Vây Giữ 沦陷 Lúnxiàn",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-vay-giu-lunxian.html"
+        },
+        {
+          "title": "[Hợp âm] Lời bài hát: Yến Vô Hiết - Châu Dương - Trung Tâm Ca Nhạc Nhẹ TP. Hồ Chí Minh",
+          "url": "https://canhacnhe.com/hop-am-loi-bai-hat-yen-vo-hiet-chau-duong"
+        },
+        {
+          "title": "Nhạc Trung Quốc Buồn Tâm Trạng TikTok - Hắc Kỳ Tử, Tô Tinh Tiệp, Lam Tâm Vũ - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/playlist/1704878069Y02M"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Yến vô hiết 燕无歇 Yàn wú xiē",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-yen-vo-hiet-yan-wu-xi.html"
+        },
+        {
+          "title": "Vương Tĩnh Văn Không Mập - Diễn Đàn Chia Sẻ",
+          "url": "https://chiase.org/tags/vuong-tinh-van-khong-mp/"
+        },
+        {
+          "title": "Vây Giữ 沦陷 - Vương Tĩnh Văn Không Mập 王靖雯不胖 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2000217938"
+        },
+        {
+          "title": "Vây Giữ-Vương Tĩnh Văn Không Mập | 沦陷-王靖雯不胖 | Sự Vô Tình Của Anh Đã Khiến Ta Mất Nhau || Hạt Bí Ngô - BiliBili",
+          "url": "https://www.bilibili.tv/video/2001484101"
+        },
+        {
+          "title": "Hợp âm Chấp Mê Bất Ngộ (执迷不悟) - Tiểu Nhạc Ca (小乐哥) (Phiên bản 1) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/77718/chap-me-bat-ngo/?s=1"
+        }
+      ]
+    },
+    {
+      "trackIds": [
+        "48475929e6666f37380485602f1bdd0959db51fc1d58d1114cfbc0de2280c938.m4a",
+        "d2b17a52d1c5b0411eb49e617a71b2985a276f44746e1cda7d687c080e16f80d.m4a",
+        "bc66c29657128282714ca24ed494e0c507593499dd37086655b27a4c550a4cd4.m4a",
+        "573e396edb6207da512a7247c71ad87f6ad90ce8e10d028591949c87d0635b3a.m4a"
+      ],
+      "queries": [
+        "[Vietsub] Thanh Trừ - Vương Hân Thần, Tô Tinh Tiệp | 清空 - 王忻辰/蘇星婕 lời dịch tiếng Việt",
+        "[ Vietsub + Hot Tiktok ] Em Yêu Anh - Trình Giai Giai | 我爱你 - 程佳佳 lời dịch tiếng Việt",
+        "[Vietsub+Tiktok] Mỹ Nhân Họa Quyển - Văn Nhân Thính Thư  | 美人畫卷 - 闻人听書 lời dịch tiếng Việt",
+        "[Vietsub] Khách Mời - Lộ Phi Văn | 嘉宾 - 路飞文 lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub] Khách Mời - Lộ Phi Văn | 嘉宾 - 路飞文 - YouTube",
+          "url": "https://www.youtube.com/watch?v=Kfktebzfgbw"
+        },
+        {
+          "title": "[Vietsub] Thanh Trừ - Vương Hân Thần, Tô Tinh Tiệp | 清空 - 王忻辰/蘇星婕 - YouTube",
+          "url": "https://www.youtube.com/watch?v=Y4pmmQkm9n8"
+        },
+        {
+          "title": "Luyện nói video: [Vietsub] Thanh Trừ - Vương Hân Thần, Tô Tinh Tiệp | 清空 - 王忻辰/蘇星婕 - ShadowingChinese",
+          "url": "https://shadowingchinese.com/vi/practice/vietsub-thanh-tru-vuong-han-than-to-tinh-tiep-%E6%B8%85%E7%A9%BA-%E7%8E%8B%E5%BF%BB%E8%BE%B0-%E8%98%87%E6%98%9F%E5%A9%95-Y4pmmQkm9n8"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Thanh Trừ - Vương Hân Thần, Tô Tinh Tiệp / 清空 - 王忻辰 -蘇星婕 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2000269463"
+        },
+        {
+          "title": "[Vietsub] Khách Mời - Lộ Phi Văn | 嘉宾 Chords - 路飞文 - ChordU",
+          "url": "https://chordu.com/chords-tabs--vietsub-kh%C3%A1ch-m%E1%BB%9Di-l%E1%BB%99-phi-v%C4%83n-%E5%98%89%E5%AE%BE-%E8%B7%AF%E9%A3%9E%E6%96%87-id_Kfktebzfgbw"
+        },
+        {
+          "title": "[Vietsub] Khách Mời • Lộ Phi Văn ♪ 嘉賓 • 路飛文 (Bản nữ) - BiliBili",
+          "url": "https://www.bilibili.tv/video/2006558188"
+        },
+        {
+          "title": "[ Pinyin + Vietsub ] Khách Mời - Lộ Phi Văn || 嘉宾 - 路飞文 - BiliBili",
+          "url": "https://www.bilibili.tv/en/video/2043814363"
+        },
+        {
+          "title": "Khách Mời - Lộ Phi Văn - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/khach-moi-lo-phi-van.96419/"
+        },
+        {
+          "title": "Học tiếng Trung qua bài hát: Em Yêu Anh - Wǒ ài nǐ [Pinyin + Vietsub] - Học tiếng Trung qua Bài hát - Phiên âm - Lời Việt [2026]",
+          "url": "https://baihattiengtrung.com/em-yeu-anh-wo-ai-ni.html"
+        },
+        {
+          "title": "(8) [Vietsub] Khách Mời - Lộ Phi Văn | 嘉宾 - 路飞文 - YouTube | Thiệp, Âm nhạc, Youtube",
+          "url": "https://ar.pinterest.com/pin/721772277792613535/"
+        },
+        {
+          "title": "Em Yêu Anh / 我爱你 (Vietsub, Kara) | NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/video/tvW0yu3GDPkgQ"
+        },
+        {
+          "title": "Cover - Khách Mời - Lộ Phi Văn Cover - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/khach-moi-lo-phi-van-cover.75803/"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Em yêu anh 我爱你 Wǒ ài nǐ – Trình Giai Giai 程佳佳",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-em-yeu-anh-w-ai-n-trinh-giai-giai.html"
+        },
+        {
+          "title": "[Lyrics + Vietsub] - Em Yêu Anh - Trình Giai Giai - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/em-yeu-anh-trinh-giai-giai.107974/"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Thời gian dần phai - Tô Hân Thần, Vương Tinh Tiệp / 时间幻灭 - 王忻辰_苏星婕 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2000191662"
+        },
+        {
+          "title": "[Vietsub] Thời gian tan vỡ (时间幻灭) - Vương Hãn Thần/ Vương Tinh Tiệp -苏星婕/王忻辰 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2000252090"
+        },
+        {
+          "title": "[Vietsub] 王忻辰/苏星婕 - 放晴 || Vương Hãn Thần/Tô Tinh Tiệp - Sáng Lại - BiliBili",
+          "url": "https://www.bilibili.tv/video/2007840727"
+        },
+        {
+          "title": "Wo Ai Ni là gì? Lời bài hát phiên âm của Wo Ai Ni | 35Express",
+          "url": "https://35express.org/wo-ai-ni-la-gi-loi-bai-hat-phien-am-cua-wo-ai-ni/"
+        },
+        {
+          "title": "VIETSUB XIN CHÀO THỨ 7 23.11.2024",
+          "url": "https://ok.ru/video/8867448097380"
+        },
+        {
+          "title": "[Vietsub] Trời quang mây tạnh • Vương Hân Thần/Tô Tinh Tiệp ♪ 放晴 • 王忻辰/苏星婕 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2005866949"
+        },
+        {
+          "title": "Review Nhạc - Bài Hát Khách Mời - Lộ Phi Văn - Trương Viễn - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/bai-hat-khach-moi-lo-phi-van-truong-vien.93961/"
+        },
+        {
+          "title": "Người yêu ơi, trời mưa rồi - Trình Giai Giai - Hot Douyin Chords - Chordify",
+          "url": "https://chordify.net/chords/vietsub-nguoi-yeu-oi-troi-mua-roi-qin-ai-de-xia-yu-le-trinh-giai-giai-cheng-jia-jia-hot-douyin-chanh-day"
+        },
+        {
+          "title": "[Vietsub] Trời quang mây tạnh • Vương Hân Thần/Tô Tinh Tiệp ♪ 放晴 • 王忻辰/苏星婕 - BiliBili",
+          "url": "https://www.bilibili.tv/en/video/2005866949"
+        },
+        {
+          "title": "我爱你 - TikTok, Spotify & YouTube Analytics",
+          "url": "https://chartex.com/song/2596423"
+        },
+        {
+          "title": "Em Yêu Anh - Trình Giai Giai (COVER) | 我爱你 - 程佳佳 | MERVYN - BiliBili",
+          "url": "https://www.bilibili.tv/video/2045500808"
+        },
+        {
+          "title": "美人畫卷 (DJ正式版) - 闻人听書 ♪ 〖動態歌詞/Vietsub/Pinyin Lyrics〗| 抖音热歌 洗脑神曲 DJ抖音专辑 抖音熱門DJ版 | Gan Jing World",
+          "url": "https://www.ganjingworld.com/video/1gitj9d0qgt6QXDe4pZcAXeMs1bl1c"
+        },
+        {
+          "title": "Mỹ Nhân Họa Quyển / 美人畫卷 - Văn Nhân Thính Thư - BiliBili",
+          "url": "https://www.bilibili.tv/video/2040820424"
+        },
+        {
+          "title": "Top 3 muốn cả thế giới biết anh yêu em phiên âm tiếng việt mới nhất năm 2022 - Kiến Thức Cho Người lao Động Việt Nam",
+          "url": "https://laodongdongnai.vn/top-3-muon-ca-the-gioi-biet-anh-yeu-em-phien-am-tieng-viet-moi-nhat-nam-2022-1677226874/"
+        },
+        {
+          "title": "Em Yêu Anh - Trình Giai Giai (COVER) | 我爱你 - 程佳佳 | MERVYN - BiliBili",
+          "url": "https://www.bilibili.tv/en/video/2045500808"
+        },
+        {
+          "title": "Học tiếng Trung qua bài hát - 123 Em Yêu Anh - 123我爱你 (Vietsub,pinyin)",
+          "url": "https://tiengtrung.vn/bai-hat-123-em-yeu-anh"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Khách Mời - Trương Viễn - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/khach-moi-truong-vien.68486/"
+        },
+        {
+          "title": "Intro “Em… Em Yêu Ai” – Sơn Tùng M-TP Gây Sốt TikTok Với Giai Điệu Gây Nghiện 💥🎶",
+          "url": "https://35express.org/intro-em-em-yeu-ai-son-tung-m-tp-gay-sot-tiktok-voi-giai-dieu-gay-nghien-%F0%9F%92%A5%F0%9F%8E%B6/"
+        },
+        {
+          "title": "khách mời nghĩa là gì? Từ điển Việt Việt | VDict",
+          "url": "https://vdict.com/kh%C3%A1ch%20m%E1%BB%9Di%2C3%2C0%2C0.html"
+        },
+        {
+          "title": "Xem One Piece (Đảo Hải Tặc) 路飞五档启动 Vietsub – iQIYI | iQ.com",
+          "url": "https://www.iq.com/short/one-piece-dao-hai-tac-1rpdp0e2ue0?lang=vi_vn"
+        },
+        {
+          "title": "Xem Hàng Không Jia EP 1 mới nhất trực tuyến kèm phụ đề tiếng Việt miễn phí – MangoTV | w.mgtv.com",
+          "url": "https://w.mgtv.com/b/901183/24590983.html?fpa=6&ftl=1&lang=vn&lastp=v_play"
+        },
+        {
+          "title": "Thánh Tổ [Việt Sub] | HH3D",
+          "url": "https://hoathinh3d.you/thanh-to"
+        },
+        {
+          "title": "List truyện ngôn tình Điền văn – Petrichor",
+          "url": "https://petrichor78.wordpress.com/2023/08/31/list-truyen-ngon-tinh-dien-van/"
+        },
+        {
+          "title": "Thần Ẩn | DongMePhim",
+          "url": "https://dongmephim.online/phim/than-an"
+        },
+        {
+          "title": "[LS4] List truyện ngôn tình Nữ chính là nha hoàn/ thiếp/ thông phòng – Petrichor",
+          "url": "https://petrichor78.wordpress.com/2025/10/04/ls4-list-truyen-ngon-tinh-nu-chinh-la-nha-hoan-thiep-thong-phong/"
+        },
+        {
+          "title": "Thần Vực Vô Tận | HHKungfu",
+          "url": "https://hhkungfu.cv/phim/than-vuc-vo-tan/"
+        },
+        {
+          "title": "Bạn trai hắn mỹ nhan thịnh thế",
+          "url": "https://wikicv.org/truyen/ban-trai-han-my-nhan-thinh-the-WyCTAu8h7Dpnu04y"
+        },
+        {
+          "title": "Xem phim Thánh Tổ - Lord Of All Lords (2024) | XemPhim247",
+          "url": "https://motchill.live/chi-tiet-phim/thanh-to"
+        }
+      ]
+    },
+    {
+      "trackIds": [
+        "67861619062d93db1fea83c9a27c72b396b7043295e63e15737929674454610d.m4a",
+        "f3f022fe65e1011438d3760350c39645e9a9fff9319396cf4406c062f2a9dc00.m4a",
+        "fb8965f7a3a3b93355e37b5b95dd3621798dab0801949e87609bbf2747aef23f.m4a",
+        "293deae3b48fb45e030c8af6f56447b009444fc0982bb6fdc4aaef0f02060e3e.m4a"
+      ],
+      "queries": [
+        "[Vietsub TikTok] Sau Này Gặp Được Anh Ấy - Hồ 66 | 后来遇见他 - 胡66 lời dịch tiếng Việt",
+        "[Vietsub+Hot tiktok ] Đáy Biển - Nhất Chi Lựu Liên ( Bản Gốc ) | 海底 - 一支榴莲 lời dịch tiếng Việt",
+        "[Vietsub] Tầm Dữ - A YueYue | 寻屿 - 阿YueYue lời dịch tiếng Việt",
+        "[Vietsub] Ring Ring Ring - Bất Thị Hoa Hỏa Nha | Ring Ring Ring - 不是花火呀 lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub] Ring Ring Ring - Bất Thị Hoa Hỏa Nha | Ring Ring Ring - 不是花火呀 - YouTube",
+          "url": "https://www.youtube.com/watch?v=eXZo1Xo2ioc"
+        },
+        {
+          "title": "[Vietsub+Tiktok] Sau Này Khi Gặp Được Anh Ấy - Hồ 66 | 后来遇见他 - 胡66 | Nhạc Hoa tâm trạng - YouTube",
+          "url": "https://www.youtube.com/watch?v=O69HnJhil_0"
+        },
+        {
+          "title": "[Vietsub|HotTiktok] Ring Ring Ring • 不是花火呀 • Bất Thị Hoa Hoả Nha - BiliBili",
+          "url": "https://www.bilibili.tv/video/2009244306"
+        },
+        {
+          "title": "Ring Ring Ring By SHE",
+          "url": "https://chinesemusicwiki.com/ring-ring-ring-by-she/"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Ring Ring Ring - Bất Thị Hoa Hỏa Nha 不是花火呀",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-ring-ring-ring-bat-thi-hoa-hoa-nha.html"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Ring Ring Ring - Bất Thị Hoa Hoả Nha - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/ring-ring-ring-bat-thi-hoa-hoa-nha.79328/"
+        },
+        {
+          "title": "50 bài hát tiếng Trung hot trên TikTok cực nhiều người nghe",
+          "url": "https://phanmemmkt.vn/bai-hat-tieng-trung-hot-tren-tiktok"
+        },
+        {
+          "title": "Bất Thị Hoa Hỏa Nha (不是花火呀) - Hợp Âm Chuẩn - Thư viện hợp âm lớn nhất Việt Nam",
+          "url": "https://hopamchuan.com/artist/173193/bat-thi-hoa-hoa-nha"
+        },
+        {
+          "title": "[VIETSUB] (live) Đ&Aacute;Y BIỂN - NHẤT CHI LƯU LI&Ecirc;N || 海底 - 一支榴莲 [Chương tr&igrave;nh 明日创作计划] | Videos & Movies on Vimeo",
+          "url": "https://vimeo.com/590447745"
+        },
+        {
+          "title": "Ring Ring Ring – Chinese Lyrics Pinyin",
+          "url": "https://allmusing.net/chinese-lyrics-pinyin/ring-ring-ring/313/"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Tầm Dữ - A Yue Yue - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/tam-du-a-yue-yue.69663/"
+        },
+        {
+          "title": "[Vietsub+Pinyin] Tầm Dữ - A Nguyệt Nguyệt / 寻屿 - 阿YueYue - BiliBili",
+          "url": "https://www.bilibili.tv/video/2009021229"
+        },
+        {
+          "title": "[Vietsub] Có chút thích • Bất Thị Hoa Hoả Nha ♪ 某些喜欢 • 不是花火呀 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2004761492"
+        },
+        {
+          "title": "Ring Ring Ring 歌詞 - 不是花火呀 | Mulanci",
+          "url": "https://www.mulanci.org/lyric/tl347112/"
+        },
+        {
+          "title": "A Yue Yue - Việt Nam Overnight",
+          "url": "https://dembuon.vn/tags/a-yue-yue/"
+        },
+        {
+          "title": "Học tiếng Trung qua bài hát “Ring Ring Ring” – Bất Thị Hoa Hỏa Nha cover – Tiếng Trung Hicado",
+          "url": "https://tiengtrunghicado.wordpress.com/2021/08/01/hoc-tieng-trung-qua-bai-hat-ring-ring-ring-bat-thi-hoa-hoa-nha-cover/"
+        },
+        {
+          "title": "[Vietsub] Đáy Biển (海底) - Nhất Chi Lựu Liên (一支榴莲) - BiliBili",
+          "url": "https://www.bilibili.tv/video/2004052732"
+        },
+        {
+          "title": "Ring Ring Ring-不是花火呀-MP3在线免费播放与下载 - 歌曲宝MP3音乐下载",
+          "url": "https://www.gequbao.com/music/22317"
+        },
+        {
+          "title": "Nhạc Hoa 1 - Bất Thị Hoa Hỏa Nha (不是花火呀), Vương Trình Chương, Bài Cốt - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/playlist/eV2fpuwYJRdY"
+        },
+        {
+          "title": "Ring Ring Ring - 不是花火呀『拉长耳朵提高警觉 神经细胞全面戒备』（原唱：S.H.E）（动态歌词/Pin Yin Lyrics）_哔哩哔哩_bilibili",
+          "url": "https://www.bilibili.com/video/BV1ZM4y1u7kG/"
+        },
+        {
+          "title": "Get chords for tracks by 阿yueyue 孙嘉凝 周仁",
+          "url": "https://chordu.com/artist-chords-%E9%98%BFyueyue-%E5%AD%99%E5%98%89%E5%87%9D-%E5%91%A8%E4%BB%81"
+        },
+        {
+          "title": "Tầm Dữ - A YueYue | 寻屿 - 阿YueYue Akordy - Chordify",
+          "url": "https://chordify.net/chords/vietsub-tam-du-a-yueyue-xun-yu-ayueyue-moah-nhac-trung-channel"
+        },
+        {
+          "title": "[Vietsub] Đáy Biển (海底) - Nhất Chi Lựu Liên (一支榴莲) - BiliBili",
+          "url": "https://www.bilibili.tv/en/video/2004052732"
+        },
+        {
+          "title": "Học bài hát tiếng Trung: Sau này khi gặp được anh ấy 后来遇见他 Hòulái yùjiàn tā",
+          "url": "https://nhactrunghoa.com/hoc-bai-hat-tieng-trung-sau-nay-khi-gap-duoc-anh-ay.html"
+        },
+        {
+          "title": "Download Lagu Day Bien Ban Hop Xuong Gratis | GudangLagu321",
+          "url": "https://day-bien-ban-hop-xuong.gudanglagu321.tel/"
+        },
+        {
+          "title": "Mv Múa \" Đáy Biển - Nhất Chi Lựu Liên ( Bản Gốc ) | 海底 - 一支榴莲 \" - Múa Cổ Trang Trung Quốc - BiliBili",
+          "url": "https://www.bilibili.tv/video/2001041011"
+        },
+        {
+          "title": "寻屿-阿YueYue-MP3在线免费播放与下载 - 歌曲宝MP3音乐下载",
+          "url": "https://www.gequbao.com/music/8484727"
+        },
+        {
+          "title": "[Lyrics + Vietsub] - Sau Này Khi Gặp Được Anh Ấy - Hồ 66 - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/sau-nay-khi-gap-duoc-anh-ay-ho-66.58485/"
+        },
+        {
+          "title": "Nhất Chi Lựu Liên - Việt Nam Overnight",
+          "url": "https://dembuon.vn/tags/nhat-chi-luu-lien/"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/my-zh_cn/single/Q1gnVOkl3Bs7FufA2uTc2A%3D%3D"
+        },
+        {
+          "title": "ĐÁY BIỂN – Nhất Chỉ Lưu Liên | 海底 – 一支榴莲 – 🌸 Myn 🌸",
+          "url": "https://mynzhao.wordpress.com/2020/07/28/day-bien-nhat-chi-luu-lien-%E6%B5%B7%E5%BA%95-%E4%B8%80%E6%94%AF%E6%A6%B4%E8%8E%B2/"
+        },
+        {
+          "title": "海底 - Vương Thanh Tú: Song Lyrics, Music Videos & Concerts",
+          "url": "https://www.shazam.com/song/1866624447/%E6%B5%B7%E5%BA%95"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/my-ms/single/8HrCM3JXCumGpW_Z8QNGRA%3D%3D"
+        },
+        {
+          "title": "Hợp âm Sau này khi gặp được anh ấy (後來遇見他) - Hồ 66 (胡66) (Hợp âm cơ bản) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/35273/sau-nay-khi-gap-duoc-anh-ay/Ryloli"
+        },
+        {
+          "title": "[Vietsub] Đáy Biển 海底 - Nhất Chi Lựu Liên 一支榴莲 Akkorde - Chordify",
+          "url": "https://chordify.net/chords/vietsub-day-bien-hai-di-nhat-chi-luu-lien-yi-zhi-liu-lian-dora-hanyu"
+        },
+        {
+          "title": "Cổ Cầm - Đáy Biển - Nhất Chi Lựu Liên | 海底 - 一支榴莲 by Nam Nhất Tiên Sinh - BiliBili",
+          "url": "https://www.bilibili.tv/video/2047622119"
+        },
+        {
+          "title": "Bottom of the Sea海底(Hai Di) By Yi Zhi Liu Lian一支榴莲",
+          "url": "https://chinesemusicwiki.com/bottom-of-the-sea%E6%B5%B7%E5%BA%95hai-di-by-yi-zhi-liu-lian%E4%B8%80%E6%94%AF%E6%A6%B4%E8%8E%B2/"
+        },
+        {
+          "title": "寻屿 - 阿YueYue〖这时间人海里终不能和你相遇却也不能以身相许换别离〗（拼音歌词/Pin Yin Lyrics）_哔哩哔哩_bilibili",
+          "url": "https://www.bilibili.com/video/BV1up4y1h7Xe/"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/th/single/8HrCM3JXCumGpW_Z8QNGRA%3D%3D"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/th/single/lXsMbzjpHOtJmtkI0bzjLw%3D%3D"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/id/single/tqlPlwlkpUAe18ran5_KNQ%3D%3D"
+        },
+        {
+          "title": "抖音后来遇见他陪我春秋冬夏是什么歌?后来遇见他完整歌词-多特图文教程",
+          "url": "https://www.duote.com/tech/202005/124435.html"
+        },
+        {
+          "title": "阿YueYue《寻屿》这时间人海里，终不能和你相遇，却也不能以身相许换别离_哔哩哔哩_bilibili",
+          "url": "https://www.bilibili.com/video/BV1Yv411h7Df/"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/th/single/tqlPlwlkpUAe18ran5_KNQ%3D%3D"
+        },
+        {
+          "title": "Sau Khi Gặp Được Anh (2022) Full Vietsub – iQIYI | iQ.com",
+          "url": "https://www.iq.com/album/sau-khi-gap-duoc-anh-2022-jz3b0ov2rp?lang=vi_vn&zeus=%40%402usmP"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/hk/single/tqlPlwlkpUAe18ran5_KNQ%3D%3D"
+        },
+        {
+          "title": "後來遇見他 歌詞 - 胡66 | Mulanci",
+          "url": "https://www.mulanci.org/lyric/tl284287/"
+        },
+        {
+          "title": "胡66〖後來遇見他〗歌詞 Hou Lai Yu Jian Ta ピンイン付日本語訳｜C-POPマニア〜中国語歌詞の和訳〜",
+          "url": "https://cpopmania.com/houlaiyujianta/"
+        },
+        {
+          "title": "Lyrics Pinyin Hou Lai Yu Jian Ta〖後來遇見他〗胡66 Hu 66 English｜C-POPマニア〜中国語歌詞の和訳〜",
+          "url": "https://cpopmania.com/en/houlaiyujianta/"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/hk/single/qiI4YEhaMX1crTlWR_TpYg%3D%3D"
+        }
+      ]
+    },
+    {
+      "trackIds": [
+        "7ae17f479231eabf813cef65bc6b8223656bdc4f9dd35db0c48d7a10f68763bf.m4a",
+        "8d89469d7664df23d1dd613ca0b1878a36aba70b71c12a386b04bba3450048ed.m4a",
+        "17254a5cdc32058e6f0b6fb5f18513e359bb47f9b79efdd543bbf9cc2e742d94.m4a",
+        "8a8286f72095d8a3a3c45c4b2f97ca4393bca245e349bf81c3b7f7c7038288eb.m4a"
+      ],
+      "queries": [
+        "[Vietsub] Nhiệt Tâm 105°C Của Cậu - A Tứ | 热爱105°C的你 - 阿肆 lời dịch tiếng Việt",
+        "[Vietsub] Tháp Rơi Tự Do - LBI Lợi Bỉ | 跳楼机 - LBI利比 lời dịch tiếng Việt",
+        "[Vietsub] Thủy Triều (remix) - Phó Mộng Đồng | 潮汐 DJ -  傅梦彤 lời dịch tiếng Việt",
+        "[Vietsub]  Khó Sinh Hận - Lễ Việt | 难生恨 - 礼越 lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub] Nhiệt Tâm 105°C Của Cậu - A Tứ | 热爱105°C的你 - 阿肆 - YouTube",
+          "url": "https://www.youtube.com/watch?v=_IXpL83nE2Q"
+        },
+        {
+          "title": "[Vietsub]  Khó Sinh Hận - Lễ Việt | 难生恨 - 礼越 - YouTube",
+          "url": "https://www.youtube.com/watch?v=mkslCrFQcjg"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Khó Sinh Hận - Lễ Việt - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/kho-sinh-han-le-viet.149474/"
+        },
+        {
+          "title": "[Vietsub+Pinyin] Thủy Triều (remix) - Phó Mộng Đồng | 潮汐 DJ - 傅梦 - BiliBili",
+          "url": "https://www.bilibili.tv/vi/video/2006543865?bstar_from=bstar-web.ugc-video-detail.related-recommend.all"
+        },
+        {
+          "title": "[Vietsub] Tháp Rơi Tự Do - LBI Lợi Bỉ | 跳楼机 - LBI利比 | |",
+          "url": "https://studio.okara.vn/ban-thu/vietsub-thap-roi-tu-do-lbi-loi-bi-lbi-11468325"
+        },
+        {
+          "title": "[AMV] Thủy Triều (remix) - Phó Mộng Đồng | 潮汐 DJ - 傅梦彤 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2006758270"
+        },
+        {
+          "title": "Khó Sinh Hận 难生恨 | Học Tiếng Trung Qua Bài Hát",
+          "url": "https://hsk.edmicro.vn/tin-tuc/hoc-tieng-trung-qua-bai-hat-kho-sinh-han"
+        },
+        {
+          "title": "Tháp Rơi Tự Do - DICKSON ft. Tiến Nguyễn / 跳楼机 | Gan Jing World",
+          "url": "https://www.ganjingworld.com/video/1ir51hp4dkp2EWScZEW6Kv7A91ki1c"
+        },
+        {
+          "title": "Jumping Machine跳楼机(Tiao Lou Ji) By LBI利比",
+          "url": "https://chinesemusicwiki.com/jumping-machine%E8%B7%B3%E6%A5%BC%E6%9C%BAtiao-lou-ji-by-lbi%E5%88%A9%E6%AF%94/"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Thuỷ Triều Remix - Phó Mộng Đồng - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/thuy-trieu-remix-pho-mong-dong.81688/"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Thủy Triều 潮汐 Cháoxī (Remix)",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-thuy-trieu-chaoxi-remix.html"
+        },
+        {
+          "title": "Khó Sinh Hận | 难生恨 - Lễ Việt | 礼越 - BiliBili",
+          "url": "https://www.bilibili.tv/video/4796670873180160"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Nhiệt Tâm 105°C Của Cậu 热爱105°C的你 Rè'ài 105°C de nǐ",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-nhiet-tam-105-c-cua-cau.html"
+        },
+        {
+          "title": "Tháp Rơi Tự Do 跳楼机 | Học Tiếng Trung Qua Bài Hát",
+          "url": "https://hsk.edmicro.vn/tin-tuc/hoc-tieng-trung-qua-bai-hat-thap-roi-tu-do"
+        },
+        {
+          "title": "[Vietsub] Thủy triều (Natural) - IN-K/An Tô Vũ/Phó Mộng Đồng | 潮汐 (Natural) - IN-K/安苏羽/傅梦彤 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2043342041"
+        },
+        {
+          "title": "Nightcore Thủy Triều Remix - Phó Mộng Đồng | 傅梦彤 - 潮汐 (DJPad仔) ♫ EDM Remix Leo Rank ♫ Hot Tiktok - BiliBili",
+          "url": "https://www.bilibili.tv/video/2041817281"
+        },
+        {
+          "title": "Khó Sinh Hận | 难生恨 - Lễ Việt | 礼越 - BiliBili",
+          "url": "https://www.bilibili.tv/vi/video/4796670873180160?bstar_from=bstar-web.ugc-video-detail.related-recommend.all"
+        },
+        {
+          "title": "[Vietsub - Pinyin] Tháp Rơi Tự Do - LBI Lợi Bỉ | 跳楼机 - LBI利比 Ringkasan YouTube Didukung oleh Sider",
+          "url": "https://sider.ai/id/create/video/ai-video-shortener/explore/ee46df96-844f-4daa-9445-3a3e63ea1fab"
+        },
+        {
+          "title": "[Listen Only] Nhiệt Tâm 105°C Của Cậu - Lyrics & Karaoke | Free on StarMaker",
+          "url": "https://www.starmakerstudios.com/en/song/%E9%98%BF%E8%82%86-%5Blisten-only%5D-nhiet-tam-105%C2%B0c-cua-cau-lyrics/611752105023076847"
+        },
+        {
+          "title": "Get chords for tracks by 羽梦落汐",
+          "url": "https://chordu.com/artist-chords-%E7%BE%BD%E6%A2%A6%E8%90%BD%E6%B1%90"
+        },
+        {
+          "title": "热爱105℃的你（2019年阿肆演唱的歌曲）_百度百科",
+          "url": "https://bkso.baidu.com/item/%E7%83%AD%E7%88%B1105%E2%84%83%E7%9A%84%E4%BD%A0/57037585?fromModule=lemma_inlink"
+        },
+        {
+          "title": "Hợp âm Thủy Triều (潮汐) - Phó Mộng Đồng (傅梦彤) (Phiên bản 1) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/46111/thuy-trieu"
+        },
+        {
+          "title": "跳楼机 là gì? | Từ điển Trung Việt | ZIM Dictionary",
+          "url": "https://dictionary.zim.vn/trung-viet/%E8%B7%B3%E6%A5%BC%E6%9C%BA"
+        },
+        {
+          "title": "Khó Sinh Hận | 难生恨 - Lễ Việt | 礼越 - BiliBili",
+          "url": "https://www.bilibili.tv/th/video/4796670873180160"
+        },
+        {
+          "title": "[Vietsub - Pinyin] Tháp Rơi Tự Do - LBI Lợi Bỉ | 跳楼机 - LBI利比 Podsumowanie YouTube zasilane przez Sider",
+          "url": "https://sider.ai/pl/create/video/ai-video-shortener/explore/ee46df96-844f-4daa-9445-3a3e63ea1fab/"
+        },
+        {
+          "title": "[Vietsub - Pinyin] Tháp Rơi Tự Do - LBI Lợi Bỉ | 跳楼机 - LBI利比 Resumen de YouTube impulsado por Sider",
+          "url": "https://sider.ai/es/create/video/ai-video-shortener/explore/ee46df96-844f-4daa-9445-3a3e63ea1fab/"
+        },
+        {
+          "title": "Lời bài hát Super Idol - Tian Yiming | Super Idol Lyrics",
+          "url": "https://mp3.edu.vn/loi-bai-hat-super-idol-tian-yiming-super-idol-lyrics/"
+        },
+        {
+          "title": "大家好，我是LBI利比，同时也是跳楼机... 来自LBI利比 - 微博",
+          "url": "https://weibo.com/6443100248/5282321976527479"
+        },
+        {
+          "title": "越南人听跳楼机评论区全是夸赞_哔哩哔哩_bilibili",
+          "url": "https://www.bilibili.com/video/BV13ERaYpEzz/"
+        },
+        {
+          "title": "安苏羽, IN-K, & 傅梦彤 | Lyrics, Song Meanings & Music Videos",
+          "url": "https://sonichits.com/artist/%E5%AE%89%E8%8B%8F%E7%BE%BD%2C_IN-K%2C_%26_%E5%82%85%E6%A2%A6%E5%BD%A4"
+        },
+        {
+          "title": "抖音神曲Dǒu yīn shénqǔ--阿肆Ā sì《熱愛105°C的你rè ài yì bǎi líng wǔ dù de nǐ》 原唱Yuán chàng版本Bǎnběn | Maggie Yang 讲师的专栏",
+          "url": "https://cafetalk.com/column/read/?id=209906&lang=zh"
+        },
+        {
+          "title": "LBI利比 - 跳楼机『baby我们的感情好像跳楼机』（动态歌词/Lyrics Video/无损音质/4k）_哔哩哔哩_bilibili",
+          "url": "https://www.bilibili.com/video/BV1WG6KYhEuJ/"
+        },
+        {
+          "title": "热爱105℃的你 - 萌娘百科_万物皆可萌的百科全书",
+          "url": "https://moegirl.icu/%E7%83%AD%E7%88%B1105%E5%BA%A6%E7%9A%84%E4%BD%A0"
+        },
+        {
+          "title": "大家好，我是LBI利比，也就是跳楼机和... 来自LBI利比 - 微博",
+          "url": "https://weibo.com/6443100248/5282277542069775"
+        },
+        {
+          "title": "抖音 Remix - Chinese Musik 1 - Vương Lân (S.Wing), Lưu Dương Dương, Triệu Vy (Vicky Zhao) - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/playlist/MjriOrrPYPi6"
+        },
+        {
+          "title": "熱愛105℃的你 - VCPedia.cn，關於中文歌聲合成的一切",
+          "url": "https://vcpedia.cn/zh-hant/%E7%83%AD%E7%88%B1105%E5%BA%A6%E7%9A%84%E4%BD%A0"
+        },
+        {
+          "title": "[Vietsub] Khó sinh hận • 难生恨 • DAWN - BiliBili",
+          "url": "https://www.bilibili.tv/ar/video/2000190732"
+        },
+        {
+          "title": "Lyrics - Lời Bài Hát Khó Sinh Hận - Lễ Việt - Diễn Đàn Chia Sẻ",
+          "url": "https://chiase.org/threads/loi-bai-hat-kho-sinh-han-le-viet.19341/"
+        },
+        {
+          "title": "热爱105℃的你 - VCPedia.cn，关于中文歌声合成的一切",
+          "url": "https://vcpedia.cn/%E7%83%AD%E7%88%B1105%E5%BA%A6%E7%9A%84%E4%BD%A0"
+        },
+        {
+          "title": "Thủy Triều (remix) 潮汐 - An Tô Vũ,Phó Mộng Đồng - BiliBili",
+          "url": "https://www.bilibili.tv/video/2007884697"
+        },
+        {
+          "title": "[Vietsub] Khó sinh hận • 难生恨 • DAWN - BiliBili",
+          "url": "https://www.bilibili.tv/video/2000190732"
+        },
+        {
+          "title": "熱愛105℃的你 - VCPedia.cn，關於中文歌聲合成的一切",
+          "url": "https://vcpedia.cn/zh-hk/%E7%83%AD%E7%88%B1105%E5%BA%A6%E7%9A%84%E4%BD%A0"
+        },
+        {
+          "title": "阿肆「热爱105℃的你」（2023年9月15日放送）｜敬和キャンパスレポ",
+          "url": "https://note.com/keiwacampus/n/n9e23a23599ee"
+        },
+        {
+          "title": "熱愛105℃的你 - 萌娘百科 萬物皆可萌的百科全書",
+          "url": "https://moegirl.icu/zh-hant/%E7%83%AD%E7%88%B1105%E5%BA%A6%E7%9A%84%E4%BD%A0"
+        },
+        {
+          "title": "Lời bài hát Nhiệt Ái 105°C Của Cậu – Hàn Dung",
+          "url": "https://mp3.edu.vn/loi-bai-hat-nhiet-ai-105c-cua-cau-han-dung/"
+        },
+        {
+          "title": "help me find the sounds of this video",
+          "url": "https://www.reddit.com/r/WhatsThisSong/comments/1wpac39/help_me_find_the_sounds_of_this_video/"
+        }
+      ]
+    },
+    {
+      "trackIds": [
+        "9ff35f3f2c1bb0c253805e708d173194757936a350b8d7795fbf7738aa6b930b.m4a",
+        "ba466c08bf6f2254b2e3e30f52b8444ba386223230c4ac6f0569237560159a2f.m4a",
+        "f28567f4bc02312b98f8dd8b1add1106cd04e6560dd6ea3845efbf7f691b2465.m4a",
+        "be2429a62761ebe529808f27662ec5e054ade016356b43e7920cb24d137ae569.m4a"
+      ],
+      "queries": [
+        "[Vietsub] Phong Dạ Hành - Tưởng Tuyết Nhi | 风夜行 - 蒋雪儿 lời dịch tiếng Việt",
+        "[Vietsub] Chẩm Thán - Trịnh Ngư | 怎叹 - 郑鱼 lời dịch tiếng Việt",
+        "[Vietsub] Anh Có Thể Đừng Rời Xa Em Được Không - Mạc Khiếu Tỷ Tỷ | 你能不能不要离开我 - 莫叫姐姐 lời dịch tiếng Việt",
+        "[Vietsub] Mạc Vấn Quy Kỳ - Tưởng Tuyết Nhi, Là Thất Thúc Đây | 莫问归期 - 蒋雪儿/七叔 lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub] Anh Có Thể Đừng Rời Xa Em Được Không - Mạc Khiếu Tỷ Tỷ | 你能不能不要离开我 - 莫叫姐姐 - YouTube",
+          "url": "https://www.youtube.com/watch?v=Ik2i84IrRoc"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Chẩm thán - Trịnh Ngư | 怎叹 - 郑鱼 - YouTube",
+          "url": "https://www.youtube.com/watch?v=XDf1jztjJYk"
+        },
+        {
+          "title": "Mạc Khiếu Tỷ Tỷ | 你能不能不要离开我 - 莫叫姐姐 - Hoa Ngữ Gia Hân",
+          "url": "https://hoangugiahan.com/thu-vien/nhac-tieng-trung-%E4%B8%AD%E6%96%87%E9%9F%B3%E6%A8%82/nhac-tieng-trung-anh-co-the-dung-roi-xa-em-duoc-khong.html/attachment/mac-khieu-ty-ty-%E4%BD%A0%E8%83%BD%E4%B8%8D%E8%83%BD%E4%B8%8D%E8%A6%81%E7%A6%BB%E5%BC%80%E6%88%91-%E8%8E%AB%E5%8F%AB%E5%A7%90%E5%A7%90"
+        },
+        {
+          "title": "Bài hát chờ duyệt - Hợp Âm Chuẩn - Thư viện hợp âm lớn nhất Việt Nam",
+          "url": "https://hopamchuan.com/manage/song/approve/81066/anh-co-the-dung-roi-xa-em-duoc-khong-mac-khieu-ty-ty"
+        },
+        {
+          "title": "Hợp âm Anh có thể đừng rời xa em được không (Anh có thể đừng bỏ rơi em được không - Nǐ néng bu néng bú yào lí kāi wǒ - 你能不能不要离开我) - Thiên Tú",
+          "url": "https://hopamviet.vn/chord/song/anh-co-the-dung-roi-xa-em-duoc-khong-anh-co-the-dung-bo-roi-em-duoc-khong-n-neng-bu-neng-bu-yao-li-ki-w/W8IU7A7B.html"
+        },
+        {
+          "title": "[Vietsub]Anh Có Thể Đừng Rời Xa Em Được Không 你能不能不要离开我 - Mạc Khiếu Tỷ Tỷ 莫叫姐姐 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2006131145"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Anh Có Thể Đừng Rời Xa Em Được Không - Mạc Khiếu Tỷ Tỷ - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/anh-co-the-dung-roi-xa-em-duoc-khong-mac-khieu-ty-ty.82259/"
+        },
+        {
+          "title": "Anh Có Thể Nào Đừng Rời Xa Em / 你能不能不要离开我 (Vietsub, Kara) | NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/video/C0lc5djZygwBe"
+        },
+        {
+          "title": "Lời bài hát và hợp âm Anh có thể đừng rời xa em được không (Nǐ néng bu néng bú yào lí kāi wǒ - 你能不能不要离开我)",
+          "url": "https://www.loibaihatviet.com/loi-bai-hat/anh-co-the-dung-roi-xa-em-duoc-khong-n-neng-bu-neng-bu-yao-li-kai-w-53364"
+        },
+        {
+          "title": "Mạc Vấn Quy Kỳ | Tưởng Tuyết Nhi Lyrics, Meaning & Videos",
+          "url": "https://sonichits.com/video/T%C6%B0%E1%BB%9Fng_Tuy%E1%BA%BFt_Nhi/M%E1%BA%A1c_V%E1%BA%A5n_Quy_K%E1%BB%B3"
+        },
+        {
+          "title": "Hợp âm Anh Có Thể Đừng Rời Xa Em Được Không (你能不能不要离开我) - Mạc Khiếu Tỷ Tỷ (莫叫姐姐) (Hợp âm cơ bản) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/48093/anh-co-the-dung-roi-xa-em-duoc-khong/"
+        },
+        {
+          "title": "[Vietsub] Phong Dạ Hành - Tưởng Tuyết Nhi | 风夜行 - 蒋雪儿 | Gan Jing World",
+          "url": "https://www.ganjingworld.com/video/1gjfefqr4lh1b4KOVQTRG1O2y1l51c"
+        },
+        {
+          "title": "Don’t Ask About The Return Date莫问归期(Mo Wen Gui Qi) By Snow.J蒋雪儿",
+          "url": "https://chinesemusicwiki.com/dont-ask-about-the-return-date%E8%8E%AB%E9%97%AE%E5%BD%92%E6%9C%9Fmo-wen-gui-qi-by-snow-j%E8%92%8B%E9%9B%AA%E5%84%BF/"
+        },
+        {
+          "title": "Lời Dịch - Lời Bài Hát Anh Có Thể Đừng Rời Xa Em Được Không - Mạc Khiếu Tỷ Tỷ - Diễn Đàn Chia Sẻ",
+          "url": "https://chiase.org/threads/loi-bai-hat-anh-co-the-dung-roi-xa-em-duoc-khong-mac-khieu-ty-ty.9379/"
+        },
+        {
+          "title": "Lời Dịch - Lời Bài Hát Anh Có Thể Đừng Rời Xa Em Được Không - Mạc Khiếu Tỷ Tỷ - Diễn Đàn Chia Sẻ",
+          "url": "https://chiase.org/threads/loi-bai-hat-anh-co-the-dung-roi-xa-em-duoc-khong-mac-khieu-ty-ty.9699/"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Mạc Vấn Quy Kỳ - Tưởng Tuyết Nhi, Là Thất Thúc Đây",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-mac-van-quy-ky-tuong-tuyet-nhi-la-that-thuc-day.html"
+        },
+        {
+          "title": "Tất cả bài đăng: Anh Có Thể Đừng Rời Xa Em Được Không (你能不能不要离开我) (Mạc Khiếu Tỷ Tỷ (莫叫姐姐)) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/all/48093/anh-co-the-dung-roi-xa-em-duoc-khong"
+        },
+        {
+          "title": "[AMV] Anh Có Thể Đừng Rời Xa Em Được Không - Mạc Khiếu Tỷ Tỷ | 你能不能不要离开我 - 莫叫姐姐 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2008665722"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Mạc vấn quy kỳ - Tưởng Tuyết Nhi, Là Thất Thúc Đây / 蔣雪兒 & 是七叔呢 - 莫問歸期 - BiliBili",
+          "url": "https://www.bilibili.tv/en/video/2004038053"
+        },
+        {
+          "title": "Download Lagu Mac Van Quy Mp3 Gratis Terlengkap!! - UyeShare",
+          "url": "https://m.uyeshare.cc/music/mac-van-quy.html"
+        },
+        {
+          "title": "风夜行 | 蒋雪儿 Lyrics, Meaning & Videos",
+          "url": "https://sonichits.com/album/%E8%92%8B%E9%9B%AA%E5%84%BF/%E9%A3%8E%E5%A4%9C%E8%A1%8C"
+        },
+        {
+          "title": "[Vietsub - Hot tiktok] 莫问归期 - Mạc vấn quy kỳ | 蒋雪儿 - Tưởng Tuyết Nhi - BiliBili",
+          "url": "https://www.bilibili.tv/video/2002979200"
+        },
+        {
+          "title": "[Vietsub] Mạc Vấn Quy Kỳ - Tưởng Tuyết Nhi | 莫問歸期 - 蔣雪兒 Chords - ChordU",
+          "url": "https://chordu.com/chords-tabs--vietsub-m%E1%BA%A1c-v%E1%BA%A5n-quy-k%E1%BB%B3-t%C6%B0%E1%BB%9Fng-tuy%E1%BA%BFt-nhi-%E8%8E%AB%E5%95%8F%E6%AD%B8%E6%9C%9F-%E8%94%A3%E9%9B%AA%E5%85%92-id_g1SJMyGA_hM"
+        },
+        {
+          "title": "Stream Mạc Vấn Quy Kỳ - Tưởng Tuyết Nhi | 莫问归期 - 蒋雪儿 by Hòa Không | Listen online for free on SoundCloud",
+          "url": "https://soundcloud.com/user8195090/mac-van-quy-ky-tuong-tuyet-nhi"
+        },
+        {
+          "title": "Get chords for tracks by 蒋婴",
+          "url": "https://chordu.com/artist-chords-%E8%92%8B%E5%A9%B4"
+        },
+        {
+          "title": "Hợp Âm Mạc vấn quy kỳ (莫问归期) - Tương Tuyết Nhi - Hợp Âm Nhanh",
+          "url": "https://hopamnhanh.com/song/39662/30997/mac-van-quy-ky"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Phong Đêm Hành - Tưởng Tuyết Nhi / 蒋雪儿 - 风夜行 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2003836398"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Mạc Vấn Quy Kỳ - Tưởng Tuyết Nhi / 莫問歸期 - 蔣雪兒 / Trương Chỉ Khê - Thanh Dao Y Quan - BiliBili",
+          "url": "https://www.bilibili.tv/vi/video/2004162038?bstar_from=bstar-web.ugc-video-detail.related-recommend.all"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Mạc Vấn Quy Kỳ - Tưởng Tuyết Nhi - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/mac-van-quy-ky-tuong-tuyet-nhi.42254/"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Phong Dạ Hành 风夜行 Fēng yèxíng",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-phong-da-hanh-feng-yexing.html"
+        },
+        {
+          "title": "Phong Dạ Hành 风夜行 | Học Tiếng Trung Qua Bài Hát",
+          "url": "https://hsk.edmicro.vn/tin-tuc/hoc-tieng-trung-qua-bai-hat-phong-da-hanh"
+        },
+        {
+          "title": "[Vietsub] Phong Dạ Hành - Tưởng Tuyết Nhi | 风夜行 Chords - 蒋雪儿 - ChordU",
+          "url": "https://chordu.com/chords-tabs--vietsub-phong-d%E1%BA%A1-h%C3%A0nh-t%C6%B0%E1%BB%9Fng-tuy%E1%BA%BFt-nhi-%E9%A3%8E%E5%A4%9C%E8%A1%8C-%E8%92%8B%E9%9B%AA%E5%84%BF-id_UwF4Igcc91s"
+        },
+        {
+          "title": "Tra từ: 怎 - Từ điển Hán Nôm",
+          "url": "https://hvdic.thivien.net/whv/%E6%80%8E"
+        },
+        {
+          "title": "Stream Phong Dạ Hành - Tưởng Tuyết Nhi | 风夜行 - 蒋雪儿 by Bon Bon | Listen online for free on SoundCloud",
+          "url": "https://soundcloud.com/bon-bon-294851770/phong-da-hanh-tuong-tuyet-nhi"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Phong Dạ Hành - Tưởng Tuyết Nhi - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/phong-da-hanh-tuong-tuyet-nhi.116731/"
+        },
+        {
+          "title": "\"怎\" là gì? Nghĩa của từ 怎 trong tiếng Việt. Từ điển Trung-Việt",
+          "url": "https://vtudien.com/trung-viet/dictionary/nghia-cua-tu-%E6%80%8E"
+        },
+        {
+          "title": "[Lyrics] Chẩm Thán - Trịnh Ngư - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/cham-than-trinh-ngu.78089/"
+        },
+        {
+          "title": "蔣雪兒 - 風夜行 (抖音熱播DJ版) Phong Dạ Hành (Remix)『豈合巴山雪夜 相望別離，我自乘風去，留下一輪血月 不過宿命』〖2k22抖音火流行歌曲推薦TikTok〗 | Gan Jing World",
+          "url": "https://www.ganjingworld.com/video/1giqufhqsq33K8kPOScgVZ3Ow1b51c"
+        }
+      ]
+    },
+    {
+      "trackIds": [
+        "73462406411e463eee6c4ea77313a1e1043a5c94de62a4ea48c76a0ae2f3a869.m4a",
+        "a1c2c57877cdf29a45c5f64dde07a537943230efac76965d625b9426fee60d02.m4a",
+        "a9fae3dceac5556b7a0955a01eda665db3c327b6570ed6d0c5cb2a1be5ff74f1.m4a",
+        "c91947eea3e12e2aff5a9a832893a250afcd0ab40b70266c2c4d33ace010d6a5.m4a"
+      ],
+      "queries": [
+        "[Vietsub] Bầu Trời Đầy Sao Không Bằng Anh - Ycccc | 满天星辰不及你 - ycccc lời dịch tiếng Việt",
+        "[Vietsub] TA - Bất Thị Hoa Hỏa Nha | TA - 不是花火呀 lời dịch tiếng Việt",
+        "[Vietsub+Tiktok] Túy Khuynh Thành Remix - Tiểu A Phong | 醉倾城DJ - 小阿枫 lời dịch tiếng Việt",
+        "[Vietsub] Yêu Anh Đến Khoảnh Khắc Cuối Cùng - Mạc Khiếu Tỷ Tỷ | 爱你到最后一刻 - 莫叫姐姐 lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub+Tiktok] Túy Khuynh Thành Remix - Tiểu A Phong | 醉倾城DJ - 小阿枫 - YouTube",
+          "url": "https://www.youtube.com/watch?v=7HplOwsgBsk"
+        },
+        {
+          "title": "[Vietsub+Tiktok] Túy Khuynh Thành Remix - Tiểu A Phong | 醉倾城DJ - 小阿枫 - 1 hour - YouTube",
+          "url": "https://www.youtube.com/watch?v=sXCzRVXvGwc"
+        },
+        {
+          "title": "Tiktok music - Tiểu A Phong (Xiao A Feng), Tiểu Thiến (Xiao Qian), Lollipop - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/playlist/BVvKobJO6mJD"
+        },
+        {
+          "title": "Intoxicated in Your Beauty醉倾城(Zui Qing Cheng) By Xiao A Feng小阿枫",
+          "url": "https://chinesemusicwiki.com/intoxicated-in-your-beauty%E9%86%89%E5%80%BE%E5%9F%8Ezui-qing-cheng-by-xiao-a-feng%E5%B0%8F%E9%98%BF%E6%9E%AB/"
+        },
+        {
+          "title": "Hợp âm Yêu em đến khoảnh khắc cuối cùng (Ài nǐ dào zuì hòu yī kè - 爱你到最后一刻) - Mạc Khiếu tỷ tỷ",
+          "url": "https://hopamviet.vn/chord/song/yeu-em-den-khoanh-khac-cuoi-cung-ai-n-dao-zui-hou-y-ke/W8IU7B98.html"
+        },
+        {
+          "title": "The Starry Sky Can’t Compare To You满天星辰不及你(Man Tian Xing Chen Bu Ji Ni) By YCCCC",
+          "url": "https://chinesemusicwiki.com/the-starry-sky-cant-compare-to-you%E6%BB%A1%E5%A4%A9%E6%98%9F%E8%BE%B0%E4%B8%8D%E5%8F%8A%E4%BD%A0man-tian-xing-chen-bu-ji-ni-by-ycccc/"
+        },
+        {
+          "title": "Nhạc trẻ Trung Quốc",
+          "url": "https://nhactrunghoa.com/nhac-tre-trung-quoc"
+        },
+        {
+          "title": "Music | PDF",
+          "url": "https://www.scribd.com/document/810998888/Music"
+        },
+        {
+          "title": "Yêu Anh Đến Khoảnh Khắc Cuối Cùng / 爱你到最后一刻 (Vietsub, Kara) | NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/video/4HSErLQVV5v0o"
+        },
+        {
+          "title": "Hợp âm Yêu em đến khoảnh khắc cuối cùng (Ài nǐ dào zuì hòu yī kè - 爱你到最后一刻) - Đặng Thanh Tuyền",
+          "url": "https://hopamviet.vn/chord/song/yeu-em-den-khoanh-khac-cuoi-cung-ai-n-dao-zui-hou-y-ke/W8IU80BA.html"
+        },
+        {
+          "title": "[Vietsub] TA • Bất Thị Hoa Hỏa Nha • 不是花火呀 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2009568468"
+        },
+        {
+          "title": "Bài hát tiếng Trung: TA - Bất Thị Hoa Hỏa Nha 不是花火呀",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-ta-bat-thi-hoa-hoa-nha.html"
+        },
+        {
+          "title": "抖音 Chinese - DouYin Remix 3 - Hoa Chúc, Vương Thắng Nam, Mạch Tiểu Đâu (Mai Xiao Dou) - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/playlist/WZ52Um4hcwB4"
+        },
+        {
+          "title": "[Vietsub] Có chút thích • Bất Thị Hoa Hoả Nha ♪ 某些喜欢 • 不是花火呀 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2004761492"
+        },
+        {
+          "title": "Get chords for tracks by 莫叫姐姐",
+          "url": "https://chordu.com/artist-chords-%E8%8E%AB%E5%8F%AB%E5%A7%90%E5%A7%90"
+        },
+        {
+          "title": "[Cập nhật] TOP nhạc Tik Tok Trung Quốc được yêu thích nhất",
+          "url": "https://tiengtrunghsk.vn/cap-nhat-top-nhac-tik-tok-trung-quoc-duoc-yeu-thich-nhat/"
+        },
+        {
+          "title": "Bầu Trời Đầy Sao Không Bằng Em (2025) Full Vietsub – iQIYI | iQ.com",
+          "url": "https://www.iq.com/album/bau-troi-day-sao-khong-bang-em-2025-kyiwoqwpup?lang=vi_vn"
+        },
+        {
+          "title": "Xem Bầu Trời Đầy Sao Không Bằng Em Tập 1 Vietsub – iQIYI | iQ.com",
+          "url": "https://www.iq.com/play/bau-troi-day-sao-khong-bang-em-1fbthumvrfc?lang=vi_vn"
+        },
+        {
+          "title": "Get chords for tracks by Ycccc",
+          "url": "https://chordu.com/artist-chords-ycccc"
+        },
+        {
+          "title": "Nhạc Tiktok Trung - Việt Nam Overnight",
+          "url": "https://dembuon.vn/tags/nhac-tiktok-trung/"
+        },
+        {
+          "title": "[Vietsub] Mưa còn chưa có ngừng • Bất Thị Hoa Hoả Nha ♪ 雨还没停 • 不是花火呀 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2005199908"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Yêu Anh Đến Khoảnh Khắc Cuối Cùng 爱你到最后一刻",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-yeu-anh-den-khoanh-khac-cuoi-cung.html"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Bầu Trời Đầy Sao Không Bằng Anh - Ycccc - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/bau-troi-day-sao-khong-bang-anh-ycccc.99943/"
+        },
+        {
+          "title": "Bầu Trời Đầy Sao Không Bằng Anh 满天星辰不及你- YCCC - Web Tiếng Trung",
+          "url": "https://webtiengtrung.com/bau-troi-day-sao-khong-bang-anh-%E6%BB%A1%E5%A4%A9%E6%98%9F%E8%BE%B0%E4%B8%8D%E5%8F%8A%E4%BD%A0-yccc/"
+        },
+        {
+          "title": "Bầu Trời Đầy Sao Không Bằng Anh [Beat_Lời Việt]|满天星辰不及你 - Karaoke Miễn Phí | StarMaker",
+          "url": "https://www.starmakerstudios.com/vi/song/ycccc-bau-troi-djay-sao-khong-bang-anh-%5Bbeat_loi-viet%5Dor%E6%BB%A1%E5%A4%A9%E6%98%9F%E8%BE%B0%E4%B8%8D%E5%8F%8A%E4%BD%A0-lyrics/611752105024751956"
+        },
+        {
+          "title": "Xem Bầu Trời Đầy Sao Không Bằng Em Tập 30 Vietsub – iQIYI | iQ.com",
+          "url": "https://www.iq.com/play/bau-troi-day-sao-khong-bang-em-13kk4djjxzw?lang=vi_vn"
+        },
+        {
+          "title": "Hợp âm Bầu Trời Đầy Sao Không Bằng Anh (满天星辰不及你) - Đặng Thanh Tuyền (Hợp âm cơ bản) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/56692/bau-troi-day-sao-khong-bang-anh/"
+        },
+        {
+          "title": "Bầu Trời Đầy Sao Không Bằng Anh (满天星辰不及你)--Ycccc-- - BiliBili",
+          "url": "https://www.bilibili.tv/video/2044801357"
+        },
+        {
+          "title": "Nhạc Trung Lời Việt| Page 2 - Việt Nam Overnight",
+          "url": "https://dembuon.vn/tags/nhac-trung-loi-viet/page-2"
+        },
+        {
+          "title": "Bầu Trời Đầy Sao Không Bằng Anh 满天星辰不及你",
+          "url": "https://hsk.edmicro.vn/tin-tuc/bai-hat-bau-troi-day-sao-khong-bang-anh"
+        },
+        {
+          "title": "[Vietsub] Chia anh một nửa • Bất Thị Hoa Hoả Nha ♪ 分你一半 • 不是花火呀 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2001134103"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Tuý Khuynh Thành Remix - Tiểu A Phong - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/tuy-khuynh-thanh-remix-tieu-a-phong.68782/"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Túy khuynh thành 醉倾城",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-tuy-khuynh-thanh.html"
+        },
+        {
+          "title": "Yêu Anh Đến Khoảnh Khắc Cuối Cùng (爱你到最后一刻) (DJ Bản/DJ版) - Mạc Khiếu Tỷ Tỷ [Download FLAC,MP3]",
+          "url": "https://highresolutionmusic.com/song/yeu-anh-den-khoanh-khac-cuoi-cung-ai-ni-dao-zui-hou-yi-ke-dj-ban-dj-ban-655466775"
+        },
+        {
+          "title": "[Vietsub+FULL] Nhất tiếu khuynh thành (Bản Tiktok)《一笑倾城》|CHENTU Trần Thổ - CHENTU尘土 |Nhạc tiktok - BiliBili",
+          "url": "https://www.bilibili.tv/vi/video/2014497831"
+        },
+        {
+          "title": "Hợp âm Túy khuynh thành (Zuì qīng chéng - 醉倾城) - Lee Phú Quý",
+          "url": "https://hopamviet.vn/chord/song/tuy-khuynh-thanh-zui-qng-cheng/W8IU7CU0.html"
+        },
+        {
+          "title": "Mặc Khiếu Tỷ Tỷ - Việt Nam Overnight",
+          "url": "https://dembuon.vn/tags/mac-khieu-ty-ty/"
+        }
+      ]
+    },
+    {
+      "trackIds": [
+        "9fd5a1f55515691b6e41fd9afc98a4a0fed22124470e5f6d2f456f0db31607db.m4a",
+        "b7baa0f53ca509ec0cd330d447c38f46973bf7ac964a0549c9bad12693130a6f.m4a",
+        "bed559e6a1007ebc7609e0dac920adbd68e35f1386f22eaa8d3461a5f934b688.m4a",
+        "069052a8dec5f046da4024b01774aef11a548ca944dc5728d07dd46fdacf0fd4.m4a"
+      ],
+      "queries": [
+        "[Vietsub + Tiktok] Hắn Chỉ Là Lướt Qua - h3R3, Thái Duật Blazo | 他只是经过 - h3R3, 蔡燏Blazo lời dịch tiếng Việt",
+        "[Vietsub] Giấc Mơ Không Thể Đánh Thức (Full Tiktok) - Thập Nhị! | 醒不来的梦 - 拾贰！ lời dịch tiếng Việt",
+        "[Vietsub] Dễ Thay Đổi - Vương Tĩnh Văn Không Mập |  善變 - 王靖雯不胖 lời dịch tiếng Việt",
+        "[Vietsub + Tiktok] Yêu, Tồn Tại - Lư Lư Mau Im Lặng | 爱，存在 - 卢卢快闭嘴 lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub + Tiktok] Yêu, Tồn Tại - Lư Lư Mau Im Lặng | 爱，存在 - 卢卢快闭嘴 - YouTube",
+          "url": "https://www.youtube.com/watch?v=AaH3u6JHBUQ"
+        },
+        {
+          "title": "[Vietsub + Tiktok] Hắn Chỉ Là Lướt Qua - h3R3, Thái Duật Blazo | 他只是经过 - h3R3, 蔡燏Blazo - YouTube",
+          "url": "https://www.youtube.com/watch?v=DAq3HaifL4I"
+        },
+        {
+          "title": "The Dream That I Cannot Wake Up From醒不来的梦(Xing Bu Lai De Meng) By SHIER拾贰",
+          "url": "https://chinesemusicwiki.com/the-dream-that-i-cannot-wake-up-from%E9%86%92%E4%B8%8D%E6%9D%A5%E7%9A%84%E6%A2%A6xing-bu-lai-de-meng-by-shier%E6%8B%BE%E8%B4%B0/"
+        },
+        {
+          "title": "[Vietsub + Tiktok] Hắn Chỉ Là Lướt Qua - h3R3, Thái Duật Blazo | 他只是经过 - h3R3, 蔡燏Blazo Chords - ChordU",
+          "url": "https://chordu.com/chords-tabs--vietsub-%2B-tiktok-h%E1%BA%AFn-ch%E1%BB%89-l%C3%A0-l%C6%B0%E1%BB%9Bt-qua-h3r3-th%C3%A1i-du%E1%BA%ADt-blazo-%E4%BB%96%E5%8F%AA%E6%98%AF%E7%BB%8F%E8%BF%87-h3r3-%E8%94%A1%E7%87%8Fblazo-id_DAq3HaifL4I"
+        },
+        {
+          "title": "He Just Passed By他只是经过(Ta Zhi Shi Jing Guo) By h3R3 & Felix Bennett",
+          "url": "https://chinesemusicwiki.com/he-just-passed-by%E4%BB%96%E5%8F%AA%E6%98%AF%E7%BB%8F%E8%BF%87ta-zhi-shi-jing-guo-by-h3r3-felix-bennett/"
+        },
+        {
+          "title": "[Vietsub] Dễ thay đổi • Vương Tĩnh Văn Không Mập ♪ 善变 • 王靖雯不胖 - BiliBili",
+          "url": "https://www.bilibili.tv/ar/video/2004802721"
+        },
+        {
+          "title": "Fickleness善变(Shan Bian) By Wang Jingwen王靖雯",
+          "url": "https://chinesemusicwiki.com/fickleness%E5%96%84%E5%8F%98shan-bian-by-wang-jingwen%E7%8E%8B%E9%9D%96%E9%9B%AF/"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Dễ thay đổi 善变 Shàn biàn",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-de-thay-doi-shan-bian.html"
+        },
+        {
+          "title": "h3R3 - 他只是经过 Blazo ver. 歌词 | RapZH 中文说唱数据库",
+          "url": "https://rapzh.com/songs/5732822"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Giấc Mơ Không Thể Đánh Thức - Thập Nhị - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/giac-mo-khong-the-danh-thuc-thap-nhi.66802/"
+        },
+        {
+          "title": "[Vietsub] Hắn Chỉ Là Lướt Qua - h3R3, Thái Duật Blazo | 他只是经过 - h3R3, 蔡燏Blazo - BiliBili",
+          "url": "https://www.bilibili.tv/video/2007884737"
+        },
+        {
+          "title": "Download Lagu Ta Zhi Shi Jing Guo Mp3 Gratis Terlengkap!! - UyeShare",
+          "url": "https://m.uyeshare.cc/music/ta-zhi-shi-jing-guo.html"
+        },
+        {
+          "title": "高旭 - 他只是经过 歌词 | RapZH 中文说唱数据库",
+          "url": "https://rapzh.com/songs/4852502"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Giấc Mơ Không Thể Đánh Thức - Thập Nhị - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/giac-mo-khong-the-danh-thuc-thap-nhi.74953/"
+        },
+        {
+          "title": "[AMV] Dễ Thay Đổi - Vương Tĩnh Văn Không Mập | 善變 - 王靖雯不胖 | MIXED - BiliBili",
+          "url": "https://www.bilibili.tv/video/2002366381"
+        },
+        {
+          "title": "Dễ Thay Đổi - Vương Tĩnh Văn Không Mập | 善變 - 王靖雯不胖 - Web Tiếng Trung",
+          "url": "https://webtiengtrung.com/de-thay-doi-vuong-tinh-van-khong-map-%E5%96%84%E8%AE%8A-%E7%8E%8B%E9%9D%96%E9%9B%AF%E4%B8%8D%E8%83%96/"
+        },
+        {
+          "title": "Hae Yeon ARMY's space - BiliBili",
+          "url": "https://www.bilibili.tv/en/space/1068999039"
+        },
+        {
+          "title": "《他只是经过》歌曲 他只是经过歌词 他只是经过主唱→买购APP",
+          "url": "https://www.maigoo.com/citiao/267467.html"
+        },
+        {
+          "title": "Học bài hát Giấc mơ không thể đánh thức tiếng Trung (醒不来的梦)",
+          "url": "https://prepedu.com/vi/blog/bai-hat-giac-mo-khong-the-danh-thuc-tieng-trung"
+        },
+        {
+          "title": "H3R3 - H3R3, Trương Hâm (Kim Zhang), Cao Húc (Gao Xu) - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/playlist/1700374476YKQ7"
+        },
+        {
+          "title": "Lời bài hát - Giấc Mơ Không Thể Đánh Thức - Lee Phú Quý - zuto.vn",
+          "url": "https://zuto.vn/giac-mo-khong-the-danh-thuc-699711"
+        },
+        {
+          "title": "Stream 💋 G𝐈Ấ𝐂 𝐌Ơ K𝐇Ô𝐍G T𝐇Ể Đ𝐀́N𝐇 𝐓H𝐔̛́C R𝐄M𝐈X 醒不来的梦 | H𝐎T T𝐈K𝐓O𝐊 | 𝐁Ằ𝐍G C𝐎̂̉T𝐀Y B𝐘 𝐍K R𝐄M𝐈X - N𝐇Ạ𝐂 𝐏H𝐀́P S𝐔̛ 𝐓R𝐔N𝐆 by 𝘉𝑎̆̀𝘯𝑔 𝐶𝘰̂̉𝑇𝘢𝑦 💋 𝟢𝟿𝟸𝟸𝟿𝟿𝟿𝟸𝟸𝟸 | Listen online for free on SoundCloud",
+          "url": "https://m.soundcloud.com/bang-co-tay-remix/giac-mo-khong-the-danh-thuc-remix-hot-tiktok-bang-cotay-by-nk-rmic"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/id/single/%2BhfYvVtnk11SNfuBc0qa6w%3D%3D"
+        },
+        {
+          "title": "[Vietsub] Vây Giữ - Vương Tĩnh Văn Không Mập | 沦陷 - 王靖雯不胖 - GTDB Videos gtdb.org",
+          "url": "https://gtdb.org/video/G_fVwdpLKZ4?key_note=c"
+        },
+        {
+          "title": "《他只是经过》歌曲 他只是经过歌词 他只是经过主唱→买购APP",
+          "url": "https://m.maigoo.com/citiao/267467.html"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Giấc Mơ Không Thể Đánh Thức 醒不来的梦",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-giac-mo-khong-the-danh-thuc.html"
+        },
+        {
+          "title": "[Dịch lời bài hát] Giấc mộng không thể đánh thức (醒不来的梦) – Hồi Tiểu Tiên (回小仙) – Na's World",
+          "url": "https://naxiaholic.wordpress.com/2021/07/21/translate-lyrics-giac-mong-khong-the-danh-thuc-%E9%86%92%E4%B8%8D%E6%9D%A5%E7%9A%84%E6%A2%A6-hoi-tieu-tien-%E5%9B%9E%E5%B0%8F%E4%BB%99/"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/mo/single/%2BhfYvVtnk11SNfuBc0qa6w%3D%3D"
+        },
+        {
+          "title": "[Vietsub+Lyrics] Sau khi em đi -Lư Lư Mau Im Lặng (我走後/Wo Zou Hou -盧盧快閉嘴)「我走了你別再難過 」Bản cover tiktok - BiliBili",
+          "url": "https://www.bilibili.tv/video/2009827482"
+        },
+        {
+          "title": "Download Lagu Zi Zi Ju Ju Gratis | GudangLagu321",
+          "url": "https://zi-zi-ju-ju.gudanglagu321.tel/"
+        },
+        {
+          "title": "[Vietsub] Vây Giữ - Vương Tĩnh Văn Không Mập | 沦陷 - 王靖雯不胖 - GTDB Videos gtdb.org",
+          "url": "https://gtdb.org/video/G_fVwdpLKZ4"
+        },
+        {
+          "title": "TikTok trends in Vietnam today - Endless",
+          "url": "https://home.endless.app/radar/tiktok/vietnam"
+        },
+        {
+          "title": "[Vietsub] Vây Giữ - Vương Tĩnh Văn Không Mập _ 沦陷 - 王靖雯不胖 | ziuthu10",
+          "url": "https://ziuthu10.bandcamp.com/track/vietsub-v-y-gi-v-ng-t-nh-v-n-kh-ng-m-p"
+        },
+        {
+          "title": "Hắn chỉ là lướt qua │Những lời anh ta từng nói với em đã bao giờ thực hiện chưa - BiliBili",
+          "url": "https://www.bilibili.tv/video/2049579732"
+        },
+        {
+          "title": "Lulu, shut up | Lyrics, Song Meanings & Music Videos",
+          "url": "https://sonichits.com/artist/Lulu%2C_shut_up"
+        },
+        {
+          "title": "tiktok songs - Lư Lư Mau Im Lặng, Thiên Bách Thuận, Mễ Tiểu Túng Kelly (Mi Xiao Song Kelly) - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/playlist/3ALUwdJITgvY"
+        },
+        {
+          "title": "蔡燏Blazo & h3R3 - 他只是經過 Blazo ver「他曾說的話又沒有兌現，他現在又站在誰的對面」〖動態歌詞/pīn yīn gē cí〗 | 天天要聞",
+          "url": "https://daydaynews.cc/video/4302366.html"
+        },
+        {
+          "title": "h3R3 歌曲列表 | RapZH 中文说唱数据库",
+          "url": "https://rapzh.com/artists/h3r3/songs"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/th/single/%2BhfYvVtnk11SNfuBc0qa6w%3D%3D"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/mo/artist/1VCGDZynC2o4D8r_cFw8fA%3D%3D"
+        },
+        {
+          "title": "Học tiếng Trung qua bài hát “Giấc Mơ Không Thể Đánh Thức (醒不来的梦)” - STUDY4",
+          "url": "https://study4.com/posts/2520/hoc-tieng-trung-qua-bai-hat-giac-mo-khong-the-danh-thuc-xing-bu-lai-de-meng/"
+        },
+        {
+          "title": "爱,存在 歌词 - 卢卢快闭嘴 | Mulanci",
+          "url": "https://www.mulanci.org/lyric/sl406654/"
+        },
+        {
+          "title": "爱,存在 歌词 - 卢卢快闭嘴的专辑 | Mulanci",
+          "url": "https://www.mulanci.org/lyric/sa115104/"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/my-zh_cn/artist/k2nQfCeDsd7196Z7vep9eQ%3D%3D"
+        },
+        {
+          "title": "[Vietsub TikTok] Tình yêu, có tồn tại (爱，存在) - Hắc Kỳ Tử - BiliBili",
+          "url": "https://www.bilibili.tv/video/2008845563"
+        },
+        {
+          "title": "盧盧快閉嘴 - 字字句句『他一句寂寞时候的回应』💜〖#动态歌词lyrics video〗〖高音质 动态歌词lyrics〗〖動態歌詞/Vietsub/Pinyin Lyrics〗🎵🎧🧡",
+          "url": "https://www.ganjingworld.com/video/1ifqgghn8qk5nPchcw7Q2Df0p1lu1c"
+        },
+        {
+          "title": "爱，存在-卢卢快闭嘴&王靖雯-MP3在线免费播放与下载 - 歌曲宝MP3音乐下载",
+          "url": "https://www.gequbao.com/music/1738605"
+        },
+        {
+          "title": "倒计时九小时 主包在线等急、。！ #唱歌 #新歌上线 #原创 #卢卢快闭嘴#爱已陨落 - 抖音",
+          "url": "https://www.douyin.com/video/7463015482912771366"
+        }
+      ]
+    },
+    {
+      "trackIds": [
+        "b775e0cdfd154a53204a9a4c900d672dfe2c99047f5e4e489b5da4438983a541.m4a",
+        "beaa64788e4868411e673e5e43af3242d6e1149b71df8188b417c1ce52bd92be.m4a",
+        "79e87bb06eeafab63e485459e3f7375ad8b22425d35a4f09add0e652471d8277.m4a",
+        "82f422cb67243ae72448e6c9e21ff71074b46da0d4770119939338827b6aa385.m4a"
+      ],
+      "queries": [
+        "[Vietsub] Trời Quang Mây Tạnh - Vương Hân Thần, Tô Tinh Tiệp | 放晴 - 王忻辰/苏星婕 lời dịch tiếng Việt",
+        "[Vietsub] Thời Không Ngân Hà - Ngải Thần | 时空银河 - 艾辰 lời dịch tiếng Việt",
+        "[Vietsub] Không Bằng (full bản nữ) - Dã Khả | 不如 - 也可 lời dịch tiếng Việt",
+        "[Vietsub] Nhạc Tàn Người Cũng Tan - En | 曲终人亦散 - en lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub] Trời Quang Mây Tạnh - Vương Hân Thần, Tô Tinh Tiệp | 放晴 - 王忻辰/苏星婕 - YouTube",
+          "url": "https://www.youtube.com/watch?v=oaFu8AMvZ3E"
+        },
+        {
+          "title": "[Vietsub] Nhạc Tàn Người Cũng Tan - En | 曲终人亦散 - en - YouTube",
+          "url": "https://www.youtube.com/watch?v=1vVOusBoECM"
+        },
+        {
+          "title": "[Vietsub] Nhạc tàn người cũng tan ♪ 曲终人亦散 • en - BiliBili",
+          "url": "https://www.bilibili.tv/en/video/2003302747"
+        },
+        {
+          "title": "[Vietsub] Trời quang mây tạnh • Vương Hân Thần/Tô Tinh Tiệp ♪ 放晴 • 王忻辰/苏星婕 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2005866949"
+        },
+        {
+          "title": "[Vietsub] Trời quang mây tạnh • Vương Hân Thần/Tô Tinh Tiệp ♪ 放晴 • 王忻辰/苏星婕 - BiliBili",
+          "url": "https://www.bilibili.tv/en/video/2005866949"
+        },
+        {
+          "title": "[Vietsub] Nhạc tàn người cũng tan ♪ 曲终人亦散 • en - BiliBili",
+          "url": "https://www.bilibili.tv/video/2003302747"
+        },
+        {
+          "title": "Nhạc Tàn Người Cũng Tan 曲终人亦散 - en - BiliBili",
+          "url": "https://www.bilibili.tv/vi/video/2044598579"
+        },
+        {
+          "title": "Lời bài hát và hợp âm Nhạc tàn người cũng tan (Qū zhōng rén yì sàn - 曲终人亦散)",
+          "url": "https://www.loibaihatviet.com/loi-bai-hat/nhac-tan-nguoi-cung-tan-qu-zhong-ren-yi-san-53279"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Nhạc Tàn Người Cũng Tan 曲终人亦散 Qǔ zhōng rén yì sàn",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-nhac-tan-nguoi-cung-tan.html"
+        },
+        {
+          "title": "[Vietsub] 王忻辰/苏星婕 - 放晴 || Vương Hãn Thần/Tô Tinh Tiệp - Sáng Lại - BiliBili",
+          "url": "https://www.bilibili.tv/video/2007840727"
+        },
+        {
+          "title": "[Lyrics] Nhạc Tàn Người Cũng Tan - En - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/nhac-tan-nguoi-cung-tan-en.91362/"
+        },
+        {
+          "title": "Nhạc Tàn Người Cũng Tan 曲终人亦散 - en - BiliBili",
+          "url": "https://www.bilibili.tv/video/2044598579"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Thời Không Ngân Hà 时空银河 Shíkōng yínhé",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-thoi-khong-ngan-ha-shik-ng-yinhe.html"
+        },
+        {
+          "title": "[Vietsub] Không Bằng • Dã Khả ♪ 不如 • 也可 (Bản Nữ) - BiliBili",
+          "url": "https://www.bilibili.tv/video/2001142137"
+        },
+        {
+          "title": "[Vietsub] Nhạc Tàn Người Cũng Tan - En | 曲终人亦散 - en Acordes - Chordify",
+          "url": "https://chordify.net/chords/vietsub-nhac-tan-nguoi-cung-tan-en-qu-zhong-ren-yi-san-en-moah-nhac-trung-channel"
+        },
+        {
+          "title": "Nhạc Tàn Người Cũng Tan (曲终人亦散)/EN - BiliBili",
+          "url": "https://www.bilibili.tv/video/2001357780"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Khúc Chung Nhân Cũng Tan (曲终人亦散) - En - BiliBili",
+          "url": "https://www.bilibili.tv/video/2009627920"
+        },
+        {
+          "title": "[Lyrics + Vietsub] - Trời Quang Mây Tạnh - Vương Hân Thần Ft. Tô Tinh Tiệp - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/troi-quang-may-tanh-vuong-han-than-ft-to-tinh-tiep.103150/"
+        },
+        {
+          "title": "Nhạc Tàn Người Cũng Tan (的曲终人亦散)- en | Tổng hợp những phân cảnh ngược tâm trong phim cổ trang - BiliBili",
+          "url": "https://www.bilibili.tv/vi/video/2000165601"
+        },
+        {
+          "title": "Stream Y2mate.com - Vietsub Thời Không Ngân Hà Ngải Thần 时空银河 艾辰 by Hongljpro123 | Listen online for free on SoundCloud",
+          "url": "https://m.soundcloud.com/hongljpro123/y2mate-com-vietsub-th-i-kh-ng"
+        },
+        {
+          "title": "Stream Khúc Chung Nhân Diệc Tán 曲终人亦散 (Khúc nhạc tàn người cũng tan) - en by Monthra Trần | Listen online for free on SoundCloud",
+          "url": "https://soundcloud.com/monthra-tr-n/nhac-tan-nguoi-cung-tan"
+        },
+        {
+          "title": "Tổng hợp đầy đủ các cấu trúc so sánh trong tiếng Trung (A-Z)",
+          "url": "https://tiengtrunghoaingo.edu.vn/cac-loai-cau-so-sanh-trong-tieng-trung"
+        },
+        {
+          "title": "[Vietsub] Thời gian tan vỡ (时间幻灭) - Vương Hãn Thần/ Vương Tinh Tiệp -苏星婕/王忻辰 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2000252090"
+        },
+        {
+          "title": "Trời Quang Mây Tạnh Toàn tập - ShortMax",
+          "url": "https://www.shorttv.live/vi/episodes/tr%E1%BB%9Di-quang-m%C3%A2y-t%E1%BA%A1nh-16934"
+        },
+        {
+          "title": "Vương Hân Thần - Việt Nam Overnight",
+          "url": "https://dembuon.vn/tags/vuong-han-than/"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Thời gian dần phai - Tô Hân Thần, Vương Tinh Tiệp / 时间幻灭 - 王忻辰_苏星婕 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2000191662"
+        },
+        {
+          "title": "[Lyrics] - Không Bằng - Dã Khả - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/khong-bang-da-kha.83462/"
+        },
+        {
+          "title": "也可 (Dã Khả) | Lyrics, Song Meanings & Music Videos",
+          "url": "https://sonichits.com/artist/%E4%B9%9F%E5%8F%AF_%28D%C3%A3_Kh%E1%BA%A3%29"
+        },
+        {
+          "title": "[Dịch lời bài hát] Không bằng (不如) – Tần Hải Thanh (秦海清) – Na's World",
+          "url": "https://naxiaholic.wordpress.com/2022/06/23/dich-loi-bai-hat-khong-bang-%E4%B8%8D%E5%A6%82-tan-hai-thanh-%E7%A7%A6%E6%B5%B7%E6%B8%85/"
+        },
+        {
+          "title": "Cách dùng 不 và 没",
+          "url": "https://www.tiengtrunghoanglien.com.vn/cach-dung-va"
+        },
+        {
+          "title": "Ngữ pháp: 不⋯⋯也⋯⋯ — HSK 4 | Hanbeego học tiếng trung",
+          "url": "https://hanbeego.com/grammar/hsk4/cau-truc-khong-cung-bat-buoc-cho-du-khong"
+        },
+        {
+          "title": "放晴 - 王忻辰, 蘇星婕 - 放晴專輯 - LINE MUSIC",
+          "url": "https://music-tw.line.me/track/5474669001"
+        },
+        {
+          "title": "Không bằng (bù rú - 不如) Karaoke & Lời Bài Hát | Yokara",
+          "url": "https://www.yokara.com/karaoke/khong-bang-bu-ru"
+        },
+        {
+          "title": "放晴（王忻辰、苏星婕演唱歌曲）_百度百科",
+          "url": "https://bkso.baidu.com/item/%E6%94%BE%E6%99%B4/59983641?fromModule=lemma_inlink"
+        },
+        {
+          "title": "Xem Thời Gian Dừng Lại Ngàn Năm: Tôi Bị Mắc Kẹt Trong Cùng Một Ngày Tập 1 Vietsub – iQIYI | iQ.com",
+          "url": "https://www.iq.com/play/thoi-gian-dung-lai-ngan-nam-toi-bi-mac-ket-trong-cung-mot-ngay-2c0v5jq0ucs?lang=vi_vn"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Không Bằng - Trần Hải Thanh - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/khong-bang-tran-hai-thanh.75197/"
+        },
+        {
+          "title": "Cách dùng 不 và 没 trong tiếng Trung: phân biệt phủ định đúng cách",
+          "url": "https://tiengtrunghannhi.vn/cach-dung-bu-va-mei-trong-tieng-trung-phan-biet-phu-dinh-dung-cach/"
+        },
+        {
+          "title": "不如 - Học tiếng Trung Quốc",
+          "url": "https://tiengtrungquoc.net/tu-vung-moi/%E4%B8%8D%E5%A6%82/"
+        },
+        {
+          "title": "Không Bằng (不如） - 秦海清 - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/khong-bang-bu-ru-qin-hai-qing.100488/"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Thời Không Sai Lệch - Ngải Thần - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/thoi-khong-sai-lech-ngai-than.67062/"
+        },
+        {
+          "title": "Thời Không Ngân Hà - Ngải Thần - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/thoi-khong-ngan-ha-ngai-than.92150/"
+        },
+        {
+          "title": "Quang Âm Chi Ngoại (Beyond Time's Gaze) Vietsub | Phim Mới",
+          "url": "https://guphimz.com/xem-phim-quang-am-chi-ngoai-909f1"
+        },
+        {
+          "title": "Phim Tình yêu không-thời gian",
+          "url": "https://luotphimx.net/phim/tinh-yeu-khong-thoi-gian"
+        },
+        {
+          "title": "Xem phim Thâm Không Bỉ Ngạn - The Other Side Of Deep Space, 深空彼岸 (2026) | XemPhim247",
+          "url": "https://motchill.live/chi-tiet-phim/tham-khong-bi-ngan"
+        },
+        {
+          "title": "Xem Siêu Thời Không Lãng Mạn 金阿银这嘴也太逗了！ Vietsub – iQIYI | iQ.com",
+          "url": "https://www.iq.com/short/sieu-thoi-khong-lang-man-1gwvv7ndf8k?lang=vi_vn"
+        }
+      ]
+    },
+    {
+      "trackIds": [
+        "9372905d20051406f7f8d2d6e5a97d55ee1e9ec1a3f3cd075cbc63b0fc3c8dd1.m4a",
+        "90cae3c1d4c8af0181318bafdbe954ad84261e0962c95d94fdd926da14ec6724.m4a",
+        "77bd746950e1bd3057365f37fd82cc2d76c82ae340ac3eb3aac3390a1f99e38a.m4a",
+        "152fef1e907b1a6fbbff8369011c53d66e4729ef27bacdeb3187406e85d21267.m4a"
+      ],
+      "queries": [
+        "[Vietsub] Thẩm Viên Ngoại - A YueYue, Lệ Cách, Tiểu Điền Âm Nhạc Xã | 沈園外 - 阿YueYue / 戾格 / 小田音樂社 lời dịch tiếng Việt",
+        "[Vietsub] Hồng Mã - Hứa Lam Tâm | 红马 (女版) - 一颗狼星_许篮心 lời dịch tiếng Việt",
+        "[Vietsub] Người Ta - Ngải Thần | 他他他 - 艾辰 lời dịch tiếng Việt",
+        "[Vietsub] Tây Lâu Biệt Tự - Doãn Tích Miên/Tiểu Điền Âm Nhạc Xã | 西楼别序 - 尹昔眠/小田音乐社 lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub] Thẩm Viên Ngoại - A YueYue, Lệ Cách, Tiểu Điền Âm Nhạc Xã | 沈園外 - 阿YueYue / 戾格 / 小田音樂社 - YouTube",
+          "url": "https://www.youtube.com/watch?v=8DkOxbwOlnI"
+        },
+        {
+          "title": "[Vietsub] Hồng Mã - Hứa Lam Tâm | 红马 (女版) - 一颗狼星_许篮心 - YouTube",
+          "url": "https://www.youtube.com/watch?v=jJtPrjzNwh0"
+        },
+        {
+          "title": "Cảm âm Tây Lâu Biệt Tự - Doãn Tích Miên ft Tiểu Điền Âm Nhạc Xã - CẢM ÂM VIỆT",
+          "url": "https://www.camamviet.com/cam-am-tay-lau-biet-tu-doan-tich-mien-ft-tieu-dien-am-nhac-xa/"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Thẩm Viên Ngoại 沈园外 Chén yuán wài",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-tham-vien-ngoai-chen-yuan-wai.html"
+        },
+        {
+          "title": "Get chords for tracks by 艾辰",
+          "url": "https://chordu.com/artist-chords-%E8%89%BE%E8%BE%B0"
+        },
+        {
+          "title": "Get chords for tracks by 一颗狼星",
+          "url": "https://chordu.com/artist-chords-%E4%B8%80%E9%A2%97%E7%8B%BC%E6%98%9F"
+        },
+        {
+          "title": "红马 (女版) (红马 (女版)) | 一颗狼星_许篮心 Lyrics, Meaning & Videos",
+          "url": "https://sonichits.com/video/%E4%B8%80%E9%A2%97%E7%8B%BC%E6%98%9F%02%E8%AE%B8%E7%AF%AE%E5%BF%83/%E7%BA%A2%E9%A9%AC_%28%E5%A5%B3%E7%89%88%29_%28%E7%BA%A2%E9%A9%AC_%28%E5%A5%B3%E7%89%88%29%29"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Tây Lâu Biệt Tự 西楼别序 Xī lóu bié xù",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-tay-lau-biet-tu.html"
+        },
+        {
+          "title": "[Vietsub]Tây Lâu Biệt Tự 西楼别序 - Doãn Tích Miên &Tiểu Điền Âm Nhạc Xã 尹昔眠 &小田音乐社 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2000604844"
+        },
+        {
+          "title": "Tây Lâu Biệt Tự - 西楼别序 (Lời Việt) - Karaoke Miễn Phí | StarMaker",
+          "url": "https://www.starmakerstudios.com/vi/song/%E5%B0%B9%E6%98%94%E7%9C%A0%2F%E5%B0%8F%E7%94%B0%E9%9F%B3%E6%A8%82%E7%A4%BE-tay-lau-biet-tu-%E8%A5%BF%E6%A5%BC%E5%88%AB%E5%BA%8F-loi-viet-lyrics/611752105022588914"
+        },
+        {
+          "title": "Tây lâu biệt tự - Doãn Tích Miên/Tiểu Điền Âm Nhạc Xã || 《西楼别序》- 尹昔眠/小田音乐社 ♪ ♫ ♬ Akordy - Chordify",
+          "url": "https://chordify.net/chords/vietsub-pinyin-tay-lau-biet-tu-doan-tich-mien-tieu-dien-am-nhac-xa-xi-lou-bie-xu-yin-xi-mian-xiao-tian-yin-le-she-tu-da-si-ye"
+        },
+        {
+          "title": "[Vietsub] Người Ta - Ngải Thần | 他他他 Chords - 艾辰 - ChordU",
+          "url": "https://chordu.com/chords-tabs--vietsub-ng%C6%B0%E1%BB%9Di-ta-ng%E1%BA%A3i-th%E1%BA%A7n-%E4%BB%96%E4%BB%96%E4%BB%96-%E8%89%BE%E8%BE%B0-id_99uabJJUFX4"
+        },
+        {
+          "title": "[Vietsub+pinyin] Tây Lâu Biệt Tự - Doãn Tích Miên/Tiểu Điền Âm Nhạc Xã / 西樓別序 - 尹昔眠, 小田音樂社 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2002665508"
+        },
+        {
+          "title": "[Vietsub] Tây Lâu Biệt Tự - Doãn Tích Miên/Tiểu Điền Âm Nhạc Xã | 西楼别序 - 尹昔眠/小田音乐社 | Moah - Nhạc Trung Channel Lyrics, Meaning & Videos",
+          "url": "https://sonichits.com/video/Moah_-_Nh%E1%BA%A1c_Trung_Channel/%5BVietsub%5D_T%C3%A2y_L%C3%A2u_Bi%E1%BB%87t_T%E1%BB%B1_-_Do%C3%A3n_T%C3%ADch_Mi%C3%AAn%01Ti%E1%BB%83u_%C4%90i%E1%BB%81n_%C3%82m_Nh%E1%BA%A1c_X%C3%A3_%7C_%E8%A5%BF%E6%A5%BC%E5%88%AB%E5%BA%8F_-_%E5%B0%B9%E6%98%94%E7%9C%A0%01%E5%B0%8F%E7%94%B0%E9%9F%B3%E4%B9%90%E7%A4%BE"
+        },
+        {
+          "title": "Parting At West Attic西楼别序(Xi Lou Bie Xu) By Yin Ximian尹昔眠 & Tian Music Club小田音乐社",
+          "url": "https://chinesemusicwiki.com/parting-at-west-attic%E8%A5%BF%E6%A5%BC%E5%88%AB%E5%BA%8Fxi-lou-bie-xu-by-yin-ximian%E5%B0%B9%E6%98%94%E7%9C%A0-tian-music-club%E5%B0%8F%E7%94%B0%E9%9F%B3%E4%B9%90%E7%A4%BE/"
+        },
+        {
+          "title": "Get chords for tracks by 阿yueyue 孙嘉凝 周仁",
+          "url": "https://chordu.com/artist-chords-%E9%98%BFyueyue-%E5%AD%99%E5%98%89%E5%87%9D-%E5%91%A8%E4%BB%81"
+        },
+        {
+          "title": "Get chords for tracks by 小田音樂社 尹昔眠",
+          "url": "https://chordu.com/artist-chords-%E5%B0%8F%E7%94%B0%E9%9F%B3%E6%A8%82%E7%A4%BE-%E5%B0%B9%E6%98%94%E7%9C%A0"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Thẩm Viên Ngoại - A Yue Yue Ft Lệ Cách - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/tham-vien-ngoai-a-yue-yue-ft-le-cach.67102/"
+        },
+        {
+          "title": "Tây lâu biệt tự - Doãn Tích Miên, 小石头和孩子们, Chillies - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/playlist/1704284665Va1N"
+        },
+        {
+          "title": "Hợp âm thẩm viên ngoại (沈园外) - 阿YueYue (Phiên bản 1) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/83631/tham-vien-ngoai"
+        },
+        {
+          "title": "Lời Bài Hát Tây Lâu Biệt Tự - Doãn Tích Miên - Diễn Đàn Chia Sẻ",
+          "url": "https://chiase.org/threads/loi-bai-hat-tay-lau-biet-tu-doan-tich-mien.7635/"
+        },
+        {
+          "title": "Tây Lâu Biệt Tự - Doãn Tích MiênTiểu Điền Âm Nhạc Xã 西楼别序 - 尹昔眠小田音乐社 | ziuthu10",
+          "url": "https://ziuthu10.bandcamp.com/track/t-y-l-u-bi-t-t-do-n-t-ch-mi-nti-u-i-n-m-nh-c-x?action=download"
+        },
+        {
+          "title": "[Vietsub|HotTiktok] Hồng Mã • Nhất Khỏa Lang Tinh Hứa Lam Tâm ♪ 红马 • 一颗狼星许篮心 - BiliBili",
+          "url": "https://www.bilibili.tv/th/video/2004680617"
+        },
+        {
+          "title": "[Vietsub] Thẩm Viên Ngoại 沈园外 - A Yue Yue 阿 Yue Yue || Lưu Kim Tuế Nguyệt 流金岁月2020 - video Dailymotion",
+          "url": "https://www.dailymotion.com/video/x9tjlzo"
+        },
+        {
+          "title": "NGẢI THẦN (艾辰) - Hợp Âm Chuẩn - Thư viện hợp âm lớn nhất Việt Nam",
+          "url": "https://hopamchuan.com/artist/51792/ngai-than"
+        },
+        {
+          "title": "沈园外_阿YueYue、戾格、小田音乐社_高音质在线试听_沈园外歌词|歌曲下载_酷狗音乐",
+          "url": "https://www.kugou.com/song-36/1hr26396.html"
+        },
+        {
+          "title": "A Yue Yue - Việt Nam Overnight",
+          "url": "https://dembuon.vn/tags/a-yue-yue/"
+        },
+        {
+          "title": "Hợp âm Người Ta (他他他） - NGẢI THẦN (艾辰) (Phiên bản 1) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/66610/nguoi-ta/"
+        },
+        {
+          "title": "Hợp âm Người Ta (他他他） - NGẢI THẦN (艾辰) (Phiên bản 1) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/66610/nguoi-ta/kimhoa0186892494"
+        },
+        {
+          "title": "沈园外-阿YueYue&戾格&小田音乐社-MP3下载-歌曲海-海量高品质MP3音乐免费下载",
+          "url": "https://www.gequhai.com/play/11987"
+        },
+        {
+          "title": "[Vietsub] Thẩm Viên Ngoại - Lý Văn Hương & Mễ Lục | 沈园外 - 李蚊香 & 米六 Chords - Chordify",
+          "url": "https://chordify.net/chords/yueyue-li-ge-xiao-tian-yin-le-she-songs/shen-yuan-wai-chords"
+        },
+        {
+          "title": "沈园外-阿YueYue/戾格/小田音乐社_无损flac免费下载_mp3免费下载",
+          "url": "https://www.isflac.com/songs/291458041"
+        },
+        {
+          "title": "沈园外-阿YueYue/戾格/小田音乐社_mp3音乐免费下载_沈园外mp3歌曲下载_沈园外无损音乐下载-黑山音乐",
+          "url": "https://www.163cn.cc/songs/23031.html"
+        },
+        {
+          "title": "ngải thần - Diễn Đàn Chia Sẻ",
+          "url": "https://chiase.org/tags/ngai-thn/"
+        },
+        {
+          "title": "[Vietsub] Người Ta - Ngải Thần | 他他他 - 艾辰 Acordes - Chordify",
+          "url": "https://chordify.net/chords/vietsub-nguoi-ta-ngai-than-ta-ta-ta-ai-chen-moah-nhac-trung-channel"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Thời Không Ngân Hà 时空银河 Shíkōng yínhé",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-thoi-khong-ngan-ha-shik-ng-yinhe.html"
+        },
+        {
+          "title": "Hứa Lam Tâm (Nhất Khỏa Lang Tinh) - Nghe và tải nhạc mới nhất - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/artist/307473"
+        },
+        {
+          "title": "Ngải Thần - Việt Nam Overnight",
+          "url": "https://dembuon.vn/tags/ngai-than/"
+        },
+        {
+          "title": "Học bài hát tiếng Trung: Thán - Ngải Thần | 叹 - 艾辰",
+          "url": "https://nhactrunghoa.com/hoc-bai-hat-tieng-trung-than-ngai-than.html"
+        },
+        {
+          "title": "Play 红马 (女版) by 一颗狼星_许篮心 on Amazon Music Unlimited",
+          "url": "https://music.amazon.com/albums/B0D89N1WTD"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/mo/artist/yhU_AJgqjeQeDLAmWg2FMw%3D%3D"
+        }
+      ]
+    },
+    {
+      "trackIds": [
+        "7f59990c1d8ab17ee895e5df77cb4cd0436bdd5940ba17166c2d0051be586c7e.m4a",
+        "127e28fe186efae1ea5bef15b77e0d4d52ae5f0daadc527c166f0e971a847771.m4a",
+        "4ee7ffd5b46df122e01b813d4f1879a54ce6ddd6416d871a1de8fb5b221560ff.m4a",
+        "80da30e03f73d1f8b50c38dd044acf262bc61972217b0b36efd4ba1dc617b8ad.m4a"
+      ],
+      "queries": [
+        "[Vietsub] Xóa đi - Yên ( Hứa Giai Hào) | 删了吧 - 烟(许佳豪) lời dịch tiếng Việt",
+        "[Vietsub] Nếu Ánh Trăng Không Đến - Vương Vũ Trụ Leto/ Kiều Tuấn Thừa | 若月亮没来  - 王宇宙Leto/乔浚丞 lời dịch tiếng Việt",
+        "[Vietsub] Không Bằng - Tần Hải Thanh | 不如 - 秦海清 lời dịch tiếng Việt",
+        "[Vietsub] Vịnh Alaska - Lam Tâm Vũ | 阿拉斯加海湾 - 蓝心羽 lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub] Nếu Ánh Trăng Không Đến - Vương Vũ Trụ Leto/ Kiều Tuấn Thừa | 若月亮没来  - 王宇宙Leto/乔浚丞 - YouTube",
+          "url": "https://www.youtube.com/watch?v=DYwTleYQc9U"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Nếu Ánh Trăng Chưa Đến - Vương Vũ Trụ Leto/Kiều Tuấn Thừa | 王宇宙Leto/乔浚丞 - 若月亮没来 - YouTube",
+          "url": "https://www.youtube.com/watch?v=LgsmhGecD6U"
+        },
+        {
+          "title": "If The Moon Doesn’t Come若月亮没来(Ruo Yue Liang Mei Lai) By Leto王宇宙 & Qiao Juncheng乔浚丞",
+          "url": "https://chinesemusicwiki.com/if-the-moon-doesnt-come%E8%8B%A5%E6%9C%88%E4%BA%AE%E6%B2%A1%E6%9D%A5ruo-yue-liang-mei-lai-by-leto%E7%8E%8B%E5%AE%87%E5%AE%99-qiao-juncheng%E4%B9%94%E6%B5%9A%E4%B8%9E/"
+        },
+        {
+          "title": "[Vietsub] Xóa đi thôi! • Yên ( Hứa Giai Hào ) ♪ 刪了吧 • 煙 (許佳豪) - BiliBili",
+          "url": "https://www.bilibili.tv/video/2002357715"
+        },
+        {
+          "title": "[Vietsub] Xoá Đi Thôi (删了吧) - Yên (Hứa Giai Hào) 烟(许佳豪) - BiliBili",
+          "url": "https://www.bilibili.tv/en/video/2002874191"
+        },
+        {
+          "title": "Delete It删了吧(Shan Le Ba) By Steven烟(徐佳豪)",
+          "url": "https://chinesemusicwiki.com/delete-it%E5%88%A0%E4%BA%86%E5%90%A7shan-le-ba-by-steven%E7%83%9F%E5%BE%90%E4%BD%B3%E8%B1%AA/"
+        },
+        {
+          "title": "Vương Vũ Trụ Leto/ Kiều Tuấn Thừa | 若月亮没来 - 王宇宙Leto/乔浚丞 - Hợp Âm Chuẩn - Thư viện hợp âm lớn nhất Việt Nam",
+          "url": "https://hopamchuan.com/artist/280677/vuong-vu-tru-leto-kieu-tuan-thua-leto"
+        },
+        {
+          "title": "[Vietsub] Không Bằng - Tần Hải Thành (不如 - 秦海清) - BiliBili",
+          "url": "https://www.bilibili.tv/video/2002531298"
+        },
+        {
+          "title": "[Vietsub] Xóa đi thôi (删了吧) - Yên (Hứa Giai Hào) - BiliBili",
+          "url": "https://www.bilibili.tv/video/2008526698"
+        },
+        {
+          "title": "Nếu Ánh Trăng Không Đến - Vương Vũ Trụ Leto/Kiều Tuấn Thừa | 若月亮没来 - 王宇宙Leto/乔浚丞 - Listen to music",
+          "url": "https://soundcloud.com/discover/sets/track-stations%3A1815639966"
+        },
+        {
+          "title": "若月亮没来 (Live) - Vương Vũ Trụ Leto, Vũ Nghệ (Philip Wu), Chu Tinh Kiệt (J.zen) - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/song/9BYyfWXhG2xk?source=app"
+        },
+        {
+          "title": "Stream Xoá đi thôi | 删了吧 - Yên (Hứa Giai Hào) || 烟(许佳豪) by Bon Bon | Listen online for free on SoundCloud",
+          "url": "https://soundcloud.com/bon-bon-294851770/xoa-di-thoi-yen-hua-giai-hao"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Xóa đi 删了吧 Shānle ba",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-xoa-di.html"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Xóa Đi - Yên - Hứa Giai Hào - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/xoa-di-yen-hua-giai-hao.98025/"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Không Bằng - Trần Hải Thanh - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/khong-bang-tran-hai-thanh.75197/"
+        },
+        {
+          "title": "Cảm âm Nếu Ánh Trăng Không Đến | Vương Vũ Trụ Leto, Kiều Tuấn Thừa",
+          "url": "https://camamsao.io.vn/cam-am-neu-anh-trang-khong-den-vuong-vu-tru-leto-kieu-tuan-thua/"
+        },
+        {
+          "title": "Hợp âm nếu ánh trăng không đến - Vương Vũ Trụ Leto/ Kiều Tuấn Thừa | 若月亮没来 - 王宇宙Leto/乔浚丞 (Đô trưởng ) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/70553/neu-anh-trang-khong-den"
+        },
+        {
+          "title": "Yêu thích của Dinh - Nghe Hay Không, Tz An Trúc, Vương Vũ Trụ Leto, Kiều Tuấn Thừa (Qiao Jun Cheng) - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/playlist/9feOPrsfqCLb"
+        },
+        {
+          "title": "Chinese Lessons from Moah - Nhạc Trung Channel",
+          "url": "https://baolingo.app/practice/channels/UCnkIIQRJlw5ZFlDKgx3ypyw"
+        },
+        {
+          "title": "NCT TOP CPOP 2024 - Uông Tô Lang, Thiện Y Thuần (Dan Yi Chun), Vương Vũ Trụ Leto, Kiều Tuấn Thừa (Qiao Jun Cheng) - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/playlist/87pRWcyHcZYw"
+        },
+        {
+          "title": "若月亮没来（杨宗纬、宝石Gem、王宇宙Leto演唱的歌曲）_百度百科",
+          "url": "https://bkso.baidu.com/item/%E8%8B%A5%E6%9C%88%E4%BA%AE%E6%B2%A1%E6%9D%A5/64482493?fromModule=lemma_inlink"
+        },
+        {
+          "title": "[Dịch lời bài hát] Không bằng (不如) – Tần Hải Thanh (秦海清) – Na's World",
+          "url": "https://naxiaholic.wordpress.com/2022/06/23/dich-loi-bai-hat-khong-bang-%E4%B8%8D%E5%A6%82-tan-hai-thanh-%E7%A7%A6%E6%B5%B7%E6%B8%85/"
+        },
+        {
+          "title": "JOOX",
+          "url": "https://www.joox.com/my-zh_cn/single/dCER0Fuq4cHUiMIQT4e5jA%3D%3D"
+        },
+        {
+          "title": "Download Lagu Shang Tian A Mp3 Gratis Terlengkap!! - UyeShare",
+          "url": "https://m.uyeshare.cc/music/shang-tian-a.html"
+        },
+        {
+          "title": "Nếu Ánh Trăng Chưa Đến - Vương Vũ Trụ Leto/Kiều Tuấn Thừa | 王宇宙Leto/乔浚丞 - 若月亮没来 Acordes - Chordify",
+          "url": "https://chordify.net/chords/vietsub-pinyin-neu-anh-trang-chua-den-vuong-vu-tru-leto-kieu-tuan-thua-wang-yu-zhouleto-qiao-jun-cheng-ruo-yue-liang-mei-lai-pa"
+        },
+        {
+          "title": "[Hợp âm] Lời bài hát: Không Bằng - Tần Hải Thanh - Trung Tâm Ca Nhạc Nhẹ TP. Hồ Chí Minh",
+          "url": "https://canhacnhe.com/hop-am-loi-bai-hat-khong-bang-tan-hai-thanh"
+        },
+        {
+          "title": "Hợp âm nếu ánh trăng không đến - Vương Vũ Trụ Leto/ Kiều Tuấn Thừa | 若月亮没来 - 王宇宙Leto/乔浚丞 (Đô trưởng ) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/70553/neu-anh-trang-khong-den/"
+        },
+        {
+          "title": "Download Lagu Alasijiahaiwan Mp3 Gratis Terlengkap!! - UyeShare",
+          "url": "https://m.uyeshare.cc/music/alasijiahaiwan.html"
+        },
+        {
+          "title": "[Vietsub]Vịnh Alaska 阿拉斯加海湾 - Lam Tâm Vũ - BiliBili",
+          "url": "https://www.bilibili.tv/video/2008486900"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Vịnh Alaska - Lam Tâm Vũ - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/vinh-alaska-lam-tam-vu.67414/"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Vịnh Alaska 阿拉斯加海湾 Ālāsījiā hǎiwān",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-vinh-alaska.html"
+        },
+        {
+          "title": "Xóa đi thôi│Nếu không thì em xóa tôi đi cho rồi - BiliBili",
+          "url": "https://www.bilibili.tv/video/2047742531"
+        },
+        {
+          "title": "Hợp âm Không Bằng (不如) - Tần Hải Thanh (秦海清) (Phiên bản 1) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/47035/khong-bang/"
+        },
+        {
+          "title": "烟(许佳豪) 歌词 | Mulanci",
+          "url": "https://www.mulanci.org/lyric/s24766/"
+        },
+        {
+          "title": "烟(许佳豪)的《删了吧》歌词 - 音乐歌词 - 资源猫",
+          "url": "https://m.ziyuanm.com/yygeci/43890/"
+        },
+        {
+          "title": "[Vietsub] Tam Quốc Luyến • Yên (Hứa Giai Hào) ♪ 三国恋 • 烟(许佳豪) - BiliBili",
+          "url": "https://www.bilibili.tv/video/2046400531"
+        },
+        {
+          "title": "删了吧 歌词 - 烟的专辑 | Mulanci",
+          "url": "https://www.mulanci.org/lyric/sa96793/"
+        },
+        {
+          "title": "[Lyrics] Ngày Tháng Sau Này - Huy Vạc Ft. Viam - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/ngay-thang-sau-nay-huy-vac-ft-viam.138642/"
+        },
+        {
+          "title": "Review Nhạc - Vịnh Alaska - Lam Tâm Vũ - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/vinh-alaska-lam-tam-vu.94344/"
+        },
+        {
+          "title": "Qin Haiqing 秦海清 – Chinese Lyrics Pinyin",
+          "url": "https://allmusing.net/chinese-lyrics-pinyin/category/singer/qin-haiqing-%E7%A7%A6%E6%B5%B7%E6%B8%85/"
+        },
+        {
+          "title": "Tổng hợp đầy đủ các cấu trúc so sánh trong tiếng Trung (A-Z)",
+          "url": "https://tiengtrunghoaingo.edu.vn/cac-loai-cau-so-sanh-trong-tieng-trung"
+        },
+        {
+          "title": "Học tiếng Trung qua bài hát “Không bằng” cực chi tiết - STUDY4",
+          "url": "https://study4.com/posts/2521/hoc-tieng-trung-qua-bai-hat-khong-bang-cuc-chi-tiet/"
+        },
+        {
+          "title": "[Vietsub] Vịnh Alaska - Lam Tâm Vũ | 阿拉斯加海湾 - 蓝心羽 Acordes - Chordify",
+          "url": "https://chordify.net/es/chords/vietsub-vinh-alaska-lam-tam-vu-a-la-si-jia-hai-wan-lan-xin-yu-moah-nhac-trung-channel"
+        },
+        {
+          "title": "Không Bằng (不如） - 秦海清 - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/khong-bang-bu-ru-qin-hai-qing.100488/"
+        },
+        {
+          "title": "[Vietsub+Pinyin] Vịnh Alaska - Lưu Khả Dĩ | 阿拉斯加海湾 - 刘可以 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2013656409"
+        },
+        {
+          "title": "[Lyrics + Vietsub] - Hình Ảnh Phản Chiếu - Lam Tâm Vũ - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/hinh-anh-phan-chieu-lam-tam-vu.102789/"
+        }
+      ]
+    },
+    {
+      "trackIds": [
+        "61c112757c4bdcfe5d90ba2ac27d24ca2098de952f1315f392f5179e9f5e07b8.m4a",
+        "a031aaec4d0d593ed7c01c16d1b05b6955cfe5a9e81978ae6c10281610aeb38e.m4a",
+        "67ed3dcc79477f36fccca34477e38eec1ac9c83b29b0326b0e0cf16ba9ab3704.m4a",
+        "1ff295ee354894ed38993e670d394693a552f4cd0c2f9471ead148d27851ef27.m4a"
+      ],
+      "queries": [
+        "[Vietsub] Xem Như Tôi Từng Cưới Được Cô Ấy - Mạc Khiếu Tỷ Tỷ | 当我娶过她 - 莫叫姐姐 lời dịch tiếng Việt",
+        "[Vietsub] Nửa Đời Tuyết - Là Thất Thúc Đây | 半生雪 - 是七叔呢V lời dịch tiếng Việt",
+        "[Vietsub + Tiktok] Ngu Hề Thán - Văn Nhân Thính Thư | 虞兮叹 - 闻人听書 lời dịch tiếng Việt",
+        "[Vietsub] Ta Tên Trường An, Chàng Tên Cố Lý - Doãn Tích Miên/ Tiểu Điền Âm Nhạc Xã | 我叫长安,你叫故里 lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub + Tiktok] Ngu Hề Thán - Văn Nhân Thính Thư | 虞兮叹 - 闻人听書 - YouTube",
+          "url": "https://www.youtube.com/watch?v=XxutYA4stMA"
+        },
+        {
+          "title": "[Vietsub] XEM NHƯ TÔI ĐÃ CƯỚI CÔ ẤY (当我娶过她) - Mạc Khiếu Tỷ Tỷ (莫叫姐姐) - Hot Douyin - YouTube",
+          "url": "https://www.youtube.com/watch?v=O5oIG3Dyx_8"
+        },
+        {
+          "title": "[Vietsub+Pinyin] Ta Tên Trường An, Chàng Tên Cố Lý | 我叫长安，你叫故里",
+          "url": "https://kynguyencongnghe.com/giai-tri/am-nhac/ta-ten-truong-an-chang-ten-co-ly/"
+        },
+        {
+          "title": "Ta Tên Trường An, Chàng Tên Cố Lý / 我叫长安,你叫故里 - Tiểu Điền Âm Nhạc Xã, Doãn Tích Miên - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/song/7iQBaI3bSi3o"
+        },
+        {
+          "title": "[Vietsub] Ta Tên Trường An, Chàng Tên Cố Lý - Doãn Tích Miên- Tiểu Điền Âm Nhạc Xã - 我叫长安,你叫故里",
+          "url": "https://ok.ru/video/2783810751029"
+        },
+        {
+          "title": "Hợp Âm Xem Như Tôi Từng Cưới Được Cô Ấy (当我娶过她) – Mạc Khiếu Tỷ Tỷ (莫叫姐姐)",
+          "url": "https://hopamguitar.com.vn/hop-am/5888/xem-nhu-toi-tung-cuoi-duoc-co-ay"
+        },
+        {
+          "title": "Ta Tên Trường An, Chàng Tên Cố Lý / 我叫长安,你叫故里 - Tiểu Điền Âm Nhạc Xã, Doãn Tích Miên - mp3 download | lyric - NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/bai-hat/ta-ten-truong-an-chang-ten-co-ly-tieu-dien-am-nhac-xa-ft-doan-tich-mien.7iQBaI3bSi3o.html"
+        },
+        {
+          "title": "When I Married Her当我娶过她(Dang Wo Qu Guo Ta) By He Shenzhang何深彰",
+          "url": "https://chinesemusicwiki.com/when-i-married-her%E5%BD%93%E6%88%91%E5%A8%B6%E8%BF%87%E5%A5%B9dang-wo-qu-guo-ta-by-he-shenzhang%E4%BD%95%E6%B7%B1%E5%BD%B0/"
+        },
+        {
+          "title": "Lời Bài Hát Xem Như Tôi Từng Cưới Cô Ấy (当我娶过她) | Pinyin + Dịch Nghĩa Chuẩn",
+          "url": "https://foxhsk.com/blog/loi-bai-hat-xem-nhu-toi-tung-cuoi-co-ay-dang-wo-quguo-ta"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Xem như tôi đã từng cưới cô ấy - 当我娶过她 - Học tiếng Trung qua Bài hát - Phiên âm - Lời Việt [2026]",
+          "url": "https://baihattiengtrung.com/xem-nhu-toi-da-tung-cuoi-co-ay.html"
+        },
+        {
+          "title": "[Vietsub] Khi em cưới cô ấy • Mạc Khiếu Tỷ Tỷ ♪ 当我娶过她 • 莫叫姐姐 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2005867857"
+        },
+        {
+          "title": "Bài hát tiếng Trung: Ta Tên Trường An, Chàng Tên Cố Lý 我叫长安,你叫故里",
+          "url": "https://nhactrunghoa.com/bai-hat-tieng-trung-ta-ten-truong-an-chang-ten-co-ly.html"
+        },
+        {
+          "title": "[Vietsub] Ta Tên Trường An, Chàng Tên Cố Lý - Doãn Tích Miên/ Tiểu Điền Âm Nhạc Xã | 我叫长安,你叫故里 Chords - ChordU",
+          "url": "https://chordu.com/chords-tabs--vietsub-ta-t%C3%AAn-tr%C6%B0%E1%BB%9Dng-an-ch%C3%A0ng-t%C3%AAn-c%E1%BB%91-l%C3%BD-do%C3%A3n-t%C3%ADch-mi%C3%AAn-ti%E1%BB%83u-%C4%90i%E1%BB%81n-%C3%82m-nh%E1%BA%A1c-x%C3%A3-%E6%88%91%E5%8F%AB%E9%95%BF%E5%AE%89-%E4%BD%A0%E5%8F%AB%E6%95%85%E9%87%8C-id_Gc4LUVm7Wvk"
+        },
+        {
+          "title": "Lời bài hát Ta Tên Trường An Chàng Tên Cố Lý - Lee Phú Quý - Lyricvn.com",
+          "url": "https://lyricvn.com/loi-bai-hat-ta-ten-truong-an-chang-ten-co-ly-lee-phu-quy/"
+        },
+        {
+          "title": "Lời Bài Hát Ta Tên Trường An, Người Tên Cố Lý (我叫长安, 你叫故里) – Hàn Tiểu Hạ x Ái Lợi (Pinyin + Lời Dịch Chuẩn) | FoxHSK",
+          "url": "https://foxhsk.com/blog/loi-bai-hat-ta-ten-truong-an-nguoi-ten-co-ly-han-tieu-ha-ai-loi"
+        },
+        {
+          "title": "Hợp âm Ta tên Trường An , người tên Cố Lý | 我叫长安,你叫故里 - Doãn Tích Miên (Phiên bản 1) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/44781/ta-ten-truong-an-nguoi-ten-co-ly/"
+        },
+        {
+          "title": "Lời bài hát - Nửa Đời Tuyết - Lee Phú Quý - zuto.vn",
+          "url": "https://zuto.vn/nua-doi-tuyet-701622"
+        },
+        {
+          "title": "[Vietsub + Tiktok] Ngu Hề Thán - Văn Nhân Thính Thư | 虞兮叹 - 闻人听書 Acordes - Chordify",
+          "url": "https://chordify.net/chords/vietsub-tiktok-ngu-he-than-van-nhan-thinh-thu-yu-xi-tan-wen-ren-ting-shu-moah-nhac-trung-channel"
+        },
+        {
+          "title": "[Vietsub + Tiktok] Ngu Hề Thán - Văn Nhân Thính Thư | 虞兮叹 Chords - 闻人听書 - ChordU",
+          "url": "https://chordu.com/chords-tabs--vietsub-%2B-tiktok-ngu-h%E1%BB%81-th%C3%A1n-v%C4%83n-nh%C3%A2n-th%C3%ADnh-th%C6%B0-%E8%99%9E%E5%85%AE%E5%8F%B9-%E9%97%BB%E4%BA%BA%E5%90%AC%E6%9B%B8-id_XxutYA4stMA"
+        },
+        {
+          "title": "Tiểu Điền Âm Nhạc Xã - Hợp Âm Chuẩn - Thư viện hợp âm lớn nhất Việt Nam",
+          "url": "https://hopamchuan.com/artist/161215/tieu-dien-am-nhac-xa"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Ta Tên Trường An, Chàng Tên Cố Lý - Đoàn Tích Miên, Tiểu Điền Âm Nhạc Xã - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/ta-ten-truong-an-chang-ten-co-ly-doan-tich-mien-tieu-dien-am-nhac-xa.69226/"
+        },
+        {
+          "title": "Lời Dịch - Lời Bài Hát Tôi Từng Cưới Được Cô Ấy - Mạc Khiếu Tỷ Tỷ - Diễn Đàn Chia Sẻ",
+          "url": "https://chiase.org/threads/loi-bai-hat-toi-tung-cuoi-duoc-co-ay-mac-khieu-ty-ty.9378/"
+        },
+        {
+          "title": "Ta Tên Trường An, Chàng Tên Cố Lý / 我叫长安,你叫故里 (Vietsub, Kara) | NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/video/AeXn77ZatjD7t"
+        },
+        {
+          "title": "Get chords for tracks by 闻人听書",
+          "url": "https://chordu.com/artist-chords-%E9%97%BB%E4%BA%BA%E5%90%AC%E6%9B%B8-"
+        },
+        {
+          "title": "[Vietsub + Pinyin] Nửa Đời Tuyết - Là Thất Thúc Đây | 半生雪 - 是七叔呢 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2007943113"
+        },
+        {
+          "title": "Lời Bài Hát Bán Sinh Tuyết (半生雪) | Pinyin + Lời Dịch Thơ Cổ Phong",
+          "url": "https://foxhsk.com/blog/loi-bai-hat-ban-sinh-tuyet-la-that-thuc-day"
+        },
+        {
+          "title": "Ngu Hề Thán / 虞兮叹 | NhacCuaTui",
+          "url": "https://www.nhaccuatui.com/video/aOHUhijJU9vQh"
+        },
+        {
+          "title": "闻人听書 - 虞兮叹 (DJ抖音版)〖Ngu Hề Thán Remix〗 Hot Tiktok Douyin_哔哩哔哩_bilibili",
+          "url": "https://www.bilibili.com/video/BV1Qi4y1Y77x/"
+        },
+        {
+          "title": "虞兮叹 (DJR7版) - 闻人听書 ♪ 〖動態歌詞/Vietsub/Pinyin Lyrics〗Kain Music | 抖音热歌版BGM | Douyin | TikTok | Gan Jing World",
+          "url": "https://www.ganjingworld.com/video/1giqt3c2s6t4piEOgHNRVEVR71da1c"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Khi Em Cưới Cô Ấy - Mạc Khiếu Tỷ Tỷ - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/khi-em-cuoi-co-ay-mac-khieu-ty-ty.98064/"
+        },
+        {
+          "title": "Mặc Khiếu Tỷ Tỷ - Việt Nam Overnight",
+          "url": "https://dembuon.vn/tags/mac-khieu-ty-ty/"
+        },
+        {
+          "title": "Listen to playlists featuring Ngu Hề Thán (Remix) - Văn Nhân Thính Thư - 虞今叹 (DJ沈念) 闻人听書 | Tik Tok_ 0_01 ♪ by Ruby Shan online for free on SoundCloud",
+          "url": "https://soundcloud.com/user-706429111/ngu-he-tha-n-remix-va-n-nha-n/sets"
+        },
+        {
+          "title": "[Vietsub] Tình yêu khiến em đau - Mạc Khiếu Tỷ Tỷ || 莫叫姐姐 - 爱情让我痛 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2002726579"
+        },
+        {
+          "title": "虞兮叹 (DJ正式版) - 闻人听書 ♪ 〖動態歌詞/Vietsub/Pinyin Lyrics〗| 抖音热歌 洗脑神曲 DJ抖音专辑 抖音熱門DJ版 | Gan Jing World",
+          "url": "https://www.ganjingworld.com/video/1gitfkl921qh44ZOTUejXgr5z1v81c"
+        },
+        {
+          "title": "[Vietsub] Nửa Đời Tuyết - Là Thất Thúc Đây | 半生雪 - 是七叔呢V Chords - ChordU",
+          "url": "https://chordu.com/chords-tabs--vietsub-n%E1%BB%ADa-%C4%90%E1%BB%9Di-tuy%E1%BA%BFt-l%C3%A0-th%E1%BA%A5t-th%C3%BAc-%C4%90%C3%A2y-%E5%8D%8A%E7%94%9F%E9%9B%AA-%E6%98%AF%E4%B8%83%E5%8F%94%E5%91%A2v-id_W7UdVKa8gK0"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Nửa Đời Tuyết - Diệp Trạch Hạo - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/nua-doi-tuyet-diep-trach-hao.101261/"
+        },
+        {
+          "title": "Xem Như Tôi Từng Cưới Được Cô Ấy - Mạc Khiếu Tỷ Tỷ - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/xem-nhu-toi-tung-cuoi-duoc-co-ay-mac-khieu-ty-ty.105157/"
+        },
+        {
+          "title": "[Vietsub] Không nên tin vào tinh yêu • Mạc Khiếu Tỷ Tỷ ♪ 不该用情 • 莫叫姐姐 (Bản Nữ) - BiliBili",
+          "url": "https://www.bilibili.tv/video/2000999773"
+        },
+        {
+          "title": "[Vietsub] Kiếp sau không chắc còn có thể gặp được anh • Mạc Khiếu Tỷ Tỷ ♪ 下辈子不一定还能遇见你 • 莫叫姐姐 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2009946624"
+        },
+        {
+          "title": "Playlist - List Nhạc Là Thất Thúc Đây - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/list-nhac-la-that-thuc-day.84307/"
+        }
+      ]
+    },
+    {
+      "trackIds": [
+        "653e6c9027843e971a953502e9035a566ebb9adb7654eddd8c62dd01cb32d302.m4a",
+        "28b326bfb15907722084019d4ccfd7811a5e4a103ef78871e71c84dc36c62868.m4a",
+        "4069174745a632dfb7e9f47c7a0ab04d102a8ea969445efeb86bc1061e470ed0.m4a"
+      ],
+      "queries": [
+        "[Vietsub] Một Đường Nở Hoa - Ôn Dịch Tâm | 一路生花 - 温奕心 lời dịch tiếng Việt",
+        "[Vietsub] Thời Không Sai Lệch - Ngải Thần |  错位时空 - 艾辰 lời dịch tiếng Việt",
+        "[Vietsub] Bích Thượng Quan - Đặng Ngụ Quân | 壁上观 - 邓寓君 lời dịch tiếng Việt"
+      ],
+      "candidates": [
+        {
+          "title": "[Vietsub] Bích Thượng Quan - Đặng Ngụ Quân | 壁上观 - 邓寓君 - YouTube",
+          "url": "https://www.youtube.com/watch?v=UV7kfq47Sqw"
+        },
+        {
+          "title": "[Vietsub] Thời Không Sai Lệch - Ngải Thần |  错位时空 - 艾辰 - YouTube",
+          "url": "https://www.youtube.com/watch?v=P9mqCv1yhBE"
+        },
+        {
+          "title": "[Vietsub+pinyin] Thời không sai lệch - Ngải Thần | 错位时空 - 艾辰",
+          "url": "https://kynguyencongnghe.com/thoi-khong-sai-lech/"
+        },
+        {
+          "title": "Blossom All the Way一路生花(Yi Lu Sheng Hua) By Wen Yixin温奕心",
+          "url": "https://chinesemusicwiki.com/blossom-all-the-way%E4%B8%80%E8%B7%AF%E7%94%9F%E8%8A%B1yi-lu-sheng-hua-by-wen-yixin%E6%B8%A9%E5%A5%95%E5%BF%83/"
+        },
+        {
+          "title": "[ Vietsub ] Thời không sai lệch - Ngải Thần -《错位时空 Chords》- 艾辰 - ChordU",
+          "url": "https://chordu.com/chords-tabs--vietsub-th%E1%BB%9Di-kh%C3%B4ng-sai-l%E1%BB%87ch-ng%E1%BA%A3i-th%E1%BA%A7n-%E9%94%99%E4%BD%8D%E6%97%B6%E7%A9%BA-%E8%89%BE%E8%BE%B0-id_49HjHHyfEPg"
+        },
+        {
+          "title": "Luyện nói video: [Vietsub] Thời Không Sai Lệch - Ngải Thần | 错位时空 - 艾辰 - ShadowingEnglish",
+          "url": "https://shadowingenglish.com/vi/practice/vietsub-thoi-khong-sai-lech-ngai-than-P9mqCv1yhBE"
+        },
+        {
+          "title": "Lời Bài Hát Thời Không Sai Lệch (错位时空) – Ngải Thần | Pinyin + Lời Dịch",
+          "url": "https://foxhsk.com/blog/loi-bai-hat-thoi-khong-sai-lech-ngai-than"
+        },
+        {
+          "title": "[Vietsub] Một đường nở hoa • Ôn Dịch Tâm ♪ 一路生花 • 温奕心 - BiliBili",
+          "url": "https://www.bilibili.tv/video/2008638603"
+        },
+        {
+          "title": "[Vietsub] Một Đường Nở Hoa - Ôn Dịch Tâm | 一路生花 - 温奕心 Chords - ChordU",
+          "url": "https://chordu.com/chords-tabs--vietsub-m%E1%BB%99t-%C4%90%C6%B0%E1%BB%9Dng-n%E1%BB%9F-hoa-%C3%94n-d%E1%BB%8Bch-t%C3%A2m-%E4%B8%80%E8%B7%AF%E7%94%9F%E8%8A%B1-%E6%B8%A9%E5%A5%95%E5%BF%83-id_S1ElLh_hf3k"
+        },
+        {
+          "title": "[Vietsub] Một đường nở hoa • Ôn Dịch Tâm ♪ 一路生花 • 温奕心 Chords - ChordU",
+          "url": "https://chordu.com/chords-tabs--vietsub-m%E1%BB%99t-%C4%91%C6%B0%E1%BB%9Dng-n%E1%BB%9F-hoa-%C3%94n-d%E1%BB%8Bch-t%C3%A2m-%E2%99%AA-%E4%B8%80%E8%B7%AF%E7%94%9F%E8%8A%B1-%E6%B8%A9%E5%A5%95%E5%BF%83-id_xBuqULqvkds"
+        },
+        {
+          "title": "[Vietsub] Thời không sai lệch (错位时空) - Ngải Thần - BiliBili",
+          "url": "https://www.bilibili.tv/video/2005985049"
+        },
+        {
+          "title": "Bài học tiếng Trung: Bích Thượng Quan - Đặng Ngụ Quân",
+          "url": "https://nhactrunghoa.com/bai-hoc-tieng-trung-bich-thuong-quan-dang-ngu-quan.html"
+        },
+        {
+          "title": "Hướng dẫn: THỜI KHÔNG SAI LỆCH - Ngải Thần | 错位时空 - 艾辰 | Guitar Solo - BiliBili",
+          "url": "https://www.bilibili.tv/video/2009928989"
+        },
+        {
+          "title": "[Vietsub] Thời không sai lệch (错位时空) - Ngải Thần - BiliBili",
+          "url": "https://www.bilibili.tv/en/video/2005985049"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Thời Không Sai Lệch - Ngải Thần - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/thoi-khong-sai-lech-ngai-than.67062/"
+        },
+        {
+          "title": "Tất cả bài đăng: Thời Không Sai Lệch - Ngải Thần (错位时空 - 艾辰) [Phiên âm tiếng Việt] (NGẢI THẦN (艾辰)) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/all/43180/thoi-khong-sai-lech-ngai-than-phien-am-tieng-viet"
+        },
+        {
+          "title": "Hợp âm Thời Không Sai Lệch - Ngải Thần (错位时空 - 艾辰) [Phiên âm tiếng Việt] - NGẢI THẦN (艾辰) (Phiên bản 1) - Hợp Âm Chuẩn",
+          "url": "https://hopamchuan.com/song/43180/thoi-khong-sai-lech-ngai-than-phien-am-tieng-viet/"
+        },
+        {
+          "title": "越南语翻唱《错位时空》（1）[Cover Lời Việt] - Thời Không Sai Lệch - ♬ KatNLee ♪_哔哩哔哩_bilibili",
+          "url": "https://www.bilibili.com/video/BV1BU4y1a7yL/"
+        },
+        {
+          "title": "[Vietsub] Thời không sai lệch (错位时空) - Huyền Thương - BiliBili",
+          "url": "https://www.bilibili.tv/video/2001271061"
+        },
+        {
+          "title": "[Lyrics + Vietsub] Một Đường Nở Hoa - Ôn Dịch Tâm - Việt Nam Overnight",
+          "url": "https://dembuon.vn/threads/mot-duong-no-hoa-on-dich-tam.95725/"
+        },
+        {
+          "title": "[AMV] Một Đường Nở Hoa - Ôn Dịch Tâm | 一路生花 - 温奕心 | MIXED - BiliBili",
+          "url": "https://www.bilibili.tv/video/2000365201"
+        },
+        {
+          "title": "Một Đường Nở Hoa 一路生花 | Học Tiếng Trung Qua Bài Hát",
+          "url": "https://hsk.edmicro.vn/tin-tuc/hoc-tieng-trung-qua-bai-hat-mot-duong-no-hoa"
+        },
+        {
+          "title": "Một Đường Nở Hoa - Ôn Dịch Tâm | 一路生花 - 温奕心 - BiliBili",
+          "url": "https://www.bilibili.tv/video/4787919757253120"
+        },
+        {
+          "title": "壁上观 là gì? | Từ điển Trung Việt | ZIM Dictionary",
+          "url": "https://dictionary.zim.vn/trung-viet/%E5%A3%81%E4%B8%8A%E8%A7%82"
+        },
+        {
+          "title": "Download Lagu Yi Long Sheng Hua Mp3 Gratis Terlengkap!! - UyeShare",
+          "url": "https://m.uyeshare.cc/music/yi-long-sheng-hua.html"
+        },
+        {
+          "title": "[Vietsub] Một Đường Nở Hoa - Ôn Dịch Tâm | 一路生花 - 温奕心 Acordes - Chordify",
+          "url": "https://chordify.net/chords/vietsub-mot-duong-no-hoa-on-dich-tam-yi-lu-sheng-hua-wen-yi-xin-moah-nhac-trung-channel"
+        },
+        {
+          "title": "[Engsub/Vietsub] 一路生花 (Yi Lu Sheng Hua) || Một Đường Nở Hoa - 温奕心 (Wen Yi Xin - Ôn Dịch Tâm) Acordes - Chordify",
+          "url": "https://chordify.net/chords/engsub-vietsub-yi-lu-sheng-hua-yi-lu-sheng-hua-mot-duong-no-hoa-wen-yi-xin-wen-yi-xin-on-dich-tam-tanhua"
+        },
+        {
+          "title": "[Vietsub/ Pinyin] MỘT ĐƯỜNG NỞ HOA || 一路生花 || Yílù Shēng Huā || 周深 (Zhōu Shēn) | Gan Jing World",
+          "url": "https://www.ganjingworld.com/video/1hpcnnc5i274eDOMbFwxdcBJN1621c"
+        },
+        {
+          "title": "\"壁上观\" là gì? Nghĩa của từ 壁上观 trong tiếng Việt. Từ điển Trung-Việt",
+          "url": "https://vtudien.com/trung-viet/dictionary/nghia-cua-tu-%E5%A3%81%E4%B8%8A%E8%A7%82"
+        },
+        {
+          "title": "\"作壁上观\" là gì? Nghĩa của từ 作壁上观 trong tiếng Việt. Từ điển Trung-Việt",
+          "url": "https://vtudien.com/trung-viet/dictionary/nghia-cua-tu-%E4%BD%9C%E5%A3%81%E4%B8%8A%E8%A7%82"
+        },
+        {
+          "title": "Tra từ: 壁 - Từ điển Hán Nôm",
+          "url": "https://hvdic.thivien.net/whv/%E5%A3%81"
+        },
+        {
+          "title": "Thời không sai lệch / 错位时空 - Ngải Thần / 艾辰 (Complete Version) + <80 BPM>",
+          "url": "https://www.reddit.com/r/skymusicstudio/comments/nkgptq"
+        },
+        {
+          "title": "Tra nghĩa từ: bích quan - Từ điển Hán Nôm Việt",
+          "url": "https://hanzi.live/hanvi/b%C3%ADch%20quan"
+        },
+        {
+          "title": "Bài hát: Tỳ Bà Khúc (琵琶曲) - Đặng Ngụ Quân",
+          "url": "https://nhactrunghoa.com/vietsub-ty-ba-khuc-dang-ngu-quan-dang-thap-ma-quanty-ba-khuc-pi-pa-qu-dang-ngu-quan-8910.html"
+        },
+        {
+          "title": "壁观 là gì? | Từ điển Trung Việt | ZIM Dictionary",
+          "url": "https://dictionary.zim.vn/trung-viet/%E5%A3%81%E8%A7%82"
+        }
+      ]
+    }
+  ]
+}

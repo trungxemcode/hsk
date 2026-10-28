@@ -21,9 +21,12 @@ const {chromium,webkit}=require('playwright'),fs=require('node:fs'),path=require
    const query=Element.prototype.querySelectorAll;
    Element.prototype.querySelectorAll=function(selector){if(this.classList.contains('workspace')&&selector.includes('button'))window.__animationWork.fullButtonScans++;return query.call(this,selector);};
   });
-  await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));await fixture(page);
+  await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({json:{enabled:false}}));await page.route('**/push-config.json',r=>r.fulfill({json:{appId:''}}));await fixture(page);
   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');await page.waitForFunction(()=>window.HSKStudio&&window.HSKMusic&&window.HSKMobileUX);
   await page.evaluate(()=>HSKStudio.navigate('music-play'));await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList button').length===3);await page.waitForTimeout(500);
+  // Settle the separately tested Push UI before measuring music clock work.
+  await page.waitForFunction(()=>document.getElementById('pushStatus').textContent.startsWith('Chưa kết nối OneSignal.')&&document.getElementById('updatePushStatus').textContent===document.getElementById('pushStatus').textContent);
+  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
   const work=await page.evaluate(async()=>{
    window.__animationWork={shellUpdates:0,fullButtonScans:0};
    window.__bodyMutations={};
