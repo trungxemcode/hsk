@@ -1866,6 +1866,16 @@
           "kind": "file",
           "file": "server/music-lrc-recovery.test.mjs",
           "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/music/forced-alignment-proof.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/forced-alignment-proof.test.mjs",
+          "value": ""
         }
       ]
     }
