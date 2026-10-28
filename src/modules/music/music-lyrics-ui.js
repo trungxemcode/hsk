@@ -44,12 +44,13 @@ root.HSKMusicLyricsUI={install(api){
  async function load(next){
   if(next?.id===track?.id&&next?.lyricsRevision===track?.lyricsRevision)return;
   if(next?.id===track?.id&&(pointer||selection()))return;
+  const isNewTrack=next?.id!==track?.id;
   const keepFlipped=next?.id===track?.id&&cover.classList.contains('is-script-flipped');
   clear();track=next?{...next}:null;if(!next?.hasLyrics)return;
   box.hidden=false;note.hidden=false;coverEligibility(true);panel.classList.add('music-has-script');note.textContent='Đang tải lời bài hát…';const epoch=sequence,controller=new AbortController();request=controller;
   try{const response=await fetch(api.endpoint()+'/api/tracks/'+encodeURIComponent(next.id)+'/lyrics',{signal:controller.signal,cache:'no-store'});if(!response.ok)throw Error(response.status===404?'Chưa có script cho bài này.':'Chưa tải được lời bài hát.');const text=await response.text();if(controller.signal.aborted||epoch!==sequence)return;const parsed=C.parse(text,'lyrics.json');await pinyinReady();if(controller.signal.aborted||epoch!==sequence)return;script=parsed;
    words.replaceChildren(...script.cues.map((cue,i)=>{const row=el('p',undefined,'music-timed-line');row.dataset.cue=String(i);const han=el('span',undefined,'music-timed-text');han.append(...Array.from(cue.text,c=>el('span',c,'music-timed-char')));row.append(han);const pin=pronunciationOf(cue);if(pin){const small=el('small',pin,'music-timed-pinyin');small.lang='zh-Latn';row.append(small);}if(cue.vi)row.append(el('small',cue.vi,'music-timed-vi'));return row;}));
-   const shared=JSON.parse(text);note.hidden=!(shared.status==='draft');note.textContent=(shared.status==='draft'?'Script AI · Chưa được admin duyệt. ':shared.reviewed===true?'Script đã được admin duyệt. ':'')+'Nhấn giữ hoặc kéo chọn lời để tra cứu AI.';if(keepFlipped)flip(true,false);tick(api.time(),api.duration());
+   const shared=JSON.parse(text);note.hidden=!(shared.status==='draft');note.textContent=(shared.status==='draft'?'Script AI · Chưa được admin duyệt. ':shared.reviewed===true?'Script đã được admin duyệt. ':'')+'Nhấn giữ hoặc kéo chọn lời để tra cứu AI.';if(keepFlipped||(isNewTrack&&script.cues.some(c=>c.characters?.length)))flip(true,false);tick(api.time(),api.duration());
   }catch(error){if(epoch===sequence&&error.name!=='AbortError'){note.hidden=false;note.textContent=error.message;const retry=el('button','Thử tải lại');retry.type='button';retry.onclick=()=>{track=null;load(next);};words.append(retry);}}
   finally{if(request===controller)request=null;}
  }

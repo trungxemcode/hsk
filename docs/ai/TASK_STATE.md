@@ -75,3 +75,5 @@ All 50 audio tracks are public. The remaining 36 were uploaded as private 60s AS
 
 ## Character karaoke display correction (2026-10-28)
 Owner reported whole-line white text on Bích Thượng Quan. Anonymous API confirmed 34 cues and zero character-timed cues. Keep auto-scroll and text selection, but line-only cues retain neutral text and opacity; only observed character onsets light characters. No synthetic interpolation. Add focused 390/844/1440 browser regression. Word enrichment remains partial; do not report all 50 as word-complete.
+
+Khi chọn bài mới có `characters`, tự mở mặt lời/karaoke. Giữ nút quay về ảnh bìa; cập nhật script của cùng bài không ép mở lại nếu người dùng đang xem bìa. Phạm vi căn chữ: toàn bộ 51 bài hiện có, gồm 50 Moah và Bích Thượng Quan cũ. Chỉ hoàn tất khi dữ liệu mốc từng chữ của toàn bộ lời được kiểm chứng; mốc dòng không được tính là hoàn tất.

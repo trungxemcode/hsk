@@ -14,7 +14,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   await page.evaluate(()=>{HSKAccountDashboard={user:{uid:'listener',getIdToken:async()=> 'listener'}};HSKStudio.navigate('music-play');});await page.waitForFunction(()=>document.querySelectorAll('#musicCloudList .music-cloud-track').length===3);
   await page.locator('[data-browse-filter=hsk]').click();assert.equal(await page.locator('#musicCloudList .music-cloud-track').count(),1);assert.equal(await page.locator('#musicLegacyLessons').isVisible(),true);
   await page.locator('#musicCloudList .music-cloud-track').first().click();await page.waitForFunction(()=>document.querySelectorAll('#musicTimedLyrics .music-timed-line').length===2);const audio=await page.locator('#musicBackgroundAudio').elementHandle();await page.waitForFunction(()=>document.getElementById('musicBackgroundAudio')?.currentTime>.1);
-  await page.locator('#musicLyricsFlip').click();await page.waitForFunction(()=>!document.getElementById('musicTimedPanel').inert);
+  await page.waitForFunction(()=>document.getElementById('musicLinkCover').classList.contains('is-script-flipped'));assert.equal(await page.locator('#musicTimedPanel').evaluate(n=>n.inert),false,'character-timed tracks automatically open karaoke');
   assert.equal(await page.locator('.music-timed-pinyin').first().textContent(),'nǐ hǎo shì jiè','supplied pronunciation wins');
   assert.match(await page.locator('.music-timed-pinyin').nth(1).textContent(),/wǒ men yì qǐ xué xí/,'missing pinyin generated locally');
   await audio.evaluate(n=>{n.pause();n.currentTime=2;n.dispatchEvent(new Event('timeupdate'));});

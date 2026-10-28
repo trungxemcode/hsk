@@ -303,3 +303,5 @@ Kho nhạc tự cập nhật: khi màn nghe nhạc đang mở và có mạng, cl
 
 ### Hiển thị karaoke khi thiếu mốc chữ
 `music-lyrics.css` giữ màu trung tính cho câu chỉ có mốc dòng (`data-timing=line`). Chỉ `.music-timed-char.is-sung` trong câu có `characters` được tô sáng theo thời gian audio. Không nội suy đều hoặc tô trắng cả câu thay cho mốc từng chữ. Kiểm thử: `tools/check-music-karaoke-ui.cjs` (390/844/1440, tua tiến/lùi, pinyin giữ nguyên).
+
+Khi chọn bài mới có `characters`, tự mở mặt lời/karaoke. Giữ nút quay về ảnh bìa; cập nhật script của cùng bài không ép mở lại nếu người dùng đang xem bìa. Phạm vi căn chữ: toàn bộ 51 bài hiện có, gồm 50 Moah và Bích Thượng Quan cũ. Chỉ hoàn tất khi dữ liệu mốc từng chữ của toàn bộ lời được kiểm chứng; mốc dòng không được tính là hoàn tất.
