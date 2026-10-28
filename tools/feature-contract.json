@@ -1282,6 +1282,11 @@
           "kind": "contains",
           "file": "src/modules/music/music.js",
           "value": "function playbackList()"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-music-catalog-refresh-ui.cjs",
+          "value": ""
         }
       ]
     },
