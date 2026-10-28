@@ -130,13 +130,13 @@ async function processGroq(id,input,env,json,fetchFn,signal){
   let value;
   while(!value){try{value=matchGroq(reference,data,input.duration);}catch(error){
    const window=repairSearchWindow(error.repairWindow,input.duration);if(!batch||!window||window.end-window.start<.5)throw error;
-   const used=data.chunkRepairStrategy==='full-clip-v1'&&Array.isArray(data.chunkRepairs)?data.chunkRepairs:[],clip=used.length<2?await loadRepairChunk(bucket,id,window,used):null;
+   const used=data.chunkRepairStrategy==='canonical-clip-v2'&&Array.isArray(data.chunkRepairs)?data.chunkRepairs:[],clip=used.length<2?await loadRepairChunk(bucket,id,window,used):null;
    if(!clip&&(data.repairAttempted||window.end-window.start>90))throw error;
-   const prompt=reference.cues.slice(Math.max(0,window.cue-1),window.cue+2).map(c=>c.text).join(' ').slice(0,160),retry=await transcribeGroqAudio(bucket,audioKey,id,keys,prompt,.2,fetchFn,controller.signal,json,clip);
+   const prompt=reference.cues.slice(Math.max(0,window.cue-3),window.cue+5).map(c=>c.text).join(' ').slice(0,160),retry=await transcribeGroqAudio(bucket,audioKey,id,keys,prompt,clip?0:.2,fetchFn,controller.signal,json,clip);
    if(retry instanceof Response)return retry;
    const start=clip?clip.start:window.start,end=clip?Math.min(input.duration,clip.start+clip.duration):window.end;
    const inside=w=>Number.isFinite(w.start)&&Number.isFinite(w.end)&&w.start>=start&&w.end<=end,replacement=(retry.words||[]).filter(inside);
-   data={...data,repairAttempted:true,chunkRepairStrategy:clip?'full-clip-v1':data.chunkRepairStrategy,chunkRepairs:clip?[...used,clip.index]:used,...(replacement.length?{words:[...data.words.filter(w=>w.end<=start||w.start>=end),...replacement].sort((a,b)=>a.start-b.start),segments:[...(data.segments||[]).filter(w=>w.end<=start||w.start>=end),...(retry.segments||[]).filter(inside)].sort((a,b)=>a.start-b.start)}:{})};
+   data={...data,repairAttempted:true,chunkRepairStrategy:clip?'canonical-clip-v2':data.chunkRepairStrategy,chunkRepairs:clip?[...used,clip.index]:used,...(replacement.length?{words:[...data.words.filter(w=>w.end<=start||w.start>=end),...replacement].sort((a,b)=>a.start-b.start),segments:[...(data.segments||[]).filter(w=>w.end<=start||w.start>=end),...(retry.segments||[]).filter(inside)].sort((a,b)=>a.start-b.start)}:{})};
    await bucket.put(rawKey,JSON.stringify({words:data.words,segments:data.segments,duration:data.duration,repairAttempted:true,chunkRepairs:data.chunkRepairs,chunkRepairStrategy:data.chunkRepairStrategy,model:MODEL}),{httpMetadata:{contentType:'application/json; charset=utf-8'},customMetadata:{sourceEtag:sourceHead.httpEtag,audioEtag:head.httpEtag}});
   }}
   value.repairAttempted=data.repairAttempted===true;value.chunkRepairsUsed=data.chunkRepairs?.length||0;
