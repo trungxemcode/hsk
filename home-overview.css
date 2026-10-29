@@ -84,3 +84,13 @@ body.studio-enabled .overview-search .clean-home-search{margin:0;border:0;paddin
  html body.studio-enabled :is(.plan-actions,.mobile-card-actions,.notebook-actions){gap:12px;align-items:center;flex-wrap:wrap;}
  html body.studio-enabled :is(.plan-actions,.mobile-card-actions,.notebook-actions)>button{min-height:44px;box-sizing:border-box;}
 }
+
+/* Desktop planner actions follow the same inset and alignment as card content. */
+@media(min-width:721px){
+ html body.studio-enabled #studioHome #planToday{padding:24px!important;box-sizing:border-box!important;}
+ html body.studio-enabled #studioHome #planToday>.section-row{display:flex!important;align-items:center!important;justify-content:flex-end!important;flex-wrap:wrap!important;gap:12px!important;margin:0!important;}
+ html body.studio-enabled #studioHome #planToday>.section-row>h3{flex:1 1 160px!important;margin:0!important;}
+ html body.studio-enabled #studioHome #planToday>.section-row>button{display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;flex:0 0 auto!important;min-width:128px!important;min-height:40px!important;padding:10px 18px!important;margin:0!important;line-height:1.4!important;text-align:center!important;}
+ html body.studio-enabled #studioHome #planTasks .plan-task{align-items:center!important;gap:20px!important;padding:18px 0!important;}
+ html body.studio-enabled #studioHome #planTasks .plan-task>button{display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;flex:0 0 128px!important;min-height:40px!important;padding:10px 18px!important;margin:0!important;line-height:1.4!important;text-align:center!important;}
+}
