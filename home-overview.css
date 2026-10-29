@@ -114,6 +114,6 @@ body.studio-enabled .overview-search .clean-home-search{margin:0;border:0;paddin
  html body.studio-enabled #studioHome #planToday .plan-heading p{margin:6px 0 0;}
 }
 /* Keep the sheen/floating character; remove only the heavy animated outer glow. */
-html body.studio-enabled #studioHome .feature-hero{box-shadow:0 3px 10px rgb(38 24 88 / 8%)!important;animation-name:rd-sheen!important;}
+html body.studio-enabled #studioHome .feature-hero{box-shadow:var(--shadow-home-hero)!important;animation-name:rd-sheen!important;}
 
 @media(min-width:721px){html body.studio-enabled #studioHome.overview-v216 #placementEntry>p+button{margin-left:auto!important;}}
