@@ -1,0 +1,47 @@
+name: YouTube cookie diagnostic
+on:
+  push:
+    branches: [diagnostic/youtube-cookie-check]
+    paths: [.github/workflows/youtube-cookie-check.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: python -m pip install --quiet --upgrade "yt-dlp[default]"
+      - name: Check secret with one source
+        env:
+          COOKIE_INPUT: ${{ secrets.YTB_Cookies }}
+        shell: python
+        run: |
+          import os, pathlib, tempfile, subprocess, runpy
+          raw = os.environ.get('COOKIE_INPUT', '').strip()
+          if not raw:
+              print('COOKIE_CHECK=secret-missing-or-empty')
+              raise SystemExit(1)
+          helper = runpy.run_path('tools/music-import-runner.py', run_name='cookie_helper')
+          with tempfile.TemporaryDirectory() as td:
+              path = pathlib.Path(td) / 'cookies.txt'
+              try:
+                  helper['cookies'](raw, path)
+              except Exception:
+                  print('COOKIE_CHECK=invalid-format')
+                  raise SystemExit(1)
+              try:
+                  res = subprocess.run(['yt-dlp', '--ignore-config', '--cookies', str(path), '--js-runtimes', 'node', '--no-playlist', '--skip-download', '--print', 'id', '--socket-timeout', '20', '--retries', '1', 'https://www.youtube.com/watch?v=m6yytX2gHxs'], capture_output=True, timeout=150)
+                  detail = res.stderr.decode('utf-8', 'replace').lower()
+                  category = 'success' if res.returncode == 0 else 'login-required-or-expired' if 'sign in' in detail or 'cookies' in detail else 'http-403' if '403' in detail else 'javascript-challenge' if 'challenge' in detail else 'source-error'
+                  print('COOKIE_CHECK=' + category)
+                  raise SystemExit(0 if res.returncode == 0 else 1)
+              except subprocess.TimeoutExpired:
+                  print('COOKIE_CHECK=timeout')
+                  raise SystemExit(1)
