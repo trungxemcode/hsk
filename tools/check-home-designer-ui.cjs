@@ -1,7 +1,7 @@
 /* Real app, real local writer, temporary checkout. No user project/data is modified. */
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),assert=require('node:assert/strict'),{spawn,execFileSync}=require('node:child_process'),{chromium}=require('playwright');
 (async()=>{
- const root=process.cwd(),temp=fs.mkdtempSync(path.join(os.tmpdir(),'hsk-designer-')),fixture=path.join(temp,'project');let server,browser;
+ const root=process.cwd(),temp=fs.mkdtempSync(path.join(os.tmpdir(),'hsk-designer-')),fixture=path.join(temp,'project');let server,browser,editorPage;
  try{
   execFileSync('python3',['-c',"import shutil,os,sys;shutil.copytree(sys.argv[1],sys.argv[2],copy_function=os.link,ignore=shutil.ignore_patterns('.git','__pycache__','node_modules'))",root,fixture]);
   const originalIndex=fs.readFileSync(path.join(fixture,'index.html'),'utf8');
@@ -9,6 +9,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   const url=await new Promise((resolve,reject)=>{let output='';const timer=setTimeout(()=>reject(Error('Local designer did not start')),15000);server.stdout.on('data',b=>{output+=b;const m=output.match(/http:\/\/127\.0\.0\.1:\d+/);if(m){clearTimeout(timer);resolve(m[0]);}});server.once('exit',code=>{clearTimeout(timer);reject(Error('Local server exited '+code));});server.stderr.on('data',b=>{output+=b;});});
   browser=await chromium.launch({executablePath:process.env.CHROME_EXECUTABLE});
   const page=await browser.newPage({viewport:{width:1440,height:1000},serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+  editorPage=page;
   const ordinary=await browser.newPage({viewport:{width:1440,height:900},serviceWorkers:'block'});
   await ordinary.goto(url+'/index.html',{waitUntil:'domcontentloaded'});await ordinary.waitForFunction(()=>window.HSKLessons&&document.querySelector('#homeDailyWord h3'));
   const font=()=>ordinary.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize);
@@ -32,7 +33,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   await ordinary.reload({waitUntil:'domcontentloaded'});await ordinary.waitForFunction(()=>document.querySelector('#homeDailyWord h3'));assert.equal(await font(),baseline,'draft must not change ordinary app');
   await page.locator('#mobile').click();await frame.waitForFunction(()=>innerWidth===390&&document.body.classList.contains('mobile-ux'));
   assert.equal(await page.locator('#field-fontSize').inputValue(),'');
-  await page.locator('#field-fontSize').fill('20');await page.locator('#field-fontSize').press('Tab');
+  await page.locator('#field-fontSize').fill('20');await page.waitForTimeout(250);assert.equal(await page.locator('#field-fontSize').inputValue(),'20','viewport refresh must not overwrite an active edit');await page.locator('#field-fontSize').press('Tab');
   await frame.waitForFunction(()=>getComputedStyle(document.querySelector('#homeDailyWord h3')).fontSize==='20px');
   await page.locator('#desktop').click();await frame.waitForFunction(()=>innerWidth===1440&&!document.body.classList.contains('mobile-ux'));
   assert.equal(await frame.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize),'28px');
@@ -63,5 +64,5 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   await page.locator('#undo').click();assert.equal(await frame.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize),'28px');
   await page.locator('#mobile').click();await frame.waitForFunction(()=>innerWidth===390);await page.screenshot({path:'/tmp/home-designer-mobile.png',fullPage:true});
   assert.deepEqual(errors,[]);console.log('PASS Home Designer: live selection without activation, independent PC/mobile edits, undo/redo, reload, real drag, stable DOM, preview navigation, export/import validation, actual apply and reset; ordinary app unchanged until apply.');
- }finally{await browser?.close();server?.kill('SIGTERM');fs.rmSync(temp,{recursive:true,force:true});}
+ }catch(e){try{await editorPage?.screenshot({path:'/tmp/home-designer-failure.png',fullPage:true});}catch{}throw e;}finally{await browser?.close();server?.kill('SIGTERM');fs.rmSync(temp,{recursive:true,force:true});}
 })().catch(e=>{console.error(e);process.exitCode=1});
