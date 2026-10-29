@@ -2,7 +2,7 @@ name: Studio layout checks
 on:
   pull_request:
     # Visual-layer changes must run the same responsive and interaction checks.
-    paths: ['redesign.css', 'redesign.js', 'tools/check-redesign-ui.cjs', 'src/**', 'content/data/**', 'loader.js', 'tools/pwa-assets.json', 'home-overview*', 'tools/check-home-overview-ui.cjs', 'tools/check-press-shape-ui.cjs', 'mobile-ux*', 'tools/check-mobile-ux*.cjs', 'tools/check-ios-animation-ui.cjs', 'tools/check-mobile-flow*.cjs', 'passive*', 'tools/check-passive*.cjs', 'app.js', 'placement*', 'tools/check-placement*.cjs', 'style.css', 'mobile-layout.css', 'ui-buttons.css', 'handwriting.css', 'speech.css', 'lesson-chat.css', 'tools/check-design-tokens.cjs', 'study-sync*', 'ui-buttons.css', 'notebook*', 'backup*', 'tools/check-notebook*.cjs', 'account.js', 'index.html', 'studio.js', 'planner.js', 'planner-core.js', 'exam*', 'drive-exam*', 'drive-audio*', 'open-dictionary*', 'content/open-dictionary/**', 'tools/check-open-dictionary*.cjs', 'tools/build-open-dictionary.py', 'content/drive-hsk/**', 'tools/import-drive-hsk.py', 'ai-coach*', 'coach-profile.js', 'lessons.js', 'lessons-data.json', 'lesson-mastery.js', 'lesson-mini*', 'lesson-guided*', 'tools/check-lesson-guided-ui.cjs', 'account-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-exam*.cjs', 'tools/check-ai-coach*.cjs', 'tools/check-lesson-mini*.cjs', 'tools/check-reading-dom.cjs', 'real-reading*', 'tools/check-real-reading*.cjs', 'practice-games*', 'practice-selector*', 'study4-practice.js', 'tools/check-practice-games*.cjs', 'tools/check-practice-picker-ui.cjs', '.github/workflows/studio-ui.yml']
+    paths: ['redesign.css', 'redesign.js', 'tools/check-redesign-ui.cjs', 'src/**', 'content/data/**', 'loader.js', 'tools/pwa-assets.json', 'home-overview*', 'tools/check-home-overview-ui.cjs', 'tools/check-desktop-layout-polish-ui.cjs', 'tools/check-press-shape-ui.cjs', 'mobile-ux*', 'tools/check-mobile-ux*.cjs', 'tools/check-ios-animation-ui.cjs', 'tools/check-mobile-flow*.cjs', 'passive*', 'tools/check-passive*.cjs', 'app.js', 'placement*', 'tools/check-placement*.cjs', 'style.css', 'mobile-layout.css', 'ui-buttons.css', 'handwriting.css', 'speech.css', 'lesson-chat.css', 'tools/check-design-tokens.cjs', 'study-sync*', 'ui-buttons.css', 'notebook*', 'backup*', 'tools/check-notebook*.cjs', 'account.js', 'index.html', 'studio.js', 'planner.js', 'planner-core.js', 'exam*', 'drive-exam*', 'drive-audio*', 'open-dictionary*', 'content/open-dictionary/**', 'tools/check-open-dictionary*.cjs', 'tools/build-open-dictionary.py', 'content/drive-hsk/**', 'tools/import-drive-hsk.py', 'ai-coach*', 'coach-profile.js', 'lessons.js', 'lessons-data.json', 'lesson-mastery.js', 'lesson-mini*', 'lesson-guided*', 'tools/check-lesson-guided-ui.cjs', 'account-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-exam*.cjs', 'tools/check-ai-coach*.cjs', 'tools/check-lesson-mini*.cjs', 'tools/check-reading-dom.cjs', 'real-reading*', 'tools/check-real-reading*.cjs', 'practice-games*', 'practice-selector*', 'study4-practice.js', 'tools/check-practice-games*.cjs', 'tools/check-practice-picker-ui.cjs', '.github/workflows/studio-ui.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -92,6 +92,7 @@ jobs:
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-shared-press-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-account-roles-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-home-overview-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-desktop-layout-polish-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-clean-ux-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-ai-loading-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-responsive-goal-ui.cjs
@@ -125,6 +126,7 @@ jobs:
             /tmp/mobile-flow-*.png
             /tmp/clean-*.png
             /tmp/overview-*.png
+            /tmp/layout-polish-*.png
             /tmp/press-shape-*.png
             /tmp/notebook-*.png
             /tmp/placement-feedback-*.png
