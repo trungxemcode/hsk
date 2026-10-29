@@ -21,10 +21,10 @@ const streak=button('',()=>window.HSKStudio?.navigate('account'));streak.id='hom
 const wordBox=make('section',null,'overview-word'),wordHead=make('div',null,'overview-word-head'),wordDetails=make('details'),summary=make('summary'),han=make('strong'),pin=make('span'),meaning=make('span'),wordBody=make('div',null,'overview-word-body'),wordRow=make('div',null,'overview-word-row'),sound=make('div',null,'overview-word-sound');
 let offset=0,current=null,signature='',frame=0,lastMobile=null;
 wordBox.id='homeDailyWord';wordHead.append(make('h3','Từ vựng hôm nay'),button('Đổi từ ↻',()=>{offset++;render();}));summary.append(han,pin,meaning);wordDetails.append(summary,wordBody);wordRow.append(wordDetails,sound);wordBox.append(wordHead,wordRow);home.querySelector('.dashboard-grid').after(wordBox);wordBox.after(searchDetails);
-const wordHome=document.createComment('daily word desktop position');wordBox.before(wordHome);
+// The desktop daily word stays above placement and planner cards.
 function pool(){try{return typeof words!=='undefined'?words:[];}catch{return [];}}
 function render(){frame=0;const p=window.HSKPlanner?.plan,key=new Date(Date.now()+7*3600000).toISOString().slice(0,10),seconds=Math.max(0,Number(p?.journal?.[key]?.seconds)||0),minutes=Math.floor(seconds/60);
-const mobile=document.body.classList.contains('mobile-ux');if(mobile&&hero.previousElementSibling!==wordBox)hero.before(wordBox);else if(!mobile&&wordHome.nextSibling!==wordBox)wordHome.after(wordBox);if(mobile&&$('planToday').parentElement!==tasks)tasks.append($('planToday'));else if(!mobile&&$('planToday').parentElement===tasks)planAnchor.after($('planToday'));
+const mobile=document.body.classList.contains('mobile-ux');if(mobile&&hero.previousElementSibling!==wordBox)hero.before(wordBox);else if(!mobile&&home.firstElementChild!==wordBox)home.prepend(wordBox);if(mobile&&$('planToday').parentElement!==tasks)tasks.append($('planToday'));else if(!mobile&&$('planToday').parentElement===tasks)planAnchor.after($('planToday'));
 if(mobile!==lastMobile){searchDetails.open=!mobile;lastMobile=mobile;}
 if(document.body.dataset.studioHub==='home'){if(notice.parentElement!==home)home.prepend(notice);}else if(notice.parentElement===home)noticeAnchor.after(notice);
 meter.hidden=!p;tasks.hidden=!p;if(p){write(time,`${minutes} / ${p.minutes} phút hôm nay`);const value=Math.min(1,seconds/(Math.max(1,p.minutes)*60));if(progress.value!==value)progress.value=value;}

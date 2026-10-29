@@ -45,7 +45,7 @@
  for(const group of groups){
   const {prefix,name}=group,picker=document.createElement('div');picker.id=prefix+'ModePicker';picker.className='ps-picker';group.picker=picker;
   picker.innerHTML=`<details id="${prefix}ModeDisclosure" class="ps-disclosure">
-  <summary class="ps-disclosure-summary"><span class="ps-summary-icon" aria-hidden="true"></span><span class="ps-summary-copy"><strong>Chọn chế độ ${name}</strong><small id="${prefix}SelectedCount" aria-live="polite"></small></span><span class="ps-level" id="${prefix}ModeLevel">HSK</span><span class="ps-chevron" aria-hidden="true">⌄</span></summary>
+  <summary class="ps-disclosure-summary"><span class="ps-summary-icon" aria-hidden="true"></span><span class="ps-summary-copy"><strong>Chọn chế độ ${name}</strong><small id="${prefix}SelectedCount" aria-live="polite"></small></span><span class="ps-level" id="${prefix}ModeLevel">HSK</span></summary>
   <div class="ps-disclosure-body"><div class="ps-tools"><p>Chọn một, nhiều hoặc tất cả chế độ.</p><div><button type="button" id="${prefix}SelectAll">Chọn tất cả</button><button type="button" id="${prefix}ClearAll">Bỏ chọn</button></div></div><div id="${prefix}ModeOptions" class="ps-options" role="group" aria-label="Các chế độ ${name}"></div><div class="ps-start-row"><p id="${prefix}ModeStatus" role="status"></p><button type="button" class="ps-start" id="${prefix}StartModes">Bắt đầu ${name} →</button></div></div>
   </details>`;
   picker.querySelector('.ps-summary-icon').append(svg(prefix==='review'?'repeat':'check'));

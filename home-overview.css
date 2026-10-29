@@ -94,3 +94,26 @@ body.studio-enabled .overview-search .clean-home-search{margin:0;border:0;paddin
  html body.studio-enabled #studioHome #planTasks .plan-task{align-items:center!important;gap:20px!important;padding:18px 0!important;}
  html body.studio-enabled #studioHome #planTasks .plan-task>button{display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;flex:0 0 128px!important;min-height:40px!important;padding:10px 18px!important;margin:0!important;line-height:1.4!important;text-align:center!important;}
 }
+
+/* Desktop alignment: one shared 24px card inset. */
+@media(min-width:721px){
+ html body.studio-enabled #studioHome.overview-v216 #placementEntry{display:flex;align-items:center;flex-wrap:wrap;gap:12px!important;padding:24px!important;box-sizing:border-box;}
+ html body.studio-enabled #studioHome.overview-v216 #placementEntry>h3{margin:0;flex:0 1 auto;}
+ html body.studio-enabled #studioHome.overview-v216 #placementEntry>p{flex:1 1 180px;margin:0;}
+ html body.studio-enabled #studioHome.overview-v216 #placementEntry>button{margin:0!important;min-height:40px!important;flex:0 0 auto;}
+ html body.studio-enabled #studioHome #planToday>.section-row>.plan-heading{flex:1 1 180px;align-self:center;}
+ html body.studio-enabled #studioHome #planToday .plan-heading h3{font-size:14px;font-weight:700;line-height:1.4;margin:0;}
+ html body.studio-enabled #studioHome #planToday #planTodayMeta{margin:6px 0 0;line-height:1.4;}
+ html body.studio-enabled #studioHome #planTasks{margin-top:20px;}
+ html body.studio-enabled #studioHome #planTasks .plan-task:last-child{padding-bottom:0!important;}
+ html body.studio-enabled #studioHome #homeDailyWord{margin:0 0 16px;}
+}
+@media(max-width:720px){
+ html body.studio-enabled #studioHome #planToday>.section-row>.plan-heading{grid-column:1/-1;}
+ html body.studio-enabled #studioHome #planToday .plan-heading h3{margin:0;}
+ html body.studio-enabled #studioHome #planToday .plan-heading p{margin:6px 0 0;}
+}
+/* Keep the sheen/floating character; remove only the heavy animated outer glow. */
+html body.studio-enabled #studioHome .feature-hero{box-shadow:0 3px 10px rgb(38 24 88 / 8%)!important;animation-name:rd-sheen!important;}
+
+@media(min-width:721px){html body.studio-enabled #studioHome.overview-v216 #placementEntry>p+button{margin-left:auto!important;}}

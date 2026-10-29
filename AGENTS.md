@@ -44,3 +44,6 @@ The older `C:\New folder\hsk` is a secondary checkout, not a separate app or sou
 - If the task changes a verified subsystem, update only its section of `docs/ai/PROJECT_MAP.md`; use `docs/ai/TASK_STATE.md` as a brief handoff with current task, decisions, affected files, tests and blockers.
 - Treat all notes as a map, **not** as a replacement for checking changed code or current `git status`.
 - Do not store tokens, credentials, personal user data, or API keys in AI handoff files.
+
+## Layout declaration and approval (owner policy)
+Before running tests for every PR, declare whether layout is expected to change, listing exact pages, PC/mobile scope, and intended differences. Check before/after screenshots and geometry for affected shared controls. Stop on undeclared differences. Never silently refresh visual baselines or weaken assertions. A layout-changing PR requires the owner's review of the concrete changes before merge. Passing tests do not constitute owner approval. Record the declaration in the PR body. GitHub enforcement requires a required status check/ruleset and is not implied by this document.
