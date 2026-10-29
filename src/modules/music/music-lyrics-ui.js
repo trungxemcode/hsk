@@ -42,7 +42,7 @@ root.HSKMusicLyricsUI={install(api){
   if(!script||panel.hidden||api.mode()!=='chill')return;
   const next=C.active(script.cues,time,duration||Infinity);if(next>=0)glow(words.children[next],script.cues[next],time,duration||Infinity);if(next===active&&centered===Math.max(0,next))return;
   if(active>=0){const n=words.children[active];n?.classList.remove('is-current');n?.removeAttribute('aria-current');if(n&&active!==next){n.removeAttribute('data-lit');for(const c of n.querySelectorAll('.is-sung'))c.classList.remove('is-sung');}}
-  active=next;if(next<0){queueCenter();return;}const row=words.children[next];row.classList.add('is-current');row.setAttribute('aria-current','true');
+  active=next;if(next<0){if(time<script.cues[0].start)queueCenter();return;}const row=words.children[next];row.classList.add('is-current');row.setAttribute('aria-current','true');
   queueCenter();
  }
  async function load(next){
@@ -74,7 +74,8 @@ root.HSKMusicLyricsUI={install(api){
   }catch(error){if(epoch===uploadSequence)uploadStatus.textContent=error.message;}finally{if(epoch===uploadSequence){uploadBusy=false;upload.disabled=false;}}
  };
  words.addEventListener('pointerdown',()=>{pointer=true;centered=-1;});document.addEventListener('pointerup',()=>{pointer=false;});document.addEventListener('pointercancel',()=>{pointer=false;});
- for(const event of ['wheel','touchmove'])words.addEventListener(event,()=>{manualUntil=Date.now()+5000;centered=-1;},{passive:true});
+ for(const event of ['wheel','touchmove'])words.addEventListener(event,event=>{event.preventDefault();},{passive:false});
+ words.addEventListener('keydown',event=>{if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(event.key)&&!event.shiftKey)event.preventDefault();});
  document.addEventListener('selectionchange',()=>{const value=selection();if(value){selected=value;selectionTrack=track?.id||'';lookup.hidden=false;}else if(document.activeElement!==lookup){selected='';lookup.hidden=true;}});
  lookup.addEventListener('pointerdown',event=>event.preventDefault());
  lookup.onclick=()=>{
