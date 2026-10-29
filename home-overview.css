@@ -72,3 +72,15 @@ body.studio-enabled .overview-search .clean-home-search{margin:0;border:0;paddin
 }
 @media(max-width:359px){body.mobile-ux[data-studio-hub=home] #studioHeader .topbar-title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}body.mobile-ux[data-studio-hub=home] #studioHeader .topbar-actions{margin-left:auto}}
 @media(prefers-reduced-motion:reduce){.overview-v216 .mobile-today-hero .mobile-hero-cta{transition:none}}
+
+/* Planner actions share a clear content inset and equal touch targets on phones. */
+@media(max-width:720px){
+ html body.studio-enabled #studioHome #planToday{padding:16px!important;box-sizing:border-box!important;}
+ html body.studio-enabled #studioHome #planToday>.section-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;align-items:stretch!important;justify-content:stretch!important;margin:0!important;}
+ html body.studio-enabled #studioHome #planToday>.section-row>h3{grid-column:1/-1!important;margin:0!important;}
+ html body.studio-enabled #studioHome #planToday>.section-row>button{box-sizing:border-box!important;width:100%!important;min-width:0!important;min-height:44px!important;margin:0!important;padding:10px 12px!important;line-height:1.4!important;white-space:normal!important;text-align:center!important;align-self:stretch!important;}
+ html body.studio-enabled #studioHome #planTasks .plan-task{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:12px!important;padding:16px!important;box-sizing:border-box!important;}
+ html body.studio-enabled #studioHome #planTasks .plan-task>button{box-sizing:border-box!important;width:100%!important;min-height:44px!important;margin:0!important;padding:10px 16px!important;text-align:center!important;align-self:stretch!important;}
+ html body.studio-enabled :is(.plan-actions,.mobile-card-actions,.notebook-actions){gap:12px;align-items:center;flex-wrap:wrap;}
+ html body.studio-enabled :is(.plan-actions,.mobile-card-actions,.notebook-actions)>button{min-height:44px;box-sizing:border-box;}
+}
