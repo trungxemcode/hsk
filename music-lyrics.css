@@ -81,3 +81,6 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCov
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicTimedPanel .music-timed-head{position:relative!important;inset:auto!important;justify-content:flex-end!important;flex:none!important;padding-bottom:4px!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLyricsBack{font-size:14px!important;min-height:36px!important;padding:6px 12px!important;}
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line.is-current[data-timing=character]{opacity:1;}
+
+/* Follow-only lyrics: seek with the media timeline; retain native text selection. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicTimedLyrics{overflow-y:hidden!important;touch-action:none!important;scrollbar-width:none!important;}
