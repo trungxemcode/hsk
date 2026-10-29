@@ -26,7 +26,10 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   await audio.evaluate(n=>{n.currentTime=.5;n.dispatchEvent(new Event('timeupdate'));});
   assert.equal(await page.locator('.is-current').getAttribute('data-timing'),'line');
   assert.equal(await page.locator('.is-current .is-sung').count(),0,'line-only scripts have no synthetic sweep');
-  await page.waitForFunction(()=>{const n=document.querySelector('.music-timed-line.is-current');const other=document.querySelector('.music-timed-line:not(.is-current) .music-timed-char');return getComputedStyle(n).opacity==='0.48'&&getComputedStyle(n.querySelector('.music-timed-char')).color===getComputedStyle(other).color;});
+  await page.waitForFunction(()=>{const n=document.querySelector('.music-timed-line.is-current');const other=document.querySelector('.music-timed-line:not(.is-current) .music-timed-char');return getComputedStyle(n).opacity==='0.62'&&getComputedStyle(n.querySelector('.music-timed-char')).color===getComputedStyle(other).color;});
+  await page.waitForFunction(()=>{const box=document.getElementById('musicTimedLyrics').getBoundingClientRect(),next=document.querySelectorAll('.music-timed-line')[1].getBoundingClientRect();return next.top>=box.top&&next.bottom<=box.bottom;});
+  assert.ok(await page.locator('.music-timed-text').first().evaluate(n=>parseFloat(getComputedStyle(n.parentElement).fontSize)>=26),'readable Hanzi');
+  assert.equal(await page.locator('#musicLyricsBack').textContent(),'Ảnh bìa');
   const neutral=await page.locator('.music-timed-line.is-current .music-timed-char').first().evaluate(n=>getComputedStyle(n).color);assert.equal(neutral,await page.locator('.music-timed-line:not(.is-current) .music-timed-char').first().evaluate(n=>getComputedStyle(n).color),'missing word timestamps must not brighten a whole line');
   await audio.evaluate(n=>{n.currentTime=1.05;n.dispatchEvent(new Event('timeupdate'));});
   assert.equal(await page.locator('.music-timed-pinyin .is-sung').count(),0);
