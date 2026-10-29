@@ -308,3 +308,7 @@ Khi chọn bài mới có `characters`, tự mở mặt lời/karaoke. Giữ nú
 
 ### Tra cứu lời nhạc và đồng hồ karaoke
 Music UI vẫn giữ `music-<trackId>` làm ngữ cảnh giao diện. Khi gửi hỏi đáp, `transportContext` chọn nhánh `open-dictionary` đã được backend hỗ trợ, giữ `sourceId`, `scope:music`, từ được chọn, pinyin và ngữ cảnh lời tối đa 600 ký tự. Không áp dụng prompt bài học HSK1 cho nhạc. Cache 32 câu trả lời chỉ trong bộ nhớ, theo UID/ngữ cảnh/lịch sử và xóa khi đổi tài khoản. Đồng hồ karaoke đọc currentTime thật; RAF chỉ chạy khi audio đang phát và mặt lời đang mở/hiện trên trang. Tính vị trí cuộn được gom một frame, không đổi nguồn audio hay mốc hát.
+
+## Bộ chỉnh trang chủ local (3.22.1 candidate)
+Mở Chinh-giao-dien.cmd (Python 3.10+) để dùng tools/serve-home-designer.py trên loopback cổng 8788. Công cụ riêng không được nạp bởi app/PWA thông thường. Nháp PC/mobile, chọn trực tiếp, Undo/Redo và đổi thứ tự bằng CSS dùng danh sách phần tử/thuộc tính trong tools/home-designer/schema.json.
+Nút Lưu vào dự án có xác nhận, chỉ cập nhật home-design.json/CSS, một link đánh dấu trong index.html và đăng ký CSS vào danh mục PWA. Không push/merge tự động; phải kiểm tra layout và chuẩn bị bản PWA trước PR. Preview tách theo cổng, tắt tài khoản/push/kết nối ngoài; không dùng làm app học chính. Hướng dẫn: docs/HOME_DESIGNER.md.

@@ -1,0 +1,560 @@
+{
+  "schema": 1,
+  "groups": {
+    "desktop": [
+      "daily-word",
+      "assessment",
+      "plan",
+      "plan-settings",
+      "dashboard",
+      "quick-search"
+    ],
+    "mobile": [
+      "daily-word",
+      "mobile-hero",
+      "dashboard",
+      "quick-search"
+    ]
+  },
+  "components": [
+    {
+      "key": "daily-word",
+      "label": "Từ vựng hôm nay",
+      "selector": "#homeDailyWord"
+    },
+    {
+      "key": "assessment",
+      "label": "Kết quả đánh giá",
+      "selector": "#placementEntry"
+    },
+    {
+      "key": "plan",
+      "label": "Kế hoạch hôm nay",
+      "selector": "#planToday"
+    },
+    {
+      "key": "plan-settings",
+      "label": "Mục tiêu & lịch học",
+      "selector": "#homePlanSettings"
+    },
+    {
+      "key": "mobile-hero",
+      "label": "Khung học hôm nay trên điện thoại",
+      "selector": "#mobileTodayHero"
+    },
+    {
+      "key": "dashboard",
+      "label": "Các thẻ học & ôn nhanh",
+      "selector": ".dashboard-grid"
+    },
+    {
+      "key": "quick-search",
+      "label": "Tra cứu nhanh",
+      "selector": ".overview-search"
+    },
+    {
+      "key": "word-heading",
+      "label": "Tiêu đề từ vựng",
+      "selector": "#homeDailyWord h3",
+      "parent": "daily-word"
+    },
+    {
+      "key": "word-change",
+      "label": "Nút Đổi từ",
+      "selector": "#homeDailyWord .overview-word-head button",
+      "parent": "daily-word"
+    },
+    {
+      "key": "word-card",
+      "label": "Ô từ vựng",
+      "selector": "#homeDailyWord summary",
+      "parent": "daily-word"
+    },
+    {
+      "key": "word-han",
+      "label": "Chữ Hán hôm nay",
+      "selector": "#homeDailyWord summary strong",
+      "parent": "daily-word"
+    },
+    {
+      "key": "word-pinyin",
+      "label": "Pinyin hôm nay",
+      "selector": "#homeDailyWord summary span:first-of-type",
+      "parent": "daily-word"
+    },
+    {
+      "key": "word-meaning",
+      "label": "Nghĩa tiếng Việt",
+      "selector": "#homeDailyWord summary span:last-of-type",
+      "parent": "daily-word"
+    },
+    {
+      "key": "assessment-title",
+      "label": "Tiêu đề đánh giá",
+      "selector": "#placementEntry h3",
+      "parent": "assessment"
+    },
+    {
+      "key": "assessment-copy",
+      "label": "Mô tả đánh giá",
+      "selector": "#placementEntry>p",
+      "parent": "assessment"
+    },
+    {
+      "key": "assessment-first",
+      "label": "Nút đầu trong ô đánh giá",
+      "selector": "#placementEntry>button:first-of-type",
+      "parent": "assessment"
+    },
+    {
+      "key": "assessment-last",
+      "label": "Nút cuối trong ô đánh giá",
+      "selector": "#placementEntry>button:last-of-type",
+      "parent": "assessment"
+    },
+    {
+      "key": "plan-head",
+      "label": "Hàng tiêu đề kế hoạch",
+      "selector": "#planToday>.section-row",
+      "parent": "plan"
+    },
+    {
+      "key": "plan-heading",
+      "label": "Tiêu đề Kế hoạch hôm nay",
+      "selector": "#planTodayTitle",
+      "parent": "plan"
+    },
+    {
+      "key": "plan-meta",
+      "label": "Số phút & số ngày",
+      "selector": "#planTodayMeta",
+      "parent": "plan"
+    },
+    {
+      "key": "plan-edit",
+      "label": "Nút Chỉnh mục tiêu",
+      "selector": "#planSettingsLink",
+      "parent": "plan"
+    },
+    {
+      "key": "plan-continue",
+      "label": "Nút Tiếp tục học",
+      "selector": "#planContinue",
+      "parent": "plan"
+    },
+    {
+      "key": "plan-tasks",
+      "label": "Danh sách nhiệm vụ",
+      "selector": "#planTasks",
+      "parent": "plan"
+    },
+    {
+      "key": "settings-heading",
+      "label": "Tiêu đề Mục tiêu & lịch học",
+      "selector": "#homePlanSettings>summary",
+      "parent": "plan-settings"
+    },
+    {
+      "key": "settings-copy",
+      "label": "Dòng Chọn HSK, nhịp học",
+      "selector": "#planEmpty>p",
+      "parent": "plan-settings"
+    },
+    {
+      "key": "settings-action",
+      "label": "Nút Lập kế hoạch học",
+      "selector": "#planGoSetup",
+      "parent": "plan-settings"
+    },
+    {
+      "key": "settings-form-heading",
+      "label": "Chọn mục tiêu và lịch học",
+      "selector": "#planSetup>summary",
+      "parent": "plan-settings"
+    },
+    {
+      "key": "hero",
+      "label": "Thẻ tím giới thiệu",
+      "selector": ".feature-hero",
+      "parent": "dashboard"
+    },
+    {
+      "key": "hero-heading",
+      "label": "Chữ lớn trong thẻ tím",
+      "selector": ".feature-copy h3",
+      "parent": "dashboard"
+    },
+    {
+      "key": "hero-copy",
+      "label": "Mô tả trong thẻ tím",
+      "selector": ".feature-copy p",
+      "parent": "dashboard"
+    },
+    {
+      "key": "hero-action",
+      "label": "Nút trong thẻ tím",
+      "selector": ".hero-button",
+      "parent": "dashboard"
+    },
+    {
+      "key": "shortcuts",
+      "label": "Nhóm Học & ôn nhanh",
+      "selector": ".shortcut-grid",
+      "parent": "dashboard"
+    },
+    {
+      "key": "music-action",
+      "label": "Nút Nghe nhạc & học HSK",
+      "selector": ".home-music-chill",
+      "parent": "dashboard"
+    },
+    {
+      "key": "pathway",
+      "label": "Ba bước học tập",
+      "selector": ".pathway",
+      "parent": "dashboard"
+    },
+    {
+      "key": "side-card",
+      "label": "Ô Góc học tập",
+      "selector": ".today-card",
+      "parent": "dashboard"
+    },
+    {
+      "key": "reminder",
+      "label": "Ô Đến lúc ôn lại?",
+      "selector": ".review-reminder",
+      "parent": "dashboard"
+    },
+    {
+      "key": "quick-heading",
+      "label": "Tiêu đề Tra cứu nhanh",
+      "selector": ".overview-search>summary",
+      "parent": "quick-search"
+    },
+    {
+      "key": "task-1",
+      "label": "Ôn từ đến hạn",
+      "selector": "#planTasks>.plan-task:nth-child(1)",
+      "parent": "plan"
+    },
+    {
+      "key": "task-1-title",
+      "label": "Tên nhiệm vụ: Ôn từ đến hạn",
+      "selector": "#planTasks>.plan-task:nth-child(1) strong",
+      "parent": "plan"
+    },
+    {
+      "key": "task-1-copy",
+      "label": "Mô tả: Ôn từ đến hạn",
+      "selector": "#planTasks>.plan-task:nth-child(1) p",
+      "parent": "plan"
+    },
+    {
+      "key": "task-1-action",
+      "label": "Nút Bắt đầu: Ôn từ đến hạn",
+      "selector": "#planTasks>.plan-task:nth-child(1) button",
+      "parent": "plan"
+    },
+    {
+      "key": "task-2",
+      "label": "Học từ mới",
+      "selector": "#planTasks>.plan-task:nth-child(2)",
+      "parent": "plan"
+    },
+    {
+      "key": "task-2-title",
+      "label": "Tên nhiệm vụ: Học từ mới",
+      "selector": "#planTasks>.plan-task:nth-child(2) strong",
+      "parent": "plan"
+    },
+    {
+      "key": "task-2-copy",
+      "label": "Mô tả: Học từ mới",
+      "selector": "#planTasks>.plan-task:nth-child(2) p",
+      "parent": "plan"
+    },
+    {
+      "key": "task-2-action",
+      "label": "Nút Bắt đầu: Học từ mới",
+      "selector": "#planTasks>.plan-task:nth-child(2) button",
+      "parent": "plan"
+    },
+    {
+      "key": "task-3",
+      "label": "Đọc, nghe & ngữ pháp",
+      "selector": "#planTasks>.plan-task:nth-child(3)",
+      "parent": "plan"
+    },
+    {
+      "key": "task-3-title",
+      "label": "Tên nhiệm vụ: Đọc, nghe & ngữ pháp",
+      "selector": "#planTasks>.plan-task:nth-child(3) strong",
+      "parent": "plan"
+    },
+    {
+      "key": "task-3-copy",
+      "label": "Mô tả: Đọc, nghe & ngữ pháp",
+      "selector": "#planTasks>.plan-task:nth-child(3) p",
+      "parent": "plan"
+    },
+    {
+      "key": "task-3-action",
+      "label": "Nút Bắt đầu: Đọc, nghe & ngữ pháp",
+      "selector": "#planTasks>.plan-task:nth-child(3) button",
+      "parent": "plan"
+    },
+    {
+      "key": "task-4",
+      "label": "Kiểm tra & sửa lỗi",
+      "selector": "#planTasks>.plan-task:nth-child(4)",
+      "parent": "plan"
+    },
+    {
+      "key": "task-4-title",
+      "label": "Tên nhiệm vụ: Kiểm tra & sửa lỗi",
+      "selector": "#planTasks>.plan-task:nth-child(4) strong",
+      "parent": "plan"
+    },
+    {
+      "key": "task-4-copy",
+      "label": "Mô tả: Kiểm tra & sửa lỗi",
+      "selector": "#planTasks>.plan-task:nth-child(4) p",
+      "parent": "plan"
+    },
+    {
+      "key": "task-4-action",
+      "label": "Nút Bắt đầu: Kiểm tra & sửa lỗi",
+      "selector": "#planTasks>.plan-task:nth-child(4) button",
+      "parent": "plan"
+    }
+  ],
+  "properties": {
+    "fontSize": {
+      "type": "number",
+      "label": "Cỡ chữ",
+      "css": "font-size",
+      "unit": "px",
+      "min": 10,
+      "max": 64,
+      "integer": true,
+      "group": "Chữ"
+    },
+    "lineHeight": {
+      "type": "number",
+      "label": "Giãn dòng (lần)",
+      "css": "line-height",
+      "unit": "",
+      "min": 1,
+      "max": 2.5,
+      "integer": false,
+      "group": "Chữ"
+    },
+    "paddingTop": {
+      "type": "number",
+      "label": "Đệm trên",
+      "css": "padding-top",
+      "unit": "px",
+      "min": 0,
+      "max": 96,
+      "integer": true,
+      "group": "Khoảng đệm bên trong"
+    },
+    "paddingRight": {
+      "type": "number",
+      "label": "Đệm phải",
+      "css": "padding-right",
+      "unit": "px",
+      "min": 0,
+      "max": 96,
+      "integer": true,
+      "group": "Khoảng đệm bên trong"
+    },
+    "paddingBottom": {
+      "type": "number",
+      "label": "Đệm dưới",
+      "css": "padding-bottom",
+      "unit": "px",
+      "min": 0,
+      "max": 96,
+      "integer": true,
+      "group": "Khoảng đệm bên trong"
+    },
+    "paddingLeft": {
+      "type": "number",
+      "label": "Đệm trái",
+      "css": "padding-left",
+      "unit": "px",
+      "min": 0,
+      "max": 96,
+      "integer": true,
+      "group": "Khoảng đệm bên trong"
+    },
+    "marginTop": {
+      "type": "number",
+      "label": "Cách trên",
+      "css": "margin-top",
+      "unit": "px",
+      "min": 0,
+      "max": 96,
+      "integer": true,
+      "group": "Khoảng cách bên ngoài"
+    },
+    "marginBottom": {
+      "type": "number",
+      "label": "Cách dưới",
+      "css": "margin-bottom",
+      "unit": "px",
+      "min": 0,
+      "max": 96,
+      "integer": true,
+      "group": "Khoảng cách bên ngoài"
+    },
+    "gap": {
+      "type": "number",
+      "label": "Khoảng giữa các phần tử",
+      "css": "gap",
+      "unit": "px",
+      "min": 0,
+      "max": 64,
+      "integer": true,
+      "group": "Căn hàng"
+    },
+    "textAlign": {
+      "type": "select",
+      "label": "Căn chữ",
+      "css": "text-align",
+      "options": [
+        {
+          "value": "left",
+          "label": "Trái"
+        },
+        {
+          "value": "center",
+          "label": "Giữa"
+        },
+        {
+          "value": "right",
+          "label": "Phải"
+        }
+      ],
+      "group": "Chữ"
+    },
+    "fontWeight": {
+      "type": "select",
+      "label": "Độ đậm",
+      "css": "font-weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Thường"
+        },
+        {
+          "value": "500",
+          "label": "Vừa"
+        },
+        {
+          "value": "600",
+          "label": "Đậm vừa"
+        },
+        {
+          "value": "700",
+          "label": "Đậm"
+        }
+      ],
+      "group": "Chữ"
+    },
+    "alignItems": {
+      "type": "select",
+      "label": "Căn dọc trong khối",
+      "css": "align-items",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Trên"
+        },
+        {
+          "value": "center",
+          "label": "Giữa"
+        },
+        {
+          "value": "flex-end",
+          "label": "Dưới"
+        },
+        {
+          "value": "stretch",
+          "label": "Kéo đều"
+        }
+      ],
+      "group": "Căn hàng"
+    },
+    "justifyContent": {
+      "type": "select",
+      "label": "Căn ngang trong khối",
+      "css": "justify-content",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Trái"
+        },
+        {
+          "value": "center",
+          "label": "Giữa"
+        },
+        {
+          "value": "flex-end",
+          "label": "Phải"
+        },
+        {
+          "value": "space-between",
+          "label": "Dàn hai đầu"
+        }
+      ],
+      "group": "Căn hàng"
+    },
+    "color": {
+      "type": "select",
+      "label": "Màu chữ",
+      "css": "color",
+      "options": [
+        {
+          "value": "var(--ink)",
+          "label": "Chữ chính"
+        },
+        {
+          "value": "var(--sub)",
+          "label": "Chữ phụ"
+        },
+        {
+          "value": "var(--accent)",
+          "label": "Tím chủ đạo"
+        },
+        {
+          "value": "var(--surface)",
+          "label": "Màu nền thẻ"
+        }
+      ],
+      "group": "Màu theo theme"
+    },
+    "backgroundColor": {
+      "type": "select",
+      "label": "Màu nền",
+      "css": "background-color",
+      "options": [
+        {
+          "value": "var(--surface)",
+          "label": "Nền thẻ"
+        },
+        {
+          "value": "var(--paper)",
+          "label": "Nền trang"
+        },
+        {
+          "value": "var(--accent)",
+          "label": "Tím chủ đạo"
+        }
+      ],
+      "group": "Màu theo theme"
+    }
+  }
+}

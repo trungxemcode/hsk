@@ -1,0 +1,37 @@
+name: Local Home Designer
+on:
+  pull_request:
+    paths: ['tools/home-designer/**', 'tools/serve-home-designer.py', 'tools/check-home-designer*.cjs', 'tools/test_home_designer.py', 'Chinh-giao-dien.cmd', '.github/workflows/home-designer.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  editor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate drafts and local file writes
+        run: |
+          node tools/check-home-designer-core.cjs
+          python -m unittest discover -s tools -p test_home_designer.py
+      - name: Install browser test dependency
+        run: npm install --prefix /tmp/hsk-tests playwright@1.56.1
+      - name: Edit, save, reload and apply in the real app
+        env:
+          NODE_PATH: /tmp/hsk-tests/node_modules
+        run: CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-home-designer-ui.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: home-designer-screenshots
+          path: /tmp/home-designer-*.png
+          retention-days: 7
