@@ -73,3 +73,11 @@ html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCov
 
 /* A line anchor is not evidence for character karaoke. Keep untimed characters neutral. */
 html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line.is-current[data-timing=line]{color:var(--mb-rd-muted)!important;opacity:.48;}
+
+/* Mobile karaoke: readable text and a visible upcoming cue without width-based blank space. */
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover #musicTimedLyrics{padding-block:24px 160px!important;scroll-padding-block:24px!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover .music-timed-line{font-size:clamp(26px,6.8vw,34px)!important;line-height:1.35!important;padding-block:12px!important;opacity:.62;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLinkCover .music-timed-pinyin{font-size:clamp(14px,3.6vw,16px)!important;line-height:1.45!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicTimedPanel .music-timed-head{position:relative!important;inset:auto!important;justify-content:flex-end!important;flex:none!important;padding-bottom:4px!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel #musicLyricsBack{font-size:14px!important;min-height:36px!important;padding:6px 12px!important;}
+html body:not(#_rd)[data-studio-hub=music] #musicPanel.music-panel .music-timed-line.is-current[data-timing=character]{opacity:1;}
