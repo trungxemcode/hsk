@@ -1,6 +1,1 @@
-{
-  "request": "Sửa lỗi xác minh nhóm tài khoản trên màn hình Tài khoản: hiển thị đúng nguyên nhân HTTP và giữ nguyên mọi trang, chức năng khác.",
-  "excludedRoutes": [
-    "account"
-  ]
-}
+{"request":"Chỉ sửa khoảng cách các box và kích thước hai nút sao lưu tại Tài khoản trên điện thoại; desktop và các trang khác giữ nguyên.","excludedRoutes":["account"]}
