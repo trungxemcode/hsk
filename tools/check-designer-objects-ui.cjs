@@ -21,14 +21,14 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
  await page.locator('.designer-guide').focus();await page.keyboard.press('Delete');assert.equal(await page.locator('.designer-guide').count(),0);
  await page.screenshot({path:'/tmp/designer-rulers.png',fullPage:true});
  // Hard-edit selects actual nested nodes and preserves parent DOM/handlers.
- const small=frame.locator('.hero-character > span');const parentColor=await small.evaluate(n=>getComputedStyle(n.parentElement).color);
+ const small=frame.locator('.hero-character > span');const parentColor=await small.evaluate(n=>getComputedStyle(n.parentElement).fontSize);
  await page.screenshot({path:'/tmp/designer-object-hard-before.png',fullPage:true});
  await page.locator('#hard-edit').click();await (async()=>{const b=await small.boundingBox();assert.ok(b,'nested target has geometry');await page.mouse.click(b.x+b.width/2,b.y+b.height/2);})();assert.match(await page.locator('#selected-name').textContent(),/习/);
  await small.evaluate(n=>{window.__hardNode=n;window.__hardParent=n.parentElement;});
- await page.locator('#field-color').fill('#e11d48');await page.locator('#field-color').press('Tab');
- assert.equal(await small.evaluate(n=>getComputedStyle(n).color),'rgb(225, 29, 72)');assert.equal(await small.evaluate(n=>getComputedStyle(n.parentElement).color),parentColor,'nested edit does not style parent');
+ await page.locator('#field-fontSize').fill('24');await page.locator('#field-fontSize').press('Tab');
+ assert.equal(await small.evaluate(n=>getComputedStyle(n).fontSize),'24px');assert.equal(await small.evaluate(n=>getComputedStyle(n.parentElement).fontSize),parentColor,'nested edit does not style parent');
  assert.equal(await small.evaluate(n=>n===window.__hardNode&&n.parentElement===window.__hardParent),true,'hard-edit never wraps or replaces DOM');
- await page.locator('#undo').click();assert.notEqual(await small.evaluate(n=>getComputedStyle(n).color),'rgb(225, 29, 72)');
+ await page.locator('#undo').click();assert.notEqual(await small.evaluate(n=>getComputedStyle(n).fontSize),'24px');
  await page.locator('#parent').click();assert.ok(await page.locator('#hard-children button').count()>0,'immediate children remain reachable');
  await page.locator('#hard-children button').filter({hasText:'习'}).first().click();assert.match(await page.locator('#selected-name').textContent(),/习/);
  await page.screenshot({path:'/tmp/designer-object-hard-after.png',fullPage:true});
