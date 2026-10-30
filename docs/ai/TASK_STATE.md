@@ -1,5 +1,8 @@
 # Current task: mobile animation performance
 
+## 30/10/2026 — GitHub UI scope merge gate
+Owner clarified the unchanged-page rule must be enforced through GitHub Rules. Added PR check ui-outside-scope comparing real merge-base/head screenshots and geometry on390/1440 light/dark; only explicitly requested route exemptions from a scope declaration changed in this PR. Capture public route entries and mocked admin, scroll slices, deterministic fixtures, report+before/after/diff artifacts. No frontend/PWA changes in this addition. Current declaration excludes account; normal lessons remain protected. Deeper modals/authenticated learner states still need separate review. Prepared separate main ruleset requiring GitHub Actions check, strict base, no bypass, and authenticated gh apply/readback utility; do not claim ACTIVE until settings readback confirms. Browser guard QA in progress. GitHub CLI device login requested because connector has no rules API and cloud browser cannot launch.
+
 ## Mobile animation performance (2026-10-26)
 Branch `fix/ios-animation-performance-20261026`, candidate 3.20.4. Stop the mobile shell observer self-loop with idempotent hidden setters; ignore independently rendered music/loading mutations. Decorate added controls incrementally instead of scanning the workspace on every text update. Coalesce music drag/scroll work with requestAnimationFrame; avoid playlist decoration on play-state changes and redundant nested menu entrance. Loading stage transitions use cancellable opacity WAAPI instead of forced offsetWidth layout. Audio lifecycle, MediaSession, sources and background playback are unchanged.
 

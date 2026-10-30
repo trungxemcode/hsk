@@ -15,6 +15,7 @@ Thực hiện theo [quy tắc kiểm tra phạm vi](../docs/ai/UI_SCOPE_REVIEW.m
 - Danh sách đầy đủ trang/chế độ được bảo vệ:
 - Viewport, theme, fixture và trạng thái:
 - Liên kết ảnh trước/sau, diff và kết quả đo:
+- Khai báo `.github/ui-scope.json` của PR và artifact check `ui-outside-scope`:
 - [ ] Đã so sánh các trang ngoài phạm vi trên PC/điện thoại, sáng/tối.
 - [ ] Không còn khác biệt ngoài phạm vi; bằng chứng khớp code/base cuối cùng.
 - [ ] Các kiểm thử của trang được sửa và CI đã đạt; chủ dự án đã review nếu có thay đổi layout.

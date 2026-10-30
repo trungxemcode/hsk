@@ -1,0 +1,4 @@
+{
+  "request": "Chỉ đổi khoảng cách thẻ Tài khoản và chữ/pinyin Học tự động toàn màn hình. Trang Bài học thường vẫn được so sánh.",
+  "excludedRoutes": ["account"]
+}
