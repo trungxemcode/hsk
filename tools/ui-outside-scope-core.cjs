@@ -54,4 +54,9 @@ function measureDOM(){
     return {key:n.id||n.tagName+'.'+n.getAttribute('class'),text,paintAttributes,x:Math.round(r.x*100)/100,y:Math.round(r.y*100)/100,w:Math.round(r.width*100)/100,h:Math.round(r.height*100)/100,font:s.fontSize,fontFamily:s.fontFamily,weight:s.fontWeight,align:s.textAlign,color:s.color,background:s.backgroundColor,backgroundImage:s.backgroundImage,shadow:s.boxShadow,border:s.border,borderRadius:s.borderRadius,padding:s.padding,margin:s.margin,transform:s.transform,opacity:s.opacity};
   });
 }
-module.exports={ROUTES,scope,pixels,visualPixels,measureDOM};
+function scenarios(width,theme){
+ if(width===undefined&&theme===undefined)return [390,1440].flatMap(width=>['light','dark'].map(theme=>({width,theme})));
+ const n=Number(width);assert.ok([390,1440].includes(n)&&['light','dark'].includes(theme),'Invalid or incomplete UI scenario');
+ return [{width:n,theme}];
+}
+module.exports={ROUTES,scope,pixels,visualPixels,measureDOM,scenarios};
