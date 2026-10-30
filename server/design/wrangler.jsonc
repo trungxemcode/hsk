@@ -1,0 +1,23 @@
+{
+  "name": "hsk-ui-designer",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "assets": {
+    "directory": ".assets",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "vars": {
+    "FIREBASE_API_KEY": "AIzaSyAQlltCY7fZzNUnVkaiOusYSwa0LO5a6ko",
+    "PUBLIC_ORIGINS": "https://trungxemcode.github.io",
+    "PUBLIC_URL": "https://trungxemcode.github.io/hsk/",
+    "APP_RELEASE": "3.23.2"
+  },
+  "r2_buckets": [
+    {
+      "binding": "DESIGN_BUCKET",
+      "bucket_name": "hsk-music-library"
+    }
+  ]
+}

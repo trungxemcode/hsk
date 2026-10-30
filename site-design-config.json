@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "endpoint": "https://hsk-ui-designer.trung-hsk668.workers.dev/api/design",
+  "publicOrigins": [
+    "https://trungxemcode.github.io"
+  ]
+}

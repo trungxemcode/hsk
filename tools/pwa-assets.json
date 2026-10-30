@@ -168,7 +168,9 @@
     "content/voice-demos/zm_yunjian.mp3",
     "storage-cleanup.css",
     "src/modules/shell/storage-cleanup.js",
-    "src/modules/shell/legacy-music-cleanup.js"
+    "src/modules/shell/legacy-music-cleanup.js",
+    "site-design-live.js",
+    "site-design-config.json"
   ],
   "aliases": {
     "backup-core.js": "src/modules/backup/backup-core.js",

@@ -1888,6 +1888,113 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "local-home-designer",
+      "name": "Bộ chỉnh toàn app local: nháp từng trang PC/mobile, Undo/Redo, kéo thứ tự và áp dụng có kiểm tra",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "Chinh-giao-dien.cmd",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/editor.html",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/editor.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/core.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/schema.json",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/serve-home-designer.py",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-home-designer-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/core.js",
+          "value": "function generateCSS("
+        },
+        {
+          "kind": "contains",
+          "file": "tools/serve-home-designer.py",
+          "value": "ThreadingHTTPServer(('127.0.0.1', port)"
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/bridge.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-site-designer-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/core.js",
+          "value": "function emptyProject("
+        }
+      ]
+    },
+    {
+      "id": "cloud-ui-designer",
+      "name": "Hai link phát hành/chỉnh UXUI: chủ app tự đồng bộ CSS, chống ghi đè tab và giữ CSS cuối khi mất mạng",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "server/design/worker.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/design-worker.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/cloud.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-cloud-designer-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "site-design-live.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "site-design-config.json",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "./site-design-live.js"
+        }
+      ]
     }
   ]
 }
