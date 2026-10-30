@@ -2020,6 +2020,22 @@
           "value": "./site-design-live.js"
         }
       ]
+    },
+    {
+      "id": "editor-only-rulers-guides",
+      "name": "Thước pixel và đường căn riêng editor",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/guides.js",
+          "value": "designer-guides"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": "guides never enter release iframe"
+        }
+      ]
     }
   ]
 }

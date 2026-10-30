@@ -5,6 +5,18 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
  execFileSync('python3',['-c',"import shutil,os,sys;shutil.copytree(sys.argv[1],sys.argv[2],copy_function=os.link,ignore=shutil.ignore_patterns('.git','__pycache__','node_modules','.assets','.wrangler'))",root,fixture]);
  server=spawn('python3',['tools/serve-home-designer.py','--root',fixture,'--port','0'],{stdio:['ignore','pipe','pipe']});const url=await new Promise((resolve,reject)=>{let out='';const timer=setTimeout(()=>reject(Error('Server timeout')),15000);server.stdout.on('data',s=>{out+=s;const m=out.match(/http:\/\/127\.0\.0\.1:\d+/);if(m){clearTimeout(timer);resolve(m[0]);}});server.once('exit',c=>reject(Error('Server exit '+c)));});
  browser=await chromium.launch({executablePath:process.env.CHROME_EXECUTABLE});page=await browser.newPage({viewport:{width:1600,height:1000},serviceWorkers:'block'});page.on('pageerror',e=>errors.push(e.message));await page.goto(url+'/tools/home-designer/editor.html',{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>document.getElementById('status').textContent.includes('Sẵn sàng'));let frame=await(await page.locator('#canvas').elementHandle()).contentFrame();
+ // Editor-only ruler/guide regression, using real pointer capture and zoom.
+ const ruler=page.locator('.designer-ruler.horizontal'),rb=await ruler.boundingBox(),fb=await page.locator('#canvas').boundingBox();
+ await page.mouse.move(rb.x+80,rb.y+10);await page.mouse.down();await page.mouse.move(fb.x+80,fb.y+120,{steps:6});await page.mouse.up();
+ assert.equal(await page.locator('.designer-guide').count(),1);
+ const guideBefore=await page.locator('.designer-guide').getAttribute('title');
+ await page.locator('#zoom-toggle').click();assert.equal(await page.locator('.designer-guide').getAttribute('title'),guideBefore,'zoom preserves document pixel coordinate');
+ await page.locator('#zoom-toggle').click();
+ const gb=await page.locator('.designer-guide').boundingBox();await page.mouse.move(gb.x+40,gb.y+4);await page.mouse.down();await page.mouse.move(gb.x+40,gb.y+34,{steps:5});await page.mouse.up();
+ assert.notEqual(await page.locator('.designer-guide').getAttribute('title'),guideBefore,'guide can move');
+ assert.equal(await frame.locator('#designer-guides,.designer-ruler,.designer-guide').count(),0,'guides never enter release iframe');
+ await page.locator('.designer-guide').focus();await page.keyboard.press('Delete');assert.equal(await page.locator('.designer-guide').count(),0);
+ await page.screenshot({path:'/tmp/designer-rulers.png',fullPage:true});
  const target=frame.locator('.hero-button');await target.click();assert.equal(await frame.locator('#studioHome').isVisible(),true,'selecting does not navigate');const handleSize=await frame.locator('[data-resize=both]').boundingBox();assert.ok(handleSize.width<=12&&handleSize.height<=12,'resize handles must not inherit app button sizing');await frame.evaluate(()=>window.__object=document.querySelector('.hero-button'));await page.locator('#field-fontSize').fill('21');await frame.locator('.feature-copy h3').click();assert.equal(await page.locator('#field-fontSize').inputValue(),'','pending edit must not leak to next selection');await target.click();assert.equal(await page.locator('#field-fontSize').inputValue(),'21','clicking another object commits the pending field on its original target');
  const sibling=await frame.locator('.feature-copy h3').boundingBox(),parents=await target.evaluate(n=>[...n.parentElement.children].map(c=>c.id||c.className));
  const scale=()=>page.locator('#canvas').boundingBox().then(b=>b.width/1440);
