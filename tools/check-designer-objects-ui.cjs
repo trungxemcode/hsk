@@ -20,6 +20,21 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
  assert.equal(await frame.locator('#designer-guides,.designer-ruler,.designer-guide').count(),0,'guides never enter release iframe');
  await page.locator('.designer-guide').focus();await page.keyboard.press('Delete');assert.equal(await page.locator('.designer-guide').count(),0);
  await page.screenshot({path:'/tmp/designer-rulers.png',fullPage:true});
+ // Hard-edit selects actual nested nodes and preserves parent DOM/handlers.
+ const small=frame.locator('.hero-character > span');const parentColor=await small.evaluate(n=>getComputedStyle(n.parentElement).color);
+ await page.screenshot({path:'/tmp/designer-object-hard-before.png',fullPage:true});
+ await page.locator('#hard-edit').click();await small.click();assert.match(await page.locator('#selected-name').textContent(),/习/);
+ await small.evaluate(n=>{window.__hardNode=n;window.__hardParent=n.parentElement;});
+ await page.locator('#field-color').fill('#e11d48');await page.locator('#field-color').press('Tab');
+ assert.equal(await small.evaluate(n=>getComputedStyle(n).color),'rgb(225, 29, 72)');assert.equal(await small.evaluate(n=>getComputedStyle(n.parentElement).color),parentColor,'nested edit does not style parent');
+ assert.equal(await small.evaluate(n=>n===window.__hardNode&&n.parentElement===window.__hardParent),true,'hard-edit never wraps or replaces DOM');
+ await page.locator('#undo').click();assert.notEqual(await small.evaluate(n=>getComputedStyle(n).color),'rgb(225, 29, 72)');
+ await page.locator('#parent').click();assert.ok(await page.locator('#hard-children button').count()>0,'immediate children remain reachable');
+ await page.locator('#hard-children button').filter({hasText:'习'}).first().click();assert.match(await page.locator('#selected-name').textContent(),/习/);
+ await page.screenshot({path:'/tmp/designer-object-hard-after.png',fullPage:true});
+ await page.locator('#mobile').click();await frame.waitForFunction(()=>innerWidth===390);await page.setViewportSize({width:820,height:1000});await small.click();assert.match(await page.locator('#selected-name').textContent(),/习/);await page.screenshot({path:'/tmp/designer-object-hard-phone.png',fullPage:true});await page.setViewportSize({width:1600,height:1000});await page.locator('#desktop').click();await frame.waitForFunction(()=>innerWidth===1440);
+ const icon=frame.locator('.hero-button [data-icon]');await icon.evaluate(n=>n.style.pointerEvents='none');const ib=await icon.boundingBox();await page.mouse.click(ib.x+ib.width/2,ib.y+ib.height/2);assert.doesNotMatch(await page.locator('#selected-name').textContent(),/^Nút/,'hard hit test reaches icon inside button with pointer events disabled');assert.equal(await frame.locator('#studioHome').isVisible(),true,'deep selection does not activate parent button');await icon.evaluate(n=>n.style.removeProperty('pointer-events'));
+ await page.locator('#hard-edit').click();await frame.locator('.hero-button').click();assert.equal(await page.locator('#hard-edit').getAttribute('aria-pressed'),'false');
  const target=frame.locator('.hero-button');await target.click();assert.equal(await frame.locator('#studioHome').isVisible(),true,'selecting does not navigate');const handleSize=await frame.locator('[data-resize=both]').boundingBox();assert.ok(handleSize.width<=12&&handleSize.height<=12,'resize handles must not inherit app button sizing');await frame.evaluate(()=>window.__object=document.querySelector('.hero-button'));await page.locator('#field-fontSize').fill('21');await frame.locator('.feature-copy h3').click();assert.equal(await page.locator('#field-fontSize').inputValue(),'','pending edit must not leak to next selection');await target.click();assert.equal(await page.locator('#field-fontSize').inputValue(),'21','clicking another object commits the pending field on its original target');
  const sibling=await frame.locator('.feature-copy h3').boundingBox(),parents=await target.evaluate(n=>[...n.parentElement.children].map(c=>c.id||c.className));
  const scale=()=>page.locator('#canvas').boundingBox().then(b=>b.width/1440);
