@@ -207,3 +207,8 @@ Phục hồi pinyin dùng Qwen preview chỉ cho bản nhập riêng có kiểm 
 - server/design/worker.mjs: independent Worker, Firebase owner authorization, schema-validated CSS and R2 conditional writes at ui-design/current-v2.json. Assets packed by tools/pack-design-editor.py; preview blocks accounts/push/SW/external connections.
 - tools/home-designer/cloud.js: owner login, sequential auto-publish, per-tab draft recovery and conflict stop. Existing loopback editor remains available.
 - site-design-live.js/config: public release pulls CSS while foreground/online every 15s and on return, retains cached last-good CSS offline; never remounts app/audio or touches learner progress. Tests: server/design-worker.test.mjs, tools/check-cloud-designer-ui.cjs.
+
+## Designer object tools (3.23.3)
+- tools/home-designer/objects.js: pointer drag/resize, one-gesture history, cancel and keyboard movement; attaches only to preview document. bridge.js integrates selection/portal and exposes gesture callbacks/replay.
+- editor.js: typed Position/Border/Animation controls, group tabs, color picker/theme presets and motion transaction. Core/schema plus Python generate the same validated composed CSS; default unedited config adds no rules.
+- Regression: check-designer-objects-ui.cjs for geometry/DOM/undo/reduced motion; check-cloud-designer-ui.cjs proves remote publish of drag/border/animation. Repack and redeploy dedicated design Worker when shipping editor/schema changes; never replace AI/music/voice services.

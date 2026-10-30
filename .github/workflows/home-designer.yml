@@ -1,7 +1,7 @@
 name: Local Home Designer
 on:
   pull_request:
-    paths: ['tools/home-designer/**', 'tools/serve-home-designer.py', 'tools/check-home-designer*.cjs', 'tools/test_home_designer.py', 'tools/check-site-designer-ui.cjs', 'tools/check-cloud-designer-ui.cjs', 'server/design/**', 'server/design-worker.test.mjs', 'site-design-*.js', 'site-design-config.json', 'Chinh-giao-dien.cmd', '.github/workflows/home-designer.yml']
+    paths: ['tools/home-designer/**', 'tools/serve-home-designer.py', 'tools/check-home-designer*.cjs', 'tools/test_home_designer.py', 'tools/check-site-designer-ui.cjs', 'tools/check-cloud-designer-ui.cjs', 'tools/check-designer-objects-ui.cjs', 'server/design/**', 'server/design-worker.test.mjs', 'site-design-*.js', 'site-design-config.json', 'Chinh-giao-dien.cmd', '.github/workflows/home-designer.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -31,6 +31,7 @@ jobs:
           NODE_PATH: /tmp/hsk-tests/node_modules
         run: |
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-home-designer-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-designer-objects-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-site-designer-ui.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-cloud-designer-ui.cjs
       - uses: actions/upload-artifact@v4
@@ -42,4 +43,5 @@ jobs:
             /tmp/site-designer-*.png
             /tmp/site-designer-coverage.json
             /tmp/cloud-designer-*.png
+            /tmp/designer-object*.png
           retention-days: 7

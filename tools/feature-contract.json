@@ -1952,6 +1952,31 @@
           "kind": "contains",
           "file": "tools/home-designer/core.js",
           "value": "function emptyProject("
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/objects.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/schema.json",
+          "value": "\"moveX\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/schema.json",
+          "value": "\"borderColor\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/schema.json",
+          "value": "\"animationName\""
         }
       ]
     },
