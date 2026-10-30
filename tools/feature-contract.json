@@ -2199,6 +2199,22 @@
           "value": "does not mutate presentation input or speech text"
         }
       ]
+    },
+    {
+      "id": "account-uniform-card-spacing",
+      "name": "Các khối Tài khoản cách đều16px",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "studio-layout.css",
+          "value": "margin-block-start:16px!important"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-account-card-spacing-ui.cjs",
+          "value": "uniform16px gaps"
+        }
+      ]
     }
   ]
 }

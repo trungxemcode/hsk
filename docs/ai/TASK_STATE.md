@@ -119,3 +119,6 @@ Owner reports excess space under the fullscreen auto-learning card and controls 
 
 ## 30/10/2026 — readable fullscreen type and centered pinyin
 Owner reports text too small and joined pinyin; only hands-free viewport requested. New branch fix/guided-type-pinyin from merged main0d9b4c3. Viewport-relative reading fonts (desktop main up to64px/word120px/pinyin40px) retain fit-scale down to0.6. Pinyin full-width/auto margins/important center alignment. Core display-only formatter splits valid syllables with tones preserved, using Han count only for fully joined word strings, handles apostrophes/numeric tones and leaves unparseable chunks intact. Only render text uses formatting; source frames/data/speech unchanged. Two focused unit tests pass, browser regression pending. Candidate3.23.14, not merged/deployed.
+
+## 30/10/2026 — account card spacing added to current UI PR
+Owner additionally requests equal large-card gaps on Account. PC/mobile direct settings/voice/storage/version cards receive16px flow gaps and no saved per-card translations; no inner/auth/data changes. Regression guest/signed fixtures, light/dark390/1440 and saved offsets. Included alongside pending typography PR246 to keep PWA hashes consistent instead of competing release branches. Browser QA pending.
