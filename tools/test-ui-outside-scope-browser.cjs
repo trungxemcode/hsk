@@ -15,6 +15,10 @@ const {measureDOM,visualPixels}=require('./ui-outside-scope-core.cjs');
   }
   await reset();await page.locator('#box').evaluate(n=>n.textContent='ADC');const text=await snap();
   assert.ok(visualPixels(baseline.image,text.image)>0,'Changed letter must fail the pixel gate');
+  assert.notDeepEqual(text.geometry,baseline.geometry,'Visible text is also protected independently of rasterization');
+  await page.setContent('<svg width="20" height="20"><path d="M0 0L10 10"/></svg>');const svg=await page.evaluate(measureDOM);
+  await page.locator('path').evaluate(n=>n.setAttribute('d','M0 0L11 10'));
+  assert.notDeepEqual(await page.evaluate(measureDOM),svg,'SVG path edits must be protected independently of rasterization');
   console.log('PASS guard browser control: identical stable; 1px movement, subtle CSS color, radius, gradient and text changes detected');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

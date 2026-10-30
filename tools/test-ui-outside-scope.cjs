@@ -21,3 +21,10 @@ test('a single altered pixel or image dimensions fails; identical image passes',
   assert.equal(pixels(a,{...a,data:Buffer.from([250,255,255,255])}).changed,1);
   assert.equal(pixels(a,{...a,width:2}).changed,Infinity);
 });
+test('rounded-edge raster sample differs from a real isolated pixel edit',()=>{
+  const img=()=>({width:3,height:3,data:Buffer.from(Array.from({length:9},(_,i)=>[i%2?0:255,i%2?0:255,i%2?0:255,255]).flat())});
+  const a=img(),b=img();a.data.set([85,85,85,255],16);b.data.set([120,120,120,255],16);
+  assert.equal(visualPixels(a,b),0,'isolated mixed edge sample');
+  const white={width:3,height:3,data:Buffer.alloc(36,255)},dot={...white,data:Buffer.from(white.data)};
+  dot.data.set([0,0,0,255],16);assert.equal(visualPixels(white,dot),1,'real one-pixel edit must fail');
+});
