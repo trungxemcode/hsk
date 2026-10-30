@@ -1,4 +1,6 @@
 {
-  "request": "Chỉ đổi khoảng cách thẻ Tài khoản và chữ/pinyin Học tự động toàn màn hình. Trang Bài học thường vẫn được so sánh.",
-  "excludedRoutes": ["account"]
+  "request": "Sửa lỗi xác minh nhóm tài khoản trên màn hình Tài khoản: hiển thị đúng nguyên nhân HTTP và giữ nguyên mọi trang, chức năng khác.",
+  "excludedRoutes": [
+    "account"
+  ]
 }
