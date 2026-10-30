@@ -2,7 +2,8 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {execFileSync}=require('node:child_process');
 const assert=require('node:assert/strict');
-const {ROUTES,scope,pixels,visualPixels,measureDOM}=require('./ui-outside-scope-core.cjs');
+const {ROUTES,scope,pixels,visualPixels,measureDOM,scenarios}=require('./ui-outside-scope-core.cjs');
+const {isFrontendChange}=require('./ci-sharding-core.cjs');
 const [before,after,out]=process.argv.slice(2).map(x=>path.resolve(x));
 assert.ok(before&&after&&out,'Usage: node tools/check-ui-outside-scope.cjs BASE_DIR HEAD_DIR OUTPUT_DIR');
 fs.mkdirSync(out,{recursive:true});
@@ -10,13 +11,13 @@ const git=(...args)=>execFileSync('git',['-C',after,...args],{encoding:'utf8'}).
 const baseSHA=execFileSync('git',['-C',before,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
 const headSHA=git('rev-parse','HEAD');
 const changed=git('diff','--name-only',baseSHA,headSHA).split('\n').filter(Boolean);
-const frontend=changed.some(f=>! /^(tools\/|docs\/|server\/|\.github\/)/.test(f)&&/\.(css|js|html|json)$/.test(f));
-const report={baseSHA,headSHA,changed,results:[],coverage:'Guest entry pages plus admin with local mocked owner/role API. Authenticated learner dashboards and modal/learning substates require separate fixtures/review.'};
+const frontend=isFrontendChange(changed),selectedScenarios=scenarios(process.env.UI_SCOPE_WIDTH,process.env.UI_SCOPE_THEME);
+const report={baseSHA,headSHA,changed,selectedScenarios,results:[],coverage:'Guest entry pages plus admin with local mocked owner/role API. Authenticated learner dashboards and modal/learning substates require separate fixtures/review.'};
 const save=()=>fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));
-if(!frontend){report.result='Not applicable: no rendered app files changed';save();console.log(report.result);process.exit(0);}
 // An old scope declaration cannot silently exempt a page in the next PR.
 const config=changed.includes('.github/ui-scope.json')?JSON.parse(fs.readFileSync(path.join(after,'.github/ui-scope.json'),'utf8')):{request:'No exclusions declared in this PR',excludedRoutes:[]};
 const protectedRoutes=scope(config);report.scope=config;
+if(!frontend){report.result='Not applicable: no rendered app files changed';save();console.log(report.result);process.exit(0);}
 // New routes must be added to the capture inventory, not silently skipped.
 for(const root of [before,after]){
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
@@ -93,7 +94,7 @@ function serve(root){
   }finally{await page.close();}
  }
  try{
-  for(const width of [390,1440])for(const theme of ['light','dark'])for(const route of protectedRoutes){
+  for(const {width,theme} of selectedScenarios)for(const route of protectedRoutes){
    const key=route+'-'+width+'-'+theme;
    const a=await capture(servers[0],route,width,theme,path.join(out,key+'-before'));
    const b=await capture(servers[1],route,width,theme,path.join(out,key+'-after'));

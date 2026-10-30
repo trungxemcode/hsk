@@ -15,91 +15,117 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Unit tests for deletion protection (including deliberate sabotage)
-        run: python -m unittest discover -s tools -p 'test_feature_preservation.py'
-      - name: Preserve all previously protected capabilities
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
-        run: |
-          if [ -n "$BASE_SHA" ] && git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
-            if git cat-file -e "$BASE_SHA:tools/feature-contract.json" 2>/dev/null; then
-              python tools/check-feature-preservation.py --base "$BASE_SHA"
-            else
-              echo "Initial contract bootstrap: no registry in base, checking implementation and inventory."
-              python tools/check-feature-preservation.py
-            fi
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Unit tests for deletion protection (including deliberate sabotage)
+      run: python -m unittest discover -s tools -p 'test_feature_preservation.py'
+    - name: Preserve all previously protected capabilities
+      env:
+        BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+      run: |
+        if [ -n "$BASE_SHA" ] && git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
+          if git cat-file -e "$BASE_SHA:tools/feature-contract.json" 2>/dev/null; then
+            python tools/check-feature-preservation.py --base "$BASE_SHA"
           else
-            # Missing base SHA must fail once the registry is in main.
-            echo "Cannot verify parent commit; refusing to skip feature preservation."
-            exit 1
+            echo "Initial contract bootstrap: no registry in base, checking implementation and inventory."
+            python tools/check-feature-preservation.py
           fi
+        else
+          # Missing base SHA must fail once the registry is in main.
+          echo "Cannot verify parent commit; refusing to skip feature preservation."
+          exit 1
+        fi
   functional-regressions:
     name: protected-flows
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: npm install --prefix /tmp/hsk-tests jsdom@26.1.0 playwright@1.56.1 fake-indexeddb@6.2.4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Protected core behavior, data and server tests
-        env:
-          NODE_PATH: /tmp/hsk-tests/node_modules
-        run: |
-          node --test server/*.test.mjs
-          node tools/check-music-local-files-only.cjs
-          node tools/check-voice-demo-offline-range.cjs
-          node tools/check-yunjian-only.cjs
-          node tools/check-yunjian-model-transport.cjs
-          node tools/check-reading-dom.cjs
-          node tools/check-studio-dom.cjs
-          node tools/check-notebook-dom.cjs
-          node tools/check-exam-dom.cjs
-          node tools/check-practice-games-core.cjs
-          node tools/check-study-sync-dom.cjs
-          node tools/check-update-dom.cjs
-          node tools/check-real-reading-variety.cjs
-  browser-regressions:
-    name: mobile-and-learning
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+    - run: npm install --prefix /tmp/hsk-tests jsdom@26.1.0 playwright@1.56.1 fake-indexeddb@6.2.4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Protected core behavior, data and server tests
+      env:
+        NODE_PATH: /tmp/hsk-tests/node_modules
+      run: |
+        node --test server/*.test.mjs
+        node tools/check-music-local-files-only.cjs
+        node tools/check-voice-demo-offline-range.cjs
+        node tools/check-yunjian-only.cjs
+        node tools/check-yunjian-model-transport.cjs
+        node tools/check-reading-dom.cjs
+        node tools/check-studio-dom.cjs
+        node tools/check-notebook-dom.cjs
+        node tools/check-exam-dom.cjs
+        node tools/check-practice-games-core.cjs
+        node tools/check-study-sync-dom.cjs
+        node tools/check-update-dom.cjs
+        node tools/check-real-reading-variety.cjs
+  browser-shards:
+    name: mobile-learning-shard (${{ matrix.shard }}/3)
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        shard:
+        - 1
+        - 2
+        - 3
     steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: npm install --prefix /tmp/hsk-tests playwright@1.56.1 jsdom@26.1.0
-      - name: Keep real interaction flows working on phone and desktop
-        env:
-          NODE_PATH: /tmp/hsk-tests/node_modules
-        run: |
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-feature-runtime.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-storage-cleanup-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-storage-migration-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-online-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-ios-layout.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-module-loading-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-drive-images-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-backup-relocation-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-pwa-relocation-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-lesson-picker-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-practice-picker-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-practice-games-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-real-reading-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-studio-ui.cjs
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+    - run: npm install --prefix /tmp/hsk-tests playwright@1.56.1 jsdom@26.1.0
+    - name: Run assigned protected browser flows
+      env:
+        NODE_PATH: /tmp/hsk-tests/node_modules
+        SHARD: ${{ matrix.shard }}
+      run: node tools/run-ci-suite.cjs protected-browser "$SHARD" 3 /tmp/protected-shard
+    - name: Keep test inventory and durations
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: protected-browser-${{ matrix.shard }}-${{ github.sha }}
+        path: /tmp/protected-shard
+        retention-days: 7
+  browser-regressions:
+    name: mobile-and-learning
+    needs: browser-shards
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+    - name: Verify partition guards
+      run: node --test tools/test-ci-sharding.cjs
+    - uses: actions/download-artifact@v4
+      with:
+        pattern: protected-browser-*-${{ github.sha }}
+        path: /tmp/ci-reports
+    - name: Verify complete test inventory
+      run: node tools/check-ci-reports.cjs suite protected-browser 3 /tmp/ci-reports "$GITHUB_SHA"
+    - name: Require every parallel job to succeed
+      if: always()
+      env:
+        SHARD_RESULT: ${{ needs.browser-shards.result }}
+      run: test "$SHARD_RESULT" = success
