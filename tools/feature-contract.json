@@ -1954,6 +1954,47 @@
           "value": "function emptyProject("
         }
       ]
+    },
+    {
+      "id": "cloud-ui-designer",
+      "name": "Hai link phát hành/chỉnh UXUI: chủ app tự đồng bộ CSS, chống ghi đè tab và giữ CSS cuối khi mất mạng",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "server/design/worker.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/design-worker.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/cloud.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-cloud-designer-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "site-design-live.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "site-design-config.json",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "./site-design-live.js"
+        }
+      ]
     }
   ]
 }

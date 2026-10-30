@@ -22,3 +22,6 @@ __pycache__/
 
 # Local Cloudflare development state
 .wrangler/
+
+server/design/.assets/
+server/design/.wrangler/

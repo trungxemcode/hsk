@@ -202,3 +202,8 @@ Phục hồi pinyin dùng Qwen preview chỉ cho bản nhập riêng có kiểm 
 - Windows entry: Chinh-giao-dien.cmd; standard-library server tools/serve-home-designer.py, loopback port 8788. Separate origin; external connections/account/push and service-worker installation blocked in preview.
 - tools/home-designer/: editor, bridge.js live route/selection adapter, fixed 44-view/property schema. Schema 2 stores independent per-page desktop/mobile styles and safe selectors. Legacy Home drafts upgrade without dropping other pages. 100-step undo/redo, CSS-only ordering where allowed, JSON/CSS export; default app never loads editor code.
 - Explicit Apply writes managed JSON/CSS, one marked link in index.html, and adds home-design.css to the PWA catalog. No commit/push. Prepare a PWA release before publishing applied changes. Python/JS generators have v1/v2 parity tests; check-site-designer-ui.cjs covers all views and multi-page persistence/apply. Admin is a local read-only skeleton, not authenticated admin data. See docs/HOME_DESIGNER.md.
+
+## Cloud UI Designer (3.23.1 candidate)
+- server/design/worker.mjs: independent Worker, Firebase owner authorization, schema-validated CSS and R2 conditional writes at ui-design/current-v2.json. Assets packed by tools/pack-design-editor.py; preview blocks accounts/push/SW/external connections.
+- tools/home-designer/cloud.js: owner login, sequential auto-publish, per-tab draft recovery and conflict stop. Existing loopback editor remains available.
+- site-design-live.js/config: public release pulls CSS while foreground/online every 15s and on return, retains cached last-good CSS offline; never remounts app/audio or touches learner progress. Tests: server/design-worker.test.mjs, tools/check-cloud-designer-ui.cjs.

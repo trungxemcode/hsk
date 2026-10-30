@@ -38,3 +38,13 @@ Kiểm tra UI tạo một bản sao tạm bằng hardlink, chạy app và máy c
 `schema.json` chứa danh sách trang, phạm vi CSS và thuộc tính được phép. Phần tử nhận diện trong từng trang được lưu bằng selector cấu trúc có kiểm tra; không cho selector vượt ra ngoài phạm vi trang hoặc chèn CSS tự do. Bộ sinh CSS trình duyệt và bộ ghi Python dùng cùng schema, có kiểm tra kết quả giống hệt nhau. Chỉ một stylesheet được quản lý có độ ưu tiên cố định, có phạm vi trang chủ và breakpoint; không nối chồng stylesheet mỗi lần chỉnh.
 
 Tên home-design.json/CSS được giữ để tương thích bản trang chủ cũ; nội dung v2 chứa cấu hình của các trang đã chỉnh. Xuất bản nháp hiện tải hsk-giao-dien.json. Chỉnh theo vị trí dòng/thẻ là chỉnh ô giao diện đó, không sửa dữ liệu từ vựng hay nội dung bài. Undo/Redo hoạt động trên toàn bộ nháp và quay về trang của lần chỉnh tương ứng.
+
+## Hai link online
+- Bản phát hành: https://trungxemcode.github.io/hsk/
+- Chỉnh UX/UI: https://hsk-ui-designer.trung-hsk668.workers.dev/
+
+Đăng nhập ở link chỉnh bằng tài khoản chủ app HSK. Mỗi chỉnh sửa hợp lệ tự lưu; xem trạng thái “Đã đồng bộ tới bản phát hành”. Bản phát hành đang mở nhận CSS trong khoảng 15 giây hoặc ngay khi trở lại trang, tùy mạng. Không phải bấm Lưu vào dự án; nút Đồng bộ ngay cho phép thử lại. Đăng xuất khi dùng xong trên máy chung.
+
+Nếu hai tab cùng chỉnh, tab cũ bị dừng ghi thay vì ghi đè. Xuất nháp trước khi tải lại; nút Tải nháp chưa đồng bộ giúp giữ thay đổi chưa gửi. Hoàn tác cũng được đồng bộ sang bản phát hành. Khi mất mạng, thay đổi chưa gửi còn trong nháp; bản phát hành giữ CSS gần nhất. Các phần tử/dữ liệu chỉ xuất hiện sau đăng nhập hoặc từ API ngoài không được giả lập trong preview.
+
+Triển khai editor: chạy python3 tools/pack-design-editor.py, rồi npx wrangler deploy --config server/design/wrangler.jsonc trong môi trường Cloudflare đã đăng nhập. Chỉ bundle public assets; không gói secrets. Worker này độc lập với API nhạc/AI/voice.
