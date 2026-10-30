@@ -2109,6 +2109,48 @@
           "value": "hard-edit never wraps or replaces DOM"
         }
       ]
+    },
+    {
+      "id": "editor-independent-axis-gaps",
+      "name": "Khoảng cách ngang và dọc độc lập trong editor",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/schema.json",
+          "value": "\"columnGap\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/schema.json",
+          "value": "\"rowGap\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": "axis gaps override uniform gap independently"
+        }
+      ]
+    },
+    {
+      "id": "editor-multi-select-align",
+      "name": "Quét chọn nhiều object và căn giãn đều độc lập",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/editor.html",
+          "value": "id=\"multi-select\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/multi.js",
+          "value": "function layout(items,action)"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": "marquee selects multiple contained objects"
+        }
+      ]
     }
   ]
 }

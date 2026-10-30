@@ -73,3 +73,8 @@ AI chỉ trả patch thuộc tính của một box; máy chủ xác thực owner
 
 ### Hard-edit phần tử trong group
 Bật **Hard-edit** trên thanh công cụ để chọn sâu từng span, icon, ảnh hoặc phần tử SVG bên trong group, kể cả phần tử con có pointer-events:none. Bảng **Cấp phần tử** và danh sách **Phần tử con trực tiếp** giúp chọn đúng cấp; **↑ Cấp cha** lên một cấp DOM. Các chỉnh sửa dùng chung Position/Border/Animation/ChatGPT, Hoàn tác và tự đồng bộ. Chỉ bật/tắt không thay đổi thiết kế; cấu trúc DOM và hành vi nút vẫn giữ nguyên. Chữ gắn trực tiếp vào node cha, phần tử giả CSS ::before/::after và chi tiết nằm trong ảnh raster/canvas chưa phải object DOM riêng để tách chọn. Không tự bọc/tách DOM vì sẽ làm selector của bản phát hành sai khác.
+
+Trong nhóm **Căn hàng**, **Khoảng cách chung** đặt gap cho cả hai chiều; **Khoảng cách ngang** (column-gap) và **Khoảng cách dọc** (row-gap) ghi đè riêng từng chiều. Đơn vị px, khoảng0–64; để trống một chiều để dùng khoảng chung/mặc định. Các giá trị có tác dụng với bố cục flex/grid, không phải khoảng cách ký tự trong một từ.
+
+### Chọn nhiều và căn/giãn đều
+Giữ Shift để thêm hoặc Ctrl/Cmd để thêm/bớt object khi bấm trong preview. Hoặc bật **Quét chọn**, kéo một hình chữ nhật bao các object, rồi tắt chế độ để trở về kéo từng object. Với ít nhất2 object, dùng **Căn trái / Giữa ngang / Căn phải**, **Căn trên / Giữa dọc / Căn dưới**. Từ3 object, **Đều ngang / Đều dọc** chia đều khoảng trống giữa mép object và giữ hai đầu. Căn theo khung bao của các object đang chọn; không đổi thứ tự DOM hay kích thước. Mỗi thao tác là một bước Hoàn tác. Nếu chọn cả cha lẫn con, khi căn chỉ dịch cha để tránh con bị dịch hai lần. Khung quét và đường bao chỉ thuộc editor, không xuất hiện trên bản phát hành.
