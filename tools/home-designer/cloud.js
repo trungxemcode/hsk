@@ -34,5 +34,5 @@ window.HSKDesignerCloud={async create(server,callbacks={}){
  logout.onclick=()=>{paused=true;clearTimeout(timer);auth=null;sessionStorage.removeItem(key);location.reload();};
  window.addEventListener('online',()=>{if(!paused)flush();});
  window.addEventListener('beforeunload',e=>{if(pending||busy){e.preventDefault();e.returnValue='';}});
- return {get revision(){return revision;},queue(config){pending=JSON.parse(JSON.stringify(config));say(paused?'Nháp chưa đồng bộ · Xuất nháp trước khi tải lại':'Đang chờ đồng bộ…',paused);clearTimeout(timer);timer=setTimeout(flush,1200);},flush};
+ return {async editObject(input,signal){const response=await fetch('/__designer/chatgpt',{method:'POST',signal,headers:{'Content-Type':'application/json',Authorization:'Bearer '+await refresh()},body:JSON.stringify(input)});const result=await response.json();if(!response.ok)throw Error(result.error||'Chưa sửa được giao diện.');return result;},get revision(){return revision;},queue(config){pending=JSON.parse(JSON.stringify(config));say(paused?'Nháp chưa đồng bộ · Xuất nháp trước khi tải lại':'Đang chờ đồng bộ…',paused);clearTimeout(timer);timer=setTimeout(flush,1200);},flush};
 }};

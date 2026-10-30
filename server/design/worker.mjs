@@ -1,5 +1,6 @@
 import Core from '../../tools/home-designer/core.js';
 import schema from '../../tools/home-designer/schema.json' with {type:'json'};
+import {editObject} from './chatgpt.mjs';
 import {identity} from '../music/worker.mjs';
 const KEY='ui-design/current-v2.json',MAX=2000000;
 const fail=(message,status)=>Object.assign(Error(message),{status});
@@ -30,6 +31,13 @@ export async function handleDesign(request,env,ctx={},deps={}){
     return json({revision,css:saved?.css||'',updatedAt:saved?.updatedAt||null},200,{ETag:etag});
    }
    return json({mode:'cloud',projectId:'hsk-online-design-v2',release:env.APP_RELEASE||'cloud',revision,applied:saved?.config||null,publicUrl:env.PUBLIC_URL||'https://trungxemcode.github.io/hsk/',firebaseApiKey:env.FIREBASE_API_KEY});
+  }
+  if(url.pathname==='/__designer/chatgpt'&&request.method==='POST'){
+   if(origin!==self)return json({error:'Chỉ sửa từ trang editor.'},403);
+   const actor=await (deps.identity||identity)(request,env,deps.fetchFn||fetch);
+   if(!actor.admin)return json({error:'Chỉ chủ ứng dụng được dùng sửa với ChatGPT.'},403);
+   const input=await boundedJSON(request);
+   return json(await editObject(input,env,deps.openaiFetch||fetch));
   }
   if(url.pathname==='/__designer/apply'&&request.method==='POST'){
    if(origin!==self)return json({error:'Chỉ lưu từ trang chỉnh sửa.'},403);

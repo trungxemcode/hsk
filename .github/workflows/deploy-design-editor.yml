@@ -30,6 +30,7 @@ jobs:
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -48,7 +49,7 @@ jobs:
         run: |
           python tools/check-pwa-release.py
           node tools/check-home-designer-core.cjs
-          node --test server/design-worker.test.mjs
+          node --test server/design-worker.test.mjs server/design-chatgpt.test.mjs
       - name: Pack public app and editor assets
         run: python tools/pack-design-editor.py
       - name: Bundle dedicated editor Worker

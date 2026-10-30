@@ -2057,6 +2057,37 @@
           "value": "test_rejects_stale_asset_even_with_correct_release"
         }
       ]
+    },
+    {
+      "id": "editor-chatgpt-selected-object",
+      "name": "Sửa box đang chọn bằng ChatGPT qua API, key riêng tư và hoàn tác",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/editor.html",
+          "value": "id=\"ai-panel\""
+        },
+        {
+          "kind": "contains",
+          "file": "server/design/worker.mjs",
+          "value": "/__designer/chatgpt"
+        },
+        {
+          "kind": "contains",
+          "file": "server/design/chatgpt.mjs",
+          "value": "store:false"
+        },
+        {
+          "kind": "contains",
+          "file": "server/design-chatgpt.test.mjs",
+          "value": "owner success never publishes"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-cloud-designer-ui.cjs",
+          "value": "late AI cannot overwrite manual edits"
+        }
+      ]
     }
   ]
 }
