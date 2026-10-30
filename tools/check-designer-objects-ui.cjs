@@ -12,7 +12,10 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
  const guideBefore=await page.locator('.designer-guide').getAttribute('title');
  await page.locator('#zoom-toggle').click();assert.equal(await page.locator('.designer-guide').getAttribute('title'),guideBefore,'zoom preserves document pixel coordinate');
  await page.locator('#zoom-toggle').click();
- const gb=await page.locator('.designer-guide').boundingBox();await page.mouse.move(gb.x+40,gb.y+4);await page.mouse.down();await page.mouse.move(gb.x+40,gb.y+34,{steps:5});await page.mouse.up();
+ await page.waitForFunction(()=>{const g=document.querySelector('.designer-guide'),f=document.getElementById('canvas'),b=document.getElementById('frame-box');return Math.abs(g.getBoundingClientRect().y+4-f.getBoundingClientRect().y-parseFloat(g.title)*b.clientWidth/f.width)<2;});
+ const gb=await page.locator('.designer-guide').boundingBox(),vp=await page.locator('#viewport').boundingBox(),dragX=(Math.max(gb.x,vp.x)+Math.min(gb.x+gb.width,vp.x+vp.width))/2;
+ assert.equal(await page.evaluate(({x,y})=>document.elementFromPoint(x,y)?.closest('.designer-guide')!==null,{x:dragX,y:gb.y+4}),true,'drag starts on the visible guide, not a clipped sidebar');
+ await page.mouse.move(dragX,gb.y+4);await page.mouse.down();await page.mouse.move(dragX,gb.y+34,{steps:5});await page.mouse.up();
  assert.notEqual(await page.locator('.designer-guide').getAttribute('title'),guideBefore,'guide can move');
  assert.equal(await frame.locator('#designer-guides,.designer-ruler,.designer-guide').count(),0,'guides never enter release iframe');
  await page.locator('.designer-guide').focus();await page.keyboard.press('Delete');assert.equal(await page.locator('.designer-guide').count(),0);

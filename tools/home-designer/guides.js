@@ -34,6 +34,7 @@
  function finish(e,cancel=false){if(!active)return;const {guide,before,fresh}=active;active=null;if(cancel){if(fresh)remove(guide);else guide.position=before;}else{const limit=guide.axis==='horizontal'?Number(frame.height):Number(frame.width);if(guide.position<0||guide.position>limit)remove(guide);}if(box.hasPointerCapture(e.pointerId))box.releasePointerCapture(e.pointerId);draw();}
  box.addEventListener('pointerup',e=>finish(e));box.addEventListener('pointercancel',e=>finish(e,true));
  document.addEventListener('keydown',e=>{if(!selected||e.target.closest('input,textarea,select,[contenteditable]'))return;if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();remove(selected);}if(e.key==='Escape'){if(active){const {guide,before,fresh}=active;active=null;if(fresh)remove(guide);else guide.position=before;}selected=null;draw();}});
+ box.addEventListener('designer-fit',draw);
  new ResizeObserver(draw).observe(box);
  new MutationObserver(draw).observe(document.getElementById('preview'),{attributes:true,attributeFilter:['aria-pressed']});
  document.getElementById('page-select').addEventListener('change',()=>{selected=null;draw();});
