@@ -1,1 +1,1 @@
-{"request":"Chỉ sửa khoảng cách các box và kích thước hai nút sao lưu tại Tài khoản trên điện thoại; desktop và các trang khác giữ nguyên.","excludedRoutes":["account"]}
+{"request":"Tách Luyện thi HSK (study4) thành thẻ riêng dưới bộ chọn Luyện/Ôn, giữ nguyên route và chức năng; kèm sửa mobile Tài khoản trước đó.","excludedRoutes":["practice","account"]}

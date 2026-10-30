@@ -28,7 +28,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await page.locator('.ps-extras').count(),0,'no redundant direct-mode section');
    await disclosure.locator('summary').click();
    assert.equal(await disclosure.evaluate(el=>el.open),true);
-   const amount=await picker.locator('.ps-option input').count();assert.equal(amount,11,'music has its own top-level page');assert.equal(await picker.locator('[data-practice-option=music]').count(),0);
+   const amount=await picker.locator('.ps-option input').count();assert.equal(amount,10,'music and Study4 are separate entries');assert.equal(await picker.locator('[data-practice-option=music]').count(),0);
    if(width<721){
     const layout=await picker.locator('.ps-options').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length);
     assert.equal(layout,2,'mobile mode choices form a compact two-column grid');
@@ -49,7 +49,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await picker.locator('#practiceStartModes').isDisabled(),true);
    await picker.locator('[data-practice-option=match-game] input').check();
    await picker.locator('[data-practice-option=sentence-game] input').check();
-   assert.match(await picker.locator('#practiceSelectedCount').innerText(),/2 \/ 11/);
+   assert.match(await picker.locator('#practiceSelectedCount').innerText(),/2 \/ 10/);
    await disclosure.locator('summary').click();
    assert.equal(await disclosure.evaluate(el=>el.open),false,'can collapse after choosing');
    assert.equal(await picker.locator('#practiceStartModes').isVisible(),false,'start hidden with its collapsed group');await disclosure.locator('summary').click();
@@ -66,11 +66,10 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await picker.locator('#practiceSelectAll').click();
    assert.equal(await picker.locator('.ps-option input:checked').count(),amount);
    await picker.locator('#practiceClearAll').click();
-   await picker.locator('[data-practice-option=study4] input').check();
-   assert.equal(await picker.locator('.ps-option input:checked').count(),1);
+   assert.equal(await picker.locator('[data-practice-option=study4]').count(),0);
    await disclosure.locator('summary').click();
-   assert.equal(await disclosure.evaluate(el=>el.open),false);
-   await disclosure.locator('summary').click();await picker.locator('#practiceStartModes').click();
+   await page.locator('#practiceStudy4Entry').click();
+   assert.equal(await page.locator('#practiceSessionBar').isVisible(),false);
    assert.equal(await page.locator('#study4PracticePanel').isVisible(),true);
    assert.equal(await page.locator('#study4Level').inputValue(),'3');
    const url=await page.locator('.s4-visit').getAttribute('href');
@@ -84,7 +83,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
     const link=await page.locator('.s4-visit').getAttribute('href');
     assert.ok(link.startsWith('https://study4.com/tests/'),'valid source URL');
    }
-   await page.locator('#practiceSessionStop').click();
+   await page.evaluate(()=>HSKStudio.navigate('practice'));
    await page.evaluate(()=>HSKStudio.navigate('practice'));
    assert.equal(await disclosure.evaluate(el=>el.open),false,'single mode starts from collapsed picker');
    assert.equal(await picker.locator('#practiceStartModes').isVisible(),false);
@@ -130,3 +129,4 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  }
  }finally{await browser.close();server.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
+
