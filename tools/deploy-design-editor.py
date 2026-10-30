@@ -83,7 +83,10 @@ def main():
     bindings = [{'name': key, 'type': 'plain_text', 'text': str(value)} for key, value in config['vars'].items()]
     bindings += [{'name': row['binding'], 'type': 'r2_bucket', 'bucket_name': row['bucket_name']} for row in config['r2_buckets']]
     bindings.append({'name': 'ASSETS', 'type': 'assets'})
+    if os.environ.get('OPENAI_API_KEY'):
+        bindings.append({'name': 'OPENAI_API_KEY', 'type': 'secret_text', 'text': os.environ['OPENAI_API_KEY']})
     metadata = {'main_module': 'worker.mjs', 'compatibility_date': config['compatibility_date'], 'bindings': bindings,
+                'keep_bindings': ['secret_text'],
                 'assets': {'jwt': completion, 'config': {'run_worker_first': True, 'html_handling': 'none', 'not_found_handling': 'none'}}}
     body, mime = multipart([('metadata', None, 'application/json', json.dumps(metadata).encode()),
                             ('worker.mjs', 'worker.mjs', 'application/javascript+module', args.bundle.read_bytes())])

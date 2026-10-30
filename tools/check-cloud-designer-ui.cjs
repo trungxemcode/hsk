@@ -1,6 +1,6 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),{pathToFileURL}=require('node:url'),{chromium}=require('playwright');
 (async()=>{
- const {handleDesign}=await import(pathToFileURL(path.resolve('server/design/worker.mjs'))),root=process.cwd();let content=null,etag=0,unavailable=false,allowPublic=true,designReads=0,editorURL,publicURL,browser;const errors=[];
+ const {handleDesign}=await import(pathToFileURL(path.resolve('server/design/worker.mjs'))),root=process.cwd();let openaiDelay=0,openaiCalls=0;let content=null,etag=0,unavailable=false,allowPublic=true,designReads=0,editorURL,publicURL,browser;const errors=[];
  const bucket={async get(){const value=content;return value?{etag:String(etag),json:async()=>JSON.parse(value)}:null;},async put(k,value,options){if(options.onlyIf.etagMatches!==undefined&&options.onlyIf.etagMatches!==String(etag))return null;if(options.onlyIf.etagDoesNotMatch&&content)return null;content=value;return {etag:String(++etag)};}};
  const types={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.woff2':'font/woff2','.svg':'image/svg+xml','.png':'image/png','.gz':'application/gzip'};
  async function asset(request,editor=false){
@@ -12,7 +12,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
  const env={DESIGN_BUCKET:bucket,FIREBASE_API_KEY:'test-public-key',APP_RELEASE:'test',ASSETS:{fetch:request=>asset(request,true)}};
  const fetchFn=async(u,init)=>JSON.parse(init.body).idToken==='browser-owner'?Response.json({users:[{localId:'BIvUyItDYJWcLvlhhtYFyj5csBH2'}]}):new Response('',{status:400});
  async function start(handler){const s=http.createServer(async(req,res)=>{try{const chunks=[];for await(const chunk of req)chunks.push(chunk);const request=new Request('http://127.0.0.1:'+s.address().port+req.url,{method:req.method,headers:req.headers,...(chunks.length?{body:Buffer.concat(chunks),duplex:'half'}:{})}),response=await handler(request);res.writeHead(response.status,Object.fromEntries(response.headers));res.end(Buffer.from(await response.arrayBuffer()));}catch(e){res.writeHead(500);res.end(String(e));}});await new Promise(resolve=>s.listen(0,'127.0.0.1',resolve));return s;}
- const editor=await start(request=>{if(new URL(request.url).pathname==='/api/design')designReads++;return unavailable&&new URL(request.url).pathname==='/api/design'?new Response('temporary',{status:503}):handleDesign(request,env,{}, {fetchFn});});editorURL='http://127.0.0.1:'+editor.address().port;
+ const editor=await start(request=>{if(new URL(request.url).pathname==='/api/design')designReads++;return unavailable&&new URL(request.url).pathname==='/api/design'?new Response('temporary',{status:503}):handleDesign(request,env,{}, {fetchFn,openaiFetch:async(url,options)=>{openaiCalls++;const body=JSON.parse(options.body);assert.equal(body.store,false);assert.equal(options.headers.Authorization,'Bearer sk-browser-test-not-real');if(openaiDelay)await new Promise(r=>setTimeout(r,openaiDelay));return Response.json({status:'completed',output:[{content:[{type:'output_text',text:JSON.stringify({summary:'Đã tăng chữ box được chọn',changes:[{property:'fontSize',value:29}]})}]}]});}});});editorURL='http://127.0.0.1:'+editor.address().port;
  const live=await start(request=>asset(request));publicURL='http://127.0.0.1:'+live.address().port;env.PUBLIC_URL=publicURL;env.PUBLIC_ORIGINS=publicURL;
  try{
  browser=await chromium.launch({executablePath:process.env.CHROME_EXECUTABLE});const context=await browser.newContext({viewport:{width:1600,height:1000},serviceWorkers:'block'});
@@ -22,6 +22,21 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
  const baseline=await ordinary.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize);
  const page=await editorPage(),frame=await(await page.locator('#canvas').elementHandle()).contentFrame();
  assert.equal(await frame.evaluate(()=>localStorage.getItem('test-learner-sentinel')),null,'editor preview has separate learner storage');
+ await page.screenshot({path:'/tmp/cloud-designer-chat-before.png',fullPage:true});
+ await frame.locator('#homeDailyWord h3').click();await page.locator('#ai-panel > summary').click();await page.locator('#ai-panel details > summary').click();
+ await page.locator('#ai-key').fill('sk-browser-test-not-real');await page.locator('#ai-request').fill('Tăng cỡ chữ lên 29px');await page.locator('#ai-send').click();
+ await page.waitForFunction(()=>document.getElementById('ai-status').textContent.includes('Đã sửa box'));
+ assert.equal(await page.locator('#field-fontSize').inputValue(),'29','ChatGPT changes selected object');assert.equal(openaiCalls,1);
+ assert.equal(await frame.locator('#ai-panel').count(),0,'AI controls never enter release iframe');
+ assert.equal(await page.evaluate(()=>JSON.stringify({...localStorage,...sessionStorage}).includes('sk-browser-test')),false,'API key never persists in browser storage');
+ await page.screenshot({path:'/tmp/cloud-designer-chat-after.png',fullPage:true});
+ await page.locator('#undo').click();assert.equal(await page.locator('#field-fontSize').inputValue(),'','AI edit is one undo step');
+ openaiDelay=600;await page.locator('#ai-send').click();await page.locator('#field-fontSize').fill('25');await page.locator('#field-fontSize').press('Tab');
+ await page.waitForFunction(()=>document.getElementById('ai-status').textContent.includes('thông số đã đổi'));
+ assert.equal(await page.locator('#field-fontSize').inputValue(),'25','late AI cannot overwrite manual edits');await page.locator('#undo').click();
+ openaiDelay=0;await page.locator('#ai-clear-key').click();assert.equal(await page.locator('#ai-key').inputValue(),'');
+ await page.locator('#ai-panel > summary').click();
+
  await frame.locator('#homeDailyWord h3').click();await page.locator('#field-fontSize').fill('31');await page.locator('#field-fontSize').press('Tab');await page.waitForFunction(()=>document.getElementById('cloud-status').textContent.includes('Đã đồng bộ'));
  assert.equal(JSON.parse(content).config.pages.home.styles.desktop['word-heading'].fontSize,31);
  await ordinary.waitForFunction(()=>getComputedStyle(document.querySelector('#homeDailyWord h3')).fontSize==='31px',null,{timeout:25000});
