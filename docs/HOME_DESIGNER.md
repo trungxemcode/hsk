@@ -58,3 +58,8 @@ Các tab Vị trí, Border, Animation, Chữ đưa bạn tới đúng nhóm tron
 
 ### Thước và đường căn
 Thước pixel theo tỷ lệ zoom. Kéo từ thước trên để tạo đường căn ngang, từ thước trái để tạo đường căn dọc. Kéo đường để di chuyển; nhấp đúp, Delete hoặc kéo ra ngoài khung để xóa; nút Xóa đường căn xóa toàn bộ đường của trang/kích thước hiện tại. Escape hủy thao tác kéo. Đường căn chỉ tồn tại trong phiên editor, riêng theo trang và PC/điện thoại; không lưu vào cấu hình/CSS, không đồng bộ sang bản phát hành, ẩn khi Dùng thử.
+
+### Tự triển khai sau merge
+Workflow `Deploy UX UI editor` chạy khi `main` được cập nhật, hoặc chạy thủ công bằng Actions → Run workflow trên `main`. Mỗi lượt kiểm tra PWA/backend, đóng gói app/editor, triển khai riêng `hsk-ui-designer`, rồi đối chiếu release và toàn bộ tệp editor qua HTTPS. Các lượt triển khai tuần tự; không hủy giữa lúc upload. Dữ liệu thiết kế R2 và các Worker nhạc/AI/voice được giữ nguyên.
+
+Cấu hình một lần tại Settings → Secrets and variables → Actions: `CLOUDFLARE_API_TOKEN` (token Cloudflare có quyền Workers Editor cho Worker hsk-ui-designer trong đúng account), `CLOUDFLARE_ACCOUNT_ID`. Không dùng token OAuth đăng nhập tạm thời làm secret tự triển khai. Thiếu secrets thì workflow dừng với thông báo rõ ràng. `APP_RELEASE` lấy từ `app-version.json` khi deploy, không phụ thuộc giá trị cũ trong Wrangler config. Link editor: https://hsk-ui-designer.trung-hsk668.workers.dev/.

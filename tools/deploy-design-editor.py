@@ -52,6 +52,8 @@ def main():
     if config['name'] != 'hsk-ui-designer':
         raise SystemExit('This deployer is restricted to the dedicated design Worker.')
     token = os.environ.get('CLOUDFLARE_API_TOKEN')
+    if not token and os.environ.get('GITHUB_ACTIONS') == 'true':
+        raise SystemExit('Missing Actions secret CLOUDFLARE_API_TOKEN.')
     if not token:
         token = tomllib.loads((Path.home() / '.config/.wrangler/config/default.toml').read_text())['oauth_token']
     account = '/accounts/' + args.account_id
@@ -77,6 +79,7 @@ def main():
         if uploaded.get('jwt'):
             completion = uploaded['jwt']
         print('Uploaded asset batch', index + 1, flush=True)
+    config['vars']['APP_RELEASE'] = json.loads((ROOT / 'app-version.json').read_text())['release']
     bindings = [{'name': key, 'type': 'plain_text', 'text': str(value)} for key, value in config['vars'].items()]
     bindings += [{'name': row['binding'], 'type': 'r2_bucket', 'bucket_name': row['bucket_name']} for row in config['r2_buckets']]
     bindings.append({'name': 'ASSETS', 'type': 'assets'})

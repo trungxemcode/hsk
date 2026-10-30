@@ -2036,6 +2036,27 @@
           "value": "guides never enter release iframe"
         }
       ]
+    },
+    {
+      "id": "editor-automatic-deployment",
+      "name": "Tự triển khai editor sau merge main và xác minh bản thật",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": ".github/workflows/deploy-design-editor.yml",
+          "value": "hsk-design-editor-production"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/verify-live-design-editor.py",
+          "value": "def verify(fetch):"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/test_design_deployment.py",
+          "value": "test_rejects_stale_asset_even_with_correct_release"
+        }
+      ]
     }
   ]
 }
