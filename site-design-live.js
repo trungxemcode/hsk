@@ -14,7 +14,7 @@
   }catch{delay=Math.min(60000,delay*2);}finally{working=false;schedule();}
  }
  async function start(){
-  try{const response=await fetch(configURL,{cache:'no-store'});if(!response.ok)return;const config=await response.json();if(config.enabled!==true)return;const url=new URL(config.endpoint,location.href);if(url.protocol!=='https:'&&!(url.hostname==='127.0.0.1'&&location.hostname==='127.0.0.1'))return;endpoint=url.href;try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(saved?.endpoint===endpoint)apply(saved.css,saved.revision);}catch{}await check();}catch{}
+  try{const response=await fetch(configURL,{cache:'no-store'});if(!response.ok)return;const config=await response.json();if(config.enabled!==true||(Array.isArray(config.publicOrigins)&&!config.publicOrigins.includes(location.origin)))return;const url=new URL(config.endpoint,location.href);if(url.protocol!=='https:'&&!(url.hostname==='127.0.0.1'&&location.hostname==='127.0.0.1'))return;endpoint=url.href;try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(saved?.endpoint===endpoint)apply(saved.css,saved.revision);}catch{}await check();}catch{}
  }
  document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer);else check();});window.addEventListener('online',check);window.addEventListener('offline',()=>clearTimeout(timer));window.addEventListener('pagehide',()=>clearTimeout(timer));window.addEventListener('pageshow',check);start();
 })();

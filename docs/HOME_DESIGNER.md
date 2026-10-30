@@ -48,3 +48,5 @@ Tên home-design.json/CSS được giữ để tương thích bản trang chủ 
 Nếu hai tab cùng chỉnh, tab cũ bị dừng ghi thay vì ghi đè. Xuất nháp trước khi tải lại; nút Tải nháp chưa đồng bộ giúp giữ thay đổi chưa gửi. Hoàn tác cũng được đồng bộ sang bản phát hành. Khi mất mạng, thay đổi chưa gửi còn trong nháp; bản phát hành giữ CSS gần nhất. Các phần tử/dữ liệu chỉ xuất hiện sau đăng nhập hoặc từ API ngoài không được giả lập trong preview.
 
 Triển khai editor: chạy python3 tools/pack-design-editor.py, rồi npx wrangler deploy --config server/design/wrangler.jsonc trong môi trường Cloudflare đã đăng nhập. Chỉ bundle public assets; không gói secrets. Worker này độc lập với API nhạc/AI/voice.
+
+Nếu Wrangler không hỗ trợ API deployment của phiên đăng nhập hiện tại, có thể dùng Direct Upload API chính thức: tạo bundle bằng npx wrangler deploy --dry-run --outdir /tmp/hsk-cloud-worker-bundle --config server/design/wrangler.jsonc, rồi python3 tools/deploy-design-editor.py --account-id ACCOUNT_ID --bundle /tmp/hsk-cloud-worker-bundle/worker.js (Python 3.11+). Công cụ chỉ triển khai Worker hsk-ui-designer và không in token.

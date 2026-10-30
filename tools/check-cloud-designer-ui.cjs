@@ -1,10 +1,10 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),{pathToFileURL}=require('node:url'),{chromium}=require('playwright');
 (async()=>{
- const {handleDesign}=await import(pathToFileURL(path.resolve('server/design/worker.mjs'))),root=process.cwd();let content=null,etag=0,unavailable=false,editorURL,publicURL,browser;const errors=[];
+ const {handleDesign}=await import(pathToFileURL(path.resolve('server/design/worker.mjs'))),root=process.cwd();let content=null,etag=0,unavailable=false,allowPublic=true,designReads=0,editorURL,publicURL,browser;const errors=[];
  const bucket={async get(){const value=content;return value?{etag:String(etag),json:async()=>JSON.parse(value)}:null;},async put(k,value,options){if(options.onlyIf.etagMatches!==undefined&&options.onlyIf.etagMatches!==String(etag))return null;if(options.onlyIf.etagDoesNotMatch&&content)return null;content=value;return {etag:String(++etag)};}};
  const types={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.woff2':'font/woff2','.svg':'image/svg+xml','.png':'image/png','.gz':'application/gzip'};
  async function asset(request,editor=false){
-  const u=new URL(request.url);if(u.pathname==='/site-design-config.json')return Response.json({enabled:true,endpoint:editorURL+'/api/design'});
+  const u=new URL(request.url);if(u.pathname==='/site-design-config.json')return Response.json({enabled:true,endpoint:editorURL+'/api/design',publicOrigins:allowPublic?[publicURL]:[]});
   if(['/account-config.json','/push-config.json'].includes(u.pathname))return Response.json({enabled:false});
   let file=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile())return new Response('missing',{status:404});
   return new Response(fs.readFileSync(file),{headers:{'Content-Type':types[path.extname(file)]||'application/octet-stream'}});
@@ -12,7 +12,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
  const env={DESIGN_BUCKET:bucket,FIREBASE_API_KEY:'test-public-key',APP_RELEASE:'test',ASSETS:{fetch:request=>asset(request,true)}};
  const fetchFn=async(u,init)=>JSON.parse(init.body).idToken==='browser-owner'?Response.json({users:[{localId:'BIvUyItDYJWcLvlhhtYFyj5csBH2'}]}):new Response('',{status:400});
  async function start(handler){const s=http.createServer(async(req,res)=>{try{const chunks=[];for await(const chunk of req)chunks.push(chunk);const request=new Request('http://127.0.0.1:'+s.address().port+req.url,{method:req.method,headers:req.headers,...(chunks.length?{body:Buffer.concat(chunks),duplex:'half'}:{})}),response=await handler(request);res.writeHead(response.status,Object.fromEntries(response.headers));res.end(Buffer.from(await response.arrayBuffer()));}catch(e){res.writeHead(500);res.end(String(e));}});await new Promise(resolve=>s.listen(0,'127.0.0.1',resolve));return s;}
- const editor=await start(request=>unavailable&&new URL(request.url).pathname==='/api/design'?new Response('temporary',{status:503}):handleDesign(request,env,{}, {fetchFn}));editorURL='http://127.0.0.1:'+editor.address().port;
+ const editor=await start(request=>{if(new URL(request.url).pathname==='/api/design')designReads++;return unavailable&&new URL(request.url).pathname==='/api/design'?new Response('temporary',{status:503}):handleDesign(request,env,{}, {fetchFn});});editorURL='http://127.0.0.1:'+editor.address().port;
  const live=await start(request=>asset(request));publicURL='http://127.0.0.1:'+live.address().port;env.PUBLIC_URL=publicURL;env.PUBLIC_ORIGINS=publicURL;
  try{
  browser=await chromium.launch({executablePath:process.env.CHROME_EXECUTABLE});const context=await browser.newContext({viewport:{width:1600,height:1000},serviceWorkers:'block'});
@@ -36,6 +36,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
  const download=await Promise.all([other.waitForEvent('download'),other.getByText('Tải nháp chưa đồng bộ',{exact:true}).click()]).then(r=>r[0]);const stream=await download.createReadStream();let downloaded='';for await(const chunk of stream)downloaded+=chunk;assert.equal(JSON.parse(downloaded).pages.home.styles.desktop['word-heading'].fontSize,34);
  await other.close();await page.screenshot({path:'/tmp/cloud-designer-editor.png',fullPage:true});await page.close();ordinary=await context.newPage();await ordinary.goto(publicURL+'/index.html');await ordinary.waitForFunction(()=>document.querySelector('#homeDailyWord h3')&&getComputedStyle(document.querySelector('#homeDailyWord h3')).fontSize==='32px');unavailable=true;await ordinary.reload();await ordinary.waitForFunction(()=>document.querySelector('#homeDailyWord h3')&&getComputedStyle(document.querySelector('#homeDailyWord h3')).fontSize==='32px');
  await ordinary.screenshot({path:'/tmp/cloud-designer-release.png',fullPage:true});
- assert.deepEqual(errors,[]);console.log('PASS cloud designer: owner login, automatic publish, live polling without reload, isolated preview storage, undo sync, two-tab conflict protection/recovery and cached CSS during outage.');
+ allowPublic=false;const readsBefore=designReads;await ordinary.reload();await ordinary.waitForFunction(expected=>document.querySelector('#homeDailyWord h3')&&getComputedStyle(document.querySelector('#homeDailyWord h3')).fontSize===expected,baseline);await ordinary.waitForTimeout(300);assert.equal(designReads,readsBefore,'non-release origin must not fetch or apply cloud CSS');
+ assert.deepEqual(errors,[]);console.log('PASS cloud designer: owner login, automatic publish, live polling without reload, isolated preview storage, undo sync, two-tab conflict protection/recovery cached CSS during outage and default layout on non-release origins.');
  }finally{await browser?.close();editor.closeAllConnections();live.closeAllConnections();await Promise.all([new Promise(r=>editor.close(r)),new Promise(r=>live.close(r))]);}
 })().catch(e=>{console.error(e);process.exitCode=1});
