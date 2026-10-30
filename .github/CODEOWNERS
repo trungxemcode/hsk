@@ -11,3 +11,6 @@
 /tools/check-*.cjs @trungxemcode
 /server/*.test.mjs @trungxemcode
 /.github/workflows/*.yml @trungxemcode
+/.github/ui-scope*.json @trungxemcode
+/tools/*ui-outside-scope*.cjs @trungxemcode
+/tools/apply-ui-scope-ruleset.py @trungxemcode

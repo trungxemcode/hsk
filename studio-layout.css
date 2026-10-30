@@ -575,3 +575,10 @@ body.studio-enabled .lesson-section-nav button{min-width:0;white-space:normal;li
 @media(max-width:600px){body.studio-enabled .lesson-section-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.lesson-step-footer{gap:10px;margin-top:20px;padding-top:16px}.lesson-step-footer button{flex:1 1 140px}.lesson-section{scroll-margin-top:90px}}
 
 .admin-account-roles{margin-top:24px}.admin-role-controls{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.admin-role-controls input,.admin-role-controls select{min-width:0;max-width:100%;font-size:16px;flex:1 1 200px}.admin-role-row{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)}.admin-role-row>div{min-width:0;overflow-wrap:anywhere}.admin-role-row button{flex-shrink:0}
+
+/* Equal flow spacing for the large desktop account cards; mobile keeps its
+   existing accordion layout and equalizes only the adjacent voice/storage cards. */
+body.studio-enabled:not(.mobile-ux) #accountPanel#accountPanel#accountPanel#accountPanel > :is(.account-detail,.account-version){margin-block:0!important;translate:none!important}
+body.studio-enabled:not(.mobile-ux) #accountPanel#accountPanel#accountPanel#accountPanel > :is(.account-detail,.account-version) + :is(.account-detail,.account-version){margin-block-start:16px!important}
+body.mobile-ux #accountPanel#accountPanel#accountPanel#accountPanel > article.account-detail{margin-block:0!important;translate:none!important}
+body.mobile-ux #accountPanel#accountPanel#accountPanel#accountPanel > article.account-detail + article.account-detail{margin-block-start:16px!important}

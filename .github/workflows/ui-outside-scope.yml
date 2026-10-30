@@ -1,0 +1,46 @@
+name: Compare UI outside requested scope
+on:
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: ui-scope-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  compare:
+    name: ui-outside-scope
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix /tmp/hsk-ui-scope playwright@1.56.1 pngjs@7.0.0 pixelmatch@5.3.0
+      - name: Install fonts
+        run: sudo apt-get update -qq && sudo apt-get install -y fonts-noto-cjk
+      - name: Test guard logic
+        env:
+          NODE_PATH: /tmp/hsk-ui-scope/node_modules
+        run: |
+          node --test tools/test-ui-outside-scope.cjs
+          python3 -m unittest discover -s tools -p 'test_ui_scope_ruleset.py'
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/test-ui-outside-scope-browser.cjs
+      - name: Compare base and final head
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          NODE_PATH: /tmp/hsk-ui-scope/node_modules
+        run: |
+          git worktree add --detach /tmp/hsk-ui-before "$(git merge-base "$PR_BASE" HEAD)"
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-ui-outside-scope.cjs /tmp/hsk-ui-before "$PWD" /tmp/ui-outside-scope
+      - name: Keep before, after, diff and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-outside-scope-${{ github.event.pull_request.head.sha }}
+          path: /tmp/ui-outside-scope
+          retention-days: 14
