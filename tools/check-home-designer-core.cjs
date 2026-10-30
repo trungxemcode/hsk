@@ -36,3 +36,8 @@ test('multi-object layout equalizes edge gaps, centers different sizes and keeps
  const spaced=multi.layout(items,'distribute-x'),positions=spaced.map((d,i)=>items[i].x+d.dx);assert.equal(positions[1]-positions[0]-items[0].width,positions[2]-positions[1]-items[1].width);assert.equal(positions[0],0);assert.equal(positions[2],100);
  assert.deepEqual(multi.layout(items,'bottom').map((d,i)=>items[i].y+d.dy+items[i].height),[120,120,120]);assert.equal(JSON.stringify(items),before);assert.deepEqual(multi.layout(items.slice(0,2),'distribute-y'),[]);
 });
+test('key-object alignment uses only selected objects and keeps the last selected anchor fixed',()=>{
+ const multi=require('./home-designer/multi.js'),items=[{key:'small-a',x:10,y:5,width:20,height:10},{key:'small-b',x:100,y:80,width:40,height:30}];
+ const changes=multi.layout(items,'center-x','small-b');assert.equal(changes[1].dx,0);assert.equal(items[0].x+changes[0].dx+10,120);assert.equal(changes[0].dy,0);
+ const vertical=multi.layout(items,'center-y','small-b');assert.equal(vertical[1].dy,0);assert.equal(items[0].y+vertical[0].dy+5,95);
+});

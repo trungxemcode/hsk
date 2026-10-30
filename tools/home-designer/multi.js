@@ -1,8 +1,10 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.HSKDesignerMulti=api;})(typeof globalThis!=='undefined'?globalThis:this,()=>{
  'use strict';
  function layout(items,action){
+  const referenceKey=arguments[2]||null;
   if(items.length<(action.startsWith('distribute')?3:2))return [];
-  const left=Math.min(...items.map(n=>n.x)),top=Math.min(...items.map(n=>n.y)),right=Math.max(...items.map(n=>n.x+n.width)),bottom=Math.max(...items.map(n=>n.y+n.height));
+  const reference=items.find(n=>n.key===referenceKey),bounds=reference&&!action.startsWith('distribute')?[reference]:items;
+  const left=Math.min(...bounds.map(n=>n.x)),top=Math.min(...bounds.map(n=>n.y)),right=Math.max(...bounds.map(n=>n.x+n.width)),bottom=Math.max(...bounds.map(n=>n.y+n.height));
   const delta=new Map(items.map(n=>[n.key,{key:n.key,dx:0,dy:0}]));
   if(action.startsWith('distribute')){
    const horizontal=action==='distribute-x',axis=horizontal?'x':'y',size=horizontal?'width':'height',sorted=[...items].sort((a,b)=>a[axis]-b[axis]);
@@ -29,7 +31,7 @@
    if(!g.moved){choose({target:g.target,clientX:g.x,clientY:g.y,type:'pointerdown',shiftKey:g.add,preventDefault(){},stopImmediatePropagation(){}});return;}
    const x=Math.min(g.x,g.endX),y=Math.min(g.y,g.endY),right=Math.max(g.x,g.endX),bottom=Math.max(g.y,g.endY),r=root(),seen=new Set();
    let entries=[...catalog().values()].map(c=>({key:c.key,n:node(c.key)})).filter(({n})=>{if(!n||n===r||seen.has(n)||!visible(n))return false;seen.add(n);const b=n.getBoundingClientRect();return b.width>0&&b.height>0&&b.left>=x&&b.top>=y&&b.right<=right&&b.bottom<=bottom;});
-   entries=entries.filter(a=>!entries.some(b=>a!==b&&(hard()?a.n.contains(b.n):b.n.contains(a.n))));selectMany(entries.map(c=>c.key),g.add);
+   entries=entries.filter(a=>!entries.some(b=>a!==b&&a.n.contains(b.n)));selectMany(entries.map(c=>c.key),g.add);
   },true);
   doc.addEventListener('pointercancel',cancel,true);win.addEventListener('blur',cancel);doc.addEventListener('keydown',e=>{if(e.key==='Escape'&&gesture){e.preventDefault();e.stopImmediatePropagation();cancel();}},true);
   return {draw,cancel,suppressClick,enable(value){cancel();suppressUntil=0;enabled=!!value;doc.documentElement.classList.toggle('hd-marquee-mode',enabled&&editing());},editing(){cancel();doc.documentElement.classList.toggle('hd-marquee-mode',enabled&&editing());draw();}};
