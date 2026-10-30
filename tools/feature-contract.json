@@ -2151,6 +2151,38 @@
           "value": "marquee selects multiple contained objects"
         }
       ]
+    },
+    {
+      "id": "editor-group-drag",
+      "name": "Kéo cả nhóm đang chọn, Hoàn tác và hủy nguyên nhóm",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/editor.js",
+          "value": "function motionTargets"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": "Escape restores the whole group"
+        }
+      ]
+    },
+    {
+      "id": "editor-align-selected-anchor",
+      "name": "Căn giữa object đã chọn, giữ object mốc và bỏ khung cha",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/editor.html",
+          "value": "id=\"align-reference\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": "selected key object stays fixed"
+        }
+      ]
     }
   ]
 }
