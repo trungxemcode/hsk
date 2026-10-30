@@ -8,7 +8,7 @@ window.HSKDesignerObjects={attach({doc,win,overlay,schema,editable,choose,node,s
  function cancel(){replayCleanup?.();if(!gesture)return;const g=gesture;gesture=null;if(queued)win.cancelAnimationFrame(queued);queued=0;pending=null;badge.hidden=true;doc.documentElement.classList.remove('hsk-object-dragging');if(g.started){callbacks.cancel();restoreStyles(g.n,g.frozen);callbacks.settled?.();}try{doc.documentElement.releasePointerCapture(g.pointerId);}catch{}}
  function begin(e,key,kind='move',axis='both'){
   if(!editable()||e.button!==0||!key)return;cancel();const n=node(key);if(!n)return;e.preventDefault();e.stopImmediatePropagation();
-  if(doc.activeElement?.matches('input,textarea,select'))doc.activeElement.blur();win.focus();const computed=win.getComputedStyle(n),pose=callbacks.pose(key);gesture={key,n,pointerId:e.pointerId,kind,axis,x:e.clientX,y:e.clientY,pose,inline:computed.display==='inline',width:parseFloat(computed.width)||n.offsetWidth,height:parseFloat(computed.height)||n.offsetHeight,started:false,patch:null};
+  if(doc.activeElement?.matches('input,textarea,select'))doc.activeElement.blur();win.focus();const computed=win.getComputedStyle(n),pose=callbacks.pose(key);gesture={key,n,pointerId:e.pointerId,kind,axis,x:e.clientX,y:e.clientY,pose,inline:computed.display==='inline',width:parseFloat(computed.width)||n.offsetWidth||n.getBoundingClientRect().width,height:parseFloat(computed.height)||n.offsetHeight||n.getBoundingClientRect().height,started:false,patch:null};
   try{doc.documentElement.setPointerCapture(e.pointerId);}catch{}
  }
  function move(e){

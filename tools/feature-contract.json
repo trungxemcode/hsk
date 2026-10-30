@@ -2088,6 +2088,27 @@
           "value": "late AI cannot overwrite manual edits"
         }
       ]
+    },
+    {
+      "id": "editor-hard-edit-nested",
+      "name": "Hard-edit chọn phần tử con trong group và lên cấp cha",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/editor.html",
+          "value": "id=\"hard-edit\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/bridge.js",
+          "value": "function preciseTarget(e)"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": "hard-edit never wraps or replaces DOM"
+        }
+      ]
     }
   ]
 }
