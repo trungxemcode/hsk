@@ -21,3 +21,18 @@ test('Python and browser export identical position/border/motion CSS in every tr
  const py="import importlib.util,json,sys;from pathlib import Path;s=importlib.util.spec_from_file_location('designer','tools/serve-home-designer.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m);print(m.generate_css(json.loads(Path('tools/home-designer/schema.json').read_text()),json.loads(sys.stdin.read())),end='')";
  for(const trigger of ['appear','hover','press']){const c=core.emptyProject(schema);for(const mode of ['desktop','mobile'])c.pages.home.styles[mode]['hero-action']={position:'absolute',top:10,left:20,width:130,borderColor:mode==='desktop'?'#aBc':'var(--line)',borderStyle:'solid',borderRadius:12,moveX:15,moveY:-9,rotate:12,scale:.9,opacity:.75,animationName:'hsk-design-spin',animationTrigger:trigger,animationDuration:850,animationDelay:25,animationIterations:'3',transitionProperty:'all',transitionDuration:250};assert.equal(execFileSync('python3',['-c',py],{input:JSON.stringify(c),encoding:'utf8'}),core.generateCSS(schema,c));}
 });
+
+test('independent horizontal and vertical gaps override legacy uniform gap and preserve Python parity',()=>{
+ const c=core.emptyProject(schema);c.pages.home.styles.desktop['hero-action']={gap:8,columnGap:24,rowGap:12};
+ const css=core.generateCSS(schema,c);assert.match(css,/gap:8px!important;column-gap:24px!important;row-gap:12px!important/);assert.deepEqual(c.pages.home.styles.mobile,{});
+ const py="import importlib.util,json,sys;from pathlib import Path;s=importlib.util.spec_from_file_location('designer','tools/serve-home-designer.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m);print(m.generate_css(json.loads(Path('tools/home-designer/schema.json').read_text()),json.loads(sys.stdin.read())),end='')";
+ assert.equal(execFileSync('python3',['-c',py],{input:JSON.stringify(c),encoding:'utf8'}),css);
+ for(const bad of [-1,65,1.5,'12px;display:none']){c.pages.home.styles.desktop['hero-action'].columnGap=bad;assert.throws(()=>core.validate(schema,c));}
+ const old=core.empty(schema);old.styles.desktop['hero-action']={gap:9};assert.deepEqual(core.upgrade(schema,old).pages.home.styles.desktop['hero-action'],{gap:9});
+});
+test('multi-object layout equalizes edge gaps, centers different sizes and keeps inputs unchanged',()=>{
+ const multi=require('./home-designer/multi.js'),items=[{key:'a',x:0,y:10,width:20,height:10},{key:'b',x:40,y:40,width:40,height:20},{key:'c',x:100,y:90,width:10,height:30}],before=JSON.stringify(items);
+ const centered=multi.layout(items,'center-x');assert.deepEqual(centered.map((d,i)=>items[i].x+d.dx+items[i].width/2),[55,55,55]);
+ const spaced=multi.layout(items,'distribute-x'),positions=spaced.map((d,i)=>items[i].x+d.dx);assert.equal(positions[1]-positions[0]-items[0].width,positions[2]-positions[1]-items[1].width);assert.equal(positions[0],0);assert.equal(positions[2],100);
+ assert.deepEqual(multi.layout(items,'bottom').map((d,i)=>items[i].y+d.dy+items[i].height),[120,120,120]);assert.equal(JSON.stringify(items),before);assert.deepEqual(multi.layout(items.slice(0,2),'distribute-y'),[]);
+});

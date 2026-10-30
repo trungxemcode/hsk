@@ -412,8 +412,28 @@
     },
     "gap": {
       "type": "number",
-      "label": "Khoảng giữa các phần tử",
+      "label": "Khoảng cách chung",
       "css": "gap",
+      "unit": "px",
+      "min": 0,
+      "max": 64,
+      "integer": true,
+      "group": "Căn hàng"
+    },
+    "columnGap": {
+      "type": "number",
+      "label": "Khoảng cách ngang",
+      "css": "column-gap",
+      "unit": "px",
+      "min": 0,
+      "max": 64,
+      "integer": true,
+      "group": "Căn hàng"
+    },
+    "rowGap": {
+      "type": "number",
+      "label": "Khoảng cách dọc",
+      "css": "row-gap",
       "unit": "px",
       "min": 0,
       "max": 64,
