@@ -14,21 +14,34 @@ from urllib.parse import urlsplit
 import webbrowser
 
 
-def validate(schema, data):
-    if not isinstance(data, dict) or type(data.get('schema')) is not int or data.get('schema') != 1 or data.get('page') != 'home':
-        raise ValueError('Tệp không phải cấu hình trang chủ HSK phiên bản 1.')
-    if set(data) != {'schema', 'page', 'styles', 'order'}:
-        raise ValueError('Trường cấu hình không hợp lệ.')
-    if not all(isinstance(data.get(k), dict) and set(data[k]) == {'desktop', 'mobile'} for k in ('styles', 'order')):
+def page_schemas(schema):
+    return schema.get('pages') or [{'id': 'home', 'label': 'Trang chủ', 'root': '#studioHome', 'scope': 'html body.studio-enabled[data-studio-hub="home"] #studioHome#studioHome#studioHome', 'reorder': True, 'components': schema['components'], 'groups': schema['groups']}]
+
+
+def blank_page():
+    return {'components': {}, 'styles': {'desktop': {}, 'mobile': {}}, 'order': {'desktop': [], 'mobile': []}}
+
+
+def empty_project(schema):
+    return {'schema': 2, 'pages': {p['id']: blank_page() for p in page_schemas(schema)}}
+
+
+def selector_ok(value):
+    if not isinstance(value, str) or len(value) > 360:
+        return False
+    if value == '':
+        return True
+    segment = r'(?:#[A-Za-z_][\w-]*|[a-z][a-z0-9-]*(?::nth-of-type\([1-9][0-9]{0,4}\))?)'
+    return bool(re.fullmatch(segment + r'(?: > ' + segment + r')*', value)) and not re.search(r'(?:^| > )(?:html|body|head|script|style|link|meta)(?:$|:| > )', value)
+
+
+def validate_styles(schema, styles, keys):
+    if not isinstance(styles, dict) or set(styles) != {'desktop', 'mobile'}:
         raise ValueError('Thiếu cấu hình PC/điện thoại.')
-    keys = {c['key'] for c in schema['components']}
     for mode in ('desktop', 'mobile'):
-        order, styles = data['order'][mode], data['styles'][mode]
-        if not isinstance(order, list) or not all(isinstance(x, str) for x in order) or len(order) != len(schema['groups'][mode]) or len(set(order)) != len(order) or set(order) != set(schema['groups'][mode]):
-            raise ValueError('Danh sách khối có phần tử thiếu, trùng hoặc không hợp lệ.')
-        if not isinstance(styles, dict) or not set(styles).issubset(keys):
+        if not isinstance(styles[mode], dict) or not set(styles[mode]).issubset(keys):
             raise ValueError('Phần tử không được phép chỉnh.')
-        for props in styles.values():
+        for props in styles[mode].values():
             if not isinstance(props, dict):
                 raise ValueError('Thuộc tính không hợp lệ.')
             for name, value in props.items():
@@ -40,39 +53,101 @@ def validate(schema, data):
                         raise ValueError('Giá trị ngoài giới hạn: ' + p['label'])
                 elif not isinstance(value, str) or value not in [o['value'] for o in p['options']]:
                     raise ValueError('Giá trị không hợp lệ: ' + p['label'])
-    return data
+    return styles
+
+
+def validate(schema, data):
+    if not isinstance(data, dict) or type(data.get('schema')) is not int:
+        raise ValueError('Tệp không phải bản nháp giao diện HSK phiên bản 1 hoặc 2.')
+    if data['schema'] == 1:
+        if set(data) != {'schema', 'page', 'styles', 'order'} or data['page'] != 'home':
+            raise ValueError('Bản nháp trang chủ không hợp lệ.')
+        validate_styles(schema, data['styles'], {c['key'] for c in schema['components']})
+        if not isinstance(data['order'], dict) or set(data['order']) != {'desktop', 'mobile'}:
+            raise ValueError('Thiếu thứ tự khối.')
+        for mode in ('desktop', 'mobile'):
+            order = data['order'][mode]
+            if not isinstance(order, list) or not all(isinstance(k, str) for k in order) or len(order) != len(schema['groups'][mode]) or len(set(order)) != len(order) or set(order) != set(schema['groups'][mode]):
+                raise ValueError('Danh sách khối không hợp lệ.')
+        return data
+    if data['schema'] != 2 or set(data) != {'schema', 'pages'} or not isinstance(data['pages'], dict):
+        raise ValueError('Bản nháp giao diện không hợp lệ.')
+    pages = {p['id']: p for p in page_schemas(schema)}
+    out = empty_project(schema)
+    for page_id, config in data['pages'].items():
+        if page_id not in pages or not isinstance(config, dict) or set(config) != {'components', 'styles', 'order'} or not isinstance(config['components'], dict) or len(config['components']) > 1000:
+            raise ValueError('Trang hoặc danh sách phần tử không hợp lệ.')
+        page = pages[page_id]
+        registry = {c['key']: c for c in page.get('components', [])}
+        for key, component in config['components'].items():
+            if not re.fullmatch(r'[a-z][a-z0-9-]{0,95}', key) or key in registry or not isinstance(component, dict) or set(component) != {'selector', 'label'} or not selector_ok(component['selector']) or not isinstance(component['label'], str) or not 0 < len(component['label']) <= 120:
+                raise ValueError('Phần tử nhập không hợp lệ: ' + key)
+            registry[key] = component
+        validate_styles(schema, config['styles'], set(registry))
+        if not isinstance(config['order'], dict) or set(config['order']) != {'desktop', 'mobile'}:
+            raise ValueError('Thiếu thứ tự khối.')
+        for mode in ('desktop', 'mobile'):
+            order = config['order'][mode]
+            if not isinstance(order, list) or not all(isinstance(k, str) for k in order) or len(order) > 100 or len(set(order)) != len(order) or any(k not in registry or not registry[k]['selector'] or ' ' in registry[k]['selector'] for k in order) or (order and not page.get('reorder')):
+                raise ValueError('Thứ tự khối không hợp lệ.')
+        out['pages'][page_id] = config
+    return out
+
+
+def upgrade(schema, data):
+    data = validate(schema, data)
+    if data['schema'] == 2:
+        return data
+    out = empty_project(schema)
+    out['pages']['home']['styles'] = data['styles']
+    for mode in ('desktop', 'mobile'):
+        if data['order'][mode] != schema['groups'][mode]:
+            out['pages']['home']['order'][mode] = data['order'][mode]
+    return out
 
 
 def generate_css(schema, data):
-    data = validate(schema, data)
-    prefix = 'html body.studio-enabled[data-studio-hub="home"] #studioHome#studioHome#studioHome'
-    by_key = {c['key']: c for c in schema['components']}
-    css = '/* HSK Home Designer v1 — generated; edit the JSON in the local designer. */\n'
-    for mode in ('desktop', 'mobile'):
-        scope = prefix.replace('body.studio-enabled', 'body.studio-enabled:not(.mobile-ux)' if mode == 'desktop' else 'body.studio-enabled.mobile-ux')
-        rules = []
-        for c in schema['components']:
-            props = data['styles'][mode].get(c['key'], {})
-            declarations = []
-            for name, p in schema['properties'].items():
-                if name in props:
-                    v = props[name]
-                    value = str(int(v)) if isinstance(v, (float, int)) and v == int(v) else str(v)
-                    declarations.append(p['css'] + ':' + value + p.get('unit', '') + '!important')
-            if declarations:
-                rules.append(scope + ' ' + c['selector'] + '{' + ';'.join(declarations) + ';}')
-        if data['order'][mode] != schema['groups'][mode]:
-            rules += [scope + ':not([hidden]){display:flex!important;flex-direction:column!important;}', scope + '>*{order:900!important;}', scope + '>#updateNotice{order:-1!important;}']
-            for i, key in enumerate(data['order'][mode]):
-                rules.append(scope + '>' + by_key[key]['selector'] + '{order:' + str(i) + '!important;}')
-        if rules:
-            css += '@media ' + ('(min-width:721px)' if mode == 'desktop' else '(max-width:720px), (orientation:landscape) and (max-height:500px) and (pointer:coarse)') + '{\n' + '\n'.join(rules) + '\n}\n'
+    data = upgrade(schema, data)
+    css = '/* HSK Visual Designer v2 — generated; edit the JSON in the local designer. */\n'
+    for page in page_schemas(schema):
+        config = data['pages'][page['id']]
+        registry = {c['key']: c for c in page.get('components', [])}
+        registry.update(config['components'])
+        for mode in ('desktop', 'mobile'):
+            scope = page['scope'].replace('body.studio-enabled', 'body.studio-enabled:not(.mobile-ux)' if mode == 'desktop' else 'body.studio-enabled.mobile-ux')
+            rules = []
+            for key in sorted(config['styles'][mode]):
+                props = config['styles'][mode][key]
+                declarations = []
+                for name, p in schema['properties'].items():
+                    if name in props:
+                        value = props[name]
+                        value = str(int(value)) if isinstance(value, (float, int)) and value == int(value) else str(value)
+                        declarations.append(p['css'] + ':' + value + p.get('unit', '') + '!important')
+                if declarations:
+                    selector = registry[key]['selector']
+                    rules.append(scope + (' ' + selector if selector else '') + '{' + ';'.join(declarations) + ';}')
+            order = config['order'][mode]
+            if order:
+                rules += [scope + ':not([hidden]){display:flex!important;flex-direction:column!important;}', scope + '>*{order:900!important;}']
+                if page['id'] == 'home':
+                    rules.append(scope + '>#updateNotice{order:-1!important;}')
+                for i, key in enumerate(order):
+                    rules.append(scope + '>' + registry[key]['selector'] + '{order:' + str(i) + '!important;}')
+            if rules:
+                css += '@media ' + ('(min-width:721px)' if mode == 'desktop' else '(max-width:720px), (orientation:landscape) and (max-height:500px) and (pointer:coarse)') + '{\n' + '\n'.join(rules) + '\n}\n'
     return css
 
 
 def apply_config(root, schema, data):
     """Only the managed JSON/CSS and one marked HTML link can be written."""
-    data = validate(schema, data)
+    original = validate(schema, data)
+    data = upgrade(schema, original)
+    applied = root / 'home-design.json'
+    if original['schema'] == 1 and applied.exists():
+        previous = upgrade(schema, json.loads(applied.read_text(encoding='utf-8')))
+        previous['pages']['home'] = data['pages']['home']
+        data = previous
     index = root / 'index.html'
     before = index.read_text(encoding='utf-8')
     if len(re.findall(r'<!-- HSK HOME DESIGN START -->', before)) > 1:
@@ -182,7 +257,7 @@ def make_server(root, port):
                 return self.json_response({'error': 'Đường dẫn không được hỗ trợ.'}, 404)
             try:
                 length = int(self.headers.get('Content-Length', '0'))
-                if not 0 < length <= 200000:
+                if not 0 < length <= 2000000:
                     raise ValueError('Kích thước bản nháp không hợp lệ.')
                 data = json.loads(self.rfile.read(length))
                 with lock:

@@ -53,6 +53,18 @@ class DesignerTests(unittest.TestCase):
             M.apply_config(self.root, SCHEMA, broken)
         self.assertEqual(before, {p.name: p.read_bytes() for p in self.root.glob('*') if p.is_file()})
 
+    def test_legacy_home_apply_preserves_other_pages(self):
+        bundle = M.empty_project(SCHEMA)
+        bundle['pages']['quiz']['components']['title'] = {'selector': '#quizTitle', 'label': 'Câu hỏi'}
+        bundle['pages']['quiz']['styles']['desktop']['title'] = {'fontSize': 30}
+        M.apply_config(self.root, SCHEMA, bundle)
+        home = config()
+        home['styles']['mobile']['word-heading'] = {'fontSize': 21}
+        M.apply_config(self.root, SCHEMA, home)
+        saved = json.loads((self.root / 'home-design.json').read_text())
+        self.assertEqual(saved['pages']['quiz']['styles']['desktop']['title']['fontSize'], 30)
+        self.assertEqual(saved['pages']['home']['styles']['mobile']['word-heading']['fontSize'], 21)
+
     def test_local_writer_requires_same_origin_token_and_rejects_path_escape(self):
         server = M.make_server(self.root, 0)
         thread = threading.Thread(target=server.serve_forever, daemon=True)

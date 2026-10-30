@@ -1,7 +1,7 @@
 name: Local Home Designer
 on:
   pull_request:
-    paths: ['tools/home-designer/**', 'tools/serve-home-designer.py', 'tools/check-home-designer*.cjs', 'tools/test_home_designer.py', 'Chinh-giao-dien.cmd', '.github/workflows/home-designer.yml']
+    paths: ['tools/home-designer/**', 'tools/serve-home-designer.py', 'tools/check-home-designer*.cjs', 'tools/test_home_designer.py', 'tools/check-site-designer-ui.cjs', 'Chinh-giao-dien.cmd', '.github/workflows/home-designer.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -28,10 +28,15 @@ jobs:
       - name: Edit, save, reload and apply in the real app
         env:
           NODE_PATH: /tmp/hsk-tests/node_modules
-        run: CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-home-designer-ui.cjs
+        run: |
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-home-designer-ui.cjs
+          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-site-designer-ui.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: home-designer-screenshots
-          path: /tmp/home-designer-*.png
+          path: |
+            /tmp/home-designer-*.png
+            /tmp/site-designer-*.png
+            /tmp/site-designer-coverage.json
           retention-days: 7

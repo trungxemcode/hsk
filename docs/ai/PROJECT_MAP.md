@@ -198,7 +198,7 @@ Batch imports: server/music/batch-reference.mjs accepts trusted import job refer
 
 Phục hồi pinyin dùng Qwen preview chỉ cho bản nhập riêng có kiểm tra âm; nếu provider/model hoặc chất lượng không đạt thì không xuất bản. Ưu tiên lời Trung từ nguồn nhạc liên kết, đối chiếu với pinyin mô tả, trước khi dùng phục hồi AI.
 
-## Local Home Designer (3.22.1 candidate)
-- Windows entry: Chinh-giao-dien.cmd; standard-library server tools/serve-home-designer.py, loopback port 8788. Separate origin, external connections/account/push and service-worker installation blocked in preview.
-- tools/home-designer/: editor UI plus named component/property schema; independent desktop/mobile draft, 100-step undo/redo, live selection interception, CSS-only ordering and JSON/CSS export. Normal app does not load the editor.
-- Explicit Apply writes managed JSON/CSS, one marked link in index.html, and adds home-design.css to the PWA catalog. It does not commit/push; prepare a PWA release before PR. Python/JS CSS generators share schema and have parity tests. See docs/HOME_DESIGNER.md.
+## Local Site Designer (3.22.2 candidate)
+- Windows entry: Chinh-giao-dien.cmd; standard-library server tools/serve-home-designer.py, loopback port 8788. Separate origin; external connections/account/push and service-worker installation blocked in preview.
+- tools/home-designer/: editor, bridge.js live route/selection adapter, fixed 44-view/property schema. Schema 2 stores independent per-page desktop/mobile styles and safe selectors. Legacy Home drafts upgrade without dropping other pages. 100-step undo/redo, CSS-only ordering where allowed, JSON/CSS export; default app never loads editor code.
+- Explicit Apply writes managed JSON/CSS, one marked link in index.html, and adds home-design.css to the PWA catalog. No commit/push. Prepare a PWA release before publishing applied changes. Python/JS generators have v1/v2 parity tests; check-site-designer-ui.cjs covers all views and multi-page persistence/apply. Admin is a local read-only skeleton, not authenticated admin data. See docs/HOME_DESIGNER.md.

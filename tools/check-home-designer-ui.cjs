@@ -49,10 +49,10 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   await frame.waitForFunction(()=>document.querySelector('#homeDailyWord').getBoundingClientRect().y<document.querySelector('#placementEntry').getBoundingClientRect().y);
   await page.locator('#demo').click();await frame.locator('#planToday').waitFor({state:'visible'});
   await page.locator('#preview').click();await frame.locator('.hero-button').click();await frame.locator('#lessonsPanel').waitFor({state:'visible'});
-  await page.locator('#preview').click();await frame.locator('#studioHome').waitFor({state:'visible'});
+  await page.locator('#preview').click();await page.waitForFunction(()=>document.getElementById('page-select').value==='lesson-detail'&&document.getElementById('status').textContent.includes('Sẵn sàng'));await frame.locator('#lessonsPanel').waitFor({state:'visible'});await page.locator('#page-select').selectOption('home');await frame.locator('#studioHome').waitFor({state:'visible'});
   await page.locator('#find').fill('Tiêu đề từ vựng');await page.locator('.part[data-key="word-heading"]').click();
   await page.screenshot({path:'/tmp/home-designer-desktop.png',fullPage:true});
-  const download=await Promise.all([page.waitForEvent('download'),page.locator('#export').click()]).then(r=>r[0]);const file=path.join(temp,'draft.json');await download.saveAs(file);const exported=JSON.parse(fs.readFileSync(file,'utf8'));assert.equal(exported.styles.desktop['word-heading'].fontSize,28);assert.equal(exported.styles.mobile['word-heading'].fontSize,20);
+  const download=await Promise.all([page.waitForEvent('download'),page.locator('#export').click()]).then(r=>r[0]);const file=path.join(temp,'draft.json');await download.saveAs(file);const exported=JSON.parse(fs.readFileSync(file,'utf8'));assert.equal(exported.pages.home.styles.desktop['word-heading'].fontSize,28);assert.equal(exported.pages.home.styles.mobile['word-heading'].fontSize,20);
   await page.locator('#file').setInputFiles({name:'broken.json',mimeType:'application/json',buffer:Buffer.from('{"schema":1,"scripts":"bad"}')});await page.waitForFunction(()=>document.getElementById('status').textContent.includes('Không nhập được'));assert.equal(await frame.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize),'28px');
   await page.locator('#file').setInputFiles(file);
   await page.locator('#apply').click();await page.locator('#confirm button[value="ok"]').click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('Đã lưu vào dự án'));
