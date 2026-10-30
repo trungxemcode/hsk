@@ -1,5 +1,5 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
-const {ROUTES,scope,pixels}=require('./ui-outside-scope-core.cjs');
+const {ROUTES,scope,pixels,visualPixels}=require('./ui-outside-scope-core.cjs');
 test('only explicitly requested page is excluded; unknown/all-page bypass rejected',()=>{
   const protectedPages=scope({request:'Sửa A (Tài khoản)',excludedRoutes:['account']});
   assert.ok(!protectedPages.includes('account'));assert.ok(protectedPages.includes('lessons'));
@@ -7,6 +7,13 @@ test('only explicitly requested page is excluded; unknown/all-page bypass reject
   assert.throws(()=>scope({request:'',excludedRoutes:[]}));
   assert.throws(()=>scope({request:'test',excludedRoutes:['*']}));
   assert.throws(()=>scope({request:'test',excludedRoutes:ROUTES}));
+});
+test('perceptual comparison rejects one real pixel change and dimensions; ignores raster rounding',()=>{
+  const a={width:1,height:1,data:Buffer.from([255,255,255,255])};
+  assert.equal(visualPixels(a,a),0);
+  assert.equal(visualPixels(a,{...a,data:Buffer.from([254,254,255,255])}),0);
+  assert.equal(visualPixels(a,{...a,data:Buffer.from([0,0,0,255])}),1);
+  assert.equal(visualPixels(a,{...a,width:2}),Infinity);
 });
 test('a single altered pixel or image dimensions fails; identical image passes',()=>{
   const a={width:1,height:1,data:Buffer.from([255,255,255,255])};

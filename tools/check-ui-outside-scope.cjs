@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {execFileSync}=require('node:child_process');
 const assert=require('node:assert/strict');
-const {ROUTES,scope,pixels}=require('./ui-outside-scope-core.cjs');
+const {ROUTES,scope,pixels,visualPixels,measureDOM}=require('./ui-outside-scope-core.cjs');
 const [before,after,out]=process.argv.slice(2).map(x=>path.resolve(x));
 assert.ok(before&&after&&out,'Usage: node tools/check-ui-outside-scope.cjs BASE_DIR HEAD_DIR OUTPUT_DIR');
 fs.mkdirSync(out,{recursive:true});
@@ -31,7 +31,7 @@ function serve(root){
  return new Promise(resolve=>server.listen(0,'127.0.0.1',()=>resolve(server)));
 }
 (async()=>{
- const {chromium}=require('playwright'),{PNG}=require('pngjs'),pixelmatch=require('pixelmatch');
+ const {chromium}=require('playwright'),{PNG}=require('pngjs');
  const servers=await Promise.all([serve(before),serve(after)]);
  const browser=await chromium.launch({headless:true,args:['--disable-gpu','--force-color-profile=srgb'],...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
  let failures=0;
@@ -54,6 +54,12 @@ function serve(root){
     await page.waitForFunction(()=>!document.getElementById('adminBtn').hidden);
    }
    await page.evaluate(({route,theme})=>{document.documentElement.dataset.theme=theme;window.HSKStudio.navigate(route);},{route,theme});
+   // Lazy music UI can first measure its tab marker while its panel is hidden.
+   // Exercise the same real viewport-resize lifecycle on both builds after entry.
+   if(route.startsWith('music')){
+    await page.setViewportSize({width:width+1,height:900});
+    await page.setViewportSize({width,height:900});
+   }
    await page.evaluate(()=>document.fonts.ready);
    await page.addStyleTag({content:'*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important;scroll-behavior:auto!important}'});
    await page.waitForTimeout(1200);
@@ -65,9 +71,14 @@ function serve(root){
     const alias=route==='music-play'?'music':route;
     assert.ok(state.hub===alias||state.classes.includes('show-'+route)||state.active===route,'Route did not open '+route+': '+JSON.stringify(state));
    }
-   const geometry=await page.evaluate(()=>[...document.querySelectorAll('body *')].filter(n=>n.checkVisibility()&&!['SCRIPT','STYLE','LINK'].includes(n.tagName)).map(n=>{
-    const r=n.getBoundingClientRect(),s=getComputedStyle(n);return{key:n.id||n.tagName+'.'+n.getAttribute('class'),x:Math.round(r.x*100)/100,y:Math.round(r.y*100)/100,w:Math.round(r.width*100)/100,h:Math.round(r.height*100)/100,font:s.fontSize,weight:s.fontWeight,align:s.textAlign,color:s.color,background:s.backgroundColor,border:s.border,borderRadius:s.borderRadius,padding:s.padding,margin:s.margin,transform:s.transform};
-   }));
+   const measure=()=>page.evaluate(measureDOM);
+   let geometry=await measure(),settled=false;
+   for(let attempt=0;attempt<12;attempt++){
+    await page.waitForTimeout(250);const next=await measure();
+    if(JSON.stringify(geometry)===JSON.stringify(next)){settled=true;break;}geometry=next;
+   }
+   assert.ok(settled,'Unstable layout before capture: '+route);
+   fs.writeFileSync(prefix+'-geometry.json',JSON.stringify(geometry,null,2));
    const images=[];
    // Capture both the document and each vertical slice of the main scrolling pane.
    const scroll=await page.evaluate(()=>{const n=document.querySelector('.workspace');return n?{height:n.clientHeight,total:n.scrollHeight}:null;});
@@ -90,10 +101,7 @@ function serve(root){
    for(let i=0;i<Math.min(a.images.length,b.images.length);i++){
     const x=PNG.sync.read(fs.readFileSync(a.images[i])),y=PNG.sync.read(fs.readFileSync(b.images[i]));
     const delta=pixels(x,y);result.rawChangedPixels+=delta.changed;
-    // Identical-build control reproduced edge-only rasterization variance.
-    // Ignore only pixelmatch-detected antialiasing, with zero color threshold;
-    // strict element geometry/colors/radii above still protect actual styles.
-    result.changedPixels+=x.width===y.width&&x.height===y.height?pixelmatch(x.data,y.data,null,x.width,x.height,{threshold:0,includeAA:false}):Infinity;
+    result.changedPixels+=visualPixels(x,y);
     if(delta.changed&&x.width===y.width&&x.height===y.height){
      const diff=new PNG({width:x.width,height:x.height});
      for(let p=0;p<x.data.length;p+=4){const changed=[0,1,2,3].some(k=>Math.abs(x.data[p+k]-y.data[p+k])>2);diff.data[p]=changed?255:Math.round(y.data[p]*.25);diff.data[p+1]=changed?0:Math.round(y.data[p+1]*.25);diff.data[p+2]=changed?128:Math.round(y.data[p+2]*.25);diff.data[p+3]=255;}
