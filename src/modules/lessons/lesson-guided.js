@@ -95,7 +95,7 @@ function presentation(lesson,words,store){
  function render(){
   stop();save();strokeHost.hidden=true;strokeHost.replaceChildren();text.hidden=false;progress.value=Math.min(pos,frames.length);label.textContent=`${Math.min(pos+1,frames.length)}/${frames.length} · Học tự động`;
   if(pos>=frames.length){playing=false;caption.textContent='Đã xem hết bài';text.textContent='Sẵn sàng ôn lại?';pin.textContent='Nghe và xem không tự tính là đã thuộc từ.';status.replaceChildren(button('Làm ôn ngắn',()=>{close();store.practice();}));}
-  else{const f=frames[pos];stage.dataset.slideKind=f.kind;stage.dataset.frameId=f.id;caption.textContent=f.label;text.textContent=f.text;pin.textContent=f.pin||'';status.textContent='';}
+  else{const f=frames[pos];stage.dataset.slideKind=f.kind;stage.dataset.frameId=f.id;caption.textContent=f.label;text.textContent=f.kind==='pinyin'?window.HSKGuidedCore.formatPinyin(f.text):f.text;pin.textContent=window.HSKGuidedCore.formatPinyin(f.pin||'',f.speak||f.text);status.textContent='';}
   update();fit();if(playing)run();
  }
  function move(delta){if(closed)return;pos=Math.max(0,Math.min(frames.length,pos+delta));render();}

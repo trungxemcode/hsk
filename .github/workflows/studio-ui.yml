@@ -42,6 +42,7 @@ jobs:
           node tools/check-placement-route-dom.cjs
           node tools/check-passive-dom.cjs
           node --test server/*.test.mjs
+          node --test tools/test-guided-pinyin.cjs
           node tools/check-speech-dom.cjs
           CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-chinese-voices-ui.cjs
           node tools/check-reading-dom.cjs

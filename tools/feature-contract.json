@@ -2183,6 +2183,22 @@
           "value": "selected key object stays fixed"
         }
       ]
+    },
+    {
+      "id": "guided-readable-type-pinyin",
+      "name": "Chữ toàn màn hình lớn, pinyin tách âm và luôn căn giữa",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/lessons/lesson-guided-core.js",
+          "value": "function formatPinyin"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/test-guided-pinyin.cjs",
+          "value": "does not mutate presentation input or speech text"
+        }
+      ]
     }
   ]
 }
