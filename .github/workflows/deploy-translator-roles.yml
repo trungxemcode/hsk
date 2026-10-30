@@ -1,0 +1,58 @@
+name: Restore account-role endpoints on translator Worker
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/deploy-translator-roles.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: hsk-translator-worker-production
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Require existing Cloudflare deploy credentials
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo '::error::Missing CLOUDFLARE_API_TOKEN'; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo '::error::Missing CLOUDFLARE_ACCOUNT_ID'; exit 1; }
+      - name: Validate role security and existing translation behavior
+        run: node --test server/account-roles.test.mjs server/translator-worker.test.mjs
+      - name: Ensure bundled script includes the actual role routes
+        run: |
+          node --input-type=module -e "import {readFileSync} from 'node:fs';const s=readFileSync('server/translator-worker-bundled.mjs','utf8');for(const p of ['/account-role','/admin/accounts','/admin/account-role'])if(!s.includes(p))throw Error('Missing '+p);"
+      - name: Bundle the checked-in Worker for inspection
+        run: npx --yes wrangler@4 deploy --dry-run --outdir /tmp/hsk-translator-role-build --config server/wrangler.jsonc
+      - name: Publish existing translator Worker (preserve variables and secrets)
+        run: npx --yes wrangler@4 deploy --config server/wrangler.jsonc
+      - name: Confirm all three routes exist without submitting user credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://hsk-vietnamese-translator.trung-hsk668.workers.dev'
+          for route in /account-role /admin/accounts /admin/account-role; do
+            success=0
+            for attempt in 1 2 3 4 5 6; do
+              status=$(curl -sS --max-time 12 -o /tmp/hsk-role-response.json -w '%{http_code}' -X POST "$base$route" -H 'Origin: https://trungxemcode.github.io' -H 'Content-Type: application/json' --data '{}')
+              if [[ "$status" == 401 ]]; then success=1; break; fi
+              sleep 3
+            done
+            if [[ "$success" != 1 ]]; then
+              echo "::error::Role endpoint $route returned HTTP $status (expected unauthenticated 401; never 404)"
+              exit 1
+            fi
+            echo "PASS $route HTTP 401 (route exists; token authentication still enforced)"
+          done
