@@ -51,6 +51,9 @@ def validate_styles(schema, styles, keys):
                 if p['type'] == 'number':
                     if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not p['min'] <= value <= p['max'] or (p.get('integer') and value != int(value)):
                         raise ValueError('Giá trị ngoài giới hạn: ' + p['label'])
+                elif p['type'] == 'color':
+                    if not isinstance(value, str) or (not re.fullmatch(r'#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})', value) and value not in [o['value'] for o in p['options']]):
+                        raise ValueError('Màu không hợp lệ: ' + p['label'])
                 elif not isinstance(value, str) or value not in [o['value'] for o in p['options']]:
                     raise ValueError('Giá trị không hợp lệ: ' + p['label'])
     return styles
@@ -106,27 +109,61 @@ def upgrade(schema, data):
     return out
 
 
+def element_rules(schema, props, selector):
+    declarations, extra = [], []
+    name = props.get('animationName')
+    preset = bool(name and name != 'none')
+    trigger = props.get('animationTrigger', 'appear')
+    def decl(p, value):
+        if isinstance(value, (float, int)) and value == int(value):
+            value = int(value)
+        return p['css'] + ':' + str(value) + p.get('unit', '') + '!important'
+    for key, p in schema['properties'].items():
+        if key in props and not p.get('meta') and key != 'animationName':
+            declarations.append(decl(p, props[key]))
+    def importance(key):
+        return '' if key in schema.get('motion', {}).get('channels', {}).get(name, []) else '!important'
+    for key, variable, fallback in [('moveX', 'x', '0px'), ('moveY', 'y', '0px'), ('rotate', 'rotate', '0deg'), ('scale', 'scale', '1'), ('opacity', 'opacity', '1')]:
+        if (preset or (key in ('moveX', 'moveY') and ('moveX' in props or 'moveY' in props))) and key not in props:
+            declarations.append('--hsk-design-' + variable + ':' + fallback + '!important')
+    if 'moveX' in props or 'moveY' in props:
+        declarations.append('translate:var(--hsk-design-x,0px) var(--hsk-design-y,0px)' + importance('translate'))
+    for key, css, fallback in [('rotate', 'rotate', '0deg'), ('scale', 'scale', '1'), ('opacity', 'opacity', '1')]:
+        if key in props:
+            declarations.append(css + ':var(--hsk-design-' + key + ',' + fallback + ')' + importance(key))
+    if preset:
+        for key, value in schema['motion']['defaults'].items():
+            if key not in props:
+                declarations.append(decl(schema['properties'][key], value))
+        declarations.append('animation-name:' + (name if trigger == 'appear' else 'none') + '!important')
+        if trigger != 'appear':
+            extra.append(selector + (':hover' if trigger == 'hover' else ':active') + '{animation-name:' + name + '!important;}')
+    elif name == 'none':
+        declarations.append('animation-name:none!important')
+    rules = [selector + '{' + ';'.join(declarations) + ';}'] if declarations else []
+    motion = preset or any(k.startswith('transition') or k.startswith('animation') for k in props)
+    return rules + extra, motion, preset
+
+
 def generate_css(schema, data):
     data = upgrade(schema, data)
     css = '/* HSK Visual Designer v2 — generated; edit the JSON in the local designer. */\n'
+    needs_frames = False
     for page in page_schemas(schema):
         config = data['pages'][page['id']]
         registry = {c['key']: c for c in page.get('components', [])}
         registry.update(config['components'])
         for mode in ('desktop', 'mobile'):
             scope = page['scope'].replace('body.studio-enabled', 'body.studio-enabled:not(.mobile-ux)' if mode == 'desktop' else 'body.studio-enabled.mobile-ux')
-            rules = []
+            rules, reduced = [], []
             for key in sorted(config['styles'][mode]):
-                props = config['styles'][mode][key]
-                declarations = []
-                for name, p in schema['properties'].items():
-                    if name in props:
-                        value = props[name]
-                        value = str(int(value)) if isinstance(value, (float, int)) and value == int(value) else str(value)
-                        declarations.append(p['css'] + ':' + value + p.get('unit', '') + '!important')
-                if declarations:
-                    selector = registry[key]['selector']
-                    rules.append(scope + (' ' + selector if selector else '') + '{' + ';'.join(declarations) + ';}')
+                selector = registry[key]['selector']
+                selector = scope + (' ' + selector if selector else '')
+                element, motion, preset = element_rules(schema, config['styles'][mode][key], selector)
+                rules.extend(element)
+                needs_frames = needs_frames or preset
+                if motion:
+                    reduced.append(selector)
             order = config['order'][mode]
             if order:
                 rules += [scope + ':not([hidden]){display:flex!important;flex-direction:column!important;}', scope + '>*{order:900!important;}']
@@ -134,9 +171,11 @@ def generate_css(schema, data):
                     rules.append(scope + '>#updateNotice{order:-1!important;}')
                 for i, key in enumerate(order):
                     rules.append(scope + '>' + registry[key]['selector'] + '{order:' + str(i) + '!important;}')
+            if reduced:
+                rules.append('@media(prefers-reduced-motion:reduce){' + ''.join(s + '{animation-duration:0.001ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;animation-play-state:running!important;transition-duration:0.001ms!important;}' for s in reduced) + '}')
             if rules:
                 css += '@media ' + ('(min-width:721px)' if mode == 'desktop' else '(max-width:720px), (orientation:landscape) and (max-height:500px) and (pointer:coarse)') + '{\n' + '\n'.join(rules) + '\n}\n'
-    return css
+    return (schema['motion']['keyframes'] if needs_frames else '') + css
 
 
 def apply_config(root, schema, data):

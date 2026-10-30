@@ -50,3 +50,11 @@ Nếu hai tab cùng chỉnh, tab cũ bị dừng ghi thay vì ghi đè. Xuất n
 Triển khai editor: chạy python3 tools/pack-design-editor.py, rồi npx wrangler deploy --config server/design/wrangler.jsonc trong môi trường Cloudflare đã đăng nhập. Chỉ bundle public assets; không gói secrets. Worker này độc lập với API nhạc/AI/voice.
 
 Nếu Wrangler không hỗ trợ API deployment của phiên đăng nhập hiện tại, có thể dùng Direct Upload API chính thức: tạo bundle bằng npx wrangler deploy --dry-run --outdir /tmp/hsk-cloud-worker-bundle --config server/design/wrangler.jsonc, rồi python3 tools/deploy-design-editor.py --account-id ACCOUNT_ID --bundle /tmp/hsk-cloud-worker-bundle/worker.js (Python 3.11+). Công cụ chỉ triển khai Worker hsk-ui-designer và không in token.
+
+## Kéo object và chỉnh Position / Border / Animation
+Bấm giữ ngay trên chữ/nút rồi kéo để di chuyển. Kéo tay nắm ở cạnh/góc khung chọn để đổi kích thước. Tay nắm ✥ di chuyển object; tay nắm ⠿ vẫn đổi thứ tự cả khối. Giữ Shift khi kéo để khóa trục. Mũi tên dịch 1px, Shift + mũi tên dịch 10px khi chọn object trong bản xem. Một lần kéo chỉ tạo một bước Hoàn tác. Escape hủy lần kéo đang thực hiện.
+
+Các tab Vị trí, Border, Animation, Chữ đưa bạn tới đúng nhóm trong bảng bên phải. X/Y giữ chỗ cũ; Position Absolute/Fixed thay đổi luồng theo CSS, Top/Left dùng khi Position khác Static. Border có độ dày, kiểu, màu picker/HEX/theme và bo từng góc. Animation có hiệu ứng có sẵn, thời lượng, độ trễ, nhịp, lặp, chiều, trạng thái và cách kích hoạt. Xem thử chỉ phát lại trong editor; thiết lập hợp lệ vẫn tự đồng bộ như trước. Hệ điều hành chọn giảm chuyển động sẽ giảm hiệu ứng.
+
+### Thước và đường căn
+Thước pixel theo tỷ lệ zoom. Kéo từ thước trên để tạo đường căn ngang, từ thước trái để tạo đường căn dọc. Kéo đường để di chuyển; nhấp đúp, Delete hoặc kéo ra ngoài khung để xóa; nút Xóa đường căn xóa toàn bộ đường của trang/kích thước hiện tại. Escape hủy thao tác kéo. Đường căn chỉ tồn tại trong phiên editor, riêng theo trang và PC/điện thoại; không lưu vào cấu hình/CSS, không đồng bộ sang bản phát hành, ẩn khi Dùng thử.

@@ -555,6 +555,654 @@
         }
       ],
       "group": "Màu theo theme"
+    },
+    "position": {
+      "type": "select",
+      "label": "Position",
+      "css": "position",
+      "options": [
+        {
+          "value": "static",
+          "label": "Static · Theo bố cục"
+        },
+        {
+          "value": "relative",
+          "label": "Relative · Giữ chỗ"
+        },
+        {
+          "value": "absolute",
+          "label": "Absolute · Tự do trong khối"
+        },
+        {
+          "value": "fixed",
+          "label": "Fixed · Ghim màn hình"
+        },
+        {
+          "value": "sticky",
+          "label": "Sticky · Dính khi cuộn"
+        }
+      ],
+      "group": "Position"
+    },
+    "moveX": {
+      "type": "number",
+      "label": "X · dịch ngang",
+      "css": "--hsk-design-x",
+      "unit": "px",
+      "min": -2400,
+      "max": 2400,
+      "integer": true,
+      "group": "Position"
+    },
+    "moveY": {
+      "type": "number",
+      "label": "Y · dịch dọc",
+      "css": "--hsk-design-y",
+      "unit": "px",
+      "min": -2400,
+      "max": 2400,
+      "integer": true,
+      "group": "Position"
+    },
+    "top": {
+      "type": "number",
+      "label": "Trên · Top",
+      "css": "top",
+      "unit": "px",
+      "min": -2400,
+      "max": 2400,
+      "integer": true,
+      "group": "Position"
+    },
+    "right": {
+      "type": "number",
+      "label": "Phải · Right",
+      "css": "right",
+      "unit": "px",
+      "min": -2400,
+      "max": 2400,
+      "integer": true,
+      "group": "Position"
+    },
+    "bottom": {
+      "type": "number",
+      "label": "Dưới · Bottom",
+      "css": "bottom",
+      "unit": "px",
+      "min": -2400,
+      "max": 2400,
+      "integer": true,
+      "group": "Position"
+    },
+    "left": {
+      "type": "number",
+      "label": "Trái · Left",
+      "css": "left",
+      "unit": "px",
+      "min": -2400,
+      "max": 2400,
+      "integer": true,
+      "group": "Position"
+    },
+    "zIndex": {
+      "type": "number",
+      "label": "Lớp hiển thị · z-index",
+      "css": "z-index",
+      "unit": "",
+      "min": -100,
+      "max": 9999,
+      "integer": true,
+      "group": "Position"
+    },
+    "display": {
+      "type": "select",
+      "label": "Hiển thị",
+      "css": "display",
+      "options": [
+        {
+          "value": "block",
+          "label": "block"
+        },
+        {
+          "value": "inline-block",
+          "label": "inline-block"
+        },
+        {
+          "value": "inline",
+          "label": "inline"
+        },
+        {
+          "value": "flex",
+          "label": "flex"
+        },
+        {
+          "value": "grid",
+          "label": "grid"
+        },
+        {
+          "value": "none",
+          "label": "none"
+        }
+      ],
+      "group": "Kích thước"
+    },
+    "width": {
+      "type": "number",
+      "label": "Rộng",
+      "css": "width",
+      "unit": "px",
+      "min": 0,
+      "max": 2400,
+      "integer": true,
+      "group": "Kích thước"
+    },
+    "height": {
+      "type": "number",
+      "label": "Cao",
+      "css": "height",
+      "unit": "px",
+      "min": 0,
+      "max": 2400,
+      "integer": true,
+      "group": "Kích thước"
+    },
+    "minWidth": {
+      "type": "number",
+      "label": "Rộng tối thiểu",
+      "css": "min-width",
+      "unit": "px",
+      "min": 0,
+      "max": 2400,
+      "integer": true,
+      "group": "Kích thước"
+    },
+    "minHeight": {
+      "type": "number",
+      "label": "Cao tối thiểu",
+      "css": "min-height",
+      "unit": "px",
+      "min": 0,
+      "max": 2400,
+      "integer": true,
+      "group": "Kích thước"
+    },
+    "maxWidth": {
+      "type": "number",
+      "label": "Rộng tối đa",
+      "css": "max-width",
+      "unit": "px",
+      "min": 0,
+      "max": 2400,
+      "integer": true,
+      "group": "Kích thước"
+    },
+    "maxHeight": {
+      "type": "number",
+      "label": "Cao tối đa",
+      "css": "max-height",
+      "unit": "px",
+      "min": 0,
+      "max": 2400,
+      "integer": true,
+      "group": "Kích thước"
+    },
+    "rotate": {
+      "type": "number",
+      "label": "Xoay",
+      "css": "--hsk-design-rotate",
+      "unit": "deg",
+      "min": -360,
+      "max": 360,
+      "integer": false,
+      "group": "Kích thước",
+      "previewCss": "rotate"
+    },
+    "scale": {
+      "type": "number",
+      "label": "Tỉ lệ",
+      "css": "--hsk-design-scale",
+      "unit": "",
+      "min": 0.25,
+      "max": 3,
+      "integer": false,
+      "group": "Kích thước",
+      "previewCss": "scale"
+    },
+    "opacity": {
+      "type": "number",
+      "label": "Độ rõ · 0–1",
+      "css": "--hsk-design-opacity",
+      "unit": "",
+      "min": 0,
+      "max": 1,
+      "integer": false,
+      "group": "Kích thước",
+      "previewCss": "opacity"
+    },
+    "borderWidth": {
+      "type": "number",
+      "label": "Độ dày viền",
+      "css": "border-width",
+      "unit": "px",
+      "min": 0,
+      "max": 24,
+      "integer": true,
+      "group": "Border"
+    },
+    "borderStyle": {
+      "type": "select",
+      "label": "Kiểu viền",
+      "css": "border-style",
+      "options": [
+        {
+          "value": "none",
+          "label": "Không viền"
+        },
+        {
+          "value": "solid",
+          "label": "Liền"
+        },
+        {
+          "value": "dashed",
+          "label": "Nét đứt"
+        },
+        {
+          "value": "dotted",
+          "label": "Chấm"
+        },
+        {
+          "value": "double",
+          "label": "Viền đôi"
+        }
+      ],
+      "group": "Border"
+    },
+    "borderColor": {
+      "type": "color",
+      "label": "Màu viền",
+      "css": "border-color",
+      "options": [
+        {
+          "value": "var(--line)",
+          "label": "Theo theme"
+        },
+        {
+          "value": "var(--accent)",
+          "label": "Tím chủ đạo"
+        }
+      ],
+      "group": "Border"
+    },
+    "borderRadius": {
+      "type": "number",
+      "label": "Bo góc",
+      "css": "border-radius",
+      "unit": "px",
+      "min": 0,
+      "max": 160,
+      "integer": true,
+      "group": "Border"
+    },
+    "borderTopLeftRadius": {
+      "type": "number",
+      "label": "Góc trên trái",
+      "css": "border-top-left-radius",
+      "unit": "px",
+      "min": 0,
+      "max": 160,
+      "integer": true,
+      "group": "Border"
+    },
+    "borderTopRightRadius": {
+      "type": "number",
+      "label": "Góc trên phải",
+      "css": "border-top-right-radius",
+      "unit": "px",
+      "min": 0,
+      "max": 160,
+      "integer": true,
+      "group": "Border"
+    },
+    "borderBottomLeftRadius": {
+      "type": "number",
+      "label": "Góc dưới trái",
+      "css": "border-bottom-left-radius",
+      "unit": "px",
+      "min": 0,
+      "max": 160,
+      "integer": true,
+      "group": "Border"
+    },
+    "borderBottomRightRadius": {
+      "type": "number",
+      "label": "Góc dưới phải",
+      "css": "border-bottom-right-radius",
+      "unit": "px",
+      "min": 0,
+      "max": 160,
+      "integer": true,
+      "group": "Border"
+    },
+    "animationName": {
+      "type": "select",
+      "label": "Hiệu ứng",
+      "css": "animation-name",
+      "options": [
+        {
+          "value": "none",
+          "label": "Không hiệu ứng"
+        },
+        {
+          "value": "hsk-design-fade",
+          "label": "Hiện dần"
+        },
+        {
+          "value": "hsk-design-slide-up",
+          "label": "Trượt lên"
+        },
+        {
+          "value": "hsk-design-slide-right",
+          "label": "Trượt sang phải"
+        },
+        {
+          "value": "hsk-design-zoom",
+          "label": "Phóng nhẹ"
+        },
+        {
+          "value": "hsk-design-pulse",
+          "label": "Nhịp phóng"
+        },
+        {
+          "value": "hsk-design-float",
+          "label": "Lơ lửng"
+        },
+        {
+          "value": "hsk-design-spin",
+          "label": "Xoay vòng"
+        }
+      ],
+      "group": "Animation"
+    },
+    "animationTrigger": {
+      "type": "select",
+      "label": "Khi nào chạy",
+      "css": "",
+      "options": [
+        {
+          "value": "appear",
+          "label": "Xuất hiện"
+        },
+        {
+          "value": "hover",
+          "label": "Rê chuột"
+        },
+        {
+          "value": "press",
+          "label": "Nhấn giữ"
+        }
+      ],
+      "group": "Animation",
+      "meta": true
+    },
+    "animationDuration": {
+      "type": "number",
+      "label": "Thời lượng",
+      "css": "animation-duration",
+      "unit": "ms",
+      "min": 0,
+      "max": 20000,
+      "integer": true,
+      "group": "Animation"
+    },
+    "animationDelay": {
+      "type": "number",
+      "label": "Độ trễ",
+      "css": "animation-delay",
+      "unit": "ms",
+      "min": 0,
+      "max": 20000,
+      "integer": true,
+      "group": "Animation"
+    },
+    "animationTimingFunction": {
+      "type": "select",
+      "label": "Nhịp chuyển",
+      "css": "animation-timing-function",
+      "options": [
+        {
+          "value": "ease",
+          "label": "ease"
+        },
+        {
+          "value": "ease-in",
+          "label": "ease-in"
+        },
+        {
+          "value": "ease-out",
+          "label": "ease-out"
+        },
+        {
+          "value": "ease-in-out",
+          "label": "ease-in-out"
+        },
+        {
+          "value": "linear",
+          "label": "linear"
+        }
+      ],
+      "group": "Animation"
+    },
+    "animationIterations": {
+      "type": "select",
+      "label": "Số lần lặp",
+      "css": "animation-iteration-count",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 lần"
+        },
+        {
+          "value": "2",
+          "label": "2 lần"
+        },
+        {
+          "value": "3",
+          "label": "3 lần"
+        },
+        {
+          "value": "5",
+          "label": "5 lần"
+        },
+        {
+          "value": "10",
+          "label": "10 lần"
+        },
+        {
+          "value": "infinite",
+          "label": "Liên tục"
+        }
+      ],
+      "group": "Animation"
+    },
+    "animationDirection": {
+      "type": "select",
+      "label": "Chiều chạy",
+      "css": "animation-direction",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Bình thường"
+        },
+        {
+          "value": "reverse",
+          "label": "Ngược"
+        },
+        {
+          "value": "alternate",
+          "label": "Qua lại"
+        },
+        {
+          "value": "alternate-reverse",
+          "label": "Qua lại từ cuối"
+        }
+      ],
+      "group": "Animation"
+    },
+    "animationFillMode": {
+      "type": "select",
+      "label": "Sau khi chạy",
+      "css": "animation-fill-mode",
+      "options": [
+        {
+          "value": "none",
+          "label": "Về gốc"
+        },
+        {
+          "value": "forwards",
+          "label": "Giữ cuối"
+        },
+        {
+          "value": "backwards",
+          "label": "Giữ đầu"
+        },
+        {
+          "value": "both",
+          "label": "Giữ cả hai"
+        }
+      ],
+      "group": "Animation"
+    },
+    "animationPlayState": {
+      "type": "select",
+      "label": "Trạng thái",
+      "css": "animation-play-state",
+      "options": [
+        {
+          "value": "running",
+          "label": "Đang chạy"
+        },
+        {
+          "value": "paused",
+          "label": "Tạm dừng"
+        }
+      ],
+      "group": "Animation"
+    },
+    "transitionProperty": {
+      "type": "select",
+      "label": "Chuyển tiếp",
+      "css": "transition-property",
+      "options": [
+        {
+          "value": "none",
+          "label": "Không chuyển tiếp"
+        },
+        {
+          "value": "all",
+          "label": "Mọi thuộc tính"
+        },
+        {
+          "value": "translate, scale, rotate",
+          "label": "Vị trí / tỉ lệ / xoay"
+        },
+        {
+          "value": "color, background-color, border-color, box-shadow",
+          "label": "Màu / viền / bóng"
+        },
+        {
+          "value": "opacity",
+          "label": "Độ rõ"
+        }
+      ],
+      "group": "Transition"
+    },
+    "transitionDuration": {
+      "type": "number",
+      "label": "Thời lượng",
+      "css": "transition-duration",
+      "unit": "ms",
+      "min": 0,
+      "max": 5000,
+      "integer": true,
+      "group": "Transition"
+    },
+    "transitionDelay": {
+      "type": "number",
+      "label": "Độ trễ",
+      "css": "transition-delay",
+      "unit": "ms",
+      "min": 0,
+      "max": 5000,
+      "integer": true,
+      "group": "Transition"
+    },
+    "transitionTimingFunction": {
+      "type": "select",
+      "label": "Nhịp chuyển",
+      "css": "transition-timing-function",
+      "options": [
+        {
+          "value": "ease",
+          "label": "ease"
+        },
+        {
+          "value": "ease-in",
+          "label": "ease-in"
+        },
+        {
+          "value": "ease-out",
+          "label": "ease-out"
+        },
+        {
+          "value": "ease-in-out",
+          "label": "ease-in-out"
+        },
+        {
+          "value": "linear",
+          "label": "linear"
+        }
+      ],
+      "group": "Transition"
+    },
+    "borderTopWidth": {
+      "type": "number",
+      "label": "Viền trên",
+      "css": "border-top-width",
+      "unit": "px",
+      "min": 0,
+      "max": 24,
+      "integer": true,
+      "group": "Border"
+    },
+    "borderRightWidth": {
+      "type": "number",
+      "label": "Viền phải",
+      "css": "border-right-width",
+      "unit": "px",
+      "min": 0,
+      "max": 24,
+      "integer": true,
+      "group": "Border"
+    },
+    "borderBottomWidth": {
+      "type": "number",
+      "label": "Viền dưới",
+      "css": "border-bottom-width",
+      "unit": "px",
+      "min": 0,
+      "max": 24,
+      "integer": true,
+      "group": "Border"
+    },
+    "borderLeftWidth": {
+      "type": "number",
+      "label": "Viền trái",
+      "css": "border-left-width",
+      "unit": "px",
+      "min": 0,
+      "max": 24,
+      "integer": true,
+      "group": "Border"
     }
   },
   "pages": [
@@ -1332,5 +1980,43 @@
       "reorder": false,
       "scope": "html body.studio-enabled #drawer#drawer#drawer"
     }
-  ]
+  ],
+  "motion": {
+    "defaults": {
+      "animationDuration": 400,
+      "animationDelay": 0,
+      "animationTimingFunction": "ease-out",
+      "animationIterations": "1",
+      "animationDirection": "normal",
+      "animationFillMode": "both",
+      "animationPlayState": "running"
+    },
+    "keyframes": "@keyframes hsk-design-fade{from{opacity:0}to{opacity:var(--hsk-design-opacity,1)}}\n@keyframes hsk-design-slide-up{from{opacity:0;translate:var(--hsk-design-x,0px) calc(var(--hsk-design-y,0px) + 16px)}to{opacity:var(--hsk-design-opacity,1);translate:var(--hsk-design-x,0px) var(--hsk-design-y,0px)}}\n@keyframes hsk-design-slide-right{from{opacity:0;translate:calc(var(--hsk-design-x,0px) - 16px) var(--hsk-design-y,0px)}to{opacity:var(--hsk-design-opacity,1);translate:var(--hsk-design-x,0px) var(--hsk-design-y,0px)}}\n@keyframes hsk-design-zoom{from{opacity:0;scale:calc(var(--hsk-design-scale,1) * .92)}to{opacity:var(--hsk-design-opacity,1);scale:var(--hsk-design-scale,1)}}\n@keyframes hsk-design-pulse{0%,100%{scale:var(--hsk-design-scale,1)}50%{scale:calc(var(--hsk-design-scale,1) * 1.04)}}\n@keyframes hsk-design-float{0%,100%{translate:var(--hsk-design-x,0px) var(--hsk-design-y,0px)}50%{translate:var(--hsk-design-x,0px) calc(var(--hsk-design-y,0px) - 8px)}}\n@keyframes hsk-design-spin{from{rotate:var(--hsk-design-rotate,0deg)}to{rotate:calc(var(--hsk-design-rotate,0deg) + 360deg)}}\n",
+    "channels": {
+      "hsk-design-fade": [
+        "opacity"
+      ],
+      "hsk-design-slide-up": [
+        "translate",
+        "opacity"
+      ],
+      "hsk-design-slide-right": [
+        "translate",
+        "opacity"
+      ],
+      "hsk-design-zoom": [
+        "scale",
+        "opacity"
+      ],
+      "hsk-design-pulse": [
+        "scale"
+      ],
+      "hsk-design-float": [
+        "translate"
+      ],
+      "hsk-design-spin": [
+        "rotate"
+      ]
+    }
+  }
 }
