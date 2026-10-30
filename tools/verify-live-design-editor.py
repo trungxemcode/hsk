@@ -28,7 +28,7 @@ def main():
     parser.add_argument('--delay', type=int, default=5)
     args = parser.parse_args()
     def fetch(path):
-        request = urllib.request.Request(URL + path + '?verify=' + str(time.time_ns()), headers={'Cache-Control': 'no-cache'})
+        request = urllib.request.Request(URL + path + '?verify=' + str(time.time_ns()), headers={'Cache-Control': 'no-cache', 'User-Agent': 'Mozilla/5.0 (compatible; HSK-Editor-Deploy/1.0)'})
         with urllib.request.urlopen(request, timeout=30) as response:
             return response.read()
     for attempt in range(args.attempts):

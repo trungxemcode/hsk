@@ -30,6 +30,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
  assert.equal(await frame.locator('#ai-panel').count(),0,'AI controls never enter release iframe');
  assert.equal(await page.evaluate(()=>JSON.stringify({...localStorage,...sessionStorage}).includes('sk-browser-test')),false,'API key never persists in browser storage');
  await page.screenshot({path:'/tmp/cloud-designer-chat-after.png',fullPage:true});
+ await page.setViewportSize({width:390,height:844});await page.locator('#mobile').click();await page.screenshot({path:'/tmp/cloud-designer-chat-phone.png',fullPage:true});await page.setViewportSize({width:1600,height:1000});await page.locator('#desktop').click();
  await page.locator('#undo').click();assert.equal(await page.locator('#field-fontSize').inputValue(),'','AI edit is one undo step');
  openaiDelay=600;await page.locator('#ai-send').click();await page.locator('#field-fontSize').fill('25');await page.locator('#field-fontSize').press('Tab');
  await page.waitForFunction(()=>document.getElementById('ai-status').textContent.includes('thông số đã đổi'));
