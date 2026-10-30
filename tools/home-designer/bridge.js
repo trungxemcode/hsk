@@ -25,7 +25,7 @@ window.HSKDesignerBridge={create(frame,schema,callbacks){
  async function until(fn,ms=12000){const start=Date.now();while(Date.now()-start<ms){const found=fn();if(found)return found;await sleep(80);}return null;}
  async function lesson(){win.history.replaceState(null,'',win.location.pathname+win.location.search);win.HSKStudio.navigate('lessons');await win.HSKLessonNav.open();const b=doc.querySelector('#lessonsContent .lesson-resume,#lessonsContent .lesson-row');if(b)b.click();await until(()=>doc.body.classList.contains('lesson-focus')&&doc.querySelector('#lessonsContent .lesson-guided-entry'));}
  async function open(next){
-  busy=true;editing=true;restore();win.HSKLessonGuided?.stop();for(const d of doc.querySelectorAll('dialog[open]'))d.close();win.HSKSpeech?.stop();doc.body.classList.remove('drawer-open');page=next;
+  busy=true;editing=true;restore();for(const p of doc.querySelectorAll(':popover-open'))p.hidePopover();if(!doc.getElementById('lessonChatPanel')?.hidden)doc.getElementById('lessonChatClose')?.click();win.HSKLessonGuided?.stop();for(const d of doc.querySelectorAll('dialog[open]'))d.close();win.HSKSpeech?.stop();doc.body.classList.remove('drawer-open');page=next;
   try{
    if(next.route==='music'||next.route==='music-play')await until(()=>win.HSKMusic,20000);
    win.history.replaceState(null,'',win.location.pathname+win.location.search);win.HSKStudio.navigate(next.route||'home');

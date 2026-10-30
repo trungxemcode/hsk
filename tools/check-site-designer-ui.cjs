@@ -10,7 +10,7 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   try{
    await page.locator('#'+mode).click();await page.locator('#page-select').selectOption(view.id);
    await page.waitForFunction(id=>document.getElementById('page-select').value===id&&!document.getElementById('status').textContent.startsWith('Đang mở'),view.id,{timeout:45000});
-   const status=await page.locator('#status').textContent();assert.ok(status.includes('Sẵn sàng'),view.id+': '+status);assert.equal(await frame.locator(view.root).count(),1,'one live root');
+   if(view.id!=='word-popup')assert.equal(await frame.locator(':popover-open').count(),0,'no leftover word popup');if(view.id!=='lesson-chat')assert.equal(await frame.locator('#lessonChatPanel').isVisible(),false,'no leftover chat panel');const status=await page.locator('#status').textContent();assert.ok(status.includes('Sẵn sàng'),view.id+': '+status);assert.equal(await frame.locator(view.root).count(),1,'one live root');
    const isVisible=await frame.locator(view.root).isVisible();if(!(mode==='mobile'&&view.id==='sidebar'))assert.ok(isVisible,'root visible: '+view.id+' '+mode);
    const parts=await page.locator('#parts .part').count();assert.ok(parts>0,'named components for '+view.id);report.push({page:view.id,mode,visible:isVisible,parts});
    if(mode==='desktop'&&['practice','quiz','account','music','writing','guided'].includes(view.id))await page.screenshot({path:'/tmp/site-designer-'+view.id+'.png',fullPage:true});
