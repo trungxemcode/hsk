@@ -154,7 +154,7 @@ html[data-theme=dark] #studioPractice .ps-disclosure{background:var(--surface);c
 .study4-exam-panel .s4-picker-choice small{font-size:11px;color:var(--sub)}
 .study4-exam-panel .s4-picker-choice.is-current{border:2px solid var(--accent);padding:8px 10px;background:var(--surface)}
 .study4-exam-panel .s4-picker-choice.is-current{background:var(--accent);color:var(--palette-white)}
-.study4-exam-panel .s4-picker-choice.is-current strong,.study4-exam-panel .s4-picker-choice.is-current small{color:var(--palette-white)}
+html body.studio-enabled .study4-exam-panel button.s4-picker-choice.is-current :is(strong,small){color:var(--palette-white)!important}
 .study4-exam-panel .s4-picker-choice:focus-visible,.study4-exam-panel .s4-picker-pages button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .study4-exam-panel .s4-picker-pages{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .study4-exam-panel .s4-picker-pages button{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--accent-ink);font:inherit;font-weight:750}
