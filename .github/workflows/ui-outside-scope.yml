@@ -47,6 +47,8 @@ jobs:
       with:
         name: ui-outside-scope-${{ matrix.width }}-${{ matrix.theme }}-${{ github.event.pull_request.head.sha }}
         path: /tmp/ui-outside-scope
+        # Retries must replace failed snapshots; duplicate names can make the gate read stale reports.
+        overwrite: true
         retention-days: 14
     strategy:
       fail-fast: false
