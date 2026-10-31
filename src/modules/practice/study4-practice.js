@@ -231,7 +231,7 @@
   pickerGrid.replaceChildren();
   const subset=items.slice(pickerPage*PICKER_PAGE_SIZE,(pickerPage+1)*PICKER_PAGE_SIZE);
   for(const t of subset){
-   const current=String(t.id)===String(selectedTestId),button=el('button',null,'s4-picker-choice'+(current?' is-current':''));
+   const current=String(t.id)===String(selectedTestId),button=el('button',null,'s4-picker-choice'+(current?' is-selected-paper':''));
    button.type='button';button.dataset.testId=String(t.id);
    button.setAttribute('aria-pressed',String(current));button.title=t.title;
    const shortTitle=String(t.title).match(/(?:practice|advanced|mock)\s+test\s+(\d+)/i);
