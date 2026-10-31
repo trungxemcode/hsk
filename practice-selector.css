@@ -156,9 +156,9 @@ html[data-theme=dark] #studioPractice .ps-disclosure{background:var(--surface);c
 .study4-exam-panel .s4-part-tab{border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);min-height:42px;padding:8px 14px;font-weight:700}
 .study4-exam-panel .s4-part-tab.is-active{background:var(--accent);border-color:var(--accent);color:var(--palette-white)}
 .study4-exam-panel .s4-audio-box{padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface);display:grid;gap:10px}
-.study4-exam-panel .s4-audio-box--inline{padding:10px 12px;background:var(--surface-muted,#f8fafc);border-radius:10px;margin:6px 0;gap:6px}
+.study4-exam-panel .s4-audio-box--inline{padding:10px 12px;background:var(--paper);border-radius:var(--radius-btn);margin:6px 0;gap:6px}
 .study4-exam-panel .s4-audio-box--group{margin:8px 0 12px}
-.study4-exam-panel .s4-audio-box--question{padding:6px 10px;margin:4px 0 8px;background:var(--surface-muted,#f8fafc)}
+.study4-exam-panel .s4-audio-box--question{padding:6px 10px;margin:4px 0 8px;background:var(--paper)}
 .study4-exam-panel .s4-audio-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .study4-exam-panel .s4-audio-head strong{font-size:14px;color:var(--ink)}
 .study4-exam-panel .s4-audio-sub{font-size:12px;color:var(--sub)}
