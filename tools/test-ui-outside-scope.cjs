@@ -28,3 +28,10 @@ test('rounded-edge raster sample differs from a real isolated pixel edit',()=>{
   const white={width:3,height:3,data:Buffer.alloc(36,255)},dot={...white,data:Buffer.from(white.data)};
   dot.data.set([0,0,0,255],16);assert.equal(visualPixels(white,dot),1,'real one-pixel edit must fail');
 });
+
+test('rerun replaces stale visual report artifacts rather than reusing failed snapshots',()=>{
+  const workflow=require('node:fs').readFileSync('.github/workflows/ui-outside-scope.yml','utf8');
+  const upload=workflow.split('    - name: Keep before, after, diff and report')[1]?.split('    strategy:')[0];
+  assert.ok(upload?.includes('uses: actions/upload-artifact@v4'),'visual snapshots must be uploaded');
+  assert.match(upload,/^        overwrite: true$/m,'retry uploads must replace artifacts from prior attempts');
+});
