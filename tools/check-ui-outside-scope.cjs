@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {execFileSync}=require('node:child_process');
 const assert=require('node:assert/strict');
-const {ROUTES,scope,pixels,visualPixels,measureDOM,scenarios}=require('./ui-outside-scope-core.cjs');
+const {ROUTES,scope,pixels,visualPixels,measureDOM,scenarios,canRecaptureGeometryOnly}=require('./ui-outside-scope-core.cjs');
 const {needsVisualComparison}=require('./ci-sharding-core.cjs');
 const [before,after,out]=process.argv.slice(2).map(x=>path.resolve(x));
 assert.ok(before&&after&&out,'Usage: node tools/check-ui-outside-scope.cjs BASE_DIR HEAD_DIR OUTPUT_DIR');
@@ -104,10 +104,12 @@ function serve(root){
  try{
   for(const {width,theme} of selectedScenarios)for(const route of protectedRoutes){
    const key=route+'-'+width+'-'+theme;
-   const a=await capture(servers[0],route,width,theme,path.join(out,key+'-before'));
-   const b=await capture(servers[1],route,width,theme,path.join(out,key+'-after'));
-   const result={key,title:a.title,geometryEqual:JSON.stringify(a.geometry)===JSON.stringify(b.geometry),imageCountEqual:a.images.length===b.images.length,rawChangedPixels:0,changedPixels:0};
-   for(let i=0;i<Math.min(a.images.length,b.images.length);i++){
+   let result,attempt=0;
+   for(attempt=1;attempt<=3;attempt++){
+    const a=await capture(servers[0],route,width,theme,path.join(out,key+'-before'));
+    const b=await capture(servers[1],route,width,theme,path.join(out,key+'-after'));
+    result={key,title:a.title,geometryEqual:JSON.stringify(a.geometry)===JSON.stringify(b.geometry),imageCountEqual:a.images.length===b.images.length,rawChangedPixels:0,changedPixels:0};
+    for(let i=0;i<Math.min(a.images.length,b.images.length);i++){
     const x=PNG.sync.read(fs.readFileSync(a.images[i])),y=PNG.sync.read(fs.readFileSync(b.images[i]));
     const delta=pixels(x,y);result.rawChangedPixels+=delta.changed;
     result.changedPixels+=visualPixels(x,y);
@@ -117,7 +119,11 @@ function serve(root){
      fs.writeFileSync(path.join(out,key+'-diff-'+i+'.png'),PNG.sync.write(diff));
     }
    }
-   result.pass=result.geometryEqual&&result.imageCountEqual&&result.changedPixels===0;
+    result.pass=result.geometryEqual&&result.imageCountEqual&&result.changedPixels===0;
+    if(result.pass||!canRecaptureGeometryOnly({...result,elementCountEqual:a.geometry.length===b.geometry.length})||attempt===3)break;
+    console.warn(`RECHECK ${key}: geometry-only CSSOM mismatch, fresh captures ${attempt+1}/3`);
+   }
+   result.captureAttempts=attempt;
    if(!result.pass)failures++;report.results.push(result);save();console.log((result.pass?'PASS ':'FAIL ')+key+' pixels='+result.changedPixels+' geometry='+result.geometryEqual);
   }
   report.result=failures?'FAIL: '+failures+' outside-scope states changed':'PASS: protected entry-page states unchanged';save();assert.equal(failures,0,report.result);

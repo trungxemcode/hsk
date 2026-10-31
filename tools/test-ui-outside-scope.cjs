@@ -1,5 +1,5 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
-const {ROUTES,scope,pixels,visualPixels}=require('./ui-outside-scope-core.cjs');
+const {ROUTES,scope,pixels,visualPixels,canRecaptureGeometryOnly}=require('./ui-outside-scope-core.cjs');
 test('only explicitly requested page is excluded; unknown/all-page bypass rejected',()=>{
   const protectedPages=scope({request:'Sửa A (Tài khoản)',excludedRoutes:['account']});
   assert.ok(!protectedPages.includes('account'));assert.ok(protectedPages.includes('lessons'));
@@ -34,4 +34,12 @@ test('rerun replaces stale visual report artifacts rather than reusing failed sn
   const upload=workflow.split('    - name: Keep before, after, diff and report')[1]?.split('    strategy:')[0];
   assert.ok(upload?.includes('uses: actions/upload-artifact@v4'),'visual snapshots must be uploaded');
   assert.match(upload,/^        overwrite: true$/m,'retry uploads must replace artifacts from prior attempts');
+});
+
+test('only re-capture geometry-only mismatches; never retry true visual regressions',()=>{
+  const mismatch={geometryEqual:false,imageCountEqual:true,changedPixels:0,elementCountEqual:true};
+  assert.equal(canRecaptureGeometryOnly(mismatch),true);
+  for(const bad of [{changedPixels:1},{geometryEqual:true},{imageCountEqual:false},{elementCountEqual:false}]){
+    assert.equal(canRecaptureGeometryOnly({...mismatch,...bad}),false);
+  }
 });
