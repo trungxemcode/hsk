@@ -29,18 +29,20 @@ export async function handleExamBank(request,env){
  try{
   const head=await env.EXAM_BUCKET.head(key);if(!head)return json({error:'Not found'},404);
   const headers=new Headers({...CORS,'Content-Type':contentType,'Cache-Control':cache,'ETag':head.httpEtag||`"${head.etag}"`});
-  if(dataName.test(u.pathname))headers.set('Content-Encoding','gzip');
+  // R2 keeps gzip bytes; returning them as JSON without decoding breaks browser fetch().json().
+  // Stream-decompress exactly once here; Cloudflare can negotiate HTTP compression itself.
+  if(dataName.test(u.pathname))headers.delete('Content-Encoding');
   if(allowRange)headers.set('Accept-Ranges','bytes');
   let range=null;
   if(allowRange&&request.headers.has('Range')&&(!request.headers.has('If-Range')||request.headers.get('If-Range')===headers.get('ETag'))){
    try{range=parseByteRange(request.headers.get('Range'),head.size);}catch{return new Response(null,{status:416,headers:{...CORS,'Content-Range':`bytes */${head.size}`}});}
   }
   if(!range&&request.headers.get('If-None-Match')===headers.get('ETag'))return new Response(null,{status:304,headers});
-  headers.set('Content-Length',String(range?range.length:head.size));
+  if(!dataName.test(u.pathname))headers.set('Content-Length',String(range?range.length:head.size));
   if(range)headers.set('Content-Range',`bytes ${range.offset}-${range.offset+range.length-1}/${head.size}`);
   if(method==='HEAD')return new Response(null,{status:range?206:200,headers});
   const asset=await env.EXAM_BUCKET.get(key,range?{range}:undefined);if(!asset)return json({error:'Not found'},404);
-  return new Response(asset.body,{status:range?206:200,headers});
+  return new Response(dataName.test(u.pathname)?asset.body.pipeThrough(new DecompressionStream('gzip')):asset.body,{status:range?206:200,headers});
  }catch{return json({error:'Exam storage temporarily unavailable'},503);}
 }
 export default {fetch:handleExamBank};
