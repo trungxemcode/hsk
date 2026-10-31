@@ -64,6 +64,14 @@ function serve(root){
    await page.evaluate(()=>document.fonts.ready);
    await page.addStyleTag({content:'*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important;scroll-behavior:auto!important}'});
    await page.waitForTimeout(1200);
+   // PWA releases necessarily update the version label on Account, even when
+   // no Account UI code changed. Normalize only its *text* in both captures.
+   // Keep the containing card, its CSS, all other text, and all layout geometry
+   // under strict comparison rather than excluding the entire Account route.
+   if(route==='account')await page.evaluate(()=>{
+    const label=document.getElementById('studioVersion');
+    if(label)label.textContent='Bản phát hành hiện tại';
+   });
    const title=await page.locator('#activeTitle').innerText();
    assert.ok(title.trim(),'Missing route title: '+route);
    // Confirm routes really opened, rather than comparing the previous page twice.
