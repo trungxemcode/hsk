@@ -47,3 +47,23 @@ body.guided-presenting{overflow:hidden}
 .guided-presentation select{min-height:36px;padding:4px;font-size:13px;max-width:100px}
 .guided-presentation footer>button{font-size:12px}
 @media(max-height:450px){.guided-presentation[open]{gap:5px;padding-block:6px;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto 4px minmax(0,1fr)}.guided-presentation header{grid-column:1/-1}.guided-presentation progress{grid-column:1/-1}.guided-presentation footer{grid-column:2;grid-row:3;max-width:215px;align-content:center;gap:6px}.guided-slide{gap:6px;padding:6px}.guided-slide-actions{gap:4px}.guided-presentation button{padding:6px;min-height:44px}.guided-slide-status{font-size:12px}}
+
+/* Viewport player structure must follow available space, including when a saved
+   visual-design stylesheet sets fixed heights or translates its controls.
+   Four selector anchors outrank the designer's three anchors, only in this dialog. */
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>.guided-slide,
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>footer,
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>footer>*:not(dialog),
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-slide-actions>button{
+ height:auto!important;min-height:0!important;max-height:none!important;position:static!important;translate:none!important;transform:none!important;margin:0!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;
+}
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open]>footer{align-content:start!important;align-items:center!important;gap:8px 14px!important;padding:0!important;flex-shrink:0!important}
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-slide-actions{gap:8px!important;flex:0 0 100%!important}
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] button,
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] select{min-height:44px!important}
+
+/* Larger viewport-relative reading type; existing fit() shrinks only if needed. */
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-slide-text{font-size:calc(clamp(28px,min(3.4vw,6vh),64px) * var(--slide-scale))!important;text-align:center!important}
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-slide[data-slide-kind=word] .guided-slide-text{font-size:calc(clamp(64px,min(7vw,12vh),120px) * var(--slide-scale))!important}
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-slide-pin{font-size:calc(clamp(22px,min(2.1vw,3.7vh),40px) * var(--slide-scale))!important;text-align:center!important;margin-inline:auto!important;width:100%;box-sizing:border-box}
+:is(#_hsk-guided-layout-a,.guided-presentation):is(#_hsk-guided-layout-b,.guided-presentation):is(#_hsk-guided-layout-c,.guided-presentation):is(#_hsk-guided-layout-d,.guided-presentation)[open] .guided-slide-label{font-size:calc(clamp(15px,1.25vw,24px) * var(--slide-scale))!important}

@@ -1888,6 +1888,333 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "local-home-designer",
+      "name": "Bộ chỉnh toàn app local: nháp từng trang PC/mobile, Undo/Redo, kéo thứ tự và áp dụng có kiểm tra",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "Chinh-giao-dien.cmd",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/editor.html",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/editor.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/core.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/schema.json",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/serve-home-designer.py",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-home-designer-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/core.js",
+          "value": "function generateCSS("
+        },
+        {
+          "kind": "contains",
+          "file": "tools/serve-home-designer.py",
+          "value": "ThreadingHTTPServer(('127.0.0.1', port)"
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/bridge.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-site-designer-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/core.js",
+          "value": "function emptyProject("
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/objects.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/schema.json",
+          "value": "\"moveX\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/schema.json",
+          "value": "\"borderColor\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/schema.json",
+          "value": "\"animationName\""
+        }
+      ]
+    },
+    {
+      "id": "cloud-ui-designer",
+      "name": "Hai link phát hành/chỉnh UXUI: chủ app tự đồng bộ CSS, chống ghi đè tab và giữ CSS cuối khi mất mạng",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "server/design/worker.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/design-worker.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/home-designer/cloud.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-cloud-designer-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "site-design-live.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "site-design-config.json",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "./site-design-live.js"
+        }
+      ]
+    },
+    {
+      "id": "editor-only-rulers-guides",
+      "name": "Thước pixel và đường căn riêng editor",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/guides.js",
+          "value": "designer-guides"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": "guides never enter release iframe"
+        }
+      ]
+    },
+    {
+      "id": "editor-automatic-deployment",
+      "name": "Tự triển khai editor sau merge main và xác minh bản thật",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": ".github/workflows/deploy-design-editor.yml",
+          "value": "hsk-design-editor-production"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/verify-live-design-editor.py",
+          "value": "def verify(fetch):"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/test_design_deployment.py",
+          "value": "test_rejects_stale_asset_even_with_correct_release"
+        }
+      ]
+    },
+    {
+      "id": "editor-chatgpt-selected-object",
+      "name": "Sửa box đang chọn bằng ChatGPT qua API, key riêng tư và hoàn tác",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/editor.html",
+          "value": "id=\"ai-panel\""
+        },
+        {
+          "kind": "contains",
+          "file": "server/design/worker.mjs",
+          "value": "/__designer/chatgpt"
+        },
+        {
+          "kind": "contains",
+          "file": "server/design/chatgpt.mjs",
+          "value": "store:false"
+        },
+        {
+          "kind": "contains",
+          "file": "server/design-chatgpt.test.mjs",
+          "value": "owner success never publishes"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-cloud-designer-ui.cjs",
+          "value": "late AI cannot overwrite manual edits"
+        }
+      ]
+    },
+    {
+      "id": "editor-hard-edit-nested",
+      "name": "Hard-edit chọn phần tử con trong group và lên cấp cha",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/editor.html",
+          "value": "id=\"hard-edit\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/bridge.js",
+          "value": "function preciseTarget(e)"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": "hard-edit never wraps or replaces DOM"
+        }
+      ]
+    },
+    {
+      "id": "editor-independent-axis-gaps",
+      "name": "Khoảng cách ngang và dọc độc lập trong editor",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/schema.json",
+          "value": "\"columnGap\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/schema.json",
+          "value": "\"rowGap\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": "axis gaps override uniform gap independently"
+        }
+      ]
+    },
+    {
+      "id": "editor-multi-select-align",
+      "name": "Quét chọn nhiều object và căn giãn đều độc lập",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/editor.html",
+          "value": "id=\"multi-select\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/multi.js",
+          "value": "function layout(items,action)"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": "marquee selects multiple contained objects"
+        }
+      ]
+    },
+    {
+      "id": "editor-group-drag",
+      "name": "Kéo cả nhóm đang chọn, Hoàn tác và hủy nguyên nhóm",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/editor.js",
+          "value": "function motionTargets"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": "Escape restores the whole group"
+        }
+      ]
+    },
+    {
+      "id": "editor-align-selected-anchor",
+      "name": "Căn giữa object đã chọn, giữ object mốc và bỏ khung cha",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "tools/home-designer/editor.html",
+          "value": "id=\"align-reference\""
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-designer-objects-ui.cjs",
+          "value": "selected key object stays fixed"
+        }
+      ]
+    },
+    {
+      "id": "guided-readable-type-pinyin",
+      "name": "Chữ toàn màn hình lớn, pinyin tách âm và luôn căn giữa",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/lessons/lesson-guided-core.js",
+          "value": "function formatPinyin"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/test-guided-pinyin.cjs",
+          "value": "does not mutate presentation input or speech text"
+        }
+      ]
+    },
+    {
+      "id": "account-uniform-card-spacing",
+      "name": "Các khối Tài khoản cách đều16px",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "studio-layout.css",
+          "value": "margin-block-start:16px!important"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-account-card-spacing-ui.cjs",
+          "value": "uniform16px gaps"
+        }
+      ]
     }
   ]
 }

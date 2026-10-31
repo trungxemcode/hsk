@@ -1,0 +1,6 @@
+{
+  "request": "Căn chỉnh menu trên thanh đầu trang mobile tại màn hình Trang chủ; không thay đổi bố cục các trang khác.",
+  "excludedRoutes": [
+    "home"
+  ]
+}

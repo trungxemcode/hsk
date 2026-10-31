@@ -1,0 +1,86 @@
+# Chỉnh giao diện toàn app HSK trên máy
+
+## Mở bộ chỉnh
+
+Trên Windows, mở thư mục dự án rồi bấm đúp **Chinh-giao-dien.cmd**. Cần Python 3.10 trở lên. Giữ cửa sổ lệnh mở trong lúc chỉnh. Bộ chỉnh mở tại `http://127.0.0.1:8788/tools/home-designer/editor.html`; nếu cổng đang được dùng, chạy `python tools/serve-home-designer.py --port 8789 --open`.
+
+Không cần npm, API AI, Figma hay tài khoản dịch vụ thiết kế. Bộ chỉnh chỉ phục vụ trên địa chỉ loopback. Nó dùng một cổng riêng với app local thường mở ở cổng 8000, nên bản xem thử có vùng lưu dữ liệu riêng. Không mở bộ chỉnh trên cùng cổng đã dùng làm app học thường ngày. Tài khoản/push và kết nối dịch vụ bên ngoài bị tắt trong máy chủ chỉnh sửa; phần Dùng thử dành cho xem bố cục và các thao tác local.
+
+## Chỉnh trực tiếp
+
+1. Chọn trang trong ô **Trang đang chỉnh** ở bảng trái. Có 44 trang/khung: trang chủ, bài học và học tự động, các chế độ luyện, sổ từ, tra cứu/dịch/ảnh, nhạc, tài khoản, menu chung và cửa sổ công cụ. Bấm vào chữ, nút hoặc khối trong bản xem để chọn. Nút trong app không chạy khi đang ở chế độ chỉnh.
+2. Bảng bên phải chỉnh riêng phần tử đang chọn: chữ, căn hàng, khoảng đệm, khoảng cách và các màu theo theme hiện có. Ô để trống nghĩa là dùng kiểu mặc định của app. Các thông số PC và điện thoại tách biệt.
+3. Bấm **Chọn cả khối** khi muốn chỉnh khoảng cách của cả thẻ thay vì từng dòng chữ. **Mở/thu nội dung** giúp xem phần nằm trong khung thu gọn.
+4. Kéo tay nắm trên khung đang chọn hoặc kéo các khối ở bảng trái để đổi thứ tự. Có nút Lên/Xuống để dùng bàn phím. Thứ tự dùng CSS; không clone nút hay di chuyển DOM của app.
+5. **Hiện kế hoạch mẫu** tạo lộ trình minh họa trong vùng lưu riêng của bản xem để chỉnh được các dòng nhiệm vụ. Không đồng bộ lên tài khoản.
+6. **Dùng thử** cho phép bấm các nút của app. Bấm **Quay lại chỉnh sửa** để về trang chủ và tiếp tục chọn phần tử.
+7. **Hoàn tác/Làm lại** hoặc Ctrl+Z/Ctrl+Shift+Z thao tác trên lịch sử tối đa 100 lần chỉnh. **Khôi phục bản mặc định** vẫn có thể hoàn tác.
+
+Mỗi trang giữ riêng cấu hình PC/điện thoại. Những khối có dòng chảy thông thường cho phép kéo đổi thứ tự; trình phát, thanh điều hướng và cửa sổ cố định giữ thứ tự để bảo toàn tương tác. Vẫn có thể chọn phần tử trong các khung đó để chỉnh chữ, căn hàng và khoảng cách. Không hỗ trợ xóa/nhân bản chức năng hay kéo vị trí pixel tự do.
+
+**Cập nhật thành phần** nhận diện lại nội dung sau khi mở một trạng thái mới. **Hiện phần đang ẩn** chỉ mở phần tử trong bản xem, không xuất quy tắc hiện/ẩn vào app. Các màn cần quyền/dữ liệu online chỉ có khung có sẵn; bộ chỉnh không cấp quyền, không giả đăng nhập và không gửi yêu cầu AI. Trong Dùng thử có thể mở trạng thái local (ví dụ câu hỏi hoặc sổ từ) rồi quay lại chỉnh ngay tại trạng thái đó.
+
+## Giữ bản chỉnh và áp dụng
+
+- Bản nháp tự lưu trong trình duyệt, gắn với thư mục dự án. Nháp v2 chứa nhiều trang; nhập nháp trang chủ v1 chỉ cập nhật trang chủ và giữ nguyên các trang khác. **Xuất bản nháp** giữ một file JSON để sao lưu, chuyển máy hoặc gửi cho AI tiếp tục. **Nhập bản nháp** kiểm tra cấu trúc/giá trị trước khi thay trạng thái; tệp sai không ghi đè bản đang chỉnh.
+- **Xuất CSS** tải CSS được sinh từ cấu hình. Hãy giữ JSON cùng CSS để chỉnh lại sau này.
+- **Lưu vào dự án** chỉ ghi sau hộp xác nhận. Nó cập nhật `home-design.json`, `home-design.css`, một vùng link có đánh dấu trong `index.html`, và đăng ký CSS vào danh mục tài nguyên PWA khi có danh mục. Không sửa handler, ID, nội dung bài học, tiến độ, khóa lưu trữ hoặc những stylesheet khác. Lưu lặp chỉ cập nhật một link.
+- Thay đổi này mới nằm trên máy. Bộ chỉnh không tự commit, push, merge hoặc phát hành. Trước khi đưa lên GitHub, làm theo quy trình PR/PWA của dự án: khai báo thay đổi layout, kiểm tra, chạy `python tools/prepare-pwa-release.py --note "Mô tả thay đổi giao diện"` trên nhánh tính năng rồi kiểm tra `python tools/check-pwa-release.py --base origin/main`.
+
+Muốn một trang trở về giao diện gốc sau khi đã áp dụng: chọn trang rồi **Khôi phục trang này → Lưu vào dự án**. Các trang khác được giữ nguyên. CSS mặc định không có rule thay đổi giao diện.
+
+## Kiểm tra cho người bảo trì
+
+`node tools/check-home-designer-core.cjs`, `python -m unittest discover -s tools -p test_home_designer.py`, và `node tools/check-home-designer-ui.cjs`, và `node tools/check-site-designer-ui.cjs`.
+
+Kiểm tra UI tạo một bản sao tạm bằng hardlink, chạy app và máy chủ thật trên bản sao, kiểm tra chọn không kích hoạt nút, PC/mobile, Undo/Redo, lưu/mở lại nháp, kéo thực, export/import, ghi file và app thông thường sau khi áp dụng. Việc ghi dùng thay thế file nên không sửa nguồn của hardlink. Các bài bảo toàn tính năng hiện có vẫn phải chạy.
+
+`schema.json` chứa danh sách trang, phạm vi CSS và thuộc tính được phép. Phần tử nhận diện trong từng trang được lưu bằng selector cấu trúc có kiểm tra; không cho selector vượt ra ngoài phạm vi trang hoặc chèn CSS tự do. Bộ sinh CSS trình duyệt và bộ ghi Python dùng cùng schema, có kiểm tra kết quả giống hệt nhau. Chỉ một stylesheet được quản lý có độ ưu tiên cố định, có phạm vi trang chủ và breakpoint; không nối chồng stylesheet mỗi lần chỉnh.
+
+Tên home-design.json/CSS được giữ để tương thích bản trang chủ cũ; nội dung v2 chứa cấu hình của các trang đã chỉnh. Xuất bản nháp hiện tải hsk-giao-dien.json. Chỉnh theo vị trí dòng/thẻ là chỉnh ô giao diện đó, không sửa dữ liệu từ vựng hay nội dung bài. Undo/Redo hoạt động trên toàn bộ nháp và quay về trang của lần chỉnh tương ứng.
+
+## Hai link online
+- Bản phát hành: https://trungxemcode.github.io/hsk/
+- Chỉnh UX/UI: https://hsk-ui-designer.trung-hsk668.workers.dev/
+
+Đăng nhập ở link chỉnh bằng tài khoản chủ app HSK. Mỗi chỉnh sửa hợp lệ tự lưu; xem trạng thái “Đã đồng bộ tới bản phát hành”. Bản phát hành đang mở nhận CSS trong khoảng 15 giây hoặc ngay khi trở lại trang, tùy mạng. Không phải bấm Lưu vào dự án; nút Đồng bộ ngay cho phép thử lại. Đăng xuất khi dùng xong trên máy chung.
+
+Nếu hai tab cùng chỉnh, tab cũ bị dừng ghi thay vì ghi đè. Xuất nháp trước khi tải lại; nút Tải nháp chưa đồng bộ giúp giữ thay đổi chưa gửi. Hoàn tác cũng được đồng bộ sang bản phát hành. Khi mất mạng, thay đổi chưa gửi còn trong nháp; bản phát hành giữ CSS gần nhất. Các phần tử/dữ liệu chỉ xuất hiện sau đăng nhập hoặc từ API ngoài không được giả lập trong preview.
+
+Triển khai editor: chạy python3 tools/pack-design-editor.py, rồi npx wrangler deploy --config server/design/wrangler.jsonc trong môi trường Cloudflare đã đăng nhập. Chỉ bundle public assets; không gói secrets. Worker này độc lập với API nhạc/AI/voice.
+
+Nếu Wrangler không hỗ trợ API deployment của phiên đăng nhập hiện tại, có thể dùng Direct Upload API chính thức: tạo bundle bằng npx wrangler deploy --dry-run --outdir /tmp/hsk-cloud-worker-bundle --config server/design/wrangler.jsonc, rồi python3 tools/deploy-design-editor.py --account-id ACCOUNT_ID --bundle /tmp/hsk-cloud-worker-bundle/worker.js (Python 3.11+). Công cụ chỉ triển khai Worker hsk-ui-designer và không in token.
+
+## Kéo object và chỉnh Position / Border / Animation
+Bấm giữ ngay trên chữ/nút rồi kéo để di chuyển. Kéo tay nắm ở cạnh/góc khung chọn để đổi kích thước. Tay nắm ✥ di chuyển object; tay nắm ⠿ vẫn đổi thứ tự cả khối. Giữ Shift khi kéo để khóa trục. Mũi tên dịch 1px, Shift + mũi tên dịch 10px khi chọn object trong bản xem. Một lần kéo chỉ tạo một bước Hoàn tác. Escape hủy lần kéo đang thực hiện.
+
+Các tab Vị trí, Border, Animation, Chữ đưa bạn tới đúng nhóm trong bảng bên phải. X/Y giữ chỗ cũ; Position Absolute/Fixed thay đổi luồng theo CSS, Top/Left dùng khi Position khác Static. Border có độ dày, kiểu, màu picker/HEX/theme và bo từng góc. Animation có hiệu ứng có sẵn, thời lượng, độ trễ, nhịp, lặp, chiều, trạng thái và cách kích hoạt. Xem thử chỉ phát lại trong editor; thiết lập hợp lệ vẫn tự đồng bộ như trước. Hệ điều hành chọn giảm chuyển động sẽ giảm hiệu ứng.
+
+### Thước và đường căn
+Thước pixel theo tỷ lệ zoom. Kéo từ thước trên để tạo đường căn ngang, từ thước trái để tạo đường căn dọc. Kéo đường để di chuyển; nhấp đúp, Delete hoặc kéo ra ngoài khung để xóa; nút Xóa đường căn xóa toàn bộ đường của trang/kích thước hiện tại. Escape hủy thao tác kéo. Đường căn chỉ tồn tại trong phiên editor, riêng theo trang và PC/điện thoại; không lưu vào cấu hình/CSS, không đồng bộ sang bản phát hành, ẩn khi Dùng thử.
+
+### Tự triển khai sau merge
+Workflow `Deploy UX UI editor` chạy khi `main` được cập nhật, hoặc chạy thủ công bằng Actions → Run workflow trên `main`. Mỗi lượt kiểm tra PWA/backend, đóng gói app/editor, triển khai riêng `hsk-ui-designer`, rồi đối chiếu release và toàn bộ tệp editor qua HTTPS. Các lượt triển khai tuần tự; không hủy giữa lúc upload. Dữ liệu thiết kế R2 và các Worker nhạc/AI/voice được giữ nguyên.
+
+Cấu hình một lần tại Settings → Secrets and variables → Actions: `CLOUDFLARE_API_TOKEN` (token Cloudflare có quyền Workers Editor cho Worker hsk-ui-designer trong đúng account), `CLOUDFLARE_ACCOUNT_ID`. Không dùng token OAuth đăng nhập tạm thời làm secret tự triển khai. Thiếu secrets thì workflow dừng với thông báo rõ ràng. `APP_RELEASE` lấy từ `app-version.json` khi deploy, không phụ thuộc giá trị cũ trong Wrangler config. Link editor: https://hsk-ui-designer.trung-hsk668.workers.dev/.
+
+### Sửa box bằng ChatGPT / Codex
+Mở editor online, đăng nhập chủ app, chọn box rồi mở mục **Sửa với ChatGPT / Codex** trong bảng thuộc tính. Nhập yêu cầu và bấm **Sửa với ChatGPT**. Có thể chỉnh các thuộc tính editor đang hỗ trợ (vị trí, kích thước, chữ, màu, border, animation/transition); chưa sửa nội dung chữ, chức năng hay source code tùy ý. Kết quả áp dụng thành một bước Hoàn tác và dùng cơ chế tự đồng bộ sẵn có. Box/thông số thay đổi trong lúc chờ sẽ chặn áp dụng kết quả cũ.
+
+Trong **API key & model**, nhập OpenAI API key vào ô mật khẩu và chọn model có quyền dùng Responses + Structured Outputs (mặc định `gpt-6-sol`). Key không được ghi vào localStorage/sessionStorage, nháp, CSS hay dữ liệu phát hành; chỉ tồn tại trong ô nhập đến khi xóa/tải lại trang. Nút **Xóa key khỏi phiên** xóa ô nhập. API tính phí riêng. Hoặc thêm Actions secret `OPENAI_API_KEY`: lần triển khai tiếp theo cấu hình secret phía Worker, không cần nhập key ở editor. Các secret Worker được giữ khi triển khai lại. Key không trả về trong state/public API và lỗi không chứa nội dung thô từ nhà cung cấp.
+
+AI chỉ trả patch thuộc tính của một box; máy chủ xác thực owner/origin và kiểm tra giới hạn schema trước khi trả về. Không chạy JavaScript/CSS tự do do AI tạo. Yêu cầu gửi qua Responses API với `store:false`, timeout60s, không tự retry chi phí. Hủy chờ ngăn áp dụng kết quả trong editor; không đảm bảo nhà cung cấp dừng tính phí nếu đã bắt đầu xử lý.
+
+### Hard-edit phần tử trong group
+Bật **Hard-edit** trên thanh công cụ để chọn sâu từng span, icon, ảnh hoặc phần tử SVG bên trong group, kể cả phần tử con có pointer-events:none. Bảng **Cấp phần tử** và danh sách **Phần tử con trực tiếp** giúp chọn đúng cấp; **↑ Cấp cha** lên một cấp DOM. Các chỉnh sửa dùng chung Position/Border/Animation/ChatGPT, Hoàn tác và tự đồng bộ. Chỉ bật/tắt không thay đổi thiết kế; cấu trúc DOM và hành vi nút vẫn giữ nguyên. Chữ gắn trực tiếp vào node cha, phần tử giả CSS ::before/::after và chi tiết nằm trong ảnh raster/canvas chưa phải object DOM riêng để tách chọn. Không tự bọc/tách DOM vì sẽ làm selector của bản phát hành sai khác.
+
+Trong nhóm **Căn hàng**, **Khoảng cách chung** đặt gap cho cả hai chiều; **Khoảng cách ngang** (column-gap) và **Khoảng cách dọc** (row-gap) ghi đè riêng từng chiều. Đơn vị px, khoảng0–64; để trống một chiều để dùng khoảng chung/mặc định. Các giá trị có tác dụng với bố cục flex/grid, không phải khoảng cách ký tự trong một từ.
+
+### Chọn nhiều và căn/giãn đều
+Giữ Shift để thêm hoặc Ctrl/Cmd để thêm/bớt object khi bấm trong preview. Hoặc bật **Quét chọn**, kéo một hình chữ nhật bao các object, rồi tắt chế độ để trở về kéo từng object. Với ít nhất2 object, dùng **Căn trái / Giữa ngang / Căn phải**, **Căn trên / Giữa dọc / Căn dưới**. Từ3 object, **Đều ngang / Đều dọc** chia đều khoảng trống giữa mép object và giữ hai đầu. Căn theo khung bao của các object đang chọn; không đổi thứ tự DOM hay kích thước. Mỗi thao tác là một bước Hoàn tác. Nếu chọn cả cha lẫn con, khi căn bỏ qua khung cha để chỉ căn các object con. Khi kéo nhóm chỉ dịch cha để tránh con bị dịch hai lần. Khung quét và đường bao chỉ thuộc editor, không xuất hiện trên bản phát hành.
+
+Sau khi chọn nhiều object, tắt Quét chọn rồi kéo một thành viên hoặc tay cầm di chuyển để dịch cả nhóm cùng khoảng X/Y. Giữ nguyên khoảng cách, giữ nhóm chọn; một bước Hoàn tác hoặc Escape hủy toàn bộ lượt kéo. Nếu chọn lẫn cha và con, chỉ dịch cha để con không bị dịch hai lần. Resize vẫn chỉnh riêng object đang thao tác. Nhóm được chặn cùng nhau khi chạm giới hạn dịch chuyển, tránh làm lệch tương quan vị trí.
+
+Phép căn bỏ qua khung cha nếu các phần tử con cũng được chọn, chỉ dùng các object nhỏ được chọn. **Mốc căn** mặc định giữ object chọn cuối cố định; các object khác căn theo nó. Có thể chuyển sang căn giữa nhóm được chọn. Danh sách tên object cho phép bỏ object thừa trước khi căn. Giãn đều vẫn giữ hai đầu của nhóm. Đây là quy tắc căn; kéo nhóm vẫn chỉ dịch cha nếu cả cha và con được chọn để tránh dịch con hai lần.
+
+Thanh nhãn tím và nút nổi trên object được ẩn để không che chữ; tên và thao tác dùng bảng thuộc tính. Viền chọn mảnh và góc resize vẫn hiển thị; kéo trực tiếp object để di chuyển.

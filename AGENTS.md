@@ -44,3 +44,37 @@ The older `C:\New folder\hsk` is a secondary checkout, not a separate app or sou
 - If the task changes a verified subsystem, update only its section of `docs/ai/PROJECT_MAP.md`; use `docs/ai/TASK_STATE.md` as a brief handoff with current task, decisions, affected files, tests and blockers.
 - Treat all notes as a map, **not** as a replacement for checking changed code or current `git status`.
 - Do not store tokens, credentials, personal user data, or API keys in AI handoff files.
+
+## Layout declaration and approval (owner policy)
+Before running tests for every PR, declare whether layout is expected to change, listing exact pages, PC/mobile scope, and intended differences. Check before/after screenshots and geometry for affected shared controls. Stop on undeclared differences. Never silently refresh visual baselines or weaken assertions. A layout-changing PR requires the owner's review of the concrete changes before merge. Passing tests do not constitute owner approval. Record the declaration in the PR body. GitHub enforcement requires a required status check/ruleset and is not implied by this document.
+
+## Unchanged-page visual comparison before merge (owner policy)
+For every PR that can affect the rendered UI, follow [UI_SCOPE_REVIEW.md](docs/ai/UI_SCOPE_REVIEW.md). Declare the exact pages/modes the user authorized changing BEFORE editing. Compare the PR base and final head on every page outside that scope, using matched screenshots and geometry on PC/mobile. The requested page is excluded from THIS unchanged-page comparison; its own functional/layout tests still apply. Shared navigation and controls outside the authorized region remain protected. Any unexplained outside-scope difference or missing comparison evidence blocks merge. Never broaden the scope, refresh the baseline, or mark this check passed merely to accept a regression. Record the refs, page inventory, states, evidence and result in the PR checklist. Recheck after relevant code/base changes. This is a mandatory review rule; it does not itself install a GitHub required status check.
+
+
+## Token Optimization Rules
+
+- Only inspect files relevant to the current task.
+- Prefer symbol search before reading large files.
+- Reuse verified project architecture documentation.
+- Batch independent code searches and checks.
+- Avoid repeating identical failed commands.
+- Do not launch subagents unless necessary.
+- Do not load unrelated MCP tools.
+- Run targeted tests first, then broader tests when needed.
+- Keep terminal output concise.
+- Avoid unnecessary full-repository scans.
+- Keep responses short and focused.
+- Update a brief handoff after major milestones.
+- Never sacrifice correctness or security to save tokens.
+
+
+## Code Exploration Rules
+
+- Inspect only files relevant to the task.
+- Search for functions before reading entire files.
+- Avoid repeated full-repository scans.
+- Reuse verified architecture documentation.
+- Use concise terminal output.
+- Run targeted tests before broader regression tests.
+- Do not repeat failed tests without diagnosing the cause.

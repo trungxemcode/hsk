@@ -58,5 +58,16 @@ function practiceLead(){return 900;}
 function transitionPause(){return 300;}
 function pronunciationGap(){return 300;}
 function karaokeDuration(slide,speed=.75,modelMs=0){const count=Array.from(slide.text||'').filter(c=>/\p{Script=Han}/u.test(c)).length;return Math.max(8000,count*650,modelMs*1.4)/Math.max(.65,Math.min(1,Number(speed)||.75));}
-const api={plan,duration,presentation,slideDuration,practiceLead,transitionPause,pronunciationGap,karaokeDuration};root.HSKGuidedCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
+// Display-only segmentation: retain original letters/tones; never regenerate pronunciation.
+function formatPinyin(value,han=''){
+ const source=String(value||'').normalize('NFC'),expected=/^[\p{Script=Han}]+$/u.test(han)?Array.from(han).length:0;
+ const tokenPattern=/[\p{Script=Latin}\p{M}1-5]+/gu,whole=/^[\p{Script=Latin}\p{M}1-5]+$/u.test(source.trim());
+ return source.replace(tokenPattern,token=>{
+  const chars=Array.from(token),memo=new Map();
+  const valid=piece=>{const tones=piece.match(/[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ1-5]/g)||[];if(tones.length>1)return false;const base=piece.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');return /^(?:(?:zh|ch|sh|[bpmfdtnlgkhjqxrzcswy])?(?:a|o|e|ai|ei|ao|ou|an|en|ang|eng|ong|i|ia|ie|iao|iu|ian|in|iang|ing|iong|u|ua|ue|uo|uai|ui|uan|un|uang|ueng|v|ve|van|vn)|er|ng)[1-5]?$/.test(base);};
+  function solve(i){if(i===chars.length)return new Map([[0,[]]]);if(memo.has(i))return memo.get(i);const out=new Map();for(let end=Math.min(chars.length,i+7);end>i;end--){const part=chars.slice(i,end).join('');if(!valid(part))continue;for(const [count,rest]of solve(end))if(!out.has(count+1))out.set(count+1,[part,...rest]);}memo.set(i,out);return out;}
+  const choices=solve(0),count=whole&&expected&&choices.has(expected)?expected:Math.min(...choices.keys());return choices.get(count)?.join(' ')||token;
+ }).replace(/[’']/g,' ').replace(/\s+/g,' ').trim();
+}
+const api={formatPinyin,plan,duration,presentation,slideDuration,practiceLead,transitionPause,pronunciationGap,karaokeDuration};root.HSKGuidedCore=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window==='object'?window:globalThis);

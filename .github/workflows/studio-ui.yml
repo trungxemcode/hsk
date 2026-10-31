@@ -2,131 +2,90 @@ name: Studio layout checks
 on:
   pull_request:
     # Visual-layer changes must run the same responsive and interaction checks.
-    paths: ['redesign.css', 'redesign.js', 'tools/check-redesign-ui.cjs', 'src/**', 'content/data/**', 'loader.js', 'tools/pwa-assets.json', 'home-overview*', 'tools/check-home-overview-ui.cjs', 'tools/check-press-shape-ui.cjs', 'mobile-ux*', 'tools/check-mobile-ux*.cjs', 'tools/check-ios-animation-ui.cjs', 'tools/check-mobile-flow*.cjs', 'passive*', 'tools/check-passive*.cjs', 'app.js', 'placement*', 'tools/check-placement*.cjs', 'style.css', 'mobile-layout.css', 'ui-buttons.css', 'handwriting.css', 'speech.css', 'lesson-chat.css', 'tools/check-design-tokens.cjs', 'study-sync*', 'ui-buttons.css', 'notebook*', 'backup*', 'tools/check-notebook*.cjs', 'account.js', 'index.html', 'studio.js', 'planner.js', 'planner-core.js', 'exam*', 'drive-exam*', 'drive-audio*', 'open-dictionary*', 'content/open-dictionary/**', 'tools/check-open-dictionary*.cjs', 'tools/build-open-dictionary.py', 'content/drive-hsk/**', 'tools/import-drive-hsk.py', 'ai-coach*', 'coach-profile.js', 'lessons.js', 'lessons-data.json', 'lesson-mastery.js', 'lesson-mini*', 'lesson-guided*', 'tools/check-lesson-guided-ui.cjs', 'account-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-exam*.cjs', 'tools/check-ai-coach*.cjs', 'tools/check-lesson-mini*.cjs', 'tools/check-reading-dom.cjs', 'real-reading*', 'tools/check-real-reading*.cjs', 'practice-games*', 'practice-selector*', 'study4-practice.js', 'tools/check-practice-games*.cjs', 'tools/check-practice-picker-ui.cjs', '.github/workflows/studio-ui.yml']
+    paths: ['redesign.css', 'redesign.js', 'tools/check-redesign-ui.cjs', 'src/**', 'content/data/**', 'loader.js', 'tools/pwa-assets.json', 'home-overview*', 'tools/check-home-overview-ui.cjs', 'tools/check-desktop-layout-polish-ui.cjs', 'tools/check-press-shape-ui.cjs', 'mobile-ux*', 'tools/check-mobile-ux*.cjs', 'tools/check-ios-animation-ui.cjs', 'tools/check-mobile-flow*.cjs', 'passive*', 'tools/check-passive*.cjs', 'app.js', 'placement*', 'tools/check-placement*.cjs', 'style.css', 'mobile-layout.css', 'ui-buttons.css', 'handwriting.css', 'speech.css', 'lesson-chat.css', 'tools/check-design-tokens.cjs', 'study-sync*', 'ui-buttons.css', 'notebook*', 'backup*', 'tools/check-notebook*.cjs', 'account.js', 'index.html', 'studio.js', 'planner.js', 'planner-core.js', 'exam*', 'drive-exam*', 'drive-audio*', 'open-dictionary*', 'content/open-dictionary/**', 'tools/check-open-dictionary*.cjs', 'tools/build-open-dictionary.py', 'content/drive-hsk/**', 'tools/import-drive-hsk.py', 'ai-coach*', 'coach-profile.js', 'lessons.js', 'lessons-data.json', 'lesson-mastery.js', 'lesson-mini*', 'lesson-guided*', 'tools/check-lesson-guided-ui.cjs', 'account-core.js', 'server/**', 'studio-layout.css', 'tools/check-studio*.cjs', 'tools/check-exam*.cjs', 'tools/check-ai-coach*.cjs', 'tools/check-lesson-mini*.cjs', 'tools/check-reading-dom.cjs', 'real-reading*', 'tools/check-real-reading*.cjs', 'practice-games*', 'practice-selector*', 'study4-practice.js', 'tools/check-practice-games*.cjs', 'tools/check-practice-picker-ui.cjs', '.github/workflows/studio-ui.yml', 'tools/ci-suites.json', 'tools/*ci-shard*.cjs', 'tools/run-ci-suite.cjs', 'tools/check-ci-reports.cjs']
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: studio-layout-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  layout:
+  layout-shards:
+    name: layout-shard (${{ matrix.shard }}/6)
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        shard:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
     steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Install test dependencies
-        run: npm install --prefix /tmp/hsk-tests jsdom@26.1.0 playwright@1.56.1
-      - name: Install Chinese fonts for visual checks
-        continue-on-error: true
-        timeout-minutes: 2
-        run: sudo apt-get update -qq -o Acquire::ForceIPv4=true -o Acquire::http::Timeout=15 && sudo apt-get install -y --no-install-recommends fonts-noto-cjk || true
-      - name: Verify mobile lesson chat
-        env:
-          NODE_PATH: /tmp/hsk-tests/node_modules
-        run: CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-chat-mobile-ui.cjs
-      - name: Verify music link controls
-        env:
-          NODE_PATH: /tmp/hsk-tests/node_modules
-        run: CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-links-ui.cjs
-      - name: Functional regression checks
-        env:
-          NODE_PATH: /tmp/hsk-tests/node_modules
-        run: |
-          node tools/check-music-dom.cjs
-          node tools/check-music-links-dom.cjs
-          node tools/check-design-tokens.cjs
-          node tools/check-placement-dom.cjs
-          node tools/check-placement-route-dom.cjs
-          node tools/check-passive-dom.cjs
-          node --test server/*.test.mjs
-          node tools/check-speech-dom.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-chinese-voices-ui.cjs
-          node tools/check-reading-dom.cjs
-          node tools/check-studio-dom.cjs
-          node tools/check-notebook-dom.cjs
-          node tools/check-notebook-factory-dom.cjs
-          node tools/check-planner-dom.cjs
-          node tools/check-study-sync-dom.cjs
-          python3 tools/check-pwa-release.py
-          python3 -m unittest discover -s tools -p 'test_pwa_release*.py'
-          node tools/check-update-dom.cjs
-          node tools/check-ai-coach-dom.cjs
-          node tools/check-exam-dom.cjs
-          node tools/check-open-dictionary-dom.cjs
-          node tools/check-lesson-mini-dom.cjs
-          node tools/check-practice-games-core.cjs
-          node tools/check-real-reading-variety.cjs
-          python3 -m unittest discover -s tools -p 'test_update*.py'
-      - name: Browser layout and controls
-        env:
-          NODE_PATH: /tmp/hsk-tests/node_modules
-        run: |
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-ios-animation-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-karaoke-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-lyrics-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-transcript-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-background-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-resume-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-import-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-menu-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-smart-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-delete-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-search-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-artwork-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-surfaces-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-workbuddy-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-selection-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-queue-motion-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-entry-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-startup-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-online-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-redesign-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-music-mobile-nav-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-lesson-guided-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-guided-presentation-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-press-shape-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-shared-press-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-account-roles-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-home-overview-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-clean-ux-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-ai-loading-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-responsive-goal-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-mobile-ux-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-mobile-flow-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-writing-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-placement-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-placement-route-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-placement-feedback-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-placement-adaptive-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-passive-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-search-tabs-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-practice-games-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-practice-picker-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-real-reading-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-goal-scope-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-ios-push-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-studio-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-dark-contrast-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-ui.cjs
-          CHROME_EXECUTABLE="$(command -v google-chrome)" node tools/check-notebook-factory-ui.cjs
-      - name: Keep layout screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: studio-layout-screenshots
-          path: |
-            /tmp/studio-*.png
-            /tmp/music-*.png
-            /tmp/mobile-ux-*.png
-            /tmp/mobile-flow-*.png
-            /tmp/clean-*.png
-            /tmp/overview-*.png
-            /tmp/press-shape-*.png
-            /tmp/notebook-*.png
-            /tmp/placement-feedback-*.png
-            /tmp/placement-adaptive-*.png
-          retention-days: 7
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+    - name: Install test dependencies
+      run: npm install --prefix /tmp/hsk-tests jsdom@26.1.0 playwright@1.56.1
+    - name: Install Chinese fonts for visual checks
+      continue-on-error: true
+      timeout-minutes: 2
+      run: sudo apt-get update -qq -o Acquire::ForceIPv4=true -o Acquire::http::Timeout=15 && sudo apt-get install -y --no-install-recommends
+        fonts-noto-cjk || true
+    - name: Run assigned tests
+      env:
+        NODE_PATH: /tmp/hsk-tests/node_modules
+        SHARD: ${{ matrix.shard }}
+      run: node tools/run-ci-suite.cjs studio "$SHARD" 6 /tmp/studio-shard
+    - name: Keep layout screenshots
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: studio-layout-screenshots-${{ matrix.shard }}-${{ github.sha }}
+        path: |-
+          /tmp/studio-*.png
+          /tmp/music-*.png
+          /tmp/mobile-ux-*.png
+          /tmp/mobile-flow-*.png
+          /tmp/clean-*.png
+          /tmp/overview-*.png
+          /tmp/layout-polish-*.png
+          /tmp/press-shape-*.png
+          /tmp/notebook-*.png
+          /tmp/placement-feedback-*.png
+          /tmp/placement-adaptive-*.png
+
+          /tmp/studio-shard/report.json
+        retention-days: 7
+  layout:
+    name: layout
+    needs: layout-shards
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+    - name: Verify partition guards
+      run: node --test tools/test-ci-sharding.cjs
+    - uses: actions/download-artifact@v4
+      with:
+        pattern: studio-layout-screenshots-*-${{ github.sha }}
+        path: /tmp/ci-reports
+    - name: Verify complete test inventory
+      run: node tools/check-ci-reports.cjs suite studio 6 /tmp/ci-reports "$GITHUB_SHA"
+    - name: Require every parallel job to succeed
+      if: always()
+      env:
+        SHARD_RESULT: ${{ needs.layout-shards.result }}
+      run: test "$SHARD_RESULT" = success

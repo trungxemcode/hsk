@@ -1,6 +1,7 @@
 /* Shared design tokens. New components use semantic tokens below.
    Legacy palette entries preserve existing feature-specific shades during migration. */
 :root{
+  --shadow-home-hero:0 3px 10px rgb(38 24 88 / 8%);
 --wb-exact-0:transparent;
 --wb-exact-1:inherit;
 --wb-exact-2:rgba(158,146,255,.16);
