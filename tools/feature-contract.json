@@ -2215,6 +2215,27 @@
           "value": "uniform16px gaps"
         }
       ]
+    },
+    {
+      "id": "study4-inapp-exam",
+      "name": "Làm đề và nghe HSK 1-6 Study4 trực tiếp trong ứng dụng",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "study4-tests-data.json.gz",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/practice/study4-practice.js",
+          "value": "function startExam("
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-study4-exam-ui.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }

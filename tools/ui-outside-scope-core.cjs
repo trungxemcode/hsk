@@ -59,4 +59,5 @@ function scenarios(width,theme){
  const n=Number(width);assert.ok([390,1440].includes(n)&&['light','dark'].includes(theme),'Invalid or incomplete UI scenario');
  return [{width:n,theme}];
 }
-module.exports={ROUTES,scope,pixels,visualPixels,measureDOM,scenarios};
+function canRecaptureGeometryOnly(r){return !r.geometryEqual&&r.imageCountEqual&&r.changedPixels===0&&r.elementCountEqual;}
+module.exports={ROUTES,scope,pixels,visualPixels,measureDOM,scenarios,canRecaptureGeometryOnly};
