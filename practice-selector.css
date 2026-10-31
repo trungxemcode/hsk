@@ -129,3 +129,78 @@ html[data-theme=dark] #studioPractice .ps-disclosure{background:var(--surface);c
 #studioPractice .ps-exam-entry{display:flex;align-items:center;gap:14px;width:100%;box-sizing:border-box;padding:18px;margin:0 0 26px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface);color:var(--ink);text-align:left;min-height:88px}
 #studioPractice .ps-exam-entry>.ps-copy{flex:1}
 #studioPractice .ps-exam-entry>span:last-child{font-size:22px;color:var(--accent-dark)}
+
+
+/* In-app Study4 exam & listening runner */
+.study4-exam-panel .s4-controls[hidden]{display:none!important}
+.study4-exam-panel .s4-selects{display:flex;gap:12px;flex-wrap:wrap;align-items:end}
+.study4-exam-panel .s4-level-grid{display:grid;gap:10px;margin-top:14px;max-height:360px;overflow-y:auto;padding-right:4px}
+.study4-exam-panel .s4-mini-card{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface);color:var(--ink)}
+.study4-exam-panel .s4-mini-card.is-current{border-color:var(--accent)}
+.study4-exam-panel .s4-mini-info{display:grid;gap:4px;min-width:0}
+.study4-exam-panel .s4-mini-info strong{font-size:15px;color:var(--ink)}
+.study4-exam-panel .s4-mini-info small{font-size:12px;color:var(--sub)}
+.study4-exam-panel .s4-mini-start{border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--accent-ink);min-height:40px;padding:8px 14px;font-weight:750;flex:none}
+.study4-exam-panel .s4-runner{display:grid;gap:16px;margin-top:12px}
+.study4-exam-panel .s4-runner-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface)}
+.study4-exam-panel .s4-runner-title{display:grid;gap:4px;flex:1;min-width:180px}
+.study4-exam-panel .s4-runner-title h3{margin:0;font-size:clamp(17px,2.2vw,21px);color:var(--ink)}
+.study4-exam-panel .s4-runner-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.study4-exam-panel .s4-timer-badge,.study4-exam-panel .s4-progress-badge{display:inline-flex;align-items:center;min-height:38px;padding:6px 12px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);font-size:13px;font-weight:700}
+.study4-exam-panel .s4-back-btn,.study4-exam-panel .s4-reset-btn,.study4-exam-panel .s4-part-nav{border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);min-height:42px;padding:8px 14px;font-weight:700}
+.study4-exam-panel .s4-submit-btn,.study4-exam-panel .s4-part-nav.is-primary{border:1px solid var(--accent);border-radius:var(--radius-btn);background:var(--accent);color:var(--palette-white);min-height:42px;padding:8px 16px;font-weight:750}
+.study4-exam-panel .s4-score-banner{padding:16px 18px;border:2px solid var(--accent);border-radius:var(--radius-card);background:var(--surface);color:var(--ink);display:grid;gap:6px}
+.study4-exam-panel .s4-score-banner strong{font-size:17px;color:var(--accent-ink)}
+.study4-exam-panel .s4-score-banner p{margin:0;font-size:13px;color:var(--sub)}
+.study4-exam-panel .s4-part-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.study4-exam-panel .s4-part-tab{border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);min-height:42px;padding:8px 14px;font-weight:700}
+.study4-exam-panel .s4-part-tab.is-active{background:var(--accent);border-color:var(--accent);color:var(--palette-white)}
+.study4-exam-panel .s4-audio-box{padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface);display:grid;gap:10px}
+.study4-exam-panel .s4-audio-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.study4-exam-panel .s4-audio-head strong{font-size:14px;color:var(--ink)}
+.study4-exam-panel .s4-audio-sub{font-size:12px;color:var(--sub)}
+.study4-exam-panel .s4-audio-player{width:100%;max-width:100%}
+.study4-exam-panel .s4-palette{display:flex;flex-wrap:wrap;gap:6px;padding:12px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface)}
+.study4-exam-panel .s4-palette-chip{min-width:36px;height:36px;padding:0 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:12px;font-weight:700}
+.study4-exam-panel .s4-palette-chip.is-answered{border-color:var(--accent);color:var(--accent-ink)}
+.study4-exam-panel .s4-palette-chip.is-correct{background:var(--accent);border-color:var(--accent);color:var(--palette-white)}
+.study4-exam-panel .s4-palette-chip.is-wrong{border-color:#d93025;color:#d93025}
+html[data-theme=dark] .study4-exam-panel .s4-palette-chip.is-wrong{border-color:#ff8a80;color:#ff8a80}
+.study4-exam-panel .s4-groups{display:grid;gap:16px}
+.study4-exam-panel .s4-group-card{border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface);padding:16px;display:grid;gap:14px}
+.study4-exam-panel .s4-group-context{padding-bottom:12px;border-bottom:1px solid var(--line);display:grid;gap:8px;color:var(--ink);overflow-x:auto}
+.study4-exam-panel .s4-group-badge{font-size:12px;font-weight:750;color:var(--accent-ink)}
+.study4-exam-panel .s4-context-body img,.study4-exam-panel .s4-q-context img{max-width:100%;height:auto;border-radius:8px;cursor:zoom-in;background:#fff;padding:4px}
+.study4-exam-panel .s4-context-body table,.study4-exam-panel .s4-q-context table{width:100%;border-collapse:collapse;font-size:14px;color:var(--ink)}
+.study4-exam-panel .s4-context-body td,.study4-exam-panel .s4-context-body th,.study4-exam-panel .s4-q-context td,.study4-exam-panel .s4-q-context th{border:1px solid var(--line);padding:8px}
+.study4-exam-panel .s4-group-questions{display:grid;gap:14px}
+.study4-exam-panel .s4-question-card{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--surface);display:grid;gap:10px;color:var(--ink)}
+.study4-exam-panel .s4-q-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.study4-exam-panel .s4-q-num{font-size:14px;color:var(--accent-ink)}
+.study4-exam-panel .s4-check-one{border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--sub);font-size:12px;font-weight:700;padding:6px 10px;min-height:32px}
+.study4-exam-panel .s4-q-context,.study4-exam-panel .s4-q-prompt{font-size:15px;line-height:1.65;color:var(--ink);overflow-x:auto}
+.study4-exam-panel .s4-q-context p,.study4-exam-panel .s4-q-prompt p,.study4-exam-panel .s4-context-body p{margin:4px 0}
+.study4-exam-panel .s4-choices{display:grid;gap:8px}
+.study4-exam-panel .s4-choice-btn{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:11px 14px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;min-height:44px}
+.study4-exam-panel .s4-choice-btn.is-selected,.study4-exam-panel .s4-letter-btn.is-selected{background:var(--accent);border-color:var(--accent);color:var(--palette-white)}
+.study4-exam-panel .s4-quick-letters,.study4-exam-panel .s4-order-tokens{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.study4-exam-panel .s4-letter-btn,.study4-exam-panel .s4-order-token{border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);min-height:40px;min-width:44px;padding:6px 12px;font-weight:750;font-size:14px}
+.study4-exam-panel .s4-order-token.is-used{border-color:var(--accent);color:var(--accent-ink)}
+.study4-exam-panel .s4-input-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.study4-exam-panel .s4-text-input,.study4-exam-panel .s4-essay-input{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);font:inherit;font-size:15px}
+.study4-exam-panel .s4-input-row .s4-text-input{flex:1;min-width:180px}
+.study4-exam-panel .s4-clear-inline{border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);min-height:42px;padding:8px 12px;font-weight:700}
+.study4-exam-panel .s4-char-count{font-size:12px;color:var(--sub)}
+.study4-exam-panel .s4-q-feedback{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);display:grid;gap:8px;font-size:14px}
+.study4-exam-panel .s4-q-feedback.is-correct{border-color:var(--accent)}
+.study4-exam-panel .s4-q-feedback.is-wrong{border-color:#d93025}
+html[data-theme=dark] .study4-exam-panel .s4-q-feedback.is-wrong{border-color:#ff8a80}
+.study4-exam-panel .s4-transcript{font-size:14px;color:var(--ink);border-top:1px dashed var(--line);padding-top:8px}
+.study4-exam-panel .s4-transcript summary{cursor:pointer;font-weight:700;color:var(--accent-ink)}
+.study4-exam-panel .s4-runner-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-top:8px}
+@media(max-width:720px){
+ .study4-exam-panel .s4-selects{width:100%}
+ .study4-exam-panel .s4-selects label{flex:1}
+ .study4-exam-panel .s4-runner-top{align-items:stretch}
+ .study4-exam-panel .s4-runner-actions{width:100%;justify-content:space-between}
+}

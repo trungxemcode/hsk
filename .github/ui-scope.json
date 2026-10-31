@@ -1,10 +1,6 @@
 {
-  "request": "Căn đều nút menu ba gạch và header của đúng 5 trang chính trên iPhone: Trang chủ, Bài học, Luyện & Ôn, Sổ từ vựng, Tra cứu. Giữ các trang và chức năng khác không đổi.",
+  "request": "Lấy dữ liệu đề thi HSK 1–6 từ Study4 và cho phép người dùng chọn đề, làm bài thi hoặc phần nghe, phát audio gốc, điền đáp án và chấm điểm/xem transcript trực tiếp ngay trong trang Luyện thi HSK (study4) của web-app mà không phải chuyển sang tab Study4.",
   "excludedRoutes": [
-    "home",
-    "lessons",
-    "practice",
-    "notebook",
-    "search"
+    "study4"
   ]
 }

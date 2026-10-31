@@ -148,6 +148,7 @@
     "src/modules/practice/practice-selector.js",
     "practice-selector.css",
     "src/modules/practice/study4-practice.js",
+    "study4-tests-data.json.gz",
     "src/modules/lessons/lesson-guided-core.js",
     "src/modules/lessons/lesson-guided.js",
     "lesson-guided.css",
