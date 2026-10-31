@@ -207,6 +207,13 @@ body.studio-enabled #aboutPanel .mobile-home-stats{display:block;margin-top:16px
 .mobile-lesson-word{position:fixed;inset:auto;margin:0;width:min(310px,calc(100vw - 24px));max-height:45dvh;overflow-y:auto;box-sizing:border-box;padding:14px;background:var(--surface);color:var(--ink);border:1px solid var(--line-dark);border-radius:var(--radius-card);box-shadow:var(--shadow)}
 .mobile-lesson-word>div{display:flex;align-items:center;justify-content:space-between;gap:12px}.mobile-lesson-word strong{font-size:26px}.mobile-lesson-word p{font-size:15px;line-height:1.5;overflow-wrap:anywhere;margin:8px 0}.mobile-lesson-word button{min-height:44px;padding:8px 12px;margin:4px 4px 0 0}
 @media(max-width:720px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
+ /* The Home header already has no outer horizontal padding. Apply the
+    same inset to the four other dock roots. Lessons and Search are core
+    tab routes without data-studio-hub, so match their active tab instead of
+    expecting a missing hub attribute. Never translate the
+    menu button (which would break its touch target and title spacing).
+    The inner header's shared padding stays intact on every page. */
+ body.mobile-ux:is([data-studio-hub=practice],[data-studio-hub=notebook],:has(.app-tabs [data-mode=lessons].active),:has(.app-tabs [data-mode=search].active)) #studioHeader{padding-inline:0}
  body.mobile-ux #studioHeader #menuBtn{display:inline-flex!important;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;padding:10px}
  body.mobile-ux:not([data-studio-hub=home]) #studioHeader .topbar-inner{width:100%;max-width:none;box-sizing:border-box;gap:6px;flex-wrap:wrap;padding-block:8px;height:auto;min-height:64px}
  body.mobile-ux:not([data-studio-hub=home]) #studioHeader{height:auto;flex-basis:auto}
