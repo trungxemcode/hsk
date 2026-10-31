@@ -1,6 +1,1 @@
-{
-  "request": "Sửa lỗi xác minh nhóm tài khoản trên màn hình Tài khoản: hiển thị đúng nguyên nhân HTTP và giữ nguyên mọi trang, chức năng khác.",
-  "excludedRoutes": [
-    "account"
-  ]
-}
+{"request":"Tách Luyện thi HSK (study4) thành thẻ riêng dưới bộ chọn Luyện/Ôn, giữ nguyên route và chức năng; kèm sửa mobile Tài khoản trước đó.","excludedRoutes":["practice","account"]}

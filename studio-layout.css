@@ -580,5 +580,5 @@ body.studio-enabled .lesson-section-nav button{min-width:0;white-space:normal;li
    existing accordion layout and equalizes only the adjacent voice/storage cards. */
 body.studio-enabled:not(.mobile-ux) #accountPanel#accountPanel#accountPanel#accountPanel > :is(.account-detail,.account-version){margin-block:0!important;translate:none!important}
 body.studio-enabled:not(.mobile-ux) #accountPanel#accountPanel#accountPanel#accountPanel > :is(.account-detail,.account-version) + :is(.account-detail,.account-version){margin-block-start:16px!important}
-body.mobile-ux #accountPanel#accountPanel#accountPanel#accountPanel > article.account-detail{margin-block:0!important;translate:none!important}
-body.mobile-ux #accountPanel#accountPanel#accountPanel#accountPanel > article.account-detail + article.account-detail{margin-block-start:16px!important}
+body.mobile-ux #accountPanel#accountPanel#accountPanel#accountPanel > :is(article.account-detail,.account-version){margin-block:16px 0!important;translate:none!important}
+body.mobile-ux #accountPanel#accountPanel#accountPanel#accountPanel > :is(article.account-detail,.account-version) + :is(article.account-detail,.account-version){margin-block-start:16px!important}

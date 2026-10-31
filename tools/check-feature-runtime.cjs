@@ -40,7 +40,17 @@ const regular=['search','learn','quiz','srs','mistakes','compare','account','les
    // Exercise visible content, not just a route name.
    await page.evaluate(()=>window.HSKStudio.navigate('practice'));
    assert.equal(await page.locator('#practiceModeDisclosure').count(),1,'Practice selector lost');
-   assert.ok(await page.locator('[data-practice-option]').count()>=13,'Practice modes disappeared');
+   // Eleven? No: Study4 is now a standalone card, outside the ten-item practice chooser.
+   assert.equal(await page.locator('#practiceModeOptions [data-practice-option]').count(),10,'Ten remaining practice modes must stay available');
+   assert.equal(await page.locator('#reviewModeOptions [data-practice-option]').count(),2,'Both review modes must stay available');
+   assert.equal(await page.locator('#practiceModeOptions [data-practice-option=study4]').count(),0,'Study4 must be separate from multi-select');
+   const examEntry=page.locator('#practiceStudy4Entry');
+   assert.equal(await examEntry.count(),1,'Standalone HSK exam entry must exist');
+   assert.ok(await examEntry.isVisible(),'Standalone HSK exam entry must be visible');
+   await examEntry.click();
+   assert.equal(await page.evaluate(()=>document.body.dataset.studioHub),'study4','Standalone HSK exam must navigate to its existing route');
+   assert.ok(await page.locator('#study4PracticePanel').isVisible(),'Study4 exam panel must open');
+   await page.evaluate(()=>HSKStudio.navigate('practice'));
    await page.evaluate(()=>window.HSKStudio.navigate('study4'));
    assert.ok(await page.locator('#study4PracticePanel a[href^="https://"]').count()>=1,'External HSK exam sources missing');
    await page.evaluate(()=>window.HSKStudio.navigate('real-reading'));
@@ -56,7 +66,7 @@ const regular=['search','learn','quiz','srs','mistakes','compare','account','les
    assert.ok(await page.locator('#offlineCheck').count()===1,'PWA updater lost');
    assert.ok(await page.locator('#updateNotice').count()===1,'Update notice lost');
    assert.equal(errors.length,0,'Browser exceptions: '+JSON.stringify(errors));
-   console.log('PASS HSK feature runtime '+width+'px: '+hub.length+' hubs, '+regular.length+' routes, 13 practice modes, account, study progress, PWA');
+   console.log('PASS HSK feature runtime '+width+'px: '+hub.length+' hubs, '+regular.length+' routes, 10 practice modes + 2 review modes + standalone Study4, account, study progress, PWA');
    await page.close();
   }
  }finally{await browser.close();server.close();}

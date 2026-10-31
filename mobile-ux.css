@@ -252,8 +252,8 @@ body.studio-enabled #aboutPanel .mobile-home-stats{display:block;margin-top:16px
  body.mobile-ux .mobile-account-group>summary{cursor:pointer;padding:14px 0;min-height:48px;font-size:15px;font-weight:650}
  body.mobile-ux .mobile-account-group[open]>:not(summary){margin:8px 0 14px}
  body.mobile-ux .mobile-account-group .studio-account-settings{padding:0;border:0;margin:0}
- body.mobile-ux .mobile-backup-tools{display:flex;flex-wrap:wrap;gap:8px}
- body.mobile-ux .mobile-backup-tools button{flex:1 1 130px;min-height:44px;white-space:normal}
+ body.mobile-ux .mobile-backup-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:stretch}
+ body.mobile-ux #accountPanel .mobile-backup-tools :is(#accountBackup,#accountRestore){box-sizing:border-box;width:100%;min-width:0;min-height:64px;height:auto;margin:0;padding:10px 12px;line-height:1.5;white-space:normal;display:flex;align-items:center;justify-content:center;text-align:center}
  body.mobile-ux .mobile-error-profile:not([hidden]){display:block;margin:16px 0}
  body.mobile-ux .mobile-error-profile>div:first-child{display:flex;align-items:center;justify-content:space-between;gap:8px}
  body.mobile-ux .mobile-error-profile h3{font-size:17px;margin:0}
