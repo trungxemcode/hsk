@@ -11,7 +11,10 @@
   6:{id:'6785',title:'HSK 6 Advanced test 4',url:'https://study4.com/tests/6785/hsk-6-advanced-test-4/',minutes:135,listening:50,totalQuestions:101}
  };
  const seedCatalog={...catalog};
- const CLOUD_MANIFEST='https://pub-af2cf92bdb964826afb5fa13cb332892.r2.dev/study4/manifest.json';
+ const CLOUD_MANIFESTS=[
+  'https://hsk-exam-bank.trung-hsk668.workers.dev/v1/manifest',
+  'https://pub-af2cf92bdb964826afb5fa13cb332892.r2.dev/study4/manifest.json'
+ ];
  const CLOUD_REFRESH_MS=2*60*1000;
  const testsByLevel={1:[catalog[1]],2:[catalog[2]],3:[catalog[3]],4:[catalog[4]],5:[catalog[5]],6:[catalog[6]]};
  const testsById=new Map(Object.values(catalog).map(t=>[String(t.id),t]));
@@ -840,19 +843,25 @@
   if(dataReady&&!refresh)return Promise.resolve(null);
   loadPromise=(async()=>{
    try{
-    const r=await fetch(CLOUD_MANIFEST,{cache:'no-store'});
-    if(!r.ok)throw Error('Cloud manifest HTTP '+r.status);
-    const m=await r.json();
-    if(m.schema!==1||!/^([a-f0-9]{64})$/.test(m.sha256)||m.version!==m.sha256||!Number.isSafeInteger(m.tests)||m.tests<1)throw Error('Cloud manifest không hợp lệ');
-    if(remoteRevision===m.version&&dataReady)return null;
-    // Content-Encoding:gzip is transparently decoded by Cloudflare R2 and fetch.
-    const dataURL=new URL('./data/'+m.sha256+'.json.gz',CLOUD_MANIFEST);
-    const asset=await fetch(dataURL.toString());
-    if(!asset.ok)throw Error('Cloud data HTTP '+asset.status);
-    const payload=await asset.json();
-    if(payload.tests?.length!==m.tests)throw Error('Số bộ đề trên Cloudflare không khớp manifest');
-    installData(payload);remoteRevision=m.version;
-    return payload;
+    let cloudError;
+    for(const manifestURL of CLOUD_MANIFESTS){
+     try{
+      const r=await fetch(manifestURL,{cache:'no-store',signal:AbortSignal.timeout(7000)});
+      if(!r.ok)throw Error('Cloud manifest HTTP '+r.status);
+      const m=await r.json();
+      if(m.schema!==1||!/^([a-f0-9]{64})$/.test(m.sha256)||m.version!==m.sha256||!Number.isSafeInteger(m.tests)||m.tests<1)throw Error('Cloud manifest không hợp lệ');
+      if(remoteRevision===m.version&&dataReady)return null;
+      // Relative path resolves correctly for both the Worker and the R2 fallback.
+      const dataURL=new URL('./data/'+m.sha256+'.json.gz',manifestURL);
+      const asset=await fetch(dataURL.toString(),{signal:AbortSignal.timeout(15000)});
+      if(!asset.ok)throw Error('Cloud data HTTP '+asset.status);
+      const payload=await asset.json();
+      if(payload.tests?.length!==m.tests)throw Error('Số bộ đề trên Cloudflare không khớp manifest');
+      installData(payload);remoteRevision=m.version;
+      return payload;
+     }catch(error){cloudError=error;}
+    }
+    throw cloudError||Error('Cloudflare chưa sẵn sàng');
    }catch(error){
     // Keep already loaded exams during a temporary network failure.
     if(!dataReady){
