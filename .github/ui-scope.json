@@ -1,6 +1,10 @@
 {
-  "request": "Căn chỉnh menu trên thanh đầu trang mobile tại màn hình Trang chủ; không thay đổi bố cục các trang khác.",
+  "request": "Căn đều nút menu ba gạch và header của đúng 5 trang chính trên iPhone: Trang chủ, Bài học, Luyện & Ôn, Sổ từ vựng, Tra cứu. Giữ các trang và chức năng khác không đổi.",
   "excludedRoutes": [
-    "home"
+    "home",
+    "lessons",
+    "practice",
+    "notebook",
+    "search"
   ]
 }
