@@ -50,6 +50,34 @@ html[data-theme=dark] body.studio-enabled .exam-feedback.wrong>strong{color:var(
 @media(max-width:720px){body.studio-enabled .exam-catalogue{grid-template-columns:1fr;gap:20px}body.studio-enabled .exam-stage{padding:18px}body.studio-enabled .exam-type-card{padding:16px;gap:12px}body.studio-enabled .exam-options{grid-template-columns:1fr}body.studio-enabled .exam-options:has(.exam-scene){grid-template-columns:1fr 1fr}body.studio-enabled .exam-passage{padding:14px;font-size:19px}body.studio-enabled .exam-type-meta{flex-basis:75px}body.studio-enabled .exam-panel select,body.studio-enabled .exam-panel input{font-size:16px}}
 @media(max-width:500px){body.studio-enabled #studioPractice .hub-cards{grid-template-columns:1fr}body.studio-enabled .exam-filters{grid-template-columns:1fr;gap:12px}body.studio-enabled .exam-type-card{align-items:flex-start;flex-direction:column}body.studio-enabled .exam-type-meta{flex-basis:auto}body.studio-enabled .exam-question{font-size:19px}}
 
+/* Exam catalogue rhythm: explicit gaps instead of stacked default margins.
+   Scope all rules to the exam page so other routes stay pixel-identical. */
+body.studio-enabled #examPractice .section-row{display:flex;align-items:center;gap:12px 16px;margin-bottom:16px}
+body.studio-enabled #examPractice .section-row>button{
+  align-self:center;
+  flex:0 0 auto;
+  min-height:48px!important;
+  padding:10px 16px!important;
+  font-size:14px!important;
+  line-height:1.4;
+  color:var(--accent-dark)!important;
+  background:var(--accent-light)!important;
+  border:1px solid var(--line)!important;
+  border-radius:var(--radius-btn)!important;
+}
+body.studio-enabled #examPractice #examPool{margin:0;line-height:1.5}
+body.studio-enabled #examPractice .exam-catalogue{margin:16px 0 0;gap:24px}
+body.studio-enabled #examPractice .exam-skill-group{display:grid;align-content:start;gap:12px}
+body.studio-enabled #examPractice .exam-skill-group>h3{margin:0 0 4px;line-height:1.35}
+body.studio-enabled #examPractice .exam-type-card{margin:0;align-self:stretch}
+body.studio-enabled #examPractice .exam-type-card>span:first-child{display:grid;align-content:start;gap:7px}
+body.studio-enabled #examPractice .exam-type-card small{margin:0}
+body.studio-enabled #examPractice .exam-sources{margin-top:24px}
+@media(max-width:720px){
+  body.studio-enabled #examPractice .exam-type-card{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:12px;min-height:0;padding:16px}
+  body.studio-enabled #examPractice .exam-type-meta{flex:0 0 auto;align-self:flex-start}
+}
+
 body.studio-enabled .lesson-mini{padding:20px;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius-16px);margin:0 0 28px}
 body.studio-enabled .lesson-mini h4{font-size:19px;margin:0}
 body.studio-enabled .lesson-mini .section-row{flex-wrap:wrap;gap:8px 16px;margin-bottom:14px}
