@@ -6,6 +6,8 @@ function scope(config) {
   assert.equal(new Set(config.excludedRoutes).size, config.excludedRoutes.length, 'Duplicate scope');
   for (const route of config.excludedRoutes) assert.ok(ROUTES.includes(route), 'Unknown excluded route: '+route);
   assert.ok(config.excludedRoutes.length < ROUTES.length, 'Cannot exclude every page');
+  assert.ok(config.sharedHeaderOnly === undefined || typeof config.sharedHeaderOnly === 'boolean','Shared header scope must be boolean');
+  if(config.sharedHeaderOnly) assert.equal(config.excludedRoutes.length,0,'A shared header edit must preserve visual checks on every route');
   return ROUTES.filter(route=>!config.excludedRoutes.includes(route));
 }
 function pixels(a,b) {
@@ -46,8 +48,8 @@ function visualPixels(a,b){
   return changed;
 }
 // Serializable into page.evaluate; shared with the sabotage browser regression.
-function measureDOM(){
-  return [...document.querySelectorAll('body *')].filter(n=>n.checkVisibility()&&!['SCRIPT','STYLE','LINK'].includes(n.tagName)).map(n=>{
+function measureDOM(options={}){
+  return [...document.querySelectorAll('body *')].filter(n=>(!options.skipHeader||!n.closest('#studioHeader'))&&n.checkVisibility()&&!['SCRIPT','STYLE','LINK'].includes(n.tagName)).map(n=>{
     const r=n.getBoundingClientRect(),s=getComputedStyle(n);
     const text=[...n.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('');
     const paintAttributes=Object.fromEntries(['d','points','fill','stroke','src','href'].map(k=>[k,(n.getAttribute(k)||'').replace(/http:\/\/127\.0\.0\.1:\d+/g,'LOCAL')]));

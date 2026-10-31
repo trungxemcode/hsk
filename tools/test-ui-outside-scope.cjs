@@ -43,3 +43,16 @@ test('only re-capture geometry-only mismatches; never retry true visual regressi
     assert.equal(canRecaptureGeometryOnly({...mismatch,...bad}),false);
   }
 });
+
+test('shared header requests preserve ALL route visual comparisons',()=>{
+ assert.deepEqual(scope({request:'Unify hamburger geometry everywhere',excludedRoutes:[],sharedHeaderOnly:true}),ROUTES);
+ assert.throws(()=>scope({request:'Unify hamburger geometry everywhere',excludedRoutes:['account'],sharedHeaderOnly:true}));
+ assert.throws(()=>scope({request:'Unify hamburger geometry everywhere',excludedRoutes:[],sharedHeaderOnly:'true'}));
+});
+
+test('shared header normalization leaves the route content geometry strict',()=>{
+ const src=require('node:fs').readFileSync(require('node:path').join(__dirname,'check-ui-outside-scope.cjs'),'utf8');
+ assert.ok(src.includes('page.evaluate(measureDOM,{skipHeader:config.sharedHeaderOnly===true})'));
+ const fn=require('./ui-outside-scope-core.cjs').measureDOM;
+ assert.match(fn.toString(),/options.skipHeader/);
+});

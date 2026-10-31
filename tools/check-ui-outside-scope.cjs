@@ -64,6 +64,12 @@ function serve(root){
    await page.evaluate(()=>document.fonts.ready);
    await page.addStyleTag({content:'*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important;scroll-behavior:auto!important}'});
    await page.waitForTimeout(1200);
+   // When the shared shell header itself is the requested target, normalize
+   // ONLY that header in both builds. All route content below it keeps strict
+   // screenshot AND geometry comparison, unlike excluding every route.
+   if(config.sharedHeaderOnly){
+    await page.addStyleTag({content:'#studioHeader{visibility:hidden!important;height:80px!important;min-height:80px!important;flex:0 0 80px!important;box-sizing:border-box!important;padding:0!important;margin:0!important}'});
+   }
    // PWA releases necessarily update the version label on Account, even when
    // no Account UI code changed. Normalize only its *text* in both captures.
    // Keep the containing card, its CSS, all other text, and all layout geometry
@@ -72,7 +78,7 @@ function serve(root){
     const label=document.getElementById('studioVersion');
     if(label)label.textContent='Bản phát hành hiện tại';
    });
-   const title=await page.locator('#activeTitle').innerText();
+   const title=await page.locator('#activeTitle').textContent();
    assert.ok(title.trim(),'Missing route title: '+route);
    // Confirm routes really opened, rather than comparing the previous page twice.
    {
@@ -80,7 +86,7 @@ function serve(root){
     const alias=route==='music-play'?'music':route;
     assert.ok(state.hub===alias||state.classes.includes('show-'+route)||state.active===route,'Route did not open '+route+': '+JSON.stringify(state));
    }
-   const measure=()=>page.evaluate(measureDOM);
+   const measure=()=>page.evaluate(measureDOM,{skipHeader:config.sharedHeaderOnly===true});
    let geometry=await measure(),settled=false;
    for(let attempt=0;attempt<12;attempt++){
     await page.waitForTimeout(250);const next=await measure();
