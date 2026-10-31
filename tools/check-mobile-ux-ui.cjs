@@ -12,7 +12,7 @@ if(mobile){
   const geometry=await page.evaluate(()=>{
    const b=document.getElementById('menuBtn').getBoundingClientRect();
    const header=document.getElementById('studioHeader');
-   return {x:b.x,width:b.width,outerPadding:getComputedStyle(header).paddingLeft,visible:b.width>0&&b.height>0};
+   return {x:b.x,width:b.width,outerPadding:getComputedStyle(header).paddingLeft,hub:document.body.dataset.studioHub||null,activeTab:document.querySelector('.app-tabs [data-mode].active')?.dataset.mode||null,visible:b.width>0&&b.height>0};
   });
   assert.ok(geometry.visible,'menu button should be visible at '+route);
   assert.ok(geometry.x>=8&&geometry.x<=20,'menu should respect the common ~14px left inset at '+route+': '+JSON.stringify(geometry));
