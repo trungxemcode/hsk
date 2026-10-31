@@ -1,4 +1,4 @@
 {
-  "request": "Tối ưu thao tác chọn dạng bài thành 2 bước và chọn bộ đề Study4 bằng tìm kiếm/phân trang; chỉ đổi giao diện study4, bảo vệ mọi trang khác.",
-  "excludedRoutes": ["study4"]
+  "request": "Căn giữa theo trục dọc icon SVG với nhãn trong sidebar PC dùng chung; chỉ tác động sidebar ở desktop >=981px, giữ nguyên tablet/mobile và mọi nội dung trang.",
+  "excludedRoutes": ["home", "lessons", "practice", "search", "learn", "quiz", "srs", "mistakes", "compare", "notebook", "match-game", "sentence-game", "study4", "real-reading", "exam", "translator", "account", "about", "admin"]
 }

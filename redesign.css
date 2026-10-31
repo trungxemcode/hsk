@@ -3146,6 +3146,42 @@ html[data-theme="dark"] body.studio-enabled .study4-exam-panel .s4-visit { backg
   }
 }
 
+/* Desktop sidebar: center icon glyphs on the text line, not the inline SVG baseline. */
+@media (min-width:981px){
+  body.studio-enabled .sidebar :is(.side-nav,.side-quick) > button{
+    display:flex;
+    align-items:center;
+  }
+  body.studio-enabled .sidebar :is(.side-nav,.side-quick) > button > i[data-icon]{
+    display:inline-flex;
+    flex:0 0 18px;
+    width:18px;
+    height:18px;
+    align-items:center;
+    justify-content:center;
+    margin:0;
+    line-height:0;
+    font-style:normal;
+  }
+  body.studio-enabled .sidebar .side-quick > button > i[data-icon]{
+    flex-basis:16px;
+    width:16px;
+    height:16px;
+  }
+  body.studio-enabled .sidebar :is(.side-nav,.side-quick) > button > i[data-icon] > svg{
+    display:block;
+    width:100%;
+    height:100%;
+    margin:0;
+  }
+  body.studio-enabled .sidebar :is(.side-nav,.side-quick) > button > span{
+    display:flex;
+    align-items:center;
+    min-width:0;
+    line-height:1.25;
+  }
+}
+
 /* --- 7. Sidebar cố định: không cuộn theo con lăn --- */
 @media (min-width:981px){
   html body:not(#_rd).studio-enabled .sidebar{
