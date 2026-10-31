@@ -1,5 +1,5 @@
 {
-  "request": "Lấy dữ liệu đề thi HSK 1–6 từ Study4 và cho phép người dùng chọn đề, làm bài thi hoặc phần nghe, phát audio gốc, điền đáp án và chấm điểm/xem transcript trực tiếp ngay trong trang Luyện thi HSK (study4) của web-app mà không phải chuyển sang tab Study4.",
+  "request": "Chuyển nguồn dữ liệu bộ đề HSK và audio sang Cloudflare để cập nhật đề từ R2 mà không cần cập nhật ứng dụng; thay đổi phần hiển thị logic chỉ trang study4, bảo toàn các trang còn lại.",
   "excludedRoutes": [
     "study4"
   ]

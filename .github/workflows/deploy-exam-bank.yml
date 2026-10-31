@@ -1,0 +1,47 @@
+name: Deploy Cloudflare Study4 exam bank
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'server/exams/**'
+      - '.github/workflows/deploy-exam-bank.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: hsk-study4-cloud-production
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Require Cloudflare deployment permissions
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo '::error::Missing Cloudflare deploy token'; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo '::error::Missing Cloudflare account ID'; exit 1; }
+      - name: Verify read-only exam routes, ranges, and access rules
+        run: node --test server/study4-cloud-bank.test.mjs
+      - name: Deploy dedicated exam Worker without touching AI or music Workers
+        run: npx --yes wrangler@4 deploy --config server/exams/wrangler.jsonc
+      - name: Verify public exam catalog endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://hsk-exam-bank.trung-hsk668.workers.dev'
+          for attempt in 1 2 3 4 5; do
+            if curl -fsS --max-time 12 "$base/v1/manifest" -o /tmp/hsk-exam-manifest.json; then break; fi
+            sleep 3
+          done
+          node -e "const m=require('/tmp/hsk-exam-manifest.json');if(m.schema!==1||m.tests<351||!/^[a-f0-9]{64}$/.test(m.sha256))process.exit(1)"
+          echo "PASS Study4 Cloudflare Worker public 351+ exam manifest" >> "$GITHUB_STEP_SUMMARY"
