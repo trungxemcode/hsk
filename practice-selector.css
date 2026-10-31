@@ -151,10 +151,10 @@ html[data-theme=dark] #studioPractice .ps-disclosure{background:var(--surface);c
 .study4-exam-panel .s4-picker-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .study4-exam-panel .s4-picker-choice{display:grid;gap:2px;align-content:center;text-align:left;min-width:0;min-height:62px;padding:9px 11px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);cursor:pointer}
 .study4-exam-panel .s4-picker-choice strong{font-size:14px;overflow-wrap:anywhere}
-.study4-exam-panel .s4-picker-choice small{font-size:11px;color:var(--sub)}
+.study4-exam-panel .s4-picker-choice .s4-picker-meta{font-size:11px;color:var(--sub)}
 .study4-exam-panel .s4-picker-choice.is-current{border:2px solid var(--accent);padding:8px 10px;background:var(--surface)}
 .study4-exam-panel .s4-picker-choice.is-current{background:var(--accent);color:var(--palette-white)}
-html body.studio-enabled .study4-exam-panel button.s4-picker-choice.is-current :is(strong,small){color:var(--palette-white)!important}
+html body.studio-enabled #study4PracticePanel button.s4-picker-choice.is-current :is(strong,.s4-picker-meta){color:var(--palette-white)!important}
 .study4-exam-panel .s4-picker-choice:focus-visible,.study4-exam-panel .s4-picker-pages button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .study4-exam-panel .s4-picker-pages{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .study4-exam-panel .s4-picker-pages button{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--accent-ink);font:inherit;font-weight:750}

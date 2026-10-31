@@ -235,7 +235,7 @@
    button.type='button';button.dataset.testId=String(t.id);
    button.setAttribute('aria-pressed',String(current));button.title=t.title;
    const shortTitle=String(t.title).match(/(?:practice|advanced|mock)\s+test\s+(\d+)/i);
-   button.append(el('strong',shortTitle?'Đề '+shortTitle[1]:t.title),el('small',(t.totalQuestions||'—')+' câu'+(current?' · Đang chọn':'')));
+   button.append(el('strong',shortTitle?'Đề '+shortTitle[1]:t.title),el('span',(t.totalQuestions||'—')+' câu'+(current?' · Đang chọn':''),'s4-picker-meta'));
    button.addEventListener('click',()=>{
     selectedTestId=String(t.id);testSelect.value=selectedTestId;
     // Preserve selected time/type where valid when comparing papers.
