@@ -86,7 +86,7 @@ function serve(root){
     const alias=route==='music-play'?'music':route;
     assert.ok(state.hub===alias||state.classes.includes('show-'+route)||state.active===route,'Route did not open '+route+': '+JSON.stringify(state));
    }
-   const measure=()=>page.evaluate(measureDOM);
+   const measure=()=>page.evaluate(measureDOM,{skipHeader:config.sharedHeaderOnly===true});
    let geometry=await measure(),settled=false;
    for(let attempt=0;attempt<12;attempt++){
     await page.waitForTimeout(250);const next=await measure();

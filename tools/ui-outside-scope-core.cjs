@@ -48,8 +48,8 @@ function visualPixels(a,b){
   return changed;
 }
 // Serializable into page.evaluate; shared with the sabotage browser regression.
-function measureDOM(){
-  return [...document.querySelectorAll('body *')].filter(n=>n.checkVisibility()&&!['SCRIPT','STYLE','LINK'].includes(n.tagName)).map(n=>{
+function measureDOM(options={}){
+  return [...document.querySelectorAll('body *')].filter(n=>(!options.skipHeader||!n.closest('#studioHeader'))&&n.checkVisibility()&&!['SCRIPT','STYLE','LINK'].includes(n.tagName)).map(n=>{
     const r=n.getBoundingClientRect(),s=getComputedStyle(n);
     const text=[...n.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('');
     const paintAttributes=Object.fromEntries(['d','points','fill','stroke','src','href'].map(k=>[k,(n.getAttribute(k)||'').replace(/http:\/\/127\.0\.0\.1:\d+/g,'LOCAL')]));
