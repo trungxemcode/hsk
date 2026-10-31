@@ -50,3 +50,13 @@ Before running tests for every PR, declare whether layout is expected to change,
 
 ## Unchanged-page visual comparison before merge (owner policy)
 For every PR that can affect the rendered UI, follow [UI_SCOPE_REVIEW.md](docs/ai/UI_SCOPE_REVIEW.md). Declare the exact pages/modes the user authorized changing BEFORE editing. Compare the PR base and final head on every page outside that scope, using matched screenshots and geometry on PC/mobile. The requested page is excluded from THIS unchanged-page comparison; its own functional/layout tests still apply. Shared navigation and controls outside the authorized region remain protected. Any unexplained outside-scope difference or missing comparison evidence blocks merge. Never broaden the scope, refresh the baseline, or mark this check passed merely to accept a regression. Record the refs, page inventory, states, evidence and result in the PR checklist. Recheck after relevant code/base changes. This is a mandatory review rule; it does not itself install a GitHub required status check.
+
+## Code Exploration Rules
+
+- Inspect only files relevant to the task.
+- Search for functions before reading entire files.
+- Avoid repeated full-repository scans.
+- Reuse verified architecture documentation.
+- Use concise terminal output.
+- Run targeted tests before broader regression tests.
+- Do not repeat failed tests without diagnosing the cause.
