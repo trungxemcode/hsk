@@ -37,6 +37,13 @@
     '<button type="button" data-s4-skill="test">Đề HSK</button>'+
     '<button type="button" data-s4-skill="listening">Bài nghe</button>'+
    '</div>'+
+   '<div class="s4-exam-options" id="study4ExamOptions">'+
+    '<div class="s4-exam-options-fields">'+
+     '<label for="study4SectionSelect">Phần muốn thi <select id="study4SectionSelect"></select></label>'+
+     '<label for="study4DurationSelect">Thời gian làm bài <select id="study4DurationSelect"></select></label>'+
+    '</div>'+
+    '<p class="s4-exam-summary" id="study4ExamSummary" role="status"></p>'+
+   '</div>'+
   '</div>'+
   '<div id="study4Results"></div>'+
   '<p class="s4-credit">Nguồn: <a href="https://study4.com/tests/" target="_blank" rel="noopener noreferrer">Study4.com</a></p>'+
@@ -46,9 +53,13 @@
  const controlsBox=panel.querySelector('.s4-controls');
  const level=panel.querySelector('#study4Level');
  const testSelect=panel.querySelector('#study4TestSelect');
+ const sectionSelect=panel.querySelector('#study4SectionSelect');
+ const durationSelect=panel.querySelector('#study4DurationSelect');
+ const examSummary=panel.querySelector('#study4ExamSummary');
  const results=panel.querySelector('#study4Results');
  for(let n=1;n<=6;n++){const o=new Option('HSK '+n,String(n));level.add(o);}
- let skill='test',selectedTestId='';
+ let skill='test',selectedTestId='',sectionFilter='all',durationCustomized=false;
+ for(let minutes=5;minutes<=180;minutes+=5)durationSelect.add(new Option(minutes+' phút',String(minutes)));
 
  function el(tag,text,cls){
   const n=document.createElement(tag);
@@ -123,6 +134,63 @@
   return list.find(t=>String(t.id)===String(selectedTestId))||list[0]||catalog[3];
  }
 
+ const SKILL_LABELS={listening:'Nghe',reading:'Đọc',writing:'Viết'};
+ const KIND_LABELS={choice:'Trắc nghiệm',input:'Điền / ghép đáp án',order:'Sắp xếp câu',essay:'Viết / điền chữ'};
+ // Cloze is determined by actual blanks in the question, not just the input widget kind.
+ function isClozeQuestion(q){
+  const html=String(q.contextHtml||'')+' '+String(q.promptHtml||'');
+  const text=html.replace(/<[^>]*>/g,'').replace(/&nbsp;|&#160;/gi,' ');
+  return /\(\s*\)|（\s*）|_{2,}|＿{2,}|\[\s*\]|□|▢|…{2,}/.test(text);
+ }
+ function getDefaultMinutes(test,mode){
+  const basic=Number(test.minutes)||60;
+  const target=mode==='listening'?Math.max(15,Math.round(basic*0.45)):basic;
+  return Math.min(180,Math.max(5,Math.ceil(target/5)*5));
+ }
+ function filteredParts(test,mode,filter){
+  const base=(test.parts||[]).filter(p=>mode!=='listening'||p.skill==='listening');
+  if(filter==='all')return base;
+  const parts=[];
+  for(const p of base){
+   if(filter.startsWith('skill:')&&p.skill!==filter.slice(6))continue;
+   if(filter.startsWith('kind:')&&!filter.startsWith('kind:'+p.skill+':'))continue;
+   const groups=[];
+   for(const g of (p.groups||[])){
+    const questions=(g.questions||[]).filter(q=>filter.startsWith('skill:')||(filter==='cloze'?isClozeQuestion(q):q.kind===filter.split(':')[2]));
+    if(questions.length)groups.push({...g,questions});
+   }
+   if(groups.length)parts.push({...p,groups,questionCount:groups.reduce((n,g)=>n+g.questions.length,0)});
+  }
+  return parts;
+ }
+ function availableSectionOptions(test,mode){
+  const options=[{value:'all',label:mode==='listening'?'Toàn bộ phần nghe':'Toàn bộ đề'}];
+  const parts=(test.parts||[]).filter(p=>mode!=='listening'||p.skill==='listening');
+  const hasCloze=parts.some(p=>(p.groups||[]).some(g=>(g.questions||[]).some(isClozeQuestion)));
+  if(hasCloze)options.push({value:'cloze',label:'Điền chỗ trống (đục lỗ)'});
+  for(const p of parts){
+   const questions=(p.groups||[]).flatMap(g=>g.questions||[]);
+   if(!questions.length)continue;
+   options.push({value:'skill:'+p.skill,label:SKILL_LABELS[p.skill]||p.name||p.skill});
+   for(const kind of ['choice','input','order','essay']){
+    if(questions.some(q=>q.kind===kind))options.push({value:'kind:'+p.skill+':'+kind,label:(SKILL_LABELS[p.skill]||p.skill)+' · '+KIND_LABELS[kind]});
+   }
+  }
+  return options;
+ }
+ function refreshExamOptions(){
+  const item=currentItem(),options=availableSectionOptions(item,skill);
+  sectionSelect.replaceChildren(...options.map(opt=>new Option(opt.label,opt.value)));
+  if(!options.some(opt=>opt.value===sectionFilter))sectionFilter='all';
+  sectionSelect.value=sectionFilter;
+  const minutes=Number(durationSelect.value);
+  if(!durationCustomized||!minutes)durationSelect.value=String(getDefaultMinutes(item,skill));
+  const subset=filteredParts(item,skill,sectionFilter);
+  const count=subset.reduce((n,p)=>n+(p.groups||[]).reduce((sum,g)=>sum+(g.questions||[]).length,0),0);
+  examSummary.textContent=count?`${count} câu hỏi · ${durationSelect.value} phút · Chỉ chấm các câu trong phần đã chọn`:'Đang tải danh sách dạng bài của bộ đề…';
+  sectionSelect.disabled=!item.parts?.length;
+ }
+
  function attachZoomableImages(container){
   for(const img of container.querySelectorAll('img')){
    img.loading='lazy';
@@ -170,15 +238,22 @@
    return;
   }
   stopMedia();
-  const availParts=mode==='listening'
-   ?full.parts.filter(p=>p.skill==='listening')
-   :full.parts;
-  const partsToUse=availParts.length?availParts:full.parts;
-  const prog=getTestProgress(full.id);
-  const mins=mode==='listening'?Math.max(15,Math.round((full.minutes||45)*0.45)):(full.minutes||60);
+  const filter=sectionFilter;
+  const partsToUse=filteredParts(full,mode,filter);
+  if(!partsToUse.length){sectionFilter='all';refreshExamOptions();return;}
+  const defaultMinutes=getDefaultMinutes(full,mode);
+  const chosenMinutes=Number(durationSelect.value);
+  const mins=Number.isInteger(chosenMinutes)&&chosenMinutes>=5&&chosenMinutes<=180&&chosenMinutes%5===0?chosenMinutes:defaultMinutes;
+  // Custom sessions are isolated from the original full-exam progress.
+  const progressKey=filter==='all'&&mins===defaultMinutes?String(full.id):`${full.id}::${mode}::${filter}::${mins}`;
+  const prog=getTestProgress(progressKey);
   activeSession={
    test:full,
    mode,
+   filter,
+   progressKey,
+   durationMinutes:mins,
+   deadlineAt:Date.now()+mins*60000,
    parts:partsToUse,
    partIndex:0,
    remainingSec:mins*60,
@@ -192,7 +267,7 @@
 
  function persistSession(){
   if(!activeSession)return;
-  saveTestProgress(activeSession.test.id,{
+  saveTestProgress(activeSession.progressKey,{
    answers:activeSession.answers,
    checked:activeSession.checked,
    submitted:activeSession.submitted
@@ -233,6 +308,10 @@
   results.replaceChildren();
 
   const sess=activeSession;
+  if(!sess.submitted){
+   sess.remainingSec=Math.max(0,Math.ceil((sess.deadlineAt-Date.now())/1000));
+   if(sess.remainingSec===0){sess.submitted=true;sess.timeExpired=true;persistSession();}
+  }
   const test=sess.test;
   const activePart=sess.parts[sess.partIndex]||sess.parts[0];
   const stats=computeScore(sess);
@@ -252,7 +331,7 @@
 
   const titleWrap=el('div',null,'s4-runner-title');
   titleWrap.append(
-   el('span','HSK '+test.level+' · '+(sess.mode==='listening'?'Luyện nghe':'Làm đề trực tiếp'),'s4-brow'),
+   el('span','HSK '+test.level+' · '+(sess.mode==='listening'?'Luyện nghe':'Làm đề trực tiếp')+(sess.filter!=='all'?' · '+(availableSectionOptions(test,sess.mode).find(o=>o.value===sess.filter)?.label||'Phần tự chọn'):''),'s4-brow'),
    el('h3',test.title)
   );
 
@@ -280,6 +359,9 @@
    sess.answers={};
    sess.checked={};
    sess.submitted=false;
+   sess.timeExpired=false;
+   sess.deadlineAt=Date.now()+sess.durationMinutes*60000;
+   sess.remainingSec=sess.durationMinutes*60;
    persistSession();
    renderActiveSession();
   });
@@ -290,10 +372,12 @@
 
   if(!sess.submitted){
    timerId=setInterval(()=>{
-    if(!activeSession||activeSession.paused||panel.hidden)return;
-    if(activeSession.remainingSec>0){
-     activeSession.remainingSec--;
-     timerBadge.textContent='⏱ '+formatClock(activeSession.remainingSec);
+    if(activeSession!==sess||sess.paused||panel.hidden)return;
+    sess.remainingSec=Math.max(0,Math.ceil((sess.deadlineAt-Date.now())/1000));
+    timerBadge.textContent='⏱ '+formatClock(sess.remainingSec);
+    if(sess.remainingSec===0){
+     sess.submitted=true;sess.timeExpired=true;
+     persistSession();renderActiveSession();
     }
    },1000);
   }
@@ -304,7 +388,7 @@
    banner.id='study4ScoreBanner';
    banner.setAttribute('role','status');
    banner.append(
-    el('strong',`Kết quả: ${stats.correctObj} / ${stats.totalObj} câu trắc nghiệm đúng (${stats.percent}%)`),
+    el('strong',(sess.timeExpired?'Hết giờ · ':'')+(stats.totalObj?`Kết quả: ${stats.correctObj} / ${stats.totalObj} câu trắc nghiệm đúng (${stats.percent}%)`:`Đã làm ${stats.essayDone} / ${stats.totalAll} câu viết`)),
     el('p',stats.essayDone?`Đã lưu ${stats.essayDone} câu viết tự luận. Xem đáp án chi tiết và lời thoại (Transcript) bên dưới.`:'Xem đáp án đúng và lời thoại (Transcript) cho từng câu bên dưới.')
    );
    wrap.append(banner);
@@ -333,8 +417,13 @@
     fullBtn.type='button';
     fullBtn.addEventListener('click',()=>{
      sess.mode='test';
+     sess.filter='all';
      sess.parts=test.parts;
      sess.partIndex=0;
+     sess.durationMinutes=getDefaultMinutes(test,'test');
+     sess.deadlineAt=Date.now()+sess.durationMinutes*60000;
+     sess.remainingSec=sess.durationMinutes*60;
+     sess.progressKey=String(test.id);
      renderActiveSession();
     });
     partBar.append(fullBtn);
@@ -757,6 +846,7 @@
   }
   controlsBox.hidden=false;
   syncTestDropdown();
+  refreshExamOptions();
   const item=currentItem();
   for(const b of panel.querySelectorAll('[data-s4-skill]')){
    const current=b.dataset.s4Skill===skill;
@@ -835,6 +925,7 @@
     startBtn.addEventListener('click',()=>{
      selectedTestId=String(t.id);
      testSelect.value=selectedTestId;
+     sectionFilter='all';durationCustomized=false;refreshExamOptions();
      startExam(t,skill);
     });
     row.append(info,startBtn);
@@ -851,6 +942,7 @@
   level.value=String(catalog[n]?n:3);
   selectedTestId=options.testId?String(options.testId):String((testsByLevel[Number(level.value)]?.[0]||catalog[Number(level.value)]||catalog[3]).id);
   skill=options.skill==='listening'?'listening':'test';
+  sectionFilter='all';durationCustomized=false;
   update();
   if(Date.now()-lastCloudCheck>CLOUD_REFRESH_MS)loadStudy4Data({refresh:true});
   if(options.autoStart){
@@ -923,23 +1015,28 @@
  }
 
  level.addEventListener('change',()=>{
+  sectionFilter='all';durationCustomized=false;
   activeSession=null;
   selectedTestId=String((testsByLevel[Number(level.value)]?.[0]||catalog[Number(level.value)]||catalog[3]).id);
   update();
  });
  testSelect.addEventListener('change',()=>{
+  sectionFilter='all';durationCustomized=false;
   activeSession=null;
   selectedTestId=String(testSelect.value);
   update();
  });
  panel.querySelectorAll('[data-s4-skill]').forEach(button=>button.addEventListener('click',()=>{
   skill=button.dataset.s4Skill;
+  sectionFilter='all';durationCustomized=false;
   if(activeSession){
    startExam(activeSession.test,skill);
   }else{
    update();
   }
  }));
+ sectionSelect.addEventListener('change',()=>{sectionFilter=sectionSelect.value;refreshExamOptions();});
+ durationSelect.addEventListener('change',()=>{durationCustomized=true;refreshExamOptions();});
  panel.querySelector('.s4-internal').addEventListener('click',()=>{
   stopMedia();
   window.HSKStudio?.navigate('exam');

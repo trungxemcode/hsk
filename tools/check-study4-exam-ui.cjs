@@ -69,6 +69,54 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.locator('#study4ScoreBanner').waitFor({state:'visible'});
    assert.match(await page.locator('#study4ScoreBanner').innerText(),/Kết quả:/);
 
+   // Per-test section choices come from actual available question kinds, not a static HSK template.
+   await page.locator('.s4-back-btn').click();
+   const section=page.locator('#study4SectionSelect'),duration=page.locator('#study4DurationSelect');
+   assert.equal(await section.inputValue(),'all');
+   assert.equal(await duration.inputValue(),'85');
+   const options=await section.locator('option').evaluateAll(nodes=>nodes.map(n=>n.value));
+   assert.ok(options.includes('cloze')&&options.includes('kind:reading:input')&&options.includes('kind:writing:order'));
+   assert.ok(!options.includes('kind:writing:choice'),'Unavailable type must not be offered');
+   assert.equal(await duration.locator('option').count(),36,'Duration must increase by 5 from 5 to 180');
+
+   // Cloze-only exam: preserve original question identifiers, score only its own subset.
+   await section.selectOption('cloze');
+   await duration.selectOption('10');
+   await page.locator('.s4-visit').click();
+   const clozeMeta=await page.evaluate(()=>{
+    const s=HSKStudy4.activeSession;
+    return {filter:s.filter,seconds:s.remainingSec,total:s.parts.reduce((n,p)=>n+p.questionCount,0),kinds:s.parts.flatMap(p=>p.groups.flatMap(g=>g.questions.map(q=>q.kind))),key:s.progressKey};
+   });
+   assert.equal(clozeMeta.filter,'cloze');
+   assert.equal(clozeMeta.seconds,600);
+   assert.ok(clozeMeta.total>0&&clozeMeta.total<80,'Only cloze questions selected');
+   assert.ok(!clozeMeta.kinds.includes('order'),'Other question kinds are removed');
+   assert.match(clozeMeta.key,/::test::cloze::10$/);
+   assert.match(await page.locator('#study4ProgressBadge').innerText(),new RegExp('/'+clozeMeta.total+'$'));
+   await page.evaluate(()=>{HSKStudy4.activeSession.deadlineAt=Date.now()-1000;});
+   await page.locator('#study4ScoreBanner').waitFor({state:'visible',timeout:4000});
+   assert.match(await page.locator('#study4ScoreBanner').innerText(),/Hết giờ/,'Time expiry automatically submits');
+   await page.locator('.s4-back-btn').click();
+
+   // Reading choice-only exam uses only the current paper's reading MCQs.
+   await section.selectOption('kind:reading:choice');
+   await duration.selectOption('5');
+   await page.locator('.s4-visit').click();
+   const readingMeta=await page.evaluate(()=>({minutes:HSKStudy4.activeSession.durationMinutes,skills:HSKStudy4.activeSession.parts.map(p=>p.skill),kinds:HSKStudy4.activeSession.parts.flatMap(p=>p.groups.flatMap(g=>g.questions.map(q=>q.kind)))}));
+   assert.equal(readingMeta.minutes,5);
+   assert.deepEqual(readingMeta.skills,['reading']);
+   assert.ok(readingMeta.kinds.length>0&&readingMeta.kinds.every(k=>k==='choice'));
+   await page.locator('.s4-back-btn').click();
+
+   // Switching HSK level resets the selection and offers only types present in that paper.
+   await page.locator('#study4Level').selectOption('1');
+   assert.equal(await section.inputValue(),'all');
+   assert.equal(await duration.inputValue(),'35');
+   assert.ok(!(await section.locator('option').evaluateAll(nodes=>nodes.map(n=>n.value))).includes('kind:writing:order'));
+   await page.locator('#study4Level').selectOption('3');
+   assert.equal(await section.inputValue(),'all');
+   assert.equal(await duration.inputValue(),'85');
+
    // Return to test list, pick test 4927 (HSK 3 Practice test 1) and verify Listening transcript
    await page.locator('.s4-back-btn').click();
    await page.locator('.s4-test-card').waitFor({state:'visible'});
