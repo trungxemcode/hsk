@@ -48,19 +48,26 @@ def main():
     ap.add_argument('--max-mib',type=int,default=12,help='Maximum size per audio file')
     ap.add_argument('--budget-mib',type=int,default=100,help='Maximum total transferred this run')
     ap.add_argument('--dry-run',action='store_true')
+    ap.add_argument('--retry-failed',action='store_true',help='Reattempt failed sources after changing size/time limits')
+    ap.add_argument('--max-attempts',type=int,default=0,help='Maximum attempted downloads (default: 4x upload limit)')
     args=ap.parse_args()
     if args.limit<1 or args.max_mib<1 or args.budget_mib<1:ap.error('limits must be positive')
     payload=json.loads(gzip.decompress(args.data.read_bytes()))
     mapping=json.loads(args.map.read_text()) if args.map.exists() else {}
-    pending=[u for u in urls(payload) if u not in mapping]
-    print(f'Audio references: {len(urls(payload))}, already mirrored: {len(mapping)}, pending: {len(pending)}',flush=True)
+    errors_path=args.map.with_name(args.map.stem+'-errors.json')
+    errors=json.loads(errors_path.read_text()) if errors_path.exists() else {}
+    pending=[u for u in urls(payload) if u not in mapping and (args.retry_failed or u not in errors)]
+    print(f'Audio references: {len(urls(payload))}, mirrored: {len(mapping)}, pending: {len(pending)}, previous failures: {len(errors)}',flush=True)
     if args.dry_run:return
-    completed,total=0,0
+    completed,total,attempted=0,0,0
+    max_attempts=args.max_attempts or args.limit*4
+    if max_attempts<1:ap.error('max-attempts must be positive')
     args.map.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='hsk-audio-mirror-') as tmp:
         target=Path(tmp)/'audio.bin'
         for url in pending:
-            if completed>=args.limit or total>=args.budget_mib*1024*1024:break
+            if completed>=args.limit or attempted>=max_attempts or total>=args.budget_mib*1024*1024:break
+            attempted+=1
             ext=Path(urlparse(url).path).suffix.lower().lstrip('.')
             if ext not in ('mp3','m4a'):continue
             key=hashlib.sha256(url.encode('utf-8')).hexdigest()+'.'+ext
@@ -74,10 +81,14 @@ def main():
                 put('study4/audio/'+key,target,'audio/mpeg' if ext=='mp3' else 'audio/mp4',cache='public, max-age=86400')
                 mapping[url]=PUBLIC_BASE+'/study4/audio/'+key
                 args.map.write_text(json.dumps(mapping,ensure_ascii=False),encoding='utf-8')
+                if url in errors:
+                    del errors[url];errors_path.write_text(json.dumps(errors,ensure_ascii=False),encoding='utf-8')
                 completed+=1;total+=len(raw)
                 print(f'OK {completed}/{args.limit} {key[:12]}... {len(raw)} bytes',flush=True)
             except (subprocess.CalledProcessError,ValueError,OSError) as error:
+                errors[url]=str(error)[:240]
+                errors_path.write_text(json.dumps(errors,ensure_ascii=False),encoding='utf-8')
                 print(f'SKIP {key[:12]}... {str(error)[:130]}',flush=True)
-    print(f'Uploaded this run: {completed}; bytes: {total}; map: {args.map}',flush=True)
+    print(f'Uploaded this run: {completed}; attempted: {attempted}; bytes: {total}; map: {args.map}',flush=True)
 
 if __name__=='__main__':main()
