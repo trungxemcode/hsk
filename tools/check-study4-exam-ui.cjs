@@ -29,6 +29,22 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.locator('#study4PracticePanel').waitFor({state:'visible'});
    assert.equal(await page.locator('#study4Level').inputValue(),'3');
    assert.equal(await page.locator('#study4TestSelect option').count(),counts[3]);
+   assert.equal(await page.locator('.s4-picker-choice').count(),8,'Only 8 compact papers per page');
+   assert.match(await page.locator('#study4PickerStatus').innerText(),/Trang 1\/8/);
+   assert.equal(await page.locator('.s4-picker-grid').evaluate(e=>getComputedStyle(e).overflowY),'visible','No nested scrolling traps');
+   await page.locator('#study4PickerNext').click();
+   assert.match(await page.locator('#study4PickerStatus').innerText(),/Trang 2\/8/);
+   assert.equal(await page.locator('.s4-picker-choice').count(),8);
+   await page.locator('#study4PickerPrev').click();
+   assert.match(await page.locator('#study4PickerStatus').innerText(),/Trang 1\/8/);
+   await page.locator('#study4TestSearch').fill('4927');
+   assert.equal(await page.locator('.s4-picker-choice').count(),1,'Search can jump to any test ID');
+   await page.locator('.s4-picker-choice[data-test-id="4927"]').click();
+   assert.match(await page.locator('.s4-test-card h3').innerText(),/Practice test 1/);
+   await page.locator('#study4TestSearch').fill('');
+   await page.locator('#study4TestSearch').fill('5048');
+   await page.locator('.s4-picker-choice[data-test-id="5048"]').click();
+   await page.locator('#study4TestSearch').fill('');
 
    // Clicking primary CTA (.s4-visit) stays in-app and opens interactive test runner
    await page.locator('.s4-visit').click();
@@ -71,16 +87,19 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
 
    // Per-test section choices come from actual available question kinds, not a static HSK template.
    await page.locator('.s4-back-btn').click();
-   const section=page.locator('#study4SectionSelect'),duration=page.locator('#study4DurationSelect');
+   const section=page.locator('#study4SkillSelect'),kind=page.locator('#study4KindSelect'),duration=page.locator('#study4DurationSelect');
    assert.equal(await section.inputValue(),'all');
+   assert.equal(await kind.inputValue(),'all');
    assert.equal(await duration.inputValue(),'85');
-   const options=await section.locator('option').evaluateAll(nodes=>nodes.map(n=>n.value));
-   assert.ok(options.includes('cloze')&&options.includes('kind:reading:input')&&options.includes('kind:writing:order'));
-   assert.ok(!options.includes('kind:writing:choice'),'Unavailable type must not be offered');
+   assert.deepEqual(await section.locator('option').evaluateAll(nodes=>nodes.map(n=>n.value)),['all','listening','reading','writing']);
+   const kinds=await kind.locator('option').evaluateAll(nodes=>nodes.map(n=>n.value));
+   assert.ok(kinds.includes('cloze')&&kinds.includes('input')&&kinds.includes('order'));
    assert.equal(await duration.locator('option').count(),36,'Duration must increase by 5 from 5 to 180');
-
-   // Cloze-only exam: preserve original question identifiers, score only its own subset.
-   await section.selectOption('cloze');
+   await section.selectOption('reading');
+   assert.ok(!(await kind.locator('option').evaluateAll(nodes=>nodes.map(n=>n.value))).includes('order'),'Reading excludes sentence ordering');
+   await section.selectOption('all');
+   // Cloze-only exam: preserve original identifiers and score its own subset.
+   await kind.selectOption('cloze');
    await duration.selectOption('10');
    await page.locator('.s4-visit').click();
    const clozeMeta=await page.evaluate(()=>{
@@ -99,7 +118,8 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.locator('.s4-back-btn').click();
 
    // Reading choice-only exam uses only the current paper's reading MCQs.
-   await section.selectOption('kind:reading:choice');
+   await section.selectOption('reading');
+   await kind.selectOption('choice');
    await duration.selectOption('5');
    await page.locator('.s4-visit').click();
    const readingMeta=await page.evaluate(()=>({minutes:HSKStudy4.activeSession.durationMinutes,skills:HSKStudy4.activeSession.parts.map(p=>p.skill),kinds:HSKStudy4.activeSession.parts.flatMap(p=>p.groups.flatMap(g=>g.questions.map(q=>q.kind)))}));
@@ -111,15 +131,18 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    // Switching HSK level resets the selection and offers only types present in that paper.
    await page.locator('#study4Level').selectOption('1');
    assert.equal(await section.inputValue(),'all');
+   assert.equal(await kind.inputValue(),'all');
    assert.equal(await duration.inputValue(),'35');
-   assert.ok(!(await section.locator('option').evaluateAll(nodes=>nodes.map(n=>n.value))).includes('kind:writing:order'));
+   assert.ok(!(await section.locator('option').evaluateAll(nodes=>nodes.map(n=>n.value))).includes('writing'));
    await page.locator('#study4Level').selectOption('3');
    assert.equal(await section.inputValue(),'all');
+   assert.equal(await kind.inputValue(),'all');
    assert.equal(await duration.inputValue(),'85');
 
    // The level selector already returned to the list; now verify another paper's Listening transcript.
    await page.locator('.s4-test-card').waitFor({state:'visible'});
-   await page.locator('#study4TestSelect').selectOption('4927');
+   await page.locator('#study4TestSearch').fill('4927');
+   await page.locator('.s4-picker-choice[data-test-id="4927"]').click();
    await page.locator('[data-s4-skill="listening"]').click();
    await page.locator('.s4-visit').click();
    await page.locator('.s4-runner').waitFor({state:'visible'});
