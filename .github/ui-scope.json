@@ -1,4 +1,5 @@
 {
-  "request": "Tích hợp nút Giải thích với AI và khung chat tạm thời ở phần kết quả câu trả lời sai trong Luyện thi HSK (Study4), Bài tập HSK và Trắc nghiệm; giữ nguyên mọi trang khác.",
-  "excludedRoutes": ["study4", "exam", "quiz"]
+  "request": "Chuẩn hóa vị trí nút ba gạch, tên trang và khoảng cách topbar trên toàn bộ trang và trang con HSK, bảo toàn nội dung các route.",
+  "excludedRoutes": [],
+  "sharedHeaderOnly": true
 }

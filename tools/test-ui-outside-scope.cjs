@@ -43,3 +43,9 @@ test('only re-capture geometry-only mismatches; never retry true visual regressi
     assert.equal(canRecaptureGeometryOnly({...mismatch,...bad}),false);
   }
 });
+
+test('shared header requests preserve ALL route visual comparisons',()=>{
+ assert.deepEqual(scope({request:'Unify hamburger geometry everywhere',excludedRoutes:[],sharedHeaderOnly:true}),ROUTES);
+ assert.throws(()=>scope({request:'Unify hamburger geometry everywhere',excludedRoutes:['account'],sharedHeaderOnly:true}));
+ assert.throws(()=>scope({request:'Unify hamburger geometry everywhere',excludedRoutes:[],sharedHeaderOnly:'true'}));
+});

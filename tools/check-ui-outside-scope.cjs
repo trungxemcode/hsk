@@ -64,6 +64,12 @@ function serve(root){
    await page.evaluate(()=>document.fonts.ready);
    await page.addStyleTag({content:'*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important;scroll-behavior:auto!important}'});
    await page.waitForTimeout(1200);
+   // When the shared shell header itself is the requested target, normalize
+   // ONLY that header in both builds. All route content below it keeps strict
+   // screenshot AND geometry comparison, unlike excluding every route.
+   if(config.sharedHeaderOnly){
+    await page.addStyleTag({content:'#studioHeader{visibility:hidden!important;height:80px!important;min-height:80px!important;flex:0 0 80px!important;box-sizing:border-box!important;padding:0!important;margin:0!important}'});
+   }
    // PWA releases necessarily update the version label on Account, even when
    // no Account UI code changed. Normalize only its *text* in both captures.
    // Keep the containing card, its CSS, all other text, and all layout geometry

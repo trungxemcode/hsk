@@ -6,6 +6,8 @@ function scope(config) {
   assert.equal(new Set(config.excludedRoutes).size, config.excludedRoutes.length, 'Duplicate scope');
   for (const route of config.excludedRoutes) assert.ok(ROUTES.includes(route), 'Unknown excluded route: '+route);
   assert.ok(config.excludedRoutes.length < ROUTES.length, 'Cannot exclude every page');
+  assert.ok(config.sharedHeaderOnly === undefined || typeof config.sharedHeaderOnly === 'boolean','Shared header scope must be boolean');
+  if(config.sharedHeaderOnly) assert.equal(config.excludedRoutes.length,0,'A shared header edit must preserve visual checks on every route');
   return ROUTES.filter(route=>!config.excludedRoutes.includes(route));
 }
 function pixels(a,b) {
