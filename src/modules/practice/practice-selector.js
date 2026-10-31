@@ -41,7 +41,7 @@
  const practice=document.getElementById('studioPractice');
  if(!practice)return;
  const reviewIDs=new Set(['srs','mistakes']);
- const groups=[{prefix:'practice',name:'luyện',modes:MODES.filter(m=>!reviewIDs.has(m[0])&&m[0]!=='music')},{prefix:'review',name:'ôn',modes:MODES.filter(m=>reviewIDs.has(m[0]))}];
+ const groups=[{prefix:'practice',name:'luyện',modes:MODES.filter(m=>!reviewIDs.has(m[0])&&!['music','study4'].includes(m[0]))},{prefix:'review',name:'ôn',modes:MODES.filter(m=>reviewIDs.has(m[0]))}];
  for(const group of groups){
   const {prefix,name}=group,picker=document.createElement('div');picker.id=prefix+'ModePicker';picker.className='ps-picker';group.picker=picker;
   picker.innerHTML=`<details id="${prefix}ModeDisclosure" class="ps-disclosure">
@@ -52,6 +52,12 @@
   group.disclosure=picker.querySelector('details');group.options=picker.querySelector('.ps-options');group.counter=picker.querySelector('small');group.start=picker.querySelector('.ps-start');group.hint=picker.querySelector('[role=status]');
  }
  practice.prepend(...groups.map(g=>g.picker));
+ // Independent exam entry keeps the existing Study4 route and module.
+ const examEntry=document.createElement('button');examEntry.type='button';examEntry.id='practiceStudy4Entry';examEntry.className='ps-exam-entry';examEntry.dataset.studioGo='study4';
+ const examIcon=document.createElement('span');examIcon.className='ps-icon';examIcon.append(svg('exam'));
+ const examCopy=document.createElement('span');examCopy.className='ps-copy';const examTitle=document.createElement('strong');examTitle.textContent='Luyện thi HSK';const examNote=document.createElement('small');examNote.textContent='Đề thi và bài nghe theo cấp HSK';examCopy.append(examTitle,examNote);
+ const examArrow=document.createElement('span');examArrow.textContent='→';examArrow.setAttribute('aria-hidden','true');examEntry.append(examIcon,examCopy,examArrow);groups[1].picker.after(examEntry);
+ examEntry.addEventListener('click',()=>window.HSKStudio?.navigate('study4'));
  // Legacy nodes keep their feature handlers; both visible chooser groups use the same UI.
  for(const legacy of ['studioReview','practiceGroup']){const group=document.getElementById(legacy);if(group){group.hidden=true;group.open=false;}}
  const owner=()=>{try{return JSON.parse(localStorage.getItem('hsk-account-meta-v1')||'{}').uid||'guest';}catch{return 'guest';}};
