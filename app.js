@@ -298,7 +298,7 @@ function updateQuizScopeInfo() {
  $('quizPoolPreview').textContent=`${quizLevelLabel()} · ${pool.length} từ · ${eligible.length} từ trong nhóm đã chọn`+(Number.isInteger(count)&&count>0&&count<=100?` · Lượt ôn: ${Math.min(count,eligible.length)} câu`:'')+($('quizDirection').value==='combined'?` · Trộn: ${selectedQuizTypes().map(type=>quizTypeLabels[type]).join(', ')||'chưa chọn dạng'}`:'')+(selectedQuizTypes().some(contextMode)?` · ${contextQuizMap.size.toLocaleString('vi-VN')} mục; mỗi từ có cả hai dạng câu hỏi.`:'');
 }
 function resetQuiz(message='Đã đổi phạm vi ôn. Bấm Bắt đầu để tạo lượt mới.') {
- quizSession=null;question=null;$('quizPrompt').textContent='';$('quizOptions').replaceChildren();$('quizNext').hidden=true;$('quizProgress').textContent='';$('quizFeedback').textContent=message;
+ quizSession=null;question=null;$('quizWrongAI')?.remove();window.HSKWrongAnswerAI?.clearAll?.();$('quizPrompt').textContent='';$('quizOptions').replaceChildren();$('quizNext').hidden=true;$('quizProgress').textContent='';$('quizFeedback').textContent=message;
 }
 function createQuestion(w,direction,candidatePool=quizLevelWords()) {
  if(contextMode(direction))return createContextQuestion(w,direction,candidatePool);
@@ -333,11 +333,11 @@ function startQuiz(e) {
 }
 function renderQuestion() {
  const s=quizSession;if(!s)return;
- if(s.position>=s.pool.length){window.HSKLoading?.flash('Kết quả bài kiểm tra đang load...','Đang tổng hợp điểm số và cập nhật lịch ôn...',undefined,$('quizPanel'));$('quizProgress').textContent='Hoàn thành';$('quizPrompt').textContent=`${s.score} / ${s.pool.length} câu đúng`;$('quizOptions').replaceChildren();$('quizFeedback').textContent='Lịch ôn đã được cập nhật. Chọn Bắt đầu / Làm lại để tạo lượt mới.';$('quizNext').hidden=true;question=null;return;}
+ if(s.position>=s.pool.length){$('quizWrongAI')?.remove();window.HSKWrongAnswerAI?.clearAll?.();window.HSKLoading?.flash('Kết quả bài kiểm tra đang load...','Đang tổng hợp điểm số và cập nhật lịch ôn...',undefined,$('quizPanel'));$('quizProgress').textContent='Hoàn thành';$('quizPrompt').textContent=`${s.score} / ${s.pool.length} câu đúng`;$('quizOptions').replaceChildren();$('quizFeedback').textContent='Lịch ôn đã được cập nhật. Chọn Bắt đầu / Làm lại để tạo lượt mới.';$('quizNext').hidden=true;question=null;return;}
  if(s.position===0){const label=/^Ôn câu|^Ôn từ hay nhầm|^Làm lại câu|^Ôn trọng tâm/.test(s.levelLabel||'')?'Bài ôn câu sai đang load...':/^Phân biệt từ/.test(s.levelLabel||'')?'Bài luyện từ dễ nhầm đang load...':'Bài kiểm tra trắc nghiệm đang load...';window.HSKLoading?.flash(label,'Phạm vi: '+(s.levelLabel||'HSK'),undefined,$('quizPanel'));}
  const direction=s.plan?.[s.position]||(s.direction==='mixed'?randomItem(['han','mean']):s.direction);
  question=s.savedQuestions?{...s.savedQuestions[s.position],answered:false,options:shuffled(s.savedQuestions[s.position].options.map(option=>({...option})))}:createQuestion(s.pool[s.position],direction,s.candidates);
- $('quizOptions').replaceChildren();$('quizNext').hidden=true;$('quizFeedback').textContent='';
+ $('quizWrongAI')?.remove();window.HSKWrongAnswerAI?.clearAll?.();$('quizOptions').replaceChildren();$('quizNext').hidden=true;$('quizFeedback').textContent='';
  $('quizProgress').textContent=`Câu ${s.position+1} / ${s.pool.length} · Đúng: ${s.score} · Phạm vi: ${s.levelLabel} · Từ HSK ${s.pool[s.position].hsk} · ${quizTypeLabels[direction]}`;
  if(!question){$('quizPrompt').textContent='Không đủ đáp án khác biệt để tạo câu này.';$('quizNext').hidden=false;return;}
  $('quizPrompt').style.whiteSpace='pre-line';
@@ -360,6 +360,7 @@ function answerQuiz(i) {
  $('quizFeedback').textContent=`${correct?'✓ Chính xác!':'× Chưa đúng.'}\n${w.han} · ${w.pin}\nNghĩa: ${w.mean}\nÔn lại sau ${intervalLabel(recordOf(w).interval)}.`;
  if(question.item)$('quizFeedback').textContent+=`\n\nCâu đúng: ${question.item.cn}\n${question.item.pin}\n${question.item.vi}\n\nGiải thích: ${question.item.explanation}`;
  if(question.item && !correct && question.item.incorrectReasons?.[chosen.text])$('quizFeedback').textContent+=`\nLỗi ở đáp án bạn chọn: ${question.item.incorrectReasons[chosen.text]}`;
+ $('quizWrongAI')?.remove();if(!correct&&window.HSKWrongAnswerAI){const aiHost=document.createElement('div');aiHost.id='quizWrongAI';aiHost.className='quiz-wrong-ai-host';$('quizNext').before(aiHost);const ci=question.options.findIndex(o=>o.correct);window.HSKWrongAnswerAI.mount(aiHost,()=>({id:'quiz-'+(w.id||w.han)+'-'+quizSession.position,hsk:w.hsk||1,title:(quizSession.levelLabel||'Trắc nghiệm từ vựng')+' · HSK '+(w.hsk||1),skill:'Từ vựng',prompt:$('quizPrompt').textContent||'',context:question.item?(question.item.cn+' ('+question.item.pin+') — '+question.item.vi):(w.han+' ('+w.pin+'): '+w.mean),userAnswer:String.fromCharCode(65+i)+'. '+chosen.text,correctAnswer:(ci>=0?String.fromCharCode(65+ci)+'. ':'')+(question.options[ci]?.text||''),options:question.options.map((opt,idx)=>({value:String.fromCharCode(65+idx),text:opt.text,isCorrect:Boolean(opt.correct),isSelected:idx===i,note:opt.w?(opt.w.han+' ('+opt.w.pin+'): '+opt.w.mean):(question.item?.incorrectReasons?.[opt.text]||'')})),explanation:$('quizFeedback').textContent||'',words:question.options.map(o=>o.w).filter(Boolean).map(ow=>({han:ow.han,pin:ow.pin,mean:ow.mean}))}));}
  $('quizNext').textContent=quizSession.position===quizSession.pool.length-1?'Xem kết quả':'Câu tiếp theo';$('quizNext').hidden=false;
 }
 let srsSession=null;

@@ -1,4 +1,4 @@
 {
-  "request": "Căn đều khoảng cách giữa dòng thống kê, tiêu đề Nghe/Đọc/Viết, các ô dạng đề và nút Về luyện tập trên trang Bài tập HSK; giữ nguyên mọi trang khác.",
-  "excludedRoutes": ["exam"]
+  "request": "Tích hợp nút Giải thích với AI và khung chat tạm thời ở phần kết quả câu trả lời sai trong Luyện thi HSK (Study4), Bài tập HSK và Trắc nghiệm; giữ nguyên mọi trang khác.",
+  "excludedRoutes": ["study4", "exam", "quiz"]
 }

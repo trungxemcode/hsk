@@ -29,7 +29,92 @@ function present(host,getSample){const result=el('div',undefined,'coach-answer-d
 function mount(host){const panel=el('section',undefined,'ai-coach-panel panel-box');panel.setAttribute('aria-label','AI hỗ trợ học tập');panel.append(el('h3','AI · điểm cần cải thiện'),el('p','AI xem câu trả lời, giải thích lỗi và đề xuất luyện tập. Bài làm được gửi tới dịch vụ AI khi bạn chấm hoặc bật giải thích AI sau mỗi câu.','hint'));const label=makeToggle();const status=el('p','', 'coach-status hint');status.setAttribute('role','status');const stats=el('div',undefined,'coach-stats'),out=el('div',undefined,'coach-history'),b=el('button','Phân tích các bài gần đây');b.type='button';b.className='coach-analyze-recent';b.onclick=()=>review(read().samples.slice(-8),out);const clear=el('button','Xóa lịch sử AI');clear.type='button';clear.onclick=()=>{resetQueue();++serial;pending?.abort();pending=null;autoCount=0;save({enabled:read().enabled,samples:[],reviews:[]});out.replaceChildren();refresh();};const profile=el('div',undefined,'coach-profile');panel.append(label,status,stats,profile,b,clear,out);host.append(panel);panels.add(panel);refresh();}
 function refresh(){const s=read();for(const t of toggles){if(!t.isConnected){toggles.delete(t);continue;}t.querySelector('input').checked=s.enabled;}for(const p of panels){if(!p.isConnected){panels.delete(p);continue;}p.querySelector('.coach-analyze-recent').disabled=!!pending;const stat=p.querySelector('.coach-stats');stat.replaceChildren();const rows=C.stats(s.samples);for(const r of rows)stat.append(el('p',`${r.skill}: ${r.correct}/${r.attempts} lượt đúng · ${r.distinct} câu khác nhau`));p.querySelector('.coach-status').textContent=lastError|| (pending?'AI chấm điểm đang load…':s.samples.length?`Đã ghi ${s.samples.length} lượt gần đây. Một lỗi riêng lẻ chưa đủ kết luận điểm yếu.`:'Chưa có dữ liệu. Hãy làm ôn ngắn hoặc luyện theo dạng đề.');renderProfile(p.querySelector('.coach-profile'),s);}}
 function renderProfile(host,s){const fingerprint=owner()+':'+(window.HSKExamBank?.items.length||0)+':'+JSON.stringify(s.profile);if(host.dataset.fingerprint===fingerprint){host.querySelectorAll('.profile-ai-button').forEach(b=>b.disabled=!!pending);return;}host.dataset.fingerprint=fingerprint;host.replaceChildren();host.append(el('h4','Hồ sơ lỗi lặp'),el('p','Nhóm câu có dấu hiệu cần luyện, chưa phải kết luận nguyên nhân. Theo dõi tối đa 400 lượt có đáp án trong 90 ngày; bài viết tự đối chiếu không được tính là đúng/sai.','hint'));const groups=P.groups(s.profile);if(!groups.length){host.append(el('p','Chưa có câu sai đủ dữ liệu để lập nhóm.','hint'));return;}for(const g of groups.slice(0,6)){const card=el('article',undefined,'coach-profile-card');card.append(el('strong','HSK '+g.hsk+' · '+g.label),el('p',g.status+' · '+g.wrong+'/'+g.attempts+' lượt sai · '+g.distinctWrong+' câu khác nhau · '+g.days+' ngày'),el('small',g.trend+(g.previousAttempts>=5?' · trước '+g.previousWrong+'/'+g.previousAttempts+', gần đây '+g.recentWrong+'/'+g.recentAttempts:'')));const details=el('details');details.append(el('summary','Xem bằng chứng và cách luyện'));for(const e of g.evidence)details.append(el('p',(e.lesson||e.prompt)+'\nBạn chọn: '+e.answer+'\nĐáp án/mẫu: '+e.expected));P.plan(g).forEach((step,i)=>details.append(el('p',(i+1)+'. '+step)));card.append(details);const train=el('button','Luyện 5 câu nhóm này');train.type='button';train.onclick=()=>window.HSKExam?.target(g);const matches=window.HSKExamBank?.items.filter(q=>q.level===g.hsk&&window.HSKExamBank.types.find(t=>t.id===q.type)?.format!=='writing'&&P.matches({...q,skill:window.HSKExamBank.types.find(t=>t.id===q.type)?.skill},g))||[];train.disabled=!matches.length;if(!matches.length){card.append(el('p','Chưa có câu khác phù hợp; hãy mở lại bài trong bằng chứng.','hint'));const lesson=g.evidence.map(e=>e.id.match(/^standard-[1-6]-\d+/)?.[0]).find(Boolean);if(lesson){const back=el('button','Mở bài liên quan');back.type='button';back.onclick=()=>{history.pushState(null,'','#lesson/'+lesson);window.HSKStudio?.navigate('lessons');};card.append(back);}}const ai=el('button','AI góp ý nhóm lỗi'),out=el('div',undefined,'coach-result');ai.type='button';ai.className='profile-ai-button';ai.disabled=!!pending;ai.onclick=()=>{const cohort=s.profile.events.filter(e=>e.hsk===g.hsk&&e.topic===g.topic),evidence=[...g.evidence,...cohort.slice(-5)].filter((e,i,a)=>a.findIndex(x=>x.id===e.id&&x.time===e.time)===i).slice(-8).map(e=>({...e,writing:false,source:'',explanation:''}));review(evidence,out,'profile',g);};out.setAttribute('role','status');card.append(train,ai,out);host.append(card);}}
-window.HSKAICoach={observe,attach,mount,toggle,present,explain,sample:C.sample,review};window.addEventListener('hsk-account-ready',()=>{resetQueue();++serial;pending?.abort();pending=null;autoCount=0;lastError='';for(const p of panels)p.querySelector('.coach-history').replaceChildren();refresh();});window.addEventListener('pagehide',()=>{resetQueue();++serial;pending?.abort();pending=null;});window.addEventListener('storage',e=>{if(e.key===KEY)refresh();});window.addEventListener('hsk-exam-ready',refresh);
+const wrongChats=new Set();
+function clearAllWrongChats(){for(const c of [...wrongChats])c.destroy();}
+function mountWrongExplain(host,getSpec){
+ if(!host)return null;
+ for(const old of host.querySelectorAll(':scope > .wrong-ai-explain'))old.remove();
+ const wrap=el('div',undefined,'wrong-ai-explain'),btn=el('button','Giải thích với AI','wrong-ai-explain-btn'),chatBox=el('section',undefined,'wrong-ai-chat'),head=el('header',undefined,'wrong-ai-chat-head'),headCopy=el('div',undefined,'wrong-ai-chat-title'),closeBtn=el('button','Đóng','wrong-ai-chat-close'),messages=el('div',undefined,'wrong-ai-chat-messages'),status=el('p','','wrong-ai-chat-status hint'),form=el('form',undefined,'wrong-ai-chat-form'),input=el('textarea',undefined,'wrong-ai-chat-input'),sendBtn=el('button','Gửi','wrong-ai-chat-send');
+ btn.type='button';btn.setAttribute('aria-expanded','false');
+ chatBox.hidden=true;chatBox.setAttribute('aria-label','Khung chat tạm thời giải thích câu sai');
+ headCopy.append(el('strong','Giải thích với AI'),el('small','Khung chat tạm thời cho câu hỏi này · Tự xóa khi đóng hoặc thoát'));
+ closeBtn.type='button';closeBtn.setAttribute('aria-label','Đóng khung chat tạm thời');
+ head.append(headCopy,closeBtn);
+ messages.setAttribute('role','log');messages.setAttribute('aria-live','polite');
+ status.setAttribute('role','status');
+ input.rows=2;input.maxLength=500;input.required=true;input.placeholder='Hỏi kỹ hơn về câu này (từ vựng, ngữ pháp, các phương án)...';input.setAttribute('aria-label','Hỏi thêm AI về câu sai này');
+ sendBtn.type='submit';
+ form.append(input,sendBtn);chatBox.append(head,messages,status,form);wrap.append(btn,chatBox);host.append(wrap);
+ let history=[],chatPending=null,chatSerial=0,builtContext=null,initialized=false;
+ function appendMessage(role,text){
+  const row=el('div',undefined,'wrong-ai-chat-msg '+role);
+  row.append(el('strong',role==='user'?'Bạn':'AI'),el('p',text));
+  messages.append(row);messages.scrollTop=messages.scrollHeight;
+ }
+ function destroy(){
+  ++chatSerial;chatPending?.abort();chatPending=null;
+  history=[];builtContext=null;initialized=false;
+  messages.replaceChildren();status.textContent='';input.value='';
+  input.disabled=false;sendBtn.disabled=false;
+  chatBox.removeAttribute('aria-busy');chatBox.hidden=true;
+  btn.setAttribute('aria-expanded','false');
+  wrongChats.delete(instance);
+ }
+ async function sendTurn(questionText,isInitial){
+  if(!questionText||chatPending)return;
+  if(!config){status.textContent='Chưa kết nối được dịch vụ AI. Hãy thử lại sau.';return;}
+  const user=window.HSKAccountDashboard?.user;
+  if(!user){status.textContent='Hãy đăng nhập tài khoản app để hỏi AI giải thích.';return;}
+  if(!builtContext)builtContext=C.buildWrongAnswerPrompt(typeof getSpec==='function'?getSpec():getSpec);
+  const current=++chatSerial,initialOwner=owner(),uid=user.uid,controller=new AbortController();
+  chatPending=controller;sendBtn.disabled=true;input.disabled=true;chatBox.setAttribute('aria-busy','true');
+  if(!isInitial){appendMessage('user',questionText);input.value='';status.textContent='AI đang trả lời câu hỏi của bạn…';}
+  else status.textContent='AI đang phân tích câu hỏi và giải thích cả 4 phương án…';
+  const timer=setTimeout(()=>controller.abort(),55000);
+  try{
+   const token=await user.getIdToken();
+   if(current!==chatSerial||owner()!==initialOwner||window.HSKAccountDashboard?.user?.uid!==uid||!wrap.isConnected)return;
+   const r=await fetch(config.endpoint.replace(/\/translate$/,'/lesson-ask'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({question:questionText.slice(0,500),hsk:builtContext.hsk,lesson:builtContext.lesson,history:history.slice(-8)}),signal:controller.signal});
+   const data=await r.json();
+   if(current!==chatSerial||owner()!==initialOwner||window.HSKAccountDashboard?.user?.uid!==uid||!wrap.isConnected)return;
+   if(!r.ok)throw Error(data.error||'AI chưa trả lời được. Hãy thử lại.');
+   if(typeof data.answer!=='string'||!data.answer.trim()||data.answer.length>5000)throw Error('Câu trả lời chưa đầy đủ. Hãy thử lại.');
+   const answer=data.answer.trim();
+   history.push({role:'user',text:questionText.slice(0,500)},{role:'assistant',text:answer});
+   history=history.slice(-8);
+   appendMessage('assistant',answer);
+   status.textContent='';initialized=true;
+  }catch(e){
+   if(current===chatSerial)status.textContent=e.name==='AbortError'?'AI phản hồi quá lâu. Hãy thử lại.':e.message;
+  }finally{
+   clearTimeout(timer);
+   if(current===chatSerial){chatPending=null;chatBox.removeAttribute('aria-busy');sendBtn.disabled=false;input.disabled=false;}
+  }
+ }
+ const instance={wrap,destroy,get history(){return history.slice();},get open(){return !chatBox.hidden;}};
+ btn.onclick=()=>{
+  if(!chatBox.hidden&&initialized){input.focus({preventScroll:true});return;}
+  for(const other of [...wrongChats])if(other!==instance)other.destroy();
+  wrongChats.add(instance);
+  chatBox.hidden=false;btn.setAttribute('aria-expanded','true');
+  if(!initialized&&!chatPending){
+   builtContext=C.buildWrongAnswerPrompt(typeof getSpec==='function'?getSpec():getSpec);
+   sendTurn(builtContext.initialQuestion,true);
+  }
+ };
+ closeBtn.onclick=()=>{destroy();btn.focus({preventScroll:true});};
+ chatBox.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();destroy();btn.focus({preventScroll:true});}});
+ input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();form.requestSubmit();}});
+ form.onsubmit=e=>{e.preventDefault();const q=input.value.trim();if(!q||chatPending)return;sendTurn(q,false);};
+ return instance;
+}
+if(typeof MutationObserver==='function'&&document.body){
+ new MutationObserver(()=>{
+  for(const c of [...wrongChats])if(!c.wrap.isConnected||c.wrap.closest('[hidden]'))c.destroy();
+ }).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden']});
+}
+window.HSKWrongAnswerAI={mount:mountWrongExplain,clearAll:clearAllWrongChats,buildPrompt:C.buildWrongAnswerPrompt};
+window.HSKAICoach={observe,attach,mount,toggle,present,explain,sample:C.sample,review,explainWrong:mountWrongExplain};window.addEventListener('hsk-account-ready',()=>{clearAllWrongChats();resetQueue();++serial;pending?.abort();pending=null;autoCount=0;lastError='';for(const p of panels)p.querySelector('.coach-history').replaceChildren();refresh();});window.addEventListener('pagehide',()=>{clearAllWrongChats();resetQueue();++serial;pending?.abort();pending=null;});window.addEventListener('popstate',clearAllWrongChats);window.addEventListener('hashchange',clearAllWrongChats);window.addEventListener('storage',e=>{if(e.key===KEY)refresh();});window.addEventListener('hsk-exam-ready',refresh);
 fetch('./translation-config.json',{cache:'no-store'}).then(r=>r.json()).then(c=>{if(c.enabled&&new URL(c.endpoint).protocol==='https:')config=c;}).catch(()=>{});
 mount(document.querySelector('#practiceGroup')||document.querySelector('#studioPractice'));
 })();

@@ -13,7 +13,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   for(const width of [390,1440]){
    const page=await browser.newPage({viewport:{width,height:844},isMobile:width<721,hasTouch:width<721,serviceWorkers:'block'}),errors=[];
    page.on('pageerror',e=>errors.push(e.message));
-   await page.route('https://**/*',r=>r.abort());
+   const aiPayloads=[];await page.route('https://**/*',r=>r.abort());await page.route('**/translation-config.json',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({enabled:true,endpoint:'https://test.example/translate'})}));await page.route('**/lesson-ask',async r=>{const body=JSON.parse(r.request().postData()||'{}');aiPayloads.push(body);await r.fulfill({contentType:'application/json',body:JSON.stringify({answer:body.history?.length?'Giải thích thêm: Phương án đúng khớp ngữ cảnh hội thoại.':'Giải thích 4 phương án:\n- Phương án đúng khớp lời thoại.\n- Phương án bạn chọn và các phương án còn lại sai ngữ cảnh.'})});});
    await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
    await page.addInitScript(()=>localStorage.setItem('hsk-studio-target-v1:guest','3'));
    await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
@@ -149,6 +149,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await page.locator('audio.s4-audio-player').count(),1);
    await page.locator('#s4-q-1 .s4-check-one').click();
    assert.ok(await page.locator('.s4-transcript').count()>=1,'Transcript unlocked for checked question');
+   const wrongExplainBtn=page.locator('#s4-q-1 .wrong-ai-explain-btn');assert.equal(await wrongExplainBtn.isVisible(),true,'Wrong answer displays Giải thích với AI button');await page.evaluate(()=>{window.HSKAccountDashboard={user:{uid:'u1',getIdToken:async()=>'fake-token'}};});await wrongExplainBtn.click();const wrongChat=page.locator('#s4-q-1 .wrong-ai-chat');await wrongChat.waitFor({state:'visible'});await page.waitForFunction(()=>document.querySelectorAll('#s4-q-1 .wrong-ai-chat-msg').length===1);assert.ok(aiPayloads.length>=1,'Clicking Giải thích với AI calls /lesson-ask');assert.ok(Array.isArray(aiPayloads.at(-1).lesson?.content?.allOptions)&&aiPayloads.at(-1).lesson.content.allOptions.length>=2,'Payload includes all options');assert.match(await wrongChat.locator('.wrong-ai-chat-messages').innerText(),/Giải thích 4 phương án/);await wrongChat.locator('.wrong-ai-chat-input').fill('Cho mình hỏi kỹ hơn về câu này?');await wrongChat.locator('.wrong-ai-chat-send').click();await page.waitForFunction(()=>document.querySelectorAll('#s4-q-1 .wrong-ai-chat-msg').length===3);assert.equal(aiPayloads.at(-1).history?.length,2,'Follow-up chat sends temporary history');await page.locator('.s4-back-btn').click();assert.equal(await page.locator('.wrong-ai-chat').count(),0,'Temporary AI chat is destroyed when exiting the test');
 
    assert.deepEqual(errors,[],'no page errors at '+width);
    await page.close();

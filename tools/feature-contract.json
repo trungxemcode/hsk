@@ -2232,7 +2232,7 @@
         },
         {
           "kind": "file",
-          "file": "tools/check-study4-exam-ui.cjs",
+          "file": "tools/check-study4-exam-ui.cjs", "value": "" } ] }, { "id": "exam-wrong-ai-explain-chat", "name": "Giải thích câu sai với AI và khung chat tạm thời trong luyện thi HSK", "checks": [ { "kind": "contains", "file": "src/modules/ai-coach/ai-coach-core.js", "value": "function buildWrongAnswerPrompt(" }, { "kind": "contains", "file": "src/modules/ai-coach/ai-coach.js", "value": "window.HSKWrongAnswerAI=" }, { "kind": "contains", "file": "src/modules/practice/study4-practice.js", "value": "HSKWrongAnswerAI.mount(" }, { "kind": "contains", "file": "src/modules/exams/exam.js", "value": "HSKWrongAnswerAI.mount(" }, { "kind": "file", "file": "tools/check-ai-coach-dom.cjs",
           "value": ""
         }
       ]

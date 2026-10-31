@@ -90,7 +90,7 @@
   try{
    document.querySelectorAll('audio.s4-audio-player').forEach(a=>{try{a.pause();}catch{}});
   }catch{}
-  window.HSKSpeech?.stop?.();
+  window.HSKSpeech?.stop?.();window.HSKWrongAnswerAI?.clearAll?.();
  }
 
  function loadStore(){
@@ -276,6 +276,9 @@
   for(const bad of tpl.content.querySelectorAll('script,style,iframe,object,embed'))bad.remove();
   target.append(tpl.content.cloneNode(true));
   attachZoomableImages(target);
+ }
+ function stripStudy4Html(htmlStr){if(!htmlStr)return '';const tpl=document.createElement('template');tpl.innerHTML=String(htmlStr).replace(/<(?:br|\/p|\/div|\/tr|\/li)\b[^>]*>/gi,'\n').replace(/<\/(?:td|th)>/gi,' · ');for(const bad of tpl.content.querySelectorAll('script,style,iframe,object,embed'))bad.remove();const hasImg=tpl.content.querySelector('img')!==null,text=(tpl.content.textContent||'').replace(/[ \t]+/g,' ').replace(/\n\s*\n+/g,'\n').trim();return text||(hasImg?'[Hình minh họa trong đề]':'');}
+ function buildStudy4WrongSpec(test,activePart,g,q,userVal){const qPrompt=stripStudy4Html(q.promptHtml)||stripStudy4Html(q.contextHtml)||('Câu '+q.number),ctxParts=[stripStudy4Html(g.contextHtml),q.promptHtml?stripStudy4Html(q.contextHtml):''].filter(Boolean),trParts=[stripStudy4Html(q.transcriptHtml),stripStudy4Html(g.transcriptHtml)].filter(Boolean);let options=[];if(Array.isArray(q.options)&&q.options.length){options=q.options.map((opt,idx)=>{const label=String(opt.value||String.fromCharCode(65+idx)).trim(),raw=stripStudy4Html(opt.html||opt.label||label),cleaned=raw.replace(new RegExp('^'+label+'[.\\s:：)\\]]*','i'),'').trim()||raw;return {label,text:cleaned,isUserChoice:Boolean(userVal&&normAnswer(userVal,q.kind)===normAnswer(label,q.kind)),isCorrect:Boolean(isCorrectAnswer(q,label))};});}else if(Array.isArray(q.ordering)&&q.ordering.length){options=q.ordering.map((word,idx)=>({label:String.fromCharCode(65+idx),text:String(word),isUserChoice:false,isCorrect:false}));}else{const combinedCtx=ctxParts.join('\n'),matches=[...combinedCtx.matchAll(/(?:^|\n|\s)([A-F])[.．、:：\s]+([^\nA-F]{1,120})/g)];if(matches.length>=2)options=matches.slice(0,6).map(m=>({label:m[1],text:m[2].trim(),isUserChoice:Boolean(userVal&&normAnswer(userVal,q.kind)===m[1]),isCorrect:Boolean(isCorrectAnswer(q,m[1]))}));else if(/^[A-Fa-f]$/.test(String(q.answer||'').trim()))options=['A','B','C','D','E','F'].map(code=>({label:code,text:'Phương án '+code,isUserChoice:Boolean(userVal&&normAnswer(userVal,q.kind)===code),isCorrect:Boolean(isCorrectAnswer(q,code))}));else if(/^[ABCabc]{3}$/.test(String(q.answer||'').trim()))options=['ABC','ACB','BAC','BCA','CAB','CBA'].map(code=>({label:code,text:'Thứ tự '+code,isUserChoice:Boolean(userVal&&normAnswer(userVal,q.kind)===code),isCorrect:Boolean(isCorrectAnswer(q,code))}));}const chosenOpt=options.find(o=>o.isUserChoice),rightOpt=options.find(o=>o.isCorrect),userAnswerText=userVal&&String(userVal).trim()?(chosenOpt&&chosenOpt.text!==chosenOpt.label?`${chosenOpt.label} (${chosenOpt.text})`:String(userVal).trim()):'Chưa chọn đáp án',correctAnswerText=rightOpt&&rightOpt.text!==rightOpt.label?`${rightOpt.label} (${rightOpt.text})`:String(q.answer||'');return {id:`study4-${test.id}-${q.qid||q.number}`,hsk:Number(test.level)||3,sourceName:`Luyện thi HSK ${test.level} · ${test.title} · Câu ${q.number}`,skill:SKILL_LABELS[activePart?.skill]||'Đọc',questionPrompt:qPrompt,contextText:ctxParts.join('\n'),transcriptText:trParts.join('\n'),userAnswer:userAnswerText,correctAnswer:correctAnswerText,options,explanation:stripStudy4Html(q.explanationHtml)};
  }
 
  function formatClock(sec){
@@ -695,6 +698,11 @@
      }
      if(q.explanationHtml){
       const ex=el('div',null,'s4-explanation');
+      renderSafeHtml(ex,q.explanationHtml);
+      feedbackBox.append(ex);
+     }
+     if(ok===false&&window.HSKWrongAnswerAI)window.HSKWrongAnswerAI.mount(feedbackBox,()=>buildStudy4WrongSpec(test,activePart,g,q,sess.answers[q.qid]||''));if(false){const ex=el('div');
+      feedbackBox.append(ex);
       renderSafeHtml(ex,q.explanationHtml);
       feedbackBox.append(ex);
      }
