@@ -78,7 +78,7 @@ function serve(root){
     const label=document.getElementById('studioVersion');
     if(label)label.textContent='Bản phát hành hiện tại';
    });
-   const title=await page.locator('#activeTitle').innerText();
+   const title=await page.locator('#activeTitle').textContent();
    assert.ok(title.trim(),'Missing route title: '+route);
    // Confirm routes really opened, rather than comparing the previous page twice.
    {
