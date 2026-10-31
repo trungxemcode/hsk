@@ -4,7 +4,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  const root=process.cwd(),server=http.createServer((req,res)=>{
   const f=path.resolve(root,'.'+new URL(req.url,'http://local').pathname);
   if(!f.startsWith(root+path.sep)||!fs.existsSync(f)||!fs.statSync(f).isFile()){res.writeHead(404);res.end();return;}
-  res.setHeader('Content-Type',({'.js':'text/javascript','.css':'text/css','.html':'text/html','.json':'application/json'})[path.extname(f)]||'application/octet-stream');
+  res.setHeader('Content-Type',({'.js':'text/javascript','.css':'text/css','.html':'text/html','.json':'application/json','.mp3':'audio/mpeg'})[path.extname(f)]||'application/octet-stream');
   res.end(fs.readFileSync(f));
  });
  await new Promise(r=>server.listen(0,'127.0.0.1',r));
@@ -35,7 +35,11 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await page.locator('.s4-runner').waitFor({state:'visible'});
    assert.equal(await page.locator('#study4PracticePanel').isVisible(),true,'user remains inside #study4PracticePanel');
    assert.equal(await page.locator('.s4-part-tab').count(),3,'HSK 3 has Listening, Reading, Writing tabs');
-   assert.equal(await page.locator('audio.s4-audio-player').count(),1,'Listening part renders official audio player');
+   const audioPlayers=page.locator('audio.s4-audio-player');
+   assert.ok(await audioPlayers.count()>=1,'Listening part renders audio player(s)');
+   const firstSources=await audioPlayers.first().locator('source').evaluateAll(els=>els.map(s=>s.src));
+   assert.ok(firstSources.some(s=>s.includes('content/study4-audio')),'Includes local offline source');
+   assert.ok(firstSources.some(s=>s.startsWith('https://')),'Includes fallback remote CDN source');
 
    // Answer Q1 (multiple choice in Listening)
    const q1Choice=page.locator('#s4-q-1 .s4-choice-btn').first();

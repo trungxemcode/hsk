@@ -183,6 +183,7 @@ def parse_question_item(item_el, q_sol):
         q_obj["contextHtml"] = ctx_html
     if item_audio:
         q_obj["audio"] = item_audio
+        q_obj["audioFile"] = "content/study4-audio/" + os.path.basename(re.sub(r"[?#].*$", "", item_audio))
     if prompt_html:
         q_obj["promptHtml"] = prompt_html
     if ordering:

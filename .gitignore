@@ -23,5 +23,8 @@ __pycache__/
 # Local Cloudflare development state
 .wrangler/
 
+# Local Study4 audio files (6.4 GB offline media archive)
+content/study4-audio/
+
 server/design/.assets/
 server/design/.wrangler/
