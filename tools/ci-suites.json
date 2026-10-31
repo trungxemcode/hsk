@@ -78,7 +78,8 @@
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-studio-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-dark-contrast-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-notebook-ui.cjs",
-    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-notebook-factory-ui.cjs"
+    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-notebook-factory-ui.cjs",
+    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-study4-exam-ui.cjs"
   ],
   "protected-browser": [
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-feature-runtime.cjs",
