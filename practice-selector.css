@@ -135,13 +135,34 @@ html[data-theme=dark] #studioPractice .ps-disclosure{background:var(--surface);c
 .study4-exam-panel .s4-controls[hidden]{display:none!important}
 .study4-exam-panel .s4-selects{display:flex;gap:12px;flex-wrap:wrap;align-items:end}
 .study4-exam-panel .s4-exam-options{display:grid;flex:0 0 100%;width:100%;box-sizing:border-box;gap:10px;margin-top:12px;padding:16px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface)}
-.study4-exam-panel .s4-exam-options-fields{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(125px,1fr);gap:12px;align-items:end}
+.study4-exam-panel .s4-exam-options-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:end}
 .study4-exam-panel .s4-exam-options-fields label{min-width:0;display:grid;gap:7px;color:var(--ink);font-weight:750;font-size:14px}
 .study4-exam-panel .s4-exam-options-fields select{width:100%;min-width:0;max-width:100%;min-height:46px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);font:inherit;font-weight:650;box-sizing:border-box}
 .study4-exam-panel .s4-exam-options-fields select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .study4-exam-panel .s4-exam-summary{margin:0;font-size:13px;line-height:1.5;color:var(--sub)}
-@media(max-width:440px){.study4-exam-panel .s4-exam-options-fields{grid-template-columns:minmax(0,1fr)}.study4-exam-panel .s4-exam-options{padding:12px}}
-.study4-exam-panel .s4-level-grid{display:grid;gap:10px;margin-top:14px;max-height:360px;overflow-y:auto;padding-right:4px}
+@media(max-width:440px){.study4-exam-panel .s4-exam-options{padding:12px}.study4-exam-panel .s4-exam-options-fields label:last-child{grid-column:1 / -1}}
+/* Compact, accessible test picker: no nested touch scrolling on iPhone. */
+.study4-exam-panel .s4-test-picker{display:grid;gap:12px;flex:0 0 100%;width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:var(--radius-card);padding:14px;background:var(--surface)}
+.study4-exam-panel .s4-picker-header{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--ink)}
+.study4-exam-panel .s4-picker-header strong{font-size:16px}
+.study4-exam-panel .s4-picker-header span{font-size:13px;color:var(--sub)}
+.study4-exam-panel .s4-picker-search-label{display:grid;gap:6px;font-size:13px;color:var(--sub)}
+.study4-exam-panel .s4-picker-search-label input{width:100%;min-width:0;box-sizing:border-box;min-height:46px;padding:10px 12px;font:inherit;font-size:16px;border:1px solid var(--line);border-radius:var(--radius-btn);color:var(--ink);background:var(--surface)}
+.study4-exam-panel .s4-picker-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.study4-exam-panel .s4-picker-choice{display:grid;gap:2px;align-content:center;text-align:left;min-width:0;min-height:62px;padding:9px 11px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink);cursor:pointer}
+.study4-exam-panel .s4-picker-choice strong{font-size:14px;overflow-wrap:anywhere}
+.study4-exam-panel .s4-picker-choice .s4-picker-meta{font-size:11px;color:var(--sub)}
+.study4-exam-panel .s4-picker-choice.is-selected-paper{border:2px solid var(--accent);padding:8px 10px;background:var(--surface)}
+.study4-exam-panel .s4-picker-choice.is-selected-paper{background:var(--accent);color:var(--palette-white)}
+html body.studio-enabled #study4PracticePanel button.s4-picker-choice.is-selected-paper :is(strong,.s4-picker-meta){color:var(--palette-white)!important}
+.study4-exam-panel .s4-picker-choice:focus-visible,.study4-exam-panel .s4-picker-pages button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.study4-exam-panel .s4-picker-pages{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.study4-exam-panel .s4-picker-pages button{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--accent-ink);font:inherit;font-weight:750}
+.study4-exam-panel .s4-picker-pages button:disabled{opacity:.45;cursor:default}
+.study4-exam-panel .s4-picker-pages span{font-size:13px;color:var(--sub)}
+.study4-exam-panel .s4-picker-empty{grid-column:1/-1;color:var(--sub);font-size:14px}
+@media(max-width:720px){.study4-exam-panel .s4-picker-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.study4-exam-panel .s4-test-picker{padding:12px}}
+
 .study4-exam-panel .s4-mini-card{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface);color:var(--ink)}
 .study4-exam-panel .s4-mini-card.is-current{border-color:var(--accent)}
 .study4-exam-panel .s4-mini-info{display:grid;gap:4px;min-width:0}

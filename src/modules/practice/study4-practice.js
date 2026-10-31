@@ -31,7 +31,7 @@
   '<div class="s4-controls">'+
    '<div class="s4-selects">'+
     '<label for="study4Level">Cấp độ <select id="study4Level"></select></label>'+
-    '<label for="study4TestSelect">Bộ đề <select id="study4TestSelect"></select></label>'+
+    '<select id="study4TestSelect" hidden aria-hidden="true" tabindex="-1"></select>'+
    '</div>'+
    '<div class="s4-tabs" role="group" aria-label="Phần thi">'+
     '<button type="button" data-s4-skill="test">Đề HSK</button>'+
@@ -39,11 +39,18 @@
    '</div>'+
    '<div class="s4-exam-options" id="study4ExamOptions">'+
     '<div class="s4-exam-options-fields">'+
-     '<label for="study4SectionSelect">Phần muốn thi <select id="study4SectionSelect"></select></label>'+
+     '<label for="study4SkillSelect">Phần thi <select id="study4SkillSelect"></select></label>'+
+     '<label for="study4KindSelect">Dạng bài <select id="study4KindSelect"></select></label>'+
      '<label for="study4DurationSelect">Thời gian làm bài <select id="study4DurationSelect"></select></label>'+
     '</div>'+
     '<p class="s4-exam-summary" id="study4ExamSummary" role="status"></p>'+
    '</div>'+
+   '<section class="s4-test-picker" id="study4TestPicker" aria-label="Chọn bộ đề">'+
+    '<div class="s4-picker-header"><strong>Chọn bộ đề</strong><span id="study4PickerCount"></span></div>'+
+    '<label for="study4TestSearch" class="s4-picker-search-label">Tìm đề <input id="study4TestSearch" type="search" placeholder="Nhập số đề hoặc tên đề…" autocomplete="off" inputmode="search"></label>'+
+    '<div class="s4-picker-grid" id="study4PickerGrid"></div>'+
+    '<div class="s4-picker-pages"><button type="button" id="study4PickerPrev">← Trước</button><span id="study4PickerStatus" aria-live="polite"></span><button type="button" id="study4PickerNext">Tiếp →</button></div>'+
+   '</section>'+
   '</div>'+
   '<div id="study4Results"></div>'+
   '<p class="s4-credit">Nguồn: <a href="https://study4.com/tests/" target="_blank" rel="noopener noreferrer">Study4.com</a></p>'+
@@ -53,12 +60,20 @@
  const controlsBox=panel.querySelector('.s4-controls');
  const level=panel.querySelector('#study4Level');
  const testSelect=panel.querySelector('#study4TestSelect');
- const sectionSelect=panel.querySelector('#study4SectionSelect');
+ const skillSelect=panel.querySelector('#study4SkillSelect');
+ const kindSelect=panel.querySelector('#study4KindSelect');
+ const testSearch=panel.querySelector('#study4TestSearch');
+ const pickerGrid=panel.querySelector('#study4PickerGrid');
+ const pickerPrev=panel.querySelector('#study4PickerPrev');
+ const pickerNext=panel.querySelector('#study4PickerNext');
+ const pickerStatus=panel.querySelector('#study4PickerStatus');
+ const pickerCount=panel.querySelector('#study4PickerCount');
  const durationSelect=panel.querySelector('#study4DurationSelect');
  const examSummary=panel.querySelector('#study4ExamSummary');
  const results=panel.querySelector('#study4Results');
  for(let n=1;n<=6;n++){const o=new Option('HSK '+n,String(n));level.add(o);}
- let skill='test',selectedTestId='',sectionFilter='all',durationCustomized=false;
+ let skill='test',selectedTestId='',sectionFilter='all',durationCustomized=false,pickerPage=0;
+ const PICKER_PAGE_SIZE=8;
  for(let minutes=5;minutes<=180;minutes+=5)durationSelect.add(new Option(minutes+' phút',String(minutes)));
 
  function el(tag,text,cls){
@@ -151,45 +166,88 @@
   const base=(test.parts||[]).filter(p=>mode!=='listening'||p.skill==='listening');
   if(filter==='all')return base;
   const parts=[];
+  const isKind=filter.startsWith('kind:');
+  const [,targetSkill,kind]=isKind?filter.split(':'):[];
   for(const p of base){
    if(filter.startsWith('skill:')&&p.skill!==filter.slice(6))continue;
-   if(filter.startsWith('kind:')&&!filter.startsWith('kind:'+p.skill+':'))continue;
+   if(isKind&&targetSkill!=='all'&&targetSkill!==p.skill)continue;
    const groups=[];
    for(const g of (p.groups||[])){
-    const questions=(g.questions||[]).filter(q=>filter.startsWith('skill:')||(filter==='cloze'?isClozeQuestion(q):q.kind===filter.split(':')[2]));
+    const questions=(g.questions||[]).filter(q=>
+     filter.startsWith('skill:')||(filter==='cloze'||kind==='cloze'?isClozeQuestion(q):q.kind===kind));
     if(questions.length)groups.push({...g,questions});
    }
    if(groups.length)parts.push({...p,groups,questionCount:groups.reduce((n,g)=>n+g.questions.length,0)});
   }
   return parts;
  }
- function availableSectionOptions(test,mode){
-  const options=[{value:'all',label:mode==='listening'?'Toàn bộ phần nghe':'Toàn bộ đề'}];
-  const parts=(test.parts||[]).filter(p=>mode!=='listening'||p.skill==='listening');
-  const hasCloze=parts.some(p=>(p.groups||[]).some(g=>(g.questions||[]).some(isClozeQuestion)));
-  if(hasCloze)options.push({value:'cloze',label:'Điền chỗ trống (đục lỗ)'});
-  for(const p of parts){
-   const questions=(p.groups||[]).flatMap(g=>g.questions||[]);
-   if(!questions.length)continue;
-   options.push({value:'skill:'+p.skill,label:SKILL_LABELS[p.skill]||p.name||p.skill});
-   for(const kind of ['choice','input','order','essay']){
-    if(questions.some(q=>q.kind===kind))options.push({value:'kind:'+p.skill+':'+kind,label:(SKILL_LABELS[p.skill]||p.skill)+' · '+KIND_LABELS[kind]});
-   }
-  }
-  return options;
+ function filterFromControls(){
+  const section=skillSelect.value||'all',kind=kindSelect.value||'all';
+  if(kind==='all')return section==='all'?'all':'skill:'+section;
+  if(kind==='cloze'&&section==='all')return 'cloze';
+  return 'kind:'+section+':'+kind;
  }
  function refreshExamOptions(){
-  const item=currentItem(),options=availableSectionOptions(item,skill);
-  sectionSelect.replaceChildren(...options.map(opt=>new Option(opt.label,opt.value)));
-  if(!options.some(opt=>opt.value===sectionFilter))sectionFilter='all';
-  sectionSelect.value=sectionFilter;
+  const item=currentItem();
+  const base=(item.parts||[]).filter(p=>skill!=='listening'||p.skill==='listening');
+  let section='all',kind='all';
+  if(sectionFilter.startsWith('skill:'))section=sectionFilter.slice(6);
+  if(sectionFilter==='cloze')kind='cloze';
+  if(sectionFilter.startsWith('kind:')){const [,p,k]=sectionFilter.split(':');section=p;kind=k;}
+  const skillOptions=[new Option(skill==='listening'?'Toàn bộ phần nghe':'Toàn bộ đề','all')];
+  for(const p of base){
+   if((p.groups||[]).some(g=>(g.questions||[]).length))skillOptions.push(new Option(SKILL_LABELS[p.skill]||p.name||p.skill,p.skill));
+  }
+  skillSelect.replaceChildren(...skillOptions);
+  if(!skillOptions.some(o=>o.value===section))section='all';
+  skillSelect.value=section;
+  const questions=base.filter(p=>section==='all'||p.skill===section).flatMap(p=>(p.groups||[]).flatMap(g=>g.questions||[]));
+  const kinds=[{value:'all',label:'Tất cả dạng bài'}];
+  if(questions.some(isClozeQuestion))kinds.push({value:'cloze',label:'Điền chỗ trống'});
+  for(const k of ['choice','input','order','essay']){
+   if(questions.some(q=>q.kind===k))kinds.push({value:k,label:KIND_LABELS[k]});
+  }
+  kindSelect.replaceChildren(...kinds.map(o=>new Option(o.label,o.value)));
+  if(!kinds.some(o=>o.value===kind))kind='all';
+  kindSelect.value=kind;
+  sectionFilter=filterFromControls();
   const minutes=Number(durationSelect.value);
   if(!durationCustomized||!minutes)durationSelect.value=String(getDefaultMinutes(item,skill));
   const subset=filteredParts(item,skill,sectionFilter);
   const count=subset.reduce((n,p)=>n+(p.groups||[]).reduce((sum,g)=>sum+(g.questions||[]).length,0),0);
   examSummary.textContent=count?`${count} câu hỏi · ${durationSelect.value} phút · Chỉ chấm các câu trong phần đã chọn`:'Đang tải danh sách dạng bài của bộ đề…';
-  sectionSelect.disabled=!item.parts?.length;
+  skillSelect.disabled=!item.parts?.length;
+  kindSelect.disabled=!item.parts?.length;
  }
+ function currentTestList(){return testsByLevel[Number(level.value)]||[];}
+ function matchingTests(){
+  const term=testSearch.value.trim().toLocaleLowerCase('vi');
+  return currentTestList().filter(t=>!term||String(t.title).toLocaleLowerCase('vi').includes(term)||String(t.id).includes(term));
+ }
+ function renderPicker(){
+  const items=matchingTests(),pages=Math.max(1,Math.ceil(items.length/PICKER_PAGE_SIZE));
+  pickerPage=Math.max(0,Math.min(pickerPage,pages-1));
+  pickerCount.textContent=`${items.length} đề`;
+  pickerGrid.replaceChildren();
+  const subset=items.slice(pickerPage*PICKER_PAGE_SIZE,(pickerPage+1)*PICKER_PAGE_SIZE);
+  for(const t of subset){
+   const current=String(t.id)===String(selectedTestId),button=el('button',null,'s4-picker-choice'+(current?' is-selected-paper':''));
+   button.type='button';button.dataset.testId=String(t.id);
+   button.setAttribute('aria-pressed',String(current));button.title=t.title;
+   const shortTitle=String(t.title).match(/(?:practice|advanced|mock)\s+test\s+(\d+)/i);
+   button.append(el('strong',shortTitle?'Đề '+shortTitle[1]:t.title),el('span',(t.totalQuestions||'—')+' câu'+(current?' · Đang chọn':''),'s4-picker-meta'));
+   button.addEventListener('click',()=>{
+    selectedTestId=String(t.id);testSelect.value=selectedTestId;
+    // Preserve selected time/type where valid when comparing papers.
+    update();
+   });
+   pickerGrid.append(button);
+  }
+  if(!subset.length)pickerGrid.append(el('p','Không tìm thấy đề phù hợp.','s4-picker-empty'));
+  pickerStatus.textContent=`Trang ${pickerPage+1}/${pages}`;
+  pickerPrev.disabled=pickerPage===0;pickerNext.disabled=pickerPage>=pages-1;
+ }
+
 
  function attachZoomableImages(container){
   for(const img of container.querySelectorAll('img')){
@@ -331,7 +389,7 @@
 
   const titleWrap=el('div',null,'s4-runner-title');
   titleWrap.append(
-   el('span','HSK '+test.level+' · '+(sess.mode==='listening'?'Luyện nghe':'Làm đề trực tiếp')+(sess.filter!=='all'?' · '+(availableSectionOptions(test,sess.mode).find(o=>o.value===sess.filter)?.label||'Phần tự chọn'):''),'s4-brow'),
+   el('span','HSK '+test.level+' · '+(sess.mode==='listening'?'Luyện nghe':'Làm đề trực tiếp')+(sess.filter!=='all'?' · '+(sess.filter==='cloze'?'Điền chỗ trống':sess.filter.startsWith('skill:')?(SKILL_LABELS[sess.filter.slice(6)]||'Phần tự chọn'):sess.filter.startsWith('kind:')?(KIND_LABELS[sess.filter.split(':')[2]]||'Phần tự chọn'):'Phần tự chọn'):''),'s4-brow'),
    el('h3',test.title)
   );
 
@@ -847,6 +905,7 @@
   controlsBox.hidden=false;
   syncTestDropdown();
   refreshExamOptions();
+  renderPicker();
   const item=currentItem();
   for(const b of panel.querySelectorAll('[data-s4-skill]')){
    const current=b.dataset.s4Skill===skill;
@@ -882,57 +941,8 @@
    startExam(item,skill);
   });
 
-  const lvlTests=testsByLevel[Number(level.value)]||[];
-  const all=document.createElement('a');
-  all.className='s4-library';
-  all.href='https://study4.com/tests/hsk-'+level.value+'/';
-  all.target='_blank';
-  all.rel='noopener noreferrer';
-  all.textContent=lvlTests.length>1
-   ?`Đổi bộ đề HSK ${level.value} (${lvlTests.length} đề có sẵn trong app)`
-   :'Xem thư viện đề HSK '+level.value;
-  all.addEventListener('click',e=>{
-   e.preventDefault();
-   if(lvlTests.length>1){
-    const idx=lvlTests.findIndex(t=>String(t.id)===String(item.id));
-    const next=lvlTests[(idx+1)%lvlTests.length];
-    selectedTestId=String(next.id);
-    testSelect.value=selectedTestId;
-    update();
-   }else{
-    startExam(item,skill);
-   }
-  });
-
-  card.append(eyebrow,title,meta,details,link,all);
+  card.append(eyebrow,title,meta,details,link);
   results.append(card);
-
-  // Also render quick cards for all synced tests in this level if > 1
-  if(lvlTests.length>1){
-   const grid=el('div',null,'s4-level-grid');
-   for(const t of lvlTests){
-    const prog=getTestProgress(t.id);
-    const ansCount=Object.values(prog.answers||{}).filter(v=>v&&String(v).trim()).length;
-    const row=el('div',null,'s4-mini-card'+(String(t.id)===String(item.id)?' is-current':''));
-    const info=el('div',null,'s4-mini-info');
-    info.append(
-     el('strong',t.title),
-     el('small',`${t.minutes} phút · ${skill==='listening'?t.listening+' câu nghe':(t.totalQuestions||'')+' câu'}${ansCount?` · Đã làm ${ansCount} câu`:''}`)
-    );
-    const startBtn=el('button',skill==='listening'?'Nghe ngay':'Làm đề','s4-mini-start');
-    startBtn.type='button';
-    startBtn.dataset.testId=String(t.id);
-    startBtn.addEventListener('click',()=>{
-     selectedTestId=String(t.id);
-     testSelect.value=selectedTestId;
-     sectionFilter='all';durationCustomized=false;refreshExamOptions();
-     startExam(t,skill);
-    });
-    row.append(info,startBtn);
-    grid.append(row);
-   }
-   results.append(grid);
-  }
  }
 
  function open(options={}){
@@ -942,8 +952,11 @@
   level.value=String(catalog[n]?n:3);
   selectedTestId=options.testId?String(options.testId):String((testsByLevel[Number(level.value)]?.[0]||catalog[Number(level.value)]||catalog[3]).id);
   skill=options.skill==='listening'?'listening':'test';
-  sectionFilter='all';durationCustomized=false;
+  sectionFilter='all';durationCustomized=false;pickerPage=0;testSearch.value='';
   update();
+  // Show the selected paper even when it is not on the first page.
+  const index=matchingTests().findIndex(t=>String(t.id)===selectedTestId);
+  if(index>=0){pickerPage=Math.floor(index/PICKER_PAGE_SIZE);renderPicker();}
   if(Date.now()-lastCloudCheck>CLOUD_REFRESH_MS)loadStudy4Data({refresh:true});
   if(options.autoStart){
    startExam(currentItem(),skill);
@@ -1015,11 +1028,14 @@
  }
 
  level.addEventListener('change',()=>{
-  sectionFilter='all';durationCustomized=false;
+  sectionFilter='all';durationCustomized=false;pickerPage=0;testSearch.value='';
   activeSession=null;
   selectedTestId=String((testsByLevel[Number(level.value)]?.[0]||catalog[Number(level.value)]||catalog[3]).id);
   update();
  });
+ testSearch.addEventListener('input',()=>{pickerPage=0;renderPicker();});
+ pickerPrev.addEventListener('click',()=>{if(pickerPage>0){pickerPage--;renderPicker();}});
+ pickerNext.addEventListener('click',()=>{if(pickerPage<Math.ceil(matchingTests().length/PICKER_PAGE_SIZE)-1){pickerPage++;renderPicker();}});
  testSelect.addEventListener('change',()=>{
   sectionFilter='all';durationCustomized=false;
   activeSession=null;
@@ -1035,7 +1051,8 @@
    update();
   }
  }));
- sectionSelect.addEventListener('change',()=>{sectionFilter=sectionSelect.value;refreshExamOptions();});
+ skillSelect.addEventListener('change',()=>{sectionFilter='skill:'+skillSelect.value;refreshExamOptions();});
+ kindSelect.addEventListener('change',()=>{sectionFilter=filterFromControls();refreshExamOptions();});
  durationSelect.addEventListener('change',()=>{durationCustomized=true;refreshExamOptions();});
  panel.querySelector('.s4-internal').addEventListener('click',()=>{
   stopMedia();

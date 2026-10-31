@@ -1,6 +1,4 @@
 {
-  "request": "Thêm tùy chọn phần thi/dạng câu hỏi theo dữ liệu từng bộ đề Study4 và chọn thời lượng làm bài theo bội số 5 phút; chỉ thay đổi trang study4, bảo vệ toàn bộ trang còn lại.",
-  "excludedRoutes": [
-    "study4"
-  ]
+  "request": "Tối ưu thao tác chọn dạng bài thành 2 bước và chọn bộ đề Study4 bằng tìm kiếm/phân trang; chỉ đổi giao diện study4, bảo vệ mọi trang khác.",
+  "excludedRoutes": ["study4"]
 }
