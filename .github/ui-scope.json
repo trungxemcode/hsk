@@ -1,5 +1,5 @@
 {
-  "request": "Chuyển nguồn dữ liệu bộ đề HSK và audio sang Cloudflare để cập nhật đề từ R2 mà không cần cập nhật ứng dụng; thay đổi phần hiển thị logic chỉ trang study4, bảo toàn các trang còn lại.",
+  "request": "Thêm tùy chọn phần thi/dạng câu hỏi theo dữ liệu từng bộ đề Study4 và chọn thời lượng làm bài theo bội số 5 phút; chỉ thay đổi trang study4, bảo vệ toàn bộ trang còn lại.",
   "excludedRoutes": [
     "study4"
   ]

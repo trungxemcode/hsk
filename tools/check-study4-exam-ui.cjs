@@ -117,8 +117,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await section.inputValue(),'all');
    assert.equal(await duration.inputValue(),'85');
 
-   // Return to test list, pick test 4927 (HSK 3 Practice test 1) and verify Listening transcript
-   await page.locator('.s4-back-btn').click();
+   // The level selector already returned to the list; now verify another paper's Listening transcript.
    await page.locator('.s4-test-card').waitFor({state:'visible'});
    await page.locator('#study4TestSelect').selectOption('4927');
    await page.locator('[data-s4-skill="listening"]').click();
