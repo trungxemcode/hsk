@@ -61,6 +61,9 @@
   if(timerId){clearInterval(timerId);timerId=null;}
   if(currentAudio&&!currentAudio.paused){try{currentAudio.pause();}catch{}}
   currentAudio=null;
+  try{
+   document.querySelectorAll('audio.s4-audio-player').forEach(a=>{try{a.pause();}catch{}});
+  }catch{}
   window.HSKSpeech?.stop?.();
  }
 
@@ -339,25 +342,55 @@
    wrap.append(partBar);
   }
 
-  // Audio player for Listening part
-  const audioUrl=activePart.audio||(activePart.skill==='listening'?test.audio:'');
-  if(audioUrl){
-   const audioBox=el('div',null,'s4-audio-box');
-   const audioLabel=el('div',null,'s4-audio-head');
-   audioLabel.append(
-    el('strong','🎧 Audio bài nghe chính thức ('+test.title+')'),
-    el('span','Phát trực tiếp trong ứng dụng · Có thể tua hoặc tạm dừng','s4-audio-sub')
-   );
+  // Audio builder helper: dual sources (local offline file + remote CDN fallback)
+  const createAudioBox=(audioUrl,audioFile,labelText,isInline=false)=>{
+   if(!audioUrl&&!audioFile)return null;
+   const box=el('div',null,'s4-audio-box'+(isInline?' s4-audio-box--inline':''));
+   if(labelText){
+    const head=el('div',null,'s4-audio-head');
+    head.append(
+     el('strong',labelText),
+     el('span','Phát trực tiếp trong ứng dụng · Có thể tua hoặc tạm dừng','s4-audio-sub')
+    );
+    box.append(head);
+   }
    const audioEl=document.createElement('audio');
    audioEl.controls=true;
-   audioEl.preload='metadata';
-   audioEl.src=audioUrl;
+   audioEl.preload=isInline?'none':'metadata';
    audioEl.className='s4-audio-player';
-   audioEl.setAttribute('aria-label','Audio nghe '+test.title);
-   audioEl.addEventListener('play',()=>window.HSKSpeech?.stop?.());
-   currentAudio=audioEl;
-   audioBox.append(audioLabel,audioEl);
-   wrap.append(audioBox);
+   if(labelText)audioEl.setAttribute('aria-label',labelText);
+
+   if(audioFile){
+    const sLocal=document.createElement('source');
+    sLocal.src='./'+String(audioFile).replace(/^\.?\/+/,'');
+    sLocal.type='audio/mpeg';
+    audioEl.append(sLocal);
+   }
+   if(audioUrl){
+    const sRemote=document.createElement('source');
+    sRemote.src=audioUrl;
+    sRemote.type='audio/mpeg';
+    audioEl.append(sRemote);
+   }
+
+   audioEl.addEventListener('play',()=>{
+    window.HSKSpeech?.stop?.();
+    document.querySelectorAll('audio.s4-audio-player').forEach(a=>{
+     if(a!==audioEl&&!a.paused)try{a.pause();}catch{}
+    });
+    currentAudio=audioEl;
+   });
+
+   box.append(audioEl);
+   return box;
+  };
+
+  // Audio player for Listening part
+  const audioUrl=activePart.audio||(activePart.skill==='listening'?test.audio:'');
+  const audioFile=activePart.audioFile||(activePart.skill==='listening'?test.audioFile:'');
+  if(audioUrl||audioFile){
+   const audioBox=createAudioBox(audioUrl,audioFile,'🎧 Audio bài nghe chính thức ('+test.title+')');
+   if(audioBox)wrap.append(audioBox);
   }
 
   // Question palette for current part
@@ -427,11 +460,18 @@
      gTransHolder.append(trDetails);
     }
    };
-   if(g.contextHtml||g.transcriptHtml){
+   if(g.contextHtml||g.transcriptHtml||g.audio||g.audioFile){
     const gCtx=el('div',null,'s4-group-context');
     const qNums=(g.questions||[]).map(x=>x.number);
     if(qNums.length>1){
      gCtx.append(el('div',`Tư liệu dùng chung cho câu ${qNums[0]}–${qNums[qNums.length-1]}`,'s4-group-badge'));
+    }
+    if(g.audio||g.audioFile){
+     const gAudio=createAudioBox(g.audio,g.audioFile,'🎧 Audio đoạn nghe chung câu '+(qNums.length>1?`${qNums[0]}–${qNums[qNums.length-1]}`:qNums[0]),true);
+     if(gAudio){
+      gAudio.classList.add('s4-audio-box--group');
+      gCtx.append(gAudio);
+     }
     }
     if(g.contextHtml){
      const ctxInner=el('div',null,'s4-context-body');
@@ -456,6 +496,14 @@
     checkOneBtn.type='button';
     qHead.append(numBadge,checkOneBtn);
     qCard.append(qHead);
+
+    if(q.audio||q.audioFile){
+     const qAudio=createAudioBox(q.audio,q.audioFile,null,true);
+     if(qAudio){
+      qAudio.classList.add('s4-audio-box--question');
+      qCard.append(qAudio);
+     }
+    }
 
     if(q.contextHtml){
      const qCtx=el('div',null,'s4-q-context');
