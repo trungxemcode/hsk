@@ -65,7 +65,7 @@ body.studio-enabled .overview-search .clean-home-search{margin:0;border:0;paddin
  body.mobile-ux #studioHeader #headerInfo{width:44px;height:44px;flex:none}
  body.mobile-ux[data-studio-hub=home] #studioHeader #menuBtn{display:inline-flex!important;width:44px;height:44px;min-width:44px;padding:10px;align-items:center;justify-content:center}
  body.mobile-ux[data-studio-hub=home] #studioHeader{padding-inline:0;height:auto;flex-basis:auto}
- body.mobile-ux[data-studio-hub=home] #studioHeader .topbar-inner{width:100%;max-width:none;box-sizing:border-box;padding:8px 12px;gap:5px;min-height:64px;height:auto;flex-wrap:wrap}
+ body.mobile-ux[data-studio-hub=home] #studioHeader .topbar-inner{width:calc(100% - 34px);max-width:none;box-sizing:border-box;padding-block:8px;gap:6px;min-height:64px;height:auto;flex-wrap:wrap}
  body.mobile-ux[data-studio-hub=home] #studioHeader #activeTitle{font-size:15px;white-space:normal}
  body.mobile-ux[data-studio-hub=home] .overview-tasks>summary{min-height:40px}
  body.mobile-ux #studioHome.overview-v216 .shortcut[data-studio-go]{min-height:86px}
