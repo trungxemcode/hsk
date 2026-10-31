@@ -10,6 +10,12 @@
   5:{id:'6753',title:'HSK 5 Advanced test 1',url:'https://study4.com/tests/6753/hsk-5-advanced-test-1/',minutes:120,listening:45,totalQuestions:100},
   6:{id:'6785',title:'HSK 6 Advanced test 4',url:'https://study4.com/tests/6785/hsk-6-advanced-test-4/',minutes:135,listening:50,totalQuestions:101}
  };
+ const seedCatalog={...catalog};
+ const CLOUD_MANIFESTS=[
+  'https://hsk-exam-bank.trung-hsk668.workers.dev/v1/manifest',
+  'https://pub-af2cf92bdb964826afb5fa13cb332892.r2.dev/study4/manifest.json'
+ ];
+ const CLOUD_REFRESH_MS=2*60*1000;
  const testsByLevel={1:[catalog[1]],2:[catalog[2]],3:[catalog[3]],4:[catalog[4]],5:[catalog[5]],6:[catalog[6]]};
  const testsById=new Map(Object.values(catalog).map(t=>[String(t.id),t]));
  let dataReady=false,dataError=null,activeSession=null,timerId=null,currentAudio=null;
@@ -798,50 +804,72 @@
   selectedTestId=options.testId?String(options.testId):String((testsByLevel[Number(level.value)]?.[0]||catalog[Number(level.value)]||catalog[3]).id);
   skill=options.skill==='listening'?'listening':'test';
   update();
+  if(Date.now()-lastCloudCheck>CLOUD_REFRESH_MS)loadStudy4Data({refresh:true});
   if(options.autoStart){
    startExam(currentItem(),skill);
   }
  }
 
  function installData(payload){
-  if(!payload||!Array.isArray(payload.tests))return;
-  const grouped={1:[],2:[],3:[],4:[],5:[],6:[]};
+  if(!payload||!Array.isArray(payload.tests)||!payload.tests.length)throw Error('Kho đề trống hoặc sai định dạng');
+  const grouped={1:[],2:[],3:[],4:[],5:[],6:[]},fresh=new Map();
   for(const t of payload.tests){
    const lvl=Number(t.level);
-   if(grouped[lvl])grouped[lvl].push(t);
-   testsById.set(String(t.id),t);
+   if(!grouped[lvl]||!t.id||!Array.isArray(t.parts)||fresh.has(String(t.id)))throw Error('Kho đề chứa mục không hợp lệ hoặc trùng ID');
+   grouped[lvl].push(t);fresh.set(String(t.id),t);
   }
+  // Replace rather than append: removed exams must not survive a cloud catalog update.
+  testsById.clear();
+  for(const [id,t] of fresh)testsById.set(id,t);
   for(let n=1;n<=6;n++){
-   if(grouped[n].length){
-    testsByLevel[n]=grouped[n];
-    catalog[n]=grouped[n][0];
-   }
+   testsByLevel[n]=grouped[n].length?grouped[n]:[seedCatalog[n]];
+   catalog[n]=testsByLevel[n][0];
   }
-  dataReady=true;
+  dataReady=true;dataError=null;
   if(!panel.hidden&&!activeSession)update();
   window.dispatchEvent(new Event('hsk-study4-ready'));
  }
 
- let loadPromise=null;
- function loadStudy4Data(){
+ let loadPromise=null,lastCloudCheck=0,remoteRevision='';
+ async function loadBundledStudy4(){
+  const r=await fetch('./study4-tests-data.json.gz');
+  if(!r.ok)throw Error('Local HTTP '+r.status);
+  if(typeof DecompressionStream==='function'&&r.body)return new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).json();
+  // Most supported iOS and desktop browsers provide DecompressionStream.
+  return r.json();
+ }
+ function loadStudy4Data({refresh=false}={}){
   if(loadPromise)return loadPromise;
+  if(dataReady&&!refresh)return Promise.resolve(null);
   loadPromise=(async()=>{
    try{
-    const r=await fetch('./study4-tests-data.json.gz');
-    if(!r.ok)throw Error('HTTP '+r.status);
-    let data;
-    if(typeof DecompressionStream==='function'&&r.body){
-     data=await new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).json();
-    }else{
-     data=await r.json();
+    let cloudError;
+    for(const manifestURL of CLOUD_MANIFESTS){
+     try{
+      const r=await fetch(manifestURL,{cache:'no-store',signal:AbortSignal.timeout(7000)});
+      if(!r.ok)throw Error('Cloud manifest HTTP '+r.status);
+      const m=await r.json();
+      if(m.schema!==1||!/^([a-f0-9]{64})$/.test(m.sha256)||m.version!==m.sha256||!Number.isSafeInteger(m.tests)||m.tests<1)throw Error('Cloud manifest không hợp lệ');
+      if(remoteRevision===m.version&&dataReady)return null;
+      // Relative path resolves correctly for both the Worker and the R2 fallback.
+      const dataURL=new URL('./data/'+m.sha256+'.json.gz',manifestURL);
+      const asset=await fetch(dataURL.toString(),{signal:AbortSignal.timeout(15000)});
+      if(!asset.ok)throw Error('Cloud data HTTP '+asset.status);
+      const payload=await asset.json();
+      if(payload.tests?.length!==m.tests)throw Error('Số bộ đề trên Cloudflare không khớp manifest');
+      installData(payload);remoteRevision=m.version;
+      return payload;
+     }catch(error){cloudError=error;}
     }
-    installData(data);
-    return data;
-   }catch(e){
-    dataError=e.message||String(e);
-    window.dispatchEvent(new Event('hsk-study4-ready'));
+    throw cloudError||Error('Cloudflare chưa sẵn sàng');
+   }catch(error){
+    // Keep already loaded exams during a temporary network failure.
+    if(!dataReady){
+     try{const fallback=await loadBundledStudy4();installData(fallback);return fallback;}
+     catch(localError){dataError=localError.message||error.message||String(error);window.dispatchEvent(new Event('hsk-study4-ready'));}
+    }
     return null;
-   }
+   }finally{lastCloudCheck=Date.now();loadPromise=null;}
   })();
   return loadPromise;
  }
