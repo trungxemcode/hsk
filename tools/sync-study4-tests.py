@@ -183,7 +183,6 @@ def parse_question_item(item_el, q_sol):
         q_obj["contextHtml"] = ctx_html
     if item_audio:
         q_obj["audio"] = item_audio
-        q_obj["audioFile"] = "content/study4-audio/" + os.path.basename(re.sub(r"[?#].*$", "", item_audio))
     if prompt_html:
         q_obj["promptHtml"] = prompt_html
     if ordering:
@@ -293,7 +292,7 @@ def parse_test(item, session_id):
             p_obj["audio"] = part_audio
         parts.append(p_obj)
 
-    return {
+    test_obj = {
         "id": str(tid),
         "level": level,
         "title": title,
@@ -305,6 +304,25 @@ def parse_test(item, session_id):
         "audio": top_audio,
         "parts": parts
     }
+    folder = f"content/study4-audio/hsk{level}/test-{tid}"
+    has_q = any(q.get("audio") for p in parts for g in p.get("groups", []) for q in g.get("questions", []))
+    if not has_q:
+        if top_audio:
+            test_obj["audioFile"] = f"{folder}/listening.mp3"
+        for p in parts:
+            if p.get("audio"):
+                p["audioFile"] = f"{folder}/listening.mp3"
+    else:
+        for p in parts:
+            for g in p.get("groups", []):
+                q_nums = [q.get("number") for q in g.get("questions", []) if q.get("number")]
+                if g.get("audio"):
+                    name = f"group-q{q_nums[0]}-q{q_nums[-1]}.mp3" if len(q_nums) > 1 else f"group-q{q_nums[0]}.mp3"
+                    g["audioFile"] = f"{folder}/{name}"
+                for q in g.get("questions", []):
+                    if q.get("audio"):
+                        q["audioFile"] = f"{folder}/q{q.get('number')}.mp3"
+    return test_obj
 
 def discover_all(session_id):
     found = {}

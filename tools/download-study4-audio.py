@@ -2,20 +2,18 @@
 """
 tools/download-study4-audio.py
 Tải toàn bộ file audio bài nghe HSK 1–6 từ Study4 về máy local (content/study4-audio/).
-Lưu trữ nội bộ để bảo đảm app luôn có audio dù Study4 thay đổi hoặc gián đoạn.
+Lưu trữ theo cấu trúc thư mục bộ đề:
+  content/study4-audio/hsk{level}/test-{id}/listening.mp3
+  content/study4-audio/hsk{level}/test-{id}/q{number}.mp3
+  content/study4-audio/hsk{level}/test-{id}/group-q{start}-q{end}.mp3
 
 Tính năng:
-- Đa luồng (mặc định 16 workers) với tốc độ cao (~10-15 MB/s)
+- Đa luồng (mặc định 16 workers) với tốc độ cao (~15-20 MB/s)
 - Khả năng tiếp tục (resume): bỏ qua file đã tải thành công, không tải lại
 - Tải qua file tạm .tmp trước khi đổi tên -> tránh file hỏng/dở dang
 - Báo cáo tiến độ realtime (phần trăm, dung lượng đã tải, tốc độ MB/s, thời gian còn lại)
 - Hỗ trợ tải theo từng cấp HSK (--level 1..6) hoặc toàn bộ
 - Tạo file manifest.json tổng kết danh mục sau khi hoàn thành
-
-Cách dùng:
-  python tools/download-study4-audio.py
-  python tools/download-study4-audio.py --level 3
-  python tools/download-study4-audio.py --workers 20
 """
 
 import argparse
@@ -43,23 +41,22 @@ USER_AGENT = (
 )
 
 def extract_audio_entries(data_path, level_filter=None):
-    """Trích xuất tất cả cặp (url, filename, level) duy nhất từ dữ liệu bộ đề."""
+    """Trích xuất tất cả cặp (url, rel_path, level) duy nhất từ dữ liệu bộ đề."""
     with gzip.open(data_path, "rt", encoding="utf-8") as f:
         data = json.load(f)
 
-    entries = {}  # basename -> { 'url': ..., 'level': ..., 'test_id': ... }
+    entries = {}  # rel_path -> { 'url': ..., 'level': ..., 'test_id': ..., 'rel_path': ... }
 
     def record(obj, lvl, tid):
         u = obj.get("audio")
         f = obj.get("audioFile")
         if u and f:
-            base = os.path.basename(f)
-            if base not in entries:
-                entries[base] = {
+            if f not in entries:
+                entries[f] = {
                     "url": u,
                     "level": lvl,
                     "test_id": tid,
-                    "filename": base,
+                    "rel_path": f,
                 }
 
     for t in data.get("tests", []):
@@ -78,18 +75,19 @@ def extract_audio_entries(data_path, level_filter=None):
     return entries
 
 
-def download_one(entry, dest_dir, timeout=30, max_retries=3):
+def download_one(entry, timeout=30, max_retries=3):
     """Tải một file audio qua file tạm .tmp, hỗ trợ thử lại."""
     url = entry["url"]
-    filename = entry["filename"]
-    final_path = os.path.join(dest_dir, filename)
-    tmp_path = os.path.join(dest_dir, filename + ".tmp")
+    rel_path = entry["rel_path"]
+    final_path = os.path.normpath(rel_path)
+    os.makedirs(os.path.dirname(final_path), exist_ok=True)
+    tmp_path = final_path + ".tmp"
 
     # Kiểm tra nếu file đã tồn tại và hợp lệ (> 1024 bytes)
     if os.path.exists(final_path):
         sz = os.path.getsize(final_path)
         if sz > 1024:
-            return filename, sz, "skipped"
+            return rel_path, sz, "skipped"
 
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
 
@@ -102,7 +100,7 @@ def download_one(entry, dest_dir, timeout=30, max_retries=3):
                 with open(tmp_path, "wb") as out:
                     out.write(data)
                 os.replace(tmp_path, final_path)
-                return filename, len(data), "downloaded"
+                return rel_path, len(data), "downloaded"
         except Exception as e:
             if os.path.exists(tmp_path):
                 try:
@@ -112,9 +110,9 @@ def download_one(entry, dest_dir, timeout=30, max_retries=3):
             if attempt < max_retries - 1:
                 time.sleep(1.0 + attempt * 1.5)
             else:
-                return filename, 0, f"failed: {e}"
+                return rel_path, 0, f"failed: {e}"
 
-    return filename, 0, "failed"
+    return rel_path, 0, "failed"
 
 
 def format_bytes(n):
@@ -131,7 +129,6 @@ def format_bytes(n):
 def main():
     parser = argparse.ArgumentParser(description="Tải audio đề thi Study4 HSK về thư mục local.")
     parser.add_argument("--data", default="study4-tests-data.json.gz", help="Đường dẫn file dữ liệu bộ đề")
-    parser.add_argument("--dest", default="content/study4-audio", help="Thư mục lưu trữ audio local")
     parser.add_argument("--level", type=int, choices=[1, 2, 3, 4, 5, 6], default=None, help="Lọc theo cấp HSK (1-6)")
     parser.add_argument("--workers", type=int, default=16, help="Số luồng tải song song (mặc định 16)")
     parser.add_argument("--timeout", type=int, default=30, help="Timeout mỗi request (giây)")
@@ -141,12 +138,9 @@ def main():
         print(f"Lỗi: Không tìm thấy file dữ liệu: {args.data}", file=sys.stderr)
         sys.exit(1)
 
-    os.makedirs(args.dest, exist_ok=True)
-
     print("=" * 68)
     print("  HSK Study4 Audio Downloader")
     print(f"  Dữ liệu nguồn: {args.data}")
-    print(f"  Thư mục đích:  {args.dest}")
     print(f"  Cấp HSK lọc:   {args.level if args.level else 'Tất cả (HSK 1–6)'}")
     print(f"  Số luồng:      {args.workers}")
     print("=" * 68)
@@ -156,21 +150,20 @@ def main():
     print(f"\n→ Tìm thấy tổng cộng {total_files} file audio bài nghe độc nhất.")
 
     # Kiểm tra số lượng đã có
-    existing_files = set(os.listdir(args.dest)) if os.path.exists(args.dest) else set()
     already_done = 0
     already_bytes = 0
-    for name, item in entries.items():
-        if name in existing_files:
-            fp = os.path.join(args.dest, name)
+    for rel_path, item in entries.items():
+        fp = os.path.normpath(rel_path)
+        if os.path.exists(fp):
             sz = os.path.getsize(fp)
             if sz > 1024:
                 already_done += 1
                 already_bytes += sz
 
-    print(f"→ Đã tải sẵn: {already_done} / {total_files} file ({format_bytes(already_bytes)})")
+    print(f"→ Đã có sẵn:   {already_done} / {total_files} file ({format_bytes(already_bytes)})")
     remaining_count = total_files - already_done
     if remaining_count == 0:
-        print("\n✓ Toàn bộ file audio đã được tải đầy đủ về máy local!")
+        print("\n✓ Toàn bộ file audio đã có đầy đủ trong thư mục bộ đề!")
         sys.exit(0)
 
     print(f"→ Cần tải tiếp: {remaining_count} file\n")
@@ -186,26 +179,26 @@ def main():
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as executor:
         future_map = {
-            executor.submit(download_one, entry, args.dest, args.timeout): entry
+            executor.submit(download_one, entry, args.timeout): entry
             for entry in entries.values()
         }
 
         for future in concurrent.futures.as_completed(future_map):
             entry = future_map[future]
-            fname, sz, status = future.result()
+            rel_path, sz, status = future.result()
 
             if status == "downloaded":
                 completed_count += 1
                 downloaded_new_count += 1
                 downloaded_bytes += sz
-                manifest[fname] = {
+                manifest[rel_path] = {
                     "url": entry["url"],
                     "bytes": sz,
                     "level": entry["level"],
                     "test_id": entry["test_id"],
                 }
             elif status == "skipped":
-                manifest[fname] = {
+                manifest[rel_path] = {
                     "url": entry["url"],
                     "bytes": sz,
                     "level": entry["level"],
@@ -245,14 +238,13 @@ def main():
     print(f"  File mới tải về:    {downloaded_new_count} ({format_bytes(downloaded_bytes)})")
     if failed_items:
         print(f"  Số file thất bại:   {len(failed_items)}")
-        with open(os.path.join(args.dest, "failed.json"), "w", encoding="utf-8") as f:
+        with open("content/study4-audio/failed.json", "w", encoding="utf-8") as f:
             json.dump([{"url": it[0]["url"], "error": it[1]} for it in failed_items], f, indent=2)
-        print(f"  Chi tiết lỗi đã lưu tại: {os.path.join(args.dest, 'failed.json')}")
     else:
         print("  Không có lỗi nào xảy ra.")
 
     # Lưu manifest.json
-    manifest_path = os.path.join(args.dest, "manifest.json")
+    manifest_path = "content/study4-audio/manifest.json"
     with open(manifest_path, "w", encoding="utf-8") as f:
         json.dump({
             "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
