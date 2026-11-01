@@ -1,5 +1,5 @@
 {
-  "request": "Đọc thực tế: mặc định lấy nguyên văn từ Mandarin Bean và HSK Reading, thêm danh sách/chọn bài và nguồn; PC/mobile sáng/tối. Luồng AI cũ vẫn là tùy chọn riêng, các trang khác giữ nguyên.",
+  "request": "Đọc thực tế: mặc định lấy nguyên văn từ Mandarin Bean và HSK Reading, thêm danh sách/chọn bài và nguồn; Chỉ online, lịch sử URL lưu cloud theo tài khoản, không lưu thiết bị. PC/mobile sáng/tối. Luồng AI cũ vẫn là tùy chọn riêng, các trang khác giữ nguyên.",
   "excludedRoutes": [
     "real-reading"
   ]
