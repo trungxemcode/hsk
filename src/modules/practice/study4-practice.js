@@ -103,6 +103,13 @@
   const s=loadStore();
   return s[testId]||{answers:{},checked:{},submitted:false,score:null};
  }
+ function getPaperStats(test){
+  const prog=getTestProgress(String(test.id)),questions=(test.parts||[]).flatMap(p=>(p.groups||[]).flatMap(g=>g.questions||[]));
+  const objective=questions.filter(q=>q.kind!=='essay'),answered=objective.filter(q=>String(prog.answers?.[q.qid]||'').trim()),correct=answered.reduce((n,q)=>n+(isCorrectAnswer(q,prog.answers[q.qid])?1:0),0);
+  if(!answered.length)return null;
+  const ratio=Math.max(0,Math.min(100,correct*100/answered.length));
+  return {answered:answered.length,correct,wrong:answered.length-correct,ratio,submitted:Boolean(prog.submitted)};
+ }
  function saveTestProgress(testId,prog){
   const s=loadStore();
   s[testId]={...prog,updatedAt:Date.now()};
@@ -231,11 +238,13 @@
   pickerGrid.replaceChildren();
   const subset=items.slice(pickerPage*PICKER_PAGE_SIZE,(pickerPage+1)*PICKER_PAGE_SIZE);
   for(const t of subset){
-   const current=String(t.id)===String(selectedTestId),button=el('button',null,'s4-picker-choice'+(current?' is-selected-paper':''));
+   const current=String(t.id)===String(selectedTestId),stats=getPaperStats(t),button=el('button',null,'s4-picker-choice'+(current?' is-selected-paper':'')+(stats?' has-progress':''));
    button.type='button';button.dataset.testId=String(t.id);
    button.setAttribute('aria-pressed',String(current));button.title=t.title;
    const shortTitle=String(t.title).match(/(?:practice|advanced|mock)\s+test\s+(\d+)/i);
-   button.append(el('strong',shortTitle?'Đề '+shortTitle[1]:t.title),el('span',(t.totalQuestions||'—')+' câu'+(current?' · Đang chọn':''),'s4-picker-meta'));
+   const status=stats?`${Math.round(stats.ratio)}% đúng · ${stats.correct}/${stats.answered} câu`:'Chưa làm';
+   if(stats){button.style.setProperty('--s4-correct-ratio',`${stats.ratio}%`);button.setAttribute('aria-label',`${t.title}: ${status}, ${stats.wrong} câu sai`);}
+   button.append(el('strong',shortTitle?'Đề '+shortTitle[1]:t.title),el('span',(t.totalQuestions||'—')+' câu · '+status+(current?' · Đang chọn':''),'s4-picker-meta'));
    button.addEventListener('click',()=>{
     selectedTestId=String(t.id);testSelect.value=selectedTestId;
     // Preserve selected time/type where valid when comparing papers.
@@ -937,6 +946,7 @@
   results.replaceChildren();
   const card=document.createElement('article');
   card.className='s4-test-card';
+  const paperStats=getPaperStats(item);
   const eyebrow=document.createElement('span');
   eyebrow.className='s4-brow';
   eyebrow.textContent='HSK '+level.value+' · '+(skill==='listening'?'Kỹ năng nghe':'Đề luyện thi');
@@ -951,6 +961,10 @@
   details.textContent=skill==='listening'
    ?'Phát audio gốc, chọn đáp án, chấm điểm và đối chiếu lời thoại (Transcript) trực tiếp ngay trong ứng dụng.'
    :'Làm đề thi, nghe audio, chọn đáp án và xem kết quả chi tiết trực tiếp ngay trong ứng dụng mà không cần rời trang.';
+  if(paperStats){
+   const progress=el('p',`${Math.round(paperStats.ratio)}% đúng · ${paperStats.correct}/${paperStats.answered} câu đã trả lời · ${paperStats.wrong} câu sai`,'s4-paper-progress');
+   progress.setAttribute('role','status');card.append(progress);
+  }
 
   const link=document.createElement('a');
   link.className='s4-visit';

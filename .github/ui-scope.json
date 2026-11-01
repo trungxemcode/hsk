@@ -1,6 +1,7 @@
 {
-  "request": "PR #266: chỉ thêm câu ôn luyện nguồn Study4 và cache AI chung cho Exam; không đổi giao diện các trang khác.",
+  "request": "PR #268: thể hiện tỷ lệ câu đúng/sai bằng viền trên ô dạng bài Exam và ô chọn đề Study4; bảo vệ mọi trang ngoài hai route này.",
   "excludedRoutes": [
-    "exam"
+    "exam",
+    "study4"
   ]
 }

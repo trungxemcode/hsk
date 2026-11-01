@@ -155,6 +155,10 @@ html[data-theme=dark] #studioPractice .ps-disclosure{background:var(--surface);c
 .study4-exam-panel .s4-picker-choice.is-selected-paper{border:2px solid var(--accent);padding:8px 10px;background:var(--surface)}
 .study4-exam-panel .s4-picker-choice.is-selected-paper{background:var(--accent);color:var(--palette-white)}
 html body.studio-enabled #study4PracticePanel button.s4-picker-choice.is-selected-paper :is(strong,.s4-picker-meta){color:var(--palette-white)!important}
+.study4-exam-panel .s4-picker-choice.has-progress{border:3px solid var(--palette-clear);background:linear-gradient(var(--surface),var(--surface)) padding-box,conic-gradient(from -90deg,var(--legacy-hex-14864a) var(--s4-correct-ratio),var(--legacy-hex-d83b40) 0) border-box;padding:7px 9px}
+.study4-exam-panel .s4-picker-choice.is-selected-paper.has-progress{background:linear-gradient(var(--surface),var(--surface)) padding-box,conic-gradient(from -90deg,var(--legacy-hex-14864a) var(--s4-correct-ratio),var(--legacy-hex-d83b40) 0) border-box;color:var(--ink)}
+html body.studio-enabled #study4PracticePanel button.s4-picker-choice.is-selected-paper.has-progress :is(strong,.s4-picker-meta){color:var(--ink)!important}
+.study4-exam-panel .s4-test-card .s4-paper-progress{margin:0;padding:10px 12px;border:1px solid var(--line);border-radius:var(--radius-btn);color:var(--accent-dark);font-weight:750}
 .study4-exam-panel .s4-picker-choice:focus-visible,.study4-exam-panel .s4-picker-pages button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .study4-exam-panel .s4-picker-pages{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .study4-exam-panel .s4-picker-pages button{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--accent-ink);font:inherit;font-weight:750}
