@@ -46,3 +46,12 @@
  .rr-settings .rr-genre{grid-column:1/-1}
  .rr-line{gap:6px}
 }
+
+/* Original-source controls are scoped to the existing reader. */
+#realReadingPanel label[hidden]{display:none!important}
+#rrOriginalReading[hidden]{display:none!important}
+#rrOriginalReading>p{font-size:13px;line-height:1.6;color:var(--sub)}
+#rrOriginalReading h3{margin:16px 0 8px}
+#rrOriginalReading .rr-original-list{margin-top:16px;padding:12px;border:1px solid var(--line);border-radius:var(--radius-btn)}
+#rrOriginalReading .rr-original-list>button{display:block;box-sizing:border-box;width:100%;margin:10px 0 0;text-align:left;white-space:normal;min-height:44px}
+#rrOriginalReading .rr-hanzi{white-space:pre-wrap}

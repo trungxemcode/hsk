@@ -1,6 +1,6 @@
 {
-  "request": "Chỉ sửa khoảng cách 4 hàng cuối của Tài khoản > Hồ sơ trên desktop: nhãn Tài khoản → thông báo offline 10px → lịch sử làm bài 12px → thông báo cập nhật 12px; giữ nguyên Cài đặt, mobile và các trang còn lại.",
+  "request": "Đọc thực tế: mặc định lấy nguyên văn từ Mandarin Bean và HSK Reading, thêm danh sách/chọn bài và nguồn; PC/mobile sáng/tối. Luồng AI cũ vẫn là tùy chọn riêng, các trang khác giữ nguyên.",
   "excludedRoutes": [
-    "account"
+    "real-reading"
   ]
 }

@@ -42,6 +42,7 @@ const SAMPLE={
   });
   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
   await page.waitForFunction(()=>!!window.HSKRealReading&&!!window.HSKStudio&&!!window.HSKLessons,{timeout:25000});
+  await page.evaluate(()=>HSKStudio.navigate('real-reading'));await page.locator('#rrContentMode').selectOption('ai');
   if(width===320){const bodies=await page.evaluate(async()=>{const catalog=await fetch('./lessons-data.json').then(r=>r.json());return catalog.courses.flatMap(c=>c.lessons.map(l=>({hsk:c.hsk,lessonId:l.id,lessonWords:HSKRealReadingVariety.requestWords(HSKLessons.match(l.words))})));});assert.equal(bodies.length,146);assert.ok(bodies.every(checkReadingBody),'all real lesson vocabularies must satisfy the Worker contract');}
   for(const theme of ['light','dark']){
    const baseline=submissions.length;

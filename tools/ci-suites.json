@@ -73,6 +73,7 @@
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-practice-games-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-practice-picker-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-real-reading-ui.cjs",
+    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-original-reading-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-goal-scope-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-ios-push-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-studio-ui.cjs",
@@ -98,6 +99,7 @@
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-practice-picker-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-practice-games-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-real-reading-ui.cjs",
+    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-original-reading-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-notebook-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-studio-ui.cjs"
   ]

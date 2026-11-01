@@ -1,3 +1,4 @@
+import { createOriginalReadingService } from './original-reading.mjs';
 import {validTranscriptInput,transcribeMusic,libraryTranscriptMedia,saveGeneratedTranscript} from './music-transcript.mjs';
 import {createGeminiModelFallback} from './ai-resilience.mjs';
 import {validExamImages,resolveExamImages} from './wrong-answer-images.mjs';
@@ -49,6 +50,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
  const cooldowns=new Map();
  const geminiState={cursor:0,blocked:new Map()};
  const sourceCache=new Map();
+ const originalReading=createOriginalReadingService(providerFetch,{now,cacheAPI:globalThis.caches?.default});
  return async(request,env,ctx)=>{
   const timings=[];let abuseLease=null,abuseUid='',responseStatus=500,qaSession=null;
   const rawFetchFn=new URL(request.url).pathname==='/voice-precache'?providerFetch:createGeminiModelFallback(providerFetch,env,{state:resilienceState,now,onResult:entry=>console.info('hsk-ai-provider-result',entry)});
@@ -62,6 +64,12 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
   if(!allowed.includes(origin))return reply({error:'Nguồn truy cập không được phép.'},403);
   Object.assign(headers,{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider, X-HSK-AI-Cache, X-HSK-Image-Remaining'});
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
+  if(new URL(request.url).pathname==='/reading-library'){
+   if(request.method!=='POST')return reply({error:'Yêu cầu không hợp lệ.'},405);
+   let input;try{input=await readBody(request,2048);}catch{return reply({error:'Yêu cầu quá dài hoặc không hợp lệ.'},400);}
+   const result=await originalReading(input);return reply(result.data,result.status);
+  }
+
   const route=new URL(request.url).pathname,isTranscript=route==='/music-transcript',isRole=['/account-role','/admin/accounts','/admin/account-role'].includes(route),isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
   if(!isTranscript&&!isRole&&route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading)return reply({error:'Không tìm thấy dịch vụ.'},404);
   if(request.method!=='POST')return reply({error:'Yêu cầu không hợp lệ.'},405);
