@@ -8,6 +8,8 @@ function scope(config) {
   assert.ok(config.excludedRoutes.length < ROUTES.length, 'Cannot exclude every page');
   assert.ok(config.sharedHeaderOnly === undefined || typeof config.sharedHeaderOnly === 'boolean','Shared header scope must be boolean');
   if(config.sharedHeaderOnly) assert.equal(config.excludedRoutes.length,0,'A shared header edit must preserve visual checks on every route');
+  assert.ok(config.sharedSidebarOnly===undefined||typeof config.sharedSidebarOnly==='boolean');
+  if(config.sharedSidebarOnly)assert.equal(config.excludedRoutes.length,0,'Sidebar edit must preserve every route');
   assert.ok(config.sharedQuickNavOnly === undefined || typeof config.sharedQuickNavOnly === 'boolean','Quick nav scope must be boolean');
   if(config.sharedQuickNavOnly) {
     assert.equal(config.excludedRoutes.length,0,'A shared quick-nav edit must preserve visual checks on every route');
@@ -54,7 +56,7 @@ function visualPixels(a,b){
 }
 // Serializable into page.evaluate; shared with the sabotage browser regression.
 function measureDOM(options={}){
-  return [...document.querySelectorAll('body *')].filter(n=>(!options.skipHeader||!n.closest('#studioHeader'))&&n.checkVisibility()&&!['SCRIPT','STYLE','LINK'].includes(n.tagName)).map(n=>{
+  return [...document.querySelectorAll('body *')].filter(n=>(!options.skipHeader||!n.closest('#studioHeader'))&&(!options.skipSidebar||!n.closest('.sidebar'))&&n.checkVisibility()&&!['SCRIPT','STYLE','LINK'].includes(n.tagName)).map(n=>{
     const r=n.getBoundingClientRect(),s=getComputedStyle(n);
     const text=[...n.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('');
     const paintAttributes=Object.fromEntries(['d','points','fill','stroke','src','href'].map(k=>[k,(n.getAttribute(k)||'').replace(/http:\/\/127\.0\.0\.1:\d+/g,'LOCAL')]));

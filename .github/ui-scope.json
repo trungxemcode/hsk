@@ -1,5 +1,5 @@
 {
-  "request": "Chủ dự án yêu cầu áp dụng riêng commit 48247367: tăng kích thước nút điều hướng nhanh ở sidebar trên desktop (38→40px, icon 16→18px, chữ 13→13.5px, gap 11→12). Các nội dung/chức năng của mọi trang và giao diện mobile giữ nguyên.",
+  "request": "Chỉ sidebar trên PC/tablet: 5 nhóm xổ xuống Học tập HSK, Ôn luyện, Giải trí, Công cụ, Luyện thi HSK; Flashcard trong Học; Trang chủ/Tài khoản riêng. Giữ nguyên nội dung mọi route, drawer/mobile không đổi.",
   "excludedRoutes": [],
-  "sharedQuickNavOnly": true
+  "sharedSidebarOnly": true
 }

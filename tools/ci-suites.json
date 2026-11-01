@@ -83,7 +83,8 @@
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-study4-exam-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-exam-catalogue-spacing-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-shared-header-all-routes-ui.cjs",
-    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-wrong-answer-images-ui.cjs"
+    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-wrong-answer-images-ui.cjs",
+    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-grouped-navigation-ui.cjs"
   ],
   "protected-browser": [
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-feature-runtime.cjs",

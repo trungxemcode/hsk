@@ -82,8 +82,9 @@ renderIcons();
   document.querySelectorAll('[data-studio-go],[data-search-tool]').forEach(b=>{
    // "translator" belongs to the global Search section, but is a distinct local tab.
    const localTab=!!b.closest('.studio-search-tabs');
-   const selected=localTab?b.dataset.searchTool===(document.body.dataset.searchTool||(name==='translator'?'translate':'vocabulary')):b.dataset.studioGo===(parents[name]||name);
-   b.classList.toggle('active',selected);
+   const group=b.closest('.side-nav .nav-group');
+   const selected=group?!b.dataset.navAction&&b.dataset.studioGo===name:localTab?b.dataset.searchTool===(document.body.dataset.searchTool||(name==='translator'?'translate':'vocabulary')):b.dataset.studioGo===(parents[name]||name);
+   b.classList.toggle('active',selected);if(group&&selected)group.open=true;
    if(localTab)b.setAttribute('aria-pressed',String(selected));
    if(selected)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
   });
@@ -161,7 +162,7 @@ renderIcons();
   const admin=$('adminBtn');$('studioAdminLink').hidden=admin.hidden;
   const filter=document.body.classList.contains('show-lessons')?$('lessonsPanel').dataset.lessonLevel||'1':document.querySelector('[data-filter].active')?.dataset.filter||'all';$('studioLevelText').textContent=filter==='all'?'Tất cả HSK':'HSK '+filter;
  }
- document.querySelectorAll('[data-studio-go]').forEach(b=>b.addEventListener('click',()=>b.dataset.searchTool?chooseSearchTool(b.dataset.searchTool):navigate(b.dataset.studioGo)));
+ document.querySelectorAll('[data-studio-go]').forEach(b=>b.addEventListener('click',()=>{const action=b.dataset.navAction;if(action==='handwriting'||action==='image'){chooseSearchTool(action);return;}if(action){navigate('practice');if(action==='writing'&&window.HSKWritingPractice?.open){window.HSKWritingPractice.open();return;}const text={writing:'Học viết',passive:'Học rảnh tay',placement:'Đánh giá trình độ'}[action];[...document.querySelectorAll('#studioPractice .hub-card')].find(c=>c.textContent.includes(text))?.click();return;}if(b.dataset.studioGo==='real-reading')window.HSKRealReading?.leaveLesson?.();b.dataset.searchTool?chooseSearchTool(b.dataset.searchTool):navigate(b.dataset.studioGo);}));
  document.querySelectorAll('[data-account-section]').forEach(tab=>tab.addEventListener('click',()=>{const section=tab.dataset.accountSection;$('accountPanel').dataset.accountCurrent=section;document.querySelectorAll('[data-account-section]').forEach(x=>{const active=x.dataset.accountSection===section;x.classList.toggle('is-active',active);x.setAttribute('aria-selected',String(active));});document.querySelectorAll('[data-account-section-view]').forEach(view=>{view.hidden=view.dataset.accountSectionView!==section;});}));
  document.querySelectorAll('[data-search-tool]:not([data-studio-go])').forEach(b=>b.addEventListener('click',()=>chooseSearchTool(b.dataset.searchTool)));
  const syncHandwritingTools=()=>document.querySelectorAll('[data-search-tool="handwriting"]').forEach(b=>{if(b!==$('handwritingOpen'))b.disabled=$('handwritingOpen').disabled;});

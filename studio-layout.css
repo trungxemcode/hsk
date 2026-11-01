@@ -651,3 +651,16 @@ body.studio-enabled #accountSettingsView .account-version .offline-bar :is(span,
  body.studio-enabled:not(.mobile-ux) #accountProfileView#accountProfileView#accountProfileView#accountProfileView>.account-exam-history{margin-top:12px!important}
  body.studio-enabled:not(.mobile-ux) #accountPanel[data-account-current="profile"]>.update-push-settings{margin-top:12px!important}
 }
+
+/* Five navigation disclosures; sidebar dimensions and page content stay unchanged. */
+.side-nav .nav-group{border:0;background:var(--palette-clear);margin:0;padding:0}
+body.studio-enabled .side-nav .nav-group>summary{display:flex;align-items:center;gap:12px;min-height:46px;box-sizing:border-box;list-style:none;cursor:pointer;padding:10px 14px!important;border-radius:var(--radius-btn);font-size:14px;font-weight:650;color:var(--ink)}
+.side-nav .nav-group>summary::-webkit-details-marker{display:none}
+.side-nav .nav-group>summary>i{display:flex;flex:none;align-items:center;line-height:0}.side-nav .nav-group>summary svg{width:19px;height:19px}
+.side-nav .nav-chevron{margin-left:auto;transition:transform .15s}.side-nav .nav-group[open] .nav-chevron{transform:rotate(180deg)}
+.side-nav .nav-group-items{display:flex;flex-direction:column;gap:4px;padding:4px 0 8px 12px}
+.side-nav .nav-group:not([open])>.nav-group-items{display:none!important}
+body.studio-enabled .side-nav .nav-group-items>button{width:100%;min-height:44px;padding:10px 12px;white-space:normal;font-size:13px;line-height:1.5}
+.side-nav .nav-group summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.side-nav .nav-group:has(button.active)>summary{background:var(--accent-light);color:var(--accent-dark)}
+@media(min-width:721px) and (max-width:970px){body.studio-enabled .side-nav .nav-group>summary{justify-content:center;padding:10px 0!important}.side-nav .nav-group>summary>span,.side-nav .nav-chevron{display:none!important}.side-nav .nav-group-items{padding-left:0}}

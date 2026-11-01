@@ -41,7 +41,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
      assert.notEqual(colors[mode==='search'?0:2],colors[mode==='search'?2:0],mode+' visually distinguishes chosen tab');
      const chosen=await buttons.nth(mode==='search'?0:2).getAttribute('aria-current');
      assert.equal(chosen,'page',mode+' current');
-     const nav=page.locator(width<721?'#mobileDock [data-studio-go="search"]':'.sidebar [data-studio-go="search"]');
+     const nav=page.locator(width<721?'#mobileDock [data-studio-go="search"]':'.sidebar .side-nav [data-studio-go="'+mode+'"]:not([data-nav-action])');
      assert.equal(await nav.evaluate(el=>el.classList.contains('active')),true,'parent search stays selected');
     }
     await check('search');

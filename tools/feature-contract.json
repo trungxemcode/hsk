@@ -2308,6 +2308,42 @@
           "value": "pathname==='/reading-library'"
         }
       ]
+    },
+    {
+      "id": "grouped-sidebar-navigation",
+      "name": "Sidebar 5 nhóm xổ xuống và Flashcard trong Học tập HSK",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "Học tập HSK"
+        },
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "Luyện thi HSK"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-grouped-navigation-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "exam"
+        },
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "study4"
+        },
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "real-reading"
+        }
+      ]
     }
   ]
 }
