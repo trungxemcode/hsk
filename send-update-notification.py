@@ -12,8 +12,12 @@ SITE = 'https://trungxemcode.github.io/hsk/'
 
 # Pages caches static JSON for up to 600 seconds. Each attempt must use a
 # distinct URL or an early stale response can be cached for the entire loop.
-PAGES_DEPLOY_ATTEMPTS = 12
+# GitHub Pages can lag behind a successful commit by more than two minutes.
+# Use a monotonic deadline rather than a fixed attempt count; keep ~45 seconds
+# of the 5-minute Actions job for startup and the OneSignal request.
+PAGES_DEPLOY_WAIT_BUDGET_SECONDS = 230
 PAGES_DEPLOY_POLL_SECONDS = 10
+PAGES_MANIFEST_REQUEST_TIMEOUT_SECONDS = 10
 
 
 def live_manifest_url(version, attempt):
@@ -21,6 +25,28 @@ def live_manifest_url(version, attempt):
         'release': version, 'attempt': attempt, 'probe': time.time_ns(),
     })
 
+
+
+def wait_for_live_version(version):
+    deadline = time.monotonic() + PAGES_DEPLOY_WAIT_BUDGET_SECONDS
+    attempt = 0
+    while True:
+        try:
+            request = urllib.request.Request(live_manifest_url(version, attempt), headers={
+                'Cache-Control': 'no-cache', 'Pragma': 'no-cache',
+            })
+            timeout = min(PAGES_MANIFEST_REQUEST_TIMEOUT_SECONDS, max(1, deadline - time.monotonic()))
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                live = json.load(response)
+            if live.get('version') == version:
+                return
+        except (urllib.error.URLError, TimeoutError, ValueError):
+            pass
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise SystemExit('Live version differs: refusing premature/stale update notification.')
+        time.sleep(min(PAGES_DEPLOY_POLL_SECONDS, remaining))
+        attempt += 1
 
 
 def payload(app_id, manifest):
@@ -44,22 +70,7 @@ def main():
     try:
         # Native Pages deployments do not reliably emit a workflow_run to user workflows.
         # Wait for the deployed manifest rather than notifying from an unverified push.
-        live = {}
-        for attempt in range(PAGES_DEPLOY_ATTEMPTS):
-            try:
-                request = urllib.request.Request(live_manifest_url(manifest['version'], attempt), headers={
-                    'Cache-Control': 'no-cache', 'Pragma': 'no-cache',
-                })
-                with urllib.request.urlopen(request, timeout=10) as response:
-                    live = json.load(response)
-                if live.get('version') == manifest['version']:
-                    break
-            except (urllib.error.URLError, TimeoutError, ValueError):
-                pass
-            if attempt + 1 < PAGES_DEPLOY_ATTEMPTS:
-                time.sleep(PAGES_DEPLOY_POLL_SECONDS)
-        if live.get('version') != manifest['version']:
-            raise SystemExit('Live version differs: refusing premature/stale update notification.')
+        wait_for_live_version(manifest['version'])
         request = urllib.request.Request('https://api.onesignal.com/notifications?c=push',
             data=json.dumps(payload(app_id, manifest)).encode(),
             headers={'Authorization': 'Key ' + key, 'Content-Type': 'application/json'})
