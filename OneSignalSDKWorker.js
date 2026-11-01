@@ -1,3 +1,3 @@
-// HSK shell revision: hsk-offline-3-23-41
-importScripts('./offline-worker.js?v=3-23-41');
+// HSK shell revision: hsk-offline-3-23-42
+importScripts('./offline-worker.js?v=3-23-42');
 try{importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js');}catch(error){console.warn('Thông báo cần mạng; học offline vẫn hoạt động.',error);}
