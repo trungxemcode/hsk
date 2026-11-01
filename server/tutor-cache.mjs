@@ -1,3 +1,4 @@
+import {EXAM_SHARED_REGISTRY} from './exam-shared-registry.mjs';
 import {TUTOR_CURRICULUM} from './tutor-curriculum.mjs';
 
 export const QA_CACHE_REVISION='qa-20261021-v1';
@@ -12,7 +13,7 @@ function qaPublicQuestion(q){return /^(?:(?:phân biệt|so sánh) [\p{Script=Ha
 export function qaSensitive(x){return /(?:https?:\/\/|www\.|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b|\d[\d\s()+.-]{6,}\d|AIza[\w-]{20,}|\b(?:password|mật khẩu|api[_ -]?key|bearer|token|địa chỉ nhà|số điện thoại)\b)/iu.test(x);}
 export async function qaDescriptor(route,body,uid,env){
  if(env.QA_CACHE_ENABLED!=='true'||!qaRoutes.has(route)||!env.AI_CONTROL||!uid||body.history?.length)return null;
- if(route==='/lesson-ask'&&(body.images?.length||body.lesson?.content?.mode==='wrong-answer-explanation'))return null;
+ if(route==='/lesson-ask'&&(body.images?.length||(body.lesson?.content?.mode==='wrong-answer-explanation'&&EXAM_SHARED_REGISTRY[await qaHash({lesson:body.lesson,question:body.question})]!==true)))return null;
  if(route==='/lesson-ask'&&/^(placement-|open-dictionary)/.test(body.lesson?.id||''))return null;
  const context=route==='/lesson-ask'?body.lesson:route==='/ask'?body.translation:route==='/dictionary-translate'?body.entries:{context:body.context||'',word:body.word||null};
  const question=qaNormalize(body.question||body.query||(route==='/dictionary-translate'?'dịch nghĩa nhóm từ':''));
@@ -22,7 +23,9 @@ export async function qaDescriptor(route,body,uid,env){
  if(route==='/lesson-ask'){
   const known=TUTOR_CURRICULUM.lessons[body.lesson?.id];
   trusted=!!known&&known.hsk===body.hsk&&known.hash===await qaHash(context);
-  shared=trusted&&qaPublicQuestion(question);
+  const publicExam=!body.images?.length&&EXAM_SHARED_REGISTRY[await qaHash({lesson:body.lesson,question:body.question})]===true;
+  trusted=trusted||publicExam;
+  shared=publicExam||(trusted&&qaPublicQuestion(question));
  }else if(route==='/dictionary-lookup'&&!body.context){
   trusted=!body.word||TUTOR_CURRICULUM.dictionary[await qaHash(body.word)]===true;
   shared=/^[\p{Script=Han}]{1,20}[？?]?$/u.test(question)&&trusted;
