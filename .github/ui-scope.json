@@ -1,4 +1,6 @@
 {
-  "request": "Chỉ PC từ 721px: Học viết và Đánh giá trình độ mở trong workspace; giữ nguyên modal điện thoại. #283 đã có trên main, không sửa Tra cứu/So sánh hoặc các trang khác.",
-  "excludedRoutes": []
+  "request": "Chỉ PC ở ô Từ vựng hôm nay trên Trang chủ: pinyin và nghĩa cùng hàng, cỡ 18px và weight 550 nhẹ hơn Hán tự. Điện thoại và các trang khác giữ nguyên.",
+  "excludedRoutes": [
+    "home"
+  ]
 }

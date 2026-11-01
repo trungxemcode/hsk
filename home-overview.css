@@ -119,3 +119,10 @@ html body.studio-enabled #studioHome .feature-hero{box-shadow:var(--shadow-home-
 @media(min-width:721px){html body.studio-enabled #studioHome.overview-v216 #placementEntry>p+button{margin-left:auto!important;}}
 
 @media(prefers-reduced-motion:no-preference){html body.studio-enabled #studioHome .feature-hero{animation-name:rd-sheen!important;}}
+
+/* PC: pronunciation and meaning sit alongside the character on one row. */
+@media(min-width:721px){
+ html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary{grid-template-columns:auto minmax(0,max-content) minmax(0,1fr)!important;column-gap:20px!important;align-items:center}
+ html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary strong{grid-row:auto}
+ html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary span{font-size:18px!important;font-weight:550!important;line-height:1.5}
+}
