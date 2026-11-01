@@ -2277,6 +2277,27 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "chinese-story-catalog",
+      "name": "Truyện ngắn biên soạn phân cấp HSK 1–6, đọc offline",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "src/modules/reading/chinese-story-catalog.js",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/reading/real-reading.js",
+          "value": "window.HSKChineseStoryCatalog"
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-chinese-story-catalog.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
-  "request": "Chỉ sửa khoảng cách 4 hàng cuối của Tài khoản > Hồ sơ trên desktop: nhãn Tài khoản → thông báo offline 10px → lịch sử làm bài 12px → thông báo cập nhật 12px; giữ nguyên Cài đặt, mobile và các trang còn lại.",
+  "request": "Tích hợp truyện phân cấp vào route real-reading: mặc định truyện ngắn và nhãn nút/mô tả trong reader. Các loại bài, trang Luyện và route khác giữ nguyên. PC/mobile sáng/tối.",
   "excludedRoutes": [
-    "account"
+    "real-reading"
   ]
 }

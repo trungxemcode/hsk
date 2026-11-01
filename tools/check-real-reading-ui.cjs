@@ -36,12 +36,34 @@ const SAMPLE={
    submissions.push(r.request().postDataJSON());
    assert.equal(checkReadingBody(submissions.at(-1)),true,'actual frontend payload must satisfy Worker validation');
    const genre=r.request().postDataJSON().genre||'dialogue';
-   const value={...SAMPLE,id:'mock-generated-'+submissions.length,lessonId:null,genre};
+   const value={...SAMPLE,id:'mock-generated-'+submissions.length,lessonId:null,topic:r.request().postDataJSON().topic,genre};
    if(genre!=='dialogue'){value.scriptMode=[];value.paragraphMode=[...SAMPLE.paragraphMode,{hanzi:'他们一边吃早饭，一边讨论今天的工作。',pinyin:'Tāmen yìbiān chī zǎofàn, yìbiān tǎolùn jīntiān de gōngzuò.',vi:'Họ vừa ăn sáng vừa trao đổi công việc hôm nay.'}];}
    await r.fulfill({contentType:'application/json',body:JSON.stringify({story:value})});
   });
   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
   await page.waitForFunction(()=>!!window.HSKRealReading&&!!window.HSKStudio&&!!window.HSKLessons,{timeout:25000});
+
+  // Built-in stories work for guests, filter by the capitalized UI topic and reopen after reload.
+  for(const theme of ['light','dark']){
+   await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;localStorage.removeItem('hsk-real-reading-history-v1:guest');window.HSKAccountDashboard=null;window.dispatchEvent(new Event('hsk-account-ready'));HSKRealReading.leaveLesson();HSKStudio.navigate('real-reading');},theme);
+   await page.locator('#rrGenre').selectOption('story');
+   for(let hsk=1;hsk<=6;hsk++){
+    await page.locator('#rrHsk').selectOption(String(hsk));
+    const data=await page.evaluate(hsk=>{const s=HSKChineseStoryCatalog.find(s=>s.hsk===hsk);return {id:s.id,topic:s.topic,answers:s.quiz.map(q=>q.answerIndex)};},hsk);
+    const topicOption=await page.locator('#rrTopic option').evaluateAll((ns,topic)=>ns.find(n=>n.textContent.toLocaleLowerCase('vi')===topic)?.value,data.topic);
+    await page.locator('#rrTopic').selectOption(topicOption);
+    const before=submissions.length;await page.locator('#rrNew').click();
+    assert.equal(await page.evaluate(()=>HSKRealReading.story?.id),data.id);assert.equal(submissions.length,before);
+    assert.equal(await page.locator('.rr-credit a').count(),0,'original catalog must not claim an external original');
+    assert.match(await page.locator('.rr-credit').innerText(),/biên soạn trong app/);
+    for(let i=0;i<3;i++)await page.locator('input[name="rr-q'+i+'"][value="'+data.answers[i]+'"]').check();
+    await page.locator('.rr-quiz button').click();assert.match(await page.locator('.rr-quiz-result').innerText(),/Đúng 3\/3/);
+    await page.locator('#rrOld').click();assert.equal(await page.evaluate(()=>HSKRealReading.story.id),data.id);
+   }
+  }
+  await page.reload();await page.waitForFunction(()=>window.HSKRealReading&&window.HSKStudio&&window.HSKLessons&&window.HSKMobileUX&&document.body.dataset.studioHub==='home');
+  await page.evaluate(()=>HSKStudio.navigate('real-reading'));await page.locator('#rrHsk').selectOption('6');await page.locator('#rrOld').click();assert.equal(await page.evaluate(()=>HSKRealReading.story?.hsk),6);
+  await page.locator('#rrHsk').selectOption('3');await page.locator('#rrTopic').selectOption('');await page.locator('#rrGenre').selectOption('dialogue');
   if(width===320){const bodies=await page.evaluate(async()=>{const catalog=await fetch('./lessons-data.json').then(r=>r.json());return catalog.courses.flatMap(c=>c.lessons.map(l=>({hsk:c.hsk,lessonId:l.id,lessonWords:HSKRealReadingVariety.requestWords(HSKLessons.match(l.words))})));});assert.equal(bodies.length,146);assert.ok(bodies.every(checkReadingBody),'all real lesson vocabularies must satisfy the Worker contract');}
   for(const theme of ['light','dark']){
    const baseline=submissions.length;
@@ -91,13 +113,13 @@ const SAMPLE={
   }
   for(const genre of ['story','news','email','explainer']){
    await page.evaluate(()=>{localStorage.removeItem('hsk-real-reading-history-v1:guest');localStorage.removeItem('hsk-real-reading-cache-v1:guest');window.dispatchEvent(new Event('hsk-account-ready'));HSKRealReading.leaveLesson();HSKStudio.navigate('real-reading');});
-   await page.locator('#rrGenre').selectOption(genre);const before=submissions.length;await page.locator('#rrNew').click();await page.waitForFunction(()=>!document.querySelector('#rrNew').disabled);
+   await page.locator('#rrGenre').selectOption(genre);await page.locator('#rrTopic').selectOption('Du lịch');const before=submissions.length;await page.locator('#rrNew').click();await page.waitForFunction(()=>!document.querySelector('#rrNew').disabled);
    assert.equal(submissions.length,before+1);assert.equal(submissions.at(-1).genre,genre);assert.equal(await page.locator('#rrArticle .rr-line').count(),2);
    assert.equal(await page.locator('#rrArticle .rr-reading-switches button').filter({hasText:'Kịch bản'}).count(),0);
    await page.locator('#rrOld').click();assert.match(await page.locator('#rrStatus').innerText(),/bài cũ/);
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);assert.equal(overflow,false);
   }
-  await page.locator('#rrGenre').selectOption('dialogue');await page.locator('#rrOld').click();assert.match(await page.locator('#rrStatus').innerText(),/Chưa có/);
+  await page.locator('#rrTopic').selectOption('');await page.locator('#rrGenre').selectOption('dialogue');await page.locator('#rrOld').click();assert.match(await page.locator('#rrStatus').innerText(),/Chưa có/);
   // From a real HSK lesson, the new reading route retains the lesson ID.
   await page.evaluate(async()=>{window.HSKRealReading.leaveLesson();window.HSKStudio.navigate('lessons');history.replaceState(null,'','#lesson/standard-3-01');await window.HSKLessonNav.open();});
   await page.locator('.lesson-reading-entry').waitFor({state:'visible',timeout:18000});
