@@ -4,8 +4,6 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/deploy-translator-roles.yml'
-      - 'server/translator-worker-bundled.mjs'
-      - 'server/wrong-answer-images.mjs'
   workflow_dispatch:
 permissions:
   contents: read
