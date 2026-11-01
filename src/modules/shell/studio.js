@@ -52,7 +52,7 @@ renderIcons();
   root.querySelectorAll('button:not(.speech-button):not(.mastery-btn):not(.studio-action)').forEach(mark);
  }
  decorateControls();new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)decorateControls(node);}).observe(main,{subtree:true,childList:true});
- const labels={'real-reading':'Đọc thực tế','study4':'Luyện thi HSK','match-game':'Đối chiếu 3 cột','sentence-game':'Sắp xếp câu',home:'Trang chủ',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện & Ôn',exam:'Bài tập HSK',review:'Luyện & Ôn',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn theo lịch',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
+ const labels={writing:'Học viết',placement:'Đánh giá trình độ & lộ trình','real-reading':'Đọc thực tế','study4':'Luyện thi HSK','match-game':'Đối chiếu 3 cột','sentence-game':'Sắp xếp câu',home:'Trang chủ',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện & Ôn',exam:'Bài tập HSK',review:'Luyện & Ôn',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn theo lịch',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
  const parents={'real-reading':'lessons','study4':'practice','match-game':'practice','sentence-game':'practice',learn:'practice',quiz:'practice',compare:'practice',exam:'practice',srs:'practice',mistakes:'practice',translator:'search',about:'home'};
  labels.music='Nghe nhạc học HSK';labels['music-play']='Nghe nhạc & học HSK';
  let ready=false,route='home',lastOwner='',fingerprint='',activityTimer,refreshTimer,lastGoalScope='';
@@ -83,7 +83,7 @@ renderIcons();
    // "translator" belongs to the global Search section, but is a distinct local tab.
    const localTab=!!b.closest('.studio-search-tabs');
    const group=b.closest('.side-nav .nav-group');
-   const selected=group?!b.dataset.navAction&&b.dataset.studioGo===name:localTab?b.dataset.searchTool===(document.body.dataset.searchTool||(name==='translator'?'translate':'vocabulary')):b.dataset.studioGo===(parents[name]||name);
+   const selected=group?(b.dataset.navAction?b.dataset.navAction===name:b.dataset.studioGo===name):localTab?b.dataset.searchTool===(document.body.dataset.searchTool||(name==='translator'?'translate':'vocabulary')):b.dataset.studioGo===(parents[name]||name);
    b.classList.toggle('active',selected);if(group&&selected)group.open=true;
    if(localTab)b.setAttribute('aria-pressed',String(selected));
    if(selected)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
@@ -110,12 +110,14 @@ renderIcons();
   if(musicRoute&&!window.HSKMusic){clearMusicWait();pendingMusic=name;document.querySelectorAll('[data-studio-go="'+name+'"]').forEach(node=>{const small=node.querySelector('small');musicWaitControls.push([node,small,small?.textContent||'']);node.setAttribute('aria-busy','true');node.classList.add('music-entry-pending');if(small)small.textContent='Đang mở trình phát…';});musicWaitTimer=setTimeout(()=>clearMusicWait(true),20000);window.HSKMusicLoad?.start();return;}
   clearMusicWait();
   if(name==='review')name='practice';
-  if(!ready&&!['account','translator','about','admin','music','music-play'].includes(name))return;
+  if(!ready&&!['writing','placement','account','translator','about','admin','music','music-play'].includes(name))return;
   if(!ready)routeChosenBeforeReady=true;
   if(name==='search'&&!$('handwritingPanel').hidden)$('handwritingClose').click();
   if(name==='search'||name==='translator')document.body.dataset.searchTool=name==='search'?'vocabulary':'translate';
+  if(name==='writing'&&!$('writingPractice').open){window.HSKWritingPractice?.open();return;}
+  if(name==='placement'&&!$('placementDialog').open){window.HSKPlacement?.open();return;}
   clearHub();
-  if(['home','practice','review','exam','notebook','match-game','sentence-game','study4','real-reading','music','music-play'].includes(name)){
+  if(['writing','placement','home','practice','review','exam','notebook','match-game','sentence-game','study4','real-reading','music','music-play'].includes(name)){
    const hub=name==='music-play'?'music':name;
    document.querySelector('.app-tabs [data-mode="learn"]').click();document.body.classList.remove('show-lessons','lesson-focus');document.body.dataset.studioHub=hub;document.querySelector(`[data-studio-hub-panel="${hub}"]`).hidden=false;title(name);
   }else{const special={account:'accountBtn',translator:'translatorBtn',admin:'adminBtn',about:'aboutBtn'};const trigger=special[name]?$(special[name]):document.querySelector(`.app-tabs [data-mode="${name}"]`);if(!trigger||trigger.hidden)return;trigger.click();title(name);}

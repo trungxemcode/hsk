@@ -2346,6 +2346,22 @@
       ]
     },
     {
+      "id": "learning-tool-pages",
+      "name": "Trang Học viết và Đánh giá trình độ",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/handwriting/writing-practice.js",
+          "value": "HSKFeaturePage('writingPractice','writing')"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/placement/placement.js",
+          "value": "HSKFeaturePage('placementDialog','placement')"
+        }
+      ]
+    },
+    {
       "id": "word-recovery",
       "name": "AI nhận diện từ qua cách đọc và nghĩa gần đúng",
       "checks": [

@@ -12,3 +12,7 @@
  #writingPractice>button,#writingPractice form button,#writingPractice .writing-controls button{min-height:40px;padding:8px 12px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--ink)}
  #writingPractice .writing-controls{gap:8px}
 }
+
+body.studio-enabled #writingPractice.feature-page{position:static;inset:auto;margin:0;width:100%;max-width:none;height:auto;max-height:none;overflow:visible;box-sizing:border-box;padding:24px}
+body.studio-enabled #writingPractice.feature-page[hidden]{display:none!important}
+@media(max-width:720px){body.studio-enabled #writingPractice.feature-page{padding:16px}}

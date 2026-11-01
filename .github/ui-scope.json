@@ -1,7 +1,4 @@
 {
-  "request": "Thêm trợ giúp AI tìm từ khi quên chữ trong Tra cứu và So sánh từ trên PC/mobile; giữ giao diện và chức năng các trang khác.",
-  "excludedRoutes": [
-    "search",
-    "compare"
-  ]
+  "request": "Chỉ PC từ 721px: Học viết và Đánh giá trình độ mở trong workspace; giữ nguyên modal điện thoại. #283 đã có trên main, không sửa Tra cứu/So sánh hoặc các trang khác.",
+  "excludedRoutes": []
 }
