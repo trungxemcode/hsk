@@ -1,7 +1,4 @@
 {
-  "request": "Kế thừa #283: trợ giúp AI tìm từ ở Tra cứu/So sánh PC/mobile; #284 chỉ PC từ 721px mở Học viết và Đánh giá trình độ trong workspace, giữ nguyên modal điện thoại. Các trang khác giữ nguyên.",
-  "excludedRoutes": [
-    "search",
-    "compare"
-  ]
+  "request": "Chỉ PC từ 721px: Học viết và Đánh giá trình độ mở trong workspace; giữ nguyên modal điện thoại. #283 đã có trên main, không sửa Tra cứu/So sánh hoặc các trang khác.",
+  "excludedRoutes": []
 }
