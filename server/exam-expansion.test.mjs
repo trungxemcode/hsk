@@ -3,3 +3,11 @@ test('72 independent additions preserve the original bank and validate all forma
 test('292 alternatives belong to their actual lesson and keep five mastery slots',()=>{const data=JSON.parse(fs.readFileSync(new URL('../lesson-mini-data.json',import.meta.url)));let count=0;for(const [id,l] of Object.entries(data.lessons)){const source=JSON.parse(fs.readFileSync(new URL('../lesson-content-hsk'+l.level+'.json',import.meta.url))).lessons.find(x=>x.id===id),texts=[...source.grammar.flatMap(g=>g.examples),...(source.warmupReading?.lines||source.reading.lines)].map(x=>x.cn);assert.equal(l.variants.length,2);for(const q of l.variants){count++;assert.ok(texts.includes(q.sourceText));assert.ok(l.questions.some(base=>base.id===q.evidenceKey));assert.equal(C.grade(q,0),true);assert.ok(q.audio?.length<=120||q.passage?.length<=120);const state=M.applyMini({}, {id:q.evidenceKey,kind:'objective',correct:true,time:1});assert.equal(state.miniEvidence[q.evidenceKey].streak,1);}}assert.equal(count,292);});
 
 test('source exam reading preserves answers and provenance',()=>{const qs=B.items.filter(q=>q.type==='sourceReading');assert.equal(qs.length,5481);assert.equal(new Set(qs.map(q=>q.id)).size,qs.length);for(const q of qs){assert.ok(q.sourceRef.test);assert.ok(q.prompt);assert.equal(C.grade(q,q.answer),true);assert.ok(!/<img/i.test(q.prompt));}});
+
+test('source-reading type only advertises levels with available source questions',()=>{
+ const actual=[...new Set(B.items.filter(q=>q.type==='sourceReading').map(q=>q.level))].sort();
+ const advertised=B.types.find(t=>t.id==='sourceReading').levels.slice().sort();
+ assert.deepEqual(advertised,actual);
+ for(const level of advertised)assert.ok(C.eligible(B,level,'all','sourceReading').length>0);
+ assert.equal(C.eligible(B,1,'all','sourceReading').length,0);
+});

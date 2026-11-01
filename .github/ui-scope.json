@@ -1,5 +1,6 @@
 {
-  "request": "Chuẩn hóa vị trí nút ba gạch, tên trang và khoảng cách topbar trên toàn bộ trang và trang con HSK, bảo toàn nội dung các route.",
-  "excludedRoutes": [],
-  "sharedHeaderOnly": true
+  "request": "PR #266: chỉ thêm câu ôn luyện nguồn Study4 và cache AI chung cho Exam; không đổi giao diện các trang khác.",
+  "excludedRoutes": [
+    "exam"
+  ]
 }
