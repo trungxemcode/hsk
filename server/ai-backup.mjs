@@ -29,6 +29,7 @@ export const AI_TIMEOUTS=Object.freeze({text:6000,reading:12000,backup:25000});
 export const AI_ROLE_TIMEOUTS=Object.freeze({text:10000,reading:18000,gemini:25000,complex:15000,heavyReading:25000});
 export function aiTaskRole(route,body={}){
  if(['/ocr','/handwriting-recognize','/study-plan-review'].includes(route))return 'gemini';
+ if(route==='/lesson-ask'&&body.images?.length)return 'gemini';
  if(route==='/reading-next')return 'gemini'; // Full passage + pinyin + translation + quiz is a generation task.
  if(route==='/dictionary-translate')return body.entries?.length>15?'gemini':'xkiro';
  const question=String(body.question||body.query||'');
@@ -112,7 +113,7 @@ export function createAiFailoverFetch(fetchFn,env,{
  wrapped.hskFailover=true;return wrapped;
 }
 export function createAiRoleFetch(fetchFn,env,{route,body,accountRole,validateData,onProvider,onAttempt}={}){
- if(accountRole){const providerOnly=['admin','vip'].includes(accountRole)||['/ocr','/handwriting-recognize'].includes(route)?'gemini':'xkiro';return createAiFailoverFetch(fetchFn,env,{providerOnly,preferSecondary:providerOnly==='xkiro',timeoutMs:route==='/reading-next'?60000:30000,backupTimeoutMs:route==='/reading-next'?60000:30000,validateData,onProvider,onAttempt});}
+ if(accountRole){const providerOnly=['admin','vip'].includes(accountRole)||['/ocr','/handwriting-recognize'].includes(route)||route==='/lesson-ask'&&body?.images?.length?'gemini':'xkiro';return createAiFailoverFetch(fetchFn,env,{providerOnly,preferSecondary:providerOnly==='xkiro',timeoutMs:route==='/reading-next'?60000:30000,backupTimeoutMs:route==='/reading-next'?60000:30000,validateData,onProvider,onAttempt});}
  const reading=route==='/reading-next',enabled=env.AI_TASK_ROUTING==='true',role=aiTaskRole(route,body);
  return createAiFailoverFetch(fetchFn,env,{
   preferSecondary:enabled&&role==='xkiro',

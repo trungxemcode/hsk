@@ -44,7 +44,7 @@ export class HSkaIControl {
    const userDayLimit=Math.max(1,Math.min(fresh?13:500,Number(this.env.AI_USER_DAILY_LIMIT)||50));
    const readingDayLimit=Math.max(1,Math.min(fresh?3:100,Number(this.env.AI_USER_READING_DAILY_LIMIT)||15));
    const queryDayLimit=Math.max(1,Math.min(fresh?10:500,Number(this.env.AI_USER_QUERY_DAILY_LIMIT)||35));
-   const imageLimited=data.imageLimited===true&&['ocr','handwriting'].includes(data.route);
+   const imageLimited=data.imageLimited===true&&['ocr','handwriting','ask-image'].includes(data.route);
    const imageDay=new Date(time+7*3600000).toISOString().slice(0,10),imageKey='img:'+imageDay+':'+data.uid;
    const userKey='u:'+day+':'+data.uid,readingKey='r:'+day+':'+data.uid;
    const dayKey='g:'+day,minuteKey='m:'+minute;
