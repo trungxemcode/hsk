@@ -33,10 +33,9 @@ function buildWrongAnswerPrompt(spec={}){
  const words=(Array.isArray(spec.words)?spec.words:[]).slice(0,12).map(w=>({han:String(w?.han||'').slice(0,40),pin:String(w?.pin||'').slice(0,80),mean:String(w?.mean||'').slice(0,160)})).filter(w=>w.han);
  const images=(Array.isArray(spec.images)?spec.images:[]).slice(0,10).map((image,i)=>({label:String(image?.label||'Hình '+(i+1)).slice(0,90),...(image?.src?{src:String(image.src)}:{}),...(image?.mimeType&&image?.data?{mimeType:image.mimeType,data:image.data}:{}),...(typeof image?.load==='function'?{load:image.load}:{}),...(image?.svg?{svg:image.svg}:{})}));
  const lesson={id:'wrong-explain-'+String(spec.id||'q').replace(/^(?:placement-|open-dictionary)/,'q-').slice(0,80),title:String(spec.sourceName||spec.title||('Giải thích câu sai HSK '+hsk)).slice(0,160),hsk,words,content:{mode:'wrong-answer-explanation',skill,question:String(spec.questionPrompt||spec.prompt||'').slice(0,1200),context:String(spec.contextText||spec.context||'').slice(0,1800),transcript:String(spec.transcriptText||spec.transcript||'').slice(0,1800),userWrongAnswer:String(spec.userAnswer||'Chưa chọn đáp án').slice(0,500),correctAnswer:String(spec.correctAnswer||'').slice(0,500),allOptions,referenceExplanation:String(spec.explanation||'').slice(0,800),imageLabels:images.map(x=>x.label)} };
- const listening=skill.toLowerCase().includes('nghe');
- const initialQuestion=listening
-  ?'Trả lời theo thứ tự: 1. Transcript (chỉ chép lời nghe được cung cấp); 2. Nghĩa tiếng Việt; 3. Đáp án cần chọn (mô tả hình từ ảnh thật nếu có); 4. Giải thích từ khóa và lý do đúng/sai. Nếu có hình hãy nhìn hình thật, không đoán. Không bịa transcript hoặc ảnh. Nêu ngắn gọn khi dữ liệu thiếu.'
-  :'Giải thích câu sai bằng tiếng Việt, theo thứ tự: 1. Đề bài và nghĩa tiếng Việt; 2. Đáp án đúng, vì sao đúng; 3. Giải thích LẦN LƯỢT TỪNG lựa chọn A, B, C, D (hoặc đúng mọi lựa chọn thực tế): dẫn nội dung lựa chọn, nghĩa, lý do đúng hoặc sai của TỪNG phương án; 4. Mấu chốt từ vựng/ngữ pháp/ngữ cảnh để tránh nhầm. Nếu có hình phải phân tích ảnh đính kèm thật theo nhãn, không bịa. Không bỏ qua phương án, không thêm lựa chọn không có trong dữ liệu.';
+ // The Worker owns one authoritative explanation rubric. A listening question
+ // changes only the source material (provided transcript, never audio/ASR).
+ const initialQuestion='Giải thích câu sai: dùng đề bài hoặc transcript đã có, dịch nghĩa, nêu đáp án đúng, phân tích từng phương án A, B, C, D (hay mọi phương án thực tế), rồi chỉ ra mấu chốt. Phân tích hình gốc nếu được gửi. Không tự nghe lại audio hay bịa phương án.';
  return {hsk,lesson,images,initialQuestion};
 }
 

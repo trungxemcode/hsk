@@ -35,7 +35,7 @@ test('dictionary requests cache query plus context, reading and gloss; batch IDs
  const entries=[{id:'one',han:'买',pinyin:'mǎi',gloss:'buy'}];assert.notEqual((await qaDescriptor('/dictionary-translate',{entries},'alice',env)).key,(await qaDescriptor('/dictionary-translate',{entries:[{...entries[0],id:'two'}]},'alice',env)).key);
 });
 test('history, followup-only question, placement reports, PII and other routes bypass caches',async()=>{
- const {env}=mock();for(const [route,body] of [['/lesson-ask',{...qBody(),history:[{role:'user',text:'previous'}]}],['/lesson-ask',qBody('giải thích lại')],['/lesson-ask',{...qBody(),lesson:{...lesson,id:'placement-feedback'}}],['/ask',{...tBody(),question:'Email me@example.com'}],['/ask',{...tBody(),question:'Gọi số 0901234567'}],['/translate',{text:'hi'}]])assert.equal(await qaDescriptor(route,body,'alice',env),null);
+ const {env}=mock();for(const [route,body] of [['/lesson-ask',{...qBody(),history:[{role:'user',text:'previous'}]}],['/lesson-ask',qBody('giải thích lại')],['/lesson-ask',{...qBody(),lesson:{...lesson,id:'placement-feedback'}}],['/lesson-ask',{...qBody(),lesson:{...lesson,content:{mode:'wrong-answer-explanation',skill:'Nghe',transcript:'你好'}}}],['/ask',{...tBody(),question:'Email me@example.com'}],['/ask',{...tBody(),question:'Gọi số 0901234567'}],['/translate',{text:'hi'}]])assert.equal(await qaDescriptor(route,body,'alice',env),null);
  assert.equal(await qaDescriptor('/lesson-ask',qBody(),'alice',{...env,QA_CACHE_ENABLED:'false'}),null);
 });
 test('normalization retains Hanzi, tone distinctions, negation and grammatical position',()=>{

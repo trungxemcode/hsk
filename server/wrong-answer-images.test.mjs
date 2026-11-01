@@ -44,7 +44,7 @@ test('authenticated wrong-answer lesson puts actual image in Gemini request, nev
  assert.equal(parts.length,3);
  assert.equal(parts[2].inlineData.mimeType,'image/png');
  assert.equal(parts[2].inlineData.data,inline.data);
- assert.match(payload.systemInstruction.parts[0].text,/từng lựa chọn/);
+ assert.match(payload.systemInstruction.parts[0].text,/từng.*phương án/i);
  assert.match(payload.systemInstruction.parts[0].text,/allOptions/);
  assert.equal(payload.generationConfig.maxOutputTokens,1900);
 });
