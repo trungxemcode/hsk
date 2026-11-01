@@ -1,5 +1,4 @@
 {
-  "request": "Chỉ sidebar trên PC/tablet: 5 nhóm xổ xuống Học tập HSK, Ôn luyện, Giải trí, Công cụ, Luyện thi HSK; Flashcard trong Học; Trang chủ/Tài khoản riêng. Giữ nguyên nội dung mọi route, drawer/mobile không đổi.",
-  "excludedRoutes": [],
-  "sharedSidebarOnly": true
+  "request": "Sửa riêng dialog Học viết: căn giữa desktop và khung SVG vuông đủ lớn, giữ các trang khác và giao diện mobile.",
+  "excludedRoutes": []
 }
