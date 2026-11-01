@@ -1,5 +1,5 @@
 {
-  "request": "Áp dụng hai ảnh chủ dự án đã duyệt: Hồ sơ đưa lịch sử sát mô tả với gap16; Cài đặt đồng nhất padding16, tiêu đề-mô tả8, mô tả-nút12, khoảng thẻ16. Chỉ account PC/mobile sáng/tối.",
+  "request": "Chỉ sửa khoảng cách 4 hàng cuối của Tài khoản > Hồ sơ trên desktop: nhãn Tài khoản → thông báo offline 10px → lịch sử làm bài 12px → thông báo cập nhật 12px; giữ nguyên Cài đặt, mobile và các trang còn lại.",
   "excludedRoutes": [
     "account"
   ]

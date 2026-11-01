@@ -643,3 +643,11 @@ body.studio-enabled #accountSettingsView .account-version-copy{display:grid;gap:
 body.studio-enabled #accountSettingsView .account-version-copy>:is(strong,p){margin:0!important}
 body.studio-enabled #accountSettingsView .account-version .offline-bar{margin:0!important;padding:0!important;gap:10px;align-items:center}
 body.studio-enabled #accountSettingsView .account-version .offline-bar :is(span,button){margin:0!important;translate:none!important}
+
+/* Hồ sơ: tighten only the final four rows on desktop; leave Settings and all other routes alone. */
+@media (min-width:721px){
+ body.studio-enabled:not(.mobile-ux) #accountProfileView #accountBadge{margin-bottom:0!important}
+ body.studio-enabled:not(.mobile-ux) #accountPanel#accountPanel#accountPanel#accountPanel[data-account-current="profile"] #accountStatus{margin-top:10px!important}
+ body.studio-enabled:not(.mobile-ux) #accountProfileView#accountProfileView#accountProfileView#accountProfileView>.account-exam-history{margin-top:12px!important}
+ body.studio-enabled:not(.mobile-ux) #accountPanel[data-account-current="profile"]>.update-push-settings{margin-top:12px!important}
+}
