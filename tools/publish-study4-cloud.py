@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 import gzip
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
@@ -53,6 +54,29 @@ def build_catalog(input_path, audio_map=None):
 
 
 def put(key, path, content_type, encoding=None, cache='no-store'):
+    # Upload via Cloudflare R2 S3 when the VPS has private credentials.
+    # Preserve working Wrangler OAuth flow until S3 can be authenticated.
+    key_id = os.getenv('R2_ACCESS_KEY_ID') or os.getenv('AWS_ACCESS_KEY_ID')
+    secret = os.getenv('R2_SECRET_ACCESS_KEY') or os.getenv('AWS_SECRET_ACCESS_KEY')
+    if key_id and secret:
+        import boto3
+        from botocore.config import Config
+        endpoint = os.getenv('R2_S3_ENDPOINT', 'https://b431ad22b61e55ef5f445fb029e2f579.r2.cloudflarestorage.com')
+        endpoint = endpoint.removesuffix('/' + BUCKET).rstrip('/')
+        client = boto3.client(
+            's3', endpoint_url=endpoint, region_name='auto',
+            aws_access_key_id=key_id, aws_secret_access_key=secret,
+            config=Config(s3={'addressing_style': 'path'}, retries={'max_attempts': 3, 'mode': 'standard'}))
+        kwargs = {'Bucket': BUCKET, 'Key': key, 'ContentType': content_type,
+                  'CacheControl': cache, 'ContentLength': path.stat().st_size}
+        if encoding:
+            kwargs['ContentEncoding'] = encoding
+        with path.open('rb') as stream:
+            client.put_object(Body=stream, **kwargs)
+        remote = client.head_object(Bucket=BUCKET, Key=key)
+        if remote['ContentLength'] != path.stat().st_size:
+            raise RuntimeError('S3 publication size verification failed')
+        return
     cmd = ['npx', 'wrangler', 'r2', 'object', 'put', f'{BUCKET}/{key}', '--remote', '--file', str(path), '--content-type', content_type, '--cache-control', cache]
     if encoding:
         cmd += ['--content-encoding', encoding]

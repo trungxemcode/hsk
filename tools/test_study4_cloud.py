@@ -28,6 +28,43 @@ class Study4CloudPublishTests(unittest.TestCase):
         self.assertTrue(out['tests'][0]['parts'][0]['audio'].startswith(publisher.PUBLIC_BASE))
         self.assertEqual(out['tests'][0]['parts'][0]['groups'][0]['questions'][0]['audio'], another)
 
+    def test_s3_backend_put_metadata(self):
+        import os
+        from unittest.mock import patch, MagicMock
+        with tempfile.TemporaryDirectory() as tmp:
+            asset = pathlib.Path(tmp) / 'asset.json.gz'
+            asset.write_bytes(b'abcd')
+            client = MagicMock()
+            client.head_object.return_value = {'ContentLength': 4}
+            with patch.dict(os.environ, {
+                'R2_ACCESS_KEY_ID': 'test-key',
+                'R2_SECRET_ACCESS_KEY': 'test-secret',
+                'R2_S3_ENDPOINT': 'https://example.r2.cloudflarestorage.com',
+            }), patch('boto3.client', return_value=client):
+                publisher.put('study4/data/file.json.gz', asset,
+                              'application/json', 'gzip', 'public, max-age=300')
+            options = client.put_object.call_args.kwargs
+            self.assertEqual(options['Bucket'], publisher.BUCKET)
+            self.assertEqual(options['Key'], 'study4/data/file.json.gz')
+            self.assertEqual(options['ContentEncoding'], 'gzip')
+            self.assertEqual(options['CacheControl'], 'public, max-age=300')
+            self.assertEqual(options['ContentLength'], 4)
+
+    def test_wrangle_fallback_without_s3_credentials(self):
+        import os
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as tmp:
+            asset = pathlib.Path(tmp) / 'manifest.json'
+            asset.write_text('{}')
+            cleaned = dict(os.environ)
+            for name in ('R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY',
+                         'AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY'):
+                cleaned.pop(name, None)
+            with patch.dict(os.environ, cleaned, clear=True), patch.object(publisher.subprocess, 'run') as run:
+                publisher.put('study4/manifest.json', asset, 'application/json')
+            self.assertEqual(run.call_count, 1)
+            self.assertIn('wrangler', run.call_args.args[0])
+
     def test_invalid_or_duplicate_exams_fail_before_r2_manifest_can_change(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = pathlib.Path(tmp) / 'bad.json.gz'
