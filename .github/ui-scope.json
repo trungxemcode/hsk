@@ -1,6 +1,5 @@
 {
-  "request": "Đọc thực tế: mặc định lấy nguyên văn từ Mandarin Bean và HSK Reading, thêm danh sách/chọn bài và nguồn; Chỉ online, lịch sử URL lưu cloud theo tài khoản, không lưu thiết bị. PC/mobile sáng/tối. Luồng AI cũ vẫn là tùy chọn riêng, các trang khác giữ nguyên.",
-  "excludedRoutes": [
-    "real-reading"
-  ]
+  "request": "Chủ dự án yêu cầu áp dụng riêng commit 48247367: tăng kích thước nút điều hướng nhanh ở sidebar trên desktop (38→40px, icon 16→18px, chữ 13→13.5px, gap 11→12). Các nội dung/chức năng của mọi trang và giao diện mobile giữ nguyên.",
+  "excludedRoutes": [],
+  "sharedQuickNavOnly": true
 }
