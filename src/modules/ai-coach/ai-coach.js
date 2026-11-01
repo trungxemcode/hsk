@@ -69,7 +69,7 @@ function mountWrongExplain(host,getSpec){
   const current=++chatSerial,initialOwner=owner(),uid=user.uid,controller=new AbortController();
   chatPending=controller;sendBtn.disabled=true;input.disabled=true;chatBox.setAttribute('aria-busy','true');
   if(!isInitial){appendMessage('user',questionText);input.value='';status.textContent='AI đang trả lời câu hỏi của bạn…';}
-  else status.textContent='AI đang phân tích câu hỏi và giải thích cả 4 phương án…';
+  else status.textContent='AI đang giải thích nội dung và đáp án…';
   const timer=setTimeout(()=>controller.abort(),55000);
   try{
    const token=await user.getIdToken();
