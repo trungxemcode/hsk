@@ -1,8 +1,9 @@
 (()=>{
 'use strict';
+
 const el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n;};
 const button=(label,fn)=>{const b=el('button',label);b.type='button';b.onclick=fn;return b;};
-const dialog=el('dialog');dialog.id='writingPractice';dialog.setAttribute('aria-labelledby','writingTitle');
+const dialog=window.HSKFeaturePage('writingPractice','writing');dialog.setAttribute('aria-labelledby','writingTitle');
 const heading=el('h2','Học viết');heading.id='writingTitle';
 const close=button('Đóng',()=>dialog.close()),form=el('form'),input=el('input'),label=el('label','Chữ hoặc từ muốn luyện');input.id='writingInput';input.maxLength=20;input.value='你好';label.htmlFor=input.id;
 const load=button('Học chữ này',()=>openWord(input.value));form.append(label,input,load);form.onsubmit=e=>{e.preventDefault();openWord(input.value);};
@@ -32,7 +33,7 @@ controls.append(button('Xem mẫu',watch),button('Viết theo',practice),button(
 speed.onchange=()=>{if(data){build();status.textContent='Đã đổi tốc độ. Bấm Xem mẫu hoặc Viết theo.';}};outline.onchange=()=>{if(writer)outline.checked?writer.showOutline():writer.hideOutline();};
 function openWord(text){queue=[...new Set([...text].filter(c=>/\p{Script=Han}/u.test(c)))];if(!queue.length){status.textContent='Nhập ít nhất một chữ Hán để luyện viết.';return;}choices.replaceChildren(...queue.map(c=>button(c,()=>select(c))));select(queue[0]);}
 dialog.append(heading,close,form,choices,modeBar,stage,status,controls,speed,outlineLabel,el('p','Mẹo: từ trên xuống dưới, từ trái sang phải. Khung viết nhận thao tác vẽ; vuốt bên ngoài khung để cuộn.'));
-document.body.append(dialog);dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});dialog.addEventListener('close',()=>{if(dialog.open)return;++serial;writer?.cancelQuiz();writer?.pauseAnimation();stage.replaceChildren();writer=null;});
+dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});dialog.addEventListener('close',()=>{if(dialog.open)return;++serial;writer?.cancelQuiz();writer?.pauseAnimation();stage.replaceChildren();writer=null;});
 const entry=button('Học viết · Xem thứ tự nét và viết theo',()=>{dialog.showModal();openWord(input.value);});entry.className='hub-card';entry.id='writingPracticeOpen';document.querySelector('.practice-hubs')?.append(entry);
 const symbol=el('span','字'),content=el('span');symbol.className='hub-symbol lilac';symbol.setAttribute('aria-hidden','true');content.className='hub-content';content.append(el('strong','Học viết'),el('small','Xem thứ tự nét, rồi viết theo từng nét.'),el('em','Bắt đầu viết ↗'));entry.replaceChildren(symbol,content);
 window.HSKWritingPractice={characterData:charData,open(text='你好'){input.value=text;dialog.showModal();openWord(text);}};

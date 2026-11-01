@@ -1,4 +1,4 @@
 {
-  "request": "Sửa riêng dialog Học viết: căn giữa desktop và khung SVG vuông đủ lớn, giữ các trang khác và giao diện mobile.",
+  "request": "Chỉ PC từ 721px: Học viết và Đánh giá trình độ mở trong workspace như trang riêng; giữ nguyên modal và bố cục điện thoại. Các trang khác không thay đổi.",
   "excludedRoutes": []
 }

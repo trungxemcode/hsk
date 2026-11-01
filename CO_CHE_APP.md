@@ -330,3 +330,6 @@ Core JS và Python xuất CSS giống nhau; cloud Worker vẫn xác thực chủ
 ### Bổ sung ôn luyện từ kho đề và giải thích dùng chung
 `exam-expansion.js` bổ sung 5.481 câu đọc từ snapshot `study4-tests-data.json.gz`: chỉ nhập câu có nội dung chữ, lựa chọn và đáp án xác định, không có ảnh phụ thuộc; giữ mã đề/câu và bỏ trùng. Dạng `sourceReading` dùng cơ chế chấm/lưu hiện hữu.
 `tools/build-exam-shared-registry.cjs` tạo fingerprint toàn bộ lesson và câu hỏi giải thích chuẩn cho kho bổ sung. Worker chỉ cho phép dùng chung giữa tài khoản khi fingerprint trùng danh mục công khai, không có ảnh và lịch sử. Nội dung sửa, câu hỏi thêm và payload ngoài danh mục không được dùng chung. Cache hit hiện được trả trước bước trừ quota trong translator-worker. Thứ tự lựa chọn khác cần fingerprint khác; trường hợp chưa đăng ký tiếp tục gọi AI. Cần deploy Worker sau merge để bật cơ chế mới.
+
+### Trang công cụ học trên PC
+`src/modules/shell/feature-page.js` giữ API open/close hiện có, hiển thị Học viết và Đánh giá trình độ trong workspace ở chiều rộng từ 721px. Điện thoại tiếp tục dùng native modal và mobile focus hiện có. Đổi trang dừng animation/âm thanh theo lifecycle cũ; bài đánh giá đã trả lời vẫn lưu draft. Đổi breakpoint khi đang mở chuyển hình thức hiển thị và giữ phiên học. Không đổi Học rảnh tay hay hộp thoại phụ.

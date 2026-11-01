@@ -2344,6 +2344,22 @@
           "value": "real-reading"
         }
       ]
+    },
+    {
+      "id": "learning-tool-pages",
+      "name": "Trang Học viết và Đánh giá trình độ",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/handwriting/writing-practice.js",
+          "value": "HSKFeaturePage('writingPractice','writing')"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/placement/placement.js",
+          "value": "HSKFeaturePage('placementDialog','placement')"
+        }
+      ]
     }
   ]
 }

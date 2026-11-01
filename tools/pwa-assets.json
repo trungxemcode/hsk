@@ -173,7 +173,8 @@
     "src/modules/shell/storage-cleanup.js",
     "src/modules/shell/legacy-music-cleanup.js",
     "site-design-live.js",
-    "site-design-config.json"
+    "site-design-config.json",
+    "src/modules/shell/feature-page.js"
   ],
   "aliases": {
     "backup-core.js": "src/modules/backup/backup-core.js",
