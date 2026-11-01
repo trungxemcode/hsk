@@ -104,6 +104,7 @@
     "src/modules/lessons/lesson-mini.js",
     "lesson-mini-data.json",
     "src/modules/ai-coach/ai-coach-core.js",
+    "src/modules/ai-coach/ai-coach-images.js",
     "src/modules/ai-coach/ai-coach.js",
     "src/modules/shell/mobile-dock.js",
     "src/modules/exams/exam-expansion.js",

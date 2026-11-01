@@ -83,3 +83,10 @@ test('Worker admin exemption uses verified account UID, ignoring forged token ro
  assert.equal((await handler(req('regular'),configured)).status,200);
  assert.equal((await handler(req('regular'),configured)).status,429,'forged admin claim does not bypass cooldown or quotas');
 });
+
+test('a regular learner has 10 combined image explanations per VN day, ordinary text remains separate',async()=>{
+ const {environment}=mock({AI_GLOBAL_DAILY_LIMIT:'10000',AI_GLOBAL_MINUTE_LIMIT:'1000',AI_USER_DAILY_LIMIT:'50',AI_USER_QUERY_DAILY_LIMIT:'35'});
+ for(let i=0;i<10;i++)assert.equal((await controlCall(environment,'reserve',{uid:'image-learner',route:i%2?'ocr':'ask-image',imageLimited:true})).allowed,true);
+ assert.equal((await controlCall(environment,'reserve',{uid:'image-learner',route:'ask-image',imageLimited:true})).reason,'user-image-daily');
+ assert.equal((await controlCall(environment,'reserve',{uid:'image-learner',route:'ask'})).allowed,true);
+});

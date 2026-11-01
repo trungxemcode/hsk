@@ -12,6 +12,7 @@ function qaPublicQuestion(q){return /^(?:(?:phân biệt|so sánh) [\p{Script=Ha
 export function qaSensitive(x){return /(?:https?:\/\/|www\.|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b|\d[\d\s()+.-]{6,}\d|AIza[\w-]{20,}|\b(?:password|mật khẩu|api[_ -]?key|bearer|token|địa chỉ nhà|số điện thoại)\b)/iu.test(x);}
 export async function qaDescriptor(route,body,uid,env){
  if(env.QA_CACHE_ENABLED!=='true'||!qaRoutes.has(route)||!env.AI_CONTROL||!uid||body.history?.length)return null;
+ if(route==='/lesson-ask'&&body.images?.length)return null;
  if(route==='/lesson-ask'&&/^(placement-|open-dictionary)/.test(body.lesson?.id||''))return null;
  const context=route==='/lesson-ask'?body.lesson:route==='/ask'?body.translation:route==='/dictionary-translate'?body.entries:{context:body.context||'',word:body.word||null};
  const question=qaNormalize(body.question||body.query||(route==='/dictionary-translate'?'dịch nghĩa nhóm từ':''));

@@ -65,16 +65,23 @@ function mountWrongExplain(host,getSpec){
   if(!config){status.textContent='Chưa kết nối được dịch vụ AI. Hãy thử lại sau.';return;}
   const user=window.HSKAccountDashboard?.user;
   if(!user){status.textContent='Hãy đăng nhập tài khoản app để hỏi AI giải thích.';return;}
-  if(!builtContext)builtContext=C.buildWrongAnswerPrompt(typeof getSpec==='function'?getSpec():getSpec);
   const current=++chatSerial,initialOwner=owner(),uid=user.uid,controller=new AbortController();
   chatPending=controller;sendBtn.disabled=true;input.disabled=true;chatBox.setAttribute('aria-busy','true');
   if(!isInitial){appendMessage('user',questionText);input.value='';status.textContent='AI đang trả lời câu hỏi của bạn…';}
-  else status.textContent='AI đang giải thích nội dung và đáp án…';
+  else status.textContent='AI đang chuẩn bị dữ liệu câu hỏi và ảnh gốc…';
   const timer=setTimeout(()=>controller.abort(),55000);
   try{
+   if(!builtContext){
+    const spec=typeof getSpec==='function'?await getSpec():getSpec;
+    if(current!==chatSerial||controller.signal.aborted||!wrap.isConnected)return;
+    builtContext=C.buildWrongAnswerPrompt(spec);
+    try{builtContext.images=await window.HSKWrongAnswerImages.prepare(builtContext.images);}catch(e){builtContext=null;throw Error('Không chuyển được ảnh gốc cho AI: '+e.message);}
+    if(current!==chatSerial||controller.signal.aborted||!wrap.isConnected)return;
+   }
+   status.textContent='AI đang giải thích nội dung và đáp án…';
    const token=await user.getIdToken();
    if(current!==chatSerial||owner()!==initialOwner||window.HSKAccountDashboard?.user?.uid!==uid||!wrap.isConnected)return;
-   const r=await fetch(config.endpoint.replace(/\/translate$/,'/lesson-ask'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({question:questionText.slice(0,500),hsk:builtContext.hsk,lesson:builtContext.lesson,history:history.slice(-8)}),signal:controller.signal});
+   const r=await fetch(config.endpoint.replace(/\/translate$/,'/lesson-ask'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({question:(isInitial?builtContext.initialQuestion:questionText).slice(0,500),hsk:builtContext.hsk,lesson:builtContext.lesson,history:history.slice(-8),...(builtContext.images.length?{images:builtContext.images}:{})}),signal:controller.signal});
    const data=await r.json();
    if(current!==chatSerial||owner()!==initialOwner||window.HSKAccountDashboard?.user?.uid!==uid||!wrap.isConnected)return;
    if(!r.ok)throw Error(data.error||'AI chưa trả lời được. Hãy thử lại.');
@@ -98,8 +105,7 @@ function mountWrongExplain(host,getSpec){
   wrongChats.add(instance);
   chatBox.hidden=false;btn.setAttribute('aria-expanded','true');
   if(!initialized&&!chatPending){
-   builtContext=C.buildWrongAnswerPrompt(typeof getSpec==='function'?getSpec():getSpec);
-   sendTurn(builtContext.initialQuestion,true);
+   sendTurn('Giải thích câu sai này',true);
   }
  };
  closeBtn.onclick=()=>{destroy();btn.focus({preventScroll:true});};

@@ -13,8 +13,21 @@ test('listening explanation prioritizes transcript, meaning and target picture w
  assert.ok(p.initialQuestion.length<=500);
  const sections=['1. Transcript','2. Nghĩa','3. Đáp án cần chọn','4. Giải thích'].map(x=>p.initialQuestion.indexOf(x));
  assert.ok(sections.every((x,i)=>x>=0&&(!i||x>sections[i-1])));
- assert.match(p.initialQuestion,/mô tả hình cần chọn.*dù thiếu ảnh/);
- assert.match(p.initialQuestion,/Không bịa transcript, hình hoặc nhãn đáp án/);
- assert.match(p.initialQuestion,/Không phân tích từng phương án chỉ có nhãn/);
+ assert.match(p.initialQuestion,/mô tả hình từ ảnh thật/);
+ assert.match(p.initialQuestion,/Không bịa transcript hoặc ảnh/);
+ assert.match(p.initialQuestion,/không đoán/);
  const missing=C.buildWrongAnswerPrompt({skill:'Nghe'});assert.equal(missing.lesson.content.transcript,'');
+});
+
+test('reading and writing wrong-answer explanations cover every supplied A-D option and preserve image loading references',()=>{
+ const load=()=>Promise.resolve('data:image/png;base64,test');
+ const p=C.buildWrongAnswerPrompt({id:'q4',hsk:5,skill:'Đọc',questionPrompt:'哪一项是正确的？',correctAnswer:'C',userAnswer:'A',options:['A','B','C','D'].map(label=>({label,text:'Câu '+label,isSelected:label==='A',isCorrect:label==='C'})),images:[{label:'Ảnh đáp án C',load}]});
+ assert.deepEqual(p.lesson.content.allOptions.map(o=>o.option),['A','B','C','D']);
+ assert.equal(p.lesson.content.allOptions[2].status,'Đáp án đúng');
+ assert.match(p.initialQuestion,/A, B, C, D/);
+ assert.match(p.initialQuestion,/từng phương án/i);
+ assert.equal(p.images[0].load,load);
+ const writing=C.buildWrongAnswerPrompt({skill:'Viết',options:[],correctAnswer:'我去学校。'});
+ assert.equal(writing.lesson.content.allOptions.length,0);
+ assert.match(writing.initialQuestion,/hoặc đúng mọi lựa chọn thực tế/);
 });
