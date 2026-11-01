@@ -631,3 +631,15 @@ body.mobile-ux #accountPanel .mobile-backup-tools{margin-top:16px}
 
 /* The update disclosure is moved between account containers by mobile UX. */
 body.studio-enabled #accountPanel .update-push-settings{margin-block:16px!important}
+
+/* Account spacing approved from the profile/settings reference images. */
+body.studio-enabled #accountPanel#accountPanel#accountPanel#accountPanel #accountStatus{translate:none!important;margin:12px 0 0!important}
+body.studio-enabled #accountProfileView#accountProfileView#accountProfileView#accountProfileView>.account-exam-history{margin-block:16px 0!important}
+body.studio-enabled #accountSettingsView#accountSettingsView#accountSettingsView#accountSettingsView>article.account-detail{display:grid;gap:12px;padding:16px!important}
+body.studio-enabled #accountSettingsView#accountSettingsView#accountSettingsView#accountSettingsView>article.account-detail>h3{margin:0 0 -4px!important}
+body.studio-enabled #accountSettingsView#accountSettingsView#accountSettingsView#accountSettingsView>article.account-detail>:is(p,button){margin:0!important;translate:none!important;justify-self:start}
+body.studio-enabled #accountSettingsView#accountSettingsView#accountSettingsView#accountSettingsView>.account-version{display:grid;gap:12px;padding:16px!important}
+body.studio-enabled #accountSettingsView .account-version-copy{display:grid;gap:8px;min-width:0}
+body.studio-enabled #accountSettingsView .account-version-copy>:is(strong,p){margin:0!important}
+body.studio-enabled #accountSettingsView .account-version .offline-bar{margin:0!important;padding:0!important;gap:10px;align-items:center}
+body.studio-enabled #accountSettingsView .account-version .offline-bar :is(span,button){margin:0!important;translate:none!important}

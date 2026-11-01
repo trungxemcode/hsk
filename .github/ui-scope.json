@@ -1,5 +1,5 @@
 {
-  "request": "Tài khoản > Cài đặt: khôi phục khung bao gốc bị bỏ nhầm, tạo khoảng đệm thật 16px phía trên hai nút sao lưu; PC/mobile. Các trang khác không đổi.",
+  "request": "Áp dụng hai ảnh chủ dự án đã duyệt: Hồ sơ đưa lịch sử sát mô tả với gap16; Cài đặt đồng nhất padding16, tiêu đề-mô tả8, mô tả-nút12, khoảng thẻ16. Chỉ account PC/mobile sáng/tối.",
   "excludedRoutes": [
     "account"
   ]
