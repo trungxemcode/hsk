@@ -124,5 +124,5 @@ html body.studio-enabled #studioHome .feature-hero{box-shadow:var(--shadow-home-
 @media(min-width:721px){
  html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary{grid-template-columns:auto minmax(0,max-content) minmax(0,1fr)!important;column-gap:20px!important;align-items:center}
  html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary strong{grid-row:auto}
- html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary span{font-size:18px!important;font-weight:550!important;line-height:1.5}
+ html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary span{font-size:21px!important;font-weight:550!important;line-height:1.5}
 }
