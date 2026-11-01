@@ -1,4 +1,7 @@
 {
-  "request": "Sửa riêng dialog Học viết: căn giữa desktop và khung SVG vuông đủ lớn, giữ các trang khác và giao diện mobile.",
-  "excludedRoutes": []
+  "request": "Thêm trợ giúp AI tìm từ khi quên chữ trong Tra cứu và So sánh từ trên PC/mobile; giữ giao diện và chức năng các trang khác.",
+  "excludedRoutes": [
+    "search",
+    "compare"
+  ]
 }

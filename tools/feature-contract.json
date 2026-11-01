@@ -2344,6 +2344,22 @@
           "value": "real-reading"
         }
       ]
+    },
+    {
+      "id": "word-recovery",
+      "name": "AI nhận diện từ qua cách đọc và nghĩa gần đúng",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/dictionary/open-dictionary.js",
+          "value": "function recoveryPanel("
+        },
+        {
+          "kind": "contains",
+          "file": "server/translator-worker.mjs",
+          "value": "NHẬN DIỆN TỪ QUÊN CHỮ"
+        }
+      ]
     }
   ]
 }

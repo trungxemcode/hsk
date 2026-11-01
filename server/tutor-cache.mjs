@@ -1,7 +1,7 @@
 import {EXAM_SHARED_REGISTRY} from './exam-shared-registry.mjs';
 import {TUTOR_CURRICULUM} from './tutor-curriculum.mjs';
 
-export const QA_CACHE_REVISION='qa-20261021-v1';
+export const QA_CACHE_REVISION='qa-word-recovery-v2';
 const qaRoutes=new Set(['/ask','/lesson-ask','/dictionary-lookup','/dictionary-translate']);
 export function qaStable(value){
  const sort=x=>Array.isArray(x)?x.map(sort):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,sort(x[k])])):x;
