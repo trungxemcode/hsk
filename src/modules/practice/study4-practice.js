@@ -354,7 +354,8 @@
   saveTestProgress(activeSession.progressKey,{
    answers:activeSession.answers,
    checked:activeSession.checked,
-   submitted:activeSession.submitted
+   submitted:activeSession.submitted,
+   score:computeScore(activeSession)
   });
  }
 

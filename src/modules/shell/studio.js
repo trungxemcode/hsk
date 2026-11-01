@@ -124,6 +124,15 @@ renderIcons();
  function snapshot(){return ['hsk-flashcards-progress-v1','hsk-flashcards-mistakes-v1','hsk-course-lessons-v1','hsk-adaptive-learning-v1','hsk-exam-practice-v1'].map(k=>localStorage.getItem(k)||'').join('|');}
  function day(timestamp){return new Date(timestamp+7*3600000).toISOString().slice(0,10);}
  function activity(){const a=window.HSKStudyStore.activity();return {version:1,days:a.days&&typeof a.days==='object'&&!Array.isArray(a.days)?a.days:{},hours:Array.isArray(a.hours)&&a.hours.length===24?a.hours.map(n=>Number.isFinite(n)&&n>=0?n:0):Array(24).fill(0)};}
+ function examHistory(){
+  const rows=[];const readJSON=k=>{try{return JSON.parse(localStorage.getItem(k)||'{}')||{};}catch{return {};}};
+  const exam=readJSON('hsk-exam-practice-v1'),groups={};
+  for(const row of Object.values(exam.records||{})){if(!row?.updatedAt)continue;const key=`${row.level||'?'}:${row.type||'Bài tập'}`,g=groups[key]||{title:`HSK ${row.level||'?'} · ${row.type||'Bài tập'}`,correct:0,attempts:0,updatedAt:0};g.correct+=Number(row.correct)||0;g.attempts+=Number(row.attempts)||0;g.updatedAt=Math.max(g.updatedAt,Number(row.updatedAt)||0);groups[key]=g;}
+  Object.values(groups).forEach(g=>rows.push({...g,source:'Bài tập HSK'}));
+  const study4=readJSON('hsk-study4-progress-v1');for(const [key,prog] of Object.entries(study4)){if(!prog?.submitted||!prog.updatedAt)continue;const answers=Object.values(prog.answers||{}).filter(v=>String(v||'').trim()).length;rows.push({title:`Study4 · Đề ${key.split('::')[0]}`,correct:Number(prog.score?.correctObj)||0,attempts:Number(prog.score?.totalObj)||answers,updatedAt:Number(prog.updatedAt)||0,source:'Bộ đề Study4'});}
+  return rows.sort((a,b)=>b.updatedAt-a.updatedAt).slice(0,12);
+ }
+ function renderExamHistory(){const root=$('hskExamHistory');if(!root)return;root.replaceChildren();const rows=examHistory();if(!rows.length){const empty=document.createElement('p');empty.textContent='Chưa có lượt làm bài nào được lưu.';root.append(empty);return;}for(const row of rows){const item=document.createElement('article');item.className='hsk-exam-history-item';const title=document.createElement('strong');title.textContent=row.title;const score=document.createElement('span');score.textContent=row.attempts?`${Math.round(row.correct*100/row.attempts)}% đúng · ${row.correct}/${row.attempts} câu`:'Chưa có điểm';const date=document.createElement('small');date.textContent=`${row.source} · ${new Date(row.updatedAt).toLocaleString('vi-VN')}`;item.append(title,score,date);root.append(item);}}
  function recordActivity(){
   const who=owner(),next=snapshot();if(who!==lastOwner){lastOwner=who;fingerprint=next;return;}if(next===fingerprint)return;fingerprint=next;
   const a=activity(),now=Date.now(),date=day(now),hour=new Date(now+7*3600000).getUTCHours();
@@ -148,10 +157,12 @@ renderIcons();
   $('studioHour').textContent=peak?String(hour).padStart(2,'0')+':00':'—';$('studioHourNote').textContent=peak?'Khung giờ có nhiều thao tác học · UTC+7':'Chưa có dữ liệu giờ học';
   const week=$('studioWeek');week.replaceChildren();for(let i=6;i>=0;i--){const date=day(now-i*86400000),cell=document.createElement('div');cell.className='account-day'+(a.days[date]?' is-studied':'');const b=document.createElement('b');b.textContent=a.days[date]?'✓':'·';cell.append(b,document.createTextNode(new Date(date+'T00:00:00Z').toLocaleDateString('vi-VN',{weekday:'short',timeZone:'UTC'})));week.append(cell);}
   $('studioHomeWords').textContent=all.length.toLocaleString('vi-VN');$('studioHomeDue').textContent=String(Object.values(r).filter(x=>Number.isFinite(x.due)&&x.due<=now).length);
+  renderExamHistory();
   const admin=$('adminBtn');$('studioAdminLink').hidden=admin.hidden;
   const filter=document.body.classList.contains('show-lessons')?$('lessonsPanel').dataset.lessonLevel||'1':document.querySelector('[data-filter].active')?.dataset.filter||'all';$('studioLevelText').textContent=filter==='all'?'Tất cả HSK':'HSK '+filter;
  }
  document.querySelectorAll('[data-studio-go]').forEach(b=>b.addEventListener('click',()=>b.dataset.searchTool?chooseSearchTool(b.dataset.searchTool):navigate(b.dataset.studioGo)));
+ document.querySelectorAll('[data-account-section]').forEach(tab=>tab.addEventListener('click',()=>{const section=tab.dataset.accountSection;$('accountPanel').dataset.accountCurrent=section;document.querySelectorAll('[data-account-section]').forEach(x=>{const active=x.dataset.accountSection===section;x.classList.toggle('is-active',active);x.setAttribute('aria-selected',String(active));});document.querySelectorAll('[data-account-section-view]').forEach(view=>{view.hidden=view.dataset.accountSectionView!==section;});}));
  document.querySelectorAll('[data-search-tool]:not([data-studio-go])').forEach(b=>b.addEventListener('click',()=>chooseSearchTool(b.dataset.searchTool)));
  const syncHandwritingTools=()=>document.querySelectorAll('[data-search-tool="handwriting"]').forEach(b=>{if(b!==$('handwritingOpen'))b.disabled=$('handwritingOpen').disabled;});
  new MutationObserver(syncHandwritingTools).observe($('handwritingOpen'),{attributes:true,attributeFilter:['disabled']});syncHandwritingTools();
