@@ -606,3 +606,16 @@ body.studio-enabled #accountProfileView>.account-exam-history{display:block;heig
 .account-exam-history-count{color:var(--sub);font-size:13px;font-weight:400;white-space:nowrap}
 .account-exam-history:not([open])>:not(summary){display:none!important}
 .account-exam-history .hsk-exam-history-item{min-width:0;overflow-wrap:anywhere}
+/* The summary is the clickable header of this framed details card.
+   Its surface and focus ring must cover the full outer frame, not only
+   the card's padded content area. */
+body.studio-enabled #accountProfileView > .account-exam-history > .account-exam-history-heading{
+  margin:-18px;
+  padding:18px;
+  border-radius:var(--radius-16px);
+}
+body.studio-enabled #accountProfileView > .account-exam-history[open] > .account-exam-history-heading{
+  margin-bottom:12px;
+  border-bottom-left-radius:0;
+  border-bottom-right-radius:0;
+}
