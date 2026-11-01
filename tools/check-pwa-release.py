@@ -54,7 +54,7 @@ def ensure_release_integrity(root=ROOT):
         raise ValueError('Invalid PWA version')
     if not isinstance(release, str) or not RELEASE_RE.fullmatch(release):
         raise ValueError('Invalid semantic release number')
-    if version != 'hsk-offline-' + release.replace('.', '-'):
+    if not re.fullmatch(re.escape('hsk-offline-' + release.replace('.', '-')) + r'(?:-r[1-9]\d*)?', version):
         raise ValueError('PWA version must match semantic release')
     assets = source_assets() if root == ROOT else read_asset_list(root)
     expected = collect_assets(root)
@@ -122,11 +122,18 @@ def compare_with_base(base, manifest):
             + ' --release X.Y.Z --note "Mô tả ngắn".'
         )
     if frontend:
-        if old.get('release') == manifest.get('release') or old.get('version') == manifest['version']:
-            raise ValueError('Frontend update requires a new release and PWA version')
         previous_release = old.get('release', '')
-        if not RELEASE_RE.fullmatch(previous_release) or tuple(map(int, manifest['release'].split('.'))) <= tuple(map(int, previous_release.split('.'))):
+        if not RELEASE_RE.fullmatch(previous_release) or tuple(map(int, manifest['release'].split('.'))) < tuple(map(int, previous_release.split('.'))):
             raise ValueError('Frontend update must increase to a newer semantic release')
+        if previous_release == manifest['release']:
+            prefix = 'hsk-offline-' + previous_release.replace('.', '-')
+            def revision(value):
+                if value == prefix:
+                    return 0
+                match = re.fullmatch(re.escape(prefix) + r'-r([1-9]\d*)', value or '')
+                return int(match[1]) if match else -1
+            if revision(old.get('version')) < 0 or revision(manifest['version']) <= revision(old.get('version')):
+                raise ValueError('Frontend update requires a new release or newer internal PWA revision')
         print('FRONTEND RELEASE OK: ' + old.get('version', '?') + ' -> ' + manifest['version'])
     else:
         print('BACKEND/DOCS-ONLY PUSH: no iPhone app download needed (server changes are live).')
