@@ -182,3 +182,11 @@ test('deployment config targets the existing Worker and preserves dashboard vari
  assert.ok(config.migrations.some(m=>m.new_sqlite_classes?.includes('HSkaIControl')));
  assert.equal(Object.keys(config.vars).some(k=>/KEY|TOKEN|SECRET/.test(k)),false);
 });
+
+test('word recovery accepts approximate readings, clarification and confirmed comparison',async()=>{
+ for(const query of ['ni','ni3','nìa','So sánh 泥 và 你']){
+  const {run,calls}=setup(dictionaryResponse);const context=JSON.stringify({meaningHint:'đất ướt',previousSuggestions:['你']});
+  const r=await run('/dictionary-lookup',{query,context});assert.equal(r.status,200);
+  const sent=calls.at(-1).body;assert.match(sent.systemInstruction.parts[0].text,/NHẬN DIỆN TỪ QUÊN CHỮ/);assert.match(sent.systemInstruction.parts[0].text,/confirmed-comparison/);assert.equal(JSON.parse(sent.contents[0].parts[0].text).context,context);
+ }
+});

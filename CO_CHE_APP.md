@@ -333,3 +333,6 @@ Core JS và Python xuất CSS giống nhau; cloud Worker vẫn xác thực chủ
 
 ### Trang công cụ học trên PC
 `src/modules/shell/feature-page.js` giữ API open/close hiện có, hiển thị Học viết và Đánh giá trình độ trong workspace ở chiều rộng từ 721px. Điện thoại tiếp tục dùng native modal và mobile focus hiện có. Đổi trang dừng animation/âm thanh theo lifecycle cũ; bài đánh giá đã trả lời vẫn lưu draft. Đổi breakpoint khi đang mở chuyển hình thức hiển thị và giữ phiên học. Không đổi Học rảnh tay hay hộp thoại phụ.
+
+### Tìm từ khi quên chữ
+Tra cứu và So sánh có `word-recovery` trong open-dictionary.js. Dùng endpoint dictionary-lookup hiện có, giữ auth/quota; pinyin không thanh/số thanh/âm Việt + nghĩa mô tả, chọn ứng viên rồi so sánh đúng hai từ đã xác nhận. Sửa đầu vào hủy kết quả cũ; ngữ cảnh giữ gợi ý trước trong phiên, không ghi tiến độ/SRS. Worker và bundled phải triển khai cùng prompt mới; cache revision đổi để không tái dùng câu trả lời cũ.

@@ -28,6 +28,17 @@ const {JSDOM,VirtualConsole}=require('jsdom'),fs=require('node:fs'),path=require
   await wait(()=>[...d.querySelectorAll('#openDictionary .dictionary-row-han')].some(n=>n.textContent==='龘'));assert.equal(w.localStorage.getItem('hsk-open-dictionary-srs-v1'),srsBefore);assert.equal(w.localStorage.getItem('hsk-flashcards-progress-v1'),progressBefore);
   const prior=w.HSKDictionaryBridge.query();for(const bad of ['','abc','你好','<'])assert.equal(w.HSKHandwritingSearch.select(bad).supported,false);assert.equal(w.HSKDictionaryBridge.query(),prior);
   w.HSKDictionaryBridge.setScope('hsk');const filtered=w.HSKHandwritingSearch.select('赢');assert.equal(filtered.scope,'general');assert.equal(filtered.fallback,true);assert.equal(d.querySelector('.filter-btn[data-filter="1"]').getAttribute('aria-pressed'),'true','fallback does not alter global HSK filter');
+
+  w.HSKAccountDashboard={user:{uid:'test-user',getIdToken:async()=>'test-token'}};
+  const recovery=d.querySelector('#comparePanel .word-recovery'),rows=recovery.querySelectorAll('.dictionary-ai-panel'),result=recovery.lastElementChild;
+  click(recovery,'So sánh hai từ đã chọn');assert.match(result.textContent,/chọn đúng cả hai/);
+  const set=(input,value)=>{input.value=value;input.dispatchEvent(new w.Event('input'));};
+  w.__dictionaryAiResponse={answer:'Có thể là 你 hoặc 泥. Bạn nhớ nghĩa nào?',terms:[{han:'你',pinyin:'nǐ',meaning:'bạn'},{han:'泥',pinyin:'ní',meaning:'bùn'}]};
+  set(rows[0].querySelector('input'),'nìa');click(rows[0],'AI tìm chữ');await wait(()=>rows[0].textContent.includes('你 · nǐ · bạn'));assert.equal(requests.at(-1).query,'nìa');assert.equal(requests.at(-1).word,undefined);
+  set(rows[0].querySelectorAll('input')[1],'không phải bạn, thứ đất ướt');w.__dictionaryAiResponse={answer:'Bạn muốn nói bùn.',terms:[{han:'泥',pinyin:'ní',meaning:'bùn'}]};click(rows[0],'AI tìm chữ');await wait(()=>rows[0].textContent.includes('泥 · ní · bùn'));assert.ok(JSON.parse(requests.at(-1).context).previousSuggestions.includes('你'));click(rows[0],'泥 · ní · bùn');
+  set(rows[1].querySelector('input'),'ni3');w.__dictionaryAiResponse={answer:'Có thể là bạn.',terms:[{han:'你',pinyin:'nǐ',meaning:'bạn'}]};click(rows[1],'AI tìm chữ');await wait(()=>rows[1].textContent.includes('你 · nǐ · bạn'));click(rows[1],'你 · nǐ · bạn');
+  w.__dictionaryAiResponse={answer:'泥 là bùn, 你 là bạn.',terms:[]};click(recovery,'So sánh hai từ đã chọn');await wait(()=>result.textContent.includes('泥 là bùn'));assert.equal(requests.at(-1).query,'So sánh 泥 và 你');assert.deepEqual(JSON.parse(requests.at(-1).context).confirmedTerms.map(t=>t.han),['泥','你']);
+  set(rows[0].querySelector('input'),'ni');click(recovery,'So sánh hai từ đã chọn');assert.match(result.textContent,/chọn đúng cả hai/);assert.equal(w.localStorage.getItem('hsk-flashcards-progress-v1'),progressBefore);
   assert.deepEqual(errors,[]);console.log('PASS: split HSK/general search; exact/partial ranking; complete pagination; no HSK-filter restriction in general; opt-in SRS; AI mock context and legacy controls.');
  }finally{await new Promise(r=>setTimeout(r,1200));dom.window.close();server.close();}
 })().catch(e=>{console.error(e);process.exit(1);});
