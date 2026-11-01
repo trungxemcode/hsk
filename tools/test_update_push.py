@@ -1,5 +1,6 @@
 import importlib.util
 import unittest
+import io
 from unittest import mock
 from urllib.parse import urlsplit, parse_qs
 spec = importlib.util.spec_from_file_location('notify', 'send-update-notification.py')
@@ -21,6 +22,37 @@ class UpdatePushTests(unittest.TestCase):
         self.assertEqual(a['filters'][0]['value'], '1')
         self.assertTrue(a['url'].endswith('?update=1'))
 
+
+    def test_waits_for_matching_live_release_before_notifying(self):
+        old = io.BytesIO(b'{"version":"previous"}')
+        current = io.BytesIO(b'{"version":"v2"}')
+        with (
+            mock.patch.object(notify.urllib.request, 'urlopen', side_effect=[old, current]) as request,
+            mock.patch.object(notify.time, 'sleep') as pause,
+        ):
+            notify.wait_for_live_version('v2')
+        self.assertEqual(request.call_count, 2)
+        pause.assert_called_once_with(notify.PAGES_DEPLOY_POLL_SECONDS)
+        first = request.call_args_list[0].args[0]
+        second = request.call_args_list[1].args[0]
+        self.assertNotEqual(first.full_url, second.full_url)
+
+    def test_stale_release_never_passes_and_wait_budget_is_bounded(self):
+        clock = [0.0]
+        def fake_sleep(duration):
+            clock[0] += duration
+        with (
+            mock.patch.object(notify.time, 'monotonic', side_effect=lambda: clock[0]),
+            mock.patch.object(notify.time, 'sleep', side_effect=fake_sleep),
+            mock.patch.object(notify.urllib.request, 'urlopen',
+                              side_effect=lambda *args, **kwargs: io.BytesIO(b'{"version":"previous"}')) as request,
+        ):
+            with self.assertRaisesRegex(SystemExit, 'Live version differs'):
+                notify.wait_for_live_version('v2')
+        self.assertEqual(clock[0], notify.PAGES_DEPLOY_WAIT_BUDGET_SECONDS)
+        self.assertGreater(request.call_count, 12)
+        self.assertLessEqual(request.call_count, 26)
+
     def test_live_deploy_check_busts_github_pages_cache(self):
         # GitHub Pages uses Cache-Control: max-age=600 for this manifest.
         with mock.patch.object(notify.time, 'time_ns', side_effect=[111, 222]):
@@ -32,4 +64,4 @@ class UpdatePushTests(unittest.TestCase):
         self.assertEqual(parse_qs(urlsplit(second).query)['attempt'], ['1'])
         self.assertEqual(parse_qs(urlsplit(first).query)['probe'], ['111'])
         self.assertEqual(parse_qs(urlsplit(second).query)['probe'], ['222'])
-        self.assertEqual(notify.PAGES_DEPLOY_ATTEMPTS, 12)
+        self.assertEqual(notify.PAGES_DEPLOY_WAIT_BUDGET_SECONDS, 230)
