@@ -1,5 +1,5 @@
 {
-  "request": "Tài khoản > Hồ sơ/Cài đặt trên PC/mobile: tách khối thông báo cập nhật khỏi khối phía trên 16px; căn cụm sao lưu và thống nhất khung Cài đặt. Rà các route khác, chỉ sửa khi có lỗi khoảng cách tương tự được xác nhận.",
+  "request": "Tài khoản > Cài đặt: khôi phục khung bao gốc bị bỏ nhầm, tạo khoảng đệm thật 16px phía trên hai nút sao lưu; PC/mobile. Các trang khác không đổi.",
   "excludedRoutes": [
     "account"
   ]
