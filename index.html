@@ -216,7 +216,7 @@
 
 
 <section id="accountSettingsView" class="account-section-view" data-account-section-view="settings" aria-labelledby="accountSettingsTitle" hidden><h3 id="accountSettingsTitle" class="account-view-title">Cài đặt ứng dụng</h3><p class="hint">Tiến độ từ vựng, lịch SRS, câu sai và phân tích học tập được lưu theo tài khoản. Khi mất mạng, app giữ thay đổi trên máy và gửi lên khi có mạng. Nếu hai thiết bị sửa cùng một mục, lần cập nhật có thời gian mới hơn được giữ.</p>
-<button id="accountBackup">Tải bản sao lưu tiến độ</button><button id="accountRestore" type="button">Nhập bản sao lưu JSON</button><p class="hint">Thống kê tiến độ đã đồng bộ có thể được quản trị viên xem. Firebase quản lý email và mật khẩu. Bạn không cần đăng nhập lại mỗi lần mở app trên thiết bị đã đăng nhập.</p>
+<div class="account-backup-actions" role="group" aria-label="Sao lưu tiến độ"><button id="accountBackup">Tải bản sao lưu tiến độ</button><button id="accountRestore" type="button">Nhập bản sao lưu JSON</button></div><p class="hint">Thống kê tiến độ đã đồng bộ có thể được quản trị viên xem. Firebase quản lý email và mật khẩu. Bạn không cần đăng nhập lại mỗi lần mở app trên thiết bị đã đăng nhập.</p>
 <div class="account-detail studio-account-settings"><div id="accountForms"><form id="accountForm">
 <label for="accountAction">Bạn muốn</label><select id="accountAction"><option value="login">Đăng nhập</option><option value="register">Tạo tài khoản mới</option></select>
 <label for="accountEmail">Email</label><input id="accountEmail" type="email" autocomplete="username" required="" placeholder="Email của bạn">

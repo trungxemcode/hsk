@@ -1,5 +1,5 @@
 {
-  "request": "Tài khoản > Hồ sơ: lịch sử dạng xổ xuống và khung tự giãn trên PC/mobile.",
+  "request": "Chỉ Tài khoản > Cài đặt: tăng khoảng đệm cụm sao lưu, thống nhất bề rộng các thẻ và bỏ khung ngoài dư trên PC/mobile.",
   "excludedRoutes": [
     "account"
   ]

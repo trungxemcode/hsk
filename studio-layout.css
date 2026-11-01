@@ -619,3 +619,13 @@ body.studio-enabled #accountProfileView > .account-exam-history[open] > .account
   border-bottom-left-radius:0;
   border-bottom-right-radius:0;
 }
+
+/* Settings uses one consistent card boundary rather than a second outer frame. */
+body.studio-enabled.show-account #accountPanel#accountPanel#accountPanel#accountPanel[data-account-current="settings"]{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+body.studio-enabled #accountSettingsView>.account-backup-actions{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 20px}
+body.studio-enabled #accountSettingsView>.account-backup-actions :is(#accountBackup,#accountRestore){width:auto;max-width:100%;min-height:44px;margin:0!important;white-space:normal}
+body.studio-enabled #accountSettingsView>.hint{margin:12px 0;line-height:1.6}
+body.studio-enabled #accountSettingsView>.account-detail{box-sizing:border-box;width:100%;height:auto;min-height:0}
+body.studio-enabled #accountPanel :is(#accountForms,#accountSigned)[hidden]{display:none!important}
+body.mobile-ux #accountPanel .mobile-backup-tools{margin-top:16px}
+@media(max-width:720px){body.studio-enabled #accountSettingsView>.account-backup-actions{display:none}}
