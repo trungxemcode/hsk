@@ -2277,6 +2277,37 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "original-reading-sources",
+      "name": "Đọc nguyên văn từ Mandarin Bean và HSK Reading, chỉ lưu URL",
+      "checks": [
+        {
+          "kind": "file",
+          "file": "server/original-reading.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "server/original-reading.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "src/modules/reading/original-reading.js",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-original-reading-ui.cjs",
+          "value": ""
+        },
+        {
+          "kind": "contains",
+          "file": "server/translator-worker.mjs",
+          "value": "pathname==='/reading-library'"
+        }
+      ]
     }
   ]
 }
