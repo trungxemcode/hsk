@@ -1,7 +1,6 @@
 {
-  "request": "PR #268: thể hiện tỷ lệ câu đúng/sai bằng viền trên ô dạng bài Exam và ô chọn đề Study4; bảo vệ mọi trang ngoài hai route này.",
+  "request": "PR #269: tách Hồ sơ/Cài đặt và hiển thị lịch sử bài thi trong trang Tài khoản, chỉ thay đổi account; mọi route khác giữ nguyên giao diện.",
   "excludedRoutes": [
-    "exam",
-    "study4"
+    "account"
   ]
 }
