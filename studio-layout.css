@@ -621,7 +621,7 @@ body.studio-enabled #accountProfileView > .account-exam-history[open] > .account
 }
 
 /* Settings uses one consistent card boundary rather than a second outer frame. */
-body.studio-enabled.show-account #accountPanel#accountPanel#accountPanel#accountPanel[data-account-current="settings"]{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+body.studio-enabled.show-account #accountPanel#accountPanel#accountPanel#accountPanel[data-account-current="settings"]{padding:0!important;border:0!important;background:var(--palette-clear)!important;box-shadow:none!important}
 body.studio-enabled #accountSettingsView>.account-backup-actions{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 20px}
 body.studio-enabled #accountSettingsView>.account-backup-actions :is(#accountBackup,#accountRestore){width:auto;max-width:100%;min-height:44px;margin:0!important;white-space:normal}
 body.studio-enabled #accountSettingsView>.hint{margin:12px 0;line-height:1.6}
