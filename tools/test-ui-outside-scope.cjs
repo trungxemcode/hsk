@@ -52,7 +52,9 @@ test('shared header requests preserve ALL route visual comparisons',()=>{
 
 test('shared header normalization leaves the route content geometry strict',()=>{
  const src=require('node:fs').readFileSync(require('node:path').join(__dirname,'check-ui-outside-scope.cjs'),'utf8');
- assert.ok(src.includes('page.evaluate(measureDOM,{skipHeader:config.sharedHeaderOnly===true})'));
+ assert.ok(src.includes('page.evaluate(measureDOM,{skipHeader:config.sharedHeaderOnly===true,skipSidebar:config.sharedSidebarOnly===true})'));
  const fn=require('./ui-outside-scope-core.cjs').measureDOM;
  assert.match(fn.toString(),/options.skipHeader/);
 });
+
+test("sidebar scope protects every route and only allows a boolean flag",()=>{assert.equal(scope({request:"Regroup sidebar",excludedRoutes:[],sharedSidebarOnly:true}).length,21);assert.throws(()=>scope({request:"Regroup sidebar",excludedRoutes:["home"],sharedSidebarOnly:true}));assert.throws(()=>scope({request:"Regroup sidebar",excludedRoutes:[],sharedSidebarOnly:"true"}));const fn=require("./ui-outside-scope-core.cjs").measureDOM;assert.match(fn.toString(),/options.skipSidebar/);assert.match(fn.toString(),/closest\('\.sidebar'\)/);});
