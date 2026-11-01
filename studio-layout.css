@@ -594,3 +594,28 @@ body.studio-enabled #accountSettingsView#accountSettingsView#accountSettingsView
 body.studio-enabled #accountSettingsView#accountSettingsView#accountSettingsView#accountSettingsView > :is(.account-detail,.account-version) + :is(.account-detail,.account-version){margin-block-start:16px!important}
 body.mobile-ux #accountPanel[data-account-current="profile"] > :is(#mobileAccountAuth,#mobileAccountSystem,#mobileAccountPrivacy,.account-version){display:none!important}
 body.mobile-ux #accountPanel[data-account-current="settings"] > :is(#mobileProfileSummary,#mobileAccountStats,#mobileErrorProfile,#accountBadge,#accountStatus){display:none!important}
+
+/* Keep account history and its parent in normal content flow. */
+body.studio-enabled.show-account #accountPanel#accountPanel#accountPanel#accountPanel,body.studio-enabled #accountProfileView{height:auto!important;max-height:none!important;min-height:0!important}
+body.studio-enabled #accountProfileView>.account-exam-history{display:block;height:auto!important;max-height:none!important;min-height:0!important;margin-top:16px;translate:none!important}
+.account-exam-history-heading{display:flex;align-items:center;gap:10px;min-height:44px;cursor:pointer;list-style:none;color:var(--ink);font-weight:750;overflow-wrap:anywhere}
+.account-exam-history-heading::-webkit-details-marker{display:none}
+.account-exam-history-heading::after{content:"⌄";margin-left:auto;flex:none;color:var(--sub)}
+.account-exam-history[open]>.account-exam-history-heading::after{content:"⌃"}
+.account-exam-history-heading:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--radius-btn)}
+.account-exam-history-count{color:var(--sub);font-size:13px;font-weight:400;white-space:nowrap}
+.account-exam-history:not([open])>:not(summary){display:none!important}
+.account-exam-history .hsk-exam-history-item{min-width:0;overflow-wrap:anywhere}
+/* The summary is the clickable header of this framed details card.
+   Its surface and focus ring must cover the full outer frame, not only
+   the card's padded content area. */
+body.studio-enabled #accountProfileView > .account-exam-history > .account-exam-history-heading{
+  margin:-18px;
+  padding:18px;
+  border-radius:var(--radius-16px);
+}
+body.studio-enabled #accountProfileView > .account-exam-history[open] > .account-exam-history-heading{
+  margin-bottom:12px;
+  border-bottom-left-radius:0;
+  border-bottom-right-radius:0;
+}

@@ -1,5 +1,5 @@
 {
-  "request": "PR #269: tách Hồ sơ/Cài đặt và hiển thị lịch sử bài thi trong trang Tài khoản, chỉ thay đổi account; mọi route khác giữ nguyên giao diện.",
+  "request": "Tài khoản > Hồ sơ: lịch sử dạng xổ xuống và khung tự giãn trên PC/mobile.",
   "excludedRoutes": [
     "account"
   ]
