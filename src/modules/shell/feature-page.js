@@ -2,7 +2,8 @@
 // Desktop tools share the workspace; phone retains its original native modal.
 window.HSKFeaturePage=(id,route)=>{
  const page=document.createElement('dialog');page.id=id;
- const nativeOpen=page.showModal.bind(page),nativeClose=page.close.bind(page),nativeShow=page.show.bind(page);
+ const modalOpen=page.showModal,close=page.close,show=page.show;
+ const nativeOpen=()=>modalOpen.call(page),nativeClose=()=>close.call(page),nativeShow=()=>show.call(page);
  let desktop=false,transition=false;
  function presentation(){
   desktop=window.matchMedia('(min-width:721px)').matches;
