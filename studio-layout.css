@@ -629,3 +629,6 @@ body.studio-enabled #accountSettingsView>.account-detail{box-sizing:border-box;w
 body.studio-enabled #accountPanel :is(#accountForms,#accountSigned)[hidden]{display:none!important}
 body.mobile-ux #accountPanel .mobile-backup-tools{margin-top:16px}
 @media(max-width:720px){body.studio-enabled #accountSettingsView>.account-backup-actions{display:none}}
+
+/* The update disclosure is moved between account containers by mobile UX. */
+body.studio-enabled #accountPanel .update-push-settings{margin-block:16px!important}

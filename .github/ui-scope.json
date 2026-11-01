@@ -1,5 +1,5 @@
 {
-  "request": "Chỉ Tài khoản > Cài đặt: tăng khoảng đệm cụm sao lưu, thống nhất bề rộng các thẻ và bỏ khung ngoài dư trên PC/mobile.",
+  "request": "Tài khoản > Hồ sơ/Cài đặt trên PC/mobile: tách khối thông báo cập nhật khỏi khối phía trên 16px; căn cụm sao lưu và thống nhất khung Cài đặt. Rà các route khác, chỉ sửa khi có lỗi khoảng cách tương tự được xác nhận.",
   "excludedRoutes": [
     "account"
   ]
