@@ -153,4 +153,3 @@
  loadHistory();level.value=String(studyGoal());caption();sourceList();
  window.HSKRealReading={lastLesson:null,enter,leaveLesson(){cancel();lesson=null;},openFromLesson(context){cancel();lesson=context||this.lastLesson;level.value=String(lesson?.hsk||studyGoal());window.HSKStudio?.navigate('real-reading')},get story(){return story},get history(){return history},cancel};
 })();
-

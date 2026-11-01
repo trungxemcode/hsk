@@ -156,6 +156,7 @@
     "src/modules/reading/real-reading-variety-core.js",
     "src/modules/reading/chinese-story-catalog.js",
     "src/modules/reading/real-reading.js",
+    "src/modules/reading/original-reading.js",
     "real-reading.css",
     "src/utils/text.js",
     "src/utils/format.js",
@@ -250,6 +251,7 @@
     "home-overview.js": "src/modules/shell/home-overview.js",
     "mobile-layout.js": "src/modules/shell/mobile-layout.js",
     "mobile-dock.js": "src/modules/shell/mobile-dock.js",
-    "mobile-ux.js": "src/modules/shell/mobile-ux.js"
+    "mobile-ux.js": "src/modules/shell/mobile-ux.js",
+    "original-reading.js": "src/modules/reading/original-reading.js"
   }
 }

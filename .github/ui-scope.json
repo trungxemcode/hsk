@@ -1,6 +1,6 @@
 {
-  "request": "Tài khoản > Cài đặt: khôi phục khung bao gốc bị bỏ nhầm, tạo khoảng đệm thật 16px phía trên hai nút sao lưu; PC/mobile. Các trang khác không đổi.",
+  "request": "Đọc thực tế: giữ nguyên chế độ bài gốc online & lịch sử cloud từ main, bổ sung thư viện 6 truyện biên soạn HSK 1–6 trong chế độ AI tùy chọn, có pinyin/nghĩa/câu hỏi. Không đổi giao diện các trang ngoài real-reading.",
   "excludedRoutes": [
-    "account"
+    "real-reading"
   ]
 }
