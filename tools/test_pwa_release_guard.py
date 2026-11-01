@@ -31,8 +31,8 @@ class PwaReleaseGuardTests(unittest.TestCase):
     def test_actual_checkout_is_consistent(self):
         data = guard.ensure_release_integrity()
         self.assertGreaterEqual(len(data['assets']), 150)
-        self.assertRegex(data['release'], r'^3\.\d+\.\d+$')
-        self.assertEqual(data['version'], 'hsk-offline-' + data['release'].replace('.', '-'))
+        self.assertRegex(data['release'], r'^\d+\.\d+\.\d+$')
+        self.assertRegex(data['version'], '^hsk-offline-' + data['release'].replace('.', '-') + r'(?:-r[1-9]\d*)?$')
 
     def test_assets_classify_ui_and_backend(self):
         names = set(guard.ensure_release_integrity()['assets'])
@@ -95,6 +95,17 @@ class PwaReleaseGuardTests(unittest.TestCase):
         with patch.object(guard, '_run', side_effect=[json.dumps(previous), 'index.html']):
             with self.assertRaisesRegex(ValueError, 'newer semantic release'):
                 guard.compare_with_base('old-head', current)
+
+    def test_small_ui_update_advances_internal_revision(self):
+        current = guard.ensure_release_integrity()
+        prefix = 'hsk-offline-' + current['release'].replace('.', '-')
+        previous = {**current, 'version': prefix + '-r1'}
+        updated = {**current, 'version': prefix + '-r2'}
+        with patch.object(guard, '_run', side_effect=[json.dumps(previous), 'index.html']):
+            self.assertEqual(guard.compare_with_base('old-head', updated), ['index.html'])
+        with patch.object(guard, '_run', side_effect=[json.dumps(updated), 'index.html']):
+            with self.assertRaisesRegex(ValueError, 'new release or newer internal'):
+                guard.compare_with_base('old-head', previous)
 
     def test_hash_mismatch_caught_with_single_changed_asset(self):
         current = guard.ensure_release_integrity()
