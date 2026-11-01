@@ -14,3 +14,5 @@ body.studio-enabled .result-card.dictionary-row{display:block;padding:0;min-heig
 
 .word-recovery>p,.word-recovery>div{margin:16px}
 .word-recovery>button{margin:0 16px 16px}
+
+body.studio-enabled .word-recovery[open]>summary{border-bottom-left-radius:0!important;border-bottom-right-radius:0!important}
