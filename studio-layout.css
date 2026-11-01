@@ -582,3 +582,9 @@ body.studio-enabled:not(.mobile-ux) #accountPanel#accountPanel#accountPanel#acco
 body.studio-enabled:not(.mobile-ux) #accountPanel#accountPanel#accountPanel#accountPanel > :is(.account-detail,.account-version) + :is(.account-detail,.account-version){margin-block-start:16px!important}
 body.mobile-ux #accountPanel#accountPanel#accountPanel#accountPanel > :is(article.account-detail,.account-version){margin-block:16px 0!important;translate:none!important}
 body.mobile-ux #accountPanel#accountPanel#accountPanel#accountPanel > :is(article.account-detail,.account-version) + :is(article.account-detail,.account-version){margin-block-start:16px!important}
+.account-sections{display:flex;gap:8px;margin:16px 0 20px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.account-section-tab{min-height:42px;padding:9px 16px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);color:var(--sub);font-weight:750;cursor:pointer}
+.account-section-tab.is-active{background:var(--accent);border-color:var(--accent);color:var(--palette-white)}
+.account-section-view{display:block}.account-view-title{margin:0 0 16px;color:var(--ink)}
+.hsk-exam-history{display:grid;gap:8px}.hsk-exam-history-item{display:grid;gap:3px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface)}.hsk-exam-history-item strong{color:var(--ink)}.hsk-exam-history-item span{color:var(--accent-dark);font-weight:750}.hsk-exam-history-item small{color:var(--sub)}
+@media(max-width:540px){.account-sections{position:sticky;top:0;z-index:2;background:var(--paper)}.account-section-tab{flex:1}}
