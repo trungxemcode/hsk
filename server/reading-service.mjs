@@ -1,6 +1,10 @@
 import { createAiRoleFetch } from './ai-backup.mjs';
 // Real-world reading adaptation. Source URLs are allowlisted and checked on server; no arbitrary URL fetches.
 export const READING_SOURCES=Object.freeze([
+ {id:'mandarinbean',hskMin:1,hskMax:6,topic:'Nhiều chủ đề',site:'Mandarin Bean',url:'https://mandarinbean.com/'},
+ {id:'hskreading',hskMin:1,hskMax:6,topic:'Bài đọc theo HSK',site:'HSK Reading',url:'https://hskreading.com/'},
+ {id:'littlefox',hskMin:1,hskMax:4,topic:'Truyện thiếu nhi',site:'Little Fox Chinese',url:'https://chinese.littlefox.com/'},
+ {id:'yes-chinese',hskMin:1,hskMax:6,topic:'Bài đọc phân cấp',site:'Yes Chinese',url:'https://yes-chinese.com/reading/'},
  {id:'what-study',hskMin:1,hskMax:2,topic:'Trường học',site:'Mandarin Bean',url:'https://mandarinbean.com/what-are-you-studying/'},
  {id:'life-change',hskMin:2,hskMax:4,topic:'Đời sống',site:'Mandarin Bean',url:'https://mandarinbean.com/change-of-life/'},
  {id:'ask-leave',hskMin:2,hskMax:4,topic:'Công việc',site:'Mandarin Bean',url:'https://mandarinbean.com/ask-for-leave/'},
@@ -80,7 +84,7 @@ export async function buildReadingStory(body,{fetchFn,env,signal,model,random=Ma
  const source=chooseReadingSource(body,random);
  if(!source)return {status:404,data:{error:'Chưa có nguồn phù hợp cấp HSK này.'}};
  const canonical=new URL(source.url);
- if(canonical.protocol!=='https:'||!['mandarinbean.com'].includes(canonical.hostname)||canonical.port||canonical.username||canonical.password)return {status:400,data:{error:'Nguồn không được phép.'}};
+ if(canonical.protocol!=='https:'||!['mandarinbean.com','hskreading.com','chinese.littlefox.com','yes-chinese.com'].includes(canonical.hostname)||canonical.port||canonical.username||canonical.password)return {status:400,data:{error:'Nguồn không được phép.'}};
  let text='';const sourceStart=Date.now();
  try{
   const saved=sourceCache?.get(source.id);

@@ -14,7 +14,7 @@
   ['exam','Bài tập HSK','Luyện Nghe, Đọc, Viết theo dạng.','clipboard'],
   ['placement','Đánh giá trình độ','Kiểm tra và gợi ý lộ trình.','chart'],
   ['study4','Luyện thi HSK','Đề thi và bài nghe từ Study4.','exam'],
-  ['real-reading','Đọc thực tế','Đọc kịch bản mới từ bài báo và truyện.','cards'],
+  ['real-reading','Đọc truyện tiếng Trung','Truyện ngắn phân cấp HSK 1–6 có pinyin và câu hỏi.','cards'],
   ['music','Nghe nhạc học HSK','Nghe từng câu, đoán ý và học từ mới.','headphones']
  ];
  const paths={
@@ -167,3 +167,4 @@
  for(const container of containers)new MutationObserver(alignExistingIcons).observe(container,{childList:true});
  window.HSKPracticeSelection={start:begin,next,stop,onNavigate,get selected(){return [...selected]},get active(){return session?.routes||[]}};
 })();
+

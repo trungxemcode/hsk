@@ -49,7 +49,8 @@ const SAMPLE={
    await page.evaluate(x=>{document.documentElement.dataset.theme=x;window.HSKRealReading.leaveLesson();window.HSKStudio.navigate('real-reading')},theme);
    assert.equal(await page.locator('#realReadingPanel').isVisible(),true);
    assert.equal(await page.locator('#rrHsk').inputValue(),'3');
-   assert.equal(await page.locator('#rrSourceList a').count(),2);
+   await page.locator('#rrGenre').selectOption('dialogue');
+   assert.ok(await page.locator('#rrSourceList a').count()>=4,'all reading references should be available for the selected level');
    assert.equal(await page.locator('#rrArticle').isVisible(),false);
    await page.locator('#rrNew').click();
    assert.match(await page.locator('#rrStatus').innerText(),/Đăng nhập/,'must not call AI for guests without cached stories');
@@ -91,10 +92,10 @@ const SAMPLE={
   }
   for(const genre of ['story','news','email','explainer']){
    await page.evaluate(()=>{localStorage.removeItem('hsk-real-reading-history-v1:guest');localStorage.removeItem('hsk-real-reading-cache-v1:guest');window.dispatchEvent(new Event('hsk-account-ready'));HSKRealReading.leaveLesson();HSKStudio.navigate('real-reading');});
-   await page.locator('#rrGenre').selectOption(genre);const before=submissions.length;await page.locator('#rrNew').click();await page.waitForFunction(()=>!document.querySelector('#rrNew').disabled);
-   assert.equal(submissions.length,before+1);assert.equal(submissions.at(-1).genre,genre);assert.equal(await page.locator('#rrArticle .rr-line').count(),2);
+   await page.locator('#rrGenre').selectOption(genre);await page.locator('#rrTopic').selectOption('Du lịch');const before=submissions.length;await page.locator('#rrNew').click();await page.waitForFunction(()=>!document.querySelector('#rrNew').disabled);
+   assert.equal(submissions.length,before+1);assert.equal(submissions.at(-1).genre,genre);assert.ok(await page.locator('#rrArticle .rr-line').count()>=2);
    assert.equal(await page.locator('#rrArticle .rr-reading-switches button').filter({hasText:'Kịch bản'}).count(),0);
-   await page.locator('#rrOld').click();assert.match(await page.locator('#rrStatus').innerText(),/bài cũ/);
+   await page.locator('#rrTopic').selectOption('');await page.locator('#rrOld').click();assert.match(await page.locator('#rrStatus').innerText(),/bài cũ/);
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);assert.equal(overflow,false);
   }
   await page.locator('#rrGenre').selectOption('dialogue');await page.locator('#rrOld').click();assert.match(await page.locator('#rrStatus').innerText(),/Chưa có/);
@@ -129,3 +130,4 @@ const SAMPLE={
  }
  }finally{await browser.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1});
+

@@ -37,6 +37,7 @@
 .rr-sources{margin-top:18px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius-btn);color:var(--ink);background:var(--surface)}
 .rr-sources summary{font-size:14px;font-weight:700;cursor:pointer}
 .rr-source-item{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid var(--line);padding:12px 0;font-size:13px;color:var(--sub)}
+.rr-source-note{font-size:12px;line-height:1.55;color:var(--sub);margin:10px 0}
 .rr-panel button:focus-visible,.rr-panel select:focus-visible,.rr-panel summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 @media(max-width:720px){
  .rr-panel{width:100%;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}

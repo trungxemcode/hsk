@@ -6,16 +6,20 @@
  const panel=document.createElement('section');
  panel.id='realReadingPanel';panel.className='panel rr-panel';panel.dataset.studioHubPanel='real-reading';panel.hidden=true;
  const sources=[
+  {id:'mandarinbean',source:{id:'mandarinbean',url:'https://mandarinbean.com/'},hskMin:1,hskMax:6,site:'Mandarin Bean',topic:'Nhiều chủ đề'},
+  {id:'hskreading',source:{id:'hskreading',url:'https://hskreading.com/'},hskMin:1,hskMax:6,site:'HSK Reading',topic:'Bài đọc theo HSK'},
+  {id:'littlefox',source:{id:'littlefox',url:'https://chinese.littlefox.com/'},hskMin:1,hskMax:4,site:'Little Fox Chinese',topic:'Truyện thiếu nhi'},
+  {id:'yes-chinese',source:{id:'yes-chinese',url:'https://yes-chinese.com/reading/'},hskMin:1,hskMax:6,site:'Yes Chinese',topic:'Bài đọc phân cấp'},
   {id:'what-study',source:{id:'what-study',url:'https://mandarinbean.com/what-are-you-studying/'},hskMin:1,hskMax:2,site:'Mandarin Bean',topic:'Trường học'},
   {id:'life-change',source:{id:'life-change',url:'https://mandarinbean.com/change-of-life/'},hskMin:2,hskMax:4,site:'Mandarin Bean',topic:'Đời sống'},
   {id:'ask-leave',source:{id:'ask-leave',url:'https://mandarinbean.com/ask-for-leave/'},hskMin:2,hskMax:4,site:'Mandarin Bean',topic:'Công việc'},
   {id:'internet-phone',source:{id:'internet-phone',url:'https://mandarinbean.com/internet-and-cellphone/'},hskMin:4,hskMax:6,site:'Mandarin Bean',topic:'Gia đình'},
   {id:'tui-qiao',source:{id:'tui-qiao',url:'https://mandarinbean.com/tui-qiao/'},hskMin:5,hskMax:6,site:'Mandarin Bean',topic:'Văn hóa'}
  ];
- panel.innerHTML='<div class="rr-heading"><button class="rr-back" id="rrBack" type="button">← Quay lại</button><span class="rr-badge" id="rrLevel">HSK 3</span></div><h2>Đọc thực tế</h2><p class="rr-subtitle" id="rrContext">Luyện đọc những tình huống khác nhau từ bài báo và truyện có nguồn rõ ràng.</p><div class="rr-settings"><label>Cấp đọc <select id="rrHsk"></select></label><label>Chủ đề <select id="rrTopic"><option value="">Tất cả</option><option>Ăn uống</option><option>Đời sống</option><option>Công việc</option><option>Giao thông</option><option>Du lịch</option><option>Trường học</option><option>Gia đình</option><option>Văn hóa</option></select></label></div><div class="rr-ops"><button id="rrNew" type="button" class="rr-primary">AI chọn bài mới ↻</button><button id="rrOld" type="button" class="rr-secondary">Đọc lại bài gần nhất</button></div><p class="rr-stats" id="rrStats" aria-live="polite"></p><p class="rr-status" id="rrStatus" role="status" aria-live="polite"></p><div class="rr-article" id="rrArticle" hidden></div><details class="rr-sources" id="rrSources"><summary>Nguồn đọc có thể chọn</summary><div id="rrSourceList"></div></details>';
+ panel.innerHTML='<div class="rr-heading"><button class="rr-back" id="rrBack" type="button">← Quay lại</button><span class="rr-badge" id="rrLevel">HSK 3</span></div><h2>Đọc truyện tiếng Trung</h2><p class="rr-subtitle" id="rrContext">Truyện ngắn nguyên bản, phân cấp HSK 1–6, có pinyin, nghĩa và câu hỏi hiểu bài.</p><div class="rr-settings"><label>Cấp đọc <select id="rrHsk"></select></label><label>Chủ đề <select id="rrTopic"><option value="">Tất cả</option><option>Ăn uống</option><option>Đời sống</option><option>Công việc</option><option>Giao thông</option><option>Du lịch</option><option>Trường học</option><option>Gia đình</option><option>Văn hóa</option></select></label></div><div class="rr-ops"><button id="rrNew" type="button" class="rr-primary">Đọc truyện mới ↻</button><button id="rrOld" type="button" class="rr-secondary">Đọc lại bài gần nhất</button></div><p class="rr-stats" id="rrStats" aria-live="polite"></p><p class="rr-status" id="rrStatus" role="status" aria-live="polite"></p><div class="rr-article" id="rrArticle" hidden></div><details class="rr-sources" id="rrSources"><summary>Nguồn tham khảo</summary><div id="rrSourceList"></div></details>';
  document.querySelector('main.workspace').append(panel);
  const level=$('rrHsk'),topic=$('rrTopic'),status=$('rrStatus'),article=$('rrArticle'),newButton=$('rrNew'),sourcesList=$('rrSourceList');
- const genre=document.createElement('select');genre.id='rrGenre';const genreLabel=document.createElement('label');genreLabel.className='rr-genre';genreLabel.append('Loại bài đọc',genre);for(const [id,label]of Object.entries(C.GENRES))genre.add(new Option(label,id));panel.querySelector('.rr-settings').append(genreLabel);
+ const genre=document.createElement('select');genre.id='rrGenre';const genreLabel=document.createElement('label');genreLabel.className='rr-genre';genreLabel.append('Loại bài đọc',genre);for(const [id,label]of Object.entries(C.GENRES))genre.add(new Option(label,id));genre.value='story';panel.querySelector('.rr-settings').append(genreLabel);
  genre.addEventListener('change',()=>{cancel();story=null;article.hidden=true;caption();});
  const cancelButton=document.createElement('button');cancelButton.type='button';cancelButton.id='rrCancel';cancelButton.textContent='Hủy tạo bài';cancelButton.hidden=true;cancelButton.onclick=()=>{cancel();setState('Đã hủy tạo bài.');};document.querySelector('#realReadingPanel .rr-ops').append(cancelButton);
  function untilAbort(promise,signal){return new Promise((resolve,reject)=>{const abort=()=>reject(new DOMException('Đã hủy','AbortError'));if(signal.aborted){abort();return;}signal.addEventListener('abort',abort,{once:true});Promise.resolve(promise).then(value=>{signal.removeEventListener('abort',abort);resolve(value);},error=>{signal.removeEventListener('abort',abort);reject(error);});});}
@@ -26,6 +30,7 @@
  const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(scoped(key))||'null')||fallback;}catch{return fallback;}};
  const persist=(key,data)=>{try{localStorage.setItem(scoped(key),JSON.stringify(data));}catch{status.textContent='Bộ nhớ thiết bị đầy; lịch sử bài đọc có thể chưa được lưu.';}};
  const cacheKey='hsk-real-reading-cache-v1',historyKey=C.HISTORY_KEY;
+ const catalog=Array.isArray(window.HSKChineseStoryCatalog)?window.HSKChineseStoryCatalog:[];
  function loadHistory(){history=read(historyKey,{version:1,entries:[]});cached=read(cacheKey,[]);openedOwner=owner();}
  function scope(){return {hsk:Number(level.value),genre:genre.value,lessonId:lesson?.id||null,topics:topic.value?[topic.value]:C.TOPICS};}
  function studyGoal(){const id=owner();let value=window.HSKPlanner?.plan?.target;try{if(value==null)value=JSON.parse(localStorage.getItem('hsk-studio-target-v1:'+id)||'null');}catch{}const n=Number(value);return n>=1&&n<=6?n:3;}
@@ -102,7 +107,7 @@
  async function generate(){
   if(request)return;
   if(owner()!==openedOwner)loadHistory();
-  const current=scope(),existing=C.nextCached(topic.value?cached.filter(s=>s.topic===topic.value):cached,history,current);
+  const current=scope(),available=[...catalog,...cached],existing=C.nextCached(topic.value?available.filter(s=>s.topic===topic.value):available,history,current);
   if(existing.kind==='cached'){openStory(existing.item);setState('Bài mới từ thư viện đã lưu, không cần gọi AI.');return;}
   const user=window.HSKAccountDashboard?.user;
   if(!user){setState('Đăng nhập tài khoản HSK để AI tạo bài mới. Bạn vẫn có thể xem các nguồn bài gốc ở dưới.');return;}
@@ -148,3 +153,4 @@
  loadHistory();level.value=String(studyGoal());caption();sourceList();
  window.HSKRealReading={lastLesson:null,enter,leaveLesson(){cancel();lesson=null;},openFromLesson(context){cancel();lesson=context||this.lastLesson;level.value=String(lesson?.hsk||studyGoal());window.HSKStudio?.navigate('real-reading')},get story(){return story},get history(){return history},cancel};
 })();
+
