@@ -653,10 +653,10 @@ body.studio-enabled #accountSettingsView .account-version .offline-bar :is(span,
 }
 
 /* Five navigation disclosures; sidebar dimensions and page content stay unchanged. */
-.side-nav .nav-group{border:0;background:transparent;margin:0;padding:0}
+.side-nav .nav-group{border:0;background:var(--palette-clear);margin:0;padding:0}
 body.studio-enabled .side-nav .nav-group>summary{display:flex;align-items:center;gap:12px;min-height:46px;box-sizing:border-box;list-style:none;cursor:pointer;padding:10px 14px!important;border-radius:var(--radius-btn);font-size:14px;font-weight:650;color:var(--ink)}
 .side-nav .nav-group>summary::-webkit-details-marker{display:none}
-.side-nav .nav-group>summary>i{display:flex;flex:none}.side-nav .nav-group>summary svg{width:19px;height:19px}
+.side-nav .nav-group>summary>i{display:flex;flex:none;align-items:center;line-height:0}.side-nav .nav-group>summary svg{width:19px;height:19px}
 .side-nav .nav-chevron{margin-left:auto;transition:transform .15s}.side-nav .nav-group[open] .nav-chevron{transform:rotate(180deg)}
 .side-nav .nav-group-items{display:flex;flex-direction:column;gap:4px;padding:4px 0 8px 12px}
 .side-nav .nav-group:not([open])>.nav-group-items{display:none!important}
