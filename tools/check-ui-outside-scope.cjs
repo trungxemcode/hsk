@@ -70,6 +70,12 @@ function serve(root){
    if(config.sharedHeaderOnly){
     await page.addStyleTag({content:'#studioHeader{visibility:hidden!important;height:80px!important;min-height:80px!important;flex:0 0 80px!important;box-sizing:border-box!important;padding:0!important;margin:0!important}'});
    }
+   // An explicitly authorized shared quick-nav edit changes its metrics on every
+   // route. Normalize ONLY these exact quick-link properties on both snapshots,
+   // preserving all other sidebar and page geometry/paint comparisons.
+   if(config.sharedQuickNavOnly){
+    await page.addStyleTag({content:'@media(min-width:721px){body.studio-enabled .side-quick button{min-height:38px!important;gap:11px!important;font-size:13px!important;font-weight:500!important}body.studio-enabled .side-quick button svg{width:16px!important;height:16px!important}}'});
+   }
    // PWA releases necessarily update the version label on Account, even when
    // no Account UI code changed. Normalize only its *text* in both captures.
    // Keep the containing card, its CSS, all other text, and all layout geometry

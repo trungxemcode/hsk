@@ -10,6 +10,11 @@ function scope(config) {
   if(config.sharedHeaderOnly) assert.equal(config.excludedRoutes.length,0,'A shared header edit must preserve visual checks on every route');
   assert.ok(config.sharedSidebarOnly===undefined||typeof config.sharedSidebarOnly==='boolean');
   if(config.sharedSidebarOnly)assert.equal(config.excludedRoutes.length,0,'Sidebar edit must preserve every route');
+  assert.ok(config.sharedQuickNavOnly === undefined || typeof config.sharedQuickNavOnly === 'boolean','Quick nav scope must be boolean');
+  if(config.sharedQuickNavOnly) {
+    assert.equal(config.excludedRoutes.length,0,'A shared quick-nav edit must preserve visual checks on every route');
+    assert.ok(!config.sharedHeaderOnly,'Only one shared area may be normalized in a single PR');
+  }
   return ROUTES.filter(route=>!config.excludedRoutes.includes(route));
 }
 function pixels(a,b) {

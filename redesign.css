@@ -146,15 +146,15 @@ body.studio-enabled .side-divider{
 }
 body.studio-enabled .side-quick{ gap:1px; display:flex; flex-direction:column; }
 body.studio-enabled .side-quick button{
-  min-height:38px;
+  min-height:40px;
   padding:0 12px;
   border-radius:var(--radius-rd-003);
-  gap:11px;
-  font-size:13px;
-  font-weight:500;
+  gap:12px;
+  font-size:13.5px;
+  font-weight:550;
   color:var(--rd-muted);
 }
-body.studio-enabled .side-quick button svg{ width:16px;height:16px;color:var(--rd-faint); }
+body.studio-enabled .side-quick button svg{ width:18px;height:18px;color:var(--rd-faint); }
 body.studio-enabled .side-quick button:hover{ background:var(--rd-static-color-027); color:var(--rd-ink); }
 html[data-theme="dark"] body.studio-enabled .side-quick button:hover{ background:var(--rd-static-color-015); }
 
