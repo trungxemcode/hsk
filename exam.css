@@ -11,7 +11,8 @@ body.studio-enabled .exam-filters label{font-size:13px;color:var(--sub)}
 body.studio-enabled .exam-catalogue{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin:24px 0}
 body.studio-enabled .exam-skill-group{min-width:0}
 body.studio-enabled .exam-type-card{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;text-align:left;padding:18px;margin-bottom:12px;background:var(--surface);border:1px solid var(--line);color:var(--ink)}
-body.studio-enabled .exam-type-card.has-attempts{border:3px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box,conic-gradient(from -90deg,var(--legacy-hex-14864a) var(--exam-correct-ratio),var(--legacy-hex-d83b40) 0) border-box}
+body.studio-enabled .exam-type-card.has-attempts{border:3px solid var(--palette-clear);background:linear-gradient(var(--surface),var(--surface)) padding-box,conic-gradient(from -90deg,var(--legacy-hex-14864a) var(--exam-correct-ratio),var(--legacy-hex-d83b40) 0) border-box}
+html[data-theme=dark] body.studio-enabled .exam-type-card.has-attempts{background:linear-gradient(var(--palette-dark-surface),var(--palette-dark-surface)) padding-box,conic-gradient(from -90deg,var(--legacy-hex-14864a) var(--exam-correct-ratio),var(--legacy-hex-d83b40) 0) border-box!important;border-color:var(--palette-clear)!important}
 body.studio-enabled .exam-type-card.has-attempts:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:2px}
 body.studio-enabled .exam-type-card>span:first-child{min-width:0;flex:1}
 body.studio-enabled .exam-type-card strong{display:block;font-size:16px;line-height:1.45}
