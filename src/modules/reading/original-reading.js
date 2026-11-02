@@ -1,4 +1,4 @@
-/* Source-only reading. Cloud-only URL metadata, online-only reading; no device persistence or AI requests. */
+/* Source-only reading. Cloud-only URL metadata, online-only reading; no device persistence or automatic AI requests. */
 (()=>{
  'use strict';
  const panel=document.getElementById('realReadingPanel');if(!panel)return;
@@ -7,7 +7,22 @@
  const label=document.createElement('label');label.append('Nội dung',mode);settings.prepend(label);
  const host=document.createElement('section');host.id='rrOriginalReading';host.setAttribute('aria-label','Bài đọc nguyên văn');$('rrArticle').before(host);
  const randomButton=document.createElement('button');randomButton.id='rrRandom';randomButton.type='button';randomButton.className='rr-secondary';randomButton.textContent='Đọc ngẫu nhiên';newButton.after(randomButton);
- let controller=null,revision=0,configPromise=null,items=[],currentURL='',pinPromise=null;
+ const lookup=document.createElement('button');lookup.id='rrSelectionAsk';lookup.type='button';lookup.className='rr-secondary';lookup.textContent='Tra cứu AI';lookup.hidden=true;document.body.append(lookup);
+ let controller=null,revision=0,configPromise=null,items=[],currentURL='',pinPromise=null,openedArticle=null,selected=null;
+ function clearLookup(){selected=null;lookup.hidden=true;window.dispatchEvent(new Event('hsk-reading-context-end'));}
+ function selection(){
+  if(panel.hidden||!active()||!navigator.onLine||!openedArticle)return null;
+  const value=window.getSelection();if(!value?.rangeCount||value.isCollapsed)return null;
+  const paragraphOf=node=>(node?.nodeType===1?node:node?.parentElement)?.closest('.rr-hanzi'),anchor=paragraphOf(value.anchorNode),focus=paragraphOf(value.focusNode);if(!anchor||!focus||!host.contains(anchor)||!host.contains(focus))return null;
+  const fragment=value.getRangeAt(0).cloneContents();fragment.querySelectorAll('rt,button').forEach(n=>n.remove());const text=fragment.textContent.replace(/\s+/g,' ').trim().slice(0,160);if(!/[\u3400-\u9fff]/u.test(text))return null;
+  const index=[...host.querySelectorAll('.rr-hanzi')].indexOf(anchor),paragraph=openedArticle.paragraphs[index]?.hanzi||'',at=Math.max(0,paragraph.indexOf(text));
+  return {text,url:openedArticle.url,context:paragraph.slice(Math.max(0,at-140),at+text.length+200)};
+ }
+ document.addEventListener('selectionchange',()=>{const value=selection();if(value){selected=value;lookup.hidden=false;}else if(document.activeElement!==lookup){selected=null;lookup.hidden=true;}});
+ lookup.addEventListener('pointerdown',event=>event.preventDefault());
+ lookup.addEventListener('click',()=>{const value=selection()||selected;if(!value||!openedArticle||value.url!==openedArticle.url||panel.hidden||!active()||!navigator.onLine)return;
+  window.dispatchEvent(new CustomEvent('hsk-reading-ask',{detail:{lesson:{id:'reading-'+openedArticle.url,title:openedArticle.title,vi:openedArticle.titleVi||openedArticle.title,number:'Bài đọc',hsk:Number($('rrHsk').value),words:[{han:value.text,pin:window.pinyinPro?.pinyin(value.text)||'',mean:''}],content:{selectedText:value.text,context:value.context,sourceURL:openedArticle.url}},question:('Giải thích nghĩa, pinyin và cách dùng trong ngữ cảnh bài đọc của đoạn: “'+value.text+'”.').slice(0,500)}}));window.getSelection()?.removeAllRanges();selected=null;lookup.hidden=true;
+ });
  const owner=()=>window.HSKAccountDashboard?.user?.uid||'guest';
  let cloudRequest=null,cloudConfig=null;
  async function cloudHistory(item=null){
@@ -34,7 +49,7 @@
  }
  const make=(tag,text)=>{const n=document.createElement(tag);if(text!=null)n.textContent=text;return n;};
  const active=()=>mode.value==='original';
- function stop(){revision++;controller?.abort();cloudRequest?.abort();cloudRequest=null;controller=null;newButton.disabled=false;oldButton.disabled=false;randomButton.disabled=false;panel.removeAttribute('aria-busy');$('rrCancel').hidden=true;}
+ function stop(){clearLookup();revision++;controller?.abort();cloudRequest?.abort();cloudRequest=null;controller=null;newButton.disabled=false;oldButton.disabled=false;randomButton.disabled=false;panel.removeAttribute('aria-busy');$('rrCancel').hidden=true;}
  async function endpoint(){
   configPromise||=fetch('./translation-config.json',{cache:'no-store'}).then(r=>r.json()).then(c=>{const u=new URL(c.endpoint);if(!c.enabled||u.protocol!=='https:')throw Error('Dịch vụ đọc nguồn chưa được cấu hình.');return u.href.replace(/\/translate$/,'/reading-library');}).catch(e=>{configPromise=null;throw e;});return configPromise;
  }
@@ -54,7 +69,7 @@
   return box;
  }
  function titleOf(item){return (item.titleZh||item.title)+' - '+(item.titleVi||'Chưa có bản dịch tên');}
- function showList(focus=true){window.HSKSpeech?.stop?.();host.replaceChildren(listing());if(focus){const b=[...host.querySelectorAll('button')].find(n=>n.dataset.url===currentURL)||host.querySelector('button');b?.focus({preventScroll:true});host.scrollIntoView({block:'start',behavior:'auto'});} $('rrStatus').textContent=items.length?'Chọn một bài để đọc.':'Hãy tải danh sách hoặc chọn Đọc ngẫu nhiên.';}
+ function showList(focus=true){openedArticle=null;clearLookup();window.HSKSpeech?.stop?.();host.replaceChildren(listing());if(focus){const b=[...host.querySelectorAll('button')].find(n=>n.dataset.url===currentURL)||host.querySelector('button');b?.focus({preventScroll:true});host.scrollIntoView({block:'start',behavior:'auto'});} $('rrStatus').textContent=items.length?'Chọn một bài để đọc.':'Hãy tải danh sách hoặc chọn Đọc ngẫu nhiên.';}
  function pinyinReady(){if(window.pinyinPro)return Promise.resolve();if(!pinPromise)pinPromise=new Promise((resolve,reject)=>{const script=make('script');script.src='./vendor/pinyin-pro/pinyin-pro.js';script.onload=()=>{script.remove();resolve();};script.onerror=()=>{script.remove();pinPromise=null;reject(Error('Chưa tải được pinyin.'));};document.head.append(script);});return pinPromise;}
  function annotate(paragraph){
   const han=make('p');han.className='rr-hanzi';han.lang='zh';
@@ -75,7 +90,7 @@
   const a=data.article,stamp=revision;try{await pinyinReady();}catch{}if(stamp!==revision||!active()||panel.hidden)return;
   if(!a||a.url!==item.url||a.status!=='original'||!Array.isArray(a.paragraphs)||!a.paragraphs.length){$('rrStatus').textContent='Nguồn chưa trả nguyên văn hợp lệ.';return;}
   item={...item,titleZh:a.titleZh||a.title,titleVi:a.titleVi||item.titleVi};
-  currentURL=a.url;window.HSKSpeech?.stop?.();const back=make('button','← Danh sách bài đọc');back.id='rrOriginalBack';back.type='button';back.className='rr-back';back.onclick=()=>{stop();if(items.length)showList();else load();};const heading=make('h3',titleOf(item));heading.tabIndex=-1;host.replaceChildren(back,heading);
+  openedArticle=a;currentURL=a.url;window.HSKSpeech?.stop?.();const back=make('button','← Danh sách bài đọc');back.id='rrOriginalBack';back.type='button';back.className='rr-back';back.onclick=()=>{stop();if(items.length)showList();else load();};const heading=make('h3',titleOf(item));heading.tabIndex=-1;host.replaceChildren(back,heading);
   const credit=make('p',a.site+' · Nguyên văn từ nguồn'),link=make('a','Mở bài gốc ↗');link.href=a.url;link.target='_blank';link.rel='noopener noreferrer';credit.append(' · ',link);host.append(credit);
   const hasPin=!!window.pinyinPro,pin=make('button','Pinyin');pin.id='rrOriginalPinyin';pin.title='Pinyin tham khảo, ưu tiên cách đọc từ nguồn.';pin.type='button';pin.className='rr-secondary';pin.setAttribute('aria-pressed','false');pin.hidden=!hasPin;
   pin.onclick=()=>{const show=pin.getAttribute('aria-pressed')!=='true';pin.setAttribute('aria-pressed',String(show));host.querySelectorAll('.rr-original-pin').forEach(n=>n.hidden=!show);};host.append(pin);
@@ -107,15 +122,15 @@
  mode.addEventListener('change',sync);
  newButton.addEventListener('click',e=>{if(active()){e.preventDefault();e.stopImmediatePropagation();load();}},true);
  oldButton.addEventListener('click',e=>{if(!active())return;e.preventDefault();e.stopImmediatePropagation();if(!navigator.onLine){offline();return;}const stamp=revision;cloudHistory().then(item=>{if(stamp!==revision||!active())return;if(item)open(item);else $('rrStatus').textContent='Chưa có URL bài gốc trên cloud ở cấp này.';}).catch(error=>{if(stamp===revision&&active())$('rrStatus').textContent=error.message;});},true);
- $('rrHsk').addEventListener('change',()=>{if(active()){stop();items=[];host.replaceChildren();sync();}});
+ $('rrHsk').addEventListener('change',()=>{if(active()){stop();items=[];openedArticle=null;host.replaceChildren();sync();}});
  $('rrCancel').addEventListener('click',()=>{if(active())stop();},true);
  $('rrBack').addEventListener('click',stop,true);
  new MutationObserver(()=>{if(panel.hidden)stop();else if(active())sync();}).observe(panel,{attributes:true,attributeFilter:['hidden']});
- window.addEventListener('hsk-account-ready',()=>{stop();items=[];host.replaceChildren();if(active())sync();});
- function offline(){if(!active())return;stop();window.HSKSpeech?.stop?.();items=[];host.replaceChildren();newButton.disabled=true;oldButton.disabled=true;randomButton.disabled=true;$('rrStatus').textContent='Chế độ bài gốc chỉ hoạt động khi có mạng.';}
+ window.addEventListener('hsk-account-ready',()=>{stop();items=[];openedArticle=null;host.replaceChildren();if(active())sync();});
+ function offline(){if(!active())return;stop();window.HSKSpeech?.stop?.();items=[];openedArticle=null;host.replaceChildren();newButton.disabled=true;oldButton.disabled=true;randomButton.disabled=true;$('rrStatus').textContent='Chế độ bài gốc chỉ hoạt động khi có mạng.';}
  window.addEventListener('offline',offline);
  window.addEventListener('online',()=>{if(active()){stop();$('rrStatus').textContent='Đã có mạng. Hãy tải lại danh sách bài gốc.';}});
- window.addEventListener('pagehide',()=>{stop();host.replaceChildren();items=[];});
+ window.addEventListener('pagehide',()=>{stop();openedArticle=null;host.replaceChildren();items=[];});
  sync();if(!navigator.onLine)offline();
 })();
 
