@@ -1,5 +1,5 @@
 {
-  "request": "Chỉ điện thoại: bỏ nhóm Bộ lọc HSK và Thông tin khỏi drawer; nút HSK trên header mở trực tiếp bộ lọc; chuyển Giới thiệu ứng dụng vào nhóm Tài khoản. Giữ nguyên trang và giao diện PC.",
+  "request": "Chỉ điện thoại: màn Vẽ chữ giữ header/dock chung; gộp đường vào dịch văn bản và ảnh trong menu Công cụ, một thao tác chính Đọc và dịch ảnh, OCR chỉ lấy chữ vẫn ở tùy chọn. PC và các trang khác không đổi.",
   "excludedRoutes": [],
   "sharedMobileDrawerOnly": true
 }

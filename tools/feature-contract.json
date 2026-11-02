@@ -2403,6 +2403,22 @@
           "value": "function syncMobileMenu()"
         }
       ]
+    },
+    {
+      "id": "mobile-search-tools-unified",
+      "name": "Vẽ chữ giữ thanh điều hướng; ảnh có một đường vào và giữ OCR tùy chọn",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/shell/mobile-ux.js",
+          "value": "imageOptions.id='mobileOCROptions'"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/shell/mobile-ux.js",
+          "value": "mobile?'Dịch văn bản / ảnh':originalTranslateLabel"
+        }
+      ]
     }
   ]
 }

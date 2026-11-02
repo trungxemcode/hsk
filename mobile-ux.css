@@ -315,3 +315,10 @@ body.studio-enabled #aboutPanel .mobile-home-stats{display:block;margin-top:16px
 #mobileHSKFilter .filter-btn:not(.active) .studio-filter-label{color:var(--ink)}
 #mobileHSKFilter .filter-btn:not(.active) .studio-filter-count{color:var(--sub)}
 #mobileHSKFilter .filter-btn.active :is(.studio-filter-label,.studio-filter-count){color:inherit}
+/* One phone entry for text/image translation; OCR-only remains an option inside. */
+@media(max-width:720px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
+ html body:not(#_rd).mobile-ux #drawer .drawer-route-nav button[data-nav-action=image]{display:none!important}
+ #mobileOCROptions{margin:12px 0}
+ #mobileOCROptions > summary{min-height:44px;display:flex;align-items:center;cursor:pointer}
+ #mobileOCROptions #ocrRead{width:100%;min-height:44px}
+}

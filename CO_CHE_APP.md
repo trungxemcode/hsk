@@ -40,6 +40,8 @@ flowchart TD
 | `app.js` | Trạng thái học, thẻ, tìm kiếm, chấm và SRS hiện hữu | Không tạo nguồn tiến độ/SRS thứ hai trong lớp UI |
 | `src/modules/shell/studio.js` | Điều hướng, hub/panel, `HSKStudio`, công cụ tìm kiếm | Dùng route có sẵn qua `HSKStudio.navigate(...)`; không chỉ đổi class rồi bỏ lifecycle |
 | `src/modules/shell/mobile-ux.js` | Chuyển DOM responsive, sheet, focus học, loading | Không clone nút có handler; giữ vị trí phục hồi desktop, focus/scroll |
+
+Trên điện thoại, Vẽ chữ là màn tra cứu thường, giữ header/dock chung; chỉ phiên học/thi mới dùng focus toàn màn hình. Menu Công cụ gộp đường vào dịch văn bản/ảnh; trong màn ảnh, `ocrFast` là thao tác chính, `ocrRead` được chuyển vào `mobileOCROptions`. Giữ chính nút có handler và phục hồi vị trí, nhãn khi về desktop.
 | `src/modules/shell/home-overview.js` | Trang chủ, từ vựng/ngày, tiến độ, CTA | Chỉ trình bày tiến độ thật; không tự thưởng điểm khi xem/nghe từ |
 | `redesign.css`, `style.css`, `studio-layout.css`, `mobile-ux.css`, `ui-buttons.css` | Token, layout và lớp giao diện | Kiểm tra selector thắng thực tế; dùng token hiện có, tránh chồng override vô hạn |
 
