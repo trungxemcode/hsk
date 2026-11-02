@@ -49,7 +49,7 @@ renderIcons();
  // Build the mobile menu from PC route metadata before binding navigation events.
  const drawerBody=$('drawer').querySelector('.drawer-body'),mobileRoutes=document.createElement('nav');mobileRoutes.className='drawer-route-nav';mobileRoutes.setAttribute('aria-label','Nhóm chức năng');
  const legacy=document.createElement('div');legacy.hidden=true;legacy.className='drawer-legacy-hooks';
- for(const n of [...drawerBody.children])if(n.matches('.music-chill-nav-entry,.music-nav-entry')||n.matches('details')&&!n.querySelector('#accountBtn,#aboutBtn'))legacy.append(n);
+ for(const n of [...drawerBody.children])if(n.matches('.music-chill-nav-entry,.music-nav-entry')||n.matches('details')&&!n.matches('.drawer-about-group')&&!n.querySelector('#accountBtn,#aboutBtn'))legacy.append(n);
  const levels=legacy.querySelector('.lesson-menu-levels');
  const sourceNav=document.querySelector('.side-nav');
  for(const source of [...sourceNav.children].filter(n=>n.matches('.nav-group,[data-studio-go="home"]'))){

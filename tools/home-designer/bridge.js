@@ -53,7 +53,7 @@ window.HSKDesignerBridge={create(frame,schema,callbacks){
    }
    if(next.kind==='chat'){doc.getElementById('lessonChatButton')?.click();const panel=doc.querySelector(next.root);if(panel)remember(panel,'hidden',null);}
    if(next.kind==='word'){const term=doc.querySelector('.lesson-tap-word');if(term)term.click();else win.HSKMobileUX?.word({han:'你好',pin:'nǐ hǎo',mean:'xin chào',hsk:1},doc.querySelector('#lessonsContent h2')||doc.querySelector('#lessonsContent'));}
-   if(next.kind==='drawer'){doc.getElementById('levelPill')?.click();}
+   if(next.kind==='drawer'){doc.getElementById('menuBtn')?.click();}
    if(next.kind==='admin'){win.HSKStudio.navigate('home');doc.body.classList.add('show-admin');delete doc.body.dataset.studioHub;const panel=doc.querySelector(next.root);if(panel){remember(panel,'hidden',null);remember(panel,'style',panel.getAttribute('style')||'');panel.style.setProperty('display','block','important');}}
    await sleep(220);win.HSKSpeech?.stop();for(const media of doc.querySelectorAll('audio,video'))media.pause();
    const r=await until(()=>doc.querySelector(next.root),3000);if(!r)throw Error('Chưa mở được '+next.label+'. Hãy thử lại hoặc dùng Dùng thử để mở trạng thái này.');
