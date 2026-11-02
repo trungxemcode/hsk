@@ -1,4 +1,5 @@
 {
   "request": "Chỉ menu drawer bên trái điện thoại: dùng cùng 5 nhóm và đích tính năng như sidebar PC, giữ bộ lọc HSK, tài khoản, admin, thông tin và chọn cấp giáo trình. Không đổi sidebar PC, dock hoặc nội dung trang.",
-  "excludedRoutes": []
+  "excludedRoutes": [],
+  "sharedMobileDrawerOnly": true
 }

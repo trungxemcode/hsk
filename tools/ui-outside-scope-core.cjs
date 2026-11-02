@@ -15,6 +15,11 @@ function scope(config) {
     assert.equal(config.excludedRoutes.length,0,'A shared quick-nav edit must preserve visual checks on every route');
     assert.ok(!config.sharedHeaderOnly,'Only one shared area may be normalized in a single PR');
   }
+  assert.ok(config.sharedMobileDrawerOnly===undefined||typeof config.sharedMobileDrawerOnly==='boolean','Mobile drawer scope must be boolean');
+  if(config.sharedMobileDrawerOnly){
+    assert.equal(config.excludedRoutes.length,0,'Mobile drawer edit must preserve every route');
+    assert.ok(!config.sharedHeaderOnly&&!config.sharedSidebarOnly&&!config.sharedQuickNavOnly,'Only the mobile drawer may be scoped');
+  }
   return ROUTES.filter(route=>!config.excludedRoutes.includes(route));
 }
 function pixels(a,b) {
@@ -56,7 +61,7 @@ function visualPixels(a,b){
 }
 // Serializable into page.evaluate; shared with the sabotage browser regression.
 function measureDOM(options={}){
-  return [...document.querySelectorAll('body *')].filter(n=>(!options.skipHeader||!n.closest('#studioHeader'))&&(!options.skipSidebar||!n.closest('.sidebar'))&&n.checkVisibility()&&!['SCRIPT','STYLE','LINK'].includes(n.tagName)).map(n=>{
+  return [...document.querySelectorAll('body *')].filter(n=>(!options.skipHeader||!n.closest('#studioHeader'))&&(!options.skipSidebar||!n.closest('.sidebar'))&&(!options.skipClosedMobileDrawerBody||!n.closest('#drawer[aria-hidden="true"] .drawer-body'))&&n.checkVisibility()&&!['SCRIPT','STYLE','LINK'].includes(n.tagName)).map(n=>{
     const r=n.getBoundingClientRect(),s=getComputedStyle(n);
     const text=[...n.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('');
     const paintAttributes=Object.fromEntries(['d','points','fill','stroke','src','href'].map(k=>[k,(n.getAttribute(k)||'').replace(/http:\/\/127\.0\.0\.1:\d+/g,'LOCAL')]));
