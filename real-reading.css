@@ -70,3 +70,5 @@
 #rrSelectionAsk[hidden]{display:none!important}
 #rrOriginalReading .rr-hanzi,#rrOriginalReading .rr-character{user-select:text;-webkit-user-select:text}
 @media(max-width:720px){#rrSelectionAsk{bottom:calc(96px + env(safe-area-inset-bottom,0px))}}
+
+@media(min-width:721px) and (pointer:fine){#rrSelectionAsk.rr-selection-near{left:var(--rr-selection-x,12px);top:var(--rr-selection-y,12px);right:auto;bottom:auto}}
