@@ -287,3 +287,16 @@ body.studio-enabled #aboutPanel .mobile-home-stats{display:block;margin-top:16px
 .hsk-loading-spinner{border-radius:var(--radius-round);will-change:transform}
 .hsk-loading-glyph{animation:none}
 @media(prefers-reduced-motion:reduce){.hsk-loading-spinner{animation:hsk-loader-spin 2s linear infinite!important}}
+
+/* Mobile drawer mirrors PC destinations; style only the drawer subtree. */
+#drawer .drawer-route-nav{display:grid;gap:10px;margin-bottom:16px}
+#drawer .drawer-route-nav .nav-group-items{display:grid;gap:4px;padding:4px 8px 12px}
+#drawer .drawer-route-nav details:not([open])>.nav-group-items{display:none}
+#drawer .drawer-route-nav .drawer-item{width:100%;box-sizing:border-box;min-height:44px;text-align:left}
+#drawer .drawer-route-nav :is(summary,button){display:flex;align-items:center;gap:12px}
+#drawer .drawer-route-nav :is(summary,button)>i{width:22px;height:22px;flex:none}
+#drawer .drawer-route-nav .nav-chevron{margin-left:auto}
+#drawer .drawer-route-nav details[open]>summary .nav-chevron{transform:rotate(180deg)}
+#drawer .drawer-route-nav .di-lbl{min-width:0;overflow-wrap:anywhere}
+#drawer .drawer-route-nav button.active{color:var(--accent);background:var(--accent-light)}
+#drawer .drawer-legacy-hooks[hidden]{display:none!important}
