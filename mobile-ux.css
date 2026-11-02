@@ -300,3 +300,18 @@ body.studio-enabled #aboutPanel .mobile-home-stats{display:block;margin-top:16px
 #drawer .drawer-route-nav .di-lbl{min-width:0;overflow-wrap:anywhere}
 #drawer .drawer-route-nav button.active{color:var(--accent);background:var(--accent-light)}
 #drawer .drawer-legacy-hooks[hidden]{display:none!important}
+
+/* Only the phone drawer is simplified; the header pill owns the native filter. */
+@media(max-width:720px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
+ #drawer :is(.drawer-filter-group,.drawer-about-group){display:none}
+ dialog.mobile-hsk-filter{width:calc(100% - 32px);max-width:420px;max-height:calc(100dvh - 120px);margin:calc(80px + env(safe-area-inset-top)) auto auto;border-radius:var(--radius-dialog);padding:20px}
+ #mobileHSKFilter .filter-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px}
+ #mobileHSKFilter .filter-btn{min-height:48px;font-size:16px}
+ #mobileHSKFilter .filter-btn[data-filter=all]{grid-column:1/-1}
+}
+#mobileHSKFilter .filter-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px}
+#mobileHSKFilter .studio-filter-label{font-size:16px;font-weight:650}
+#mobileHSKFilter .studio-filter-count{font-size:12px;font-weight:400}
+#mobileHSKFilter .filter-btn:not(.active) .studio-filter-label{color:var(--ink)}
+#mobileHSKFilter .filter-btn:not(.active) .studio-filter-count{color:var(--sub)}
+#mobileHSKFilter .filter-btn.active :is(.studio-filter-label,.studio-filter-count){color:inherit}

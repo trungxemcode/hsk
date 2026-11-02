@@ -2387,6 +2387,22 @@
           "value": "mobileRoutes.className='drawer-route-nav'"
         }
       ]
+    },
+    {
+      "id": "mobile-header-hsk-filter",
+      "name": "Nút HSK điện thoại mở trực tiếp bộ lọc, giữ Giới thiệu trong Tài khoản",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/shell/mobile-layout.js",
+          "value": "filterDialog.id='mobileHSKFilter'"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/shell/mobile-layout.js",
+          "value": "function syncMobileMenu()"
+        }
+      ]
     }
   ]
 }
