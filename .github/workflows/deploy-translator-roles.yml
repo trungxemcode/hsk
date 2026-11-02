@@ -1,9 +1,14 @@
-name: Restore account-role endpoints on translator Worker
+name: Deploy translator Worker and verify service routes
 on:
   push:
     branches: [main]
     paths:
       - '.github/workflows/deploy-translator-roles.yml'
+      - 'server/translator-worker.mjs'
+      - 'server/translator-worker-bundled.mjs'
+      - 'server/original-reading.mjs'
+      - 'server/wrangler.jsonc'
+      - 'tools/build-worker-bundle.cjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -30,10 +35,14 @@ jobs:
           test -n "$CLOUDFLARE_API_TOKEN" || { echo '::error::Missing CLOUDFLARE_API_TOKEN'; exit 1; }
           test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo '::error::Missing CLOUDFLARE_ACCOUNT_ID'; exit 1; }
       - name: Validate role security and existing translation behavior
-        run: node --test server/account-roles.test.mjs server/translator-worker.test.mjs
+        run: node --test server/account-roles.test.mjs server/translator-worker.test.mjs server/original-reading.test.mjs
+      - name: Require current generated Worker
+        run: |
+          node tools/build-worker-bundle.cjs
+          git diff --exit-code -- server/translator-worker-bundled.mjs
       - name: Ensure bundled script includes the actual role routes
         run: |
-          node --input-type=module -e "import {readFileSync} from 'node:fs';const s=readFileSync('server/translator-worker-bundled.mjs','utf8');for(const p of ['/account-role','/admin/accounts','/admin/account-role'])if(!s.includes(p))throw Error('Missing '+p);"
+          node --input-type=module -e "import {readFileSync} from 'node:fs';const s=readFileSync('server/translator-worker-bundled.mjs','utf8');for(const p of ['/account-role','/admin/accounts','/admin/account-role','/reading-library'])if(!s.includes(p))throw Error('Missing '+p);"
       - name: Bundle the checked-in Worker for inspection
         run: npx --yes wrangler@4 deploy --dry-run --outdir /tmp/hsk-translator-role-build --config server/wrangler.jsonc
       - name: Publish existing translator Worker (preserve variables and secrets)
@@ -56,3 +65,10 @@ jobs:
             fi
             echo "PASS $route HTTP 401 (route exists; token authentication still enforced)"
           done
+      - name: Confirm original reading route exists without AI requests
+        shell: bash
+        run: |
+          set -euo pipefail
+          status=$(curl -sS --retry 2 --max-time 20 -o /tmp/hsk-reading-response.json -w '%{http_code}' -X POST 'https://hsk-vietnamese-translator.trung-hsk668.workers.dev/reading-library' -H 'Origin: https://trungxemcode.github.io' -H 'Content-Type: application/json' --data '{}')
+          test "$status" = 400 || { echo "::error::Reading source endpoint returned HTTP $status (expected validation 400, never missing-route 404)"; exit 1; }
+          echo 'PASS original reading endpoint is deployed'
