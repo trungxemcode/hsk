@@ -56,3 +56,15 @@ test('current HSK Reading plain headings preserve the passage and exclude transl
 test('question-only HSK Reading pages never masquerade as an original passage',()=>{
  assert.throws(()=>extractOriginalReading('<article class="type-post"><div class="post-content"><h2>问题</h2><p>'+line+'</p></div></article>',hrURL),/Cấu trúc nguồn/);
 });
+
+test('source ruby annotations align to normalized exact Han text',()=>{
+ const p=extractOriginalReading(mb,mbURL).paragraphs[0];assert.deepEqual(p.annotations,[{start:3,text:'今天',pinyin:'jīntiān'}]);
+});
+test('current title metadata is bilingual without passage storage',()=>{
+ const html='<article class="category-hsk-3"><a href="https://hskreading.com/can-you-give-me-a-discount/">Can you give me a discount?</a></article>';
+ const item=extractOriginalIndex(html,'hskreading.com',3)[0];assert.equal(item.titleZh,'能打折吗？');assert.equal(item.titleVi,'Có thể giảm giá không?');assert.equal(item.hsk,3);
+});
+test('known headingless original stops before questions',()=>{
+ const html='<article class="type-post"><div class="post-content"><p>English introduction.</p><p>中国女子在加拿大转机时被暂时扣留。</p><h2>问题</h2><p>谁被拘留？答案不能混入。</p></div></article>';
+ const article=extractOriginalReading(html,'https://hskreading.com/chinese-woman-detained-in-canada/');assert.equal(article.paragraphs.length,1);assert.equal(article.title,'中国女子在加拿大被拘留');assert(!article.paragraphs[0].hanzi.includes('答案'));
+});

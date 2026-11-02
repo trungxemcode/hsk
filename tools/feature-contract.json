@@ -2306,6 +2306,21 @@
           "kind": "contains",
           "file": "server/translator-worker.mjs",
           "value": "pathname==='/reading-library'"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/reading/original-reading.js",
+          "value": "rrRandom"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/reading/original-reading.js",
+          "value": "rrOriginalBack"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/reading/original-reading.js",
+          "value": "rrOriginalPinyin"
         }
       ]
     },
