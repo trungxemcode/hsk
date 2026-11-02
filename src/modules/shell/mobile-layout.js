@@ -17,16 +17,16 @@
  const filterHead=document.createElement('header');filterHead.className='mobile-sheet-head';const filterTitle=document.createElement('h2');filterTitle.id='mobileHSKFilterTitle';filterTitle.textContent='Bộ lọc HSK';filterTitle.tabIndex=-1;
  const filterClose=document.createElement('button');filterClose.type='button';filterClose.id='mobileHSKFilterClose';filterClose.textContent='Đóng';filterClose.addEventListener('click',()=>filterDialog.close());filterHead.append(filterTitle,filterClose);
  const filterHint=document.createElement('p');filterHint.className='hint';filterHint.textContent='Áp dụng cho thẻ từ vựng, tra cứu, trắc nghiệm và ôn tập.';filterDialog.append(filterHead,filterHint);body.append(filterDialog);
- function openFilter(){closeDrawer(false);filterDialog.append(filterButtons);pill.setAttribute('aria-expanded','true');filterDialog.showModal();filterTitle.focus({preventScroll:true});}
- filterDialog.addEventListener('close',()=>{filterHome.after(filterButtons);pill.setAttribute('aria-expanded','false');if(phone.matches)pill.focus({preventScroll:true});});
+ function openFilter(){if(filterDialog.open)return;closeDrawer(false);filterDialog.append(filterButtons);pill.setAttribute('aria-expanded','true');filterDialog.showModal();filterTitle.focus({preventScroll:true});}
+ filterDialog.addEventListener('close',()=>{filterHome.after(filterButtons);pill.setAttribute('aria-expanded','false');pill.focus({preventScroll:true});});
  filterButtons.addEventListener('click',e=>{if(e.target.closest('[data-filter]')&&filterDialog.open)filterDialog.close();});
  filterDialog.addEventListener('click',e=>{const r=filterDialog.getBoundingClientRect();if(e.target===filterDialog&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))filterDialog.close();});
  const aboutButton=$('aboutBtn'),aboutGroup=aboutButton.closest('.drawer-group'),aboutHome=document.createComment('About menu original');aboutButton.before(aboutHome);aboutGroup.classList.add('drawer-about-group');
- function syncMobileMenu(){if(phone.matches){$('accountBtn').parentElement.append(aboutButton);pill.setAttribute('aria-haspopup','dialog');pill.setAttribute('aria-controls',filterDialog.id);pill.setAttribute('aria-expanded',String(filterDialog.open));}else{if(filterDialog.open)filterDialog.close();aboutHome.after(aboutButton);pill.removeAttribute('aria-haspopup');pill.removeAttribute('aria-controls');pill.removeAttribute('aria-expanded');}}
+ function syncMobileMenu(){if(phone.matches){$('accountBtn').parentElement.append(aboutButton);}else{if(filterDialog.open)filterDialog.close();aboutHome.after(aboutButton);}pill.setAttribute('aria-haspopup','dialog');pill.setAttribute('aria-controls',filterDialog.id);pill.setAttribute('aria-expanded',String(filterDialog.open));}
  phone.addEventListener('change',syncMobileMenu);syncMobileMenu();
 
 
- menu.addEventListener('click',openDrawer);$('levelPill').addEventListener('click',()=>phone.matches?openFilter():openDrawer());$('drawerClose').addEventListener('click',()=>closeDrawer());$('drawerScrim').addEventListener('click',()=>closeDrawer());
+ menu.addEventListener('click',openDrawer);$('levelPill').addEventListener('click',openFilter);$('drawerClose').addEventListener('click',()=>closeDrawer());$('drawerScrim').addEventListener('click',()=>closeDrawer());
  $('aboutBtn').addEventListener('click',()=>{about.hidden=false;body.classList.add('show-about');closeDrawer(false);workspace.scrollTop=0;});
  document.querySelector('.app-tabs').addEventListener('click',()=>{hideAbout();workspace.scrollTop=0;});
  drawer.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{hideAbout();closeDrawer();workspace.scrollTop=0;}));

@@ -2460,6 +2460,22 @@
           "value": "const menuRoute="
         }
       ]
+    },
+    {
+      "id": "desktop-header-hsk-filter",
+      "name": "Nút HSK PC mở bộ chọn cấp độc lập với điều hướng",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/shell/mobile-layout.js",
+          "value": "$('levelPill').addEventListener('click',openFilter)"
+        },
+        {
+          "kind": "contains",
+          "file": "tools/check-mobile-header-filter-ui.cjs",
+          "value": "PC HSK pill never opens navigation"
+        }
+      ]
     }
   ]
 }

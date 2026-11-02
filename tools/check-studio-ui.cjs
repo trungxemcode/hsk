@@ -78,16 +78,15 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
     await page.evaluate(mode=>window.HSKStudio.navigate(mode),mode);await page.waitForTimeout(350);
     await contrast('.hub-group-heading,.sidebar-label,.side-nav button,.side-quick button,#activeTitle,#studioLevelText,.feature-copy h3,.feature-copy p,.hero-button,.shortcut strong,.shortcut small,.path-step>span,.path-step strong,.path-step small,.today-card p,.featured-han span,.stats-stack strong,.stats-stack small,.review-reminder strong,.review-reminder small,.hub-content strong,.hub-content small,.hub-content em,.about-hero strong,.about-hero span,.account-metric strong,.account-metric small,.metric-caption,.account-detail h3,.account-day,.account-day b,.account-progress-meta,.account-level-note,.account-version-copy strong,.account-version-copy p,.account-version button');
    }
-   await page.locator('#levelPill').click();if(width>720&&await page.locator('#hskFilterToggle').getAttribute('aria-expanded')!=='true')await page.locator('#hskFilterToggle').click();await page.waitForTimeout(300);
+   await page.locator('#levelPill').click();await page.waitForTimeout(300);assert.equal(await page.locator('#mobileHSKFilter').evaluate(n=>n.open),true);assert.equal(await page.locator('#drawer').getAttribute('aria-hidden'),'true');
    await contrast('.drawer-head strong,.drawer-head span,.drawer-title,.drawer-hint,.di-lbl,.studio-filter-label,.studio-filter-count');
    assert.equal(await page.locator('.filter-btn[aria-pressed=true]').count(),1);
    await page.locator('.filter-btn[data-filter="5"]').click();await page.waitForTimeout(300);
    assert.equal(await page.locator('#studioLevelText').innerText(),'HSK 5');
    assert.equal(await page.locator('.filter-btn[data-filter="5"]').getAttribute('aria-pressed'),'true');
-   if(!await page.locator(width<721?'#mobileHSKFilterClose':'#drawerClose').isVisible()){if(await page.locator('.mobile-focus-bar').isVisible())await page.locator('.mobile-focus-bar button').click();await page.locator('#levelPill').click();}
-   if(width>720&&await page.locator('#hskFilterToggle').getAttribute('aria-expanded')!=='true')await page.locator('#hskFilterToggle').click();
+   if(!await page.locator('#mobileHSKFilterClose').isVisible()){if(await page.locator('.mobile-focus-bar').isVisible())await page.locator('.mobile-focus-bar button').click();await page.locator('#levelPill').click();}
    await page.waitForTimeout(300);await contrast('.studio-filter-label,.studio-filter-count');await page.screenshot({path:'/tmp/studio-filter-'+width+'.png',fullPage:true});
-   await page.locator(width<721?'#mobileHSKFilterClose':'#drawerClose').click();await page.evaluate(()=>window.HSKStudio.navigate('about'));await page.waitForTimeout(350);await page.screenshot({path:'/tmp/studio-about-'+width+'.png',fullPage:true});
+   await page.locator('#mobileHSKFilterClose').click();await page.evaluate(()=>window.HSKStudio.navigate('about'));await page.waitForTimeout(350);await page.screenshot({path:'/tmp/studio-about-'+width+'.png',fullPage:true});
   }
   // Menu groups and the phone text layout must retain usable widths.
   for(const width of [320,375,390,430]){
