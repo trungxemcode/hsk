@@ -18,7 +18,22 @@
   const index=[...host.querySelectorAll('.rr-hanzi')].indexOf(anchor),paragraph=openedArticle.paragraphs[index]?.hanzi||'',at=Math.max(0,paragraph.indexOf(text));
   return {text,url:openedArticle.url,context:paragraph.slice(Math.max(0,at-140),at+text.length+200)};
  }
- document.addEventListener('selectionchange',()=>{const value=selection();if(value){selected=value;lookup.hidden=false;}else if(document.activeElement!==lookup){selected=null;lookup.hidden=true;}});
+ let lookupFrame=0;
+ function positionLookup(){
+  lookupFrame=0;if(lookup.hidden)return;
+  const desktop=matchMedia('(min-width:721px) and (pointer:fine)').matches;lookup.classList.toggle('rr-selection-near',desktop);if(!desktop)return;
+  const range=window.getSelection();if(!range?.rangeCount||range.isCollapsed)return;
+  const rect=range.getRangeAt(0).getBoundingClientRect(),size=lookup.getBoundingClientRect(),width=size.width,height=size.height;
+  const left=Math.max(12,Math.min(innerWidth-width-12,rect.left+(rect.width-width)/2));
+  const preferred=rect.bottom+height+20<=innerHeight?rect.bottom+8:rect.top-height-8,top=Math.max(12,Math.min(innerHeight-height-12,preferred));
+  lookup.style.setProperty('--rr-selection-x',left+'px');lookup.style.setProperty('--rr-selection-y',top+'px');
+ }
+ function inspectReadingSelection(){const value=selection();if(value){selected=value;lookup.hidden=false;if(!lookupFrame)lookupFrame=requestAnimationFrame(positionLookup);}else if(document.activeElement!==lookup){selected=null;lookup.hidden=true;}}
+ document.addEventListener('selectionchange',inspectReadingSelection);
+ document.addEventListener('pointerup',inspectReadingSelection);
+ document.addEventListener('keyup',inspectReadingSelection);
+ window.addEventListener('resize',()=>{if(!lookup.hidden)positionLookup();});
+ window.addEventListener('scroll',()=>{if(!lookup.hidden&&!lookupFrame)lookupFrame=requestAnimationFrame(positionLookup);},{capture:true,passive:true});
  lookup.addEventListener('pointerdown',event=>event.preventDefault());
  lookup.addEventListener('click',()=>{const value=selection()||selected;if(!value||!openedArticle||value.url!==openedArticle.url||panel.hidden||!active()||!navigator.onLine)return;
   window.dispatchEvent(new CustomEvent('hsk-reading-ask',{detail:{lesson:{id:'reading-'+openedArticle.url,title:openedArticle.title,vi:openedArticle.titleVi||openedArticle.title,number:'Bài đọc',hsk:Number($('rrHsk').value),words:[{han:value.text,pin:window.pinyinPro?.pinyin(value.text)||'',mean:''}],content:{selectedText:value.text,context:value.context,sourceURL:openedArticle.url}},question:('Giải thích nghĩa, pinyin và cách dùng trong ngữ cảnh bài đọc của đoạn: “'+value.text+'”.').slice(0,500)}}));window.getSelection()?.removeAllRanges();selected=null;lookup.hidden=true;

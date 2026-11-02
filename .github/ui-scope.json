@@ -1,5 +1,5 @@
 {
-  "request": "Chỉ Đọc thực tế, chế độ bài gốc PC/mobile: bôi đen chữ và Tra cứu AI như lời bài hát, dùng chat hiện hữu. Giữ nguyên các trang khác, nhạc, header/sidebar/dock và luồng AI tùy chọn.",
+  "request": "Chỉ Đọc thực tế chế độ bài gốc trên PC: nút Tra cứu AI xuất hiện cạnh vùng bôi đen; nhận vùng chọn kéo chuột thật. Điện thoại giữ vị trí trên dock; mọi trang khác, chat, header/sidebar/dock giữ nguyên.",
   "excludedRoutes": [
     "real-reading"
   ]
