@@ -62,11 +62,11 @@ let wordScrollTop=0;function openWord(w,trigger){if(!media.matches||window.getSe
 main.addEventListener('scroll',()=>{if(Math.abs(main.scrollTop-wordScrollTop)>1)closeWord();},{passive:true});window.addEventListener('hsk-account-ready',()=>{closeWord();closeDialog(errorSheet.node);errorSignature='';});
 const imageOptions=el('details',undefined,'mobile-ocr-options clean-disclosure');imageOptions.id='mobileOCROptions';imageOptions.hidden=true;imageOptions.append(el('summary','Chỉ lấy chữ (OCR)'));$('ocrRead').parentElement.after(imageOptions);
 const imageHint=document.querySelector('.ocr-panel > p.hint'),originalImageHint=imageHint.textContent,originalFastLabel=$('ocrFast').textContent,originalReadLabel=$('ocrRead').textContent;
-const translateDrawer=document.querySelector('#drawer .drawer-route-nav [data-studio-go="translator"]:not([data-nav-action])'),translateDrawerLabel=translateDrawer.querySelector('.di-lbl'),originalTranslateLabel=translateDrawerLabel.textContent;
+const translateDrawer=document.querySelector('#drawer .drawer-route-nav [data-studio-go="translator"]:not([data-nav-action])'),translateDrawerLabel=translateDrawer?.querySelector('.di-lbl'),originalTranslateLabel=translateDrawerLabel?.textContent||'';
 function refineMobile(mobile){
  moveMobile($('ocrRead'),imageOptions,mobile);hidden(imageOptions,!mobile);text($('ocrFast'),mobile?'Đọc và dịch ảnh':originalFastLabel);text($('ocrRead'),mobile?'Chỉ nhận dạng chữ':originalReadLabel);
  text(imageHint,mobile?'Chọn hoặc chụp ảnh có chữ tiếng Trung. Ảnh chỉ được gửi xử lý khi bạn bấm Đọc và dịch ảnh hoặc Chỉ nhận dạng chữ. Bạn có thể xem và sửa chữ sau khi nhận dạng.':originalImageHint);
- text(translateDrawerLabel,mobile?'Dịch văn bản / ảnh':originalTranslateLabel);attr(translateDrawer,'aria-label',mobile?'Dịch văn bản / ảnh':originalTranslateLabel);
+ if(translateDrawer){text(translateDrawerLabel,mobile?'Dịch văn bản / ảnh':originalTranslateLabel);attr(translateDrawer,'aria-label',mobile?'Dịch văn bản / ảnh':originalTranslateLabel);}
 
  for(const [n,dest] of [[accountStatsNode,accountStats],[accountAuthNode,accountAuth],[$('accountBackup'),backup],[$('accountRestore'),backup],[accountSettings,system],[pushSettings,system],[pushReminder,system],...privacyNotes.map(n=>[n,accountPrivacy])])moveMobile(n,dest,mobile);
  for(const n of [$('accountBadge'),$('accountStatus')]){if(!originalHomes.has(n)){const a=document.createComment('account status original');n.before(a);originalHomes.set(n,a);}if(!mobile&&n.previousSibling!==originalHomes.get(n))originalHomes.get(n).after(n);}

@@ -2419,6 +2419,22 @@
           "value": "mobile?'Dịch văn bản / ảnh':originalTranslateLabel"
         }
       ]
+    },
+    {
+      "id": "major-feature-navigation",
+      "name": "Thanh bên chỉ dẫn chức năng lớn; bốn công cụ và các chế độ luyện giữ trong màn tương ứng",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "Tra cứu &amp; dịch"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/shell/studio.js",
+          "value": "const menuRoute="
+        }
+      ]
     }
   ]
 }
