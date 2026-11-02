@@ -1,4 +1,6 @@
 {
-  "request": "Khôi phục API Đọc thực tế, cập nhật parser HSK Reading và tự triển khai Worker khi mã backend thay đổi. Không đổi giao diện, route frontend, dữ liệu học hay PWA.",
-  "excludedRoutes": []
+  "request": "Chỉ Đọc thực tế, chế độ bài gốc trên PC/điện thoại: đọc ngẫu nhiên, tên Trung–Việt, màn đọc riêng có quay lại danh sách, pinyin dưới từng chữ. Giữ nguyên AI tùy chọn, header, sidebar, dock và trang khác.",
+  "excludedRoutes": [
+    "real-reading"
+  ]
 }

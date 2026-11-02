@@ -6,7 +6,8 @@
  const mode=document.createElement('select');mode.id='rrContentMode';mode.add(new Option('Bài gốc từ hai nguồn','original'));mode.add(new Option('Bài luyện AI (tùy chọn)','ai'));
  const label=document.createElement('label');label.append('Nội dung',mode);settings.prepend(label);
  const host=document.createElement('section');host.id='rrOriginalReading';host.setAttribute('aria-label','Bài đọc nguyên văn');$('rrArticle').before(host);
- let controller=null,revision=0,configPromise=null,items=[];
+ const randomButton=document.createElement('button');randomButton.id='rrRandom';randomButton.type='button';randomButton.className='rr-secondary';randomButton.textContent='Đọc ngẫu nhiên';newButton.after(randomButton);
+ let controller=null,revision=0,configPromise=null,items=[],currentURL='',pinPromise=null;
  const owner=()=>window.HSKAccountDashboard?.user?.uid||'guest';
  let cloudRequest=null,cloudConfig=null;
  async function cloudHistory(item=null){
@@ -25,7 +26,7 @@
     if(!current())return null;if(r.status===404)return null;if(!r.ok)throw Error('Chưa đọc được lịch sử trên cloud.');
     const data=await r.json();return data.fields?.payload?.stringValue?JSON.parse(data.fields.payload.stringValue):null;
    }
-   const metadata={url:item.url,title:item.title,site:item.site,hsk,openedAt:Date.now()};
+   const metadata={url:item.url,title:item.title,titleZh:item.titleZh||'',titleVi:item.titleVi||'',site:item.site,hsk,openedAt:Date.now()};
    const fields={id:{stringValue:'original-reading-last-'+hsk},time:{integerValue:String(metadata.openedAt)},writer:{stringValue:'original-reading-url'},deleted:{booleanValue:false},payload:{stringValue:JSON.stringify(metadata)}};
    const r=await fetch('https://firestore.googleapis.com/v1/projects/'+project+'/databases/(default)/documents:commit',{method:'POST',headers,cache:'no-store',signal:c.signal,body:JSON.stringify({writes:[{update:{name,fields},updateTransforms:[{fieldPath:'updatedAt',setToServerValue:'REQUEST_TIME'}]}]})});
    if(!current())return null;if(!r.ok)throw Error('Chưa lưu được lịch sử trên cloud. Không lưu dự phòng trên máy.');return metadata;
@@ -33,47 +34,65 @@
  }
  const make=(tag,text)=>{const n=document.createElement(tag);if(text!=null)n.textContent=text;return n;};
  const active=()=>mode.value==='original';
- function stop(){revision++;controller?.abort();cloudRequest?.abort();cloudRequest=null;controller=null;newButton.disabled=false;oldButton.disabled=false;panel.removeAttribute('aria-busy');$('rrCancel').hidden=true;}
+ function stop(){revision++;controller?.abort();cloudRequest?.abort();cloudRequest=null;controller=null;newButton.disabled=false;oldButton.disabled=false;randomButton.disabled=false;panel.removeAttribute('aria-busy');$('rrCancel').hidden=true;}
  async function endpoint(){
   configPromise||=fetch('./translation-config.json',{cache:'no-store'}).then(r=>r.json()).then(c=>{const u=new URL(c.endpoint);if(!c.enabled||u.protocol!=='https:')throw Error('Dịch vụ đọc nguồn chưa được cấu hình.');return u.href.replace(/\/translate$/,'/reading-library');}).catch(e=>{configPromise=null;throw e;});return configPromise;
  }
  async function request(body){
   if(!navigator.onLine){offline();return null;}
-  stop();const id=revision,uid=owner(),c=new AbortController();controller=c;newButton.disabled=true;oldButton.disabled=true;panel.setAttribute('aria-busy','true');$('rrCancel').hidden=false;$('rrCancel').textContent='Hủy tải bài';$('rrStatus').textContent=body.op==='list'?'Đang lấy danh sách bài gốc…':'Đang trích nguyên văn từ nguồn…';
+  stop();const id=revision,uid=owner(),c=new AbortController();controller=c;newButton.disabled=true;oldButton.disabled=true;randomButton.disabled=true;panel.setAttribute('aria-busy','true');$('rrCancel').hidden=false;$('rrCancel').textContent='Hủy tải bài';$('rrStatus').textContent=body.op==='list'?'Đang lấy danh sách bài gốc…':'Đang trích nguyên văn từ nguồn…';
   const timer=setTimeout(()=>c.abort(),22000);
   try{const url=await endpoint();if(c.signal.aborted)throw new DOMException('Canceled','AbortError');
    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),cache:'no-store',signal:c.signal}),data=await r.json();
    if(id!==revision||owner()!==uid||!active())return null;if(!r.ok)throw Error(data.error||'Không tải được bài nguồn.');return data;
   }catch(e){if(id===revision&&active())$('rrStatus').textContent=e.name==='AbortError'?'Đã dừng tải bài nguồn.':e.message;return null;}
-  finally{clearTimeout(timer);if(id===revision){controller=null;newButton.disabled=false;oldButton.disabled=false;panel.removeAttribute('aria-busy');$('rrCancel').hidden=true;}}
+  finally{clearTimeout(timer);if(id===revision){controller=null;newButton.disabled=false;oldButton.disabled=false;randomButton.disabled=false;panel.removeAttribute('aria-busy');$('rrCancel').hidden=true;}}
  }
  function listing(){
   const box=make('details');box.className='rr-original-list';box.open=true;box.append(make('summary','Chọn bài gốc · '+items.length+' bài'));
-  for(const item of items){const b=make('button',item.title+' · '+item.site);b.type='button';b.addEventListener('click',()=>open(item));box.append(b);}
+  for(const item of items){const b=make('button',titleOf(item));b.type='button';b.dataset.url=item.url;b.addEventListener('click',()=>open(item));box.append(b);}
   return box;
+ }
+ function titleOf(item){return (item.titleZh||item.title)+' - '+(item.titleVi||'Chưa có bản dịch tên');}
+ function showList(focus=true){window.HSKSpeech?.stop?.();host.replaceChildren(listing());if(focus){const b=[...host.querySelectorAll('button')].find(n=>n.dataset.url===currentURL)||host.querySelector('button');b?.focus({preventScroll:true});host.scrollIntoView({block:'start',behavior:'auto'});} $('rrStatus').textContent=items.length?'Chọn một bài để đọc.':'Hãy tải danh sách hoặc chọn Đọc ngẫu nhiên.';}
+ function pinyinReady(){if(window.pinyinPro)return Promise.resolve();if(!pinPromise)pinPromise=new Promise((resolve,reject)=>{const script=make('script');script.src='./vendor/pinyin-pro/pinyin-pro.js';script.onload=()=>{script.remove();resolve();};script.onerror=()=>{script.remove();pinPromise=null;reject(Error('Chưa tải được pinyin.'));};document.head.append(script);});return pinPromise;}
+ function annotate(paragraph){
+  const han=make('p');han.className='rr-hanzi';han.lang='zh';
+  const characters=Array.from(paragraph.hanzi),generated=window.pinyinPro?.pinyin(paragraph.hanzi,{type:'array',toneType:'symbol',nonZh:'removed'})||[];
+  // Generate per-character context readings; source ruby overrides them where alignment is verified.
+  const readings=new Map();let offset=0;
+  for(const char of characters){if(/[\u3400-\u9fff]/u.test(char)){readings.set(offset,generated[readings.size]||'');}offset++;}
+  for(const mark of paragraph.annotations||[]){const chars=Array.from(mark.text),pins=sourceSyllables(mark.pinyin,chars.map((_,i)=>readings.get(mark.start+i)||''));if(pins)chars.forEach((_,i)=>readings.set(mark.start+i,pins[i]));}
+  characters.forEach((char,i)=>{if(!/[\u3400-\u9fff]/u.test(char)){han.append(document.createTextNode(char));return;}const ruby=make('ruby'),base=make('span',char),rt=make('rt',readings.get(i)||'');base.className='rr-character';rt.className='rr-original-pin';rt.hidden=true;ruby.append(base,rt);han.append(ruby);});return han;
+ }
+ function sourceSyllables(text,expected){
+  if(!expected.length||expected.length>30)return null;
+  const raw=String(text).toLowerCase().replace(/[^a-züāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜêńňǹḿ]/gu,''),plain=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'');const memo=new Map();
+  function split(pos,index){if(index===expected.length)return pos===raw.length?{score:0,parts:[]}:null;const key=pos+':'+index;if(memo.has(key))return memo.get(key);let best=null;for(let end=pos+1;end<=Math.min(raw.length,pos+7);end++){const part=raw.slice(pos,end),base=plain(part);if(!/^(?:(?:zh|ch|sh|[bpmfdtnlgkhjqxrzcsyw])?(?:a|o|e|ai|ei|ao|ou|an|en|ang|eng|ong|i|ia|ie|iao|iu|ian|in|iang|ing|iong|u|ua|uo|uai|ui|uan|un|uang|ueng|ue)|er|m|n|ng)$/u.test(base))continue;const tail=split(end,index+1);if(!tail)continue;const score=tail.score+(plain(expected[index])===base?3:0)+(expected[index]===part?1:0);if(!best||score>best.score)best={score,parts:[part,...tail.parts]};}memo.set(key,best);return best;}return split(0,0)?.parts||null;
  }
  async function open(item){
   const data=await request({op:'article',url:item.url});if(!data)return;
-  const a=data.article;
+  const a=data.article,stamp=revision;try{await pinyinReady();}catch{}if(stamp!==revision||!active()||panel.hidden)return;
   if(!a||a.url!==item.url||a.status!=='original'||!Array.isArray(a.paragraphs)||!a.paragraphs.length){$('rrStatus').textContent='Nguồn chưa trả nguyên văn hợp lệ.';return;}
-  host.replaceChildren(make('h3',a.title));
+  item={...item,titleZh:a.titleZh||a.title,titleVi:a.titleVi||item.titleVi};
+  currentURL=a.url;window.HSKSpeech?.stop?.();const back=make('button','← Danh sách bài đọc');back.id='rrOriginalBack';back.type='button';back.className='rr-back';back.onclick=()=>{stop();if(items.length)showList();else load();};const heading=make('h3',titleOf(item));heading.tabIndex=-1;host.replaceChildren(back,heading);
   const credit=make('p',a.site+' · Nguyên văn từ nguồn'),link=make('a','Mở bài gốc ↗');link.href=a.url;link.target='_blank';link.rel='noopener noreferrer';credit.append(' · ',link);host.append(credit);
-  const hasPin=a.paragraphs.some(p=>p.pinyin),pin=make('button','Pinyin nguồn');pin.type='button';pin.className='rr-secondary';pin.setAttribute('aria-pressed','false');pin.hidden=!hasPin;
+  const hasPin=!!window.pinyinPro,pin=make('button','Pinyin');pin.id='rrOriginalPinyin';pin.title='Pinyin tham khảo, ưu tiên cách đọc từ nguồn.';pin.type='button';pin.className='rr-secondary';pin.setAttribute('aria-pressed','false');pin.hidden=!hasPin;
   pin.onclick=()=>{const show=pin.getAttribute('aria-pressed')!=='true';pin.setAttribute('aria-pressed',String(show));host.querySelectorAll('.rr-original-pin').forEach(n=>n.hidden=!show);};host.append(pin);
-  for(const paragraph of a.paragraphs){const row=make('div');row.className='rr-line';const han=make('p',paragraph.hanzi);han.className='rr-hanzi';row.append(han);
+  for(const paragraph of a.paragraphs){const row=make('div');row.className='rr-line';const han=annotate(paragraph);row.append(han);
    const speech=window.HSKSpeech?.button(paragraph.hanzi,'Nghe câu tiếng Trung');if(speech)row.append(speech);
-   if(paragraph.pinyin){const p=make('p',paragraph.pinyin);p.className='rr-pinyin rr-original-pin';p.hidden=true;row.append(p);}host.append(row);
+   host.append(row);
   }
-  host.append(listing());$('rrStatus').textContent='Đã tải nguyên văn · '+(owner()==='guest'?'Đăng nhập để lưu lịch sử trên cloud.':'Đang lưu lịch sử lên cloud…');host.scrollIntoView({block:'start',behavior:'auto'});
+  heading.focus({preventScroll:true});$('rrStatus').textContent='Đã tải nguyên văn · '+(owner()==='guest'?'Đăng nhập để lưu lịch sử trên cloud.':'Đang lưu lịch sử lên cloud…');host.scrollIntoView({block:'start',behavior:'auto'});
   if(owner()!=='guest'){const stamp=revision;cloudHistory(item).then(saved=>{if(saved&&stamp===revision&&active())$('rrStatus').textContent='Đã tải nguyên văn · lịch sử lưu trên cloud.';}).catch(error=>{if(stamp===revision&&active())$('rrStatus').textContent=error.message;});}
  }
- async function load(){
+ async function load(random=false){
   const data=await request({op:'list',hsk:Number($('rrHsk').value)});if(!data)return;
   if(!Array.isArray(data.items)){ $('rrStatus').textContent='Danh sách nguồn chưa hợp lệ.';return; }
-  items=data.items;host.replaceChildren(listing());$('rrStatus').textContent=items.length+' bài từ nguồn · danh sách làm mới tối đa mỗi 6 giờ.'+(data.unavailable?.length?' Một nguồn đang tạm không tải được.':'');
+  items=data.items;if(random){if(!items.length){$('rrStatus').textContent='Chưa có bài ở cấp này.';return;}const pool=items.filter(i=>i.url!==currentURL);await open((pool.length?pool:items)[Math.floor(Math.random()*(pool.length||items.length))]);return;}host.replaceChildren(listing());$('rrStatus').textContent=items.length+' bài từ nguồn · danh sách làm mới tối đa mỗi 6 giờ.'+(data.unavailable?.length?' Một nguồn đang tạm không tải được.':'');
  }
  function sync(){
-  stop();window.HSKRealReading?.cancel();const original=active();host.hidden=!original;
+  stop();window.HSKRealReading?.cancel();const original=active();host.hidden=!original;randomButton.hidden=!original;
   for(const id of ['rrGenre','rrTopic'])$(id).closest('label').hidden=original;
   $('rrSources').hidden=original;$('rrArticle').hidden=original||!window.HSKRealReading?.story;
   newButton.textContent=original?'Tải danh sách bài gốc':'AI chọn bài mới ↻';
@@ -84,6 +103,7 @@
   if(original&&!navigator.onLine)offline();
   if(original)$('rrContext').textContent='Đọc nguyên văn từ Mandarin Bean và HSK Reading. Chỉ hoạt động khi có mạng. URL bài gần nhất lưu trên cloud khi đăng nhập; không lưu bài trên thiết bị.';
  }
+ randomButton.addEventListener('click',()=>{if(active()){if(items.length){const pool=items.filter(i=>i.url!==currentURL);open((pool.length?pool:items)[Math.floor(Math.random()*(pool.length||items.length))]);}else load(true);}});
  mode.addEventListener('change',sync);
  newButton.addEventListener('click',e=>{if(active()){e.preventDefault();e.stopImmediatePropagation();load();}},true);
  oldButton.addEventListener('click',e=>{if(!active())return;e.preventDefault();e.stopImmediatePropagation();if(!navigator.onLine){offline();return;}const stamp=revision;cloudHistory().then(item=>{if(stamp!==revision||!active())return;if(item)open(item);else $('rrStatus').textContent='Chưa có URL bài gốc trên cloud ở cấp này.';}).catch(error=>{if(stamp===revision&&active())$('rrStatus').textContent=error.message;});},true);
@@ -92,7 +112,7 @@
  $('rrBack').addEventListener('click',stop,true);
  new MutationObserver(()=>{if(panel.hidden)stop();else if(active())sync();}).observe(panel,{attributes:true,attributeFilter:['hidden']});
  window.addEventListener('hsk-account-ready',()=>{stop();items=[];host.replaceChildren();if(active())sync();});
- function offline(){if(!active())return;stop();window.HSKSpeech?.stop?.();items=[];host.replaceChildren();newButton.disabled=true;oldButton.disabled=true;$('rrStatus').textContent='Chế độ bài gốc chỉ hoạt động khi có mạng.';}
+ function offline(){if(!active())return;stop();window.HSKSpeech?.stop?.();items=[];host.replaceChildren();newButton.disabled=true;oldButton.disabled=true;randomButton.disabled=true;$('rrStatus').textContent='Chế độ bài gốc chỉ hoạt động khi có mạng.';}
  window.addEventListener('offline',offline);
  window.addEventListener('online',()=>{if(active()){stop();$('rrStatus').textContent='Đã có mạng. Hãy tải lại danh sách bài gốc.';}});
  window.addEventListener('pagehide',()=>{stop();host.replaceChildren();items=[];});

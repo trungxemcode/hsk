@@ -55,3 +55,13 @@
 #rrOriginalReading .rr-original-list{margin-top:16px;padding:12px;border:1px solid var(--line);border-radius:var(--radius-btn)}
 #rrOriginalReading .rr-original-list>button{display:block;box-sizing:border-box;width:100%;margin:10px 0 0;text-align:left;white-space:normal;min-height:44px}
 #rrOriginalReading .rr-hanzi{white-space:pre-wrap}
+
+/* A single original article view; pronunciation follows each Han character. */
+#rrOriginalReading ruby{display:inline-flex;flex-direction:column;align-items:center;vertical-align:top;white-space:nowrap;min-width:1em;margin-inline:.06em}
+#rrOriginalReading rt{display:block;font-family:system-ui,sans-serif;font-size:.52em;font-weight:500;line-height:1.35;color:var(--accent-dark);text-align:center;min-height:1.35em;user-select:none}
+#rrOriginalReading rt[hidden]{display:none!important}
+#rrOriginalReading .rr-character{line-height:1.65}
+#rrOriginalReading .rr-hanzi{line-height:2.15;white-space:pre-wrap}
+#rrOriginalBack{margin-top:16px}
+#rrOriginalReading .rr-line{align-items:start;padding-block:16px}
+#rrOriginalReading .rr-original-list summary{cursor:pointer;font-weight:650;min-height:28px}
