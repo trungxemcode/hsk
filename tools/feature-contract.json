@@ -2321,6 +2321,16 @@
           "kind": "contains",
           "file": "src/modules/reading/original-reading.js",
           "value": "rrOriginalPinyin"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/reading/original-reading.js",
+          "value": "rrSelectionAsk"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/translation/lesson-chat.js",
+          "value": "hsk-reading-ask"
         }
       ]
     },

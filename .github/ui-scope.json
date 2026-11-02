@@ -1,5 +1,5 @@
 {
-  "request": "Chỉ Đọc thực tế, chế độ bài gốc trên PC/điện thoại: đọc ngẫu nhiên, tên Trung–Việt, màn đọc riêng có quay lại danh sách, pinyin dưới từng chữ. Giữ nguyên AI tùy chọn, header, sidebar, dock và trang khác.",
+  "request": "Chỉ Đọc thực tế, chế độ bài gốc PC/mobile: bôi đen chữ và Tra cứu AI như lời bài hát, dùng chat hiện hữu. Giữ nguyên các trang khác, nhạc, header/sidebar/dock và luồng AI tùy chọn.",
   "excludedRoutes": [
     "real-reading"
   ]
