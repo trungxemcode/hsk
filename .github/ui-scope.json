@@ -1,5 +1,4 @@
 {
-  "request": "Gộp menu theo chức năng lớn trên cả PC và điện thoại: bốn công cụ thành Tra cứu & dịch; các kiểu luyện/ôn đi qua màn chọn chế độ Luyện & Ôn. Giữ Flashcard và Giáo trình, Sổ từ vựng, giải trí, luyện thi, tài khoản. Không đổi nội dung, điểm, dữ liệu hay các chế độ bên trong.",
-  "excludedRoutes": [],
-  "sharedNavigationOnly": true
+  "request": "Khôi phục API Đọc thực tế, cập nhật parser HSK Reading và tự triển khai Worker khi mã backend thay đổi. Không đổi giao diện, route frontend, dữ liệu học hay PWA.",
+  "excludedRoutes": []
 }

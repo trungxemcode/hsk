@@ -46,3 +46,13 @@ test('Worker source endpoint is available without AI credentials or quota reserv
  assert.equal((await handler(request('https://evil.test'),{},{})).status,403);
 });
 
+
+test('current HSK Reading plain headings preserve the passage and exclude translation/questions',()=>{
+ const current=hr.replace('class="cjk"','class="wp-block-heading"').replace('<p>'+line+'</p>','<p><span style="font-size:14pt">'+line+'</span></p>');
+ const article=extractOriginalReading(current,hrURL);
+ assert.equal(article.title,'今天');assert.deepEqual(article.paragraphs.map(p=>p.hanzi),[line,'小红：好，我也去。']);
+ assert.doesNotMatch(JSON.stringify(article),/fake|假的问题|English introduction/);
+});
+test('question-only HSK Reading pages never masquerade as an original passage',()=>{
+ assert.throws(()=>extractOriginalReading('<article class="type-post"><div class="post-content"><h2>问题</h2><p>'+line+'</p></div></article>',hrURL),/Cấu trúc nguồn/);
+});

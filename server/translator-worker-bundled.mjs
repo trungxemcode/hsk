@@ -712,9 +712,10 @@ export function extractOriginalReading(html,url){
  }else{
   const article=orAll(root,n=>n.tag==='article'&&orClass(n,'type-post'))[0];
   content=article&&orAll(article,n=>orClass(n,'post-content'))[0];if(!content)throw Error('Không tìm thấy nội dung bài đọc.');
-  const headings=orAll(content,n=>n.tag==='h2'&&orClass(n,'cjk'));
-  if(!headings.length)throw Error('Cấu trúc nguồn đã thay đổi.');
-  const heading=headings[0];title=orClean(heading);
+  // Current HSK Reading uses plain h2 headings; older pages used class=cjk.
+  const heading=orAll(content,n=>n.tag==='h2'&&/[\u3400-\u9fff]/u.test(orClean(n)))[0];
+  if(!heading||/^(?:问题|問題|练习|練習|答案|翻译|翻譯|词汇|詞彙)[：:？?。.!！\s]*$/u.test(orClean(heading)))throw Error('Cấu trúc nguồn đã thay đổi.');
+  title=orClean(heading);
   // Collect only the passage after its Chinese heading and before translation/questions.
   const flat=orAll(content,n=>['h2','p','input','button'].includes(n.tag));let started=false;paragraphs=[];
   for(const n of flat){if(n===heading){started=true;continue;}if(!started)continue;if(['h2','input','button'].includes(n.tag))break;
@@ -1313,7 +1314,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-ai-cache-3-6-1';
+export const WORKER_REVISION='hsk-reading-library-4-1-1-r1';
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
  let detail=typeof payload?.error?.message==='string'?payload.error.message:'';

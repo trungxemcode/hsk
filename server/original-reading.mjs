@@ -40,9 +40,10 @@ export function extractOriginalReading(html,url){
  }else{
   const article=orAll(root,n=>n.tag==='article'&&orClass(n,'type-post'))[0];
   content=article&&orAll(article,n=>orClass(n,'post-content'))[0];if(!content)throw Error('Không tìm thấy nội dung bài đọc.');
-  const headings=orAll(content,n=>n.tag==='h2'&&orClass(n,'cjk'));
-  if(!headings.length)throw Error('Cấu trúc nguồn đã thay đổi.');
-  const heading=headings[0];title=orClean(heading);
+  // Current HSK Reading uses plain h2 headings; older pages used class=cjk.
+  const heading=orAll(content,n=>n.tag==='h2'&&/[\u3400-\u9fff]/u.test(orClean(n)))[0];
+  if(!heading||/^(?:问题|問題|练习|練習|答案|翻译|翻譯|词汇|詞彙)[：:？?。.!！\s]*$/u.test(orClean(heading)))throw Error('Cấu trúc nguồn đã thay đổi.');
+  title=orClean(heading);
   // Collect only the passage after its Chinese heading and before translation/questions.
   const flat=orAll(content,n=>['h2','p','input','button'].includes(n.tag));let started=false;paragraphs=[];
   for(const n of flat){if(n===heading){started=true;continue;}if(!started)continue;if(['h2','input','button'].includes(n.tag))break;
