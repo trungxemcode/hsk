@@ -1,6 +1,4 @@
 {
-  "request": "Chỉ Đọc thực tế chế độ bài gốc trên PC: nút Tra cứu AI xuất hiện cạnh vùng bôi đen; nhận vùng chọn kéo chuột thật. Điện thoại giữ vị trí trên dock; mọi trang khác, chat, header/sidebar/dock giữ nguyên.",
-  "excludedRoutes": [
-    "real-reading"
-  ]
+  "request": "Sửa riêng tương tác nút HSK trên header PC: mở bộ chọn HSK thay vì drawer điều hướng. Không đổi giao diện khi chưa mở, menu trái, trang nội dung hoặc hành vi điện thoại.",
+  "excludedRoutes": []
 }

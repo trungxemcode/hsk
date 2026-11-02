@@ -322,3 +322,11 @@ body.studio-enabled #aboutPanel .mobile-home-stats{display:block;margin-top:16px
  #mobileOCROptions > summary{min-height:44px;display:flex;align-items:center;cursor:pointer}
  #mobileOCROptions #ocrRead{width:100%;min-height:44px}
 }
+
+/* Desktop header HSK opens its own picker, independently of navigation. */
+@media(min-width:721px) and (min-height:501px),(min-width:721px) and (pointer:fine){
+ dialog.mobile-hsk-filter{width:min(440px,calc(100% - 32px));margin:auto;padding:24px}
+ #mobileHSKFilter .filter-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px}
+ #mobileHSKFilter .filter-btn{min-height:48px;font-size:16px}
+ #mobileHSKFilter .filter-btn[data-filter=all]{grid-column:1/-1}
+}
