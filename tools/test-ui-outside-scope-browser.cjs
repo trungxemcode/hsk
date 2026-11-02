@@ -31,6 +31,12 @@ const {measureDOM,visualPixels}=require('./ui-outside-scope-core.cjs');
   assert.ok((await scoped()).some(n=>n.text==='New item'),'Open drawer must still be measured');
   await page.setViewportSize({width:1440,height:300});await page.locator('#drawer').evaluate(n=>n.setAttribute('aria-hidden','true'));
   assert.ok(!(await scoped()).some(n=>n.text==='New item'),'Dormant mobile drawer remains scoped on PC');const desktop=await scoped();await page.locator('#content').evaluate(n=>n.style.padding='1px');assert.notDeepEqual(await scoped(),desktop,'PC content remains protected');
+  await page.setContent('<aside class="sidebar" style="position:fixed;left:0;width:200px;height:100vh"><button>Old menu</button></aside><aside id="drawer" aria-hidden="true"><div class="drawer-body" style="position:fixed;left:-2000px"><button>Old phone menu</button></div></aside><header id="studioHeader">Protected header</header><main id="content">Protected page</main>');
+  const navigation=()=>page.evaluate(measureDOM,{skipSidebar:true,skipClosedMobileDrawerBody:true});const navBase=await navigation();
+  await page.locator('.sidebar').evaluate(n=>n.innerHTML='<button>One tools entry</button><button>Practice chooser</button>');
+  await page.locator('.drawer-body').evaluate(n=>n.innerHTML='<button>Unified phone menu</button>');
+  assert.deepEqual(await navigation(),navBase,'Only sidebar and closed drawer are scoped');
+  await page.locator('#studioHeader').evaluate(n=>n.style.marginLeft='1px');assert.notDeepEqual(await navigation(),navBase,'Header remains protected in combined navigation scope');
   console.log('PASS guard browser control: identical stable; 1px movement, subtle CSS color, radius, gradient and text changes detected');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

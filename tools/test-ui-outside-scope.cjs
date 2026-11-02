@@ -52,7 +52,7 @@ test('shared header requests preserve ALL route visual comparisons',()=>{
 
 test('shared header normalization leaves the route content geometry strict',()=>{
  const src=require('node:fs').readFileSync(require('node:path').join(__dirname,'check-ui-outside-scope.cjs'),'utf8');
- assert.ok(src.includes('page.evaluate(measureDOM,{skipHeader:config.sharedHeaderOnly===true,skipSidebar:config.sharedSidebarOnly===true,skipClosedMobileDrawerBody:config.sharedMobileDrawerOnly===true})'));
+ assert.ok(src.includes('page.evaluate(measureDOM,{skipHeader:config.sharedHeaderOnly===true,skipSidebar:config.sharedSidebarOnly===true||config.sharedNavigationOnly===true,skipClosedMobileDrawerBody:config.sharedMobileDrawerOnly===true||config.sharedNavigationOnly===true})'));
  const fn=require('./ui-outside-scope-core.cjs').measureDOM;
  assert.match(fn.toString(),/options.skipHeader/);
 });
@@ -75,4 +75,11 @@ test('mobile drawer scope preserves all routes and forbids unrelated exclusions'
  for(const value of ['true',1])assert.throws(()=>scope({request:'Mobile drawer',excludedRoutes:[],sharedMobileDrawerOnly:value}));
  assert.throws(()=>scope({request:'Mobile drawer',excludedRoutes:['home'],sharedMobileDrawerOnly:true}));
  assert.throws(()=>scope({request:'Mobile drawer',excludedRoutes:[],sharedMobileDrawerOnly:true,sharedSidebarOnly:true}));
+});
+
+test('combined navigation scope preserves every route and only the two navigation regions',()=>{
+ assert.deepEqual(scope({request:'Simplify both menus',excludedRoutes:[],sharedNavigationOnly:true}),ROUTES);
+ assert.throws(()=>scope({request:'Simplify menus',excludedRoutes:['search'],sharedNavigationOnly:true}));
+ assert.throws(()=>scope({request:'Simplify menus',excludedRoutes:[],sharedNavigationOnly:'true'}));
+ assert.throws(()=>scope({request:'Simplify menus',excludedRoutes:[],sharedNavigationOnly:true,sharedHeaderOnly:true}));
 });

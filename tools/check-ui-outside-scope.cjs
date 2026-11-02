@@ -92,11 +92,11 @@ function serve(root){
     const alias=route==='music-play'?'music':route;
     assert.ok(state.hub===alias||state.classes.includes('show-'+route)||state.active===route,'Route did not open '+route+': '+JSON.stringify(state));
    }
-   if(config.sharedSidebarOnly)await page.addStyleTag({content:'.sidebar{visibility:hidden!important}'});
+   if(config.sharedSidebarOnly||config.sharedNavigationOnly)await page.addStyleTag({content:'.sidebar{visibility:hidden!important}'});
    // Only the explicitly requested drawer body is outside scope on phones.
    // Keep the shell, all screenshots and every page/desktop geometry strict.
-   if(config.sharedMobileDrawerOnly)assert.equal(await page.locator('#drawer').getAttribute('aria-hidden'),'true','Compare pages only with the drawer closed');
-   const measure=()=>page.evaluate(measureDOM,{skipHeader:config.sharedHeaderOnly===true,skipSidebar:config.sharedSidebarOnly===true,skipClosedMobileDrawerBody:config.sharedMobileDrawerOnly===true});
+   if(config.sharedMobileDrawerOnly||config.sharedNavigationOnly)assert.equal(await page.locator('#drawer').getAttribute('aria-hidden'),'true','Compare pages only with the drawer closed');
+   const measure=()=>page.evaluate(measureDOM,{skipHeader:config.sharedHeaderOnly===true,skipSidebar:config.sharedSidebarOnly===true||config.sharedNavigationOnly===true,skipClosedMobileDrawerBody:config.sharedMobileDrawerOnly===true||config.sharedNavigationOnly===true});
    let geometry=await measure(),settled=false;
    for(let attempt=0;attempt<12;attempt++){
     await page.waitForTimeout(250);const next=await measure();

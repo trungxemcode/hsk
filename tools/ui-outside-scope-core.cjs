@@ -20,6 +20,11 @@ function scope(config) {
     assert.equal(config.excludedRoutes.length,0,'Mobile drawer edit must preserve every route');
     assert.ok(!config.sharedHeaderOnly&&!config.sharedSidebarOnly&&!config.sharedQuickNavOnly,'Only the mobile drawer may be scoped');
   }
+  assert.ok(config.sharedNavigationOnly===undefined||typeof config.sharedNavigationOnly==='boolean','Navigation scope must be boolean');
+  if(config.sharedNavigationOnly){
+    assert.equal(config.excludedRoutes.length,0,'Navigation edit must preserve every route');
+    assert.ok(!config.sharedHeaderOnly&&!config.sharedQuickNavOnly&&!config.sharedSidebarOnly&&!config.sharedMobileDrawerOnly,'Scope only the sidebar and closed drawer');
+  }
   return ROUTES.filter(route=>!config.excludedRoutes.includes(route));
 }
 function pixels(a,b) {

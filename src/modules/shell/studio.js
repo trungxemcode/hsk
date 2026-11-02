@@ -102,7 +102,8 @@ renderIcons();
    // "translator" belongs to the global Search section, but is a distinct local tab.
    const localTab=!!b.closest('.studio-search-tabs');
    const group=b.closest('.side-nav .nav-group,.drawer-route-nav .nav-group');
-   const selected=group?(b.dataset.navAction?b.dataset.navAction===name:b.dataset.studioGo===name):localTab?b.dataset.searchTool===(document.body.dataset.searchTool||(name==='translator'?'translate':'vocabulary')):b.dataset.studioGo===(parents[name]||name);
+   const menuRoute=['quiz','srs','mistakes','compare','match-game','sentence-game','writing','passive','placement'].includes(name)?'practice':name==='translator'?'search':name;
+   const selected=group?(b.dataset.navAction?b.dataset.navAction===name:b.dataset.studioGo===menuRoute):localTab?b.dataset.searchTool===(document.body.dataset.searchTool||(name==='translator'?'translate':'vocabulary')):b.dataset.studioGo===(parents[name]||name);
    b.classList.toggle('active',selected);if(group&&selected)group.open=true;
    if(localTab)b.setAttribute('aria-pressed',String(selected));
    if(selected)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');

@@ -1,5 +1,5 @@
 {
-  "request": "Chỉ điện thoại: màn Vẽ chữ giữ header/dock chung; gộp đường vào dịch văn bản và ảnh trong menu Công cụ, một thao tác chính Đọc và dịch ảnh, OCR chỉ lấy chữ vẫn ở tùy chọn. PC và các trang khác không đổi.",
+  "request": "Gộp menu theo chức năng lớn trên cả PC và điện thoại: bốn công cụ thành Tra cứu & dịch; các kiểu luyện/ôn đi qua màn chọn chế độ Luyện & Ôn. Giữ Flashcard và Giáo trình, Sổ từ vựng, giải trí, luyện thi, tài khoản. Không đổi nội dung, điểm, dữ liệu hay các chế độ bên trong.",
   "excludedRoutes": [],
-  "sharedMobileDrawerOnly": true
+  "sharedNavigationOnly": true
 }
