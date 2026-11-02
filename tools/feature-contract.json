@@ -2376,6 +2376,17 @@
           "value": "NHẬN DIỆN TỪ QUÊN CHỮ"
         }
       ]
+    },
+    {
+      "id": "mobile-grouped-navigation",
+      "name": "Menu điện thoại cùng nhóm và route với PC",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/shell/studio.js",
+          "value": "mobileRoutes.className='drawer-route-nav'"
+        }
+      ]
     }
   ]
 }

@@ -102,15 +102,15 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
    assert.ok(await page.locator('#studioTargetLevel').evaluate(el=>el.clientWidth>200));
    await page.screenshot({path:'/tmp/studio-account-'+width+'.png',fullPage:true});
    await page.locator('#levelPill').click();
-   assert.equal(await page.locator('#drawer .drawer-body > .drawer-group').count(),5);
-   const summaries=page.locator('#drawer .drawer-group-heading');assert.equal(await summaries.count(),4);
+   assert.equal(await page.locator('#drawer .drawer-route-nav > .drawer-group').count(),5);
+   const summaries=page.locator('#drawer .drawer-route-nav > details > summary, #drawer .drawer-body > details > summary');assert.equal(await summaries.count(),7);
    for(const summary of await summaries.all()){
     if(await summary.locator('..').getAttribute('open')!==null)await summary.click();
     assert.equal(await summary.locator('..').getAttribute('open'),null);await summary.press('Enter');assert.notEqual(await summary.locator('..').getAttribute('open'),null);await summary.press('Enter');assert.equal(await summary.locator('..').getAttribute('open'),null);
    }
    if(await page.locator('#hskFilterToggle').getAttribute('aria-expanded')==='true')await page.locator('#hskFilterToggle').click();
    await page.waitForTimeout(300);await page.screenshot({path:'/tmp/studio-menu-'+width+'.png',fullPage:true});
-   await summaries.filter({hasText:'Ôn luyện'}).click();await page.locator('#drawer [data-drawer-mode="quiz"]').click();assert.ok(await page.locator('#quizPanel').isVisible());
+   await summaries.filter({hasText:'Ôn luyện'}).click();await page.locator('#drawer .drawer-route-nav [data-studio-go="quiz"]').click();assert.ok(await page.locator('#quizPanel').isVisible());
    await page.waitForTimeout(350);await page.screenshot({path:'/tmp/studio-quiz-'+width+'.png',fullPage:true});
   }
   // Exercise an active learning day on every weekday, including Sunday rest-day defaults.

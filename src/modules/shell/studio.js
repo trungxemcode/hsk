@@ -45,6 +45,25 @@ renderIcons();
  function setTheme(mode){document.documentElement.dataset.theme=mode;const dark=mode==='dark';themeButton.setAttribute('aria-pressed',String(dark));themeButton.setAttribute('aria-label',dark?'Bật chế độ sáng':'Bật chế độ tối');themeButton.title=dark?'Chế độ sáng':'Chế độ tối';themeButton.innerHTML=dark?'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>';const surface=getComputedStyle(document.documentElement).getPropertyValue('--paper').trim();if(surface)document.querySelectorAll('meta[name="theme-color"]').forEach(m=>m.content=surface);}
  setTheme(document.documentElement.dataset.theme==='dark'?'dark':'light');themeButton.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';setTheme(next);try{localStorage.setItem('hsk-theme-v1',next);}catch{}});window.addEventListener('storage',e=>{if(e.key==='hsk-theme-v1')setTheme(e.newValue==='dark'?'dark':'light');});
  const $=id=>document.getElementById(id),main=document.querySelector('.workspace');
+
+ // Build the mobile menu from PC route metadata before binding navigation events.
+ const drawerBody=$('drawer').querySelector('.drawer-body'),mobileRoutes=document.createElement('nav');mobileRoutes.className='drawer-route-nav';mobileRoutes.setAttribute('aria-label','Nhóm chức năng');
+ const legacy=document.createElement('div');legacy.hidden=true;legacy.className='drawer-legacy-hooks';
+ for(const n of [...drawerBody.children])if(n.matches('.music-chill-nav-entry,.music-nav-entry')||n.matches('details')&&!n.querySelector('#accountBtn,#aboutBtn'))legacy.append(n);
+ const levels=legacy.querySelector('.lesson-menu-levels');
+ const sourceNav=document.querySelector('.side-nav');
+ for(const source of [...sourceNav.children].filter(n=>n.matches('.nav-group,[data-studio-go="home"]'))){
+  const clone=source.cloneNode(true);clone.removeAttribute('id');
+  if(clone.tagName==='DETAILS'){
+   clone.classList.add('drawer-group');clone.querySelector('summary').classList.add('drawer-group-heading');clone.querySelector('.nav-group-items').classList.add('drawer-group-content');
+   if(source.querySelector('[data-studio-go="lessons"]')&&levels)clone.querySelector('.drawer-group-content').append(levels);
+  }
+  for(const b of clone.matches('button')?[clone]:clone.querySelectorAll('button[data-studio-go]'))b.classList.add('drawer-item');
+  clone.querySelectorAll('summary>span,button>span').forEach(n=>n.classList.add('di-lbl'));
+  clone.querySelectorAll('summary>i,button>i').forEach(n=>n.classList.add(n.classList.contains('nav-chevron')?'di-chev':'di-ico'));
+  mobileRoutes.append(clone);
+ }
+ drawerBody.prepend(mobileRoutes);drawerBody.append(legacy);
  function decorateControls(root=main){
   if(root.nodeType!==1)return;
   const mark=b=>{if(b.closest('.panel-box')&&!b.matches('.speech-button,.mastery-btn,.studio-action'))b.classList.add('studio-action');};
@@ -82,7 +101,7 @@ renderIcons();
   document.querySelectorAll('[data-studio-go],[data-search-tool]').forEach(b=>{
    // "translator" belongs to the global Search section, but is a distinct local tab.
    const localTab=!!b.closest('.studio-search-tabs');
-   const group=b.closest('.side-nav .nav-group');
+   const group=b.closest('.side-nav .nav-group,.drawer-route-nav .nav-group');
    const selected=group?(b.dataset.navAction?b.dataset.navAction===name:b.dataset.studioGo===name):localTab?b.dataset.searchTool===(document.body.dataset.searchTool||(name==='translator'?'translate':'vocabulary')):b.dataset.studioGo===(parents[name]||name);
    b.classList.toggle('active',selected);if(group&&selected)group.open=true;
    if(localTab)b.setAttribute('aria-pressed',String(selected));

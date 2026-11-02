@@ -1,6 +1,5 @@
 {
-  "request": "Chỉ PC ở ô Từ vựng hôm nay: pinyin và nghĩa 21px, bằng 3/4 Hán tự 28px, giữ weight 550 và cùng hàng. Điện thoại và các trang khác giữ nguyên.",
-  "excludedRoutes": [
-    "home"
-  ]
+  "request": "Chỉ menu drawer bên trái điện thoại: dùng cùng 5 nhóm và đích tính năng như sidebar PC, giữ bộ lọc HSK, tài khoản, admin, thông tin và chọn cấp giáo trình. Không đổi sidebar PC, dock hoặc nội dung trang.",
+  "excludedRoutes": [],
+  "sharedMobileDrawerOnly": true
 }

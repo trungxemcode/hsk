@@ -58,7 +58,10 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
    if(mobile){
     await page.locator('#menuBtn').click();
     assert.equal(await page.locator('.drawer-body>.music-nav-entry').isVisible(),false,'one shared music entry in drawer');
-    await page.locator('.drawer-body>.music-chill-nav-entry').click();
+    const entertainment=page.locator('#drawer .drawer-route-nav summary').filter({hasText:'Giải trí'});
+    if(await entertainment.locator('..').getAttribute('open')===null)await entertainment.click();
+    assert.equal(await page.locator('#drawer .drawer-route-nav [data-studio-go=music-play]').count(),1,'one grouped entertainment music entry');
+    await page.locator('#drawer .drawer-route-nav [data-studio-go=music-play]').click();
    }else{
     assert.equal(await page.locator('.side-nav [data-studio-go=music]').isVisible(),false,'one shared music entry in sidebar');
     await page.locator('.side-nav [data-studio-go="music-play"]').click();

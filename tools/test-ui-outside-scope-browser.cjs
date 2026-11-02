@@ -19,6 +19,18 @@ const {measureDOM,visualPixels}=require('./ui-outside-scope-core.cjs');
   await page.setContent('<svg width="20" height="20"><path d="M0 0L10 10"/></svg>');const svg=await page.evaluate(measureDOM);
   await page.locator('path').evaluate(n=>n.setAttribute('d','M0 0L11 10'));
   assert.notDeepEqual(await page.evaluate(measureDOM),svg,'SVG path edits must be protected independently of rasterization');
+  await page.setContent('<div id="drawer" aria-hidden="true"><div class="drawer-body"><button>Old menu</button></div></div><main id="content">Protected content</main>');
+  const scoped=()=>page.evaluate(measureDOM,{skipClosedMobileDrawerBody:true});
+  const drawerBaseline=await scoped();
+  await page.locator('.drawer-body').evaluate(n=>{n.style.position='fixed';n.style.left='-9999px';n.innerHTML='<button>Five groups</button>';});
+  // Position only the drawer body before taking matched geometry.
+  const closed=await scoped();await page.locator('.drawer-body').evaluate(n=>n.innerHTML='<button>New item</button><button>Another item</button>');
+  assert.deepEqual(await scoped(),closed,'Only closed mobile drawer body may differ');
+  await page.locator('#content').evaluate(n=>n.style.marginLeft='1px');assert.notDeepEqual(await scoped(),closed,'Page geometry must stay protected');
+  await page.locator('#drawer').evaluate(n=>n.setAttribute('aria-hidden','false'));
+  assert.ok((await scoped()).some(n=>n.text==='New item'),'Open drawer must still be measured');
+  await page.setViewportSize({width:1440,height:300});await page.locator('#drawer').evaluate(n=>n.setAttribute('aria-hidden','true'));
+  assert.ok(!(await scoped()).some(n=>n.text==='New item'),'Dormant mobile drawer remains scoped on PC');const desktop=await scoped();await page.locator('#content').evaluate(n=>n.style.padding='1px');assert.notDeepEqual(await scoped(),desktop,'PC content remains protected');
   console.log('PASS guard browser control: identical stable; 1px movement, subtle CSS color, radius, gradient and text changes detected');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

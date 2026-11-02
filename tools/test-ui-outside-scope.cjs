@@ -52,7 +52,7 @@ test('shared header requests preserve ALL route visual comparisons',()=>{
 
 test('shared header normalization leaves the route content geometry strict',()=>{
  const src=require('node:fs').readFileSync(require('node:path').join(__dirname,'check-ui-outside-scope.cjs'),'utf8');
- assert.ok(src.includes('page.evaluate(measureDOM,{skipHeader:config.sharedHeaderOnly===true,skipSidebar:config.sharedSidebarOnly===true})'));
+ assert.ok(src.includes('page.evaluate(measureDOM,{skipHeader:config.sharedHeaderOnly===true,skipSidebar:config.sharedSidebarOnly===true,skipClosedMobileDrawerBody:config.sharedMobileDrawerOnly===true})'));
  const fn=require('./ui-outside-scope-core.cjs').measureDOM;
  assert.match(fn.toString(),/options.skipHeader/);
 });
@@ -68,4 +68,11 @@ test('shared quick navigation scope compares all routes and validates narrow nor
  assert.match(source,/config.sharedQuickNavOnly/);
  assert.match(source,/\.side-quick button svg\{width:16px!/);
  assert.match(source,/@media\(min-width:721px\)/);
+});
+
+test('mobile drawer scope preserves all routes and forbids unrelated exclusions',()=>{
+ assert.deepEqual(scope({request:'Mobile drawer',excludedRoutes:[],sharedMobileDrawerOnly:true}),ROUTES);
+ for(const value of ['true',1])assert.throws(()=>scope({request:'Mobile drawer',excludedRoutes:[],sharedMobileDrawerOnly:value}));
+ assert.throws(()=>scope({request:'Mobile drawer',excludedRoutes:['home'],sharedMobileDrawerOnly:true}));
+ assert.throws(()=>scope({request:'Mobile drawer',excludedRoutes:[],sharedMobileDrawerOnly:true,sharedSidebarOnly:true}));
 });
