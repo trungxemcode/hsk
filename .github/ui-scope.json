@@ -1,8 +1,6 @@
 {
-  "request": "Tách Hồ sơ và Tài khoản thành hai trang điều hướng độc lập trên PC/mobile; bỏ hai tab trong trang; avatar mở Hồ sơ. Chỉ đổi hai trang này và mục tương ứng trong sidebar/drawer.",
+  "request": "PR #298: chỉ căn giữa nội dung của hai nút Kiểm tra cập nhật/Cập nhật trong thẻ phiên bản thuộc Tài khoản → Cài đặt trên desktop và điện thoại. Hồ sơ và mọi trang khác phải giữ nguyên.",
   "excludedRoutes": [
-    "account",
-    "profile"
-  ],
-  "sharedNavigationOnly": true
+    "account"
+  ]
 }

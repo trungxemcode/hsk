@@ -643,6 +643,7 @@ body.studio-enabled #accountSettingsView .account-version-copy{display:grid;gap:
 body.studio-enabled #accountSettingsView .account-version-copy>:is(strong,p){margin:0!important}
 body.studio-enabled #accountSettingsView .account-version .offline-bar{margin:0!important;padding:0!important;gap:10px;align-items:center}
 body.studio-enabled #accountSettingsView .account-version .offline-bar :is(span,button){margin:0!important;translate:none!important}
+body.studio-enabled #accountPanel[data-account-current="settings"] .account-version .offline-bar :is(#offlineCheck,#offlineUpdate){display:inline-flex;align-items:center;justify-content:center;text-align:center}
 
 /* Hồ sơ: tighten only the final four rows on desktop; leave Settings and all other routes alone. */
 @media (min-width:721px){

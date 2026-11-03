@@ -27,6 +27,12 @@ function scope(config) {
   }
   return ROUTES.filter(route=>!config.excludedRoutes.includes(route));
 }
+function routeIsOpen(route, state) {
+  if(route==='profile')return state.classes.includes('show-account')&&state.accountCurrent==='profile';
+  if(route==='account')return state.classes.includes('show-account')&&state.accountCurrent==='settings';
+  const alias=route==='music-play'?'music':route;
+  return state.hub===alias||state.classes.includes('show-'+route)||state.active===route;
+}
 function pixels(a,b) {
   if(a.width!==b.width || a.height!==b.height) return {changed:Infinity, reason:'image dimensions changed'};
   let changed=0;
@@ -79,4 +85,4 @@ function scenarios(width,theme){
  return [{width:n,theme}];
 }
 function canRecaptureGeometryOnly(r){return !r.geometryEqual&&r.imageCountEqual&&r.changedPixels===0&&r.elementCountEqual;}
-module.exports={ROUTES,scope,pixels,visualPixels,measureDOM,scenarios,canRecaptureGeometryOnly};
+module.exports={ROUTES,scope,routeIsOpen,pixels,visualPixels,measureDOM,scenarios,canRecaptureGeometryOnly};
