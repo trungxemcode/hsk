@@ -66,6 +66,18 @@ test('lesson questions use the old Gemini 3.5 Flash Lite request settings and ac
  assert.ok(calls[1].body.systemInstruction.parts[0].text.includes(JSON.stringify(lesson)));
 });
 
+test('AI teacher mode uses a proactive HSK roleplay instruction and preserves chat history',async()=>{
+ const teacher=setup(answerResponse);
+ const response=await teacher.run('/lesson-ask',{hsk:3,question:'Bắt đầu buổi học',lesson:{id:'ai-teacher',title:'Giảng viên AI',words:[],content:{mode:'ai-teacher',topic:'Giao tiếp du lịch'}},history:[{role:'user',text:'Tôi muốn luyện gọi món.'},{role:'assistant',text:'我们来练习在餐厅点菜。'}]});
+ assert.equal(response.status,200);
+ const request=teacher.calls[1].body;
+ assert.match(request.systemInstruction.parts[0].text,/roleplay/);
+ assert.match(request.systemInstruction.parts[0].text,/chủ động dẫn dắt buổi học/);
+ assert.match(request.systemInstruction.parts[0].text,/cấp HSK 3/);
+ assert.deepEqual(request.contents.map(m=>m.role),['user','model','user']);
+ assert.equal(request.contents[0].parts[0].text,'Tôi muốn luyện gọi món.');
+});
+
 test('sentence Q&A, translation and OCR retain their previous generation settings',async()=>{
  const qa=setup(answerResponse);assert.equal((await qa.run('/ask')).status,200);
  assert.equal(qa.calls[1].body.generationConfig.temperature,0.2);
