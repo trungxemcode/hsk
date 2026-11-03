@@ -57,7 +57,7 @@ test('shared header normalization leaves the route content geometry strict',()=>
  assert.match(fn.toString(),/options.skipHeader/);
 });
 
-test("sidebar scope protects every route and only allows a boolean flag",()=>{assert.equal(scope({request:"Regroup sidebar",excludedRoutes:[],sharedSidebarOnly:true}).length,21);assert.throws(()=>scope({request:"Regroup sidebar",excludedRoutes:["home"],sharedSidebarOnly:true}));assert.throws(()=>scope({request:"Regroup sidebar",excludedRoutes:[],sharedSidebarOnly:"true"}));const fn=require("./ui-outside-scope-core.cjs").measureDOM;assert.match(fn.toString(),/options.skipSidebar/);assert.match(fn.toString(),/closest\('\.sidebar'\)/);});
+test("sidebar scope protects every route and only allows a boolean flag",()=>{assert.equal(scope({request:"Regroup sidebar",excludedRoutes:[],sharedSidebarOnly:true}).length,22);assert.throws(()=>scope({request:"Regroup sidebar",excludedRoutes:["home"],sharedSidebarOnly:true}));assert.throws(()=>scope({request:"Regroup sidebar",excludedRoutes:[],sharedSidebarOnly:"true"}));const fn=require("./ui-outside-scope-core.cjs").measureDOM;assert.match(fn.toString(),/options.skipSidebar/);assert.match(fn.toString(),/closest\('\.sidebar'\)/);});
 
 test('shared quick navigation scope compares all routes and validates narrow normalization',()=>{
  assert.deepEqual(scope({request:'Enlarge desktop quick navigation',excludedRoutes:[],sharedQuickNavOnly:true}),ROUTES);
@@ -83,3 +83,5 @@ test('combined navigation scope preserves every route and only the two navigatio
  assert.throws(()=>scope({request:'Simplify menus',excludedRoutes:[],sharedNavigationOnly:'true'}));
  assert.throws(()=>scope({request:'Simplify menus',excludedRoutes:[],sharedNavigationOnly:true,sharedHeaderOnly:true}));
 });
+
+test('Profile/Account split scopes exactly the two pages plus navigation',()=>{assert.equal(scope({request:'Separate profile/account',excludedRoutes:['account','profile'],sharedNavigationOnly:true}).length,20);assert.throws(()=>scope({request:'Bad unrelated scope',excludedRoutes:['account','profile','home'],sharedNavigationOnly:true}));});

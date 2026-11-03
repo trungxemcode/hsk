@@ -2492,6 +2492,27 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "navigation-profile",
+      "name": "Hồ sơ và Tài khoản là hai trang riêng trên PC và mobile",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "profile"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/shell/studio.js",
+          "value": "function setAccountPage(name)"
+        },
+        {
+          "kind": "file",
+          "file": "tools/profile-account-fixture.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }

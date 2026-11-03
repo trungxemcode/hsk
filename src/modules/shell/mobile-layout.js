@@ -22,7 +22,7 @@
  filterButtons.addEventListener('click',e=>{if(e.target.closest('[data-filter]')&&filterDialog.open)filterDialog.close();});
  filterDialog.addEventListener('click',e=>{const r=filterDialog.getBoundingClientRect();if(e.target===filterDialog&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))filterDialog.close();});
  const aboutButton=$('aboutBtn'),aboutGroup=aboutButton.closest('.drawer-group'),aboutHome=document.createComment('About menu original');aboutButton.before(aboutHome);aboutGroup.classList.add('drawer-about-group');
- function syncMobileMenu(){if(phone.matches){$('accountBtn').parentElement.append(aboutButton);}else{if(filterDialog.open)filterDialog.close();aboutHome.after(aboutButton);}pill.setAttribute('aria-haspopup','dialog');pill.setAttribute('aria-controls',filterDialog.id);pill.setAttribute('aria-expanded',String(filterDialog.open));}
+ function syncMobileMenu(){if(phone.matches){$('accountSettingsView').append(aboutButton);}else{if(filterDialog.open)filterDialog.close();aboutHome.after(aboutButton);}pill.setAttribute('aria-haspopup','dialog');pill.setAttribute('aria-controls',filterDialog.id);pill.setAttribute('aria-expanded',String(filterDialog.open));}
  phone.addEventListener('change',syncMobileMenu);syncMobileMenu();
 
 

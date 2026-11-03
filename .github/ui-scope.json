@@ -1,4 +1,8 @@
 {
-  "request": "Hành vi nút điều hướng chính trên PC/mobile: bấm lại mục đang mở thì về Trang chủ; menu/bộ lọc bấm lại để đóng. Không đổi layout, nội dung, tác vụ học/lưu/gửi, tab tùy chọn con hay API navigate lập trình.",
-  "excludedRoutes": []
+  "request": "Tách Hồ sơ và Tài khoản thành hai trang điều hướng độc lập trên PC/mobile; bỏ hai tab trong trang; avatar mở Hồ sơ. Chỉ đổi hai trang này và mục tương ứng trong sidebar/drawer.",
+  "excludedRoutes": [
+    "account",
+    "profile"
+  ],
+  "sharedNavigationOnly": true
 }
