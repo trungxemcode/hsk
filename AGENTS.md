@@ -8,6 +8,8 @@ The older `C:\New folder\hsk` is a secondary checkout, not a separate app or sou
 Đọc [CO_CHE_APP.md](CO_CHE_APP.md) để hiểu điểm cắm module, dữ liệu, PWA iOS/Android, backend và quy trình sửa an toàn. Khi thay đổi cơ chế, cập nhật mục tương ứng theo code đã kiểm chứng.
 
 ## Start a coding task (fast)
+Read the first 25 lines of [HSK_AI_FILE_GUIDE.md](HSK_AI_FILE_GUIDE.md), then search its routing table for the requested feature. Open only the matching files and verified callers/imports/events/endpoints; do not reload the entire guide on every request.
+
 1. Read this file. Run `git status -sb`, `git branch --show-current`, and `git log -1 --oneline` in the current checkout.
 2. Check `docs/ai/TASK_STATE.md` only when resuming work; inspect the relevant section of `docs/ai/PROJECT_MAP.md` only for the feature being changed.
 3. Prefer symbol/file search (Serena when available), then read the functions and dependencies that matter. Do not dump or re-read the whole repo.
