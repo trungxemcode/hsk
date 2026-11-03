@@ -8,6 +8,18 @@ test('only explicitly requested page is excluded; unknown/all-page bypass reject
   assert.throws(()=>scope({request:'test',excludedRoutes:['*']}));
   assert.throws(()=>scope({request:'test',excludedRoutes:ROUTES}));
 });
+test('Profile and Account split are verified by actual account page, not only show-account CSS',()=>{
+  const {routeIsOpen}=require('./ui-outside-scope-core.cjs');
+  const state={hub:'',active:'learn',classes:'studio-enabled mobile-ux show-account',accountCurrent:'profile'};
+  assert.equal(routeIsOpen('profile',state),true);
+  assert.equal(routeIsOpen('account',state),false);
+  assert.equal(routeIsOpen('profile',{...state,accountCurrent:'settings'}),false);
+  assert.equal(routeIsOpen('account',{...state,accountCurrent:'settings'}),true);
+  assert.equal(routeIsOpen('profile',{...state,classes:'studio-enabled show-lessons'}),false);
+  assert.equal(routeIsOpen('lessons',{...state,classes:'studio-enabled show-lessons'}),true);
+  assert.equal(routeIsOpen('home',{...state,hub:'home',classes:'studio-enabled'}),true);
+  assert.equal(scope({request:'Only Account settings update buttons',excludedRoutes:['account']}).includes('profile'),true);
+});
 test('perceptual comparison rejects one real pixel change and dimensions; ignores raster rounding',()=>{
   const a={width:1,height:1,data:Buffer.from([255,255,255,255])};
   assert.equal(visualPixels(a,a),0);
