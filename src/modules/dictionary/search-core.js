@@ -91,3 +91,53 @@ function nearSenses(a,b) {
   if (left===right || phraseIn(left,right) || phraseIn(right,left)) return true;
   return synonymGroups.some(group=>group.includes(left)&&group.includes(right));
 }
+
+// Người học thường ghi lại âm tiếng Trung theo thói quen tiếng Việt ("chửng mơ",
+// "xây sừ") thay vì pinyin. Đây chỉ là lớp gợi ý để tạo ứng viên, không tự
+// kết luận một chữ Hán duy nhất.
+const VN_PHONETIC_INITIALS = [
+  [/^(?:tr|ch)/, ['zh','ch','j','q','z']], [/^x/, ['x','s','sh']],
+  [/^s/, ['sh','s','x']], [/^(?:d|gi|r)/, ['r','y','z']],
+  [/^kh/, ['k','h','q']], [/^th/, ['t','c','ch']],
+  [/^ph/, ['f','p']], [/^b/, ['b','p']], [/^p/, ['p','b']], [/^(?:ngh|ng)/, ['w','y','']], [/^nh/, ['r','n']]
+];
+const VN_PHONETIC_FINALS = [
+  [/ưng$|ung$|âng$/, ['eng','ing','ang','en','un']], [/ư$/, ['i','u','e']],
+  [/ơu$|ơ$/, ['e','ou','uo']], [/ây$|ai$/, ['ai','ei','ui']],
+  [/ao$|au$/, ['ao','iao','ou']], [/oong$|ong$/, ['ong','uang','eng']],
+  [/uyên$|iên$/, ['uan','ian','un']], [/iệt$|iếc$/, ['ie','ue']]
+];
+function stripVietnameseTone(value) {
+  return String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/\d/g,'').trim();
+}
+function expandVietnamesePhonetic(rawInput) {
+  const syllables=stripVietnameseTone(rawInput).split(/\s+/).filter(Boolean);
+  return syllables.map(syllable=>{
+    const candidates=new Set([syllable]);
+    for(const [pattern,replacements] of VN_PHONETIC_INITIALS)if(pattern.test(syllable)){
+      const rest=syllable.replace(pattern,'');for(const replacement of replacements)candidates.add(replacement+rest);
+    }
+    for(const candidate of [...candidates])for(const [pattern,replacements] of VN_PHONETIC_FINALS)if(pattern.test(candidate))
+      for(const replacement of replacements)candidates.add(candidate.replace(pattern,replacement));
+    return [...candidates].filter(Boolean).slice(0,10);
+  });
+}
+function flattenPhoneticHints(hints) {
+  return [...new Set((Array.isArray(hints)?hints:[]).flatMap(group=>Array.isArray(group)?group:[group]).map(stripVietnameseTone).filter(Boolean))].slice(0,40);
+}
+function normalizePhoneticKey(value) {
+  return stripVietnameseTone(value).replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' ').trim();
+}
+function phoneticCandidateScore(pinyin,hints) {
+  const pin=normalizePhoneticKey(pinyin).replace(/\s+/g,'');
+  if(!pin)return 0;
+  const groups=Array.isArray(hints)?hints.map(group=>(Array.isArray(group)?group:[group]).map(stripVietnameseTone).filter(Boolean).slice(0,8)).filter(Boolean):[];
+  const combinations=[''];for(const group of groups){const next=[];for(const prefix of combinations)for(const value of group)next.push(prefix+value);combinations.splice(0,combinations.length,...next.slice(0,160));}
+  const values=[...new Set([...flattenPhoneticHints(hints),...combinations])].map(x=>x.replace(/\s+/g,''));
+  let best=0;
+  const nearPhonetic=(a,b)=>{if(Math.abs(a.length-b.length)>1)return false;let i=0,j=0,d=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;continue;}if(++d>1)return false;if(a.length>=b.length)i++;if(b.length>=a.length)j++;}return d+(i<a.length||j<b.length?1:0)<=1;};
+  for(const value of values){if(pin===value)best=Math.max(best,100);else if(pin.startsWith(value)||value.startsWith(pin))best=Math.max(best,72);else if(value.length>=3&&pin.includes(value))best=Math.max(best,58);else if(value.length>=4&&nearPhonetic(pin,value))best=Math.max(best,42);}
+  return best;
+}
+
+if(typeof window!=='undefined'&&window.HSKOpenDictionaryCore)Object.assign(window.HSKOpenDictionaryCore,{expandVietnamesePhonetic,flattenPhoneticHints,normalizePhoneticKey,phoneticCandidateScore});

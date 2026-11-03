@@ -4,8 +4,8 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 const root=new URL('../',import.meta.url);
 function helpers(){
- const context=vm.createContext({usageFactsData:{words:{'行':{variants:[{pin:'xíng',senses:[{mean:'đi'}]},{pin:'háng',senses:[{mean:'hàng'}]}]}}}});
- for(const name of ['src/utils/text.js','src/utils/format.js','src/modules/dictionary/search-core.js','src/ui/dictionary-relations.js'])vm.runInContext(fs.readFileSync(new URL(name,root),'utf8'),context);
+ const context=vm.createContext({usageFactsData:{words:{'行':{variants:[{pin:'xíng',senses:[{mean:'đi'}]},{pin:'háng',senses:[{mean:'hàng'}]}]}}}});context.window=context;
+ for(const name of ['src/utils/text.js','src/utils/format.js','src/modules/dictionary/open-dictionary-core.js','src/modules/dictionary/search-core.js','src/ui/dictionary-relations.js'])vm.runInContext(fs.readFileSync(new URL(name,root),'utf8'),context);
  return code=>JSON.parse(vm.runInContext('JSON.stringify('+code+')',context));
 }
 test('search normalization preserves Vietnamese meanings while allowing accent-free lookup',()=>{
@@ -26,6 +26,9 @@ test('synonym lookup retains ambiguous-query exclusions and whole-sense matching
 test('typo matching remains bounded and does not guess short words',()=>{
  const run=helpers();assert.equal(run("typoSimilar('studying','studing')"),true);
  assert.equal(run("typoSimilar('studying','running')"),false);assert.equal(run("typoSimilar('mua','mưa')"),false);
+});
+test('phonetic recovery expands Vietnamese approximations and ranks grounded candidates',()=>{
+ const run=helpers();const hints=run("HSKOpenDictionaryCore.expandVietnamesePhonetic('chửng mơ pan')");assert.ok(hints[0].some(x=>['cheng','chen','zung'].includes(x)));assert.equal(run("HSKOpenDictionaryCore.normalizePhoneticKey('nìa ni3')"),'nia ni');assert.ok(run("HSKOpenDictionaryCore.phoneticCandidateScore('zěnmebàn',HSKOpenDictionaryCore.expandVietnamesePhonetic('chửng mơ pan'))")>0);
 });
 test('shuffle returns all original entries without mutating the source',()=>{
  const run=helpers();assert.deepEqual(run("(()=>{const a=[1,2,3,4],b=shuffled(a);return {a,b:b.sort()};})()"),{a:[1,2,3,4],b:[1,2,3,4]});
