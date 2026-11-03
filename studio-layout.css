@@ -668,4 +668,6 @@ body.studio-enabled .side-nav .nav-group-items>button{width:100%;min-height:44px
 /* Independent Profile / Account routes; original node handlers remain intact. */
 body.studio-enabled #accountPageTitle{margin-bottom:16px}
 body.studio-enabled #accountPanel[data-account-current="profile"]>.update-push-settings{display:none!important}
-body.mobile-ux #accountPanel[data-account-current="settings"]>:is(#accountBadge,#accountStatus){display:block!important}
+body.mobile-ux #accountPanel[data-account-current="settings"]>#accountBadge{display:inline-flex!important}
+body.mobile-ux #accountPanel[data-account-current="settings"]>#accountStatus{display:block!important}
+body.mobile-ux #accountSettingsStatus{display:none!important}
