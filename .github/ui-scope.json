@@ -1,18 +1,6 @@
 {
   "request": "Cải tiến Tra cứu → Từ vựng trên desktop và điện thoại: tìm kiếm thông minh với AI nhận diện âm bồi tiếng Việt, đối chiếu từ điển cục bộ, gợi ý ngữ cảnh và ghi nhớ phát âm đã xác nhận. Các trang, công cụ tra cứu khác và điều hướng dùng chung phải giữ nguyên.",
   "excludedRoutes": [
-    "home",
-    "lessons",
-    "practice",
-    "notebook",
-    "real-reading",
-    "music",
-    "exam",
-    "study4",
-    "profile",
-    "account",
-    "translator",
-    "admin",
-    "about"
+    "search"
   ]
 }
