@@ -27,6 +27,7 @@ function setup(providerResponse,options={}){
  return {calls,run:(route,body=bodies[route])=>handler(new Request('https://worker.test'+route,{method:'POST',headers:{Origin:origin,Authorization:'Bearer '+token},body:JSON.stringify(body)}),{...env,...options})};
 }
 const answerResponse=()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify({answer:'你好 là lời chào.'})}]}}]});
+const teacherResponse=()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify({answer:JSON.stringify({lesson_plan:{scenario_description:'Bạn đang gọi món.',target_vocab:[{word:'菜单',pinyin:'càidān',meaning:'thực đơn'},{word:'推荐',pinyin:'tuījiàn',meaning:'giới thiệu'}],target_grammar:{pattern:'虽然…但是…',explanation:'Mặc dù… nhưng…',example:'虽然很贵，但是很好。'}},evaluation:null,teacher_turn:{chinese:'请看菜单，你想吃什么？',pinyin:'Qǐng kàn càidān, nǐ xiǎng chī shénme?',vietnamese_translation:'Hãy xem thực đơn, bạn muốn ăn gì?',current_mission_hint:'Dùng 菜单 và trả lời một món bạn muốn gọi.'},lesson_summary:null})})}]}}]});
 const batchBody={entries:[{id:'entry-1',han:'直播间',pinyin:'zhi2 bo1 jian1',gloss:'live streaming room'}]};
 const batchResponse=data=>()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(data)}]}}]});
 test('batch meanings are Vietnamese, mapped to source entries, and independent of HSK',async()=>{
@@ -76,6 +77,12 @@ test('AI teacher mode uses a proactive HSK roleplay instruction and preserves ch
  assert.match(request.systemInstruction.parts[0].text,/cấp HSK 3/);
  assert.deepEqual(request.contents.map(m=>m.role),['user','model','user']);
  assert.equal(request.contents[0].parts[0].text,'Tôi muốn luyện gọi món.');
+});
+
+test('AI teacher mode returns a bounded lesson plan and advances session state',async()=>{
+ const teacher=setup(teacherResponse),body={hsk:3,question:'Bắt đầu buổi học',lesson:{id:'ai-teacher',title:'Giảng viên AI',words:[],content:{mode:'ai-teacher',topic:'Gọi món',session_state:{turn:0,max_turns:6,target_vocab:[],used_vocab:[],recent_mistakes:[]}}},history:[]};
+ const response=await teacher.run('/lesson-ask',body),data=await response.json();
+ assert.equal(response.status,200);assert.equal(data.mode,'ai-teacher');assert.equal(data.teacher.lesson_plan.target_vocab.length,2);assert.equal(data.session_state.turn,1);assert.deepEqual(data.session_state.target_vocab,['菜单','推荐']);assert.equal(data.session_state.is_finished,false);
 });
 
 test('sentence Q&A, translation and OCR retain their previous generation settings',async()=>{
