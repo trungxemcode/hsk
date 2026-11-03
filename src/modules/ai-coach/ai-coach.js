@@ -87,6 +87,7 @@ function mountWrongExplain(host,getSpec){
    if(!r.ok)throw Error(data.error||'AI chưa trả lời được. Hãy thử lại.');
    if(typeof data.answer!=='string'||!data.answer.trim()||data.answer.length>5000)throw Error('Câu trả lời chưa đầy đủ. Hãy thử lại.');
    const answer=data.answer.trim();
+   if(isInitial){const takeaway=P.extractStep5TakeawayFromExplanation(answer);if(takeaway)P.recordUnifiedWeakness({hsk:builtContext.hsk,tagOrRule:takeaway,sampleSentence:builtContext.lesson.content.question,source:'wrong_answer_explanation'});}
    history.push({role:'user',text:questionText.slice(0,500)},{role:'assistant',text:answer});
    history=history.slice(-8);
    appendMessage('assistant',answer);

@@ -28,12 +28,12 @@ const HSK_TEACHER_RULES={
 };
 function teacherInstruction({hsk,topic,state}){
  const s=state&&typeof state==='object'?state:{},turn=Number.isInteger(s.turn)?s.turn:0,maxTurns=Number.isInteger(s.max_turns)?s.max_turns:6;
- const targets=Array.isArray(s.target_vocab)?s.target_vocab:[],used=Array.isArray(s.used_vocab)?s.used_vocab:[],remaining=targets.filter(word=>!used.includes(word));
+ const targets=Array.isArray(s.target_vocab)?s.target_vocab:[],used=Array.isArray(s.used_vocab)?s.used_vocab:[],remaining=targets.filter(word=>!used.includes(word)),focusRules=Array.isArray(s.focus_rules)?s.focus_rules.slice(0,3):[],mistakeSamples=Array.isArray(s.mistake_samples)?s.mistake_samples.slice(0,3):[];
  const phase=turn===0?'KHỞI TẠO':turn>=maxTurns-1?'TỔNG KẾT':turn===maxTurns-2?'THỬ THÁCH PHẢN XẠ':'LUYỆN CÓ DẪN DẮT';
  return `Bạn là Giảng viên Hán ngữ roleplay như một giáo viên thật, dạy 1-1 qua chat cho học viên Việt Nam. Hãy chủ động dẫn dắt buổi học theo từng nhiệm vụ; đây là một tiết học có điểm dừng, không phải chatbot nói chuyện tự do.
 Cấp độ HSK: ${hsk} (cấp HSK ${hsk}). Chủ đề: ${topic}. Lượt hiện tại: ${turn}/${maxTurns}. Giai đoạn: ${phase}.
 Giới hạn ngôn ngữ: ${HSK_TEACHER_RULES[hsk]||HSK_TEACHER_RULES[3]}
-Từ mục tiêu còn chưa dùng: ${JSON.stringify(remaining)}. Ngữ pháp mục tiêu hiện có: ${JSON.stringify(s.target_grammar||null)}. Lỗi gần đây: ${JSON.stringify(Array.isArray(s.recent_mistakes)?s.recent_mistakes:[])}.
+Từ mục tiêu còn chưa dùng: ${JSON.stringify(remaining)}. Ngữ pháp mục tiêu hiện có: ${JSON.stringify(s.target_grammar||null)}. Lỗi gần đây: ${JSON.stringify(Array.isArray(s.recent_mistakes)?s.recent_mistakes:[])}. Điểm yếu cần ưu tiên: ${JSON.stringify(focusRules)}. Ví dụ lỗi gần đây: ${JSON.stringify(mistakeSamples)}.
 
 Hãy trả về MỘT object JSON được serialize thành chuỗi trong trường answer, đúng các khóa sau:
 {
@@ -340,7 +340,8 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     const t=body.translation;
     const isWrongExam=isLessonAsk&&body.lesson?.content?.mode==='wrong-answer-explanation';
     const isAITeacher=isLessonAsk&&body.lesson?.content?.mode==='ai-teacher';
-    const teacherState=body.lesson?.content?.session_state||{};
+    const baseTeacherState=body.lesson?.content?.session_state||{};
+    const teacherState={...baseTeacherState,focus_rules:body.lesson?.content?.focusRules,mistake_samples:body.lesson?.content?.recentMistakeSamples};
     const teacherTopic=String(body.lesson?.content?.topic||'hội thoại hằng ngày').slice(0,80);
     const teacherTurn=Number.isInteger(teacherState.turn)?teacherState.turn:0;
     const teacherMaxTurns=Number.isInteger(teacherState.max_turns)?teacherState.max_turns:6;
