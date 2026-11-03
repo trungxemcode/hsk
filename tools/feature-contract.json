@@ -2476,6 +2476,22 @@
           "value": "PC HSK pill never opens navigation"
         }
       ]
+    },
+    {
+      "id": "main-navigation-repeat-home",
+      "name": "Bấm lại nút điều hướng chính đang mở để về Trang chủ",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/shell/studio.js",
+          "value": "function repeatedDestination(name,tool)"
+        },
+        {
+          "kind": "file",
+          "file": "tools/navigation-toggle-fixture.cjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }

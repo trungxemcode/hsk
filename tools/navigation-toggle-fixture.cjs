@@ -1,0 +1,16 @@
+const assert=require('node:assert/strict');
+module.exports=async function navigationToggle(page,width){
+ const home=()=>page.waitForFunction(()=>document.body.dataset.studioHub==='home');
+ const at=name=>page.waitForFunction(name=>{const b=document.body;if(name==='translator')return b.classList.contains('show-translator');if(name==='account')return b.classList.contains('show-account');if(name==='lessons')return b.classList.contains('show-lessons');if(['search','learn','quiz'].includes(name))return !b.dataset.studioHub&&document.querySelector('.app-tabs [data-mode="'+name+'"]')?.classList.contains('active');return b.dataset.studioHub===(name==='music-play'?'music':name);},name);
+ await page.evaluate(()=>HSKStudio.navigate('home'));
+ for(const [selector,name] of (width<721?[['#headerInfo','account']]:[['#headerInfo','account'],['#headerSearch','search']])){await page.locator(selector).click();await at(name);await page.locator(selector).click();await home();}
+ const area=width<721?'#mobileDock':'.side-nav';
+ const names=width<721?['lessons','practice','notebook','search']:['lessons','learn','practice','notebook','real-reading','music-play','search','exam','study4','account'];
+ async function press(name){const b=page.locator(area+' [data-studio-go="'+name+'"]:not([hidden])').first(),group=b.locator('xpath=ancestor::details[1]');if(await group.count()&&await group.getAttribute('open')===null)await group.locator('summary').first().click();if(name==='music-play'&&!await b.isVisible()){assert(await page.locator('#musicPanel').isVisible(),'existing full-screen music owns navigation visibility');await b.dispatchEvent('click');}else await b.click();}
+ for(const name of names){await page.evaluate(()=>HSKStudio.navigate('home'));await press(name);await at(name);await press(name);await home();}
+ await page.evaluate(()=>{HSKStudio.navigate('account');HSKStudio.navigate('account');});await at('account');await page.evaluate(()=>HSKStudio.navigate('home'));await home();
+ if(width>=721){await page.evaluate(()=>HSKStudio.navigate('quiz'));await at('quiz');await press('practice');await at('practice');await press('practice');await home();}else{await page.evaluate(()=>HSKStudio.navigate('translator'));await at('translator');await press('search');await at('search');await press('search');await home();}
+ if(width<721){const point=await page.locator('#menuBtn').boundingBox();await page.locator('#menuBtn').click();assert.equal(await page.locator('#drawer').getAttribute('aria-hidden'),'false');await page.locator('#menuBtn').dispatchEvent('click');await page.waitForFunction(()=>!document.body.classList.contains('drawer-open'));await page.locator('#menuBtn').click();await page.locator('#drawerClose').click();await page.waitForFunction(()=>!document.body.classList.contains('drawer-open'));}
+ const point=await page.locator('#levelPill').boundingBox();await page.locator('#levelPill').click();assert(await page.locator('#mobileHSKFilter').evaluate(n=>n.open));await page.mouse.click(point.x+point.width/2,point.y+point.height/2);await page.waitForFunction(()=>!document.getElementById('mobileHSKFilter').open);await home();
+ console.log('PASS repeated main navigation '+width+': avatar/search, '+names.join(',')+', idempotent API, child-to-parent and popup return');
+};

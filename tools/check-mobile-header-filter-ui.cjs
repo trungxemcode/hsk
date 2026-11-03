@@ -20,6 +20,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   await page.locator('#levelPill').click();await page.locator('#mobileHSKFilter [data-filter="all"]').click();await page.waitForFunction(()=>!document.getElementById('mobileHSKFilter').open);assert.equal(await page.locator('#studioLevelText').textContent(),'Tất cả HSK');
   await page.locator('#menuBtn').evaluate(n=>n.click());assert.equal(await page.locator('#drawer').getAttribute('aria-hidden'),'false','menu remains an independent navigation trigger');assert.equal(await page.locator('#mobileHSKFilter').evaluate(n=>n.open),false);await page.keyboard.press('Escape');
  }}
+ await require('./navigation-toggle-fixture.cjs')(page,width);
  console.log('PASS direct HSK filter and preserved navigation '+width);await page.close();
  }}finally{await browser.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

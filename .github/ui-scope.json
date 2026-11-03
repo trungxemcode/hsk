@@ -1,4 +1,4 @@
 {
-  "request": "Sửa riêng tương tác nút HSK trên header PC: mở bộ chọn HSK thay vì drawer điều hướng. Không đổi giao diện khi chưa mở, menu trái, trang nội dung hoặc hành vi điện thoại.",
+  "request": "Hành vi nút điều hướng chính trên PC/mobile: bấm lại mục đang mở thì về Trang chủ; menu/bộ lọc bấm lại để đóng. Không đổi layout, nội dung, tác vụ học/lưu/gửi, tab tùy chọn con hay API navigate lập trình.",
   "excludedRoutes": []
 }
