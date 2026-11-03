@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {execFileSync}=require('node:child_process');
 const assert=require('node:assert/strict');
-const {ROUTES,scope,pixels,visualPixels,measureDOM,scenarios,canRecaptureGeometryOnly}=require('./ui-outside-scope-core.cjs');
+const {ROUTES,scope,routeIsOpen,pixels,visualPixels,measureDOM,scenarios,canRecaptureGeometryOnly}=require('./ui-outside-scope-core.cjs');
 const {needsVisualComparison}=require('./ci-sharding-core.cjs');
 const [before,after,out]=process.argv.slice(2).map(x=>path.resolve(x));
 assert.ok(before&&after&&out,'Usage: node tools/check-ui-outside-scope.cjs BASE_DIR HEAD_DIR OUTPUT_DIR');
@@ -88,9 +88,8 @@ function serve(root){
    assert.ok(title.trim(),'Missing route title: '+route);
    // Confirm routes really opened, rather than comparing the previous page twice.
    {
-    const state=await page.evaluate(()=>({hub:document.body.dataset.studioHub||'',classes:document.body.className,active:document.querySelector('.app-tabs [data-mode].active')?.dataset.mode}));
-    const alias=route==='music-play'?'music':route;
-    assert.ok(state.hub===alias||state.classes.includes('show-'+route)||state.active===route,'Route did not open '+route+': '+JSON.stringify(state));
+    const state=await page.evaluate(()=>({hub:document.body.dataset.studioHub||'',classes:document.body.className,active:document.querySelector('.app-tabs [data-mode].active')?.dataset.mode,accountCurrent:document.getElementById('accountPanel')?.dataset.accountCurrent}));
+    assert.ok(routeIsOpen(route,state),'Route did not open '+route+': '+JSON.stringify(state));
    }
    if(config.sharedSidebarOnly||config.sharedNavigationOnly)await page.addStyleTag({content:'.sidebar{visibility:hidden!important}'});
    // Only the explicitly requested drawer body is outside scope on phones.
