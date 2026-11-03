@@ -25,7 +25,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
     }
     window.HSKStudio.navigate('account');
    },[...fs.readFileSync('tools/fixtures/music-heaacv2-64k.m4a')]);
-   await page.locator('[data-account-section="settings"]').click();
+   await page.evaluate(()=>HSKStudio.navigate('account'));
     await page.locator('#storageCleanupOpen').click();
    await page.waitForFunction(()=>document.querySelector('#storageCleanupResetExtras')?.disabled===false);
    assert.match(await page.locator('.storage-transfer-panel').innerText(),/Cốc Cốc/);

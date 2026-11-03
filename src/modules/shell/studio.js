@@ -49,10 +49,10 @@ renderIcons();
  // Build the mobile menu from PC route metadata before binding navigation events.
  const drawerBody=$('drawer').querySelector('.drawer-body'),mobileRoutes=document.createElement('nav');mobileRoutes.className='drawer-route-nav';mobileRoutes.setAttribute('aria-label','Nhóm chức năng');
  const legacy=document.createElement('div');legacy.hidden=true;legacy.className='drawer-legacy-hooks';
- for(const n of [...drawerBody.children])if(n.matches('.music-chill-nav-entry,.music-nav-entry')||n.matches('details')&&!n.matches('.drawer-about-group')&&!n.querySelector('#accountBtn,#aboutBtn'))legacy.append(n);
+ for(const n of [...drawerBody.children])if(n.matches('.music-chill-nav-entry,.music-nav-entry')||n.matches('details')&&!n.matches('.drawer-about-group')&&!n.querySelector('#aboutBtn'))legacy.append(n);
  const levels=legacy.querySelector('.lesson-menu-levels');
  const sourceNav=document.querySelector('.side-nav');
- for(const source of [...sourceNav.children].filter(n=>n.matches('.nav-group,[data-studio-go="home"]'))){
+ for(const source of [...sourceNav.children].filter(n=>n.matches('.nav-group,[data-studio-go="home"],[data-studio-go="profile"],[data-studio-go="account"]'))){
   const clone=source.cloneNode(true);clone.removeAttribute('id');
   if(clone.tagName==='DETAILS'){
    clone.classList.add('drawer-group');clone.querySelector('summary').classList.add('drawer-group-heading');clone.querySelector('.nav-group-items').classList.add('drawer-group-content');
@@ -71,7 +71,7 @@ renderIcons();
   root.querySelectorAll('button:not(.speech-button):not(.mastery-btn):not(.studio-action)').forEach(mark);
  }
  decorateControls();new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)decorateControls(node);}).observe(main,{subtree:true,childList:true});
- const labels={writing:'Học viết',placement:'Đánh giá trình độ & lộ trình','real-reading':'Đọc thực tế','study4':'Luyện thi HSK','match-game':'Đối chiếu 3 cột','sentence-game':'Sắp xếp câu',home:'Trang chủ',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện & Ôn',exam:'Bài tập HSK',review:'Luyện & Ôn',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn theo lịch',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
+ const labels={writing:'Học viết',placement:'Đánh giá trình độ & lộ trình','real-reading':'Đọc thực tế','study4':'Luyện thi HSK','match-game':'Đối chiếu 3 cột','sentence-game':'Sắp xếp câu',home:'Trang chủ',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện & Ôn',exam:'Bài tập HSK',review:'Luyện & Ôn',search:'Tra cứu',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn theo lịch',profile:'Hồ sơ',account:'Tài khoản',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
  const parents={'real-reading':'lessons','study4':'practice','match-game':'practice','sentence-game':'practice',learn:'practice',quiz:'practice',compare:'practice',exam:'practice',srs:'practice',mistakes:'practice',translator:'search',about:'home'};
  labels.music='Nghe nhạc học HSK';labels['music-play']='Nghe nhạc & học HSK';
  let ready=false,route='home',lastOwner='',fingerprint='',activityTimer,refreshTimer,lastGoalScope='';
@@ -109,7 +109,7 @@ renderIcons();
    if(selected)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
   });
  }
- function coreView(){for(const [cls,name] of [['show-account','account'],['show-admin','admin'],['show-translator','translator'],['show-about','about'],['show-lessons','lessons']])if(document.body.classList.contains(cls))return name;return document.querySelector('.app-tabs [data-mode].active')?.dataset.mode||'learn';}
+ function coreView(){for(const [cls,name] of [['show-account','account'],['show-admin','admin'],['show-translator','translator'],['show-about','about'],['show-lessons','lessons']])if(document.body.classList.contains(cls))return name==='account'&&$('accountPanel').dataset.accountCurrent==='profile'?'profile':name;return document.querySelector('.app-tabs [data-mode].active')?.dataset.mode||'learn';}
  const searchNames={vocabulary:'Tra cứu',handwriting:'Vẽ chữ',translate:'Dịch câu',image:'Đọc ảnh'};
  function chooseSearchTool(tool){
   if(!searchNames[tool])return;
@@ -122,7 +122,7 @@ renderIcons();
  }
  let pendingMusic='',musicWaitTimer=0,musicWaitControls=[],routeChosenBeforeReady=false;
  function clearMusicWait(failed=false){clearTimeout(musicWaitTimer);pendingMusic='';for(const [node,small,label] of musicWaitControls){node.removeAttribute('aria-busy');node.classList.remove('music-entry-pending');if(small)small.textContent=failed?'Chưa mở được. Chạm để thử lại.':label;}musicWaitControls=[];}
- function earlyMusicHome(){if(!ready&&!pendingMusic&&!['account','translator','about','admin'].includes(route)&&(!document.body.dataset.studioHub||document.body.dataset.studioHub==='home')){document.body.dataset.studioHub='home';$('studioHome').hidden=false;title('home');refresh();}}
+ function earlyMusicHome(){if(!ready&&!pendingMusic&&!['profile','account','translator','about','admin'].includes(route)&&(!document.body.dataset.studioHub||document.body.dataset.studioHub==='home')){document.body.dataset.studioHub='home';$('studioHome').hidden=false;title('home');refresh();}}
  window.addEventListener('hsk-music-ready',()=>{const next=pendingMusic;clearMusicWait();if(next)navigate(next);else earlyMusicHome();});
  window.addEventListener('hsk-music-load-error',()=>clearMusicWait(true));
  // API navigation stays idempotent; only repeated main-navigation clicks toggle Home.
@@ -138,7 +138,7 @@ renderIcons();
   if(musicRoute&&!window.HSKMusic){clearMusicWait();pendingMusic=name;document.querySelectorAll('[data-studio-go="'+name+'"]').forEach(node=>{const small=node.querySelector('small');musicWaitControls.push([node,small,small?.textContent||'']);node.setAttribute('aria-busy','true');node.classList.add('music-entry-pending');if(small)small.textContent='Đang mở trình phát…';});musicWaitTimer=setTimeout(()=>clearMusicWait(true),20000);window.HSKMusicLoad?.start();return;}
   clearMusicWait();
   if(name==='review')name='practice';
-  if(!ready&&!['writing','placement','account','translator','about','admin','music','music-play'].includes(name))return;
+  if(!ready&&!['writing','placement','profile','account','translator','about','admin','music','music-play'].includes(name))return;
   if(!ready)routeChosenBeforeReady=true;
   if(name==='search'&&!$('handwritingPanel').hidden)$('handwritingClose').click();
   if(name==='search'||name==='translator')document.body.dataset.searchTool=name==='search'?'vocabulary':'translate';
@@ -148,7 +148,7 @@ renderIcons();
   if(['writing','placement','home','practice','review','exam','notebook','match-game','sentence-game','study4','real-reading','music','music-play'].includes(name)){
    const hub=name==='music-play'?'music':name;
    document.querySelector('.app-tabs [data-mode="learn"]').click();document.body.classList.remove('show-lessons','lesson-focus');document.body.dataset.studioHub=hub;document.querySelector(`[data-studio-hub-panel="${hub}"]`).hidden=false;title(name);
-  }else{const special={account:'accountBtn',translator:'translatorBtn',admin:'adminBtn',about:'aboutBtn'};const trigger=special[name]?$(special[name]):document.querySelector(`.app-tabs [data-mode="${name}"]`);if(!trigger||trigger.hidden)return;trigger.click();title(name);}
+  }else{const special={profile:'accountBtn',account:'accountBtn',translator:'translatorBtn',admin:'adminBtn',about:'aboutBtn'};const trigger=special[name]?$(special[name]):document.querySelector(`.app-tabs [data-mode="${name}"]`);if(!trigger||trigger.hidden)return;trigger.click();if(name==='profile'||name==='account')setAccountPage(name);title(name);}
   closeDrawer();if(musicRoute)main.scrollTo({top:0,behavior:'instant'});else main.scrollTop=0;window.scrollTo({top:0,behavior:musicRoute?'instant':window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});refresh();if(name==='exam')window.dispatchEvent(new Event('hsk-exam-open'));if(name==='match-game'||name==='sentence-game')window.HSKPracticeGames?.start(name);if(name==='study4')window.HSKStudy4?.open();if(name==='real-reading')window.HSKRealReading?.enter();if(name==='music'||name==='music-play'){window.HSKMusic?.enter(name==='music-play'?'chill':'study');$('musicPanel')?.querySelector('.music-stage')?.scrollTo({top:0,behavior:'instant'});}window.HSKPracticeSelection?.onNavigate?.(name);
  }
  window.addEventListener('hsk-lesson-context',()=>refresh());
@@ -193,7 +193,19 @@ renderIcons();
   const filter=document.body.classList.contains('show-lessons')?$('lessonsPanel').dataset.lessonLevel||'1':document.querySelector('[data-filter].active')?.dataset.filter||'all';$('studioLevelText').textContent=filter==='all'?'Tất cả HSK':'HSK '+filter;
  }
  document.querySelectorAll('[data-studio-go]').forEach(b=>b.addEventListener('click',()=>{const action=b.dataset.navAction;if(!action&&b.closest('.side-nav,.drawer-route-nav,#studioHeader,#mobileDock')&&repeatedDestination(b.dataset.studioGo,b.dataset.searchTool)){navigate('home');return;}if(action==='handwriting'||action==='image'){chooseSearchTool(action);return;}if(action){navigate('practice');if(action==='writing'&&window.HSKWritingPractice?.open){window.HSKWritingPractice.open();return;}const text={writing:'Học viết',passive:'Học rảnh tay',placement:'Đánh giá trình độ'}[action];[...document.querySelectorAll('#studioPractice .hub-card')].find(c=>c.textContent.includes(text))?.click();return;}if(b.dataset.studioGo==='real-reading')window.HSKRealReading?.leaveLesson?.();b.dataset.searchTool?chooseSearchTool(b.dataset.searchTool):navigate(b.dataset.studioGo);}));
- document.querySelectorAll('[data-account-section]').forEach(tab=>tab.addEventListener('click',()=>{const section=tab.dataset.accountSection;$('accountPanel').dataset.accountCurrent=section;document.querySelectorAll('[data-account-section]').forEach(x=>{const active=x.dataset.accountSection===section;x.classList.toggle('is-active',active);x.setAttribute('aria-selected',String(active));});document.querySelectorAll('[data-account-section-view]').forEach(view=>{view.hidden=view.dataset.accountSectionView!==section;});}));
+ // Auth status remains visible on Account while the original learning status stays on Profile.
+ const accountFeedback=document.createElement('p');accountFeedback.id='accountSettingsStatus';accountFeedback.className='hint';accountFeedback.setAttribute('role','status');$('accountSettingsTitle').after(accountFeedback);
+ const syncAccountFeedback=()=>{accountFeedback.textContent=$('accountStatus').textContent;accountFeedback.hidden=!accountFeedback.textContent.trim();};
+ new MutationObserver(syncAccountFeedback).observe($('accountStatus'),{childList:true,subtree:true,characterData:true});syncAccountFeedback();
+ // Separate navigation destinations share the original auth/learning nodes and storage.
+ function setAccountPage(name){
+  const section=name==='profile'?'profile':'settings',panel=$('accountPanel');
+  panel.dataset.accountCurrent=section;panel.setAttribute('aria-label',labels[name]);
+  $('accountPageTitle').textContent=labels[name];
+  document.querySelectorAll('[data-account-section-view]').forEach(view=>{view.hidden=view.dataset.accountSectionView!==section;});
+ }
+
+ $('accountBtn').addEventListener('click',()=>setAccountPage('account'));
  document.querySelectorAll('[data-search-tool]:not([data-studio-go])').forEach(b=>b.addEventListener('click',()=>chooseSearchTool(b.dataset.searchTool)));
  const syncHandwritingTools=()=>document.querySelectorAll('[data-search-tool="handwriting"]').forEach(b=>{if(b!==$('handwritingOpen'))b.disabled=$('handwritingOpen').disabled;});
  new MutationObserver(syncHandwritingTools).observe($('handwritingOpen'),{attributes:true,attributeFilter:['disabled']});syncHandwritingTools();
@@ -206,6 +218,7 @@ renderIcons();
  document.addEventListener('click',event=>{
   if(!event.isTrusted)return;
   const trigger=event.target.closest('.app-tabs [data-mode],#accountBtn,#translatorBtn,#adminBtn,#aboutBtn');if(!trigger)return;
+  if(trigger.id==='accountBtn')setAccountPage('account');
   const destination=trigger.dataset.mode||({accountBtn:'account',translatorBtn:'translator',adminBtn:'admin',aboutBtn:'about'})[trigger.id];
   if(!repeatedDestination(destination))return;
   event.preventDefault();event.stopImmediatePropagation();navigate('home');

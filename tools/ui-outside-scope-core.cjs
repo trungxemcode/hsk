@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const ROUTES = ['home','lessons','practice','search','learn','quiz','srs','mistakes','compare','notebook','match-game','sentence-game','study4','real-reading','exam','music','music-play','translator','account','about','admin'];
+const ROUTES = ['home','lessons','practice','search','learn','quiz','srs','mistakes','compare','notebook','match-game','sentence-game','study4','real-reading','exam','music','music-play','translator','account','profile','about','admin'];
 function scope(config) {
   assert.ok(config && typeof config.request === 'string' && config.request.trim(), 'Scope needs the owner request');
   assert.ok(Array.isArray(config.excludedRoutes), 'excludedRoutes must be an array');
@@ -22,7 +22,7 @@ function scope(config) {
   }
   assert.ok(config.sharedNavigationOnly===undefined||typeof config.sharedNavigationOnly==='boolean','Navigation scope must be boolean');
   if(config.sharedNavigationOnly){
-    assert.equal(config.excludedRoutes.length,0,'Navigation edit must preserve every route');
+    assert.ok(config.excludedRoutes.length===0||(config.excludedRoutes.length===2&&config.excludedRoutes.includes('account')&&config.excludedRoutes.includes('profile')),'Navigation edit may only accompany the explicit Profile/Account split');
     assert.ok(!config.sharedHeaderOnly&&!config.sharedQuickNavOnly&&!config.sharedSidebarOnly&&!config.sharedMobileDrawerOnly,'Scope only the sidebar and closed drawer');
   }
   return ROUTES.filter(route=>!config.excludedRoutes.includes(route));

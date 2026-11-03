@@ -16,7 +16,7 @@ test('required gate fails for missing, duplicated, stale, incomplete or failed t
 test('visual gate requires all four scenarios and every protected route',()=>{
  const {ROUTES}=require('./ui-outside-scope-core.cjs'),scope={request:'test',excludedRoutes:['account']},changed=['style.css'];
  const make=()=>[390,1440].flatMap(width=>['light','dark'].map(theme=>({baseSHA:'b',headSHA:'h',changed,scope,selectedScenarios:[{width,theme}],result:'PASS: protected entry-page states unchanged',results:ROUTES.filter(r=>r!=='account').map(r=>({key:r+'-'+width+'-'+theme,pass:true,geometryEqual:true,imageCountEqual:true,changedPixels:0}))})));
- assert.equal(verifyVisual(make(),'b','h',changed,scope),80);
+ assert.equal(verifyVisual(make(),'b','h',changed,scope),(ROUTES.length-scope.excludedRoutes.length)*4);
  for(const change of [r=>r.pop(),r=>r[0].results.pop(),r=>r[1]=r[0],r=>r[0].headSHA='old',r=>r[0].results[0].changedPixels=1]){const r=make();change(r);assert.throws(()=>verifyVisual(r,'b','h',changed,scope));}
 });
 test('scenario selection rejects incomplete and unknown matrix inputs',()=>{

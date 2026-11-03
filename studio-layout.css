@@ -664,3 +664,10 @@ body.studio-enabled .side-nav .nav-group-items>button{width:100%;min-height:44px
 .side-nav .nav-group summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .side-nav .nav-group:has(button.active)>summary{background:var(--accent-light);color:var(--accent-dark)}
 @media(min-width:721px) and (max-width:970px){body.studio-enabled .side-nav .nav-group>summary{justify-content:center;padding:10px 0!important}.side-nav .nav-group>summary>span,.side-nav .nav-chevron{display:none!important}.side-nav .nav-group-items{padding-left:0}}
+
+/* Independent Profile / Account routes; original node handlers remain intact. */
+body.studio-enabled #accountPageTitle{margin-bottom:16px}
+body.studio-enabled #accountPanel[data-account-current="profile"]>.update-push-settings{display:none!important}
+body.mobile-ux #accountPanel[data-account-current="settings"]>#accountBadge{display:inline-flex!important}
+body.mobile-ux #accountPanel[data-account-current="settings"]>#accountStatus{display:block!important}
+body.mobile-ux #accountSettingsStatus{display:none!important}

@@ -17,7 +17,7 @@ const saved=grid.querySelector('[data-studio-go=search]');saved.dataset.studioGo
 const bookIcon=document.querySelector('#mobileDock [data-studio-go=notebook] svg');if(bookIcon){saved.querySelector('.shortcut-icon').removeAttribute('data-icon');saved.querySelector('.shortcut-icon').replaceChildren(bookIcon.cloneNode(true));}
 grid.replaceChildren(srs,quiz,flash,saved);write(home.querySelector('.dashboard-primary>.section-row h3'),'Học & ôn nhanh');
 const badge=make('span',null,'overview-due');badge.id='homeDueBadge';srs.append(badge);
-const streak=button('',()=>window.HSKStudio?.navigate('account'));streak.id='homeStreak';streak.setAttribute('aria-label','Chuỗi ngày học');$('headerInfo').before(streak);
+const streak=button('',()=>window.HSKStudio?.navigate('profile'));streak.id='homeStreak';streak.setAttribute('aria-label','Chuỗi ngày học');$('headerInfo').before(streak);
 const wordBox=make('section',null,'overview-word'),wordHead=make('div',null,'overview-word-head'),wordDetails=make('details'),summary=make('summary'),han=make('strong'),pin=make('span'),meaning=make('span'),wordBody=make('div',null,'overview-word-body'),wordRow=make('div',null,'overview-word-row'),sound=make('div',null,'overview-word-sound');
 let offset=0,current=null,signature='',frame=0,lastMobile=null;
 wordBox.id='homeDailyWord';wordHead.append(make('h3','Từ vựng hôm nay'),button('Đổi từ ↻',()=>{offset++;render();}));summary.append(han,pin,meaning);wordDetails.append(summary,wordBody);wordRow.append(wordDetails,sound);wordBox.append(wordHead,wordRow);home.querySelector('.dashboard-grid').after(wordBox);wordBox.after(searchDetails);

@@ -16,7 +16,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    for(const [name,n] of [['hsk-offline-sentinel',77],['hsk-music-codec-v1',4096],['hsk-writing-data-2',2048],['hsk-handwriting-neural-ppocrv5-ort122-v1',1024],['hsk-open-dictionary-cedict-v1',512],['unrelated-cache',99]]){const c=await caches.open(name);await c.put('/'+name,new Response(new Uint8Array(n)));}
    window.HSKStudio.navigate('account');
   },[...fs.readFileSync('tools/fixtures/music-heaacv2-64k.m4a')]);
-  await page.locator('[data-account-section="settings"]').click();
+  await page.evaluate(()=>HSKStudio.navigate('account'));
   await page.locator('#storageCleanupOpen').click();await page.waitForFunction(()=>!document.querySelector('#storageCleanupStatus').textContent.includes('Đang tính'));
   assert.equal(await page.locator('.storage-cleanup-row').count(),7);assert.equal(await page.getByText('Nhạc riêng tài khoản khác',{exact:true}).count(),0);assert.equal(await page.locator('#storageCleanupDelete').isDisabled(),true);
   assert.match(await page.locator('#storageCleanupTotal').innerText(),/KiB|MiB/);
