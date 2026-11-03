@@ -33,12 +33,17 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
      await page.evaluate(()=>document.activeElement?.blur?.());
      // CSS color transitions may not settle at the same speed on headless Chrome/CI.
      // Wait for actual visual contrast rather than asserting in the first animation frame.
-     await page.waitForFunction(selector=>{
+     const selectedIndex=mode==='search'?0:2,otherIndex=mode==='search'?2:0;
+     await page.waitForFunction(({selector,selectedIndex,otherIndex})=>{
       const buttons=[...document.querySelectorAll(selector)];
-      const active=buttons.find(b=>b.getAttribute('aria-pressed')==='true'),idle=buttons.find(b=>b.getAttribute('aria-pressed')==='false');return buttons.length===4&&active&&idle&&getComputedStyle(active).backgroundColor!==getComputedStyle(idle).backgroundColor;
-     },panel+' .studio-search-tabs button',{timeout:4000});
+      // Compare the exact two tabs asserted below. A third idle tab can
+      // have a distinct background before the selected tab finishes painting.
+      return buttons.length===4&&buttons[selectedIndex]?.getAttribute('aria-pressed')==='true'
+       &&buttons[otherIndex]?.getAttribute('aria-pressed')==='false'
+       &&getComputedStyle(buttons[selectedIndex]).backgroundColor!==getComputedStyle(buttons[otherIndex]).backgroundColor;
+     },{selector:panel+' .studio-search-tabs button',selectedIndex,otherIndex},{timeout:5000});
      const colors=await buttons.evaluateAll(bs=>bs.map(el=>getComputedStyle(el).backgroundColor));
-     assert.notEqual(colors[mode==='search'?0:2],colors[mode==='search'?2:0],mode+' visually distinguishes chosen tab');
+     assert.notEqual(colors[selectedIndex],colors[otherIndex],mode+' visually distinguishes chosen tab');
      const chosen=await buttons.nth(mode==='search'?0:2).getAttribute('aria-current');
      assert.equal(chosen,'page',mode+' current');
      const nav=page.locator(width<721?'#mobileDock [data-studio-go="search"]':'.sidebar .side-nav [data-studio-go="search"]:not([data-nav-action])');
