@@ -11,6 +11,12 @@ test('semantic intent and tone-sensitive readings avoid cross-reading meaning co
  assert.equal(C.sameReading('píngfán','ping2 fan2'),true);assert.equal(C.sameReading('zhòng','zhong4'),true);assert.equal(C.sameReading('zhòng','zhong1'),false);assert.equal(C.sameReading('shù','shu3'),false);assert.equal(C.sameReading('lǜ','lu:4'),true);
  assert.equal(C.score(['形','形','xing2',['shape']],'he'),0,'short English substrings must not match unrelated glosses');
 });
+test('AI dictionary proposals are post-verified against local Hanzi and pinyin',()=>{
+ const rows=[['怎么办','怎麼辦','zěn me bàn',['làm thế nào; làm sao đây']]];
+ const result=C.reconcileAiTermsWithDictionary([{han:'怎么办',pinyin:'zen me ban',meaning:'làm sao đây'}],rows)[0];
+ assert.equal(result.verification_status,'verified');assert.equal(result.pinyin,'zěn me bàn');assert.equal(result.dict_meaning,'làm thế nào; làm sao đây');
+ const corrected=C.reconcileAiTermsWithDictionary([{han:'怎么办',pinyin:'zhèng me bān',meaning:'x'}],rows)[0];assert.equal(corrected.verification_status,'pinyin_corrected');
+});
 test('general search ranks exact, containing and near results without an HSK bonus',()=>{
  const exact=['直播','直播','zhi2 bo1',['live broadcast']],partial=['直播间','直播間','zhi2 bo1 jian1',['livestream room']],contains=['网络直播','網絡直播','wang3 luo4 zhi2 bo1',['webcast']];
  assert.ok(C.score(exact,'直播')>C.score(partial,'直播'));assert.ok(C.score(partial,'直播')>=C.score(contains,'直播'));assert.ok(C.score(partial,'直播間')>0);assert.ok(C.score(['学习','學習','xue2 xi2',['study']],'学刁')>0);

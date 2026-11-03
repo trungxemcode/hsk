@@ -1,7 +1,7 @@
 import {EXAM_SHARED_REGISTRY} from './exam-shared-registry.mjs';
 import {TUTOR_CURRICULUM} from './tutor-curriculum.mjs';
 
-export const QA_CACHE_REVISION='qa-word-recovery-v2';
+export const QA_CACHE_REVISION='qa-word-recovery-v3-hybrid-rag';
 const qaRoutes=new Set(['/ask','/lesson-ask','/dictionary-lookup','/dictionary-translate']);
 export function qaStable(value){
  const sort=x=>Array.isArray(x)?x.map(sort):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,sort(x[k])])):x;
@@ -9,6 +9,7 @@ export function qaStable(value){
 }
 export async function qaHash(value){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(typeof value==='string'?value:qaStable(value)));return Array.from(new Uint8Array(b),x=>x.toString(16).padStart(2,'0')).join('');}
 export function qaNormalize(q){return String(q||'').normalize('NFC').replace(/\s+/gu,' ').trim().toLowerCase();}
+export function qaNormalizePhonetic(q){return String(q||'').normalize('NFD').toLowerCase().replace(/[\u0300-\u036f]/gu,'').replace(/đ/g,'d').replace(/[1-5]/g,'').replace(/[^a-z0-9\s\p{Script=Han}]/gu,'').replace(/\s+/gu,' ').trim();}
 function qaPublicQuestion(q){return /^(?:(?:phân biệt|so sánh) [\p{Script=Han}]{1,12} (?:và|với) [\p{Script=Han}]{1,12}|(?:cách dùng|giải thích|nghĩa của) (?:(?:chữ|từ|trợ từ|cấu trúc) )?[\p{Script=Han}]{1,12}(?: (?:ở cuối câu|sau động từ))?|[\p{Script=Han}]{1,12} (?:nghĩa là gì|dùng thế nào|dùng khi nào))[?.？。!！]*$/u.test(q);}
 export function qaSensitive(x){return /(?:https?:\/\/|www\.|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b|\d[\d\s()+.-]{6,}\d|AIza[\w-]{20,}|\b(?:password|mật khẩu|api[_ -]?key|bearer|token|địa chỉ nhà|số điện thoại)\b)/iu.test(x);}
 export async function qaDescriptor(route,body,uid,env){
@@ -16,7 +17,8 @@ export async function qaDescriptor(route,body,uid,env){
  if(route==='/lesson-ask'&&(body.images?.length||(body.lesson?.content?.mode==='wrong-answer-explanation'&&EXAM_SHARED_REGISTRY[await qaHash({lesson:body.lesson,question:body.question})]!==true)))return null;
  if(route==='/lesson-ask'&&/^(placement-|open-dictionary)/.test(body.lesson?.id||''))return null;
  const context=route==='/lesson-ask'?body.lesson:route==='/ask'?body.translation:route==='/dictionary-translate'?body.entries:{context:body.context||'',word:body.word||null};
- const question=qaNormalize(body.question||body.query||(route==='/dictionary-translate'?'dịch nghĩa nhóm từ':''));
+ const rawQuestion=body.question||body.query||(route==='/dictionary-translate'?'dịch nghĩa nhóm từ':'');
+ const question=route==='/dictionary-lookup'?qaNormalizePhonetic(rawQuestion):qaNormalize(rawQuestion);
  // Context-bound followups without history are not independently reusable.
  if(!question||/^(giải thích lại|nói lại|tiếp tục|câu trên|đoạn trên|vì sao vậy|tại sao vậy)[?.!\s]*$/u.test(question)||qaSensitive(question))return null;
  let shared=false,trusted=false;
