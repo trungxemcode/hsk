@@ -68,6 +68,21 @@
   return defaultSelection.slice();
  }
  let selected=new Set(restore()),session=null;
+ function exposeContext(){
+  const context=session?.context;
+  window.HSKPracticeContext=context?{
+   snapshot(){return {uid:context.uid,hsk:context.hsk,lessonId:context.lessonId,lessonWords:context.lessonWords.slice(),focusRules:context.focusRules.slice(),recentMistakeSamples:context.recentMistakeSamples.slice(),adaptivePlan:context.adaptivePlan,sessionMissedWords:context.sessionMissedWords.slice(),sessionMissedRules:context.sessionMissedRules.slice()};},
+   recordMistake({word,rule,sampleSentence}={}){
+    if(!context)return;
+    const item=typeof word==='object'?word:{han:String(word||'').trim()};
+    const han=String(item.han||item.word||'').trim();
+    if(han&&!context.sessionMissedWords.some(x=>String(x.han||x)===han))context.sessionMissedWords.unshift({...item,han});
+    if(rule&&!context.sessionMissedRules.includes(String(rule)))context.sessionMissedRules.unshift(String(rule));
+    if(sampleSentence&&!context.recentMistakeSamples.includes(String(sampleSentence)))context.recentMistakeSamples.unshift(String(sampleSentence));
+    window.dispatchEvent(new CustomEvent('hsk-practice-context-change',{detail:this.snapshot()}));
+   }
+  }:null;
+ }
  function persist(){try{localStorage.setItem(prefKey(),JSON.stringify([...selected]));}catch{}}
  function renderCount(){
   for(const group of groups){
@@ -132,10 +147,13 @@
  function begin(group=groups[0]){
   const routes=group.modes.map(m=>m[0]).filter(id=>selected.has(id));
   if(!routes.length){group.hint.textContent='Hãy chọn ít nhất một chế độ.';return;}
-  session={routes,index:0,group};group.hint.textContent='';group.disclosure.open=false;launch(routes[0]);
+  const uid=owner(),hsk=level();
+  const remedial=window.HSKCoachProfile?.buildRemedialTopicForAiTeacher?.(hsk);
+  session={routes,index:0,group,context:{uid,hsk,lessonId:null,lessonWords:[],focusRules:remedial?.focusRules||[],recentMistakeSamples:remedial?.recentMistakeSamples||[],adaptivePlan:remedial?.adaptivePlan||null,sessionMissedWords:[],sessionMissedRules:[]}};
+  exposeContext();group.hint.textContent='';group.disclosure.open=false;launch(routes[0]);
  }
  function stop(){
-  session=null;updateBar();window.HSKStudio?.navigate('practice');
+  session=null;exposeContext();updateBar();window.HSKStudio?.navigate('practice');
  }
  function next(){
   if(!session)return;
@@ -149,7 +167,7 @@
    (session.routes[session.index]==='passive'&&route==='learn'));
  }
  window.addEventListener('hsk-account-ready',()=>{selected=new Set(restore());renderCount();stopIfNeeded();});
- function stopIfNeeded(){if(session){session=null;updateBar();}}
+ function stopIfNeeded(){if(session){session=null;exposeContext();updateBar();}}
  function alignExistingIcons(){
   const cards=practice.querySelectorAll('.hub-card:not([data-ps-icon-ready])');
   for(const card of cards){
