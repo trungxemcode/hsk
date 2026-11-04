@@ -4,7 +4,7 @@ import {createGeminiModelFallback} from './ai-resilience.mjs';
 import {validExamImages,resolveExamImages} from './wrong-answer-images.mjs';
 import {buildWrongAnswerInstruction} from './wrong-answer-rules.mjs';
 import {OWNER_UID,accountRoleCall,roleProvider} from './account-roles.mjs';
-import {qaBegin,qaFinish,qaRelease,qaUsage} from './tutor-cache.mjs';
+import {qaBegin,qaFinish,qaRelease,qaUsage,getCachedWrongAnswerExplanation,setCachedWrongAnswerExplanation} from './tutor-cache.mjs';
 import { vocabulary } from './hsk-vocabulary.mjs';
 import { validateHandwritingSample, submitHandwritingSample } from './handwriting-samples.mjs';
 import { checkReadingBody, buildReadingStory, validReadingStory } from './reading-service.mjs';
@@ -339,6 +339,9 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(isAsk){
     const t=body.translation;
     const isWrongExam=isLessonAsk&&body.lesson?.content?.mode==='wrong-answer-explanation';
+    const wrongCacheParams={hsk:level,lesson:body.lesson,history:body.history,images:body.images};
+    const cachedWrongAnswer=isWrongExam?getCachedWrongAnswerExplanation(wrongCacheParams):null;
+    if(cachedWrongAnswer)return reply({answer:cachedWrongAnswer,cached:true});
     const isAITeacher=isLessonAsk&&body.lesson?.content?.mode==='ai-teacher';
     const baseTeacherState=body.lesson?.content?.session_state||{};
     const teacherState={...baseTeacherState,focus_rules:body.lesson?.content?.focusRules,mistake_samples:body.lesson?.content?.recentMistakeSamples,adaptive_plan:body.lesson?.content?.adaptivePlan};
@@ -367,6 +370,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      return reply({answer:serialized,teacher,mode:'ai-teacher',session_state});
     }
     if(typeof answer!=='string'||!answer.trim()||answer.length>5000)return reply({error:'Câu trả lời chưa đầy đủ. Hãy thử lại.'},502);
+    if(isWrongExam)setCachedWrongAnswerExplanation(wrongCacheParams,answer);
     await qaUsage(env,payload);
     await qaFinish(roleEnv,qaSession,{answer},headers['X-HSK-AI-Provider'],{rawFetch:rawFetchFn,ctx,signal:controller.signal});
     return reply({answer});

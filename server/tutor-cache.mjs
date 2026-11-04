@@ -1,6 +1,14 @@
 import {EXAM_SHARED_REGISTRY} from './exam-shared-registry.mjs';
 import {TUTOR_CURRICULUM} from './tutor-curriculum.mjs';
 
+const wrongAnswerTurn0Cache=new Map(),questionVisualSummaryCache=new Map();
+const WRONG_ANSWER_TTL=14*24*60*60*1000;
+function imageFingerprint(images){if(!Array.isArray(images)||!images.length)return 'no_img';return images.map((im,i)=>{const raw=typeof im==='string'?im:(im?.src||im?.data||'');return raw?`${i}:${raw.length}:${raw.slice(0,18)}:${raw.slice(-18)}`:`empty_${i}`;}).join('|');}
+export function buildWrongAnswerCacheKey({hsk,lesson,history,images}={}){if(Array.isArray(history)&&history.length)return null;const c=lesson?.content||{};return ['wa_turn0_v1',hsk,lesson?.id||'',c.skill||'',c.question||'',c.transcript||'',JSON.stringify(c.allOptions||[]),c.userWrongAnswer||'',c.correctAnswer||'',imageFingerprint(images)].map(v=>String(v).trim().replace(/\s+/gu,' ')).join('|').slice(0,12000);}
+export function getCachedWrongAnswerExplanation(params){const key=buildWrongAnswerCacheKey(params);if(!key)return null;const hit=wrongAnswerTurn0Cache.get(key);if(!hit||hit.expiresAt<=Date.now()){wrongAnswerTurn0Cache.delete(key);return null;}return hit.answer;}
+export function setCachedWrongAnswerExplanation(params,answer){const key=buildWrongAnswerCacheKey(params);if(!key||typeof answer!=='string'||!answer.trim())return false;wrongAnswerTurn0Cache.set(key,{answer:answer.trim().slice(0,5000),expiresAt:Date.now()+WRONG_ANSWER_TTL});const qid=params?.lesson?.id;if(qid&&Array.isArray(params.images)&&params.images.length)questionVisualSummaryCache.set(String(qid),{summary:answer.trim().slice(0,900),expiresAt:Date.now()+WRONG_ANSWER_TTL});return true;}
+export function getQuestionVisualSummary(questionId){const hit=questionVisualSummaryCache.get(String(questionId||''));if(!hit||hit.expiresAt<=Date.now()){questionVisualSummaryCache.delete(String(questionId||''));return null;}return hit.summary;}
+
 export const QA_CACHE_REVISION='qa-word-recovery-v3-hybrid-rag';
 const qaRoutes=new Set(['/ask','/lesson-ask','/dictionary-lookup','/dictionary-translate']);
 export function qaStable(value){
