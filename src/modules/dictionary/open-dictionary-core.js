@@ -36,5 +36,33 @@
  }
  const vietnamese=q=>/[đĐ]|[\u0302\u0306\u0309\u031b\u0323]/.test(String(q).normalize('NFD'));
  function translationKey(w){let h=2166136261;for(const c of w.sourceMean||w.mean||''){h^=c.codePointAt(0);h=Math.imul(h,16777619);}return id(w)+'|'+(h>>>0).toString(16);}
- const api={KEY,id,fold,reading,sameReading,pinyinQuery,semanticQuery,valid,clean,add,rate,matches,near,score,vietnamese,translationKey};root.HSKOpenDictionaryCore=api;if(typeof module!=='undefined')module.exports=api;
+ function normalizePinyinWithoutTone(value){return fold(value).replace(/\s+/g,'');}
+ function verifyCharacterByCharacter(han,pinyin,rows){
+  const characters=[...String(han||'')],parts=String(pinyin||'').trim().split(/[\s,]+/).filter(Boolean);
+  if(!characters.length||characters.length!==parts.length)return {isValid:false,correctedPinyin:''};
+  const corrected=[];let validChars=0;
+  for(let i=0;i<characters.length;i++){
+   const row=(Array.isArray(rows)?rows:[]).find(candidate=>candidate[0]===characters[i]||candidate[1]===characters[i]);
+   if(!row)continue;
+   const readings=Array.isArray(row[2])?[row[2]]:[];
+   if(normalizePinyinWithoutTone(parts[i])===normalizePinyinWithoutTone(row[2])){validChars++;corrected.push(row[2]);}
+  }
+  return {isValid:validChars===characters.length,correctedPinyin:corrected.join(' ')};
+ }
+ // AI output is treated as a proposal. A local dictionary row always wins for
+ // Hanzi and pinyin; invented or incomplete suggestions remain visibly marked.
+ function reconcileAiTermsWithDictionary(aiTerms,localRows){
+  if(!Array.isArray(aiTerms))return [];
+  const rows=Array.isArray(localRows)?localRows:[];
+  return aiTerms.map(item=>{
+   const han=String(item?.han||'').trim(), exactRow=rows.find(row=>row&&((row[0]===han)||(row[1]===han)));
+   if(exactRow){
+    const pinyin=String(exactRow[2]||''),same=normalizePinyinWithoutTone(item.pinyin)===normalizePinyinWithoutTone(pinyin);
+    return {...item,han:exactRow[0],pinyin,dict_meaning:Array.isArray(exactRow[3])?exactRow[3].join('; '):'',verification_status:same?'verified':'pinyin_corrected',confidence:Number.isFinite(item.confidence)?Math.max(0,Math.min(1,item.confidence)):.95};
+   }
+   const checked=verifyCharacterByCharacter(han,item?.pinyin,rows);
+   return {...item,han,pinyin:checked.correctedPinyin||String(item?.pinyin||''),verification_status:checked.isValid?'char_verified':'unverified_ai',confidence:checked.isValid?.75:.4};
+  }).sort((a,b)=>(b.confidence||0)-(a.confidence||0));
+ }
+ const api={KEY,id,fold,reading,sameReading,pinyinQuery,semanticQuery,valid,clean,add,rate,matches,near,score,vietnamese,translationKey,normalizePinyinWithoutTone,verifyCharacterByCharacter,reconcileAiTermsWithDictionary};root.HSKOpenDictionaryCore=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

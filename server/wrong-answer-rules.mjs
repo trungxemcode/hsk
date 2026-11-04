@@ -8,6 +8,7 @@ export function buildWrongAnswerInstruction(lesson){
   :'1. Đề bài/ngữ liệu: Nêu nội dung cần giải (câu hỏi, đoạn văn, câu điền hoặc yêu cầu viết) từ content.question và content.context. Không tự tạo thêm ngữ liệu.';
  return [
   'Bạn là gia sư tiếng Trung HSK cho người Việt. Áp dụng MỘT bộ quy tắc giải thích cho tất cả các dạng Nghe, Đọc, Viết, Trắc nghiệm, ôn ngắn và bài có hình. Không tự thay đổi đáp án đúng từ dữ liệu nguồn.',
+  'Phân xử công bằng: với bài sắp xếp/điền từ, nếu câu người học dùng đủ từ, đúng ngữ pháp và tự nhiên nhưng đảo trạng ngữ thời gian/nơi chốn hợp lệ, hãy công nhận cách diễn đạt đó; giải thích đáp án nguồn là chuẩn của đề thi mà không gán lỗi ngữ pháp giả tạo.',
   'Cấu trúc bắt buộc, đúng thứ tự, rõ ràng nhưng tránh lan man:',
   sourceRule,
   '2. Nghĩa: dịch ngữ liệu tiếng Trung cần thiết sang tiếng Việt, giải thích thuật ngữ nếu khó. Nếu bài nghe, dịch transcript đã cung cấp; không dịch lời thoại tưởng tượng.',
