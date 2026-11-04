@@ -4,7 +4,7 @@ import {createGeminiModelFallback} from './ai-resilience.mjs';
 import {validExamImages,resolveExamImages} from './wrong-answer-images.mjs';
 import {buildWrongAnswerInstruction} from './wrong-answer-rules.mjs';
 import {OWNER_UID,accountRoleCall,roleProvider} from './account-roles.mjs';
-import {qaBegin,qaFinish,qaRelease,qaUsage} from './tutor-cache.mjs';
+import {qaBegin,qaFinish,qaRelease,qaUsage,getCachedWrongAnswerExplanation,setCachedWrongAnswerExplanation} from './tutor-cache.mjs';
 import { vocabulary } from './hsk-vocabulary.mjs';
 import { validateHandwritingSample, submitHandwritingSample } from './handwriting-samples.mjs';
 import { checkReadingBody, buildReadingStory, validReadingStory } from './reading-service.mjs';
@@ -28,12 +28,12 @@ const HSK_TEACHER_RULES={
 };
 function teacherInstruction({hsk,topic,state}){
  const s=state&&typeof state==='object'?state:{},turn=Number.isInteger(s.turn)?s.turn:0,maxTurns=Number.isInteger(s.max_turns)?s.max_turns:6;
- const targets=Array.isArray(s.target_vocab)?s.target_vocab:[],used=Array.isArray(s.used_vocab)?s.used_vocab:[],remaining=targets.filter(word=>!used.includes(word)),focusRules=Array.isArray(s.focus_rules)?s.focus_rules.slice(0,3):[],mistakeSamples=Array.isArray(s.mistake_samples)?s.mistake_samples.slice(0,3):[];
+ const targets=Array.isArray(s.target_vocab)?s.target_vocab:[],used=Array.isArray(s.used_vocab)?s.used_vocab:[],remaining=targets.filter(word=>!used.includes(word)),focusRules=Array.isArray(s.focus_rules)?s.focus_rules.slice(0,3):[],mistakeSamples=Array.isArray(s.mistake_samples)?s.mistake_samples.slice(0,3):[],adaptivePlan=Array.isArray(s.adaptive_plan)?s.adaptive_plan.slice(0,3):[];
  const phase=turn===0?'KHỞI TẠO':turn>=maxTurns-1?'TỔNG KẾT':turn===maxTurns-2?'THỬ THÁCH PHẢN XẠ':'LUYỆN CÓ DẪN DẮT';
  return `Bạn là Giảng viên Hán ngữ roleplay như một giáo viên thật, dạy 1-1 qua chat cho học viên Việt Nam. Hãy chủ động dẫn dắt buổi học theo từng nhiệm vụ; đây là một tiết học có điểm dừng, không phải chatbot nói chuyện tự do.
 Cấp độ HSK: ${hsk} (cấp HSK ${hsk}). Chủ đề: ${topic}. Lượt hiện tại: ${turn}/${maxTurns}. Giai đoạn: ${phase}.
 Giới hạn ngôn ngữ: ${HSK_TEACHER_RULES[hsk]||HSK_TEACHER_RULES[3]}
-Từ mục tiêu còn chưa dùng: ${JSON.stringify(remaining)}. Ngữ pháp mục tiêu hiện có: ${JSON.stringify(s.target_grammar||null)}. Lỗi gần đây: ${JSON.stringify(Array.isArray(s.recent_mistakes)?s.recent_mistakes:[])}. Điểm yếu cần ưu tiên: ${JSON.stringify(focusRules)}. Ví dụ lỗi gần đây: ${JSON.stringify(mistakeSamples)}.
+Từ mục tiêu còn chưa dùng: ${JSON.stringify(remaining)}. Ngữ pháp mục tiêu hiện có: ${JSON.stringify(s.target_grammar||null)}. Lỗi gần đây: ${JSON.stringify(Array.isArray(s.recent_mistakes)?s.recent_mistakes:[])}. Điểm yếu cần ưu tiên: ${JSON.stringify(focusRules)}. Ví dụ lỗi gần đây: ${JSON.stringify(mistakeSamples)}. Lịch ôn thích ứng: ${JSON.stringify(adaptivePlan)}. Nếu mục nào due=true, ưu tiên kiểm tra lại bằng một nhiệm vụ ngắn; nếu due=false, củng cố bằng ngữ cảnh mới và không lặp máy móc.
 
 Hãy trả về MỘT object JSON được serialize thành chuỗi trong trường answer, đúng các khóa sau:
 {
@@ -339,9 +339,12 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(isAsk){
     const t=body.translation;
     const isWrongExam=isLessonAsk&&body.lesson?.content?.mode==='wrong-answer-explanation';
+    const wrongCacheParams={hsk:level,lesson:body.lesson,history:body.history,images:body.images};
+    const cachedWrongAnswer=isWrongExam?getCachedWrongAnswerExplanation(wrongCacheParams):null;
+    if(cachedWrongAnswer)return reply({answer:cachedWrongAnswer,cached:true});
     const isAITeacher=isLessonAsk&&body.lesson?.content?.mode==='ai-teacher';
     const baseTeacherState=body.lesson?.content?.session_state||{};
-    const teacherState={...baseTeacherState,focus_rules:body.lesson?.content?.focusRules,mistake_samples:body.lesson?.content?.recentMistakeSamples};
+    const teacherState={...baseTeacherState,focus_rules:body.lesson?.content?.focusRules,mistake_samples:body.lesson?.content?.recentMistakeSamples,adaptive_plan:body.lesson?.content?.adaptivePlan};
     const teacherTopic=String(body.lesson?.content?.topic||'hội thoại hằng ngày').slice(0,80);
     const teacherTurn=Number.isInteger(teacherState.turn)?teacherState.turn:0;
     const teacherMaxTurns=Number.isInteger(teacherState.max_turns)?teacherState.max_turns:6;
@@ -367,6 +370,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      return reply({answer:serialized,teacher,mode:'ai-teacher',session_state});
     }
     if(typeof answer!=='string'||!answer.trim()||answer.length>5000)return reply({error:'Câu trả lời chưa đầy đủ. Hãy thử lại.'},502);
+    if(isWrongExam)setCachedWrongAnswerExplanation(wrongCacheParams,answer);
     await qaUsage(env,payload);
     await qaFinish(roleEnv,qaSession,{answer},headers['X-HSK-AI-Provider'],{rawFetch:rawFetchFn,ctx,signal:controller.signal});
     return reply({answer});

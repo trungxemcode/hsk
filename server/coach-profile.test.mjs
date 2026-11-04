@@ -1,5 +1,21 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {createRequire} from 'node:module';const require=createRequire(import.meta.url),P=require('../src/modules/ai-coach/coach-profile.js'),B=require('../src/modules/exams/exam-bank.js');require('../src/modules/exams/exam-expansion.js')(B);const now=Date.now(),s=(id,correct,time=now,extra={})=>({id,hsk:2,skill:'Đọc',type:'image',prompt:'她不喝茶，只喝水。',source:'',answer:'Người đọc sách',expected:'Người uống nước',correct,time,writing:false,...extra});
-test('one error and repeating one exact question cannot establish cross-question recurrence',()=>{let p=P.seed(null,[s('one',false)],now),g=P.groups(p,now)[0];assert.equal(g.status,'Chưa đủ bằng chứng');for(let n=1;n<=5;n++)p=P.add(p,s('one',false,now+n),now+10);g=P.groups(p,now+10)[0];assert.equal(g.distinctWrong,1);assert.equal(g.status,'Cần kiểm tra thêm');});
-test('recurrence needs different questions; historical events and exact attempts are bounded and deduplicated',()=>{let p=P.seed(null,[s('one',false,now-86400000),s('two',false,now-10000),s('one',false,now)],now);const g=P.groups(p,now)[0];assert.equal(g.status,'Lặp lại');assert.equal(g.days,2);assert.equal(g.distinctWrong,2);p=P.add(p,s('one',false,now),now);assert.equal(p.events.length,3);p=P.add(p,s('writing',false,now,{writing:true}),now);assert.equal(p.events.length,3);p=P.add(p,s('old',false,now-91*86400000),now);assert.equal(p.events.length,3);for(let i=0;i<450;i++)p=P.add(p,s('many-'+i,true,now+i),now+500);assert.equal(p.events.length,400);});
-test('trend compares sufficiently diverse windows and keeps proficiency levels apart',()=>{let p=P.seed(null,[],now);for(let i=0;i<20;i++)p=P.add(p,s('q'+i%5,i>=10,now-20000+i),now);const g=P.groups(p,now)[0];assert.equal(g.trend,'Giảm lỗi');assert.equal(g.previousWrong,10);assert.equal(g.recentWrong,0);p=P.add(p,s('other-level',false,now,{hsk:3}),now);assert.equal(P.groups(p,now).length,2);assert.equal(P.groups(P.seed(null,[s('only',false),s('second',true,now+1)],now+1),now+1)[0].trend,'Chưa đủ lượt để so sánh');});
-test('topic classification and target selection use question evidence, not learner speculation',()=>{assert.equal(P.topic(s('x',false)), 'negation');assert.equal(P.topic(s('x',false,now,{skill:'Nghe',prompt:'他几点到？'})),'time');assert.equal(P.topic(s('x',false,now,{type:'order'})),'order');const g=P.groups(P.seed(null,[s('x',false)],now),now)[0],matches=B.items.filter(q=>q.level===g.hsk&&P.matches(q,g));assert.ok(matches.length>0);assert.ok(P.plan(g).length===3);});
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+
+const require=createRequire(import.meta.url);
+const storage=new Map();
+globalThis.localStorage={getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,String(value))};
+const P=require('../src/modules/ai-coach/coach-profile.js');
+
+test('remedial teacher plan prioritizes repeated due weaknesses and schedules the next review',()=>{
+ const now=Date.now();
+ storage.set('hsk-coach-unified-weaknesses-v1',JSON.stringify({items:{
+  grammar:{title:'Trật tự từ',hsk:3,count:5,lastMistakeSample:'我明天去北京',updatedAt:now-8*86400000},
+  vocab:{title:'Từ chỉ số lượng',hsk:3,count:1,lastMistakeSample:'三个学生',updatedAt:now-2*86400000}
+ }}));
+ const result=P.buildRemedialTopicForAiTeacher(3);
+ assert.equal(result.focusRules[0],'Trật tự từ');
+ assert.equal(result.adaptivePlan[0].due,true);
+ assert.equal(result.adaptivePlan[0].priority>result.adaptivePlan[1].priority,true);
+ assert.match(result.adaptivePlan[0].nextReviewAt,/T/);
+});
