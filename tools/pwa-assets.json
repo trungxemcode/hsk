@@ -175,7 +175,8 @@
     "src/modules/shell/legacy-music-cleanup.js",
     "site-design-live.js",
     "site-design-config.json",
-    "src/modules/shell/feature-page.js"
+    "src/modules/shell/feature-page.js",
+    "src/modules/practice/practice-generator-core.js"
   ],
   "aliases": {
     "backup-core.js": "src/modules/backup/backup-core.js",
