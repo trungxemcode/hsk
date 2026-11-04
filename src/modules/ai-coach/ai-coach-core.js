@@ -22,7 +22,7 @@ for(const w of r.weaknesses)if(!skills.includes(w.skill)||!ids.has(w.id)||!str(w
 for(const c of r.corrections){if(!ids.has(c.id)||!str(c.original,500)||!verifyAndExtractOriginalQuote(ids.get(c.id).answer,c.original)||!str(c.corrected,700)||!str(c.why,500))throw Error('AI chưa trích đúng câu trả lời để sửa. Hãy thử lại.');}
 if(!samples.some(s=>s.writing))r.score=null;
 return {summary:r.summary,score:r.score,weaknesses:r.weaknesses,corrections:r.corrections};}
-function contextualSample(q,value,correct,meta){const row=sample(q,value,correct,meta);row.type=q.type||q.format||'';row.imageOnly=q.imageOnly===true;row.sourceRef=q.sourceRef?{code:q.sourceRef.code,number:q.sourceRef.number}:undefined;if(q.images){row.expected=optionText(q,q.options[q.answer]);row.options=q.options.map(v=>optionText(q,v));}return row;}
+function contextualSample(q,value,correct,meta){const row=sample(q,value,correct,meta);row.type=q.type||q.format||'';row.imageOnly=q.imageOnly===true;row.visualContext=String(q.visualSummary||q.imageCaption||q.imageAlt||'').slice(0,900)||null;row.sourceRef=q.sourceRef?{code:q.sourceRef.code,number:q.sourceRef.number}:undefined;if(q.images){row.expected=optionText(q,q.options[q.answer]);row.options=q.options.map(v=>optionText(q,v));}return row;}
 function buildWrongAnswerPrompt(spec={}){
  const rawHsk=Number(spec.hsk),hsk=Number.isFinite(rawHsk)&&rawHsk>=1&&rawHsk<=6?Math.round(rawHsk):3;
  const skill=String(spec.skill||'Đọc').slice(0,60);
