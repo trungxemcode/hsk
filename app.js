@@ -306,8 +306,15 @@ function createQuestion(w,direction,candidatePool=quizLevelWords()) {
  const sense=randomItem(senses), label=direction==='han'?sense:w.han;
  const distractors=[], seen=new Set([exact(label)]);
  // Keep every answer within the selected HSK range, regardless of mastery filters.
- const candidates=shuffled(candidatePool);
- for(const candidate of candidates) {
+ // Tier 1: the current filtered pool; tier 2: the same pool without length/status
+ // assumptions; tier 3: the complete HSK level. This prevents a small lesson or
+ // mastery filter from silently dropping a quiz item.
+ const targetLevel=Number(w.hsk);
+ const sameLevel=words.filter(candidate=>Number(candidate?.hsk)===targetLevel);
+ const sameLength=pool=>pool.filter(candidate=>candidate?.han?.length===w.han.length);
+ const pools=[sameLength(candidatePool),candidatePool,sameLength(sameLevel),sameLevel];
+ for(const pool of pools)for(const candidate of shuffled(pool)) {
+  if(distractors.length>=3)break;
   if(candidate.han===w.han)continue;
   const cs=sensesMap.get(candidate);
   // A word sharing any sense or a known near-synonym cannot become a wrong choice.
@@ -354,6 +361,7 @@ function answerQuiz(i) {
  const chosen=question.options[i];const correct=chosen.correct;if(correct)quizSession.score++;
  [...$('quizOptions').children].forEach((b,j)=>{b.disabled=true;if(question.options[j].correct)b.classList.add('correct');else if(j===i)b.classList.add('wrong');});
  recordQuizMistake(question,chosen);
+ if(!correct)window.HSKPracticeContext?.recordMistake?.({word:question.w,rule:question.item?.sense||question.direction,sampleSentence:question.item?.cn});
  review(question.w,correct?'good':'again');
  if(quizSession.lessonId)window.dispatchEvent(new CustomEvent('hsk-lesson-evidence',{detail:{id:quizSession.lessonId,key:wordKey(question.w),kind:'quiz',correct,time:Date.now()}}));
  const w=question.w;

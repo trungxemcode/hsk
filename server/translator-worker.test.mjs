@@ -88,6 +88,15 @@ test('AI teacher mode returns a bounded lesson plan and advances session state',
  const response=await teacher.run('/lesson-ask',body),data=await response.json();
  assert.equal(response.status,200);assert.equal(data.mode,'ai-teacher');assert.equal(data.teacher.lesson_plan.target_vocab.length,2);assert.equal(data.session_state.turn,1);assert.deepEqual(data.session_state.target_vocab,['菜单','推荐']);assert.equal(data.session_state.is_finished,false);
 });
+test('unified practice generation validates and returns only safe exercise shapes',async()=>{
+ const provider=setup(()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify({answer:JSON.stringify({items:[
+  {type:'multiple_choice',skill:'grammar',topicId:'ba_bei',prompt:'Chọn câu đúng với 把。',options:['我把书看完了。','我书把看完了。','把我书看了完。','我看把书完了。'],correctAnswer:0,explanation:'把 đưa tân ngữ lên trước động từ và kết quả。'},
+  {type:'reorder',skill:'writing',topicId:'word_order',prompt:'Xếp câu。',segments:['我','昨天','去了','学校'],correctAnswer:'我昨天去了学校',acceptedAnswers:[],explanation:'Trạng ngữ thời gian đứng trước động từ。'},
+  {type:'fill_in_blank',skill:'reading',topicId:'time',prompt:'我___去学校。',correctAnswer:'明天',explanation:'明天 chỉ ngày mai。'},
+  {type:'multiple_choice',prompt:'Sai vì thiếu lựa chọn',options:['A'],correctAnswer:0,explanation:'x'}]})})}]}}]}));
+ const body={hsk:3,question:'Tạo bài luyện',lesson:{id:'unified-practice-generator',title:'Ngân hàng bài luyện',words:[],content:{mode:'unified-practice-gen',hsk:3,count:4,focusRules:['把字句'],recentMistakeSamples:['我书把看完了'],adaptivePlan:[],lessonWords:[],requestedTypes:['multiple_choice','reorder','fill_in_blank']}},history:[]};
+ const response=await provider.run('/lesson-ask',body),data=await response.json();assert.equal(response.status,200);assert.equal(data.mode,'unified-practice-gen');assert.equal(data.items.length,3);assert.equal(data.items[1].segments.join(''),data.items[1].correctAnswer);assert.match(provider.calls[1].body.systemInstruction.parts[0].text,/biên soạn viên bài luyện HSK 3/);
+});
 
 test('sentence Q&A, translation and OCR retain their previous generation settings',async()=>{
  const qa=setup(answerResponse);assert.equal((await qa.run('/ask')).status,200);

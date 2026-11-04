@@ -64,6 +64,12 @@ test('validates completeness of script/paragraph/questions',()=>{
  assert.equal(validReadingStory({...story,quiz:story.quiz.slice(0,2)}),false);
  assert.equal(validReadingStory({...story,scriptMode:[{...story.scriptMode[0],hanzi:'nothing'},...story.scriptMode.slice(1)]}),false);
 });
+test('deep reading validation checks target vocabulary, unique options and evidence quotes',()=>{
+ const grounded={...story,quiz:story.quiz.map((q,i)=>({...q,evidenceZh:i===0?'我今天很忙':'我买了两个包子'}))};
+ assert.equal(validReadingStory(grounded,{genre:'dialogue',hsk:1,quality:true,lessonWords:[{han:'吃饭',mean:'ăn'},{han:'包子',mean:'bánh bao'}]}),true);
+ assert.equal(validReadingStory(grounded,{genre:'dialogue',hsk:1,quality:true,lessonWords:[{han:'火车',mean:'tàu'},{han:'医院',mean:'bệnh viện'}]}),false);
+ assert.equal(validReadingStory({...grounded,quiz:[{...grounded.quiz[0],evidenceZh:'火车已经出发'},grounded.quiz[1],grounded.quiz[2]]},{genre:'dialogue',hsk:1,quality:true}),false);
+});
 test('extracts only verified public source and generates a labeled educational adaptation',async()=>{
  const {calls,fetchFn}=provider();
  const x=await buildReadingStory(valid,{fetchFn,env,model:'gemini-3.5-flash-lite',random:()=>0});

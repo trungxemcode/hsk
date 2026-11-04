@@ -21,8 +21,27 @@
   const input=text(sentence).replace(/[\s\u3000]+/g,'');
   if(!/\p{Script=Han}/u.test(input))return [];
   const tokenizer=typeof Intl!=='undefined'&&Intl.Segmenter?new Intl.Segmenter('zh',{granularity:'word'}):null;
-  const raw=tokenizer?[...tokenizer.segment(input)].map(x=>x.segment):Array.from(input);
-  return raw.filter(x=>/[\p{Script=Han}0-9]/u.test(x)).map(x=>x.trim()).filter(Boolean);
+   const initial=(tokenizer?[...tokenizer.segment(input)].map(x=>x.segment):Array.from(input))
+     .map(x=>x.replace(/[^\p{Script=Han}0-9]/gu,'')).filter(Boolean);
+   const raw=[];
+   for(const token of initial){
+     // Intl.Segmenter may join a subject with 把/被 ("我把"). Keep the
+     // construction marker visible as its own grammatical tile.
+     const marker=token.search(/[把被]/u);
+     if(marker>0){raw.push(token.slice(0,marker),token.slice(marker));}
+     else if(marker===0&&token.length>1)raw.push(token[0],token.slice(1));
+     else raw.push(token);
+   }
+   // Keep aspect particles and common result/directional complements with the verb.
+   // This makes a reorder task test a teachable chunk (看完了), not an isolated 了 tile.
+   const attachToPrevious=new Set(['了','着','过','得','地','的','们','完','好','懂','到','见','清楚','错','上','里','中','下','前','后','边','面','起来','出来','下去','上来','过去','回来','进去','进来']);
+   const merged=[];
+   for(const token of raw){
+     const previous=merged[merged.length-1];
+     if(previous&&attachToPrevious.has(token)&&previous.length<=4)merged[merged.length-1]=previous+token;
+     else merged.push(token);
+   }
+   return merged;
  }
  function sentences(words,level=3,count=10,rng=Math.random){
   const candidates=[],seen=new Set(),entries=shuffled((words||[]).filter(w=>level==='all'||Number(w.hsk)===Number(level)),rng);

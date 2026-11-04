@@ -116,7 +116,9 @@
   try{
    const token=await untilAbort(user.getIdToken(),controller.signal);
    if(request!==controller||owner()!==requestOwner)return;
-   const body={hsk:current.hsk,genre:current.genre,lessonId:current.lessonId,lessonWords:C.requestWords(lesson?.words),sourceId:pick.source.id,topic:pick.topic,angle:pick.angle,excludeIds:C.stats(history,current).opened?history.entries.slice(-25).map(x=>x.id):[],excludeSources:history.entries.slice(-8).map(x=>x.sourceKey)};
+   const shared=window.HSKPracticeContext?.snapshot?.();
+   const missed=Array.isArray(shared?.sessionMissedWords)?shared.sessionMissedWords:[];
+   const body={hsk:current.hsk,genre:current.genre,lessonId:current.lessonId,lessonWords:C.requestWords([...missed,...(lesson?.words||[])]),sourceId:pick.source.id,topic:pick.topic,angle:pick.angle,excludeIds:C.stats(history,current).opened?history.entries.slice(-25).map(x=>x.id):[],excludeSources:history.entries.slice(-8).map(x=>x.sourceKey)};
    const response=await fetch(config.endpoint.replace(/\/translate$/,'/reading-next'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify(body),signal:controller.signal});
    const result=await response.json();if(request!==controller||owner()!==requestOwner||controller.signal.aborted)return;if(!response.ok)throw Error(result.error||'Chưa tải được bài đọc mới.');
    if(!acceptServerStory(result.story))throw Error('Dữ liệu bài đọc chưa hợp lệ.');
