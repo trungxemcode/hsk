@@ -68,6 +68,9 @@ Source: HSK repository on GitHub `main`. Verified against release 2.16 (2026-10-
 ## AI task routing (3.3.6)
 Server ai-backup.mjs: aiTaskRole + createAiRoleFetch select xKiro for routine text, Gemini for all reading generation and heavy/multimodal work (Worker 3.4.2); one sequential fallback, schema/reading validation, X-HSK-AI-Provider response header. AI_TASK_ROUTING controls policy. See ai-roles.test.mjs for routing and safety regression tests.
 
+## Closed-loop AI tutor (4.1.9 candidate)
+`src/modules/ai-coach/coach-profile.js` now keeps a per-account mastery profile with EXPOSED, ASSISTED_CORRECT, UNASSISTED_IMMEDIATE and DELAYED_MASTERED states, due retests and delta cloud sync. `tutor-loop-engine.js` coordinates diagnostic probes, teach-before-practice cards, progressive hints and a no-hint blind check. `practice-generator-core.js` exposes deterministic HSK ceiling, ambiguity, pinyin and tutor-pack gates; `planner-core.js` chooses a different context and consolidates or advances after delayed recall. The AI Teacher sends bounded mastery context, records evaluation evidence and surfaces due retests. Worker mode `micro-tutor-pack` generates and validates a teaching card, two guided exercises and a blind check; epistemic limits require clarification for ambiguous text and prohibit claims about pronunciation without audio. Tests: `server/tutor-loop-engine.test.mjs`, `server/translator-worker.test.mjs`.
+
 ## AI account quotas (server3.3.9)
 server/ai-control.mjs reserve: normal50 total/day,35 queries,15 readings; trusted ADMIN_UIDS exemption. translator-worker.mjs derives UID from verified Firebase lookup and exempts verified admins from cooldown. Existing global ordinary-user caps/cache/auth stay. Wrangler owns limits and UID allowlist; no frontend role flags grant access.
 

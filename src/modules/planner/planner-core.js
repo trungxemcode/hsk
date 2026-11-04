@@ -1,6 +1,9 @@
 /* Goal planning rules are independent of learning stores and AI availability. */
 (function(root){'use strict';
 const DAY=86400000,clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+const CONTEXT_THEMES=['daily_life','shopping','school_campus','workplace','travel_transport','dining_health'];
+function pickDifferentContextTheme(previousContext=''){const candidates=CONTEXT_THEMES.filter(x=>x!==previousContext);return candidates[Math.floor(Math.random()*candidates.length)]||'workplace';}
+function adjustNextLearningStepAfterRetest(profile,retestNodeId,isRetestPassed){const states=root.HSKCoachProfile?.MASTERY_STATES||{DELAYED_MASTERED:'DELAYED_MASTERED'},node=profile?.grammarNodes?.[retestNodeId]||profile?.vocabNodes?.[retestNodeId];if(!node)return {action:'CONTINUE_NORMAL_PLAN'};if(!isRetestPassed||node.state!==states.DELAYED_MASTERED)return {action:'FALLBACK_CONSOLIDATE',targetNodeId:node.id,targetTitle:node.title,difficultyAdjustment:'decrease',nextContextTheme:pickDifferentContextTheme(node.lastContextSignature),reasonVi:`Bạn vẫn còn nhầm "${node.title}" khi gặp tình huống mới. Gia sư sẽ củng cố lại nền tảng bằng ví dụ khác.`};return {action:'ADVANCE_AND_INCREASE_DIFFICULTY',masteredNodeId:node.id,difficultyAdjustment:'increase',nextContextTheme:pickDifferentContextTheme(node.lastContextSignature),reasonVi:`Bạn đã nhớ "${node.title}" trong ngữ cảnh mới; lộ trình chuyển sang nội dung nâng cao hơn.`};}
 function date(t){return new Date(t+7*3600000).toISOString().slice(0,10);}
 function slots(start,end,days){let n=0;for(let t=start;t<end;t+=DAY){const d=new Date(t+7*3600000).getUTCDay();if(d!==0||days===7){if(days!==5||d!==6)n++;}}return Math.max(1,n);}
 function choices({remaining,lessons=0,basis=1,target=5,budget=180,days=6},now=Date.now()){
@@ -17,5 +20,5 @@ function assess(plan,now){const start=plan.paceStarted||plan.created,elapsed=(no
  return {kind:'steady',reason:'Giữ nhịp hiện tại; cần thêm bằng chứng trước khi tăng tốc.',stats};
 }
 function alternatives(plan,assessment,now){const s=assessment.stats,left=s?.remaining??plan.total,daysLeft=Math.max(7,Math.ceil((plan.end-now)/DAY)),pace=Math.max(1,(s?.actual||0)/Math.max(1,slots(plan.created,now,plan.days))),extended=Math.max(daysLeft,Math.ceil(left/pace*7/plan.days)+7),required=Math.max(plan.minutes,Math.ceil(plan.minutes*Math.max(1,1/Math.max(.1,s?.ratio||.1))));return {extendEnd:now+extended*DAY,catchupMinutes:required,catchupPossible:required<=plan.budget,fastEnd:now+Math.max(7,Math.ceil(daysLeft*.9))*DAY,fastMinutes:Math.min(plan.budget,Math.ceil(plan.minutes*1.1))};}
-const api={DAY,date,slots,choices,remaining,quota,assess,alternatives,clamp};root.HSKPlannerCore=api;if(typeof module!=='undefined')module.exports=api;
+const api={DAY,date,slots,choices,remaining,quota,assess,alternatives,clamp,CONTEXT_THEMES,pickDifferentContextTheme,adjustNextLearningStepAfterRetest};root.HSKPlannerCore=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof window==='undefined'?globalThis:window);
