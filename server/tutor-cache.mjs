@@ -22,7 +22,7 @@ function qaPublicQuestion(q){return /^(?:(?:phân biệt|so sánh) [\p{Script=Ha
 export function qaSensitive(x){return /(?:https?:\/\/|www\.|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b|\d[\d\s()+.-]{6,}\d|AIza[\w-]{20,}|\b(?:password|mật khẩu|api[_ -]?key|bearer|token|địa chỉ nhà|số điện thoại)\b)/iu.test(x);}
 export async function qaDescriptor(route,body,uid,env){
  if(env.QA_CACHE_ENABLED!=='true'||!qaRoutes.has(route)||!env.AI_CONTROL||!uid||body.history?.length)return null;
- if(route==='/lesson-ask'&&(body.images?.length||(body.lesson?.content?.mode==='wrong-answer-explanation'&&EXAM_SHARED_REGISTRY[await qaHash({lesson:body.lesson,question:body.question})]!==true)))return null;
+ const wrongExam=route==='/lesson-ask'&&body.lesson?.content?.mode==='wrong-answer-explanation'; if(route==='/lesson-ask'&&((body.images?.length&&!wrongExam)||(wrongExam&&EXAM_SHARED_REGISTRY[await qaHash({lesson:body.lesson,question:body.question})]!==true)))return null;
  if(route==='/lesson-ask'&&/^(placement-|open-dictionary)/.test(body.lesson?.id||''))return null;
  const context=route==='/lesson-ask'?body.lesson:route==='/ask'?body.translation:route==='/dictionary-translate'?body.entries:{context:body.context||'',word:body.word||null};
  const rawQuestion=body.question||body.query||(route==='/dictionary-translate'?'dịch nghĩa nhóm từ':'');
@@ -33,7 +33,7 @@ export async function qaDescriptor(route,body,uid,env){
  if(route==='/lesson-ask'){
   const known=TUTOR_CURRICULUM.lessons[body.lesson?.id];
   trusted=!!known&&known.hsk===body.hsk&&known.hash===await qaHash(context);
-  const publicExam=!body.images?.length&&EXAM_SHARED_REGISTRY[await qaHash({lesson:body.lesson,question:body.question})]===true;
+  const publicExam=EXAM_SHARED_REGISTRY[await qaHash({lesson:body.lesson,question:body.question})]===true;
   trusted=trusted||publicExam;
   shared=publicExam||(trusted&&qaPublicQuestion(question));
  }else if(route==='/dictionary-lookup'&&!body.context){
@@ -41,7 +41,7 @@ export async function qaDescriptor(route,body,uid,env){
   shared=/^[\p{Script=Han}]{1,20}[？?]?$/u.test(question)&&trusted;
  }
  if(!trusted&&qaSensitive(qaStable(context)))return null;
- const contextHash=await qaHash({route,hsk:body.hsk||null,context,curriculum:TUTOR_CURRICULUM.revision,prompt:QA_CACHE_REVISION,accountProvider:env.QA_ACCOUNT_PROVIDER||'legacy',model:env.GEMINI_MODEL||'gemini-3.5-flash-lite',backup:[env.AI_BACKUP_ENABLED||'',env.AI_TASK_ROUTING||'',env.SECONDARY_AI_PROVIDER||'',env.SECONDARY_AI_MODEL||''],epoch:env.QA_CACHE_EPOCH||'1'});
+ const contextHash=await qaHash({route,hsk:body.hsk||null,context,images:route==='/lesson-ask'?(body.images||[]):null,curriculum:TUTOR_CURRICULUM.revision,prompt:QA_CACHE_REVISION,accountProvider:env.QA_ACCOUNT_PROVIDER||'legacy',model:env.GEMINI_MODEL||'gemini-3.5-flash-lite',backup:[env.AI_BACKUP_ENABLED||'',env.AI_TASK_ROUTING||'',env.SECONDARY_AI_PROVIDER||'',env.SECONDARY_AI_MODEL||''],epoch:env.QA_CACHE_EPOCH||'1'});
  const owner=shared?'public':await qaHash('qa-owner:'+uid),scope=await qaHash({contextHash,owner}),key=await qaHash({scope,question});
  return {key,scope,route,shared,question,ttl:shared?604800:86400};
 }
