@@ -58,6 +58,18 @@
   function buildGenerationPayload({uid='guest',hsk=3,count=5,focusRules=[],recentMistakeSamples=[],adaptivePlan=null,lessonWords=[],requestedTypes=['multiple_choice','reorder','fill_in_blank']}={}){
     return {question:'Tạo bài luyện thích ứng theo hồ sơ lỗi.',hsk:Number(hsk)||3,lesson:{id:'unified-practice-generator',title:'Ngân hàng bài luyện thích ứng',words:(Array.isArray(lessonWords)?lessonWords:[]).slice(0,20),content:{mode:'unified-practice-gen',hsk:Number(hsk)||3,count:Math.min(8,Math.max(1,Number(count)||5)),focusRules:(Array.isArray(focusRules)?focusRules:[]).slice(0,6),recentMistakeSamples:(Array.isArray(recentMistakeSamples)?recentMistakeSamples:[]).slice(0,6),adaptivePlan,lessonWords:(Array.isArray(lessonWords)?lessonWords:[]).slice(0,20),requestedTypes}},history:[]};
   }
+  const chineseWords=value=>{const raw=text(value),segments=[];if(typeof Intl!=='undefined'&&Intl.Segmenter){for(const part of new Intl.Segmenter('zh-CN',{granularity:'word'}).segment(raw))if(/[\u3400-\u9fff]/u.test(part.segment))segments.push(part.segment);}else segments.push(...(raw.match(/[\u3400-\u9fff]+/gu)||[]));return segments;};
+  function dictEntry(map,key){return map?.get?map.get(key):map?.[key];}
+  function validateHskLevelCeiling(chineseSentence,learnerHsk=3,localDictMap=null){if(!localDictMap)return {valid:true};const words=chineseWords(chineseSentence),maxAllowed=Number(learnerHsk)||3,over=words.map(w=>({w,e:dictEntry(localDictMap,w)})).filter(x=>x.e?.hsk&&Number(x.e.hsk)>maxAllowed+1);return over.length>=2||words.length&&over.length/words.length>.15?{valid:false,reason:`Câu vượt trần từ vựng HSK ${maxAllowed}: ${over.map(x=>`${x.w}(HSK${x.e.hsk})`).join(', ')}`}:{valid:true};}
+  function validateUnambiguousAnswer(exercise,localDictMap=null){
+   if(!exercise||!text(exercise.prompt))return {valid:false,reason:'empty_prompt'};const prompt=text(exercise.prompt),options=Array.isArray(exercise.options)?exercise.options.map(text):[];
+   const negation=options.includes('不')&&(options.includes('没')||options.includes('没有'));if(negation&&!/(昨天|今天|明天|刚才|以前|以后|平时|常常|往往|总是|从不|已经|曾经|过|了|还没|要是|如果|想|愿意|敢|肯)/u.test(prompt))return {valid:false,reason:'ambiguous_bu_mei'};
+   if(exercise.type==='multiple_choice'&&localDictMap){if(new Set(options).size!==options.length)return {valid:false,reason:'duplicate_options'};const meanings=[];for(const option of options){const meaning=text(dictEntry(localDictMap,option)?.meaning).toLowerCase();if(meaning&&meanings.includes(meaning))return {valid:false,reason:'duplicate_option_meaning'};if(meaning)meanings.push(meaning);}}
+   if(exercise.type==='reorder'){const exam=root.HSKExamCore,target=exam?.normalizeChineseSentenceForGrading?exam.normalizeChineseSentenceForGrading(exercise.correctAnswer):compact(exercise.correctAnswer),joined=exam?.normalizeChineseSentenceForGrading?exam.normalizeChineseSentenceForGrading((exercise.segments||[]).join('')):compact((exercise.segments||[]).join(''));if(Array.from(target).sort().join('')!==Array.from(joined).sort().join(''))return {valid:false,reason:'reorder_character_mismatch'};}
+   return {valid:true};
+  }
+  function sanitizeGeneratedPinyin(item,localDictMap=null){if(!item||!localDictMap)return item;const word=text(item.han||item.word),entry=dictEntry(localDictMap,word),normalize=root.HSKOpenDictionaryCore?.normalizePinyinWithoutTone||((v)=>text(v).toLowerCase().replace(/[1-5]/g,''));if(entry?.pinyin&&(!item.pinyin||normalize(item.pinyin)===normalize(entry.pinyin)))item.pinyin=entry.pinyin;return item;}
+  function verifyTutorPackQuality(pack,learnerHsk=3,localDictMap=null){if(!pack?.teachingCard||!Array.isArray(pack.guidedExercises)||!pack.blindCheckExercise)return {valid:false,reason:'missing_tutor_pack_parts'};const exercises=[...pack.guidedExercises,pack.blindCheckExercise];for(const ex of exercises){const ceiling=validateHskLevelCeiling(ex.prompt,learnerHsk,localDictMap);if(!ceiling.valid)return ceiling;const answer=validateUnambiguousAnswer(ex,localDictMap);if(!answer.valid)return answer;if(text(ex.explanation).length<10)return {valid:false,reason:'missing_explanation'};}return {valid:true};}
   async function synthesizeAdaptiveExercises({uid='guest',hsk=3,count=5,focusRules=[],recentMistakeSamples=[],adaptivePlan=null,lessonWords=[],requestedTypes,endpoint,token,fetchFn=root.fetch?.bind(root),signal}={}){
     if(typeof fetchFn!=='function')throw Error('AI practice fetch is unavailable');
     const user=root.HSKAccountDashboard?.user;
@@ -75,7 +87,7 @@
     const verified=[];for(const item of rawItems){const result=validateGeneratedExercise(item,hsk);if(result.valid)verified.push(result.item);}
     saveToLocalDynamicBank(uid,verified);return verified;
   }
-  const api={validateGeneratedExercise,getLocalDynamicBank,saveToLocalDynamicBank,selectDynamicExercises,buildGenerationPayload,synthesizeAdaptiveExercises};
+  const api={validateGeneratedExercise,getLocalDynamicBank,saveToLocalDynamicBank,selectDynamicExercises,buildGenerationPayload,synthesizeAdaptiveExercises,validateHskLevelCeiling,validateUnambiguousAnswer,sanitizeGeneratedPinyin,verifyTutorPackQuality};
   root.HSKPracticeGenerator=api;
   if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof globalThis==='object'?globalThis:this);

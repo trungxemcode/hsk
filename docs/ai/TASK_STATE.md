@@ -1,4 +1,8 @@
-# Current task: mobile animation performance
+# Current task: closed-loop AI tutor upgrade (2026-11-04)
+
+Implemented the proposal in `E:/download/gemini-code-1793804188754.md` on branch `feat/ai-smart-search`: per-account four-state mastery profile and delta sync, diagnostic probe/tutor loop engine, progressive hints with blind checks, deterministic content gates, delayed retest planner, bounded Worker `micro-tutor-pack` mode, and AI Teacher integration with mastery context and due-ret test banner. Added focused tests and PWA release `4.1.9` with 200 offline assets. Validation: 419 server tests, feature preservation, runtime 390/1440, module loading and PWA release guard pass. No PR/merge performed yet.
+
+# Previous task: mobile animation performance
 
 ## 30/10/2026 — faster CI without reduced coverage
 PR246 was merged atf998c14 while CI optimization was being prepared. Continue this optimization in ci/parallel-checks worktree hsk-parallel-ci fromf998c14, separate PR. No frontend changes; all21 routes are protected (84 states), no inherited account exemption. Changes to the visual guard/workflow itself force full comparisons so this CI-only PR validates the real matrix rather than reporting not-applicable.

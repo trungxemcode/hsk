@@ -110,6 +110,7 @@
     "src/modules/shell/mobile-dock.js",
     "src/modules/exams/exam-expansion.js",
     "src/modules/ai-coach/coach-profile.js",
+    "src/modules/ai-coach/tutor-loop-engine.js",
     "src/modules/exams/drive-exam.js",
     "drive-exam-data.json.gz",
     "src/modules/exams/drive-audio.js",
@@ -148,6 +149,7 @@
     "src/modules/practice/practice-games.js",
     "practice-games.css",
     "src/modules/practice/practice-selector.js",
+    "src/modules/practice/practice-generator-core.js",
     "practice-selector.css",
     "src/modules/practice/study4-practice.js",
     "study4-tests-data.json.gz",
@@ -175,8 +177,7 @@
     "src/modules/shell/legacy-music-cleanup.js",
     "site-design-live.js",
     "site-design-config.json",
-    "src/modules/shell/feature-page.js",
-    "src/modules/practice/practice-generator-core.js"
+    "src/modules/shell/feature-page.js"
   ],
   "aliases": {
     "backup-core.js": "src/modules/backup/backup-core.js",
