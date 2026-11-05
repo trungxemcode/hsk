@@ -10,11 +10,26 @@
   const unique=items=>Array.from(new Set((Array.isArray(items)?items:[]).map(text).filter(Boolean)));
   const id=(prefix)=>`ai_${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,8)}`;
 
+  function escapeRegExp(value){return String(value).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+  function verifyAnswerExplanationConsistency(rawItem){
+    const type=text(rawItem?.type),prompt=text(rawItem?.prompt),explanation=text(rawItem?.explanation);let correctText='',distractors=[];
+    if(type==='multiple_choice'&&Array.isArray(rawItem.options)){const index=Number(rawItem.correctAnswer);correctText=text(rawItem.options[index]);distractors=rawItem.options.filter((_,i)=>i!==index).map(text).filter(Boolean);}else correctText=text(rawItem?.correctAnswer);
+    if(!correctText)return {passed:false,reason:'empty_correct_answer'};
+    for(const distractor of distractors){const pattern=new RegExp(`(đáp án đúng là|chọn đáp án|nên chọn|phải điền|kết quả là|bằng)\\s*["“'‘(\\[]?${escapeRegExp(distractor)}["”'’)\\]]?`,'i');if(pattern.test(explanation))return {passed:false,reason:`explanation_contradicts_answer_key_affirms_${distractor}`};}
+    if((type==='multiple_choice'||type==='fill_in_blank')&&!explanation.includes(correctText))return {passed:false,reason:'explanation_missing_correct_answer_reference'};
+    if(prompt.includes('___')){const filled=prompt.replace('___',correctText).replace(/\s+/g,'');if(/(不不|没没|了了|着着|过过|把把|被被|的得|得的)/.test(filled))return {passed:false,reason:'filled_sentence_has_duplicate_particles'};}
+    return {passed:true};
+  }
   function validateGeneratedExercise(rawItem, expectedHsk=3){
+    const config=expectedHsk&&typeof expectedHsk==='object'?expectedHsk:{expectedHsk};const learnerHsk=Math.max(1,Math.min(6,Number(config.expectedHsk)||3)),expectedTopicId=text(config.expectedTopicId),localDictMap=config.localDictMap||null;
     if(!rawItem||typeof rawItem!=='object')return {valid:false,reason:'invalid_item_object'};
-    const type=text(rawItem.type),prompt=text(rawItem.prompt),explanation=text(rawItem.explanation),topicId=text(rawItem.topicId)||'general';
-    if(!prompt||explanation.length<8)return {valid:false,reason:'missing_prompt_or_explanation'};
-    const base={source:'ai_verified',hsk:Math.max(1,Math.min(6,Number(expectedHsk)||3)),skill:text(rawItem.skill)||'grammar',topicId,createdAt:Date.now()};
+    const type=text(rawItem.type),prompt=text(rawItem.prompt),explanation=text(rawItem.explanation),topicId=expectedTopicId||text(rawItem.topicId)||'general';
+    if(expectedTopicId&&rawItem.topicId&&text(rawItem.topicId)!==expectedTopicId)return {valid:false,reason:`topic_mismatch_expected_${expectedTopicId}_got_${text(rawItem.topicId)}`};
+    if(!prompt||explanation.length<10)return {valid:false,reason:'missing_prompt_or_explanation'};
+    const ceiling=validateHskLevelCeiling(prompt,learnerHsk,localDictMap);if(!ceiling.valid)return ceiling;
+    const ambiguity=validateUnambiguousAnswer(rawItem,localDictMap);if(!ambiguity.valid)return ambiguity;
+    const consistency=verifyAnswerExplanationConsistency(rawItem);if(!consistency.passed)return {valid:false,reason:consistency.reason};
+    const base={source:'ai_verified',validationStatus:'consistency_checked',hsk:learnerHsk,skill:text(rawItem.skill)||'grammar',topicId,createdAt:Date.now()};
     if(type==='multiple_choice'){
       const options=Array.isArray(rawItem.options)?rawItem.options.map(text):[];
       const answer=Number(rawItem.correctAnswer);
@@ -34,7 +49,7 @@
     if(type==='fill_in_blank'){
       const answer=text(rawItem.correctAnswer),hasBlank=/___|（\s*）|\(\s*\)/u.test(prompt);
       if(!hasBlank||!answer||answer.length>20)return {valid:false,reason:'invalid_fill_in_blank_format'};
-      return {valid:true,item:{...base,id:id('fill'),type,skill:'reading',topicId:topicId==='general'?'fill_in_blank':topicId,prompt,correctAnswer:answer,acceptedAnswers:unique([answer,...(Array.isArray(rawItem.acceptedAnswers)?rawItem.acceptedAnswers:[])]).slice(0,5),explanation}};
+      return {valid:true,item:{...base,id:id('fill'),type,skill:'reading',inputMode:answer.length===1?'single_char':'multi_char',maxLength:Math.max(8,answer.length+2),topicId:topicId==='general'?'fill_in_blank':topicId,prompt,pinyin:text(rawItem.pinyin),correctAnswer:answer,acceptedAnswers:unique([answer,...(Array.isArray(rawItem.acceptedAnswers)?rawItem.acceptedAnswers:[])]).slice(0,5),explanation}};
     }
     return {valid:false,reason:'unsupported_exercise_type'};
   }
@@ -70,7 +85,7 @@
   }
   function sanitizeGeneratedPinyin(item,localDictMap=null){if(!item||!localDictMap)return item;const word=text(item.han||item.word),entry=dictEntry(localDictMap,word),normalize=root.HSKOpenDictionaryCore?.normalizePinyinWithoutTone||((v)=>text(v).toLowerCase().replace(/[1-5]/g,''));if(entry?.pinyin&&(!item.pinyin||normalize(item.pinyin)===normalize(entry.pinyin)))item.pinyin=entry.pinyin;return item;}
   function verifyTutorPackQuality(pack,learnerHsk=3,localDictMap=null){if(!pack?.teachingCard||!Array.isArray(pack.guidedExercises)||!pack.blindCheckExercise)return {valid:false,reason:'missing_tutor_pack_parts'};const exercises=[...pack.guidedExercises,pack.blindCheckExercise];for(const ex of exercises){const ceiling=validateHskLevelCeiling(ex.prompt,learnerHsk,localDictMap);if(!ceiling.valid)return ceiling;const answer=validateUnambiguousAnswer(ex,localDictMap);if(!answer.valid)return answer;if(text(ex.explanation).length<10)return {valid:false,reason:'missing_explanation'};}return {valid:true};}
-  async function synthesizeAdaptiveExercises({uid='guest',hsk=3,count=5,focusRules=[],recentMistakeSamples=[],adaptivePlan=null,lessonWords=[],requestedTypes,endpoint,token,fetchFn=root.fetch?.bind(root),signal}={}){
+  async function synthesizeAdaptiveExercises({uid='guest',getCurrentUid=()=>uid,sessionId=null,isSessionActive=()=>true,hsk=3,count=5,targetTopicId=null,focusRules=[],recentMistakeSamples=[],adaptivePlan=null,lessonWords=[],requestedTypes,endpoint,token,fetchFn=root.fetch?.bind(root),signal,localDictMap=null}={}){
     if(typeof fetchFn!=='function')throw Error('AI practice fetch is unavailable');
     const user=root.HSKAccountDashboard?.user;
     const authToken=token||await user?.getIdToken?.();
@@ -79,15 +94,17 @@
     if(!url){try{const config=await fetch('./translation-config.json',{cache:'no-store'}).then(r=>r.json());url=config.endpoint;}catch{}}
     if(!url)throw Error('Chưa cấu hình dịch vụ AI.');
     url=String(url).replace(/\/translate\/?$/,'/lesson-ask');
-    const response=await fetchFn(url,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+authToken},body:JSON.stringify(buildGenerationPayload({uid,hsk,count,focusRules,recentMistakeSamples,adaptivePlan,lessonWords,requestedTypes})),signal});
+    const expectedUid=resolveSafeUid(uid),response=await fetchFn(url,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+authToken},body:JSON.stringify(buildGenerationPayload({uid,hsk,count,focusRules,recentMistakeSamples,adaptivePlan,lessonWords,requestedTypes})),signal});
+    if(signal?.aborted||resolveSafeUid(getCurrentUid())!==expectedUid||!isSessionActive(sessionId))return {aborted:true,reason:'context_invalidated_before_response',items:[]};
     const payload=await response.json().catch(()=>({}));
     if(!response.ok)throw Error(payload.error||`Unified Practice Generator HTTP ${response.status}`);
     let rawItems=Array.isArray(payload.items)?payload.items:[];
     if(!rawItems.length&&typeof payload.answer==='string'){try{rawItems=JSON.parse(payload.answer)?.items||[];}catch{}}
-    const verified=[];for(const item of rawItems){const result=validateGeneratedExercise(item,hsk);if(result.valid)verified.push(result.item);}
-    saveToLocalDynamicBank(uid,verified);return verified;
+    if(signal?.aborted||resolveSafeUid(getCurrentUid())!==expectedUid||!isSessionActive(sessionId))return {aborted:true,reason:'context_invalidated_after_json',items:[]};
+    const verified=[];for(const item of rawItems){const result=validateGeneratedExercise(item,{expectedHsk:hsk,expectedTopicId:targetTopicId,localDictMap});if(result.valid)verified.push(result.item);}
+    saveToLocalDynamicBank(expectedUid,verified);return {aborted:false,items:verified};
   }
-  const api={validateGeneratedExercise,getLocalDynamicBank,saveToLocalDynamicBank,selectDynamicExercises,buildGenerationPayload,synthesizeAdaptiveExercises,validateHskLevelCeiling,validateUnambiguousAnswer,sanitizeGeneratedPinyin,verifyTutorPackQuality};
+  const api={validateGeneratedExercise,verifyAnswerExplanationConsistency,getLocalDynamicBank,saveToLocalDynamicBank,selectDynamicExercises,buildGenerationPayload,synthesizeAdaptiveExercises,validateHskLevelCeiling,validateUnambiguousAnswer,sanitizeGeneratedPinyin,verifyTutorPackQuality};
   root.HSKPracticeGenerator=api;
   if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof globalThis==='object'?globalThis:this);

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url),C=require('../src/modules/practice/practice-generator-core.js');
 test('generated exercises reject ambiguous choices and invalid reorder characters',()=>{
- const q={type:'multiple_choice',prompt:'选择正确答案',options:['甲','乙','丙','丁'],correctAnswer:2,explanation:'Bằng chứng cho đáp án đúng.'};
+ const q={type:'multiple_choice',prompt:'选择正确答案',options:['甲','乙','丙','丁'],correctAnswer:2,explanation:'Đáp án đúng là 丙 vì đây là lựa chọn phù hợp.'};
  assert.equal(C.validateGeneratedExercise(q,4).item.hsk,4);
  assert.equal(C.validateGeneratedExercise({...q,options:['甲','甲','丙','丁']},4).valid,false);
  assert.equal(C.validateGeneratedExercise({...q,correctAnswer:4},4).valid,false);
