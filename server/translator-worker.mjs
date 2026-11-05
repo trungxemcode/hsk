@@ -130,18 +130,21 @@ async function readBody(request,limit=20000){
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
 export const WORKER_REVISION='hsk-reading-library-4-1-2-r1';
+export function buildCorsHeaders(request,env={}){const origin=request.headers.get('Origin')||'*';return {'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Authorization, X-Requested-With','Access-Control-Max-Age':'86400','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider, X-HSK-AI-Cache, X-HSK-Image-Remaining','Vary':'Origin'};}
+function jsonWithCors(value,status,request,env){return new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8',...buildCorsHeaders(request,env)}});}
 export async function handleProfileSyncRequest(request,env,verifyAuthTokenFn){
- if(request.method!=='POST')return Response.json({ok:false,error:'Method not allowed'},{status:405});
+ if(request.method==='OPTIONS')return new Response(null,{status:204,headers:buildCorsHeaders(request,env)});
+ if(request.method!=='POST')return jsonWithCors({ok:false,error:'Method not allowed'},405,request,env);
  const token=request.headers.get('Authorization')?.match(/^Bearer\s+([^\s]+)$/)?.[1]||'';
- if(!token)return Response.json({ok:false,error:'Missing Authorization Bearer token'},{status:401});
- const authUser=await verifyAuthTokenFn?.(token,env);if(!authUser?.uid)return Response.json({ok:false,error:'Invalid or expired token'},{status:401});
- const body=await request.json().catch(()=>null);if(!body||body.uid!==authUser.uid)return Response.json({ok:false,error:'UID mismatch with authenticated user'},{status:403});
- const kv=env?.USER_PROFILES_KV;if(!kv)return Response.json({ok:false,error:'Profile storage unavailable'},{status:503});
+ if(!token)return jsonWithCors({ok:false,error:'Missing Authorization Bearer token'},401,request,env);
+ const authUser=await verifyAuthTokenFn?.(token,env);if(!authUser?.uid)return jsonWithCors({ok:false,error:'Invalid or expired token'},401,request,env);
+ const body=await request.json().catch(()=>null);if(!body||body.uid!==authUser.uid)return jsonWithCors({ok:false,error:'UID mismatch with authenticated user'},403,request,env);
+ const kv=env?.USER_PROFILES_KV;if(!kv)return jsonWithCors({ok:false,error:'Profile storage unavailable'},503,request,env);
  const key=`tutor_profile_v3:${authUser.uid}`,existing=await kv.get(key),profile=existing?JSON.parse(existing):{uid:authUser.uid,targetHsk:3,vocabNodes:{},grammarNodes:{},retestQueue:[],weaknessItems:{}};
  const delta=body.delta&&typeof body.delta==='object'?body.delta:{};
  const merge=(bucket,list)=>{for(const node of Array.isArray(list)?list:[]){if(!node?.id)continue;const prev=profile[bucket][node.id];if(!prev||(node.lastAttemptAt||0)>=(prev.lastAttemptAt||0))profile[bucket][node.id]={...node,dirtyForSync:false};}};
  merge('vocabNodes',delta.vocabNodes);merge('grammarNodes',delta.grammarNodes);if(Array.isArray(delta.retestQueue))profile.retestQueue=delta.retestQueue;if(delta.weaknessItems&&typeof delta.weaknessItems==='object')profile.weaknessItems={...(profile.weaknessItems||{}),...delta.weaknessItems};profile.targetHsk=Number(delta.targetHsk)||profile.targetHsk;profile.updatedAt=Date.now();await kv.put(key,JSON.stringify(profile));
- return Response.json({ok:true,synced:true,serverTimestamp:profile.updatedAt,remoteDelta:{vocabNodes:Object.values(profile.vocabNodes),grammarNodes:Object.values(profile.grammarNodes),retestQueue:profile.retestQueue,weaknessItems:profile.weaknessItems}});
+ return jsonWithCors({ok:true,synced:true,serverTimestamp:profile.updatedAt,remoteDelta:{vocabNodes:Object.values(profile.vocabNodes),grammarNodes:Object.values(profile.grammarNodes),retestQueue:profile.retestQueue,weaknessItems:profile.weaknessItems}},200,request,env);
 }
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
@@ -237,7 +240,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(!auth.ok)return reply({error:'Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại.'},401);
    const account=(await auth.json()).users?.[0];if(!account||account.localId!==c.sub||account.disabled)return reply({error:'Tài khoản không được phép dịch.'},401);
    if(isTranscript&&account.localId!==OWNER_UID)return reply({error:'Chỉ admin được tạo và cập nhật script bài hát.'},403);
-    if(isProfileSync){const syncRequest=new Request(request.url,{method:'POST',headers:{Authorization:'Bearer '+token}});syncRequest.json=async()=>body;return handleProfileSyncRequest(syncRequest,env,async()=>({uid:account.localId}));}
+    if(isProfileSync){const syncRequest=new Request(request.url,{method:'POST',headers:{Authorization:'Bearer '+token,Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(body)});return handleProfileSyncRequest(syncRequest,env,async()=>({uid:account.localId}));}
    const restricted=(env.ALLOWED_UIDS||'').split(',').filter(Boolean);if(restricted.length&&!restricted.includes(c.sub))return reply({error:'Tài khoản chưa được bật dịch câu.'},403);
    if(isSample){const result=await submitHandwritingSample(body,c.sub,env,now());return reply(result.body,result.status);}
    const isAdmin=(isRole||env.AI_ACCOUNT_ROLES_ENABLED==='true')?account.localId===OWNER_UID:(env.ADMIN_UIDS||'').split(',').map(uid=>uid.trim()).filter(Boolean).includes(account.localId);
