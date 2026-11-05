@@ -6,9 +6,11 @@
   const compact=value=>text(value).replace(/[\s\u3000。，！？!?；;：:,、.“”‘’（）()\[\]{}]/gu,'');
   const hanzi=value=>(text(value).match(/[\u3400-\u9fff]/gu)||[]).join('');
   const storage=()=>typeof root.localStorage==='object'?root.localStorage:null;
+  const resolveSafeUid=uid=>{const value=String(uid??'').trim();return value||'guest';};
   const ownerKey=uid=>`${BANK_PREFIX}:${text(uid)||'guest'}`;
   const unique=items=>Array.from(new Set((Array.isArray(items)?items:[]).map(text).filter(Boolean)));
   const id=(prefix)=>`ai_${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,8)}`;
+  function createGeneratorResult({aborted=false,reason=null,items=[]}={}){const safeItems=Array.isArray(items)?items:[],result={aborted:Boolean(aborted),reason,items:safeItems};result[Symbol.iterator]=function*(){if(!this.aborted)yield* this.items;};return result;}
 
   function escapeRegExp(value){return String(value).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
   function verifyAnswerExplanationConsistency(rawItem){
@@ -94,17 +96,18 @@
     if(!url){try{const config=await fetch('./translation-config.json',{cache:'no-store'}).then(r=>r.json());url=config.endpoint;}catch{}}
     if(!url)throw Error('Chưa cấu hình dịch vụ AI.');
     url=String(url).replace(/\/translate\/?$/,'/lesson-ask');
-    const expectedUid=resolveSafeUid(uid),response=await fetchFn(url,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+authToken},body:JSON.stringify(buildGenerationPayload({uid,hsk,count,focusRules,recentMistakeSamples,adaptivePlan,lessonWords,requestedTypes})),signal});
-    if(signal?.aborted||resolveSafeUid(getCurrentUid())!==expectedUid||!isSessionActive(sessionId))return {aborted:true,reason:'context_invalidated_before_response',items:[]};
+    const expectedUid=resolveSafeUid(uid);if(signal?.aborted)return createGeneratorResult({aborted:true,reason:'signal_aborted'});
+    const response=await fetchFn(url,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+authToken},body:JSON.stringify(buildGenerationPayload({uid:expectedUid,hsk,count,focusRules,recentMistakeSamples,adaptivePlan,lessonWords,requestedTypes})),signal});
+    if(signal?.aborted||resolveSafeUid(getCurrentUid())!==expectedUid||!isSessionActive(sessionId))return createGeneratorResult({aborted:true,reason:'context_invalidated_before_response'});
     const payload=await response.json().catch(()=>({}));
     if(!response.ok)throw Error(payload.error||`Unified Practice Generator HTTP ${response.status}`);
     let rawItems=Array.isArray(payload.items)?payload.items:[];
     if(!rawItems.length&&typeof payload.answer==='string'){try{rawItems=JSON.parse(payload.answer)?.items||[];}catch{}}
-    if(signal?.aborted||resolveSafeUid(getCurrentUid())!==expectedUid||!isSessionActive(sessionId))return {aborted:true,reason:'context_invalidated_after_json',items:[]};
+    if(signal?.aborted||resolveSafeUid(getCurrentUid())!==expectedUid||!isSessionActive(sessionId))return createGeneratorResult({aborted:true,reason:'context_invalidated_after_json'});
     const verified=[];for(const item of rawItems){const result=validateGeneratedExercise(item,{expectedHsk:hsk,expectedTopicId:targetTopicId,localDictMap});if(result.valid)verified.push(result.item);}
-    saveToLocalDynamicBank(expectedUid,verified);return {aborted:false,items:verified};
+    saveToLocalDynamicBank(expectedUid,verified);return createGeneratorResult({items:verified});
   }
-  const api={validateGeneratedExercise,verifyAnswerExplanationConsistency,getLocalDynamicBank,saveToLocalDynamicBank,selectDynamicExercises,buildGenerationPayload,synthesizeAdaptiveExercises,validateHskLevelCeiling,validateUnambiguousAnswer,sanitizeGeneratedPinyin,verifyTutorPackQuality};
+  const api={resolveSafeUid,createGeneratorResult,validateGeneratedExercise,verifyAnswerExplanationConsistency,getLocalDynamicBank,saveToLocalDynamicBank,selectDynamicExercises,buildGenerationPayload,synthesizeAdaptiveExercises,validateHskLevelCeiling,validateUnambiguousAnswer,sanitizeGeneratedPinyin,verifyTutorPackQuality};
   root.HSKPracticeGenerator=api;
   if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof globalThis==='object'?globalThis:this);

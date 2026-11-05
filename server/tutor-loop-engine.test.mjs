@@ -16,7 +16,7 @@ test('mastery profile separates assisted, immediate and delayed mastery',()=>{
  assert.equal(result.node.state,P.MASTERY_STATES.ASSISTED_CORRECT);assert.ok(result.node.masteryScore<=.45);
  result=P.recordTutorAttempt(profile,{nodeId:'negation_bu_mei',title:'不 và 没',isCorrect:true,isBlindCheckAtSessionEnd:true,contextSignature:'dining'});
  assert.equal(result.node.state,P.MASTERY_STATES.UNASSISTED_IMMEDIATE);assert.equal(profile.retestQueue.length,1);
- result=P.recordTutorAttempt(profile,{nodeId:'negation_bu_mei',isCorrect:true,isDelayedVerification:true,contextSignature:'travel'});
+ result=P.recordTutorAttempt(profile,{nodeId:'negation_bu_mei',isCorrect:true,isDelayedVerification:true,nowOverride:Date.now()+P.DELAYED_RETEST_INTERVAL_MS,contextSignature:'travel'});
  assert.equal(result.node.state,P.MASTERY_STATES.DELAYED_MASTERED);assert.equal(result.node.masteryScore,1);assert.equal(profile.retestQueue.length,0);
 });
 
