@@ -1,6 +1,4 @@
 {
-  "request": "Cải tiến Tra cứu → Từ vựng trên desktop và điện thoại: tìm kiếm thông minh với AI nhận diện âm bồi tiếng Việt, đối chiếu từ điển cục bộ, gợi ý ngữ cảnh và ghi nhớ phát âm đã xác nhận. Các trang, công cụ tra cứu khác và điều hướng dùng chung phải giữ nguyên.",
-  "excludedRoutes": [
-    "search"
-  ]
+  "request": "PR #305: tích hợp cơ chế gia sư AI khép kín, hồ sơ năng lực, dạy–luyện–kiểm tra và bài luyện thích ứng. Chỉ thay đổi logic trong AI Coach, Ôn luyện, đề thi và đọc; không có thay đổi layout/kiểu dáng được yêu cầu. Kiểm tra giữ nguyên giao diện trên TẤT CẢ các route.",
+  "excludedRoutes": []
 }

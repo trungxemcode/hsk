@@ -2513,6 +2513,42 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "adaptive-practice-generator",
+      "name": "Tạo bài luyện thích ứng và ngân hàng theo tài khoản",
+      "checks": [
+        {
+          "kind": "contains",
+          "file": "src/modules/practice/practice-generator-core.js",
+          "value": "HSKPracticeGenerator"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/practice/practice-generator-core.js",
+          "value": "validateGeneratedExercise"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/practice/practice-generator-core.js",
+          "value": "synthesizeAdaptiveExercises"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/practice/practice-generator-core.js",
+          "value": "hsk-dynamic-practice-bank-v1"
+        },
+        {
+          "kind": "contains",
+          "file": "index.html",
+          "value": "src/modules/practice/practice-generator-core.js"
+        },
+        {
+          "kind": "file",
+          "file": "server/practice-generator.test.mjs",
+          "value": ""
+        }
+      ]
     }
   ]
 }
