@@ -27,6 +27,14 @@ test('PR307 profile sync responds to CORS preflight and authenticated POST',asyn
  assert.equal(post.status,200);assert.equal(post.headers.get('Access-Control-Allow-Origin'),'https://trungxemcode.github.io');assert.equal((await post.json()).synced,true);
 });
 
+test('v5 profile sync is idempotent for queued learning evidence',async()=>{
+ const map=new Map(),event={eventId:'evt-sync-once',uid:'runtime-user',questionId:'q1',timestamp:Date.now()};
+ const request=()=>new Request('https://worker.example/api/profile-sync',{method:'POST',headers:{Origin:'https://trungxemcode.github.io',Authorization:'Bearer token','Content-Type':'application/json'},body:JSON.stringify({uid:'runtime-user',delta:{events:[event]}})});
+ const first=await handleProfileSyncRequest(request(),{USER_PROFILES_KV:{get:key=>map.get(key)||null,put:(key,value)=>{map.set(key,value);}}},async token=>token==='token'?{uid:'runtime-user'}:null);
+ const second=await handleProfileSyncRequest(request(),{USER_PROFILES_KV:{get:key=>map.get(key)||null,put:(key,value)=>{map.set(key,value);}}},async token=>token==='token'?{uid:'runtime-user'}:null);
+ assert.equal(first.status,200);assert.equal(second.status,200);const snapshot=JSON.parse(map.values().next().value);assert.equal(snapshot.events.length,1);assert.equal(snapshot.appliedEventIds.length,1);
+});
+
 test('PR307 guest weakness data is adopted after login',()=>{
  const uid='runtime-adopt-'+Date.now(),guest=Profile.loadUserWeaknessStore('guest');guest.items={mistake:{id:'mistake',title:'mistake',hsk:3,count:1,sources:['test'],updatedAt:Date.now(),lastMistakeSample:'我不去'}};localStorage.setItem('hsk-coach-unified-weaknesses-v2:guest',JSON.stringify(guest));
  Profile.loadUnifiedProfile(uid);const adopted=Profile.loadUserWeaknessStore(uid);assert.equal(adopted.items.mistake.count,1);assert.equal(localStorage.getItem('hsk-coach-unified-weaknesses-v2:guest'),null);

@@ -140,11 +140,15 @@ export async function handleProfileSyncRequest(request,env,verifyAuthTokenFn){
  const authUser=await verifyAuthTokenFn?.(token,env);if(!authUser?.uid)return jsonWithCors({ok:false,error:'Invalid or expired token'},401,request,env);
  const body=await request.json().catch(()=>null);if(!body||body.uid!==authUser.uid)return jsonWithCors({ok:false,error:'UID mismatch with authenticated user'},403,request,env);
  const kv=env?.USER_PROFILES_KV;if(!kv)return jsonWithCors({ok:false,error:'Profile storage unavailable'},503,request,env);
- const key=`tutor_profile_v3:${authUser.uid}`,existing=await kv.get(key),profile=existing?JSON.parse(existing):{uid:authUser.uid,targetHsk:3,vocabNodes:{},grammarNodes:{},retestQueue:[],weaknessItems:{}};
+ const key=`tutor_profile_v3:${authUser.uid}`,existing=await kv.get(key),profile=existing?JSON.parse(existing):{uid:authUser.uid,targetHsk:3,vocabNodes:{},grammarNodes:{},retestQueue:[],weaknessItems:{},appliedEventIds:[],events:[]};
  const delta=body.delta&&typeof body.delta==='object'?body.delta:{};
  const merge=(bucket,list)=>{for(const node of Array.isArray(list)?list:[]){if(!node?.id)continue;const prev=profile[bucket][node.id];if(!prev||(node.lastAttemptAt||0)>=(prev.lastAttemptAt||0))profile[bucket][node.id]={...node,dirtyForSync:false};}};
- merge('vocabNodes',delta.vocabNodes);merge('grammarNodes',delta.grammarNodes);if(Array.isArray(delta.retestQueue))profile.retestQueue=delta.retestQueue;if(delta.weaknessItems&&typeof delta.weaknessItems==='object')profile.weaknessItems={...(profile.weaknessItems||{}),...delta.weaknessItems};profile.targetHsk=Number(delta.targetHsk)||profile.targetHsk;profile.updatedAt=Date.now();await kv.put(key,JSON.stringify(profile));
- return jsonWithCors({ok:true,synced:true,serverTimestamp:profile.updatedAt,remoteDelta:{vocabNodes:Object.values(profile.vocabNodes),grammarNodes:Object.values(profile.grammarNodes),retestQueue:profile.retestQueue,weaknessItems:profile.weaknessItems}},200,request,env);
+ merge('vocabNodes',delta.vocabNodes);merge('grammarNodes',delta.grammarNodes);
+ profile.appliedEventIds=Array.isArray(profile.appliedEventIds)?profile.appliedEventIds:[];profile.events=Array.isArray(profile.events)?profile.events:[];
+ for(const event of Array.isArray(delta.events)?delta.events:[]){if(!event||event.uid!==authUser.uid||typeof event.eventId!=='string'||!event.eventId.trim()||profile.appliedEventIds.includes(event.eventId))continue;profile.appliedEventIds.push(event.eventId);profile.events.push({...event,receivedAt:Date.now()});}
+ profile.appliedEventIds=profile.appliedEventIds.slice(-500);profile.events=profile.events.slice(-500);
+ if(Array.isArray(delta.retestQueue))profile.retestQueue=delta.retestQueue;if(delta.weaknessItems&&typeof delta.weaknessItems==='object')profile.weaknessItems={...(profile.weaknessItems||{}),...delta.weaknessItems};profile.targetHsk=Number(delta.targetHsk)||profile.targetHsk;profile.updatedAt=Date.now();await kv.put(key,JSON.stringify(profile));
+ return jsonWithCors({ok:true,synced:true,serverTimestamp:profile.updatedAt,remoteDelta:{vocabNodes:Object.values(profile.vocabNodes),grammarNodes:Object.values(profile.grammarNodes),retestQueue:profile.retestQueue,weaknessItems:profile.weaknessItems,events:profile.events,appliedEventIds:profile.appliedEventIds}},200,request,env);
 }
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';

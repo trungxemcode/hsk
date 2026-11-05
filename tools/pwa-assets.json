@@ -21,6 +21,8 @@
     "src/modules/planner/planner-core.js",
     "src/modules/planner/planner.js",
     "index.html",
+    "src/modules/practice/question-adapter.mjs",
+    "src/shared/tutor-contracts.mjs",
     "studio-layout.css",
     "src/modules/shell/studio.js",
     "src/modules/speech/speech.js",
