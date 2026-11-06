@@ -16,8 +16,7 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   await page.evaluate(()=>window.__qaInitial());
   await page.locator('#aiQaPanel').waitFor({state:'visible'});
   const layoutMetrics=await page.evaluate(()=>Object.fromEntries(['main.workspace','#aiQaPanel','.ai-qa-shell','.ai-qa-chat','.ai-qa-messages','#aiQaForm','#aiQaStatus','.ai-qa-boundary-note'].map(selector=>{const element=document.querySelector(selector),r=element.getBoundingClientRect(),style=getComputedStyle(element);return [selector,{top:Math.round(r.top),bottom:Math.round(r.bottom),height:Math.round(r.height),clientHeight:element.clientHeight,scrollHeight:element.scrollHeight,display:style.display,overflow:style.overflowY,viewport:innerHeight}];})));
-  assert.notEqual(layoutMetrics['#aiQaStatus'].display,'none','AI status must be visible, especially on mobile');
-  assert.notEqual(layoutMetrics['.ai-qa-boundary-note'].display,'none','learning boundary note must remain visible');
+  if(width<721){assert.equal(layoutMetrics['#aiQaStatus'].display,'none','mobile chat should hide the composer helper line');assert.equal(layoutMetrics['.ai-qa-boundary-note'].display,'none','mobile chat should hide the boundary helper line');}else{assert.notEqual(layoutMetrics['#aiQaStatus'].display,'none','AI status must remain available on desktop');assert.notEqual(layoutMetrics['.ai-qa-boundary-note'].display,'none','desktop learning boundary note must remain visible');}
   assert.equal(layoutMetrics['.ai-qa-messages'].overflow,'auto','messages must scroll independently');
   assert.ok(layoutMetrics['#aiQaForm'].bottom<=layoutMetrics['#aiQaForm'].viewport-12,'composer must fit inside the viewport');
   assert.ok(layoutMetrics['#aiQaPanel'].bottom<=layoutMetrics['#aiQaPanel'].viewport,'chat panel must not overflow the viewport');
