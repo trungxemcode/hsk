@@ -1,5 +1,5 @@
 {
-  "request": "Commit 2d562a2: chỉnh khung chat vuông, menu lịch sử và trạng thái AI trên mobile; không đổi các trang ngoài ai-qa.",
+  "request": "PR #316: bổ sung gia sư AI cá nhân hóa, điều hướng ý định và các nút kiểm tra lại trong trang Hỏi đáp AI; các trang ngoài ai-qa phải giữ nguyên.",
   "excludedRoutes": [
     "ai-qa"
   ]
