@@ -160,12 +160,26 @@
     <div id="searchResults" class="result-grid"></div><button id="searchMore" hidden="">Xem thêm</button>
   </section>
   <section id="aiQaPanel" class="panel-box activity-panel ai-qa-panel" data-studio-hub-panel="ai-qa" hidden aria-label="Hỏi đáp AI">
-    <div class="ai-qa-heading"><div><h2>Hỏi đáp AI</h2><p class="hint">Một gia sư AI để hỏi tiếng Trung, cách học và lộ trình cá nhân. Bạn có thể hỏi tự do; AI chỉ dùng dữ liệu học tập tổng hợp để đánh giá khi câu hỏi cần đến.</p></div><span class="ai-qa-badge">Gia sư 1–1</span></div>
-    <div class="ai-qa-context"><div><strong>Dữ liệu học tập</strong><p id="aiQaSnapshot" class="hint" role="status"></p></div><label for="aiQaHsk">Cấp HSK<select id="aiQaHsk"><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select></label></div>
-    <div id="aiQaMessages" class="ai-qa-messages" role="log" aria-live="polite"></div><p id="aiQaStatus" class="ai-qa-status hint" role="status"></p>
-    <form id="aiQaForm" class="ai-qa-form"><textarea id="aiQaInput" rows="3" maxlength="500" aria-label="Câu hỏi cho gia sư AI" placeholder="Ví dụ: Vì sao dùng 了 trong câu này? Hoặc: Tôi nên học gì tiếp theo?" required></textarea><button id="aiQaSend" type="submit">Gửi câu hỏi</button></form>
-    <div class="ai-qa-actions"><button id="aiQaReview" type="button" class="secondary-btn">Đánh giá lộ trình học</button><button id="aiQaClear" type="button" class="quiet-btn">Xóa cuộc trò chuyện</button></div>
-    <p class="hint ai-qa-boundary-note">Ranh giới tiến bộ: khi có đủ bằng chứng gần 99%, AI sẽ xác nhận bạn đã đạt và chuyển sang bước mới. AI chỉ nhắc lỗi có ảnh hưởng rõ ràng hoặc lặp lại, không giữ bạn mắc kẹt vì lỗi nhỏ.</p>
+    <div class="ai-qa-shell">
+      <aside id="aiQaHistory" class="ai-qa-history" aria-label="Các cuộc trò chuyện gần đây" hidden>
+        <div class="ai-qa-history-head"><strong>Cuộc trò chuyện</strong><button id="aiQaHistoryClose" type="button" aria-label="Đóng danh sách cuộc trò chuyện">×</button></div>
+        <button id="aiQaNewChat" class="ai-qa-new-chat" type="button"><span aria-hidden="true">＋</span> Đoạn chat mới</button>
+        <div id="aiQaConversationList" class="ai-qa-conversation-list" role="list"></div>
+      </aside>
+      <div class="ai-qa-chat">
+        <header class="ai-qa-chatbar">
+          <button id="aiQaHistoryToggle" class="ai-qa-history-toggle" type="button" aria-expanded="false" aria-controls="aiQaHistory"><span aria-hidden="true">☰</span><span>Gần đây</span></button>
+          <div class="ai-qa-chat-title"><strong id="aiQaConversationTitle">Đoạn chat mới</strong><small>Gia sư AI · HSK</small></div>
+          <label class="ai-qa-level" for="aiQaHsk"><span>Cấp</span><select id="aiQaHsk" aria-label="Cấp HSK"><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select></label>
+        </header>
+        <div class="ai-qa-learning-strip"><span class="ai-qa-learning-dot" aria-hidden="true"></span><span id="aiQaSnapshot" role="status"></span></div>
+        <div id="aiQaMessages" class="ai-qa-messages" role="log" aria-live="polite"></div>
+        <div id="aiQaEmpty" class="ai-qa-empty"><strong>Hỏi gia sư AI bất cứ điều gì</strong><span>Hỏi tiếng Trung, cách học hoặc lộ trình. Muốn đánh giá tiến độ, hãy nhập: <em>Đánh giá lộ trình học của tôi</em>.</span></div>
+        <p id="aiQaStatus" class="ai-qa-status" role="status"></p>
+        <form id="aiQaForm" class="ai-qa-form"><textarea id="aiQaInput" rows="1" maxlength="500" aria-label="Tin nhắn cho gia sư AI" placeholder="Nhắn tin cho gia sư AI…" required></textarea><button id="aiQaSend" class="ai-qa-send" type="submit" aria-label="Gửi tin nhắn"><span aria-hidden="true">↑</span></button></form>
+        <p class="ai-qa-boundary-note">AI dùng dữ liệu học tập tổng hợp. Khi đã đủ bằng chứng gần 99%, AI sẽ xác nhận bạn đã đạt và đề xuất bước tiếp theo, không bắt bạn mắc kẹt vì lỗi vụn vặt.</p>
+      </div>
+    </div>
   </section>
   <section id="quizPanel" class="panel-box activity-panel" hidden="">
     <h2>Kiểm tra trắc nghiệm</h2>
