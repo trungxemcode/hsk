@@ -1,6 +1,4 @@
 {
-  "request": "Commit 2d562a2: chỉnh khung chat vuông, menu lịch sử và trạng thái AI trên mobile; không đổi các trang ngoài ai-qa.",
-  "excludedRoutes": [
-    "ai-qa"
-  ]
+  "request": "PR307 regression: chỉ sửa đồng bộ dữ liệu điểm yếu học tập AI, không thay đổi giao diện bất kỳ trang nào.",
+  "excludedRoutes": []
 }
