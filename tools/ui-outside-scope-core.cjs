@@ -91,7 +91,10 @@ function visualPixels(a,b){
 function measureDOM(options={}){
   return [...document.querySelectorAll('body *')].filter(n=>(!options.skipHeader||!n.closest('#studioHeader'))&&(!options.skipSidebar||!n.closest('.sidebar'))&&(!options.skipClosedMobileDrawerBody||!n.closest('#drawer[aria-hidden="true"] .drawer-body'))&&n.checkVisibility()&&!['SCRIPT','STYLE','LINK'].includes(n.tagName)).map(n=>{
     const r=n.getBoundingClientRect(),s=getComputedStyle(n);
-    const text=[...n.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('');
+    const rawText=[...n.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('');
+    // New hidden panels can change only indentation in main's direct text nodes.
+    // Normalize that invisible whitespace, never readable text or element geometry.
+    const text=n.matches('main.workspace')&&!rawText.trim()?'':rawText;
     const paintAttributes=Object.fromEntries(['d','points','fill','stroke','src','href'].map(k=>[k,(n.getAttribute(k)||'').replace(/http:\/\/127\.0\.0\.1:\d+/g,'LOCAL')]));
     return {key:n.id||n.tagName+'.'+n.getAttribute('class'),text,paintAttributes,x:Math.round(r.x*100)/100,y:Math.round(r.y*100)/100,w:Math.round(r.width*100)/100,h:Math.round(r.height*100)/100,font:s.fontSize,fontFamily:s.fontFamily,weight:s.fontWeight,align:s.textAlign,color:s.color,background:s.backgroundColor,backgroundImage:s.backgroundImage,shadow:s.boxShadow,border:s.border,borderRadius:s.borderRadius,padding:s.padding,margin:s.margin,transform:s.transform,opacity:s.opacity};
   });
