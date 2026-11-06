@@ -31,7 +31,23 @@ function verifyVisual(reports,base,head,changed,config){
   assert.ok([390,1440].includes(width)&&['light','dark'].includes(theme));assert.ok(!keys.has(key),'Duplicate scenario');keys.add(key);
   const expected=needsVisualComparison(changed)?routes.map(route=>route+'-'+key):[];
   assert.deepEqual(r.results.map(x=>x.key),expected,'Missing or duplicated protected page');
-  for(const result of r.results){assert.equal(result.pass,true);assert.equal(result.geometryEqual,true);assert.equal(result.imageCountEqual,true);assert.equal(result.changedPixels,0);count++;}
+  for(let i=0;i<r.results.length;i++){
+    const result=r.results[i],route=routes[i];
+    assert.equal(result.pass,true);
+    if((config.newRoutes||[]).includes(route)){
+      assert.equal(result.newRoute,true,'New page must be explicitly labelled as head-only');
+      assert.equal(result.baselineAvailable,false,'New page must not pretend to have a baseline');
+      assert.equal(result.headCaptured,true,'New page must be captured in the PR head');
+      assert.ok(result.geometryElements>0,'New page missing DOM geometry');
+      assert.ok(result.screenshotCount>0,'New page missing screenshot');
+    }else{
+      assert.equal(result.newRoute,undefined,'Existing protected page cannot use head-only verification');
+      assert.equal(result.geometryEqual,true);
+      assert.equal(result.imageCountEqual,true);
+      assert.equal(result.changedPixels,0);
+    }
+    count++;
+  }
   assert.equal(r.result,needsVisualComparison(changed)?'PASS: protected entry-page states unchanged':'Not applicable: no app or visual-guard changes');
  }
  return count;

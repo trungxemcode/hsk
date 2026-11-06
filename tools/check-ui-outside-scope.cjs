@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {execFileSync}=require('node:child_process');
 const assert=require('node:assert/strict');
-const {ROUTES,scope,routeIsOpen,pixels,visualPixels,measureDOM,scenarios,canRecaptureGeometryOnly}=require('./ui-outside-scope-core.cjs');
+const {ROUTES,scope,addedRoutesFromNavigation,routeIsOpen,pixels,visualPixels,measureDOM,scenarios,canRecaptureGeometryOnly}=require('./ui-outside-scope-core.cjs');
 const {needsVisualComparison}=require('./ci-sharding-core.cjs');
 const [before,after,out]=process.argv.slice(2).map(x=>path.resolve(x));
 assert.ok(before&&after&&out,'Usage: node tools/check-ui-outside-scope.cjs BASE_DIR HEAD_DIR OUTPUT_DIR');
@@ -18,11 +18,13 @@ const save=()=>fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(repo
 const config=changed.includes('.github/ui-scope.json')?JSON.parse(fs.readFileSync(path.join(after,'.github/ui-scope.json'),'utf8')):{request:'No exclusions declared in this PR',excludedRoutes:[]};
 const protectedRoutes=scope(config);report.scope=config;
 if(!compareUI){report.result='Not applicable: no app or visual-guard changes';save();console.log(report.result);process.exit(0);}
-// New routes must be added to the capture inventory, not silently skipped.
-for(const root of [before,after]){
- const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+// Every newly introduced route needs explicit scope and a real panel.
+const baseHTML=fs.readFileSync(path.join(before,'index.html'),'utf8');
+const headHTML=fs.readFileSync(path.join(after,'index.html'),'utf8');
+for(const html of [baseHTML,headHTML]){
  for(const match of html.matchAll(/data-studio-go="([^"]+)"/g)) assert.ok(ROUTES.includes(match[1])||match[1]==='review','Uncovered navigation route: '+match[1]);
 }
+addedRoutesFromNavigation(baseHTML,headHTML,config);
 function serve(root){
  const server=http.createServer((req,res)=>{
   const file=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://local').pathname));
@@ -90,6 +92,7 @@ function serve(root){
    {
     const state=await page.evaluate(()=>({hub:document.body.dataset.studioHub||'',classes:document.body.className,active:document.querySelector('.app-tabs [data-mode].active')?.dataset.mode,accountCurrent:document.getElementById('accountPanel')?.dataset.accountCurrent}));
     assert.ok(routeIsOpen(route,state),'Route did not open '+route+': '+JSON.stringify(state));
+    if((config.newRoutes||[]).includes(route))assert.equal(await page.locator('[data-studio-hub-panel="'+route+'"]').isVisible(),true,'New route panel must be visible: '+route);
    }
    if(config.sharedSidebarOnly||config.sharedNavigationOnly)await page.addStyleTag({content:'.sidebar{visibility:hidden!important}'});
    // Only the explicitly requested drawer body is outside scope on phones.
@@ -119,6 +122,16 @@ function serve(root){
  try{
   for(const {width,theme} of selectedScenarios)for(const route of protectedRoutes){
    const key=route+'-'+width+'-'+theme;
+   if((config.newRoutes||[]).includes(route)){
+    // The baseline has no such page: verify the NEW page actually opens and
+    // captures; do not pretend that its pixels were compared against a baseline.
+    const b=await capture(servers[1],route,width,theme,path.join(out,key+'-after'));
+    const result={key,title:b.title,newRoute:true,baselineAvailable:false,headCaptured:true,geometryElements:b.geometry.length,screenshotCount:b.images.length,pass:b.geometry.length>0&&b.images.length>0};
+    if(!result.pass)failures++;
+    report.results.push(result);save();
+    console.log((result.pass?'PASS ':'FAIL ')+key+' new route captured='+result.screenshotCount);
+    continue;
+   }
    let result,attempt=0;
    for(attempt=1;attempt<=3;attempt++){
     const a=await capture(servers[0],route,width,theme,path.join(out,key+'-before'));
