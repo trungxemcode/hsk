@@ -182,7 +182,9 @@
     "src/modules/shell/feature-page.js",
     "ai-qa.css",
     "src/modules/ai-coach/ai-qa-core.js",
-    "src/modules/ai-coach/ai-qa.js"
+    "src/modules/ai-coach/ai-qa.js",
+    "src/modules/ai-coach/qa-intent-router.js",
+    "src/modules/ai-coach/qa-understanding-memory.js"
   ],
   "aliases": {
     "backup-core.js": "src/modules/backup/backup-core.js",
