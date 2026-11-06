@@ -1,8 +1,6 @@
 {
-  "request": "PR #310: bổ sung trang Hỏi đáp AI và nút điều hướng vào Công cụ; giữ nguyên layout, nội dung của toàn bộ trang đã có; đồng thời sửa cơ chế đồng bộ nhánh và font CI.",
-  "excludedRoutes": [],
-  "newRoutes": [
+  "request": "PR #311: chỉ thiết kế lại màn hình Hỏi đáp AI thành workspace chat; không thay đổi giao diện các trang khác.",
+  "excludedRoutes": [
     "ai-qa"
-  ],
-  "sharedNavigationOnly": true
+  ]
 }

@@ -5,7 +5,13 @@
  const historyPane=$('aiQaHistory'),historyToggle=$('aiQaHistoryToggle'),historyClose=$('aiQaHistoryClose'),newChat=$('aiQaNewChat'),conversationList=$('aiQaConversationList'),conversationTitle=$('aiQaConversationTitle');
  let config=null,pending=null,serial=0,history=[],owner='guest',activeId='';
  const key=uid=>`hsk-ai-qa-v1:${String(uid||'guest').replace(/[^\w:.-]/g,'_').slice(0,150)}`;
- const makeId=()=>`chat-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,7)}`;
+ const makeId=()=>{
+  // Do not advance Math.random(): game fixtures and other app features rely on it.
+  const values=new Uint32Array(1);
+  if(globalThis.crypto?.getRandomValues)globalThis.crypto.getRandomValues(values);
+  else values[0]=((Date.now() ^ Math.trunc(performance.now()*1000))>>>0);
+  return `chat-${Date.now().toString(36)}-${values[0].toString(36)}`;
+ };
  const cleanMessages=value=>Array.isArray(value)?value.filter(x=>x&&['user','assistant'].includes(x.role)&&typeof x.text==='string'&&x.text.trim()).slice(-12).map(x=>({role:x.role,text:x.text.slice(0,5000)})):[];
  const titleFor=text=>{const clean=String(text||'').replace(/\s+/g,' ').trim();return (clean||'Đoạn chat mới').slice(0,46)+(clean.length>46?'…':'');};
  const normalizeConversation=(x,index)=>({id:String(x?.id||makeId()),title:titleFor(x?.title||x?.messages?.find(m=>m?.role==='user')?.text||`Đoạn chat ${index+1}`),messages:cleanMessages(x?.messages),createdAt:Number(x?.createdAt)||Date.now()-index*1000,updatedAt:Number(x?.updatedAt)||Number(x?.createdAt)||Date.now()-index*1000});
