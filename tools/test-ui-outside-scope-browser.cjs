@@ -37,6 +37,12 @@ const {measureDOM,visualPixels}=require('./ui-outside-scope-core.cjs');
   await page.locator('.drawer-body').evaluate(n=>n.innerHTML='<button>Unified phone menu</button>');
   assert.deepEqual(await navigation(),navBase,'Only sidebar and closed drawer are scoped');
   await page.locator('#studioHeader').evaluate(n=>n.style.marginLeft='1px');assert.notDeepEqual(await navigation(),navBase,'Header remains protected in combined navigation scope');
+  await page.setContent('<main class="workspace">\n  <div id="actual">Visible content</div>\n</main>');
+  const whitespaceBaseline=await page.evaluate(measureDOM);
+  await page.locator('main.workspace').evaluate(n=>{n.firstChild.textContent='\n\n  \n';});
+  assert.deepEqual(await page.evaluate(measureDOM),whitespaceBaseline,'Invisible main indentation must not fail an unchanged page');
+  await page.locator('#actual').evaluate(n=>n.textContent='Visible content changed');
+  assert.notDeepEqual(await page.evaluate(measureDOM),whitespaceBaseline,'Actual visible text changes must still fail the visual guard');
   console.log('PASS guard browser control: identical stable; 1px movement, subtle CSS color, radius, gradient and text changes detected');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

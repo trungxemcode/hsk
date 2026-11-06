@@ -1,9 +1,13 @@
 const assert = require('node:assert/strict');
-const ROUTES = ['home','lessons','practice','search','learn','quiz','srs','mistakes','compare','notebook','match-game','sentence-game','study4','real-reading','exam','music','music-play','translator','account','profile','about','admin'];
+const ROUTES = ['home','lessons','practice','search','ai-qa','learn','quiz','srs','mistakes','compare','notebook','match-game','sentence-game','study4','real-reading','exam','music','music-play','translator','account','profile','about','admin'];
 function scope(config) {
   assert.ok(config && typeof config.request === 'string' && config.request.trim(), 'Scope needs the owner request');
   assert.ok(Array.isArray(config.excludedRoutes), 'excludedRoutes must be an array');
   assert.equal(new Set(config.excludedRoutes).size, config.excludedRoutes.length, 'Duplicate scope');
+  const newRoutes=config.newRoutes||[];
+  assert.ok(Array.isArray(newRoutes),'newRoutes must be an array');
+  assert.equal(new Set(newRoutes).size,newRoutes.length,'Duplicate new routes');
+  for(const route of newRoutes){assert.ok(ROUTES.includes(route),'Unknown new route: '+route);assert.ok(!config.excludedRoutes.includes(route),'New routes cannot be excluded');}
   for (const route of config.excludedRoutes) assert.ok(ROUTES.includes(route), 'Unknown excluded route: '+route);
   assert.ok(config.excludedRoutes.length < ROUTES.length, 'Cannot exclude every page');
   assert.ok(config.sharedHeaderOnly === undefined || typeof config.sharedHeaderOnly === 'boolean','Shared header scope must be boolean');
@@ -26,6 +30,19 @@ function scope(config) {
     assert.ok(!config.sharedHeaderOnly&&!config.sharedQuickNavOnly&&!config.sharedSidebarOnly&&!config.sharedMobileDrawerOnly,'Scope only the sidebar and closed drawer');
   }
   return ROUTES.filter(route=>!config.excludedRoutes.includes(route));
+}
+function addedRoutesFromNavigation(beforeHTML,afterHTML,config) {
+  const links=html=>new Set([...html.matchAll(/data-studio-go="([^"]+)"/g)].map(match=>match[1]));
+  const before=links(beforeHTML),after=links(afterHTML);
+  const added=[...after].filter(route=>!before.has(route)&&route!=='review');
+  const declared=config.newRoutes||[];
+  assert.deepEqual(added.slice().sort(),declared.slice().sort(),'Every new navigation route must be explicitly declared');
+  if(declared.length)assert.equal(config.sharedNavigationOnly,true,'New navigation entries require scoped sidebar/drawer comparison');
+  for(const route of declared){
+    assert.ok(ROUTES.includes(route),'New route missing from protected inventory: '+route);
+    assert.ok(afterHTML.includes('data-studio-hub-panel="'+route+'"'),'New route must have a real app panel: '+route);
+  }
+  return declared;
 }
 function routeIsOpen(route, state) {
   if(route==='profile')return state.classes.includes('show-account')&&state.accountCurrent==='profile';
@@ -74,7 +91,10 @@ function visualPixels(a,b){
 function measureDOM(options={}){
   return [...document.querySelectorAll('body *')].filter(n=>(!options.skipHeader||!n.closest('#studioHeader'))&&(!options.skipSidebar||!n.closest('.sidebar'))&&(!options.skipClosedMobileDrawerBody||!n.closest('#drawer[aria-hidden="true"] .drawer-body'))&&n.checkVisibility()&&!['SCRIPT','STYLE','LINK'].includes(n.tagName)).map(n=>{
     const r=n.getBoundingClientRect(),s=getComputedStyle(n);
-    const text=[...n.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('');
+    const rawText=[...n.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('');
+    // New hidden panels can change only indentation in main's direct text nodes.
+    // Normalize that invisible whitespace, never readable text or element geometry.
+    const text=n.matches('main.workspace')&&!rawText.trim()?'':rawText;
     const paintAttributes=Object.fromEntries(['d','points','fill','stroke','src','href'].map(k=>[k,(n.getAttribute(k)||'').replace(/http:\/\/127\.0\.0\.1:\d+/g,'LOCAL')]));
     return {key:n.id||n.tagName+'.'+n.getAttribute('class'),text,paintAttributes,x:Math.round(r.x*100)/100,y:Math.round(r.y*100)/100,w:Math.round(r.width*100)/100,h:Math.round(r.height*100)/100,font:s.fontSize,fontFamily:s.fontFamily,weight:s.fontWeight,align:s.textAlign,color:s.color,background:s.backgroundColor,backgroundImage:s.backgroundImage,shadow:s.boxShadow,border:s.border,borderRadius:s.borderRadius,padding:s.padding,margin:s.margin,transform:s.transform,opacity:s.opacity};
   });
@@ -85,4 +105,4 @@ function scenarios(width,theme){
  return [{width:n,theme}];
 }
 function canRecaptureGeometryOnly(r){return !r.geometryEqual&&r.imageCountEqual&&r.changedPixels===0&&r.elementCountEqual;}
-module.exports={ROUTES,scope,routeIsOpen,pixels,visualPixels,measureDOM,scenarios,canRecaptureGeometryOnly};
+module.exports={ROUTES,scope,addedRoutesFromNavigation,routeIsOpen,pixels,visualPixels,measureDOM,scenarios,canRecaptureGeometryOnly};

@@ -23,6 +23,7 @@
     "node tools/check-update-dom.cjs",
     "node tools/check-ai-coach-dom.cjs",
     "node tools/check-exam-dom.cjs",
+    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-ai-qa-ui.cjs",
     "node tools/check-open-dictionary-dom.cjs",
     "node tools/check-lesson-mini-dom.cjs",
     "node tools/check-practice-games-core.cjs",

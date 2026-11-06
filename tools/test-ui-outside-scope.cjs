@@ -8,6 +8,19 @@ test('only explicitly requested page is excluded; unknown/all-page bypass reject
   assert.throws(()=>scope({request:'test',excludedRoutes:['*']}));
   assert.throws(()=>scope({request:'test',excludedRoutes:ROUTES}));
 });
+test('new AI Q&A navigation is declared and its real page is captured, never silently excluded',()=>{
+  const {addedRoutesFromNavigation}=require('./ui-outside-scope-core.cjs');
+  const base='<button data-studio-go="search"></button>';
+  const head=base+'<button data-studio-go="ai-qa"></button><section data-studio-hub-panel="ai-qa"></section>';
+  const config={request:'Add AI Q&A',excludedRoutes:[],newRoutes:['ai-qa'],sharedNavigationOnly:true};
+  assert.deepEqual(addedRoutesFromNavigation(base,head,config),['ai-qa']);
+  assert.ok(scope(config).includes('ai-qa'),'New page must stay in CI coverage');
+  assert.throws(()=>addedRoutesFromNavigation(base,head,{...config,newRoutes:[]}));
+  assert.throws(()=>addedRoutesFromNavigation(base,head.replace('data-studio-hub-panel','data-nothing'),config));
+  assert.throws(()=>addedRoutesFromNavigation(base,head,{...config,sharedNavigationOnly:false}));
+  assert.throws(()=>scope({...config,excludedRoutes:['ai-qa']}));
+});
+
 test('Profile and Account split are verified by actual account page, not only show-account CSS',()=>{
   const {routeIsOpen}=require('./ui-outside-scope-core.cjs');
   const state={hub:'',active:'learn',classes:'studio-enabled mobile-ux show-account',accountCurrent:'profile'};
@@ -69,7 +82,7 @@ test('shared header normalization leaves the route content geometry strict',()=>
  assert.match(fn.toString(),/options.skipHeader/);
 });
 
-test("sidebar scope protects every route and only allows a boolean flag",()=>{assert.equal(scope({request:"Regroup sidebar",excludedRoutes:[],sharedSidebarOnly:true}).length,22);assert.throws(()=>scope({request:"Regroup sidebar",excludedRoutes:["home"],sharedSidebarOnly:true}));assert.throws(()=>scope({request:"Regroup sidebar",excludedRoutes:[],sharedSidebarOnly:"true"}));const fn=require("./ui-outside-scope-core.cjs").measureDOM;assert.match(fn.toString(),/options.skipSidebar/);assert.match(fn.toString(),/closest\('\.sidebar'\)/);});
+test("sidebar scope protects every route and only allows a boolean flag",()=>{assert.equal(scope({request:"Regroup sidebar",excludedRoutes:[],sharedSidebarOnly:true}).length,ROUTES.length);assert.throws(()=>scope({request:"Regroup sidebar",excludedRoutes:["home"],sharedSidebarOnly:true}));assert.throws(()=>scope({request:"Regroup sidebar",excludedRoutes:[],sharedSidebarOnly:"true"}));const fn=require("./ui-outside-scope-core.cjs").measureDOM;assert.match(fn.toString(),/options.skipSidebar/);assert.match(fn.toString(),/closest\('\.sidebar'\)/);});
 
 test('shared quick navigation scope compares all routes and validates narrow normalization',()=>{
  assert.deepEqual(scope({request:'Enlarge desktop quick navigation',excludedRoutes:[],sharedQuickNavOnly:true}),ROUTES);
@@ -96,4 +109,4 @@ test('combined navigation scope preserves every route and only the two navigatio
  assert.throws(()=>scope({request:'Simplify menus',excludedRoutes:[],sharedNavigationOnly:true,sharedHeaderOnly:true}));
 });
 
-test('Profile/Account split scopes exactly the two pages plus navigation',()=>{assert.equal(scope({request:'Separate profile/account',excludedRoutes:['account','profile'],sharedNavigationOnly:true}).length,20);assert.throws(()=>scope({request:'Bad unrelated scope',excludedRoutes:['account','profile','home'],sharedNavigationOnly:true}));});
+test('Profile/Account split scopes exactly the two pages plus navigation',()=>{assert.equal(scope({request:'Separate profile/account',excludedRoutes:['account','profile'],sharedNavigationOnly:true}).length,ROUTES.length-2);assert.throws(()=>scope({request:'Bad unrelated scope',excludedRoutes:['account','profile','home'],sharedNavigationOnly:true}));});

@@ -1,4 +1,8 @@
 {
-  "request": "PR #305: tích hợp cơ chế gia sư AI khép kín, hồ sơ năng lực, dạy–luyện–kiểm tra và bài luyện thích ứng. Chỉ thay đổi logic trong AI Coach, Ôn luyện, đề thi và đọc; không có thay đổi layout/kiểu dáng được yêu cầu. Kiểm tra giữ nguyên giao diện trên TẤT CẢ các route.",
-  "excludedRoutes": []
+  "request": "PR #310: bổ sung trang Hỏi đáp AI và nút điều hướng vào Công cụ; giữ nguyên layout, nội dung của toàn bộ trang đã có; đồng thời sửa cơ chế đồng bộ nhánh và font CI.",
+  "excludedRoutes": [],
+  "newRoutes": [
+    "ai-qa"
+  ],
+  "sharedNavigationOnly": true
 }
