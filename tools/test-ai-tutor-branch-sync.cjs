@@ -116,6 +116,7 @@ test('UI font install is cached and has a finite step timeout',()=>{
   const y=fs.readFileSync(path.join(__dirname,'../.github/workflows/ui-outside-scope.yml'),'utf8');
   assert.match(y,/uses: actions\/cache@v4/);
   assert.match(y,/timeout-minutes: 4/);
-  assert.match(y,/timeout 90s sudo apt-get update/);
-  assert.match(y,/timeout 120s sudo env DEBIAN_FRONTEND/);
+  assert.match(y,/raw\.githubusercontent\.com\/notofonts\/noto-cjk\/165c01b46ea533872e002e0785ff17e44f6d97d8/);
+  assert.match(y,/2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b/);
+  assert.doesNotMatch(y,/apt-get (?:update|install)/);
 });
