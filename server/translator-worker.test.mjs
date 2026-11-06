@@ -71,6 +71,11 @@ test('lesson questions use the old Gemini 3.5 Flash Lite request settings and ac
  assert.ok(calls[1].body.systemInstruction.parts[0].text.includes(JSON.stringify(lesson)));
 });
 
+test('AI Q&A mode carries bounded progress context and enforces the 99% boundary',async()=>{
+ const qa=setup(answerResponse),snapshot={masteryBoundary:{reached:true,near:false,threshold:{minAttempts:20}},practice:{attempts:24,accuracy:.99},activity:{studyDaysLast30:5}};
+ const response=await qa.run('/lesson-ask',{hsk:4,question:'Đánh giá lộ trình của tôi',lesson:{id:'ai-qa',title:'Hỏi đáp AI',words:[],content:{mode:'ai-qa',learning_snapshot:snapshot}},history:[]});
+ assert.equal(response.status,200);const request=qa.calls[1].body;assert.match(request.systemInstruction.parts[0].text,/RANH GIỚI 99%/);assert.match(request.systemInstruction.parts[0].text,/không bới lỗi vụn vặt/);assert.equal(request.contents.at(-1).parts[0].text,'Đánh giá lộ trình của tôi');assert.equal(request.generationConfig.temperature,.25);assert.equal(request.generationConfig.maxOutputTokens,1800);
+});
 test('AI teacher mode uses a proactive HSK roleplay instruction and preserves chat history',async()=>{
  const teacher=setup(answerResponse);
  const response=await teacher.run('/lesson-ask',{hsk:3,question:'Bắt đầu buổi học',lesson:{id:'ai-teacher',title:'Giảng viên AI',words:[],content:{mode:'ai-teacher',topic:'Giao tiếp du lịch'}},history:[{role:'user',text:'Tôi muốn luyện gọi món.'},{role:'assistant',text:'我们来练习在餐厅点菜。'}]});

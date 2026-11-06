@@ -1,4 +1,10 @@
-# Current task: closed-loop AI tutor upgrade (2026-11-04)
+# Current task: AI Q&A tutor and 99% progress boundary (2026-11-06)
+
+Implemented the Tools → `Hỏi đáp AI` route on `feat/ai-tutor-v5-hardening`. The responsive chat acts as an HSK tutor for Chinese questions, study methods and roadmap reviews, reuses the existing authenticated `/lesson-ask` transport, and keeps a bounded per-account local chat history. Each roadmap request sends only a privacy-safe learning snapshot: target HSK, 30-day activity, vocabulary totals, practice aggregates, open mistakes and the existing mastery profile. The Worker has a dedicated `ai-qa` mode and proactive teacher prompt.
+
+The 99% boundary is explicit and evidence-based: at least 20 recent attempts, at least 3 active study days, accuracy ≥99% and no repeated weakness with three or more observed errors. Once reached, the tutor confirms the skill and advances the learner to one next challenge; it does not keep the learner trapped fixing microscopic errors. Near mastery (≥95% with enough attempts) prioritizes only consequential or repeated errors. Source and bundled Worker revisions are synchronized at `hsk-reading-library-4-1-2-r3`; release manifest is `4.2.1-r2`.
+
+Validation on 2026-11-06: `node --test server/*.test.mjs` = 434 passed; `node --test server/ai-qa-core.test.mjs` = 2 passed; `tools/check-ai-qa-ui.cjs` = responsive 390px and 1440px passes using the installed Cốc Cốc Chromium executable; `git diff --check` passes. The UI harness now waits for the actual lesson/data boot before navigating, preventing a false hidden-route failure on slower browsers. Changes are still uncommitted and have not been pushed or submitted as a PR.
 
 Implemented the proposal in `E:/download/gemini-code-1793804188754.md` on branch `feat/ai-smart-search`: per-account four-state mastery profile and delta sync, diagnostic probe/tutor loop engine, progressive hints with blind checks, deterministic content gates, delayed retest planner, bounded Worker `micro-tutor-pack` mode, and AI Teacher integration with mastery context and due-ret test banner. Added focused tests and PWA release `4.1.9` with 200 offline assets. Validation: 419 server tests, feature preservation, runtime 390/1440, module loading and PWA release guard pass. No PR/merge performed yet.
 

@@ -4,6 +4,42 @@
   "policy": "append-only; remove only after a separate user-authorized approval PR has landed on main",
   "features": [
     {
+      "id": "navigation-ai-qa",
+      "name": "Hỏi đáp AI và đánh giá lộ trình",
+      "checks": [
+        {
+          "kind": "data_go",
+          "file": "index.html",
+          "value": "ai-qa"
+        },
+        {
+          "kind": "id",
+          "file": "index.html",
+          "value": "aiQaPanel"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/ai-coach/ai-qa.js",
+          "value": "/lesson-ask"
+        },
+        {
+          "kind": "contains",
+          "file": "src/modules/ai-coach/ai-qa-core.js",
+          "value": "MASTERY_BOUNDARY"
+        },
+        {
+          "kind": "file",
+          "file": "server/ai-qa-core.test.mjs",
+          "value": ""
+        },
+        {
+          "kind": "file",
+          "file": "tools/check-ai-qa-ui.cjs",
+          "value": ""
+        }
+      ]
+    },
+    {
       "id": "navigation-home",
       "name": "Trang tổng quan",
       "checks": [
