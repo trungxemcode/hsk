@@ -154,6 +154,23 @@ function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-
 export const WORKER_REVISION='hsk-reading-library-4-1-2-r3';
 export function buildCorsHeaders(request,env={}){const origin=request.headers.get('Origin')||'*';return {'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Authorization, X-Requested-With','Access-Control-Max-Age':'86400','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider, X-HSK-AI-Cache, X-HSK-Image-Remaining','Vary':'Origin'};}
 function jsonWithCors(value,status,request,env){return new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8',...buildCorsHeaders(request,env)}});}
+function mergeWeaknessItemsAcrossDevices(existing={},incoming={}){
+ const valid=value=>value&&typeof value==='object'&&!Array.isArray(value);
+ const merged={...(valid(existing)?existing:{})};
+ if(!valid(incoming))return merged;
+ for(const [key,item] of Object.entries(incoming)){
+  if(['__proto__','constructor','prototype'].includes(key)||!valid(item))continue;
+  const previous=valid(merged[key])?merged[key]:null;
+  const oldAt=Number(previous?.updatedAt)||0,newAt=Number(item.updatedAt)||0;
+  const newest=newAt>=oldAt?item:previous,older=newAt>=oldAt?previous:item;
+  merged[key]={...older,...newest,
+   count:Math.max(0,Number(previous?.count)||0,Number(item.count)||0),
+   updatedAt:Math.max(oldAt,newAt),
+   sources:[...new Set([...(Array.isArray(previous?.sources)?previous.sources:[]),...(Array.isArray(item.sources)?item.sources:[])].filter(s=>typeof s==='string'))]
+  };
+ }
+ return merged;
+}
 function mergeRetestQueuesAcrossDevices(localQueue=[],remoteQueue=[],profile={}){const map=new Map();for(const ticket of [...(Array.isArray(localQueue)?localQueue:[]),...(Array.isArray(remoteQueue)?remoteQueue:[])]){if(!ticket||!ticket.nodeId)continue;const domain=String(ticket.nodeType||ticket.domain||'grammar')==='vocab'?'vocab':'grammar',key=`${domain}:${ticket.nodeId}`,old=map.get(key);if(!old||Number(ticket.updatedAt||ticket.dueAt||0)>Number(old.updatedAt||old.dueAt||0))map.set(key,{...ticket,nodeType:domain,domain,updatedAt:Number(ticket.updatedAt||ticket.dueAt||0)});}for(const [key,ticket] of map){const [domain,nodeId]=key.split(':');const node=profile[`${domain}Nodes`]?.[nodeId];if(node?.state==='DELAYED_MASTERED'&&Number(node.lastAttemptAt||0)>=Number(ticket.dueAt||0))map.delete(key);}return [...map.values()].sort((a,b)=>Number(a.dueAt||0)-Number(b.dueAt||0));}
 const AI_QA_MAX_CONVERSATIONS=20,AI_QA_MAX_MESSAGES=12,AI_QA_MAX_TEXT=5000;
 function cleanAiQaMessage(value,index=0){if(!value||!['user','assistant'].includes(value.role)||typeof value.text!=='string'||!value.text.trim())return null;return {id:String(value.id||`${value.role}:${value.text.slice(0,80)}:${index}`).slice(0,120),role:value.role,text:value.text.trim().slice(0,AI_QA_MAX_TEXT),createdAt:Number.isFinite(Number(value.createdAt))?Number(value.createdAt):0};}
@@ -178,7 +195,7 @@ export async function handleProfileSyncRequest(request,env,verifyAuthTokenFn){
  profile.appliedEventIds=Array.isArray(profile.appliedEventIds)?profile.appliedEventIds:[];profile.events=Array.isArray(profile.events)?profile.events:[];
  for(const event of Array.isArray(delta.events)?delta.events:[]){if(!event||event.uid!==authUser.uid||typeof event.eventId!=='string'||!event.eventId.trim()||profile.appliedEventIds.includes(event.eventId))continue;profile.appliedEventIds.push(event.eventId);profile.events.push({...event,receivedAt:Date.now()});}
  profile.appliedEventIds=profile.appliedEventIds.slice(-500);profile.events=profile.events.slice(-500);
-  profile.retestQueue=mergeRetestQueuesAcrossDevices(profile.retestQueue,delta.retestQueue,profile);if(delta.activeSession&&(!profile.activeSession||Number(delta.activeSession.updatedAt||0)>=Number(profile.activeSession.updatedAt||0)))profile.activeSession=delta.activeSession;if(delta.weaknessItems&&typeof delta.weaknessItems==='object')profile.weaknessItems={...(profile.weaknessItems||{}),...delta.weaknessItems};const chat=mergeAiQaConversations(profile.aiQaConversations,delta.aiQaConversations,[(profile.aiQaDeleted||[]),...(Array.isArray(delta.aiQaDeletedConversationIds)?delta.aiQaDeletedConversationIds:[])].flat(),Date.now());profile.aiQaConversations=chat.conversations;profile.aiQaDeleted=chat.deleted;profile.targetHsk=Number(delta.targetHsk)||profile.targetHsk;profile.updatedAt=Date.now();await kv.put(key,JSON.stringify(profile));
+  profile.retestQueue=mergeRetestQueuesAcrossDevices(profile.retestQueue,delta.retestQueue,profile);if(delta.activeSession&&(!profile.activeSession||Number(delta.activeSession.updatedAt||0)>=Number(profile.activeSession.updatedAt||0)))profile.activeSession=delta.activeSession;if(delta.weaknessItems&&typeof delta.weaknessItems==='object')profile.weaknessItems=mergeWeaknessItemsAcrossDevices(profile.weaknessItems,delta.weaknessItems);const chat=mergeAiQaConversations(profile.aiQaConversations,delta.aiQaConversations,[(profile.aiQaDeleted||[]),...(Array.isArray(delta.aiQaDeletedConversationIds)?delta.aiQaDeletedConversationIds:[])].flat(),Date.now());profile.aiQaConversations=chat.conversations;profile.aiQaDeleted=chat.deleted;profile.targetHsk=Number(delta.targetHsk)||profile.targetHsk;profile.updatedAt=Date.now();await kv.put(key,JSON.stringify(profile));
   return jsonWithCors({ok:true,synced:true,serverTimestamp:profile.updatedAt,remoteDelta:{vocabNodes:Object.values(profile.vocabNodes),grammarNodes:Object.values(profile.grammarNodes),retestQueue:profile.retestQueue,activeSession:profile.activeSession,weaknessItems:profile.weaknessItems,events:profile.events,appliedEventIds:profile.appliedEventIds,aiQaConversations:profile.aiQaConversations,aiQaDeleted:profile.aiQaDeleted}},200,request,env);
 }
 async function geminiFailure(response,model,env,operation='existing'){

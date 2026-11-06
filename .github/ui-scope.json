@@ -1,6 +1,4 @@
 {
-  "request": "PR #316: bổ sung gia sư AI cá nhân hóa, điều hướng ý định và các nút kiểm tra lại trong trang Hỏi đáp AI; các trang ngoài ai-qa phải giữ nguyên.",
-  "excludedRoutes": [
-    "ai-qa"
-  ]
+  "request": "PR307 regression: chỉ sửa đồng bộ dữ liệu điểm yếu học tập AI, không thay đổi giao diện bất kỳ trang nào.",
+  "excludedRoutes": []
 }
