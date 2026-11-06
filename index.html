@@ -34,7 +34,7 @@
 <script src="./src/modules/translation/translator.js" defer=""></script>
 <script src="./src/modules/translation/ocr.js" defer=""></script>
 <script src="./src/modules/lessons/lesson-mastery.js" defer=""></script>
-<script type="module" src="./src/shared/tutor-contracts.mjs"></script><script type="module" src="./src/modules/practice/question-adapter.mjs"></script><script src="./src/modules/ai-coach/coach-profile.js" defer></script><script src="./src/modules/ai-coach/tutor-loop-engine.js" defer></script><script src="./src/modules/ai-coach/ai-coach-core.js" defer></script><script src="./src/modules/ai-coach/ai-qa-core.js" defer></script>
+<script type="module" src="./src/shared/tutor-contracts.mjs"></script><script type="module" src="./src/modules/practice/question-adapter.mjs"></script><script src="./src/modules/ai-coach/coach-profile.js" defer></script><script src="./src/modules/ai-coach/tutor-loop-engine.js" defer></script><script src="./src/modules/ai-coach/ai-coach-core.js" defer></script><script src="./src/modules/ai-coach/ai-qa-core.js" defer></script><script src="./src/modules/ai-coach/qa-intent-router.js" defer></script><script src="./src/modules/ai-coach/qa-understanding-memory.js" defer></script>
 <script src="./src/modules/ai-coach/ai-coach-images.js" defer></script>
 <script src="./src/modules/ai-coach/ai-coach.js" defer></script><script src="./src/modules/ai-coach/ai-teacher.js" defer></script><script src="./src/modules/ai-coach/ai-qa.js" defer></script>
 <script src="./src/modules/lessons/lesson-mini.js" defer></script>
@@ -170,7 +170,7 @@
         <header class="ai-qa-chatbar">
           <button id="aiQaHistoryToggle" class="ai-qa-history-toggle" type="button" aria-expanded="false" aria-controls="aiQaHistory"><span aria-hidden="true">☰</span><span>Gần đây</span></button>
           <div class="ai-qa-chat-title"><strong id="aiQaConversationTitle">Đoạn chat mới</strong><small>Gia sư AI · HSK</small></div>
-          <label class="ai-qa-level" for="aiQaHsk"><span>Cấp</span><select id="aiQaHsk" aria-label="Cấp HSK"><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select></label>
+          <span class="ai-qa-level-note">Theo mục tiêu HSK của app</span>
         </header>
         <div class="ai-qa-learning-strip"><span class="ai-qa-learning-dot" aria-hidden="true"></span><span id="aiQaSnapshot" role="status"></span></div>
         <div id="aiQaMessages" class="ai-qa-messages" role="log" aria-live="polite"></div>
