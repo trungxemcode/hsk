@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
-import {handleProfileSyncRequest} from './translator-worker-bundled.mjs';
+import {handleProfileSyncRequest,mergeAiQaConversations} from './translator-worker-bundled.mjs';
 
 const require=createRequire(import.meta.url);
 const Practice=require('../src/modules/practice/practice-generator-core.js');
@@ -25,6 +25,22 @@ test('PR307 profile sync responds to CORS preflight and authenticated POST',asyn
  assert.equal(preflight.status,204);assert.equal(preflight.headers.get('Access-Control-Allow-Origin'),'https://trungxemcode.github.io');
  const map=new Map(),post=await handleProfileSyncRequest(new Request(url,{method:'POST',headers:{Origin:'https://trungxemcode.github.io',Authorization:'Bearer token','Content-Type':'application/json'},body:JSON.stringify({uid:'runtime-user',delta:{targetHsk:3,grammarNodes:[]}})}),{USER_PROFILES_KV:{get:key=>map.get(key)||null,put:(key,value)=>{map.set(key,value);}}},async token=>token==='token'?{uid:'runtime-user'}:null);
  assert.equal(post.status,200);assert.equal(post.headers.get('Access-Control-Allow-Origin'),'https://trungxemcode.github.io');assert.equal((await post.json()).synced,true);
+});
+
+test('AI Q&A conversations merge messages from multiple devices and honor deletion tombstones',()=>{
+ const one={id:'chat-1',title:'Hỏi ngữ pháp',createdAt:10,updatedAt:20,messages:[{id:'m-1',role:'user',text:'Giải thích 了',createdAt:11}]};
+ const two={id:'chat-1',title:'Hỏi ngữ pháp',createdAt:10,updatedAt:30,messages:[{id:'m-2',role:'assistant',text:'了 diễn tả sự hoàn thành hoặc thay đổi trạng thái.',createdAt:29}]};
+ const merged=mergeAiQaConversations([], [one], []);const both=mergeAiQaConversations(merged.conversations,[two],[]);
+ assert.equal(both.conversations[0].messages.length,2);assert.equal(both.conversations[0].title,'Hỏi ngữ pháp');
+ const removed=mergeAiQaConversations(both.conversations,[],[{id:'chat-1',deletedAt:40}]);assert.equal(removed.conversations.length,0);
+});
+
+test('AI Q&A profile sync returns a union for two device writes',async()=>{
+ const map=new Map(),env={USER_PROFILES_KV:{get:key=>map.get(key)||null,put:(key,value)=>{map.set(key,value);}}},headers={Origin:'https://trungxemcode.github.io',Authorization:'Bearer token','Content-Type':'application/json'};
+ const post=delta=>handleProfileSyncRequest(new Request('https://worker.example/api/profile-sync',{method:'POST',headers,body:JSON.stringify({uid:'runtime-chat-user',delta})}),env,async token=>token==='token'?{uid:'runtime-chat-user'}:null);
+ await post({aiQaConversations:[{id:'chat-1',title:'Thiết bị A',createdAt:10,updatedAt:20,messages:[{id:'m-a',role:'user',text:'Tin nhắn từ laptop',createdAt:11}]}]});
+ const second=await post({aiQaConversations:[{id:'chat-1',title:'Thiết bị B',createdAt:10,updatedAt:30,messages:[{id:'m-b',role:'assistant',text:'Phản hồi từ điện thoại',createdAt:29}]}]});
+ const data=await second.json(),chat=data.remoteDelta.aiQaConversations.find(item=>item.id==='chat-1');assert.equal(chat.messages.length,2);assert.equal(chat.title,'Thiết bị B');
 });
 
 test('v5 profile sync is idempotent for queued learning evidence',async()=>{
