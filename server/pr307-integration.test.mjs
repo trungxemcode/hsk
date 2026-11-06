@@ -32,6 +32,8 @@ test('AI Q&A conversations merge messages from multiple devices and honor deleti
  const two={id:'chat-1',title:'Hỏi ngữ pháp',createdAt:10,updatedAt:30,messages:[{id:'m-2',role:'assistant',text:'了 diễn tả sự hoàn thành hoặc thay đổi trạng thái.',createdAt:29}]};
  const merged=mergeAiQaConversations([], [one], []);const both=mergeAiQaConversations(merged.conversations,[two],[]);
  assert.equal(both.conversations[0].messages.length,2);assert.equal(both.conversations[0].title,'Hỏi ngữ pháp');
+ const extraMessages=Array.from({length:30},(_,i)=>({id:'many-'+i,role:'user',text:'Luyện câu '+i,createdAt:i+1}));
+ assert.equal(mergeAiQaConversations([],[{...one,messages:extraMessages}],[]).conversations[0].messages.length,12,'new cloud conversations are bounded as well as merged conversations');
  const removed=mergeAiQaConversations(both.conversations,[],[{id:'chat-1',deletedAt:40}]);assert.equal(removed.conversations.length,0);
 });
 
@@ -41,6 +43,9 @@ test('AI Q&A profile sync returns a union for two device writes',async()=>{
  await post({aiQaConversations:[{id:'chat-1',title:'Thiết bị A',createdAt:10,updatedAt:20,messages:[{id:'m-a',role:'user',text:'Tin nhắn từ laptop',createdAt:11}]}]});
  const second=await post({aiQaConversations:[{id:'chat-1',title:'Thiết bị B',createdAt:10,updatedAt:30,messages:[{id:'m-b',role:'assistant',text:'Phản hồi từ điện thoại',createdAt:29}]}]});
  const data=await second.json(),chat=data.remoteDelta.aiQaConversations.find(item=>item.id==='chat-1');assert.equal(chat.messages.length,2);assert.equal(chat.title,'Thiết bị B');
+ const malformed=await post({aiQaDeletedConversationIds:{not:'an array'}});
+ assert.equal(malformed.status,200,'malformed tombstone payload must not crash profile sync');
+
 });
 
 test('v5 profile sync is idempotent for queued learning evidence',async()=>{
