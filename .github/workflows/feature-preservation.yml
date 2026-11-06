@@ -60,6 +60,7 @@ jobs:
         NODE_PATH: /tmp/hsk-tests/node_modules
       run: |
         node --test server/*.test.mjs
+        node --test tools/test-ai-tutor-branch-sync.cjs
         node tools/check-music-local-files-only.cjs
         node tools/check-voice-demo-offline-range.cjs
         node tools/check-yunjian-only.cjs
