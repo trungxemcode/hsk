@@ -18,3 +18,11 @@ html[data-theme=dark] body.studio-enabled .ai-qa-panel,html[data-theme=dark] .ai
 /* On phones the chat owns the available viewport; only the message column scrolls. */
 @media(max-width:720px){body.studio-enabled[data-studio-hub=ai-qa] main.workspace{width:100%!important;padding:0 0 calc(76px + env(safe-area-inset-bottom))!important;overflow:hidden;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-panel{width:100%!important;height:100%!important;min-height:0!important;margin:0!important;border-radius:var(--radius-btn) var(--radius-btn) 0 0;overflow:hidden;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-shell{height:100%!important;min-height:0!important;border-radius:var(--radius-btn) var(--radius-btn) 0 0;}.ai-qa-chat{min-height:0;}.ai-qa-messages{min-height:0;overflow-y:auto;overscroll-behavior:contain;}.ai-qa-form{margin-bottom:10px;}.ai-qa-history{border-radius:var(--radius-btn) 0 0 0;}}
 @media(max-width:720px){body.studio-enabled[data-studio-hub=ai-qa] main.workspace{display:flex!important;flex-direction:column;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-panel{flex:1 1 auto;}}
+/* Final chat proportions and unified conversation action row. */
+@media(min-width:721px){body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-panel{width:min(100%,calc(100dvh - 122px))!important;max-width:calc(100dvh - 122px)!important;margin-inline:auto!important;}.ai-qa-shell{width:100%;}}
+.ai-qa-conversation{position:relative;}
+.ai-qa-conversation-open{padding-right:42px;}
+.ai-qa-conversation-more{position:absolute!important;top:5px!important;right:4px!important;width:30px!important;height:30px!important;min-height:30px!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;}
+.ai-qa-conversation-more:hover{background:var(--accent-light)!important;}
+.ai-qa-boundary-note{display:none!important;}
+@media(max-width:720px){.ai-qa-conversation{border:1px solid var(--line);}.ai-qa-conversation[data-active=true]{border-color:color-mix(in srgb,var(--accent) 38%,var(--line));}.ai-qa-conversation-open{border:0!important;background:transparent!important;padding-right:46px;}.ai-qa-conversation-more{right:5px!important;top:5px!important;border:0!important;background:transparent!important;}.ai-qa-conversation-more:hover{background:var(--accent-light)!important;}}
