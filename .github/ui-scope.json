@@ -1,5 +1,5 @@
 {
-  "request": "Commit 4faa31e: căn khung chat Hỏi đáp AI trên PC và điện thoại; mọi trang ngoài ai-qa phải giữ nguyên giao diện.",
+  "request": "Commit 2d562a2: chỉnh khung chat vuông, menu lịch sử và trạng thái AI trên mobile; không đổi các trang ngoài ai-qa.",
   "excludedRoutes": [
     "ai-qa"
   ]
