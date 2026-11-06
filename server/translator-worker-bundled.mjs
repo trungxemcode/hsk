@@ -1890,9 +1890,10 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-reading-library-4-1-2-r1';
+export const WORKER_REVISION='hsk-reading-library-4-1-2-r2';
 export function buildCorsHeaders(request,env={}){const origin=request.headers.get('Origin')||'*';return {'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Authorization, X-Requested-With','Access-Control-Max-Age':'86400','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider, X-HSK-AI-Cache, X-HSK-Image-Remaining','Vary':'Origin'};}
 function jsonWithCors(value,status,request,env){return new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8',...buildCorsHeaders(request,env)}});}
+function mergeRetestQueuesAcrossDevices(localQueue=[],remoteQueue=[],profile={}){const map=new Map();for(const ticket of [...(Array.isArray(localQueue)?localQueue:[]),...(Array.isArray(remoteQueue)?remoteQueue:[])]){if(!ticket||!ticket.nodeId)continue;const domain=String(ticket.nodeType||ticket.domain||'grammar')==='vocab'?'vocab':'grammar',key=`${domain}:${ticket.nodeId}`,old=map.get(key);if(!old||Number(ticket.updatedAt||ticket.dueAt||0)>Number(old.updatedAt||old.dueAt||0))map.set(key,{...ticket,nodeType:domain,domain,updatedAt:Number(ticket.updatedAt||ticket.dueAt||0)});}for(const [key,ticket] of map){const [domain,nodeId]=key.split(':');const node=profile[`${domain}Nodes`]?.[nodeId];if(node?.state==='DELAYED_MASTERED'&&Number(node.lastAttemptAt||0)>=Number(ticket.dueAt||0))map.delete(key);}return [...map.values()].sort((a,b)=>Number(a.dueAt||0)-Number(b.dueAt||0));}
 export async function handleProfileSyncRequest(request,env,verifyAuthTokenFn){
  if(request.method==='OPTIONS')return new Response(null,{status:204,headers:buildCorsHeaders(request,env)});
  if(request.method!=='POST')return jsonWithCors({ok:false,error:'Method not allowed'},405,request,env);
@@ -1901,15 +1902,15 @@ export async function handleProfileSyncRequest(request,env,verifyAuthTokenFn){
  const authUser=await verifyAuthTokenFn?.(token,env);if(!authUser?.uid)return jsonWithCors({ok:false,error:'Invalid or expired token'},401,request,env);
  const body=await request.json().catch(()=>null);if(!body||body.uid!==authUser.uid)return jsonWithCors({ok:false,error:'UID mismatch with authenticated user'},403,request,env);
  const kv=env?.USER_PROFILES_KV;if(!kv)return jsonWithCors({ok:false,error:'Profile storage unavailable'},503,request,env);
- const key=`tutor_profile_v3:${authUser.uid}`,existing=await kv.get(key),profile=existing?JSON.parse(existing):{uid:authUser.uid,targetHsk:3,vocabNodes:{},grammarNodes:{},retestQueue:[],weaknessItems:{},appliedEventIds:[],events:[]};
+  const key=`tutor_profile_v3:${authUser.uid}`,existing=await kv.get(key),profile=existing?JSON.parse(existing):{uid:authUser.uid,targetHsk:3,vocabNodes:{},grammarNodes:{},retestQueue:[],weaknessItems:{},appliedEventIds:[],events:[],activeSession:null};
  const delta=body.delta&&typeof body.delta==='object'?body.delta:{};
  const merge=(bucket,list)=>{for(const node of Array.isArray(list)?list:[]){if(!node?.id)continue;const prev=profile[bucket][node.id];if(!prev||(node.lastAttemptAt||0)>=(prev.lastAttemptAt||0))profile[bucket][node.id]={...node,dirtyForSync:false};}};
  merge('vocabNodes',delta.vocabNodes);merge('grammarNodes',delta.grammarNodes);
  profile.appliedEventIds=Array.isArray(profile.appliedEventIds)?profile.appliedEventIds:[];profile.events=Array.isArray(profile.events)?profile.events:[];
  for(const event of Array.isArray(delta.events)?delta.events:[]){if(!event||event.uid!==authUser.uid||typeof event.eventId!=='string'||!event.eventId.trim()||profile.appliedEventIds.includes(event.eventId))continue;profile.appliedEventIds.push(event.eventId);profile.events.push({...event,receivedAt:Date.now()});}
  profile.appliedEventIds=profile.appliedEventIds.slice(-500);profile.events=profile.events.slice(-500);
- if(Array.isArray(delta.retestQueue))profile.retestQueue=delta.retestQueue;if(delta.weaknessItems&&typeof delta.weaknessItems==='object')profile.weaknessItems={...(profile.weaknessItems||{}),...delta.weaknessItems};profile.targetHsk=Number(delta.targetHsk)||profile.targetHsk;profile.updatedAt=Date.now();await kv.put(key,JSON.stringify(profile));
- return jsonWithCors({ok:true,synced:true,serverTimestamp:profile.updatedAt,remoteDelta:{vocabNodes:Object.values(profile.vocabNodes),grammarNodes:Object.values(profile.grammarNodes),retestQueue:profile.retestQueue,weaknessItems:profile.weaknessItems,events:profile.events,appliedEventIds:profile.appliedEventIds}},200,request,env);
+  profile.retestQueue=mergeRetestQueuesAcrossDevices(profile.retestQueue,delta.retestQueue,profile);if(delta.activeSession&&(!profile.activeSession||Number(delta.activeSession.updatedAt||0)>=Number(profile.activeSession.updatedAt||0)))profile.activeSession=delta.activeSession;if(delta.weaknessItems&&typeof delta.weaknessItems==='object')profile.weaknessItems={...(profile.weaknessItems||{}),...delta.weaknessItems};profile.targetHsk=Number(delta.targetHsk)||profile.targetHsk;profile.updatedAt=Date.now();await kv.put(key,JSON.stringify(profile));
+  return jsonWithCors({ok:true,synced:true,serverTimestamp:profile.updatedAt,remoteDelta:{vocabNodes:Object.values(profile.vocabNodes),grammarNodes:Object.values(profile.grammarNodes),retestQueue:profile.retestQueue,activeSession:profile.activeSession,weaknessItems:profile.weaknessItems,events:profile.events,appliedEventIds:profile.appliedEventIds}},200,request,env);
 }
 async function geminiFailure(response,model,env,operation='existing'){
  const status=response.status,payload=await response.json().catch(()=>null),providerStatus=payload?.error?.status||'';
