@@ -25,29 +25,27 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/.local/share/fonts/hsk-ci
-        key: ${{ runner.os }}-hsk-noto-cjk-visual-v1
+        key: ${{ runner.os }}-hsk-noto-cjk-visual-v2
     - name: Install fonts
       timeout-minutes: 4
       shell: bash
       run: |
         set -euo pipefail
         FONT_DIR="$HOME/.local/share/fonts/hsk-ci"
+        FONT_FILE="$FONT_DIR/NotoSansCJKsc-Regular.otf"
+        EXPECTED_SHA256="2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
         mkdir -p "$FONT_DIR"
-        fc-cache -f "$FONT_DIR" >/dev/null
-        if fc-match -f '%{family}' 'Noto Sans CJK SC' | grep -qi 'Noto Sans CJK'; then
-          echo "Noto CJK fonts are already available."
-          exit 0
+        if ! printf '%s  %s\n' "$EXPECTED_SHA256" "$FONT_FILE" | sha256sum --check --status; then
+          rm -f "$FONT_FILE" "$FONT_FILE.tmp"
+          # Pinned official font: 16.4 MB, versus the 61 MB Ubuntu apt package.
+          timeout 165s curl -fsSL --retry 2 --retry-delay 2 --connect-timeout 12 --max-time 120 \
+            'https://raw.githubusercontent.com/notofonts/noto-cjk/165c01b46ea533872e002e0785ff17e44f6d97d8/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf' \
+            -o "$FONT_FILE.tmp"
+          mv "$FONT_FILE.tmp" "$FONT_FILE"
         fi
-        # Timeout instead of waiting for a stale apt mirror until GitHub cancels the job.
-        timeout 90s sudo apt-get update -qq -o Acquire::ForceIPv4=true -o Acquire::http::Timeout=15 -o Acquire::Retries=1
-        timeout 120s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends fonts-noto-cjk
-        if ! fc-match -f '%{family}' 'Noto Sans CJK SC' | grep -qi 'Noto Sans CJK'; then
-          echo "Noto CJK font install did not succeed." >&2
-          exit 1
-        fi
-        FONT_FILE="$(fc-match -f '%{file}' 'Noto Sans CJK SC')"
-        cp "$FONT_FILE" "$FONT_DIR/$(basename "$FONT_FILE")"
+        printf '%s  %s\n' "$EXPECTED_SHA256" "$FONT_FILE" | sha256sum -c -
         fc-cache -f "$FONT_DIR" >/dev/null
+        fc-match -f '%{family}' 'Noto Sans CJK SC' | grep -qi 'Noto Sans CJK SC'
     - name: Test guard logic
       env:
         NODE_PATH: /tmp/hsk-ui-scope/node_modules
