@@ -41,5 +41,18 @@ service cloud.firestore {
    allow delete: if request.auth != null && request.auth.uid == uid
     && sampleId.matches('^[a-f0-9]{64}$');
   }
+  match /users/{uid}/aiQaConversations/{conversationId} {
+   allow read: if request.auth != null && request.auth.uid == uid;
+   allow create, update: if request.auth != null && request.auth.uid == uid
+    && request.resource.data.keys().hasOnly(['id','title','messages','createdAt','updatedAt','deleted','deletedAt','updatedAtServer'])
+    && request.resource.data.id is string && request.resource.data.id.size() <= 120
+    && request.resource.data.title is string && request.resource.data.title.size() <= 100
+    && request.resource.data.messages is list && request.resource.data.messages.size() <= 12
+    && request.resource.data.createdAt is number && request.resource.data.updatedAt is number
+    && request.resource.data.deleted is bool
+    && (!request.resource.data.deleted || request.resource.data.deletedAt is number)
+    && request.resource.data.updatedAtServer == request.time;
+   allow delete: if false;
+  }
  }
 }
