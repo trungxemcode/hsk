@@ -22,7 +22,7 @@ window.HSKDesignerObjects={attach({doc,win,overlay,schema,editable,choose,node,s
   if(g.inline)patch.display='inline-block';g.patch=patch;pending=patch;badge.hidden=false;if(!queued)queued=win.requestAnimationFrame(()=>{queued=0;flush();});
  }
  function finish(e){const g=gesture;if(!g||e.pointerId!==g.pointerId)return;e.preventDefault();e.stopImmediatePropagation();flush();gesture=null;badge.hidden=true;doc.documentElement.classList.remove('hsk-object-dragging');if(g.started){callbacks.commit(g.key,g.patch);for(const f of g.frozen)restoreStyles(f.n,f.snapshot);callbacks.settled?.();suppressUntil=win.performance.now()+250;}try{doc.documentElement.releasePointerCapture(g.pointerId);}catch{}}
- doc.addEventListener('pointerdown',e=>{if(!editable()||e.target.closest?.('[data-hsk-designer-ui]')||e.button!==0)return;const c=choose(e);if(c)begin(e,c.key);},true);
+ doc.addEventListener('pointerdown',e=>{if(!editable()||e.altKey||e.target.closest?.('[data-hsk-designer-ui]')||e.button!==0)return;const c=choose(e);if(c)begin(e,c.key);},true);
  doc.addEventListener('pointermove',move,true);doc.addEventListener('pointerup',finish,true);doc.addEventListener('pointercancel',cancel,true);win.addEventListener('blur',cancel);doc.addEventListener('visibilitychange',()=>{if(doc.hidden)cancel();});
  doc.addEventListener('dragstart',e=>{if(editable()&&!e.target.closest?.('[data-hsk-designer-ui]'))e.preventDefault();},true);
  doc.addEventListener('keydown',e=>{

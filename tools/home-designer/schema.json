@@ -1716,6 +1716,118 @@
       "scope": "html body.studio-enabled[data-search-tool=\"vocabulary\"] #searchPanel#searchPanel#searchPanel"
     },
     {
+      "id": "ai-qa",
+      "label": "Hỏi đáp AI / Chat AI",
+      "root": "#aiQaPanel",
+      "route": "ai-qa",
+      "kind": "route",
+      "group": "Học tập",
+      "reorder": false,
+      "scope": "html body.studio-enabled[data-studio-hub=\"ai-qa\"] #aiQaPanel#aiQaPanel#aiQaPanel",
+      "components": [
+        {
+          "key": "chat-shell",
+          "label": "Toàn bộ bố cục Chat AI",
+          "selector": ".ai-qa-shell"
+        },
+        {
+          "key": "chat-history",
+          "label": "Thanh lịch sử trò chuyện",
+          "selector": "#aiQaHistory"
+        },
+        {
+          "key": "chat-history-title",
+          "label": "Tiêu đề lịch sử",
+          "selector": ".ai-qa-history-head"
+        },
+        {
+          "key": "chat-new",
+          "label": "Nút đoạn chat mới",
+          "selector": "#aiQaNewChat"
+        },
+        {
+          "key": "chat-history-list",
+          "label": "Danh sách cuộc trò chuyện",
+          "selector": "#aiQaConversationList"
+        },
+        {
+          "key": "chat-body",
+          "label": "Khung nội dung chat",
+          "selector": ".ai-qa-chat"
+        },
+        {
+          "key": "chat-toolbar",
+          "label": "Thanh tiêu đề Chat AI",
+          "selector": ".ai-qa-chatbar"
+        },
+        {
+          "key": "chat-history-toggle",
+          "label": "Nút mở lịch sử",
+          "selector": "#aiQaHistoryToggle"
+        },
+        {
+          "key": "chat-heading",
+          "label": "Tên cuộc trò chuyện",
+          "selector": "#aiQaConversationTitle"
+        },
+        {
+          "key": "chat-learning",
+          "label": "Thông tin trình độ",
+          "selector": ".ai-qa-learning-strip"
+        },
+        {
+          "key": "chat-messages",
+          "label": "Vùng tin nhắn",
+          "selector": "#aiQaMessages"
+        },
+        {
+          "key": "chat-user-message",
+          "label": "Bong bóng tin nhắn người học",
+          "selector": ".ai-qa-message.user"
+        },
+        {
+          "key": "chat-ai-message",
+          "label": "Bong bóng tin nhắn AI",
+          "selector": ".ai-qa-message.assistant"
+        },
+        {
+          "key": "chat-feedback",
+          "label": "Nút phản hồi AI",
+          "selector": ".ai-qa-feedback"
+        },
+        {
+          "key": "chat-suggestions",
+          "label": "Gợi ý câu hỏi tiếp theo",
+          "selector": ".qa-suggestions-group"
+        },
+        {
+          "key": "chat-empty",
+          "label": "Lời chào Chat AI",
+          "selector": "#aiQaEmpty"
+        },
+        {
+          "key": "chat-status",
+          "label": "Trạng thái phản hồi",
+          "selector": "#aiQaStatus"
+        },
+        {
+          "key": "chat-composer",
+          "label": "Khung nhập tin nhắn",
+          "selector": "#aiQaForm"
+        },
+        {
+          "key": "chat-input",
+          "label": "Ô nhập Chat AI",
+          "selector": "#aiQaInput"
+        },
+        {
+          "key": "chat-send",
+          "label": "Nút gửi tin nhắn",
+          "selector": "#aiQaSend"
+        }
+      ]
+    },
+    {
       "id": "handwriting",
       "label": "Vẽ chữ để tra cứu",
       "root": "#handwritingPanel",
