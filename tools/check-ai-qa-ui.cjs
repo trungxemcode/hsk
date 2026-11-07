@@ -17,10 +17,21 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   await page.locator('#aiQaPanel').waitFor({state:'visible'});
   const themeColors=await page.evaluate(async()=>{
     const html=document.documentElement,prior=html.getAttribute('data-theme'),panel=document.getElementById('aiQaPanel');
-    html.setAttribute('data-theme','light');await new Promise(resolve=>setTimeout(resolve,500));
-    const light=getComputedStyle(panel).backgroundColor;
-    html.setAttribute('data-theme','dark');await new Promise(resolve=>setTimeout(resolve,500));
-    const dark=getComputedStyle(panel).backgroundColor;
+    // The app animates theme changes: wait for the final computed color,
+    // otherwise an in-between animation frame causes nondeterministic CI failures.
+    const waitForColor=async(expected)=>{
+      const deadline=performance.now()+3000;
+      while(performance.now()<deadline){
+        const actual=getComputedStyle(panel).backgroundColor;
+        if(actual===expected)return actual;
+        await new Promise(resolve=>setTimeout(resolve,70));
+      }
+      return getComputedStyle(panel).backgroundColor;
+    };
+    html.setAttribute('data-theme','light');
+    const light=await waitForColor('rgb(244, 244, 250)');
+    html.setAttribute('data-theme','dark');
+    const dark=await waitForColor('rgb(33, 33, 33)');
     if(prior===null)html.removeAttribute('data-theme');else html.setAttribute('data-theme',prior);
     return {light,dark};
   });
