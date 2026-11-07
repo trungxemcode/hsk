@@ -673,3 +673,22 @@ body.studio-enabled #accountPanel[data-account-current="profile"]>.update-push-s
 body.mobile-ux #accountPanel[data-account-current="settings"]>#accountBadge{display:inline-flex!important}
 body.mobile-ux #accountPanel[data-account-current="settings"]>#accountStatus{display:block!important}
 body.mobile-ux #accountSettingsStatus{display:none!important}
+
+
+/* Shared submenu SVG alignment: icons occupy a true 19px flex track.
+   The former inline SVG had a baseline gap, leaving sparkles/search/etc.
+   above the optical center of their label on desktop. */
+body.studio-enabled .side-nav .nav-group-items > button > i[data-icon]{
+  display:grid;
+  place-items:center;
+  flex:0 0 19px;
+  width:19px;
+  height:19px;
+  min-height:19px;
+  line-height:0;
+}
+body.studio-enabled .side-nav .nav-group-items > button > i[data-icon] > svg{
+  display:block;
+  width:19px;
+  height:19px;
+}
