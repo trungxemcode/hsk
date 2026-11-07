@@ -5,6 +5,18 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
 
 
  if(width>720){
+ const navAlignment=await page.evaluate(()=>{
+   const buttons=[...document.querySelectorAll('.side-nav .nav-group-items > button')];
+   return buttons.map(b=>{
+    const svg=b.querySelector('i[data-icon] > svg'),label=b.querySelector('span');
+    if(!svg||!label)return null;
+    const i=svg.getBoundingClientRect(),t=label.getBoundingClientRect();
+    return {route:b.dataset.studioGo,difference:Math.abs(i.y+i.height/2-t.y-t.height/2)};
+   }).filter(Boolean);
+ });
+ assert.ok(navAlignment.length>=2,'submenu SVG icons and text are present');
+ for(const sample of navAlignment)assert.ok(sample.difference<1.25,
+   'navigation '+sample.route+' icon/label misaligned by '+sample.difference+'px');
  const groups=page.locator('.side-nav .nav-group');
  assert.deepEqual(await groups.nth(3).locator('[data-studio-go]').evaluateAll(ns=>ns.map(n=>n.dataset.studioGo)),['search','ai-qa'],'tools group contains dictionary and AI tutor');assert.equal(await groups.nth(1).locator('[data-studio-go]').count(),2,'mode choices belong inside Luyện & Ôn');
  assert.deepEqual(await groups.locator(':scope>summary').allTextContents(),['Học tập HSK','Ôn luyện','Giải trí','Công cụ','Luyện thi HSK']);
