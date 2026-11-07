@@ -198,7 +198,7 @@ body.studio-enabled[data-studio-hub="ai-qa"] #aiQaSend > span > svg{
     --qa-reading-inset:max(20px, calc((100% - var(--qa-reading-width)) / 2));
   }
   body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-messages{
-    padding:8px var(--qa-reading-inset) 150px!important;
+    padding:8px var(--qa-reading-inset) 12px!important;
     scroll-behavior:auto;
   }
   body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-message{
@@ -220,20 +220,64 @@ body.studio-enabled[data-studio-hub="ai-qa"] #aiQaSend > span > svg{
   }
   html body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"]
   #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaForm{
-    position:absolute!important;
-    left:var(--qa-reading-inset)!important;
-    right:var(--qa-reading-inset)!important;
-    bottom:46px!important;
-    width:auto!important;
+    position:relative!important;
+    inset:auto!important;
+    flex:none;
+    box-sizing:border-box;
+    width:calc(100% - 2 * var(--qa-reading-inset))!important;
     max-width:none!important;
-    margin:0!important;
+    margin:0 auto!important;
     translate:none!important;
     transform:none!important;
   }
-  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-empty,
   body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-status,
   body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-boundary-note{
     box-sizing:border-box;
-    max-width:var(--qa-reading-width);
+    width:calc(100% - 2 * var(--qa-reading-inset));
+    margin-inline:auto;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-boundary-note{
+    position:static;
+    margin-block:8px 12px;
+    text-align:center;
+  }
+
+  /* Keep the welcome and composer together until the first message is sent. */
+  body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"]
+  .ai-qa-chat:has(> #aiQaEmpty:not([hidden])){
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:auto minmax(0,1fr) auto auto auto auto minmax(0,1fr);
+  }
+  body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"]
+  .ai-qa-chat:has(> #aiQaEmpty:not([hidden])) > .ai-qa-messages{
+    grid-row:2;
+    padding-block:0!important;
+  }
+  html body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"]
+  #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaEmpty:not([hidden]){
+    grid-row:3;
+    position:static!important;
+    box-sizing:border-box;
+    width:calc(100% - 2 * var(--qa-reading-inset))!important;
+    margin:0 auto 14px!important;
+    padding:0!important;
+    translate:none!important;
+    transform:none!important;
+  }
+  body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"]
+  .ai-qa-chat:has(> #aiQaEmpty:not([hidden])) > .ai-qa-status{
+    grid-row:5;
+    margin-block:6px 0;
+    min-height:0;
+    text-align:center;
+  }
+  body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"]
+  .ai-qa-chat:has(> #aiQaEmpty:not([hidden])) > .ai-qa-form{
+    grid-row:4;
+  }
+  body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"]
+  .ai-qa-chat:has(> #aiQaEmpty:not([hidden])) > .ai-qa-boundary-note{
+    grid-row:6;
   }
 }
