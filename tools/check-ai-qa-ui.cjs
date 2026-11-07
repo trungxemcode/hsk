@@ -15,6 +15,26 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   assert.equal(await page.evaluate(()=>window.__qaWrites.length),0,'do not overwrite remote conversations before first Firestore snapshot');
   await page.evaluate(()=>window.__qaInitial());
   await page.locator('#aiQaPanel').waitFor({state:'visible'});
+  assert.equal(await page.locator('.ai-qa-conversation').count(),0,
+    'new account does not create a phantom empty chat');
+  assert.equal((await page.locator('#aiQaConversationTitle').textContent()).trim(),'Hỏi đáp AI');
+  assert.equal(await page.locator('#aiQaEmpty').isVisible(),true,
+    'show welcome until the first submitted question');
+  // The add-new-chat action must not consume an ID or write empty conversations.
+  await page.evaluate(()=>document.getElementById('aiQaNewChat').click());
+  assert.equal(await page.locator('.ai-qa-conversation').count(),0,
+    'new chat draft remains unsaved until the learner asks a question');
+  assert.equal(await page.locator('#aiQaEmpty').isVisible(),true);
+  assert.equal(await page.evaluate(()=>window.__qaWrites.length),0,
+    'no empty conversation written to Firestore');
+  const pinnedIntent=await page.evaluate(()=>{
+    const registry=new Map([['latest',{aiMessageId:'latest',nodeLabel:'Từ vựng'}]]);
+    try{HSKQaIntentRouter.resolveTargetMessageAndIntent({userText:'Ví dụ khác',
+      explicitAction:'another_example',explicitTargetAiMessageId:'missing',
+      aiMessageRegistry:registry});return 'accepted';}catch{return 'rejected';}
+  });
+  assert.equal(pinnedIntent,'rejected','an unknown explicit AI feedback target must not silently choose latest');
+
   // The cloud Designer can still serve a legacy fixed root width and manually
   // translated send button; client CSS must preserve responsive geometry.
   await page.addStyleTag({content:`@media (min-width:721px){
@@ -98,6 +118,11 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   assert.ok(layoutMetrics['#aiQaPanel'].bottom<=layoutMetrics['#aiQaPanel'].viewport,'chat panel must not overflow the viewport');
   if(width===390){await page.setViewportSize({width:320,height:640});const tiny=await page.evaluate(()=>{const f=document.querySelector('#aiQaForm').getBoundingClientRect(),m=document.querySelector('.ai-qa-messages').getBoundingClientRect();return {composerTop:f.top,composerBottom:f.bottom,viewport:innerHeight,messagesHeight:m.height}});assert.ok(tiny.composerBottom<tiny.viewport-30&&tiny.messagesHeight>=40,'320px short viewport still shows a usable composer and scroll area');await page.setViewportSize({width:390,height:844});}
 assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);assert.equal(await page.locator('#aiQaReview').count(),0);assert.equal(await page.locator('#aiQaClear').count(),0);assert.match(await page.locator('#aiQaSnapshot').innerText(),/HSK/);await page.locator('#aiQaInput').fill('Đánh giá lộ trình của tôi');await page.locator('#aiQaSend').click();await page.locator('.ai-qa-message.assistant').waitFor();
+  assert.equal(await page.locator('.ai-qa-conversation').count(),1,
+    'first question creates exactly one persistent conversation');
+  assert.equal(await page.locator('#aiQaEmpty').isVisible(),false,'welcome hides after first question');
+  assert.match(await page.locator('.ai-qa-conversation-open strong').first().textContent(),/Đánh giá lộ trình/);
+
   if(width>=721){
     for(const viewport of [1280,1440,1775]){
       await page.setViewportSize({width:viewport,height:900});
@@ -157,6 +182,10 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   await page.waitForFunction(()=>window.__qaWaiting&&document.getElementById('aiQaSend').disabled);
   await page.locator('#aiQaHistoryToggle').click();
   await page.locator('#aiQaNewChat').click();
+  assert.equal(await page.locator('#aiQaEmpty').isVisible(),true,'new draft restores welcome after aborting old request');
+  assert.equal((await page.locator('#aiQaConversationTitle').textContent()).trim(),'Hỏi đáp AI');
+  assert.ok((await page.locator('.ai-qa-conversation').count())>=2,'old conversations are preserved without a new placeholder');
+
   assert.equal(await page.evaluate(()=>window.__qaAborted),true,'stale request must abort');
   assert.equal(await page.locator('#aiQaSend').isEnabled(),true,'send restored after chat switch');
   assert.equal(await page.locator('#aiQaInput').isEnabled(),true,'composer restored after chat switch');

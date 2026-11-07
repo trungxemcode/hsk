@@ -282,3 +282,27 @@ body.studio-enabled[data-studio-hub="ai-qa"] #aiQaSend > span > svg{
     grid-row:6;
   }
 }
+
+/* Contextual chat titles: show the full title on hover only when truncated.
+   Keep these rules scoped to AI chat; avoid animation for reduced-motion users. */
+@keyframes ai-qa-title-marquee{
+  0%,36%{transform:translateX(0)}
+  100%{transform:translateX(calc(-1px * var(--qa-shift,0)))}
+}
+body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-title-viewport{
+  display:block!important;
+  overflow:hidden!important;
+  text-overflow:clip!important;
+  white-space:nowrap!important;
+}
+body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-title-text{
+  display:block;
+  width:max-content;
+  max-width:none;
+  white-space:nowrap;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-title-viewport[data-overflow=true]:hover .ai-qa-title-text{
+    animation:ai-qa-title-marquee 7s ease-in-out infinite alternate;
+  }
+}
