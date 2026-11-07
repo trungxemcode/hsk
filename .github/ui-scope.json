@@ -1,6 +1,4 @@
 {
-  "request": "Sửa lỗi iPhone sau PR #331: chỉ chỉnh bố cục Hỏi đáp AI trên điện thoại (rộng 320–430px): giới hạn app-shell và panel trên dock thật, cập nhật độ cao dock khi safe-area/padding đổi, vùng cuộn tin nhắn, ô nhập cách dock 8px; giữ nguyên giao diện Chat AI desktop và toàn bộ 22 trang HSK khác.",
-  "excludedRoutes": [
-    "ai-qa"
-  ]
+  "request": "Chỉ chỉnh logic hiển thị câu hỏi gợi ý ở trang Hỏi đáp AI trên PC và điện thoại: hiện một nhóm sau câu trả lời AI mới, ẩn khi gõ, gửi hoặc nhấn gợi ý; không hiện lại trong lịch sử/chat đồng bộ. Giữ nguyên mọi trang HSK khác và bố cục hiện tại.",
+  "excludedRoutes": ["ai-qa"]
 }
