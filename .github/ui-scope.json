@@ -1,5 +1,5 @@
 {
-  "request": "PR #319: thiết kế lại riêng khung chat Hỏi đáp AI kiểu ChatGPT trên PC/mobile, bảo vệ nguyên trạng tất cả trang khác.",
+  "request": "PR #322: Chỉ chỉnh Chat AI trên laptop/PC để khoảng hở ngoài trên, dưới, trái, phải bằng nhau (20px); giữ cuộn riêng lịch sử và tin nhắn. Không thay đổi mobile hoặc các trang HSK khác.",
   "excludedRoutes": [
     "ai-qa"
   ]

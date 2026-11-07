@@ -15,6 +15,27 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   assert.equal(await page.evaluate(()=>window.__qaWrites.length),0,'do not overwrite remote conversations before first Firestore snapshot');
   await page.evaluate(()=>window.__qaInitial());
   await page.locator('#aiQaPanel').waitFor({state:'visible'});
+  if(width>=721){
+    await page.waitForTimeout(400); // panel-enter animation must settle before measuring
+    for(const [screenWidth,screenHeight] of [[1440,844],[1775,900],[1280,720]]){
+      await page.setViewportSize({width:screenWidth,height:screenHeight});
+      const gutters=await page.evaluate(()=>{
+        const frame=document.querySelector('.app-area').getBoundingClientRect();
+        const topbar=document.querySelector('#studioHeader').getBoundingClientRect();
+        const panel=document.querySelector('#aiQaPanel').getBoundingClientRect();
+        return {top:panel.top-topbar.bottom,left:panel.left-frame.left,right:frame.right-panel.right,
+          bottom:frame.bottom-panel.bottom,bodyY:getComputedStyle(document.body).overflowY,
+          messageY:getComputedStyle(document.querySelector('.ai-qa-messages')).overflowY,
+          historyY:getComputedStyle(document.querySelector('.ai-qa-conversation-list')).overflowY};
+      });
+      for(const edge of ['top','left','right','bottom'])assert.ok(Math.abs(gutters[edge]-20)<2,
+        'desktop Chat AI '+edge+' gutter at '+screenWidth+'×'+screenHeight+' must match 20px: '+JSON.stringify(gutters));
+      assert.equal(gutters.bodyY,'hidden','outer page does not scroll');
+      assert.equal(gutters.messageY,'auto','message content remains scrollable');
+      assert.equal(gutters.historyY,'auto','conversation history remains scrollable');
+    }
+    await page.setViewportSize({width,height:844});
+  }
   const themeColors=await page.evaluate(async()=>{
     const html=document.documentElement,prior=html.getAttribute('data-theme'),panel=document.getElementById('aiQaPanel');
     // The app animates theme changes: wait for the final computed color,
