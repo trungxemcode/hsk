@@ -21,11 +21,16 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
       const geom=await page.evaluate(()=>{
         const bounds=selector=>{const r=document.querySelector(selector).getBoundingClientRect();return {top:r.top,bottom:r.bottom,left:r.left,right:r.right};};
         const msg=document.querySelector('#aiQaMessages');
-        return {dock:bounds('#mobileDock'),form:bounds('#aiQaForm'),empty:bounds('#aiQaEmpty'),
-          messages:bounds('#aiQaMessages'),formPosition:getComputedStyle(document.querySelector('#aiQaForm')).position,
+        return {dock:bounds('#mobileDock'),shell:bounds('.app-shell'),panel:bounds('#aiQaPanel'),
+          form:bounds('#aiQaForm'),empty:bounds('#aiQaEmpty'),messages:bounds('#aiQaMessages'),
+          formPosition:getComputedStyle(document.querySelector('#aiQaForm')).position,
           messageOverflow:getComputedStyle(msg).overflowY,
           viewport:window.innerHeight};
       });
+      assert.ok(Math.abs(geom.shell.bottom-geom.dock.top)<=2,
+        'mobile app shell must end at dock top, not extend behind dock at '+mobileWidth+': '+JSON.stringify(geom));
+      assert.ok(Math.abs(geom.panel.bottom-geom.dock.top)<=2,
+        'mobile chat panel must fit inside shell above dock at '+mobileWidth+': '+JSON.stringify(geom));
       assert.ok(Math.abs(geom.dock.top-geom.form.bottom-8)<=2,
         'mobile input must stay 8px above dock at '+mobileWidth+': '+JSON.stringify(geom));
       assert.ok(geom.empty.bottom < geom.form.top,
@@ -35,6 +40,22 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
       assert.equal(geom.formPosition,'relative','iOS keyboard-safe composer stays in chat flow');
       assert.equal(geom.messageOverflow,'auto','messages scroll independently');
     }
+    // Regression: the real iPhone dock can grow when safe-area padding changes.
+    // Observe its border box, not only its content box, or the chat is covered.
+    await page.setViewportSize({width:390,height:844});
+    await page.evaluate(()=>document.getElementById('mobileDock').style.setProperty('padding-bottom','42px','important'));
+    await page.waitForFunction(()=>{
+      const dock=document.getElementById('mobileDock').getBoundingClientRect(),
+        shell=document.querySelector('.app-shell').getBoundingClientRect(),
+        form=document.getElementById('aiQaForm').getBoundingClientRect();
+      return dock.height>=100&&Math.abs(shell.bottom-dock.top)<=2&&Math.abs(dock.top-form.bottom-8)<=2;
+    },null,{timeout:10000});
+    await page.evaluate(()=>document.getElementById('mobileDock').style.removeProperty('padding-bottom'));
+    await page.waitForFunction(()=>{
+      const dock=document.getElementById('mobileDock').getBoundingClientRect(),
+        shell=document.querySelector('.app-shell').getBoundingClientRect();
+      return Math.abs(shell.bottom-dock.top)<=2;
+    },null,{timeout:10000});
     await page.setViewportSize({width,height:844});
   }
 
