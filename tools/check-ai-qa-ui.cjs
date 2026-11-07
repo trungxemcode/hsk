@@ -15,6 +15,29 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   assert.equal(await page.evaluate(()=>window.__qaWrites.length),0,'do not overwrite remote conversations before first Firestore snapshot');
   await page.evaluate(()=>window.__qaInitial());
   await page.locator('#aiQaPanel').waitFor({state:'visible'});
+  if(width===390){
+    for(const [mobileWidth,mobileHeight] of [[320,640],[390,844],[430,932]]){
+      await page.setViewportSize({width:mobileWidth,height:mobileHeight});
+      const geom=await page.evaluate(()=>{
+        const bounds=selector=>{const r=document.querySelector(selector).getBoundingClientRect();return {top:r.top,bottom:r.bottom,left:r.left,right:r.right};};
+        const msg=document.querySelector('#aiQaMessages');
+        return {dock:bounds('#mobileDock'),form:bounds('#aiQaForm'),empty:bounds('#aiQaEmpty'),
+          messages:bounds('#aiQaMessages'),formPosition:getComputedStyle(document.querySelector('#aiQaForm')).position,
+          messageOverflow:getComputedStyle(msg).overflowY,
+          viewport:window.innerHeight};
+      });
+      assert.ok(Math.abs(geom.dock.top-geom.form.bottom-8)<=2,
+        'mobile input must stay 8px above dock at '+mobileWidth+': '+JSON.stringify(geom));
+      assert.ok(geom.empty.bottom < geom.form.top,
+        'welcome heading cannot be hidden by input: '+JSON.stringify(geom));
+      assert.ok(geom.messages.bottom<=geom.form.top+1,
+        'scrolling messages must not hide behind input: '+JSON.stringify(geom));
+      assert.equal(geom.formPosition,'relative','iOS keyboard-safe composer stays in chat flow');
+      assert.equal(geom.messageOverflow,'auto','messages scroll independently');
+    }
+    await page.setViewportSize({width,height:844});
+  }
+
   assert.equal(await page.locator('.ai-qa-conversation').count(),0,
     'new account does not create a phantom empty chat');
   assert.equal((await page.locator('#aiQaConversationTitle').textContent()).trim(),'Hỏi đáp AI');

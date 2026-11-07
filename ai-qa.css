@@ -395,3 +395,106 @@ body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-title-text{
     animation:ai-qa-title-marquee 7s ease-in-out infinite alternate;
   }
 }
+
+
+/* Mobile AI chat fits above the app dock. Keep the composer in the chat grid:
+   fixed viewport positioning overlaps the welcome pane and the iOS keyboard.
+   The dock-height token already includes device safe-area spacing. */
+@media (max-width:720px){
+  body.studio-enabled[data-studio-hub="ai-qa"] main.workspace{
+    display:flex!important;
+    flex:1 1 0!important;
+    flex-direction:column!important;
+    width:100%!important;
+    max-width:none!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:14px 16px var(--mobile-dock-height,66px)!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+  }
+  html body.studio-enabled[data-studio-hub="ai-qa"]
+  main.workspace #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel{
+    position:relative!important;
+    flex:1 1 0!important;
+    width:100%!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    border-radius:20px!important;
+    box-sizing:border-box!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-shell{
+    position:absolute!important;
+    inset:0!important;
+    display:flex!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-chat{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:auto minmax(0,1fr) auto auto!important;
+    width:100%!important;
+    min-height:0!important;
+  }
+  html body.studio-enabled[data-studio-hub="ai-qa"]
+  #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaMessages{
+    grid-row:2!important;
+    position:static!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    width:100%!important;
+    margin:0!important;
+    padding:8px 18px 12px!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain;
+    translate:none!important;
+    transform:none!important;
+  }
+  html body.studio-enabled[data-studio-hub="ai-qa"]
+  #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaForm{
+    grid-row:4!important;
+    display:flex!important;
+    position:relative!important;
+    inset:auto!important;
+    width:calc(100% - 36px)!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    margin:0 auto 8px!important;
+    padding:8px 10px 8px 14px!important;
+    border-radius:var(--radius-pill)!important;
+    box-sizing:border-box!important;
+    translate:none!important;
+    transform:none!important;
+  }
+  html body.studio-enabled[data-studio-hub="ai-qa"]
+  #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaEmpty:not([hidden]){
+    grid-area:2 / 1!important;
+    position:static!important;
+    align-self:center!important;
+    width:calc(100% - 36px)!important;
+    margin:auto!important;
+    translate:none!important;
+    transform:none!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-message.user{
+    align-self:stretch!important;
+    text-align:right!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-message.user p{
+    display:inline-block!important;
+    max-width:88%!important;
+    text-align:left!important;
+  }
+  /* When the mobile dock is deliberately hidden, reclaim its reserved area. */
+  body.mobile-ux.mobile-focus.studio-enabled[data-studio-hub="ai-qa"]
+  main.workspace{
+    padding-bottom:8px!important;
+  }
+}
