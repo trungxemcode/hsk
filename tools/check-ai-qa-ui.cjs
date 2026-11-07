@@ -238,11 +238,26 @@ assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);ass
 assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written to realtime storage');assert.equal(received.lesson.content.mode,'ai-qa');assert.ok(received.lesson.content.learning_snapshot.masteryBoundary);assert.match(await page.locator('#aiQaMessages').innerText(),/Bạn đã có nền tảng tốt/);
    const targetAiId=await page.locator('.ai-qa-message.assistant').first().getAttribute('data-ai-message-id');
    assert.ok(targetAiId,'assistant message has a stable target id');
+   assert.equal(await page.locator('.qa-suggestions-group').count(),1,
+     'only one fresh answer shows follow-up suggestions');
    await page.locator('.qa-suggestion-row-btn').first().click();
    await page.waitForFunction(()=>document.querySelectorAll('.ai-qa-message.assistant').length===2);
    assert.equal(received.lesson.content.intentInfo.targetAiMessageId,targetAiId,'suggestion must reference the correct AI response');
    assert.equal(received.lesson.content.intentInfo.intent,'edge_case_exploration','context shift suggestion routes to the intended pedagogical branch');
-   assert.equal(received.lesson.content.intentInfo.evidencePolicy,'question_only','suggestions must not count as proof of weakness');await page.evaluate(()=>window.__qaEmit([{id:'chat-remote',title:'Chat từ điện thoại',messages:[{id:'remote-1',role:'user',text:'Tin nhắn từ điện thoại',createdAt:Date.now()}],createdAt:Date.now(),updatedAt:Date.now(),deleted:false}]));await page.locator('#aiQaHistoryToggle').click();await page.locator('#aiQaHistory').waitFor({state:'visible'});assert.ok(await page.locator('.ai-qa-conversation').count()>=2,'realtime listener merges the other device');assert.ok((await page.locator('.ai-qa-conversation').allTextContents()).some(text=>text.includes('Chat từ điện thoại')));
+   assert.equal(received.lesson.content.intentInfo.evidencePolicy,'question_only','suggestions must not count as proof of weakness');
+   assert.equal(await page.locator('.ai-qa-message.assistant').first().locator('.qa-suggestions-group').count(),0,
+     'clicked suggestions disappear from the previous answer');
+   assert.equal(await page.locator('.ai-qa-message.assistant').last().locator('.qa-suggestions-group').count(),1,
+     'only the newly arrived AI answer gets fresh suggestions');
+   await page.locator('#aiQaInput').fill('Tôi đang tự nhập câu hỏi khác');
+   assert.equal(await page.locator('.qa-suggestions-group').count(),0,
+     'typing immediately dismisses follow-up suggestions on PC and mobile');
+   assert.ok(await page.locator('.ai-qa-feedback button').count()>=2,
+     'dismissal must retain targeted feedback controls and prior messages');
+   await page.locator('#aiQaInput').fill('');
+   assert.equal(await page.locator('.qa-suggestions-group').count(),0,
+     'clearing the draft must not resurrect old suggestions');
+   await page.evaluate(()=>window.__qaEmit([{id:'chat-remote',title:'Chat từ điện thoại',messages:[{id:'remote-1',role:'user',text:'Tin nhắn từ điện thoại',createdAt:Date.now()}],createdAt:Date.now(),updatedAt:Date.now(),deleted:false}]));await page.locator('#aiQaHistoryToggle').click();await page.locator('#aiQaHistory').waitFor({state:'visible'});assert.ok(await page.locator('.ai-qa-conversation').count()>=2,'realtime listener merges the other device');assert.ok((await page.locator('.ai-qa-conversation').allTextContents()).some(text=>text.includes('Chat từ điện thoại')));
   for(const row of [0,1]){
     const more=page.locator('.ai-qa-conversation-more').nth(row);
     await more.click();
@@ -252,7 +267,16 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
     assert.deepEqual(borders,['0px','0px'],'history menu actions are borderless on every row');
     await more.click();
   }
-  await page.locator('#aiQaHistoryClose').click();  // Regression: changing chats during a stalled request must abort the stale request,
+  await page.locator('#aiQaHistoryClose').click();
+  await page.locator('#aiQaHistoryToggle').click();
+  await page.locator('.ai-qa-conversation-open').filter({hasText:'Chat từ điện thoại'}).click();
+  assert.equal(await page.locator('.qa-suggestions-group').count(),0,
+    'opening a synced conversation must not show historical suggestions');
+  await page.locator('#aiQaHistoryToggle').click();
+  await page.locator('.ai-qa-conversation-open').filter({hasText:'Đánh giá lộ trình'}).click();
+  assert.equal(await page.locator('.qa-suggestions-group').count(),0,
+    'reopening the original chat must not restore dismissed suggestions');
+  // Regression: changing chats during a stalled request must abort the stale request,
   // unlock the composer, and prevent the earlier response from overwriting new chat.
   await page.evaluate(()=>{
     const original=window.fetch;
