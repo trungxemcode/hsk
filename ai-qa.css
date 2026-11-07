@@ -16,7 +16,7 @@ html[data-theme=dark] body.studio-enabled .ai-qa-panel,html[data-theme=dark] .ai
 /* Tighten the workspace around the chat on wide screens. */
 @media(min-width:721px){body.studio-enabled[data-studio-hub=ai-qa] main.workspace{width:100%!important;max-width:none!important;padding:20px 24px 24px!important;box-sizing:border-box;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-panel{width:100%!important;max-width:none!important;margin:0!important;min-height:calc(100dvh - 122px);}.ai-qa-shell{height:calc(100dvh - 122px);min-height:620px;}.ai-qa-conversation{border:1px solid var(--palette-clear);}.ai-qa-conversation[data-active=true]{border-color:color-mix(in srgb,var(--accent) 28%,var(--line));}.ai-qa-conversation-more{position:absolute;right:4px;top:5px;margin:0;}.ai-qa-conversation-open{padding-right:36px;}.ai-qa-conversation-more:hover{background:var(--accent-light);}}
 /* On phones the chat owns the available viewport; only the message column scrolls. */
-@media(max-width:720px){body.studio-enabled[data-studio-hub=ai-qa] main.workspace{width:100%!important;padding:0 0 calc(76px + env(safe-area-inset-bottom))!important;overflow:hidden;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-panel{width:100%!important;height:100%!important;min-height:0!important;margin:0!important;border-radius:var(--radius-btn) var(--radius-btn) 0 0;overflow:hidden;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-shell{height:100%!important;min-height:0!important;border-radius:var(--radius-btn) var(--radius-btn) 0 0;}.ai-qa-chat{min-height:0;}.ai-qa-messages{min-height:0;overflow-y:auto;overscroll-behavior:contain;}.ai-qa-form{margin-bottom:10px;}.ai-qa-history{border-radius:var(--radius-btn) 0 0 0;}}
+@media(max-width:720px){body.studio-enabled[data-studio-hub=ai-qa] main.workspace{width:100%!important;padding:0!important;overflow:hidden;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-panel{width:100%!important;height:100%!important;min-height:0!important;margin:0!important;border-radius:var(--radius-btn) var(--radius-btn) 0 0;overflow:hidden;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-shell{height:100%!important;min-height:0!important;border-radius:var(--radius-btn) var(--radius-btn) 0 0;}.ai-qa-chat{min-height:0;}.ai-qa-messages{min-height:0;overflow-y:auto;overscroll-behavior:contain;}.ai-qa-form{margin-bottom:10px;}.ai-qa-history{border-radius:var(--radius-btn) 0 0 0;}}
 @media(max-width:720px){body.studio-enabled[data-studio-hub=ai-qa] main.workspace{display:flex!important;flex-direction:column;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-panel{flex:1 1 auto;}}
 /* Final chat proportions and unified conversation action row. */
 @media(min-width:721px){body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-panel{width:min(100%,calc(100dvh - 122px))!important;max-width:calc(100dvh - 122px)!important;margin-inline:auto!important;}.ai-qa-shell{width:100%;}}
@@ -84,7 +84,56 @@ body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-send{width:34px;height:34px;mi
 body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-send:hover{background:var(--qa-bright);}
 body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-boundary-note{position:absolute;right:24px;bottom:17px;left:24px;width:auto;margin:0;color:var(--qa-subtle);font-size:10px;}
 @media(min-width:721px){body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-history[hidden]{display:flex!important;}}
-@media(max-width:720px){body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-shell{height:calc(100dvh - 76px);min-height:0;border-radius:var(--radius-btn) var(--radius-btn) var(--qa-radius-flat) var(--qa-radius-flat);}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-chatbar{padding:8px 12px;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-messages{padding:8px 16px 142px;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-message{padding:16px 0;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-message p{font-size:14px;}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-form{right:12px;bottom:38px;left:12px;width:calc(100% - 24px);}body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-boundary-note{display:none!important;}}
+@media(max-width:720px){
+  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-chat{
+    --qa-mobile-gutter:18px;
+  }
+  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-chatbar{
+    flex-shrink:0;
+    padding:8px var(--qa-mobile-gutter);
+  }
+  html body.studio-enabled[data-studio-hub=ai-qa]
+  #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaMessages{
+    padding:8px var(--qa-mobile-gutter) 12px!important;
+    scrollbar-width:none;
+  }
+  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-messages::-webkit-scrollbar{
+    display:none;
+  }
+  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-message{
+    box-sizing:border-box;
+    padding:12px 0;
+    overflow-wrap:anywhere;
+  }
+  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-message p{font-size:14px;}
+  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-message.user{text-align:right;}
+  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-message.user p{
+    box-sizing:border-box;
+    max-width:88%;
+    text-align:left;
+  }
+  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-empty{
+    width:calc(100% - 2 * var(--qa-mobile-gutter));
+    margin:12px auto;
+  }
+  /* The mobile app shell already ends above the dock, including its safe area. */
+  html body.studio-enabled[data-studio-hub=ai-qa]
+  #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaForm{
+    position:relative!important;
+    inset:auto!important;
+    flex:none;
+    box-sizing:border-box;
+    width:calc(100% - 2 * var(--qa-mobile-gutter))!important;
+    margin:0 auto 8px!important;
+    translate:none!important;
+    transform:none!important;
+    align-items:center;
+    padding:8px 10px 8px 14px;
+    border-radius:var(--radius-pill);
+  }
+  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-form textarea{font-size:16px;}
+  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-boundary-note{display:none!important;}
+}
 /* Keep the ChatGPT-inspired neutral canvas above the legacy dark studio panel theme. */
 html[data-theme=dark] body.studio-enabled[data-studio-hub=ai-qa] #aiQaPanel{
   background-color:var(--qa-bg)!important;
