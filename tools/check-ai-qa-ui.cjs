@@ -40,6 +40,22 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
       assert.equal(geom.formPosition,'relative','iOS keyboard-safe composer stays in chat flow');
       assert.equal(geom.messageOverflow,'auto','messages scroll independently');
     }
+    // Regression: the real iPhone dock can grow when safe-area padding changes.
+    // Observe its border box, not only its content box, or the chat is covered.
+    await page.setViewportSize({width:390,height:844});
+    await page.evaluate(()=>document.getElementById('mobileDock').style.setProperty('padding-bottom','42px','important'));
+    await page.waitForFunction(()=>{
+      const dock=document.getElementById('mobileDock').getBoundingClientRect(),
+        shell=document.querySelector('.app-shell').getBoundingClientRect(),
+        form=document.getElementById('aiQaForm').getBoundingClientRect();
+      return dock.height>=100&&Math.abs(shell.bottom-dock.top)<=2&&Math.abs(dock.top-form.bottom-8)<=2;
+    },null,{timeout:10000});
+    await page.evaluate(()=>document.getElementById('mobileDock').style.removeProperty('padding-bottom'));
+    await page.waitForFunction(()=>{
+      const dock=document.getElementById('mobileDock').getBoundingClientRect(),
+        shell=document.querySelector('.app-shell').getBoundingClientRect();
+      return Math.abs(shell.bottom-dock.top)<=2;
+    },null,{timeout:10000});
     await page.setViewportSize({width,height:844});
   }
 
