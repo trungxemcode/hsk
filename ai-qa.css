@@ -433,7 +433,7 @@ body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-title-text{
     margin:0!important;
     padding:0!important;
     overflow:hidden!important;
-    border-radius:20px!important;
+    border-radius:var(--radius-20px)!important;
     box-sizing:border-box!important;
   }
   body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-shell{
