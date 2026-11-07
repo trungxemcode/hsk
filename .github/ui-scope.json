@@ -1,5 +1,5 @@
 {
-  "request": "PR #325: chỉ sửa bố cục bên trong Chat AI trên desktop: tin nhắn AI, bong bóng người dùng và ô nhập nằm trên cùng một cột nội dung căn giữa, loại bỏ offset Composer cũ từ HSK UI Designer; phục hồi vị trí cuộn tức thời khi mở hội thoại. Giữ nguyên khung ngoài 20px, các trang khác và giao diện mobile.",
+  "request": "Chỉ sửa vị trí nội dung Hỏi đáp AI trên PC: căn giữa lời chào và ô nhập trong đoạn chat mới, đưa ô nhập về đáy khi có tin nhắn. Giữ khung ngoài, sidebar và bố cục điện thoại.",
   "excludedRoutes": [
     "ai-qa"
   ]
