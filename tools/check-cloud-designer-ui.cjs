@@ -17,10 +17,34 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
  try{
  browser=await chromium.launch({executablePath:process.env.CHROME_EXECUTABLE});const context=await browser.newContext({viewport:{width:1600,height:1000},serviceWorkers:'block'});
  await context.route('https://identitytoolkit.googleapis.com/**',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({idToken:'browser-owner',refreshToken:'test-refresh',expiresIn:'3600'})}));
- async function editorPage(){const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());await page.goto(editorURL);const login=page.locator('.cloud-login');if(await login.isVisible()){await login.locator('input[type=email]').fill('owner@example.test');await login.locator('input[type=password]').fill('browser-test-password');await login.locator('button.primary').click();}await page.waitForFunction(()=>document.getElementById('status').textContent.includes('Sẵn sàng'));return page;}
+ async function editorPage(){const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());await page.goto(editorURL);const login=page.locator('.cloud-login');await page.waitForFunction(()=>document.querySelector('.cloud-login')||document.getElementById('status').textContent.includes('Sẵn sàng'));if(await login.isVisible()){await login.locator('input[type=email]').fill('owner@example.test');await login.locator('input[type=password]').fill('browser-test-password');await login.locator('button.primary').click();}await page.waitForFunction(()=>document.getElementById('status').textContent.includes('Sẵn sàng'));return page;}
  let ordinary=await context.newPage();ordinary.on('pageerror',e=>errors.push(e.message));await ordinary.goto(publicURL+'/index.html');await ordinary.waitForFunction(()=>window.HSKStudio&&document.querySelector('#homeDailyWord h3'));await ordinary.evaluate(()=>{localStorage.setItem('test-learner-sentinel','preserve');window.__node=document.querySelector('#homeDailyWord h3');window.__studio=HSKStudio;});
  const baseline=await ordinary.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize);
  const page=await editorPage(),frame=await(await page.locator('#canvas').elementHandle()).contentFrame();
+ assert.equal(await page.locator('#page-select option[value="ai-qa"]').count(),1,'Chat AI appears in editor page selector');
+ await page.locator('#page-select').selectOption('ai-qa');
+ await page.waitForFunction(()=>document.getElementById('status').textContent.includes('Sẵn sàng · Hỏi đáp AI'));
+ await frame.locator('#aiQaPanel').waitFor({state:'visible'});
+ assert.equal(await frame.locator('#aiQaInput').count(),1);
+ await page.locator('#preview').click();
+ assert.equal(await page.evaluate(()=>document.body.classList.contains('designer-interacting')),true,'interaction fills editing workspace');
+ await frame.locator('#aiQaHistoryToggle').click();
+ await frame.locator('#aiQaHistory').waitFor({state:'visible'});
+ await page.locator('#preview').click();
+ await frame.locator('#aiQaHistory').waitFor({state:'visible'});
+ await frame.locator('#aiQaInput').click();
+ assert.match(await page.locator('#selected-name').textContent(),/Chat AI|Ô nhập|Tin nhắn/,'Chat AI input can be selected after interacting');
+ await page.locator('#page-select').selectOption('home');
+ await page.waitForFunction(()=>document.getElementById('status').textContent.includes('Sẵn sàng · Trang chủ'));
+ await page.locator('#mobile').click();
+ await page.locator('#preview').click();
+ await frame.locator('#menuBtn').click();
+ await page.locator('#preview').click();
+ await page.waitForFunction(()=>document.getElementById('page-select').value==='drawer'&&document.getElementById('status').textContent.includes('Sẵn sàng'));
+ assert.equal(await frame.evaluate(()=>document.body.classList.contains('drawer-open')),true,'mobile drawer stays open for editing');
+ await page.locator('#page-select').selectOption('home');
+ await page.locator('#desktop').click();
+
  assert.equal(await frame.evaluate(()=>localStorage.getItem('test-learner-sentinel')),null,'editor preview has separate learner storage');
  await page.screenshot({path:'/tmp/cloud-designer-chat-before.png',fullPage:true});
  await frame.locator('#homeDailyWord h3').click();await page.locator('#ai-panel > summary').click();await page.locator('#ai-panel details > summary').click();
@@ -30,7 +54,16 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
  assert.equal(await frame.locator('#ai-panel').count(),0,'AI controls never enter release iframe');
  assert.equal(await page.evaluate(()=>JSON.stringify({...localStorage,...sessionStorage}).includes('sk-browser-test')),false,'API key never persists in browser storage');
  await page.screenshot({path:'/tmp/cloud-designer-chat-after.png',fullPage:true});
- await page.setViewportSize({width:390,height:844});await page.locator('#mobile').click();await page.screenshot({path:'/tmp/cloud-designer-chat-phone.png',fullPage:true});await page.setViewportSize({width:1600,height:1000});await page.locator('#desktop').click();
+ await page.setViewportSize({width:390,height:844});await page.locator('#mobile').click();
+ assert.ok((await page.locator('.workspace').boundingBox()).width>330,'mobile editor gives most width to app preview');
+ await page.locator('#pages-toggle').click();
+ assert.equal(await page.locator('.layers').isVisible(),true,'page list opens as mobile drawer');
+ await page.locator('#editor-backdrop').click({position:{x:385,y:300}});
+ assert.equal(await page.locator('.layers').isVisible(),false,'mobile drawer closes without leaving the page');
+ await page.locator('#inspector-toggle').click();
+ assert.equal(await page.locator('.inspector').isVisible(),true,'property inspector opens on mobile');
+ await page.locator('#editor-backdrop').click({position:{x:5,y:300}});
+ await page.screenshot({path:'/tmp/cloud-designer-chat-phone.png',fullPage:true});await page.setViewportSize({width:1600,height:1000});await page.locator('#desktop').click();
  await page.locator('#undo').click();assert.equal(await page.locator('#field-fontSize').inputValue(),'','AI edit is one undo step');
  openaiDelay=600;await page.locator('#ai-send').click();await page.locator('#field-fontSize').fill('25');await page.locator('#field-fontSize').press('Tab');
  await page.waitForFunction(()=>document.getElementById('ai-status').textContent.includes('thông số đã đổi'));
