@@ -939,6 +939,15 @@
   --rd-music-color-044:#7566F0;
   --rd-music-color-045:rgba(255,255,255,.2);
   --rd-music-color-046:rgba(255,255,255,.18);
+
+  /* Scoped AI-QA palette: only used in the AI Q&A route. */
+  --qa-bg:var(--paper);--qa-surface:var(--surface);--qa-sidebar:var(--surface);
+  --qa-line:var(--line);--qa-text:var(--ink);--qa-muted:var(--muted);
+  --qa-sidebar-line:var(--line);--qa-hover:var(--accent-light);--qa-hover-soft:var(--paper);--qa-hover-strong:var(--line-dark);
+  --qa-bright:var(--surface);--qa-subtle:var(--muted);--qa-muted-text:var(--sub);--qa-scroll:var(--line-dark);
+  --qa-message-label:var(--sub);--qa-input-border:var(--line-dark);--qa-placeholder:var(--muted);--qa-send-ink:var(--surface);
+  --qa-shadow-menu:var(--shadow);--qa-shadow-composer:var(--shadow);
+  --qa-radius-compact:8px;--qa-radius-message:18px;--qa-radius-flat:0;
 }
 html[data-theme="dark"]{
   color-scheme:dark;
@@ -994,6 +1003,13 @@ html[data-theme="dark"]{
   --accent:#7c6bff;
   --button-active-bg:var(--press-active-bg);
   --button-active-text:var(--palette-white);
+
+  /* AI Q&A dark mode: ChatGPT-inspired neutral shades, isolated from other routes. */
+  --qa-bg:#212121;--qa-surface:#2f2f2f;--qa-sidebar:#171717;--qa-line:#3f3f3f;--qa-text:#ececec;--qa-muted:#a7a7a7;
+  --qa-sidebar-line:#292929;--qa-hover:#2a2a2a;--qa-hover-soft:#242424;--qa-hover-strong:#444444;
+  --qa-bright:#ffffff;--qa-subtle:#888888;--qa-muted-text:#aaaaaa;--qa-scroll:#555555;
+  --qa-message-label:#b7b7b7;--qa-input-border:#4b4b4b;--qa-placeholder:#9b9b9b;--qa-send-ink:#222222;
+  --qa-shadow-menu:0 8px 28px #0008;--qa-shadow-composer:0 3px 16px #0006;
 }
 
 

@@ -1,5 +1,5 @@
 {
-  "request": "PR #318: chỉ bổ sung điều hướng Gia sư AI và gợi ý câu hỏi bên trong trang Hỏi đáp AI; các trang khác giữ nguyên giao diện.",
+  "request": "PR #319: thiết kế lại riêng khung chat Hỏi đáp AI kiểu ChatGPT trên PC/mobile, bảo vệ nguyên trạng tất cả trang khác.",
   "excludedRoutes": [
     "ai-qa"
   ]
