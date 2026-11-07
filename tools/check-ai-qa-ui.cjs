@@ -50,6 +50,22 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
       assert.equal(gutters.bodyY,'hidden','outer page does not scroll');
       assert.equal(gutters.messageY,'auto','message content remains scrollable');
       assert.equal(gutters.historyY,'auto','conversation history remains scrollable');
+      const welcome=await page.evaluate(()=>{
+        const rect=selector=>document.querySelector(selector).getBoundingClientRect();
+        const chat=rect('.ai-qa-chat'),header=rect('.ai-qa-chatbar');
+        const intro=rect('#aiQaEmpty'),form=rect('#aiQaForm'),note=rect('.ai-qa-boundary-note');
+        return {
+          gap:form.top-intro.bottom,
+          centerOffset:form.top+form.height/2-(header.bottom+chat.bottom)/2,
+          introAlignment:intro.left-form.left,
+          noteAlignment:note.left-form.left,
+          noteGap:note.top-form.bottom,
+        };
+      });
+      assert.ok(welcome.gap>=0&&welcome.gap<=24,'welcome and composer stay together: '+JSON.stringify(welcome));
+      assert.ok(Math.abs(welcome.centerOffset)<50,'new chat composer sits near the center of the chat pane');
+      assert.ok(Math.abs(welcome.introAlignment)<2&&Math.abs(welcome.noteAlignment)<2&&welcome.noteGap>=0,
+        'welcome, composer and note share a column and do not overlap');
     }
     await page.setViewportSize({width,height:844});
   }
@@ -100,6 +116,7 @@ assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);ass
       assert.ok(Math.abs(rects.userText.right-rects.assistant.right)<=2,'User bubble right-aligns in the reading column');
       assert.ok(rects.userText.left>rects.assistant.left+30,'User bubble is not aligned to AI text at '+viewport);
       assert.equal(rects.formTranslate,'none','legacy Designer offset must not shift the composer');
+      assert.ok(rects.chat.bottom-rects.form.bottom<100,'active chat composer returns to the bottom');
       assert.equal(rects.formContainer,'relative','Composer must be anchored to chat, not entire shell');
       assert.equal(rects.scrollMode,'auto','Conversation restore should not animate while rehydrating');
     }
