@@ -1,4 +1,6 @@
 {
-  "request": "PR307 regression: chỉ sửa đồng bộ dữ liệu điểm yếu học tập AI, không thay đổi giao diện bất kỳ trang nào.",
-  "excludedRoutes": []
+  "request": "PR #318: chỉ bổ sung điều hướng Gia sư AI và gợi ý câu hỏi bên trong trang Hỏi đáp AI; các trang khác giữ nguyên giao diện.",
+  "excludedRoutes": [
+    "ai-qa"
+  ]
 }
