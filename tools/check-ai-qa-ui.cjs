@@ -15,6 +15,21 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   assert.equal(await page.evaluate(()=>window.__qaWrites.length),0,'do not overwrite remote conversations before first Firestore snapshot');
   await page.evaluate(()=>window.__qaInitial());
   await page.locator('#aiQaPanel').waitFor({state:'visible'});
+  // The cloud Designer can still serve a legacy fixed root width and manually
+  // translated send button; client CSS must preserve responsive geometry.
+  await page.addStyleTag({content:`@media (min-width:721px){
+    html body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel{width:1130px!important;}
+  }
+  html body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel #aiQaSend{translate:-5px -5px!important;padding-top:10px!important;}`});
+  const sendGeometry=await page.evaluate(()=>{
+    const button=document.querySelector('#aiQaSend'),arrow=button.querySelector('svg');
+    if(!arrow)throw Error('Chat AI send icon must be an SVG');
+    const b=button.getBoundingClientRect(),i=arrow.getBoundingClientRect();
+    return {dx:i.x+i.width/2-b.x-b.width/2,dy:i.y+i.height/2-b.y-b.height/2,padding:getComputedStyle(button).paddingTop,translate:getComputedStyle(button).translate};
+  });
+  assert.ok(Math.abs(sendGeometry.dx)<1&&Math.abs(sendGeometry.dy)<1,'send arrow must stay precisely centered: '+JSON.stringify(sendGeometry));
+  assert.equal(sendGeometry.padding,'0px','legacy Designer padding cannot shift the send arrow');
+  assert.equal(sendGeometry.translate,'none','legacy Designer offset cannot translate the send button');
   if(width>=721){
     await page.waitForTimeout(400); // panel-enter animation must settle before measuring
     for(const [screenWidth,screenHeight] of [[1440,844],[1775,900],[1280,720]]){
