@@ -15,6 +15,17 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   assert.equal(await page.evaluate(()=>window.__qaWrites.length),0,'do not overwrite remote conversations before first Firestore snapshot');
   await page.evaluate(()=>window.__qaInitial());
   await page.locator('#aiQaPanel').waitFor({state:'visible'});
+  const themeColors=await page.evaluate(async()=>{
+    const html=document.documentElement,prior=html.getAttribute('data-theme'),panel=document.getElementById('aiQaPanel');
+    html.setAttribute('data-theme','light');await new Promise(resolve=>setTimeout(resolve,500));
+    const light=getComputedStyle(panel).backgroundColor;
+    html.setAttribute('data-theme','dark');await new Promise(resolve=>setTimeout(resolve,500));
+    const dark=getComputedStyle(panel).backgroundColor;
+    if(prior===null)html.removeAttribute('data-theme');else html.setAttribute('data-theme',prior);
+    return {light,dark};
+  });
+  assert.notEqual(themeColors.light,themeColors.dark,'AI chat needs distinct light/dark palettes');
+  assert.equal(themeColors.dark,'rgb(33, 33, 33)','dark AI chat uses the neutral design token');
   const layoutMetrics=await page.evaluate(()=>Object.fromEntries(['main.workspace','#aiQaPanel','.ai-qa-shell','.ai-qa-chat','.ai-qa-messages','#aiQaForm','#aiQaStatus','.ai-qa-boundary-note'].map(selector=>{const element=document.querySelector(selector),r=element.getBoundingClientRect(),style=getComputedStyle(element);return [selector,{top:Math.round(r.top),bottom:Math.round(r.bottom),height:Math.round(r.height),clientHeight:element.clientHeight,scrollHeight:element.scrollHeight,display:style.display,overflow:style.overflowY,viewport:innerHeight}];})));
   if(width<721){assert.equal(layoutMetrics['#aiQaStatus'].display,'none','mobile chat should hide idle helper');assert.equal(layoutMetrics['.ai-qa-boundary-note'].display,'none','mobile boundary helper is hidden');await page.evaluate(()=>document.getElementById('aiQaStatus').textContent='Gia sư AI chưa trả lời được. Hãy thử lại.');assert.equal(await page.locator('#aiQaStatus').isVisible(),true,'mobile error status must be visible');assert.match(await page.locator('#aiQaStatus').innerText(),/Gia sư AI chưa trả lời được/);await page.evaluate(()=>document.getElementById('aiQaStatus').textContent='');}else{assert.notEqual(layoutMetrics['#aiQaStatus'].display,'none','AI status must remain visible on desktop');assert.notEqual(layoutMetrics['.ai-qa-boundary-note'].display,'none','desktop learning note must remain visible');}
   assert.equal(layoutMetrics['.ai-qa-messages'].overflow,'auto','messages must scroll independently');
