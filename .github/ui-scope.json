@@ -1,5 +1,5 @@
 {
-  "request": "PR #316: bổ sung gia sư AI cá nhân hóa, điều hướng ý định và các nút kiểm tra lại trong trang Hỏi đáp AI; các trang ngoài ai-qa phải giữ nguyên.",
+  "request": "PR #318: chỉ bổ sung điều hướng Gia sư AI và gợi ý câu hỏi bên trong trang Hỏi đáp AI; các trang khác giữ nguyên giao diện.",
   "excludedRoutes": [
     "ai-qa"
   ]

@@ -27,6 +27,34 @@ test('PR307 profile sync responds to CORS preflight and authenticated POST',asyn
  assert.equal(post.status,200);assert.equal(post.headers.get('Access-Control-Allow-Origin'),'https://trungxemcode.github.io');assert.equal((await post.json()).synced,true);
 });
 
+test('PR307 profile sync imports remote learning weaknesses and protects newer local evidence',async()=>{
+ const uid='runtime-weakness-import-'+Date.now();
+ const local=Profile.loadUnifiedProfile(uid);
+ const key='hsk-coach-unified-weaknesses-v2:'+uid;
+ storageMap.set(key,JSON.stringify({uid,updatedAt:4000,items:{negation:{id:'negation',title:'Quy tắc phủ định mới',count:5,updatedAt:4000,sources:['practice'],lastMistakeSample:'我没去'}}}));
+ const remote={negation:{id:'negation',title:'Quy tắc phủ định cũ',count:1,updatedAt:1000,sources:['exam'],lastMistakeSample:'我不去了'},comparison:{id:'comparison',title:'Câu so sánh',count:2,updatedAt:3000,sources:['reading']}};
+ const result=await Profile.syncUnifiedProfileWithCloud(local,{authToken:'test-token',endpoint:'https://worker.example/api/profile-sync',fetchFn:async()=>new Response(JSON.stringify({ok:true,serverTimestamp:4500,remoteDelta:{weaknessItems:remote}}),{status:200})});
+ assert.equal(result.synced,true);
+ const data=Profile.loadUserWeaknessStore(uid).items;
+ assert.equal(data.negation.count,5,'stale remote count must not overwrite local learning evidence');
+ assert.equal(data.negation.title,'Quy tắc phủ định mới');
+ assert.deepEqual(data.negation.sources,['practice','exam']);
+ assert.equal(data.comparison.count,2,'new mistakes from another device must be imported');
+});
+
+test('PR307 Worker weakness sync does not overwrite newer knowledge with stale device payloads',async()=>{
+ const uid='runtime-weakness-worker',kv=new Map(),env={USER_PROFILES_KV:{get:key=>kv.get(key)||null,put:(key,value)=>kv.set(key,value)}};
+ const post=delta=>handleProfileSyncRequest(new Request('https://worker.example/api/profile-sync',{method:'POST',headers:{Authorization:'Bearer token','Content-Type':'application/json'},body:JSON.stringify({uid,delta:{weaknessItems:delta}})}),env,async()=>({uid}));
+ const initial=await post({negation:{id:'negation',title:'Quy tắc mới',count:5,updatedAt:4000,sources:['practice']}});
+ assert.equal(initial.status,200);
+ const second=await post({negation:{id:'negation',title:'Quy tắc cũ',count:1,updatedAt:1000,sources:['exam']},comparison:{id:'comparison',title:'Câu so sánh',count:2,updatedAt:3000,sources:['reading']}});
+ assert.equal(second.status,200);
+ const items=(await second.json()).remoteDelta.weaknessItems;
+ assert.equal(items.negation.count,5);
+ assert.equal(items.negation.title,'Quy tắc mới');
+ assert.deepEqual(items.negation.sources,['practice','exam']);
+ assert.equal(items.comparison.count,2);
+});
 test('AI Q&A conversations merge messages from multiple devices and honor deletion tombstones',()=>{
  const one={id:'chat-1',title:'Hỏi ngữ pháp',createdAt:10,updatedAt:20,messages:[{id:'m-1',role:'user',text:'Giải thích 了',createdAt:11}]};
  const two={id:'chat-1',title:'Hỏi ngữ pháp',createdAt:10,updatedAt:30,messages:[{id:'m-2',role:'assistant',text:'了 diễn tả sự hoàn thành hoặc thay đổi trạng thái.',createdAt:29}]};
