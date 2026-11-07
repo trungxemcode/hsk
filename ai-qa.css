@@ -88,3 +88,60 @@ body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-boundary-note{position:absolut
 html[data-theme=dark] body.studio-enabled[data-studio-hub=ai-qa] #aiQaPanel{
   background-color:var(--qa-bg)!important;
 }
+
+/* Desktop Chat AI: symmetrical viewport gutters, with independent history/message scrolling.
+   Keep this scoped to the AI Q&A route so other HSK pages and iPhone remain unchanged. */
+@media (min-width:721px) {
+  body.studio-enabled[data-studio-hub="ai-qa"] {
+    height:100dvh;
+    overflow:hidden;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .app-shell {
+    height:100dvh;
+    min-height:0;
+    overflow:hidden;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .app-area {
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+    overflow:hidden;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] main.workspace {
+    --ai-qa-outer-gap:20px;
+    display:flex;
+    flex:1 1 auto;
+    flex-direction:column;
+    width:100%!important;
+    max-width:none!important;
+    height:auto!important;
+    min-height:0;
+    margin:0!important;
+    padding:var(--ai-qa-outer-gap)!important;
+    box-sizing:border-box;
+    overflow:hidden!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel {
+    flex:1 1 auto;
+    width:100%!important;
+    max-width:none!important;
+    height:100%!important;
+    min-height:0!important;
+    margin:0!important;
+    overflow:hidden;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-shell {
+    width:100%;
+    height:100%!important;
+    min-height:0!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-chat {
+    min-height:0;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-messages,
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-conversation-list {
+    min-height:0;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+  }
+}
