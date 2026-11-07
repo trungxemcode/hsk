@@ -53,6 +53,7 @@ body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-conversation-open small{color:
 body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-conversation-more{color:var(--qa-muted-text)!important;background:var(--palette-clear)!important;border:0!important;}
 body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-conversation-more:hover{background:var(--qa-hover-strong)!important;color:var(--qa-bright)!important;}
 body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-conversation-menu{background:var(--qa-surface);color:var(--qa-text);box-shadow:var(--qa-shadow-menu);}
+body.studio-enabled[data-studio-hub=ai-qa] #aiQaPanel .ai-qa-conversation-menu > button{border-width:0!important;}
 body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-conversation-menu button{color:var(--qa-text);background:var(--palette-clear);}
 body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-conversation-menu button:hover{background:var(--qa-hover-strong);}
 body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-chat{background:var(--qa-bg);}
