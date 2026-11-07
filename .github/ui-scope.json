@@ -1,5 +1,5 @@
 {
-  "request": "Chỉ chỉnh vùng chat Hỏi đáp AI trên điện thoại: chừa lề, ẩn vạch cuộn nhưng giữ thao tác vuốt, đưa ô nhập xuống gần thanh điều hướng dưới và căn tin nhắn người dùng sang phải.",
+  "request": "Khôi phục ô nhập Hỏi đáp AI trên điện thoại trong chat mới và hội thoại dài, đặt ngay trên thanh điều hướng với khe hở 8 px. Giữ lề nội dung và thao tác vuốt.",
   "excludedRoutes": [
     "ai-qa"
   ]
