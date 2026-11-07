@@ -1,5 +1,5 @@
 {
-  "request": "Chỉ sửa vị trí nội dung Hỏi đáp AI trên PC: căn giữa lời chào và ô nhập trong đoạn chat mới, đưa ô nhập về đáy khi có tin nhắn. Giữ khung ngoài, sidebar và bố cục điện thoại.",
+  "request": "Chỉ bỏ viền quanh các mục Đổi tên và Xóa cuộc trò chuyện trong menu ba chấm của lịch sử Hỏi đáp AI trên PC và điện thoại.",
   "excludedRoutes": [
     "ai-qa"
   ]
