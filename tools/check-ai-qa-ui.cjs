@@ -21,6 +21,8 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
     html body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel{width:1130px!important;}
   }
   html body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel #aiQaSend{translate:-5px -5px!important;padding-top:10px!important;}`});
+  if(width>=721)await page.addStyleTag({content:`html body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel #aiQaForm{
+    width:708px!important;translate:163px -6px!important;left:24px!important;right:24px!important;}`});
   const sendGeometry=await page.evaluate(()=>{
     const button=document.querySelector('#aiQaSend'),arrow=button.querySelector('svg');
     if(!arrow)throw Error('Chat AI send icon must be an SVG');
@@ -79,7 +81,31 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   assert.ok(layoutMetrics['#aiQaForm'].bottom<=layoutMetrics['#aiQaForm'].viewport-12,'composer must fit inside the viewport');
   assert.ok(layoutMetrics['#aiQaPanel'].bottom<=layoutMetrics['#aiQaPanel'].viewport,'chat panel must not overflow the viewport');
   if(width===390){await page.setViewportSize({width:320,height:640});const tiny=await page.evaluate(()=>{const f=document.querySelector('#aiQaForm').getBoundingClientRect(),m=document.querySelector('.ai-qa-messages').getBoundingClientRect();return {composerTop:f.top,composerBottom:f.bottom,viewport:innerHeight,messagesHeight:m.height}});assert.ok(tiny.composerBottom<tiny.viewport-30&&tiny.messagesHeight>=40,'320px short viewport still shows a usable composer and scroll area');await page.setViewportSize({width:390,height:844});}
-assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);assert.equal(await page.locator('#aiQaReview').count(),0);assert.equal(await page.locator('#aiQaClear').count(),0);assert.match(await page.locator('#aiQaSnapshot').innerText(),/HSK/);await page.locator('#aiQaInput').fill('Đánh giá lộ trình của tôi');await page.locator('#aiQaSend').click();await page.locator('.ai-qa-message.assistant').waitFor();assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written to realtime storage');assert.equal(received.lesson.content.mode,'ai-qa');assert.ok(received.lesson.content.learning_snapshot.masteryBoundary);assert.match(await page.locator('#aiQaMessages').innerText(),/Bạn đã có nền tảng tốt/);
+assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);assert.equal(await page.locator('#aiQaReview').count(),0);assert.equal(await page.locator('#aiQaClear').count(),0);assert.match(await page.locator('#aiQaSnapshot').innerText(),/HSK/);await page.locator('#aiQaInput').fill('Đánh giá lộ trình của tôi');await page.locator('#aiQaSend').click();await page.locator('.ai-qa-message.assistant').waitFor();
+  if(width>=721){
+    for(const viewport of [1280,1440,1775]){
+      await page.setViewportSize({width:viewport,height:900});
+      const rects=await page.evaluate(()=>{
+        const rect=selector=>{const r=document.querySelector(selector).getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width};};
+        const form=document.getElementById('aiQaForm'),chat=document.querySelector('.ai-qa-chat');
+        return {form:rect('#aiQaForm'),assistant:rect('.ai-qa-message.assistant'),
+          user:rect('.ai-qa-message.user'),userText:rect('.ai-qa-message.user p'),
+          chat:rect('.ai-qa-chat'),formTranslate:getComputedStyle(form).translate,
+          scrollMode:getComputedStyle(document.getElementById('aiQaMessages')).scrollBehavior,
+          formContainer:getComputedStyle(chat).position};
+      });
+      assert.ok(Math.abs(rects.form.left-rects.assistant.left)<=2,'AI and input align on left at '+viewport+': '+JSON.stringify(rects));
+      assert.ok(Math.abs(rects.form.right-rects.assistant.right)<=2,'AI and input align on right at '+viewport+': '+JSON.stringify(rects));
+      assert.ok(Math.abs(rects.user.right-rects.assistant.right)<=2,'User row belongs to same centered column');
+      assert.ok(Math.abs(rects.userText.right-rects.assistant.right)<=2,'User bubble right-aligns in the reading column');
+      assert.ok(rects.userText.left>rects.assistant.left+30,'User bubble is not aligned to AI text at '+viewport);
+      assert.equal(rects.formTranslate,'none','legacy Designer offset must not shift the composer');
+      assert.equal(rects.formContainer,'relative','Composer must be anchored to chat, not entire shell');
+      assert.equal(rects.scrollMode,'auto','Conversation restore should not animate while rehydrating');
+    }
+    await page.setViewportSize({width,height:844});
+  }
+assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written to realtime storage');assert.equal(received.lesson.content.mode,'ai-qa');assert.ok(received.lesson.content.learning_snapshot.masteryBoundary);assert.match(await page.locator('#aiQaMessages').innerText(),/Bạn đã có nền tảng tốt/);
    const targetAiId=await page.locator('.ai-qa-message.assistant').first().getAttribute('data-ai-message-id');
    assert.ok(targetAiId,'assistant message has a stable target id');
    await page.locator('.qa-suggestion-row-btn').first().click();

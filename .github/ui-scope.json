@@ -1,5 +1,6 @@
 {
-  "request": "PR #324: sửa căn giữa icon SVG và nhãn cho các mục chức năng trong sidebar HSK trên PC (kể cả Hỏi đáp AI). Chỉ sửa vùng sidebar dùng chung, không thay đổi nội dung hay chức năng các trang.",
-  "excludedRoutes": [],
-  "sharedSidebarOnly": true
+  "request": "PR #325: chỉ sửa bố cục bên trong Chat AI trên desktop: tin nhắn AI, bong bóng người dùng và ô nhập nằm trên cùng một cột nội dung căn giữa, loại bỏ offset Composer cũ từ HSK UI Designer; phục hồi vị trí cuộn tức thời khi mở hội thoại. Giữ nguyên khung ngoài 20px, các trang khác và giao diện mobile.",
+  "excludedRoutes": [
+    "ai-qa"
+  ]
 }

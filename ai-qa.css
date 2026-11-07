@@ -185,3 +185,55 @@ body.studio-enabled[data-studio-hub="ai-qa"] #aiQaSend > span > svg{
   stroke-linecap:round;
   stroke-linejoin:round;
 }
+
+/* Desktop AI Q&A: one centered reading/composing column.
+   Outer frame already has equal 20px gutters; these rules only affect the
+   inside of the chat. Cloud Designer may still publish absolute pixel offsets
+   based on its 1440px screenshot: don't let them displace the composer. */
+@media (min-width:721px){
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-chat{
+    position:relative;
+    min-width:0;
+    --qa-reading-width:820px;
+    --qa-reading-inset:max(20px, calc((100% - var(--qa-reading-width)) / 2));
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-messages{
+    padding:8px var(--qa-reading-inset) 150px!important;
+    scroll-behavior:auto;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-message{
+    box-sizing:border-box;
+    width:100%!important;
+    max-width:var(--qa-reading-width)!important;
+    min-width:0;
+    align-self:center!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-message.user{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-message.user p{
+    width:fit-content;
+    max-width:min(100%,630px);
+    text-align:left;
+  }
+  html body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"]
+  #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaForm{
+    position:absolute!important;
+    left:var(--qa-reading-inset)!important;
+    right:var(--qa-reading-inset)!important;
+    bottom:46px!important;
+    width:auto!important;
+    max-width:none!important;
+    margin:0!important;
+    translate:none!important;
+    transform:none!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-empty,
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-status,
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-boundary-note{
+    box-sizing:border-box;
+    max-width:var(--qa-reading-width);
+  }
+}
