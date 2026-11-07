@@ -21,11 +21,16 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
       const geom=await page.evaluate(()=>{
         const bounds=selector=>{const r=document.querySelector(selector).getBoundingClientRect();return {top:r.top,bottom:r.bottom,left:r.left,right:r.right};};
         const msg=document.querySelector('#aiQaMessages');
-        return {dock:bounds('#mobileDock'),form:bounds('#aiQaForm'),empty:bounds('#aiQaEmpty'),
-          messages:bounds('#aiQaMessages'),formPosition:getComputedStyle(document.querySelector('#aiQaForm')).position,
+        return {dock:bounds('#mobileDock'),shell:bounds('.app-shell'),panel:bounds('#aiQaPanel'),
+          form:bounds('#aiQaForm'),empty:bounds('#aiQaEmpty'),messages:bounds('#aiQaMessages'),
+          formPosition:getComputedStyle(document.querySelector('#aiQaForm')).position,
           messageOverflow:getComputedStyle(msg).overflowY,
           viewport:window.innerHeight};
       });
+      assert.ok(Math.abs(geom.shell.bottom-geom.dock.top)<=2,
+        'mobile app shell must end at dock top, not extend behind dock at '+mobileWidth+': '+JSON.stringify(geom));
+      assert.ok(Math.abs(geom.panel.bottom-geom.dock.top)<=2,
+        'mobile chat panel must fit inside shell above dock at '+mobileWidth+': '+JSON.stringify(geom));
       assert.ok(Math.abs(geom.dock.top-geom.form.bottom-8)<=2,
         'mobile input must stay 8px above dock at '+mobileWidth+': '+JSON.stringify(geom));
       assert.ok(geom.empty.bottom < geom.form.top,

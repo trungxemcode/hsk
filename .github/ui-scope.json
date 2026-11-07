@@ -1,5 +1,5 @@
 {
-  "request": "PR #331: chỉ chỉnh bố cục Hỏi đáp AI trên điện thoại (rộng 320–430px): khung chào, vùng cuộn tin nhắn, ô nhập ngay trên dock với khoảng cách 8px; giữ nguyên giao diện Chat AI desktop và toàn bộ 22 trang HSK khác.",
+  "request": "Sửa lỗi iPhone sau PR #331: chỉ chỉnh bố cục Hỏi đáp AI trên điện thoại (rộng 320–430px): giới hạn app-shell và panel trên dock thật, vùng cuộn tin nhắn, ô nhập cách dock 8px; giữ nguyên giao diện Chat AI desktop và toàn bộ 22 trang HSK khác.",
   "excludedRoutes": [
     "ai-qa"
   ]

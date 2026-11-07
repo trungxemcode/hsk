@@ -401,6 +401,14 @@ body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-title-text{
    fixed viewport positioning overlaps the welcome pane and the iOS keyboard.
    The dock-height token already includes device safe-area spacing. */
 @media (max-width:720px){
+  /* The dock is a sibling of app-shell. A legacy 100%-height shell ignores
+     inset-bottom on iOS, so constrain the shell itself above the real dock. */
+  html body.studio-enabled[data-studio-hub="ai-qa"] .app-shell{
+    position:fixed!important;
+    inset:0 0 var(--mobile-dock-height,calc(67px + env(safe-area-inset-bottom,0px))) 0!important;
+    height:auto!important;
+    min-height:0!important;
+  }
   body.studio-enabled[data-studio-hub="ai-qa"] main.workspace{
     display:flex!important;
     flex:1 1 0!important;
@@ -409,7 +417,9 @@ body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-title-text{
     max-width:none!important;
     min-height:0!important;
     margin:0!important;
-    padding:14px 16px var(--mobile-dock-height,66px)!important;
+    /* The shell already stops at the dock: reserving its height again here
+       was masking the over-constrained shell and can break on Safari. */
+    padding:14px 16px 0!important;
     box-sizing:border-box!important;
     overflow:hidden!important;
   }
