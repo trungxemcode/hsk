@@ -145,3 +145,43 @@ html[data-theme=dark] body.studio-enabled[data-studio-hub=ai-qa] #aiQaPanel{
     overscroll-behavior:contain;
   }
 }
+
+
+/* Keep the published Chat AI fluid when legacy Designer drafts contain pixel widths.
+   The public Designer stores #aiQaPanel width in px based on its 1440px preview;
+   that fixed width must not win at a larger desktop viewport. */
+@media(min-width:721px){
+  html body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"]
+  main.workspace #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel{
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+  }
+}
+/* Use the button's layout box, not legacy Designer offsets or font glyph
+   baselines, to center the Chat AI send arrow. */
+html body.studio-enabled[data-studio-hub="ai-qa"]
+#aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaSend{
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  translate:none!important;
+  line-height:1!important;
+}
+body.studio-enabled[data-studio-hub="ai-qa"] #aiQaSend > span{
+  display:grid;
+  place-items:center;
+  width:100%;
+  height:100%;
+  line-height:0;
+}
+body.studio-enabled[data-studio-hub="ai-qa"] #aiQaSend > span > svg{
+  display:block;
+  width:18px;
+  height:18px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2.3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}

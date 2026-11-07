@@ -1,5 +1,5 @@
 {
-  "request": "PR #322: Chỉ chỉnh Chat AI trên laptop/PC để khoảng hở ngoài trên, dưới, trái, phải bằng nhau (20px); giữ cuộn riêng lịch sử và tin nhắn. Không thay đổi mobile hoặc các trang HSK khác.",
+  "request": "PR #323: đồng bộ giao diện Chat AI desktop tự giãn theo vùng còn trống bất kể draft Designer lưu width px; sửa căn giữa mũi tên gửi và thông báo kích thước gốc tự thích ứng. Không sửa các trang HSK khác.",
   "excludedRoutes": [
     "ai-qa"
   ]

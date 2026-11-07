@@ -37,9 +37,9 @@
   if(!entries.length){const note=document.createElement('small');note.textContent='Không có phần tử con tách riêng trong DOM.';children.append(note);}
  }
  function renderInspector(){renderHardInspector();
-  const c=catalog.get(selected),n=node(selected),own=current().styles[mode][selected]||{},computed=n&&getComputedStyle(n);$('selected-name').textContent=c?.label||'Chọn một phần tử';$('selected-note').textContent=visible(n)?'Chỉnh riêng phần tử này trong '+page().label+'.':'Phần tử đang ẩn hoặc chưa có nội dung. Dùng Hiện phần đang ẩn, hoặc Dùng thử để mở trạng thái cần chỉnh.';
+  const c=catalog.get(selected),n=node(selected),own=current().styles[mode][selected]||{},computed=n&&getComputedStyle(n);const fluidChatRoot=pageId==='ai-qa'&&mode==='desktop'&&c?.selector==='';$('selected-name').textContent=c?.label||'Chọn một phần tử';$('selected-note').textContent=visible(n)?'Chỉnh riêng phần tử này trong '+page().label+'.':'Phần tử đang ẩn hoặc chưa có nội dung. Dùng Hiện phần đang ẩn, hoặc Dùng thử để mở trạng thái cần chỉnh.';if(fluidChatRoot)$('selected-note').textContent='Khung gốc Chat AI tự giãn theo màn hình để giữ khoảng hở đều bốn phía. Chỉnh riêng cột lịch sử, vùng chat và các phần tử bên trong.';
   $('parent').disabled=!c?.parent;$('clear').disabled=!Object.keys(own).length;$('disclose').disabled=!(n&&(n.matches('details')||n.closest('details')));$('reveal').disabled=!n||visible(n);const list=order(),i=list.indexOf(groupFor(selected));$('move-up').disabled=!ready||i<=0;$('move-down').disabled=!ready||i<0||i===list.length-1;
-  for(const [key,input] of fields){const p=schema.properties[key];input.disabled=!ready||!c;input.value=Object.hasOwn(own,key)?String(own[key]):'';
+  for(const [key,input] of fields){const p=schema.properties[key];input.disabled=!ready||!c||(fluidChatRoot&&key==='width');input.value=fluidChatRoot&&key==='width'?'':Object.hasOwn(own,key)?String(own[key]):'';if(fluidChatRoot&&key==='width')input.placeholder='Tự giãn 100%';
    if(p.type==='number'&&computed){const raw=computed.getPropertyValue(p.previewCss||p.css);let v=parseFloat(raw);if(key==='lineHeight')v/=parseFloat(computed.fontSize);if(p.unit==='ms'&&raw.trim().endsWith('s')&&!raw.trim().endsWith('ms'))v*=1000;if(key==='moveX'||key==='moveY'||key==='rotate')v=own[key]||0;if(key==='scale'&&!Number.isFinite(v))v=1;input.placeholder=Number.isFinite(v)?String(Math.round(v*100)/100):'Mặc định';}
    if(p.type==='color'){const value=own[key]||'',isTheme=value.startsWith('var(');if(isTheme)input.value='';input.placeholder=isTheme?(p.options.find(o=>o.value===value)?.label||'Theo theme'):'#RRGGBB';const picker=$('picker-'+key);picker.disabled=input.disabled;picker.value=hexColor(/^#/.test(value)?value:isTheme?computed?.getPropertyValue(value.slice(4,-1)):computed?.getPropertyValue(p.css)||value);}
   }
@@ -59,7 +59,7 @@ if(!selectedKeys.size&&selected)selectedKeys.add(selected);for(const key of [...
   });return navigation;
  }
  function motionTargets(key,kind='move'){const keys=kind==='move'&&selectedKeys.has(key)?[...selectedKeys]:[key];return keys.filter(k=>node(k)&&!keys.some(parent=>parent!==k&&node(parent)?.contains(node(k))));}
- function beginMotion(key,kind='move'){if(!ready||preview)return false;moving={base:clone(config),id:pageId,mode,key,keys:motionTargets(key,kind),kind};return true;}
+ function beginMotion(key,kind='move'){if(!ready||preview)return false;if(kind==='resize'&&pageId==='ai-qa'&&mode==='desktop'&&catalog.get(key)?.selector==='')return false;moving={base:clone(config),id:pageId,mode,key,keys:motionTargets(key,kind),kind};return true;}
  function motionConfig(key,patch){if(!moving||moving.id!==pageId||moving.mode!==mode||moving.key!==key)return null;const next=clone(moving.base);
   if(moving.kind==='move'&&(moving.keys.length>1||moving.keys[0]!==key)){
    const styles=moving.base.pages[pageId].styles[mode],pose=styles[key]||{};let dx=(patch.moveX??pose.moveX??0)-(pose.moveX||0),dy=(patch.moveY??pose.moveY??0)-(pose.moveY||0);
