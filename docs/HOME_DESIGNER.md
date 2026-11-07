@@ -8,7 +8,7 @@ Không cần npm, API AI, Figma hay tài khoản dịch vụ thiết kế. Bộ 
 
 ## Chỉnh trực tiếp
 
-1. Chọn trang trong ô **Trang đang chỉnh** ở bảng trái. Có 44 trang/khung: trang chủ, bài học và học tự động, các chế độ luyện, sổ từ, tra cứu/dịch/ảnh, nhạc, tài khoản, menu chung và cửa sổ công cụ. Bấm vào chữ, nút hoặc khối trong bản xem để chọn. Nút trong app không chạy khi đang ở chế độ chỉnh.
+1. Chọn trang trong ô **Trang đang chỉnh** ở bảng trái. Có 45 trang/khung: trang chủ, bài học và học tự động, các chế độ luyện, sổ từ, tra cứu/dịch/ảnh, nhạc, tài khoản, menu chung và cửa sổ công cụ. Bấm vào chữ, nút hoặc khối trong bản xem để chọn. Nút trong app không chạy khi đang ở chế độ chỉnh.
 2. Bảng bên phải chỉnh riêng phần tử đang chọn: chữ, căn hàng, khoảng đệm, khoảng cách và các màu theo theme hiện có. Ô để trống nghĩa là dùng kiểu mặc định của app. Các thông số PC và điện thoại tách biệt.
 3. Bấm **Chọn cả khối** khi muốn chỉnh khoảng cách của cả thẻ thay vì từng dòng chữ. **Mở/thu nội dung** giúp xem phần nằm trong khung thu gọn.
 4. Kéo tay nắm trên khung đang chọn hoặc kéo các khối ở bảng trái để đổi thứ tự. Có nút Lên/Xuống để dùng bàn phím. Thứ tự dùng CSS; không clone nút hay di chuyển DOM của app.
@@ -84,3 +84,9 @@ Sau khi chọn nhiều object, tắt Quét chọn rồi kéo một thành viên 
 Phép căn bỏ qua khung cha nếu các phần tử con cũng được chọn, chỉ dùng các object nhỏ được chọn. **Mốc căn** mặc định giữ object chọn cuối cố định; các object khác căn theo nó. Có thể chuyển sang căn giữa nhóm được chọn. Danh sách tên object cho phép bỏ object thừa trước khi căn. Giãn đều vẫn giữ hai đầu của nhóm. Đây là quy tắc căn; kéo nhóm vẫn chỉ dịch cha nếu cả cha và con được chọn để tránh dịch con hai lần.
 
 Thanh nhãn tím và nút nổi trên object được ẩn để không che chữ; tên và thao tác dùng bảng thuộc tính. Viền chọn mảnh và góc resize vẫn hiển thị; kéo trực tiếp object để di chuyển.
+
+### Chỉnh Chat AI và các menu đang ẩn
+
+Trong **Trang đang chỉnh**, chọn **Hỏi đáp AI / Chat AI** để sửa riêng giao diện chat, lịch sử, thanh nhập và các thành phần trong trang. Bấm **Thao tác như app** để duyệt trong khung xem trước ở kích thước rộng: chuyển tab, mở thanh menu, lịch sử chat và các hộp nội dung như ứng dụng thật (dữ liệu tài khoản/AI bên ngoài vẫn được cách ly). Bấm **Chọn để chỉnh** khi nội dung cần sửa đã mở: giữ nguyên trạng thái vừa mở và tiếp tục chọn, kéo và chỉnh thuộc tính. Với PC, có thể giữ Alt rồi bấm một nút ngay trong chế độ chỉnh để thao tác nhanh mà không phải chuyển chế độ. Trang trong danh sách bên trái sẽ cập nhật theo màn hình đang mở; bản xem trước không thay đổi dữ liệu học của người dùng.
+
+Trên điện thoại, khung xem trước chiếm toàn chiều ngang; bấm **☰ Trang** để mở danh sách trang hoặc **☷ Thuộc tính** để chỉnh thông số. Bấm vùng tối bên ngoài để đóng bảng, trạng thái trong app không mất.

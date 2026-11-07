@@ -15,20 +15,156 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   assert.equal(await page.evaluate(()=>window.__qaWrites.length),0,'do not overwrite remote conversations before first Firestore snapshot');
   await page.evaluate(()=>window.__qaInitial());
   await page.locator('#aiQaPanel').waitFor({state:'visible'});
+  assert.equal(await page.locator('.ai-qa-conversation').count(),0,
+    'new account does not create a phantom empty chat');
+  assert.equal((await page.locator('#aiQaConversationTitle').textContent()).trim(),'Hỏi đáp AI');
+  assert.equal(await page.locator('#aiQaEmpty').isVisible(),true,
+    'show welcome until the first submitted question');
+  // The add-new-chat action must not consume an ID or write empty conversations.
+  await page.evaluate(()=>document.getElementById('aiQaNewChat').click());
+  assert.equal(await page.locator('.ai-qa-conversation').count(),0,
+    'new chat draft remains unsaved until the learner asks a question');
+  assert.equal(await page.locator('#aiQaEmpty').isVisible(),true);
+  assert.equal(await page.evaluate(()=>window.__qaWrites.length),0,
+    'no empty conversation written to Firestore');
+  const pinnedIntent=await page.evaluate(()=>{
+    const registry=new Map([['latest',{aiMessageId:'latest',nodeLabel:'Từ vựng'}]]);
+    try{HSKQaIntentRouter.resolveTargetMessageAndIntent({userText:'Ví dụ khác',
+      explicitAction:'another_example',explicitTargetAiMessageId:'missing',
+      aiMessageRegistry:registry});return 'accepted';}catch{return 'rejected';}
+  });
+  assert.equal(pinnedIntent,'rejected','an unknown explicit AI feedback target must not silently choose latest');
+
+  // The cloud Designer can still serve a legacy fixed root width and manually
+  // translated send button; client CSS must preserve responsive geometry.
+  await page.addStyleTag({content:`@media (min-width:721px){
+    html body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel{width:1130px!important;}
+  }
+  html body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel #aiQaSend{translate:-5px -5px!important;padding-top:10px!important;}`});
+  if(width>=721)await page.addStyleTag({content:`html body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel #aiQaForm{
+    width:708px!important;translate:163px -6px!important;left:24px!important;right:24px!important;}`});
+  const sendGeometry=await page.evaluate(()=>{
+    const button=document.querySelector('#aiQaSend'),arrow=button.querySelector('svg');
+    if(!arrow)throw Error('Chat AI send icon must be an SVG');
+    const b=button.getBoundingClientRect(),i=arrow.getBoundingClientRect();
+    return {dx:i.x+i.width/2-b.x-b.width/2,dy:i.y+i.height/2-b.y-b.height/2,padding:getComputedStyle(button).paddingTop,translate:getComputedStyle(button).translate};
+  });
+  assert.ok(Math.abs(sendGeometry.dx)<1&&Math.abs(sendGeometry.dy)<1,'send arrow must stay precisely centered: '+JSON.stringify(sendGeometry));
+  assert.equal(sendGeometry.padding,'0px','legacy Designer padding cannot shift the send arrow');
+  assert.equal(sendGeometry.translate,'none','legacy Designer offset cannot translate the send button');
+  if(width>=721){
+    await page.waitForTimeout(400); // panel-enter animation must settle before measuring
+    for(const [screenWidth,screenHeight] of [[1440,844],[1775,900],[1280,720]]){
+      await page.setViewportSize({width:screenWidth,height:screenHeight});
+      const gutters=await page.evaluate(()=>{
+        const frame=document.querySelector('.app-area').getBoundingClientRect();
+        const topbar=document.querySelector('#studioHeader').getBoundingClientRect();
+        const panel=document.querySelector('#aiQaPanel').getBoundingClientRect();
+        return {top:panel.top-topbar.bottom,left:panel.left-frame.left,right:frame.right-panel.right,
+          bottom:frame.bottom-panel.bottom,bodyY:getComputedStyle(document.body).overflowY,
+          messageY:getComputedStyle(document.querySelector('.ai-qa-messages')).overflowY,
+          historyY:getComputedStyle(document.querySelector('.ai-qa-conversation-list')).overflowY};
+      });
+      for(const edge of ['top','left','right','bottom'])assert.ok(Math.abs(gutters[edge]-20)<2,
+        'desktop Chat AI '+edge+' gutter at '+screenWidth+'×'+screenHeight+' must match 20px: '+JSON.stringify(gutters));
+      assert.equal(gutters.bodyY,'hidden','outer page does not scroll');
+      assert.equal(gutters.messageY,'auto','message content remains scrollable');
+      assert.equal(gutters.historyY,'auto','conversation history remains scrollable');
+      const welcome=await page.evaluate(()=>{
+        const rect=selector=>document.querySelector(selector).getBoundingClientRect();
+        const chat=rect('.ai-qa-chat'),header=rect('.ai-qa-chatbar');
+        const intro=rect('#aiQaEmpty'),form=rect('#aiQaForm'),note=rect('.ai-qa-boundary-note');
+        return {
+          gap:form.top-intro.bottom,
+          centerOffset:form.top+form.height/2-(header.bottom+chat.bottom)/2,
+          introAlignment:intro.left-form.left,
+          noteAlignment:note.left-form.left,
+          noteGap:note.top-form.bottom,
+        };
+      });
+      assert.ok(welcome.gap>=0&&welcome.gap<=24,'welcome and composer stay together: '+JSON.stringify(welcome));
+      assert.ok(Math.abs(welcome.centerOffset)<50,'new chat composer sits near the center of the chat pane');
+      assert.ok(Math.abs(welcome.introAlignment)<2&&Math.abs(welcome.noteAlignment)<2&&welcome.noteGap>=0,
+        'welcome, composer and note share a column and do not overlap');
+    }
+    await page.setViewportSize({width,height:844});
+  }
+  const themeColors=await page.evaluate(async()=>{
+    const html=document.documentElement,prior=html.getAttribute('data-theme'),panel=document.getElementById('aiQaPanel');
+    // The app animates theme changes: wait for the final computed color,
+    // otherwise an in-between animation frame causes nondeterministic CI failures.
+    const waitForColor=async(expected)=>{
+      const deadline=performance.now()+3000;
+      while(performance.now()<deadline){
+        const actual=getComputedStyle(panel).backgroundColor;
+        if(actual===expected)return actual;
+        await new Promise(resolve=>setTimeout(resolve,70));
+      }
+      return getComputedStyle(panel).backgroundColor;
+    };
+    html.setAttribute('data-theme','light');
+    const light=await waitForColor('rgb(244, 244, 250)');
+    html.setAttribute('data-theme','dark');
+    const dark=await waitForColor('rgb(33, 33, 33)');
+    if(prior===null)html.removeAttribute('data-theme');else html.setAttribute('data-theme',prior);
+    return {light,dark};
+  });
+  assert.notEqual(themeColors.light,themeColors.dark,'AI chat needs distinct light/dark palettes');
+  assert.equal(themeColors.dark,'rgb(33, 33, 33)','dark AI chat uses the neutral design token');
   const layoutMetrics=await page.evaluate(()=>Object.fromEntries(['main.workspace','#aiQaPanel','.ai-qa-shell','.ai-qa-chat','.ai-qa-messages','#aiQaForm','#aiQaStatus','.ai-qa-boundary-note'].map(selector=>{const element=document.querySelector(selector),r=element.getBoundingClientRect(),style=getComputedStyle(element);return [selector,{top:Math.round(r.top),bottom:Math.round(r.bottom),height:Math.round(r.height),clientHeight:element.clientHeight,scrollHeight:element.scrollHeight,display:style.display,overflow:style.overflowY,viewport:innerHeight}];})));
   if(width<721){assert.equal(layoutMetrics['#aiQaStatus'].display,'none','mobile chat should hide idle helper');assert.equal(layoutMetrics['.ai-qa-boundary-note'].display,'none','mobile boundary helper is hidden');await page.evaluate(()=>document.getElementById('aiQaStatus').textContent='Gia sư AI chưa trả lời được. Hãy thử lại.');assert.equal(await page.locator('#aiQaStatus').isVisible(),true,'mobile error status must be visible');assert.match(await page.locator('#aiQaStatus').innerText(),/Gia sư AI chưa trả lời được/);await page.evaluate(()=>document.getElementById('aiQaStatus').textContent='');}else{assert.notEqual(layoutMetrics['#aiQaStatus'].display,'none','AI status must remain visible on desktop');assert.notEqual(layoutMetrics['.ai-qa-boundary-note'].display,'none','desktop learning note must remain visible');}
   assert.equal(layoutMetrics['.ai-qa-messages'].overflow,'auto','messages must scroll independently');
   assert.ok(layoutMetrics['#aiQaForm'].bottom<=layoutMetrics['#aiQaForm'].viewport-12,'composer must fit inside the viewport');
   assert.ok(layoutMetrics['#aiQaPanel'].bottom<=layoutMetrics['#aiQaPanel'].viewport,'chat panel must not overflow the viewport');
   if(width===390){await page.setViewportSize({width:320,height:640});const tiny=await page.evaluate(()=>{const f=document.querySelector('#aiQaForm').getBoundingClientRect(),m=document.querySelector('.ai-qa-messages').getBoundingClientRect();return {composerTop:f.top,composerBottom:f.bottom,viewport:innerHeight,messagesHeight:m.height}});assert.ok(tiny.composerBottom<tiny.viewport-30&&tiny.messagesHeight>=40,'320px short viewport still shows a usable composer and scroll area');await page.setViewportSize({width:390,height:844});}
-assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);assert.equal(await page.locator('#aiQaReview').count(),0);assert.equal(await page.locator('#aiQaClear').count(),0);assert.match(await page.locator('#aiQaSnapshot').innerText(),/HSK/);await page.locator('#aiQaInput').fill('Đánh giá lộ trình của tôi');await page.locator('#aiQaSend').click();await page.locator('.ai-qa-message.assistant').waitFor();assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written to realtime storage');assert.equal(received.lesson.content.mode,'ai-qa');assert.ok(received.lesson.content.learning_snapshot.masteryBoundary);assert.match(await page.locator('#aiQaMessages').innerText(),/Bạn đã có nền tảng tốt/);
+assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);assert.equal(await page.locator('#aiQaReview').count(),0);assert.equal(await page.locator('#aiQaClear').count(),0);assert.match(await page.locator('#aiQaSnapshot').innerText(),/HSK/);await page.locator('#aiQaInput').fill('Đánh giá lộ trình của tôi');await page.locator('#aiQaSend').click();await page.locator('.ai-qa-message.assistant').waitFor();
+  assert.equal(await page.locator('.ai-qa-conversation').count(),1,
+    'first question creates exactly one persistent conversation');
+  assert.equal(await page.locator('#aiQaEmpty').isVisible(),false,'welcome hides after first question');
+  assert.match(await page.locator('.ai-qa-conversation-open strong').first().textContent(),/Đánh giá lộ trình/);
+
+  if(width>=721){
+    for(const viewport of [1280,1440,1775]){
+      await page.setViewportSize({width:viewport,height:900});
+      const rects=await page.evaluate(()=>{
+        const rect=selector=>{const r=document.querySelector(selector).getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width};};
+        const form=document.getElementById('aiQaForm'),chat=document.querySelector('.ai-qa-chat');
+        return {form:rect('#aiQaForm'),assistant:rect('.ai-qa-message.assistant'),
+          user:rect('.ai-qa-message.user'),userText:rect('.ai-qa-message.user p'),
+          chat:rect('.ai-qa-chat'),formTranslate:getComputedStyle(form).translate,
+          scrollMode:getComputedStyle(document.getElementById('aiQaMessages')).scrollBehavior,
+          formContainer:getComputedStyle(chat).position};
+      });
+      assert.ok(Math.abs(rects.form.left-rects.assistant.left)<=2,'AI and input align on left at '+viewport+': '+JSON.stringify(rects));
+      assert.ok(Math.abs(rects.form.right-rects.assistant.right)<=2,'AI and input align on right at '+viewport+': '+JSON.stringify(rects));
+      assert.ok(Math.abs(rects.user.right-rects.assistant.right)<=2,'User row belongs to same centered column');
+      assert.ok(Math.abs(rects.userText.right-rects.assistant.right)<=2,'User bubble right-aligns in the reading column');
+      assert.ok(rects.userText.left>rects.assistant.left+30,'User bubble is not aligned to AI text at '+viewport);
+      assert.equal(rects.formTranslate,'none','legacy Designer offset must not shift the composer');
+      assert.ok(rects.chat.bottom-rects.form.bottom<100,'active chat composer returns to the bottom');
+      assert.equal(rects.formContainer,'relative','Composer must be anchored to chat, not entire shell');
+      assert.equal(rects.scrollMode,'auto','Conversation restore should not animate while rehydrating');
+    }
+    await page.setViewportSize({width,height:844});
+  }
+assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written to realtime storage');assert.equal(received.lesson.content.mode,'ai-qa');assert.ok(received.lesson.content.learning_snapshot.masteryBoundary);assert.match(await page.locator('#aiQaMessages').innerText(),/Bạn đã có nền tảng tốt/);
    const targetAiId=await page.locator('.ai-qa-message.assistant').first().getAttribute('data-ai-message-id');
    assert.ok(targetAiId,'assistant message has a stable target id');
    await page.locator('.qa-suggestion-row-btn').first().click();
    await page.waitForFunction(()=>document.querySelectorAll('.ai-qa-message.assistant').length===2);
    assert.equal(received.lesson.content.intentInfo.targetAiMessageId,targetAiId,'suggestion must reference the correct AI response');
    assert.equal(received.lesson.content.intentInfo.intent,'edge_case_exploration','context shift suggestion routes to the intended pedagogical branch');
-   assert.equal(received.lesson.content.intentInfo.evidencePolicy,'question_only','suggestions must not count as proof of weakness');await page.evaluate(()=>window.__qaEmit([{id:'chat-remote',title:'Chat từ điện thoại',messages:[{id:'remote-1',role:'user',text:'Tin nhắn từ điện thoại',createdAt:Date.now()}],createdAt:Date.now(),updatedAt:Date.now(),deleted:false}]));await page.locator('#aiQaHistoryToggle').click();await page.locator('#aiQaHistory').waitFor({state:'visible'});assert.ok(await page.locator('.ai-qa-conversation').count()>=2,'realtime listener merges the other device');assert.ok((await page.locator('.ai-qa-conversation').allTextContents()).some(text=>text.includes('Chat từ điện thoại')));await page.locator('.ai-qa-conversation-more').first().click();assert.equal(await page.locator('.ai-qa-conversation-menu').first().isVisible(),true);await page.locator('#aiQaHistoryClose').click();  // Regression: changing chats during a stalled request must abort the stale request,
+   assert.equal(received.lesson.content.intentInfo.evidencePolicy,'question_only','suggestions must not count as proof of weakness');await page.evaluate(()=>window.__qaEmit([{id:'chat-remote',title:'Chat từ điện thoại',messages:[{id:'remote-1',role:'user',text:'Tin nhắn từ điện thoại',createdAt:Date.now()}],createdAt:Date.now(),updatedAt:Date.now(),deleted:false}]));await page.locator('#aiQaHistoryToggle').click();await page.locator('#aiQaHistory').waitFor({state:'visible'});assert.ok(await page.locator('.ai-qa-conversation').count()>=2,'realtime listener merges the other device');assert.ok((await page.locator('.ai-qa-conversation').allTextContents()).some(text=>text.includes('Chat từ điện thoại')));
+  for(const row of [0,1]){
+    const more=page.locator('.ai-qa-conversation-more').nth(row);
+    await more.click();
+    const menu=page.locator('.ai-qa-conversation-menu').nth(row);
+    await menu.waitFor({state:'visible'});
+    const borders=await menu.locator('button').evaluateAll(buttons=>buttons.map(button=>getComputedStyle(button).borderWidth));
+    assert.deepEqual(borders,['0px','0px'],'history menu actions are borderless on every row');
+    await more.click();
+  }
+  await page.locator('#aiQaHistoryClose').click();  // Regression: changing chats during a stalled request must abort the stale request,
   // unlock the composer, and prevent the earlier response from overwriting new chat.
   await page.evaluate(()=>{
     const original=window.fetch;
@@ -46,6 +182,10 @@ assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);ass
   await page.waitForFunction(()=>window.__qaWaiting&&document.getElementById('aiQaSend').disabled);
   await page.locator('#aiQaHistoryToggle').click();
   await page.locator('#aiQaNewChat').click();
+  assert.equal(await page.locator('#aiQaEmpty').isVisible(),true,'new draft restores welcome after aborting old request');
+  assert.equal((await page.locator('#aiQaConversationTitle').textContent()).trim(),'Hỏi đáp AI');
+  assert.ok((await page.locator('.ai-qa-conversation').count())>=2,'old conversations are preserved without a new placeholder');
+
   assert.equal(await page.evaluate(()=>window.__qaAborted),true,'stale request must abort');
   assert.equal(await page.locator('#aiQaSend').isEnabled(),true,'send restored after chat switch');
   assert.equal(await page.locator('#aiQaInput').isEnabled(),true,'composer restored after chat switch');

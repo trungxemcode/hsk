@@ -17,3 +17,24 @@
 #hard-edit[aria-pressed=true]{background:#5b46e8;color:white;border-color:#5b46e8}#hard-inspector{margin:14px 0;border-top:1px solid #e5e1ef;padding-top:10px}#hard-path{display:flex;flex-wrap:wrap;gap:4px}#hard-path button,#hard-children button{font-size:11px;text-align:left;overflow-wrap:anywhere;max-width:100%;min-height:28px}#hard-children{max-height:220px;overflow:auto;margin-top:8px}#hard-children button{display:block;width:100%;margin-bottom:4px}#hard-children small{display:block;color:#78738e}
 
 #align-reference{width:100%;padding:7px;border:1px solid #deddeb;border-radius:8px;background:white;color:inherit;font:inherit}#multi-selection-list{display:flex;gap:4px;flex-wrap:wrap;max-height:120px;overflow:auto;margin-top:8px}#multi-selection-list button{font-size:10px;min-height:26px;padding:3px 6px;max-width:100%;overflow-wrap:anywhere}
+
+/* Interactive preview temporarily gives the actual app full canvas width. */
+body.designer-interacting .editor-layout{grid-template-columns:minmax(0,1fr)}
+body.designer-interacting .layers,body.designer-interacting .inspector{display:none}
+body.designer-interacting #preview{background:#5b46e8;border-color:#5b46e8;color:#fff}
+body.designer-interacting #viewport{padding:10px 12px 24px}
+
+/* Mobile: keep the live app full-width and open editor panels only on demand. */
+#pages-toggle,#inspector-toggle,#editor-backdrop{display:none}
+@media(max-width:760px){
+ .editor-layout{display:flex;flex-direction:column;height:calc(100dvh - 92px)}
+ .workspace{height:100%;width:100%;min-width:0}
+ .layers,.inspector{display:none;position:fixed;top:92px;bottom:0;z-index:52;width:min(88vw,350px);overflow:auto;background:white;box-shadow:0 4px 24px #24203424}
+ .layers{left:0;right:auto}.inspector{right:0;left:auto}
+ body.editor-pages-open .layers,body.editor-inspector-open .inspector{display:block}
+ body.editor-pages-open #editor-backdrop,body.editor-inspector-open #editor-backdrop{display:block;position:fixed;inset:92px 0 0;z-index:51;width:100%;height:calc(100dvh - 92px);background:#21183a50;border:0;border-radius:0}
+ #pages-toggle,#inspector-toggle{display:inline-flex}
+ body.designer-interacting .layers,body.designer-interacting .inspector,body.designer-interacting #pages-toggle,body.designer-interacting #inspector-toggle,body.designer-interacting #editor-backdrop{display:none!important}
+ .preview-toolbar{justify-content:flex-start;max-height:112px;overflow:auto}
+ #viewport{padding:8px 10px 24px}
+}
