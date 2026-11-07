@@ -1,5 +1,5 @@
 {
-  "request": "PR #328: cập nhật Chat AI để hiện trạng thái chào trước câu hỏi đầu tiên, không tự tạo cuộc trò chuyện trống, giữ các cuộc trò chuyện đã có và cho phép xem tiêu đề dài khi hover. Giữ nguyên giao diện Chat AI bản phát hành hiện tại, tất cả trang còn lại và router phản hồi AI đã được sửa trước đây.",
+  "request": "Chỉ chỉnh vùng chat Hỏi đáp AI trên điện thoại: chừa lề, ẩn vạch cuộn nhưng giữ thao tác vuốt, đưa ô nhập xuống gần thanh điều hướng dưới và căn tin nhắn người dùng sang phải.",
   "excludedRoutes": [
     "ai-qa"
   ]

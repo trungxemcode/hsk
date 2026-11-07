@@ -121,6 +121,26 @@ assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);ass
   assert.equal(await page.locator('.ai-qa-conversation').count(),1,
     'first question creates exactly one persistent conversation');
   assert.equal(await page.locator('#aiQaEmpty').isVisible(),false,'welcome hides after first question');
+  if(width===390){
+    const mobileLayout=await page.evaluate(()=>{
+      const messages=document.getElementById('aiQaMessages');
+      const rect=selector=>document.querySelector(selector).getBoundingClientRect();
+      const chat=rect('.ai-qa-chat'),form=rect('#aiQaForm'),dock=rect('#mobileDock');
+      const answer=rect('.ai-qa-message.assistant'),scrollStyle=getComputedStyle(messages);
+      return {
+        left:answer.left-chat.left,right:chat.right-answer.right,
+        dockGap:dock.top-form.bottom,
+        scrollbar:scrollStyle.scrollbarWidth,overflow:scrollStyle.overflowY,
+        messagesEnd:messages.getBoundingClientRect().bottom,formTop:form.top,
+      };
+    });
+    assert.ok(mobileLayout.left>=16&&mobileLayout.right>=16,'mobile messages leave room on both sides');
+    assert.ok(mobileLayout.dockGap>=5&&mobileLayout.dockGap<=16,
+      'mobile composer stays just above the dock: '+JSON.stringify(mobileLayout));
+    assert.equal(mobileLayout.scrollbar,'none','hide the mobile scrollbar');
+    assert.equal(mobileLayout.overflow,'auto','preserve mobile message scrolling');
+    assert.ok(mobileLayout.messagesEnd<=mobileLayout.formTop+1,'composer does not cover the message area');
+  }
   assert.match(await page.locator('.ai-qa-conversation-open strong').first().textContent(),/Đánh giá lộ trình/);
 
   if(width>=721){
