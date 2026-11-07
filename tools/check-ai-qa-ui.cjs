@@ -43,6 +43,28 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   html body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel #aiQaSend{translate:-5px -5px!important;padding-top:10px!important;}`});
   if(width>=721)await page.addStyleTag({content:`html body.studio-enabled:not(.mobile-ux)[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel #aiQaForm{
     width:708px!important;translate:163px -6px!important;left:24px!important;right:24px!important;}`});
+  if(width<721)await page.addStyleTag({content:`
+    html body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel #aiQaMessages{
+      height:900px!important;min-height:900px!important;
+    }
+    html body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel #aiQaEmpty{
+      min-height:700px!important;translate:0 80px!important;
+    }
+    html body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel #aiQaForm{
+      height:120px!important;translate:0 160px!important;
+    }
+  `});
+  async function assertMobileComposerReachable(){
+    const hit=await page.evaluate(()=>{
+      const field=document.getElementById('aiQaInput');
+      const rect=field.getBoundingClientRect();
+      const top=document.getElementById('mobileDock').getBoundingClientRect().top;
+      const target=document.elementFromPoint(rect.left+rect.width/2,rect.top+rect.height/2);
+      return {editable:target===field&&!field.disabled,aboveDock:rect.bottom<top};
+    });
+    assert.deepEqual(hit,{editable:true,aboveDock:true},'the input is visible and tappable above the dock');
+  }
+  if(width<721)await assertMobileComposerReachable();
   const sendGeometry=await page.evaluate(()=>{
     const button=document.querySelector('#aiQaSend'),arrow=button.querySelector('svg');
     if(!arrow)throw Error('Chat AI send icon must be an SVG');
@@ -122,6 +144,8 @@ assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);ass
     'first question creates exactly one persistent conversation');
   assert.equal(await page.locator('#aiQaEmpty').isVisible(),false,'welcome hides after first question');
   if(width===390){
+    await page.waitForFunction(()=>!document.getElementById("aiQaInput").disabled);
+    await assertMobileComposerReachable();
     const mobileLayout=await page.evaluate(()=>{
       const messages=document.getElementById('aiQaMessages');
       const rect=selector=>document.querySelector(selector).getBoundingClientRect();

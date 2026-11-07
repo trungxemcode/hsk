@@ -87,13 +87,40 @@ body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-boundary-note{position:absolut
 @media(max-width:720px){
   body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-chat{
     --qa-mobile-gutter:18px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:auto minmax(0,1fr) auto auto;
+    min-height:0;
+  }
+  html body.studio-enabled[data-studio-hub=ai-qa]
+  main.workspace #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel{
+    position:relative!important;
+    height:auto!important;
+    max-height:none!important;
+    min-height:0!important;
+    flex:1 1 0!important;
+  }
+  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-shell{
+    position:absolute;
+    inset:0;
   }
   body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-chatbar{
-    flex-shrink:0;
+    grid-row:1;
     padding:8px var(--qa-mobile-gutter);
   }
   html body.studio-enabled[data-studio-hub=ai-qa]
   #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaMessages{
+    grid-row:2;
+    grid-column:1;
+    position:static!important;
+    box-sizing:border-box;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    width:100%!important;
+    margin:0!important;
+    translate:none!important;
+    transform:none!important;
     padding:8px var(--qa-mobile-gutter) 12px!important;
     scrollbar-width:none;
   }
@@ -112,16 +139,29 @@ body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-boundary-note{position:absolut
     max-width:88%;
     text-align:left;
   }
-  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-empty{
-    width:calc(100% - 2 * var(--qa-mobile-gutter));
-    margin:12px auto;
+  html body.studio-enabled[data-studio-hub=ai-qa]
+  #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaEmpty:not([hidden]){
+    grid-area:2 / 1;
+    align-self:center;
+    position:static!important;
+    box-sizing:border-box;
+    width:calc(100% - 2 * var(--qa-mobile-gutter))!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0 auto!important;
+    translate:none!important;
+    transform:none!important;
   }
+  body.studio-enabled[data-studio-hub=ai-qa] .ai-qa-status{grid-row:3;}
   /* The mobile app shell already ends above the dock, including its safe area. */
   html body.studio-enabled[data-studio-hub=ai-qa]
   #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaForm{
+    grid-row:4;
+    display:flex!important;
     position:relative!important;
     inset:auto!important;
-    flex:none;
+    height:auto!important;
+    min-height:0!important;
     box-sizing:border-box;
     width:calc(100% - 2 * var(--qa-mobile-gutter))!important;
     margin:0 auto 8px!important;
