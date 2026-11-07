@@ -129,7 +129,17 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
    await page.waitForFunction(()=>document.querySelectorAll('.ai-qa-message.assistant').length===2);
    assert.equal(received.lesson.content.intentInfo.targetAiMessageId,targetAiId,'suggestion must reference the correct AI response');
    assert.equal(received.lesson.content.intentInfo.intent,'edge_case_exploration','context shift suggestion routes to the intended pedagogical branch');
-   assert.equal(received.lesson.content.intentInfo.evidencePolicy,'question_only','suggestions must not count as proof of weakness');await page.evaluate(()=>window.__qaEmit([{id:'chat-remote',title:'Chat từ điện thoại',messages:[{id:'remote-1',role:'user',text:'Tin nhắn từ điện thoại',createdAt:Date.now()}],createdAt:Date.now(),updatedAt:Date.now(),deleted:false}]));await page.locator('#aiQaHistoryToggle').click();await page.locator('#aiQaHistory').waitFor({state:'visible'});assert.ok(await page.locator('.ai-qa-conversation').count()>=2,'realtime listener merges the other device');assert.ok((await page.locator('.ai-qa-conversation').allTextContents()).some(text=>text.includes('Chat từ điện thoại')));await page.locator('.ai-qa-conversation-more').first().click();assert.equal(await page.locator('.ai-qa-conversation-menu').first().isVisible(),true);await page.locator('#aiQaHistoryClose').click();  // Regression: changing chats during a stalled request must abort the stale request,
+   assert.equal(received.lesson.content.intentInfo.evidencePolicy,'question_only','suggestions must not count as proof of weakness');await page.evaluate(()=>window.__qaEmit([{id:'chat-remote',title:'Chat từ điện thoại',messages:[{id:'remote-1',role:'user',text:'Tin nhắn từ điện thoại',createdAt:Date.now()}],createdAt:Date.now(),updatedAt:Date.now(),deleted:false}]));await page.locator('#aiQaHistoryToggle').click();await page.locator('#aiQaHistory').waitFor({state:'visible'});assert.ok(await page.locator('.ai-qa-conversation').count()>=2,'realtime listener merges the other device');assert.ok((await page.locator('.ai-qa-conversation').allTextContents()).some(text=>text.includes('Chat từ điện thoại')));
+  for(const row of [0,1]){
+    const more=page.locator('.ai-qa-conversation-more').nth(row);
+    await more.click();
+    const menu=page.locator('.ai-qa-conversation-menu').nth(row);
+    await menu.waitFor({state:'visible'});
+    const borders=await menu.locator('button').evaluateAll(buttons=>buttons.map(button=>getComputedStyle(button).borderWidth));
+    assert.deepEqual(borders,['0px','0px'],'history menu actions are borderless on every row');
+    await more.click();
+  }
+  await page.locator('#aiQaHistoryClose').click();  // Regression: changing chats during a stalled request must abort the stale request,
   // unlock the composer, and prevent the earlier response from overwriting new chat.
   await page.evaluate(()=>{
     const original=window.fetch;
