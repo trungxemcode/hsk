@@ -395,3 +395,101 @@ body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-title-text{
     animation:ai-qa-title-marquee 7s ease-in-out infinite alternate;
   }
 }
+
+/* Mobile chat frame: keep the composer inside the viewport and leave an even
+   breathing gap above the fixed bottom navigation. */
+@media (max-width:720px){
+  body.studio-enabled[data-studio-hub="ai-qa"] main.workspace{
+    display:flex!important;
+    flex:1 1 auto!important;
+    flex-direction:column!important;
+    width:100%!important;
+    max-width:none!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:14px 16px calc(14px + env(safe-area-inset-bottom))!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel{
+    position:relative!important;
+    flex:1 1 auto!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    border-radius:20px!important;
+    overflow:hidden!important;
+    box-sizing:border-box!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-shell{
+    position:relative!important;
+    inset:auto!important;
+    display:flex!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    border-radius:inherit!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-chat{
+    display:flex!important;
+    flex:1 1 auto!important;
+    min-height:0!important;
+    width:100%!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-chatbar{
+    flex:none!important;
+    min-height:62px!important;
+    padding:10px 18px!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-learning-strip{display:none!important;}
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-messages{
+    flex:1 1 auto!important;
+    width:100%!important;
+    min-height:0!important;
+    box-sizing:border-box!important;
+    padding:14px 18px 10px!important;
+    overflow-y:auto!important;
+    margin-bottom:140px!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-form{
+    position:relative!important;
+    inset:auto!important;
+    flex:none!important;
+    width:calc(100% - 36px)!important;
+    margin:8px 18px 12px!important;
+    box-sizing:border-box!important;
+    padding:8px 10px 8px 14px!important;
+    border-radius:999px!important;
+  }
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-status{flex:none!important;min-height:0!important;}
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-message{width:100%!important;}
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-message.user{align-self:stretch!important;text-align:right!important;}
+  body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-message.user p{max-width:88%!important;display:inline-block!important;}
+  html body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaMessages{
+    height:auto!important;
+    max-height:none!important;
+    translate:none!important;
+    transform:none!important;
+  }
+  html body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaEmpty{
+    translate:none!important;
+    transform:none!important;
+  }
+  html body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaForm{
+    position:fixed!important;
+    z-index:20!important;
+    right:16px!important;
+    bottom:calc(var(--mobile-dock-height,67px) + 14px + env(safe-area-inset-bottom))!important;
+    left:16px!important;
+    width:auto!important;
+    height:auto!important;
+    max-height:none!important;
+    margin:0!important;
+    translate:none!important;
+    transform:none!important;
+  }
+  html body.studio-enabled[data-studio-hub="ai-qa"] #aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel #aiQaMessages{
+    margin-bottom:140px!important;
+  }
+}
