@@ -8,7 +8,9 @@
    messages.scrollHeight-messages.clientHeight-messages.scrollTop<=80;
  }
  function scrollToLatest(){
-  messages.scrollTo({top:messages.scrollHeight,behavior:'instant'});
+  // scrollTop works in Safari, Chromium and lightweight DOM test environments.
+  // Direct assignment also avoids smooth-scroll animation when restoring a chat.
+  messages.scrollTop=messages.scrollHeight;
   updateJumpToLatest();
  }
  messages.addEventListener('scroll',updateJumpToLatest,{passive:true});
