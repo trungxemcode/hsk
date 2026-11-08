@@ -144,7 +144,44 @@
    });
   }finally{db.close();}
  }
- window.HSKQaProjectSources={readLink,readFile,select,tidy,
+ function bindChatAttachment(form){
+  const make=(tag,cls)=>{const node=document.createElement(tag);node.className=cls;return node;};
+  const plus=make('button','qa-chat-attach'),picker=make('input','qa-chat-file');
+  const preview=make('div','qa-chat-file-preview'),caption=make('span','qa-chat-file-name');
+  const remove=make('button','qa-chat-file-remove');
+  plus.type=remove.type='button';
+  plus.textContent='+';plus.title='Đính kèm tệp';plus.setAttribute('aria-label','Đính kèm tệp');
+  remove.textContent='×';remove.setAttribute('aria-label','Bỏ tệp đính kèm');
+  picker.type='file';picker.hidden=true;
+  picker.accept='.pdf,.docx,.xlsx,.pptx,.txt,.md,.csv,.tsv';
+  picker.setAttribute('aria-label','Chọn tệp đính kèm');
+  caption.setAttribute('role','status');
+  preview.append(caption,remove);preview.hidden=true;
+  form.prepend(preview,plus,picker);
+  let revision=0,attachment=null,loading=false,failed=false;
+  function clear(){
+   revision++;attachment=null;loading=false;failed=false;picker.value='';
+   preview.hidden=true;caption.textContent='';remove.hidden=false;
+  }
+  plus.onclick=()=>picker.click();
+  remove.onclick=clear;
+  picker.onchange=async()=>{
+   const file=picker.files[0];if(!file)return;
+   clear();const token=revision;
+   loading=true;preview.hidden=false;caption.textContent='Đang đọc '+file.name+'…';
+   try{
+    const item=await readFile(file);
+    if(token!==revision)return;
+    if(!item.text)throw Error('Tệp này không có văn bản đọc được.');
+    attachment=item;caption.textContent=item.name;
+   }catch(error){
+    if(token!==revision)return;
+    failed=true;caption.textContent=error.message||'Chưa đọc được tệp.';
+   }finally{if(token===revision)loading=false;}
+  };
+  return {clear,get attachment(){return attachment;},get blocked(){return loading||failed;}};
+ }
+ window.HSKQaProjectSources={readLink,readFile,select,tidy,bindChatAttachment,
   storeFile:(id,file)=>fileStore('readwrite',store=>store.put(file,id)),
   getFile:id=>fileStore('readonly',store=>store.get(id)),
   removeFile:id=>fileStore('readwrite',store=>store.delete(id))

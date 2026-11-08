@@ -59,6 +59,14 @@
       ]
     },
     {
+      "id": "ai-qa-chat-attachments",
+      "name": "Đính kèm tài liệu vào cuộc trò chuyện AI",
+      "checks": [
+        {"kind": "contains", "file": "src/modules/ai-coach/qa-project-sources.js", "value": "bindChatAttachment"},
+        {"kind": "contains", "file": "src/modules/ai-coach/ai-qa.js", "value": "attachmentName"}
+      ]
+    },
+    {
       "id": "navigation-home",
       "name": "Trang tổng quan",
       "checks": [

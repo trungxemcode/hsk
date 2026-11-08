@@ -374,11 +374,18 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   await page.locator('#qaProjectLink').fill('https://example.test/lesson');
   await page.locator('#qaProjectLinkForm button').click();
   await page.getByText('Nguồn tiếng Trung',{exact:true}).waitFor();
+  const projectComposer=page.locator('#qaProjectChatForm');
+  await projectComposer.getByRole('button',{name:'Đính kèm tệp'}).click();
+  await projectComposer.locator('input[type=file]').setInputFiles({
+    name:'ghi-chu.txt',mimeType:'text/plain',buffer:Buffer.from('Ghi chú đính kèm dự án')
+  });
+  await projectComposer.getByText('ghi-chu.txt',{exact:true}).waitFor();
   await page.locator('#qaProjectQuestion').fill('Giải thích từ 生词');
   await page.locator('#qaProjectChatForm button[type=submit]').click();
   await page.locator('.ai-qa-message.assistant').waitFor();
   assert.deepEqual(received.lesson.content.learning_snapshot,{},'private project does not send global study memory');
   const directive=received.lesson.content.intentInfo.directiveVi;
+  assert.match(directive,/Ghi chú đính kèm dự án/);
   assert.match(directive,/生词 dùng để nói về từ mới/);
   assert.match(directive,/生词是新学的词语/);
   assert.ok(directive.indexOf('example.test')<directive.indexOf('tu-vung.txt'),'web excerpts precede files');
@@ -419,6 +426,21 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
     await page.locator('#aiQaSend').click();
   };
   const lastReply=page.locator('#aiQaMessages .assistant').last();
+  const composer=page.locator('#aiQaForm');
+  const picker=composer.locator('input[type=file]');
+  await picker.setInputFiles({name:'bo-qua.txt',mimeType:'text/plain',buffer:Buffer.from('Không gửi đoạn này')});
+  await composer.getByText('bo-qua.txt',{exact:true}).waitFor();
+  await composer.getByRole('button',{name:'Bỏ tệp đính kèm'}).click();
+  assert.equal(await composer.getByText('bo-qua.txt',{exact:true}).isVisible(),false);
+  await picker.setInputFiles({name:'bai-hoc.txt',mimeType:'text/plain',buffer:Buffer.from('Nội dung tệp thường')});
+  await composer.getByText('bai-hoc.txt',{exact:true}).waitFor();
+  await page.locator('#aiQaInput').focus();
+  assert.equal(await page.locator('#aiQaInput').evaluate(input=>getComputedStyle(input).outlineStyle),'none');
+  await page.locator('#aiQaSend').click();
+  await page.getByText('Tệp: bai-hoc.txt',{exact:true}).waitFor();
+  await page.waitForFunction(()=>!document.getElementById('aiQaSend').disabled);
+  assert.match(received.lesson.content.intentInfo.directiveVi,/Nội dung tệp thường/);
+  assert.doesNotMatch(received.lesson.content.intentInfo.directiveVi,/Không gửi đoạn này/);
   const lastRequest=received;
   const knownWord=await page.evaluate(()=>['你','我','学习'].find(han=>HSKDictionaryBridge.lookupExact(han)));
   assert.ok(knownWord,'test requires a word from the offline dictionary');
