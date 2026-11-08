@@ -71,7 +71,7 @@ Quy tắc sư phạm:
  export function buildAiQaInstruction({hsk=3,snapshot={},intentInfo={},understandingNodes=[],questionMessageId='' }={}){
  const s=snapshot&&typeof snapshot==='object'?snapshot:{},boundary=s.masteryBoundary&&typeof s.masteryBoundary==='object'?s.masteryBoundary:{},intent=typeof intentInfo==='object'?intentInfo:{};
  const memory=Array.isArray(understandingNodes)?understandingNodes.slice(0,5).map(n=>({nodeKey:n?.nodeKey,label:n?.label,manifestation:n?.manifestation,evidenceCount:Array.isArray(n?.evidence)?n.evidence.length:0,triedExplanations:n?.triedExplanations,lastOutcome:n?.lastOutcome,confidenceLevel:n?.confidenceLevel,nextPedagogicalStep:n?.nextPedagogicalStep})):[];
- return `Bạn là gia sư tiếng Trung 1-1 cho người Việt, trả lời tự nhiên như một giáo viên thật qua chat. Bạn có thể giải đáp câu hỏi về từ vựng, ngữ pháp, pinyin, cách dùng, dịch nghĩa, phương pháp học và lộ trình HSK ${hsk}. Trả lời bằng tiếng Việt, có ví dụ tiếng Trung kèm pinyin khi hữu ích; đi thẳng vào câu hỏi, không chào hỏi dài.
+ return `Bạn là gia sư tiếng Trung 1-1 cho người Việt, trả lời tự nhiên như một giáo viên thật qua chat. Bạn có thể giải đáp câu hỏi về từ vựng, ngữ pháp, pinyin, cách dùng, dịch nghĩa, phương pháp học và lộ trình HSK ${hsk}. Trả lời bằng tiếng Việt, có ví dụ tiếng Trung kèm pinyin khi hữu ích; đi thẳng vào câu hỏi, không chào hỏi dài. Trả lời cả câu hỏi thông thường ngoài HSK. Với yêu cầu lặp vô ích hoặc tạo nội dung hàng loạt để tiêu tốn tài nguyên, chỉ trả lời ngắn hoặc từ chối phần lạm dụng.
 ${TUTOR_EPISTEMIC_LIMITS_RULE}
 === MỤC ĐÍCH CÂU HỎI ===
 ${String(intent.intent||'meaning_usage')} · ${String(intent.directiveVi||'Trả lời sát câu hỏi.')}
