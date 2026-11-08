@@ -648,3 +648,59 @@ html body.studio-enabled #qaProjectHome .qa-project-tabs button:is(:hover,:focus
   #qaProjectHome .qa-project-title-row h2{font-size:21px;}
   #qaProjectChatForm button{width:44px;height:44px;min-height:44px;}
 }
+
+/* The two chat composers share a single surface and outer focus indicator. */
+html body.studio-enabled[data-studio-hub="ai-qa"]
+#aiQaPanel#aiQaPanel#aiQaPanel#aiQaPanel :is(#aiQaForm,#qaProjectChatForm).qa-chat-composer{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:4px 6px;
+  box-sizing:border-box;
+  padding:4px 6px!important;
+  border:1px solid var(--qa-input-border);
+  border-radius:26px!important;
+  background:var(--qa-surface);
+  box-shadow:none;
+}
+#aiQaPanel :is(#aiQaForm,#qaProjectChatForm).qa-chat-composer:focus-within{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+}
+#aiQaPanel .qa-chat-composer :is(#aiQaInput,#qaProjectQuestion){
+  flex:1 1 0;
+  min-width:0;
+  padding:7px 4px;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:var(--palette-clear)!important;
+  color:var(--qa-text);
+  font-size:16px;
+}
+#aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaSend,button[type=submit]){
+  --button-bg:var(--palette-clear);
+  --button-text:var(--qa-text);
+  --button-active-bg:var(--qa-hover);
+  --button-active-text:var(--qa-text);
+  display:grid;
+  place-items:center;
+  flex:0 0 40px;
+  width:40px;
+  height:40px;
+  min-height:40px;
+  padding:0;
+  border:0!important;
+  border-radius:var(--radius-pill);
+}
+#aiQaPanel .qa-chat-composer .qa-chat-attach{font-size:24px;line-height:1;}
+.qa-chat-file[hidden],.qa-chat-file-preview[hidden]{display:none!important;}
+.qa-chat-file-preview{display:flex;align-items:center;gap:6px;flex:0 0 100%;min-width:0;padding-inline:8px;box-sizing:border-box;}
+.qa-chat-file-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--qa-subtle);font-size:13px;}
+#qaProjectChatForm .qa-chat-file-remove,.qa-chat-file-remove{width:32px;height:32px;min-height:32px;flex:none;padding:0;border-radius:var(--radius-pill);}
+.qa-chat-sent-file{display:block;color:var(--qa-subtle);font-size:12px;overflow-wrap:anywhere;}
+@media(max-width:720px){
+  #aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaSend,button[type=submit]){
+    flex-basis:44px;width:44px;height:44px;min-height:44px;
+  }
+}
