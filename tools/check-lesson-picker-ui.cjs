@@ -6,9 +6,21 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
  try{for(const width of [320,390,430,1440])for(const theme of ['light','dark']){
   const p=await b.newPage({viewport:{width,height:844},hasTouch:width<721,isMobile:width<721,serviceWorkers:'block'}),errors=[];p.on('pageerror',e=>errors.push(e.message));
   await p.route('https://**/*',r=>r.abort());await p.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));
+  const origin='http://127.0.0.1:'+server.address().port;
+  await p.route('**/site-design-config.json',r=>r.fulfill({json:{enabled:true,endpoint:origin+'/test-design',publicOrigins:[origin]}}));
+  await p.route('**/test-design',r=>r.fulfill({json:{revision:'lesson-flow-regression',css:
+   'html body.show-lessons.lesson-focus #lessonsPanel#lessonsPanel#lessonsPanel #lessonsContent > section:nth-of-type(1) > details:nth-of-type(1) > summary {translate:0 -46px!important;color:rgb(12,34,56)!important}'+
+   'html body.show-lessons.lesson-focus #lessonsPanel#lessonsPanel#lessonsPanel #lessonsContent > div:nth-of-type(1) > button {translate:0 -41px!important}'}}));
   await p.goto('http://127.0.0.1:'+server.address().port+'/index.html');await p.waitForFunction(()=>window.HSKMobileUX&&window.HSKLessonNav);
   await p.evaluate(async theme=>{document.documentElement.dataset.theme=theme;HSKStudio.navigate('lessons');history.replaceState(null,'','#lesson/standard-3-01');await HSKLessonNav.open();},theme);
   const picker=p.getByLabel('Chọn mục bài học',{exact:true});await p.locator('.lesson-section-nav').waitFor();
+  await p.locator('#hsk-live-design').waitFor({state:'attached'});
+  const mastery=p.locator('.lesson-mastery'),summary=mastery.locator('summary');
+  await summary.waitFor({state:'visible'});
+  assert.equal(await summary.evaluate(n=>getComputedStyle(n).translate),'none');
+  assert.equal(await summary.evaluate(n=>getComputedStyle(n).color),'rgb(12, 34, 56)');
+  const meterBounds=await mastery.boundingBox(),navBounds=await p.locator('.lesson-section-nav').boundingBox();
+  assert.ok(navBounds.y>=meterBounds.y+meterBounds.height-1,'lesson navigation stays below the progress card');
   assert.equal(await picker.isVisible(),width<721);assert.deepEqual(await picker.locator('option').evaluateAll(ns=>ns.map(n=>n.value)),['overview','reading','grammar','practice']);
   const before=await p.evaluate(()=>localStorage.getItem('hsk-course-lessons-v1'));
   for(const [id,label] of [['overview','Từ vựng'],['reading','Đọc & hội thoại'],['grammar','Ngữ pháp'],['practice','Luyện tập']]){

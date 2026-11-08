@@ -4,7 +4,20 @@
  if(new URLSearchParams(location.search).has('home-designer-preview'))return;
  const script=document.currentScript,configURL=new URL('./site-design-config.json',script.src),key='hsk-live-design-v1';
  let endpoint='',revision='',etag='',timer=null,working=false,delay=15000;
- function apply(css,rev){if(typeof css!=='string'||css.length>2000000||typeof rev!=='string')return;let style=document.getElementById('hsk-live-design');if(!style){style=document.createElement('style');style.id='hsk-live-design';document.head.append(style);}style.textContent=css;revision=rev;window.dispatchEvent(new CustomEvent('hsk-design-updated',{detail:{revision:rev}}));}
+ // Layout on these routes follows the responsive document flow. Old Designer
+ // object rules use ordinal selectors that can point at a different element after a redesign.
+ const responsiveGeometry=/^(?:--hsk-design-[xy]|translate|transform(?:-origin)?|position|inset(?:-.*)?|top|right|bottom|left|z-index|display|overflow(?:-.*)?|(?:min-|max-)?(?:width|height|inline-size|block-size)|margin(?:-.*)?|padding(?:-.*)?|(?:row-|column-)?gap|grid(?:-.*)?|flex(?:-.*)?|order|(?:align|justify)-.*)$/;
+ function protectResponsiveLayout(rules){
+  for(const rule of rules){
+   if(rule.cssRules)protectResponsiveLayout(rule.cssRules);
+   const selector=rule.selectorText||'';
+   const scoped=/#(?:studioHome#studioHome#studioHome|lessonsPanel#lessonsPanel#lessonsPanel)\b/.test(selector);
+   const fixedLayoutTarget=/#(?:homeDailyWord|homeQuery|planSetup)\b|#lessonsPanel\s*$/.test(selector);
+   if(!rule.style||!scoped||!(selector.includes(':nth-of-type(')||fixedLayoutTarget))continue;
+   for(const property of Array.from(rule.style))if(responsiveGeometry.test(property))rule.style.removeProperty(property);
+  }
+ }
+ function apply(css,rev){if(typeof css!=='string'||css.length>2000000||typeof rev!=='string')return;let style=document.getElementById('hsk-live-design');if(!style){style=document.createElement('style');style.id='hsk-live-design';document.head.append(style);}style.textContent=css;if(style.sheet)protectResponsiveLayout(style.sheet.cssRules);revision=rev;window.dispatchEvent(new CustomEvent('hsk-design-updated',{detail:{revision:rev}}));}
  function schedule(){clearTimeout(timer);if(endpoint&&!document.hidden&&navigator.onLine!==false)timer=setTimeout(check,delay);}
  async function check(){
   clearTimeout(timer);if(working||!endpoint||document.hidden||navigator.onLine===false)return;working=true;

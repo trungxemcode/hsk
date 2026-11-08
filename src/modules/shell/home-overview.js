@@ -6,7 +6,10 @@ const make=(tag,label,cls)=>{const n=document.createElement(tag);if(label)n.text
 home.classList.add('overview-v216');
 const meter=make('div',null,'overview-time'),time=make('span'),progress=make('progress');progress.max=1;progress.value=0;progress.setAttribute('aria-label','Thời gian học hôm nay');meter.append(time,progress);
 const lesson=make('p',null,'overview-lesson');hero.querySelector('.mobile-hero-cta').before(meter,lesson);
-const planAnchor=document.createComment('overview plan original');$('planToday').before(planAnchor);
+const primary=home.querySelector('.dashboard-primary'),side=home.querySelector('.dashboard-side');
+const today=$('planToday'),settingsPanel=$('homePlanSettings');
+const placement=$('placementEntry'),placementAnchor=document.createComment('overview placement original');
+placement?.before(placementAnchor);
 const tasks=make('details',null,'overview-tasks');tasks.append(make('summary','Nhiệm vụ hôm nay'));hero.append(tasks);
 const desktopHero=home.querySelector('.feature-hero .hero-button');if(desktopHero)desktopHero.addEventListener('click',e=>{if(!window.HSKPlanner?.plan||!$('planContinue'))return;e.preventDefault();e.stopImmediatePropagation();$('planContinue').click();},true);
 const notice=$('updateNotice'),noticeAnchor=document.createComment('overview update original');notice.before(noticeAnchor);
@@ -19,19 +22,43 @@ grid.replaceChildren(srs,quiz,flash,saved);write(home.querySelector('.dashboard-
 const badge=make('span',null,'overview-due');badge.id='homeDueBadge';srs.append(badge);
 const streak=button('',()=>window.HSKStudio?.navigate('profile'));streak.id='homeStreak';streak.setAttribute('aria-label','Chuỗi ngày học');$('headerInfo').before(streak);
 const wordBox=make('section',null,'overview-word'),wordHead=make('div',null,'overview-word-head'),wordDetails=make('details'),summary=make('summary'),han=make('strong'),pin=make('span'),meaning=make('span'),wordBody=make('div',null,'overview-word-body'),wordRow=make('div',null,'overview-word-row'),sound=make('div',null,'overview-word-sound');
+const progressCard=make('section',null,'overview-progress-card'),knownStat=make('p'),dueStat=make('p');
+progressCard.append(make('h3','Tiến độ học'),knownStat,dueStat,button('Xem hồ sơ →',()=>window.HSKStudio?.navigate('profile')));
+side.prepend(progressCard);
 let offset=0,current=null,signature='',frame=0,lastMobile=null;
 wordBox.id='homeDailyWord';wordHead.append(make('h3','Từ vựng hôm nay'),button('Đổi từ ↻',()=>{offset++;render();}));summary.append(han,pin,meaning);wordDetails.append(summary,wordBody);wordRow.append(wordDetails,sound);wordBox.append(wordHead,wordRow);home.querySelector('.dashboard-grid').after(wordBox);wordBox.after(searchDetails);
-// The desktop daily word stays above placement and planner cards.
+// The phone keeps the daily word first; desktop uses it as the first supporting card.
 function pool(){try{return typeof words!=='undefined'?words:[];}catch{return [];}}
 function render(){frame=0;const p=window.HSKPlanner?.plan,key=new Date(Date.now()+7*3600000).toISOString().slice(0,10),seconds=Math.max(0,Number(p?.journal?.[key]?.seconds)||0),minutes=Math.floor(seconds/60);
-const mobile=document.body.classList.contains('mobile-ux');if(mobile&&hero.previousElementSibling!==wordBox)hero.before(wordBox);else if(!mobile&&home.firstElementChild!==wordBox)home.prepend(wordBox);if(mobile&&$('planToday').parentElement!==tasks)tasks.append($('planToday'));else if(!mobile&&$('planToday').parentElement===tasks)planAnchor.after($('planToday'));
-if(mobile!==lastMobile){searchDetails.open=!mobile;lastMobile=mobile;}
+const mobile=document.body.classList.contains('mobile-ux');
+if(mobile!==lastMobile){
+ if(mobile){
+  hero.before(wordBox);
+  tasks.append(today);
+  if(placement)placementAnchor.after(placement);
+ }else{
+  side.prepend(wordBox);
+  primary.prepend(today);
+  today.after(settingsPanel);
+  if(placement)settingsPanel.after(placement);
+ }
+ searchDetails.open=!mobile;
+ lastMobile=mobile;
+}
+if(!mobile){
+ const feature=desktopHero?.closest('.feature-hero');
+ if(feature){
+  const anchor=placement||settingsPanel;
+  if(p&&anchor.nextElementSibling!==feature)anchor.after(feature);
+  if(!p&&primary.firstElementChild!==feature)primary.prepend(feature);
+ }
+}
 if(document.body.dataset.studioHub==='home'){if(notice.parentElement!==home)home.prepend(notice);}else if(notice.parentElement===home)noticeAnchor.after(notice);
 meter.hidden=!p;tasks.hidden=!p;if(p){write(time,`${minutes} / ${p.minutes} phút hôm nay`);const value=Math.min(1,seconds/(Math.max(1,p.minutes)*60));if(progress.value!==value)progress.value=value;}
 const task=$('planTasks')?.children[2]?.querySelector('p');write(lesson,p?(task?.textContent||'Chọn bài tiếp theo trong lộ trình'):'Từ vựng, hội thoại và bài tập theo từng bài.');
 if(desktopHero){const match=task?.textContent.match(/^Bài\s+(\d+)/),label=p?(match?'Học tiếp · Bài '+match[1]+' ':'Học tiếp · HSK '+p.target+' '):'Khám phá bài học ';if(desktopHero.firstChild?.nodeType===Node.TEXT_NODE&&desktopHero.firstChild.nodeValue!==label)desktopHero.firstChild.nodeValue=label;const heading=home.querySelector('.feature-copy h3');if(heading)write(heading,p?'Hôm nay · HSK '+p.target:'Bài học HSK 1–6');}
 const title=hero.querySelector('h2');if(p)title.setAttribute('aria-label','Mục tiêu hôm nay · HSK '+p.target);
-const due=Number($('studioHomeDue').textContent)||0;write(badge,String(due));badge.hidden=!due;write(srs.querySelector('small'),due?`${due} từ đến hạn`:'Chưa có từ đến hạn');
+const due=Number($('studioHomeDue').textContent)||0;write(knownStat,$('studioKnownCount').textContent);write(dueStat,due+' từ đến hạn ôn');write(badge,String(due));badge.hidden=!due;write(srs.querySelector('small'),due?`${due} từ đến hạn`:'Chưa có từ đến hạn');
 write(flash.querySelector('small'),$('studioProgressLabel').textContent+' · '+$('studioKnownCount').textContent.split(' · ')[0]);const count=Object.values(window.HSKNotebook?.items||{}).filter(w=>w&&typeof w.han==='string'&&typeof w.mean==='string').length;write(saved.querySelector('small'),`${count} từ đã lưu`);
 const days=$('studioStreak').textContent.match(/\d+/)?.[0]||'0';write(streak,'🔥 '+days);streak.setAttribute('aria-label',`Chuỗi học tập: ${days} ngày. Mở tài khoản`);
 extras.hidden=$('homeAssessment').hidden&&$('mobileHeroResult').hidden;
