@@ -36,7 +36,7 @@
 <script src="./src/modules/lessons/lesson-mastery.js" defer=""></script>
 <script type="module" src="./src/shared/tutor-contracts.mjs"></script><script type="module" src="./src/modules/practice/question-adapter.mjs"></script><script src="./src/modules/ai-coach/coach-profile.js" defer></script><script src="./src/modules/ai-coach/tutor-loop-engine.js" defer></script><script src="./src/modules/ai-coach/ai-coach-core.js" defer></script><script src="./src/modules/ai-coach/ai-qa-core.js" defer></script><script src="./src/modules/ai-coach/qa-intent-router.js" defer></script><script src="./src/modules/ai-coach/qa-understanding-memory.js" defer></script><script src="./src/modules/ai-coach/ai-qa-suggestions-ui.js" defer></script>
 <script src="./src/modules/ai-coach/ai-coach-images.js" defer></script>
-<script src="./src/modules/ai-coach/ai-coach.js" defer></script><script src="./src/modules/ai-coach/ai-teacher.js" defer></script><script src="./src/modules/ai-coach/ai-qa.js" defer></script>
+<script src="./src/modules/ai-coach/ai-coach.js" defer></script><script src="./src/modules/ai-coach/ai-teacher.js" defer></script><script src="./src/modules/ai-coach/qa-project-sources.js" defer></script><script src="./src/modules/ai-coach/qa-projects.js" defer></script><script src="./src/modules/ai-coach/ai-qa.js" defer></script>
 <script src="./src/modules/lessons/lesson-mini.js" defer></script>
 <link rel="stylesheet" href="./speech.css"><script src="./src/modules/speech/voice-store.js" defer=""></script><script src="./src/modules/speech/voice-manager.js" defer=""></script><script src="./src/modules/speech/speech.js" defer=""></script><script src="./src/modules/speech/voice-settings.js" defer=""></script>
 <link rel="stylesheet" href="./lesson-guided.css"><script src="./src/modules/lessons/lesson-guided-core.js" defer></script><script src="./src/modules/lessons/lesson-guided.js" defer></script>
@@ -164,12 +164,51 @@
       <aside id="aiQaHistory" class="ai-qa-history" aria-label="Các cuộc trò chuyện gần đây" hidden>
         <div class="ai-qa-history-head"><strong>Cuộc trò chuyện</strong><button id="aiQaHistoryClose" type="button" aria-label="Đóng danh sách cuộc trò chuyện">×</button></div>
         <button id="aiQaNewChat" class="ai-qa-new-chat" type="button"><span aria-hidden="true">＋</span> Đoạn chat mới</button>
+        <div class="qa-project-sidebar">
+          <strong>Dự án</strong><button id="qaProjectCreate" type="button">＋ Tạo dự án</button>
+          <div id="qaProjectFolders"></div>
+        </div>
         <div id="aiQaConversationList" class="ai-qa-conversation-list" role="list"></div>
       </aside>
+      <section id="qaProjectHome" class="qa-project-home" hidden aria-labelledby="qaProjectTitle">
+        <button id="qaProjectExit" type="button">← Hỏi đáp AI</button>
+        <div class="qa-project-content">
+          <h2 id="qaProjectTitle"></h2>
+          <form id="qaProjectChatForm" class="qa-project-form">
+            <input id="qaProjectQuestion" aria-label="Tin nhắn mới trong dự án" maxlength="500" required>
+            <button type="submit" aria-label="Gửi tin nhắn">↑</button>
+          </form>
+          <div class="qa-project-tabs">
+            <button id="qaProjectChatsTab" type="button" aria-pressed="true">Trò chuyện</button>
+            <button id="qaProjectSourcesTab" type="button" aria-pressed="false">Nguồn</button>
+          </div>
+          <div id="qaProjectChats"></div>
+          <div id="qaProjectSources" hidden>
+            <form id="qaProjectLinkForm" class="qa-project-form">
+              <input id="qaProjectLink" type="url" maxlength="1000" required placeholder="https://…" aria-label="Link nguồn">
+              <button type="submit">Thêm link</button>
+            </form>
+            <label for="qaProjectFile">Tải tệp từ thiết bị</label>
+            <input id="qaProjectFile" type="file">
+            <p>AI ưu tiên nội dung từ link rồi đến tệp. Với nguồn chưa đọc được chữ, dùng ô văn bản để bổ sung.</p>
+            <div id="qaProjectSourceList"></div>
+          </div>
+          <p id="qaProjectStatus" role="status"></p>
+        </div>
+      </section>
+      <dialog id="qaProjectDialog" class="qa-project-dialog" aria-labelledby="qaProjectDialogTitle">
+        <form id="qaProjectCreateForm">
+          <header><h2 id="qaProjectDialogTitle">Tạo dự án</h2><button id="qaProjectCancel" type="button" aria-label="Đóng">×</button></header>
+          <label for="qaProjectName">Tên dự án</label>
+          <input id="qaProjectName" maxlength="64" placeholder="Ví dụ: Ôn HSK 4" required>
+          <p>Lưu cuộc trò chuyện và nguồn học theo từng chủ đề trên thiết bị này.</p>
+          <footer><label>Bộ nhớ riêng <input id="qaProjectPrivate" type="checkbox" role="switch"></label><button type="submit">Tạo dự án</button></footer>
+        </form>
+      </dialog>
       <div class="ai-qa-chat">
         <header class="ai-qa-chatbar">
           <button id="aiQaHistoryToggle" class="ai-qa-history-toggle" type="button" aria-expanded="false" aria-controls="aiQaHistory"><span aria-hidden="true">☰</span><span>Gần đây</span></button>
-          <div class="ai-qa-chat-title"><strong id="aiQaConversationTitle">Hỏi đáp AI</strong><small>Gia sư AI · HSK</small></div>
+          <button id="qaProjectBack" type="button" hidden aria-label="Về dự án">←</button><div class="ai-qa-chat-title"><strong id="aiQaConversationTitle">Hỏi đáp AI</strong><small>Gia sư AI · HSK</small></div>
           <span class="ai-qa-level-note">Theo mục tiêu HSK của app</span>
         </header>
         <div class="ai-qa-learning-strip"><span class="ai-qa-learning-dot" aria-hidden="true"></span><span id="aiQaSnapshot" role="status"></span></div>

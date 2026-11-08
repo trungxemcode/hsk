@@ -40,6 +40,16 @@
       ]
     },
     {
+      "id": "ai-qa-projects",
+      "name": "Dự án riêng trong Hỏi đáp AI",
+      "checks": [
+        {"kind": "id", "file": "index.html", "value": "qaProjectPrivate"},
+        {"kind": "id", "file": "index.html", "value": "qaProjectSources"},
+        {"kind": "file", "file": "src/modules/ai-coach/qa-projects.js", "value": ""},
+        {"kind": "file", "file": "src/modules/ai-coach/qa-project-sources.js", "value": ""}
+      ]
+    },
+    {
       "id": "navigation-home",
       "name": "Trang tổng quan",
       "checks": [

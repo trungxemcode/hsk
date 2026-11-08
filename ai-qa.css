@@ -535,3 +535,29 @@ body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-jump-to-latest:not([hidden])
   stroke-linecap:round;
   stroke-linejoin:round;
 }
+
+/* Project folders and project home use the existing chat palette. */
+.qa-project-sidebar{padding:10px 14px;color:var(--qa-text);}
+.qa-project-sidebar>strong{display:block;margin-bottom:6px;}
+#qaProjectFolders{max-height:26vh;overflow:auto;}
+#qaProjectFolders button,#qaProjectChats button{display:block;width:100%;text-align:left;margin-block:4px;overflow-wrap:anywhere;}
+.qa-project-home[hidden],.ai-qa-chat[hidden],#qaProjectBack[hidden],
+#qaProjectChats[hidden],#qaProjectSources[hidden]{display:none!important;}
+.qa-project-home{flex:1;min-width:0;min-height:0;overflow:auto;padding:16px 20px;background:var(--qa-bg);color:var(--qa-text);}
+.qa-project-content{width:min(100%,760px);margin:26px auto 0;}
+.qa-project-content h2{margin:0 0 16px;overflow-wrap:anywhere;}
+.qa-project-form{display:flex;align-items:center;gap:8px;margin:0 0 12px;}
+.qa-project-form input{flex:1;min-width:0;font-size:16px;}
+.qa-project-tabs{display:flex;gap:8px;margin:12px 0;}
+.qa-project-dialog{box-sizing:border-box;width:min(440px,calc(100vw - 32px));padding:20px;border:1px solid var(--qa-input-border);border-radius:var(--radius-card);background:var(--qa-surface);color:var(--qa-text);}
+.qa-project-dialog::backdrop{background:var(--legacy-hex-14152e78);}
+.qa-project-dialog header,.qa-project-dialog footer{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.qa-project-dialog h2{margin:0;font-size:19px;}
+.qa-project-dialog label{display:inline-flex;align-items:center;gap:8px;margin-block:8px;}
+#qaProjectName{width:100%;box-sizing:border-box;font-size:16px;}
+#qaProjectPrivate{width:auto;min-height:auto;accent-color:var(--accent);}
+#qaProjectSourceList details{margin:10px 0;padding:10px;border:1px solid var(--qa-input-border);border-radius:var(--radius-btn);}
+#qaProjectSourceList a{display:block;overflow-wrap:anywhere;}
+#qaProjectSourceList textarea{box-sizing:border-box;width:100%;display:block;margin:8px 0;font-size:16px;}
+#qaProjectStatus{min-height:1.3em;}
+#qaProjectChats small{float:right;margin-inline-start:8px;color:var(--qa-subtle);}
