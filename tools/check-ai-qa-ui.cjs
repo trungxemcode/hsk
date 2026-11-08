@@ -8,6 +8,7 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   await page.route('https://ai.test/lesson-ask',async r=>{received=r.request().postDataJSON();return r.fulfill({json:{answer:'Bạn đã có **nền tảng tốt**.\nVí dụ: **对不起 (duìbuqǐ)**. **<img src=x>**',primaryNodeKey:'grammar:contrast',nodeLabel:'So sánh',suggestedQuestions:[{kind:'context_shift',text:'Cho ví dụ với tình huống đời thường khác nhé?'}]}});});
   let chatRole='regular';
   await page.route('https://ai.test/account-role',route=>route.fulfill({json:{account:{role:chatRole}}}));
+await page.route('https://ai.test/ai-providers',route=>route.fulfill({json:{system:{gemini:{available:true},chatgpt:{available:false}},personal:{configured:true,enabled:true,provider:'claude',model:'claude-sonnet'}}}));
   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html',{waitUntil:'domcontentloaded',timeout:60000});
   // Studio navigation intentionally stays gated until the real lesson/data boot
   // completes. Waiting only for the shell API races that gate and leaves the
@@ -25,6 +26,22 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   await page.waitForFunction(()=>!document.getElementById('aiQaThinking').disabled);
   await thinking.selectOption('medium');
   assert.equal(await page.locator('#qaProjectThinking').inputValue(),'medium');
+  const providerButton=page.locator('#aiQaForm .qa-provider-btn'),providerMenu=page.locator('#aiQaForm .qa-provider-menu');
+  assert.equal(await providerButton.getAttribute('aria-expanded'),'false');
+  await providerButton.click();
+  await providerMenu.locator('[data-provider="system-gemini"]:not([aria-disabled])').waitFor();
+  assert.equal(await providerMenu.locator('[data-provider="system-chatgpt"]').getAttribute('aria-disabled'),'true','ChatGPT chưa cài phải bị khóa');
+  assert.equal(await providerMenu.locator('[data-provider="personal:deepseek"]').getAttribute('aria-disabled'),'true','API riêng chưa nhập phải bị khóa');
+  assert.ok(await providerMenu.locator('[data-provider="personal:deepseek"] .qa-provider-lock').count(),'mục bị khóa có ổ khóa');
+  assert.equal(await providerMenu.locator('[data-provider="personal:claude"]').getAttribute('aria-disabled'),null,'API riêng đã bật được chọn');
+  const menuBox=await providerMenu.boundingBox();assert.ok(menuBox.x>=0&&menuBox.x+menuBox.width<=width+0.5&&menuBox.y>=0,'menu nằm trong màn hình');
+  await providerMenu.locator('[data-provider="system-chatgpt"]').click({force:true});
+  assert.equal(await providerButton.locator('.qa-provider-label').textContent(),'Tự động','bấm mục khóa không đổi lựa chọn');
+  assert.equal(await providerMenu.isVisible(),true,'bấm mục khóa không đóng menu');
+  await providerMenu.locator('[data-provider="personal:claude"]').click();
+  assert.equal(await providerMenu.isVisible(),false);
+  assert.equal(await page.evaluate(()=>window.HSKAiProviderPicker.choice()),'personal');
+  assert.equal(await page.locator('#qaProjectChatForm .qa-provider-btn').getAttribute('aria-label'),'Nhà cung cấp AI: Claude');
   if(width===390){
     for(const [mobileWidth,mobileHeight] of [[320,640],[390,844],[430,932]]){
       await page.setViewportSize({width:mobileWidth,height:mobileHeight});
@@ -283,7 +300,7 @@ assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);ass
     }
     await page.setViewportSize({width,height:844});
   }
-assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written to realtime storage');assert.equal(received.lesson.content.mode,'ai-qa');assert.equal(received.thinking,'medium');assert.ok(received.lesson.content.learning_snapshot.masteryBoundary);assert.match(await page.locator('#aiQaMessages').innerText(),/Bạn đã có nền tảng tốt/);
+assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written to realtime storage');assert.equal(received.lesson.content.mode,'ai-qa');assert.equal(received.thinking,'medium');assert.equal(received.aiProvider,'personal');assert.ok(received.lesson.content.learning_snapshot.masteryBoundary);assert.match(await page.locator('#aiQaMessages').innerText(),/Bạn đã có nền tảng tốt/);
    const answer=page.locator('.ai-qa-message.assistant p').first();
    assert.deepEqual(await answer.locator('b').allTextContents(),['nền tảng tốt','对不起 (duìbuqǐ)','<img src=x>']);
    assert.equal(await answer.locator('img').count(),0);

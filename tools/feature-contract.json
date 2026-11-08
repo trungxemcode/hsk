@@ -95,6 +95,17 @@
       ]
     },
     {
+      "id": "ai-qa-provider-picker",
+      "name": "Chọn nhà cung cấp AI trong ô chat Hỏi đáp AI (mục chưa khả dụng bị khóa)",
+      "checks": [
+        {"kind": "file", "file": "src/modules/ai-coach/ai-provider-picker.js", "value": ""},
+        {"kind": "contains", "file": "src/modules/ai-coach/ai-provider-picker.js", "value": "HSKAiProviderPicker"},
+        {"kind": "file", "file": "server/ai-provider-choice.mjs", "value": ""},
+        {"kind": "file", "file": "server/ai-provider-choice.test.mjs", "value": ""},
+        {"kind": "contains", "file": "server/translator-worker.mjs", "value": "/ai-providers"}
+      ]
+    },
+    {
       "id": "navigation-home",
       "name": "Trang tổng quan",
       "checks": [
