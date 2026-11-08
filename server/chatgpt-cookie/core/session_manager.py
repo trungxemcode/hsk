@@ -47,8 +47,13 @@ class ChatGPTSessionManager:
         if AsyncSession is None:
             raise RuntimeError("Thư viện curl_cffi chưa được cài đặt.")
 
+        parts = self.session_token.split("|")
+        if any(not part or any(char.isspace() or char in ';,"\\' for char in part) for part in parts):
+            raise ValueError("Định dạng Cookie ChatGPT không hợp lệ.")
+        name = "__Secure-next-auth.session-token"
         cookies = {
-            "__Secure-next-auth.session-token": self.session_token
+            (f"{name}.{index}" if len(parts) > 1 else name): part
+            for index, part in enumerate(parts)
         }
 
         async with AsyncSession(impersonate="chrome120", cookies=cookies) as session:

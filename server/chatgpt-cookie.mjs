@@ -329,9 +329,12 @@ export class ChatGPTSessionManager{
   const nowSec=this.now()/1000;
   if(this.accessToken&&nowSec<this.tokenExpiresAt-300)return this.accessToken;
   if(!this.sessionToken)throw Error('Cookie đã hết hạn hoặc không hợp lệ. Vui lòng cập nhật Cookie mới.');
+  const parts=this.sessionToken.split('|');
+  if(parts.some(part=>!part||/[\s;,"\\]/.test(part)))throw Error('Định dạng Cookie ChatGPT không hợp lệ.');
+  const cookieName='__Secure-next-auth.session-token';
   const headers={
    ...this.getHeaders(false),
-   'Cookie':`__Secure-next-auth.session-token=${this.sessionToken}`
+   'Cookie':parts.map((part,index)=>`${cookieName}${parts.length>1?'.'+index:''}=${part}`).join('; ')
   };
   const response=await fetchFn(`${this.baseUrl}/api/auth/session`,{
    method:'GET',headers,signal,redirect:'manual'
