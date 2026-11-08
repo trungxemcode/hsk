@@ -341,7 +341,14 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   assert.equal(await page.locator('#aiQaSend').isEnabled(),true,'send restored after chat switch');
   assert.equal(await page.locator('#aiQaInput').isEnabled(),true,'composer restored after chat switch');
   if(width<721)await page.locator('#aiQaHistoryToggle').click();
-  await page.locator('#qaProjectCreate').click();
+  const createProject=page.getByRole('button',{name:'Tạo dự án',exact:true});
+  const sectionToggle=page.locator('#qaProjectSectionToggle');
+  const createBounds=await createProject.boundingBox();
+  const headingBounds=await sectionToggle.boundingBox();
+  assert.ok(Math.abs(createBounds.y-headingBounds.y)<=1,'create icon sits on the Dự án heading row');
+  await sectionToggle.click();
+  assert.equal(await sectionToggle.getAttribute('aria-expanded'),'false');
+  await createProject.click();
   await page.locator('#qaProjectName').fill('Ôn tiếng Trung');
   await page.locator('#qaProjectPrivate').check();
   await page.locator('#qaProjectCreateForm button[type=submit]').click();
@@ -378,6 +385,11 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   await toggle.click();
   await child.waitFor({state:'hidden'});
   await toggle.click();
+  const projectCompose=folder.getByRole('button',{name:'Trò chuyện mới trong Ôn tiếng Trung'});
+  await projectCompose.click();
+  assert.equal(await page.locator('#qaProjectHome').isVisible(),true);
+  assert.equal(await page.locator('#qaProjectQuestion').evaluate(input=>document.activeElement===input),true);
+  if(width<721)await page.locator('#qaProjectHistory').click();
   await child.click();
   await page.locator('#qaProjectBack').waitFor({state:'visible'});
   if(width<721)await page.locator('#aiQaHistoryToggle').click();
