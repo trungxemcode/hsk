@@ -14,6 +14,17 @@ import {createHandler,HSkaIControl} from './translator-worker-bundled.mjs';
 const secret='sample-master-secret-at-least-32-characters';
 const origin='https://trungxemcode.github.io';
 
+test('ChatGPTSessionManager sends split cookies under their original numbered names',async()=>{
+ const first='a'.repeat(3900),second='b'.repeat(900);
+ const manager=new ChatGPTSessionManager(first+'|'+second);
+ const token=await manager.getValidAccessToken(async(_url,init)=>{
+  assert.equal(init.headers.Cookie,`__Secure-next-auth.session-token.0=${first}; __Secure-next-auth.session-token.1=${second}`);
+  return Response.json({accessToken:'test-access-token'});
+ });
+ assert.equal(token,'test-access-token');
+ await assert.rejects(new ChatGPTSessionManager(first+'|').getValidAccessToken(()=>assert.fail('invalid cookie sent')),/không hợp lệ/);
+});
+
 test('ChatGPTSessionManager exchanges session cookie for accessToken and caches it for 1 hour',async()=>{
  let nowMs=1000000;
  let sessionCalls=0;
