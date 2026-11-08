@@ -1,9 +1,10 @@
 # File: main.py
 import os
+from secrets import compare_digest
 from typing import Optional
 from fastapi import FastAPI, HTTPException, Header, UploadFile, File
 from pydantic import BaseModel
-from core.session_manager import ChatGPTSessionManager
+from core.session_manager import ChatGPTSessionManager, ChatGPTUpstreamError
 from core.chat_client import ChatGPTClient
 from security.guardrail import HSKGuardrail
 from projects.document_parser import HSKDocumentParser
@@ -12,6 +13,7 @@ from personalization.memory_manager import HSKMemoryManager
 from services.hsk_tutor import HSKTutorService
 
 app = FastAPI(title="HSK AI Backend (Cookie + Guardrail + RAG + Personalization)")
+bridge_app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 
 # Lấy Cookie từ biến môi trường
 SESSION_COOKIE = os.getenv("CHATGPT_SESSION_TOKEN", "YOUR_SESSION_TOKEN_HERE")
@@ -189,13 +191,17 @@ async def chat_with_project(
 
 
 @app.post("/api/hsk/bridge")
+@bridge_app.post("/api/hsk/bridge")
 async def stateless_cookie_bridge(
     req: StatelessBridgeRequest,
-    x_user_id: str = Header(default="student_01"),
-    authorization: Optional[str] = Header(default=None),
-    x_chatgpt_session_token: Optional[str] = Header(default=None)
+    x_hsk_bridge_key: str = Header(default=""),
+    x_chatgpt_session_token: str = Header(default="")
 ):
-    """Bridge endpoint cho Cloudflare Worker / HSK App gửi prompt Stateless qua curl_cffi"""
+    key = os.getenv("CHATGPT_COOKIE_BRIDGE_KEY", "")
+    if not key or not compare_digest(key.encode(), x_hsk_bridge_key.encode()):
+        raise HTTPException(status_code=401, detail="Bridge authentication failed.")
+    if not x_chatgpt_session_token.strip():
+        raise HTTPException(status_code=400, detail="Thiếu cookie ChatGPT.")
     if req.validate_task:
         is_valid, reason = guardrail.validate_input(req.prompt, task_type=req.validate_task)
         if not is_valid:
@@ -206,9 +212,15 @@ async def stateless_cookie_bridge(
         else req.prompt
     )
     try:
-        override = _extract_session_override(authorization, x_chatgpt_session_token)
-        return await chat_client.send_stateless_message(prompt, model=req.model, session_token=override)
-    except ValueError as ve:
-        raise HTTPException(status_code=400, detail=str(ve))
-    except Exception as e:
-        raise HTTPException(status_code=502, detail=str(e))
+        return await chat_client.send_stateless_message(
+            prompt, model=req.model, session_token=x_chatgpt_session_token
+        )
+    except ChatGPTUpstreamError as exc:
+        raise HTTPException(
+            status_code=429 if exc.status == 429 else 502,
+            detail={"stage": exc.stage, "status": exc.status, "challenge": exc.challenge}
+        ) from exc
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Dữ liệu phiên ChatGPT không hợp lệ.")
+    except Exception:
+        raise HTTPException(status_code=502, detail="Bridge chưa nhận được phản hồi ChatGPT.")

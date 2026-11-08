@@ -3,7 +3,7 @@ import json
 import uuid
 import asyncio
 from typing import Optional
-from .session_manager import ChatGPTSessionManager, AsyncSession
+from .session_manager import ChatGPTSessionManager, ChatGPTUpstreamError, AsyncSession
 
 
 class ChatGPTClient:
@@ -67,13 +67,12 @@ class ChatGPTClient:
                     self.api_url,
                     headers=headers,
                     json=payload,
-                    timeout=60
+                    timeout=60,
+                    allow_redirects=False
                 )
 
                 if response.status_code != 200:
-                    raise Exception(
-                        f"Lỗi gọi ChatGPT API ({response.status_code}): {response.text[:200]}"
-                    )
+                    raise ChatGPTUpstreamError("conversation", response.status_code, response.headers.get("cf-mitigated") == "challenge")
 
                 result = self._parse_sse_response(response.text)
 

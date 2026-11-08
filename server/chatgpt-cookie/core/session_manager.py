@@ -8,6 +8,14 @@ except ImportError:  # pragma: no cover - fallback when curl_cffi is not install
     AsyncSession = None
 
 
+class ChatGPTUpstreamError(Exception):
+    def __init__(self, stage: str, status: int, challenge: bool = False):
+        self.stage = stage
+        self.status = status
+        self.challenge = challenge
+        super().__init__(f"ChatGPT {stage}: HTTP {status}")
+
+
 class ChatGPTSessionManager:
     def __init__(self, session_token: str, base_url: str = "https://chatgpt.com"):
         self.session_token = (session_token or "").strip()
@@ -60,17 +68,16 @@ class ChatGPTSessionManager:
             response = await session.get(
                 f"{self.base_url}/api/auth/session",
                 headers=self._get_headers(include_auth=False),
-                timeout=30
+                timeout=30,
+                allow_redirects=False
             )
 
             if response.status_code != 200:
-                raise Exception(
-                    f"Lỗi xác thực Cookie (HTTP {response.status_code}): {response.text[:200]}"
-                )
+                raise ChatGPTUpstreamError("session", response.status_code, response.headers.get("cf-mitigated") == "challenge")
 
             data = response.json()
             if "accessToken" not in data:
-                raise Exception("Cookie đã hết hạn hoặc không hợp lệ. Vui lòng cập nhật Cookie mới.")
+                raise ChatGPTUpstreamError("session", 401)
 
             self.access_token = data["accessToken"]
             # Lưu cache Access Token trong 1 giờ (3600 giây)
