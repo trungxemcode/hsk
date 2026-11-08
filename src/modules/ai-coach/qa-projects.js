@@ -27,6 +27,19 @@
   button.addEventListener('click',action);
   return button;
  }
+ const iconPaths={
+  folder:'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z',
+  openFolder:'M3 18V7a2 2 0 0 1 2-2h4l2 2h7a2 2 0 0 1 2 2v2M3 18l3-7h16l-3 7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z',
+  compose:'M12 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M10 14l1-4 7-7 3 3-7 7-4 1Z'
+ };
+ function icon(name){
+  const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),path=document.createElementNS(ns,'path');
+  svg.setAttribute('viewBox','0 0 24 24');
+  svg.setAttribute('aria-hidden','true');
+  path.setAttribute('d',iconPaths[name]);
+  svg.append(path);
+  return svg;
+ }
  function bind(api){
   const dialog=$('qaProjectDialog'),status=$('qaProjectStatus'),home=$('qaProjectHome');
   const chats=$('qaProjectChats'),sources=$('qaProjectSources'),tabs=[$('qaProjectChatsTab'),$('qaProjectSourcesTab')];
@@ -38,6 +51,11 @@
   }
   tabs[0].onclick=()=>tab(false);
   tabs[1].onclick=()=>tab(true);
+  const sectionToggle=$('qaProjectSectionToggle'),folders=$('qaProjectFolders');
+  sectionToggle.onclick=()=>{
+   folders.hidden=!folders.hidden;
+   sectionToggle.setAttribute('aria-expanded',String(!folders.hidden));
+  };
   $('qaProjectHistory').onclick=api.openHistory;
   $('qaProjectExit').onclick=()=>api.open('');
   $('qaProjectBack').onclick=()=>api.open(api.project()?.id);
@@ -52,7 +70,7 @@
    $('qaProjectName').setCustomValidity('');
    const name=$('qaProjectName').value.trim();
    if(!name)return;
-   try{api.create(name,$('qaProjectPrivate').checked);dialog.close();tab(false);}
+   try{folders.hidden=false;sectionToggle.setAttribute('aria-expanded','true');api.create(name,$('qaProjectPrivate').checked);dialog.close();tab(false);}
    catch(error){$('qaProjectName').setCustomValidity(error.message);$('qaProjectName').reportValidity();}
   };
   $('qaProjectName').oninput=()=> $('qaProjectName').setCustomValidity('');
@@ -97,7 +115,7 @@
    if(file)void importSource(()=>window.HSKQaProjectSources.readFile(file),file);
   };
   let renderedProject=null,selectedFolder=null;
-  const expanded=new Set();
+  const expanded=new Set(),showAll=new Set();
   return function render(){
    const project=api.project();
    const showHome=!!project&&!api.active();
@@ -108,7 +126,7 @@
     selectedFolder=project?.id;
     if(project)expanded.add(project.id);
    }
-   $('qaProjectFolders').replaceChildren(...api.projects().map(item=>{
+   folders.replaceChildren(...api.projects().map(item=>{
     const folder=document.createElement('div'),heading=document.createElement('div');
     heading.className='qa-project-folder-heading';
     const list=document.createElement('div');
@@ -116,12 +134,14 @@
     list.className='qa-project-folder-chats';
     list.setAttribute('role','list');
     list.hidden=!expanded.has(item.id);
-    const toggle=makeButton(list.hidden?'▸':'▾',()=>{
+    const toggle=makeButton('',()=>{
      list.hidden=!list.hidden;
      if(list.hidden)expanded.delete(item.id);else expanded.add(item.id);
-     toggle.textContent=list.hidden?'▸':'▾';
+     toggle.replaceChildren(icon(list.hidden?'folder':'openFolder'));
      toggle.setAttribute('aria-expanded',String(!list.hidden));
     });
+    toggle.className='qa-project-folder-toggle';
+    toggle.append(icon(list.hidden?'folder':'openFolder'));
     toggle.setAttribute('aria-label','Cuộc trò chuyện trong '+item.name);
     toggle.setAttribute('aria-controls',list.id);
     toggle.setAttribute('aria-expanded',String(!list.hidden));
@@ -129,10 +149,34 @@
      expanded.add(item.id);
      api.open(item.id);
     });
-    if(project?.id===item.id&&!api.active())name.setAttribute('aria-current','page');
-    heading.append(toggle,name);
+    name.className='qa-project-folder-name';
+    if(project?.id===item.id){
+     heading.dataset.active='true';
+     if(!api.active())name.setAttribute('aria-current','page');
+    }
+    const compose=makeButton('',()=>{
+     expanded.add(item.id);
+     api.open(item.id);
+     tab(false);
+     question.focus({preventScroll:true});
+    });
+    compose.className='qa-project-folder-compose';
+    compose.setAttribute('aria-label','Trò chuyện mới trong '+item.name);
+    compose.title='Trò chuyện mới';
+    compose.append(icon('compose'));
+    heading.append(toggle,name,compose);
     if(item.chats.length){
-     list.append(...[...item.chats].sort((a,b)=>b.updatedAt-a.updatedAt).map(chat=>api.renderChatRow(chat,item.id)));
+     const sorted=[...item.chats].sort((a,b)=>b.updatedAt-a.updatedAt);
+     const renderChats=()=>{
+      const full=showAll.has(item.id)||sorted.slice(5).some(chat=>chat.id===api.active()?.id);
+      list.replaceChildren(...(full?sorted:sorted.slice(0,5)).map(chat=>api.renderChatRow(chat,item.id)));
+      if(!full&&sorted.length>5){
+       const more=makeButton('Hiển thị thêm',()=>{showAll.add(item.id);renderChats();});
+       more.className='qa-project-folder-more';
+       list.append(more);
+      }
+     };
+     renderChats();
     }else{
      const hint=document.createElement('small');
      hint.textContent='Chưa có cuộc trò chuyện';
