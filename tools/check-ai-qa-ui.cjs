@@ -18,6 +18,16 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   if(width===390){
     for(const [mobileWidth,mobileHeight] of [[320,640],[390,844],[430,932]]){
       await page.setViewportSize({width:mobileWidth,height:mobileHeight});
+      // ResizeObserver publishes the dock's BORDER-box height asynchronously.
+      // Compare final geometry after that update, not an intermediate viewport
+      // frame; this still times out on a real dock/composer overlap regression.
+      await page.waitForFunction(()=>{
+        const rect=selector=>document.querySelector(selector).getBoundingClientRect();
+        const dock=rect('#mobileDock'),shell=rect('.app-shell'),
+          panel=rect('#aiQaPanel'),form=rect('#aiQaForm');
+        return dock.height>0&&Math.abs(shell.bottom-dock.top)<=2&&
+          Math.abs(panel.bottom-dock.top)<=2&&Math.abs(dock.top-form.bottom-8)<=2;
+      },null,{timeout:10000});
       const geom=await page.evaluate(()=>{
         const bounds=selector=>{const r=document.querySelector(selector).getBoundingClientRect();return {top:r.top,bottom:r.bottom,left:r.left,right:r.right};};
         const msg=document.querySelector('#aiQaMessages');
