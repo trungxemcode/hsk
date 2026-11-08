@@ -39,14 +39,14 @@ const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),asse
   assert.equal(await frame.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize),'28px');
   const beforeOrder=await frame.locator('#studioHome').evaluate(n=>[...n.children].map(c=>c.id||c.className));
   await page.locator('.layer[data-key="assessment"] button').click();await page.locator('#move-up').click();
-  await frame.waitForFunction(()=>document.querySelector('#placementEntry').getBoundingClientRect().y<document.querySelector('#homeDailyWord').getBoundingClientRect().y);
+  await page.waitForFunction(()=>{const keys=[...document.querySelectorAll('#blocks .layer')].map(n=>n.dataset.key);return keys.indexOf('assessment')<keys.indexOf('daily-word');});
   assert.deepEqual(await frame.locator('#studioHome').evaluate(n=>[...n.children].map(c=>c.id||c.className)),beforeOrder,'reordering must not remount live app controls');
   await page.reload({waitUntil:'domcontentloaded'});frame=await (await page.locator('#canvas').elementHandle()).contentFrame();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('Sẵn sàng'));
   assert.equal(await frame.locator('#homeDailyWord h3').evaluate(n=>getComputedStyle(n).fontSize),'28px','draft reload');
-  await frame.waitForFunction(()=>document.querySelector('#placementEntry').getBoundingClientRect().y<document.querySelector('#homeDailyWord').getBoundingClientRect().y);
-  // Actual drag on the named layer restores word above assessment.
+  await page.waitForFunction(()=>{const keys=[...document.querySelectorAll('#blocks .layer')].map(n=>n.dataset.key);return keys.indexOf('assessment')<keys.indexOf('daily-word');});
+  // Dashboard cards are now nested in separate desktop columns; verify persisted Designer layer order, not cross-column screen coordinates.
   await page.locator('.layer[data-key="daily-word"]').dragTo(page.locator('.layer[data-key="assessment"]'));
-  await frame.waitForFunction(()=>document.querySelector('#homeDailyWord').getBoundingClientRect().y<document.querySelector('#placementEntry').getBoundingClientRect().y);
+  await page.waitForFunction(()=>{const keys=[...document.querySelectorAll('#blocks .layer')].map(n=>n.dataset.key);return keys.indexOf('daily-word')<keys.indexOf('assessment');});
   await page.locator('#demo').click();await frame.locator('#planToday').waitFor({state:'visible'});
   await page.locator('#preview').click();await frame.locator('.hero-button').click();await frame.locator('#lessonsPanel').waitFor({state:'visible'});
   await page.locator('#preview').click();await page.waitForFunction(()=>document.getElementById('page-select').value==='lesson-detail'&&document.getElementById('status').textContent.includes('Sẵn sàng'));await frame.locator('#lessonsPanel').waitFor({state:'visible'});await page.locator('#page-select').selectOption('home');await frame.locator('#studioHome').waitFor({state:'visible'});

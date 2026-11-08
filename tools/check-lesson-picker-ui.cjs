@@ -14,10 +14,13 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
   await p.goto('http://127.0.0.1:'+server.address().port+'/index.html');await p.waitForFunction(()=>window.HSKMobileUX&&window.HSKLessonNav);
   await p.evaluate(async theme=>{document.documentElement.dataset.theme=theme;HSKStudio.navigate('lessons');history.replaceState(null,'','#lesson/standard-3-01');await HSKLessonNav.open();},theme);
   const picker=p.getByLabel('Chọn mục bài học',{exact:true});await p.locator('.lesson-section-nav').waitFor();
+  await p.waitForFunction(()=>!document.getElementById('designSync').hidden);
+  await p.locator('#designSync').evaluate(button=>button.click());
   await p.locator('#hsk-live-design').waitFor({state:'attached'});
   const mastery=p.locator('.lesson-mastery'),summary=mastery.locator('summary');
   await summary.waitFor({state:'visible'});
   assert.equal(await summary.evaluate(n=>getComputedStyle(n).translate),'none');
+  await p.waitForFunction(()=>getComputedStyle(document.querySelector('.lesson-mastery summary')).color==='rgb(12, 34, 56)',null,{timeout:10000});
   assert.equal(await summary.evaluate(n=>getComputedStyle(n).color),'rgb(12, 34, 56)');
   const meterBounds=await mastery.boundingBox(),navBounds=await p.locator('.lesson-section-nav').boundingBox();
   assert.ok(navBounds.y>=meterBounds.y+meterBounds.height-1,'lesson navigation stays below the progress card');

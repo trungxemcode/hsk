@@ -1,6 +1,6 @@
 /* Online publishing adapter. Passwords go directly to Firebase, never to the design server. */
 window.HSKDesignerCloud={async create(server,callbacks={}){
- const key='hsk-design-auth-v1',api=server.firebaseApiKey;let auth=null,pending=null,timer=null,busy=false,paused=false,revision=server.revision;
+ const key='hsk-design-auth-v1',api=server.firebaseApiKey;let auth=null,pending=null,busy=false,paused=false,revision=server.revision;
  const status=document.createElement('small');status.id='cloud-status';document.querySelector('.brand small').replaceWith(status);
  const say=(message,error=false)=>{status.textContent=message;status.style.color=error?'#b42336':'';};
  const release=document.createElement('a');release.href=server.publicUrl;release.target='_blank';release.rel='noopener';release.textContent='Mở bản phát hành ↗';document.querySelector('.actions').prepend(release);
@@ -12,7 +12,7 @@ window.HSKDesignerCloud={async create(server,callbacks={}){
  try{auth=JSON.parse(sessionStorage.getItem(key)||'null');if(auth)await verify();}catch{auth=null;sessionStorage.removeItem(key);}
  async function login(){
   const dialog=document.createElement('dialog');dialog.className='cloud-login';
-  const heading=document.createElement('h2');heading.textContent='Đăng nhập để chỉnh giao diện';const text=document.createElement('p');text.textContent='Dùng tài khoản chủ ứng dụng HSK. Thay đổi sẽ tự lưu sang bản phát hành.';
+  const heading=document.createElement('h2');heading.textContent='Đăng nhập để chỉnh giao diện';const text=document.createElement('p');text.textContent='Dùng tài khoản chủ ứng dụng HSK. Bấm Đồng bộ bản phát hành khi muốn gửi bản chỉnh.';
   const form=document.createElement('form'),email=document.createElement('input'),password=document.createElement('input'),button=document.createElement('button'),error=document.createElement('p'),reset=document.createElement('button');
   email.type='email';email.autocomplete='username';email.placeholder='Email tài khoản HSK';email.required=true;email.setAttribute('aria-label','Email tài khoản HSK');
   password.type='password';password.autocomplete='current-password';password.placeholder='Mật khẩu';password.required=true;password.setAttribute('aria-label','Mật khẩu');
@@ -21,18 +21,17 @@ window.HSKDesignerCloud={async create(server,callbacks={}){
   form.append(email,password,button,reset,error);dialog.append(heading,text,form);document.body.append(dialog);dialog.addEventListener('cancel',e=>e.preventDefault());dialog.showModal();email.focus();
   return new Promise(resolve=>{form.onsubmit=async e=>{e.preventDefault();button.disabled=true;error.textContent='Đang đăng nhập…';try{const result=await firebase('signInWithPassword',{email:email.value.trim(),password:password.value,returnSecureToken:true});password.value='';store({idToken:result.idToken,refreshToken:result.refreshToken,expires:Date.now()+Number(result.expiresIn)*1000});await verify();dialog.close();dialog.remove();resolve();}catch(e){auth=null;sessionStorage.removeItem(key);error.textContent=e.message;}finally{button.disabled=false;}};});
  }
- if(!auth)await login();say('Tự đồng bộ · Đã kết nối');
+ if(!auth)await login();say('Đã kết nối · Đồng bộ thủ công');
  async function flush(){
-  clearTimeout(timer);if(busy||paused||!pending)return;busy=true;let retryDelay=1200;const config=pending;pending=null;say('Đang đồng bộ…');
+  if(busy||paused||!pending)return;busy=true;const config=pending;pending=null;say('Đang đồng bộ…');
   try{
    const token=await refresh(),response=await fetch('/__designer/apply',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({config,revision})}),result=await response.json();
    if(!response.ok){if(response.status===409||response.status===401||response.status===403)paused=true;throw Error(result.error||'Chưa đồng bộ được. Nháp vẫn ở trên máy.');}
-   revision=result.revision;callbacks.saved?.(revision,config);say('Đã đồng bộ tới bản phát hành');window.dispatchEvent(new CustomEvent('hsk-design-published',{detail:{revision}}));
-  }catch(e){if(!pending)pending=config;say(e.message,true);retryDelay=10000;}
-  finally{busy=false;if(pending&&!paused){clearTimeout(timer);timer=setTimeout(flush,retryDelay);}}
+   revision=result.revision;callbacks.saved?.(revision,config);say(pending?'Có bản chỉnh mới chưa đồng bộ':'Đã đồng bộ tới bản phát hành');window.dispatchEvent(new CustomEvent('hsk-design-published',{detail:{revision}}));
+  }catch(e){if(!pending)pending=config;say(e.message,true);}
+  finally{busy=false;}
  }
- logout.onclick=()=>{paused=true;clearTimeout(timer);auth=null;sessionStorage.removeItem(key);location.reload();};
- window.addEventListener('online',()=>{if(!paused)flush();});
+ logout.onclick=()=>{paused=true;auth=null;sessionStorage.removeItem(key);location.reload();};
  window.addEventListener('beforeunload',e=>{if(pending||busy){e.preventDefault();e.returnValue='';}});
- return {async editObject(input,signal){const response=await fetch('/__designer/chatgpt',{method:'POST',signal,headers:{'Content-Type':'application/json',Authorization:'Bearer '+await refresh()},body:JSON.stringify(input)});const result=await response.json();if(!response.ok)throw Error(result.error||'Chưa sửa được giao diện.');return result;},get revision(){return revision;},queue(config){pending=JSON.parse(JSON.stringify(config));say(paused?'Nháp chưa đồng bộ · Xuất nháp trước khi tải lại':'Đang chờ đồng bộ…',paused);clearTimeout(timer);timer=setTimeout(flush,1200);},flush};
+ return {async editObject(input,signal){const response=await fetch('/__designer/chatgpt',{method:'POST',signal,headers:{'Content-Type':'application/json',Authorization:'Bearer '+await refresh()},body:JSON.stringify(input)});const result=await response.json();if(!response.ok)throw Error(result.error||'Chưa sửa được giao diện.');return result;},get revision(){return revision;},queue(config){pending=JSON.parse(JSON.stringify(config));say(paused?'Nháp chưa đồng bộ · Xuất nháp trước khi tải lại':'Có bản chỉnh chưa đồng bộ',paused);},flush};
 }};
