@@ -765,7 +765,7 @@ export function getOrCreateCookieClient(sessionToken,{baseUrl=CHATGPT_BASE_URL,n
 export function normalizeChatGptTutorReply(rawText,{userId='student_01',questionText='',questionMessageId='',memoryManager=sharedMemoryManager}={}){
  const text=String(rawText||'').trim();
  const match=text.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
- const jsonStr=match?match[1].trim():text;
+ const jsonStr=(match?match[1].trim():text).replace(/^<escape>\s*([\s\S]*?)\s*<\/escape>$/i,'$1');
  let data=null;
  try{data=JSON.parse(jsonStr);}catch{}
  if(data&&typeof data==='object'){

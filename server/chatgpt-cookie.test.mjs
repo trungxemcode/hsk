@@ -146,6 +146,7 @@ test('Worker supports ChatGPT Cookie in Personal AI settings, Shared Server Cook
    }
   }
  };
+ let chatgptReplyWrapper=text=>text;
  let chatgptReplyJson={
   answer_vi:'Cấu trúc **越来越** dùng để diễn tả mức độ tăng dần.',
   cited_from_file:'身体越来越好',
@@ -170,7 +171,7 @@ test('Worker supports ChatGPT Cookie in Personal AI settings, Shared Server Cook
   }
   if(u.endsWith('/backend-api/conversation')&&init.method==='POST'){
    const sse=`data: ${JSON.stringify({
-    message:{id:'m-1',author:{role:'assistant'},content:{parts:['```json\n'+JSON.stringify(chatgptReplyJson)+'\n```']}},
+    message:{id:'m-1',author:{role:'assistant'},content:{parts:[chatgptReplyWrapper('```json\n'+JSON.stringify(chatgptReplyJson)+'\n```')]}},
     conversation_id:'conv-cookie-1'
    })}\n\ndata: [DONE]\n`;
    return new Response(sse,{status:200,headers:{'Content-Type':'text/event-stream'}});
@@ -242,7 +243,8 @@ test('Worker supports ChatGPT Cookie in Personal AI settings, Shared Server Cook
  assert.equal((await outOfScopeRes.json()).code,'OUT_OF_SCOPE');
 
  // 5. Shared Server CHATGPT_SESSION_TOKEN works for user without personal AI
- chatgptReplyJson={answer:'Chào bạn! Đây là phản hồi từ Cookie dùng chung của Server.'};
+ chatgptReplyWrapper=text=>'<escape>'+text.split('\n').slice(1,-1).join('\n')+'</escape>';
+ chatgptReplyJson={answer:'Chào bạn! Đây là phản hồi từ Cookie dùng chung của Server.',suggestedQuestions:[{type:'decision_guide',text:'Khi nào nên dùng 您好?'}]};
  const sharedEnv={...baseEnv,CHATGPT_SESSION_TOKEN:'shared-server-cookie-token-1234567890',AI_QA_PROVIDER:'chatgpt-cookie'};
  const sharedRes=await callWorker('regular-learner','/lesson-ask',{
   ...qaBody,
@@ -250,7 +252,9 @@ test('Worker supports ChatGPT Cookie in Personal AI settings, Shared Server Cook
  },sharedEnv);
  assert.equal(sharedRes.status,200);
  assert.equal(sharedRes.headers.get('X-HSK-AI-Provider'),'chatgpt-cookie');
- assert.equal((await sharedRes.json()).answer,'Chào bạn! Đây là phản hồi từ Cookie dùng chung của Server.');
+ const sharedReply=await sharedRes.json();
+ assert.equal(sharedReply.answer,'Chào bạn! Đây là phản hồi từ Cookie dùng chung của Server.');
+ assert.equal(sharedReply.suggestedQuestions[0].text,'Khi nào nên dùng 您好?');
  for(const [index,question] of ['Xin chào','nỉ hào là gì','Đóng vai nhân viên cửa hàng để luyện tiếng Trung','Python tiếng Trung nói sao?','Viết một ví dụ Python ngắn'].entries()){
   const response=await callWorker('learner-short-'+index,'/lesson-ask',{...qaBody,question},sharedEnv);
   assert.equal(response.status,200);
