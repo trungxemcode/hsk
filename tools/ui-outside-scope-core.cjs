@@ -26,7 +26,7 @@ function scope(config) {
   }
   assert.ok(config.sharedNavigationOnly===undefined||typeof config.sharedNavigationOnly==='boolean','Navigation scope must be boolean');
   if(config.sharedNavigationOnly){
-    assert.ok(config.excludedRoutes.length===0||(config.excludedRoutes.length===2&&config.excludedRoutes.includes('account')&&config.excludedRoutes.includes('profile')),'Navigation edit may only accompany the explicit Profile/Account split');
+    assert.ok(config.excludedRoutes.length===0||(config.excludedRoutes.length===1&&config.excludedRoutes.includes('account'))||(config.excludedRoutes.length===2&&config.excludedRoutes.includes('account')&&config.excludedRoutes.includes('profile')),'Navigation edit may only accompany Account settings or the explicit Profile/Account split');
     assert.ok(!config.sharedHeaderOnly&&!config.sharedQuickNavOnly&&!config.sharedSidebarOnly&&!config.sharedMobileDrawerOnly,'Scope only the sidebar and closed drawer');
   }
   return ROUTES.filter(route=>!config.excludedRoutes.includes(route));

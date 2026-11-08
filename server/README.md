@@ -119,3 +119,13 @@ Rollback: set `QA_CACHE_ENABLED=false` and `QA_SHADOW_MODE=off` to restore the p
 AI_ACCOUNT_ROLES_ENABLED=true enables exclusive provider routing: fixed owner/VIP Gemini, regular xKiro. No automatic cross-provider fallback. Existing AI_CONTROL binding hosts a separate account-roles-v1 instance, no new infrastructure or Firestore rules. Authenticated POST /account-role self-registers verified identity. Owner-only POST /admin/accounts accepts cursor and returns up to100 rows. Owner-only POST /admin/account-role accepts uid, optional display email, role vip or regular. Admin cannot be changed via API; email is a label, UID is authoritative. VIP is not admin and retains existing ordinary quotas. Regular accounts retain Gemini image OCR/translation/handwriting with a shared10/day reservation sublimit, reset at00:00 Asia/Ho_Chi_Minh, within existing35-query/50-total budgets. VIP has no image sublimit; admin remains unlimited. Failed generation reservations count, validation/auth/quota rejections do not. Local handwriting remains. Browser roles are informational.
 
 Account registry becomes populated as users sign in to the updated frontend or call AI. Dashboard supports explicit UID designation before first registry login. Rollback AI_ACCOUNT_ROLES_ENABLED=false restores task-based routing while keeping assignments. Deploy backend before frontend. Do not deploy this repository bundle blindly over an independently patched live voice Worker; compare live code and preserve voice changes. No live deployment is implied by a merged frontend PR.
+
+## API riêng cho Hỏi đáp AI
+
+Cấu hình cần binding `AI_CONTROL` hiện có và Worker secret `AI_PERSONAL_KEY_SECRET` (ít nhất 32 ký tự ngẫu nhiên). Tạo một lần và giữ bản sao trong trình quản lý mật khẩu. Đổi secret sẽ khiến key cũ phải nhập lại.
+
+```sh
+npx wrangler secret put AI_PERSONAL_KEY_SECRET --config server/wrangler.jsonc
+```
+
+Người dùng lưu cấu hình trong Cài đặt. Worker xác minh Firebase UID, mã hóa key bằng AES-GCM, và chỉ trả metadata về trình duyệt. Chế độ API riêng áp dụng cho Hỏi đáp AI, kể cả chat dự án. Nhà cung cấp do người dùng chọn nhận nội dung của lượt chat. Khi bật chế độ này, lỗi nhà cung cấp được trả về cho người dùng và không chuyển sang key dùng chung. FOSTA dùng `https://codex.fosta.app/v1/chat/completions` và hỗ trợ `gpt-6.1-sol`, `gpt-6-astra`, `gpt-6-luna`. Các preset khác dùng endpoint chính thức của nhà cung cấp.

@@ -67,6 +67,15 @@
       ]
     },
     {
+      "id": "account-personal-ai",
+      "name": "API riêng theo tài khoản cho Hỏi đáp AI",
+      "checks": [
+        {"kind": "id", "file": "index.html", "value": "personalAiForm"},
+        {"kind": "contains", "file": "server/personal-ai.mjs", "value": "AES-GCM"},
+        {"kind": "contains", "file": "server/translator-worker.mjs", "value": "personal-ai-settings"}
+      ]
+    },
+    {
       "id": "navigation-home",
       "name": "Trang tổng quan",
       "checks": [

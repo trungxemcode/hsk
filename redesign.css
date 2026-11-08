@@ -4419,3 +4419,9 @@ html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[d
     gap:6px!important;
   }
 }
+
+#personalAiForm:not([hidden]){display:grid;gap:8px;margin-top:12px;}
+#personalAiForm[hidden]{display:none!important;}
+#personalAiForm input:not([type=checkbox]),#personalAiForm select{box-sizing:border-box;width:100%;font-size:16px;}
+#personalAiForm input[type=checkbox]{width:auto;min-height:auto;}
+#personalAiForm .hint,#personalAiStatus{margin:4px 0;}

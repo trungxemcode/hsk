@@ -7,6 +7,7 @@ on:
       - 'server/translator-worker.mjs'
       - 'server/translator-worker-bundled.mjs'
       - 'server/original-reading.mjs'
+      - 'server/personal-ai.mjs'
       - 'server/wrangler.jsonc'
       - 'tools/build-worker-bundle.cjs'
   workflow_dispatch:
@@ -35,7 +36,7 @@ jobs:
           test -n "$CLOUDFLARE_API_TOKEN" || { echo '::error::Missing CLOUDFLARE_API_TOKEN'; exit 1; }
           test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo '::error::Missing CLOUDFLARE_ACCOUNT_ID'; exit 1; }
       - name: Validate role security and existing translation behavior
-        run: node --test server/account-roles.test.mjs server/translator-worker.test.mjs server/original-reading.test.mjs
+        run: node --test server/account-roles.test.mjs server/translator-worker.test.mjs server/original-reading.test.mjs server/personal-ai.test.mjs
       - name: Require current generated Worker
         run: |
           node tools/build-worker-bundle.cjs
