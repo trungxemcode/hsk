@@ -10,8 +10,18 @@ const primary=home.querySelector('.dashboard-primary'),side=home.querySelector('
 const today=$('planToday'),settingsPanel=$('homePlanSettings');
 const placement=$('placementEntry'),placementAnchor=document.createComment('overview placement original');
 placement?.before(placementAnchor);
-const taskList=$('planTasks'),desktopTasks=make('details',null,'overview-plan-disclosure');
-desktopTasks.append(make('summary','Nhiệm vụ hôm nay'));
+const taskList=$('planTasks');
+let desktopPlanExpanded=true;
+const planToggle=button('',()=>{
+ desktopPlanExpanded=!desktopPlanExpanded;
+ planToggle.setAttribute('aria-expanded',String(desktopPlanExpanded));
+ taskList.hidden=!desktopPlanExpanded;
+});
+planToggle.className='overview-plan-toggle';
+planToggle.append(make('span',null,'overview-plan-chevron'));
+planToggle.setAttribute('aria-label','Nhiệm vụ trong Kế hoạch hôm nay');
+planToggle.setAttribute('aria-controls',taskList.id);
+planToggle.setAttribute('aria-expanded','true');
 const tasks=make('details',null,'overview-tasks');tasks.append(make('summary','Nhiệm vụ hôm nay'));hero.append(tasks);
 const desktopHero=home.querySelector('.feature-hero .hero-button');if(desktopHero)desktopHero.addEventListener('click',e=>{if(!window.HSKPlanner?.plan||!$('planContinue'))return;e.preventDefault();e.stopImmediatePropagation();$('planContinue').click();},true);
 const notice=$('updateNotice'),noticeAnchor=document.createComment('overview update original');notice.before(noticeAnchor);
@@ -37,14 +47,14 @@ if(mobile!==lastMobile){
  if(mobile){
   hero.before(wordBox);
   tasks.append(today);
-  today.append(taskList);
-  desktopTasks.remove();
+  taskList.hidden=false;
+  planToggle.remove();
   searchAnchor.after(searchDetails);
   if(placement)placementAnchor.after(placement);
  }else{
   side.prepend(searchDetails,wordBox);
-  desktopTasks.append(taskList);
-  today.append(desktopTasks);
+  $('planTodayTitle').after(planToggle);
+  taskList.hidden=!desktopPlanExpanded;
   primary.prepend(today);
   today.after(settingsPanel);
   if(placement)settingsPanel.after(placement);
