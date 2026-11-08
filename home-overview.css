@@ -55,7 +55,7 @@ body.studio-enabled .overview-search .clean-home-search{margin:0;border:0;paddin
  body.mobile-ux #studioHome.overview-v216 .section-row{margin:0 0 8px}
  body.mobile-ux #studioHome.overview-v216 .section-row h3{font-size:15px;margin:0}
  body.mobile-ux #studioHome.overview-v216 .shortcut-grid{gap:8px}
- body.mobile-ux #studioHome.overview-v216>.overview-search{order:0}
+ html body:not(#_rd).mobile-ux #studioHome.overview-v216 .overview-search{margin:0 0 12px!important}
  body.mobile-ux[data-studio-hub=home] #homeStreak{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:6px;font-size:13px;white-space:nowrap;border:0;background:var(--accent-light);color:var(--ink);border-radius:var(--radius-btn)}
  body.mobile-ux .topbar-actions{gap:5px}
  body.mobile-ux #studioHeader .topbar-title{min-width:0;flex:1}
@@ -168,3 +168,22 @@ html body.studio-enabled #studioHome .feature-hero{box-shadow:var(--shadow-home-
  html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome .dashboard-side .overview-search #homeQuery{width:100%!important;min-width:0}
  #studioHome .dashboard-side .overview-search form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
 }
+
+
+/* Group the goal, AI setting, and pace controls in the existing settings panel. */
+body.studio-enabled #homePlanSettings .plan-overview-group{
+ display:grid;gap:8px;padding:14px 0;border-top:1px solid var(--line);
+}
+body.studio-enabled #homePlanSettings .plan-overview-group:first-child{padding-top:0;border-top:0}
+body.studio-enabled #homePlanSettings #planOverview :is(h4,p){margin:0}
+body.studio-enabled #homePlanSettings #planOverview h4{font-size:14px}
+body.studio-enabled #homePlanSettings #planOverview p:empty{display:none}
+body.studio-enabled #homePlanSettings #planSlow{margin:0 0 12px}
+body.studio-enabled #homePlanSettings .plan-adjust-options{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px;margin-top:12px;
+}
+body.studio-enabled #homePlanSettings .plan-adjust-options article{
+ display:flex;flex-direction:column;align-items:flex-start;gap:6px;
+ margin:0;padding:12px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);
+}
+body.studio-enabled #homePlanSettings .plan-adjust-options button{margin-top:auto}
