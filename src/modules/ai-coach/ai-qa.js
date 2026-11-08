@@ -233,7 +233,7 @@ function formatTime(value){try{return new Intl.DateTimeFormat('vi-VN',{day:'2-di
   return;
  }
  const selectedThinking=thinkingControls[0].disabled?'low':thinking;
- const timer=setTimeout(()=>controller.abort(),55000);try{const token=await user.getIdToken(),s=currentProject?.privateMemory?{}:snapshot(),level=Number(s.targetHsk)>=1&&Number(s.targetHsk)<=6?Number(s.targetHsk):3,endpoint=config.endpoint.replace(/\/translate\/?$/,'/lesson-ask');const contextIntent=currentProject?{...intentInfo,directiveVi:(intentInfo.directiveVi||'')+window.HSKQaProjects.prompt(currentProject,question,chat.id)}:intentInfo;
+ const timer=setTimeout(()=>controller.abort(),110000);try{const token=await user.getIdToken(),s=currentProject?.privateMemory?{}:snapshot(),level=Number(s.targetHsk)>=1&&Number(s.targetHsk)<=6?Number(s.targetHsk):3,endpoint=config.endpoint.replace(/\/translate\/?$/,'/lesson-ask');const contextIntent=currentProject?{...intentInfo,directiveVi:(intentInfo.directiveVi||'')+window.HSKQaProjects.prompt(currentProject,question,chat.id)}:intentInfo;
  const lesson={id:'ai-qa',title:'Hỏi đáp AI · gia sư cá nhân',words:[],content:{
   mode:'ai-qa',scope:currentProject?'project':'general',learning_snapshot:s,
   intentInfo:contextIntent,understandingNodes:relevantNodes,questionMessageId

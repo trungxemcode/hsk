@@ -488,11 +488,13 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   settingsAvailable=true;
   await page.locator('#personalAiLoad').click();
   await page.locator('#personalAiForm').waitFor({state:'visible'});
+  await page.locator('#personalAiFostaModel').selectOption('gpt-6-luna');
+  assert.equal(await page.locator('#personalAiFostaModel option').count(),3);
   await page.locator('#personalAiEnabled').check();
   await page.locator('#personalAiKey').fill('fake-test-key-only');
   await page.locator('#personalAiForm button[type=submit]').click();
   await page.getByText('Đang dùng API riêng cho Hỏi đáp AI.',{exact:true}).waitFor();
-  assert.deepEqual(savedSettings,{provider:'fosta',model:'gpt-6.1-sol',enabled:true,apiKey:'fake-test-key-only'});
+  assert.deepEqual(savedSettings,{provider:'fosta',model:'gpt-6-luna',enabled:true,apiKey:'fake-test-key-only'});
   assert.equal(await page.locator('#personalAiKey').inputValue(),'');
   assert.equal(await page.evaluate(()=>JSON.stringify(localStorage).includes('fake-test-key-only')),false);
 assert.deepEqual(errors,[]);console.log('PASS AI Q&A',width,'realtime sync, chat layout, history menu, bounded snapshot, request, response');await page.close();

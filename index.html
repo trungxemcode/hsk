@@ -311,9 +311,13 @@
 <label><input id="personalAiEnabled" type="checkbox"> Dùng API riêng</label>
 <label for="personalAiProvider">Nhà cung cấp</label>
 <select id="personalAiProvider"><option value="fosta">FOSTA (OpenAI-compatible)</option><option value="openai">OpenAI / ChatGPT</option><option value="claude">Anthropic / Claude</option><option value="deepseek">DeepSeek</option><option value="gemini">Google Gemini</option></select>
-<label for="personalAiModel">Model</label>
-<input id="personalAiModel" maxlength="100" required list="personalAiModels" spellcheck="false">
-<datalist id="personalAiModels"></datalist>
+<label id="personalAiModelLabel" for="personalAiFostaModel">Model</label>
+<select id="personalAiFostaModel" aria-label="Model FOSTA">
+<option value="gpt-6.1-sol">gpt-6.1-sol</option>
+<option value="gpt-6-astra">gpt-6-astra</option>
+<option value="gpt-6-luna">gpt-6-luna</option>
+</select>
+<input id="personalAiModel" maxlength="100" spellcheck="false" hidden disabled>
 <p id="personalAiEndpoint" class="hint"></p>
 <label for="personalAiKey">API key</label>
 <input id="personalAiKey" type="password" maxlength="512" autocomplete="new-password" spellcheck="false" autocapitalize="off">
