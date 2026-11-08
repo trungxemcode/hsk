@@ -92,7 +92,9 @@
   for(const control of controls)picks.push(build(control));
   document.addEventListener('pointerdown',event=>{if(openPicker&&!openPicker.menu.contains(event.target)&&!openPicker.button.contains(event.target))closeAll();});
   window.addEventListener('resize',closeAll);
-  window.addEventListener('scroll',closeAll,true);
+  window.addEventListener('scroll',event=>{
+    if(openPicker&&event.target!==openPicker.menu)closeAll();
+  },true);
 
   async function refresh(user,config){
     const nextUid=user?.uid||'guest';

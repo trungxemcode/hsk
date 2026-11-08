@@ -35,6 +35,14 @@ await page.route('https://ai.test/ai-providers',route=>route.fulfill({json:{syst
   assert.ok(await providerMenu.locator('[data-provider="personal:deepseek"] .qa-provider-lock').count(),'mục bị khóa có ổ khóa');
   assert.equal(await providerMenu.locator('[data-provider="personal:claude"]').getAttribute('aria-disabled'),null,'API riêng đã bật được chọn');
   const menuBox=await providerMenu.boundingBox();assert.ok(menuBox.x>=0&&menuBox.x+menuBox.width<=width+0.5&&menuBox.y>=0,'menu nằm trong màn hình');
+  await providerMenu.evaluate(menu=>{menu.style.maxHeight='160px';});
+  await providerMenu.hover();
+  await page.mouse.wheel(0,240);
+  await page.waitForFunction(()=>document.querySelector('#aiQaForm .qa-provider-menu').scrollTop>0);
+  assert.ok(await providerMenu.isVisible(),'cuộn trong danh sách không đóng menu');
+  await page.evaluate(()=>window.dispatchEvent(new Event('scroll')));
+  assert.equal(await providerMenu.isVisible(),false,'cuộn trang ngoài đóng menu');
+  await providerButton.click();
   await providerMenu.locator('[data-provider="system-chatgpt"]').click({force:true});
   assert.equal(await providerButton.locator('.qa-provider-label').textContent(),'Tự động','bấm mục khóa không đổi lựa chọn');
   assert.equal(await providerMenu.isVisible(),true,'bấm mục khóa không đóng menu');
