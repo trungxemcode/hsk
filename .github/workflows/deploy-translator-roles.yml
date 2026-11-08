@@ -1,15 +1,7 @@
 name: Deploy translator Worker and verify service routes
+# Production voice/translation Worker may be newer than the repository bundle.
+# Deploy only after comparing live voice code and configuring the master secret.
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/deploy-translator-roles.yml'
-      - 'server/translator-worker.mjs'
-      - 'server/translator-worker-bundled.mjs'
-      - 'server/original-reading.mjs'
-      - 'server/personal-ai.mjs'
-      - 'server/wrangler.jsonc'
-      - 'tools/build-worker-bundle.cjs'
   workflow_dispatch:
 permissions:
   contents: read
