@@ -20,6 +20,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
   const mastery=p.locator('.lesson-mastery'),summary=mastery.locator('summary');
   await summary.waitFor({state:'visible'});
   assert.equal(await summary.evaluate(n=>getComputedStyle(n).translate),'none');
+  await p.waitForFunction(()=>getComputedStyle(document.querySelector('.lesson-mastery summary')).color==='rgb(12, 34, 56)',null,{timeout:10000});
   assert.equal(await summary.evaluate(n=>getComputedStyle(n).color),'rgb(12, 34, 56)');
   const meterBounds=await mastery.boundingBox(),navBounds=await p.locator('.lesson-section-nav').boundingBox();
   assert.ok(navBounds.y>=meterBounds.y+meterBounds.height-1,'lesson navigation stays below the progress card');
