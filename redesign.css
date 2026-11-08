@@ -1001,7 +1001,7 @@ body.studio-enabled :is(#homePlanSettings,.plan-panel,.clean-disclosure,.memory-
     width:100% !important;
     height:auto !important;
   }
-  body.studio-enabled #studioHome #planEmpty{
+  body.studio-enabled #studioHome #planEmpty:not([hidden]){
     display:flex;
     align-items:center;
     gap:18px;
@@ -1470,7 +1470,7 @@ body.studio-enabled .clean-home-inputs button:hover{
 }
 
 /* --- Cân lại khối mục tiêu + cột phụ --- */
-body.studio-enabled #studioHome #planEmpty{
+body.studio-enabled #studioHome #planEmpty:not([hidden]){
   display:flex !important;
   align-items:center;
   flex-wrap:wrap;
@@ -2914,7 +2914,7 @@ html body:not(#_rd).studio-enabled #homePlanSettings > summary{
 html body:not(#_rd).studio-enabled #homePlanSettings > summary:hover{
   background:var(--rd-static-color-010) !important;
 }
-html body:not(#_rd).studio-enabled #homePlanSettings #planEmpty{
+html body:not(#_rd).studio-enabled #homePlanSettings #planEmpty:not([hidden]){
   display:flex !important;
   align-items:center;
   justify-content:space-between;
