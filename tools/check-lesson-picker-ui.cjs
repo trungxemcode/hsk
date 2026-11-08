@@ -17,6 +17,15 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
    assert.equal(await p.locator('.workspace').evaluate(n=>n.scrollWidth>n.clientWidth+1),false);
   }
   assert.equal(await p.evaluate(()=>localStorage.getItem('hsk-course-lessons-v1')),before,'section navigation must not award mastery');
+  const mini=p.locator('.lesson-mini'),check=p.locator('.lesson-practice-check');
+  assert.ok(await mini.isVisible());assert.equal(await check.isVisible(),false);
+  await p.locator('[data-practice-mode=check]').click();
+  assert.ok(await check.isVisible());assert.equal(await mini.isVisible(),false);
+  await check.locator('.lesson-test-options button').first().click();
+  await p.locator('[data-practice-mode=mini]').click();
+  await p.locator('[data-practice-mode=check]').click();
+  assert.ok(await check.locator('.lesson-test-options button').first().isDisabled(),'switching activities preserves answered question');
+  assert.equal(await p.locator('.workspace').evaluate(n=>n.scrollWidth>n.clientWidth+1),false);
   if(width<721){
    await picker.selectOption('overview');await p.locator('.workspace').evaluate(n=>n.scrollTop=0);
    const details=p.locator('.mobile-mastery-details');await details.evaluate(n=>n.open=false);const closed=await p.locator('.lesson-section-nav').boundingBox();

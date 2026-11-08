@@ -19,7 +19,15 @@ const {JSDOM,VirtualConsole}=require('jsdom'),fs=require('node:fs'),assert=requi
   if(['03','06','09','12'].includes(id.slice(-2))){button('Đọc & hội thoại').click();assert.equal(d.querySelector('.lesson-dialogue').querySelectorAll('.lesson-language-line').length,8,id+' eight-turn dialogue');}
  }
  const id='standard-2-03',l=JSON.parse(fs.readFileSync('lesson-content-hsk2.json')).lessons.find(l=>l.id===id);w.history.replaceState(null,'','#lesson/'+id);await w.HSKLessonNav.open();button('Luyện tập').click();
- for(const [i,q] of l.practice.entries()){button(q.options[q.answer]).click();assert.ok(d.querySelector('.lesson-test-feedback').textContent.includes('Chính xác'));button(i===5?'Xem kết quả':'Câu tiếp theo').click();}
+ const miniPanel=d.querySelector('.lesson-mini'),checkPanel=d.querySelector('.lesson-practice-check');
+ assert.ok(miniPanel&&!miniPanel.closest('[hidden]'),'Ôn nhanh is the default practice activity');
+ assert.ok(checkPanel?.closest('[hidden]'),'Hiểu bài is hidden until selected');
+ const checkMode=d.querySelector('[data-practice-mode=check]'),miniMode=d.querySelector('[data-practice-mode=mini]');
+ assert.ok(checkMode&&miniMode,'both practice modes exist');checkMode.click();
+ assert.ok(!checkPanel.closest('[hidden]')&&miniPanel.closest('[hidden]'),'Hiểu bài becomes visible');
+ for(const [i,q] of l.practice.entries()){button(q.options[q.answer]).click();assert.ok(d.querySelector('.lesson-test-feedback').textContent.includes('Chính xác'));
+  if(i===0){miniMode.click();assert.ok(checkPanel.closest('[hidden]'),'Hiểu bài can be hidden without resetting answers');checkMode.click();assert.equal(checkPanel.querySelector('.lesson-test-options button').disabled,true,'answer remains locked after switching tabs');}
+  button(i===5?'Xem kết quả':'Câu tiếp theo').click();}
  const evidence=JSON.parse(w.localStorage.getItem('hsk-course-lessons-v1')).lessons[id].contentEvidence;assert.equal(Object.keys(evidence).length,6);assert.ok(Object.values(evidence).every(x=>x.streak===1));assert.deepEqual(errors,[]);
  console.log('PASS: actual app initialization; all 146 lesson DOM views; collapsed-by-default pinyin/meaning toggles; vocabulary/aliases; 24 eight-turn dialogues; grading and persistence for all 6 questions. Visual/browser layout is not covered.');
  }finally{dom.window.close();server.close();}
