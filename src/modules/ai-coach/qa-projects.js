@@ -84,10 +84,7 @@
   $('qaProjectName').oninput=()=> $('qaProjectName').setCustomValidity('');
   $('qaProjectChatForm').onsubmit=event=>{
    event.preventDefault();
-   if(!question.value.trim())return;
-   const message=question.value;
-   question.value='';
-   api.ask(message);
+   api.submitProject(question);
   };
   async function importSource(load,file=null){
    const project=api.project(),owner=api.owner();
