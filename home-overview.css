@@ -187,3 +187,8 @@ body.studio-enabled #homePlanSettings .plan-adjust-options article{
  margin:0;padding:12px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);
 }
 body.studio-enabled #homePlanSettings .plan-adjust-options button{margin-top:auto}
+
+/* On desktop, editing shows the original form without the saved-plan summary above it. */
+body.studio-enabled:not(.mobile-ux) #studioHome #homePlanSettings:has(> #planSetup[open]) > #planOverview{
+ display:none;
+}
