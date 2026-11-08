@@ -330,10 +330,9 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    const choiceError=isAiQa?aiProviderChoiceError(aiChoice,{personalEnabled:personalAi?.enabled===true,sharedCookieReady,geminiReady:configuredGeminiKeys(env).length>0}):null;
    if(choiceError)return reply({error:choiceError,code:'AI_PROVIDER_UNAVAILABLE'},409);
    const useSharedChatGptCookie=isAiQa&&!usePersonalAi&&sharedCookieReady&&(aiChoice==='system-chatgpt'||aiChoice==='auto'&&(env.AI_QA_PROVIDER==='chatgpt-cookie'||!configuredGeminiKeys(env).length));
-   const useChatGptCookie=isAiQa&&(useSharedChatGptCookie||usePersonalAi&&personalAi?.provider==='chatgpt-cookie');
    if(isLessonAsk&&!usePersonalAi&&!useSharedChatGptCookie&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ AI chưa được kích hoạt.'},503);
    if(isAiQa){
-    const guardCheck=sharedGuardrail.validateInput(body.question,'qa',{strictRelevance:useChatGptCookie});
+    const guardCheck=sharedGuardrail.validateInput(body.question,'qa',{strictRelevance:false});
     if(!guardCheck.valid)return reply({error:guardCheck.reason,code:'AI_GUARDRAIL_BLOCKED'},400);
    }
    if(isSample){const result=await submitHandwritingSample(body,c.sub,env,now());return reply(result.body,result.status);}

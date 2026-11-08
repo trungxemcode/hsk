@@ -251,4 +251,9 @@ test('Worker supports ChatGPT Cookie in Personal AI settings, Shared Server Cook
  assert.equal(sharedRes.status,200);
  assert.equal(sharedRes.headers.get('X-HSK-AI-Provider'),'chatgpt-cookie');
  assert.equal((await sharedRes.json()).answer,'Chào bạn! Đây là phản hồi từ Cookie dùng chung của Server.');
+ for(const [index,question] of ['Xin chào','nỉ hào là gì'].entries()){
+  const response=await callWorker('learner-short-'+index,'/lesson-ask',{...qaBody,question},sharedEnv);
+  assert.equal(response.status,200);
+  assert.equal(response.headers.get('X-HSK-AI-Provider'),'chatgpt-cookie');
+ }
 });
