@@ -157,7 +157,7 @@ html body.studio-enabled #studioHome .feature-hero{box-shadow:var(--shadow-home-
  html body.studio-enabled:not(.mobile-ux) #studioHome #planTasks[hidden]{display:none!important}
  html body.studio-enabled #studioHome .overview-plan-toggle{
   display:inline-grid;place-items:center;vertical-align:middle;width:28px;min-width:28px;height:28px;min-height:28px;
-  padding:0;margin:0 0 0 6px;background:transparent;border:0;box-shadow:none;color:var(--sub);
+  padding:0;margin:0 0 0 6px;background:var(--palette-clear);border:0;box-shadow:none;color:var(--sub);
  }
  #studioHome .overview-plan-toggle .overview-plan-chevron{
   width:7px;height:7px;border-right:1.5px solid var(--sub);border-bottom:1.5px solid var(--sub);
@@ -187,3 +187,8 @@ body.studio-enabled #homePlanSettings .plan-adjust-options article{
  margin:0;padding:12px;border:1px solid var(--line);border-radius:var(--radius-btn);background:var(--surface);
 }
 body.studio-enabled #homePlanSettings .plan-adjust-options button{margin-top:auto}
+
+/* On desktop, editing shows the original form without the saved-plan summary above it. */
+body.studio-enabled:not(.mobile-ux) #studioHome #homePlanSettings:has(> #planSetup[open]) > #planOverview{
+ display:none;
+}
