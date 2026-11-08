@@ -88,5 +88,5 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal){
  const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
   payload?.choices?.[0]?.message?.content;
  if(typeof text!=='string')return new Response(null,{status:502});
- return Response.json({candidates:[{content:{parts:[{text:text.trim().replace(/^\x60{3}(?:json)?\s*|\s*\x60{3}$/gi,'')}]}}]});
+ return Response.json({candidates:[{content:{parts:[{text:text.trim()}]}}]});
 }
