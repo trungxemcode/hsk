@@ -1,7 +1,1 @@
-{
-  "request": "Đổi nhãn điều hướng Tài khoản thành Cài đặt và thêm cài đặt API riêng trong trang này.",
-  "excludedRoutes": [
-    "account"
-  ],
-  "sharedNavigationOnly": true
-}
+{"request":"Bộ chọn mức suy nghĩ trong ô nhập chat thường và chat dự án, cùng thông báo lỗi API riêng trong Cài đặt, trên PC và điện thoại.","excludedRoutes":["ai-qa","account"]}

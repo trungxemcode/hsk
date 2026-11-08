@@ -44,6 +44,7 @@
     method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
     body:JSON.stringify({op,settings}),cache:'no-store'
    });
+   if(response.status===404)throw Error('Máy chủ Hỏi đáp AI chưa cập nhật chức năng API riêng. Hãy thử lại sau.');
    const data=await response.json();
    if(id!==requestId||account()?.uid!==user.uid)return;
    if(!response.ok)throw Error(data.error||'Chưa lưu được cài đặt API.');

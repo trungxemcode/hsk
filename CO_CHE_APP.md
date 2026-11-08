@@ -225,6 +225,9 @@ Các địa chỉ dưới lấy từ code/config ở commit đối chiếu, **kh
 | `https://hsk-vietnamese-translator.trung-hsk668.workers.dev/translate` | `translation-config.json` | Điểm vào AI/dịch; module có thể dựng route khác từ cùng origin. Đối chiếu handler từng route ở mục7, giữ auth/payload |
 | `https://hsk-music-library.trung-hsk668.workers.dev` | `music-config.json.cloudEndpoint` **và** hằng `BASE` trong `tools/music-import-runner.py` | Kho R2 và queue import. Khi chuyển Worker phải sửa cả app lẫn runner; giữ OIDC, origins và bucket |
 | `https://generativelanguage.googleapis.com/v1beta/models/…` | `server/gemini-keys.mjs`, `translator-worker.mjs`, `voice-tts.mjs`, các service AI | Worker gọi Gemini; model/method quyết định theo feature. API key chỉ tồn tại server; không gọi trực tiếp từ frontend để né quota |
+
+Hỏi đáp AI dùng mức Thấp (Gemini 3.1 Flash-Lite), Trung bình (3.5 Flash) hoặc Cao (3.8 Flash) khi dùng API mặc định. Worker xác minh VIP/Admin trước khi cho gọi hai mức trên Thấp và giữ đúng model khi xoay key. API riêng tiếp tục dùng model đã cấu hình.
+
 | `https://api.xkiro.com/v1/chat/completions` | `server/ai-backup.mjs` | Provider text phụ/role thường theo flags; secret phía Worker. Không tráo sang route speech/vision khi chưa có adapter tương thích |
 | Firebase project `hsk-flashcards-44631`, auth domain `hsk-flashcards-44631.firebaseapp.com` | `account-config.json`; SDK trong `src/modules/account/account.js` | Auth và Firestore theo cùng project. Đổi project cần kế hoạch chuyển tài khoản/dữ liệu/rules, không sửa UID chủ kho để test |
 | `https://www.gstatic.com/firebasejs/13.0.0/…` | `account.js` | SDK Firebase tải ngoài. Nâng version cần test auth/sync/backup, không coi là asset nội bộ |

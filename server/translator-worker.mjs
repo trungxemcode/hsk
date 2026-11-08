@@ -154,7 +154,8 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-reading-library-4-1-2-r3';
+export const WORKER_REVISION='hsk-qa-thinking-r1';
+const QA_THINKING_MODELS=new Map([['low','gemini-3.1-flash-lite'],['medium','gemini-3.5-flash'],['high','gemini-3.8-flash']]);
 export function buildCorsHeaders(request,env={}){const origin=request.headers.get('Origin')||'*';return {'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Authorization, X-Requested-With','Access-Control-Max-Age':'86400','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider, X-HSK-AI-Cache, X-HSK-Image-Remaining','Vary':'Origin'};}
 function jsonWithCors(value,status,request,env){return new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8',...buildCorsHeaders(request,env)}});}
 function mergeWeaknessItemsAcrossDevices(existing={},incoming={}){
@@ -306,8 +307,11 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      return reply({error:status===400?'Kiểm tra nhà cung cấp, tên model và API key.':'Máy chủ chưa bật lưu API riêng.'},status);
     }catch{return reply({error:'Máy chủ chưa bật lưu API riêng.'},503);}
    }
+   const isAiQa=isLessonAsk&&body.lesson?.content?.mode==='ai-qa';
+   const thinking=body.thinking??'low';
+   if(isAiQa&&!QA_THINKING_MODELS.has(thinking))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
    let personalAi=null;
-   if(isLessonAsk&&body.lesson?.content?.mode==='ai-qa'&&env.AI_CONTROL){
+   if(isAiQa&&env.AI_CONTROL){
     try{personalAi=await personalAiCall(env,account.localId,'personal-ai-use');}
     catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
    }
@@ -328,7 +332,12 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     }catch{return reply({error:'Chưa xác minh được quyền tài khoản. Hãy thử lại.',code:'ACCOUNT_ROLES_UNAVAILABLE'},503);}
    }
    fetchFn=createAiRoleFetch(keyFetch,env,{route,body,accountRole:verifiedRole,validateData:isReading?data=>validReadingStory(data,{genre:body.genre||'dialogue',hsk:body.hsk,quality:!!body.genre,lessonWords:body.lessonWords}):undefined,onProvider:provider=>{headers['X-HSK-AI-Provider']=provider;},onAttempt:entry=>{if(isReading)timings.push(entry);}});
-   const roleEnv=verifiedRole?{...env,QA_ACCOUNT_PROVIDER:roleProvider(verifiedRole),QA_SHADOW_MODE:'off'}:env;
+   if(isAiQa&&thinking!=='low'&&!isAdmin&&verifiedRole!=='vip'){
+    return reply({error:'Mức Trung bình và Cao chỉ dành cho VIP và Admin.',code:'QA_THINKING_FORBIDDEN'},403);
+   }
+   const model=isAiQa?QA_THINKING_MODELS.get(thinking):env.GEMINI_MODEL||'gemini-3.5-flash-lite';
+   const roleEnv=isAiQa?{...env,GEMINI_MODEL:model,QA_ACCOUNT_PROVIDER:'gemini',QA_SHADOW_MODE:'off'}:
+    verifiedRole?{...env,QA_ACCOUNT_PROVIDER:roleProvider(verifiedRole),QA_SHADOW_MODE:'off'}:env;
    const providerFailure=(response,model,env,operation)=>verifiedRole==='regular'&&!isOcr&&!isHandwriting?{error:response.status===429?'xKiro đã đạt giới hạn lượt dùng. Hãy thử lại sau.':'xKiro chưa trả lời được. Hãy thử lại sau.',code:'AI_PROVIDER_ERROR',provider:'xkiro',workerRevision:WORKER_REVISION}:geminiFailure(response,model,env,operation);
    if(!isAdmin&&env.AI_ABUSE_ENABLED==='true'){
     if(env.AI_REQUIRE_VERIFIED_EMAIL==='true'&&account.emailVerified!==true)return reply({error:'Hãy xác minh email trong trang Tài khoản trước khi dùng AI.',code:'AI_EMAIL_UNVERIFIED'},403);
@@ -348,7 +357,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true'&&(cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
    if(cooldowns.size>1000)for(const [uid,t] of cooldowns)if(t<=now())cooldowns.delete(uid);
    if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true')cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
-   const level=body.hsk,model=env.GEMINI_MODEL||'gemini-3.5-flash-lite';
+   const level=body.hsk;
    if(!usePersonalAi&&env.QA_CACHE_ENABLED==='true'&&['/ask','/lesson-ask','/dictionary-lookup','/dictionary-translate'].includes(route)){
     {const env=roleEnv;qaSession=await qaBegin(route,body,account.localId,env,isAdmin);}
     headers['X-HSK-AI-Cache']=qaSession.state;
@@ -441,7 +450,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     await qaFinish(roleEnv,qaSession,{translations:data.translations,source:'ai',language:'vi'},headers['X-HSK-AI-Provider'],{rawFetch:rawFetchFn,ctx,signal:controller.signal});
     return reply({translations:data.translations,source:'ai',language:'vi'});
    }
-   const isDictionary=isDictionaryRoute||isLessonAsk&&body.lesson.id==='open-dictionary';
+   const isDictionary=isDictionaryRoute||isLessonAsk&&!isAiQa&&body.lesson.id==='open-dictionary';
    if(isDictionary){
     if(!/^[a-z0-9.-]+$/.test(model))return reply({error:'Cấu hình mô hình chưa hợp lệ.'},503);
     const query=isDictionaryRoute?body.query.trim():String(body.lesson.words[0]?.han||body.lesson.title).slice(0,160),context=isDictionaryRoute?body.context||'':String(body.lesson.content.context||'').slice(0,600),word=isDictionaryRoute?body.word||null:body.lesson.words[0]||null;
@@ -466,7 +475,6 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     const cachedWrongAnswer=isWrongExam?getCachedWrongAnswerExplanation(wrongCacheParams):null;
     if(cachedWrongAnswer)return reply({answer:cachedWrongAnswer,cached:true});
     const isAITeacher=isLessonAsk&&body.lesson?.content?.mode==='ai-teacher';
-    const isAiQa=isLessonAsk&&body.lesson?.content?.mode==='ai-qa';
     const isUnifiedPractice=isLessonAsk&&body.lesson?.content?.mode==='unified-practice-gen';
     const isMicroTutorPack=isLessonAsk&&body.lesson?.content?.mode==='micro-tutor-pack';
     const baseTeacherState=body.lesson?.content?.session_state||{};
@@ -489,9 +497,12 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      catch{return reply({error:'Không kết nối được API riêng. Kiểm tra nhà cung cấp trong Cài đặt.'},502);}
      if(!response.ok)return reply({error:response.status===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng từ chối yêu cầu. Kiểm tra key và model trong Cài đặt.'},response.status===429?429:502);
     }else{
-     response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
+     // Rotate keys without switching the chosen chat model or provider.
+     const generate=isAiQa?createGeminiKeyFetch(providerFetch,env,{now,state:geminiState}):fetchFn;
+     if(isAiQa)headers['X-HSK-AI-Provider']='gemini';
+     response=await generate('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
     }
-    if(!response.ok)return reply(await providerFailure(response,model,env),response.status===429?429:502);
+    if(!response.ok)return reply(await (isAiQa?geminiFailure(response,model,env):providerFailure(response,model,env)),response.status===429?429:502);
     const payload=await response.json(),candidate=payload.candidates?.[0];
     if(candidate?.finishReason&&candidate.finishReason!=='STOP')return reply({error:'AI chưa hoàn thành câu trả lời. Hãy thử hỏi ngắn hơn.'},502);
     let parsed;try{parsed=JSON.parse((candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join(''));}catch{return reply({error:'AI trả lời chưa đúng định dạng. Hãy thử lại.'},502);}

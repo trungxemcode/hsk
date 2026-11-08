@@ -67,6 +67,15 @@
       ]
     },
     {
+      "id": "ai-qa-thinking",
+      "name": "Mức suy nghĩ Hỏi đáp AI theo quyền tài khoản",
+      "checks": [
+        {"kind": "contains", "file": "index.html", "value": "qaProjectThinking"},
+        {"kind": "contains", "file": "server/translator-worker.mjs", "value": "QA_THINKING_FORBIDDEN"},
+        {"kind": "contains", "file": "tools/check-ai-qa-ui.cjs", "value": "regular chat is locked to Low"}
+      ]
+    },
+    {
       "id": "account-personal-ai",
       "name": "API riêng theo tài khoản cho Hỏi đáp AI",
       "checks": [

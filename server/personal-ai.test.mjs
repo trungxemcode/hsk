@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {OWNER_UID} from './account-roles.mjs';
 import {createHandler,HSkaIControl,personalAiGenerate} from './translator-worker-bundled.mjs';
 
 const secret='sample-master-secret-at-least-32-characters';
@@ -25,12 +26,13 @@ const worker=createHandler(async (url,init)=>{
   return Response.json({users:[{localId:claims.sub}]});
  }
  calls.push({url,headers:init.headers,body:JSON.parse(init.body),redirect:init.redirect});
+ if(String(url).includes('generativelanguage'))return Response.json({candidates:[{content:{parts:[{text:'{"answer":"你好"}'}]}}]});
  return Response.json({choices:[{message:{content:'{"answer":"你好"}'}}]});
 });
-const request=(uid,path,body)=>{
+const request=(uid,path,body,workerEnv=env)=>{
  const claims={aud:'hsk-flashcards-44631',iss:'https://securetoken.google.com/hsk-flashcards-44631',sub:uid,exp:Math.floor(Date.now()/1000)+3600};
  const token='header.'+Buffer.from(JSON.stringify(claims)).toString('base64url')+'.signature';
- return worker(new Request('https://worker.test'+path,{method:'POST',headers:{Origin:origin,Authorization:'Bearer '+token},body:JSON.stringify(body)}),env);
+ return worker(new Request('https://worker.test'+path,{method:'POST',headers:{Origin:origin,Authorization:'Bearer '+token},body:JSON.stringify(body)}),workerEnv);
 };
 const settingsPath='/personal-ai-settings';
 const question={question:'Xin chào',hsk:1,lesson:{id:'ai-qa',title:'AI',words:[],content:{mode:'ai-qa',learning_snapshot:{}}},history:[]};
@@ -79,4 +81,23 @@ test('the provider adapters use their own authentication and fixed endpoints',as
   });
   assert.equal(result.status,200);
  }
+});
+
+test('chat model selection uses verified account roles and keeps the selected Gemini model',async()=>{
+ const shared={...env,GEMINI_API_KEY:'fake-shared-gemini',AI_ACCOUNT_ROLES_ENABLED:'true',
+  AI_MODEL_FAILOVER_ENABLED:'true',AI_GEMINI_FALLBACK_MODELS:'gemini-3.6-flash'};
+ const owner=OWNER_UID;
+ const send=(uid,thinking)=>request(uid,'/lesson-ask',{...question,thinking},shared);
+ const before=calls.length;
+ assert.equal((await send('regular-chat','high')).status,403);
+ assert.equal((await send('regular-chat','medium')).status,403);
+ assert.equal((await send('regular-chat','gemini-3.8-flash')).status,400);
+ assert.equal(calls.length,before);
+ assert.equal((await send('regular-chat')).status,200);
+ assert.match(calls.at(-1).url,/gemini-3\.1-flash-lite:generateContent$/);
+ assert.equal((await request(owner,'/admin/account-role',{uid:'vip-chat',role:'vip'},shared)).status,200);
+ assert.equal((await send('vip-chat','medium')).status,200);
+ assert.match(calls.at(-1).url,/gemini-3\.5-flash:generateContent$/);
+ assert.equal((await send(owner,'high')).status,200);
+ assert.match(calls.at(-1).url,/gemini-3\.8-flash:generateContent$/);
 });
