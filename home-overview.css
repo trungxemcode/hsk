@@ -188,7 +188,8 @@ body.studio-enabled #homePlanSettings .plan-adjust-options article{
 }
 body.studio-enabled #homePlanSettings .plan-adjust-options button{margin-top:auto}
 
-/* On desktop, editing shows the original form without the saved-plan summary above it. */
-body.studio-enabled:not(.mobile-ux) #studioHome #homePlanSettings:has(> #planSetup[open]) > #planOverview{
+/* Progress is opt-in on desktop and separate from the goal form. */
+#homePlanSettings #planSetup[open] + .desktop-plan-progress,
+#homePlanSettings .desktop-plan-progress:has(> #planOverview[hidden]){
  display:none;
 }
