@@ -7,7 +7,11 @@ from unittest.mock import patch
 BACKEND_DIR = Path(__file__).resolve().parent.parent / "server" / "chatgpt-cookie"
 sys.path.insert(0, str(BACKEND_DIR))
 
-from core.session_manager import ChatGPTSessionManager  # noqa: E402
+from core.session_manager import (  # noqa: E402
+    ChatGPTSessionManager,
+    parse_session_cookies,
+    solve_sentinel_pow,
+)
 from core.chat_client import ChatGPTClient  # noqa: E402
 from security.guardrail import HSKGuardrail  # noqa: E402
 from projects.document_parser import HSKDocumentParser  # noqa: E402
@@ -95,6 +99,28 @@ class ChatGPTCookieBackendTests(unittest.TestCase):
                     await tutor.explain_vocabulary("user_1", "你好", 1, mm)
 
         asyncio.run(run_chat())
+
+    def test_sentinel_pow_and_cookie_chunking(self):
+        import hashlib
+
+        seed = "0.123456"
+        difficulty = "0fff"
+        token = solve_sentinel_pow(seed, difficulty)
+        self.assertTrue(token.startswith("gAAAAAB"))
+        b64_part = token[len("gAAAAAB") :].encode("ascii")
+        digest = hashlib.sha3_512(seed.encode("utf-8") + b64_part).hexdigest()
+        self.assertLessEqual(digest[: len(difficulty)], difficulty)
+
+        long_token = "a" * 3967 + "b" * 409
+        chunks = parse_session_cookies(long_token)
+        self.assertEqual(chunks["__Secure-next-auth.session-token.0"], "a" * 3967)
+        self.assertEqual(chunks["__Secure-next-auth.session-token.1"], "b" * 409)
+
+        header_cookies = parse_session_cookies(
+            "__Secure-next-auth.session-token.0=part0; __Secure-next-auth.session-token.1=part1; oai-did=dev-123"
+        )
+        self.assertEqual(header_cookies["oai-did"], "dev-123")
+        self.assertEqual(header_cookies["__Secure-next-auth.session-token.1"], "part1")
 
 
 if __name__ == "__main__":

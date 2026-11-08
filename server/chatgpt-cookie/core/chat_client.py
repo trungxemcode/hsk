@@ -35,13 +35,15 @@ class ChatGPTClient:
         session_token: Optional[str] = None
     ) -> dict:
         """
-        Gửi tin nhắn hoàn toàn độc lập (Stateless) và tự động xóa lịch sử nếu có.
+        Gửi tin nhắn hoàn toàn độc lập (Stateless) kèm Cookie phiên + Sentinel Proof-of-Work
+        và tự động xóa lịch sử nếu có.
         """
         sm, lock = self._resolve_session(session_token)
         async with lock:
+            if AsyncSession is None:
+                raise RuntimeError("Thư viện curl_cffi chưa được cài đặt.")
+
             access_token = await sm.get_valid_access_token()
-            headers = sm._get_headers(include_auth=True, access_token=access_token)
-            headers["Accept"] = "text/event-stream"
 
             payload = {
                 "action": "next",
@@ -55,14 +57,19 @@ class ChatGPTClient:
                 "parent_message_id": str(uuid.uuid4()),
                 "model": model or "gpt-4o-mini",
                 "timezone_offset_min": -420,
+                "conversation_mode": {"kind": "primary_assistant"},
+                "websocket_request_id": str(uuid.uuid4()),
                 # QUAN TRỌNG: Tắt lưu lịch sử và tắt tự huấn luyện để chống loãng AI
                 "history_and_training_disabled": True,
             }
 
-            if AsyncSession is None:
-                raise RuntimeError("Thư viện curl_cffi chưa được cài đặt.")
-
-            async with AsyncSession(impersonate="chrome120") as session:
+            async with AsyncSession(impersonate="chrome120", cookies=sm.get_cookies()) as session:
+                sentinel_headers = await sm.get_sentinel_headers(session, access_token)
+                headers = {
+                    **sm._get_headers(include_auth=True, access_token=access_token),
+                    **sentinel_headers,
+                    "Accept": "text/event-stream",
+                }
                 response = await session.post(
                     self.api_url,
                     headers=headers,
@@ -70,9 +77,32 @@ class ChatGPTClient:
                     timeout=60,
                     allow_redirects=False
                 )
+                sm.update_cookies(getattr(session, "cookies", None))
+
+                if response.status_code == 401:
+                    sm.access_token = None
+                    access_token = await sm.get_valid_access_token()
+                    sentinel_headers = await sm.get_sentinel_headers(session, access_token)
+                    headers = {
+                        **sm._get_headers(include_auth=True, access_token=access_token),
+                        **sentinel_headers,
+                        "Accept": "text/event-stream",
+                    }
+                    response = await session.post(
+                        self.api_url,
+                        headers=headers,
+                        json=payload,
+                        timeout=60,
+                        allow_redirects=False
+                    )
+                    sm.update_cookies(getattr(session, "cookies", None))
 
                 if response.status_code != 200:
-                    raise ChatGPTUpstreamError("conversation", response.status_code, response.headers.get("cf-mitigated") == "challenge")
+                    raise ChatGPTUpstreamError(
+                        "conversation",
+                        response.status_code,
+                        response.headers.get("cf-mitigated") == "challenge"
+                    )
 
                 result = self._parse_sse_response(response.text)
 
@@ -94,7 +124,7 @@ class ChatGPTClient:
             headers = target_sm._get_headers(include_auth=True, access_token=access_token)
             if AsyncSession is None:
                 return
-            async with AsyncSession(impersonate="chrome120") as session:
+            async with AsyncSession(impersonate="chrome120", cookies=target_sm.get_cookies()) as session:
                 await session.patch(
                     f"{self.api_url}/{conversation_id}",
                     headers=headers,

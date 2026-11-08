@@ -314,12 +314,59 @@ export class ChatGPTSessionManager{
   this.tokenExpiresAt=0;
   this.baseUrl=baseUrl.replace(/\/+$/,'');
   this.now=now;
+  this.deviceId=crypto.randomUUID();
+  this.extraCookies=new Map();
+ }
+ getCookieHeader(){
+  if(!this.sessionToken)throw Error('Cookie đã hết hạn hoặc không hợp lệ. Vui lòng cập nhật Cookie mới.');
+  const cookieName='__Secure-next-auth.session-token';
+  const entries=[];
+  if(this.sessionToken.includes(';')&&this.sessionToken.includes('=')){
+   for(const rawPair of this.sessionToken.split(';')){
+    const pair=rawPair.trim();
+    if(!pair||!pair.includes('='))continue;
+    const eq=pair.indexOf('='),k=pair.slice(0,eq).trim(),v=pair.slice(eq+1).trim();
+    if(!k||!v||/[\s;,"\\]/.test(v))throw Error('Định dạng Cookie ChatGPT không hợp lệ.');
+    if(k==='oai-did')this.deviceId=v;
+    entries.push(`${k}=${v}`);
+   }
+   if(!entries.some(e=>e.startsWith(cookieName)||e.startsWith('oai-sc=')))throw Error('Định dạng Cookie ChatGPT không hợp lệ.');
+  }else{
+   const parts=this.sessionToken.includes('|')?this.sessionToken.split('|'):
+    this.sessionToken.length>4000?Array.from({length:Math.ceil(this.sessionToken.length/3967)},(_,i)=>this.sessionToken.slice(i*3967,(i+1)*3967)):
+    [this.sessionToken];
+   if(parts.some(part=>!part||/[\s;,"\\]/.test(part)))throw Error('Định dạng Cookie ChatGPT không hợp lệ.');
+   for(const [index,part] of parts.entries()){
+    entries.push(`${cookieName}${parts.length>1?'.'+index:''}=${part}`);
+   }
+  }
+  for(const [k,v] of this.extraCookies.entries()){
+   if(!entries.some(e=>e.startsWith(`${k}=`)))entries.push(`${k}=${v}`);
+  }
+  return entries.join('; ');
+ }
+ captureResponseCookies(response){
+  try{
+   const setCookies=typeof response?.headers?.getSetCookie==='function'?response.headers.getSetCookie():
+    response?.headers?.get?.('set-cookie')?[response.headers.get('set-cookie')]:[];
+   for(const raw of setCookies){
+    const first=String(raw||'').split(';')[0]?.trim();
+    if(!first||!first.includes('='))continue;
+    const eq=first.indexOf('='),k=first.slice(0,eq).trim(),v=first.slice(eq+1).trim();
+    if(k&&v){
+     this.extraCookies.set(k,v);
+     if(k==='oai-did')this.deviceId=v;
+    }
+   }
+  }catch{}
  }
  getHeaders(includeAuth=true){
   const headers={
    'Accept':'*/*',
    'Accept-Language':'vi-VN,vi;q=0.9,en-US;q=0.8,en;q=0.7',
    'Content-Type':'application/json',
+   'Oai-Device-Id':this.deviceId,
+   'Oai-Language':'vi-VN',
    'Origin':this.baseUrl,
    'Referer':`${this.baseUrl}/`,
    'Sec-Ch-Ua':'"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
@@ -327,23 +374,23 @@ export class ChatGPTSessionManager{
    'Sec-Ch-Ua-Platform':'"Windows"',
    'User-Agent':CHATGPT_CHROME120_UA
   };
-  if(includeAuth&&this.accessToken)headers['Authorization']=`Bearer ${this.accessToken}`;
+  if(includeAuth&&this.accessToken){
+   headers['Authorization']=`Bearer ${this.accessToken}`;
+   headers['Cookie']=this.getCookieHeader();
+  }
   return headers;
  }
  async getValidAccessToken(fetchFn=fetch,signal){
   const nowSec=this.now()/1000;
   if(this.accessToken&&nowSec<this.tokenExpiresAt-300)return this.accessToken;
-  if(!this.sessionToken)throw Error('Cookie đã hết hạn hoặc không hợp lệ. Vui lòng cập nhật Cookie mới.');
-  const parts=this.sessionToken.split('|');
-  if(parts.some(part=>!part||/[\s;,"\\]/.test(part)))throw Error('Định dạng Cookie ChatGPT không hợp lệ.');
-  const cookieName='__Secure-next-auth.session-token';
   const headers={
    ...this.getHeaders(false),
-   'Cookie':parts.map((part,index)=>`${cookieName}${parts.length>1?'.'+index:''}=${part}`).join('; ')
+   'Cookie':this.getCookieHeader()
   };
   const response=await fetchFn(`${this.baseUrl}/api/auth/session`,{
    method:'GET',headers,signal,redirect:'manual'
   });
+  this.captureResponseCookies(response);
   if(!response.ok){
    const err=Error(`ChatGPT từ chối kiểm tra phiên (HTTP ${response.status}).`);
    err.status=response.status;
