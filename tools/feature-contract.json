@@ -50,6 +50,15 @@
       ]
     },
     {
+      "id": "ai-qa-personal-actions",
+      "name": "Lệnh thao tác cá nhân trong Hỏi đáp AI",
+      "checks": [
+        {"kind": "contains", "file": "src/modules/ai-coach/ai-qa.js", "value": "performPersonalCommand"},
+        {"kind": "contains", "file": "src/modules/notebook/notebook.js", "value": "saveForAccount"},
+        {"kind": "contains", "file": "tools/check-ai-qa-ui.cjs", "value": "app commands never use the model endpoint"}
+      ]
+    },
+    {
       "id": "navigation-home",
       "name": "Trang tổng quan",
       "checks": [

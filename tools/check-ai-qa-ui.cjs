@@ -413,6 +413,31 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
 
   assert.ok(await page.evaluate(()=>!window.__qaWrites.some(({data})=>
     data.title?.includes('Giải thích từ 生词'))),'project chats stay separate from cloud conversations');
+  await page.evaluate(()=>localStorage.setItem('hsk-account-meta-v1',JSON.stringify({uid:'qa-user'})));
+  const command=async text=>{
+    await page.locator('#aiQaInput').fill(text);
+    await page.locator('#aiQaSend').click();
+  };
+  const lastReply=page.locator('#aiQaMessages .assistant').last();
+  const lastRequest=received;
+  const knownWord=await page.evaluate(()=>['你','我','学习'].find(han=>HSKDictionaryBridge.lookupExact(han)));
+  assert.ok(knownWord,'test requires a word from the offline dictionary');
+  await command(`Thêm từ ${knownWord} vào sổ`);
+  assert.match(await lastReply.innerText(),/Đã thêm/);
+  await command(`Thêm từ ${knownWord} vào sổ`);
+  assert.match(await lastReply.innerText(),/đã có/);
+  assert.equal(await page.evaluate(han=>Object.values(HSKNotebook.items).filter(item=>item.han===han).length,knownWord),1);
+  await page.evaluate(()=>localStorage.setItem('hsk-account-meta-v1',JSON.stringify({uid:'other-user'})));
+  await command('Thêm từ 测试词 vào sổ, nghĩa là từ thử nghiệm');
+  assert.match(await lastReply.innerText(),/Tài khoản chưa sẵn sàng/);
+  assert.equal(await page.evaluate(()=>Object.values(HSKNotebook.items).some(item=>item.han==='测试词')),false);
+  await page.evaluate(()=>localStorage.setItem('hsk-account-meta-v1',JSON.stringify({uid:'qa-user'})));
+  await command('Mở admin');
+  assert.match(await lastReply.innerText(),/chỉ có thể mở công cụ học tập/);
+  assert.equal(await page.locator('#aiQaPanel').isVisible(),true);
+  await command('Mở sổ từ vựng');
+  await page.locator('#notebookPanel').waitFor({state:'visible'});
+  assert.equal(received,lastRequest,'app commands never use the model endpoint');
 assert.deepEqual(errors,[]);console.log('PASS AI Q&A',width,'realtime sync, chat layout, history menu, bounded snapshot, request, response');await page.close();
  }}finally{await browser?.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1});
