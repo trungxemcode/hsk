@@ -716,7 +716,7 @@ html body.studio-enabled #aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaS
   min-height:32px;
   padding:0 4px;
   border:0;
-  background:transparent;
+  background:var(--palette-clear);
   color:var(--qa-text);
   font-size:12px;
 }
