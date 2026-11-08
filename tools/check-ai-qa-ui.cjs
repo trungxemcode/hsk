@@ -5,7 +5,7 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
  try{browser=await chromium.launch({executablePath:process.env.CHROME_EXECUTABLE});for(const width of [390,1440]){
   const page=await browser.newPage({viewport:{width,height:844},isMobile:width<721,hasTouch:width<721,serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));await page.route('**/translation-config.json',r=>r.fulfill({json:{enabled:true,endpoint:'https://ai.test/translate'}}));let received=null;
-  await page.route('https://ai.test/lesson-ask',async r=>{received=r.request().postDataJSON();return r.fulfill({json:{answer:'Bạn đã có nền tảng tốt. Hãy chuyển sang một thử thách mới có ích.',primaryNodeKey:'grammar:contrast',nodeLabel:'So sánh',suggestedQuestions:[{kind:'context_shift',text:'Cho ví dụ với tình huống đời thường khác nhé?'}]}});});
+  await page.route('https://ai.test/lesson-ask',async r=>{received=r.request().postDataJSON();return r.fulfill({json:{answer:'Bạn đã có **nền tảng tốt**.\nVí dụ: **对不起 (duìbuqǐ)**. **<img src=x>**',primaryNodeKey:'grammar:contrast',nodeLabel:'So sánh',suggestedQuestions:[{kind:'context_shift',text:'Cho ví dụ với tình huống đời thường khác nhé?'}]}});});
   let chatRole='regular';
   await page.route('https://ai.test/account-role',route=>route.fulfill({json:{account:{role:chatRole}}}));
   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html',{waitUntil:'domcontentloaded',timeout:60000});
@@ -284,6 +284,11 @@ assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);ass
     await page.setViewportSize({width,height:844});
   }
 assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written to realtime storage');assert.equal(received.lesson.content.mode,'ai-qa');assert.equal(received.thinking,'medium');assert.ok(received.lesson.content.learning_snapshot.masteryBoundary);assert.match(await page.locator('#aiQaMessages').innerText(),/Bạn đã có nền tảng tốt/);
+   const answer=page.locator('.ai-qa-message.assistant p').first();
+   assert.deepEqual(await answer.locator('b').allTextContents(),['nền tảng tốt','对不起 (duìbuqǐ)','<img src=x>']);
+   assert.equal(await answer.locator('img').count(),0);
+   assert.match(await answer.textContent(),/tốt\.\nVí dụ/);
+
    const targetAiId=await page.locator('.ai-qa-message.assistant').first().getAttribute('data-ai-message-id');
    assert.ok(targetAiId,'assistant message has a stable target id');
    assert.equal(await page.locator('.qa-suggestions-group').count(),1,
