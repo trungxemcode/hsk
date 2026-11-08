@@ -2,8 +2,10 @@
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;},button=(text,fn,cls)=>{const n=el('button',text,cls);n.type='button';n.onclick=fn;return n;};
 let stopCurrent=()=>{};
 function owner(){try{return JSON.parse(localStorage.getItem('hsk-account-meta-v1')||'{}').uid||'guest';}catch{return 'guest';}}
-function mount(view,l,store){stopCurrent();const questions=l.content.miniReview.questions,initialOwner=owner(),box=el('section',undefined,'lesson-mini');box.setAttribute('aria-label','Ôn ngắn bài này');view.append(box);const header=el('div',undefined,'section-row'),title=el('h4','Ôn ngắn bài này'),meter=el('small');header.append(title,meter);box.append(header,el('p','5 câu/tác vụ theo từ, mẫu ngữ pháp và đoạn ngắn của bài · khoảng 3–6 phút. Câu khách quan đúng 2 lần liên tiếp; viết ngắn hoàn thành tự đối chiếu. Phần này đóng góp 10 điểm trong tiến độ 100% của bài.','hint'));
-window.HSKAICoach?.toggle(box);const stage=el('div',undefined,'lesson-mini-stage');box.append(stage);let position=0,order=[],answered=false,active=true;
+function mount(view,l,store){stopCurrent();const questions=l.content.miniReview.questions,initialOwner=owner(),box=el('section',undefined,'lesson-mini');box.setAttribute('aria-label','Ôn ngắn bài này');view.append(box);const header=el('div',undefined,'section-row'),title=el('h4','Ôn ngắn bài này'),meter=el('small');header.append(title,meter);box.append(header);
+const help=el('details',undefined,'lesson-practice-help');
+help.append(el('summary','Hướng dẫn và tùy chọn AI'),el('p','Khoảng 3–6 phút. Câu khách quan cần đúng hai lần liên tiếp; phần viết hoàn thành bằng tự đối chiếu. Ôn nhanh đóng góp 10 điểm vào tiến độ bài.','hint'));
+window.HSKAICoach?.toggle(help);box.append(help);const stage=el('div',undefined,'lesson-mini-stage');box.append(stage);let position=0,order=[],answered=false,active=true;
 stopCurrent=()=>{active=false;window.HSKSpeech?.stop();window.HSKWrongAnswerAI?.clearAll?.();};const live=()=>active&&box.isConnected&&owner()===initialOwner;
 function ready(q){const e=store.read().miniEvidence?.[q.evidenceKey||q.id];return q.format==='writing'?e?.reviewed===true:(e?.streak||0)>=2;}
 function updateMeter(){meter.textContent=questions.filter(ready).length+'/5 hoàn thành';store.changed();}

@@ -692,3 +692,14 @@ body.studio-enabled .side-nav .nav-group-items > button > i[data-icon] > svg{
   width:19px;
   height:19px;
 }
+
+/* Keep each practice activity in its own panel inside the lesson. */
+.lesson-practice-modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:16px}
+.lesson-practice-modes button{min-height:44px;padding:8px 12px;white-space:normal}
+.lesson-practice-modes button[aria-pressed=true]{background:var(--accent);color:var(--palette-white);border-color:var(--accent)}
+.lesson-practice-check{padding:20px;border:1px solid var(--line);border-radius:var(--radius-16px);background:var(--surface)}
+.lesson-practice-check h4{margin:0 0 10px}
+.lesson-practice-help{margin:8px 0 12px}
+.lesson-practice-help summary{cursor:pointer;font-size:13px;color:var(--sub)}
+.lesson-practice-check .lesson-test-options button{min-height:44px;text-align:left}
+@media(max-width:720px){.lesson-practice-check{padding:16px}.lesson-practice-modes button{padding-inline:6px}}
