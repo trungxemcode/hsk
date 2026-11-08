@@ -537,9 +537,8 @@ body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-jump-to-latest:not([hidden])
 }
 
 /* Project folders and project home use the existing chat palette. */
-.qa-project-sidebar{padding:10px 14px;color:var(--qa-text);}
-.qa-project-sidebar>strong{display:block;margin-bottom:6px;}
-#qaProjectFolders .qa-project-folder-heading button,#qaProjectChats button{display:block;width:100%;text-align:left;margin-block:4px;overflow-wrap:anywhere;}
+.qa-project-sidebar{padding:6px 8px;color:var(--qa-text);}
+#qaProjectChats button{display:block;width:100%;text-align:left;margin-block:4px;overflow-wrap:anywhere;}
 .qa-project-home[hidden],.ai-qa-chat[hidden],#qaProjectBack[hidden],
 #qaProjectChats[hidden],#qaProjectSources[hidden]{display:none!important;}
 .qa-project-home{flex:1;min-width:0;min-height:0;overflow:auto;padding:16px 20px;background:var(--qa-bg);color:var(--qa-text);}
@@ -563,12 +562,53 @@ body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-jump-to-latest:not([hidden])
 
 .ai-qa-sidebar-content{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;}
 .ai-qa-sidebar-content .ai-qa-conversation-list{overflow:visible!important;}
-.ai-qa-recent-heading{margin:12px 14px 4px;font-size:13px;color:var(--qa-text);}
-.qa-project-folder-heading{display:flex;align-items:center;gap:4px;}
-#qaProjectFolders .qa-project-folder-heading button:first-child{width:32px;flex:none;text-align:center;padding-inline:0;}
-#qaProjectFolders .qa-project-folder-heading button:last-child{flex:1;min-width:0;}
-.qa-project-folder-chats[hidden]{display:none!important;}
-.qa-project-folder-chats{padding-inline-start:18px;}
-.qa-project-folder-chats>small{padding-inline-start:8px;color:var(--qa-subtle);}
+.ai-qa-recent-heading{margin:14px 14px 4px;font-size:13px;color:var(--qa-text);}
+.qa-project-sidebar-heading,.qa-project-folder-heading{display:flex;align-items:center;min-width:0;border-radius:var(--qa-radius-compact);}
+.qa-project-sidebar-heading{justify-content:space-between;margin-bottom:4px;}
+/* Scope the button surface directly: shared --button-* tokens belong to style.css. */
+html body.studio-enabled #aiQaHistory :is(.ai-qa-new-chat,.ai-qa-conversation-open,.qa-project-sidebar button){
+  background:var(--palette-clear)!important;
+  color:var(--qa-text)!important;
+  min-height:36px;
+  margin-block:0;
+  border:0!important;
+  border-radius:var(--qa-radius-compact);
+}
+html body.studio-enabled #aiQaHistory :is(.ai-qa-new-chat,.ai-qa-conversation-open,.qa-project-sidebar button):is(:hover,:focus-visible,:active,[aria-current=page]){
+  background:var(--qa-hover)!important;
+  color:var(--qa-text)!important;
+}
+html body.studio-enabled #aiQaHistory :is(.ai-qa-new-chat,.ai-qa-conversation-open,.qa-project-sidebar button):is(:hover,:focus-visible,:active,[aria-current=page]) :is(svg,span,strong){
+  color:var(--qa-text)!important;
+}
+#aiQaHistory .ai-qa-new-chat{margin:0 8px 8px;padding:8px 10px;}
+#aiQaHistory svg{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+#qaProjectSectionToggle{display:flex;align-items:center;gap:4px;padding:0 6px;font-size:13px;font-weight:650;}
+#qaProjectSectionToggle svg{width:12px;height:12px;}
+#qaProjectSectionToggle[aria-expanded=false] svg{rotate:-90deg;}
+#qaProjectFolders[hidden],.qa-project-folder-chats[hidden]{display:none!important;}
+.qa-project-folder-heading:is(:hover,:focus-within),.qa-project-folder-heading[data-active=true]{background:var(--qa-hover);}
+#aiQaHistory :is(#qaProjectCreate,.qa-project-folder-toggle,.qa-project-folder-compose){
+  display:grid;place-items:center;flex:0 0 34px;width:34px;padding:0;
+}
+#aiQaHistory .qa-project-folder-name{
+  flex:1;min-width:0;padding:0 4px;text-align:left;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px;font-weight:500;
+}
+#aiQaHistory .qa-project-folder-compose svg{width:15px;height:15px;}
+.qa-project-folder-chats{padding-inline-start:24px;}
+.qa-project-folder-chats>small{display:block;padding:5px 8px;color:var(--qa-subtle);}
+#aiQaHistory .qa-project-folder-more{padding:6px 8px;font-size:12px;}
+#aiQaHistory .ai-qa-conversation-list{gap:0;}
+#aiQaHistory .ai-qa-conversation-open{justify-content:center;padding-block:7px;padding-inline:8px 38px;}
+#aiQaHistory .ai-qa-conversation-open small{display:none;}
+#aiQaHistory .ai-qa-conversation-more{top:50%!important;translate:0 -50%;}
+@media(hover:hover) and (pointer:fine){
+  #aiQaHistory .qa-project-folder-heading:not([data-active=true]):not(:hover):not(:focus-within) .qa-project-folder-compose{opacity:0;}
+}
+@media(max-width:720px){
+  #aiQaHistory :is(.ai-qa-new-chat,.ai-qa-conversation-open,.qa-project-sidebar button){min-height:44px;}
+  #aiQaHistory :is(#qaProjectCreate,.qa-project-folder-toggle,.qa-project-folder-compose){flex-basis:44px;width:44px;}
+}
 #qaProjectHistory{display:none;}
 @media(max-width:720px){#qaProjectHistory{display:inline-grid;place-items:center;}}

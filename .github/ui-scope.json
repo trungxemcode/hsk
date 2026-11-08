@@ -1,5 +1,5 @@
 {
-  "request": "Chỉ thay đổi điều hướng Hỏi đáp AI trên PC và điện thoại: Dự án xổ chat con, Gần đây độc lập, Đoạn chat mới luôn tạo chat thường.",
+  "request": "Chỉ thay đổi bố cục, icon và thao tác sidebar Hỏi đáp AI trên PC và điện thoại theo mẫu danh sách thư mục.",
   "excludedRoutes": [
     "ai-qa"
   ]
