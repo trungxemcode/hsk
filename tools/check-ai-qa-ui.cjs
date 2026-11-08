@@ -520,7 +520,7 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   await page.locator('#personalAiForm').waitFor({state:'visible'});
   await page.locator('#personalAiProvider').selectOption('chatgpt-cookie');
   assert.equal(await page.locator('#personalAiModel').inputValue(),'gpt-4o-mini');
-  assert.match(await page.locator('#personalAiEndpoint').textContent(),/__Secure-next-auth\.session-token/);
+  assert.match(await page.locator('#personalAiEndpoint').textContent(),/cookie tách thành \.0 và \.1.*dấu \|/);
   await page.locator('#personalAiProvider').selectOption('fosta');
   await page.locator('#personalAiFostaModel').selectOption('gpt-6-luna');
   assert.equal(await page.locator('#personalAiFostaModel option').count(),3);

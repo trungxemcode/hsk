@@ -1,1 +1,1 @@
-{"request":"Designer và Cài đặt: chỉ gửi hoặc nhận giao diện khi bấm đồng bộ.","excludedRoutes":["account"]}
+{"request":"Cài đặt: nhận cookie ChatGPT riêng chia phần. Hỏi đáp AI: hiển thị lỗi phiên ChatGPT riêng.","excludedRoutes":["account","ai-qa"]}

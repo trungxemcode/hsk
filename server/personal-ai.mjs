@@ -35,7 +35,7 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
  }
  if(action!=='personal-ai-save'||!settings||Object.keys(settings).some(k=>!['provider','model','enabled','apiKey'].includes(k)))return Response.json({}, {status:400});
  const {provider,model,enabled,apiKey}=settings;
- const maxKeyLen=provider==='chatgpt-cookie'?4096:512;
+ const maxKeyLen=provider==='chatgpt-cookie'?8192:512;
  if(!Object.hasOwn(PERSONAL_PROVIDERS,provider)||typeof model!=='string'||!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(model)||
   typeof enabled!=='boolean'||provider==='fosta'&&!PERSONAL_FOSTA_MODELS.has(model)||
   apiKey!==undefined&&(typeof apiKey!=='string'||apiKey.length<8||apiKey.length>maxKeyLen||!/^[!-~]+$/.test(apiKey)))return Response.json({}, {status:400});
