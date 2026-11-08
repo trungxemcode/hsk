@@ -164,13 +164,17 @@
       <aside id="aiQaHistory" class="ai-qa-history" aria-label="Các cuộc trò chuyện gần đây" hidden>
         <div class="ai-qa-history-head"><strong>Cuộc trò chuyện</strong><button id="aiQaHistoryClose" type="button" aria-label="Đóng danh sách cuộc trò chuyện">×</button></div>
         <button id="aiQaNewChat" class="ai-qa-new-chat" type="button"><span aria-hidden="true">＋</span> Đoạn chat mới</button>
+        <div class="ai-qa-sidebar-content">
         <div class="qa-project-sidebar">
           <strong>Dự án</strong><button id="qaProjectCreate" type="button">＋ Tạo dự án</button>
           <div id="qaProjectFolders"></div>
         </div>
-        <div id="aiQaConversationList" class="ai-qa-conversation-list" role="list"></div>
+        <h3 class="ai-qa-recent-heading">Gần đây</h3>
+        <div id="aiQaConversationList" class="ai-qa-conversation-list" role="list" aria-label="Gần đây"></div>
+        </div>
       </aside>
       <section id="qaProjectHome" class="qa-project-home" hidden aria-labelledby="qaProjectTitle">
+        <button id="qaProjectHistory" type="button" aria-label="Mở danh sách cuộc trò chuyện" aria-controls="aiQaHistory">☰</button>
         <button id="qaProjectExit" type="button">← Hỏi đáp AI</button>
         <div class="qa-project-content">
           <h2 id="qaProjectTitle"></h2>

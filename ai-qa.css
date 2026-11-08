@@ -539,8 +539,7 @@ body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-jump-to-latest:not([hidden])
 /* Project folders and project home use the existing chat palette. */
 .qa-project-sidebar{padding:10px 14px;color:var(--qa-text);}
 .qa-project-sidebar>strong{display:block;margin-bottom:6px;}
-#qaProjectFolders{max-height:26vh;overflow:auto;}
-#qaProjectFolders button,#qaProjectChats button{display:block;width:100%;text-align:left;margin-block:4px;overflow-wrap:anywhere;}
+#qaProjectFolders .qa-project-folder-heading button,#qaProjectChats button{display:block;width:100%;text-align:left;margin-block:4px;overflow-wrap:anywhere;}
 .qa-project-home[hidden],.ai-qa-chat[hidden],#qaProjectBack[hidden],
 #qaProjectChats[hidden],#qaProjectSources[hidden]{display:none!important;}
 .qa-project-home{flex:1;min-width:0;min-height:0;overflow:auto;padding:16px 20px;background:var(--qa-bg);color:var(--qa-text);}
@@ -561,3 +560,15 @@ body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-jump-to-latest:not([hidden])
 #qaProjectSourceList textarea{box-sizing:border-box;width:100%;display:block;margin:8px 0;font-size:16px;}
 #qaProjectStatus{min-height:1.3em;}
 #qaProjectChats small{float:right;margin-inline-start:8px;color:var(--qa-subtle);}
+
+.ai-qa-sidebar-content{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;}
+.ai-qa-sidebar-content .ai-qa-conversation-list{overflow:visible!important;}
+.ai-qa-recent-heading{margin:12px 14px 4px;font-size:13px;color:var(--qa-text);}
+.qa-project-folder-heading{display:flex;align-items:center;gap:4px;}
+#qaProjectFolders .qa-project-folder-heading button:first-child{width:32px;flex:none;text-align:center;padding-inline:0;}
+#qaProjectFolders .qa-project-folder-heading button:last-child{flex:1;min-width:0;}
+.qa-project-folder-chats[hidden]{display:none!important;}
+.qa-project-folder-chats{padding-inline-start:18px;}
+.qa-project-folder-chats>small{padding-inline-start:8px;color:var(--qa-subtle);}
+#qaProjectHistory{display:none;}
+@media(max-width:720px){#qaProjectHistory{display:inline-grid;place-items:center;}}

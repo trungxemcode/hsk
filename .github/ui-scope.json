@@ -1,5 +1,5 @@
 {
-  "request": "Chỉ Hỏi đáp AI trên PC và điện thoại: thêm thư mục Dự án, hộp tạo dự án có công tắc bộ nhớ riêng, màn hình Trò chuyện và Nguồn.",
+  "request": "Chỉ thay đổi điều hướng Hỏi đáp AI trên PC và điện thoại: Dự án xổ chat con, Gần đây độc lập, Đoạn chat mới luôn tạo chat thường.",
   "excludedRoutes": [
     "ai-qa"
   ]

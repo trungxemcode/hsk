@@ -139,7 +139,7 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
         return {top:panel.top-topbar.bottom,left:panel.left-frame.left,right:frame.right-panel.right,
           bottom:frame.bottom-panel.bottom,bodyY:getComputedStyle(document.body).overflowY,
           messageY:getComputedStyle(document.querySelector('.ai-qa-messages')).overflowY,
-          historyY:getComputedStyle(document.querySelector('.ai-qa-conversation-list')).overflowY};
+          historyY:getComputedStyle(document.querySelector('.ai-qa-sidebar-content')).overflowY};
       });
       for(const edge of ['top','left','right','bottom'])assert.ok(Math.abs(gutters[edge]-20)<2,
         'desktop Chat AI '+edge+' gutter at '+screenWidth+'×'+screenHeight+' must match 20px: '+JSON.stringify(gutters));
@@ -368,6 +368,28 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   assert.ok(directive.indexOf('example.test')<directive.indexOf('tu-vung.txt'),'web excerpts precede files');
   await page.locator('#qaProjectBack').click();
   assert.match(await page.locator('#qaProjectChats').innerText(),/Giải thích từ 生词/);
+  if(width<721)await page.locator('#qaProjectHistory').click();
+  const recent=page.locator('#aiQaConversationList');
+  const folder=page.locator('#qaProjectFolders');
+  const child=folder.getByRole('button',{name:'Mở Giải thích từ 生词',exact:true});
+  const toggle=folder.getByRole('button',{name:'Cuộc trò chuyện trong Ôn tiếng Trung'});
+  assert.match(await recent.innerText(),/Chat từ điện thoại/);
+  assert.doesNotMatch(await recent.innerText(),/Giải thích từ 生词/);
+  await toggle.click();
+  await child.waitFor({state:'hidden'});
+  await toggle.click();
+  await child.click();
+  await page.locator('#qaProjectBack').waitFor({state:'visible'});
+  if(width<721)await page.locator('#aiQaHistoryToggle').click();
+  await recent.getByRole('button',{name:'Mở Chat từ điện thoại',exact:true}).click();
+  assert.equal(await page.locator('#qaProjectBack').isVisible(),false);
+  if(width<721)await page.locator('#aiQaHistoryToggle').click();
+  await child.click();
+  if(width<721)await page.locator('#aiQaHistoryToggle').click();
+  await page.locator('#aiQaNewChat').click();
+  assert.equal(await page.locator('#qaProjectHome').isVisible(),false);
+  assert.equal(await page.locator('#aiQaEmpty').isVisible(),true);
+
   assert.ok(await page.evaluate(()=>!window.__qaWrites.some(({data})=>
     data.title?.includes('Giải thích từ 生词'))),'project chats stay separate from cloud conversations');
 assert.deepEqual(errors,[]);console.log('PASS AI Q&A',width,'realtime sync, chat layout, history menu, bounded snapshot, request, response');await page.close();
