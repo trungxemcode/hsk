@@ -1,1 +1,1 @@
-{"request":"Bộ chọn mức suy nghĩ trong ô nhập chat thường và chat dự án, cùng thông báo lỗi API riêng trong Cài đặt, trên PC và điện thoại.","excludedRoutes":["ai-qa","account"]}
+{"request":"Chọn model FOSTA trong Cài đặt và thông báo lỗi API riêng trong Hỏi đáp AI trên PC và điện thoại.","excludedRoutes":["ai-qa","account"]}

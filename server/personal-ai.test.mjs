@@ -52,6 +52,7 @@ test('settings are private by verified UID and FOSTA handles chat without a shar
  assert.equal(calls[0].url,'https://codex.fosta.app/v1/chat/completions');
  assert.equal(calls[0].headers.Authorization,'Bearer '+key);
  assert.equal(calls[0].body.model,'gpt-6.1-sol');
+ assert.equal(calls[0].body.stream,false);
  assert.equal(calls[0].redirect,'error');
  // An enabled private key must never silently fall back to a shared provider
  // when the master encryption secret is unavailable after configuration.
@@ -100,4 +101,10 @@ test('chat model selection uses verified account roles and keeps the selected Ge
  assert.match(calls.at(-1).url,/gemini-3\.5-flash:generateContent$/);
  assert.equal((await send(owner,'high')).status,200);
  assert.match(calls.at(-1).url,/gemini-3\.8-flash:generateContent$/);
+});
+
+test('invalid upstream response body is handled separately from connection failures',async()=>{
+ const payload={systemInstruction:{parts:[{text:'guide'}]},contents:[]};
+ const result=await personalAiGenerate({provider:'fosta',model:'gpt-6-luna',apiKey:'fake'},payload,async()=>new Response('<html>error</html>'));
+ assert.equal(result.status,502);
 });

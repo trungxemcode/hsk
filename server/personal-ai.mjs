@@ -77,14 +77,14 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal){
    body={model,system,messages,max_tokens:2400};
   }else{
    headers.Authorization='Bearer '+apiKey;
-   body={model,messages:[{role:'system',content:system},...messages]};
+   body={model,messages:[{role:'system',content:system},...messages],...(provider==='fosta'?{stream:false}:{})};
   }
  }
  const response=await fetchFn(url,{method:'POST',headers,body:JSON.stringify(body),signal,redirect:'error'});
  if(!response.ok||provider==='gemini')return response;
- const payload=await response.json();
- const text=provider==='claude'?payload.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
-  payload.choices?.[0]?.message?.content;
+ const payload=await response.json().catch(()=>null);
+ const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
+  payload?.choices?.[0]?.message?.content;
  if(typeof text!=='string')return new Response(null,{status:502});
  return Response.json({candidates:[{content:{parts:[{text:text.trim().replace(/^\x60{3}(?:json)?\s*|\s*\x60{3}$/gi,'')}]}}]});
 }

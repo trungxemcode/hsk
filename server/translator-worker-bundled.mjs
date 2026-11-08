@@ -348,14 +348,14 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal){
    body={model,system,messages,max_tokens:2400};
   }else{
    headers.Authorization='Bearer '+apiKey;
-   body={model,messages:[{role:'system',content:system},...messages]};
+   body={model,messages:[{role:'system',content:system},...messages],...(provider==='fosta'?{stream:false}:{})};
   }
  }
  const response=await fetchFn(url,{method:'POST',headers,body:JSON.stringify(body),signal,redirect:'error'});
  if(!response.ok||provider==='gemini')return response;
- const payload=await response.json();
- const text=provider==='claude'?payload.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
-  payload.choices?.[0]?.message?.content;
+ const payload=await response.json().catch(()=>null);
+ const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
+  payload?.choices?.[0]?.message?.content;
  if(typeof text!=='string')return new Response(null,{status:502});
  return Response.json({candidates:[{content:{parts:[{text:text.trim().replace(/^\x60{3}(?:json)?\s*|\s*\x60{3}$/gi,'')}]}}]});
 }
@@ -2143,7 +2143,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(typeof body.question!=='string'||!body.question.trim()||body.question.length>500||!t||typeof t.vietnamese!=='string'||!t.vietnamese.trim()||t.vietnamese.length>4000||typeof t.chinese!=='string'||!t.chinese.trim()||t.chinese.length>2000||typeof t.pinyin!=='string'||t.pinyin.length>2000||typeof t.explanation!=='string'||t.explanation.length>2000||!Array.isArray(h)||h.length>8||!h.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.text==='string'&&m.text.length<=1000))return reply({error:'Câu hỏi hoặc ngữ cảnh không hợp lệ.'},400);
   }else if(typeof body.text!=='string'||!body.text.trim()||body.text.length>500)return reply({error:'Nhập câu tối đa 500 ký tự.'},400);
 
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isTranscript?140000:isOcr?110000:isReading?85000:isAsk?45000:60000);
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isTranscript?140000:isOcr?110000:isReading?85000:isLessonAsk&&body.lesson?.content?.mode==='ai-qa'?100000:isAsk?45000:60000);
   const abortRequest=()=>controller.abort();if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',abortRequest,{once:true});
   try{
    const auth=await fetchFn('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(env.FIREBASE_API_KEY),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token}),signal:controller.signal});
@@ -2346,8 +2346,18 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     if(usePersonalAi){
      headers['X-HSK-AI-Provider']=personalAi.provider;
      try{response=await personalAiGenerate(personalAi,providerBody,providerFetch,controller.signal);}
-     catch{return reply({error:'Không kết nối được API riêng. Kiểm tra nhà cung cấp trong Cài đặt.'},502);}
-     if(!response.ok)return reply({error:response.status===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng từ chối yêu cầu. Kiểm tra key và model trong Cài đặt.'},response.status===429?429:502);
+     catch(error){
+      const timeout=controller.signal.aborted||error.name==='AbortError';
+      console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});
+      return reply({error:timeout?'API riêng phản hồi quá lâu. Hãy thử lại.':'Không kết nối được tới máy chủ API riêng. Hãy thử lại hoặc tắt API riêng trong Cài đặt.',code:timeout?'PERSONAL_AI_TIMEOUT':'PERSONAL_AI_NETWORK'},timeout?504:502);
+     }
+     if(!response.ok){
+      const upstream=response.status;
+      const error=upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
+       upstream===400||upstream===404?'API riêng không chấp nhận yêu cầu hoặc model đã chọn. Kiểm tra model trong Cài đặt.':
+       upstream===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng không trả về phản hồi hợp lệ. Hãy thử lại.';
+      return reply({error,code:'PERSONAL_AI_UPSTREAM',upstream},upstream===429?429:502);
+     }
     }else{
      // Rotate keys without switching the chosen chat model or provider.
      const generate=isAiQa?createGeminiKeyFetch(providerFetch,env,{now,state:geminiState}):fetchFn;

@@ -5,21 +5,23 @@
  if(!form)return;
  const load=$('personalAiLoad'),status=$('personalAiStatus'),provider=$('personalAiProvider');
  const model=$('personalAiModel'),enabled=$('personalAiEnabled'),key=$('personalAiKey'),remove=$('personalAiRemove');
- const models={fosta:['gpt-6.1-sol','gpt-6-astra','gpt-6-luna'],openai:[],claude:[],deepseek:[],gemini:[]};
+ const fostaModel=$('personalAiFostaModel'),modelLabel=$('personalAiModelLabel');
  let stored=null,busy=false,owner=null,requestId=0;
  const account=()=>window.HSKAccountDashboard?.user;
  function describe(){
-  $('personalAiEndpoint').textContent=provider.value==='fosta'?'Base URL: https://codex.fosta.app/v1':'Nhập tên model chính xác do nhà cung cấp cấp.';
-  $('personalAiModels').replaceChildren(...models[provider.value].map(value=>{
-   const option=document.createElement('option');option.value=value;return option;
-  }));
+  const fosta=provider.value==='fosta';
+  fostaModel.hidden=!fosta;fostaModel.disabled=busy||!fosta;
+  model.hidden=fosta;model.disabled=busy||fosta;model.required=!fosta;
+  modelLabel.htmlFor=fosta?fostaModel.id:model.id;
+  $('personalAiEndpoint').textContent=fosta?'Base URL: https://codex.fosta.app/v1':'Nhập tên model chính xác do nhà cung cấp cấp.';
   key.placeholder=stored?.provider===provider.value?'Để trống để giữ key đã lưu':'Nhập API key của bạn';
  }
  function apply(data){
   stored=data.configured?data:null;
   enabled.checked=!!data.enabled;
   provider.value=data.provider||'fosta';
-  model.value=data.model||models[provider.value][0]||'';
+  fostaModel.value=provider.value==='fosta'&&data.model?data.model:fostaModel.options[0].value;
+  model.value=provider.value==='fosta'?'':data.model||'';
   key.value='';remove.hidden=!stored;
   describe();form.hidden=false;
   status.textContent=stored?(enabled.checked?'Đang dùng API riêng cho Hỏi đáp AI.':'Đã lưu API key. Hỏi đáp AI đang dùng API mặc định.'):'Chưa lưu API key riêng.';
@@ -27,6 +29,7 @@
  function lock(value){
   busy=value;load.disabled=value;
   for(const field of form.elements)field.disabled=value;
+  describe();
  }
  async function request(op,settings){
   if(busy)return;
@@ -52,12 +55,12 @@
   }catch(error){if(id===requestId)status.textContent=error.message||'Chưa kết nối được máy chủ.';}
   finally{if(id===requestId)lock(false);}
  }
- provider.onchange=()=>{model.value=models[provider.value][0]||'';key.value='';describe();};
+ provider.onchange=()=>{model.value=stored?.provider===provider.value?stored.model:'';key.value='';describe();};
  load.onclick=()=>request('read');
  form.onsubmit=event=>{
   event.preventDefault();
   const apiKey=key.value.trim();key.value='';
-  void request('save',{provider:provider.value,model:model.value.trim(),enabled:enabled.checked,...(apiKey?{apiKey}:{})});
+  void request('save',{provider:provider.value,model:(provider.value==='fosta'?fostaModel:model).value.trim(),enabled:enabled.checked,...(apiKey?{apiKey}:{})});
  };
  remove.onclick=()=>{if(confirm('Xóa API key riêng đã lưu?'))void request('remove');};
  function reset(){
