@@ -151,3 +151,12 @@ html body.studio-enabled #studioHome .feature-hero{box-shadow:var(--shadow-home-
 #studioHome .overview-progress-card h3{margin:0 0 8px;font-size:15px}
 #studioHome .overview-progress-card p{margin:4px 0;color:var(--sub);font-size:13px}
 #studioHome .overview-progress-card button{margin-top:8px;min-height:40px}
+
+@media(min-width:721px){
+ #studioHome .overview-plan-disclosure{margin-top:12px;border-top:1px solid var(--line)}
+ #studioHome .overview-plan-disclosure>summary{cursor:pointer;min-height:44px;box-sizing:border-box;padding:12px 0;font-size:14px;font-weight:650}
+ html body.studio-enabled #studioHome .overview-plan-disclosure #planTasks{margin-top:0}
+ html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome .dashboard-side .overview-search{margin:0!important}
+ html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome .dashboard-side .overview-search #homeQuery{width:100%!important;min-width:0}
+ #studioHome .dashboard-side .overview-search form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+}
