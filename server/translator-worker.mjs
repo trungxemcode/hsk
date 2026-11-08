@@ -307,7 +307,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     }catch{return reply({error:'Máy chủ chưa bật lưu API riêng.'},503);}
    }
    let personalAi=null;
-   if(isLessonAsk&&body.lesson?.content?.mode==='ai-qa'&&env.AI_PERSONAL_KEY_SECRET){
+   if(isLessonAsk&&body.lesson?.content?.mode==='ai-qa'&&env.AI_CONTROL){
     try{personalAi=await personalAiCall(env,account.localId,'personal-ai-use');}
     catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
    }

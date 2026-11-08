@@ -122,6 +122,8 @@ Account registry becomes populated as users sign in to the updated frontend or c
 
 ## API riêng cho Hỏi đáp AI
 
+**Triển khai an toàn:** Workflow `deploy-translator-roles.yml` chỉ chạy thủ công qua `workflow_dispatch`. Trước khi kích hoạt, đối chiếu mã Worker live và bảo toàn các bản vá voice hiện có; xác nhận secret `AI_PERSONAL_KEY_SECRET` đã thiết lập. Merge frontend không tự triển khai Worker.
+
 Cấu hình cần binding `AI_CONTROL` hiện có và Worker secret `AI_PERSONAL_KEY_SECRET` (ít nhất 32 ký tự ngẫu nhiên). Tạo một lần và giữ bản sao trong trình quản lý mật khẩu. Đổi secret sẽ khiến key cũ phải nhập lại.
 
 ```sh

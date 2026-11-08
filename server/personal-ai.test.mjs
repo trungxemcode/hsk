@@ -51,6 +51,14 @@ test('settings are private by verified UID and FOSTA handles chat without a shar
  assert.equal(calls[0].headers.Authorization,'Bearer '+key);
  assert.equal(calls[0].body.model,'gpt-6.1-sol');
  assert.equal(calls[0].redirect,'error');
+ // An enabled private key must never silently fall back to a shared provider
+ // when the master encryption secret is unavailable after configuration.
+ const secretBefore=env.AI_PERSONAL_KEY_SECRET,callsBefore=calls.length;
+ delete env.AI_PERSONAL_KEY_SECRET;
+ try{
+  assert.equal((await request('alice','/lesson-ask',question)).status,503);
+  assert.equal(calls.length,callsBefore);
+ }finally{env.AI_PERSONAL_KEY_SECRET=secretBefore;}
  assert.equal((await request('alice',settingsPath,{op:'save',settings:{provider:'fosta',model:'gpt-6-luna',enabled:false}})).status,200);
  assert.equal((await request('alice','/lesson-ask',question)).status,503);
  assert.deepEqual(await (await request('alice',settingsPath,{op:'remove'})).json(),{configured:false,enabled:false});
