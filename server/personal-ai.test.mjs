@@ -19,6 +19,7 @@ env.AI_CONTROL={
  }
 };
 const calls=[];
+let personalReply='{"answer":"你好"}';
 const worker=createHandler(async (url,init)=>{
  if(String(url).includes('identitytoolkit')){
   const token=JSON.parse(init.body).idToken;
@@ -27,7 +28,7 @@ const worker=createHandler(async (url,init)=>{
  }
  calls.push({url,headers:init.headers,body:JSON.parse(init.body),redirect:init.redirect});
  if(String(url).includes('generativelanguage'))return Response.json({candidates:[{content:{parts:[{text:'{"answer":"你好"}'}]}}]});
- return Response.json({choices:[{message:{content:'{"answer":"你好"}'}}]});
+ return Response.json({choices:[{message:{content:personalReply}}]});
 });
 const request=(uid,path,body,workerEnv=env)=>{
  const claims={aud:'hsk-flashcards-44631',iss:'https://securetoken.google.com/hsk-flashcards-44631',sub:uid,exp:Math.floor(Date.now()/1000)+3600};
@@ -119,4 +120,22 @@ test('Cloudflare-compatible redirect handling never forwards the API key',async(
  });
  assert.equal(result.status,502);
  assert.equal(requests,1);
+});
+
+test('personal chat returns plain text and fenced JSON through the authenticated Worker route',async()=>{
+ for(const [index,[content,answer]] of [
+  ['Xin chào! Tôi có thể giúp bạn học tiếng Trung.','Xin chào! Tôi có thể giúp bạn học tiếng Trung.'],
+  ['Kết quả:\n```json\n{"answer":"Bạn đang học HSK 1.","primaryNodeKey":"level"}\n```','Bạn đang học HSK 1.'],
+  ['{"answer":','']
+ ].entries()){
+  const uid='reply-format-test-'+index;
+  const saved=await request(uid,settingsPath,{op:'save',settings:{provider:'fosta',model:'gpt-6-luna',enabled:true,apiKey:'fake-provider-api-key'}});
+  assert.equal(saved.status,200);
+  personalReply=content;
+  try{
+   const response=await request(uid,'/lesson-ask',question);
+   assert.equal(response.status,answer?200:502);
+   if(answer)assert.equal((await response.json()).answer,answer);
+  }finally{personalReply='{"answer":"你好"}';}
+ }
 });

@@ -359,7 +359,7 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal){
  const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
   payload?.choices?.[0]?.message?.content;
  if(typeof text!=='string')return new Response(null,{status:502});
- return Response.json({candidates:[{content:{parts:[{text:text.trim().replace(/^\x60{3}(?:json)?\s*|\s*\x60{3}$/gi,'')}]}}]});
+ return Response.json({candidates:[{content:{parts:[{text:text.trim()}]}}]});
 }
 
 // Cloudflare Durable Object: centralized, atomic AI budget and reusable reading cache.
@@ -2369,7 +2369,19 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     if(!response.ok)return reply(await (isAiQa?geminiFailure(response,model,env):providerFailure(response,model,env)),response.status===429?429:502);
     const payload=await response.json(),candidate=payload.candidates?.[0];
     if(candidate?.finishReason&&candidate.finishReason!=='STOP')return reply({error:'AI chưa hoàn thành câu trả lời. Hãy thử hỏi ngắn hơn.'},502);
-    let parsed;try{parsed=JSON.parse((candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join(''));}catch{return reply({error:'AI trả lời chưa đúng định dạng. Hãy thử lại.'},502);}
+    const answerText=(candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('').trim();
+    let parsed;
+    try{parsed=JSON.parse(answerText);}catch{
+     if(usePersonalAi&&isAiQa){
+      const fencedJson=answerText.match(/(?:^|\n)\s*```(?:json)?[ \t]*\r?\n(\s*\{[\s\S]*?\})\s*```/i);
+      if(fencedJson){try{parsed=JSON.parse(fencedJson[1]);}catch{}}
+      if(!parsed&&answerText&&!fencedJson&&!/^(?:```json|[{\[])/i.test(answerText)){
+       parsed={answer:answerText.length<=5000?answerText:answerText.slice(0,4999)+'…'};
+      }
+     }
+     if(!parsed)return reply({error:'AI trả lời chưa đúng định dạng. Hãy thử lại.'},502);
+    }
+    if(usePersonalAi&&isAiQa&&typeof parsed==='string')parsed={answer:parsed};
     let answer=parsed?.answer;
     if(isAiQa){
      if(typeof answer!=='string'||!answer.trim()||answer.length>5000)return reply({error:'Gia sư AI trả về dữ liệu chưa đầy đủ. Hãy thử lại.'},502);
