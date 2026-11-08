@@ -38,6 +38,7 @@
   }
   tabs[0].onclick=()=>tab(false);
   tabs[1].onclick=()=>tab(true);
+  $('qaProjectHistory').onclick=api.openHistory;
   $('qaProjectExit').onclick=()=>api.open('');
   $('qaProjectBack').onclick=()=>api.open(api.project()?.id);
   $('qaProjectCreate').onclick=()=>{
@@ -95,15 +96,51 @@
    event.target.value='';
    if(file)void importSource(()=>window.HSKQaProjectSources.readFile(file),file);
   };
-  let renderedProject=null;
+  let renderedProject=null,selectedFolder=null;
+  const expanded=new Set();
   return function render(){
    const project=api.project();
    const showHome=!!project&&!api.active();
    home.hidden=!showHome;
    $('aiQaMessages').closest('.ai-qa-chat').hidden=showHome;
    $('qaProjectBack').hidden=!project;
-   $('qaProjectFolders').replaceChildren(...api.projects().map(item=>
-    makeButton('▱ '+item.name,()=>api.open(item.id))));
+   if(project?.id!==selectedFolder){
+    selectedFolder=project?.id;
+    if(project)expanded.add(project.id);
+   }
+   $('qaProjectFolders').replaceChildren(...api.projects().map(item=>{
+    const folder=document.createElement('div'),heading=document.createElement('div');
+    heading.className='qa-project-folder-heading';
+    const list=document.createElement('div');
+    list.id='qa-project-chats-'+item.id;
+    list.className='qa-project-folder-chats';
+    list.setAttribute('role','list');
+    list.hidden=!expanded.has(item.id);
+    const toggle=makeButton(list.hidden?'▸':'▾',()=>{
+     list.hidden=!list.hidden;
+     if(list.hidden)expanded.delete(item.id);else expanded.add(item.id);
+     toggle.textContent=list.hidden?'▸':'▾';
+     toggle.setAttribute('aria-expanded',String(!list.hidden));
+    });
+    toggle.setAttribute('aria-label','Cuộc trò chuyện trong '+item.name);
+    toggle.setAttribute('aria-controls',list.id);
+    toggle.setAttribute('aria-expanded',String(!list.hidden));
+    const name=makeButton(item.name,()=>{
+     expanded.add(item.id);
+     api.open(item.id);
+    });
+    if(project?.id===item.id&&!api.active())name.setAttribute('aria-current','page');
+    heading.append(toggle,name);
+    if(item.chats.length){
+     list.append(...[...item.chats].sort((a,b)=>b.updatedAt-a.updatedAt).map(chat=>api.renderChatRow(chat,item.id)));
+    }else{
+     const hint=document.createElement('small');
+     hint.textContent='Chưa có cuộc trò chuyện';
+     list.append(hint);
+    }
+    folder.append(heading,list);
+    return folder;
+   }));
    if(!showHome)return;
    if(renderedProject!==project){
     tab(false);status.textContent='';question.value='';renderedProject=project;
