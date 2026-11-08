@@ -15,6 +15,15 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
    if(width<721)await picker.selectOption(id);else await p.locator('.lesson-section-nav').getByRole('button',{name:label,exact:true}).click();
    assert.equal(await p.locator('.lesson-section:not([hidden])').getAttribute('data-lesson-section'),id);assert.equal(await picker.inputValue(),id);
    assert.equal(await p.locator('.workspace').evaluate(n=>n.scrollWidth>n.clientWidth+1),false);
+   if(id==='reading'){
+    const reading=p.locator('.lesson-reading'),dialogue=p.locator('.lesson-dialogues');
+    assert.ok(await reading.isVisible());assert.equal(await dialogue.isVisible(),false);
+    await p.getByRole('button',{name:/^Hội thoại ·/}).click();
+    assert.ok(await dialogue.isVisible());assert.equal(await reading.isVisible(),false);
+    await p.getByRole('button',{name:'Bài đọc',exact:true}).click();
+    assert.ok(await reading.isVisible());
+   }
+
   }
   assert.equal(await p.evaluate(()=>localStorage.getItem('hsk-course-lessons-v1')),before,'section navigation must not award mastery');
   const mini=p.locator('.lesson-mini'),check=p.locator('.lesson-practice-check');
@@ -33,6 +42,18 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
    assert.equal(await p.locator('.lesson-section-nav').evaluate(n=>getComputedStyle(n).position),'static');
    await p.locator('.workspace').evaluate(n=>n.scrollTop=0);const a=await p.locator('.lesson-section-nav').boundingBox();await p.locator('.workspace').evaluate(n=>n.scrollTop=250);const z=await p.locator('.lesson-section-nav').boundingBox();assert.ok(z.y<a.y-100,'picker must scroll with content');
    await picker.selectOption('reading');await p.locator('.workspace').evaluate(n=>n.scrollTop=0);await p.screenshot({path:'/tmp/lesson-picker-'+width+'-'+theme+'.png'});
+  }
+  await p.getByRole('button',{name:'← Quay về danh sách',exact:true}).click();
+  const catalog=p.getByLabel('Cấp độ giáo trình',{exact:true});
+  await catalog.waitFor();
+  assert.equal(await catalog.locator('option').count(),6);
+  assert.equal(await catalog.inputValue(),'3');
+  if(width===390&&theme==='light'){
+   await catalog.selectOption('4');
+   await p.locator('.lesson-catalog-header h3').getByText('HSK 4',{exact:true}).waitFor();
+   await p.locator('.lesson-list .lesson-row').first().click();
+   await p.locator('.lesson-detail-header').waitFor();
+   assert.match(await p.locator('.lesson-detail-header .lesson-eyebrow').innerText(),/^HSK 4/);
   }
   assert.deepEqual(errors,[]);await p.close();
  }console.log('PASS lesson picker: 4 reachable sections, native phone dropdown, expanding mastery/scroll flow, unchanged progress, desktop buttons and 320/390/430/1440 light/dark.');}finally{await b.close();server.close();}

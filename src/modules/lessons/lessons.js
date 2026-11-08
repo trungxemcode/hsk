@@ -64,12 +64,24 @@ function render(){
  window.HSKSpeech?.stop();
  if(!data||!api())return;window.dispatchEvent(new CustomEvent('hsk-lesson-context',{detail:selected&&!panel.hidden?{id:selected.id,hsk,title:selected.title,vi:selected.vi,number:selected.number,words:matched(selected).map(w=>({han:w.han,pin:w.pin,mean:w.mean})),content:selected.content}:null}));root.replaceChildren();const p=progress();
  if(selected){document.body.classList.add('lesson-focus');renderLesson(selected,p);return;}document.body.classList.remove('lesson-focus');
- root.append(button('☷ Chọn cấp độ · HSK '+hsk,()=>$('menuBtn').click(),'lesson-level-picker'));
- root.append(el('h3','HSK '+hsk+' · '+course().lessons.length+' bài'));
- const aggregate=courseProgress(hsk,p),courseBox=el('section',undefined,'lesson-course-progress');courseBox.append(el('strong','Tiến độ các bài HSK '+hsk+' · '+aggregate.percent+'%'),el('p',aggregate.completed+'/'+aggregate.total+' bài đạt 100% · trung bình tiến độ của toàn bộ bài trong cấp này.','hint'));const courseBar=el('progress');courseBar.max=100;courseBar.value=aggregate.percent;courseBar.setAttribute('aria-label','Tiến độ học các bài HSK '+hsk);courseBox.append(courseBar);root.append(courseBox);
- if(hsk>=4){const volumes=el('div',undefined,'lesson-actions');for(const [v,label] of [['','Cả hai tập'],['A','Thượng · Tập 1'],['B','Hạ · Tập 2']]){const b=button(label,()=>{volume=v;render();});b.setAttribute('aria-pressed',String(volume===v));volumes.append(b);}root.append(volumes);}
+ const catalog=el('header',undefined,'lesson-catalog-header');
+ const catalogTitle=el('div');
+ catalogTitle.append(el('p','Giáo trình HSK','lesson-eyebrow'),el('h3','HSK '+hsk),el('p',course().lessons.length+' bài học','hint'));
+ const levelField=el('label','Cấp độ giáo trình','lesson-catalog-level'),levelSelect=el('select');
+ levelSelect.setAttribute("aria-label","Cấp độ giáo trình");
+ for(let level=1;level<=6;level++){
+  const option=el('option','HSK '+level);option.value=level;levelSelect.append(option);
+ }
+ levelSelect.value=hsk;
+ levelSelect.onchange=()=>{hsk=Number(levelSelect.value);volume='';open({preserveLevel:true});};
+ levelField.append(levelSelect);catalog.append(catalogTitle,levelField);root.append(catalog);
+ const aggregate=courseProgress(hsk,p),courseBox=el('section',undefined,'lesson-course-progress');
+ courseBox.append(el('strong','Tiến độ HSK '+hsk+' · '+aggregate.percent+'%'),el('p',aggregate.completed+'/'+aggregate.total+' bài đã nắm vững','hint'));
+ const courseBar=el('progress');courseBar.max=100;courseBar.value=aggregate.percent;courseBar.setAttribute('aria-label','Tiến độ học các bài HSK '+hsk);courseBox.append(courseBar);
  const resume=course().lessons.find(l=>p[l.id]?.startedAt&&!measure(l,p).mastered)||course().lessons.find(l=>!measure(l,p).mastered);
- if(resume)root.append(button('Tiếp tục bài '+resume.number+' · '+resume.vi,()=>select(resume),'lesson-resume'));
+ if(resume)courseBox.append(button((p[resume.id]?.startedAt?'Tiếp tục bài ':'Bắt đầu bài ')+resume.number+' · '+resume.vi,()=>select(resume),'lesson-resume'));
+ root.append(courseBox,el('h4','Danh sách bài học','lesson-list-heading'));
+ if(hsk>=4){const volumes=el('div',undefined,'lesson-actions');for(const [v,label] of [['','Cả hai tập'],['A','Thượng · Tập 1'],['B','Hạ · Tập 2']]){const b=button(label,()=>{volume=v;render();});b.setAttribute('aria-pressed',String(volume===v));volumes.append(b);}root.append(volumes);}
  const list=el('div',undefined,'lesson-list');
  for(const l of course().lessons.filter(l=>!volume||l.volume===volume)){
   const m=measure(l,p),row=button('',()=>select(l),'lesson-row'+(m.mastered?' is-mastered':m.read?' is-read':''));row.append(el('span',String(l.number).padStart(2,'0'),'lesson-number'),el('span',undefined,'lesson-row-text'));
@@ -85,20 +97,22 @@ function masteryChips(meter,m,total,miniTotal){let chips=meter.querySelector('.l
 function renderLesson(l,p){
  const ws=matched(l),known=ws.filter(w=>api().record(w)?.status==='known').length;
  if(lessonSection==='guided'&&window.HSKLessonGuided){status.textContent='';root.append(button('← Bài học',()=>changeSection('overview'),'lesson-back'));window.HSKLessonGuided.mount(root,l,ws,{read:()=>progress()[l.id]||{},persist:value=>save(l.id,value,false,true),exit:()=>changeSection('overview'),readComplete:()=>save(l.id,{read:true,completed:false},false),practice:()=>changeSection('practice'),answer:(q,correct)=>{const old=progress()[l.id]||{},evidence={...old.contentEvidence},r=evidence[q.id]||{streak:0,attempts:0};evidence[q.id]={streak:correct?Math.min(2,r.streak+1):0,attempts:r.attempts+1,last:Date.now()};save(l.id,{contentEvidence:evidence},false,true);}});return;}
- root.append(button('← Quay về danh sách',goList,'lesson-back'));
- root.append(el('h3','Bài '+l.number+' · '+l.vi),el('p',l.title,'lesson-title-cn'),el('p','HSK '+hsk+(l.volume?' · Tập '+(l.volume==='A'?'Thượng':'Hạ'):'')+' · '+known+'/'+ws.length+' từ đã thuộc','hint'));
- root.append(button(lessonSection==='guided'?'Đang học tự động':'Học tự động',()=>changeSection('guided'),'lesson-guided-entry'));
-
- root.append(button('Đọc thêm tình huống thực tế',()=>window.HSKRealReading?.openFromLesson({id:l.id,hsk,number:l.number,words:ws.map(w=>({han:w.han,mean:w.mean,pin:w.pin}))}),'lesson-guided-entry lesson-reading-entry'));
-  const views=l.content?contentShell(l,p):null,overview=views?.overview||root,vocabRoot=views?.vocabulary||root;
- if(!l.content)root.append(el('p','Bài này hiện có phần từ vựng; nội dung ngữ pháp, bài đọc và hội thoại đang chờ đối chiếu.','hint'));
- const steps=el('p','Học từ → đọc ví dụ → kiểm tra → ôn lại theo lịch. Các nút đã thuộc/chưa thuộc dùng chung tiến độ với thẻ từ và SRS.','hint');overview.append(steps);
+ const header=el('header',undefined,'lesson-detail-header');
+ header.append(button('← Quay về danh sách',goList,'lesson-back'),
+  el('p','HSK '+hsk+(l.volume?' · Tập '+(l.volume==='A'?'Thượng':'Hạ'):'')+' · Bài '+l.number,'lesson-eyebrow'),
+  el('h3','Bài '+l.number+' · '+l.vi),el('p',l.title,'lesson-title-cn'));
+ const studyModes=el('div',undefined,'lesson-study-modes');
+ studyModes.append(button('Học tự động',()=>changeSection('guided'),'lesson-guided-entry'),
+  button('Đọc thêm tình huống thực tế',()=>window.HSKRealReading?.openFromLesson({id:l.id,hsk,number:l.number,words:ws.map(w=>({han:w.han,mean:w.mean,pin:w.pin}))}),'lesson-guided-entry lesson-reading-entry'));
+ header.append(studyModes);root.append(header);
  const m=measure(l,p),meter=el('section',undefined,'lesson-mastery');
  meter.append(el('strong','Tiến độ bài · '+m.percent+'%'));const bar=el('progress');bar.max=100;bar.value=m.percent;meter.append(bar,el('p',breakdown(m),'lesson-mastery-breakdown'),el('small',m.quizReady+'/'+ws.length+' từ trả lời đúng 2 lần liên tiếp · '+m.srsReady+'/'+ws.length+' từ ôn đúng 3 lần cách nhau ít nhất 24 giờ.'+(l.miniReviewKeys?' · Ôn ngắn: '+m.miniReady+'/'+l.miniReviewKeys.length+' tác vụ hoàn thành.':'')));
  masteryChips(meter,m,ws.length,l.miniReviewKeys?.length||0);
- overview.append(meter);
- const actions=el('div',undefined,'lesson-actions');actions.append(button('Kiểm tra từ bài này',()=>{close(true);api().quiz(ws,'HSK '+hsk+' · Bài '+l.number,l.id);}),button('Ôn SRS bài này',()=>{close(true);api().srs(ws,l.id);}),button(m.read?'✓ Đã học qua':'Đánh dấu đã học qua',()=>save(l.id,{read:true,completed:false})));overview.append(actions);
- const card=el('article',undefined,'lesson-card');vocabRoot.append(card);
+ root.append(meter);
+ const views=l.content?contentShell(l,p):null,overview=views?.overview||root,vocabRoot=views?.vocabulary||root;
+ if(!l.content)root.append(el('p','Bài này hiện có phần từ vựng; nội dung ngữ pháp, bài đọc và hội thoại đang chờ đối chiếu.','hint'));
+ const actions=el('div',undefined,'lesson-actions lesson-review-actions');actions.append(button('Kiểm tra từ bài này',()=>{close(true);api().quiz(ws,'HSK '+hsk+' · Bài '+l.number,l.id);}),button('Ôn SRS bài này',()=>{close(true);api().srs(ws,l.id);}),button(m.read?'✓ Đã học qua':'Đánh dấu đã học qua',()=>save(l.id,{read:true,completed:false})));
+ const card=el('article',undefined,'lesson-card');vocabRoot.append(el('h4','Từ vựng'),el('p',known+'/'+ws.length+' từ đã thuộc · Xem thẻ, nghe phát âm rồi tự đánh dấu.','hint'),card);
  function draw(){
   window.HSKSpeech?.stop();
   card.replaceChildren();if(!ws.length){card.append(el('p','Bài này chưa có thẻ tương ứng trong dữ liệu.'));return;}
@@ -112,6 +126,8 @@ function renderLesson(l,p){
  }draw();
  const vocab=el('details',undefined,'lesson-vocab');vocab.append(el('summary','Danh sách từ của bài · '+ws.length+' thẻ'));const grid=el('div',undefined,'lesson-word-grid');for(let i=0;i<ws.length;i++){const w=ws[i],b=button(w.han+' · '+w.pin,()=>{cardIndex=i;revealed=true;draw();card.scrollIntoView({block:'center',behavior:'smooth'});});grid.append(b);}vocab.append(grid);vocabRoot.append(vocab);
  const missing=l.words.filter(w=>!api().match([w]).length);if(missing.length){const gaps=el('details',undefined,'lesson-sources');gaps.append(el('summary','Mục từ chưa có thẻ trong app · '+missing.length),el('p',missing.join('、')),el('p','Danh sách giáo trình có thêm tên riêng, từ bổ sung và mục chưa khớp dữ liệu hiện tại. Các mục này chưa được tính vào kiểm tra hay số từ đã thuộc.','hint'));vocabRoot.append(gaps);}
+ overview.append(el('h4','Kiểm tra và ôn lại','lesson-list-heading'),actions);
+ const context=overview.querySelector('.lesson-context');if(context)overview.append(context);
  if(views)for(let i=0;i<lessonSteps.length;i++){const [id]=lessonSteps[i],footer=el('nav',undefined,'lesson-step-footer');footer.setAttribute('aria-label','Đi tiếp trong bài học');if(i>0){const [prev,label]=lessonSteps[i-1];footer.append(button('← '+label,()=>changeSection(prev)));}if(i<lessonSteps.length-1){const [next,label]=lessonSteps[i+1];footer.append(button('Tiếp theo: '+label+' →',()=>changeSection(next),'lesson-step-next'));}else footer.append(button('Về danh sách bài học',goList));views[id].append(footer);}
  const navigation=el('div',undefined,'lesson-actions'),ls=course().lessons,position=ls.indexOf(l);if(position>0)navigation.append(button('← Bài trước',()=>select(ls[position-1])));if(position<ls.length-1)navigation.append(button('Bài tiếp →',()=>select(ls[position+1])));root.append(navigation);
 }
@@ -132,11 +148,27 @@ function contentShell(l,p){
   const v=el('section',undefined,'lesson-section');v.hidden=lessonSection!==id;v.setAttribute('aria-label',label);views[id]=v;
   v.dataset.lessonSection=id;const b=button(label,()=>changeSection(id));b.setAttribute('aria-pressed',String(!v.hidden));const evidence=measure(l,p),complete=id==='overview'?evidence.quiz===1:id==='reading'?evidence.read:id==='practice'?evidence.content===1&&evidence.mini===1:evidence.mastered;b.dataset.complete=String(complete);if(complete){b.title='Có bằng chứng hoàn thành trong tiến độ bài';[...select.options].find(option=>option.value===id).textContent=label+' · Đã hoàn thành';}nav.append(b);root.append(v);
  }
- views.overview.append(el('h4','Tổng quan & từ vựng'),el('p',c.objectives.join(' ')));const summary=el('details',undefined,'lesson-sources');summary.append(el('summary','Nội dung trọng tâm'),el('p',c.summary));views.overview.append(summary);views.vocabulary=views.overview;
- const readingGroup=views.reading;views.dialogue=el('section',undefined,'lesson-dialogues');views.dialogue.append(el('h4','Hội thoại'));views.reading=el('section',undefined,'lesson-reading');readingGroup.append(views.dialogue,views.reading);
- const source=el('details',undefined,'lesson-sources');source.append(el('summary','Nội dung và nguồn đối chiếu'),el('p',c.provenance.label));for(const s of c.provenance.sources){const a=el('a',s.label);a.href=s.url;a.target='_blank';a.rel='noopener';source.append(a);}views.overview.append(source);
+ const context=el('details',undefined,'lesson-sources lesson-context');
+ context.append(el('summary','Mục tiêu và nội dung bài'),el('p',c.objectives.join(' ')),el('p',c.summary),el('p',c.provenance.label,'hint'));
+ for(const source of c.provenance.sources){const a=el('a',source.label);a.href=source.url;a.target='_blank';a.rel='noopener noreferrer';context.append(a);}
+ views.overview.append(context);views.vocabulary=views.overview;
+ const readingGroup=views.reading;
+ const readingModes=el('div',undefined,'lesson-practice-modes');
+ readingModes.setAttribute('role','group');readingModes.setAttribute('aria-label','Chọn nội dung đọc');
+ views.dialogue=el('section',undefined,'lesson-dialogues');views.dialogue.append(el('h4','Hội thoại'));
+ views.reading=el('section',undefined,'lesson-reading');
+ const readingPanel=views.reading;
+ const readButton=button('Bài đọc',()=>showReading(false)),dialogueButton=button('Hội thoại · '+c.dialogues.length,()=>showReading(true));
+ function showReading(dialogue){
+  window.HSKSpeech?.stop();
+  readingPanel.hidden=dialogue;views.dialogue.hidden=!dialogue;
+  readButton.setAttribute('aria-pressed',String(!dialogue));dialogueButton.setAttribute('aria-pressed',String(dialogue));
+ }
+ readingModes.append(readButton,dialogueButton);readingGroup.append(readingModes,views.reading,views.dialogue);
+ showReading(false);
+ views.grammar.append(el('h4','Mẫu ngữ pháp'));
  views.grammar.append(el('p',hsk===1&&Number(l.id.split('-')[2])<3?'Hai bài đầu ưu tiên ngữ âm và giao tiếp. Các phần dưới đây bao gồm hướng dẫn phát âm và mẫu giao tiếp.':'Học mẫu câu, đọc ví dụ rồi đối chiếu lỗi thường gặp.','hint'));
- for(const x of c.grammar){const box=el('article',undefined,'lesson-grammar-point');box.append(el('h4',x.title),el('p',x.pattern,'lesson-pattern'),el('p',x.usage));for(const e of x.examples)box.append(languageLine(e));box.append(el('p','Lưu ý: '+x.error,'lesson-error-note'));views.grammar.append(box);}
+ for(const [index,x] of c.grammar.entries()){const box=el('article',undefined,'lesson-grammar-point');box.append(el('p','Mẫu '+(index+1),'lesson-eyebrow'),el('h4',x.title),el('p',x.pattern,'lesson-pattern'),el('p',x.usage),el('h5','Ví dụ'));for(const e of x.examples)box.append(languageLine(e));box.append(el('p','Lưu ý: '+x.error,'lesson-error-note'));views.grammar.append(box);}
  const longReading=c.reading.kind==='long-form-original';
  views.reading.append(el('h4',c.reading.title),el('p',longReading?c.reading.characterCount+' chữ Hán · '+c.reading.lines.length+' đoạn · bài đọc dài biên soạn riêng.':'Đoạn luyện đọc được biên soạn cho app theo chủ đề bài.','hint'));
  if(window.HSKSpeech)views.reading.append(window.HSKSpeech.button(c.reading.lines.map(x=>x.cn),'Nghe toàn bài đọc',true));
