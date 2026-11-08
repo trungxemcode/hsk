@@ -319,7 +319,8 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   await page.evaluate(()=>{
     const original=window.fetch;
     window.__qaWaiting=false;window.__qaAborted=false;
-    window.fetch=(url,opts)=>String(url).includes('/lesson-ask')?new Promise((_,reject)=>{
+    window.fetch=(url,opts)=>String(url).includes('/lesson-ask')&&
+      JSON.parse(opts.body).question==='Câu hỏi đang xử lý'?new Promise((_,reject)=>{
       window.__qaWaiting=true;
       opts.signal.addEventListener('abort',()=>{
         window.__qaAborted=true;
@@ -339,6 +340,36 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   assert.equal(await page.evaluate(()=>window.__qaAborted),true,'stale request must abort');
   assert.equal(await page.locator('#aiQaSend').isEnabled(),true,'send restored after chat switch');
   assert.equal(await page.locator('#aiQaInput').isEnabled(),true,'composer restored after chat switch');
+  if(width<721)await page.locator('#aiQaHistoryToggle').click();
+  await page.locator('#qaProjectCreate').click();
+  await page.locator('#qaProjectName').fill('Ôn tiếng Trung');
+  await page.locator('#qaProjectPrivate').check();
+  await page.locator('#qaProjectCreateForm button[type=submit]').click();
+  await page.locator('#qaProjectHome').waitFor({state:'visible'});
+  await page.locator('#qaProjectSourcesTab').click();
+  await page.locator('#qaProjectFile').setInputFiles({
+    name:'tu-vung.txt',mimeType:'text/plain',buffer:Buffer.from('生词 dùng để nói về từ mới.')
+  });
+  await page.getByText('Đã thêm nguồn.',{exact:true}).waitFor();
+  await page.route('https://example.test/lesson',route=>route.fulfill({
+    contentType:'text/html',headers:{'Access-Control-Allow-Origin':'*'},
+    body:'<title>Nguồn tiếng Trung</title><article>生词是新学的词语。</article>'
+  }));
+  await page.locator('#qaProjectLink').fill('https://example.test/lesson');
+  await page.locator('#qaProjectLinkForm button').click();
+  await page.getByText('Nguồn tiếng Trung',{exact:true}).waitFor();
+  await page.locator('#qaProjectQuestion').fill('Giải thích từ 生词');
+  await page.locator('#qaProjectChatForm button[type=submit]').click();
+  await page.locator('.ai-qa-message.assistant').waitFor();
+  assert.deepEqual(received.lesson.content.learning_snapshot,{},'private project does not send global study memory');
+  const directive=received.lesson.content.intentInfo.directiveVi;
+  assert.match(directive,/生词 dùng để nói về từ mới/);
+  assert.match(directive,/生词是新学的词语/);
+  assert.ok(directive.indexOf('example.test')<directive.indexOf('tu-vung.txt'),'web excerpts precede files');
+  await page.locator('#qaProjectBack').click();
+  assert.match(await page.locator('#qaProjectChats').innerText(),/Giải thích từ 生词/);
+  assert.ok(await page.evaluate(()=>!window.__qaWrites.some(({data})=>
+    data.title?.includes('Giải thích từ 生词'))),'project chats stay separate from cloud conversations');
 assert.deepEqual(errors,[]);console.log('PASS AI Q&A',width,'realtime sync, chat layout, history menu, bounded snapshot, request, response');await page.close();
  }}finally{await browser?.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1});
