@@ -460,6 +460,27 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   await command('Mở sổ từ vựng');
   await page.locator('#notebookPanel').waitFor({state:'visible'});
   assert.equal(received,lastRequest,'app commands never use the model endpoint');
+  let savedSettings;
+  await page.route('https://ai.test/personal-ai-settings',route=>{
+    const body=route.request().postDataJSON();
+    if(body.op==='save'){
+      savedSettings=body.settings;
+      return route.fulfill({json:{configured:true,enabled:true,provider:'fosta',model:'gpt-6.1-sol'}});
+    }
+    return route.fulfill({json:{configured:false,enabled:false}});
+  });
+  await page.evaluate(()=>HSKStudio.navigate('account'));
+  await page.locator('#accountPanel').waitFor({state:'visible'});
+  assert.equal(await page.locator('#accountPageTitle').textContent(),'Cài đặt');
+  await page.locator('#personalAiLoad').click();
+  await page.locator('#personalAiForm').waitFor({state:'visible'});
+  await page.locator('#personalAiEnabled').check();
+  await page.locator('#personalAiKey').fill('fake-test-key-only');
+  await page.locator('#personalAiForm button[type=submit]').click();
+  await page.getByText('Đang dùng API riêng cho Hỏi đáp AI.',{exact:true}).waitFor();
+  assert.deepEqual(savedSettings,{provider:'fosta',model:'gpt-6.1-sol',enabled:true,apiKey:'fake-test-key-only'});
+  assert.equal(await page.locator('#personalAiKey').inputValue(),'');
+  assert.equal(await page.evaluate(()=>JSON.stringify(localStorage).includes('fake-test-key-only')),false);
 assert.deepEqual(errors,[]);console.log('PASS AI Q&A',width,'realtime sync, chat layout, history menu, bounded snapshot, request, response');await page.close();
  }}finally{await browser?.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1});

@@ -1,6 +1,7 @@
 {
-  "request": "Chỉ hai thanh nhập Hỏi đáp AI và trang Dự án trên PC/điện thoại: đồng bộ khung nhập, focus ngoài và thêm nút đính kèm tài liệu.",
+  "request": "Đổi nhãn điều hướng Tài khoản thành Cài đặt và thêm cài đặt API riêng trong trang này.",
   "excludedRoutes": [
-    "ai-qa"
-  ]
+    "account"
+  ],
+  "sharedNavigationOnly": true
 }

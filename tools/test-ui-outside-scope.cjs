@@ -19,6 +19,7 @@ test('new AI Q&A navigation is declared and its real page is captured, never sil
   assert.throws(()=>addedRoutesFromNavigation(base,head.replace('data-studio-hub-panel','data-nothing'),config));
   assert.throws(()=>addedRoutesFromNavigation(base,head,{...config,sharedNavigationOnly:false}));
   assert.throws(()=>scope({...config,excludedRoutes:['ai-qa']}));
+  assert.ok(!scope({...config,newRoutes:[],excludedRoutes:['account']}).includes('account'));
 });
 
 test('Profile and Account split are verified by actual account page, not only show-account CSS',()=>{

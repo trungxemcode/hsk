@@ -33,6 +33,7 @@
     "src/modules/admin/admin-core.js",
     "src/modules/admin/admin.js",
     "src/modules/account/account.js",
+    "src/modules/account/personal-ai-settings.js",
     "src/modules/account/account-core.js",
     "account-config.json",
     "loader.js",

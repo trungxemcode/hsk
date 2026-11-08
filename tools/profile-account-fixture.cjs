@@ -12,7 +12,7 @@ module.exports=async function profileAccount(page,width){
   assert.equal(await page.locator(area+' [data-studio-go="profile"][aria-current="page"]').count(),1);
   if(mobile){assert(await page.locator('#mobileProfileSummary').isVisible());assert(!await page.locator('#mobileAccountAuth').isVisible());}
   await page.screenshot({path:'/tmp/profile-split-'+width+'-'+theme+'.png',fullPage:true});
-  await entry('account');await page.waitForFunction(()=>document.getElementById('activeTitle').textContent==='Tài khoản');
+  await entry('account');await page.waitForFunction(()=>document.body.dataset.accountPage==='account'||(!document.getElementById('accountPanel').hidden&&document.getElementById('accountPanel').dataset.accountCurrent==='settings'));
   assert(await page.locator('#accountSettingsView').isVisible());assert(!await page.locator('#accountProfileView').isVisible());
   if(mobile){assert(!await page.locator('#mobileProfileSummary').isVisible());await page.locator('#mobileAccountAuth').evaluate(n=>n.open=true);}
   await page.evaluate(()=>document.getElementById('accountStatus').textContent='Trạng thái đồng bộ kiểm thử');await page.waitForFunction(()=>document.getElementById('accountSettingsStatus').textContent==='Trạng thái đồng bộ kiểm thử');assert(await page.locator(mobile?'#accountStatus':'#accountSettingsStatus').isVisible());assert.equal(await page.locator('#accountSettingsStatus').isVisible(),!mobile,'one visible auth status per viewport');assert(await page.locator('#accountRestore').isVisible());assert.equal(await page.locator('#accountForm').count(),1);

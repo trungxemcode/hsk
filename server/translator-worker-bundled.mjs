@@ -269,6 +269,97 @@ export async function accountRoleCall(env,action,data,signal){
  }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}
 }
 
+// Credentials are scoped to an authenticated UID and encrypted before storage.
+const PERSONAL_PROVIDERS={
+ openai:'https://api.openai.com/v1/chat/completions',
+ fosta:'https://codex.fosta.app/v1/chat/completions',
+ deepseek:'https://api.deepseek.com/chat/completions',
+ claude:'https://api.anthropic.com/v1/messages',
+ gemini:'https://generativelanguage.googleapis.com/v1beta/models/'
+};
+const PERSONAL_FOSTA_MODELS=new Set(['gpt-6.1-sol','gpt-6-astra','gpt-6-luna']);
+const personalEncode=value=>new TextEncoder().encode(value);
+const personalB64=bytes=>btoa(String.fromCharCode(...new Uint8Array(bytes)));
+const personalBytes=value=>Uint8Array.from(atob(value),char=>char.charCodeAt(0));
+async function personalCipher(env){
+ if(typeof env.AI_PERSONAL_KEY_SECRET!=='string'||env.AI_PERSONAL_KEY_SECRET.length<32)throw Error('Personal AI unavailable');
+ return crypto.subtle.importKey('raw',await crypto.subtle.digest('SHA-256',personalEncode(env.AI_PERSONAL_KEY_SECRET)),{name:'AES-GCM'},false,['encrypt','decrypt']);
+}
+function personalPublic(record){
+ return record?{configured:true,enabled:record.enabled,provider:record.provider,model:record.model}:{configured:false,enabled:false};
+}
+export async function personalAiStorage(storage,env,{action,uid,settings}){
+ if(typeof uid!=='string'||!/^[-\w:]{1,150}$/.test(uid))return Response.json({}, {status:400});
+ const key='personal-ai-v1';
+ if(action==='personal-ai-remove'){
+  await storage.delete(key);return Response.json(personalPublic(null));
+ }
+ if(action==='personal-ai-read'||action==='personal-ai-use'){
+  const record=await storage.get(key);
+  if(action==='personal-ai-read'||!record?.enabled)return Response.json(personalPublic(record));
+  const apiKey=new TextDecoder().decode(await crypto.subtle.decrypt({
+   name:'AES-GCM',iv:personalBytes(record.iv),additionalData:personalEncode(uid+':'+record.provider)
+  },await personalCipher(env),personalBytes(record.ciphertext)));
+  return Response.json({...personalPublic(record),apiKey});
+ }
+ if(action!=='personal-ai-save'||!settings||Object.keys(settings).some(k=>!['provider','model','enabled','apiKey'].includes(k)))return Response.json({}, {status:400});
+ const {provider,model,enabled,apiKey}=settings;
+ if(!Object.hasOwn(PERSONAL_PROVIDERS,provider)||typeof model!=='string'||!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(model)||
+  typeof enabled!=='boolean'||provider==='fosta'&&!PERSONAL_FOSTA_MODELS.has(model)||
+  apiKey!==undefined&&(typeof apiKey!=='string'||!/^[!-~]{8,512}$/.test(apiKey)))return Response.json({}, {status:400});
+ const cipher=await personalCipher(env);
+ return storage.transaction(async tx=>{
+  const previous=await tx.get(key);
+  if(!apiKey&&previous?.provider!==provider)return Response.json({}, {status:400});
+  const record={provider,model,enabled,iv:previous?.iv,ciphertext:previous?.ciphertext};
+  if(apiKey){
+   const iv=crypto.getRandomValues(new Uint8Array(12));
+   const ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:personalEncode(uid+':'+provider)},cipher,personalEncode(apiKey));
+   record.iv=personalB64(iv);record.ciphertext=personalB64(ciphertext);
+  }
+  await tx.put(key,record);return Response.json(personalPublic(record));
+ });
+}
+export async function personalAiCall(env,uid,action,settings){
+ const binding=env.AI_CONTROL;
+ if(!binding)return action==='personal-ai-use'?{enabled:false}:{status:503};
+ const response=await binding.get(binding.idFromName('personal-ai:'+uid)).fetch('https://internal.hsk/personal-ai',{
+  method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({uid,action,settings})
+ });
+ if(action==='personal-ai-use'&&!response.ok)throw Error('Personal AI unavailable');
+ return {status:response.status,...await response.json()};
+}
+export async function personalAiGenerate(config,requestBody,fetchFn,signal){
+ const {provider,model,apiKey}=config;
+ const endpoint=PERSONAL_PROVIDERS[provider];
+ if(!endpoint)throw Error('Invalid provider');
+ const headers={'Content-Type':'application/json'};
+ let url=endpoint,body=requestBody;
+ if(provider==='gemini'){
+  url+=encodeURIComponent(model)+':generateContent';
+  headers['x-goog-api-key']=apiKey;
+ }else{
+  const system=requestBody.systemInstruction.parts[0].text;
+  const messages=requestBody.contents.map(message=>({
+   role:message.role==='model'?'assistant':'user',content:message.parts.map(part=>part.text||'').join('\n')
+  }));
+  if(provider==='claude'){
+   headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';
+   body={model,system,messages,max_tokens:2400};
+  }else{
+   headers.Authorization='Bearer '+apiKey;
+   body={model,messages:[{role:'system',content:system},...messages]};
+  }
+ }
+ const response=await fetchFn(url,{method:'POST',headers,body:JSON.stringify(body),signal,redirect:'error'});
+ if(!response.ok||provider==='gemini')return response;
+ const payload=await response.json();
+ const text=provider==='claude'?payload.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
+  payload.choices?.[0]?.message?.content;
+ if(typeof text!=='string')return new Response(null,{status:502});
+ return Response.json({candidates:[{content:{parts:[{text:text.trim().replace(/^\x60{3}(?:json)?\s*|\s*\x60{3}$/gi,'')}]}}]});
+}
+
 // Cloudflare Durable Object: centralized, atomic AI budget and reusable reading cache.
 // Never stores provider keys, Firebase ID tokens, private translation prompts or images.
 export class HSkaIControl {
@@ -277,6 +368,7 @@ export class HSkaIControl {
  async fetch(request){
   if(request.method!=='POST')return Response.json({error:'method'},{status:405});
   let data;try{data=await request.json()}catch{return Response.json({error:'payload'},{status:400})}
+  if(data?.action?.startsWith?.('personal-ai-'))return personalAiStorage(this.state.storage,this.env,data);
   if(data&&typeof data.action==='string'&&data.action.startsWith('roles-'))return accountRoleControl(this.state.storage,data);
   if(data&&typeof data.action==='string'&&data.action.startsWith('qa-'))return qaCacheControl(this.state.storage,this.env,data);
   if(!data||typeof data!=='object'||!['reserve','get','put','lock','unlock','gemini-pick','gemini-report','abuse-start','abuse-finish'].includes(data.action))
@@ -1996,18 +2088,19 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    const result=await originalReading(input);return reply(result.data,result.status);
   }
 
-  const route=new URL(request.url).pathname,isTranscript=route==='/music-transcript',isRole=['/account-role','/admin/accounts','/admin/account-role'].includes(route),isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isProfileSync=route==='/api/profile-sync',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
-  if(!isTranscript&&!isRole&&route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading&&!isProfileSync)return reply({error:'Không tìm thấy dịch vụ.'},404);
+  const route=new URL(request.url).pathname,isPersonalSettings=route==='/personal-ai-settings',isTranscript=route==='/music-transcript',isRole=['/account-role','/admin/accounts','/admin/account-role'].includes(route),isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isProfileSync=route==='/api/profile-sync',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
+  if(!isPersonalSettings&&!isTranscript&&!isRole&&route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading&&!isProfileSync)return reply({error:'Không tìm thấy dịch vụ.'},404);
   if(request.method!=='POST')return reply({error:'Yêu cầu không hợp lệ.'},405);
   if(isTranscript&&env.MUSIC_TRANSCRIPT_ENABLED==='false')return reply({error:'Tự tạo script bằng AI đã được tắt. Hãy gắn script LRC/SRT/JSON có sẵn.',code:'MUSIC_TRANSCRIPT_DISABLED'},503);
-  if(!env.FIREBASE_API_KEY||!isRole&&!isSample&&!isProfileSync&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
+  if(!env.FIREBASE_API_KEY||!isLessonAsk&&!isPersonalSettings&&!isRole&&!isSample&&!isProfileSync&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
   const token=request.headers.get('Authorization')?.match(/^Bearer ([^\s]+)$/)?.[1],c=token&&token.length<5000?claims(token):null,project=env.FIREBASE_PROJECT_ID||'hsk-flashcards-44631';
   if(!c||c.aud!==project||c.iss!=='https://securetoken.google.com/'+project||typeof c.sub!=='string'||!c.sub||typeof c.exp!=='number'||c.exp<=now()/1000)return reply({error:'Hãy đăng nhập tài khoản app để dịch.'},401);
   let body;try{body=await readBody(request,isTranscript?60000:isSample?4096:isOcr?2100000:isHandwriting?550000:isLessonAsk?7600000:isDictionaryTranslate?60000:20000);}catch{return reply({error:isOcr||isHandwriting?'Ảnh quá lớn hoặc không hợp lệ.':'Câu nhập không hợp lệ hoặc quá dài.'},400);}
   if(!body||typeof body!=='object')return reply({error:'Yêu cầu không hợp lệ.'},400);
-  if(!isTranscript&&!isRole&&!isProfileSync&&!isDictionaryRoute&&!isDictionaryTranslate&&!isOcr&&!isSample&&!isHandwriting&&!isReading&&(!Number.isInteger(body.hsk)||body.hsk<1||body.hsk>6))return reply({error:'Chọn trình độ HSK 1–6.'},400);
+  if(!isPersonalSettings&&!isTranscript&&!isRole&&!isProfileSync&&!isDictionaryRoute&&!isDictionaryTranslate&&!isOcr&&!isSample&&!isHandwriting&&!isReading&&(!Number.isInteger(body.hsk)||body.hsk<1||body.hsk>6))return reply({error:'Chọn trình độ HSK 1–6.'},400);
   if(!isRole&&!isOcr&&!isAsk&&!isSample&&body.direction!==undefined&&!['vi-zh','zh-vi'].includes(body.direction))return reply({error:'Chọn chiều dịch hợp lệ.'},400);
-  if(isTranscript){if(!validTranscriptInput(body))return reply({error:'Chỉ bài đã xuất bản trong kho của chủ app mới được tạo transcript (tối đa 8 phút).'},400);if(!env.AI_CONTROL)return reply({error:'Chưa kết nối hạn mức transcript.'},503);}
+  if(isPersonalSettings){if(!['read','save','remove'].includes(body.op)||Object.keys(body).some(k=>!['op','settings'].includes(k)))return reply({error:'Yêu cầu cài đặt không hợp lệ.'},400);}
+  else if(isTranscript){if(!validTranscriptInput(body))return reply({error:'Chỉ bài đã xuất bản trong kho của chủ app mới được tạo transcript (tối đa 8 phút).'},400);if(!env.AI_CONTROL)return reply({error:'Chưa kết nối hạn mức transcript.'},503);}
   else if(isRole){if(Object.keys(body).some(k=>!['uid','email','role','cursor'].includes(k)))return reply({error:'Yêu cầu quản lý quyền không hợp lệ.'},400);}
   else if(isSample){if(!validateHandwritingSample(body))return reply({error:'Mẫu góp phải là một chữ Hán đã xác nhận và ảnh nét hợp lệ.'},400);}
   else if(isHandwriting){
@@ -2058,6 +2151,20 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(isTranscript&&account.localId!==OWNER_UID)return reply({error:'Chỉ admin được tạo và cập nhật script bài hát.'},403);
     if(isProfileSync){const syncRequest=new Request(request.url,{method:'POST',headers:{Authorization:'Bearer '+token,Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(body)});return handleProfileSyncRequest(syncRequest,env,async()=>({uid:account.localId}));}
    const restricted=(env.ALLOWED_UIDS||'').split(',').filter(Boolean);if(restricted.length&&!restricted.includes(c.sub))return reply({error:'Tài khoản chưa được bật dịch câu.'},403);
+   if(isPersonalSettings){
+    try{
+     const {status,...result}=await personalAiCall(env,account.localId,'personal-ai-'+body.op,body.settings);
+     if(status===200)return reply(result);
+     return reply({error:status===400?'Kiểm tra nhà cung cấp, tên model và API key.':'Máy chủ chưa bật lưu API riêng.'},status);
+    }catch{return reply({error:'Máy chủ chưa bật lưu API riêng.'},503);}
+   }
+   let personalAi=null;
+   if(isLessonAsk&&body.lesson?.content?.mode==='ai-qa'&&env.AI_CONTROL){
+    try{personalAi=await personalAiCall(env,account.localId,'personal-ai-use');}
+    catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
+   }
+   const usePersonalAi=personalAi?.enabled===true;
+   if(isLessonAsk&&!usePersonalAi&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ AI chưa được kích hoạt.'},503);
    if(isSample){const result=await submitHandwritingSample(body,c.sub,env,now());return reply(result.body,result.status);}
    const isAdmin=(isRole||env.AI_ACCOUNT_ROLES_ENABLED==='true')?account.localId===OWNER_UID:(env.ADMIN_UIDS||'').split(',').map(uid=>uid.trim()).filter(Boolean).includes(account.localId);
    let verifiedRole;
@@ -2094,7 +2201,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(cooldowns.size>1000)for(const [uid,t] of cooldowns)if(t<=now())cooldowns.delete(uid);
    if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true')cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
    const level=body.hsk,model=env.GEMINI_MODEL||'gemini-3.5-flash-lite';
-   if(env.QA_CACHE_ENABLED==='true'&&['/ask','/lesson-ask','/dictionary-lookup','/dictionary-translate'].includes(route)){
+   if(!usePersonalAi&&env.QA_CACHE_ENABLED==='true'&&['/ask','/lesson-ask','/dictionary-lookup','/dictionary-translate'].includes(route)){
     {const env=roleEnv;qaSession=await qaBegin(route,body,account.localId,env,isAdmin);}
     headers['X-HSK-AI-Cache']=qaSession.state;
     if(controller.signal.aborted)throw new DOMException('Canceled','AbortError');
@@ -2115,7 +2222,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     readingLocked=!!lock?.acquired;
    }
    try{
-    const budget=await controlCall(env,'reserve',{uid:c.sub,imageLimited:verifiedRole==='regular'&&(isOcr||isHandwriting||isLessonAsk&&body.images?.length>0),newAccount:Number(account.createdAt)>now()-86400000,route:isTranscript?'music-transcript':isReading?'reading':isOcr?'ocr':isHandwriting?'handwriting':isPlan?'study-plan':isLessonAsk&&body.images?.length?'ask-image':isAsk?'ask':'translate'});
+    const budget=usePersonalAi?null:await controlCall(env,'reserve',{uid:c.sub,imageLimited:verifiedRole==='regular'&&(isOcr||isHandwriting||isLessonAsk&&body.images?.length>0),newAccount:Number(account.createdAt)>now()-86400000,route:isTranscript?'music-transcript':isReading?'reading':isOcr?'ocr':isHandwriting?'handwriting':isPlan?'study-plan':isLessonAsk&&body.images?.length?'ask-image':isAsk?'ask':'translate'});
     if(budget&&Number.isInteger(budget.remainingImageDay))headers['X-HSK-Image-Remaining']=String(budget.remainingImageDay);
     if(budget&&!budget.allowed){
      const message=budget.reason==='user-image-daily'?'Bạn đã dùng hết 10 lượt AI hình ảnh hôm nay. Hạn mức được đặt lại lúc 00:00 giờ Việt Nam.':budget.reason==='new-user-reading-daily'?'Tài khoản trong 24 giờ đầu có tối đa 3 lượt tạo bài đọc/ngày.':budget.reason==='new-user-query-daily'?'Tài khoản trong 24 giờ đầu có tối đa 10 lượt truy vấn AI/ngày.':budget.reason==='new-user-daily'?'Tài khoản trong 24 giờ đầu có tối đa 13 lượt AI/ngày.':budget.reason==='user-reading-daily'?'Bạn đã dùng hết 15 lượt tạo bài đọc hôm nay. Vẫn có thể đọc lại bài đã lưu.':budget.reason==='user-query-daily'?'Bạn đã dùng hết 35 lượt truy vấn AI hôm nay. Vẫn có thể tạo bài đọc nếu còn lượt.':budget.reason==='user-daily'?'Bạn đã dùng hết 50 lượt AI hôm nay.':budget.reason==='global-minute'?'App đang có nhiều yêu cầu AI. Hãy thử lại sau một phút.':'App đã đạt giới hạn AI chung trong ngày.';
@@ -2226,7 +2333,16 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      catch(e){return reply({error:e.message||'Không nhận được hình gốc để AI phân tích.',code:'EXAM_IMAGE_UNAVAILABLE'},422);}
     }
     const contents=[...body.history.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.text}]})),{role:'user',parts:[{text:body.question.trim()},...examImageParts]}];
-    const response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify({systemInstruction:{parts:[{text:instruction}]},contents,generationConfig:{temperature:isAITeacher?0.35:isAiQa?0.25:isUnifiedPractice||isMicroTutorPack?0.45:0.2,maxOutputTokens:isWrongExam?1900:isAITeacher?1600:isAiQa?1800:isUnifiedPractice||isMicroTutorPack?3000:900,responseMimeType:'application/json',responseSchema:isAiQa?aiQaAnswerSchema:teacherAnswerSchema}})});
+    const providerBody={systemInstruction:{parts:[{text:instruction}]},contents,generationConfig:{temperature:isAITeacher?0.35:isAiQa?0.25:isUnifiedPractice||isMicroTutorPack?0.45:0.2,maxOutputTokens:isWrongExam?1900:isAITeacher?1600:isAiQa?1800:isUnifiedPractice||isMicroTutorPack?3000:900,responseMimeType:'application/json',responseSchema:isAiQa?aiQaAnswerSchema:teacherAnswerSchema}};
+    let response;
+    if(usePersonalAi){
+     headers['X-HSK-AI-Provider']=personalAi.provider;
+     try{response=await personalAiGenerate(personalAi,providerBody,providerFetch,controller.signal);}
+     catch{return reply({error:'Không kết nối được API riêng. Kiểm tra nhà cung cấp trong Cài đặt.'},502);}
+     if(!response.ok)return reply({error:response.status===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng từ chối yêu cầu. Kiểm tra key và model trong Cài đặt.'},response.status===429?429:502);
+    }else{
+     response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
+    }
     if(!response.ok)return reply(await providerFailure(response,model,env),response.status===429?429:502);
     const payload=await response.json(),candidate=payload.candidates?.[0];
     if(candidate?.finishReason&&candidate.finishReason!=='STOP')return reply({error:'AI chưa hoàn thành câu trả lời. Hãy thử hỏi ngắn hơn.'},502);
@@ -2239,7 +2355,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      const suggestedQuestions=Array.isArray(parsed.suggestedQuestions)?parsed.suggestedQuestions.slice(0,3).map(x=>({kind:['decision_guide','context_shift','practice_request'].includes(x?.kind)?x.kind:'decision_guide',text:String(x?.text||'').trim().replace(/\s+/g,' ').slice(0,180)})).filter(x=>x.text.length>=4):[];
      const micro=parsed.optionalMicroCheck&&typeof parsed.optionalMicroCheck==='object'?{nodeKey:String(parsed.optionalMicroCheck.nodeKey||'').slice(0,120),label:String(parsed.optionalMicroCheck.label||'').slice(0,160),prompt:String(parsed.optionalMicroCheck.prompt||'').slice(0,500),acceptedAnswers:Array.isArray(parsed.optionalMicroCheck.acceptedAnswers)?parsed.optionalMicroCheck.acceptedAnswers.map(String).slice(0,5):[],hint:String(parsed.optionalMicroCheck.hint||'').slice(0,300),nextStepIfAssisted:String(parsed.optionalMicroCheck.nextStepIfAssisted||'').slice(0,300)}:null;
      const candidates=Array.isArray(parsed.memoryCandidates)?parsed.memoryCandidates.slice(0,8).map(c=>({nodeKey:String(c?.nodeKey||'').slice(0,120),label:String(c?.label||'').slice(0,160),candidateType:['interest_only','ai_hypothesis','observed_mistake'].includes(c?.candidateType)?c.candidateType:'ai_hypothesis',manifestation:String(c?.manifestation||'').slice(0,300),evidenceMessageId:String(c?.evidenceMessageId||'').slice(0,120),evidenceQuote:String(c?.evidenceQuote||'').slice(0,500),explanationSummary:String(c?.explanationSummary||'').slice(0,240),nextPedagogicalStep:String(c?.nextPedagogicalStep||'').slice(0,240)})):[];
-     await qaUsage(env,payload);await qaFinish(roleEnv,qaSession,{answer,mode:'ai-qa',explanationStrategyUsed:strategy,suggestedQuestions,memoryCandidates:candidates},headers['X-HSK-AI-Provider'],{rawFetch:rawFetchFn,ctx,signal:controller.signal});return reply({answer,primaryNodeKey,nodeLabel,coreRuleSummary,explanationStrategyUsed:strategy,optionalMicroCheck:micro,suggestedQuestions,memoryCandidates:candidates,mode:'ai-qa'});
+     if(!usePersonalAi)await qaUsage(env,payload);await qaFinish(roleEnv,qaSession,{answer,mode:'ai-qa',explanationStrategyUsed:strategy,suggestedQuestions,memoryCandidates:candidates},headers['X-HSK-AI-Provider'],{rawFetch:rawFetchFn,ctx,signal:controller.signal});return reply({answer,primaryNodeKey,nodeLabel,coreRuleSummary,explanationStrategyUsed:strategy,optionalMicroCheck:micro,suggestedQuestions,memoryCandidates:candidates,mode:'ai-qa'});
     }
     if(isUnifiedPractice){
      const generated=normalizeUnifiedPracticeResult(answer,{hsk:level,count:body.lesson?.content?.count||5});
