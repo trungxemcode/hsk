@@ -186,6 +186,7 @@
     "src/modules/ai-coach/ai-qa.js",
     "src/modules/ai-coach/qa-projects.js",
     "src/modules/ai-coach/qa-project-sources.js",
+    "src/modules/ai-coach/ai-provider-picker.js",
     "src/modules/ai-coach/qa-intent-router.js",
     "src/modules/ai-coach/qa-understanding-memory.js",
     "src/modules/ai-coach/ai-qa-suggestions-ui.js"

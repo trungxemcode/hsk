@@ -843,6 +843,37 @@ export async function chatgptCookieGenerate(config,requestBody,fetchFn=fetch,sig
 
 export {sharedGuardrail,sharedMemoryManager};
 
+// Hỏi đáp AI: nhà cung cấp mà học viên chọn trong ô chat. 'auto' giữ nguyên hành vi cũ của Worker.
+export const AI_PROVIDER_CHOICES=new Set(['auto','system-gemini','system-chatgpt','personal']);
+export const PERSONAL_PROVIDER_IDS=['openai','fosta','deepseek','claude','gemini','chatgpt-cookie'];
+
+export function normalizeAiProviderChoice(value){
+  if(value===undefined||value===null||value==='')return 'auto';
+  return typeof value==='string'&&AI_PROVIDER_CHOICES.has(value)?value:null;
+}
+
+// Trả về lý do không dùng được (tiếng Việt) hoặc null nếu lựa chọn khả dụng.
+export function aiProviderChoiceError(choice,{personalEnabled=false,sharedCookieReady=false,geminiReady=false}={}){
+  if(choice==='personal'&&!personalEnabled)return 'API riêng chưa được bật. Hãy bật hoặc nhập API/cookie trong Cài đặt.';
+  if(choice==='system-chatgpt'&&!sharedCookieReady)return 'ChatGPT của hệ thống chưa được admin cấu hình.';
+  if(choice==='system-gemini'&&!geminiReady)return 'Gemini của hệ thống chưa sẵn sàng.';
+  return null;
+}
+
+// Công khai cho client: chỉ trạng thái khả dụng, không có key/cookie.
+export function describeAiProviders({geminiReady=false,sharedCookieReady=false,personal=null}={}){
+  const configured=personal?.configured===true;
+  return {
+    system:{gemini:{available:Boolean(geminiReady)},chatgpt:{available:Boolean(sharedCookieReady)}},
+    personal:{
+      configured,
+      enabled:configured&&personal?.enabled===true,
+      provider:configured&&PERSONAL_PROVIDER_IDS.includes(personal?.provider)?personal.provider:null,
+      model:configured&&typeof personal?.model==='string'?personal.model.slice(0,100):null
+    }
+  };
+}
+
 // Credentials are scoped to an authenticated UID and encrypted before storage.
 const PERSONAL_PROVIDERS={
  openai:'https://api.openai.com/v1/chat/completions',
@@ -2668,7 +2699,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    const result=await originalReading(input);return reply(result.data,result.status);
   }
 
-  const route=new URL(request.url).pathname,isPersonalSettings=route==='/personal-ai-settings',isTranscript=route==='/music-transcript',isRole=['/account-role','/admin/accounts','/admin/account-role'].includes(route),isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isProfileSync=route==='/api/profile-sync',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
+  const route=new URL(request.url).pathname,isAiProviders=route==='/ai-providers',isPersonalSettings=route==='/personal-ai-settings'||isAiProviders,isTranscript=route==='/music-transcript',isRole=['/account-role','/admin/accounts','/admin/account-role'].includes(route),isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isProfileSync=route==='/api/profile-sync',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
   if(!isPersonalSettings&&!isTranscript&&!isRole&&route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading&&!isProfileSync)return reply({error:'Không tìm thấy dịch vụ.'},404);
   if(request.method!=='POST')return reply({error:'Yêu cầu không hợp lệ.'},405);
   if(isTranscript&&env.MUSIC_TRANSCRIPT_ENABLED==='false')return reply({error:'Tự tạo script bằng AI đã được tắt. Hãy gắn script LRC/SRT/JSON có sẵn.',code:'MUSIC_TRANSCRIPT_DISABLED'},503);
@@ -2679,7 +2710,8 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
   if(!body||typeof body!=='object')return reply({error:'Yêu cầu không hợp lệ.'},400);
   if(!isPersonalSettings&&!isTranscript&&!isRole&&!isProfileSync&&!isDictionaryRoute&&!isDictionaryTranslate&&!isOcr&&!isSample&&!isHandwriting&&!isReading&&(!Number.isInteger(body.hsk)||body.hsk<1||body.hsk>6))return reply({error:'Chọn trình độ HSK 1–6.'},400);
   if(!isRole&&!isOcr&&!isAsk&&!isSample&&body.direction!==undefined&&!['vi-zh','zh-vi'].includes(body.direction))return reply({error:'Chọn chiều dịch hợp lệ.'},400);
-  if(isPersonalSettings){if(!['read','save','remove'].includes(body.op)||Object.keys(body).some(k=>!['op','settings'].includes(k)))return reply({error:'Yêu cầu cài đặt không hợp lệ.'},400);}
+  if(isAiProviders){if(Object.keys(body).length)return reply({error:'Yêu cầu nhà cung cấp AI không hợp lệ.'},400);}
+  else if(isPersonalSettings){if(!['read','save','remove'].includes(body.op)||Object.keys(body).some(k=>!['op','settings'].includes(k)))return reply({error:'Yêu cầu cài đặt không hợp lệ.'},400);}
   else if(isTranscript){if(!validTranscriptInput(body))return reply({error:'Chỉ bài đã xuất bản trong kho của chủ app mới được tạo transcript (tối đa 8 phút).'},400);if(!env.AI_CONTROL)return reply({error:'Chưa kết nối hạn mức transcript.'},503);}
   else if(isRole){if(Object.keys(body).some(k=>!['uid','email','role','cursor'].includes(k)))return reply({error:'Yêu cầu quản lý quyền không hợp lệ.'},400);}
   else if(isSample){if(!validateHandwritingSample(body))return reply({error:'Mẫu góp phải là một chữ Hán đã xác nhận và ảnh nét hợp lệ.'},400);}
@@ -2731,6 +2763,11 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(isTranscript&&account.localId!==OWNER_UID)return reply({error:'Chỉ admin được tạo và cập nhật script bài hát.'},403);
     if(isProfileSync){const syncRequest=new Request(request.url,{method:'POST',headers:{Authorization:'Bearer '+token,Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(body)});return handleProfileSyncRequest(syncRequest,env,async()=>({uid:account.localId}));}
    const restricted=(env.ALLOWED_UIDS||'').split(',').filter(Boolean);if(restricted.length&&!restricted.includes(c.sub))return reply({error:'Tài khoản chưa được bật dịch câu.'},403);
+   if(isAiProviders){
+    let personal=null;
+    try{if(env.AI_CONTROL)personal=await personalAiCall(env,account.localId,'personal-ai-read');}catch{personal=null;}
+    return reply(describeAiProviders({geminiReady:configuredGeminiKeys(env).length>0,sharedCookieReady:typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim()),personal}));
+   }
    if(isPersonalSettings){
     try{
      const {status,...result}=await personalAiCall(env,account.localId,'personal-ai-'+body.op,body.settings);
@@ -2746,8 +2783,13 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     try{personalAi=await personalAiCall(env,account.localId,'personal-ai-use');}
     catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
    }
-   const usePersonalAi=personalAi?.enabled===true;
-   const useSharedChatGptCookie=isAiQa&&!usePersonalAi&&typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim())&&(env.AI_QA_PROVIDER==='chatgpt-cookie'||!configuredGeminiKeys(env).length);
+   const aiChoice=isAiQa?normalizeAiProviderChoice(body.aiProvider):'auto';
+   if(aiChoice===null)return reply({error:'Nhà cung cấp AI không hợp lệ.',code:'AI_PROVIDER_INVALID'},400);
+   const usePersonalAi=personalAi?.enabled===true&&(aiChoice==='auto'||aiChoice==='personal');
+   const sharedCookieReady=typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim());
+   const choiceError=isAiQa?aiProviderChoiceError(aiChoice,{personalEnabled:personalAi?.enabled===true,sharedCookieReady,geminiReady:configuredGeminiKeys(env).length>0}):null;
+   if(choiceError)return reply({error:choiceError,code:'AI_PROVIDER_UNAVAILABLE'},409);
+   const useSharedChatGptCookie=isAiQa&&!usePersonalAi&&sharedCookieReady&&(aiChoice==='system-chatgpt'||aiChoice==='auto'&&(env.AI_QA_PROVIDER==='chatgpt-cookie'||!configuredGeminiKeys(env).length));
    const useChatGptCookie=isAiQa&&(useSharedChatGptCookie||usePersonalAi&&personalAi?.provider==='chatgpt-cookie');
    if(isLessonAsk&&!usePersonalAi&&!useSharedChatGptCookie&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ AI chưa được kích hoạt.'},503);
    if(isAiQa){
