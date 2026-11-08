@@ -9,6 +9,7 @@ const lesson=make('p',null,'overview-lesson');hero.querySelector('.mobile-hero-c
 const primary=home.querySelector('.dashboard-primary'),side=home.querySelector('.dashboard-side');
 const today=$('planToday'),settingsPanel=$('homePlanSettings');
 const planSetup=$('planSetup'),planOverview=$('planOverview');
+const aiPlanSettings=$('planAIToggle').closest('.plan-overview-group');
 const planProgress=make('details',null,'clean-disclosure desktop-plan-progress');
 planProgress.append(make('summary','Xem tiến độ và điều chỉnh'));
 planSetup.addEventListener('toggle',()=>{
@@ -56,6 +57,7 @@ if(mobile!==lastMobile){
   taskList.hidden=false;
   planToggle.remove();
   if(planProgress.parentElement){
+   planOverview.firstElementChild.after(aiPlanSettings);
    planSetup.before(planOverview);
    planProgress.remove();
    planProgress.open=false;
@@ -68,6 +70,7 @@ if(mobile!==lastMobile){
   taskList.hidden=!desktopPlanExpanded;
   planSetup.after(planProgress);
   planProgress.append(planOverview);
+  planOverview.append(aiPlanSettings);
   primary.prepend(today);
   today.after(settingsPanel);
   if(placement)settingsPanel.after(placement);
