@@ -708,3 +708,16 @@ html body.studio-enabled #aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaS
     flex-basis:44px;width:44px;height:44px;min-height:44px;
   }
 }
+
+#aiQaPanel .qa-chat-composer .qa-thinking{
+  flex:none;
+  width:clamp(64px,22vw,104px);
+  min-width:0;
+  min-height:32px;
+  padding:0 4px;
+  border:0;
+  background:var(--palette-clear);
+  color:var(--qa-text);
+  font-size:12px;
+}
+#aiQaPanel .qa-chat-composer .qa-thinking:disabled{opacity:.7;}

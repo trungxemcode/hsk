@@ -6,6 +6,8 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   const page=await browser.newPage({viewport:{width,height:844},isMobile:width<721,hasTouch:width<721,serviceWorkers:'block'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route('https://**/*',r=>r.abort());await page.route('**/account-config.json',r=>r.fulfill({contentType:'application/json',body:'{"enabled":false}'}));await page.route('**/translation-config.json',r=>r.fulfill({json:{enabled:true,endpoint:'https://ai.test/translate'}}));let received=null;
   await page.route('https://ai.test/lesson-ask',async r=>{received=r.request().postDataJSON();return r.fulfill({json:{answer:'Bạn đã có nền tảng tốt. Hãy chuyển sang một thử thách mới có ích.',primaryNodeKey:'grammar:contrast',nodeLabel:'So sánh',suggestedQuestions:[{kind:'context_shift',text:'Cho ví dụ với tình huống đời thường khác nhé?'}]}});});
+  let chatRole='regular';
+  await page.route('https://ai.test/account-role',route=>route.fulfill({json:{account:{role:chatRole}}}));
   await page.goto('http://127.0.0.1:'+server.address().port+'/index.html',{waitUntil:'domcontentloaded',timeout:60000});
   // Studio navigation intentionally stays gated until the real lesson/data boot
   // completes. Waiting only for the shell API races that gate and leaves the
@@ -15,6 +17,14 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),htt
   assert.equal(await page.evaluate(()=>window.__qaWrites.length),0,'do not overwrite remote conversations before first Firestore snapshot');
   await page.evaluate(()=>window.__qaInitial());
   await page.locator('#aiQaPanel').waitFor({state:'visible'});
+  const thinking=page.locator('#aiQaThinking');
+  assert.equal(await thinking.inputValue(),'low');
+  assert.ok(await thinking.isDisabled(),'regular chat is locked to Low');
+  chatRole='vip';
+  await page.evaluate(()=>window.dispatchEvent(new Event('hsk-ai-qa-open')));
+  await page.waitForFunction(()=>!document.getElementById('aiQaThinking').disabled);
+  await thinking.selectOption('medium');
+  assert.equal(await page.locator('#qaProjectThinking').inputValue(),'medium');
   if(width===390){
     for(const [mobileWidth,mobileHeight] of [[320,640],[390,844],[430,932]]){
       await page.setViewportSize({width:mobileWidth,height:mobileHeight});
@@ -273,7 +283,7 @@ assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);ass
     }
     await page.setViewportSize({width,height:844});
   }
-assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written to realtime storage');assert.equal(received.lesson.content.mode,'ai-qa');assert.ok(received.lesson.content.learning_snapshot.masteryBoundary);assert.match(await page.locator('#aiQaMessages').innerText(),/Bạn đã có nền tảng tốt/);
+assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written to realtime storage');assert.equal(received.lesson.content.mode,'ai-qa');assert.equal(received.thinking,'medium');assert.ok(received.lesson.content.learning_snapshot.masteryBoundary);assert.match(await page.locator('#aiQaMessages').innerText(),/Bạn đã có nền tảng tốt/);
    const targetAiId=await page.locator('.ai-qa-message.assistant').first().getAttribute('data-ai-message-id');
    assert.ok(targetAiId,'assistant message has a stable target id');
    assert.equal(await page.locator('.qa-suggestions-group').count(),1,
@@ -460,8 +470,9 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   await command('Mở sổ từ vựng');
   await page.locator('#notebookPanel').waitFor({state:'visible'});
   assert.equal(received,lastRequest,'app commands never use the model endpoint');
-  let savedSettings;
+  let savedSettings,settingsAvailable=false;
   await page.route('https://ai.test/personal-ai-settings',route=>{
+    if(!settingsAvailable)return route.fulfill({status:404,json:{error:'Không tìm thấy dịch vụ.'}});
     const body=route.request().postDataJSON();
     if(body.op==='save'){
       savedSettings=body.settings;
@@ -472,6 +483,9 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   await page.evaluate(()=>HSKStudio.navigate('account'));
   await page.locator('#accountPanel').waitFor({state:'visible'});
   assert.equal(await page.locator('#accountPageTitle').textContent(),'Cài đặt');
+  await page.locator('#personalAiLoad').click();
+  await page.getByText('Máy chủ Hỏi đáp AI chưa cập nhật chức năng API riêng. Hãy thử lại sau.',{exact:true}).waitFor();
+  settingsAvailable=true;
   await page.locator('#personalAiLoad').click();
   await page.locator('#personalAiForm').waitFor({state:'visible'});
   await page.locator('#personalAiEnabled').check();

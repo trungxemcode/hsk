@@ -123,6 +123,15 @@ Account registry becomes populated as users sign in to the updated frontend or c
 ## API riêng cho Hỏi đáp AI
 
 **Triển khai an toàn:** Workflow `deploy-translator-roles.yml` chỉ chạy thủ công qua `workflow_dispatch`. Trước khi kích hoạt, đối chiếu mã Worker live và bảo toàn các bản vá voice hiện có; xác nhận secret `AI_PERSONAL_KEY_SECRET` đã thiết lập. Merge frontend không tự triển khai Worker.
+Sau khi triển khai, xác nhận `POST /personal-ai-settings` trả HTTP 401 khi chưa đăng nhập. HTTP 404 nghĩa là Worker live chưa có route. Sau đó mở Cài đặt bằng tài khoản thử để xác nhận Worker đọc được cấu hình.
+
+```bash
+npx wrangler secret list --config server/wrangler.jsonc
+curl -i -X POST https://hsk-vietnamese-translator.trung-hsk668.workers.dev/personal-ai-settings \
+  -H 'Origin: https://trungxemcode.github.io' -H 'Content-Type: application/json' \
+  --data '{"op":"read"}'
+```
+
 
 Cấu hình cần binding `AI_CONTROL` hiện có và Worker secret `AI_PERSONAL_KEY_SECRET` (ít nhất 32 ký tự ngẫu nhiên). Tạo một lần và giữ bản sao trong trình quản lý mật khẩu. Đổi secret sẽ khiến key cũ phải nhập lại.
 
