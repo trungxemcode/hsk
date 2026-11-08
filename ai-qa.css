@@ -550,7 +550,7 @@ body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-jump-to-latest:not([hidden])
 .qa-project-form input{flex:1;min-width:0;font-size:16px;}
 .qa-project-tabs{display:flex;gap:8px;margin:12px 0;}
 .qa-project-dialog{box-sizing:border-box;width:min(440px,calc(100vw - 32px));padding:20px;border:1px solid var(--qa-input-border);border-radius:var(--radius-card);background:var(--qa-surface);color:var(--qa-text);}
-.qa-project-dialog::backdrop{background:#0008;}
+.qa-project-dialog::backdrop{background:var(--legacy-hex-14152e78);}
 .qa-project-dialog header,.qa-project-dialog footer{display:flex;align-items:center;justify-content:space-between;gap:12px;}
 .qa-project-dialog h2{margin:0;font-size:19px;}
 .qa-project-dialog label{display:inline-flex;align-items:center;gap:8px;margin-block:8px;}
