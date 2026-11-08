@@ -612,3 +612,36 @@ html body.studio-enabled #aiQaHistory :is(.ai-qa-new-chat,.ai-qa-conversation-op
 }
 #qaProjectHistory{display:none;}
 @media(max-width:720px){#qaProjectHistory{display:inline-grid;place-items:center;}}
+
+/* Project landing page shares one reading column for chat and sources. */
+#qaProjectHome .qa-project-content{width:min(100%,640px);margin:20px auto 0;}
+.qa-project-title-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+#qaProjectHome .qa-project-title-row h2{margin:0;font-size:24px;}
+.qa-project-title-row svg,#qaProjectChatForm svg{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+#qaProjectChatForm{padding:4px 5px 4px 16px;border:1px solid var(--qa-input-border);border-radius:var(--radius-pill);background:var(--qa-surface);}
+#qaProjectChatForm input{padding:8px 0;border:0!important;background:var(--palette-clear)!important;box-shadow:none;}
+#qaProjectChatForm button{display:grid;place-items:center;flex:none;width:40px;height:40px;min-height:40px;padding:0;border-radius:var(--radius-pill);}
+#qaProjectChatForm svg{width:18px;height:18px;}
+#qaProjectHome .qa-project-tabs{margin:20px 0 8px;}
+#qaProjectHome .qa-project-tabs button{
+  --button-bg:var(--palette-clear);
+  --button-text:var(--qa-text);
+  --button-active-bg:var(--qa-hover);
+  --button-active-text:var(--qa-text);
+  border:0!important;border-radius:var(--radius-pill);
+}
+.qa-project-source-intro{display:flex;justify-content:flex-end;margin-bottom:8px;}
+.qa-project-source-intro.is-empty{
+  display:grid;align-content:center;justify-items:center;justify-content:stretch;
+  gap:14px;min-height:clamp(175px,36vh,310px);padding:20px;
+  border:1px dashed var(--qa-input-border);border-radius:var(--radius-card);text-align:center;
+}
+.qa-project-source-intro p{margin:6px 0 0;color:var(--qa-subtle);font-size:13px;}
+#qaProjectAddSource{border-radius:var(--radius-pill);}
+.qa-project-source-options{padding:12px;margin-bottom:10px;border:1px solid var(--qa-input-border);border-radius:var(--radius-card);}
+.qa-project-source-options input[type=file]{display:block;max-width:100%;margin-top:6px;}
+.qa-project-source-options p{margin:8px 0 0;font-size:13px;color:var(--qa-subtle);}
+@media(max-width:720px){
+  #qaProjectHome .qa-project-title-row h2{font-size:21px;}
+  #qaProjectChatForm button{width:44px;height:44px;min-height:44px;}
+}
