@@ -187,6 +187,34 @@ assert.equal(await page.locator('[data-studio-go="ai-qa"]').count()>=1,true);ass
   assert.equal(await page.locator('.ai-qa-conversation').count(),1,
     'first question creates exactly one persistent conversation');
   assert.equal(await page.locator('#aiQaEmpty').isVisible(),false,'welcome hides after first question');
+  const jump=page.locator('#aiQaJumpToLatest');
+  await page.evaluate(()=>{
+    const messages=document.getElementById('aiQaMessages');
+    messages.lastElementChild.style.minHeight='1500px';
+    messages.scrollTo({top:0,behavior:'instant'});
+    messages.dispatchEvent(new Event('scroll'));
+  });
+  await jump.waitFor({state:'visible'});
+  const jumpBounds=await jump.boundingBox(),composerBounds=await page.locator('#aiQaForm').boundingBox();
+  assert.ok(jumpBounds.y+jumpBounds.height<=composerBounds.y,'jump button sits above the composer');
+  if(width>=721){
+    const distance=await page.evaluate(()=>{
+      HSKStudio.navigate('home');
+      HSKStudio.navigate('ai-qa');
+      const messages=document.getElementById('aiQaMessages');
+      return messages.scrollHeight-messages.clientHeight-messages.scrollTop;
+    });
+    assert.ok(distance<=2,'returning to chat immediately lands at the bottom');
+    assert.equal(await jump.isVisible(),false);
+    await page.locator('#aiQaMessages').evaluate(messages=>messages.scrollTo({top:0,behavior:'instant'}));
+    await jump.waitFor({state:'visible'});
+  }
+  await jump.click();
+  assert.ok(await page.locator('#aiQaMessages').evaluate(messages=>
+    messages.scrollHeight-messages.clientHeight-messages.scrollTop<=2),'jump button reaches the latest message');
+  assert.equal(await jump.isVisible(),false);
+  await page.locator('#aiQaMessages').evaluate(messages=>messages.lastElementChild.style.removeProperty('min-height'));
+
   if(width===390){
     await page.waitForFunction(()=>!document.getElementById("aiQaInput").disabled);
     await assertMobileComposerReachable();
