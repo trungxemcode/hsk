@@ -120,9 +120,34 @@ html body.studio-enabled #studioHome .feature-hero{box-shadow:var(--shadow-home-
 
 @media(prefers-reduced-motion:no-preference){html body.studio-enabled #studioHome .feature-hero{animation-name:rd-sheen!important;}}
 
-/* PC: pronunciation and meaning sit alongside the character on one row. */
+/* Desktop keeps the current study action beside supporting information. */
 @media(min-width:721px){
- html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary{grid-template-columns:auto minmax(0,max-content) minmax(0,1fr)!important;column-gap:20px!important;align-items:center}
- html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary strong{grid-row:auto}
- html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary span{font-size:21px!important;font-weight:550!important;line-height:1.5}
+ body.studio-enabled:not(.mobile-ux) #studioHome.overview-v216 .dashboard-grid{
+  display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr)!important;gap:16px;align-items:start;margin:0;
+ }
+ body.studio-enabled:not(.mobile-ux) #studioHome.overview-v216 :is(.dashboard-primary,.dashboard-side){min-width:0}
+ body.studio-enabled:not(.mobile-ux) #studioHome.overview-v216 .dashboard-side{
+  display:flex!important;flex-direction:column;gap:12px;
+ }
+ html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary{
+  grid-template-columns:auto minmax(0,1fr)!important;column-gap:10px!important;
+ }
+ html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary strong{grid-row:1/3}
+ html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #homeDailyWord .overview-word-row summary span{font-size:14px!important}
+ html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome.overview-v216 #homeDailyWord{margin:0!important}
+ html body.studio-enabled:not(.mobile-ux) #studioHome #planToday .plan-heading h3{font-size:20px}
+ html body:not(#_rd).studio-enabled:not(.mobile-ux) #studioHome #planSettingsLink{
+  background:var(--surface)!important;border-color:var(--line)!important;color:var(--ink)!important;
+ }
+ html body.studio-enabled:not(.mobile-ux) #studioHome #planContinue{
+  background:var(--accent)!important;border-color:var(--accent)!important;color:var(--palette-white)!important;
+ }
 }
+@media(min-width:721px) and (max-width:1023px){
+ body.studio-enabled:not(.mobile-ux) #studioHome.overview-v216 .dashboard-grid{grid-template-columns:minmax(0,1fr)!important}
+}
+
+#studioHome .overview-progress-card{padding:16px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface)}
+#studioHome .overview-progress-card h3{margin:0 0 8px;font-size:15px}
+#studioHome .overview-progress-card p{margin:4px 0;color:var(--sub);font-size:13px}
+#studioHome .overview-progress-card button{margin-top:8px;min-height:40px}
