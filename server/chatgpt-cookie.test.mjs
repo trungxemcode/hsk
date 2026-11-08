@@ -166,6 +166,9 @@ test('Worker supports ChatGPT Cookie in Personal AI settings, Shared Server Cook
    return Response.json({users:[{localId:claims.sub}]});
   }
   upstreamCalls.push({url:u,method:init.method,headers:init.headers,body:init.body?JSON.parse(init.body):null});
+  if(u==='https://bridge.test/api/hsk/bridge'){
+   return Response.json({reply:JSON.stringify({answer:'Phản hồi qua cầu nối.'})});
+  }
   if(u.endsWith('/api/auth/session')){
    return Response.json({accessToken:'chatgpt-web-access-token'});
   }
@@ -260,4 +263,16 @@ test('Worker supports ChatGPT Cookie in Personal AI settings, Shared Server Cook
   assert.equal(response.status,200);
   assert.equal(response.headers.get('X-HSK-AI-Provider'),'chatgpt-cookie');
  }
+ const splitCookie='a'.repeat(3900)+'|'+'b'.repeat(950);
+ const bridgeEnv={...sharedEnv,CHATGPT_COOKIE_BRIDGE_URL:'https://bridge.test',CHATGPT_COOKIE_BRIDGE_KEY:'bridge-test-key'};
+ const privateSaved=await callWorker('split-private-user','/personal-ai-settings',{
+  op:'save',settings:{provider:'chatgpt-cookie',model:'gpt-4o-mini',enabled:true,apiKey:splitCookie}
+ },bridgeEnv);
+ assert.equal(privateSaved.status,200);
+ const privateReply=await callWorker('split-private-user','/lesson-ask',{...qaBody,aiProvider:'personal'},bridgeEnv);
+ assert.equal(privateReply.status,200);
+ assert.equal((await privateReply.json()).answer,'Phản hồi qua cầu nối.');
+ const bridgeCall=upstreamCalls.findLast(call=>call.url==='https://bridge.test/api/hsk/bridge');
+ assert.equal(bridgeCall.headers['X-HSK-Bridge-Key'],'bridge-test-key');
+ assert.equal(bridgeCall.headers['X-ChatGPT-Session-Token'],splitCookie);
 });

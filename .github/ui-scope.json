@@ -1,1 +1,1 @@
-{"request":"Hỏi đáp AI: bỏ chặn chủ đề và từ khóa thông thường, giữ giới hạn chống lạm dụng.","excludedRoutes":["ai-qa"]}
+{"request":"Cài đặt: nhận cookie ChatGPT riêng chia phần. Hỏi đáp AI: hiển thị lỗi phiên ChatGPT riêng.","excludedRoutes":["account","ai-qa"]}
