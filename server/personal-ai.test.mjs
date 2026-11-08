@@ -53,7 +53,7 @@ test('settings are private by verified UID and FOSTA handles chat without a shar
  assert.equal(calls[0].headers.Authorization,'Bearer '+key);
  assert.equal(calls[0].body.model,'gpt-6.1-sol');
  assert.equal(calls[0].body.stream,false);
- assert.equal(calls[0].redirect,'error');
+ assert.equal(calls[0].redirect,'manual');
  // An enabled private key must never silently fall back to a shared provider
  // when the master encryption secret is unavailable after configuration.
  const secretBefore=env.AI_PERSONAL_KEY_SECRET,callsBefore=calls.length;
@@ -77,7 +77,7 @@ test('the provider adapters use their own authentication and fixed endpoints',as
   const result=await personalAiGenerate({provider,model:'example',apiKey:'test-key'},payload,async(url,init)=>{
    assert.equal(url,endpoint);
    assert.match(init.headers[header],/test-key$/);
-   assert.equal(init.redirect,'error');
+   assert.equal(init.redirect,'manual');
    return Response.json({content:[{type:'text',text:'{}'}],choices:[{message:{content:'{}'}}]});
   });
   assert.equal(result.status,200);
@@ -107,4 +107,16 @@ test('invalid upstream response body is handled separately from connection failu
  const payload={systemInstruction:{parts:[{text:'guide'}]},contents:[]};
  const result=await personalAiGenerate({provider:'fosta',model:'gpt-6-luna',apiKey:'fake'},payload,async()=>new Response('<html>error</html>'));
  assert.equal(result.status,502);
+});
+
+test('Cloudflare-compatible redirect handling never forwards the API key',async()=>{
+ let requests=0;
+ const payload={systemInstruction:{parts:[{text:'guide'}]},contents:[]};
+ const result=await personalAiGenerate({provider:'fosta',model:'gpt-6-luna',apiKey:'fake'},payload,async(url,init)=>{
+  requests++;
+  assert.equal(init.redirect,'manual');
+  return new Response(null,{status:307,headers:{Location:'https://elsewhere.test/'}});
+ });
+ assert.equal(result.status,502);
+ assert.equal(requests,1);
 });

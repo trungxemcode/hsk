@@ -80,7 +80,9 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal){
    body={model,messages:[{role:'system',content:system},...messages],...(provider==='fosta'?{stream:false}:{})};
   }
  }
- const response=await fetchFn(url,{method:'POST',headers,body:JSON.stringify(body),signal,redirect:'error'});
+ const response=await fetchFn(url,{method:'POST',headers,body:JSON.stringify(body),signal,redirect:'manual'});
+ // Workers supports manual redirects. Never forward account-owned credentials to a redirect target.
+ if(response.status>=300&&response.status<400)return new Response(null,{status:502});
  if(!response.ok||provider==='gemini')return response;
  const payload=await response.json().catch(()=>null);
  const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
