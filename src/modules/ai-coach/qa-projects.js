@@ -44,6 +44,14 @@
   const dialog=$('qaProjectDialog'),status=$('qaProjectStatus'),home=$('qaProjectHome');
   const chats=$('qaProjectChats'),sources=$('qaProjectSources'),tabs=[$('qaProjectChatsTab'),$('qaProjectSourcesTab')];
   const sourceList=$('qaProjectSourceList'),question=$('qaProjectQuestion');
+  const sourceIntro=$('qaProjectSourceIntro'),sourceEmpty=$('qaProjectSourceEmpty');
+  const sourceOptions=$('qaProjectSourceOptions'),addSource=$('qaProjectAddSource');
+  function showSourceOptions(open){
+   sourceOptions.hidden=!open;
+   addSource.setAttribute('aria-expanded',String(open));
+   addSource.textContent=open?'Đóng thêm nguồn':'Thêm nguồn';
+  }
+  addSource.onclick=()=>showSourceOptions(sourceOptions.hidden);
   const report=error=>{status.textContent=error.message||'Không lưu được dữ liệu trên thiết bị.';};
   function tab(showSources){
    chats.hidden=showSources;sources.hidden=!showSources;
@@ -187,7 +195,7 @@
    }));
    if(!showHome)return;
    if(renderedProject!==project){
-    tab(false);status.textContent='';question.value='';renderedProject=project;
+    tab(false);showSourceOptions(false);status.textContent='';question.value='';renderedProject=project;
    }
    $('qaProjectTitle').textContent=project.name;
    question.placeholder='Trò chuyện mới trong '+project.name;
@@ -200,6 +208,8 @@
      return button;
     }));
    if(!project.chats.length)chats.textContent='Chưa có cuộc trò chuyện.';
+   sourceEmpty.hidden=project.sources.length>0;
+   sourceIntro.classList.toggle('is-empty',!sourceEmpty.hidden);
    sourceList.replaceChildren(...project.sources.map(source=>{
     const row=document.createElement('details'),title=document.createElement('summary');
     title.textContent=source.name+(source.text?'':' · Cần nội dung');
