@@ -1,5 +1,5 @@
 {
-  "request": "Chỉ Hỏi đáp AI trên PC và điện thoại: hiện nút xuống tin nhắn mới nhất khi cuộn lên và mở hội thoại ở đáy khi quay lại trang.",
+  "request": "Chỉ Hỏi đáp AI trên PC và điện thoại: thêm thư mục Dự án, hộp tạo dự án có công tắc bộ nhớ riêng, màn hình Trò chuyện và Nguồn.",
   "excludedRoutes": [
     "ai-qa"
   ]
