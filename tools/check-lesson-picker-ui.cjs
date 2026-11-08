@@ -14,6 +14,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
   await p.goto('http://127.0.0.1:'+server.address().port+'/index.html');await p.waitForFunction(()=>window.HSKMobileUX&&window.HSKLessonNav);
   await p.evaluate(async theme=>{document.documentElement.dataset.theme=theme;HSKStudio.navigate('lessons');history.replaceState(null,'','#lesson/standard-3-01');await HSKLessonNav.open();},theme);
   const picker=p.getByLabel('Chọn mục bài học',{exact:true});await p.locator('.lesson-section-nav').waitFor();
+  await p.waitForFunction(()=>!document.getElementById('designSync').hidden);
+  await p.locator('#designSync').evaluate(button=>button.click());
   await p.locator('#hsk-live-design').waitFor({state:'attached'});
   const mastery=p.locator('.lesson-mastery'),summary=mastery.locator('summary');
   await summary.waitFor({state:'visible'});
