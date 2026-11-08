@@ -611,15 +611,16 @@ export class ChatGPTSessionManager{
    method:'GET',headers,signal,redirect:'manual'
   });
   if(!response.ok){
-   const text=(await response.text().catch(()=>'')).slice(0,200);
-   const err=Error(`Lỗi xác thực Cookie (HTTP ${response.status}): ${text}`);
-   err.status=response.status===401||response.status===403?401:response.status;
+   const err=Error(`ChatGPT từ chối kiểm tra phiên (HTTP ${response.status}).`);
+   err.status=response.status;
+   err.code='CHATGPT_SESSION_HTTP';
    throw err;
   }
   const data=await response.json().catch(()=>null);
   if(!data||typeof data.accessToken!=='string'||!data.accessToken.trim()){
    const err=Error('Cookie đã hết hạn hoặc không hợp lệ. Vui lòng cập nhật Cookie mới.');
    err.status=401;
+   err.code='CHATGPT_SESSION_NO_TOKEN';
    throw err;
   }
   this.accessToken=data.accessToken.trim();
@@ -662,8 +663,8 @@ export class ChatGPTClient{
     method:'POST',headers,body:JSON.stringify(payload),signal,redirect:'manual'
    });
    if(!response.ok){
-    const text=(await response.text().catch(()=>'')).slice(0,200);
-    const err=Error(`Lỗi gọi ChatGPT API (${response.status}): ${text}`);
+    const err=Error(`ChatGPT từ chối gửi tin nhắn (HTTP ${response.status}).`);
+    err.code='CHATGPT_CONVERSATION_HTTP';
     err.status=response.status;
     throw err;
    }
@@ -833,7 +834,7 @@ export async function chatgptCookieGenerate(config,requestBody,fetchFn=fetch,sig
  }catch(err){
   if(err?.name==='AbortError'||signal?.aborted)throw err;
   const status=Number.isInteger(err?.status)&&err.status>=400&&err.status<600?err.status:502;
-  return new Response(JSON.stringify({error:err?.message||'Lỗi gọi ChatGPT Cookie.'}),{status});
+  return new Response(JSON.stringify({error:err?.message||'Lỗi gọi ChatGPT Cookie.',code:err?.code,upstreamStatus:err?.status}),{status});
  }
  if(!replyText||!replyText.trim())return new Response(null,{status:502});
  const normalized=normalizeChatGptTutorReply(replyText,{userId:uid,questionText:userQuestion,memoryManager:sharedMemoryManager});
@@ -2991,7 +2992,12 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     }else if(useSharedChatGptCookie){
      headers['X-HSK-AI-Provider']='chatgpt-cookie';
      response=await chatgptCookieGenerate({model:env.CHATGPT_COOKIE_MODEL||'gpt-4o-mini',apiKey:env.CHATGPT_SESSION_TOKEN},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});
-     if(!response.ok)return reply({error:response.status===401?'Cookie ChatGPT đã hết hạn hoặc không hợp lệ. Vui lòng cập nhật Cookie mới.':'ChatGPT chưa trả lời được. Hãy thử lại sau.',code:'AI_PROVIDER_ERROR',provider:'chatgpt-cookie',workerRevision:WORKER_REVISION},response.status===429?429:502);
+     if(!response.ok){
+      const failure=await response.json().catch(()=>null);
+      const safeCodes=['CHATGPT_SESSION_HTTP','CHATGPT_SESSION_NO_TOKEN','CHATGPT_CONVERSATION_HTTP'];
+      const error=safeCodes.includes(failure?.code)?failure.error:response.status===401?'Không xác thực được phiên ChatGPT.':'ChatGPT chưa trả lời được. Hãy thử lại sau.';
+      return reply({error,code:'AI_PROVIDER_ERROR',provider:'chatgpt-cookie',workerRevision:WORKER_REVISION},response.status===429?429:502);
+     }
     }else{
      // Rotate keys without switching the chosen chat model or provider.
      const generate=isAiQa?createGeminiKeyFetch(providerFetch,env,{now,state:geminiState}):fetchFn;
