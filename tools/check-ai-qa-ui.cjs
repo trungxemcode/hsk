@@ -354,10 +354,19 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   await page.locator('#qaProjectCreateForm button[type=submit]').click();
   await page.locator('#qaProjectHome').waitFor({state:'visible'});
   await page.locator('#qaProjectSourcesTab').click();
+  await page.locator('#qaProjectSourceEmpty').waitFor({state:'visible'});
+  assert.equal(await page.locator('#qaProjectLink').isVisible(),false);
+  assert.equal(await page.locator('#qaProjectFile').isVisible(),false);
+  await page.getByRole('button',{name:'Thêm nguồn',exact:true}).click();
+  await page.locator('#qaProjectLink').waitFor({state:'visible'});
+  await page.getByRole('button',{name:'Đóng thêm nguồn',exact:true}).click();
+  assert.equal(await page.locator('#qaProjectLink').isVisible(),false);
+  await page.getByRole('button',{name:'Thêm nguồn',exact:true}).click();
   await page.locator('#qaProjectFile').setInputFiles({
     name:'tu-vung.txt',mimeType:'text/plain',buffer:Buffer.from('生词 dùng để nói về từ mới.')
   });
   await page.getByText('Đã thêm nguồn.',{exact:true}).waitFor();
+  assert.equal(await page.locator('#qaProjectSourceEmpty').isVisible(),false);
   await page.route('https://example.test/lesson',route=>route.fulfill({
     contentType:'text/html',headers:{'Access-Control-Allow-Origin':'*'},
     body:'<title>Nguồn tiếng Trung</title><article>生词是新学的词语。</article>'
