@@ -1,5 +1,5 @@
 {
-  "request": "Chỉ đổi bố cục trang dự án Hỏi đáp AI trên PC và điện thoại: tiêu đề, ô mở chat, tab và trạng thái Nguồn.",
+  "request": "Chỉ hai thanh nhập Hỏi đáp AI và trang Dự án trên PC/điện thoại: đồng bộ khung nhập, focus ngoài và thêm nút đính kèm tài liệu.",
   "excludedRoutes": [
     "ai-qa"
   ]
