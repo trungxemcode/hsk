@@ -1,3 +1,4 @@
+import {chatgptCookieGenerate,sharedGuardrail} from './chatgpt-cookie.mjs';
 import {personalAiCall,personalAiGenerate} from './personal-ai.mjs';
 import { createOriginalReadingService } from './original-reading.mjs';
 import {validTranscriptInput,transcribeMusic,libraryTranscriptMedia,saveGeneratedTranscript} from './music-transcript.mjs';
@@ -316,7 +317,13 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
    }
    const usePersonalAi=personalAi?.enabled===true;
-   if(isLessonAsk&&!usePersonalAi&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ AI chưa được kích hoạt.'},503);
+   const useSharedChatGptCookie=isAiQa&&!usePersonalAi&&typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim())&&(env.AI_QA_PROVIDER==='chatgpt-cookie'||!configuredGeminiKeys(env).length);
+   const useChatGptCookie=isAiQa&&(useSharedChatGptCookie||usePersonalAi&&personalAi?.provider==='chatgpt-cookie');
+   if(isLessonAsk&&!usePersonalAi&&!useSharedChatGptCookie&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ AI chưa được kích hoạt.'},503);
+   if(isAiQa){
+    const guardCheck=sharedGuardrail.validateInput(body.question,'qa',{strictRelevance:useChatGptCookie});
+    if(!guardCheck.valid)return reply({error:guardCheck.reason,code:'AI_GUARDRAIL_BLOCKED'},400);
+   }
    if(isSample){const result=await submitHandwritingSample(body,c.sub,env,now());return reply(result.body,result.status);}
    const isAdmin=(isRole||env.AI_ACCOUNT_ROLES_ENABLED==='true')?account.localId===OWNER_UID:(env.ADMIN_UIDS||'').split(',').map(uid=>uid.trim()).filter(Boolean).includes(account.localId);
    let verifiedRole;
@@ -493,7 +500,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     let response;
     if(usePersonalAi){
      headers['X-HSK-AI-Provider']=personalAi.provider;
-     try{response=await personalAiGenerate(personalAi,providerBody,providerFetch,controller.signal);}
+     try{response=await personalAiGenerate(personalAi,providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});}
      catch(error){
       const timeout=controller.signal.aborted||error.name==='AbortError';
       console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});
@@ -506,6 +513,10 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
        upstream===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng không trả về phản hồi hợp lệ. Hãy thử lại.';
       return reply({error,code:'PERSONAL_AI_UPSTREAM',upstream},upstream===429?429:502);
      }
+    }else if(useSharedChatGptCookie){
+     headers['X-HSK-AI-Provider']='chatgpt-cookie';
+     response=await chatgptCookieGenerate({model:env.CHATGPT_COOKIE_MODEL||'gpt-4o-mini',apiKey:env.CHATGPT_SESSION_TOKEN},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});
+     if(!response.ok)return reply({error:response.status===401?'Cookie ChatGPT đã hết hạn hoặc không hợp lệ. Vui lòng cập nhật Cookie mới.':'ChatGPT chưa trả lời được. Hãy thử lại sau.',code:'AI_PROVIDER_ERROR',provider:'chatgpt-cookie',workerRevision:WORKER_REVISION},response.status===429?429:502);
     }else{
      // Rotate keys without switching the chosen chat model or provider.
      const generate=isAiQa?createGeminiKeyFetch(providerFetch,env,{now,state:geminiState}):fetchFn;
@@ -518,7 +529,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     const answerText=(candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('').trim();
     let parsed;
     try{parsed=JSON.parse(answerText);}catch{
-     if(usePersonalAi&&isAiQa){
+     if((usePersonalAi||useSharedChatGptCookie)&&isAiQa){
       const fencedJson=answerText.match(/(?:^|\n)\s*```(?:json)?[ \t]*\r?\n(\s*\{[\s\S]*?\})\s*```/i);
       if(fencedJson){try{parsed=JSON.parse(fencedJson[1]);}catch{}}
       if(!parsed&&answerText&&!fencedJson&&!/^(?:```json|[{\[])/i.test(answerText)){
@@ -527,7 +538,8 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      }
      if(!parsed)return reply({error:'AI trả lời chưa đúng định dạng. Hãy thử lại.'},502);
     }
-    if(usePersonalAi&&isAiQa&&typeof parsed==='string')parsed={answer:parsed};
+    if((usePersonalAi||useSharedChatGptCookie)&&isAiQa&&typeof parsed==='string')parsed={answer:parsed};
+    if(isAiQa&&parsed?.error==='OUT_OF_SCOPE')return reply({error:'Yêu cầu của bạn nằm ngoài phạm vi học tiếng Trung HSK!',code:'OUT_OF_SCOPE'},400);
     let answer=parsed?.answer;
     if(isAiQa){
      if(typeof answer!=='string'||!answer.trim()||answer.length>5000)return reply({error:'Gia sư AI trả về dữ liệu chưa đầy đủ. Hãy thử lại.'},502);

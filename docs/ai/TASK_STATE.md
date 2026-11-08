@@ -1,4 +1,12 @@
-# Current task: AI Q&A tutor and 99% progress boundary (2026-11-06)
+# Current task: ChatGPT Cookie mechanism for AI Q&A (2026-11-08)
+
+Implemented the 4-pillar ChatGPT Web Cookie architecture on branch `feat/chatgpt-cookie-ai-qa` based on the design specification:
+1. **TLS Impersonation & Stateless Cookie Manager (`server/chatgpt-cookie/core/`, `server/chatgpt-cookie.mjs`):** Exchanges `__Secure-next-auth.session-token` for `accessToken` via `/api/auth/session` (cached 1h with 5m buffer), sends stateless requests (`history_and_training_disabled: true`) to `/backend-api/conversation`, parses SSE streams, and hides temporary conversations (`PATCH is_visible: false`). Supports both shared server cookie (`CHATGPT_SESSION_TOKEN` / `CHATGPT_COOKIE_BRIDGE_URL`) and per-user encrypted cookie (`provider: 'chatgpt-cookie'` in `personal-ai.mjs` / `#personalAiProvider`).
+2. **3-Layer AI Guardrail (`server/chatgpt-cookie/security/guardrail.py`, `src/modules/ai-coach/ai-qa-core.js`, `server/chatgpt-cookie.mjs`):** 0ms local cooldown, jailbreak & off-topic regex filtering, Chinese character / HSK keyword validation, document validation (≥10 Chinese characters), and Sandwich Defense (`<student_input>` + `{"error": "OUT_OF_SCOPE"}`).
+3. **Local RAG Project Engine (`server/chatgpt-cookie/projects/`, `src/modules/ai-coach/qa-project-sources.js`):** Hybrid Chinese-Vietnamese tokenizer (Vietnamese/Latin words + Han unigrams + Han bigrams), overlapping 400-char chunking, BM25Okapi ranking, and 4-turn sliding window history.
+4. **Dynamic Memory Personalization (`server/chatgpt-cookie/personalization/memory_manager.py`, `server/chatgpt-cookie.mjs`):** Injects `<student_memory_profile>` XML and extracts piggyback `memory_update` (`detected_weak_vocab`, `detected_weak_grammar`, `new_personal_fact`) with FIFO bounds and HSK `memoryCandidates` mapping.
+
+# Previous task: AI Q&A tutor and 99% progress boundary (2026-11-06)
 
 Implemented the Tools → `Hỏi đáp AI` route on `feat/ai-tutor-v5-hardening`. The responsive chat acts as an HSK tutor for Chinese questions, study methods and roadmap reviews, reuses the existing authenticated `/lesson-ask` transport, and keeps a bounded per-account local chat history. Each roadmap request sends only a privacy-safe learning snapshot: target HSK, 30-day activity, vocabulary totals, practice aggregates, open mistakes and the existing mastery profile. The Worker has a dedicated `ai-qa` mode and proactive teacher prompt.
 

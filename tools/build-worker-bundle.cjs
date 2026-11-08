@@ -11,7 +11,8 @@ const examSharedRegistry=fs.readFileSync(path.join(server,'exam-shared-registry.
 const tutorCache=fs.readFileSync(path.join(server,'tutor-cache.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
 const tutorStore=fs.readFileSync(path.join(server,'tutor-cache-store.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
 const accountRoles=fs.readFileSync(path.join(server,'account-roles.mjs'),'utf8').replace(/\r\n/g,'\n');
-const personalAi=fs.readFileSync(path.join(server,'personal-ai.mjs'),'utf8').replace(/\r\n/g,'\n');
+const chatgptCookie=fs.readFileSync(path.join(server,'chatgpt-cookie.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
+const personalAi=fs.readFileSync(path.join(server,'personal-ai.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
 const aiControl=fs.readFileSync(path.join(server,'ai-control.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
 const aiResilience=fs.readFileSync(path.join(server,'ai-resilience.mjs'),'utf8').replace(/\r\n/g,'\n');
 const aiBackup=fs.readFileSync(path.join(server,'ai-backup.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'');
@@ -23,5 +24,5 @@ const transcript="const MusicTranscript=(()=>{const holder={};\n"+lyricsCore+"\n
 const wrongImages=fs.readFileSync(path.join(server,'wrong-answer-images.mjs'),'utf8').replace(/^export /gm,'');
 const wrongRules=fs.readFileSync(path.join(server,'wrong-answer-rules.mjs'),'utf8').replace(/^export /gm,'');
 const handler=fs.readFileSync(path.join(server,'translator-worker.mjs'),'utf8').replace(/\r\n/g,'\n').replace(/\r\n/g,'\n').replace(/^import .*;\n/gm,'').trimStart();
-fs.writeFileSync(target,'// Standalone Cloudflare Worker. Generated from vocabulary + translator-worker.mjs.\nexport const vocabulary='+JSON.stringify(vocabulary)+';\n\n'+collector+'\n'+tutorCurriculum+'\n'+examSharedRegistry+'\n'+tutorCache+'\n'+tutorStore+'\n'+accountRoles+'\n'+personalAi+'\n'+aiControl+'\n'+aiResilience+'\n'+aiBackup+'\n'+geminiKeys+'\n'+originalReading+'\n'+reading+'\n'+voiceVerify+'\n'+voiceTts+'\n'+transcript+'\n'+wrongImages+'\n'+wrongRules+'\n'+handler);
+fs.writeFileSync(target,'// Standalone Cloudflare Worker. Generated from vocabulary + translator-worker.mjs.\nexport const vocabulary='+JSON.stringify(vocabulary)+';\n\n'+collector+'\n'+tutorCurriculum+'\n'+examSharedRegistry+'\n'+tutorCache+'\n'+tutorStore+'\n'+accountRoles+'\n'+chatgptCookie+'\n'+personalAi+'\n'+aiControl+'\n'+aiResilience+'\n'+aiBackup+'\n'+geminiKeys+'\n'+originalReading+'\n'+reading+'\n'+voiceVerify+'\n'+voiceTts+'\n'+transcript+'\n'+wrongImages+'\n'+wrongRules+'\n'+handler);
 console.log('Bundled worker synchronized; '+vocabulary.length+' vocabulary entries preserved.');

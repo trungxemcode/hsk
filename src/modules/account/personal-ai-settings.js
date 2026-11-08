@@ -9,12 +9,13 @@
  let stored=null,busy=false,owner=null,requestId=0;
  const account=()=>window.HSKAccountDashboard?.user;
  function describe(){
-  const fosta=provider.value==='fosta';
+  const fosta=provider.value==='fosta',cookie=provider.value==='chatgpt-cookie';
   fostaModel.hidden=!fosta;fostaModel.disabled=busy||!fosta;
   model.hidden=fosta;model.disabled=busy||fosta;model.required=!fosta;
+  if(cookie&&!model.value.trim())model.value='gpt-4o-mini';
   modelLabel.htmlFor=fosta?fostaModel.id:model.id;
-  $('personalAiEndpoint').textContent=fosta?'Base URL: https://codex.fosta.app/v1':'Nhập tên model chính xác do nhà cung cấp cấp.';
-  key.placeholder=stored?.provider===provider.value?'Để trống để giữ key đã lưu':'Nhập API key của bạn';
+  $('personalAiEndpoint').textContent=fosta?'Base URL: https://codex.fosta.app/v1':cookie?'Dùng Cookie __Secure-next-auth.session-token từ chatgpt.com (Stateless + Guardrail).':'Nhập tên model chính xác do nhà cung cấp cấp.';
+  key.placeholder=stored?.provider===provider.value?(cookie?'Để trống để giữ cookie đã lưu':'Để trống để giữ key đã lưu'):(cookie?'Dán __Secure-next-auth.session-token của bạn':'Nhập API key của bạn');
  }
  function apply(data){
   stored=data.configured?data:null;
@@ -55,7 +56,7 @@
   }catch(error){if(id===requestId)status.textContent=error.message||'Chưa kết nối được máy chủ.';}
   finally{if(id===requestId)lock(false);}
  }
- provider.onchange=()=>{model.value=stored?.provider===provider.value?stored.model:'';key.value='';describe();};
+ provider.onchange=()=>{model.value=stored?.provider===provider.value?stored.model:(provider.value==='chatgpt-cookie'?'gpt-4o-mini':'');key.value='';describe();};
  load.onclick=()=>request('read');
  form.onsubmit=event=>{
   event.preventDefault();
