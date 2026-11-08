@@ -193,3 +193,30 @@ body.studio-enabled #homePlanSettings .plan-adjust-options button{margin-top:aut
 #homePlanSettings .desktop-plan-progress:has(> #planOverview[hidden]){
  display:none;
 }
+
+/* The desktop progress disclosure reads from outcome to action to preferences. */
+#planVocabularyMeter{display:none}
+#homePlanSettings .desktop-plan-progress #planOverview:not([hidden]){
+ display:grid;gap:16px;padding:0 16px 16px;
+}
+#homePlanSettings .desktop-plan-progress .plan-overview-group{
+ border:0;padding:0;gap:8px;
+}
+#homePlanSettings .desktop-plan-progress #planOverview > .plan-overview-group:first-child{
+ padding:20px;border-radius:var(--radius-card);background:var(--accent-light);
+}
+#homePlanSettings .desktop-plan-progress #planOverview #planTitle{font-size:21px;color:var(--ink)}
+#homePlanSettings .desktop-plan-progress #planProgress{font-weight:650;color:var(--ink)}
+#homePlanSettings .desktop-plan-progress #planVocabularyMeter{
+ display:block;width:100%;height:8px;accent-color:var(--accent);
+}
+#homePlanSettings .desktop-plan-progress #planAssessment{font-weight:650;color:var(--ink)}
+#homePlanSettings .desktop-plan-progress .plan-actions{margin-top:4px}
+#homePlanSettings .desktop-plan-progress #planSlow{
+ margin:0;padding:14px;border-color:var(--line);background:var(--surface);
+}
+#homePlanSettings .desktop-plan-progress .plan-adjust-options article{background:var(--accent-light)}
+#homePlanSettings .desktop-plan-progress .plan-adjust-options button{align-self:flex-start}
+#homePlanSettings .desktop-plan-progress .plan-overview-group:last-child{
+ border-top:1px solid var(--line);padding-top:12px;
+}
