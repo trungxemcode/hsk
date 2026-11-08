@@ -1,5 +1,5 @@
 {
-  "request": "Chỉ thay đổi bố cục, icon và thao tác sidebar Hỏi đáp AI trên PC và điện thoại theo mẫu danh sách thư mục.",
+  "request": "Chỉ đổi bố cục trang dự án Hỏi đáp AI trên PC và điện thoại: tiêu đề, ô mở chat, tab và trạng thái Nguồn.",
   "excludedRoutes": [
     "ai-qa"
   ]
