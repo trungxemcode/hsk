@@ -493,6 +493,10 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   settingsAvailable=true;
   await page.locator('#personalAiLoad').click();
   await page.locator('#personalAiForm').waitFor({state:'visible'});
+  await page.locator('#personalAiProvider').selectOption('chatgpt-cookie');
+  assert.equal(await page.locator('#personalAiModel').inputValue(),'gpt-4o-mini');
+  assert.match(await page.locator('#personalAiEndpoint').textContent(),/__Secure-next-auth\.session-token/);
+  await page.locator('#personalAiProvider').selectOption('fosta');
   await page.locator('#personalAiFostaModel').selectOption('gpt-6-luna');
   assert.equal(await page.locator('#personalAiFostaModel option').count(),3);
   await page.locator('#personalAiEnabled').check();

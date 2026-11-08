@@ -118,12 +118,14 @@
   return {name:file.name.slice(0,120),text:hasText?text:''};
  }
  function select(sources,question){
+  const core=window.HSKAIQACore;
   const terms=[...new Set(question.toLowerCase().match(/\p{Script=Han}{1,2}|[^\W\d_]{3,}|[\p{L}\p{N}]{3,}/gu)||[])].slice(0,35);
   return [...sources].sort((a,b)=>Number(!!b.url)-Number(!!a.url)).flatMap(source=>{
-   const excerpts=source.text.match(/[\s\S]{1,650}/g)||[];
-   const best=excerpts.map(text=>({text,score:terms.filter(term=>text.toLowerCase().includes(term)).length}))
-    .sort((a,b)=>b.score-a.score)[0];
-   return best?[{name:source.name,url:source.url,text:best.text}]:[];
+   const excerpts=core?.chunkDocumentText?core.chunkDocumentText(source.text,400,50):(source.text.match(/[\s\S]{1,650}/g)||[]);
+   if(!excerpts.length)return [];
+   const bestText=core?.bm25RetrieveChunks?core.bm25RetrieveChunks(excerpts,question,1)[0]:
+    excerpts.map(text=>({text,score:terms.filter(term=>text.toLowerCase().includes(term)).length})).sort((a,b)=>b.score-a.score)[0]?.text;
+   return bestText?[{name:source.name,url:source.url,text:bestText}]:[];
   }).slice(0,10);
  }
  // Keep original uploads for formats the text extractor does not understand.

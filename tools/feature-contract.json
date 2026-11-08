@@ -85,6 +85,16 @@
       ]
     },
     {
+      "id": "ai-qa-chatgpt-cookie",
+      "name": "Cơ chế Cookie ChatGPT kết hợp Guardrail 3 lớp và BM25 RAG cho Hỏi đáp AI",
+      "checks": [
+        {"kind": "contains", "file": "index.html", "value": "chatgpt-cookie"},
+        {"kind": "file", "file": "server/chatgpt-cookie.mjs", "value": ""},
+        {"kind": "file", "file": "server/chatgpt-cookie/main.py", "value": ""},
+        {"kind": "file", "file": "server/chatgpt-cookie.test.mjs", "value": ""}
+      ]
+    },
+    {
       "id": "navigation-home",
       "name": "Trang tổng quan",
       "checks": [
