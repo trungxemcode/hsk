@@ -565,15 +565,21 @@ body.studio-enabled[data-studio-hub="ai-qa"] .ai-qa-jump-to-latest:not([hidden])
 .ai-qa-recent-heading{margin:14px 14px 4px;font-size:13px;color:var(--qa-text);}
 .qa-project-sidebar-heading,.qa-project-folder-heading{display:flex;align-items:center;min-width:0;border-radius:var(--qa-radius-compact);}
 .qa-project-sidebar-heading{justify-content:space-between;margin-bottom:4px;}
-#aiQaHistory :is(.ai-qa-new-chat,.ai-qa-conversation-open,.qa-project-sidebar button){
-  --button-bg:var(--palette-clear);
-  --button-text:var(--qa-text);
-  --button-active-bg:var(--qa-hover);
-  --button-active-text:var(--qa-text);
+/* Scope the button surface directly: shared --button-* tokens belong to style.css. */
+html body.studio-enabled #aiQaHistory :is(.ai-qa-new-chat,.ai-qa-conversation-open,.qa-project-sidebar button){
+  background:var(--palette-clear)!important;
+  color:var(--qa-text)!important;
   min-height:36px;
   margin-block:0;
   border:0!important;
   border-radius:var(--qa-radius-compact);
+}
+html body.studio-enabled #aiQaHistory :is(.ai-qa-new-chat,.ai-qa-conversation-open,.qa-project-sidebar button):is(:hover,:focus-visible,:active,[aria-current=page]){
+  background:var(--qa-hover)!important;
+  color:var(--qa-text)!important;
+}
+html body.studio-enabled #aiQaHistory :is(.ai-qa-new-chat,.ai-qa-conversation-open,.qa-project-sidebar button):is(:hover,:focus-visible,:active,[aria-current=page]) :is(svg,span,strong){
+  color:var(--qa-text)!important;
 }
 #aiQaHistory .ai-qa-new-chat{margin:0 8px 8px;padding:8px 10px;}
 #aiQaHistory svg{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
