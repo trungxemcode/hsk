@@ -216,8 +216,9 @@ async def stateless_cookie_bridge(
             prompt, model=req.model, session_token=x_chatgpt_session_token
         )
     except ChatGPTUpstreamError as exc:
+        # A tunnel can replace origin 502 responses and discard the diagnostic body.
         raise HTTPException(
-            status_code=429 if exc.status == 429 else 502,
+            status_code=429 if exc.status == 429 else 424,
             detail={"stage": exc.stage, "status": exc.status, "challenge": exc.challenge}
         ) from exc
     except ValueError:
