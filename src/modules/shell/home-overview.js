@@ -26,7 +26,7 @@ const tasks=make('details',null,'overview-tasks');tasks.append(make('summary','N
 const desktopHero=home.querySelector('.feature-hero .hero-button');if(desktopHero)desktopHero.addEventListener('click',e=>{if(!window.HSKPlanner?.plan||!$('planContinue'))return;e.preventDefault();e.stopImmediatePropagation();$('planContinue').click();},true);
 const notice=$('updateNotice'),noticeAnchor=document.createComment('overview update original');notice.before(noticeAnchor);
 const extras=make('details',null,'overview-extras');extras.append(make('summary','Lộ trình & đánh giá'),$('homeAssessment'),$('mobileHeroResult'));hero.append(extras);
-const quick=$('homeQuickSearch'),searchDetails=make('details',null,'overview-search'),searchAnchor=document.createComment('overview search original');quick.before(searchAnchor,searchDetails);searchDetails.append(make('summary','Tra cứu nhanh · Vẽ chữ · Dịch'),quick);
+const quick=$('homeQuickSearch'),searchDetails=make('details',null,'overview-search');quick.before(searchDetails);searchDetails.append(make('summary','Tra cứu nhanh · Vẽ chữ · Dịch'),quick);
 const grid=home.querySelector('.shortcut-grid'),srs=grid.querySelector('[data-studio-go=srs]'),flash=grid.querySelector('[data-studio-go=learn]'),quiz=grid.querySelector('[data-studio-go=quiz]');
 const saved=grid.querySelector('[data-studio-go=search]');saved.dataset.studioGo='notebook';saved.onclick=e=>{e.stopImmediatePropagation();window.HSKStudio?.navigate('notebook');};saved.addEventListener('click',saved.onclick,true);write(saved.querySelector('strong'),'Sổ từ vựng');
 const bookIcon=document.querySelector('#mobileDock [data-studio-go=notebook] svg');if(bookIcon){saved.querySelector('.shortcut-icon').removeAttribute('data-icon');saved.querySelector('.shortcut-icon').replaceChildren(bookIcon.cloneNode(true));}
@@ -49,7 +49,7 @@ if(mobile!==lastMobile){
   tasks.append(today);
   taskList.hidden=false;
   planToggle.remove();
-  searchAnchor.after(searchDetails);
+  wordBox.before(searchDetails);
   if(placement)placementAnchor.after(placement);
  }else{
   side.prepend(searchDetails,wordBox);

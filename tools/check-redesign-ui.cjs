@@ -34,9 +34,10 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
     if(width<=720){
      const gaps=await page.evaluate(()=>{
       const rect=s=>document.querySelector(s).getBoundingClientRect(),gap=(a,b)=>rect(b).top-rect(a).bottom;
-      return [gap('.shortcut-grid','.home-music-grid'),gap('.home-music-grid','.pathway'),gap('.pathway','.overview-search')];
+      return [gap('.shortcut-grid','.home-music-grid'),gap('.home-music-grid','.pathway'),gap('.overview-search','#homeDailyWord')];
      });
      assert.equal(await page.locator('#mobileTodayHero').evaluate(n=>n.previousElementSibling.id),'homeDailyWord','daily word is an independent card before the study hero');
+     assert.equal(await page.locator('.overview-search').evaluate(n=>n.nextElementSibling.id),'homeDailyWord','quick search precedes the daily word');
      assert.equal(await page.locator('#homeDailyWord').count(),1,'one daily word with original controls');
      assert(gaps.every(g=>Math.abs(g-12)<2),'mobile home uses consistent 12px card spacing: '+gaps.join(','));
     }

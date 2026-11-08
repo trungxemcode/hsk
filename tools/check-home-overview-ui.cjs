@@ -13,6 +13,9 @@ await p.evaluate(()=>{document.getElementById('planLevel').value='3';document.ge
 await settings.evaluate(n=>n.open=true);
 assert.equal(await p.locator('#planEmpty').isVisible(),false,'Hide setup when a plan exists');
 assert.ok(await p.locator('#planOverview').isVisible());
+assert.equal(await p.locator('#planOverview > .plan-overview-group').count(),3);
+assert.ok(await p.locator('#planAIToggle').isVisible());
+assert.ok(await p.locator('#planReview').isVisible());
 await settings.locator(':scope > summary').click();
 const planToggle=p.getByRole('button',{name:'Nhiệm vụ trong Kế hoạch hôm nay'});
 assert.equal(await planToggle.getAttribute('aria-expanded'),'true');
