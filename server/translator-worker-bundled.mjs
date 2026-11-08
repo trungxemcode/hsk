@@ -810,12 +810,14 @@ export async function chatgptCookieGenerate(config,requestBody,fetchFn=fetch,sig
  let replyText='';
  try{
   if(bridgeUrl){
-   const endpoint=new URL('/api/hsk/bridge',bridgeUrl).href;
+   const endpoint=new URL('/api/hsk/bridge',bridgeUrl);
+   const bridgeKey=String(env?.CHATGPT_COOKIE_BRIDGE_KEY||'').trim();
+   if(endpoint.protocol!=='https:'||!bridgeKey)return new Response(null,{status:502});
    const response=await fetchFn(endpoint,{
     method:'POST',
     headers:{
      'Content-Type':'application/json',
-     'X-User-Id':uid,
+     'X-HSK-Bridge-Key':bridgeKey,
      'X-ChatGPT-Session-Token':rawToken
     },
     body:JSON.stringify({prompt:safePrompt,model}),
@@ -823,8 +825,17 @@ export async function chatgptCookieGenerate(config,requestBody,fetchFn=fetch,sig
     redirect:'manual'
    });
    if(response.status>=300&&response.status<400)return new Response(null,{status:502});
-   if(!response.ok)return new Response(null,{status:response.status});
    const payload=await response.json().catch(()=>null);
+   if(!response.ok){
+    const {stage,status,challenge}=payload?.detail||{};
+    if(['session','conversation'].includes(stage)&&Number.isInteger(status)&&status>=300&&status<=599){
+     const action=stage==='session'?'kiểm tra phiên':'gửi tin nhắn';
+     const code=stage==='session'?'CHATGPT_SESSION_HTTP':'CHATGPT_CONVERSATION_HTTP';
+     const reason=challenge===true?', Cloudflare challenge':'';
+     return Response.json({error:`ChatGPT từ chối ${action} (HTTP ${status}${reason}).`,code},{status:status===429?429:502});
+    }
+    return new Response(null,{status:502});
+   }
    replyText=typeof payload?.reply==='string'?payload.reply:'';
   }else{
    const client=getOrCreateCookieClient(rawToken,{baseUrl:env?.CHATGPT_BASE_URL||CHATGPT_BASE_URL,now});
