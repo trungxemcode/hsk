@@ -659,7 +659,7 @@ html body.studio-enabled[data-studio-hub="ai-qa"]
   box-sizing:border-box;
   padding:4px 6px!important;
   border:1px solid var(--qa-input-border);
-  border-radius:26px!important;
+  border-radius:var(--radius-card)!important;
   background:var(--qa-surface);
   box-shadow:none;
 }
@@ -678,11 +678,10 @@ html body.studio-enabled[data-studio-hub="ai-qa"]
   color:var(--qa-text);
   font-size:16px;
 }
-#aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaSend,button[type=submit]){
-  --button-bg:var(--palette-clear);
-  --button-text:var(--qa-text);
-  --button-active-bg:var(--qa-hover);
-  --button-active-text:var(--qa-text);
+/* Style only the two composers; global --button-* tokens remain in style.css. */
+html body.studio-enabled #aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaSend,button[type=submit]){
+  background:var(--palette-clear)!important;
+  color:var(--qa-text)!important;
   display:grid;
   place-items:center;
   flex:0 0 40px;
@@ -693,6 +692,11 @@ html body.studio-enabled[data-studio-hub="ai-qa"]
   border:0!important;
   border-radius:var(--radius-pill);
 }
+html body.studio-enabled #aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaSend,button[type=submit]):is(:hover,:focus-visible,:active){
+  background:var(--qa-hover)!important;
+  color:var(--qa-text)!important;
+}
+html body.studio-enabled #aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaSend,button[type=submit]):is(:hover,:focus-visible,:active) :is(span,svg){color:var(--qa-text)!important;}
 #aiQaPanel .qa-chat-composer .qa-chat-attach{font-size:24px;line-height:1;}
 .qa-chat-file[hidden],.qa-chat-file-preview[hidden]{display:none!important;}
 .qa-chat-file-preview{display:flex;align-items:center;gap:6px;flex:0 0 100%;min-width:0;padding-inline:8px;box-sizing:border-box;}
