@@ -520,9 +520,11 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      }
      if(!response.ok){
       const upstream=response.status;
-      const error=upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
+      const errData=await response.json().catch(()=>null);
+      const detailError=typeof errData?.error==='string'&&errData.error.trim()?errData.error.trim():null;
+      const error=detailError||(upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
        upstream===400||upstream===404?'API riêng không chấp nhận yêu cầu hoặc model đã chọn. Kiểm tra model trong Cài đặt.':
-       upstream===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng không trả về phản hồi hợp lệ. Hãy thử lại.';
+       upstream===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng không trả về phản hồi hợp lệ. Hãy thử lại.');
       return reply({error,code:'PERSONAL_AI_UPSTREAM',upstream},upstream===429?429:502);
      }
     }else if(useSharedChatGptCookie||usePersonalCookie){

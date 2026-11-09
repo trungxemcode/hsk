@@ -535,7 +535,7 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
   throw new Error('Môi trường hiện tại không hỗ trợ kết nối WebSocket tới Muse AI.');
 }
 
-export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 45000 } = {}) {
+export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 85000 } = {}) {
   const ws = await openMuseWebSocket(session.ws_url, { fetchFn, wsFactory, signal });
   const queue = [];
   let closed = false;
@@ -956,7 +956,7 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
       ? cred.session
       : await bootstrapMuseHatchSession(cred.cookieHeader, { fetchFn, signal, now: options.now });
     const prompt = buildMuseFlattenedPrompt(requestBody, model);
-    const replyText = await runMuseNoiseChat(session, prompt, { fetchFn, wsFactory: options.wsFactory, signal });
+    const replyText = await runMuseNoiseChat(session, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: 85000 });
     if (!replyText) return new Response(JSON.stringify({ error: 'Muse AI không trả về nội dung.' }), { status: 502 });
     const normalized = normalizeMuseTutorReply(replyText, questionText);
     return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(normalized) }] } }] });
