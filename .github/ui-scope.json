@@ -1,1 +1,1 @@
-{"request":"Cài đặt: nhận cookie ChatGPT riêng chia phần. Hỏi đáp AI: hiển thị lỗi phiên ChatGPT riêng.","excludedRoutes":["account","ai-qa"]}
+{"request":"Hỏi đáp AI: nhận diện nhà cung cấp và chọn mức độ mạnh hoặc model riêng ngay trong ô chat; giữ nguyên bố cục và các trang khác.","excludedRoutes":["ai-qa"]}
