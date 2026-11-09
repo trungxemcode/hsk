@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {normalizeAiProviderChoice,aiProviderChoiceError,describeAiProviders} from './ai-provider-choice.mjs';
+import {extractChatGptPlanType,probeChatGptCookieAccount} from './chatgpt-cookie.mjs';
 
 test('normalizeAiProviderChoice defaults to auto and rejects unknown values',()=>{
   assert.equal(normalizeAiProviderChoice(undefined),'auto');
@@ -25,4 +26,27 @@ test('describeAiProviders exposes availability without secrets',()=>{
   assert.ok(!JSON.stringify(out).includes('secret'));
   assert.deepEqual(describeAiProviders().personal,{configured:false,enabled:false,provider:null,model:null});
   assert.equal(describeAiProviders({personal:{configured:true,enabled:true,provider:'evil'}}).personal.provider,null);
+  const plusOut=describeAiProviders({geminiReady:true,sharedCookieReady:true,personal:{configured:true,enabled:true,provider:'chatgpt-cookie',model:'gpt-4o',planType:'plus',models:['gpt-4o-mini','gpt-4o','o3-mini']}});
+  assert.equal(plusOut.personal.planType,'plus');
+  assert.deepEqual(plusOut.personal.models,['gpt-4o-mini','gpt-4o','o3-mini']);
+});
+
+test('extractChatGptPlanType and probeChatGptCookieAccount detect Plus vs Free and models',async()=>{
+  const plusJwtPayload=Buffer.from(JSON.stringify({'https://api.openai.com/auth':{chatgpt_plan_type:'plus'}})).toString('base64url');
+  assert.equal(extractChatGptPlanType({accessToken:`eyJ.${plusJwtPayload}.sig`}),'plus');
+  assert.equal(extractChatGptPlanType({account:{planType:'plus'}}),'plus');
+  assert.equal(extractChatGptPlanType({account:{planType:'free'}}),'free');
+  const probed=await probeChatGptCookieAccount('plus-cookie-token-test',{
+    fetchFn:async url=>{
+      if(url==='https://chatgpt.com/api/auth/session'){
+        return Response.json({accessToken:`eyJ.${plusJwtPayload}.sig`,account:{planType:'plus'}});
+      }
+      if(url==='https://chatgpt.com/backend-api/models'){
+        return Response.json({models:[{slug:'gpt-4o-mini'},{slug:'gpt-4o'},{slug:'o3-mini'},{slug:'o4-mini'}]});
+      }
+      throw Error('Unexpected probe URL: '+url);
+    }
+  });
+  assert.equal(probed.planType,'plus');
+  assert.deepEqual(probed.models,['gpt-4o-mini','gpt-4o','o3-mini','o4-mini']);
 });

@@ -25,21 +25,26 @@
  const thinkingControls=[$('aiQaThinking'),$('qaProjectThinking')];
  let thinking='low',thinkingOwner=null,roleRequest=0,roleVerifiedUid=null,roleVerifiedAt=0,canChooseRole=false,thinkingSpecKey='';
  function renderThinkingSelects(info){
-  const specKey=info?`${info.kind}:${info.savedModel||''}:${info.models.map(([m])=>m).join(',')}`:'default';
+  const opts=info?.options||[
+   {value:'low',label:'Thấp',model:'gemini-3.1-flash-lite',tier:'low'},
+   {value:'medium',label:'Trung bình',model:'gemini-3.5-flash',tier:'medium'},
+   {value:'high',label:'Cao',model:'gemini-3.8-flash',tier:'high'}
+  ];
+  const specKey=`${info?.kind||'default'}:${opts.map(o=>`${o.value}=${o.model}`).join(',')}`;
   if(specKey===thinkingSpecKey)return;
   thinkingSpecKey=specKey;
   for(const control of thinkingControls){
    control.textContent='';
-   if(!info){
-    for(const [val,label] of [['low','Thấp'],['medium','Trung bình'],['high','Cao']]){const opt=document.createElement('option');opt.value=val;opt.textContent=label;control.append(opt);}
-    continue;
+   for(const item of opts){
+    const opt=document.createElement('option');
+    opt.value=item.value;
+    opt.textContent=item.label;
+    if(item.model)opt.dataset.model=item.model;
+    if(item.tier)opt.dataset.tier=item.tier;
+    control.append(opt);
    }
-   const tierGroup=document.createElement('optgroup');tierGroup.label=`Mức độ mạnh · ${info.label}`;
-   for(const [tier,meta] of [['low',info.tiers.low],['medium',info.tiers.medium],['high',info.tiers.high]]){const opt=document.createElement('option');opt.value=tier;opt.textContent=meta.label;tierGroup.append(opt);}
-   const modelGroup=document.createElement('optgroup');modelGroup.label=`Model riêng · ${info.label}`;
-   for(const [modelId,modelLabel] of info.models){const opt=document.createElement('option');opt.value=`model:${modelId}`;opt.textContent=modelLabel;modelGroup.append(opt);}
-   control.append(tierGroup,modelGroup);
-   const title=`Chọn mức độ mạnh hoặc model cho ${info.label}`;control.title=title;control.setAttribute('aria-label',title);
+   const title=info?`Chọn mức độ mạnh hoặc model cho ${info.label}`:'Chọn mức độ suy nghĩ của AI';
+   control.title=title;control.setAttribute('aria-label',title);
   }
  }
  function updateThinking(canChoose=canChooseRole){
@@ -47,8 +52,14 @@
   const info=window.HSKAiProviderPicker?.activeProviderInfo?.()||null;
   renderThinkingSelects(info);
   const unlocked=canChooseRole||Boolean(info?.explicitNonSystemGemini);
-  if(!unlocked)thinking='low';
-  else if(thinking.startsWith('model:')&&!Array.from(thinkingControls[0]?.options||[]).some(opt=>opt.value===thinking))thinking='low';
+  if(!unlocked){
+   thinking='low';
+  }else{
+   const availableValues=Array.from(thinkingControls[0]?.options||[]).map(opt=>opt.value);
+   if(!availableValues.includes(thinking)){
+    thinking=thinking==='medium'&&availableValues.includes('high')?'high':(availableValues[0]||'low');
+   }
+  }
   for(const control of thinkingControls){
    control.value=thinking;
    control.disabled=!unlocked;
@@ -274,7 +285,7 @@ function formatTime(value){try{return new Intl.DateTimeFormat('vi-VN',{day:'2-di
   pending=null;send.disabled=false;input.disabled=false;status.textContent='';
   return;
  }
- const rawSelection=thinkingControls[0].disabled?'low':thinking,selectedThinking=rawSelection.startsWith('model:')?'low':rawSelection,selectedAiModel=rawSelection.startsWith('model:')?rawSelection.slice(6):'',aiProvider=window.HSKAiProviderPicker?.choice?.()||'auto';
+ const activeOpt=thinkingControls[0].disabled?null:thinkingControls[0].selectedOptions?.[0],rawSelection=thinkingControls[0].disabled?'low':thinking,selectedThinking=activeOpt?.dataset?.tier||(rawSelection.startsWith('model:')?'low':rawSelection),providerInfo=window.HSKAiProviderPicker?.activeProviderInfo?.()||null,selectedAiModel=rawSelection.startsWith('model:')?rawSelection.slice(6):(activeOpt?.dataset?.model&&providerInfo?.kind&&providerInfo.kind!=='system-gemini'?activeOpt.dataset.model:''),aiProvider=window.HSKAiProviderPicker?.choice?.()||'auto';
  const timer=setTimeout(()=>controller.abort(),110000);try{const token=await user.getIdToken(),s=currentProject?.privateMemory?{}:snapshot(),level=Number(s.targetHsk)>=1&&Number(s.targetHsk)<=6?Number(s.targetHsk):3,endpoint=config.endpoint.replace(/\/translate\/?$/,'/lesson-ask');const contextIntent=currentProject?{...intentInfo,directiveVi:(intentInfo.directiveVi||'')+window.HSKQaProjects.prompt(currentProject,question,chat.id)}:intentInfo;
  const lesson={id:'ai-qa',title:'Hỏi đáp AI · gia sư cá nhân',words:[],content:{
   mode:'ai-qa',scope:currentProject?'project':'general',learning_snapshot:s,

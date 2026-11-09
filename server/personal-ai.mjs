@@ -1,4 +1,4 @@
-import {chatgptCookieGenerate} from './chatgpt-cookie.mjs';
+import {chatgptCookieGenerate,probeChatGptCookieAccount} from './chatgpt-cookie.mjs';
 // Credentials are scoped to an authenticated UID and encrypted before storage.
 const PERSONAL_PROVIDERS={
  openai:'https://api.openai.com/v1/chat/completions',
@@ -93,4 +93,56 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
   payload?.choices?.[0]?.message?.content;
  if(typeof text!=='string')return new Response(null,{status:502});
  return Response.json({candidates:[{content:{parts:[{text:text.trim()}]}}]});
+}
+
+const providerModelsCache=new Map();
+export async function probePersonalAiCapabilities(personal,{env={},fetchFn=fetch,signal,now=()=>Date.now()}={}){
+ if(!personal?.enabled||!personal?.apiKey||!personal?.provider)return {};
+ const {provider,apiKey,model}=personal;
+ const cacheKey=`${provider}:${apiKey.slice(0,16)}:${apiKey.length}:${model||''}`;
+ const cached=providerModelsCache.get(cacheKey);
+ if(cached&&now()-cached.at<1800000)return cached.value;
+ let value={};
+ try{
+  if(provider==='chatgpt-cookie'){
+   const info=await probeChatGptCookieAccount(apiKey,{env,fetchFn,signal,now});
+   const planType=info?.planType||((apiKey.includes('|')||apiKey.length>4000||['gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free');
+   const models=info?.models?.length?info.models:(planType==='plus'?['gpt-4o-mini','gpt-4o','o3-mini','gpt-4-1','o4-mini']:['gpt-4o-mini','o3-mini']);
+   value={planType,models};
+  }else if(provider==='claude'){
+   const res=await fetchFn('https://api.anthropic.com/v1/models',{method:'GET',headers:{'x-api-key':apiKey,'anthropic-version':'2023-06-01'},signal,redirect:'manual'});
+   if(res.ok){
+    const data=await res.json().catch(()=>null);
+    const ids=(data?.data||[]).map(m=>m?.id).filter(id=>typeof id==='string'&&/^claude-/i.test(id)).slice(0,10);
+    if(ids.length)value={models:ids};
+   }
+  }else if(provider==='deepseek'){
+   const res=await fetchFn('https://api.deepseek.com/models',{method:'GET',headers:{Authorization:'Bearer '+apiKey},signal,redirect:'manual'});
+   if(res.ok){
+    const data=await res.json().catch(()=>null);
+    const ids=(data?.data||[]).map(m=>m?.id).filter(id=>typeof id==='string'&&/^deepseek-/i.test(id)).slice(0,8);
+    if(ids.length)value={models:ids};
+   }
+  }else if(provider==='openai'){
+   const res=await fetchFn('https://api.openai.com/v1/models',{method:'GET',headers:{Authorization:'Bearer '+apiKey},signal,redirect:'manual'});
+   if(res.ok){
+    const data=await res.json().catch(()=>null);
+    const allow=new Set(['gpt-4o-mini','gpt-4o','o3-mini','gpt-4.1','gpt-4.1-mini','o4-mini']);
+    const ids=(data?.data||[]).map(m=>m?.id).filter(id=>allow.has(id));
+    if(ids.length)value={models:ids};
+   }
+  }else if(provider==='gemini'){
+   const res=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models',{method:'GET',headers:{'x-goog-api-key':apiKey},signal,redirect:'manual'});
+   if(res.ok){
+    const data=await res.json().catch(()=>null);
+    const allow=new Set(['gemini-2.5-flash-lite','gemini-2.5-flash','gemini-2.5-pro','gemini-2.0-flash']);
+    const ids=(data?.models||[]).filter(m=>Array.isArray(m?.supportedGenerationMethods)&&m.supportedGenerationMethods.includes('generateContent')).map(m=>String(m?.name||'').replace(/^models\//,'')).filter(id=>allow.has(id));
+    if(ids.length)value={models:ids};
+   }
+  }else if(provider==='fosta'){
+   value={models:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol']};
+  }
+ }catch{}
+ providerModelsCache.set(cacheKey,{at:now(),value});
+ return value;
 }

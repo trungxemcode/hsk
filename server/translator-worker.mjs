@@ -1,5 +1,5 @@
 import {chatgptCookieGenerate,sharedGuardrail} from './chatgpt-cookie.mjs';
-import {personalAiCall,personalAiGenerate} from './personal-ai.mjs';
+import {personalAiCall,personalAiGenerate,probePersonalAiCapabilities} from './personal-ai.mjs';
 import {normalizeAiProviderChoice,aiProviderChoiceError,describeAiProviders} from './ai-provider-choice.mjs';
 import { createOriginalReadingService } from './original-reading.mjs';
 import {validTranscriptInput,transcribeMusic,libraryTranscriptMedia,saveGeneratedTranscript} from './music-transcript.mjs';
@@ -305,7 +305,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    const restricted=(env.ALLOWED_UIDS||'').split(',').filter(Boolean);if(restricted.length&&!restricted.includes(c.sub))return reply({error:'Tài khoản chưa được bật dịch câu.'},403);
    if(isAiProviders){
     let personal=null;
-    try{if(env.AI_CONTROL)personal=await personalAiCall(env,account.localId,'personal-ai-read');}catch{personal=null;}
+    try{if(env.AI_CONTROL){personal=await personalAiCall(env,account.localId,'personal-ai-read');if(personal?.enabled){const full=await personalAiCall(env,account.localId,'personal-ai-use').catch(()=>null);if(full?.apiKey)personal={...personal,...await probePersonalAiCapabilities(full,{env,fetchFn:providerFetch,signal:controller.signal,now})};}}}catch{personal=null;}
     return reply(describeAiProviders({geminiReady:configuredGeminiKeys(env).length>0,sharedCookieReady:typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim()),personal}));
    }
    if(isPersonalSettings){
@@ -344,7 +344,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      if(isRole){
       const action=route==='/account-role'?'roles-self':route==='/admin/accounts'?'roles-list':'roles-set';
       if(action==='roles-set'&&(!['vip','regular'].includes(body.role)||typeof body.uid!=='string'||!/^[-\w:]{1,150}$/.test(body.uid)||body.uid===OWNER_UID))return reply({error:'Chỉ được cấp hoặc thu hồi VIP; admin được giữ cố định.'},400);
-      const roleData=await accountRoleCall(env,action,action==='roles-self'?{actor:account.localId,email:account.email||''}:action==='roles-list'?{actor:account.localId,...(body.cursor?{cursor:body.cursor}:{})}:{actor:account.localId,uid:body.uid,email:body.email,role:body.role},controller.signal);if(route==='/account-role'){let personal=null;try{if(env.AI_CONTROL)personal=await personalAiCall(env,account.localId,'personal-ai-read');}catch{personal=null;}return reply({...roleData,providers:describeAiProviders({geminiReady:configuredGeminiKeys(env).length>0,sharedCookieReady:typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim()),personal})});}return reply(roleData);
+      const roleData=await accountRoleCall(env,action,action==='roles-self'?{actor:account.localId,email:account.email||''}:action==='roles-list'?{actor:account.localId,...(body.cursor?{cursor:body.cursor}:{})}:{actor:account.localId,uid:body.uid,email:body.email,role:body.role},controller.signal);if(route==='/account-role'){let personal=null;try{if(env.AI_CONTROL){personal=await personalAiCall(env,account.localId,'personal-ai-read');if(personal?.enabled){const full=await personalAiCall(env,account.localId,'personal-ai-use').catch(()=>null);if(full?.apiKey)personal={...personal,...await probePersonalAiCapabilities(full,{env,fetchFn:providerFetch,signal:controller.signal,now})};}}}catch{personal=null;}return reply({...roleData,providers:describeAiProviders({geminiReady:configuredGeminiKeys(env).length>0,sharedCookieReady:typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim()),personal})});}return reply(roleData);
      }
      verifiedRole=(await accountRoleCall(env,'roles-self',{actor:account.localId,email:account.email||''},controller.signal)).account.role;
     }catch{return reply({error:'Chưa xác minh được quyền tài khoản. Hãy thử lại.',code:'ACCOUNT_ROLES_UNAVAILABLE'},503);}
