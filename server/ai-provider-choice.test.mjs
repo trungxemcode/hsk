@@ -6,8 +6,8 @@ import {extractChatGptPlanType,probeChatGptCookieAccount} from './chatgpt-cookie
 test('normalizeAiProviderChoice defaults to auto and rejects unknown values',()=>{
   assert.equal(normalizeAiProviderChoice(undefined),'auto');
   assert.equal(normalizeAiProviderChoice(''),'auto');
-  for(const v of ['auto','system-gemini','system-chatgpt','personal'])assert.equal(normalizeAiProviderChoice(v),v);
-  for(const v of ['claude','x',1,{},[]])assert.equal(normalizeAiProviderChoice(v),null);
+  for(const v of ['auto','system-gemini','system-chatgpt','personal','personal:chatgpt-cookie','personal:muse-cookie','personal:fosta'])assert.equal(normalizeAiProviderChoice(v),v);
+  for(const v of ['claude','x',1,{},[],'personal:invalid','personal:evil'])assert.equal(normalizeAiProviderChoice(v),null);
 });
 
 test('aiProviderChoiceError blocks unavailable providers only',()=>{

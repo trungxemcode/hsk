@@ -388,7 +388,13 @@ const MUSE_BROWSER_HEADERS = {
   'Accept': 'application/json, text/plain, */*',
   'Accept-Language': 'vi-VN,vi;q=0.9,en-US;q=0.8,en;q=0.7',
   'Origin': MUSE_BASE_URL,
-  'Referer': `${MUSE_BASE_URL}/`
+  'Referer': `${MUSE_BASE_URL}/`,
+  'Sec-Fetch-Dest': 'empty',
+  'Sec-Fetch-Mode': 'cors',
+  'Sec-Fetch-Site': 'same-origin',
+  'sec-ch-ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+  'sec-ch-ua-mobile': '?0',
+  'sec-ch-ua-platform': '"Windows"'
 };
 
 export async function bootstrapMuseHatchSession(cookieHeader, { fetchFn = fetch, signal, now = () => Date.now() } = {}) {
@@ -476,7 +482,15 @@ export async function bootstrapMuseHatchSession(cookieHeader, { fetchFn = fetch,
   return session;
 }
 
-function museToBytes(data) {
+export function museToBuffer(data) {
+  if (data instanceof ArrayBuffer) return data;
+  if (ArrayBuffer.isView(data)) {
+    return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+  }
+  return data;
+}
+
+export function museToBytes(data) {
   if (data instanceof Uint8Array) return data;
   if (data instanceof ArrayBuffer) return new Uint8Array(data);
   if (ArrayBuffer.isView(data)) return new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
@@ -493,15 +507,19 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
     const httpUrl = wsUrl.replace(/^wss:/i, 'https:').replace(/^ws:/i, 'http:');
     const upgradeResp = await fetchFn(httpUrl, {
       headers: {
-        ...MUSE_BROWSER_HEADERS,
-        'Upgrade': 'websocket',
-        'Connection': 'Upgrade'
+        'Origin': MUSE_BASE_URL,
+        'User-Agent': MUSE_BROWSER_HEADERS['User-Agent'],
+        'Upgrade': 'websocket'
       },
       signal
     });
     if (upgradeResp?.webSocket) {
       const ws = upgradeResp.webSocket;
-      if (typeof ws.accept === 'function') ws.accept();
+      try { ws.binaryType = 'arraybuffer'; } catch {}
+      if (typeof ws.accept === 'function') {
+        try { ws.accept(); } catch {}
+      }
+      try { ws.binaryType = 'arraybuffer'; } catch {}
       return ws;
     }
   } catch {}
@@ -509,7 +527,14 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
   if (typeof globalThis.WebSocket === 'function') {
     return await new Promise((resolve, reject) => {
       const ws = new globalThis.WebSocket(wsUrl);
-      ws.binaryType = 'arraybuffer';
+      try { ws.binaryType = 'arraybuffer'; } catch {}
+      if (typeof ws.accept === 'function') {
+        try { ws.accept(); } catch {}
+      }
+      try { ws.binaryType = 'arraybuffer'; } catch {}
+      if (ws.readyState === 1) {
+        return resolve(ws);
+      }
       const onOpen = () => { cleanup(); resolve(ws); };
       const onErr = () => { cleanup(); reject(new Error('Không thể kết nối WebSocket tới Muse AI')); };
       const cleanup = () => {
@@ -523,14 +548,23 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
   throw new Error('Môi trường hiện tại không hỗ trợ kết nối WebSocket tới Muse AI.');
 }
 
-export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 45000 } = {}) {
+export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 85000 } = {}) {
   const ws = await openMuseWebSocket(session.ws_url, { fetchFn, wsFactory, signal });
   const queue = [];
   let closed = false;
   let notify = null;
 
-  const pushMsg = (ev) => {
-    const bytes = museToBytes(ev?.data ?? ev);
+  const seenEvents = new WeakSet();
+  const pushMsg = async (ev) => {
+    if (ev && typeof ev === 'object') {
+      if (seenEvents.has(ev)) return;
+      seenEvents.add(ev);
+    }
+    let raw = ev?.data !== undefined ? ev.data : ev;
+    if (raw && typeof raw.arrayBuffer === 'function') {
+      try { raw = await raw.arrayBuffer(); } catch {}
+    }
+    const bytes = museToBytes(raw);
     if (bytes.byteLength > 0) {
       queue.push(bytes);
       if (notify) { const fn = notify; notify = null; fn(); }
@@ -566,17 +600,20 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
     const nonce = crypto.getRandomValues(new Uint8Array(32));
     const msg1Payload = museConcat(new Uint8Array([0x0a, 0x20]), nonce);
     const msg1 = await hs.writeMessage1(msg1Payload);
-    ws.send(msg1);
+    ws.send(museToBuffer(msg1));
 
-    const msg2 = await recvRaw(10000);
-    if (!msg2) throw new Error('Muse AI không phản hồi bước bắt tay Noise (msg2)');
+    const msg2 = await recvRaw(15000);
+    if (!msg2) {
+      if (closed) throw new Error('Muse AI đã đóng kết nối WebSocket trong bước bắt tay Noise (msg2)');
+      throw new Error('Muse AI không phản hồi bước bắt tay Noise (msg2)');
+    }
     await hs.readMessage2(msg2);
 
     const { bytes: msg3, send: csSend, recv: csRecv } = await hs.writeMessage3(new Uint8Array(0));
-    ws.send(msg3);
+    ws.send(museToBuffer(msg3));
 
     // Kick frame (empty plaintext AEAD tag)
-    ws.send(await csSend.encrypt(new Uint8Array(0), new Uint8Array(0)));
+    ws.send(museToBuffer(await csSend.encrypt(new Uint8Array(0), new Uint8Array(0))));
 
     let streamSeq = 0n;
     let chunkSeq = 0n;
@@ -598,7 +635,7 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
       const sr = museBuildServiceRequest(0, sf);
       const frames = museBuildTransportFrames(cid, sr);
       for (const frame of frames) {
-        ws.send(await csSend.encrypt(new Uint8Array(0), frame));
+        ws.send(museToBuffer(await csSend.encrypt(new Uint8Array(0), frame)));
       }
       return sid;
     };
@@ -655,11 +692,12 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
       }
       if (sf.body_chunk) {
         const data = sf.body_chunk.data;
+        let eventObj = null;
         if (data?.byteLength) {
           try {
             const obj = JSON.parse(new TextDecoder().decode(data));
             if (obj && typeof obj === 'object' && !Array.isArray(obj) && 'event' in obj) {
-              return { kind: 'event', streamId: sid, obj };
+              eventObj = obj;
             }
           } catch {}
           let b = streamBodies.get(sid);
@@ -671,7 +709,10 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
           streamBodies.delete(sid);
           const combined = museConcat(...b.parts);
           const parsed = combined.byteLength ? JSON.parse(new TextDecoder().decode(combined)) : {};
-          return { kind: 'complete', streamId: sid, status: b.status, body: parsed };
+          return { kind: 'complete', streamId: sid, status: b.status, body: parsed, event: eventObj };
+        }
+        if (eventObj) {
+          return { kind: 'event', streamId: sid, obj: eventObj };
         }
       }
       return null;
@@ -707,51 +748,113 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
       capabilities: MUSE_CAPABILITIES
     });
 
-    let sendSid = null;
-    let sendStartMs = Date.now();
+    const sendSid = await sendRequest('POST', '/chat/stream', {
+      message: userText,
+      node_id: clientId,
+      capabilities: MUSE_CAPABILITIES,
+      timezone: 'Asia/Ho_Chi_Minh'
+    });
+    const sendStartMs = Date.now();
     const textParts = [];
     const deadline = Date.now() + timeoutMs;
 
+    let idleAfterTextCount = 0;
     while (Date.now() < deadline) {
-      if (sendSid === null && respondedStreams.has(subSid)) {
-        sendStartMs = Date.now();
-        sendSid = await sendRequest('POST', '/chat/stream', {
-          message: userText,
-          node_id: clientId,
-          capabilities: MUSE_CAPABILITIES,
-          timezone: 'Asia/Ho_Chi_Minh'
-        });
-      }
-      const ev = await recvFrameEvent(1200);
+      const ev = await recvFrameEvent(1000);
       if (ev === 'closed') break;
-      if (!ev || ev.kind !== 'event') continue;
-      const obj = ev.obj;
-      if (typeof obj.ts_ms === 'number' && obj.ts_ms < sendStartMs - 1000) continue;
-      const eventName = obj.event;
-      const payload = obj.payload || {};
-      if (eventName === 'delta.text_append') {
-        const delta = payload.text ?? payload.delta ?? '';
+      if (!ev) {
+        if (textParts.length > 0) {
+          idleAfterTextCount++;
+          if (idleAfterTextCount >= 2) break;
+        }
+        continue;
+      }
+      idleAfterTextCount = 0;
+
+      if (ev.kind === 'complete' && ev.event) {
+        const obj = ev.event;
+        const payload = obj.payload || obj;
+        const delta = payload.text ?? payload.delta ?? payload.content ?? (typeof payload.string === 'string' ? payload.string : '');
         if (typeof delta === 'string' && delta) textParts.push(delta);
-      } else if (eventName === 'delta.message_done') {
+      }
+
+      if (ev.kind === 'event') {
+        const obj = ev.obj || {};
+        const eventName = String(obj.event || '');
+        const payload = obj.payload || obj;
+
+        if (
+          eventName === 'delta.text_append' ||
+          eventName === 'chat.delta' ||
+          eventName === 'text_append' ||
+          eventName.includes('delta') ||
+          eventName.includes('append') ||
+          eventName.includes('text')
+        ) {
+          const delta = payload.text ?? payload.delta ?? payload.content ?? (typeof payload.string === 'string' ? payload.string : '');
+          if (typeof delta === 'string' && delta) textParts.push(delta);
+        } else if (
+          eventName === 'delta.message_done' ||
+          eventName === 'chat.done' ||
+          eventName.includes('done') ||
+          eventName.includes('finish') ||
+          payload.done === true
+        ) {
+          if (textParts.length === 0) {
+            const messages = payload?.transcript?.messages || payload?.messages || [];
+            for (const m of messages) {
+              for (const c of m?.content || []) {
+                if (c?.type === 'text' && typeof c.text === 'string') textParts.push(c.text);
+              }
+              if (typeof m?.text === 'string' && m.text.trim()) textParts.push(m.text.trim());
+            }
+          }
+          break;
+        } else if (eventName === 'message.assistant' || eventName.includes('assistant')) {
+          const t = payload.display_text ?? payload.content ?? payload.text ?? '';
+          if (typeof t === 'string' && t.trim()) {
+            if (textParts.length === 0) textParts.push(t.trim());
+          }
+          break;
+        }
+      } else if (ev.kind === 'complete') {
+        const body = ev.body || {};
         if (textParts.length === 0) {
-          const messages = payload?.transcript?.messages || [];
-          for (const m of messages) {
-            for (const c of m?.content || []) {
-              if (c?.type === 'text' && typeof c.text === 'string') textParts.push(c.text);
+          const possibleText = body.text ?? body.response ?? body.content ?? body.message ?? body.display_text ?? body?.choices?.[0]?.message?.content;
+          if (typeof possibleText === 'string' && possibleText.trim()) {
+            textParts.push(possibleText.trim());
+          } else if (Array.isArray(body.messages)) {
+            for (const m of body.messages) {
+              const t = typeof m?.content === 'string' ? m.content : Array.isArray(m?.content) ? m.content.map(c => c?.text || '').join('') : (m?.text || '');
+              if (t.trim()) textParts.push(t.trim());
             }
           }
         }
-        break;
-      } else if (eventName === 'message.assistant') {
-        if (textParts.length === 0) {
-          const t = payload.display_text ?? payload.content ?? '';
-          if (typeof t === 'string' && t) textParts.push(t);
-        }
-        break;
+        if (textParts.length > 0) break;
+      } else if (ev.kind === 'reset') {
+        if (textParts.length > 0) break;
       }
     }
 
-    return textParts.join('').trim();
+    let result = textParts.join('').trim();
+    if (!result) {
+      for (const [sid, b] of streamBodies.entries()) {
+        if (b.parts?.length) {
+          const combined = new TextDecoder().decode(museConcat(...b.parts)).trim();
+          if (combined) {
+            try {
+              const obj = JSON.parse(combined);
+              const t = obj.text || obj.response || obj.content || obj.message;
+              if (typeof t === 'string' && t.trim()) { result = t.trim(); break; }
+            } catch {
+              result = combined;
+              break;
+            }
+          }
+        }
+      }
+    }
+    return result;
   } finally {
     try { ws.close(); } catch {}
   }
@@ -805,22 +908,39 @@ export function normalizeMuseTutorReply(rawText, questionText = '') {
 }
 
 function buildMuseFlattenedPrompt(requestBody, model) {
-  const systemText = (requestBody?.systemInstruction?.parts || [])
-    .map(p => p?.text || '')
-    .filter(Boolean)
-    .join('\n')
-    .trim();
-  const turns = (requestBody?.contents || []).map(msg => {
-    const role = msg?.role === 'model' ? 'Gia sư AI' : 'Học viên';
+  const contents = Array.isArray(requestBody?.contents) ? requestBody.contents : [];
+  const lastUser = [...contents].reverse().find(c => c?.role === 'user');
+  const userQuestion = (lastUser?.parts || []).map(p => p?.text || '').join('\n').trim();
+
+  // Chỉ lấy tối đa 2 lượt hội thoại gần nhất để giữ ngữ cảnh mà không làm đầy khung chat
+  const historyTurns = contents.slice(0, -1).slice(-2).map(msg => {
+    const role = msg?.role === 'model' ? 'Gia sư' : 'Học viên';
     const text = (msg?.parts || []).map(p => p?.text || '').join('\n').trim();
-    return text ? `${role}: ${text}` : '';
+    return text ? `${role}: ${text.slice(0, 300)}` : '';
   }).filter(Boolean);
-  const modeHint = model === 'muse-spark-thinking'
-    ? '[Chế độ suy luận sâu Muse Spark: phân tích kỹ từng điểm ngữ pháp/từ vựng trước khi trả lời]\n'
-    : model === 'muse-spark-fast'
-    ? '[Chế độ phản hồi nhanh Muse Spark]\n'
-    : '';
-  return [modeHint + systemText, ...turns].filter(Boolean).join('\n\n');
+
+  let modeInstruction = '';
+  if (model === 'muse-spark-thinking') {
+    modeInstruction = `[Gia sư tiếng Trung HSK - Chế độ SUY LUẬN SÂU & PHÂN TÍCH LOGIC]:
+Hãy phân tích chuyên sâu từng bước:
+1. Bản chất và quy tắc cốt lõi của điểm ngữ pháp/từ vựng trong câu hỏi.
+2. So sánh đối chiếu với các từ/cấu trúc tương tự dễ gây nhầm lẫn, phân biệt rõ sắc thái sử dụng.
+3. Chỉ ra lỗi sai phổ biến mà người học tiếng Trung hay mắc phải và giải thích lý do.
+4. Đưa ra các ví dụ câu mẫu chữ Hán kèm pinyin chuẩn và dịch nghĩa tự nhiên, kèm mẹo ghi nhớ.`;
+  } else if (model === 'muse-spark-fast') {
+    modeInstruction = `[Gia sư tiếng Trung HSK - Chế độ PHẢN HỒI NHANH TỨC THÌ]:
+Trả lời thật ngắn gọn, trực diện vào trọng tâm, giải thích nhanh nghĩa và cách dùng, đưa 1 ví dụ chữ Hán kèm pinyin.`;
+  } else {
+    modeInstruction = `[Gia sư tiếng Trung HSK - Chế độ TOÀN DIỆN & CÂN BẰNG]:
+Giải thích rõ ràng, đầy đủ ngữ nghĩa, cách dùng và ngữ pháp. Đưa ra các ví dụ câu thực tế sinh động kèm chữ Hán, pinyin và dịch nghĩa tiếng Việt, hướng dẫn cách vận dụng tự nhiên trong giao tiếp HSK.`;
+  }
+
+  const parts = [];
+  parts.push(modeInstruction);
+  if (historyTurns.length) parts.push(`[Hội thoại trước]:\n${historyTurns.join('\n')}`);
+  parts.push(`Học viên: ${userQuestion || 'Xin chào'}`);
+
+  return parts.filter(Boolean).join('\n\n');
 }
 
 export async function probeMuseAiAccount(rawCredential, { fetchFn = fetch, signal, now = () => Date.now() } = {}) {
@@ -897,11 +1017,15 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
       ? cred.session
       : await bootstrapMuseHatchSession(cred.cookieHeader, { fetchFn, signal, now: options.now });
     const prompt = buildMuseFlattenedPrompt(requestBody, model);
-    const replyText = await runMuseNoiseChat(session, prompt, { fetchFn, wsFactory: options.wsFactory, signal });
+    const replyText = await runMuseNoiseChat(session, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: 85000 });
     if (!replyText) return new Response(JSON.stringify({ error: 'Muse AI không trả về nội dung.' }), { status: 502 });
     const normalized = normalizeMuseTutorReply(replyText, questionText);
     return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(normalized) }] } }] });
   } catch (err) {
+    if (cred.cookieHeader) {
+      const cacheKey = cred.cookieHeader.slice(0, 96) + ':' + cred.cookieHeader.length;
+      museSessionCache.delete(cacheKey);
+    }
     // If credential was 'auto' (could be an api.meta.ai Bearer token without prefix), try Bearer endpoint before failing
     if (cred.kind === 'auto' && !cred.raw.includes('=')) {
       try {

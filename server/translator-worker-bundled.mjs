@@ -1370,7 +1370,13 @@ const MUSE_BROWSER_HEADERS = {
   'Accept': 'application/json, text/plain, */*',
   'Accept-Language': 'vi-VN,vi;q=0.9,en-US;q=0.8,en;q=0.7',
   'Origin': MUSE_BASE_URL,
-  'Referer': `${MUSE_BASE_URL}/`
+  'Referer': `${MUSE_BASE_URL}/`,
+  'Sec-Fetch-Dest': 'empty',
+  'Sec-Fetch-Mode': 'cors',
+  'Sec-Fetch-Site': 'same-origin',
+  'sec-ch-ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+  'sec-ch-ua-mobile': '?0',
+  'sec-ch-ua-platform': '"Windows"'
 };
 
 export async function bootstrapMuseHatchSession(cookieHeader, { fetchFn = fetch, signal, now = () => Date.now() } = {}) {
@@ -1458,7 +1464,15 @@ export async function bootstrapMuseHatchSession(cookieHeader, { fetchFn = fetch,
   return session;
 }
 
-function museToBytes(data) {
+export function museToBuffer(data) {
+  if (data instanceof ArrayBuffer) return data;
+  if (ArrayBuffer.isView(data)) {
+    return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+  }
+  return data;
+}
+
+export function museToBytes(data) {
   if (data instanceof Uint8Array) return data;
   if (data instanceof ArrayBuffer) return new Uint8Array(data);
   if (ArrayBuffer.isView(data)) return new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
@@ -1475,15 +1489,19 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
     const httpUrl = wsUrl.replace(/^wss:/i, 'https:').replace(/^ws:/i, 'http:');
     const upgradeResp = await fetchFn(httpUrl, {
       headers: {
-        ...MUSE_BROWSER_HEADERS,
-        'Upgrade': 'websocket',
-        'Connection': 'Upgrade'
+        'Origin': MUSE_BASE_URL,
+        'User-Agent': MUSE_BROWSER_HEADERS['User-Agent'],
+        'Upgrade': 'websocket'
       },
       signal
     });
     if (upgradeResp?.webSocket) {
       const ws = upgradeResp.webSocket;
-      if (typeof ws.accept === 'function') ws.accept();
+      try { ws.binaryType = 'arraybuffer'; } catch {}
+      if (typeof ws.accept === 'function') {
+        try { ws.accept(); } catch {}
+      }
+      try { ws.binaryType = 'arraybuffer'; } catch {}
       return ws;
     }
   } catch {}
@@ -1491,7 +1509,14 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
   if (typeof globalThis.WebSocket === 'function') {
     return await new Promise((resolve, reject) => {
       const ws = new globalThis.WebSocket(wsUrl);
-      ws.binaryType = 'arraybuffer';
+      try { ws.binaryType = 'arraybuffer'; } catch {}
+      if (typeof ws.accept === 'function') {
+        try { ws.accept(); } catch {}
+      }
+      try { ws.binaryType = 'arraybuffer'; } catch {}
+      if (ws.readyState === 1) {
+        return resolve(ws);
+      }
       const onOpen = () => { cleanup(); resolve(ws); };
       const onErr = () => { cleanup(); reject(new Error('Không thể kết nối WebSocket tới Muse AI')); };
       const cleanup = () => {
@@ -1505,14 +1530,23 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
   throw new Error('Môi trường hiện tại không hỗ trợ kết nối WebSocket tới Muse AI.');
 }
 
-export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 45000 } = {}) {
+export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 85000 } = {}) {
   const ws = await openMuseWebSocket(session.ws_url, { fetchFn, wsFactory, signal });
   const queue = [];
   let closed = false;
   let notify = null;
 
-  const pushMsg = (ev) => {
-    const bytes = museToBytes(ev?.data ?? ev);
+  const seenEvents = new WeakSet();
+  const pushMsg = async (ev) => {
+    if (ev && typeof ev === 'object') {
+      if (seenEvents.has(ev)) return;
+      seenEvents.add(ev);
+    }
+    let raw = ev?.data !== undefined ? ev.data : ev;
+    if (raw && typeof raw.arrayBuffer === 'function') {
+      try { raw = await raw.arrayBuffer(); } catch {}
+    }
+    const bytes = museToBytes(raw);
     if (bytes.byteLength > 0) {
       queue.push(bytes);
       if (notify) { const fn = notify; notify = null; fn(); }
@@ -1548,17 +1582,20 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
     const nonce = crypto.getRandomValues(new Uint8Array(32));
     const msg1Payload = museConcat(new Uint8Array([0x0a, 0x20]), nonce);
     const msg1 = await hs.writeMessage1(msg1Payload);
-    ws.send(msg1);
+    ws.send(museToBuffer(msg1));
 
-    const msg2 = await recvRaw(10000);
-    if (!msg2) throw new Error('Muse AI không phản hồi bước bắt tay Noise (msg2)');
+    const msg2 = await recvRaw(15000);
+    if (!msg2) {
+      if (closed) throw new Error('Muse AI đã đóng kết nối WebSocket trong bước bắt tay Noise (msg2)');
+      throw new Error('Muse AI không phản hồi bước bắt tay Noise (msg2)');
+    }
     await hs.readMessage2(msg2);
 
     const { bytes: msg3, send: csSend, recv: csRecv } = await hs.writeMessage3(new Uint8Array(0));
-    ws.send(msg3);
+    ws.send(museToBuffer(msg3));
 
     // Kick frame (empty plaintext AEAD tag)
-    ws.send(await csSend.encrypt(new Uint8Array(0), new Uint8Array(0)));
+    ws.send(museToBuffer(await csSend.encrypt(new Uint8Array(0), new Uint8Array(0))));
 
     let streamSeq = 0n;
     let chunkSeq = 0n;
@@ -1580,7 +1617,7 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
       const sr = museBuildServiceRequest(0, sf);
       const frames = museBuildTransportFrames(cid, sr);
       for (const frame of frames) {
-        ws.send(await csSend.encrypt(new Uint8Array(0), frame));
+        ws.send(museToBuffer(await csSend.encrypt(new Uint8Array(0), frame)));
       }
       return sid;
     };
@@ -1637,11 +1674,12 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
       }
       if (sf.body_chunk) {
         const data = sf.body_chunk.data;
+        let eventObj = null;
         if (data?.byteLength) {
           try {
             const obj = JSON.parse(new TextDecoder().decode(data));
             if (obj && typeof obj === 'object' && !Array.isArray(obj) && 'event' in obj) {
-              return { kind: 'event', streamId: sid, obj };
+              eventObj = obj;
             }
           } catch {}
           let b = streamBodies.get(sid);
@@ -1653,7 +1691,10 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
           streamBodies.delete(sid);
           const combined = museConcat(...b.parts);
           const parsed = combined.byteLength ? JSON.parse(new TextDecoder().decode(combined)) : {};
-          return { kind: 'complete', streamId: sid, status: b.status, body: parsed };
+          return { kind: 'complete', streamId: sid, status: b.status, body: parsed, event: eventObj };
+        }
+        if (eventObj) {
+          return { kind: 'event', streamId: sid, obj: eventObj };
         }
       }
       return null;
@@ -1689,51 +1730,113 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
       capabilities: MUSE_CAPABILITIES
     });
 
-    let sendSid = null;
-    let sendStartMs = Date.now();
+    const sendSid = await sendRequest('POST', '/chat/stream', {
+      message: userText,
+      node_id: clientId,
+      capabilities: MUSE_CAPABILITIES,
+      timezone: 'Asia/Ho_Chi_Minh'
+    });
+    const sendStartMs = Date.now();
     const textParts = [];
     const deadline = Date.now() + timeoutMs;
 
+    let idleAfterTextCount = 0;
     while (Date.now() < deadline) {
-      if (sendSid === null && respondedStreams.has(subSid)) {
-        sendStartMs = Date.now();
-        sendSid = await sendRequest('POST', '/chat/stream', {
-          message: userText,
-          node_id: clientId,
-          capabilities: MUSE_CAPABILITIES,
-          timezone: 'Asia/Ho_Chi_Minh'
-        });
-      }
-      const ev = await recvFrameEvent(1200);
+      const ev = await recvFrameEvent(1000);
       if (ev === 'closed') break;
-      if (!ev || ev.kind !== 'event') continue;
-      const obj = ev.obj;
-      if (typeof obj.ts_ms === 'number' && obj.ts_ms < sendStartMs - 1000) continue;
-      const eventName = obj.event;
-      const payload = obj.payload || {};
-      if (eventName === 'delta.text_append') {
-        const delta = payload.text ?? payload.delta ?? '';
+      if (!ev) {
+        if (textParts.length > 0) {
+          idleAfterTextCount++;
+          if (idleAfterTextCount >= 2) break;
+        }
+        continue;
+      }
+      idleAfterTextCount = 0;
+
+      if (ev.kind === 'complete' && ev.event) {
+        const obj = ev.event;
+        const payload = obj.payload || obj;
+        const delta = payload.text ?? payload.delta ?? payload.content ?? (typeof payload.string === 'string' ? payload.string : '');
         if (typeof delta === 'string' && delta) textParts.push(delta);
-      } else if (eventName === 'delta.message_done') {
+      }
+
+      if (ev.kind === 'event') {
+        const obj = ev.obj || {};
+        const eventName = String(obj.event || '');
+        const payload = obj.payload || obj;
+
+        if (
+          eventName === 'delta.text_append' ||
+          eventName === 'chat.delta' ||
+          eventName === 'text_append' ||
+          eventName.includes('delta') ||
+          eventName.includes('append') ||
+          eventName.includes('text')
+        ) {
+          const delta = payload.text ?? payload.delta ?? payload.content ?? (typeof payload.string === 'string' ? payload.string : '');
+          if (typeof delta === 'string' && delta) textParts.push(delta);
+        } else if (
+          eventName === 'delta.message_done' ||
+          eventName === 'chat.done' ||
+          eventName.includes('done') ||
+          eventName.includes('finish') ||
+          payload.done === true
+        ) {
+          if (textParts.length === 0) {
+            const messages = payload?.transcript?.messages || payload?.messages || [];
+            for (const m of messages) {
+              for (const c of m?.content || []) {
+                if (c?.type === 'text' && typeof c.text === 'string') textParts.push(c.text);
+              }
+              if (typeof m?.text === 'string' && m.text.trim()) textParts.push(m.text.trim());
+            }
+          }
+          break;
+        } else if (eventName === 'message.assistant' || eventName.includes('assistant')) {
+          const t = payload.display_text ?? payload.content ?? payload.text ?? '';
+          if (typeof t === 'string' && t.trim()) {
+            if (textParts.length === 0) textParts.push(t.trim());
+          }
+          break;
+        }
+      } else if (ev.kind === 'complete') {
+        const body = ev.body || {};
         if (textParts.length === 0) {
-          const messages = payload?.transcript?.messages || [];
-          for (const m of messages) {
-            for (const c of m?.content || []) {
-              if (c?.type === 'text' && typeof c.text === 'string') textParts.push(c.text);
+          const possibleText = body.text ?? body.response ?? body.content ?? body.message ?? body.display_text ?? body?.choices?.[0]?.message?.content;
+          if (typeof possibleText === 'string' && possibleText.trim()) {
+            textParts.push(possibleText.trim());
+          } else if (Array.isArray(body.messages)) {
+            for (const m of body.messages) {
+              const t = typeof m?.content === 'string' ? m.content : Array.isArray(m?.content) ? m.content.map(c => c?.text || '').join('') : (m?.text || '');
+              if (t.trim()) textParts.push(t.trim());
             }
           }
         }
-        break;
-      } else if (eventName === 'message.assistant') {
-        if (textParts.length === 0) {
-          const t = payload.display_text ?? payload.content ?? '';
-          if (typeof t === 'string' && t) textParts.push(t);
-        }
-        break;
+        if (textParts.length > 0) break;
+      } else if (ev.kind === 'reset') {
+        if (textParts.length > 0) break;
       }
     }
 
-    return textParts.join('').trim();
+    let result = textParts.join('').trim();
+    if (!result) {
+      for (const [sid, b] of streamBodies.entries()) {
+        if (b.parts?.length) {
+          const combined = new TextDecoder().decode(museConcat(...b.parts)).trim();
+          if (combined) {
+            try {
+              const obj = JSON.parse(combined);
+              const t = obj.text || obj.response || obj.content || obj.message;
+              if (typeof t === 'string' && t.trim()) { result = t.trim(); break; }
+            } catch {
+              result = combined;
+              break;
+            }
+          }
+        }
+      }
+    }
+    return result;
   } finally {
     try { ws.close(); } catch {}
   }
@@ -1787,22 +1890,39 @@ export function normalizeMuseTutorReply(rawText, questionText = '') {
 }
 
 function buildMuseFlattenedPrompt(requestBody, model) {
-  const systemText = (requestBody?.systemInstruction?.parts || [])
-    .map(p => p?.text || '')
-    .filter(Boolean)
-    .join('\n')
-    .trim();
-  const turns = (requestBody?.contents || []).map(msg => {
-    const role = msg?.role === 'model' ? 'Gia sư AI' : 'Học viên';
+  const contents = Array.isArray(requestBody?.contents) ? requestBody.contents : [];
+  const lastUser = [...contents].reverse().find(c => c?.role === 'user');
+  const userQuestion = (lastUser?.parts || []).map(p => p?.text || '').join('\n').trim();
+
+  // Chỉ lấy tối đa 2 lượt hội thoại gần nhất để giữ ngữ cảnh mà không làm đầy khung chat
+  const historyTurns = contents.slice(0, -1).slice(-2).map(msg => {
+    const role = msg?.role === 'model' ? 'Gia sư' : 'Học viên';
     const text = (msg?.parts || []).map(p => p?.text || '').join('\n').trim();
-    return text ? `${role}: ${text}` : '';
+    return text ? `${role}: ${text.slice(0, 300)}` : '';
   }).filter(Boolean);
-  const modeHint = model === 'muse-spark-thinking'
-    ? '[Chế độ suy luận sâu Muse Spark: phân tích kỹ từng điểm ngữ pháp/từ vựng trước khi trả lời]\n'
-    : model === 'muse-spark-fast'
-    ? '[Chế độ phản hồi nhanh Muse Spark]\n'
-    : '';
-  return [modeHint + systemText, ...turns].filter(Boolean).join('\n\n');
+
+  let modeInstruction = '';
+  if (model === 'muse-spark-thinking') {
+    modeInstruction = `[Gia sư tiếng Trung HSK - Chế độ SUY LUẬN SÂU & PHÂN TÍCH LOGIC]:
+Hãy phân tích chuyên sâu từng bước:
+1. Bản chất và quy tắc cốt lõi của điểm ngữ pháp/từ vựng trong câu hỏi.
+2. So sánh đối chiếu với các từ/cấu trúc tương tự dễ gây nhầm lẫn, phân biệt rõ sắc thái sử dụng.
+3. Chỉ ra lỗi sai phổ biến mà người học tiếng Trung hay mắc phải và giải thích lý do.
+4. Đưa ra các ví dụ câu mẫu chữ Hán kèm pinyin chuẩn và dịch nghĩa tự nhiên, kèm mẹo ghi nhớ.`;
+  } else if (model === 'muse-spark-fast') {
+    modeInstruction = `[Gia sư tiếng Trung HSK - Chế độ PHẢN HỒI NHANH TỨC THÌ]:
+Trả lời thật ngắn gọn, trực diện vào trọng tâm, giải thích nhanh nghĩa và cách dùng, đưa 1 ví dụ chữ Hán kèm pinyin.`;
+  } else {
+    modeInstruction = `[Gia sư tiếng Trung HSK - Chế độ TOÀN DIỆN & CÂN BẰNG]:
+Giải thích rõ ràng, đầy đủ ngữ nghĩa, cách dùng và ngữ pháp. Đưa ra các ví dụ câu thực tế sinh động kèm chữ Hán, pinyin và dịch nghĩa tiếng Việt, hướng dẫn cách vận dụng tự nhiên trong giao tiếp HSK.`;
+  }
+
+  const parts = [];
+  parts.push(modeInstruction);
+  if (historyTurns.length) parts.push(`[Hội thoại trước]:\n${historyTurns.join('\n')}`);
+  parts.push(`Học viên: ${userQuestion || 'Xin chào'}`);
+
+  return parts.filter(Boolean).join('\n\n');
 }
 
 export async function probeMuseAiAccount(rawCredential, { fetchFn = fetch, signal, now = () => Date.now() } = {}) {
@@ -1879,11 +1999,15 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
       ? cred.session
       : await bootstrapMuseHatchSession(cred.cookieHeader, { fetchFn, signal, now: options.now });
     const prompt = buildMuseFlattenedPrompt(requestBody, model);
-    const replyText = await runMuseNoiseChat(session, prompt, { fetchFn, wsFactory: options.wsFactory, signal });
+    const replyText = await runMuseNoiseChat(session, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: 85000 });
     if (!replyText) return new Response(JSON.stringify({ error: 'Muse AI không trả về nội dung.' }), { status: 502 });
     const normalized = normalizeMuseTutorReply(replyText, questionText);
     return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(normalized) }] } }] });
   } catch (err) {
+    if (cred.cookieHeader) {
+      const cacheKey = cred.cookieHeader.slice(0, 96) + ':' + cred.cookieHeader.length;
+      museSessionCache.delete(cacheKey);
+    }
     // If credential was 'auto' (could be an api.meta.ai Bearer token without prefix), try Bearer endpoint before failing
     if (cred.kind === 'auto' && !cred.raw.includes('=')) {
       try {
@@ -1902,12 +2026,24 @@ export const PERSONAL_PROVIDER_IDS=['openai','fosta','deepseek','claude','gemini
 
 export function normalizeAiProviderChoice(value){
   if(value===undefined||value===null||value==='')return 'auto';
-  return typeof value==='string'&&AI_PROVIDER_CHOICES.has(value)?value:null;
+  if(typeof value!=='string')return null;
+  if(AI_PROVIDER_CHOICES.has(value))return value;
+  if(value.startsWith('personal:')){
+    const prov=value.slice(9);
+    if(PERSONAL_PROVIDER_IDS.includes(prov))return value;
+  }
+  return null;
 }
 
 // Trả về lý do không dùng được (tiếng Việt) hoặc null nếu lựa chọn khả dụng.
-export function aiProviderChoiceError(choice,{personalEnabled=false,sharedCookieReady=false,geminiReady=false}={}){
+export function aiProviderChoiceError(choice,{personalEnabled=false,personalProviders=null,sharedCookieReady=false,geminiReady=false}={}){
   if(choice==='personal'&&!personalEnabled)return 'API riêng chưa được bật. Hãy bật hoặc nhập API/cookie trong Cài đặt.';
+  if(choice.startsWith('personal:')){
+    const prov=choice.slice(9);
+    const provData=personalProviders?.[prov];
+    const isReady=provData?Boolean(provData.enabled):personalEnabled;
+    if(!isReady)return `Nhà cung cấp riêng ${prov} chưa được bật hoặc chưa cấu hình trong Cài đặt.`;
+  }
   if(choice==='system-chatgpt'&&!sharedCookieReady)return 'ChatGPT của hệ thống chưa được admin cấu hình.';
   if(choice==='system-gemini'&&!geminiReady)return 'Gemini của hệ thống chưa sẵn sàng.';
   return null;
@@ -1916,13 +2052,33 @@ export function aiProviderChoiceError(choice,{personalEnabled=false,sharedCookie
 // Công khai cho client: chỉ trạng thái khả dụng, không có key/cookie.
 export function describeAiProviders({geminiReady=false,sharedCookieReady=false,personal=null}={}){
   const configured=personal?.configured===true;
+  const providers=personal?.providers&&typeof personal.providers==='object'?personal.providers:null;
+  let sanitizedProviders=undefined;
+  if(configured&&providers){
+    sanitizedProviders={};
+    for(const [pId,pData] of Object.entries(providers)){
+      if(PERSONAL_PROVIDER_IDS.includes(pId)&&pData&&pData.configured){
+        sanitizedProviders[pId]={
+          configured:true,
+          enabled:pData.enabled===true,
+          provider:pId,
+          model:typeof pData.model==='string'?pData.model.slice(0,100):null,
+          ...(typeof pData.planType==='string'?{planType:pData.planType}:{}),
+          ...(Array.isArray(pData.models)&&pData.models.length?{models:pData.models.slice(0,12)}:{})
+        };
+      }
+    }
+  }
   return {
     system:{gemini:{available:Boolean(geminiReady)},chatgpt:{available:Boolean(sharedCookieReady)}},
     personal:{
       configured,
       enabled:configured&&personal?.enabled===true,
       provider:configured&&PERSONAL_PROVIDER_IDS.includes(personal?.provider)?personal.provider:null,
-      model:configured&&typeof personal?.model==='string'?personal.model.slice(0,100):null,...(configured&&typeof personal?.planType==='string'?{planType:personal.planType}:{}),...(configured&&Array.isArray(personal?.models)&&personal.models.length?{models:personal.models.slice(0,12)}:{})
+      model:configured&&typeof personal?.model==='string'?personal.model.slice(0,100):null,
+      ...(configured&&typeof personal?.planType==='string'?{planType:personal.planType}:{}),
+      ...(configured&&Array.isArray(personal?.models)&&personal.models.length?{models:personal.models.slice(0,12)}:{}),
+      ...(configured&&sanitizedProviders?{providers:sanitizedProviders}:{})
     }
   };
 }
@@ -1948,15 +2104,75 @@ async function personalCipher(env){
 function personalPublic(record){
  return record?{configured:true,enabled:record.enabled,provider:record.provider,model:record.model}:{configured:false,enabled:false};
 }
+async function loadAllPersonalProviders(store,fallbackRecord){
+ let index=await store.get('personal-ai-providers-index');
+ const map={};
+ if(!Array.isArray(index)){
+  index=fallbackRecord?.provider?[fallbackRecord.provider]:[];
+ }
+ for(const p of index){
+  let rec=await store.get('personal-ai-prov:'+p);
+  if(!rec&&fallbackRecord?.provider===p)rec=fallbackRecord;
+  if(rec&&rec.provider===p){
+   map[p]={configured:true,enabled:rec.enabled===true,provider:p,model:rec.model,...(rec.planType?{planType:rec.planType}:{})};
+  }
+ }
+ if(fallbackRecord?.provider&&!map[fallbackRecord.provider]){
+  map[fallbackRecord.provider]={configured:true,enabled:fallbackRecord.enabled===true,provider:fallbackRecord.provider,model:fallbackRecord.model,...(fallbackRecord.planType?{planType:fallbackRecord.planType}:{})};
+ }
+ return map;
+}
 export async function personalAiStorage(storage,env,{action,uid,settings}){
  if(typeof uid!=='string'||!/^[-\w:]{1,150}$/.test(uid))return Response.json({}, {status:400});
  const key='personal-ai-v1';
  if(action==='personal-ai-remove'){
-  await storage.delete(key);return Response.json(personalPublic(null));
+  const targetProvider=typeof settings?.provider==='string'?settings.provider:null;
+  if(targetProvider){
+   return storage.transaction(async tx=>{
+    await tx.delete('personal-ai-prov:'+targetProvider);
+    let index=(await tx.get('personal-ai-providers-index'))||[];
+    index=Array.isArray(index)?index.filter(p=>p!==targetProvider):[];
+    await tx.put('personal-ai-providers-index',index);
+    const legacy=await tx.get(key);
+    if(legacy?.provider===targetProvider){
+     if(index.length){
+      const nextRec=await tx.get('personal-ai-prov:'+index[0]);
+      if(nextRec){await tx.put(key,nextRec);const providers=await loadAllPersonalProviders(tx,nextRec);return Response.json({...personalPublic(nextRec),providers});}
+     }
+     await tx.delete(key);
+     return Response.json(personalPublic(null));
+    }
+    const providers=await loadAllPersonalProviders(tx,legacy);
+    return Response.json({...personalPublic(legacy),providers});
+   });
+  }
+  return storage.transaction(async tx=>{
+   const index=(await tx.get('personal-ai-providers-index'))||[];
+   if(Array.isArray(index)){for(const p of index)await tx.delete('personal-ai-prov:'+p);}
+   await tx.delete('personal-ai-providers-index');
+   await tx.delete(key);
+   return Response.json(personalPublic(null));
+  });
  }
- if(action==='personal-ai-read'||action==='personal-ai-use'){
+ if(action==='personal-ai-read'){
   const record=await storage.get(key);
-  if(action==='personal-ai-read'||!record?.enabled)return Response.json(personalPublic(record));
+  if(!record)return Response.json(personalPublic(null));
+  const providers=await loadAllPersonalProviders(storage,record);
+  return Response.json({...personalPublic(record),providers});
+ }
+ if(action==='personal-ai-use'){
+  const targetProvider=typeof settings?.provider==='string'&&PERSONAL_PROVIDERS[settings.provider]?settings.provider:null;
+  let record=null;
+  if(targetProvider){
+   record=await storage.get('personal-ai-prov:'+targetProvider);
+   if(!record){
+    const legacy=await storage.get(key);
+    if(legacy?.provider===targetProvider)record=legacy;
+   }
+  }else{
+   record=await storage.get(key);
+  }
+  if(!record?.enabled)return Response.json(personalPublic(record));
   const apiKey=new TextDecoder().decode(await crypto.subtle.decrypt({
    name:'AES-GCM',iv:personalBytes(record.iv),additionalData:personalEncode(uid+':'+record.provider)
   },await personalCipher(env),personalBytes(record.ciphertext)));
@@ -1964,21 +2180,31 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
  }
  if(action!=='personal-ai-save'||!settings||Object.keys(settings).some(k=>!['provider','model','enabled','apiKey'].includes(k)))return Response.json({}, {status:400});
  const {provider,model,enabled,apiKey}=settings;
- const maxKeyLen=(provider==='chatgpt-cookie'||provider==='muse-cookie')?8192:512;
+ const maxKeyLen=(provider==='chatgpt-cookie'||provider==='muse-cookie')?16384:512;
  if(!Object.hasOwn(PERSONAL_PROVIDERS,provider)||typeof model!=='string'||!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(model)||
   typeof enabled!=='boolean'||provider==='fosta'&&!PERSONAL_FOSTA_MODELS.has(model)||
   apiKey!==undefined&&(typeof apiKey!=='string'||apiKey.length<8||apiKey.length>maxKeyLen||!(provider==='chatgpt-cookie'||provider==='muse-cookie'?/^[ -~]+$/:/^[!-~]+$/).test(apiKey)))return Response.json({}, {status:400});
  const cipher=await personalCipher(env);
+ const inferredPlan=provider==='chatgpt-cookie'?((apiKey?.includes('|')||apiKey?.length>4000||['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free'):undefined;
  return storage.transaction(async tx=>{
-  const previous=await tx.get(key);
-  if(!apiKey&&previous?.provider!==provider)return Response.json({}, {status:400});
-  const record={provider,model,enabled,iv:previous?.iv,ciphertext:previous?.ciphertext};
+  const legacy=await tx.get(key);
+  let previous=await tx.get('personal-ai-prov:'+provider);
+  if(!previous&&legacy?.provider===provider)previous=legacy;
+  if(!apiKey&&!previous?.ciphertext)return Response.json({}, {status:400});
+  const record={provider,model,enabled,iv:previous?.iv,ciphertext:previous?.ciphertext,...(inferredPlan?{planType:inferredPlan}:previous?.planType?{planType:previous.planType}:{})};
   if(apiKey){
    const iv=crypto.getRandomValues(new Uint8Array(12));
    const ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:personalEncode(uid+':'+provider)},cipher,personalEncode(apiKey));
    record.iv=personalB64(iv);record.ciphertext=personalB64(ciphertext);
   }
-  await tx.put(key,record);return Response.json(personalPublic(record));
+  await tx.put('personal-ai-prov:'+provider,record);
+  let index=(await tx.get('personal-ai-providers-index'))||[];
+  if(!Array.isArray(index))index=[];
+  if(!index.includes(provider))index.push(provider);
+  if(legacy?.provider&&!index.includes(legacy.provider))index.push(legacy.provider);
+  await tx.put('personal-ai-providers-index',index);
+  await tx.put(key,record);
+  return Response.json(personalPublic(record));
  });
 }
 export async function personalAiCall(env,uid,action,settings){
@@ -3888,14 +4114,17 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    const isAiQa=isLessonAsk&&body.lesson?.content?.mode==='ai-qa';
    const thinking=body.thinking??'low',requestedAiModel=isAiQa&&typeof body.aiModel==='string'?body.aiModel.trim():'';
    if(isAiQa&&(!QA_THINKING_MODELS.has(thinking)||requestedAiModel&&!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(requestedAiModel)))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
-   let personalAi=null;
-   if(isAiQa&&env.AI_CONTROL){
-    try{personalAi=await personalAiCall(env,account.localId,'personal-ai-use');}
-    catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
-   }
    const aiChoice=isAiQa?normalizeAiProviderChoice(body.aiProvider):'auto';
    if(aiChoice===null)return reply({error:'Nhà cung cấp AI không hợp lệ.',code:'AI_PROVIDER_INVALID'},400);
-   const usePersonalAi=personalAi?.enabled===true&&(aiChoice==='auto'||aiChoice==='personal');
+   let personalAi=null;
+   if(isAiQa&&env.AI_CONTROL){
+    try{
+     const targetProvider=(typeof body.personalProvider==='string'&&PERSONAL_PROVIDERS[body.personalProvider])?body.personalProvider:(aiChoice.startsWith('personal:')?aiChoice.slice(9):undefined);
+     personalAi=await personalAiCall(env,account.localId,'personal-ai-use',targetProvider?{provider:targetProvider}:undefined);
+    }
+    catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
+   }
+   const usePersonalAi=personalAi?.enabled===true&&(aiChoice==='auto'||aiChoice==='personal'||aiChoice.startsWith('personal:'));
    const sharedCookieReady=typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim());
    const choiceError=isAiQa?aiProviderChoiceError(aiChoice,{personalEnabled:personalAi?.enabled===true,sharedCookieReady,geminiReady:configuredGeminiKeys(env).length>0}):null;
    if(choiceError)return reply({error:choiceError,code:'AI_PROVIDER_UNAVAILABLE'},409);
@@ -4090,9 +4319,11 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      }
      if(!response.ok){
       const upstream=response.status;
-      const error=upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
+      const errData=await response.json().catch(()=>null);
+      const detailError=typeof errData?.error==='string'&&errData.error.trim()?errData.error.trim():null;
+      const error=detailError||(upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
        upstream===400||upstream===404?'API riêng không chấp nhận yêu cầu hoặc model đã chọn. Kiểm tra model trong Cài đặt.':
-       upstream===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng không trả về phản hồi hợp lệ. Hãy thử lại.';
+       upstream===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng không trả về phản hồi hợp lệ. Hãy thử lại.');
       return reply({error,code:'PERSONAL_AI_UPSTREAM',upstream},upstream===429?429:502);
      }
     }else if(useSharedChatGptCookie||usePersonalCookie){

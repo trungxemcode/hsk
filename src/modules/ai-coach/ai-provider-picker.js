@@ -57,7 +57,7 @@
   const cleanUid=value=>String(value||'guest').replace(/[^\w:.-]/g,'_').slice(0,150);
   const storeKey=targetUid=>`hsk-ai-qa-provider-v1:${cleanUid(targetUid)}`;
   const cacheKey=targetUid=>`hsk-ai-providers-cache-v1:${cleanUid(targetUid)}`;
-  const cipherKey=targetUid=>`hsk-personal-ai-cipher-v1:${cleanUid(targetUid)}`;
+  const cipherKey=(targetUid,prov)=>`hsk-personal-ai-cipher-v1:${cleanUid(targetUid)}${prov?':'+prov:''}`;
   const controls=['aiQaThinking','qaProjectThinking'].map(id=>document.getElementById(id)).filter(Boolean);
   if(!controls.length)return;
   let uid='guest',selected='auto',availability=null,openPicker=null,cryptoKeyPromise=null;
@@ -133,24 +133,26 @@
       const aad=new TextEncoder().encode(`${key}:${clean.provider}`);
       const ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:aad},aes,new TextEncoder().encode(clean.apiKey));
       const payload=JSON.stringify({v:1,provider:clean.provider,model:clean.model,enabled:clean.enabled,iv:b64(iv),ciphertext:b64(ciphertext)});
-      try{localStorage.setItem(cipherKey(targetUid),payload);}catch{}
+      try{localStorage.setItem(cipherKey(targetUid,clean.provider),payload);}catch{}
+      try{sessionStorage.setItem(cipherKey(targetUid,clean.provider),payload);}catch{}
       try{sessionStorage.setItem(cipherKey(targetUid),payload);}catch{}
     }catch{}
   }
-  async function loadDirectCred(targetUid){
-    const key=cleanUid(targetUid);
-    if(directKeys.has(key))return directKeys.get(key);
+  async function loadDirectCred(targetUid,prov){
+    const memKey=cleanUid(targetUid)+(prov?':'+prov:'');
+    if(directKeys.has(memKey))return directKeys.get(memKey);
     try{
-      const raw=JSON.parse(sessionStorage.getItem(cipherKey(targetUid))||localStorage.getItem(cipherKey(targetUid))||'null');
+      const raw=JSON.parse(sessionStorage.getItem(cipherKey(targetUid,prov))||localStorage.getItem(cipherKey(targetUid,prov))||sessionStorage.getItem(cipherKey(targetUid))||localStorage.getItem(cipherKey(targetUid))||'null');
       if(!raw||!raw.iv||!raw.ciphertext||!Object.hasOwn(DIRECT_ENDPOINTS,raw.provider))return null;
+      if(prov&&raw.provider!==prov)return null;
       const aes=await getDeviceCryptoKey();
       if(!aes)return null;
-      const aad=new TextEncoder().encode(`${key}:${raw.provider}`);
+      const aad=new TextEncoder().encode(`${cleanUid(targetUid)}:${raw.provider}`);
       const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:fromB64(raw.iv),additionalData:aad},aes,fromB64(raw.ciphertext));
       const apiKey=new TextDecoder().decode(plain);
       if(!apiKey)return null;
       const cred={provider:raw.provider,model:String(raw.model||''),enabled:Boolean(raw.enabled),apiKey};
-      directKeys.set(key,cred);
+      directKeys.set(memKey,cred);
       return cred;
     }catch{return null;}
   }
@@ -180,15 +182,21 @@
       {id:'system-chatgpt',value:'system-chatgpt',label:'ChatGPT',sub:a?.system?.chatgpt?.available?'2 mức: Bình thường & Suy luận':known?'Admin chưa cài cookie':'Chưa kiểm tra được',locked:!a?.system?.chatgpt?.available},
       {group:'Của bạn'}];
     for(const [provider,label] of PERSONAL){
-      const mine=p.provider===provider,ready=mine&&p.enabled===true;
-      const cookieTier=provider==='chatgpt-cookie'&&mine?(p.planType==='plus'?'TK Plus':p.planType==='free'?'TK Thường':''):'';
+      const provData=p.providers?.[provider]||(p.provider===provider?p:null);
+      const mine=Boolean(provData&&provData.configured);
+      const ready=mine&&provData.enabled===true;
+      const cookieTier=provider==='chatgpt-cookie'&&mine?(provData.planType==='plus'?'TK Plus':provData.planType==='free'?'TK Thường':''):'';
       list.push({id:`personal:${provider}`,value:'personal',label,locked:!ready,
-        sub:ready?(cookieTier?`${cookieTier} · ${p.model||'gpt-4o-mini'}`:(p.model||'API riêng của bạn')):mine&&p.configured?'Đang tắt trong Cài đặt':known?'Thêm trong Cài đặt → API riêng':'Chưa kiểm tra được'});
+        sub:ready?(cookieTier?`${cookieTier} · ${provData.model||'gpt-4o-mini'}`:(provData.model||'API riêng của bạn')):mine&&provData.configured?'Đang tắt trong Cài đặt':known?'Thêm trong Cài đặt → API riêng':'Chưa kiểm tra được'});
     }
     return list;
   }
   function entry(id){return items().find(item=>item.id===id&&!item.locked)||null;}
-  function normalizeSelection(){if(!entry(selected))selected='auto';}
+  function normalizeSelection(){
+    const a=availability,p=a?.personal||{};
+    if(selected==='personal'&&p?.provider)selected='personal:'+p.provider;
+    if(!entry(selected))selected='auto';
+  }
   function current(){return items().find(item=>item.id===selected)||items()[1];}
   function closeAll(){if(openPicker){openPicker.close();openPicker=null;}}
 
@@ -261,7 +269,8 @@
     }else if(!sys.gemini?.available&&sys.chatgpt?.available){
       kind='system-chatgpt';
     }
-    const isPlusCookie=kind==='chatgpt-cookie'&&(p.planType?p.planType!=='free':['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(p.model));
+    const provData=isPersonal?(p.providers?.[kind]||(p.provider===kind?p:null)):null;
+    const isPlusCookie=kind==='chatgpt-cookie'&&(provData?.planType?provData.planType!=='free':['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(provData?.model));
     const labelMap={
       'system-gemini':'Gemini hệ thống',
       'system-chatgpt':'ChatGPT hệ thống',
@@ -273,14 +282,14 @@
       claude:'Claude',
       gemini:'Gemini (API riêng)'
     };
-    const options=buildProviderModelOptions(kind,isPersonal?p:null);
+    const options=buildProviderModelOptions(kind,provData);
     return {
       kind,
       label:labelMap[kind]||'AI',
       isPersonal,
       explicitNonSystemGemini,
       planType:kind==='chatgpt-cookie'?(isPlusCookie?'plus':'free'):null,
-      savedModel:isPersonal&&p.provider===kind&&typeof p.model==='string'?p.model.trim():'',
+      savedModel:provData&&typeof provData.model==='string'?provData.model.trim():'',
       options
     };
   }
@@ -358,15 +367,35 @@
     if(!targetUid||!publicData||typeof publicData!=='object')return;
     const rawKey=typeof rawSettings?.apiKey==='string'?rawSettings.apiKey.trim():'';
     const inferredPlan=publicData.provider==='chatgpt-cookie'?(publicData.planType||(rawKey?(rawKey.includes('|')||rawKey.length>4000?'plus':'free'):(['gpt-4o','gpt-4-1','o4-mini'].includes(publicData.model)?'plus':availability?.personal?.planType||'free'))):undefined;
-    const personal=publicData.configured?{
-      configured:true,enabled:Boolean(publicData.enabled),
-      provider:String(publicData.provider||''),model:String(publicData.model||''),
-      ...(inferredPlan?{planType:inferredPlan}:{}),
-      ...(Array.isArray(publicData.models)&&publicData.models.length?{models:publicData.models}:{})
-    }:{configured:false,enabled:false};
     const base=readCachedAvailability(targetUid)||(cleanUid(targetUid)===cleanUid(uid)?availability:null)||{
-      system:{gemini:{available:true},chatgpt:{available:false}},personal
+      system:{gemini:{available:true},chatgpt:{available:false}},personal:{configured:false,enabled:false}
     };
+    const existingProviders={...(base.personal?.providers||{})};
+    if(publicData.providers&&typeof publicData.providers==='object'){
+      Object.assign(existingProviders,publicData.providers);
+    }
+    if(publicData.configured&&publicData.provider){
+      existingProviders[publicData.provider]={
+        configured:true,
+        enabled:Boolean(publicData.enabled),
+        provider:publicData.provider,
+        model:String(publicData.model||''),
+        ...(inferredPlan?{planType:inferredPlan}:{})
+      };
+    }else if(rawSettings?.remove){
+      if(rawSettings.provider)delete existingProviders[rawSettings.provider];
+      else for(const k of Object.keys(existingProviders))delete existingProviders[k];
+    }
+    const hasRemaining=Object.keys(existingProviders).length>0;
+    const activeProv=publicData.configured?publicData.provider:(hasRemaining?Object.keys(existingProviders)[0]:null);
+    const personal=hasRemaining?{
+      configured:true,
+      enabled:activeProv?Boolean(existingProviders[activeProv]?.enabled):Boolean(publicData.enabled),
+      provider:activeProv||publicData.provider||'',
+      model:activeProv?String(existingProviders[activeProv]?.model||''):String(publicData.model||''),
+      ...(inferredPlan?{planType:inferredPlan}:{}),
+      providers:existingProviders
+    }:{configured:false,enabled:false};
     applyAvailability(targetUid,{...base,personal});
     if(!personal.configured||rawSettings?.remove){
       await saveEncryptedDirectCred(targetUid,null);
@@ -448,9 +477,9 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
   async function tryDirectAsk({uid:targetUid,aiProvider,thinking,aiModel,question,hsk,lesson,history,signal}={}){
     if(aiProvider&&aiProvider!=='auto'&&aiProvider!=='personal')return null;
     if(availability?.personal&&(availability.personal.configured===false||availability.personal.enabled===false))return null;
-    const cred=await loadDirectCred(targetUid);
-    if(!cred||!cred.enabled||!cred.apiKey||!Object.hasOwn(DIRECT_ENDPOINTS,cred.provider))return null;
     const info=activeProviderInfo();
+    const cred=await loadDirectCred(targetUid,info?.kind);
+    if(!cred||!cred.enabled||!cred.apiKey||!Object.hasOwn(DIRECT_ENDPOINTS,cred.provider))return null;
     const matchedOpt=info?.options?.find(o=>o.value===thinking||o.model===aiModel);
     const chosenModel=(aiModel&&(cred.provider!=='fosta'||['gpt-6.1-sol','gpt-6-astra','gpt-6-luna'].includes(aiModel)))?aiModel:
       matchedOpt?.model||cred.model;

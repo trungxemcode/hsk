@@ -21,15 +21,75 @@ async function personalCipher(env){
 function personalPublic(record){
  return record?{configured:true,enabled:record.enabled,provider:record.provider,model:record.model}:{configured:false,enabled:false};
 }
+async function loadAllPersonalProviders(store,fallbackRecord){
+ let index=await store.get('personal-ai-providers-index');
+ const map={};
+ if(!Array.isArray(index)){
+  index=fallbackRecord?.provider?[fallbackRecord.provider]:[];
+ }
+ for(const p of index){
+  let rec=await store.get('personal-ai-prov:'+p);
+  if(!rec&&fallbackRecord?.provider===p)rec=fallbackRecord;
+  if(rec&&rec.provider===p){
+   map[p]={configured:true,enabled:rec.enabled===true,provider:p,model:rec.model,...(rec.planType?{planType:rec.planType}:{})};
+  }
+ }
+ if(fallbackRecord?.provider&&!map[fallbackRecord.provider]){
+  map[fallbackRecord.provider]={configured:true,enabled:fallbackRecord.enabled===true,provider:fallbackRecord.provider,model:fallbackRecord.model,...(fallbackRecord.planType?{planType:fallbackRecord.planType}:{})};
+ }
+ return map;
+}
 export async function personalAiStorage(storage,env,{action,uid,settings}){
  if(typeof uid!=='string'||!/^[-\w:]{1,150}$/.test(uid))return Response.json({}, {status:400});
  const key='personal-ai-v1';
  if(action==='personal-ai-remove'){
-  await storage.delete(key);return Response.json(personalPublic(null));
+  const targetProvider=typeof settings?.provider==='string'?settings.provider:null;
+  if(targetProvider){
+   return storage.transaction(async tx=>{
+    await tx.delete('personal-ai-prov:'+targetProvider);
+    let index=(await tx.get('personal-ai-providers-index'))||[];
+    index=Array.isArray(index)?index.filter(p=>p!==targetProvider):[];
+    await tx.put('personal-ai-providers-index',index);
+    const legacy=await tx.get(key);
+    if(legacy?.provider===targetProvider){
+     if(index.length){
+      const nextRec=await tx.get('personal-ai-prov:'+index[0]);
+      if(nextRec){await tx.put(key,nextRec);const providers=await loadAllPersonalProviders(tx,nextRec);return Response.json({...personalPublic(nextRec),providers});}
+     }
+     await tx.delete(key);
+     return Response.json(personalPublic(null));
+    }
+    const providers=await loadAllPersonalProviders(tx,legacy);
+    return Response.json({...personalPublic(legacy),providers});
+   });
+  }
+  return storage.transaction(async tx=>{
+   const index=(await tx.get('personal-ai-providers-index'))||[];
+   if(Array.isArray(index)){for(const p of index)await tx.delete('personal-ai-prov:'+p);}
+   await tx.delete('personal-ai-providers-index');
+   await tx.delete(key);
+   return Response.json(personalPublic(null));
+  });
  }
- if(action==='personal-ai-read'||action==='personal-ai-use'){
+ if(action==='personal-ai-read'){
   const record=await storage.get(key);
-  if(action==='personal-ai-read'||!record?.enabled)return Response.json(personalPublic(record));
+  if(!record)return Response.json(personalPublic(null));
+  const providers=await loadAllPersonalProviders(storage,record);
+  return Response.json({...personalPublic(record),providers});
+ }
+ if(action==='personal-ai-use'){
+  const targetProvider=typeof settings?.provider==='string'&&PERSONAL_PROVIDERS[settings.provider]?settings.provider:null;
+  let record=null;
+  if(targetProvider){
+   record=await storage.get('personal-ai-prov:'+targetProvider);
+   if(!record){
+    const legacy=await storage.get(key);
+    if(legacy?.provider===targetProvider)record=legacy;
+   }
+  }else{
+   record=await storage.get(key);
+  }
+  if(!record?.enabled)return Response.json(personalPublic(record));
   const apiKey=new TextDecoder().decode(await crypto.subtle.decrypt({
    name:'AES-GCM',iv:personalBytes(record.iv),additionalData:personalEncode(uid+':'+record.provider)
   },await personalCipher(env),personalBytes(record.ciphertext)));
@@ -37,21 +97,31 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
  }
  if(action!=='personal-ai-save'||!settings||Object.keys(settings).some(k=>!['provider','model','enabled','apiKey'].includes(k)))return Response.json({}, {status:400});
  const {provider,model,enabled,apiKey}=settings;
- const maxKeyLen=(provider==='chatgpt-cookie'||provider==='muse-cookie')?8192:512;
+ const maxKeyLen=(provider==='chatgpt-cookie'||provider==='muse-cookie')?16384:512;
  if(!Object.hasOwn(PERSONAL_PROVIDERS,provider)||typeof model!=='string'||!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(model)||
   typeof enabled!=='boolean'||provider==='fosta'&&!PERSONAL_FOSTA_MODELS.has(model)||
   apiKey!==undefined&&(typeof apiKey!=='string'||apiKey.length<8||apiKey.length>maxKeyLen||!(provider==='chatgpt-cookie'||provider==='muse-cookie'?/^[ -~]+$/:/^[!-~]+$/).test(apiKey)))return Response.json({}, {status:400});
  const cipher=await personalCipher(env);
+ const inferredPlan=provider==='chatgpt-cookie'?((apiKey?.includes('|')||apiKey?.length>4000||['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free'):undefined;
  return storage.transaction(async tx=>{
-  const previous=await tx.get(key);
-  if(!apiKey&&previous?.provider!==provider)return Response.json({}, {status:400});
-  const record={provider,model,enabled,iv:previous?.iv,ciphertext:previous?.ciphertext};
+  const legacy=await tx.get(key);
+  let previous=await tx.get('personal-ai-prov:'+provider);
+  if(!previous&&legacy?.provider===provider)previous=legacy;
+  if(!apiKey&&!previous?.ciphertext)return Response.json({}, {status:400});
+  const record={provider,model,enabled,iv:previous?.iv,ciphertext:previous?.ciphertext,...(inferredPlan?{planType:inferredPlan}:previous?.planType?{planType:previous.planType}:{})};
   if(apiKey){
    const iv=crypto.getRandomValues(new Uint8Array(12));
    const ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:personalEncode(uid+':'+provider)},cipher,personalEncode(apiKey));
    record.iv=personalB64(iv);record.ciphertext=personalB64(ciphertext);
   }
-  await tx.put(key,record);return Response.json(personalPublic(record));
+  await tx.put('personal-ai-prov:'+provider,record);
+  let index=(await tx.get('personal-ai-providers-index'))||[];
+  if(!Array.isArray(index))index=[];
+  if(!index.includes(provider))index.push(provider);
+  if(legacy?.provider&&!index.includes(legacy.provider))index.push(legacy.provider);
+  await tx.put('personal-ai-providers-index',index);
+  await tx.put(key,record);
+  return Response.json(personalPublic(record));
  });
 }
 export async function personalAiCall(env,uid,action,settings){
