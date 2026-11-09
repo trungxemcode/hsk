@@ -211,3 +211,67 @@ test('personal chat returns plain text and fenced JSON through the authenticated
   }finally{personalReply='{"answer":"你好"}';}
  }
 });
+
+test('personal AI synchronizes for lesson chat, coach review, and wrong answer explanation',async()=>{
+ const uid='sync-ai-tester';
+ const saved=await request(uid,settingsPath,{op:'save',settings:{provider:'fosta',model:'gpt-6-luna:high',enabled:true,apiKey:'fake-fosta-sync-key'}});
+ assert.equal(saved.status,200);
+
+ const callsBefore=calls.length;
+
+ // 1. Lesson chat (giải thích từ vựng trong bài)
+ const lessonChatBody={
+  question:'Từ này dùng thế nào?',
+  hsk:2,
+  lesson:{id:'standard-2-1',title:'Bài 1',words:[],content:{context:'你好'}},
+  history:[]
+ };
+ const lessonChatRes=await request(uid,'/lesson-ask',lessonChatBody);
+ assert.equal(lessonChatRes.status,200);
+ assert.equal((await lessonChatRes.json()).answer,'你好');
+ assert.equal(calls.at(-1).url,'https://codex.fosta.app/v1/chat/completions');
+ assert.equal(calls.at(-1).body.model,'gpt-6-luna');
+ assert.equal(calls.at(-1).body.reasoning_effort,'high');
+
+ // 2. Coach review (chấm / giải thích trắc nghiệm)
+ const coachReviewBody={
+  question:'Giải thích vì sao đúng sai',
+  hsk:2,
+  lesson:{id:'coach-review',title:'Ôn tập HSK 2',words:[],content:{observations:[]}},
+  history:[]
+ };
+ const coachRes=await request(uid,'/lesson-ask',coachReviewBody);
+ assert.equal(coachRes.status,200);
+ assert.equal((await coachRes.json()).answer,'你好');
+ assert.equal(calls.at(-1).url,'https://codex.fosta.app/v1/chat/completions');
+
+ // 3. Wrong answer explanation (giải thích câu sai)
+ const wrongExamBody={
+  question:'Giải thích câu sai này',
+  hsk:2,
+  lesson:{id:'wrong-explain-q1',title:'Giải thích câu sai',words:[],content:{mode:'wrong-answer-explanation'}},
+  history:[]
+ };
+ const wrongRes=await request(uid,'/lesson-ask',wrongExamBody);
+ assert.equal(wrongRes.status,200);
+ assert.equal((await wrongRes.json()).answer,'你好');
+ assert.equal(calls.at(-1).url,'https://codex.fosta.app/v1/chat/completions');
+
+ assert.equal(calls.length,callsBefore+3);
+});
+
+test('personal AI returning plain text for lesson chat is cleanly unwrapped into answer',async()=>{
+ const uid='plain-text-lesson-tester';
+ await request(uid,settingsPath,{op:'save',settings:{provider:'fosta',model:'gpt-6-luna',enabled:true,apiKey:'fake-fosta-key'}});
+ personalReply='Từ "你好" dùng để chào hỏi trang trọng trong tiếng Trung.';
+ try{
+  const res=await request(uid,'/lesson-ask',{
+   question:'Giải thích từ 你好',
+   hsk:1,
+   lesson:{id:'standard-1-1',title:'Bài 1',words:[],content:{}},
+   history:[]
+  });
+  assert.equal(res.status,200);
+  assert.equal((await res.json()).answer,'Từ "你好" dùng để chào hỏi trang trọng trong tiếng Trung.');
+ }finally{personalReply='{"answer":"你好"}';}
+});

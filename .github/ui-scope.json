@@ -1,1 +1,1 @@
-{"request":"Cài đặt và Hỏi đáp AI: chọn các cấp suy luận Fosta Luna, Astra, Sol và nhãn model tương ứng.","excludedRoutes":["account","ai-qa"]}
+{"request":"Đồng bộ provider và model AI riêng đang được chọn cho hỏi đáp bài học, giải thích đáp án và AI chấm, không thay đổi bố cục các trang ngoài phạm vi.","excludedRoutes":["ai-qa","lessons","practice"]}

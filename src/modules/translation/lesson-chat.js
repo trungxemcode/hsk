@@ -23,12 +23,12 @@ async function sendQuestion(question){
  const user=window.HSKAccountDashboard?.user;if(!user){status.textContent='Hãy đăng nhập tài khoản app để hỏi AI.';return;}
  const context=lesson,wireContext=transportContext(context),cacheKey=/^(?:music|reading)-/.test(context.id)?JSON.stringify([user.uid,wireContext,question,history.slice(-8)]):null;
  if(cacheKey&&musicAnswers.has(cacheKey)){message('user',question);const answer=musicAnswers.get(cacheKey);message('assistant',answer);history.push({role:'user',text:question},{role:'assistant',text:answer});history=history.slice(-8);input.value='';status.textContent='';return;}
- const current=serial,controller=new AbortController();pending=controller;send.disabled=true;panel.setAttribute('aria-busy','true');message('user',question);input.value='';status.textContent='AI hỏi đáp bài học đang load…';
+ const current=serial,controller=new AbortController();pending=controller;send.disabled=true;panel.setAttribute('aria-busy','true');message('user',question);input.value='';const activeParams=window.HSKAiProviderPicker?.getActiveAiParams?.();status.textContent=(activeParams?.providerInfo?.label||'AI')+' hỏi đáp bài học đang load…';
  const stopLoading=()=>{if(current===serial)panel.removeAttribute('aria-busy');};
  const timer=setTimeout(()=>controller.abort(),55000);
  try{
   const token=await user.getIdToken();if(current!==serial)return;
-  const response=await fetch(config.endpoint.replace(/\/translate$/,'/lesson-ask'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({question,hsk:context.hsk,lesson:wireContext,history:history.slice(-8)}),signal:controller.signal});
+  const response=await fetch(config.endpoint.replace(/\/translate$/,'/lesson-ask'),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({question,hsk:context.hsk,lesson:wireContext,history:history.slice(-8),...(activeParams?.thinking?{thinking:activeParams.thinking}:{}),...(activeParams?.aiModel?{aiModel:activeParams.aiModel}:{}),...(activeParams?.aiProvider?{aiProvider:activeParams.aiProvider}:{}),...(activeParams?.personalProvider?{personalProvider:activeParams.personalProvider}:{})}),signal:controller.signal});
   const data=await response.json();if(current!==serial)return;
   if(!response.ok)throw Error(response.status===404?'Dịch vụ hỏi đáp bài học chưa được kích hoạt.':data.error||'AI chưa trả lời được. Hãy thử lại.');
   if(typeof data.answer!=='string'||!data.answer.trim()||data.answer.length>5000)throw Error('Câu trả lời chưa đầy đủ. Hãy thử lại.');
