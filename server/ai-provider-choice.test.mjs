@@ -29,6 +29,9 @@ test('describeAiProviders exposes availability without secrets',()=>{
   const plusOut=describeAiProviders({geminiReady:true,sharedCookieReady:true,personal:{configured:true,enabled:true,provider:'chatgpt-cookie',model:'gpt-6',planType:'plus',models:['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6']}});
   assert.equal(plusOut.personal.planType,'plus');
   assert.deepEqual(plusOut.personal.models,['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6']);
+  const museOut=describeAiProviders({geminiReady:true,sharedCookieReady:false,personal:{configured:true,enabled:true,provider:'muse-cookie',model:'muse-spark',models:['muse-spark-fast','muse-spark','muse-spark-thinking']}});
+  assert.equal(museOut.personal.provider,'muse-cookie');
+  assert.deepEqual(museOut.personal.models,['muse-spark-fast','muse-spark','muse-spark-thinking']);
 });
 
 test('extractChatGptPlanType and probeChatGptCookieAccount detect Plus vs Free and models',async()=>{

@@ -67,6 +67,19 @@ test('settings are private by verified UID and FOSTA handles chat without a shar
  assert.equal((await request('alice','/lesson-ask',question)).status,503);
  assert.deepEqual(await (await request('alice',settingsPath,{op:'remove'})).json(),{configured:false,enabled:false});
 });
+
+test('settings save muse-cookie and route /lesson-ask to Muse AI provider',async()=>{
+ const key='Bearer meta-token-secret-123';
+ const saved=await request('musetester',settingsPath,{op:'save',settings:{provider:'muse-cookie',model:'muse-spark',enabled:true,apiKey:key}});
+ assert.equal(saved.status,200);
+ assert.deepEqual(await saved.json(),{configured:true,enabled:true,provider:'muse-cookie',model:'muse-spark'});
+ const response=await request('musetester','/lesson-ask',question);
+ assert.equal(response.status,200);
+ const data=await response.json();
+ assert.equal(data.answer,'你好');
+ assert.match(calls.at(-1).url,/api\.meta\.ai\/v1\/chat\/completions/);
+ assert.equal(calls.at(-1).headers.Authorization,'Bearer meta-token-secret-123');
+});
 test('the provider adapters use their own authentication and fixed endpoints',async()=>{
  const payload={systemInstruction:{parts:[{text:'guide'}]},contents:[{role:'user',parts:[{text:'hi'}]}]};
  for(const [provider,endpoint,header] of [

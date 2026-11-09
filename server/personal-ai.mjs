@@ -1,4 +1,5 @@
 import {chatgptCookieGenerate,probeChatGptCookieAccount} from './chatgpt-cookie.mjs';
+import {museAiGenerate,probeMuseAiAccount,MUSE_DEFAULT_MODELS} from './muse-ai.mjs';
 // Credentials are scoped to an authenticated UID and encrypted before storage.
 const PERSONAL_PROVIDERS={
  openai:'https://api.openai.com/v1/chat/completions',
@@ -6,7 +7,8 @@ const PERSONAL_PROVIDERS={
  deepseek:'https://api.deepseek.com/chat/completions',
  claude:'https://api.anthropic.com/v1/messages',
  gemini:'https://generativelanguage.googleapis.com/v1beta/models/',
- 'chatgpt-cookie':'https://chatgpt.com/backend-api/conversation'
+ 'chatgpt-cookie':'https://chatgpt.com/backend-api/conversation',
+ 'muse-cookie':'https://muse.ai/api/hatch/token'
 };
 const PERSONAL_FOSTA_MODELS=new Set(['gpt-6.1-sol','gpt-6-astra','gpt-6-luna']);
 const personalEncode=value=>new TextEncoder().encode(value);
@@ -35,10 +37,10 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
  }
  if(action!=='personal-ai-save'||!settings||Object.keys(settings).some(k=>!['provider','model','enabled','apiKey'].includes(k)))return Response.json({}, {status:400});
  const {provider,model,enabled,apiKey}=settings;
- const maxKeyLen=provider==='chatgpt-cookie'?8192:512;
+ const maxKeyLen=(provider==='chatgpt-cookie'||provider==='muse-cookie')?8192:512;
  if(!Object.hasOwn(PERSONAL_PROVIDERS,provider)||typeof model!=='string'||!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(model)||
   typeof enabled!=='boolean'||provider==='fosta'&&!PERSONAL_FOSTA_MODELS.has(model)||
-  apiKey!==undefined&&(typeof apiKey!=='string'||apiKey.length<8||apiKey.length>maxKeyLen||!/^[!-~]+$/.test(apiKey)))return Response.json({}, {status:400});
+  apiKey!==undefined&&(typeof apiKey!=='string'||apiKey.length<8||apiKey.length>maxKeyLen||!(provider==='chatgpt-cookie'||provider==='muse-cookie'?/^[ -~]+$/:/^[!-~]+$/).test(apiKey)))return Response.json({}, {status:400});
  const cipher=await personalCipher(env);
  return storage.transaction(async tx=>{
   const previous=await tx.get(key);
@@ -64,6 +66,7 @@ export async function personalAiCall(env,uid,action,settings){
 export async function personalAiGenerate(config,requestBody,fetchFn,signal,options={}){
  const {provider,model,apiKey}=config;
  if(provider==='chatgpt-cookie')return chatgptCookieGenerate(config,requestBody,fetchFn,signal,options);
+ if(provider==='muse-cookie')return museAiGenerate(config,requestBody,fetchFn,signal,options);
  const endpoint=PERSONAL_PROVIDERS[provider];
  if(!endpoint)throw Error('Invalid provider');
  const headers={'Content-Type':'application/json'};
@@ -141,6 +144,9 @@ export async function probePersonalAiCapabilities(personal,{env={},fetchFn=fetch
    }
   }else if(provider==='fosta'){
    value={models:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol']};
+  }else if(provider==='muse-cookie'){
+   const info=await probeMuseAiAccount(apiKey,{fetchFn,signal,now});
+   value={models:info?.models?.length?info.models:MUSE_DEFAULT_MODELS};
   }
  }catch{}
  providerModelsCache.set(cacheKey,{at:now(),value});

@@ -2,7 +2,7 @@
 (()=>{'use strict';
   const PERSONAL=[
     ['claude','Claude'],['deepseek','DeepSeek'],['openai','OpenAI'],
-    ['gemini','Gemini (API riêng)'],['fosta','Fosta'],['chatgpt-cookie','ChatGPT (cookie riêng)']
+    ['gemini','Gemini (API riêng)'],['fosta','Fosta'],['chatgpt-cookie','ChatGPT (cookie riêng)'],['muse-cookie','Muse AI (token riêng)']
   ];
   const DIRECT_ENDPOINTS={
     openai:'https://api.openai.com/v1/chat/completions',
@@ -39,10 +39,10 @@
     'gemini-2.0-flash':'Gemini 2.0 Flash',
     'gpt-6-luna':'gpt-6-luna',
     'gpt-6-astra':'gpt-6-astra',
-    'gpt-6.1-sol':'gpt-6.1-sol'
+    'gpt-6.1-sol':'gpt-6.1-sol','muse-spark-fast':'Muse Spark (Nhanh)','muse-spark':'Muse Spark','muse-spark-thinking':'Muse Spark (Suy luận)','muse-wonder':'Muse Wonder'
   };
   const DEFAULT_PROVIDER_MODELS={
-    fosta:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol'],
+    fosta:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol'],'muse-cookie':['muse-spark-fast','muse-spark','muse-spark-thinking'],
     deepseek:['deepseek-chat','deepseek-reasoner'],
     claude:['claude-3-5-haiku-latest','claude-3-7-sonnet-latest','claude-sonnet-4-20250514'],
     openai:['gpt-4o-mini','gpt-4o','o3-mini','gpt-4.1','gpt-4.1-mini'],
@@ -266,6 +266,7 @@
       'system-gemini':'Gemini hệ thống',
       'system-chatgpt':'ChatGPT hệ thống',
       'chatgpt-cookie':isPlusCookie?'ChatGPT Plus (cookie riêng)':'ChatGPT Thường (cookie riêng)',
+      'muse-cookie':'Muse AI (token riêng)',
       fosta:'Fosta',
       openai:'OpenAI',
       deepseek:'DeepSeek',
