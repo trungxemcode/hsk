@@ -126,6 +126,19 @@ test('multi-provider personal AI preserves independent credentials and routes dy
  assert.equal(afterData.providers['muse-cookie']?.configured,true);
 });
 
+test('fosta reasoning effort splits model and passes reasoning_effort parameter',async()=>{
+ const uid='fosta-effort-user';
+ const key='fosta-effort-test-key';
+ const saved=await request(uid,settingsPath,{op:'save',settings:{provider:'fosta',model:'gpt-6-luna:xhigh',enabled:true,apiKey:key}});
+ assert.equal(saved.status,200);
+ const testEnv={...env,ADMIN_UIDS:uid};
+ const reply=await request(uid,'/lesson-ask',{...question,aiProvider:'personal:fosta',aiModel:'gpt-6-luna:xhigh'},testEnv);
+ assert.equal(reply.status,200);
+ assert.equal(calls.at(-1).url,'https://codex.fosta.app/v1/chat/completions');
+ assert.equal(calls.at(-1).body.model,'gpt-6-luna');
+ assert.equal(calls.at(-1).body.reasoning_effort,'xhigh');
+});
+
 test('the provider adapters use their own authentication and fixed endpoints',async()=>{
  const payload={systemInstruction:{parts:[{text:'guide'}]},contents:[{role:'user',parts:[{text:'hi'}]}]};
  for(const [provider,endpoint,header] of [

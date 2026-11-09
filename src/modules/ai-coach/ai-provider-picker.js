@@ -37,9 +37,20 @@
     'gemini-2.5-flash':'Gemini 2.5 Flash',
     'gemini-2.5-pro':'Gemini 2.5 Pro',
     'gemini-2.0-flash':'Gemini 2.0 Flash',
-    'gpt-6-luna':'gpt-6-luna',
-    'gpt-6-astra':'gpt-6-astra',
-    'gpt-6.1-sol':'gpt-6.1-sol','muse-spark-fast':'Muse Spark (Nhanh)','muse-spark':'Muse Spark','muse-spark-thinking':'Muse Spark (Suy luận)','muse-wonder':'Muse Wonder'
+    'gpt-6-luna:low':'Luna (Nhẹ)',
+    'gpt-6-luna:medium':'Luna (Trung bình)',
+    'gpt-6-luna:high':'Luna (Nâng cao)',
+    'gpt-6-luna:xhigh':'Luna (Chuyên sâu)',
+    'gpt-6-luna':'Luna (gpt-6-luna)',
+    'gpt-6-astra':'Astra (gpt-6-astra)',
+    'gpt-6-astra:low':'Astra (Nhẹ)',
+    'gpt-6-astra:medium':'Astra (Trung bình)',
+    'gpt-6-astra:high':'Astra (Nâng cao)',
+    'gpt-6-astra:xhigh':'Astra (Chuyên sâu)',
+    'gpt-6.1-sol':'Sol (gpt-6.1-sol)',
+    'gpt-6.1-sol:low':'Sol (Nhẹ)',
+    'gpt-6.1-sol:medium':'Sol (Trung bình)',
+    'gpt-6.1-sol:high':'Sol (Nâng cao)','muse-spark-fast':'Muse Spark (Nhanh)','muse-spark':'Muse Spark','muse-spark-thinking':'Muse Spark (Suy luận)','muse-wonder':'Muse Wonder'
   };
   const DEFAULT_PROVIDER_MODELS={
     fosta:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol'],'muse-cookie':['muse-spark-fast','muse-spark','muse-spark-thinking'],
@@ -201,6 +212,7 @@
   function closeAll(){if(openPicker){openPicker.close();openPicker=null;}}
 
   function buildProviderModelOptions(kind,p){
+    const savedModel=p?.provider===kind&&typeof p.model==='string'?p.model.trim():'';
     if(kind==='system-gemini'){
       return [
         {value:'low',label:'Thấp',model:'gemini-3.1-flash-lite',tier:'low'},
@@ -214,7 +226,36 @@
         {value:'high',label:'Suy luận',model:'o3-mini',tier:'high'}
       ];
     }
-    const savedModel=p?.provider===kind&&typeof p.model==='string'?p.model.trim():'';
+    if(kind==='fosta'){
+      const base=savedModel||'gpt-6-luna';
+      if(base.startsWith('gpt-6-astra')){
+        return [
+          {value:'low',label:'Astra (Nhẹ)',model:'gpt-6-astra:low',tier:'low'},
+          {value:'medium',label:'Astra (Trung bình)',model:'gpt-6-astra:medium',tier:'medium'},
+          {value:'high',label:'Astra (Nâng cao)',model:'gpt-6-astra:high',tier:'high'},
+          {value:'xhigh',label:'Astra (Chuyên sâu)',model:'gpt-6-astra:xhigh',tier:'high'},
+          {value:'model:gpt-6-luna',label:'Luna (gpt-6-luna)',model:'gpt-6-luna',tier:'low'},
+          {value:'model:gpt-6.1-sol',label:'Sol (gpt-6.1-sol)',model:'gpt-6.1-sol',tier:'medium'}
+        ];
+      }
+      if(base.startsWith('gpt-6.1-sol')||base.startsWith('gpt-6-sol')){
+        return [
+          {value:'low',label:'Sol (Nhẹ)',model:'gpt-6.1-sol:low',tier:'low'},
+          {value:'medium',label:'Sol (Trung bình)',model:'gpt-6.1-sol:medium',tier:'medium'},
+          {value:'high',label:'Sol (Nâng cao)',model:'gpt-6.1-sol:high',tier:'high'},
+          {value:'model:gpt-6-luna',label:'Luna (gpt-6-luna)',model:'gpt-6-luna',tier:'low'},
+          {value:'model:gpt-6-astra',label:'Astra (gpt-6-astra)',model:'gpt-6-astra',tier:'high'}
+        ];
+      }
+      return [
+        {value:'low',label:'Luna (Nhẹ)',model:'gpt-6-luna:low',tier:'low'},
+        {value:'medium',label:'Luna (Trung bình)',model:'gpt-6-luna:medium',tier:'medium'},
+        {value:'high',label:'Luna (Nâng cao)',model:'gpt-6-luna:high',tier:'high'},
+        {value:'xhigh',label:'Luna (Chuyên sâu)',model:'gpt-6-luna:xhigh',tier:'high'},
+        {value:'model:gpt-6.1-sol',label:'Sol (gpt-6.1-sol)',model:'gpt-6.1-sol',tier:'medium'},
+        {value:'model:gpt-6-astra',label:'Astra (gpt-6-astra)',model:'gpt-6-astra',tier:'high'}
+      ];
+    }
     if(kind==='chatgpt-cookie'){
       const isPlus=p?.planType?p.planType!=='free':['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(savedModel);
       if(!isPlus){
@@ -496,8 +537,17 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
       body={systemInstruction:{parts:[{text:instruction}]},contents,generationConfig:{temperature:0.25,maxOutputTokens:1800,responseMimeType:'application/json',responseSchema:DIRECT_SCHEMA}};
     }else{
       headers.Authorization='Bearer '+cred.apiKey;
+      let fostaModel=chosenModel,fostaEffort=undefined;
+      if(cred.provider==='fosta'){
+        if(chosenModel.includes(':')){
+          const parts=chosenModel.split(':');
+          fostaModel=parts[0];fostaEffort=parts[1];
+        }else if(['low','medium','high','xhigh'].includes(thinking)){
+          fostaEffort=thinking;
+        }
+      }
       const messages=[{role:'system',content:instruction},...(Array.isArray(history)?history:[]).map(m=>({role:m.role==='assistant'?'assistant':'user',content:String(m.text||'')})),{role:'user',content:String(question||'').trim()}];
-      body={model:chosenModel,messages,...(cred.provider==='fosta'?{stream:false}:{})};
+      body={model:fostaModel,messages,...(cred.provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{})};
     }
     let response;
     try{
