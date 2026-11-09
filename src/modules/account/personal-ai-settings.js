@@ -9,14 +9,15 @@
  let stored=null,busy=false,owner=null,requestId=0;
  const account=()=>window.HSKAccountDashboard?.user;
  function describe(){
-  const fosta=provider.value==='fosta',cookie=provider.value==='chatgpt-cookie';
-  key.maxLength=cookie?8192:512;
+  const fosta=provider.value==='fosta',cookie=provider.value==='chatgpt-cookie',muse=provider.value==='muse-cookie';
+  key.maxLength=(cookie||muse)?8192:512;
   fostaModel.hidden=!fosta;fostaModel.disabled=busy||!fosta;
   model.hidden=fosta;model.disabled=busy||fosta;model.required=!fosta;
   if(cookie&&!model.value.trim())model.value='gpt-6';
+  if(muse&&!model.value.trim())model.value='muse-spark';
   modelLabel.htmlFor=fosta?fostaModel.id:model.id;
-  $('personalAiEndpoint').textContent=fosta?'Base URL: https://codex.fosta.app/v1':cookie?'Dán giá trị cookie phiên ChatGPT. Nếu cookie tách thành .0 và .1, dán phần .0 rồi dấu | rồi phần .1, không thêm khoảng trắng.':'Nhập tên model chính xác do nhà cung cấp cấp.';
-  key.placeholder=stored?.provider===provider.value?(cookie?'Để trống để giữ cookie đã lưu':'Để trống để giữ key đã lưu'):(cookie?'Dán __Secure-next-auth.session-token của bạn':'Nhập API key của bạn');
+  $('personalAiEndpoint').textContent=fosta?'Base URL: https://codex.fosta.app/v1':cookie?'Dán giá trị cookie phiên ChatGPT. Nếu cookie tách thành .0 và .1, dán phần .0 rồi dấu | rồi phần .1, không thêm khoảng trắng.':muse?'Dán token/cookie phiên Muse AI (cookie hatch_sess từ muse.ai, hoặc Bearer token api.meta.ai).':'Nhập tên model chính xác do nhà cung cấp cấp.';
+  key.placeholder=stored?.provider===provider.value?((cookie||muse)?'Để trống để giữ token/cookie đã lưu':'Để trống để giữ key đã lưu'):(cookie?'Dán __Secure-next-auth.session-token của bạn':muse?'Dán hatch_sess hoặc Bearer token Muse AI của bạn':'Nhập API key của bạn');
  }
  function apply(data){
   stored=data.configured?data:null;
@@ -57,7 +58,7 @@
   }catch(error){if(id===requestId)status.textContent=error.message||'Chưa kết nối được máy chủ.';}
   finally{if(id===requestId)lock(false);}
  }
- provider.onchange=()=>{model.value=stored?.provider===provider.value?stored.model:(provider.value==='chatgpt-cookie'?'gpt-6':'');key.value='';describe();};
+ provider.onchange=()=>{model.value=stored?.provider===provider.value?stored.model:(provider.value==='chatgpt-cookie'?'gpt-6':provider.value==='muse-cookie'?'muse-spark':'');key.value='';describe();};
  load.onclick=()=>request('read');
  form.onsubmit=event=>{
   event.preventDefault();

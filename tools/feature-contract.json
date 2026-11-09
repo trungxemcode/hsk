@@ -106,6 +106,15 @@
       ]
     },
     {
+      "id": "ai-qa-muse-ai",
+      "name": "Tích hợp Muse AI (Meta Muse Token / Web Cookie và Bearer API) cho Hỏi đáp AI",
+      "checks": [
+        {"kind": "contains", "file": "index.html", "value": "muse-cookie"},
+        {"kind": "file", "file": "server/muse-ai.mjs", "value": ""},
+        {"kind": "file", "file": "server/muse-ai.test.mjs", "value": ""}
+      ]
+    },
+    {
       "id": "navigation-home",
       "name": "Trang tổng quan",
       "checks": [
