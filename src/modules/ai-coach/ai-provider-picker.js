@@ -493,6 +493,7 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
       if(!parsed)throw Error('AI trả lời chưa đúng định dạng. Hãy thử lại.');
     }
     if(typeof parsed==='string')parsed={answer:parsed};
+    parsed=window.HSKAIQACore?.unwrapAiQaPayload?.(parsed)||parsed;
     if(parsed?.error==='OUT_OF_SCOPE')throw Error('Yêu cầu của bạn nằm ngoài phạm vi học tiếng Trung HSK!');
     const answer=typeof parsed?.answer==='string'?parsed.answer.trim():'';
     if(!answer||answer.length>5000)throw Error('Gia sư AI trả về dữ liệu chưa đầy đủ. Hãy thử lại.');

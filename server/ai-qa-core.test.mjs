@@ -49,3 +49,31 @@ test('local guardrail accepts ordinary questions and blocks instruction override
  assert.match(wrapped,/<student_input>\nPhân biệt 二 và 两\n<\/student_input>/);
  assert.match(wrapped,/lặp vô ích/);
 });
+
+test('unwrapAiQaPayload and unwrapAiQaText unwrap <escape> tags, nested answer.content objects, and truncated JSON',()=>{
+ const rawEscapePayload=`<escape>{
+  "primaryNodeKey": "topic:m-mw7zah08-1w4fm2z",
+  "nodeLabel": "Các cách chào hỏi tiếng Trung",
+  "coreRuleSummary": "你好 dùng khi giao tiếp thông thường, thân mật; 您好 dùng khi cần thể hiện sự lịch sự và tôn trọng.",
+  "answer": {
+    "status": "answered",
+    "content": "Cả 你好 và 您好 đều có nghĩa là “Xin chào”, nhưng khác nhau về mức độ lịch sự:\\n\\n1. 你好 (nǐ hǎo) – Xin chào.\\n2. 您好 (nín hǎo) – Xin chào (lịch sự)."
+  },
+  "explanationStrategyUsed": "So sánh trực tiếp hai từ"
+}</escape>`;
+ const unwrapped=C.unwrapAiQaPayload({answer:rawEscapePayload});
+ assert.equal(unwrapped.primaryNodeKey,'topic:m-mw7zah08-1w4fm2z');
+ assert.equal(unwrapped.nodeLabel,'Các cách chào hỏi tiếng Trung');
+ assert.match(unwrapped.answer,/^Cả 你好 và 您好 đều có nghĩa là/);
+ assert.equal(unwrapped.answer.includes('<escape>'),false);
+ assert.equal(unwrapped.answer.includes('"primaryNodeKey"'),false);
+
+ // Also works when unwrapped directly as text (e.g., from persisted history)
+ const cleanText=C.unwrapAiQaText(rawEscapePayload);
+ assert.match(cleanText,/^Cả 你好 và 您好 đều có nghĩa là/);
+ assert.equal(cleanText.includes('<escape>'),false);
+
+ // Works when JSON is truncated before closing braces
+ const truncated=`<escape>{\n  "primaryNodeKey": "topic:greeting",\n  "answer": {\n    "status": "answered",\n    "content": "Giải thích ngắn gọn về 你好 và 您好."\n  },\n  "explanationStrategyUsed": "So sánh`;
+ assert.equal(C.unwrapAiQaText(truncated),'Giải thích ngắn gọn về 你好 và 您好.');
+});

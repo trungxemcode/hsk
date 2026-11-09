@@ -133,5 +133,124 @@
   const mistakes=read(store,'hsk-flashcards-mistakes-v1',{}),entries=Array.isArray(mistakes?.entries)?mistakes.entries:[],open=entries.filter(x=>x&&!x.resolved),topMistakes=open.sort((a,b)=>(Number(b.wrongCount)||0)-(Number(a.wrongCount)||0)).slice(0,5).map(x=>({wrongCount:Number(x.wrongCount)||0,lastWrong:Number(x.lastWrong)||0,direction:String(x.snapshot?.direction||'')}));
   return {version:1,generatedAt:now,targetHsk:level,activity:{studyDaysLast30,streak,hours:Array.isArray(study?.hours)?study.hours.map(x=>Number(x)||0).slice(0,24):[]},vocabulary:{known,total:pool.length,percent:pool.length?Math.round(known*100/pool.length):null},practice:{attempts:adaptive.attempts,correct:adaptive.correct,wrong:adaptive.wrong,accuracy:adaptive.accuracy===null?null:Number(adaptive.accuracy.toFixed(4)),activeDays:adaptive.activeDays},mistakes:{open:open.length,total:entries.length,top:topMistakes},masteryBoundary:boundary,plan:plan?{target:Number(plan.target)||level,minutes:Number(plan.minutes)||0,days:Number(plan.days)||0,remaining:Number(plan.total||0)-Number(plan.paceLearned||0)}:null,coachMastery:root.HSKCoachProfile?.buildMasteryProfilePayload?.(profile,level)||null};
  }
- const api={MASTERY_BOUNDARY,containsChinese,tokenizeMixedZhVi,chunkDocumentText,bm25RetrieveChunks,validateQaInput,validateProjectDocument,wrapSandwichPrompt,aggregateAdaptiveStats,masteryBoundary,buildLearningSnapshot};root.HSKAIQACore=api;if(typeof module==='object'&&module.exports)module.exports=api;
+ function repairJsonControlChars(str){
+  let inStr=false,esc=false,out='';
+  for(let i=0;i<str.length;i++){
+   const ch=str[i];
+   if(inStr){
+    if(esc){esc=false;out+=ch;}
+    else if(ch==='\\'){esc=true;out+=ch;}
+    else if(ch==='"'){inStr=false;out+=ch;}
+    else if(ch==='\n')out+='\\n';
+    else if(ch==='\r')out+='';
+    else if(ch==='\t')out+='\\t';
+    else out+=ch;
+   }else{
+    if(ch==='"')inStr=true;
+    out+=ch;
+   }
+  }
+  return out;
+ }
+ function parseJsonLoose(raw){
+  if(typeof raw!=='string')return null;
+  let cleaned=raw.replace(/<\/?escape>/gi,'').trim();
+  const fenced=cleaned.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+  if(fenced)cleaned=fenced[1].replace(/<\/?escape>/gi,'').trim();
+  const first=cleaned.indexOf('{'),last=cleaned.lastIndexOf('}');
+  const candidates=[cleaned];
+  if(first!==-1&&last>first)candidates.push(cleaned.slice(first,last+1));
+  for(const cand of candidates){
+   try{const p=JSON.parse(cand);if(p&&typeof p==='object')return p;}
+   catch{try{const p2=JSON.parse(repairJsonControlChars(cand));if(p2&&typeof p2==='object')return p2;}catch{}}
+  }
+  return null;
+ }
+ function regexFallbackAnswer(str){
+  for(const key of ['content','answer_vi','answer','explanation','text']){
+   const re=new RegExp(`"${key}"\\s*:\\s*"((?:\\\\.|[^"\\\\])*)(?:"|$)`,'s');
+   const m=str.match(re);
+   if(m&&m[1]&&m[1].trim().length>3){
+    return m[1].replace(/\\n/g,'\n').replace(/\\r/g,'').replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\\\/g,'\\').trim();
+   }
+  }
+  return '';
+ }
+ function extractAnswerString(val,depth=0){
+  if(depth>4||val==null)return '';
+  if(typeof val==='string'){
+   const trimmed=val.replace(/<\/?escape>/gi,'').trim();
+   if((trimmed.startsWith('{')||trimmed.startsWith('```'))&&/"(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)"/.test(trimmed)){
+    const inner=unwrapAiQaPayload(trimmed,depth+1);
+    if(inner&&typeof inner.answer==='string'&&inner.answer.trim())return inner.answer.trim();
+   }
+   return trimmed;
+  }
+  if(Array.isArray(val))return val.map(x=>extractAnswerString(x,depth+1)).filter(Boolean).join('\n\n');
+  if(typeof val==='object'){
+   for(const k of ['content','text','answer','answer_vi','explanation','message','reply','response','body','markdown','value','summary']){
+    if(val[k]!==undefined){const s=extractAnswerString(val[k],depth+1);if(s)return s;}
+   }
+   const skip=new Set(['status','type','role','id','mode','primaryNodeKey','nodeKey','nodeLabel','coreRuleSummary','explanationStrategyUsed','code','error']);
+   const parts=[];
+   for(const [k,v] of Object.entries(val)){
+    if(!skip.has(k)&&typeof v==='string'&&v.trim().length>2)parts.push(v.trim());
+   }
+   if(parts.length)return parts.join('\n\n');
+  }
+  return '';
+ }
+ function unwrapAiQaPayload(input,depth=0){
+  if(depth>4||!input)return null;
+  if(typeof input==='string'){
+   const stripped=input.replace(/<\/?escape>/gi,'').trim();
+   const parsed=parseJsonLoose(stripped);
+   if(parsed)return unwrapAiQaPayload(parsed,depth+1);
+   if(/^\s*\{[\s\S]*"(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)"/.test(stripped)){
+    const fallback=regexFallbackAnswer(stripped);
+    if(fallback)return {answer:fallback};
+   }
+   return {answer:stripped};
+  }
+  if(typeof input==='object'){
+   let base={...input};
+   if(typeof base.answer==='string'){
+    const trimmed=base.answer.replace(/<\/?escape>/gi,'').trim();
+    if((trimmed.startsWith('{')||trimmed.startsWith('```'))&&/"(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)"/.test(trimmed)){
+     const inner=unwrapAiQaPayload(trimmed,depth+1);
+     if(inner&&typeof inner==='object'){
+      base={...inner,...base,answer:inner.answer||base.answer};
+      for(const k of ['primaryNodeKey','nodeLabel','coreRuleSummary','explanationStrategyUsed','optionalMicroCheck','suggestedQuestions','memoryCandidates']){
+       if(inner[k]&&(!base[k]||(Array.isArray(base[k])&&!base[k].length)))base[k]=inner[k];
+      }
+     }
+    }
+   }
+   let ans=extractAnswerString(base.answer,depth+1)||extractAnswerString(base.answer_vi,depth+1)||extractAnswerString(base.content,depth+1)||extractAnswerString(base.text,depth+1)||extractAnswerString(base.reply,depth+1)||extractAnswerString(base.response,depth+1)||extractAnswerString(base.explanation,depth+1)||extractAnswerString(base.coreRuleSummary,depth+1);
+   if(typeof base.cited_from_file==='string'&&base.cited_from_file.trim()&&ans&&!ans.includes(base.cited_from_file.trim())){
+    ans+=`\n\nTrích dẫn tài liệu: ${base.cited_from_file.trim()}`;
+   }
+   if(Array.isArray(base.examples)&&base.examples.length&&ans){
+    const exLines=base.examples.slice(0,3).map(ex=>{
+     if(!ex||typeof ex!=='object')return '';
+     const zh=String(ex.zh||'').trim(),py=String(ex.pinyin||'').trim(),vi=String(ex.vi||'').trim();
+     return zh?`- **${zh}**${py?` (${py})`:''}${vi?`: ${vi}`:''}`:'';
+    }).filter(Boolean);
+    if(exLines.length)ans+='\n\nVí dụ:\n'+exLines.join('\n');
+   }
+   return {...base,answer:ans};
+  }
+  return null;
+ }
+ function unwrapAiQaText(text){
+  if(typeof text!=='string')return '';
+  const trimmed=text.trim();
+  if(!trimmed)return '';
+  if(/<\/?escape>/i.test(trimmed)||((trimmed.startsWith('{')||trimmed.startsWith('```'))&&/"(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)"/.test(trimmed))){
+   const res=unwrapAiQaPayload(trimmed);
+   if(res&&typeof res.answer==='string'&&res.answer.trim())return res.answer.trim();
+  }
+  return trimmed.replace(/<\/?escape>/gi,'').trim();
+ }
+ const api={MASTERY_BOUNDARY,containsChinese,tokenizeMixedZhVi,chunkDocumentText,bm25RetrieveChunks,validateQaInput,validateProjectDocument,wrapSandwichPrompt,aggregateAdaptiveStats,masteryBoundary,buildLearningSnapshot,unwrapAiQaPayload,unwrapAiQaText};root.HSKAIQACore=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window==='object'?window:globalThis);
