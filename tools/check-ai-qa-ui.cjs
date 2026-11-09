@@ -53,6 +53,19 @@ await page.route('https://ai.test/ai-providers',route=>route.fulfill({json:{syst
   assert.equal(await thinking.getAttribute('aria-label'),'Chọn mức độ mạnh hoặc model cho Claude');
   assert.equal(await thinking.locator('optgroup').count(),0,'danh sách model phải phẳng, không chia optgroup trùng lặp');
   assert.equal(await thinking.locator('option[data-model="claude-sonnet"]').count(),1);
+  const providerOptionsCheck=await page.evaluate(()=>{
+    const p=window.HSKAiProviderPicker;
+    return {
+      gemini:p._buildOptions('system-gemini').map(o=>o.label),
+      chatgptSys:p._buildOptions('system-chatgpt').map(o=>o.label),
+      chatgptFree:p._buildOptions('chatgpt-cookie',{planType:'free'}).map(o=>o.label),
+      chatgptPlus:p._buildOptions('chatgpt-cookie',{planType:'plus'}).map(o=>o.label)
+    };
+  });
+  assert.deepEqual(providerOptionsCheck.gemini,['Thấp','Trung bình','Cao']);
+  assert.deepEqual(providerOptionsCheck.chatgptSys,['Bình thường','Suy luận']);
+  assert.deepEqual(providerOptionsCheck.chatgptFree,['Bình thường','Suy luận']);
+  assert.deepEqual(providerOptionsCheck.chatgptPlus,['GPT-6 (Tức thì)','GPT-6 (Cân bằng)','GPT-6 (Suy luận)','GPT-5.6 Sol']);
   if(width===390){
     for(const [mobileWidth,mobileHeight] of [[320,640],[390,844],[430,932]]){
       await page.setViewportSize({width:mobileWidth,height:mobileHeight});
@@ -522,7 +535,7 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   await page.locator('#personalAiLoad').click();
   await page.locator('#personalAiForm').waitFor({state:'visible'});
   await page.locator('#personalAiProvider').selectOption('chatgpt-cookie');
-  assert.equal(await page.locator('#personalAiModel').inputValue(),'gpt-4o-mini');
+  assert.equal(await page.locator('#personalAiModel').inputValue(),'gpt-6');
   assert.match(await page.locator('#personalAiEndpoint').textContent(),/cookie tách thành \.0 và \.1.*dấu \|/);
   await page.locator('#personalAiProvider').selectOption('fosta');
   await page.locator('#personalAiFostaModel').selectOption('gpt-6-luna');
