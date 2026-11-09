@@ -954,8 +954,8 @@ strong .qa-hanzi,
   font-style:italic;
   font-weight:500;
   letter-spacing:0.02em;
-  color:var(--accent-dark,#4338ca);
+  color:var(--accent-dark);
 }
 html[data-theme=dark] .qa-pinyin{
-  color:var(--accent-light,#a5b4fc);
+  color:var(--accent-light);
 }
