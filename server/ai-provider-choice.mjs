@@ -24,7 +24,7 @@ export function describeAiProviders({geminiReady=false,sharedCookieReady=false,p
       configured,
       enabled:configured&&personal?.enabled===true,
       provider:configured&&PERSONAL_PROVIDER_IDS.includes(personal?.provider)?personal.provider:null,
-      model:configured&&typeof personal?.model==='string'?personal.model.slice(0,100):null
+      model:configured&&typeof personal?.model==='string'?personal.model.slice(0,100):null,...(configured&&typeof personal?.planType==='string'?{planType:personal.planType}:{}),...(configured&&Array.isArray(personal?.models)&&personal.models.length?{models:personal.models.slice(0,12)}:{})
     }
   };
 }

@@ -121,6 +121,31 @@ def parse_session_cookies(raw_token: str) -> dict[str, str]:
     }
 
 
+def extract_plan_type(data: dict) -> str:
+    """Phân biệt tài khoản ChatGPT Plus/Pro/Team và Thường (Free) từ phản hồi session hoặc JWT."""
+    if not isinstance(data, dict):
+        return "free"
+    raw_plan = str(
+        (data.get("account") or {}).get("planType")
+        or ((data.get("accounts") or {}).get("default") or {}).get("entitlement", {}).get("subscription_plan")
+        or ""
+    ).lower()
+    if not raw_plan and isinstance(data.get("accessToken"), str):
+        parts = data["accessToken"].split(".")
+        if len(parts) >= 2:
+            try:
+                pad = parts[1] + "=" * (-len(parts[1]) % 4)
+                claims = json.loads(base64.urlsafe_b64decode(pad.encode("ascii")).decode("utf-8"))
+                raw_plan = str(
+                    (claims.get("https://api.openai.com/auth") or {}).get("chatgpt_plan_type") or ""
+                ).lower()
+            except Exception:
+                raw_plan = ""
+    if any(raw_plan.startswith(p) for p in ("plus", "pro", "team", "enterprise", "edu", "chatgptplus")):
+        return "plus"
+    return "free"
+
+
 class ChatGPTSessionManager:
     def __init__(self, session_token: str, base_url: str = "https://chatgpt.com"):
         self.session_token = (session_token or "").strip()
@@ -129,6 +154,8 @@ class ChatGPTSessionManager:
         self.base_url = base_url.rstrip("/")
         self.cookies: dict[str, str] = {}
         self.device_id: str = str(uuid.uuid4())
+        self.plan_type: str = "free"
+        self.available_models: list[str] = []
 
     def get_cookies(self) -> dict[str, str]:
         if not self.cookies:
@@ -202,9 +229,41 @@ class ChatGPTSessionManager:
                 raise ChatGPTUpstreamError("session", 401)
 
             self.access_token = data["accessToken"]
+            self.plan_type = extract_plan_type(data)
             # Lưu cache Access Token trong 1 giờ (3600 giây)
             self.token_expires_at = time.time() + 3600
             return self.access_token
+
+    async def get_account_info(self) -> dict:
+        """Trả về gói tài khoản (plus/free) và danh sách model khả dụng của Cookie."""
+        access_token = await self.get_valid_access_token()
+        if AsyncSession is not None and not self.available_models:
+            try:
+                async with AsyncSession(impersonate="chrome120", cookies=self.get_cookies()) as session:
+                    res = await session.get(
+                        f"{self.base_url}/backend-api/models",
+                        headers=self._get_headers(include_auth=True, access_token=access_token),
+                        timeout=15,
+                        allow_redirects=False,
+                    )
+                    self.update_cookies(getattr(session, "cookies", None))
+                    if res.status_code == 200:
+                        items = (res.json() or {}).get("models") or []
+                        slugs = [
+                            str(m.get("slug")).strip()
+                            for m in items
+                            if isinstance(m, dict) and isinstance(m.get("slug"), str) and m.get("slug").strip()
+                        ]
+                        if slugs:
+                            self.available_models = slugs[:12]
+                            if any(s in slugs for s in ("gpt-4o", "gpt-4-1", "o4-mini", "gpt-4.5")):
+                                self.plan_type = "plus"
+            except Exception:
+                pass
+        return {
+            "plan_type": self.plan_type,
+            "models": self.available_models,
+        }
 
     async def get_sentinel_headers(self, session, access_token: str) -> dict[str, str]:
         """Lấy OpenAI-Sentinel-Chat-Requirements-Token và giải Proof-of-Work trước khi gửi tin nhắn."""

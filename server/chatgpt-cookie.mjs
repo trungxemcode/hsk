@@ -404,7 +404,7 @@ export class ChatGPTSessionManager{
    err.code='CHATGPT_SESSION_NO_TOKEN';
    throw err;
   }
-  this.accessToken=data.accessToken.trim();
+  this.accessToken=data.accessToken.trim();this.planType=extractChatGptPlanType(data);
   this.tokenExpiresAt=nowSec+3600;
   return this.accessToken;
  }
@@ -638,3 +638,68 @@ export async function chatgptCookieGenerate(config,requestBody,fetchFn=fetch,sig
 }
 
 export {sharedGuardrail,sharedMemoryManager};
+
+const cookieAccountCache=new Map();
+export function extractChatGptPlanType(data){
+ if(!data||typeof data!=='object')return 'free';
+ let raw=String(data?.account?.planType||data?.accounts?.default?.entitlement?.subscription_plan||'').toLowerCase();
+ if(!raw&&typeof data.accessToken==='string'){
+  const part=data.accessToken.split('.')[1];
+  if(part){
+   try{
+    const claims=JSON.parse(atob(part.replace(/-/g,'+').replace(/_/g,'/')));
+    raw=String(claims?.['https://api.openai.com/auth']?.chatgpt_plan_type||'').toLowerCase();
+   }catch{}
+  }
+ }
+ return /^(plus|pro|team|enterprise|edu|chatgptplus)/.test(raw)?'plus':'free';
+}
+export async function probeChatGptCookieAccount(rawToken,{env={},fetchFn=fetch,signal,now=()=>Date.now()}={}){
+ const token=String(rawToken||'').trim();
+ if(!token)return null;
+ const cacheKey=`${token.slice(0,24)}:${token.length}:${token.slice(-24)}`;
+ const cached=cookieAccountCache.get(cacheKey);
+ if(cached&&now()-cached.at<1800000)return cached.info;
+ const bridgeUrl=String(env?.CHATGPT_COOKIE_BRIDGE_URL||'').trim();
+ const bridgeKey=String(env?.CHATGPT_COOKIE_BRIDGE_KEY||'').trim();
+ if(bridgeUrl&&bridgeKey){
+  try{
+   const endpoint=new URL('/api/hsk/session-info',bridgeUrl);
+   if(endpoint.protocol==='https:'){
+    const res=await fetchFn(endpoint,{method:'POST',headers:{'Content-Type':'application/json','X-HSK-Bridge-Key':bridgeKey,'X-ChatGPT-Session-Token':token},body:'{}',signal,redirect:'manual'});
+    if(res.ok){
+     const data=await res.json().catch(()=>null);
+     if(data&&typeof data==='object'){
+      const info={planType:data.plan_type==='plus'?'plus':'free',models:Array.isArray(data.models)?data.models.filter(m=>typeof m==='string').slice(0,12):[]};
+      cookieAccountCache.set(cacheKey,{at:now(),info});
+      return info;
+     }
+    }
+   }
+  }catch{}
+ }
+ try{
+  const client=getOrCreateCookieClient(token,{baseUrl:env?.CHATGPT_BASE_URL||CHATGPT_BASE_URL,now});
+  if(!client.sm.planType&&!bridgeUrl)await client.sm.getValidAccessToken(fetchFn,signal);
+  if(!client.sm.availableModels&&!bridgeUrl&&client.sm.accessToken){
+   try{
+    const mRes=await fetchFn(`${client.sm.baseUrl}/backend-api/models`,{method:'GET',headers:client.sm.getHeaders(true),signal,redirect:'manual'});
+    if(mRes.ok){
+     const mData=await mRes.json().catch(()=>null);
+     const slugs=[];
+     for(const item of Array.isArray(mData?.models)?mData.models:[]){
+      const slug=typeof item?.slug==='string'?item.slug.trim():'';
+      if(slug&&!slugs.includes(slug))slugs.push(slug);
+     }
+     if(slugs.length)client.sm.availableModels=slugs;
+    }
+   }catch{}
+  }
+  if(client.sm.planType){
+   const info={planType:client.sm.planType,models:client.sm.availableModels||[]};
+   cookieAccountCache.set(cacheKey,{at:now(),info});
+   return info;
+  }
+ }catch{}
+ return null;
+}

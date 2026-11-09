@@ -225,3 +225,24 @@ async def stateless_cookie_bridge(
         raise HTTPException(status_code=400, detail="Dữ liệu phiên ChatGPT không hợp lệ.")
     except Exception:
         raise HTTPException(status_code=502, detail="Bridge chưa nhận được phản hồi ChatGPT.")
+
+
+@app.post("/api/hsk/session-info")
+@bridge_app.post("/api/hsk/session-info")
+async def cookie_session_info(
+    x_hsk_bridge_key: str = Header(default=""),
+    x_chatgpt_session_token: str = Header(default="")
+):
+    key = os.getenv("CHATGPT_COOKIE_BRIDGE_KEY", "")
+    if not key or not compare_digest(key.encode(), x_hsk_bridge_key.encode()):
+        raise HTTPException(status_code=401, detail="Bridge authentication failed.")
+    token = x_chatgpt_session_token.strip()
+    if not token:
+        raise HTTPException(status_code=400, detail="Thiếu cookie ChatGPT.")
+    try:
+        mgr = chat_client._get_session_manager(token)
+        return await mgr.get_account_info()
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Dữ liệu phiên ChatGPT không hợp lệ.")
+    except Exception:
+        raise HTTPException(status_code=502, detail="Chưa kiểm tra được phiên ChatGPT.")

@@ -51,7 +51,8 @@ await page.route('https://ai.test/ai-providers',route=>route.fulfill({json:{syst
   assert.equal(await page.evaluate(()=>window.HSKAiProviderPicker.choice()),'personal');
   assert.equal(await page.locator('#qaProjectChatForm .qa-provider-btn').getAttribute('aria-label'),'Nhà cung cấp AI: Claude');
   assert.equal(await thinking.getAttribute('aria-label'),'Chọn mức độ mạnh hoặc model cho Claude');
-  assert.equal(await thinking.locator('option[value="model:claude-sonnet"]').count(),1);
+  assert.equal(await thinking.locator('optgroup').count(),0,'danh sách model phải phẳng, không chia optgroup trùng lặp');
+  assert.equal(await thinking.locator('option[data-model="claude-sonnet"]').count(),1);
   if(width===390){
     for(const [mobileWidth,mobileHeight] of [[320,640],[390,844],[430,932]]){
       await page.setViewportSize({width:mobileWidth,height:mobileHeight});

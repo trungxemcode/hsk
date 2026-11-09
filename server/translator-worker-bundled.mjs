@@ -675,7 +675,7 @@ export class ChatGPTSessionManager{
    err.code='CHATGPT_SESSION_NO_TOKEN';
    throw err;
   }
-  this.accessToken=data.accessToken.trim();
+  this.accessToken=data.accessToken.trim();this.planType=extractChatGptPlanType(data);
   this.tokenExpiresAt=nowSec+3600;
   return this.accessToken;
  }
@@ -910,6 +910,71 @@ export async function chatgptCookieGenerate(config,requestBody,fetchFn=fetch,sig
 
 export {sharedGuardrail,sharedMemoryManager};
 
+const cookieAccountCache=new Map();
+export function extractChatGptPlanType(data){
+ if(!data||typeof data!=='object')return 'free';
+ let raw=String(data?.account?.planType||data?.accounts?.default?.entitlement?.subscription_plan||'').toLowerCase();
+ if(!raw&&typeof data.accessToken==='string'){
+  const part=data.accessToken.split('.')[1];
+  if(part){
+   try{
+    const claims=JSON.parse(atob(part.replace(/-/g,'+').replace(/_/g,'/')));
+    raw=String(claims?.['https://api.openai.com/auth']?.chatgpt_plan_type||'').toLowerCase();
+   }catch{}
+  }
+ }
+ return /^(plus|pro|team|enterprise|edu|chatgptplus)/.test(raw)?'plus':'free';
+}
+export async function probeChatGptCookieAccount(rawToken,{env={},fetchFn=fetch,signal,now=()=>Date.now()}={}){
+ const token=String(rawToken||'').trim();
+ if(!token)return null;
+ const cacheKey=`${token.slice(0,24)}:${token.length}:${token.slice(-24)}`;
+ const cached=cookieAccountCache.get(cacheKey);
+ if(cached&&now()-cached.at<1800000)return cached.info;
+ const bridgeUrl=String(env?.CHATGPT_COOKIE_BRIDGE_URL||'').trim();
+ const bridgeKey=String(env?.CHATGPT_COOKIE_BRIDGE_KEY||'').trim();
+ if(bridgeUrl&&bridgeKey){
+  try{
+   const endpoint=new URL('/api/hsk/session-info',bridgeUrl);
+   if(endpoint.protocol==='https:'){
+    const res=await fetchFn(endpoint,{method:'POST',headers:{'Content-Type':'application/json','X-HSK-Bridge-Key':bridgeKey,'X-ChatGPT-Session-Token':token},body:'{}',signal,redirect:'manual'});
+    if(res.ok){
+     const data=await res.json().catch(()=>null);
+     if(data&&typeof data==='object'){
+      const info={planType:data.plan_type==='plus'?'plus':'free',models:Array.isArray(data.models)?data.models.filter(m=>typeof m==='string').slice(0,12):[]};
+      cookieAccountCache.set(cacheKey,{at:now(),info});
+      return info;
+     }
+    }
+   }
+  }catch{}
+ }
+ try{
+  const client=getOrCreateCookieClient(token,{baseUrl:env?.CHATGPT_BASE_URL||CHATGPT_BASE_URL,now});
+  if(!client.sm.planType&&!bridgeUrl)await client.sm.getValidAccessToken(fetchFn,signal);
+  if(!client.sm.availableModels&&!bridgeUrl&&client.sm.accessToken){
+   try{
+    const mRes=await fetchFn(`${client.sm.baseUrl}/backend-api/models`,{method:'GET',headers:client.sm.getHeaders(true),signal,redirect:'manual'});
+    if(mRes.ok){
+     const mData=await mRes.json().catch(()=>null);
+     const slugs=[];
+     for(const item of Array.isArray(mData?.models)?mData.models:[]){
+      const slug=typeof item?.slug==='string'?item.slug.trim():'';
+      if(slug&&!slugs.includes(slug))slugs.push(slug);
+     }
+     if(slugs.length)client.sm.availableModels=slugs;
+    }
+   }catch{}
+  }
+  if(client.sm.planType){
+   const info={planType:client.sm.planType,models:client.sm.availableModels||[]};
+   cookieAccountCache.set(cacheKey,{at:now(),info});
+   return info;
+  }
+ }catch{}
+ return null;
+}
+
 // Hỏi đáp AI: nhà cung cấp mà học viên chọn trong ô chat. 'auto' giữ nguyên hành vi cũ của Worker.
 export const AI_PROVIDER_CHOICES=new Set(['auto','system-gemini','system-chatgpt','personal']);
 export const PERSONAL_PROVIDER_IDS=['openai','fosta','deepseek','claude','gemini','chatgpt-cookie'];
@@ -936,7 +1001,7 @@ export function describeAiProviders({geminiReady=false,sharedCookieReady=false,p
       configured,
       enabled:configured&&personal?.enabled===true,
       provider:configured&&PERSONAL_PROVIDER_IDS.includes(personal?.provider)?personal.provider:null,
-      model:configured&&typeof personal?.model==='string'?personal.model.slice(0,100):null
+      model:configured&&typeof personal?.model==='string'?personal.model.slice(0,100):null,...(configured&&typeof personal?.planType==='string'?{planType:personal.planType}:{}),...(configured&&Array.isArray(personal?.models)&&personal.models.length?{models:personal.models.slice(0,12)}:{})
     }
   };
 }
@@ -1035,6 +1100,58 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
   payload?.choices?.[0]?.message?.content;
  if(typeof text!=='string')return new Response(null,{status:502});
  return Response.json({candidates:[{content:{parts:[{text:text.trim()}]}}]});
+}
+
+const providerModelsCache=new Map();
+export async function probePersonalAiCapabilities(personal,{env={},fetchFn=fetch,signal,now=()=>Date.now()}={}){
+ if(!personal?.enabled||!personal?.apiKey||!personal?.provider)return {};
+ const {provider,apiKey,model}=personal;
+ const cacheKey=`${provider}:${apiKey.slice(0,16)}:${apiKey.length}:${model||''}`;
+ const cached=providerModelsCache.get(cacheKey);
+ if(cached&&now()-cached.at<1800000)return cached.value;
+ let value={};
+ try{
+  if(provider==='chatgpt-cookie'){
+   const info=await probeChatGptCookieAccount(apiKey,{env,fetchFn,signal,now});
+   const planType=info?.planType||((apiKey.includes('|')||apiKey.length>4000||['gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free');
+   const models=info?.models?.length?info.models:(planType==='plus'?['gpt-4o-mini','gpt-4o','o3-mini','gpt-4-1','o4-mini']:['gpt-4o-mini','o3-mini']);
+   value={planType,models};
+  }else if(provider==='claude'){
+   const res=await fetchFn('https://api.anthropic.com/v1/models',{method:'GET',headers:{'x-api-key':apiKey,'anthropic-version':'2023-06-01'},signal,redirect:'manual'});
+   if(res.ok){
+    const data=await res.json().catch(()=>null);
+    const ids=(data?.data||[]).map(m=>m?.id).filter(id=>typeof id==='string'&&/^claude-/i.test(id)).slice(0,10);
+    if(ids.length)value={models:ids};
+   }
+  }else if(provider==='deepseek'){
+   const res=await fetchFn('https://api.deepseek.com/models',{method:'GET',headers:{Authorization:'Bearer '+apiKey},signal,redirect:'manual'});
+   if(res.ok){
+    const data=await res.json().catch(()=>null);
+    const ids=(data?.data||[]).map(m=>m?.id).filter(id=>typeof id==='string'&&/^deepseek-/i.test(id)).slice(0,8);
+    if(ids.length)value={models:ids};
+   }
+  }else if(provider==='openai'){
+   const res=await fetchFn('https://api.openai.com/v1/models',{method:'GET',headers:{Authorization:'Bearer '+apiKey},signal,redirect:'manual'});
+   if(res.ok){
+    const data=await res.json().catch(()=>null);
+    const allow=new Set(['gpt-4o-mini','gpt-4o','o3-mini','gpt-4.1','gpt-4.1-mini','o4-mini']);
+    const ids=(data?.data||[]).map(m=>m?.id).filter(id=>allow.has(id));
+    if(ids.length)value={models:ids};
+   }
+  }else if(provider==='gemini'){
+   const res=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models',{method:'GET',headers:{'x-goog-api-key':apiKey},signal,redirect:'manual'});
+   if(res.ok){
+    const data=await res.json().catch(()=>null);
+    const allow=new Set(['gemini-2.5-flash-lite','gemini-2.5-flash','gemini-2.5-pro','gemini-2.0-flash']);
+    const ids=(data?.models||[]).filter(m=>Array.isArray(m?.supportedGenerationMethods)&&m.supportedGenerationMethods.includes('generateContent')).map(m=>String(m?.name||'').replace(/^models\//,'')).filter(id=>allow.has(id));
+    if(ids.length)value={models:ids};
+   }
+  }else if(provider==='fosta'){
+   value={models:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol']};
+  }
+ }catch{}
+ providerModelsCache.set(cacheKey,{at:now(),value});
+ return value;
 }
 
 // Cloudflare Durable Object: centralized, atomic AI budget and reusable reading cache.
@@ -2832,7 +2949,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    const restricted=(env.ALLOWED_UIDS||'').split(',').filter(Boolean);if(restricted.length&&!restricted.includes(c.sub))return reply({error:'Tài khoản chưa được bật dịch câu.'},403);
    if(isAiProviders){
     let personal=null;
-    try{if(env.AI_CONTROL)personal=await personalAiCall(env,account.localId,'personal-ai-read');}catch{personal=null;}
+    try{if(env.AI_CONTROL){personal=await personalAiCall(env,account.localId,'personal-ai-read');if(personal?.enabled){const full=await personalAiCall(env,account.localId,'personal-ai-use').catch(()=>null);if(full?.apiKey)personal={...personal,...await probePersonalAiCapabilities(full,{env,fetchFn:providerFetch,signal:controller.signal,now})};}}}catch{personal=null;}
     return reply(describeAiProviders({geminiReady:configuredGeminiKeys(env).length>0,sharedCookieReady:typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim()),personal}));
    }
    if(isPersonalSettings){
@@ -2871,7 +2988,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      if(isRole){
       const action=route==='/account-role'?'roles-self':route==='/admin/accounts'?'roles-list':'roles-set';
       if(action==='roles-set'&&(!['vip','regular'].includes(body.role)||typeof body.uid!=='string'||!/^[-\w:]{1,150}$/.test(body.uid)||body.uid===OWNER_UID))return reply({error:'Chỉ được cấp hoặc thu hồi VIP; admin được giữ cố định.'},400);
-      const roleData=await accountRoleCall(env,action,action==='roles-self'?{actor:account.localId,email:account.email||''}:action==='roles-list'?{actor:account.localId,...(body.cursor?{cursor:body.cursor}:{})}:{actor:account.localId,uid:body.uid,email:body.email,role:body.role},controller.signal);if(route==='/account-role'){let personal=null;try{if(env.AI_CONTROL)personal=await personalAiCall(env,account.localId,'personal-ai-read');}catch{personal=null;}return reply({...roleData,providers:describeAiProviders({geminiReady:configuredGeminiKeys(env).length>0,sharedCookieReady:typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim()),personal})});}return reply(roleData);
+      const roleData=await accountRoleCall(env,action,action==='roles-self'?{actor:account.localId,email:account.email||''}:action==='roles-list'?{actor:account.localId,...(body.cursor?{cursor:body.cursor}:{})}:{actor:account.localId,uid:body.uid,email:body.email,role:body.role},controller.signal);if(route==='/account-role'){let personal=null;try{if(env.AI_CONTROL){personal=await personalAiCall(env,account.localId,'personal-ai-read');if(personal?.enabled){const full=await personalAiCall(env,account.localId,'personal-ai-use').catch(()=>null);if(full?.apiKey)personal={...personal,...await probePersonalAiCapabilities(full,{env,fetchFn:providerFetch,signal:controller.signal,now})};}}}catch{personal=null;}return reply({...roleData,providers:describeAiProviders({geminiReady:configuredGeminiKeys(env).length>0,sharedCookieReady:typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim()),personal})});}return reply(roleData);
      }
      verifiedRole=(await accountRoleCall(env,'roles-self',{actor:account.localId,email:account.email||''},controller.signal)).account.role;
     }catch{return reply({error:'Chưa xác minh được quyền tài khoản. Hãy thử lại.',code:'ACCOUNT_ROLES_UNAVAILABLE'},503);}

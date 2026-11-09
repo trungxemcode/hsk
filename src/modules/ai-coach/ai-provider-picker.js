@@ -1,4 +1,4 @@
-/* Hỏi đáp AI: chọn nhà cung cấp AI, nhận diện loại AI đang dùng để nạp mức độ mạnh & model riêng, cache trạng thái 15 phút và gọi thẳng API riêng trên thiết bị. */
+/* Hỏi đáp AI: chọn nhà cung cấp AI, tự phân biệt tài khoản ChatGPT Plus/Thường và nạp danh sách model thực tế không trùng lặp. */
 (()=>{'use strict';
   const PERSONAL=[
     ['claude','Claude'],['deepseek','DeepSeek'],['openai','OpenAI'],
@@ -10,119 +10,36 @@
     deepseek:'https://api.deepseek.com/chat/completions',
     gemini:'https://generativelanguage.googleapis.com/v1beta/models/'
   };
-  const PROVIDER_MODELS={
-    'system-gemini':{
-      label:'Gemini hệ thống',
-      tiers:{
-        low:{model:'gemini-3.1-flash-lite',label:'Thấp · Gemini 3.1 Lite'},
-        medium:{model:'gemini-3.5-flash',label:'Trung bình · Gemini 3.5 Flash'},
-        high:{model:'gemini-3.8-flash',label:'Cao · Gemini 3.8 Flash'}
-      },
-      models:[
-        ['gemini-3.1-flash-lite','gemini-3.1-flash-lite (Nhanh)'],
-        ['gemini-3.5-flash','gemini-3.5-flash (Cân bằng)'],
-        ['gemini-3.8-flash','gemini-3.8-flash (Mạnh)']
-      ]
-    },
-    'system-chatgpt':{
-      label:'ChatGPT hệ thống',
-      tiers:{
-        low:{model:'gpt-4o-mini',label:'Thấp · gpt-4o-mini'},
-        medium:{model:'gpt-4o',label:'Trung bình · gpt-4o'},
-        high:{model:'o3-mini',label:'Cao · o3-mini'}
-      },
-      models:[
-        ['gpt-4o-mini','gpt-4o-mini (Nhanh · nhẹ)'],
-        ['gpt-4o','gpt-4o (Đa năng · Plus)'],
-        ['gpt-4-1-mini','gpt-4-1-mini (Tốc độ cao)'],
-        ['gpt-4-1','gpt-4-1 (Phân tích sâu)'],
-        ['o3-mini','o3-mini (Suy luận logic)'],
-        ['o4-mini','o4-mini (Suy luận mới)']
-      ]
-    },
-    'chatgpt-cookie':{
-      label:'ChatGPT (cookie riêng)',
-      tiers:{
-        low:{model:'gpt-4o-mini',label:'Thấp · gpt-4o-mini'},
-        medium:{model:'gpt-4o',label:'Trung bình · gpt-4o'},
-        high:{model:'o3-mini',label:'Cao · o3-mini'}
-      },
-      models:[
-        ['gpt-4o-mini','gpt-4o-mini (Nhanh · nhẹ)'],
-        ['gpt-4o','gpt-4o (Đa năng · Plus)'],
-        ['gpt-4-1-mini','gpt-4-1-mini (Tốc độ cao)'],
-        ['gpt-4-1','gpt-4-1 (Phân tích sâu)'],
-        ['o3-mini','o3-mini (Suy luận logic)'],
-        ['o4-mini','o4-mini (Suy luận mới)']
-      ]
-    },
-    fosta:{
-      label:'Fosta',
-      tiers:{
-        low:{model:'gpt-6-luna',label:'Thấp · gpt-6-luna'},
-        medium:{model:'gpt-6-astra',label:'Trung bình · gpt-6-astra'},
-        high:{model:'gpt-6.1-sol',label:'Cao · gpt-6.1-sol'}
-      },
-      models:[
-        ['gpt-6-luna','gpt-6-luna (Nhanh)'],
-        ['gpt-6-astra','gpt-6-astra (Cân bằng)'],
-        ['gpt-6.1-sol','gpt-6.1-sol (Mạnh nhất)']
-      ]
-    },
-    openai:{
-      label:'OpenAI',
-      tiers:{
-        low:{model:'gpt-4o-mini',label:'Thấp · gpt-4o-mini'},
-        medium:{model:'gpt-4o',label:'Trung bình · gpt-4o'},
-        high:{model:'o3-mini',label:'Cao · o3-mini'}
-      },
-      models:[
-        ['gpt-4o-mini','gpt-4o-mini (Nhanh)'],
-        ['gpt-4o','gpt-4o (Đa năng)'],
-        ['gpt-4.1-mini','gpt-4.1-mini (Tốc độ cao)'],
-        ['gpt-4.1','gpt-4.1 (Chuẩn xác)'],
-        ['o3-mini','o3-mini (Suy luận)']
-      ]
-    },
-    deepseek:{
-      label:'DeepSeek',
-      tiers:{
-        low:{model:'deepseek-chat',label:'Thấp · deepseek-chat'},
-        medium:{model:'deepseek-chat',label:'Trung bình · deepseek-chat'},
-        high:{model:'deepseek-reasoner',label:'Cao · deepseek-reasoner'}
-      },
-      models:[
-        ['deepseek-chat','deepseek-chat (DeepSeek V3)'],
-        ['deepseek-reasoner','deepseek-reasoner (DeepSeek R1)']
-      ]
-    },
-    claude:{
-      label:'Claude',
-      tiers:{
-        low:{model:'claude-3-5-haiku-latest',label:'Thấp · Claude 3.5 Haiku'},
-        medium:{model:'claude-3-7-sonnet-latest',label:'Trung bình · Claude 3.7 Sonnet'},
-        high:{model:'claude-sonnet-4-20250514',label:'Cao · Claude Sonnet 4'}
-      },
-      models:[
-        ['claude-3-5-haiku-latest','claude-3-5-haiku-latest (Nhanh)'],
-        ['claude-3-7-sonnet-latest','claude-3-7-sonnet-latest (Cân bằng)'],
-        ['claude-sonnet-4-20250514','claude-sonnet-4-20250514 (Mạnh)']
-      ]
-    },
-    gemini:{
-      label:'Gemini (API riêng)',
-      tiers:{
-        low:{model:'gemini-2.5-flash-lite',label:'Thấp · Gemini 2.5 Lite'},
-        medium:{model:'gemini-2.5-flash',label:'Trung bình · Gemini 2.5 Flash'},
-        high:{model:'gemini-2.5-pro',label:'Cao · Gemini 2.5 Pro'}
-      },
-      models:[
-        ['gemini-2.5-flash-lite','gemini-2.5-flash-lite (Nhanh)'],
-        ['gemini-2.5-flash','gemini-2.5-flash (Cân bằng)'],
-        ['gemini-2.5-pro','gemini-2.5-pro (Suy luận sâu)'],
-        ['gemini-2.0-flash','gemini-2.0-flash']
-      ]
-    }
+  const MODEL_LABELS={
+    'gpt-4o-mini':'GPT-4o mini',
+    'gpt-4o':'GPT-4o',
+    'o3-mini':'o3-mini (Suy luận)',
+    'o4-mini':'o4-mini (Suy luận cao)',
+    'gpt-4-1':'GPT-4.1',
+    'gpt-4-1-mini':'GPT-4.1 mini',
+    'gpt-4.1':'GPT-4.1',
+    'gpt-4.1-mini':'GPT-4.1 mini',
+    'deepseek-chat':'DeepSeek V3',
+    'deepseek-reasoner':'DeepSeek R1 (Suy luận)',
+    'claude-3-5-haiku-latest':'Claude 3.5 Haiku',
+    'claude-3-7-sonnet-latest':'Claude 3.7 Sonnet',
+    'claude-sonnet-4-20250514':'Claude Sonnet 4',
+    'gemini-2.5-flash-lite':'Gemini 2.5 Lite',
+    'gemini-2.5-flash':'Gemini 2.5 Flash',
+    'gemini-2.5-pro':'Gemini 2.5 Pro',
+    'gemini-2.0-flash':'Gemini 2.0 Flash',
+    'gpt-6-luna':'gpt-6-luna',
+    'gpt-6-astra':'gpt-6-astra',
+    'gpt-6.1-sol':'gpt-6.1-sol'
+  };
+  const DEFAULT_PROVIDER_MODELS={
+    fosta:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol'],
+    deepseek:['deepseek-chat','deepseek-reasoner'],
+    claude:['claude-3-5-haiku-latest','claude-3-7-sonnet-latest','claude-sonnet-4-20250514'],
+    openai:['gpt-4o-mini','gpt-4o','o3-mini','gpt-4.1','gpt-4.1-mini'],
+    gemini:['gemini-2.5-flash-lite','gemini-2.5-flash','gemini-2.5-pro'],
+    'chatgpt-plus':['gpt-4o-mini','gpt-4o','o3-mini','gpt-4-1','o4-mini'],
+    'chatgpt-free':['gpt-4o-mini','o3-mini']
   };
   const CACHE_TTL_MS=15*60*1000;
   const LOCK='<svg class="qa-provider-lock" aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
@@ -228,6 +145,22 @@
       return cred;
     }catch{return null;}
   }
+  async function probeDirectModels(cred){
+    if(!cred?.apiKey||!cred?.provider)return null;
+    try{
+      if(cred.provider==='deepseek'){
+        const r=await fetch('https://api.deepseek.com/models',{headers:{Authorization:'Bearer '+cred.apiKey},signal:AbortSignal.timeout(5000)});
+        if(r.ok){const d=await r.json();const ids=(d?.data||[]).map(m=>m?.id).filter(id=>typeof id==='string'&&/^deepseek-/i.test(id));if(ids.length)return ids.slice(0,8);}
+      }else if(cred.provider==='openai'){
+        const r=await fetch('https://api.openai.com/v1/models',{headers:{Authorization:'Bearer '+cred.apiKey},signal:AbortSignal.timeout(5000)});
+        if(r.ok){const d=await r.json(),allow=new Set(['gpt-4o-mini','gpt-4o','o3-mini','gpt-4.1','gpt-4.1-mini','o4-mini']);const ids=(d?.data||[]).map(m=>m?.id).filter(id=>allow.has(id));if(ids.length)return ids;}
+      }else if(cred.provider==='gemini'){
+        const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models',{headers:{'x-goog-api-key':cred.apiKey},signal:AbortSignal.timeout(5000)});
+        if(r.ok){const d=await r.json(),allow=new Set(['gemini-2.5-flash-lite','gemini-2.5-flash','gemini-2.5-pro','gemini-2.0-flash']);const ids=(d?.models||[]).filter(m=>Array.isArray(m?.supportedGenerationMethods)&&m.supportedGenerationMethods.includes('generateContent')).map(m=>String(m?.name||'').replace(/^models\//,'')).filter(id=>allow.has(id));if(ids.length)return ids;}
+      }
+    }catch{}
+    return null;
+  }
 
   function items(){
     const a=availability,p=a?.personal||{};
@@ -235,12 +168,13 @@
     const list=[{group:'Hệ thống'},
       {id:'auto',value:'auto',label:'Tự động',sub:'Hệ thống chọn giúp bạn',locked:false},
       {id:'system-gemini',value:'system-gemini',label:'Gemini',sub:a?.system?.gemini?.available?'Key mặc định của hệ thống':known?'Hệ thống chưa sẵn sàng':'Chưa kiểm tra được',locked:!a?.system?.gemini?.available},
-      {id:'system-chatgpt',value:'system-chatgpt',label:'ChatGPT',sub:a?.system?.chatgpt?.available?'Do admin cài trên Worker':known?'Admin chưa cài cookie':'Chưa kiểm tra được',locked:!a?.system?.chatgpt?.available},
+      {id:'system-chatgpt',value:'system-chatgpt',label:'ChatGPT',sub:a?.system?.chatgpt?.available?'2 mức: Bình thường & Suy luận':known?'Admin chưa cài cookie':'Chưa kiểm tra được',locked:!a?.system?.chatgpt?.available},
       {group:'Của bạn'}];
     for(const [provider,label] of PERSONAL){
       const mine=p.provider===provider,ready=mine&&p.enabled===true;
+      const cookieTier=provider==='chatgpt-cookie'&&mine?(p.planType==='plus'?'TK Plus':p.planType==='free'?'TK Thường':''):'';
       list.push({id:`personal:${provider}`,value:'personal',label,locked:!ready,
-        sub:ready?(p.model||'API riêng của bạn'):mine&&p.configured?'Đang tắt trong Cài đặt':known?'Thêm trong Cài đặt → API riêng':'Chưa kiểm tra được'});
+        sub:ready?(cookieTier?`${cookieTier} · ${p.model||'gpt-4o-mini'}`:(p.model||'API riêng của bạn')):mine&&p.configured?'Đang tắt trong Cài đặt':known?'Thêm trong Cài đặt → API riêng':'Chưa kiểm tra được'});
     }
     return list;
   }
@@ -248,6 +182,56 @@
   function normalizeSelection(){if(!entry(selected))selected='auto';}
   function current(){return items().find(item=>item.id===selected)||items()[1];}
   function closeAll(){if(openPicker){openPicker.close();openPicker=null;}}
+
+  function buildProviderModelOptions(kind,p){
+    if(kind==='system-gemini'){
+      return [
+        {value:'low',label:'Thấp',model:'gemini-3.1-flash-lite',tier:'low'},
+        {value:'medium',label:'Trung bình',model:'gemini-3.5-flash',tier:'medium'},
+        {value:'high',label:'Cao',model:'gemini-3.8-flash',tier:'high'}
+      ];
+    }
+    if(kind==='system-chatgpt'){
+      return [
+        {value:'low',label:'Bình thường',model:'gpt-4o-mini',tier:'low'},
+        {value:'high',label:'Suy luận',model:'o3-mini',tier:'high'}
+      ];
+    }
+    const savedModel=p?.provider===kind&&typeof p.model==='string'?p.model.trim():'';
+    if(kind==='chatgpt-cookie'){
+      const isPlus=p?.planType?p.planType!=='free':['gpt-4o','gpt-4-1','o4-mini'].includes(savedModel);
+      if(!isPlus){
+        return [
+          {value:'low',label:'Bình thường',model:'gpt-4o-mini',tier:'low'},
+          {value:'high',label:'Suy luận',model:'o3-mini',tier:'high'}
+        ];
+      }
+      const rawList=Array.isArray(p?.models)&&p.models.length?p.models:DEFAULT_PROVIDER_MODELS['chatgpt-plus'];
+      const unique=[...new Set([...rawList,...(savedModel?[savedModel]:[])])];
+      const tierSlots=['low','medium','high'];
+      return unique.map((modelId,idx)=>({
+        value:idx<3?tierSlots[idx]:`model:${modelId}`,
+        label:MODEL_LABELS[modelId]||modelId,
+        model:modelId,
+        tier:idx===0?'low':idx===1?'medium':'high'
+      }));
+    }
+    const baseList=Array.isArray(p?.models)&&p.models.length?p.models:(DEFAULT_PROVIDER_MODELS[kind]||[]);
+    const unique=[...new Set([...baseList,...(savedModel?[savedModel]:[])])];
+    if(unique.length===2){
+      return [
+        {value:'low',label:MODEL_LABELS[unique[0]]||unique[0],model:unique[0],tier:'low'},
+        {value:'high',label:MODEL_LABELS[unique[1]]||unique[1],model:unique[1],tier:'high'}
+      ];
+    }
+    const tierSlots=['low','medium','high'];
+    return unique.map((modelId,idx)=>({
+      value:idx<3?tierSlots[idx]:`model:${modelId}`,
+      label:MODEL_LABELS[modelId]||modelId,
+      model:modelId,
+      tier:idx===0?'low':idx===1?'medium':'high'
+    }));
+  }
 
   function activeProviderInfo(){
     normalizeSelection();
@@ -259,25 +243,31 @@
       kind='system-chatgpt';explicitNonSystemGemini=true;
     }else if(selected==='system-gemini'){
       kind='system-gemini';
-    }else if(p.enabled===true&&p.provider&&PROVIDER_MODELS[p.provider]){
+    }else if(p.enabled===true&&p.provider){
       kind=p.provider;isPersonal=true;
     }else if(!sys.gemini?.available&&sys.chatgpt?.available){
       kind='system-chatgpt';
     }
-    const spec=PROVIDER_MODELS[kind]||PROVIDER_MODELS['system-gemini'];
-    const savedModel=isPersonal&&p.provider===kind&&typeof p.model==='string'?p.model.trim():'';
-    const models=spec.models.map(([id,text])=>[id,id===savedModel?`${text} · Đang lưu`:text]);
-    if(savedModel&&!models.some(([id])=>id===savedModel)){
-      models.unshift([savedModel,`${savedModel} (Đang lưu)`]);
-    }
+    const isPlusCookie=kind==='chatgpt-cookie'&&(p.planType?p.planType!=='free':['gpt-4o','gpt-4-1','o4-mini'].includes(p.model));
+    const labelMap={
+      'system-gemini':'Gemini hệ thống',
+      'system-chatgpt':'ChatGPT hệ thống',
+      'chatgpt-cookie':isPlusCookie?'ChatGPT Plus (cookie riêng)':'ChatGPT Thường (cookie riêng)',
+      fosta:'Fosta',
+      openai:'OpenAI',
+      deepseek:'DeepSeek',
+      claude:'Claude',
+      gemini:'Gemini (API riêng)'
+    };
+    const options=buildProviderModelOptions(kind,isPersonal?p:null);
     return {
       kind,
-      label:spec.label,
+      label:labelMap[kind]||'AI',
       isPersonal,
       explicitNonSystemGemini,
-      savedModel,
-      tiers:spec.tiers,
-      models
+      planType:kind==='chatgpt-cookie'?(isPlusCookie?'plus':'free'):null,
+      savedModel:isPersonal&&p.provider===kind&&typeof p.model==='string'?p.model.trim():'',
+      options
     };
   }
 
@@ -352,9 +342,13 @@
   }
   async function syncPersonal(targetUid,publicData,rawSettings){
     if(!targetUid||!publicData||typeof publicData!=='object')return;
+    const rawKey=typeof rawSettings?.apiKey==='string'?rawSettings.apiKey.trim():'';
+    const inferredPlan=publicData.provider==='chatgpt-cookie'?(publicData.planType||(rawKey?(rawKey.includes('|')||rawKey.length>4000?'plus':'free'):(['gpt-4o','gpt-4-1','o4-mini'].includes(publicData.model)?'plus':availability?.personal?.planType||'free'))):undefined;
     const personal=publicData.configured?{
       configured:true,enabled:Boolean(publicData.enabled),
-      provider:String(publicData.provider||''),model:String(publicData.model||'')
+      provider:String(publicData.provider||''),model:String(publicData.model||''),
+      ...(inferredPlan?{planType:inferredPlan}:{}),
+      ...(Array.isArray(publicData.models)&&publicData.models.length?{models:publicData.models}:{})
     }:{configured:false,enabled:false};
     const base=readCachedAvailability(targetUid)||(cleanUid(targetUid)===cleanUid(uid)?availability:null)||{
       system:{gemini:{available:true},chatgpt:{available:false}},personal
@@ -368,8 +362,11 @@
       await saveEncryptedDirectCred(targetUid,null);
       return;
     }
-    if(rawSettings?.apiKey){
-      await saveEncryptedDirectCred(targetUid,{provider:personal.provider,model:personal.model,enabled:personal.enabled,apiKey:rawSettings.apiKey});
+    if(rawKey){
+      const cred={provider:personal.provider,model:personal.model,enabled:personal.enabled,apiKey:rawKey};
+      await saveEncryptedDirectCred(targetUid,cred);
+      const discovered=await probeDirectModels(cred);
+      if(discovered?.length)applyAvailability(targetUid,{...base,personal:{...personal,models:discovered}});
       return;
     }
     const existing=await loadDirectCred(targetUid);
@@ -439,8 +436,10 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
     if(availability?.personal&&(availability.personal.configured===false||availability.personal.enabled===false))return null;
     const cred=await loadDirectCred(targetUid);
     if(!cred||!cred.enabled||!cred.apiKey||!Object.hasOwn(DIRECT_ENDPOINTS,cred.provider))return null;
+    const info=activeProviderInfo();
+    const matchedOpt=info?.options?.find(o=>o.value===thinking||o.model===aiModel);
     const chosenModel=(aiModel&&(cred.provider!=='fosta'||['gpt-6.1-sol','gpt-6-astra','gpt-6-luna'].includes(aiModel)))?aiModel:
-      (thinking&&PROVIDER_MODELS[cred.provider]?.tiers?.[thinking]?.model)||cred.model;
+      matchedOpt?.model||cred.model;
     const instruction=buildDirectPrompt({
       hsk,snapshot:lesson?.content?.learning_snapshot,intentInfo:lesson?.content?.intentInfo,
       understandingNodes:lesson?.content?.understandingNodes,questionMessageId:lesson?.content?.questionMessageId
