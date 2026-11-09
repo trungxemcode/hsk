@@ -1497,7 +1497,13 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
   if (typeof globalThis.WebSocket === 'function') {
     return await new Promise((resolve, reject) => {
       const ws = new globalThis.WebSocket(wsUrl);
+      if (typeof ws.accept === 'function') {
+        try { ws.accept(); } catch {}
+      }
       ws.binaryType = 'arraybuffer';
+      if (ws.readyState === 1) {
+        return resolve(ws);
+      }
       const onOpen = () => { cleanup(); resolve(ws); };
       const onErr = () => { cleanup(); reject(new Error('Không thể kết nối WebSocket tới Muse AI')); };
       const cleanup = () => {
@@ -1695,51 +1701,98 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
       capabilities: MUSE_CAPABILITIES
     });
 
-    let sendSid = null;
-    let sendStartMs = Date.now();
+    const sendSid = await sendRequest('POST', '/chat/stream', {
+      message: userText,
+      node_id: clientId,
+      capabilities: MUSE_CAPABILITIES,
+      timezone: 'Asia/Ho_Chi_Minh'
+    });
+    const sendStartMs = Date.now();
     const textParts = [];
     const deadline = Date.now() + timeoutMs;
 
     while (Date.now() < deadline) {
-      if (sendSid === null && respondedStreams.has(subSid)) {
-        sendStartMs = Date.now();
-        sendSid = await sendRequest('POST', '/chat/stream', {
-          message: userText,
-          node_id: clientId,
-          capabilities: MUSE_CAPABILITIES,
-          timezone: 'Asia/Ho_Chi_Minh'
-        });
-      }
       const ev = await recvFrameEvent(1200);
       if (ev === 'closed') break;
-      if (!ev || ev.kind !== 'event') continue;
-      const obj = ev.obj;
-      if (typeof obj.ts_ms === 'number' && obj.ts_ms < sendStartMs - 1000) continue;
-      const eventName = obj.event;
-      const payload = obj.payload || {};
-      if (eventName === 'delta.text_append') {
-        const delta = payload.text ?? payload.delta ?? '';
-        if (typeof delta === 'string' && delta) textParts.push(delta);
-      } else if (eventName === 'delta.message_done') {
+      if (!ev) continue;
+
+      if (ev.kind === 'event') {
+        const obj = ev.obj || {};
+        const eventName = String(obj.event || '');
+        const payload = obj.payload || obj;
+
+        if (
+          eventName === 'delta.text_append' ||
+          eventName === 'chat.delta' ||
+          eventName === 'text_append' ||
+          eventName.includes('delta') ||
+          eventName.includes('append') ||
+          eventName.includes('text')
+        ) {
+          const delta = payload.text ?? payload.delta ?? payload.content ?? (typeof payload.string === 'string' ? payload.string : '');
+          if (typeof delta === 'string' && delta) textParts.push(delta);
+        } else if (
+          eventName === 'delta.message_done' ||
+          eventName === 'chat.done' ||
+          eventName.includes('done') ||
+          eventName.includes('finish') ||
+          payload.done === true
+        ) {
+          if (textParts.length === 0) {
+            const messages = payload?.transcript?.messages || payload?.messages || [];
+            for (const m of messages) {
+              for (const c of m?.content || []) {
+                if (c?.type === 'text' && typeof c.text === 'string') textParts.push(c.text);
+              }
+              if (typeof m?.text === 'string' && m.text.trim()) textParts.push(m.text.trim());
+            }
+          }
+          break;
+        } else if (eventName === 'message.assistant' || eventName.includes('assistant')) {
+          const t = payload.display_text ?? payload.content ?? payload.text ?? '';
+          if (typeof t === 'string' && t.trim()) {
+            if (textParts.length === 0) textParts.push(t.trim());
+          }
+          break;
+        }
+      } else if (ev.kind === 'complete') {
+        const body = ev.body || {};
         if (textParts.length === 0) {
-          const messages = payload?.transcript?.messages || [];
-          for (const m of messages) {
-            for (const c of m?.content || []) {
-              if (c?.type === 'text' && typeof c.text === 'string') textParts.push(c.text);
+          const possibleText = body.text ?? body.response ?? body.content ?? body.message ?? body.display_text ?? body?.choices?.[0]?.message?.content;
+          if (typeof possibleText === 'string' && possibleText.trim()) {
+            textParts.push(possibleText.trim());
+          } else if (Array.isArray(body.messages)) {
+            for (const m of body.messages) {
+              const t = typeof m?.content === 'string' ? m.content : Array.isArray(m?.content) ? m.content.map(c => c?.text || '').join('') : (m?.text || '');
+              if (t.trim()) textParts.push(t.trim());
             }
           }
         }
-        break;
-      } else if (eventName === 'message.assistant') {
-        if (textParts.length === 0) {
-          const t = payload.display_text ?? payload.content ?? '';
-          if (typeof t === 'string' && t) textParts.push(t);
-        }
-        break;
+        if (textParts.length > 0) break;
+      } else if (ev.kind === 'reset') {
+        if (textParts.length > 0) break;
       }
     }
 
-    return textParts.join('').trim();
+    let result = textParts.join('').trim();
+    if (!result) {
+      for (const [sid, b] of streamBodies.entries()) {
+        if (b.parts?.length) {
+          const combined = new TextDecoder().decode(museConcat(...b.parts)).trim();
+          if (combined) {
+            try {
+              const obj = JSON.parse(combined);
+              const t = obj.text || obj.response || obj.content || obj.message;
+              if (typeof t === 'string' && t.trim()) { result = t.trim(); break; }
+            } catch {
+              result = combined;
+              break;
+            }
+          }
+        }
+      }
+    }
+    return result;
   } finally {
     try { ws.close(); } catch {}
   }
@@ -1890,6 +1943,10 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
     const normalized = normalizeMuseTutorReply(replyText, questionText);
     return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(normalized) }] } }] });
   } catch (err) {
+    if (cred.cookieHeader) {
+      const cacheKey = cred.cookieHeader.slice(0, 96) + ':' + cred.cookieHeader.length;
+      museSessionCache.delete(cacheKey);
+    }
     // If credential was 'auto' (could be an api.meta.ai Bearer token without prefix), try Bearer endpoint before failing
     if (cred.kind === 'auto' && !cred.raw.includes('=')) {
       try {
