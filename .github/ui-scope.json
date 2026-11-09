@@ -1,1 +1,1 @@
-{"request":"Hỏi đáp AI: nhận diện nhà cung cấp và chọn mức độ mạnh hoặc model riêng ngay trong ô chat; giữ nguyên bố cục và các trang khác.","excludedRoutes":["ai-qa"]}
+{"request":"Hỏi đáp AI: tinh gọn lựa chọn model theo tài khoản Plus/Thường, phát hiện model đang dùng và bỏ danh sách trùng; chỉ thay đổi trong trang Hỏi đáp AI.","excludedRoutes":["ai-qa"]}
