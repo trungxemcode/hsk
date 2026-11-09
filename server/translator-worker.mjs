@@ -344,7 +344,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      if(isRole){
       const action=route==='/account-role'?'roles-self':route==='/admin/accounts'?'roles-list':'roles-set';
       if(action==='roles-set'&&(!['vip','regular'].includes(body.role)||typeof body.uid!=='string'||!/^[-\w:]{1,150}$/.test(body.uid)||body.uid===OWNER_UID))return reply({error:'Chỉ được cấp hoặc thu hồi VIP; admin được giữ cố định.'},400);
-      return reply(await accountRoleCall(env,action,action==='roles-self'?{actor:account.localId,email:account.email||''}:action==='roles-list'?{actor:account.localId,...(body.cursor?{cursor:body.cursor}:{})}:{actor:account.localId,uid:body.uid,email:body.email,role:body.role},controller.signal));
+      const roleData=await accountRoleCall(env,action,action==='roles-self'?{actor:account.localId,email:account.email||''}:action==='roles-list'?{actor:account.localId,...(body.cursor?{cursor:body.cursor}:{})}:{actor:account.localId,uid:body.uid,email:body.email,role:body.role},controller.signal);if(route==='/account-role'){let personal=null;try{if(env.AI_CONTROL)personal=await personalAiCall(env,account.localId,'personal-ai-read');}catch{personal=null;}return reply({...roleData,providers:describeAiProviders({geminiReady:configuredGeminiKeys(env).length>0,sharedCookieReady:typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim()),personal})});}return reply(roleData);
      }
      verifiedRole=(await accountRoleCall(env,'roles-self',{actor:account.localId,email:account.email||''},controller.signal)).account.role;
     }catch{return reply({error:'Chưa xác minh được quyền tài khoản. Hãy thử lại.',code:'ACCOUNT_ROLES_UNAVAILABLE'},503);}
