@@ -16,9 +16,6 @@
  messages.addEventListener('scroll',updateJumpToLatest,{passive:true});
  jumpToLatest.addEventListener('click',scrollToLatest);
  window.addEventListener('hsk-ai-qa-open',scrollToLatest);
- document.addEventListener('visibilitychange',()=>{
-  if(!document.hidden&&!panel.hidden&&matchMedia('(min-width:721px)').matches)scrollToLatest();
- });
  if(window.ResizeObserver)new ResizeObserver(updateJumpToLatest).observe(messages);
  const historyPane=$('aiQaHistory'),historyToggle=$('aiQaHistoryToggle'),historyClose=$('aiQaHistoryClose'),newChat=$('aiQaNewChat'),conversationList=$('aiQaConversationList'),conversationTitle=$('aiQaConversationTitle');
  let config=null,pending=null,activeSuggestionMessageId=null,serial=0,history=[],owner='guest',aiMessageRegistry=new Map(),activeId='',deleted={},syncBusy=false,syncQueued=false,realtimeUnsubscribe=null,realtimeApiRef=null,realtimeUid='',realtimeReady=false;
@@ -162,18 +159,45 @@
  const intent=(text,action=null)=>window.HSKQaIntentRouter?.classifyUserQaIntent?.(text,action)||{intent:'meaning_usage',shouldOfferMicroCheck:false,directiveVi:'Trả lời trực tiếp, rõ ràng và sát câu hỏi.'};
  // Suggestions are a transient affordance, not part of persisted chat history.
  function hideSuggestions(){activeSuggestionMessageId=null;messages.querySelectorAll('.qa-suggestions-group').forEach(group=>group.remove());}
+ const CJK_REGEX=/([\u3000-\u303f\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff01-\uffee]+)/g;
+ function appendStyledText(target,str){
+  if(!str)return;
+  let last=0;
+  for(const m of str.matchAll(CJK_REGEX)){
+   if(m.index>last)target.append(str.slice(last,m.index));
+   const span=document.createElement('span');
+   span.className='qa-hanzi';
+   span.textContent=m[1];
+   target.append(span);
+   last=m.index+m[0].length;
+  }
+  if(last<str.length)target.append(str.slice(last));
+ }
+ function renderItalicsAndText(target,text){
+  let offset=0;
+  for(const match of text.matchAll(/(?<![\\*])\*(?!\*)([^*\r\n]+)\*(?!\*)/g)){
+   if(!match[1].trim())continue;
+   appendStyledText(target,text.slice(offset,match.index));
+   const em=document.createElement('em');
+   em.className='qa-pinyin';
+   appendStyledText(em,match[1].trim());
+   target.append(em);
+   offset=match.index+match[0].length;
+  }
+  appendStyledText(target,text.slice(offset));
+ }
  function renderAssistantText(body,rawText){
   const text=window.HSKAIQACore?.unwrapAiQaText?.(rawText)||String(rawText||'');
   let offset=0;
   for(const match of text.matchAll(/(?<![\\*])\*\*(?!\*)([^*\r\n]+)\*\*(?!\*)/g)){
    if(!match[1].trim())continue;
-   body.append(text.slice(offset,match.index));
+   renderItalicsAndText(body,text.slice(offset,match.index));
    const bold=document.createElement('b');
-   bold.textContent=match[1].trim();
+   renderItalicsAndText(bold,match[1].trim());
    body.append(bold);
    offset=match.index+match[0].length;
   }
-  body.append(text.slice(offset));
+  renderItalicsAndText(body,text.slice(offset));
  }
  function add(role,text,meta=null,scroll=true){const row=document.createElement('article');row.className=`ai-qa-message ${role}`;if(meta?.aiMessageId)row.dataset.aiMessageId=meta.aiMessageId;const who=document.createElement('strong');who.textContent=role==='user'?'Bạn':'Gia sư AI';const body=document.createElement('p');if(role==='assistant')renderAssistantText(body,text);else body.textContent=text;row.append(who,body);if(role==='user'&&meta?.attachmentName){const name=document.createElement('small');name.className='qa-chat-sent-file';name.textContent='Tệp: '+meta.attachmentName;row.append(name);}if(role==='assistant'&&meta){const actions=document.createElement('div');actions.className='ai-qa-feedback';for(const [id,label] of [['not_understood','Chưa hiểu'],['another_example','Ví dụ khác'],...(meta.optionalMicroCheck?[['try_micro_check','Thử 1 câu nhanh']]:[]),['report_suspect_answer','Có vẻ sai']]){const button=document.createElement('button');button.type='button';button.dataset.qaAction=id;button.dataset.targetAiMessageId=meta.aiMessageId||'';button.textContent=label;actions.append(button);}row.append(actions);const suggestions=window.HSKQaIntentRouter?.normalizeSuggestedQuestions?.(meta.suggestedQuestions||[],meta.aiMessageId)||[];if(suggestions.length&&meta.aiMessageId===activeSuggestionMessageId){const group=document.createElement('div');group.className='qa-suggestions-group';const caption=document.createElement('div');caption.className='qa-suggestions-caption';caption.textContent='Hỏi tiếp về phần này:';const stack=document.createElement('div');stack.className='qa-suggestions-stack';for(const sug of suggestions){const button=document.createElement('button');button.type='button';button.className='qa-suggestion-row-btn';button.dataset.qaSuggestionId=sug.id;button.dataset.targetAiMessageId=sug.targetAiMessageId;button.textContent=sug.text;stack.append(button);}group.append(caption,stack);row.append(group);}}messages.append(row);if(scroll)scrollToLatest();}
  let thinkingTimer=null,thinkingStartedAt=0,thinkingCardEl=null;
