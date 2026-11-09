@@ -316,12 +316,13 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     }catch{return reply({error:'Máy chủ chưa bật lưu API riêng.'},503);}
    }
    const isAiQa=isLessonAsk&&body.lesson?.content?.mode==='ai-qa';
-   const thinking=body.thinking??'low',requestedAiModel=isAiQa&&typeof body.aiModel==='string'?body.aiModel.trim():'';
-   if(isAiQa&&(!QA_THINKING_MODELS.has(thinking)||requestedAiModel&&!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(requestedAiModel)))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
-   const aiChoice=isAiQa?normalizeAiProviderChoice(body.aiProvider):'auto';
+   const isPersonalAllowed=isAiQa||isLessonAsk;
+   const thinking=body.thinking??'low',requestedAiModel=isPersonalAllowed&&typeof body.aiModel==='string'?body.aiModel.trim():'';
+   if(isPersonalAllowed&&(!QA_THINKING_MODELS.has(thinking)||requestedAiModel&&!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(requestedAiModel)))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
+   const aiChoice=isPersonalAllowed?normalizeAiProviderChoice(body.aiProvider):'auto';
    if(aiChoice===null)return reply({error:'Nhà cung cấp AI không hợp lệ.',code:'AI_PROVIDER_INVALID'},400);
    let personalAi=null;
-   if(isAiQa&&env.AI_CONTROL){
+   if(isPersonalAllowed&&env.AI_CONTROL){
     try{
      const targetProvider=(typeof body.personalProvider==='string'&&PERSONAL_PROVIDERS[body.personalProvider])?body.personalProvider:(aiChoice.startsWith('personal:')?aiChoice.slice(9):undefined);
      personalAi=await personalAiCall(env,account.localId,'personal-ai-use',targetProvider?{provider:targetProvider}:undefined);
@@ -330,9 +331,9 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    }
    const usePersonalAi=personalAi?.enabled===true&&(aiChoice==='auto'||aiChoice==='personal'||aiChoice.startsWith('personal:'));
    const sharedCookieReady=typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim());
-   const choiceError=isAiQa?aiProviderChoiceError(aiChoice,{personalEnabled:personalAi?.enabled===true,sharedCookieReady,geminiReady:configuredGeminiKeys(env).length>0}):null;
+   const choiceError=isPersonalAllowed?aiProviderChoiceError(aiChoice,{personalEnabled:personalAi?.enabled===true,sharedCookieReady,geminiReady:configuredGeminiKeys(env).length>0}):null;
    if(choiceError)return reply({error:choiceError,code:'AI_PROVIDER_UNAVAILABLE'},409);
-   const useSharedChatGptCookie=isAiQa&&!usePersonalAi&&sharedCookieReady&&(aiChoice==='system-chatgpt'||aiChoice==='auto'&&(env.AI_QA_PROVIDER==='chatgpt-cookie'||!configuredGeminiKeys(env).length));
+   const useSharedChatGptCookie=isPersonalAllowed&&!usePersonalAi&&sharedCookieReady&&(aiChoice==='system-chatgpt'||aiChoice==='auto'&&(env.AI_QA_PROVIDER==='chatgpt-cookie'||!configuredGeminiKeys(env).length));
    if(isLessonAsk&&!usePersonalAi&&!useSharedChatGptCookie&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ AI chưa được kích hoạt.'},503);
    if(isAiQa){
     const guardCheck=sharedGuardrail.validateInput(body.question,'qa',{strictRelevance:false});
@@ -375,9 +376,9 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(isTranscript){try{previousMusicScript=await env.MUSIC_BUCKET?.head('lyrics/'+body.trackId+'.json');body.media=await libraryTranscriptMedia(body.trackId,{fetchFn:rawFetchFn,env,signal:controller.signal});}catch(e){return reply({error:e.message||'Chưa xác minh được bài trong kho.'},e.status||502);}}
    // Per-isolate cooldown reduces double submissions; provider free-tier quotas remain the global limit.
    const cooldownKey=(isTranscript?'transcript:':isReading?'reading:':isDictionaryTranslate?'dictionary-translate:':isHandwriting?'handwriting:':isOcr?'ocr:':isAsk?'ask:':'translate:')+c.sub;
-   if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true'&&(cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
+   if(!isAdmin&&!usePersonalAi&&env.AI_ABUSE_ENABLED!=='true'&&(cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
    if(cooldowns.size>1000)for(const [uid,t] of cooldowns)if(t<=now())cooldowns.delete(uid);
-   if(!isAdmin&&env.AI_ABUSE_ENABLED!=='true')cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
+   if(!isAdmin&&!usePersonalAi&&env.AI_ABUSE_ENABLED!=='true')cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
    const level=body.hsk;
    if(!usePersonalAi&&env.QA_CACHE_ENABLED==='true'&&['/ask','/lesson-ask','/dictionary-lookup','/dictionary-translate'].includes(route)){
     {const env=roleEnv;qaSession=await qaBegin(route,body,account.localId,env,isAdmin);}
@@ -553,7 +554,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     const answerText=(candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('').replace(/<\/?escape>/gi,'').trim();
     let parsed;
     try{parsed=JSON.parse(answerText);}catch{
-     if((usePersonalAi||useSharedChatGptCookie)&&isAiQa){
+     if(usePersonalAi||useSharedChatGptCookie){
       const fencedJson=answerText.match(/(?:^|\n)\s*```(?:json)?[ \t]*\r?\n(\s*\{[\s\S]*?\})\s*```/i);
       if(fencedJson){try{parsed=JSON.parse(fencedJson[1]);}catch{}}
       if(!parsed){const b0=answerText.indexOf('{'),b1=answerText.lastIndexOf('}');if(b0!==-1&&b1>b0){try{parsed=JSON.parse(answerText.slice(b0,b1+1));}catch{}}}
@@ -563,10 +564,16 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      }
      if(!parsed)return reply({error:'AI trả lời chưa đúng định dạng. Hãy thử lại.'},502);
     }
-    if((usePersonalAi||useSharedChatGptCookie)&&isAiQa&&typeof parsed==='string')parsed={answer:parsed};
+    if((usePersonalAi||useSharedChatGptCookie)&&typeof parsed==='string')parsed={answer:parsed};
     if(isAiQa&&parsed?.error==='OUT_OF_SCOPE')return reply({error:'Yêu cầu của bạn nằm ngoài phạm vi học tiếng Trung HSK!',code:'OUT_OF_SCOPE'},400);
     let answer=parsed?.answer;
-    if(isAiQa&&typeof answer!=='string'){answer=Array.isArray(answer)?answer.filter(x=>typeof x==='string').join('\n\n').trim():answer&&typeof answer==='object'?String(answer.content||answer.text||answer.answer||answer.answer_vi||answer.explanation||answer.message||'').trim():String(parsed?.answer_vi||parsed?.content||parsed?.text||parsed?.reply||parsed?.response||parsed?.explanation||'').trim();}
+    if(typeof answer!=='string'){
+     if((usePersonalAi||useSharedChatGptCookie)&&parsed&&typeof parsed==='object'&&!Array.isArray(parsed)){
+      answer=typeof parsed.text==='string'?parsed.text:(typeof parsed.explanation==='string'?parsed.explanation:JSON.stringify(parsed));
+     }else if(isAiQa){
+      answer=Array.isArray(answer)?answer.filter(x=>typeof x==='string').join('\n\n').trim():answer&&typeof answer==='object'?String(answer.content||answer.text||answer.answer||answer.answer_vi||answer.explanation||answer.message||'').trim():String(parsed?.answer_vi||parsed?.content||parsed?.text||parsed?.reply||parsed?.response||parsed?.explanation||'').trim();
+     }
+    }
     if(isAiQa){
      if(typeof answer!=='string'||!answer.trim()||answer.length>5000)return reply({error:'Gia sư AI trả về dữ liệu chưa đầy đủ. Hãy thử lại.'},502);
      const strategy=typeof parsed.explanationStrategyUsed==='string'&&parsed.explanationStrategyUsed.trim()?parsed.explanationStrategyUsed.trim().slice(0,120):'direct_explanation';

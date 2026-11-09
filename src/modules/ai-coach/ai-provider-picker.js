@@ -585,6 +585,24 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
     return {answer,primaryNodeKey,nodeLabel,coreRuleSummary,explanationStrategyUsed:strategy,optionalMicroCheck:micro,suggestedQuestions,memoryCandidates,mode:'ai-qa'};
   }
 
+  function getActiveAiParams(){
+    normalizeSelection();
+    const info=activeProviderInfo();
+    const choiceVal=entry(selected)?.value||'auto';
+    const thinkingEl=document.getElementById('aiQaThinking');
+    const activeOpt=(thinkingEl&&!thinkingEl.disabled)?thinkingEl.selectedOptions?.[0]:null;
+    const rawSelection=(thinkingEl&&!thinkingEl.disabled)?thinkingEl.value:'low';
+    const selectedThinking=activeOpt?.dataset?.tier||(rawSelection.startsWith('model:')?'low':rawSelection);
+    const selectedAiModel=rawSelection.startsWith('model:')?rawSelection.slice(6):(activeOpt?.dataset?.model&&info?.kind&&info.kind!=='system-gemini'?activeOpt.dataset.model:(info?.savedModel||''));
+    return {
+      providerInfo:info,
+      aiProvider:choiceVal!=='auto'?choiceVal:undefined,
+      personalProvider:(info?.isPersonal&&info?.kind)?info.kind:undefined,
+      aiModel:selectedAiModel||undefined,
+      thinking:selectedThinking||'low'
+    };
+  }
+
   selected=readSaved();
   window.HSKAiProviderPicker={
     refresh,
@@ -592,6 +610,7 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
     syncPersonal,
     tryDirectAsk,
     activeProviderInfo,
+    getActiveAiParams,
     _buildOptions:buildProviderModelOptions,
     // Giá trị gửi lên Worker; 'auto' không gửi gì để giữ hành vi mặc định.
     choice(){normalizeSelection();return entry(selected)?.value||'auto';}
