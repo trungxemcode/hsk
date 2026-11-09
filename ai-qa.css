@@ -742,3 +742,186 @@ html body.studio-enabled #aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaS
   #aiQaPanel .qa-provider-btn{width:28px;padding:0;justify-content:center;}
   #aiQaPanel .qa-provider-btn :is(.qa-provider-label,.qa-provider-caret){display:none;}
 }
+
+/* Hiệu ứng suy luận trực quan của Gia sư AI (ChatGPT / Gemini style) */
+.ai-qa-thinking-card{
+  align-self:flex-start;
+  width:min(640px,92%);
+  padding:14px 16px;
+  border:1px solid var(--qa-input-border);
+  border-radius:var(--radius-card);
+  background:color-mix(in srgb,var(--qa-surface) 92%,var(--accent-light));
+  color:var(--qa-text);
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  animation:aiQaThinkingFadeIn .22s ease-out;
+}
+.ai-qa-thinking-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+.ai-qa-thinking-orb{
+  width:28px;
+  height:28px;
+  flex:none;
+  border-radius:var(--radius-pill);
+  background:color-mix(in srgb,var(--accent) 16%,var(--qa-surface));
+  color:var(--accent);
+  display:grid;
+  place-items:center;
+  animation:aiQaOrbPulse 1.8s ease-in-out infinite;
+}
+.ai-qa-thinking-orb svg{
+  width:16px;
+  height:16px;
+  fill:currentColor;
+  animation:aiQaOrbSpin 4.2s linear infinite;
+}
+.ai-qa-thinking-title{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px;
+  flex:1;
+  min-width:0;
+}
+.ai-qa-thinking-title strong{
+  font-size:13px;
+  font-weight:700;
+  color:var(--qa-text);
+}
+.ai-qa-thinking-badge{
+  padding:2px 8px;
+  border-radius:var(--radius-pill);
+  background:color-mix(in srgb,var(--accent) 14%,var(--qa-surface));
+  color:var(--accent);
+  font-size:11px;
+  font-weight:650;
+}
+.ai-qa-thinking-dots{
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  margin-left:2px;
+}
+.ai-qa-thinking-dots i{
+  width:5px;
+  height:5px;
+  border-radius:var(--radius-round);
+  background:var(--accent);
+  display:inline-block;
+  animation:aiQaDotWave 1.2s ease-in-out infinite;
+}
+.ai-qa-thinking-dots i:nth-child(2){animation-delay:.18s;}
+.ai-qa-thinking-dots i:nth-child(3){animation-delay:.36s;}
+.ai-qa-thinking-timer{
+  flex:none;
+  font-size:11px;
+  font-weight:650;
+  font-variant-numeric:tabular-nums;
+  color:var(--qa-subtle);
+  padding:2px 7px;
+  border-radius:var(--radius-pill);
+  background:var(--qa-hover);
+}
+.ai-qa-thinking-bar{
+  height:4px;
+  width:100%;
+  border-radius:var(--radius-pill);
+  background:color-mix(in srgb,var(--qa-input-border) 65%,var(--palette-clear));
+  overflow:hidden;
+}
+.ai-qa-thinking-bar-fill{
+  display:block;
+  height:100%;
+  border-radius:var(--radius-pill);
+  background:var(--accent);
+  transition:width .3s ease;
+  animation:aiQaBarGlow 1.6s ease-in-out infinite;
+}
+.ai-qa-thinking-steps{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.ai-qa-thinking-step{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  line-height:1.4;
+  color:var(--qa-subtle);
+  transition:color .2s ease,opacity .2s ease;
+}
+.ai-qa-thinking-step[data-state="pending"]{opacity:.52;}
+.ai-qa-thinking-step[data-state="active"]{
+  color:var(--qa-text);
+  font-weight:650;
+  opacity:1;
+}
+.ai-qa-thinking-step[data-state="done"]{
+  color:var(--qa-subtle);
+  opacity:.82;
+}
+.ai-qa-thinking-step-dot{
+  width:8px;
+  height:8px;
+  flex:none;
+  border-radius:var(--radius-round);
+  border:1.5px solid currentColor;
+  box-sizing:border-box;
+}
+.ai-qa-thinking-step[data-state="active"] .ai-qa-thinking-step-dot{
+  background:var(--accent);
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 24%,var(--palette-clear));
+  animation:aiQaDotWave 1.1s ease-in-out infinite;
+}
+.ai-qa-thinking-step[data-state="done"] .ai-qa-thinking-step-dot{
+  background:var(--green);
+  border-color:var(--green);
+}
+.ai-qa-thinking-skeleton{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding-top:2px;
+}
+.ai-qa-thinking-skeleton span{
+  display:block;
+  height:8px;
+  border-radius:var(--radius-pill);
+  background:color-mix(in srgb,var(--qa-input-border) 55%,var(--palette-clear));
+  animation:aiQaSkeletonPulse 1.5s ease-in-out infinite;
+}
+.ai-qa-thinking-skeleton span:first-child{width:88%;}
+.ai-qa-thinking-skeleton span:last-child{width:62%;animation-delay:.25s;}
+@keyframes aiQaThinkingFadeIn{
+  from{opacity:0;transform:translateY(4px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes aiQaOrbPulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+}
+@keyframes aiQaOrbSpin{
+  0%{transform:rotate(0deg);}
+  50%{transform:rotate(180deg) scale(1.06);}
+  100%{transform:rotate(360deg);}
+}
+@keyframes aiQaDotWave{
+  0%,100%{opacity:.35;transform:translateY(0);}
+  50%{opacity:1;transform:translateY(-2px);}
+}
+@keyframes aiQaBarGlow{
+  0%,100%{opacity:.78;}
+  50%{opacity:1;}
+}
+@keyframes aiQaSkeletonPulse{
+  0%,100%{opacity:.35;}
+  50%{opacity:.75;}
+}

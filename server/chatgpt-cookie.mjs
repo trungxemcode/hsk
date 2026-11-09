@@ -494,9 +494,9 @@ export function getOrCreateCookieClient(sessionToken,{baseUrl=CHATGPT_BASE_URL,n
 export function normalizeChatGptTutorReply(rawText,{userId='student_01',questionText='',questionMessageId='',memoryManager=sharedMemoryManager}={}){
  const text=String(rawText||'').trim();
  const match=text.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
- const jsonStr=(match?match[1].trim():text).replace(/^<escape>\s*([\s\S]*?)\s*<\/escape>$/i,'$1');
+ const jsonStr=(match?match[1].trim():text).replace(/<\/?escape>/gi,'').trim();
  let data=null;
- try{data=JSON.parse(jsonStr);}catch{}
+ try{data=JSON.parse(jsonStr);}catch{const b0=jsonStr.indexOf('{'),b1=jsonStr.lastIndexOf('}');if(b0!==-1&&b1>b0){try{data=JSON.parse(jsonStr.slice(b0,b1+1));}catch{}}}
  if(data&&typeof data==='object'){
   if(data.error==='OUT_OF_SCOPE'){
    return {outOfScope:true,error:'Yêu cầu của bạn nằm ngoài phạm vi học tiếng Trung HSK!'};
@@ -558,6 +558,8 @@ export function normalizeChatGptTutorReply(rawText,{userId='student_01',question
     }
    };
   }
+  const coercedAns=typeof data.answer==='string'?data.answer.replace(/<\/?escape>/gi,'').trim():Array.isArray(data.answer)?data.answer.filter(x=>typeof x==='string').join('\n\n').trim():data.answer&&typeof data.answer==='object'?String(data.answer.content||data.answer.text||data.answer.answer||data.answer.answer_vi||data.answer.explanation||data.answer.message||'').replace(/<\/?escape>/gi,'').trim():String(data.content||data.text||data.reply||data.response||data.explanation||'').replace(/<\/?escape>/gi,'').trim();
+  if(coercedAns)data.answer=coercedAns;
   if(typeof data.answer==='string'&&data.answer.trim()){
    return {
     outOfScope:false,
@@ -633,7 +635,7 @@ export async function chatgptCookieGenerate(config,requestBody,fetchFn=fetch,sig
  if(normalized?.outOfScope){
   return Response.json({candidates:[{content:{parts:[{text:JSON.stringify({error:'OUT_OF_SCOPE',message:normalized.error})}]}}]});
  }
- const finalText=normalized?.payload?JSON.stringify(normalized.payload):replyText.trim();
+ const finalText=normalized?.payload?JSON.stringify(normalized.payload):replyText.replace(/<\/?escape>/gi,'').trim();
  return Response.json({candidates:[{content:{parts:[{text:finalText}]}}]});
 }
 
