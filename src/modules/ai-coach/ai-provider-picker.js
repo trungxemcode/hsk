@@ -1,4 +1,4 @@
-/* Hỏi đáp AI: chọn nhà cung cấp AI trong ô chat, cache trạng thái 15 phút và gọi thẳng API riêng trên thiết bị khi có thể. */
+/* Hỏi đáp AI: chọn nhà cung cấp AI, nhận diện loại AI đang dùng để nạp mức độ mạnh & model riêng, cache trạng thái 15 phút và gọi thẳng API riêng trên thiết bị. */
 (()=>{'use strict';
   const PERSONAL=[
     ['claude','Claude'],['deepseek','DeepSeek'],['openai','OpenAI'],
@@ -9,6 +9,120 @@
     fosta:'https://codex.fosta.app/v1/chat/completions',
     deepseek:'https://api.deepseek.com/chat/completions',
     gemini:'https://generativelanguage.googleapis.com/v1beta/models/'
+  };
+  const PROVIDER_MODELS={
+    'system-gemini':{
+      label:'Gemini hệ thống',
+      tiers:{
+        low:{model:'gemini-3.1-flash-lite',label:'Thấp · Gemini 3.1 Lite'},
+        medium:{model:'gemini-3.5-flash',label:'Trung bình · Gemini 3.5 Flash'},
+        high:{model:'gemini-3.8-flash',label:'Cao · Gemini 3.8 Flash'}
+      },
+      models:[
+        ['gemini-3.1-flash-lite','gemini-3.1-flash-lite (Nhanh)'],
+        ['gemini-3.5-flash','gemini-3.5-flash (Cân bằng)'],
+        ['gemini-3.8-flash','gemini-3.8-flash (Mạnh)']
+      ]
+    },
+    'system-chatgpt':{
+      label:'ChatGPT hệ thống',
+      tiers:{
+        low:{model:'gpt-4o-mini',label:'Thấp · gpt-4o-mini'},
+        medium:{model:'gpt-4o',label:'Trung bình · gpt-4o'},
+        high:{model:'o3-mini',label:'Cao · o3-mini'}
+      },
+      models:[
+        ['gpt-4o-mini','gpt-4o-mini (Nhanh · nhẹ)'],
+        ['gpt-4o','gpt-4o (Đa năng · Plus)'],
+        ['gpt-4-1-mini','gpt-4-1-mini (Tốc độ cao)'],
+        ['gpt-4-1','gpt-4-1 (Phân tích sâu)'],
+        ['o3-mini','o3-mini (Suy luận logic)'],
+        ['o4-mini','o4-mini (Suy luận mới)']
+      ]
+    },
+    'chatgpt-cookie':{
+      label:'ChatGPT (cookie riêng)',
+      tiers:{
+        low:{model:'gpt-4o-mini',label:'Thấp · gpt-4o-mini'},
+        medium:{model:'gpt-4o',label:'Trung bình · gpt-4o'},
+        high:{model:'o3-mini',label:'Cao · o3-mini'}
+      },
+      models:[
+        ['gpt-4o-mini','gpt-4o-mini (Nhanh · nhẹ)'],
+        ['gpt-4o','gpt-4o (Đa năng · Plus)'],
+        ['gpt-4-1-mini','gpt-4-1-mini (Tốc độ cao)'],
+        ['gpt-4-1','gpt-4-1 (Phân tích sâu)'],
+        ['o3-mini','o3-mini (Suy luận logic)'],
+        ['o4-mini','o4-mini (Suy luận mới)']
+      ]
+    },
+    fosta:{
+      label:'Fosta',
+      tiers:{
+        low:{model:'gpt-6-luna',label:'Thấp · gpt-6-luna'},
+        medium:{model:'gpt-6-astra',label:'Trung bình · gpt-6-astra'},
+        high:{model:'gpt-6.1-sol',label:'Cao · gpt-6.1-sol'}
+      },
+      models:[
+        ['gpt-6-luna','gpt-6-luna (Nhanh)'],
+        ['gpt-6-astra','gpt-6-astra (Cân bằng)'],
+        ['gpt-6.1-sol','gpt-6.1-sol (Mạnh nhất)']
+      ]
+    },
+    openai:{
+      label:'OpenAI',
+      tiers:{
+        low:{model:'gpt-4o-mini',label:'Thấp · gpt-4o-mini'},
+        medium:{model:'gpt-4o',label:'Trung bình · gpt-4o'},
+        high:{model:'o3-mini',label:'Cao · o3-mini'}
+      },
+      models:[
+        ['gpt-4o-mini','gpt-4o-mini (Nhanh)'],
+        ['gpt-4o','gpt-4o (Đa năng)'],
+        ['gpt-4.1-mini','gpt-4.1-mini (Tốc độ cao)'],
+        ['gpt-4.1','gpt-4.1 (Chuẩn xác)'],
+        ['o3-mini','o3-mini (Suy luận)']
+      ]
+    },
+    deepseek:{
+      label:'DeepSeek',
+      tiers:{
+        low:{model:'deepseek-chat',label:'Thấp · deepseek-chat'},
+        medium:{model:'deepseek-chat',label:'Trung bình · deepseek-chat'},
+        high:{model:'deepseek-reasoner',label:'Cao · deepseek-reasoner'}
+      },
+      models:[
+        ['deepseek-chat','deepseek-chat (DeepSeek V3)'],
+        ['deepseek-reasoner','deepseek-reasoner (DeepSeek R1)']
+      ]
+    },
+    claude:{
+      label:'Claude',
+      tiers:{
+        low:{model:'claude-3-5-haiku-latest',label:'Thấp · Claude 3.5 Haiku'},
+        medium:{model:'claude-3-7-sonnet-latest',label:'Trung bình · Claude 3.7 Sonnet'},
+        high:{model:'claude-sonnet-4-20250514',label:'Cao · Claude Sonnet 4'}
+      },
+      models:[
+        ['claude-3-5-haiku-latest','claude-3-5-haiku-latest (Nhanh)'],
+        ['claude-3-7-sonnet-latest','claude-3-7-sonnet-latest (Cân bằng)'],
+        ['claude-sonnet-4-20250514','claude-sonnet-4-20250514 (Mạnh)']
+      ]
+    },
+    gemini:{
+      label:'Gemini (API riêng)',
+      tiers:{
+        low:{model:'gemini-2.5-flash-lite',label:'Thấp · Gemini 2.5 Lite'},
+        medium:{model:'gemini-2.5-flash',label:'Trung bình · Gemini 2.5 Flash'},
+        high:{model:'gemini-2.5-pro',label:'Cao · Gemini 2.5 Pro'}
+      },
+      models:[
+        ['gemini-2.5-flash-lite','gemini-2.5-flash-lite (Nhanh)'],
+        ['gemini-2.5-flash','gemini-2.5-flash (Cân bằng)'],
+        ['gemini-2.5-pro','gemini-2.5-pro (Suy luận sâu)'],
+        ['gemini-2.0-flash','gemini-2.0-flash']
+      ]
+    }
   };
   const CACHE_TTL_MS=15*60*1000;
   const LOCK='<svg class="qa-provider-lock" aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
@@ -135,6 +249,38 @@
   function current(){return items().find(item=>item.id===selected)||items()[1];}
   function closeAll(){if(openPicker){openPicker.close();openPicker=null;}}
 
+  function activeProviderInfo(){
+    normalizeSelection();
+    const p=availability?.personal||{},sys=availability?.system||{};
+    let kind='system-gemini',isPersonal=false,explicitNonSystemGemini=false;
+    if(selected.startsWith('personal:')){
+      kind=selected.slice(9);isPersonal=true;explicitNonSystemGemini=true;
+    }else if(selected==='system-chatgpt'){
+      kind='system-chatgpt';explicitNonSystemGemini=true;
+    }else if(selected==='system-gemini'){
+      kind='system-gemini';
+    }else if(p.enabled===true&&p.provider&&PROVIDER_MODELS[p.provider]){
+      kind=p.provider;isPersonal=true;
+    }else if(!sys.gemini?.available&&sys.chatgpt?.available){
+      kind='system-chatgpt';
+    }
+    const spec=PROVIDER_MODELS[kind]||PROVIDER_MODELS['system-gemini'];
+    const savedModel=isPersonal&&p.provider===kind&&typeof p.model==='string'?p.model.trim():'';
+    const models=spec.models.map(([id,text])=>[id,id===savedModel?`${text} · Đang lưu`:text]);
+    if(savedModel&&!models.some(([id])=>id===savedModel)){
+      models.unshift([savedModel,`${savedModel} (Đang lưu)`]);
+    }
+    return {
+      kind,
+      label:spec.label,
+      isPersonal,
+      explicitNonSystemGemini,
+      savedModel,
+      tiers:spec.tiers,
+      models
+    };
+  }
+
   function build(control){
     const wrap=document.createElement('div');wrap.className='qa-provider';
     const button=document.createElement('button');button.type='button';button.className='qa-provider-btn';
@@ -187,7 +333,11 @@
     });
     return api;
   }
-  function renderAll(){normalizeSelection();for(const p of picks)p.render();}
+  function renderAll(){
+    normalizeSelection();
+    for(const p of picks)p.render();
+    window.dispatchEvent(new CustomEvent('hsk-ai-provider-state'));
+  }
   for(const control of controls)picks.push(build(control));
   document.addEventListener('pointerdown',event=>{if(openPicker&&!openPicker.menu.contains(event.target)&&!openPicker.button.contains(event.target))closeAll();});
   window.addEventListener('resize',closeAll);
@@ -284,11 +434,13 @@ Chỉ trả JSON gồm primaryNodeKey, nodeLabel, coreRuleSummary, answer, expla
 === CÂU HỎI GỢI Ý TIẾP THEO ===
 Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng khác nhau: decision_guide (cách tự chọn), context_shift (tình huống/ngoại lệ), practice_request (xin một câu tự luyện). Mỗi text dưới 18 từ, là câu hỏi tự nhiên, không tự kết luận người học yếu. Nếu có practice_request, chuẩn bị optionalMicroCheck tương ứng.`;
   }
-  async function tryDirectAsk({uid:targetUid,aiProvider,question,hsk,lesson,history,signal}={}){
+  async function tryDirectAsk({uid:targetUid,aiProvider,thinking,aiModel,question,hsk,lesson,history,signal}={}){
     if(aiProvider&&aiProvider!=='auto'&&aiProvider!=='personal')return null;
     if(availability?.personal&&(availability.personal.configured===false||availability.personal.enabled===false))return null;
     const cred=await loadDirectCred(targetUid);
     if(!cred||!cred.enabled||!cred.apiKey||!Object.hasOwn(DIRECT_ENDPOINTS,cred.provider))return null;
+    const chosenModel=(aiModel&&(cred.provider!=='fosta'||['gpt-6.1-sol','gpt-6-astra','gpt-6-luna'].includes(aiModel)))?aiModel:
+      (thinking&&PROVIDER_MODELS[cred.provider]?.tiers?.[thinking]?.model)||cred.model;
     const instruction=buildDirectPrompt({
       hsk,snapshot:lesson?.content?.learning_snapshot,intentInfo:lesson?.content?.intentInfo,
       understandingNodes:lesson?.content?.understandingNodes,questionMessageId:lesson?.content?.questionMessageId
@@ -296,14 +448,14 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
     const endpoint=DIRECT_ENDPOINTS[cred.provider],headers={'Content-Type':'application/json'};
     let url=endpoint,body;
     if(cred.provider==='gemini'){
-      url+=encodeURIComponent(cred.model)+':generateContent';
+      url+=encodeURIComponent(chosenModel)+':generateContent';
       headers['x-goog-api-key']=cred.apiKey;
       const contents=[...(Array.isArray(history)?history:[]).map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:String(m.text||'')}]})) ,{role:'user',parts:[{text:String(question||'').trim()}]}];
       body={systemInstruction:{parts:[{text:instruction}]},contents,generationConfig:{temperature:0.25,maxOutputTokens:1800,responseMimeType:'application/json',responseSchema:DIRECT_SCHEMA}};
     }else{
       headers.Authorization='Bearer '+cred.apiKey;
       const messages=[{role:'system',content:instruction},...(Array.isArray(history)?history:[]).map(m=>({role:m.role==='assistant'?'assistant':'user',content:String(m.text||'')})),{role:'user',content:String(question||'').trim()}];
-      body={model:cred.model,messages,...(cred.provider==='fosta'?{stream:false}:{})};
+      body={model:chosenModel,messages,...(cred.provider==='fosta'?{stream:false}:{})};
     }
     let response;
     try{
@@ -340,13 +492,15 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
     return {answer,primaryNodeKey,nodeLabel,coreRuleSummary,explanationStrategyUsed:strategy,optionalMicroCheck:micro,suggestedQuestions,memoryCandidates,mode:'ai-qa'};
   }
 
-  selected=readSaved();renderAll();
+  selected=readSaved();
   window.HSKAiProviderPicker={
     refresh,
     applyAvailability,
     syncPersonal,
     tryDirectAsk,
+    activeProviderInfo,
     // Giá trị gửi lên Worker; 'auto' không gửi gì để giữ hành vi mặc định.
     choice(){normalizeSelection();return entry(selected)?.value||'auto';}
   };
+  renderAll();
 })();
