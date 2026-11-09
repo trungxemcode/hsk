@@ -2684,7 +2684,7 @@ async function readBody(request,limit=20000){
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
 export const WORKER_REVISION='hsk-qa-thinking-r1';
-const QA_THINKING_MODELS=new Map([['low','gemini-3.1-flash-lite'],['medium','gemini-3.5-flash'],['high','gemini-3.8-flash']]);
+const QA_THINKING_MODELS=new Map([['low','gemini-3.1-flash-lite'],['medium','gemini-3.5-flash'],['high','gemini-3.8-flash']]);const QA_PROVIDER_TIER_MODELS={'chatgpt-cookie':{low:'gpt-4o-mini',medium:'gpt-4o',high:'o3-mini'},openai:{low:'gpt-4o-mini',medium:'gpt-4o',high:'o3-mini'},deepseek:{low:'deepseek-chat',medium:'deepseek-chat',high:'deepseek-reasoner'},claude:{low:'claude-3-5-haiku-latest',medium:'claude-3-7-sonnet-latest',high:'claude-sonnet-4-20250514'},fosta:{low:'gpt-6-luna',medium:'gpt-6-astra',high:'gpt-6.1-sol'},gemini:{low:'gemini-2.5-flash-lite',medium:'gemini-2.5-flash',high:'gemini-2.5-pro'}};
 export function buildCorsHeaders(request,env={}){const origin=request.headers.get('Origin')||'*';return {'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Authorization, X-Requested-With','Access-Control-Max-Age':'86400','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider, X-HSK-AI-Cache, X-HSK-Image-Remaining','Vary':'Origin'};}
 function jsonWithCors(value,status,request,env){return new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8',...buildCorsHeaders(request,env)}});}
 function mergeWeaknessItemsAcrossDevices(existing={},incoming={}){
@@ -2843,8 +2843,8 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     }catch{return reply({error:'Máy chủ chưa bật lưu API riêng.'},503);}
    }
    const isAiQa=isLessonAsk&&body.lesson?.content?.mode==='ai-qa';
-   const thinking=body.thinking??'low';
-   if(isAiQa&&!QA_THINKING_MODELS.has(thinking))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
+   const thinking=body.thinking??'low',requestedAiModel=isAiQa&&typeof body.aiModel==='string'?body.aiModel.trim():'';
+   if(isAiQa&&(!QA_THINKING_MODELS.has(thinking)||requestedAiModel&&!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(requestedAiModel)))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
    let personalAi=null;
    if(isAiQa&&env.AI_CONTROL){
     try{personalAi=await personalAiCall(env,account.localId,'personal-ai-use');}
@@ -2877,10 +2877,10 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     }catch{return reply({error:'Chưa xác minh được quyền tài khoản. Hãy thử lại.',code:'ACCOUNT_ROLES_UNAVAILABLE'},503);}
    }
    fetchFn=createAiRoleFetch(keyFetch,env,{route,body,accountRole:verifiedRole,validateData:isReading?data=>validReadingStory(data,{genre:body.genre||'dialogue',hsk:body.hsk,quality:!!body.genre,lessonWords:body.lessonWords}):undefined,onProvider:provider=>{headers['X-HSK-AI-Provider']=provider;},onAttempt:entry=>{if(isReading)timings.push(entry);}});
-   if(isAiQa&&thinking!=='low'&&!isAdmin&&verifiedRole!=='vip'){
+   const systemGeminiModel=requestedAiModel&&[...QA_THINKING_MODELS.values()].includes(requestedAiModel)?requestedAiModel:QA_THINKING_MODELS.get(thinking);if(isAiQa&&!usePersonalAi&&!useSharedChatGptCookie&&(thinking!=='low'||systemGeminiModel!=='gemini-3.1-flash-lite')&&!isAdmin&&verifiedRole!=='vip'){
     return reply({error:'Mức Trung bình và Cao chỉ dành cho VIP và Admin.',code:'QA_THINKING_FORBIDDEN'},403);
    }
-   const model=isAiQa?QA_THINKING_MODELS.get(thinking):env.GEMINI_MODEL||'gemini-3.5-flash-lite';
+   const model=isAiQa?systemGeminiModel:env.GEMINI_MODEL||'gemini-3.5-flash-lite';
    const roleEnv=isAiQa?{...env,GEMINI_MODEL:model,QA_ACCOUNT_PROVIDER:'gemini',QA_SHADOW_MODE:'off'}:
     verifiedRole?{...env,QA_ACCOUNT_PROVIDER:roleProvider(verifiedRole),QA_SHADOW_MODE:'off'}:env;
    const providerFailure=(response,model,env,operation)=>verifiedRole==='regular'&&!isOcr&&!isHandwriting?{error:response.status===429?'xKiro đã đạt giới hạn lượt dùng. Hãy thử lại sau.':'xKiro chưa trả lời được. Hãy thử lại sau.',code:'AI_PROVIDER_ERROR',provider:'xkiro',workerRevision:WORKER_REVISION}:geminiFailure(response,model,env,operation);
@@ -3039,7 +3039,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     const usePersonalCookie=usePersonalAi&&personalAi.provider==='chatgpt-cookie';
     if(usePersonalAi&&!usePersonalCookie){
      headers['X-HSK-AI-Provider']=personalAi.provider;
-     try{response=await personalAiGenerate(personalAi,providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});}
+     try{const activePersonalModel=requestedAiModel&&(personalAi.provider!=='fosta'||['gpt-6.1-sol','gpt-6-astra','gpt-6-luna'].includes(requestedAiModel))?requestedAiModel:typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS[personalAi.provider]?.[body.thinking]?QA_PROVIDER_TIER_MODELS[personalAi.provider][body.thinking]:personalAi.model;response=await personalAiGenerate({...personalAi,model:activePersonalModel},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});}
      catch(error){
       const timeout=controller.signal.aborted||error.name==='AbortError';
       console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});
@@ -3055,7 +3055,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     }else if(useSharedChatGptCookie||usePersonalCookie){
      if(usePersonalCookie&&!personalAi.apiKey?.trim())return reply({error:'Chưa có cookie ChatGPT riêng. Kiểm tra trong Cài đặt.',code:'AI_PROVIDER_UNAVAILABLE'},409);
      headers['X-HSK-AI-Provider']='chatgpt-cookie';
-     const cookieConfig=usePersonalCookie?personalAi:{model:env.CHATGPT_COOKIE_MODEL||'gpt-4o-mini',apiKey:env.CHATGPT_SESSION_TOKEN};
+     const baseCookieConfig=usePersonalCookie?personalAi:{model:env.CHATGPT_COOKIE_MODEL||'gpt-4o-mini',apiKey:env.CHATGPT_SESSION_TOKEN};const cookieConfig={...baseCookieConfig,model:requestedAiModel||(typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS['chatgpt-cookie']?.[body.thinking])||baseCookieConfig.model};
      response=await chatgptCookieGenerate(cookieConfig,providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});
      if(!response.ok){
       const failure=await response.json().catch(()=>null);
