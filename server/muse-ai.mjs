@@ -388,7 +388,13 @@ const MUSE_BROWSER_HEADERS = {
   'Accept': 'application/json, text/plain, */*',
   'Accept-Language': 'vi-VN,vi;q=0.9,en-US;q=0.8,en;q=0.7',
   'Origin': MUSE_BASE_URL,
-  'Referer': `${MUSE_BASE_URL}/`
+  'Referer': `${MUSE_BASE_URL}/`,
+  'Sec-Fetch-Dest': 'empty',
+  'Sec-Fetch-Mode': 'cors',
+  'Sec-Fetch-Site': 'same-origin',
+  'sec-ch-ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+  'sec-ch-ua-mobile': '?0',
+  'sec-ch-ua-platform': '"Windows"'
 };
 
 export async function bootstrapMuseHatchSession(cookieHeader, { fetchFn = fetch, signal, now = () => Date.now() } = {}) {

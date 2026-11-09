@@ -10,7 +10,7 @@
  const account=()=>window.HSKAccountDashboard?.user;
  function describe(){
   const fosta=provider.value==='fosta',cookie=provider.value==='chatgpt-cookie',muse=provider.value==='muse-cookie';
-  key.maxLength=(cookie||muse)?8192:512;
+  key.maxLength=(cookie||muse)?16384:512;
   fostaModel.hidden=!fosta;fostaModel.disabled=busy||!fosta;
   model.hidden=fosta;model.disabled=busy||fosta;model.required=!fosta;
   if(cookie&&!model.value.trim())model.value='gpt-6';

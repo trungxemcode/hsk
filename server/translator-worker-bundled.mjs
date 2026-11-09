@@ -1370,7 +1370,13 @@ const MUSE_BROWSER_HEADERS = {
   'Accept': 'application/json, text/plain, */*',
   'Accept-Language': 'vi-VN,vi;q=0.9,en-US;q=0.8,en;q=0.7',
   'Origin': MUSE_BASE_URL,
-  'Referer': `${MUSE_BASE_URL}/`
+  'Referer': `${MUSE_BASE_URL}/`,
+  'Sec-Fetch-Dest': 'empty',
+  'Sec-Fetch-Mode': 'cors',
+  'Sec-Fetch-Site': 'same-origin',
+  'sec-ch-ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+  'sec-ch-ua-mobile': '?0',
+  'sec-ch-ua-platform': '"Windows"'
 };
 
 export async function bootstrapMuseHatchSession(cookieHeader, { fetchFn = fetch, signal, now = () => Date.now() } = {}) {
@@ -1964,7 +1970,7 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
  }
  if(action!=='personal-ai-save'||!settings||Object.keys(settings).some(k=>!['provider','model','enabled','apiKey'].includes(k)))return Response.json({}, {status:400});
  const {provider,model,enabled,apiKey}=settings;
- const maxKeyLen=(provider==='chatgpt-cookie'||provider==='muse-cookie')?8192:512;
+ const maxKeyLen=(provider==='chatgpt-cookie'||provider==='muse-cookie')?16384:512;
  if(!Object.hasOwn(PERSONAL_PROVIDERS,provider)||typeof model!=='string'||!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(model)||
   typeof enabled!=='boolean'||provider==='fosta'&&!PERSONAL_FOSTA_MODELS.has(model)||
   apiKey!==undefined&&(typeof apiKey!=='string'||apiKey.length<8||apiKey.length>maxKeyLen||!(provider==='chatgpt-cookie'||provider==='muse-cookie'?/^[ -~]+$/:/^[!-~]+$/).test(apiKey)))return Response.json({}, {status:400});
