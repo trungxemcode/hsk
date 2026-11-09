@@ -692,11 +692,12 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
       }
       if (sf.body_chunk) {
         const data = sf.body_chunk.data;
+        let eventObj = null;
         if (data?.byteLength) {
           try {
             const obj = JSON.parse(new TextDecoder().decode(data));
             if (obj && typeof obj === 'object' && !Array.isArray(obj) && 'event' in obj) {
-              return { kind: 'event', streamId: sid, obj };
+              eventObj = obj;
             }
           } catch {}
           let b = streamBodies.get(sid);
@@ -708,7 +709,10 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
           streamBodies.delete(sid);
           const combined = museConcat(...b.parts);
           const parsed = combined.byteLength ? JSON.parse(new TextDecoder().decode(combined)) : {};
-          return { kind: 'complete', streamId: sid, status: b.status, body: parsed };
+          return { kind: 'complete', streamId: sid, status: b.status, body: parsed, event: eventObj };
+        }
+        if (eventObj) {
+          return { kind: 'event', streamId: sid, obj: eventObj };
         }
       }
       return null;
@@ -754,10 +758,25 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
     const textParts = [];
     const deadline = Date.now() + timeoutMs;
 
+    let idleAfterTextCount = 0;
     while (Date.now() < deadline) {
-      const ev = await recvFrameEvent(1200);
+      const ev = await recvFrameEvent(1000);
       if (ev === 'closed') break;
-      if (!ev) continue;
+      if (!ev) {
+        if (textParts.length > 0) {
+          idleAfterTextCount++;
+          if (idleAfterTextCount >= 2) break;
+        }
+        continue;
+      }
+      idleAfterTextCount = 0;
+
+      if (ev.kind === 'complete' && ev.event) {
+        const obj = ev.event;
+        const payload = obj.payload || obj;
+        const delta = payload.text ?? payload.delta ?? payload.content ?? (typeof payload.string === 'string' ? payload.string : '');
+        if (typeof delta === 'string' && delta) textParts.push(delta);
+      }
 
       if (ev.kind === 'event') {
         const obj = ev.obj || {};
