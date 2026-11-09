@@ -957,11 +957,14 @@ export async function probeChatGptCookieAccount(rawToken,{env={},fetchFn=fetch,s
     const mRes=await fetchFn(`${client.sm.baseUrl}/backend-api/models`,{method:'GET',headers:client.sm.getHeaders(true),signal,redirect:'manual'});
     if(mRes.ok){
      const mData=await mRes.json().catch(()=>null);
+     const allow=new Set(['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-6-mini','gpt-4o','gpt-4o-mini','o3-mini']);
+     const priority=['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-6-mini','gpt-4o','o3-mini'];
      const slugs=[];
      for(const item of Array.isArray(mData?.models)?mData.models:[]){
       const slug=typeof item?.slug==='string'?item.slug.trim():'';
-      if(slug&&!slugs.includes(slug))slugs.push(slug);
+      if(slug&&allow.has(slug)&&!slugs.includes(slug))slugs.push(slug);
      }
+     slugs.sort((a,b)=>{const ia=priority.indexOf(a),ib=priority.indexOf(b);if(ia!==-1&&ib!==-1)return ia-ib;if(ia!==-1)return -1;if(ib!==-1)return 1;return 0;});
      if(slugs.length)client.sm.availableModels=slugs;
     }
    }catch{}
@@ -1113,8 +1116,8 @@ export async function probePersonalAiCapabilities(personal,{env={},fetchFn=fetch
  try{
   if(provider==='chatgpt-cookie'){
    const info=await probeChatGptCookieAccount(apiKey,{env,fetchFn,signal,now});
-   const planType=info?.planType||((apiKey.includes('|')||apiKey.length>4000||['gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free');
-   const models=info?.models?.length?info.models:(planType==='plus'?['gpt-4o-mini','gpt-4o','o3-mini','gpt-4-1','o4-mini']:['gpt-4o-mini','o3-mini']);
+   const planType=info?.planType||((apiKey.includes('|')||apiKey.length>4000||['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free');
+   const models=info?.models?.length?info.models:(planType==='plus'?['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6']:['gpt-4o-mini','o3-mini']);
    value={planType,models};
   }else if(provider==='claude'){
    const res=await fetchFn('https://api.anthropic.com/v1/models',{method:'GET',headers:{'x-api-key':apiKey,'anthropic-version':'2023-06-01'},signal,redirect:'manual'});

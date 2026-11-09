@@ -686,11 +686,14 @@ export async function probeChatGptCookieAccount(rawToken,{env={},fetchFn=fetch,s
     const mRes=await fetchFn(`${client.sm.baseUrl}/backend-api/models`,{method:'GET',headers:client.sm.getHeaders(true),signal,redirect:'manual'});
     if(mRes.ok){
      const mData=await mRes.json().catch(()=>null);
+     const allow=new Set(['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-6-mini','gpt-4o','gpt-4o-mini','o3-mini']);
+     const priority=['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-6-mini','gpt-4o','o3-mini'];
      const slugs=[];
      for(const item of Array.isArray(mData?.models)?mData.models:[]){
       const slug=typeof item?.slug==='string'?item.slug.trim():'';
-      if(slug&&!slugs.includes(slug))slugs.push(slug);
+      if(slug&&allow.has(slug)&&!slugs.includes(slug))slugs.push(slug);
      }
+     slugs.sort((a,b)=>{const ia=priority.indexOf(a),ib=priority.indexOf(b);if(ia!==-1&&ib!==-1)return ia-ib;if(ia!==-1)return -1;if(ib!==-1)return 1;return 0;});
      if(slugs.length)client.sm.availableModels=slugs;
     }
    }catch{}

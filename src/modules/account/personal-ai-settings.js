@@ -13,7 +13,7 @@
   key.maxLength=cookie?8192:512;
   fostaModel.hidden=!fosta;fostaModel.disabled=busy||!fosta;
   model.hidden=fosta;model.disabled=busy||fosta;model.required=!fosta;
-  if(cookie&&!model.value.trim())model.value='gpt-4o-mini';
+  if(cookie&&!model.value.trim())model.value='gpt-6';
   modelLabel.htmlFor=fosta?fostaModel.id:model.id;
   $('personalAiEndpoint').textContent=fosta?'Base URL: https://codex.fosta.app/v1':cookie?'Dán giá trị cookie phiên ChatGPT. Nếu cookie tách thành .0 và .1, dán phần .0 rồi dấu | rồi phần .1, không thêm khoảng trắng.':'Nhập tên model chính xác do nhà cung cấp cấp.';
   key.placeholder=stored?.provider===provider.value?(cookie?'Để trống để giữ cookie đã lưu':'Để trống để giữ key đã lưu'):(cookie?'Dán __Secure-next-auth.session-token của bạn':'Nhập API key của bạn');
@@ -57,7 +57,7 @@
   }catch(error){if(id===requestId)status.textContent=error.message||'Chưa kết nối được máy chủ.';}
   finally{if(id===requestId)lock(false);}
  }
- provider.onchange=()=>{model.value=stored?.provider===provider.value?stored.model:(provider.value==='chatgpt-cookie'?'gpt-4o-mini':'');key.value='';describe();};
+ provider.onchange=()=>{model.value=stored?.provider===provider.value?stored.model:(provider.value==='chatgpt-cookie'?'gpt-6':'');key.value='';describe();};
  load.onclick=()=>request('read');
  form.onsubmit=event=>{
   event.preventDefault();
