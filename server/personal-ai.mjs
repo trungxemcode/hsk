@@ -10,7 +10,12 @@ const PERSONAL_PROVIDERS={
  'chatgpt-cookie':'https://chatgpt.com/backend-api/conversation',
  'muse-cookie':'https://muse.ai/api/hatch/token'
 };
-const PERSONAL_FOSTA_MODELS=new Set(['gpt-6.1-sol','gpt-6-astra','gpt-6-luna']);
+const PERSONAL_FOSTA_MODELS=new Set([
+ 'gpt-6.1-sol','gpt-6-astra','gpt-6-luna',
+ 'gpt-6-luna:low','gpt-6-luna:medium','gpt-6-luna:high','gpt-6-luna:xhigh',
+ 'gpt-6.1-sol:low','gpt-6.1-sol:medium','gpt-6.1-sol:high',
+ 'gpt-6-astra:low','gpt-6-astra:medium','gpt-6-astra:high','gpt-6-astra:xhigh'
+]);
 const personalEncode=value=>new TextEncoder().encode(value);
 const personalB64=bytes=>btoa(String.fromCharCode(...new Uint8Array(bytes)));
 const personalBytes=value=>Uint8Array.from(atob(value),char=>char.charCodeAt(0));
@@ -154,7 +159,14 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
    body={model,system,messages,max_tokens:2400};
   }else{
    headers.Authorization='Bearer '+apiKey;
-   body={model,messages:[{role:'system',content:system},...messages],...(provider==='fosta'?{stream:false}:{})};
+   let fostaModel=model,fostaEffort=undefined;
+   if(provider==='fosta'){
+    if(model.includes(':')){
+     const parts=model.split(':');
+     fostaModel=parts[0];fostaEffort=parts[1];
+    }
+   }
+   body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{})};
   }
  }
  const response=await fetchFn(url,{method:'POST',headers,body:JSON.stringify(body),signal,redirect:'manual'});

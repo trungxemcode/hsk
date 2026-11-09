@@ -2093,7 +2093,12 @@ const PERSONAL_PROVIDERS={
  'chatgpt-cookie':'https://chatgpt.com/backend-api/conversation',
  'muse-cookie':'https://muse.ai/api/hatch/token'
 };
-const PERSONAL_FOSTA_MODELS=new Set(['gpt-6.1-sol','gpt-6-astra','gpt-6-luna']);
+const PERSONAL_FOSTA_MODELS=new Set([
+ 'gpt-6.1-sol','gpt-6-astra','gpt-6-luna',
+ 'gpt-6-luna:low','gpt-6-luna:medium','gpt-6-luna:high','gpt-6-luna:xhigh',
+ 'gpt-6.1-sol:low','gpt-6.1-sol:medium','gpt-6.1-sol:high',
+ 'gpt-6-astra:low','gpt-6-astra:medium','gpt-6-astra:high','gpt-6-astra:xhigh'
+]);
 const personalEncode=value=>new TextEncoder().encode(value);
 const personalB64=bytes=>btoa(String.fromCharCode(...new Uint8Array(bytes)));
 const personalBytes=value=>Uint8Array.from(atob(value),char=>char.charCodeAt(0));
@@ -2237,7 +2242,14 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
    body={model,system,messages,max_tokens:2400};
   }else{
    headers.Authorization='Bearer '+apiKey;
-   body={model,messages:[{role:'system',content:system},...messages],...(provider==='fosta'?{stream:false}:{})};
+   let fostaModel=model,fostaEffort=undefined;
+   if(provider==='fosta'){
+    if(model.includes(':')){
+     const parts=model.split(':');
+     fostaModel=parts[0];fostaEffort=parts[1];
+    }
+   }
+   body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{})};
   }
  }
  const response=await fetchFn(url,{method:'POST',headers,body:JSON.stringify(body),signal,redirect:'manual'});
@@ -3953,7 +3965,7 @@ async function readBody(request,limit=20000){
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
 export const WORKER_REVISION='hsk-qa-thinking-r1';
-const QA_THINKING_MODELS=new Map([['low','gemini-3.1-flash-lite'],['medium','gemini-3.5-flash'],['high','gemini-3.8-flash']]);const QA_PROVIDER_TIER_MODELS={'chatgpt-cookie':{low:'gpt-4o-mini',medium:'gpt-4o',high:'o3-mini'},'muse-cookie':{low:'muse-spark-fast',medium:'muse-spark',high:'muse-spark-thinking'},openai:{low:'gpt-4o-mini',medium:'gpt-4o',high:'o3-mini'},deepseek:{low:'deepseek-chat',medium:'deepseek-chat',high:'deepseek-reasoner'},claude:{low:'claude-3-5-haiku-latest',medium:'claude-3-7-sonnet-latest',high:'claude-sonnet-4-20250514'},fosta:{low:'gpt-6-luna',medium:'gpt-6-astra',high:'gpt-6.1-sol'},gemini:{low:'gemini-2.5-flash-lite',medium:'gemini-2.5-flash',high:'gemini-2.5-pro'}};
+const QA_THINKING_MODELS=new Map([['low','gemini-3.1-flash-lite'],['medium','gemini-3.5-flash'],['high','gemini-3.8-flash'],['xhigh','gemini-3.8-flash']]);const QA_PROVIDER_TIER_MODELS={'chatgpt-cookie':{low:'gpt-4o-mini',medium:'gpt-4o',high:'o3-mini'},'muse-cookie':{low:'muse-spark-fast',medium:'muse-spark',high:'muse-spark-thinking'},openai:{low:'gpt-4o-mini',medium:'gpt-4o',high:'o3-mini'},deepseek:{low:'deepseek-chat',medium:'deepseek-chat',high:'deepseek-reasoner'},claude:{low:'claude-3-5-haiku-latest',medium:'claude-3-7-sonnet-latest',high:'claude-sonnet-4-20250514'},fosta:{low:'gpt-6-luna:low',medium:'gpt-6-luna:medium',high:'gpt-6-luna:high',xhigh:'gpt-6-luna:xhigh'},gemini:{low:'gemini-2.5-flash-lite',medium:'gemini-2.5-flash',high:'gemini-2.5-pro'}};
 export function buildCorsHeaders(request,env={}){const origin=request.headers.get('Origin')||'*';return {'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Authorization, X-Requested-With','Access-Control-Max-Age':'86400','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider, X-HSK-AI-Cache, X-HSK-Image-Remaining','Vary':'Origin'};}
 function jsonWithCors(value,status,request,env){return new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8',...buildCorsHeaders(request,env)}});}
 function mergeWeaknessItemsAcrossDevices(existing={},incoming={}){
@@ -4311,7 +4323,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     const usePersonalCookie=usePersonalAi&&personalAi.provider==='chatgpt-cookie';
     if(usePersonalAi&&!usePersonalCookie){
      headers['X-HSK-AI-Provider']=personalAi.provider;
-     try{const activePersonalModel=requestedAiModel&&(personalAi.provider!=='fosta'||['gpt-6.1-sol','gpt-6-astra','gpt-6-luna'].includes(requestedAiModel))?requestedAiModel:typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS[personalAi.provider]?.[body.thinking]?QA_PROVIDER_TIER_MODELS[personalAi.provider][body.thinking]:personalAi.model;response=await personalAiGenerate({...personalAi,model:activePersonalModel},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});}
+     try{const activePersonalModel=requestedAiModel&&(personalAi.provider!=='fosta'||/^(?:gpt-6-luna|gpt-6-astra|gpt-6\.1-sol)(?::(?:low|medium|high|xhigh))?$/i.test(requestedAiModel))?requestedAiModel:typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS[personalAi.provider]?.[body.thinking]?QA_PROVIDER_TIER_MODELS[personalAi.provider][body.thinking]:personalAi.model;response=await personalAiGenerate({...personalAi,model:activePersonalModel},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});}
      catch(error){
       const timeout=controller.signal.aborted||error.name==='AbortError';
       console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});
