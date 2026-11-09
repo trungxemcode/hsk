@@ -919,15 +919,24 @@ function buildMuseFlattenedPrompt(requestBody, model) {
     return text ? `${role}: ${text.slice(0, 300)}` : '';
   }).filter(Boolean);
 
-  const modeHint = model === 'muse-spark-thinking'
-    ? '[Chế độ suy luận sâu: phân tích kỹ ngữ pháp và từ vựng trước khi trả lời]'
-    : '';
-
-  const briefRole = '[Gia sư tiếng Trung HSK]: Trả lời bằng tiếng Việt tự nhiên, giải thích rõ nghĩa, cách dùng, ví dụ kèm chữ Hán và pinyin.';
+  let modeInstruction = '';
+  if (model === 'muse-spark-thinking') {
+    modeInstruction = `[Gia sư tiếng Trung HSK - Chế độ SUY LUẬN SÂU & PHÂN TÍCH LOGIC]:
+Hãy phân tích chuyên sâu từng bước:
+1. Bản chất và quy tắc cốt lõi của điểm ngữ pháp/từ vựng trong câu hỏi.
+2. So sánh đối chiếu với các từ/cấu trúc tương tự dễ gây nhầm lẫn, phân biệt rõ sắc thái sử dụng.
+3. Chỉ ra lỗi sai phổ biến mà người học tiếng Trung hay mắc phải và giải thích lý do.
+4. Đưa ra các ví dụ câu mẫu chữ Hán kèm pinyin chuẩn và dịch nghĩa tự nhiên, kèm mẹo ghi nhớ.`;
+  } else if (model === 'muse-spark-fast') {
+    modeInstruction = `[Gia sư tiếng Trung HSK - Chế độ PHẢN HỒI NHANH TỨC THÌ]:
+Trả lời thật ngắn gọn, trực diện vào trọng tâm, giải thích nhanh nghĩa và cách dùng, đưa 1 ví dụ chữ Hán kèm pinyin.`;
+  } else {
+    modeInstruction = `[Gia sư tiếng Trung HSK - Chế độ TOÀN DIỆN & CÂN BẰNG]:
+Giải thích rõ ràng, đầy đủ ngữ nghĩa, cách dùng và ngữ pháp. Đưa ra các ví dụ câu thực tế sinh động kèm chữ Hán, pinyin và dịch nghĩa tiếng Việt, hướng dẫn cách vận dụng tự nhiên trong giao tiếp HSK.`;
+  }
 
   const parts = [];
-  if (modeHint) parts.push(modeHint);
-  parts.push(briefRole);
+  parts.push(modeInstruction);
   if (historyTurns.length) parts.push(`[Hội thoại trước]:\n${historyTurns.join('\n')}`);
   parts.push(`Học viên: ${userQuestion || 'Xin chào'}`);
 
