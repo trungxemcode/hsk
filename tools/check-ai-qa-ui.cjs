@@ -387,6 +387,18 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   await page.locator('#aiQaInput').fill('Câu hỏi đang xử lý');
   await page.locator('#aiQaSend').click();
   await page.waitForFunction(()=>window.__qaWaiting&&document.getElementById('aiQaSend').disabled);
+  const thinkingCard=page.locator('#aiQaMessages .ai-qa-thinking-card');
+  await thinkingCard.waitFor({state:'visible'});
+  const timerBeforeSync=await thinkingCard.locator('.ai-qa-thinking-timer').textContent();
+  await page.evaluate(()=>{
+    const now=Date.now();
+    window.__qaEmit([{id:'chat-during-ask',title:'Đồng bộ khi đang hỏi',
+      messages:[{id:'remote-during-ask',role:'user',text:'Tin nhắn đồng bộ',createdAt:now}],
+      createdAt:now,updatedAt:now}]);
+  });
+  assert.equal(await thinkingCard.count(),1,'realtime history render preserves the pending indicator');
+  assert.equal(await thinkingCard.isVisible(),true);
+  await page.waitForFunction(before=>parseFloat(document.querySelector('.ai-qa-thinking-timer')?.textContent)>parseFloat(before),timerBeforeSync);
   await page.locator('#aiQaHistoryToggle').click();
   await page.locator('#aiQaNewChat').click();
   assert.equal(await page.locator('#aiQaEmpty').isVisible(),true,'new draft restores welcome after aborting old request');
@@ -394,6 +406,7 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   assert.ok((await page.locator('.ai-qa-conversation').count())>=2,'old conversations are preserved without a new placeholder');
 
   assert.equal(await page.evaluate(()=>window.__qaAborted),true,'stale request must abort');
+  assert.equal(await thinkingCard.count(),0,'canceling a request removes the indicator');
   assert.equal(await page.locator('#aiQaSend').isEnabled(),true,'send restored after chat switch');
   assert.equal(await page.locator('#aiQaInput').isEnabled(),true,'composer restored after chat switch');
   if(width<721)await page.locator('#aiQaHistoryToggle').click();

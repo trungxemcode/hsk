@@ -1,1 +1,1 @@
-{"request":"Hỏi đáp AI: tinh gọn lựa chọn model theo tài khoản Plus/Thường, phát hiện model đang dùng và bỏ danh sách trùng; chỉ thay đổi trong trang Hỏi đáp AI.","excludedRoutes":["ai-qa"]}
+{"request":"Hỏi đáp AI trên PC và điện thoại: giữ thẻ chờ ở cuối luồng tin nhắn khi đồng bộ lịch sử trong lúc yêu cầu AI đang xử lý.","excludedRoutes":["ai-qa"]}

@@ -878,7 +878,7 @@ html body.studio-enabled #aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaS
 .ai-qa-thinking-step[data-state="active"] .ai-qa-thinking-step-dot{
   background:var(--accent);
   border-color:var(--accent);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 24%,var(--palette-clear));
+  box-shadow:var(--qa-thinking-active-shadow);
   animation:aiQaDotWave 1.1s ease-in-out infinite;
 }
 .ai-qa-thinking-step[data-state="done"] .ai-qa-thinking-step-dot{

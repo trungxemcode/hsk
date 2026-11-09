@@ -1,6 +1,7 @@
 /* Shared design tokens. New components use semantic tokens below.
    Legacy palette entries preserve existing feature-specific shades during migration. */
 :root{
+  --qa-thinking-active-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 24%,var(--palette-clear));
   --shadow-home-hero:0 3px 10px rgb(38 24 88 / 8%);
 --wb-exact-0:transparent;
 --wb-exact-1:inherit;
