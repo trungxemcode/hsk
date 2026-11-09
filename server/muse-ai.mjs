@@ -889,22 +889,30 @@ export function normalizeMuseTutorReply(rawText, questionText = '') {
 }
 
 function buildMuseFlattenedPrompt(requestBody, model) {
-  const systemText = (requestBody?.systemInstruction?.parts || [])
-    .map(p => p?.text || '')
-    .filter(Boolean)
-    .join('\n')
-    .trim();
-  const turns = (requestBody?.contents || []).map(msg => {
-    const role = msg?.role === 'model' ? 'Gia sư AI' : 'Học viên';
+  const contents = Array.isArray(requestBody?.contents) ? requestBody.contents : [];
+  const lastUser = [...contents].reverse().find(c => c?.role === 'user');
+  const userQuestion = (lastUser?.parts || []).map(p => p?.text || '').join('\n').trim();
+
+  // Chỉ lấy tối đa 2 lượt hội thoại gần nhất để giữ ngữ cảnh mà không làm đầy khung chat
+  const historyTurns = contents.slice(0, -1).slice(-2).map(msg => {
+    const role = msg?.role === 'model' ? 'Gia sư' : 'Học viên';
     const text = (msg?.parts || []).map(p => p?.text || '').join('\n').trim();
-    return text ? `${role}: ${text}` : '';
+    return text ? `${role}: ${text.slice(0, 300)}` : '';
   }).filter(Boolean);
+
   const modeHint = model === 'muse-spark-thinking'
-    ? '[Chế độ suy luận sâu Muse Spark: phân tích kỹ từng điểm ngữ pháp/từ vựng trước khi trả lời]\n'
-    : model === 'muse-spark-fast'
-    ? '[Chế độ phản hồi nhanh Muse Spark]\n'
+    ? '[Chế độ suy luận sâu: phân tích kỹ ngữ pháp và từ vựng trước khi trả lời]'
     : '';
-  return [modeHint + systemText, ...turns].filter(Boolean).join('\n\n');
+
+  const briefRole = '[Gia sư tiếng Trung HSK]: Trả lời bằng tiếng Việt tự nhiên, giải thích rõ nghĩa, cách dùng, ví dụ kèm chữ Hán và pinyin.';
+
+  const parts = [];
+  if (modeHint) parts.push(modeHint);
+  parts.push(briefRole);
+  if (historyTurns.length) parts.push(`[Hội thoại trước]:\n${historyTurns.join('\n')}`);
+  parts.push(`Học viên: ${userQuestion || 'Xin chào'}`);
+
+  return parts.filter(Boolean).join('\n\n');
 }
 
 export async function probeMuseAiAccount(rawCredential, { fetchFn = fetch, signal, now = () => Date.now() } = {}) {
