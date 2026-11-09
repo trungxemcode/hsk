@@ -1464,7 +1464,15 @@ export async function bootstrapMuseHatchSession(cookieHeader, { fetchFn = fetch,
   return session;
 }
 
-function museToBytes(data) {
+export function museToBuffer(data) {
+  if (data instanceof ArrayBuffer) return data;
+  if (ArrayBuffer.isView(data)) {
+    return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+  }
+  return data;
+}
+
+export function museToBytes(data) {
   if (data instanceof Uint8Array) return data;
   if (data instanceof ArrayBuffer) return new Uint8Array(data);
   if (ArrayBuffer.isView(data)) return new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
@@ -1481,15 +1489,19 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
     const httpUrl = wsUrl.replace(/^wss:/i, 'https:').replace(/^ws:/i, 'http:');
     const upgradeResp = await fetchFn(httpUrl, {
       headers: {
-        ...MUSE_BROWSER_HEADERS,
-        'Upgrade': 'websocket',
-        'Connection': 'Upgrade'
+        'Origin': MUSE_BASE_URL,
+        'User-Agent': MUSE_BROWSER_HEADERS['User-Agent'],
+        'Upgrade': 'websocket'
       },
       signal
     });
     if (upgradeResp?.webSocket) {
       const ws = upgradeResp.webSocket;
-      if (typeof ws.accept === 'function') ws.accept();
+      try { ws.binaryType = 'arraybuffer'; } catch {}
+      if (typeof ws.accept === 'function') {
+        try { ws.accept(); } catch {}
+      }
+      try { ws.binaryType = 'arraybuffer'; } catch {}
       return ws;
     }
   } catch {}
@@ -1497,10 +1509,11 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
   if (typeof globalThis.WebSocket === 'function') {
     return await new Promise((resolve, reject) => {
       const ws = new globalThis.WebSocket(wsUrl);
+      try { ws.binaryType = 'arraybuffer'; } catch {}
       if (typeof ws.accept === 'function') {
         try { ws.accept(); } catch {}
       }
-      ws.binaryType = 'arraybuffer';
+      try { ws.binaryType = 'arraybuffer'; } catch {}
       if (ws.readyState === 1) {
         return resolve(ws);
       }
@@ -1523,8 +1536,17 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
   let closed = false;
   let notify = null;
 
-  const pushMsg = (ev) => {
-    const bytes = museToBytes(ev?.data ?? ev);
+  const seenEvents = new WeakSet();
+  const pushMsg = async (ev) => {
+    if (ev && typeof ev === 'object') {
+      if (seenEvents.has(ev)) return;
+      seenEvents.add(ev);
+    }
+    let raw = ev?.data !== undefined ? ev.data : ev;
+    if (raw && typeof raw.arrayBuffer === 'function') {
+      try { raw = await raw.arrayBuffer(); } catch {}
+    }
+    const bytes = museToBytes(raw);
     if (bytes.byteLength > 0) {
       queue.push(bytes);
       if (notify) { const fn = notify; notify = null; fn(); }
@@ -1560,17 +1582,20 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
     const nonce = crypto.getRandomValues(new Uint8Array(32));
     const msg1Payload = museConcat(new Uint8Array([0x0a, 0x20]), nonce);
     const msg1 = await hs.writeMessage1(msg1Payload);
-    ws.send(msg1);
+    ws.send(museToBuffer(msg1));
 
-    const msg2 = await recvRaw(10000);
-    if (!msg2) throw new Error('Muse AI không phản hồi bước bắt tay Noise (msg2)');
+    const msg2 = await recvRaw(15000);
+    if (!msg2) {
+      if (closed) throw new Error('Muse AI đã đóng kết nối WebSocket trong bước bắt tay Noise (msg2)');
+      throw new Error('Muse AI không phản hồi bước bắt tay Noise (msg2)');
+    }
     await hs.readMessage2(msg2);
 
     const { bytes: msg3, send: csSend, recv: csRecv } = await hs.writeMessage3(new Uint8Array(0));
-    ws.send(msg3);
+    ws.send(museToBuffer(msg3));
 
     // Kick frame (empty plaintext AEAD tag)
-    ws.send(await csSend.encrypt(new Uint8Array(0), new Uint8Array(0)));
+    ws.send(museToBuffer(await csSend.encrypt(new Uint8Array(0), new Uint8Array(0))));
 
     let streamSeq = 0n;
     let chunkSeq = 0n;
@@ -1592,7 +1617,7 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
       const sr = museBuildServiceRequest(0, sf);
       const frames = museBuildTransportFrames(cid, sr);
       for (const frame of frames) {
-        ws.send(await csSend.encrypt(new Uint8Array(0), frame));
+        ws.send(museToBuffer(await csSend.encrypt(new Uint8Array(0), frame)));
       }
       return sid;
     };
