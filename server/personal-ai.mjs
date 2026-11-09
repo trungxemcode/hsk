@@ -106,8 +106,8 @@ export async function probePersonalAiCapabilities(personal,{env={},fetchFn=fetch
  try{
   if(provider==='chatgpt-cookie'){
    const info=await probeChatGptCookieAccount(apiKey,{env,fetchFn,signal,now});
-   const planType=info?.planType||((apiKey.includes('|')||apiKey.length>4000||['gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free');
-   const models=info?.models?.length?info.models:(planType==='plus'?['gpt-4o-mini','gpt-4o','o3-mini','gpt-4-1','o4-mini']:['gpt-4o-mini','o3-mini']);
+   const planType=info?.planType||((apiKey.includes('|')||apiKey.length>4000||['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free');
+   const models=info?.models?.length?info.models:(planType==='plus'?['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6']:['gpt-4o-mini','o3-mini']);
    value={planType,models};
   }else if(provider==='claude'){
    const res=await fetchFn('https://api.anthropic.com/v1/models',{method:'GET',headers:{'x-api-key':apiKey,'anthropic-version':'2023-06-01'},signal,redirect:'manual'});

@@ -11,6 +11,15 @@
     gemini:'https://generativelanguage.googleapis.com/v1beta/models/'
   };
   const MODEL_LABELS={
+    'gpt-6':'GPT-6 (Cân bằng)',
+    'gpt-6-instant':'GPT-6 (Tức thì)',
+    'gpt-6-thinking':'GPT-6 (Suy luận)',
+    'gpt-5-6':'GPT-5.6 Sol',
+    'gpt-5-6-instant':'GPT-5.6 Sol (Tức thì)',
+    'gpt-5-6-thinking':'GPT-5.6 Sol (Suy luận)',
+    'gpt-5.6':'GPT-5.6 Sol',
+    'gpt-5.6-sol':'GPT-5.6 Sol',
+    'gpt-6-mini':'GPT-6 mini',
     'gpt-4o-mini':'GPT-4o mini',
     'gpt-4o':'GPT-4o',
     'o3-mini':'o3-mini (Suy luận)',
@@ -38,7 +47,7 @@
     claude:['claude-3-5-haiku-latest','claude-3-7-sonnet-latest','claude-sonnet-4-20250514'],
     openai:['gpt-4o-mini','gpt-4o','o3-mini','gpt-4.1','gpt-4.1-mini'],
     gemini:['gemini-2.5-flash-lite','gemini-2.5-flash','gemini-2.5-pro'],
-    'chatgpt-plus':['gpt-4o-mini','gpt-4o','o3-mini','gpt-4-1','o4-mini'],
+    'chatgpt-plus':['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6'],
     'chatgpt-free':['gpt-4o-mini','o3-mini']
   };
   const CACHE_TTL_MS=15*60*1000;
@@ -199,7 +208,7 @@
     }
     const savedModel=p?.provider===kind&&typeof p.model==='string'?p.model.trim():'';
     if(kind==='chatgpt-cookie'){
-      const isPlus=p?.planType?p.planType!=='free':['gpt-4o','gpt-4-1','o4-mini'].includes(savedModel);
+      const isPlus=p?.planType?p.planType!=='free':['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(savedModel);
       if(!isPlus){
         return [
           {value:'low',label:'Bình thường',model:'gpt-4o-mini',tier:'low'},
@@ -207,7 +216,11 @@
         ];
       }
       const rawList=Array.isArray(p?.models)&&p.models.length?p.models:DEFAULT_PROVIDER_MODELS['chatgpt-plus'];
-      const unique=[...new Set([...rawList,...(savedModel?[savedModel]:[])])];
+      const allowed=new Set(['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-6-mini','gpt-4o','gpt-4o-mini','o3-mini']);
+      const filtered=rawList.filter(m=>allowed.has(m)||Object.hasOwn(MODEL_LABELS,m));
+      const priority=['gpt-6-instant','gpt-6','gpt-6-thinking','gpt-5-6','gpt-5-6-instant','gpt-5-6-thinking','gpt-6-mini','gpt-4o','o3-mini'];
+      filtered.sort((a,b)=>{const ia=priority.indexOf(a),ib=priority.indexOf(b);if(ia!==-1&&ib!==-1)return ia-ib;if(ia!==-1)return -1;if(ib!==-1)return 1;return 0;});
+      const unique=[...new Set([...filtered,...(savedModel&&savedModel!=='gpt-4o-mini'?[savedModel]:[])])];
       const tierSlots=['low','medium','high'];
       return unique.map((modelId,idx)=>({
         value:idx<3?tierSlots[idx]:`model:${modelId}`,
@@ -248,7 +261,7 @@
     }else if(!sys.gemini?.available&&sys.chatgpt?.available){
       kind='system-chatgpt';
     }
-    const isPlusCookie=kind==='chatgpt-cookie'&&(p.planType?p.planType!=='free':['gpt-4o','gpt-4-1','o4-mini'].includes(p.model));
+    const isPlusCookie=kind==='chatgpt-cookie'&&(p.planType?p.planType!=='free':['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(p.model));
     const labelMap={
       'system-gemini':'Gemini hệ thống',
       'system-chatgpt':'ChatGPT hệ thống',
@@ -498,6 +511,7 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
     syncPersonal,
     tryDirectAsk,
     activeProviderInfo,
+    _buildOptions:buildProviderModelOptions,
     // Giá trị gửi lên Worker; 'auto' không gửi gì để giữ hành vi mặc định.
     choice(){normalizeSelection();return entry(selected)?.value||'auto';}
   };

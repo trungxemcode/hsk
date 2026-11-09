@@ -249,14 +249,25 @@ class ChatGPTSessionManager:
                     self.update_cookies(getattr(session, "cookies", None))
                     if res.status_code == 200:
                         items = (res.json() or {}).get("models") or []
+                        allowed_user_slugs = {
+                            "gpt-6-instant", "gpt-6", "gpt-6-thinking",
+                            "gpt-5-6", "gpt-5-6-instant", "gpt-5-6-thinking",
+                            "gpt-6-mini", "gpt-4o", "gpt-4o-mini", "o3-mini", "gpt-4.1",
+                        }
                         slugs = [
                             str(m.get("slug")).strip()
                             for m in items
-                            if isinstance(m, dict) and isinstance(m.get("slug"), str) and m.get("slug").strip()
+                            if isinstance(m, dict) and isinstance(m.get("slug"), str) and m.get("slug").strip() in allowed_user_slugs
                         ]
+                        priority_order = [
+                            "gpt-6-instant", "gpt-6", "gpt-6-thinking",
+                            "gpt-5-6", "gpt-5-6-instant", "gpt-5-6-thinking",
+                            "gpt-6-mini", "gpt-4o", "o3-mini",
+                        ]
+                        slugs.sort(key=lambda s: priority_order.index(s) if s in priority_order else 999)
                         if slugs:
-                            self.available_models = slugs[:12]
-                            if any(s in slugs for s in ("gpt-4o", "gpt-4-1", "o4-mini", "gpt-4.5")):
+                            self.available_models = slugs[:10]
+                            if any(s in slugs for s in ("gpt-6", "gpt-6-instant", "gpt-6-thinking", "gpt-5-6", "gpt-4o", "gpt-4-1", "o4-mini", "gpt-4.5")):
                                 self.plan_type = "plus"
             except Exception:
                 pass
