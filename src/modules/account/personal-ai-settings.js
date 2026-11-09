@@ -53,7 +53,7 @@
    const data=await response.json();
    if(id!==requestId||account()?.uid!==user.uid)return;
    if(!response.ok)throw Error(data.error||'Chưa lưu được cài đặt API.');
-   apply(data);
+   apply(data);window.HSKAiProviderPicker?.syncPersonal?.(user.uid,data,op==='remove'?{remove:true}:settings);
   }catch(error){if(id===requestId)status.textContent=error.message||'Chưa kết nối được máy chủ.';}
   finally{if(id===requestId)lock(false);}
  }

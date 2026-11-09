@@ -531,6 +531,7 @@ assert.ok(await page.evaluate(()=>window.__qaWrites.length>=1),'chat is written 
   assert.deepEqual(savedSettings,{provider:'fosta',model:'gpt-6-luna',enabled:true,apiKey:'fake-test-key-only'});
   assert.equal(await page.locator('#personalAiKey').inputValue(),'');
   assert.equal(await page.evaluate(()=>JSON.stringify(localStorage).includes('fake-test-key-only')),false);
+  let directAuth=null;await page.route('https://codex.fosta.app/v1/chat/completions',r=>{directAuth=r.request().headers()['authorization'];return r.fulfill({json:{choices:[{message:{content:JSON.stringify({answer:'Trả lời trực tiếp từ PWA',explanationStrategyUsed:'direct_explanation',suggestedQuestions:[],memoryCandidates:[]})}}]}});});const directReply=await page.evaluate(()=>window.HSKAiProviderPicker.tryDirectAsk({uid:'qa-user',aiProvider:'auto',question:'Xin chào',hsk:3,lesson:{content:{}},history:[]}));assert.equal(directAuth,'Bearer fake-test-key-only');assert.equal(directReply.answer,'Trả lời trực tiếp từ PWA');
 assert.deepEqual(errors,[]);console.log('PASS AI Q&A',width,'realtime sync, chat layout, history menu, bounded snapshot, request, response');await page.close();
  }}finally{await browser?.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1});
