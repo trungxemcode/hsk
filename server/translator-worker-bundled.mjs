@@ -4119,7 +4119,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    let personalAi=null;
    if(isAiQa&&env.AI_CONTROL){
     try{
-     const targetProvider=aiChoice.startsWith('personal:')?aiChoice.slice(9):undefined;
+     const targetProvider=(typeof body.personalProvider==='string'&&PERSONAL_PROVIDERS[body.personalProvider])?body.personalProvider:(aiChoice.startsWith('personal:')?aiChoice.slice(9):undefined);
      personalAi=await personalAiCall(env,account.localId,'personal-ai-use',targetProvider?{provider:targetProvider}:undefined);
     }
     catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}

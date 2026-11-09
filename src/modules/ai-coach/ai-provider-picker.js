@@ -57,7 +57,7 @@
   const cleanUid=value=>String(value||'guest').replace(/[^\w:.-]/g,'_').slice(0,150);
   const storeKey=targetUid=>`hsk-ai-qa-provider-v1:${cleanUid(targetUid)}`;
   const cacheKey=targetUid=>`hsk-ai-providers-cache-v1:${cleanUid(targetUid)}`;
-  const cipherKey=targetUid=>`hsk-personal-ai-cipher-v1:${cleanUid(targetUid)}`;
+  const cipherKey=(targetUid,prov)=>`hsk-personal-ai-cipher-v1:${cleanUid(targetUid)}${prov?':'+prov:''}`;
   const controls=['aiQaThinking','qaProjectThinking'].map(id=>document.getElementById(id)).filter(Boolean);
   if(!controls.length)return;
   let uid='guest',selected='auto',availability=null,openPicker=null,cryptoKeyPromise=null;
@@ -133,24 +133,26 @@
       const aad=new TextEncoder().encode(`${key}:${clean.provider}`);
       const ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:aad},aes,new TextEncoder().encode(clean.apiKey));
       const payload=JSON.stringify({v:1,provider:clean.provider,model:clean.model,enabled:clean.enabled,iv:b64(iv),ciphertext:b64(ciphertext)});
-      try{localStorage.setItem(cipherKey(targetUid),payload);}catch{}
+      try{localStorage.setItem(cipherKey(targetUid,clean.provider),payload);}catch{}
+      try{sessionStorage.setItem(cipherKey(targetUid,clean.provider),payload);}catch{}
       try{sessionStorage.setItem(cipherKey(targetUid),payload);}catch{}
     }catch{}
   }
-  async function loadDirectCred(targetUid){
-    const key=cleanUid(targetUid);
-    if(directKeys.has(key))return directKeys.get(key);
+  async function loadDirectCred(targetUid,prov){
+    const memKey=cleanUid(targetUid)+(prov?':'+prov:'');
+    if(directKeys.has(memKey))return directKeys.get(memKey);
     try{
-      const raw=JSON.parse(sessionStorage.getItem(cipherKey(targetUid))||localStorage.getItem(cipherKey(targetUid))||'null');
+      const raw=JSON.parse(sessionStorage.getItem(cipherKey(targetUid,prov))||localStorage.getItem(cipherKey(targetUid,prov))||sessionStorage.getItem(cipherKey(targetUid))||localStorage.getItem(cipherKey(targetUid))||'null');
       if(!raw||!raw.iv||!raw.ciphertext||!Object.hasOwn(DIRECT_ENDPOINTS,raw.provider))return null;
+      if(prov&&raw.provider!==prov)return null;
       const aes=await getDeviceCryptoKey();
       if(!aes)return null;
-      const aad=new TextEncoder().encode(`${key}:${raw.provider}`);
+      const aad=new TextEncoder().encode(`${cleanUid(targetUid)}:${raw.provider}`);
       const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:fromB64(raw.iv),additionalData:aad},aes,fromB64(raw.ciphertext));
       const apiKey=new TextDecoder().decode(plain);
       if(!apiKey)return null;
       const cred={provider:raw.provider,model:String(raw.model||''),enabled:Boolean(raw.enabled),apiKey};
-      directKeys.set(key,cred);
+      directKeys.set(memKey,cred);
       return cred;
     }catch{return null;}
   }
@@ -475,9 +477,9 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
   async function tryDirectAsk({uid:targetUid,aiProvider,thinking,aiModel,question,hsk,lesson,history,signal}={}){
     if(aiProvider&&aiProvider!=='auto'&&aiProvider!=='personal')return null;
     if(availability?.personal&&(availability.personal.configured===false||availability.personal.enabled===false))return null;
-    const cred=await loadDirectCred(targetUid);
-    if(!cred||!cred.enabled||!cred.apiKey||!Object.hasOwn(DIRECT_ENDPOINTS,cred.provider))return null;
     const info=activeProviderInfo();
+    const cred=await loadDirectCred(targetUid,info?.kind);
+    if(!cred||!cred.enabled||!cred.apiKey||!Object.hasOwn(DIRECT_ENDPOINTS,cred.provider))return null;
     const matchedOpt=info?.options?.find(o=>o.value===thinking||o.model===aiModel);
     const chosenModel=(aiModel&&(cred.provider!=='fosta'||['gpt-6.1-sol','gpt-6-astra','gpt-6-luna'].includes(aiModel)))?aiModel:
       matchedOpt?.model||cred.model;
