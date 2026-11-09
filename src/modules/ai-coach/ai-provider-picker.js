@@ -180,15 +180,21 @@
       {id:'system-chatgpt',value:'system-chatgpt',label:'ChatGPT',sub:a?.system?.chatgpt?.available?'2 mức: Bình thường & Suy luận':known?'Admin chưa cài cookie':'Chưa kiểm tra được',locked:!a?.system?.chatgpt?.available},
       {group:'Của bạn'}];
     for(const [provider,label] of PERSONAL){
-      const mine=p.provider===provider,ready=mine&&p.enabled===true;
-      const cookieTier=provider==='chatgpt-cookie'&&mine?(p.planType==='plus'?'TK Plus':p.planType==='free'?'TK Thường':''):'';
+      const provData=p.providers?.[provider]||(p.provider===provider?p:null);
+      const mine=Boolean(provData&&provData.configured);
+      const ready=mine&&provData.enabled===true;
+      const cookieTier=provider==='chatgpt-cookie'&&mine?(provData.planType==='plus'?'TK Plus':provData.planType==='free'?'TK Thường':''):'';
       list.push({id:`personal:${provider}`,value:'personal',label,locked:!ready,
-        sub:ready?(cookieTier?`${cookieTier} · ${p.model||'gpt-4o-mini'}`:(p.model||'API riêng của bạn')):mine&&p.configured?'Đang tắt trong Cài đặt':known?'Thêm trong Cài đặt → API riêng':'Chưa kiểm tra được'});
+        sub:ready?(cookieTier?`${cookieTier} · ${provData.model||'gpt-4o-mini'}`:(provData.model||'API riêng của bạn')):mine&&provData.configured?'Đang tắt trong Cài đặt':known?'Thêm trong Cài đặt → API riêng':'Chưa kiểm tra được'});
     }
     return list;
   }
   function entry(id){return items().find(item=>item.id===id&&!item.locked)||null;}
-  function normalizeSelection(){if(!entry(selected))selected='auto';}
+  function normalizeSelection(){
+    const a=availability,p=a?.personal||{};
+    if(selected==='personal'&&p?.provider)selected='personal:'+p.provider;
+    if(!entry(selected))selected='auto';
+  }
   function current(){return items().find(item=>item.id===selected)||items()[1];}
   function closeAll(){if(openPicker){openPicker.close();openPicker=null;}}
 
@@ -261,7 +267,8 @@
     }else if(!sys.gemini?.available&&sys.chatgpt?.available){
       kind='system-chatgpt';
     }
-    const isPlusCookie=kind==='chatgpt-cookie'&&(p.planType?p.planType!=='free':['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(p.model));
+    const provData=isPersonal?(p.providers?.[kind]||(p.provider===kind?p:null)):null;
+    const isPlusCookie=kind==='chatgpt-cookie'&&(provData?.planType?provData.planType!=='free':['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(provData?.model));
     const labelMap={
       'system-gemini':'Gemini hệ thống',
       'system-chatgpt':'ChatGPT hệ thống',
@@ -273,14 +280,14 @@
       claude:'Claude',
       gemini:'Gemini (API riêng)'
     };
-    const options=buildProviderModelOptions(kind,isPersonal?p:null);
+    const options=buildProviderModelOptions(kind,provData);
     return {
       kind,
       label:labelMap[kind]||'AI',
       isPersonal,
       explicitNonSystemGemini,
       planType:kind==='chatgpt-cookie'?(isPlusCookie?'plus':'free'):null,
-      savedModel:isPersonal&&p.provider===kind&&typeof p.model==='string'?p.model.trim():'',
+      savedModel:provData&&typeof provData.model==='string'?provData.model.trim():'',
       options
     };
   }
@@ -358,15 +365,35 @@
     if(!targetUid||!publicData||typeof publicData!=='object')return;
     const rawKey=typeof rawSettings?.apiKey==='string'?rawSettings.apiKey.trim():'';
     const inferredPlan=publicData.provider==='chatgpt-cookie'?(publicData.planType||(rawKey?(rawKey.includes('|')||rawKey.length>4000?'plus':'free'):(['gpt-4o','gpt-4-1','o4-mini'].includes(publicData.model)?'plus':availability?.personal?.planType||'free'))):undefined;
-    const personal=publicData.configured?{
-      configured:true,enabled:Boolean(publicData.enabled),
-      provider:String(publicData.provider||''),model:String(publicData.model||''),
-      ...(inferredPlan?{planType:inferredPlan}:{}),
-      ...(Array.isArray(publicData.models)&&publicData.models.length?{models:publicData.models}:{})
-    }:{configured:false,enabled:false};
     const base=readCachedAvailability(targetUid)||(cleanUid(targetUid)===cleanUid(uid)?availability:null)||{
-      system:{gemini:{available:true},chatgpt:{available:false}},personal
+      system:{gemini:{available:true},chatgpt:{available:false}},personal:{configured:false,enabled:false}
     };
+    const existingProviders={...(base.personal?.providers||{})};
+    if(publicData.providers&&typeof publicData.providers==='object'){
+      Object.assign(existingProviders,publicData.providers);
+    }
+    if(publicData.configured&&publicData.provider){
+      existingProviders[publicData.provider]={
+        configured:true,
+        enabled:Boolean(publicData.enabled),
+        provider:publicData.provider,
+        model:String(publicData.model||''),
+        ...(inferredPlan?{planType:inferredPlan}:{})
+      };
+    }else if(rawSettings?.remove){
+      if(rawSettings.provider)delete existingProviders[rawSettings.provider];
+      else for(const k of Object.keys(existingProviders))delete existingProviders[k];
+    }
+    const hasRemaining=Object.keys(existingProviders).length>0;
+    const activeProv=publicData.configured?publicData.provider:(hasRemaining?Object.keys(existingProviders)[0]:null);
+    const personal=hasRemaining?{
+      configured:true,
+      enabled:activeProv?Boolean(existingProviders[activeProv]?.enabled):Boolean(publicData.enabled),
+      provider:activeProv||publicData.provider||'',
+      model:activeProv?String(existingProviders[activeProv]?.model||''):String(publicData.model||''),
+      ...(inferredPlan?{planType:inferredPlan}:{}),
+      providers:existingProviders
+    }:{configured:false,enabled:false};
     applyAvailability(targetUid,{...base,personal});
     if(!personal.configured||rawSettings?.remove){
       await saveEncryptedDirectCred(targetUid,null);

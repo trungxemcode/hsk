@@ -80,6 +80,52 @@ test('settings save muse-cookie and route /lesson-ask to Muse AI provider',async
  assert.match(calls.at(-1).url,/api\.meta\.ai\/v1\/chat\/completions/);
  assert.equal(calls.at(-1).headers.Authorization,'Bearer meta-token-secret-123');
 });
+test('multi-provider personal AI preserves independent credentials and routes dynamically',async()=>{
+ const uid='multiprov-user';
+ // 1. Save Fosta
+ const fostaKey='fosta-secret-key-12345';
+ const resFosta=await request(uid,settingsPath,{op:'save',settings:{provider:'fosta',model:'gpt-6.1-sol',enabled:true,apiKey:fostaKey}});
+ assert.equal(resFosta.status,200);
+
+ // 2. Save Muse without wiping Fosta
+ const museKey='Bearer muse-meta-secret-999';
+ const resMuse=await request(uid,settingsPath,{op:'save',settings:{provider:'muse-cookie',model:'muse-spark',enabled:true,apiKey:museKey}});
+ assert.equal(resMuse.status,200);
+
+ // 3. Read settings shows both providers in providers map
+ const readRes=await request(uid,settingsPath,{op:'read'});
+ assert.equal(readRes.status,200);
+ const readData=await readRes.json();
+ assert.equal(readData.configured,true);
+ assert.ok(readData.providers);
+ assert.equal(readData.providers['fosta']?.configured,true);
+ assert.equal(readData.providers['fosta']?.model,'gpt-6.1-sol');
+ assert.equal(readData.providers['muse-cookie']?.configured,true);
+ assert.equal(readData.providers['muse-cookie']?.model,'muse-spark');
+
+ // 4. Route with aiProvider: 'personal:fosta' uses Fosta endpoint and key
+ const testEnv={...env,ADMIN_UIDS:uid};
+ const fostaReply=await request(uid,'/lesson-ask',{...question,aiProvider:'personal:fosta'},testEnv);
+ assert.equal(fostaReply.status,200);
+ assert.equal(calls.at(-1).url,'https://codex.fosta.app/v1/chat/completions');
+ assert.equal(calls.at(-1).headers.Authorization,'Bearer '+fostaKey);
+
+ // 5. Route with aiProvider: 'personal:muse-cookie' uses Muse endpoint and token
+ const museReply=await request(uid,'/lesson-ask',{...question,question:'Câu hỏi khác cho Muse',aiProvider:'personal:muse-cookie'},testEnv);
+ assert.equal(museReply.status,200);
+ assert.match(calls.at(-1).url,/api\.meta\.ai\/v1\/chat\/completions/);
+ assert.equal(calls.at(-1).headers.Authorization,'Bearer muse-meta-secret-999');
+
+ // 6. Scoped remove removes only Fosta, keeping Muse active
+ const removeFosta=await request(uid,settingsPath,{op:'remove',settings:{provider:'fosta'}});
+ assert.equal(removeFosta.status,200);
+ const afterRemove=await request(uid,settingsPath,{op:'read'});
+ const afterData=await afterRemove.json();
+ assert.equal(afterData.configured,true);
+ assert.equal(afterData.providers['fosta'],undefined);
+ assert.equal(afterData.providers['muse-cookie']?.configured,true);
+});
+
 test('the provider adapters use their own authentication and fixed endpoints',async()=>{
  const payload={systemInstruction:{parts:[{text:'guide'}]},contents:[{role:'user',parts:[{text:'hi'}]}]};
  for(const [provider,endpoint,header] of [

@@ -2026,12 +2026,24 @@ export const PERSONAL_PROVIDER_IDS=['openai','fosta','deepseek','claude','gemini
 
 export function normalizeAiProviderChoice(value){
   if(value===undefined||value===null||value==='')return 'auto';
-  return typeof value==='string'&&AI_PROVIDER_CHOICES.has(value)?value:null;
+  if(typeof value!=='string')return null;
+  if(AI_PROVIDER_CHOICES.has(value))return value;
+  if(value.startsWith('personal:')){
+    const prov=value.slice(9);
+    if(PERSONAL_PROVIDER_IDS.includes(prov))return value;
+  }
+  return null;
 }
 
 // Trả về lý do không dùng được (tiếng Việt) hoặc null nếu lựa chọn khả dụng.
-export function aiProviderChoiceError(choice,{personalEnabled=false,sharedCookieReady=false,geminiReady=false}={}){
+export function aiProviderChoiceError(choice,{personalEnabled=false,personalProviders=null,sharedCookieReady=false,geminiReady=false}={}){
   if(choice==='personal'&&!personalEnabled)return 'API riêng chưa được bật. Hãy bật hoặc nhập API/cookie trong Cài đặt.';
+  if(choice.startsWith('personal:')){
+    const prov=choice.slice(9);
+    const provData=personalProviders?.[prov];
+    const isReady=provData?Boolean(provData.enabled):personalEnabled;
+    if(!isReady)return `Nhà cung cấp riêng ${prov} chưa được bật hoặc chưa cấu hình trong Cài đặt.`;
+  }
   if(choice==='system-chatgpt'&&!sharedCookieReady)return 'ChatGPT của hệ thống chưa được admin cấu hình.';
   if(choice==='system-gemini'&&!geminiReady)return 'Gemini của hệ thống chưa sẵn sàng.';
   return null;
@@ -2040,13 +2052,33 @@ export function aiProviderChoiceError(choice,{personalEnabled=false,sharedCookie
 // Công khai cho client: chỉ trạng thái khả dụng, không có key/cookie.
 export function describeAiProviders({geminiReady=false,sharedCookieReady=false,personal=null}={}){
   const configured=personal?.configured===true;
+  const providers=personal?.providers&&typeof personal.providers==='object'?personal.providers:null;
+  let sanitizedProviders=undefined;
+  if(configured&&providers){
+    sanitizedProviders={};
+    for(const [pId,pData] of Object.entries(providers)){
+      if(PERSONAL_PROVIDER_IDS.includes(pId)&&pData&&pData.configured){
+        sanitizedProviders[pId]={
+          configured:true,
+          enabled:pData.enabled===true,
+          provider:pId,
+          model:typeof pData.model==='string'?pData.model.slice(0,100):null,
+          ...(typeof pData.planType==='string'?{planType:pData.planType}:{}),
+          ...(Array.isArray(pData.models)&&pData.models.length?{models:pData.models.slice(0,12)}:{})
+        };
+      }
+    }
+  }
   return {
     system:{gemini:{available:Boolean(geminiReady)},chatgpt:{available:Boolean(sharedCookieReady)}},
     personal:{
       configured,
       enabled:configured&&personal?.enabled===true,
       provider:configured&&PERSONAL_PROVIDER_IDS.includes(personal?.provider)?personal.provider:null,
-      model:configured&&typeof personal?.model==='string'?personal.model.slice(0,100):null,...(configured&&typeof personal?.planType==='string'?{planType:personal.planType}:{}),...(configured&&Array.isArray(personal?.models)&&personal.models.length?{models:personal.models.slice(0,12)}:{})
+      model:configured&&typeof personal?.model==='string'?personal.model.slice(0,100):null,
+      ...(configured&&typeof personal?.planType==='string'?{planType:personal.planType}:{}),
+      ...(configured&&Array.isArray(personal?.models)&&personal.models.length?{models:personal.models.slice(0,12)}:{}),
+      ...(configured&&sanitizedProviders?{providers:sanitizedProviders}:{})
     }
   };
 }
@@ -2072,15 +2104,75 @@ async function personalCipher(env){
 function personalPublic(record){
  return record?{configured:true,enabled:record.enabled,provider:record.provider,model:record.model}:{configured:false,enabled:false};
 }
+async function loadAllPersonalProviders(store,fallbackRecord){
+ let index=await store.get('personal-ai-providers-index');
+ const map={};
+ if(!Array.isArray(index)){
+  index=fallbackRecord?.provider?[fallbackRecord.provider]:[];
+ }
+ for(const p of index){
+  let rec=await store.get('personal-ai-prov:'+p);
+  if(!rec&&fallbackRecord?.provider===p)rec=fallbackRecord;
+  if(rec&&rec.provider===p){
+   map[p]={configured:true,enabled:rec.enabled===true,provider:p,model:rec.model,...(rec.planType?{planType:rec.planType}:{})};
+  }
+ }
+ if(fallbackRecord?.provider&&!map[fallbackRecord.provider]){
+  map[fallbackRecord.provider]={configured:true,enabled:fallbackRecord.enabled===true,provider:fallbackRecord.provider,model:fallbackRecord.model,...(fallbackRecord.planType?{planType:fallbackRecord.planType}:{})};
+ }
+ return map;
+}
 export async function personalAiStorage(storage,env,{action,uid,settings}){
  if(typeof uid!=='string'||!/^[-\w:]{1,150}$/.test(uid))return Response.json({}, {status:400});
  const key='personal-ai-v1';
  if(action==='personal-ai-remove'){
-  await storage.delete(key);return Response.json(personalPublic(null));
+  const targetProvider=typeof settings?.provider==='string'?settings.provider:null;
+  if(targetProvider){
+   return storage.transaction(async tx=>{
+    await tx.delete('personal-ai-prov:'+targetProvider);
+    let index=(await tx.get('personal-ai-providers-index'))||[];
+    index=Array.isArray(index)?index.filter(p=>p!==targetProvider):[];
+    await tx.put('personal-ai-providers-index',index);
+    const legacy=await tx.get(key);
+    if(legacy?.provider===targetProvider){
+     if(index.length){
+      const nextRec=await tx.get('personal-ai-prov:'+index[0]);
+      if(nextRec){await tx.put(key,nextRec);const providers=await loadAllPersonalProviders(tx,nextRec);return Response.json({...personalPublic(nextRec),providers});}
+     }
+     await tx.delete(key);
+     return Response.json(personalPublic(null));
+    }
+    const providers=await loadAllPersonalProviders(tx,legacy);
+    return Response.json({...personalPublic(legacy),providers});
+   });
+  }
+  return storage.transaction(async tx=>{
+   const index=(await tx.get('personal-ai-providers-index'))||[];
+   if(Array.isArray(index)){for(const p of index)await tx.delete('personal-ai-prov:'+p);}
+   await tx.delete('personal-ai-providers-index');
+   await tx.delete(key);
+   return Response.json(personalPublic(null));
+  });
  }
- if(action==='personal-ai-read'||action==='personal-ai-use'){
+ if(action==='personal-ai-read'){
   const record=await storage.get(key);
-  if(action==='personal-ai-read'||!record?.enabled)return Response.json(personalPublic(record));
+  if(!record)return Response.json(personalPublic(null));
+  const providers=await loadAllPersonalProviders(storage,record);
+  return Response.json({...personalPublic(record),providers});
+ }
+ if(action==='personal-ai-use'){
+  const targetProvider=typeof settings?.provider==='string'&&PERSONAL_PROVIDERS[settings.provider]?settings.provider:null;
+  let record=null;
+  if(targetProvider){
+   record=await storage.get('personal-ai-prov:'+targetProvider);
+   if(!record){
+    const legacy=await storage.get(key);
+    if(legacy?.provider===targetProvider)record=legacy;
+   }
+  }else{
+   record=await storage.get(key);
+  }
+  if(!record?.enabled)return Response.json(personalPublic(record));
   const apiKey=new TextDecoder().decode(await crypto.subtle.decrypt({
    name:'AES-GCM',iv:personalBytes(record.iv),additionalData:personalEncode(uid+':'+record.provider)
   },await personalCipher(env),personalBytes(record.ciphertext)));
@@ -2093,16 +2185,26 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
   typeof enabled!=='boolean'||provider==='fosta'&&!PERSONAL_FOSTA_MODELS.has(model)||
   apiKey!==undefined&&(typeof apiKey!=='string'||apiKey.length<8||apiKey.length>maxKeyLen||!(provider==='chatgpt-cookie'||provider==='muse-cookie'?/^[ -~]+$/:/^[!-~]+$/).test(apiKey)))return Response.json({}, {status:400});
  const cipher=await personalCipher(env);
+ const inferredPlan=provider==='chatgpt-cookie'?((apiKey?.includes('|')||apiKey?.length>4000||['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free'):undefined;
  return storage.transaction(async tx=>{
-  const previous=await tx.get(key);
-  if(!apiKey&&previous?.provider!==provider)return Response.json({}, {status:400});
-  const record={provider,model,enabled,iv:previous?.iv,ciphertext:previous?.ciphertext};
+  const legacy=await tx.get(key);
+  let previous=await tx.get('personal-ai-prov:'+provider);
+  if(!previous&&legacy?.provider===provider)previous=legacy;
+  if(!apiKey&&!previous?.ciphertext)return Response.json({}, {status:400});
+  const record={provider,model,enabled,iv:previous?.iv,ciphertext:previous?.ciphertext,...(inferredPlan?{planType:inferredPlan}:previous?.planType?{planType:previous.planType}:{})};
   if(apiKey){
    const iv=crypto.getRandomValues(new Uint8Array(12));
    const ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:personalEncode(uid+':'+provider)},cipher,personalEncode(apiKey));
    record.iv=personalB64(iv);record.ciphertext=personalB64(ciphertext);
   }
-  await tx.put(key,record);return Response.json(personalPublic(record));
+  await tx.put('personal-ai-prov:'+provider,record);
+  let index=(await tx.get('personal-ai-providers-index'))||[];
+  if(!Array.isArray(index))index=[];
+  if(!index.includes(provider))index.push(provider);
+  if(legacy?.provider&&!index.includes(legacy.provider))index.push(legacy.provider);
+  await tx.put('personal-ai-providers-index',index);
+  await tx.put(key,record);
+  return Response.json(personalPublic(record));
  });
 }
 export async function personalAiCall(env,uid,action,settings){
@@ -4012,14 +4114,17 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    const isAiQa=isLessonAsk&&body.lesson?.content?.mode==='ai-qa';
    const thinking=body.thinking??'low',requestedAiModel=isAiQa&&typeof body.aiModel==='string'?body.aiModel.trim():'';
    if(isAiQa&&(!QA_THINKING_MODELS.has(thinking)||requestedAiModel&&!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(requestedAiModel)))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
-   let personalAi=null;
-   if(isAiQa&&env.AI_CONTROL){
-    try{personalAi=await personalAiCall(env,account.localId,'personal-ai-use');}
-    catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
-   }
    const aiChoice=isAiQa?normalizeAiProviderChoice(body.aiProvider):'auto';
    if(aiChoice===null)return reply({error:'Nhà cung cấp AI không hợp lệ.',code:'AI_PROVIDER_INVALID'},400);
-   const usePersonalAi=personalAi?.enabled===true&&(aiChoice==='auto'||aiChoice==='personal');
+   let personalAi=null;
+   if(isAiQa&&env.AI_CONTROL){
+    try{
+     const targetProvider=aiChoice.startsWith('personal:')?aiChoice.slice(9):undefined;
+     personalAi=await personalAiCall(env,account.localId,'personal-ai-use',targetProvider?{provider:targetProvider}:undefined);
+    }
+    catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
+   }
+   const usePersonalAi=personalAi?.enabled===true&&(aiChoice==='auto'||aiChoice==='personal'||aiChoice.startsWith('personal:'));
    const sharedCookieReady=typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim());
    const choiceError=isAiQa?aiProviderChoiceError(aiChoice,{personalEnabled:personalAi?.enabled===true,sharedCookieReady,geminiReady:configuredGeminiKeys(env).length>0}):null;
    if(choiceError)return reply({error:choiceError,code:'AI_PROVIDER_UNAVAILABLE'},409);

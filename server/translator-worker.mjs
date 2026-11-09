@@ -318,14 +318,17 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    const isAiQa=isLessonAsk&&body.lesson?.content?.mode==='ai-qa';
    const thinking=body.thinking??'low',requestedAiModel=isAiQa&&typeof body.aiModel==='string'?body.aiModel.trim():'';
    if(isAiQa&&(!QA_THINKING_MODELS.has(thinking)||requestedAiModel&&!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(requestedAiModel)))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
-   let personalAi=null;
-   if(isAiQa&&env.AI_CONTROL){
-    try{personalAi=await personalAiCall(env,account.localId,'personal-ai-use');}
-    catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
-   }
    const aiChoice=isAiQa?normalizeAiProviderChoice(body.aiProvider):'auto';
    if(aiChoice===null)return reply({error:'Nhà cung cấp AI không hợp lệ.',code:'AI_PROVIDER_INVALID'},400);
-   const usePersonalAi=personalAi?.enabled===true&&(aiChoice==='auto'||aiChoice==='personal');
+   let personalAi=null;
+   if(isAiQa&&env.AI_CONTROL){
+    try{
+     const targetProvider=aiChoice.startsWith('personal:')?aiChoice.slice(9):undefined;
+     personalAi=await personalAiCall(env,account.localId,'personal-ai-use',targetProvider?{provider:targetProvider}:undefined);
+    }
+    catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
+   }
+   const usePersonalAi=personalAi?.enabled===true&&(aiChoice==='auto'||aiChoice==='personal'||aiChoice.startsWith('personal:'));
    const sharedCookieReady=typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim());
    const choiceError=isAiQa?aiProviderChoiceError(aiChoice,{personalEnabled:personalAi?.enabled===true,sharedCookieReady,geminiReady:configuredGeminiKeys(env).length>0}):null;
    if(choiceError)return reply({error:choiceError,code:'AI_PROVIDER_UNAVAILABLE'},409);
