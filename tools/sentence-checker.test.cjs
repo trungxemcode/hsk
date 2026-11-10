@@ -48,3 +48,10 @@ test('advanced rules preserve valid conjunctions, collocations and compounds',()
   '这是提高人们保护环境的意识的有效方法。',
  ])assert.equal(checker.checkText(text).length,0,text);
 });
+test('linking word edits do not mask a separate problem in the same sentence',()=>{
+ const edits=checker.checkText('尽管他每天都练习身体，所以他还是经常觉得累。');
+ assert.deepEqual(Array.from(edits,edit=>[edit.original,edit.replacement]),[
+  ['练习身体','锻炼身体'],
+  ['所以','但是'],
+ ]);
+});

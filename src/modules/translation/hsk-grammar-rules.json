@@ -341,8 +341,8 @@
       "id": "HSK6_CONCESSION_RESULT",
       "hskLevel": 6,
       "category": "conjunction",
-      "pattern": "(尽管[^，,。！？；;]{2,60}[，,]\\s*)所以(?=[^，,。！？；;]{2})",
-      "replace": "$1但是",
+      "pattern": "(?<=尽管[^，,。！？；;]{2,60}[，,]\\s*)所以(?=[^，,。！？；;]{2})",
+      "replace": "但是",
       "message": "「尽管」 mở vế nhượng bộ. Dùng 「但是」 nếu vế sau diễn đạt ý tương phản.",
       "kind": "style"
     },
@@ -395,8 +395,8 @@
       "id": "HSK6_DOUBLE_CAUSE",
       "hskLevel": 6,
       "category": "conjunction",
-      "pattern": "(之所以[^，,。！？；;]{2,65}[，,]\\s*是因为)因为",
-      "replace": "$1",
+      "pattern": "(?<=之所以[^，,。！？；;]{2,65}[，,]\\s*是因为)因为",
+      "replace": "",
       "message": "「之所以…是因为…」 đã có từ nối nguyên nhân. Bỏ chữ 「因为」 bị lặp.",
       "kind": "fix"
     },
