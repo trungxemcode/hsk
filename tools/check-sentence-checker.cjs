@@ -59,7 +59,12 @@ const server=http.createServer((req,res)=>{
       window.HSKAccountDashboard={user:{uid:'grammar-test',getIdToken:async()=> 'mock-token'}};
       window.fetch=async(input,init)=>{
         if(String(input).includes('translation-config.json'))return new Response(JSON.stringify({enabled:true,endpoint:'https://grammar.invalid/translate'}));
-        if(String(input).includes('/lesson-ask'))return new Promise(resolve=>{window.__resolveGrammar=()=>resolve(new Response(JSON.stringify({answer:JSON.stringify({summary:'STALE_RESPONSE',suggestions:[{kind:'fix',original:'帮忙我',replacement:'帮我',reason:'STALE_SUGGESTION'}]})})));});
+        if(String(input).includes('/lesson-ask'))return new Promise(resolve=>{
+          window.__resolveGrammar=(data={answer:JSON.stringify({summary:'STALE_RESPONSE',suggestions:[{kind:'fix',original:'帮忙我',replacement:'帮我',reason:'STALE_SUGGESTION'}]})})=>{
+            window.__resolveGrammar=null;
+            resolve(new Response(JSON.stringify(data)));
+          };
+        });
         return originalFetch(input,init);
       };
     });
@@ -72,6 +77,19 @@ const server=http.createServer((req,res)=>{
     assert.equal(await editor.locator('[data-source="ai"]').count(),0,'stale AI result must not attach to edited draft');
     assert.ok(!(await editor.locator('.sentence-status').innerText()).includes('STALE'));
     assert.equal(await editor.locator('.sentence-deep-check').isDisabled(),false);
+    await input.fill('昨天，我讨论了这个话题跟同学们三个小时。');
+    await editor.getByRole('button',{name:'Kiểm tra sâu bằng AI',exact:true}).click();
+    await page.waitForFunction(()=>!!window.__resolveGrammar);
+    await page.evaluate(()=>window.__resolveGrammar({answer:'Đặt cụm 跟同学们 trước động từ 讨论.'}));
+    await editor.locator('.sentence-status').filter({hasText:'Đặt cụm 跟同学们 trước động từ 讨论.'}).waitFor();
+    assert.equal(await editor.locator('.sentence-card[data-source="ai"]').count(),0);
+    await editor.getByRole('button',{name:'Kiểm tra sâu bằng AI',exact:true}).click();
+    await page.waitForFunction(()=>!!window.__resolveGrammar);
+    await page.evaluate(()=>window.__resolveGrammar({sentenceReview:{summary:'Đã kiểm tra đoạn văn.',suggestions:[
+      {kind:'fix',original:'讨论了这个话题跟同学们',replacement:'跟同学们讨论了这个话题',reason:'Đặt đối tượng trao đổi trước động từ.'}
+    ]}}));
+    await editor.locator('.sentence-card[data-source="ai"]').getByRole('button',{name:'Áp dụng',exact:true}).click();
+    assert.equal(await input.inputValue(),'昨天，我跟同学们讨论了这个话题三个小时。');
     for(const width of [390,1440]){
       await page.setViewportSize({width,height:900});
       await input.fill('昨天他帮忙我打扫房间，我很感谢他。');

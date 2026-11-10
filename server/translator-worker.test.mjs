@@ -233,3 +233,28 @@ test('word recovery accepts approximate readings, clarification and confirmed co
   const sent=calls.at(-1).body;assert.match(sent.systemInstruction.parts[0].text,/NHẬN DIỆN TỪ QUÊN CHỮ/);assert.match(sent.systemInstruction.parts[0].text,/confirmed-comparison/);assert.equal(JSON.parse(sent.contents[0].parts[0].text).context,context);
  }
 });
+
+test('sentence review accepts direct JSON, legacy JSON strings and readable feedback',async()=>{
+ const question='昨天，我讨论了这个话题跟同学们三个小时。大家应该多锻炼身体。';
+ const body={hsk:6,question,history:[],lesson:{id:'sentence-editor',title:'Sửa câu tiếng Trung',words:[],content:{mode:'sentence-editor'}}};
+ const review={summary:'Đặt cụm chỉ người trước động từ.',suggestions:[{kind:'fix',original:'讨论了这个话题跟同学们',replacement:'跟同学们讨论了这个话题',reason:'Đặt 跟同学们 trước 讨论.'}]};
+ for(const content of [
+  JSON.stringify(review),
+  JSON.stringify({answer:JSON.stringify(review)}),
+  '```json\n'+JSON.stringify(review)+'\n```'
+ ]){
+  const {run,calls}=setup(()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:content}]}}]}));
+  const response=await run('/lesson-ask',body);
+  assert.equal(response.status,200);
+  const result=await response.json();
+  assert.deepEqual(result.sentenceReview,review);
+  assert.deepEqual(JSON.parse(result.answer),review);
+  assert.equal(calls[1].body.contents[0].parts[0].text,question);
+  assert.equal(calls[1].body.generationConfig.maxOutputTokens,1800);
+ }
+ const prose='Cụm 跟同学们 nên đứng trước 讨论.';
+ const {run}=setup(()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:prose}]}}]}));
+ const response=await run('/lesson-ask',body);
+ assert.equal(response.status,200);
+ assert.deepEqual(await response.json(),{answer:prose});
+});
