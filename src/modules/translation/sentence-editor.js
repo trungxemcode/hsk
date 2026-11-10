@@ -30,12 +30,22 @@
       mirror.append(draft.value.slice(cursor,start),mark);
       cursor=end;
       if(filter!=='all'&&filter!==kind)continue;
-      const card=document.createElement('article'),title=document.createElement('h4');
-      const change=document.createElement('p'),detail=document.createElement('p'),actions=document.createElement('footer');
+      const card=document.createElement('article');
       card.className='sentence-card';card.dataset.kind=kind;
+      const head=document.createElement('div');head.className='sentence-card-head';
+      const dot=document.createElement('span');dot.className='sentence-card-dot';
+      const title=document.createElement('h4');
       title.textContent=kind==='fix'?'Cần sửa':'Tự nhiên hơn';
-      change.lang='zh';change.textContent=original+' → '+(replacement||'∅');
-      detail.textContent=reason;
+      head.append(dot,title);
+      const change=document.createElement('p');
+      change.className='sentence-diff';change.lang='zh';
+      const del=document.createElement('del');del.className='sentence-del';del.textContent=original;
+      const arrow=document.createElement('span');arrow.className='sentence-arrow';arrow.textContent=' → ';
+      const ins=document.createElement('ins');ins.className='sentence-ins';ins.textContent=replacement||'∅';
+      change.append(del,arrow,ins);
+      const detail=document.createElement('p');
+      detail.className='sentence-card-detail';detail.textContent=reason;
+      const actions=document.createElement('footer');
       actions.append(button('Áp dụng','sentence-apply',()=>{
         if(draft.value.length-(end-start)+replacement.length>draft.maxLength){
           status.textContent='Áp dụng gợi ý này sẽ vượt giới hạn 500 ký tự.';return;
@@ -53,7 +63,7 @@
       }),button('Tìm trong bài','sentence-locate',()=>{
         draft.focus();draft.setSelectionRange(start,end);
       }));
-      card.append(title,change,detail,actions);cards.append(card);
+      card.append(head,change,detail,actions);cards.append(card);
     }
     mirror.append(draft.value.slice(cursor)+'\n');
     syncScroll();
@@ -87,6 +97,12 @@
 
   draft.addEventListener('input',resetDraft);
   draft.addEventListener('scroll',syncScroll);
+  draft.addEventListener('keydown',event=>{
+    if((event.ctrlKey||event.metaKey)&&event.key==='Enter'){
+      event.preventDefault();
+      form.requestSubmit();
+    }
+  });
   window.addEventListener('hsk-account-ready',()=>{if(pending)resetDraft();});
   example.addEventListener('click',()=>{
     if(draft.value.trim())return;
