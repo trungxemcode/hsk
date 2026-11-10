@@ -1,1 +1,1 @@
-{"request":"Chỉ thiết kế lại trang Sửa câu tiếng Trung theo bố cục Grammarly, gồm khung nhập toàn chiều rộng và thanh gợi ý PC/mobile. Không sửa các trang khác.","excludedRoutes":["sentence-editor"]}
+{"request":"Công cụ Sửa câu tiếng Trung: thêm bộ kiểm tra chính tả và ngữ pháp HSK 1–6 không cần token, gợi ý trực tiếp trong trang Sửa câu; giữ nguyên 23 trang còn lại.","excludedRoutes":["sentence-editor"]}
