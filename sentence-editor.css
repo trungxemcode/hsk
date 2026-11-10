@@ -1,10 +1,10 @@
 #sentenceEditor {
-  --se-green: #10a37f;
-  --se-green-soft: rgba(16, 163, 127, 0.12);
-  --se-fix: #ef4444;
-  --se-fix-soft: rgba(239, 68, 68, 0.12);
-  --se-style: #3b82f6;
-  --se-style-soft: rgba(59, 130, 246, 0.12);
+  --se-green: var(--sentence-editor-green);
+  --se-green-soft: var(--sentence-editor-green-soft);
+  --se-fix: var(--sentence-editor-fix);
+  --se-fix-soft: var(--sentence-editor-fix-soft);
+  --se-style: var(--sentence-editor-style);
+  --se-style-soft: var(--sentence-editor-style-soft);
   --se-edge: var(--line);
   color: var(--ink);
   width: 100%;
@@ -72,7 +72,7 @@
   border: 0 !important;
   outline: none !important;
   box-shadow: none !important;
-  border-radius: 0 !important;
+  border-radius: var(--radius-none) !important;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans", sans-serif;
   font-size: 1.35rem;
@@ -85,7 +85,7 @@
 }
 #sentenceEditor textarea {
   resize: none;
-  background: transparent !important;
+  background: var(--palette-clear) !important;
   color: var(--ink) !important;
   caret-color: var(--se-green);
   z-index: 2;
@@ -96,14 +96,14 @@
   font-size: 1.25rem;
 }
 #sentenceEditor .sentence-mirror {
-  color: transparent !important;
+  color: var(--palette-clear) !important;
   pointer-events: none;
   user-select: none;
   z-index: 1;
 }
 #sentenceEditor mark {
-  background: transparent;
-  color: transparent;
+  background: var(--palette-clear);
+  color: var(--palette-clear);
   text-decoration: underline 3px var(--se-fix);
   text-underline-offset: 6px;
   text-decoration-skip-ink: none;
@@ -138,7 +138,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: transparent;
+  background: var(--palette-clear);
   border: 1px dashed var(--se-edge);
   border-radius: var(--radius-pill);
   color: var(--accent-dark);
@@ -158,7 +158,7 @@
   justify-content: center;
   gap: 6px;
   background: var(--se-green);
-  color: #ffffff;
+  color: var(--palette-white);
   border: 0;
   border-radius: var(--radius-pill);
   font-weight: 700;
@@ -166,12 +166,12 @@
   padding: 8px 22px;
   min-height: 38px;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(16, 163, 127, 0.25);
+  box-shadow: var(--shadow-sentence-editor-submit);
   transition: all 0.15s ease;
 }
 #sentenceEditor .sentence-check-btn:hover {
   filter: brightness(1.08);
-  box-shadow: 0 4px 12px rgba(16, 163, 127, 0.35);
+  box-shadow: var(--shadow-sentence-editor-submit-hover);
 }
 #sentenceEditor .sentence-check-btn:disabled {
   opacity: 0.55;
@@ -249,7 +249,7 @@
   line-height: 1.5;
   padding: 10px 12px;
   border-radius: var(--radius-btn);
-  background: color-mix(in srgb, var(--ink) 4%, transparent);
+  background: color-mix(in srgb, var(--ink) 4%, var(--palette-clear));
   border: 1px dashed var(--se-edge);
 }
 #sentenceEditor .sentence-suggestions {
@@ -262,12 +262,12 @@
   border: 1px solid var(--se-edge);
   border-radius: var(--radius-card);
   padding: 14px 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sentence-editor-card);
   transition: all 0.15s ease;
 }
 #sentenceEditor .sentence-card:hover {
   border-color: color-mix(in srgb, var(--accent) 35%, var(--se-edge));
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--shadow-sentence-editor-card-hover);
 }
 #sentenceEditor .sentence-card-head {
   display: flex;
@@ -278,7 +278,7 @@
 #sentenceEditor .sentence-card-dot {
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  border-radius: var(--radius-round);
   background: var(--se-fix);
   flex-shrink: 0;
 }
@@ -302,7 +302,7 @@
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
   line-height: 1.6;
   padding: 6px 10px;
-  background: color-mix(in srgb, var(--ink) 3%, transparent);
+  background: color-mix(in srgb, var(--ink) 3%, var(--palette-clear));
   border-radius: var(--radius-btn);
 }
 #sentenceEditor .sentence-del {
@@ -335,7 +335,7 @@
 }
 #sentenceEditor .sentence-apply {
   background: var(--se-green);
-  color: #ffffff;
+  color: var(--palette-white);
   border: 0;
   border-radius: var(--radius-pill);
   padding: 6px 14px;
@@ -350,7 +350,7 @@
 }
 #sentenceEditor .sentence-dismiss,
 #sentenceEditor .sentence-locate {
-  background: transparent;
+  background: var(--palette-clear);
   color: var(--muted);
   border: 1px solid var(--se-edge);
   border-radius: var(--radius-pill);
@@ -363,7 +363,7 @@
 }
 #sentenceEditor .sentence-dismiss:hover {
   color: var(--ink);
-  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  background: color-mix(in srgb, var(--ink) 5%, var(--palette-clear));
 }
 #sentenceEditor .sentence-locate:hover {
   color: var(--se-style);
@@ -388,7 +388,7 @@ html[data-theme="dark"] #sentenceEditor .sentence-review {
   background: var(--palette-dark-surface) !important;
 }
 html[data-theme="dark"] #sentenceEditor .sentence-card {
-  background: color-mix(in srgb, var(--palette-dark-surface) 82%, #ffffff 8%) !important;
+  background: color-mix(in srgb, var(--palette-dark-surface) 82%, var(--palette-white) 8%) !important;
   border-color: var(--palette-dark-line-strong) !important;
 }
 html[data-theme="dark"] #sentenceEditor .sentence-filters button {
@@ -396,7 +396,7 @@ html[data-theme="dark"] #sentenceEditor .sentence-filters button {
   color: var(--palette-dark-ink-muted) !important;
 }
 html[data-theme="dark"] #sentenceEditor .sentence-diff {
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: color-mix(in srgb, var(--palette-white) 5%, var(--palette-clear)) !important;
 }
 html[data-theme="dark"] #sentenceEditor textarea {
   color: var(--palette-dark-ink) !important;

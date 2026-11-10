@@ -1,1 +1,1 @@
-{"request":"Thêm công cụ Sửa câu tiếng Trung theo bố cục Grammarly trên PC và điện thoại, chỉ thêm lối vào trong nhóm Công cụ.","excludedRoutes":[],"newRoutes":["sentence-editor"],"sharedNavigationOnly":true}
+{"request":"Chỉ thiết kế lại trang Sửa câu tiếng Trung theo bố cục Grammarly, gồm khung nhập toàn chiều rộng và thanh gợi ý PC/mobile. Không sửa các trang khác.","excludedRoutes":["sentence-editor"]}
