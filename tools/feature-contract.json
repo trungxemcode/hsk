@@ -4,6 +4,16 @@
   "policy": "append-only; remove only after a separate user-authorized approval PR has landed on main",
   "features": [
     {
+      "id": "sentence-editor",
+      "name": "Công cụ Sửa câu tiếng Trung",
+      "checks": [
+        {"kind": "data_go", "file": "index.html", "value": "sentence-editor"},
+        {"kind": "id", "file": "index.html", "value": "sentenceDraft"},
+        {"kind": "file", "file": "src/modules/translation/sentence-editor.js", "value": ""},
+        {"kind": "contains", "file": "server/translator-worker.mjs", "value": "sentence-editor"}
+      ]
+    },
+    {
       "id": "navigation-ai-qa",
       "name": "Hỏi đáp AI và đánh giá lộ trình",
       "checks": [

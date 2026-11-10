@@ -182,6 +182,8 @@
     "site-design-config.json",
     "src/modules/shell/feature-page.js",
     "ai-qa.css",
+    "sentence-editor.css",
+    "src/modules/translation/sentence-editor.js",
     "src/modules/ai-coach/ai-qa-core.js",
     "src/modules/ai-coach/ai-qa.js",
     "src/modules/ai-coach/qa-projects.js",

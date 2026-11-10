@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const ROUTES = ['home','lessons','practice','search','ai-qa','learn','quiz','srs','mistakes','compare','notebook','match-game','sentence-game','study4','real-reading','exam','music','music-play','translator','account','profile','about','admin'];
+const ROUTES = ['home','lessons','practice','search','ai-qa','sentence-editor','learn','quiz','srs','mistakes','compare','notebook','match-game','sentence-game','study4','real-reading','exam','music','music-play','translator','account','profile','about','admin'];
 function scope(config) {
   assert.ok(config && typeof config.request === 'string' && config.request.trim(), 'Scope needs the owner request');
   assert.ok(Array.isArray(config.excludedRoutes), 'excludedRoutes must be an array');

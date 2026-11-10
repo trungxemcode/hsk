@@ -2,7 +2,7 @@
 const {chromium}=require('playwright'),assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const ROOT=process.cwd();
-const hub=['home','practice','notebook','match-game','sentence-game','study4','real-reading'];
+const hub=['home','practice','notebook','match-game','sentence-game','study4','real-reading','sentence-editor'];
 const regular=['search','learn','quiz','srs','mistakes','compare','account','lessons'];
 (async()=>{
  const server=http.createServer((req,res)=>{
@@ -37,6 +37,36 @@ const regular=['search','learn','quiz','srs','mistakes','compare','account','les
     assert.ok(current.heading,'Missing header title: '+mode);
     assert.ok(current.panels.includes(mode),'Hub panel missing/invisible: '+mode+' '+JSON.stringify(current));
    }
+   await page.route('**/translation-config.json',route=>route.fulfill({json:{enabled:true,endpoint:'https://sentence-test.invalid/translate'}}));
+   await page.route('https://sentence-test.invalid/lesson-ask',route=>{
+    const body=route.request().postDataJSON();
+    assert.equal(body.lesson.content.mode,'sentence-editor');
+    assert.equal(body.question,'我昨天去了商店，买了一件很漂亮衣服。');
+    return route.fulfill({json:{answer:JSON.stringify({summary:'有一处可修改。',suggestions:[
+      {kind:'fix',original:'很漂亮衣服',replacement:'很漂亮的衣服',reason:'Thêm 的 trước danh từ.'},
+      {kind:'style',original:'去了商店',replacement:'去了一趟商店',reason:'Nhấn mạnh một chuyến đi.'}
+    ]})}});
+   });
+   await page.evaluate(()=>{
+    window.__sentenceDashboard=window.HSKAccountDashboard;
+    window.HSKAccountDashboard={user:{uid:'sentence-test',getIdToken:async()=> 'test-token'}};
+    window.HSKStudio.navigate('sentence-editor');
+   });
+   const editor=page.locator('#sentenceEditor');
+   await editor.getByRole('button',{name:'Thử câu mẫu'}).click();
+   await editor.getByRole('button',{name:'Kiểm tra',exact:true}).click();
+   await editor.getByText('Thêm 的 trước danh từ.').waitFor();
+   assert.equal(await editor.locator('mark').count(),2);
+   await editor.getByRole('button',{name:'Cần sửa',exact:true}).click();
+   assert.equal(await editor.locator('.sentence-card').count(),1);
+   await editor.getByRole('button',{name:'Tìm trong bài'}).click();
+   assert.equal(await editor.locator('textarea').evaluate(input=>input.value.slice(input.selectionStart,input.selectionEnd)),'很漂亮衣服');
+   await editor.getByRole('button',{name:'Áp dụng'}).click();
+   assert.equal(await editor.locator('textarea').inputValue(),'我昨天去了商店，买了一件很漂亮的衣服。');
+   await editor.getByRole('button',{name:'Tất cả',exact:true}).click();
+   await editor.getByRole('button',{name:'Bỏ qua'}).click();
+   assert.equal(await editor.locator('mark').count(),0);
+   await page.evaluate(()=>{window.HSKAccountDashboard=window.__sentenceDashboard;delete window.__sentenceDashboard;});
    // Exercise visible content, not just a route name.
    await page.evaluate(()=>window.HSKStudio.navigate('practice'));
    assert.equal(await page.locator('#practiceModeDisclosure').count(),1,'Practice selector lost');
