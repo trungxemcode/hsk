@@ -162,28 +162,36 @@
   </section>
   <section id="sentenceEditor" class="sentence-editor" data-studio-hub-panel="sentence-editor" hidden aria-label="Sửa câu tiếng Trung">
     <form class="sentence-editor-shell">
-      <header class="sentence-toolbar">
-        <div><h2>Sửa câu tiếng Trung</h2><small>Bản nháp của bạn</small></div>
-        <button type="submit">Kiểm tra</button>
-      </header>
       <div class="sentence-columns">
         <div class="sentence-sheet">
-          <label for="sentenceDraft">Văn bản tiếng Trung</label>
+          <label for="sentenceDraft" class="visually-hidden">Văn bản tiếng Trung</label>
           <div class="sentence-writing">
             <pre class="sentence-mirror" aria-hidden="true"></pre>
-            <textarea id="sentenceDraft" lang="zh" maxlength="500" spellcheck="false" placeholder="Viết hoặc dán câu tiếng Trung vào đây…"></textarea>
+            <textarea id="sentenceDraft" lang="zh" maxlength="500" spellcheck="false" placeholder="Viết hoặc dán câu tiếng Trung vào đây…" aria-label="Văn bản tiếng Trung"></textarea>
           </div>
-          <footer><span class="sentence-count">0 / 500 ký tự</span><button type="button" class="sentence-example">Thử câu mẫu</button></footer>
+          <footer class="sentence-footer">
+            <div class="sentence-footer-meta">
+              <span class="sentence-count">0 / 500 ký tự</span>
+              <button type="button" class="sentence-example">Thử câu mẫu</button>
+            </div>
+            <button type="submit" class="sentence-check-btn">Kiểm tra</button>
+          </footer>
         </div>
         <aside class="sentence-review" aria-label="Gợi ý chỉnh sửa">
-          <h3>Gợi ý chỉnh sửa</h3>
-          <div class="sentence-filters" aria-label="Lọc gợi ý">
-            <button type="button" data-sentence-filter="all" aria-pressed="true">Tất cả</button>
-            <button type="button" data-sentence-filter="fix" aria-pressed="false">Cần sửa</button>
-            <button type="button" data-sentence-filter="style" aria-pressed="false">Tự nhiên hơn</button>
+          <div class="sentence-review-head">
+            <div class="sentence-review-title">
+              <h3>Gợi ý chỉnh sửa</h3>
+            </div>
+            <div class="sentence-filters" aria-label="Lọc gợi ý">
+              <button type="button" data-sentence-filter="all" aria-pressed="true">Tất cả</button>
+              <button type="button" data-sentence-filter="fix" aria-pressed="false">Cần sửa</button>
+              <button type="button" data-sentence-filter="style" aria-pressed="false">Tự nhiên hơn</button>
+            </div>
           </div>
-          <p class="sentence-status" role="status">Nhập câu rồi bấm Kiểm tra để xem gợi ý.</p>
-          <div class="sentence-suggestions"></div>
+          <div class="sentence-review-body">
+            <p class="sentence-status" role="status">Nhập câu rồi bấm Kiểm tra để xem gợi ý.</p>
+            <div class="sentence-suggestions"></div>
+          </div>
         </aside>
       </div>
     </form>
