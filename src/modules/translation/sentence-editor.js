@@ -83,14 +83,33 @@
   }
   function resetForInput(){cancelPending();aiSuggestions=[];localSuggestions=[];aiSummary='';dismissed.clear();undoStack=[];setStatus(composing?'Đang nhập chữ…':'Đang kiểm tra cục bộ…');scheduleLocalCheck();onnx?.check(draft.value,composing);render();}
   undoButton.addEventListener('click',()=>{const previous=undoStack.pop();if(!previous)return;cancelPending();clearTimeout(inputTimer);draft.value=previous.text;aiSuggestions=previous.ai;dismissed=new Set(previous.dismissed);aiSummary='';onnx?.check(draft.value);runLocalCheck();draft.focus();});
+  function readReviewResponse(payload){
+    let value=payload?.sentenceReview??payload?.answer??payload;
+    for(let depth=0;depth<3;depth++){
+      if(value&&typeof value==='object'){
+        if(Array.isArray(value.suggestions))return value;
+        value=value.answer;
+        continue;
+      }
+      if(typeof value!=='string'||!value.trim())break;
+      const cleaned=value.trim().replace(/^`{3}(?:json)?\s*([\s\S]*?)\s*`{3}$/i,'$1').trim();
+      try{value=JSON.parse(cleaned);}
+      catch{
+        if(/^[{\[]/.test(cleaned))break;
+        // Older Workers sometimes return a readable review without edit anchors.
+        return {summary:cleaned.slice(0,4000),suggestions:[],textOnly:true};
+      }
+    }
+    throw Error('AI chưa trả được bài nhận xét đầy đủ. Hãy thử lại.');
+  }
   function readSuggestions(text,data){
-    if(!data||typeof data.summary!=='string'||!Array.isArray(data.suggestions))throw Error('AI trả về gợi ý chưa đúng định dạng. Hãy thử lại.');
+    if(!data||!Array.isArray(data.suggestions))throw Error('AI trả về gợi ý chưa đúng định dạng. Hãy thử lại.');
     const items=[];
-    for(const item of data.suggestions.slice(0,5)){
+    for(const item of data.suggestions.slice(0,8)){
       if(!item||!['fix','style'].includes(item.kind)||typeof item.original!=='string'||!item.original||typeof item.replacement!=='string'||item.replacement.length>500||item.replacement===item.original||typeof item.reason!=='string'||!item.reason.trim())continue;
       const start=text.indexOf(item.original),end=start+item.original.length;if(start<0||text.indexOf(item.original,start+1)>=0||items.some(other=>start<other.end&&end>other.start))continue;items.push({...item,start,end,source:'ai',reason:item.reason.slice(0,350)});
     }
-    if(data.suggestions.length&&!items.length)throw Error('AI chưa trả được gợi ý khớp với văn bản. Hãy thử lại.');return items.sort((a,b)=>a.start-b.start);
+    return items.sort((a,b)=>a.start-b.start);
   }
 
   draft.addEventListener('input',resetForInput);draft.addEventListener('scroll',syncScroll);
@@ -122,7 +141,12 @@
       if(pending!==controller||controller.signal.aborted||draft.value!==text)return;
       const response=await fetch(endpoint,{method:'POST',signal:controller.signal,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({question:text,hsk:level>=1&&level<=6?level:3,history:[],lesson:{id:'sentence-editor',title:'Sửa câu tiếng Trung',words:[],content:{mode:'sentence-editor',localChecker:true,checkerMetrics:metrics}}})});
       const data=await response.json();if(pending!==controller||draft.value!==text||window.HSKAccountDashboard?.user?.uid!==user.uid)return;if(!response.ok)throw Error(data.error||'Chưa kiểm tra được văn bản.');
-      let result;try{result=JSON.parse(data.answer);}catch{throw Error('Máy chủ chưa trả được gợi ý chỉnh sửa. Hãy thử lại.');}aiSuggestions=readSuggestions(text,result);aiSummary=result.summary.trim().slice(0,400)||(aiSuggestions.length?'AI đã đề xuất chỉnh sửa.':'AI chưa thấy chỗ cần sửa.');setStatus(aiSummary);render();
+      const result=readReviewResponse(data);
+      aiSuggestions=readSuggestions(text,result);
+      const summary=typeof result.summary==='string'?result.summary.trim().slice(0,result.textOnly?4000:800):'';
+      const unanchored=result.suggestions.length>0&&!aiSuggestions.length;
+      aiSummary=summary||(aiSuggestions.length?'AI đã đề xuất chỉnh sửa.':unanchored?'AI có gợi ý nhưng chưa khớp được đoạn gốc.':'AI chưa thấy chỗ cần sửa.');
+      setStatus(aiSummary);render();
     }catch(error){if(pending===controller)setStatus(error.name==='AbortError'?'AI xử lý quá lâu. Gợi ý cục bộ vẫn được giữ.':error.message);}finally{clearTimeout(timeout);if(pending===controller){pending=null;submit.disabled=false;aiButton.disabled=false;panel.setAttribute('aria-busy','false');}}
   });
   (async()=>{try{await checker?.ready;}catch{}runLocalCheck();})();

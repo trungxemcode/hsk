@@ -14,7 +14,7 @@
   const HAN_RUN=/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+/gu;
   // Offline fallback mirrors hsk-grammar-rules.json; parity is covered by tests.
   const DEFAULT_CONFIG={
-  "version": "2026.11.10.2",
+  "version": "2026.11.10.3",
   "macros": {
     "NUM": "(?:[一两三四五六七八九十百千万亿]+|几|每|这|那|哪)",
     "PRONOUN": "(?:我们|你们|他们|她们|咱们|大家|我|你|他|她|它)",
@@ -351,6 +351,96 @@
       "pattern": "({{NUM}})个(电影)",
       "replace": "$1部$2",
       "message": "Khi đếm tác phẩm điện ảnh, dùng 「部电影」."
+    },
+    {
+      "id": "HSK6_CONCESSION_RESULT",
+      "hskLevel": 6,
+      "category": "conjunction",
+      "pattern": "(?<=尽管[^，,。！？；;]{2,60}[，,]\\s*)所以(?=[^，,。！？；;]{2})",
+      "replace": "但是",
+      "message": "「尽管」 mở vế nhượng bộ. Dùng 「但是」 nếu vế sau diễn đạt ý tương phản.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK6_DISCUSS_WORD_ORDER",
+      "hskLevel": 6,
+      "category": "word_order",
+      "pattern": "讨论(了?)(这个话题|这个问题|这件事|这个方案|这项计划)(跟|和|与)((?:同学|老师|朋友|同事|家人|父母|室友)(?:们)?)(?=[一二两三四五六七八九十几\\d]+(?:个)?(?:小时|钟头|分钟)|[，,。！？；;]|$)",
+      "replace": "$3$4讨论$1$2",
+      "message": "Đặt 「跟/和/与 + người」 trước động từ 「讨论」.",
+      "kind": "fix"
+    },
+    {
+      "id": "HSK6_OWN_VEHICLE",
+      "hskLevel": 6,
+      "category": "particle",
+      "pattern": "((?:开|骑|驾驶|停放)自己)(汽车|自行车|摩托车|电动车|车)(?!辆|队|间|库|站|主|牌|票|行|轮|棚|门|窗)",
+      "replace": "$1的$2",
+      "message": "Thêm 「的」 khi nói đến phương tiện của chính mình.",
+      "kind": "fix"
+    },
+    {
+      "id": "HSK6_EXERCISE_BODY",
+      "hskLevel": 6,
+      "category": "collocation",
+      "pattern": "练习身体(?=[，,。！？；;]|$)",
+      "replace": "锻炼身体",
+      "message": "Dùng 「锻炼身体」 cho việc rèn luyện sức khỏe. 「练习」 thường đi với kỹ năng hoặc bài tập.",
+      "kind": "fix"
+    },
+    {
+      "id": "HSK6_AWARENESS_DEGREE",
+      "hskLevel": 6,
+      "category": "collocation",
+      "pattern": "提高((?:人们|公众|居民|学生|大家|市民)(?:的)?(?:保护环境|环保|节约用水|安全|交通安全)(?:的)?意识)(?:很|非常|特别)厉害(?=[，,。！？；;]|$)",
+      "replace": "大幅提高$1",
+      "message": "Đặt 「大幅」 trước 「提高」 để diễn đạt mức tăng. 「很厉害」 ở cuối câu không tự nhiên trong ngữ cảnh này.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK6_COMMUTE_DURATION",
+      "hskLevel": 6,
+      "category": "word_order",
+      "pattern": "(骑(?:自行车|电动车|摩托车)去(?:公司|学校|单位|办公室))([一二两三四五六七八九十几\\d]+(?:个)?(?:小时|钟头|分钟))(?=[，,。！？；;]|$)",
+      "replace": "$1要花$2",
+      "message": "Nếu ý là thời gian đi đường, dùng 「要花 + thời lượng」. Nếu nói thời gian tập đạp xe, hãy nêu rõ ý đó.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK6_DOUBLE_CAUSE",
+      "hskLevel": 6,
+      "category": "conjunction",
+      "pattern": "(?<=之所以[^，,。！？；;]{2,65}[，,]\\s*是因为)因为",
+      "replace": "",
+      "message": "「之所以…是因为…」 đã có từ nối nguyên nhân. Bỏ chữ 「因为」 bị lặp.",
+      "kind": "fix"
+    },
+    {
+      "id": "HSK6_DOUBLE_NEGATION",
+      "hskLevel": 6,
+      "category": "collocation",
+      "pattern": "避免((?:事故|错误|问题|意外|冲突|污染))(?:不再|不要)(发生|出现)(?=[，,。！？；;]|$)",
+      "replace": "避免$1$2",
+      "message": "「避免」 đã mang ý ngăn một việc xảy ra. Nếu muốn phòng ngừa, bỏ 「不再/不要」.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK6_REDUNDANT_APPROX",
+      "hskLevel": 6,
+      "category": "redundancy",
+      "pattern": "大约([一二两三四五六七八九十百千万几\\d]+(?:个)?(?:小时|钟头|分钟|公里|天|年|人|元|次))左右",
+      "replace": "大约$1",
+      "message": "「大约」 và 「左右」 đều chỉ số gần đúng. Giữ một từ là đủ.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK6_REDUNDANT_PURPOSE",
+      "hskLevel": 6,
+      "category": "redundancy",
+      "pattern": "目的是为了",
+      "replace": "目的是",
+      "message": "Có thể lược 「为了」 sau 「目的是」 để câu gọn hơn.",
+      "kind": "style"
     }
   ]
 };

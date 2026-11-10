@@ -23,3 +23,35 @@ test('context-sensitive suggestions are never presented as certain errors',()=>{
 });
 test('local cache is bounded during continued editing',()=>{for(let i=0;i<250;i++)checker.checkText(`第${i}句。`);assert.ok(checker.metrics().cacheSize<=200);});
 test('edit distance correctly handles transposed letters',()=>{const engine=new SymSpellChineseEngine();assert.equal(engine.damerauLevenshtein('abcd','abdc',1),1);});
+
+test('advanced HSK paragraph yields independent edits across clauses',()=>{
+ const text='随着科技的进步，尽管人们的生活越来越方便，所以环境污染也越来越严重。昨天，我讨论了这个话题跟同学们三个小时。大家都主张少开自己车，多骑自行车，因为骑车不但能保护环境，而且能练习身体。为了响应这个建议，我决定明天开始骑自行车去公司一个小时。虽然路有点远，但是只要坚持下去，就会习惯的。同时，政府也应该采取措施，比如多建设公园，提高人们保护环境的意识很厉害。';
+ const edits=checker.checkText(text);
+ const expected=['但是','跟同学们讨论了这个话题','开自己的车','锻炼身体','骑自行车去公司要花一个小时','大幅提高人们保护环境的意识'];
+ assert.equal(edits.length,expected.length);
+ for(let i=0;i<edits.length;i++){
+  const edit=edits[i];
+  assert.equal(edit.replacement.endsWith(expected[i]),true);
+  assert.equal(text.slice(edit.start,edit.end),edit.original);
+  if(i)assert.ok(edit.start>=edits[i-1].end);
+ }
+ assert.equal(edits[4].kind,'style');
+});
+test('advanced rules preserve valid conjunctions, collocations and compounds',()=>{
+ for(const text of [
+  '尽管工作很忙，但是他坚持锻炼身体。',
+  '因为污染越来越严重，所以政府采取了措施。',
+  '昨天我跟同学们讨论了这个话题三个小时。',
+  '我们骑自己的自行车去学校。',
+  '她每天练习身体协调动作。',
+  '我们骑自行车去公司要花一个小时。',
+  '这是提高人们保护环境的意识的有效方法。',
+ ])assert.equal(checker.checkText(text).length,0,text);
+});
+test('linking word edits do not mask a separate problem in the same sentence',()=>{
+ const edits=checker.checkText('尽管他每天都练习身体，所以他还是经常觉得累。');
+ assert.deepEqual(Array.from(edits,edit=>[edit.original,edit.replacement]),[
+  ['练习身体','锻炼身体'],
+  ['所以','但是'],
+ ]);
+});
