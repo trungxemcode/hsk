@@ -10,6 +10,8 @@
         {"kind": "data_go", "file": "index.html", "value": "sentence-editor"},
         {"kind": "id", "file": "index.html", "value": "sentenceDraft"},
         {"kind": "file", "file": "src/modules/translation/sentence-editor.js", "value": ""},
+        {"kind": "file", "file": "src/modules/translation/sentence-checker-core.js", "value": ""},
+        {"kind": "file", "file": "src/modules/translation/hsk-grammar-rules.json", "value": ""},
         {"kind": "contains", "file": "server/translator-worker.mjs", "value": "sentence-editor"}
       ]
     },
