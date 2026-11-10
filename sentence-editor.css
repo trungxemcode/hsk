@@ -1,43 +1,43 @@
 #sentenceEditor {
-  --se-green:#087b68;
-  --se-fix:#b53853;
-  --se-style:#4168bb;
-  --se-edge:var(--line,#dfe4e4);
-  color:var(--ink,#202a32);
+  --se-green:var(--green);
+  --se-fix:var(--red);
+  --se-style:var(--blue);
+  --se-edge:var(--line);
+  color:var(--ink);
   max-width:1280px;
   margin:16px auto;
 }
 #sentenceEditor [hidden]{display:none!important}
-#sentenceEditor .sentence-editor-shell{background:var(--surface,#fff);border:1px solid var(--se-edge);border-radius:14px;overflow:hidden}
+#sentenceEditor .sentence-editor-shell{background:var(--surface);border:1px solid var(--se-edge);border-radius:var(--radius-card);overflow:hidden}
 #sentenceEditor .sentence-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 22px;border-bottom:1px solid var(--se-edge)}
 #sentenceEditor h2,#sentenceEditor h3{margin:0;font-size:1rem}
-#sentenceEditor small,#sentenceEditor footer,#sentenceEditor .sentence-status{color:var(--muted,#536066)}
-#sentenceEditor .sentence-toolbar button,#sentenceEditor .sentence-apply{background:var(--se-green);color:#fff;border:0;border-radius:8px;font-weight:700;padding:9px 15px}
+#sentenceEditor small,#sentenceEditor footer,#sentenceEditor .sentence-status{color:var(--muted)}
+#sentenceEditor .sentence-toolbar button,#sentenceEditor .sentence-apply{background:var(--se-green);color:var(--button-text);border:0;border-radius:var(--radius-btn);font-weight:700;padding:9px 15px}
 #sentenceEditor button{cursor:pointer;min-height:36px}
 #sentenceEditor button:disabled{opacity:.55;cursor:wait}
 #sentenceEditor button:focus-visible{outline:2px solid var(--se-style);outline-offset:2px}
 #sentenceEditor .sentence-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,340px);min-height:520px}
 #sentenceEditor .sentence-sheet{min-width:0;padding:30px clamp(20px,5vw,64px) 18px;display:flex;flex-direction:column;gap:16px}
-#sentenceEditor label{font-size:.85rem;font-weight:650;color:var(--muted,#536066)}
+#sentenceEditor label{font-size:.85rem;font-weight:650;color:var(--muted)}
 #sentenceEditor .sentence-writing{position:relative;flex:1;min-height:300px}
 #sentenceEditor textarea,#sentenceEditor .sentence-mirror{position:absolute;inset:0;width:100%;height:100%;padding:5px 0;margin:0;border:0;box-sizing:border-box;font:400 1.25rem/1.8 system-ui,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere;overflow:auto;scrollbar-width:none}
-#sentenceEditor textarea{resize:none;background:transparent;color:inherit;outline:none}
-#sentenceEditor .sentence-writing:focus-within{box-shadow:inset 0 -1px var(--se-green)}
-#sentenceEditor .sentence-mirror{color:transparent;pointer-events:none}
-#sentenceEditor mark{background:transparent;color:inherit;text-decoration:underline 2px var(--se-fix);text-underline-offset:4px}
+#sentenceEditor textarea{resize:none;background:var(--palette-clear);color:inherit;outline:none}
+#sentenceEditor .sentence-writing:focus-within{box-shadow:var(--shadow)}
+#sentenceEditor .sentence-mirror{color:var(--palette-clear);pointer-events:none}
+#sentenceEditor mark{background:var(--palette-clear);color:inherit;text-decoration:underline 2px var(--se-fix);text-underline-offset:4px}
 #sentenceEditor mark[data-kind="style"]{text-decoration-color:var(--se-style)}
 #sentenceEditor footer{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.82rem}
 #sentenceEditor .sentence-review{padding:22px 16px;border-left:1px solid var(--se-edge);min-width:0}
 #sentenceEditor .sentence-filters{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
-#sentenceEditor .sentence-filters button,#sentenceEditor .sentence-example,#sentenceEditor .sentence-dismiss,#sentenceEditor .sentence-locate{background:transparent;color:inherit;border:1px solid var(--se-edge);border-radius:8px;padding:5px 9px;font:inherit;font-size:.82rem}
+#sentenceEditor .sentence-filters button,#sentenceEditor .sentence-example,#sentenceEditor .sentence-dismiss,#sentenceEditor .sentence-locate{background:var(--palette-clear);color:inherit;border:1px solid var(--se-edge);border-radius:var(--radius-btn);padding:5px 9px;font:inherit;font-size:.82rem}
 #sentenceEditor .sentence-filters [aria-pressed="true"]{border-color:var(--se-green);font-weight:700}
 #sentenceEditor .sentence-status{font-size:.86rem;overflow-wrap:anywhere}
-#sentenceEditor .sentence-card{border:1px solid var(--se-edge);border-radius:10px;padding:12px;margin-top:10px;overflow-wrap:anywhere}
+#sentenceEditor .sentence-card{border:1px solid var(--se-edge);border-radius:var(--radius-btn);padding:12px;margin-top:10px;overflow-wrap:anywhere}
 #sentenceEditor .sentence-card h4{margin:0 0 8px;color:var(--se-fix);font-size:.85rem}
 #sentenceEditor .sentence-card[data-kind="style"] h4{color:var(--se-style)}
 #sentenceEditor .sentence-card p{margin:6px 0 10px;font-size:.9rem}
 #sentenceEditor .sentence-card footer{justify-content:flex-start;flex-wrap:wrap}
-html[data-theme="dark"] #sentenceEditor{--se-fix:#f69bad;--se-style:#9cbbff}
+
 @media(max-width:720px){
   #sentenceEditor{margin:8px auto}
   #sentenceEditor .sentence-toolbar,#sentenceEditor .sentence-sheet,#sentenceEditor .sentence-review{padding:12px}

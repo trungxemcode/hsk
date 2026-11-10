@@ -5,7 +5,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  try{for(const width of [320,390,1440]){
  const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'});await page.route('https://**/*',r=>r.abort());await page.goto('http://127.0.0.1:'+server.address().port+'/index.html',{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.HSKStudio&&window.HSKMobileUX&&window.HSKPracticeSelection&&window.HSKLessons);
  const read=await page.evaluate(()=>{const mapping=root=>[...root.querySelectorAll('.nav-group')].map(g=>({name:g.querySelector('summary').textContent.trim(),routes:[...g.querySelectorAll('[data-studio-go]')].map(b=>b.dataset.studioGo)}));return {pc:mapping(document.querySelector('.side-nav')),phone:mapping(document.querySelector('.drawer-route-nav'))};});
- assert.deepEqual(read.phone,read.pc);assert.deepEqual(read.pc.map(x=>x.routes),[['lessons','learn'],['practice','notebook'],['real-reading','music-play'],['search','ai-qa'],['exam','study4']]);
+ assert.deepEqual(read.phone,read.pc);assert.deepEqual(read.pc.map(x=>x.routes),[['lessons','learn'],['practice','notebook'],['real-reading','music-play'],['search','ai-qa','sentence-editor'],['exam','study4']]);
  const root=width<721?'#drawer .drawer-route-nav':'.side-nav';
  async function enter(route){
   await page.evaluate(()=>HSKStudio.navigate('home'));if(width<721)await page.locator('#menuBtn').click();
