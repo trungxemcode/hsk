@@ -438,3 +438,11 @@ html[data-theme="dark"] #sentenceEditor textarea {
     max-height: 380px;
   }
 }
+
+/* Review actions stay accessible in the suggestion column, including mobile. */
+#sentenceEditor .sentence-help { margin: 0; font-size: .82rem; color: var(--muted); line-height: 1.55; }
+#sentenceEditor .sentence-deep-check { flex-shrink: 0; }
+#sentenceEditor .sentence-footer, #sentenceEditor .sentence-footer-meta, #sentenceEditor .sentence-card footer { flex-wrap: wrap; }
+#sentenceEditor .sentence-undo { border: 1px solid var(--se-edge); border-radius: var(--radius-pill); padding: 6px 12px; background: var(--surface); color: var(--ink); }
+#sentenceEditor .sentence-undo:disabled { opacity: .5; }
+#sentenceEditor .sentence-card, #sentenceEditor .sentence-status { overflow-wrap: anywhere; }

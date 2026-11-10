@@ -12,60 +12,348 @@
 
   const HAN=/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/u;
   const HAN_RUN=/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+/gu;
+  // Offline fallback mirrors hsk-grammar-rules.json; parity is covered by tests.
   const DEFAULT_CONFIG={
-    version:'2026.11.10',
-    macros:{
-      NUM:'(?:[一两三四五六七八九十百千万亿]+|几|每|这|那|哪)',
-      PRONOUN:'(?:我|你|他|她|它|我们|你们|他们|咱们|大家)',
-      TIME_WORD:'(?:今天|明天|昨天|前天|后天|现在|刚才|以前|以后|早上|上午|中午|下午|晚上|周末|去年|今年|明年)',
-      NOUN_BEN:'(?:书|词典|字典|杂志|小说|课本|笔记本|画册|护照)',
-      NOUN_JIAN:'(?:衣服|衬衫|毛衣|大衣|外套|行李|事|事情|礼物)',
-      NOUN_TIAO:'(?:裤子|裙子|河|路|鱼|狗|新闻|毛巾|船)',
-      NOUN_ZHANG:'(?:纸|桌子|床|照片|票|地图|脸|嘴)',
-      ADJ_COMMON:'(?:高兴|开心|快乐|伤心|难过|认真|努力|仔细|热情|慢慢|快快|悄悄|大声|小声|清楚|流利)',
-      VERB_ACTION:'(?:看|听|说|读|写|走|跑|吃|喝|买|卖|学|学习|工作|休息|睡觉|做|打|玩|洗|穿|找|去|来|回|到|跑步|说话)'
+  "version": "2026.11.10.2",
+  "macros": {
+    "NUM": "(?:[一两三四五六七八九十百千万亿]+|几|每|这|那|哪)",
+    "PRONOUN": "(?:我们|你们|他们|她们|咱们|大家|我|你|他|她|它)",
+    "TIME_WORD": "(?:今天|明天|昨天|前天|后天|现在|刚才|以前|以后|早上|上午|中午|下午|晚上|周末|去年|今年|明年)",
+    "NOUN_BEN": "(?:书|词典|字典|杂志|小说|课本|笔记本|画册|护照)",
+    "NOUN_JIAN": "(?:衣服|衬衫|毛衣|大衣|外套|行李|事|事情|礼物)",
+    "NOUN_TIAO": "(?:裤子|裙子|河|路|鱼|狗|新闻|毛巾|船)",
+    "NOUN_ZHANG": "(?:纸|桌子|床|照片|票|地图|脸|嘴)",
+    "ADJ_COMMON": "(?:高兴|开心|快乐|伤心|难过|认真|努力|仔细|热情|慢慢|快快|悄悄|大声|小声|清楚|流利)",
+    "VERB_ACTION": "(?:看|听|说|读|写|走|跑|吃|喝|买|卖|学|学习|工作|休息|睡觉|做|打|玩|洗|穿|找|去|来|回|到|跑步|说话)"
+  },
+  "rules": [
+    {
+      "id": "HSK1_LIANG_ER",
+      "hskLevel": 1,
+      "category": "measure_word",
+      "pattern": "(?<![第零〇一二两三四五六七八九十百千万亿\\d])二(个|本|件|条|张|杯|瓶|双|只|家|口|岁|块|次|遍)",
+      "replace": "两$1",
+      "message": "Đứng trước lượng từ, dùng 「两」 cho số lượng; 「二」 thường dùng trong số đếm và số thứ tự."
     },
-    rules:[
-      {id:'HSK1_LIANG_ER',hskLevel:1,category:'measure_word',pattern:'二(个|本|件|条|张|杯|瓶|双|只|家|口|岁|块|次|遍)',replace:'两$1',message:'Đứng trước lượng từ, dùng 「两」 cho số lượng; 「二」 thường dùng trong số đếm và số thứ tự.'},
-      {id:'HSK1_MW_BEN',hskLevel:1,category:'measure_word',pattern:'({{NUM}})个({{NOUN_BEN}})',replace:'$1本$2',message:'Sách, từ điển và tài liệu đóng quyển dùng lượng từ 「本」 thay vì 「个」.'},
-      {id:'HSK1_MW_JIAN',hskLevel:1,category:'measure_word',pattern:'({{NUM}})个({{NOUN_JIAN}})',replace:'$1件$2',message:'Quần áo, hành lý, sự việc và món quà thường dùng lượng từ 「件」.'},
-      {id:'HSK2_MW_TIAO',hskLevel:2,category:'measure_word',pattern:'({{NUM}})个({{NOUN_TIAO}})',replace:'$1条$2',message:'Vật dài, thon như cá, sông, đường và quần thường dùng 「条」.'},
-      {id:'HSK2_MW_ZHANG',hskLevel:2,category:'measure_word',pattern:'({{NUM}})个({{NOUN_ZHANG}})',replace:'$1张$2',message:'Vật phẳng như giấy, ảnh, vé, bản đồ và bàn thường dùng 「张」.'},
-      {id:'HSK1_NEG_BU_YOU',hskLevel:1,category:'negation',pattern:'不有',replace:'没有',message:'Phủ định của 「有」 là 「没有」, không dùng 「不有」.'},
-      {id:'HSK2_NEG_MEI_LE',hskLevel:2,category:'negation',pattern:'没(有)?({{VERB_ACTION}})了',replace:'没$1$2',message:'Sau 「没 / 没有」 không thêm trợ từ hoàn thành 「了」 ở cuối hành động.'},
-      {id:'HSK2_DE_ADV_VERB',hskLevel:2,category:'particle',pattern:'({{ADJ_COMMON}})[的得]({{VERB_ACTION}})',replace:'$1地$2',message:'Trạng ngữ đứng trước động từ dùng 「地」: tính từ + 地 + động từ.'},
-      {id:'HSK2_DE_VERB_COMP',hskLevel:2,category:'particle',pattern:'({{VERB_ACTION}})[的地](很|非常|太|真|特别)?({{ADJ_COMMON}}|好|快|慢|早|晚|多|少)',replace:'$1得$2$3',message:'Bổ ngữ chỉ mức độ sau động từ dùng 「得」: động từ + 得 + tính từ.'},
-      {id:'HSK2_BI_DEGREE_ADV',hskLevel:2,category:'comparison',pattern:'(比[^，。！？\\s]{1,6})(?:很|非常|太|真|特别)([^，。！？\\s]{1,3})',replace:'$1$2',message:'Sau 「比」 không đặt trực tiếp phó từ mức độ như 「很、非常、太」 trước tính từ.'},
-      {id:'HSK1_WORD_ORDER_TIME',hskLevel:1,category:'word_order',pattern:'({{PRONOUN}})((?:去|来|回|在|到|看|吃|买|学)[^，。！？\\s]{1,5})({{TIME_WORD}})(?=[，。！？\\s]|$)',replace:'$1$3$2',message:'Trạng ngữ thời gian thường đứng trước động từ: chủ ngữ + thời gian + động từ.'},
-      {id:'HSK3_CONJ_RUGUO_JIU',hskLevel:3,category:'word_order',pattern:'(如果[^，。！？]+，)\\s*就({{PRONOUN}})',replace:'$1$2就',message:'Trong 「如果…就…」, 「就」 thường đứng sau chủ ngữ của vế sau.'},
-      {id:'HSK3_BA_BARE_VERB',hskLevel:3,category:'ba_sentence',pattern:'(把[^，。！？\\s]{1,8})({{VERB_ACTION}})(?=[，。！？\\s]|$)',replace:'$1$2了',message:'Câu 「把」 cần thành phần kết quả, hướng hoặc trạng thái đi kèm động từ; không để động từ trơ ở cuối câu.'},
-      {id:'HSK1_PUNCT_SPACE',hskLevel:1,category:'punctuation',pattern:'[ \\t]+([，。！？、；：])',replace:'$1',message:'Không đặt khoảng trắng trước dấu câu tiếng Trung.'},
-      {id:'HSK1_DUPLICATE_PUNCT',hskLevel:1,category:'punctuation',pattern:'([，。！？])\\1+',replace:'$1',message:'Dấu câu lặp liên tiếp nên rút gọn còn một dấu.'}
-    ]
-  };
-
-  // Keep the offline fallback aligned with the external rule catalogue.  The
-  // JSON file is preferred when the app is served over HTTP; these rules keep
-  // the checker useful during an offline first load or a stale cache.
-  DEFAULT_CONFIG.rules.push(
-    {id:'HSK4_SUIRAN_SUOYI',hskLevel:4,category:'conjunction',pattern:'(虽然[^，。！？]+，[^，。！？]{1,20})所以',replace:'$1但是',message:'「虽然」 thường đi với 「但是/可是」，không dùng 「所以」 để nối kết quả đối lập.'},
-    {id:'HSK4_YINWEI_DANSHI',hskLevel:4,category:'conjunction',pattern:'(因为[^，。！？]+，[^，。！？]{1,20})但是',replace:'$1所以',message:'「因为」 thường mở nguyên nhân và đi với 「所以」 ở vế kết quả.'},
-    {id:'HSK4_RUGUO_DANSHI',hskLevel:4,category:'conjunction',pattern:'(如果[^，。！？]+，[^，。！？]{1,20})但是',replace:'$1就',message:'Điều kiện 「如果…」 thường đi với 「就」，không dùng 「但是」 để chỉ kết quả.'},
-    {id:'HSK4_JIRAN_SUOYI',hskLevel:4,category:'conjunction',pattern:'(既然[^，。！？]+，[^，。！？]{1,20})所以',replace:'$1就',message:'「既然…」 thường đi với 「就…」，không dùng 「所以」 lặp chức năng kết luận.'},
-    {id:'HSK4_SUIRAN_QUE',hskLevel:4,category:'conjunction',pattern:'虽然([^，。！？]+)，所以',replace:'虽然$1，但是',message:'Cặp tương phản là 「虽然…但是/可是…」.'},
-    {id:'HSK4_CHUF_JIU',hskLevel:4,category:'conjunction',pattern:'(除非[^，。！？]+，[^，。！？]{1,20})就',replace:'$1否则',message:'「除非…」 thường đi với 「否则…」 để nêu điều kiện loại trừ.'},
-    {id:'HSK4_CHULE_DUPLICATE',hskLevel:4,category:'conjunction',pattern:'除了([^，。！？]{1,12})(以外|之外)之外',replace:'除了$1$2',message:'Chỉ dùng một lần thành phần 「以外/之外」 trong cấu trúc 「除了…以外/之外…」.'},
-    {id:'HSK5_BU_GUAN_DANSHI',hskLevel:5,category:'conjunction',pattern:'((?:不管|无论)[^，。！？]+，[^，。！？]{1,20})(?:但是|可是)',replace:'$1都',message:'「不管/无论…」 thường đi với 「都/也…」，không dùng 「但是」 để nối vế bao quát.'},
-    {id:'HSK5_JISHI_DANSHI',hskLevel:5,category:'conjunction',pattern:'(即使[^，。！？]+，[^，。！？]{1,20})但是',replace:'$1也',message:'Cặp nhượng bộ là 「即使…也…」，không dùng 「但是」 ở vế sau.'},
-    {id:'HSK5_JIRAN_DANSHI',hskLevel:5,category:'conjunction',pattern:'(既然[^，。！？]+，[^，。！？]{1,20})但是',replace:'$1就',message:'「既然…」 thường dẫn đến kết luận bằng 「就…」.'},
-    {id:'HSK5_ZHIYOU_JIU',hskLevel:5,category:'conjunction',pattern:'(只有[^，。！？]+，[^，。！？]{0,20}?)就',replace:'$1才',message:'Cấu trúc điều kiện cần là 「只有…才…」.'},
-    {id:'HSK5_ZHIYAO_CAI',hskLevel:5,category:'conjunction',pattern:'(只要[^，。！？]+，[^，。！？]{1,20})才',replace:'$1就',message:'Cấu trúc điều kiện đủ là 「只要…就…」.'},
-    {id:'HSK6_YIMIAN_DUPLICATE',hskLevel:6,category:'conjunction',pattern:'一方面([^，。！？]+)，所以',replace:'一方面$1，另一方面',message:'Khi trình bày hai mặt song song, dùng cặp 「一方面…另一方面…」.'},
-    {id:'HSK6_YIMIAN_DANSHI',hskLevel:6,category:'conjunction',pattern:'一方面([^，。！？]+)，但是',replace:'一方面$1，另一方面',message:'Hai mặt song song nên dùng 「一方面…另一方面…」 thay vì 「但是」.'},
-    {id:'HSK4_ASPECT_MEI_LE',hskLevel:4,category:'aspect',pattern:'没(有)?({{VERB_ACTION}})了',replace:'没$1$2',message:'「没/没有」 đã phủ định việc xảy ra; thường không thêm 「了」 chỉ hoàn thành.'},
-    {id:'HSK4_DE_DE',hskLevel:4,category:'particle',pattern:'的的+',replace:'的',message:'Không lặp trợ từ 「的」 liên tiếp trong một cụm danh từ.'},
-    {id:'HSK4_LE_LE',hskLevel:4,category:'aspect',pattern:'了了+',replace:'了',message:'Không lặp trợ từ 「了」 liên tiếp.'}
-  );
+    {
+      "id": "HSK1_MW_BEN",
+      "hskLevel": 1,
+      "category": "measure_word",
+      "pattern": "({{NUM}})个({{NOUN_BEN}})",
+      "replace": "$1本$2",
+      "message": "Sách, từ điển và tài liệu đóng quyển dùng lượng từ 「本」 thay vì 「个」."
+    },
+    {
+      "id": "HSK1_MW_JIAN",
+      "hskLevel": 1,
+      "category": "measure_word",
+      "pattern": "({{NUM}})个({{NOUN_JIAN}})",
+      "replace": "$1件$2",
+      "message": "Quần áo, hành lý, sự việc và món quà thường dùng lượng từ 「件」."
+    },
+    {
+      "id": "HSK2_MW_TIAO",
+      "hskLevel": 2,
+      "category": "measure_word",
+      "pattern": "({{NUM}})个({{NOUN_TIAO}})",
+      "replace": "$1条$2",
+      "message": "Vật dài, thon như cá, sông, đường và quần thường dùng 「条」."
+    },
+    {
+      "id": "HSK2_MW_ZHANG",
+      "hskLevel": 2,
+      "category": "measure_word",
+      "pattern": "({{NUM}})个({{NOUN_ZHANG}})",
+      "replace": "$1张$2",
+      "message": "Vật phẳng như giấy, ảnh, vé, bản đồ và bàn thường dùng 「张」."
+    },
+    {
+      "id": "HSK1_NEG_BU_YOU",
+      "hskLevel": 1,
+      "category": "negation",
+      "pattern": "(?<![无何岂所])不有(?![利害效用趣关名理])",
+      "replace": "没有",
+      "message": "Phủ định của 「有」 là 「没有」, không dùng 「不有」."
+    },
+    {
+      "id": "HSK2_NEG_MEI_LE",
+      "hskLevel": 2,
+      "category": "negation",
+      "pattern": "没(有)?({{VERB_ACTION}})了",
+      "replace": "没$1$2",
+      "message": "Cần xét ngữ cảnh. Sau 「没 / 没有」 không thêm trợ từ hoàn thành 「了」 ở cuối hành động.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK2_DE_ADV_VERB",
+      "hskLevel": 2,
+      "category": "particle",
+      "pattern": "({{ADJ_COMMON}})[的得]({{VERB_ACTION}})",
+      "replace": "$1地$2",
+      "message": "Trạng ngữ đứng trước động từ dùng 「地」: tính từ + 地 + động từ."
+    },
+    {
+      "id": "HSK2_DE_VERB_COMP",
+      "hskLevel": 2,
+      "category": "particle",
+      "pattern": "({{VERB_ACTION}})[的地](很|非常|太|真|特别)?({{ADJ_COMMON}}|好|快|慢|早|晚|多|少)",
+      "replace": "$1得$2$3",
+      "message": "Bổ ngữ chỉ mức độ sau động từ dùng 「得」: động từ + 得 + tính từ."
+    },
+    {
+      "id": "HSK2_BI_DEGREE_ADV",
+      "hskLevel": 2,
+      "category": "comparison",
+      "pattern": "(比[^，。！？\\s]{1,6})(?:很|非常|太|真|特别)([^，。！？\\s]{1,3})",
+      "replace": "$1$2",
+      "message": "Cần xét ngữ cảnh. Sau 「比」 không đặt trực tiếp phó từ mức độ như 「很、非常、太」 trước tính từ.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK1_WORD_ORDER_TIME",
+      "hskLevel": 1,
+      "category": "word_order",
+      "pattern": "({{PRONOUN}})((?:去|来|回|在|到|看|吃|买|学)[^，。！？\\s]{1,5})({{TIME_WORD}})(?=[，。！？\\s]|$)",
+      "replace": "$1$3$2",
+      "message": "Cần xét ngữ cảnh. Trạng ngữ thời gian thường đứng trước động từ: chủ ngữ + thời gian + động từ.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK3_CONJ_RUGUO_JIU",
+      "hskLevel": 3,
+      "category": "word_order",
+      "pattern": "(如果[^，。！？]+，)\\s*就({{PRONOUN}})",
+      "replace": "$1$2就",
+      "message": "Trong 「如果…就…」, 「就」 thường đứng sau chủ ngữ của vế sau."
+    },
+    {
+      "id": "HSK3_BA_BARE_VERB",
+      "hskLevel": 3,
+      "category": "ba_sentence",
+      "pattern": "(把[^，。！？\\s]{1,8})({{VERB_ACTION}})(?=[，。！？\\s]|$)",
+      "replace": "$1$2了",
+      "message": "Câu 把 thường cần kết quả hoặc trạng thái đi kèm. Chỉ thêm 了 nếu ý bạn là hành động đã hoàn thành.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK1_PUNCT_SPACE",
+      "hskLevel": 1,
+      "category": "punctuation",
+      "pattern": "[ \\t]+([，。！？、；：])",
+      "replace": "$1",
+      "message": "Không đặt khoảng trắng trước dấu câu tiếng Trung."
+    },
+    {
+      "id": "HSK1_DUPLICATE_PUNCT",
+      "hskLevel": 1,
+      "category": "punctuation",
+      "pattern": "([，。！？])\\1+",
+      "replace": "$1",
+      "message": "Dấu câu lặp liên tiếp nên rút gọn còn một dấu."
+    },
+    {
+      "id": "HSK4_SUIRAN_SUOYI",
+      "hskLevel": 4,
+      "category": "conjunction",
+      "pattern": "(虽然[^，。！？]+，[^，。！？]{1,20})所以",
+      "replace": "$1但是",
+      "message": "Cần xét ngữ cảnh. 「虽然」 thường đi với 「但是/可是」，không dùng 「所以」 để nối kết quả đối lập.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK4_YINWEI_DANSHI",
+      "hskLevel": 4,
+      "category": "conjunction",
+      "pattern": "(因为[^，。！？]+，[^，。！？]{1,20})但是",
+      "replace": "$1所以",
+      "message": "Cần xét ngữ cảnh. 「因为」 thường mở nguyên nhân và đi với 「所以」 ở vế kết quả.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK4_RUGUO_DANSHI",
+      "hskLevel": 4,
+      "category": "conjunction",
+      "pattern": "(如果[^，。！？]+，[^，。！？]{1,20})但是",
+      "replace": "$1就",
+      "message": "Cần xét ngữ cảnh. Điều kiện 「如果…」 thường đi với 「就」，không dùng 「但是」 để chỉ kết quả.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK4_JIRAN_SUOYI",
+      "hskLevel": 4,
+      "category": "conjunction",
+      "pattern": "(既然[^，。！？]+，[^，。！？]{1,20})所以",
+      "replace": "$1就",
+      "message": "Cần xét ngữ cảnh. 「既然…」 thường đi với 「就…」，không dùng 「所以」 lặp chức năng kết luận.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK4_SUIRAN_QUE",
+      "hskLevel": 4,
+      "category": "conjunction",
+      "pattern": "虽然([^，。！？]+)，所以",
+      "replace": "虽然$1，但是",
+      "message": "Cần xét ngữ cảnh. Cặp tương phản là 「虽然…但是/可是…」.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK4_CHUF..._JIU",
+      "hskLevel": 4,
+      "category": "conjunction",
+      "pattern": "(除非[^，。！？]+，[^，。！？]{1,20})就",
+      "replace": "$1否则",
+      "message": "Cần xét ngữ cảnh. 「除非…」 thường đi với 「否则…」 để nêu điều kiện loại trừ.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK4_CHULE_DUPLICATE",
+      "hskLevel": 4,
+      "category": "conjunction",
+      "pattern": "除了([^，。！？]{1,12})(以外|之外)之外",
+      "replace": "除了$1$2",
+      "message": "Cần xét ngữ cảnh. Chỉ dùng một lần thành phần 「以外/之外」 trong cấu trúc 「除了…以外/之外…」.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK5_BU_GUAN_DANSHI",
+      "hskLevel": 5,
+      "category": "conjunction",
+      "pattern": "((?:不管|无论)[^，。！？]+，[^，。！？]{1,20})(?:但是|可是)",
+      "replace": "$1都",
+      "message": "Cần xét ngữ cảnh. 「不管/无论…」 thường đi với 「都/也…」，không dùng 「但是」 để nối vế bao quát.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK5_JISHI_DANSHI",
+      "hskLevel": 5,
+      "category": "conjunction",
+      "pattern": "(即使[^，。！？]+，[^，。！？]{1,20})但是",
+      "replace": "$1也",
+      "message": "Cần xét ngữ cảnh. Cặp nhượng bộ là 「即使…也…」，không dùng 「但是」 ở vế sau.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK5_JIRAN_DANSHI",
+      "hskLevel": 5,
+      "category": "conjunction",
+      "pattern": "(既然[^，。！？]+，[^，。！？]{1,20})但是",
+      "replace": "$1就",
+      "message": "Cần xét ngữ cảnh. 「既然…」 thường dẫn đến kết luận bằng 「就…」.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK5_ZHIYOU_JIU",
+      "hskLevel": 5,
+      "category": "conjunction",
+      "pattern": "(只有[^，。！？]+，[^，。！？]{0,20}?)就",
+      "replace": "$1才",
+      "message": "Cần xét ngữ cảnh. Cấu trúc điều kiện cần là 「只有…才…」.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK5_ZHIYAO_CAI",
+      "hskLevel": 5,
+      "category": "conjunction",
+      "pattern": "(只要[^，。！？]+，[^，。！？]{1,20})才",
+      "replace": "$1就",
+      "message": "Cần xét ngữ cảnh. Cấu trúc điều kiện đủ là 「只要…就…」.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK6_YIMIAN_DUPLICATE",
+      "hskLevel": 6,
+      "category": "conjunction",
+      "pattern": "一方面([^，。！？]+)，所以",
+      "replace": "一方面$1，另一方面",
+      "message": "Cần xét ngữ cảnh. Khi trình bày hai mặt song song, dùng cặp 「一方面…另一方面…」.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK6_YIMIAN_DANSHI",
+      "hskLevel": 6,
+      "category": "conjunction",
+      "pattern": "一方面([^，。！？]+)，但是",
+      "replace": "一方面$1，另一方面",
+      "message": "Cần xét ngữ cảnh. Hai mặt song song nên dùng 「一方面…另一方面…」 thay vì 「但是」.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK4_ASPECT_MEI_LE",
+      "hskLevel": 4,
+      "category": "aspect",
+      "pattern": "没(有)?({{VERB_ACTION}})了",
+      "replace": "没$1$2",
+      "message": "Cần xét ngữ cảnh. 「没/没有」 đã phủ định việc xảy ra; thường không thêm 「了」 chỉ hoàn thành.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK4_DE_DE",
+      "hskLevel": 4,
+      "category": "particle",
+      "pattern": "的的+(?!解|结|分明|无几|可数|不得|确)",
+      "replace": "的",
+      "message": "Không lặp trợ từ 「的」 liên tiếp trong một cụm danh từ."
+    },
+    {
+      "id": "HSK4_LE_LE",
+      "hskLevel": 4,
+      "category": "aspect",
+      "pattern": "了了+(?!解|结|分明|无几|可数|不得|确)",
+      "replace": "了",
+      "message": "Cần xét ngữ cảnh. Không lặp trợ từ 「了」 liên tiếp.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK3_BANGMANG_OBJECT",
+      "hskLevel": 3,
+      "category": "word_order",
+      "pattern": "帮忙({{PRONOUN}})(?=打扫|搬|做|写|买|找|拿|看|学习|准备|收拾|解决|翻译|修|洗|开|关)",
+      "replace": "帮$1",
+      "message": "「帮忙」 không nhận trực tiếp tân ngữ chỉ người. Khi nói giúp ai làm gì, dùng 「帮 + người + hành động」."
+    },
+    {
+      "id": "HSK2_MISSING_DE",
+      "hskLevel": 2,
+      "category": "particle",
+      "pattern": "((?:很|非常|特别)(?:漂亮|好看|干净|可爱|有趣|重要|复杂|简单))(衣服|裙子|房间|孩子|故事|问题|事情|工作)",
+      "replace": "$1的$2",
+      "message": "Cụm tính từ có phó từ mức độ bổ nghĩa cho danh từ cần 「的」: 很漂亮的衣服."
+    },
+    {
+      "id": "HSK2_SUIRAN_DIRECT",
+      "hskLevel": 2,
+      "category": "conjunction",
+      "kind": "style",
+      "pattern": "(因为[^，。！？]+，)但是",
+      "replace": "$1所以",
+      "message": "Nếu vế sau là kết quả của nguyên nhân, dùng 所以. Giữ 但是 nếu bạn thực sự muốn diễn đạt tương phản."
+    },
+    {
+      "id": "HSK2_ZAI_ACTION",
+      "hskLevel": 2,
+      "category": "particle",
+      "pattern": "({{PRONOUN}})在在(?=学习|工作|看书|吃饭|学校|家)",
+      "replace": "$1在",
+      "message": "「在」 bị lặp ở vị trí này; giữ lại một chữ."
+    },
+    {
+      "id": "HSK3_LIANGCI_CHE",
+      "hskLevel": 3,
+      "category": "measure_word",
+      "pattern": "({{NUM}})个(汽车|自行车|出租车)",
+      "replace": "$1辆$2",
+      "message": "Xe dùng lượng từ 「辆」."
+    },
+    {
+      "id": "HSK2_LIANGCI_DIAN",
+      "hskLevel": 2,
+      "category": "measure_word",
+      "pattern": "({{NUM}})个(电影)",
+      "replace": "$1部$2",
+      "message": "Khi đếm tác phẩm điện ảnh, dùng 「部电影」."
+    }
+  ]
+};
 
   function clone(value){return JSON.parse(JSON.stringify(value));}
   function normalizePinyin(value=''){
@@ -108,7 +396,7 @@
       for(let i=1;i<=a.length;i++){const row=[i];let min=i;
         for(let j=1;j<=b.length;j++){const cost=a[i-1]===b[j-1]?0:1;let value=Math.min(row[j-1]+1,previous[j]+1,previous[j-1]+cost);
           if(before&&i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])value=Math.min(value,before[j-2]+1);row[j]=value;min=Math.min(min,value);}
-        if(min>limit)return limit+1;before=previous;for(let j=0;j<row.length;j++)previous[j]=row[j];
+        if(min>limit)return limit+1;before=previous.slice();for(let j=0;j<row.length;j++)previous[j]=row[j];
       }return previous[b.length];
     }
     lookup(query){
@@ -139,17 +427,17 @@
       const report=facts?.report||{};this.datasetVersion=[seen.size,report.checkedWords||'',report.targetedNotes||'',this.config.version].join(':');this.sentenceCache.clear();this.stats.words=seen.size;return this.datasetVersion;
     }
     splitSentences(text){const rows=[],re=/[^.!?。！？\n]+[.!?。！？\n]*/gu;let match;while((match=re.exec(text))!==null)rows.push({text:match[0],offset:match.index});if(!rows.length&&text)rows.push({text,offset:0});return rows;}
-    _ruleErrors(sentence){const errors=[];for(const rule of this.rules){const re=new RegExp(rule.source,rule.regex.flags),replaceRe=new RegExp(rule.source,rule.regex.flags.replace('g',''));let match;while((match=re.exec(sentence))!==null){const wrong=match[0],replacement=wrong.replace(replaceRe,rule.replace??wrong);if(!wrong||replacement===wrong)continue;errors.push({kind:'fix',source:'local',ruleId:rule.id,category:rule.category,start:match.index,end:match.index+wrong.length,original:wrong,replacement,reason:rule.message,hskLevel:rule.hskLevel});if(!re.global)break;}}return errors;}
+    _ruleErrors(sentence){const errors=[];for(const rule of this.rules){const re=new RegExp(rule.source,rule.regex.flags);let match;while((match=re.exec(sentence))!==null){const wrong=match[0],replacement=String(rule.replace??wrong).replace(/\$(\$|&|\d{1,2})/g,(_,key)=>key==='$'?'$':key==='&'?wrong:(match[Number(key)]??''));if(!wrong){if(!re.global)break;re.lastIndex++;continue;}if(replacement===wrong)continue;errors.push({kind:rule.kind||'fix',source:'local',ruleId:rule.id,category:rule.category,start:match.index,end:match.index+wrong.length,original:wrong,replacement,reason:rule.message,hskLevel:rule.hskLevel});if(!re.global)break;}}return errors;}
     _spellingErrors(sentence,existing){const errors=[],blocked=(start,end)=>existing.some(item=>start<item.end&&end>item.start);const latin=/[A-Za-z][A-Za-z'’-]{2,}/gu;let match;
-      while((match=latin.exec(sentence))!==null){const result=this.symSpell.lookup(match[0]);if(result&&!blocked(match.index,match.index+match[0].length))errors.push({kind:'fix',source:'local',category:'spelling',start:match.index,end:match.index+match[0].length,original:match[0],replacement:result.suggestion,reason:result.message,confidence:result.confidence});}
+      while((match=latin.exec(sentence))!==null){const result=this.symSpell.lookup(match[0]);if(result&&!blocked(match.index,match.index+match[0].length))errors.push({kind:'style',source:'local',category:'spelling',start:match.index,end:match.index+match[0].length,original:match[0],replacement:result.suggestion,reason:result.message,confidence:result.confidence});}
       for(const run of sentence.matchAll(HAN_RUN)){const value=run[0],offset=run.index||0;if(value.length<3)continue;
         // Four-character chunks catch common HSK idiom/word typos while the
         // dictionary check prevents warnings for every ordinary Hanzi pair.
-        for(let i=0;i<=value.length-3;i++){const size=value.length>=4?4:3;if(i+size>value.length)break;const start=offset+i,end=start+size;if(blocked(start,end))continue;const result=this.symSpell.lookupHan(value.slice(i,i+size));if(!result||result.confidence<.85)continue;errors.push({kind:'fix',source:'local',category:'spelling',start,end,original:value.slice(i,i+size),replacement:result.suggestion,reason:result.message,confidence:result.confidence});}
+        for(let i=0;i<=value.length-3;i++){const size=value.length>=4?4:3;if(i+size>value.length)break;const start=offset+i,end=start+size;if(blocked(start,end))continue;const result=this.symSpell.lookupHan(value.slice(i,i+size));if(!result||result.confidence<.85)continue;errors.push({kind:'style',source:'local',category:'spelling',start,end,original:value.slice(i,i+size),replacement:result.suggestion,reason:result.message,confidence:result.confidence});}
       }return errors;
     }
     analyzeSentence(sentence){const cached=this.sentenceCache.get(sentence);if(cached){this.cacheHits++;this.stats.cacheHits++;return cached.map(item=>({...item}));}
-      const grammar=this._ruleErrors(sentence),spelling=this._spellingErrors(sentence,grammar),all=[...grammar,...spelling].sort((a,b)=>a.start-b.start||b.end-b.start);const accepted=[];for(const item of all){if(!accepted.some(other=>item.start<other.end&&item.end>other.start))accepted.push(item);}this.sentenceCache.set(sentence,accepted);return accepted.map(item=>({...item}));}
+      const grammar=this._ruleErrors(sentence),spelling=this._spellingErrors(sentence,grammar),all=[...grammar,...spelling].sort((a,b)=>a.start-b.start||b.end-b.start);const accepted=[];for(const item of all){if(!accepted.some(other=>item.start<other.end&&item.end>other.start))accepted.push(item);}if(this.sentenceCache.size>=200)this.sentenceCache.delete(this.sentenceCache.keys().next().value);this.sentenceCache.set(sentence,accepted);return accepted.map(item=>({...item}));}
     checkText(text){this.stats.checks++;if(!text)return [];const errors=[];for(const sentence of this.splitSentences(String(text)))for(const item of this.analyzeSentence(sentence.text))errors.push({...item,start:item.start+sentence.offset,end:item.end+sentence.offset});return errors;}
     metrics(){return {...this.stats,cacheSize:this.sentenceCache.size,datasetVersion:this.datasetVersion};}
   }

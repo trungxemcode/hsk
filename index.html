@@ -172,6 +172,7 @@
           <footer class="sentence-footer">
             <div class="sentence-footer-meta">
               <span class="sentence-count">0 / 500 ký tự</span>
+              <button type="button" class="sentence-undo" disabled>Hoàn tác</button>
               <button type="button" class="sentence-example">Thử câu mẫu</button>
             </div>
             <button type="submit" class="sentence-check-btn">Kiểm tra</button>
@@ -189,7 +190,9 @@
             </div>
           </div>
           <div class="sentence-review-body">
-            <p class="sentence-status" role="status">Đang theo dõi · kiểm tra cục bộ, không dùng AI.</p>
+            <p class="sentence-status" role="status" aria-live="polite">Nhập tiếng Trung để kiểm tra ngay khi gõ · không dùng AI.</p>
+            <p class="sentence-help">Gạch chân khi thấy lỗi thường gặp. AI kiểm tra thêm ngữ cảnh và cách diễn đạt, chỉ chạy khi bạn bấm nút.</p>
+            <button type="submit" class="sentence-deep-check sentence-check-btn">Kiểm tra sâu bằng AI</button>
             <div class="sentence-suggestions"></div>
           </div>
         </aside>
