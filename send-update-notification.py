@@ -12,10 +12,10 @@ SITE = 'https://trungxemcode.github.io/hsk/'
 
 # Pages caches static JSON for up to 600 seconds. Each attempt must use a
 # distinct URL or an early stale response can be cached for the entire loop.
-# GitHub Pages can lag behind a successful commit by more than two minutes.
-# Use a monotonic deadline rather than a fixed attempt count; keep ~45 seconds
-# of the 5-minute Actions job for startup and the OneSignal request.
-PAGES_DEPLOY_WAIT_BUDGET_SECONDS = 230
+# Pages deployments sometimes exceed five minutes under GitHub Actions load.
+# Poll for up to 8.5 minutes, leaving 90 seconds of the 10-minute job
+# for startup and OneSignal delivery. Never notify before exact release is live.
+PAGES_DEPLOY_WAIT_BUDGET_SECONDS = 510
 PAGES_DEPLOY_POLL_SECONDS = 10
 PAGES_MANIFEST_REQUEST_TIMEOUT_SECONDS = 10
 
