@@ -1,6 +1,7 @@
 import importlib.util
 import unittest
 import io
+from pathlib import Path
 from unittest import mock
 from urllib.parse import urlsplit, parse_qs
 spec = importlib.util.spec_from_file_location('notify', 'send-update-notification.py')
@@ -51,7 +52,7 @@ class UpdatePushTests(unittest.TestCase):
                 notify.wait_for_live_version('v2')
         self.assertEqual(clock[0], notify.PAGES_DEPLOY_WAIT_BUDGET_SECONDS)
         self.assertGreater(request.call_count, 12)
-        self.assertLessEqual(request.call_count, 26)
+        self.assertLessEqual(request.call_count, notify.PAGES_DEPLOY_WAIT_BUDGET_SECONDS // notify.PAGES_DEPLOY_POLL_SECONDS + 1)
 
     def test_live_deploy_check_busts_github_pages_cache(self):
         # GitHub Pages uses Cache-Control: max-age=600 for this manifest.
@@ -64,4 +65,9 @@ class UpdatePushTests(unittest.TestCase):
         self.assertEqual(parse_qs(urlsplit(second).query)['attempt'], ['1'])
         self.assertEqual(parse_qs(urlsplit(first).query)['probe'], ['111'])
         self.assertEqual(parse_qs(urlsplit(second).query)['probe'], ['222'])
-        self.assertEqual(notify.PAGES_DEPLOY_WAIT_BUDGET_SECONDS, 230)
+        # Keep enough startup/send time within the workflow deadline, even if
+        # GitHub Pages deployment needs an extended wait.
+        self.assertGreaterEqual(notify.PAGES_DEPLOY_WAIT_BUDGET_SECONDS, 230)
+        workflow = Path('.github/workflows/update-notifications.yml').read_text()
+        self.assertIn('timeout-minutes: 10', workflow)
+        self.assertLessEqual(notify.PAGES_DEPLOY_WAIT_BUDGET_SECONDS, 10 * 60 - 60)
