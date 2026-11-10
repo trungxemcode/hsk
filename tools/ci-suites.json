@@ -87,7 +87,9 @@
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-wrong-answer-images-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-grouped-navigation-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-mobile-grouped-menu-ui.cjs",
-    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-mobile-header-filter-ui.cjs"
+    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-mobile-header-filter-ui.cjs",
+    "node --test tools/sentence-checker.test.cjs",
+    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-sentence-checker.cjs"
   ],
   "protected-browser": [
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-feature-runtime.cjs",

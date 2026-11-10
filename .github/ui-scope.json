@@ -1,1 +1,1 @@
-{"request":"Công cụ Sửa câu tiếng Trung: thêm bộ kiểm tra chính tả và ngữ pháp HSK 1–6 không cần token, gợi ý trực tiếp trong trang Sửa câu; giữ nguyên 23 trang còn lại.","excludedRoutes":["sentence-editor"]}
+{"request": "Cải thiện kiểm tra ngữ pháp và vòng đời gợi ý tại Sửa câu tiếng Trung trên PC/mobile; làm rõ kiểm tra cục bộ/AI, thêm hoàn tác. Các trang khác giữ nguyên.", "excludedRoutes": ["sentence-editor"]}

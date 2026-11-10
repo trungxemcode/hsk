@@ -148,3 +148,10 @@ Owner reports text too small and joined pinyin; only hands-free viewport request
 
 ## 30/10/2026 — account card spacing added to current UI PR
 Owner additionally requests equal large-card gaps on Account. PC/mobile direct settings/voice/storage/version cards receive16px flow gaps and no saved per-card translations; no inner/auth/data changes. Regression guest/signed fixtures, light/dark390/1440 and saved offsets. Included alongside pending typography PR246 to keep PWA hashes consistent instead of competing release branches. Browser QA pending.
+
+## Sentence grammar review (2026-11-10)
+- Base: 886b972; branch fix/grammar-editor-review. Scope: sentence-editor only, PC/mobile.
+- Fix replacement expansion with regex lookarounds; guard 二 in ordinals/compound numbers, add 帮忙 + person + action and missing 的 rules. Context/spelling guesses are style hints. Bound cache and correct transposition distance.
+- Abort/invalidate AI on draft, account and route changes; validate spans, prefer AI on overlap, preserve dismiss on same draft and add session undo. Manual AI only, existing auth/quota unchanged.
+- Tests: 7 core cases; Chromium checker covers screenshot example, apply/undo, dismiss, stale AI, 390/1440 layouts and zero automatic requests. Feature/PWA guards required. Provider mocked, not live AI acceptance.
+- Release 4.4.26. No merge/deploy authorization in this task. Other agents: preserve these edits; rebase on main before merge/release to avoid PWA version conflicts.
