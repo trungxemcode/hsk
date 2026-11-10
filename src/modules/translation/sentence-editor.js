@@ -8,8 +8,16 @@
   const example=panel.querySelector('.sentence-example');
   const cards=panel.querySelector('.sentence-suggestions'),filters=[...panel.querySelectorAll('[data-sentence-filter]')];
   const checker=window.HSKSentenceCheckerCore?.checker;
-  let localSuggestions=[],aiSuggestions=[],filter='all',pending=null,inputTimer=0,composing=false;
+  let localSuggestions=[],onnxSuggestions=[],aiSuggestions=[],filter='all',pending=null,inputTimer=0,composing=false;
   let dismissed=new Set(),undoStack=[],aiSummary='';
+  const onnx=window.HSKSentenceOnnx?.({
+    toggle:panel.querySelector('.sentence-onnx-toggle'),
+    status:panel.querySelector('.sentence-onnx-status'),
+    onSuggestions(items){
+      onnxSuggestions=items.map(item=>({...item,kind:'fix',source:'onnx'}));
+      render();
+    }
+  });
   const signature=item=>`${item.start}:${item.end}:${item.original}:${item.replacement}`;
   function cancelPending(){if(pending)pending.abort();pending=null;submit.disabled=false;aiButton.disabled=false;panel.setAttribute('aria-busy','false');}
   function valid(item){return item.start>=0&&item.end<=draft.value.length&&draft.value.slice(item.start,item.end)===item.original;}
@@ -20,7 +28,7 @@
   function syncScroll(){mirror.scrollTop=draft.scrollTop;mirror.scrollLeft=draft.scrollLeft;}
   function uniqueSuggestions(){
     const seen=new Set(),out=[];
-    for(const item of [...aiSuggestions,...localSuggestions]){
+    for(const item of [...aiSuggestions,...localSuggestions,...onnxSuggestions]){
       const key=signature(item);if(seen.has(key)||dismissed.has(key)||!valid(item))continue;if(out.some(other=>item.start<other.end&&item.end>other.start))continue;seen.add(key);out.push(item);
     }
     return out.sort((a,b)=>a.start-b.start);
@@ -40,7 +48,7 @@
     for(const item of currentErrors()){
       const card=document.createElement('article');card.className='sentence-card';card.dataset.kind=item.kind;card.dataset.source=item.source||'local';
       const head=document.createElement('div');head.className='sentence-card-head';const dot=document.createElement('span');dot.className='sentence-card-dot';
-      const title=document.createElement('h4');title.textContent=(item.kind==='fix'?'Cần sửa':'Gợi ý diễn đạt')+(item.source==='ai'?' · AI':' · Cục bộ');head.append(dot,title);
+      const title=document.createElement('h4');title.textContent=(item.kind==='fix'?'Cần sửa':'Gợi ý diễn đạt')+(item.source==='ai'?' · AI':item.source==='onnx'?' · Tại máy':' · Cục bộ');head.append(dot,title);
       const change=document.createElement('p');change.className='sentence-diff';change.lang='zh';
       const del=document.createElement('del');del.className='sentence-del';del.textContent=item.original;
       const arrow=document.createElement('span');arrow.className='sentence-arrow';arrow.textContent=' → ';
@@ -60,7 +68,7 @@
     const delta=replacement.length-(item.end-item.start);
     draft.setRangeText(replacement,item.start,item.end,'end');
     aiSuggestions=aiSuggestions.filter(other=>other.end<=item.start||other.start>=item.end).map(other=>other.start<item.end?other:{...other,start:other.start+delta,end:other.end+delta});
-    dismissed.clear();aiSummary='';runLocalCheck();
+    dismissed.clear();aiSummary='';onnx?.check(draft.value);runLocalCheck();
   }
   function dismissSuggestion(item){
     dismissed.add(signature(item));render();setStatus(uniqueSuggestions().length?`Còn ${uniqueSuggestions().length} gợi ý.`:'Đã xem hết gợi ý.');
@@ -73,8 +81,8 @@
     if(!pending)setStatus(aiSummary||(text.trim()?(total?`${total} gợi ý${aiSuggestions.length?' · gồm kết quả AI':' · kiểm tra cục bộ, không dùng AI'}`:'Chưa phát hiện lỗi trong các quy tắc cục bộ. Dùng Kiểm tra sâu bằng AI để xét ngữ cảnh.'): 'Nhập tiếng Trung để kiểm tra ngay khi gõ · không dùng AI.'));
     render();
   }
-  function resetForInput(){cancelPending();aiSuggestions=[];localSuggestions=[];aiSummary='';dismissed.clear();undoStack=[];setStatus(composing?'Đang nhập chữ…':'Đang kiểm tra cục bộ…');scheduleLocalCheck();render();}
-  undoButton.addEventListener('click',()=>{const previous=undoStack.pop();if(!previous)return;cancelPending();clearTimeout(inputTimer);draft.value=previous.text;aiSuggestions=previous.ai;dismissed=new Set(previous.dismissed);aiSummary='';runLocalCheck();draft.focus();});
+  function resetForInput(){cancelPending();aiSuggestions=[];localSuggestions=[];aiSummary='';dismissed.clear();undoStack=[];setStatus(composing?'Đang nhập chữ…':'Đang kiểm tra cục bộ…');scheduleLocalCheck();onnx?.check(draft.value,composing);render();}
+  undoButton.addEventListener('click',()=>{const previous=undoStack.pop();if(!previous)return;cancelPending();clearTimeout(inputTimer);draft.value=previous.text;aiSuggestions=previous.ai;dismissed=new Set(previous.dismissed);aiSummary='';onnx?.check(draft.value);runLocalCheck();draft.focus();});
   function readSuggestions(text,data){
     if(!data||typeof data.summary!=='string'||!Array.isArray(data.suggestions))throw Error('AI trả về gợi ý chưa đúng định dạng. Hãy thử lại.');
     const items=[];
@@ -90,7 +98,16 @@
   draft.addEventListener('compositionend',()=>{composing=false;resetForInput();});
   draft.addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key==='Enter'){event.preventDefault();form.requestSubmit();}});
   window.addEventListener('hsk-account-ready',()=>{cancelPending();aiSuggestions=[];aiSummary='';runLocalCheck();});
-  new MutationObserver(()=>{if(panel.hidden&&pending){cancelPending();runLocalCheck();}}).observe(panel,{attributes:true,attributeFilter:['hidden']});
+  new MutationObserver(()=>{
+    if(panel.hidden){
+      onnx?.pause();
+      if(pending){cancelPending();runLocalCheck();}
+    }else onnx?.check(draft.value,composing);
+  }).observe(panel,{attributes:true,attributeFilter:['hidden']});
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden)onnx?.pause();
+    else if(!panel.hidden)onnx?.check(draft.value,composing);
+  });
   window.addEventListener('hsk-lessons-ready',()=>{window.HSKSentenceCheckerCore?.refresh?.();scheduleLocalCheck(0);});
   example.addEventListener('click',()=>{if(draft.value.trim())return;draft.value='我昨天去了商店，买了一件很漂亮衣服。';resetForInput();draft.focus();});
   filters.forEach(node=>node.addEventListener('click',()=>{filter=node.dataset.sentenceFilter;for(const item of filters)item.setAttribute('aria-pressed',String(item===node));render();}));

@@ -16,6 +16,15 @@
       ]
     },
     {
+      "id": "sentence-onnx-lite",
+      "name": "Kiểm tra ngữ pháp tại máy bằng ONNX",
+      "checks": [
+        {"kind": "file", "file": "src/modules/translation/sentence-onnx-worker.js", "value": ""},
+        {"kind": "file", "file": "vendor/sentence-onnx/grammar-lite-v1.onnx", "value": ""},
+        {"kind": "contains", "file": "index.html", "value": "sentence-onnx-toggle"}
+      ]
+    },
+    {
       "id": "navigation-ai-qa",
       "name": "Hỏi đáp AI và đánh giá lộ trình",
       "checks": [
