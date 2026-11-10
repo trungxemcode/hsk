@@ -193,6 +193,8 @@
             <p class="sentence-status" role="status" aria-live="polite">Nhập tiếng Trung để kiểm tra ngay khi gõ · không dùng AI.</p>
             <p class="sentence-help">Gạch chân khi thấy lỗi thường gặp. AI kiểm tra thêm ngữ cảnh và cách diễn đạt, chỉ chạy khi bạn bấm nút.</p>
             <button type="submit" class="sentence-deep-check sentence-check-btn">Kiểm tra sâu bằng AI</button>
+            <button type="button" class="sentence-check-btn sentence-onnx-toggle" aria-pressed="false">Bật kiểm tra tại máy</button>
+            <p class="sentence-help sentence-onnx-status" role="status">Thử nghiệm · tải khoảng 3 MB lần đầu để kiểm tra theo ngữ cảnh.</p>
             <div class="sentence-suggestions"></div>
           </div>
         </aside>
@@ -448,7 +450,7 @@
 
   
 <aside id="updateNotice" class="update-notice" aria-label="Thông báo cập nhật" hidden><strong>Có phiên bản HSK mới</strong><p id="updateNoticeText" role="status"></p><div class="update-notice-actions"><button type="button" id="updateNoticeApply" disabled>Đang tải…</button><button type="button" id="updateNoticeLater">Để sau</button></div></aside>
-<link rel="stylesheet" href="./open-dictionary.css"><link rel="stylesheet" href="./ai-qa.css"><link rel="stylesheet" href="./sentence-editor.css"><script src="./src/modules/translation/sentence-checker-core.js" defer></script><script src="./src/modules/translation/sentence-editor.js" defer></script><script src="./loader.js?v=push-2" defer=""></script>
+<link rel="stylesheet" href="./open-dictionary.css"><link rel="stylesheet" href="./ai-qa.css"><link rel="stylesheet" href="./sentence-editor.css"><script src="./src/modules/translation/sentence-checker-core.js" defer></script><script src="./src/modules/translation/sentence-onnx-controller.js" defer></script><script src="./src/modules/translation/sentence-editor.js" defer></script><script src="./loader.js?v=push-2" defer=""></script>
 <script src="./offline.js?v=offline-2" defer=""></script>
 <script src="./src/modules/shell/mobile-layout.js?v=mobile-3" defer=""></script>
 <button id="lessonChatButton" class="lesson-chat-button" type="button" aria-label="Hỏi AI về bài học" title="Hỏi AI về bài học" aria-controls="lessonChatPanel" aria-expanded="false" hidden=""><span aria-hidden="true">💬</span></button>

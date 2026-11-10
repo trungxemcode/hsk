@@ -155,3 +155,8 @@ Owner additionally requests equal large-card gaps on Account. PC/mobile direct s
 - Abort/invalidate AI on draft, account and route changes; validate spans, prefer AI on overlap, preserve dismiss on same draft and add session undo. Manual AI only, existing auth/quota unchanged.
 - Tests: 7 core cases; Chromium checker covers screenshot example, apply/undo, dismiss, stale AI, 390/1440 layouts and zero automatic requests. Feature/PWA guards required. Provider mocked, not live AI acceptance.
 - Release 4.4.26. No merge/deploy authorization in this task. Other agents: preserve these edits; rebase on main before merge/release to avoid PWA version conflicts.
+
+### HSK ONNX Lite
+- Branch `feat/hsk-onnx-lite` built on the grammar-editor fix. Adds an opt-in contextual ranker and model package in the Sửa câu tiếng Trung editor.
+- 4.4.27 PWA candidate. Static rules remain the fallback. The experimental model ranks bounded HSK edits and was trained on synthetic examples. Broad Chinese benchmark and physical iPhone validation remain separate.
+- Runtime check: `node tools/check-sentence-onnx-ui.cjs`. Reproduce the artifact with `tools/train-sentence-onnx.py` and update the worker asset hashes/version when shipping new weights.

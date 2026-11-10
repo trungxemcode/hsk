@@ -89,7 +89,8 @@
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-mobile-grouped-menu-ui.cjs",
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-mobile-header-filter-ui.cjs",
     "node --test tools/sentence-checker.test.cjs",
-    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-sentence-checker.cjs"
+    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-sentence-checker.cjs",
+    "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-sentence-onnx-ui.cjs"
   ],
   "protected-browser": [
     "CHROME_EXECUTABLE=\"$(command -v google-chrome)\" node tools/check-feature-runtime.cjs",

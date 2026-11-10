@@ -1,1 +1,1 @@
-{"request": "Cải thiện kiểm tra ngữ pháp và vòng đời gợi ý tại Sửa câu tiếng Trung trên PC/mobile; làm rõ kiểm tra cục bộ/AI, thêm hoàn tác. Các trang khác giữ nguyên.", "excludedRoutes": ["sentence-editor"]}
+{"request":"Thêm điều khiển và gợi ý ONNX tại máy trong Sửa câu tiếng Trung trên desktop/mobile.","excludedRoutes":["sentence-editor"]}
