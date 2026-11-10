@@ -183,6 +183,8 @@
     "src/modules/shell/feature-page.js",
     "ai-qa.css",
     "sentence-editor.css",
+    "src/modules/translation/sentence-checker-core.js",
+    "src/modules/translation/hsk-grammar-rules.json",
     "src/modules/translation/sentence-editor.js",
     "src/modules/ai-coach/ai-qa-core.js",
     "src/modules/ai-coach/ai-qa.js",

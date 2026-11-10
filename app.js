@@ -775,6 +775,14 @@ window.HSKLessons={
 window.HSKDictionaryBridge={query:()=>handwritingSearchCharacter||$('searchInput').value,exact:q=>words.some(w=>w.han===q),lookupExact(han){const matches=words.filter(word=>word.han===han);const entries=new Map(matches.filter(word=>word.mean).map(word=>[word.pin+'|'+word.mean,word]));if(entries.size!==1)return null;const word=entries.values().next().value;return {han:word.han,pin:word.pin,mean:word.mean};},hsk:(han,trad)=>words.find(w=>w.han===han||w.han===trad)?.hsk||null,open(han,pin){const w=words.find(w=>w.han===han&&w.pin===pin);if(!w)return;if(activeLevel!=='all'&&String(w.hsk)!==activeLevel)document.querySelector('[data-filter="'+w.hsk+'"]').click();$('masteryFilter').value='all';rebuildDeck(w);switchMode('learn');},scope:()=>searchScope,results:()=>searchMatches.slice(),setScope(value){if(!['hsk','general'].includes(value))return;searchScope=value;document.querySelectorAll('[data-search-scope]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.searchScope===value)));$('dictionaryModeHint').textContent=value==='hsk'?'Ưu tiên từ vựng HSK.':'Tìm cả từ ngoài HSK.';runSearch();}};
 document.querySelectorAll('[data-search-scope]').forEach(b=>b.onclick=()=>window.HSKDictionaryBridge.setScope(b.dataset.searchScope));
 window.HSKFlashcardBridge={snapshot(){return {index,words:currentWords.map(w=>window.HSKPassiveCore?.word(w)).filter(Boolean)};},show(key){if(mode!=='learn')return false;const n=currentWords.findIndex(w=>wordKey(w)===key);if(n<0)return false;index=n;updateCard();return true;},reveal(){$('flashcard').classList.add('flipped');}};
+// Shared read-only data bridge for zero-token client modules.  Keep this
+// projection small so the sentence checker can rebuild its index whenever a
+// newer vocabulary/usage bundle is loaded without coupling to app internals.
+window.HSKVocabularyBridge={
+ snapshot(){return words.map(w=>({han:w.han,pin:w.pin,hsk:w.hsk,mean:w.mean,exCn:w.exCn,exVi:w.exVi,entryKind:w.entryKind}));},
+ facts(){return typeof usageFactsData!=='undefined'?usageFactsData:null;},
+ version(){const report=typeof usageFactsData!=='undefined'?usageFactsData.report||{}:{};return `${words.length}:${report.checkedWords||0}:${report.targetedNotes||0}`;}
+};
 window.dispatchEvent(new Event('hsk-lessons-ready'));
 // Mobile exit ends only the current quiz session; saved answers/SRS remain intact.
 window.HSKMobileQuiz={exit(){resetQuiz('Đã thoát phiên. Các câu đã làm vẫn được giữ; chọn Bắt đầu để luyện lượt mới.');}};

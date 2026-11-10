@@ -1,0 +1,47 @@
+/* Verify the zero-token sentence checker independently from the optional AI path. */
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const http=require('node:http');
+
+const root=process.cwd();
+const server=http.createServer((req,res)=>{
+  const file=path.resolve(root,'.'+new URL(req.url,'http://localhost').pathname);
+  if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){res.writeHead(404);return res.end();}
+  res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json'})[path.extname(file)]||'application/octet-stream');
+  res.end(fs.readFileSync(file));
+});
+
+(async()=>{
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+  const browser=await chromium.launch({headless:true,...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
+  try{
+    const page=await browser.newPage({viewport:{width:390,height:844},serviceWorkers:'block'});
+    let aiRequests=0;page.on('request',request=>{if(request.url().includes('/lesson-ask'))aiRequests++;});
+    await page.route('https://**/*',route=>route.abort());
+    await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
+    await page.waitForFunction(()=>window.HSKStudio&&window.HSKSentenceCheckerCore&&window.HSKVocabularyBridge&&document.querySelector('#appLoadStatus')?.hidden,{timeout:90000});
+    await page.evaluate(()=>window.HSKStudio.navigate('sentence-editor'));
+    const editor=page.locator('#sentenceEditor');
+    await editor.locator('#sentenceDraft').fill('我有一个书。不有二个书。');
+    await editor.locator('.sentence-card').first().waitFor({timeout:3000});
+    assert.ok(await editor.locator('mark').count()>=3,'grammar rules should be visible while typing');
+    assert.match(await editor.locator('.sentence-status').textContent(),/không dùng AI/);
+    assert.equal(aiRequests,0,'typing must not call the AI endpoint');
+    const metrics=await page.evaluate(()=>window.HSKSentenceCheckerCore.checker.metrics());
+    assert.ok(metrics.words>1000,'checker must use the app vocabulary bridge');
+    assert.ok(metrics.rules>=30,'grammar catalogue must include HSK 1–6 rules');
+    const advanced=await page.evaluate(()=>window.HSKSentenceCheckerCore.checker.checkText('虽然我很累，所以我还是学习。只有努力，就能进步。'));
+    assert.ok(advanced.some(item=>item.hskLevel===4),'HSK 4 conjunction rule missing');
+    assert.ok(advanced.some(item=>item.hskLevel===5),'HSK 5 conjunction rule missing');
+    await page.evaluate(()=>{const text='我有一个书。不有二个书。';window.HSKSentenceCheckerCore.checker.checkText(text);window.HSKSentenceCheckerCore.checker.checkText(text);});
+    assert.ok((await page.evaluate(()=>window.HSKSentenceCheckerCore.checker.metrics().cacheHits))>0,'unchanged sentences should use cache');
+    const dynamic=await page.evaluate(()=>{
+      const c=window.HSKSentenceCheckerCore.checker;c.refresh([{han:'测试词',pin:'cè shì cí',hsk:6}],{report:{checkedWords:1,targetedNotes:1}});return c.checkText('测试祠');
+    });
+    assert.equal(dynamic[0]?.replacement,'测试词','checker should rebuild from a newer app vocabulary bundle');
+    assert.equal(aiRequests,0,'local suggestions must stay zero-token');
+    console.log('PASS sentence checker: realtime grammar, local spelling, cache, data refresh, zero AI requests');
+  }finally{await browser.close();server.close();}
+})().catch(error=>{console.error(error);process.exitCode=1;});

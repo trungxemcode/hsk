@@ -1,0 +1,162 @@
+/*
+ * Offline checker used by Sửa câu tiếng Trung.
+ *
+ * This module deliberately has no network or model dependency.  It compiles the
+ * small, high-confidence grammar catalogue, indexes the vocabulary already
+ * loaded by the app, and exposes one synchronous checkText() call for the UI.
+ * The vocabulary index is rebuilt when the app announces a data refresh, so a
+ * new vocabulary bundle improves spelling suggestions without a code change.
+ */
+(()=>{
+  'use strict';
+
+  const HAN=/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/u;
+  const HAN_RUN=/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+/gu;
+  const DEFAULT_CONFIG={
+    version:'2026.11.10',
+    macros:{
+      NUM:'(?:[一两三四五六七八九十百千万亿]+|几|每|这|那|哪)',
+      PRONOUN:'(?:我|你|他|她|它|我们|你们|他们|咱们|大家)',
+      TIME_WORD:'(?:今天|明天|昨天|前天|后天|现在|刚才|以前|以后|早上|上午|中午|下午|晚上|周末|去年|今年|明年)',
+      NOUN_BEN:'(?:书|词典|字典|杂志|小说|课本|笔记本|画册|护照)',
+      NOUN_JIAN:'(?:衣服|衬衫|毛衣|大衣|外套|行李|事|事情|礼物)',
+      NOUN_TIAO:'(?:裤子|裙子|河|路|鱼|狗|新闻|毛巾|船)',
+      NOUN_ZHANG:'(?:纸|桌子|床|照片|票|地图|脸|嘴)',
+      ADJ_COMMON:'(?:高兴|开心|快乐|伤心|难过|认真|努力|仔细|热情|慢慢|快快|悄悄|大声|小声|清楚|流利)',
+      VERB_ACTION:'(?:看|听|说|读|写|走|跑|吃|喝|买|卖|学|学习|工作|休息|睡觉|做|打|玩|洗|穿|找|去|来|回|到|跑步|说话)'
+    },
+    rules:[
+      {id:'HSK1_LIANG_ER',hskLevel:1,category:'measure_word',pattern:'二(个|本|件|条|张|杯|瓶|双|只|家|口|岁|块|次|遍)',replace:'两$1',message:'Đứng trước lượng từ, dùng 「两」 cho số lượng; 「二」 thường dùng trong số đếm và số thứ tự.'},
+      {id:'HSK1_MW_BEN',hskLevel:1,category:'measure_word',pattern:'({{NUM}})个({{NOUN_BEN}})',replace:'$1本$2',message:'Sách, từ điển và tài liệu đóng quyển dùng lượng từ 「本」 thay vì 「个」.'},
+      {id:'HSK1_MW_JIAN',hskLevel:1,category:'measure_word',pattern:'({{NUM}})个({{NOUN_JIAN}})',replace:'$1件$2',message:'Quần áo, hành lý, sự việc và món quà thường dùng lượng từ 「件」.'},
+      {id:'HSK2_MW_TIAO',hskLevel:2,category:'measure_word',pattern:'({{NUM}})个({{NOUN_TIAO}})',replace:'$1条$2',message:'Vật dài, thon như cá, sông, đường và quần thường dùng 「条」.'},
+      {id:'HSK2_MW_ZHANG',hskLevel:2,category:'measure_word',pattern:'({{NUM}})个({{NOUN_ZHANG}})',replace:'$1张$2',message:'Vật phẳng như giấy, ảnh, vé, bản đồ và bàn thường dùng 「张」.'},
+      {id:'HSK1_NEG_BU_YOU',hskLevel:1,category:'negation',pattern:'不有',replace:'没有',message:'Phủ định của 「有」 là 「没有」, không dùng 「不有」.'},
+      {id:'HSK2_NEG_MEI_LE',hskLevel:2,category:'negation',pattern:'没(有)?({{VERB_ACTION}})了',replace:'没$1$2',message:'Sau 「没 / 没有」 không thêm trợ từ hoàn thành 「了」 ở cuối hành động.'},
+      {id:'HSK2_DE_ADV_VERB',hskLevel:2,category:'particle',pattern:'({{ADJ_COMMON}})[的得]({{VERB_ACTION}})',replace:'$1地$2',message:'Trạng ngữ đứng trước động từ dùng 「地」: tính từ + 地 + động từ.'},
+      {id:'HSK2_DE_VERB_COMP',hskLevel:2,category:'particle',pattern:'({{VERB_ACTION}})[的地](很|非常|太|真|特别)?({{ADJ_COMMON}}|好|快|慢|早|晚|多|少)',replace:'$1得$2$3',message:'Bổ ngữ chỉ mức độ sau động từ dùng 「得」: động từ + 得 + tính từ.'},
+      {id:'HSK2_BI_DEGREE_ADV',hskLevel:2,category:'comparison',pattern:'(比[^，。！？\\s]{1,6})(?:很|非常|太|真|特别)([^，。！？\\s]{1,3})',replace:'$1$2',message:'Sau 「比」 không đặt trực tiếp phó từ mức độ như 「很、非常、太」 trước tính từ.'},
+      {id:'HSK1_WORD_ORDER_TIME',hskLevel:1,category:'word_order',pattern:'({{PRONOUN}})((?:去|来|回|在|到|看|吃|买|学)[^，。！？\\s]{1,5})({{TIME_WORD}})(?=[，。！？\\s]|$)',replace:'$1$3$2',message:'Trạng ngữ thời gian thường đứng trước động từ: chủ ngữ + thời gian + động từ.'},
+      {id:'HSK3_CONJ_RUGUO_JIU',hskLevel:3,category:'word_order',pattern:'(如果[^，。！？]+，)\\s*就({{PRONOUN}})',replace:'$1$2就',message:'Trong 「如果…就…」, 「就」 thường đứng sau chủ ngữ của vế sau.'},
+      {id:'HSK3_BA_BARE_VERB',hskLevel:3,category:'ba_sentence',pattern:'(把[^，。！？\\s]{1,8})({{VERB_ACTION}})(?=[，。！？\\s]|$)',replace:'$1$2了',message:'Câu 「把」 cần thành phần kết quả, hướng hoặc trạng thái đi kèm động từ; không để động từ trơ ở cuối câu.'},
+      {id:'HSK1_PUNCT_SPACE',hskLevel:1,category:'punctuation',pattern:'[ \\t]+([，。！？、；：])',replace:'$1',message:'Không đặt khoảng trắng trước dấu câu tiếng Trung.'},
+      {id:'HSK1_DUPLICATE_PUNCT',hskLevel:1,category:'punctuation',pattern:'([，。！？])\\1+',replace:'$1',message:'Dấu câu lặp liên tiếp nên rút gọn còn một dấu.'}
+    ]
+  };
+
+  // Keep the offline fallback aligned with the external rule catalogue.  The
+  // JSON file is preferred when the app is served over HTTP; these rules keep
+  // the checker useful during an offline first load or a stale cache.
+  DEFAULT_CONFIG.rules.push(
+    {id:'HSK4_SUIRAN_SUOYI',hskLevel:4,category:'conjunction',pattern:'(虽然[^，。！？]+，[^，。！？]{1,20})所以',replace:'$1但是',message:'「虽然」 thường đi với 「但是/可是」，không dùng 「所以」 để nối kết quả đối lập.'},
+    {id:'HSK4_YINWEI_DANSHI',hskLevel:4,category:'conjunction',pattern:'(因为[^，。！？]+，[^，。！？]{1,20})但是',replace:'$1所以',message:'「因为」 thường mở nguyên nhân và đi với 「所以」 ở vế kết quả.'},
+    {id:'HSK4_RUGUO_DANSHI',hskLevel:4,category:'conjunction',pattern:'(如果[^，。！？]+，[^，。！？]{1,20})但是',replace:'$1就',message:'Điều kiện 「如果…」 thường đi với 「就」，không dùng 「但是」 để chỉ kết quả.'},
+    {id:'HSK4_JIRAN_SUOYI',hskLevel:4,category:'conjunction',pattern:'(既然[^，。！？]+，[^，。！？]{1,20})所以',replace:'$1就',message:'「既然…」 thường đi với 「就…」，không dùng 「所以」 lặp chức năng kết luận.'},
+    {id:'HSK4_SUIRAN_QUE',hskLevel:4,category:'conjunction',pattern:'虽然([^，。！？]+)，所以',replace:'虽然$1，但是',message:'Cặp tương phản là 「虽然…但是/可是…」.'},
+    {id:'HSK4_CHUF_JIU',hskLevel:4,category:'conjunction',pattern:'(除非[^，。！？]+，[^，。！？]{1,20})就',replace:'$1否则',message:'「除非…」 thường đi với 「否则…」 để nêu điều kiện loại trừ.'},
+    {id:'HSK4_CHULE_DUPLICATE',hskLevel:4,category:'conjunction',pattern:'除了([^，。！？]{1,12})(以外|之外)之外',replace:'除了$1$2',message:'Chỉ dùng một lần thành phần 「以外/之外」 trong cấu trúc 「除了…以外/之外…」.'},
+    {id:'HSK5_BU_GUAN_DANSHI',hskLevel:5,category:'conjunction',pattern:'((?:不管|无论)[^，。！？]+，[^，。！？]{1,20})(?:但是|可是)',replace:'$1都',message:'「不管/无论…」 thường đi với 「都/也…」，không dùng 「但是」 để nối vế bao quát.'},
+    {id:'HSK5_JISHI_DANSHI',hskLevel:5,category:'conjunction',pattern:'(即使[^，。！？]+，[^，。！？]{1,20})但是',replace:'$1也',message:'Cặp nhượng bộ là 「即使…也…」，không dùng 「但是」 ở vế sau.'},
+    {id:'HSK5_JIRAN_DANSHI',hskLevel:5,category:'conjunction',pattern:'(既然[^，。！？]+，[^，。！？]{1,20})但是',replace:'$1就',message:'「既然…」 thường dẫn đến kết luận bằng 「就…」.'},
+    {id:'HSK5_ZHIYOU_JIU',hskLevel:5,category:'conjunction',pattern:'(只有[^，。！？]+，[^，。！？]{0,20}?)就',replace:'$1才',message:'Cấu trúc điều kiện cần là 「只有…才…」.'},
+    {id:'HSK5_ZHIYAO_CAI',hskLevel:5,category:'conjunction',pattern:'(只要[^，。！？]+，[^，。！？]{1,20})才',replace:'$1就',message:'Cấu trúc điều kiện đủ là 「只要…就…」.'},
+    {id:'HSK6_YIMIAN_DUPLICATE',hskLevel:6,category:'conjunction',pattern:'一方面([^，。！？]+)，所以',replace:'一方面$1，另一方面',message:'Khi trình bày hai mặt song song, dùng cặp 「一方面…另一方面…」.'},
+    {id:'HSK6_YIMIAN_DANSHI',hskLevel:6,category:'conjunction',pattern:'一方面([^，。！？]+)，但是',replace:'一方面$1，另一方面',message:'Hai mặt song song nên dùng 「一方面…另一方面…」 thay vì 「但是」.'},
+    {id:'HSK4_ASPECT_MEI_LE',hskLevel:4,category:'aspect',pattern:'没(有)?({{VERB_ACTION}})了',replace:'没$1$2',message:'「没/没有」 đã phủ định việc xảy ra; thường không thêm 「了」 chỉ hoàn thành.'},
+    {id:'HSK4_DE_DE',hskLevel:4,category:'particle',pattern:'的的+',replace:'的',message:'Không lặp trợ từ 「的」 liên tiếp trong một cụm danh từ.'},
+    {id:'HSK4_LE_LE',hskLevel:4,category:'aspect',pattern:'了了+',replace:'了',message:'Không lặp trợ từ 「了」 liên tiếp.'}
+  );
+
+  function clone(value){return JSON.parse(JSON.stringify(value));}
+  function normalizePinyin(value=''){
+    return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ü/g,'v').replace(/[^a-z]/gi,'').toLowerCase();
+  }
+  function compileRules(config){
+    const macros=config?.macros||{};
+    return (config?.rules||[]).map((rule,index)=>{
+      const source=String(rule.pattern||'').replace(/\{\{(\w+)\}\}/g,(_,name)=>macros[name]||'');
+      try{return {...rule,order:index,source,regex:new RegExp(source,rule.flags||'g')};}
+      catch{return null;}
+    }).filter(Boolean);
+  }
+
+  class SymSpellChineseEngine{
+    constructor(maxEditDistance=1){
+      this.maxEditDistance=maxEditDistance;this.dictionary=new Map();this.deleteIndex=new Map();this.pinyinIndex=new Map();
+    }
+    clear(){this.dictionary.clear();this.deleteIndex.clear();this.pinyinIndex.clear();}
+    generateDeletes(word,maxDist){
+      const out=new Set(),queue=[{value:word,distance:0}];
+      while(queue.length){const current=queue.shift();if(current.distance>=maxDist||current.value.length<=1)continue;
+        for(let i=0;i<current.value.length;i++){const next=current.value.slice(0,i)+current.value.slice(i+1);if(out.has(next))continue;out.add(next);queue.push({value:next,distance:current.distance+1});}
+      }return out;
+    }
+    _index(value,key){if(!value)return;let bucket=this.deleteIndex.get(value);if(!bucket)this.deleteIndex.set(value,bucket=new Set());bucket.add(key);}
+    addEntry(entry={}){
+      const word=String(entry.han||entry.word||'').trim();if(!word||!HAN.test(word)||word.length<2||word.includes('…'))return;
+      const key=word.toLowerCase(),hsk=Math.max(1,Math.min(6,Number(entry.hsk)||3));
+      const frequency=Number(entry.frequency)||((7-hsk)*100+word.length*5);
+      const existing=this.dictionary.get(key);if(existing&&existing.frequency>=frequency)return;
+      this.dictionary.set(key,{word,pinyin:entry.pin||entry.pinyin||'',hsk,frequency});
+      const pinyin=normalizePinyin(entry.pin||entry.pinyin||'');
+      if(pinyin){let rows=this.pinyinIndex.get(pinyin);if(!rows)this.pinyinIndex.set(pinyin,rows=[]);rows.push({word,frequency});this._index(pinyin,key);}
+      this._index(key,key);for(const variant of this.generateDeletes(key,Math.min(this.maxEditDistance,1)))this._index(variant,key);
+    }
+    damerauLevenshtein(a,b,limit=2){
+      if(Math.abs(a.length-b.length)>limit)return limit+1;
+      const previous=Array.from({length:b.length+1},(_,i)=>i);let before=null;
+      for(let i=1;i<=a.length;i++){const row=[i];let min=i;
+        for(let j=1;j<=b.length;j++){const cost=a[i-1]===b[j-1]?0:1;let value=Math.min(row[j-1]+1,previous[j]+1,previous[j-1]+cost);
+          if(before&&i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])value=Math.min(value,before[j-2]+1);row[j]=value;min=Math.min(min,value);}
+        if(min>limit)return limit+1;before=previous;for(let j=0;j<row.length;j++)previous[j]=row[j];
+      }return previous[b.length];
+    }
+    lookup(query){
+      const value=String(query||'').toLowerCase();if(!value)return null;if(this.dictionary.has(value))return null;
+      const isHan=HAN.test(value),normalized=normalizePinyin(value),variants=this.generateDeletes(value,1);variants.add(value);
+      const candidates=new Set();for(const variant of variants){const bucket=this.deleteIndex.get(variant)||[];
+        // Short delete keys are shared by many ordinary HSK words.  Skipping
+        // an oversized bucket keeps the realtime path bounded and avoids
+        // turning a normal sentence into a full-dictionary scan.
+        if(isHan&&bucket.size>80)continue;for(const key of bucket){candidates.add(key);if(isHan&&candidates.size>=160)break;}if(isHan&&candidates.size>=160)break;}
+      let best=null;
+      for(const key of candidates){const entry=this.dictionary.get(key);if(!entry)continue;if(isHan&&entry.word.length!==value.length)continue;
+        const distance=this.damerauLevenshtein(value,isHan?key:(normalizePinyin(entry.pinyin)||key),1);if(distance>1)continue;
+        if(!best||distance<best.distance||distance===best.distance&&entry.frequency>best.frequency)best={entry,distance};
+      }
+      if(best)return {suggestion:best.entry.word,distance:best.distance,type:'spelling',message:`Có thể bạn muốn viết 「${best.entry.word}」?`,confidence:best.distance===1?.91:.99};
+      if(normalized&&normalized!==value){const rows=this.pinyinIndex.get(normalized)||[];if(rows.length)return {suggestion:rows[0].word,distance:1,type:'homophone',message:`Pinyin này thường được viết là 「${rows[0].word}」.`,confidence:.82};}
+      return null;
+    }
+    lookupHan(query){return String(query||'').length>=3?this.lookup(query):null;}
+  }
+
+  class UnifiedGrammarChecker{
+    constructor(config=DEFAULT_CONFIG){this.config=config;this.rules=compileRules(config);this.symSpell=new SymSpellChineseEngine(1);this.sentenceCache=new Map();this.cacheHits=0;this.datasetVersion='fallback';this.stats={checks:0,cacheHits:0,words:0,rules:this.rules.length};}
+    setRules(config){if(!config||!Array.isArray(config.rules))return false;this.config=config;this.rules=compileRules(config);this.sentenceCache.clear();this.stats.rules=this.rules.length;return true;}
+    refresh(vocabulary=[],facts=null){
+      this.symSpell.clear();const seen=new Set();for(const item of Array.isArray(vocabulary)?vocabulary:[]){const key=String(item?.han||item?.word||'');if(!key||seen.has(key))continue;seen.add(key);this.symSpell.addEntry(item);}
+      const report=facts?.report||{};this.datasetVersion=[seen.size,report.checkedWords||'',report.targetedNotes||'',this.config.version].join(':');this.sentenceCache.clear();this.stats.words=seen.size;return this.datasetVersion;
+    }
+    splitSentences(text){const rows=[],re=/[^.!?。！？\n]+[.!?。！？\n]*/gu;let match;while((match=re.exec(text))!==null)rows.push({text:match[0],offset:match.index});if(!rows.length&&text)rows.push({text,offset:0});return rows;}
+    _ruleErrors(sentence){const errors=[];for(const rule of this.rules){const re=new RegExp(rule.source,rule.regex.flags),replaceRe=new RegExp(rule.source,rule.regex.flags.replace('g',''));let match;while((match=re.exec(sentence))!==null){const wrong=match[0],replacement=wrong.replace(replaceRe,rule.replace??wrong);if(!wrong||replacement===wrong)continue;errors.push({kind:'fix',source:'local',ruleId:rule.id,category:rule.category,start:match.index,end:match.index+wrong.length,original:wrong,replacement,reason:rule.message,hskLevel:rule.hskLevel});if(!re.global)break;}}return errors;}
+    _spellingErrors(sentence,existing){const errors=[],blocked=(start,end)=>existing.some(item=>start<item.end&&end>item.start);const latin=/[A-Za-z][A-Za-z'’-]{2,}/gu;let match;
+      while((match=latin.exec(sentence))!==null){const result=this.symSpell.lookup(match[0]);if(result&&!blocked(match.index,match.index+match[0].length))errors.push({kind:'fix',source:'local',category:'spelling',start:match.index,end:match.index+match[0].length,original:match[0],replacement:result.suggestion,reason:result.message,confidence:result.confidence});}
+      for(const run of sentence.matchAll(HAN_RUN)){const value=run[0],offset=run.index||0;if(value.length<3)continue;
+        // Four-character chunks catch common HSK idiom/word typos while the
+        // dictionary check prevents warnings for every ordinary Hanzi pair.
+        for(let i=0;i<=value.length-3;i++){const size=value.length>=4?4:3;if(i+size>value.length)break;const start=offset+i,end=start+size;if(blocked(start,end))continue;const result=this.symSpell.lookupHan(value.slice(i,i+size));if(!result||result.confidence<.85)continue;errors.push({kind:'fix',source:'local',category:'spelling',start,end,original:value.slice(i,i+size),replacement:result.suggestion,reason:result.message,confidence:result.confidence});}
+      }return errors;
+    }
+    analyzeSentence(sentence){const cached=this.sentenceCache.get(sentence);if(cached){this.cacheHits++;this.stats.cacheHits++;return cached.map(item=>({...item}));}
+      const grammar=this._ruleErrors(sentence),spelling=this._spellingErrors(sentence,grammar),all=[...grammar,...spelling].sort((a,b)=>a.start-b.start||b.end-b.start);const accepted=[];for(const item of all){if(!accepted.some(other=>item.start<other.end&&item.end>other.start))accepted.push(item);}this.sentenceCache.set(sentence,accepted);return accepted.map(item=>({...item}));}
+    checkText(text){this.stats.checks++;if(!text)return [];const errors=[];for(const sentence of this.splitSentences(String(text)))for(const item of this.analyzeSentence(sentence.text))errors.push({...item,start:item.start+sentence.offset,end:item.end+sentence.offset});return errors;}
+    metrics(){return {...this.stats,cacheSize:this.sentenceCache.size,datasetVersion:this.datasetVersion};}
+  }
+
+  const checker=new UnifiedGrammarChecker();
+  checker.ready=(async()=>{try{const response=await fetch('./src/modules/translation/hsk-grammar-rules.json',{cache:'no-store'});if(response.ok)checker.setRules(await response.json());}catch{}return checker;})();
+  function refreshFromApp(){const bridge=window.HSKVocabularyBridge;if(!bridge?.snapshot)return;try{checker.refresh(bridge.snapshot(),bridge.facts?.());}catch{}}
+  window.addEventListener('hsk-lessons-ready',refreshFromApp);window.addEventListener('hsk-sentence-checker-refresh',refreshFromApp);refreshFromApp();
+  window.HSKSentenceCheckerCore={checker,UnifiedGrammarChecker,SymSpellChineseEngine,compileRules,normalizePinyin,defaultConfig:clone(DEFAULT_CONFIG),refresh:refreshFromApp};
+})();
