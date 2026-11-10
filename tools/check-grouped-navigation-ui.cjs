@@ -18,7 +18,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  for(const sample of navAlignment)assert.ok(sample.difference<1.25,
    'navigation '+sample.route+' icon/label misaligned by '+sample.difference+'px');
  const groups=page.locator('.side-nav .nav-group');
- assert.deepEqual(await groups.nth(3).locator('[data-studio-go]').evaluateAll(ns=>ns.map(n=>n.dataset.studioGo)),['search','ai-qa'],'tools group contains dictionary and AI tutor');assert.equal(await groups.nth(1).locator('[data-studio-go]').count(),2,'mode choices belong inside Luyện & Ôn');
+ assert.deepEqual(await groups.nth(3).locator('[data-studio-go]').evaluateAll(ns=>ns.map(n=>n.dataset.studioGo)),['search','ai-qa','sentence-editor'],'tools group contains dictionary and AI tutor');assert.equal(await groups.nth(1).locator('[data-studio-go]').count(),2,'mode choices belong inside Luyện & Ôn');
  assert.deepEqual(await groups.locator(':scope>summary').allTextContents(),['Học tập HSK','Ôn luyện','Giải trí','Công cụ','Luyện thi HSK']);
  await groups.evaluateAll(ns=>ns.forEach(n=>n.open=false));await groups.nth(0).locator('summary').click();
  await groups.nth(0).locator('[data-studio-go="learn"]').click();assert(await page.locator('#learnPanel').isVisible());

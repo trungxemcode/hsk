@@ -343,3 +343,7 @@ Core JS và Python xuất CSS giống nhau; cloud Worker vẫn xác thực chủ
 
 ### Tìm từ khi quên chữ
 Tra cứu và So sánh có `word-recovery` trong open-dictionary.js. Dùng endpoint dictionary-lookup hiện có, giữ auth/quota; pinyin không thanh/số thanh/âm Việt + nghĩa mô tả, chọn ứng viên rồi so sánh đúng hai từ đã xác nhận. Sửa đầu vào hủy kết quả cũ; ngữ cảnh giữ gợi ý trước trong phiên, không ghi tiến độ/SRS. Worker và bundled phải triển khai cùng prompt mới; cache revision đổi để không tái dùng câu trả lời cũ.
+
+### Sửa câu tiếng Trung
+
+Công cụ mở trình biên tập độc lập với bảng gợi ý. Khi người học bấm Kiểm tra, ứng dụng gửi tối đa 500 ký tự qua chế độ `sentence-editor` của Worker. Gợi ý được gắn với đoạn nguyên văn, phân biệt lỗi thực sự với cách nói tự nhiên hơn. Sửa bản nháp bằng tay sẽ xóa kết quả cũ và hủy yêu cầu đang chờ.
