@@ -123,3 +123,45 @@ test('runMuseNoiseChat completes a real Noise XX handshake and collects streamed
   assert.equal(text,reply);
   assert.equal(normalizeMuseTutorReply(text).answer,'Muse trả lời về 你好 và 您好');
 });
+
+test('Hatch refreshes gateway tokens once after a WebSocket rejection and sends the prompt once',async()=>{
+  const server=await makeHatchServer('{"answer":"你好"}');
+  const upgrades=[];
+  let leases=0,accepted=0;
+  const res=await museAiGenerate({apiKey:'hatch_sess=test-reconnect'},
+    {contents:[{role:'user',parts:[{text:'Xin chào'}]}]}, async (url,init)=>{
+      const request=new URL(url);
+      switch(request.pathname){
+        case '/api/hatch/lease-vm':
+          leases++;
+          return Response.json({gatewayUrl:'wss://test.metaaivm.com',vmName:'test-vm'});
+        case '/api/hatch/vm/wake': return Response.json({});
+        case '/api/hatch/token': return Response.json({token:'test-token-'+leases});
+        case '/api/hatch/noise-notary-token': return Response.json({notaryToken:'test-notary-'+leases});
+      }
+      assert.equal(init.headers.Upgrade,'websocket');
+      assert.equal(init.redirect,'manual');
+      upgrades.push(request.searchParams);
+      if(upgrades.length===1)return new Response(null,{status:403});
+      return {webSocket:{...server,accept(){accepted++;}}};
+    });
+  assert.equal(res.status,200);
+  assert.equal(JSON.parse((await res.json()).candidates[0].content.parts[0].text).answer,'你好');
+  assert.equal(leases,2);
+  assert.equal(accepted,1);
+  assert.deepEqual(upgrades.map(q=>q.get('auth_token')),['test-token-1','test-token-2']);
+  assert.notEqual(upgrades[0].get('request_id'),upgrades[1].get('request_id'));
+});
+
+test('WebSocket rejection reports the HTTP status without the session URL or tokens',async()=>{
+  const session={vm_id:'v',auth_token:'test-auth',notary_token:'test-notary',
+    ws_url:'wss://hatch.metaaivm.com/v1/noise?auth_token=test-auth'};
+  let requests=0;
+  const res=await museAiGenerate({apiKey:JSON.stringify(session)}, {},async()=>{
+    requests++;
+    return new Response('test-auth',{status:403});
+  });
+  assert.equal(res.status,502);
+  assert.deepEqual(await res.json(),{error:'Muse AI từ chối mở WebSocket (HTTP 403).'});
+  assert.equal(requests,1);
+});

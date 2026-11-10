@@ -397,9 +397,9 @@ const MUSE_BROWSER_HEADERS = {
   'sec-ch-ua-platform': '"Windows"'
 };
 
-export async function bootstrapMuseHatchSession(cookieHeader, { fetchFn = fetch, signal, now = () => Date.now() } = {}) {
-  const cacheKey = cookieHeader.slice(0, 96) + ':' + cookieHeader.length;
-  const cached = museSessionCache.get(cacheKey);
+export async function bootstrapMuseHatchSession(cookieHeader, { fetchFn = fetch, signal, now = () => Date.now(), consume = false } = {}) {
+  const cached = museSessionCache.get(cookieHeader);
+  if (consume) museSessionCache.delete(cookieHeader);
   if (cached && now() - cached.at < 20 * 60 * 1000) return cached.session;
 
   const postMuse = async (path, body) => {
@@ -478,7 +478,7 @@ export async function bootstrapMuseHatchSession(cookieHeader, { fetchFn = fetch,
   });
   const wsUrl = `wss://${MUSE_LB_HOST}${MUSE_NOISE_WS_PATH}?${q.toString()}`;
   const session = { vm_id: vmId, gateway_url: gatewayUrl, auth_token: authToken, notary_token: notaryToken, request_id: requestId, ws_url: wsUrl };
-  museSessionCache.set(cacheKey, { at: now(), session });
+  if (!consume) museSessionCache.set(cookieHeader, { at: now(), session });
   return session;
 }
 
@@ -498,54 +498,75 @@ export function museToBytes(data) {
   return new Uint8Array(0);
 }
 
+function museWebSocketError(status) {
+  return Object.assign(new Error(
+    status ? `Muse AI từ chối mở WebSocket (HTTP ${status}).` : 'Không thể kết nối WebSocket tới Muse AI.'
+  ), { code: 'MUSE_WS_OPEN_FAILED', upgradeStatus: status });
+}
+
 async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } = {}) {
+  signal?.throwIfAborted();
   if (typeof wsFactory === 'function') {
     return wsFactory(wsUrl, { signal });
   }
-  // Try Cloudflare Worker WebSocket upgrade first if fetchFn supports Upgrade: websocket
-  try {
-    const httpUrl = wsUrl.replace(/^wss:/i, 'https:').replace(/^ws:/i, 'http:');
-    const upgradeResp = await fetchFn(httpUrl, {
-      headers: {
-        'Origin': MUSE_BASE_URL,
-        'User-Agent': MUSE_BROWSER_HEADERS['User-Agent'],
-        'Upgrade': 'websocket'
-      },
-      signal
-    });
-    if (upgradeResp?.webSocket) {
-      const ws = upgradeResp.webSocket;
-      try { ws.binaryType = 'arraybuffer'; } catch {}
-      if (typeof ws.accept === 'function') {
-        try { ws.accept(); } catch {}
-      }
-      try { ws.binaryType = 'arraybuffer'; } catch {}
-      return ws;
-    }
-  } catch {}
 
-  if (typeof globalThis.WebSocket === 'function') {
-    return await new Promise((resolve, reject) => {
-      const ws = new globalThis.WebSocket(wsUrl);
-      try { ws.binaryType = 'arraybuffer'; } catch {}
-      if (typeof ws.accept === 'function') {
-        try { ws.accept(); } catch {}
-      }
-      try { ws.binaryType = 'arraybuffer'; } catch {}
-      if (ws.readyState === 1) {
-        return resolve(ws);
-      }
-      const onOpen = () => { cleanup(); resolve(ws); };
-      const onErr = () => { cleanup(); reject(new Error('Không thể kết nối WebSocket tới Muse AI')); };
-      const cleanup = () => {
-        ws.removeEventListener('open', onOpen);
-        ws.removeEventListener('error', onErr);
-      };
-      ws.addEventListener('open', onOpen);
-      ws.addEventListener('error', onErr);
+  const timeout = AbortSignal.timeout(12000);
+  const openingSignal = signal ? AbortSignal.any([signal, timeout]) : timeout;
+  const httpUrl = wsUrl.replace(/^wss:/i, 'https:').replace(/^ws:/i, 'http:');
+  let response;
+  try {
+    response = await fetchFn(httpUrl, {
+      headers: { Origin: MUSE_BASE_URL, 'User-Agent': MUSE_BROWSER_HEADERS['User-Agent'], Upgrade: 'websocket' },
+      redirect: 'manual',
+      signal: openingSignal
     });
+  } catch {
+    signal?.throwIfAborted();
   }
-  throw new Error('Môi trường hiện tại không hỗ trợ kết nối WebSocket tới Muse AI.');
+  if (response?.webSocket) {
+    const ws = response.webSocket;
+    try {
+      ws.binaryType = 'arraybuffer';
+      ws.accept?.();
+    } catch {
+      try { ws.close(); } catch {}
+      throw museWebSocketError();
+    }
+    return ws;
+  }
+
+  // Keep the native client for runtimes without the Workers fetch upgrade API.
+  if (response || typeof globalThis.WebSocketPair === 'function' ||
+      typeof globalThis.WebSocket !== 'function' || openingSignal.aborted) {
+    throw museWebSocketError(response?.status);
+  }
+
+  return new Promise((resolve, reject) => {
+    let ws;
+    try {
+      ws = new globalThis.WebSocket(wsUrl);
+      ws.binaryType = 'arraybuffer';
+    } catch {
+      throw museWebSocketError();
+    }
+    const cleanup = () => {
+      ws.removeEventListener('open', onOpen);
+      ws.removeEventListener('error', onFailure);
+      ws.removeEventListener('close', onFailure);
+      openingSignal.removeEventListener('abort', onFailure);
+    };
+    const onOpen = () => { cleanup(); resolve(ws); };
+    const onFailure = () => {
+      cleanup();
+      try { ws.close(); } catch {}
+      reject(signal?.aborted ? signal.reason : museWebSocketError());
+    };
+    if (ws.readyState === 1) return onOpen();
+    ws.addEventListener('open', onOpen);
+    ws.addEventListener('error', onFailure);
+    ws.addEventListener('close', onFailure);
+    openingSignal.addEventListener('abort', onFailure, { once: true });
+  });
 }
 
 export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 85000 } = {}) {
@@ -1013,19 +1034,24 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
 
   // 2. Muse.ai Hatch Web Session / Cookie over Noise_XX_25519_AESGCM_SHA256
   try {
-    const session = cred.kind === 'hatch-session'
-      ? cred.session
-      : await bootstrapMuseHatchSession(cred.cookieHeader, { fetchFn, signal, now: options.now });
+    const bootstrap = () => bootstrapMuseHatchSession(cred.cookieHeader, { fetchFn, signal, now: options.now, consume: true });
+    const session = cred.kind === 'hatch-session' ? cred.session : await bootstrap();
     const prompt = buildMuseFlattenedPrompt(requestBody, model);
-    const replyText = await runMuseNoiseChat(session, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: 85000 });
+    const chat = current => runMuseNoiseChat(current, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: 85000 });
+    let replyText;
+    try {
+      replyText = await chat(session);
+    } catch (error) {
+      // Retry only before a prompt was sent, with newly issued gateway tokens.
+      if (!cred.cookieHeader || signal?.aborted || error?.code !== 'MUSE_WS_OPEN_FAILED' ||
+          ![undefined, 401, 403, 404, 410, 502, 503, 504].includes(error.upgradeStatus)) throw error;
+      replyText = await chat(await bootstrap());
+    }
     if (!replyText) return new Response(JSON.stringify({ error: 'Muse AI không trả về nội dung.' }), { status: 502 });
     const normalized = normalizeMuseTutorReply(replyText, questionText);
     return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(normalized) }] } }] });
   } catch (err) {
-    if (cred.cookieHeader) {
-      const cacheKey = cred.cookieHeader.slice(0, 96) + ':' + cred.cookieHeader.length;
-      museSessionCache.delete(cacheKey);
-    }
+    signal?.throwIfAborted();
     // If credential was 'auto' (could be an api.meta.ai Bearer token without prefix), try Bearer endpoint before failing
     if (cred.kind === 'auto' && !cred.raw.includes('=')) {
       try {
