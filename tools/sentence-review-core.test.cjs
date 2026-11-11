@@ -100,4 +100,10 @@ test('handles varied real-world LLM formats including fenced JSON with chatter, 
   const r5 = normalize(naturalSuggest, text);
   assert.ok(r5 && r5.suggestions.length === 1);
   assert.equal(apply(text, r5.suggestions), expectedRevised);
+
+  // 6. Truncated / unclosed JSON stream recovered by bracket repair
+  const truncatedStream = '{\n  "summary": "AI phát hiện lỗi.",\n  "suggestions": [\n    {"kind": "grammar", "original": "去过了", "replacement": "去了", "reason": "Dùng 了."}';
+  const r6 = normalize(truncatedStream, text);
+  assert.ok(r6 && r6.suggestions.length === 1);
+  assert.equal(apply(text, r6.suggestions), expectedRevised);
 });

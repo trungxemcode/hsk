@@ -308,7 +308,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(typeof body.question!=='string'||!body.question.trim()||body.question.length>500||!t||typeof t.vietnamese!=='string'||!t.vietnamese.trim()||t.vietnamese.length>4000||typeof t.chinese!=='string'||!t.chinese.trim()||t.chinese.length>2000||typeof t.pinyin!=='string'||t.pinyin.length>2000||typeof t.explanation!=='string'||t.explanation.length>2000||!Array.isArray(h)||h.length>8||!h.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.text==='string'&&m.text.length<=1000))return reply({error:'Câu hỏi hoặc ngữ cảnh không hợp lệ.'},400);
   }else if(typeof body.text!=='string'||!body.text.trim()||body.text.length>500)return reply({error:'Nhập câu tối đa 500 ký tự.'},400);
 
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isTranscript?140000:isOcr?110000:isReading?85000:isLessonAsk&&['ai-qa','sentence-editor'].includes(body.lesson?.content?.mode)?100000:isAsk?45000:60000);
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isTranscript?140000:isOcr?110000:isReading?85000:isLessonAsk&&['ai-qa','sentence-editor'].includes(body.lesson?.content?.mode)?180000:isAsk?45000:60000);
   const abortRequest=()=>controller.abort();if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',abortRequest,{once:true});
   try{
    const auth=await fetchFn('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(env.FIREBASE_API_KEY),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token}),signal:controller.signal});
@@ -536,16 +536,28 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      catch(error){
       const timeout=controller.signal.aborted||error.name==='AbortError';
       console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});
-      return reply({error:timeout?'API riêng phản hồi quá lâu. Hãy thử lại.':'Không kết nối được tới máy chủ API riêng. Hãy thử lại hoặc tắt API riêng trong Cài đặt.',code:timeout?'PERSONAL_AI_TIMEOUT':'PERSONAL_AI_NETWORK'},timeout?504:502);
+      if(isSentenceEditor&&!controller.signal.aborted&&env.GEMINI_API_KEY){
+       console.info('hsk-sentence-editor-fallback-to-gemini',{provider:personalAi.provider,reason:error?.message});
+       headers['X-HSK-AI-Provider']='gemini';
+       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
+      }else{
+       return reply({error:timeout?'API riêng phản hồi quá lâu. Hãy thử lại.':'Không kết nối được tới máy chủ API riêng. Hãy thử lại hoặc tắt API riêng trong Cài đặt.',code:timeout?'PERSONAL_AI_TIMEOUT':'PERSONAL_AI_NETWORK'},timeout?504:502);
+      }
      }
      if(!response.ok){
-      const upstream=response.status;
-      const errData=await response.json().catch(()=>null);
-      const detailError=typeof errData?.error==='string'&&errData.error.trim()?errData.error.trim():null;
-      const error=detailError||(upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
-       upstream===400||upstream===404?'API riêng không chấp nhận yêu cầu hoặc model đã chọn. Kiểm tra model trong Cài đặt.':
-       upstream===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng không trả về phản hồi hợp lệ. Hãy thử lại.');
-      return reply({error,code:'PERSONAL_AI_UPSTREAM',upstream},upstream===429?429:502);
+      if(isSentenceEditor&&!controller.signal.aborted&&env.GEMINI_API_KEY){
+       console.info('hsk-sentence-editor-fallback-to-gemini-upstream',{provider:personalAi.provider,status:response.status});
+       headers['X-HSK-AI-Provider']='gemini';
+       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
+      }else{
+       const upstream=response.status;
+       const errData=await response.json().catch(()=>null);
+       const detailError=typeof errData?.error==='string'&&errData.error.trim()?errData.error.trim():null;
+       const error=detailError||(upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
+        upstream===400||upstream===404?'API riêng không chấp nhận yêu cầu hoặc model đã chọn. Kiểm tra model trong Cài đặt.':
+        upstream===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng không trả về phản hồi hợp lệ. Hãy thử lại.');
+       return reply({error,code:'PERSONAL_AI_UPSTREAM',upstream},upstream===429?429:502);
+      }
      }
     }else if(useSharedChatGptCookie||usePersonalCookie){
      if(usePersonalCookie&&!personalAi.apiKey?.trim())return reply({error:'Chưa có cookie ChatGPT riêng. Kiểm tra trong Cài đặt.',code:'AI_PROVIDER_UNAVAILABLE'},409);

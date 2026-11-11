@@ -1551,7 +1551,7 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
   });
 }
 
-export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 85000, waitForFinal = false } = {}) {
+export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 160000, waitForFinal = false } = {}) {
   const ws = await openMuseWebSocket(session.ws_url, { fetchFn, wsFactory, signal });
   const queue = [];
   let closed = false;
@@ -1764,16 +1764,28 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
 
     let idleAfterTextCount = 0;
     let finished = false;
+    let lastActivityMs = Date.now();
     while (Date.now() < deadline) {
       const ev = await recvFrameEvent(1000);
-      if (ev === 'closed') break;
+      if (ev === 'closed') {
+        if (textParts.length > 0) finished = true;
+        break;
+      }
       if (!ev) {
         if (!waitForFinal && textParts.length > 0) {
           idleAfterTextCount++;
           if (idleAfterTextCount >= 2) break;
         }
+        // Send a keepalive AEAD kick frame every 12 seconds of inactivity so the connection doesn't get closed by proxy/load balancer
+        if (Date.now() - lastActivityMs >= 12000 && !closed) {
+          try {
+            ws.send(museToBuffer(await csSend.encrypt(new Uint8Array(0), new Uint8Array(0))));
+            lastActivityMs = Date.now();
+          } catch {}
+        }
         continue;
       }
+      lastActivityMs = Date.now();
       idleAfterTextCount = 0;
 
       if (!waitForFinal && ev.kind === 'complete' && ev.event) {
@@ -1787,7 +1799,19 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
         const obj = ev.obj || ev.event || {};
         const eventName = String(obj.event || '');
         const payload = obj.payload || obj;
-        if (waitForFinal && (eventName === 'delta.message_done' || eventName === 'chat.done' || payload.done === true)) {
+        const isDoneEvent = eventName === 'delta.message_done' ||
+          eventName === 'chat.done' ||
+          eventName.includes('done') ||
+          eventName.includes('finish') ||
+          eventName.includes('complete') ||
+          eventName.includes('stop') ||
+          payload.done === true ||
+          payload.is_final === true ||
+          payload.final === true ||
+          payload.finish_reason === 'stop' ||
+          payload.status === 'completed';
+
+        if (waitForFinal && isDoneEvent) {
           const messages = payload.transcript?.messages || payload.messages || [];
           const assistantMessages = messages.filter(message => message.role === 'assistant');
           const lastMsg = assistantMessages[assistantMessages.length - 1];
@@ -1856,16 +1880,38 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
         }
         if (textParts.length > 0) break;
       } else if (ev.kind === 'reset') {
-        if (waitForFinal ? ev.streamId === subSid || ev.streamId === sendSid : textParts.length > 0) break;
+        if (ev.streamId === subSid) {
+          if (textParts.length > 0) finished = true;
+          break;
+        }
+        if (!waitForFinal && textParts.length > 0) break;
       }
     }
 
-    if (waitForFinal && !finished) {
+    let result = textParts.join('').trim();
+    if (!result) {
+      for (const [sid, b] of streamBodies.entries()) {
+        if (b.parts?.length) {
+          const combined = new TextDecoder().decode(museConcat(...b.parts)).trim();
+          if (combined) {
+            try {
+              const obj = JSON.parse(combined);
+              const t = obj.text || obj.response || obj.content || obj.message;
+              if (typeof t === 'string' && t.trim()) { result = t.trim(); break; }
+            } catch {
+              result = combined;
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    if (waitForFinal && !finished && !result) {
       if (Date.now() >= deadline) throw new Error('Muse AI phản hồi quá lâu. Hãy thử lại.');
       throw new Error('Kết nối Muse AI đã đóng trước khi trả xong. Hãy thử lại.');
     }
-    let result = textParts.join('').trim();
-    if (waitForFinal) return result;
+    return result;
     if (!result) {
       for (const [sid, b] of streamBodies.entries()) {
         if (b.parts?.length) {
@@ -2053,15 +2099,18 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
     const bootstrap = () => bootstrapMuseHatchSession(cred.cookieHeader, { fetchFn, signal, now: options.now, consume: true });
     const session = cred.kind === 'hatch-session' ? cred.session : await bootstrap();
     const prompt = buildMuseFlattenedPrompt(requestBody, model, options.sentenceReview);
-    const chat = current => runMuseNoiseChat(current, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: 85000, waitForFinal: options.sentenceReview });
+    const chat = current => runMuseNoiseChat(current, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: options.sentenceReview ? 160000 : 85000, waitForFinal: options.sentenceReview });
     let replyText;
     try {
       replyText = await chat(session);
     } catch (error) {
-      // Retry only before a prompt was sent, with newly issued gateway tokens.
-      if (!cred.cookieHeader || signal?.aborted || error?.code !== 'MUSE_WS_OPEN_FAILED' ||
-          ![undefined, 401, 403, 404, 410, 502, 503, 504].includes(error.upgradeStatus)) throw error;
-      replyText = await chat(await bootstrap());
+      if (!cred.cookieHeader || signal?.aborted) throw error;
+      try {
+        const freshSession = await bootstrap();
+        replyText = await chat(freshSession);
+      } catch {
+        throw error;
+      }
     }
     if (!replyText) return new Response(JSON.stringify({ error: 'Muse AI không trả về nội dung.' }), { status: 502 });
     return wrapReply(replyText);
@@ -3938,6 +3987,26 @@ function buildWrongAnswerInstruction(lesson){
       const withoutTrailingCommas = slice.replace(/,\s*([\]}])/g, '$1');
       try { return JSON.parse(withoutTrailingCommas); } catch {}
     }
+    // Attempt repair of unclosed JSON brackets from truncated stream
+    if (b0 >= 0) {
+      let openBraces = 0, openBrackets = 0, inString = false, escape = false;
+      const target = clean.slice(b0);
+      for (let i = 0; i < target.length; i++) {
+        const c = target[i];
+        if (escape) { escape = false; continue; }
+        if (c === '\\') { escape = true; continue; }
+        if (c === '"') { inString = !inString; continue; }
+        if (inString) continue;
+        if (c === '{') openBraces++;
+        else if (c === '}') openBraces = Math.max(0, openBraces - 1);
+        else if (c === '[') openBrackets++;
+        else if (c === ']') openBrackets = Math.max(0, openBrackets - 1);
+      }
+      let repaired = target.trim().replace(/,\s*$/, '');
+      while (openBrackets > 0) { repaired += ']'; openBrackets--; }
+      while (openBraces > 0) { repaired += '}'; openBraces--; }
+      try { return JSON.parse(repaired); } catch {}
+    }
     return null;
   }
 
@@ -4388,7 +4457,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(typeof body.question!=='string'||!body.question.trim()||body.question.length>500||!t||typeof t.vietnamese!=='string'||!t.vietnamese.trim()||t.vietnamese.length>4000||typeof t.chinese!=='string'||!t.chinese.trim()||t.chinese.length>2000||typeof t.pinyin!=='string'||t.pinyin.length>2000||typeof t.explanation!=='string'||t.explanation.length>2000||!Array.isArray(h)||h.length>8||!h.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.text==='string'&&m.text.length<=1000))return reply({error:'Câu hỏi hoặc ngữ cảnh không hợp lệ.'},400);
   }else if(typeof body.text!=='string'||!body.text.trim()||body.text.length>500)return reply({error:'Nhập câu tối đa 500 ký tự.'},400);
 
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isTranscript?140000:isOcr?110000:isReading?85000:isLessonAsk&&['ai-qa','sentence-editor'].includes(body.lesson?.content?.mode)?100000:isAsk?45000:60000);
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isTranscript?140000:isOcr?110000:isReading?85000:isLessonAsk&&['ai-qa','sentence-editor'].includes(body.lesson?.content?.mode)?180000:isAsk?45000:60000);
   const abortRequest=()=>controller.abort();if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',abortRequest,{once:true});
   try{
    const auth=await fetchFn('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(env.FIREBASE_API_KEY),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token}),signal:controller.signal});
@@ -4616,16 +4685,28 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      catch(error){
       const timeout=controller.signal.aborted||error.name==='AbortError';
       console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});
-      return reply({error:timeout?'API riêng phản hồi quá lâu. Hãy thử lại.':'Không kết nối được tới máy chủ API riêng. Hãy thử lại hoặc tắt API riêng trong Cài đặt.',code:timeout?'PERSONAL_AI_TIMEOUT':'PERSONAL_AI_NETWORK'},timeout?504:502);
+      if(isSentenceEditor&&!controller.signal.aborted&&env.GEMINI_API_KEY){
+       console.info('hsk-sentence-editor-fallback-to-gemini',{provider:personalAi.provider,reason:error?.message});
+       headers['X-HSK-AI-Provider']='gemini';
+       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
+      }else{
+       return reply({error:timeout?'API riêng phản hồi quá lâu. Hãy thử lại.':'Không kết nối được tới máy chủ API riêng. Hãy thử lại hoặc tắt API riêng trong Cài đặt.',code:timeout?'PERSONAL_AI_TIMEOUT':'PERSONAL_AI_NETWORK'},timeout?504:502);
+      }
      }
      if(!response.ok){
-      const upstream=response.status;
-      const errData=await response.json().catch(()=>null);
-      const detailError=typeof errData?.error==='string'&&errData.error.trim()?errData.error.trim():null;
-      const error=detailError||(upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
-       upstream===400||upstream===404?'API riêng không chấp nhận yêu cầu hoặc model đã chọn. Kiểm tra model trong Cài đặt.':
-       upstream===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng không trả về phản hồi hợp lệ. Hãy thử lại.');
-      return reply({error,code:'PERSONAL_AI_UPSTREAM',upstream},upstream===429?429:502);
+      if(isSentenceEditor&&!controller.signal.aborted&&env.GEMINI_API_KEY){
+       console.info('hsk-sentence-editor-fallback-to-gemini-upstream',{provider:personalAi.provider,status:response.status});
+       headers['X-HSK-AI-Provider']='gemini';
+       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
+      }else{
+       const upstream=response.status;
+       const errData=await response.json().catch(()=>null);
+       const detailError=typeof errData?.error==='string'&&errData.error.trim()?errData.error.trim():null;
+       const error=detailError||(upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
+        upstream===400||upstream===404?'API riêng không chấp nhận yêu cầu hoặc model đã chọn. Kiểm tra model trong Cài đặt.':
+        upstream===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng không trả về phản hồi hợp lệ. Hãy thử lại.');
+       return reply({error,code:'PERSONAL_AI_UPSTREAM',upstream},upstream===429?429:502);
+      }
      }
     }else if(useSharedChatGptCookie||usePersonalCookie){
      if(usePersonalCookie&&!personalAi.apiKey?.trim())return reply({error:'Chưa có cookie ChatGPT riêng. Kiểm tra trong Cài đặt.',code:'AI_PROVIDER_UNAVAILABLE'},409);
