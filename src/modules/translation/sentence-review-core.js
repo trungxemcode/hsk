@@ -53,6 +53,26 @@
       const withoutTrailingCommas = slice.replace(/,\s*([\]}])/g, '$1');
       try { return JSON.parse(withoutTrailingCommas); } catch {}
     }
+    // Attempt repair of unclosed JSON brackets from truncated stream
+    if (b0 >= 0) {
+      let openBraces = 0, openBrackets = 0, inString = false, escape = false;
+      const target = clean.slice(b0);
+      for (let i = 0; i < target.length; i++) {
+        const c = target[i];
+        if (escape) { escape = false; continue; }
+        if (c === '\\') { escape = true; continue; }
+        if (c === '"') { inString = !inString; continue; }
+        if (inString) continue;
+        if (c === '{') openBraces++;
+        else if (c === '}') openBraces = Math.max(0, openBraces - 1);
+        else if (c === '[') openBrackets++;
+        else if (c === ']') openBrackets = Math.max(0, openBrackets - 1);
+      }
+      let repaired = target.trim().replace(/,\s*$/, '');
+      while (openBrackets > 0) { repaired += ']'; openBrackets--; }
+      while (openBraces > 0) { repaired += '}'; openBraces--; }
+      try { return JSON.parse(repaired); } catch {}
+    }
     return null;
   }
 

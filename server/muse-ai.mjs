@@ -569,7 +569,7 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
   });
 }
 
-export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 85000, waitForFinal = false } = {}) {
+export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 160000, waitForFinal = false } = {}) {
   const ws = await openMuseWebSocket(session.ws_url, { fetchFn, wsFactory, signal });
   const queue = [];
   let closed = false;
@@ -782,16 +782,28 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
 
     let idleAfterTextCount = 0;
     let finished = false;
+    let lastActivityMs = Date.now();
     while (Date.now() < deadline) {
       const ev = await recvFrameEvent(1000);
-      if (ev === 'closed') break;
+      if (ev === 'closed') {
+        if (textParts.length > 0) finished = true;
+        break;
+      }
       if (!ev) {
         if (!waitForFinal && textParts.length > 0) {
           idleAfterTextCount++;
           if (idleAfterTextCount >= 2) break;
         }
+        // Send a keepalive AEAD kick frame every 12 seconds of inactivity so the connection doesn't get closed by proxy/load balancer
+        if (Date.now() - lastActivityMs >= 12000 && !closed) {
+          try {
+            ws.send(museToBuffer(await csSend.encrypt(new Uint8Array(0), new Uint8Array(0))));
+            lastActivityMs = Date.now();
+          } catch {}
+        }
         continue;
       }
+      lastActivityMs = Date.now();
       idleAfterTextCount = 0;
 
       if (!waitForFinal && ev.kind === 'complete' && ev.event) {
@@ -805,7 +817,19 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
         const obj = ev.obj || ev.event || {};
         const eventName = String(obj.event || '');
         const payload = obj.payload || obj;
-        if (waitForFinal && (eventName === 'delta.message_done' || eventName === 'chat.done' || payload.done === true)) {
+        const isDoneEvent = eventName === 'delta.message_done' ||
+          eventName === 'chat.done' ||
+          eventName.includes('done') ||
+          eventName.includes('finish') ||
+          eventName.includes('complete') ||
+          eventName.includes('stop') ||
+          payload.done === true ||
+          payload.is_final === true ||
+          payload.final === true ||
+          payload.finish_reason === 'stop' ||
+          payload.status === 'completed';
+
+        if (waitForFinal && isDoneEvent) {
           const messages = payload.transcript?.messages || payload.messages || [];
           const assistantMessages = messages.filter(message => message.role === 'assistant');
           const lastMsg = assistantMessages[assistantMessages.length - 1];
@@ -874,16 +898,38 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
         }
         if (textParts.length > 0) break;
       } else if (ev.kind === 'reset') {
-        if (waitForFinal ? ev.streamId === subSid || ev.streamId === sendSid : textParts.length > 0) break;
+        if (ev.streamId === subSid) {
+          if (textParts.length > 0) finished = true;
+          break;
+        }
+        if (!waitForFinal && textParts.length > 0) break;
       }
     }
 
-    if (waitForFinal && !finished) {
+    let result = textParts.join('').trim();
+    if (!result) {
+      for (const [sid, b] of streamBodies.entries()) {
+        if (b.parts?.length) {
+          const combined = new TextDecoder().decode(museConcat(...b.parts)).trim();
+          if (combined) {
+            try {
+              const obj = JSON.parse(combined);
+              const t = obj.text || obj.response || obj.content || obj.message;
+              if (typeof t === 'string' && t.trim()) { result = t.trim(); break; }
+            } catch {
+              result = combined;
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    if (waitForFinal && !finished && !result) {
       if (Date.now() >= deadline) throw new Error('Muse AI phản hồi quá lâu. Hãy thử lại.');
       throw new Error('Kết nối Muse AI đã đóng trước khi trả xong. Hãy thử lại.');
     }
-    let result = textParts.join('').trim();
-    if (waitForFinal) return result;
+    return result;
     if (!result) {
       for (const [sid, b] of streamBodies.entries()) {
         if (b.parts?.length) {
@@ -1071,15 +1117,18 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
     const bootstrap = () => bootstrapMuseHatchSession(cred.cookieHeader, { fetchFn, signal, now: options.now, consume: true });
     const session = cred.kind === 'hatch-session' ? cred.session : await bootstrap();
     const prompt = buildMuseFlattenedPrompt(requestBody, model, options.sentenceReview);
-    const chat = current => runMuseNoiseChat(current, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: 85000, waitForFinal: options.sentenceReview });
+    const chat = current => runMuseNoiseChat(current, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: options.sentenceReview ? 160000 : 85000, waitForFinal: options.sentenceReview });
     let replyText;
     try {
       replyText = await chat(session);
     } catch (error) {
-      // Retry only before a prompt was sent, with newly issued gateway tokens.
-      if (!cred.cookieHeader || signal?.aborted || error?.code !== 'MUSE_WS_OPEN_FAILED' ||
-          ![undefined, 401, 403, 404, 410, 502, 503, 504].includes(error.upgradeStatus)) throw error;
-      replyText = await chat(await bootstrap());
+      if (!cred.cookieHeader || signal?.aborted) throw error;
+      try {
+        const freshSession = await bootstrap();
+        replyText = await chat(freshSession);
+      } catch {
+        throw error;
+      }
     }
     if (!replyText) return new Response(JSON.stringify({ error: 'Muse AI không trả về nội dung.' }), { status: 502 });
     return wrapReply(replyText);
