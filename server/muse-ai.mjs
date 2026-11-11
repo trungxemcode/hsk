@@ -807,11 +807,12 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
         const payload = obj.payload || obj;
         if (waitForFinal && (eventName === 'delta.message_done' || eventName === 'chat.done' || payload.done === true)) {
           const messages = payload.transcript?.messages || payload.messages || [];
+          const assistantMessages = messages.filter(message => message.role === 'assistant');
+          const lastMsg = assistantMessages[assistantMessages.length - 1];
           const finalText = typeof payload.text === 'string' ? payload.text :
-            messages.filter(message => message.role === 'assistant').map(message =>
-              typeof message.text === 'string' ? message.text :
-                Array.isArray(message.content) ? message.content.map(part => part.text || '').join('') :
-                  typeof message.content === 'string' ? message.content : '').join('');
+            lastMsg ? (typeof lastMsg.text === 'string' ? lastMsg.text :
+              Array.isArray(lastMsg.content) ? lastMsg.content.map(part => part.text || '').join('') :
+                typeof lastMsg.content === 'string' ? lastMsg.content : '') : '';
           if (finalText.trim()) textParts.splice(0, textParts.length, finalText);
           finished = true;
           break;
@@ -960,7 +961,7 @@ export function buildMuseFlattenedPrompt(requestBody, model, sentenceReview = fa
 
   if (sentenceReview) {
     const instruction = (requestBody?.systemInstruction?.parts || []).map(part => part.text).join('\n');
-    return instruction + '\n\nVăn bản cần sửa (dữ liệu JSON):\n' + JSON.stringify(userQuestion);
+    return instruction + '\n\nLƯU Ý: Chỉ trả về JSON duy nhất theo đúng cấu trúc trên, không thêm bất kỳ văn bản chào hỏi hay lời dẫn nào bên ngoài JSON.\n\nVăn bản cần sửa (dữ liệu JSON):\n' + JSON.stringify(userQuestion);
   }
 
   // Chỉ lấy tối đa 2 lượt hội thoại gần nhất để giữ ngữ cảnh mà không làm đầy khung chat
