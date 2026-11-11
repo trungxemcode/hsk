@@ -280,7 +280,7 @@
     pending = controller;
     setBusy(true);
     setStatus('AI đang kiểm tra ngữ pháp và cách diễn đạt…');
-    const timeout = setTimeout(() => controller.abort(), 50000);
+    const timeout = setTimeout(() => controller.abort(), 105000);
     try {
       const configResponse = await fetch('./translation-config.json', {signal: controller.signal, cache: 'no-store'});
       if (!configResponse.ok) throw Error('Dịch vụ AI chưa sẵn sàng.');
