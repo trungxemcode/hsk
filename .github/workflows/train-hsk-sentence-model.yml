@@ -1,0 +1,93 @@
+name: Train HSK sentence model
+
+on:
+  workflow_dispatch:
+    inputs:
+      dataset:
+        description: Corpus folder under tools/sentence-training/data
+        type: string
+        default: seed
+        required: true
+      epochs:
+        description: Training passes over the corpus
+        type: choice
+        options: ['1', '2', '3', '4', '5']
+        default: '1'
+      validation_only:
+        description: Check corpus only, without downloading the model
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hsk-sentence-training-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      HSK_DATASET: ${{ inputs.dataset }}
+      HSK_EPOCHS: ${{ inputs.epochs }}
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      HF_HUB_DISABLE_XET: '1'
+      TOKENIZERS_PARALLELISM: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check split integrity and coverage by HSK level
+        run: |
+          [[ "$HSK_DATASET" =~ ^[A-Za-z0-9_-]+$ ]] || { echo 'Enter one corpus folder name'; exit 1; }
+          [[ "$HSK_EPOCHS" =~ ^[1-5]$ ]] || { echo 'Choose 1–5 epochs'; exit 1; }
+          python tools/sentence-training/corpus.py "tools/sentence-training/data/$HSK_DATASET"
+      - name: Install CPU training and ONNX export dependencies
+        if: ${{ !inputs.validation_only }}
+        run: |
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.6.0+cpu'
+          python -m pip install -r tools/sentence-training/requirements.txt
+      - name: Fine-tune and benchmark the INT8 candidate
+        if: ${{ !inputs.validation_only }}
+        run: |
+          python tools/sentence-training/train.py \
+            --dataset-dir "tools/sentence-training/data/$HSK_DATASET" \
+            --epochs "$HSK_EPOCHS" --out "$RUNNER_TEMP/hsk-candidate"
+      - name: Summarize held-out results
+        if: ${{ !inputs.validation_only }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+
+          report = json.loads((Path(os.environ["RUNNER_TEMP"]) / "hsk-candidate/report.json").read_text())
+          baseline = report["baseline_test"]["by_hsk"]
+          candidate = report["candidate_test_at_calibrated_threshold"]["by_hsk"]
+          lines = [
+              "# HSK 1–6 evaluation",
+              "",
+              f"Candidate threshold: {report['candidate_threshold']:.4f}",
+              "",
+              "| HSK | Original errors located | Candidate errors located | Candidate clean sentences flagged |",
+              "|---|---:|---:|---:|",
+          ]
+          for level in baseline:
+              left, right = baseline[level], candidate[level]
+              lines.append(f"| {level} | {left['located']}/{left['errors']} | {right['located']}/{right['errors']} | {right['clean_flagged']}/{right['clean']} |")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as stream:
+              stream.write("\n".join(lines) + "\n")
+          PY
+      - name: Upload candidate and report
+        if: ${{ !inputs.validation_only }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: hsk-electra-candidate-${{ github.run_id }}
+          path: ${{ runner.temp }}/hsk-candidate/
+          compression-level: 0
+          retention-days: 7
+          if-no-files-found: error
