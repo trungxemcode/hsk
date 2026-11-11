@@ -62,7 +62,7 @@ const server=http.createServer((req,res)=>{
         if(String(input).includes('/lesson-ask'))return new Promise(resolve=>{
           window.__resolveGrammar=(data={answer:JSON.stringify({summary:'STALE_RESPONSE',suggestions:[{kind:'fix',original:'帮忙我',replacement:'帮我',reason:'STALE_SUGGESTION'}]})})=>{
             window.__resolveGrammar=null;
-            resolve(new Response(JSON.stringify(data)));
+            resolve(new Response(JSON.stringify(data),{headers:{'X-HSK-AI-Provider':'gemini'}}));
           };
         });
         return originalFetch(input,init);
@@ -85,9 +85,11 @@ const server=http.createServer((req,res)=>{
     assert.equal(await editor.locator('.sentence-card[data-source="ai"]').count(),0);
     await editor.getByRole('button',{name:'Kiểm tra sâu bằng AI',exact:true}).click();
     await page.waitForFunction(()=>!!window.__resolveGrammar);
-    await page.evaluate(()=>window.__resolveGrammar({sentenceReview:{summary:'Đã kiểm tra đoạn văn.',suggestions:[
+    await page.evaluate(()=>window.__resolveGrammar({aiSource:{provider:'gemini',model:'gemini-test-version'},sentenceReview:{summary:'Đã kiểm tra đoạn văn.',suggestions:[
       {kind:'fix',original:'讨论了这个话题跟同学们',replacement:'跟同学们讨论了这个话题',reason:'Đặt đối tượng trao đổi trước động từ.'}
     ]}}));
+    await editor.locator('.sentence-status').filter({hasText:'Nguồn: Gemini · gemini-test-version.'}).waitFor();
+    await editor.locator('.sentence-card[data-source="ai"] h4').filter({hasText:'AI · Gemini'}).waitFor();
     await editor.locator('.sentence-card[data-source="ai"]').getByRole('button',{name:'Áp dụng',exact:true}).click();
     assert.equal(await input.inputValue(),'昨天，我跟同学们讨论了这个话题三个小时。');
     await input.fill('🙂这件衣服。');

@@ -163,3 +163,25 @@ test('the same constructions generalize across verbs, domains and sentence bound
     '项目不仅增加了就业岗位；而且能否按期交付，是企业最关心的问题。',
   ])assert.ok(checker.checkText(text).every(edit=>!/^STRUCT_(OBJECT_COLLOCATION|INCREMENTAL_RELATION|REQUIREMENT_POLARITY|PREVENTION)$/u.test(edit.ruleId??'')),text);
 });
+
+test('HSK 5 paragraph gets three independent local suggestions with concrete explanations',()=>{
+ const source='为了改善大家的工作效率，公司上个月启动了一项新的培训计划。这次报名参加培训的员工大约有三十人左右，大家每天都在认真听讲并积极交流。然而，由于刚接手新项目，小李平时的工作非常繁忙，他把上周布置的实践任务没有按时完成。';
+ const edits=checker.checkText(source);
+ assert.deepEqual(Array.from(edits,e=>[e.original,e.replacement]),[
+  ['改善','提高'],['左右',''],['把上周布置的实践任务没有按时完成','没有把上周布置的实践任务按时完成'],
+ ]);
+ assert.equal(edits[0].kind,'style');
+ assert.equal(edits[2].kind,'fix');
+ const repaired=[...edits].reverse().reduce((text,edit)=>text.slice(0,edit.start)+edit.replacement+text.slice(edit.end),source);
+ assert.equal(checker.checkText(repaired).length,0);
+ for(const valid of [
+  '他把没有按时完成的任务交给老师。',
+  '她把没有盖子的盒子放好。',
+  '工作人员把握时机，及时处理。',
+  '大约有三十人参加了活动。',
+  '他希望改善员工的工作条件。',
+  '市民在广场左右两侧等候。',
+ ])assert.equal(checker.checkText(valid).length,0,valid);
+ assert.ok(checker.checkText('志愿者把名单没整理好。').some(e=>e.ruleId==='STRUCT_NEGATIVE_BA'));
+ assert.ok(checker.checkText('参加的人数大概有二十人左右。').some(e=>e.ruleId==='STRUCT_APPROXIMATION'));
+});

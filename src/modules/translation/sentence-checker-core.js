@@ -519,6 +519,7 @@
   // occurrence such as 潜力的渠道 is not the head of the object.
   const objectHeads = [
     {verb: /拓宽|拓展/gu, noun: /潜力|潜能/gu, alternatives: '挖掘、激发 hoặc 释放'},
+    {verb: /改善/gu, noun: /效率/gu, alternatives: '提高 hoặc 提升', suggestedVerb: '提高'},
     {verb: /加快|加速|增强/gu, noun: /效率|效能/gu, alternatives: '提高 hoặc 提升'},
     {verb: /缩短/gu, noun: /速度|速率/gu, alternatives: '降低 hoặc 减慢'},
     {verb: /延长/gu, noun: /范围|覆盖面/gu, alternatives: '扩大 hoặc 拓宽'},
@@ -528,16 +529,23 @@
   const embeddedPredicate = /(?:负责|用于|用来|以便|为了|从而|进而|以此|并|来)?(?:产生|带来|挖掘|激发|开发|释放|发挥|提高|提升|改善|扩大|加快|减慢|降低|延长|增加|缩短)/u;
 
   function findObjectMismatches(clause, add) {
-    for (const {verb, noun, alternatives} of objectHeads) {
+    for (const {verb, noun, alternatives, suggestedVerb} of objectHeads) {
       for (const verbMatch of clause.content.matchAll(verb)) {
         const tailStart = verbMatch.index + verbMatch[0].length;
         const tail = clause.content.slice(tailStart);
         for (const object of tail.matchAll(noun)) {
           if (object.index > 56 || embeddedPredicate.test(tail.slice(0, object.index))) break;
           if (!objectBoundary.test(tail.slice(object.index + object[0].length))) continue;
-          const start = clause.start + tailStart + object.index;
-          add(start, start + object[0].length, null, 'STRUCT_OBJECT_COLLOCATION',
-            '「' + verbMatch[0] + '」 không hợp với tân ngữ 「' + object[0] + '」 trong cách dùng này. Cân nhắc ' + alternatives + '. Nếu có nhiều tân ngữ, hãy dùng động từ phù hợp cho từng tân ngữ.');
+          const following = tail.slice(object.index + object[0].length);
+          if (suggestedVerb && !following && !/[、和与]|以及/u.test(tail)) {
+            const start = clause.start + verbMatch.index;
+            add(start, start + verbMatch[0].length, suggestedVerb, 'STRUCT_OBJECT_COLLOCATION',
+              'Với 「' + object[0] + '」 (hiệu suất), thường dùng 「' + suggestedVerb + '」 (nâng cao).');
+          } else {
+            const start = clause.start + tailStart + object.index;
+            add(start, start + object[0].length, null, 'STRUCT_OBJECT_COLLOCATION',
+              '「' + verbMatch[0] + '」 không hợp với tân ngữ 「' + object[0] + '」 trong cách dùng này. Cân nhắc ' + alternatives + '. Nếu có nhiều tân ngữ, hãy dùng động từ phù hợp cho từng tân ngữ.');
+          }
         }
       }
     }
@@ -589,6 +597,25 @@
       }
 
       findObjectMismatches(current, add);
+
+      const approximate = /(?:大约|大概|约)(?:有|为|是|达(?:到)?)?(?:[零一二两三四五六七八九十百千万亿几]+|\d+(?:\.\d+)?)(?:个)?(?:人|名|位|小时|分钟|天|年|公里|元|次)(左右|上下)(?=$|的|到场|报名|参加)/gu;
+      for (const match of value.matchAll(approximate)) {
+        const suffix = match[1];
+        const start = current.start + match.index + match[0].length - suffix.length;
+        add(start, start + suffix.length, '', 'STRUCT_APPROXIMATION',
+          'Câu đã có từ chỉ ước lượng ở đầu con số. Bỏ 「' + suffix + '」 để tránh lặp ý “khoảng”.');
+      }
+
+      // Require a negative predicate at the end of the clause. In 把没有…的
+      // phrases, the negation belongs to the object modifier and stays there.
+      const negativeBa = value.match(/把(?!握)([\p{Script=Han}]{1,45}?)(没有|没|未能|不能|不肯|不愿|不敢|未)((?:按时|及时|顺利|全部|彻底|认真|妥善|完全|提前|当场|立即|好好|仔细|正式|直接|分别)?(?:完成|做完|处理好|处理|交上|交给|交完|整理好|整理|修改好|修改|保存好|保存|送给|送到|放好|放回|拿走|记住|看完|看懂|说清楚|落实|修好|关闭|打开|准备好|提交|写完|交付|签好|归还))$/u);
+      if (negativeBa) {
+        const [original, object, negative, predicate] = negativeBa;
+        const start = current.start + negativeBa.index;
+        add(start, start + original.length, negative + '把' + object + predicate, 'STRUCT_NEGATIVE_BA',
+          'Khi phủ định cả hành động trong câu chữ 把, đặt 「' + negative + '」 trước 「把」. Tân ngữ và kết quả giữ nguyên.', 'fix');
+      }
+
 
       if (directlyFollows) {
         // A paired connective should match the relation of the first clause.
