@@ -482,7 +482,7 @@
       "id": "HSK6_THROUGH_CAUSATIVE",
       "hskLevel": 6,
       "category": "advanced_writing",
-      "pattern": "(?<=(?:^|[。！？；])通过[^，,。！？；;]{2,35}[，,]\\s*)使(?=[^，,。！？；;]{2,35}得以)",
+      "pattern": "(?<=(?:^|[，,。！？；])通过[^，,。！？；;]{2,35}[，,]\\s*)使(?=[^，,。！？；;]{2,35}得以)",
       "replace": "",
       "message": "Trong mẫu 「通过…，使…得以…」 ở đầu câu, có thể bỏ 使 để vế sau có chủ ngữ.",
       "kind": "style"
