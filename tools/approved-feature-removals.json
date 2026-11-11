@@ -22,19 +22,19 @@
     {
       "id": "sentence-editor",
       "approvedBy": "trungxemcode",
-      "approvalUrl": "Pending the approval PR URL",
+      "approvalUrl": "https://github.com/trungxemcode/hsk/pull/392",
       "reason": "Owner requested an AI-only sentence editor. Authorize removal of the local grammar rules and spelling engine from the app. Preserve the sentence editor route, AI review, editing, highlighting and undo."
     },
     {
       "id": "sentence-onnx-lite",
       "approvedBy": "trungxemcode",
-      "approvalUrl": "Pending the approval PR URL",
+      "approvalUrl": "https://github.com/trungxemcode/hsk/pull/392",
       "reason": "Owner requested removing the on-device Lite model from the sentence editor. Preserve separate training tools."
     },
     {
       "id": "sentence-electra-trial",
       "approvedBy": "trungxemcode",
-      "approvalUrl": "Pending the approval PR URL",
+      "approvalUrl": "https://github.com/trungxemcode/hsk/pull/392",
       "reason": "Owner requested removing the on-device ELECTRA option from the sentence editor. Preserve separate training tools."
     }
   ]
