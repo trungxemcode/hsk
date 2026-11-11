@@ -21,6 +21,7 @@
   const electra=window.HSKSentenceElectraTrial?.({
     panel,draft,onSuggestions(items){electraSuggestions=items;render();}
   });
+  const providerNames=Object.freeze({gemini:'Gemini',xkiro:'xKiro',openai:'OpenAI',anthropic:'Claude',claude:'Claude',deepseek:'DeepSeek',fosta:'Fosta','chatgpt-cookie':'ChatGPT'});
   const signature=item=>`${item.start}:${item.end}:${item.original}:${item.replacement}`;
   function cancelPending(){if(pending)pending.abort();pending=null;submit.disabled=false;aiButton.disabled=false;panel.setAttribute('aria-busy','false');}
   function valid(item){return item.start>=0&&item.end<=draft.value.length&&draft.value.slice(item.start,item.end)===item.original;}
@@ -51,7 +52,7 @@
     for(const item of currentErrors()){
       const card=document.createElement('article');card.className='sentence-card';card.dataset.kind=item.kind;card.dataset.source=item.source||'local';
       const head=document.createElement('div');head.className='sentence-card-head';const dot=document.createElement('span');dot.className='sentence-card-dot';
-      const title=document.createElement('h4');title.textContent=item.reviewOnly?(item.source==='electra'?'Cần xem lại · Model 103 MB':'Cần xem lại · Cục bộ'):(item.kind==='fix'?'Cần sửa':'Gợi ý diễn đạt')+(item.source==='ai'?' · AI':item.source==='onnx'?' · Tại máy':' · Cục bộ');head.append(dot,title);
+      const title=document.createElement('h4');title.textContent=item.reviewOnly?(item.source==='electra'?'Cần xem lại · Model 103 MB':'Cần xem lại · Cục bộ'):(item.kind==='fix'?'Cần sửa':'Gợi ý diễn đạt')+(item.source==='ai'?' · AI'+(item.provider?' · '+item.provider:''):item.source==='onnx'?' · Tại máy':' · Cục bộ');head.append(dot,title);
       const change=document.createElement('p');change.className='sentence-diff';change.lang='zh';
       const del=document.createElement('del');del.className='sentence-del';del.textContent=item.original||'(thêm tại đây)';
       const arrow=document.createElement('span');arrow.className='sentence-arrow';arrow.textContent=' → ';
@@ -95,8 +96,20 @@
     if(!review)throw Error('AI chưa trả được gợi ý có vị trí sửa. Hãy bấm kiểm tra lại.');
     return review;
   }
-  function readSuggestions(text,data){
-    return data.suggestions.map(item=>({...item,source:'ai'}));
+  function sourceLabel(data,response){
+    const key=response.headers.get('X-HSK-AI-Provider')||data.aiSource?.provider;
+    const provider=Object.hasOwn(providerNames,key)?providerNames[key]:'';
+    const reported=data.aiSource?.model;
+    const model=data.aiSource?.provider===key&&typeof reported==='string'&&/^[a-z0-9][a-z0-9._/:+-]{0,119}$/i.test(reported)?reported:'';
+    return {provider,model};
+  }
+
+  function readSuggestions(text,data,provider){
+    const apply=item=>text.slice(0,item.start)+item.replacement+text.slice(item.end);
+    return data.suggestions.map(item=>{
+      const equivalent=item.fromRewrite&&localSuggestions.find(local=>!local.reviewOnly&&apply(local)===apply(item));
+      return {...item,...(equivalent?{kind:equivalent.kind,reason:equivalent.reason}:{}),source:'ai',provider};
+    });
   }
 
   draft.addEventListener('input',resetForInput);draft.addEventListener('scroll',syncScroll);
@@ -129,10 +142,12 @@
       const response=await fetch(endpoint,{method:'POST',signal:controller.signal,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({question:text,hsk:level>=1&&level<=6?level:3,history:[],lesson:{id:'sentence-editor',title:'Sửa câu tiếng Trung',words:[],content:{mode:'sentence-editor',localChecker:true,checkerMetrics:metrics}}})});
       const data=await response.json();if(pending!==controller||draft.value!==text||window.HSKAccountDashboard?.user?.uid!==user.uid)return;if(!response.ok)throw Error(data.error||'Chưa kiểm tra được văn bản.');
       const result=readReviewResponse(data,text);
-      aiSuggestions=readSuggestions(text,result);
+      const {provider,model}=sourceLabel(data,response);
+      aiSuggestions=readSuggestions(text,result,provider);
       const summary=typeof result.summary==='string'?result.summary.trim().slice(0,result.textOnly?4000:800):'';
       const unanchored=result.suggestions.length>0&&!aiSuggestions.length;
       aiSummary=summary||(aiSuggestions.length?'AI đã đề xuất chỉnh sửa.':unanchored?'AI có gợi ý nhưng chưa khớp được đoạn gốc.':'AI chưa thấy chỗ cần sửa.');
+      if(provider)aiSummary+=' Nguồn: '+provider+(model?' · '+model:'')+'.';
       setStatus(aiSummary);render();
     }catch(error){if(pending===controller)setStatus(error.name==='AbortError'?'AI xử lý quá lâu. Gợi ý cục bộ vẫn được giữ.':error.message);}finally{clearTimeout(timeout);if(pending===controller){pending=null;submit.disabled=false;aiButton.disabled=false;panel.setAttribute('aria-busy','false');}}
   });

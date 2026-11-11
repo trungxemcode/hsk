@@ -41,7 +41,7 @@ export async function qaDescriptor(route,body,uid,env){
   shared=/^[\p{Script=Han}]{1,20}[？?]?$/u.test(question)&&trusted;
  }
  if(!trusted&&qaSensitive(qaStable(context)))return null;
- const contextHash=await qaHash({route,hsk:body.hsk||null,context,images:route==='/lesson-ask'?(body.images||[]):null,curriculum:TUTOR_CURRICULUM.revision,prompt:QA_CACHE_REVISION,accountProvider:env.QA_ACCOUNT_PROVIDER||'legacy',model:env.GEMINI_MODEL||'gemini-3.5-flash-lite',backup:[env.AI_BACKUP_ENABLED||'',env.AI_TASK_ROUTING||'',env.SECONDARY_AI_PROVIDER||'',env.SECONDARY_AI_MODEL||''],epoch:env.QA_CACHE_EPOCH||'1'});
+ const contextHash=await qaHash({route,hsk:body.hsk||null,context,images:route==='/lesson-ask'?(body.images||[]):null,curriculum:TUTOR_CURRICULUM.revision,prompt:body.lesson?.content?.mode==='sentence-editor'?QA_CACHE_REVISION+':sentence-review-v2':QA_CACHE_REVISION,accountProvider:env.QA_ACCOUNT_PROVIDER||'legacy',model:env.GEMINI_MODEL||'gemini-3.5-flash-lite',backup:[env.AI_BACKUP_ENABLED||'',env.AI_TASK_ROUTING||'',env.SECONDARY_AI_PROVIDER||'',env.SECONDARY_AI_MODEL||''],epoch:env.QA_CACHE_EPOCH||'1'});
  const owner=shared?'public':await qaHash('qa-owner:'+uid),scope=await qaHash({contextHash,owner}),key=await qaHash({scope,question});
  return {key,scope,route,shared,question,ttl:shared?604800:86400};
 }

@@ -20,7 +20,8 @@ test('corrected paragraph yields independently anchored cards that reproduce AI 
 test('insertions, deletions, repeated substrings and emoji preserve UTF-16 positions',()=>{
  for(const [a,b] of [['🙂衣服。','🙂的衣服。'],['我我去。','我去。'],['好。好。','好。很好。'],['','你'],['你好','']]){
   assert.equal(apply(a,diffEdits(a,b)),b);
-  assert.equal(apply(a,normalize({correctedText:b},a).suggestions),b);
+  if (b) assert.equal(apply(a,normalize({correctedText:b},a).suggestions),b);
+  else assert.equal(normalize({correctedText:b},a),null,'reject a rewrite that erases the entire draft');
  }
 });
 test('structured old and new envelopes agree and invalid positions cannot be applied',()=>{
@@ -46,4 +47,21 @@ test('diff is lossless for varied text and edits stay bounded',()=>{
   assert.ok(edits.length<=12);
   assert.equal(apply(source,edits),target);
  }
+});
+
+
+test('a marked-up rewrite produces only Chinese edits and moves negation as one operation',()=>{
+  const text='为了改善大家的工作效率，员工大约有三十人左右。他把上周布置的实践任务没有按时完成。';
+  const revised='为了提高大家的工作效率，员工大约有三十人。他没有把上周布置的实践任务按时完成。';
+  const response={answer:JSON.stringify({answer:'**Bản sửa tự nhiên:** '+revised+'\n**Giải thích:** Chuyển vị trí 没有.'})};
+  const review=normalize(response,text);
+  assert.deepEqual(review.suggestions.map(({original,replacement})=>[original,replacement]),[
+    ['改善','提高'],['左右',''],['把上周布置的实践任务没有','没有把上周布置的实践任务'],
+  ]);
+  assert.equal(apply(text,review.suggestions),revised);
+  assert.match(review.suggestions[2].reason,/Đổi vị trí 「没有」/);
+  assert.equal(normalize({correctedText:'tự nhiên: **'+revised},text),null);
+  assert.equal(normalize({suggestions:[{kind:'style',original:'改善',replacement:'tự nhiên: **',reason:'x'}]},text),null);
+  assert.equal(normalize({answer:'Bản sửa không xác định: '+revised},text),null);
+  assert.equal(normalize({answer:'**Bản sửa tự nhiên:** '+revised+'\nĐây là lời giải thích không có tiêu đề.'},text),null);
 });

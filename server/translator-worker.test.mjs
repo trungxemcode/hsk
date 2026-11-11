@@ -244,7 +244,7 @@ test('sentence review normalizes structured responses and rejects unanchored pro
   JSON.stringify({answer:JSON.stringify(review)}),
   '```json\n'+JSON.stringify(review)+'\n```'
  ]){
-  const {run,calls}=setup(()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:content}]}}]}));
+  const {run,calls}=setup(()=>Response.json({modelVersion:'gemini-test-version',candidates:[{finishReason:'STOP',content:{parts:[{text:content}]}}]}));
   const response=await run('/lesson-ask',body);
   assert.equal(response.status,200);
   const result=await response.json();
@@ -252,6 +252,10 @@ test('sentence review normalizes structured responses and rejects unanchored pro
   assert.deepEqual(JSON.parse(result.answer),result.sentenceReview);
   assert.equal(calls[1].body.contents[0].parts[0].text,question);
   assert.equal(calls[1].body.generationConfig.maxOutputTokens,1800);
+  assert.deepEqual(calls[1].body.generationConfig.responseSchema.required,['summary','suggestions']);
+  assert.deepEqual(calls[1].body.generationConfig.responseSchema.properties.suggestions.items.required,['kind','original','replacement','reason']);
+  assert.equal(response.headers.get('X-HSK-AI-Provider'),'gemini');
+  assert.deepEqual(result.aiSource,{provider:'gemini',model:'gemini-test-version'});
  }
  const prose='Cụm 跟同学们 nên đứng trước 讨论.';
  const {run}=setup(()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:prose}]}}]}));
