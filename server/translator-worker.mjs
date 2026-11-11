@@ -539,7 +539,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
       if(isSentenceEditor&&!controller.signal.aborted&&env.GEMINI_API_KEY){
        console.info('hsk-sentence-editor-fallback-to-gemini',{provider:personalAi.provider,reason:error?.message});
        headers['X-HSK-AI-Provider']='gemini';
-       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
+       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
       }else{
        return reply({error:timeout?'API riêng phản hồi quá lâu. Hãy thử lại.':'Không kết nối được tới máy chủ API riêng. Hãy thử lại hoặc tắt API riêng trong Cài đặt.',code:timeout?'PERSONAL_AI_TIMEOUT':'PERSONAL_AI_NETWORK'},timeout?504:502);
       }
@@ -548,7 +548,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
       if(isSentenceEditor&&!controller.signal.aborted&&env.GEMINI_API_KEY){
        console.info('hsk-sentence-editor-fallback-to-gemini-upstream',{provider:personalAi.provider,status:response.status});
        headers['X-HSK-AI-Provider']='gemini';
-       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
+       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
       }else{
        const upstream=response.status;
        const errData=await response.json().catch(()=>null);
