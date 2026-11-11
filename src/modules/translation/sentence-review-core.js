@@ -4,17 +4,23 @@
   'use strict';
 
   const han = /\p{Script=Han}/u;
-  const rewriteHeading = /^(?:#{1,6}\s+)?(?:\*{1,2}|__)?(?:Bản (?:sửa|chỉnh sửa)(?: đề xuất| tự nhiên(?: hơn)?| hoàn chỉnh| đã chỉnh sửa)?|Đoạn văn (?:đã sửa|sau khi sửa)|Văn bản đã sửa|修改后(?:的文本)?|修改稿)(?:\*{1,2}|__)?\s*(?:[:：]\s*(?:\*{1,2}|__)?\s*(.*))?$/iu;
+  const rewriteHeading = /^(?:#{1,6}\s+)?(?:\*{1,2}|__)?(?:Bản (?:sửa|chỉnh sửa)(?: đề xuất| tự nhiên(?: hơn)?| hoàn chỉnh| đã chỉnh sửa)?|Đoạn văn (?:đã sửa|sau khi sửa)|Văn bản đã sửa|Câu (?:đúng|sửa|đã sửa|viết lại|hoàn chỉnh|chuẩn)|(?:Gợi ý|Đề xuất) (?:sửa|chỉnh sửa)|Sửa (?:lại|thành)|修改后(?:的文本)?|修改稿|修改建议|正确(?:句子|表达)|建议修改)(?:\*{1,2}|__)?\s*(?:[:：]\s*(?:\*{1,2}|__)?\s*(.*))?$/iu;
   const explanationHeading = /^(?:#{1,6}\s+|(?:\d+[.)]|[-*])\s+|(?:\*{1,2}|__)?(?:Giải thích|Nhận xét|Phân tích|Lý do|Gợi ý|Lưu ý|说明|解析|修改说明|理由|提示)(?:\b|[:：]))/iu;
 
+  function cleanMarkdownWrap(text) {
+    if (typeof text !== 'string') return '';
+    return text.trim().replace(/^[*_~`]+|[*_~`]+$/g, '').trim();
+  }
+
   function safeEditText(value, original) {
-    if (/(?:\*\*|__|[\x60#]|<\/?[a-z][^>]*>|\[[^\]]+\]\()/iu.test(value)) return false;
+    const clean = cleanMarkdownWrap(value);
+    if (/(?:\*\*|__|[\x60#]|<\/?[a-z][^>]*>|\[[^\]]+\]\()/iu.test(clean)) return false;
     // Chinese revisions may preserve source acronyms and names. New Latin
     // words are more likely to be a heading or commentary than a correction.
     if (!han.test(original)) return true;
     const words = text => (text.normalize('NFKC').toLowerCase().match(/[\p{Script=Latin}\p{Mark}]+/gu) || []);
     const allowed = new Set(words(original));
-    return words(value).every(word => allowed.has(word));
+    return words(clean).every(word => allowed.has(word));
   }
 
   function extractRewrite(reply, original) {
@@ -22,14 +28,32 @@
     const heading = lines.findIndex(line => rewriteHeading.test(line.trim()));
     if (heading < 0) return null;
     const firstLine = lines[heading].trim().match(rewriteHeading)[1];
-    const paragraphs = firstLine?.trim() ? [firstLine.trim()] : [];
+    const paragraphs = firstLine?.trim() ? [cleanMarkdownWrap(firstLine.trim())] : [];
     for (const raw of lines.slice(heading + 1)) {
       const line = raw.trim();
       if (explanationHeading.test(line) || rewriteHeading.test(line)) break;
-      if (line) paragraphs.push(line);
+      if (line) paragraphs.push(cleanMarkdownWrap(line));
     }
     const corrected = paragraphs.join('\n').trim();
     return han.test(corrected) && corrected.length <= 500 && safeEditText(corrected, original) ? corrected : null;
+  }
+
+  function tryParseJson(str) {
+    if (typeof str !== 'string') return null;
+    let clean = str.trim();
+    clean = clean.replace(/<(?:think|thought)>[\s\S]*?<\/(?:think|thought)>/gi, '').trim();
+    const fenced = clean.match(/```(?:json)?\s*([\s\S]*?)```/i);
+    if (fenced) clean = fenced[1].trim();
+    try { return JSON.parse(clean); } catch {}
+    const b0 = clean.indexOf('{');
+    const b1 = clean.lastIndexOf('}');
+    if (b0 >= 0 && b1 > b0) {
+      const slice = clean.slice(b0, b1 + 1);
+      try { return JSON.parse(slice); } catch {}
+      const withoutTrailingCommas = slice.replace(/,\s*([\]}])/g, '$1');
+      try { return JSON.parse(withoutTrailingCommas); } catch {}
+    }
+    return null;
   }
 
   function groupMovedText(edits, original) {
@@ -116,24 +140,30 @@
     let value = payload?.sentenceReview ?? payload?.answer ?? payload;
     for (let depth = 0; depth < 4; depth++) {
       if (typeof value !== 'string') {
-        if (value && (Array.isArray(value.suggestions) || typeof value.correctedText === 'string')) break;
+        if (value && (Array.isArray(value.suggestions) || Array.isArray(value.corrections) || Array.isArray(value.edits) || typeof value.correctedText === 'string' || typeof value.corrected_text === 'string')) break;
         value = value?.answer;
         continue;
       }
-      const clean = value.trim().replace(/^\x60{3}(?:json)?\s*([\s\S]*?)\s*\x60{3}$/i, '$1');
-      try { value = JSON.parse(clean); }
-      catch {
-        const corrected = extractRewrite(clean, text);
-        if (corrected === null) return null;
-        value = {correctedText: corrected};
-        break;
+      const parsed = tryParseJson(value);
+      if (parsed && typeof parsed === 'object') {
+        value = parsed;
+        if (Array.isArray(value.suggestions) || Array.isArray(value.corrections) || Array.isArray(value.edits) || typeof value.correctedText === 'string' || typeof value.corrected_text === 'string') {
+          break;
+        }
+        continue;
       }
+      const clean = value.replace(/<(?:think|thought)>[\s\S]*?<\/(?:think|thought)>/gi, '').trim();
+      const corrected = extractRewrite(clean, text);
+      if (corrected === null) return null;
+      value = {correctedText: corrected};
+      break;
     }
     if (!value || typeof value !== 'object') return null;
-    let suggestions = value.suggestions;
-    const derived = !Array.isArray(suggestions) && typeof value.correctedText === 'string';
+    let suggestions = value.suggestions ?? value.corrections ?? value.edits ?? value.changes;
+    const correctedCandidate = value.correctedText ?? value.corrected_text ?? value.revisedText ?? value.revised_text;
+    const derived = !Array.isArray(suggestions) && typeof correctedCandidate === 'string';
     if (derived) {
-      const corrected = value.correctedText.trim();
+      const corrected = cleanMarkdownWrap(correctedCandidate);
       if (corrected.length > 500 || !safeEditText(corrected, text)) return null;
       if (han.test(text) && !han.test(corrected)) return null;
       suggestions = diffEdits(text, corrected);
@@ -141,21 +171,34 @@
     if (!Array.isArray(suggestions)) return null;
     const accepted = [];
     for (const edit of suggestions.slice(0, 20)) {
-      if (!edit || !['fix', 'style'].includes(edit.kind) || typeof edit.original !== 'string' ||
-          typeof edit.replacement !== 'string' || edit.replacement.length > 700 ||
-          edit.original === edit.replacement || !safeEditText(edit.replacement, text) || typeof edit.reason !== 'string' || !edit.reason.trim()) continue;
-      let start;
-      if (Number.isInteger(edit.start) && Number.isInteger(edit.end) && edit.end === edit.start + edit.original.length &&
-          edit.start >= 0 && edit.end <= text.length && text.slice(edit.start, edit.end) === edit.original) start = edit.start;
-      else {
-        if (!edit.original) continue;
-        start = text.indexOf(edit.original);
-        if (start < 0 || text.indexOf(edit.original, start + 1) >= 0) continue;
+      if (!edit || typeof edit !== 'object') continue;
+      let kind = String(edit.kind || 'fix').toLowerCase();
+      if (['fix', 'style'].includes(kind)) {
+        // standard
+      } else if (['grammar', 'error', 'spelling', 'vocab', 'vocabulary', 'cần sửa', 'sai'].some(k => kind.includes(k))) {
+        kind = 'fix';
+      } else {
+        kind = 'style';
       }
-      const end = start + edit.original.length;
+      let original = edit.original ?? edit.from ?? edit.target ?? edit.before;
+      let replacement = edit.replacement ?? edit.to ?? edit.replace ?? edit.after ?? edit.corrected ?? '';
+      let reason = edit.reason ?? edit.explanation ?? edit.note ?? edit.message ?? 'Gợi ý chỉnh sửa từ AI.';
+      if (typeof original !== 'string' || typeof replacement !== 'string' || typeof reason !== 'string') continue;
+      original = original.replace(/^[“”"「『]+|[”"」』]+$/gu, '').trim();
+      replacement = cleanMarkdownWrap(replacement).replace(/^[“”"「『]+|[”"」』]+$/gu, '').trim();
+      if (replacement.length > 700 || original === replacement || !safeEditText(replacement, text) || !reason.trim()) continue;
+      let start;
+      if (Number.isInteger(edit.start) && Number.isInteger(edit.end) && edit.end === edit.start + original.length &&
+          edit.start >= 0 && edit.end <= text.length && text.slice(edit.start, edit.end) === original) start = edit.start;
+      else {
+        if (!original) continue;
+        start = text.indexOf(original);
+        if (start < 0 || text.indexOf(original, start + 1) >= 0) continue;
+      }
+      const end = start + original.length;
       if (accepted.some(other => start === other.start || start < other.end && end > other.start)) continue;
-      if (text.length - edit.original.length + edit.replacement.length > 500) continue;
-      accepted.push({kind: edit.kind, start, end, original: edit.original, replacement: edit.replacement, reason: edit.reason.trim().slice(0,350), ...(edit.fromRewrite === true ? {fromRewrite: true} : {})});
+      if (text.length - original.length + replacement.length > 500) continue;
+      accepted.push({kind, start, end, original, replacement, reason: reason.trim().slice(0, 350), ...(edit.fromRewrite === true ? {fromRewrite: true} : {})});
       if (accepted.length === 12) break;
     }
     if (suggestions.length && !accepted.length) return null;

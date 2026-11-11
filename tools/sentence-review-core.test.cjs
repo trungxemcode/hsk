@@ -65,3 +65,39 @@ test('a marked-up rewrite produces only Chinese edits and moves negation as one 
   assert.equal(normalize({answer:'Bản sửa không xác định: '+revised},text),null);
   assert.equal(normalize({answer:'**Bản sửa tự nhiên:** '+revised+'\nĐây là lời giải thích không có tiêu đề.'},text),null);
 });
+
+test('handles varied real-world LLM formats including fenced JSON with chatter, thinking tags and alternative headings',()=>{
+  const text='我昨天去过了北京。';
+  const expectedRevised='我昨天去了北京。';
+  
+  // 1. Fenced JSON with intro & outro conversational text
+  const fencedWithChatter = 'Dưới đây là kết quả kiểm tra:\n```json\n{\n  "summary": "AI phát hiện lỗi dùng từ.",\n  "suggestions": [\n    {"kind": "fix", "original": "去过了", "replacement": "去了", "reason": "Dùng 了."}\n  ]\n}\n```\nChúc bạn học tốt!';
+  const r1 = normalize(fencedWithChatter, text);
+  assert.ok(r1 && r1.suggestions.length === 1);
+  assert.equal(apply(text, r1.suggestions), expectedRevised);
+
+  // 2. Unfenced JSON inside text
+  const unfencedInText = 'JSON kết quả:\n{\n  "summary": "AI phát hiện lỗi.",\n  "suggestions": [\n    {"kind": "grammar", "original": "去过了", "replacement": "去了", "reason": "Dùng 了."}\n  ]\n}';
+  const r2 = normalize(unfencedInText, text);
+  assert.ok(r2 && r2.suggestions.length === 1);
+  assert.equal(r2.suggestions[0].kind, 'fix');
+  assert.equal(apply(text, r2.suggestions), expectedRevised);
+
+  // 3. Output with thinking tags
+  const withThinking = '<think>\nPhân tích ngữ pháp: 去过了 -> 去了\n</think>\n```json\n{\n  "summary": "AI phát hiện lỗi.",\n  "corrections": [\n    {"from": "去过了", "to": "去了", "explanation": "Dùng 了."}\n  ]\n}\n```';
+  const r3 = normalize(withThinking, text);
+  assert.ok(r3 && r3.suggestions.length === 1);
+  assert.equal(apply(text, r3.suggestions), expectedRevised);
+
+  // 4. Natural language with **Câu đúng:**
+  const naturalHeading = '**Câu đúng:**\n我昨天去了北京。\n\n**Giải thích:**\nDùng 了 cho hành động hoàn thành.';
+  const r4 = normalize(naturalHeading, text);
+  assert.ok(r4 && r4.suggestions.length === 1);
+  assert.equal(apply(text, r4.suggestions), expectedRevised);
+
+  // 5. Natural language with **Gợi ý sửa:**
+  const naturalSuggest = '**Gợi ý sửa:** 我昨天去了北京。\n\n**Lý do:**\nDùng 了.';
+  const r5 = normalize(naturalSuggest, text);
+  assert.ok(r5 && r5.suggestions.length === 1);
+  assert.equal(apply(text, r5.suggestions), expectedRevised);
+});
