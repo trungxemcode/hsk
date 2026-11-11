@@ -455,3 +455,11 @@ html[data-theme="dark"] #sentenceEditor textarea {
   margin-right: -2px;
   text-decoration: none;
 }
+
+#sentenceEditor .sentence-electra-trial {
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-btn);
+  padding: 10px 12px;
+}
+#sentenceEditor .sentence-electra-trial summary { cursor: pointer; }
+#sentenceEditor .sentence-electra-trial button { margin: 4px 4px 4px 0; }

@@ -490,6 +490,237 @@
   ]
 };
 
+
+  const polarityWord = /能否|是否|可否|能不能|会不会|可不可以/u;
+  const requirementPredicate = /^(?:也是|就是|是(?!否)|构成)(?:[\p{Script=Han}]{0,48})?(?:必然要求|必要条件|先决条件|重要前提|基本前提|根本要求|硬性要求|首要任务|当务之急|必由之路)$/u;
+  const nestedQuestion = /(?:研究|了解|判断|核实|确认|检查|评估|讨论|考虑|决定|调查|取决于|能说明|说明|表明|争论|咨询|弄清|证明|辨别|确定)/u;
+
+  function findRequirement(subject, following) {
+    if (requirementPredicate.test(following ?? '') && subject) return subject;
+    // A copula can be separated by a comma or included in the same clause.
+    for (const match of [...subject.matchAll(/(?:也是|就是|是(?!否)|构成)/gu)].reverse()) {
+      const prefix = subject.slice(0, match.index);
+      if (prefix && !/[不就也]$/u.test(prefix) && requirementPredicate.test(subject.slice(match.index))) {
+        return prefix;
+      }
+    }
+    return '';
+  }
+
+  function findPolarity(subject) {
+    const match = subject.match(polarityWord);
+    if (!match || match.index > 26 || /(?:与否|还是|或者|以及)/u.test(subject)) return null;
+    if (nestedQuestion.test(subject.slice(0, match.index))) return null;
+    if (match[0] === '能否' && subject[match.index + match[0].length] === '认') return null;
+    return subject.slice(match.index + match[0].length).length >= 2 ? match : null;
+  }
+
+  // Match the object head, including in a coordinated list. An attributive
+  // occurrence such as 潜力的渠道 is not the head of the object.
+  const objectHeads = [
+    {verb: /拓宽|拓展/gu, noun: /潜力|潜能/gu, alternatives: '挖掘、激发 hoặc 释放'},
+    {verb: /加快|加速|增强/gu, noun: /效率|效能/gu, alternatives: '提高 hoặc 提升'},
+    {verb: /缩短/gu, noun: /速度|速率/gu, alternatives: '降低 hoặc 减慢'},
+    {verb: /延长/gu, noun: /范围|覆盖面/gu, alternatives: '扩大 hoặc 拓宽'},
+    {verb: /拓宽|扩大/gu, noun: /时间|期限/gu, alternatives: '延长 hoặc 增加'}
+  ];
+  const objectBoundary = /^(?:$|以及|及其|及其他|并(?:且|未|不|将|使|让|扩大|提高|推动)|[、和与])/u;
+  const embeddedPredicate = /(?:负责|用于|用来|以便|为了|从而|进而|以此|并|来)?(?:产生|带来|挖掘|激发|开发|释放|发挥|提高|提升|改善|扩大|加快|减慢|降低|延长|增加|缩短)/u;
+
+  function findObjectMismatches(clause, add) {
+    for (const {verb, noun, alternatives} of objectHeads) {
+      for (const verbMatch of clause.content.matchAll(verb)) {
+        const tailStart = verbMatch.index + verbMatch[0].length;
+        const tail = clause.content.slice(tailStart);
+        for (const object of tail.matchAll(noun)) {
+          if (object.index > 56 || embeddedPredicate.test(tail.slice(0, object.index))) break;
+          if (!objectBoundary.test(tail.slice(object.index + object[0].length))) continue;
+          const start = clause.start + tailStart + object.index;
+          add(start, start + object[0].length, null, 'STRUCT_OBJECT_COLLOCATION',
+            '「' + verbMatch[0] + '」 không hợp với tân ngữ 「' + object[0] + '」 trong cách dùng này. Cân nhắc ' + alternatives + '. Nếu có nhiều tân ngữ, hãy dùng động từ phù hợp cho từng tân ngữ.');
+        }
+      }
+    }
+  }
+
+  // Examine whole constructions in a sentence. Keep edits anchored to the
+  // smallest part we can explain, and keep ambiguous readings as review cards.
+  function structuralErrors(sentence) {
+    const errors = [];
+    // Mask quotations without changing UTF-16 offsets or inventing clause boundaries.
+    const text = sentence.replace(/“[^”]*”|「[^」]*」|『[^』]*』|《[^》]*》|"[^"]*"/gu, value => ' '.repeat(value.length));
+    const clauses = [...text.matchAll(/[^，,；;。！？!?：:]+/gu)].flatMap(match => {
+      const content = match[0].trim();
+      return content ? [{content, start: match.index + match[0].indexOf(content), end: match.index + match[0].trimEnd().length}] : [];
+    });
+
+    function add(start, end, replacement, ruleId, reason, kind = 'style') {
+      const original = sentence.slice(start, end);
+      if (!original || original === replacement) return;
+      errors.push({
+        start, end, original, replacement: replacement ?? '',
+        ruleId, reason, kind, source: 'local', category: 'sentence_structure',
+        hskLevel: 6, reviewOnly: replacement == null
+      });
+    }
+
+    const separatedByComma = (left, right) => right && /^[，,]\s*$/u.test(text.slice(left.end, right.start));
+    for (let i = 0; i < clauses.length; i++) {
+      const current = clauses[i];
+      const next = clauses[i + 1];
+      const value = current.content;
+      const directlyFollows = separatedByComma(current, next);
+      const requirementSubject = findRequirement(value, directlyFollows ? next.content : '');
+      const polarity = findPolarity(requirementSubject);
+      if (polarity) {
+        const start = current.start + polarity.index;
+        add(start, start + polarity[0].length, null, 'STRUCT_REQUIREMENT_POLARITY',
+          '「' + polarity[0] + '」 nêu cả hai khả năng, trong khi vị ngữ sau gọi việc đó là một yêu cầu hoặc điều kiện. Nếu muốn nói việc cần làm, bỏ 「' + polarity[0] + '」. Nếu muốn giữ câu hỏi hai khả năng, hãy đổi cách viết vị ngữ.');
+      }
+
+      if (directlyFollows && /(?:不仅|不但|不只|不单|不光|不单单)(?!是|在于|意味着|说明|表明)/u.test(value)) {
+        const connector = next.content.match(/^(?:而且|并且|甚至|更|还|也)(?=[\p{Script=Han}])/u);
+        const following = separatedByComma(next, clauses[i + 2]) ? clauses[i + 2].content : '';
+        const secondSubject = connector ? findRequirement(next.content.slice(connector[0].length), following) : '';
+        if (secondSubject && (findPolarity(secondSubject) || /^(?:确保|保证|维持|提高|降低|实现|完成|保持|落实|推进|减少|解决|防止|加强|按时|按期|建立|控制)/u.test(secondSubject))) {
+          add(next.start, next.start + connector[0].length, null, 'STRUCT_INCREMENTAL_RELATION',
+            'Vế đầu kể tác dụng hoặc hành động, vế sau chuyển sang xác định một yêu cầu. Hãy cân nhắc tách thành hai câu và bỏ cặp từ nối tăng tiến.');
+        }
+      }
+
+      findObjectMismatches(current, add);
+
+      if (directlyFollows) {
+        // A paired connective should match the relation of the first clause.
+        // Stop at new clauses and leave explicitly nested conditions alone.
+        const openers = [...value.matchAll(/只有|只要|除非|如果/gu)];
+        const opener = openers.length === 1 && openers[0].index <= 10 ? openers[0][0] : '';
+        const closer = next.content.match(/^(就(?!算|是|连|此|近|地|餐|位|业)|便(?!利|宜|捷|民|于)|才(?!华|能是|智|干))(?=[^\s])/u);
+        if (opener && opener !== '如果' && closer) {
+          const left = opener;
+          const [, right] = closer;
+          if ((left === '只要') === (right === '才')) {
+            const rightPair = left === '只要' ? '只要…就…' : left + '…才…';
+            add(next.start, next.start + right.length, null, 'STRUCT_CONDITION',
+              'Hai vế dùng cặp điều kiện khác nhau. Nếu giữ ý của vế đầu, dùng 「' + rightPair + '」. Hãy xác nhận quan hệ bạn muốn diễn đạt.');
+          }
+        }
+
+        const intro = /^(?:通过|经过|由于|凭借|鉴于)[\p{Script=Han}]{2,}$/u.test(value);
+        const causative = next.content.match(/^(使得?|让|令)(?=[\p{Script=Han}]{2,})/u);
+        const followsSentenceIntro = clauses.slice(0, i).every(clause =>
+          /^(?:近年来|目前|过去|如今|日前|此前|随着|在[^，]{1,35}(?:下|中|后|时)$)/u.test(clause.content));
+        if (intro && causative && followsSentenceIntro && !/^(?:让步|让利|令牌|使者|使命|使用|使团|使馆|令人[^，]{1,12}的是|让我[^，]{1,12}的是)/u.test(next.content)) {
+          add(next.start, next.start + causative[0].length, null, 'STRUCT_MISSING_SUBJECT',
+            'Vế đầu là cụm dẫn nhập. Sau đó câu mở bằng động từ gây khiến nên hãy kiểm tra chủ ngữ. Có thể bổ sung chủ ngữ hoặc bỏ động từ gây khiến nếu vế sau tự đứng được.');
+        }
+
+        const twoSided = findPolarity(value);
+        const oneSided = next.content.match(/^(?:关键|重点|核心|根本)(?:就)?在于(?:必须|应该|应当|要|一定要)(?=[\p{Script=Han}])/u);
+        if (twoSided && oneSided && !/(?:以及|还是|或者|与否)/u.test(value)) {
+          add(next.start, next.start + oneSided[0].length, null, 'STRUCT_POLARITY',
+            'Vế đầu hỏi có hay không, còn vế sau nêu một việc phải làm. Nếu muốn giữ hai khả năng, có thể dùng 「取决于是否…」. Nếu muốn nêu yêu cầu, hãy viết lại vế đầu theo hướng khẳng định.');
+        }
+      }
+
+      const composition = value.match(/(?:包括|包含|涵盖)([^，。！？；：]{3,65}?)(等(?:几个|若干|多个)?(?:部分|方面|环节|内容|要素|项目|类别|成员)?)(?:所)?组成$/u);
+      if (composition && !/由[^，。！？；]{0,45}$/u.test(value.slice(0, composition.index))) {
+        const ending = composition[0].match(/(?:所)?组成$/u)[0];
+        add(current.end - ending.length, current.end, '', 'STRUCT_COMPOSITION',
+          '「包括…」 đã giới thiệu thành phần. Bỏ 「' + ending + '」 hoặc dùng trọn mẫu 「由…组成」.', 'fix');
+      }
+
+      const mixedCause = value.match(/(?:是由于|是因为)([\p{Script=Han}]{2,45})(所致|造成的|导致的)$/u);
+      if (mixedCause) {
+        add(current.end - mixedCause[2].length, current.end, '', 'STRUCT_CAUSE',
+          'Câu đang ghép 「是因为／是由于…」 với một đuôi chỉ nguyên nhân. Bỏ đuôi này để giữ mẫu đầu.', 'fix');
+      }
+
+      for (const match of value.matchAll(/(?:防止|以防|以免|避免|杜绝)([\p{Script=Han}]{1,80}?)(不再|不要|不会)(发生|出现|重演|重现|上演|复发|再现|扩大|恶化|蔓延)(?=$|的|了|后)/gu)) {
+        const [, object, negative, event] = match;
+        // In “防止供水不再正常运行”, cessation is the event to prevent.
+        // Require evidence of an adverse event before offering an edit.
+        if (!/(?:事故|冲突|错误|灾害|问题|悲剧|故障|风险|纠纷|违规|违法|违约|舞弊|造假|火灾|泄漏|泄露|断电|短缺|盗窃|污染|误操作|失误|暴力|欺诈|疫情)/u.test(object)) continue;
+        if (/(?:处置|监测|整改|防范|救治|预防|治理|化解|排查|调查|报告|检查|警报|预警|整治|通报|处理|演练|管控|措施|制度|机制|能力|渠道|流程)(?:工作|程序|行动|系统)?$/u.test(object)) continue;
+        const start = current.start + match.index + match[0].length - negative.length - event.length;
+        const eventRepeats = /^(?:重演|重现|复发|再现)$/u.test(event);
+        const replacement = negative === '不再' && !eventRepeats ? '再次' : '';
+        add(start, start + negative.length, replacement, 'STRUCT_PREVENTION',
+          'Nếu ý là ngăn sự việc xấu xảy ra, bỏ cụm phủ định để tránh đảo nghĩa.' +
+          (eventRepeats ? ' 「' + event + '」 đã mang ý lặp lại.' : ' Có thể dùng 「再次' + event + '」 khi nói về việc tái diễn.'));
+      }
+
+      const mixedFocus = value.match(/围绕(以)?([\p{Script=Han}]{2,40})(为(?:中心|核心|主题|主线))(?=$|开展|进行|推进|展开)/u);
+      if (mixedFocus) {
+        const start = current.start + mixedFocus.index;
+        const end = start + mixedFocus[0].length;
+        add(start, end, '围绕' + mixedFocus[2], 'STRUCT_FOCUS',
+          '「围绕…」 và 「以…为中心／主题」 là hai cách dựng câu. Giữ một mẫu để tránh chồng cấu trúc.', 'fix');
+      }
+
+      const duplicatedMajority = value.match(/(?:大多|多数|主要)(?:都是|是)?以([\p{Script=Han}]{2,32})为主$/u);
+      if (duplicatedMajority) {
+        const start = current.start + duplicatedMajority.index;
+        add(start, current.end, '以' + duplicatedMajority[1] + '为主', 'STRUCT_MAJORITY',
+          '「以…为主」 đã chỉ thành phần chiếm ưu thế. Có thể lược từ chỉ số đông ở đầu cụm.');
+      }
+
+      const mixedPassive = value.match(/(?:深受|受到|受到了)([\p{Script=Han}]{2,30}?)所(?=(?:欢迎|喜爱|支持|重视|青睐|认可|认同|称赞|关注|批评|赞扬)$)/u);
+      if (mixedPassive) {
+        const end = current.start + mixedPassive.index + mixedPassive[0].length;
+        add(end - 1, end, '', 'STRUCT_PASSIVE',
+          '「受到…」 và 「为…所…」 là hai cấu trúc bị động. Nếu giữ 「受到」, bỏ 「所」.', 'fix');
+      }
+
+      const reduction = value.match(/(?:降低|减少|下降|缩短|压缩)(?:了|近|约|将近|大约)?(?:[一二两三四五六七八九十百千]+|\d+(?:\.\d+)?)倍(?=$|以上|左右)/u);
+      if (reduction) {
+        const start = current.start + reduction.index;
+        add(start, start + reduction[0].length, null, 'STRUCT_REDUCTION',
+          'Cách nói “giảm X lần” có thể khiến người đọc hiểu sai. Hãy kiểm tra số gốc rồi ghi phần trăm đã giảm hoặc tỷ lệ còn lại.');
+      }
+
+      // Policy verbs take a noun object. A coordinated list of action phrases
+      // can be turned into that object with 等措施. Explicit objects are valid.
+      const policy = value.match(/(?:出台|颁布|制定)(?:了|过)?(.+)$/u);
+      if (policy) {
+        const actions = policy[1].split(/、|以及|和|并(?:且)?/u).map(action => action.trim());
+        const verb = /^(?:延长|缩短|扩大|增设|增开|增派|举办|开展|加强|减免|降低|提高|简化|设置|设立|增加|减少|暂停|恢复|优化|完善|调整|发放|开放)(?=[\p{Script=Han}]{2,})/u;
+        const explicitObject = /(?:办法|措施|方案|通知|细则|条例|规定|政策|制度|计划|标准|目录|意见|规则|法规|文件|指南|要求|公告|草案|决议|议案)$/u;
+        if (actions.length >= 2 && actions.every(action => verb.test(action)) && !explicitObject.test(policy[1])) {
+          const last = actions.at(-1);
+          add(current.end - last.length, current.end, last + '等措施', 'STRUCT_POLICY_OBJECT',
+            '「出台／颁布／制定」 thường cần danh từ làm tân ngữ. Thêm 「等措施」 để cả danh sách hành động trở thành tân ngữ.');
+        }
+      }
+
+      const beneficiary = value.match(/对于([\p{Script=Han}]{2,34}?)提供了(?=[\p{Script=Han}]{2,})/u);
+      if (beneficiary && /(?:参考|建议|帮助|支持|便利|保障|服务|信息|机会|条件|方案|工具|依据)(?:等)?$/u.test(value)
+          && !/^(?:是否|如何|为何|什么|为什么|谁|能否)/u.test(beneficiary[1])
+          && !/(?:问题|现象|困难|情况|变化|影响|行为|缺陷|故障|挑战)$/u.test(beneficiary[1])) {
+        const start = current.start + beneficiary.index;
+        add(start, start + 2, '为', 'STRUCT_BENEFICIARY',
+          'Nếu phần sau 「对于」 là người hoặc hoạt động được hỗ trợ, dùng mẫu 「为…提供…」.');
+      }
+
+      for (const match of value.matchAll(/([\p{Script=Han}]{2,24})(?:以及|和|与)(图书|车辆|水果|家具|乐器|电器)$/gu)) {
+        const groups = {
+          图书: /(?:小说|课本|名著|词典|字典|古籍|画册|绘本|读物)$/u,
+          车辆: /(?:汽车|公交车|货车|摩托车|出租车)$/u,
+          水果: /(?:苹果|橘子|香蕉|葡萄|梨子|西瓜)$/u,
+          家具: /(?:书柜|桌椅|沙发|衣柜|餐桌)$/u,
+          乐器: /(?:钢琴|古筝|吉他|小提琴|笛子)$/u,
+          电器: /(?:冰箱|电视机|洗衣机|空调|微波炉)$/u
+        };
+        const [full, specific, group] = match;
+        if (!groups[group].test(specific)) continue;
+        const end = current.start + match.index + full.length;
+        add(end - group.length, end, null, 'STRUCT_CATEGORY_OVERLAP',
+          'Mục cuối có thể bao gồm mục đứng trước. Nếu bạn định nói phần còn lại của nhóm, hãy thêm 「其他」 trước danh từ cuối.');
+      }
+    }
+    return errors;
+  }
+
   function clone(value){return JSON.parse(JSON.stringify(value));}
   function normalizePinyin(value=''){
     return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ü/g,'v').replace(/[^a-z]/gi,'').toLowerCase();
@@ -561,7 +792,7 @@
       this.symSpell.clear();const seen=new Set();for(const item of Array.isArray(vocabulary)?vocabulary:[]){const key=String(item?.han||item?.word||'');if(!key||seen.has(key))continue;seen.add(key);this.symSpell.addEntry(item);}
       const report=facts?.report||{};this.datasetVersion=[seen.size,report.checkedWords||'',report.targetedNotes||'',this.config.version].join(':');this.sentenceCache.clear();this.stats.words=seen.size;return this.datasetVersion;
     }
-    splitSentences(text){const rows=[],re=/[^.!?。！？\n]+[.!?。！？\n]*/gu;let match;while((match=re.exec(text))!==null)rows.push({text:match[0],offset:match.index});if(!rows.length&&text)rows.push({text,offset:0});return rows;}
+    splitSentences(text){const rows=[],re=/(?:(?<=\d)\.(?=\d)|[^.!?。！？\n])+(?:(?<!\d)\.|\.(?!\d)|[!?。！？\n])*/gu;let match;while((match=re.exec(text))!==null)rows.push({text:match[0],offset:match.index});if(!rows.length&&text)rows.push({text,offset:0});return rows;}
     _ruleErrors(sentence){const errors=[];for(const rule of this.rules){const re=new RegExp(rule.source,rule.regex.flags);let match;while((match=re.exec(sentence))!==null){const wrong=match[0],replacement=String(rule.replace??wrong).replace(/\$(\$|&|\d{1,2})/g,(_,key)=>key==='$'?'$':key==='&'?wrong:(match[Number(key)]??''));if(!wrong){if(!re.global)break;re.lastIndex++;continue;}if(replacement===wrong)continue;errors.push({kind:rule.kind||'fix',source:'local',ruleId:rule.id,category:rule.category,start:match.index,end:match.index+wrong.length,original:wrong,replacement,reason:rule.message,hskLevel:rule.hskLevel});if(!re.global)break;}}return errors;}
     _spellingErrors(sentence,existing){const errors=[],blocked=(start,end)=>existing.some(item=>start<item.end&&end>item.start);const latin=/[A-Za-z][A-Za-z'’-]{2,}/gu;let match;
       while((match=latin.exec(sentence))!==null){const result=this.symSpell.lookup(match[0]);if(result&&!blocked(match.index,match.index+match[0].length))errors.push({kind:'style',source:'local',category:'spelling',start:match.index,end:match.index+match[0].length,original:match[0],replacement:result.suggestion,reason:result.message,confidence:result.confidence});}
@@ -572,7 +803,15 @@
       }return errors;
     }
     analyzeSentence(sentence){const cached=this.sentenceCache.get(sentence);if(cached){this.cacheHits++;this.stats.cacheHits++;return cached.map(item=>({...item}));}
-      const grammar=this._ruleErrors(sentence),spelling=this._spellingErrors(sentence,grammar),all=[...grammar,...spelling].sort((a,b)=>a.start-b.start||b.end-b.start);const accepted=[];for(const item of all){if(!accepted.some(other=>item.start<other.end&&item.end>other.start))accepted.push(item);}if(this.sentenceCache.size>=200)this.sentenceCache.delete(this.sentenceCache.keys().next().value);this.sentenceCache.set(sentence,accepted);return accepted.map(item=>({...item}));}
+      const grammar=[...this._ruleErrors(sentence),...structuralErrors(sentence)];
+      const spelling=this._spellingErrors(sentence,grammar);
+      const ranked=[...grammar,...spelling].sort((a,b)=>
+        Number(Boolean(a.reviewOnly))-Number(Boolean(b.reviewOnly))||a.start-b.start||b.end-b.start);
+      const accepted=[];
+      for(const item of ranked){
+        if(!accepted.some(other=>item.start<other.end&&item.end>other.start))accepted.push(item);
+      }
+      accepted.sort((a,b)=>a.start-b.start);if(this.sentenceCache.size>=200)this.sentenceCache.delete(this.sentenceCache.keys().next().value);this.sentenceCache.set(sentence,accepted);return accepted.map(item=>({...item}));}
     checkText(text){this.stats.checks++;if(!text)return [];const errors=[];for(const sentence of this.splitSentences(String(text)))for(const item of this.analyzeSentence(sentence.text))errors.push({...item,start:item.start+sentence.offset,end:item.end+sentence.offset});return errors;}
     metrics(){return {...this.stats,cacheSize:this.sentenceCache.size,datasetVersion:this.datasetVersion};}
   }

@@ -348,13 +348,15 @@ Tra cứu và So sánh có `word-recovery` trong open-dictionary.js. Dùng endpo
 
 Công cụ mở trình biên tập độc lập với bảng gợi ý. Khi gõ, `sentence-checker-core.js` chạy quy tắc cục bộ sau 280 ms, tạm dừng trong IME; không gọi AI. Catalogue JSON và fallback đồng nhất, cache tối đa 200 câu. Quy tắc phụ thuộc ngữ cảnh và từ gần giống chỉ là gợi ý diễn đạt, không khẳng định lỗi. Khi người học bấm Kiểm tra hoặc Kiểm tra sâu bằng AI, ứng dụng gửi tối đa 500 ký tự qua chế độ `sentence-editor` của Worker với đăng nhập/quota hiện có. Sửa bản nháp, đổi tài khoản hoặc đóng trang hủy yêu cầu; đối chiếu snapshot và đoạn gốc trước khi nhận/áp dụng kết quả. AI ưu tiên khi trùng vùng cục bộ; áp dụng bỏ gợi ý chồng lấn, dịch vị trí các gợi ý sau đó. Có hoàn tác tối đa 20 lần trong phiên; bỏ qua giữ hiệu lực khi kiểm tra lại bản nháp không đổi. Không lưu thêm dữ liệu người học.
 
-Kiểm tra sâu nhận nhận xét có cấu trúc từ Worker và tương thích phản hồi dạng văn bản từ Worker cũ. Chỉ bật Áp dụng khi gợi ý AI khớp đoạn nguyên văn. Bộ quy tắc cục bộ cũng xét một số cấu trúc nhiều vế, vị trí cụm chỉ người/thời lượng và kết hợp từ HSK nâng cao.
+Kiểm tra sâu nhận nhận xét có cấu trúc từ Worker và tương thích phản hồi dạng văn bản từ Worker cũ. Chỉ bật Áp dụng khi gợi ý AI khớp đoạn nguyên văn. Bộ kiểm tra cục bộ xét cấu trúc nhiều vế, quan hệ giữa hai vế, phần còn thiếu, cách kết hợp từ và lỗi lặp ý. Bộ kiểm tra tách vị trí của liên từ và từ chỉ hai khả năng để hiện các gợi ý riêng trong cùng một câu. Các trường hợp phụ thuộc vào ý người viết có thẻ cần xem lại.
 
 ### Kiểm tra câu tại máy bằng ONNX
 
 Tại **Công cụ → Sửa câu tiếng Trung**, chế độ thử nghiệm ONNX bật theo lựa chọn của người học. Worker tải gói khoảng 3 MB một lần và lưu bằng Cache Storage riêng. Gói gồm WASM, mã runtime và model INT8. Không gửi bản nháp ra ngoài thiết bị. Dùng ngoại tuyến sau khi app đã được tải để dùng offline và gói model còn trong cache.
 
 Bản thử nghiệm dùng bộ tạo phương án HSK và bộ xếp hạng ngữ cảnh huấn luyện từ ví dụ tổng hợp. Chỉ xử lý các nhóm lỗi đã định nghĩa. Bộ quy tắc cơ bản tiếp tục hoạt động khi ONNX tắt hoặc không nạp được. Worker chạy sau 1,2 giây dừng gõ, bỏ kết quả cũ theo revision và dừng khi rời trang hoặc đưa app vào nền. Công thức huấn luyện và nguồn runtime có trong `vendor/sentence-onnx/SOURCES.md`.
+
+Mục **Thử model 103 MB** nạp gói ELECTRA INT8 từ file do người dùng chọn. Model chạy khi chọn gói hoặc bấm Kiểm tra bài này và đánh dấu vị trí nghi vấn. Worker dùng chung runtime với Lite và kiểm tra SHA-256 trước khi mở gói. Đổi tab vẫn giữ file đã chọn trong phiên. Khi rời màn hoặc đưa app vào nền lâu, Worker có thể được giải phóng và mở lại từ file đó. Model lớn không nằm trong bộ tải PWA.
 
 ### Thẻ chỉnh sửa AI
 

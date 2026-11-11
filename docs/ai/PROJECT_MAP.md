@@ -225,8 +225,10 @@ Repeated main navigation: studio.js repeatedDestination applies only header/side
 
 - Profile/Account split: `HSKStudio.navigate('profile')` opens learning metrics/history; `navigate('account')` opens auth/sync/backup/settings. Separate sidebar and drawer entries; avatar opens Profile. Original account panel IDs, auth handlers and storage remain stable; no in-page two-option tab.
 
-Sentence editor: `src/modules/translation/sentence-editor.js` owns local debounce/IME, manual AI snapshot cancellation, overlap resolution and undo. `sentence-checker-core.js` + `hsk-grammar-rules.json` keep fallback/catalogue parity; contextual/spelling guesses are style suggestions. Tests: `node --test tools/sentence-checker.test.cjs`, `tools/check-sentence-checker.cjs` and sentence flow in feature runtime. No automatic AI requests.
+Sentence editor: `src/modules/translation/sentence-editor.js` owns local debounce/IME, manual AI snapshot cancellation, overlap resolution and undo. `sentence-checker-core.js` + `hsk-grammar-rules.json` keep fallback/catalogue parity. A clause-level pass covers compound structures; cases with ambiguous intent are review-only suggestions. Tests: `node --test tools/sentence-checker.test.cjs`, `tools/check-sentence-checker.cjs` and sentence flow in feature runtime. No automatic AI requests.
 
 Sentence ONNX Lite adds an opt-in Worker through `sentence-onnx-controller.js`. The candidate generator and contextual features are shared with the training tool through `sentence-onnx-core.js`. Runtime and INT8 model assets load on demand from `vendor/sentence-onnx/` and use a separate verified Cache Storage package. Scope: sentence editor only.
+
+The same route also has an independent manual ELECTRA trial. `sentence-electra-controller.js` owns the Worker lifecycle and `sentence-electra-core.js` verifies the selected package, tokenizes text, and converts logits to review-only source ranges. See `vendor/sentence-onnx/ELECTRA.md` for model provenance and export.
 
 Sentence review cards: shared `sentence-review-core.js` normalizes provider envelopes or explicitly labelled corrected paragraphs to anchored edits. Used by frontend and Worker bundle. UTF-16 insertion/deletion and multiple edits tested in `tools/sentence-review-core.test.cjs`.

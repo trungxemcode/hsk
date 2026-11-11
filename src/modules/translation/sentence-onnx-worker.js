@@ -13,6 +13,8 @@ const packageFiles = {
 };
 
 let sessionPromise;
+let detectorSession;
+let detectorPack;
 let busy = false;
 
 async function loadPackage() {
@@ -34,7 +36,7 @@ async function loadPackage() {
   return files;
 }
 
-async function createSession() {
+async function createSession(file) {
   try {
     const files = await loadPackage();
     const script = URL.createObjectURL(files['ort.wasm.min.js']);
@@ -46,6 +48,13 @@ async function createSession() {
       const binary = files['ort-wasm-simd-threaded.wasm.gz'].stream()
         .pipeThrough(new DecompressionStream('gzip'));
       ort.env.wasm.wasmBinary = await new Response(binary).arrayBuffer();
+      if (file) {
+        importScripts('./sentence-electra-core.js');
+        const {graph,...pack} = await self.HSKSentenceElectra.openPackage(file);
+        detectorSession = await ort.InferenceSession.create(graph, {executionProviders: ['wasm']});
+        detectorPack = pack;
+        return detectorSession;
+      }
       const model = await files['grammar-lite-v1.onnx'].arrayBuffer();
       return await ort.InferenceSession.create(model, {executionProviders: ['wasm']});
     } finally {
@@ -53,15 +62,35 @@ async function createSession() {
       URL.revokeObjectURL(module);
     }
   } catch (error) {
-    await self.caches?.delete(packageCache).catch(() => {});
+    if (!file) await self.caches?.delete(packageCache).catch(() => {});
     throw error;
   }
 }
 
 self.onmessage = async ({data}) => {
-  if (busy || !data || !['load', 'check'].includes(data.type)) return;
+  if (busy || !data || !['load', 'check', 'load-detector', 'detect'].includes(data.type)) return;
   busy = true;
   try {
+    if (data.type === 'load-detector') {
+      await createSession(data.file);
+      self.postMessage({type:'detector-ready'});
+      return;
+    }
+    if (data.type === 'detect') {
+      if (!detectorSession) throw Error('Model chưa được nạp.');
+      const start=performance.now();
+      const suggestions=await self.HSKSentenceElectra.detect(String(data.text).slice(0,500),detectorPack,async (input,tokens,width)=>{
+        const embeddings=new ort.Tensor('float32',input,[1,tokens,width]);
+        const attention_mask=new ort.Tensor('int64',new BigInt64Array(tokens).fill(1n),[1,tokens]);
+        try {
+          const result=await detectorSession.run({embeddings,attention_mask});
+          try { return result.logits.data.slice(); }
+          finally { result.logits.dispose(); }
+        } finally { embeddings.dispose(); attention_mask.dispose(); }
+      });
+      self.postMessage({type:'detector-result',revision:data.revision,suggestions,elapsed:Math.round(performance.now()-start)});
+      return;
+    }
     const session = await (sessionPromise ??= createSession());
     if (data.type === 'load') {
       self.postMessage({type: 'ready'});
@@ -82,8 +111,8 @@ self.onmessage = async ({data}) => {
       }
     }
     self.postMessage({type: 'result', revision: data.revision, suggestions});
-  } catch {
-    self.postMessage({type: 'error'});
+  } catch (error) {
+    self.postMessage({type: 'error', message: String(error?.message || '').slice(0,180)});
   } finally {
     busy = false;
   }

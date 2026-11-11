@@ -195,6 +195,15 @@
             <button type="submit" class="sentence-deep-check sentence-check-btn">Kiểm tra sâu bằng AI</button>
             <button type="button" class="sentence-check-btn sentence-onnx-toggle" aria-pressed="false">Bật kiểm tra tại máy</button>
             <p class="sentence-help sentence-onnx-status" role="status">Thử nghiệm · tải khoảng 3 MB lần đầu để kiểm tra theo ngữ cảnh.</p>
+            <details class="sentence-electra-trial">
+              <summary>Thử model 103 MB</summary>
+              <p class="sentence-help">Chọn gói từ Tệp. Sau khi đổi bài, bấm Kiểm tra bài này để cập nhật các vị trí nghi vấn.</p>
+              <input class="sentence-electra-file" type="file" hidden>
+              <button class="sentence-electra-pick" type="button">Chọn gói model</button>
+              <button class="sentence-electra-run" type="button" hidden>Kiểm tra bài này</button>
+              <button class="sentence-electra-stop" type="button" hidden>Dừng model</button>
+              <p class="sentence-help sentence-electra-status" role="status"></p>
+            </details>
             <div class="sentence-suggestions"></div>
           </div>
         </aside>
@@ -450,7 +459,7 @@
 
   
 <aside id="updateNotice" class="update-notice" aria-label="Thông báo cập nhật" hidden><strong>Có phiên bản HSK mới</strong><p id="updateNoticeText" role="status"></p><div class="update-notice-actions"><button type="button" id="updateNoticeApply" disabled>Đang tải…</button><button type="button" id="updateNoticeLater">Để sau</button></div></aside>
-<link rel="stylesheet" href="./open-dictionary.css"><link rel="stylesheet" href="./ai-qa.css"><link rel="stylesheet" href="./sentence-editor.css"><script src="./src/modules/translation/sentence-checker-core.js" defer></script><script src="./src/modules/translation/sentence-onnx-controller.js" defer></script><script src="./src/modules/translation/sentence-review-core.js" defer></script><script src="./src/modules/translation/sentence-editor.js" defer></script><script src="./loader.js?v=push-2" defer=""></script>
+<link rel="stylesheet" href="./open-dictionary.css"><link rel="stylesheet" href="./ai-qa.css"><link rel="stylesheet" href="./sentence-editor.css"><script src="./src/modules/translation/sentence-checker-core.js" defer></script><script src="./src/modules/translation/sentence-onnx-controller.js" defer></script><script src="./src/modules/translation/sentence-review-core.js" defer></script><script src="./src/modules/translation/sentence-electra-controller.js" defer></script><script src="./src/modules/translation/sentence-editor.js" defer></script><script src="./loader.js?v=push-2" defer=""></script>
 <script src="./offline.js?v=offline-2" defer=""></script>
 <script src="./src/modules/shell/mobile-layout.js?v=mobile-3" defer=""></script>
 <button id="lessonChatButton" class="lesson-chat-button" type="button" aria-label="Hỏi AI về bài học" title="Hỏi AI về bài học" aria-controls="lessonChatPanel" aria-expanded="false" hidden=""><span aria-hidden="true">💬</span></button>
