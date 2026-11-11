@@ -152,6 +152,30 @@
   border-color: var(--accent);
   background: var(--accent-light);
 }
+#sentenceEditor .sentence-ai-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+}
+
+#sentenceEditor .sentence-ai-actions label {
+  font-size: .82rem;
+  color: var(--muted);
+}
+
+#sentenceEditor .sentence-ai-actions select {
+  max-width: 100%;
+  min-height: 38px;
+  padding: 4px 8px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-btn);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+}
+
 #sentenceEditor .sentence-check-btn {
   display: inline-flex;
   align-items: center;
