@@ -1910,10 +1910,15 @@ export function normalizeMuseTutorReply(rawText, questionText = '') {
   };
 }
 
-function buildMuseFlattenedPrompt(requestBody, model) {
+export function buildMuseFlattenedPrompt(requestBody, model, sentenceReview = false) {
   const contents = Array.isArray(requestBody?.contents) ? requestBody.contents : [];
   const lastUser = [...contents].reverse().find(c => c?.role === 'user');
   const userQuestion = (lastUser?.parts || []).map(p => p?.text || '').join('\n').trim();
+
+  if (sentenceReview) {
+    const instruction = (requestBody?.systemInstruction?.parts || []).map(part => part.text).join('\n');
+    return instruction + '\n\nVăn bản cần sửa (dữ liệu JSON):\n' + JSON.stringify(userQuestion);
+  }
 
   // Chỉ lấy tối đa 2 lượt hội thoại gần nhất để giữ ngữ cảnh mà không làm đầy khung chat
   const historyTurns = contents.slice(0, -1).slice(-2).map(msg => {
@@ -1980,6 +1985,10 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
   const lastUser = [...contents].reverse().find(c => c?.role === 'user');
   const questionText = (lastUser?.parts || []).map(p => p?.text || '').join('\n').slice(0, 160);
 
+  const wrapReply = text => Response.json({ candidates: [{ content: { parts: [{
+    text: options.sentenceReview ? text : JSON.stringify(normalizeMuseTutorReply(text, questionText))
+  }] } }] });
+
   // 1. Direct Bearer token call to api.meta.ai (or when auto falls back to Bearer)
   const tryBearerCall = async (token) => {
     const system = (requestBody?.systemInstruction?.parts || []).map(p => p?.text || '').join('\n');
@@ -2006,8 +2015,7 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
     const payload = await response.json().catch(() => null);
     const rawReply = payload?.choices?.[0]?.message?.content;
     if (typeof rawReply !== 'string' || !rawReply.trim()) return new Response(null, { status: 502 });
-    const normalized = normalizeMuseTutorReply(rawReply, questionText);
-    return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(normalized) }] } }] });
+    return wrapReply(rawReply);
   };
 
   if (cred.kind === 'bearer') {
@@ -2018,7 +2026,7 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
   try {
     const bootstrap = () => bootstrapMuseHatchSession(cred.cookieHeader, { fetchFn, signal, now: options.now, consume: true });
     const session = cred.kind === 'hatch-session' ? cred.session : await bootstrap();
-    const prompt = buildMuseFlattenedPrompt(requestBody, model);
+    const prompt = buildMuseFlattenedPrompt(requestBody, model, options.sentenceReview);
     const chat = current => runMuseNoiseChat(current, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: 85000 });
     let replyText;
     try {
@@ -2030,8 +2038,7 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
       replyText = await chat(await bootstrap());
     }
     if (!replyText) return new Response(JSON.stringify({ error: 'Muse AI không trả về nội dung.' }), { status: 502 });
-    const normalized = normalizeMuseTutorReply(replyText, questionText);
-    return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(normalized) }] } }] });
+    return wrapReply(replyText);
   } catch (err) {
     signal?.throwIfAborted();
     // If credential was 'auto' (could be an api.meta.ai Bearer token without prefix), try Bearer endpoint before failing
@@ -4312,7 +4319,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(typeof body.question!=='string'||!body.question.trim()||body.question.length>500||!t||typeof t.vietnamese!=='string'||!t.vietnamese.trim()||t.vietnamese.length>4000||typeof t.chinese!=='string'||!t.chinese.trim()||t.chinese.length>2000||typeof t.pinyin!=='string'||t.pinyin.length>2000||typeof t.explanation!=='string'||t.explanation.length>2000||!Array.isArray(h)||h.length>8||!h.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.text==='string'&&m.text.length<=1000))return reply({error:'Câu hỏi hoặc ngữ cảnh không hợp lệ.'},400);
   }else if(typeof body.text!=='string'||!body.text.trim()||body.text.length>500)return reply({error:'Nhập câu tối đa 500 ký tự.'},400);
 
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isTranscript?140000:isOcr?110000:isReading?85000:isLessonAsk&&body.lesson?.content?.mode==='ai-qa'?100000:isAsk?45000:60000);
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isTranscript?140000:isOcr?110000:isReading?85000:isLessonAsk&&['ai-qa','sentence-editor'].includes(body.lesson?.content?.mode)?100000:isAsk?45000:60000);
   const abortRequest=()=>controller.abort();if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',abortRequest,{once:true});
   try{
    const auth=await fetchFn('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(env.FIREBASE_API_KEY),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token}),signal:controller.signal});
@@ -4536,7 +4543,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     const usePersonalCookie=usePersonalAi&&personalAi.provider==='chatgpt-cookie';
     if(usePersonalAi&&!usePersonalCookie){
      headers['X-HSK-AI-Provider']=personalAi.provider;
-     try{const activePersonalModel=requestedAiModel&&(personalAi.provider!=='fosta'||/^(?:gpt-6-luna|gpt-6-astra|gpt-6\.1-sol)(?::(?:low|medium|high|xhigh))?$/i.test(requestedAiModel))?requestedAiModel:typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS[personalAi.provider]?.[body.thinking]?QA_PROVIDER_TIER_MODELS[personalAi.provider][body.thinking]:personalAi.model;reviewModel=activePersonalModel;response=await personalAiGenerate({...personalAi,model:activePersonalModel},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});}
+     try{const activePersonalModel=requestedAiModel&&(personalAi.provider!=='fosta'||/^(?:gpt-6-luna|gpt-6-astra|gpt-6\.1-sol)(?::(?:low|medium|high|xhigh))?$/i.test(requestedAiModel))?requestedAiModel:typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS[personalAi.provider]?.[body.thinking]?QA_PROVIDER_TIER_MODELS[personalAi.provider][body.thinking]:personalAi.model;reviewModel=activePersonalModel;response=await personalAiGenerate({...personalAi,model:activePersonalModel},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now,sentenceReview:isSentenceEditor});}
      catch(error){
       const timeout=controller.signal.aborted||error.name==='AbortError';
       console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});

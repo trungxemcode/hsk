@@ -928,10 +928,15 @@ export function normalizeMuseTutorReply(rawText, questionText = '') {
   };
 }
 
-function buildMuseFlattenedPrompt(requestBody, model) {
+export function buildMuseFlattenedPrompt(requestBody, model, sentenceReview = false) {
   const contents = Array.isArray(requestBody?.contents) ? requestBody.contents : [];
   const lastUser = [...contents].reverse().find(c => c?.role === 'user');
   const userQuestion = (lastUser?.parts || []).map(p => p?.text || '').join('\n').trim();
+
+  if (sentenceReview) {
+    const instruction = (requestBody?.systemInstruction?.parts || []).map(part => part.text).join('\n');
+    return instruction + '\n\nVăn bản cần sửa (dữ liệu JSON):\n' + JSON.stringify(userQuestion);
+  }
 
   // Chỉ lấy tối đa 2 lượt hội thoại gần nhất để giữ ngữ cảnh mà không làm đầy khung chat
   const historyTurns = contents.slice(0, -1).slice(-2).map(msg => {
@@ -998,6 +1003,10 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
   const lastUser = [...contents].reverse().find(c => c?.role === 'user');
   const questionText = (lastUser?.parts || []).map(p => p?.text || '').join('\n').slice(0, 160);
 
+  const wrapReply = text => Response.json({ candidates: [{ content: { parts: [{
+    text: options.sentenceReview ? text : JSON.stringify(normalizeMuseTutorReply(text, questionText))
+  }] } }] });
+
   // 1. Direct Bearer token call to api.meta.ai (or when auto falls back to Bearer)
   const tryBearerCall = async (token) => {
     const system = (requestBody?.systemInstruction?.parts || []).map(p => p?.text || '').join('\n');
@@ -1024,8 +1033,7 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
     const payload = await response.json().catch(() => null);
     const rawReply = payload?.choices?.[0]?.message?.content;
     if (typeof rawReply !== 'string' || !rawReply.trim()) return new Response(null, { status: 502 });
-    const normalized = normalizeMuseTutorReply(rawReply, questionText);
-    return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(normalized) }] } }] });
+    return wrapReply(rawReply);
   };
 
   if (cred.kind === 'bearer') {
@@ -1036,7 +1044,7 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
   try {
     const bootstrap = () => bootstrapMuseHatchSession(cred.cookieHeader, { fetchFn, signal, now: options.now, consume: true });
     const session = cred.kind === 'hatch-session' ? cred.session : await bootstrap();
-    const prompt = buildMuseFlattenedPrompt(requestBody, model);
+    const prompt = buildMuseFlattenedPrompt(requestBody, model, options.sentenceReview);
     const chat = current => runMuseNoiseChat(current, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: 85000 });
     let replyText;
     try {
@@ -1048,8 +1056,7 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
       replyText = await chat(await bootstrap());
     }
     if (!replyText) return new Response(JSON.stringify({ error: 'Muse AI không trả về nội dung.' }), { status: 502 });
-    const normalized = normalizeMuseTutorReply(replyText, questionText);
-    return Response.json({ candidates: [{ content: { parts: [{ text: JSON.stringify(normalized) }] } }] });
+    return wrapReply(replyText);
   } catch (err) {
     signal?.throwIfAborted();
     // If credential was 'auto' (could be an api.meta.ai Bearer token without prefix), try Bearer endpoint before failing

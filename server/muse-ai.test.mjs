@@ -165,3 +165,21 @@ test('WebSocket rejection reports the HTTP status without the session URL or tok
   assert.deepEqual(await res.json(),{error:'Muse AI từ chối mở WebSocket (HTTP 403).'});
   assert.equal(requests,1);
 });
+
+test('Muse sentence review sends editor instructions and preserves the structured response', async () => {
+  const {buildMuseFlattenedPrompt} = await import('./muse-ai.mjs');
+  const request = {
+    systemInstruction: {parts: [{text: 'Trả JSON có suggestions, kind, original, replacement, reason.'}]},
+    contents: [{role: 'user', parts: [{text: '他昨天去过了北京。'}]}]
+  };
+  const prompt = buildMuseFlattenedPrompt(request, 'muse-spark-thinking', true);
+  assert.match(prompt, /suggestions, kind, original, replacement, reason/);
+  assert.match(prompt, /他昨天去过了北京/);
+  assert.doesNotMatch(prompt, /Gia sư|ví dụ câu mẫu/);
+  const edits = {suggestions: [{kind: 'fix', original: '去过了北京', replacement: '去了北京', reason: 'Dùng 了 cho sự kiện cụ thể.'}]};
+  const response = await museAiGenerate({apiKey: 'Bearer sk-meta-123'}, request, async (_url, init) => {
+    assert.equal(JSON.parse(init.body).messages[0].content, request.systemInstruction.parts[0].text);
+    return Response.json({choices: [{message: {content: JSON.stringify(edits)}}]});
+  }, undefined, {sentenceReview: true});
+  assert.deepEqual(JSON.parse((await response.json()).candidates[0].content.parts[0].text), edits);
+});
