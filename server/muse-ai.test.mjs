@@ -67,7 +67,7 @@ test('expired muse.ai cookie returns 401 without leaking the token',async()=>{
 });
 
 // Simulated Hatch responder: real Noise XX (X25519/AES-GCM/SHA-256) on the responder side.
-async function makeHatchServer(replyText){
+async function makeHatchServer(replyText, pauseMs = 0){
   const enc=new TextEncoder();
   const sha=async d=>new Uint8Array(await crypto.subtle.digest('SHA-256',d));
   const hmac=async(k,d)=>new Uint8Array(await crypto.subtle.sign('HMAC',await crypto.subtle.importKey('raw',k,{name:'HMAC',hash:'SHA-256'},false,['sign']),d));
@@ -107,7 +107,13 @@ async function makeHatchServer(replyText){
       if(path==='/chat/stream'){
         await sendFrame(sid,bf(3,cat(vf(1,200),bf(3,'{"message_id":"m1"}'),vf(4,1))));
         const now=Date.now()+5;
-        for(const part of [replyText.slice(0,10),replyText.slice(10)])await sendFrame(2,bf(4,bf(1,JSON.stringify({event:'delta.text_append',payload:{text:part},ts_ms:now}))));
+        for (const [index, part] of [replyText.slice(0,10), replyText.slice(10)].entries()) {
+          if (index && pauseMs) {
+            await new Promise(resolve => setTimeout(resolve, pauseMs));
+            await sendFrame(2,bf(4,bf(1,JSON.stringify({event:'message.assistant',payload:{text:'Đang soạn'},ts_ms:now}))));
+          }
+          await sendFrame(2,bf(4,bf(1,JSON.stringify({event:'delta.text_append',payload:{text:part},ts_ms:now}))));
+        }
         await sendFrame(2,bf(4,bf(1,JSON.stringify({event:'delta.message_done',payload:{},ts_ms:now}))));
         return;
       }
@@ -182,4 +188,14 @@ test('Muse sentence review sends editor instructions and preserves the structure
     return Response.json({choices: [{message: {content: JSON.stringify(edits)}}]});
   }, undefined, {sentenceReview: true});
   assert.deepEqual(JSON.parse((await response.json()).candidates[0].content.parts[0].text), edits);
+});
+
+
+test('Muse sentence review waits past a partial JSON pause and an assistant snapshot', async () => {
+  const reply = '{"summary":"Đã kiểm tra","suggestions":[]}';
+  const server = await makeHatchServer(reply, 2400);
+  const result = await runMuseNoiseChat({ws_url:'wss://hatch.metaaivm.com/v1/noise?x=1'}, 'Sửa câu', {
+    wsFactory: async () => server, timeoutMs: 8000, waitForFinal: true
+  });
+  assert.equal(result, reply);
 });

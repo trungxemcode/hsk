@@ -1551,7 +1551,7 @@ async function openMuseWebSocket(wsUrl, { fetchFn = fetch, wsFactory, signal } =
   });
 }
 
-export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 85000 } = {}) {
+export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsFactory, signal, timeoutMs = 85000, waitForFinal = false } = {}) {
   const ws = await openMuseWebSocket(session.ws_url, { fetchFn, wsFactory, signal });
   const queue = [];
   let closed = false;
@@ -1711,7 +1711,8 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
           const b = streamBodies.get(sid) || { status: 200, parts: [] };
           streamBodies.delete(sid);
           const combined = museConcat(...b.parts);
-          const parsed = combined.byteLength ? JSON.parse(new TextDecoder().decode(combined)) : {};
+          let parsed = {};
+          try { if (combined.byteLength) parsed = JSON.parse(new TextDecoder().decode(combined)); } catch {}
           return { kind: 'complete', streamId: sid, status: b.status, body: parsed, event: eventObj };
         }
         if (eventObj) {
@@ -1762,11 +1763,12 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
     const deadline = Date.now() + timeoutMs;
 
     let idleAfterTextCount = 0;
+    let finished = false;
     while (Date.now() < deadline) {
       const ev = await recvFrameEvent(1000);
       if (ev === 'closed') break;
       if (!ev) {
-        if (textParts.length > 0) {
+        if (!waitForFinal && textParts.length > 0) {
           idleAfterTextCount++;
           if (idleAfterTextCount >= 2) break;
         }
@@ -1774,17 +1776,28 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
       }
       idleAfterTextCount = 0;
 
-      if (ev.kind === 'complete' && ev.event) {
+      if (!waitForFinal && ev.kind === 'complete' && ev.event) {
         const obj = ev.event;
         const payload = obj.payload || obj;
         const delta = payload.text ?? payload.delta ?? payload.content ?? (typeof payload.string === 'string' ? payload.string : '');
         if (typeof delta === 'string' && delta) textParts.push(delta);
       }
 
-      if (ev.kind === 'event') {
-        const obj = ev.obj || {};
+      if (ev.kind === 'event' || waitForFinal && ev.kind === 'complete' && ev.event) {
+        const obj = ev.obj || ev.event || {};
         const eventName = String(obj.event || '');
         const payload = obj.payload || obj;
+        if (waitForFinal && (eventName === 'delta.message_done' || eventName === 'chat.done' || payload.done === true)) {
+          const messages = payload.transcript?.messages || payload.messages || [];
+          const finalText = typeof payload.text === 'string' ? payload.text :
+            messages.filter(message => message.role === 'assistant').map(message =>
+              typeof message.text === 'string' ? message.text :
+                Array.isArray(message.content) ? message.content.map(part => part.text || '').join('') :
+                  typeof message.content === 'string' ? message.content : '').join('');
+          if (finalText.trim()) textParts.splice(0, textParts.length, finalText);
+          finished = true;
+          break;
+        }
 
         if (
           eventName === 'delta.text_append' ||
@@ -1796,13 +1809,13 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
         ) {
           const delta = payload.text ?? payload.delta ?? payload.content ?? (typeof payload.string === 'string' ? payload.string : '');
           if (typeof delta === 'string' && delta) textParts.push(delta);
-        } else if (
+        } else if (!waitForFinal && (
           eventName === 'delta.message_done' ||
           eventName === 'chat.done' ||
           eventName.includes('done') ||
           eventName.includes('finish') ||
           payload.done === true
-        ) {
+        )) {
           if (textParts.length === 0) {
             const messages = payload?.transcript?.messages || payload?.messages || [];
             for (const m of messages) {
@@ -1813,7 +1826,7 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
             }
           }
           break;
-        } else if (eventName === 'message.assistant' || eventName.includes('assistant')) {
+        } else if (!waitForFinal && (eventName === 'message.assistant' || eventName.includes('assistant'))) {
           const t = payload.display_text ?? payload.content ?? payload.text ?? '';
           if (typeof t === 'string' && t.trim()) {
             if (textParts.length === 0) textParts.push(t.trim());
@@ -1822,6 +1835,13 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
         }
       } else if (ev.kind === 'complete') {
         const body = ev.body || {};
+        if (waitForFinal) {
+          const finalText = body.text ?? body.response ?? body.content ?? body.display_text ?? body.choices?.[0]?.message?.content;
+          if (ev.streamId !== sendSid || typeof finalText !== 'string' || !finalText.trim()) continue;
+          textParts.splice(0, textParts.length, finalText);
+          finished = true;
+          break;
+        }
         if (textParts.length === 0) {
           const possibleText = body.text ?? body.response ?? body.content ?? body.message ?? body.display_text ?? body?.choices?.[0]?.message?.content;
           if (typeof possibleText === 'string' && possibleText.trim()) {
@@ -1835,11 +1855,16 @@ export async function runMuseNoiseChat(session, userText, { fetchFn = fetch, wsF
         }
         if (textParts.length > 0) break;
       } else if (ev.kind === 'reset') {
-        if (textParts.length > 0) break;
+        if (waitForFinal ? ev.streamId === subSid || ev.streamId === sendSid : textParts.length > 0) break;
       }
     }
 
+    if (waitForFinal && !finished) {
+      if (Date.now() >= deadline) throw new Error('Muse AI phản hồi quá lâu. Hãy thử lại.');
+      throw new Error('Kết nối Muse AI đã đóng trước khi trả xong. Hãy thử lại.');
+    }
     let result = textParts.join('').trim();
+    if (waitForFinal) return result;
     if (!result) {
       for (const [sid, b] of streamBodies.entries()) {
         if (b.parts?.length) {
@@ -2027,7 +2052,7 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
     const bootstrap = () => bootstrapMuseHatchSession(cred.cookieHeader, { fetchFn, signal, now: options.now, consume: true });
     const session = cred.kind === 'hatch-session' ? cred.session : await bootstrap();
     const prompt = buildMuseFlattenedPrompt(requestBody, model, options.sentenceReview);
-    const chat = current => runMuseNoiseChat(current, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: 85000 });
+    const chat = current => runMuseNoiseChat(current, prompt, { fetchFn, wsFactory: options.wsFactory, signal, timeoutMs: 85000, waitForFinal: options.sentenceReview });
     let replyText;
     try {
       replyText = await chat(session);
@@ -4180,7 +4205,7 @@ async function readBody(request,limit=20000){
  const bytes=new Uint8Array(size);let n=0;for(const p of parts){bytes.set(p,n);n+=p.length;}return JSON.parse(new TextDecoder().decode(bytes));
 }
 function claims(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));}catch{return null;}}
-export const WORKER_REVISION='hsk-qa-thinking-r1-sentence-review';
+export const WORKER_REVISION='hsk-qa-thinking-r1-sentence-review-stream';
 const QA_THINKING_MODELS=new Map([['low','gemini-3.1-flash-lite'],['medium','gemini-3.5-flash'],['high','gemini-3.8-flash'],['xhigh','gemini-3.8-flash']]);const QA_PROVIDER_TIER_MODELS={'chatgpt-cookie':{low:'gpt-4o-mini',medium:'gpt-4o',high:'o3-mini'},'muse-cookie':{low:'muse-spark-fast',medium:'muse-spark',high:'muse-spark-thinking'},openai:{low:'gpt-4o-mini',medium:'gpt-4o',high:'o3-mini'},deepseek:{low:'deepseek-chat',medium:'deepseek-chat',high:'deepseek-reasoner'},claude:{low:'claude-3-5-haiku-latest',medium:'claude-3-7-sonnet-latest',high:'claude-sonnet-4-20250514'},fosta:{low:'gpt-6-luna:low',medium:'gpt-6-luna:medium',high:'gpt-6-luna:high',xhigh:'gpt-6-luna:xhigh'},gemini:{low:'gemini-2.5-flash-lite',medium:'gemini-2.5-flash',high:'gemini-2.5-pro'}};
 export function buildCorsHeaders(request,env={}){const origin=request.headers.get('Origin')||'*';return {'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Methods':'GET, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Authorization, X-Requested-With','Access-Control-Max-Age':'86400','Access-Control-Expose-Headers':'X-HSK-Worker-Version, X-HSK-AI-Provider, X-HSK-AI-Cache, X-HSK-Image-Remaining','Vary':'Origin'};}
 function jsonWithCors(value,status,request,env){return new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8',...buildCorsHeaders(request,env)}});}
