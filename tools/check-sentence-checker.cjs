@@ -33,6 +33,8 @@ const server=http.createServer((req,res)=>{
     const input = editor.locator('#sentenceDraft');
     const check = editor.getByRole('button',{name:'Kiểm tra bằng AI',exact:true});
     const status = editor.locator('.sentence-status');
+    const provider = editor.getByLabel('Nhà cung cấp AI');
+    assert.equal(await provider.inputValue(), 'auto');
     await input.fill('我有一个书。不有二个书。');
     assert.equal(await editor.locator('.sentence-card').count(),0,'typing alone must not produce suggestions');
     assert.equal(await editor.locator('.sentence-onnx-toggle, .sentence-electra-trial').count(),0);
@@ -52,6 +54,7 @@ const server=http.createServer((req,res)=>{
       window.fetch=async(input,init)=>{
         if(String(input).includes('translation-config.json'))return new Response(JSON.stringify({enabled:true,endpoint:'https://grammar.invalid/translate'}));
         if(String(input).includes('/lesson-ask'))return new Promise(resolve=>{
+          window.__lastGrammarRequest=JSON.parse(init.body);
           window.__grammarRequestCount=(window.__grammarRequestCount||0)+1;
           window.__resolveGrammar=(data={answer:JSON.stringify({summary:'STALE_RESPONSE',suggestions:[{kind:'fix',original:'帮忙我',replacement:'帮我',reason:'STALE_SUGGESTION'}]})})=>{
             window.__resolveGrammar=null;
@@ -61,9 +64,13 @@ const server=http.createServer((req,res)=>{
         return originalFetch(input,init);
       };
     });
+    await provider.selectOption('personal:fosta');
+    await page.evaluate(() => window.dispatchEvent(new Event('hsk-account-ready')));
+    assert.equal(await provider.inputValue(), 'personal:fosta');
     await input.fill('他帮忙我打扫房间。');
     await check.click();
     await page.waitForFunction(()=>!!window.__resolveGrammar);
+    assert.equal(await page.evaluate(() => window.__lastGrammarRequest.aiProvider), 'personal:fosta');
     await input.fill('今天我去学校。');
     await page.evaluate(()=>window.__resolveGrammar());
     await page.waitForTimeout(350);

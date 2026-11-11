@@ -1,1 +1,1 @@
-{"request": "Sửa câu tiếng Trung PC/mobile: chỉ kiểm tra bằng AI, bỏ kiểm tra cục bộ và hai chế độ model tại máy.", "excludedRoutes": ["sentence-editor"]}
+{"request":"Thêm lựa chọn nhà cung cấp AI riêng cho Sửa câu tiếng Trung.","excludedRoutes":["sentence-editor"]}

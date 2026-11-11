@@ -175,7 +175,27 @@
               <button type="button" class="sentence-undo" disabled>Hoàn tác</button>
               <button type="button" class="sentence-example">Thử câu mẫu</button>
             </div>
-            <button type="submit" class="sentence-check-btn">Kiểm tra bằng AI</button>
+            <div class="sentence-ai-actions">
+              <label for="sentenceAiProvider">Nhà cung cấp AI</label>
+              <select id="sentenceAiProvider">
+                <option value="auto">Tự động</option>
+                <optgroup label="Hệ thống">
+                  <option value="system-gemini">Gemini</option>
+                  <option value="system-chatgpt">ChatGPT</option>
+                </optgroup>
+                <optgroup label="API / cookie riêng">
+                  <option value="personal">Cấu hình đang bật</option>
+                  <option value="personal:openai">OpenAI</option>
+                  <option value="personal:fosta">Fosta</option>
+                  <option value="personal:deepseek">DeepSeek</option>
+                  <option value="personal:claude">Claude</option>
+                  <option value="personal:gemini">Gemini</option>
+                  <option value="personal:chatgpt-cookie">ChatGPT</option>
+                  <option value="personal:muse-cookie">Muse AI</option>
+                </optgroup>
+              </select>
+              <button type="submit" class="sentence-check-btn">Kiểm tra bằng AI</button>
+            </div>
           </footer>
         </div>
         <aside class="sentence-review" aria-label="Gợi ý chỉnh sửa">

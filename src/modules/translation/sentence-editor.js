@@ -6,6 +6,9 @@
   const form = panel.querySelector('form');
   const draft = panel.querySelector('textarea');
   const submit = form.querySelector('[type="submit"]');
+  const providerSelect = form.querySelector('#sentenceAiProvider');
+  const providerChoices = new Set([...providerSelect.options].map(option => option.value));
+  const providerStorageKey = () => 'hsk-sentence-ai-provider:' + (window.HSKAccountDashboard?.user?.uid || 'guest');
   const undo = panel.querySelector('.sentence-undo');
   const example = panel.querySelector('.sentence-example');
   const status = panel.querySelector('.sentence-status');
@@ -229,7 +232,24 @@
       render();
     });
   }
-  window.addEventListener('hsk-account-ready', resetForInput);
+  function restoreProvider() {
+    let saved;
+    try { saved = localStorage.getItem(providerStorageKey()); } catch {}
+    providerSelect.value = providerChoices.has(saved) ? saved : 'auto';
+  }
+
+  restoreProvider();
+  providerSelect.addEventListener('change', () => {
+    try { localStorage.setItem(providerStorageKey(), providerSelect.value); } catch {}
+    if (pending) {
+      cancelPending();
+      setStatus(initialStatus);
+    }
+  });
+  window.addEventListener('hsk-account-ready', () => {
+    restoreProvider();
+    resetForInput();
+  });
   new MutationObserver(() => {
     if (panel.hidden && pending) {
       cancelPending();
@@ -255,6 +275,7 @@
       setStatus('Đăng nhập để kiểm tra văn bản bằng AI.');
       return;
     }
+    const aiProvider = providerSelect.value;
     const controller = new AbortController();
     pending = controller;
     setBusy(true);
@@ -278,6 +299,7 @@
         headers: {Authorization: 'Bearer ' + token, 'Content-Type': 'application/json'},
         body: JSON.stringify({
           question: text,
+          ...(aiProvider !== 'auto' ? {aiProvider} : {}),
           hsk: level >= 1 && level <= 6 ? level : 3,
           history: [],
           lesson: {id: 'sentence-editor', title: 'Sửa câu tiếng Trung', words: [], content: {mode: 'sentence-editor'}}
