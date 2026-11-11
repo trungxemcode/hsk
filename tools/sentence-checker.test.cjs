@@ -118,3 +118,48 @@ test('mixed advanced paragraphs surface several different issues and preserve or
     '只有在天气正常时，如果申请获批，就可以登山。',
   ])assert.ok(checker.checkText(text).every(edit=>!edit.ruleId?.startsWith('STRUCT_')),text);
 });
+
+test('five issues in one sentence remain separately visible and a fluent rewrite stays clear',()=>{
+  const text='经过专家组历时数月的深入论证，使这一跨区域交通规划不仅拓宽了沿线各省的经济潜力和辐射范围，而且能否确保工程按时竣工，是推动区域协调发展的必然要求，沿线各部门必须通力协作，防止施工建设过程中违规操作的现象不再重演。';
+  const suggestions=checker.checkText(text);
+  assert.deepEqual(Array.from(suggestions,edit=>[edit.ruleId,edit.original]),[
+    ['STRUCT_MISSING_SUBJECT','使'],
+    ['STRUCT_OBJECT_COLLOCATION','潜力'],
+    ['STRUCT_INCREMENTAL_RELATION','而且'],
+    ['STRUCT_REQUIREMENT_POLARITY','能否'],
+    ['STRUCT_PREVENTION','不再'],
+  ]);
+  for(const edit of suggestions)assert.equal(text.slice(edit.start,edit.end),edit.original);
+  assert.equal(suggestions.at(-1).replacement,'');
+  const revised='经过专家组历时数月的深入论证，这一跨区域交通规划激发了沿线各省的经济潜力，拓宽了辐射范围。确保工程按时竣工，是推动区域协调发展的必然要求。沿线各部门必须通力协作，防止施工违规现象重演。';
+  assert.deepEqual(Array.from(checker.checkText(revised),edit=>edit.ruleId),[]);
+});
+
+test('the same constructions generalize across verbs, domains and sentence boundaries',()=>{
+  const cases=[
+    ['新的调度系统加快了仓库拣货效率和发货速度。','STRUCT_OBJECT_COLLOCATION','新的调度系统提高了仓库拣货效率，加快了发货速度。'],
+    ['这次改造缩短了传输速度。','STRUCT_OBJECT_COLLOCATION','这次改造缩短了传输时间。'],
+    ['学校不但扩大了实习规模，并且是否落实安全培训是接收学生的硬性要求。','STRUCT_INCREMENTAL_RELATION','学校不但扩大了实习规模，还为学生提供了安全培训。'],
+    ['这套系统不光减少了等待时间，而且完成交接，是确保服务连续的基本前提。','STRUCT_INCREMENTAL_RELATION','这套系统减少了等待时间。完成交接是确保服务连续的基本前提。'],
+    ['居民是否能够及时得到救助是落实应急预案的根本要求。','STRUCT_REQUIREMENT_POLARITY','及时救助居民是落实应急预案的根本要求。'],
+    ['水库能不能按期蓄水，是保障旱季供水的先决条件。','STRUCT_REQUIREMENT_POLARITY','水库能不能按期蓄水，取决于检修能否及时完成。'],
+    ['施工方加强巡查，避免施工现场因擅自操作导致的电力故障不再复发。','STRUCT_PREVENTION','施工方加强巡查，避免施工现场因擅自操作导致的电力故障复发。'],
+    ['纪检部门开展复核，以免有关人员在审核过程中舞弊的情况不再发生。','STRUCT_PREVENTION','纪检部门开展复核，以免有关人员在审核过程中舞弊的情况再次发生。'],
+  ];
+  for(const [source,id,valid] of cases){
+    assert.ok(checker.checkText(source).some(edit=>edit.ruleId===id),source);
+    assert.ok(checker.checkText(valid).every(edit=>edit.ruleId!==id),valid);
+  }
+  for(const text of [
+    '项目拓宽了挖掘学生潜力的渠道。',
+    '平台拓展了释放乡村发展潜力的空间。',
+    '学校加快设备更新以提高教学效率。',
+    '证书不仅是入职的基本条件，而且是继续深造的必要条件。',
+    '申请能否成功是大家关心的问题。',
+    '判断客户是否按时付款，是财务部门的首要任务。',
+    '报告还需核实供水能否恢复，这是启动应急预案的必要条件。',
+    '为防止故障预警系统不再正常运行，技术人员安排了巡检。',
+    '为了避免事故监测工作不再出现于会议议程，主管补充了相应要求。',
+    '项目不仅增加了就业岗位；而且能否按期交付，是企业最关心的问题。',
+  ])assert.ok(checker.checkText(text).every(edit=>!/^STRUCT_(OBJECT_COLLOCATION|INCREMENTAL_RELATION|REQUIREMENT_POLARITY|PREVENTION)$/u.test(edit.ruleId??'')),text);
+});

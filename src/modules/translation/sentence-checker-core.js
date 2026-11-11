@@ -491,6 +491,58 @@
 };
 
 
+  const polarityWord = /能否|是否|可否|能不能|会不会|可不可以/u;
+  const requirementPredicate = /^(?:也是|就是|是(?!否)|构成)(?:[\p{Script=Han}]{0,48})?(?:必然要求|必要条件|先决条件|重要前提|基本前提|根本要求|硬性要求|首要任务|当务之急|必由之路)$/u;
+  const nestedQuestion = /(?:研究|了解|判断|核实|确认|检查|评估|讨论|考虑|决定|调查|取决于|能说明|说明|表明|争论|咨询|弄清|证明|辨别|确定)/u;
+
+  function findRequirement(subject, following) {
+    if (requirementPredicate.test(following ?? '') && subject) return subject;
+    // A copula can be separated by a comma or included in the same clause.
+    for (const match of [...subject.matchAll(/(?:也是|就是|是(?!否)|构成)/gu)].reverse()) {
+      const prefix = subject.slice(0, match.index);
+      if (prefix && !/[不就也]$/u.test(prefix) && requirementPredicate.test(subject.slice(match.index))) {
+        return prefix;
+      }
+    }
+    return '';
+  }
+
+  function findPolarity(subject) {
+    const match = subject.match(polarityWord);
+    if (!match || match.index > 26 || /(?:与否|还是|或者|以及)/u.test(subject)) return null;
+    if (nestedQuestion.test(subject.slice(0, match.index))) return null;
+    if (match[0] === '能否' && subject[match.index + match[0].length] === '认') return null;
+    return subject.slice(match.index + match[0].length).length >= 2 ? match : null;
+  }
+
+  // Match the object head, including in a coordinated list. An attributive
+  // occurrence such as 潜力的渠道 is not the head of the object.
+  const objectHeads = [
+    {verb: /拓宽|拓展/gu, noun: /潜力|潜能/gu, alternatives: '挖掘、激发 hoặc 释放'},
+    {verb: /加快|加速|增强/gu, noun: /效率|效能/gu, alternatives: '提高 hoặc 提升'},
+    {verb: /缩短/gu, noun: /速度|速率/gu, alternatives: '降低 hoặc 减慢'},
+    {verb: /延长/gu, noun: /范围|覆盖面/gu, alternatives: '扩大 hoặc 拓宽'},
+    {verb: /拓宽|扩大/gu, noun: /时间|期限/gu, alternatives: '延长 hoặc 增加'}
+  ];
+  const objectBoundary = /^(?:$|以及|及其|及其他|并(?:且|未|不|将|使|让|扩大|提高|推动)|[、和与])/u;
+  const embeddedPredicate = /(?:负责|用于|用来|以便|为了|从而|进而|以此|并|来)?(?:产生|带来|挖掘|激发|开发|释放|发挥|提高|提升|改善|扩大|加快|减慢|降低|延长|增加|缩短)/u;
+
+  function findObjectMismatches(clause, add) {
+    for (const {verb, noun, alternatives} of objectHeads) {
+      for (const verbMatch of clause.content.matchAll(verb)) {
+        const tailStart = verbMatch.index + verbMatch[0].length;
+        const tail = clause.content.slice(tailStart);
+        for (const object of tail.matchAll(noun)) {
+          if (object.index > 56 || embeddedPredicate.test(tail.slice(0, object.index))) break;
+          if (!objectBoundary.test(tail.slice(object.index + object[0].length))) continue;
+          const start = clause.start + tailStart + object.index;
+          add(start, start + object[0].length, null, 'STRUCT_OBJECT_COLLOCATION',
+            '「' + verbMatch[0] + '」 không hợp với tân ngữ 「' + object[0] + '」 trong cách dùng này. Cân nhắc ' + alternatives + '. Nếu có nhiều tân ngữ, hãy dùng động từ phù hợp cho từng tân ngữ.');
+        }
+      }
+    }
+  }
+
   // Examine whole constructions in a sentence. Keep edits anchored to the
   // smallest part we can explain, and keep ambiguous readings as review cards.
   function structuralErrors(sentence) {
@@ -512,11 +564,31 @@
       });
     }
 
+    const separatedByComma = (left, right) => right && /^[，,]\s*$/u.test(text.slice(left.end, right.start));
     for (let i = 0; i < clauses.length; i++) {
       const current = clauses[i];
       const next = clauses[i + 1];
       const value = current.content;
-      const directlyFollows = next && /^[，,]\s*$/u.test(text.slice(current.end, next.start));
+      const directlyFollows = separatedByComma(current, next);
+      const requirementSubject = findRequirement(value, directlyFollows ? next.content : '');
+      const polarity = findPolarity(requirementSubject);
+      if (polarity) {
+        const start = current.start + polarity.index;
+        add(start, start + polarity[0].length, null, 'STRUCT_REQUIREMENT_POLARITY',
+          '「' + polarity[0] + '」 nêu cả hai khả năng, trong khi vị ngữ sau gọi việc đó là một yêu cầu hoặc điều kiện. Nếu muốn nói việc cần làm, bỏ 「' + polarity[0] + '」. Nếu muốn giữ câu hỏi hai khả năng, hãy đổi cách viết vị ngữ.');
+      }
+
+      if (directlyFollows && /(?:不仅|不但|不只|不单|不光|不单单)(?!是|在于|意味着|说明|表明)/u.test(value)) {
+        const connector = next.content.match(/^(?:而且|并且|甚至|更|还|也)(?=[\p{Script=Han}])/u);
+        const following = separatedByComma(next, clauses[i + 2]) ? clauses[i + 2].content : '';
+        const secondSubject = connector ? findRequirement(next.content.slice(connector[0].length), following) : '';
+        if (secondSubject && (findPolarity(secondSubject) || /^(?:确保|保证|维持|提高|降低|实现|完成|保持|落实|推进|减少|解决|防止|加强|按时|按期|建立|控制)/u.test(secondSubject))) {
+          add(next.start, next.start + connector[0].length, null, 'STRUCT_INCREMENTAL_RELATION',
+            'Vế đầu kể tác dụng hoặc hành động, vế sau chuyển sang xác định một yêu cầu. Hãy cân nhắc tách thành hai câu và bỏ cặp từ nối tăng tiến.');
+        }
+      }
+
+      findObjectMismatches(current, add);
 
       if (directlyFollows) {
         // A paired connective should match the relation of the first clause.
@@ -543,7 +615,7 @@
             'Vế đầu là cụm dẫn nhập. Sau đó câu mở bằng động từ gây khiến nên hãy kiểm tra chủ ngữ. Có thể bổ sung chủ ngữ hoặc bỏ động từ gây khiến nếu vế sau tự đứng được.');
         }
 
-        const twoSided = value.match(/(?:^|[^既])(能否|是否|可否|能不能|会不会)(?=[\p{Script=Han}]{2,})/u);
+        const twoSided = findPolarity(value);
         const oneSided = next.content.match(/^(?:关键|重点|核心|根本)(?:就)?在于(?:必须|应该|应当|要|一定要)(?=[\p{Script=Han}])/u);
         if (twoSided && oneSided && !/(?:以及|还是|或者|与否)/u.test(value)) {
           add(next.start, next.start + oneSided[0].length, null, 'STRUCT_POLARITY',
@@ -564,10 +636,18 @@
           'Câu đang ghép 「是因为／是由于…」 với một đuôi chỉ nguyên nhân. Bỏ đuôi này để giữ mẫu đầu.', 'fix');
       }
 
-      for (const match of value.matchAll(/(?:防止|以防|以免|避免)([^，。！？；]{0,30}?(?:事故|冲突|错误|灾害|问题|悲剧|故障|风险|纠纷))(不再|不要)(?=(?:发生|出现|重演|上演|扩大|恶化|蔓延)(?:$|的|了|后))/gu)) {
-        const start = current.start + match.index + match[0].length - match[2].length;
-        add(start, start + match[2].length, match[2] === '不再' ? '再次' : '', 'STRUCT_PREVENTION',
-          'Động từ ở đầu cụm đã mang nghĩa ngăn ngừa. Nếu ý là ngăn sự việc xảy ra hay tái diễn, sửa cụm phủ định để tránh đảo nghĩa.');
+      for (const match of value.matchAll(/(?:防止|以防|以免|避免|杜绝)([\p{Script=Han}]{1,80}?)(不再|不要|不会)(发生|出现|重演|重现|上演|复发|再现|扩大|恶化|蔓延)(?=$|的|了|后)/gu)) {
+        const [, object, negative, event] = match;
+        // In “防止供水不再正常运行”, cessation is the event to prevent.
+        // Require evidence of an adverse event before offering an edit.
+        if (!/(?:事故|冲突|错误|灾害|问题|悲剧|故障|风险|纠纷|违规|违法|违约|舞弊|造假|火灾|泄漏|泄露|断电|短缺|盗窃|污染|误操作|失误|暴力|欺诈|疫情)/u.test(object)) continue;
+        if (/(?:处置|监测|整改|防范|救治|预防|治理|化解|排查|调查|报告|检查|警报|预警|整治|通报|处理|演练|管控|措施|制度|机制|能力|渠道|流程)(?:工作|程序|行动|系统)?$/u.test(object)) continue;
+        const start = current.start + match.index + match[0].length - negative.length - event.length;
+        const eventRepeats = /^(?:重演|重现|复发|再现)$/u.test(event);
+        const replacement = negative === '不再' && !eventRepeats ? '再次' : '';
+        add(start, start + negative.length, replacement, 'STRUCT_PREVENTION',
+          'Nếu ý là ngăn sự việc xấu xảy ra, bỏ cụm phủ định để tránh đảo nghĩa.' +
+          (eventRepeats ? ' 「' + event + '」 đã mang ý lặp lại.' : ' Có thể dùng 「再次' + event + '」 khi nói về việc tái diễn.'));
       }
 
       const mixedFocus = value.match(/围绕(以)?([\p{Script=Han}]{2,40})(为(?:中心|核心|主题|主线))(?=$|开展|进行|推进|展开)/u);

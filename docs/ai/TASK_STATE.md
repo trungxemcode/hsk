@@ -172,3 +172,5 @@ Owner additionally requests equal large-card gaps on Account. PC/mobile direct s
 - Run `node tools/check-sentence-onnx-ui.cjs` for opt-in and lifecycle checks. Set `HSK_ELECTRA_PACKAGE` to the verified package to exercise actual inference through the same UI test.
 
 - Follow-up: file selection survives switching tabs. The structural checker looks across clauses and covers multiple patterns per paragraph. Check negative examples alongside altered sentences to catch meaning-changing suggestions.
+
+- Compound grammar follow-up: cover coordinated verb–object mismatches, broken incremental relations, two-sided subjects with one-sided predicates, and negative prevention across long noun phrases. Keep independent spans for simultaneous findings and preserve matched correct forms.

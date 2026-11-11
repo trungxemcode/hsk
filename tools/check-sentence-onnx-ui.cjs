@@ -49,6 +49,14 @@ const server = http.createServer((req, res) => {
       assert.equal(await review.getByRole('button', {name: 'Áp dụng'}).count(), 0);
       await review.getByRole('button', {name: 'Tìm trong bài'}).click();
       assert.equal(await draft.evaluate(el => el.value.slice(el.selectionStart, el.selectionEnd)), '关键在于要');
+      await draft.fill('经过多轮调研，使这项服务不但加快了处理效率和审批速度，而且能否实现数据共享，是保障持续运营的根本要求，相关部门必须合作，防止越权访问的违规现象不再重演。');
+      const localCards = editor.locator('.sentence-card[data-source=local]');
+      await page.waitForFunction(() => document.querySelectorAll('#sentenceEditor .sentence-card[data-source=local]').length >= 5);
+      const anchors = await localCards.locator('.sentence-diff').allTextContents();
+      for (const text of ['使', '效率', '而且', '能否', '不再']) {
+        assert.ok(anchors.some(anchor => anchor.startsWith(text)), 'A distinct card highlights ' + text);
+      }
+
       await draft.fill('我借了四只书。');
 
       const trial = editor.locator('.sentence-electra-trial');

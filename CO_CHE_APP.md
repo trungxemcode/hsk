@@ -348,7 +348,7 @@ Tra cứu và So sánh có `word-recovery` trong open-dictionary.js. Dùng endpo
 
 Công cụ mở trình biên tập độc lập với bảng gợi ý. Khi gõ, `sentence-checker-core.js` chạy quy tắc cục bộ sau 280 ms, tạm dừng trong IME; không gọi AI. Catalogue JSON và fallback đồng nhất, cache tối đa 200 câu. Quy tắc phụ thuộc ngữ cảnh và từ gần giống chỉ là gợi ý diễn đạt, không khẳng định lỗi. Khi người học bấm Kiểm tra hoặc Kiểm tra sâu bằng AI, ứng dụng gửi tối đa 500 ký tự qua chế độ `sentence-editor` của Worker với đăng nhập/quota hiện có. Sửa bản nháp, đổi tài khoản hoặc đóng trang hủy yêu cầu; đối chiếu snapshot và đoạn gốc trước khi nhận/áp dụng kết quả. AI ưu tiên khi trùng vùng cục bộ; áp dụng bỏ gợi ý chồng lấn, dịch vị trí các gợi ý sau đó. Có hoàn tác tối đa 20 lần trong phiên; bỏ qua giữ hiệu lực khi kiểm tra lại bản nháp không đổi. Không lưu thêm dữ liệu người học.
 
-Kiểm tra sâu nhận nhận xét có cấu trúc từ Worker và tương thích phản hồi dạng văn bản từ Worker cũ. Chỉ bật Áp dụng khi gợi ý AI khớp đoạn nguyên văn. Bộ kiểm tra cục bộ xét cấu trúc nhiều vế, quan hệ giữa hai vế, phần còn thiếu, cách kết hợp từ và lỗi lặp ý. Các trường hợp phụ thuộc vào ý người viết có thẻ cần xem lại.
+Kiểm tra sâu nhận nhận xét có cấu trúc từ Worker và tương thích phản hồi dạng văn bản từ Worker cũ. Chỉ bật Áp dụng khi gợi ý AI khớp đoạn nguyên văn. Bộ kiểm tra cục bộ xét cấu trúc nhiều vế, quan hệ giữa hai vế, phần còn thiếu, cách kết hợp từ và lỗi lặp ý. Bộ kiểm tra tách vị trí của liên từ và từ chỉ hai khả năng để hiện các gợi ý riêng trong cùng một câu. Các trường hợp phụ thuộc vào ý người viết có thẻ cần xem lại.
 
 ### Kiểm tra câu tại máy bằng ONNX
 
