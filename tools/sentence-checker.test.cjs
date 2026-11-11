@@ -55,3 +55,12 @@ test('linking word edits do not mask a separate problem in the same sentence',()
   ['所以','但是'],
  ]);
 });
+test('formal writing compound errors are distinct and corrected forms stay clear',()=>{
+ const source='通过有关部门的实地调研，使老旧小区改造工程得以稳步推进。这项民生工程培养了社区的文化底蕴。改造项目之所以能够获得广泛好评的原因，是因为方案尊重了群众的意愿。能否妥善解决历史遗留难题，是实现社区长远发展的必然选择。施工单位应该加强监管，以防类似安全事故不再发生。';
+ const edits=checker.checkText(source);
+ assert.equal(edits.length,5);
+ for(const item of edits)assert.equal(source.slice(item.start,item.end),item.original);
+ for(const correct of ['通过实地调研，改造工程得以推进。','政府丰富了社区的文化底蕴。','项目之所以获得好评，是因为方案合理。','能否解决难题，是项目成功与否的关键。','以防类似事故再次发生。']){
+   assert.equal(checker.checkText(correct).length,0,correct);
+ }
+});

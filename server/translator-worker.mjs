@@ -1,3 +1,4 @@
+import '../src/modules/translation/sentence-review-core.js';
 import {chatgptCookieGenerate,sharedGuardrail} from './chatgpt-cookie.mjs';
 import {personalAiCall,personalAiGenerate,probePersonalAiCapabilities} from './personal-ai.mjs';
 import {normalizeAiProviderChoice,aiProviderChoiceError,describeAiProviders} from './ai-provider-choice.mjs';
@@ -556,26 +557,12 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     if(candidate?.finishReason&&candidate.finishReason!=='STOP')return reply({error:'AI chưa hoàn thành câu trả lời. Hãy thử hỏi ngắn hơn.'},502);
     const answerText=(candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('').replace(/<\/?escape>/gi,'').trim();
     if(isSentenceEditor){
-     // Accept both the direct review and the earlier answer-wrapped response.
-     // Keep answer as a string for clients released before sentenceReview.
-     let review=answerText;
-     for(let depth=0;depth<3&&typeof review==='string';depth++){
-      const clean=review.trim().replace(/^`{3}(?:json)?\s*([\s\S]*?)\s*`{3}$/i,'$1').trim();
-      try{
-       review=JSON.parse(clean);
-       if(review&&typeof review==='object'&&!Array.isArray(review.suggestions))review=review.answer;
-      }catch{review=clean;break;}
-     }
-     const structured=review&&typeof review==='object'&&Array.isArray(review.suggestions);
-     const result=structured?{
-      summary:typeof review.summary==='string'?review.summary.slice(0,800):'',
-      suggestions:review.suggestions.slice(0,8),
-     }:null;
-     const answer=result?JSON.stringify(result):typeof review==='string'&&!/^[{\[]/.test(review)?review.slice(0,4000):'';
-     if(!answer.trim())return reply({error:'AI chưa trả được bài nhận xét đầy đủ. Hãy thử lại.'},502);
+     const result=globalThis.HSKSentenceReview.normalize(answerText,body.question);
+     if(!result)return reply({error:'AI chưa trả được gợi ý có vị trí sửa. Hãy kiểm tra lại.',code:'SENTENCE_REVIEW_FORMAT'},502);
+     const answer=JSON.stringify(result);
      await qaUsage(env,payload);
      await qaFinish(roleEnv,qaSession,{answer},headers['X-HSK-AI-Provider'],{rawFetch:rawFetchFn,ctx,signal:controller.signal});
-     return reply(result?{answer,sentenceReview:result}:{answer});
+     return reply({answer,sentenceReview:result});
     }
     let parsed;
     try{parsed=JSON.parse(answerText);}catch{

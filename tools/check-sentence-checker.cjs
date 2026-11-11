@@ -81,7 +81,7 @@ const server=http.createServer((req,res)=>{
     await editor.getByRole('button',{name:'Kiểm tra sâu bằng AI',exact:true}).click();
     await page.waitForFunction(()=>!!window.__resolveGrammar);
     await page.evaluate(()=>window.__resolveGrammar({answer:'Đặt cụm 跟同学们 trước động từ 讨论.'}));
-    await editor.locator('.sentence-status').filter({hasText:'Đặt cụm 跟同学们 trước động từ 讨论.'}).waitFor();
+    await editor.locator('.sentence-status').filter({hasText:'AI chưa trả được gợi ý có vị trí sửa.'}).waitFor();
     assert.equal(await editor.locator('.sentence-card[data-source="ai"]').count(),0);
     await editor.getByRole('button',{name:'Kiểm tra sâu bằng AI',exact:true}).click();
     await page.waitForFunction(()=>!!window.__resolveGrammar);
@@ -90,6 +90,17 @@ const server=http.createServer((req,res)=>{
     ]}}));
     await editor.locator('.sentence-card[data-source="ai"]').getByRole('button',{name:'Áp dụng',exact:true}).click();
     assert.equal(await input.inputValue(),'昨天，我跟同学们讨论了这个话题三个小时。');
+    await input.fill('🙂这件衣服。');
+    await editor.getByRole('button',{name:'Kiểm tra sâu bằng AI',exact:true}).click();
+    await page.waitForFunction(()=>!!window.__resolveGrammar);
+    await page.evaluate(()=>window.__resolveGrammar({answer:'### Bản sửa đề xuất\n🙂这件漂亮的衣服。\n\n### Giải thích lỗi chính\nBổ sung mô tả.'}));
+    const insertion=editor.locator('.sentence-card[data-source="ai"]');
+    await insertion.getByRole('button',{name:'Áp dụng',exact:true}).click();
+    assert.equal(await input.inputValue(),'🙂这件漂亮的衣服。');
+    assert.equal(await insertion.count(),0,'applied insertion must not remain as an AI suggestion');
+    assert.ok(!(await editor.locator('.sentence-status').innerText()).includes('###'));
+    await editor.getByRole('button',{name:'Hoàn tác',exact:true}).click();
+    assert.equal(await input.inputValue(),'🙂这件衣服。');
     for(const width of [390,1440]){
       await page.setViewportSize({width,height:900});
       await input.fill('昨天他帮忙我打扫房间，我很感谢他。');
