@@ -478,3 +478,12 @@ html[data-theme="dark"] #sentenceEditor textarea {
   margin-right: -2px;
   text-decoration: none;
 }
+
+
+#sentenceEditor .sentence-wait:not([hidden]) {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: .82rem;
+  font-variant-numeric: tabular-nums;
+}
