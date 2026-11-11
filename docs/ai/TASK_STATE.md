@@ -170,3 +170,5 @@ Owner additionally requests equal large-card gaps on Account. PC/mobile direct s
 
 - The sentence editor can open a pinned INT8 ELECTRA package from the device and mark suspected spans as review-only cards. Lite and AI remain separate. The large weights are not served by the PWA.
 - Run `node tools/check-sentence-onnx-ui.cjs` for opt-in and lifecycle checks. Set `HSK_ELECTRA_PACKAGE` to the verified package to exercise actual inference through the same UI test.
+
+- Follow-up: file selection survives switching tabs. The structural checker looks across clauses and covers multiple patterns per paragraph. Check negative examples alongside altered sentences to catch meaning-changing suggestions.

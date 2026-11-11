@@ -42,6 +42,15 @@ const server = http.createServer((req, res) => {
       const suggestions = editor.locator('.sentence-card[data-source=onnx]');
       await draft.fill('我借了四只书。');
       assert.equal(modelRequests.length, 0, 'No model fetch before opt-in');
+      const reviewDraft = '这份指南对于居民了解新政策提供了实用的参考。申请能否通过，关键在于要交齐材料。';
+      await draft.fill(reviewDraft);
+      const review = editor.locator('.sentence-card').filter({hasText: 'Cần xem lại · Cục bộ'});
+      await review.waitFor();
+      assert.equal(await review.getByRole('button', {name: 'Áp dụng'}).count(), 0);
+      await review.getByRole('button', {name: 'Tìm trong bài'}).click();
+      assert.equal(await draft.evaluate(el => el.value.slice(el.selectionStart, el.selectionEnd)), '关键在于要');
+      await draft.fill('我借了四只书。');
+
       const trial = editor.locator('.sentence-electra-trial');
       const trialFile = trial.locator('.sentence-electra-file');
       const trialStatus = trial.locator('.sentence-electra-status');
@@ -89,13 +98,20 @@ const server = http.createServer((req, res) => {
         const result = trialResults.filter({hasText: '只'});
         await result.waitFor({timeout: 90000});
         assert.match(await trialStatus.textContent(), /1 vị trí nghi vấn/);
+        await page.evaluate(() => HSKStudio.navigate('home'));
+        await editor.waitFor({state: 'hidden'});
+        await page.evaluate(() => HSKStudio.navigate('sentence-editor'));
+        await editor.waitFor({state: 'visible'});
+        await trial.getByRole('button', {name: 'Kiểm tra bài này'}).click();
+        await page.waitForFunction(() => /1 vị trí nghi vấn/.test(document.querySelector('.sentence-electra-status').textContent));
+
         assert.equal(await result.getByRole('button', {name: 'Áp dụng'}).count(), 0);
         await result.getByRole('button', {name: 'Tìm trong bài'}).click();
         assert.equal(await draft.evaluate(el => el.value.slice(el.selectionStart, el.selectionEnd)), '只');
         await draft.fill('我昨天去超市买了三本书。');
         assert.equal(await trialResults.count(), 0);
-        await trial.getByRole('button', {name: 'Chạy lại'}).click();
-        await page.waitForFunction(() => /0 vị trí nghi vấn/.test(document.querySelector('.sentence-electra-status').textContent));
+        await trial.getByRole('button', {name: 'Kiểm tra bài này'}).click();
+        await page.waitForFunction(() => /Chưa thấy vị trí nghi vấn/.test(document.querySelector('.sentence-electra-status').textContent));
         await trial.getByRole('button', {name: 'Dừng model'}).click();
         assert.match(await trialStatus.textContent(), /Đã dừng/);
       }

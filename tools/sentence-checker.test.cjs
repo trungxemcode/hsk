@@ -64,3 +64,57 @@ test('formal writing compound errors are distinct and corrected forms stay clear
    assert.equal(checker.checkText(correct).length,0,correct);
  }
 });
+
+test('structural checks transfer across topics and leave matched correct variants clear',()=>{
+  const cases=[
+    ['颁布了扩大招生范围、设置实习岗位和简化申请流程。','STRUCT_POLICY_OBJECT','颁布了扩大招生范围、设置实习岗位和简化申请流程的通知。'],
+    ['制定了减免摊位费用和增加公共照明。','STRUCT_POLICY_OBJECT','制定了减免摊位费用和增加公共照明的方案。'],
+    ['这次培训包括安全演练、现场讲解等环节组成。','STRUCT_COMPOSITION','这次培训由安全演练、现场讲解等环节组成。'],
+    ['教材包含语音练习、课文对话等部分组成。','STRUCT_COMPOSITION','教材包含语音练习、课文对话等部分。'],
+    ['仪器失灵是由于供电中断所致。','STRUCT_CAUSE','仪器失灵是由于供电中断。'],
+    ['供水受阻是因为施工人员误操作造成的。','STRUCT_CAUSE','供水受阻是施工人员误操作造成的。'],
+    ['只有填写报名表，便能获得资格。','STRUCT_CONDITION','只有填写报名表，才能获得资格。'],
+    ['除非保存好收据，便能申请退款。','STRUCT_CONDITION','除非保存好收据，否则无法申请退款。'],
+    ['凭借各方的共同努力，让救援工作迅速展开。','STRUCT_MISSING_SUBJECT','凭借各方的共同努力，救援队迅速展开行动。'],
+    ['经过耐心讲解，令居民逐渐了解新的分类办法。','STRUCT_MISSING_SUBJECT','经过耐心讲解，社区工作人员让居民逐渐了解新的分类办法。'],
+    ['行人是否能安全过街，关键在于要完善交通设施。','STRUCT_POLARITY','行人是否能安全过街，取决于交通设施是否完善。'],
+    ['这份手册对于新员工熟悉业务提供了有价值的参考。','STRUCT_BENEFICIARY','这份手册为新员工熟悉业务提供了有价值的参考。'],
+    ['请加强巡查，避免类似故障不再出现。','STRUCT_PREVENTION','请加强巡查，避免类似故障再次出现。'],
+    ['这里供应苹果、葡萄以及水果。','STRUCT_CATEGORY_OVERLAP','这里供应苹果、葡萄以及其他水果。'],
+    ['会议围绕以节水为主题展开。','STRUCT_FOCUS','会议以节水为主题展开。'],
+    ['本地游客大多是以家庭为主。','STRUCT_MAJORITY','本地游客以家庭为主。'],
+    ['这项活动深受社区居民所欢迎。','STRUCT_PASSIVE','这项活动深受社区居民欢迎。'],
+    ['换设备以后，能耗降低了1.5倍。','STRUCT_REDUCTION','换设备以后，能耗降到了原来的三分之二。'],
+  ];
+  for(const [sentence,ruleId,correct] of cases){
+    const edits=checker.checkText(sentence);
+    const edit=edits.find(item=>item.ruleId===ruleId);
+    assert.ok(edit,sentence+' '+JSON.stringify(edits));
+    assert.equal(sentence.slice(edit.start,edit.end),edit.original);
+    if(!edit.reviewOnly){
+      const changed=sentence.slice(0,edit.start)+edit.replacement+sentence.slice(edit.end);
+      assert.ok(!checker.checkText(changed).some(item=>item.ruleId===ruleId),changed);
+    }
+    assert.deepEqual(Array.from(checker.checkText(correct),item=>item.ruleId),[],correct);
+  }
+});
+
+test('mixed advanced paragraphs surface several different issues and preserve ordinary language',()=>{
+  const paragraph='博物馆制定了延长开放时间、增设志愿者岗位和开展导览活动。课程包含阅读、讨论等环节组成。这个项目对于居民了解历史提供了新的机会。能否吸引更多观众，核心在于要改善交通。';
+  const edits=checker.checkText(paragraph);
+  assert.deepEqual(Array.from(edits,item=>item.ruleId),[
+    'STRUCT_POLICY_OBJECT','STRUCT_COMPOSITION','STRUCT_BENEFICIARY','STRUCT_POLARITY'
+  ]);
+  for(const text of [
+    '对于这个问题，他提供了可行的解决方案。',
+    '对于是否提供了足够的信息，专家还在讨论。',
+    '他朗读了“只有努力，就能成功”这句话。',
+    '除非雨停，就算大家都来，我们也无法出发。',
+    '我们采取措施避免工人不再参与项目。',
+    '通过实际测试，使用这套程序的人给出了反馈。',
+    '这套办法能否成功，关键在于员工的参与程度。',
+    '报告围绕问题展开，并受到团队所提供的技术支持。',
+    '用电量从每月2.4万度降低至1.8万度。',
+    '只有在天气正常时，如果申请获批，就可以登山。',
+  ])assert.ok(checker.checkText(text).every(edit=>!edit.ruleId?.startsWith('STRUCT_')),text);
+});
