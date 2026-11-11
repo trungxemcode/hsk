@@ -1,0 +1,6 @@
+{
+  "name": "HSK 1\u20136 pipeline smoke corpus",
+  "license": "CC0-1.0",
+  "provenance": "Original examples authored for this repository. Levels are instructional estimates. Template/topic families are disjoint between splits.",
+  "purpose": "Engineering smoke test only; 26 sentences per split. It is too small and too structured to estimate production coverage."
+}
