@@ -42,7 +42,7 @@
     for(const item of uniqueSuggestions()){
       if(item.start<cursor||item.end>draft.value.length)continue;
       mirror.append(draft.value.slice(cursor,item.start));
-      const mark=document.createElement('mark');mark.dataset.kind=item.kind;mark.dataset.source=item.source||'local';mark.textContent=draft.value.slice(item.start,item.end)||'▏';mirror.append(mark);cursor=item.end;
+      const mark=document.createElement('mark');mark.dataset.kind=item.kind;mark.dataset.source=item.source||'local';mark.dataset.insertion=String(item.start===item.end);mark.textContent=draft.value.slice(item.start,item.end)||'\u200b';mirror.append(mark);cursor=item.end;
     }
     mirror.append(draft.value.slice(cursor)+'\n');syncScroll();
     for(const item of currentErrors()){
