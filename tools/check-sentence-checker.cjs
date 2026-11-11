@@ -71,7 +71,11 @@ const server=http.createServer((req,res)=>{
     await check.click();
     await page.waitForFunction(()=>!!window.__resolveGrammar);
     assert.equal(await page.evaluate(() => window.__lastGrammarRequest.aiProvider), 'personal:fosta');
+    const waitTimer = editor.locator('.sentence-wait');
+    await waitTimer.filter({hasText: /Đang chờ AI trả lời · [1-9]\d* giây/}).waitFor();
+    assert.equal(await check.isDisabled(), true);
     await input.fill('今天我去学校。');
+    await waitTimer.waitFor({state: 'hidden'});
     await page.evaluate(()=>window.__resolveGrammar());
     await page.waitForTimeout(350);
     assert.equal(await editor.locator('[data-source="ai"]').count(),0,'stale AI result must not attach to edited draft');

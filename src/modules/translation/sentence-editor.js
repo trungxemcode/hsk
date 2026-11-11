@@ -23,6 +23,18 @@
   let suggestions = [];
   let filter = 'all';
   let pending = null;
+  let waitTimer;
+  let waitStarted;
+  let waitPhase;
+  const waitLabel = document.createElement('span');
+  waitLabel.className = 'sentence-wait';
+  waitLabel.hidden = true;
+  waitLabel.setAttribute('aria-hidden', 'true');
+  status.after(waitLabel);
+
+  function renderWait() {
+    waitLabel.textContent = waitPhase + ' · ' + Math.floor((performance.now() - waitStarted) / 1000) + ' giây';
+  }
   let composing = false;
   let dismissed = new Set();
   let undoStack = [];
@@ -32,6 +44,14 @@
   }
 
   function setBusy(busy) {
+    clearInterval(waitTimer);
+    waitLabel.hidden = !busy;
+    if (busy) {
+      waitStarted = performance.now();
+      waitPhase = 'Đang kết nối';
+      renderWait();
+      waitTimer = setInterval(renderWait, 1000);
+    }
     submit.disabled = busy;
     panel.setAttribute('aria-busy', String(busy));
   }
@@ -293,6 +313,8 @@
       if (pending !== controller) return;
       if (controller.signal.aborted) throw new DOMException('Aborted', 'AbortError');
       const level = Number(document.getElementById('studioTargetLevel')?.value);
+      waitPhase = 'Đang chờ AI trả lời';
+      renderWait();
       const response = await fetch(endpoint, {
         method: 'POST',
         signal: controller.signal,
