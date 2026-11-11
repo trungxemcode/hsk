@@ -480,6 +480,12 @@ html[data-theme="dark"] #sentenceEditor textarea {
 }
 
 
+#sentenceEditor .ai-qa-thinking-card {
+  width: 100%;
+  box-sizing: border-box;
+  align-self: stretch;
+}
+
 #sentenceEditor .sentence-wait:not([hidden]) {
   display: block;
   margin-top: 8px;

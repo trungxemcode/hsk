@@ -15,6 +15,7 @@
   const count = panel.querySelector('.sentence-count');
   const mirror = panel.querySelector('.sentence-mirror');
   const cards = panel.querySelector('.sentence-suggestions');
+  const help = panel.querySelector('.sentence-help');
   const filters = [...panel.querySelectorAll('[data-sentence-filter]')];
   const providerNames = Object.freeze({gemini:'Gemini', xkiro:'xKiro', openai:'OpenAI', anthropic:'Claude', claude:'Claude', deepseek:'DeepSeek', fosta:'Fosta', 'chatgpt-cookie':'ChatGPT'});
   const initialStatus = status.textContent;
@@ -23,18 +24,96 @@
   let suggestions = [];
   let filter = 'all';
   let pending = null;
-  let waitTimer;
-  let waitStarted;
-  let waitPhase;
+  let waitStarted = 0;
+  let waitPhase = 'Đang kết nối';
+  let thinkingTimer = null;
+  let thinkingCardEl = null;
+
+  const THINKING_STEPS = [
+    { at: 0, pct: 24, text: 'Phân tích câu hỏi & mục tiêu HSK của bạn' },
+    { at: 1.5, pct: 52, text: 'Tra cứu từ vựng, chữ Hán, phiên âm & ngữ pháp' },
+    { at: 3.5, pct: 78, text: 'Đối chiếu cách diễn đạt tự nhiên & chọn ví dụ sát ngữ cảnh' },
+    { at: 6.0, pct: 94, text: 'Tổng hợp gợi ý sửa lỗi & giải thích chi tiết' }
+  ];
+
   const waitLabel = document.createElement('span');
   waitLabel.className = 'sentence-wait';
   waitLabel.hidden = true;
   waitLabel.setAttribute('aria-hidden', 'true');
   status.after(waitLabel);
 
-  function renderWait() {
-    waitLabel.textContent = waitPhase + ' · ' + Math.floor((performance.now() - waitStarted) / 1000) + ' giây';
+  function activeProviderLabel() {
+    const selectedOption = providerSelect.selectedOptions?.[0];
+    if (selectedOption && providerSelect.value !== 'auto') {
+      return selectedOption.textContent.trim();
+    }
+    return 'HSK AI';
   }
+
+  function renderWait(elapsed = (performance.now() - waitStarted) / 1000, activeIdx = -1) {
+    const seconds = Math.floor(elapsed);
+    if (activeIdx < 0) {
+      activeIdx = 0;
+      for (let i = 0; i < THINKING_STEPS.length; i++) {
+        if (elapsed >= THINKING_STEPS[i].at) activeIdx = i;
+      }
+    }
+    const stepText = THINKING_STEPS[activeIdx]?.text || '';
+    waitLabel.textContent = waitPhase + ' · ' + seconds + ' giây' + (stepText ? ' · ' + stepText : '');
+  }
+
+  function stopThinkingIndicator() {
+    if (thinkingTimer) {
+      clearInterval(thinkingTimer);
+      thinkingTimer = null;
+    }
+    if (thinkingCardEl) {
+      thinkingCardEl.remove();
+      thinkingCardEl = null;
+    }
+    panel.querySelectorAll('.ai-qa-thinking-card').forEach(el => el.remove());
+    if (status) status.hidden = false;
+    if (help) help.hidden = false;
+  }
+
+  function startThinkingIndicator(modelLabel = '') {
+    stopThinkingIndicator();
+    if (status) status.hidden = true;
+    if (help) help.hidden = true;
+    const card = document.createElement('div');
+    card.className = 'ai-qa-thinking-card';
+    card.setAttribute('role', 'status');
+    card.setAttribute('aria-live', 'polite');
+    const badgeText = modelLabel ? `<span class="ai-qa-thinking-badge">${modelLabel.replace(/[<>&]/g, '')}</span>` : '';
+    card.innerHTML = `<div class="ai-qa-thinking-head"><span class="ai-qa-thinking-orb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.2 6.3 6.3 2.2-6.3 2.2L12 19.5l-2.2-6.3-6.3-2.2 6.3-2.2L12 2.5z"/></svg></span><div class="ai-qa-thinking-title"><strong>Gia sư AI đang suy luận</strong>${badgeText}<span class="ai-qa-thinking-dots" aria-hidden="true"><i></i><i></i><i></i></span></div><span class="ai-qa-thinking-timer">0.1s</span></div><div class="ai-qa-thinking-bar" aria-hidden="true"><span class="ai-qa-thinking-bar-fill" style="width:18%"></span></div><div class="ai-qa-thinking-steps">${THINKING_STEPS.map((step, idx) => `<div class="ai-qa-thinking-step" data-step="${idx}" data-state="${idx === 0 ? 'active' : 'pending'}"><span class="ai-qa-thinking-step-dot" aria-hidden="true"></span><span class="ai-qa-thinking-step-text">${step.text}</span></div>`).join('')}</div><div class="ai-qa-thinking-skeleton" aria-hidden="true"><span></span><span></span></div>`;
+    thinkingCardEl = card;
+    status.before(card);
+
+    const timerEl = card.querySelector('.ai-qa-thinking-timer');
+    const barFill = card.querySelector('.ai-qa-thinking-bar-fill');
+    const stepEls = [...card.querySelectorAll('.ai-qa-thinking-step')];
+
+    thinkingTimer = setInterval(() => {
+      if (!card.isConnected) {
+        stopThinkingIndicator();
+        return;
+      }
+      const elapsed = Math.max(0.1, (performance.now() - waitStarted) / 1000);
+      if (timerEl) timerEl.textContent = `${elapsed.toFixed(1)}s`;
+      let activeIdx = 0;
+      for (let i = 0; i < THINKING_STEPS.length; i++) {
+        if (elapsed >= THINKING_STEPS[i].at) activeIdx = i;
+      }
+      stepEls.forEach((el, i) => {
+        el.dataset.state = i < activeIdx ? 'done' : i === activeIdx ? 'active' : 'pending';
+      });
+      const basePct = THINKING_STEPS[activeIdx].pct;
+      const extra = activeIdx === THINKING_STEPS.length - 1 ? Math.min(4, (elapsed - THINKING_STEPS[activeIdx].at) * 0.25) : 0;
+      if (barFill) barFill.style.width = `${Math.min(98, Math.round(basePct + extra))}%`;
+      renderWait(elapsed, activeIdx);
+    }, 150);
+  }
+
   let composing = false;
   let dismissed = new Set();
   let undoStack = [];
@@ -44,13 +123,14 @@
   }
 
   function setBusy(busy) {
-    clearInterval(waitTimer);
     waitLabel.hidden = !busy;
     if (busy) {
       waitStarted = performance.now();
       waitPhase = 'Đang kết nối';
-      renderWait();
-      waitTimer = setInterval(renderWait, 1000);
+      startThinkingIndicator(activeProviderLabel());
+      renderWait(0, 0);
+    } else {
+      stopThinkingIndicator();
     }
     submit.disabled = busy;
     panel.setAttribute('aria-busy', String(busy));
