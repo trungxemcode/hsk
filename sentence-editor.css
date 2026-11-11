@@ -458,7 +458,7 @@ html[data-theme="dark"] #sentenceEditor textarea {
 
 #sentenceEditor .sentence-electra-trial {
   border: 1px solid var(--se-edge);
-  border-radius: 12px;
+  border-radius: var(--radius-btn);
   padding: 10px 12px;
 }
 #sentenceEditor .sentence-electra-trial summary { cursor: pointer; }
