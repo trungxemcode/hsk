@@ -10,26 +10,9 @@
         {"kind": "data_go", "file": "index.html", "value": "sentence-editor"},
         {"kind": "id", "file": "index.html", "value": "sentenceDraft"},
         {"kind": "file", "file": "src/modules/translation/sentence-editor.js", "value": ""},
-        {"kind": "file", "file": "src/modules/translation/sentence-checker-core.js", "value": ""},
-        {"kind": "file", "file": "src/modules/translation/hsk-grammar-rules.json", "value": ""},
+        {"kind": "file", "file": "src/modules/translation/sentence-review-core.js", "value": ""},
+        {"kind": "contains", "file": "index.html", "value": "Kiểm tra bằng AI"},
         {"kind": "contains", "file": "server/translator-worker.mjs", "value": "sentence-editor"}
-      ]
-    },
-    {
-      "id": "sentence-onnx-lite",
-      "name": "Kiểm tra ngữ pháp tại máy bằng ONNX",
-      "checks": [
-        {"kind": "file", "file": "src/modules/translation/sentence-onnx-worker.js", "value": ""},
-        {"kind": "file", "file": "vendor/sentence-onnx/grammar-lite-v1.onnx", "value": ""},
-        {"kind": "contains", "file": "index.html", "value": "sentence-onnx-toggle"}
-      ]
-    },
-    {
-      "id": "sentence-electra-trial",
-      "name": "Thử phát hiện lỗi tiếng Trung tại máy với model lớn",
-      "checks": [
-        {"kind": "file", "file": "src/modules/translation/sentence-electra-core.js", "value": ""},
-        {"kind": "contains", "file": "index.html", "value": "sentence-electra-pick"}
       ]
     },
     {

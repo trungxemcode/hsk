@@ -4,7 +4,8 @@ const packages=[
  ['hsk-music-codec-v1','Bộ nén nhạc cũ','Không cần cho cách lưu file MP3/M4A hiện tại.'],
  ['hsk-handwriting-neural-ppocrv5-ort122-v1','Nhận dạng viết tay nâng cao','Cần tải lại để dùng nhận dạng nâng cao.'],
  ['hsk-writing-data-2','Dữ liệu nét chữ đã xem','Tải lại khi mở chữ tương ứng.'],
- ['hsk-open-dictionary-cedict-v1','Từ điển mở rộng đã tra','Cần mạng để tải lại các phần đã xóa.']
+ ['hsk-open-dictionary-cedict-v1','Từ điển mở rộng đã tra','Cần mạng để tải lại các phần đã xóa.'],
+ ['hsk-sentence-onnx-v1','Gói sửa câu tại máy (cũ)','Đã ngừng dùng. Có thể xóa để giải phóng dung lượng.']
 ];
 const owner=()=>root.HSKAccountDashboard?.user?.uid||(()=>{try{return JSON.parse(localStorage.getItem('hsk-account-meta-v1'))?.uid||'guest';}catch{return 'guest';}})();
 const size=n=>n<1024?n+' B':(n<1048576?n/1024:n/1048576).toLocaleString('vi-VN',{maximumFractionDigits:2})+(n<1048576?' KiB':' MiB');
@@ -28,7 +29,7 @@ async function refresh(message=''){
   for(const row of found)add(row);
   const assets=new Set();let total=0;for(const r of rows){if(r.asset&&assets.has(r.asset))continue;if(r.asset)assets.add(r.asset);total+=r.bytes;}
   q('storageCleanupTotal').textContent='Dữ liệu tải thêm: '+size(total)+(rows.some(r=>r.asset)?' · nhạc của tài khoản hiện tại':'');
-  status.textContent=[message,rows.length?'Chọn những mục bạn muốn xóa. Các gói có thể tải lại khi cần.':'Chưa có dữ liệu tải thêm để dọn.',errors.length?'Chưa đọc được '+errors.join(', ')+'. Bấm Làm mới để thử lại.':''].filter(Boolean).join(' ');
+  status.textContent=[message,rows.length?'Chọn những mục bạn muốn xóa.':'Chưa có dữ liệu tải thêm để dọn.',errors.length?'Chưa đọc được '+errors.join(', ')+'. Bấm Làm mới để thử lại.':''].filter(Boolean).join(' ');
  }finally{if(token===scan){busy=false;controls();}}
 }
 

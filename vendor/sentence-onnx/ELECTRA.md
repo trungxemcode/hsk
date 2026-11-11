@@ -21,7 +21,6 @@ python tools/export-sentence-electra.py /path/to/pinned-snapshot /path/to/output
 
 The trial client pins the package SHA-256
 `72a744229e20e7b9b16922aee39e8cd52e08e9e3114bc0203de8d336b9d5634b`.
-Reverify artifacts and update the client pin together when rebuilding with different
-export tooling. To exercise the real model in the browser suite, set
-`HSK_ELECTRA_PACKAGE` to the downloaded package and run
-`node tools/check-sentence-onnx-ui.cjs`.
+Reverify artifacts when rebuilding with different export tooling. Use the
+[training entry](../../tools/sentence-training/README.md) to train and evaluate
+candidates separately from the production editor.

@@ -6,7 +6,7 @@
 
 1. Chọn **Run workflow**, nhánh chứa dữ liệu, tên thư mục dữ liệu và số epoch. Bật **validation_only** nếu chỉ kiểm tra định dạng. Bộ mặc định `seed` có 78 câu để thử toàn bộ quy trình. Bộ `expanded-v1` có 1.008 câu tổng hợp, đủ HSK 1–6 và 14 nhóm lỗi để mở rộng coverage; điểm trên dữ liệu tổng hợp vẫn cần được kiểm tra lại bằng dữ liệu người bản ngữ trước khi phát hành.
 2. Mở **Summary** của lần chạy để xem số lỗi tìm được và số câu đúng bị báo nhầm theo từng cấp. Tải gói trong **Artifacts**. `report.json` lưu kết quả theo nhóm lỗi, dấu SHA-256 của dữ liệu và model, tham số huấn luyện, kết quả gốc và ứng viên cùng ngưỡng 0,90.
-3. Nếu chọn một ứng viên để phát hành, mở PR riêng thay mã SHA-256 và kích thước gói trong bộ nạp của app, rồi chạy lại kiểm thử trên trình duyệt. Dùng tập kiểm tra đủ lớn, có câu viết đúng, nhiều lỗi cùng câu và câu ngoài những mẫu từng dùng để huấn luyện.
+3. Đánh giá ứng viên trên một tập đủ lớn, có câu viết đúng, nhiều lỗi cùng câu và câu ngoài những mẫu từng dùng để huấn luyện. Lưu kết quả để so sánh các ứng viên trong cổng huấn luyện riêng.
 
 AI có thể gọi bằng CLI:
 
