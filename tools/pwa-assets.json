@@ -190,6 +190,8 @@
     "src/modules/translation/sentence-onnx-controller.js",
     "src/modules/translation/sentence-onnx-core.js",
     "src/modules/translation/sentence-onnx-worker.js",
+    "src/modules/translation/sentence-electra-core.js",
+    "src/modules/translation/sentence-electra-controller.js",
     "src/modules/ai-coach/ai-qa-core.js",
     "src/modules/ai-coach/ai-qa.js",
     "src/modules/ai-coach/qa-projects.js",

@@ -356,6 +356,8 @@ Tại **Công cụ → Sửa câu tiếng Trung**, chế độ thử nghiệm ON
 
 Bản thử nghiệm dùng bộ tạo phương án HSK và bộ xếp hạng ngữ cảnh huấn luyện từ ví dụ tổng hợp. Chỉ xử lý các nhóm lỗi đã định nghĩa. Bộ quy tắc cơ bản tiếp tục hoạt động khi ONNX tắt hoặc không nạp được. Worker chạy sau 1,2 giây dừng gõ, bỏ kết quả cũ theo revision và dừng khi rời trang hoặc đưa app vào nền. Công thức huấn luyện và nguồn runtime có trong `vendor/sentence-onnx/SOURCES.md`.
 
+Mục **Thử model 103 MB** nạp gói ELECTRA INT8 từ file do người dùng chọn. Model chỉ chạy khi mở gói hoặc bấm Chạy lại, đánh dấu vị trí nghi vấn mà không thay văn bản. Worker dùng chung runtime với Lite, kiểm tra SHA-256 trước khi mở gói và dừng khi người dùng rời màn hoặc đưa app vào nền. Model lớn không nằm trong bộ tải PWA.
+
 ### Thẻ chỉnh sửa AI
 
 `sentence-review-core.js` chuẩn hóa đầu ra AI thành vị trí UTF-16, đoạn gốc, đoạn thay thế và lý do. Worker và frontend dùng chung helper. Nếu provider trả đoạn sửa có nhãn rõ, helper đối chiếu với bản nháp bằng LCS giới hạn 500 ký tự để tạo các chỉnh sửa. Đoạn nhận xét không có vị trí hoặc bản sửa rõ ràng báo cần kiểm tra lại. Thao tác chèn và xóa dùng chung cơ chế áp dụng/hoàn tác. Local vẫn là bộ mẫu có giới hạn, có gợi ý cho cấu trúc văn viết nâng cao.

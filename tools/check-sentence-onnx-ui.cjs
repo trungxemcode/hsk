@@ -42,6 +42,22 @@ const server = http.createServer((req, res) => {
       const suggestions = editor.locator('.sentence-card[data-source=onnx]');
       await draft.fill('我借了四只书。');
       assert.equal(modelRequests.length, 0, 'No model fetch before opt-in');
+      const trial = editor.locator('.sentence-electra-trial');
+      const trialFile = trial.locator('.sentence-electra-file');
+      const trialStatus = trial.locator('.sentence-electra-status');
+      const trialResults = editor.locator('.sentence-card[data-source=electra]');
+      assert.equal(await trial.locator('summary').isVisible(), true);
+      assert.equal(await trial.locator('.sentence-electra-pick').isVisible(), false);
+      await trial.locator('summary').click();
+      const [chooser] = await Promise.all([
+        page.waitForEvent('filechooser'),
+        trial.getByRole('button', {name: 'Chọn gói model'}).click()
+      ]);
+      await chooser.setFiles({name: 'wrong.hskmodel', mimeType: 'application/octet-stream', buffer: Buffer.from('not a model')});
+      assert.match(await trialStatus.textContent(), /Hãy chọn gói/);
+      assert.equal(modelRequests.length, 0, 'An invalid trial file does not start the Worker');
+      await trial.locator('summary').click();
+
       await toggle.click();
       await page.waitForFunction(() => /Đã xét các mẫu lỗi|Không mở được model/.test(document.querySelector('.sentence-onnx-status').textContent), null, {timeout: 50000});
       assert.match(await status.textContent(), /Đã xét các mẫu lỗi/, errors.join('\n'));
@@ -64,6 +80,25 @@ const server = http.createServer((req, res) => {
       await suggestions.first().getByRole('button', {name: 'Áp dụng', exact: true}).click();
       assert.equal(await draft.inputValue(), '🙂我已经写完作业了。');
       assert.equal(modelRequests.length, 4, 'Restart uses the complete cached model package');
+      if (process.env.HSK_ELECTRA_PACKAGE) {
+        await toggle.click();
+        await page.unroute("**/vendor/sentence-onnx/**");
+        await draft.fill('我昨天去超市买了三只书。');
+        await trial.locator('summary').click();
+        await trialFile.setInputFiles(process.env.HSK_ELECTRA_PACKAGE);
+        const result = trialResults.filter({hasText: '只'});
+        await result.waitFor({timeout: 90000});
+        assert.match(await trialStatus.textContent(), /1 vị trí nghi vấn/);
+        assert.equal(await result.getByRole('button', {name: 'Áp dụng'}).count(), 0);
+        await result.getByRole('button', {name: 'Tìm trong bài'}).click();
+        assert.equal(await draft.evaluate(el => el.value.slice(el.selectionStart, el.selectionEnd)), '只');
+        await draft.fill('我昨天去超市买了三本书。');
+        assert.equal(await trialResults.count(), 0);
+        await trial.getByRole('button', {name: 'Chạy lại'}).click();
+        await page.waitForFunction(() => /0 vị trí nghi vấn/.test(document.querySelector('.sentence-electra-status').textContent));
+        await trial.getByRole('button', {name: 'Dừng model'}).click();
+        assert.match(await trialStatus.textContent(), /Đã dừng/);
+      }
       assert.deepEqual(errors, []);
       console.log('PASS sentence ONNX runtime, correction, undo and cached restart at width', width);
       await page.close();

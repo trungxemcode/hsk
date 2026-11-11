@@ -25,6 +25,14 @@
       ]
     },
     {
+      "id": "sentence-electra-trial",
+      "name": "Thử phát hiện lỗi tiếng Trung tại máy với model lớn",
+      "checks": [
+        {"kind": "file", "file": "src/modules/translation/sentence-electra-core.js", "value": ""},
+        {"kind": "contains", "file": "index.html", "value": "sentence-electra-pick"}
+      ]
+    },
+    {
       "id": "navigation-ai-qa",
       "name": "Hỏi đáp AI và đánh giá lộ trình",
       "checks": [

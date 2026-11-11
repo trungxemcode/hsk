@@ -8,7 +8,7 @@
   const example=panel.querySelector('.sentence-example');
   const cards=panel.querySelector('.sentence-suggestions'),filters=[...panel.querySelectorAll('[data-sentence-filter]')];
   const checker=window.HSKSentenceCheckerCore?.checker;
-  let localSuggestions=[],onnxSuggestions=[],aiSuggestions=[],filter='all',pending=null,inputTimer=0,composing=false;
+  let localSuggestions=[],onnxSuggestions=[],electraSuggestions=[],aiSuggestions=[],filter='all',pending=null,inputTimer=0,composing=false;
   let dismissed=new Set(),undoStack=[],aiSummary='';
   const onnx=window.HSKSentenceOnnx?.({
     toggle:panel.querySelector('.sentence-onnx-toggle'),
@@ -17,6 +17,9 @@
       onnxSuggestions=items.map(item=>({...item,kind:'fix',source:'onnx'}));
       render();
     }
+  });
+  const electra=window.HSKSentenceElectraTrial?.({
+    panel,draft,onSuggestions(items){electraSuggestions=items;render();}
   });
   const signature=item=>`${item.start}:${item.end}:${item.original}:${item.replacement}`;
   function cancelPending(){if(pending)pending.abort();pending=null;submit.disabled=false;aiButton.disabled=false;panel.setAttribute('aria-busy','false');}
@@ -28,7 +31,7 @@
   function syncScroll(){mirror.scrollTop=draft.scrollTop;mirror.scrollLeft=draft.scrollLeft;}
   function uniqueSuggestions(){
     const seen=new Set(),out=[];
-    for(const item of [...aiSuggestions,...localSuggestions,...onnxSuggestions]){
+    for(const item of [...aiSuggestions,...localSuggestions,...onnxSuggestions,...electraSuggestions]){
       const key=signature(item);if(seen.has(key)||dismissed.has(key)||!valid(item))continue;if(out.some(other=>item.start<other.end&&item.end>other.start))continue;seen.add(key);out.push(item);
     }
     return out.sort((a,b)=>a.start-b.start);
@@ -48,14 +51,17 @@
     for(const item of currentErrors()){
       const card=document.createElement('article');card.className='sentence-card';card.dataset.kind=item.kind;card.dataset.source=item.source||'local';
       const head=document.createElement('div');head.className='sentence-card-head';const dot=document.createElement('span');dot.className='sentence-card-dot';
-      const title=document.createElement('h4');title.textContent=(item.kind==='fix'?'Cần sửa':'Gợi ý diễn đạt')+(item.source==='ai'?' · AI':item.source==='onnx'?' · Tại máy':' · Cục bộ');head.append(dot,title);
+      const title=document.createElement('h4');title.textContent=item.reviewOnly?'Cần xem lại · Model 103 MB':(item.kind==='fix'?'Cần sửa':'Gợi ý diễn đạt')+(item.source==='ai'?' · AI':item.source==='onnx'?' · Tại máy':' · Cục bộ');head.append(dot,title);
       const change=document.createElement('p');change.className='sentence-diff';change.lang='zh';
       const del=document.createElement('del');del.className='sentence-del';del.textContent=item.original||'(thêm tại đây)';
       const arrow=document.createElement('span');arrow.className='sentence-arrow';arrow.textContent=' → ';
-      const ins=document.createElement('ins');ins.className='sentence-ins';ins.textContent=item.replacement||'∅';change.append(del,arrow,ins);
+      const ins=document.createElement('ins');ins.className='sentence-ins';ins.textContent=item.replacement||'∅';
+      if(item.reviewOnly)change.textContent=item.original;
+      else change.append(del,arrow,ins);
       const detail=document.createElement('p');detail.className='sentence-card-detail';detail.textContent=item.reason;
       const actions=document.createElement('footer');
-      actions.append(button('Áp dụng','sentence-apply',()=>applySuggestion(item)),button('Bỏ qua','sentence-dismiss',()=>dismissSuggestion(item)),button('Tìm trong bài','sentence-locate',()=>{draft.focus();draft.setSelectionRange(item.start,item.end);}));
+      if(!item.reviewOnly)actions.append(button('Áp dụng','sentence-apply',()=>applySuggestion(item)));
+      actions.append(button('Bỏ qua','sentence-dismiss',()=>dismissSuggestion(item)),button('Tìm trong bài','sentence-locate',()=>{draft.focus();draft.setSelectionRange(item.start,item.end);}));
       card.append(head,change,detail,actions);cards.append(card);
     }
     if(uniqueSuggestions().length&&!cards.children.length){const empty=document.createElement('p');empty.textContent='Không có gợi ý thuộc nhóm này.';cards.append(empty);}
@@ -67,6 +73,7 @@
     undoStack.push({text:draft.value,ai:aiSuggestions.map(x=>({...x})),dismissed:[...dismissed]});if(undoStack.length>20)undoStack.shift();
     const delta=replacement.length-(item.end-item.start);
     draft.setRangeText(replacement,item.start,item.end,'end');
+    electra?.invalidate();
     aiSuggestions=aiSuggestions.filter(other=>other!==item&&(other.end<=item.start||other.start>=item.end)).map(other=>other.start<item.end?other:{...other,start:other.start+delta,end:other.end+delta});
     dismissed.clear();aiSummary='';onnx?.check(draft.value);runLocalCheck();
   }
@@ -81,8 +88,8 @@
     if(!pending)setStatus(aiSummary||(text.trim()?(total?`${total} gợi ý${aiSuggestions.length?' · gồm kết quả AI':' · kiểm tra cục bộ, không dùng AI'}`:'Chưa phát hiện lỗi trong các quy tắc cục bộ. Dùng Kiểm tra sâu bằng AI để xét ngữ cảnh.'): 'Nhập tiếng Trung để kiểm tra ngay khi gõ · không dùng AI.'));
     render();
   }
-  function resetForInput(){cancelPending();aiSuggestions=[];localSuggestions=[];aiSummary='';dismissed.clear();undoStack=[];setStatus(composing?'Đang nhập chữ…':'Đang kiểm tra cục bộ…');scheduleLocalCheck();onnx?.check(draft.value,composing);render();}
-  undoButton.addEventListener('click',()=>{const previous=undoStack.pop();if(!previous)return;cancelPending();clearTimeout(inputTimer);draft.value=previous.text;aiSuggestions=previous.ai;dismissed=new Set(previous.dismissed);aiSummary='';onnx?.check(draft.value);runLocalCheck();draft.focus();});
+  function resetForInput(){cancelPending();aiSuggestions=[];localSuggestions=[];aiSummary='';dismissed.clear();undoStack=[];setStatus(composing?'Đang nhập chữ…':'Đang kiểm tra cục bộ…');scheduleLocalCheck();electra?.invalidate();onnx?.check(draft.value,composing);render();}
+  undoButton.addEventListener('click',()=>{const previous=undoStack.pop();if(!previous)return;cancelPending();clearTimeout(inputTimer);draft.value=previous.text;electra?.invalidate();aiSuggestions=previous.ai;dismissed=new Set(previous.dismissed);aiSummary='';onnx?.check(draft.value);runLocalCheck();draft.focus();});
   function readReviewResponse(payload,text){
     const review=window.HSKSentenceReview.normalize(payload,text);
     if(!review)throw Error('AI chưa trả được gợi ý có vị trí sửa. Hãy bấm kiểm tra lại.');
@@ -99,12 +106,12 @@
   window.addEventListener('hsk-account-ready',()=>{cancelPending();aiSuggestions=[];aiSummary='';runLocalCheck();});
   new MutationObserver(()=>{
     if(panel.hidden){
-      onnx?.pause();
+      onnx?.pause();electra?.pause();
       if(pending){cancelPending();runLocalCheck();}
     }else onnx?.check(draft.value,composing);
   }).observe(panel,{attributes:true,attributeFilter:['hidden']});
   document.addEventListener('visibilitychange',()=>{
-    if(document.hidden)onnx?.pause();
+    if(document.hidden){onnx?.pause();electra?.pause();}
     else if(!panel.hidden)onnx?.check(draft.value,composing);
   });
   window.addEventListener('hsk-lessons-ready',()=>{window.HSKSentenceCheckerCore?.refresh?.();scheduleLocalCheck(0);});

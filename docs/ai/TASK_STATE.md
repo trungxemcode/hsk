@@ -165,3 +165,8 @@ Owner additionally requests equal large-card gaps on Account. PC/mobile direct s
 - Base 332bfcc. Shared sentence-review normalizer replaces prose fallback with anchored cards, supports labelled revised paragraphs through bounded diff and structured edits.
 - Local rules add formal-writing conjunction, causal redundancy, cultural collocation, prevent-negation and binary mismatch cases. Scope remains finite, no new broad neural grammar detector.
 - All review paths keep edits on the supplied original. Test insertions, deletions, repeated text, emoji and reconstruction of the AI revision.
+
+## ELECTRA 103 MB trial
+
+- The sentence editor can open a pinned INT8 ELECTRA package from the device and mark suspected spans as review-only cards. Lite and AI remain separate. The large weights are not served by the PWA.
+- Run `node tools/check-sentence-onnx-ui.cjs` for opt-in and lifecycle checks. Set `HSK_ELECTRA_PACKAGE` to the verified package to exercise actual inference through the same UI test.

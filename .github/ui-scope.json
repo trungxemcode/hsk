@@ -1,1 +1,1 @@
-{"request":"Sửa câu tiếng Trung PC/mobile: kết quả AI luôn là thẻ chỉnh sửa, bổ sung lỗi văn viết phức và trạng thái phạm vi kiểm tra tại máy.","excludedRoutes":["sentence-editor"]}
+{"request": "Sửa câu tiếng Trung PC/mobile: thêm mục thu gọn để chọn gói ONNX 103 MB, chạy tại máy và xem thẻ nghi vấn.", "excludedRoutes": ["sentence-editor"]}
