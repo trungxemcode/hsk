@@ -13,12 +13,12 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    await HSKLegacyMusicCleanup.put('cleanup-one',{url:'offline:two',title:'Bài muốn xóa'},file);
    await HSKLegacyMusicCleanup.put('cleanup-other',{url:'offline:other',title:'Nhạc riêng tài khoản khác'},file);
    const store=HSKVoiceStore.createStore(indexedDB),before=await store.snapshot();await store.replace(before.revision,{source:'pack',voiceId:'zm_yunjian',voiceURI:'',assets:['fixture'],files:[['model','fixture']]},new Map([['fixture',new Blob([new Uint8Array(8192)])]]));
-   for(const [name,n] of [['hsk-offline-sentinel',77],['hsk-music-codec-v1',4096],['hsk-writing-data-2',2048],['hsk-handwriting-neural-ppocrv5-ort122-v1',1024],['hsk-open-dictionary-cedict-v1',512],['unrelated-cache',99]]){const c=await caches.open(name);await c.put('/'+name,new Response(new Uint8Array(n)));}
+   for(const [name,n] of [['hsk-offline-sentinel',77],['hsk-music-codec-v1',4096],['hsk-writing-data-2',2048],['hsk-handwriting-neural-ppocrv5-ort122-v1',1024],['hsk-open-dictionary-cedict-v1',512],['hsk-sentence-onnx-v1',3072],['unrelated-cache',99]]){const c=await caches.open(name);await c.put('/'+name,new Response(new Uint8Array(n)));}
    window.HSKStudio.navigate('account');
   },[...fs.readFileSync('tools/fixtures/music-heaacv2-64k.m4a')]);
   await page.evaluate(()=>HSKStudio.navigate('account'));
   await page.locator('#storageCleanupOpen').click();await page.waitForFunction(()=>!document.querySelector('#storageCleanupStatus').textContent.includes('Đang tính'));
-  assert.equal(await page.locator('.storage-cleanup-row').count(),7);assert.equal(await page.getByText('Nhạc riêng tài khoản khác',{exact:true}).count(),0);assert.equal(await page.locator('#storageCleanupDelete').isDisabled(),true);
+  assert.equal(await page.locator('.storage-cleanup-row').count(),8);assert.equal(await page.getByText('Nhạc riêng tài khoản khác',{exact:true}).count(),0);assert.equal(await page.locator('#storageCleanupDelete').isDisabled(),true);
   assert.match(await page.locator('#storageCleanupTotal').innerText(),/KiB|MiB/);
   // Opening/scanning does not delete anything. Nothing is selected by default.
   assert.equal(await page.locator('.storage-cleanup-row input:checked').count(),0);
@@ -27,6 +27,16 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   await page.locator('#storageCleanupDelete').click();await page.waitForFunction(()=>document.querySelector('#storageCleanupStatus').textContent.includes('Đã xóa 1 / 1'));
   assert.equal(await page.evaluate(async()=>(await caches.open('hsk-writing-data-2')).keys().then(k=>k.length)),0);
   assert.equal(await page.evaluate(async()=>(await caches.open('hsk-music-codec-v1')).keys().then(k=>k.length)),1,'unselected codec stays');
+  const oldSentencePack=page.getByRole('checkbox',{name:'Gói sửa câu tại máy (cũ)',exact:true});
+  assert.match(await oldSentencePack.locator('..').innerText(),/3 KiB/);
+  await oldSentencePack.check();
+  await page.locator('#storageCleanupDelete').click();
+  await page.waitForFunction(()=>document.querySelector('#storageCleanupStatus').textContent.includes('Đã xóa 1 / 1'));
+  assert.equal(await oldSentencePack.count(),0);
+  const remaining=await page.evaluate(async()=>Object.fromEntries(await Promise.all(
+   ['hsk-sentence-onnx-v1','hsk-handwriting-neural-ppocrv5-ort122-v1','hsk-offline-sentinel','unrelated-cache'].map(async name=>[name,(await (await caches.open(name)).keys()).length])
+  )));
+  assert.deepEqual(Object.values(remaining),[0,1,1,1],'only the selected sentence pack is removed');
   // A voice replaced in another tab must not be removed from a stale selection.
   await page.getByRole('checkbox',{name:/Giọng tiếng Trung/ }).check();
   await page.evaluate(async()=>{const s=HSKVoiceStore.createStore(indexedDB),v=await s.snapshot();await s.replace(v.revision,{...v},new Map());});

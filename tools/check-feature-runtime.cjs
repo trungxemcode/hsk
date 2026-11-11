@@ -54,7 +54,7 @@ const regular=['search','learn','quiz','srs','mistakes','compare','account','les
    });
    const editor=page.locator('#sentenceEditor');
    await editor.getByRole('button',{name:'Thử câu mẫu'}).click();
-   await editor.getByRole('button',{name:'Kiểm tra',exact:true}).click();
+   await editor.getByRole('button',{name:'Kiểm tra bằng AI',exact:true}).click();
    await editor.getByText('Thêm 的 trước danh từ.').waitFor();
    assert.equal(await editor.locator('mark').count(),2);
    await editor.getByRole('button',{name:'Cần sửa',exact:true}).click();
