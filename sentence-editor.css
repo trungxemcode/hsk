@@ -446,3 +446,12 @@ html[data-theme="dark"] #sentenceEditor textarea {
 #sentenceEditor .sentence-undo { border: 1px solid var(--se-edge); border-radius: var(--radius-pill); padding: 6px 12px; background: var(--surface); color: var(--ink); }
 #sentenceEditor .sentence-undo:disabled { opacity: .5; }
 #sentenceEditor .sentence-card, #sentenceEditor .sentence-status { overflow-wrap: anywhere; }
+
+/* Insertion anchors occupy zero net width so later highlights stay aligned. */
+#sentenceEditor mark[data-insertion="true"] {
+  display: inline-block;
+  width: 0;
+  border-left: 2px solid var(--se-style);
+  margin-right: -2px;
+  text-decoration: none;
+}

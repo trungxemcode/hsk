@@ -52,7 +52,7 @@
           if (data.type === 'ready') status.textContent = 'Đã bật kiểm tra theo ngữ cảnh tại máy.';
           if (data.type === 'result' && data.revision === revision) {
             onSuggestions(data.suggestions);
-            status.textContent = 'Đã kiểm tra tại máy. Văn bản ở trên thiết bị.';
+            status.textContent = 'Đã xét các mẫu lỗi được hỗ trợ tại máy. Bài phức tạp nên kiểm tra thêm bằng AI.';
           }
           const next = queued;
           queued = null;

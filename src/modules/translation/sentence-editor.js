@@ -42,7 +42,7 @@
     for(const item of uniqueSuggestions()){
       if(item.start<cursor||item.end>draft.value.length)continue;
       mirror.append(draft.value.slice(cursor,item.start));
-      const mark=document.createElement('mark');mark.dataset.kind=item.kind;mark.dataset.source=item.source||'local';mark.textContent=draft.value.slice(item.start,item.end);mirror.append(mark);cursor=item.end;
+      const mark=document.createElement('mark');mark.dataset.kind=item.kind;mark.dataset.source=item.source||'local';mark.dataset.insertion=String(item.start===item.end);mark.textContent=draft.value.slice(item.start,item.end)||'\u200b';mirror.append(mark);cursor=item.end;
     }
     mirror.append(draft.value.slice(cursor)+'\n');syncScroll();
     for(const item of currentErrors()){
@@ -50,7 +50,7 @@
       const head=document.createElement('div');head.className='sentence-card-head';const dot=document.createElement('span');dot.className='sentence-card-dot';
       const title=document.createElement('h4');title.textContent=(item.kind==='fix'?'Cần sửa':'Gợi ý diễn đạt')+(item.source==='ai'?' · AI':item.source==='onnx'?' · Tại máy':' · Cục bộ');head.append(dot,title);
       const change=document.createElement('p');change.className='sentence-diff';change.lang='zh';
-      const del=document.createElement('del');del.className='sentence-del';del.textContent=item.original;
+      const del=document.createElement('del');del.className='sentence-del';del.textContent=item.original||'(thêm tại đây)';
       const arrow=document.createElement('span');arrow.className='sentence-arrow';arrow.textContent=' → ';
       const ins=document.createElement('ins');ins.className='sentence-ins';ins.textContent=item.replacement||'∅';change.append(del,arrow,ins);
       const detail=document.createElement('p');detail.className='sentence-card-detail';detail.textContent=item.reason;
@@ -67,7 +67,7 @@
     undoStack.push({text:draft.value,ai:aiSuggestions.map(x=>({...x})),dismissed:[...dismissed]});if(undoStack.length>20)undoStack.shift();
     const delta=replacement.length-(item.end-item.start);
     draft.setRangeText(replacement,item.start,item.end,'end');
-    aiSuggestions=aiSuggestions.filter(other=>other.end<=item.start||other.start>=item.end).map(other=>other.start<item.end?other:{...other,start:other.start+delta,end:other.end+delta});
+    aiSuggestions=aiSuggestions.filter(other=>other!==item&&(other.end<=item.start||other.start>=item.end)).map(other=>other.start<item.end?other:{...other,start:other.start+delta,end:other.end+delta});
     dismissed.clear();aiSummary='';onnx?.check(draft.value);runLocalCheck();
   }
   function dismissSuggestion(item){
@@ -83,33 +83,13 @@
   }
   function resetForInput(){cancelPending();aiSuggestions=[];localSuggestions=[];aiSummary='';dismissed.clear();undoStack=[];setStatus(composing?'Đang nhập chữ…':'Đang kiểm tra cục bộ…');scheduleLocalCheck();onnx?.check(draft.value,composing);render();}
   undoButton.addEventListener('click',()=>{const previous=undoStack.pop();if(!previous)return;cancelPending();clearTimeout(inputTimer);draft.value=previous.text;aiSuggestions=previous.ai;dismissed=new Set(previous.dismissed);aiSummary='';onnx?.check(draft.value);runLocalCheck();draft.focus();});
-  function readReviewResponse(payload){
-    let value=payload?.sentenceReview??payload?.answer??payload;
-    for(let depth=0;depth<3;depth++){
-      if(value&&typeof value==='object'){
-        if(Array.isArray(value.suggestions))return value;
-        value=value.answer;
-        continue;
-      }
-      if(typeof value!=='string'||!value.trim())break;
-      const cleaned=value.trim().replace(/^`{3}(?:json)?\s*([\s\S]*?)\s*`{3}$/i,'$1').trim();
-      try{value=JSON.parse(cleaned);}
-      catch{
-        if(/^[{\[]/.test(cleaned))break;
-        // Older Workers sometimes return a readable review without edit anchors.
-        return {summary:cleaned.slice(0,4000),suggestions:[],textOnly:true};
-      }
-    }
-    throw Error('AI chưa trả được bài nhận xét đầy đủ. Hãy thử lại.');
+  function readReviewResponse(payload,text){
+    const review=window.HSKSentenceReview.normalize(payload,text);
+    if(!review)throw Error('AI chưa trả được gợi ý có vị trí sửa. Hãy bấm kiểm tra lại.');
+    return review;
   }
   function readSuggestions(text,data){
-    if(!data||!Array.isArray(data.suggestions))throw Error('AI trả về gợi ý chưa đúng định dạng. Hãy thử lại.');
-    const items=[];
-    for(const item of data.suggestions.slice(0,8)){
-      if(!item||!['fix','style'].includes(item.kind)||typeof item.original!=='string'||!item.original||typeof item.replacement!=='string'||item.replacement.length>500||item.replacement===item.original||typeof item.reason!=='string'||!item.reason.trim())continue;
-      const start=text.indexOf(item.original),end=start+item.original.length;if(start<0||text.indexOf(item.original,start+1)>=0||items.some(other=>start<other.end&&end>other.start))continue;items.push({...item,start,end,source:'ai',reason:item.reason.slice(0,350)});
-    }
-    return items.sort((a,b)=>a.start-b.start);
+    return data.suggestions.map(item=>({...item,source:'ai'}));
   }
 
   draft.addEventListener('input',resetForInput);draft.addEventListener('scroll',syncScroll);
@@ -141,7 +121,7 @@
       if(pending!==controller||controller.signal.aborted||draft.value!==text)return;
       const response=await fetch(endpoint,{method:'POST',signal:controller.signal,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({question:text,hsk:level>=1&&level<=6?level:3,history:[],lesson:{id:'sentence-editor',title:'Sửa câu tiếng Trung',words:[],content:{mode:'sentence-editor',localChecker:true,checkerMetrics:metrics}}})});
       const data=await response.json();if(pending!==controller||draft.value!==text||window.HSKAccountDashboard?.user?.uid!==user.uid)return;if(!response.ok)throw Error(data.error||'Chưa kiểm tra được văn bản.');
-      const result=readReviewResponse(data);
+      const result=readReviewResponse(data,text);
       aiSuggestions=readSuggestions(text,result);
       const summary=typeof result.summary==='string'?result.summary.trim().slice(0,result.textOnly?4000:800):'';
       const unanchored=result.suggestions.length>0&&!aiSuggestions.length;

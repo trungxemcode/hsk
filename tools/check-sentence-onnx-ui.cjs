@@ -43,8 +43,8 @@ const server = http.createServer((req, res) => {
       await draft.fill('我借了四只书。');
       assert.equal(modelRequests.length, 0, 'No model fetch before opt-in');
       await toggle.click();
-      await page.waitForFunction(() => /Đã kiểm tra tại máy|Không mở được model/.test(document.querySelector('.sentence-onnx-status').textContent), null, {timeout: 50000});
-      assert.match(await status.textContent(), /Đã kiểm tra tại máy/, errors.join('\n'));
+      await page.waitForFunction(() => /Đã xét các mẫu lỗi|Không mở được model/.test(document.querySelector('.sentence-onnx-status').textContent), null, {timeout: 50000});
+      assert.match(await status.textContent(), /Đã xét các mẫu lỗi/, errors.join('\n'));
       assert.match(await suggestions.first().textContent(), /本书/);
       await suggestions.first().getByRole('button', {name: 'Áp dụng', exact: true}).click();
       assert.equal(await draft.inputValue(), '我借了四本书。');

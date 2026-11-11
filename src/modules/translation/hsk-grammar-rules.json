@@ -1,5 +1,5 @@
 {
-  "version": "2026.11.10.3",
+  "version": "2026.11.11.1",
   "macros": {
     "NUM": "(?:[一两三四五六七八九十百千万亿]+|几|每|这|那|哪)",
     "PRONOUN": "(?:我们|你们|他们|她们|咱们|大家|我|你|他|她|它)",
@@ -425,6 +425,51 @@
       "pattern": "目的是为了",
       "replace": "目的是",
       "message": "Có thể lược 「为了」 sau 「目的是」 để câu gọn hơn.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK6_REDUNDANT_CAUSAL_REASON",
+      "hskLevel": 6,
+      "category": "advanced_writing",
+      "pattern": "(?<=之所以[^，,。！？；;]{2,65})的原因(?=[，,]\\s*是因为)",
+      "replace": "",
+      "message": "「之所以…是因为…」 đã diễn đạt nguyên nhân. Bỏ 「的原因」 bị lặp.",
+      "kind": "fix"
+    },
+    {
+      "id": "HSK6_CULTURAL_COLLOCATION",
+      "hskLevel": 6,
+      "category": "advanced_writing",
+      "pattern": "培养(了?)([^，,。！？；;]{0,12}文化底蕴)",
+      "replace": "丰富$1$2",
+      "message": "「文化底蕴」 thường đi với 丰富 hoặc 增强. Nếu ý là làm phong phú nền tảng văn hóa, dùng 丰富.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK6_PREVENT_DOUBLE_NEGATIVE",
+      "hskLevel": 6,
+      "category": "advanced_writing",
+      "pattern": "(以防[^，,。！？；;]{1,18})不再(发生|出现)",
+      "replace": "$1再次$2",
+      "message": "「以防」 đã mang nghĩa phòng ngừa. Nếu ý là ngăn tái diễn, dùng 「以防…再次发生」.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK6_BINARY_ONE_SIDED",
+      "hskLevel": 6,
+      "category": "advanced_writing",
+      "pattern": "能否([^，,。！？；;]{2,40})([，,]\\s*是[^，,。！？；;]{2,40}的)(必然选择|重要前提|必要条件)",
+      "replace": "$1$2$3",
+      "message": "Vế 能否 nêu hai khả năng, còn vế sau khẳng định một điều kiện. Nếu muốn khẳng định việc cần làm, bỏ 能否.",
+      "kind": "style"
+    },
+    {
+      "id": "HSK6_THROUGH_CAUSATIVE",
+      "hskLevel": 6,
+      "category": "advanced_writing",
+      "pattern": "(?<=(?:^|[，,。！？；])通过[^，,。！？；;]{2,35}[，,]\\s*)使(?=[^，,。！？；;]{2,35}得以)",
+      "replace": "",
+      "message": "Trong mẫu 「通过…，使…得以…」 ở đầu câu, có thể bỏ 使 để vế sau có chủ ngữ.",
       "kind": "style"
     }
   ]

@@ -160,3 +160,8 @@ Owner additionally requests equal large-card gaps on Account. PC/mobile direct s
 - Branch `feat/hsk-onnx-lite` built on the grammar-editor fix. Adds an opt-in contextual ranker and model package in the Sửa câu tiếng Trung editor.
 - 4.4.27 PWA candidate. Static rules remain the fallback. The experimental model ranks bounded HSK edits and was trained on synthetic examples. Broad Chinese benchmark and physical iPhone validation remain separate.
 - Runtime check: `node tools/check-sentence-onnx-ui.cjs`. Reproduce the artifact with `tools/train-sentence-onnx.py` and update the worker asset hashes/version when shipping new weights.
+
+### Grammar cards follow-up
+- Base 332bfcc. Shared sentence-review normalizer replaces prose fallback with anchored cards, supports labelled revised paragraphs through bounded diff and structured edits.
+- Local rules add formal-writing conjunction, causal redundancy, cultural collocation, prevent-negation and binary mismatch cases. Scope remains finite, no new broad neural grammar detector.
+- All review paths keep edits on the supplied original. Test insertions, deletions, repeated text, emoji and reconstruction of the AI revision.
