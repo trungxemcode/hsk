@@ -1,0 +1,6 @@
+# Install torch==2.6.0+cpu from the official PyTorch CPU index separately.
+huggingface_hub==0.30.2
+numpy==1.26.4
+onnx==1.18.0
+onnxruntime==1.22.1
+transformers==4.51.3

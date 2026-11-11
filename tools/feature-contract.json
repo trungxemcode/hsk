@@ -33,6 +33,15 @@
       ]
     },
     {
+      "id": "sentence-model-training",
+      "name": "Cổng huấn luyện model Sửa câu HSK",
+      "checks": [
+        {"kind": "contains", "file": ".github/workflows/train-hsk-sentence-model.yml", "value": "workflow_dispatch"},
+        {"kind": "file", "file": "tools/sentence-training/corpus.py", "value": ""},
+        {"kind": "file", "file": "tools/sentence-training/train.py", "value": ""}
+      ]
+    },
+    {
       "id": "navigation-ai-qa",
       "name": "Hỏi đáp AI và đánh giá lộ trình",
       "checks": [
