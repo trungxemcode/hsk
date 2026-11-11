@@ -1,0 +1,12 @@
+{
+  "name": "HSK 1-6 expanded synthetic sentence error corpus v1",
+  "license": "CC0-1.0",
+  "provenance": "Original hand-authored templates with controlled perturbations, generated deterministically by generate_expanded.py. No scraped or personally identifying data. HSK levels are instructional estimates and examples require native-speaker review before production release.",
+  "purpose": "Expanded ELECTRA localization training and held-out evaluation across 14 error types, including grammatical, orthographic, collocation, pragmatic-naturalness, scope and punctuation cases. Synthetic rows are coverage scaffolding, not a claim of native-speaker frequency.",
+  "generator": "tools/sentence-training/generate_expanded.py",
+  "counts": {
+    "families": 504,
+    "rows": 1008,
+    "variants_per_type_level": 6
+  }
+}
