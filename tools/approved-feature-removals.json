@@ -18,6 +18,24 @@
       "approvedBy": "trungxemcode",
       "approvalUrl": "https://github.com/trungxemcode/hsk/pull/189",
       "reason": "Owner requested replacing entertainment YouTube/yt-dlp/VPS and device-offline music with owner-uploaded R2 streaming. Preserve study lessons, native background controls, playlists/history and account isolation with new R2 guards."
+    },
+    {
+      "id": "sentence-editor",
+      "approvedBy": "trungxemcode",
+      "approvalUrl": "Pending the approval PR URL",
+      "reason": "Owner requested an AI-only sentence editor. Authorize removal of the local grammar rules and spelling engine from the app. Preserve the sentence editor route, AI review, editing, highlighting and undo."
+    },
+    {
+      "id": "sentence-onnx-lite",
+      "approvedBy": "trungxemcode",
+      "approvalUrl": "Pending the approval PR URL",
+      "reason": "Owner requested removing the on-device Lite model from the sentence editor. Preserve separate training tools."
+    },
+    {
+      "id": "sentence-electra-trial",
+      "approvedBy": "trungxemcode",
+      "approvalUrl": "Pending the approval PR URL",
+      "reason": "Owner requested removing the on-device ELECTRA option from the sentence editor. Preserve separate training tools."
     }
   ]
 }
