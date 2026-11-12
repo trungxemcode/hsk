@@ -545,9 +545,11 @@ Nếu phải chuyển vị trí một từ, đưa toàn bộ cụm trước và 
        headers['X-HSK-AI-Provider']='gemini';
        response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':geminiFallbackKey},signal:controller.signal,body:JSON.stringify(providerBody)});
       }else{
+       const upstream=response.status;
        const errData=await response.json().catch(()=>null);
-       const detailError=typeof errData?.error==='string'&&errData.error.trim()?errData.error.trim():null;
+       const detailError=typeof errData?.error==='string'&&errData.error.trim()?errData.error.trim():(typeof errData?.error?.message==='string'&&errData.error.message.trim()?errData.error.message.trim():null);
        const error=detailError||(upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
+        upstream===402?'Tài khoản API riêng đã hết số dư tiền mặt hoặc hạn mức (HTTP 402).':
         upstream===400||upstream===404?'API riêng không chấp nhận yêu cầu hoặc model đã chọn. Kiểm tra model trong Cài đặt.':
         upstream===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng không trả về phản hồi hợp lệ. Hãy thử lại.');
        return reply({error,code:'PERSONAL_AI_UPSTREAM',upstream},upstream===429?429:502);
