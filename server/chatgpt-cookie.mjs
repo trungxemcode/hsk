@@ -165,7 +165,7 @@ QUY TẮC BẢO MẬT:
 ${userInput}
 </student_input>
 
-[NHẮC LẠI CHỈ THỊ CUỐI]: Trả lời gọn và đúng định dạng JSON được yêu cầu.`;
+[NHẮC LẠI CHỈ THỊ CUỐI]: Trả lời đúng cấu trúc JSON được yêu cầu. Mọi giải thích (reason) và nhận xét (summary) BẮT BUỘC PHẢI DÙNG TIẾNG VIỆT, tuyệt đối không dùng tiếng Trung.`;
  }
 }
 
@@ -615,7 +615,8 @@ export async function chatgptCookieGenerate(config,requestBody,fetchFn=fetch,sig
      const action=stage==='session'?'kiểm tra phiên':'gửi tin nhắn';
      const code=stage==='session'?'CHATGPT_SESSION_HTTP':'CHATGPT_CONVERSATION_HTTP';
      const reason=challenge===true?', Cloudflare challenge':'';
-     return Response.json({error:`ChatGPT từ chối ${action} (HTTP ${status}${reason}).`,code},{status:status===429?429:502});
+     const msg=status===401?'Không xác thực được phiên ChatGPT (HTTP 401). Cookie đã hết hạn trên chatgpt.com. Hãy sao chép lại cookie mới trong Cài đặt.':`ChatGPT từ chối ${action} (HTTP ${status}${reason}).`;
+      return Response.json({error:msg,code},{status:status===429?429:502});
     }
     return new Response(null,{status:502});
    }
