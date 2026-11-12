@@ -1,4 +1,25 @@
-# Current task: PWA Asset SHA-256 CRLF line ending mismatch fix (2026-11-12)
+# Current task: Auto-fetch and apply supported AI models for custom/API providers (2026-11-12)
+
+Built the auto-fetch model feature for custom (OpenAI-compatible) and personal AI providers on branch `feat/auto-fetch-custom-models`:
+1. **Server (`server/personal-ai.mjs`, `server/translator-worker.mjs`, `server/translator-worker-bundled.mjs`):**
+   - Added `fetchPersonalAiModels(config, { fetchFn, signal })` supporting custom OpenAI-compatible endpoints (`/models`), DeepSeek, OpenAI, Gemini, Claude, and FOSTA.
+   - Added `op: 'models'` handling to `/personal-ai-settings` route on Cloudflare Worker. Supports explicit API keys or automatically retrieves and decrypts stored credentials if the key field is empty.
+   - Deployed Cloudflare Worker immediately: Current Version ID `bd74c6e5-ac05-4d21-a5ad-0fd95e112f32`.
+2. **Frontend UI & Interactive Model Picker (`index.html`, `studio-layout.css`, `src/modules/account/personal-ai-settings.js`):**
+   - Added "Lấy danh sách model" button next to Model field (`#personalAiFetchModels`).
+   - Added interactive model selector card list container (`#personalAiModelListContainer` & `#personalAiModelList`).
+   - Cards show model ID (monospace bold), description / developer info, active badge ("Đang dùng"), and "Áp dụng" button.
+   - Clicking any model card automatically applies it to `#personalAiModel`, highlights the selection, and updates the status message.
+   - Auto-fetches in background when custom endpoint is configured or provider changes; supports on-demand refresh.
+   - Direct fetch fallback when CORS is enabled on provider, with secure fallback to Cloudflare Worker `/personal-ai-settings` `op: 'models'`.
+3. **Verification & Quality Gates:**
+   - 481/481 server tests passed (added new test verifying `op: 'models'` with custom provider and stored credentials).
+   - Feature preservation check passed (98 capabilities, 447 guards).
+   - Runtime 390px and 1440px checks passed (`tools/check-feature-runtime.cjs`).
+   - PWA release prepared and verified: `4.4.42` (`hsk-offline-4-4-42`, 215 assets).
+   - All files saved with pure LF line endings.
+
+# Previous task: PWA Asset SHA-256 CRLF line ending mismatch fix (2026-11-12)
 
 Fixed the PWA service worker download failure: `Tệp src/modules/account/personal-ai-settings.js chưa khớp phiên bản sau 3 lần tải`.
 

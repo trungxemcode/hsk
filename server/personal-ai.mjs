@@ -292,3 +292,80 @@ export async function probePersonalAiCapabilities(personal,{env={},fetchFn=fetch
  providerModelsCache.set(cacheKey,{at:now(),value});
  return value;
 }
+
+export async function fetchPersonalAiModels(config,{fetchFn=fetch,signal}={}){
+ if(!config||typeof config!=='object')throw Error('Cấu hình không hợp lệ.');
+ const {provider,apiKey,endpoint}=config;
+ if(!apiKey&&provider!=='fosta')throw Error('Chưa có API key.');
+ if(provider==='custom'){
+  if(!endpoint)throw Error('Vui lòng nhập Endpoint / Base URL.');
+  let modelsUrl=endpoint.trim().replace(/\/+$/, '');
+  if(modelsUrl.endsWith('/chat/completions')){
+   modelsUrl=modelsUrl.slice(0,-'/chat/completions'.length)+'/models';
+  }else if(!modelsUrl.endsWith('/models')){
+   modelsUrl+='/models';
+  }
+  const res=await fetchFn(modelsUrl,{
+   method:'GET',
+   headers:{Authorization:'Bearer '+apiKey,'Content-Type':'application/json'},
+   signal,
+   redirect:'follow'
+  });
+  if(!res.ok){
+   const err=await res.json().catch(()=>null);
+   const msg=err?.error?.message||err?.message||('HTTP '+res.status);
+   throw Error('Lỗi từ nhà cung cấp: '+msg);
+  }
+  const data=await res.json().catch(()=>null);
+  const rawList=Array.isArray(data)?data:(Array.isArray(data?.data)?data.data:(Array.isArray(data?.models)?data.models:[]));
+  const models=rawList.map(m=>({
+   id:String(typeof m==='string'?m:(m?.id||m?.name||'')).trim(),
+   description:String(typeof m==='string'?'':(m?.description||(m?.owned_by?'Nhà phát triển: '+m.owned_by:'')))
+  })).filter(m=>m.id&&m.id.length<=100);
+  if(!models.length)throw Error('Không tìm thấy model nào từ endpoint này.');
+  return models;
+ }
+ if(provider==='deepseek'){
+  const res=await fetchFn('https://api.deepseek.com/models',{headers:{Authorization:'Bearer '+apiKey},signal,redirect:'follow'});
+  if(!res.ok)throw Error('HTTP '+res.status);
+  const data=await res.json().catch(()=>null);
+  return (data?.data||[]).map(m=>({id:m.id,description:m.owned_by?'Nhà phát triển: '+m.owned_by:''})).filter(m=>m.id);
+ }
+ if(provider==='openai'){
+  const res=await fetchFn('https://api.openai.com/v1/models',{headers:{Authorization:'Bearer '+apiKey},signal,redirect:'follow'});
+  if(!res.ok)throw Error('HTTP '+res.status);
+  const data=await res.json().catch(()=>null);
+  const allow=new Set(['gpt-4o','gpt-4o-mini','o3-mini','gpt-4.1','gpt-4.1-mini','o4-mini']);
+  return (data?.data||[]).filter(m=>allow.has(m.id)).map(m=>({id:m.id,description:''}));
+ }
+ if(provider==='gemini'){
+  const res=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models',{headers:{'x-goog-api-key':apiKey},signal,redirect:'follow'});
+  if(!res.ok)throw Error('HTTP '+res.status);
+  const data=await res.json().catch(()=>null);
+  return (data?.models||[]).filter(m=>Array.isArray(m?.supportedGenerationMethods)&&m.supportedGenerationMethods.includes('generateContent')).map(m=>({id:String(m?.name||'').replace(/^models\//,''),description:m.displayName||''}));
+ }
+ if(provider==='fosta'){
+  return [
+   {id:'gpt-6-luna',description:'Luna (Mặc định: Nhẹ, Trung bình, Nâng cao, Chuyên sâu)'},
+   {id:'gpt-6-astra',description:'Astra (Mô hình cao cấp nhất)'},
+   {id:'gpt-6.1-sol',description:'Sol (Mô hình cân bằng chi phí)'}
+  ];
+ }
+ if(provider==='chatgpt-cookie'){
+  return [
+   {id:'gpt-6',description:'GPT-6 (Mặc định)'},
+   {id:'gpt-6-instant',description:'GPT-6 Instant'},
+   {id:'gpt-6-thinking',description:'GPT-6 Thinking'},
+   {id:'gpt-5-6',description:'GPT-5.6'},
+   {id:'gpt-4o',description:'GPT-4o'},
+   {id:'gpt-4o-mini',description:'GPT-4o Mini'}
+  ];
+ }
+ if(provider==='muse-cookie'){
+  return [
+   {id:'muse-spark',description:'Muse Spark (Nhanh, nhẹ)'},
+   {id:'muse-pro',description:'Muse Pro (Suy luận sâu)'}
+  ];
+ }
+ return [];
+}

@@ -26,8 +26,9 @@ const worker=createHandler(async (url,init)=>{
   const claims=JSON.parse(Buffer.from(token.split('.')[1],'base64url').toString());
   return Response.json({users:[{localId:claims.sub}]});
  }
- calls.push({url,headers:init.headers,body:JSON.parse(init.body),redirect:init.redirect});
+ calls.push({url,headers:init.headers,body:init?.body?JSON.parse(init.body):null,redirect:init.redirect});
  if(String(url).includes('generativelanguage'))return Response.json({candidates:[{content:{parts:[{text:'{"answer":"你好"}'}]}}]});
+ if(String(url).endsWith('/models'))return Response.json({data:[{id:'deepseek-v4.1-flash-1017',description:'DeepSeek V4.1 Flash'},{id:'deepseek-v4.1',description:'DeepSeek V4.1'}]});
  return Response.json({choices:[{message:{content:personalReply}}]});
 });
 const request=(uid,path,body,workerEnv=env)=>{
@@ -325,4 +326,51 @@ test('custom OpenAI-compatible provider saves custom endpoint, normalizes URL, a
  assert.equal(reply2.status,200);
  assert.equal(calls.at(-1).url,'https://literouter.fun/v1/chat/completions');
  assert.equal(calls.at(-1).body.model,'deepseek/deepseek-chat');
+});
+
+test('settings op: models fetches supported models with provided or stored credentials',async()=>{
+ const fostaRes=await request('alice',settingsPath,{op:'models',settings:{provider:'fosta'}});
+ assert.equal(fostaRes.status,200);
+ const fostaData=await fostaRes.json();
+ assert.equal(fostaData.ok,true);
+ assert.ok(Array.isArray(fostaData.models));
+ assert.ok(fostaData.models.some(m=>m.id==='gpt-6-luna'));
+
+ const customRes=await request('alice',settingsPath,{
+  op:'models',
+  settings:{
+   provider:'custom',
+   endpoint:'https://literouter.fun/api/v1',
+   apiKey:'sk-custom-test-key'
+  }
+ });
+ assert.equal(customRes.status,200);
+ const customData=await customRes.json();
+ assert.equal(customData.ok,true);
+ assert.equal(customData.models.length,2);
+ assert.equal(customData.models[0].id,'deepseek-v4.1-flash-1017');
+ assert.equal(calls.at(-1).url,'https://literouter.fun/api/v1/models');
+ assert.equal(calls.at(-1).headers.Authorization,'Bearer sk-custom-test-key');
+
+ const uid3='custom-saved-models-uid';
+ await request(uid3,settingsPath,{
+  op:'save',
+  settings:{
+   provider:'custom',
+   endpoint:'https://literouter.fun/v1/chat/completions',
+   model:'deepseek-v4.1-flash-1017',
+   enabled:true,
+   apiKey:'sk-saved-key-12345'
+  }
+ });
+ const savedRes=await request(uid3,settingsPath,{
+  op:'models',
+  settings:{provider:'custom'}
+ });
+ assert.equal(savedRes.status,200);
+ const savedData=await savedRes.json();
+ assert.equal(savedData.ok,true);
+ assert.equal(savedData.models[0].id,'deepseek-v4.1-flash-1017');
+ assert.equal(calls.at(-1).url,'https://literouter.fun/v1/models');
+ assert.equal(calls.at(-1).headers.Authorization,'Bearer sk-saved-key-12345');
 });
