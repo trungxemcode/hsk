@@ -1,4 +1,29 @@
-# Current task: ChatGPT Cookie mechanism for AI Q&A (2026-11-08)
+# Current task: Universal AI response unwrapping filter & JSX/XML wrapper resilience (2026-11-12)
+
+Resolved the issue where LLM responses wrapped in XML/JSX tags (e.g. `<text preserveWhitespace>{JSON.stringify({primaryNodeKey:...})}</text>`) and unquoted JS object keys caused raw wrapper code to be rendered in the AI Coach chat and sentence editor.
+
+Key enhancements implemented across server and client:
+1. **Universal Tag & Wrapper Stripping (`cleanWrapperTags`):**
+   - Automatically removes `<text...>`, `<output...>`, `<response...>`, `<result...>`, `<json...>`, `<think...>`, and `<escape...>` tags.
+   - Unwraps `{JSON.stringify(...)}` and `JSON.stringify(...)` wrappers.
+2. **Robust Multi-Strategy Parser (`parseJsonLoose`, `cleanAndParseAiResponse`, `tryParseJson`):**
+   - Strips trailing commas (`,\s*([}\]])` -> `$1`).
+   - Quotes unquoted JavaScript keys (`([{,\s*)([a-zA-Z_$][a-zA-Z0-9_$]*)\s*:` -> `$1"$2":`).
+   - Fixes raw control characters (newlines/tabs inside strings).
+   - Balanced brace scanning to recover embedded objects from noisy LLM stream context.
+   - Regex fallback extraction for fields like `answer`, `content`, `primaryNodeKey`, `nodeLabel`.
+   - Handles nested stringified JSON in `answer` recursively.
+   - Maps `type` to `kind` in `suggestedQuestions` chips.
+3. **Verification & Deployment:**
+   - 480 server tests in `server/*.test.mjs` passed (including new tests for JSX/XML wrappers and unquoted object keys).
+   - Sentence editor runtime tests (`tools/check-sentence-checker.cjs`) passed.
+   - Runtime 390px and 1440px checks passed (`tools/check-feature-runtime.cjs`).
+   - Feature preservation check passed (98 capabilities, 447 guards).
+   - PWA release integrity checked with `python tools/check-pwa-release.py` (215 assets verified, 4.4.40).
+   - Deployed Cloudflare Worker: `hsk-vietnamese-translator` triggers updated (`Current Version ID: c1e1e103-75bf-439f-a3cb-9cc236cb4ebb`).
+   - Pushed commit to `origin/fix/muse-long-response-resilience`.
+
+# Previous task: ChatGPT Cookie mechanism for AI Q&A (2026-11-08)
 
 Implemented the 4-pillar ChatGPT Web Cookie architecture on branch `feat/chatgpt-cookie-ai-qa` based on the design specification:
 1. **TLS Impersonation & Stateless Cookie Manager (`server/chatgpt-cookie/core/`, `server/chatgpt-cookie.mjs`):** Exchanges `__Secure-next-auth.session-token` for `accessToken` via `/api/auth/session` (cached 1h with 5m buffer), sends stateless requests (`history_and_training_disabled: true`) to `/backend-api/conversation`, parses SSE streams, and hides temporary conversations (`PATCH is_visible: false`). Supports both shared server cookie (`CHATGPT_SESSION_TOKEN` / `CHATGPT_COOKIE_BRIDGE_URL`) and per-user encrypted cookie (`provider: 'chatgpt-cookie'` in `personal-ai.mjs` / `#personalAiProvider`).

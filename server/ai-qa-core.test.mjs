@@ -77,3 +77,22 @@ test('unwrapAiQaPayload and unwrapAiQaText unwrap <escape> tags, nested answer.c
  const truncated=`<escape>{\n  "primaryNodeKey": "topic:greeting",\n  "answer": {\n    "status": "answered",\n    "content": "Giải thích ngắn gọn về 你好 và 您好."\n  },\n  "explanationStrategyUsed": "So sánh`;
  assert.equal(C.unwrapAiQaText(truncated),'Giải thích ngắn gọn về 你好 và 您好.');
 });
+
+test('unwrapAiQaPayload and unwrapAiQaText clean XML/JSX wrapper tags, JSON.stringify, and unquoted object keys', () => {
+  const userScreenshotPayload = `<text preserveWhitespace>{JSON.stringify({primaryNodeKey:"topic:m-mw7zah08-1w4fm2z",nodeLabel:"Các cách chào hỏi tiếng Trung",coreRulesSummary:"你好 (nǐ hǎo) là cách chào hỏi thông dụng trong tiếng Trung.",answer:"你好! (Nǐ hǎo!) — Xin chào! 😊\\n\\nRất vui được gặp bạn! Hôm nay bạn muốn học từ vựng, ngữ pháp hay luyện giao tiếp tiếng Trung HSK 3?",explanationStrategyUsed:"Chào hỏi tự nhiên, kèm chữ Hán, pinyin và nghĩa tiếng Việt.",optionalMicroCheck:null,suggestedQuestions:[{type:"decision_guide",text:"Khi nào dùng 你好 và 您好?"},{type:"context_shift",text:"Buổi chiều chào bằng tiếng Trung thế nào?"},{type:"practice_request",text:"Cho mình một đoạn hội thoại chào hỏi ngắn nhé."}],memoryCandidates:[]})}</text>`;
+  const unwrapped = C.unwrapAiQaPayload(userScreenshotPayload);
+  assert.equal(unwrapped.primaryNodeKey, 'topic:m-mw7zah08-1w4fm2z');
+  assert.equal(unwrapped.nodeLabel, 'Các cách chào hỏi tiếng Trung');
+  assert.match(unwrapped.answer, /^你好! \(Nǐ hǎo!\) — Xin chào!/);
+  assert.equal(unwrapped.answer.includes('<text'), false);
+  assert.equal(unwrapped.answer.includes('JSON.stringify'), false);
+  assert.equal(Array.isArray(unwrapped.suggestedQuestions), true);
+  assert.equal(unwrapped.suggestedQuestions.length, 3);
+
+  const cleanText = C.unwrapAiQaText(userScreenshotPayload);
+  assert.match(cleanText, /^你好! \(Nǐ hǎo!\) — Xin chào!/);
+  assert.equal(cleanText.includes('<text'), false);
+  assert.equal(cleanText.includes('JSON.stringify'), false);
+  assert.equal(cleanText.includes('primaryNodeKey'), false);
+});
+

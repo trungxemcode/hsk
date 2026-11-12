@@ -600,18 +600,77 @@ Nếu phải chuyển vị trí một từ, đưa toàn bộ cụm trước và 
      await qaFinish(roleEnv,qaSession,{answer,aiSource},provider,{rawFetch:rawFetchFn,ctx,signal:controller.signal});
      return reply({answer,sentenceReview:result,aiSource});
     }
-    let parsed;
-    try{parsed=JSON.parse(answerText);}catch{
-     if(usePersonalAi||useSharedChatGptCookie){
-      const fencedJson=answerText.match(/(?:^|\n)\s*```(?:json)?[ \t]*\r?\n(\s*\{[\s\S]*?\})\s*```/i);
-      if(fencedJson){try{parsed=JSON.parse(fencedJson[1]);}catch{}}
-      if(!parsed){const b0=answerText.indexOf('{'),b1=answerText.lastIndexOf('}');if(b0!==-1&&b1>b0){try{parsed=JSON.parse(answerText.slice(b0,b1+1));}catch{}}}
-      if(!parsed&&answerText&&!fencedJson&&!/^(?:```json|[{\[])/i.test(answerText)){
-       parsed={answer:answerText.length<=5000?answerText:answerText.slice(0,4999)+'…'};
+    function cleanAndParseAiResponse(raw){
+     if(!raw||typeof raw!=='string')return null;
+     let s=raw.trim();
+     s=s.replace(/<\/?escape>/gi,'');
+     s=s.replace(/<(?:think|thought|reasoning)>[\s\S]*?<\/(?:think|thought|reasoning)>/gi,'');
+     s=s.replace(/<\/?(?:text|output|response|result|json)(?:\s+[^>]*)?>/gi,'').trim();
+     s=s.replace(/(?:^|\s*\{)\s*JSON\.(?:stringify|parse)\s*\(\s*([\s\S]*?)\s*\)\s*(?:\}\s*|$)/g,'$1').trim();
+     s=s.replace(/(?:^|\s*\{)\s*JSON\.(?:stringify|parse)\s*\(\s*([\s\S]*?)\s*\)\s*(?:\}\s*|$)/g,'$1').trim();
+     const fenced=s.match(/```(?:json|javascript|js)?\s*([\s\S]*?)\s*```/i);
+     if(fenced)s=fenced[1].trim();
+     s=s.replace(/<\/?(?:text|output|response|result|json)(?:\s+[^>]*)?>/gi,'').trim();
+     s=s.replace(/(?:^|\s*\{)\s*JSON\.(?:stringify|parse)\s*\(\s*([\s\S]*?)\s*\)\s*(?:\}\s*|$)/g,'$1').trim();
+     function tryCand(cand){
+      if(!cand||typeof cand!=='string')return null;
+      let t=cand.trim();
+      try{const p=JSON.parse(t);if(p&&typeof p==='object')return p;}catch{}
+      const noTrailingCommas=t.replace(/,\s*([}\]])/g,'$1');
+      try{const p=JSON.parse(noTrailingCommas);if(p&&typeof p==='object')return p;}catch{}
+      const quotedKeys=noTrailingCommas.replace(/([{,]\s*)([a-zA-Z_$][a-zA-Z0-9_$]*)\s*:/g,'$1"$2":');
+      try{const p=JSON.parse(quotedKeys);if(p&&typeof p==='object')return p;}catch{}
+      const repaired=quotedKeys.replace(/[\u0000-\u001f]/g,c=>c==='\n'?'\\n':c==='\r'?'':c==='\t'?'\\t':'');
+      try{const p=JSON.parse(repaired);if(p&&typeof p==='object')return p;}catch{}
+      return null;
+     }
+     let parsed=tryCand(s);
+     if(!parsed){
+      const first=s.indexOf('{'),last=s.lastIndexOf('}');
+      if(first!==-1&&last>first)parsed=tryCand(s.slice(first,last+1));
+     }
+     if(!parsed&&s.includes('{')){
+      let startIdx=s.indexOf('{');
+      while(startIdx!==-1&&!parsed){
+       let depth=0,inString=false,esc=false,endIdx=-1;
+       for(let i=startIdx;i<s.length;i++){
+        const c=s[i];
+        if(esc){esc=false;continue;}
+        if(c==='\\'){esc=true;continue;}
+        if(c==='"'){inString=!inString;continue;}
+        if(!inString){
+         if(c==='{')depth++;
+         else if(c==='}'){depth--;if(depth===0){endIdx=i;break;}}
+        }
+       }
+       if(endIdx>startIdx){parsed=tryCand(s.slice(startIdx,endIdx+1));if(parsed)break;}
+       startIdx=s.indexOf('{',startIdx+1);
       }
      }
-     if(!parsed)return reply({error:'AI trả lời chưa đúng định dạng. Hãy thử lại.'},502);
+     if(!parsed){
+      const ansMatch=s.match(/(?:"|')?(?:answer|answer_vi|content|text|explanation)(?:"|')?\s*:\s*"((?:\\.|[^"\\])*)"/);
+      if(ansMatch&&ansMatch[1]){
+       const ans=ansMatch[1].replace(/\\n/g,'\n').replace(/\\r/g,'').replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\\\/g,'\\');
+       const nodeKey=s.match(/(?:"|')?primaryNodeKey(?:"|')?\s*:\s*"((?:\\.|[^"\\])*)"/)?.[1]||'';
+       const nodeLabel=s.match(/(?:"|')?nodeLabel(?:"|')?\s*:\s*"((?:\\.|[^"\\])*)"/)?.[1]||'';
+       const coreRule=s.match(/(?:"|')?coreRuleSummary(?:"|')?\s*:\s*"((?:\\.|[^"\\])*)"/)?.[1]||'';
+       parsed={answer:ans,...(nodeKey?{primaryNodeKey:nodeKey}:{}),...(nodeLabel?{nodeLabel}:{}),...(coreRule?{coreRuleSummary:coreRule}:{})};
+      }
+     }
+     if(!parsed&&(usePersonalAi||useSharedChatGptCookie)&&s&&!fenced&&!/^(?:```json|[{\[])/i.test(s)){
+      parsed={answer:s.length<=5000?s:s.slice(0,4999)+'…'};
+     }
+     if(parsed&&typeof parsed.answer==='string'){
+      const trimmedAns=parsed.answer.trim();
+      if((trimmedAns.startsWith('{')||trimmedAns.startsWith('<')||trimmedAns.startsWith('```'))&&/(?:"|')?(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)(?:"|')?\s*:/i.test(trimmedAns)){
+       const nested=cleanAndParseAiResponse(trimmedAns);
+       if(nested&&typeof nested==='object')parsed={...nested,...parsed,answer:nested.answer||parsed.answer};
+      }
+     }
+     return parsed;
     }
+    let parsed=cleanAndParseAiResponse(answerText);
+    if(!parsed)return reply({error:'AI trả lời chưa đúng định dạng. Hãy thử lại.'},502);
     if((usePersonalAi||useSharedChatGptCookie)&&typeof parsed==='string')parsed={answer:parsed};
     if(isAiQa&&parsed?.error==='OUT_OF_SCOPE')return reply({error:'Yêu cầu của bạn nằm ngoài phạm vi học tiếng Trung HSK!',code:'OUT_OF_SCOPE'},400);
     let answer=parsed?.answer;
@@ -626,7 +685,7 @@ Nếu phải chuyển vị trí một từ, đưa toàn bộ cụm trước và 
      if(typeof answer!=='string'||!answer.trim()||answer.length>5000)return reply({error:'Gia sư AI trả về dữ liệu chưa đầy đủ. Hãy thử lại.'},502);
      const strategy=typeof parsed.explanationStrategyUsed==='string'&&parsed.explanationStrategyUsed.trim()?parsed.explanationStrategyUsed.trim().slice(0,120):'direct_explanation';
      const primaryNodeKey=String(parsed.primaryNodeKey||'').trim().slice(0,120),nodeLabel=String(parsed.nodeLabel||'').trim().slice(0,160),coreRuleSummary=String(parsed.coreRuleSummary||'').trim().slice(0,300);
-     const suggestedQuestions=Array.isArray(parsed.suggestedQuestions)?parsed.suggestedQuestions.slice(0,3).map(x=>({kind:['decision_guide','context_shift','practice_request'].includes(x?.kind)?x.kind:'decision_guide',text:String(x?.text||'').trim().replace(/\s+/g,' ').slice(0,180)})).filter(x=>x.text.length>=4):[];
+     const suggestedQuestions=Array.isArray(parsed.suggestedQuestions)?parsed.suggestedQuestions.slice(0,3).map(x=>{const k=x?.kind||x?.type;return {kind:['decision_guide','context_shift','practice_request'].includes(k)?k:'decision_guide',text:String(x?.text||'').trim().replace(/\s+/g,' ').slice(0,180)};}).filter(x=>x.text.length>=4):[];
      const micro=parsed.optionalMicroCheck&&typeof parsed.optionalMicroCheck==='object'?{nodeKey:String(parsed.optionalMicroCheck.nodeKey||'').slice(0,120),label:String(parsed.optionalMicroCheck.label||'').slice(0,160),prompt:String(parsed.optionalMicroCheck.prompt||'').slice(0,500),acceptedAnswers:Array.isArray(parsed.optionalMicroCheck.acceptedAnswers)?parsed.optionalMicroCheck.acceptedAnswers.map(String).slice(0,5):[],hint:String(parsed.optionalMicroCheck.hint||'').slice(0,300),nextStepIfAssisted:String(parsed.optionalMicroCheck.nextStepIfAssisted||'').slice(0,300)}:null;
      const candidates=Array.isArray(parsed.memoryCandidates)?parsed.memoryCandidates.slice(0,8).map(c=>({nodeKey:String(c?.nodeKey||'').slice(0,120),label:String(c?.label||'').slice(0,160),candidateType:['interest_only','ai_hypothesis','observed_mistake'].includes(c?.candidateType)?c.candidateType:'ai_hypothesis',manifestation:String(c?.manifestation||'').slice(0,300),evidenceMessageId:String(c?.evidenceMessageId||'').slice(0,120),evidenceQuote:String(c?.evidenceQuote||'').slice(0,500),explanationSummary:String(c?.explanationSummary||'').slice(0,240),nextPedagogicalStep:String(c?.nextPedagogicalStep||'').slice(0,240)})):[];
      if(!usePersonalAi)await qaUsage(env,payload);await qaFinish(roleEnv,qaSession,{answer,mode:'ai-qa',explanationStrategyUsed:strategy,suggestedQuestions,memoryCandidates:candidates},headers['X-HSK-AI-Provider'],{rawFetch:rawFetchFn,ctx,signal:controller.signal});return reply({answer,primaryNodeKey,nodeLabel,coreRuleSummary,explanationStrategyUsed:strategy,optionalMicroCheck:micro,suggestedQuestions,memoryCandidates:candidates,mode:'ai-qa'});
