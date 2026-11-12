@@ -1,6 +1,6 @@
 // Hỏi đáp AI: nhà cung cấp mà học viên chọn trong ô chat. 'auto' giữ nguyên hành vi cũ của Worker.
 export const AI_PROVIDER_CHOICES=new Set(['auto','system-gemini','system-chatgpt','personal']);
-export const PERSONAL_PROVIDER_IDS=['openai','fosta','deepseek','claude','gemini','chatgpt-cookie','muse-cookie'];
+export const PERSONAL_PROVIDER_IDS=['openai','fosta','deepseek','claude','gemini','chatgpt-cookie','muse-cookie','custom'];
 
 export function normalizeAiProviderChoice(value){
   if(value===undefined||value===null||value==='')return 'auto';
@@ -41,6 +41,7 @@ export function describeAiProviders({geminiReady=false,sharedCookieReady=false,p
           enabled:pData.enabled===true,
           provider:pId,
           model:typeof pData.model==='string'?pData.model.slice(0,100):null,
+          ...(typeof pData.endpoint==='string'?{endpoint:pData.endpoint.slice(0,300)}:{}),
           ...(typeof pData.planType==='string'?{planType:pData.planType}:{}),
           ...(Array.isArray(pData.models)&&pData.models.length?{models:pData.models.slice(0,12)}:{})
         };

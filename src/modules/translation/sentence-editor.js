@@ -17,7 +17,7 @@
   const cards = panel.querySelector('.sentence-suggestions');
   const help = panel.querySelector('.sentence-help');
   const filters = [...panel.querySelectorAll('[data-sentence-filter]')];
-  const providerNames = Object.freeze({gemini:'Gemini', xkiro:'xKiro', openai:'OpenAI', anthropic:'Claude', claude:'Claude', deepseek:'DeepSeek', fosta:'Fosta', 'chatgpt-cookie':'ChatGPT'});
+  const providerNames = Object.freeze({gemini:'Gemini', xkiro:'xKiro', openai:'OpenAI', anthropic:'Claude', claude:'Claude', deepseek:'DeepSeek', fosta:'Fosta', 'chatgpt-cookie':'ChatGPT', 'muse-cookie':'Muse AI', custom:'Tùy chỉnh'});
   const initialStatus = status.textContent;
   const han = /\p{Script=Han}/u;
 

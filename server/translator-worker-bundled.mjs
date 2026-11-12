@@ -2130,7 +2130,7 @@ export async function museAiGenerate(config, requestBody, fetchFn = fetch, signa
 
 // Hỏi đáp AI: nhà cung cấp mà học viên chọn trong ô chat. 'auto' giữ nguyên hành vi cũ của Worker.
 export const AI_PROVIDER_CHOICES=new Set(['auto','system-gemini','system-chatgpt','personal']);
-export const PERSONAL_PROVIDER_IDS=['openai','fosta','deepseek','claude','gemini','chatgpt-cookie','muse-cookie'];
+export const PERSONAL_PROVIDER_IDS=['openai','fosta','deepseek','claude','gemini','chatgpt-cookie','muse-cookie','custom'];
 
 export function normalizeAiProviderChoice(value){
   if(value===undefined||value===null||value==='')return 'auto';
@@ -2171,6 +2171,7 @@ export function describeAiProviders({geminiReady=false,sharedCookieReady=false,p
           enabled:pData.enabled===true,
           provider:pId,
           model:typeof pData.model==='string'?pData.model.slice(0,100):null,
+          ...(typeof pData.endpoint==='string'?{endpoint:pData.endpoint.slice(0,300)}:{}),
           ...(typeof pData.planType==='string'?{planType:pData.planType}:{}),
           ...(Array.isArray(pData.models)&&pData.models.length?{models:pData.models.slice(0,12)}:{})
         };
@@ -2199,8 +2200,21 @@ const PERSONAL_PROVIDERS={
  claude:'https://api.anthropic.com/v1/messages',
  gemini:'https://generativelanguage.googleapis.com/v1beta/models/',
  'chatgpt-cookie':'https://chatgpt.com/backend-api/conversation',
- 'muse-cookie':'https://muse.ai/api/hatch/token'
+ 'muse-cookie':'https://muse.ai/api/hatch/token',
+ custom:''
 };
+function isValidEndpointUrl(str){
+ if(typeof str!=='string'||str.length<8||str.length>300)return false;
+ try{
+  const u=new URL(str);
+  if(u.protocol!=='https:'&&u.protocol!=='http:')return false;
+  const h=u.hostname.toLowerCase();
+  if(h==='localhost'||h.endsWith('.localhost')||h==='127.0.0.1'||h==='0.0.0.0'||h==='::1'||h==='169.254.169.254'||h.startsWith('10.')||h.startsWith('192.168.')||/^172\.(1[6-9]|2\d|3[01])\./.test(h)||h.endsWith('.internal')||h.endsWith('.local'))return false;
+  return true;
+ }catch{
+  return false;
+ }
+}
 const PERSONAL_FOSTA_MODELS=new Set([
  'gpt-6.1-sol','gpt-6-astra','gpt-6-luna',
  'gpt-6-luna:low','gpt-6-luna:medium','gpt-6-luna:high','gpt-6-luna:xhigh',
@@ -2215,7 +2229,13 @@ async function personalCipher(env){
  return crypto.subtle.importKey('raw',await crypto.subtle.digest('SHA-256',personalEncode(env.AI_PERSONAL_KEY_SECRET)),{name:'AES-GCM'},false,['encrypt','decrypt']);
 }
 function personalPublic(record){
- return record?{configured:true,enabled:record.enabled,provider:record.provider,model:record.model}:{configured:false,enabled:false};
+ return record?{
+  configured:true,
+  enabled:record.enabled,
+  provider:record.provider,
+  model:record.model,
+  ...(record.endpoint?{endpoint:record.endpoint}:{})
+ }:{configured:false,enabled:false};
 }
 async function loadAllPersonalProviders(store,fallbackRecord){
  let index=await store.get('personal-ai-providers-index');
@@ -2227,11 +2247,25 @@ async function loadAllPersonalProviders(store,fallbackRecord){
   let rec=await store.get('personal-ai-prov:'+p);
   if(!rec&&fallbackRecord?.provider===p)rec=fallbackRecord;
   if(rec&&rec.provider===p){
-   map[p]={configured:true,enabled:rec.enabled===true,provider:p,model:rec.model,...(rec.planType?{planType:rec.planType}:{})};
+   map[p]={
+    configured:true,
+    enabled:rec.enabled===true,
+    provider:p,
+    model:rec.model,
+    ...(rec.planType?{planType:rec.planType}:{}),
+    ...(rec.endpoint?{endpoint:rec.endpoint}:{})
+   };
   }
  }
  if(fallbackRecord?.provider&&!map[fallbackRecord.provider]){
-  map[fallbackRecord.provider]={configured:true,enabled:fallbackRecord.enabled===true,provider:fallbackRecord.provider,model:fallbackRecord.model,...(fallbackRecord.planType?{planType:fallbackRecord.planType}:{})};
+  map[fallbackRecord.provider]={
+   configured:true,
+   enabled:fallbackRecord.enabled===true,
+   provider:fallbackRecord.provider,
+   model:fallbackRecord.model,
+   ...(fallbackRecord.planType?{planType:fallbackRecord.planType}:{}),
+   ...(fallbackRecord.endpoint?{endpoint:fallbackRecord.endpoint}:{})
+  };
  }
  return map;
 }
@@ -2274,7 +2308,7 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
   return Response.json({...personalPublic(record),providers});
  }
  if(action==='personal-ai-use'){
-  const targetProvider=typeof settings?.provider==='string'&&PERSONAL_PROVIDERS[settings.provider]?settings.provider:null;
+  const targetProvider=typeof settings?.provider==='string'&&Object.hasOwn(PERSONAL_PROVIDERS,settings.provider)?settings.provider:null;
   let record=null;
   if(targetProvider){
    record=await storage.get('personal-ai-prov:'+targetProvider);
@@ -2291,11 +2325,12 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
   },await personalCipher(env),personalBytes(record.ciphertext)));
   return Response.json({...personalPublic(record),apiKey});
  }
- if(action!=='personal-ai-save'||!settings||Object.keys(settings).some(k=>!['provider','model','enabled','apiKey'].includes(k)))return Response.json({}, {status:400});
- const {provider,model,enabled,apiKey}=settings;
+ if(action!=='personal-ai-save'||!settings||Object.keys(settings).some(k=>!['provider','model','enabled','apiKey','endpoint'].includes(k)))return Response.json({}, {status:400});
+ const {provider,model,enabled,apiKey,endpoint}=settings;
  const maxKeyLen=(provider==='chatgpt-cookie'||provider==='muse-cookie')?16384:512;
- if(!Object.hasOwn(PERSONAL_PROVIDERS,provider)||typeof model!=='string'||!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(model)||
+ if(!Object.hasOwn(PERSONAL_PROVIDERS,provider)||typeof model!=='string'||!/^[a-z0-9][a-z0-9._/:-]{0,99}$/i.test(model)||
   typeof enabled!=='boolean'||provider==='fosta'&&!PERSONAL_FOSTA_MODELS.has(model)||
+  provider==='custom'&&endpoint!==undefined&&!isValidEndpointUrl(endpoint)||
   apiKey!==undefined&&(typeof apiKey!=='string'||apiKey.length<8||apiKey.length>maxKeyLen||!(provider==='chatgpt-cookie'||provider==='muse-cookie'?/^[ -~]+$/:/^[!-~]+$/).test(apiKey)))return Response.json({}, {status:400});
  const cipher=await personalCipher(env);
  const inferredPlan=provider==='chatgpt-cookie'?((apiKey?.includes('|')||apiKey?.length>4000||['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free'):undefined;
@@ -2304,7 +2339,14 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
   let previous=await tx.get('personal-ai-prov:'+provider);
   if(!previous&&legacy?.provider===provider)previous=legacy;
   if(!apiKey&&!previous?.ciphertext)return Response.json({}, {status:400});
-  const record={provider,model,enabled,iv:previous?.iv,ciphertext:previous?.ciphertext,...(inferredPlan?{planType:inferredPlan}:previous?.planType?{planType:previous.planType}:{})};
+  if(provider==='custom'&&!endpoint&&!previous?.endpoint)return Response.json({}, {status:400});
+  const record={
+   provider,model,enabled,
+   iv:previous?.iv,
+   ciphertext:previous?.ciphertext,
+   ...(inferredPlan?{planType:inferredPlan}:previous?.planType?{planType:previous.planType}:{}),
+   ...(provider==='custom'?{endpoint:endpoint||previous?.endpoint}:{})
+  };
   if(apiKey){
    const iv=crypto.getRandomValues(new Uint8Array(12));
    const ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:personalEncode(uid+':'+provider)},cipher,personalEncode(apiKey));
@@ -2333,10 +2375,13 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
  const {provider,model,apiKey}=config;
  if(provider==='chatgpt-cookie')return chatgptCookieGenerate(config,requestBody,fetchFn,signal,options);
  if(provider==='muse-cookie')return museAiGenerate(config,requestBody,fetchFn,signal,options);
- const endpoint=PERSONAL_PROVIDERS[provider];
+ const endpoint=provider==='custom'?config.endpoint:PERSONAL_PROVIDERS[provider];
  if(!endpoint)throw Error('Invalid provider');
  const headers={'Content-Type':'application/json'};
  let url=endpoint,body=requestBody;
+ if(provider==='custom'&&!url.endsWith('/chat/completions')){
+  url=url.replace(/\/+$/, '')+'/chat/completions';
+ }
  if(provider==='gemini'){
   url+=encodeURIComponent(model)+':generateContent';
   headers['x-goog-api-key']=apiKey;
@@ -2357,7 +2402,7 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
      fostaModel=parts[0];fostaEffort=parts[1];
     }
    }
-   body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{})};
+   body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(requestBody.generationConfig?.temperature!==undefined?{temperature:requestBody.generationConfig.temperature}:{}),...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{stream:false})};
   }
  }
  const response=await fetchFn(url,{method:'POST',headers,body:JSON.stringify(body),signal,redirect:'manual'});
@@ -2366,7 +2411,7 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
  if(!response.ok||provider==='gemini')return response;
  const payload=await response.json().catch(()=>null);
  const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
-  payload?.choices?.[0]?.message?.content;
+  (payload?.choices?.[0]?.message?.content??payload?.choices?.[0]?.text);
  if(typeof text!=='string')return new Response(null,{status:502});
  return Response.json({candidates:[{content:{parts:[{text:text.trim()}]}}]});
 }
@@ -2417,6 +2462,19 @@ export async function probePersonalAiCapabilities(personal,{env={},fetchFn=fetch
    }
   }else if(provider==='fosta'){
    value={models:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol']};
+  }else if(provider==='custom'&&personal.endpoint){
+   let modelsUrl=personal.endpoint;
+   if(modelsUrl.endsWith('/chat/completions')){
+    modelsUrl=modelsUrl.slice(0,-'/chat/completions'.length)+'/models';
+   }else if(!modelsUrl.endsWith('/models')){
+    modelsUrl=modelsUrl.replace(/\/+$/, '')+'/models';
+   }
+   const res=await fetchFn(modelsUrl,{method:'GET',headers:{Authorization:'Bearer '+apiKey},signal,redirect:'manual'});
+   if(res.ok){
+    const data=await res.json().catch(()=>null);
+    const ids=(data?.data||[]).map(m=>m?.id).filter(id=>typeof id==='string'&&id.trim().length<=100).slice(0,20);
+    if(ids.length)value={models:ids};
+   }
   }else if(provider==='muse-cookie'){
    const info=await probeMuseAiAccount(apiKey,{fetchFn,signal,now});
    value={models:info?.models?.length?info.models:MUSE_DEFAULT_MODELS};
@@ -4141,21 +4199,52 @@ function buildWrongAnswerInstruction(lesson){
       original = original.replace(/^[“”"「『]+|[”"」』]+$/gu, '').trim();
       replacement = cleanMarkdownWrap(replacement).replace(/^[“”"「『]+|[”"」』]+$/gu, '').trim();
       if (replacement.length > 700 || original === replacement || !safeEditText(replacement, text) || !reason.trim()) continue;
-      let start;
+      let start = -1;
       if (Number.isInteger(edit.start) && Number.isInteger(edit.end) && edit.end === edit.start + original.length &&
-          edit.start >= 0 && edit.end <= text.length && text.slice(edit.start, edit.end) === original) start = edit.start;
-      else {
+          edit.start >= 0 && edit.end <= text.length && text.slice(edit.start, edit.end) === original) {
+        start = edit.start;
+      } else {
         if (!original) continue;
-        start = text.indexOf(original);
-        if (start < 0 || text.indexOf(original, start + 1) >= 0) continue;
+        const occurrences = [];
+        let pos = text.indexOf(original);
+        while (pos >= 0) {
+          occurrences.push(pos);
+          pos = text.indexOf(original, pos + 1);
+        }
+        if (occurrences.length === 1) {
+          start = occurrences[0];
+        } else if (occurrences.length > 1) {
+          const nonOverlapping = occurrences.filter(p => {
+            const e = p + original.length;
+            return !accepted.some(other => p === other.start || (p < other.end && e > other.start));
+          });
+          if (nonOverlapping.length > 0) {
+            start = nonOverlapping[0];
+          }
+        }
       }
+      if (start < 0) continue;
       const end = start + original.length;
       if (accepted.some(other => start === other.start || start < other.end && end > other.start)) continue;
       if (text.length - original.length + replacement.length > 500) continue;
       accepted.push({kind, start, end, original, replacement, reason: reason.trim().slice(0, 350), ...(edit.fromRewrite === true ? {fromRewrite: true} : {})});
       if (accepted.length === 12) break;
     }
-    if (suggestions.length && !accepted.length) return null;
+    if (suggestions.length && !accepted.length) {
+      if (typeof correctedCandidate === 'string') {
+        const corrected = cleanMarkdownWrap(correctedCandidate);
+        if (corrected.length <= 500 && safeEditText(corrected, text) && (!han.test(text) || han.test(corrected))) {
+          const fallbackEdits = diffEdits(text, corrected);
+          if (fallbackEdits.length) {
+            return {
+              summary: 'AI đã đề xuất ' + fallbackEdits.length + ' chỉnh sửa.',
+              suggestions: fallbackEdits.sort((a,b) => a.start - b.start)
+            };
+          }
+        }
+      }
+      return null;
+    }
     return {
       summary: accepted.length ? 'AI đã đề xuất ' + accepted.length + ' chỉnh sửa.' : 'AI chưa thấy chỗ cần sửa.',
       suggestions: accepted.sort((a,b) => a.start - b.start)
@@ -4481,13 +4570,13 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    const isAiQa=isLessonAsk&&body.lesson?.content?.mode==='ai-qa';
    const isPersonalAllowed=isAiQa||isLessonAsk;
    const thinking=body.thinking??'low',requestedAiModel=isPersonalAllowed&&typeof body.aiModel==='string'?body.aiModel.trim():'';
-   if(isPersonalAllowed&&(!QA_THINKING_MODELS.has(thinking)||requestedAiModel&&!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(requestedAiModel)))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
+   if(isPersonalAllowed&&(!QA_THINKING_MODELS.has(thinking)||requestedAiModel&&!/^[a-z0-9][a-z0-9._/:-]{0,99}$/i.test(requestedAiModel)))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
    const aiChoice=isPersonalAllowed?normalizeAiProviderChoice(body.aiProvider):'auto';
    if(aiChoice===null)return reply({error:'Nhà cung cấp AI không hợp lệ.',code:'AI_PROVIDER_INVALID'},400);
    let personalAi=null;
    if(isPersonalAllowed&&env.AI_CONTROL){
     try{
-     const targetProvider=(typeof body.personalProvider==='string'&&PERSONAL_PROVIDERS[body.personalProvider])?body.personalProvider:(aiChoice.startsWith('personal:')?aiChoice.slice(9):undefined);
+     const targetProvider=(typeof body.personalProvider==='string'&&PERSONAL_PROVIDER_IDS.includes(body.personalProvider))?body.personalProvider:(aiChoice.startsWith('personal:')?aiChoice.slice(9):undefined);
      personalAi=await personalAiCall(env,account.localId,'personal-ai-use',targetProvider?{provider:targetProvider}:undefined);
     }
     catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
@@ -4685,21 +4774,22 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      catch(error){
       const timeout=controller.signal.aborted||error.name==='AbortError';
       console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});
-      if(isSentenceEditor&&!controller.signal.aborted&&env.GEMINI_API_KEY){
+      const geminiFallbackKey=configuredGeminiKeys(env)[0];
+      if(isSentenceEditor&&!controller.signal.aborted&&geminiFallbackKey){
        console.info('hsk-sentence-editor-fallback-to-gemini',{provider:personalAi.provider,reason:error?.message});
        headers['X-HSK-AI-Provider']='gemini';
-       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
+       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':geminiFallbackKey},signal:controller.signal,body:JSON.stringify(providerBody)});
       }else{
        return reply({error:timeout?'API riêng phản hồi quá lâu. Hãy thử lại.':'Không kết nối được tới máy chủ API riêng. Hãy thử lại hoặc tắt API riêng trong Cài đặt.',code:timeout?'PERSONAL_AI_TIMEOUT':'PERSONAL_AI_NETWORK'},timeout?504:502);
       }
      }
      if(!response.ok){
-      if(isSentenceEditor&&!controller.signal.aborted&&env.GEMINI_API_KEY){
+      const geminiFallbackKey=configuredGeminiKeys(env)[0];
+      if(isSentenceEditor&&!controller.signal.aborted&&geminiFallbackKey){
        console.info('hsk-sentence-editor-fallback-to-gemini-upstream',{provider:personalAi.provider,status:response.status});
        headers['X-HSK-AI-Provider']='gemini';
-       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
+       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':geminiFallbackKey},signal:controller.signal,body:JSON.stringify(providerBody)});
       }else{
-       const upstream=response.status;
        const errData=await response.json().catch(()=>null);
        const detailError=typeof errData?.error==='string'&&errData.error.trim()?errData.error.trim():null;
        const error=detailError||(upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
@@ -4731,7 +4821,19 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     if(candidate?.finishReason&&candidate.finishReason!=='STOP')return reply({error:'AI chưa hoàn thành câu trả lời. Hãy thử hỏi ngắn hơn.'},502);
     const answerText=(candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('').replace(/<\/?escape>/gi,'').trim();
     if(isSentenceEditor){
-     const result=globalThis.HSKSentenceReview.normalize(answerText,body.question);
+     let result=globalThis.HSKSentenceReview.normalize(answerText,body.question);
+     if(!result&&headers['X-HSK-AI-Provider']!=='gemini'&&configuredGeminiKeys(env)[0]&&!controller.signal.aborted){
+      console.info('hsk-sentence-editor-fallback-to-gemini-format',{provider:personalAi?.provider||'unknown'});
+      headers['X-HSK-AI-Provider']='gemini';
+      const fbKey=configuredGeminiKeys(env)[0];
+      const fbRes=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':fbKey},signal:controller.signal,body:JSON.stringify(providerBody)});
+      if(fbRes.ok){
+       const fbPayload=await fbRes.json();
+       const fbCandidate=fbPayload.candidates?.[0];
+       const fbAnswerText=(fbCandidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('').replace(/<\/?escape>/gi,'').trim();
+       result=globalThis.HSKSentenceReview.normalize(fbAnswerText,body.question);
+      }
+     }
      if(!result)return reply({error:'AI chưa trả được gợi ý có vị trí sửa. Hãy kiểm tra lại.',code:'SENTENCE_REVIEW_FORMAT'},502);
      const answer=JSON.stringify(result);
      const provider=headers['X-HSK-AI-Provider'];

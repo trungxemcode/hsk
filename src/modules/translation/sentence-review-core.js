@@ -207,21 +207,52 @@
       original = original.replace(/^[“”"「『]+|[”"」』]+$/gu, '').trim();
       replacement = cleanMarkdownWrap(replacement).replace(/^[“”"「『]+|[”"」』]+$/gu, '').trim();
       if (replacement.length > 700 || original === replacement || !safeEditText(replacement, text) || !reason.trim()) continue;
-      let start;
+      let start = -1;
       if (Number.isInteger(edit.start) && Number.isInteger(edit.end) && edit.end === edit.start + original.length &&
-          edit.start >= 0 && edit.end <= text.length && text.slice(edit.start, edit.end) === original) start = edit.start;
-      else {
+          edit.start >= 0 && edit.end <= text.length && text.slice(edit.start, edit.end) === original) {
+        start = edit.start;
+      } else {
         if (!original) continue;
-        start = text.indexOf(original);
-        if (start < 0 || text.indexOf(original, start + 1) >= 0) continue;
+        const occurrences = [];
+        let pos = text.indexOf(original);
+        while (pos >= 0) {
+          occurrences.push(pos);
+          pos = text.indexOf(original, pos + 1);
+        }
+        if (occurrences.length === 1) {
+          start = occurrences[0];
+        } else if (occurrences.length > 1) {
+          const nonOverlapping = occurrences.filter(p => {
+            const e = p + original.length;
+            return !accepted.some(other => p === other.start || (p < other.end && e > other.start));
+          });
+          if (nonOverlapping.length > 0) {
+            start = nonOverlapping[0];
+          }
+        }
       }
+      if (start < 0) continue;
       const end = start + original.length;
       if (accepted.some(other => start === other.start || start < other.end && end > other.start)) continue;
       if (text.length - original.length + replacement.length > 500) continue;
       accepted.push({kind, start, end, original, replacement, reason: reason.trim().slice(0, 350), ...(edit.fromRewrite === true ? {fromRewrite: true} : {})});
       if (accepted.length === 12) break;
     }
-    if (suggestions.length && !accepted.length) return null;
+    if (suggestions.length && !accepted.length) {
+      if (typeof correctedCandidate === 'string') {
+        const corrected = cleanMarkdownWrap(correctedCandidate);
+        if (corrected.length <= 500 && safeEditText(corrected, text) && (!han.test(text) || han.test(corrected))) {
+          const fallbackEdits = diffEdits(text, corrected);
+          if (fallbackEdits.length) {
+            return {
+              summary: 'AI đã đề xuất ' + fallbackEdits.length + ' chỉnh sửa.',
+              suggestions: fallbackEdits.sort((a,b) => a.start - b.start)
+            };
+          }
+        }
+      }
+      return null;
+    }
     return {
       summary: accepted.length ? 'AI đã đề xuất ' + accepted.length + ' chỉnh sửa.' : 'AI chưa thấy chỗ cần sửa.',
       suggestions: accepted.sort((a,b) => a.start - b.start)
