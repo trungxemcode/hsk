@@ -2,7 +2,7 @@
 (()=>{'use strict';
   const PERSONAL=[
     ['claude','Claude'],['deepseek','DeepSeek'],['openai','OpenAI'],
-    ['gemini','Gemini (API riêng)'],['fosta','Fosta'],['chatgpt-cookie','ChatGPT (cookie riêng)'],['muse-cookie','Muse AI (token riêng)']
+    ['gemini','Gemini (API riêng)'],['fosta','Fosta'],['custom','Tùy chỉnh (API riêng)'],['chatgpt-cookie','ChatGPT (cookie riêng)'],['muse-cookie','Muse AI (token riêng)']
   ];
   const DIRECT_ENDPOINTS={
     openai:'https://api.openai.com/v1/chat/completions',
@@ -318,6 +318,7 @@
       'chatgpt-cookie':isPlusCookie?'ChatGPT Plus (cookie riêng)':'ChatGPT Thường (cookie riêng)',
       'muse-cookie':'Muse AI (token riêng)',
       fosta:'Fosta',
+      custom:'Tùy chỉnh (API riêng)',
       openai:'OpenAI',
       deepseek:'DeepSeek',
       claude:'Claude',

@@ -192,6 +192,7 @@
                   <option value="personal:gemini">Gemini</option>
                   <option value="personal:chatgpt-cookie">ChatGPT</option>
                   <option value="personal:muse-cookie">Muse AI</option>
+                  <option value="personal:custom">Tùy chỉnh (API riêng)</option>
                 </optgroup>
               </select>
               <button type="submit" class="sentence-check-btn">Kiểm tra bằng AI</button>
@@ -368,7 +369,11 @@
 <form id="personalAiForm" hidden autocomplete="off">
 <label><input id="personalAiEnabled" type="checkbox"> Dùng API riêng</label>
 <label for="personalAiProvider">Nhà cung cấp</label>
-<select id="personalAiProvider"><option value="fosta">FOSTA (OpenAI-compatible)</option><option value="chatgpt-cookie">ChatGPT Web Cookie</option><option value="muse-cookie">Muse AI (Token / Cookie)</option><option value="openai">OpenAI / ChatGPT</option><option value="claude">Anthropic / Claude</option><option value="deepseek">DeepSeek</option><option value="gemini">Google Gemini</option></select>
+<select id="personalAiProvider"><option value="fosta">FOSTA (OpenAI-compatible)</option><option value="custom">Tùy chỉnh (OpenAI-compatible / Endpoint riêng)</option><option value="chatgpt-cookie">ChatGPT Web Cookie</option><option value="muse-cookie">Muse AI (Token / Cookie)</option><option value="openai">OpenAI / ChatGPT</option><option value="claude">Anthropic / Claude</option><option value="deepseek">DeepSeek</option><option value="gemini">Google Gemini</option></select>
+<div id="personalAiEndpointGroup" hidden>
+<label for="personalAiCustomEndpoint">Endpoint / Base URL</label>
+<input id="personalAiCustomEndpoint" type="url" maxlength="300" spellcheck="false" placeholder="https://literouter.fun/v1/chat/completions">
+</div>
 <label id="personalAiModelLabel" for="personalAiFostaModel">Model</label>
 <select id="personalAiFostaModel" aria-label="Model FOSTA">
 <option value="gpt-6-luna">Luna (Mặc định: Nhẹ, Trung bình, Nâng cao, Chuyên sâu)</option>

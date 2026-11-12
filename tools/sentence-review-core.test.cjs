@@ -107,3 +107,17 @@ test('handles varied real-world LLM formats including fenced JSON with chatter, 
   assert.ok(r6 && r6.suggestions.length === 1);
   assert.equal(apply(text, r6.suggestions), expectedRevised);
 });
+
+test('resolves non-overlapping occurrences of repeated characters and falls back to corrected candidate if needed', () => {
+  const text = '这是我的朋友的电脑。';
+  const payload = {
+    summary: 'Sửa bớt từ',
+    suggestions: [
+      { kind: 'style', original: '的', replacement: '', reason: 'Bỏ bớt chữ 的 cho tự nhiên.' }
+    ]
+  };
+  const r = normalize(payload, text);
+  assert.ok(r && r.suggestions.length === 1);
+  assert.equal(r.suggestions[0].original, '的');
+  assert.equal(r.suggestions[0].start, 3);
+});

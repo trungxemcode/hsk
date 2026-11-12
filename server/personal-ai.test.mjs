@@ -275,3 +275,54 @@ test('personal AI returning plain text for lesson chat is cleanly unwrapped into
   assert.equal((await res.json()).answer,'Từ "你好" dùng để chào hỏi trang trọng trong tiếng Trung.');
  }finally{personalReply='{"answer":"你好"}';}
 });
+
+
+test('custom OpenAI-compatible provider saves custom endpoint, normalizes URL, and routes chat',async()=>{
+ const uid='custom-router-user';
+ const key='sk-onekey-your-api-key';
+ const customEndpoint='https://literouter.fun/v1/chat/completions';
+ const customModel='deepseek-v4.1';
+
+ // 1. Reject invalid / SSRF endpoints
+ assert.equal((await request(uid,settingsPath,{op:'save',settings:{provider:'custom',endpoint:'http://localhost:8000/v1',model:customModel,enabled:true,apiKey:key}})).status,400);
+ assert.equal((await request(uid,settingsPath,{op:'save',settings:{provider:'custom',endpoint:'http://127.0.0.1/v1',model:customModel,enabled:true,apiKey:key}})).status,400);
+ assert.equal((await request(uid,settingsPath,{op:'save',settings:{provider:'custom',endpoint:'http://169.254.169.254/latest/meta-data',model:customModel,enabled:true,apiKey:key}})).status,400);
+ assert.equal((await request(uid,settingsPath,{op:'save',settings:{provider:'custom',model:customModel,enabled:true,apiKey:key}})).status,400);
+
+ // 2. Save custom provider
+ const saveRes=await request(uid,settingsPath,{op:'save',settings:{provider:'custom',endpoint:customEndpoint,model:customModel,enabled:true,apiKey:key}});
+ assert.equal(saveRes.status,200);
+ const saveJson=await saveRes.json();
+ assert.equal(saveJson.configured,true);
+ assert.equal(saveJson.enabled,true);
+ assert.equal(saveJson.provider,'custom');
+ assert.equal(saveJson.model,customModel);
+ assert.equal(saveJson.endpoint,customEndpoint);
+
+ // 3. Read settings shows custom provider in providers map
+ const readRes=await request(uid,settingsPath,{op:'read'});
+ assert.equal(readRes.status,200);
+ const readJson=await readRes.json();
+ assert.equal(readJson.providers?.custom?.configured,true);
+ assert.equal(readJson.providers?.custom?.endpoint,customEndpoint);
+ assert.equal(readJson.providers?.custom?.model,customModel);
+
+ // 4. Route with aiProvider: 'personal:custom'
+ const testEnv={...env,ADMIN_UIDS:uid};
+ const reply=await request(uid,'/lesson-ask',{...question,aiProvider:'personal:custom'},testEnv);
+ assert.equal(reply.status,200);
+ assert.equal(calls.at(-1).url,customEndpoint);
+ assert.equal(calls.at(-1).headers.Authorization,'Bearer '+key);
+ assert.equal(calls.at(-1).body.model,customModel);
+ assert.equal(calls.at(-1).body.stream,false);
+
+ // 5. Normalize endpoint when user provides base URL without /chat/completions
+ const uid2='custom-router-user-2';
+ const saveBaseRes=await request(uid2,settingsPath,{op:'save',settings:{provider:'custom',endpoint:'https://literouter.fun/v1',model:'deepseek/deepseek-chat',enabled:true,apiKey:key}});
+ assert.equal(saveBaseRes.status,200);
+ const testEnv2={...env,ADMIN_UIDS:uid2};
+ const reply2=await request(uid2,'/lesson-ask',{...question,aiProvider:'personal:custom'},testEnv2);
+ assert.equal(reply2.status,200);
+ assert.equal(calls.at(-1).url,'https://literouter.fun/v1/chat/completions');
+ assert.equal(calls.at(-1).body.model,'deepseek/deepseek-chat');
+});

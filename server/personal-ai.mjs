@@ -8,8 +8,21 @@ const PERSONAL_PROVIDERS={
  claude:'https://api.anthropic.com/v1/messages',
  gemini:'https://generativelanguage.googleapis.com/v1beta/models/',
  'chatgpt-cookie':'https://chatgpt.com/backend-api/conversation',
- 'muse-cookie':'https://muse.ai/api/hatch/token'
+ 'muse-cookie':'https://muse.ai/api/hatch/token',
+ custom:''
 };
+function isValidEndpointUrl(str){
+ if(typeof str!=='string'||str.length<8||str.length>300)return false;
+ try{
+  const u=new URL(str);
+  if(u.protocol!=='https:'&&u.protocol!=='http:')return false;
+  const h=u.hostname.toLowerCase();
+  if(h==='localhost'||h.endsWith('.localhost')||h==='127.0.0.1'||h==='0.0.0.0'||h==='::1'||h==='169.254.169.254'||h.startsWith('10.')||h.startsWith('192.168.')||/^172\.(1[6-9]|2\d|3[01])\./.test(h)||h.endsWith('.internal')||h.endsWith('.local'))return false;
+  return true;
+ }catch{
+  return false;
+ }
+}
 const PERSONAL_FOSTA_MODELS=new Set([
  'gpt-6.1-sol','gpt-6-astra','gpt-6-luna',
  'gpt-6-luna:low','gpt-6-luna:medium','gpt-6-luna:high','gpt-6-luna:xhigh',
@@ -24,7 +37,13 @@ async function personalCipher(env){
  return crypto.subtle.importKey('raw',await crypto.subtle.digest('SHA-256',personalEncode(env.AI_PERSONAL_KEY_SECRET)),{name:'AES-GCM'},false,['encrypt','decrypt']);
 }
 function personalPublic(record){
- return record?{configured:true,enabled:record.enabled,provider:record.provider,model:record.model}:{configured:false,enabled:false};
+ return record?{
+  configured:true,
+  enabled:record.enabled,
+  provider:record.provider,
+  model:record.model,
+  ...(record.endpoint?{endpoint:record.endpoint}:{})
+ }:{configured:false,enabled:false};
 }
 async function loadAllPersonalProviders(store,fallbackRecord){
  let index=await store.get('personal-ai-providers-index');
@@ -36,11 +55,25 @@ async function loadAllPersonalProviders(store,fallbackRecord){
   let rec=await store.get('personal-ai-prov:'+p);
   if(!rec&&fallbackRecord?.provider===p)rec=fallbackRecord;
   if(rec&&rec.provider===p){
-   map[p]={configured:true,enabled:rec.enabled===true,provider:p,model:rec.model,...(rec.planType?{planType:rec.planType}:{})};
+   map[p]={
+    configured:true,
+    enabled:rec.enabled===true,
+    provider:p,
+    model:rec.model,
+    ...(rec.planType?{planType:rec.planType}:{}),
+    ...(rec.endpoint?{endpoint:rec.endpoint}:{})
+   };
   }
  }
  if(fallbackRecord?.provider&&!map[fallbackRecord.provider]){
-  map[fallbackRecord.provider]={configured:true,enabled:fallbackRecord.enabled===true,provider:fallbackRecord.provider,model:fallbackRecord.model,...(fallbackRecord.planType?{planType:fallbackRecord.planType}:{})};
+  map[fallbackRecord.provider]={
+   configured:true,
+   enabled:fallbackRecord.enabled===true,
+   provider:fallbackRecord.provider,
+   model:fallbackRecord.model,
+   ...(fallbackRecord.planType?{planType:fallbackRecord.planType}:{}),
+   ...(fallbackRecord.endpoint?{endpoint:fallbackRecord.endpoint}:{})
+  };
  }
  return map;
 }
@@ -83,7 +116,7 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
   return Response.json({...personalPublic(record),providers});
  }
  if(action==='personal-ai-use'){
-  const targetProvider=typeof settings?.provider==='string'&&PERSONAL_PROVIDERS[settings.provider]?settings.provider:null;
+  const targetProvider=typeof settings?.provider==='string'&&Object.hasOwn(PERSONAL_PROVIDERS,settings.provider)?settings.provider:null;
   let record=null;
   if(targetProvider){
    record=await storage.get('personal-ai-prov:'+targetProvider);
@@ -100,11 +133,12 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
   },await personalCipher(env),personalBytes(record.ciphertext)));
   return Response.json({...personalPublic(record),apiKey});
  }
- if(action!=='personal-ai-save'||!settings||Object.keys(settings).some(k=>!['provider','model','enabled','apiKey'].includes(k)))return Response.json({}, {status:400});
- const {provider,model,enabled,apiKey}=settings;
+ if(action!=='personal-ai-save'||!settings||Object.keys(settings).some(k=>!['provider','model','enabled','apiKey','endpoint'].includes(k)))return Response.json({}, {status:400});
+ const {provider,model,enabled,apiKey,endpoint}=settings;
  const maxKeyLen=(provider==='chatgpt-cookie'||provider==='muse-cookie')?16384:512;
- if(!Object.hasOwn(PERSONAL_PROVIDERS,provider)||typeof model!=='string'||!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(model)||
+ if(!Object.hasOwn(PERSONAL_PROVIDERS,provider)||typeof model!=='string'||!/^[a-z0-9][a-z0-9._/:-]{0,99}$/i.test(model)||
   typeof enabled!=='boolean'||provider==='fosta'&&!PERSONAL_FOSTA_MODELS.has(model)||
+  provider==='custom'&&endpoint!==undefined&&!isValidEndpointUrl(endpoint)||
   apiKey!==undefined&&(typeof apiKey!=='string'||apiKey.length<8||apiKey.length>maxKeyLen||!(provider==='chatgpt-cookie'||provider==='muse-cookie'?/^[ -~]+$/:/^[!-~]+$/).test(apiKey)))return Response.json({}, {status:400});
  const cipher=await personalCipher(env);
  const inferredPlan=provider==='chatgpt-cookie'?((apiKey?.includes('|')||apiKey?.length>4000||['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(model))?'plus':'free'):undefined;
@@ -113,7 +147,14 @@ export async function personalAiStorage(storage,env,{action,uid,settings}){
   let previous=await tx.get('personal-ai-prov:'+provider);
   if(!previous&&legacy?.provider===provider)previous=legacy;
   if(!apiKey&&!previous?.ciphertext)return Response.json({}, {status:400});
-  const record={provider,model,enabled,iv:previous?.iv,ciphertext:previous?.ciphertext,...(inferredPlan?{planType:inferredPlan}:previous?.planType?{planType:previous.planType}:{})};
+  if(provider==='custom'&&!endpoint&&!previous?.endpoint)return Response.json({}, {status:400});
+  const record={
+   provider,model,enabled,
+   iv:previous?.iv,
+   ciphertext:previous?.ciphertext,
+   ...(inferredPlan?{planType:inferredPlan}:previous?.planType?{planType:previous.planType}:{}),
+   ...(provider==='custom'?{endpoint:endpoint||previous?.endpoint}:{})
+  };
   if(apiKey){
    const iv=crypto.getRandomValues(new Uint8Array(12));
    const ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:personalEncode(uid+':'+provider)},cipher,personalEncode(apiKey));
@@ -142,10 +183,13 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
  const {provider,model,apiKey}=config;
  if(provider==='chatgpt-cookie')return chatgptCookieGenerate(config,requestBody,fetchFn,signal,options);
  if(provider==='muse-cookie')return museAiGenerate(config,requestBody,fetchFn,signal,options);
- const endpoint=PERSONAL_PROVIDERS[provider];
+ const endpoint=provider==='custom'?config.endpoint:PERSONAL_PROVIDERS[provider];
  if(!endpoint)throw Error('Invalid provider');
  const headers={'Content-Type':'application/json'};
  let url=endpoint,body=requestBody;
+ if(provider==='custom'&&!url.endsWith('/chat/completions')){
+  url=url.replace(/\/+$/, '')+'/chat/completions';
+ }
  if(provider==='gemini'){
   url+=encodeURIComponent(model)+':generateContent';
   headers['x-goog-api-key']=apiKey;
@@ -166,7 +210,7 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
      fostaModel=parts[0];fostaEffort=parts[1];
     }
    }
-   body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{})};
+   body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(requestBody.generationConfig?.temperature!==undefined?{temperature:requestBody.generationConfig.temperature}:{}),...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{stream:false})};
   }
  }
  const response=await fetchFn(url,{method:'POST',headers,body:JSON.stringify(body),signal,redirect:'manual'});
@@ -175,7 +219,7 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
  if(!response.ok||provider==='gemini')return response;
  const payload=await response.json().catch(()=>null);
  const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
-  payload?.choices?.[0]?.message?.content;
+  (payload?.choices?.[0]?.message?.content??payload?.choices?.[0]?.text);
  if(typeof text!=='string')return new Response(null,{status:502});
  return Response.json({candidates:[{content:{parts:[{text:text.trim()}]}}]});
 }
@@ -226,6 +270,19 @@ export async function probePersonalAiCapabilities(personal,{env={},fetchFn=fetch
    }
   }else if(provider==='fosta'){
    value={models:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol']};
+  }else if(provider==='custom'&&personal.endpoint){
+   let modelsUrl=personal.endpoint;
+   if(modelsUrl.endsWith('/chat/completions')){
+    modelsUrl=modelsUrl.slice(0,-'/chat/completions'.length)+'/models';
+   }else if(!modelsUrl.endsWith('/models')){
+    modelsUrl=modelsUrl.replace(/\/+$/, '')+'/models';
+   }
+   const res=await fetchFn(modelsUrl,{method:'GET',headers:{Authorization:'Bearer '+apiKey},signal,redirect:'manual'});
+   if(res.ok){
+    const data=await res.json().catch(()=>null);
+    const ids=(data?.data||[]).map(m=>m?.id).filter(id=>typeof id==='string'&&id.trim().length<=100).slice(0,20);
+    if(ids.length)value={models:ids};
+   }
   }else if(provider==='muse-cookie'){
    const info=await probeMuseAiAccount(apiKey,{fetchFn,signal,now});
    value={models:info?.models?.length?info.models:MUSE_DEFAULT_MODELS};

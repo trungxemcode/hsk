@@ -1,7 +1,7 @@
 import '../src/modules/translation/sentence-review-core.js';
 import {chatgptCookieGenerate,sharedGuardrail} from './chatgpt-cookie.mjs';
 import {personalAiCall,personalAiGenerate,probePersonalAiCapabilities} from './personal-ai.mjs';
-import {normalizeAiProviderChoice,aiProviderChoiceError,describeAiProviders} from './ai-provider-choice.mjs';
+import {normalizeAiProviderChoice,aiProviderChoiceError,describeAiProviders,PERSONAL_PROVIDER_IDS} from './ai-provider-choice.mjs';
 import { createOriginalReadingService } from './original-reading.mjs';
 import {validTranscriptInput,transcribeMusic,libraryTranscriptMedia,saveGeneratedTranscript} from './music-transcript.mjs';
 import {createGeminiModelFallback} from './ai-resilience.mjs';
@@ -332,13 +332,13 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    const isAiQa=isLessonAsk&&body.lesson?.content?.mode==='ai-qa';
    const isPersonalAllowed=isAiQa||isLessonAsk;
    const thinking=body.thinking??'low',requestedAiModel=isPersonalAllowed&&typeof body.aiModel==='string'?body.aiModel.trim():'';
-   if(isPersonalAllowed&&(!QA_THINKING_MODELS.has(thinking)||requestedAiModel&&!/^[a-z0-9][a-z0-9._:-]{0,99}$/i.test(requestedAiModel)))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
+   if(isPersonalAllowed&&(!QA_THINKING_MODELS.has(thinking)||requestedAiModel&&!/^[a-z0-9][a-z0-9._/:-]{0,99}$/i.test(requestedAiModel)))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
    const aiChoice=isPersonalAllowed?normalizeAiProviderChoice(body.aiProvider):'auto';
    if(aiChoice===null)return reply({error:'Nhà cung cấp AI không hợp lệ.',code:'AI_PROVIDER_INVALID'},400);
    let personalAi=null;
    if(isPersonalAllowed&&env.AI_CONTROL){
     try{
-     const targetProvider=(typeof body.personalProvider==='string'&&PERSONAL_PROVIDERS[body.personalProvider])?body.personalProvider:(aiChoice.startsWith('personal:')?aiChoice.slice(9):undefined);
+     const targetProvider=(typeof body.personalProvider==='string'&&PERSONAL_PROVIDER_IDS.includes(body.personalProvider))?body.personalProvider:(aiChoice.startsWith('personal:')?aiChoice.slice(9):undefined);
      personalAi=await personalAiCall(env,account.localId,'personal-ai-use',targetProvider?{provider:targetProvider}:undefined);
     }
     catch{return reply({error:'Không đọc được cấu hình API riêng. Kiểm tra trong Cài đặt.'},503);}
@@ -536,21 +536,22 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      catch(error){
       const timeout=controller.signal.aborted||error.name==='AbortError';
       console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});
-      if(isSentenceEditor&&!controller.signal.aborted&&env.GEMINI_API_KEY){
+      const geminiFallbackKey=configuredGeminiKeys(env)[0];
+      if(isSentenceEditor&&!controller.signal.aborted&&geminiFallbackKey){
        console.info('hsk-sentence-editor-fallback-to-gemini',{provider:personalAi.provider,reason:error?.message});
        headers['X-HSK-AI-Provider']='gemini';
-       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
+       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':geminiFallbackKey},signal:controller.signal,body:JSON.stringify(providerBody)});
       }else{
        return reply({error:timeout?'API riêng phản hồi quá lâu. Hãy thử lại.':'Không kết nối được tới máy chủ API riêng. Hãy thử lại hoặc tắt API riêng trong Cài đặt.',code:timeout?'PERSONAL_AI_TIMEOUT':'PERSONAL_AI_NETWORK'},timeout?504:502);
       }
      }
      if(!response.ok){
-      if(isSentenceEditor&&!controller.signal.aborted&&env.GEMINI_API_KEY){
+      const geminiFallbackKey=configuredGeminiKeys(env)[0];
+      if(isSentenceEditor&&!controller.signal.aborted&&geminiFallbackKey){
        console.info('hsk-sentence-editor-fallback-to-gemini-upstream',{provider:personalAi.provider,status:response.status});
        headers['X-HSK-AI-Provider']='gemini';
-       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify(providerBody)});
+       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':geminiFallbackKey},signal:controller.signal,body:JSON.stringify(providerBody)});
       }else{
-       const upstream=response.status;
        const errData=await response.json().catch(()=>null);
        const detailError=typeof errData?.error==='string'&&errData.error.trim()?errData.error.trim():null;
        const error=detailError||(upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
@@ -582,7 +583,19 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     if(candidate?.finishReason&&candidate.finishReason!=='STOP')return reply({error:'AI chưa hoàn thành câu trả lời. Hãy thử hỏi ngắn hơn.'},502);
     const answerText=(candidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('').replace(/<\/?escape>/gi,'').trim();
     if(isSentenceEditor){
-     const result=globalThis.HSKSentenceReview.normalize(answerText,body.question);
+     let result=globalThis.HSKSentenceReview.normalize(answerText,body.question);
+     if(!result&&headers['X-HSK-AI-Provider']!=='gemini'&&configuredGeminiKeys(env)[0]&&!controller.signal.aborted){
+      console.info('hsk-sentence-editor-fallback-to-gemini-format',{provider:personalAi?.provider||'unknown'});
+      headers['X-HSK-AI-Provider']='gemini';
+      const fbKey=configuredGeminiKeys(env)[0];
+      const fbRes=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':fbKey},signal:controller.signal,body:JSON.stringify(providerBody)});
+      if(fbRes.ok){
+       const fbPayload=await fbRes.json();
+       const fbCandidate=fbPayload.candidates?.[0];
+       const fbAnswerText=(fbCandidate?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('').replace(/<\/?escape>/gi,'').trim();
+       result=globalThis.HSKSentenceReview.normalize(fbAnswerText,body.question);
+      }
+     }
      if(!result)return reply({error:'AI chưa trả được gợi ý có vị trí sửa. Hãy kiểm tra lại.',code:'SENTENCE_REVIEW_FORMAT'},502);
      const answer=JSON.stringify(result);
      const provider=headers['X-HSK-AI-Provider'];
