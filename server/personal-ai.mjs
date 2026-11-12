@@ -209,7 +209,8 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
      const parts=model.split(':');
      fostaModel=parts[0];fostaEffort=parts[1];
     }
-   }
+    }
+    if(options.sentenceReview&&!fostaEffort)fostaEffort='low';
    body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(requestBody.generationConfig?.temperature!==undefined?{temperature:requestBody.generationConfig.temperature}:{}),...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{stream:false})};
   }
  }
