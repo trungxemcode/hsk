@@ -1,4 +1,22 @@
-# Current task: Universal AI response unwrapping filter & JSX/XML wrapper resilience (2026-11-12)
+# Current task: PWA Asset SHA-256 CRLF line ending mismatch fix (2026-11-12)
+
+Fixed the PWA service worker download failure: `Tệp src/modules/account/personal-ai-settings.js chưa khớp phiên bản sau 3 lần tải`.
+
+Root cause:
+- `src/modules/account/personal-ai-settings.js` contained duplicate carriage returns (`\r\r\n` / CR-CR-LF).
+- `build-version.py` normalized `\r\n` to `\n` in memory, computing the SHA-256 for the LF version (`d9b4ed...`), while GitHub Pages served the raw git blob containing CRLF (`749f62...`).
+- When ServiceWorker `offline-worker.js` digested the downloaded bytes, the hash didn't match `asset.sha256` in `app-version.json`.
+
+Solution & Hardening:
+1. Normalized `src/modules/account/personal-ai-settings.js` to pure LF (`\n`, 7132 bytes).
+2. Added CRLF-to-LF fallback normalization in `offline-worker.js` during asset verification, immunizing all text files from line ending discrepancies.
+3. Updated `build-version.py` and `tools/check-pwa-release.py` with `.replace(b'\r', b'')` safety net.
+4. Added `src/**/*.js text eol=lf` to `.gitattributes`.
+5. Bumped PWA release to `4.4.41` (`hsk-offline-4-4-41`).
+6. All 480 server tests, feature preservation (98 capabilities), sentence editor UI and feature runtime (390px/1440px) passed.
+7. Pushed to branch `fix/pwa-asset-hash-mismatch`. PR link: `https://github.com/trungxemcode/hsk/pull/new/fix/pwa-asset-hash-mismatch`.
+
+# Previous task: Universal AI response unwrapping filter & JSX/XML wrapper resilience (2026-11-12)
 
 Resolved the issue where LLM responses wrapped in XML/JSX tags (e.g. `<text preserveWhitespace>{JSON.stringify({primaryNodeKey:...})}</text>`) and unquoted JS object keys caused raw wrapper code to be rendered in the AI Coach chat and sentence editor.
 
