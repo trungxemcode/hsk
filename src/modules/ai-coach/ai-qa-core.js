@@ -152,23 +152,62 @@
   }
   return out;
  }
+ function cleanWrapperTags(str){
+  if(typeof str!=='string')return '';
+  let s=str.trim();
+  s=s.replace(/<\/?escape>/gi,'');
+  s=s.replace(/<(?:think|thought|reasoning)>[\s\S]*?<\/(?:think|thought|reasoning)>/gi,'');
+  s=s.replace(/<\/?(?:text|output|response|result|json)(?:\s+[^>]*)?>/gi,'').trim();
+  s=s.replace(/(?:^|\s*\{)\s*JSON\.(?:stringify|parse)\s*\(\s*([\s\S]*?)\s*\)\s*(?:\}\s*|$)/g,'$1').trim();
+  s=s.replace(/(?:^|\s*\{)\s*JSON\.(?:stringify|parse)\s*\(\s*([\s\S]*?)\s*\)\s*(?:\}\s*|$)/g,'$1').trim();
+  return s;
+ }
  function parseJsonLoose(raw){
   if(typeof raw!=='string')return null;
-  let cleaned=raw.replace(/<\/?escape>/gi,'').trim();
-  const fenced=cleaned.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
-  if(fenced)cleaned=fenced[1].replace(/<\/?escape>/gi,'').trim();
+  let cleaned=cleanWrapperTags(raw);
+  const fenced=cleaned.match(/```(?:json|javascript|js)?\s*([\s\S]*?)\s*```/i);
+  if(fenced)cleaned=cleanWrapperTags(fenced[1]);
+  function tryCand(cand){
+   if(!cand||typeof cand!=='string')return null;
+   let t=cand.trim();
+   try{const p=JSON.parse(t);if(p&&typeof p==='object')return p;}catch{}
+   const noTrailingCommas=t.replace(/,\s*([}\]])/g,'$1');
+   try{const p=JSON.parse(noTrailingCommas);if(p&&typeof p==='object')return p;}catch{}
+   const quotedKeys=noTrailingCommas.replace(/([{,]\s*)([a-zA-Z_$][a-zA-Z0-9_$]*)\s*:/g,'$1"$2":');
+   try{const p=JSON.parse(quotedKeys);if(p&&typeof p==='object')return p;}catch{}
+   try{const p2=JSON.parse(repairJsonControlChars(quotedKeys));if(p2&&typeof p2==='object')return p2;}catch{}
+   return null;
+  }
+  let res=tryCand(cleaned);
+  if(res)return res;
   const first=cleaned.indexOf('{'),last=cleaned.lastIndexOf('}');
-  const candidates=[cleaned];
-  if(first!==-1&&last>first)candidates.push(cleaned.slice(first,last+1));
-  for(const cand of candidates){
-   try{const p=JSON.parse(cand);if(p&&typeof p==='object')return p;}
-   catch{try{const p2=JSON.parse(repairJsonControlChars(cand));if(p2&&typeof p2==='object')return p2;}catch{}}
+  if(first!==-1&&last>first){
+   res=tryCand(cleaned.slice(first,last+1));
+   if(res)return res;
+  }
+  if(cleaned.includes('{')){
+   let startIdx=cleaned.indexOf('{');
+   while(startIdx!==-1&&!res){
+    let depth=0,inString=false,esc=false,endIdx=-1;
+    for(let i=startIdx;i<cleaned.length;i++){
+     const c=cleaned[i];
+     if(esc){esc=false;continue;}
+     if(c==='\\'){esc=true;continue;}
+     if(c==='"'){inString=!inString;continue;}
+     if(!inString){
+      if(c==='{')depth++;
+      else if(c==='}'){depth--;if(depth===0){endIdx=i;break;}}
+     }
+    }
+    if(endIdx>startIdx){res=tryCand(cleaned.slice(startIdx,endIdx+1));if(res)return res;}
+    startIdx=cleaned.indexOf('{',startIdx+1);
+   }
   }
   return null;
  }
  function regexFallbackAnswer(str){
-  for(const key of ['content','answer_vi','answer','explanation','text']){
-   const re=new RegExp(`"${key}"\\s*:\\s*"((?:\\\\.|[^"\\\\])*)(?:"|$)`,'s');
+  for(const key of ['content','answer_vi','answer','explanation','text','reply','response','message']){
+   const re=new RegExp(`(?:^|[\\{,\\s])(?:"|')?${key}(?:"|')?\\s*:\\s*"((?:\\\\.|[^"\\\\])*)(?:"|$)`,'s');
    const m=str.match(re);
    if(m&&m[1]&&m[1].trim().length>3){
     return m[1].replace(/\\n/g,'\n').replace(/\\r/g,'').replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\\\/g,'\\').trim();
@@ -179,12 +218,16 @@
  function extractAnswerString(val,depth=0){
   if(depth>4||val==null)return '';
   if(typeof val==='string'){
-   const trimmed=val.replace(/<\/?escape>/gi,'').trim();
-   if((trimmed.startsWith('{')||trimmed.startsWith('```'))&&/"(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)"/.test(trimmed)){
-    const inner=unwrapAiQaPayload(trimmed,depth+1);
+   const cleaned=cleanWrapperTags(val);
+   if(cleaned&&cleaned!==val&&(/[{<`]/.test(val)||/(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)/i.test(val))){
+    const inner=unwrapAiQaPayload(cleaned,depth+1);
     if(inner&&typeof inner.answer==='string'&&inner.answer.trim())return inner.answer.trim();
    }
-   return trimmed;
+   if((cleaned.startsWith('{')||cleaned.startsWith('```'))&&/(?:"|')?(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)(?:"|')?\s*:/i.test(cleaned)){
+    const inner=unwrapAiQaPayload(cleaned,depth+1);
+    if(inner&&typeof inner.answer==='string'&&inner.answer.trim())return inner.answer.trim();
+   }
+   return cleaned;
   }
   if(Array.isArray(val))return val.map(x=>extractAnswerString(x,depth+1)).filter(Boolean).join('\n\n');
   if(typeof val==='object'){
@@ -203,10 +246,10 @@
  function unwrapAiQaPayload(input,depth=0){
   if(depth>4||!input)return null;
   if(typeof input==='string'){
-   const stripped=input.replace(/<\/?escape>/gi,'').trim();
+   const stripped=cleanWrapperTags(input);
    const parsed=parseJsonLoose(stripped);
    if(parsed)return unwrapAiQaPayload(parsed,depth+1);
-   if(/^\s*\{[\s\S]*"(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)"/.test(stripped)){
+   if(/(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)/i.test(stripped)){
     const fallback=regexFallbackAnswer(stripped);
     if(fallback)return {answer:fallback};
    }
@@ -215,9 +258,9 @@
   if(typeof input==='object'){
    let base={...input};
    if(typeof base.answer==='string'){
-    const trimmed=base.answer.replace(/<\/?escape>/gi,'').trim();
-    if((trimmed.startsWith('{')||trimmed.startsWith('```'))&&/"(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)"/.test(trimmed)){
-     const inner=unwrapAiQaPayload(trimmed,depth+1);
+    const cleaned=cleanWrapperTags(base.answer);
+    if((cleaned.startsWith('{')||cleaned.startsWith('```'))&&/(?:"|')?(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)(?:"|')?\s*:/i.test(cleaned)){
+     const inner=unwrapAiQaPayload(cleaned,depth+1);
      if(inner&&typeof inner==='object'){
       base={...inner,...base,answer:inner.answer||base.answer};
       for(const k of ['primaryNodeKey','nodeLabel','coreRuleSummary','explanationStrategyUsed','optionalMicroCheck','suggestedQuestions','memoryCandidates']){
@@ -244,13 +287,11 @@
  }
  function unwrapAiQaText(text){
   if(typeof text!=='string')return '';
-  const trimmed=text.trim();
+  let trimmed=cleanWrapperTags(text);
   if(!trimmed)return '';
-  if(/<\/?escape>/i.test(trimmed)||((trimmed.startsWith('{')||trimmed.startsWith('```'))&&/"(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)"/.test(trimmed))){
-   const res=unwrapAiQaPayload(trimmed);
-   if(res&&typeof res.answer==='string'&&res.answer.trim())return res.answer.trim();
-  }
+  const res=unwrapAiQaPayload(trimmed);
+  if(res&&typeof res.answer==='string'&&res.answer.trim())return res.answer.trim();
   return trimmed.replace(/<\/?escape>/gi,'').trim();
  }
- const api={MASTERY_BOUNDARY,containsChinese,tokenizeMixedZhVi,chunkDocumentText,bm25RetrieveChunks,validateQaInput,validateProjectDocument,wrapSandwichPrompt,aggregateAdaptiveStats,masteryBoundary,buildLearningSnapshot,unwrapAiQaPayload,unwrapAiQaText};root.HSKAIQACore=api;if(typeof module==='object'&&module.exports)module.exports=api;
+ const api={MASTERY_BOUNDARY,containsChinese,tokenizeMixedZhVi,chunkDocumentText,bm25RetrieveChunks,validateQaInput,validateProjectDocument,wrapSandwichPrompt,aggregateAdaptiveStats,masteryBoundary,buildLearningSnapshot,cleanWrapperTags,unwrapAiQaPayload,unwrapAiQaText};root.HSKAIQACore=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window==='object'?window:globalThis);

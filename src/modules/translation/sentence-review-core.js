@@ -41,8 +41,11 @@
   function tryParseJson(str) {
     if (typeof str !== 'string') return null;
     let clean = str.trim();
-    clean = clean.replace(/<(?:think|thought)>[\s\S]*?<\/(?:think|thought)>/gi, '').trim();
-    const fenced = clean.match(/```(?:json)?\s*([\s\S]*?)```/i);
+    clean = clean.replace(/<(?:think|thought|reasoning)>[\s\S]*?<\/(?:think|thought|reasoning)>/gi, '').trim();
+    clean = clean.replace(/<\/?(?:text|output|response|result|json)(?:\s+[^>]*)?>/gi, '').trim();
+    clean = clean.replace(/(?:^|\s*\{)\s*JSON\.(?:stringify|parse)\s*\(\s*([\s\S]*?)\s*\)\s*(?:\}\s*|$)/g, '$1').trim();
+    clean = clean.replace(/(?:^|\s*\{)\s*JSON\.(?:stringify|parse)\s*\(\s*([\s\S]*?)\s*\)\s*(?:\}\s*|$)/g, '$1').trim();
+    const fenced = clean.match(/```(?:json|javascript|js)?\s*([\s\S]*?)```/i);
     if (fenced) clean = fenced[1].trim();
     try { return JSON.parse(clean); } catch {}
     const b0 = clean.indexOf('{');
@@ -52,6 +55,8 @@
       try { return JSON.parse(slice); } catch {}
       const withoutTrailingCommas = slice.replace(/,\s*([\]}])/g, '$1');
       try { return JSON.parse(withoutTrailingCommas); } catch {}
+      const quotedKeys = withoutTrailingCommas.replace(/([{,]\s*)([a-zA-Z_$][a-zA-Z0-9_$]*)\s*:/g, '$1"$2":');
+      try { return JSON.parse(quotedKeys); } catch {}
     }
     // Attempt repair of unclosed JSON brackets from truncated stream
     if (b0 >= 0) {

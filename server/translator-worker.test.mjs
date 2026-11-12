@@ -262,3 +262,21 @@ test('sentence review normalizes structured responses and rejects unanchored pro
  const response=await run('/lesson-ask',body);
  assert.equal(response.status,502);
 });
+
+test('lesson-ask AI QA cleanly unwraps XML/JSX wrapper and unquoted JSON.stringify response',async()=>{
+ const payloadText=`<text preserveWhitespace>{JSON.stringify({primaryNodeKey:"topic:m-mw7zah08-1w4fm2z",nodeLabel:"Các cách chào hỏi tiếng Trung",coreRulesSummary:"你好 (nǐ hǎo) là cách chào hỏi thông dụng trong tiếng Trung.",answer:"你好! (Nǐ hǎo!) — Xin chào! 😊\\n\\nRất vui được gặp bạn!",explanationStrategyUsed:"Chào hỏi tự nhiên",optionalMicroCheck:null,suggestedQuestions:[{type:"decision_guide",text:"Khi nào dùng 你好 và 您好?"},{type:"context_shift",text:"Buổi chiều chào bằng tiếng Trung thế nào?"}],memoryCandidates:[]})}</text>`;
+ const {run}=setup(()=>Response.json({modelVersion:'gemini-test-version',candidates:[{finishReason:'STOP',content:{parts:[{text:payloadText}]}}]}));
+ const snapshot={masteryBoundary:{reached:true,near:false,threshold:{minAttempts:20}},practice:{attempts:24,accuracy:.99},activity:{studyDaysLast30:5}};
+ const body={...bodies['/lesson-ask'],lesson:{id:'lesson-1',title:'Bài 1',words:[],content:{mode:'ai-qa',learning_snapshot:snapshot}}};
+ const response=await run('/lesson-ask',body);
+ assert.equal(response.status,200);
+ const data=await response.json();
+ assert.match(data.answer,/^你好! \(Nǐ hǎo!\) — Xin chào!/);
+ assert.equal(data.answer.includes('<text'),false);
+ assert.equal(data.answer.includes('JSON.stringify'),false);
+ assert.equal(data.primaryNodeKey,'topic:m-mw7zah08-1w4fm2z');
+ assert.equal(data.nodeLabel,'Các cách chào hỏi tiếng Trung');
+ assert.equal(data.suggestedQuestions.length,2);
+ assert.equal(data.suggestedQuestions[0].kind,'decision_guide');
+});
+
