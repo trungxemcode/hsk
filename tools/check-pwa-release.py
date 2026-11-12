@@ -70,7 +70,7 @@ def ensure_release_integrity(root=ROOT):
     for name in assets:
         data = (root / name).read_bytes()
         if Path(name).suffix.lower() not in ('.png', '.gz', '.webp', '.mp3', '.woff', '.woff2'):
-            data = data.replace(b'\r\n', b'\n')
+            data = data.replace(b'\r\n', b'\n').replace(b'\r', b'')
         recorded = catalog[name]
         if recorded.get('sha256') != hashlib.sha256(data).hexdigest() or recorded.get('bytes') != len(data):
             raise ValueError('Stale asset hash for ' + name)

@@ -5,3 +5,5 @@ GEMINI.md text eol=lf
 .github/copilot-instructions.md text eol=lf
 docs/ai/*.md text eol=lf
 content/data/*.js text eol=lf
+src/**/*.js text eol=lf
+
