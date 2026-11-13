@@ -322,10 +322,25 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(isTranscript&&account.localId!==OWNER_UID)return reply({error:'Chỉ admin được tạo và cập nhật script bài hát.'},403);
     if(isProfileSync){const syncRequest=new Request(request.url,{method:'POST',headers:{Authorization:'Bearer '+token,Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(body)});return handleProfileSyncRequest(syncRequest,env,async()=>({uid:account.localId}));}
    const restricted=(env.ALLOWED_UIDS||'').split(',').filter(Boolean);if(restricted.length&&!restricted.includes(c.sub))return reply({error:'Tài khoản chưa được bật dịch câu.'},403);
-   if(isAiProviders){
+   const resolveAccountProviders=async uid=>{
     let personal=null;
-    try{if(env.AI_CONTROL){personal=await personalAiCall(env,account.localId,'personal-ai-read');if(personal?.enabled){const full=await personalAiCall(env,account.localId,'personal-ai-use').catch(()=>null);if(full?.apiKey)personal={...personal,...await probePersonalAiCapabilities(full,{env,fetchFn:providerFetch,signal:controller.signal,now})};}}}catch{personal=null;}
-    return reply(describeAiProviders({geminiReady:configuredGeminiKeys(env).length>0,sharedCookieReady:typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim()),personal}));
+    try{
+     if(env.AI_CONTROL){
+      personal=await personalAiCall(env,uid,'personal-ai-read');
+      if(personal?.enabled){
+       const full=await personalAiCall(env,uid,'personal-ai-use').catch(()=>null);
+       if(full?.apiKey)personal={...personal,...await probePersonalAiCapabilities(full,{env,fetchFn:providerFetch,signal:controller.signal,now})};
+      }
+     }
+    }catch{personal=null;}
+    return describeAiProviders({
+     geminiReady:configuredGeminiKeys(env).length>0,
+     sharedCookieReady:typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim()),
+     personal
+    });
+   };
+   if(isAiProviders){
+    return reply(await resolveAccountProviders(account.localId));
    }
    if(isPersonalSettings){
     try{
@@ -379,7 +394,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
      if(isRole){
       const action=route==='/account-role'?'roles-self':route==='/admin/accounts'?'roles-list':'roles-set';
       if(action==='roles-set'&&(!['vip','regular'].includes(body.role)||typeof body.uid!=='string'||!/^[-\w:]{1,150}$/.test(body.uid)||body.uid===OWNER_UID))return reply({error:'Chỉ được cấp hoặc thu hồi VIP; admin được giữ cố định.'},400);
-      const roleData=await accountRoleCall(env,action,action==='roles-self'?{actor:account.localId,email:account.email||''}:action==='roles-list'?{actor:account.localId,...(body.cursor?{cursor:body.cursor}:{})}:{actor:account.localId,uid:body.uid,email:body.email,role:body.role},controller.signal);if(route==='/account-role'){let personal=null;try{if(env.AI_CONTROL){personal=await personalAiCall(env,account.localId,'personal-ai-read');if(personal?.enabled){const full=await personalAiCall(env,account.localId,'personal-ai-use').catch(()=>null);if(full?.apiKey)personal={...personal,...await probePersonalAiCapabilities(full,{env,fetchFn:providerFetch,signal:controller.signal,now})};}}}catch{personal=null;}return reply({...roleData,providers:describeAiProviders({geminiReady:configuredGeminiKeys(env).length>0,sharedCookieReady:typeof env.CHATGPT_SESSION_TOKEN==='string'&&Boolean(env.CHATGPT_SESSION_TOKEN.trim()),personal})});}return reply(roleData);
+      const roleData=await accountRoleCall(env,action,action==='roles-self'?{actor:account.localId,email:account.email||''}:action==='roles-list'?{actor:account.localId,...(body.cursor?{cursor:body.cursor}:{})}:{actor:account.localId,uid:body.uid,email:body.email,role:body.role},controller.signal);if(route==='/account-role')return reply({...roleData,providers:await resolveAccountProviders(account.localId)});return reply(roleData);
      }
      verifiedRole=(await accountRoleCall(env,'roles-self',{actor:account.localId,email:account.email||''},controller.signal)).account.role;
     }catch{return reply({error:'Chưa xác minh được quyền tài khoản. Hãy thử lại.',code:'ACCOUNT_ROLES_UNAVAILABLE'},503);}
