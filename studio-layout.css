@@ -669,10 +669,9 @@ body.studio-enabled .side-nav .nav-group-items>button{width:100%;min-height:44px
 @media(min-width:971px){
   .app-shell.sidebar-collapsed .sidebar{width:60px;padding:18px 8px}
   .app-shell.sidebar-collapsed .brand-side{position:relative;justify-content:center;gap:0;padding:0 0 18px;min-height:38px}
-  .app-shell.sidebar-collapsed .brand-mark{width:38px;height:38px;border-radius:var(--radius-11px);font-size:21px;transition:opacity .15s ease}
-  .app-shell.sidebar-collapsed .sidebar-toggle{position:absolute;inset:0 auto auto 50%;transform:translateX(-50%);margin-left:0;width:38px;height:38px;border-radius:var(--radius-11px);opacity:0;background:var(--legacy-hex-f8f7fd);color:var(--accent-ink);transition:opacity .15s ease,background .15s ease}
-  .app-shell.sidebar-collapsed .brand-side:hover .brand-mark,.app-shell.sidebar-collapsed .brand-side:focus-within .brand-mark{opacity:0}
-  .app-shell.sidebar-collapsed .brand-side:hover .sidebar-toggle,.app-shell.sidebar-collapsed .sidebar-toggle:focus-visible{opacity:1}
+  .app-shell.sidebar-collapsed .brand-mark{width:38px;height:38px;border-radius:var(--radius-11px);font-size:21px;transition:transform .15s ease,box-shadow .15s ease}
+  .app-shell.sidebar-collapsed .sidebar-toggle{position:absolute;inset:0 auto auto 50%;transform:translateX(-50%);margin-left:0;width:38px;height:38px;border-radius:var(--radius-11px);opacity:0;z-index:2;cursor:pointer}
+  .app-shell.sidebar-collapsed .brand-side:hover .brand-mark{transform:scale(1.05);box-shadow:0 0 0 3px var(--accent-light)}
   .app-shell.sidebar-collapsed :is(.brand-text,.sidebar-label,.side-nav button span,.side-nav .nav-group>summary>span,.side-nav .nav-chevron,.sidebar-bottom){display:none!important}
   .app-shell.sidebar-collapsed .side-nav{gap:4px;align-items:center}
   .app-shell.sidebar-collapsed .side-nav button,.app-shell.sidebar-collapsed .side-nav .nav-group>summary{width:42px;height:42px;min-height:42px;justify-content:center;padding:0!important;margin:0 auto;border-radius:var(--radius-11px)}
