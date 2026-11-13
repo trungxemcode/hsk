@@ -143,6 +143,13 @@
     card.className = 'sentence-card';
     card.dataset.kind = edit.kind;
     card.dataset.source = 'ai';
+    card.title = 'Nhấn vào gợi ý để áp dụng đề xuất sửa này';
+    card.addEventListener('click', event => {
+      if (event.target.closest('button, a')) return;
+      const selection = window.getSelection?.();
+      if (selection && selection.toString() && card.contains(selection.anchorNode)) return;
+      applySuggestion(edit);
+    });
     const head = document.createElement('div');
     head.className = 'sentence-card-head';
     const dot = document.createElement('span');

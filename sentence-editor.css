@@ -288,6 +288,7 @@
   padding: 14px 16px;
   box-shadow: var(--shadow-sentence-editor-card);
   transition: all 0.15s ease;
+  cursor: pointer;
 }
 #sentenceEditor .sentence-card:hover {
   border-color: color-mix(in srgb, var(--accent) 35%, var(--se-edge));

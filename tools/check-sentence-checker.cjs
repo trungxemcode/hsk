@@ -107,6 +107,9 @@ const server=http.createServer((req,res)=>{
     assert.ok(!(await editor.locator('.sentence-status').innerText()).includes('###'));
     await editor.getByRole('button',{name:'Hoàn tác',exact:true}).click();
     assert.equal(await input.inputValue(),'🙂这件衣服。');
+    await insertion.locator('.sentence-diff').click();
+    assert.equal(await input.inputValue(),'🙂这件漂亮的衣服。');
+    assert.equal(await insertion.count(),0,'clicking suggestion card must apply and remove suggestion');
     const requestCount = await page.evaluate(() => window.__grammarRequestCount);
     for (const width of [390,1440]) {
       await page.setViewportSize({width,height:900});
