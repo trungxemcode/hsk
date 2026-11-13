@@ -388,12 +388,134 @@
     });
     return api;
   }
+  const effortPicks=[];
+  function buildEffort(control){
+    const wrap=document.createElement('div');wrap.className='qa-effort';
+    const button=document.createElement('button');button.type='button';button.className='qa-effort-btn';
+    button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-expanded','false');
+    const label=document.createElement('span');label.className='qa-effort-label';
+    button.append(label);button.insertAdjacentHTML('beforeend',CARET);
+    const menu=document.createElement('div');menu.className='qa-effort-popover';menu.setAttribute('role','dialog');menu.hidden=true;menu.setAttribute('aria-label','Chọn mức độ mạnh hoặc model');
+    wrap.append(button,menu);control.before(wrap);
+    let view='slider';
+    function getOpts(){return Array.from(control.options||[]);}
+    function place(){
+      const r=button.getBoundingClientRect(),width=Math.min(280,window.innerWidth-24);
+      menu.style.width=width+'px';
+      menu.style.left=Math.max(12,Math.min(window.innerWidth-width-12,r.right-width))+'px';
+      menu.style.bottom=Math.max(12,window.innerHeight-r.top+8)+'px';
+      menu.style.maxHeight=Math.max(160,Math.min(360,r.top-24))+'px';
+    }
+    function selectIndex(idx){
+      const opts=getOpts();
+      if(!opts[idx]||control.disabled)return;
+      control.value=opts[idx].value;
+      control.dispatchEvent(new Event('change',{bubbles:true}));
+    }
+    function renderPopover(){
+      const opts=getOpts();
+      const activeIdx=Math.max(0,opts.findIndex(o=>o.value===control.value));
+      const activeOpt=opts[activeIdx]||{label:'Thấp',textContent:'Thấp',value:'low'};
+      const maxIdx=Math.max(1,opts.length-1);
+      const pct=opts.length>1?(activeIdx/maxIdx)*100:100;
+      menu.textContent='';
+      if(view==='models'){
+        const list=document.createElement('div');list.className='qa-effort-model-list';list.setAttribute('role','menu');
+        for(let i=0;i<opts.length;i++){
+          const opt=opts[i],checked=i===activeIdx;
+          const row=document.createElement('button');row.type='button';row.className='qa-effort-model-item';
+          row.setAttribute('role','menuitemradio');row.setAttribute('aria-checked',String(checked));
+          row.dataset.value=opt.value;
+          const text=document.createElement('span');text.className='qa-effort-model-text';
+          const name=document.createElement('b');name.textContent=opt.textContent;
+          text.append(name);
+          const modelId=opt.dataset?.model||'';
+          if(modelId&&modelId!==opt.textContent){const sub=document.createElement('small');sub.textContent=modelId;text.append(sub);}
+          row.append(text);
+          if(checked)row.insertAdjacentHTML('beforeend','<svg class="qa-provider-check" aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>');
+          row.addEventListener('click',()=>{selectIndex(i);closeAll();button.focus();});
+          list.append(row);
+        }
+        menu.append(list);
+        return;
+      }
+      const headBtn=document.createElement('button');headBtn.type='button';headBtn.className='qa-effort-header-btn';
+      headBtn.title='Nhấn để xem và chọn danh sách model';
+      const headText=document.createElement('span');headText.className='qa-effort-current';headText.textContent=activeOpt.textContent;
+      headBtn.append(headText);
+      headBtn.insertAdjacentHTML('beforeend','<svg class="qa-effort-chevron" aria-hidden="true" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>');
+      headBtn.addEventListener('click',()=>{
+        view='models';
+        renderPopover();
+        place();
+        (menu.querySelector('[aria-checked="true"]')||menu.querySelector('.qa-effort-model-item'))?.focus();
+      });
+      const sliderWrap=document.createElement('div');sliderWrap.className='qa-effort-slider-wrap';
+      sliderWrap.style.setProperty('--qa-effort-pct',`${pct}%`);
+      const dots=document.createElement('div');dots.className='qa-effort-dots';dots.setAttribute('aria-hidden','true');
+      const dotCount=Math.max(1,opts.length);
+      for(let i=0;i<dotCount;i++){const dot=document.createElement('span');dot.className='qa-effort-dot';if(i<=activeIdx)dot.dataset.active='true';dots.append(dot);}
+      const range=document.createElement('input');range.type='range';range.className='qa-effort-range';
+      range.min='0';range.max=String(Math.max(0,opts.length-1));range.step='1';range.value=String(activeIdx);
+      range.disabled=control.disabled||opts.length<=1;
+      range.setAttribute('aria-label',control.getAttribute('aria-label')||'Chọn mức độ mạnh của model');
+      range.addEventListener('input',()=>{
+        const idx=Number(range.value);
+        const nextPct=opts.length>1?(idx/maxIdx)*100:100;
+        sliderWrap.style.setProperty('--qa-effort-pct',`${nextPct}%`);
+        if(opts[idx])headText.textContent=opts[idx].textContent;
+        dots.querySelectorAll('.qa-effort-dot').forEach((d,i)=>{d.dataset.active=i<=idx?'true':'false';});
+        selectIndex(idx);
+      });
+      sliderWrap.append(dots,range);
+      menu.append(headBtn,sliderWrap);
+    }
+    function open(){
+      if(control.disabled)return;
+      closeAll();
+      view='slider';
+      renderPopover();
+      menu.hidden=false;
+      place();
+      button.setAttribute('aria-expanded','true');
+      openPicker=api;
+      menu.querySelector('.qa-effort-range')?.focus();
+    }
+    function close(){menu.hidden=true;button.setAttribute('aria-expanded','false');}
+    const api={close,render(){
+      const opts=getOpts();
+      const activeOpt=opts.find(o=>o.value===control.value)||opts[0];
+      const text=activeOpt?.textContent||'Thấp';
+      label.textContent=text;
+      button.disabled=control.disabled;
+      const aria=control.getAttribute('aria-label')||'Mức suy nghĩ của AI';
+      button.setAttribute('aria-label',`${aria}: ${text}`);
+      button.title=control.disabled?'Chỉ khả dụng cho tài khoản VIP hoặc khi dùng API riêng':`${aria}: ${text}`;
+      if(!menu.hidden)renderPopover();
+    },menu,button};
+    button.addEventListener('click',()=>menu.hidden?open():closeAll());
+    menu.addEventListener('keydown',event=>{
+      if(event.key==='Escape'){event.preventDefault();closeAll();button.focus();return;}
+      if(view==='models'){
+        const rows=[...menu.querySelectorAll('.qa-effort-model-item')],i=rows.indexOf(document.activeElement);
+        if(event.key==='ArrowDown'){event.preventDefault();rows[Math.min(rows.length-1,i+1)]?.focus();}
+        else if(event.key==='ArrowUp'){event.preventDefault();rows[Math.max(0,i-1)]?.focus();}
+      }
+    });
+    return api;
+  }
+  function renderEffortAll(){for(const e of effortPicks)e.render();}
   function renderAll(){
     normalizeSelection();
     for(const p of picks)p.render();
+    renderEffortAll();
     window.dispatchEvent(new CustomEvent('hsk-ai-provider-state'));
   }
-  for(const control of controls)picks.push(build(control));
+  for(const control of controls){
+    picks.push(build(control));
+    effortPicks.push(buildEffort(control));
+  }
+  window.addEventListener('hsk-ai-thinking-state',renderEffortAll);
   document.addEventListener('pointerdown',event=>{if(openPicker&&!openPicker.menu.contains(event.target)&&!openPicker.button.contains(event.target))closeAll();});
   window.addEventListener('resize',closeAll);
   window.addEventListener('scroll',event=>{

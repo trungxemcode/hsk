@@ -61,6 +61,7 @@
    control.value=thinking;
    control.disabled=!unlocked;
   }
+  window.dispatchEvent(new CustomEvent('hsk-ai-thinking-state'));
  }
  for(const control of thinkingControls)control.addEventListener('change',()=>{
   if(!control.disabled){thinking=control.value;updateThinking(canChooseRole);}
