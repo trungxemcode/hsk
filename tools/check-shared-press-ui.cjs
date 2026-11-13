@@ -16,7 +16,27 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
      if(info.framed){for(const gap of [info.dx,info.dy,info.right,...(persistentOpen?[]:[info.bottom])])assert.ok(Math.abs(gap)<=2,label+' header must fill frame');assert.ok(Math.abs(info.radius-info.frameRadius)<=1,label+' matching corners');}
      if(i===0&&route==='account')await p.screenshot({path:'/tmp/press-shape-shared-account-'+size.width+'-'+theme+'.png'});
      // The existing desktop statistics policy keeps that panel expanded.
-     if(!persistentOpen){await n.press('Enter');assert.equal(await n.evaluate(n=>n.parentElement.open),true);if(info.framed)assert.equal(await n.evaluate(n=>parseFloat(getComputedStyle(n).borderBottomLeftRadius)),0,label+' open corners');await n.press('Enter');assert.equal(await n.evaluate(n=>n.parentElement.open),false);}else assert.equal(await n.evaluate(n=>parseFloat(getComputedStyle(n).borderBottomLeftRadius)),0,label+' expanded header corners');await n.evaluate(n=>n.blur());count++;
+     if(!persistentOpen){
+      const desktopSideMenu=size.width>=721&&await n.evaluate(n=>n.matches('.side-nav .nav-group>summary'));
+      if(desktopSideMenu){
+       // Desktop sidebar now uses an accessible flyout; other disclosures remain native details.
+       const opened=p.locator('.nav-flyout-side:not([hidden])');
+       if(await n.getAttribute('aria-expanded')==='true'){
+        await p.waitForTimeout(150);await n.press('Enter');await opened.waitFor({state:'hidden'});
+       }
+       await n.press('Enter');await opened.waitFor({state:'visible'});
+       assert.equal(await n.getAttribute('aria-expanded'),'true',label+' keyboard opens sidebar flyout');
+       assert.ok(await opened.locator('[data-studio-go]').count()>0,label+' flyout retains navigation destinations');
+       await p.waitForTimeout(150);await n.press('Enter');await opened.waitFor({state:'hidden'});
+       assert.equal(await n.getAttribute('aria-expanded'),'false',label+' keyboard closes sidebar flyout');
+       assert.equal(await n.evaluate(n=>n.parentElement.open),false,label+' desktop menu stays collapsed');
+      }else{
+       await n.press('Enter');assert.equal(await n.evaluate(n=>n.parentElement.open),true);
+       if(info.framed)assert.equal(await n.evaluate(n=>parseFloat(getComputedStyle(n).borderBottomLeftRadius)),0,label+' open corners');
+       await n.press('Enter');assert.equal(await n.evaluate(n=>n.parentElement.open),false);
+      }
+     }else assert.equal(await n.evaluate(n=>parseFloat(getComputedStyle(n).borderBottomLeftRadius)),0,label+' expanded header corners');
+     await n.evaluate(n=>n.blur());count++;
     }
    }
   }await p.close();

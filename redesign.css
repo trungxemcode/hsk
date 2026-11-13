@@ -4588,3 +4588,13 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-resume:is(:hover,:
   border-color:var(--palette-violet)!important;
   color:var(--palette-white)!important;
 }
+
+/* Keep selected desktop sidebar groups high-contrast in both themes. */
+html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary.active,
+html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary.active:is(:hover,:focus-visible,[aria-expanded="true"]){
+  background:var(--press-active-bg)!important;
+  border-color:var(--press-active-bg)!important;
+  color:var(--palette-white)!important;
+}
+html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary.active :is(i,svg,span),
+html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary.active:is(:hover,:focus-visible,[aria-expanded="true"]) :is(i,svg,span){color:var(--palette-white)!important;}
