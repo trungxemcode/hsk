@@ -1,1 +1,1 @@
-{"request":"PR #401: Bổ sung nhà cung cấp AI tùy chỉnh, kiểm tra ngữ pháp và khả năng phục hồi khi AI Muse trả lời dài trong trang Sửa câu tiếng Trung.","excludedRoutes":["sentence-editor"]}
+{"request":"PR #413: Thêm thanh chọn effort và popover danh sách model trong trang AI hỏi đáp; giữ nguyên giao diện các trang khác.","excludedRoutes":["ai-qa"]}
