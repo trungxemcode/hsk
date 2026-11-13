@@ -1,5 +1,5 @@
 {
-  "request": "PR #419: bổ sung thanh điều hướng ngang trong topbar desktop và flyout nhóm khi sidebar thu gọn; bảo vệ toàn bộ nội dung các trang, chỉ thay đổi hai vùng điều hướng dùng chung.",
+  "request": "PR #421: tinh chỉnh hiệu ứng hover, trạng thái active, chuyển động flyout và accordion sidebar chung. Chỉ hai vùng header và sidebar được phép thay đổi, bảo vệ mọi nội dung route trên desktop/mobile, sáng/tối.",
   "excludedRoutes": [],
   "sharedHeaderOnly": true,
   "sharedSidebarOnly": true

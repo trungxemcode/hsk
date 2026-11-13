@@ -267,6 +267,7 @@ renderIcons();
  function title(name,syncGroups=false){
   route=name;
   $('activeTitle').textContent=(['search','translator'].includes(name)&&searchNames[document.body.dataset.searchTool])||labels[name]||'HSK Flashcards';
+  let activeSideGroup=null;
   document.querySelectorAll('[data-studio-go],[data-search-tool]').forEach(b=>{
    // "translator" belongs to the global Search section, but is a distinct local tab.
    const localTab=!!b.closest('.studio-search-tabs');
