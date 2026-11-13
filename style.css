@@ -16,6 +16,7 @@
   --qa-effort-accent:#3b82f6;
   --qa-effort-thumb-border:#2563eb;
   --qa-effort-thumb-shadow:0 1px 4px rgba(0,0,0,.35);
+  --shadow-sidebar-brand-hover:0 0 0 3px var(--accent-light);
   --shadow-home-hero:0 3px 10px rgb(38 24 88 / 8%);
 --wb-exact-0:transparent;
 --wb-exact-1:inherit;
