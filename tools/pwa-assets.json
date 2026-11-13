@@ -165,6 +165,7 @@
     "real-reading.css",
     "src/utils/text.js",
     "src/utils/format.js",
+    "src/utils/ai-config.js",
     "src/modules/dictionary/search-core.js",
     "src/ui/dictionary-relations.js",
     "src/modules/speech/voice-store.js",
