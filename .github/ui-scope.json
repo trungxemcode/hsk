@@ -1,5 +1,5 @@
 {
-  "request": "PR #419: bổ sung thanh điều hướng ngang trong topbar desktop và flyout nhóm khi sidebar thu gọn; bảo vệ toàn bộ nội dung các trang, chỉ thay đổi hai vùng điều hướng dùng chung.",
+  "request": "PR #420: căn giữa flyout nhóm ở topbar và sidebar desktop thu gọn, bỏ nền trắng ở topbar pill, giữ tên cấp HSK không xuống dòng; chỉ hai vùng header và sidebar dùng chung được phép thay đổi, bảo vệ toàn bộ nội dung route.",
   "excludedRoutes": [],
   "sharedHeaderOnly": true,
   "sharedSidebarOnly": true
