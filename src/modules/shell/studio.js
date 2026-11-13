@@ -43,8 +43,14 @@ const iconPaths={
 function renderIcons(){document.querySelectorAll('[data-icon]').forEach(el=>{const key=el.getAttribute('data-icon');if(iconPaths[key]){el.innerHTML=`<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${iconPaths[key]}</svg>`}})}
 renderIcons();
  const appShell=document.querySelector('.app-shell'),sidebarToggle=document.getElementById('sidebarToggle');
- function setSidebarCollapsed(collapsed){
+ let sidebarAnimTimer=0;
+ function setSidebarCollapsed(collapsed,{animate=false}={}){
   const next=Boolean(collapsed);
+  if(animate&&appShell){
+   clearTimeout(sidebarAnimTimer);
+   appShell.classList.add('sidebar-animating');
+   sidebarAnimTimer=setTimeout(()=>appShell.classList.remove('sidebar-animating'),280);
+  }
   appShell?.classList.toggle('sidebar-collapsed',next);
   if(sidebarToggle){
    sidebarToggle.setAttribute('aria-expanded',String(!next));
@@ -58,7 +64,7 @@ renderIcons();
   let savedCollapsed=false;
   try{savedCollapsed=localStorage.getItem('hsk-sidebar-collapsed-v1')==='1';}catch{}
   if(savedCollapsed)setSidebarCollapsed(true);
-  sidebarToggle.addEventListener('click',()=>setSidebarCollapsed(!appShell?.classList.contains('sidebar-collapsed')));
+  sidebarToggle.addEventListener('click',()=>setSidebarCollapsed(!appShell?.classList.contains('sidebar-collapsed'),{animate:true}));
  }
  document.querySelectorAll('.side-nav button[data-studio-go],.side-nav .nav-group>summary').forEach(el=>{if(!el.title&&el.getAttribute('aria-label'))el.title=el.getAttribute('aria-label');});
  const themeButton=document.createElement('button');themeButton.type='button';themeButton.id='themeToggle';themeButton.className='theme-button';document.querySelector('.topbar-actions').prepend(themeButton);
