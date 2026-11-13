@@ -1,5 +1,5 @@
 (async()=>{
- const BUILD='hsk-offline-4-4-41',status=document.getElementById('offlineStatus'),update=document.getElementById('offlineUpdate'),manual=document.getElementById('offlineCheck');
+ const BUILD='hsk-offline-4-4-42-r2',status=document.getElementById('offlineStatus'),update=document.getElementById('offlineUpdate'),manual=document.getElementById('offlineCheck');
  let registration,ready=false,checking=false,lastCheck=0,phase='',lastProgress=0,latest=null,activating=false,activeVersion=null;const watched=new WeakSet();
  const notice=document.getElementById('updateNotice'),noticeText=document.getElementById('updateNoticeText'),noticeApply=document.getElementById('updateNoticeApply');let dismissed='',latestLabel='';
  function announce(downloaded=false){if(!notice||!latest||latest===BUILD||dismissed===latest)return;notice.hidden=false;noticeText.textContent=(latestLabel||'Bản mới')+(downloaded?' đã sẵn sàng. Cập nhật khi bạn học xong; tiến độ được giữ.':' đang được tải. Bạn vẫn có thể tiếp tục học.');noticeApply.disabled=!downloaded;noticeApply.textContent=downloaded?'Cập nhật ngay':'Đang tải…';}
@@ -21,7 +21,7 @@
    try{const r=await fetch('./app-version.json?t='+Date.now(),{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error('manifest');manifest=await r.json();if(typeof manifest.version!=='string')throw Error('manifest');}finally{clearTimeout(timer);}
    latest=manifest.version;latestLabel=manifest.label||'Bản mới';announce();if(waiting())return;
    if(registration.installing){watch(registration.installing);set('Bản mới đang được chuẩn bị. Tiến độ tải sẽ hiện ở đây.');return;}
-   if(latest===BUILD&&ready&&activeVersion===BUILD){phase='';set('Bạn đang dùng bản mới nhất · '+manifest.label);return;}
+   if(latest===BUILD&&ready&&activeVersion===BUILD){phase='';const sv=document.getElementById('studioVersion');if(sv&&manifest.label)sv.textContent=manifest.label;set('Bạn đang dùng bản mới nhất · '+manifest.label);return;}
    set('Đã tìm thấy bản mới · Đang tải cập nhật…');await timeout(registration.update(),20000);watch(registration.installing);
    if(!waiting()&&!registration.installing){phase='error';set('Máy chủ có bản mới nhưng trình duyệt chưa nhận được. Bấm Kiểm tra cập nhật để thử lại; tiến độ vẫn giữ nguyên.');}
   }catch(error){phase='error';set(error.message==='timeout'||error.name==='AbortError'?'Máy chủ không phản hồi trong thời hạn chờ. Bấm Kiểm tra cập nhật để thử lại; tiến độ vẫn được giữ.':'Không đọc được phiên bản mới từ đường dẫn này. Hãy thử lại; Wi-Fi có mạng không bảo đảm máy chủ tải được.');}

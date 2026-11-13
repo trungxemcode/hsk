@@ -1,6 +1,6 @@
 import '../src/modules/translation/sentence-review-core.js';
 import {chatgptCookieGenerate,sharedGuardrail} from './chatgpt-cookie.mjs';
-import {personalAiCall,personalAiGenerate,probePersonalAiCapabilities} from './personal-ai.mjs';
+import {personalAiCall,personalAiGenerate,probePersonalAiCapabilities,fetchPersonalAiModels} from './personal-ai.mjs';
 import {normalizeAiProviderChoice,aiProviderChoiceError,describeAiProviders,PERSONAL_PROVIDER_IDS} from './ai-provider-choice.mjs';
 import { createOriginalReadingService } from './original-reading.mjs';
 import {validTranscriptInput,transcribeMusic,libraryTranscriptMedia,saveGeneratedTranscript} from './music-transcript.mjs';
@@ -253,7 +253,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
   if(!isPersonalSettings&&!isTranscript&&!isRole&&!isProfileSync&&!isDictionaryRoute&&!isDictionaryTranslate&&!isOcr&&!isSample&&!isHandwriting&&!isReading&&(!Number.isInteger(body.hsk)||body.hsk<1||body.hsk>6))return reply({error:'Chọn trình độ HSK 1–6.'},400);
   if(!isRole&&!isOcr&&!isAsk&&!isSample&&body.direction!==undefined&&!['vi-zh','zh-vi'].includes(body.direction))return reply({error:'Chọn chiều dịch hợp lệ.'},400);
   if(isAiProviders){if(Object.keys(body).length)return reply({error:'Yêu cầu nhà cung cấp AI không hợp lệ.'},400);}
-  else if(isPersonalSettings){if(!['read','save','remove'].includes(body.op)||Object.keys(body).some(k=>!['op','settings'].includes(k)))return reply({error:'Yêu cầu cài đặt không hợp lệ.'},400);}
+  else if(isPersonalSettings){if(!['read','save','remove','models'].includes(body.op)||Object.keys(body).some(k=>!['op','settings'].includes(k)))return reply({error:'Yêu cầu cài đặt không hợp lệ.'},400);}
   else if(isTranscript){if(!validTranscriptInput(body))return reply({error:'Chỉ bài đã xuất bản trong kho của chủ app mới được tạo transcript (tối đa 8 phút).'},400);if(!env.AI_CONTROL)return reply({error:'Chưa kết nối hạn mức transcript.'},503);}
   else if(isRole){if(Object.keys(body).some(k=>!['uid','email','role','cursor'].includes(k)))return reply({error:'Yêu cầu quản lý quyền không hợp lệ.'},400);}
   else if(isSample){if(!validateHandwritingSample(body))return reply({error:'Mẫu góp phải là một chữ Hán đã xác nhận và ảnh nét hợp lệ.'},400);}
@@ -313,10 +313,22 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    }
    if(isPersonalSettings){
     try{
+     if(body.op==='models'){
+      const prov=body.settings?.provider||'custom';
+      let apiKey=body.settings?.apiKey;
+      let endpoint=body.settings?.endpoint;
+      if(!apiKey||(prov==='custom'&&!endpoint)){
+       const saved=await personalAiCall(env,account.localId,'personal-ai-use',prov?{provider:prov}:undefined).catch(()=>null);
+       if(!apiKey)apiKey=saved?.apiKey;
+       if(!endpoint&&prov==='custom')endpoint=saved?.endpoint;
+      }
+      const models=await fetchPersonalAiModels({provider:prov,apiKey,endpoint},{fetchFn:providerFetch,signal:controller.signal});
+      return reply({ok:true,models});
+     }
      const {status,...result}=await personalAiCall(env,account.localId,'personal-ai-'+body.op,body.settings);
      if(status===200)return reply(result);
      return reply({error:status===400?'Kiểm tra nhà cung cấp, tên model và API key.':'Máy chủ chưa bật lưu API riêng.'},status);
-    }catch{return reply({error:'Máy chủ chưa bật lưu API riêng.'},503);}
+    }catch(err){return reply({error:err?.message||'Máy chủ chưa bật lưu API riêng.'},err?.status||503);}
    }
    const isAiQa=isLessonAsk&&body.lesson?.content?.mode==='ai-qa';
    const isPersonalAllowed=isAiQa||isLessonAsk;
@@ -545,9 +557,11 @@ Nếu phải chuyển vị trí một từ, đưa toàn bộ cụm trước và 
        headers['X-HSK-AI-Provider']='gemini';
        response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':geminiFallbackKey},signal:controller.signal,body:JSON.stringify(providerBody)});
       }else{
+       const upstream=response.status;
        const errData=await response.json().catch(()=>null);
-       const detailError=typeof errData?.error==='string'&&errData.error.trim()?errData.error.trim():null;
+       const detailError=typeof errData?.error==='string'&&errData.error.trim()?errData.error.trim():(typeof errData?.error?.message==='string'&&errData.error.message.trim()?errData.error.message.trim():null);
        const error=detailError||(upstream===401||upstream===403?'API riêng từ chối xác thực. Kiểm tra API key trong Cài đặt.':
+        upstream===402?'Tài khoản API riêng đã hết số dư tiền mặt hoặc hạn mức (HTTP 402).':
         upstream===400||upstream===404?'API riêng không chấp nhận yêu cầu hoặc model đã chọn. Kiểm tra model trong Cài đặt.':
         upstream===429?'API riêng đã đạt giới hạn lượt dùng.':'API riêng không trả về phản hồi hợp lệ. Hãy thử lại.');
        return reply({error,code:'PERSONAL_AI_UPSTREAM',upstream},upstream===429?429:502);

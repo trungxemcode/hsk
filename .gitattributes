@@ -6,4 +6,10 @@ GEMINI.md text eol=lf
 docs/ai/*.md text eol=lf
 content/data/*.js text eol=lf
 src/**/*.js text eol=lf
+offline.js text eol=lf
+offline-worker.js text eol=lf
+OneSignalSDKWorker.js text eol=lf
+index.html text eol=lf
+*.css text eol=lf
+*.mjs text eol=lf
 

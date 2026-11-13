@@ -380,7 +380,17 @@
 <option value="gpt-6-astra">Astra (Mô hình cao cấp nhất)</option>
 <option value="gpt-6.1-sol">Sol (Mô hình cân bằng chi phí)</option>
 </select>
+<div class="personal-ai-model-row" id="personalAiModelRow">
 <input id="personalAiModel" maxlength="100" spellcheck="false" hidden disabled>
+<button id="personalAiFetchModels" type="button" class="secondary-btn" hidden>Kiểm tra &amp; Lấy model</button>
+</div>
+<div id="personalAiModelListContainer" hidden>
+<div class="personal-ai-model-list-header">
+<span>Chọn model (<span id="personalAiModelCount">0</span>):</span>
+<button id="personalAiModelListClose" type="button" class="secondary-btn">Đóng</button>
+</div>
+<div id="personalAiModelList" class="personal-ai-model-list"></div>
+</div>
 <p id="personalAiEndpoint" class="hint"></p>
 <label for="personalAiKey">API key</label>
 <input id="personalAiKey" type="password" maxlength="16384" autocomplete="new-password" spellcheck="false" autocapitalize="off">
