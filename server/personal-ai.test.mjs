@@ -374,3 +374,67 @@ test('settings op: models fetches supported models with provided or stored crede
  assert.equal(calls.at(-1).url,'https://literouter.fun/v1/models');
  assert.equal(calls.at(-1).headers.Authorization,'Bearer sk-saved-key-12345');
 });
+
+test('sentence-editor personal fallback keeps real source/model and never falls back twice',async()=>{
+ const sentencePayload=(questionText,providerArg='personal:custom')=>({
+  question:questionText,
+  hsk:3,
+  aiProvider:providerArg,
+  lesson:{id:'sentence-editor',title:'Sửa câu',words:[],content:{mode:'sentence-editor'}},
+  history:[]
+ });
+ const validReviewJson=JSON.stringify({
+  summary:'Nên sửa lại trợ từ.',
+  suggestions:[{kind:'fix',original:'我去学校了昨天',replacement:'我昨天去学校了',reason:'Trạng ngữ thời gian đặt trước động từ.'}]
+ });
+
+ // 1. Personal provider succeeds -> keeps personal provider & model
+ const uidOk='sentence-ok-uid';
+ await request(uidOk,settingsPath,{op:'save',settings:{provider:'custom',endpoint:'https://custom-ok.test/v1',model:'deepseek-v4.1-flash-1017',enabled:true,apiKey:'sk-ok-key-12345'}});
+ personalReply=validReviewJson;
+ const okRes=await request(uidOk,'/lesson-ask',sentencePayload('我去学校了昨天'),{...env,GEMINI_API_KEY:'fake-gem-key',ADMIN_UIDS:uidOk});
+ assert.equal(okRes.status,200);
+ const okData=await okRes.json();
+ assert.deepEqual(okData.aiSource,{provider:'custom',model:'deepseek-v4.1-flash-1017'});
+
+ // 2. Personal provider returns unanchored format -> falls back ONCE to Gemini and reports Gemini model (not custom model)
+ personalReply='not valid json at all';
+ const callsBeforeFallback=calls.length;
+ const fbHandler=createHandler(async(url,init)=>{
+  if(String(url).includes('identitytoolkit')){
+   const token=JSON.parse(init.body).idToken;
+   const claims=JSON.parse(Buffer.from(token.split('.')[1],'base64url').toString());
+   return Response.json({users:[{localId:claims.sub}]});
+  }
+  calls.push({url,headers:init.headers,body:init?.body?JSON.parse(init.body):null,redirect:init.redirect});
+  if(String(url).includes('generativelanguage')){
+   return Response.json({modelVersion:'gemini-3.1-flash-lite',candidates:[{content:{parts:[{text:validReviewJson}]}}]});
+  }
+  return Response.json({choices:[{message:{content:'plain invalid text'}}]});
+ });
+ const claims={aud:'hsk-flashcards-44631',iss:'https://securetoken.google.com/hsk-flashcards-44631',sub:uidOk,exp:Math.floor(Date.now()/1000)+3600};
+ const token='header.'+Buffer.from(JSON.stringify(claims)).toString('base64url')+'.signature';
+ const fbRes=await fbHandler(new Request('https://worker.test/lesson-ask',{method:'POST',headers:{Origin:origin,Authorization:'Bearer '+token},body:JSON.stringify(sentencePayload('我去学校了昨天'))}),{...env,GEMINI_API_KEY:'fake-gem-key',ADMIN_UIDS:uidOk});
+ assert.equal(fbRes.status,200);
+ const fbData=await fbRes.json();
+ assert.deepEqual(fbData.aiSource,{provider:'gemini',model:'gemini-3.1-flash-lite'});
+ const geminiCalls=calls.slice(callsBeforeFallback).filter(c=>String(c.url).includes('generativelanguage'));
+ assert.equal(geminiCalls.length,1);
+
+ // 3. If Gemini fallback itself fails (500) after personal provider fails (502), no second Gemini fallback is fired
+ const callsBeforeFail=calls.length;
+ const failHandler=createHandler(async(url,init)=>{
+  if(String(url).includes('identitytoolkit')){
+   const t=JSON.parse(init.body).idToken;
+   const c=JSON.parse(Buffer.from(t.split('.')[1],'base64url').toString());
+   return Response.json({users:[{localId:c.sub}]});
+  }
+  calls.push({url,headers:init.headers,body:init?.body?JSON.parse(init.body):null,redirect:init.redirect});
+  if(String(url).includes('generativelanguage'))return new Response(JSON.stringify({error:{message:'Gemini down'}}),{status:500});
+  return new Response(JSON.stringify({error:{message:'Upstream down'}}),{status:502});
+ });
+ const failRes=await failHandler(new Request('https://worker.test/lesson-ask',{method:'POST',headers:{Origin:origin,Authorization:'Bearer '+token},body:JSON.stringify(sentencePayload('我去学校了昨天'))}),{...env,GEMINI_API_KEY:'fake-gem-key',ADMIN_UIDS:uidOk});
+ assert.equal(failRes.status,502);
+ const failGeminiCalls=calls.slice(callsBeforeFail).filter(c=>String(c.url).includes('generativelanguage'));
+ assert.equal(failGeminiCalls.length,1);
+});

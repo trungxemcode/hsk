@@ -272,16 +272,11 @@ export async function probePersonalAiCapabilities(personal,{env={},fetchFn=fetch
   }else if(provider==='fosta'){
    value={models:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol']};
   }else if(provider==='custom'&&personal.endpoint){
-   let modelsUrl=personal.endpoint;
-   if(modelsUrl.endsWith('/chat/completions')){
-    modelsUrl=modelsUrl.slice(0,-'/chat/completions'.length)+'/models';
-   }else if(!modelsUrl.endsWith('/models')){
-    modelsUrl=modelsUrl.replace(/\/+$/, '')+'/models';
-   }
+   const modelsUrl=resolveCustomModelsUrl(personal.endpoint);
    const res=await fetchFn(modelsUrl,{method:'GET',headers:{Authorization:'Bearer '+apiKey},signal,redirect:'manual'});
    if(res.ok){
     const data=await res.json().catch(()=>null);
-    const ids=(data?.data||[]).map(m=>m?.id).filter(id=>typeof id==='string'&&id.trim().length<=100).slice(0,20);
+    const ids=parseOpenAiModelsList(data).map(m=>m.id).slice(0,20);
     if(ids.length)value={models:ids};
    }
   }else if(provider==='muse-cookie'){
@@ -293,18 +288,28 @@ export async function probePersonalAiCapabilities(personal,{env={},fetchFn=fetch
  return value;
 }
 
+export function resolveCustomModelsUrl(endpoint){
+ const u=String(endpoint||'').trim().replace(/\/+$/, '');
+ if(!u)return '';
+ if(u.endsWith('/chat/completions'))return u.slice(0,-'/chat/completions'.length)+'/models';
+ if(u.endsWith('/models'))return u;
+ return u+'/models';
+}
+function parseOpenAiModelsList(data){
+ const rawList=Array.isArray(data)?data:(Array.isArray(data?.data)?data.data:(Array.isArray(data?.models)?data.models:[]));
+ return rawList.map(m=>({
+  id:String(typeof m==='string'?m:(m?.id||m?.name||'')).trim(),
+  description:String(typeof m==='string'?'':(m?.description||(m?.owned_by?'Nhà phát triển: '+m.owned_by:'')))
+ })).filter(m=>m.id&&m.id.length<=100);
+}
+
 export async function fetchPersonalAiModels(config,{fetchFn=fetch,signal}={}){
  if(!config||typeof config!=='object')throw Error('Cấu hình không hợp lệ.');
  const {provider,apiKey,endpoint}=config;
  if(!apiKey&&provider!=='fosta')throw Error('Chưa có API key.');
  if(provider==='custom'){
-  if(!endpoint)throw Error('Vui lòng nhập Endpoint / Base URL.');
-  let modelsUrl=endpoint.trim().replace(/\/+$/, '');
-  if(modelsUrl.endsWith('/chat/completions')){
-   modelsUrl=modelsUrl.slice(0,-'/chat/completions'.length)+'/models';
-  }else if(!modelsUrl.endsWith('/models')){
-   modelsUrl+='/models';
-  }
+  const modelsUrl=resolveCustomModelsUrl(endpoint);
+  if(!modelsUrl)throw Error('Vui lòng nhập Endpoint / Base URL.');
   const res=await fetchFn(modelsUrl,{
    method:'GET',
    headers:{Authorization:'Bearer '+apiKey,'Content-Type':'application/json'},
@@ -317,11 +322,7 @@ export async function fetchPersonalAiModels(config,{fetchFn=fetch,signal}={}){
    throw Error('Lỗi từ nhà cung cấp: '+msg);
   }
   const data=await res.json().catch(()=>null);
-  const rawList=Array.isArray(data)?data:(Array.isArray(data?.data)?data.data:(Array.isArray(data?.models)?data.models:[]));
-  const models=rawList.map(m=>({
-   id:String(typeof m==='string'?m:(m?.id||m?.name||'')).trim(),
-   description:String(typeof m==='string'?'':(m?.description||(m?.owned_by?'Nhà phát triển: '+m.owned_by:'')))
-  })).filter(m=>m.id&&m.id.length<=100);
+  const models=parseOpenAiModelsList(data);
   if(!models.length)throw Error('Không tìm thấy model nào từ endpoint này.');
   return models;
  }

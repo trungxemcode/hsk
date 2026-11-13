@@ -1,4 +1,19 @@
-# Current task: Auto-fetch and apply supported AI models for custom/API providers (2026-11-12)
+# Current task: Pha 1 — Hợp nhất fallback Sửa câu & chuẩn hóa URL /models trên Worker (2026-11-13)
+
+Nhánh: `refactor/worker-sentence-fallback-and-models` (tách từ `main` tại `dd4ffbe`, bản `4.4.42`).
+
+Thay đổi đã thực hiện (chỉ phía `server/`, không đổi giao diện/PWA):
+1. **Gom fallback Sửa câu trong `server/translator-worker.mjs` (và đồng bộ `server/translator-worker-bundled.mjs`):**
+   - Hợp nhất 3 nhánh `hsk-sentence-editor-fallback-to-gemini*` vào helper `runSentenceEditorGeminiFallback` + `extractCandidateText` + cờ `sentenceFallbackUsed`.
+   - Khắc phục lỗi `reviewModel` bị giữ lại model riêng cũ (ví dụ `muse-spark`) sau khi fallback sang Gemini, đồng thời dùng đúng `activePayload` cho `modelVersion` và `qaUsage`.
+   - Bảo đảm không phát sinh fallback lần 2 khi Gemini fallback lỗi và tôn trọng `controller.signal.aborted`.
+2. **Hợp nhất chuẩn hóa `/models` trong `server/personal-ai.mjs`:**
+   - Tách `resolveCustomModelsUrl` và `parseOpenAiModelsList` dùng chung cho cả `probePersonalAiCapabilities` và `fetchPersonalAiModels`.
+3. **Kiểm thử & Triển khai:**
+   - Thêm test trong `server/personal-ai.test.mjs` cho 3 ca: provider riêng thành công, fallback 1 lần khi sai định dạng (kiểm tra `aiSource`), và không fallback lần 2 khi Gemini lỗi.
+   - Đạt 482/482 server tests, `check-feature-preservation.py` (98/98) và `check-pwa-release.py`.
+
+# Previous task: Auto-fetch and apply supported AI models for custom/API providers (2026-11-12)
 
 Built the auto-fetch model feature for custom (OpenAI-compatible) and personal AI providers on branch `feat/auto-fetch-custom-models`:
 1. **Server (`server/personal-ai.mjs`, `server/translator-worker.mjs`, `server/translator-worker-bundled.mjs`):**
