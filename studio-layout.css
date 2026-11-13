@@ -689,7 +689,7 @@ body.studio-enabled .side-nav .nav-group-items>button{width:100%;min-height:44px
   .topbar-nav{display:flex;align-items:center;gap:2px;margin:0 auto;padding:4px;border-radius:var(--radius-pill);background:color-mix(in srgb,var(--ink) 4%,var(--palette-clear))}
   .topbar-nav-group{position:relative;display:inline-flex;align-items:center}
   .topbar-nav-pill{display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:0 12px;border:0;border-radius:var(--radius-pill);background:var(--palette-clear);color:var(--legacy-hex-707389);font-size:12.5px;font-weight:600;white-space:nowrap}
-  .topbar-nav-pill:hover,.topbar-nav-pill[aria-expanded="true"]{background:var(--palette-white);color:var(--ink-strong);box-shadow:0 1px 3px rgba(24,24,48,.06)}
+  .topbar-nav-pill:hover,.topbar-nav-pill[aria-expanded="true"]{background:var(--palette-white);color:var(--ink-strong);box-shadow:var(--shadow-topbar-nav-hover)}
   .topbar-nav-pill.active{background:var(--accent-light);color:var(--accent-dark);font-weight:700}
   .topbar-nav-caret{width:13px;height:13px;opacity:.65;transition:transform .16s ease}
   .topbar-nav-pill[aria-expanded="true"] .topbar-nav-caret{transform:rotate(180deg)}

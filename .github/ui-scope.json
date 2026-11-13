@@ -1,1 +1,6 @@
-{"request":"PR #415: Tinh chỉnh riêng rail thu gọn sidebar desktop và canh giữa biểu tượng; mọi trang bên ngoài sidebar vẫn được bảo vệ.","excludedRoutes":[],"sharedSidebarOnly":true}
+{
+  "request": "PR #419: bổ sung thanh điều hướng ngang trong topbar desktop và flyout nhóm khi sidebar thu gọn; bảo vệ toàn bộ nội dung các trang, chỉ thay đổi hai vùng điều hướng dùng chung.",
+  "excludedRoutes": [],
+  "sharedHeaderOnly": true,
+  "sharedSidebarOnly": true
+}
