@@ -56,8 +56,9 @@ await page.route('https://ai.test/ai-providers',route=>route.fulfill({json:{syst
   const effortBtn=page.locator('#aiQaForm .qa-effort-btn'),effortPopover=page.locator('#aiQaForm .qa-effort-popover');
   await effortBtn.click();
   await effortPopover.waitFor({state:'visible'});
-  const range=effortPopover.locator('.qa-effort-range');
-  await range.evaluate(el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}));});
+  const slider=effortPopover.locator('.qa-effort-slider-wrap');
+  await slider.focus();
+  await page.keyboard.press('ArrowLeft');
   assert.equal(await thinking.inputValue(),await thinking.locator('option').first().getAttribute('value'));
   await effortPopover.locator('.qa-effort-header-btn').click();
   await effortPopover.locator('.qa-effort-model-list').waitFor({state:'visible'});
