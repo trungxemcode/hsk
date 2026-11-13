@@ -689,7 +689,9 @@ body.studio-enabled .side-nav .nav-group-items>button{width:100%;min-height:44px
   .topbar-title{flex:0 1 auto;min-width:96px}
   .topbar-nav{display:flex;align-items:center;gap:2px;margin:0 auto;padding:4px;border-radius:var(--radius-pill);background:color-mix(in srgb,var(--ink) 4%,var(--palette-clear))}
   .topbar-nav-group{position:relative;display:inline-flex;align-items:center}
-  #studioHeader .topbar-nav-pill{display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:0 12px;border:0;border-radius:var(--radius-pill);background:transparent!important;box-shadow:none!important;color:var(--legacy-hex-707389);font-size:12.5px;font-weight:600;white-space:nowrap}
+  #studioHeader .topbar-nav-pill{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 11px;border:0;border-radius:var(--radius-pill);background:transparent!important;box-shadow:none!important;color:var(--legacy-hex-707389);font-size:12.5px;font-weight:600;white-space:nowrap}
+  #studioHeader .topbar-nav-pill>i{display:inline-flex;align-items:center;justify-content:center;flex:none;line-height:0}
+  #studioHeader .topbar-nav-pill>i svg{width:15px;height:15px}
   #studioHeader .topbar-nav-pill:hover,#studioHeader .topbar-nav-pill:focus-visible,#studioHeader .topbar-nav-pill[aria-expanded="true"]{background:var(--accent-light)!important;color:var(--accent-dark)!important;box-shadow:none!important}
   #studioHeader .topbar-nav-pill.active{background:var(--accent)!important;color:var(--palette-white)!important;font-weight:700}
   .topbar-nav-caret{width:13px;height:13px;opacity:.65;transition:transform .16s ease}
