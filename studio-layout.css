@@ -674,7 +674,7 @@ body.studio-enabled .side-nav .nav-group-items>button{width:100%;min-height:44px
   .app-shell.sidebar-collapsed .side-nav button,.app-shell.sidebar-collapsed .side-nav .nav-group>summary{justify-content:center;padding:0!important;min-height:49px}
   .app-shell.sidebar-collapsed .side-nav .nav-group-items{padding-left:0}
 }
-html[data-theme=dark] body.studio-enabled .sidebar-toggle:hover{background:rgba(255,255,255,.08)}
+html[data-theme=dark] body.studio-enabled .sidebar-toggle:hover{background:color-mix(in srgb,var(--palette-white) 8%,var(--palette-clear))}
 
 /* Independent Profile / Account routes; original node handlers remain intact. */
 body.studio-enabled #accountPageTitle{margin-bottom:16px}

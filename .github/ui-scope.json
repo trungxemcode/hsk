@@ -1,1 +1,1 @@
-{"request":"PR #413: Thêm thanh chọn effort và popover danh sách model trong trang AI hỏi đáp; giữ nguyên giao diện các trang khác.","excludedRoutes":["ai-qa"]}
+{"request":"PR #414: Thêm nút thu gọn/mở rộng sidebar desktop; so sánh nghiêm ngặt tất cả nội dung ngoài sidebar.","excludedRoutes":[],"sharedSidebarOnly":true}
