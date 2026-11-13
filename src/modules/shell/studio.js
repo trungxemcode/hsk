@@ -90,6 +90,110 @@ renderIcons();
   mobileRoutes.append(clone);
  }
  drawerBody.prepend(mobileRoutes);drawerBody.append(legacy);
+
+ // Top horizontal navbar + mini flyouts (desktop topbar & collapsed left rail)
+ let activeFlyout=null,flyoutCloseTimer=0;
+ function closeActiveFlyout(){
+  clearTimeout(flyoutCloseTimer);
+  if(!activeFlyout)return;
+  activeFlyout.flyout.hidden=true;
+  activeFlyout.trigger?.setAttribute('aria-expanded','false');
+  activeFlyout=null;
+ }
+ function populateFlyout(group,extraClass){
+  const flyout=document.createElement('div');
+  flyout.className='nav-flyout '+extraClass;
+  flyout.hidden=true;
+  const head=document.createElement('div');
+  head.className='nav-flyout-head';
+  head.textContent=group.querySelector('summary>span')?.textContent?.trim()||'';
+  const items=document.createElement('div');
+  items.className='nav-flyout-items';
+  for(const btn of group.querySelectorAll('.nav-group-items>button[data-studio-go]')){
+   const item=btn.cloneNode(true);
+   item.removeAttribute('id');
+   item.addEventListener('click',()=>closeActiveFlyout());
+   items.append(item);
+  }
+  flyout.append(head,items);
+  return flyout;
+ }
+ function bindFlyoutController({anchor,trigger,flyout,place,canOpen}){
+  let openedAt=0;
+  const scheduleClose=()=>{clearTimeout(flyoutCloseTimer);flyoutCloseTimer=setTimeout(()=>{if(activeFlyout?.flyout===flyout)closeActiveFlyout();},140);};
+  const openNow=()=>{
+   if(canOpen&&!canOpen())return;
+   clearTimeout(flyoutCloseTimer);
+   if(activeFlyout&&activeFlyout.flyout!==flyout)closeActiveFlyout();
+   if(flyout.hidden)openedAt=Date.now();
+   flyout.hidden=false;
+   place();
+   trigger?.setAttribute('aria-expanded','true');
+   activeFlyout={flyout,trigger};
+  };
+  anchor.addEventListener('mouseenter',openNow);
+  anchor.addEventListener('mouseleave',scheduleClose);
+  flyout.addEventListener('mouseenter',()=>clearTimeout(flyoutCloseTimer));
+  flyout.addEventListener('mouseleave',scheduleClose);
+  trigger.addEventListener('click',event=>{
+   if(canOpen&&!canOpen())return;
+   event.preventDefault();
+   event.stopPropagation();
+   if(activeFlyout?.flyout===flyout&&!flyout.hidden&&Date.now()-openedAt>=400)closeActiveFlyout();
+   else openNow();
+  });
+ }
+ const topbarTitle=document.querySelector('#studioHeader .topbar-title');
+ const topbarNav=document.createElement('nav');
+ topbarNav.className='topbar-nav';
+ topbarNav.setAttribute('aria-label','Điều hướng nhanh');
+ const homeTopBtn=document.createElement('button');
+ homeTopBtn.type='button';homeTopBtn.className='topbar-nav-pill';homeTopBtn.dataset.studioGo='home';homeTopBtn.textContent='Trang chủ';
+ topbarNav.append(homeTopBtn);
+ for(const group of sourceNav.querySelectorAll(':scope>.nav-group')){
+  const labelText=group.querySelector('summary>span')?.textContent?.trim()||'';
+  const wrap=document.createElement('div');wrap.className='topbar-nav-group';
+  const trigger=document.createElement('button');trigger.type='button';trigger.className='topbar-nav-pill topbar-nav-trigger';
+  trigger.setAttribute('aria-haspopup','true');trigger.setAttribute('aria-expanded','false');
+  const lbl=document.createElement('span');lbl.textContent=labelText;
+  trigger.append(lbl);
+  trigger.insertAdjacentHTML('beforeend',`<svg class="topbar-nav-caret" viewBox="0 0 24 24" aria-hidden="true">${iconPaths['chevron-down']}</svg>`);
+  const topFlyout=populateFlyout(group,'nav-flyout-top');
+  wrap.append(trigger,topFlyout);
+  topbarNav.append(wrap);
+  bindFlyoutController({
+   anchor:wrap,trigger,flyout:topFlyout,
+   place:()=>{
+    const r=trigger.getBoundingClientRect(),w=Math.min(280,window.innerWidth-24);
+    topFlyout.style.width=w+'px';
+    topFlyout.style.left=Math.max(12,Math.min(window.innerWidth-w-12,r.left))+'px';
+    topFlyout.style.top=(r.bottom+8)+'px';
+   }
+  });
+  const summary=group.querySelector('summary');
+  const sideFlyout=populateFlyout(group,'nav-flyout-side');
+  document.body.append(sideFlyout);
+  bindFlyoutController({
+   anchor:summary,trigger:summary,flyout:sideFlyout,
+   canOpen:()=>Boolean(appShell?.classList.contains('sidebar-collapsed'))&&window.innerWidth>=971,
+   place:()=>{
+    const r=summary.getBoundingClientRect(),w=244;
+    sideFlyout.style.width=w+'px';
+    sideFlyout.style.left=(r.right+12)+'px';
+    const maxTop=Math.max(12,window.innerHeight-sideFlyout.offsetHeight-12);
+    sideFlyout.style.top=Math.max(12,Math.min(maxTop,r.top-4))+'px';
+   }
+  });
+ }
+ topbarTitle?.after(topbarNav);
+ document.addEventListener('pointerdown',event=>{
+  if(!activeFlyout)return;
+  if(activeFlyout.flyout.contains(event.target)||activeFlyout.trigger?.contains(event.target))return;
+  closeActiveFlyout();
+ });
+ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeActiveFlyout();});
+ window.addEventListener('resize',closeActiveFlyout);
+ window.addEventListener('scroll',event=>{if(activeFlyout&&!activeFlyout.flyout.contains(event.target))closeActiveFlyout();},true);
  function decorateControls(root=main){
   if(root.nodeType!==1)return;
   const mark=b=>{if(b.closest('.panel-box')&&!b.matches('.speech-button,.mastery-btn,.studio-action'))b.classList.add('studio-action');};
@@ -133,6 +237,10 @@ renderIcons();
    b.classList.toggle('active',selected);if(group&&selected)group.open=true;
    if(localTab)b.setAttribute('aria-pressed',String(selected));
    if(selected)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
+  });
+  document.querySelectorAll('.topbar-nav-group').forEach(g=>{
+   const trigger=g.querySelector('.topbar-nav-trigger');
+   if(trigger)trigger.classList.toggle('active',Boolean(g.querySelector('.nav-flyout [data-studio-go].active')));
   });
  }
  function coreView(){for(const [cls,name] of [['show-account','account'],['show-admin','admin'],['show-translator','translator'],['show-about','about'],['show-lessons','lessons']])if(document.body.classList.contains(cls))return name==='account'&&$('accountPanel').dataset.accountCurrent==='profile'?'profile':name;return document.querySelector('.app-tabs [data-mode].active')?.dataset.mode||'learn';}
