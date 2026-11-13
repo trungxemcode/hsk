@@ -753,7 +753,10 @@ body.studio-enabled .side-nav .nav-group-items > button > i[data-icon] > svg{
 
 .personal-ai-model-row{display:flex;gap:8px;align-items:center}
 .personal-ai-model-row #personalAiModel{flex:1;min-width:0}
-#personalAiFetchModels{white-space:nowrap;padding:7px 12px;font-size:12px;min-height:38px;border-radius:10px}
+#personalAiFetchModels{white-space:nowrap;padding:7px 12px;font-size:12px;min-height:38px;border-radius:10px;transition:all .15s ease}
+#personalAiFetchModels:disabled{opacity:.45;cursor:not-allowed}
+#personalAiFetchModels.is-ready{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+#personalAiFetchModels.is-ready:hover{filter:brightness(1.06)}
 #personalAiModelListContainer{margin-top:8px;display:grid;gap:6px}
 .personal-ai-model-list-header{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:600;color:var(--ink-strong)}
 .personal-ai-model-list-header button{padding:2px 8px;font-size:11px;min-height:unset;border-radius:6px}

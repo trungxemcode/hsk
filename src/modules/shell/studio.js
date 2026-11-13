@@ -238,7 +238,7 @@ renderIcons();
  // The existing updater owns activation and download readiness; hidden means disabled here.
  const update=$('offlineUpdate');function updateAvailability(){if(update.hidden)update.disabled=true;}
  updateAvailability();new MutationObserver(updateAvailability).observe(update,{attributes:true,attributeFilter:['hidden']});
- fetch('./app-version.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(m=>{$('studioVersion').textContent=m.label||m.version;}).catch(()=>{$('studioVersion').textContent='Chưa đọc được phiên bản · kiểm tra kết nối';});
+ fetch('./app-version.json?t='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(m=>{$('studioVersion').textContent=m.label||m.version;}).catch(()=>{$('studioVersion').textContent='Chưa đọc được phiên bản · kiểm tra kết nối';});
  fetch('./lessons-data.json').then(r=>r.json()).then(data=>{const count=(data.courses||[]).reduce((sum,c)=>sum+(c.lessons||[]).length,0);$('studioHomeLessons').textContent=count?String(count):'—';}).catch(()=>{$('studioHomeLessons').textContent='—';});
  function init(){if(ready)return;ready=true;lastOwner=owner();fingerprint=snapshot();if(!pendingMusic&&!routeChosenBeforeReady)navigate(location.hash.startsWith('#lesson/')?'lessons':'home');if(location.hash.startsWith('#lesson/')&&!routeChosenBeforeReady)window.HSKLessonNav?.open();refreshTimer=setInterval(()=>{if(!document.hidden)refresh();},30000);}
  window.addEventListener('hsk-lessons-ready',init);if(window.HSKLessons)init();

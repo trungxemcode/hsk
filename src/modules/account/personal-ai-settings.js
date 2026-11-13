@@ -42,14 +42,28 @@
   $('personalAiEndpoint').textContent=fosta?'Base URL: https://codex.fosta.app/v1':cookie?'Dán giá trị cookie phiên ChatGPT. Nếu cookie tách thành .0 và .1, dán phần .0 rồi dấu | rồi phần .1, không thêm khoảng trắng.':muse?'Dán token/cookie phiên Muse AI (cookie hatch_sess từ muse.ai, hoặc Bearer token api.meta.ai).':custom?'Nhập URL endpoint tương thích OpenAI (ví dụ: https://literouter.fun/v1/chat/completions hoặc https://api.groq.com/openai/v1).':'Nhập tên model chính xác do nhà cung cấp cấp.';
   key.placeholder=currentProv?((cookie||muse)?'Để trống để giữ token/cookie đã lưu':'Để trống để giữ key đã lưu'):(cookie?'Dán __Secure-next-auth.session-token của bạn':muse?'Dán hatch_sess hoặc Bearer token Muse AI của bạn':custom?'Nhập API key của nhà cung cấp (sk-...)':'Nhập API key của bạn');
   remove.hidden=!currentProv;
-  const canFetch=custom||['openai','deepseek','gemini','claude'].includes(provider.value);
-  if(fetchModelsBtn){
-   fetchModelsBtn.hidden=!canFetch||fosta;
-   fetchModelsBtn.disabled=busy;
-  }
+  updateFetchBtnState();
   if(fosta&&modelListContainer){
    modelListContainer.hidden=true;
   }
+ }
+ function updateFetchBtnState(){
+  if(!fetchModelsBtn)return;
+  const prov=provider.value;
+  const custom=prov==='custom';
+  const canFetch=custom||['openai','deepseek','gemini','claude'].includes(prov);
+  fetchModelsBtn.hidden=!canFetch;
+  if(!canFetch){
+   fetchModelsBtn.disabled=true;
+   fetchModelsBtn.classList.remove('is-ready');
+   return;
+  }
+  const currentProv=getProvData(prov);
+  const hasEndpoint=!custom||Boolean(customEndpoint?.value?.trim()||currentProv?.endpoint);
+  const hasKey=Boolean(key.value.trim()||currentProv?.configured);
+  const readyToFetch=!busy&&hasEndpoint&&hasKey;
+  fetchModelsBtn.disabled=!readyToFetch;
+  fetchModelsBtn.classList.toggle('is-ready',readyToFetch);
  }
  function renderModelList(models){
   if(!modelList||!modelListContainer)return;
@@ -136,9 +150,9 @@
 
   if(fetchModelsBtn){
    fetchModelsBtn.disabled=true;
-   fetchModelsBtn.textContent='Đang tải model…';
+   fetchModelsBtn.textContent='Đang kiểm tra…';
   }
-  if(!options.silent)status.textContent='Đang kết nối nhà cung cấp để lấy danh sách model…';
+  if(!options.silent)status.textContent='Đang kiểm tra API key và lấy danh sách model…';
 
   try{
    let models=null;
@@ -193,15 +207,15 @@
    }
 
    renderModelList(models);
-   status.textContent=`Đã tải ${models.length} model. Bấm "Áp dụng" vào model muốn dùng.`;
+   status.textContent=`Kết nối thành công! Tìm thấy ${models.length} model. Bấm "Áp dụng" để chọn.`;
   }catch(err){
    if(!options.silent){
-    status.textContent=err.message||'Chưa lấy được danh sách model.';
+    status.textContent=err.message||'Chưa kết nối được với key/endpoint này.';
    }
   }finally{
    if(fetchModelsBtn){
-    fetchModelsBtn.disabled=busy;
-    fetchModelsBtn.textContent='Lấy danh sách model';
+    fetchModelsBtn.textContent='Kiểm tra & Lấy model';
+    updateFetchBtnState();
    }
   }
  }
@@ -278,6 +292,8 @@
   }
  };
  if(fetchModelsBtn)fetchModelsBtn.onclick=()=>fetchSupportedModels({silent:false});
+ if(key)key.addEventListener('input',updateFetchBtnState);
+ if(customEndpoint)customEndpoint.addEventListener('input',updateFetchBtnState);
  if(modelListClose)modelListClose.onclick=()=>{if(modelListContainer)modelListContainer.hidden=true;};
  load.onclick=()=>request('read');
  form.onsubmit=event=>{
