@@ -64,7 +64,13 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
     await page.locator('#drawer .drawer-route-nav [data-studio-go=music-play]').click();
    }else{
     assert.equal(await page.locator('.side-nav [data-studio-go=music]').isVisible(),false,'one shared music entry in sidebar');
-    await page.locator('.side-nav [data-studio-go="music-play"]').click();
+    const entertainment=page.locator('.side-nav .nav-group').filter({hasText:'Giải trí'});
+    assert.equal(await entertainment.count(),1,'one grouped entertainment section in sidebar');
+    if(await entertainment.getAttribute('open')===null)await entertainment.locator(':scope>summary').click();
+    const musicEntry=entertainment.locator('[data-studio-go="music-play"]');
+    assert.equal(await musicEntry.count(),1,'one grouped entertainment music entry in sidebar');
+    assert.equal(await musicEntry.isVisible(),true,'grouped music entry is visible after expanding entertainment');
+    await musicEntry.click();
    }
    await page.evaluate(()=>HSKStudio.navigate('music'));
    assert.equal(await page.locator('#musicMenuSheet').isVisible(),false,'menu sheet hidden by default');

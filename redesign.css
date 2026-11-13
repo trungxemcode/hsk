@@ -4444,8 +4444,8 @@ html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[d
   }
   html body:not(#_rd).studio-enabled #studioHeader .topbar-nav-pill.active,
   html body:not(#_rd).studio-enabled #studioHeader .topbar-nav-pill.active:is(:hover,:focus-visible,:active,[aria-expanded="true"]){
-    background:var(--button-active-bg)!important;
-    border-color:var(--button-active-bg)!important;
+    background:var(--press-active-bg)!important;
+    border-color:var(--press-active-bg)!important;
     color:var(--palette-white)!important;
     font-weight:700!important;
   }
@@ -4464,8 +4464,8 @@ html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[d
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled #studioHeader .topbar-nav-pill.active,
   html[data-theme="dark"] body:not(#_rd).studio-enabled #studioHeader .topbar-nav-pill.active:is(:hover,:focus-visible,:active,[aria-expanded="true"]){
-    background:var(--button-active-bg)!important;
-    border-color:var(--button-active-bg)!important;
+    background:var(--press-active-bg)!important;
+    border-color:var(--press-active-bg)!important;
     color:var(--palette-white)!important;
   }
 }
@@ -4498,14 +4498,22 @@ html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary{
   transition:background-color .2s cubic-bezier(.22,1,.36,1),color .18s cubic-bezier(.22,1,.36,1),transform .12s cubic-bezier(.22,1,.36,1),padding .26s cubic-bezier(.22,1,.36,1),gap .26s cubic-bezier(.22,1,.36,1),width .26s cubic-bezier(.22,1,.36,1)!important;
 }
 html body:not(#_rd).studio-enabled .app-shell .side-nav button:not(.active):is(:hover,:focus-visible),
-html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary:is(:hover,:focus-visible){
+html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary:hover{
   background:var(--accent-light)!important;
   border-color:var(--palette-clear)!important;
   color:var(--accent-dark)!important;
 }
+html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary:focus-visible{
+  background:var(--press-active-bg)!important;
+  border-color:var(--press-active-bg)!important;
+  color:var(--palette-white)!important;
+}
 html body:not(#_rd).studio-enabled .app-shell .side-nav button:not(.active):is(:hover,:focus-visible) :is(i,svg,span),
-html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary:is(:hover,:focus-visible) :is(i,svg,span){
+html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary:hover :is(i,svg,span){
   color:var(--accent-dark)!important;
+}
+html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary:focus-visible :is(i,svg,span){
+  color:var(--palette-white)!important;
 }
 html body:not(#_rd).studio-enabled .app-shell .side-nav button.active,
 html body:not(#_rd).studio-enabled .app-shell .side-nav button.active:is(:hover,:focus-visible,:active){
@@ -4524,9 +4532,17 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .nav-flyout .nav-flyout-it
   color:var(--palette-white)!important;
 }
 html[data-theme="dark"] body:not(#_rd).studio-enabled .app-shell .side-nav button:not(.active):is(:hover,:focus-visible),
-html[data-theme="dark"] body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary:is(:hover,:focus-visible){
+html[data-theme="dark"] body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary:hover{
   background:var(--accent-light)!important;
   color:var(--accent-dark)!important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary:focus-visible{
+  background:var(--press-active-bg)!important;
+  border-color:var(--press-active-bg)!important;
+  color:var(--palette-white)!important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary:focus-visible :is(i,svg,span){
+  color:var(--palette-white)!important;
 }
 html[data-theme="dark"] body:not(#_rd).studio-enabled .app-shell .side-nav button.active,
 html[data-theme="dark"] body:not(#_rd).studio-enabled .app-shell .side-nav button.active:is(:hover,:focus-visible,:active){

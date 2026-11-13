@@ -696,7 +696,7 @@ body.studio-enabled .side-nav .nav-group-items>button{width:100%;min-height:44px
   #studioHeader .topbar-nav-pill>i svg{width:15px;height:15px}
   #studioHeader .topbar-nav-pill:not(.active):is(:hover,:focus-visible,[aria-expanded="true"]){background:var(--palette-clear)!important;color:var(--accent-dark)!important;box-shadow:none!important}
   #studioHeader .topbar-nav-pill:not(.active):is(:hover,:focus-visible,[aria-expanded="true"]) :is(i,svg,span){color:var(--accent-dark)!important}
-  #studioHeader .topbar-nav-pill.active,#studioHeader .topbar-nav-pill.active:is(:hover,:focus-visible,:active,[aria-expanded="true"]){background:var(--button-active-bg)!important;color:var(--palette-white)!important;border-color:var(--button-active-bg)!important;font-weight:700}
+  #studioHeader .topbar-nav-pill.active,#studioHeader .topbar-nav-pill.active:is(:hover,:focus-visible,:active,[aria-expanded="true"]){background:var(--press-active-bg)!important;color:var(--palette-white)!important;border-color:var(--press-active-bg)!important;font-weight:700}
   #studioHeader .topbar-nav-pill.active :is(i,svg,span),#studioHeader .topbar-nav-pill.active:is(:hover,:focus-visible,:active,[aria-expanded="true"]) :is(i,svg,span){color:var(--palette-white)!important}
   .topbar-nav-caret{width:13px;height:13px;opacity:.65;transition:transform .18s cubic-bezier(.22,1,.36,1)}
   .topbar-nav-pill[aria-expanded="true"] .topbar-nav-caret{transform:rotate(180deg)}
@@ -728,7 +728,7 @@ html body.studio-enabled .app-shell .side-nav button:active:not(:disabled),html 
 html[data-theme=dark] body.studio-enabled .topbar-nav{background:color-mix(in srgb,var(--palette-white) 6%,var(--palette-clear))}
 html[data-theme=dark] body.studio-enabled #studioHeader .topbar-nav-pill:not(.active):is(:hover,:focus-visible,[aria-expanded="true"]){background:var(--palette-clear)!important;color:var(--accent-dark)!important}
 html[data-theme=dark] body.studio-enabled #studioHeader .topbar-nav-pill:not(.active):is(:hover,:focus-visible,[aria-expanded="true"]) :is(i,svg,span){color:var(--accent-dark)!important}
-html[data-theme=dark] body.studio-enabled #studioHeader .topbar-nav-pill.active,html[data-theme=dark] body.studio-enabled #studioHeader .topbar-nav-pill.active:is(:hover,:focus-visible,:active,[aria-expanded="true"]){background:var(--button-active-bg)!important;border-color:var(--button-active-bg)!important;color:var(--palette-white)!important}
+html[data-theme=dark] body.studio-enabled #studioHeader .topbar-nav-pill.active,html[data-theme=dark] body.studio-enabled #studioHeader .topbar-nav-pill.active:is(:hover,:focus-visible,:active,[aria-expanded="true"]){background:var(--press-active-bg)!important;border-color:var(--press-active-bg)!important;color:var(--palette-white)!important}
 html[data-theme=dark] body.studio-enabled .nav-flyout{background:var(--surface);border-color:var(--line)}
 html[data-theme=dark] body.studio-enabled .nav-flyout .nav-flyout-items button{background:var(--palette-clear)!important;color:var(--ink)!important}
 html[data-theme=dark] body.studio-enabled .nav-flyout .nav-flyout-items button:not(.active):is(:hover,:focus-visible){background:var(--accent-light)!important;color:var(--accent-dark)!important}
