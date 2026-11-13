@@ -89,6 +89,6 @@
  $('handwritingMeaningSearch').onclick=()=>{window.HSKHandwritingSearch?.clear();$('searchInput').focus();};
  window.addEventListener('online',flush);window.addEventListener('hsk-account-ready',()=>{store=null;if(ready){learningStatus();flush();startKnowledgeSync();}});
  function appReady(){open.disabled=!window.HSKHandwritingSearch;}window.addEventListener('hsk-lessons-ready',appReady);appReady();
- fetch('./translation-config.json',{cache:'no-store'}).then(r=>r.json()).then(value=>{if(value.enabled&&new URL(value.endpoint).protocol==='https:'){config=value;flush();updateButton();}}).catch(()=>{});
+ window.HSKAIConfig?.loadTranslationConfig?.().then(value=>{if(value){config=value;flush();updateButton();}});
  window.addEventListener('online',()=>{updateButton();startKnowledgeSync(true);});window.addEventListener('offline',()=>{updateButton();knowledgeSyncStatus='offline';learningStatus();});
 })();

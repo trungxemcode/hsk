@@ -1,4 +1,20 @@
-# Current task: Pha 3 — Hợp nhất nạp danh sách model & tổng hợp khả năng AI cá nhân phía Worker (2026-11-13)
+# Current task: Pha 4 — Hợp nhất helper tải & xác thực cấu hình AI frontend (2026-11-13)
+
+Nhánh: `refactor/phase4-frontend-ai-config` (tách từ `main` tại `59cc2e6`, cập nhật PWA `4.4.44`).
+
+Thay đổi đã thực hiện (không đổi giao diện, layout, CSS, phân quyền, quota hay luồng nhạc):
+1. **Thêm helper dùng chung `src/utils/ai-config.js` (`window.HSKAIConfig`, UMD/IIFE hỗ trợ cả trình duyệt và Node):**
+   - Tách `validateTranslationConfig(config)` và `loadTranslationConfig({ url, cache, signal, fetchFn })` để chuẩn hóa việc gọi `fetch('./translation-config.json', { cache: 'no-store' })` và kiểm tra `enabled && typeof endpoint === 'string' && new URL(endpoint).protocol === 'https:'`, trả `null` khi lỗi/chưa bật/không phải `https:`.
+   - Nạp `<script src="./src/utils/ai-config.js" defer=""></script>` đầu danh sách script `defer` trong `index.html` (trước các module gọi và trước `loader.js`), đồng thời khai báo trong `tools/pwa-assets.json`.
+2. **Áp dụng có chọn lọc cho 6 caller khởi động có hành vi hoàn toàn tương đồng:**
+   - `src/modules/ai-coach/ai-qa.js`, `src/modules/ai-coach/ai-teacher.js`, `src/modules/dictionary/open-dictionary.js`, `src/modules/handwriting/handwriting.js`, `src/modules/notebook/notebook-factory.js`, `src/modules/reading/real-reading.js`.
+   - Giữ nguyên các caller có ngữ nghĩa riêng hoặc có bài test DOM nạp file đơn lẻ không qua `index.html` (`admin.js`, `music.js`, `music-transcript.js`, `personal-ai-settings.js`, `original-reading.js`, `practice-generator-core.js`, `sentence-editor.js`, `translator.js`, `ocr.js`, `planner.js`, `ai-coach.js`, `placement.js`, `lesson-chat.js`).
+3. **Kiểm thử & PWA:**
+   - Thêm unit test `server/ai-config.test.mjs` (4 tests); `node --test server/ai-config.test.mjs server/app-helpers.test.mjs server/ai-qa-core.test.mjs` (18/18) và toàn bộ `node --test "server/*.test.mjs"` (488/488): PASS.
+   - `check-feature-preservation.py --base origin/main` (98 capabilities; 447 guards), `check-module-loading-ui.cjs` (gzip / no-api / broken-gzip), `check-ai-qa-ui.cjs`, `check-real-reading-ui.cjs`, `check-notebook-factory-ui.cjs`, `check-word-recovery-ui.cjs`, `check-feature-runtime.cjs`, `check-ai-loading-ui.cjs`, `check-home-overview-ui.cjs`, `check-mobile-ux-ui.cjs`, `check-open-dictionary-dom.cjs`, `check-notebook-factory-dom.cjs`, `check-ai-coach-dom.cjs`, `check-placement-dom.cjs`, `check-chat-mobile-ui.cjs`, `check-pwa-relocation-ui.cjs`: PASS.
+   - `prepare-pwa-release.py` (`4.4.44`, 216 assets) & `check-pwa-release.py --base origin/main`: PASS.
+
+# Previous task (merged PR #408): Pha 3 — Hợp nhất nạp danh sách model & tổng hợp khả năng AI cá nhân phía Worker (2026-11-13)
 
 Nhánh: `refactor/phase3-duplicate-code` (tách từ `main` tại `edeaa5e`, giữ nguyên bản PWA `4.4.43` vì chỉ sửa `server/` và tài liệu).
 

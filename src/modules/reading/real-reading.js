@@ -146,7 +146,7 @@
  window.addEventListener('hsk-plan-change',()=>{if(!lesson){level.value=String(studyGoal());caption();sourceList();}});
  window.addEventListener('pagehide',cancel);
  document.querySelectorAll('[data-studio-go]').forEach(b=>b.addEventListener('click',()=>{if(!b.closest('#realReadingPanel'))cancel();}));
- fetch('./translation-config.json',{cache:'no-store'}).then(r=>r.json()).then(c=>{if(c.enabled&&new URL(c.endpoint).protocol==='https:')config=c;}).catch(()=>{});
+ window.HSKAIConfig?.loadTranslationConfig?.().then(c=>{if(c)config=c;});
  loadHistory();level.value=String(studyGoal());caption();sourceList();
  window.HSKRealReading={lastLesson:null,enter,leaveLesson(){cancel();lesson=null;},openFromLesson(context){cancel();lesson=context||this.lastLesson;level.value=String(lesson?.hsk||studyGoal());window.HSKStudio?.navigate('real-reading')},get story(){return story},get history(){return history},cancel};
 })();
