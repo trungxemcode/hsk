@@ -1,4 +1,19 @@
-# Current task: Pha 2 — Dọn dẹp frontend AI (`personal-ai-settings.js` & thinking indicator) (2026-11-13)
+# Current task: Pha 3 — Hợp nhất nạp danh sách model & tổng hợp khả năng AI cá nhân phía Worker (2026-11-13)
+
+Nhánh: `refactor/phase3-duplicate-code` (tách từ `main` tại `edeaa5e`, giữ nguyên bản PWA `4.4.43` vì chỉ sửa `server/` và tài liệu).
+
+Thay đổi đã thực hiện (chỉ phía `server/`, không đổi giao diện, quota, PWA hay hành vi iPhone):
+1. **Hợp nhất cơ chế lấy và phân tích `/models` trong `server/personal-ai.mjs`:**
+   - Tách `STATIC_PROVIDER_MODELS`, `PROVIDER_MODEL_SPECS` và `fetchProviderModels(...)` dùng chung cho cả `probePersonalAiCapabilities` và `fetchPersonalAiModels`, loại bỏ lặp lại URL, header xác thực và bộ lọc JSON của từng nhà cung cấp (`openai`, `deepseek`, `gemini`, `claude`, `custom`, `fosta`, `chatgpt-cookie`, `muse-cookie`) trong khi giữ nguyên chính sách `redirect` (`manual` khi probe, `follow` khi fetch), bộ lọc probe, thông báo lỗi và bản sao tĩnh.
+   - Tách `personalProviderSummary` dùng chung trong `loadAllPersonalProviders` để tránh lặp object tổng hợp nhà cung cấp.
+2. **Hợp nhất tổng hợp khả năng AI tài khoản trong `server/translator-worker.mjs` (và đồng bộ `server/translator-worker-bundled.mjs` qua `tools/build-worker-bundle.cjs`):**
+   - Tách helper `resolveAccountProviders(uid)` thay cho 2 khối lặp giống hệt nhau tại `/ai-providers` và `/account-role`.
+3. **Kiểm thử hồi quy:**
+   - Thêm 2 test mới trong `server/personal-ai.test.mjs` kiểm tra `fetchPersonalAiModels` + `probePersonalAiCapabilities` cho các nhà cung cấp (`openai`, `deepseek`, `gemini`, `claude`, `custom`, `chatgpt-cookie`) và tính nhất quán giữa `/ai-providers` với `/account-role`.
+   - `node --test server/personal-ai.test.mjs` (16/16), `node --test server/translator-worker.test.mjs` (26/26), `node --test "server/*.test.mjs"` (484/484): PASS.
+   - `check-feature-preservation.py --base origin/main` (98 capabilities; 447 guards) & `check-pwa-release.py --base origin/main` (215 assets, 0 client changes): PASS.
+
+# Previous task (merged PR #407): Pha 2 — Dọn dẹp frontend AI (`personal-ai-settings.js` & thinking indicator) (2026-11-13)
 
 Nhánh: `refactor/frontend-ai-settings-and-loading` (tách từ `main` tại `94d010c`, chuẩn bị bản `4.4.43`).
 

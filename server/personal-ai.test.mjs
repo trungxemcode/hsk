@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {OWNER_UID} from './account-roles.mjs';
-import {createHandler,HSkaIControl,personalAiGenerate} from './translator-worker-bundled.mjs';
+import {createHandler,HSkaIControl,personalAiGenerate,probePersonalAiCapabilities,fetchPersonalAiModels} from './translator-worker-bundled.mjs';
 
 const secret='sample-master-secret-at-least-32-characters';
 const origin='https://trungxemcode.github.io';
@@ -437,4 +437,90 @@ test('sentence-editor personal fallback keeps real source/model and never falls 
  assert.equal(failRes.status,502);
  const failGeminiCalls=calls.slice(callsBeforeFail).filter(c=>String(c.url).includes('generativelanguage'));
  assert.equal(failGeminiCalls.length,1);
+});
+
+test('consolidated provider model discovery preserves probe filters, headers, redirects and fetch descriptions',async()=>{
+ const seen=[];
+ const mockFetch=async(url,init)=>{
+  seen.push({url:String(url),headers:init?.headers||{},redirect:init?.redirect});
+  if(String(url).includes('api.openai.com/v1/models')){
+   return Response.json({data:[{id:'gpt-4o-mini'},{id:'gpt-4o'},{id:'whisper-1'}]});
+  }
+  if(String(url).includes('api.deepseek.com/models')){
+   return Response.json({data:[{id:'deepseek-chat',owned_by:'deepseek'},{id:'other-model',owned_by:'other'},{id:'deepseek-reasoner',owned_by:'deepseek'}]});
+  }
+  if(String(url).includes('generativelanguage.googleapis.com/v1beta/models')){
+   return Response.json({models:[
+    {name:'models/gemini-2.5-flash',displayName:'Gemini 2.5 Flash',supportedGenerationMethods:['generateContent']},
+    {name:'models/gemini-custom-preview',displayName:'Gemini Custom',supportedGenerationMethods:['generateContent']},
+    {name:'models/embedding-001',displayName:'Embed',supportedGenerationMethods:['embedContent']}
+   ]});
+  }
+  if(String(url).includes('api.anthropic.com/v1/models')){
+   return Response.json({data:[{id:'claude-3-7-sonnet-latest',display_name:'Claude 3.7 Sonnet'},{id:'ignored',display_name:'Other'}]});
+  }
+  return new Response('not found',{status:404});
+ };
+
+ const oaModels=await fetchPersonalAiModels({provider:'openai',apiKey:'sk-oa-test'},{fetchFn:mockFetch});
+ assert.deepEqual(oaModels,[{id:'gpt-4o-mini',description:''},{id:'gpt-4o',description:''}]);
+ assert.equal(seen.at(-1).redirect,'follow');
+ assert.equal(seen.at(-1).headers.Authorization,'Bearer sk-oa-test');
+
+ const dsModels=await fetchPersonalAiModels({provider:'deepseek',apiKey:'sk-ds-test'},{fetchFn:mockFetch});
+ assert.deepEqual(dsModels,[
+  {id:'deepseek-chat',description:'Nhà phát triển: deepseek'},
+  {id:'other-model',description:'Nhà phát triển: other'},
+  {id:'deepseek-reasoner',description:'Nhà phát triển: deepseek'}
+ ]);
+
+ const gmModels=await fetchPersonalAiModels({provider:'gemini',apiKey:'gm-key-test'},{fetchFn:mockFetch});
+ assert.deepEqual(gmModels,[
+  {id:'gemini-2.5-flash',description:'Gemini 2.5 Flash'},
+  {id:'gemini-custom-preview',description:'Gemini Custom'}
+ ]);
+ assert.equal(seen.at(-1).headers['x-goog-api-key'],'gm-key-test');
+
+ const claudeModels=await fetchPersonalAiModels({provider:'claude',apiKey:'sk-ant-test'},{fetchFn:mockFetch});
+ assert.deepEqual(claudeModels,[{id:'claude-3-7-sonnet-latest',description:'Claude 3.7 Sonnet'}]);
+ assert.equal(seen.at(-1).headers['x-api-key'],'sk-ant-test');
+ assert.equal(seen.at(-1).headers['anthropic-version'],'2023-06-01');
+
+ const dsProbe=await probePersonalAiCapabilities({enabled:true,provider:'deepseek',apiKey:'sk-ds-probe',model:'deepseek-chat'},{fetchFn:mockFetch,now:()=>1000});
+ assert.deepEqual(dsProbe,{models:['deepseek-chat','deepseek-reasoner']});
+ assert.equal(seen.at(-1).redirect,'manual');
+
+ const gmProbe=await probePersonalAiCapabilities({enabled:true,provider:'gemini',apiKey:'gm-key-probe',model:'gemini-2.5-flash'},{fetchFn:mockFetch,now:()=>1000});
+ assert.deepEqual(gmProbe,{models:['gemini-2.5-flash']});
+ assert.equal(seen.at(-1).redirect,'manual');
+
+ const claudeProbe=await probePersonalAiCapabilities({enabled:true,provider:'claude',apiKey:'sk-ant-probe',model:'claude-3-7-sonnet-latest'},{fetchFn:mockFetch,now:()=>1000});
+ assert.deepEqual(claudeProbe,{models:['claude-3-7-sonnet-latest']});
+ assert.equal(seen.at(-1).redirect,'manual');
+
+ // Probe swallows HTTP failures while fetchPersonalAiModels surfaces them
+ const failProbe=await probePersonalAiCapabilities({enabled:true,provider:'openai',apiKey:'sk-fail-probe',model:'gpt-4o'},{fetchFn:async()=>new Response('',{status:401}),now:()=>1000});
+ assert.deepEqual(failProbe,{});
+ await assert.rejects(()=>fetchPersonalAiModels({provider:'openai',apiKey:'sk-fail-fetch'},{fetchFn:async()=>new Response('',{status:401})}),/HTTP 401/);
+ await assert.rejects(()=>fetchPersonalAiModels({provider:'custom',apiKey:'sk-c',endpoint:''},{fetchFn:mockFetch}),/Endpoint/);
+
+ // Static provider catalogs return cloned entries
+ const cookieModels=await fetchPersonalAiModels({provider:'chatgpt-cookie',apiKey:'cookie-val'});
+ assert.ok(cookieModels.some(m=>m.id==='gpt-6'));
+ cookieModels[0].id='mutated';
+ const cookieModelsAgain=await fetchPersonalAiModels({provider:'chatgpt-cookie',apiKey:'cookie-val'});
+ assert.notEqual(cookieModelsAgain[0].id,'mutated');
+});
+
+test('/ai-providers and /account-role return consistent personal provider capability summaries',async()=>{
+ const uid='providers-sync-user';
+ await request(uid,settingsPath,{op:'save',settings:{provider:'fosta',model:'gpt-6-luna',enabled:true,apiKey:'fosta-sync-key-123'}});
+ const providersRes=await request(uid,'/ai-providers',{});
+ assert.equal(providersRes.status,200);
+ const providersData=await providersRes.json();
+ const roleRes=await request(uid,'/account-role',{});
+ assert.equal(roleRes.status,200);
+ const roleData=await roleRes.json();
+ assert.deepEqual(roleData.providers,providersData);
+ assert.deepEqual(providersData.personal.models,['gpt-6-luna','gpt-6-astra','gpt-6.1-sol']);
 });
