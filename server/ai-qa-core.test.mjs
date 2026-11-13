@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
@@ -94,5 +96,117 @@ test('unwrapAiQaPayload and unwrapAiQaText clean XML/JSX wrapper tags, JSON.stri
   assert.equal(cleanText.includes('<text'), false);
   assert.equal(cleanText.includes('JSON.stringify'), false);
   assert.equal(cleanText.includes('primaryNodeKey'), false);
+});
+
+test('normalizeAiQaResponse unifies strict/fenced JSON, plain text fallback, and field normalization', () => {
+  const fenced = '```json\n' + JSON.stringify({
+    answer: '  Dùng 把 để đưa tân ngữ xác định lên trước động từ.  ',
+    primaryNodeKey: 'grammar:ba',
+    nodeLabel: 'Câu chữ 把',
+    coreRuleSummary: 'S + 把 + O + V + bổ ngữ',
+    explanationStrategyUsed: '',
+    suggestedQuestions: [
+      { type: 'context_shift', text: '  Khi nào không dùng   把?  ' },
+      { kind: 'practice_request', text: 'Cho 1 ví dụ' },
+      { kind: 'invalid_kind', text: 'abc' },
+      { kind: 'decision_guide', text: 'So sánh 把 và 被' },
+      { kind: 'practice_request', text: 'Câu thứ tư bị cắt' }
+    ],
+    optionalMicroCheck: {
+      nodeKey: 'grammar:ba',
+      label: 'Đặt câu với 把',
+      prompt: 'Sắp xếp: 我 / 书 / 把 / 看了',
+      acceptedAnswers: ['我把书看了', 'a', 'b', 'c', 'd', 'e'],
+      hint: 'Đặt tân ngữ sau 把',
+      nextStepIfAssisted: 'Thử thêm bổ ngữ kết quả'
+    },
+    memoryCandidates: Array.from({ length: 10 }, (_, idx) => ({
+      nodeKey: `k${idx}`,
+      label: `L${idx}`,
+      candidateType: idx === 0 ? 'observed_mistake' : idx === 1 ? 'unknown' : 'interest_only',
+      manifestation: `M${idx}`
+    }))
+  }) + '\n```';
+
+  const normalized = C.normalizeAiQaResponse(fenced, { rejectMalformedJson: true });
+  assert.equal(normalized.mode, 'ai-qa');
+  assert.equal(normalized.answer, 'Dùng 把 để đưa tân ngữ xác định lên trước động từ.');
+  assert.equal(normalized.primaryNodeKey, 'grammar:ba');
+  assert.equal(normalized.nodeLabel, 'Câu chữ 把');
+  assert.equal(normalized.coreRuleSummary, 'S + 把 + O + V + bổ ngữ');
+  assert.equal(normalized.explanationStrategyUsed, 'direct_explanation');
+  assert.deepEqual(normalized.suggestedQuestions, [
+    { kind: 'context_shift', text: 'Khi nào không dùng 把?' },
+    { kind: 'practice_request', text: 'Cho 1 ví dụ' },
+    { kind: 'decision_guide', text: 'So sánh 把 và 被' }
+  ]);
+  assert.deepEqual(normalized.optionalMicroCheck, {
+    nodeKey: 'grammar:ba',
+    label: 'Đặt câu với 把',
+    prompt: 'Sắp xếp: 我 / 书 / 把 / 看了',
+    acceptedAnswers: ['我把书看了', 'a', 'b', 'c', 'd'],
+    hint: 'Đặt tân ngữ sau 把',
+    nextStepIfAssisted: 'Thử thêm bổ ngữ kết quả'
+  });
+  assert.equal(normalized.memoryCandidates.length, 8);
+  assert.equal(normalized.memoryCandidates[0].candidateType, 'observed_mistake');
+  assert.equal(normalized.memoryCandidates[1].candidateType, 'ai_hypothesis');
+
+  const plainLong = C.normalizeAiQaResponse('Giải thích dài '.padEnd(5010, 'x'), { rejectMalformedJson: true });
+  assert.equal(plainLong.answer.length, 5000);
+  assert.equal(plainLong.answer.endsWith('…'), true);
+  assert.equal(plainLong.primaryNodeKey, '');
+
+  const withFallback = C.normalizeAiQaResponse(
+    { answer: 'Bạn dùng 了 cho hành động đã hoàn thành.', optionalMicroCheck: { nodeKey: 'grammar:le', label: 'Trợ từ 了', prompt: 'Dịch', acceptedAnswers: [] } },
+    { fallbackNodeKey: 'topic:m-123' }
+  );
+  assert.equal(withFallback.primaryNodeKey, 'grammar:le');
+  assert.equal(withFallback.nodeLabel, 'grammar:le');
+
+  const withTopicFallback = C.normalizeAiQaResponse(
+    { answer: 'Xin chào là 你好.' },
+    { fallbackNodeKey: 'topic:m-999' }
+  );
+  assert.equal(withTopicFallback.primaryNodeKey, 'topic:m-999');
+  assert.equal(withTopicFallback.nodeLabel, 'topic:m-999');
+  assert.equal(withTopicFallback.coreRuleSummary, 'topic:m-999');
+});
+
+test('normalizeAiQaResponse preserves OUT_OF_SCOPE, malformed JSON, and length error semantics', () => {
+  assert.throws(
+    () => C.normalizeAiQaResponse('{"error":"OUT_OF_SCOPE"}', { rejectMalformedJson: true }),
+    /Yêu cầu của bạn nằm ngoài phạm vi học tiếng Trung HSK!/
+  );
+  assert.throws(
+    () => C.normalizeAiQaResponse({ error: 'OUT_OF_SCOPE' }, { incompleteError: 'Câu trả lời chưa đầy đủ. Hãy thử lại.' }),
+    /Yêu cầu của bạn nằm ngoài phạm vi học tiếng Trung HSK!/
+  );
+  assert.throws(
+    () => C.normalizeAiQaResponse('{broken json', { rejectMalformedJson: true }),
+    /AI trả lời chưa đúng định dạng\. Hãy thử lại\./
+  );
+  assert.throws(
+    () => C.normalizeAiQaResponse('```json\n[broken', { rejectMalformedJson: true }),
+    /AI trả lời chưa đúng định dạng\. Hãy thử lại\./
+  );
+  assert.throws(
+    () => C.normalizeAiQaResponse({ answer: '   ' }, { incompleteError: 'Câu trả lời chưa đầy đủ. Hãy thử lại.' }),
+    /Câu trả lời chưa đầy đủ\. Hãy thử lại\./
+  );
+  assert.throws(
+    () => C.normalizeAiQaResponse(JSON.stringify({ answer: 'a'.repeat(5001) }), { rejectMalformedJson: true }),
+    /Gia sư AI trả về dữ liệu chưa đầy đủ\. Hãy thử lại\./
+  );
+});
+
+test('index.html loads ai-qa-core.js before ai-provider-picker.js and ai-qa.js', () => {
+  const html = fs.readFileSync(path.resolve('index.html'), 'utf8');
+  const coreIdx = html.indexOf('./src/modules/ai-coach/ai-qa-core.js');
+  const pickerIdx = html.indexOf('./src/modules/ai-coach/ai-provider-picker.js');
+  const qaIdx = html.indexOf('./src/modules/ai-coach/ai-qa.js');
+  assert.ok(coreIdx !== -1 && pickerIdx !== -1 && qaIdx !== -1);
+  assert.ok(coreIdx < pickerIdx, 'ai-qa-core.js must load before ai-provider-picker.js');
+  assert.ok(coreIdx < qaIdx, 'ai-qa-core.js must load before ai-qa.js');
 });
 

@@ -293,6 +293,37 @@
   if(res&&typeof res.answer==='string'&&res.answer.trim())return res.answer.trim();
   return trimmed.replace(/<\/?escape>/gi,'').trim();
  }
+ function normalizeAiQaResponse(raw,options={}){
+  const {rejectMalformedJson=false,incompleteError='Gia sư AI trả về dữ liệu chưa đầy đủ. Hãy thử lại.',fallbackNodeKey=''}=options||{};
+  let parsed=raw;
+  if(typeof raw==='string'){
+   const cleaned=cleanWrapperTags(raw);
+   const jsonParsed=cleaned?parseJsonLoose(cleaned):null;
+   if(jsonParsed!==null){
+    parsed=unwrapAiQaPayload(typeof jsonParsed==='string'?{answer:jsonParsed}:jsonParsed);
+   }else if(rejectMalformedJson&&/^(?:```json|[{\[])/i.test(cleaned)){
+    throw Error('AI trả lời chưa đúng định dạng. Hãy thử lại.');
+   }else if(cleaned&&/(?:"|')?(?:primaryNodeKey|answer|answer_vi|content|nodeLabel)(?:"|')?\s*:/i.test(cleaned)){
+    parsed=unwrapAiQaPayload(cleaned);
+   }else{
+    parsed={answer:cleaned.length<=5000?cleaned:cleaned.slice(0,4999)+'…'};
+   }
+  }else{
+   parsed=unwrapAiQaPayload(raw)||raw;
+  }
+  if(parsed?.error==='OUT_OF_SCOPE')throw Error('Yêu cầu của bạn nằm ngoài phạm vi học tiếng Trung HSK!');
+  const answer=typeof parsed?.answer==='string'?parsed.answer.trim():'';
+  if(!answer||answer.length>5000)throw Error(incompleteError);
+  const strategy=typeof parsed.explanationStrategyUsed==='string'&&parsed.explanationStrategyUsed.trim()?parsed.explanationStrategyUsed.trim().slice(0,120):'direct_explanation';
+  const rawMicro=parsed.optionalMicroCheck;
+  const optionalMicroCheck=rawMicro&&typeof rawMicro==='object'&&!Array.isArray(rawMicro)?{nodeKey:String(rawMicro.nodeKey||'').slice(0,120),label:String(rawMicro.label||'').slice(0,160),prompt:String(rawMicro.prompt||'').slice(0,500),acceptedAnswers:Array.isArray(rawMicro.acceptedAnswers)?rawMicro.acceptedAnswers.map(String).slice(0,5):[],hint:String(rawMicro.hint||'').slice(0,300),nextStepIfAssisted:String(rawMicro.nextStepIfAssisted||'').slice(0,300)}:null;
+  const primaryNodeKey=String(parsed.primaryNodeKey||(fallbackNodeKey?optionalMicroCheck?.nodeKey||fallbackNodeKey:'')).trim().slice(0,120);
+  const nodeLabel=String(parsed.nodeLabel||(fallbackNodeKey?primaryNodeKey:'')).trim().slice(0,160);
+  const coreRuleSummary=String(parsed.coreRuleSummary||(fallbackNodeKey?(nodeLabel||primaryNodeKey):'')).trim().slice(0,300);
+  const suggestedQuestions=Array.isArray(parsed.suggestedQuestions)?parsed.suggestedQuestions.map(x=>{const rawKind=x?.kind||x?.type;return {kind:['decision_guide','context_shift','practice_request'].includes(rawKind)?rawKind:'decision_guide',text:String(x?.text||'').trim().replace(/\s+/g,' ').slice(0,180)};}).filter(x=>x.text.length>=4).slice(0,3):[];
+  const memoryCandidates=Array.isArray(parsed.memoryCandidates)?parsed.memoryCandidates.slice(0,8).map(c=>({nodeKey:String(c?.nodeKey||'').slice(0,120),label:String(c?.label||'').slice(0,160),candidateType:['interest_only','ai_hypothesis','observed_mistake'].includes(c?.candidateType)?c.candidateType:'ai_hypothesis',manifestation:String(c?.manifestation||'').slice(0,300),evidenceMessageId:String(c?.evidenceMessageId||'').slice(0,120),evidenceQuote:String(c?.evidenceQuote||'').slice(0,500),explanationSummary:String(c?.explanationSummary||'').slice(0,240),nextPedagogicalStep:String(c?.nextPedagogicalStep||'').slice(0,240)})):[];
+  return {answer,primaryNodeKey,nodeLabel,coreRuleSummary,explanationStrategyUsed:strategy,optionalMicroCheck,suggestedQuestions,memoryCandidates,mode:'ai-qa'};
+ }
  function createThinkingIndicator({container,insertCard,steps=[],extraRate=0.4,onStart,onTick,onStop}={}){
   let timer=null,startedAt=0,cardEl=null;
   function stop(){
@@ -335,5 +366,5 @@
   }
   return {start,stop,getCard:()=>cardEl};
  }
- const api={MASTERY_BOUNDARY,containsChinese,tokenizeMixedZhVi,chunkDocumentText,bm25RetrieveChunks,validateQaInput,validateProjectDocument,wrapSandwichPrompt,aggregateAdaptiveStats,masteryBoundary,buildLearningSnapshot,cleanWrapperTags,unwrapAiQaPayload,unwrapAiQaText,createThinkingIndicator};root.HSKAIQACore=api;if(typeof module==='object'&&module.exports)module.exports=api;
+ const api={MASTERY_BOUNDARY,containsChinese,tokenizeMixedZhVi,chunkDocumentText,bm25RetrieveChunks,validateQaInput,validateProjectDocument,wrapSandwichPrompt,aggregateAdaptiveStats,masteryBoundary,buildLearningSnapshot,cleanWrapperTags,unwrapAiQaPayload,unwrapAiQaText,normalizeAiQaResponse,createThinkingIndicator};root.HSKAIQACore=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window==='object'?window:globalThis);
