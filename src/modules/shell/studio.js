@@ -92,13 +92,14 @@ renderIcons();
  drawerBody.prepend(mobileRoutes);drawerBody.append(legacy);
 
  // Top horizontal navbar + mini flyouts (desktop topbar & collapsed left rail)
- let activeFlyout=null,flyoutCloseTimer=0;
+ let activeFlyout=null,flyoutCloseTimer=0,updateTopGlide=()=>{};
  function closeActiveFlyout(){
   clearTimeout(flyoutCloseTimer);
   if(!activeFlyout)return;
   activeFlyout.flyout.hidden=true;
   activeFlyout.trigger?.setAttribute('aria-expanded','false');
   activeFlyout=null;
+  updateTopGlide();
  }
  function populateFlyout(group,extraClass){
   const flyout=document.createElement('div');
@@ -120,7 +121,7 @@ renderIcons();
  }
  function bindFlyoutController({anchor,trigger,flyout,place,canOpen}){
   let openedAt=0;
-  const scheduleClose=()=>{clearTimeout(flyoutCloseTimer);flyoutCloseTimer=setTimeout(()=>{if(activeFlyout?.flyout===flyout)closeActiveFlyout();},140);};
+  const scheduleClose=()=>{clearTimeout(flyoutCloseTimer);flyoutCloseTimer=setTimeout(()=>{if(activeFlyout?.flyout===flyout)closeActiveFlyout();},100);};
   const openNow=()=>{
    if(canOpen&&!canOpen())return;
    clearTimeout(flyoutCloseTimer);
@@ -130,6 +131,7 @@ renderIcons();
    place();
    trigger?.setAttribute('aria-expanded','true');
    activeFlyout={flyout,trigger};
+   updateTopGlide();
   };
   anchor.addEventListener('mouseenter',openNow);
   anchor.addEventListener('mouseleave',scheduleClose);
@@ -139,7 +141,7 @@ renderIcons();
    if(canOpen&&!canOpen())return;
    event.preventDefault();
    event.stopPropagation();
-   if(activeFlyout?.flyout===flyout&&!flyout.hidden&&Date.now()-openedAt>=400)closeActiveFlyout();
+   if(activeFlyout?.flyout===flyout&&!flyout.hidden&&Date.now()-openedAt>=120)closeActiveFlyout();
    else openNow();
   });
  }
@@ -147,31 +149,66 @@ renderIcons();
  const topbarNav=document.createElement('nav');
  topbarNav.className='topbar-nav';
  topbarNav.setAttribute('aria-label','Điều hướng nhanh');
+ const topGlide=document.createElement('span');
+ topGlide.className='topbar-nav-glide';
+ topGlide.setAttribute('aria-hidden','true');
+ topbarNav.append(topGlide);
+ let hoveredTopPill=null;
+ updateTopGlide=()=>{
+  const target=hoveredTopPill||(activeFlyout&&topbarNav.contains(activeFlyout.trigger)?activeFlyout.trigger:null);
+  if(!target||target.classList.contains('active')||!target.offsetWidth){topGlide.style.opacity='0';return;}
+  topGlide.style.width=target.offsetWidth+'px';
+  topGlide.style.transform=`translate3d(${target.offsetLeft}px,0,0)`;
+  topGlide.style.opacity='1';
+ };
+ topbarNav.addEventListener('mouseleave',()=>{hoveredTopPill=null;updateTopGlide();});
  const homeTopBtn=document.createElement('button');
- homeTopBtn.type='button';homeTopBtn.className='topbar-nav-pill';homeTopBtn.dataset.studioGo='home';homeTopBtn.textContent='Trang chủ';
+ homeTopBtn.type='button';homeTopBtn.className='topbar-nav-pill';homeTopBtn.dataset.studioGo='home';
+ const homeIcon=sourceNav.querySelector(':scope>button[data-studio-go="home"]>i')?.cloneNode(true);
+ const homeLbl=document.createElement('span');homeLbl.textContent='Trang chủ';
+ if(homeIcon)homeTopBtn.append(homeIcon);
+ homeTopBtn.append(homeLbl);
+ homeTopBtn.addEventListener('mouseenter',()=>{closeActiveFlyout();hoveredTopPill=homeTopBtn;updateTopGlide();});
+ homeTopBtn.addEventListener('focus',()=>{hoveredTopPill=homeTopBtn;updateTopGlide();});
+ homeTopBtn.addEventListener('blur',()=>{if(hoveredTopPill===homeTopBtn){hoveredTopPill=null;updateTopGlide();}});
  topbarNav.append(homeTopBtn);
+ const topbarGroups=[];
  for(const group of sourceNav.querySelectorAll(':scope>.nav-group')){
   const labelText=group.querySelector('summary>span')?.textContent?.trim()||'';
+  const groupIcon=group.querySelector('summary>i')?.cloneNode(true);
   const wrap=document.createElement('div');wrap.className='topbar-nav-group';
   const trigger=document.createElement('button');trigger.type='button';trigger.className='topbar-nav-pill topbar-nav-trigger';
   trigger.setAttribute('aria-haspopup','true');trigger.setAttribute('aria-expanded','false');
+  if(groupIcon)trigger.append(groupIcon);
   const lbl=document.createElement('span');lbl.textContent=labelText;
   trigger.append(lbl);
   trigger.insertAdjacentHTML('beforeend',`<svg class="topbar-nav-caret" viewBox="0 0 24 24" aria-hidden="true">${iconPaths['chevron-down']}</svg>`);
   const topFlyout=populateFlyout(group,'nav-flyout-top');
-  wrap.append(trigger,topFlyout);
+  // Append to body so .topbar's backdrop-filter never creates a fixed-position containing block.
+  document.body.append(topFlyout);
+  wrap.append(trigger);
   topbarNav.append(wrap);
+  topbarGroups.push({trigger,flyout:topFlyout});
+  trigger.addEventListener('mouseenter',()=>{hoveredTopPill=trigger;updateTopGlide();});
+  trigger.addEventListener('focus',()=>{hoveredTopPill=trigger;updateTopGlide();});
+  trigger.addEventListener('blur',()=>{if(hoveredTopPill===trigger){hoveredTopPill=null;updateTopGlide();}});
   bindFlyoutController({
    anchor:wrap,trigger,flyout:topFlyout,
    place:()=>{
     const r=trigger.getBoundingClientRect(),w=Math.min(280,window.innerWidth-24);
     topFlyout.style.width=w+'px';
     const centerLeft=r.left+r.width/2-w/2;
-    topFlyout.style.left=Math.max(12,Math.min(window.innerWidth-w-12,centerLeft))+'px';
-    topFlyout.style.top=(r.bottom+8)+'px';
+    topFlyout.style.left=Math.round(Math.max(12,Math.min(window.innerWidth-w-12,centerLeft)))+'px';
+    topFlyout.style.top=Math.round(r.bottom+8)+'px';
    }
   });
   const summary=group.querySelector('summary');
+  summary?.addEventListener('click',()=>{
+   if(appShell?.classList.contains('sidebar-collapsed')&&window.innerWidth>=971)return;
+   if(!group.open){
+    for(const other of sourceNav.querySelectorAll(':scope>.nav-group'))if(other!==group)other.open=false;
+   }
+  });
   const sideFlyout=populateFlyout(group,'nav-flyout-side');
   document.body.append(sideFlyout);
   bindFlyoutController({
@@ -180,9 +217,9 @@ renderIcons();
    place:()=>{
     const r=summary.getBoundingClientRect(),w=244,h=sideFlyout.offsetHeight||140;
     sideFlyout.style.width=w+'px';
-    sideFlyout.style.left=(r.right+12)+'px';
+    sideFlyout.style.left=Math.round(r.right+12)+'px';
     const centerTop=r.top+r.height/2-h/2;
-    sideFlyout.style.top=Math.max(12,Math.min(window.innerHeight-h-12,centerTop))+'px';
+    sideFlyout.style.top=Math.round(Math.max(12,Math.min(window.innerHeight-h-12,centerTop)))+'px';
    }
   });
  }
@@ -205,7 +242,7 @@ renderIcons();
   const labels={'sentence-editor':'Sửa câu tiếng Trung',writing:'Học viết',placement:'Đánh giá trình độ & lộ trình','real-reading':'Đọc thực tế','study4':'Luyện thi HSK','match-game':'Đối chiếu 3 cột','sentence-game':'Sắp xếp câu',home:'Trang chủ',notebook:'Sổ từ vựng',lessons:'Bài học',practice:'Luyện & Ôn',exam:'Bài tập HSK',review:'Luyện & Ôn',search:'Tra cứu','ai-qa':'Hỏi đáp AI',learn:'Thẻ từ vựng',quiz:'Trắc nghiệm',mistakes:'Ôn câu sai',compare:'Từ dễ nhầm',srs:'Ôn theo lịch',profile:'Hồ sơ',account:'Cài đặt',translator:'Dịch câu / Đọc ảnh',admin:'Dashboard học viên',about:'Giới thiệu'};
  const parents={'real-reading':'lessons','study4':'practice','match-game':'practice','sentence-game':'practice',learn:'practice',quiz:'practice',compare:'practice',exam:'practice',srs:'practice',mistakes:'practice',translator:'search',about:'home'};
  labels.music='Nghe nhạc học HSK';labels['music-play']='Nghe nhạc & học HSK';
- let ready=false,route='home',lastOwner='',fingerprint='',activityTimer,refreshTimer,lastGoalScope='';
+ let ready=false,route='',lastOwner='',fingerprint='',activityTimer,refreshTimer,lastGoalScope='';
  function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||'null')||fallback;}catch{return fallback;}}
  function owner(){return read('hsk-account-meta-v1',{}).uid||'guest';}
  function dictionary(){try{return typeof words!=='undefined'?words:[];}catch{return [];}}
@@ -226,23 +263,28 @@ renderIcons();
  }
  function clearHub(){delete document.body.dataset.studioHub;document.querySelectorAll('[data-studio-hub-panel]').forEach(p=>p.hidden=true);}
  function closeDrawer(){document.body.classList.remove('drawer-open');$('drawer').inert=true;$('drawer').setAttribute('aria-hidden','true');$('menuBtn').setAttribute('aria-expanded','false');}
- function title(name){
+ function title(name,syncGroups=false){
   route=name;
   $('activeTitle').textContent=(['search','translator'].includes(name)&&searchNames[document.body.dataset.searchTool])||labels[name]||'HSK Flashcards';
+  let activeSideGroup=null;
   document.querySelectorAll('[data-studio-go],[data-search-tool]').forEach(b=>{
    // "translator" belongs to the global Search section, but is a distinct local tab.
    const localTab=!!b.closest('.studio-search-tabs');
-   const group=b.closest('.side-nav .nav-group,.drawer-route-nav .nav-group');
+   const navGroup=b.closest('.side-nav .nav-group,.drawer-route-nav .nav-group');
+   const group=navGroup||b.closest('.nav-flyout');
    const menuRoute=['quiz','srs','mistakes','compare','match-game','sentence-game','writing','passive','placement'].includes(name)?'practice':name==='translator'?'search':name;
    const selected=group?(b.dataset.navAction?b.dataset.navAction===name:b.dataset.studioGo===menuRoute):localTab?b.dataset.searchTool===(document.body.dataset.searchTool||(name==='translator'?'translate':'vocabulary')):b.dataset.studioGo===(parents[name]||name);
-   b.classList.toggle('active',selected);if(group&&selected)group.open=true;
+   b.classList.toggle('active',selected);
+   if(navGroup&&selected){if(b.closest('.side-nav'))activeSideGroup=navGroup;else navGroup.open=true;}
    if(localTab)b.setAttribute('aria-pressed',String(selected));
    if(selected)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
   });
-  document.querySelectorAll('.topbar-nav-group').forEach(g=>{
-   const trigger=g.querySelector('.topbar-nav-trigger');
-   if(trigger)trigger.classList.toggle('active',Boolean(g.querySelector('.nav-flyout [data-studio-go].active')));
+  if(syncGroups)document.querySelectorAll('.side-nav .nav-group').forEach(g=>{g.open=(g===activeSideGroup);});
+  else if(activeSideGroup)activeSideGroup.open=true;
+  topbarGroups.forEach(({trigger,flyout})=>{
+   trigger.classList.toggle('active',Boolean(flyout.querySelector('[data-studio-go].active')));
   });
+  updateTopGlide();
  }
  function coreView(){for(const [cls,name] of [['show-account','account'],['show-admin','admin'],['show-translator','translator'],['show-about','about'],['show-lessons','lessons']])if(document.body.classList.contains(cls))return name==='account'&&$('accountPanel').dataset.accountCurrent==='profile'?'profile':name;return document.querySelector('.app-tabs [data-mode].active')?.dataset.mode||'learn';}
  const searchNames={vocabulary:'Tra cứu',handwriting:'Vẽ chữ',translate:'Dịch câu',image:'Đọc ảnh'};
@@ -253,7 +295,7 @@ renderIcons();
   if(tool==='handwriting'&&$('handwritingPanel').hidden&&!$('handwritingOpen').disabled)$('handwritingOpen').onclick?.();
   if(tool==='vocabulary'&&!$('handwritingPanel').hidden)$('handwritingClose').click();
   if(tool==='image')document.querySelector('.ocr-panel').open=true;
-  title(tool==='translate'||tool==='image'?'translator':'search');
+  title(tool==='translate'||tool==='image'?'translator':'search',true);
  }
  let pendingMusic='',musicWaitTimer=0,musicWaitControls=[],routeChosenBeforeReady=false;
  function clearMusicWait(failed=false){clearTimeout(musicWaitTimer);pendingMusic='';for(const [node,small,label] of musicWaitControls){node.removeAttribute('aria-busy');node.classList.remove('music-entry-pending');if(small)small.textContent=failed?'Chưa mở được. Chạm để thử lại.':label;}musicWaitControls=[];}
@@ -282,8 +324,8 @@ renderIcons();
   clearHub();
   if(['writing','placement','home','practice','review','exam','notebook','match-game','sentence-game','study4','real-reading','ai-qa','sentence-editor','music','music-play'].includes(name)){
    const hub=name==='music-play'?'music':name;
-   document.querySelector('.app-tabs [data-mode="learn"]').click();document.body.classList.remove('show-lessons','lesson-focus');document.body.dataset.studioHub=hub;document.querySelector(`[data-studio-hub-panel="${hub}"]`).hidden=false;title(name);
-  }else{const special={profile:'accountBtn',account:'accountBtn',translator:'translatorBtn',admin:'adminBtn',about:'aboutBtn'};const trigger=special[name]?$(special[name]):document.querySelector(`.app-tabs [data-mode="${name}"]`);if(!trigger||trigger.hidden)return;trigger.click();if(name==='profile'||name==='account')setAccountPage(name);title(name);}
+   document.querySelector('.app-tabs [data-mode="learn"]').click();document.body.classList.remove('show-lessons','lesson-focus');document.body.dataset.studioHub=hub;document.querySelector(`[data-studio-hub-panel="${hub}"]`).hidden=false;title(name,true);
+  }else{const special={profile:'accountBtn',account:'accountBtn',translator:'translatorBtn',admin:'adminBtn',about:'aboutBtn'};const trigger=special[name]?$(special[name]):document.querySelector(`.app-tabs [data-mode="${name}"]`);if(!trigger||trigger.hidden)return;trigger.click();if(name==='profile'||name==='account')setAccountPage(name);title(name,true);}
   const instantScroll=musicRoute||name==='ai-qa';
   closeDrawer();if(musicRoute)main.scrollTo({top:0,behavior:'instant'});else main.scrollTop=0;window.scrollTo({top:0,behavior:instantScroll?'instant':window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});refresh();if(name==='ai-qa')window.dispatchEvent(new Event('hsk-ai-qa-open'));if(name==='exam')window.dispatchEvent(new Event('hsk-exam-open'));if(name==='match-game'||name==='sentence-game')window.HSKPracticeGames?.start(name);if(name==='study4')window.HSKStudy4?.open();if(name==='real-reading')window.HSKRealReading?.enter();if(name==='music'||name==='music-play'){window.HSKMusic?.enter(name==='music-play'?'chill':'study');$('musicPanel')?.querySelector('.music-stage')?.scrollTo({top:0,behavior:'instant'});}window.HSKPracticeSelection?.onNavigate?.(name);
  }
