@@ -53,6 +53,17 @@ await page.route('https://ai.test/ai-providers',route=>route.fulfill({json:{syst
   assert.equal(await thinking.getAttribute('aria-label'),'Chọn mức độ mạnh hoặc model cho Claude');
   assert.equal(await thinking.locator('optgroup').count(),0,'danh sách model phải phẳng, không chia optgroup trùng lặp');
   assert.equal(await thinking.locator('option[data-model="claude-sonnet"]').count(),1);
+  const effortBtn=page.locator('#aiQaForm .qa-effort-btn'),effortPopover=page.locator('#aiQaForm .qa-effort-popover');
+  await effortBtn.click();
+  await effortPopover.waitFor({state:'visible'});
+  const range=effortPopover.locator('.qa-effort-range');
+  await range.evaluate(el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}));});
+  assert.equal(await thinking.inputValue(),await thinking.locator('option').first().getAttribute('value'));
+  await effortPopover.locator('.qa-effort-header-btn').click();
+  await effortPopover.locator('.qa-effort-model-list').waitFor({state:'visible'});
+  await effortPopover.locator('.qa-effort-model-item').nth(1).click();
+  assert.equal(await effortPopover.isVisible(),false,'chọn model từ danh sách phải đóng popover');
+  assert.equal(await thinking.inputValue(),await thinking.locator('option').nth(1).getAttribute('value'));
   const providerOptionsCheck=await page.evaluate(()=>{
     const p=window.HSKAiProviderPicker;
     return {
