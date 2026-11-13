@@ -31,7 +31,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  const sidebarToggle=page.locator('#sidebarToggle'),sidebar=page.locator('aside.sidebar');
  await sidebarToggle.click();
  assert.equal(await sidebarToggle.getAttribute('aria-expanded'),'false');
- await page.waitForFunction(()=>Math.round(document.querySelector('aside.sidebar').getBoundingClientRect().width)===74);
+ await page.waitForFunction(()=>Math.round(document.querySelector('aside.sidebar').getBoundingClientRect().width)===60);
  await sidebarToggle.click();
  assert.equal(await sidebarToggle.getAttribute('aria-expanded'),'true');
  await page.waitForFunction(()=>Math.round(document.querySelector('aside.sidebar').getBoundingClientRect().width)>=220);
