@@ -38,9 +38,29 @@ const iconPaths={
 'eye-off':'<path d="M3 3l18 18M10.6 5.1A9.8 9.8 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.5 6.6A16.7 16.7 0 0 0 2 12s3.6 7 10 7a9.7 9.7 0 0 0 4.4-1M9.9 9.9a3 3 0 0 0 4.2 4.2"/>',
 'log-out':'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
 'repeat-2':'<path d="m17 2 4 4-4 4M3 11V8a2 2 0 0 1 2-2h16M7 22l-4-4 4-4M21 13v3a2 2 0 0 1-2 2H3"/>',
+'panel-left':'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/>',
 };
 function renderIcons(){document.querySelectorAll('[data-icon]').forEach(el=>{const key=el.getAttribute('data-icon');if(iconPaths[key]){el.innerHTML=`<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${iconPaths[key]}</svg>`}})}
 renderIcons();
+ const appShell=document.querySelector('.app-shell'),sidebarToggle=document.getElementById('sidebarToggle');
+ function setSidebarCollapsed(collapsed){
+  const next=Boolean(collapsed);
+  appShell?.classList.toggle('sidebar-collapsed',next);
+  if(sidebarToggle){
+   sidebarToggle.setAttribute('aria-expanded',String(!next));
+   const label=next?'Mở rộng thanh bên':'Thu gọn thanh bên';
+   sidebarToggle.setAttribute('aria-label',label);
+   sidebarToggle.title=label;
+  }
+  try{localStorage.setItem('hsk-sidebar-collapsed-v1',next?'1':'0');}catch{}
+ }
+ if(sidebarToggle){
+  let savedCollapsed=false;
+  try{savedCollapsed=localStorage.getItem('hsk-sidebar-collapsed-v1')==='1';}catch{}
+  if(savedCollapsed)setSidebarCollapsed(true);
+  sidebarToggle.addEventListener('click',()=>setSidebarCollapsed(!appShell?.classList.contains('sidebar-collapsed')));
+ }
+ document.querySelectorAll('.side-nav button[data-studio-go],.side-nav .nav-group>summary').forEach(el=>{if(!el.title&&el.getAttribute('aria-label'))el.title=el.getAttribute('aria-label');});
  const themeButton=document.createElement('button');themeButton.type='button';themeButton.id='themeToggle';themeButton.className='theme-button';document.querySelector('.topbar-actions').prepend(themeButton);
  function setTheme(mode){document.documentElement.dataset.theme=mode;const dark=mode==='dark';themeButton.setAttribute('aria-pressed',String(dark));themeButton.setAttribute('aria-label',dark?'Bật chế độ sáng':'Bật chế độ tối');themeButton.title=dark?'Chế độ sáng':'Chế độ tối';themeButton.innerHTML=dark?'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>';const surface=getComputedStyle(document.documentElement).getPropertyValue('--paper').trim();if(surface)document.querySelectorAll('meta[name="theme-color"]').forEach(m=>m.content=surface);}
  setTheme(document.documentElement.dataset.theme==='dark'?'dark':'light');themeButton.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';setTheme(next);try{localStorage.setItem('hsk-theme-v1',next);}catch{}});window.addEventListener('storage',e=>{if(e.key==='hsk-theme-v1')setTheme(e.newValue==='dark'?'dark':'light');});
