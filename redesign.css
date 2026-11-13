@@ -4429,14 +4429,14 @@ html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[d
 /* Navigation hover glide + active solid purple consistency over Round 2B hover override. */
 @media(min-width:1080px){
   html body:not(#_rd).studio-enabled #studioHeader .topbar-nav-pill{
-    background:transparent!important;
-    border-color:transparent!important;
+    background:var(--palette-clear)!important;
+    border-color:var(--palette-clear)!important;
     color:var(--legacy-hex-707389)!important;
     transition:color .16s cubic-bezier(.22,1,.36,1),background-color .16s cubic-bezier(.22,1,.36,1),transform .12s cubic-bezier(.22,1,.36,1)!important;
   }
   html body:not(#_rd).studio-enabled #studioHeader .topbar-nav-pill:not(.active):is(:hover,:focus-visible,[aria-expanded="true"]){
-    background:transparent!important;
-    border-color:transparent!important;
+    background:var(--palette-clear)!important;
+    border-color:var(--palette-clear)!important;
     color:var(--accent-dark)!important;
   }
   html body:not(#_rd).studio-enabled #studioHeader .topbar-nav-pill:not(.active):is(:hover,:focus-visible,[aria-expanded="true"]) :is(i,svg,span){
@@ -4444,8 +4444,8 @@ html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[d
   }
   html body:not(#_rd).studio-enabled #studioHeader .topbar-nav-pill.active,
   html body:not(#_rd).studio-enabled #studioHeader .topbar-nav-pill.active:is(:hover,:focus-visible,:active,[aria-expanded="true"]){
-    background:var(--accent)!important;
-    border-color:var(--accent)!important;
+    background:var(--button-active-bg)!important;
+    border-color:var(--button-active-bg)!important;
     color:var(--palette-white)!important;
     font-weight:700!important;
   }
@@ -4464,14 +4464,14 @@ html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[d
   }
   html[data-theme="dark"] body:not(#_rd).studio-enabled #studioHeader .topbar-nav-pill.active,
   html[data-theme="dark"] body:not(#_rd).studio-enabled #studioHeader .topbar-nav-pill.active:is(:hover,:focus-visible,:active,[aria-expanded="true"]){
-    background:var(--palette-violet)!important;
-    border-color:var(--palette-violet)!important;
+    background:var(--button-active-bg)!important;
+    border-color:var(--button-active-bg)!important;
     color:var(--palette-white)!important;
   }
 }
 html body:not(#_rd).studio-enabled .nav-flyout .nav-flyout-items button{
   background:var(--palette-clear)!important;
-  border-color:transparent!important;
+  border-color:var(--palette-clear)!important;
   color:var(--ink)!important;
   transition:background-color .16s cubic-bezier(.22,1,.36,1),color .16s cubic-bezier(.22,1,.36,1),transform .14s cubic-bezier(.22,1,.36,1)!important;
 }
@@ -4485,7 +4485,7 @@ html body:not(#_rd).studio-enabled .nav-flyout .nav-flyout-items button:not(.act
 }
 html body:not(#_rd).studio-enabled .nav-flyout .nav-flyout-items button.active,
 html body:not(#_rd).studio-enabled .nav-flyout .nav-flyout-items button.active:is(:hover,:focus-visible,:active){
-  background:var(--accent)!important;
+  background:var(--button-active-bg)!important;
   color:var(--palette-white)!important;
   font-weight:700!important;
 }
@@ -4500,7 +4500,7 @@ html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary{
 html body:not(#_rd).studio-enabled .app-shell .side-nav button:not(.active):is(:hover,:focus-visible),
 html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary:is(:hover,:focus-visible){
   background:var(--accent-light)!important;
-  border-color:transparent!important;
+  border-color:var(--palette-clear)!important;
   color:var(--accent-dark)!important;
 }
 html body:not(#_rd).studio-enabled .app-shell .side-nav button:not(.active):is(:hover,:focus-visible) :is(i,svg,span),
@@ -4509,8 +4509,8 @@ html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary:is(:h
 }
 html body:not(#_rd).studio-enabled .app-shell .side-nav button.active,
 html body:not(#_rd).studio-enabled .app-shell .side-nav button.active:is(:hover,:focus-visible,:active){
-  background:var(--accent)!important;
-  border-color:var(--accent)!important;
+  background:var(--button-active-bg)!important;
+  border-color:var(--button-active-bg)!important;
   color:var(--palette-white)!important;
   font-weight:700!important;
 }
@@ -4520,7 +4520,7 @@ html body:not(#_rd).studio-enabled .app-shell .side-nav button.active:is(:hover,
 }
 html[data-theme="dark"] body:not(#_rd).studio-enabled .nav-flyout .nav-flyout-items button.active,
 html[data-theme="dark"] body:not(#_rd).studio-enabled .nav-flyout .nav-flyout-items button.active:is(:hover,:focus-visible,:active){
-  background:var(--palette-violet)!important;
+  background:var(--button-active-bg)!important;
   color:var(--palette-white)!important;
 }
 html[data-theme="dark"] body:not(#_rd).studio-enabled .app-shell .side-nav button:not(.active):is(:hover,:focus-visible),
@@ -4530,7 +4530,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .app-shell .side-nav .nav-
 }
 html[data-theme="dark"] body:not(#_rd).studio-enabled .app-shell .side-nav button.active,
 html[data-theme="dark"] body:not(#_rd).studio-enabled .app-shell .side-nav button.active:is(:hover,:focus-visible,:active){
-  background:var(--palette-violet)!important;
-  border-color:var(--palette-violet)!important;
+  background:var(--button-active-bg)!important;
+  border-color:var(--button-active-bg)!important;
   color:var(--palette-white)!important;
 }

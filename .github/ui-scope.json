@@ -1,5 +1,5 @@
 {
-  "request": "PR #420: căn giữa flyout nhóm ở topbar và sidebar desktop thu gọn, bỏ nền trắng ở topbar pill, giữ tên cấp HSK không xuống dòng; chỉ hai vùng header và sidebar dùng chung được phép thay đổi, bảo vệ toàn bộ nội dung route.",
+  "request": "PR #421: tinh chỉnh hiệu ứng hover, trạng thái active, chuyển động flyout và accordion sidebar chung. Chỉ hai vùng header và sidebar được phép thay đổi, bảo vệ mọi nội dung route trên desktop/mobile, sáng/tối.",
   "excludedRoutes": [],
   "sharedHeaderOnly": true,
   "sharedSidebarOnly": true
