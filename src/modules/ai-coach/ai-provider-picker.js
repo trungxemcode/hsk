@@ -566,24 +566,7 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
     const payload=await response.json().catch(()=>null);
     const answerText=(cred.provider==='gemini'?(payload?.candidates?.[0]?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join(''):payload?.choices?.[0]?.message?.content||'').trim();
     if(!answerText)throw Error('API riêng không trả về phản hồi hợp lệ. Hãy thử lại.');
-    let parsed;
-    try{parsed=JSON.parse(answerText);}catch{
-      const fenced=answerText.match(/(?:^|\n)\s*```(?:json)?[ \t]*\r?\n(\s*\{[\s\S]*?\})\s*```/i);
-      if(fenced){try{parsed=JSON.parse(fenced[1]);}catch{}}
-      if(!parsed&&!/^(?:```json|[{\[])/i.test(answerText))parsed={answer:answerText.length<=5000?answerText:answerText.slice(0,4999)+'…'};
-      if(!parsed)throw Error('AI trả lời chưa đúng định dạng. Hãy thử lại.');
-    }
-    if(typeof parsed==='string')parsed={answer:parsed};
-    parsed=window.HSKAIQACore?.unwrapAiQaPayload?.(parsed)||parsed;
-    if(parsed?.error==='OUT_OF_SCOPE')throw Error('Yêu cầu của bạn nằm ngoài phạm vi học tiếng Trung HSK!');
-    const answer=typeof parsed?.answer==='string'?parsed.answer.trim():'';
-    if(!answer||answer.length>5000)throw Error('Gia sư AI trả về dữ liệu chưa đầy đủ. Hãy thử lại.');
-    const strategy=typeof parsed.explanationStrategyUsed==='string'&&parsed.explanationStrategyUsed.trim()?parsed.explanationStrategyUsed.trim().slice(0,120):'direct_explanation';
-    const primaryNodeKey=String(parsed.primaryNodeKey||'').trim().slice(0,120),nodeLabel=String(parsed.nodeLabel||'').trim().slice(0,160),coreRuleSummary=String(parsed.coreRuleSummary||'').trim().slice(0,300);
-    const suggestedQuestions=Array.isArray(parsed.suggestedQuestions)?parsed.suggestedQuestions.slice(0,3).map(x=>({kind:['decision_guide','context_shift','practice_request'].includes(x?.kind)?x.kind:'decision_guide',text:String(x?.text||'').trim().replace(/\s+/g,' ').slice(0,180)})).filter(x=>x.text.length>=4):[];
-    const micro=parsed.optionalMicroCheck&&typeof parsed.optionalMicroCheck==='object'?{nodeKey:String(parsed.optionalMicroCheck.nodeKey||'').slice(0,120),label:String(parsed.optionalMicroCheck.label||'').slice(0,160),prompt:String(parsed.optionalMicroCheck.prompt||'').slice(0,500),acceptedAnswers:Array.isArray(parsed.optionalMicroCheck.acceptedAnswers)?parsed.optionalMicroCheck.acceptedAnswers.map(String).slice(0,5):[],hint:String(parsed.optionalMicroCheck.hint||'').slice(0,300),nextStepIfAssisted:String(parsed.optionalMicroCheck.nextStepIfAssisted||'').slice(0,300)}:null;
-    const memoryCandidates=Array.isArray(parsed.memoryCandidates)?parsed.memoryCandidates.slice(0,8).map(c=>({nodeKey:String(c?.nodeKey||'').slice(0,120),label:String(c?.label||'').slice(0,160),candidateType:['interest_only','ai_hypothesis','observed_mistake'].includes(c?.candidateType)?c.candidateType:'ai_hypothesis',manifestation:String(c?.manifestation||'').slice(0,300),evidenceMessageId:String(c?.evidenceMessageId||'').slice(0,120),evidenceQuote:String(c?.evidenceQuote||'').slice(0,500),explanationSummary:String(c?.explanationSummary||'').slice(0,240),nextPedagogicalStep:String(c?.nextPedagogicalStep||'').slice(0,240)})):[];
-    return {answer,primaryNodeKey,nodeLabel,coreRuleSummary,explanationStrategyUsed:strategy,optionalMicroCheck:micro,suggestedQuestions,memoryCandidates,mode:'ai-qa'};
+    return window.HSKAIQACore.normalizeAiQaResponse(answerText,{rejectMalformedJson:true,incompleteError:'Gia sư AI trả về dữ liệu chưa đầy đủ. Hãy thử lại.'});
   }
 
   function getActiveAiParams(){

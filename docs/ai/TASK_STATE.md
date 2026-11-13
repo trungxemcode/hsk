@@ -1,4 +1,19 @@
-# Current task: Pha 4 — Hợp nhất helper tải & xác thực cấu hình AI frontend (2026-11-13)
+# Current task: Pha 5 — Hợp nhất chuẩn hóa phản hồi Hỏi đáp AI (2026-11-13)
+
+Nhánh: `refactor/phase5-next-duplication` (tách từ `main` tại `6068ab0`, cập nhật PWA `5.1.1`).
+
+Thay đổi đã thực hiện (không đổi giao diện, layout, CSS, phân quyền, quota hay luồng nhạc):
+1. **Thêm `HSKAIQACore.normalizeAiQaResponse(raw, options)` trong `src/modules/ai-coach/ai-qa-core.js`:**
+   - Hợp nhất bước giải nén payload Hỏi đáp AI (`cleanWrapperTags`, `parseJsonLoose`, `unwrapAiQaPayload`), kiểm tra `OUT_OF_SCOPE`, kiểm tra độ dài/rỗng của `answer`, chuẩn hóa `primaryNodeKey` / `nodeLabel` / `coreRuleSummary` (có `fallbackNodeKey`), `explanationStrategyUsed`, `suggestedQuestions` (`kind` / `type`, tối đa 3 câu dài ≥ 4 ký tự), `optionalMicroCheck` và `memoryCandidates` (tối đa 8).
+   - Giữ nguyên tùy chọn `rejectMalformedJson` (bắt lỗi JSON hỏng nhưng cho phép văn bản thuần cắt gọn 5000 ký tự) và `incompleteError` theo từng ngữ cảnh gọi.
+2. **Tái sử dụng tại hai điểm gọi frontend (`index.html` đã nạp `ai-qa-core.js` trước cả hai module):**
+   - `src/modules/ai-coach/ai-provider-picker.js` (`tryDirectAsk`): thay khối tự parse JSON/fenced và chuẩn hóa trường trùng lặp bằng `HSKAIQACore.normalizeAiQaResponse(answerText, { rejectMalformedJson: true, incompleteError: 'Gia sư AI trả về dữ liệu chưa đầy đủ. Hãy thử lại.' })`.
+   - `src/modules/ai-coach/ai-qa.js` (`ask`): thay `unwrapAiQaPayload` + kiểm tra rỗng/5000 + dựng `targetNodeKey`/`nodeLabel`/`coreRuleSummary` trùng lặp bằng `HSKAIQACore.normalizeAiQaResponse(data, { incompleteError: 'Câu trả lời chưa đầy đủ. Hãy thử lại.', fallbackNodeKey: 'topic:' + assistantId })`.
+3. **Kiểm thử & PWA:**
+   - Thêm 3 unit test trong `server/ai-qa-core.test.mjs` (tổng 9/9 pass) và chạy toàn bộ `node --test server/*.test.mjs` (491/491): PASS.
+   - `check-ai-qa-ui.cjs`, `check-ai-loading-ui.cjs`, `check-ai-coach-dom.cjs`, `check-pwa-relocation-ui.cjs`, `check-module-loading-ui.cjs`, `check-feature-runtime.cjs`, `check-feature-preservation.py --base origin/main`, `check-pwa-release.py --base origin/main`: PASS (`5.1.1`, 216 assets).
+
+# Previous task (merged PR #409): Pha 4 — Hợp nhất helper tải & xác thực cấu hình AI frontend (2026-11-13)
 
 Nhánh: `refactor/phase4-frontend-ai-config` (tách từ `main` tại `59cc2e6`, cập nhật PWA `4.4.44`).
 
