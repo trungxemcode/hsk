@@ -32,6 +32,13 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  await sidebarToggle.click();
  assert.equal(await sidebarToggle.getAttribute('aria-expanded'),'false');
  await page.waitForFunction(()=>Math.round(document.querySelector('aside.sidebar').getBoundingClientRect().width)===60);
+ assert.equal(await page.locator('.side-nav .nav-group-items').first().isVisible(),false,'collapsed sidebar hides inline sub-items');
+ await page.locator('.side-nav .nav-group > summary').first().click();
+ await page.locator('.nav-flyout-side').first().waitFor({state:'visible'});
+ await page.locator('.topbar-nav-trigger').first().click();
+ await page.locator('.nav-flyout-top').first().waitFor({state:'visible'});
+ await page.locator('.nav-flyout-top').first().locator('[data-studio-go]').first().click();
+ assert.equal(await page.locator('.nav-flyout-top').first().isVisible(),false);
  await sidebarToggle.click();
  assert.equal(await sidebarToggle.getAttribute('aria-expanded'),'true');
  await page.waitForFunction(()=>Math.round(document.querySelector('aside.sidebar').getBoundingClientRect().width)>=220);
