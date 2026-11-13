@@ -4551,44 +4551,6 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .app-shell .side-nav butto
   color:var(--palette-white)!important;
 }
 
-/* Dark lesson progress cards retain accessible contrast. */
-html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-course-progress{
-  background:linear-gradient(180deg,var(--rd-static-color-107),var(--rd-static-color-108))!important;
-  border-color:var(--rd-static-color-109)!important;
-  color:var(--rd-static-color-110)!important;
-}
-html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-course-progress strong{
-  color:var(--rd-static-color-111)!important;
-}
-html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-course-progress .hint{
-  color:var(--rd-static-color-112)!important;
-}
-html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-course-progress progress{
-  background:var(--rd-static-color-109)!important;
-  accent-color:var(--accent-dark)!important;
-}
-html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-course-progress progress::-webkit-progress-bar{
-  background:var(--rd-static-color-109)!important;
-}
-html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-course-progress progress::-webkit-progress-value{
-  background:var(--accent-dark)!important;
-}
-html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-course-progress progress::-moz-progress-bar{
-  background:var(--accent-dark)!important;
-}
-html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-course-progress .lesson-resume,
-html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-resume{
-  background:var(--palette-dark-surface)!important;
-  border-color:var(--rd-static-color-109)!important;
-  color:var(--rd-static-color-111)!important;
-}
-html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-course-progress .lesson-resume:is(:hover,:focus-visible),
-html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-resume:is(:hover,:focus-visible){
-  background:var(--palette-violet)!important;
-  border-color:var(--palette-violet)!important;
-  color:var(--palette-white)!important;
-}
-
 /* Keep selected desktop sidebar groups high-contrast in both themes. */
 html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary.active,
 html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary.active:is(:hover,:focus-visible,[aria-expanded="true"]){

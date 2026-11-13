@@ -1,5 +1,5 @@
 {
-  "request": "PR #422: unified flyout menu for desktop side navigation, maintain topbar glide and dark lesson progress contrast. Changes are restricted to shared header/sidebar UI and lesson course progress card in dark mode; protect unrelated routes and mobile interfaces.",
+  "request": "PR #422: unified desktop sidebar flyouts, topbar hover glide and accessible navigation focus. Only shared header and sidebar regions change; all route content including Lessons dark card remains protected.",
   "excludedRoutes": [],
   "sharedHeaderOnly": true,
   "sharedSidebarOnly": true
