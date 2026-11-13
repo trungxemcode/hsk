@@ -139,6 +139,7 @@ renderIcons();
   flyout.addEventListener('mouseleave',scheduleClose);
   trigger.addEventListener('click',event=>{
    if(canOpen&&!canOpen())return;
+   if(trigger.tagName==='SUMMARY'&&trigger.parentElement?.open)return;
    event.preventDefault();
    event.stopPropagation();
    if(activeFlyout?.flyout===flyout&&!flyout.hidden&&Date.now()-openedAt>=120)closeActiveFlyout();
@@ -172,7 +173,10 @@ renderIcons();
  homeTopBtn.addEventListener('focus',()=>{hoveredTopPill=homeTopBtn;updateTopGlide();});
  homeTopBtn.addEventListener('blur',()=>{if(hoveredTopPill===homeTopBtn){hoveredTopPill=null;updateTopGlide();}});
  topbarNav.append(homeTopBtn);
- const topbarGroups=[];
+ const topbarGroups=[],sideGroups=[],sidebar=sourceNav.closest('.sidebar');
+ for(const directBtn of sourceNav.querySelectorAll(':scope>button')){
+  directBtn.addEventListener('mouseenter',closeActiveFlyout);
+ }
  for(const group of sourceNav.querySelectorAll(':scope>.nav-group')){
   const labelText=group.querySelector('summary>span')?.textContent?.trim()||'';
   const groupIcon=group.querySelector('summary>i')?.cloneNode(true);
@@ -203,21 +207,18 @@ renderIcons();
    }
   });
   const summary=group.querySelector('summary');
-  summary?.addEventListener('click',()=>{
-   if(appShell?.classList.contains('sidebar-collapsed')&&window.innerWidth>=971)return;
-   if(!group.open){
-    for(const other of sourceNav.querySelectorAll(':scope>.nav-group'))if(other!==group)other.open=false;
-   }
-  });
+  summary?.setAttribute('aria-haspopup','true');
+  summary?.setAttribute('aria-expanded','false');
   const sideFlyout=populateFlyout(group,'nav-flyout-side');
   document.body.append(sideFlyout);
+  sideGroups.push({summary,flyout:sideFlyout});
   bindFlyoutController({
    anchor:summary,trigger:summary,flyout:sideFlyout,
-   canOpen:()=>Boolean(appShell?.classList.contains('sidebar-collapsed'))&&window.innerWidth>=971,
+   canOpen:()=>window.innerWidth>=721,
    place:()=>{
-    const r=summary.getBoundingClientRect(),w=244,h=sideFlyout.offsetHeight||140;
+    const r=summary.getBoundingClientRect(),sb=sidebar?.getBoundingClientRect(),w=244,h=sideFlyout.offsetHeight||140;
     sideFlyout.style.width=w+'px';
-    sideFlyout.style.left=Math.round(r.right+12)+'px';
+    sideFlyout.style.left=Math.round((sb?sb.right:r.right)+8)+'px';
     const centerTop=r.top+r.height/2-h/2;
     sideFlyout.style.top=Math.round(Math.max(12,Math.min(window.innerHeight-h-12,centerTop)))+'px';
    }
@@ -275,12 +276,14 @@ renderIcons();
    const menuRoute=['quiz','srs','mistakes','compare','match-game','sentence-game','writing','passive','placement'].includes(name)?'practice':name==='translator'?'search':name;
    const selected=group?(b.dataset.navAction?b.dataset.navAction===name:b.dataset.studioGo===menuRoute):localTab?b.dataset.searchTool===(document.body.dataset.searchTool||(name==='translator'?'translate':'vocabulary')):b.dataset.studioGo===(parents[name]||name);
    b.classList.toggle('active',selected);
-   if(navGroup&&selected){if(b.closest('.side-nav'))activeSideGroup=navGroup;else navGroup.open=true;}
+   if(navGroup&&selected&&!b.closest('.side-nav'))navGroup.open=true;
    if(localTab)b.setAttribute('aria-pressed',String(selected));
    if(selected)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
   });
-  if(syncGroups)document.querySelectorAll('.side-nav .nav-group').forEach(g=>{g.open=(g===activeSideGroup);});
-  else if(activeSideGroup)activeSideGroup.open=true;
+  if(syncGroups)document.querySelectorAll('.side-nav .nav-group').forEach(g=>{g.open=false;});
+  sideGroups.forEach(({summary,flyout})=>{
+   summary?.classList.toggle('active',Boolean(flyout.querySelector('[data-studio-go].active')));
+  });
   topbarGroups.forEach(({trigger,flyout})=>{
    trigger.classList.toggle('active',Boolean(flyout.querySelector('[data-studio-go].active')));
   });
@@ -370,7 +373,7 @@ renderIcons();
   const admin=$('adminBtn');$('studioAdminLink').hidden=admin.hidden;
   const filter=document.body.classList.contains('show-lessons')?$('lessonsPanel').dataset.lessonLevel||'1':document.querySelector('[data-filter].active')?.dataset.filter||'all';$('studioLevelText').textContent=filter==='all'?'Tất cả HSK':'HSK '+filter;
  }
- document.querySelectorAll('[data-studio-go]').forEach(b=>b.addEventListener('click',()=>{const action=b.dataset.navAction;if(!action&&b.closest('.side-nav,.drawer-route-nav,#studioHeader,#mobileDock')&&repeatedDestination(b.dataset.studioGo,b.dataset.searchTool)){navigate('home');return;}if(action==='handwriting'||action==='image'){chooseSearchTool(action);return;}if(action){navigate('practice');if(action==='writing'&&window.HSKWritingPractice?.open){window.HSKWritingPractice.open();return;}const text={writing:'Học viết',passive:'Học rảnh tay',placement:'Đánh giá trình độ'}[action];[...document.querySelectorAll('#studioPractice .hub-card')].find(c=>c.textContent.includes(text))?.click();return;}if(b.dataset.studioGo==='real-reading')window.HSKRealReading?.leaveLesson?.();b.dataset.searchTool?chooseSearchTool(b.dataset.searchTool):navigate(b.dataset.studioGo);}));
+ document.querySelectorAll('[data-studio-go]').forEach(b=>b.addEventListener('click',()=>{const action=b.dataset.navAction;if(!action&&b.closest('.side-nav,.drawer-route-nav,#studioHeader,#mobileDock,.nav-flyout')&&repeatedDestination(b.dataset.studioGo,b.dataset.searchTool)){navigate('home');return;}if(action==='handwriting'||action==='image'){chooseSearchTool(action);return;}if(action){navigate('practice');if(action==='writing'&&window.HSKWritingPractice?.open){window.HSKWritingPractice.open();return;}const text={writing:'Học viết',passive:'Học rảnh tay',placement:'Đánh giá trình độ'}[action];[...document.querySelectorAll('#studioPractice .hub-card')].find(c=>c.textContent.includes(text))?.click();return;}if(b.dataset.studioGo==='real-reading')window.HSKRealReading?.leaveLesson?.();b.dataset.searchTool?chooseSearchTool(b.dataset.searchTool):navigate(b.dataset.studioGo);}));
  // Auth status remains visible on Account while the original learning status stays on Profile.
  const accountFeedback=document.createElement('p');accountFeedback.id='accountSettingsStatus';accountFeedback.className='hint';accountFeedback.setAttribute('role','status');$('accountSettingsTitle').after(accountFeedback);
  const syncAccountFeedback=()=>{accountFeedback.textContent=$('accountStatus').textContent;accountFeedback.hidden=!accountFeedback.textContent.trim();};

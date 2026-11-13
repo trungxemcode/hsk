@@ -6,7 +6,30 @@ module.exports=async function navigationToggle(page,width){
  for(const [selector,name] of (width<721?[['#headerInfo','profile']]:[['#headerInfo','profile'],['#headerSearch','search']])){await page.locator(selector).click();await at(name);await page.locator(selector).click();await home();}
  const area=width<721?'#mobileDock':'.side-nav';
  const names=width<721?['lessons','practice','notebook','search']:['lessons','learn','practice','notebook','real-reading','music-play','search','exam','study4','profile','account'];
- async function press(name){const b=page.locator(area+' [data-studio-go="'+name+'"]:not([hidden])').first(),group=b.locator('xpath=ancestor::details[1]');if(await group.count()&&await group.getAttribute('open')===null)await group.locator('summary').first().click();if(name==='music-play'&&!await b.isVisible()){assert(await page.locator('#musicPanel').isVisible(),'existing full-screen music owns navigation visibility');await b.dispatchEvent('click');}else await b.click();}
+ async function press(name){
+  const b=page.locator(area+' [data-studio-go="'+name+'"]:not([hidden])').first(),group=b.locator('xpath=ancestor::details[1]');
+  if(name==='music-play'&&!await b.isVisible()&&!await group.locator('summary').first().isVisible()){
+   // Full-screen music intentionally hides the desktop sidebar; repeated entry still returns Home.
+   assert(await page.locator('#musicPanel').isVisible(),'existing full-screen music owns navigation visibility');
+   await b.dispatchEvent('click');
+   return;
+  }
+  if(width>=721&&await group.count()){
+   // Desktop sidebar groups use a shared flyout, not hidden inline details.
+   await group.locator('summary').first().click();
+   const flyout=page.locator('.nav-flyout-side:not([hidden])');
+   await flyout.waitFor({state:'visible'});
+   const entry=flyout.locator('[data-studio-go="'+name+'"]');
+   assert.equal(await entry.count(),1,'one visible sidebar flyout destination: '+name);
+   await entry.click();
+   return;
+  }
+  if(await group.count()&&await group.getAttribute('open')===null)await group.locator('summary').first().click();
+  if(name==='music-play'&&!await b.isVisible()){
+   assert(await page.locator('#musicPanel').isVisible(),'existing full-screen music owns navigation visibility');
+   await b.dispatchEvent('click');
+  }else await b.click();
+ }
  for(const name of names){await page.evaluate(()=>HSKStudio.navigate('home'));await press(name);await at(name);await press(name);await home();}
  await page.evaluate(()=>{HSKStudio.navigate('account');HSKStudio.navigate('account');});await at('account');await page.evaluate(()=>HSKStudio.navigate('home'));await home();
  if(width>=721){await page.evaluate(()=>HSKStudio.navigate('quiz'));await at('quiz');await press('practice');await at('practice');await press('practice');await home();}else{await page.evaluate(()=>HSKStudio.navigate('translator'));await at('translator');await press('search');await at('search');await press('search');await home();}

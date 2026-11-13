@@ -21,7 +21,9 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  assert.deepEqual(await groups.nth(3).locator('[data-studio-go]').evaluateAll(ns=>ns.map(n=>n.dataset.studioGo)),['search','ai-qa','sentence-editor'],'tools group contains dictionary and AI tutor');assert.equal(await groups.nth(1).locator('[data-studio-go]').count(),2,'mode choices belong inside Luyện & Ôn');
  assert.deepEqual(await groups.locator(':scope>summary').allTextContents(),['Học tập HSK','Ôn luyện','Giải trí','Công cụ','Luyện thi HSK']);
  await groups.evaluateAll(ns=>ns.forEach(n=>n.open=false));await groups.nth(0).locator('summary').click();
- await groups.nth(0).locator('[data-studio-go="learn"]').click();assert(await page.locator('#learnPanel').isVisible());
+ assert.equal(await groups.nth(0).getAttribute('open'),null,'expanded sidebar summary opens side flyout without inline toggle');
+ await page.locator('.nav-flyout-side').first().waitFor({state:'visible'});
+ await page.locator('.nav-flyout-side').first().locator('[data-studio-go="learn"]').click();assert(await page.locator('#learnPanel').isVisible());
  for(const [route,selector] of [['lessons','#lessonsPanel'],['notebook','#notebookPanel'],['practice','#studioPractice'],['exam','[data-studio-hub-panel=exam]'],['study4','#study4PracticePanel'],['real-reading','#realReadingPanel']]){
  const btn=page.locator('.side-nav [data-studio-go="'+route+'"]').first();await btn.evaluate(n=>n.closest('details').open=true);await btn.click();assert(await page.locator(selector).isVisible(),route);assert.equal(await btn.getAttribute('aria-current'),'page');
  }

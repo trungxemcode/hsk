@@ -1,5 +1,5 @@
 {
-  "request": "PR #421: tinh chỉnh hiệu ứng hover, trạng thái active, chuyển động flyout và accordion sidebar chung. Chỉ hai vùng header và sidebar được phép thay đổi, bảo vệ mọi nội dung route trên desktop/mobile, sáng/tối.",
+  "request": "PR #422: unified desktop sidebar flyouts, topbar hover glide and accessible navigation focus. Only shared header and sidebar regions change; all route content including Lessons dark card remains protected.",
   "excludedRoutes": [],
   "sharedHeaderOnly": true,
   "sharedSidebarOnly": true
