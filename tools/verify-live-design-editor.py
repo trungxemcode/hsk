@@ -8,6 +8,13 @@ import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
 URL = 'https://hsk-ui-designer.trung-hsk668.workers.dev'
+TEXT_ASSET_EXTENSIONS = frozenset({'.js', '.css', '.html', '.json', '.txt', '.md', '.svg', '.mjs', '.cjs'})
+
+def _normalize_asset_bytes(path, data):
+    """Normalize CRLF to LF for text assets so Windows checkouts match LF deploys."""
+    if path.suffix.lower() in TEXT_ASSET_EXTENSIONS:
+        return data.replace(b'\r\n', b'\n')
+    return data
 
 def verify(fetch):
     release = json.loads((ROOT / 'app-version.json').read_text())['release']
@@ -18,7 +25,9 @@ def verify(fetch):
     assets.append(ROOT / 'app-version.json')
     for path in assets:
         name = '/' + path.relative_to(ROOT).as_posix()
-        if hashlib.sha256(fetch(name)).digest() != hashlib.sha256(path.read_bytes()).digest():
+        live_bytes = _normalize_asset_bytes(path, fetch(name))
+        local_bytes = _normalize_asset_bytes(path, path.read_bytes())
+        if hashlib.sha256(live_bytes).digest() != hashlib.sha256(local_bytes).digest():
             raise ValueError('Live asset differs: ' + name)
     return release, len(assets)
 
