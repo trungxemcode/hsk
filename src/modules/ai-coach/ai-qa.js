@@ -200,51 +200,27 @@
   renderItalicsAndText(body,text.slice(offset));
  }
  function add(role,text,meta=null,scroll=true){const row=document.createElement('article');row.className=`ai-qa-message ${role}`;if(meta?.aiMessageId)row.dataset.aiMessageId=meta.aiMessageId;const who=document.createElement('strong');who.textContent=role==='user'?'Bạn':'Gia sư AI';const body=document.createElement('p');if(role==='assistant')renderAssistantText(body,text);else body.textContent=text;row.append(who,body);if(role==='user'&&meta?.attachmentName){const name=document.createElement('small');name.className='qa-chat-sent-file';name.textContent='Tệp: '+meta.attachmentName;row.append(name);}if(role==='assistant'&&meta){const actions=document.createElement('div');actions.className='ai-qa-feedback';for(const [id,label] of [['not_understood','Chưa hiểu'],['another_example','Ví dụ khác'],...(meta.optionalMicroCheck?[['try_micro_check','Thử 1 câu nhanh']]:[]),['report_suspect_answer','Có vẻ sai']]){const button=document.createElement('button');button.type='button';button.dataset.qaAction=id;button.dataset.targetAiMessageId=meta.aiMessageId||'';button.textContent=label;actions.append(button);}row.append(actions);const suggestions=window.HSKQaIntentRouter?.normalizeSuggestedQuestions?.(meta.suggestedQuestions||[],meta.aiMessageId)||[];if(suggestions.length&&meta.aiMessageId===activeSuggestionMessageId){const group=document.createElement('div');group.className='qa-suggestions-group';const caption=document.createElement('div');caption.className='qa-suggestions-caption';caption.textContent='Hỏi tiếp về phần này:';const stack=document.createElement('div');stack.className='qa-suggestions-stack';for(const sug of suggestions){const button=document.createElement('button');button.type='button';button.className='qa-suggestion-row-btn';button.dataset.qaSuggestionId=sug.id;button.dataset.targetAiMessageId=sug.targetAiMessageId;button.textContent=sug.text;stack.append(button);}group.append(caption,stack);row.append(group);}}messages.append(row);if(scroll)scrollToLatest();}
- let thinkingTimer=null,thinkingStartedAt=0,thinkingCardEl=null;
  const THINKING_STEPS=[
   {at:0,pct:24,text:'Phân tích câu hỏi & mục tiêu HSK của bạn'},
   {at:1.4,pct:52,text:'Tra cứu từ vựng, chữ Hán, phiên âm & ngữ pháp'},
   {at:3.2,pct:78,text:'Đối chiếu lịch sử học tập & chọn ví dụ sát ngữ cảnh'},
   {at:5.5,pct:94,text:'Tổng hợp lời giải tiếng Việt rõ ràng'}
  ];
- function stopThinkingIndicator(){
-  if(thinkingTimer){clearInterval(thinkingTimer);thinkingTimer=null;}
-  if(thinkingCardEl){thinkingCardEl.remove();thinkingCardEl=null;}
-  messages.querySelectorAll('.ai-qa-thinking-card').forEach(el=>el.remove());
- }
- function startThinkingIndicator(modelLabel=''){
-  stopThinkingIndicator();
-  thinkingStartedAt=Date.now();
-  const card=document.createElement('div');
-  card.className='ai-qa-thinking-card';
-  card.setAttribute('role','status');
-  card.setAttribute('aria-live','polite');
-  const badgeText=modelLabel?`<span class="ai-qa-thinking-badge">${modelLabel.replace(/[<>&]/g,'')}</span>`:'';
-  card.innerHTML=`<div class="ai-qa-thinking-head"><span class="ai-qa-thinking-orb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.2 6.3 6.3 2.2-6.3 2.2L12 19.5l-2.2-6.3-6.3-2.2 6.3-2.2L12 2.5z"/></svg></span><div class="ai-qa-thinking-title"><strong>Gia sư AI đang suy luận</strong>${badgeText}<span class="ai-qa-thinking-dots" aria-hidden="true"><i></i><i></i><i></i></span></div><span class="ai-qa-thinking-timer">0.1s</span></div><div class="ai-qa-thinking-bar" aria-hidden="true"><span class="ai-qa-thinking-bar-fill" style="width:18%"></span></div><div class="ai-qa-thinking-steps">${THINKING_STEPS.map((step,idx)=>`<div class="ai-qa-thinking-step" data-step="${idx}" data-state="${idx===0?'active':'pending'}"><span class="ai-qa-thinking-step-dot" aria-hidden="true"></span><span class="ai-qa-thinking-step-text">${step.text}</span></div>`).join('')}</div><div class="ai-qa-thinking-skeleton" aria-hidden="true"><span></span><span></span></div>`;
-  thinkingCardEl=card;
-  messages.append(card);
-  scrollToLatest();
-  const timerEl=card.querySelector('.ai-qa-thinking-timer');
-  const barFill=card.querySelector('.ai-qa-thinking-bar-fill');
-  const stepEls=[...card.querySelectorAll('.ai-qa-thinking-step')];
-  thinkingTimer=setInterval(()=>{
-   if(!card.isConnected){stopThinkingIndicator();return;}
-   const elapsed=Math.max(0.1,(Date.now()-thinkingStartedAt)/1000);
-   if(timerEl)timerEl.textContent=`${elapsed.toFixed(1)}s`;
-   let activeIdx=0;
-   for(let i=0;i<THINKING_STEPS.length;i++)if(elapsed>=THINKING_STEPS[i].at)activeIdx=i;
-   stepEls.forEach((el,i)=>{el.dataset.state=i<activeIdx?'done':i===activeIdx?'active':'pending';});
-   const basePct=THINKING_STEPS[activeIdx].pct;
-   const extra=activeIdx===THINKING_STEPS.length-1?Math.min(4,(elapsed-THINKING_STEPS[activeIdx].at)*0.4):0;
-   if(barFill)barFill.style.width=`${Math.min(98,Math.round(basePct+extra))}%`;
-   status.textContent=`Gia sư AI đang suy nghĩ · ${THINKING_STEPS[activeIdx].text} (${elapsed.toFixed(1)}s)`;
-  },150);
- }
+ const thinkingIndicator=window.HSKAIQACore.createThinkingIndicator({
+  container:messages,
+  steps:THINKING_STEPS,
+  extraRate:0.4,
+  insertCard:card=>{messages.append(card);scrollToLatest();},
+  onTick:(elapsed,_idx,step)=>{status.textContent=`Gia sư AI đang suy nghĩ · ${step.text} (${elapsed.toFixed(1)}s)`;}
+ });
+ function stopThinkingIndicator(){thinkingIndicator.stop();}
+ function startThinkingIndicator(modelLabel=''){thinkingIndicator.start(modelLabel);}
  function renderHistory({keepThinking=false}={}){
   if(!keepThinking)stopThinkingIndicator();
   messages.replaceChildren();
   aiMessageRegistry=new Map();for(const item of history){if(item.role==='assistant'&&item.meta?.aiMessageId)aiMessageRegistry.set(item.meta.aiMessageId,{aiMessageId:item.meta.aiMessageId,parentUserMessageId:item.meta.parentUserMessageId,originalQuestionText:item.meta.originalQuestionText,aiAnswerText:item.text,primaryNodeKey:item.meta.primaryNodeKey,nodeLabel:item.meta.nodeLabel,explanationStrategyUsed:item.meta.explanationStrategyUsed,coreRuleSummary:item.meta.coreRuleSummary,optionalMicroCheck:item.meta.optionalMicroCheck,suggestedQuestions:item.meta.suggestedQuestions||[]});add(item.role,item.text,item.meta,false);}
-  if(thinkingCardEl)messages.append(thinkingCardEl);
+  const activeThinkingCard=thinkingIndicator.getCard();
+  if(activeThinkingCard)messages.append(activeThinkingCard);
   empty.hidden=history.length>0;
   scrollToLatest();
  }

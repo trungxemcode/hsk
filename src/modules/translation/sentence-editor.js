@@ -26,8 +26,6 @@
   let pending = null;
   let waitStarted = 0;
   let waitPhase = 'Đang kết nối';
-  let thinkingTimer = null;
-  let thinkingCardEl = null;
 
   const THINKING_STEPS = [
     { at: 0, pct: 24, text: 'Phân tích câu hỏi & mục tiêu HSK của bạn' },
@@ -62,56 +60,28 @@
     waitLabel.textContent = waitPhase + ' · ' + seconds + ' giây' + (stepText ? ' · ' + stepText : '');
   }
 
+  const thinkingIndicator = window.HSKAIQACore.createThinkingIndicator({
+    container: panel,
+    steps: THINKING_STEPS,
+    extraRate: 0.25,
+    insertCard: card => status.before(card),
+    onStart: () => {
+      if (status) status.hidden = true;
+      if (help) help.hidden = true;
+    },
+    onStop: () => {
+      if (status) status.hidden = false;
+      if (help) help.hidden = false;
+    },
+    onTick: (elapsed, activeIdx) => renderWait(elapsed, activeIdx)
+  });
+
   function stopThinkingIndicator() {
-    if (thinkingTimer) {
-      clearInterval(thinkingTimer);
-      thinkingTimer = null;
-    }
-    if (thinkingCardEl) {
-      thinkingCardEl.remove();
-      thinkingCardEl = null;
-    }
-    panel.querySelectorAll('.ai-qa-thinking-card').forEach(el => el.remove());
-    if (status) status.hidden = false;
-    if (help) help.hidden = false;
+    thinkingIndicator.stop();
   }
 
   function startThinkingIndicator(modelLabel = '') {
-    stopThinkingIndicator();
-    if (status) status.hidden = true;
-    if (help) help.hidden = true;
-    const card = document.createElement('div');
-    card.className = 'ai-qa-thinking-card';
-    card.setAttribute('role', 'status');
-    card.setAttribute('aria-live', 'polite');
-    const badgeText = modelLabel ? `<span class="ai-qa-thinking-badge">${modelLabel.replace(/[<>&]/g, '')}</span>` : '';
-    card.innerHTML = `<div class="ai-qa-thinking-head"><span class="ai-qa-thinking-orb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.2 6.3 6.3 2.2-6.3 2.2L12 19.5l-2.2-6.3-6.3-2.2 6.3-2.2L12 2.5z"/></svg></span><div class="ai-qa-thinking-title"><strong>Gia sư AI đang suy luận</strong>${badgeText}<span class="ai-qa-thinking-dots" aria-hidden="true"><i></i><i></i><i></i></span></div><span class="ai-qa-thinking-timer">0.1s</span></div><div class="ai-qa-thinking-bar" aria-hidden="true"><span class="ai-qa-thinking-bar-fill" style="width:18%"></span></div><div class="ai-qa-thinking-steps">${THINKING_STEPS.map((step, idx) => `<div class="ai-qa-thinking-step" data-step="${idx}" data-state="${idx === 0 ? 'active' : 'pending'}"><span class="ai-qa-thinking-step-dot" aria-hidden="true"></span><span class="ai-qa-thinking-step-text">${step.text}</span></div>`).join('')}</div><div class="ai-qa-thinking-skeleton" aria-hidden="true"><span></span><span></span></div>`;
-    thinkingCardEl = card;
-    status.before(card);
-
-    const timerEl = card.querySelector('.ai-qa-thinking-timer');
-    const barFill = card.querySelector('.ai-qa-thinking-bar-fill');
-    const stepEls = [...card.querySelectorAll('.ai-qa-thinking-step')];
-
-    thinkingTimer = setInterval(() => {
-      if (!card.isConnected) {
-        stopThinkingIndicator();
-        return;
-      }
-      const elapsed = Math.max(0.1, (performance.now() - waitStarted) / 1000);
-      if (timerEl) timerEl.textContent = `${elapsed.toFixed(1)}s`;
-      let activeIdx = 0;
-      for (let i = 0; i < THINKING_STEPS.length; i++) {
-        if (elapsed >= THINKING_STEPS[i].at) activeIdx = i;
-      }
-      stepEls.forEach((el, i) => {
-        el.dataset.state = i < activeIdx ? 'done' : i === activeIdx ? 'active' : 'pending';
-      });
-      const basePct = THINKING_STEPS[activeIdx].pct;
-      const extra = activeIdx === THINKING_STEPS.length - 1 ? Math.min(4, (elapsed - THINKING_STEPS[activeIdx].at) * 0.25) : 0;
-      if (barFill) barFill.style.width = `${Math.min(98, Math.round(basePct + extra))}%`;
-      renderWait(elapsed, activeIdx);
-    }, 150);
+    thinkingIndicator.start(modelLabel);
   }
 
   let composing = false;

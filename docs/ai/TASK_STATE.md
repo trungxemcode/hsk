@@ -1,4 +1,21 @@
-# Current task: Pha 1 — Hợp nhất fallback Sửa câu & chuẩn hóa URL /models trên Worker (2026-11-13)
+# Current task: Pha 2 — Dọn dẹp frontend AI (`personal-ai-settings.js` & thinking indicator) (2026-11-13)
+
+Nhánh: `refactor/frontend-ai-settings-and-loading` (tách từ `main` tại `94d010c`, chuẩn bị bản `4.4.43`).
+
+Thay đổi đã thực hiện:
+1. **Hợp nhất helper gọi `/personal-ai-settings` trong `src/modules/account/personal-ai-settings.js`:**
+   - Gộp logic nạp `./translation-config.json`, lấy `user.getIdToken()`, kiểm tra `https:`, gọi `POST /personal-ai-settings`, xử lý `404` và parse JSON vào `callPersonalAiSettings(op, settings, user, { checkAbort })`.
+   - Dùng chung cho cả `fetchSupportedModels` (`op: 'models'`) và `request` (`read/save/remove`), giữ nguyên `requestId` race guard và `lock(true/false)`.
+2. **Hợp nhất vòng đời thinking indicator trong `src/modules/ai-coach/ai-qa-core.js`, `ai-qa.js`, `sentence-editor.js`:**
+   - Thêm `HSKAIQACore.createThinkingIndicator({ container, insertCard, steps, extraRate, onStart, onTick, onStop })` trong `ai-qa-core.js`.
+   - `ai-qa.js` và `sentence-editor.js` dùng chung helper này thay cho 2 bản sao `startThinkingIndicator` / `stopThinkingIndicator` riêng biệt, giữ nguyên bước suy luận, aria-live, timer và hành vi DOM từng màn hình.
+3. **Kiểm thử & PWA:**
+   - `node --test server/ai-qa-core.test.mjs server/personal-ai.test.mjs`: 20/20 pass.
+   - `check-ai-loading-ui.cjs` (390 & 1440), `check-sentence-checker.cjs`, `check-ai-qa-ui.cjs` (390 & 1440), `check-feature-runtime.cjs` (390 & 1440): PASS.
+   - `check-feature-preservation.py --base origin/main` (98 capabilities; 447 guards): PASS.
+   - `prepare-pwa-release.py` + `check-pwa-release.py --base origin/main`: PASS (`4.4.43`, 215 assets).
+
+# Previous task (merged PR #406): Pha 1 — Hợp nhất fallback Sửa câu & chuẩn hóa URL /models trên Worker (2026-11-13)
 
 Nhánh: `refactor/worker-sentence-fallback-and-models` (tách từ `main` tại `dd4ffbe`, bản `4.4.42`).
 

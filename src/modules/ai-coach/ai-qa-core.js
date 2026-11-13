@@ -293,5 +293,47 @@
   if(res&&typeof res.answer==='string'&&res.answer.trim())return res.answer.trim();
   return trimmed.replace(/<\/?escape>/gi,'').trim();
  }
- const api={MASTERY_BOUNDARY,containsChinese,tokenizeMixedZhVi,chunkDocumentText,bm25RetrieveChunks,validateQaInput,validateProjectDocument,wrapSandwichPrompt,aggregateAdaptiveStats,masteryBoundary,buildLearningSnapshot,cleanWrapperTags,unwrapAiQaPayload,unwrapAiQaText};root.HSKAIQACore=api;if(typeof module==='object'&&module.exports)module.exports=api;
+ function createThinkingIndicator({container,insertCard,steps=[],extraRate=0.4,onStart,onTick,onStop}={}){
+  let timer=null,startedAt=0,cardEl=null;
+  function stop(){
+   if(timer){clearInterval(timer);timer=null;}
+   if(cardEl){cardEl.remove();cardEl=null;}
+   if(container)container.querySelectorAll('.ai-qa-thinking-card').forEach(el=>el.remove());
+   onStop?.();
+  }
+  function start(modelLabel=''){
+   stop();
+   onStart?.();
+   startedAt=Date.now();
+   const card=document.createElement('div');
+   card.className='ai-qa-thinking-card';
+   card.setAttribute('role','status');
+   card.setAttribute('aria-live','polite');
+   const badgeText=modelLabel?`<span class="ai-qa-thinking-badge">${String(modelLabel).replace(/[<>&]/g,'')}</span>`:'';
+   card.innerHTML=`<div class="ai-qa-thinking-head"><span class="ai-qa-thinking-orb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.2 6.3 6.3 2.2-6.3 2.2L12 19.5l-2.2-6.3-6.3-2.2 6.3-2.2L12 2.5z"/></svg></span><div class="ai-qa-thinking-title"><strong>Gia sư AI đang suy luận</strong>${badgeText}<span class="ai-qa-thinking-dots" aria-hidden="true"><i></i><i></i><i></i></span></div><span class="ai-qa-thinking-timer">0.1s</span></div><div class="ai-qa-thinking-bar" aria-hidden="true"><span class="ai-qa-thinking-bar-fill" style="width:18%"></span></div><div class="ai-qa-thinking-steps">${steps.map((step,idx)=>`<div class="ai-qa-thinking-step" data-step="${idx}" data-state="${idx===0?'active':'pending'}"><span class="ai-qa-thinking-step-dot" aria-hidden="true"></span><span class="ai-qa-thinking-step-text">${step.text}</span></div>`).join('')}</div><div class="ai-qa-thinking-skeleton" aria-hidden="true"><span></span><span></span></div>`;
+   cardEl=card;
+   if(typeof insertCard==='function')insertCard(card);
+   else if(container)container.append(card);
+   const timerEl=card.querySelector('.ai-qa-thinking-timer');
+   const barFill=card.querySelector('.ai-qa-thinking-bar-fill');
+   const stepEls=[...card.querySelectorAll('.ai-qa-thinking-step')];
+   timer=setInterval(()=>{
+    if(!card.isConnected){stop();return;}
+    const elapsed=Math.max(0.1,(Date.now()-startedAt)/1000);
+    if(timerEl)timerEl.textContent=`${elapsed.toFixed(1)}s`;
+    let activeIdx=0;
+    for(let i=0;i<steps.length;i++)if(elapsed>=steps[i].at)activeIdx=i;
+    stepEls.forEach((el,i)=>{el.dataset.state=i<activeIdx?'done':i===activeIdx?'active':'pending';});
+    if(steps.length){
+     const basePct=steps[activeIdx].pct;
+     const extra=activeIdx===steps.length-1?Math.min(4,(elapsed-steps[activeIdx].at)*extraRate):0;
+     if(barFill)barFill.style.width=`${Math.min(98,Math.round(basePct+extra))}%`;
+    }
+    onTick?.(elapsed,activeIdx,steps[activeIdx]);
+   },150);
+   return card;
+  }
+  return {start,stop,getCard:()=>cardEl};
+ }
+ const api={MASTERY_BOUNDARY,containsChinese,tokenizeMixedZhVi,chunkDocumentText,bm25RetrieveChunks,validateQaInput,validateProjectDocument,wrapSandwichPrompt,aggregateAdaptiveStats,masteryBoundary,buildLearningSnapshot,cleanWrapperTags,unwrapAiQaPayload,unwrapAiQaText,createThinkingIndicator};root.HSKAIQACore=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window==='object'?window:globalThis);
