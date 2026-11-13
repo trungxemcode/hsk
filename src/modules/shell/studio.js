@@ -66,7 +66,7 @@ renderIcons();
   if(savedCollapsed)setSidebarCollapsed(true);
   sidebarToggle.addEventListener('click',()=>setSidebarCollapsed(!appShell?.classList.contains('sidebar-collapsed'),{animate:true}));
  }
- document.querySelectorAll('.side-nav button[data-studio-go],.side-nav .nav-group>summary').forEach(el=>{if(!el.title&&el.getAttribute('aria-label'))el.title=el.getAttribute('aria-label');});
+ document.querySelectorAll('.side-nav button[data-studio-go]').forEach(el=>{if(!el.title&&el.getAttribute('aria-label'))el.title=el.getAttribute('aria-label');});
  const themeButton=document.createElement('button');themeButton.type='button';themeButton.id='themeToggle';themeButton.className='theme-button';document.querySelector('.topbar-actions').prepend(themeButton);
  function setTheme(mode){document.documentElement.dataset.theme=mode;const dark=mode==='dark';themeButton.setAttribute('aria-pressed',String(dark));themeButton.setAttribute('aria-label',dark?'Bật chế độ sáng':'Bật chế độ tối');themeButton.title=dark?'Chế độ sáng':'Chế độ tối';themeButton.innerHTML=dark?'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>';const surface=getComputedStyle(document.documentElement).getPropertyValue('--paper').trim();if(surface)document.querySelectorAll('meta[name="theme-color"]').forEach(m=>m.content=surface);}
  setTheme(document.documentElement.dataset.theme==='dark'?'dark':'light');themeButton.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';setTheme(next);try{localStorage.setItem('hsk-theme-v1',next);}catch{}});window.addEventListener('storage',e=>{if(e.key==='hsk-theme-v1')setTheme(e.newValue==='dark'?'dark':'light');});
@@ -166,7 +166,8 @@ renderIcons();
    place:()=>{
     const r=trigger.getBoundingClientRect(),w=Math.min(280,window.innerWidth-24);
     topFlyout.style.width=w+'px';
-    topFlyout.style.left=Math.max(12,Math.min(window.innerWidth-w-12,r.left))+'px';
+    const centerLeft=r.left+r.width/2-w/2;
+    topFlyout.style.left=Math.max(12,Math.min(window.innerWidth-w-12,centerLeft))+'px';
     topFlyout.style.top=(r.bottom+8)+'px';
    }
   });
@@ -177,11 +178,11 @@ renderIcons();
    anchor:summary,trigger:summary,flyout:sideFlyout,
    canOpen:()=>Boolean(appShell?.classList.contains('sidebar-collapsed'))&&window.innerWidth>=971,
    place:()=>{
-    const r=summary.getBoundingClientRect(),w=244;
+    const r=summary.getBoundingClientRect(),w=244,h=sideFlyout.offsetHeight||140;
     sideFlyout.style.width=w+'px';
     sideFlyout.style.left=(r.right+12)+'px';
-    const maxTop=Math.max(12,window.innerHeight-sideFlyout.offsetHeight-12);
-    sideFlyout.style.top=Math.max(12,Math.min(maxTop,r.top-4))+'px';
+    const centerTop=r.top+r.height/2-h/2;
+    sideFlyout.style.top=Math.max(12,Math.min(window.innerHeight-h-12,centerTop))+'px';
    }
   });
  }
