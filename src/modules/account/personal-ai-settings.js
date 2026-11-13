@@ -181,24 +181,11 @@
    if(!models){
     const user=account();
     if(!user?.uid)throw Error('Hãy đăng nhập để tải danh sách model.');
-    const config=await fetch('./translation-config.json',{cache:'no-store'}).then(r=>r.json());
-    const token=await user.getIdToken();
-    const endpoint=new URL('/personal-ai-settings',config.endpoint);
-    const response=await fetch(endpoint,{
-     method:'POST',
-     headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
-     body:JSON.stringify({
-      op:'models',
-      settings:{
-       provider:prov,
-       ...(endpointVal?{endpoint:endpointVal}:{}),
-       ...(keyVal?{apiKey:keyVal}:{})
-      }
-     }),
-     cache:'no-store'
-    });
-    const data=await response.json().catch(()=>null);
-    if(!response.ok)throw Error(data?.error||'Chưa lấy được danh sách model.');
+    const data=await callPersonalAiSettings('models',{
+     provider:prov,
+     ...(endpointVal?{endpoint:endpointVal}:{}),
+     ...(keyVal?{apiKey:keyVal}:{})
+    },user);
     if(Array.isArray(data?.models))models=data.models;
    }
 
@@ -243,6 +230,24 @@
   for(const field of form.elements)field.disabled=value;
   describe();
  }
+ async function callPersonalAiSettings(op,settings,user,{checkAbort}={}){
+  const config=await fetch('./translation-config.json',{cache:'no-store'}).then(r=>r.json());
+  const token=await user.getIdToken();
+  checkAbort?.();
+  const endpoint=new URL('/personal-ai-settings',config.endpoint);
+  if(endpoint.protocol!=='https:')throw Error('Máy chủ API chưa được cấu hình.');
+  const response=await fetch(endpoint,{
+   method:'POST',
+   headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
+   body:JSON.stringify({op,settings}),
+   cache:'no-store'
+  });
+  if(response.status===404)throw Error('Máy chủ Hỏi đáp AI chưa cập nhật chức năng API riêng. Hãy thử lại sau.');
+  const data=await response.json().catch(()=>null);
+  checkAbort?.();
+  if(!response.ok)throw Error(data?.error||(op==='models'?'Chưa lấy được danh sách model.':'Chưa lưu được cài đặt API.'));
+  return data;
+ }
  async function request(op,settings){
   if(busy)return;
   const user=account();
@@ -250,27 +255,24 @@
   const id=++requestId;
   lock(true);status.textContent='Đang xử lý…';
   try{
-   const config=await fetch('./translation-config.json',{cache:'no-store'}).then(r=>r.json());
-   const token=await user.getIdToken();
-   if(id!==requestId||account()?.uid!==user.uid)return;
-   const endpoint=new URL('/personal-ai-settings',config.endpoint);
-   if(endpoint.protocol!=='https:')throw Error('Máy chủ API chưa được cấu hình.');
-   const response=await fetch(endpoint,{
-    method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
-    body:JSON.stringify({op,settings}),cache:'no-store'
+   const data=await callPersonalAiSettings(op,settings,user,{
+    checkAbort:()=>{
+     if(id!==requestId||account()?.uid!==user.uid){
+      const err=new Error('aborted');
+      err.isAborted=true;
+      throw err;
+     }
+    }
    });
-   if(response.status===404)throw Error('Máy chủ Hỏi đáp AI chưa cập nhật chức năng API riêng. Hãy thử lại sau.');
-   const data=await response.json();
-   if(id!==requestId||account()?.uid!==user.uid)return;
-   if(!response.ok)throw Error(data.error||'Chưa lưu được cài đặt API.');
    apply(data);
    if(stored&&op==='save'){
     stored.providers=stored.providers||{};
     stored.providers[data.provider]={...data};
    }
    window.HSKAiProviderPicker?.syncPersonal?.(user.uid,data,op==='remove'?{remove:true,provider:settings?.provider}:settings);
-  }catch(error){if(id===requestId)status.textContent=error.message||'Chưa kết nối được máy chủ.';}
-  finally{if(id===requestId)lock(false);}
+  }catch(error){
+   if(!error?.isAborted&&id===requestId)status.textContent=error.message||'Chưa kết nối được máy chủ.';
+  }finally{if(id===requestId)lock(false);}
  }
  provider.onchange=()=>{
   const currentProv=getProvData(provider.value);
