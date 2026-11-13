@@ -10,7 +10,10 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
     await p.evaluate(r=>HSKStudio.navigate(r),route);await p.waitForTimeout(60);
     const headers=p.locator('summary:visible'),seen=new Set();for(let i=0;i<await headers.count();i++){
      const n=headers.nth(i),kind=await n.evaluate(n=>n.parentElement.className+'|'+n.className);if(seen.has(kind))continue;seen.add(kind); // One of each header type; repeated vocabulary rows share the same styles.
-     await n.evaluate(n=>n.parentElement.open=false);await n.scrollIntoViewIfNeeded();await n.focus();await p.waitForTimeout(180);
+     await n.evaluate(n=>n.parentElement.open=false);await n.scrollIntoViewIfNeeded();await n.focus();
+     // Wait for the existing 200ms pressed-state transition to finish before checking its EXACT color.
+     // This does not relax the color or contrast assertions: wrong final styles still fail.
+     await p.waitForFunction(n=>{const s=getComputedStyle(n);return /^rgba?\(105, 87, 231(?:, 1)?\)$/.test(s.backgroundColor)&&s.color==='rgb(255, 255, 255)';},await n.elementHandle(),{timeout:2500});
      const info=await n.evaluate(n=>{const d=n.parentElement,a=n.getBoundingClientRect(),b=d.getBoundingClientRect(),s=getComputedStyle(n),t=getComputedStyle(d),framed=parseFloat(t.borderTopLeftRadius)>0||['Top','Right','Bottom','Left'].every(edge=>parseFloat(t['border'+edge+'Width'])>0);return {name:n.textContent.trim().slice(0,35),framed,dx:a.left-b.left,dy:a.top-b.top,right:b.right-a.right,bottom:b.bottom-a.bottom,radius:parseFloat(s.borderTopLeftRadius),frameRadius:parseFloat(t.borderTopLeftRadius),padding:[s.paddingLeft,s.paddingRight].map(parseFloat),bg:s.backgroundColor,color:s.color};});
      const persistentOpen=await n.evaluate(n=>n.parentElement.open);const label=JSON.stringify({size,route,theme,...info});assert.ok(info.padding.every(x=>x>=8),label+' text inset');assert.match(info.bg,/^rgba?\(105, 87, 231(?:, 1)?\)$/,label+' pressed color');assert.equal(info.color,'rgb(255, 255, 255)',label+' contrast');
      if(info.framed){for(const gap of [info.dx,info.dy,info.right,...(persistentOpen?[]:[info.bottom])])assert.ok(Math.abs(gap)<=2,label+' header must fill frame');assert.ok(Math.abs(info.radius-info.frameRadius)<=1,label+' matching corners');}
