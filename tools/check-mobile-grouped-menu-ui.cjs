@@ -9,7 +9,9 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  const root=width<721?'#drawer .drawer-route-nav':'.side-nav';
  async function enter(route){
   await page.evaluate(()=>HSKStudio.navigate('home'));if(width<721)await page.locator('#menuBtn').click();
-  const b=page.locator(root+' [data-studio-go="'+route+'"]');const d=b.locator('xpath=ancestor::details[1]');if(await d.getAttribute('open')===null)await d.locator('summary').click();await b.click();
+  const b=page.locator(root+' [data-studio-go="'+route+'"]');const d=b.locator('xpath=ancestor::details[1]');
+  if(width<721){if(await d.getAttribute('open')===null)await d.locator('summary').click();await b.click();}
+  else{await d.locator('summary').click();const fly=page.locator('.nav-flyout-side:not([hidden])');await fly.waitFor({state:'visible'});await fly.locator('[data-studio-go="'+route+'"]').click();}
   assert.equal(await b.getAttribute('aria-current'),'page',route+' parent selected');if(width<721)assert.equal(await page.locator('#drawer').getAttribute('aria-hidden'),'true');
  }
  for(const [route,id] of [['lessons','lessonsPanel'],['learn','learnPanel'],['practice','studioPractice'],['notebook','notebookPanel'],['real-reading','realReadingPanel'],['search','searchPanel'],['exam','examPractice'],['study4','study4PracticePanel']]){
