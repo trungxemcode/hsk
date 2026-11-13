@@ -28,6 +28,13 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  await page.locator('.side-nav [data-studio-go="home"]').click();
  for(const theme of ['light','dark']){await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;document.querySelectorAll('.side-nav details').forEach(n=>n.open=true);},theme);assert.equal(await page.locator('.nav-group-items button').evaluateAll(ns=>ns.some(n=>n.scrollWidth>n.clientWidth+1)),false);await page.screenshot({path:'/tmp/grouped-nav-'+width+'-'+theme+'.png',fullPage:true});}
  await groups.nth(0).locator('summary').focus();await page.keyboard.press('Enter');assert.equal(await groups.nth(0).getAttribute('open'),null);
+ const sidebarToggle=page.locator('#sidebarToggle'),sidebar=page.locator('aside.sidebar');
+ await sidebarToggle.click();
+ assert.equal(await sidebarToggle.getAttribute('aria-expanded'),'false');
+ await page.waitForFunction(()=>Math.round(document.querySelector('aside.sidebar').getBoundingClientRect().width)===74);
+ await sidebarToggle.click();
+ assert.equal(await sidebarToggle.getAttribute('aria-expanded'),'true');
+ await page.waitForFunction(()=>Math.round(document.querySelector('aside.sidebar').getBoundingClientRect().width)>=220);
  }else assert(await page.locator('#menuBtn').isVisible());
  await require('./profile-account-fixture.cjs')(page,width);await page.close();}console.log('PASS grouped navigation: five disclosures, direct routes, flashcards, keyboard, mobile unchanged');}finally{await browser.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
