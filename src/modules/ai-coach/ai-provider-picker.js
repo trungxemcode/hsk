@@ -397,7 +397,7 @@
     button.append(label);button.insertAdjacentHTML('beforeend',CARET);
     const menu=document.createElement('div');menu.className='qa-effort-popover';menu.setAttribute('role','dialog');menu.hidden=true;menu.setAttribute('aria-label','Chọn mức độ mạnh hoặc model');
     wrap.append(button,menu);control.before(wrap);
-    let view='slider';
+    let view='slider',isDragging=false;
     function getOpts(){return Array.from(control.options||[]);}
     function place(){
       const r=button.getBoundingClientRect(),width=Math.min(280,window.innerWidth-24);
@@ -451,23 +451,75 @@
         (menu.querySelector('[aria-checked="true"]')||menu.querySelector('.qa-effort-model-item'))?.focus();
       });
       const sliderWrap=document.createElement('div');sliderWrap.className='qa-effort-slider-wrap';
-      sliderWrap.style.setProperty('--qa-effort-pct',`${pct}%`);
+      sliderWrap.setAttribute('role','slider');
+      sliderWrap.tabIndex=control.disabled?-1:0;
+      sliderWrap.setAttribute('aria-label',control.getAttribute('aria-label')||'Chọn mức độ mạnh của model');
+      sliderWrap.setAttribute('aria-valuemin','0');
+      sliderWrap.setAttribute('aria-valuemax',String(Math.max(0,opts.length-1)));
+      sliderWrap.setAttribute('aria-valuenow',String(activeIdx));
+      sliderWrap.setAttribute('aria-valuetext',activeOpt.textContent);
+      if(control.disabled||opts.length<=1)sliderWrap.setAttribute('aria-disabled','true');
+      const initPos=opts.length>1?activeIdx/maxIdx:1;
+      sliderWrap.style.setProperty('--qa-effort-pos',String(initPos));
+      const track=document.createElement('div');track.className='qa-effort-track';track.setAttribute('aria-hidden','true');
+      const fill=document.createElement('div');fill.className='qa-effort-fill';
+      track.append(fill);
       const dots=document.createElement('div');dots.className='qa-effort-dots';dots.setAttribute('aria-hidden','true');
       const dotCount=Math.max(1,opts.length);
       for(let i=0;i<dotCount;i++){const dot=document.createElement('span');dot.className='qa-effort-dot';if(i<=activeIdx)dot.dataset.active='true';dots.append(dot);}
-      const range=document.createElement('input');range.type='range';range.className='qa-effort-range';
-      range.min='0';range.max=String(Math.max(0,opts.length-1));range.step='1';range.value=String(activeIdx);
-      range.disabled=control.disabled||opts.length<=1;
-      range.setAttribute('aria-label',control.getAttribute('aria-label')||'Chọn mức độ mạnh của model');
-      range.addEventListener('input',()=>{
-        const idx=Number(range.value);
-        const nextPct=opts.length>1?(idx/maxIdx)*100:100;
-        sliderWrap.style.setProperty('--qa-effort-pct',`${nextPct}%`);
-        if(opts[idx])headText.textContent=opts[idx].textContent;
+      const thumb=document.createElement('div');thumb.className='qa-effort-thumb';thumb.setAttribute('aria-hidden','true');
+      let lastIdx=activeIdx;
+      function applyVisual(pos,idx){
+        sliderWrap.style.setProperty('--qa-effort-pos',String(pos));
+        sliderWrap.setAttribute('aria-valuenow',String(idx));
+        if(opts[idx]){
+          sliderWrap.setAttribute('aria-valuetext',opts[idx].textContent);
+          headText.textContent=opts[idx].textContent;
+        }
         dots.querySelectorAll('.qa-effort-dot').forEach((d,i)=>{d.dataset.active=i<=idx?'true':'false';});
-        selectIndex(idx);
+        if(idx!==lastIdx){lastIdx=idx;selectIndex(idx);}
+      }
+      function posFromClientX(clientX){
+        const rect=sliderWrap.getBoundingClientRect(),usable=Math.max(1,rect.width-28);
+        return Math.max(0,Math.min(1,(clientX-rect.left-14)/usable));
+      }
+      sliderWrap.addEventListener('pointerdown',event=>{
+        if(control.disabled||opts.length<=1||event.button!==0)return;
+        event.preventDefault();
+        sliderWrap.focus({preventScroll:true});
+        sliderWrap.setPointerCapture?.(event.pointerId);
+        isDragging=true;
+        sliderWrap.classList.add('is-dragging');
+        const pos=posFromClientX(event.clientX),idx=Math.round(pos*maxIdx);
+        applyVisual(pos,idx);
       });
-      sliderWrap.append(dots,range);
+      sliderWrap.addEventListener('pointermove',event=>{
+        if(!isDragging)return;
+        const pos=posFromClientX(event.clientX),idx=Math.round(pos*maxIdx);
+        applyVisual(pos,idx);
+      });
+      function finishDrag(event){
+        if(!isDragging)return;
+        isDragging=false;
+        sliderWrap.classList.remove('is-dragging');
+        const pos=event.type==='pointerup'?posFromClientX(event.clientX):lastIdx/maxIdx;
+        const idx=Math.round(pos*maxIdx);
+        applyVisual(opts.length>1?idx/maxIdx:1,idx);
+      }
+      sliderWrap.addEventListener('pointerup',finishDrag);
+      sliderWrap.addEventListener('pointercancel',finishDrag);
+      sliderWrap.addEventListener('keydown',event=>{
+        if(control.disabled||opts.length<=1)return;
+        let next=lastIdx;
+        if(event.key==='ArrowRight'||event.key==='ArrowUp')next=Math.min(maxIdx,lastIdx+1);
+        else if(event.key==='ArrowLeft'||event.key==='ArrowDown')next=Math.max(0,lastIdx-1);
+        else if(event.key==='Home')next=0;
+        else if(event.key==='End')next=maxIdx;
+        else return;
+        event.preventDefault();
+        applyVisual(next/maxIdx,next);
+      });
+      sliderWrap.append(track,dots,thumb);
       menu.append(headBtn,sliderWrap);
     }
     function open(){
@@ -479,9 +531,9 @@
       place();
       button.setAttribute('aria-expanded','true');
       openPicker=api;
-      menu.querySelector('.qa-effort-range')?.focus();
+      menu.querySelector('.qa-effort-slider-wrap')?.focus();
     }
-    function close(){menu.hidden=true;button.setAttribute('aria-expanded','false');}
+    function close(){isDragging=false;menu.hidden=true;button.setAttribute('aria-expanded','false');}
     const api={close,render(){
       const opts=getOpts();
       const activeOpt=opts.find(o=>o.value===control.value)||opts[0];
@@ -491,7 +543,7 @@
       const aria=control.getAttribute('aria-label')||'Mức suy nghĩ của AI';
       button.setAttribute('aria-label',`${aria}: ${text}`);
       button.title=control.disabled?'Chỉ khả dụng cho tài khoản VIP hoặc khi dùng API riêng':`${aria}: ${text}`;
-      if(!menu.hidden)renderPopover();
+      if(!menu.hidden&&!isDragging)renderPopover();
     },menu,button};
     button.addEventListener('click',()=>menu.hidden?open():closeAll());
     menu.addEventListener('keydown',event=>{
