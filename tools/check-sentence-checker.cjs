@@ -151,9 +151,40 @@ const server=http.createServer((req,res)=>{
     const detector=editor.locator('#sentenceAiDetector');
     await detector.waitFor({state:'visible'});
     await detector.locator('.sentence-detector-score').filter({hasText:'81% AI · 19% Người'}).waitFor();
+    await detector.locator('.sentence-detector-why-title').filter({hasText:'Vì sao văn bản này giống AI?'}).waitFor();
+    const barWidths=await detector.evaluate(el=>({
+      human:el.querySelector('.sentence-detector-meter-human')?.style.width||'',
+      ai:el.querySelector('.sentence-detector-meter-ai')?.style.width||''
+    }));
+    assert.deepEqual(barWidths,{human:'19%',ai:'81%'});
     await detector.getByRole('button',{name:'Tìm trong bài'}).click();
     const selectedText=await page.evaluate(()=>{const el=document.getElementById('sentenceDraft');return el.value.slice(el.selectionStart,el.selectionEnd);});
     assert.equal(selectedText,'综上所述');
+
+    await page.evaluate(()=>{
+      window.HSKAiProviderPicker.applyAvailability('test-user',{
+        system:{gemini:{available:true},chatgpt:{available:false}},
+        personal:{configured:true,enabled:true,provider:'fosta',model:'gpt-6-luna',providers:{fosta:{configured:true,enabled:true,provider:'fosta',model:'gpt-6-luna'}}}
+      });
+      window.HSKAiProviderPicker.setSelectionFromSelect('personal:fosta');
+    });
+    await effortBtn.waitFor({state:'visible'});
+    assert.ok(!(await effortBtn.isDisabled()));
+    assert.match(await effortBtn.innerText(),/^Luna · /);
+    await effortBtn.click();
+    const sePopover=editor.locator('.sentence-ai-actions .qa-effort-popover');
+    await sePopover.waitFor({state:'visible'});
+    const seSlider=sePopover.locator('.qa-effort-slider-wrap');
+    await seSlider.focus();
+    await page.keyboard.press('End');
+    assert.match(await sePopover.locator('.qa-effort-header-btn').innerText(),/Luna \(gpt-6-luna\)/,'trượt thanh mạnh không được tự đổi sang model khác');
+    assert.equal(await sePopover.locator('.qa-effort-strength-value').innerText(),'Chuyên sâu');
+    await sePopover.locator('.qa-effort-header-btn').click();
+    const modelItems=sePopover.locator('.qa-effort-model-item');
+    assert.equal(await modelItems.count(),3,'danh sách chọn model của Fosta chỉ liệt kê 3 model, không trộn mức mạnh');
+    await modelItems.nth(2).click();
+    assert.equal(await sePopover.isVisible(),false);
+    assert.match(await effortBtn.innerText(),/^Astra · /);
 
     console.log('PASS AI sentence editor: login/offline states, manual requests, stale result rejection, provider, apply/undo and responsive layout');
   }finally{await browser.close();server.close();}

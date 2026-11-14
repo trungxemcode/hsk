@@ -171,4 +171,13 @@ test('normalizeAiDetection validates structured JSON and anchors flaggedSpans cl
   assert.equal(normalized.confidence, 'Cao');
   assert.equal(normalized.flaggedSpans.length, 1);
   assert.equal(text.slice(normalized.flaggedSpans[0].start, normalized.flaggedSpans[0].end), '综上所述');
+
+  const uniformMixed = '我每天早上七点起床学习中文。然后我八点半去学校参加课程。中午十二点我在食堂吃午饭。下午两点我和同学一起复习课文。晚上七点我在图书馆练习写汉字。十点半我回到宿舍准备休息。';
+  const uniformOut = analyzeAiLikelihood(uniformMixed);
+  assert.ok(uniformOut.aiProbability >= 38);
+  assert.ok(uniformOut.signals.some(s => /đồng đều|sách giáo khoa|biên tập/i.test(s)), 'must explain WHY uniform textbook prose resembles AI');
+  assert.ok(uniformOut.flaggedSpans.length >= 1, 'mixed/AI detection should highlight representative uniform sentence even without cliché keywords');
+
+  const sparseAi = normalizeAiDetection(JSON.stringify({aiProbability: 44, signals: ['Một dấu hiệu ngắn.']}), uniformMixed);
+  assert.ok(sparseAi.signals.length >= 2, 'sparse worker signals should be enriched with baseline AI reasons');
 });

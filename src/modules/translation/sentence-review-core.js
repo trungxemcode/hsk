@@ -378,6 +378,12 @@
       weight: 17,
       reason: 'Cụm danh/động từ trừu tượng mật độ cao rất đặc trưng của văn AI tiếng Trung.',
       tip: 'Thay bằng hành động hoặc hệ quả cụ thể trong đời sống hàng ngày.'
+    },
+    {
+      pattern: /(?:不仅[^。！？\n]{2,24}(?:而且|并且|还)|虽然[^。！？\n]{2,24}但是|尽管[^。！？\n]{2,24}(?:但是|然而)|一方面[^。！？\n]{2,30}另一方面)/gu,
+      weight: 10,
+      reason: 'Cấu trúc liên từ đối xứng chặt chẽ kiểu văn mẫu / AI hay dùng để cân bằng ý.',
+      tip: 'Ngắt thành câu ngắn tự nhiên hoặc bỏ bớt vế đối xứng quá khuôn mẫu.'
     }
   ];
 
@@ -462,17 +468,27 @@
 
     const signals = [];
     if (flaggedSpans.length) {
-      signals.push(`Phát hiện ${flaggedSpans.length} cụm từ nối hoặc mẫu diễn đạt đặc trưng của AI (${flaggedSpans.slice(0, 3).map(s => `「${s.text}」`).join(', ')}).`);
-    } else {
-      signals.push('Không thấy các cụm từ nối rập khuôn phổ biến của văn bản AI.');
+      signals.push(`Có ${flaggedSpans.length} cụm từ nối hoặc cấu trúc đặc trưng của AI (${flaggedSpans.slice(0, 3).map(s => `「${s.text}」`).join(', ')}).`);
     }
     if (sentences.length >= 3) {
-      signals.push(burstiness < 40
-        ? `Độ dài ${sentences.length} câu khá đồng đều (biến thiên nhịp câu ${burstiness}/100), gần với văn phong máy tạo.`
-        : `Độ dài giữa các câu có độ biến thiên tự nhiên (${burstiness}/100).`);
+      if (burstiness < 40) {
+        signals.push(`Nhịp độ ${sentences.length} câu quá đồng đều (biến thiên ${burstiness}/100) — AI thường viết các câu dài xấp xỉ nhau, ít ngắt nghỉ bất ngờ như người thật.`);
+      } else if (aiProbability >= 38) {
+        signals.push(`Biến thiên độ dài câu ở mức vừa (${burstiness}/100), kết hợp câu chữ trau chuốt nên mang nét máy biên tập.`);
+      } else {
+        signals.push(`Độ dài giữa các câu thay đổi tự nhiên (${burstiness}/100), đúng nhịp viết của người thật.`);
+      }
+    }
+    if (hanChars >= 35 && humanHits === 0 && learnerHits === 0) {
+      signals.push('Câu văn trơn tru theo lối sách giáo khoa, thiếu khẩu ngữ, trợ từ ngữ khí (吧/呢/啊) hoặc cảm xúc cá nhân — đặc điểm phổ biến khi AI tạo/viết lại.');
+    }
+    if (!flaggedSpans.length && aiProbability < 38) {
+      signals.push('Không phát hiện các cụm từ nối rập khuôn phổ biến của văn bản AI.');
+    } else if (!flaggedSpans.length && aiProbability >= 38) {
+      signals.push('Tuy không lặp từ nối sáo rỗng, nhưng văn phong chuẩn hóa và mạch câu cân đối khiến văn bản vẫn giống AI biên tập.');
     }
     if (learnerHits > 0) {
-      signals.push('Có lỗi diễn đạt tự nhiên của người học tiếng Trung — dấu hiệu mạnh do người tự viết.');
+      signals.push('Có nét diễn đạt tự nhiên của người học tiếng Trung — dấu hiệu mạnh do người tự viết.');
     } else if (humanHits > 0) {
       signals.push('Có trợ từ/cụm khẩu ngữ mang sắc thái giao tiếp đời thường của người viết.');
     }
@@ -480,11 +496,30 @@
       signals.push('Đoạn văn còn ngắn (< 25 chữ Hán); nên nhập đoạn dài hơn để tăng độ chính xác.');
     }
 
+    if (aiProbability >= 38 && !flaggedSpans.length && sentences.length) {
+      const repSentences = [...sentences]
+        .filter(s => (s.match(/\p{Script=Han}/gu) || []).length >= 8)
+        .sort((a, b) => b.length - a.length)
+        .slice(0, 2);
+      for (const snippet of repSentences) {
+        const pos = findSpanPosition(text, snippet, flaggedSpans);
+        if (pos >= 0) {
+          flaggedSpans.push({
+            start: pos,
+            end: pos + snippet.length,
+            text: snippet,
+            reason: 'Câu diễn đạt chuẩn mực, nhịp vế cân đối đều đặn và thiếu sắc thái khẩu ngữ cá nhân — dễ khiến người đọc/AI Detector nhận diện là do AI viết hoặc chỉnh sửa.',
+            humanizeTip: 'Thêm chi tiết cụ thể của bản thân hoặc rút gọn bớt thành cách nói tự nhiên hơn.'
+          });
+        }
+      }
+    }
+
     const summary = verdict === 'ai'
-      ? `Văn bản có ${aiProbability}% dấu hiệu do AI viết (mật độ mẫu câu chuẩn hóa và cấu trúc câu đều).`
+      ? `Văn bản có ${aiProbability}% dấu hiệu do AI viết: mật độ khuôn mẫu cao, cấu trúc cân đối và ít sắc thái cá nhân.`
       : verdict === 'mixed'
-        ? `Văn bản mang ${aiProbability}% đặc trưng AI — có thể được AI biên tập hoặc dùng nhiều từ nối mẫu.`
-        : `Văn bản tự nhiên (${humanProbability}% dấu hiệu do người viết).`;
+        ? `Văn bản mang ${aiProbability}% đặc trưng AI (nhịp câu đều hoặc dùng cấu trúc biên tập chuẩn hóa), pha với ${humanProbability}% nét tự nhiên của người viết.`
+        : `Văn bản tự nhiên (${humanProbability}% dấu hiệu do người viết, mạch câu và từ ngữ gần với cách diễn đạt đời thực).`;
 
     flaggedSpans.sort((a, b) => a.start - b.start);
     return {
@@ -555,7 +590,9 @@
     const rawSignals = Array.isArray(value.signals)
       ? value.signals.map(item => String(item || '').trim().slice(0, 280)).filter(Boolean).slice(0, 6)
       : [];
-    const signals = rawSignals.length ? rawSignals : baseline.signals;
+    const signals = rawSignals.length >= 2
+      ? rawSignals
+      : [...rawSignals, ...baseline.signals.filter(s => !rawSignals.includes(s))].slice(0, 6);
 
     const flaggedSpans = [];
     if (Array.isArray(value.flaggedSpans)) {

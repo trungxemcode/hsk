@@ -230,22 +230,53 @@
     });
     head.append(badge, score, closeBtn);
 
+    const humanPct = Math.max(0, Math.min(100, Number(result.humanProbability ?? (100 - (result.aiProbability || 0))) || 0));
+    const aiPct = Math.max(0, Math.min(100, Number(result.aiProbability ?? (100 - humanPct)) || 0));
+
     const meter = document.createElement('div');
     meter.className = 'sentence-detector-meter';
     meter.setAttribute('aria-hidden', 'true');
-    const meterFill = document.createElement('span');
-    meterFill.className = 'sentence-detector-meter-fill';
-    meterFill.dataset.verdict = result.verdict;
-    meterFill.style.width = `${Math.max(4, Math.min(100, result.aiProbability))}%`;
-    meter.append(meterFill);
+    const humanFill = document.createElement('span');
+    humanFill.className = 'sentence-detector-meter-human';
+    humanFill.style.width = `${humanPct}%`;
+    const aiFill = document.createElement('span');
+    aiFill.className = 'sentence-detector-meter-ai';
+    aiFill.style.width = `${aiPct}%`;
+    meter.append(humanFill, aiFill);
+
+    const legend = document.createElement('div');
+    legend.className = 'sentence-detector-legend';
+    const humanLeg = document.createElement('span');
+    humanLeg.className = 'sentence-detector-legend-item is-human';
+    humanLeg.textContent = `Người: ${humanPct}%`;
+    const aiLeg = document.createElement('span');
+    aiLeg.className = 'sentence-detector-legend-item is-ai';
+    aiLeg.textContent = `AI: ${aiPct}%`;
+    legend.append(humanLeg, aiLeg);
 
     const meta = document.createElement('p');
     meta.className = 'sentence-detector-meta';
     meta.textContent = `Độ tin cậy: ${result.confidence}` + (src ? ` · ${src}` : '');
 
+    const whyBox = document.createElement('div');
+    whyBox.className = 'sentence-detector-why';
+    const whyTitle = document.createElement('strong');
+    whyTitle.className = 'sentence-detector-why-title';
+    whyTitle.textContent = aiPct >= 38 ? 'Vì sao văn bản này giống AI?' : 'Vì sao văn bản này giống người viết?';
     const summary = document.createElement('p');
     summary.className = 'sentence-detector-summary';
     summary.textContent = result.summary;
+    whyBox.append(whyTitle, summary);
+    if (Array.isArray(result.signals) && result.signals.length) {
+      const list = document.createElement('ul');
+      list.className = 'sentence-detector-signals';
+      for (const item of result.signals) {
+        const li = document.createElement('li');
+        li.textContent = item;
+        list.append(li);
+      }
+      whyBox.append(list);
+    }
 
     const metrics = document.createElement('div');
     metrics.className = 'sentence-detector-metrics';
@@ -265,18 +296,7 @@
       metrics.append(chip);
     }
 
-    detectorPanel.append(head, meter, meta, summary, metrics);
-
-    if (Array.isArray(result.signals) && result.signals.length) {
-      const list = document.createElement('ul');
-      list.className = 'sentence-detector-signals';
-      for (const item of result.signals) {
-        const li = document.createElement('li');
-        li.textContent = item;
-        list.append(li);
-      }
-      detectorPanel.append(list);
-    }
+    detectorPanel.append(head, meter, legend, meta, whyBox, metrics);
 
     if (Array.isArray(result.flaggedSpans) && result.flaggedSpans.length) {
       const spansWrap = document.createElement('div');
