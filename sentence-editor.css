@@ -996,11 +996,24 @@ html[data-theme="dark"] #sentenceEditor textarea {
   gap: 10px;
 }
 
+#sentenceEditor .sentence-detector.is-collapsed {
+  padding: 10px 12px;
+  gap: 8px;
+}
+
 #sentenceEditor .sentence-detector-head {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
+}
+
+#sentenceEditor .sentence-detector-compact-pct {
+  font-size: .76rem;
+  font-weight: 700;
+  color: var(--muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 #sentenceEditor .sentence-detector-verdict {
@@ -1010,6 +1023,7 @@ html[data-theme="dark"] #sentenceEditor textarea {
   font-weight: 700;
   background: var(--se-style-soft);
   color: var(--se-style);
+  white-space: nowrap;
 }
 
 #sentenceEditor .sentence-detector-verdict[data-verdict="human"] {
@@ -1022,14 +1036,9 @@ html[data-theme="dark"] #sentenceEditor textarea {
   color: var(--se-fix);
 }
 
-#sentenceEditor .sentence-detector-score {
-  font-size: .92rem;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-}
-
 #sentenceEditor .sentence-detector-close {
   margin-left: auto;
+  flex: none;
   border: 1px solid var(--se-edge);
   border-radius: var(--radius-pill);
   padding: 4px 10px;
@@ -1037,6 +1046,7 @@ html[data-theme="dark"] #sentenceEditor textarea {
   color: var(--muted);
   font-size: .78rem;
   font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -1108,14 +1118,50 @@ html[data-theme="dark"] #sentenceEditor textarea {
   background: var(--se-fix);
 }
 
+#sentenceEditor .sentence-detector.is-collapsed .sentence-detector-meter {
+  height: 6px;
+}
+
 #sentenceEditor .sentence-detector-why {
   padding: 10px 12px;
   border: 1px solid var(--se-edge);
   border-radius: var(--radius-10px);
   background: var(--paper);
+}
+
+#sentenceEditor .sentence-detector-why-summary,
+#sentenceEditor .sentence-detector-spans-summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+#sentenceEditor .sentence-detector-why-summary::-webkit-details-marker,
+#sentenceEditor .sentence-detector-spans-summary::-webkit-details-marker {
+  display: none;
+}
+
+#sentenceEditor .sentence-detector-accordion-chevron {
+  flex: none;
+  font-size: .82rem;
+  color: var(--muted);
+  transition: transform .18s ease;
+}
+
+#sentenceEditor .sentence-detector-why:not([open]) .sentence-detector-accordion-chevron,
+#sentenceEditor .sentence-detector-spans:not([open]) .sentence-detector-accordion-chevron {
+  transform: rotate(-90deg);
+}
+
+#sentenceEditor .sentence-detector-why-body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  margin-top: 8px;
 }
 
 #sentenceEditor .sentence-detector-why-title {
@@ -1172,15 +1218,20 @@ html[data-theme="dark"] #sentenceEditor textarea {
 }
 
 #sentenceEditor .sentence-detector-spans {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   padding-top: 8px;
   border-top: 1px dashed var(--se-edge);
 }
 
+#sentenceEditor .sentence-detector-spans-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
 #sentenceEditor .sentence-detector-spans-title {
   font-size: .82rem;
+  font-weight: 700;
   color: var(--ink);
 }
 

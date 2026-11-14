@@ -150,13 +150,23 @@ const server=http.createServer((req,res)=>{
     await page.evaluate(()=>window.__resolveGrammar({aiSource:{provider:'gemini',model:'gemini-test-version'},aiDetection:{aiProbability:81,humanProbability:19,verdict:'ai',verdictLabel:'Khả năng cao do AI tạo',confidence:'Cao',summary:'Phát hiện nhiều cụm khuôn mẫu kiểu AI.',metrics:{naturalness:25,templateDensity:84,burstiness:32},signals:['Có cụm 综上所述 và 发挥着重要作用.'],flaggedSpans:[{start:0,end:4,text:'综上所述',reason:'Cụm chuyển đoạn kiểu bài luận AI.',humanizeTip:'Dùng cách nối tự nhiên hơn.'}]}}));
     const detector=editor.locator('#sentenceAiDetector');
     await detector.waitFor({state:'visible'});
-    await detector.locator('.sentence-detector-score').filter({hasText:'81% AI · 19% Người'}).waitFor();
+    assert.equal(await detector.locator('.sentence-detector-score').count(),0,'không lặp dòng % AI/Người cạnh nhãn kết luận');
+    await detector.locator('.sentence-detector-legend-item.is-human').filter({hasText:'Người: 19%'}).waitFor();
+    await detector.locator('.sentence-detector-legend-item.is-ai').filter({hasText:'AI: 81%'}).waitFor();
     await detector.locator('.sentence-detector-why-title').filter({hasText:'Vì sao văn bản này giống AI?'}).waitFor();
     const barWidths=await detector.evaluate(el=>({
       human:el.querySelector('.sentence-detector-meter-human')?.style.width||'',
       ai:el.querySelector('.sentence-detector-meter-ai')?.style.width||''
     }));
     assert.deepEqual(barWidths,{human:'19%',ai:'81%'});
+    await detector.locator('.sentence-detector-why-summary').click();
+    assert.equal(await detector.locator('.sentence-detector-why').evaluate(el=>el.open),false,'bấm tiêu đề Vì sao phải thu gọn được');
+    await detector.locator('.sentence-detector-why-summary').click();
+    assert.equal(await detector.locator('.sentence-detector-why').evaluate(el=>el.open),true,'bấm tiêu đề Vì sao phải mở lại được');
+    await detector.locator('.sentence-detector-close').click();
+    assert.equal(await detector.evaluate(el=>el.classList.contains('is-collapsed')),true,'nút thu gọn phải thu siêu gọn thẻ AI Detector thay vì xóa');
+    await detector.locator('.sentence-detector-close').click();
+    assert.equal(await detector.evaluate(el=>el.classList.contains('is-collapsed')),false,'bấm mở rộng phải khôi phục đầy đủ thẻ AI Detector');
     await detector.getByRole('button',{name:'Tìm trong bài'}).click();
     const selectedText=await page.evaluate(()=>{const el=document.getElementById('sentenceDraft');return el.value.slice(el.selectionStart,el.selectionEnd);});
     assert.equal(selectedText,'综上所述');
