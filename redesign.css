@@ -4611,7 +4611,7 @@ html[data-theme="dark"] body:not(#_rd).studio-enabled .mobile-hero-cta:is(:hover
   color:var(--rd-static-color-111) !important;
   border-color:var(--rd-brand) !important;
 }
-html[data-theme="dark"] body:not(#_rd).studio-enabled .stats-stack .stat-icon{
+html[data-theme="dark"] body:not(#_rd).studio-enabled[data-studio-hub="home"] .stats-stack .stat-icon{
   background:var(--palette-dark-violet-soft) !important;
   border-color:var(--legacy-hex-44405c) !important;
   color:var(--legacy-hex-c9c0ff) !important;
