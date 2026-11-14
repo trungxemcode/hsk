@@ -124,6 +124,37 @@ const server=http.createServer((req,res)=>{
     }
     assert.equal(await page.evaluate(() => window.__grammarRequestCount),requestCount,'edits and layout changes must not call AI');
     assert.deepEqual(localRequests,[]);
+
+    assert.equal(await input.getAttribute('maxlength'),'5000');
+    const longDraft='每天我都会复习昨天学过的生词和语法，然后试着用它们写几句完整的话。'.repeat(30);
+    assert.ok(longDraft.length>900&&longDraft.length<=5000);
+    await input.fill(longDraft);
+    await editor.locator('.sentence-count').filter({hasText:`${longDraft.length} / 5000 ký tự`}).waitFor();
+
+    const pickerBtn=editor.locator('.sentence-ai-actions .qa-provider-btn');
+    const effortBtn=editor.locator('.sentence-ai-actions .qa-effort-btn');
+    assert.ok(await pickerBtn.isVisible(),'sentence editor must show custom AI provider picker button');
+    assert.ok(await effortBtn.isVisible(),'sentence editor must show thinking/model effort button');
+    await pickerBtn.click();
+    const pickerMenu=editor.locator('.sentence-ai-actions .qa-provider-menu');
+    await pickerMenu.waitFor({state:'visible'});
+    await pickerMenu.locator('.qa-provider-item[data-provider="auto"]').click();
+    assert.equal(await provider.inputValue(),'auto');
+
+    const aiSample='综上所述，随着科技的发展，这项技术在日常生活中发挥着重要作用。';
+    await input.fill(aiSample);
+    const detectBtn=editor.locator('#sentenceAiDetectBtn');
+    await detectBtn.click();
+    await page.waitForFunction(()=>!!window.__resolveGrammar);
+    assert.equal(await page.evaluate(()=>window.__lastGrammarRequest?.lesson?.content?.mode),'sentence-ai-detect');
+    await page.evaluate(()=>window.__resolveGrammar({aiSource:{provider:'gemini',model:'gemini-test-version'},aiDetection:{aiProbability:81,humanProbability:19,verdict:'ai',verdictLabel:'Khả năng cao do AI tạo',confidence:'Cao',summary:'Phát hiện nhiều cụm khuôn mẫu kiểu AI.',metrics:{naturalness:25,templateDensity:84,burstiness:32},signals:['Có cụm 综上所述 và 发挥着重要作用.'],flaggedSpans:[{start:0,end:4,text:'综上所述',reason:'Cụm chuyển đoạn kiểu bài luận AI.',humanizeTip:'Dùng cách nối tự nhiên hơn.'}]}}));
+    const detector=editor.locator('#sentenceAiDetector');
+    await detector.waitFor({state:'visible'});
+    await detector.locator('.sentence-detector-score').filter({hasText:'81% AI · 19% Người'}).waitFor();
+    await detector.getByRole('button',{name:'Tìm trong bài'}).click();
+    const selectedText=await page.evaluate(()=>{const el=document.getElementById('sentenceDraft');return el.value.slice(el.selectionStart,el.selectionEnd);});
+    assert.equal(selectedText,'综上所述');
+
     console.log('PASS AI sentence editor: login/offline states, manual requests, stale result rejection, provider, apply/undo and responsive layout');
   }finally{await browser.close();server.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

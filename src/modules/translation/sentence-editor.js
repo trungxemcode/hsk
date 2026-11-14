@@ -7,6 +7,9 @@
   const draft = panel.querySelector('textarea');
   const submit = form.querySelector('[type="submit"]');
   const providerSelect = form.querySelector('#sentenceAiProvider');
+  const thinkingSelect = form.querySelector('#sentenceAiThinking');
+  const detectBtn = form.querySelector('#sentenceAiDetectBtn');
+  const detectorPanel = panel.querySelector('#sentenceAiDetector');
   const providerChoices = new Set([...providerSelect.options].map(option => option.value));
   const providerStorageKey = () => 'hsk-sentence-ai-provider:' + (window.HSKAccountDashboard?.user?.uid || 'guest');
   const undo = panel.querySelector('.sentence-undo');
@@ -24,6 +27,9 @@
   let suggestions = [];
   let filter = 'all';
   let pending = null;
+  let detection = null;
+  let activeMode = 'grammar';
+  let syncingProvider = false;
   let waitStarted = 0;
   let waitPhase = 'Đang kết nối';
 
@@ -41,11 +47,14 @@
   status.after(waitLabel);
 
   function activeProviderLabel() {
-    const selectedOption = providerSelect.selectedOptions?.[0];
-    if (selectedOption && providerSelect.value !== 'auto') {
-      return selectedOption.textContent.trim();
+    if (providerSelect.value === 'auto') {
+      const info = window.HSKAiProviderPicker?.activeProviderInfo?.();
+      if (info?.label && info.kind && info.kind !== 'system-gemini') return info.label;
+      return 'HSK AI';
     }
-    return 'HSK AI';
+    const selectedOption = providerSelect.selectedOptions?.[0];
+    if (selectedOption) return selectedOption.textContent.trim();
+    return window.HSKAiProviderPicker?.activeProviderInfo?.()?.label || 'HSK AI';
   }
 
   function renderWait(elapsed = (performance.now() - waitStarted) / 1000, activeIdx = -1) {
@@ -96,13 +105,14 @@
     waitLabel.hidden = !busy;
     if (busy) {
       waitStarted = performance.now();
-      waitPhase = 'Đang kết nối';
+      waitPhase = activeMode === 'detect' ? 'Đang phân tích AI Detector' : 'Đang kết nối';
       startThinkingIndicator(activeProviderLabel());
       renderWait(0, 0);
     } else {
       stopThinkingIndicator();
     }
     submit.disabled = busy;
+    if (detectBtn) detectBtn.disabled = busy;
     panel.setAttribute('aria-busy', String(busy));
   }
 
@@ -192,6 +202,113 @@
     return card;
   }
 
+  function renderDetector() {
+    if (!detectorPanel) return;
+    detectorPanel.replaceChildren();
+    if (!detection?.result) {
+      detectorPanel.hidden = true;
+      return;
+    }
+    detectorPanel.hidden = false;
+    const {result, sourceLabel: src} = detection;
+
+    const head = document.createElement('header');
+    head.className = 'sentence-detector-head';
+    const badge = document.createElement('span');
+    badge.className = 'sentence-detector-verdict';
+    badge.dataset.verdict = result.verdict;
+    badge.textContent = result.verdictLabel;
+
+    const score = document.createElement('strong');
+    score.className = 'sentence-detector-score';
+    score.textContent = `${result.aiProbability}% AI · ${result.humanProbability}% Người`;
+
+    const closeBtn = button('Đóng', 'sentence-detector-close', () => {
+      detection = null;
+      renderDetector();
+      render();
+    });
+    head.append(badge, score, closeBtn);
+
+    const meter = document.createElement('div');
+    meter.className = 'sentence-detector-meter';
+    meter.setAttribute('aria-hidden', 'true');
+    const meterFill = document.createElement('span');
+    meterFill.className = 'sentence-detector-meter-fill';
+    meterFill.dataset.verdict = result.verdict;
+    meterFill.style.width = `${Math.max(4, Math.min(100, result.aiProbability))}%`;
+    meter.append(meterFill);
+
+    const meta = document.createElement('p');
+    meta.className = 'sentence-detector-meta';
+    meta.textContent = `Độ tin cậy: ${result.confidence}` + (src ? ` · ${src}` : '');
+
+    const summary = document.createElement('p');
+    summary.className = 'sentence-detector-summary';
+    summary.textContent = result.summary;
+
+    const metrics = document.createElement('div');
+    metrics.className = 'sentence-detector-metrics';
+    const metricItems = [
+      ['Tự nhiên', `${result.metrics.naturalness}/100`],
+      ['Khuôn mẫu AI', `${result.metrics.templateDensity}/100`],
+      ['Nhịp câu', `${result.metrics.burstiness}/100`]
+    ];
+    for (const [labelText, valText] of metricItems) {
+      const chip = document.createElement('span');
+      chip.className = 'sentence-detector-metric';
+      const lbl = document.createElement('span');
+      lbl.textContent = labelText + ': ';
+      const val = document.createElement('strong');
+      val.textContent = valText;
+      chip.append(lbl, val);
+      metrics.append(chip);
+    }
+
+    detectorPanel.append(head, meter, meta, summary, metrics);
+
+    if (Array.isArray(result.signals) && result.signals.length) {
+      const list = document.createElement('ul');
+      list.className = 'sentence-detector-signals';
+      for (const item of result.signals) {
+        const li = document.createElement('li');
+        li.textContent = item;
+        list.append(li);
+      }
+      detectorPanel.append(list);
+    }
+
+    if (Array.isArray(result.flaggedSpans) && result.flaggedSpans.length) {
+      const spansWrap = document.createElement('div');
+      spansWrap.className = 'sentence-detector-spans';
+      const spansTitle = document.createElement('strong');
+      spansTitle.className = 'sentence-detector-spans-title';
+      spansTitle.textContent = 'Đoạn có dấu hiệu khuôn mẫu / AI:';
+      spansWrap.append(spansTitle);
+
+      for (const span of result.flaggedSpans) {
+        const row = document.createElement('article');
+        row.className = 'sentence-detector-span';
+        const snippet = document.createElement('p');
+        snippet.className = 'sentence-detector-quote';
+        snippet.lang = 'zh';
+        snippet.textContent = `「${span.text}」`;
+
+        const reason = document.createElement('p');
+        reason.className = 'sentence-detector-reason';
+        reason.textContent = span.reason + (span.humanizeTip ? ' Gợi ý tự nhiên hơn: ' + span.humanizeTip : '');
+
+        const locateBtn = button('Tìm trong bài', 'sentence-locate', () => {
+          draft.focus();
+          draft.setSelectionRange(span.start, span.end);
+        });
+        row.append(snippet, reason, locateBtn);
+        spansWrap.append(row);
+      }
+      detectorPanel.append(spansWrap);
+    }
+  }
+
   function render() {
     undo.disabled = !undoStack.length;
     example.hidden = Boolean(draft.value.trim());
@@ -200,17 +317,31 @@
     cards.replaceChildren();
 
     const edits = visibleSuggestions();
+    const flagSpans = !edits.length && detection?.result?.flaggedSpans?.length ? detection.result.flaggedSpans : [];
     let cursor = 0;
-    for (const edit of edits) {
-      if (edit.start < cursor) continue;
-      mirror.append(draft.value.slice(cursor, edit.start));
-      const mark = document.createElement('mark');
-      mark.dataset.kind = edit.kind;
-      mark.dataset.source = 'ai';
-      mark.dataset.insertion = String(edit.start === edit.end);
-      mark.textContent = edit.original || '\u200b';
-      mirror.append(mark);
-      cursor = edit.end;
+    if (edits.length) {
+      for (const edit of edits) {
+        if (edit.start < cursor) continue;
+        mirror.append(draft.value.slice(cursor, edit.start));
+        const mark = document.createElement('mark');
+        mark.dataset.kind = edit.kind;
+        mark.dataset.source = 'ai';
+        mark.dataset.insertion = String(edit.start === edit.end);
+        mark.textContent = edit.original || '\u200b';
+        mirror.append(mark);
+        cursor = edit.end;
+      }
+    } else if (flagSpans.length) {
+      for (const span of flagSpans) {
+        if (span.start < cursor || span.end > draft.value.length || draft.value.slice(span.start, span.end) !== span.text) continue;
+        mirror.append(draft.value.slice(cursor, span.start));
+        const mark = document.createElement('mark');
+        mark.dataset.kind = 'ai-flag';
+        mark.dataset.source = 'detector';
+        mark.textContent = span.text;
+        mirror.append(mark);
+        cursor = span.end;
+      }
     }
     mirror.append(draft.value.slice(cursor) + '\n');
     syncScroll();
@@ -233,9 +364,11 @@
   function resetForInput() {
     cancelPending();
     suggestions = [];
+    detection = null;
     dismissed.clear();
     undoStack = [];
     setStatus(initialStatus);
+    renderDetector();
     render();
   }
 
@@ -250,6 +383,8 @@
       return;
     }
     cancelPending();
+    detection = null;
+    renderDetector();
     undoStack.push({text: draft.value, suggestions, dismissed: new Set(dismissed), status: status.textContent});
     if (undoStack.length > 20) undoStack.shift();
     draft.setRangeText(edit.replacement, edit.start, edit.end, 'end');
@@ -298,7 +433,9 @@
     draft.value = previous.text;
     suggestions = previous.suggestions;
     dismissed = previous.dismissed;
+    detection = null;
     setStatus(previous.status);
+    renderDetector();
     render();
     draft.focus();
   });
@@ -309,30 +446,171 @@
       render();
     });
   }
+  function buildAiRequestParams() {
+    const pickerParams = (!thinkingSelect?.disabled || providerSelect.value !== 'auto')
+      ? (window.HSKAiProviderPicker?.getActiveAiParams?.() || null)
+      : null;
+    const aiProvider = providerSelect.value !== 'auto'
+      ? providerSelect.value
+      : (pickerParams?.aiProvider || 'auto');
+    const params = {};
+    if (aiProvider && aiProvider !== 'auto') params.aiProvider = aiProvider;
+    if (pickerParams?.personalProvider && (aiProvider.startsWith('personal') || aiProvider === 'auto')) {
+      params.personalProvider = pickerParams.personalProvider;
+    }
+    if (pickerParams?.aiModel) params.aiModel = pickerParams.aiModel;
+    if (thinkingSelect && !thinkingSelect.disabled && pickerParams?.thinking) {
+      params.thinking = pickerParams.thinking;
+    }
+    return params;
+  }
+
+  function syncProviderFromPicker() {
+    if (syncingProvider) return;
+    const nextId = window.HSKAiProviderPicker?.selectedId?.();
+    if (!nextId || !providerChoices.has(nextId)) return;
+    if (providerSelect.value !== nextId) {
+      syncingProvider = true;
+      providerSelect.value = nextId;
+      try { localStorage.setItem(providerStorageKey(), nextId); } catch {}
+      syncingProvider = false;
+      if (pending) {
+        cancelPending();
+        setStatus(initialStatus);
+      }
+    }
+  }
+
   function restoreProvider() {
-    let saved;
+    let saved = null;
     try { saved = localStorage.getItem(providerStorageKey()); } catch {}
-    providerSelect.value = providerChoices.has(saved) ? saved : 'auto';
+    const pickerId = window.HSKAiProviderPicker?.selectedId?.();
+    const chosen = (saved !== null && providerChoices.has(saved))
+      ? saved
+      : (pickerId && providerChoices.has(pickerId) ? pickerId : 'auto');
+    syncingProvider = true;
+    providerSelect.value = chosen;
+    if (window.HSKAiProviderPicker?.setSelectionFromSelect && window.HSKAiProviderPicker.selectedId?.() !== chosen) {
+      window.HSKAiProviderPicker.setSelectionFromSelect(chosen);
+    }
+    syncingProvider = false;
   }
 
   restoreProvider();
   providerSelect.addEventListener('change', () => {
     try { localStorage.setItem(providerStorageKey(), providerSelect.value); } catch {}
+    if (!syncingProvider && window.HSKAiProviderPicker?.setSelectionFromSelect) {
+      syncingProvider = true;
+      window.HSKAiProviderPicker.setSelectionFromSelect(providerSelect.value);
+      syncingProvider = false;
+    }
     if (pending) {
       cancelPending();
       setStatus(initialStatus);
     }
   });
+  window.addEventListener('hsk-ai-provider-state', syncProviderFromPicker);
   window.addEventListener('hsk-account-ready', () => {
     restoreProvider();
     resetForInput();
   });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', restoreProvider, {once: true});
+  }
   new MutationObserver(() => {
     if (panel.hidden && pending) {
       cancelPending();
       setStatus(initialStatus);
+    } else if (!panel.hidden) {
+      window.dispatchEvent(new CustomEvent('hsk-sentence-editor-open'));
     }
   }).observe(panel, {attributes: true, attributeFilter: ['hidden']});
+
+  async function runAiDetector() {
+    if (pending || composing) return;
+    const text = draft.value;
+    if (!han.test(text)) {
+      setStatus('Nhập câu hoặc đoạn văn tiếng Trung để phân tích dấu hiệu AI.');
+      draft.focus();
+      return;
+    }
+    const localResult = window.HSKSentenceReview.analyzeAiLikelihood(text);
+    const user = window.HSKAccountDashboard?.user;
+    if (navigator.onLine === false || !user?.uid) {
+      detection = {
+        result: localResult,
+        sourceLabel: navigator.onLine === false ? 'Phân tích văn phong offline' : 'Phân tích nhanh trên máy (đăng nhập để kiểm tra AI sâu)'
+      };
+      setStatus(localResult.summary);
+      renderDetector();
+      render();
+      return;
+    }
+
+    const aiParams = buildAiRequestParams();
+    const controller = new AbortController();
+    pending = controller;
+    activeMode = 'detect';
+    setBusy(true);
+    setStatus('AI Detector đang phân tích dấu hiệu AI trong văn bản tiếng Trung…');
+    const timeout = setTimeout(() => controller.abort(), 185000);
+    try {
+      const configResponse = await fetch('./translation-config.json', {signal: controller.signal, cache: 'no-store'});
+      if (!configResponse.ok) throw Error('Dịch vụ AI chưa sẵn sàng.');
+      const config = await configResponse.json();
+      if (!config.enabled) throw Error('Dịch vụ AI chưa sẵn sàng.');
+      const endpoint = new URL('/lesson-ask', config.endpoint);
+      if (endpoint.protocol !== 'https:') throw Error('Dịch vụ AI chưa sẵn sàng.');
+
+      const token = await user.getIdToken();
+      if (pending !== controller) return;
+      if (controller.signal.aborted) throw new DOMException('Aborted', 'AbortError');
+      const level = Number(document.getElementById('studioTargetLevel')?.value);
+      waitPhase = 'Đang chờ AI Detector trả lời';
+      renderWait();
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: {Authorization: 'Bearer ' + token, 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          question: text,
+          ...aiParams,
+          hsk: level >= 1 && level <= 6 ? level : 3,
+          history: [],
+          lesson: {id: 'sentence-editor', title: 'Kiểm tra dấu hiệu AI tiếng Trung', words: [], content: {mode: 'sentence-ai-detect'}}
+        })
+      });
+      const data = await response.json().catch(() => null);
+      if (pending !== controller || draft.value !== text || window.HSKAccountDashboard?.user?.uid !== user.uid) return;
+      if (!response.ok) throw Error(data?.error || 'Không phân tích sâu được, dùng kết quả phân tích nhanh trên máy.');
+      const detected = window.HSKSentenceReview.normalizeAiDetection(data, text) || localResult;
+      const {provider, model} = sourceLabel(data || {}, response);
+      const srcLabel = provider ? provider + (model ? ' · ' + model : '') : 'HSK AI + Văn phong';
+      detection = {result: detected, sourceLabel: srcLabel};
+      setStatus(detected.summary + (provider ? ' Nguồn: ' + srcLabel + '.' : ''));
+      renderDetector();
+      render();
+    } catch (error) {
+      if (pending !== controller) return;
+      detection = {result: localResult, sourceLabel: 'Phân tích nhanh trên máy'};
+      renderDetector();
+      render();
+      if (controller.signal.aborted || error.name === 'AbortError') {
+        setStatus('AI Detector phản hồi quá lâu; đang hiển thị kết quả phân tích nhanh trên máy.');
+      } else {
+        setStatus((error.message || 'Không kết nối được AI.') + ' Đang hiển thị kết quả phân tích nhanh trên máy.');
+      }
+    } finally {
+      clearTimeout(timeout);
+      if (pending === controller) {
+        pending = null;
+        activeMode = 'grammar';
+        setBusy(false);
+      }
+    }
+  }
+
+  detectBtn?.addEventListener('click', runAiDetector);
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
@@ -352,9 +630,10 @@
       setStatus('Đăng nhập để kiểm tra văn bản bằng AI.');
       return;
     }
-    const aiProvider = providerSelect.value;
+    const aiParams = buildAiRequestParams();
     const controller = new AbortController();
     pending = controller;
+    activeMode = 'grammar';
     setBusy(true);
     setStatus('AI đang kiểm tra ngữ pháp và cách diễn đạt…');
     const timeout = setTimeout(() => controller.abort(), 185000);
@@ -378,7 +657,7 @@
         headers: {Authorization: 'Bearer ' + token, 'Content-Type': 'application/json'},
         body: JSON.stringify({
           question: text,
-          ...(aiProvider !== 'auto' ? {aiProvider} : {}),
+          ...aiParams,
           hsk: level >= 1 && level <= 6 ? level : 3,
           history: [],
           lesson: {id: 'sentence-editor', title: 'Sửa câu tiếng Trung', words: [], content: {mode: 'sentence-editor'}}
@@ -403,10 +682,12 @@
       clearTimeout(timeout);
       if (pending === controller) {
         pending = null;
+        activeMode = 'grammar';
         setBusy(false);
       }
     }
   });
 
+  renderDetector();
   render();
 })();

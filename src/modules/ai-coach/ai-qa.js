@@ -19,7 +19,7 @@
  if(window.ResizeObserver)new ResizeObserver(updateJumpToLatest).observe(messages);
  const historyPane=$('aiQaHistory'),historyToggle=$('aiQaHistoryToggle'),historyClose=$('aiQaHistoryClose'),newChat=$('aiQaNewChat'),conversationList=$('aiQaConversationList'),conversationTitle=$('aiQaConversationTitle');
  let config=null,pending=null,activeSuggestionMessageId=null,serial=0,history=[],owner='guest',aiMessageRegistry=new Map(),activeId='',deleted={},syncBusy=false,syncQueued=false,realtimeUnsubscribe=null,realtimeApiRef=null,realtimeUid='',realtimeReady=false;
- const thinkingControls=[$('aiQaThinking'),$('qaProjectThinking')];
+ const thinkingControls=[$('aiQaThinking'),$('qaProjectThinking'),$('sentenceAiThinking')].filter(Boolean);
  let thinking='low',thinkingOwner=null,roleRequest=0,roleVerifiedUid=null,roleVerifiedAt=0,canChooseRole=false,thinkingSpecKey='';
  function renderThinkingSelects(info){
   const opts=info?.options||[
@@ -93,6 +93,7 @@
   }
  }
  window.addEventListener('hsk-ai-qa-open',refreshThinkingRole);
+ window.addEventListener('hsk-sentence-editor-open',refreshThinkingRole);
  const key=uid=>`hsk-ai-qa-v1:${String(uid||'guest').replace(/[^\w:.-]/g,'_').slice(0,150)}`;
  let localIdCounter=0;
  const randomSuffix=()=>{const values=new Uint32Array(1);if(globalThis.crypto?.getRandomValues)globalThis.crypto.getRandomValues(values);else values[0]=((Date.now()^Math.trunc(performance.now()*1000)^++localIdCounter)>>>0);return values[0].toString(36);};

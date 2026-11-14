@@ -280,3 +280,28 @@ test('lesson-ask AI QA cleanly unwraps XML/JSX wrapper and unquoted JSON.stringi
  assert.equal(data.suggestedQuestions[0].kind,'decision_guide');
 });
 
+test('sentence-editor supports 5000 chars and rejects >5000 chars; sentence-ai-detect returns normalized analysis',async()=>{
+ const longBase='昨天，我讨论了这个话题跟同学们三个小时。'.repeat(55);
+ assert.ok(longBase.length>1000&&longBase.length<=5000);
+ const longReview={summary:'Đặt cụm chỉ người trước động từ.',suggestions:[{kind:'fix',original:'讨论了这个话题跟同学们',replacement:'跟同学们讨论了这个话题',reason:'Đặt 跟同学们 trước 讨论.'}]};
+ const {run,calls}=setup(()=>Response.json({modelVersion:'gemini-test-version',candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(longReview)}]}}]}));
+ const okLong=await run('/lesson-ask',{hsk:6,question:longBase,history:[],lesson:{id:'sentence-editor',title:'Sửa câu tiếng Trung',words:[],content:{mode:'sentence-editor'}}});
+ assert.equal(okLong.status,200);
+ const okData=await okLong.json();
+ assert.equal(okData.sentenceReview.suggestions.length,1);
+ assert.equal(calls.at(-1).body.generationConfig.maxOutputTokens,4096);
+
+ const tooLong=await run('/lesson-ask',{hsk:6,question:'我'.repeat(5001),history:[],lesson:{id:'sentence-editor',title:'Sửa câu tiếng Trung',words:[],content:{mode:'sentence-editor'}}});
+ assert.equal(tooLong.status,400);
+
+ const aiSample='综上所述，随着科技的发展，人工智能在日常生活中发挥着重要作用，因此我们需要理性看待。';
+ const detectPayload={aiProbability:79,verdict:'ai',confidence:'Cao',summary:'Có mật độ cụm chuyển đoạn chuẩn hóa kiểu AI cao.',metrics:{naturalness:24,templateDensity:84,burstiness:31},signals:['Xuất hiện cụm 综上所述 và 发挥着重要作用.'],flaggedSpans:[{text:'综上所述',reason:'Từ chuyển đoạn kiểu bài luận AI.',humanizeTip:'Đổi sang cách nói tự nhiên hơn.'}]};
+ const detectSetup=setup(()=>Response.json({modelVersion:'gemini-test-version',candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(detectPayload)}]}}]}));
+ const detectRes=await detectSetup.run('/lesson-ask',{hsk:6,question:aiSample,history:[],lesson:{id:'sentence-editor',title:'Kiểm tra dấu hiệu AI tiếng Trung',words:[],content:{mode:'sentence-ai-detect'}}});
+ assert.equal(detectRes.status,200);
+ const detectData=await detectRes.json();
+ assert.equal(detectData.aiDetection.aiProbability,79);
+ assert.equal(detectData.aiDetection.verdict,'ai');
+ assert.equal(detectData.aiDetection.flaggedSpans[0].text,'综上所述');
+});
+

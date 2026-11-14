@@ -1,6 +1,6 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
-const {normalize,diffEdits}=require('../src/modules/translation/sentence-review-core.js');
+const {normalize,diffEdits,MAX_TEXT_LENGTH,analyzeAiLikelihood,normalizeAiDetection}=require('../src/modules/translation/sentence-review-core.js');
 
 function apply(text,edits){
   for(const edit of [...edits].sort((a,b)=>b.start-a.start)){
@@ -120,4 +120,55 @@ test('resolves non-overlapping occurrences of repeated characters and falls back
   assert.ok(r && r.suggestions.length === 1);
   assert.equal(r.suggestions[0].original, '的');
   assert.equal(r.suggestions[0].start, 3);
+});
+
+test('supports 5000-character drafts and large lossless bounded diffs', () => {
+  assert.equal(MAX_TEXT_LENGTH, 5000);
+  const block = '近年来，随着城市化进程的不断加快，人们的生活方式发生了很大的变化，我们在日常生活中也要注重保持健康作息。';
+  const base = Array.from({length: 30}, (_, idx) => (idx === 5 ? '今天我讨论了这个话题跟同学们三个小时。' : block)).join('');
+  assert.ok(base.length > 1400 && base.length <= 5000);
+  const corrected = base.replace('讨论了这个话题跟同学们', '跟同学们讨论了这个话题');
+  const edits = diffEdits(base, corrected);
+  assert.ok(edits.length >= 1 && edits.length <= 12);
+  assert.equal(apply(base, edits), corrected);
+  const review = normalize({correctedText: corrected}, base);
+  assert.ok(review && review.suggestions.length >= 1);
+  assert.equal(apply(base, review.suggestions), corrected);
+});
+
+test('analyzeAiLikelihood distinguishes formulaic AI Chinese text from natural learner prose', () => {
+  const aiText = '在当今社会，随着科技的不断发展，人工智能在日常生活中的应用具有重要意义。首先，它能够提升工作效率。其次，它为学习提供了有力支撑。此外，它也在医疗领域发挥着重要作用。综上所述，人工智能的发展可以说是利大于弊，成为现代社会不可或缺的一部分。';
+  const humanText = '其实我昨天去市场买菜的时候有点儿迷路了，哎呀！后来旁边一位阿姨告诉我怎么走，我觉得挺暖心的。顺便说一句，他昨天帮忙我搬了很重的箱子呢！';
+  const aiRes = analyzeAiLikelihood(aiText);
+  const humanRes = analyzeAiLikelihood(humanText);
+  assert.ok(aiRes.aiProbability > humanRes.aiProbability);
+  assert.ok(aiRes.aiProbability >= 55);
+  assert.ok(humanRes.aiProbability <= 40);
+  assert.ok(aiRes.flaggedSpans.length >= 2);
+  assert.equal(aiRes.aiProbability + aiRes.humanProbability, 100);
+});
+
+test('normalizeAiDetection validates structured JSON and anchors flaggedSpans cleanly', () => {
+  const text = '综上所述，随着科技的发展，这项技术在日常生活中发挥着重要作用，我个人觉得还需要多观察。';
+  const normalized = normalizeAiDetection({
+    answer: '```json\n' + JSON.stringify({
+      aiProbability: 74,
+      verdict: 'ai',
+      confidence: 'Cao',
+      summary: 'Đoạn văn dùng nhiều cụm chuyển ý khuôn mẫu.',
+      metrics: {naturalness: 30, templateDensity: 82, burstiness: 28},
+      signals: ['Dùng cụm 综上所述 và 发挥着重要作用.'],
+      flaggedSpans: [
+        {text: '综上所述', reason: 'Cụm kết luận khuôn mẫu của AI.', humanizeTip: 'Đổi sang cách nói cá nhân.'},
+        {text: 'nonexistent-span', reason: 'Không có trong văn bản.'}
+      ]
+    }) + '\n```'
+  }, text);
+  assert.ok(normalized);
+  assert.equal(normalized.aiProbability, 74);
+  assert.equal(normalized.humanProbability, 26);
+  assert.equal(normalized.verdict, 'ai');
+  assert.equal(normalized.confidence, 'Cao');
+  assert.equal(normalized.flaggedSpans.length, 1);
+  assert.equal(text.slice(normalized.flaggedSpans[0].start, normalized.flaggedSpans[0].end), '综上所述');
 });
