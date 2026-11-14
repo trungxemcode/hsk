@@ -196,7 +196,8 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
   }));
   if(provider==='claude'){
    headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';
-   body={model,system,messages,max_tokens:2400};
+   const maxTokens=Math.max(2400,Math.min(8192,Number(requestBody.generationConfig?.maxOutputTokens)||2400));
+   body={model,system,messages,max_tokens:maxTokens};
   }else{
    headers.Authorization='Bearer '+apiKey;
    let fostaModel=model,fostaEffort=undefined;
@@ -205,9 +206,10 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
      const parts=model.split(':');
      fostaModel=parts[0];fostaEffort=parts[1];
     }
-    }
-    if(options.sentenceReview&&!fostaEffort)fostaEffort='low';
-   body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(requestBody.generationConfig?.temperature!==undefined?{temperature:requestBody.generationConfig.temperature}:{}),...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{stream:false})};
+   }
+   if(options.sentenceReview&&provider==='fosta'&&!fostaEffort)fostaEffort='low';
+   const isReasoningModel=/^o[134](?:-|$)/i.test(fostaModel);
+   body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(!isReasoningModel&&requestBody.generationConfig?.temperature!==undefined?{temperature:requestBody.generationConfig.temperature}:{}),...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{stream:false})};
   }
  }
  const response=await fetchFn(url,{method:'POST',headers,body:JSON.stringify(body),signal,redirect:'manual'});

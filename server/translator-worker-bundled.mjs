@@ -2389,7 +2389,8 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
   }));
   if(provider==='claude'){
    headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';
-   body={model,system,messages,max_tokens:2400};
+   const maxTokens=Math.max(2400,Math.min(8192,Number(requestBody.generationConfig?.maxOutputTokens)||2400));
+   body={model,system,messages,max_tokens:maxTokens};
   }else{
    headers.Authorization='Bearer '+apiKey;
    let fostaModel=model,fostaEffort=undefined;
@@ -2398,9 +2399,10 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
      const parts=model.split(':');
      fostaModel=parts[0];fostaEffort=parts[1];
     }
-    }
-    if(options.sentenceReview&&!fostaEffort)fostaEffort='low';
-   body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(requestBody.generationConfig?.temperature!==undefined?{temperature:requestBody.generationConfig.temperature}:{}),...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{stream:false})};
+   }
+   if(options.sentenceReview&&provider==='fosta'&&!fostaEffort)fostaEffort='low';
+   const isReasoningModel=/^o[134](?:-|$)/i.test(fostaModel);
+   body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(!isReasoningModel&&requestBody.generationConfig?.temperature!==undefined?{temperature:requestBody.generationConfig.temperature}:{}),...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{stream:false})};
   }
  }
  const response=await fetchFn(url,{method:'POST',headers,body:JSON.stringify(body),signal,redirect:'manual'});
@@ -5321,8 +5323,17 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
      headers['X-HSK-AI-Provider']='chatgpt-cookie';
      const baseCookieConfig=usePersonalCookie?personalAi:{model:env.CHATGPT_COOKIE_MODEL||'gpt-4o-mini',apiKey:env.CHATGPT_SESSION_TOKEN};const cookieConfig={...baseCookieConfig,model:requestedAiModel||(typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS['chatgpt-cookie']?.[body.thinking])||baseCookieConfig.model};
      reviewModel=cookieConfig.model;
-     response=await chatgptCookieGenerate(cookieConfig,providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});
-     if(!response.ok){
+     try{response=await chatgptCookieGenerate(cookieConfig,providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});}
+     catch(error){
+      const fbRes=isSentenceMode?await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:'chatgpt-cookie',reason:error?.message}):null;
+      if(fbRes){response=fbRes;reviewModel=SENTENCE_EDITOR_FALLBACK_MODEL;sentenceFallbackUsed=true;sentenceFallbackFrom='chatgpt-cookie';}
+      else return reply({error:'ChatGPT chưa trả lời được. Hãy thử lại sau.',code:'AI_PROVIDER_ERROR',provider:'chatgpt-cookie',workerRevision:WORKER_REVISION},502);
+     }
+     if(!response.ok&&isSentenceMode&&!sentenceFallbackUsed){
+      const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:'chatgpt-cookie',reason:'upstream',status:response.status});
+      if(fbRes){response=fbRes;reviewModel=SENTENCE_EDITOR_FALLBACK_MODEL;sentenceFallbackUsed=true;sentenceFallbackFrom='chatgpt-cookie';}
+     }
+     if(!response.ok&&!sentenceFallbackUsed){
       const failure=await response.json().catch(()=>null);
       const safeCodes=['CHATGPT_SESSION_HTTP','CHATGPT_SESSION_NO_TOKEN','CHATGPT_CONVERSATION_HTTP'];
       const error=safeCodes.includes(failure?.code)?failure.error:response.status===401?'Không xác thực được phiên ChatGPT.':'ChatGPT chưa trả lời được. Hãy thử lại sau.';
@@ -5332,7 +5343,7 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
      // Rotate keys without switching the chosen chat model or provider.
      const generate=isAiQa?createGeminiKeyFetch(providerFetch,env,{now,state:geminiState}):fetchFn;
      if(isAiQa)headers['X-HSK-AI-Provider']='gemini';
-     const targetModel=isSentenceMode?SENTENCE_EDITOR_FALLBACK_MODEL:model;
+     const targetModel=isSentenceMode?((isAdmin||verifiedRole==='vip')&&(body.thinking||requestedAiModel)?systemGeminiModel:SENTENCE_EDITOR_FALLBACK_MODEL):model;
      const geminiKey=configuredGeminiKeys(env)[0]||env.GEMINI_API_KEY;
      response=await generate('https://generativelanguage.googleapis.com/v1beta/models/'+targetModel+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':geminiKey},signal:controller.signal,body:JSON.stringify(providerBody)});
     }
@@ -5344,9 +5355,10 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
      let activePayload=payload;
      let result=globalThis.HSKSentenceReview.normalize(answerText,body.question);
      if(!result&&!sentenceFallbackUsed&&headers['X-HSK-AI-Provider']!=='gemini'){
+      const failedProv=headers['X-HSK-AI-Provider']||personalAi?.provider||'';
       sentenceFallbackUsed=true;
-      sentenceFallbackFrom=personalAi?.provider||'';
-      const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:personalAi?.provider||'unknown',reason:'format'});
+      sentenceFallbackFrom=failedProv;
+      const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:failedProv||'unknown',reason:'format'});
       if(fbRes?.ok){
        activePayload=await fbRes.json();
        reviewModel=activePayload.modelVersion||SENTENCE_EDITOR_FALLBACK_MODEL;
@@ -5366,9 +5378,10 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
      let activePayload=payload;
      let result=globalThis.HSKSentenceReview.normalizeAiDetection(answerText,body.question);
      if(!result&&!sentenceFallbackUsed&&headers['X-HSK-AI-Provider']!=='gemini'){
+      const failedProv=headers['X-HSK-AI-Provider']||personalAi?.provider||'';
       sentenceFallbackUsed=true;
-      sentenceFallbackFrom=personalAi?.provider||'';
-      const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:personalAi?.provider||'unknown',reason:'format'});
+      sentenceFallbackFrom=failedProv;
+      const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:failedProv||'unknown',reason:'format'});
       if(fbRes?.ok){
        activePayload=await fbRes.json();
        reviewModel=activePayload.modelVersion||SENTENCE_EDITOR_FALLBACK_MODEL;

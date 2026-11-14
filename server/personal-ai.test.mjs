@@ -439,6 +439,74 @@ test('sentence-editor personal fallback keeps real source/model and never falls 
  assert.equal(failGeminiCalls.length,1);
 });
 
+test('all personal providers keep priority without premature Gemini fallback and respect compatibility fixes',async()=>{
+ const uid='all-providers-uid';
+ const longText='今天我去图书馆学习汉语。'.repeat(60);
+ const validReviewJson=JSON.stringify({
+  summary:'Câu viết tự nhiên, có thể tinh chỉnh nhẹ.',
+  suggestions:[{kind:'natural',original:'今天我去图书馆学习汉语。',replacement:'我今天去图书馆学汉语。',reason:'Ngắn gọn và tự nhiên hơn.'}]
+ });
+ const makeToken=sub=>{
+  const claims={aud:'hsk-flashcards-44631',iss:'https://securetoken.google.com/hsk-flashcards-44631',sub,exp:Math.floor(Date.now()/1000)+3600};
+  return 'header.'+Buffer.from(JSON.stringify(claims)).toString('base64url')+'.signature';
+ };
+ const token=makeToken(uid);
+
+ // 1. OpenAI o3-mini omits temperature so it does not 400 and fall back to Gemini
+ await request(uid,settingsPath,{op:'save',settings:{provider:'openai',model:'o3-mini',enabled:true,apiKey:'sk-openai-test-12345'}});
+ const openAiCalls=[];
+ const openAiHandler=createHandler(async(url,init)=>{
+  if(String(url).includes('identitytoolkit'))return Response.json({users:[{localId:uid}]});
+  const body=init?.body?JSON.parse(init.body):null;
+  openAiCalls.push({url:String(url),body});
+  if(String(url).includes('generativelanguage'))throw new Error('Should not fall back to Gemini');
+  return Response.json({choices:[{message:{content:validReviewJson}}]});
+ });
+ const openAiRes=await openAiHandler(new Request('https://worker.test/lesson-ask',{method:'POST',headers:{Origin:origin,Authorization:'Bearer '+token},body:JSON.stringify({question:'今天我去图书馆学习汉语。',hsk:3,aiProvider:'personal:openai',lesson:{id:'sentence-editor',title:'Sửa câu',words:[],content:{mode:'sentence-editor'}},history:[]})}),{...env,GEMINI_API_KEY:'fake-gem-key',ADMIN_UIDS:uid});
+ assert.equal(openAiRes.status,200);
+ const openAiData=await openAiRes.json();
+ assert.deepEqual(openAiData.aiSource,{provider:'openai',model:'o3-mini'});
+ assert.equal(openAiData.fallbackFrom,undefined);
+ assert.equal(openAiCalls.length,1);
+ assert.equal(openAiCalls[0].body.temperature,undefined);
+
+ // 2. Claude scales max_tokens >= 2400 for long drafts and keeps Claude as aiSource
+ await request(uid,settingsPath,{op:'save',settings:{provider:'claude',model:'claude-sonnet-4-6',enabled:true,apiKey:'sk-ant-test-12345'}});
+ const claudeCalls=[];
+ const claudeHandler=createHandler(async(url,init)=>{
+  if(String(url).includes('identitytoolkit'))return Response.json({users:[{localId:uid}]});
+  const body=init?.body?JSON.parse(init.body):null;
+  claudeCalls.push({url:String(url),body});
+  if(String(url).includes('generativelanguage'))throw new Error('Should not fall back to Gemini');
+  return Response.json({content:[{type:'text',text:validReviewJson}]});
+ });
+ const claudeRes=await claudeHandler(new Request('https://worker.test/lesson-ask',{method:'POST',headers:{Origin:origin,Authorization:'Bearer '+token},body:JSON.stringify({question:longText,hsk:4,aiProvider:'personal:claude',lesson:{id:'sentence-editor',title:'Sửa câu',words:[],content:{mode:'sentence-editor'}},history:[]})}),{...env,GEMINI_API_KEY:'fake-gem-key',ADMIN_UIDS:uid});
+ assert.equal(claudeRes.status,200);
+ const claudeData=await claudeRes.json();
+ assert.deepEqual(claudeData.aiSource,{provider:'claude',model:'claude-sonnet-4-6'});
+ assert.equal(claudeData.fallbackFrom,undefined);
+ assert.equal(claudeCalls.length,1);
+ assert.ok(Number(claudeCalls[0].body.max_tokens)>=2400);
+
+ // 3. chatgpt-cookie falls back to Gemini only when upstream fails and reports fallbackFrom
+ await request(uid,settingsPath,{op:'save',settings:{provider:'chatgpt-cookie',model:'gpt-5-2',enabled:true,apiKey:'__Host-next-auth.session-token=fake-session-cookie; oai-did=fake-did'}});
+ const cookieCalls=[];
+ const cookieFailHandler=createHandler(async(url,init)=>{
+  if(String(url).includes('identitytoolkit'))return Response.json({users:[{localId:uid}]});
+  cookieCalls.push(String(url));
+  if(String(url).includes('generativelanguage')){
+   return Response.json({modelVersion:'gemini-3.1-flash-lite',candidates:[{content:{parts:[{text:validReviewJson}]}}]});
+  }
+  return new Response('Upstream error',{status:502});
+ });
+ const cookieRes=await cookieFailHandler(new Request('https://worker.test/lesson-ask',{method:'POST',headers:{Origin:origin,Authorization:'Bearer '+token},body:JSON.stringify({question:'今天我去图书馆学习汉语。',hsk:3,aiProvider:'personal:chatgpt-cookie',lesson:{id:'sentence-editor',title:'Sửa câu',words:[],content:{mode:'sentence-editor'}},history:[]})}),{...env,GEMINI_API_KEY:'fake-gem-key',ADMIN_UIDS:uid});
+ assert.equal(cookieRes.status,200);
+ const cookieData=await cookieRes.json();
+ assert.deepEqual(cookieData.aiSource,{provider:'gemini',model:'gemini-3.1-flash-lite'});
+ assert.equal(cookieData.fallbackFrom,'chatgpt-cookie');
+ assert.equal(cookieCalls.filter(u=>u.includes('generativelanguage')).length,1);
+});
+
 test('consolidated provider model discovery preserves probe filters, headers, redirects and fetch descriptions',async()=>{
  const seen=[];
  const mockFetch=async(url,init)=>{
