@@ -48,9 +48,40 @@ const MIME = {
       await page.locator('#podcastPanel').waitFor({ state: 'visible' });
       assert.equal(await page.locator('#podcastSubMask').isVisible(), true, 'English subtitle mask visible');
 
-      // 1b. Channel filter bar & sync button are visible
+      // 1b. Channel filter bar, sync button & horizontal YouTube-style shelf are visible
       assert.equal(await page.locator('#podcastChannelBar').isVisible(), true, 'Channel filter bar visible');
       assert.equal(await page.locator('#podcastSyncChannelsBtn').isVisible(), true, 'Channel sync button visible');
+      assert.equal(await page.locator('#podcastShelfNextBtn').count(), 1, 'Horizontal shelf next arrow exists');
+      assert.equal(await page.locator('#podcastShelfPrevBtn').count(), 1, 'Horizontal shelf prev arrow exists');
+      const shelfLayout = await page.evaluate(() => {
+        const list = document.getElementById('podcastEpisodeList');
+        const cards = [...list.querySelectorAll('.podcast-ep-card')];
+        return {
+          cardCount: cards.length,
+          thumbsCount: list.querySelectorAll('.podcast-ep-thumb').length,
+          durPillsCount: list.querySelectorAll('.podcast-ep-dur-pill').length,
+          sameRow: cards.length >= 2 && Math.abs(cards[0].getBoundingClientRect().top - cards[1].getBoundingClientRect().top) <= 2,
+          scrollWidth: list.scrollWidth,
+          clientWidth: list.clientWidth
+        };
+      });
+      assert.equal(shelfLayout.thumbsCount, shelfLayout.cardCount, 'Every horizontal shelf card has a 16:9 thumbnail');
+      assert.equal(shelfLayout.durPillsCount, shelfLayout.cardCount, 'Every horizontal shelf card shows duration pill');
+      assert.equal(shelfLayout.sameRow, true, 'Episode cards arrange in a single horizontal sliding row');
+      assert.ok(shelfLayout.scrollWidth > shelfLayout.clientWidth, 'Horizontal shelf overflows horizontally to scroll');
+
+      // 1c. Video tap overlay toggles playback cleanly without needing YouTube iframe chrome
+      await page.locator('#podcastVideoTap').click({ position: { x: 40, y: 28 } });
+      assert.equal((await page.evaluate(() => window.HSKPodcast.getState())).playing, true);
+      await page.locator('#podcastVideoTap').click({ position: { x: 40, y: 28 } });
+      assert.equal((await page.evaluate(() => window.HSKPodcast.getState())).playing, false);
+
+      // 1d. Subtitles/Mask/Episode-Meta drawer starts collapsed and opens on demand
+      assert.equal(await page.locator('#podcastExtrasDrawer').isHidden(), true, 'Extras drawer should be collapsed by default');
+      assert.equal(await page.locator('#podcastExtrasToggle').getAttribute('aria-expanded'), 'false');
+      await page.locator('#podcastExtrasToggle').click();
+      await page.locator('#podcastExtrasDrawer').waitFor({ state: 'visible' });
+      assert.equal(await page.locator('#podcastExtrasToggle').getAttribute('aria-expanded'), 'true');
 
       // 2. Mask bottom & height sliders update overlay styles & CSS vars
       await page.locator('#podcastMaskBottomRange').fill('10');

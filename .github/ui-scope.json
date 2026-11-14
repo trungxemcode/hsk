@@ -1,5 +1,5 @@
 {
-  "request": "Integrate real YouTube podcast episodes and bilingual channels (@LearnChineseThroughPodcast and @BaoBaoMandarin) into Podcast panel and standalone admin.html.",
+  "request": "Import all public YouTube channel videos into Admin Podcast; preserve all other app UI and existing Podcast layout.",
   "excludedRoutes": [
     "admin"
   ]

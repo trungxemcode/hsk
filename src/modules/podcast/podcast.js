@@ -215,8 +215,16 @@
     return merged;
   }
 
+  function firstPlayableEpisode() {
+    const eps = allEpisodes();
+    return (
+      eps.find((ep) => !ep.adminItem || window.HSKResourceSync?.checkItemAccess?.(ep.adminItem)?.allowed !== false) ||
+      core.STARTER_EPISODES[0]
+    );
+  }
+
   function currentEpisode() {
-    return allEpisodes().find((ep) => ep.id === state.currentEpisodeId) || allEpisodes()[0];
+    return allEpisodes().find((ep) => ep.id === state.currentEpisodeId) || firstPlayableEpisode();
   }
 
   function persistPrefs() {
@@ -270,15 +278,70 @@
     });
   }
 
+  // ---- UI Icon & Title Formatting Helpers ----
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  const ICON_PATHS = {
+    plus: ['M12 5v14', 'M5 12h14'],
+    prev: ['M19 19 9 12l10-7v14z', 'M5 19V5'],
+    play: ['M6 4l14 8-14 8V4z'],
+    pause: ['M6 5h4v14H6z', 'M14 5h4v14h-4z'],
+    next: ['M5 5l10 7-10 7V5z', 'M19 5v14'],
+    replay: ['M3 12a9 9 0 1 0 3-6.7L3 8', 'M3 3v5h5'],
+    loop: ['M17 2l4 4-4 4', 'M3 11V9a4 4 0 0 1 4-4h14', 'M7 22l-4-4 4-4', 'M21 13v2a4 4 0 0 1-4 4H3'],
+    sync: ['M21 12a9 9 0 1 1-2.64-6.36', 'M21 3v6h-6'],
+    volume: ['M11 5 6 9H2v6h4l5 4V5z', 'M15.54 8.46a5 5 0 0 1 0 7.07'],
+    mask: ['M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z', 'M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z'],
+    close: ['M18 6 6 18', 'M6 6l12 12'],
+    'chevron-down': ['m6 9 6 6 6-6'],
+    'chevron-left': ['m15 18-6-6 6-6'],
+    'chevron-right': ['m9 18 6-6-6-6']
+  };
+
+  function svgIcon(name, size = 14) {
+    const svg = document.createElementNS(SVG_NS, 'svg');
+    svg.setAttribute('width', String(size));
+    svg.setAttribute('height', String(size));
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', name === 'play' || name === 'pause' ? 'currentColor' : 'none');
+    svg.setAttribute('stroke', 'currentColor');
+    svg.setAttribute('stroke-width', '1.9');
+    svg.setAttribute('stroke-linecap', 'round');
+    svg.setAttribute('stroke-linejoin', 'round');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('class', 'podcast-ico');
+    for (const d of ICON_PATHS[name] || []) {
+      const path = document.createElementNS(SVG_NS, 'path');
+      path.setAttribute('d', d);
+      svg.append(path);
+    }
+    return svg;
+  }
+
+  function setBtnContent(btn, iconName, label, iconSize = 14) {
+    btn.textContent = '';
+    if (iconName) btn.append(svgIcon(iconName, iconSize));
+    if (label) btn.append(el('span', { className: 'podcast-btn-lbl' }, label));
+  }
+
+  function formatEpisodeDisplayTitle(ep) {
+    let raw = String(ep?.titleVi || ep?.title || '').trim();
+    if (!raw) return 'Tập Podcast';
+    raw = raw
+      .replace(/\s*\((?:BaoBao Mandarin|Learn Chinese Through Podcast)\)\s*$/i, '')
+      .replace(/^(?:HSK\s+\d+(?:\s*[-–+]\s*\d+|\+)?)\s*[|｜:·-]\s*/i, '')
+      .trim();
+    return raw || String(ep?.titleVi || ep?.title || '').trim();
+  }
+
   // ---- Build Panel DOM ----
   panel.textContent = '';
 
   const aiBadgeEl = el('span', { id: 'podcastAiBadge', className: 'podcast-ai-badge' }, 'AI: Tự động');
   const toggleImportBtn = el(
     'button',
-    { type: 'button', id: 'podcastToggleImportBtn', className: 'podcast-cta-btn' },
-    '+ Nhập YouTube / Sub tiếng Anh'
+    { type: 'button', id: 'podcastToggleImportBtn', className: 'podcast-cta-btn' }
   );
+  setBtnContent(toggleImportBtn, 'plus', 'Nhập YouTube / Sub');
 
   const headEl = el(
     'header',
@@ -286,11 +349,10 @@
     el(
       'div',
       { className: 'podcast-head-copy' },
-      el('span', { className: 'podcast-eyebrow' }, 'GIẢI TRÍ · PODCAST SONG NGỮ'),
       el('h2', null, 'Luyện nghe Podcast'),
-      el('p', { className: 'podcast-subtitle' }, 'Che phụ đề tiếng Anh đốt cứng ở đáy video YouTube và thay bằng phụ đề Tiếng Việt · Chữ Hán · Pinyin đồng bộ theo từng câu.')
+      el('p', { className: 'podcast-subtitle' }, 'Che phụ đề tiếng Anh trên YouTube, thay bằng Tiếng Việt · Chữ Hán · Pinyin đồng bộ từng câu.')
     ),
-    el('div', { className: 'podcast-head-actions' }, aiBadgeEl, toggleImportBtn)
+    el('div', { className: 'podcast-head-actions' }, toggleImportBtn)
   );
 
   // Import drawer
@@ -358,6 +420,12 @@
   const importBox = el(
     'section',
     { id: 'podcastImportBox', className: 'podcast-import-box', hidden: true, 'aria-label': 'Nhập video YouTube và phụ đề' },
+    el(
+      'div',
+      { className: 'podcast-import-head' },
+      el('strong', { className: 'podcast-import-title' }, 'Nhập video YouTube hoặc phụ đề tiếng Anh'),
+      aiBadgeEl
+    ),
     el('div', { className: 'podcast-import-row' }, urlInput, titleInput, hskSelect),
     el('div', { className: 'podcast-import-tools' }, autoFetchBtn, uploadBtn, fileInput),
     subInput,
@@ -365,39 +433,90 @@
     importStatusEl
   );
 
-  // Channel, Filter & Episode Strip
+  // Channel, Filter & Episode Library (placed cleanly below workspace stage)
+  const catalogCountEl = el('span', { id: 'podcastCatalogCount', className: 'podcast-catalog-count' }, '');
+  const syncBtn = el('button', {
+    type: 'button',
+    id: 'podcastSyncChannelsBtn',
+    className: 'podcast-sec-btn podcast-sync-channels-btn',
+    onClick: () => syncYoutubeChannels()
+  });
+  setBtnContent(syncBtn, 'sync', 'Cập nhật 2 kênh');
+
+  const catalogHeadEl = el(
+    'div',
+    { className: 'podcast-catalog-head' },
+    el('div', { className: 'podcast-catalog-title-wrap' }, el('h3', { className: 'podcast-catalog-title' }, 'Kho bài nghe'), catalogCountEl),
+    syncBtn
+  );
   const channelBarEl = el('div', { id: 'podcastChannelBar', className: 'podcast-channel-bar', 'aria-label': 'Chọn kênh podcast YouTube' });
   const filterStripEl = el('div', { id: 'podcastFilterStrip', className: 'podcast-filter-strip', role: 'tablist', 'aria-label': 'Lọc theo trình độ HSK' });
+  const catalogFiltersEl = el('div', { className: 'podcast-catalog-filters' }, channelBarEl, filterStripEl);
   const channelSyncStatusEl = el('p', { id: 'podcastChannelSyncStatus', className: 'podcast-channel-status', hidden: true });
-  const episodeStripEl = el('div', { id: 'podcastEpisodeList', className: 'podcast-ep-list' });
-  const catalogSection = el('section', { className: 'podcast-catalog', 'aria-label': 'Danh sách tập Podcast' }, channelBarEl, filterStripEl, channelSyncStatusEl, episodeStripEl);
+  const shelfPrevBtn = el('button', {
+    type: 'button',
+    id: 'podcastShelfPrevBtn',
+    className: 'podcast-shelf-nav podcast-shelf-nav--prev',
+    'aria-label': 'Cuộn danh sách sang trái',
+    title: 'Xem bài trước'
+  }, svgIcon('chevron-left', 18));
+  const shelfNextBtn = el('button', {
+    type: 'button',
+    id: 'podcastShelfNextBtn',
+    className: 'podcast-shelf-nav podcast-shelf-nav--next',
+    'aria-label': 'Cuộn danh sách sang phải',
+    title: 'Xem thêm bài'
+  }, svgIcon('chevron-right', 18));
+  const episodeStripEl = el('div', { id: 'podcastEpisodeList', className: 'podcast-ep-list podcast-ep-shelf' });
+  const shelfWrapEl = el('div', { className: 'podcast-shelf-wrap' }, shelfPrevBtn, episodeStripEl, shelfNextBtn);
+  const catalogSection = el(
+    'section',
+    { className: 'podcast-catalog', 'aria-label': 'Danh sách tập Podcast' },
+    catalogHeadEl,
+    catalogFiltersEl,
+    channelSyncStatusEl,
+    shelfWrapEl
+  );
 
   // Video Stage + Subtitle Mask
   const epMetaEl = el('div', { id: 'podcastEpMeta', className: 'podcast-ep-meta' });
   const ytHostEl = el('div', { id: 'podcastYtHost', className: 'podcast-yt-host' });
+  const videoTapBtn = el('button', {
+    type: 'button',
+    id: 'podcastVideoTap',
+    className: 'podcast-video-tap',
+    'aria-label': 'Phát video',
+    title: 'Nhấn vào video để Phát / Tạm dừng'
+  });
   const posterFallbackEl = el('div', { id: 'podcastPosterFallback', className: 'podcast-poster-fallback', hidden: true });
   const maskLinesEl = el('div', { className: 'podcast-mask-lines' });
-  const maskHintEl = el('span', { className: 'podcast-mask-pill' }, 'Lớp che sub EN · Đang hiện Tiếng Việt');
+  const maskHintEl = el('span', { className: 'podcast-sr-only' }, 'Lớp che sub EN · Đang hiện Tiếng Việt');
   const subMaskEl = el(
     'div',
     { id: 'podcastSubMask', className: 'podcast-sub-mask is-solid', 'aria-live': 'polite' },
-    el('div', { className: 'podcast-mask-top' }, maskHintEl),
+    maskHintEl,
     maskLinesEl
   );
   const videoShellEl = el(
     'div',
     { id: 'podcastVideoShell', className: 'podcast-video-shell' },
     ytHostEl,
+    videoTapBtn,
     posterFallbackEl,
     subMaskEl
   );
 
   // Controls
-  const prevCueBtn = el('button', { type: 'button', id: 'podcastPrevCueBtn', className: 'podcast-ctrl-btn', title: 'Câu trước' }, '◀ Trước');
-  const playBtn = el('button', { type: 'button', id: 'podcastPlayBtn', className: 'podcast-play-btn' }, '▶ Phát');
-  const nextCueBtn = el('button', { type: 'button', id: 'podcastNextCueBtn', className: 'podcast-ctrl-btn', title: 'Câu sau' }, 'Sau ▶');
-  const replayCueBtn = el('button', { type: 'button', id: 'podcastReplayCueBtn', className: 'podcast-ctrl-btn', title: 'Nghe lại câu đang chọn' }, '↻ Nghe lại câu');
-  const loopCueBtn = el('button', { type: 'button', id: 'podcastLoopCueBtn', className: 'podcast-ctrl-btn' }, 'Lặp câu');
+  const prevCueBtn = el('button', { type: 'button', id: 'podcastPrevCueBtn', className: 'podcast-ctrl-btn', title: 'Câu trước' });
+  setBtnContent(prevCueBtn, 'prev', 'Trước', 13);
+  const playBtn = el('button', { type: 'button', id: 'podcastPlayBtn', className: 'podcast-play-btn' });
+  setBtnContent(playBtn, 'play', 'Phát', 14);
+  const nextCueBtn = el('button', { type: 'button', id: 'podcastNextCueBtn', className: 'podcast-ctrl-btn', title: 'Câu sau' });
+  setBtnContent(nextCueBtn, 'next', 'Sau', 13);
+  const replayCueBtn = el('button', { type: 'button', id: 'podcastReplayCueBtn', className: 'podcast-ctrl-btn', title: 'Nghe lại câu đang chọn' });
+  setBtnContent(replayCueBtn, 'replay', 'Nghe lại', 13);
+  const loopCueBtn = el('button', { type: 'button', id: 'podcastLoopCueBtn', className: 'podcast-ctrl-btn', title: 'Lặp lại câu đang phát' });
+  setBtnContent(loopCueBtn, 'loop', 'Lặp câu', 13);
 
   const speedButtons = [0.75, 1, 1.25].map((rate) =>
     el('button', { type: 'button', className: 'podcast-speed-btn', dataset: { rate: String(rate) } }, `${rate}x`)
@@ -415,12 +534,12 @@
   });
   const timeLabelEl = el('span', { id: 'podcastTimeLabel', className: 'podcast-time-label' }, '0:00 / 0:40');
 
-  const toggleMaskBtn = el('button', { type: 'button', id: 'podcastToggleMaskBtn', className: 'podcast-layer-btn' }, 'Che sub EN: Bật');
-  const maskStyleBtn = el('button', { type: 'button', id: 'podcastMaskStyleBtn', className: 'podcast-layer-btn' }, 'Nền: Đặc tối');
+  const toggleMaskBtn = el('button', { type: 'button', id: 'podcastToggleMaskBtn', className: 'podcast-layer-btn' }, 'Che sub: Bật');
+  const maskStyleBtn = el('button', { type: 'button', id: 'podcastMaskStyleBtn', className: 'podcast-layer-btn' }, 'Đặc tối');
   const toggleZhBtn = el('button', { type: 'button', id: 'podcastToggleZhBtn', className: 'podcast-layer-btn' }, 'Chữ Hán');
   const togglePinBtn = el('button', { type: 'button', id: 'podcastTogglePinBtn', className: 'podcast-layer-btn' }, 'Pinyin');
   const toggleViBtn = el('button', { type: 'button', id: 'podcastToggleViBtn', className: 'podcast-layer-btn' }, 'Tiếng Việt');
-  const toggleEnBtn = el('button', { type: 'button', id: 'podcastToggleEnBtn', className: 'podcast-layer-btn' }, 'Gốc (EN)');
+  const toggleEnBtn = el('button', { type: 'button', id: 'podcastToggleEnBtn', className: 'podcast-layer-btn' }, 'EN gốc');
 
   const maskBottomRange = el('input', {
     id: 'podcastMaskBottomRange',
@@ -429,6 +548,7 @@
     max: '28',
     step: '1',
     value: String(state.prefs.maskBottom),
+    title: 'Kéo để căn đáy lớp che đúng dòng sub tiếng Anh trên video',
     'aria-label': 'Vị trí vùng che từ đáy khung hình'
   });
   const maskBottomValEl = el('span', { id: 'podcastMaskBottomVal', className: 'podcast-range-val' }, `${state.prefs.maskBottom}%`);
@@ -440,10 +560,68 @@
     max: '46',
     step: '1',
     value: String(state.prefs.maskHeight),
+    title: 'Điều chỉnh độ cao vùng che phủ kín dòng phụ đề tiếng Anh',
     'aria-label': 'Chiều cao vùng che phụ đề tiếng Anh'
   });
   const maskHeightValEl = el('span', { id: 'podcastMaskHeightVal', className: 'podcast-range-val' }, `${state.prefs.maskHeight}%`);
-  const maskResetBtn = el('button', { type: 'button', id: 'podcastMaskResetBtn', className: 'podcast-sec-btn' }, 'Đặt lại khung che');
+  const maskResetBtn = el('button', { type: 'button', id: 'podcastMaskResetBtn', className: 'podcast-sec-btn podcast-mask-reset-btn', title: 'Đặt lại vị trí và độ cao mặc định' }, 'Đặt lại');
+
+  const extrasBadgeEl = el('span', { id: 'podcastExtrasBadge', className: 'podcast-ep-level' }, 'HSK');
+  const extrasSummaryTitleEl = el('span', { id: 'podcastExtrasSummaryTitle', className: 'podcast-extras-title' }, 'Đang tải tập...');
+  const extrasChevronEl = el('span', { className: 'podcast-extras-chevron', 'aria-hidden': 'true' }, svgIcon('chevron-down', 15));
+  const extrasToggleBtn = el(
+    'button',
+    {
+      type: 'button',
+      id: 'podcastExtrasToggle',
+      className: 'podcast-extras-toggle',
+      'aria-expanded': 'false',
+      'aria-controls': 'podcastExtrasDrawer'
+    },
+    el('span', { className: 'podcast-extras-summary' }, extrasBadgeEl, extrasSummaryTitleEl),
+    el('span', { className: 'podcast-extras-action' }, el('span', null, 'Phụ đề & chi tiết'), extrasChevronEl)
+  );
+
+  const extrasDrawerEl = el(
+    'div',
+    { id: 'podcastExtrasDrawer', className: 'podcast-extras-drawer', hidden: true },
+    el(
+      'div',
+      { className: 'podcast-toolbar-stack' },
+      el(
+        'div',
+        { className: 'podcast-layer-group' },
+        el('span', { className: 'podcast-group-lbl' }, 'Phụ đề'),
+        toggleZhBtn,
+        togglePinBtn,
+        toggleViBtn,
+        toggleEnBtn
+      ),
+      el(
+        'div',
+        { className: 'podcast-mask-group' },
+        el('span', { className: 'podcast-group-lbl' }, 'Che video'),
+        toggleMaskBtn,
+        maskStyleBtn,
+        el(
+          'label',
+          { className: 'podcast-slider-field', htmlFor: 'podcastMaskBottomRange', title: 'Vị trí vùng che từ đáy khung hình' },
+          el('span', null, 'Đáy'),
+          maskBottomRange,
+          maskBottomValEl
+        ),
+        el(
+          'label',
+          { className: 'podcast-slider-field', htmlFor: 'podcastMaskHeightRange', title: 'Chiều cao lớp che phụ đề tiếng Anh' },
+          el('span', null, 'Cao'),
+          maskHeightRange,
+          maskHeightValEl
+        ),
+        maskResetBtn
+      )
+    ),
+    epMetaEl
+  );
 
   const controlsCard = el(
     'section',
@@ -453,41 +631,13 @@
       'div',
       { className: 'podcast-transport-row' },
       el('div', { className: 'podcast-transport-group' }, prevCueBtn, playBtn, nextCueBtn, replayCueBtn, loopCueBtn),
-      el('div', { className: 'podcast-speed-group' }, ...speedButtons)
+      el('div', { className: 'podcast-speed-group', role: 'group', 'aria-label': 'Tốc độ phát' }, ...speedButtons)
     ),
-    el(
-      'div',
-      { className: 'podcast-layer-row' },
-      toggleMaskBtn,
-      maskStyleBtn,
-      toggleZhBtn,
-      togglePinBtn,
-      toggleViBtn,
-      toggleEnBtn
-    ),
-    el(
-      'div',
-      { className: 'podcast-mask-sliders' },
-      el(
-        'label',
-        { className: 'podcast-slider-field', htmlFor: 'podcastMaskBottomRange' },
-        el('span', null, 'Vị trí từ đáy'),
-        maskBottomRange,
-        maskBottomValEl
-      ),
-      el(
-        'label',
-        { className: 'podcast-slider-field', htmlFor: 'podcastMaskHeightRange' },
-        el('span', null, 'Độ cao lớp che'),
-        maskHeightRange,
-        maskHeightValEl
-      ),
-      maskResetBtn
-    ),
-    el('p', { className: 'podcast-mask-tip' }, 'Mẹo: Điều chỉnh Vị trí từ đáy và Độ cao lớp che sao cho phủ kín dòng phụ đề tiếng Anh đốt cứng trên video YouTube.')
+    extrasToggleBtn,
+    extrasDrawerEl
   );
 
-  const playerCol = el('div', { className: 'podcast-player-col' }, epMetaEl, videoShellEl, controlsCard);
+  const playerCol = el('div', { className: 'podcast-player-col' }, videoShellEl, controlsCard);
 
   // Transcript + Word Popover Column
   const cueCountEl = el('span', { id: 'podcastCueCount', className: 'podcast-cue-count' }, '0 câu');
@@ -501,7 +651,7 @@
     el(
       'div',
       { className: 'podcast-transcript-head' },
-      el('div', null, el('h3', null, 'Phụ đề song ngữ'), cueCountEl),
+      el('div', { className: 'podcast-transcript-title-wrap' }, el('h3', null, 'Phụ đề song ngữ'), cueCountEl),
       autoScrollBtn
     ),
     wordPopoverEl,
@@ -510,7 +660,7 @@
 
   const stageEl = el('div', { className: 'podcast-stage' }, playerCol, transcriptCol);
 
-  panel.append(headEl, importBox, catalogSection, stageEl);
+  panel.append(headEl, importBox, stageEl, catalogSection);
 
   // ---- Helpers & Rendering ----
   function setImportStatus(msg, isError) {
@@ -531,10 +681,10 @@
     subMaskEl.style.setProperty('--podcast-mask-bottom', `${p.maskBottom}%`);
     subMaskEl.style.setProperty('--podcast-mask-height', `${p.maskHeight}%`);
 
-    toggleMaskBtn.textContent = `Che sub EN: ${p.maskEnabled ? 'Bật' : 'Tắt'}`;
+    toggleMaskBtn.textContent = `Che sub: ${p.maskEnabled ? 'Bật' : 'Tắt'}`;
     toggleMaskBtn.classList.toggle('is-active', p.maskEnabled);
 
-    maskStyleBtn.textContent = `Nền: ${p.maskStyle === 'solid' ? 'Đặc tối' : 'Mờ kính'}`;
+    maskStyleBtn.textContent = p.maskStyle === 'solid' ? 'Đặc tối' : 'Mờ kính';
     maskStyleBtn.classList.toggle('is-active', p.maskStyle === 'solid');
 
     toggleZhBtn.classList.toggle('is-active', p.showZh);
@@ -554,7 +704,8 @@
       btn.classList.toggle('is-active', Number(btn.dataset.rate) === Number(p.speed));
     }
     loopCueBtn.classList.toggle('is-active', state.loopCue);
-    playBtn.textContent = state.playing ? '⏸ Tạm dừng' : '▶ Phát';
+    setBtnContent(playBtn, state.playing ? 'pause' : 'play', state.playing ? 'Tạm dừng' : 'Phát', 14);
+    videoTapBtn.setAttribute('aria-label', state.playing ? 'Tạm dừng video' : 'Phát video');
 
     if (p.showVi && !p.showEn) maskHintEl.textContent = 'Đang che sub EN · Hiện Tiếng Việt';
     else if (p.showVi && p.showEn) maskHintEl.textContent = 'Đang hiện Việt + đối chiếu EN';
@@ -607,17 +758,16 @@
     if (window.HSKSpeech?.button) {
       speakWrap.append(window.HSKSpeech.button(han, `Nghe phát âm ${han}`, false));
     } else {
-      speakWrap.append(
-        el(
-          'button',
-          {
-            type: 'button',
-            className: 'podcast-sec-btn',
-            onClick: () => window.HSKSpeech?.speak?.(han)
-          },
-          '🔊 Đọc từ'
-        )
+      const speakFallbackBtn = el(
+        'button',
+        {
+          type: 'button',
+          className: 'podcast-sec-btn',
+          onClick: () => window.HSKSpeech?.speak?.(han)
+        }
       );
+      setBtnContent(speakFallbackBtn, 'volume', 'Đọc từ', 13);
+      speakWrap.append(speakFallbackBtn);
     }
 
     const saveBtn = el(
@@ -740,12 +890,13 @@
               type: 'button',
               className: 'podcast-cue-speak',
               title: 'Đọc câu tiếng Trung',
+              'aria-label': 'Đọc câu tiếng Trung',
               onClick: (ev) => {
                 ev.stopPropagation();
                 window.HSKSpeech?.speak?.(cue.zh);
               }
             },
-            '🔊'
+            svgIcon('volume', 13)
           );
         }
       }
@@ -844,7 +995,7 @@
       if (seenKeys.has(key) || seenKeys.has(info.label.toLowerCase())) continue;
       seenKeys.add(key);
       if (info.handle) seenKeys.add(info.label.toLowerCase());
-      extraChannels.push(info);
+      extraChannels.push({ ...info, label: info.handle || info.label });
     }
     const options = [{ id: 'all', label: 'Tất cả kênh' }]
       .concat(channels.map((ch) => ({ id: ch.handle, label: ch.name, handle: ch.handle })))
@@ -856,6 +1007,8 @@
         'button',
         {
           type: 'button',
+          title: opt.handle || 'Hiển thị tất cả kênh podcast',
+          dataset: opt.handle ? { handle: opt.handle } : null,
           'aria-pressed': String(state.channelFilter === opt.id),
           className: `podcast-channel-chip${state.channelFilter === opt.id ? ' is-active' : ''}`,
           onClick: () => {
@@ -864,23 +1017,15 @@
             renderEpisodeStrip();
           }
         },
-        opt.handle ? `${opt.label} (${opt.handle})` : opt.label
+        opt.label
       );
       pillsGroup.append(btn);
     }
+    channelBarEl.append(pillsGroup);
 
-    const syncBtn = el(
-      'button',
-      {
-        type: 'button',
-        id: 'podcastSyncChannelsBtn',
-        className: 'podcast-sec-btn podcast-sync-channels-btn',
-        disabled: state.channelSyncing,
-        onClick: () => syncYoutubeChannels()
-      },
-      state.channelSyncing ? 'Đang đồng bộ 2 kênh…' : '↻ Lấy tập mới từ 2 kênh YouTube'
-    );
-    channelBarEl.append(pillsGroup, syncBtn);
+    syncBtn.disabled = state.channelSyncing;
+    syncBtn.classList.toggle('is-busy', Boolean(state.channelSyncing));
+    setBtnContent(syncBtn, 'sync', state.channelSyncing ? 'Đang đồng bộ…' : 'Cập nhật 2 kênh', 13);
 
     if (state.channelSyncStatus) {
       channelSyncStatusEl.hidden = false;
@@ -949,6 +1094,14 @@
     }
   }
 
+  function syncShelfNavState() {
+    const maxScroll = Math.max(0, episodeStripEl.scrollWidth - episodeStripEl.clientWidth);
+    const left = episodeStripEl.scrollLeft;
+    const noScroll = maxScroll <= 4;
+    shelfPrevBtn.disabled = noScroll || left <= 2;
+    shelfNextBtn.disabled = noScroll || left >= maxScroll - 2;
+  }
+
   function renderEpisodeStrip() {
     episodeStripEl.textContent = '';
     const eps = allEpisodes().filter((ep) => {
@@ -964,12 +1117,16 @@
       if (state.levelFilter === 'custom') return Boolean(ep.isCustom);
       return ep.levelGroup === state.levelFilter;
     });
+    catalogCountEl.textContent = `${eps.length} tập`;
     if (!eps.length) {
       episodeStripEl.append(el('p', { className: 'podcast-empty' }, 'Không có tập nào trong nhóm này.'));
+      syncShelfNavState();
       return;
     }
+    const frag = document.createDocumentFragment();
     for (const ep of eps) {
       const active = ep.id === state.currentEpisodeId;
+      const displayTitle = formatEpisodeDisplayTitle(ep);
       const delBtn = ep.isCustom
         ? el(
             'button',
@@ -994,6 +1151,34 @@
           )
         : null;
 
+      const thumbBox = el('div', { className: 'podcast-ep-thumb' });
+      if (ep.youtubeId) {
+        const imgEl = el('img', {
+          className: 'podcast-ep-thumb-img',
+          src: `https://i.ytimg.com/vi/${ep.youtubeId}/mqdefault.jpg`,
+          alt: '',
+          loading: 'lazy',
+          decoding: 'async'
+        });
+        imgEl.addEventListener('error', () => {
+          imgEl.hidden = true;
+          thumbBox.classList.add('has-thumb-fallback');
+        });
+        thumbBox.append(imgEl);
+      } else {
+        thumbBox.classList.add('has-thumb-fallback');
+      }
+      thumbBox.append(
+        ...[
+          el('span', { className: 'podcast-ep-thumb-fallback' }, ep.channel || 'Podcast HSK'),
+          el('span', { className: 'podcast-ep-thumb-level' }, ep.isCustom ? `${ep.level || 'Tùy chỉnh'} · Tự nhập` : (ep.level || 'HSK')),
+          active ? el('span', { className: 'podcast-ep-playing-tag' }, 'Đang mở') : null,
+          delBtn,
+          el('span', { className: 'podcast-ep-dur-pill' }, ep.durationLabel || core.formatTimestamp(ep.durationSec || 40))
+        ].filter(Boolean)
+      );
+
+      const subLine = `${ep.channel || 'Podcast'}${ep.topic ? ` · ${ep.topic}` : ''}`;
       const card = el(
         'div',
         {
@@ -1009,36 +1194,41 @@
             }
           }
         },
+        thumbBox,
         el(
           'div',
-          { className: 'podcast-ep-card-top' },
-          el('span', { className: 'podcast-ep-level' }, ep.isCustom ? `${ep.level || 'Tùy chỉnh'} · Tự nhập` : ep.level),
-          el('span', { className: 'podcast-ep-dur' }, ep.durationLabel || core.formatTimestamp(ep.durationSec || 40)),
-          delBtn
-        ),
-        el('strong', { className: 'podcast-ep-title' }, ep.titleVi || ep.title),
-        el('small', { className: 'podcast-ep-channel' }, `${ep.channel || 'Podcast'} · ${ep.topic || 'Luyện nghe'}`)
+          { className: 'podcast-ep-body' },
+          el('strong', { className: 'podcast-ep-title', title: ep.titleVi || ep.title }, displayTitle),
+          el('small', { className: 'podcast-ep-channel' }, subLine)
+        )
       );
-      episodeStripEl.append(card);
+      frag.append(card);
     }
+    episodeStripEl.append(frag);
+    window.requestAnimationFrame(syncShelfNavState);
   }
 
   function renderEpisodeMeta(ep) {
     epMetaEl.textContent = '';
+    const displayTitle = formatEpisodeDisplayTitle(ep);
+    const channelLabel = ep.channel || 'YouTube Podcast';
+    const metaSubText = ep.title && ep.title !== displayTitle ? `Gốc: ${ep.title}` : '';
+    extrasBadgeEl.textContent = ep.level || 'HSK';
+    extrasSummaryTitleEl.textContent = displayTitle;
     epMetaEl.append(
-      el(
-        'div',
-        { className: 'podcast-meta-top' },
-        el('span', { className: 'podcast-ep-level' }, ep.level || 'HSK'),
-        el('span', { className: 'podcast-meta-channel' }, ep.channelHandle ? `${ep.channel} · ${ep.channelHandle}` : (ep.channel || 'YouTube Podcast')),
-        ep.youtubeId ? el('span', { className: 'podcast-meta-yt' }, `YouTube · ${ep.youtubeId}`) : null
-      ),
-      el('h3', { className: 'podcast-meta-title' }, ep.titleVi || ep.title),
-      ep.title && ep.titleVi && ep.title !== ep.titleVi
-        ? el('p', { className: 'podcast-meta-sub' }, `Tiêu đề gốc: ${ep.title}`)
-        : null,
-      ep.note ? el('p', { className: 'podcast-meta-note' }, ep.note) : null,
-      state.captionStatus ? el('p', { id: 'podcastCaptionStatus', className: 'podcast-caption-status' }, state.captionStatus) : null
+      ...[
+        el(
+          'div',
+          { className: 'podcast-meta-top' },
+          el('span', { className: 'podcast-ep-level' }, ep.level || 'HSK'),
+          el('span', { className: 'podcast-meta-channel', title: ep.channelHandle || channelLabel }, channelLabel),
+          ep.topic ? el('span', { className: 'podcast-meta-topic' }, ep.topic) : null,
+          ep.youtubeId ? el('span', { className: 'podcast-meta-yt' }, `YouTube · ${ep.youtubeId}`) : null
+        ),
+        el('h3', { className: 'podcast-meta-title' }, displayTitle),
+        metaSubText ? el('p', { className: 'podcast-meta-sub' }, metaSubText) : null,
+        state.captionStatus ? el('p', { id: 'podcastCaptionStatus', className: 'podcast-caption-status' }, state.captionStatus) : null
+      ].filter(Boolean)
     );
   }
 
@@ -1048,8 +1238,8 @@
     const hasYt = Boolean(ep?.youtubeId);
     posterFallbackEl.append(
       el('div', { className: 'podcast-poster-badge' }, hasYt ? 'YouTube Player · Chế độ đồng bộ phụ đề' : 'Podcast Audio'),
-      el('strong', { className: 'podcast-poster-title' }, ep?.titleVi || ep?.title || 'Podcast tiếng Trung'),
-      el('p', { className: 'podcast-poster-sub' }, hasYt ? `ID video: ${ep.youtubeId} — Nhấn ▶ Phát hoặc chọn câu bất kỳ bên phải để luyện nghe.` : 'Nhấn ▶ Phát để chạy phụ đề đồng bộ.')
+      el('strong', { className: 'podcast-poster-title' }, formatEpisodeDisplayTitle(ep)),
+      el('p', { className: 'podcast-poster-sub' }, hasYt ? `YouTube ${ep.youtubeId} — Nhấn Phát hoặc chọn câu bên phải để luyện nghe.` : 'Nhấn Phát để chạy phụ đề đồng bộ.')
     );
   }
 
@@ -1110,6 +1300,9 @@
         width: '100%',
         height: '100%',
         playerVars: {
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
           cc_load_policy: 0,
           iv_load_policy: 3,
           modestbranding: 1,
@@ -1300,7 +1493,7 @@
   }
 
   function selectEpisode(id) {
-    const ep = allEpisodes().find((x) => x.id === id) || core.STARTER_EPISODES[0];
+    const ep = allEpisodes().find((x) => x.id === id) || firstPlayableEpisode();
     if (!ep) return;
     if (ep.adminItem) {
       const check = window.HSKResourceSync?.checkItemAccess?.(ep.adminItem);
@@ -1720,6 +1913,28 @@
     syncMaskAppearance();
   });
 
+  videoTapBtn.addEventListener('click', togglePlayback);
+
+  extrasToggleBtn.addEventListener('click', () => {
+    const nextOpen = extrasDrawerEl.hidden;
+    extrasDrawerEl.hidden = !nextOpen;
+    extrasToggleBtn.classList.toggle('is-open', nextOpen);
+    extrasToggleBtn.setAttribute('aria-expanded', String(nextOpen));
+  });
+
+  shelfPrevBtn.addEventListener('click', () => {
+    const step = Math.max(240, Math.round(episodeStripEl.clientWidth * 0.72));
+    episodeStripEl.scrollBy({ left: -step, behavior: 'smooth' });
+  });
+
+  shelfNextBtn.addEventListener('click', () => {
+    const step = Math.max(240, Math.round(episodeStripEl.clientWidth * 0.72));
+    episodeStripEl.scrollBy({ left: step, behavior: 'smooth' });
+  });
+
+  episodeStripEl.addEventListener('scroll', syncShelfNavState, { passive: true });
+  window.addEventListener('resize', syncShelfNavState);
+
   autoScrollBtn.addEventListener('click', () => {
     state.prefs.autoScroll = !state.prefs.autoScroll;
     persistPrefs();
@@ -1730,6 +1945,8 @@
     enter() {
       updateAiBadge();
       renderChannelBar();
+      renderFilterStrip();
+      renderEpisodeStrip();
       const ep = currentEpisode();
       if (ep?.youtubeId && !state.ytReady && !state.ytFailed) {
         mountYoutubeVideo(ep.youtubeId);
@@ -1739,6 +1956,7 @@
       }
       renderMaskCue();
       highlightActiveCue(false);
+      window.requestAnimationFrame(syncShelfNavState);
     },
     selectEpisode,
     syncChannels: syncYoutubeChannels,
@@ -1753,12 +1971,18 @@
       playing: state.playing,
       cuesCount: state.cues.length,
       channelFilter: state.channelFilter,
+      extrasOpen: !extrasDrawerEl.hidden,
       prefs: { ...state.prefs }
     })
   };
 
   // Initialize first starter episode
   window.addEventListener('hsk-resources-updated', () => {
+    const eps = allEpisodes();
+    if (!eps.some((x) => x.id === state.currentEpisodeId)) {
+      const nextEp = firstPlayableEpisode();
+      if (nextEp) state.currentEpisodeId = nextEp.id;
+    }
     renderChannelBar();
     renderFilterStrip();
     renderEpisodeStrip();
