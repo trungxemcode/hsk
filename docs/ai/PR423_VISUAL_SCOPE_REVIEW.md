@@ -40,3 +40,18 @@ The prior commit also fixed actual dark-mode contrast failures in comparison exa
 2. Preserve original CI visual baselines and require evidence that intended changes are distinguished from true regressions; do not turn off UI-outside-scope, reset snapshot baselines, or exclude all affected routes.
 3. Retest keyboard, iPhone-safe mobile layouts, AI composer visibility, overflow, 17-route dark-mode contrast, music, PWA integrity, server functionality and all affected pages.
 4. Merge only on a fresh head with all required workflows SUCCESS and conflict-free; verify GitHub Pages and Cloudflare Editor deploy. Production AI/translator Worker is not part of this PR.
+
+
+## Owner confirmation and strict post-approval CI (2026-11-14)
+
+The owner explicitly approved the **entire PR #423 global typography and responsive layout design scope**, pinned to `86ce51e29f3e6f22ac43293aa5de712806fa1605`. This approval does not excuse new regressions.
+
+- Original main merge-base remains `fdc2d360ad50458721f3349e79484da2c818e48a` and is captured at every viewport/theme and route as `*-baseline-*.png` and geometry.
+- The immutable approved checkpoint is an additional reference, **not a replacement baseline**, pixel threshold change, disabled test, or blanket route exclusion.
+- Head and approved checkpoint must match on all **24 routes × four viewport/theme scenarios = 96 protected states**, in both computed geometry and the existing pixel check.
+- The original main-to-approved differences remain measured and preserved in each CI artifact for audit, while new changes after approval still fail a strict gate.
+- Other PWA, frontend safety, feature, iPhone layout and Studio tests remain mandatory. No AI/translation Worker deployment is authorized here.
+
+- This one-time approval only activates for PR #423. After merge, future PRs retain the unchanged main-to-head visual gate; no persistent exemption is inherited.
+
+- Approved-reference worktree is prepared from the pinned SHA by the existing visual-guard script. The GitHub Actions workflow itself remains byte-for-byte unchanged and its four scenarios and gate are intact.

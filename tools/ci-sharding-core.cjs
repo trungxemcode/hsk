@@ -18,13 +18,14 @@ function verifySuite(reports,commands,suite,total,head){
 }
 function isFrontendChange(files){return files.some(f=>! /^(tools\/|docs\/|server\/|\.github\/)/.test(f)&&/\.(css|js|html|json)$/.test(f));}
 function needsVisualComparison(files){
- return isFrontendChange(files)||files.some(f=>['.github/workflows/ui-outside-scope.yml','.github/ui-scope.json','tools/check-ui-outside-scope.cjs','tools/ui-outside-scope-core.cjs','tools/ci-sharding-core.cjs','tools/check-ci-reports.cjs'].includes(f));
+ return isFrontendChange(files)||files.some(f=>['.github/workflows/ui-outside-scope.yml','.github/ui-scope.json','tools/check-ui-outside-scope.cjs','tools/ui-outside-scope-core.cjs','tools/ci-sharding-core.cjs','tools/check-ci-reports.cjs','.github/ui-global-approval.json'].includes(f));
 }
-function verifyVisual(reports,base,head,changed,config){
+function verifyVisual(reports,base,head,changed,config,approval=null){
  const {scope}=require('./ui-outside-scope-core.cjs'),routes=scope(config),keys=new Set();
  assert.equal(reports.length,4,'All four viewport/theme reports are required');let count=0;
  for(const r of reports){
   assert.equal(r.baseSHA,base,'Wrong base');assert.equal(r.headSHA,head,'Stale head');assert.ok(!r.error,r.error);
+  if(approval){assert.equal(approval.baseSHA,base,'Original main baseline must remain pinned');assert.equal(r.approvedReferenceSHA,approval.approvedSHA,'Wrong design checkpoint');}else assert.equal(r.approvedReferenceSHA||null,null,'Unapproved PR must use original baseline');
   assert.deepEqual(r.changed,changed);assert.deepEqual(r.scope,config);
   assert.equal(r.selectedScenarios.length,1,'One scenario per shard');
   const {width,theme}=r.selectedScenarios[0],key=width+'-'+theme;
@@ -45,10 +46,19 @@ function verifyVisual(reports,base,head,changed,config){
       assert.equal(result.geometryEqual,true);
       assert.equal(result.imageCountEqual,true);
       assert.equal(result.changedPixels,0);
+      if(approval){
+       assert.equal(result.originalBaselineCompared,true,'Must measure original main against owner-approved design');
+       assert.equal(result.originalBaselineCaptured,true,'Original baseline visual evidence missing');
+       assert.ok(result.originalBaselineImageCount>0,'Original main screenshots missing');
+       assert.ok(result.approvedReferenceImageCount>0,'Approved reference screenshots missing');
+       assert.equal(typeof result.originalBaselineGeometryEqual,'boolean');
+       assert.equal(typeof result.originalBaselineChangedPixels,'number');
+       assert.equal(typeof result.originalBaselineDimensionsChanged,'boolean');
+      }
     }
     count++;
   }
-  assert.equal(r.result,needsVisualComparison(changed)?'PASS: protected entry-page states unchanged':'Not applicable: no app or visual-guard changes');
+  assert.equal(r.result,needsVisualComparison(changed)?approval?'PASS: owner-approved global UI unchanged on all protected states':'PASS: protected entry-page states unchanged':'Not applicable: no app or visual-guard changes');
  }
  return count;
 }

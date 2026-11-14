@@ -1,0 +1,40 @@
+{
+  "request": "Owner explicitly approved full PR #423 global UI design at immutable commit 86ce51e on 2026-11-14. Original main snapshots and strict complete route comparisons retained; no baseline changes or exclusions.",
+  "pullRequest": 423,
+  "ownerApproved": true,
+  "baseSHA": "fdc2d360ad50458721f3349e79484da2c818e48a",
+  "approvedSHA": "86ce51e29f3e6f22ac43293aa5de712806fa1605",
+  "routes": [
+    "home",
+    "lessons",
+    "practice",
+    "search",
+    "ai-qa",
+    "sentence-editor",
+    "learn",
+    "quiz",
+    "srs",
+    "mistakes",
+    "compare",
+    "notebook",
+    "match-game",
+    "sentence-game",
+    "study4",
+    "real-reading",
+    "exam",
+    "music",
+    "music-play",
+    "translator",
+    "account",
+    "profile",
+    "about",
+    "admin"
+  ],
+  "scenarios": [
+    "390-light",
+    "390-dark",
+    "1440-light",
+    "1440-dark"
+  ],
+  "evidence": "docs/ai/PR423_VISUAL_SCOPE_REVIEW.md"
+}

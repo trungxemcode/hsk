@@ -4,15 +4,35 @@ const {execFileSync}=require('node:child_process');
 const assert=require('node:assert/strict');
 const {ROUTES,scope,addedRoutesFromNavigation,routeIsOpen,pixels,visualPixels,measureDOM,scenarios,canRecaptureGeometryOnly}=require('./ui-outside-scope-core.cjs');
 const {needsVisualComparison}=require('./ci-sharding-core.cjs');
-const [before,after,out]=process.argv.slice(2).map(x=>path.resolve(x));
-assert.ok(before&&after&&out,'Usage: node tools/check-ui-outside-scope.cjs BASE_DIR HEAD_DIR OUTPUT_DIR');
+const args=process.argv.slice(2);
+assert.equal(args.length,3,'Usage: node tools/check-ui-outside-scope.cjs BASE_DIR HEAD_DIR OUTPUT_DIR');
+const [before,after,out]=args.map(x=>path.resolve(x));
 fs.mkdirSync(out,{recursive:true});
 const git=(...args)=>execFileSync('git',['-C',after,...args],{encoding:'utf8'}).trim();
 const baseSHA=execFileSync('git',['-C',before,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
 const headSHA=git('rev-parse','HEAD');
 const changed=git('diff','--name-only',baseSHA,headSHA).split('\n').filter(Boolean);
+const approvalFile=path.join(after,'.github/ui-global-approval.json');
+// The one-time approval manifest must be NEW in this PR, never inherited by
+// later PRs. Keep the standard main/head guard unchanged after this merge.
+const approval=changed.includes('.github/ui-global-approval.json')&&fs.existsSync(approvalFile)?JSON.parse(fs.readFileSync(approvalFile,'utf8')):null;
+let approvedBefore=null;
+if(approval){
+ approvedBefore=path.join(require('node:os').tmpdir(),'hsk-approved-ui-'+process.pid);
+ execFileSync('git',['-C',after,'worktree','add','--detach',approvedBefore,approval.approvedSHA],{encoding:'utf8'});
+ assert.ok(approvedBefore,'Owner-approved design requires original base AND immutable approved checkpoint');
+ assert.equal(approval.pullRequest,423,'Approval is strictly PR #423');
+ assert.equal(approval.baseSHA,baseSHA,'Approval base must be unchanged main merge base');
+ assert.equal(approval.approvedSHA,execFileSync('git',['-C',approvedBefore,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),'Approved checkpoint must be exact');
+ assert.equal(git('merge-base',baseSHA,approval.approvedSHA),baseSHA,'Approved design must descend from original baseline');
+ assert.equal(git('merge-base',approval.approvedSHA,headSHA),approval.approvedSHA,'Head must descend from approved design');
+ assert.deepEqual(approval.routes,ROUTES,'All routes must remain protected');
+ assert.deepEqual(approval.scenarios,['390-light','390-dark','1440-light','1440-dark'],'All scenarios must be protected');
+ assert.equal(approval.ownerApproved,true,'Explicit owner approval required');
+ assert.ok(!changed.includes('.github/ui-scope.json'),'No global scope bypass');
+}
 const compareUI=needsVisualComparison(changed),selectedScenarios=scenarios(process.env.UI_SCOPE_WIDTH,process.env.UI_SCOPE_THEME);
-const report={baseSHA,headSHA,changed,selectedScenarios,results:[],coverage:'Guest entry pages plus admin with local mocked owner/role API. Authenticated learner dashboards and modal/learning substates require separate fixtures/review.'};
+const report={baseSHA,headSHA,approvedReferenceSHA:approval?.approvedSHA||null,changed,selectedScenarios,results:[],coverage:'Guest entry pages plus admin with local mocked owner/role API. Authenticated learner dashboards and modal/learning substates require separate fixtures/review.'};
 const save=()=>fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));
 // An old scope declaration cannot silently exempt a page in the next PR.
 const config=changed.includes('.github/ui-scope.json')?JSON.parse(fs.readFileSync(path.join(after,'.github/ui-scope.json'),'utf8')):{request:'No exclusions declared in this PR',excludedRoutes:[]};
@@ -35,7 +55,8 @@ function serve(root){
 }
 (async()=>{
  const {chromium}=require('playwright'),{PNG}=require('pngjs');
- const servers=await Promise.all([serve(before),serve(after)]);
+ const servers=await Promise.all([serve(before),...(approval?[serve(approvedBefore)]:[]),serve(after)]);
+ const headServer=servers[servers.length-1],approvedServer=approval?servers[1]:null;
  const browser=await chromium.launch({headless:true,args:['--disable-gpu','--force-color-profile=srgb'],...(process.env.CHROME_EXECUTABLE?{executablePath:process.env.CHROME_EXECUTABLE}:{})});
  let failures=0;
  async function capture(server,route,width,theme,prefix){
@@ -125,7 +146,7 @@ function serve(root){
    if((config.newRoutes||[]).includes(route)){
     // The baseline has no such page: verify the NEW page actually opens and
     // captures; do not pretend that its pixels were compared against a baseline.
-    const b=await capture(servers[1],route,width,theme,path.join(out,key+'-after'));
+    const b=await capture(headServer,route,width,theme,path.join(out,key+'-after'));
     const result={key,title:b.title,newRoute:true,baselineAvailable:false,headCaptured:true,geometryElements:b.geometry.length,screenshotCount:b.images.length,pass:b.geometry.length>0&&b.images.length>0};
     if(!result.pass)failures++;
     report.results.push(result);save();
@@ -134,9 +155,29 @@ function serve(root){
    }
    let result,attempt=0;
    for(attempt=1;attempt<=3;attempt++){
-    const a=await capture(servers[0],route,width,theme,path.join(out,key+'-before'));
-    const b=await capture(servers[1],route,width,theme,path.join(out,key+'-after'));
+    // Capture original main for permanent before/after audit evidence. Compare
+    // immutable owner-approved design with head, strictly on all protected pages.
+    const baseline=approval?await capture(servers[0],route,width,theme,path.join(out,key+'-baseline')):null;
+    const a=await capture(approval?approvedServer:servers[0],route,width,theme,path.join(out,key+'-before'));
+    const b=await capture(headServer,route,width,theme,path.join(out,key+'-after'));
     result={key,title:a.title,geometryEqual:JSON.stringify(a.geometry)===JSON.stringify(b.geometry),imageCountEqual:a.images.length===b.images.length,rawChangedPixels:0,changedPixels:0};
+    if(approval){
+     result.originalBaselineCompared=true;
+     result.originalBaselineCaptured=baseline.images.length>0&&baseline.geometry.length>0;
+     result.originalBaselineImageCount=baseline.images.length;
+     result.approvedReferenceImageCount=a.images.length;
+     result.originalBaselineGeometryEqual=JSON.stringify(baseline.geometry)===JSON.stringify(a.geometry);
+     result.originalBaselineImageCountEqual=baseline.images.length===a.images.length;
+     result.originalBaselineChangedPixels=0;
+     result.originalBaselineDimensionsChanged=false;
+     for(let i=0;i<Math.min(baseline.images.length,a.images.length);i++){
+      const original=PNG.sync.read(fs.readFileSync(baseline.images[i]));
+      const designed=PNG.sync.read(fs.readFileSync(a.images[i]));
+      const historicalDelta=visualPixels(original,designed);
+      if(Number.isFinite(historicalDelta))result.originalBaselineChangedPixels+=historicalDelta;
+      else result.originalBaselineDimensionsChanged=true;
+     }
+    }
     for(let i=0;i<Math.min(a.images.length,b.images.length);i++){
     const x=PNG.sync.read(fs.readFileSync(a.images[i])),y=PNG.sync.read(fs.readFileSync(b.images[i]));
     const delta=pixels(x,y);result.rawChangedPixels+=delta.changed;
@@ -154,6 +195,6 @@ function serve(root){
    result.captureAttempts=attempt;
    if(!result.pass)failures++;report.results.push(result);save();console.log((result.pass?'PASS ':'FAIL ')+key+' pixels='+result.changedPixels+' geometry='+result.geometryEqual);
   }
-  report.result=failures?'FAIL: '+failures+' outside-scope states changed':'PASS: protected entry-page states unchanged';save();assert.equal(failures,0,report.result);
- }finally{await browser.close();for(const s of servers)s.close();}
+  report.result=failures?'FAIL: '+failures+' outside-scope states changed':approval?'PASS: owner-approved global UI unchanged on all protected states':'PASS: protected entry-page states unchanged';save();assert.equal(failures,0,report.result);
+ }finally{await browser.close();for(const s of servers)s.close();if(approvedBefore)execFileSync('git',['-C',after,'worktree','remove','--force',approvedBefore]);}
 })().catch(e=>{report.error=e.stack;save();console.error(e);process.exitCode=1;});
