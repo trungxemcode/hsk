@@ -6,6 +6,8 @@
 
   const PREFS_KEY = 'hsk-podcast-prefs-v1';
   const CUSTOM_EP_KEY = 'hsk-podcast-custom-v1';
+  const CHANNEL_EP_KEY = 'hsk-podcast-channel-eps-v1';
+  const CUES_CACHE_PREFIX = 'hsk-podcast-cues-v1-';
 
   const DEFAULT_PREFS = {
     maskEnabled: true,
@@ -126,7 +128,12 @@
   const state = {
     prefs: { ...DEFAULT_PREFS, ...(savedPrefs && !Array.isArray(savedPrefs) ? savedPrefs : {}) },
     customEpisodes: Array.isArray(loadJsonStorage(CUSTOM_EP_KEY, [])) ? loadJsonStorage(CUSTOM_EP_KEY, []) : [],
+    channelEpisodes: Array.isArray(loadJsonStorage(CHANNEL_EP_KEY, [])) ? loadJsonStorage(CHANNEL_EP_KEY, []) : [],
     levelFilter: 'all',
+    channelFilter: 'all',
+    channelSyncStatus: '',
+    channelSyncing: false,
+    captionStatus: '',
     currentEpisodeId: core.STARTER_EPISODES[0].id,
     cues: [],
     activeCueIdx: -1,
@@ -142,35 +149,64 @@
     pinyinLoading: false,
     importOpen: false,
     selectedWord: null,
-    pendingRequest: null
+    pendingRequest: null,
+    captionAbort: null
   };
 
   function adminPodcasts() {
     const items = window.HSKResourceSync?.getManifest?.()?.podcasts || [];
+    const starterByYt = new Map(
+      core.STARTER_EPISODES.filter((e) => e.youtubeId).map((e) => [e.youtubeId, e])
+    );
     return items
       .filter((item) => item && item.access !== 'hidden')
       .map((item) => {
         const n = Number(item.level) || 3;
         const levelGroup = n <= 2 ? 'hsk1-2' : n === 3 ? 'hsk3' : n === 4 ? 'hsk4' : 'hsk5-6';
-        const parsedCues = item.subtitleText ? core.parseSubtitleText(item.subtitleText) : [];
+        const youtubeId = core.extractYoutubeId(item.youtubeUrl || '');
+        const starter = youtubeId ? starterByYt.get(youtubeId) : null;
+        const parsedCues = item.subtitleText
+          ? core.parseSubtitleText(item.subtitleText)
+          : (starter?.cues || []);
+        const matchedChannel = core.extractYoutubeChannelKey?.(item.note || item.title || '') || null;
         return {
           id: `admin-${item.id}`,
           adminItem: item,
-          title: item.title,
-          titleVi: item.title,
+          title: starter?.title || item.title,
+          titleVi: item.title || starter?.titleVi || '',
           level: `HSK ${n}`,
           levelGroup,
-          channel: 'Admin đề xuất',
-          topic: item.access === 'vip' ? 'Chỉ VIP' : 'Podcast HSK',
-          youtubeId: core.extractYoutubeId(item.youtubeUrl || ''),
+          channel: starter?.channel || matchedChannel?.name || 'Admin đề xuất',
+          channelHandle: starter?.channelHandle || matchedChannel?.handle || '',
+          channelUrl: starter?.channelUrl || matchedChannel?.url || '',
+          durationSec: starter?.durationSec || 0,
+          durationLabel: starter?.durationLabel || '',
+          topic: item.access === 'vip' ? 'Chỉ VIP' : (starter?.topic || 'Podcast HSK'),
+          youtubeId,
           cues: parsedCues,
-          note: item.note || ''
+          note: item.note || starter?.note || ''
         };
       });
   }
 
   function allEpisodes() {
-    return [...adminPodcasts(), ...state.customEpisodes, ...core.STARTER_EPISODES];
+    const merged = [];
+    const seenYt = new Set();
+    const pushList = (list) => {
+      for (const ep of list) {
+        if (!ep) continue;
+        if (ep.youtubeId && !ep.isCustom) {
+          if (seenYt.has(ep.youtubeId)) continue;
+          seenYt.add(ep.youtubeId);
+        }
+        merged.push(ep);
+      }
+    };
+    pushList(adminPodcasts());
+    pushList(state.customEpisodes);
+    pushList(core.STARTER_EPISODES);
+    pushList(state.channelEpisodes);
+    return merged;
   }
 
   function currentEpisode() {
@@ -183,6 +219,23 @@
 
   function persistCustomEpisodes() {
     saveJsonStorage(CUSTOM_EP_KEY, state.customEpisodes.slice(0, 15));
+  }
+
+  function persistChannelEpisodes() {
+    saveJsonStorage(CHANNEL_EP_KEY, state.channelEpisodes.slice(0, 30));
+  }
+
+  let cachedWorkerEndpoint = '';
+  async function getWorkerEndpointUrl(signal) {
+    if (cachedWorkerEndpoint) return cachedWorkerEndpoint;
+    const configResponse = await fetch('./translation-config.json', { signal, cache: 'no-store' });
+    if (!configResponse.ok) throw Error('Dịch vụ AI chưa sẵn sàng.');
+    const config = await configResponse.json();
+    if (!config.enabled || !config.endpoint) throw Error('Dịch vụ AI chưa sẵn sàng.');
+    const u = new URL(config.endpoint);
+    if (u.protocol !== 'https:') throw Error('Dịch vụ AI chưa sẵn sàng.');
+    cachedWorkerEndpoint = u.origin;
+    return cachedWorkerEndpoint;
   }
 
   function ensurePinyinPro() {
@@ -306,10 +359,12 @@
     importStatusEl
   );
 
-  // Filter & Episode Strip
+  // Channel, Filter & Episode Strip
+  const channelBarEl = el('div', { id: 'podcastChannelBar', className: 'podcast-channel-bar', 'aria-label': 'Chọn kênh podcast YouTube' });
   const filterStripEl = el('div', { id: 'podcastFilterStrip', className: 'podcast-filter-strip', role: 'tablist', 'aria-label': 'Lọc theo trình độ HSK' });
+  const channelSyncStatusEl = el('p', { id: 'podcastChannelSyncStatus', className: 'podcast-channel-status', hidden: true });
   const episodeStripEl = el('div', { id: 'podcastEpisodeList', className: 'podcast-ep-list' });
-  const catalogSection = el('section', { className: 'podcast-catalog', 'aria-label': 'Danh sách tập Podcast' }, filterStripEl, episodeStripEl);
+  const catalogSection = el('section', { className: 'podcast-catalog', 'aria-label': 'Danh sách tập Podcast' }, channelBarEl, filterStripEl, channelSyncStatusEl, episodeStripEl);
 
   // Video Stage + Subtitle Mask
   const epMetaEl = el('div', { id: 'podcastEpMeta', className: 'podcast-ep-meta' });
@@ -759,6 +814,79 @@
     }
   }
 
+  function renderChannelBar() {
+    channelBarEl.textContent = '';
+    const channels = Array.isArray(core.DEFAULT_CHANNELS) ? core.DEFAULT_CHANNELS : [];
+    const options = [{ id: 'all', label: 'Tất cả kênh' }].concat(
+      channels.map((ch) => ({ id: ch.handle, label: ch.name, handle: ch.handle }))
+    );
+    const pillsGroup = el('div', { className: 'podcast-channel-pills', role: 'group', 'aria-label': 'Kênh YouTube' });
+    for (const opt of options) {
+      const btn = el(
+        'button',
+        {
+          type: 'button',
+          'aria-pressed': String(state.channelFilter === opt.id),
+          className: `podcast-channel-chip${state.channelFilter === opt.id ? ' is-active' : ''}`,
+          onClick: () => {
+            state.channelFilter = opt.id;
+            renderChannelBar();
+            renderEpisodeStrip();
+          }
+        },
+        opt.handle ? `${opt.label} (${opt.handle})` : opt.label
+      );
+      pillsGroup.append(btn);
+    }
+
+    const syncBtn = el(
+      'button',
+      {
+        type: 'button',
+        id: 'podcastSyncChannelsBtn',
+        className: 'podcast-sec-btn podcast-sync-channels-btn',
+        disabled: state.channelSyncing,
+        onClick: () => syncYoutubeChannels()
+      },
+      state.channelSyncing ? 'Đang đồng bộ 2 kênh…' : '↻ Lấy tập mới từ 2 kênh YouTube'
+    );
+    channelBarEl.append(pillsGroup, syncBtn);
+
+    if (state.channelSyncStatus) {
+      channelSyncStatusEl.hidden = false;
+      channelSyncStatusEl.textContent = state.channelSyncStatus;
+    } else {
+      channelSyncStatusEl.hidden = true;
+      channelSyncStatusEl.textContent = '';
+    }
+  }
+
+  async function syncYoutubeChannels() {
+    if (state.channelSyncing) return;
+    state.channelSyncing = true;
+    state.channelSyncStatus = 'Đang lấy danh sách tập mới nhất từ @LearnChineseThroughPodcast và @BaoBaoMandarin…';
+    renderChannelBar();
+    try {
+      const workerOrigin = await getWorkerEndpointUrl();
+      const res = await fetch(`${workerOrigin}/podcast-feed?channel=all`, { method: 'GET', cache: 'no-store' });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !Array.isArray(data?.episodes)) {
+        throw Error(data?.error || 'Không lấy được danh sách tập mới từ 2 kênh YouTube.');
+      }
+      state.channelEpisodes = data.episodes;
+      persistChannelEpisodes();
+      const visibleCount = allEpisodes().length;
+      state.channelSyncStatus = `Đã đồng bộ ${data.episodes.length} tập gần đây từ 2 kênh YouTube (tổng ${visibleCount} tập sẵn sàng).`;
+    } catch (err) {
+      state.channelSyncStatus = err?.message || 'Chưa đồng bộ được kênh YouTube lúc này.';
+    } finally {
+      state.channelSyncing = false;
+      renderChannelBar();
+      renderFilterStrip();
+      renderEpisodeStrip();
+    }
+  }
+
   function renderFilterStrip() {
     filterStripEl.textContent = '';
     const filters = [
@@ -794,6 +922,14 @@
   function renderEpisodeStrip() {
     episodeStripEl.textContent = '';
     const eps = allEpisodes().filter((ep) => {
+      if (state.channelFilter !== 'all') {
+        const chHandle = String(ep.channelHandle || '').toLowerCase();
+        const chName = String(ep.channelName || ep.channel || '').toLowerCase();
+        const target = state.channelFilter.toLowerCase();
+        const matchObj = core.extractYoutubeChannelKey?.(state.channelFilter);
+        const matches = chHandle === target || (matchObj && chName === matchObj.name.toLowerCase());
+        if (!matches) return false;
+      }
       if (state.levelFilter === 'all') return true;
       if (state.levelFilter === 'custom') return Boolean(ep.isCustom);
       return ep.levelGroup === state.levelFilter;
@@ -864,14 +1000,15 @@
         'div',
         { className: 'podcast-meta-top' },
         el('span', { className: 'podcast-ep-level' }, ep.level || 'HSK'),
-        el('span', { className: 'podcast-meta-channel' }, ep.channel || 'YouTube Podcast'),
+        el('span', { className: 'podcast-meta-channel' }, ep.channelHandle ? `${ep.channel} · ${ep.channelHandle}` : (ep.channel || 'YouTube Podcast')),
         ep.youtubeId ? el('span', { className: 'podcast-meta-yt' }, `YouTube · ${ep.youtubeId}`) : null
       ),
       el('h3', { className: 'podcast-meta-title' }, ep.titleVi || ep.title),
       ep.title && ep.titleVi && ep.title !== ep.titleVi
         ? el('p', { className: 'podcast-meta-sub' }, `Tiêu đề gốc: ${ep.title}`)
         : null,
-      ep.note ? el('p', { className: 'podcast-meta-note' }, ep.note) : null
+      ep.note ? el('p', { className: 'podcast-meta-note' }, ep.note) : null,
+      state.captionStatus ? el('p', { id: 'podcastCaptionStatus', className: 'podcast-caption-status' }, state.captionStatus) : null
     );
   }
 
@@ -1067,6 +1204,71 @@
     if (autoPlay && !state.playing) startPlayback();
   }
 
+  async function maybeFetchFullYoutubeCaptions(ep) {
+    if (!ep?.youtubeId || ep.isCustom || panel.hidden) return;
+    if (state.captionAbort) {
+      state.captionAbort.abort();
+      state.captionAbort = null;
+    }
+    const cacheKey = `${CUES_CACHE_PREFIX}${ep.youtubeId}`;
+    const cached = loadJsonStorage(cacheKey, null);
+    if (Array.isArray(cached) && cached.length > 10) {
+      await ensurePinyinPro();
+      if (state.currentEpisodeId !== ep.id) return;
+      state.cues = core.enrichCuesLocal(cached, { simplify: true });
+      const lastEnd = state.cues.length ? state.cues[state.cues.length - 1].end : 0;
+      if (lastEnd > state.durationSec) state.durationSec = Math.round(lastEnd);
+      state.captionStatus = `✓ Đã nạp trọn bộ ${state.cues.length} câu phụ đề song ngữ từ YouTube.`;
+      renderEpisodeMeta(ep);
+      renderMaskCue();
+      renderTranscript();
+      updateTimeDisplay(false);
+      return;
+    }
+
+    if ((ep.cues || []).length > 15) return;
+    const controller = new AbortController();
+    state.captionAbort = controller;
+    state.captionStatus = 'Đang tự động tải trọn bộ phụ đề Trung · Việt của video YouTube…';
+    renderEpisodeMeta(ep);
+    try {
+      const workerOrigin = await getWorkerEndpointUrl(controller.signal);
+      const res = await fetch(`${workerOrigin}/podcast-captions?v=${encodeURIComponent(ep.youtubeId)}`, {
+        method: 'GET',
+        signal: controller.signal
+      });
+      const data = await res.json().catch(() => null);
+      if (state.captionAbort === controller) state.captionAbort = null;
+      if (!res.ok || !Array.isArray(data?.cues) || !data.cues.length) {
+        if (state.currentEpisodeId === ep.id) {
+          state.captionStatus = (ep.cues || []).length ? `Đang phát bản xem trước ${(ep.cues || []).length} câu.` : '';
+          renderEpisodeMeta(ep);
+        }
+        return;
+      }
+      saveJsonStorage(cacheKey, data.cues);
+      await ensurePinyinPro();
+      if (state.currentEpisodeId !== ep.id) return;
+      state.cues = core.enrichCuesLocal(data.cues, { simplify: true });
+      const apiDur = Number(data.videoDetails?.lengthSeconds || 0);
+      const lastEnd = state.cues.length ? state.cues[state.cues.length - 1].end : 0;
+      state.durationSec = Math.max(ep.durationSec || 0, apiDur || 0, Math.round(lastEnd) || 40);
+      state.activeCueIdx = core.findActiveCueIndex(state.cues, state.currentTime);
+      if (state.activeCueIdx < 0 && state.cues.length) state.activeCueIdx = 0;
+      state.captionStatus = `✓ Đã nạp trọn bộ ${state.cues.length} câu phụ đề Trung · Việt từ YouTube.`;
+      renderEpisodeMeta(ep);
+      renderMaskCue();
+      renderTranscript();
+      updateTimeDisplay(false);
+    } catch (_) {
+      if (state.captionAbort === controller) state.captionAbort = null;
+      if (state.currentEpisodeId === ep.id) {
+        state.captionStatus = '';
+        renderEpisodeMeta(ep);
+      }
+    }
+  }
+
   function selectEpisode(id) {
     const ep = allEpisodes().find((x) => x.id === id) || core.STARTER_EPISODES[0];
     if (!ep) return;
@@ -1080,7 +1282,12 @@
     }
     pausePlayback();
     state.currentEpisodeId = ep.id;
-    state.cues = core.enrichCuesLocal(ep.cues || []);
+    const cachedFull = ep.youtubeId && !ep.isCustom ? loadJsonStorage(`${CUES_CACHE_PREFIX}${ep.youtubeId}`, null) : null;
+    const baseCues = Array.isArray(cachedFull) && cachedFull.length > (ep.cues || []).length ? cachedFull : (ep.cues || []);
+    state.cues = core.enrichCuesLocal(baseCues, { simplify: true });
+    state.captionStatus = Array.isArray(cachedFull) && cachedFull.length > 10
+      ? `✓ Đã nạp trọn bộ ${state.cues.length} câu phụ đề song ngữ từ YouTube.`
+      : '';
     const lastCueEnd = state.cues.length ? state.cues[state.cues.length - 1].end : 36;
     state.durationSec = Math.max(ep.durationSec || 0, lastCueEnd || 36);
     state.currentTime = 0;
@@ -1098,6 +1305,7 @@
     if (ep.youtubeId && !panel.hidden) {
       posterFallbackEl.hidden = false;
       mountYoutubeVideo(ep.youtubeId);
+      maybeFetchFullYoutubeCaptions(ep);
     } else {
       posterFallbackEl.hidden = false;
     }
@@ -1162,7 +1370,7 @@
 
   function installCustomEpisode({ youtubeId, titleVi, title, hskLevel, cues, note }) {
     const id = `custom-${youtubeId || Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
-    const enriched = core.enrichCuesLocal(cues);
+    const enriched = core.enrichCuesLocal(cues, { simplify: true });
     const maxEnd = enriched.length ? enriched[enriched.length - 1].end : 40;
     const hskNum = Number(hskLevel) || 3;
     const levelGroup = hskNum <= 2 ? 'hsk1-2' : hskNum === 3 ? 'hsk3' : hskNum === 4 ? 'hsk4' : 'hsk5-6';
@@ -1183,9 +1391,11 @@
     };
     state.customEpisodes = [ep, ...state.customEpisodes].slice(0, 15);
     persistCustomEpisodes();
+    state.channelFilter = 'all';
     state.levelFilter = 'all';
     state.prefs.maskEnabled = true;
     persistPrefs();
+    renderChannelBar();
     renderFilterStrip();
     selectEpisode(ep.id);
     state.importOpen = false;
@@ -1207,6 +1417,27 @@
       autoFetchBtn.disabled = true;
       translateBtn.disabled = true;
       try {
+        // 1. Try free direct dual YouTube CC first (instant for @LearnChineseThroughPodcast & @BaoBaoMandarin)
+        try {
+          const workerOrigin = await getWorkerEndpointUrl();
+          const capRes = await fetch(`${workerOrigin}/podcast-captions?v=${encodeURIComponent(ytId)}`, { method: 'GET' });
+          const capData = await capRes.json().catch(() => null);
+          if (capRes.ok && capData?.cues?.length && capData?.languages?.zh && capData?.languages?.vi) {
+            await ensurePinyinPro();
+            const epTitle = titleInput.value.trim() || capData.videoDetails?.title || `Podcast YouTube (${ytId})`;
+            installCustomEpisode({
+              youtubeId: ytId,
+              titleVi: epTitle,
+              title: capData.videoDetails?.title || epTitle,
+              hskLevel,
+              cues: capData.cues,
+              note: `Đã nạp trực tiếp ${capData.cues.length} câu phụ đề song ngữ Trung · Việt có sẵn trên YouTube.`
+            });
+            setImportStatus(`Đã nạp trực tiếp ${capData.cues.length} câu phụ đề Trung · Việt từ YouTube!`, false);
+            return;
+          }
+        } catch (_) {}
+
         const res = await requestPodcastSubtitles({
           youtubeId: ytId,
           rawInput: `YOUTUBE_AUTO_CC:${ytId}`,
@@ -1468,14 +1699,19 @@
   window.HSKPodcast = {
     enter() {
       updateAiBadge();
+      renderChannelBar();
       const ep = currentEpisode();
       if (ep?.youtubeId && !state.ytReady && !state.ytFailed) {
         mountYoutubeVideo(ep.youtubeId);
+      }
+      if (ep?.youtubeId) {
+        maybeFetchFullYoutubeCaptions(ep);
       }
       renderMaskCue();
       highlightActiveCue(false);
     },
     selectEpisode,
+    syncChannels: syncYoutubeChannels,
     seek: (sec, autoPlay) => seekTo(sec, autoPlay),
     play: startPlayback,
     pause: pausePlayback,
@@ -1486,15 +1722,18 @@
       currentTime: state.currentTime,
       playing: state.playing,
       cuesCount: state.cues.length,
+      channelFilter: state.channelFilter,
       prefs: { ...state.prefs }
     })
   };
 
   // Initialize first starter episode
   window.addEventListener('hsk-resources-updated', () => {
+    renderChannelBar();
     renderFilterStrip();
     renderEpisodeStrip();
   });
+  renderChannelBar();
   renderFilterStrip();
   selectEpisode(state.currentEpisodeId);
   updateAiBadge();

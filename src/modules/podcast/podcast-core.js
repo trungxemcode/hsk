@@ -9,246 +9,655 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function (root) {
   'use strict';
 
+  const DEFAULT_CHANNELS = [
+    {
+      id: 'learn-chinese-through-podcast',
+      handle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      name: 'Learn Chinese Through Podcast',
+      url: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      feedUrl: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCI8Liuxdz6UPv5rgMskfwPg',
+      description: 'Podcast luyện nghe HSK 2–4 theo chủ đề đời sống, văn hóa, ẩm thực & thành ngữ (có sẵn phụ đề Trung + Việt).'
+    },
+    {
+      id: 'baobao-mandarin',
+      handle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      name: 'BaoBao Mandarin',
+      url: 'https://www.youtube.com/@BaoBaoMandarin',
+      feedUrl: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCYHKAec4JjyR_DC2obXv1Yg',
+      description: 'Podcast tiếng Trung tự nhiên HSK 1–6 từ cơ bản đến nâng cao (có sẵn phụ đề Trung + Việt).'
+    }
+  ];
+
   const STARTER_EPISODES = [
     {
-      id: 'ep-morning-coffee',
-      youtubeId: 'S_0mP1hQ7qY',
-      level: 'HSK 1–2',
+      id: 'ep-bb-hsk12-hui-yao-neng',
+      youtubeId: 'hhkIZ3gOIcs',
+      level: 'HSK 1–3',
       levelGroup: 'hsk1-2',
-      title: 'Morning Coffee & Daily Routine',
-      titleVi: 'Cà phê sáng & thói quen mỗi ngày (Podcast nhập môn)',
-      channel: 'Slow Chinese Café',
-      durationSec: 36,
-      durationLabel: '0:36',
-      topic: 'Đời sống hằng ngày',
-      note: 'Tập mẫu minh họa video có phụ đề tiếng Anh đốt cứng ở đáy khung hình — bật lớp che phụ đề để chỉ luyện nghe và đọc Hán · Pinyin · Tiếng Việt.',
+      title: 'HSK 1–3 | 会 VS 要 VS 能 | Stop Confusing 会，要，能',
+      titleVi: 'Phân biệt 会 · 要 · 能 trong tiếng Trung giao tiếp (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 1162,
+      durationLabel: '19:22',
+      topic: 'Ngữ pháp & khẩu ngữ',
+      note: 'Tập thật từ kênh BaoBao Mandarin (@BaoBaoMandarin) — chọn tập để tự động nạp trọn bộ phụ đề song ngữ Trung · Việt từ YouTube.',
       defaultMaskBottom: 4,
       defaultMaskHeight: 22,
       cues: [
         {
           start: 0,
-          end: 6,
-          en: 'Good morning everyone, welcome back to our slow podcast.',
-          zh: '大家好，早上好，欢迎来到今天的慢速播客。',
-          pinyin: 'Dàjiā hǎo, zǎoshang hǎo, huānyíng láidào jīntiān de mànsù bōkè.',
-          vi: 'Chào mọi người, chào buổi sáng, chào mừng đến với podcast tốc độ chậm hôm nay.'
+          end: 12.7,
+          en: 'Hi everyone, welcome to BaoBao Mandarin! I am XiaoYue.',
+          zh: '宝贝们，大家好～欢迎来到 BaoBao Mandarin！我是小月！',
+          pinyin: 'Bǎobèi men, dàjiā hǎo ~ huānyíng láidào BaoBao Mandarin! Wǒ shì Xiǎoyuè!',
+          vi: 'Xin chào các Bảo Bối! Chào mừng đến với BaoBao Mandarin! Mình là Tiểu Nguyệt!'
         },
         {
-          start: 6,
-          end: 12,
-          en: 'Every morning I wake up at seven and drink a cup of hot coffee.',
-          zh: '每天早上我七点起床，然后喝一杯热咖啡。',
-          pinyin: 'Měitiān zǎoshang wǒ qī diǎn qǐchuáng, ránhòu hē yì bēi rè kāfēi.',
-          vi: 'Mỗi sáng tôi thức dậy lúc bảy giờ, sau đó uống một tách cà phê nóng.'
+          start: 12.7,
+          end: 16.8,
+          en: 'Hello everyone... I am XiaoMing...',
+          zh: '大家好……我是小明……',
+          pinyin: 'Dàjiā hǎo…… wǒ shì Xiǎomíng……',
+          vi: 'Chào mọi người... Mình là Tiểu Minh...'
         },
         {
-          start: 12,
+          start: 16.8,
+          end: 23.8,
+          en: 'Hey XiaoMing, what is wrong today? You look like you have a bit of a headache?',
+          zh: '欸，小明，你今天怎么了？看起来好像有点头疼哦？',
+          pinyin: 'Ēi, Xiǎomíng, nǐ jīntiān zěnme le? Kàn qǐlái hǎoxiàng yǒudiǎn tóuténg ó?',
+          vi: 'Ê, Tiểu Minh, hôm nay bạn sao vậy? Trông như đang bị đau đầu ấy.'
+        },
+        {
+          start: 23.8,
+          end: 30.2,
+          en: 'It really hurts! Learning Chinese is so hard — the more I study, the more confused I get!',
+          zh: '头疼是真的！哎，学中文太难了！越学越糊涂！',
+          pinyin: 'Tóuténg shì zhēn de! Āi, xué Zhōngwén tài nán le! Yuè xué yuè hútu!',
+          vi: 'Đau đầu thật đó! Ôi, tiếng Trung khó quá — càng học càng thấy rối!'
+        },
+        {
+          start: 30.2,
+          end: 36.1,
+          en: 'I thought I was improving, but it feels like I was fooling myself...',
+          zh: '我以为自己在进步，结果……好像是自己骗自己……',
+          pinyin: 'Wǒ yǐwéi zìjǐ zài jìnbù, jiéguǒ…… hǎoxiàng shì zìjǐ piàn zìjǐ……',
+          vi: 'Mình cứ tưởng là đang tiến bộ, nhưng... có cảm giác như chỉ đang tự lừa mình thôi...'
+        },
+        {
+          start: 36.1,
+          end: 45.7,
+          en: 'What happened? Tell me what you do not understand — I can help you!',
+          zh: '哎哟，怎么了嘛？哪里学不懂就说出来呗！我来帮你！',
+          pinyin: 'Āiyō, zěnme le ma? Nǎlǐ xué bù dǒng jiù shuō chūlái bei! Wǒ lái bāng nǐ!',
+          vi: 'Ôi, sao vậy? Chỗ nào không hiểu thì cứ nói ra đi! Để mình giúp bạn!'
+        }
+      ]
+    },
+    {
+      id: 'ep-lctp-hsk12-greetings',
+      youtubeId: 'aYrCe-KTmTg',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 2 - 4 | Stop Saying Ni Hao Ma: Natural Chinese Greetings for Daily Life',
+      titleVi: 'Đừng chỉ nói “你好吗”: Cách chào hỏi tự nhiên của người Trung Quốc',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 1096,
+      durationLabel: '18:16',
+      topic: 'Giao tiếp đời sống',
+      note: 'Tập thật từ kênh @LearnChineseThroughPodcast (Hạo Văn & Vũ Đồng) — chọn tập để tự động nạp trọn bộ phụ đề Trung · Việt.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cues: [
+        {
+          start: 0,
+          end: 6.7,
+          en: 'This morning,',
+          zh: '今天早上，',
+          pinyin: 'Jīntiān zǎoshang,',
+          vi: 'Sáng nay,'
+        },
+        {
+          start: 6.7,
+          end: 9.4,
+          en: 'I ran into a colleague in the company elevator.',
+          zh: '我在公司电梯里遇到一位同事。',
+          pinyin: 'Wǒ zài gōngsī diàntī lǐ yùdào yí wèi tóngshì.',
+          vi: 'tôi gặp một đồng nghiệp trong thang máy công ty.'
+        },
+        {
+          start: 9.4,
+          end: 12.4,
+          en: 'I said first, "Hello, how are you?"',
+          zh: '我先说：“你好，你好吗？”',
+          pinyin: 'Wǒ xiān shuō: “Nǐ hǎo, nǐ hǎo ma?”',
+          vi: 'Tôi nói trước: "Chào, bạn khỏe không?"'
+        },
+        {
+          start: 12.4,
+          end: 13.8,
+          en: 'He looked at me,',
+          zh: '他看着我，',
+          pinyin: 'Tā kànzhe wǒ,',
+          vi: 'Anh ấy nhìn tôi,'
+        },
+        {
+          start: 13.8,
           end: 18,
-          en: 'Sometimes I listen to Chinese news while eating breakfast.',
-          zh: '有时候我一边吃早饭，一边听中文新闻。',
-          pinyin: 'Yǒu shíhou wǒ yìbiān chī zǎofàn, yìbiān tīng Zhōngwén xīnwén.',
-          vi: 'Đôi khi tôi vừa ăn sáng vừa nghe tin tức tiếng Trung.'
+          en: 'paused for a moment, and said, "I... am pretty good."',
+          zh: '停了一下，说：“我……挺好的。”',
+          pinyin: 'tíng le yíxià, shuō: “Wǒ…… tǐng hǎo de.”',
+          vi: 'im lặng một lúc rồi nói: "Tôi... tôi khỏe."'
         },
         {
           start: 18,
-          end: 24,
-          en: 'Today the weather is very sunny and warm outside.',
-          zh: '今天外面的天气很晴朗，也很暖和。',
-          pinyin: 'Jīntiān wàimiàn de tiānqì hěn qínglǎng, yě hěn nuǎnhuo.',
-          vi: 'Hôm nay thời tiết bên ngoài rất nắng đẹp và ấm áp.'
-        },
-        {
-          start: 24,
-          end: 30,
-          en: 'What do you usually do before going to work or school?',
-          zh: '你上班或者上学以前通常做什么？',
-          pinyin: 'Nǐ shàngbān huòzhě shàngxué yǐqián tōngcháng zuò shénme?',
-          vi: 'Trước khi đi làm hoặc đi học bạn thường làm gì?'
-        },
-        {
-          start: 30,
-          end: 36,
-          en: 'Leave a short comment in Chinese and practice with me.',
-          zh: '欢迎用中文留言，和我一起练习口语。',
-          pinyin: 'Huānyíng yòng Zhōngwén liúyán, hé wǒ yìqǐ liànxí kǒuyǔ.',
-          vi: 'Hãy để lại bình luận bằng tiếng Trung và luyện nói cùng mình nhé.'
+          end: 21.3,
+          en: 'And then you both just stared at the elevator door?',
+          zh: '然后呢？你们就一起看着电梯门？',
+          pinyin: 'Ránhòu ne? Nǐmen jiù yìqǐ kànzhe diàntī mén?',
+          vi: 'Và sau đó cả hai người chỉ nhìn chằm chằm vào cửa thang máy à?'
         }
       ]
     },
     {
-      id: 'ep-weekend-travel',
-      youtubeId: 'M7lc1UVf-VE',
-      level: 'HSK 3',
+      id: 'ep-lctp-hsk3-yanerdaoling',
+      youtubeId: 'CqNO2psWIyU',
+      level: 'HSK 2–4',
       levelGroup: 'hsk3',
-      title: 'Weekend Train Trip Dialogue',
-      titleVi: 'Chuyến tàu cuối tuần & cách hỏi đường',
-      channel: 'Mandarin Journey',
-      durationSec: 40,
-      durationLabel: '0:40',
-      topic: 'Du lịch & giao tiếp',
-      note: 'Hội thoại tốc độ vừa với các mẫu câu di chuyển, đặt vé tàu và rủ bạn bè đi dạo cuối tuần.',
+      title: 'HSK 2 - 4 | 掩耳盗铃: Can We Fool Ourselves? | Chinese Listening Practice',
+      titleVi: 'Thành ngữ 掩耳盗铃 (Bịt tai trộm chuông) & Tâm lý tự đánh lừa mình',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 1082,
+      durationLabel: '18:02',
+      topic: 'Thành ngữ & câu chuyện',
+      note: 'Tập thật từ kênh @LearnChineseThroughPodcast — có đầy đủ phụ đề tiếng Trung Giản thể + tiếng Việt đồng bộ theo từng giây.',
       defaultMaskBottom: 4,
       defaultMaskHeight: 22,
       cues: [
         {
           start: 0,
-          end: 7,
-          en: 'This weekend I plan to take the high-speed train to Hangzhou.',
-          zh: '这个周末我打算坐高铁去杭州玩几天。',
-          pinyin: 'Zhège zhōumò wǒ dǎsuàn zuò gāotiě qù Hángzhōu wán jǐ tiān.',
-          vi: 'Cuối tuần này tôi định đi tàu cao tốc tới Hàng Châu chơi vài ngày.'
+          end: 11.4,
+          en: 'This morning, as soon as the alarm rang,',
+          zh: '今天早上“闹钟”一响，',
+          pinyin: 'Jīntiān zǎoshang “nàozhōng” yì xiǎng,',
+          vi: 'Sáng nay, vừa chuông báo thức reo,'
         },
         {
-          start: 7,
-          end: 14,
-          en: 'Did you already book your ticket and reserve a quiet hotel?',
-          zh: '你已经买好车票，订好安静的酒店了吗？',
-          pinyin: 'Nǐ yǐjīng mǎihǎo chēpiào, dìnghǎo ānjìng de jiǔdiàn le ma?',
-          vi: 'Bạn đã mua vé tàu và đặt khách sạn yên tĩnh chưa?'
+          start: 11.4,
+          end: 13.1,
+          en: 'I reached out and turned it off,',
+          zh: '我伸手把它关了，',
+          pinyin: 'wǒ shēnshǒu bǎ tā guān le,',
+          vi: 'tôi đã với tay tắt nó đi,'
         },
         {
-          start: 14,
-          end: 21,
-          en: 'Yes, the hotel is very close to the subway station and West Lake.',
-          zh: '买好了，酒店离地铁站和西湖都非常近。',
-          pinyin: 'Mǎihǎo le, jiǔdiàn lí dìtiězhàn hé Xīhú dōu fēicháng jìn.',
-          vi: 'Mua xong rồi, khách sạn rất gần ga tàu điện ngầm và Tây Hồ.'
+          start: 13.1,
+          end: 15.8,
+          en: 'and told myself: "Lie down a bit longer,',
+          zh: '还对自己说：“再躺一会儿，',
+          pinyin: 'hái duì zìjǐ shuō: “Zài tǎng yíhuìr,',
+          vi: 'còn tự nhủ: "Nằm thêm chút nữa,'
         },
         {
-          start: 21,
-          end: 28,
-          en: 'Remember to bring an umbrella because it might rain in the afternoon.',
-          zh: '记得带一把雨伞，因为下午可能会下雨。',
-          pinyin: 'Jìde dài yì bǎ yǔsǎn, yīnwèi xiàwǔ kěnéng huì xiàyǔ.',
-          vi: 'Nhớ mang theo một chiếc ô vì buổi chiều có thể sẽ mưa.'
+          start: 15.8,
+          end: 18.8,
+          en: 'I still have plenty of time."',
+          zh: '我还有很多时间。”',
+          pinyin: 'wǒ hái yǒu hěn duō shíjiān.”',
+          vi: 'mình vẫn còn nhiều thời gian."'
         },
         {
-          start: 28,
-          end: 40,
-          en: 'No problem, let us meet at the east entrance at eight tomorrow morning.',
-          zh: '没问题，我们明天早上八点在东门见面吧。',
-          pinyin: 'Méi wèntí, wǒmen míngtiān zǎoshang bā diǎn zài dōngmén jiànmiàn ba.',
-          vi: 'Không vấn đề gì, sáng mai tám giờ chúng ta gặp nhau ở cổng đông nhé.'
+          start: 18.8,
+          end: 21.7,
+          en: 'When I checked the time, I immediately sat right up.',
+          zh: '结果一看时间，我马上坐了起来。',
+          pinyin: 'Jiéguǒ yí kàn shíjiān, wǒ mǎshàng zuò le qǐlái.',
+          vi: 'Nhưng khi nhìn giờ, tôi lập tức ngồi dậy.'
+        },
+        {
+          start: 21.7,
+          end: 26,
+          en: 'Even though I knew I should get up, I chose to look away.',
+          zh: '明明知道该起床了，却假装没看见。',
+          pinyin: 'Míngmíng zhīdào gāi qǐchuáng le, què jiǎzhuāng méi kànjiàn.',
+          vi: 'Rõ ràng biết phải dậy rồi, nhưng lại giả vờ như không thấy.'
         }
       ]
     },
     {
-      id: 'ep-digital-focus',
-      youtubeId: 'aqz-KE-bpKQ',
-      level: 'HSK 4',
-      levelGroup: 'hsk4',
-      title: 'How to Stay Focused Without Social Media',
-      titleVi: 'Giữ sự tập trung trong thời đại mạng xã hội',
-      channel: 'Mindful Talk Studio',
-      durationSec: 42,
-      durationLabel: '0:42',
-      topic: 'Thói quen & công việc',
-      note: 'Luyện nghe câu ghép biểu đạt nguyên nhân — kết quả và từ vựng chủ đề công việc, thói quen số.',
+      id: 'ep-bb-hsk3-five-habits',
+      youtubeId: 'qTKcybgpT8M',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2–4 | 学中文不那么难！| 5 Habits Made Chinese Easy!',
+      titleVi: '5 thói quen giúp học tiếng Trung dễ dàng hơn (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 983,
+      durationLabel: '16:23',
+      topic: 'Phương pháp học tập',
+      note: 'Tiểu Nguyệt & Tiểu Minh chia sẻ 5 thói quen thực tế giúp nghe nói tiếng Trung tự nhiên mỗi ngày.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cues: [
+        {
+          start: 0,
+          end: 8.6,
+          en: 'Hello everyone, dear Baobeis!',
+          zh: '大家好，亲爱的宝贝们，',
+          pinyin: 'Dàjiā hǎo, qīn’ài de bǎobèi men,',
+          vi: 'Xin chào các Bảo Bối thân yêu!'
+        },
+        {
+          start: 8.6,
+          end: 10.3,
+          en: 'Welcome back to BaoBao Mandarin,',
+          zh: '欢迎回到宝宝中文，',
+          pinyin: 'huānyíng huídào Bǎobǎo Zhōngwén,',
+          vi: 'Chào mừng trở lại BaoBao Mandarin!'
+        },
+        {
+          start: 10.3,
+          end: 13.8,
+          en: 'I am XiaoYue. Hi everyone, I am XiaoMing.',
+          zh: '我是小月。宝贝们好，我是小明。',
+          pinyin: 'Wǒ shì Xiǎoyuè. Bǎobèi men hǎo, wǒ shì Xiǎomíng.',
+          vi: 'Mình là Tiểu Nguyệt. Chào các Bảo Bối, mình là Tiểu Minh.'
+        },
+        {
+          start: 13.8,
+          end: 17.7,
+          en: 'Hey XiaoYue, I have been waiting for today’s topic for a long time!',
+          zh: '哎小月，今天这个话题我等了好久了。',
+          pinyin: 'Āi Xiǎoyuè, jīntiān zhège huàtí wǒ děng le hǎojiǔ le.',
+          vi: 'Này Tiểu Nguyệt, mình đã chờ chủ đề hôm nay lâu lắm rồi.'
+        },
+        {
+          start: 17.7,
+          end: 22.5,
+          en: 'Haha I know, because this is the question everyone asks the most.',
+          zh: '哈哈我知道我知道，因为这是大家问得最多的问题。',
+          pinyin: 'Hāhā wǒ zhīdào wǒ zhīdào, yīnwèi zhè shì dàjiā wèn de zuìduō de wèntí.',
+          vi: 'Haha mình biết! Vì đây là câu hỏi mọi người hỏi nhiều nhất.'
+        }
+      ]
+    },
+    {
+      id: 'ep-lctp-hsk3-white-snake',
+      youtubeId: 'huEhDinrgQQ',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 4 | White Snake Legend: The Story Behind West Lake',
+      titleVi: 'Truyền thuyết Bạch Xà (白蛇传): Câu chuyện phía sau Tây Hồ',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 1061,
+      durationLabel: '17:41',
+      topic: 'Văn hóa & truyền thuyết',
+      note: 'Câu chuyện Bạch Tố Trinh & Hứa Tiên bên Tây Hồ Hàng Châu, từ vựng mượt mà cho trình độ HSK 3–4.',
       defaultMaskBottom: 4,
       defaultMaskHeight: 24,
       cues: [
         {
           start: 0,
-          end: 8,
-          en: 'Have you noticed how easily short videos steal our attention?',
-          zh: '你有没有发现，短视频很容易分散我们的注意力？',
-          pinyin: 'Nǐ yǒu méiyǒu fāxiàn, duǎn shìpín hěn róngyì fēnsàn wǒmen de zhùyìlì?',
-          vi: 'Bạn có nhận ra rằng video ngắn rất dễ làm phân tán sự chú ý của chúng ta không?'
+          end: 10.8,
+          en: 'I was just strolling by West Lake,',
+          zh: '我刚才在西湖边散步，',
+          pinyin: 'Wǒ gāngcái zài Xīhú biān sànbù,',
+          vi: 'Tôi vừa đi dạo bên Tây Hồ thì'
         },
         {
-          start: 8,
-          end: 16,
-          en: 'When we check messages every few minutes, deep thinking becomes hard.',
-          zh: '如果每隔几分钟就看一次手机，就很难进行深入思考。',
-          pinyin: 'Rúguǒ měi gé jǐ fēnzhōng jiù kàn yí cì shǒujī, jiù hěn nán jìnxíng shēnrù sīkǎo.',
-          vi: 'Nếu cứ cách vài phút lại xem điện thoại một lần thì rất khó suy nghĩ sâu.'
+          start: 10.8,
+          end: 14.5,
+          en: 'and saw a white umbrella leaning next to a bench.',
+          zh: '看到一把白伞靠在长椅旁边。',
+          pinyin: 'kàndào yì bǎ bái sǎn kào zài chángyǐ pángbiān.',
+          vi: 'thấy một chiếc ô trắng dựa vào cạnh ghế đá.'
         },
         {
-          start: 16,
-          end: 25,
-          en: 'One simple habit is turning off non-urgent notifications before studying.',
-          zh: '一个简单的方法是在学习前关掉不必要的通知提醒。',
-          pinyin: 'Yí gè jiǎndān de fāngfǎ shì zài xuéxí qián guāndiào bú bìyào de tōngzhī tíxǐng.',
-          vi: 'Một cách đơn giản là tắt các thông báo không cần thiết trước khi học.'
+          start: 14.5,
+          end: 18,
+          en: 'When the wind blew, the umbrella swayed gently,',
+          zh: '风一吹，伞轻轻动了一下，',
+          pinyin: 'Fēng yì chuī, sǎn qīngqīng dòng le yíxià,',
+          vi: 'Gió thổi nhẹ, chiếc ô khẽ đung đưa,'
         },
         {
-          start: 25,
-          end: 34,
-          en: 'Even twenty-five minutes of quiet focus can double your efficiency.',
-          zh: '哪怕只专注二十五分钟，你的学习效率也会提高很多。',
-          pinyin: 'Nǎpà zhǐ zhuānzhù èrshíwǔ fēnzhōng, nǐ de xuéxí xiàolǜ yě huì tígāo hěn duō.',
-          vi: 'Dù chỉ tập trung hai mươi lăm phút, hiệu suất học tập của bạn cũng sẽ tăng lên rất nhiều.'
+          start: 18,
+          end: 21.4,
+          en: 'and I immediately thought of Bai Suzhen and Xu Xian.',
+          zh: '我马上想起了白素贞和许仙。',
+          pinyin: 'wǒ mǎshàng xiǎngqǐ le Bái Sùzhēn hé Xǔ Xiān.',
+          vi: 'tôi lập tức nghĩ đến Bạch Tố Trinh và Hứa Tiên.'
         },
         {
-          start: 34,
-          end: 42,
-          en: 'Try putting your phone in another room tonight and feel the difference.',
-          zh: '今晚试着把手机放在另一个房间，感受一下变化吧。',
-          pinyin: 'Jīnwǎn shìzhe bǎ shǒujī fàng zài lìng yí gè fángjiān, gǎnshòu yíxià biànhuà ba.',
-          vi: 'Tối nay hãy thử để điện thoại sang phòng khác và cảm nhận sự khác biệt nhé.'
+          start: 21.4,
+          end: 24.9,
+          en: 'Just a white umbrella reminded you of them?',
+          zh: '一把白伞就让你想到他们了？',
+          pinyin: 'Yì bǎ bái sǎn jiù ràng nǐ xiǎngdào tāmen le?',
+          vi: 'Chỉ một chiếc ô trắng thôi đã làm anh nhớ đến họ sao?'
+        },
+        {
+          start: 24.9,
+          end: 31.9,
+          en: 'Every time I see West Lake’s water and bridges, it feels like stepping into a story.',
+          zh: '我每次看到西湖的水和桥，也会觉得像是走进了一个故事里。',
+          pinyin: 'Wǒ měicì kàndào Xīhú de shuǐ hé qiáo, yě huì juéde xiàngshì zǒujìn le yí gè gùshi lǐ.',
+          vi: 'Mỗi lần nhìn thấy mặt nước và những cây cầu ở Tây Hồ, tôi đều cảm thấy như bước vào một câu chuyện.'
         }
       ]
     },
     {
-      id: 'ep-ai-culture-talk',
-      youtubeId: 'LXb3EKWsInQ',
+      id: 'ep-lctp-hsk4-eight-cuisines',
+      youtubeId: 'xivjMEMEAvE',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk4',
+      title: 'HSK 2 - 4 | Chinese Eight Great Cuisines: Beijing Flavor to Sichuan Spice',
+      titleVi: 'Bát đại thái hệ (八大菜系): Từ hương vị Bắc Kinh đến vị cay Tứ Xuyên',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 1152,
+      durationLabel: '19:12',
+      topic: 'Ẩm thực Trung Hoa',
+      note: 'Học từ vựng miêu tả hương vị, lẩu Tứ Xuyên và bản đồ 8 trường phái ẩm thực lớn của Trung Quốc.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 24,
+      cues: [
+        {
+          start: 0,
+          end: 10.1,
+          en: 'I had just finished brewing tea,',
+          zh: '我刚泡好茶，',
+          pinyin: 'Wǒ gāng pàohǎo chá,',
+          vi: 'Tôi vừa pha xong trà'
+        },
+        {
+          start: 10.1,
+          end: 11.9,
+          en: 'when Yutong sent me a message,',
+          zh: '雨桐就发来消息，',
+          pinyin: 'Yǔtóng jiù fālái xiāoxi,',
+          vi: 'thì Vũ Đồng nhắn tin đến,'
+        },
+        {
+          start: 11.9,
+          end: 16.2,
+          en: 'saying she kept drinking tea while eating Sichuan hotpot.',
+          zh: '说她吃四川火锅吃到一直喝茶。',
+          pinyin: 'shuō tā chī Sìchuān huǒguō chīdào yìzhí hē chá.',
+          vi: 'bảo cô ấy ăn lẩu Tứ Xuyên cay đến mức phải uống trà liên tục.'
+        },
+        {
+          start: 16.2,
+          end: 18.8,
+          en: 'How are you doing over there now?',
+          zh: '你那边现在还好吗？',
+          pinyin: 'Nǐ nàbiān xiànzài hái hǎo ma?',
+          vi: 'Cậu bên đó giờ thế nào rồi?'
+        },
+        {
+          start: 18.8,
+          end: 21.5,
+          en: 'I just got hit so hard by the spice,',
+          zh: '我刚才真的被辣到了，',
+          pinyin: 'Wǒ gāngcái zhēnde bèi là dào le,',
+          vi: 'Tớ vừa bị cay tê người luôn,'
+        },
+        {
+          start: 21.5,
+          end: 26,
+          en: 'my mouth was spicy and numb, and I had to drink several cups of tea to recover.',
+          zh: '嘴里又辣又麻，喝了好几杯茶才慢慢缓过来。',
+          pinyin: 'zuǐ lǐ yòu là yòu má, hē le hǎojǐ bēi chá cái mànmàn huǎn guòlái.',
+          vi: 'miệng vừa cay vừa tê, phải uống mấy chén trà mới từ từ dịu lại được.'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk4-short-drama',
+      youtubeId: 'MupmlHHMU7k',
+      level: 'HSK 3–5',
+      levelGroup: 'hsk4',
+      title: 'HSK 3–5 | 中国短剧有什么好看的？| Why Everyone Loves Chinese Short Drama?!',
+      titleVi: 'Vì sao phim ngắn Trung Quốc (短剧) gây nghiện? (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 989,
+      durationLabel: '16:29',
+      topic: 'Giải trí & xã hội',
+      note: 'Hội thoại tốc độ tự nhiên HSK 3–5 bàn về trào lưu xem phim ngắn 1–2 phút và văn hóa giải trí hiện đại.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 24,
+      cues: [
+        {
+          start: 0,
+          end: 8.1,
+          en: 'Hello, hello, dear Baobeis!',
+          zh: '哈啰哈啰，亲爱的宝贝们！',
+          pinyin: 'Hāluō hāluō, qīn’ài de bǎobèi men!',
+          vi: 'Xin chào, xin chào các Bảo Bối thân yêu!'
+        },
+        {
+          start: 8.1,
+          end: 10.7,
+          en: 'Welcome to BaoBao Mandarin, I am XiaoMing.',
+          zh: '欢迎来到宝宝中文，我是小明。',
+          pinyin: 'Huānyíng láidào Bǎobǎo Zhōngwén, wǒ shì Xiǎomíng.',
+          vi: 'Chào mừng đến với BaoBao Mandarin. Mình là Tiểu Minh.'
+        },
+        {
+          start: 10.7,
+          end: 16.9,
+          en: 'Hi everyone... sorry, I am XiaoYue.',
+          zh: '宝贝们好……不好意思，我是小月。',
+          pinyin: 'Bǎobèi men hǎo…… bù hǎoyìsi, wǒ shì Xiǎoyuè.',
+          vi: 'Xin chào mọi người... Xin lỗi nhé, mình là Tiểu Nguyệt.'
+        },
+        {
+          start: 16.9,
+          end: 20.1,
+          en: 'XiaoYue, why do you look so tired today?',
+          zh: '小月，你今天怎么看起来没精神？',
+          pinyin: 'Xiǎoyuè, nǐ jīntiān zěnme kàn qǐlái méi jīngshén?',
+          vi: 'Tiểu Nguyệt, sao hôm nay trông cậu mệt mỏi thiếu sức sống thế?'
+        },
+        {
+          start: 20.1,
+          end: 23.3,
+          en: 'Your eyes are even red — did you not sleep well last night?',
+          zh: '眼睛还红红的，是不是昨晚没睡好？',
+          pinyin: 'Yǎnjīng hái hónghóng de, shì bu shì zuówǎn méi shuì hǎo?',
+          vi: 'Mắt cậu còn hơi đỏ nữa, tối qua ngủ không ngon à?'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk56-overtime-996',
+      youtubeId: 'i8emBnSpS3I',
       level: 'HSK 5–6',
       levelGroup: 'hsk5-6',
-      title: 'Lifelong Learning & Cultural Curiosity',
-      titleVi: 'Học tập suốt đời & tư duy đa văn hóa',
-      channel: 'Deep Listening Lab',
-      durationSec: 44,
-      durationLabel: '0:44',
-      topic: 'Văn hóa & tư duy',
-      note: 'Podcast nâng cao về cách tiếp thu ngôn ngữ tự nhiên qua ngữ cảnh thay vì học vẹt danh sách từ rời rạc.',
+      title: 'HSK 3+ | 中国加班文化 | Working 72 Hours a Week?! China’s 996 Work Culture',
+      titleVi: 'Văn hóa tăng ca 996 ở Trung Quốc: Làm việc 72 giờ/tuần? (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 880,
+      durationLabel: '14:40',
+      topic: 'Công sở & xã hội hiện đại',
+      note: 'Tập nâng cao có sẵn đủ 3 lớp Trung · Việt · Anh trên YouTube, phân tích áp lực công việc và văn hóa 996.',
       defaultMaskBottom: 4,
       defaultMaskHeight: 24,
       cues: [
         {
           start: 0,
-          end: 9,
-          en: 'Real fluency rarely comes from memorizing isolated vocabulary lists.',
-          zh: '真正的流利表达很少来自死记硬背孤立的单词表。',
-          pinyin: 'Zhēnzhèng de liúlì biǎodá hěn shǎo láizì sǐjì-yìngbèi gūlì de dāncíbiǎo.',
-          vi: 'Sự trôi chảy thực sự hiếm khi đến từ việc học vẹt những bảng từ vựng rời rạc.'
+          end: 8.3,
+          en: 'Hello, hello, everyone!',
+          zh: '哈喽哈喽大家好，',
+          pinyin: 'Hālóu hālóu dàjiā hǎo,',
+          vi: 'Xin chào, xin chào mọi người!'
         },
         {
-          start: 9,
-          end: 18,
-          en: 'When you hear an idea in an authentic story, the emotion anchors the phrase.',
-          zh: '当你在真实的故事里听到一个观点时，情感会帮你记住这个表达。',
-          pinyin: 'Dāng nǐ zài zhēnshí de gùshi lǐ tīngdào yí gè guāndiǎn shí, qínggǎn huì bāng nǐ jìzhù zhège biǎodá.',
-          vi: 'Khi bạn nghe một quan điểm trong câu chuyện chân thực, cảm xúc sẽ giúp bạn ghi nhớ cách diễn đạt đó.'
+          start: 8.3,
+          end: 10.1,
+          en: 'Welcome to BaoBao Mandarin.',
+          zh: '欢迎来到宝宝中文，',
+          pinyin: 'Huānyíng láidào Bǎobǎo Zhōngwén,',
+          vi: 'Chào mừng đến với BaoBao Mandarin.'
         },
         {
-          start: 18,
-          end: 27,
-          en: 'Covering familiar native subtitles forces your ears to notice rhythm and tone.',
-          zh: '遮住熟悉的母语字幕，能迫使耳朵去捕捉语音节奏和声调变化。',
-          pinyin: 'Zhēzhù shúxī de mǔyǔ zìmù, néng pòshǐ ěrduo qù bǔzhuō yǔyīn jiézòu hé shēngdiào biànhuà.',
-          vi: 'Che đi phụ đề quen thuộc giúp buộc đôi tai phải nắm bắt nhịp điệu ngữ âm và biến đổi thanh điệu.'
+          start: 10.1,
+          end: 12.9,
+          en: 'I’m XiaoYue. Hi everyone, I’m XiaoMing.',
+          zh: '我是小月。大家好我是小明。',
+          pinyin: 'Wǒ shì Xiǎoyuè. Dàjiā hǎo wǒ shì Xiǎomíng.',
+          vi: 'Mình là Tiểu Nguyệt. Chào mọi người, mình là Tiểu Minh.'
         },
         {
-          start: 27,
-          end: 36,
-          en: 'Pause whenever a sentence catches your curiosity and imitate the speaker aloud.',
-          zh: '每当遇到令你好奇的句子，就暂停一下，大声模仿说话者的语气。',
-          pinyin: 'Měidāng yùdào lìng nǐ hàoqí de jùzi, jiù zàntíng yíxià, dàshēng mófǎng shuōhuàzhě de yǔqì.',
-          vi: 'Mỗi khi gặp câu khiến bạn tò mò, hãy tạm dừng một chút và bắt chước to ngữ khí của người nói.'
+          start: 13,
+          end: 16.5,
+          en: 'Our Baobeis, today’s topic',
+          zh: '各位宝贝们，今天我们要聊的话题，',
+          pinyin: 'Gèwèi bǎobèi men, jīntiān wǒmen yào liáo de huàtí,',
+          vi: 'Các Bảo Bối ơi, chủ đề hôm nay chúng ta bàn'
         },
         {
-          start: 36,
-          end: 44,
-          en: 'Over time, listening transforms from translation work into direct understanding.',
-          zh: '久而久之，听力就会从脑海里的翻译变成一种直接的理解。',
-          pinyin: 'Jiǔ’érjiǔzhī, tīnglì jiù huì cóng nǎohǎi lǐ de fānyì biànchéng yì zhǒng zhíjiē de lǐjiě.',
-          vi: 'Lâu dần, việc nghe hiểu sẽ chuyển từ quá trình dịch nhẩm trong đầu thành sự thấu hiểu trực tiếp.'
+          start: 16.5,
+          end: 19.5,
+          en: 'is one I find really interesting — China’s 996 overtime work culture.',
+          zh: '我觉得真的挺有意思的——中国的加班文化。',
+          pinyin: 'wǒ juéde zhēnde tǐng yǒu yìsi de — Zhōngguó de jiābān wénhuà.',
+          vi: 'mình thấy thật sự rất thú vị — văn hóa tăng ca ở Trung Quốc.'
         }
       ]
     }
   ];
 
   const HAN_REGEX = /\p{Script=Han}/u;
+
+  const TRAD_TO_SIMP_PAIRS = [
+    '萬万', '與与', '專专', '業业', '東东', '絲丝', '兩两', '嚴严', '喪丧', '個个',
+    '臨临', '為为', '麗丽', '舉举', '義义', '烏乌', '樂乐', '喬乔', '習习', '鄉乡',
+    '書书', '買买', '亂乱', '爭争', '亞亚', '親亲', '億亿', '僅仅', '後后', '臺台',
+    '從从', '侖仑', '倉仓', '儀仪', '們们', '價价', '眾众', '優优', '會会', '傳传',
+    '傷伤', '倫伦', '偽伪', '體体', '餘余', '來来', '側侧', '偵侦', '備备', '傢家',
+    '兒儿', '內内', '冊册', '寫写', '軍军', '農农', '準准', '涼凉', '幾几', '凱凯',
+    '別别', '刪删', '則则', '剛刚', '創创', '劉刘', '劍剑', '劇剧', '勸劝', '辦办',
+    '動动', '務务', '勝胜', '勞劳', '勢势', '區区', '醫医', '華华', '協协', '單单',
+    '賣卖', '衛卫', '廠厂', '廳厅', '歷历', '厲厉', '壓压', '厭厌', '參参', '雙双',
+    '發发', '變变', '葉叶', '號号', '嗎吗', '聽听', '啟启', '吳吴', '員员', '響响',
+    '問问', '囉啰', '園园', '圍围', '圖图', '團团', '國国', '圓圆', '場场', '塊块',
+    '壞坏', '報报', '壽寿', '夠够', '夢梦', '頭头', '奪夺', '獎奖', '媽妈', '嬰婴',
+    '學学', '實实', '寬宽', '寶宝', '對对', '導导', '將将', '尋寻', '層层', '屬属',
+    '歲岁', '島岛', '嶺岭', '師师', '帶带', '幫帮', '幹干', '廣广', '張张', '強强',
+    '彈弹', '歸归', '當当', '錄录', '復复', '憶忆', '懷怀', '態态', '總总', '戀恋',
+    '惡恶', '愛爱', '慣惯', '應应', '懶懒', '戰战', '戲戏', '戶户', '擔担', '換换',
+    '據据', '擺摆', '擴扩', '攝摄', '數数', '敵敌', '斷断', '於于', '無无', '時时',
+    '暫暂', '暢畅', '機机', '條条', '極极', '標标', '樓楼', '樣样', '樹树', '檢检',
+    '權权', '歡欢', '氣气', '沒没', '溫温', '漢汉', '點点', '燒烧', '營营', '獨独',
+    '現现', '環环', '產产', '電电', '畫画', '畢毕', '識识', '確确', '視视', '禮礼',
+    '離离', '種种', '稱称', '積积', '穩稳', '窮穷', '競竞', '筆笔', '簡简', '節节',
+    '範范', '籃篮', '類类', '緊紧', '紅红', '約约', '級级', '細细', '終终', '組组',
+    '經经', '結结', '給给', '統统', '網网', '線线', '績绩', '繼继', '續续', '聯联',
+    '職职', '腦脑', '臉脸', '藝艺', '藍蓝', '藥药', '蘇苏', '處处', '裝装', '裡里',
+    '裏里', '補补', '見见', '觀观', '規规', '覺觉', '覽览', '訂订', '計计', '討讨',
+    '訓训', '記记', '設设', '許许', '訴诉', '詞词', '試试', '詩诗', '話话', '該该',
+    '詳详', '語语', '誤误', '說说', '誰谁', '課课', '調调', '談谈', '請请', '論论',
+    '警警', '譯译', '議议', '護护', '讀读', '讓让', '貝贝', '負负', '財财', '貨货',
+    '貧贫', '責责', '費费', '貼贴', '貴贵', '資资', '賽赛', '贊赞', '贏赢', '超超',
+    '車车', '軌轨', '軟软', '較较', '載载', '輕轻', '輝辉', '輸输', '轉转', '辭辞',
+    '這这', '進进', '連连', '過过', '達达', '遠远', '適适', '選选', '還还', '郵邮',
+    '釋释', '針针', '銀银', '錯错', '錢钱', '鎮镇', '鏡镜', '長长', '門门', '開开',
+    '間间', '關关', '陰阴', '陽阳', '際际', '隨随', '險险', '隱隐', '難难', '雲云',
+    '靈灵', '靜静', '頁页', '頂顶', '順顺', '須须', '領领', '題题', '顏颜', '願愿',
+    '風风', '飛飞', '飯饭', '飲饮', '飾饰', '飽饱', '館馆', '馬马', '騎骑', '騙骗',
+    '騷骚', '驗验', '體体', '髮发', '鬧闹', '魚鱼', '鮮鲜', '鳥鸟', '雞鸡', '麥麦',
+    '麵面', '黃黄', '齊齐', '齒齿', '龍龙', '龜龟', '麼么', '噹当', '唄呗', '欸诶'
+  ];
+
+  const TRAD_TO_SIMP_MAP = new Map();
+  for (let idx = 0; idx < TRAD_TO_SIMP_PAIRS.length; idx += 1) {
+    const pair = TRAD_TO_SIMP_PAIRS[idx];
+    if (pair.length === 2 && pair[0] !== pair[1]) {
+      TRAD_TO_SIMP_MAP.set(pair[0], pair[1]);
+    }
+  }
+
+  function toSimplifiedChinese(text) {
+    const str = String(text || '');
+    if (!str) return '';
+    let out = '';
+    for (let i = 0; i < str.length; i += 1) {
+      const ch = str[i];
+      out += TRAD_TO_SIMP_MAP.get(ch) || ch;
+    }
+    return out;
+  }
+
+  function extractYoutubeChannelKey(input) {
+    const raw = String(input || '').trim();
+    if (!raw) return null;
+    const lower = raw.toLowerCase();
+    for (let i = 0; i < DEFAULT_CHANNELS.length; i += 1) {
+      const ch = DEFAULT_CHANNELS[i];
+      if (
+        lower === ch.id
+        || lower === ch.handle.toLowerCase()
+        || lower === ch.channelId.toLowerCase()
+        || lower.includes(ch.handle.toLowerCase())
+        || lower.includes(ch.channelId.toLowerCase())
+        || lower.includes(ch.handle.slice(1).toLowerCase())
+      ) {
+        return ch;
+      }
+    }
+    return null;
+  }
+
+  function inferHskLevelFromTitle(title) {
+    const text = String(title || '');
+    const m = text.match(/HSK\s*([1-6])(?:\s*[-–~]\s*([1-6]))?/i);
+    if (m) {
+      const lo = Number(m[1]);
+      const hi = m[2] ? Number(m[2]) : lo;
+      if (lo === 1 && hi <= 3) return { level: hi === 3 ? 'HSK 1–3' : 'HSK 1–2', levelGroup: 'hsk1-2' };
+      if (lo <= 2 && hi <= 4) return { level: 'HSK 2–4', levelGroup: 'hsk3' };
+      if (lo === 3 && hi >= 5) return { level: 'HSK 3–5', levelGroup: 'hsk4' };
+      if (lo >= 5 || hi >= 6) return { level: 'HSK 5–6', levelGroup: 'hsk5-6' };
+      if (lo === 4) return { level: 'HSK 4', levelGroup: 'hsk4' };
+      if (lo === 3) return { level: 'HSK 3+', levelGroup: 'hsk3' };
+      return { level: `HSK ${lo}`, levelGroup: lo <= 2 ? 'hsk1-2' : (lo === 3 ? 'hsk3' : (lo === 4 ? 'hsk4' : 'hsk5-6')) };
+    }
+    return { level: 'HSK 2–4', levelGroup: 'hsk3' };
+  }
 
   function extractYoutubeId(input) {
     const raw = String(input || '').trim();
@@ -596,10 +1005,11 @@
 
     const normalized = normalizePodcastCues(cues);
     return normalized.map((cue) => {
+      const zhText = opts.simplify ? toSimplifiedChinese(cue.zh || '') : (cue.zh || '');
       const next = {
         start: cue.start,
         end: cue.end,
-        zh: cue.zh || '',
+        zh: zhText,
         pinyin: cue.pinyin || '',
         vi: cue.vi || '',
         en: cue.en || ''
@@ -649,8 +1059,12 @@
   }
 
   return {
+    DEFAULT_CHANNELS,
     STARTER_EPISODES,
     extractYoutubeId,
+    extractYoutubeChannelKey,
+    inferHskLevelFromTitle,
+    toSimplifiedChinese,
     parseTimestampToSec,
     formatTimestamp,
     parseSubtitleText,

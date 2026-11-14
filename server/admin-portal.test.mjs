@@ -189,5 +189,6 @@ test('bundled Worker /resources-manifest and /admin/resources enforce auth and r
   assert.equal(pub1.status, 200);
   const pub1Json = await pub1.json();
   assert.equal(pub1Json.manifest.features['sentence-editor'], 'vip');
-  assert.equal(pub1Json.manifest.podcasts[0].title, 'Podcast HSK 3');
+  assert.equal(pub1Json.manifest.podcasts.length, 9);
+  assert.ok(pub1Json.manifest.podcasts.some((p) => p.title === 'Podcast HSK 3'));
 });

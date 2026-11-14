@@ -939,6 +939,56 @@
 
     byId('apPodcastCancelBtn')?.addEventListener('click', resetPodcastForm);
 
+    byId('apSyncYoutubeChannelsBtn')?.addEventListener('click', async () => {
+      if (!state.workerBase) {
+        showStatus('Thiếu endpoint Worker trong translation-config.json để lấy feed YouTube.', 'error');
+        return;
+      }
+      const btn = byId('apSyncYoutubeChannelsBtn');
+      if (btn) btn.disabled = true;
+      showStatus('Đang lấy danh sách tập mới từ @LearnChineseThroughPodcast và @BaoBaoMandarin...', 'info');
+      try {
+        const res = await fetch(`${state.workerBase}/podcast-feed?channel=all`, { method: 'GET', cache: 'no-store' });
+        const data = await res.json().catch(() => null);
+        if (!res.ok || !Array.isArray(data?.episodes)) {
+          throw Error(data?.error || `Không lấy được danh sách tập (${res.status}).`);
+        }
+        const existingYt = new Set(
+          state.manifest.podcasts.map((p) => {
+            const m = String(p?.youtubeUrl || '').match(/(?:v=|youtu\.be\/|\/(?:embed|shorts|live|v)\/)([a-zA-Z0-9_-]{11})/);
+            return m ? m[1] : '';
+          }).filter(Boolean)
+        );
+        let addedCount = 0;
+        for (const ep of data.episodes) {
+          if (!ep?.youtubeId || existingYt.has(ep.youtubeId)) continue;
+          existingYt.add(ep.youtubeId);
+          const lvlMatch = String(ep.levelGroup || '').match(/\d/);
+          state.manifest.podcasts.push({
+            id: `yt-${ep.youtubeId}`,
+            title: ep.title,
+            level: lvlMatch ? Number(lvlMatch[0]) : 3,
+            youtubeUrl: `https://www.youtube.com/watch?v=${ep.youtubeId}`,
+            subtitleText: '',
+            access: 'public',
+            note: `Kênh ${ep.channelHandle || ep.channelName || 'YouTube Podcast'}`
+          });
+          addedCount += 1;
+        }
+        if (addedCount > 0) {
+          writeLocalManifest(state.manifest);
+          renderAll();
+          showStatus(`Đã đồng bộ thêm ${addedCount} tập mới từ 2 kênh YouTube (nhớ bấm Xuất bản để lưu lên Server).`, 'ok');
+        } else {
+          showStatus(`Tất cả ${data.episodes.length} tập gần nhất từ 2 kênh đã có trong danh sách.`, 'info');
+        }
+      } catch (err) {
+        showStatus(err?.message || 'Lỗi mạng khi đồng bộ kênh YouTube.', 'error');
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    });
+
     byId('apDocForm')?.addEventListener('submit', (ev) => {
       ev.preventDefault();
       const urlCheck = core.validateHttpsUrl(byId('apDocUrl').value, { allowEmpty: false });

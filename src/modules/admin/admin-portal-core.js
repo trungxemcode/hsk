@@ -43,7 +43,80 @@
     { id: '6785', level: 6, title: 'HSK 6 · Bộ đề chuẩn', provider: 'study4', url: '', access: 'public', note: '' }
   ];
 
-  const DEFAULT_PODCASTS = [];
+  const DEFAULT_PODCASTS = [
+    {
+      id: 'bb-hsk12-hui-yao-neng',
+      level: 2,
+      title: 'HSK 1–3 | Phân biệt 会 · 要 · 能 (BaoBao Mandarin)',
+      youtubeUrl: 'https://www.youtube.com/watch?v=hhkIZ3gOIcs',
+      subtitleText: '',
+      access: 'public',
+      note: 'Kênh @BaoBaoMandarin · Có sẵn phụ đề Trung – Việt đồng bộ trên YouTube'
+    },
+    {
+      id: 'lctp-hsk12-greetings',
+      level: 2,
+      title: 'HSK 2–4 | Cách chào hỏi tự nhiên (Learn Chinese Through Podcast)',
+      youtubeUrl: 'https://www.youtube.com/watch?v=aYrCe-KTmTg',
+      subtitleText: '',
+      access: 'public',
+      note: 'Kênh @LearnChineseThroughPodcast · Có sẵn phụ đề Trung – Việt'
+    },
+    {
+      id: 'lctp-hsk3-yanerdaoling',
+      level: 3,
+      title: 'HSK 2–4 | Thành ngữ 掩耳盗铃 Bịt tai trộm chuông (Learn Chinese Through Podcast)',
+      youtubeUrl: 'https://www.youtube.com/watch?v=CqNO2psWIyU',
+      subtitleText: '',
+      access: 'public',
+      note: 'Kênh @LearnChineseThroughPodcast · Có sẵn phụ đề Trung – Việt'
+    },
+    {
+      id: 'bb-hsk3-five-habits',
+      level: 3,
+      title: 'HSK 2–4 | 5 thói quen học tiếng Trung dễ dàng (BaoBao Mandarin)',
+      youtubeUrl: 'https://www.youtube.com/watch?v=qTKcybgpT8M',
+      subtitleText: '',
+      access: 'public',
+      note: 'Kênh @BaoBaoMandarin · Có sẵn phụ đề Trung – Việt'
+    },
+    {
+      id: 'lctp-hsk3-white-snake',
+      level: 3,
+      title: 'HSK 2–4 | Truyền thuyết Bạch Xà & Tây Hồ (Learn Chinese Through Podcast)',
+      youtubeUrl: 'https://www.youtube.com/watch?v=huEhDinrgQQ',
+      subtitleText: '',
+      access: 'public',
+      note: 'Kênh @LearnChineseThroughPodcast · Có sẵn phụ đề Trung – Việt'
+    },
+    {
+      id: 'lctp-hsk4-eight-cuisines',
+      level: 4,
+      title: 'HSK 2–4 | Bát đại thái hệ & Lẩu Tứ Xuyên (Learn Chinese Through Podcast)',
+      youtubeUrl: 'https://www.youtube.com/watch?v=xivjMEMEAvE',
+      subtitleText: '',
+      access: 'public',
+      note: 'Kênh @LearnChineseThroughPodcast · Có sẵn phụ đề Trung – Việt'
+    },
+    {
+      id: 'bb-hsk4-short-drama',
+      level: 4,
+      title: 'HSK 3–5 | Vì sao phim ngắn Trung Quốc gây sốt? (BaoBao Mandarin)',
+      youtubeUrl: 'https://www.youtube.com/watch?v=MupmlHHMU7k',
+      subtitleText: '',
+      access: 'public',
+      note: 'Kênh @BaoBaoMandarin · Có sẵn phụ đề Trung – Việt'
+    },
+    {
+      id: 'bb-hsk56-overtime-996',
+      level: 5,
+      title: 'HSK 3+ | Văn hóa tăng ca 996 ở Trung Quốc (BaoBao Mandarin)',
+      youtubeUrl: 'https://www.youtube.com/watch?v=i8emBnSpS3I',
+      subtitleText: '',
+      access: 'public',
+      note: 'Kênh @BaoBaoMandarin · Có sẵn phụ đề Trung – Việt – Anh'
+    }
+  ];
 
   function cleanText(value, maxLen = 200) {
     return String(value == null ? '' : value).replace(/\s+/g, ' ').trim().slice(0, maxLen);
