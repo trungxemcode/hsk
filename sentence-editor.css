@@ -419,7 +419,7 @@ html[data-theme="dark"] #sentenceEditor .sentence-card {
 }
 html[data-theme="dark"] #sentenceEditor .sentence-filters button {
   background: var(--palette-dark-surface) !important;
-  color: var(--palette-dark-ink-muted) !important;
+  color: var(--palette-dark-muted) !important;
 }
 html[data-theme="dark"] #sentenceEditor .sentence-diff {
   background: color-mix(in srgb, var(--palette-white) 5%, var(--palette-clear)) !important;
@@ -1417,17 +1417,17 @@ html[data-theme="dark"] #sentenceEditor .sentence-detector-meter {
   line-height: 1.5;
 }
 
-#sentenceEditor .sentence-tool-cta {
+html body.studio-enabled #sentenceEditor .sentence-tool-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   padding: 7px 14px;
   min-height: 36px;
-  border: 0;
+  border: 0 !important;
   border-radius: var(--radius-pill);
-  background: var(--se-green);
-  color: var(--palette-white);
+  background: var(--se-green) !important;
+  color: var(--palette-white) !important;
   font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
@@ -1435,11 +1435,11 @@ html[data-theme="dark"] #sentenceEditor .sentence-detector-meter {
   transition: filter 0.15s ease, opacity 0.15s ease;
 }
 
-#sentenceEditor .sentence-tool-cta:hover:not(:disabled) {
+html body.studio-enabled #sentenceEditor .sentence-tool-cta:hover:not(:disabled) {
   filter: brightness(1.08);
 }
 
-#sentenceEditor .sentence-tool-cta:disabled {
+html body.studio-enabled #sentenceEditor .sentence-tool-cta:disabled {
   opacity: 0.55;
   cursor: wait;
   box-shadow: none;
@@ -1450,10 +1450,10 @@ html[data-theme="dark"] #sentenceEditor .sentence-detector-meter {
   justify-content: flex-end;
 }
 
-#sentenceEditor .sentence-apply-all {
-  background: var(--se-green-soft);
-  color: var(--se-green);
-  border: 1px solid color-mix(in srgb, var(--se-green) 35%, var(--palette-clear));
+html body.studio-enabled #sentenceEditor .sentence-apply-all {
+  background: var(--se-green-soft) !important;
+  color: var(--se-green) !important;
+  border: 1px solid color-mix(in srgb, var(--se-green) 35%, var(--palette-clear)) !important;
   border-radius: var(--radius-pill);
   padding: 6px 12px;
   font-size: 0.8rem;
@@ -1462,8 +1462,8 @@ html[data-theme="dark"] #sentenceEditor .sentence-detector-meter {
   transition: background 0.15s ease;
 }
 
-#sentenceEditor .sentence-apply-all:hover {
-  background: color-mix(in srgb, var(--se-green) 20%, var(--palette-clear));
+html body.studio-enabled #sentenceEditor .sentence-apply-all:hover {
+  background: color-mix(in srgb, var(--se-green) 20%, var(--palette-clear)) !important;
 }
 
 /* Grammarly-style vertical tool rail on right edge */
@@ -1491,7 +1491,7 @@ html[data-theme="dark"] #sentenceEditor .sentence-detector-meter {
   box-shadow: var(--shadow-sentence-editor-shell);
 }
 
-#sentenceEditor .sentence-rail-item {
+html body.studio-enabled #sentenceEditor .sentence-rail-item {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -1499,22 +1499,28 @@ html[data-theme="dark"] #sentenceEditor .sentence-detector-meter {
   width: 40px;
   height: 40px;
   padding: 0;
-  border: 0;
+  border: 0 !important;
   border-radius: var(--radius-pill);
-  background: var(--palette-clear);
-  color: var(--se-green);
+  background: var(--palette-clear) !important;
+  color: var(--se-green) !important;
   cursor: pointer;
   transition: background 0.16s ease, color 0.16s ease, transform 0.15s ease;
 }
 
-#sentenceEditor .sentence-rail-item:hover {
-  background: var(--se-green-soft);
+html body.studio-enabled #sentenceEditor .sentence-rail-item:hover {
+  background: var(--se-green-soft) !important;
+  color: var(--se-green) !important;
 }
 
-#sentenceEditor .sentence-rail-item[aria-pressed="true"] {
-  background: var(--se-green);
-  color: var(--palette-white);
+html body.studio-enabled #sentenceEditor .sentence-rail-item[aria-pressed="true"] {
+  background: var(--se-green) !important;
+  color: var(--palette-white) !important;
   box-shadow: var(--shadow-sentence-editor-submit);
+}
+
+html body.studio-enabled #sentenceEditor .sentence-rail-item .sentence-rail-icon,
+html body.studio-enabled #sentenceEditor .sentence-rail-item .sentence-rail-icon svg {
+  color: inherit !important;
 }
 
 #sentenceEditor .sentence-rail-icon {
@@ -1532,16 +1538,16 @@ html[data-theme="dark"] #sentenceEditor .sentence-detector-meter {
   display: block;
 }
 
-#sentenceEditor .sentence-rail-badge {
+html body.studio-enabled #sentenceEditor .sentence-rail-badge {
   position: absolute;
-  top: 3px;
-  right: 3px;
+  top: 2px;
+  right: 2px;
   min-width: 15px;
   height: 15px;
   padding: 0 4px;
   border-radius: var(--radius-pill);
-  background: var(--se-fix);
-  color: var(--palette-white);
+  background: var(--se-fix) !important;
+  color: var(--palette-white) !important;
   font-size: 0.65rem;
   font-weight: 800;
   line-height: 15px;
@@ -1549,44 +1555,47 @@ html[data-theme="dark"] #sentenceEditor .sentence-detector-meter {
   pointer-events: none;
 }
 
-#sentenceEditor .sentence-rail-item[aria-pressed="true"] .sentence-rail-badge {
-  background: var(--palette-dark-surface);
-  color: var(--palette-white);
+html body.studio-enabled #sentenceEditor .sentence-rail-item[aria-pressed="true"] .sentence-rail-badge {
+  background: var(--palette-dark-surface) !important;
+  color: var(--palette-white) !important;
 }
 
 @media (min-width: 721px) {
-  #sentenceEditor .sentence-rail-label {
+  html body.studio-enabled #sentenceEditor .sentence-rail-label {
     position: absolute;
-    right: calc(100% + 14px);
+    right: calc(100% + 12px);
     top: 50%;
     transform: translateY(-50%) translateX(6px);
-    padding: 6px 12px;
+    min-width: 148px;
+    text-align: right;
+    padding: 7px 14px;
     border-radius: var(--radius-btn);
-    background: var(--palette-dark-surface);
-    color: var(--palette-dark-ink-muted);
-    border: 1px solid var(--palette-dark-line-strong);
+    background: var(--palette-dark-surface) !important;
+    color: var(--palette-dark-ink) !important;
+    border: 1px solid var(--palette-dark-line-strong) !important;
     box-shadow: var(--shadow);
     font-size: 0.82rem;
     font-weight: 600;
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.16s ease, transform 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+    transition: opacity 0.16s ease, transform 0.16s ease, color 0.16s ease, border-color 0.16s ease, background 0.16s ease;
     z-index: 25;
   }
 
-  #sentenceEditor .sentence-rail-dock:hover .sentence-rail-label,
-  #sentenceEditor .sentence-rail-dock:focus-within .sentence-rail-label {
+  html body.studio-enabled #sentenceEditor .sentence-rail-dock:hover .sentence-rail-label,
+  html body.studio-enabled #sentenceEditor .sentence-rail-dock:focus-within .sentence-rail-label {
     opacity: 1;
     transform: translateY(-50%) translateX(0);
   }
 
-  #sentenceEditor .sentence-rail-item:hover .sentence-rail-label,
-  #sentenceEditor .sentence-rail-item:focus-visible .sentence-rail-label,
-  #sentenceEditor .sentence-rail-item[aria-pressed="true"] .sentence-rail-label {
-    color: var(--palette-white);
+  html body.studio-enabled #sentenceEditor .sentence-rail-item:hover .sentence-rail-label,
+  html body.studio-enabled #sentenceEditor .sentence-rail-item:focus-visible .sentence-rail-label,
+  html body.studio-enabled #sentenceEditor .sentence-rail-item[aria-pressed="true"] .sentence-rail-label {
+    background: var(--palette-dark-paper) !important;
+    color: var(--palette-white) !important;
     font-weight: 700;
-    border-color: var(--se-green);
+    border-color: var(--se-green) !important;
   }
 }
 
