@@ -1,9 +1,6 @@
 {
-  "request": "Dark-mode violet surface fixes for glowing white-purple controls/cards (Home, Lessons, SRS Easy button), plus Sentence Editor Grammarly-style right tool rail with persistent draft across sub-tools, AI Grader, 5000-char limit, unified AI model picker, and AI Detector.",
+  "request": "PR #429: improve Sentence Editor right tool rail label contrast, interactive button colors and accessible aria-labels. Only sentence-editor visual changes are expected; all other routes remain protected.",
   "excludedRoutes": [
-    "home",
-    "lessons",
-    "sentence-editor",
-    "srs"
+    "sentence-editor"
   ]
 }
