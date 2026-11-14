@@ -111,3 +111,20 @@ test('combined navigation scope preserves every route and only the two navigatio
 });
 
 test('Profile/Account split scopes exactly the two pages plus navigation',()=>{assert.equal(scope({request:'Separate profile/account',excludedRoutes:['account','profile'],sharedNavigationOnly:true}).length,ROUTES.length-2);assert.throws(()=>scope({request:'Bad unrelated scope',excludedRoutes:['account','profile','home'],sharedNavigationOnly:true}));});
+
+test('global owner approval pins original main, approved design and every route without exceptions',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const approval=JSON.parse(fs.readFileSync('.github/ui-global-approval.json','utf8'));
+ const src=fs.readFileSync(path.join(__dirname,'check-ui-outside-scope.cjs'),'utf8');
+ const workflow=fs.readFileSync('.github/workflows/ui-outside-scope.yml','utf8');
+ const {needsVisualComparison,verifyVisual}=require('./ci-sharding-core.cjs');
+ assert.equal(approval.pullRequest,423);assert.equal(approval.ownerApproved,true);
+ assert.deepEqual(approval.routes,ROUTES);
+ assert.deepEqual(approval.scenarios,['390-light','390-dark','1440-light','1440-dark']);
+ assert.equal(needsVisualComparison(['.github/ui-global-approval.json']),true);
+ assert.match(src,/originalBaselineChangedPixels/);
+ assert.match(src,/approvedBefore/);
+ assert.match(workflow,/hsk-ui-before/);assert.match(src,/worktree','add','--detach'/);
+ assert.ok(!workflow.includes('ui-global-approval.json'),'Do not alter workflows or require workflow write scope');
+ assert.throws(()=>verifyVisual([],approval.baseSHA,'new-head',['.github/ui-global-approval.json'],{request:'global design',excludedRoutes:[]},approval),'missing scenarios always fail');
+});

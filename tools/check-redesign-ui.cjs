@@ -16,7 +16,7 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
    await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
    await page.waitForFunction(()=>window.HSKStudio&&window.HSKLessons&&document.querySelectorAll('.path-step[data-rd-enhanced="1"]').length===3);
    await page.evaluate(()=>document.fonts.ready);
-   assert(await page.evaluate(()=>Array.from(document.fonts).filter(f=>f.family==='Inter'&&f.status==='loaded').length>=2),'local Latin and Vietnamese font subsets load');
+   assert(await page.evaluate(()=>Array.from(document.fonts).filter(f=>f.family==='HSK Sans'&&f.status==='loaded').length>=2),'local Latin and Vietnamese font subsets load');
    for(const theme of ['light','dark']){
     await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
     for(const [i,action] of [[0,'click'],[1,'Enter'],[2,'Space']]){
@@ -40,6 +40,20 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
      assert.equal(await page.locator('.overview-search').evaluate(n=>n.nextElementSibling.id),'homeDailyWord','quick search precedes the daily word');
      assert.equal(await page.locator('#homeDailyWord').count(),1,'one daily word with original controls');
      assert(gaps.every(g=>Math.abs(g-12)<2),'mobile home uses consistent 12px card spacing: '+gaps.join(','));
+     // Route content must align with the 16px workspace gutter rather than nest
+     // another 8px inset inside each panel, shrinking the reading area.
+     for(const [route,selector] of [['lessons','#lessonsPanel'],['quiz','#quizPanel'],['compare','#comparePanel']]){
+      await page.evaluate(r=>HSKStudio.navigate(r),route);
+      const dims=await page.locator(selector).evaluate(n=>{
+       const rect=n.getBoundingClientRect(),style=getComputedStyle(n);
+       return {x:rect.x,right:rect.right,padLeft:parseFloat(style.paddingLeft),padRight:parseFloat(style.paddingRight)};
+      });
+      assert(Math.abs(dims.x-16)<=1.5,route+' uses shared 16px mobile gutter: '+JSON.stringify(dims));
+      assert(Math.abs(width-dims.right-16)<=1.5,route+' has matching right gutter: '+JSON.stringify(dims));
+      assert(dims.padLeft<=.5&&dims.padRight<=.5,route+' has no duplicate panel horizontal padding');
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,route+' no mobile horizontal overflow');
+     }
+     await page.evaluate(()=>HSKStudio.navigate('home'));
     }
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'no horizontal overflow');
     await page.screenshot({path:'/tmp/hsk-redesign-'+width+'-'+theme+'.png',fullPage:true});

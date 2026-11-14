@@ -149,7 +149,7 @@ html body.studio-enabled #studioHome .feature-hero{box-shadow:var(--shadow-home-
 
 #studioHome .overview-progress-card{padding:16px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface)}
 #studioHome .overview-progress-card h3{margin:0 0 8px;font-size:15px}
-#studioHome .overview-progress-card p{margin:4px 0;color:var(--sub);font-size:13px}
+#studioHome .overview-progress-card p{margin:4px 0;color:var(--sub);font-size:13px;text-wrap:pretty}
 #studioHome .overview-progress-card button{margin-top:8px;min-height:40px}
 
 @media(min-width:721px){

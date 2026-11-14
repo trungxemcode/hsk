@@ -9,6 +9,8 @@ if(mode==='suite'){
  const [dir,head,base]=args;
  const changed=execFileSync('git',['diff','--name-only',base,head],{encoding:'utf8'}).trim().split('\n').filter(Boolean);
  const config=changed.includes('.github/ui-scope.json')?JSON.parse(fs.readFileSync('.github/ui-scope.json','utf8')):{request:'No exclusions declared in this PR',excludedRoutes:[]};
- count=verifyVisual(reports(dir),base,head,changed,config);
+ const approvalPath='.github/ui-global-approval.json';
+ const approval=changed.includes('.github/ui-global-approval.json')&&fs.existsSync(approvalPath)?JSON.parse(fs.readFileSync(approvalPath,'utf8')):null;
+ count=verifyVisual(reports(dir),base,head,changed,config,approval);
 }else throw Error('Unknown report mode');
 console.log('PASS complete coverage: '+count+' '+(mode==='visual'?'protected states':'test commands'));

@@ -69,7 +69,7 @@
   --mb-radius-cover:16px; --mb-radius-row:14px;
   --mb-sp-1:4px;--mb-sp-2:8px;--mb-sp-3:12px;--mb-sp-4:16px;--mb-sp-5:20px;--mb-sp-6:24px;--mb-sp-7:28px;--mb-sp-8:32px;
   --mb-gutter:20px;
-  --mb-font-ui:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Noto Sans",Arial,sans-serif;
+  --mb-font-ui:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","Helvetica Neue","PingFang SC","Hiragino Sans GB","Noto Sans",Arial,sans-serif;
   --mb-safe-top:0px; --mb-safe-bottom:0px;
   --mb-h-header:56px; --mb-h-pills:44px; --mb-h-mini:64px;
 
@@ -79,7 +79,7 @@
   --mb-h-sticky:106px;
   --mb-ease-out:cubic-bezier(.22,.61,.36,1);
   --mb-ease-in-out:cubic-bezier(.4,0,.2,1);
-  --mb-ease-spring:cubic-bezier(.34,1.32,.5,1);
+  --mb-ease-spring:cubic-bezier(.22,1,.36,1);
   --mb-dur-fast:120ms; --mb-dur-base:200ms; --mb-dur-slow:320ms; --mb-dur-morph:420ms; --mb-stagger:36ms;
 
   --mb-rd-sheet-bg:var(--mb-rd-surface);
@@ -1218,7 +1218,7 @@ html[data-theme="dark"]{
     .example {
       width: 320px;
       background: var(--palette-white);
-      border-left: 4px solid var(--legacy-hex-2b63c0);
+      border: 1px solid var(--legacy-hex-cad6ef);
       border-radius:var(--radius-10px);
       box-shadow:var(--shadow-style-3);
       padding: 12px 16px;
@@ -1297,7 +1297,7 @@ html[data-theme="dark"]{
     .mistake-entry,.compare-lesson { border:1px solid var(--legacy-hex-cad6ef);border-radius:var(--radius-btn);margin:12px 0;padding:14px;overflow-wrap:anywhere; }
     .compare-lesson summary { cursor:pointer;min-height:48px;display:flex;align-items:center;font-weight:600; }
     .compare-member { padding:12px;background:var(--legacy-hex-eef3fc);border-radius:var(--radius-8px);margin:10px 0; }
-    .compare-example { border-left:3px solid var(--legacy-hex-1547b0);padding-left:12px;margin:12px 0; }
+    .compare-example { border:1px solid var(--legacy-hex-cad6ef);border-radius:var(--radius-8px);background:var(--legacy-hex-f8faff);padding:10px 12px;margin:12px 0; }
     .source-links { display:flex;flex-wrap:wrap;gap:12px;margin-top:12px; }
     .source-links a { padding:6px 0; }
     #quizPoolPreview { margin:6px 0 0; }
