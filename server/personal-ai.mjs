@@ -215,9 +215,14 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
  if(response.status>=300&&response.status<400)return new Response(null,{status:502});
  if(!response.ok||provider==='gemini')return response;
  const payload=await response.json().catch(()=>null);
- const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
-  (payload?.choices?.[0]?.message?.content??payload?.choices?.[0]?.text);
- if(typeof text!=='string')return new Response(null,{status:502});
+ const openAiMsg=payload?.choices?.[0]?.message?.content;
+ const openAiText=typeof openAiMsg==='string'?openAiMsg:
+  Array.isArray(openAiMsg)?openAiMsg.filter(p=>typeof p==='string'||p?.type==='text'||p?.type==='output_text').map(p=>typeof p==='string'?p:(p?.text||'')).join(''):
+  typeof payload?.choices?.[0]?.text==='string'?payload.choices[0].text:
+  typeof payload?.output_text==='string'?payload.output_text:
+  Array.isArray(payload?.output)?payload.output.flatMap(o=>Array.isArray(o?.content)?o.content:[]).filter(c=>typeof c?.text==='string').map(c=>c.text).join(''):null;
+ const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):openAiText;
+ if(typeof text!=='string'||!text.trim())return new Response(null,{status:502});
  return Response.json({candidates:[{content:{parts:[{text:text.trim()}]}}]});
 }
 

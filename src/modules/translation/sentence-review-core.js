@@ -50,8 +50,19 @@
     const fenced = clean.match(/```(?:json|javascript|js)?\s*([\s\S]*?)```/i);
     if (fenced) clean = fenced[1].trim();
     try { return JSON.parse(clean); } catch {}
+    const a0 = clean.indexOf('[');
+    const a1 = clean.lastIndexOf(']');
     const b0 = clean.indexOf('{');
     const b1 = clean.lastIndexOf('}');
+    if (a0 >= 0 && a1 > a0 && (b0 < 0 || a0 < b0)) {
+      const slice = clean.slice(a0, a1 + 1);
+      for (const candidate of [slice, slice.replace(/,\s*([\]}])/g, '$1')]) {
+        try {
+          const parsedArr = JSON.parse(candidate);
+          if (Array.isArray(parsedArr)) return parsedArr;
+        } catch {}
+      }
+    }
     if (b0 >= 0 && b1 > b0) {
       const slice = clean.slice(b0, b1 + 1);
       try { return JSON.parse(slice); } catch {}
@@ -244,15 +255,19 @@
   function normalize(payload, text) {
     let value = payload?.sentenceReview ?? payload?.answer ?? payload;
     for (let depth = 0; depth < 4; depth++) {
+      if (Array.isArray(value)) {
+        value = {suggestions: value};
+        break;
+      }
       if (typeof value !== 'string') {
-        if (value && (Array.isArray(value.suggestions) || Array.isArray(value.corrections) || Array.isArray(value.edits) || typeof value.correctedText === 'string' || typeof value.corrected_text === 'string')) break;
-        value = value?.answer;
+        if (value && (Array.isArray(value.suggestions) || Array.isArray(value.corrections) || Array.isArray(value.edits) || Array.isArray(value.changes) || typeof value.correctedText === 'string' || typeof value.corrected_text === 'string' || typeof value.revisedText === 'string' || typeof value.revised_text === 'string')) break;
+        value = value?.answer ?? value?.data ?? value?.result ?? value?.review ?? value?.response;
         continue;
       }
       const parsed = tryParseJson(value);
       if (parsed && typeof parsed === 'object') {
-        value = parsed;
-        if (Array.isArray(value.suggestions) || Array.isArray(value.corrections) || Array.isArray(value.edits) || typeof value.correctedText === 'string' || typeof value.corrected_text === 'string') {
+        value = Array.isArray(parsed) ? {suggestions: parsed} : parsed;
+        if (Array.isArray(value.suggestions) || Array.isArray(value.corrections) || Array.isArray(value.edits) || Array.isArray(value.changes) || typeof value.correctedText === 'string' || typeof value.corrected_text === 'string' || typeof value.revisedText === 'string' || typeof value.revised_text === 'string') {
           break;
         }
         continue;

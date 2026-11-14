@@ -842,11 +842,12 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
     return window.HSKAIQACore.normalizeAiQaResponse(answerText,{rejectMalformedJson:true,incompleteError:'Gia sư AI trả về dữ liệu chưa đầy đủ. Hãy thử lại.'});
   }
 
-  function getActiveAiParams(){
+  function getActiveAiParams(preferredControl){
     normalizeSelection();
     const info=activeProviderInfo();
     const choiceVal=effectiveChoice();
-    const thinkingEl=controls.find(el=>!el.disabled)||controls[0]||document.getElementById('aiQaThinking');
+    const preferred=preferredControl&&controls.includes(preferredControl)?preferredControl:null;
+    const thinkingEl=preferred||controls.find(el=>!el.disabled)||controls[0]||document.getElementById('aiQaThinking');
     const activeOpt=(thinkingEl&&!thinkingEl.disabled)?thinkingEl.selectedOptions?.[0]:null;
     const rawSelection=(thinkingEl&&!thinkingEl.disabled)?thinkingEl.value:'low';
     const selectedThinking=activeOpt?.dataset?.tier||(rawSelection.startsWith('model:')?'low':rawSelection);

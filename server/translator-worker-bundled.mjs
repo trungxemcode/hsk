@@ -2408,9 +2408,14 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
  if(response.status>=300&&response.status<400)return new Response(null,{status:502});
  if(!response.ok||provider==='gemini')return response;
  const payload=await response.json().catch(()=>null);
- const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
-  (payload?.choices?.[0]?.message?.content??payload?.choices?.[0]?.text);
- if(typeof text!=='string')return new Response(null,{status:502});
+ const openAiMsg=payload?.choices?.[0]?.message?.content;
+ const openAiText=typeof openAiMsg==='string'?openAiMsg:
+  Array.isArray(openAiMsg)?openAiMsg.filter(p=>typeof p==='string'||p?.type==='text'||p?.type==='output_text').map(p=>typeof p==='string'?p:(p?.text||'')).join(''):
+  typeof payload?.choices?.[0]?.text==='string'?payload.choices[0].text:
+  typeof payload?.output_text==='string'?payload.output_text:
+  Array.isArray(payload?.output)?payload.output.flatMap(o=>Array.isArray(o?.content)?o.content:[]).filter(c=>typeof c?.text==='string').map(c=>c.text).join(''):null;
+ const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):openAiText;
+ if(typeof text!=='string'||!text.trim())return new Response(null,{status:502});
  return Response.json({candidates:[{content:{parts:[{text:text.trim()}]}}]});
 }
 
@@ -4115,8 +4120,19 @@ function buildWrongAnswerInstruction(lesson){
     const fenced = clean.match(/```(?:json|javascript|js)?\s*([\s\S]*?)```/i);
     if (fenced) clean = fenced[1].trim();
     try { return JSON.parse(clean); } catch {}
+    const a0 = clean.indexOf('[');
+    const a1 = clean.lastIndexOf(']');
     const b0 = clean.indexOf('{');
     const b1 = clean.lastIndexOf('}');
+    if (a0 >= 0 && a1 > a0 && (b0 < 0 || a0 < b0)) {
+      const slice = clean.slice(a0, a1 + 1);
+      for (const candidate of [slice, slice.replace(/,\s*([\]}])/g, '$1')]) {
+        try {
+          const parsedArr = JSON.parse(candidate);
+          if (Array.isArray(parsedArr)) return parsedArr;
+        } catch {}
+      }
+    }
     if (b0 >= 0 && b1 > b0) {
       const slice = clean.slice(b0, b1 + 1);
       try { return JSON.parse(slice); } catch {}
@@ -4309,15 +4325,19 @@ function buildWrongAnswerInstruction(lesson){
   function normalize(payload, text) {
     let value = payload?.sentenceReview ?? payload?.answer ?? payload;
     for (let depth = 0; depth < 4; depth++) {
+      if (Array.isArray(value)) {
+        value = {suggestions: value};
+        break;
+      }
       if (typeof value !== 'string') {
-        if (value && (Array.isArray(value.suggestions) || Array.isArray(value.corrections) || Array.isArray(value.edits) || typeof value.correctedText === 'string' || typeof value.corrected_text === 'string')) break;
-        value = value?.answer;
+        if (value && (Array.isArray(value.suggestions) || Array.isArray(value.corrections) || Array.isArray(value.edits) || Array.isArray(value.changes) || typeof value.correctedText === 'string' || typeof value.corrected_text === 'string' || typeof value.revisedText === 'string' || typeof value.revised_text === 'string')) break;
+        value = value?.answer ?? value?.data ?? value?.result ?? value?.review ?? value?.response;
         continue;
       }
       const parsed = tryParseJson(value);
       if (parsed && typeof parsed === 'object') {
-        value = parsed;
-        if (Array.isArray(value.suggestions) || Array.isArray(value.corrections) || Array.isArray(value.edits) || typeof value.correctedText === 'string' || typeof value.corrected_text === 'string') {
+        value = Array.isArray(parsed) ? {suggestions: parsed} : parsed;
+        if (Array.isArray(value.suggestions) || Array.isArray(value.corrections) || Array.isArray(value.edits) || Array.isArray(value.changes) || typeof value.correctedText === 'string' || typeof value.corrected_text === 'string' || typeof value.revisedText === 'string' || typeof value.revised_text === 'string') {
           break;
         }
         continue;
@@ -5269,7 +5289,7 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
     }
     const contents=[...body.history.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.text}]})),{role:'user',parts:[{text:body.question.trim()},...examImageParts]}];
     const providerBody={systemInstruction:{parts:[{text:instruction}]},contents,generationConfig:{temperature:isAITeacher?0.35:isAiQa?0.25:isUnifiedPractice||isMicroTutorPack?0.45:0.2,maxOutputTokens:isSentenceEditor?(body.question.length>500?4096:1800):isSentenceAiDetect?2200:isWrongExam?1900:isAITeacher?1600:isAiQa?1800:isUnifiedPractice||isMicroTutorPack?3000:900,...(isSentenceEditor||isSentenceAiDetect?{thinkingConfig:{thinkingBudget:0}}:{}),responseMimeType:'application/json',responseSchema:isSentenceEditor?sentenceReviewSchema:isSentenceAiDetect?sentenceAiDetectSchema:isAiQa?aiQaAnswerSchema:teacherAnswerSchema}};
-    let response,reviewModel,sentenceFallbackUsed=false;
+    let response,reviewModel,sentenceFallbackUsed=false,sentenceFallbackFrom='';
     const isSentenceMode=isSentenceEditor||isSentenceAiDetect;
     const usePersonalCookie=usePersonalAi&&personalAi.provider==='chatgpt-cookie';
     if(usePersonalAi&&!usePersonalCookie){
@@ -5279,12 +5299,12 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
       const timeout=controller.signal.aborted||error.name==='AbortError';
       console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});
       const fbRes=isSentenceMode?await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:personalAi.provider,reason:error?.message}):null;
-      if(fbRes){response=fbRes;reviewModel=SENTENCE_EDITOR_FALLBACK_MODEL;sentenceFallbackUsed=true;}
+      if(fbRes){response=fbRes;reviewModel=SENTENCE_EDITOR_FALLBACK_MODEL;sentenceFallbackUsed=true;sentenceFallbackFrom=personalAi.provider;}
       else return reply({error:timeout?'API riêng phản hồi quá lâu. Hãy thử lại.':'Không kết nối được tới máy chủ API riêng. Hãy thử lại hoặc tắt API riêng trong Cài đặt.',code:timeout?'PERSONAL_AI_TIMEOUT':'PERSONAL_AI_NETWORK'},timeout?504:502);
      }
      if(!response.ok&&isSentenceMode&&!sentenceFallbackUsed){
       const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:personalAi.provider,reason:'upstream',status:response.status});
-      if(fbRes){response=fbRes;reviewModel=SENTENCE_EDITOR_FALLBACK_MODEL;sentenceFallbackUsed=true;}
+      if(fbRes){response=fbRes;reviewModel=SENTENCE_EDITOR_FALLBACK_MODEL;sentenceFallbackUsed=true;sentenceFallbackFrom=personalAi.provider;}
      }
      if(!response.ok&&!sentenceFallbackUsed){
       const upstream=response.status;
@@ -5325,6 +5345,7 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
      let result=globalThis.HSKSentenceReview.normalize(answerText,body.question);
      if(!result&&!sentenceFallbackUsed&&headers['X-HSK-AI-Provider']!=='gemini'){
       sentenceFallbackUsed=true;
+      sentenceFallbackFrom=personalAi?.provider||'';
       const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:personalAi?.provider||'unknown',reason:'format'});
       if(fbRes?.ok){
        activePayload=await fbRes.json();
@@ -5339,13 +5360,14 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
      const aiSource=provider?{provider,...(typeof modelName==='string'&&/^[a-z0-9][a-z0-9._/:+-]{0,119}$/i.test(modelName)?{model:modelName}:{})}:undefined;
      await qaUsage(env,activePayload);
      await qaFinish(roleEnv,qaSession,{answer,aiSource},provider,{rawFetch:rawFetchFn,ctx,signal:controller.signal});
-     return reply({answer,sentenceReview:result,aiSource});
+     return reply({answer,sentenceReview:result,aiSource,...(sentenceFallbackUsed&&sentenceFallbackFrom?{fallbackFrom:sentenceFallbackFrom}:{})});
     }
     if(isSentenceAiDetect){
      let activePayload=payload;
      let result=globalThis.HSKSentenceReview.normalizeAiDetection(answerText,body.question);
      if(!result&&!sentenceFallbackUsed&&headers['X-HSK-AI-Provider']!=='gemini'){
       sentenceFallbackUsed=true;
+      sentenceFallbackFrom=personalAi?.provider||'';
       const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:personalAi?.provider||'unknown',reason:'format'});
       if(fbRes?.ok){
        activePayload=await fbRes.json();
@@ -5360,7 +5382,7 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
      const aiSource=provider?{provider,...(typeof modelName==='string'&&/^[a-z0-9][a-z0-9._/:+-]{0,119}$/i.test(modelName)?{model:modelName}:{})}:undefined;
      await qaUsage(env,activePayload);
      await qaFinish(roleEnv,qaSession,{answer,aiSource},provider,{rawFetch:rawFetchFn,ctx,signal:controller.signal});
-     return reply({answer,aiDetection:result,aiSource});
+     return reply({answer,aiDetection:result,aiSource,...(sentenceFallbackUsed&&sentenceFallbackFrom?{fallbackFrom:sentenceFallbackFrom}:{})});
     }
     function cleanAndParseAiResponse(raw){
      if(!raw||typeof raw!=='string')return null;

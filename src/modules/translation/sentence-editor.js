@@ -229,6 +229,7 @@
     const toggleBtn = button(detectorCollapsed ? 'Mở rộng ▾' : 'Thu gọn ▴', 'sentence-detector-close', () => {
       detectorCollapsed = !detectorCollapsed;
       renderDetector();
+      render();
     });
     toggleBtn.setAttribute('aria-expanded', String(!detectorCollapsed));
     toggleBtn.setAttribute('aria-label', detectorCollapsed ? 'Mở rộng bảng AI Detector' : 'Thu gọn bảng AI Detector');
@@ -373,34 +374,75 @@
     mirror.replaceChildren();
     cards.replaceChildren();
 
-    const edits = visibleSuggestions();
-    const flagSpans = !edits.length && detection?.result?.flaggedSpans?.length ? detection.result.flaggedSpans : [];
-    let cursor = 0;
-    if (edits.length) {
+    const text = draft.value;
+    const rawEdits = visibleSuggestions();
+    const edits = [];
+    let lastEnd = 0;
+    for (const edit of rawEdits) {
+      if (edit.start < lastEnd) continue;
+      edits.push(edit);
+      lastEnd = edit.end;
+    }
+    const rawFlags = (!detectorCollapsed && detection?.result?.flaggedSpans?.length) ? detection.result.flaggedSpans : [];
+    const flagSpans = rawFlags.filter(span =>
+      span.start >= 0 && span.end > span.start && span.end <= text.length && text.slice(span.start, span.end) === span.text
+    );
+
+    const bounds = new Set([0, text.length]);
+    for (const edit of edits) {
+      bounds.add(edit.start);
+      bounds.add(edit.end);
+    }
+    for (const span of flagSpans) {
+      bounds.add(span.start);
+      bounds.add(span.end);
+    }
+    const points = [...bounds].sort((a, b) => a - b);
+    let renderedAiFlags = 0;
+
+    const appendInsertionsAt = pos => {
       for (const edit of edits) {
-        if (edit.start < cursor) continue;
-        mirror.append(draft.value.slice(cursor, edit.start));
-        const mark = document.createElement('mark');
+        if (edit.start !== edit.end || edit.start !== pos) continue;
+        const insMark = document.createElement('mark');
+        insMark.dataset.kind = edit.kind;
+        insMark.dataset.source = 'ai';
+        insMark.dataset.insertion = 'true';
+        insMark.textContent = '\u200b';
+        mirror.append(insMark);
+      }
+    };
+
+    for (let i = 0; i < points.length - 1; i++) {
+      const segStart = points[i];
+      const segEnd = points[i + 1];
+      appendInsertionsAt(segStart);
+      if (segStart >= segEnd) continue;
+      const edit = edits.find(item => item.start < item.end && item.start <= segStart && item.end >= segEnd);
+      const flag = flagSpans.find(item => item.start <= segStart && item.end >= segEnd);
+      const slice = text.slice(segStart, segEnd);
+      if (!edit && !flag) {
+        mirror.append(slice);
+        continue;
+      }
+      const mark = document.createElement('mark');
+      if (edit) {
         mark.dataset.kind = edit.kind;
         mark.dataset.source = 'ai';
-        mark.dataset.insertion = String(edit.start === edit.end);
-        mark.textContent = edit.original || '\u200b';
-        mirror.append(mark);
-        cursor = edit.end;
-      }
-    } else if (flagSpans.length) {
-      for (const span of flagSpans) {
-        if (span.start < cursor || span.end > draft.value.length || draft.value.slice(span.start, span.end) !== span.text) continue;
-        mirror.append(draft.value.slice(cursor, span.start));
-        const mark = document.createElement('mark');
+        mark.dataset.insertion = 'false';
+      } else {
         mark.dataset.kind = 'ai-flag';
         mark.dataset.source = 'detector';
-        mark.textContent = span.text;
-        mirror.append(mark);
-        cursor = span.end;
       }
+      if (flag) {
+        mark.dataset.aiFlag = 'true';
+        renderedAiFlags++;
+      }
+      mark.textContent = slice;
+      mirror.append(mark);
     }
-    mirror.append(draft.value.slice(cursor) + '\n');
+    appendInsertionsAt(text.length);
+    mirror.append('\n');
+    panel.classList.toggle('is-ai-highlight', renderedAiFlags > 0);
     syncScroll();
 
     for (const edit of edits) {
@@ -504,9 +546,7 @@
     });
   }
   function buildAiRequestParams() {
-    const pickerParams = (!thinkingSelect?.disabled || providerSelect.value !== 'auto')
-      ? (window.HSKAiProviderPicker?.getActiveAiParams?.() || null)
-      : null;
+    const pickerParams = window.HSKAiProviderPicker?.getActiveAiParams?.(thinkingSelect) || null;
     const aiProvider = providerSelect.value !== 'auto'
       ? providerSelect.value
       : (pickerParams?.aiProvider || 'auto');
@@ -542,12 +582,12 @@
     let saved = null;
     try { saved = localStorage.getItem(providerStorageKey()); } catch {}
     const pickerId = window.HSKAiProviderPicker?.selectedId?.();
-    const chosen = (saved !== null && providerChoices.has(saved))
+    const chosen = (saved && saved !== 'auto' && providerChoices.has(saved))
       ? saved
       : (pickerId && providerChoices.has(pickerId) ? pickerId : 'auto');
     syncingProvider = true;
     providerSelect.value = chosen;
-    if (window.HSKAiProviderPicker?.setSelectionFromSelect && window.HSKAiProviderPicker.selectedId?.() !== chosen) {
+    if (chosen !== 'auto' && window.HSKAiProviderPicker?.setSelectionFromSelect && window.HSKAiProviderPicker.selectedId?.() !== chosen) {
       window.HSKAiProviderPicker.setSelectionFromSelect(chosen);
     }
     syncingProvider = false;
@@ -645,7 +685,8 @@
       if (!response.ok) throw Error(data?.error || 'Không phân tích sâu được, dùng kết quả phân tích nhanh trên máy.');
       const detected = window.HSKSentenceReview.normalizeAiDetection(data, text) || localResult;
       const {provider, model} = sourceLabel(data || {}, response);
-      const srcLabel = provider ? provider + (model ? ' · ' + model : '') : 'HSK AI + Văn phong';
+      const fbFrom = typeof data?.fallbackFrom === 'string' && providerNames[data.fallbackFrom] ? providerNames[data.fallbackFrom] : '';
+      const srcLabel = provider ? provider + (model ? ' · ' + model : '') + (fbFrom ? ` (dự phòng từ ${fbFrom})` : '') : 'HSK AI + Văn phong';
       detection = {result: detected, sourceLabel: srcLabel};
       setStatus(detected.summary + (provider ? ' Nguồn: ' + srcLabel + '.' : ''));
       renderDetector();
@@ -729,9 +770,10 @@
       const review = window.HSKSentenceReview.normalize(data, text);
       if (!review) throw Error('AI chưa trả được gợi ý có vị trí sửa. Hãy bấm kiểm tra lại.');
       const {provider, model} = sourceLabel(data, response);
+      const fbFrom = typeof data?.fallbackFrom === 'string' && providerNames[data.fallbackFrom] ? providerNames[data.fallbackFrom] : '';
       suggestions = review.suggestions.map(edit => ({...edit, provider}));
       dismissed.clear();
-      setStatus(review.summary + (provider ? ' Nguồn: ' + provider + (model ? ' · ' + model : '') + '.' : ''));
+      setStatus(review.summary + (provider ? ' Nguồn: ' + provider + (model ? ' · ' + model : '') + (fbFrom ? ` (dự phòng vì ${fbFrom} lỗi/không kiểm tra được)` : '') + '.' : ''));
       render();
     } catch (error) {
       if (pending !== controller) return;
