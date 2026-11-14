@@ -1,5 +1,5 @@
 {
-  "request": "PR #419: bổ sung thanh điều hướng ngang trong topbar desktop và flyout nhóm khi sidebar thu gọn; bảo vệ toàn bộ nội dung các trang, chỉ thay đổi hai vùng điều hướng dùng chung.",
+  "request": "PR #422: unified desktop sidebar flyouts, topbar hover glide and accessible navigation focus. Only shared header and sidebar regions change; all route content including Lessons dark card remains protected.",
   "excludedRoutes": [],
   "sharedHeaderOnly": true,
   "sharedSidebarOnly": true
