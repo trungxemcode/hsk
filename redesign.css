@@ -4560,3 +4560,14 @@ html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary.activ
 }
 html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary.active :is(i,svg,span),
 html body:not(#_rd).studio-enabled .app-shell .side-nav .nav-group>summary.active:is(:hover,:focus-visible,[aria-expanded="true"]) :is(i,svg,span){color:var(--palette-white)!important;}
+
+/* Comparison cards use a dark surface in dark mode, preserving readable examples. */
+html[data-theme="dark"] body.studio-enabled .compare-member,
+html[data-theme="dark"] body.studio-enabled .compare-example{
+  background:var(--surface)!important;
+  border-color:var(--line)!important;
+  color:var(--ink)!important;
+}
+
+/* Dark-mode grammar warning notes use a dark surface to keep muted text readable. */
+html[data-theme="dark"] .lesson-grammar-point .lesson-error-note{background:var(--surface)!important;border-color:var(--line)!important}
