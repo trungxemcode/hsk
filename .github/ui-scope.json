@@ -1,9 +1,7 @@
 {
-  "request": "Dark-mode violet surface fixes for glowing white-purple controls/cards (Home, Lessons, SRS Easy button), Sentence Editor Grammarly-style right tool rail with persistent draft across sub-tools, AI Grader, 5000-char limit, unified AI model picker, AI Detector, plus Podcast Listening feature under Giải trí with adjustable English subtitle mask and synchronized Vi/Zh/Pinyin captions.",
+  "request": "PR #430: add podcast listening under Entertainment and standalone admin resource management. Only Music/Podcast and Admin areas may change visually; all other existing routes remain protected.",
   "excludedRoutes": [
-    "home",
-    "lessons",
-    "sentence-editor",
-    "srs"
+    "music",
+    "admin"
   ]
 }
