@@ -28,6 +28,9 @@
   let filter = 'all';
   let pending = null;
   let detection = null;
+  let detectorCollapsed = false;
+  let detectorWhyOpen = true;
+  let detectorSpansOpen = true;
   let activeMode = 'grammar';
   let syncingProvider = false;
   let waitStarted = 0;
@@ -207,10 +210,14 @@
     detectorPanel.replaceChildren();
     if (!detection?.result) {
       detectorPanel.hidden = true;
+      detectorPanel.classList.remove('is-collapsed');
       return;
     }
     detectorPanel.hidden = false;
+    detectorPanel.classList.toggle('is-collapsed', detectorCollapsed);
     const {result, sourceLabel: src} = detection;
+    const humanPct = Math.max(0, Math.min(100, Number(result.humanProbability ?? (100 - (result.aiProbability || 0))) || 0));
+    const aiPct = Math.max(0, Math.min(100, Number(result.aiProbability ?? (100 - humanPct)) || 0));
 
     const head = document.createElement('header');
     head.className = 'sentence-detector-head';
@@ -219,19 +226,20 @@
     badge.dataset.verdict = result.verdict;
     badge.textContent = result.verdictLabel;
 
-    const score = document.createElement('strong');
-    score.className = 'sentence-detector-score';
-    score.textContent = `${result.aiProbability}% AI · ${result.humanProbability}% Người`;
-
-    const closeBtn = button('Đóng', 'sentence-detector-close', () => {
-      detection = null;
+    const toggleBtn = button(detectorCollapsed ? 'Mở rộng ▾' : 'Thu gọn ▴', 'sentence-detector-close', () => {
+      detectorCollapsed = !detectorCollapsed;
       renderDetector();
-      render();
     });
-    head.append(badge, score, closeBtn);
-
-    const humanPct = Math.max(0, Math.min(100, Number(result.humanProbability ?? (100 - (result.aiProbability || 0))) || 0));
-    const aiPct = Math.max(0, Math.min(100, Number(result.aiProbability ?? (100 - humanPct)) || 0));
+    toggleBtn.setAttribute('aria-expanded', String(!detectorCollapsed));
+    toggleBtn.setAttribute('aria-label', detectorCollapsed ? 'Mở rộng bảng AI Detector' : 'Thu gọn bảng AI Detector');
+    head.append(badge);
+    if (detectorCollapsed) {
+      const compactPct = document.createElement('span');
+      compactPct.className = 'sentence-detector-compact-pct';
+      compactPct.textContent = `${humanPct}% Người · ${aiPct}% AI`;
+      head.append(compactPct);
+    }
+    head.append(toggleBtn);
 
     const meter = document.createElement('div');
     meter.className = 'sentence-detector-meter';
@@ -243,6 +251,11 @@
     aiFill.className = 'sentence-detector-meter-ai';
     aiFill.style.width = `${aiPct}%`;
     meter.append(humanFill, aiFill);
+
+    if (detectorCollapsed) {
+      detectorPanel.append(head, meter);
+      return;
+    }
 
     const legend = document.createElement('div');
     legend.className = 'sentence-detector-legend';
@@ -258,15 +271,27 @@
     meta.className = 'sentence-detector-meta';
     meta.textContent = `Độ tin cậy: ${result.confidence}` + (src ? ` · ${src}` : '');
 
-    const whyBox = document.createElement('div');
+    const whyBox = document.createElement('details');
     whyBox.className = 'sentence-detector-why';
+    whyBox.open = detectorWhyOpen;
+    whyBox.addEventListener('toggle', () => { detectorWhyOpen = whyBox.open; });
+    const whySummary = document.createElement('summary');
+    whySummary.className = 'sentence-detector-why-summary';
     const whyTitle = document.createElement('strong');
     whyTitle.className = 'sentence-detector-why-title';
     whyTitle.textContent = aiPct >= 38 ? 'Vì sao văn bản này giống AI?' : 'Vì sao văn bản này giống người viết?';
+    const whyChevron = document.createElement('span');
+    whyChevron.className = 'sentence-detector-accordion-chevron';
+    whyChevron.setAttribute('aria-hidden', 'true');
+    whyChevron.textContent = '▾';
+    whySummary.append(whyTitle, whyChevron);
+
+    const whyBody = document.createElement('div');
+    whyBody.className = 'sentence-detector-why-body';
     const summary = document.createElement('p');
     summary.className = 'sentence-detector-summary';
     summary.textContent = result.summary;
-    whyBox.append(whyTitle, summary);
+    whyBody.append(summary);
     if (Array.isArray(result.signals) && result.signals.length) {
       const list = document.createElement('ul');
       list.className = 'sentence-detector-signals';
@@ -275,8 +300,9 @@
         li.textContent = item;
         list.append(li);
       }
-      whyBox.append(list);
+      whyBody.append(list);
     }
+    whyBox.append(whySummary, whyBody);
 
     const metrics = document.createElement('div');
     metrics.className = 'sentence-detector-metrics';
@@ -299,12 +325,22 @@
     detectorPanel.append(head, meter, legend, meta, whyBox, metrics);
 
     if (Array.isArray(result.flaggedSpans) && result.flaggedSpans.length) {
-      const spansWrap = document.createElement('div');
+      const spansWrap = document.createElement('details');
       spansWrap.className = 'sentence-detector-spans';
+      spansWrap.open = detectorSpansOpen;
+      spansWrap.addEventListener('toggle', () => { detectorSpansOpen = spansWrap.open; });
+      const spansSummary = document.createElement('summary');
+      spansSummary.className = 'sentence-detector-spans-summary';
       const spansTitle = document.createElement('strong');
       spansTitle.className = 'sentence-detector-spans-title';
-      spansTitle.textContent = 'Đoạn có dấu hiệu khuôn mẫu / AI:';
-      spansWrap.append(spansTitle);
+      spansTitle.textContent = `Đoạn có dấu hiệu khuôn mẫu / AI (${result.flaggedSpans.length}):`;
+      const spansChevron = document.createElement('span');
+      spansChevron.className = 'sentence-detector-accordion-chevron';
+      spansChevron.setAttribute('aria-hidden', 'true');
+      spansChevron.textContent = '▾';
+      spansSummary.append(spansTitle, spansChevron);
+      const spansBody = document.createElement('div');
+      spansBody.className = 'sentence-detector-spans-body';
 
       for (const span of result.flaggedSpans) {
         const row = document.createElement('article');
@@ -323,8 +359,9 @@
           draft.setSelectionRange(span.start, span.end);
         });
         row.append(snippet, reason, locateBtn);
-        spansWrap.append(row);
+        spansBody.append(row);
       }
+      spansWrap.append(spansSummary, spansBody);
       detectorPanel.append(spansWrap);
     }
   }
@@ -555,6 +592,9 @@
       return;
     }
     const localResult = window.HSKSentenceReview.analyzeAiLikelihood(text);
+    detectorCollapsed = false;
+    detectorWhyOpen = true;
+    detectorSpansOpen = true;
     const user = window.HSKAccountDashboard?.user;
     if (navigator.onLine === false || !user?.uid) {
       detection = {
