@@ -1,9 +1,5 @@
 /* Podcast listening studio with English subtitle mask and synchronized Vi/Zh/Pinyin captions */
 
-#drawer[aria-hidden="true"] .drawer-route-nav [data-studio-go="podcast"] {
-  display: none !important;
-}
-
 #podcastPanel [hidden] {
   display: none !important;
 }
