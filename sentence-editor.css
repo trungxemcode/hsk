@@ -1834,3 +1834,239 @@ html[data-theme="dark"] #sentenceEditor .sentence-rewrite-notes,
 html[data-theme="dark"] #sentenceEditor .sentence-stat-card span {
   color: var(--qa-muted);
 }
+
+/* AI Grader pane */
+#sentenceEditor .sentence-grader-rubrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#sentenceEditor .sentence-grader-rubrics button {
+  flex: 1 1 auto;
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-pill);
+  background: var(--palette-white);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#sentenceEditor .sentence-grader-rubrics button[aria-pressed="true"] {
+  background: var(--se-green-soft);
+  border-color: var(--se-green);
+  color: var(--se-green);
+  font-weight: 700;
+}
+
+#sentenceEditor .sentence-grader-topic-wrap input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-pill);
+  background: var(--palette-white);
+  color: var(--ink);
+  font-size: 0.82rem;
+}
+
+#sentenceEditor .sentence-grader-card {
+  padding: 14px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-16px);
+  background: var(--palette-white);
+  box-shadow: var(--shadow-sentence-editor-card);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#sentenceEditor .sentence-grader-hero {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#sentenceEditor .sentence-grader-score-badge {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  background: var(--se-green-soft);
+  color: var(--se-green);
+  border: 1px solid color-mix(in srgb, var(--se-green) 35%, var(--palette-clear));
+}
+
+#sentenceEditor .sentence-grader-score-badge[data-tier="mid"] {
+  background: var(--se-style-soft);
+  color: var(--se-style);
+  border-color: color-mix(in srgb, var(--se-style) 35%, var(--palette-clear));
+}
+
+#sentenceEditor .sentence-grader-score-badge[data-tier="low"] {
+  background: var(--se-fix-soft);
+  color: var(--se-fix);
+  border-color: color-mix(in srgb, var(--se-fix) 35%, var(--palette-clear));
+}
+
+#sentenceEditor .sentence-grader-score-badge strong {
+  font-size: 1.32rem;
+  font-weight: 850;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+#sentenceEditor .sentence-grader-score-badge small {
+  font-size: 0.68rem;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+#sentenceEditor .sentence-grader-hero-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+#sentenceEditor .sentence-grader-grade {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--ink-strong);
+}
+
+#sentenceEditor .sentence-grader-hsk {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  border: 1px solid var(--se-edge);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+#sentenceEditor .sentence-grader-meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+#sentenceEditor .sentence-grader-summary {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+#sentenceEditor .sentence-grader-criteria {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+#sentenceEditor .sentence-grader-criterion {
+  padding: 9px 10px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-10px);
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#sentenceEditor .sentence-grader-criterion-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+#sentenceEditor .sentence-grader-bar {
+  height: 6px;
+  width: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--line);
+  overflow: hidden;
+}
+
+#sentenceEditor .sentence-grader-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--se-green);
+}
+
+#sentenceEditor .sentence-grader-criterion-note {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--sub);
+}
+
+#sentenceEditor .sentence-grader-section-title {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+  font-weight: 750;
+  color: var(--ink-strong);
+}
+
+#sentenceEditor .sentence-grader-list {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--sub);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-grader-rubrics button,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-topic-wrap input,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-card {
+  background: var(--palette-dark-surface);
+  border-color: var(--palette-dark-line-strong);
+  color: var(--palette-dark-ink);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-grader-rubrics button[aria-pressed="true"] {
+  background: var(--se-green-soft);
+  border-color: var(--se-green);
+  color: var(--se-green);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-grader-criterion,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-hsk {
+  background: var(--qa-bg);
+  border-color: var(--qa-line);
+  color: var(--qa-text);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-grader-grade,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-summary,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-criterion-head,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-section-title {
+  color: var(--qa-text);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-grader-meta,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-criterion-note,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-list {
+  color: var(--qa-muted);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-grader-bar {
+  background: var(--qa-line);
+}

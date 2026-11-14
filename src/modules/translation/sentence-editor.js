@@ -23,6 +23,11 @@
   const rewriteStyleBtns = [...panel.querySelectorAll('[data-rewrite-style]')];
   const rewriteRunBtn = panel.querySelector('#sentenceRewriteRunBtn');
   const rewriteOutput = panel.querySelector('#sentenceRewriteOutput');
+  const graderRubricBtns = [...panel.querySelectorAll('[data-grader-rubric]')];
+  const graderPromptInput = panel.querySelector('#sentenceGraderPrompt');
+  const graderRunBtn = panel.querySelector('#sentenceGraderRunBtn');
+  const graderHint = panel.querySelector('#sentenceGraderHint');
+  const graderOutput = panel.querySelector('#sentenceGraderOutput');
   const qaChipBtns = [...panel.querySelectorAll('[data-qa-preset]')];
   const qaInput = panel.querySelector('#sentenceQaInput');
   const qaSendBtn = panel.querySelector('#sentenceQaSendBtn');
@@ -43,9 +48,15 @@
   const TOOL_META = Object.freeze({
     grammar: { title: 'Gợi ý chỉnh sửa · HSK 1–6', subtitle: 'Sửa ngữ pháp & cách diễn đạt', defaultStatus: initialStatus },
     detector: { title: 'AI Detector', subtitle: 'Phát hiện văn bản AI & nguyên nhân', defaultStatus: 'Bấm Quét dấu hiệu AI để phân tích văn bản đang dán.' },
+    grader: { title: 'AI Grader · Chấm điểm', subtitle: 'Chấm điểm chi tiết theo tiêu chí HSK', defaultStatus: 'Chọn tiêu chí rồi bấm Chấm điểm bằng AI.' },
     rewrite: { title: 'Viết lại & Tự nhiên hóa', subtitle: 'Paraphrase · Giữ nguyên văn bản đang dán', defaultStatus: 'Chọn phong cách rồi bấm Viết lại đoạn văn.' },
     ask: { title: 'Hỏi nhanh AI về bài viết', subtitle: 'Dịch, giải thích ngữ pháp & chấm mức HSK', defaultStatus: 'Đặt câu hỏi hoặc chọn gợi ý nhanh cho văn bản đang dán.' },
     stats: { title: 'Thống kê văn bản', subtitle: 'Đếm chữ Hán, câu & nhịp độ tự nhiên', defaultStatus: 'Thống kê cập nhật tức thì theo văn bản đang dán.' }
+  });
+  const GRADER_RUBRIC_LABELS = Object.freeze({
+    hsk: 'Chuẩn thi viết HSK (ngữ pháp, từ vựng, mạch lạc, đúng đề)',
+    natural: 'Độ tự nhiên như người bản xứ và cách dùng từ',
+    strict: 'Chấm khắt khe theo văn phong học thuật'
   });
   const REWRITE_STYLE_LABELS = Object.freeze({
     natural: 'Tự nhiên như người bản xứ (thoát văn AI)',
@@ -63,12 +74,15 @@
   let detectorSpansOpen = true;
   let activeMode = 'grammar';
   let activeTool = 'grammar';
+  let graderRubric = 'hsk';
+  let graderResult = null;
   let rewriteStyle = 'natural';
   let rewriteResult = null;
   let qaMessages = [];
   const toolStatuses = {
     grammar: TOOL_META.grammar.defaultStatus,
     detector: TOOL_META.detector.defaultStatus,
+    grader: TOOL_META.grader.defaultStatus,
     rewrite: TOOL_META.rewrite.defaultStatus,
     ask: TOOL_META.ask.defaultStatus,
     stats: TOOL_META.stats.defaultStatus
@@ -152,11 +166,13 @@
       waitStarted = performance.now();
       waitPhase = activeMode === 'detect'
         ? 'Đang phân tích AI Detector'
-        : activeMode === 'rewrite'
-          ? 'Đang viết lại đoạn văn'
-          : activeMode === 'ask'
-            ? 'Đang hỏi AI về bài viết'
-            : 'Đang kết nối';
+        : activeMode === 'grader'
+          ? 'Đang chấm điểm bài viết'
+          : activeMode === 'rewrite'
+            ? 'Đang viết lại đoạn văn'
+            : activeMode === 'ask'
+              ? 'Đang hỏi AI về bài viết'
+              : 'Đang kết nối';
       startThinkingIndicator(activeProviderLabel());
       renderWait(0, 0);
     } else {
@@ -164,6 +180,7 @@
     }
     submit.disabled = busy;
     if (detectorRunBtn) detectorRunBtn.disabled = busy;
+    if (graderRunBtn) graderRunBtn.disabled = busy;
     if (rewriteRunBtn) rewriteRunBtn.disabled = busy;
     if (qaSendBtn) qaSendBtn.disabled = busy;
     panel.setAttribute('aria-busy', String(busy));
@@ -427,6 +444,8 @@
       } else if (tool === 'detector' && detection?.result) {
         const aiPct = Math.max(0, Math.min(100, Number(detection.result.aiProbability) || 0));
         text = aiPct + '%';
+      } else if (tool === 'grader' && Number.isFinite(graderResult?.overallScore)) {
+        text = String(graderResult.overallScore);
       } else if (tool === 'rewrite' && rewriteResult?.rewrittenText) {
         text = '✓';
       } else if (tool === 'ask') {
@@ -538,6 +557,114 @@
     rewriteOutput.append(card);
   }
 
+  function renderGrader() {
+    if (!graderOutput) return;
+    for (const btn of graderRubricBtns) {
+      btn.setAttribute('aria-pressed', String(btn.dataset.graderRubric === graderRubric));
+    }
+    if (graderHint) graderHint.hidden = Boolean(graderResult);
+    if (graderRunBtn) graderRunBtn.textContent = graderResult ? 'Chấm lại bằng AI' : 'Chấm điểm bằng AI';
+    graderOutput.replaceChildren();
+    if (!graderResult) {
+      graderOutput.hidden = true;
+      return;
+    }
+    graderOutput.hidden = false;
+    const card = document.createElement('article');
+    card.className = 'sentence-grader-card';
+    const score = Math.max(0, Math.min(100, Math.round(Number(graderResult.overallScore) || 0)));
+    const tier = score >= 80 ? 'high' : (score >= 60 ? 'mid' : 'low');
+
+    const hero = document.createElement('div');
+    hero.className = 'sentence-grader-hero';
+    const badge = document.createElement('div');
+    badge.className = 'sentence-grader-score-badge';
+    badge.dataset.tier = tier;
+    const scoreStrong = document.createElement('strong');
+    scoreStrong.textContent = String(score);
+    const scoreSmall = document.createElement('small');
+    scoreSmall.textContent = '/ 100';
+    badge.append(scoreStrong, scoreSmall);
+
+    const info = document.createElement('div');
+    info.className = 'sentence-grader-hero-info';
+    const gradeEl = document.createElement('div');
+    gradeEl.className = 'sentence-grader-grade';
+    gradeEl.textContent = graderResult.gradeLabel || (score >= 90 ? 'Xuất sắc (A+)' : score >= 80 ? 'Giỏi (A)' : score >= 70 ? 'Khá tốt (B+)' : score >= 60 ? 'Trung bình khá (B)' : 'Cần cải thiện (C)');
+    info.append(gradeEl);
+    if (graderResult.estimatedHsk) {
+      const hskBadge = document.createElement('span');
+      hskBadge.className = 'sentence-grader-hsk';
+      hskBadge.textContent = graderResult.estimatedHsk;
+      info.append(hskBadge);
+    }
+    const meta = document.createElement('div');
+    meta.className = 'sentence-grader-meta';
+    meta.textContent = `${GRADER_RUBRIC_LABELS[graderResult.rubric]?.split('(')[0].trim() || 'Chuẩn HSK'}` + (graderResult.sourceLabel ? ` · ${graderResult.sourceLabel}` : '');
+    info.append(meta);
+    hero.append(badge, info);
+    card.append(hero);
+
+    if (graderResult.summary) {
+      const summary = document.createElement('p');
+      summary.className = 'sentence-grader-summary';
+      summary.textContent = graderResult.summary;
+      card.append(summary);
+    }
+
+    if (Array.isArray(graderResult.criteria) && graderResult.criteria.length) {
+      const critWrap = document.createElement('div');
+      critWrap.className = 'sentence-grader-criteria';
+      for (const item of graderResult.criteria) {
+        const row = document.createElement('div');
+        row.className = 'sentence-grader-criterion';
+        const head = document.createElement('div');
+        head.className = 'sentence-grader-criterion-head';
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = item.label;
+        const valStrong = document.createElement('strong');
+        const cScore = Math.max(0, Math.min(100, Math.round(Number(item.score) || 0)));
+        valStrong.textContent = `${cScore}/100`;
+        head.append(nameSpan, valStrong);
+        const bar = document.createElement('div');
+        bar.className = 'sentence-grader-bar';
+        const fill = document.createElement('span');
+        fill.style.width = `${cScore}%`;
+        bar.append(fill);
+        row.append(head, bar);
+        if (item.note) {
+          const note = document.createElement('p');
+          note.className = 'sentence-grader-criterion-note';
+          note.textContent = item.note;
+          row.append(note);
+        }
+        critWrap.append(row);
+      }
+      card.append(critWrap);
+    }
+
+    const appendList = (titleText, items) => {
+      if (!Array.isArray(items) || !items.length) return;
+      const sec = document.createElement('div');
+      const h = document.createElement('p');
+      h.className = 'sentence-grader-section-title';
+      h.textContent = titleText;
+      const ul = document.createElement('ul');
+      ul.className = 'sentence-grader-list';
+      for (const text of items) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        ul.append(li);
+      }
+      sec.append(h, ul);
+      card.append(sec);
+    };
+    appendList('Điểm mạnh', graderResult.strengths);
+    appendList('Gợi ý nâng điểm', graderResult.improvements);
+
+    graderOutput.append(card);
+  }
+
   function renderQa() {
     if (!qaThread) return;
     qaThread.replaceChildren();
@@ -573,6 +700,7 @@
     }
     status.textContent = toolStatuses[nextTool] || meta.defaultStatus;
     if (nextTool === 'detector') renderDetector();
+    else if (nextTool === 'grader') renderGrader();
     else if (nextTool === 'rewrite') renderRewrite();
     else if (nextTool === 'ask') renderQa();
     else if (nextTool === 'stats') renderStats();
@@ -688,17 +816,20 @@
     cancelPending();
     suggestions = [];
     detection = null;
+    graderResult = null;
     rewriteResult = null;
     qaMessages = [];
     dismissed.clear();
     undoStack = [];
     toolStatuses.grammar = TOOL_META.grammar.defaultStatus;
     toolStatuses.detector = TOOL_META.detector.defaultStatus;
+    toolStatuses.grader = TOOL_META.grader.defaultStatus;
     toolStatuses.rewrite = TOOL_META.rewrite.defaultStatus;
     toolStatuses.ask = TOOL_META.ask.defaultStatus;
     toolStatuses.stats = TOOL_META.stats.defaultStatus;
     status.textContent = toolStatuses[activeTool] || initialStatus;
     renderDetector();
+    renderGrader();
     renderRewrite();
     renderQa();
     render();
@@ -716,7 +847,9 @@
     }
     cancelPending();
     detection = null;
+    graderResult = null;
     renderDetector();
+    renderGrader();
     undoStack.push({text: draft.value, suggestions, dismissed: new Set(dismissed), status: toolStatuses.grammar});
     if (undoStack.length > 20) undoStack.shift();
     draft.setRangeText(edit.replacement, edit.start, edit.end, 'end');
@@ -751,7 +884,9 @@
     }
     cancelPending();
     detection = null;
+    graderResult = null;
     renderDetector();
+    renderGrader();
     undoStack.push({text: draft.value, suggestions, dismissed: new Set(dismissed), status: toolStatuses.grammar});
     if (undoStack.length > 20) undoStack.shift();
     for (let i = nonOverlapping.length - 1; i >= 0; i--) {
@@ -777,9 +912,11 @@
     draft.value = nextText;
     suggestions = [];
     detection = null;
+    graderResult = null;
     dismissed.clear();
     toolStatuses.grammar = 'Đã áp dụng bản viết lại. Bạn có thể Hoàn tác hoặc kiểm tra ngữ pháp lại.';
     renderDetector();
+    renderGrader();
     render();
     setStatus('Đã áp dụng bản viết lại vào bài viết bên trái. Có thể bấm Hoàn tác nếu muốn khôi phục.', 'rewrite');
   }
@@ -816,8 +953,10 @@
     suggestions = previous.suggestions;
     dismissed = previous.dismissed;
     detection = null;
+    graderResult = null;
     setStatus(previous.status, 'grammar');
     renderDetector();
+    renderGrader();
     render();
     draft.focus();
   });
@@ -1164,6 +1303,133 @@
     }
   }
 
+  function parseGraderOutput(raw) {
+    const text = String(raw || '').trim();
+    if (!text) return null;
+    const tagMatch = text.match(/\[\[GRADER\]\]([\s\S]*?)\[\[\/GRADER\]\]/i);
+    const fenceMatch = text.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/i);
+    const rawJsonMatch = text.match(/\{[\s\S]*"(?:overallScore|criteria|score)"[\s\S]*\}/i);
+    const jsonCandidate = (tagMatch?.[1] || fenceMatch?.[1] || rawJsonMatch?.[0] || '').trim();
+    let parsed = null;
+    if (jsonCandidate) {
+      try { parsed = JSON.parse(jsonCandidate); } catch {}
+    }
+    if (parsed && typeof parsed === 'object') {
+      const critDef = [
+        ['grammar', 'Ngữ pháp & Trật tự từ'],
+        ['vocabulary', 'Từ vựng & Dùng từ'],
+        ['coherence', 'Mạch lạc & Liên kết'],
+        ['naturalness', 'Độ tự nhiên & Hợp HSK']
+      ];
+      const critObj = parsed.criteria && typeof parsed.criteria === 'object' ? parsed.criteria : {};
+      const criteria = [];
+      for (const [key, label] of critDef) {
+        const src = critObj[key];
+        if (!src || typeof src !== 'object') continue;
+        const cScore = Number(src.score);
+        if (!Number.isFinite(cScore)) continue;
+        criteria.push({
+          label,
+          score: Math.max(0, Math.min(100, Math.round(cScore))),
+          note: typeof src.note === 'string' ? src.note.trim() : ''
+        });
+      }
+      const rawOverall = Number(parsed.overallScore ?? parsed.score);
+      const avgCrit = criteria.length ? Math.round(criteria.reduce((s, x) => s + x.score, 0) / criteria.length) : NaN;
+      const overallScore = Number.isFinite(rawOverall)
+        ? Math.max(0, Math.min(100, Math.round(rawOverall)))
+        : (Number.isFinite(avgCrit) ? avgCrit : 75);
+      const cleanList = arr => Array.isArray(arr) ? arr.map(x => String(x || '').trim()).filter(Boolean).slice(0, 5) : [];
+      return {
+        overallScore,
+        gradeLabel: typeof parsed.gradeLabel === 'string' ? parsed.gradeLabel.trim() : '',
+        estimatedHsk: typeof parsed.estimatedHsk === 'string' ? parsed.estimatedHsk.trim() : '',
+        summary: typeof parsed.summary === 'string' ? parsed.summary.trim() : '',
+        criteria,
+        strengths: cleanList(parsed.strengths),
+        improvements: cleanList(parsed.improvements)
+      };
+    }
+    const cleanText = text.replace(/\[\[\/?GRADER\]\]/gi, '').trim();
+    if (!cleanText) return null;
+    return {
+      overallScore: 75,
+      gradeLabel: 'Nhận xét chi tiết từ AI',
+      estimatedHsk: '',
+      summary: cleanText,
+      criteria: [],
+      strengths: [],
+      improvements: []
+    };
+  }
+
+  async function runGrader() {
+    if (pending || composing) return;
+    const text = draft.value;
+    if (!han.test(text)) {
+      setStatus('Nhập đoạn văn tiếng Trung bên trái trước khi chấm điểm.', 'grader');
+      draft.focus();
+      return;
+    }
+    if (navigator.onLine === false) {
+      setStatus('Chấm điểm bằng AI cần kết nối mạng. Văn bản vẫn được giữ nguyên.', 'grader');
+      return;
+    }
+    const user = window.HSKAccountDashboard?.user;
+    if (!user?.uid) {
+      setStatus('Đăng nhập để dùng AI Grader chấm điểm bài viết.', 'grader');
+      return;
+    }
+    const aiParams = buildAiRequestParams();
+    const rubricDesc = GRADER_RUBRIC_LABELS[graderRubric] || GRADER_RUBRIC_LABELS.hsk;
+    const topic = String(graderPromptInput?.value || '').trim();
+    const prompt = `Trong learning_snapshot.draft_chinese là bài viết tiếng Trung${topic ? ' (đề bài: ' + topic + ')' : ''}. Hãy chấm điểm theo tiêu chí "${rubricDesc}". Trả JSON hợp lệ bọc trong thẻ [[GRADER]]{"overallScore":0..100,"gradeLabel":"Xếp loại (v.d. Khá tốt B+)","estimatedHsk":"HSK X","summary":"nhận xét tiếng Việt ngắn","criteria":{"grammar":{"score":0..100,"note":"..."},"vocabulary":{"score":0..100,"note":"..."},"coherence":{"score":0..100,"note":"..."},"naturalness":{"score":0..100,"note":"..."}},"strengths":["..."],"improvements":["..."]}[[/GRADER]].`;
+    const controller = new AbortController();
+    pending = controller;
+    activeMode = 'grader';
+    setBusy(true);
+    setStatus('AI Grader đang chấm điểm bài viết theo 4 tiêu chí HSK…', 'grader');
+    const timeout = setTimeout(() => controller.abort(), 185000);
+    try {
+      const level = Number(document.getElementById('studioTargetLevel')?.value);
+      waitPhase = 'Đang chấm điểm bài viết';
+      renderWait();
+      const res = await requestLessonAsk({
+        question: prompt.slice(0, 495),
+        ...aiParams,
+        hsk: level >= 1 && level <= 6 ? level : 3,
+        history: [],
+        lesson: {
+          id: 'sentence-editor',
+          title: 'AI Grader chấm điểm bài viết tiếng Trung',
+          words: [],
+          content: {mode: 'ai-qa', learning_snapshot: {task: 'chinese_writing_grader', rubric: graderRubric, topic, draft_chinese: text}}
+        }
+      }, controller);
+      if (!res || pending !== controller || draft.value !== text || window.HSKAccountDashboard?.user?.uid !== res.uid) return;
+      const { response, data } = res;
+      if (!response.ok) throw Error(data?.error || 'Chưa chấm điểm được bài viết. Hãy thử lại.');
+      const parsed = parseGraderOutput(data?.answer || '');
+      if (!parsed) throw Error('AI Grader chưa trả được bảng điểm. Hãy thử lại.');
+      const {provider, model} = sourceLabel(data || {}, response);
+      const srcLabel = provider ? provider + (model ? ' · ' + model : '') : 'HSK AI';
+      graderResult = { ...parsed, rubric: graderRubric, sourceLabel: srcLabel };
+      setStatus(`Đã chấm ${parsed.overallScore}/100 điểm (${srcLabel}). Chuyển tab khác sẽ không mất bảng điểm.`, 'grader');
+      renderGrader();
+      updateRailBadges();
+    } catch (error) {
+      if (pending !== controller) return;
+      setStatus(controller.signal.aborted || error.name === 'AbortError' ? 'AI Grader xử lý quá lâu. Hãy thử lại.' : (error.message || 'Chưa chấm điểm được.'), 'grader');
+    } finally {
+      clearTimeout(timeout);
+      if (pending === controller) {
+        pending = null;
+        activeMode = 'grammar';
+        setBusy(false);
+      }
+    }
+  }
+
   for (const btn of railButtons) {
     btn.addEventListener('click', () => {
       const nextTool = btn.dataset.sentenceTool;
@@ -1178,6 +1444,24 @@
   detectorRunBtn?.addEventListener('click', () => {
     setActiveTool('detector');
     runAiDetector();
+  });
+  for (const btn of graderRubricBtns) {
+    btn.addEventListener('click', () => {
+      graderRubric = btn.dataset.graderRubric || 'hsk';
+      renderGrader();
+    });
+  }
+  graderRunBtn?.addEventListener('click', () => {
+    setActiveTool('grader');
+    runGrader();
+  });
+  graderPromptInput?.addEventListener('keydown', event => {
+    if (event.key === 'Enter' && !composing) {
+      event.preventDefault();
+      event.stopPropagation();
+      setActiveTool('grader');
+      runGrader();
+    }
   });
   applyAllBtn?.addEventListener('click', applyAllSuggestions);
   for (const btn of rewriteStyleBtns) {
@@ -1276,5 +1560,6 @@
 
   setActiveTool('grammar');
   renderDetector();
+  renderGrader();
   render();
 })();

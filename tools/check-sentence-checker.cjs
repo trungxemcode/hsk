@@ -257,9 +257,24 @@ const server=http.createServer((req,res)=>{
     await page.evaluate(()=>window.__resolveGrammar({aiSource:{provider:'fosta',model:'gpt-6-astra:xhigh'},answer:'Đoạn văn viết khá tự nhiên ở trình độ HSK 3.'}));
     await editor.locator('.sentence-qa-msg[data-role="assistant"]').filter({hasText:'Đoạn văn viết khá tự nhiên'}).waitFor();
 
-    // Switch back to Rewrite, Detector, Stats, Grammar -> draft and stored results must still be intact
+    // AI Grader tab: rubric, grading score card, 4 criteria & persistence across tab switches
+    await editor.locator('[data-sentence-tool="grader"]').click();
+    assert.equal(await input.inputValue(),persistentText,'chuyển sang tab AI Grader không được làm mất văn bản đang dán');
+    await editor.locator('[data-grader-rubric="strict"]').click();
+    await editor.locator('#sentenceGraderPrompt').fill('Giới thiệu thói quen học tập hằng ngày');
+    await editor.locator('#sentenceGraderRunBtn').click();
+    await page.waitForFunction(()=>!!window.__resolveGrammar);
+    assert.equal(await page.evaluate(()=>window.__lastGrammarRequest?.lesson?.content?.learning_snapshot?.task),'chinese_writing_grader');
+    await page.evaluate(()=>window.__resolveGrammar({aiSource:{provider:'fosta',model:'gpt-6-astra:xhigh'},answer:'[[GRADER]]{"overallScore":86,"gradeLabel":"Giỏi (A)","estimatedHsk":"HSK 4","summary":"Câu văn rõ ràng, đúng trọng tâm và tự nhiên.","criteria":{"grammar":{"score":90,"note":"Trật tự từ chính xác."},"vocabulary":{"score":82,"note":"Từ vựng phù hợp HSK 3-4."},"coherence":{"score":88,"note":"Mối quan hệ nhân quả mạch lạc."},"naturalness":{"score":84,"note":"Khá tự nhiên."}},"strengths":["Dùng liên từ 因为 mạch lạc"],"improvements":["Có thể thay 非常 bằng 特别 để tự nhiên hơn"]}[[/GRADER]]'}));
+    await editor.locator('.sentence-grader-score-badge strong').filter({hasText:'86'}).waitFor();
+    await editor.locator('[data-tool-badge="grader"]').filter({hasText:'86'}).waitFor();
+    await editor.locator('.sentence-grader-criterion').first().waitFor({state:'visible'});
+
+    // Switch back to Rewrite, Grader, Detector, Stats, Grammar -> draft and stored results must still be intact
     await editor.locator('[data-sentence-tool="rewrite"]').click();
     await editor.locator('.sentence-rewrite-text').filter({hasText:'我每天一早就去图书馆学汉语'}).waitFor();
+    await editor.locator('[data-sentence-tool="grader"]').click();
+    await editor.locator('.sentence-grader-score-badge strong').filter({hasText:'86'}).waitFor();
     await editor.locator('[data-sentence-tool="grammar"]').click();
     assert.equal(await input.inputValue(),persistentText,'quay lại tab Sửa ngữ pháp vẫn giữ nguyên văn bản đang dán');
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'editor with right rail must not overflow horizontally on desktop');
