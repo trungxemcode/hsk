@@ -258,10 +258,52 @@
             <div class="ap-card-head ap-list-head">
               <div>
                 <h2 class="ap-card-title">Danh mục Tập Podcast YouTube</h2>
-                <p class="ap-card-desc">Đề xuất danh sách tập Podcast YouTube (mặc định có sẵn 2 kênh @LearnChineseThroughPodcast &amp; @BaoBaoMandarin) hiển thị trong mục Luyện nghe Podcast.</p>
+                <p class="ap-card-desc">Dán link kênh YouTube bất kỳ để lấy toàn bộ video tự động, hoặc thêm/sửa thủ công từng tập cho học viên.</p>
               </div>
               <button id="apSyncYoutubeChannelsBtn" type="button" class="ap-btn ap-btn-ghost">↻ Đồng bộ tập mới từ 2 kênh YouTube</button>
             </div>
+            <section class="ap-channel-import-box" aria-label="Nhập hàng loạt từ kênh YouTube">
+              <div class="ap-channel-import-head">
+                <div>
+                  <h3 class="ap-subhead">Nhập hàng loạt từ link kênh YouTube</h3>
+                  <p class="ap-card-desc">Dán link kênh (ví dụ <code>https://www.youtube.com/@BaoBaoMandarin</code>, <code>@handle</code>, <code>/channel/UC...</code> hoặc playlist) để hệ thống lấy hết video công khai và tự gắn cấp HSK.</p>
+                </div>
+              </div>
+              <form id="apPodcastChannelForm" class="ap-form-grid ap-channel-import-grid">
+                <div class="ap-field ap-span-2">
+                  <label class="ap-label" for="apPodcastChannelUrl">Link hoặc @handle kênh YouTube</label>
+                  <input id="apPodcastChannelUrl" class="ap-input" type="text" placeholder="https://www.youtube.com/@LearnChineseThroughPodcast hoặc @BaoBaoMandarin" autocomplete="off" spellcheck="false" />
+                </div>
+                <div class="ap-field">
+                  <label class="ap-label" for="apPodcastBatchAccess">Quyền truy cập</label>
+                  <select id="apPodcastBatchAccess" class="ap-select">
+                    <option value="public" selected>Công khai</option>
+                    <option value="vip">Chỉ VIP</option>
+                    <option value="hidden">Ẩn</option>
+                  </select>
+                </div>
+                <div class="ap-field">
+                  <label class="ap-label" for="apPodcastBatchLevel">HSK mặc định (khi tiêu đề không ghi)</label>
+                  <select id="apPodcastBatchLevel" class="ap-select">
+                    <option value="auto" selected>Tự nhận diện (mặc định HSK 3)</option>
+                    <option value="1">Mặc định HSK 1</option>
+                    <option value="2">Mặc định HSK 2</option>
+                    <option value="3">Mặc định HSK 3</option>
+                    <option value="4">Mặc định HSK 4</option>
+                    <option value="5">Mặc định HSK 5</option>
+                    <option value="6">Mặc định HSK 6</option>
+                  </select>
+                </div>
+                <div class="ap-channel-import-actions ap-span-2">
+                  <label class="ap-check-inline" for="apPodcastSkipShorts">
+                    <input id="apPodcastSkipShorts" type="checkbox" checked />
+                    <span>Bỏ qua video ngắn (YouTube Shorts &le; 60 giây)</span>
+                  </label>
+                  <button id="apImportChannelBtn" type="submit" class="ap-btn ap-btn-primary">⬇ Lấy toàn bộ video từ kênh</button>
+                </div>
+              </form>
+              <p id="apPodcastChannelResult" class="ap-inline-result" hidden aria-live="polite"></p>
+            </section>
             <form id="apPodcastForm" class="ap-form-grid ap-form-cols">
               <input id="apPodcastEditIndex" type="hidden" value="-1" />
               <label class="ap-field ap-span-2">

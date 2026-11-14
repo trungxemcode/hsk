@@ -317,3 +317,166 @@ for (const [label, makeHandler] of [
     assert.equal(capData.cues[0].vi, 'Xin chào các Bảo Bối!');
   });
 }
+
+
+test('GET /podcast-feed?url=... rejects non-YouTube SSRF targets and non-channel links', async () => {
+  let calledUpstream = false;
+  const handler = createBundledHandler(async () => {
+    calledUpstream = true;
+    return new Response('should not fetch');
+  });
+
+  const ssrfReq = new Request('https://worker.test/podcast-feed?url=' + encodeURIComponent('https://127.0.0.1/admin'), {
+    method: 'GET',
+    headers: { Origin: origin }
+  });
+  const ssrfRes = await handler(ssrfReq, env);
+  assert.equal(ssrfRes.status, 400);
+  assert.equal(calledUpstream, false);
+
+  const nonChanReq = new Request('https://worker.test/podcast-feed?url=' + encodeURIComponent('https://www.youtube.com/watch?v=dQw4w9WgXcQ'), {
+    method: 'GET',
+    headers: { Origin: origin }
+  });
+  const nonChanRes = await handler(nonChanReq, env);
+  assert.equal(nonChanRes.status, 400);
+  assert.equal(calledUpstream, false);
+});
+
+test('GET /podcast-feed?url=... paginates VLUU uploads, parses lockup/playlist items, filters live & Shorts', async () => {
+  const browseCalls = [];
+  const sampleChannelHtml = `
+    <html><head>
+      <meta property="og:title" content="Mandarin Corner Sample" />
+    </head><body>
+      <script>
+        ytcfg.set({"INNERTUBE_API_KEY":"fake_key_123","INNERTUBE_CLIENT_VERSION":"2.20260601.00.00"});
+        var ytInitialData = {"metadata":{"channelMetadataRenderer":{"externalId":"UC1234567890123456789012"}}};
+      </script>
+    </body></html>
+  `;
+
+  const page1 = {
+    contents: {
+      twoColumnBrowseResultsRenderer: {
+        tabs: [{
+          tabRenderer: {
+            content: {
+              sectionListRenderer: {
+                contents: [{
+                  itemSectionRenderer: {
+                    contents: [{
+                      playlistVideoListRenderer: {
+                        contents: [
+                          {
+                            lockupViewModel: {
+                              contentId: 'aaaaaaaaaaa',
+                              metadata: { lockupMetadataViewModel: { title: { content: 'HSK 4 Podcast Bài 1' } } },
+                              contentImage: {
+                                thumbnailViewModel: {
+                                  overlays: [{ thumbnailBottomOverlayViewModel: { badges: [{ thumbnailBadgeViewModel: { text: '14:22' } }] } }]
+                                }
+                              },
+                              rendererContext: { commandContext: { onTap: { innertubeCommand: { commandMetadata: { webCommandMetadata: { url: '/watch?v=aaaaaaaaaaa' } } } } } }
+                            }
+                          },
+                          {
+                            lockupViewModel: {
+                              contentId: 'sssssssssss',
+                              metadata: { lockupMetadataViewModel: { title: { content: 'Quick clip #shorts' } } },
+                              contentImage: {
+                                thumbnailViewModel: {
+                                  overlays: [{ thumbnailBottomOverlayViewModel: { badges: [{ thumbnailBadgeViewModel: { text: '0:42' } }] } }]
+                                }
+                              },
+                              rendererContext: { commandContext: { onTap: { innertubeCommand: { commandMetadata: { webCommandMetadata: { url: '/shorts/sssssssssss' } } } } } }
+                            }
+                          },
+                          {
+                            continuationItemRenderer: {
+                              continuationEndpoint: { continuationCommand: { token: 'NEXT_PAGE_TOKEN_2' } }
+                            }
+                          }
+                        ]
+                      }
+                    }]
+                  }
+                }]
+              }
+            }
+          }
+        }]
+      }
+    }
+  };
+
+  const page2 = {
+    onResponseReceivedActions: [{
+      appendContinuationItemsAction: {
+        continuationItems: [
+          {
+            playlistVideoRenderer: {
+              videoId: 'bbbbbbbbbbb',
+              title: { runs: [{ text: 'HSK 5 Câu chuyện cuộc sống' }] },
+              lengthText: { simpleText: '1:02:10' },
+              navigationEndpoint: { commandMetadata: { webCommandMetadata: { url: '/watch?v=bbbbbbbbbbb' } } }
+            }
+          },
+          {
+            playlistVideoRenderer: {
+              videoId: 'lllllllllll',
+              title: { simpleText: 'Live stream Q&A' },
+              upcomingEventData: { startTime: '1800000000' }
+            }
+          }
+        ]
+      }
+    }]
+  };
+
+  const handler = createBundledHandler(async (url, init) => {
+    const u = String(url);
+    if (u.startsWith('https://www.youtube.com/@SampleChan/videos')) {
+      return new Response(sampleChannelHtml, { status: 200 });
+    }
+    if (u.includes('youtubei/v1/browse')) {
+      const payload = JSON.parse(init.body);
+      browseCalls.push(payload);
+      return Response.json(payload.continuation === 'NEXT_PAGE_TOKEN_2' ? page2 : page1);
+    }
+    return new Response('unexpected: ' + u, { status: 404 });
+  });
+
+  const res = await handler(
+    new Request('https://worker.test/podcast-feed?url=' + encodeURIComponent('https://www.youtube.com/@SampleChan') + '&skipShorts=1', {
+      method: 'GET',
+      headers: { Origin: origin }
+    }),
+    env
+  );
+  assert.equal(res.status, 200);
+  const data = await res.json();
+  assert.equal(browseCalls.length, 2);
+  assert.equal(browseCalls[0].browseId, 'VLUU1234567890123456789012');
+  assert.equal(browseCalls[1].continuation, 'NEXT_PAGE_TOKEN_2');
+  assert.equal(data.channel.name, 'Mandarin Corner Sample');
+  assert.equal(data.channel.handle, '@SampleChan');
+  assert.equal(data.episodes.length, 2);
+  assert.deepEqual(data.episodes.map((e) => e.youtubeId), ['aaaaaaaaaaa', 'bbbbbbbbbbb']);
+  assert.equal(data.episodes[0].durationLabel, '14:22');
+  assert.equal(data.episodes[0].levelGroup, 'hsk4');
+  assert.equal(data.episodes[1].durationLabel, '1:02:10');
+  assert.equal(data.episodes[1].levelGroup, 'hsk5-6');
+
+  // skipShorts=0 retains the Short video while still skipping live/upcoming
+  const resWithShorts = await handler(
+    new Request('https://worker.test/podcast-feed?url=@SampleChan&skipShorts=0', {
+      method: 'GET',
+      headers: { Origin: origin }
+    }),
+    env
+  );
+  assert.equal(resWithShorts.status, 200);
+  const dataWithShorts = await resWithShorts.json();
+  assert.deepEqual(dataWithShorts.episodes.map((e) => e.youtubeId), ['aaaaaaaaaaa', 'sssssssssss', 'bbbbbbbbbbb']);
+});

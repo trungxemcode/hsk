@@ -232,7 +232,7 @@
     if (!raw || typeof raw !== 'object') return null;
     const urlCheck = validateHttpsUrl(raw.youtubeUrl || raw.url, { allowEmpty: false });
     if (!urlCheck.valid) return null;
-    return {
+    const item = {
       id: cleanId(raw.id || raw.title || `podcast-${index + 1}`, 'podcast'),
       title: cleanText(raw.title || `Podcast ${index + 1}`, 160),
       level: normalizeLevel(raw.level),
@@ -241,6 +241,13 @@
       access: normalizeAccess(raw.access),
       note: cleanText(raw.note || '', 240)
     };
+    const channel = cleanText(raw.channel || '', 120);
+    const channelHandle = cleanText(raw.channelHandle || '', 80);
+    const durationLabel = cleanText(raw.durationLabel || '', 24);
+    if (channel) item.channel = channel;
+    if (channelHandle) item.channelHandle = channelHandle;
+    if (durationLabel) item.durationLabel = durationLabel;
+    return item;
   }
 
   function normalizeDocumentItem(raw, index) {

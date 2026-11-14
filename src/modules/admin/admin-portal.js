@@ -347,18 +347,20 @@
     if (!list) return;
     if (countEl) countEl.textContent = String(state.manifest.podcasts.length);
     list.textContent = '';
+    list.classList.toggle('ap-item-list--scroll', state.manifest.podcasts.length > 8);
     if (!state.manifest.podcasts.length) {
       list.appendChild(el('p', { className: 'ap-empty', textContent: 'Chưa có tập Podcast đề xuất nào.' }));
       return;
     }
 
+    const frag = document.createDocumentFragment();
     state.manifest.podcasts.forEach((item, idx) => {
       const accessSelect = createAccessSelect(item.access, (nextAccess) => {
         state.manifest.podcasts[idx].access = core.normalizeAccess(nextAccess);
         writeLocalManifest(state.manifest);
         renderAll();
       });
-      list.appendChild(
+      frag.appendChild(
         el('div', { className: 'ap-item-row', 'data-podcast-id': item.id }, [
           el('div', { className: 'ap-item-main' }, [
             el('div', { className: 'ap-item-title-line' }, [
@@ -368,7 +370,7 @@
             ]),
             el('div', {
               className: 'ap-item-meta',
-              textContent: `${item.youtubeUrl}${item.subtitleText ? ' · Có phụ đề đính kèm' : ''}${item.note ? ` · ${item.note}` : ''}`
+              textContent: `${item.youtubeUrl}${item.durationLabel ? ` · ${item.durationLabel}` : ''}${item.subtitleText ? ' · Có phụ đề đính kèm' : ''}${item.note ? ` · ${item.note}` : ''}`
             })
           ]),
           el('div', { className: 'ap-item-actions' }, [
@@ -389,6 +391,7 @@
         ])
       );
     });
+    list.appendChild(frag);
   }
 
   function startEditPodcast(idx) {
@@ -916,7 +919,8 @@
         return;
       }
       const title = byId('apPodcastTitle').value.trim();
-      const existingId = state.podcastEditIndex >= 0 ? state.manifest.podcasts[state.podcastEditIndex]?.id : '';
+      const existingItem = state.podcastEditIndex >= 0 ? state.manifest.podcasts[state.podcastEditIndex] : null;
+      const existingId = existingItem?.id || '';
       const nextItem = {
         id: existingId || `podcast-${Date.now().toString(36)}`,
         title,
@@ -926,7 +930,10 @@
         access: core.normalizeAccess(byId('apPodcastAccess').value),
         note: byId('apPodcastNote').value.trim()
       };
-      if (state.podcastEditIndex >= 0 && state.manifest.podcasts[state.podcastEditIndex]) {
+      if (existingItem?.channel) nextItem.channel = existingItem.channel;
+      if (existingItem?.channelHandle) nextItem.channelHandle = existingItem.channelHandle;
+      if (existingItem?.durationLabel) nextItem.durationLabel = existingItem.durationLabel;
+      if (existingItem) {
         state.manifest.podcasts[state.podcastEditIndex] = nextItem;
       } else {
         state.manifest.podcasts.unshift(nextItem);
@@ -938,6 +945,129 @@
     });
 
     byId('apPodcastCancelBtn')?.addEventListener('click', resetPodcastForm);
+
+    const MAX_ADMIN_PODCASTS = 1500;
+    function extractYtVideoId(url) {
+      const m = String(url || '').match(/(?:v=|youtu\.be\/|\/(?:embed|shorts|live|v)\/)([a-zA-Z0-9_-]{11})/);
+      return m ? m[1] : '';
+    }
+    function resolveEpisodeLevel(ep, batchLevel) {
+      const hasExplicitHsk = /\bHSK\s*[1-6]/i.test(String(ep?.title || ''));
+      if (batchLevel !== 'auto' && !hasExplicitHsk) return core.normalizeLevel(batchLevel);
+      const lvlMatch = String(ep?.levelGroup || ep?.level || '').match(/\d/);
+      return lvlMatch ? core.normalizeLevel(Number(lvlMatch[0])) : (batchLevel === 'auto' ? 3 : core.normalizeLevel(batchLevel));
+    }
+    function mergeFetchedPodcastEpisodes(episodes, { access = 'public', batchLevel = 'auto', prepend = false } = {}) {
+      const existingYt = new Set(state.manifest.podcasts.map((p) => extractYtVideoId(p?.youtubeUrl)).filter(Boolean));
+      const cleanAccess = core.normalizeAccess(access);
+      const toInsert = [];
+      let skippedDuplicates = 0;
+      let cappedSkipped = 0;
+      for (const ep of episodes) {
+        const ytId = String(ep?.youtubeId || '').trim() || extractYtVideoId(ep?.youtubeUrl);
+        if (!ytId) continue;
+        if (existingYt.has(ytId)) {
+          skippedDuplicates += 1;
+          continue;
+        }
+        if (state.manifest.podcasts.length + toInsert.length >= MAX_ADMIN_PODCASTS) {
+          cappedSkipped += 1;
+          continue;
+        }
+        existingYt.add(ytId);
+        const channelName = String(ep.channelName || ep.channel || '').trim();
+        const channelHandle = String(ep.channelHandle || '').trim();
+        const durationLabel = String(ep.durationLabel || '').trim();
+        const fallbackNote = `Kênh ${channelHandle || channelName || 'YouTube Podcast'}${durationLabel ? ` · ${durationLabel}` : ''}`;
+        const item = {
+          id: `yt-${ytId}`,
+          title: ep.title,
+          level: resolveEpisodeLevel(ep, batchLevel),
+          youtubeUrl: `https://www.youtube.com/watch?v=${ytId}`,
+          subtitleText: '',
+          access: cleanAccess,
+          note: String(ep.note || fallbackNote).trim()
+        };
+        if (channelName) item.channel = channelName;
+        if (channelHandle) item.channelHandle = channelHandle;
+        if (durationLabel) item.durationLabel = durationLabel;
+        toInsert.push(item);
+      }
+      if (toInsert.length > 0) {
+        if (prepend) {
+          state.manifest.podcasts.unshift(...toInsert);
+        } else {
+          state.manifest.podcasts.push(...toInsert);
+        }
+      }
+      return { addedCount: toInsert.length, skippedDuplicates, cappedSkipped };
+    }
+    function setChannelImportFeedback(text, tone = 'info') {
+      const elResult = byId('apPodcastChannelResult');
+      if (!elResult) return;
+      if (!text) {
+        elResult.hidden = true;
+        elResult.textContent = '';
+        elResult.className = 'ap-inline-result';
+        return;
+      }
+      elResult.hidden = false;
+      elResult.textContent = text;
+      elResult.className = `ap-inline-result ap-inline-result--${tone}`;
+    }
+
+    byId('apPodcastChannelForm')?.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (!state.workerBase) {
+        showStatus('Thiếu endpoint Worker trong translation-config.json để lấy danh sách video kênh YouTube.', 'error');
+        return;
+      }
+      const rawChannel = String(byId('apPodcastChannelUrl')?.value || '').trim();
+      if (!rawChannel) {
+        setChannelImportFeedback('Vui lòng nhập link kênh YouTube hoặc @handle trước khi bấm lấy video.', 'error');
+        byId('apPodcastChannelUrl')?.focus();
+        return;
+      }
+      const btn = byId('apImportChannelBtn');
+      if (btn) btn.disabled = true;
+      setChannelImportFeedback('Đang quét kênh YouTube và tải danh sách video...', 'info');
+      showStatus('Đang lấy toàn bộ danh sách video từ kênh YouTube...', 'info');
+      try {
+        const skipShorts = byId('apPodcastSkipShorts')?.checked !== false;
+        const batchAccess = byId('apPodcastBatchAccess')?.value || 'public';
+        const batchLevel = byId('apPodcastBatchLevel')?.value || 'auto';
+        const endpoint = `${state.workerBase}/podcast-feed?url=${encodeURIComponent(rawChannel)}&limit=500&skipShorts=${skipShorts ? '1' : '0'}`;
+        const res = await fetch(endpoint, { method: 'GET', cache: 'no-store' });
+        const data = await res.json().catch(() => null);
+        if (!res.ok || !Array.isArray(data?.episodes)) {
+          throw Error(data?.error || `Không lấy được danh sách video từ kênh (${res.status}).`);
+        }
+        const { addedCount, skippedDuplicates, cappedSkipped } = mergeFetchedPodcastEpisodes(data.episodes, {
+          access: batchAccess,
+          batchLevel,
+          prepend: true
+        });
+        const chLabel = data.channel?.name || data.channel?.handle || rawChannel;
+        const capHint = cappedSkipped ? ` (chạm giới hạn ${MAX_ADMIN_PODCASTS} tập, bỏ qua ${cappedSkipped} tập dư)` : '';
+        if (addedCount > 0) {
+          writeLocalManifest(state.manifest);
+          renderAll();
+          const msg = `Kênh ${chLabel}: tìm thấy ${data.episodes.length} video, đã thêm mới ${addedCount} tập${skippedDuplicates ? `, bỏ qua ${skippedDuplicates} tập trùng` : ''}${capHint}. Hãy bấm "Xuất bản lên Server" để áp dụng cho học viên.`;
+          setChannelImportFeedback(msg, 'ok');
+          showStatus(msg, 'ok');
+        } else {
+          const msg = `Kênh ${chLabel}: tìm thấy ${data.episodes.length} video nhưng tất cả đã có trong danh sách${capHint}.`;
+          setChannelImportFeedback(msg, 'info');
+          showStatus(msg, 'info');
+        }
+      } catch (err) {
+        const msg = err?.message || 'Lỗi mạng khi lấy danh sách video từ kênh YouTube.';
+        setChannelImportFeedback(msg, 'error');
+        showStatus(msg, 'error');
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    });
 
     byId('apSyncYoutubeChannelsBtn')?.addEventListener('click', async () => {
       if (!state.workerBase) {
@@ -953,28 +1083,11 @@
         if (!res.ok || !Array.isArray(data?.episodes)) {
           throw Error(data?.error || `Không lấy được danh sách tập (${res.status}).`);
         }
-        const existingYt = new Set(
-          state.manifest.podcasts.map((p) => {
-            const m = String(p?.youtubeUrl || '').match(/(?:v=|youtu\.be\/|\/(?:embed|shorts|live|v)\/)([a-zA-Z0-9_-]{11})/);
-            return m ? m[1] : '';
-          }).filter(Boolean)
-        );
-        let addedCount = 0;
-        for (const ep of data.episodes) {
-          if (!ep?.youtubeId || existingYt.has(ep.youtubeId)) continue;
-          existingYt.add(ep.youtubeId);
-          const lvlMatch = String(ep.levelGroup || '').match(/\d/);
-          state.manifest.podcasts.push({
-            id: `yt-${ep.youtubeId}`,
-            title: ep.title,
-            level: lvlMatch ? Number(lvlMatch[0]) : 3,
-            youtubeUrl: `https://www.youtube.com/watch?v=${ep.youtubeId}`,
-            subtitleText: '',
-            access: 'public',
-            note: `Kênh ${ep.channelHandle || ep.channelName || 'YouTube Podcast'}`
-          });
-          addedCount += 1;
-        }
+        const { addedCount } = mergeFetchedPodcastEpisodes(data.episodes, {
+          access: 'public',
+          batchLevel: 'auto',
+          prepend: false
+        });
         if (addedCount > 0) {
           writeLocalManifest(state.manifest);
           renderAll();
