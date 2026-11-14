@@ -192,3 +192,51 @@ test('bundled Worker /resources-manifest and /admin/resources enforce auth and r
   assert.equal(pub1Json.manifest.podcasts.length, 9);
   assert.ok(pub1Json.manifest.podcasts.some((p) => p.title === 'Podcast HSK 3'));
 });
+
+test('AdminPortalCore preserves channel metadata and Worker allows >500 batch-imported podcasts up to 1500', async () => {
+  const s = store();
+  const env = { AI_ACCOUNT_ROLES_ENABLED: 'true', FIREBASE_API_KEY: 'fake', AI_CONTROL: binding(s) };
+  const handler = createHandler(async (u) => {
+    if (String(u).includes('identitytoolkit')) {
+      return Response.json({ users: [{ localId: OWNER_UID, email: OWNER_EMAIL }] });
+    }
+    return Response.json({});
+  });
+
+  const many = Core.createDefaultManifest();
+  many.podcasts = Array.from({ length: 620 }, (_, i) => ({
+    id: `yt-batch-${i}`,
+    title: `HSK 4 Tập ${i + 1}`,
+    level: 4,
+    youtubeUrl: `https://www.youtube.com/watch?v=vid${String(i).padStart(8, '0')}`,
+    subtitleText: '',
+    access: 'public',
+    channel: 'Kênh Mẫu',
+    channelHandle: '@KenhMau',
+    durationLabel: '12:30',
+    note: 'Kênh @KenhMau · 12:30'
+  }));
+
+  const normalized = Core.normalizeManifest(many);
+  assert.equal(normalized.podcasts.length, 620);
+  assert.equal(normalized.podcasts[0].channelHandle, '@KenhMau');
+  assert.equal(normalized.podcasts[0].durationLabel, '12:30');
+
+  const okBatch = await handler(req('/admin/resources', { uid: OWNER_UID, body: { manifest: normalized } }), env);
+  assert.equal(okBatch.status, 200);
+
+  const loaded = await (await handler(req('/resources-manifest', { method: 'GET' }), env)).json();
+  assert.equal(loaded.manifest.podcasts.length, 620);
+
+  // Over the 1500 limit still fails closed with 400
+  const tooMany = Core.createDefaultManifest();
+  tooMany.podcasts = Array.from({ length: 1501 }, (_, i) => ({
+    id: `yt-over-${i}`,
+    title: `Tập ${i}`,
+    level: 3,
+    youtubeUrl: `https://www.youtube.com/watch?v=ovr${String(i).padStart(8, '0')}`,
+    access: 'public'
+  }));
+  const rejected = await handler(req('/admin/resources', { uid: OWNER_UID, body: { manifest: tooMany } }), env);
+  assert.equal(rejected.status, 400);
+});

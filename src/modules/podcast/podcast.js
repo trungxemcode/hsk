@@ -169,6 +169,11 @@
           ? core.parseSubtitleText(item.subtitleText)
           : (starter?.cues || []);
         const matchedChannel = core.extractYoutubeChannelKey?.(item.note || item.title || '') || null;
+        const noteHandle = String(item.note || '').match(/(@[A-Za-z0-9._-]{2,80})/)?.[1] || '';
+        const noteDur = String(item.note || '').match(/(?:^|\s|·)(\d{1,2}:\d{2}(?::\d{2})?)(?:\s|$)/)?.[1] || '';
+        const channelHandle = String(item.channelHandle || starter?.channelHandle || matchedChannel?.handle || noteHandle || '').trim();
+        const channelName = String(item.channel || starter?.channel || matchedChannel?.name || (channelHandle ? channelHandle.replace(/^@/, '') : 'Admin đề xuất')).trim();
+        const channelUrl = starter?.channelUrl || matchedChannel?.url || (channelHandle ? `https://www.youtube.com/${channelHandle}` : '');
         return {
           id: `admin-${item.id}`,
           adminItem: item,
@@ -176,11 +181,12 @@
           titleVi: item.title || starter?.titleVi || '',
           level: `HSK ${n}`,
           levelGroup,
-          channel: starter?.channel || matchedChannel?.name || 'Admin đề xuất',
-          channelHandle: starter?.channelHandle || matchedChannel?.handle || '',
-          channelUrl: starter?.channelUrl || matchedChannel?.url || '',
+          channel: channelName,
+          channelName,
+          channelHandle,
+          channelUrl,
           durationSec: starter?.durationSec || 0,
-          durationLabel: starter?.durationLabel || '',
+          durationLabel: String(item.durationLabel || starter?.durationLabel || noteDur || '').trim(),
           topic: item.access === 'vip' ? 'Chỉ VIP' : (starter?.topic || 'Podcast HSK'),
           youtubeId,
           cues: parsedCues,
@@ -814,12 +820,36 @@
     }
   }
 
+  function resolveEpisodeChannelIdentity(ep) {
+    const handle = String(ep?.channelHandle || '').trim();
+    const name = String(ep?.channelName || ep?.channel || '').trim();
+    if (handle) return { id: handle, label: name && name !== handle ? name : handle.replace(/^@/, ''), handle };
+    if (name && name !== 'Admin đề xuất' && name !== 'Tập tự nhập') return { id: name, label: name, handle: '' };
+    return null;
+  }
+
   function renderChannelBar() {
     channelBarEl.textContent = '';
     const channels = Array.isArray(core.DEFAULT_CHANNELS) ? core.DEFAULT_CHANNELS : [];
-    const options = [{ id: 'all', label: 'Tất cả kênh' }].concat(
-      channels.map((ch) => ({ id: ch.handle, label: ch.name, handle: ch.handle }))
-    );
+    const seenKeys = new Set();
+    const extraChannels = [];
+    for (const ch of channels) {
+      if (ch?.handle) seenKeys.add(ch.handle.toLowerCase());
+      if (ch?.name) seenKeys.add(ch.name.toLowerCase());
+    }
+    for (const ep of allEpisodes()) {
+      const info = resolveEpisodeChannelIdentity(ep);
+      if (!info) continue;
+      const key = (info.handle || info.label).toLowerCase();
+      if (seenKeys.has(key) || seenKeys.has(info.label.toLowerCase())) continue;
+      seenKeys.add(key);
+      if (info.handle) seenKeys.add(info.label.toLowerCase());
+      extraChannels.push(info);
+    }
+    const options = [{ id: 'all', label: 'Tất cả kênh' }]
+      .concat(channels.map((ch) => ({ id: ch.handle, label: ch.name, handle: ch.handle })))
+      .concat(extraChannels);
+    if (!options.some((o) => o.id === state.channelFilter)) state.channelFilter = 'all';
     const pillsGroup = el('div', { className: 'podcast-channel-pills', role: 'group', 'aria-label': 'Kênh YouTube' });
     for (const opt of options) {
       const btn = el(
@@ -927,7 +957,7 @@
         const chName = String(ep.channelName || ep.channel || '').toLowerCase();
         const target = state.channelFilter.toLowerCase();
         const matchObj = core.extractYoutubeChannelKey?.(state.channelFilter);
-        const matches = chHandle === target || (matchObj && chName === matchObj.name.toLowerCase());
+        const matches = chHandle === target || chName === target || (matchObj && chName === matchObj.name.toLowerCase());
         if (!matches) return false;
       }
       if (state.levelFilter === 'all') return true;
