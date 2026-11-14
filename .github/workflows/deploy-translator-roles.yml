@@ -35,17 +35,17 @@ jobs:
           git diff --exit-code -- server/translator-worker-bundled.mjs
       - name: Ensure bundled script includes the actual role routes
         run: |
-          node --input-type=module -e "import {readFileSync} from 'node:fs';const s=readFileSync('server/translator-worker-bundled.mjs','utf8');for(const p of ['/account-role','/admin/accounts','/admin/account-role','/reading-library'])if(!s.includes(p))throw Error('Missing '+p);"
+          node --input-type=module -e "import {readFileSync} from 'node:fs';const s=readFileSync('server/translator-worker-bundled.mjs','utf8');for(const p of ['/account-role','/admin/accounts','/admin/account-role','/reading-library','/resources-manifest','/admin/resources'])if(!s.includes(p))throw Error('Missing '+p);"
       - name: Bundle the checked-in Worker for inspection
         run: npx --yes wrangler@4 deploy --dry-run --outdir /tmp/hsk-translator-role-build --config server/wrangler.jsonc
       - name: Publish existing translator Worker (preserve variables and secrets)
         run: npx --yes wrangler@4 deploy --config server/wrangler.jsonc
-      - name: Confirm all three routes exist without submitting user credentials
+      - name: Confirm all role and admin routes exist without submitting user credentials
         shell: bash
         run: |
           set -euo pipefail
           base='https://hsk-vietnamese-translator.trung-hsk668.workers.dev'
-          for route in /account-role /admin/accounts /admin/account-role; do
+          for route in /account-role /admin/accounts /admin/account-role /admin/resources; do
             success=0
             for attempt in 1 2 3 4 5 6; do
               status=$(curl -sS --max-time 12 -o /tmp/hsk-role-response.json -w '%{http_code}' -X POST "$base$route" -H 'Origin: https://trungxemcode.github.io' -H 'Content-Type: application/json' --data '{}')
@@ -58,6 +58,9 @@ jobs:
             fi
             echo "PASS $route HTTP 401 (route exists; token authentication still enforced)"
           done
+          manifest_status=$(curl -sS --retry 2 --max-time 15 -o /tmp/hsk-manifest-response.json -w '%{http_code}' "$base/resources-manifest" -H 'Origin: https://trungxemcode.github.io')
+          test "$manifest_status" = 200 || { echo "::error::Manifest endpoint /resources-manifest returned HTTP $manifest_status (expected 200)"; exit 1; }
+          echo 'PASS /resources-manifest HTTP 200'
       - name: Confirm original reading route exists without AI requests
         shell: bash
         run: |

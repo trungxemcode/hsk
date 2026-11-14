@@ -1,6 +1,6 @@
 {
-  "request": "PR #429: improve Sentence Editor right tool rail label contrast, interactive button colors and accessible aria-labels. Only sentence-editor visual changes are expected; all other routes remain protected.",
+  "request": "Add Podcast listening feature under Giải trí and standalone Admin Portal (admin.html) with learner resource sync.",
   "excludedRoutes": [
-    "sentence-editor"
+    "home"
   ]
 }
