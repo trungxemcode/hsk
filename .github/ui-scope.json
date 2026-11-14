@@ -1,7 +1,10 @@
 {
-  "request": "PR #430: add podcast listening under Entertainment and standalone admin resource management. Only Music/Podcast and Admin areas may change visually; all other existing routes remain protected.",
+  "request": "PR #430: Podcast shortcut card on Home; Podcast navigation within Entertainment changes sidebar geometry on Real Reading and Music/Music Play; new Podcast listening page and standalone Admin portal. Only these intentionally touched route surfaces are excluded from unchanged-page snapshots; all other existing routes and all four viewports/themes remain protected. Targeted Podcast/Admin browser tests validate these new interfaces.",
   "excludedRoutes": [
+    "home",
+    "real-reading",
     "music",
+    "music-play",
     "admin"
   ]
 }
