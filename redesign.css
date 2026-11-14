@@ -1818,9 +1818,9 @@ body.studio-enabled #quizPrompt:empty{ display:none !important; }
   body.studio-enabled .topbar-actions > button{ width:38px;height:38px;min-height:38px; }
   body.studio-enabled .topbar-actions .level-pill{ font-size:12px;padding:0 11px; }
 
-  /* Panel trên mobile: bỏ khung lớn, dùng nền canvas */
+  /* Panel trên mobile: tận dụng gutter 16px của workspace, tránh inset lặp gây hẹp nội dung. */
   body.studio-enabled :is(.panel-box,.activity-panel,.hub-panel){
-    padding:16px 8px !important;
+    padding:16px 0 !important;
     border:0 !important;
     background:var(--rd-static-color-010) !important;
     box-shadow:none !important;
