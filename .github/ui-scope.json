@@ -1,6 +1,9 @@
 {
-  "request": "PR #427: fix Sentence Editor AI Detector collapse wrapping and AI-highlighted spans, preserve selected personal provider priority and compatibility across AI routes. Only Sentence Editor layout may change; other routes and shared shell remain protected.",
+  "request": "Dark-mode violet surface fixes for glowing white-purple controls/cards (Home, Lessons, SRS Easy button), plus Sentence Editor Grammarly-style right tool rail with persistent draft across sub-tools, AI Grader, 5000-char limit, unified AI model picker, and AI Detector.",
   "excludedRoutes": [
-    "sentence-editor"
+    "home",
+    "lessons",
+    "sentence-editor",
+    "srs"
   ]
 }

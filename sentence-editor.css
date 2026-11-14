@@ -39,9 +39,10 @@
 #sentenceEditor .sentence-columns {
   flex: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 380px;
+  grid-template-columns: minmax(0, 1fr) 370px 64px;
   min-height: 0;
   height: 100%;
+  position: relative;
 }
 
 #sentenceEditor .sentence-sheet {
@@ -457,7 +458,44 @@ html[data-theme="dark"] #sentenceEditor.is-ai-highlight .sentence-mirror {
   #sentenceEditor .sentence-footer {
     padding: 10px 16px;
   }
+  #sentenceEditor .sentence-rail {
+    order: 2;
+    border-left: 0;
+    border-top: 1px solid var(--se-edge);
+    padding: 8px 12px;
+    justify-content: flex-start;
+  }
+  #sentenceEditor .sentence-rail-dock {
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+    padding: 4px;
+    gap: 6px;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
+  #sentenceEditor .sentence-rail-item {
+    width: auto;
+    height: 36px;
+    padding: 0 11px;
+    gap: 6px;
+    flex: none;
+  }
+  #sentenceEditor .sentence-rail-label {
+    position: static;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    background: var(--palette-clear);
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+    font-size: 0.78rem;
+    color: inherit;
+    white-space: nowrap;
+  }
   #sentenceEditor .sentence-review {
+    order: 3;
     border-left: 0;
     border-top: 1px solid var(--se-edge);
     height: auto;
@@ -467,7 +505,7 @@ html[data-theme="dark"] #sentenceEditor.is-ai-highlight .sentence-mirror {
   }
   #sentenceEditor .sentence-review-body {
     padding: 14px 16px;
-    max-height: 380px;
+    max-height: 420px;
   }
 }
 
@@ -1341,5 +1379,694 @@ html[data-theme="dark"] #sentenceEditor .sentence-detector-metric {
 }
 
 html[data-theme="dark"] #sentenceEditor .sentence-detector-meter {
+  background: var(--qa-line);
+}
+
+@media (min-width: 721px) and (max-width: 1080px) {
+  #sentenceEditor .sentence-columns {
+    grid-template-columns: minmax(0, 1fr) 310px 60px;
+  }
+}
+
+#sentenceEditor .sentence-tool-subtitle {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+#sentenceEditor .sentence-tool-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+#sentenceEditor .sentence-pane-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#sentenceEditor .sentence-pane-hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+#sentenceEditor .sentence-tool-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 14px;
+  min-height: 36px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--se-green);
+  color: var(--palette-white);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-sentence-editor-submit);
+  transition: filter 0.15s ease, opacity 0.15s ease;
+}
+
+#sentenceEditor .sentence-tool-cta:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+#sentenceEditor .sentence-tool-cta:disabled {
+  opacity: 0.55;
+  cursor: wait;
+  box-shadow: none;
+}
+
+#sentenceEditor .sentence-bulk-bar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#sentenceEditor .sentence-apply-all {
+  background: var(--se-green-soft);
+  color: var(--se-green);
+  border: 1px solid color-mix(in srgb, var(--se-green) 35%, var(--palette-clear));
+  border-radius: var(--radius-pill);
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+#sentenceEditor .sentence-apply-all:hover {
+  background: color-mix(in srgb, var(--se-green) 20%, var(--palette-clear));
+}
+
+/* Grammarly-style vertical tool rail on right edge */
+#sentenceEditor .sentence-rail {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 16px 8px;
+  border-left: 1px solid var(--se-edge);
+  background: var(--paper);
+  z-index: 12;
+  min-width: 0;
+}
+
+#sentenceEditor .sentence-rail-dock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 6px;
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  border: 1px solid var(--se-edge);
+  box-shadow: var(--shadow-sentence-editor-shell);
+}
+
+#sentenceEditor .sentence-rail-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--palette-clear);
+  color: var(--se-green);
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease, transform 0.15s ease;
+}
+
+#sentenceEditor .sentence-rail-item:hover {
+  background: var(--se-green-soft);
+}
+
+#sentenceEditor .sentence-rail-item[aria-pressed="true"] {
+  background: var(--se-green);
+  color: var(--palette-white);
+  box-shadow: var(--shadow-sentence-editor-submit);
+}
+
+#sentenceEditor .sentence-rail-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+#sentenceEditor .sentence-rail-icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+#sentenceEditor .sentence-rail-badge {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 4px;
+  border-radius: var(--radius-pill);
+  background: var(--se-fix);
+  color: var(--palette-white);
+  font-size: 0.65rem;
+  font-weight: 800;
+  line-height: 15px;
+  text-align: center;
+  pointer-events: none;
+}
+
+#sentenceEditor .sentence-rail-item[aria-pressed="true"] .sentence-rail-badge {
+  background: var(--palette-dark-surface);
+  color: var(--palette-white);
+}
+
+@media (min-width: 721px) {
+  #sentenceEditor .sentence-rail-label {
+    position: absolute;
+    right: calc(100% + 14px);
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    padding: 6px 12px;
+    border-radius: var(--radius-btn);
+    background: var(--palette-dark-surface);
+    color: var(--palette-dark-ink-muted);
+    border: 1px solid var(--palette-dark-line-strong);
+    box-shadow: var(--shadow);
+    font-size: 0.82rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.16s ease, transform 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+    z-index: 25;
+  }
+
+  #sentenceEditor .sentence-rail-dock:hover .sentence-rail-label,
+  #sentenceEditor .sentence-rail-dock:focus-within .sentence-rail-label {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  #sentenceEditor .sentence-rail-item:hover .sentence-rail-label,
+  #sentenceEditor .sentence-rail-item:focus-visible .sentence-rail-label,
+  #sentenceEditor .sentence-rail-item[aria-pressed="true"] .sentence-rail-label {
+    color: var(--palette-white);
+    font-weight: 700;
+    border-color: var(--se-green);
+  }
+}
+
+/* Rewrite / Paraphrase pane */
+#sentenceEditor .sentence-rewrite-styles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#sentenceEditor .sentence-rewrite-styles button {
+  flex: 1 1 auto;
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-pill);
+  background: var(--palette-white);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#sentenceEditor .sentence-rewrite-styles button[aria-pressed="true"] {
+  background: var(--se-green-soft);
+  border-color: var(--se-green);
+  color: var(--se-green);
+  font-weight: 700;
+}
+
+#sentenceEditor .sentence-rewrite-card {
+  padding: 12px 14px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-16px);
+  background: var(--palette-white);
+  box-shadow: var(--shadow-sentence-editor-card);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#sentenceEditor .sentence-rewrite-meta {
+  font-size: 0.76rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+#sentenceEditor .sentence-rewrite-text {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: var(--radius-10px);
+  background: var(--paper);
+  border: 1px solid var(--se-edge);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+#sentenceEditor .sentence-rewrite-notes {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--sub);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+#sentenceEditor .sentence-rewrite-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Quick AI Chat pane */
+#sentenceEditor .sentence-qa-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#sentenceEditor .sentence-qa-chips button {
+  padding: 5px 10px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#sentenceEditor .sentence-qa-chips button:hover {
+  border-color: var(--se-green);
+  color: var(--se-green);
+}
+
+#sentenceEditor .sentence-qa-compose {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#sentenceEditor .sentence-qa-compose input {
+  flex: 1;
+  min-width: 0;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-pill);
+  background: var(--palette-white);
+  color: var(--ink);
+  font-size: 0.84rem;
+}
+
+#sentenceEditor .sentence-qa-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#sentenceEditor .sentence-qa-msg {
+  padding: 10px 12px;
+  border-radius: var(--radius-10px);
+  border: 1px solid var(--se-edge);
+  background: var(--palette-white);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+#sentenceEditor .sentence-qa-msg[data-role="user"] {
+  background: var(--se-green-soft);
+  border-color: color-mix(in srgb, var(--se-green) 30%, var(--palette-clear));
+  font-weight: 600;
+}
+
+#sentenceEditor .sentence-qa-msg-meta {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* Word / Hanzi stats pane */
+#sentenceEditor .sentence-stats-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#sentenceEditor .sentence-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+#sentenceEditor .sentence-stat-card {
+  padding: 10px 12px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-10px);
+  background: var(--palette-white);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#sentenceEditor .sentence-stat-card strong {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--ink-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+#sentenceEditor .sentence-stat-card span {
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+#sentenceEditor .sentence-stats-progress {
+  height: 7px;
+  width: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--line);
+  overflow: hidden;
+}
+
+#sentenceEditor .sentence-stats-progress-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--se-green);
+  transition: width 0.2s ease;
+}
+
+/* Dark theme overrides for right rail and panes */
+html[data-theme="dark"] #sentenceEditor .sentence-rail {
+  background: var(--qa-bg);
+  border-color: var(--palette-dark-line-strong);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-rail-dock {
+  background: var(--palette-dark-surface);
+  border-color: var(--palette-dark-line-strong);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-rewrite-styles button,
+html[data-theme="dark"] #sentenceEditor .sentence-rewrite-card,
+html[data-theme="dark"] #sentenceEditor .sentence-qa-chips button,
+html[data-theme="dark"] #sentenceEditor .sentence-qa-compose input,
+html[data-theme="dark"] #sentenceEditor .sentence-qa-msg,
+html[data-theme="dark"] #sentenceEditor .sentence-stat-card {
+  background: var(--palette-dark-surface);
+  border-color: var(--palette-dark-line-strong);
+  color: var(--palette-dark-ink);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-rewrite-styles button[aria-pressed="true"] {
+  background: var(--se-green-soft);
+  border-color: var(--se-green);
+  color: var(--se-green);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-qa-msg[data-role="user"] {
+  background: var(--se-green-soft);
+  border-color: color-mix(in srgb, var(--se-green) 35%, var(--palette-clear));
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-rewrite-text {
+  background: var(--qa-bg);
+  border-color: var(--qa-line);
+  color: var(--qa-text);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-stat-card strong {
+  color: var(--qa-text);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-tool-subtitle,
+html[data-theme="dark"] #sentenceEditor .sentence-pane-hint,
+html[data-theme="dark"] #sentenceEditor .sentence-rewrite-notes,
+html[data-theme="dark"] #sentenceEditor .sentence-stat-card span {
+  color: var(--qa-muted);
+}
+
+/* AI Grader pane */
+#sentenceEditor .sentence-grader-rubrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#sentenceEditor .sentence-grader-rubrics button {
+  flex: 1 1 auto;
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-pill);
+  background: var(--palette-white);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#sentenceEditor .sentence-grader-rubrics button[aria-pressed="true"] {
+  background: var(--se-green-soft);
+  border-color: var(--se-green);
+  color: var(--se-green);
+  font-weight: 700;
+}
+
+#sentenceEditor .sentence-grader-topic-wrap input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-pill);
+  background: var(--palette-white);
+  color: var(--ink);
+  font-size: 0.82rem;
+}
+
+#sentenceEditor .sentence-grader-card {
+  padding: 14px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-16px);
+  background: var(--palette-white);
+  box-shadow: var(--shadow-sentence-editor-card);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#sentenceEditor .sentence-grader-hero {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#sentenceEditor .sentence-grader-score-badge {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  background: var(--se-green-soft);
+  color: var(--se-green);
+  border: 1px solid color-mix(in srgb, var(--se-green) 35%, var(--palette-clear));
+}
+
+#sentenceEditor .sentence-grader-score-badge[data-tier="mid"] {
+  background: var(--se-style-soft);
+  color: var(--se-style);
+  border-color: color-mix(in srgb, var(--se-style) 35%, var(--palette-clear));
+}
+
+#sentenceEditor .sentence-grader-score-badge[data-tier="low"] {
+  background: var(--se-fix-soft);
+  color: var(--se-fix);
+  border-color: color-mix(in srgb, var(--se-fix) 35%, var(--palette-clear));
+}
+
+#sentenceEditor .sentence-grader-score-badge strong {
+  font-size: 1.32rem;
+  font-weight: 850;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+#sentenceEditor .sentence-grader-score-badge small {
+  font-size: 0.68rem;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+#sentenceEditor .sentence-grader-hero-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+#sentenceEditor .sentence-grader-grade {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--ink-strong);
+}
+
+#sentenceEditor .sentence-grader-hsk {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  border: 1px solid var(--se-edge);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+#sentenceEditor .sentence-grader-meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+#sentenceEditor .sentence-grader-summary {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+#sentenceEditor .sentence-grader-criteria {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+#sentenceEditor .sentence-grader-criterion {
+  padding: 9px 10px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-10px);
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#sentenceEditor .sentence-grader-criterion-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+#sentenceEditor .sentence-grader-bar {
+  height: 6px;
+  width: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--line);
+  overflow: hidden;
+}
+
+#sentenceEditor .sentence-grader-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--se-green);
+}
+
+#sentenceEditor .sentence-grader-criterion-note {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--sub);
+}
+
+#sentenceEditor .sentence-grader-section-title {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+  font-weight: 750;
+  color: var(--ink-strong);
+}
+
+#sentenceEditor .sentence-grader-list {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--sub);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-grader-rubrics button,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-topic-wrap input,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-card {
+  background: var(--palette-dark-surface);
+  border-color: var(--palette-dark-line-strong);
+  color: var(--palette-dark-ink);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-grader-rubrics button[aria-pressed="true"] {
+  background: var(--se-green-soft);
+  border-color: var(--se-green);
+  color: var(--se-green);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-grader-criterion,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-hsk {
+  background: var(--qa-bg);
+  border-color: var(--qa-line);
+  color: var(--qa-text);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-grader-grade,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-summary,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-criterion-head,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-section-title {
+  color: var(--qa-text);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-grader-meta,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-criterion-note,
+html[data-theme="dark"] #sentenceEditor .sentence-grader-list {
+  color: var(--qa-muted);
+}
+
+html[data-theme="dark"] #sentenceEditor .sentence-grader-bar {
   background: var(--qa-line);
 }
