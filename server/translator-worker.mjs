@@ -575,7 +575,7 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
     }
     const contents=[...body.history.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.text}]})),{role:'user',parts:[{text:body.question.trim()},...examImageParts]}];
     const providerBody={systemInstruction:{parts:[{text:instruction}]},contents,generationConfig:{temperature:isAITeacher?0.35:isAiQa?0.25:isUnifiedPractice||isMicroTutorPack?0.45:0.2,maxOutputTokens:isSentenceEditor?(body.question.length>500?4096:1800):isSentenceAiDetect?2200:isWrongExam?1900:isAITeacher?1600:isAiQa?1800:isUnifiedPractice||isMicroTutorPack?3000:900,...(isSentenceEditor||isSentenceAiDetect?{thinkingConfig:{thinkingBudget:0}}:{}),responseMimeType:'application/json',responseSchema:isSentenceEditor?sentenceReviewSchema:isSentenceAiDetect?sentenceAiDetectSchema:isAiQa?aiQaAnswerSchema:teacherAnswerSchema}};
-    let response,reviewModel,sentenceFallbackUsed=false;
+    let response,reviewModel,sentenceFallbackUsed=false,sentenceFallbackFrom='';
     const isSentenceMode=isSentenceEditor||isSentenceAiDetect;
     const usePersonalCookie=usePersonalAi&&personalAi.provider==='chatgpt-cookie';
     if(usePersonalAi&&!usePersonalCookie){
@@ -585,12 +585,12 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
       const timeout=controller.signal.aborted||error.name==='AbortError';
       console.warn('hsk-personal-ai-fetch-failed',{provider:personalAi.provider,timeout});
       const fbRes=isSentenceMode?await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:personalAi.provider,reason:error?.message}):null;
-      if(fbRes){response=fbRes;reviewModel=SENTENCE_EDITOR_FALLBACK_MODEL;sentenceFallbackUsed=true;}
+      if(fbRes){response=fbRes;reviewModel=SENTENCE_EDITOR_FALLBACK_MODEL;sentenceFallbackUsed=true;sentenceFallbackFrom=personalAi.provider;}
       else return reply({error:timeout?'API riêng phản hồi quá lâu. Hãy thử lại.':'Không kết nối được tới máy chủ API riêng. Hãy thử lại hoặc tắt API riêng trong Cài đặt.',code:timeout?'PERSONAL_AI_TIMEOUT':'PERSONAL_AI_NETWORK'},timeout?504:502);
      }
      if(!response.ok&&isSentenceMode&&!sentenceFallbackUsed){
       const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:personalAi.provider,reason:'upstream',status:response.status});
-      if(fbRes){response=fbRes;reviewModel=SENTENCE_EDITOR_FALLBACK_MODEL;sentenceFallbackUsed=true;}
+      if(fbRes){response=fbRes;reviewModel=SENTENCE_EDITOR_FALLBACK_MODEL;sentenceFallbackUsed=true;sentenceFallbackFrom=personalAi.provider;}
      }
      if(!response.ok&&!sentenceFallbackUsed){
       const upstream=response.status;
@@ -607,8 +607,17 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
      headers['X-HSK-AI-Provider']='chatgpt-cookie';
      const baseCookieConfig=usePersonalCookie?personalAi:{model:env.CHATGPT_COOKIE_MODEL||'gpt-4o-mini',apiKey:env.CHATGPT_SESSION_TOKEN};const cookieConfig={...baseCookieConfig,model:requestedAiModel||(typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS['chatgpt-cookie']?.[body.thinking])||baseCookieConfig.model};
      reviewModel=cookieConfig.model;
-     response=await chatgptCookieGenerate(cookieConfig,providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});
-     if(!response.ok){
+     try{response=await chatgptCookieGenerate(cookieConfig,providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});}
+     catch(error){
+      const fbRes=isSentenceMode?await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:'chatgpt-cookie',reason:error?.message}):null;
+      if(fbRes){response=fbRes;reviewModel=SENTENCE_EDITOR_FALLBACK_MODEL;sentenceFallbackUsed=true;sentenceFallbackFrom='chatgpt-cookie';}
+      else return reply({error:'ChatGPT chưa trả lời được. Hãy thử lại sau.',code:'AI_PROVIDER_ERROR',provider:'chatgpt-cookie',workerRevision:WORKER_REVISION},502);
+     }
+     if(!response.ok&&isSentenceMode&&!sentenceFallbackUsed){
+      const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:'chatgpt-cookie',reason:'upstream',status:response.status});
+      if(fbRes){response=fbRes;reviewModel=SENTENCE_EDITOR_FALLBACK_MODEL;sentenceFallbackUsed=true;sentenceFallbackFrom='chatgpt-cookie';}
+     }
+     if(!response.ok&&!sentenceFallbackUsed){
       const failure=await response.json().catch(()=>null);
       const safeCodes=['CHATGPT_SESSION_HTTP','CHATGPT_SESSION_NO_TOKEN','CHATGPT_CONVERSATION_HTTP'];
       const error=safeCodes.includes(failure?.code)?failure.error:response.status===401?'Không xác thực được phiên ChatGPT.':'ChatGPT chưa trả lời được. Hãy thử lại sau.';
@@ -618,7 +627,7 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
      // Rotate keys without switching the chosen chat model or provider.
      const generate=isAiQa?createGeminiKeyFetch(providerFetch,env,{now,state:geminiState}):fetchFn;
      if(isAiQa)headers['X-HSK-AI-Provider']='gemini';
-     const targetModel=isSentenceMode?SENTENCE_EDITOR_FALLBACK_MODEL:model;
+     const targetModel=isSentenceMode?((isAdmin||verifiedRole==='vip')&&(body.thinking||requestedAiModel)?systemGeminiModel:SENTENCE_EDITOR_FALLBACK_MODEL):model;
      const geminiKey=configuredGeminiKeys(env)[0]||env.GEMINI_API_KEY;
      response=await generate('https://generativelanguage.googleapis.com/v1beta/models/'+targetModel+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':geminiKey},signal:controller.signal,body:JSON.stringify(providerBody)});
     }
@@ -630,8 +639,10 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
      let activePayload=payload;
      let result=globalThis.HSKSentenceReview.normalize(answerText,body.question);
      if(!result&&!sentenceFallbackUsed&&headers['X-HSK-AI-Provider']!=='gemini'){
+      const failedProv=headers['X-HSK-AI-Provider']||personalAi?.provider||'';
       sentenceFallbackUsed=true;
-      const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:personalAi?.provider||'unknown',reason:'format'});
+      sentenceFallbackFrom=failedProv;
+      const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:failedProv||'unknown',reason:'format'});
       if(fbRes?.ok){
        activePayload=await fbRes.json();
        reviewModel=activePayload.modelVersion||SENTENCE_EDITOR_FALLBACK_MODEL;
@@ -645,14 +656,16 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
      const aiSource=provider?{provider,...(typeof modelName==='string'&&/^[a-z0-9][a-z0-9._/:+-]{0,119}$/i.test(modelName)?{model:modelName}:{})}:undefined;
      await qaUsage(env,activePayload);
      await qaFinish(roleEnv,qaSession,{answer,aiSource},provider,{rawFetch:rawFetchFn,ctx,signal:controller.signal});
-     return reply({answer,sentenceReview:result,aiSource});
+     return reply({answer,sentenceReview:result,aiSource,...(sentenceFallbackUsed&&sentenceFallbackFrom?{fallbackFrom:sentenceFallbackFrom}:{})});
     }
     if(isSentenceAiDetect){
      let activePayload=payload;
      let result=globalThis.HSKSentenceReview.normalizeAiDetection(answerText,body.question);
      if(!result&&!sentenceFallbackUsed&&headers['X-HSK-AI-Provider']!=='gemini'){
+      const failedProv=headers['X-HSK-AI-Provider']||personalAi?.provider||'';
       sentenceFallbackUsed=true;
-      const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:personalAi?.provider||'unknown',reason:'format'});
+      sentenceFallbackFrom=failedProv;
+      const fbRes=await runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal:controller.signal,headers,provider:failedProv||'unknown',reason:'format'});
       if(fbRes?.ok){
        activePayload=await fbRes.json();
        reviewModel=activePayload.modelVersion||SENTENCE_EDITOR_FALLBACK_MODEL;
@@ -666,7 +679,7 @@ QUY ĐỊNH NGÔN NGỮ: summary, signals, reason, humanizeTip BẮT BUỘC vi�
      const aiSource=provider?{provider,...(typeof modelName==='string'&&/^[a-z0-9][a-z0-9._/:+-]{0,119}$/i.test(modelName)?{model:modelName}:{})}:undefined;
      await qaUsage(env,activePayload);
      await qaFinish(roleEnv,qaSession,{answer,aiSource},provider,{rawFetch:rawFetchFn,ctx,signal:controller.signal});
-     return reply({answer,aiDetection:result,aiSource});
+     return reply({answer,aiDetection:result,aiSource,...(sentenceFallbackUsed&&sentenceFallbackFrom?{fallbackFrom:sentenceFallbackFrom}:{})});
     }
     function cleanAndParseAiResponse(raw){
      if(!raw||typeof raw!=='string')return null;

@@ -426,6 +426,13 @@ html[data-theme="dark"] #sentenceEditor .sentence-diff {
 html[data-theme="dark"] #sentenceEditor textarea {
   color: var(--palette-dark-ink) !important;
 }
+html[data-theme="dark"] #sentenceEditor.is-ai-highlight textarea {
+  color: var(--palette-clear) !important;
+  -webkit-text-fill-color: var(--palette-clear);
+}
+html[data-theme="dark"] #sentenceEditor.is-ai-highlight .sentence-mirror {
+  color: var(--palette-dark-ink) !important;
+}
 
 @media (max-width: 720px) {
   #sentenceEditor {
@@ -972,10 +979,20 @@ html[data-theme="dark"] #sentenceEditor textarea {
   cursor: not-allowed;
 }
 
+#sentenceEditor.is-ai-highlight textarea {
+  color: var(--palette-clear) !important;
+  -webkit-text-fill-color: var(--palette-clear);
+}
+#sentenceEditor.is-ai-highlight .sentence-mirror {
+  color: var(--ink) !important;
+}
+#sentenceEditor.is-ai-highlight .sentence-mirror mark[data-ai-flag="true"] {
+  color: var(--se-fix) !important;
+}
 #sentenceEditor .sentence-mirror mark[data-kind="ai-flag"] {
-  background: var(--se-style-soft);
-  border-bottom: 2px dashed var(--se-style);
-  color: var(--palette-clear);
+  background: var(--se-fix-soft);
+  border-bottom: 2px solid var(--se-fix);
+  color: var(--se-fix);
   border-radius: var(--radius-2px);
   text-decoration: none;
 }
@@ -985,6 +1002,8 @@ html[data-theme="dark"] #sentenceEditor textarea {
 }
 
 #sentenceEditor .sentence-detector {
+  box-sizing: border-box;
+  max-width: 100%;
   margin: 12px 0;
   padding: 14px;
   border: 1px solid var(--se-edge);
@@ -1004,26 +1023,33 @@ html[data-theme="dark"] #sentenceEditor textarea {
 #sentenceEditor .sentence-detector-head {
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  min-width: 0;
+  width: 100%;
 }
 
 #sentenceEditor .sentence-detector-compact-pct {
-  font-size: .76rem;
+  font-size: .74rem;
   font-weight: 700;
   color: var(--muted);
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
+  min-width: 0;
 }
 
 #sentenceEditor .sentence-detector-verdict {
-  padding: 3px 10px;
+  padding: 3px 9px;
   border-radius: var(--radius-pill);
-  font-size: .78rem;
+  font-size: .75rem;
   font-weight: 700;
   background: var(--se-style-soft);
   color: var(--se-style);
   white-space: nowrap;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #sentenceEditor .sentence-detector-verdict[data-verdict="human"] {
@@ -1039,12 +1065,13 @@ html[data-theme="dark"] #sentenceEditor textarea {
 #sentenceEditor .sentence-detector-close {
   margin-left: auto;
   flex: none;
+  max-width: 100%;
   border: 1px solid var(--se-edge);
   border-radius: var(--radius-pill);
-  padding: 4px 10px;
+  padding: 3px 9px;
   background: var(--palette-clear);
   color: var(--muted);
-  font-size: .78rem;
+  font-size: .74rem;
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;

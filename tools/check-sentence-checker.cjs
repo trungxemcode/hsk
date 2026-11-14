@@ -58,7 +58,8 @@ const server=http.createServer((req,res)=>{
           window.__grammarRequestCount=(window.__grammarRequestCount||0)+1;
           window.__resolveGrammar=(data={answer:JSON.stringify({summary:'STALE_RESPONSE',suggestions:[{kind:'fix',original:'帮忙我',replacement:'帮我',reason:'STALE_SUGGESTION'}]})})=>{
             window.__resolveGrammar=null;
-            resolve(new Response(JSON.stringify(data),{headers:{'X-HSK-AI-Provider':'gemini'}}));
+            const prov=data?.aiSource?.provider||'gemini';
+            resolve(new Response(JSON.stringify(data),{headers:{'X-HSK-AI-Provider':prov}}));
           };
         });
         return originalFetch(input,init);
@@ -159,14 +160,30 @@ const server=http.createServer((req,res)=>{
       ai:el.querySelector('.sentence-detector-meter-ai')?.style.width||''
     }));
     assert.deepEqual(barWidths,{human:'19%',ai:'81%'});
+    assert.equal(await editor.evaluate(el=>el.classList.contains('is-ai-highlight')),true,'mở rộng AI Detector phải bật tô đỏ đoạn nghi ngờ AI');
+    const expandedMarkColors=await editor.evaluate(el=>{
+      const ta=getComputedStyle(el.querySelector('#sentenceDraft')).color;
+      const flag=el.querySelector('.sentence-mirror mark[data-ai-flag="true"]');
+      return {textareaColor:ta,flagColor:flag?getComputedStyle(flag).color:'',mirrorColor:getComputedStyle(el.querySelector('.sentence-mirror')).color};
+    });
+    assert.notEqual(expandedMarkColors.flagColor,'','đoạn nghi ngờ AI phải được đánh dấu trong mirror');
+    assert.notEqual(expandedMarkColors.flagColor,expandedMarkColors.mirrorColor,'chữ đoạn nghi ngờ AI phải đổi sang màu đỏ khác màu chữ thường');
     await detector.locator('.sentence-detector-why-summary').click();
     assert.equal(await detector.locator('.sentence-detector-why').evaluate(el=>el.open),false,'bấm tiêu đề Vì sao phải thu gọn được');
     await detector.locator('.sentence-detector-why-summary').click();
     assert.equal(await detector.locator('.sentence-detector-why').evaluate(el=>el.open),true,'bấm tiêu đề Vì sao phải mở lại được');
     await detector.locator('.sentence-detector-close').click();
     assert.equal(await detector.evaluate(el=>el.classList.contains('is-collapsed')),true,'nút thu gọn phải thu siêu gọn thẻ AI Detector thay vì xóa');
+    assert.equal(await editor.evaluate(el=>el.classList.contains('is-ai-highlight')),false,'khi đóng thu gọn AI Detector chữ phải trở về màu đen bình thường');
+    const collapsedBounds=await detector.evaluate(el=>{
+      const box=el.getBoundingClientRect();
+      const btn=el.querySelector('.sentence-detector-close').getBoundingClientRect();
+      return {boxLeft:box.left,boxRight:box.right,btnLeft:btn.left,btnRight:btn.right};
+    });
+    assert.ok(collapsedBounds.btnRight<=collapsedBounds.boxRight+0.5&&collapsedBounds.btnLeft>=collapsedBounds.boxLeft-0.5,'nút Mở rộng không được tràn ra ngoài khung AI Detector');
     await detector.locator('.sentence-detector-close').click();
     assert.equal(await detector.evaluate(el=>el.classList.contains('is-collapsed')),false,'bấm mở rộng phải khôi phục đầy đủ thẻ AI Detector');
+    assert.equal(await editor.evaluate(el=>el.classList.contains('is-ai-highlight')),true,'bấm mở rộng lại phải tự động tô đỏ lại đoạn nghi ngờ AI');
     await detector.getByRole('button',{name:'Tìm trong bài'}).click();
     const selectedText=await page.evaluate(()=>{const el=document.getElementById('sentenceDraft');return el.value.slice(el.selectionStart,el.selectionEnd);});
     assert.equal(selectedText,'综上所述');
@@ -195,6 +212,27 @@ const server=http.createServer((req,res)=>{
     await modelItems.nth(2).click();
     assert.equal(await sePopover.isVisible(),false);
     assert.match(await effortBtn.innerText(),/^Astra · /);
+
+    await detector.locator('.sentence-detector-close').click();
+    await page.setViewportSize({width:1440,height:900});
+    const desktopCollapsedBounds=await detector.evaluate(el=>{
+      const box=el.getBoundingClientRect();
+      const btn=el.querySelector('.sentence-detector-close').getBoundingClientRect();
+      return {boxLeft:box.left,boxRight:box.right,btnLeft:btn.left,btnRight:btn.right};
+    });
+    assert.ok(desktopCollapsedBounds.btnRight<=desktopCollapsedBounds.boxRight+0.5&&desktopCollapsedBounds.btnLeft>=desktopCollapsedBounds.boxLeft-0.5,'trên desktop nút Mở rộng cũng không được tràn khỏi ô');
+    await check.click();
+    await page.waitForFunction(()=>!!window.__resolveGrammar);
+    const fostaSent=await page.evaluate(()=>({
+      aiProvider:window.__lastGrammarRequest?.aiProvider,
+      personalProvider:window.__lastGrammarRequest?.personalProvider,
+      aiModel:window.__lastGrammarRequest?.aiModel
+    }));
+    assert.equal(fostaSent.aiProvider,'personal:fosta');
+    assert.equal(fostaSent.personalProvider,'fosta');
+    assert.match(String(fostaSent.aiModel||''),/^gpt-6-astra/);
+    await page.evaluate(()=>window.__resolveGrammar({aiSource:{provider:'fosta',model:'gpt-6-astra:xhigh'},sentenceReview:{summary:'Đã kiểm tra.',suggestions:[]}}));
+    await status.filter({hasText:'Nguồn: Fosta · gpt-6-astra:xhigh.'}).waitFor();
 
     console.log('PASS AI sentence editor: login/offline states, manual requests, stale result rejection, provider, apply/undo and responsive layout');
   }finally{await browser.close();server.close();}

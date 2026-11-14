@@ -106,6 +106,17 @@ test('handles varied real-world LLM formats including fenced JSON with chatter, 
   const r6 = normalize(truncatedStream, text);
   assert.ok(r6 && r6.suggestions.length === 1);
   assert.equal(apply(text, r6.suggestions), expectedRevised);
+
+  // 7. Top-level array or wrapper object returned by personal providers (Fosta/GPT)
+  const topArray = '```json\n[{"kind":"fix","original":"去过了","replacement":"去了","reason":"Dùng 了."}]\n```';
+  const r7 = normalize(topArray, text);
+  assert.ok(r7 && r7.suggestions.length === 1);
+  assert.equal(apply(text, r7.suggestions), expectedRevised);
+
+  const wrappedReview = JSON.stringify({review: {summary: 'Sửa trợ từ', suggestions: [{kind: 'fix', original: '去过了', replacement: '去了', reason: 'Dùng 了.'}]}});
+  const r8 = normalize(wrappedReview, text);
+  assert.ok(r8 && r8.suggestions.length === 1);
+  assert.equal(apply(text, r8.suggestions), expectedRevised);
 });
 
 test('resolves non-overlapping occurrences of repeated characters and falls back to corrected candidate if needed', () => {

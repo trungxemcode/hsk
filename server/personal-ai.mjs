@@ -196,7 +196,8 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
   }));
   if(provider==='claude'){
    headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';
-   body={model,system,messages,max_tokens:2400};
+   const maxTokens=Math.max(2400,Math.min(8192,Number(requestBody.generationConfig?.maxOutputTokens)||2400));
+   body={model,system,messages,max_tokens:maxTokens};
   }else{
    headers.Authorization='Bearer '+apiKey;
    let fostaModel=model,fostaEffort=undefined;
@@ -205,9 +206,10 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
      const parts=model.split(':');
      fostaModel=parts[0];fostaEffort=parts[1];
     }
-    }
-    if(options.sentenceReview&&!fostaEffort)fostaEffort='low';
-   body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(requestBody.generationConfig?.temperature!==undefined?{temperature:requestBody.generationConfig.temperature}:{}),...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{stream:false})};
+   }
+   if(options.sentenceReview&&provider==='fosta'&&!fostaEffort)fostaEffort='low';
+   const isReasoningModel=/^o[134](?:-|$)/i.test(fostaModel);
+   body={model:fostaModel,messages:[{role:'system',content:system},...messages],...(!isReasoningModel&&requestBody.generationConfig?.temperature!==undefined?{temperature:requestBody.generationConfig.temperature}:{}),...(provider==='fosta'?{stream:false,...(fostaEffort?{reasoning_effort:fostaEffort}:{})}:{stream:false})};
   }
  }
  const response=await fetchFn(url,{method:'POST',headers,body:JSON.stringify(body),signal,redirect:'manual'});
@@ -215,9 +217,14 @@ export async function personalAiGenerate(config,requestBody,fetchFn,signal,optio
  if(response.status>=300&&response.status<400)return new Response(null,{status:502});
  if(!response.ok||provider==='gemini')return response;
  const payload=await response.json().catch(()=>null);
- const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):
-  (payload?.choices?.[0]?.message?.content??payload?.choices?.[0]?.text);
- if(typeof text!=='string')return new Response(null,{status:502});
+ const openAiMsg=payload?.choices?.[0]?.message?.content;
+ const openAiText=typeof openAiMsg==='string'?openAiMsg:
+  Array.isArray(openAiMsg)?openAiMsg.filter(p=>typeof p==='string'||p?.type==='text'||p?.type==='output_text').map(p=>typeof p==='string'?p:(p?.text||'')).join(''):
+  typeof payload?.choices?.[0]?.text==='string'?payload.choices[0].text:
+  typeof payload?.output_text==='string'?payload.output_text:
+  Array.isArray(payload?.output)?payload.output.flatMap(o=>Array.isArray(o?.content)?o.content:[]).filter(c=>typeof c?.text==='string').map(c=>c.text).join(''):null;
+ const text=provider==='claude'?payload?.content?.filter(part=>part.type==='text').map(part=>part.text).join(''):openAiText;
+ if(typeof text!=='string'||!text.trim())return new Response(null,{status:502});
  return Response.json({candidates:[{content:{parts:[{text:text.trim()}]}}]});
 }
 

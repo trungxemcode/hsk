@@ -1,5 +1,5 @@
 {
-  "request": "PR #426: compact collapsible AI Detector with interactive explanation accordions. Only Sentence Editor may change; all other app routes and shared shell stay protected.",
+  "request": "PR #427: fix Sentence Editor AI Detector collapse wrapping and AI-highlighted spans, preserve selected personal provider priority and compatibility across AI routes. Only Sentence Editor layout may change; other routes and shared shell remain protected.",
   "excludedRoutes": [
     "sentence-editor"
   ]
