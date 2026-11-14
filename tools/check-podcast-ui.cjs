@@ -48,6 +48,10 @@ const MIME = {
       await page.locator('#podcastPanel').waitFor({ state: 'visible' });
       assert.equal(await page.locator('#podcastSubMask').isVisible(), true, 'English subtitle mask visible');
 
+      // 1b. Channel filter bar & sync button are visible
+      assert.equal(await page.locator('#podcastChannelBar').isVisible(), true, 'Channel filter bar visible');
+      assert.equal(await page.locator('#podcastSyncChannelsBtn').isVisible(), true, 'Channel sync button visible');
+
       // 2. Mask bottom & height sliders update overlay styles & CSS vars
       await page.locator('#podcastMaskBottomRange').fill('10');
       await page.locator('#podcastMaskBottomRange').dispatchEvent('input');
@@ -83,9 +87,9 @@ const MIME = {
       // 4. Seek updates active cue in both mask & transcript list
       await page.evaluate(() => window.HSKPodcast.seek(14, false));
       const activeIdx = await page.evaluate(() => window.HSKPodcast.getState().activeCueIdx);
-      assert.equal(activeIdx, 2);
+      assert.equal(activeIdx, 1);
       const activeCueText = await page.locator('#podcastTranscriptList .podcast-cue-item.is-active .podcast-cue-vi').textContent();
-      assert.match(activeCueText, /ăn sáng/i);
+      assert.match(activeCueText, /Tiểu Minh/i);
 
       // 5. Clicking a Chinese word token opens lookup/save popover
       const firstToken = page.locator('#podcastSubMask .podcast-word-token').first();

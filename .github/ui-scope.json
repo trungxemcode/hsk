@@ -1,10 +1,6 @@
 {
-  "request": "PR #430: Podcast shortcut card on Home; Podcast navigation within Entertainment changes sidebar geometry on Real Reading and Music/Music Play; new Podcast listening page and standalone Admin portal. Only these intentionally touched route surfaces are excluded from unchanged-page snapshots; all other existing routes and all four viewports/themes remain protected. Targeted Podcast/Admin browser tests validate these new interfaces.",
+  "request": "Integrate real YouTube podcast episodes and bilingual channels (@LearnChineseThroughPodcast and @BaoBaoMandarin) into Podcast panel and standalone admin.html.",
   "excludedRoutes": [
-    "home",
-    "real-reading",
-    "music",
-    "music-play",
     "admin"
   ]
 }

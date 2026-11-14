@@ -92,13 +92,14 @@ const MIME = {
       await page.locator('#apMusicSubmitBtn').click();
       assert.equal(await page.locator('#apMusicList .ap-item-row').count(), 1);
 
+      assert.equal(await page.locator('#apSyncYoutubeChannelsBtn').isVisible(), true, 'Channel sync button should be visible');
       await page.locator('#apPodcastTitle').fill('Podcast Admin Test');
       await page.locator('#apPodcastLevel').selectOption('3');
       await page.locator('#apPodcastAccess').selectOption('vip');
       await page.locator('#apPodcastUrl').fill('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
       await page.locator('#apPodcastSubtitle').fill('0:00 Hello friends\n0:04 Let us learn Chinese');
       await page.locator('#apPodcastSubmitBtn').click();
-      assert.equal(await page.locator('#apPodcastList .ap-item-row').count(), 1);
+      assert.equal(await page.locator('#apPodcastList .ap-item-row').count(), 9);
 
       // Add a public study document in Docs tab
       await page.locator('[data-ap-tab="docs"]').click();

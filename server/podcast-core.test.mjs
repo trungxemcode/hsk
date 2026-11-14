@@ -18,10 +18,18 @@ test('HSKPodcastCore extracts YouTube IDs across standard URL formats', () => {
   assert.equal(podcastCore.extractYoutubeId('not-a-valid-url'), '');
 });
 
-test('HSKPodcastCore starter episodes cover HSK 1-6 with synced 4-layer cues', () => {
-  assert.equal(podcastCore.STARTER_EPISODES.length, 4);
+test('HSKPodcastCore starter episodes cover HSK 1-6 with synced 4-layer cues from the 2 YouTube channels', () => {
+  assert.equal(podcastCore.STARTER_EPISODES.length, 8);
+  assert.equal(podcastCore.DEFAULT_CHANNELS.length, 2);
+  assert.equal(podcastCore.extractYoutubeChannelKey('@LearnChineseThroughPodcast')?.channelId, 'UCI8Liuxdz6UPv5rgMskfwPg');
+  assert.equal(podcastCore.extractYoutubeChannelKey('https://www.youtube.com/@BaoBaoMandarin')?.channelId, 'UCYHKAec4JjyR_DC2obXv1Yg');
+  assert.equal(podcastCore.inferHskLevelFromTitle('HSK 1–3 | 会 VS 要 VS 能').levelGroup, 'hsk1-2');
+  assert.equal(podcastCore.inferHskLevelFromTitle('HSK 3–5 | 中国短剧有什么好看的？').levelGroup, 'hsk4');
+  assert.equal(podcastCore.toSimplifiedChinese('歡迎來到寶寶中文，請問這家餐廳怎麼走？'), '欢迎来到宝宝中文，请问这家餐厅怎么走？');
+
   for (const ep of podcastCore.STARTER_EPISODES) {
     assert.ok(ep.cues.length >= 5);
+    assert.ok(ep.channelHandle === '@BaoBaoMandarin' || ep.channelHandle === '@LearnChineseThroughPodcast');
     for (const cue of ep.cues) {
       assert.ok(cue.end > cue.start);
       assert.ok(cue.zh.length > 0 && cue.pinyin.length > 0 && cue.vi.length > 0 && cue.en.length > 0);
@@ -79,7 +87,8 @@ test('HSKPodcastCore segments Chinese tokens, locates active cues, and enriches 
 
   const cues = podcastCore.STARTER_EPISODES[0].cues;
   assert.equal(podcastCore.findActiveCueIndex(cues, 0), 0);
-  assert.equal(podcastCore.findActiveCueIndex(cues, 14), 2);
+  assert.equal(podcastCore.findActiveCueIndex(cues, 14), 1);
+  assert.equal(podcastCore.findActiveCueIndex(cues, 18), 2);
   assert.equal(podcastCore.findActiveCueIndex(cues, 999), -1);
 
   const local = podcastCore.enrichCuesLocal([{ start: 0, end: 4, en: 'Drink coffee for breakfast' }], { wordsList: dict });
@@ -240,5 +249,71 @@ for (const [label, makeHandler] of [
     const withCcData = await withCcRes.json();
     assert.equal(withCcData.sourceType, 'youtube-cc');
     assert.match(geminiSawCc, /Welcome to our podcast/);
+  });
+
+  test(`${label} serves public GET /podcast-feed and GET /podcast-captions for the 2 YouTube channels`, async () => {
+    const mockHandler = makeHandler(async (url) => {
+      const s = String(url);
+      if (s.includes('channel_id=UCI8Liuxdz6UPv5rgMskfwPg')) {
+        return new Response(`
+          <feed>
+            <entry><yt:videoId>aYrCe-KTmTg</yt:videoId><title>HSK 2 - 4 | Natural Greetings</title><published>2026-11-10T10:00:00+00:00</published></entry>
+            <entry><yt:videoId>live1234567</yt:videoId><title>[LIVE] 24/7 Practice Stream</title><published>2026-11-11T10:00:00+00:00</published></entry>
+          </feed>
+        `, { status: 200 });
+      }
+      if (s.includes('channel_id=UCYHKAec4JjyR_DC2obXv1Yg')) {
+        return new Response(`
+          <feed>
+            <entry><yt:videoId>hhkIZ3gOIcs</yt:videoId><title>HSK 1–3 | 会 VS 要 VS 能</title><published>2026-11-12T10:00:00+00:00</published></entry>
+          </feed>
+        `, { status: 200 });
+      }
+      if (s.includes('youtubei/v1/player')) {
+        return Response.json({
+          videoDetails: { title: 'HSK 1–3 | 会 VS 要 VS 能', author: 'BaoBao Mandarin', lengthSeconds: '1162' },
+          captions: {
+            playerCaptionsTracklistRenderer: {
+              captionTracks: [
+                { languageCode: 'zh-HK', baseUrl: 'https://www.youtube.com/api/timedtext?v=hhkIZ3gOIcs&lang=zh-HK' },
+                { languageCode: 'zh-TW', baseUrl: 'https://www.youtube.com/api/timedtext?v=hhkIZ3gOIcs&lang=zh-TW' },
+                { languageCode: 'vi', baseUrl: 'https://www.youtube.com/api/timedtext?v=hhkIZ3gOIcs&lang=vi' }
+              ]
+            }
+          }
+        });
+      }
+      if (s.includes('lang=zh-TW')) {
+        return new Response('<timedtext format="3"><body><p t="6900" d="5800">寶貝們，大家好！</p><p t="12700" d="4100">我是小明。</p></body></timedtext>', { status: 200 });
+      }
+      if (s.includes('lang=vi')) {
+        return new Response('<timedtext format="3"><body><p t="6900" d="5800">Xin chào các Bảo Bối!</p><p t="12700" d="4100">Mình là Tiểu Minh.</p></body></timedtext>', { status: 200 });
+      }
+      throw new Error(`Unexpected URL ${s}`);
+    }, () => now);
+
+    const feedRes = await mockHandler(
+      new Request('https://worker.test/podcast-feed?channel=all', { method: 'GET', headers: { Origin: origin } }),
+      env
+    );
+    assert.equal(feedRes.status, 200);
+    const feedData = await feedRes.json();
+    assert.equal(feedData.ok, true);
+    assert.equal(feedData.episodes.length, 2);
+    assert.equal(feedData.episodes[0].youtubeId, 'hhkIZ3gOIcs');
+    assert.equal(feedData.episodes[1].youtubeId, 'aYrCe-KTmTg');
+
+    const capRes = await mockHandler(
+      new Request('https://worker.test/podcast-captions?v=hhkIZ3gOIcs', { method: 'GET', headers: { Origin: origin } }),
+      env
+    );
+    assert.equal(capRes.status, 200);
+    const capData = await capRes.json();
+    assert.equal(capData.ok, true);
+    assert.equal(capData.languages.zh, 'zh-TW');
+    assert.equal(capData.languages.vi, 'vi');
+    assert.equal(capData.cues.length, 2);
+    assert.equal(capData.cues[0].zh, '寶貝們，大家好！');
+    assert.equal(capData.cues[0].vi, 'Xin chào các Bảo Bối!');
   });
 }

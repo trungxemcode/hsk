@@ -4974,6 +4974,254 @@ async function runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal,
   body:JSON.stringify(providerBody)
  });
 }
+const PODCAST_CHANNELS={
+ 'learn-chinese-through-podcast':{id:'learn-chinese-through-podcast',handle:'@LearnChineseThroughPodcast',channelId:'UCI8Liuxdz6UPv5rgMskfwPg',name:'Learn Chinese Through Podcast',url:'https://www.youtube.com/@LearnChineseThroughPodcast',feedUrl:'https://www.youtube.com/feeds/videos.xml?channel_id=UCI8Liuxdz6UPv5rgMskfwPg'},
+ 'baobao-mandarin':{id:'baobao-mandarin',handle:'@BaoBaoMandarin',channelId:'UCYHKAec4JjyR_DC2obXv1Yg',name:'BaoBao Mandarin',url:'https://www.youtube.com/@BaoBaoMandarin',feedUrl:'https://www.youtube.com/feeds/videos.xml?channel_id=UCYHKAec4JjyR_DC2obXv1Yg'}
+};
+function decodeXmlEntities(str){
+ return String(str||'').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,'$1').replace(/<[^>]*>/g,' ').replace(/&amp;/gi,'&').replace(/&lt;/gi,'<').replace(/&gt;/gi,'>').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'").replace(/&nbsp;/gi,' ').replace(/&#(\d+);/g,(_,n)=>String.fromCharCode(Number(n)||32)).replace(/\s+/g,' ').trim();
+}
+function inferPodcastHskFromTitle(title){
+ const m=String(title||'').match(/HSK\s*([1-6])(?:\s*[-–~]\s*([1-6]))?/i);
+ if(m){
+  const lo=Number(m[1]),hi=m[2]?Number(m[2]):lo;
+  if(lo===1&&hi<=3)return {level:hi===3?'HSK 1–3':'HSK 1–2',levelGroup:'hsk1-2'};
+  if(lo<=2&&hi<=4)return {level:'HSK 2–4',levelGroup:'hsk3'};
+  if(lo===3&&hi>=5)return {level:'HSK 3–5',levelGroup:'hsk4'};
+  if(lo>=5||hi>=6)return {level:'HSK 5–6',levelGroup:'hsk5-6'};
+  if(lo===4)return {level:'HSK 4',levelGroup:'hsk4'};
+  if(lo===3)return {level:'HSK 3+',levelGroup:'hsk3'};
+  return {level:`HSK ${lo}`,levelGroup:lo<=2?'hsk1-2':lo===3?'hsk3':lo===4?'hsk4':'hsk5-6'};
+ }
+ return {level:'HSK 2–4',levelGroup:'hsk3'};
+}
+function parseTimedTextToCues(rawBody){
+ const raw=String(rawBody||'');
+ if(!raw.trim())return [];
+ const cues=[];
+ if(raw.trim().startsWith('{')){
+  try{
+   const subData=JSON.parse(raw);
+   if(Array.isArray(subData?.events)){
+    for(const ev of subData.events){
+     if(!ev||!Array.isArray(ev.segs))continue;
+     const text=ev.segs.map(s=>s?.utf8||'').join('').replace(/\s+/g,' ').trim();
+     if(!text||text==='\n')continue;
+     const start=Math.max(0,Math.round(((Number(ev.tStartMs)||0)/1000)*100)/100);
+     const dur=Number(ev.dDurationMs)>0?Number(ev.dDurationMs)/1000:3;
+     cues.push({start,end:Math.round((start+dur)*100)/100,text});
+    }
+    return cues;
+   }
+  }catch{}
+ }
+ if(/<p\b[^>]*\bt="\d+"/i.test(raw)){
+  const pRe=/<p\b([^>]*)>([\s\S]*?)<\/p>/gi;
+  let m;
+  while((m=pRe.exec(raw))!==null){
+   const attrs=m[1]||'';
+   const tm=attrs.match(/\bt="(\d+)"/i);
+   const dm=attrs.match(/\bd="(\d+)"/i);
+   const text=decodeXmlEntities(m[2]);
+   if(!tm||!text)continue;
+   const start=Math.max(0,Math.round((Number(tm[1])/1000)*100)/100);
+   const dur=dm&&Number(dm[1])>0?Number(dm[1])/1000:3;
+   cues.push({start,end:Math.round((start+dur)*100)/100,text});
+  }
+  if(cues.length)return cues;
+ }
+ const tRe=/<text\s+start="([\d.]+)"(?:\s+dur="([\d.]+)")?[^>]*>([\s\S]*?)<\/text>/gi;
+ let tm;
+ while((tm=tRe.exec(raw))!==null){
+  const start=Math.max(0,Math.round(Number(tm[1]||0)*100)/100);
+  const dur=tm[2]&&Number(tm[2])>0?Number(tm[2]):3;
+  const text=decodeXmlEntities(tm[3]);
+  if(text)cues.push({start,end:Math.round((start+dur)*100)/100,text});
+ }
+ return cues;
+}
+async function fetchYoutubeAndroidPlayer(cleanId,{fetchFn,signal}){
+ try{
+  const res=await fetchFn('https://www.youtube.com/youtubei/v1/player?prettyPrint=false',{
+   method:'POST',
+   headers:{'Content-Type':'application/json','User-Agent':'com.google.android.youtube/20.10.38 (Linux; U; Android 14)'},
+   signal,
+   body:JSON.stringify({videoId:cleanId,context:{client:{clientName:'ANDROID',clientVersion:'20.10.38',hl:'en',gl:'US'}}})
+  });
+  if(!res.ok)return null;
+  const data=await res.json().catch(()=>null);
+  if(!data)return null;
+  const tracks=data?.captions?.playerCaptionsTracklistRenderer?.captionTracks;
+  const vd=data?.videoDetails||{};
+  return {
+   tracks:Array.isArray(tracks)?tracks:[],
+   videoDetails:{
+    title:String(vd.title||'').trim(),
+    author:String(vd.author||'').trim(),
+    channelId:String(vd.channelId||'').trim(),
+    lengthSeconds:Number(vd.lengthSeconds)||0
+   }
+  };
+ }catch(e){
+  if(signal?.aborted)throw e;
+  return null;
+ }
+}
+function alignTrackToBase(baseCues,targetCues){
+ const buckets=baseCues.map(()=>[]);
+ for(const item of targetCues){
+  let bestIdx=-1,bestOverlap=0,bestDist=Infinity;
+  const itemMid=(item.start+item.end)/2;
+  for(let i=0;i<baseCues.length;i++){
+   const b=baseCues[i];
+   const ov=Math.min(b.end,item.end)-Math.max(b.start,item.start);
+   const bMid=(b.start+b.end)/2;
+   const dist=Math.abs(bMid-itemMid);
+   if(ov>bestOverlap||(ov===bestOverlap&&dist<bestDist)){
+    bestOverlap=ov;bestDist=dist;bestIdx=i;
+   }
+  }
+  if(bestIdx>=0&&(bestOverlap>0.05||bestDist<=2.5))buckets[bestIdx].push(item.text);
+ }
+ return buckets.map(arr=>arr.join(' ').trim());
+}
+function pickYoutubeTrackByLang(tracks,lang){
+ if(!Array.isArray(tracks)||!tracks.length)return null;
+ const nonAsr=tracks.filter(t=>t?.kind!=='asr');
+ const pool=nonAsr.length?nonAsr:tracks;
+ if(lang==='zh'){
+  const order=[/^zh-Hans$/i,/^zh-CN$/i,/^zh-SG$/i,/^zh-TW$/i,/^zh-Hant$/i,/^zh$/i];
+  for(const rx of order){
+   const hit=pool.find(t=>rx.test(String(t?.languageCode||'')));
+   if(hit)return hit;
+  }
+  return pool.find(t=>/^zh(?:-|$)/i.test(String(t?.languageCode||''))&&!/^zh-HK$/i.test(String(t?.languageCode||'')))
+   ||pool.find(t=>/^zh(?:-|$)/i.test(String(t?.languageCode||'')))||null;
+ }
+ if(lang==='vi')return pool.find(t=>/^vi(?:-|$)/i.test(String(t?.languageCode||'')))||tracks.find(t=>/^vi(?:-|$)/i.test(String(t?.languageCode||'')))||null;
+ if(lang==='en')return pool.find(t=>/^en(?:-|$)/i.test(String(t?.languageCode||'')))||tracks.find(t=>/^en(?:-|$)/i.test(String(t?.languageCode||'')))||null;
+ return null;
+}
+async function fetchTrackCues(track,{fetchFn,signal}){
+ const baseUrl=String(track?.baseUrl||'').replace(/\\u0026/g,'&');
+ if(!baseUrl||!/^https:\/\/(?:www\.)?youtube\.com\//i.test(baseUrl))return [];
+ try{
+  const res=await fetchFn(baseUrl,{method:'GET',headers:{'User-Agent':'com.google.android.youtube/20.10.38 (Linux; U; Android 14)'},signal});
+  if(!res.ok)return [];
+  const raw=await res.text();
+  return parseTimedTextToCues(raw);
+ }catch(e){
+  if(signal?.aborted)throw e;
+  return [];
+ }
+}
+async function fetchYoutubeBilingualCues(youtubeId,{fetchFn,signal}){
+ const cleanId=String(youtubeId||'').trim();
+ if(!/^[a-zA-Z0-9_-]{11}$/.test(cleanId))return {error:'INVALID_YOUTUBE_ID',youtubeId:cleanId,languages:{},cues:[]};
+ const playerData=await fetchYoutubeAndroidPlayer(cleanId,{fetchFn,signal});
+ let tracks=playerData?.tracks||[];
+ const videoDetails=playerData?.videoDetails||null;
+ if(!tracks.length){
+  try{
+   const watchRes=await fetchFn('https://www.youtube.com/watch?v='+encodeURIComponent(cleanId)+'&hl=en',{method:'GET',headers:{'Accept-Language':'en-US,en;q=0.9','User-Agent':'Mozilla/5.0'},signal});
+   if(watchRes.ok){
+    const html=await watchRes.text();
+    const m=html.match(/"captionTracks"\s*:\s*(\[[\s\S]*?\])\s*[,}]/);
+    if(m){try{tracks=JSON.parse(m[1]);}catch{}}
+   }
+  }catch(e){if(signal?.aborted)throw e;}
+ }
+ if(!Array.isArray(tracks)||!tracks.length){
+  return {error:'YOUTUBE_CC_UNAVAILABLE',youtubeId:cleanId,videoDetails,languages:{},cues:[]};
+ }
+ const zhTrack=pickYoutubeTrackByLang(tracks,'zh');
+ const viTrack=pickYoutubeTrackByLang(tracks,'vi');
+ const enTrack=pickYoutubeTrackByLang(tracks,'en');
+ const [zhCues,viCues,enCues]=await Promise.all([
+  zhTrack?fetchTrackCues(zhTrack,{fetchFn,signal}):[],
+  viTrack?fetchTrackCues(viTrack,{fetchFn,signal}):[],
+  enTrack?fetchTrackCues(enTrack,{fetchFn,signal}):[]
+ ]);
+ const baseKind=zhCues.length?'zh':(viCues.length?'vi':(enCues.length?'en':''));
+ if(!baseKind){
+  return {error:'YOUTUBE_CC_UNAVAILABLE',youtubeId:cleanId,videoDetails,languages:{},cues:[]};
+ }
+ const baseCues=baseKind==='zh'?zhCues:(baseKind==='vi'?viCues:enCues);
+ const viAligned=baseKind==='zh'&&viCues.length?alignTrackToBase(baseCues,viCues):(baseKind==='en'&&viCues.length?alignTrackToBase(baseCues,viCues):[]);
+ const enAligned=baseKind!=='en'&&enCues.length?alignTrackToBase(baseCues,enCues):[];
+ const cues=baseCues.map((b,idx)=>({
+  start:b.start,
+  end:b.end>b.start?b.end:Math.round((b.start+3)*100)/100,
+  zh:baseKind==='zh'?b.text:'',
+  pinyin:'',
+  vi:baseKind==='vi'?b.text:(viAligned[idx]||''),
+  en:baseKind==='en'?b.text:(enAligned[idx]||'')
+ }));
+ return {
+  error:'',
+  youtubeId:cleanId,
+  videoDetails,
+  languages:{
+   zh:zhCues.length?String(zhTrack?.languageCode||'zh'):'',
+   vi:viCues.length?String(viTrack?.languageCode||'vi'):'',
+   en:enCues.length?String(enTrack?.languageCode||'en'):''
+  },
+  cues
+ };
+}
+async function fetchYoutubeChannelFeed(channelQuery,{fetchFn,signal}){
+ const q=String(channelQuery||'').trim().toLowerCase();
+ const allChannels=Object.values(PODCAST_CHANNELS);
+ const targets=!q||q==='all'
+  ?allChannels
+  :allChannels.filter(ch=>ch.id===q||ch.handle.toLowerCase()===q||ch.channelId.toLowerCase()===q||q.includes(ch.handle.slice(1).toLowerCase()));
+ const selected=targets.length?targets:allChannels;
+ const feedResults=await Promise.all(selected.map(async ch=>{
+  try{
+   const res=await fetchFn(ch.feedUrl,{method:'GET',headers:{'User-Agent':'Mozilla/5.0'},signal});
+   if(!res.ok)return [];
+   const xml=await res.text();
+   const entries=[];
+   const entryRe=/<entry>([\s\S]*?)<\/entry>/gi;
+   let m;
+   while((m=entryRe.exec(xml))!==null&&entries.length<15){
+    const block=m[1];
+    const videoId=block.match(/<yt:videoId>([^<]+)<\/yt:videoId>/i)?.[1]?.trim()||'';
+    const rawTitle=block.match(/<title>([\s\S]*?)<\/title>/i)?.[1]||'';
+    const title=decodeXmlEntities(rawTitle);
+    const publishedAt=block.match(/<published>([^<]+)<\/published>/i)?.[1]?.trim()||'';
+    if(!/^[a-zA-Z0-9_-]{11}$/.test(videoId)||!title)continue;
+    if(/^\s*\[?live\]?\b|\blive\s+stream/i.test(title))continue;
+    const hskInfo=inferPodcastHskFromTitle(title);
+    entries.push({
+     id:`ep-yt-${videoId}`,
+     youtubeId:videoId,
+     title,
+     titleVi:title,
+     level:hskInfo.level,
+     levelGroup:hskInfo.levelGroup,
+     channel:ch.name,
+     channelName:ch.name,
+     channelHandle:ch.handle,
+     channelId:ch.channelId,
+     channelUrl:ch.url,
+     publishedAt,
+     topic:'Podcast YouTube',
+     note:`Tập từ kênh ${ch.name} (${ch.handle}) — tự động nạp phụ đề song ngữ Trung · Việt khi mở.`,
+     defaultMaskBottom:4,
+     defaultMaskHeight:22,
+     cues:[]
+    });
+   }
+   return entries;
+  }catch(e){
+   if(signal?.aborted)throw e;
+   return [];
+  }
+ }));
+ const merged=feedResults.flat().sort((a,b)=>String(b.publishedAt||'').localeCompare(String(a.publishedAt||'')));
+ return {channels:selected,episodes:merged};
+}
 async function fetchYoutubeTimedText(youtubeId,{fetchFn,signal}){
  const cleanId=String(youtubeId||'').trim();
  if(!/^[a-zA-Z0-9_-]{11}$/.test(cleanId))return {error:'YOUTUBE_CC_UNAVAILABLE',lines:[]};
@@ -4993,7 +5241,8 @@ async function fetchYoutubeTimedText(youtubeId,{fetchFn,signal}){
   const m=html.match(/"captionTracks"\s*:\s*(\[[\s\S]*?\])\s*[,}]/);
   if(m){try{tracks=JSON.parse(m[1]);}catch{}}
  }
- if(!Array.isArray(tracks)||!tracks.length){
+ const hadWatchTracks=Array.isArray(tracks)&&tracks.length>0;
+ if(!hadWatchTracks){
   try{
    const listRes=await fetchFn('https://www.youtube.com/api/timedtext?type=list&v='+encodeURIComponent(cleanId),{method:'GET',signal});
    if(listRes.ok){
@@ -5012,35 +5261,21 @@ async function fetchYoutubeTimedText(youtubeId,{fetchFn,signal}){
  if(!baseUrl||!/^https:\/\/(?:www\.)?youtube\.com\//i.test(baseUrl))return {error:'YOUTUBE_CC_UNAVAILABLE',lines:[]};
  const sep=baseUrl.includes('?')?'&':'?';
  const jsonUrl=/[?&]fmt=/.test(baseUrl)?baseUrl.replace(/([?&]fmt=)[^&]+/,'$1json3'):baseUrl+sep+'fmt=json3';
- let subData=null,subText='';
+ let parsedCues=[];
  try{
   const subRes=await fetchFn(jsonUrl,{method:'GET',signal});
   if(subRes.ok){
-   const ct=(subRes.headers?.get?.('content-type')||'').toLowerCase();
    const raw=await subRes.text();
-   if(ct.includes('json')||raw.trim().startsWith('{')){
-    try{subData=JSON.parse(raw);}catch{}
-   }else subText=raw;
+   parsedCues=parseTimedTextToCues(raw);
   }
  }catch(e){if(signal?.aborted)throw e;}
- const lines=[];
- if(Array.isArray(subData?.events)){
-  for(const ev of subData.events){
-   if(!ev||!Array.isArray(ev.segs))continue;
-   const text=ev.segs.map(s=>s?.utf8||'').join('').replace(/\s+/g,' ').trim();
-   if(!text||text==='\n')continue;
-   const startSec=Math.max(0,Math.round(((Number(ev.tStartMs)||0)/1000)*100)/100);
-   lines.push(`${startSec} | ${text}`);
-  }
- }else if(subText){
-  const re=/<text\s+start="([\d.]+)"(?:\s+dur="([\d.]+)")?[^>]*>([\s\S]*?)<\/text>/g;
-  let tm;
-  while((tm=re.exec(subText))!==null){
-   const startSec=Math.max(0,Math.round(Number(tm[1]||0)*100)/100);
-   const txt=tm[3].replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/\s+/g,' ').trim();
-   if(txt)lines.push(`${startSec} | ${txt}`);
-  }
+ if(!parsedCues.length&&hadWatchTracks){
+  const androidData=await fetchYoutubeAndroidPlayer(cleanId,{fetchFn,signal});
+  const androidTracks=androidData?.tracks||[];
+  const androidPick=androidTracks.find(t=>t?.languageCode===pick?.languageCode)||pickYoutubeTrackByLang(androidTracks,'zh')||pickYoutubeTrackByLang(androidTracks,'en')||androidTracks[0];
+  if(androidPick)parsedCues=await fetchTrackCues(androidPick,{fetchFn,signal});
  }
+ const lines=parsedCues.map(c=>`${c.start} | ${c.text}`);
  if(!lines.length)return {error:'YOUTUBE_CC_UNAVAILABLE',lines:[]};
  return {error:'',language:String(pick?.languageCode||'en'),lines};
 }
@@ -5075,6 +5310,19 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     const data=await accountRoleCall(env,'roles-resources-get',{actor:'public'},request.signal);
     return reply({manifest:data?.manifest||null});
    }catch{return reply({error:'Chưa đọc được cấu hình tài nguyên.'},503);}
+  }
+  if(new URL(request.url).pathname==='/podcast-feed'){
+   if(request.method!=='GET')return reply({error:'Yêu cầu không hợp lệ.'},405);
+   const chParam=new URL(request.url).searchParams.get('channel')||'all';
+   const feed=await fetchYoutubeChannelFeed(chParam,{fetchFn:providerFetch,signal:request.signal});
+   return reply({ok:true,channels:feed.channels,episodes:feed.episodes});
+  }
+  if(new URL(request.url).pathname==='/podcast-captions'){
+   if(request.method!=='GET')return reply({error:'Yêu cầu không hợp lệ.'},405);
+   const vParam=new URL(request.url).searchParams.get('v')||'';
+   const cap=await fetchYoutubeBilingualCues(vParam,{fetchFn:providerFetch,signal:request.signal});
+   if(cap.error)return reply({ok:false,error:cap.error==='INVALID_YOUTUBE_ID'?'Mã video YouTube không hợp lệ.':'Video YouTube này chưa có phụ đề rời (CC) trên hệ thống.',code:cap.error},cap.error==='INVALID_YOUTUBE_ID'?400:422);
+   return reply({ok:true,youtubeId:cap.youtubeId,videoDetails:cap.videoDetails,languages:cap.languages,cues:cap.cues});
   }
 
   const route=new URL(request.url).pathname,isAiProviders=route==='/ai-providers',isPersonalSettings=route==='/personal-ai-settings'||isAiProviders,isTranscript=route==='/music-transcript',isAdminResources=route==='/admin/resources',isRole=['/account-role','/admin/accounts','/admin/account-role','/admin/resources'].includes(route),isDictionaryTranslate=route==='/dictionary-translate',isDictionaryRoute=route==='/dictionary-lookup',isPlan=route==='/study-plan-review',isProfileSync=route==='/api/profile-sync',isLessonAsk=route==='/lesson-ask',isAsk=route==='/ask'||isLessonAsk||isPlan||isDictionaryRoute||isDictionaryTranslate,isOcr=route==='/ocr',isSample=route==='/handwriting-samples',isHandwriting=route==='/handwriting-recognize',isReading=route==='/reading-next';
@@ -5383,9 +5631,27 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     let podcastInputText=body.question.trim(),podcastFetchedSource='pasted-transcript';
     if(isPodcastSubtitles){
      const ytId=String(body.lesson?.content?.youtubeId||'').trim();
-     const wantsAutoYt=body.lesson?.content?.sourceType==='youtube-url'||/^YOUTUBE_AUTO_CC:/i.test(podcastInputText)||(ytId&&/^(?:https?:\/\/)?(?:www\.|m\.)?(?:youtube\.com|youtu\.be)\//i.test(podcastInputText));
+     const ytFromText=(podcastInputText.match(/YOUTUBE_AUTO_CC:([a-zA-Z0-9_-]{11})/)||podcastInputText.match(/(?:v=|youtu\.be\/|\/(?:embed|shorts|live|v)\/)([a-zA-Z0-9_-]{11})/))?.[1]||'';
+     const targetYtId=ytId||ytFromText;
+     const wantsAutoYt=body.lesson?.content?.sourceType==='youtube-url'||/^YOUTUBE_AUTO_CC:/i.test(podcastInputText)||(targetYtId&&/^(?:https?:\/\/)?(?:www\.|m\.)?(?:youtube\.com|youtu\.be)\//i.test(podcastInputText));
      if(wantsAutoYt){
-      const ytResult=await fetchYoutubeTimedText(ytId||podcastInputText,{fetchFn:providerFetch,signal:controller.signal});
+      if(targetYtId){
+       const dualCheck=await fetchYoutubeAndroidPlayer(targetYtId,{fetchFn:providerFetch,signal:controller.signal});
+       if(dualCheck?.tracks?.length){
+        const zhT=pickYoutubeTrackByLang(dualCheck.tracks,'zh');
+        const viT=pickYoutubeTrackByLang(dualCheck.tracks,'vi');
+        if(zhT&&viT){
+         const bilingual=await fetchYoutubeBilingualCues(targetYtId,{fetchFn:providerFetch,signal:controller.signal});
+         if(!bilingual.error&&bilingual.cues.length){
+          const directResult={titleVi:bilingual.videoDetails?.title||String(body.lesson?.title||'Podcast YouTube'),summaryVi:`Đã nạp trực tiếp ${bilingual.cues.length} câu phụ đề song ngữ Trung · Việt từ YouTube.`,cues:bilingual.cues};
+          const answer=JSON.stringify(directResult);
+          await qaFinish(roleEnv,qaSession,{answer,sourceType:'youtube-dual-cc'},'youtube-cc',{rawFetch:rawFetchFn,ctx,signal:controller.signal});
+          return reply({answer,podcastSubtitles:directResult,sourceType:'youtube-dual-cc',aiSource:{provider:'youtube-cc',model:'youtube-cc'}});
+         }
+        }
+       }
+      }
+      const ytResult=await fetchYoutubeTimedText(targetYtId||podcastInputText,{fetchFn:providerFetch,signal:controller.signal});
       if(!ytResult.lines.length){
        return reply({error:'Video YouTube này chưa có phụ đề rời (CC) để lấy tự động — có thể phụ đề tiếng Anh bị đốt cứng trong khung hình. Hãy dán phụ đề/transcript hoặc tải tệp .srt/.vtt, bật lớp che đáy video rồi bấm Dịch.',code:'YOUTUBE_CC_UNAVAILABLE'},422);
       }
