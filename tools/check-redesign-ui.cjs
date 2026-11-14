@@ -16,7 +16,7 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
    await page.goto('http://127.0.0.1:'+server.address().port+'/index.html');
    await page.waitForFunction(()=>window.HSKStudio&&window.HSKLessons&&document.querySelectorAll('.path-step[data-rd-enhanced="1"]').length===3);
    await page.evaluate(()=>document.fonts.ready);
-   assert(await page.evaluate(()=>Array.from(document.fonts).filter(f=>f.family==='Inter'&&f.status==='loaded').length>=2),'local Latin and Vietnamese font subsets load');
+   assert(await page.evaluate(()=>Array.from(document.fonts).filter(f=>f.family==='HSK Sans'&&f.status==='loaded').length>=2),'local Latin and Vietnamese font subsets load');
    for(const theme of ['light','dark']){
     await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
     for(const [i,action] of [[0,'click'],[1,'Enter'],[2,'Space']]){

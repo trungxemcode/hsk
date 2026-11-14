@@ -187,7 +187,7 @@
     .example {
       width: 320px;
       background: var(--palette-white);
-      border-left: 4px solid var(--legacy-hex-2b63c0);
+      border: 1px solid var(--legacy-hex-cad6ef);
       border-radius:var(--radius-10px);
       box-shadow:var(--shadow-style-3);
       padding: 12px 16px;
@@ -266,7 +266,7 @@
     .mistake-entry,.compare-lesson { border:1px solid var(--legacy-hex-cad6ef);border-radius:var(--radius-btn);margin:12px 0;padding:14px;overflow-wrap:anywhere; }
     .compare-lesson summary { cursor:pointer;min-height:48px;display:flex;align-items:center;font-weight:600; }
     .compare-member { padding:12px;background:var(--legacy-hex-eef3fc);border-radius:var(--radius-8px);margin:10px 0; }
-    .compare-example { border-left:3px solid var(--legacy-hex-1547b0);padding-left:12px;margin:12px 0; }
+    .compare-example { border:1px solid var(--legacy-hex-cad6ef);border-radius:var(--radius-8px);background:var(--legacy-hex-f8faff);padding:10px 12px;margin:12px 0; }
     .source-links { display:flex;flex-wrap:wrap;gap:12px;margin-top:12px; }
     .source-links a { padding:6px 0; }
     #quizPoolPreview { margin:6px 0 0; }
@@ -314,7 +314,7 @@
 
 html{height:100%;background:var(--legacy-hex-d9e1f2);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:var(--palette-clear)}
 body{
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif;
+  font-family:system-ui,-apple-system,"Segoe UI","Noto Sans",sans-serif;
   height:100%;height:100dvh;max-width:var(--shell);margin:0 auto;padding:0;
   display:flex;flex-direction:column;align-items:stretch;
   background:var(--paper);overflow:hidden;
@@ -380,7 +380,7 @@ body:has(.app-tabs [data-mode="srs"].active) h1::after{content:"Ôn tập SRS"}
 .app-tabs button{
   flex:1 1 0;min-width:0;min-height:54px;padding:0 2px;border:0;border-radius:var(--radius-none);background:var(--palette-clear);
   color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;
-  font-size:10px;font-weight:600;line-height:1.2;transform:none;letter-spacing:-.1px;
+  font-size:11px;font-weight:600;line-height:1.2;transform:none;letter-spacing:-.1px;
 }
 .app-tabs .ico{width:52px;height:30px;border-radius:var(--radius-15px);display:grid;place-items:center;font-size:19px;transition:background .2s}
 .app-tabs .lbl{white-space:nowrap}
@@ -463,7 +463,7 @@ button:active{filter:brightness(.92)}
 .relation-word .relation-meaning{font-size:14.5px;line-height:1.4;margin-bottom:4px}
 .relation-word .relation-pin + .relation-meaning + .relation-pin{margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)}
 .relation-word small{font-size:12px;line-height:1.4;color:var(--legacy-hex-6b7c97)}
-button.relation-word{border-left:4px solid var(--ink-2);background:var(--legacy-hex-f2f6ff);cursor:pointer}
+button.relation-word{border-color:var(--legacy-hex-bcd0ff);background:var(--legacy-hex-f2f6ff);cursor:pointer}
 button.relation-word small{color:var(--ink-2);font-weight:600}
 div.relation-word{background:var(--legacy-hex-fafbfe);border-style:dashed}
 div.relation-word > strong{opacity:.85}
@@ -600,7 +600,7 @@ body.ios-standalone{--safe-t:max(env(safe-area-inset-top,0px),44px)}
 body.ios-standalone>h1{min-height:74px}
 @media(orientation:landscape){body.ios-standalone{--safe-t:max(env(safe-area-inset-top,0px),24px)}}
 
-.confusion-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 14px}.confusion-tabs button{min-height:46px;background:var(--legacy-hex-e4ecfa);color:var(--ink);font-size:14px}.confusion-tabs button[aria-pressed="true"]{background:var(--ink);color:var(--palette-white)}#visualCompareQuery{width:100%;margin:8px 0 14px}.visual-pair,.visual-word-examples{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.visual-character-card{border:1px solid var(--line);border-radius:var(--radius-14px);background:var(--palette-white);padding:12px 6px;text-align:center}.visual-glyph{position:relative;width:110px;height:110px;max-width:100%;margin:auto;font:500 86px/110px "Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;color:var(--legacy-hex-12307a)}.visual-focus{position:absolute;border:2px solid var(--legacy-hex-e78119);background:var(--legacy-hex-ffbc5020);border-radius:var(--radius-5px);pointer-events:none;inset:8%}.focus-top{inset:8% 8% 46%}.focus-middle{inset:30% 10% 16%}.focus-bottom{inset:52% 6% 6%}.focus-left{inset:8% 49% 8% 4%}.visual-char-mean{font-size:14px;margin:8px 0 0;overflow-wrap:anywhere}.visual-difference{border-left:4px solid var(--legacy-hex-e78119);padding:10px;background:var(--legacy-hex-fff4df);border-radius:var(--radius-8px)}.visual-lesson h3{font-size:17px;margin:18px 0 8px}.visual-lesson h4{font-size:15px;margin:14px 0 8px}.visual-word-example{padding:10px;border:1px solid var(--line);border-radius:var(--radius-btn);margin:8px 0;background:var(--palette-white);overflow-wrap:anywhere}.visual-word-example button{width:100%;font-size:13px;min-height:44px;padding:8px}.visual-word-example .example-pinyin{font-size:13px}.visual-word-example p{font-size:14px}.visual-examples-column{min-width:0}@media(max-width:360px){.visual-word-examples{grid-template-columns:1fr}.visual-glyph{width:98px;height:104px;font-size:78px;line-height:104px}}
+.confusion-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 14px}.confusion-tabs button{min-height:46px;background:var(--legacy-hex-e4ecfa);color:var(--ink);font-size:14px}.confusion-tabs button[aria-pressed="true"]{background:var(--ink);color:var(--palette-white)}#visualCompareQuery{width:100%;margin:8px 0 14px}.visual-pair,.visual-word-examples{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.visual-character-card{border:1px solid var(--line);border-radius:var(--radius-14px);background:var(--palette-white);padding:12px 6px;text-align:center}.visual-glyph{position:relative;width:110px;height:110px;max-width:100%;margin:auto;font:500 86px/110px "Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;color:var(--legacy-hex-12307a)}.visual-focus{position:absolute;border:2px solid var(--legacy-hex-e78119);background:var(--legacy-hex-ffbc5020);border-radius:var(--radius-5px);pointer-events:none;inset:8%}.focus-top{inset:8% 8% 46%}.focus-middle{inset:30% 10% 16%}.focus-bottom{inset:52% 6% 6%}.focus-left{inset:8% 49% 8% 4%}.visual-char-mean{font-size:14px;margin:8px 0 0;overflow-wrap:anywhere}.visual-difference{border:1px solid var(--legacy-hex-e78119);padding:10px;background:var(--legacy-hex-fff4df);border-radius:var(--radius-8px)}.visual-lesson h3{font-size:17px;margin:18px 0 8px}.visual-lesson h4{font-size:15px;margin:14px 0 8px}.visual-word-example{padding:10px;border:1px solid var(--line);border-radius:var(--radius-btn);margin:8px 0;background:var(--palette-white);overflow-wrap:anywhere}.visual-word-example button{width:100%;font-size:13px;min-height:44px;padding:8px}.visual-word-example .example-pinyin{font-size:13px}.visual-word-example p{font-size:14px}.visual-examples-column{min-width:0}@media(max-width:360px){.visual-word-examples{grid-template-columns:1fr}.visual-glyph{width:98px;height:104px;font-size:78px;line-height:104px}}
 .confusion-control-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.confusion-control-row label{min-width:0;font-size:14px}.confusion-control-row select{display:block;width:100%;margin-top:6px;font-size:14px;min-height:46px}#hskConfusionQuery{width:100%;margin:8px 0 14px;min-height:46px}.confusion-word-card{border:1px solid var(--line);padding:12px;border-radius:var(--radius-btn);background:var(--legacy-hex-f7faff);margin:10px 0;overflow-wrap:anywhere}.confusion-word-card strong{font-size:22px}.confusion-word-card p{font-size:14px}.confusion-word-card button,.confusion-more,#hskConfusionMore{min-height:44px;width:100%;font-size:14px}.confusion-candidate,.confusion-char-section{border:1px solid var(--line);border-radius:var(--radius-btn);padding:10px;margin:10px 0;min-width:0}.confusion-candidate summary,.confusion-char-section summary{min-height:44px;display:flex;align-items:center;cursor:pointer;overflow-wrap:anywhere;font-size:16px;font-weight:600}.confusion-candidate summary:before,.confusion-char-section summary:before{content:'▸';margin-right:8px}.confusion-candidate[open]>summary:before,.confusion-char-section[open]>summary:before{content:'▾'}.confusion-character-pair .visual-character-card{overflow-wrap:anywhere}.confusion-character-pair .visual-glyph{margin:0 auto}.indexed-confusion>h3{font-size:17px}.indexed-confusion>.hint{font-size:13px}.confusion-character-pair .example-pinyin{font-size:14px}@media(max-width:360px){.confusion-control-row{grid-template-columns:1fr}}
 .confusion-family-strip{padding:12px;border-radius:var(--radius-btn);border:1px solid var(--legacy-hex-b7c8ee);background:var(--legacy-hex-edf3ff);color:var(--legacy-hex-12307a);font-size:20px;line-height:1.6;overflow-wrap:anywhere}.confusion-candidate .hint a{display:inline;overflow-wrap:anywhere}
 
@@ -718,7 +718,7 @@ progress::-webkit-progress-value{background:var(--legacy-hex-16965a);border-radi
 #lessonPracticeBack{margin:10px 0;min-height:48px}
 body.lesson-focus .offline-bar,body.lesson-focus .memory-reminder,body.lesson-focus #lessonsPanel>h2{display:none!important}
 @media(max-width:700px){.app-tabs .ico{width:42px}.app-tabs button{padding-inline:2px}.lesson-mastery{padding:12px}.lesson-mastery small{display:block}}
-@media(max-width:360px){.app-tabs .ico{width:34px}.app-tabs .lbl{font-size:9px}}
+@media(max-width:360px){.app-tabs .ico{width:34px}.app-tabs .lbl{font-size:11px}}
 
 body.lesson-focus #lessonsPanel>.hint{display:none}
 
@@ -733,7 +733,7 @@ body.lesson-focus #lessonsPanel>.hint{display:none}
 .lesson-language-line{padding:12px;margin:10px 0;background:var(--legacy-hex-f4f7fc);border-radius:var(--radius-btn)}
 .lesson-language-line p{margin:4px 0}
 .lesson-cn{font-size:22px}
-.lesson-error-note{border-left:3px solid var(--legacy-hex-e3a630);padding-left:10px;color:var(--legacy-hex-6a501a)}
+.lesson-error-note{padding:8px 12px;border:1px solid var(--legacy-hex-e3a630);border-radius:var(--radius-8px);background:var(--legacy-hex-fff4df);color:var(--legacy-hex-6a501a)}
 .lesson-test-options{display:grid;gap:8px}
 .lesson-test-options button{text-align:left}
 .lesson-test-options button.correct{background:var(--legacy-hex-d1fae5)!important;color:var(--legacy-hex-14532d)!important;opacity:1}

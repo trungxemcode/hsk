@@ -194,11 +194,11 @@ body.studio-enabled #aboutPanel .mobile-home-stats{display:block;margin-top:16px
 .hsk-loading-title{font-size:16px;font-weight:750;line-height:1.4;color:var(--ink-strong);overflow-wrap:anywhere}
 .hsk-loading-sub{font-size:13px;line-height:1.45;color:var(--sub);overflow-wrap:anywhere}
 .hsk-loading-bar{width:100%;height:4px;margin-top:4px;background:var(--accent-light);border-radius:var(--radius-pill);overflow:hidden}
-.hsk-loading-bar-fill{display:block;width:45%;height:100%;background:var(--accent);border-radius:var(--radius-pill);animation:hsk-loader-bar 1.1s ease-in-out infinite}
+.hsk-loading-bar-fill{display:block;width:100%;height:100%;background:var(--accent);border-radius:var(--radius-pill);opacity:.4;animation:hsk-loader-fade 1.6s ease-in-out infinite}
 .hsk-stage-enter{animation:hsk-stage-fade 220ms ease-out}
 @keyframes hsk-loader-spin{to{transform:rotate(360deg)}}
 @keyframes hsk-loader-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-@keyframes hsk-loader-bar{0%{transform:translateX(-100%)}50%{transform:translateX(60%)}100%{transform:translateX(220%)}}
+@keyframes hsk-loader-fade{0%,100%{opacity:.28}50%{opacity:.78}}
 @keyframes hsk-stage-fade{from{opacity:.38}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.hsk-loading-screen,.hsk-loading-card,.hsk-loading-spinner,.hsk-loading-glyph,.hsk-loading-bar-fill,.hsk-stage-enter{animation:none!important;transition:none!important}}
 

@@ -9,7 +9,7 @@ function stopCrop(){cropping=false;stage.classList.remove('selecting');crop.text
 function showData(data){text.value=data.text;output.hidden=false;status.textContent='Đã nhận dạng chữ Trung. Kiểm tra nét chữ trước khi dịch.'+(data.note?' '+data.note:'');}
 
 function buttons(){run.disabled=!config||!image||busy;fastButton.disabled=run.disabled;choose.disabled=camera.disabled=crop.disabled=whole.disabled=busy;cancel.hidden=!busy||!controller;crop.hidden=whole.hidden=!image;}
-function reset(){++serial;controller?.abort();controller=null;busy=false;image=null;source=null;region=null;start=null;box.hidden=true;stopCrop();if(url)URL.revokeObjectURL(url);url=null;preview.removeAttribute('src');preview.hidden=true;remove.hidden=true;output.hidden=true;text.value='';file.value=capture.value='';status.textContent='';buttons();}
+function reset(){++serial;controller?.abort();controller=null;busy=false;image=null;source=null;region=null;start=null;box.hidden=true;stopCrop();if(url)URL.revokeObjectURL(url);url=null;preview.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';preview.hidden=true;remove.hidden=true;output.hidden=true;text.value='';file.value=capture.value='';status.textContent='';buttons();}
 async function pick(event){
  const selected=event.target.files?.[0];if(!selected)return;reset();const id=serial;
  if(selected.size>20*1024*1024){status.textContent='Ảnh quá lớn. Chọn ảnh dưới 20 MB.';return;}
