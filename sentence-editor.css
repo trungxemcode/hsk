@@ -654,7 +654,7 @@ html[data-theme="dark"] #sentenceEditor textarea {
   min-width: 0;
   min-height: 32px;
   height: 32px;
-  max-width: clamp(76px, 24vw, 144px);
+  max-width: clamp(88px, 28vw, 180px);
   padding: 0 10px;
   border: 1px solid var(--se-edge);
   border-radius: var(--radius-pill);
@@ -715,21 +715,75 @@ html[data-theme="dark"] #sentenceEditor textarea {
   display: none;
 }
 
+#sentenceEditor .qa-effort-field,
+#sentenceEditor .qa-effort-strength-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+#sentenceEditor .qa-effort-caption {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--qa-subtle);
+}
+
+#sentenceEditor .qa-effort-strength-value {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--qa-text);
+}
+
 #sentenceEditor .qa-effort-header-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  align-self: center;
+  min-width: 0;
+  max-width: 196px;
   padding: 4px 10px;
-  border: 0;
+  border: 1px solid var(--qa-input-border);
   border-radius: var(--radius-pill);
   background: var(--palette-clear);
   color: var(--qa-text);
   font: inherit;
-  font-size: 14px;
+  font-size: 12.5px;
   font-weight: 700;
   cursor: pointer;
+}
+
+#sentenceEditor .qa-effort-current {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#sentenceEditor .qa-effort-ticks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+#sentenceEditor .qa-effort-tick {
+  border: 0;
+  padding: 2px 4px;
+  border-radius: var(--radius-6px);
+  background: var(--palette-clear);
+  color: var(--qa-subtle);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#sentenceEditor .qa-effort-tick[data-active="true"] {
+  color: var(--qa-text);
+  font-weight: 700;
 }
 
 #sentenceEditor .qa-effort-header-btn:hover,
@@ -992,27 +1046,82 @@ html[data-theme="dark"] #sentenceEditor textarea {
 }
 
 #sentenceEditor .sentence-detector-meter {
-  height: 8px;
+  display: flex;
+  height: 10px;
   width: 100%;
   border-radius: var(--radius-pill);
   background: var(--line);
   overflow: hidden;
 }
 
-#sentenceEditor .sentence-detector-meter-fill {
+#sentenceEditor .sentence-detector-meter-human,
+#sentenceEditor .sentence-detector-meter-ai {
   display: block;
   height: 100%;
-  border-radius: var(--radius-pill);
-  background: var(--se-style);
   transition: width .25s ease;
 }
 
-#sentenceEditor .sentence-detector-meter-fill[data-verdict="human"] {
+#sentenceEditor .sentence-detector-meter-human {
   background: var(--se-green);
 }
 
-#sentenceEditor .sentence-detector-meter-fill[data-verdict="ai"] {
+#sentenceEditor .sentence-detector-meter-ai {
   background: var(--se-fix);
+}
+
+#sentenceEditor .sentence-detector-legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+#sentenceEditor .sentence-detector-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#sentenceEditor .sentence-detector-legend-item::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-round);
+  flex: none;
+}
+
+#sentenceEditor .sentence-detector-legend-item.is-human {
+  color: var(--se-green);
+}
+
+#sentenceEditor .sentence-detector-legend-item.is-human::before {
+  background: var(--se-green);
+}
+
+#sentenceEditor .sentence-detector-legend-item.is-ai {
+  color: var(--se-fix);
+}
+
+#sentenceEditor .sentence-detector-legend-item.is-ai::before {
+  background: var(--se-fix);
+}
+
+#sentenceEditor .sentence-detector-why {
+  padding: 10px 12px;
+  border: 1px solid var(--se-edge);
+  border-radius: var(--radius-10px);
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#sentenceEditor .sentence-detector-why-title {
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--ink);
 }
 
 #sentenceEditor .sentence-detector-meta,
@@ -1131,12 +1240,14 @@ html[data-theme="dark"] #sentenceEditor .sentence-detector {
 }
 
 html[data-theme="dark"] #sentenceEditor .sentence-detector-metric,
+html[data-theme="dark"] #sentenceEditor .sentence-detector-why,
 html[data-theme="dark"] #sentenceEditor .sentence-detector-span {
   background: var(--qa-bg);
   border-color: var(--qa-line);
 }
 
 html[data-theme="dark"] #sentenceEditor .sentence-detector-score,
+html[data-theme="dark"] #sentenceEditor .sentence-detector-why-title,
 html[data-theme="dark"] #sentenceEditor .sentence-detector-summary,
 html[data-theme="dark"] #sentenceEditor .sentence-detector-metric strong,
 html[data-theme="dark"] #sentenceEditor .sentence-detector-spans-title,

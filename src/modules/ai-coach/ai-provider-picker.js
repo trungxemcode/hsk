@@ -37,21 +37,19 @@
     'gemini-2.5-flash':'Gemini 2.5 Flash',
     'gemini-2.5-pro':'Gemini 2.5 Pro',
     'gemini-2.0-flash':'Gemini 2.0 Flash',
-    'gpt-6-luna:low':'Luna (Nhẹ)',
-    'gpt-6-luna:medium':'Luna (Trung bình)',
-    'gpt-6-luna:high':'Luna (Nâng cao)',
-    'gpt-6-luna:xhigh':'Luna (Chuyên sâu)',
     'gpt-6-luna':'Luna (gpt-6-luna)',
     'gpt-6-astra':'Astra (gpt-6-astra)',
-    'gpt-6-astra:low':'Astra (Nhẹ)',
-    'gpt-6-astra:medium':'Astra (Trung bình)',
-    'gpt-6-astra:high':'Astra (Nâng cao)',
-    'gpt-6-astra:xhigh':'Astra (Chuyên sâu)',
     'gpt-6.1-sol':'Sol (gpt-6.1-sol)',
-    'gpt-6.1-sol:low':'Sol (Nhẹ)',
-    'gpt-6.1-sol:medium':'Sol (Trung bình)',
-    'gpt-6.1-sol:high':'Sol (Nâng cao)','muse-spark-fast':'Muse Spark (Nhanh)','muse-spark':'Muse Spark','muse-spark-thinking':'Muse Spark (Suy luận)','muse-wonder':'Muse Wonder'
+    'gemini-3.1-flash-lite':'Gemini 3.1 Lite',
+    'gemini-3.5-flash':'Gemini 3.5 Flash',
+    'gemini-3.8-flash':'Gemini 3.8 Flash',
+    'muse-spark-fast':'Muse Spark (Nhanh)','muse-spark':'Muse Spark','muse-spark-thinking':'Muse Spark (Suy luận)','muse-wonder':'Muse Wonder'
   };
+  const FOSTA_MODELS=[
+    {id:'gpt-6-luna',short:'Luna',label:'Luna (gpt-6-luna)',sub:'Cân bằng, ổn định cho sửa câu & hỏi đáp',hasXhigh:true},
+    {id:'gpt-6.1-sol',short:'Sol',label:'Sol (gpt-6.1-sol)',sub:'Nhanh, tối ưu tốc độ & chi phí',hasXhigh:false},
+    {id:'gpt-6-astra',short:'Astra',label:'Astra (gpt-6-astra)',sub:'Mạnh nhất, phân tích ngữ pháp chuyên sâu',hasXhigh:true}
+  ];
   const DEFAULT_PROVIDER_MODELS={
     fosta:['gpt-6-luna','gpt-6-astra','gpt-6.1-sol'],'muse-cookie':['muse-spark-fast','muse-spark','muse-spark-thinking'],
     deepseek:['deepseek-chat','deepseek-reasoner'],
@@ -67,15 +65,32 @@
   const CARET='<svg class="qa-provider-caret" aria-hidden="true" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg>';
   const cleanUid=value=>String(value||'guest').replace(/[^\w:.-]/g,'_').slice(0,150);
   const storeKey=targetUid=>`hsk-ai-qa-provider-v1:${cleanUid(targetUid)}`;
+  const fostaModelKey=targetUid=>`hsk-ai-fosta-model-v1:${cleanUid(targetUid)}`;
   const cacheKey=targetUid=>`hsk-ai-providers-cache-v1:${cleanUid(targetUid)}`;
   const cipherKey=(targetUid,prov)=>`hsk-personal-ai-cipher-v1:${cleanUid(targetUid)}${prov?':'+prov:''}`;
   const controls=['aiQaThinking','qaProjectThinking','sentenceAiThinking'].map(id=>document.getElementById(id)).filter(Boolean);
   if(!controls.length)return;
-  let uid='guest',selected='auto',unverifiedSelection='',availability=null,openPicker=null,cryptoKeyPromise=null;
+  let uid='guest',selected='auto',selectedFostaModel='',unverifiedSelection='',availability=null,openPicker=null,cryptoKeyPromise=null;
   const picks=[],availabilityCache=new Map(),inflight=new Map(),directKeys=new Map();
 
+  const stripFostaEffort=model=>String(model||'').replace(/:(low|medium|high|xhigh)$/i,'').trim();
+  const isFostaModelId=id=>FOSTA_MODELS.some(m=>m.id===id);
   function readSaved(){try{return localStorage.getItem(storeKey(uid))||'auto';}catch{return 'auto';}}
   function save(){try{localStorage.setItem(storeKey(uid),selected);}catch{}}
+  function readSavedFostaModel(){try{const v=stripFostaEffort(localStorage.getItem(fostaModelKey(uid))||'');return isFostaModelId(v)?v:'';}catch{return '';}}
+  function activeFostaModel(saved){
+    if(isFostaModelId(selectedFostaModel))return selectedFostaModel;
+    const stored=readSavedFostaModel();
+    if(stored){selectedFostaModel=stored;return stored;}
+    const clean=stripFostaEffort(saved);
+    return isFostaModelId(clean)?clean:'gpt-6-luna';
+  }
+  function setFostaModel(nextId){
+    const clean=stripFostaEffort(nextId);
+    if(!isFostaModelId(clean))return;
+    selectedFostaModel=clean;
+    try{localStorage.setItem(fostaModelKey(uid),clean);}catch{}
+  }
   function validAvailability(data){return Boolean(data&&typeof data==='object'&&data.system&&data.personal);}
   function readCachedAvailability(targetUid){
     const key=cleanUid(targetUid),mem=availabilityCache.get(key);
@@ -238,34 +253,17 @@
       ];
     }
     if(kind==='fosta'){
-      const base=savedModel||'gpt-6-luna';
-      if(base.startsWith('gpt-6-astra')){
-        return [
-          {value:'low',label:'Astra (Nhẹ)',model:'gpt-6-astra:low',tier:'low'},
-          {value:'medium',label:'Astra (Trung bình)',model:'gpt-6-astra:medium',tier:'medium'},
-          {value:'high',label:'Astra (Nâng cao)',model:'gpt-6-astra:high',tier:'high'},
-          {value:'xhigh',label:'Astra (Chuyên sâu)',model:'gpt-6-astra:xhigh',tier:'high'},
-          {value:'model:gpt-6-luna',label:'Luna (gpt-6-luna)',model:'gpt-6-luna',tier:'low'},
-          {value:'model:gpt-6.1-sol',label:'Sol (gpt-6.1-sol)',model:'gpt-6.1-sol',tier:'medium'}
-        ];
-      }
-      if(base.startsWith('gpt-6.1-sol')||base.startsWith('gpt-6-sol')){
-        return [
-          {value:'low',label:'Sol (Nhẹ)',model:'gpt-6.1-sol:low',tier:'low'},
-          {value:'medium',label:'Sol (Trung bình)',model:'gpt-6.1-sol:medium',tier:'medium'},
-          {value:'high',label:'Sol (Nâng cao)',model:'gpt-6.1-sol:high',tier:'high'},
-          {value:'model:gpt-6-luna',label:'Luna (gpt-6-luna)',model:'gpt-6-luna',tier:'low'},
-          {value:'model:gpt-6-astra',label:'Astra (gpt-6-astra)',model:'gpt-6-astra',tier:'high'}
-        ];
-      }
-      return [
-        {value:'low',label:'Luna (Nhẹ)',model:'gpt-6-luna:low',tier:'low'},
-        {value:'medium',label:'Luna (Trung bình)',model:'gpt-6-luna:medium',tier:'medium'},
-        {value:'high',label:'Luna (Nâng cao)',model:'gpt-6-luna:high',tier:'high'},
-        {value:'xhigh',label:'Luna (Chuyên sâu)',model:'gpt-6-luna:xhigh',tier:'high'},
-        {value:'model:gpt-6.1-sol',label:'Sol (gpt-6.1-sol)',model:'gpt-6.1-sol',tier:'medium'},
-        {value:'model:gpt-6-astra',label:'Astra (gpt-6-astra)',model:'gpt-6-astra',tier:'high'}
+      const base=activeFostaModel(savedModel);
+      const modelMeta=FOSTA_MODELS.find(m=>m.id===base)||FOSTA_MODELS[0];
+      const tiers=[
+        {value:'low',label:'Nhẹ',model:`${base}:low`,tier:'low'},
+        {value:'medium',label:'Trung bình',model:`${base}:medium`,tier:'medium'},
+        {value:'high',label:'Nâng cao',model:`${base}:high`,tier:'high'}
       ];
+      if(modelMeta.hasXhigh){
+        tiers.push({value:'xhigh',label:'Chuyên sâu',model:`${base}:xhigh`,tier:'high'});
+      }
+      return tiers;
     }
     if(kind==='chatgpt-cookie'){
       const isPlus=p?.planType?p.planType!=='free':['gpt-6','gpt-6-instant','gpt-6-thinking','gpt-5-6','gpt-4o','gpt-4-1','o4-mini'].includes(savedModel);
@@ -336,13 +334,20 @@
       gemini:'Gemini (API riêng)'
     };
     const options=buildProviderModelOptions(kind,provData);
+    const saved=provData&&typeof provData.model==='string'?provData.model.trim():'';
+    const activeModel=kind==='fosta'?activeFostaModel(saved):'';
+    const activeModelMeta=kind==='fosta'?(FOSTA_MODELS.find(m=>m.id===activeModel)||FOSTA_MODELS[0]):null;
     return {
       kind,
       label:labelMap[kind]||'AI',
       isPersonal,
       explicitNonSystemGemini,
       planType:kind==='chatgpt-cookie'?(isPlusCookie?'plus':'free'):null,
-      savedModel:provData&&typeof provData.model==='string'?provData.model.trim():'',
+      savedModel:saved,
+      independentEffort:kind==='fosta',
+      activeModel,
+      activeModelMeta,
+      models:kind==='fosta'?FOSTA_MODELS:null,
       options
     };
   }
@@ -451,24 +456,43 @@
       control.dispatchEvent(new Event('change',{bubbles:true}));
     }
     function renderPopover(){
+      const info=activeProviderInfo();
       const opts=getOpts();
       const activeIdx=Math.max(0,opts.findIndex(o=>o.value===control.value));
       const activeOpt=opts[activeIdx]||{label:'Thấp',textContent:'Thấp',value:'low'};
       const maxIdx=Math.max(1,opts.length-1);
-      const pct=opts.length>1?(activeIdx/maxIdx)*100:100;
       menu.textContent='';
       if(view==='models'){
         const list=document.createElement('div');list.className='qa-effort-model-list';list.setAttribute('role','menu');
+        if(info.independentEffort&&Array.isArray(info.models)){
+          for(const m of info.models){
+            const checked=m.id===info.activeModel;
+            const row=document.createElement('button');row.type='button';row.className='qa-effort-model-item';
+            row.setAttribute('role','menuitemradio');row.setAttribute('aria-checked',String(checked));
+            row.dataset.value=m.id;
+            const text=document.createElement('span');text.className='qa-effort-model-text';
+            const name=document.createElement('b');name.textContent=m.label;
+            text.append(name);
+            if(m.sub){const sub=document.createElement('small');sub.textContent=m.sub;text.append(sub);}
+            row.append(text);
+            if(checked)row.insertAdjacentHTML('beforeend','<svg class="qa-provider-check" aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>');
+            row.addEventListener('click',()=>{setFostaModel(m.id);renderAll();closeAll();button.focus();});
+            list.append(row);
+          }
+          menu.append(list);
+          return;
+        }
         for(let i=0;i<opts.length;i++){
           const opt=opts[i],checked=i===activeIdx;
           const row=document.createElement('button');row.type='button';row.className='qa-effort-model-item';
           row.setAttribute('role','menuitemradio');row.setAttribute('aria-checked',String(checked));
           row.dataset.value=opt.value;
           const text=document.createElement('span');text.className='qa-effort-model-text';
-          const name=document.createElement('b');name.textContent=opt.textContent;
-          text.append(name);
           const modelId=opt.dataset?.model||'';
-          if(modelId&&modelId!==opt.textContent){const sub=document.createElement('small');sub.textContent=modelId;text.append(sub);}
+          const niceLabel=MODEL_LABELS[modelId]||opt.textContent;
+          const name=document.createElement('b');name.textContent=niceLabel;
+          text.append(name);
+          if(modelId&&modelId!==niceLabel){const sub=document.createElement('small');sub.textContent=modelId;text.append(sub);}
           row.append(text);
           if(checked)row.insertAdjacentHTML('beforeend','<svg class="qa-provider-check" aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>');
           row.addEventListener('click',()=>{selectIndex(i);closeAll();button.focus();});
@@ -477,9 +501,21 @@
         menu.append(list);
         return;
       }
+      const modelDisplayFor=opt=>info.independentEffort?(info.activeModelMeta?.label||info.activeModel||'Model'):
+        (MODEL_LABELS[opt?.dataset?.model]||opt?.dataset?.model||opt?.textContent||'Mặc định');
+      const strengthNameFor=(opt,idx)=>{
+        if(info.independentEffort||info.kind==='system-gemini'||info.kind==='system-chatgpt'||(info.kind==='chatgpt-cookie'&&info.planType==='free')){
+          return opt?.textContent||'Thấp';
+        }
+        const tier=opt?.dataset?.tier;
+        const base=tier==='high'?'Cao':tier==='medium'?'Trung bình':'Nhẹ';
+        return opts.length<=3?base:`${base} (${idx+1}/${opts.length})`;
+      };
+      const modelField=document.createElement('div');modelField.className='qa-effort-field';
+      const modelCaption=document.createElement('span');modelCaption.className='qa-effort-caption';modelCaption.textContent='Model';
       const headBtn=document.createElement('button');headBtn.type='button';headBtn.className='qa-effort-header-btn';
-      headBtn.title='Nhấn để xem và chọn danh sách model';
-      const headText=document.createElement('span');headText.className='qa-effort-current';headText.textContent=activeOpt.textContent;
+      headBtn.title='Nhấn để chọn model';
+      const headText=document.createElement('span');headText.className='qa-effort-current';headText.textContent=modelDisplayFor(activeOpt);
       headBtn.append(headText);
       headBtn.insertAdjacentHTML('beforeend','<svg class="qa-effort-chevron" aria-hidden="true" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg>');
       headBtn.addEventListener('click',()=>{
@@ -488,6 +524,13 @@
         place();
         (menu.querySelector('[aria-checked="true"]')||menu.querySelector('.qa-effort-model-item'))?.focus();
       });
+      modelField.append(modelCaption,headBtn);
+
+      const strengthHead=document.createElement('div');strengthHead.className='qa-effort-strength-head';
+      const strengthCaption=document.createElement('span');strengthCaption.className='qa-effort-caption';strengthCaption.textContent='Mức độ mạnh';
+      const strengthValue=document.createElement('strong');strengthValue.className='qa-effort-strength-value';strengthValue.textContent=strengthNameFor(activeOpt,activeIdx);
+      strengthHead.append(strengthCaption,strengthValue);
+
       const sliderWrap=document.createElement('div');sliderWrap.className='qa-effort-slider-wrap';
       sliderWrap.setAttribute('role','slider');
       sliderWrap.tabIndex=control.disabled?-1:0;
@@ -506,15 +549,18 @@
       const dotCount=Math.max(1,opts.length);
       for(let i=0;i<dotCount;i++){const dot=document.createElement('span');dot.className='qa-effort-dot';if(i<=activeIdx)dot.dataset.active='true';dots.append(dot);}
       const thumb=document.createElement('div');thumb.className='qa-effort-thumb';thumb.setAttribute('aria-hidden','true');
+      let ticks=null;
       let lastIdx=activeIdx;
       function applyVisual(pos,idx){
         sliderWrap.style.setProperty('--qa-effort-pos',String(pos));
         sliderWrap.setAttribute('aria-valuenow',String(idx));
         if(opts[idx]){
           sliderWrap.setAttribute('aria-valuetext',opts[idx].textContent);
-          headText.textContent=opts[idx].textContent;
+          strengthValue.textContent=strengthNameFor(opts[idx],idx);
+          if(!info.independentEffort)headText.textContent=modelDisplayFor(opts[idx]);
         }
         dots.querySelectorAll('.qa-effort-dot').forEach((d,i)=>{d.dataset.active=i<=idx?'true':'false';});
+        ticks?.querySelectorAll('.qa-effort-tick').forEach((t,i)=>{t.dataset.active=i===idx?'true':'false';});
         if(idx!==lastIdx){lastIdx=idx;selectIndex(idx);}
       }
       function posFromClientX(clientX){
@@ -558,7 +604,20 @@
         applyVisual(next/maxIdx,next);
       });
       sliderWrap.append(track,dots,thumb);
-      menu.append(headBtn,sliderWrap);
+      if(info.independentEffort||opts.length<=4){
+        ticks=document.createElement('div');ticks.className='qa-effort-ticks';
+        opts.forEach((opt,i)=>{
+          const tick=document.createElement('button');tick.type='button';tick.className='qa-effort-tick';
+          tick.dataset.active=String(i===activeIdx);
+          tick.textContent=opt.textContent;
+          if(control.disabled||opts.length<=1)tick.disabled=true;
+          tick.addEventListener('click',()=>{if(!control.disabled&&opts.length>1)applyVisual(i/maxIdx,i);});
+          ticks.append(tick);
+        });
+        menu.append(modelField,strengthHead,sliderWrap,ticks);
+      }else{
+        menu.append(modelField,strengthHead,sliderWrap);
+      }
     }
     function open(){
       if(control.disabled)return;
@@ -573,9 +632,11 @@
     }
     function close(){isDragging=false;menu.hidden=true;button.setAttribute('aria-expanded','false');}
     const api={close,render(){
+      const info=activeProviderInfo();
       const opts=getOpts();
       const activeOpt=opts.find(o=>o.value===control.value)||opts[0];
-      const text=activeOpt?.textContent||'Thấp';
+      const strengthText=activeOpt?.textContent||'Thấp';
+      const text=info.independentEffort&&info.activeModelMeta?`${info.activeModelMeta.short} · ${strengthText}`:strengthText;
       label.textContent=text;
       button.disabled=control.disabled;
       const aria=control.getAttribute('aria-label')||'Mức suy nghĩ của AI';
@@ -676,7 +737,7 @@
 
   async function refresh(user,config,options={}){
     const nextUid=user?.uid||'guest';
-    if(nextUid!==uid){uid=nextUid;selected=readSaved();availability=readCachedAvailability(nextUid);}
+    if(nextUid!==uid){uid=nextUid;selected=readSaved();selectedFostaModel=readSavedFostaModel();availability=readCachedAvailability(nextUid);}
     else{
       if(!selected)selected=readSaved();
       if(!availability)availability=readCachedAvailability(nextUid);
@@ -735,7 +796,7 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
     const cred=await loadDirectCred(targetUid,info?.kind);
     if(!cred||!cred.enabled||!cred.apiKey||!Object.hasOwn(DIRECT_ENDPOINTS,cred.provider))return null;
     const matchedOpt=info?.options?.find(o=>o.value===thinking||o.model===aiModel);
-    const chosenModel=(aiModel&&(cred.provider!=='fosta'||['gpt-6.1-sol','gpt-6-astra','gpt-6-luna'].includes(aiModel)))?aiModel:
+    const chosenModel=(aiModel&&(cred.provider!=='fosta'||/^(?:gpt-6\.1-sol|gpt-6-astra|gpt-6-luna)(?::(?:low|medium|high|xhigh))?$/i.test(aiModel)))?aiModel:
       matchedOpt?.model||cred.model;
     const instruction=buildDirectPrompt({
       hsk,snapshot:lesson?.content?.learning_snapshot,intentInfo:lesson?.content?.intentInfo,
@@ -808,6 +869,7 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
     activeProviderInfo,
     getActiveAiParams,
     _buildOptions:buildProviderModelOptions,
+    setFostaModel(id){setFostaModel(id);renderAll();},
     selectedId(){normalizeSelection();return selected||'auto';},
     setSelectionFromSelect(id){
       const next=typeof id==='string'&&id.trim()?id.trim():'auto';

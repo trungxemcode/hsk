@@ -736,7 +736,14 @@ html body.studio-enabled #aiQaPanel .qa-chat-composer :is(.qa-chat-attach,#aiQaS
 #aiQaPanel .qa-effort-btn .qa-provider-caret{flex:none;width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 #aiQaPanel .qa-effort-popover{position:fixed;z-index:82;box-sizing:border-box;overflow-y:auto;overscroll-behavior-y:contain;padding:12px 14px;border:1px solid var(--qa-input-border);border-radius:var(--radius-16px);background:var(--qa-surface);color:var(--qa-text);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;}
 #aiQaPanel .qa-effort-popover[hidden]{display:none;}
-#aiQaPanel .qa-effort-header-btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;align-self:center;padding:4px 10px;border:0;border-radius:var(--radius-pill);background:var(--palette-clear);color:var(--qa-text);font:inherit;font-size:14px;font-weight:700;cursor:pointer;}
+#aiQaPanel .qa-effort-field,#aiQaPanel .qa-effort-strength-head{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+#aiQaPanel .qa-effort-caption{font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--qa-subtle);}
+#aiQaPanel .qa-effort-strength-value{font-size:12px;font-weight:700;color:var(--qa-text);}
+#aiQaPanel .qa-effort-header-btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:0;max-width:196px;padding:4px 10px;border:1px solid var(--qa-input-border);border-radius:var(--radius-pill);background:var(--palette-clear);color:var(--qa-text);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;}
+#aiQaPanel .qa-effort-current{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+#aiQaPanel .qa-effort-ticks{display:flex;align-items:center;justify-content:space-between;gap:4px;}
+#aiQaPanel .qa-effort-tick{border:0;padding:2px 4px;border-radius:var(--radius-6px);background:var(--palette-clear);color:var(--qa-subtle);font:inherit;font-size:11px;font-weight:600;cursor:pointer;}
+#aiQaPanel .qa-effort-tick[data-active="true"]{color:var(--qa-text);font-weight:700;}
 #aiQaPanel .qa-effort-header-btn:hover,#aiQaPanel .qa-effort-header-btn:focus-visible{background:var(--qa-input-border);}
 #aiQaPanel .qa-effort-chevron{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.72;}
 #aiQaPanel .qa-effort-slider-wrap{position:relative;height:28px;display:flex;align-items:center;cursor:pointer;touch-action:none;user-select:none;border-radius:var(--radius-pill);}

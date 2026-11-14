@@ -54,7 +54,7 @@
   }else{
    const availableValues=Array.from(thinkingControls[0]?.options||[]).map(opt=>opt.value);
    if(!availableValues.includes(thinking)){
-    thinking=thinking==='medium'&&availableValues.includes('high')?'high':(availableValues[0]||'low');
+    thinking=(thinking==='medium'||thinking==='xhigh')&&availableValues.includes('high')?'high':(availableValues[0]||'low');
    }
   }
   for(const control of thinkingControls){
