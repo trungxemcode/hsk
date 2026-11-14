@@ -338,11 +338,20 @@ html body.studio-enabled #podcastPanel button.podcast-cue-ts:focus-visible {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
+  overflow: clip;
   background: var(--mb-rd-canvas);
   border-bottom: 1px solid var(--line);
 }
 
-.podcast-yt-host,
+.podcast-yt-host {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -64px;
+  height: calc(100% + 128px);
+  z-index: 1;
+}
+
 .podcast-yt-host iframe {
   position: absolute;
   inset: 0;
@@ -405,7 +414,7 @@ html body.studio-enabled #podcastPanel button.podcast-video-tap {
   max-width: 90%;
 }
 
-/* Clean Bottom Subtitle Mask Overlay */
+/* Clean Bottom Subtitle Mask Overlay (White Card + Crisp Dark Text) */
 .podcast-sub-mask {
   position: absolute;
   left: 2%;
@@ -419,16 +428,21 @@ html body.studio-enabled #podcastPanel button.podcast-video-tap {
   flex-direction: column;
   justify-content: center;
   gap: 3px;
-  border: 1px solid var(--mb-rd-glass-line);
+  border: 1px solid var(--palette-line-strong);
+  box-shadow: var(--rd-shadow-md);
+  color: var(--palette-ink-strong);
+  user-select: text;
+  -webkit-user-select: text;
+  cursor: text;
   transition: bottom .12s ease, min-height .12s ease, background .18s ease;
 }
 
 .podcast-sub-mask.is-solid {
-  background: var(--mb-rd-glass-solid);
+  background: var(--palette-white);
 }
 
 .podcast-sub-mask.is-blur {
-  background: var(--mb-rd-glass);
+  background: color-mix(in srgb, var(--palette-white) 88%, var(--palette-clear));
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
@@ -438,36 +452,38 @@ html body.studio-enabled #podcastPanel button.podcast-video-tap {
   flex-direction: column;
   gap: 3px;
   text-align: center;
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 .podcast-mask-zh {
   font-size: clamp(14px, 1.35vw, 17px);
   font-weight: 650;
-  color: var(--mb-rd-on-hero);
+  color: var(--palette-ink-strong);
   line-height: 1.38;
 }
 
 .podcast-mask-pinyin {
   font-size: clamp(11.5px, 1.1vw, 13px);
-  color: var(--mb-rd-on-hero-2);
+  color: var(--palette-ink);
 }
 
 .podcast-mask-vi {
   font-size: clamp(13px, 1.3vw, 15.5px);
   font-weight: 600;
-  color: var(--mb-rd-playing);
+  color: var(--palette-violet-deep);
   line-height: 1.38;
 }
 
 .podcast-mask-en {
   font-size: 11.5px;
-  color: var(--mb-rd-on-hero-3);
+  color: var(--palette-sub);
 }
 
 .podcast-mask-empty {
   margin: 0;
   font-size: 13px;
-  color: var(--mb-rd-on-hero-2);
+  color: var(--palette-sub);
 }
 
 /* Integrated Controls Deck */
@@ -1030,6 +1046,8 @@ html body.studio-enabled #podcastPanel button.podcast-cue-speak:hover {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 .podcast-cue-zh {
@@ -1056,28 +1074,49 @@ html body.studio-enabled #podcastPanel button.podcast-cue-speak:hover {
   color: var(--muted);
 }
 
-/* Clickable Chinese tokens inside both Video Mask & Transcript */
-html body.studio-enabled #podcastPanel button.podcast-word-token {
-  display: inline !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
-  padding: 0 2px !important;
-  margin: 0 !important;
-  border: 0 !important;
-  border-bottom: 1px dashed var(--palette-clear) !important;
-  border-radius: var(--rd-r-xs) !important;
-  background: var(--palette-clear) !important;
-  color: inherit !important;
-  font: inherit !important;
-  line-height: inherit !important;
-  box-shadow: none !important;
-  cursor: pointer;
+/* Clickable + Selectable Chinese tokens & Word-style purple highlighter marker */
+#podcastPanel .podcast-transcript-list {
+  user-select: text;
+  -webkit-user-select: text;
 }
 
-html body.studio-enabled #podcastPanel button.podcast-word-token.is-dict:hover,
-html body.studio-enabled #podcastPanel button.podcast-word-token:hover {
-  background: color-mix(in srgb, var(--accent) 22%, var(--palette-clear)) !important;
-  border-bottom-color: var(--accent) !important;
+#podcastPanel .podcast-sub-mask ::selection,
+#podcastPanel .podcast-sub-mask::selection,
+#podcastPanel .podcast-transcript-list ::selection,
+#podcastPanel .podcast-transcript-list::selection,
+#podcastPanel .podcast-word-token::selection {
+  background: color-mix(in srgb, var(--accent) 32%, var(--palette-clear));
+  color: inherit;
+}
+
+#podcastPanel .podcast-word-token {
+  display: inline;
+  padding: 0 2px;
+  margin: 0;
+  border: 0;
+  border-bottom: 1.5px dotted var(--palette-clear);
+  border-radius: var(--radius-4px);
+  background: var(--palette-clear);
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  box-shadow: none;
+  user-select: text;
+  -webkit-user-select: text;
+  cursor: pointer;
+  transition: background .12s ease, border-color .12s ease;
+}
+
+#podcastPanel .podcast-word-token.is-dict:hover,
+#podcastPanel .podcast-word-token:hover {
+  background: color-mix(in srgb, var(--accent) 16%, var(--palette-clear));
+  border-bottom-color: var(--accent);
+  color: inherit;
+}
+
+#podcastPanel .podcast-word-token:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 
 /* Episode Library Section (below stage) */
@@ -1261,6 +1300,15 @@ html body.studio-enabled #podcastPanel button.podcast-shelf-nav[disabled] {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   padding: 2px 2px 8px;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.podcast-ep-list.podcast-ep-shelf.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  scroll-snap-type: none;
 }
 
 .podcast-ep-card {
@@ -1310,6 +1358,10 @@ html body.studio-enabled #podcastPanel button.podcast-shelf-nav[disabled] {
   height: 100%;
   object-fit: cover;
   display: block;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
 }
 
 .podcast-ep-thumb-fallback {
@@ -1512,6 +1564,10 @@ html[data-theme="dark"] body.studio-enabled #podcastPanel button.podcast-channel
 }
 
 @media (max-width: 600px) {
+  .podcast-yt-host {
+    top: -54px;
+    height: calc(100% + 108px);
+  }
   .podcast-ep-card {
     flex: 0 0 212px;
   }

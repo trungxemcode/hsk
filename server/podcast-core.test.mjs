@@ -86,10 +86,12 @@ test('HSKPodcastCore segments Chinese tokens, locates active cues, and enriches 
   assert.ok(hanWords.includes('早饭'));
 
   const cues = podcastCore.STARTER_EPISODES[0].cues;
+  assert.ok(cues.length >= 140);
   assert.equal(podcastCore.findActiveCueIndex(cues, 0), 0);
   assert.equal(podcastCore.findActiveCueIndex(cues, 14), 1);
   assert.equal(podcastCore.findActiveCueIndex(cues, 18), 2);
-  assert.equal(podcastCore.findActiveCueIndex(cues, 999), -1);
+  assert.ok(podcastCore.findActiveCueIndex(cues, 999) >= 0);
+  assert.equal(podcastCore.findActiveCueIndex(cues, 5000), -1);
 
   const local = podcastCore.enrichCuesLocal([{ start: 0, end: 4, en: 'Drink coffee for breakfast' }], { wordsList: dict });
   assert.match(local[0].vi, /Drink coffee/);

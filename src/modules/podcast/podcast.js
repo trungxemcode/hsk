@@ -529,7 +529,7 @@
   const timeLabelEl = el('span', { id: 'podcastTimeLabel', className: 'podcast-time-label' }, '0:00 / 0:40');
 
   const toggleMaskBtn = el('button', { type: 'button', id: 'podcastToggleMaskBtn', className: 'podcast-layer-btn' }, 'Che sub: Bật');
-  const maskStyleBtn = el('button', { type: 'button', id: 'podcastMaskStyleBtn', className: 'podcast-layer-btn' }, 'Đặc tối');
+  const maskStyleBtn = el('button', { type: 'button', id: 'podcastMaskStyleBtn', className: 'podcast-layer-btn' }, 'Nền trắng');
   const toggleZhBtn = el('button', { type: 'button', id: 'podcastToggleZhBtn', className: 'podcast-layer-btn' }, 'Chữ Hán');
   const togglePinBtn = el('button', { type: 'button', id: 'podcastTogglePinBtn', className: 'podcast-layer-btn' }, 'Pinyin');
   const toggleViBtn = el('button', { type: 'button', id: 'podcastToggleViBtn', className: 'podcast-layer-btn' }, 'Tiếng Việt');
@@ -678,7 +678,7 @@
     toggleMaskBtn.textContent = `Che sub: ${p.maskEnabled ? 'Bật' : 'Tắt'}`;
     toggleMaskBtn.classList.toggle('is-active', p.maskEnabled);
 
-    maskStyleBtn.textContent = p.maskStyle === 'solid' ? 'Đặc tối' : 'Mờ kính';
+    maskStyleBtn.textContent = p.maskStyle === 'solid' ? 'Nền trắng' : 'Mờ kính';
     maskStyleBtn.classList.toggle('is-active', p.maskStyle === 'solid');
 
     toggleZhBtn.classList.toggle('is-active', p.showZh);
@@ -706,6 +706,8 @@
     else maskHintEl.textContent = 'Chế độ nghe thuần Hán · Pinyin';
   }
 
+  let suppressCardClickUntil = 0;
+
   function renderTokenizedChinese(container, text, exampleSentence) {
     const tokens = core.segmentChineseLine(text, window.words);
     if (!tokens.length) {
@@ -716,19 +718,29 @@
       if (!tok.isHan) {
         container.append(document.createTextNode(tok.text));
       } else {
-        const btn = el(
-          'button',
+        const tokenEl = el(
+          'span',
           {
-            type: 'button',
+            role: 'button',
+            tabindex: '0',
             className: `podcast-word-token${tok.entry ? ' is-dict' : ''}`,
             onClick: (ev) => {
               ev.stopPropagation();
+              const selectedText = window.getSelection?.()?.toString?.()?.trim?.();
+              if (selectedText) return;
               openWordPopover(tok, exampleSentence);
+            },
+            onKeydown: (ev) => {
+              if (ev.key === 'Enter' || ev.key === ' ') {
+                ev.preventDefault();
+                ev.stopPropagation();
+                openWordPopover(tok, exampleSentence);
+              }
             }
           },
           tok.text
         );
-        container.append(btn);
+        container.append(tokenEl);
       }
     }
   }
@@ -916,7 +928,10 @@
         {
           className: `podcast-cue-item${isActive ? ' is-active' : ''}`,
           dataset: { cueIdx: String(i) },
-          onClick: () => seekTo(cue.start, true)
+          onClick: () => {
+            if (window.getSelection?.()?.toString?.()?.trim?.()) return;
+            seekTo(cue.start, true);
+          }
         },
         el('div', { className: 'podcast-cue-side' }, tsBtn, speakControl),
         body
@@ -1156,7 +1171,10 @@
           tabindex: '0',
           className: `podcast-ep-card${active ? ' is-active' : ''}`,
           dataset: { epId: ep.id },
-          onClick: () => selectEpisode(ep.id),
+          onClick: () => {
+            if (Date.now() < suppressCardClickUntil) return;
+            selectEpisode(ep.id);
+          },
           onKeydown: (ev) => {
             if (ev.key === 'Enter' || ev.key === ' ') {
               ev.preventDefault();
@@ -1478,8 +1496,8 @@
     const cachedFull = ep.youtubeId && !ep.isCustom ? loadJsonStorage(`${CUES_CACHE_PREFIX}${ep.youtubeId}`, null) : null;
     const baseCues = Array.isArray(cachedFull) && cachedFull.length > (ep.cues || []).length ? cachedFull : (ep.cues || []);
     state.cues = core.enrichCuesLocal(baseCues, { simplify: true });
-    state.captionStatus = Array.isArray(cachedFull) && cachedFull.length > 10
-      ? `✓ Đã nạp trọn bộ ${state.cues.length} câu phụ đề song ngữ từ YouTube.`
+    state.captionStatus = state.cues.length > 15
+      ? `✓ Đã nạp trọn bộ ${state.cues.length} câu phụ đề song ngữ.`
       : '';
     const lastCueEnd = state.cues.length ? state.cues[state.cues.length - 1].end : 36;
     state.durationSec = Math.max(ep.durationSec || 0, lastCueEnd || 36);
@@ -1903,6 +1921,46 @@
   });
 
   episodeStripEl.addEventListener('scroll', syncShelfNavState, { passive: true });
+  episodeStripEl.addEventListener('dragstart', (ev) => ev.preventDefault());
+
+  let shelfDrag = null;
+  episodeStripEl.addEventListener('pointerdown', (ev) => {
+    if (ev.pointerType !== 'mouse' || ev.button !== 0) return;
+    if (ev.target?.closest?.('.podcast-ep-del')) return;
+    shelfDrag = {
+      pointerId: ev.pointerId,
+      startX: ev.clientX,
+      startScrollLeft: episodeStripEl.scrollLeft,
+      moved: false
+    };
+  });
+
+  window.addEventListener('pointermove', (ev) => {
+    if (!shelfDrag || ev.pointerId !== shelfDrag.pointerId) return;
+    const dx = ev.clientX - shelfDrag.startX;
+    if (!shelfDrag.moved && Math.abs(dx) > 5) {
+      shelfDrag.moved = true;
+      episodeStripEl.classList.add('is-dragging');
+    }
+    if (shelfDrag.moved) {
+      episodeStripEl.scrollLeft = shelfDrag.startScrollLeft - dx;
+      syncShelfNavState();
+    }
+  });
+
+  function endShelfDrag(ev) {
+    if (!shelfDrag || (ev && ev.pointerId !== shelfDrag.pointerId)) return;
+    const didMove = shelfDrag.moved;
+    shelfDrag = null;
+    episodeStripEl.classList.remove('is-dragging');
+    if (didMove) {
+      suppressCardClickUntil = Date.now() + 220;
+      syncShelfNavState();
+    }
+  }
+
+  window.addEventListener('pointerup', endShelfDrag);
+  window.addEventListener('pointercancel', endShelfDrag);
   window.addEventListener('resize', syncShelfNavState);
 
   autoScrollBtn.addEventListener('click', () => {
