@@ -5,7 +5,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
  try{for(const width of [320,390,1440]){
  const page=await browser.newPage({viewport:{width,height:900},serviceWorkers:'block'});await page.route('https://**/*',r=>r.abort());await page.goto('http://127.0.0.1:'+server.address().port+'/index.html',{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.HSKStudio&&window.HSKMobileUX&&window.HSKPracticeSelection&&window.HSKLessons);
  const read=await page.evaluate(()=>{const mapping=root=>[...root.querySelectorAll('.nav-group')].map(g=>({name:g.querySelector('summary').textContent.trim(),routes:[...g.querySelectorAll('[data-studio-go]')].map(b=>b.dataset.studioGo)}));return {pc:mapping(document.querySelector('.side-nav')),phone:mapping(document.querySelector('.drawer-route-nav'))};});
- assert.deepEqual(read.phone,read.pc);assert.deepEqual(read.pc.map(x=>x.routes),[['lessons','learn'],['practice','notebook'],['real-reading','music-play'],['search','ai-qa','sentence-editor'],['exam','study4']]);
+ assert.deepEqual(read.phone,read.pc);assert.deepEqual(read.pc.map(x=>x.routes),[['lessons','learn'],['practice','notebook'],['real-reading','music-play','podcast'],['search','ai-qa','sentence-editor'],['exam','study4']]);
  const root=width<721?'#drawer .drawer-route-nav':'.side-nav';
  async function enter(route){
   await page.evaluate(()=>HSKStudio.navigate('home'));if(width<721)await page.locator('#menuBtn').click();
@@ -14,7 +14,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   else{await d.locator('summary').click();const fly=page.locator('.nav-flyout-side:not([hidden])');await fly.waitFor({state:'visible'});await fly.locator('[data-studio-go="'+route+'"]').click();}
   assert.equal(await b.getAttribute('aria-current'),'page',route+' parent selected');if(width<721)assert.equal(await page.locator('#drawer').getAttribute('aria-hidden'),'true');
  }
- for(const [route,id] of [['lessons','lessonsPanel'],['learn','learnPanel'],['practice','studioPractice'],['notebook','notebookPanel'],['real-reading','realReadingPanel'],['search','searchPanel'],['exam','examPractice'],['study4','study4PracticePanel']]){
+ for(const [route,id] of [['lessons','lessonsPanel'],['learn','learnPanel'],['practice','studioPractice'],['notebook','notebookPanel'],['real-reading','realReadingPanel'],['podcast','podcastPanel'],['search','searchPanel'],['exam','examPractice'],['study4','study4PracticePanel']]){
   await enter(route);if(route==='exam')assert.equal(await page.locator('[data-studio-hub-panel=exam]').isVisible(),true);else assert.equal(await page.locator('#'+id).isVisible(),true,route);
  }
  for(const [mode,prefix,selector] of [['quiz','practice','#quizPanel'],['srs','review','#srsPanel'],['writing','practice','#writingPractice'],['placement','practice','#placementDialog']]){

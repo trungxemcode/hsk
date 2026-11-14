@@ -226,10 +226,16 @@
   skillSelect.disabled=!item.parts?.length;
   kindSelect.disabled=!item.parts?.length;
  }
+ function adminExams(){return window.HSKResourceSync?.getManifest?.()?.exams||[];}
+ function findAdminExam(t){const id=String(t?.id||'');return adminExams().find(x=>String(x.id)===id)||null;}
  function currentTestList(){return testsByLevel[Number(level.value)]||[];}
  function matchingTests(){
   const term=testSearch.value.trim().toLocaleLowerCase('vi');
-  return currentTestList().filter(t=>!term||String(t.title).toLocaleLowerCase('vi').includes(term)||String(t.id).includes(term));
+  return currentTestList().filter(t=>{
+   const rule=findAdminExam(t);
+   if(rule&&rule.access==='hidden')return false;
+   return !term||String(t.title).toLocaleLowerCase('vi').includes(term)||String(t.id).includes(term);
+  });
  }
  function renderPicker(){
   const items=matchingTests(),pages=Math.max(1,Math.ceil(items.length/PICKER_PAGE_SIZE));
@@ -311,6 +317,14 @@
  }
 
  function startExam(item,mode){
+  const rule=findAdminExam(item);
+  if(rule){
+   const check=window.HSKResourceSync?.checkItemAccess?.(rule);
+   if(check&&!check.allowed){
+    window.HSKResourceSync.notifyBlocked(check,rule.title||item.title||'Bộ đề này');
+    return;
+   }
+  }
   const full=testsById.get(String(item.id))||item;
   if(!full.parts||!full.parts.length){
    if(!dataReady&&!dataError){
@@ -980,6 +994,28 @@
 
   card.append(eyebrow,title,meta,details,link);
   results.append(card);
+  const customExtras=adminExams().filter(x=>x&&x.url&&x.provider!=='study4'&&x.access!=='hidden'&&Number(x.level)===Number(level.value));
+  if(customExtras.length){
+   const extraBox=el('section',null,'admin-resource-box');
+   extraBox.id='adminExtraExamsBox';
+   extraBox.append(el('h3','Bộ đề bổ sung từ Quản trị viên','admin-resource-heading'));
+   const extraList=el('div',null,'admin-resource-list');
+   for(const ex of customExtras){
+    const gate=window.HSKResourceSync?.checkItemAccess?.(ex);
+    const a=document.createElement('a');
+    a.className='admin-resource-item'+(gate&&!gate.allowed?' is-vip-locked':'');
+    a.href=gate&&!gate.allowed?'#vip-locked':ex.url;
+    if(!gate||gate.allowed){a.target='_blank';a.rel='noopener noreferrer';}
+    else a.addEventListener('click',ev=>{ev.preventDefault();window.HSKResourceSync.notifyBlocked(gate,ex.title);});
+    const cp=el('div',null,'admin-resource-copy');
+    cp.append(el('strong',ex.title));
+    if(ex.note)cp.append(el('small',ex.note));
+    extraList.append(a);
+    a.append(cp,el('span',gate&&!gate.allowed?'Chỉ VIP':'Mở đề →','admin-resource-badge'+(gate&&!gate.allowed?' is-vip':'')));
+   }
+   extraBox.append(extraList);
+   results.append(extraBox);
+  }
  }
 
  function open(options={}){
@@ -1034,7 +1070,9 @@
   loadPromise=(async()=>{
    try{
     let cloudError;
-    for(const manifestURL of CLOUD_MANIFESTS){
+    const customManifestUrl=window.HSKResourceSync?.getManifest?.()?.endpoints?.examManifestUrl;
+    const manifests=customManifestUrl?[customManifestUrl,...CLOUD_MANIFESTS]:CLOUD_MANIFESTS;
+    for(const manifestURL of manifests){
      try{
       const r=await fetch(manifestURL,{cache:'no-store',signal:AbortSignal.timeout(7000)});
       if(!r.ok)throw Error('Cloud manifest HTTP '+r.status);
@@ -1096,6 +1134,7 @@
   window.HSKStudio?.navigate('exam');
  });
  window.addEventListener('pagehide',stopMedia);
+ window.addEventListener('hsk-resources-updated',()=>{if(!activeSession)update();});
  new MutationObserver(()=>{if(panel.hidden)stopMedia();}).observe(panel,{attributes:true,attributeFilter:['hidden']});
 
  loadStudy4Data();

@@ -1,6 +1,10 @@
 {
-  "request": "PR #429: improve Sentence Editor right tool rail label contrast, interactive button colors and accessible aria-labels. Only sentence-editor visual changes are expected; all other routes remain protected.",
+  "request": "PR #430: Podcast shortcut card on Home; Podcast navigation within Entertainment changes sidebar geometry on Real Reading and Music/Music Play; new Podcast listening page and standalone Admin portal. Only these intentionally touched route surfaces are excluded from unchanged-page snapshots; all other existing routes and all four viewports/themes remain protected. Targeted Podcast/Admin browser tests validate these new interfaces.",
   "excludedRoutes": [
-    "sentence-editor"
+    "home",
+    "real-reading",
+    "music",
+    "music-play",
+    "admin"
   ]
 }

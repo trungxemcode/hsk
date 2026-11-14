@@ -2692,6 +2692,34 @@
         {"kind": "contains", "file": "src/modules/translation/sentence-review-core.js", "value": "normalizeAiDetection"},
         {"kind": "contains", "file": "server/translator-worker.mjs", "value": "sentence-ai-detect"}
       ]
+    },
+    {
+      "id": "podcast-listening",
+      "name": "Luyện nghe Podcast che phụ đề tiếng Anh",
+      "checks": [
+        {"kind": "file", "file": "src/modules/podcast/podcast-core.js", "value": ""},
+        {"kind": "file", "file": "src/modules/podcast/podcast.js", "value": ""},
+        {"kind": "file", "file": "podcast.css", "value": ""},
+        {"kind": "contains", "file": "src/modules/podcast/podcast-core.js", "value": "STARTER_EPISODES"},
+        {"kind": "contains", "file": "src/modules/podcast/podcast-core.js", "value": "parseSubtitleText"},
+        {"kind": "contains", "file": "src/modules/podcast/podcast.js", "value": "podcastSubMask"},
+        {"kind": "contains", "file": "server/translator-worker.mjs", "value": "podcast-subtitles"}
+      ]
+    },
+    {
+      "id": "standalone-admin-portal",
+      "name": "Trang Admin độc lập quản trị tài nguyên & phân quyền",
+      "checks": [
+        {"kind": "file", "file": "admin.html", "value": ""},
+        {"kind": "file", "file": "admin-portal.css", "value": ""},
+        {"kind": "file", "file": "src/modules/admin/admin-portal-core.js", "value": ""},
+        {"kind": "file", "file": "src/modules/admin/admin-portal.js", "value": ""},
+        {"kind": "file", "file": "src/modules/admin/resource-sync.js", "value": ""},
+        {"kind": "contains", "file": "server/translator-worker.mjs", "value": "/resources-manifest"},
+        {"kind": "contains", "file": "server/translator-worker.mjs", "value": "/admin/resources"},
+        {"kind": "contains", "file": "server/account-roles.mjs", "value": "roles-resources-get"},
+        {"kind": "contains", "file": "server/account-roles.mjs", "value": "roles-resources-set"}
+      ]
     }
   ]
 }
