@@ -2681,6 +2681,17 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": "sentence-ai-detector",
+      "name": "AI Detector trong Sửa câu tiếng Trung",
+      "checks": [
+        {"kind": "id", "file": "index.html", "value": "sentenceAiDetectBtn"},
+        {"kind": "id", "file": "index.html", "value": "sentenceAiDetector"},
+        {"kind": "contains", "file": "src/modules/translation/sentence-review-core.js", "value": "analyzeAiLikelihood"},
+        {"kind": "contains", "file": "src/modules/translation/sentence-review-core.js", "value": "normalizeAiDetection"},
+        {"kind": "contains", "file": "server/translator-worker.mjs", "value": "sentence-ai-detect"}
+      ]
     }
   ]
 }

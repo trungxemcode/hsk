@@ -1,6 +1,9 @@
 {
-  "request": "PR #422: unified desktop sidebar flyouts, topbar hover glide and accessible navigation focus. Only shared header and sidebar regions change; all route content including Lessons dark card remains protected.",
-  "excludedRoutes": [],
-  "sharedHeaderOnly": true,
-  "sharedSidebarOnly": true
+  "request": "Dark-mode violet surface fixes for glowing white-purple controls/cards (Home, Lessons, SRS Easy button), plus Sentence Editor 5000-char limit, unified AI model picker, and AI Detector.",
+  "excludedRoutes": [
+    "home",
+    "lessons",
+    "sentence-editor",
+    "srs"
+  ]
 }

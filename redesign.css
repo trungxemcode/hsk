@@ -4571,3 +4571,94 @@ html[data-theme="dark"] body.studio-enabled .compare-example{
 
 /* Dark-mode grammar warning notes use a dark surface to keep muted text readable. */
 html[data-theme="dark"] .lesson-grammar-point .lesson-error-note{background:var(--surface)!important;border-color:var(--line)!important}
+
+/* Dark mode: dịu mắt cho các ô/nút nền trắng chữ tím khi bật chế độ tối */
+html[data-theme="dark"] body:not(#_rd).studio-enabled #placementEntry > button:not(:disabled){
+  background:var(--palette-dark-violet-soft) !important;
+  color:var(--legacy-hex-c9c0ff) !important;
+  border:1px solid var(--legacy-hex-44405c) !important;
+  box-shadow:none !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #placementEntry > button:is(:hover,:focus-visible):not(:disabled){
+  background:var(--legacy-hex-363050) !important;
+  color:var(--rd-static-color-111) !important;
+  border-color:var(--rd-brand) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled :is(.hero-button,.feature-hero .hero-button):not(:disabled){
+  background:var(--palette-dark-violet-soft) !important;
+  color:var(--legacy-hex-c9c0ff) !important;
+  border:1px solid var(--legacy-hex-44405c) !important;
+  box-shadow:none !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled :is(.hero-button,.feature-hero .hero-button):is(:hover,:focus-visible):not(:disabled){
+  background:var(--legacy-hex-363050) !important;
+  color:var(--rd-static-color-111) !important;
+  border-color:var(--rd-brand) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled :is(.hero-button,.feature-hero .hero-button):is(:hover,:focus-visible):not(:disabled) *{
+  color:var(--rd-static-color-111) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #studioHome.overview-v216 .mobile-today-hero .mobile-hero-cta:not(:disabled),
+html[data-theme="dark"] body:not(#_rd).studio-enabled .mobile-hero-cta:not(:disabled){
+  background:var(--palette-dark-violet-soft) !important;
+  color:var(--legacy-hex-c9c0ff) !important;
+  border:1px solid var(--legacy-hex-44405c) !important;
+  box-shadow:none !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled #studioHome.overview-v216 .mobile-today-hero .mobile-hero-cta:is(:hover,:focus-visible):not(:disabled),
+html[data-theme="dark"] body:not(#_rd).studio-enabled .mobile-hero-cta:is(:hover,:focus-visible):not(:disabled){
+  background:var(--legacy-hex-363050) !important;
+  color:var(--rd-static-color-111) !important;
+  border-color:var(--rd-brand) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled[data-studio-hub="home"] .stats-stack .stat-icon{
+  background:var(--palette-dark-violet-soft) !important;
+  border-color:var(--legacy-hex-44405c) !important;
+  color:var(--legacy-hex-c9c0ff) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .review-reminder > span:first-child{
+  background:var(--palette-dark-violet-soft) !important;
+  color:var(--legacy-hex-c9c0ff) !important;
+  border:1px solid var(--legacy-hex-44405c) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .review-reminder:hover{
+  background:linear-gradient(135deg,var(--rd-static-color-107),var(--rd-static-color-108)) !important;
+  border-color:var(--rd-brand) !important;
+  color:var(--rd-static-color-111) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .review-reminder:hover strong{
+  color:var(--rd-static-color-111) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .review-reminder:hover small{
+  color:var(--rd-static-color-110) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .review-reminder:hover > span:first-child{
+  color:var(--rd-static-color-111) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-course-progress{
+  background:linear-gradient(135deg,var(--rd-static-color-107),var(--rd-static-color-108)) !important;
+  border-color:var(--rd-static-color-109) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-course-progress strong{
+  color:var(--rd-static-color-111) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-course-progress .hint{
+  color:var(--rd-static-color-110) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-resume{
+  background:linear-gradient(180deg,var(--rd-static-color-107),var(--rd-static-color-108)) !important;
+  border-color:var(--rd-static-color-109) !important;
+  color:var(--rd-static-color-111) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .lesson-resume strong{
+  color:var(--rd-static-color-111) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .ratings button[data-rating="easy"]{
+  background:var(--palette-dark-violet-soft) !important;
+  color:var(--legacy-hex-c9c0ff) !important;
+  border-color:var(--legacy-hex-44405c) !important;
+}
+html[data-theme="dark"] body:not(#_rd).studio-enabled .shortcut:hover .shortcut-icon.indigo{
+  background:var(--legacy-hex-363050) !important;
+  color:var(--rd-static-color-111) !important;
+}

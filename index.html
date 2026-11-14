@@ -168,17 +168,17 @@
           <label for="sentenceDraft" class="visually-hidden">Văn bản tiếng Trung</label>
           <div class="sentence-writing">
             <pre class="sentence-mirror" aria-hidden="true"></pre>
-            <textarea id="sentenceDraft" lang="zh" maxlength="500" spellcheck="false" placeholder="Viết hoặc dán câu tiếng Trung vào đây…" aria-label="Văn bản tiếng Trung"></textarea>
+            <textarea id="sentenceDraft" lang="zh" maxlength="5000" spellcheck="false" placeholder="Viết hoặc dán câu tiếng Trung vào đây…" aria-label="Văn bản tiếng Trung"></textarea>
           </div>
           <footer class="sentence-footer">
             <div class="sentence-footer-meta">
-              <span class="sentence-count">0 / 500 ký tự</span>
+              <span class="sentence-count">0 / 5000 ký tự</span>
               <button type="button" class="sentence-undo" disabled>Hoàn tác</button>
               <button type="button" class="sentence-example">Thử câu mẫu</button>
             </div>
             <div class="sentence-ai-actions">
-              <label for="sentenceAiProvider">Nhà cung cấp AI</label>
-              <select id="sentenceAiProvider">
+              <label for="sentenceAiProvider" class="visually-hidden">Nhà cung cấp AI</label>
+              <select id="sentenceAiProvider" class="qa-thinking">
                 <option value="auto">Tự động</option>
                 <optgroup label="Hệ thống">
                   <option value="system-gemini">Gemini</option>
@@ -196,6 +196,12 @@
                   <option value="personal:custom">Tùy chỉnh (API riêng)</option>
                 </optgroup>
               </select>
+              <select id="sentenceAiThinking" class="qa-thinking" aria-label="Mức suy nghĩ của AI" title="Mức suy nghĩ áp dụng khi dùng API mặc định" disabled>
+                <option value="low">Thấp</option>
+                <option value="medium">Trung bình</option>
+                <option value="high">Cao</option>
+              </select>
+              <button type="button" id="sentenceAiDetectBtn" class="sentence-detect-btn">AI Detector</button>
               <button type="submit" class="sentence-check-btn">Kiểm tra bằng AI</button>
             </div>
           </footer>
@@ -214,6 +220,7 @@
           <div class="sentence-review-body">
             <p class="sentence-status" role="status" aria-live="polite">Dán văn bản tiếng Trung rồi bấm Kiểm tra bằng AI.</p>
             <p class="sentence-help">AI giải thích lỗi và gợi ý cách viết tự nhiên hơn.</p>
+            <div id="sentenceAiDetector" class="sentence-detector" hidden aria-live="polite"></div>
             <div class="sentence-suggestions"></div>
           </div>
         </aside>

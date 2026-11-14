@@ -69,9 +69,9 @@
   const storeKey=targetUid=>`hsk-ai-qa-provider-v1:${cleanUid(targetUid)}`;
   const cacheKey=targetUid=>`hsk-ai-providers-cache-v1:${cleanUid(targetUid)}`;
   const cipherKey=(targetUid,prov)=>`hsk-personal-ai-cipher-v1:${cleanUid(targetUid)}${prov?':'+prov:''}`;
-  const controls=['aiQaThinking','qaProjectThinking'].map(id=>document.getElementById(id)).filter(Boolean);
+  const controls=['aiQaThinking','qaProjectThinking','sentenceAiThinking'].map(id=>document.getElementById(id)).filter(Boolean);
   if(!controls.length)return;
-  let uid='guest',selected='auto',availability=null,openPicker=null,cryptoKeyPromise=null;
+  let uid='guest',selected='auto',unverifiedSelection='',availability=null,openPicker=null,cryptoKeyPromise=null;
   const picks=[],availabilityCache=new Map(),inflight=new Map(),directKeys=new Map();
 
   function readSaved(){try{return localStorage.getItem(storeKey(uid))||'auto';}catch{return 'auto';}}
@@ -205,8 +205,19 @@
   function entry(id){return items().find(item=>item.id===id&&!item.locked)||null;}
   function normalizeSelection(){
     const a=availability,p=a?.personal||{};
+    if(a){
+      unverifiedSelection='';
+      if(selected==='personal'&&p?.provider)selected='personal:'+p.provider;
+      if(!entry(selected))selected='auto';
+      return;
+    }
+    if(unverifiedSelection&&selected===unverifiedSelection)return;
     if(selected==='personal'&&p?.provider)selected='personal:'+p.provider;
     if(!entry(selected))selected='auto';
+  }
+  function effectiveChoice(){
+    normalizeSelection();
+    return entry(selected)?.value||(!availability&&unverifiedSelection&&selected===unverifiedSelection?selected:'auto');
   }
   function current(){return items().find(item=>item.id===selected)||items()[1];}
   function closeAll(){if(openPicker){openPicker.close();openPicker=null;}}
@@ -342,14 +353,27 @@
     button.setAttribute('aria-haspopup','menu');button.setAttribute('aria-expanded','false');
     const label=document.createElement('span');label.className='qa-provider-label';
     button.innerHTML=CHIP;button.append(label);button.insertAdjacentHTML('beforeend',CARET);
-    const menu=document.createElement('div');menu.className='qa-provider-menu';menu.setAttribute('role','menu');menu.hidden=true;menu.setAttribute('aria-label','Chọn nhà cung cấp AI');
+    const menu=document.createElement('div');menu.className='qa-provider-menu';menu.setAttribute('role','menu');menu.hidden=true;menu.setAttribute('aria-label',control.id==='sentenceAiThinking'?'Danh sách model AI':'Chọn nhà cung cấp AI');
     wrap.append(button,menu);control.before(wrap);
     function place(){
       const r=button.getBoundingClientRect(),width=Math.min(300,window.innerWidth-24);
+      const sb=document.querySelector('.sidebar');
+      const sbRect=sb&&getComputedStyle(sb).display!=='none'?sb.getBoundingClientRect():null;
+      const minLeft=sbRect&&sbRect.right>0&&sbRect.right<window.innerWidth/2?Math.ceil(sbRect.right)+8:12;
+      const preferredLeft=r.right-width<minLeft?r.left:r.right-width;
+      const spaceAbove=r.top-24,spaceBelow=window.innerHeight-r.bottom-24;
+      const openUp=spaceAbove>=240||spaceAbove>=spaceBelow;
       menu.style.width=width+'px';
-      menu.style.left=Math.max(12,Math.min(window.innerWidth-width-12,r.right-width))+'px';
-      menu.style.bottom=Math.max(12,window.innerHeight-r.top+8)+'px';
-      menu.style.maxHeight=Math.max(160,Math.min(480,r.top-24))+'px';
+      menu.style.left=Math.max(minLeft,Math.min(window.innerWidth-width-12,preferredLeft))+'px';
+      if(openUp){
+        menu.style.top='auto';
+        menu.style.bottom=Math.max(12,window.innerHeight-r.top+8)+'px';
+        menu.style.maxHeight=Math.max(160,Math.min(480,spaceAbove))+'px';
+      }else{
+        menu.style.bottom='auto';
+        menu.style.top=Math.max(12,r.bottom+8)+'px';
+        menu.style.maxHeight=Math.max(160,Math.min(480,spaceBelow))+'px';
+      }
     }
     function fill(){
       menu.textContent='';
@@ -366,7 +390,7 @@
         else if(item.id===selected)row.insertAdjacentHTML('beforeend','<svg class="qa-provider-check" aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>');
         row.addEventListener('click',event=>{
           if(item.locked){event.preventDefault();event.stopPropagation();return;}
-          selected=item.id;save();closeAll();renderAll();
+          selected=item.id;unverifiedSelection='';save();closeAll();renderAll();
         });
         menu.append(row);
       }
@@ -376,7 +400,8 @@
     function close(){menu.hidden=true;button.setAttribute('aria-expanded','false');}
     const api={close,render(){
       const item=current();label.textContent=item.label;
-      button.setAttribute('aria-label','Nhà cung cấp AI: '+item.label);button.title='Nhà cung cấp AI: '+item.label;
+      const prefix=control.id==='sentenceAiThinking'?'Chọn AI: ':'Nhà cung cấp AI: ';
+      button.setAttribute('aria-label',prefix+item.label);button.title=prefix+item.label;
       if(!menu.hidden)fill();
     },menu,button};
     button.addEventListener('click',()=>menu.hidden?open():closeAll());
@@ -401,10 +426,23 @@
     function getOpts(){return Array.from(control.options||[]);}
     function place(){
       const r=button.getBoundingClientRect(),width=Math.min(280,window.innerWidth-24);
+      const sb=document.querySelector('.sidebar');
+      const sbRect=sb&&getComputedStyle(sb).display!=='none'?sb.getBoundingClientRect():null;
+      const minLeft=sbRect&&sbRect.right>0&&sbRect.right<window.innerWidth/2?Math.ceil(sbRect.right)+8:12;
+      const preferredLeft=r.right-width<minLeft?r.left:r.right-width;
+      const spaceAbove=r.top-24,spaceBelow=window.innerHeight-r.bottom-24;
+      const openUp=spaceAbove>=200||spaceAbove>=spaceBelow;
       menu.style.width=width+'px';
-      menu.style.left=Math.max(12,Math.min(window.innerWidth-width-12,r.right-width))+'px';
-      menu.style.bottom=Math.max(12,window.innerHeight-r.top+8)+'px';
-      menu.style.maxHeight=Math.max(160,Math.min(360,r.top-24))+'px';
+      menu.style.left=Math.max(minLeft,Math.min(window.innerWidth-width-12,preferredLeft))+'px';
+      if(openUp){
+        menu.style.top='auto';
+        menu.style.bottom=Math.max(12,window.innerHeight-r.top+8)+'px';
+        menu.style.maxHeight=Math.max(160,Math.min(360,spaceAbove))+'px';
+      }else{
+        menu.style.bottom='auto';
+        menu.style.top=Math.max(12,r.bottom+8)+'px';
+        menu.style.maxHeight=Math.max(160,Math.min(360,spaceBelow))+'px';
+      }
     }
     function selectIndex(idx){
       const opts=getOpts();
@@ -746,8 +784,8 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
   function getActiveAiParams(){
     normalizeSelection();
     const info=activeProviderInfo();
-    const choiceVal=entry(selected)?.value||'auto';
-    const thinkingEl=document.getElementById('aiQaThinking');
+    const choiceVal=effectiveChoice();
+    const thinkingEl=controls.find(el=>!el.disabled)||controls[0]||document.getElementById('aiQaThinking');
     const activeOpt=(thinkingEl&&!thinkingEl.disabled)?thinkingEl.selectedOptions?.[0]:null;
     const rawSelection=(thinkingEl&&!thinkingEl.disabled)?thinkingEl.value:'low';
     const selectedThinking=activeOpt?.dataset?.tier||(rawSelection.startsWith('model:')?'low':rawSelection);
@@ -770,8 +808,14 @@ Tạo 1 đến tối đa 3 câu hỏi ngắn, mỗi câu mở một hướng kh�
     activeProviderInfo,
     getActiveAiParams,
     _buildOptions:buildProviderModelOptions,
+    selectedId(){normalizeSelection();return selected||'auto';},
+    setSelectionFromSelect(id){
+      const next=typeof id==='string'&&id.trim()?id.trim():'auto';
+      unverifiedSelection=!availability&&next!=='auto'&&items().some(item=>item.id===next)?next:'';
+      selected=next;save();renderAll();
+    },
     // Giá trị gửi lên Worker; 'auto' không gửi gì để giữ hành vi mặc định.
-    choice(){normalizeSelection();return entry(selected)?.value||'auto';}
+    choice(){return effectiveChoice();}
   };
   renderAll();
 })();
