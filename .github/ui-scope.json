@@ -1,5 +1,5 @@
 {
-  "request": "Dark-mode violet surface fixes for glowing white-purple controls/cards (Home, Lessons, SRS Easy button), plus Sentence Editor Grammarly-style right tool rail with persistent draft across sub-tools, AI Grader, 5000-char limit, unified AI model picker, and AI Detector.",
+  "request": "Dark-mode violet surface fixes for glowing white-purple controls/cards (Home, Lessons, SRS Easy button), Sentence Editor Grammarly-style right tool rail with persistent draft across sub-tools, AI Grader, 5000-char limit, unified AI model picker, AI Detector, plus Podcast Listening feature under Giải trí with adjustable English subtitle mask and synchronized Vi/Zh/Pinyin captions.",
   "excludedRoutes": [
     "home",
     "lessons",

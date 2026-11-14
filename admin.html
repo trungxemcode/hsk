@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>HSK Admin · Quản trị tài nguyên &amp; phân quyền học viên</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('hsk_admin_theme') || localStorage.getItem('hsk_theme');
+        if (saved === 'dark' || saved === 'light') {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./admin-portal.css" />
+</head>
+<body class="ap-body">
+  <div class="ap-shell">
+    <header class="ap-topbar">
+      <div class="ap-brand">
+        <span class="ap-brand-mark" aria-hidden="true">管</span>
+        <div class="ap-brand-copy">
+          <h1 class="ap-brand-title">HSK Admin Portal</h1>
+          <p class="ap-brand-sub">Trang quản trị độc lập · Đường dẫn, Bộ đề, Nhạc, Podcast &amp; Tài liệu</p>
+        </div>
+      </div>
+      <div class="ap-topbar-actions">
+        <span id="apAuthBadge" class="ap-badge ap-badge-muted">Chưa đăng nhập</span>
+        <button id="apThemeBtn" type="button" class="ap-btn ap-btn-ghost" title="Đổi giao diện Sáng / Tối">Giao diện: Sáng</button>
+        <a id="apLearnerLink" class="ap-btn ap-btn-ghost" href="./index.html">Mở App Học Viên</a>
+        <button id="apSaveLocalBtn" type="button" class="ap-btn ap-btn-secondary">Lưu bản nháp</button>
+        <button id="apPublishBtn" type="button" class="ap-btn ap-btn-primary">Xuất bản lên Server</button>
+      </div>
+    </header>
+
+    <section class="ap-auth-bar" aria-label="Xác thực và đồng bộ cấu hình">
+      <div class="ap-auth-info">
+        <strong id="apAccountLine">Chế độ xem / soạn thảo cục bộ</strong>
+        <span id="apSyncMeta" class="ap-meta-text">Chưa đồng bộ máy chủ</span>
+      </div>
+      <div class="ap-auth-controls">
+        <button id="apLoginBtn" type="button" class="ap-btn ap-btn-secondary">Đăng nhập Admin (Google)</button>
+        <button id="apLogoutBtn" type="button" class="ap-btn ap-btn-ghost" hidden>Đăng xuất</button>
+        <button id="apRefreshBtn" type="button" class="ap-btn ap-btn-ghost">Tải lại từ Server</button>
+        <button id="apExportBtn" type="button" class="ap-btn ap-btn-ghost">Xuất JSON</button>
+        <label class="ap-btn ap-btn-ghost ap-file-btn" for="apImportInput">
+          Nhập JSON
+          <input id="apImportInput" type="file" accept="application/json,.json" hidden />
+        </label>
+        <button id="apResetBtn" type="button" class="ap-btn ap-btn-danger-ghost">Khôi phục mặc định</button>
+      </div>
+      <p id="apStatusBanner" class="ap-status" role="status" aria-live="polite" hidden></p>
+    </section>
+
+    <nav class="ap-tabs" role="tablist" aria-label="Danh mục quản trị">
+      <button id="tab-overview" class="ap-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-overview" data-ap-tab="overview">Tổng quan &amp; Hệ thống</button>
+      <button id="tab-exams" class="ap-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-exams" data-ap-tab="exams">Bộ đề thi</button>
+      <button id="tab-media" class="ap-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-media" data-ap-tab="media">Nhạc &amp; Podcast</button>
+      <button id="tab-docs" class="ap-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-docs" data-ap-tab="docs">Tài liệu HSK 1–6</button>
+      <button id="tab-access" class="ap-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-access" data-ap-tab="access">Phân quyền &amp; Học viên</button>
+    </nav>
+
+    <main class="ap-main">
+      <!-- Tab 1: Overview & System Endpoints -->
+      <section id="panel-overview" class="ap-panel" role="tabpanel" aria-labelledby="tab-overview">
+        <div class="ap-kpi-grid" aria-label="Thống kê cấu hình">
+          <article class="ap-kpi-card">
+            <span class="ap-kpi-label">Bộ đề thi</span>
+            <strong id="apKpiExams" class="ap-kpi-value">0</strong>
+          </article>
+          <article class="ap-kpi-card">
+            <span class="ap-kpi-label">Bài nhạc</span>
+            <strong id="apKpiMusic" class="ap-kpi-value">0</strong>
+          </article>
+          <article class="ap-kpi-card">
+            <span class="ap-kpi-label">Tập Podcast</span>
+            <strong id="apKpiPodcasts" class="ap-kpi-value">0</strong>
+          </article>
+          <article class="ap-kpi-card">
+            <span class="ap-kpi-label">Tài liệu học tập</span>
+            <strong id="apKpiDocs" class="ap-kpi-value">0</strong>
+          </article>
+          <article class="ap-kpi-card">
+            <span class="ap-kpi-label">Tính năng giới hạn (VIP/Ẩn)</span>
+            <strong id="apKpiRestricted" class="ap-kpi-value">0</strong>
+          </article>
+        </div>
+
+        <article class="ap-card">
+          <div class="ap-card-head">
+            <div>
+              <h2 class="ap-card-title">Đường dẫn hệ thống (System Endpoints)</h2>
+              <p class="ap-card-desc">Thay đổi URL gốc của kho đề R2/Study4, dữ liệu bộ đề Drive và Worker kho nhạc mà không cần sửa code app học viên.</p>
+            </div>
+          </div>
+          <form id="apEndpointsForm" class="ap-form-grid">
+            <label class="ap-field">
+              <span class="ap-label">URL Manifest Kho Đề (R2 / Study4 HTTPS hoặc để trống dùng mặc định)</span>
+              <input id="apEpExamManifest" type="url" class="ap-input" placeholder="https://exam-worker.example.workers.dev/v1/manifest" />
+            </label>
+            <label class="ap-field">
+              <span class="ap-label">Đường dẫn dữ liệu Bộ Đề Drive (HTTPS hoặc ./drive-exam-data.json.gz)</span>
+              <input id="apEpDriveExam" type="text" class="ap-input" placeholder="./drive-exam-data.json.gz" />
+            </label>
+            <label class="ap-field">
+              <span class="ap-label">Endpoint Cloudflare Worker Nhạc (HTTPS)</span>
+              <input id="apEpMusicCloud" type="url" class="ap-input" placeholder="https://hsk-music-library.trung-hsk668.workers.dev" />
+            </label>
+            <div class="ap-form-actions">
+              <button type="submit" class="ap-btn ap-btn-primary">Cập nhật đường dẫn hệ thống</button>
+            </div>
+          </form>
+        </article>
+      </section>
+
+      <!-- Tab 2: Exam Sets -->
+      <section id="panel-exams" class="ap-panel" role="tabpanel" aria-labelledby="tab-exams" hidden>
+        <article class="ap-card">
+          <div class="ap-card-head">
+            <div>
+              <h2 class="ap-card-title">Thêm hoặc chỉnh sửa Bộ đề luyện thi</h2>
+              <p class="ap-card-desc">Quản lý bộ đề HSK 1–6 từ Study4, Google Drive hoặc liên kết bên ngoài kèm phân quyền học viên.</p>
+            </div>
+          </div>
+          <form id="apExamForm" class="ap-form-grid ap-form-cols">
+            <input id="apExamEditIndex" type="hidden" value="-1" />
+            <label class="ap-field">
+              <span class="ap-label">Mã bộ đề (ID)</span>
+              <input id="apExamId" type="text" class="ap-input" required placeholder="vd: hsk4-de-01 hoặc 6743" />
+            </label>
+            <label class="ap-field">
+              <span class="ap-label">Cấp độ HSK</span>
+              <select id="apExamLevel" class="ap-select">
+                <option value="1">HSK 1</option>
+                <option value="2">HSK 2</option>
+                <option value="3">HSK 3</option>
+                <option value="4">HSK 4</option>
+                <option value="5">HSK 5</option>
+                <option value="6">HSK 6</option>
+              </select>
+            </label>
+            <label class="ap-field ap-span-2">
+              <span class="ap-label">Tiêu đề bộ đề</span>
+              <input id="apExamTitle" type="text" class="ap-input" required placeholder="vd: HSK 4 · Đề luyện thi thử số 1" />
+            </label>
+            <label class="ap-field">
+              <span class="ap-label">Nguồn đề</span>
+              <select id="apExamProvider" class="ap-select">
+                <option value="study4">Study4</option>
+                <option value="drive">Google Drive</option>
+                <option value="external">Liên kết ngoài (HTTPS)</option>
+              </select>
+            </label>
+            <label class="ap-field">
+              <span class="ap-label">Quyền truy cập</span>
+              <select id="apExamAccess" class="ap-select">
+                <option value="public">Công khai (Tất cả học viên)</option>
+                <option value="vip">Chỉ VIP</option>
+                <option value="hidden">Ẩn hoàn toàn</option>
+              </select>
+            </label>
+            <label class="ap-field ap-span-2">
+              <span class="ap-label">Đường dẫn (HTTPS — tuỳ chọn với mã Study4 gốc)</span>
+              <input id="apExamUrl" type="text" class="ap-input" placeholder="https://drive.google.com/..." />
+            </label>
+            <label class="ap-field ap-span-2">
+              <span class="ap-label">Ghi chú</span>
+              <input id="apExamNote" type="text" class="ap-input" placeholder="Mô tả ngắn cho học viên hoặc lưu ý nội bộ" />
+            </label>
+            <div class="ap-form-actions ap-span-2">
+              <button id="apExamSubmitBtn" type="submit" class="ap-btn ap-btn-primary">Thêm bộ đề</button>
+              <button id="apExamCancelBtn" type="button" class="ap-btn ap-btn-ghost" hidden>Huỷ sửa</button>
+            </div>
+          </form>
+        </article>
+
+        <article class="ap-card">
+          <div class="ap-card-head ap-list-head">
+            <h2 class="ap-card-title">Danh sách Bộ đề (<span id="apExamCount">0</span>)</h2>
+            <div class="ap-filter-row">
+              <select id="apExamFilterLevel" class="ap-select ap-select-sm" aria-label="Lọc theo cấp độ HSK">
+                <option value="all">Tất cả HSK</option>
+                <option value="1">HSK 1</option>
+                <option value="2">HSK 2</option>
+                <option value="3">HSK 3</option>
+                <option value="4">HSK 4</option>
+                <option value="5">HSK 5</option>
+                <option value="6">HSK 6</option>
+              </select>
+              <input id="apExamSearch" type="search" class="ap-input ap-input-sm" placeholder="Tìm theo tên hoặc mã đề..." />
+            </div>
+          </div>
+          <div id="apExamList" class="ap-item-list"></div>
+        </article>
+      </section>
+
+      <!-- Tab 3: Music & Podcast -->
+      <section id="panel-media" class="ap-panel" role="tabpanel" aria-labelledby="tab-media" hidden>
+        <div class="ap-split-grid">
+          <article class="ap-card">
+            <div class="ap-card-head">
+              <div>
+                <h2 class="ap-card-title">Danh mục Nhạc học tiếng Trung</h2>
+                <p class="ap-card-desc">Gắn link YouTube, Spotify, SoundCloud hoặc file MP3/M4A HTTPS được phép phát cho học viên.</p>
+              </div>
+            </div>
+            <form id="apMusicForm" class="ap-form-grid ap-form-cols">
+              <input id="apMusicEditIndex" type="hidden" value="-1" />
+              <label class="ap-field">
+                <span class="ap-label">Tên bài hát</span>
+                <input id="apMusicTitle" type="text" class="ap-input" required placeholder="vd: 月亮代表我的心" />
+              </label>
+              <label class="ap-field">
+                <span class="ap-label">Ca sĩ / Tác giả</span>
+                <input id="apMusicArtist" type="text" class="ap-input" placeholder="vd: 邓丽君" />
+              </label>
+              <label class="ap-field">
+                <span class="ap-label">Cấp độ HSK</span>
+                <select id="apMusicLevel" class="ap-select">
+                  <option value="1">HSK 1</option>
+                  <option value="2">HSK 2</option>
+                  <option value="3">HSK 3</option>
+                  <option value="4">HSK 4</option>
+                  <option value="5">HSK 5</option>
+                  <option value="6">HSK 6</option>
+                </select>
+              </label>
+              <label class="ap-field">
+                <span class="ap-label">Quyền truy cập</span>
+                <select id="apMusicAccess" class="ap-select">
+                  <option value="public">Công khai</option>
+                  <option value="vip">Chỉ VIP</option>
+                  <option value="hidden">Ẩn hoàn toàn</option>
+                </select>
+              </label>
+              <label class="ap-field ap-span-2">
+                <span class="ap-label">Đường dẫn nhạc (HTTPS)</span>
+                <input id="apMusicUrl" type="url" class="ap-input" required placeholder="https://www.youtube.com/watch?v=..." />
+              </label>
+              <label class="ap-field ap-span-2">
+                <span class="ap-label">Ghi chú</span>
+                <input id="apMusicNote" type="text" class="ap-input" placeholder="Ghi chú từ vựng hoặc tốc độ bài hát" />
+              </label>
+              <div class="ap-form-actions ap-span-2">
+                <button id="apMusicSubmitBtn" type="submit" class="ap-btn ap-btn-primary">Thêm bài nhạc</button>
+                <button id="apMusicCancelBtn" type="button" class="ap-btn ap-btn-ghost" hidden>Huỷ sửa</button>
+              </div>
+            </form>
+            <div class="ap-subhead">Danh sách nhạc (<span id="apMusicCount">0</span>)</div>
+            <div id="apMusicList" class="ap-item-list"></div>
+          </article>
+
+          <article class="ap-card">
+            <div class="ap-card-head">
+              <div>
+                <h2 class="ap-card-title">Danh mục Tập Podcast YouTube</h2>
+                <p class="ap-card-desc">Đề xuất danh sách tập Podcast YouTube kèm phụ đề sẵn (tùy chọn) hiển thị trong mục Luyện nghe Podcast.</p>
+              </div>
+            </div>
+            <form id="apPodcastForm" class="ap-form-grid ap-form-cols">
+              <input id="apPodcastEditIndex" type="hidden" value="-1" />
+              <label class="ap-field ap-span-2">
+                <span class="ap-label">Tiêu đề tập Podcast</span>
+                <input id="apPodcastTitle" type="text" class="ap-input" required placeholder="vd: Tập 1 · Học tiếng Trung qua hội thoại hằng ngày" />
+              </label>
+              <label class="ap-field">
+                <span class="ap-label">Cấp độ HSK</span>
+                <select id="apPodcastLevel" class="ap-select">
+                  <option value="1">HSK 1</option>
+                  <option value="2">HSK 2</option>
+                  <option value="3">HSK 3</option>
+                  <option value="4">HSK 4</option>
+                  <option value="5">HSK 5</option>
+                  <option value="6">HSK 6</option>
+                </select>
+              </label>
+              <label class="ap-field">
+                <span class="ap-label">Quyền truy cập</span>
+                <select id="apPodcastAccess" class="ap-select">
+                  <option value="public">Công khai</option>
+                  <option value="vip">Chỉ VIP</option>
+                  <option value="hidden">Ẩn hoàn toàn</option>
+                </select>
+              </label>
+              <label class="ap-field ap-span-2">
+                <span class="ap-label">Link YouTube Podcast (HTTPS)</span>
+                <input id="apPodcastUrl" type="url" class="ap-input" required placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
+              </label>
+              <label class="ap-field ap-span-2">
+                <span class="ap-label">Phụ đề đính kèm sẵn (SRT / LRC / Timestamp, tuỳ chọn)</span>
+                <textarea id="apPodcastSubtitle" class="ap-textarea" rows="3" placeholder="0:00 Hello everyone&#10;0:04 Today we practice Chinese"></textarea>
+              </label>
+              <label class="ap-field ap-span-2">
+                <span class="ap-label">Ghi chú</span>
+                <input id="apPodcastNote" type="text" class="ap-input" placeholder="Ghi chú chủ đề" />
+              </label>
+              <div class="ap-form-actions ap-span-2">
+                <button id="apPodcastSubmitBtn" type="submit" class="ap-btn ap-btn-primary">Thêm tập Podcast</button>
+                <button id="apPodcastCancelBtn" type="button" class="ap-btn ap-btn-ghost" hidden>Huỷ sửa</button>
+              </div>
+            </form>
+            <div class="ap-subhead">Danh sách Podcast (<span id="apPodcastCount">0</span>)</div>
+            <div id="apPodcastList" class="ap-item-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Tab 4: Study Documents HSK 1-6 -->
+      <section id="panel-docs" class="ap-panel" role="tabpanel" aria-labelledby="tab-docs" hidden>
+        <article class="ap-card">
+          <div class="ap-card-head">
+            <div>
+              <h2 class="ap-card-title">Thêm hoặc chỉnh sửa Tài liệu học tập (HSK 1–6)</h2>
+              <p class="ap-card-desc">Tài liệu PDF, thư mục Google Drive, bài đọc thêm hoặc video bổ trợ gắn trực tiếp vào mục Bài học của học viên.</p>
+            </div>
+          </div>
+          <form id="apDocForm" class="ap-form-grid ap-form-cols">
+            <input id="apDocEditIndex" type="hidden" value="-1" />
+            <label class="ap-field ap-span-2">
+              <span class="ap-label">Tên tài liệu</span>
+              <input id="apDocTitle" type="text" class="ap-input" required placeholder="vd: Tổng hợp ngữ pháp HSK 3 PDF" />
+            </label>
+            <label class="ap-field">
+              <span class="ap-label">Cấp độ HSK</span>
+              <select id="apDocLevel" class="ap-select">
+                <option value="1">HSK 1</option>
+                <option value="2">HSK 2</option>
+                <option value="3">HSK 3</option>
+                <option value="4">HSK 4</option>
+                <option value="5">HSK 5</option>
+                <option value="6">HSK 6</option>
+              </select>
+            </label>
+            <label class="ap-field">
+              <span class="ap-label">Loại tài liệu</span>
+              <select id="apDocKind" class="ap-select">
+                <option value="pdf">PDF</option>
+                <option value="drive">Google Drive</option>
+                <option value="reading">Bài đọc</option>
+                <option value="video">Video</option>
+                <option value="link">Liên kết khác</option>
+              </select>
+            </label>
+            <label class="ap-field">
+              <span class="ap-label">Quyền truy cập</span>
+              <select id="apDocAccess" class="ap-select">
+                <option value="public">Công khai</option>
+                <option value="vip">Chỉ VIP</option>
+                <option value="hidden">Ẩn hoàn toàn</option>
+              </select>
+            </label>
+            <label class="ap-field">
+              <span class="ap-label">Mô tả ngắn</span>
+              <input id="apDocDesc" type="text" class="ap-input" placeholder="Ghi chú nội dung tài liệu" />
+            </label>
+            <label class="ap-field ap-span-2">
+              <span class="ap-label">Đường dẫn tài liệu (HTTPS)</span>
+              <input id="apDocUrl" type="url" class="ap-input" required placeholder="https://drive.google.com/file/d/..." />
+            </label>
+            <div class="ap-form-actions ap-span-2">
+              <button id="apDocSubmitBtn" type="submit" class="ap-btn ap-btn-primary">Thêm tài liệu</button>
+              <button id="apDocCancelBtn" type="button" class="ap-btn ap-btn-ghost" hidden>Huỷ sửa</button>
+            </div>
+          </form>
+        </article>
+
+        <article class="ap-card">
+          <div class="ap-card-head ap-list-head">
+            <h2 class="ap-card-title">Kho Tài liệu (<span id="apDocCount">0</span>)</h2>
+            <select id="apDocFilterLevel" class="ap-select ap-select-sm" aria-label="Lọc tài liệu theo HSK">
+              <option value="all">Tất cả HSK</option>
+              <option value="1">HSK 1</option>
+              <option value="2">HSK 2</option>
+              <option value="3">HSK 3</option>
+              <option value="4">HSK 4</option>
+              <option value="5">HSK 5</option>
+              <option value="6">HSK 6</option>
+            </select>
+          </div>
+          <div id="apDocList" class="ap-item-list"></div>
+        </article>
+      </section>
+
+      <!-- Tab 5: Access Matrix, Accounts & Student Progress -->
+      <section id="panel-access" class="ap-panel" role="tabpanel" aria-labelledby="tab-access" hidden>
+        <article class="ap-card">
+          <div class="ap-card-head ap-list-head">
+            <div>
+              <h2 class="ap-card-title">Phân quyền tính năng App Học Viên</h2>
+              <p class="ap-card-desc">Bật công khai, giới hạn cho VIP hoặc ẩn hoàn toàn từng phân hệ khi học viên truy cập App.</p>
+            </div>
+            <button id="apUnlockAllFeaturesBtn" type="button" class="ap-btn ap-btn-ghost">Mở công khai tất cả</button>
+          </div>
+          <div id="apFeatureMatrix" class="ap-feature-grid"></div>
+        </article>
+
+        <div class="ap-split-grid">
+          <article id="apAccountsSection" class="ap-card">
+            <div class="ap-card-head ap-list-head">
+              <div>
+                <h2 class="ap-card-title">Quản lý Quyền VIP Tài khoản</h2>
+                <p class="ap-card-desc">Cấp hoặc thu hồi quyền VIP thông qua Worker máy chủ (chỉ tài khoản Admin mới có hiệu lực).</p>
+              </div>
+              <button id="apLoadAccountsBtn" type="button" class="ap-btn ap-btn-secondary">Tải danh sách</button>
+            </div>
+            <form id="apVipGrantForm" class="ap-form-grid ap-form-cols">
+              <label class="ap-field">
+                <span class="ap-label">UID học viên</span>
+                <input id="apVipUid" type="text" class="ap-input" required placeholder="Firebase UID..." />
+              </label>
+              <label class="ap-field">
+                <span class="ap-label">Email (tuỳ chọn)</span>
+                <input id="apVipEmail" type="email" class="ap-input" placeholder="hocvien@gmail.com" />
+              </label>
+              <label class="ap-field">
+                <span class="ap-label">Quyền</span>
+                <select id="apVipRoleSelect" class="ap-select">
+                  <option value="vip">VIP</option>
+                  <option value="regular">Thường (Regular)</option>
+                </select>
+              </label>
+              <div class="ap-form-actions ap-align-end">
+                <button type="submit" class="ap-btn ap-btn-primary">Cập nhật quyền</button>
+              </div>
+            </form>
+            <div id="apAccountsList" class="ap-item-list"></div>
+          </article>
+
+          <article id="apStudentStatsSection" class="ap-card">
+            <div class="ap-card-head ap-list-head">
+              <div>
+                <h2 class="ap-card-title">Tiến độ Học viên (Firestore)</h2>
+                <p class="ap-card-desc">Theo dõi thống kê học từ vựng và ôn tập được học viên đồng bộ lên đám mây.</p>
+              </div>
+              <button id="apLoadStudentsBtn" type="button" class="ap-btn ap-btn-secondary">Tải tiến độ</button>
+            </div>
+            <input id="apStudentSearch" type="search" class="ap-input ap-mb-3" placeholder="Lọc theo email hoặc UID..." />
+            <div id="apStudentList" class="ap-item-list"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./src/modules/admin/admin-core.js"></script>
+  <script src="./src/modules/admin/admin-portal-core.js"></script>
+  <script src="./src/modules/admin/admin-portal.js"></script>
+</body>
+</html>

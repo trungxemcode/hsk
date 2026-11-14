@@ -193,7 +193,15 @@
     "src/modules/ai-coach/ai-provider-picker.js",
     "src/modules/ai-coach/qa-intent-router.js",
     "src/modules/ai-coach/qa-understanding-memory.js",
-    "src/modules/ai-coach/ai-qa-suggestions-ui.js"
+    "src/modules/ai-coach/ai-qa-suggestions-ui.js",
+    "podcast.css",
+    "src/modules/podcast/podcast-core.js",
+    "src/modules/podcast/podcast.js",
+    "admin.html",
+    "admin-portal.css",
+    "src/modules/admin/admin-portal-core.js",
+    "src/modules/admin/admin-portal.js",
+    "src/modules/admin/resource-sync.js"
   ],
   "aliases": {
     "backup-core.js": "src/modules/backup/backup-core.js",
