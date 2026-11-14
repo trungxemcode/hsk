@@ -8,8 +8,26 @@
   const submit = form.querySelector('[type="submit"]');
   const providerSelect = form.querySelector('#sentenceAiProvider');
   const thinkingSelect = form.querySelector('#sentenceAiThinking');
-  const detectBtn = form.querySelector('#sentenceAiDetectBtn');
+  const detectBtn = panel.querySelector('#sentenceAiDetectBtn');
   const detectorPanel = panel.querySelector('#sentenceAiDetector');
+  const detectorRunBtn = panel.querySelector('#sentenceDetectorRunBtn');
+  const detectorHint = panel.querySelector('#sentenceDetectorHint');
+  const reviewAside = panel.querySelector('.sentence-review');
+  const toolHeading = panel.querySelector('#sentenceToolHeading');
+  const toolSubtitle = panel.querySelector('#sentenceToolSubtitle');
+  const filtersBox = panel.querySelector('.sentence-filters');
+  const railButtons = [...panel.querySelectorAll('[data-sentence-tool]')];
+  const toolPanes = [...panel.querySelectorAll('[data-sentence-pane]')];
+  const bulkBar = panel.querySelector('.sentence-bulk-bar');
+  const applyAllBtn = panel.querySelector('.sentence-apply-all');
+  const rewriteStyleBtns = [...panel.querySelectorAll('[data-rewrite-style]')];
+  const rewriteRunBtn = panel.querySelector('#sentenceRewriteRunBtn');
+  const rewriteOutput = panel.querySelector('#sentenceRewriteOutput');
+  const qaChipBtns = [...panel.querySelectorAll('[data-qa-preset]')];
+  const qaInput = panel.querySelector('#sentenceQaInput');
+  const qaSendBtn = panel.querySelector('#sentenceQaSendBtn');
+  const qaThread = panel.querySelector('#sentenceQaThread');
+  const statsBody = panel.querySelector('#sentenceStatsBody');
   const providerChoices = new Set([...providerSelect.options].map(option => option.value));
   const providerStorageKey = () => 'hsk-sentence-ai-provider:' + (window.HSKAccountDashboard?.user?.uid || 'guest');
   const undo = panel.querySelector('.sentence-undo');
@@ -22,6 +40,18 @@
   const filters = [...panel.querySelectorAll('[data-sentence-filter]')];
   const providerNames = Object.freeze({gemini:'Gemini', xkiro:'xKiro', openai:'OpenAI', anthropic:'Claude', claude:'Claude', deepseek:'DeepSeek', fosta:'Fosta', 'chatgpt-cookie':'ChatGPT', 'muse-cookie':'Muse AI', custom:'Tùy chỉnh'});
   const initialStatus = status.textContent;
+  const TOOL_META = Object.freeze({
+    grammar: { title: 'Gợi ý chỉnh sửa · HSK 1–6', subtitle: 'Sửa ngữ pháp & cách diễn đạt', defaultStatus: initialStatus },
+    detector: { title: 'AI Detector', subtitle: 'Phát hiện văn bản AI & nguyên nhân', defaultStatus: 'Bấm Quét dấu hiệu AI để phân tích văn bản đang dán.' },
+    rewrite: { title: 'Viết lại & Tự nhiên hóa', subtitle: 'Paraphrase · Giữ nguyên văn bản đang dán', defaultStatus: 'Chọn phong cách rồi bấm Viết lại đoạn văn.' },
+    ask: { title: 'Hỏi nhanh AI về bài viết', subtitle: 'Dịch, giải thích ngữ pháp & chấm mức HSK', defaultStatus: 'Đặt câu hỏi hoặc chọn gợi ý nhanh cho văn bản đang dán.' },
+    stats: { title: 'Thống kê văn bản', subtitle: 'Đếm chữ Hán, câu & nhịp độ tự nhiên', defaultStatus: 'Thống kê cập nhật tức thì theo văn bản đang dán.' }
+  });
+  const REWRITE_STYLE_LABELS = Object.freeze({
+    natural: 'Tự nhiên như người bản xứ (thoát văn AI)',
+    formal: 'Trang trọng, chuẩn văn viết HSK',
+    concise: 'Ngắn gọn, súc tích, rõ ý'
+  });
   const han = /\p{Script=Han}/u;
 
   let suggestions = [];
@@ -32,6 +62,17 @@
   let detectorWhyOpen = true;
   let detectorSpansOpen = true;
   let activeMode = 'grammar';
+  let activeTool = 'grammar';
+  let rewriteStyle = 'natural';
+  let rewriteResult = null;
+  let qaMessages = [];
+  const toolStatuses = {
+    grammar: TOOL_META.grammar.defaultStatus,
+    detector: TOOL_META.detector.defaultStatus,
+    rewrite: TOOL_META.rewrite.defaultStatus,
+    ask: TOOL_META.ask.defaultStatus,
+    stats: TOOL_META.stats.defaultStatus
+  };
   let syncingProvider = false;
   let waitStarted = 0;
   let waitPhase = 'Đang kết nối';
@@ -100,22 +141,31 @@
   let dismissed = new Set();
   let undoStack = [];
 
-  function setStatus(message) {
-    status.textContent = message;
+  function setStatus(message, tool = activeTool) {
+    if (Object.hasOwn(toolStatuses, tool)) toolStatuses[tool] = message;
+    if (tool === activeTool) status.textContent = message;
   }
 
   function setBusy(busy) {
     waitLabel.hidden = !busy;
     if (busy) {
       waitStarted = performance.now();
-      waitPhase = activeMode === 'detect' ? 'Đang phân tích AI Detector' : 'Đang kết nối';
+      waitPhase = activeMode === 'detect'
+        ? 'Đang phân tích AI Detector'
+        : activeMode === 'rewrite'
+          ? 'Đang viết lại đoạn văn'
+          : activeMode === 'ask'
+            ? 'Đang hỏi AI về bài viết'
+            : 'Đang kết nối';
       startThinkingIndicator(activeProviderLabel());
       renderWait(0, 0);
     } else {
       stopThinkingIndicator();
     }
     submit.disabled = busy;
-    if (detectBtn) detectBtn.disabled = busy;
+    if (detectorRunBtn) detectorRunBtn.disabled = busy;
+    if (rewriteRunBtn) rewriteRunBtn.disabled = busy;
+    if (qaSendBtn) qaSendBtn.disabled = busy;
     panel.setAttribute('aria-busy', String(busy));
   }
 
@@ -367,10 +417,174 @@
     }
   }
 
+  function updateRailBadges() {
+    for (const badge of panel.querySelectorAll('[data-tool-badge]')) {
+      const tool = badge.dataset.toolBadge;
+      let text = '';
+      if (tool === 'grammar') {
+        const n = visibleSuggestions().length;
+        if (n > 0) text = String(n);
+      } else if (tool === 'detector' && detection?.result) {
+        const aiPct = Math.max(0, Math.min(100, Number(detection.result.aiProbability) || 0));
+        text = aiPct + '%';
+      } else if (tool === 'rewrite' && rewriteResult?.rewrittenText) {
+        text = '✓';
+      } else if (tool === 'ask') {
+        const replies = qaMessages.filter(m => m.role === 'assistant').length;
+        if (replies > 0) text = String(replies);
+      }
+      badge.textContent = text;
+      badge.hidden = !text;
+    }
+  }
+
+  function renderStats() {
+    if (!statsBody) return;
+    const text = draft.value;
+    const hanMatches = text.match(/\p{Script=Han}/gu) || [];
+    const hanCount = hanMatches.length;
+    const uniqueHan = new Set(hanMatches).size;
+    const sentences = text.split(/[。！？!?；;\n]+/u).map(s => s.trim()).filter(s => /\p{Script=Han}|[A-Za-z0-9]/u.test(s));
+    const paragraphs = text.split(/\n+/).map(p => p.trim()).filter(Boolean);
+    const avgChars = sentences.length ? Math.round(hanCount / sentences.length) : 0;
+    const readSec = hanCount ? Math.max(2, Math.round((hanCount / 260) * 60)) : 0;
+    const readLabel = readSec >= 60 ? `${Math.floor(readSec / 60)} phút ${readSec % 60} giây` : `${readSec} giây`;
+    const pct = Math.min(100, Math.round((text.length / (draft.maxLength || 5000)) * 100));
+    const localMetrics = hanCount && window.HSKSentenceReview?.analyzeAiLikelihood
+      ? window.HSKSentenceReview.analyzeAiLikelihood(text).metrics
+      : null;
+
+    statsBody.replaceChildren();
+    const progressWrap = document.createElement('div');
+    progressWrap.className = 'sentence-stats-progress';
+    const progressFill = document.createElement('div');
+    progressFill.className = 'sentence-stats-progress-fill';
+    progressFill.style.width = `${pct}%`;
+    progressWrap.append(progressFill);
+
+    const grid = document.createElement('div');
+    grid.className = 'sentence-stats-grid';
+    const items = [
+      [text.length.toLocaleString('vi-VN'), `Tổng ký tự (/ ${(draft.maxLength || 5000).toLocaleString('vi-VN')})`],
+      [hanCount.toLocaleString('vi-VN'), 'Tổng chữ Hán (Hanzi)'],
+      [uniqueHan.toLocaleString('vi-VN'), 'Chữ Hán khác nhau'],
+      [String(sentences.length), `Số câu · ${paragraphs.length} đoạn`],
+      [avgChars ? `${avgChars} chữ` : '0', 'Trung bình mỗi câu'],
+      [hanCount ? readLabel : '0 giây', 'Thời gian đọc ước tính']
+    ];
+    if (localMetrics) {
+      items.push(
+        [`${localMetrics.naturalness}/100`, 'Điểm tự nhiên sơ bộ'],
+        [`${localMetrics.burstiness}/100`, 'Độ biến thiên nhịp câu']
+      );
+    }
+    for (const [valText, lblText] of items) {
+      const card = document.createElement('div');
+      card.className = 'sentence-stat-card';
+      const strong = document.createElement('strong');
+      strong.textContent = valText;
+      const span = document.createElement('span');
+      span.textContent = lblText;
+      card.append(strong, span);
+      grid.append(card);
+    }
+    statsBody.append(progressWrap, grid);
+  }
+
+  function renderRewrite() {
+    if (!rewriteOutput) return;
+    for (const btn of rewriteStyleBtns) {
+      btn.setAttribute('aria-pressed', String(btn.dataset.rewriteStyle === rewriteStyle));
+    }
+    rewriteOutput.replaceChildren();
+    if (!rewriteResult?.rewrittenText) {
+      rewriteOutput.hidden = true;
+      return;
+    }
+    rewriteOutput.hidden = false;
+    const card = document.createElement('article');
+    card.className = 'sentence-rewrite-card';
+    const meta = document.createElement('div');
+    meta.className = 'sentence-rewrite-meta';
+    meta.textContent = `${REWRITE_STYLE_LABELS[rewriteResult.style] || 'Viết lại'}` + (rewriteResult.sourceLabel ? ` · ${rewriteResult.sourceLabel}` : '');
+
+    const textBox = document.createElement('p');
+    textBox.className = 'sentence-rewrite-text';
+    textBox.lang = 'zh';
+    textBox.textContent = rewriteResult.rewrittenText;
+
+    card.append(meta, textBox);
+    if (rewriteResult.notes) {
+      const notes = document.createElement('p');
+      notes.className = 'sentence-rewrite-notes';
+      notes.textContent = rewriteResult.notes;
+      card.append(notes);
+    }
+
+    const actions = document.createElement('div');
+    actions.className = 'sentence-rewrite-actions';
+    actions.append(
+      button('Áp dụng vào bài viết', 'sentence-apply', () => applyRewriteText(rewriteResult.rewrittenText)),
+      button('Sao chép', 'sentence-locate', async () => {
+        try {
+          await navigator.clipboard?.writeText?.(rewriteResult.rewrittenText);
+          setStatus('Đã sao chép bản viết lại.', 'rewrite');
+        } catch {
+          setStatus('Không tự sao chép được; hãy bôi đen đoạn viết lại để copy.', 'rewrite');
+        }
+      })
+    );
+    card.append(actions);
+    rewriteOutput.append(card);
+  }
+
+  function renderQa() {
+    if (!qaThread) return;
+    qaThread.replaceChildren();
+    for (const msg of qaMessages) {
+      const box = document.createElement('div');
+      box.className = 'sentence-qa-msg';
+      box.dataset.role = msg.role;
+      const meta = document.createElement('span');
+      meta.className = 'sentence-qa-msg-meta';
+      meta.textContent = msg.role === 'user' ? 'Bạn' : ('AI' + (msg.sourceLabel ? ' · ' + msg.sourceLabel : ''));
+      const body = document.createElement('div');
+      body.textContent = msg.text;
+      box.append(meta, body);
+      qaThread.append(box);
+    }
+  }
+
+  function setActiveTool(nextTool) {
+    if (!Object.hasOwn(TOOL_META, nextTool)) return;
+    activeTool = nextTool;
+    if (reviewAside) reviewAside.dataset.activeTool = nextTool;
+    const meta = TOOL_META[nextTool];
+    if (toolHeading) toolHeading.textContent = meta.title;
+    if (toolSubtitle) toolSubtitle.textContent = meta.subtitle;
+    if (filtersBox) filtersBox.hidden = nextTool !== 'grammar';
+    for (const btn of railButtons) {
+      const isActive = btn.dataset.sentenceTool === nextTool;
+      btn.setAttribute('aria-pressed', String(isActive));
+      btn.setAttribute('aria-selected', String(isActive));
+    }
+    for (const pane of toolPanes) {
+      pane.hidden = pane.dataset.sentencePane !== nextTool;
+    }
+    status.textContent = toolStatuses[nextTool] || meta.defaultStatus;
+    if (nextTool === 'detector') renderDetector();
+    else if (nextTool === 'rewrite') renderRewrite();
+    else if (nextTool === 'ask') renderQa();
+    else if (nextTool === 'stats') renderStats();
+    render();
+  }
+
   function render() {
     undo.disabled = !undoStack.length;
     example.hidden = Boolean(draft.value.trim());
     count.textContent = draft.value.length + ' / ' + draft.maxLength + ' ký tự';
+    if (detectorHint) detectorHint.hidden = Boolean(detection?.result);
+    if (detectorRunBtn) detectorRunBtn.textContent = detection?.result ? 'Quét lại bằng AI' : 'Quét dấu hiệu AI';
     mirror.replaceChildren();
     cards.replaceChildren();
 
@@ -383,13 +597,16 @@
       edits.push(edit);
       lastEnd = edit.end;
     }
-    const rawFlags = (!detectorCollapsed && detection?.result?.flaggedSpans?.length) ? detection.result.flaggedSpans : [];
+    const rawFlags = (activeTool === 'detector' && !detectorCollapsed && detection?.result?.flaggedSpans?.length)
+      ? detection.result.flaggedSpans
+      : [];
     const flagSpans = rawFlags.filter(span =>
       span.start >= 0 && span.end > span.start && span.end <= text.length && text.slice(span.start, span.end) === span.text
     );
+    const grammarEditsForMirror = activeTool === 'detector' ? [] : edits;
 
     const bounds = new Set([0, text.length]);
-    for (const edit of edits) {
+    for (const edit of grammarEditsForMirror) {
       bounds.add(edit.start);
       bounds.add(edit.end);
     }
@@ -401,7 +618,7 @@
     let renderedAiFlags = 0;
 
     const appendInsertionsAt = pos => {
-      for (const edit of edits) {
+      for (const edit of grammarEditsForMirror) {
         if (edit.start !== edit.end || edit.start !== pos) continue;
         const insMark = document.createElement('mark');
         insMark.dataset.kind = edit.kind;
@@ -417,7 +634,7 @@
       const segEnd = points[i + 1];
       appendInsertionsAt(segStart);
       if (segStart >= segEnd) continue;
-      const edit = edits.find(item => item.start < item.end && item.start <= segStart && item.end >= segEnd);
+      const edit = grammarEditsForMirror.find(item => item.start < item.end && item.start <= segStart && item.end >= segEnd);
       const flag = flagSpans.find(item => item.start <= segStart && item.end >= segEnd);
       const slice = text.slice(segStart, segEnd);
       if (!edit && !flag) {
@@ -445,6 +662,11 @@
     panel.classList.toggle('is-ai-highlight', renderedAiFlags > 0);
     syncScroll();
 
+    if (bulkBar && applyAllBtn) {
+      bulkBar.hidden = edits.length < 2;
+      applyAllBtn.textContent = `Sửa toàn bộ (${edits.length} gợi ý)`;
+    }
+
     for (const edit of edits) {
       if (filter === 'all' || edit.kind === filter) cards.append(makeCard(edit));
     }
@@ -453,21 +675,32 @@
       empty.textContent = 'Không có gợi ý thuộc nhóm này.';
       cards.append(empty);
     }
+    updateRailBadges();
+    renderStats();
   }
 
   function showRemaining() {
     const remaining = visibleSuggestions().length;
-    setStatus(remaining ? 'Còn ' + remaining + ' gợi ý từ lần kiểm tra này.' : 'Đã xem hết gợi ý. Bạn có thể kiểm tra lại văn bản bằng AI.');
+    setStatus(remaining ? 'Còn ' + remaining + ' gợi ý từ lần kiểm tra này.' : 'Đã xem hết gợi ý. Bạn có thể kiểm tra lại văn bản bằng AI.', 'grammar');
   }
 
   function resetForInput() {
     cancelPending();
     suggestions = [];
     detection = null;
+    rewriteResult = null;
+    qaMessages = [];
     dismissed.clear();
     undoStack = [];
-    setStatus(initialStatus);
+    toolStatuses.grammar = TOOL_META.grammar.defaultStatus;
+    toolStatuses.detector = TOOL_META.detector.defaultStatus;
+    toolStatuses.rewrite = TOOL_META.rewrite.defaultStatus;
+    toolStatuses.ask = TOOL_META.ask.defaultStatus;
+    toolStatuses.stats = TOOL_META.stats.defaultStatus;
+    status.textContent = toolStatuses[activeTool] || initialStatus;
     renderDetector();
+    renderRewrite();
+    renderQa();
     render();
   }
 
@@ -478,13 +711,13 @@
     }
     const delta = edit.replacement.length - edit.original.length;
     if (draft.value.length + delta > draft.maxLength) {
-      setStatus('Áp dụng gợi ý này sẽ vượt giới hạn ' + draft.maxLength + ' ký tự.');
+      setStatus('Áp dụng gợi ý này sẽ vượt giới hạn ' + draft.maxLength + ' ký tự.', 'grammar');
       return;
     }
     cancelPending();
     detection = null;
     renderDetector();
-    undoStack.push({text: draft.value, suggestions, dismissed: new Set(dismissed), status: status.textContent});
+    undoStack.push({text: draft.value, suggestions, dismissed: new Set(dismissed), status: toolStatuses.grammar});
     if (undoStack.length > 20) undoStack.shift();
     draft.setRangeText(edit.replacement, edit.start, edit.end, 'end');
 
@@ -499,6 +732,56 @@
     dismissed = nextDismissed;
     render();
     showRemaining();
+  }
+
+  function applyAllSuggestions() {
+    const rawEdits = visibleSuggestions();
+    const nonOverlapping = [];
+    let lastEnd = 0;
+    for (const edit of rawEdits) {
+      if (edit.start < lastEnd || !isCurrent(edit)) continue;
+      nonOverlapping.push(edit);
+      lastEnd = edit.end;
+    }
+    if (!nonOverlapping.length) return;
+    const totalDelta = nonOverlapping.reduce((acc, edit) => acc + (edit.replacement.length - edit.original.length), 0);
+    if (draft.value.length + totalDelta > draft.maxLength) {
+      setStatus('Áp dụng tất cả gợi ý sẽ vượt giới hạn ' + draft.maxLength + ' ký tự.', 'grammar');
+      return;
+    }
+    cancelPending();
+    detection = null;
+    renderDetector();
+    undoStack.push({text: draft.value, suggestions, dismissed: new Set(dismissed), status: toolStatuses.grammar});
+    if (undoStack.length > 20) undoStack.shift();
+    for (let i = nonOverlapping.length - 1; i >= 0; i--) {
+      const edit = nonOverlapping[i];
+      draft.setRangeText(edit.replacement, edit.start, edit.end, 'end');
+    }
+    const appliedSet = new Set(nonOverlapping);
+    suggestions = suggestions.filter(item => !appliedSet.has(item));
+    dismissed.clear();
+    render();
+    setStatus(`Đã áp dụng ${nonOverlapping.length} gợi ý sửa câu.`, 'grammar');
+  }
+
+  function applyRewriteText(nextText) {
+    if (!nextText || typeof nextText !== 'string') return;
+    if (nextText.length > draft.maxLength) {
+      setStatus('Bản viết lại vượt giới hạn ' + draft.maxLength + ' ký tự.', 'rewrite');
+      return;
+    }
+    cancelPending();
+    undoStack.push({text: draft.value, suggestions, dismissed: new Set(dismissed), status: toolStatuses.grammar});
+    if (undoStack.length > 20) undoStack.shift();
+    draft.value = nextText;
+    suggestions = [];
+    detection = null;
+    dismissed.clear();
+    toolStatuses.grammar = 'Đã áp dụng bản viết lại. Bạn có thể Hoàn tác hoặc kiểm tra ngữ pháp lại.';
+    renderDetector();
+    render();
+    setStatus('Đã áp dụng bản viết lại vào bài viết bên trái. Có thể bấm Hoàn tác nếu muốn khôi phục.', 'rewrite');
   }
 
   function sourceLabel(data, response) {
@@ -533,7 +816,7 @@
     suggestions = previous.suggestions;
     dismissed = previous.dismissed;
     detection = null;
-    setStatus(previous.status);
+    setStatus(previous.status, 'grammar');
     renderDetector();
     render();
     draft.focus();
@@ -617,17 +900,63 @@
   new MutationObserver(() => {
     if (panel.hidden && pending) {
       cancelPending();
-      setStatus(initialStatus);
+      setStatus(TOOL_META[activeTool]?.defaultStatus || initialStatus, activeTool);
     } else if (!panel.hidden) {
       window.dispatchEvent(new CustomEvent('hsk-sentence-editor-open'));
     }
   }).observe(panel, {attributes: true, attributeFilter: ['hidden']});
 
+  function parseRewriteOutput(raw) {
+    const text = String(raw || '').trim();
+    if (!text) return { rewrittenText: '', notes: '' };
+    const tagMatch = text.match(/\[\[REWRITE\]\]([\s\S]*?)\[\[\/REWRITE\]\]/i);
+    if (tagMatch) {
+      const rewrittenText = tagMatch[1].trim();
+      const notes = text.replace(tagMatch[0], '').trim();
+      return { rewrittenText, notes };
+    }
+    const fenceMatch = text.match(/```(?:zh|chinese|text)?\s*([\s\S]*?)```/i);
+    if (fenceMatch && han.test(fenceMatch[1])) {
+      const rewrittenText = fenceMatch[1].trim();
+      const notes = text.replace(fenceMatch[0], '').trim();
+      return { rewrittenText, notes };
+    }
+    const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+    const firstChineseLine = lines.find(line => han.test(line));
+    return {
+      rewrittenText: firstChineseLine || text,
+      notes: firstChineseLine && lines.length > 1 ? lines.filter(l => l !== firstChineseLine).join('\n') : ''
+    };
+  }
+
+  async function requestLessonAsk(bodyPayload, controller) {
+    const configResponse = await fetch('./translation-config.json', {signal: controller.signal, cache: 'no-store'});
+    if (!configResponse.ok) throw Error('Dịch vụ AI chưa sẵn sàng.');
+    const config = await configResponse.json();
+    if (!config.enabled) throw Error('Dịch vụ AI chưa sẵn sàng.');
+    const endpoint = new URL('/lesson-ask', config.endpoint);
+    if (endpoint.protocol !== 'https:') throw Error('Dịch vụ AI chưa sẵn sàng.');
+
+    const user = window.HSKAccountDashboard?.user;
+    if (!user?.uid) throw Error('Đăng nhập để sử dụng tính năng AI này.');
+    const token = await user.getIdToken();
+    if (pending !== controller) return null;
+    if (controller.signal.aborted) throw new DOMException('Aborted', 'AbortError');
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      signal: controller.signal,
+      headers: {Authorization: 'Bearer ' + token, 'Content-Type': 'application/json'},
+      body: JSON.stringify(bodyPayload)
+    });
+    const data = await response.json().catch(() => null);
+    return { response, data, uid: user.uid };
+  }
+
   async function runAiDetector() {
     if (pending || composing) return;
     const text = draft.value;
     if (!han.test(text)) {
-      setStatus('Nhập câu hoặc đoạn văn tiếng Trung để phân tích dấu hiệu AI.');
+      setStatus('Nhập câu hoặc đoạn văn tiếng Trung để phân tích dấu hiệu AI.', 'detector');
       draft.focus();
       return;
     }
@@ -641,7 +970,7 @@
         result: localResult,
         sourceLabel: navigator.onLine === false ? 'Phân tích văn phong offline' : 'Phân tích nhanh trên máy (đăng nhập để kiểm tra AI sâu)'
       };
-      setStatus(localResult.summary);
+      setStatus(localResult.summary, 'detector');
       renderDetector();
       render();
       return;
@@ -652,43 +981,28 @@
     pending = controller;
     activeMode = 'detect';
     setBusy(true);
-    setStatus('AI Detector đang phân tích dấu hiệu AI trong văn bản tiếng Trung…');
+    setStatus('AI Detector đang phân tích dấu hiệu AI trong văn bản tiếng Trung…', 'detector');
     const timeout = setTimeout(() => controller.abort(), 185000);
     try {
-      const configResponse = await fetch('./translation-config.json', {signal: controller.signal, cache: 'no-store'});
-      if (!configResponse.ok) throw Error('Dịch vụ AI chưa sẵn sàng.');
-      const config = await configResponse.json();
-      if (!config.enabled) throw Error('Dịch vụ AI chưa sẵn sàng.');
-      const endpoint = new URL('/lesson-ask', config.endpoint);
-      if (endpoint.protocol !== 'https:') throw Error('Dịch vụ AI chưa sẵn sàng.');
-
-      const token = await user.getIdToken();
-      if (pending !== controller) return;
-      if (controller.signal.aborted) throw new DOMException('Aborted', 'AbortError');
       const level = Number(document.getElementById('studioTargetLevel')?.value);
       waitPhase = 'Đang chờ AI Detector trả lời';
       renderWait();
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        signal: controller.signal,
-        headers: {Authorization: 'Bearer ' + token, 'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          question: text,
-          ...aiParams,
-          hsk: level >= 1 && level <= 6 ? level : 3,
-          history: [],
-          lesson: {id: 'sentence-editor', title: 'Kiểm tra dấu hiệu AI tiếng Trung', words: [], content: {mode: 'sentence-ai-detect'}}
-        })
-      });
-      const data = await response.json().catch(() => null);
-      if (pending !== controller || draft.value !== text || window.HSKAccountDashboard?.user?.uid !== user.uid) return;
+      const res = await requestLessonAsk({
+        question: text,
+        ...aiParams,
+        hsk: level >= 1 && level <= 6 ? level : 3,
+        history: [],
+        lesson: {id: 'sentence-editor', title: 'Kiểm tra dấu hiệu AI tiếng Trung', words: [], content: {mode: 'sentence-ai-detect'}}
+      }, controller);
+      if (!res || pending !== controller || draft.value !== text || window.HSKAccountDashboard?.user?.uid !== res.uid) return;
+      const { response, data } = res;
       if (!response.ok) throw Error(data?.error || 'Không phân tích sâu được, dùng kết quả phân tích nhanh trên máy.');
       const detected = window.HSKSentenceReview.normalizeAiDetection(data, text) || localResult;
       const {provider, model} = sourceLabel(data || {}, response);
       const fbFrom = typeof data?.fallbackFrom === 'string' && providerNames[data.fallbackFrom] ? providerNames[data.fallbackFrom] : '';
       const srcLabel = provider ? provider + (model ? ' · ' + model : '') + (fbFrom ? ` (dự phòng từ ${fbFrom})` : '') : 'HSK AI + Văn phong';
       detection = {result: detected, sourceLabel: srcLabel};
-      setStatus(detected.summary + (provider ? ' Nguồn: ' + srcLabel + '.' : ''));
+      setStatus(detected.summary + (provider ? ' Nguồn: ' + srcLabel + '.' : ''), 'detector');
       renderDetector();
       render();
     } catch (error) {
@@ -697,9 +1011,9 @@
       renderDetector();
       render();
       if (controller.signal.aborted || error.name === 'AbortError') {
-        setStatus('AI Detector phản hồi quá lâu; đang hiển thị kết quả phân tích nhanh trên máy.');
+        setStatus('AI Detector phản hồi quá lâu; đang hiển thị kết quả phân tích nhanh trên máy.', 'detector');
       } else {
-        setStatus((error.message || 'Không kết nối được AI.') + ' Đang hiển thị kết quả phân tích nhanh trên máy.');
+        setStatus((error.message || 'Không kết nối được AI.') + ' Đang hiển thị kết quả phân tích nhanh trên máy.', 'detector');
       }
     } finally {
       clearTimeout(timeout);
@@ -711,24 +1025,209 @@
     }
   }
 
-  detectBtn?.addEventListener('click', runAiDetector);
-
-  form.addEventListener('submit', async event => {
-    event.preventDefault();
+  async function runRewrite() {
     if (pending || composing) return;
     const text = draft.value;
     if (!han.test(text)) {
-      setStatus('Nhập câu hoặc đoạn văn tiếng Trung cần sửa.');
+      setStatus('Nhập đoạn văn tiếng Trung bên trái trước khi viết lại.', 'rewrite');
       draft.focus();
       return;
     }
     if (navigator.onLine === false) {
-      setStatus('Kiểm tra bằng AI cần kết nối mạng. Văn bản vẫn ở đây.');
+      setStatus('Viết lại bằng AI cần kết nối mạng. Văn bản vẫn được giữ nguyên.', 'rewrite');
       return;
     }
     const user = window.HSKAccountDashboard?.user;
     if (!user?.uid) {
-      setStatus('Đăng nhập để kiểm tra văn bản bằng AI.');
+      setStatus('Đăng nhập để dùng tính năng Viết lại bằng AI.', 'rewrite');
+      return;
+    }
+    const aiParams = buildAiRequestParams();
+    const styleDesc = REWRITE_STYLE_LABELS[rewriteStyle] || REWRITE_STYLE_LABELS.natural;
+    const prompt = `Trong learning_snapshot.draft_chinese là bài viết tiếng Trung. Hãy viết lại hoàn chỉnh đoạn văn đó bằng tiếng Trung theo phong cách "${styleDesc}", giữ đúng ý chính. Đặt trọn đoạn tiếng Trung đã viết lại vào cặp thẻ [[REWRITE]]...[[/REWRITE]] rồi giải thích ngắn các cải thiện bằng tiếng Việt.`;
+    const controller = new AbortController();
+    pending = controller;
+    activeMode = 'rewrite';
+    setBusy(true);
+    setStatus('AI đang viết lại đoạn văn theo phong cách đã chọn…', 'rewrite');
+    const timeout = setTimeout(() => controller.abort(), 185000);
+    try {
+      const level = Number(document.getElementById('studioTargetLevel')?.value);
+      waitPhase = 'Đang viết lại đoạn văn';
+      renderWait();
+      const res = await requestLessonAsk({
+        question: prompt.slice(0, 490),
+        ...aiParams,
+        hsk: level >= 1 && level <= 6 ? level : 3,
+        history: [],
+        lesson: {
+          id: 'sentence-editor',
+          title: 'Viết lại câu tiếng Trung',
+          words: [],
+          content: {mode: 'ai-qa', learning_snapshot: {task: 'chinese_sentence_rewrite', style: rewriteStyle, draft_chinese: text}}
+        }
+      }, controller);
+      if (!res || pending !== controller || draft.value !== text || window.HSKAccountDashboard?.user?.uid !== res.uid) return;
+      const { response, data } = res;
+      if (!response.ok) throw Error(data?.error || 'Chưa viết lại được văn bản. Hãy thử lại.');
+      const parsed = parseRewriteOutput(data?.answer || '');
+      if (!parsed.rewrittenText || !han.test(parsed.rewrittenText)) {
+        throw Error('AI chưa trả được đoạn tiếng Trung viết lại. Hãy thử lại.');
+      }
+      const {provider, model} = sourceLabel(data || {}, response);
+      const srcLabel = provider ? provider + (model ? ' · ' + model : '') : 'HSK AI';
+      rewriteResult = { style: rewriteStyle, rewrittenText: parsed.rewrittenText, notes: parsed.notes, sourceLabel: srcLabel };
+      setStatus('Đã tạo bản viết lại. Bạn có thể bấm Áp dụng vào bài viết hoặc chuyển tab khác.', 'rewrite');
+      renderRewrite();
+      updateRailBadges();
+    } catch (error) {
+      if (pending !== controller) return;
+      setStatus(controller.signal.aborted || error.name === 'AbortError' ? 'AI xử lý quá lâu. Hãy thử lại.' : (error.message || 'Chưa viết lại được văn bản.'), 'rewrite');
+    } finally {
+      clearTimeout(timeout);
+      if (pending === controller) {
+        pending = null;
+        activeMode = 'grammar';
+        setBusy(false);
+      }
+    }
+  }
+
+  async function runDraftQa(rawQuestion) {
+    if (pending || composing) return;
+    const text = draft.value;
+    const query = String(rawQuestion || '').trim();
+    if (!han.test(text)) {
+      setStatus('Dán đoạn văn tiếng Trung bên trái trước khi hỏi AI.', 'ask');
+      draft.focus();
+      return;
+    }
+    if (!query) {
+      qaInput?.focus();
+      return;
+    }
+    if (navigator.onLine === false) {
+      setStatus('Hỏi đáp AI cần kết nối mạng. Văn bản vẫn được giữ nguyên.', 'ask');
+      return;
+    }
+    const user = window.HSKAccountDashboard?.user;
+    if (!user?.uid) {
+      setStatus('Đăng nhập để hỏi AI về bài viết.', 'ask');
+      return;
+    }
+    const aiParams = buildAiRequestParams();
+    const controller = new AbortController();
+    pending = controller;
+    activeMode = 'ask';
+    setBusy(true);
+    setStatus('AI đang đọc văn bản và trả lời câu hỏi của bạn…', 'ask');
+    const timeout = setTimeout(() => controller.abort(), 185000);
+    try {
+      const level = Number(document.getElementById('studioTargetLevel')?.value);
+      waitPhase = 'Đang chờ AI trả lời';
+      renderWait();
+      const historyPayload = qaMessages.slice(-4).map(m => ({role: m.role, text: String(m.text || '').slice(0, 1000)}));
+      const res = await requestLessonAsk({
+        question: query.slice(0, 480),
+        ...aiParams,
+        hsk: level >= 1 && level <= 6 ? level : 3,
+        history: historyPayload,
+        lesson: {
+          id: 'sentence-editor',
+          title: 'Hỏi đáp bài viết tiếng Trung',
+          words: [],
+          content: {mode: 'ai-qa', learning_snapshot: {task: 'chinese_draft_qa', draft_chinese: text}}
+        }
+      }, controller);
+      if (!res || pending !== controller || draft.value !== text || window.HSKAccountDashboard?.user?.uid !== res.uid) return;
+      const { response, data } = res;
+      if (!response.ok) throw Error(data?.error || 'Chưa nhận được phản hồi từ AI. Hãy thử lại.');
+      const answer = String(data?.answer || '').trim();
+      if (!answer) throw Error('AI chưa trả lời được câu hỏi này.');
+      const {provider, model} = sourceLabel(data || {}, response);
+      const srcLabel = provider ? provider + (model ? ' · ' + model : '') : 'HSK AI';
+      qaMessages.push({ role: 'user', text: query }, { role: 'assistant', text: answer, sourceLabel: srcLabel });
+      if (qaInput) qaInput.value = '';
+      setStatus('Đã trả lời dựa trên văn bản đang dán.', 'ask');
+      renderQa();
+      updateRailBadges();
+    } catch (error) {
+      if (pending !== controller) return;
+      setStatus(controller.signal.aborted || error.name === 'AbortError' ? 'AI xử lý quá lâu. Hãy thử lại.' : (error.message || 'Chưa hỏi được AI.'), 'ask');
+    } finally {
+      clearTimeout(timeout);
+      if (pending === controller) {
+        pending = null;
+        activeMode = 'grammar';
+        setBusy(false);
+      }
+    }
+  }
+
+  for (const btn of railButtons) {
+    btn.addEventListener('click', () => {
+      const nextTool = btn.dataset.sentenceTool;
+      if (!nextTool) return;
+      setActiveTool(nextTool);
+      if (nextTool === 'detector' && !detection && han.test(draft.value) && !pending) {
+        runAiDetector();
+      }
+    });
+  }
+
+  detectorRunBtn?.addEventListener('click', () => {
+    setActiveTool('detector');
+    runAiDetector();
+  });
+  applyAllBtn?.addEventListener('click', applyAllSuggestions);
+  for (const btn of rewriteStyleBtns) {
+    btn.addEventListener('click', () => {
+      rewriteStyle = btn.dataset.rewriteStyle || 'natural';
+      renderRewrite();
+    });
+  }
+  rewriteRunBtn?.addEventListener('click', () => {
+    setActiveTool('rewrite');
+    runRewrite();
+  });
+  for (const chip of qaChipBtns) {
+    chip.addEventListener('click', () => {
+      const preset = chip.dataset.qaPreset || '';
+      if (qaInput) qaInput.value = preset;
+      setActiveTool('ask');
+      runDraftQa(preset);
+    });
+  }
+  qaSendBtn?.addEventListener('click', () => {
+    setActiveTool('ask');
+    runDraftQa(qaInput?.value || '');
+  });
+  qaInput?.addEventListener('keydown', event => {
+    if (event.key === 'Enter' && !composing) {
+      event.preventDefault();
+      event.stopPropagation();
+      setActiveTool('ask');
+      runDraftQa(qaInput.value);
+    }
+  });
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    setActiveTool('grammar');
+    if (pending || composing) return;
+    const text = draft.value;
+    if (!han.test(text)) {
+      setStatus('Nhập câu hoặc đoạn văn tiếng Trung cần sửa.', 'grammar');
+      draft.focus();
+      return;
+    }
+    if (navigator.onLine === false) {
+      setStatus('Kiểm tra bằng AI cần kết nối mạng. Văn bản vẫn ở đây.', 'grammar');
+      return;
+    }
+    const user = window.HSKAccountDashboard?.user;
+    if (!user?.uid) {
+      setStatus('Đăng nhập để kiểm tra văn bản bằng AI.', 'grammar');
       return;
     }
     const aiParams = buildAiRequestParams();
@@ -736,36 +1235,21 @@
     pending = controller;
     activeMode = 'grammar';
     setBusy(true);
-    setStatus('AI đang kiểm tra ngữ pháp và cách diễn đạt…');
+    setStatus('AI đang kiểm tra ngữ pháp và cách diễn đạt…', 'grammar');
     const timeout = setTimeout(() => controller.abort(), 185000);
     try {
-      const configResponse = await fetch('./translation-config.json', {signal: controller.signal, cache: 'no-store'});
-      if (!configResponse.ok) throw Error('Dịch vụ AI chưa sẵn sàng.');
-      const config = await configResponse.json();
-      if (!config.enabled) throw Error('Dịch vụ AI chưa sẵn sàng.');
-      const endpoint = new URL('/lesson-ask', config.endpoint);
-      if (endpoint.protocol !== 'https:') throw Error('Dịch vụ AI chưa sẵn sàng.');
-
-      const token = await user.getIdToken();
-      if (pending !== controller) return;
-      if (controller.signal.aborted) throw new DOMException('Aborted', 'AbortError');
       const level = Number(document.getElementById('studioTargetLevel')?.value);
       waitPhase = 'Đang chờ AI trả lời';
       renderWait();
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        signal: controller.signal,
-        headers: {Authorization: 'Bearer ' + token, 'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          question: text,
-          ...aiParams,
-          hsk: level >= 1 && level <= 6 ? level : 3,
-          history: [],
-          lesson: {id: 'sentence-editor', title: 'Sửa câu tiếng Trung', words: [], content: {mode: 'sentence-editor'}}
-        })
-      });
-      const data = await response.json().catch(() => null);
-      if (pending !== controller || draft.value !== text || window.HSKAccountDashboard?.user?.uid !== user.uid) return;
+      const res = await requestLessonAsk({
+        question: text,
+        ...aiParams,
+        hsk: level >= 1 && level <= 6 ? level : 3,
+        history: [],
+        lesson: {id: 'sentence-editor', title: 'Sửa câu tiếng Trung', words: [], content: {mode: 'sentence-editor'}}
+      }, controller);
+      if (!res || pending !== controller || draft.value !== text || window.HSKAccountDashboard?.user?.uid !== res.uid) return;
+      const { response, data } = res;
       if (!response.ok) throw Error(data?.error || 'Chưa kiểm tra được văn bản. Hãy thử lại.');
       const review = window.HSKSentenceReview.normalize(data, text);
       if (!review) throw Error('AI chưa trả được gợi ý có vị trí sửa. Hãy bấm kiểm tra lại.');
@@ -773,13 +1257,13 @@
       const fbFrom = typeof data?.fallbackFrom === 'string' && providerNames[data.fallbackFrom] ? providerNames[data.fallbackFrom] : '';
       suggestions = review.suggestions.map(edit => ({...edit, provider}));
       dismissed.clear();
-      setStatus(review.summary + (provider ? ' Nguồn: ' + provider + (model ? ' · ' + model : '') + (fbFrom ? ` (dự phòng vì ${fbFrom} lỗi/không kiểm tra được)` : '') + '.' : ''));
+      setStatus(review.summary + (provider ? ' Nguồn: ' + provider + (model ? ' · ' + model : '') + (fbFrom ? ` (dự phòng vì ${fbFrom} lỗi/không kiểm tra được)` : '') + '.' : ''), 'grammar');
       render();
     } catch (error) {
       if (pending !== controller) return;
-      if (controller.signal.aborted || error.name === 'AbortError') setStatus('AI xử lý quá lâu. Hãy thử lại.');
-      else if (error instanceof TypeError) setStatus('Không kết nối được dịch vụ AI. Kiểm tra mạng rồi thử lại.');
-      else setStatus(error.message || 'Chưa kiểm tra được văn bản. Hãy thử lại.');
+      if (controller.signal.aborted || error.name === 'AbortError') setStatus('AI xử lý quá lâu. Hãy thử lại.', 'grammar');
+      else if (error instanceof TypeError) setStatus('Không kết nối được dịch vụ AI. Kiểm tra mạng rồi thử lại.', 'grammar');
+      else setStatus(error.message || 'Chưa kiểm tra được văn bản. Hãy thử lại.', 'grammar');
     } finally {
       clearTimeout(timeout);
       if (pending === controller) {
@@ -790,6 +1274,7 @@
     }
   });
 
+  setActiveTool('grammar');
   renderDetector();
   render();
 })();

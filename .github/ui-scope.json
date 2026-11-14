@@ -1,5 +1,5 @@
 {
-  "request": "Dark-mode violet surface fixes for glowing white-purple controls/cards (Home, Lessons, SRS Easy button), plus Sentence Editor 5000-char limit, unified AI model picker, and AI Detector.",
+  "request": "Dark-mode violet surface fixes for glowing white-purple controls/cards (Home, Lessons, SRS Easy button), plus Sentence Editor Grammarly-style right tool rail with persistent draft across sub-tools, 5000-char limit, unified AI model picker, and AI Detector.",
   "excludedRoutes": [
     "home",
     "lessons",

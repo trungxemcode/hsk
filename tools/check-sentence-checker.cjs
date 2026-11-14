@@ -234,6 +234,38 @@ const server=http.createServer((req,res)=>{
     await page.evaluate(()=>window.__resolveGrammar({aiSource:{provider:'fosta',model:'gpt-6-astra:xhigh'},sentenceReview:{summary:'Đã kiểm tra.',suggestions:[]}}));
     await status.filter({hasText:'Nguồn: Fosta · gpt-6-astra:xhigh.'}).waitFor();
 
+    // Verify Grammarly-style right rail switches across sub-tools without losing pasted draft text or results
+    const persistentText='我每天早上都去图书馆学习汉语，因为我非常喜欢中国文化。';
+    await input.fill(persistentText);
+    await editor.locator('[data-sentence-tool="stats"]').click();
+    await editor.locator('#sentenceStatsBody .sentence-stat-card').first().waitFor({state:'visible'});
+    assert.equal(await input.inputValue(),persistentText,'chuyển sang tab Thống kê không được làm mất văn bản đang dán');
+
+    await editor.locator('[data-sentence-tool="rewrite"]').click();
+    assert.equal(await input.inputValue(),persistentText,'chuyển sang tab Viết lại không được làm mất văn bản đang dán');
+    await editor.locator('#sentenceRewriteRunBtn').click();
+    await page.waitForFunction(()=>!!window.__resolveGrammar);
+    assert.equal(await page.evaluate(()=>window.__lastGrammarRequest?.lesson?.content?.mode),'ai-qa');
+    await page.evaluate(()=>window.__resolveGrammar({aiSource:{provider:'fosta',model:'gpt-6-astra:xhigh'},answer:'[[REWRITE]]我每天一早就去图书馆学汉语，因为我特别喜欢中国文化。[[/REWRITE]]\nĐã điều chỉnh từ ngữ tự nhiên hơn.'}));
+    await editor.locator('.sentence-rewrite-text').filter({hasText:'我每天一早就去图书馆学汉语'}).waitFor();
+
+    await editor.locator('[data-sentence-tool="ask"]').click();
+    assert.equal(await input.inputValue(),persistentText,'chuyển sang tab Hỏi nhanh AI không được làm mất văn bản đang dán');
+    await editor.locator('#sentenceQaInput').fill('Đoạn này có tự nhiên không?');
+    await editor.locator('#sentenceQaSendBtn').click();
+    await page.waitForFunction(()=>!!window.__resolveGrammar);
+    await page.evaluate(()=>window.__resolveGrammar({aiSource:{provider:'fosta',model:'gpt-6-astra:xhigh'},answer:'Đoạn văn viết khá tự nhiên ở trình độ HSK 3.'}));
+    await editor.locator('.sentence-qa-msg[data-role="assistant"]').filter({hasText:'Đoạn văn viết khá tự nhiên'}).waitFor();
+
+    // Switch back to Rewrite, Detector, Stats, Grammar -> draft and stored results must still be intact
+    await editor.locator('[data-sentence-tool="rewrite"]').click();
+    await editor.locator('.sentence-rewrite-text').filter({hasText:'我每天一早就去图书馆学汉语'}).waitFor();
+    await editor.locator('[data-sentence-tool="grammar"]').click();
+    assert.equal(await input.inputValue(),persistentText,'quay lại tab Sửa ngữ pháp vẫn giữ nguyên văn bản đang dán');
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'editor with right rail must not overflow horizontally on desktop');
+    await page.setViewportSize({width:390,height:844});
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'editor with right rail must not overflow horizontally on mobile');
+
     console.log('PASS AI sentence editor: login/offline states, manual requests, stale result rejection, provider, apply/undo and responsive layout');
   }finally{await browser.close();server.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});
