@@ -448,7 +448,7 @@
     className: 'podcast-sec-btn podcast-sync-channels-btn',
     onClick: () => syncYoutubeChannels()
   });
-  setBtnContent(syncBtn, 'sync', 'Cập nhật 3 kênh');
+  setBtnContent(syncBtn, 'sync', 'Cập nhật 4 kênh');
 
   const catalogHeadEl = el(
     'div',
@@ -1047,7 +1047,7 @@
 
     syncBtn.disabled = state.channelSyncing;
     syncBtn.classList.toggle('is-busy', Boolean(state.channelSyncing));
-    const channelCount = channels.length || 3;
+    const channelCount = channels.length || 4;
     setBtnContent(syncBtn, 'sync', state.channelSyncing ? 'Đang đồng bộ…' : `Cập nhật ${channelCount} kênh`, 13);
 
     if (state.channelSyncStatus) {
@@ -1062,19 +1062,19 @@
   async function syncYoutubeChannels() {
     if (state.channelSyncing) return;
     state.channelSyncing = true;
-    state.channelSyncStatus = 'Đang lấy danh sách tập mới nhất từ @LearnChineseThroughPodcast, @BaoBaoMandarin và @ChineseDailyPodcast…';
+    state.channelSyncStatus = 'Đang lấy danh sách tập mới nhất từ @LearnChineseThroughPodcast, @BaoBaoMandarin, @ChineseDailyPodcast và @PandaStudio24…';
     renderChannelBar();
     try {
       const workerOrigin = await getWorkerEndpointUrl();
       const res = await fetch(`${workerOrigin}/podcast-feed?channel=all`, { method: 'GET', cache: 'no-store' });
       const data = await res.json().catch(() => null);
       if (!res.ok || !Array.isArray(data?.episodes)) {
-        throw Error(data?.error || 'Không lấy được danh sách tập mới từ 3 kênh YouTube.');
+        throw Error(data?.error || 'Không lấy được danh sách tập mới từ 4 kênh YouTube.');
       }
       state.channelEpisodes = data.episodes;
       persistChannelEpisodes();
       const visibleCount = allEpisodes().length;
-      state.channelSyncStatus = `Đã đồng bộ ${data.episodes.length} tập gần đây từ 3 kênh YouTube (tổng ${visibleCount} tập sẵn sàng).`;
+      state.channelSyncStatus = `Đã đồng bộ ${data.episodes.length} tập gần đây từ 4 kênh YouTube (tổng ${visibleCount} tập sẵn sàng).`;
     } catch (err) {
       state.channelSyncStatus = err?.message || 'Chưa đồng bộ được kênh YouTube lúc này.';
     } finally {

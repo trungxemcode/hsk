@@ -21,12 +21,13 @@ test('HSKPodcastCore extracts YouTube IDs across standard URL formats', () => {
   assert.equal(podcastCore.extractYoutubeId('not-a-valid-url'), '');
 });
 
-test('HSKPodcastCore starter episodes cover HSK 1-6 with synced 4-layer cues from the 3 YouTube channels', () => {
+test('HSKPodcastCore starter episodes cover HSK 1-6 with synced 4-layer cues from the 4 YouTube channels', () => {
   assert.equal(podcastCore.STARTER_EPISODES.length, 8);
-  assert.equal(podcastCore.DEFAULT_CHANNELS.length, 3);
+  assert.equal(podcastCore.DEFAULT_CHANNELS.length, 4);
   assert.equal(podcastCore.extractYoutubeChannelKey('@LearnChineseThroughPodcast')?.channelId, 'UCI8Liuxdz6UPv5rgMskfwPg');
   assert.equal(podcastCore.extractYoutubeChannelKey('https://www.youtube.com/@BaoBaoMandarin')?.channelId, 'UCYHKAec4JjyR_DC2obXv1Yg');
   assert.equal(podcastCore.extractYoutubeChannelKey('https://www.youtube.com/@ChineseDailyPodcast')?.channelId, 'UCyYT-HdG1FXua6_vwyXNqhg');
+  assert.equal(podcastCore.extractYoutubeChannelKey('https://www.youtube.com/@PandaStudio24')?.channelId, 'UCnXr9o-f4MXHdgq_QN3QFiw');
   assert.equal(podcastCore.inferHskLevelFromTitle('HSK 1–3 | 会 VS 要 VS 能').levelGroup, 'hsk1-2');
   assert.equal(podcastCore.inferHskLevelFromTitle('HSK 3–5 | 中国短剧有什么好看的？').levelGroup, 'hsk4');
   assert.equal(podcastCore.toSimplifiedChinese('歡迎來到寶寶中文，請問這家餐廳怎麼走？'), '欢迎来到宝宝中文，请问这家餐厅怎么走？');
@@ -37,6 +38,7 @@ test('HSKPodcastCore starter episodes cover HSK 1-6 with synced 4-layer cues fro
       ep.channelHandle === '@BaoBaoMandarin'
       || ep.channelHandle === '@LearnChineseThroughPodcast'
       || ep.channelHandle === '@ChineseDailyPodcast'
+      || ep.channelHandle === '@PandaStudio24'
     );
     for (const cue of ep.cues) {
       assert.ok(cue.end > cue.start);
@@ -45,19 +47,20 @@ test('HSKPodcastCore starter episodes cover HSK 1-6 with synced 4-layer cues fro
   }
 });
 
-test('LIBRARY_EPISODES and all 146 static podcast cue packs are valid simplified 4-layer scripts', () => {
+test('LIBRARY_EPISODES and all 161 static podcast cue packs are valid simplified 4-layer scripts', () => {
   const lib = podcastCore.LIBRARY_EPISODES || [];
-  assert.equal(lib.length, 139);
+  assert.equal(lib.length, 154);
   const allCurated = [...podcastCore.STARTER_EPISODES, ...lib];
   const withUrl = allCurated.filter((ep) => ep.cuesUrl);
-  assert.equal(withUrl.length, 146);
+  assert.equal(withUrl.length, 161);
   const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
   for (const ep of withUrl) {
     assert.ok(ep.cues.length >= 2, `${ep.id} has preview cues`);
     assert.ok(
       ep.channelHandle === '@BaoBaoMandarin'
       || ep.channelHandle === '@LearnChineseThroughPodcast'
-      || ep.channelHandle === '@ChineseDailyPodcast',
+      || ep.channelHandle === '@ChineseDailyPodcast'
+      || ep.channelHandle === '@PandaStudio24',
       `${ep.id} channelHandle`
     );
     const jsonPath = path.join(rootDir, ep.cuesUrl);

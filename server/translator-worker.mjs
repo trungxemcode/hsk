@@ -237,7 +237,8 @@ async function runSentenceEditorGeminiFallback({fetchFn,env,providerBody,signal,
 const PODCAST_CHANNELS={
  'learn-chinese-through-podcast':{id:'learn-chinese-through-podcast',handle:'@LearnChineseThroughPodcast',channelId:'UCI8Liuxdz6UPv5rgMskfwPg',name:'Learn Chinese Through Podcast',url:'https://www.youtube.com/@LearnChineseThroughPodcast',feedUrl:'https://www.youtube.com/feeds/videos.xml?channel_id=UCI8Liuxdz6UPv5rgMskfwPg'},
  'baobao-mandarin':{id:'baobao-mandarin',handle:'@BaoBaoMandarin',channelId:'UCYHKAec4JjyR_DC2obXv1Yg',name:'BaoBao Mandarin',url:'https://www.youtube.com/@BaoBaoMandarin',feedUrl:'https://www.youtube.com/feeds/videos.xml?channel_id=UCYHKAec4JjyR_DC2obXv1Yg'},
- 'chinese-daily-podcast':{id:'chinese-daily-podcast',handle:'@ChineseDailyPodcast',channelId:'UCyYT-HdG1FXua6_vwyXNqhg',name:'Chinese Daily Podcast',url:'https://www.youtube.com/@ChineseDailyPodcast',feedUrl:'https://www.youtube.com/feeds/videos.xml?channel_id=UCyYT-HdG1FXua6_vwyXNqhg'}
+ 'chinese-daily-podcast':{id:'chinese-daily-podcast',handle:'@ChineseDailyPodcast',channelId:'UCyYT-HdG1FXua6_vwyXNqhg',name:'Chinese Daily Podcast',url:'https://www.youtube.com/@ChineseDailyPodcast',feedUrl:'https://www.youtube.com/feeds/videos.xml?channel_id=UCyYT-HdG1FXua6_vwyXNqhg'},
+ 'panda-studio':{id:'panda-studio',handle:'@PandaStudio24',channelId:'UCnXr9o-f4MXHdgq_QN3QFiw',name:'Panda Studio',url:'https://www.youtube.com/@PandaStudio24',feedUrl:'https://www.youtube.com/feeds/videos.xml?channel_id=UCnXr9o-f4MXHdgq_QN3QFiw'}
 };
 function decodeXmlEntities(str){
  return String(str||'').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,'$1').replace(/<[^>]*>/g,' ').replace(/&amp;/gi,'&').replace(/&lt;/gi,'<').replace(/&gt;/gi,'>').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'").replace(/&nbsp;/gi,' ').replace(/&#(\d+);/g,(_,n)=>String.fromCharCode(Number(n)||32)).replace(/\s+/g,' ').trim();
