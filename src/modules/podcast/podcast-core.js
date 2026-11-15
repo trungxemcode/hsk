@@ -2455,6 +2455,288 @@
           vi: 'Bắt đầu từ hôm nay, BaoBao Mandarin sẽ ra mắt một series kể chuyện mới.'
         }
       ]
+    },
+    {
+      id: 'ep-lctp-hsk24-calm-bad-luck',
+      youtubeId: 'OnXbndDA7I4',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 4 | How Chinese People Stay Calm in Bad Luck (Worth Knowing) | Chinese Listening Practice',
+      titleVi: 'Người Trung Quốc giữ bình tĩnh thế nào khi gặp chuyện xui rủi? (LCTP)',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 1489,
+      durationLabel: '24:49',
+      topic: 'Tư duy & văn hóa',
+      note: 'Trọn bộ 678 câu đối thoại giữa Tử Hiên & Vũ Đồng về thái độ sống bình tĩnh (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/OnXbndDA7I4.json',
+      cuesCount: 678,
+      cues: [
+        {
+          start: 6.11,
+          end: 6.71,
+          en: 'Yutong,',
+          zh: '雨桐，',
+          pinyin: 'Yǔtóng,',
+          vi: 'Vũ Đồng,'
+        },
+        {
+          start: 6.71,
+          end: 9.85,
+          en: 'You look to be in a really good mood this morning,',
+          zh: '今天早上你的心情看起来真不错，',
+          pinyin: 'Jīntiān zǎoshang nǐ de xīnqíng kàn qǐlái zhēn búcuò,',
+          vi: 'Sáng nay trông tâm trạng của cậu thật vui vẻ,'
+        },
+        {
+          start: 9.87,
+          end: 12.25,
+          en: 'and you even smiled as you poured me hot tea.',
+          zh: '还笑眯眯地给我倒热茶。',
+          pinyin: 'Hái xiàomīmī de gěi wǒ dào rè chá.',
+          vi: 'lại còn mỉm cười rót trà nóng cho tớ nữa.'
+        }
+      ]
+    },
+    {
+      id: 'ep-lctp-hsk24-mapo-tofu',
+      youtubeId: 'RjvcxwnO8EU',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 4 | How Mapo Tofu Creates Seven Flavors | Learn Chinese Through Food',
+      titleVi: 'Đậu phụ Ma Bà và 7 tầng hương vị (Learn Chinese Through Podcast)',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 727,
+      durationLabel: '12:07',
+      topic: 'Ẩm thực Tứ Xuyên',
+      note: 'Trọn bộ 297 câu kể chuyện món Đậu phụ Ma Bà Tứ Xuyên, từ vựng vị giác & nấu ăn HSK 2–4 (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/RjvcxwnO8EU.json',
+      cuesCount: 297,
+      cues: [
+        {
+          start: 6.78,
+          end: 9.67,
+          en: 'Have you ever encountered this situation?',
+          zh: '你有没有遇到过这种情况？',
+          pinyin: 'nǐ yǒu méi yǒu yùdào guo zhè zhǒng qíngkuàng?',
+          vi: 'Bạn đã bao giờ gặp tình huống này chưa?'
+        },
+        {
+          start: 9.81,
+          end: 12.27,
+          en: 'A plate of tofu has just been brought to the table,',
+          zh: '一盘豆腐刚端上桌，',
+          pinyin: 'yì pán dòufu gāng duān shàng zhuō,',
+          vi: 'Một đĩa đậu phụ vừa được bưng lên bàn,'
+        },
+        {
+          start: 12.33,
+          end: 13.65,
+          en: 'glistening red,',
+          zh: '红得发亮，',
+          pinyin: 'hóng de fāliàng,',
+          vi: 'đỏ bóng lên,'
+        }
+      ]
+    },
+    {
+      id: 'ep-lctp-hsk24-ancient-wall-sunset',
+      youtubeId: 'McIKMPc-QhY',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 4 | Sunset on the Ancient Wall  | Learn Chinese Through a Beautiful City Walk',
+      titleVi: 'Hoàng hôn trên tường thành cổ — City Walk học tiếng Trung (LCTP)',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 727,
+      durationLabel: '12:07',
+      topic: 'Du lịch & dạo phố',
+      note: 'Trọn bộ 296 câu mô tả chuyến dạo bộ ngắm hoàng hôn trên tường thành cổ (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/McIKMPc-QhY.json',
+      cuesCount: 296,
+      cues: [
+        {
+          start: 6.27,
+          end: 8.65,
+          en: 'Have you ever seen a sunset like this?',
+          zh: '你有没有看过这样的夕阳？',
+          pinyin: 'Nǐ yǒu méiyǒu kàn guo zhèyàng de xīyáng?',
+          vi: 'Bạn đã bao giờ ngắm hoàng hôn như thế này chưa?'
+        },
+        {
+          start: 8.87,
+          end: 11.41,
+          en: 'The sun hasn\'t completely set yet,',
+          zh: '太阳还没有完全落下，',
+          pinyin: 'Tàiyáng hái méiyǒu wánquán luòxia,',
+          vi: 'Mặt trời vẫn chưa hoàn toàn lặn xuống,'
+        },
+        {
+          start: 11.47,
+          end: 14.81,
+          en: 'but the ancient city wall has already turned golden,',
+          zh: '古老的城墙先变成了金色，',
+          pinyin: 'Gǔlǎo de chéngqiáng xiān biàn chéng le jīnsè,',
+          vi: 'nhưng những bức tường thành cổ đã chuyển sang màu vàng trước,'
+        }
+      ]
+    },
+    {
+      id: 'ep-lctp-hsk24-truly-happy',
+      youtubeId: 'RSgCb3MVgrw',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 4 | What Makes a Person Truly Happy?  | Chinese Listening Practice',
+      titleVi: 'Điều gì khiến một người thực sự hạnh phúc? (LCTP)',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 781,
+      durationLabel: '13:01',
+      topic: 'Hạnh phúc & nội tâm',
+      note: 'Trọn bộ 338 câu chia sẻ nhẹ nhàng về niềm vui và hạnh phúc bền vững HSK 2–4 (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/RSgCb3MVgrw.json',
+      cuesCount: 338,
+      cues: [
+        {
+          start: 6.49,
+          end: 8.29,
+          en: 'Have you ever met someone like this…',
+          zh: '你有没有见过这样的人……',
+          pinyin: 'Nǐ yǒu méiyǒu jiàn guo zhèyàng de rén……',
+          vi: 'Bạn đã từng gặp người như thế này chưa…'
+        },
+        {
+          start: 8.29,
+          end: 9.49,
+          en: 'They are always smiling,',
+          zh: '他总是笑，',
+          pinyin: 'Tā zǒngshì xiào,',
+          vi: 'Người đó lúc nào cũng cười,'
+        },
+        {
+          start: 9.49,
+          end: 11.79,
+          en: 'and seem happy every day.',
+          zh: '看起来每天都很开心。',
+          pinyin: 'Kàn qǐlái měitiān dōu hěn kāixīn.',
+          vi: 'trông như ngày nào cũng rất vui vẻ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-lctp-hsk12-exam-prep-p4',
+      youtubeId: 'TiTXwdz45TQ',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1 - 2 Exam Preparation | Have you passed HSK 1 yet? - Come on over! P4',
+      titleVi: 'Luyện nghe thi HSK 1–2 (Phần 4) — Tử Hiên & Vũ Đồng (LCTP)',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 437,
+      durationLabel: '7:17',
+      topic: 'Ôn thi HSK 1–2',
+      note: 'Trọn bộ 164 câu luyện nghe mẫu câu thực chiến cho kỳ thi HSK 1–2 (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/TiTXwdz45TQ.json',
+      cuesCount: 164,
+      cues: [
+        {
+          start: 6.13,
+          end: 7.48,
+          en: 'Hello, I\'m Zixuan.',
+          zh: '你好，我是子轩。',
+          pinyin: 'Nǐ hǎo, wǒ shì Zǐxuān.',
+          vi: 'Xin chào, tôi là Tử Hiên.'
+        },
+        {
+          start: 8.29,
+          end: 10.23,
+          en: 'Today we listen to Chinese.',
+          zh: '今天我们听汉语。',
+          pinyin: 'Jīntiān wǒmen tīng Hànyǔ.',
+          vi: 'Hôm nay chúng ta nghe tiếng Trung.'
+        },
+        {
+          start: 10.69,
+          end: 12.75,
+          en: 'Hello, I\'m Yutong.',
+          zh: '你好，我是雨桐。',
+          pinyin: 'Nǐ hǎo, wǒ shì Yǔtóng.',
+          vi: 'Xin chào, tôi là Vũ Đồng.'
+        }
+      ]
+    },
+    {
+      id: 'ep-lctp-hsk24-remember-words',
+      youtubeId: 'PTHiyUpf1d8',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 4 | Learn Chinese Smarter: Remember New Words for Longer | Chinese Listening Practice',
+      titleVi: 'Mẹo học từ vựng tiếng Trung nhớ lâu hơn (LCTP)',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 702,
+      durationLabel: '11:42',
+      topic: 'Phương pháp nhớ từ vựng',
+      note: 'Trọn bộ 313 câu chia sẻ phương pháp ghi nhớ từ mới tiếng Trung lâu hơn (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/PTHiyUpf1d8.json',
+      cuesCount: 313,
+      cues: [
+        {
+          start: 6.25,
+          end: 8.19,
+          en: 'Have you ever had this feeling:',
+          zh: '你有没有过这种感觉：',
+          pinyin: 'Nǐ yǒu méiyǒu guò zhè zhǒng gǎnjué:',
+          vi: 'Bạn đã bao giờ có cảm giác thế này chưa:'
+        },
+        {
+          start: 8.25,
+          end: 10.65,
+          en: 'Yesterday you memorized fifty new words,',
+          zh: '昨天背了五十个新词，',
+          pinyin: 'Zuótiān bèi le wǔshí ge xīn cí,',
+          vi: 'Hôm qua học thuộc năm mươi từ mới,'
+        },
+        {
+          start: 10.65,
+          end: 13.45,
+          en: 'but today it feels as if you’re seeing them for the first time?',
+          zh: '今天却好像第一次见到它们？',
+          pinyin: 'Jīntiān què hǎoxiàng dì yī cì jiàn dào tāmen?',
+          vi: 'mà hôm nay lại cứ như lần đầu tiên nhìn thấy chúng?'
+        }
+      ]
     }
   ];
 
