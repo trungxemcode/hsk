@@ -44,7 +44,8 @@ export async function accountRoleControl(storage,data,time=Date.now()){
   if(!m||typeof m!=='object'||Array.isArray(m))return reply({error:'Dữ liệu cấu hình không hợp lệ.'},400);
   if(m.endpoints!==undefined&&(!m.endpoints||typeof m.endpoints!=='object'||Array.isArray(m.endpoints)||!isSafeUrl(m.endpoints.examManifestUrl,true,true)||!isSafeUrl(m.endpoints.driveExamDataUrl,true,true)||!isSafeUrl(m.endpoints.musicCloudEndpoint,true,false)))return reply({error:'Đường dẫn hệ thống không hợp lệ.'},400);
   for(const field of['exams','music','podcasts','documents']){
-   if(m[field]!==undefined&&(!Array.isArray(m[field])||m[field].length>500))return reply({error:'Danh sách tài nguyên không hợp lệ.'},400);
+   const maxItems=field==='podcasts'?1500:500;
+   if(m[field]!==undefined&&(!Array.isArray(m[field])||m[field].length>maxItems))return reply({error:'Danh sách tài nguyên không hợp lệ.'},400);
    if(Array.isArray(m[field])){
     for(const item of m[field]){
      const rawUrl=item?.youtubeUrl||item?.url||'';
