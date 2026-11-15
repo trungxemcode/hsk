@@ -1,0 +1,3329 @@
+{
+  "id": "-f2CWdcfSmc",
+  "youtubeId": "-f2CWdcfSmc",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "聊斋志异：画皮 | Liaozhai Bedtime Story: The Painted Skin | Chinese Daily Podcast",
+  "durationSec": 1089,
+  "cues": [
+    {
+      "start": 6.5,
+      "end": 8.59,
+      "en": "Dear friends, good evening.",
+      "zh": "亲爱的朋友们，晚上好。",
+      "pinyin": "Qīn'ài de péngyǒumen, wǎnshang hǎo.",
+      "vi": "Các bạn thân mến, chào buổi tối."
+    },
+    {
+      "start": 8.6,
+      "end": 12.79,
+      "en": "Welcome to the 'Bedtime Stories' segment of 'Chinese Daily.'",
+      "zh": "欢迎收听《每天中文》的“睡前故事”专栏，",
+      "pinyin": "Huānyíng shōutīng “Měitiān Zhōngwén” de “shuìqián gùshi” zhuānlán,",
+      "vi": "Chào mừng các bạn đến với chuyên mục “Truyện kể trước giờ ngủ” của “Mỗi Ngày Trung Văn”."
+    },
+    {
+      "start": 12.8,
+      "end": 13.89,
+      "en": "I'm Li Ming.",
+      "zh": "我是李明。",
+      "pinyin": "Wǒ shì Lǐ Míng.",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 13.9,
+      "end": 16.06,
+      "en": "Good evening, I'm Wang Yu.",
+      "zh": "晚上好呀，我是王雨。",
+      "pinyin": "Wǎnshang hǎo ya, wǒ shì Wáng Yǔ.",
+      "vi": "Chào buổi tối, tôi là Vương Vũ."
+    },
+    {
+      "start": 16.07,
+      "end": 17.59,
+      "en": "How was your day?",
+      "zh": "今天过得怎么样？",
+      "pinyin": "Jīntiān guò de zěnmeyàng?",
+      "vi": "Hôm nay của bạn thế nào?"
+    },
+    {
+      "start": 17.6,
+      "end": 19.36,
+      "en": "Did work go smoothly?",
+      "zh": "工作顺利吗？",
+      "pinyin": "Gōngzuò shùnlì ma?",
+      "vi": "Công việc có thuận lợi không?"
+    },
+    {
+      "start": 19.37,
+      "end": 21.79,
+      "en": "No matter what troubles you ran into today,",
+      "zh": "不管今天遇到了什么烦心事，",
+      "pinyin": "Bùguǎn jīntiān yùdào le shénme fánxīn shì,",
+      "vi": "Dù hôm nay có gặp chuyện gì phiền lòng,"
+    },
+    {
+      "start": 21.8,
+      "end": 25.09,
+      "en": "or however tired you are, please stop for now,",
+      "zh": "或者有多累，现在都请停下来，",
+      "pinyin": "Huòzhě yǒu duō lèi, xiànzài dōu qǐng tíng xiàlái,",
+      "vi": "hay có mệt đến đâu, bây giờ hãy dừng lại,"
+    },
+    {
+      "start": 25.1,
+      "end": 26.89,
+      "en": "set aside the day's exhaustion,",
+      "zh": "放下一整天的疲惫，",
+      "pinyin": "Fàngxià yì zhěngtiān de píbèi,",
+      "vi": "gác lại mọi mệt mỏi của cả ngày,"
+    },
+    {
+      "start": 26.9,
+      "end": 30.26,
+      "en": "and lie comfortably in your warm bed.",
+      "zh": "舒舒服服地躺进温暖的被窝里吧。",
+      "pinyin": "Shūshūfúfú de tǎng jìn wēnnuǎn de bèiwō lǐ ba.",
+      "vi": "thoải mái nằm vào chiếc chăn ấm áp nhé."
+    },
+    {
+      "start": 30.27,
+      "end": 33.06,
+      "en": "Yes, take a deep breath and close your eyes,",
+      "zh": "是的，深呼吸，闭上眼睛，",
+      "pinyin": "Shì de, shēnhūxī, bìshàng yǎnjing,",
+      "vi": "Đúng vậy, hít thở sâu, nhắm mắt lại,"
+    },
+    {
+      "start": 33.07,
+      "end": 35.49,
+      "en": "let your heart slowly calm down.",
+      "zh": "让心慢慢安静下来。",
+      "pinyin": "Ràng xīn màn màn ānjìng xiàlái.",
+      "vi": "để lòng từ từ lặng yên."
+    },
+    {
+      "start": 35.5,
+      "end": 38.92,
+      "en": "Starting today, our bedtime story segment",
+      "zh": "从今天开始，我们的睡前故事专栏",
+      "pinyin": "Cóng jīntiān kāishǐ, wǒmen de shuìqián gùshi zhuānlán",
+      "vi": "Từ hôm nay, chuyên mục truyện kể trước giờ ngủ của chúng ta"
+    },
+    {
+      "start": 38.93,
+      "end": 42.19,
+      "en": "will launch a brand-new major theme,",
+      "zh": "将开启一个全新的重磅主题，",
+      "pinyin": "jiāng kāiqǐ yí ge quánxīn de zhòngbàng zhǔtí,",
+      "vi": "sẽ mở ra một chủ đề mới toanh và đặc biệt,"
+    },
+    {
+      "start": 42.2,
+      "end": 43.36,
+      "en": "taking everyone together",
+      "zh": "带大家一起",
+      "pinyin": "Dài dàjiā yìqǐ",
+      "vi": "đưa mọi người cùng"
+    },
+    {
+      "start": 43.37,
+      "end": 46.76,
+      "en": "into ancient China's famous collection of wondrous tales,",
+      "zh": "走进中国古代著名的奇妙故事集",
+      "pinyin": "Zǒujìn Zhōngguó gǔdài zhùmíng de qímiào gùshijí",
+      "vi": "bước vào tập truyện kỳ lạ nổi tiếng thời cổ đại Trung Quốc"
+    },
+    {
+      "start": 46.77,
+      "end": 48.39,
+      "en": "'Strange Tales from a Chinese Studio.'",
+      "zh": "《聊斋志异》。",
+      "pinyin": "“Liáozhāi Zhìyì”.",
+      "vi": "“Liêu Trai Chí Dị”."
+    },
+    {
+      "start": 48.4,
+      "end": 50.32,
+      "en": "I've finally been waiting for this topic!",
+      "zh": "终于等到这个专题了！",
+      "pinyin": "Zhōngyú děngdào zhège zhuāntí le!",
+      "vi": "Cuối cùng cũng đợi được chủ đề này rồi!"
+    },
+    {
+      "start": 50.33,
+      "end": 52.29,
+      "en": "In today's first episode,",
+      "zh": "在今天的第一期节目里，",
+      "pinyin": "Zài jīntiān de dì yī qī jiémù lǐ,",
+      "vi": "Trong tập đầu tiên hôm nay,"
+    },
+    {
+      "start": 52.3,
+      "end": 54.92,
+      "en": "we're going to talk about, in all of 'Strange Tales from a Chinese Studio,'",
+      "zh": "我们要聊的是整个《聊斋志异》里",
+      "pinyin": "Wǒmen yào liáo de shì zhěnggè “Liáozhāi Zhìyì” lǐ",
+      "vi": "chúng ta sẽ nói về câu chuyện trong toàn bộ “Liêu Trai Chí Dị”"
+    },
+    {
+      "start": 54.93,
+      "end": 57.85,
+      "en": "the most classic and widely circulated story,",
+      "zh": "最经典、流传最广的一个故事，",
+      "pinyin": "zuì jīngdiǎn, liúchuán zuì guǎng de yí ge gùshi,",
+      "vi": "câu chuyện kinh điển nhất và được lưu truyền rộng nhất,"
+    },
+    {
+      "start": 57.87,
+      "end": 59.89,
+      "en": "called 'The Painted Skin.'",
+      "zh": "叫作《画皮》。",
+      "pinyin": "jiàozuò “Huà Pí”.",
+      "vi": "có tên là “Bức Họa Da Người”."
+    },
+    {
+      "start": 59.9,
+      "end": 61.46,
+      "en": "This story, 'The Painted Skin,'",
+      "zh": "《画皮》这个故事，",
+      "pinyin": "“Huà Pí” zhège gùshi,",
+      "vi": "Câu chuyện “Bức Họa Da Người” này,"
+    },
+    {
+      "start": 61.47,
+      "end": 64.99,
+      "en": "on the surface tells of an extremely beautiful woman,",
+      "zh": "表面上是在讲一个长得极美的女子，",
+      "pinyin": "biǎomiàn shang shì zài jiǎng yí ge zhǎng de jíměi de nǚzǐ,",
+      "vi": "bề ngoài kể về một người phụ nữ xinh đẹp tuyệt trần,"
+    },
+    {
+      "start": 65,
+      "end": 68.66,
+      "en": "but behind it, it actually explores glamorous appearances,",
+      "zh": "但背后探讨的其实是华丽的外表、",
+      "pinyin": "Dàn bèihòu tàntǎo de qíshí shì huálì de wàibiǎo,",
+      "vi": "nhưng thực ra phía sau bàn đến vẻ ngoài hào nhoáng,"
+    },
+    {
+      "start": 68.67,
+      "end": 70.36,
+      "en": "human inner desires,",
+      "zh": "人类内心的欲望，",
+      "pinyin": "rénlèi nèixīn de yùwàng,",
+      "vi": "những dục vọng trong lòng con người,"
+    },
+    {
+      "start": 70.37,
+      "end": 74.59,
+      "en": "and those dangerous traps disguised as something beautiful.",
+      "zh": "以及那些伪装成美好的危险陷阱。",
+      "pinyin": "yǐjí nàxiē wěizhuāng chéng měihǎo de wēixiǎn xiànjǐng.",
+      "vi": "cùng những cạm bẫy nguy hiểm giả dạng thành vẻ đẹp."
+    },
+    {
+      "start": 74.6,
+      "end": 77.29,
+      "en": "People in ancient times long ago used this story to remind us,",
+      "zh": "古人早就借这个故事提醒我们，",
+      "pinyin": "Gǔrén zǎo jiù jiè zhège gùshi tíxǐng wǒmen,",
+      "vi": "Người xưa đã sớm mượn câu chuyện này để nhắc nhở chúng ta,"
+    },
+    {
+      "start": 77.3,
+      "end": 78.99,
+      "en": "the beauty seen by the eyes",
+      "zh": "眼睛看到的美好，",
+      "pinyin": "yǎnjing kàndào de měihǎo,",
+      "vi": "những vẻ đẹp mà mắt nhìn thấy,"
+    },
+    {
+      "start": 79,
+      "end": 82.79,
+      "en": "may sometimes hide a huge crisis behind it.",
+      "zh": "有时候背后可能藏着巨大的危机。",
+      "pinyin": "yǒu shíhou bèihòu kěnéng cáng zhe jùdà de wēijī.",
+      "vi": "đôi khi phía sau có thể ẩn chứa một nguy cơ to lớn."
+    },
+    {
+      "start": 82.8,
+      "end": 85.69,
+      "en": "Just what kind of peerless beauty",
+      "zh": "到底是什么样的绝世美貌下，",
+      "pinyin": "Dàodǐ shì shénme yàng de juéshì měimào xià,",
+      "vi": "Rốt cuộc là dưới vẻ đẹp tuyệt thế như thế nào,"
+    },
+    {
+      "start": 85.7,
+      "end": 88.52,
+      "en": "hides a secret beyond anyone's imagination?",
+      "zh": "藏着让人意想不到的秘密呢？",
+      "pinyin": "cáng zhe ràng rén yìxiǎng bú dào de mìmì ne?",
+      "vi": "lại ẩn giấu bí mật khiến người ta không thể ngờ tới?"
+    },
+    {
+      "start": 88.53,
+      "end": 89.19,
+      "en": "Next,",
+      "zh": "接下来，",
+      "pinyin": "Jiēxiàlái,",
+      "vi": "Tiếp theo,"
+    },
+    {
+      "start": 89.2,
+      "end": 92.26,
+      "en": "please get into the most comfortable position,",
+      "zh": "就请调整好一个最舒服的姿势，",
+      "pinyin": "jiù qǐng tiáozhěng hǎo yí ge zuì shūfu de zīshì,",
+      "vi": "hãy điều chỉnh sang một tư thế thoải mái nhất,"
+    },
+    {
+      "start": 92.27,
+      "end": 95.33,
+      "en": "let's turn time back to ancient times together,",
+      "zh": "让我们一起把时间倒回古代，",
+      "pinyin": "Ràng wǒmen yìqǐ bǎ shíjiān dàohuí gǔdài,",
+      "vi": "để chúng ta cùng đưa thời gian trở về thời cổ đại,"
+    },
+    {
+      "start": 95.33,
+      "end": 99.12,
+      "en": "and listen to the strange encounter of the scholar Wang Sheng one early morning.",
+      "zh": "听听书生王生在一个清晨的奇遇吧。",
+      "pinyin": "tīngting shūshēng Wáng Shēng zài yí ge qīngchén de qíyù ba.",
+      "vi": "và nghe cuộc gặp gỡ kỳ lạ của thư sinh Vương Sinh vào một buổi sáng sớm nhé."
+    },
+    {
+      "start": 99.13,
+      "end": 102.45,
+      "en": "The story takes place in a place called Taiyuan.",
+      "zh": "故事发生在一个叫太原的地方。",
+      "pinyin": "Gùshi fāshēng zài yí ge jiào Tàiyuán de dìfang.",
+      "vi": "Câu chuyện xảy ra ở một nơi gọi là Thái Nguyên."
+    },
+    {
+      "start": 102.47,
+      "end": 105.46,
+      "en": "It was an early morning, just before dawn,",
+      "zh": "那是一个清晨，天刚蒙蒙亮，",
+      "pinyin": "Nà shì yí ge qīngchén, tiān gāng méngméng liàng,",
+      "vi": "Đó là một buổi sáng sớm, trời vừa hửng sáng,"
+    },
+    {
+      "start": 105.47,
+      "end": 108.53,
+      "en": "and a thin white mist still drifted over the road.",
+      "zh": "路上还漂着一层白色的薄雾。",
+      "pinyin": "lùshang hái piāo zhe yì céng báisè de bówù.",
+      "vi": "trên đường vẫn còn phảng phất một lớp sương mỏng màu trắng."
+    },
+    {
+      "start": 108.53,
+      "end": 111.95,
+      "en": "The scholar Wang Sheng was walking home alone,",
+      "zh": "书生王生一个人走在回家的路上，",
+      "pinyin": "shūshēng Wáng Shēng yí ge rén zǒu zài huí jiā de lùshang,",
+      "vi": "thư sinh Vương Sinh một mình đi trên đường về nhà,"
+    },
+    {
+      "start": 111.97,
+      "end": 116.13,
+      "en": "Everything around was very quiet; he could only hear his own footsteps.",
+      "zh": "四周非常安静，只能听到自己的脚步声。",
+      "pinyin": "sìzhōu fēicháng ānjìng, zhǐ néng tīngdào zìjǐ de jiǎobù shēng.",
+      "vi": "xung quanh vô cùng yên tĩnh, chỉ nghe thấy tiếng bước chân của chính mình."
+    },
+    {
+      "start": 116.13,
+      "end": 119.49,
+      "en": "Suddenly, he saw a young woman ahead,",
+      "zh": "突然，他看到前面有一个年轻女子，",
+      "pinyin": "Tūrán, tā kàndào qiánmiàn yǒu yí ge niánqīng nǚzǐ,",
+      "vi": "Đột nhiên, anh nhìn thấy phía trước có một người phụ nữ trẻ,"
+    },
+    {
+      "start": 119.5,
+      "end": 121.56,
+      "en": "carrying a large bundle on her back,",
+      "zh": "身上背着一个大包裹，",
+      "pinyin": "shēnshang bēi zhe yí ge dà bāoguǒ,",
+      "vi": "trên lưng đeo một cái bọc lớn,"
+    },
+    {
+      "start": 121.57,
+      "end": 124.93,
+      "en": "walking all alone, very slowly,",
+      "zh": "一个人孤零零地走着，走得非常慢，",
+      "pinyin": "yí ge rén gūlínglíng de zǒuzhe, zǒu de fēicháng màn,",
+      "vi": "một mình lẻ loi bước đi, đi rất chậm,"
+    },
+    {
+      "start": 124.93,
+      "end": 127.49,
+      "en": "looking very tired and sad.",
+      "zh": "好像很累、很难过的样子。",
+      "pinyin": "hǎoxiàng hěn lèi, hěn nánguò de yàngzi.",
+      "vi": "trông như rất mệt mỏi và rất buồn."
+    },
+    {
+      "start": 127.5,
+      "end": 132.16,
+      "en": "A young girl walking alone on the road early in the morning?",
+      "zh": "一个年轻女孩子，在大清早一个人走在路上？",
+      "pinyin": "Yí ge niánqīng nǚháizi, zài dà qīngzǎo yí ge rén zǒu zài lùshang?",
+      "vi": "Một cô gái trẻ lại một mình đi trên đường vào sáng sớm?"
+    },
+    {
+      "start": 132.17,
+      "end": 134.93,
+      "en": "That does sound a little strange.",
+      "zh": "这听起来确实有点奇怪啊。",
+      "pinyin": "Zhè tīng qǐlái quèshí yǒudiǎn qíguài a.",
+      "vi": "Điều này nghe đúng là hơi kỳ lạ thật."
+    },
+    {
+      "start": 134.93,
+      "end": 138.95,
+      "en": "How could someone from a normal family go out alone so early?",
+      "zh": "正常人家的人，怎么会这么早独自出门呢？",
+      "pinyin": "Zhèngcháng rénjiā de rén, zěnme huì zhème zǎo dúzì chūmén ne?",
+      "vi": "Người nhà bình thường sao lại ra ngoài một mình sớm như vậy chứ?"
+    },
+    {
+      "start": 138.97,
+      "end": 142.46,
+      "en": "Yes, any rational person would find it strange.",
+      "zh": "是的，任何理智的人都会觉得奇怪。",
+      "pinyin": "Shì de, rènhé lǐzhì de rén dōu huì juéde qíguài.",
+      "vi": "Đúng vậy, bất kỳ người lý trí nào cũng sẽ thấy kỳ lạ."
+    },
+    {
+      "start": 142.47,
+      "end": 147.09,
+      "en": "Wang Sheng also felt a bit curious, so he quickly stepped forward.",
+      "zh": "王生也觉得有点好奇，于是他快步走上前去。",
+      "pinyin": "Wáng Shēng yě juéde yǒudiǎn hàoqí, yúshì tā kuàibù zǒu shàng qián qù.",
+      "vi": "Vương Sinh cũng thấy hơi tò mò, thế là anh nhanh bước tiến lên phía trước."
+    },
+    {
+      "start": 147.1,
+      "end": 148.99,
+      "en": "When he walked up to that girl,",
+      "zh": "当他走到那个女孩子面前，",
+      "pinyin": "Dāng tā zǒu dào nàge nǚháizi miànqián,",
+      "vi": "Khi anh ta bước đến trước mặt cô gái đó,"
+    },
+    {
+      "start": 149,
+      "end": 152.59,
+      "en": "and turned to look, he was completely stunned.",
+      "zh": "转头一看的时候，他整个人都呆住了。",
+      "pinyin": "Zhuǎn tóu yī kàn de shíhou, tā zhěnggè rén dōu dāi zhù le.",
+      "vi": "quay đầu nhìn lại thì cả người anh ta sững sờ."
+    },
+    {
+      "start": 152.6,
+      "end": 154.06,
+      "en": "Why was he stunned?",
+      "zh": "为什么呆住了？",
+      "pinyin": "Wèishénme dāi zhù le?",
+      "vi": "Vì sao lại sững sờ?"
+    },
+    {
+      "start": 154.07,
+      "end": 156.49,
+      "en": "Was that girl very ugly?",
+      "zh": "那个女孩子长得很难看吗？",
+      "pinyin": "Nàge nǚháizi zhǎng de hěn nánkàn ma?",
+      "vi": "Cô gái đó trông rất xấu sao?"
+    },
+    {
+      "start": 156.5,
+      "end": 157.86,
+      "en": "Just the opposite.",
+      "zh": "正好相反。",
+      "pinyin": "Zhènghǎo xiāngfǎn.",
+      "vi": "Ngược lại hoàn toàn."
+    },
+    {
+      "start": 157.87,
+      "end": 160.09,
+      "en": "That girl was so beautiful,",
+      "zh": "那个女孩子长得太美了，",
+      "pinyin": "Nàge nǚháizi zhǎng de tài měi le,",
+      "vi": "Cô gái đó đẹp quá,"
+    },
+    {
+      "start": 160.1,
+      "end": 163.92,
+      "en": "her eyes were clear as water, her complexion fair,",
+      "zh": "眼睛像水一样清澈，脸色白皙，",
+      "pinyin": "Yǎnjing xiàng shuǐ yīyàng qīngchè, liǎnsè báixī,",
+      "vi": "đôi mắt trong như nước, làn da trắng trẻo,"
+    },
+    {
+      "start": 163.93,
+      "end": 168.09,
+      "en": "her delicate look made anyone who glanced at her feel a pang of tenderness.",
+      "zh": "柔弱的样子让人看一眼就忍不住心疼。",
+      "pinyin": "Róuruò de yàngzi ràng rén kàn yī yǎn jiù rěn bù zhù xīnténg.",
+      "vi": "vẻ yếu ớt khiến người ta nhìn một cái là không khỏi xót xa."
+    },
+    {
+      "start": 168.1,
+      "end": 171.96,
+      "en": "Wang Sheng usually read many books of sages, but at that moment,",
+      "zh": "王生平时读了很多圣贤书，但那一刻，",
+      "pinyin": "Wáng Shēng píngshí dú le hěn duō shèngxián shū, dàn nà yīkè,",
+      "vi": "Bình thường Vương Sinh đọc nhiều sách thánh hiền, nhưng khoảnh khắc đó,"
+    },
+    {
+      "start": 171.97,
+      "end": 175.89,
+      "en": "all his reason was blown away by the beauty before him.",
+      "zh": "他的理智全都被眼前的美貌给吹散了。",
+      "pinyin": "Tā de lǐzhì quándōu bèi yǎnqián de měimào gěi chuī sàn le.",
+      "vi": "lý trí của anh ta đều bị vẻ đẹp trước mắt thổi bay sạch."
+    },
+    {
+      "start": 175.9,
+      "end": 179.69,
+      "en": "a strong liking suddenly rose in his heart,",
+      "zh": "他心里一下子升起了一种强烈的喜欢，",
+      "pinyin": "Tā xīnli yīxiàzi shēngqǐ le yī zhǒng qiángliè de xǐhuan,",
+      "vi": "trong lòng anh ta bỗng trỗi dậy một sự yêu thích mãnh liệt,"
+    },
+    {
+      "start": 179.7,
+      "end": 181.12,
+      "en": "or rather, desire.",
+      "zh": "或者说是欲望。",
+      "pinyin": "Huòzhě shuō shì yùwàng.",
+      "vi": "hay nói cách khác là dục vọng."
+    },
+    {
+      "start": 181.13,
+      "end": 185.19,
+      "en": "Ah, you see, men really do all judge by appearance.",
+      "zh": "哎，你看，男人果然都是看外表的。",
+      "pinyin": "Āi, nǐ kàn, nánrén guǒrán dōu shì kàn wàibiǎo de.",
+      "vi": "Ôi, bạn xem đấy, đàn ông quả nhiên đều chỉ nhìn bề ngoài."
+    },
+    {
+      "start": 185.2,
+      "end": 187.52,
+      "en": "So did Wang Sheng take the initiative to talk to her?",
+      "zh": "那王生主动跟她说话了吗？",
+      "pinyin": "Nà Wáng Shēng zhǔdòng gēn tā shuōhuà le ma?",
+      "vi": "Vậy Vương Sinh có chủ động nói chuyện với cô ấy không?"
+    },
+    {
+      "start": 187.53,
+      "end": 189.29,
+      "en": "Of course he couldn't resist.",
+      "zh": "他当然忍不住了。",
+      "pinyin": "Tā dāngrán rěn bù zhù le.",
+      "vi": "Đương nhiên anh ta không nhịn được."
+    },
+    {
+      "start": 189.3,
+      "end": 190.39,
+      "en": "Wang Sheng walked over,",
+      "zh": "王生走过去，",
+      "pinyin": "Wáng Shēng zǒu guòqu,",
+      "vi": "Vương Sinh bước tới,"
+    },
+    {
+      "start": 190.4,
+      "end": 193.56,
+      "en": "asked her politely, Young lady,",
+      "zh": "很有礼貌地问她，这位年轻的姑娘，",
+      "pinyin": "Hěn yǒu lǐmào de wèn tā, zhè wèi niánqīng de gūniang,",
+      "vi": "rất lịch sự hỏi cô ấy, cô gái trẻ này,"
+    },
+    {
+      "start": 193.57,
+      "end": 196.99,
+      "en": "it's so early—why are you walking on the road alone?",
+      "zh": "天这么早，你为什么一个人在路上走呢？",
+      "pinyin": "Tiān zhème zǎo, nǐ wèishénme yīgè rén zài lùshang zǒu ne?",
+      "vi": "trời còn sớm thế này, sao cô lại đi một mình trên đường?"
+    },
+    {
+      "start": 197,
+      "end": 198.96,
+      "en": "Have you run into some trouble?",
+      "zh": "遇到什么难处了吗？",
+      "pinyin": "Yùdào shénme nánchù le ma?",
+      "vi": "Cô có gặp khó khăn gì không?"
+    },
+    {
+      "start": 198.97,
+      "end": 202.46,
+      "en": "As soon as the woman heard this, tears immediately streamed down,",
+      "zh": "那个女子一听，眼泪马上就流了下来，",
+      "pinyin": "Nàge nǚzǐ yī tīng, yǎnlèi mǎshàng jiù liú le xiàlái,",
+      "vi": "Cô gái đó vừa nghe, nước mắt lập tức trào ra,"
+    },
+    {
+      "start": 202.47,
+      "end": 205.56,
+      "en": "crying like a flower in the rain.",
+      "zh": "哭得像雨中的花朵一样。",
+      "pinyin": "Kū de xiàng yǔ zhōng de huāduǒ yīyàng.",
+      "vi": "khóc như đóa hoa trong mưa."
+    },
+    {
+      "start": 205.57,
+      "end": 208.89,
+      "en": "She said her family was very poor, and for money,",
+      "zh": "她说，她家里很穷，父母为了钱，",
+      "pinyin": "Tā shuō, tā jiāli hěn qióng, fùmǔ wèile qián,",
+      "vi": "Cô ấy nói nhà mình rất nghèo, cha mẹ vì tiền,"
+    },
+    {
+      "start": 208.9,
+      "end": 211.79,
+      "en": "sold her to a wealthy household as a concubine,",
+      "zh": "把她卖给了一个大户人家当小妾，",
+      "pinyin": "bǎ tā màigěi le yīgè dàhù rénjiā dāng xiǎoqiè,",
+      "vi": "đã bán cô cho một gia đình quyền quý làm vợ lẽ,"
+    },
+    {
+      "start": 211.8,
+      "end": 214.99,
+      "en": "but the first wife often beat and scolded her,",
+      "zh": "但是大老婆经常打她、骂她，",
+      "pinyin": "dànshì dà lǎopo jīngcháng dǎ tā, mà tā,",
+      "vi": "nhưng bà vợ cả thường xuyên đánh mắng cô,"
+    },
+    {
+      "start": 215,
+      "end": 218.99,
+      "en": "she truly couldn't bear the suffering, so she secretly ran away.",
+      "zh": "她实在受不了这种痛苦，就偷偷跑了出来。",
+      "pinyin": "tā shízài shòu bù liǎo zhè zhǒng tòngkǔ, jiù tōutōu pǎo le chūlái.",
+      "vi": "cô thật sự không chịu nổi nỗi khổ này nên đã lén bỏ chạy ra ngoài."
+    },
+    {
+      "start": 219,
+      "end": 222.29,
+      "en": "Now she is homeless and doesn't know where to go.",
+      "zh": "现在无家可归，不知道该往哪里去。",
+      "pinyin": "Xiànzài wú jiā kě guī, bù zhīdào gāi wǎng nǎli qù.",
+      "vi": "Bây giờ cô không còn nhà để về, không biết nên đi đâu."
+    },
+    {
+      "start": 222.3,
+      "end": 226.09,
+      "en": "Wow, beautiful and with such a pitiful background,",
+      "zh": "哇，长得好看，身世又这么可怜，",
+      "pinyin": "Wa, zhǎng de hǎokàn, shēnshì yòu zhème kělián,",
+      "vi": "Chà, xinh đẹp, thân thế lại đáng thương đến thế,"
+    },
+    {
+      "start": 226.1,
+      "end": 227.76,
+      "en": "it sounds exactly like a",
+      "zh": "听起来完全是一个",
+      "pinyin": "Tīng qǐlái wánquán shì yīgè",
+      "vi": "nghe hoàn toàn giống một"
+    },
+    {
+      "start": 227.77,
+      "end": 230.93,
+      "en": "delicate young girl who needs a hero to protect her.",
+      "zh": "需要英雄来保护的柔弱少女。",
+      "pinyin": "xūyào yīngxióng lái bǎohù de róuruò shàonǚ.",
+      "vi": "thiếu nữ yếu ớt cần anh hùng đến bảo vệ."
+    },
+    {
+      "start": 230.93,
+      "end": 232.29,
+      "en": "If I were Wang Sheng,",
+      "zh": "如果我是王生，",
+      "pinyin": "Rúguǒ wǒ shì Wáng Shēng,",
+      "vi": "Nếu tôi là Vương Sinh,"
+    },
+    {
+      "start": 232.3,
+      "end": 235.99,
+      "en": "I might also immediately be overwhelmed with sympathy and want to help her.",
+      "zh": "我可能也会立刻同情心泛滥，想帮帮她。",
+      "pinyin": "wǒ kěnéng yě huì lìkè tóngqíngxīn fànlàn, xiǎng bāngbang tā.",
+      "vi": "có lẽ tôi cũng sẽ lập tức tràn đầy lòng thương hại, muốn giúp cô ấy."
+    },
+    {
+      "start": 236,
+      "end": 237.89,
+      "en": "Wang Sheng thought the same way.",
+      "zh": "王生也是这么想的。",
+      "pinyin": "Wáng Shēng yě shì zhème xiǎng de.",
+      "vi": "Vương Sinh cũng nghĩ như vậy."
+    },
+    {
+      "start": 237.9,
+      "end": 240.36,
+      "en": "Or rather, within this sympathy,",
+      "zh": "或者说，这种同情心里面，",
+      "pinyin": "huòzhě shuō, zhè zhǒng tóngqíngxīn lǐmiàn,",
+      "vi": "Hay nói cách khác, trong sự đồng cảm này,"
+    },
+    {
+      "start": 240.37,
+      "end": 242.73,
+      "en": "there was also hidden his own selfish motive.",
+      "zh": "还藏着他自己的私心。",
+      "pinyin": "hái cáng zhe tā zìjǐ de sīxīn.",
+      "vi": "còn ẩn chứa tư tâm của chính anh ta."
+    },
+    {
+      "start": 242.73,
+      "end": 245.49,
+      "en": "Wang Sheng said to the woman, If you don't mind,",
+      "zh": "王生对女子说，如果你不介意，",
+      "pinyin": "Wáng Shēng duì nǚzǐ shuō, rúguǒ nǐ bù jièyì,",
+      "vi": "Vương Sinh nói với cô gái: Nếu cô không ngại,"
+    },
+    {
+      "start": 245.5,
+      "end": 248.59,
+      "en": "you can first stay at my home; my home is very safe,",
+      "zh": "可以先去我家住下，我家很安全，",
+      "pinyin": "kěyǐ xiān qù wǒ jiā zhù xià, wǒ jiā hěn ānquán,",
+      "vi": "có thể đến nhà tôi ở tạm trước, nhà tôi rất an toàn,"
+    },
+    {
+      "start": 248.6,
+      "end": 250.46,
+      "en": "no one will come looking for you.",
+      "zh": "没有人会来找你。",
+      "pinyin": "méiyǒu rén huì lái zhǎo nǐ.",
+      "vi": "sẽ không có ai đến tìm cô."
+    },
+    {
+      "start": 250.47,
+      "end": 253.33,
+      "en": "Hearing this, the woman agreed very gratefully.",
+      "zh": "女子听了，非常感激地答应了。",
+      "pinyin": "Nǚzǐ tīng le, fēicháng gǎnjī de dāying le.",
+      "vi": "Cô gái nghe xong, vô cùng cảm kích mà đồng ý."
+    },
+    {
+      "start": 253.33,
+      "end": 256.52,
+      "en": "So Wang Sheng took this beautiful strange woman",
+      "zh": "于是，王生就把这个美丽的陌生女人",
+      "pinyin": "Yúshì, Wáng Shēng jiù bǎ zhège měilì de mòshēng nǚrén",
+      "vi": "Thế là Vương Sinh đưa người phụ nữ xinh đẹp xa lạ này"
+    },
+    {
+      "start": 256.53,
+      "end": 258.19,
+      "en": "back to his own home.",
+      "zh": "带回了自己的家。",
+      "pinyin": "dài huí le zìjǐ de jiā.",
+      "vi": "về nhà mình."
+    },
+    {
+      "start": 258.2,
+      "end": 261.16,
+      "en": "Wait a moment, Li Ming—doesn't Wang Sheng have anyone else at home?",
+      "zh": "等一下，李明，王生家里没有别人吗？",
+      "pinyin": "Děng yīxià, Lǐ Míng, Wáng Shēng jiāli méiyǒu biérén ma?",
+      "vi": "Khoan đã, Lý Minh, nhà Vương Sinh không có ai khác sao?"
+    },
+    {
+      "start": 261.17,
+      "end": 262.33,
+      "en": "Does he have a wife?",
+      "zh": "他有妻子吗？",
+      "pinyin": "Tā yǒu qīzi ma?",
+      "vi": "Anh ta có vợ không?"
+    },
+    {
+      "start": 262.33,
+      "end": 265.65,
+      "en": "Of course he has a wife; his wife is called Chen.",
+      "zh": "他当然有妻子，他的妻子叫陈氏。",
+      "pinyin": "Tā dāngrán yǒu qīzi, tā de qīzi jiào Chén shì.",
+      "vi": "Đương nhiên anh ta có vợ, vợ anh ta tên là Trần thị."
+    },
+    {
+      "start": 265.67,
+      "end": 268.19,
+      "en": "Wang Sheng knew that bringing home a beautiful woman of unknown origin",
+      "zh": "王生知道带一个来历不明的美女回家，",
+      "pinyin": "Wáng Shēng zhīdào dài yīgè láilì bù míng de měinǚ huí jiā,",
+      "vi": "Vương Sinh biết rằng đưa một người đẹp không rõ lai lịch về nhà,"
+    },
+    {
+      "start": 268.2,
+      "end": 269.66,
+      "en": "his wife would definitely be angry,",
+      "zh": "妻子一定会生气，",
+      "pinyin": "qīzi yīdìng huì shēngqì,",
+      "vi": "vợ anh ta nhất định sẽ tức giận,"
+    },
+    {
+      "start": 269.67,
+      "end": 272.06,
+      "en": "and if the villagers found out, they would gossip.",
+      "zh": "而且村里人知道了也会说闲话。",
+      "pinyin": "érqiě cūnli rén zhīdào le yě huì shuō xiánhuà.",
+      "vi": "hơn nữa người trong làng biết chuyện cũng sẽ dị nghị."
+    },
+    {
+      "start": 272.07,
+      "end": 274.96,
+      "en": "So he did something very dishonest:",
+      "zh": "所以他做了一件非常不诚实的事情，",
+      "pinyin": "suǒyǐ tā zuò le yī jiàn fēicháng bù chéngshí de shìqing,",
+      "vi": "nên anh ta đã làm một việc vô cùng không trung thực,"
+    },
+    {
+      "start": 274.97,
+      "end": 278.46,
+      "en": "he secretly hid the woman in his study.",
+      "zh": "他偷偷把这个女子藏在了自己的书房里。",
+      "pinyin": "tā tōutōu bǎ zhège nǚzǐ cáng zài le zìjǐ de shūfáng li.",
+      "vi": "anh ta lén giấu người phụ nữ này trong thư phòng của mình."
+    },
+    {
+      "start": 278.47,
+      "end": 280.66,
+      "en": "He actually, behind his wife's back,",
+      "zh": "他居然背着自己的妻子",
+      "pinyin": "Tā jūrán bèizhe zìjǐ de qīzi",
+      "vi": "Anh ta lại dám sau lưng vợ mình"
+    },
+    {
+      "start": 280.67,
+      "end": 282.56,
+      "en": "hid a woman in his study!",
+      "zh": "藏了一个女人在书房里！",
+      "pinyin": "cáng le yīgè nǚrén zài shūfáng li!",
+      "vi": "giấu một người phụ nữ trong thư phòng!"
+    },
+    {
+      "start": 282.57,
+      "end": 284.59,
+      "en": "This is no longer ordinary help,",
+      "zh": "这已经不是普通的帮忙了，",
+      "pinyin": "Zhè yǐjīng bú shì pǔtōng de bāngmáng le,",
+      "vi": "Đây không còn là giúp đỡ bình thường nữa,"
+    },
+    {
+      "start": 284.6,
+      "end": 286.92,
+      "en": "This is just selfishness and deception.",
+      "zh": "这就是自私和欺骗。",
+      "pinyin": "Zhè jiùshì zìsī hé qīpiàn.",
+      "vi": "Đây chính là sự ích kỷ và lừa dối."
+    },
+    {
+      "start": 286.93,
+      "end": 290.49,
+      "en": "For beauty, Wang Sheng completely forgot his responsibility to his family.",
+      "zh": "王生为了美色，完全忘记了对家庭的责任。",
+      "pinyin": "Wáng Shēng wèile měisè, wánquán wàngjìle duì jiātíng de zérèn.",
+      "vi": "Vương Sinh vì sắc đẹp mà hoàn toàn quên đi trách nhiệm với gia đình."
+    },
+    {
+      "start": 290.5,
+      "end": 292.59,
+      "en": "That's right, your analysis is very accurate.",
+      "zh": "没错，你分析得非常准确。",
+      "pinyin": "Méi cuò, nǐ fēnxī de fēicháng zhǔnquè.",
+      "vi": "Đúng vậy, bạn phân tích rất chính xác."
+    },
+    {
+      "start": 292.6,
+      "end": 294.66,
+      "en": "Desire often begins like this,",
+      "zh": "欲望往往就是这样开始的，",
+      "pinyin": "Yùwàng wǎngwǎng jiùshì zhèyàng kāishǐ de,",
+      "vi": "Dục vọng thường bắt đầu như thế này,"
+    },
+    {
+      "start": 294.67,
+      "end": 297.96,
+      "en": "It makes people first find a seemingly kind excuse,",
+      "zh": "它让人先找到一个看似善良的借口，",
+      "pinyin": "Tā ràng rén xiān zhǎodào yí ge kànsì shànliáng de jièkǒu,",
+      "vi": "Nó khiến người ta trước tiên tìm một cái cớ có vẻ lương thiện,"
+    },
+    {
+      "start": 297.97,
+      "end": 299.06,
+      "en": "such as sympathy,",
+      "zh": "比如同情，",
+      "pinyin": "Bǐrú tóngqíng,",
+      "vi": "ví dụ như lòng thương hại,"
+    },
+    {
+      "start": 299.07,
+      "end": 302.79,
+      "en": "and then makes people give up their moral bottom line step by step.",
+      "zh": "然后让人一步一步放弃道德的底线。",
+      "pinyin": "Ránhòu ràng rén yí bù yí bù fàngqì dàodé de dǐxiàn.",
+      "vi": "rồi khiến người ta từng bước từng bước từ bỏ ranh giới đạo đức."
+    },
+    {
+      "start": 302.8,
+      "end": 304.72,
+      "en": "However, Wang Sheng's wife, Chen Shi,",
+      "zh": "不过，王生的妻子陈氏",
+      "pinyin": "Bùguò, Wáng Shēng de qīzi Chén Shì",
+      "vi": "Tuy nhiên, vợ của Vương Sinh là Trần Thị"
+    },
+    {
+      "start": 304.73,
+      "end": 307.09,
+      "en": "soon discovered the secret in the study.",
+      "zh": "很快就发现了书房里的秘密。",
+      "pinyin": "Hěn kuài jiù fāxiànle shūfáng lǐ de mìmì.",
+      "vi": "đã nhanh chóng phát hiện ra bí mật trong thư phòng."
+    },
+    {
+      "start": 307.1,
+      "end": 309.12,
+      "en": "Chen Shi was a very clever woman,",
+      "zh": "陈氏是一个很聪明的女人，",
+      "pinyin": "Chén Shì shì yí ge hěn cōngmíng de nǚrén,",
+      "vi": "Trần Thị là một người phụ nữ rất thông minh,"
+    },
+    {
+      "start": 309.13,
+      "end": 311.89,
+      "en": "She saw that although this woman was very beautiful,",
+      "zh": "她看到这个女子虽然长得非常美丽，",
+      "pinyin": "Tā kàndào zhège nǚzǐ suīrán zhǎng de fēicháng měilì,",
+      "vi": "Trần Thị thấy cô gái này tuy trông rất xinh đẹp,"
+    },
+    {
+      "start": 311.9,
+      "end": 313.46,
+      "en": "but her speech and manner",
+      "zh": "但是说话和举止",
+      "pinyin": "Dànshì shuōhuà hé jǔzhǐ",
+      "vi": "nhưng cách nói chuyện và cử chỉ"
+    },
+    {
+      "start": 313.47,
+      "end": 316.16,
+      "en": "always made people feel an indescribable chill.",
+      "zh": "总让人觉得有一种说不出的冷意。",
+      "pinyin": "Zǒng ràng rén juéde yǒu yì zhǒng shuō bù chū de lěngyì.",
+      "vi": "luôn khiến người ta cảm thấy có một nỗi lạnh lẽo khó nói thành lời."
+    },
+    {
+      "start": 316.17,
+      "end": 319.19,
+      "en": "Women's intuition is usually very sharp!",
+      "zh": "女人的直觉通常都是非常灵敏的！",
+      "pinyin": "Nǚrén de zhíjué tōngcháng dōu shì fēicháng língmǐn de!",
+      "vi": "Trực giác của phụ nữ thường rất nhạy bén!"
+    },
+    {
+      "start": 319.2,
+      "end": 320.96,
+      "en": "Did Chen Shi try to advise Wang Sheng?",
+      "zh": "陈氏劝王生了吗？",
+      "pinyin": "Chén Shì quàn Wáng Shēng le ma?",
+      "vi": "Trần Thị có khuyên Vương Sinh không?"
+    },
+    {
+      "start": 320.97,
+      "end": 321.96,
+      "en": "Chen Shi did.",
+      "zh": "陈氏劝了。",
+      "pinyin": "Chén Shì quàn le.",
+      "vi": "Trần Thị có khuyên."
+    },
+    {
+      "start": 321.97,
+      "end": 323.06,
+      "en": "She said to Wang Sheng,",
+      "zh": "她对王生说，",
+      "pinyin": "Tā duì Wáng Shēng shuō,",
+      "vi": "Trần Thị nói với Vương Sinh rằng,"
+    },
+    {
+      "start": 323.07,
+      "end": 324.99,
+      "en": "This woman, no one knows where she came from,",
+      "zh": "这个女子不知道从哪里来，",
+      "pinyin": "Zhège nǚzǐ bù zhīdào cóng nǎlǐ lái,",
+      "vi": "Cô gái này không biết từ đâu đến,"
+    },
+    {
+      "start": 325,
+      "end": 328.26,
+      "en": "walking alone in the wilderness—it is too strange.",
+      "zh": "一个人在荒郊野外走，事情太奇怪了。",
+      "pinyin": "Yí ge rén zài huāngjiāo yěwài zǒu, shìqíng tài qíguài le.",
+      "vi": "một người đi giữa nơi hoang vắng, chuyện quá kỳ lạ."
+    },
+    {
+      "start": 328.27,
+      "end": 329.89,
+      "en": "Someone who ran away from a wealthy household,",
+      "zh": "在大户人家逃跑的人，",
+      "pinyin": "Zài dàhù rénjiā táopǎo de rén,",
+      "vi": "Người trốn khỏi nhà quyền quý,"
+    },
+    {
+      "start": 329.9,
+      "end": 332.32,
+      "en": "might bring us lawsuits and big trouble,",
+      "zh": "可能会给我们惹来官司和大麻烦，",
+      "pinyin": "Kěnéng huì gěi wǒmen rě lái guānsi hé dà máfan,",
+      "vi": "có thể sẽ mang đến cho chúng ta kiện tụng và rắc rối lớn,"
+    },
+    {
+      "start": 332.33,
+      "end": 334.69,
+      "en": "You'd better give her some travel money and let her go.",
+      "zh": "你还是给她一些路费，让她离开吧。",
+      "pinyin": "Nǐ háishì gěi tā yìxiē lùfèi, ràng tā líkāi ba.",
+      "vi": "Anh nên cho cô ta ít tiền lộ phí, để cô ta rời đi thôi."
+    },
+    {
+      "start": 334.7,
+      "end": 337.06,
+      "en": "But Wang Sheng was dazzled by her beauty,",
+      "zh": "但是王生被美貌迷住了眼睛，",
+      "pinyin": "Dànshì Wáng Shēng bèi měimào mízhùle yǎnjing,",
+      "vi": "Nhưng Vương Sinh bị sắc đẹp làm mờ mắt,"
+    },
+    {
+      "start": 337.07,
+      "end": 338.96,
+      "en": "and would not listen at all to his wife's advice,",
+      "zh": "根本听不进妻子的忠告，",
+      "pinyin": "Gēnběn tīng bú jìn qīzi de zhōnggào,",
+      "vi": "hoàn toàn không nghe lọt lời khuyên của vợ,"
+    },
+    {
+      "start": 338.97,
+      "end": 340.69,
+      "en": "instead thinking his wife was jealous.",
+      "zh": "反而觉得妻子是在嫉妒。",
+      "pinyin": "Fǎn'ér juéde qīzi shì zài jídù.",
+      "vi": "ngược lại còn cho rằng vợ đang ghen."
+    },
+    {
+      "start": 340.7,
+      "end": 343.36,
+      "en": "Many times, real life is like this too,",
+      "zh": "很多时候现实生活里也是这样，",
+      "pinyin": "Hěn duō shíhou xiànshí shēnghuó lǐ yě shì zhèyàng,",
+      "vi": "Nhiều khi trong cuộc sống thực tế cũng như vậy,"
+    },
+    {
+      "start": 343.37,
+      "end": 345.76,
+      "en": "when we want something too much,",
+      "zh": "当我们太想要某样东西的时候，",
+      "pinyin": "Dāng wǒmen tài xiǎng yào mǒu yàng dōngxi de shíhou,",
+      "vi": "khi chúng ta quá muốn một thứ gì đó,"
+    },
+    {
+      "start": 345.77,
+      "end": 348.73,
+      "en": "the people around us who truly care give us reminders,",
+      "zh": "身边真正关心我们的人给我们提醒，",
+      "pinyin": "Shēnbiān zhēnzhèng guānxīn wǒmen de rén gěi wǒmen tíxǐng,",
+      "vi": "những người thực sự quan tâm chúng ta ở bên cạnh nhắc nhở chúng ta,"
+    },
+    {
+      "start": 348.73,
+      "end": 351.05,
+      "en": "but we instead feel others are harming us,",
+      "zh": "我们反而觉得别人是在害我们，",
+      "pinyin": "Wǒmen fǎn'ér juéde biérén shì zài hài wǒmen,",
+      "vi": "chúng ta lại cảm thấy người khác đang hại mình,"
+    },
+    {
+      "start": 351.07,
+      "end": 353.56,
+      "en": "It really makes one anxious. So what happened next?",
+      "zh": "真是让人着急。那后来呢？",
+      "pinyin": "Zhēn shì ràng rén zháojí. Nà hòulái ne?",
+      "vi": "Thật là khiến người ta sốt ruột. Rồi sau đó thì sao?"
+    },
+    {
+      "start": 353.57,
+      "end": 355.13,
+      "en": "Did they just keep living like that?",
+      "zh": "他们就一直这样住着？",
+      "pinyin": "Tāmen jiù yìzhí zhèyàng zhùzhe?",
+      "vi": "Họ cứ sống như vậy mãi sao?"
+    },
+    {
+      "start": 355.13,
+      "end": 356.75,
+      "en": "Danger often comes quickly.",
+      "zh": "危险往往来得很快。",
+      "pinyin": "Wēixiǎn wǎngwǎng lái de hěn kuài.",
+      "vi": "Nguy hiểm thường đến rất nhanh."
+    },
+    {
+      "start": 356.77,
+      "end": 359.39,
+      "en": "A few days later, Wang Sheng went to the market to buy things.",
+      "zh": "几天之后，王生去集市上买东西。",
+      "pinyin": "Jǐ tiān zhīhòu, Wáng Shēng qù jíshì shàng mǎi dōngxi.",
+      "vi": "Vài ngày sau, Vương Sinh đi chợ mua đồ."
+    },
+    {
+      "start": 359.4,
+      "end": 362.46,
+      "en": "In the bustling crowd, a Daoist priest came toward him.",
+      "zh": "在热闹的人群中，迎面走来了一个道士。",
+      "pinyin": "Zài rènao de rénqún zhōng, yíngmiàn zǒu lái le yí ge dàoshì.",
+      "vi": "Trong đám đông náo nhiệt, một đạo sĩ đi ngược chiều tới."
+    },
+    {
+      "start": 362.47,
+      "end": 363.33,
+      "en": "In traditional Chinese",
+      "zh": "在中国传统",
+      "pinyin": "Zài Zhōngguó chuántǒng",
+      "vi": "Trong truyền thống Trung Quốc"
+    },
+    {
+      "start": 363.33,
+      "end": 366.85,
+      "en": "culture, Daoist priests usually refer to those who practice Daoism,",
+      "zh": "文化里，道士通常是指那些修行道教、",
+      "pinyin": "wénhuà lǐ, dàoshì tōngcháng shì zhǐ nàxiē xiūxíng Dàojiào,",
+      "vi": "văn hóa, đạo sĩ thường chỉ những người tu hành Đạo giáo,"
+    },
+    {
+      "start": 366.87,
+      "end": 370.33,
+      "en": "people who understand some magic, or can see through the laws of heaven and earth.",
+      "zh": "懂一些法术，或者能看透天地规律的人。",
+      "pinyin": "dǒng yìxiē fǎshù, huòzhě néng kàntòu tiāndì guīlǜ de rén.",
+      "vi": "hiểu một số pháp thuật, hoặc có thể nhìn thấu quy luật trời đất."
+    },
+    {
+      "start": 370.33,
+      "end": 371.95,
+      "en": "This Daoist priest walked up to Wang Sheng,",
+      "zh": "这个道士走到王生面前，",
+      "pinyin": "Zhège dàoshì zǒu dào Wáng Shēng miànqián,",
+      "vi": "Đạo sĩ này đi đến trước mặt Vương Sinh,"
+    },
+    {
+      "start": 371.97,
+      "end": 375.36,
+      "en": "suddenly stopped, staring intently at Wang Sheng's face.",
+      "zh": "突然停下脚步，眼睛紧紧地盯着王生的脸。",
+      "pinyin": "Tūrán tíng xià jiǎobù, yǎnjing jǐnjǐn de dīngzhe Wáng Shēng de liǎn.",
+      "vi": "đột nhiên dừng bước, mắt nhìn chằm chằm vào mặt Vương Sinh."
+    },
+    {
+      "start": 375.37,
+      "end": 376.93,
+      "en": "Did the Daoist priest see something?",
+      "zh": "道士看出了什么吗？",
+      "pinyin": "Dàoshì kàn chū le shénme ma?",
+      "vi": "Đạo sĩ nhìn ra điều gì rồi sao?"
+    },
+    {
+      "start": 376.93,
+      "end": 378.85,
+      "en": "What was on Wang Sheng's face?",
+      "zh": "王生的脸上有什么东西？",
+      "pinyin": "Wáng Shēng de liǎn shàng yǒu shénme dōngxi?",
+      "vi": "Trên mặt Vương Sinh có thứ gì?"
+    },
+    {
+      "start": 378.87,
+      "end": 383.93,
+      "en": "The Daoist priest said to Wang Sheng very seriously, 'Young man,'",
+      "zh": "道士非常严肃地对王生说，年轻人，",
+      "pinyin": "Dàoshì fēicháng yánsù de duì Wáng Shēng shuō, niánqīngrén,",
+      "vi": "Đạo sĩ rất nghiêm túc nói với Vương Sinh: 'Người trẻ tuổi,'"
+    },
+    {
+      "start": 383.93,
+      "end": 387.05,
+      "en": "I see a dark evil aura between your brows,",
+      "zh": "我看你的眉宇之间有一团黑色的邪气，",
+      "pinyin": "Wǒ kàn nǐ de méiyǔ zhījiān yǒu yì tuán hēisè de xiéqì,",
+      "vi": "Ta thấy giữa lông mày của ngươi có một luồng tà khí màu đen,"
+    },
+    {
+      "start": 387.07,
+      "end": 389.56,
+      "en": "a heavy demonic aura is wrapped around you,",
+      "zh": "你身上缠绕着很重的妖气，",
+      "pinyin": "Nǐ shēnshang chánrào zhe hěn zhòng de yāoqì,",
+      "vi": "trên người ngươi quấn quanh một luồng yêu khí rất nặng,"
+    },
+    {
+      "start": 389.57,
+      "end": 392.13,
+      "en": "Have you recently met anyone strange?",
+      "zh": "你最近是不是遇到了什么奇怪的人？",
+      "pinyin": "Nǐ zuìjìn shì bú shì yùdàole shénme qíguài de rén?",
+      "vi": "Dạo gần đây ngươi có gặp phải người kỳ quái nào không?"
+    },
+    {
+      "start": 392.13,
+      "end": 395.09,
+      "en": "If you are not careful, disaster will soon befall you!",
+      "zh": "如果不小心，你马上就要大祸临头了！",
+      "pinyin": "Rúguǒ bù xiǎoxīn, nǐ mǎshàng jiù yào dàhuò líntóu le!",
+      "vi": "Nếu không cẩn thận, ngươi sẽ sớm gặp đại họa!"
+    },
+    {
+      "start": 395.1,
+      "end": 398.59,
+      "en": "Wow, even a professional on the street has noticed the problem!",
+      "zh": "哇，连路上的专业人士都看出问题来了！",
+      "pinyin": "Wā, lián lùshang de zhuānyè rénshì dōu kàn chū wèntí lái le!",
+      "vi": "Chà, đến cả chuyên gia trên đường cũng nhìn ra vấn đề rồi!"
+    },
+    {
+      "start": 398.6,
+      "end": 400.59,
+      "en": "This was already the second warning.",
+      "zh": "这已经是第二次警告了。",
+      "pinyin": "Zhè yǐjīng shì dì'èr cì jǐnggào le.",
+      "vi": "Đây đã là lời cảnh báo thứ hai rồi."
+    },
+    {
+      "start": 400.6,
+      "end": 402.79,
+      "en": "Surely Wang Sheng should believe it this time, right?",
+      "zh": "王生这下总该相信了吧？",
+      "pinyin": "Wáng Shēng zhè xià zǒng gāi xiāngxìn le ba?",
+      "vi": "Lần này Vương Sinh chắc cuối cùng cũng nên tin rồi chứ?"
+    },
+    {
+      "start": 402.8,
+      "end": 406.59,
+      "en": "Unfortunately, Wang Sheng not only didn't believe him but became very angry.",
+      "zh": "可惜，王生不仅没有相信，反而非常生气。",
+      "pinyin": "Kěxī, Wáng Shēng bùjǐn méiyǒu xiāngxìn, fǎn'ér fēicháng shēngqì.",
+      "vi": "Đáng tiếc, Vương Sinh không những không tin mà còn vô cùng tức giận."
+    },
+    {
+      "start": 406.6,
+      "end": 407.29,
+      "en": "He thought to himself,",
+      "zh": "他心想，",
+      "pinyin": "Tā xīn xiǎng,",
+      "vi": "Anh ta thầm nghĩ,"
+    },
+    {
+      "start": 407.3,
+      "end": 409.59,
+      "en": "These past few days I've been living happily at home,",
+      "zh": "我这几天在家里过得开开心心的，",
+      "pinyin": "Wǒ zhè jǐ tiān zài jiā lǐ guò de kāikāixīnxīn de,",
+      "vi": "Mấy ngày nay tôi ở nhà sống vui vẻ thoải mái,"
+    },
+    {
+      "start": 409.6,
+      "end": 412.16,
+      "en": "there's such a gentle, beautiful woman hidden in my study,",
+      "zh": "书房里藏着那么温柔美丽的美女，",
+      "pinyin": "shūfáng lǐ cáng zhe nàme wēnróu měilì de měinǚ,",
+      "vi": "trong thư phòng còn giấu một mỹ nữ dịu dàng xinh đẹp đến vậy,"
+    },
+    {
+      "start": 412.17,
+      "end": 414.89,
+      "en": "you stinking Daoist priest actually curse me with impending disaster,",
+      "zh": "你这个臭道士居然咒我大祸临头，",
+      "pinyin": "nǐ zhège chòu dàoshì jūrán zhòu wǒ dàhuòlíntóu,",
+      "vi": "ông đạo sĩ thối tha này lại dám rủa tôi sắp gặp đại họa,"
+    },
+    {
+      "start": 414.9,
+      "end": 416.72,
+      "en": "you must be trying to swindle my money!",
+      "zh": "肯定是想骗我的钱！",
+      "pinyin": "kěndìng shì xiǎng piàn wǒ de qián!",
+      "vi": "chắc chắn là muốn lừa tiền của tôi!"
+    },
+    {
+      "start": 416.73,
+      "end": 419.39,
+      "en": "So Wang Sheng glared fiercely at the Daoist priest,",
+      "zh": "于是王生狠狠地瞪了道士一眼，",
+      "pinyin": "Yúshì Wáng Shēng hěnhěn de dèng le dàoshì yī yǎn,",
+      "vi": "Thế là Vương Sinh trừng mắt nhìn đạo sĩ một cái thật dữ,"
+    },
+    {
+      "start": 419.4,
+      "end": 420.76,
+      "en": "turned around and went home.",
+      "zh": "转身就回家了。",
+      "pinyin": "zhuǎnshēn jiù huí jiā le.",
+      "vi": "quay người về nhà luôn."
+    },
+    {
+      "start": 420.77,
+      "end": 423.93,
+      "en": "Alas, Wang Sheng is truly beyond saving.",
+      "zh": "哎，王生这个人真是没救了。",
+      "pinyin": "Āi, Wáng Shēng zhège rén zhēn shì méi jiù le.",
+      "vi": "Haiz, con người Vương Sinh này thật là hết cứu."
+    },
+    {
+      "start": 423.93,
+      "end": 425.05,
+      "en": "When faced with temptation,",
+      "zh": "面对诱惑，",
+      "pinyin": "Miànduì yòuhuò,",
+      "vi": "Đối mặt với cám dỗ,"
+    },
+    {
+      "start": 425.07,
+      "end": 427.46,
+      "en": "people are always willing to believe what makes them",
+      "zh": "人们总是愿意相信那个让自己",
+      "pinyin": "rénmen zǒng shì yuànyì xiāngxìn nàge ràng zìjǐ",
+      "vi": "con người luôn sẵn lòng tin vào điều khiến bản thân"
+    },
+    {
+      "start": 427.47,
+      "end": 428.56,
+      "en": "comfortable—a lie,",
+      "zh": "舒服的谎言，",
+      "pinyin": "shūfu de huǎngyán,",
+      "vi": "cảm thấy dễ chịu, dù đó là lời nói dối,"
+    },
+    {
+      "start": 428.57,
+      "end": 431.93,
+      "en": "and unwilling to accept the truth that makes them uncomfortable.",
+      "zh": "而不愿意接受让自己不舒服的真相。",
+      "pinyin": "ér bù yuànyì jiēshòu ràng zìjǐ bù shūfu de zhēnxiàng.",
+      "vi": "mà không muốn chấp nhận sự thật khiến mình khó chịu."
+    },
+    {
+      "start": 431.93,
+      "end": 435.32,
+      "en": "Li Ming, hearing this, I suddenly thought of a question. Oh?",
+      "zh": "李明，听到这里我突然想到一个问题。哦？",
+      "pinyin": "Lǐ Míng, tīng dào zhèlǐ wǒ tūrán xiǎngdào yī gè wèntí. Ó?",
+      "vi": "Lý Minh, nghe đến đây tôi đột nhiên nghĩ ra một vấn đề. Ồ?"
+    },
+    {
+      "start": 435.33,
+      "end": 436.25,
+      "en": "What did you think of?",
+      "zh": "你想到了什么？",
+      "pinyin": "Nǐ xiǎngdào le shénme?",
+      "vi": "Bạn nghĩ ra điều gì?"
+    },
+    {
+      "start": 436.27,
+      "end": 437.16,
+      "en": "I was thinking,",
+      "zh": "我在想，",
+      "pinyin": "Wǒ zài xiǎng,",
+      "vi": "Tôi đang nghĩ,"
+    },
+    {
+      "start": 437.17,
+      "end": 440.29,
+      "en": "many Chinese-learning friends who listen to our podcast,",
+      "zh": "很多收听我们节目的中文学习者朋友，",
+      "pinyin": "hěnduō shōutīng wǒmen jiémù de Zhōngwén xuéxízhě péngyou,",
+      "vi": "nhiều bạn học tiếng Trung đang nghe chương trình của chúng ta,"
+    },
+    {
+      "start": 440.3,
+      "end": 443.06,
+      "en": "when they usually encounter ancient Chinese stories,",
+      "zh": "平时在接触中国古代故事的时候，",
+      "pinyin": "píngshí zài jiēchù Zhōngguó gǔdài gùshi de shíhou,",
+      "vi": "bình thường khi tiếp xúc với các câu chuyện cổ đại Trung Quốc,"
+    },
+    {
+      "start": 443.07,
+      "end": 445.93,
+      "en": "may find the classical Chinese or special vocabulary in them",
+      "zh": "可能会觉得里面的文言或者特殊词汇",
+      "pinyin": "kěnéng huì juéde lǐmiàn de wényán huòzhě tèshū cíhuì",
+      "vi": "có thể sẽ thấy văn ngôn hoặc những từ ngữ đặc biệt bên trong"
+    },
+    {
+      "start": 445.93,
+      "end": 449.29,
+      "en": "very difficult, like so-called demonic aura and Daoist priests.",
+      "zh": "很难，比如什么妖气、道士。",
+      "pinyin": "hěn nán, bǐrú shénme yāoqì, dàoshì.",
+      "vi": "rất khó, ví dụ như gì mà yêu khí, đạo sĩ."
+    },
+    {
+      "start": 449.3,
+      "end": 452.06,
+      "en": "But if we set aside this supernatural shell,",
+      "zh": "但如果抛开这些神怪的外壳，",
+      "pinyin": "dàn rúguǒ pāokāi zhèxiē shénguài de wàiké,",
+      "vi": "nhưng nếu gạt bỏ lớp vỏ thần quái ấy,"
+    },
+    {
+      "start": 452.07,
+      "end": 455.09,
+      "en": "the human weaknesses discussed in the story, viewed today,",
+      "zh": "故事里讲的人性弱点，在今天看来",
+      "pinyin": "gùshi lǐ jiǎng de rénxìng ruòdiǎn, zài jīntiān kànlái",
+      "vi": "những điểm yếu trong bản tính con người mà câu chuyện nói tới, nhìn từ hôm nay"
+    },
+    {
+      "start": 455.1,
+      "end": 458.56,
+      "en": "are actually not outdated at all, right? You put it so clearly.",
+      "zh": "其实一点都不过时，对吧？你说得太透彻了。",
+      "pinyin": "qíshí yīdiǎn dōu bù guòshí, duì ba? Nǐ shuō de tài tòuchè le.",
+      "vi": "thật ra hoàn toàn không hề lỗi thời, đúng không? Bạn nói quá thấu đáo."
+    },
+    {
+      "start": 458.57,
+      "end": 460.36,
+      "en": "The most crucial thing in learning a language,",
+      "zh": "学习语言最关键的，",
+      "pinyin": "Xuéxí yǔyán zuì guānjiàn de,",
+      "vi": "Điều then chốt nhất khi học ngôn ngữ,"
+    },
+    {
+      "start": 460.37,
+      "end": 462.93,
+      "en": "is actually understanding the human nature behind the story.",
+      "zh": "其实是读懂故事背后的人性。",
+      "pinyin": "qíshí shì dúdǒng gùshi bèihòu de rénxìng.",
+      "vi": "thật ra là hiểu được bản tính con người đằng sau câu chuyện."
+    },
+    {
+      "start": 462.93,
+      "end": 466.99,
+      "en": "Language is the carrier of culture, while human nature is shared across the world.",
+      "zh": "语言是文化的载体，而人性是全世界相通的。",
+      "pinyin": "Yǔyán shì wénhuà de zàitǐ, ér rénxìng shì quánshìjiè xiāngtōng de.",
+      "vi": "Ngôn ngữ là vật mang văn hóa, còn bản tính con người thì thông suốt trên toàn thế giới."
+    },
+    {
+      "start": 467,
+      "end": 468.32,
+      "en": "The 'demonic aura' the ancients spoke of,",
+      "zh": "古人说的妖气，",
+      "pinyin": "Gǔrén shuō de yāoqì,",
+      "vi": "Cái gọi là yêu khí mà người xưa nói,"
+    },
+    {
+      "start": 468.33,
+      "end": 471.09,
+      "en": "viewed today, is actually a dangerous signal,",
+      "zh": "在今天看来，其实就是危险的信号、",
+      "pinyin": "zài jīntiān kànlái, qíshí jiùshì wēixiǎn de xìnhào,",
+      "vi": "nhìn từ ngày nay, thật ra chính là tín hiệu nguy hiểm,"
+    },
+    {
+      "start": 471.1,
+      "end": 472.56,
+      "en": "an abnormal temptation.",
+      "zh": "不正常的诱惑。",
+      "pinyin": "bù zhèngcháng de yòuhuò.",
+      "vi": "một sự cám dỗ không bình thường."
+    },
+    {
+      "start": 472.57,
+      "end": 473.69,
+      "en": "When you encounter something,",
+      "zh": "当你遇到一件事，",
+      "pinyin": "Dāng nǐ yùdào yī jiàn shì,",
+      "vi": "Khi bạn gặp một việc nào đó,"
+    },
+    {
+      "start": 473.7,
+      "end": 476.46,
+      "en": "if reason has already warned you many times that something is wrong,",
+      "zh": "如果理智已经多次提醒你不对劲，",
+      "pinyin": "rúguǒ lǐzhì yǐjīng duō cì tíxǐng nǐ bù duìjìn,",
+      "vi": "nếu lý trí đã nhiều lần nhắc bạn rằng có gì đó không ổn,"
+    },
+    {
+      "start": 476.47,
+      "end": 479.66,
+      "en": "but you choose to ignore it for the sake of temporary pleasure,",
+      "zh": "但你为了贪图一时的快乐而选择忽视，",
+      "pinyin": "dàn nǐ wèile tāntú yīshí de kuàilè ér xuǎnzé hūshì,",
+      "vi": "nhưng bạn vì ham muốn niềm vui nhất thời mà chọn phớt lờ,"
+    },
+    {
+      "start": 479.67,
+      "end": 483.33,
+      "en": "then you're actually just like Wang Sheng, already fooled by appearances.",
+      "zh": "那其实就和王生一样，已经被表象给迷惑了。",
+      "pinyin": "nà qíshí jiù hé Wáng Shēng yīyàng, yǐjīng bèi biǎoxiàng gěi míhuò le.",
+      "vi": "thì thật ra cũng giống như Vương Sinh, đã bị vẻ bề ngoài mê hoặc rồi."
+    },
+    {
+      "start": 483.33,
+      "end": 486.29,
+      "en": "That's true; thinking about it this way makes perfect sense.",
+      "zh": "确实是这样，这么一想就完全通顺了。",
+      "pinyin": "Quèshí shì zhèyàng, zhème yī xiǎng jiù wánquán tōngshùn le.",
+      "vi": "Đúng là vậy, nghĩ như thế thì hoàn toàn thông suốt rồi."
+    },
+    {
+      "start": 486.3,
+      "end": 489.29,
+      "en": "So after Wang Sheng got home, what happened next?",
+      "zh": "那王生回到家之后，又发生了什么？",
+      "pinyin": "Nà Wáng Shēng huí dào jiā zhīhòu, yòu fāshēng le shénme?",
+      "vi": "Vậy sau khi Vương Sinh về đến nhà, lại xảy ra chuyện gì?"
+    },
+    {
+      "start": 489.3,
+      "end": 491.92,
+      "en": "Although on the surface Wang Sheng didn't believe the Daoist's words,",
+      "zh": "王生虽然表面上不相信道士的话，",
+      "pinyin": "Wáng Shēng suīrán biǎomiàn shàng bù xiāngxìn dàoshì de huà,",
+      "vi": "Tuy bề ngoài Vương Sinh không tin lời đạo sĩ,"
+    },
+    {
+      "start": 491.93,
+      "end": 493.19,
+      "en": "but that's how people are:",
+      "zh": "但人就是这样，",
+      "pinyin": "dàn rén jiù shì zhèyàng,",
+      "vi": "nhưng con người vốn là vậy,"
+    },
+    {
+      "start": 493.2,
+      "end": 496.52,
+      "en": "once the seed of doubt is planted, it quietly sprouts.",
+      "zh": "怀疑的种子一旦种下，就会悄悄发芽。",
+      "pinyin": "huáiyí de zhǒngzi yīdàn zhòng xià, jiù huì qiāoqiāo fāyá.",
+      "vi": "một khi hạt giống nghi ngờ đã gieo xuống, nó sẽ âm thầm nảy mầm."
+    },
+    {
+      "start": 496.53,
+      "end": 498.65,
+      "en": "He got home, walked to the study door,",
+      "zh": "他回到家，走到书房门口，",
+      "pinyin": "Tā huí dào jiā, zǒu dào shūfáng ménkǒu,",
+      "vi": "Anh về đến nhà, đi đến cửa thư phòng,"
+    },
+    {
+      "start": 498.67,
+      "end": 501.29,
+      "en": "and found the study door tightly shut from inside,",
+      "zh": "发现书房的门从里面紧紧地关着，",
+      "pinyin": "fāxiàn shūfáng de mén cóng lǐmiàn jǐnjǐn de guān zhe,",
+      "vi": "phát hiện cửa thư phòng bị đóng chặt từ bên trong,"
+    },
+    {
+      "start": 501.3,
+      "end": 502.76,
+      "en": "and even bolted.",
+      "zh": "还插上了门闩。",
+      "pinyin": "hái chā shàng le ménshuān.",
+      "vi": "còn cài then cửa."
+    },
+    {
+      "start": 502.77,
+      "end": 506.29,
+      "en": "In broad daylight, why lock the door from inside?",
+      "zh": "大白天的，为什么要在里面把门锁上呢？",
+      "pinyin": "Dà báitiān de, wèishénme yào zài lǐmiàn bǎ mén suǒ shàng ne?",
+      "vi": "Giữa ban ngày ban mặt, tại sao lại phải khóa cửa từ bên trong chứ?"
+    },
+    {
+      "start": 506.3,
+      "end": 507.76,
+      "en": "Yeah, why indeed?",
+      "zh": "是啊，为什么呢？",
+      "pinyin": "Shì a, wèishénme ne?",
+      "vi": "Đúng vậy, tại sao chứ?"
+    },
+    {
+      "start": 507.77,
+      "end": 509.56,
+      "en": "Wang Sheng's heart also skipped a beat.",
+      "zh": "王生心里也咯噔了一下。",
+      "pinyin": "Wáng Shēng xīnli yě gēdēng le yīxià.",
+      "vi": "Trong lòng Vương Sinh cũng thót một cái."
+    },
+    {
+      "start": 509.57,
+      "end": 511.06,
+      "en": "He gently pushed the door,",
+      "zh": "他轻轻推了推门，",
+      "pinyin": "Tā qīngqīng tuī le tuī mén,",
+      "vi": "Anh nhẹ nhàng đẩy cửa,"
+    },
+    {
+      "start": 511.07,
+      "end": 513.66,
+      "en": "but it wouldn't open. So he softened his steps,",
+      "zh": "推不开。于是，他放轻脚步，",
+      "pinyin": "tuī bù kāi. Yúshì, tā fàngqīng jiǎobù,",
+      "vi": "không mở được. Thế là anh nhẹ nhàng bước đi,"
+    },
+    {
+      "start": 513.67,
+      "end": 516.69,
+      "en": "and quietly went around to the window behind the study.",
+      "zh": "悄悄绕到了书房后边的窗户下。",
+      "pinyin": "qiāoqiāo rào dào le shūfáng hòubian de chuānghu xià.",
+      "vi": "lặng lẽ vòng ra dưới cửa sổ phía sau thư phòng."
+    },
+    {
+      "start": 516.7,
+      "end": 520.16,
+      "en": "Ancient windows were all made of wooden lattice frames pasted with paper.",
+      "zh": "古代的窗户都是用木头格子糊着纸做成的。",
+      "pinyin": "Gǔdài de chuānghu dōu shì yòng mùtou gézi hú zhe zhǐ zuò chéng de.",
+      "vi": "Cửa sổ thời xưa đều làm bằng khung gỗ dán giấy."
+    },
+    {
+      "start": 520.17,
+      "end": 523.16,
+      "en": "Wang Sheng dipped his finger in some saliva and on the window paper",
+      "zh": "王生用手指沾了点口水，在窗户纸上",
+      "pinyin": "Wáng Shēng yòng shǒuzhǐ zhān le diǎn kǒushuǐ, zài chuānghu zhǐ shàng",
+      "vi": "Vương Sinh lấy ngón tay chấm chút nước bọt, trên giấy cửa sổ"
+    },
+    {
+      "start": 523.17,
+      "end": 525.33,
+      "en": "quietly made a small hole,",
+      "zh": "悄悄破开了一个小小的洞，",
+      "pinyin": "qiāoqiāo pò kāi le yī gè xiǎoxiǎo de dòng,",
+      "vi": "lặng lẽ làm thủng một lỗ nhỏ,"
+    },
+    {
+      "start": 525.33,
+      "end": 529.39,
+      "en": "Then he pressed one eye to it and looked inside the room.",
+      "zh": "然后把一只眼睛贴了上去，向房间里面看去。",
+      "pinyin": "Ránhòu bǎ yì zhī yǎnjing tiē le shàngqù, xiàng fángjiān lǐmiàn kàn qù.",
+      "vi": "Rồi anh ta áp một mắt lên đó, nhìn vào trong phòng."
+    },
+    {
+      "start": 529.4,
+      "end": 531.59,
+      "en": "My god, what did he see?",
+      "zh": "天哪，他看到了什么？",
+      "pinyin": "Tiān na, tā kàn dào le shénme?",
+      "vi": "Trời ơi, anh ta đã nhìn thấy gì?"
+    },
+    {
+      "start": 531.6,
+      "end": 533.52,
+      "en": "Was it terrifying inside?",
+      "zh": "里面是不是很可怕？",
+      "pinyin": "Lǐmiàn shì bu shì hěn kěpà?",
+      "vi": "Bên trong có phải rất đáng sợ không?"
+    },
+    {
+      "start": 533.53,
+      "end": 535.45,
+      "en": "In front of the table in the room,",
+      "zh": "房间里的桌子前面，",
+      "pinyin": "Fángjiān lǐ de zhuōzi qiánmiàn,",
+      "vi": "Trước chiếc bàn trong phòng,"
+    },
+    {
+      "start": 535.47,
+      "end": 537.66,
+      "en": "the beautiful girl was not sitting there.",
+      "zh": "没有坐着那个美丽的姑娘。",
+      "pinyin": "Méiyǒu zuò zhe nàge měilì de gūniang.",
+      "vi": "không có cô gái xinh đẹp ấy ngồi đó."
+    },
+    {
+      "start": 537.67,
+      "end": 540.39,
+      "en": "Sitting there was one whose skin was green all over,",
+      "zh": "那里坐着一个全身皮肤发绿、",
+      "pinyin": "Nàlǐ zuò zhe yí gè quánshēn pífū fā lǜ,",
+      "vi": "Ở đó có một kẻ toàn thân da xanh lét,"
+    },
+    {
+      "start": 540.4,
+      "end": 543.39,
+      "en": "a demon with teeth as long as saw blades.",
+      "zh": "牙齿长得像锯子一样的恶鬼。",
+      "pinyin": "Yáchǐ zhǎng de xiàng jùzi yíyàng de èguǐ.",
+      "vi": "một con ác quỷ có hàm răng dài như lưỡi cưa."
+    },
+    {
+      "start": 543.4,
+      "end": 546.56,
+      "en": "A demon! That beauty really was a monster!",
+      "zh": "恶鬼！那个美女真的是妖怪！",
+      "pinyin": "Èguǐ! Nàge měinǚ zhēn de shì yāoguài!",
+      "vi": "Ác quỷ! Cô gái xinh đẹp đó thật sự là yêu quái!"
+    },
+    {
+      "start": 546.57,
+      "end": 549.29,
+      "en": "Yes. The demon was sitting at the table,",
+      "zh": "是的。那个恶鬼正坐在桌前，",
+      "pinyin": "Shì de. Nàge èguǐ zhèng zuò zài zhuō qián,",
+      "vi": "Đúng vậy. Con ác quỷ đó đang ngồi trước bàn,"
+    },
+    {
+      "start": 549.3,
+      "end": 552.69,
+      "en": "Spread flat on the table was something very thin.",
+      "zh": "桌上平平整整地铺着一张薄薄的东西。",
+      "pinyin": "Zhuō shàng píngpíngzhěngzhěng de pū zhe yì zhāng báo báo de dōngxi.",
+      "vi": "Trên bàn trải phẳng phiu một thứ mỏng tang."
+    },
+    {
+      "start": 552.7,
+      "end": 555.49,
+      "en": "It was a complete human skin,",
+      "zh": "那是一张完整的人的皮肤，",
+      "pinyin": "Nà shì yì zhāng wánzhěng de rén de pífū,",
+      "vi": "Đó là một tấm da người nguyên vẹn,"
+    },
+    {
+      "start": 555.5,
+      "end": 559.29,
+      "en": "with hair, facial features, hands, and feet on it.",
+      "zh": "上面有头发，有五官，有手有脚。",
+      "pinyin": "Shàngmiàn yǒu tóufa, yǒu wǔguān, yǒu shǒu yǒu jiǎo.",
+      "vi": "trên đó có tóc, có ngũ quan, có tay có chân."
+    },
+    {
+      "start": 559.3,
+      "end": 561.89,
+      "en": "The demon held a colored paintbrush in its hand,",
+      "zh": "恶鬼手里拿着一支彩色的画笔，",
+      "pinyin": "Èguǐ shǒu lǐ ná zhe yì zhī cǎisè de huàbǐ,",
+      "vi": "Con ác quỷ cầm trong tay một cây bút vẽ màu,"
+    },
+    {
+      "start": 561.9,
+      "end": 564.49,
+      "en": "as if painting on white paper, extremely",
+      "zh": "像在白纸上画画一样，极其认",
+      "pinyin": "Xiàng zài báizhǐ shàng huàhuà yíyàng, jíqí rèn",
+      "vi": "như đang vẽ trên giấy trắng, vô cùng"
+    },
+    {
+      "start": 564.5,
+      "end": 568.49,
+      "en": "carefully drawing eyebrows and dabbing color on the lips on that human skin.",
+      "zh": "真地在那张人皮上描画眉毛、点染嘴唇。",
+      "pinyin": "zhēn de zài nà zhāng rénpí shàng miáohuà méimao, diǎnrǎn zuǐchún.",
+      "vi": "chăm chú vẽ lông mày, tô màu môi trên tấm da người đó."
+    },
+    {
+      "start": 568.5,
+      "end": 570.99,
+      "en": "After finishing the painting, the demon put down the brush,",
+      "zh": "画好之后，恶鬼放下画笔，",
+      "pinyin": "Huà hǎo zhīhòu, èguǐ fàngxià huàbǐ,",
+      "vi": "Vẽ xong, con ác quỷ đặt bút vẽ xuống,"
+    },
+    {
+      "start": 571,
+      "end": 574.29,
+      "en": "grabbed that human skin with both hands, as if putting on clothes,",
+      "zh": "两只手抓起那张人皮，像穿衣服一样，",
+      "pinyin": "Liǎng zhī shǒu zhuā qǐ nà zhāng rénpí, xiàng chuān yīfu yíyàng,",
+      "vi": "hai tay nhấc tấm da người đó lên, như mặc quần áo,"
+    },
+    {
+      "start": 574.3,
+      "end": 578.06,
+      "en": "put it over its body and gave itself a gentle shake.",
+      "zh": "把它往自己的身上一套，轻轻抖了抖身子。",
+      "pinyin": "Bǎ tā wǎng zìjǐ de shēnshang yí tào, qīngqīng dǒu le dǒu shēnzi.",
+      "vi": "khoác nó lên người mình, rồi khẽ rung rung thân thể."
+    },
+    {
+      "start": 578.07,
+      "end": 581.39,
+      "en": "And then? Then the demon disappeared.",
+      "zh": "然后呢？然后，恶鬼就消失了。",
+      "pinyin": "Ránhòu ne? Ránhòu, èguǐ jiù xiāoshī le.",
+      "vi": "Sau đó thì sao? Sau đó, con ác quỷ biến mất."
+    },
+    {
+      "start": 581.4,
+      "end": 584.79,
+      "en": "Standing in the room, it turned back into that delicate,",
+      "zh": "站在房间里的，又变成了那个娇滴滴、",
+      "pinyin": "Zhàn zài fángjiān lǐ de, yòu biàn chéng le nàge jiāodīdī,",
+      "vi": "Người đang đứng trong phòng lại biến thành cô gái dịu dàng,"
+    },
+    {
+      "start": 584.8,
+      "end": 587.32,
+      "en": "young woman as beautiful as a fairy.",
+      "zh": "美若天仙的年轻女子。",
+      "pinyin": "Měi ruò tiānxiān de niánqīng nǚzǐ.",
+      "vi": "cô gái trẻ đẹp như tiên."
+    },
+    {
+      "start": 587.33,
+      "end": 589.39,
+      "en": "Oh my god... this is way too scary!",
+      "zh": "妈呀……这也太吓人了！",
+      "pinyin": "Mā ya…… zhè yě tài xiàrén le!",
+      "vi": "Mẹ ơi…… chuyện này cũng quá đáng sợ rồi!"
+    },
+    {
+      "start": 589.4,
+      "end": 593.12,
+      "en": "So the so-called beauty was just a painted fake skin!",
+      "zh": "原来所谓的美貌，只是一张画出来的假皮！",
+      "pinyin": "Yuánlái suǒwèi de měimào, zhǐshì yì zhāng huà chūlái de jiǎ pí!",
+      "vi": "Hóa ra cái gọi là nhan sắc, chỉ là một tấm da giả được vẽ ra!"
+    },
+    {
+      "start": 593.13,
+      "end": 595.95,
+      "en": "Just thinking about the gentle beauty he held and talked to every day,",
+      "zh": "一想到天天抱着说话的温柔美女，",
+      "pinyin": "Yì xiǎng dào tiāntiān bào zhe shuōhuà de wēnróu měinǚ,",
+      "vi": "Chỉ cần nghĩ đến việc ngày ngày ôm ấp trò chuyện với cô gái dịu dàng xinh đẹp,"
+    },
+    {
+      "start": 595.97,
+      "end": 597.49,
+      "en": "while beneath the skin was actually a",
+      "zh": "皮底下其实是一个",
+      "pinyin": "Pí dǐxia qíshí shì yí gè",
+      "vi": "mà bên dưới lớp da thật ra là một"
+    },
+    {
+      "start": 597.5,
+      "end": 599.66,
+      "en": "man-eating demon with a green face and fangs,",
+      "zh": "青面獠牙的吃人恶鬼，",
+      "pinyin": "Qīngmiàn liáoyá de chī rén èguǐ,",
+      "vi": "con ác quỷ ăn thịt người mặt xanh nanh nhọn,"
+    },
+    {
+      "start": 599.67,
+      "end": 602.13,
+      "en": "I get goosebumps all over!",
+      "zh": "我整个人鸡皮疙瘩都起来了！",
+      "pinyin": "Wǒ zhěng gè rén jīpí gēda dōu qǐlái le!",
+      "vi": "tôi nổi hết cả da gà!"
+    },
+    {
+      "start": 602.13,
+      "end": 604.39,
+      "en": "Imagine how Wang Sheng felt at that moment.",
+      "zh": "想象一下王生当时的心情。",
+      "pinyin": "Xiǎngxiàng yíxià Wáng Shēng dāngshí de xīnqíng.",
+      "vi": "Hãy tưởng tượng tâm trạng của Vương Sinh lúc đó."
+    },
+    {
+      "start": 604.4,
+      "end": 607.29,
+      "en": "He crouched outside the window and saw this with his own eyes,",
+      "zh": "他趴在窗户外面，亲眼看到这一幕，",
+      "pinyin": "Tā pā zài chuānghu wàimiàn, qīnyǎn kàn dào zhè yí mù,",
+      "vi": "Anh ta nằm rạp bên ngoài cửa sổ, tận mắt chứng kiến cảnh này,"
+    },
+    {
+      "start": 607.3,
+      "end": 610.69,
+      "en": "so frightened that he trembled all over and his legs went as limp as noodles,",
+      "zh": "吓得浑身发抖，双腿软得像面条一样，",
+      "pinyin": "Xià de húnshēn fādǒu, shuāng tuǐ ruǎn de xiàng miàntiáo yíyàng,",
+      "vi": "sợ đến run khắp người, hai chân mềm nhũn như sợi mì,"
+    },
+    {
+      "start": 610.7,
+      "end": 612.12,
+      "en": "he could not even stand steadily.",
+      "zh": "连站都站不稳了。",
+      "pinyin": "Lián zhàn dōu zhàn bù wěn le.",
+      "vi": "đến đứng cũng không đứng vững."
+    },
+    {
+      "start": 612.13,
+      "end": 613.92,
+      "en": "He almost used both hands and feet,",
+      "zh": "他几乎是手脚并用，",
+      "pinyin": "Tā jīhū shì shǒu jiǎo bìng yòng,",
+      "vi": "Anh ta gần như dùng cả tay lẫn chân,"
+    },
+    {
+      "start": 613.93,
+      "end": 615.99,
+      "en": "and scrambled out of the house,",
+      "zh": "连滚带爬地逃出了家门，",
+      "pinyin": "Lián gǔn dài pá de táo chū le jiā mén,",
+      "vi": "vừa lăn vừa bò chạy ra khỏi cửa nhà,"
+    },
+    {
+      "start": 616,
+      "end": 619.39,
+      "en": "ran desperately to the market to find the Taoist priest from before.",
+      "zh": "拼了命地跑到集市上去找刚才那个道士。",
+      "pinyin": "Pīn le mìng de pǎo dào jíshì shàng qù zhǎo gāngcái nàge dàoshì.",
+      "vi": "liều mạng chạy đến chợ tìm vị đạo sĩ lúc nãy."
+    },
+    {
+      "start": 619.4,
+      "end": 620.96,
+      "en": "Now he knows fear!",
+      "zh": "现在知道害怕了！",
+      "pinyin": "Xiànzài zhīdào hàipà le!",
+      "vi": "Giờ thì biết sợ rồi!"
+    },
+    {
+      "start": 620.97,
+      "end": 624.56,
+      "en": "Just now the Taoist priest had kindly warned him, yet he called him a liar.",
+      "zh": "刚才道士好心提醒他，他还骂人家是骗子。",
+      "pinyin": "Gāngcái dàoshì hǎoxīn tíxǐng tā, tā hái mà rénjia shì piànzi.",
+      "vi": "Lúc nãy đạo sĩ tốt bụng nhắc nhở anh ta, vậy mà anh ta còn mắng người ta là kẻ lừa đảo."
+    },
+    {
+      "start": 624.57,
+      "end": 626.66,
+      "en": "Now he finally knew who was right.",
+      "zh": "现在终于知道谁是对的了。",
+      "pinyin": "Xiànzài zhōngyú zhīdào shéi shì duì de le.",
+      "vi": "Giờ cuối cùng cũng biết ai đúng rồi."
+    },
+    {
+      "start": 626.67,
+      "end": 628.16,
+      "en": "Did he find the Taoist priest?",
+      "zh": "他找到道士了吗？",
+      "pinyin": "Tā zhǎo dào dàoshì le ma?",
+      "vi": "Anh ta có tìm được đạo sĩ không?"
+    },
+    {
+      "start": 628.17,
+      "end": 629.19,
+      "en": "He did.",
+      "zh": "他找到了。",
+      "pinyin": "Tā zhǎo dào le.",
+      "vi": "Anh ta tìm được rồi."
+    },
+    {
+      "start": 629.2,
+      "end": 630.92,
+      "en": "Wang Sheng knelt before the Taoist priest,",
+      "zh": "王生跪在道士面前，",
+      "pinyin": "Wáng Shēng guì zài dàoshì miànqián,",
+      "vi": "Vương Sinh quỳ trước mặt đạo sĩ,"
+    },
+    {
+      "start": 630.93,
+      "end": 635.09,
+      "en": "knocking his head on the ground and weeping, begging the priest to save his life.",
+      "zh": "一边磕头一边大哭，求道士救救自己的性命。",
+      "pinyin": "Yìbiān kētóu yìbiān dàkū, qiú dàoshì jiùjiu zìjǐ de xìngmìng.",
+      "vi": "vừa dập đầu vừa khóc lớn, cầu xin đạo sĩ cứu mạng mình."
+    },
+    {
+      "start": 635.1,
+      "end": 638.49,
+      "en": "The priest sighed and said, 'This demon is also pitiful.",
+      "zh": "道士叹了口气说，这个恶鬼也是可怜，",
+      "pinyin": "Dàoshì tàn le kǒu qì shuō, zhège èguǐ yě shì kělián,",
+      "vi": "Đạo sĩ thở dài nói, con ác quỷ này cũng đáng thương,"
+    },
+    {
+      "start": 638.5,
+      "end": 640.96,
+      "en": "'to survive in the human world, it searches everywhere for a substitute,",
+      "zh": "为了生活在人间到处找替身，",
+      "pinyin": "Wèi le shēnghuó zài rénjiān dàochù zhǎo tìshēn,",
+      "vi": "để sống ở nhân gian mà khắp nơi tìm người thế thân,"
+    },
+    {
+      "start": 640.97,
+      "end": 644.33,
+      "en": "'I originally did not want to wipe it out completely, but since it harms people,",
+      "zh": "我本来不想赶尽杀绝，但它既然害人，",
+      "pinyin": "Wǒ běnlái bù xiǎng gǎn jìn shā jué, dàn tā jìrán hài rén,",
+      "vi": "Ta vốn không muốn đuổi cùng giết tận, nhưng nó đã hại người,"
+    },
+    {
+      "start": 644.33,
+      "end": 646.49,
+      "en": "'I will give you a magic treasure.'",
+      "zh": "我就给你一件法宝吧。",
+      "pinyin": "Wǒ jiù gěi nǐ yí jiàn fǎbǎo ba.",
+      "vi": "thì ta cho ngươi một món pháp bảo vậy."
+    },
+    {
+      "start": 646.5,
+      "end": 649.26,
+      "en": "The priest gave Wang Sheng a wooden-handled horsetail whisk,",
+      "zh": "道士给了王生一把木柄拂尘，",
+      "pinyin": "Dàoshì gěi le Wáng Shēng yì bǎ mùbǐng fúchén,",
+      "vi": "Đạo sĩ đưa cho Vương Sinh một cây phất trần cán gỗ,"
+    },
+    {
+      "start": 649.27,
+      "end": 650.73,
+      "en": "the kind we in period dramas",
+      "zh": "就是我们在古装剧里",
+      "pinyin": "Jiù shì wǒmen zài gǔzhuāngjù lǐ",
+      "vi": "chính là loại mà chúng ta trong phim cổ trang"
+    },
+    {
+      "start": 650.73,
+      "end": 653.59,
+      "en": "often see Taoist priests holding in their hands,",
+      "zh": "经常看到道士拿在手里的那种拂尘，",
+      "pinyin": "Jīngcháng kàn dào dàoshì ná zài shǒu lǐ de nà zhǒng fúchén,",
+      "vi": "thường thấy các đạo sĩ cầm trong tay,"
+    },
+    {
+      "start": 653.6,
+      "end": 656.12,
+      "en": "and told him to hang it on his bedroom door,",
+      "zh": "让他挂在自己卧室的门上，",
+      "pinyin": "Ràng tā guà zài zìjǐ wòshì de mén shàng,",
+      "vi": "bảo anh ta treo lên cửa phòng ngủ của mình,"
+    },
+    {
+      "start": 656.13,
+      "end": 658.05,
+      "en": "saying it could ward off the demon.",
+      "zh": "说这可以挡住恶鬼。",
+      "pinyin": "Shuō zhè kěyǐ dǎng zhù èguǐ.",
+      "vi": "nói rằng thứ này có thể chặn con ác quỷ."
+    },
+    {
+      "start": 658.07,
+      "end": 661.46,
+      "en": "Can a single horsetail whisk really stop that terrifying evil ghost?",
+      "zh": "一把拂尘就能挡住那个可怕的恶鬼吗？",
+      "pinyin": "Yì bǎ fúchén jiù néng dǎngzhù nàge kěpà de èguǐ ma?",
+      "vi": "Chỉ một cây phất trần mà chặn được con ác quỷ đáng sợ đó sao?"
+    },
+    {
+      "start": 661.47,
+      "end": 663.69,
+      "en": "Why do I feel a bit uneasy about it?",
+      "zh": "我怎么觉得有点不保险呢？",
+      "pinyin": "Wǒ zěnme juéde yǒudiǎn bù bǎoxiǎn ne?",
+      "vi": "Sao tôi lại thấy hơi không an toàn nhỉ?"
+    },
+    {
+      "start": 663.7,
+      "end": 665.29,
+      "en": "Your premonition is very accurate.",
+      "zh": "你的预感很准。",
+      "pinyin": "Nǐ de yùgǎn hěn zhǔn.",
+      "vi": "Cảm giác của bạn rất chuẩn."
+    },
+    {
+      "start": 665.3,
+      "end": 668.66,
+      "en": "Wang Sheng ran home with the whisk and hung it on the bedroom door,",
+      "zh": "王生拿着拂尘跑回家，挂在卧室门上，",
+      "pinyin": "Wáng Shēng ná zhe fúchén pǎo huí jiā, guà zài wòshì mén shàng,",
+      "vi": "Vương Sinh cầm phất trần chạy về nhà, treo nó lên cửa phòng ngủ,"
+    },
+    {
+      "start": 668.67,
+      "end": 670.79,
+      "en": "and held his wife tightly in his arms,",
+      "zh": "和妻子紧紧地抱在一起，",
+      "pinyin": "hé qīzi jǐnjǐn de bào zài yìqǐ,",
+      "vi": "cùng vợ ôm chặt lấy nhau,"
+    },
+    {
+      "start": 670.8,
+      "end": 673.26,
+      "en": "huddled under the blanket trembling, not even daring to",
+      "zh": "躲在被子里发抖，连灯都不敢",
+      "pinyin": "duǒ zài bèizi lǐ fādǒu, lián dēng dōu bù gǎn",
+      "vi": "trốn trong chăn run lẩy bẩy, ngay cả đèn cũng không dám"
+    },
+    {
+      "start": 673.27,
+      "end": 677.76,
+      "en": "turn on the light. At midnight, soft footsteps sounded in the courtyard.",
+      "zh": "开。到了半夜，院子里响起了轻微的脚步声。",
+      "pinyin": "kāi. Dào le bànyè, yuànzi lǐ xiǎng qǐ le qīngwēi de jiǎobù shēng.",
+      "vi": "bật đèn. Đến nửa đêm, trong sân vang lên tiếng bước chân nhẹ."
+    },
+    {
+      "start": 677.77,
+      "end": 682.19,
+      "en": "The woman walked out of the study and came to the bedroom door.",
+      "zh": "那个女子从书房走出来了，来到了卧室门口。",
+      "pinyin": "Nàge nǚzǐ cóng shūfáng zǒu chūlái le, lái dào le wòshì ménkǒu.",
+      "vi": "Người phụ nữ đó từ thư phòng bước ra, đến trước cửa phòng ngủ."
+    },
+    {
+      "start": 682.2,
+      "end": 684.12,
+      "en": "She saw the whisk hanging on the door,",
+      "zh": "她看到了门上挂着的拂尘，",
+      "pinyin": "Tā kàndào le mén shàng guà zhe de fúchén,",
+      "vi": "Cô ta nhìn thấy cây phất trần treo trên cửa,"
+    },
+    {
+      "start": 684.13,
+      "end": 686.85,
+      "en": "Her footsteps stopped; she did not dare approach.",
+      "zh": "脚步停了下来，不敢靠近。",
+      "pinyin": "Jiǎobù tíng le xiàlái, bù gǎn kàojìn.",
+      "vi": "bước chân dừng lại, không dám đến gần."
+    },
+    {
+      "start": 686.87,
+      "end": 689.46,
+      "en": "Phew, it seems the Taoist's magic implement does work after all,",
+      "zh": "呼，看来道士的法宝还是有用的，",
+      "pinyin": "Hū, kànlái dàoshì de fǎbǎo háishì yǒuyòng de,",
+      "vi": "Phù, xem ra pháp bảo của đạo sĩ vẫn có tác dụng,"
+    },
+    {
+      "start": 689.47,
+      "end": 690.66,
+      "en": "She doesn't dare come in anymore.",
+      "zh": "她不敢进来了。",
+      "pinyin": "Tā bù gǎn jìnlái le.",
+      "vi": "Cô ta không dám bước vào nữa."
+    },
+    {
+      "start": 690.67,
+      "end": 694.69,
+      "en": "She really doesn't dare walk straight in, but the evil ghost is furious.",
+      "zh": "她确实不敢直接走进来，但是恶鬼非常愤怒。",
+      "pinyin": "Tā quèshí bù gǎn zhíjiē zǒu jìnlái, dànshì èguǐ fēicháng fènnù.",
+      "vi": "Cô ta quả thật không dám trực tiếp bước vào, nhưng con ác quỷ vô cùng tức giận."
+    },
+    {
+      "start": 694.7,
+      "end": 697.19,
+      "en": "The woman outside the door cursed viciously,",
+      "zh": "女子在门外恶狠狠地大骂道，",
+      "pinyin": "Nǚzǐ zài mén wài èhěnhěn de dàmà dào,",
+      "vi": "Người phụ nữ đứng ngoài cửa hung hãn chửi lớn,"
+    },
+    {
+      "start": 697.2,
+      "end": 700.72,
+      "en": "Wang Sheng, you bastard! The Taoist wants to scare me, but I'm not afraid at all!",
+      "zh": "好你个王生，道士想吓唬我，我才不怕！",
+      "pinyin": "Hǎo nǐ ge Wáng Shēng, dàoshì xiǎng xiàhu wǒ, wǒ cái bú pà!",
+      "vi": "Vương Sinh kia, đạo sĩ muốn dọa ta, ta chẳng sợ đâu!"
+    },
+    {
+      "start": 700.73,
+      "end": 703.75,
+      "en": "With that, she yanked the whisk off the door,",
+      "zh": "说完，她一把扯下门上的拂尘，",
+      "pinyin": "Shuō wán, tā yì bǎ chě xià mén shàng de fúchén,",
+      "vi": "Nói xong, cô ta giật mạnh cây phất trần trên cửa xuống,"
+    },
+    {
+      "start": 703.77,
+      "end": 705.56,
+      "en": "and snapped it right in two!",
+      "zh": "直接把它折成了两段！",
+      "pinyin": "zhíjiē bǎ tā zhé chéng le liǎng duàn!",
+      "vi": "trực tiếp bẻ nó thành hai đoạn!"
+    },
+    {
+      "start": 705.57,
+      "end": 708.69,
+      "en": "Then she kicked the door open and rushed into the bedroom!",
+      "zh": "然后一脚踹开了房门，冲进了卧室！",
+      "pinyin": "Ránhòu yì jiǎo chuài kāi le fángmén, chōng jìn le wòshì!",
+      "vi": "Sau đó đá tung cửa phòng, lao vào phòng ngủ!"
+    },
+    {
+      "start": 708.7,
+      "end": 710.16,
+      "en": "Ah! She rushed in?!",
+      "zh": "啊！冲进去了？！",
+      "pinyin": "A! Chōng jìnqù le?!",
+      "vi": "Á! Cô ta lao vào rồi sao?!"
+    },
+    {
+      "start": 710.17,
+      "end": 712.13,
+      "en": "Then what will happen to Wang Sheng and his wife?!",
+      "zh": "那王生和他的妻子怎么办？！",
+      "pinyin": "Nà Wáng Shēng hé tā de qīzi zěnme bàn?!",
+      "vi": "Vậy Vương Sinh và vợ anh ta phải làm sao?!"
+    },
+    {
+      "start": 712.13,
+      "end": 715.19,
+      "en": "The evil ghost rushed to the bed and grabbed Wang Sheng,",
+      "zh": "恶鬼冲到床前，一把抓住王生，",
+      "pinyin": "Èguǐ chōng dào chuáng qián, yì bǎ zhuā zhù Wáng Shēng,",
+      "vi": "Con ác quỷ lao đến trước giường, túm lấy Vương Sinh,"
+    },
+    {
+      "start": 715.2,
+      "end": 717.49,
+      "en": "ripped open Wang Sheng's chest,",
+      "zh": "直接撕开了王生的胸膛，",
+      "pinyin": "zhíjiē sī kāi le Wáng Shēng de xiōngtáng,",
+      "vi": "trực tiếp xé toạc lồng ngực của Vương Sinh,"
+    },
+    {
+      "start": 717.5,
+      "end": 719.66,
+      "en": "reached in and pulled out Wang Sheng's heart,",
+      "zh": "伸手抓出了王生的心脏，",
+      "pinyin": "shēn shǒu zhuā chū le Wáng Shēng de xīnzàng,",
+      "vi": "thò tay móc ra trái tim của Vương Sinh,"
+    },
+    {
+      "start": 719.67,
+      "end": 723.69,
+      "en": "then turned, leaped swiftly out the window, and vanished into the night.",
+      "zh": "然后转身飞快地跳出窗户，消失在黑夜之中。",
+      "pinyin": "ránhòu zhuǎn shēn fēikuài de tiào chū chuānghu, xiāoshī zài hēiyè zhī zhōng.",
+      "vi": "rồi quay người nhảy vọt ra ngoài cửa sổ, biến mất trong màn đêm."
+    },
+    {
+      "start": 723.7,
+      "end": 726.72,
+      "en": "Wang Sheng fell into a pool of blood and died on the spot.",
+      "zh": "王生当场就倒在血泊里死去了。",
+      "pinyin": "Wáng Shēng dāngchǎng jiù dǎo zài xuèpō lǐ sǐ qù le.",
+      "vi": "Vương Sinh ngay tại chỗ ngã xuống vũng máu và chết."
+    },
+    {
+      "start": 726.73,
+      "end": 727.69,
+      "en": "Oh my God...",
+      "zh": "天哪……",
+      "pinyin": "Tiān na……",
+      "vi": "Trời ơi……"
+    },
+    {
+      "start": 727.7,
+      "end": 730.96,
+      "en": "In the end, Wang Sheng paid the most painful price.",
+      "zh": "王生最后还是付出了最惨痛的代价。",
+      "pinyin": "Wáng Shēng zuìhòu háishì fùchū le zuì cǎntòng de dàijià.",
+      "vi": "Cuối cùng Vương Sinh vẫn phải trả cái giá thảm khốc nhất."
+    },
+    {
+      "start": 730.97,
+      "end": 733.06,
+      "en": "His heart was torn out.",
+      "zh": "他的心脏被挖走了。",
+      "pinyin": "Tā de xīnzàng bèi wā zǒu le.",
+      "vi": "Trái tim của anh ta bị móc đi mất rồi."
+    },
+    {
+      "start": 733.07,
+      "end": 734.66,
+      "en": "This really proves the saying,",
+      "zh": "这真的应了那句话，",
+      "pinyin": "Zhè zhēn de yìng le nà jù huà,",
+      "vi": "Điều này đúng là ứng với câu nói đó,"
+    },
+    {
+      "start": 734.67,
+      "end": 736.76,
+      "en": "blinded by superficial beauty,",
+      "zh": "被表面的美丽蒙蔽了心智，",
+      "pinyin": "bèi biǎomiàn de měilì méngbì le xīnzhì,",
+      "vi": "bị vẻ đẹp bề ngoài che mờ tâm trí,"
+    },
+    {
+      "start": 736.77,
+      "end": 739.26,
+      "en": "in the end, losing even one's own true heart.",
+      "zh": "最后连自己的真心也丢掉了。",
+      "pinyin": "zuìhòu lián zìjǐ de zhēnxīn yě diūdiào le.",
+      "vi": "cuối cùng ngay cả trái tim chân thật của mình cũng đánh mất."
+    },
+    {
+      "start": 739.27,
+      "end": 741.29,
+      "en": "Your summary is very profound.",
+      "zh": "你总结得太深刻了。",
+      "pinyin": "Nǐ zǒngjié de tài shēnkè le.",
+      "vi": "Bạn tổng kết quá sâu sắc."
+    },
+    {
+      "start": 741.3,
+      "end": 744.69,
+      "en": "Losing one's heart is both a terrifying plot point in the story,",
+      "zh": "失去心脏，既是故事里可怕的情节，",
+      "pinyin": "Shīqù xīnzàng, jì shì gùshì lǐ kěpà de qíngjié,",
+      "vi": "Mất đi trái tim vừa là tình tiết đáng sợ trong câu chuyện,"
+    },
+    {
+      "start": 744.7,
+      "end": 746.92,
+      "en": "and a powerful metaphor.",
+      "zh": "也是一个强烈的隐喻。",
+      "pinyin": "yě shì yí ge qiángliè de yǐnyù.",
+      "vi": "cũng là một ẩn dụ mạnh mẽ."
+    },
+    {
+      "start": 746.93,
+      "end": 749.39,
+      "en": "If a person is completely controlled by desire,",
+      "zh": "一个人如果被欲望完全控制，",
+      "pinyin": "Yí ge rén rúguǒ bèi yùwàng wánquán kòngzhì,",
+      "vi": "Nếu một người bị dục vọng hoàn toàn khống chế,"
+    },
+    {
+      "start": 749.4,
+      "end": 751.39,
+      "en": "loses the ability to tell right from wrong,",
+      "zh": "失去了辨别是非的能力，",
+      "pinyin": "shīqù le biànbié shìfēi de nénglì,",
+      "vi": "đánh mất khả năng phân biệt đúng sai,"
+    },
+    {
+      "start": 751.4,
+      "end": 754.36,
+      "en": "then how is he different from a dead person without a heart?",
+      "zh": "那他和没有心脏的死人又有什么区别呢？",
+      "pinyin": "nà tā hé méiyǒu xīnzàng de sǐrén yòu yǒu shénme qūbié ne?",
+      "vi": "thì anh ta khác gì một người chết không có trái tim?"
+    },
+    {
+      "start": 754.37,
+      "end": 757.36,
+      "en": "What happened next? What about Wang Sheng's wife, Chen?",
+      "zh": "后来呢？王生的妻子陈氏怎么样了？",
+      "pinyin": "Hòulái ne? Wáng Shēng de qīzi Chén shì zěnmeyàng le?",
+      "vi": "Sau đó thì sao? Vợ của Vương Sinh là Trần Thị thế nào rồi?"
+    },
+    {
+      "start": 757.37,
+      "end": 759.39,
+      "en": "Does the story end tragically just like that?",
+      "zh": "故事就这么悲惨地结束了吗？",
+      "pinyin": "Gùshì jiù zhème bēicǎn de jiéshù le ma?",
+      "vi": "Câu chuyện kết thúc bi thảm như vậy sao?"
+    },
+    {
+      "start": 759.4,
+      "end": 761.16,
+      "en": "Although Chen was heartbroken,",
+      "zh": "陈氏虽然伤心欲绝，",
+      "pinyin": "Chén shì suīrán shāngxīn yùjué,",
+      "vi": "Trần Thị tuy đau lòng đến tột cùng,"
+    },
+    {
+      "start": 761.17,
+      "end": 764.69,
+      "en": "she was a truly loyal and strong woman.",
+      "zh": "但她是一个真正忠诚而且坚强的女人。",
+      "pinyin": "dàn tā shì yí ge zhēnzhèng zhōngchéng érqiě jiānqiáng de nǚrén.",
+      "vi": "nhưng cô ấy là một người phụ nữ thật sự chung thủy và mạnh mẽ."
+    },
+    {
+      "start": 764.7,
+      "end": 766.92,
+      "en": "After dawn, the Taoist hurried over,",
+      "zh": "天亮之后，道士赶了过来，",
+      "pinyin": "Tiān liàng zhīhòu, dàoshì gǎn le guòlái,",
+      "vi": "Sau khi trời sáng, đạo sĩ vội vã đến,"
+    },
+    {
+      "start": 766.93,
+      "end": 770.09,
+      "en": "destroyed the evil ghost and took away the painted skin.",
+      "zh": "消灭了恶鬼，把那张画皮收走了。",
+      "pinyin": "xiāomiè le èguǐ, bǎ nà zhāng huàpí shōu zǒu le.",
+      "vi": "tiêu diệt con ác quỷ, thu lại bức da vẽ đó."
+    },
+    {
+      "start": 770.1,
+      "end": 771.92,
+      "en": "But looking at Wang Sheng's corpse,",
+      "zh": "但是看着王生的尸体，",
+      "pinyin": "dànshì kàn zhe Wáng Shēng de shītǐ,",
+      "vi": "Nhưng nhìn thi thể của Vương Sinh,"
+    },
+    {
+      "start": 771.93,
+      "end": 775.89,
+      "en": "Chen knelt on the ground, weeping and begging the Taoist to save her husband.",
+      "zh": "陈氏跪在地上，哭着求道士救救她的丈夫。",
+      "pinyin": "Chén shì guì zài dì shàng, kū zhe qiú dàoshì jiù jiù tā de zhàngfu.",
+      "vi": "Trần Thị quỳ trên đất, khóc lóc cầu xin đạo sĩ cứu chồng mình."
+    },
+    {
+      "start": 775.9,
+      "end": 778.39,
+      "en": "The Taoist said to Chen, 'I cannot save him,",
+      "zh": "道士对陈氏说，我救不了他，",
+      "pinyin": "Dàoshì duì Chén shì shuō, wǒ jiù bù liǎo tā,",
+      "vi": "Đạo sĩ nói với Trần Thị: Ta không cứu được anh ta,"
+    },
+    {
+      "start": 778.4,
+      "end": 779.92,
+      "en": "but in the market in town",
+      "zh": "但是城里的集市上",
+      "pinyin": "dànshì chéng lǐ de jíshì shàng",
+      "vi": "nhưng ở chợ trong thành"
+    },
+    {
+      "start": 779.93,
+      "end": 782.55,
+      "en": "there is a crazy beggar; he might have",
+      "zh": "有一个疯疯癫癫的乞丐，他可能有",
+      "pinyin": "yǒu yí ge fēngfēngdiāndiān de qǐgài, tā kěnéng yǒu",
+      "vi": "có một người ăn mày điên điên dại dại, ông ta có thể có"
+    },
+    {
+      "start": 782.57,
+      "end": 785.13,
+      "en": "a way, but his personality is very eccentric,",
+      "zh": "办法，不过他性格非常古怪，",
+      "pinyin": "bànfǎ, búguò tā xìnggé fēicháng gǔguài,",
+      "vi": "cách cứu, nhưng tính cách ông ta rất kỳ quái,"
+    },
+    {
+      "start": 785.13,
+      "end": 788.09,
+      "en": "you must endure all his insults and torment,",
+      "zh": "你必须忍受他所有的侮辱和折磨，",
+      "pinyin": "nǐ bìxū rěnshòu tā suǒyǒu de wǔrǔ hé zhémó,",
+      "vi": "bạn phải chịu đựng mọi sự sỉ nhục và giày vò của ông ta,"
+    },
+    {
+      "start": 788.1,
+      "end": 789.59,
+      "en": "Let's see if you have that sincerity.",
+      "zh": "看你有没有这个诚意。",
+      "pinyin": "Kàn nǐ yǒu méi yǒu zhège chéngyì.",
+      "vi": "Để xem bạn có thành ý này không."
+    },
+    {
+      "start": 789.6,
+      "end": 792.16,
+      "en": "To save her husband who had betrayed her,",
+      "zh": "陈氏为了救回背叛过自己的丈夫，",
+      "pinyin": "Chén shì wèile jiùhuí bèipànguo zìjǐ de zhàngfu,",
+      "vi": "Để cứu lại người chồng từng phản bội mình,"
+    },
+    {
+      "start": 792.17,
+      "end": 793.96,
+      "en": "was she willing to go beg that beggar?",
+      "zh": "愿意去求那个乞丐吗？",
+      "pinyin": "Yuànyì qù qiú nàge qǐgài ma?",
+      "vi": "Trần thị có sẵn lòng đi cầu xin gã ăn mày đó không?"
+    },
+    {
+      "start": 793.97,
+      "end": 795.46,
+      "en": "She went. Chen shi",
+      "zh": "她去了。陈氏",
+      "pinyin": "Tā qù le. Chén shì",
+      "vi": "Cô ấy đã đi. Trần thị"
+    },
+    {
+      "start": 795.47,
+      "end": 798.26,
+      "en": "found that filthy beggar at the market,",
+      "zh": "在集市上找到了那个脏兮兮的乞丐，",
+      "pinyin": "Zài jíshì shang zhǎodàole nàge zāngxīxī de qǐgài,",
+      "vi": "tìm thấy gã ăn mày bẩn thỉu đó ở chợ,"
+    },
+    {
+      "start": 798.27,
+      "end": 800.46,
+      "en": "knelt on the ground and begged bitterly.",
+      "zh": "跪在地上苦苦哀求。",
+      "pinyin": "Guì zài dìshang kǔkǔ āiqiú.",
+      "vi": "quỳ xuống đất khổ sở van xin."
+    },
+    {
+      "start": 800.47,
+      "end": 803.73,
+      "en": "That beggar deliberately humiliated her and hit her with a stick,",
+      "zh": "那个乞丐故意羞辱她，用棍子打她，",
+      "pinyin": "Nàge qǐgài gùyì xiūrǔ tā, yòng gùnzi dǎ tā,",
+      "vi": "Gã ăn mày đó cố ý sỉ nhục cô, dùng gậy đánh cô,"
+    },
+    {
+      "start": 803.73,
+      "end": 805.65,
+      "en": "spat a thick mouthful of phlegm onto the ground,",
+      "zh": "把一口浓痰吐在地上，",
+      "pinyin": "bǎ yì kǒu nóng tán tù zài dìshang,",
+      "vi": "nhổ một bãi đờm đặc xuống đất,"
+    },
+    {
+      "start": 805.67,
+      "end": 809.79,
+      "en": "said to Chen shi, 'If you eat it, I'll save your husband.'",
+      "zh": "对陈氏说，如果你把它吃了，我就救你丈夫。",
+      "pinyin": "duì Chén shì shuō, rúguǒ nǐ bǎ tā chī le, wǒ jiù jiù nǐ zhàngfu.",
+      "vi": "nói với Trần thị rằng: Nếu cô ăn nó, ta sẽ cứu chồng cô."
+    },
+    {
+      "start": 809.8,
+      "end": 813.12,
+      "en": "Everyone at the market was watching Chen shi make a fool of herself.",
+      "zh": "集市上所有的人都在看陈氏的笑话。",
+      "pinyin": "Jíshì shang suǒyǒu de rén dōu zài kàn Chén shì de xiàohua.",
+      "vi": "Tất cả mọi người ở chợ đều đang xem trò cười của Trần thị."
+    },
+    {
+      "start": 813.13,
+      "end": 815.05,
+      "en": "But to save her husband's life,",
+      "zh": "但陈氏为了救丈夫的命，",
+      "pinyin": "Dàn Chén shì wèile jiù zhàngfu de mìng,",
+      "vi": "Nhưng vì cứu mạng chồng, Trần thị..."
+    },
+    {
+      "start": 815.07,
+      "end": 818.66,
+      "en": "with tears in her eyes, she actually swallowed that mouthful of phlegm.",
+      "zh": "含着眼泪，真的把那口痰吞了下去。",
+      "pinyin": "hánzhe yǎnlèi, zhēn de bǎ nà kǒu tán tūn le xiàqù.",
+      "vi": "nước mắt lưng tròng, thật sự nuốt bãi đờm đó xuống."
+    },
+    {
+      "start": 818.67,
+      "end": 821.99,
+      "en": "The beggar laughed loudly and walked away, saying, 'Go home.'",
+      "zh": "乞丐大笑着走开了，说了一句，你回家去吧。",
+      "pinyin": "Qǐgài dàxiàozhe zǒukāi le, shuōle yí jù, nǐ huí jiā qù ba.",
+      "vi": "Gã ăn mày cười lớn bỏ đi, nói một câu: 'Cô về nhà đi.'"
+    },
+    {
+      "start": 822,
+      "end": 825.19,
+      "en": "This plot... really leaves one with mixed feelings.",
+      "zh": "这个情节……真的让人心里五味杂陈。",
+      "pinyin": "Zhège qíngjié…… zhēn de ràng rén xīnli wǔwèi záchén.",
+      "vi": "Tình tiết này…… thật sự khiến lòng người trăm mối ngổn ngang."
+    },
+    {
+      "start": 825.2,
+      "end": 828.26,
+      "en": "Wang Sheng betrayed his family for a false skin,",
+      "zh": "王生为了一个虚假的皮囊背叛家庭，",
+      "pinyin": "Wáng Shēng wèile yí ge xūjiǎ de pínáng bèipàn jiātíng,",
+      "vi": "Vương Sinh vì một lớp da giả dối mà phản bội gia đình,"
+    },
+    {
+      "start": 828.27,
+      "end": 830.99,
+      "en": "while his wife of many years, to save his life,",
+      "zh": "而他的结发妻子却为了救他的命，",
+      "pinyin": "Ér tā de jiéfà qīzi què wèile jiù tā de mìng,",
+      "vi": "còn người vợ tào khang của anh ta, vì cứu mạng anh ta,"
+    },
+    {
+      "start": 831,
+      "end": 833.36,
+      "en": "gave up all her dignity.",
+      "zh": "放下了自己所有的尊严。",
+      "pinyin": "Fàngxiàle zìjǐ suǒyǒu de zūnyán.",
+      "vi": "đã từ bỏ tất cả lòng tự trọng của mình."
+    },
+    {
+      "start": 833.37,
+      "end": 835.79,
+      "en": "What a striking contrast this creates!",
+      "zh": "这形成了多么强烈的对比啊！",
+      "pinyin": "Zhè xíngchéngle duōme qiángliè de duìbǐ a!",
+      "vi": "Điều này tạo nên một sự đối lập mạnh mẽ biết bao!"
+    },
+    {
+      "start": 835.8,
+      "end": 839.36,
+      "en": "Yes. Chen shi returned home ashamed and grief-stricken,",
+      "zh": "是的。陈氏羞愧又悲伤地回到家，",
+      "pinyin": "Shì de. Chén shì xiūkuì yòu bēishāng de huídào jiā,",
+      "vi": "Đúng vậy. Trần thị vừa xấu hổ vừa đau buồn trở về nhà,"
+    },
+    {
+      "start": 839.37,
+      "end": 841.99,
+      "en": "and wept loudly while holding her husband's cold corpse.",
+      "zh": "抱着丈夫冰冷的尸体大哭。",
+      "pinyin": "bàozhe zhàngfu bīnglěng de shītǐ dàkū.",
+      "vi": "ôm lấy thi thể lạnh ngắt của chồng mà khóc lớn."
+    },
+    {
+      "start": 842,
+      "end": 845.32,
+      "en": "As she cried and cried, she suddenly felt a sharp pain in her chest,",
+      "zh": "哭着哭着，她突然觉得胸口剧烈疼痛，",
+      "pinyin": "Kūzhe kūzhe, tā tūrán juéde xiōngkǒu jùliè téngtòng,",
+      "vi": "Khóc mãi khóc mãi, cô đột nhiên cảm thấy ngực đau dữ dội,"
+    },
+    {
+      "start": 845.33,
+      "end": 847.75,
+      "en": "felt nauseous and couldn't help opening her mouth,",
+      "zh": "恶心想吐，忍不住一张嘴，",
+      "pinyin": "Ěxīn xiǎng tù, rěn bú zhù yì zhāng zuǐ,",
+      "vi": "buồn nôn muốn ói, không nhịn được mở miệng ra,"
+    },
+    {
+      "start": 847.77,
+      "end": 850.26,
+      "en": "spat out a steaming heart,",
+      "zh": "吐出了一颗热气腾腾的心脏，",
+      "pinyin": "Tǔchūle yì kē rèqì téngténg de xīnzàng,",
+      "vi": "nôn ra một quả tim nóng hổi,"
+    },
+    {
+      "start": 850.27,
+      "end": 853.56,
+      "en": "and it fell right into Wang Sheng's torn-open chest.",
+      "zh": "正好掉进了王生被撕开的胸口里。",
+      "pinyin": "Zhènghǎo diàojìnle Wáng Shēng bèi sīkāi de xiōngkǒu li.",
+      "vi": "vừa vặn rơi vào lồng ngực bị xé toạc của Vương Sinh."
+    },
+    {
+      "start": 853.57,
+      "end": 854.26,
+      "en": "That heart",
+      "zh": "那颗心脏",
+      "pinyin": "Nà kē xīnzàng",
+      "vi": "Quả tim đó"
+    },
+    {
+      "start": 854.27,
+      "end": 856.86,
+      "en": "immediately began beating in Wang Sheng's chest,",
+      "zh": "立刻在王生的胸膛里跳动起来，",
+      "pinyin": "Lìkè zài Wáng Shēng de xiōngtáng li tiàodòng qǐlai,",
+      "vi": "lập tức đập rộn lên trong lồng ngực của Vương Sinh,"
+    },
+    {
+      "start": 856.87,
+      "end": 859.66,
+      "en": "the wound slowly healed, and before long,",
+      "zh": "伤口慢慢愈合，没过多久，",
+      "pinyin": "Shāngkǒu mànmàn yùhé, méi guò duōjiǔ,",
+      "vi": "vết thương dần dần lành lại, chẳng bao lâu,"
+    },
+    {
+      "start": 859.67,
+      "end": 862.59,
+      "en": "Wang Sheng actually took a deep breath and came back to life.",
+      "zh": "王生竟然深吸一口气，活了过来。",
+      "pinyin": "Wáng Shēng jìngrán shēn xī yì kǒu qì, huóle guòlai.",
+      "vi": "Vương Sinh bỗng nhiên hít sâu một hơi, sống lại."
+    },
+    {
+      "start": 862.6,
+      "end": 863.96,
+      "en": "That's so shocking.",
+      "zh": "太震撼了。",
+      "pinyin": "Tài zhènhàn le.",
+      "vi": "Thật quá chấn động."
+    },
+    {
+      "start": 863.97,
+      "end": 865.79,
+      "en": "This heart that saved Wang Sheng,",
+      "zh": "这颗拯救王生的心脏，",
+      "pinyin": "Zhè kē zhěngjiù Wáng Shēng de xīnzàng,",
+      "vi": "Quả tim đã cứu Vương Sinh này,"
+    },
+    {
+      "start": 865.8,
+      "end": 869.16,
+      "en": "was actually obtained through his wife Chen shi's love and sacrifice.",
+      "zh": "其实是妻子陈氏的爱和牺牲换来的。",
+      "pinyin": "Qíshí shì qīzi Chén shì de ài hé xīshēng huànlái de.",
+      "vi": "thật ra là nhờ tình yêu và sự hy sinh của người vợ Trần thị mà có."
+    },
+    {
+      "start": 869.17,
+      "end": 871.19,
+      "en": "At the end of this story, Pu Songling",
+      "zh": "蒲松龄在这篇故事的最后，",
+      "pinyin": "Pú Sōnglíng zài zhè piān gùshi de zuìhòu,",
+      "vi": "Ở cuối câu chuyện này, Bồ Tùng Linh"
+    },
+    {
+      "start": 871.2,
+      "end": 873.32,
+      "en": "wrote a very powerful commentary.",
+      "zh": "写了一段非常有力量的评论。",
+      "pinyin": "Xiěle yí duàn fēicháng yǒu lìliàng de pínglùn.",
+      "vi": "đã viết một đoạn bình luận rất có sức mạnh."
+    },
+    {
+      "start": 873.33,
+      "end": 876.49,
+      "en": "He said, there are too many foolish people in the world,",
+      "zh": "他说，世界上愚蠢的人太多了，",
+      "pinyin": "Tā shuō, shìjiè shang yúchǔn de rén tài duō le,",
+      "vi": "Ông nói, trên đời có quá nhiều kẻ ngu ngốc,"
+    },
+    {
+      "start": 876.5,
+      "end": 878.86,
+      "en": "when right before their eyes is a man-eating evil ghost,",
+      "zh": "明明眼前就是一个吃人的恶鬼，",
+      "pinyin": "Míngmíng yǎnqián jiùshì yí ge chī rén de èguǐ,",
+      "vi": "rõ ràng trước mắt là một con ác quỷ ăn thịt người,"
+    },
+    {
+      "start": 878.87,
+      "end": 881.59,
+      "en": "yet everyone insists on finding her beautiful and charming;",
+      "zh": "大家却偏偏觉得她美丽动人；",
+      "pinyin": "Dàjiā què piānpiān juéde tā měilì dòngrén;",
+      "vi": "vậy mà mọi người lại cứ thấy cô ta xinh đẹp quyến rũ;"
+    },
+    {
+      "start": 881.6,
+      "end": 883.86,
+      "en": "when something is clearly a loyal and kind truth,",
+      "zh": "明明是忠诚善良的真话，",
+      "pinyin": "Míngmíng shì zhōngchéng shànliáng de zhēnhuà,",
+      "vi": "rõ ràng là lời nói thật trung thành và lương thiện,"
+    },
+    {
+      "start": 883.87,
+      "end": 885.96,
+      "en": "yet everyone thinks it is a lie.",
+      "zh": "大家却觉得那是谎言。",
+      "pinyin": "Dàjiā què juéde nà shì huǎngyán.",
+      "vi": "mọi người lại cho rằng đó là lời dối trá."
+    },
+    {
+      "start": 885.97,
+      "end": 888.89,
+      "en": "Those who lust after beauty and ignore the essence,",
+      "zh": "那些贪图美色、不看本质的人，",
+      "pinyin": "Nàxiē tāntú měisè, bú kàn běnzhì de rén,",
+      "vi": "Những kẻ ham mê sắc đẹp, không nhìn vào bản chất,"
+    },
+    {
+      "start": 888.9,
+      "end": 890.72,
+      "en": "isn't their fate tragic?",
+      "zh": "下场难道不可悲吗？",
+      "pinyin": "Xiàchǎng nándào bù kěbēi ma?",
+      "vi": "kết cục của họ lẽ nào không đáng buồn sao?"
+    },
+    {
+      "start": 890.73,
+      "end": 894.52,
+      "en": "After hearing this story, I really took a deep breath.",
+      "zh": "听完这个故事，我真的深深地吸了一口气。",
+      "pinyin": "Tīngwán zhège gùshi, wǒ zhēn de shēnshēn de xīle yì kǒu qì.",
+      "vi": "Nghe xong câu chuyện này, tôi thật sự hít sâu một hơi."
+    },
+    {
+      "start": 894.53,
+      "end": 897.55,
+      "en": "Li Ming, do you think this story 'The Painted Skin'",
+      "zh": "李明，你觉得《画皮》这个故事，",
+      "pinyin": "Lǐ Míng, nǐ juéde 《Huàpí》 zhège gùshi,",
+      "vi": "Lý Minh, bạn có nghĩ câu chuyện 《Họa Bì》 này"
+    },
+    {
+      "start": 897.57,
+      "end": 900.16,
+      "en": "in the modern society we live in today,",
+      "zh": "在今天我们生活的现代社会里，",
+      "pinyin": "Zài jīntiān wǒmen shēnghuó de xiàndài shèhuì li,",
+      "vi": "trong xã hội hiện đại mà chúng ta đang sống ngày nay,"
+    },
+    {
+      "start": 900.17,
+      "end": 901.89,
+      "en": "still has practical significance?",
+      "zh": "还有现实意义吗？",
+      "pinyin": "Hái yǒu xiànshí yìyì ma?",
+      "vi": "vẫn còn ý nghĩa thực tế không?"
+    },
+    {
+      "start": 901.9,
+      "end": 903.29,
+      "en": "It means a great deal.",
+      "zh": "意义太大了。",
+      "pinyin": "Yìyì tài dà le.",
+      "vi": "Ý nghĩa lớn lắm."
+    },
+    {
+      "start": 903.3,
+      "end": 905.72,
+      "en": "Think about it—in today's internet age,",
+      "zh": "你想想看，在现在的网络时代，",
+      "pinyin": "Nǐ xiǎngxiang kàn, zài xiànzài de wǎngluò shídài,",
+      "vi": "Bạn thử nghĩ xem, trong thời đại mạng Internet hiện nay,"
+    },
+    {
+      "start": 905.73,
+      "end": 909.59,
+      "en": "every day we scroll on our phones and see all kinds of perfect photos,",
+      "zh": "我们每天刷手机，看到各种各样完美的照片、",
+      "pinyin": "Wǒmen měitiān shuā shǒujī, kàndào gèzhǒng gèyàng wánměi de zhàopiàn,",
+      "vi": "mỗi ngày chúng ta lướt điện thoại, thấy đủ loại ảnh hoàn hảo,"
+    },
+    {
+      "start": 909.6,
+      "end": 910.96,
+      "en": "perfect videos.",
+      "zh": "完美的视频。",
+      "pinyin": "wánměi de shìpín.",
+      "vi": "những video hoàn hảo."
+    },
+    {
+      "start": 910.97,
+      "end": 913.93,
+      "en": "Many people use beauty filters, and even artificial intelligence",
+      "zh": "很多人用美颜滤镜，甚至用人工智能",
+      "pinyin": "Hěnduō rén yòng měiyán lǜjìng, shènzhì yòng réngōng zhìnéng",
+      "vi": "Nhiều người dùng bộ lọc làm đẹp, thậm chí dùng trí tuệ nhân tạo"
+    },
+    {
+      "start": 913.93,
+      "end": 916.89,
+      "en": "to paint themselves a perfect skin.",
+      "zh": "给自己画上了一层完美的皮囊。",
+      "pinyin": "Gěi zìjǐ huàshàngle yì céng wánměi de pínáng.",
+      "vi": "để vẽ lên cho mình một lớp da hoàn hảo."
+    },
+    {
+      "start": 916.9,
+      "end": 919.96,
+      "en": "On the surface, they look glamorous and tenderly affectionate,",
+      "zh": "表面上看起来光鲜亮丽、温柔多情，",
+      "pinyin": "Biǎomiàn shàng kàn qǐlái guāngxiān liànglì, wēnróu duōqíng,",
+      "vi": "Bề ngoài trông hào nhoáng rực rỡ, dịu dàng đa tình,"
+    },
+    {
+      "start": 919.97,
+      "end": 922.89,
+      "en": "but what kind of person is behind the phone screen,",
+      "zh": "但手机屏幕背后是一个什么样的人，",
+      "pinyin": "Dàn shǒujī píngmù bèihòu shì yí ge shénme yàng de rén,",
+      "vi": "Nhưng đằng sau màn hình điện thoại là một người như thế nào,"
+    },
+    {
+      "start": 922.9,
+      "end": 924.16,
+      "en": "do we really know?",
+      "zh": "我们真的知道吗？",
+      "pinyin": "Wǒmen zhēnde zhīdào ma?",
+      "vi": "Chúng ta thật sự biết không?"
+    },
+    {
+      "start": 924.17,
+      "end": 926.76,
+      "en": "True! Scams in modern society,",
+      "zh": "真的！现代社会的骗局，",
+      "pinyin": "Zhēn de! Xiàndài shèhuì de piànjú,",
+      "vi": "Thật đấy! Những chiêu lừa đảo trong xã hội hiện đại,"
+    },
+    {
+      "start": 926.77,
+      "end": 929.36,
+      "en": "many also wear a beautiful painted skin.",
+      "zh": "很多也是披着美丽的画皮。",
+      "pinyin": "Hěnduō yě shì pīzhe měilì de huàpí.",
+      "vi": "Nhiều cái cũng khoác lên mình lớp da vẽ đẹp đẽ."
+    },
+    {
+      "start": 929.37,
+      "end": 932.66,
+      "en": "For example, those online who look especially handsome and wealthy,",
+      "zh": "比如那些网上看起来特别帅气多金、",
+      "pinyin": "Bǐrú nàxiē wǎngshàng kàn qǐlái tèbié shuàiqì duōjīn,",
+      "vi": "Ví dụ những người trên mạng trông đặc biệt đẹp trai và giàu có,"
+    },
+    {
+      "start": 932.67,
+      "end": 934.49,
+      "en": "people who ask after you warmly,",
+      "zh": "对你嘘寒问暖的人，",
+      "pinyin": "duì nǐ xūhánwènnuǎn de rén,",
+      "vi": "những người hỏi han chăm sóc bạn ân cần,"
+    },
+    {
+      "start": 934.5,
+      "end": 937.09,
+      "en": "end up scamming victims out of all their savings;",
+      "zh": "最后骗光了受害者的积蓄；",
+      "pinyin": "zuìhòu piànguāng le shòuhàizhě de jīxù;",
+      "vi": "cuối cùng lừa sạch tiền tiết kiệm của nạn nhân;"
+    },
+    {
+      "start": 937.1,
+      "end": 940.19,
+      "en": "and those that promise to make people rich overnight,",
+      "zh": "还有那些承诺能让人一夜暴富、",
+      "pinyin": "hái yǒu nàxiē chéngnuò néng ràng rén yíyè bàofù,",
+      "vi": "Còn những thứ hứa hẹn có thể khiến người ta giàu lên chỉ sau một đêm,"
+    },
+    {
+      "start": 940.2,
+      "end": 942.86,
+      "en": "investment traps that look incredibly tempting,",
+      "zh": "看起来无比诱人的投资陷阱，",
+      "pinyin": "kàn qǐlái wúbǐ yòurén de tóuzī xiànjǐng,",
+      "vi": "những cái bẫy đầu tư trông vô cùng hấp dẫn,"
+    },
+    {
+      "start": 942.87,
+      "end": 946.06,
+      "en": "aren't they essentially all tempting painted skins?",
+      "zh": "本质上不都是一张张诱人的画皮吗？",
+      "pinyin": "běnzhì shàng bù dōu shì yì zhāngzhāng yòurén de huàpí ma?",
+      "vi": "về bản chất chẳng phải đều là từng lớp da vẽ đầy cám dỗ sao?"
+    },
+    {
+      "start": 946.07,
+      "end": 947.29,
+      "en": "Absolutely correct.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn đúng."
+    },
+    {
+      "start": 947.3,
+      "end": 951.12,
+      "en": "Beauty itself is not wrong; pursuing beauty is also human nature.",
+      "zh": "美貌本身没有错，追求美也是人的天性。",
+      "pinyin": "Měimào běnshēn méiyǒu cuò, zhuīqiú měi yě shì rén de tiānxìng.",
+      "vi": "Bản thân sắc đẹp không có lỗi, theo đuổi cái đẹp cũng là bản tính của con người."
+    },
+    {
+      "start": 951.13,
+      "end": 953.92,
+      "en": "But the ancients, through 'The Painted Skin,' remind us,",
+      "zh": "但是，古人通过《画皮》提醒我们，",
+      "pinyin": "Dànshì, gǔrén tōngguò 《Huàpí》 tíxǐng wǒmen,",
+      "vi": "Nhưng người xưa qua 《Họa Bì》 nhắc nhở chúng ta,"
+    },
+    {
+      "start": 953.93,
+      "end": 956.65,
+      "en": "never take appearance as everything.",
+      "zh": "千万不要把外表当成全部。",
+      "pinyin": "qiānwàn búyào bǎ wàibiǎo dàngchéng quánbù.",
+      "vi": "tuyệt đối đừng coi vẻ bề ngoài là tất cả."
+    },
+    {
+      "start": 956.67,
+      "end": 959.86,
+      "en": "true security comes from a clear mind;",
+      "zh": "真正的安全感，来自于清醒的头脑；",
+      "pinyin": "zhēnzhèng de ānquángǎn, láizì yú qīngxǐng de tóunǎo;",
+      "vi": "Cảm giác an toàn thật sự đến từ một cái đầu tỉnh táo;"
+    },
+    {
+      "start": 959.87,
+      "end": 962.13,
+      "en": "and truly precious feelings are those",
+      "zh": "而真正珍贵的情感，是那些",
+      "pinyin": "ér zhēnzhèng zhēnguì de qínggǎn, shì nàxiē",
+      "vi": "Còn tình cảm thật sự quý giá là những"
+    },
+    {
+      "start": 962.13,
+      "end": 965.85,
+      "en": "kindness and loyalty that can withstand the tests of time and hardship,",
+      "zh": "经得起时间和困难考验的善良与忠诚，",
+      "pinyin": "jīngdeqǐ shíjiān hé kùnnán kǎoyàn de shànliáng yǔ zhōngchéng,",
+      "vi": "lòng tốt và sự chung thủy chịu được thử thách của thời gian và khó khăn,"
+    },
+    {
+      "start": 965.87,
+      "end": 967.99,
+      "en": "not momentary excitement and temptation.",
+      "zh": "而不是一时的刺激与诱惑。",
+      "pinyin": "ér bú shì yìshí de cìjī yǔ yòuhuò.",
+      "vi": "chứ không phải là kích thích và cám dỗ nhất thời."
+    },
+    {
+      "start": 968,
+      "end": 969.36,
+      "en": "Tonight's bedtime story,",
+      "zh": "今天这个睡前故事，",
+      "pinyin": "Jīntiān zhège shuìqián gùshì,",
+      "vi": "Câu chuyện trước khi ngủ hôm nay,"
+    },
+    {
+      "start": 969.37,
+      "end": 971.13,
+      "en": "although it's a little creepy,",
+      "zh": "虽然有一点点惊悚，",
+      "pinyin": "suīrán yǒu yìdiǎndiǎn jīngsǒng,",
+      "vi": "tuy hơi đáng sợ một chút,"
+    },
+    {
+      "start": 971.13,
+      "end": 973.65,
+      "en": "it really made me much more clear-headed.",
+      "zh": "但是真的让我清醒了很多。",
+      "pinyin": "dànshì zhēnde ràng wǒ qīngxǐng le hěnduō.",
+      "vi": "nhưng thật sự khiến tôi tỉnh táo hơn nhiều."
+    },
+    {
+      "start": 973.67,
+      "end": 974.16,
+      "en": "Li Ming,",
+      "zh": "李明，",
+      "pinyin": "Lǐ Míng,",
+      "vi": "Lý Minh,"
+    },
+    {
+      "start": 974.17,
+      "end": 976.53,
+      "en": "let's, for the friends listening to this story,",
+      "zh": "我们来给正在听这个故事的朋友们，",
+      "pinyin": "wǒmen lái gěi zhèngzài tīng zhège gùshì de péngyoumen,",
+      "vi": "Chúng ta hãy, với những người bạn đang nghe câu chuyện này,"
+    },
+    {
+      "start": 976.53,
+      "end": 979.92,
+      "en": "summarize a few very important",
+      "zh": "总结一下今晚故事里几个非常重要、",
+      "pinyin": "zǒngjié yíxià jīnwǎn gùshì lǐ jǐ ge fēicháng zhòngyào,",
+      "vi": "tổng kết một chút vài từ vựng tiếng Trung rất quan trọng,"
+    },
+    {
+      "start": 979.93,
+      "end": 982.05,
+      "en": "and very practical Chinese words, okay.",
+      "zh": "也很实用的中文词汇吧。",
+      "pinyin": "yě hěn shíyòng de Zhōngwén cíhuì ba.",
+      "vi": "và cũng rất thiết thực nhé."
+    },
+    {
+      "start": 982.07,
+      "end": 982.96,
+      "en": "Sure.",
+      "zh": "好啊。",
+      "pinyin": "Hǎo a.",
+      "vi": "Được thôi."
+    },
+    {
+      "start": 982.97,
+      "end": 986.39,
+      "en": "The first word is one we mentioned repeatedly: surface.",
+      "zh": "第一个词就是我们反复提到的，表面。",
+      "pinyin": "Dì yī ge cí jiù shì wǒmen fǎnfù tídào de, biǎomiàn.",
+      "vi": "Từ đầu tiên là từ chúng ta nhắc đi nhắc lại, 'bề mặt'."
+    },
+    {
+      "start": 986.4,
+      "end": 989.89,
+      "en": "For example, superficial beauty—you can't just look at the surface.",
+      "zh": "比如，表面的美丽，不能只看表面。",
+      "pinyin": "Bǐrú, biǎomiàn de měilì, bùnéng zhǐ kàn biǎomiàn.",
+      "vi": "Ví dụ, vẻ đẹp bề mặt, không thể chỉ nhìn bề mặt."
+    },
+    {
+      "start": 989.9,
+      "end": 992.29,
+      "en": "'Surface' refers to the outermost layer of something.",
+      "zh": "表面指的是事物的最外层。",
+      "pinyin": "Biǎomiàn zhǐ de shì shìwù de zuì wàicéng.",
+      "vi": "'Bề mặt' chỉ lớp ngoài cùng của sự vật."
+    },
+    {
+      "start": 992.3,
+      "end": 994.59,
+      "en": "The second word is 'temptation.'",
+      "zh": "第二个词是，诱惑。",
+      "pinyin": "Dì èr ge cí shì, yòuhuò.",
+      "vi": "Từ thứ hai là 'cám dỗ'."
+    },
+    {
+      "start": 994.6,
+      "end": 997.59,
+      "en": "Temptation is like that painted skin—it attracts you,",
+      "zh": "诱惑就像那张画皮，它吸引你、",
+      "pinyin": "Yòuhuò jiù xiàng nà zhāng huàpí, tā xīyǐn nǐ,",
+      "vi": "Cám dỗ giống như lớp da vẽ đó, nó thu hút bạn,"
+    },
+    {
+      "start": 997.6,
+      "end": 1000.36,
+      "en": "seduces you, making you unable to resist getting closer,",
+      "zh": "勾引你，让你忍不住想靠近，",
+      "pinyin": "gōuyǐn nǐ, ràng nǐ rěnbuzhù xiǎng kàojìn,",
+      "vi": "quyến rũ bạn, khiến bạn không nhịn được mà muốn lại gần,"
+    },
+    {
+      "start": 1000.37,
+      "end": 1003.09,
+      "en": "but behind it may hide enormous danger.",
+      "zh": "但背后可能藏着巨大的危险。",
+      "pinyin": "dàn bèihòu kěnéng cángzhe jùdà de wēixiǎn.",
+      "vi": "nhưng phía sau có thể ẩn chứa nguy hiểm to lớn."
+    },
+    {
+      "start": 1003.1,
+      "end": 1005.39,
+      "en": "We need to learn to resist temptation.",
+      "zh": "我们要学会抵挡诱惑。",
+      "pinyin": "Wǒmen yào xuéhuì dǐdǎng yòuhuò.",
+      "vi": "Chúng ta phải học cách chống lại cám dỗ."
+    },
+    {
+      "start": 1005.4,
+      "end": 1007.72,
+      "en": "The third word is 'desire.'",
+      "zh": "第三个词是，欲望。",
+      "pinyin": "Dì sān ge cí shì, yùwàng.",
+      "vi": "Từ thứ ba là 'dục vọng'."
+    },
+    {
+      "start": 1007.73,
+      "end": 1010.49,
+      "en": "Desire is the thoughts and pursuits in everyone's heart,",
+      "zh": "欲望是每个人心里的想法和追求，",
+      "pinyin": "Yùwàng shì měi ge rén xīnli de xiǎngfǎ hé zhuīqiú,",
+      "vi": "Dục vọng là những suy nghĩ và theo đuổi trong lòng mỗi người,"
+    },
+    {
+      "start": 1010.5,
+      "end": 1013.79,
+      "en": "it is not a bad thing in itself, but if it gets out of control,",
+      "zh": "它本身不是坏事，但如果失去了控制，",
+      "pinyin": "tā běnshēn bú shì huàishì, dàn rúguǒ shīqù le kòngzhì,",
+      "vi": "bản thân nó không phải điều xấu, nhưng nếu mất kiểm soát,"
+    },
+    {
+      "start": 1013.8,
+      "end": 1016.39,
+      "en": "desire will turn into a knife that hurts yourself.",
+      "zh": "欲望就会变成伤害自己的刀子。",
+      "pinyin": "yùwàng jiù huì biànchéng shānghài zìjǐ de dāozi.",
+      "vi": "dục vọng sẽ biến thành con dao làm tổn thương chính mình."
+    },
+    {
+      "start": 1016.4,
+      "end": 1018.92,
+      "en": "The fourth word is 'truth.'",
+      "zh": "第四个词是，真相。",
+      "pinyin": "Dì sì ge cí shì, zhēnxiàng.",
+      "vi": "Từ thứ tư là 'sự thật'."
+    },
+    {
+      "start": 1018.93,
+      "end": 1020.25,
+      "en": "Truth and falsehood go together,",
+      "zh": "真假相伴，",
+      "pinyin": "Zhēn jiǎ xiāngbàn,",
+      "vi": "Thật và giả đi cùng nhau,"
+    },
+    {
+      "start": 1020.27,
+      "end": 1023.09,
+      "en": "many people would rather believe beautiful lies,",
+      "zh": "很多人宁愿相信美丽的谎言，",
+      "pinyin": "hěnduō rén nìngyuàn xiāngxìn měilì de huǎngyán,",
+      "vi": "nhiều người thà tin vào những lời nói dối đẹp đẽ,"
+    },
+    {
+      "start": 1023.1,
+      "end": 1025.66,
+      "en": "than face the cruel truth.",
+      "zh": "也不敢去面对残酷的真相。",
+      "pinyin": "yě bù gǎn qù miànduì cánkù de zhēnxiàng.",
+      "vi": "cũng không dám đối mặt với sự thật tàn khốc."
+    },
+    {
+      "start": 1025.67,
+      "end": 1028.13,
+      "en": "The last word is 'essence.'",
+      "zh": "最后一个词，是本质。",
+      "pinyin": "Zuìhòu yí ge cí, shì běnzhì.",
+      "vi": "Từ cuối cùng là 'bản chất'."
+    },
+    {
+      "start": 1028.13,
+      "end": 1030.69,
+      "en": "to see through surface phenomena to see a person,",
+      "zh": "透过表面的现象，去看到一个人、",
+      "pinyin": "tòuguò biǎomiàn de xiànxiàng, qù kàndào yí ge rén,",
+      "vi": "Nhìn xuyên qua hiện tượng bề mặt, để thấy một người,"
+    },
+    {
+      "start": 1030.7,
+      "end": 1032.66,
+      "en": "and the inner essence of a matter,",
+      "zh": "一件事内在的本质，",
+      "pinyin": "yí jiàn shì nèizài de běnzhì,",
+      "vi": "và bản chất bên trong của một sự việc,"
+    },
+    {
+      "start": 1032.67,
+      "end": 1036.16,
+      "en": "this is the ability we most need to learn as we grow.",
+      "zh": "这是我们在成长过程中最需要学习的本领。",
+      "pinyin": "zhè shì wǒmen zài chéngzhǎng guòchéng zhōng zuì xūyào xuéxí de běnlǐng.",
+      "vi": "đây là kỹ năng chúng ta cần học nhất trong quá trình trưởng thành."
+    },
+    {
+      "start": 1036.17,
+      "end": 1039.96,
+      "en": "These five words—surface, temptation, desire,",
+      "zh": "这五个词，表面、诱惑、欲望、",
+      "pinyin": "Zhè wǔ ge cí, biǎomiàn, yòuhuò, yùwàng,",
+      "vi": "Năm từ này, 'bề mặt', 'cám dỗ', 'dục vọng',"
+    },
+    {
+      "start": 1039.97,
+      "end": 1041.73,
+      "en": "truth, essence,",
+      "zh": "真相、本质，",
+      "pinyin": "zhēnxiàng, běnzhì,",
+      "vi": "'sự thật', 'bản chất',"
+    },
+    {
+      "start": 1041.73,
+      "end": 1044.65,
+      "en": "are not only the key to telling 'The Painted Skin' well,",
+      "zh": "不仅是讲好《画皮》这个故事的关键，",
+      "pinyin": "bùjǐn shì jiǎng hǎo 《Huàpí》 zhège gùshì de guānjiàn,",
+      "vi": "không chỉ là mấu chốt để kể hay câu chuyện 《Họa Bì》,"
+    },
+    {
+      "start": 1044.67,
+      "end": 1047.73,
+      "en": "They are also important words for understanding life.",
+      "zh": "也是我们理解生活的重要词汇。",
+      "pinyin": "Yě shì wǒmen lǐjiě shēnghuó de zhòngyào cíhuì.",
+      "vi": "Đây cũng là những từ vựng quan trọng để chúng ta hiểu cuộc sống."
+    },
+    {
+      "start": 1047.73,
+      "end": 1048.99,
+      "en": "After listening to today's story,",
+      "zh": "听完今天的故事，",
+      "pinyin": "Tīng wán jīntiān de gùshi,",
+      "vi": "Sau khi nghe câu chuyện hôm nay,"
+    },
+    {
+      "start": 1049,
+      "end": 1050.89,
+      "en": "I wonder, as you're listening to this program,",
+      "zh": "不知道正在听节目的你，",
+      "pinyin": "Bù zhīdào zhèngzài tīng jiémù de nǐ,",
+      "vi": "Không biết bạn đang nghe chương trình,"
+    },
+    {
+      "start": 1050.9,
+      "end": 1054.59,
+      "en": "have you ever encountered, in life, that kind of seemingly beautiful...",
+      "zh": "在生活中有没有遇到过那种看起来很美、",
+      "pinyin": "zài shēnghuó zhōng yǒu méiyǒu yùdào guo nà zhǒng kàn qǐlái hěn měi,",
+      "vi": "trong cuộc sống, bạn có từng gặp kiểu trông rất đẹp,"
+    },
+    {
+      "start": 1054.6,
+      "end": 1057.26,
+      "en": "but which in reality is a trap—a painted skin?",
+      "zh": "实际上却是陷阱的画皮呢？",
+      "pinyin": "shíjìshang què shì xiànjǐng de huàpí ne?",
+      "vi": "nhưng thực chất lại là tấm da vẽ đầy cạm bẫy không?"
+    },
+    {
+      "start": 1057.27,
+      "end": 1059.29,
+      "en": "And how did you discover the truth?",
+      "zh": "你又是怎么发现真相的？",
+      "pinyin": "Nǐ yòu shì zěnme fāxiàn zhēnxiàng de?",
+      "vi": "Và bạn đã phát hiện ra sự thật bằng cách nào?"
+    },
+    {
+      "start": 1059.3,
+      "end": 1062.59,
+      "en": "You're welcome to think about this question quietly in your heart,",
+      "zh": "欢迎大家在心里安静地思考这个问题，",
+      "pinyin": "Huānyíng dàjiā zài xīnlǐ ānjìng de sīkǎo zhège wèntí,",
+      "vi": "Hoan nghênh mọi người lặng lẽ suy nghĩ về câu hỏi này trong lòng,"
+    },
+    {
+      "start": 1062.6,
+      "end": 1065.76,
+      "en": "or chat about it with friends around you before bed.",
+      "zh": "也可以在睡前和身边的朋友聊一聊。",
+      "pinyin": "yě kěyǐ zài shuì qián hé shēnbiān de péngyou liáo yì liáo.",
+      "vi": "hoặc cũng có thể trò chuyện đôi chút với những người bạn bên cạnh trước khi ngủ."
+    },
+    {
+      "start": 1065.77,
+      "end": 1068.36,
+      "en": "It's deep into the night; put down all worries",
+      "zh": "夜晚很深了，把所有的烦恼",
+      "pinyin": "Yèwǎn hěn shēn le, bǎ suǒyǒu de fánnǎo",
+      "vi": "Đêm đã rất khuya rồi, hãy đặt mọi nỗi phiền muộn"
+    },
+    {
+      "start": 1068.37,
+      "end": 1070.73,
+      "en": "and daytime temptations—let them all go.",
+      "zh": "和白天的诱惑都放下吧。",
+      "pinyin": "hé báitiān de yòuhuò dōu fàngxià ba.",
+      "vi": "và những cám dỗ của ban ngày xuống nhé."
+    },
+    {
+      "start": 1070.73,
+      "end": 1072.85,
+      "en": "Close your eyes and relax. I hope tonight you have a warm and real dream.",
+      "zh": "闭上眼睛，放轻松。希望今晚的你，能有一个温暖而真实的梦。",
+      "pinyin": "Bìshang yǎnjing, fàng qīngsōng. Xīwàng jīnwǎn de nǐ, néng yǒu yí ge wēnnuǎn ér zhēnshí de mèng.",
+      "vi": "Hãy nhắm mắt lại, thả lỏng người. Mong rằng đêm nay bạn có một giấc mơ ấm áp và chân thật."
+    },
+    {
+      "start": 1072.87,
+      "end": 1075.66,
+      "en": "Thank you everyone for listening to this episode of Chinese Daily",
+      "zh": "感谢大家收听这一期的《每天中文》",
+      "pinyin": "Gǎnxiè dàjiā shōutīng zhè yì qī de Měitiān Zhōngwén",
+      "vi": "Cảm ơn mọi người đã nghe tập này của “Mỗi Ngày Tiếng Trung”"
+    },
+    {
+      "start": 1075.67,
+      "end": 1076.56,
+      "en": "Bedtime Story.",
+      "zh": "睡前故事。",
+      "pinyin": "Shuìqián gùshi.",
+      "vi": "Chuyện kể trước giờ đi ngủ."
+    },
+    {
+      "start": 1076.57,
+      "end": 1078.26,
+      "en": "Wishing you good night and sweet dreams.",
+      "zh": "祝你晚安，好梦。",
+      "pinyin": "Zhù nǐ wǎn'ān, hǎo mèng.",
+      "vi": "Chúc bạn ngủ ngon, có giấc mơ đẹp."
+    },
+    {
+      "start": 1078.27,
+      "end": 1080.24,
+      "en": "Good night, see you next episode.",
+      "zh": "晚安，我们下期再见。",
+      "pinyin": "Wǎn'ān, wǒmen xià qī zàijiàn.",
+      "vi": "Ngủ ngon nhé, hẹn gặp lại các bạn vào tập sau."
+    }
+  ]
+}

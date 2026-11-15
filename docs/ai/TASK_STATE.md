@@ -1,11 +1,11 @@
-# Current task: Tích hợp trọn bộ 30 gói script Podcast 4 lớp & kênh `@ChineseDailyPodcast` (2026-11-15)
+# Current task: Tích hợp trọn bộ 146 gói script Podcast 4 lớp & kênh `@ChineseDailyPodcast` (2026-11-15)
 
 Nhánh: `ui/podcast-impeccable-redesign` (PWA `5.2.3`).
 
 Thay đổi đã thực hiện (không đổi layout `#studioHome` hay các route ngoài phạm vi Podcast / Admin):
-1. **Kho script tĩnh 4 lớp (`content/podcast/cues/*.json`, 30 tệp / 8.900 câu đã kiểm định Giản thể · Pinyin · Việt · Anh, không chồng chéo):**
+1. **Kho script tĩnh 4 lớp (`content/podcast/cues/*.json`, 146 tệp / 47.217 câu đã kiểm định Giản thể · Pinyin · Việt · Anh, không chồng chéo):**
    - Nâng cấp 7/8 tập còn lại trong `STARTER_EPISODES` sang `cuesUrl` & `cuesCount` (giữ nguyên tập 1 `hhkIZ3gOIcs` 147 câu inline).
-   - Bổ sung `LIBRARY_EPISODES` lên 23 tập (20/20 tập `@BaoBaoMandarin`, 10 tập `@LearnChineseThroughPodcast` gồm 6 tập mới `OnXbndDA7I4`, `RjvcxwnO8EU`, `McIKMPc-QhY`, `RSgCb3MVgrw`, `TiTXwdz45TQ`, `PTHiyUpf1d8`, và 1 tập `@ChineseDailyPodcast` `UKUY_0HSRE8` 353 câu; tổng 31 tập / 9.047 câu).
+   - Bổ sung `LIBRARY_EPISODES` lên 139 tập (`20/20` tập `@BaoBaoMandarin`, `10` tập `@LearnChineseThroughPodcast`, và `117/117` tập công khai `@ChineseDailyPodcast`, bỏ qua 8 video Members-only; tổng `147` tập / `47.364` câu).
 2. **Nạp tĩnh `cuesUrl` & hỗ trợ 3 kênh (`src/modules/podcast/podcast.js`, `podcast-core.js`, `server/translator-worker.mjs`, `admin.html`, `admin-portal.js`):**
    - Thêm `@ChineseDailyPodcast` (`UCyYT-HdG1FXua6_vwyXNqhg`) vào `DEFAULT_CHANNELS`, `PODCAST_CHANNELS` (kèm đồng bộ `server/translator-worker-bundled.mjs`) và UI chọn/đồng bộ 3 kênh; giữ nguyên 8 mục `DEFAULT_PODCASTS` trong `admin-portal-core.js`.
    - `adminPodcasts()` kế thừa `cuesUrl` / `cuesCount` từ `STARTER_EPISODES` + `LIBRARY_EPISODES`; `maybeFetchFullYoutubeCaptions()` / `selectEpisode()` nạp `ep.cuesUrl` với cache nội bộ `staticCuesCache`.

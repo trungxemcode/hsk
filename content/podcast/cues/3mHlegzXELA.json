@@ -1,0 +1,3481 @@
+{
+  "id": "3mHlegzXELA",
+  "youtubeId": "3mHlegzXELA",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 3–5 | Ancient Wisdom | 3 Chinese Fables for Critical Thinking | 成语故事 | Chinese daily podcast",
+  "durationSec": 1189,
+  "cues": [
+    {
+      "start": 6.47,
+      "end": 10.23,
+      "en": "Hello everyone, welcome to a new episode of “Everyday Chinese.”",
+      "zh": "大家好，欢迎收听新一期的“每天中文”。",
+      "pinyin": "Dàjiā hǎo, huānyíng shōutīng xīn yì qī de “Měitiān Zhōngwén”.",
+      "vi": "Xin chào mọi người, chào mừng đến với tập mới của “Mỗi Ngày Tiếng Trung”."
+    },
+    {
+      "start": 10.23,
+      "end": 11.25,
+      "en": "I'm Li Ming.",
+      "zh": "我是李明。",
+      "pinyin": "Wǒ shì Lǐ Míng.",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 11.27,
+      "end": 13.03,
+      "en": "Hello everyone, I'm Wang Yu.",
+      "zh": "大家好，我是王雨。",
+      "pinyin": "Dàjiā hǎo, wǒ shì Wáng Yǔ.",
+      "vi": "Xin chào mọi người, tôi là Vương Vũ."
+    },
+    {
+      "start": 13.03,
+      "end": 15.82,
+      "en": "Li Ming, last night I read a book,",
+      "zh": "李明，我昨天晚上看了一本书，",
+      "pinyin": "Lǐ Míng, wǒ zuótiān wǎnshang kàn le yì běn shū,",
+      "vi": "Lý Minh, tối qua tôi đọc một cuốn sách,"
+    },
+    {
+      "start": 15.83,
+      "end": 20.52,
+      "en": "There was a little story in it that was really interesting and made me think for a long time.",
+      "zh": "里面有一个小故事特别有意思，让我思考了很久。",
+      "pinyin": "Lǐmiàn yǒu yí ge xiǎo gùshi tèbié yǒu yìsi, ràng wǒ sīkǎo le hěn jiǔ.",
+      "vi": "Trong đó có một câu chuyện nhỏ rất thú vị, khiến tôi suy nghĩ rất lâu."
+    },
+    {
+      "start": 20.53,
+      "end": 22.45,
+      "en": "Oh? Really? What kind of story?",
+      "zh": "哦？是吗？什么样的故事？",
+      "pinyin": "Ó? Shì ma? Shénme yàng de gùshi?",
+      "vi": "Ồ? Vậy à? Câu chuyện như thế nào?"
+    },
+    {
+      "start": 22.47,
+      "end": 23.69,
+      "en": "Tell me about it.",
+      "zh": "说来听听。",
+      "pinyin": "Shuō lái tīngting.",
+      "vi": "Kể tôi nghe xem."
+    },
+    {
+      "start": 23.7,
+      "end": 26.22,
+      "en": "I've found that sometimes a simple story,",
+      "zh": "我发现，有时候一个简单的故事，",
+      "pinyin": "Wǒ fāxiàn, yǒu shíhou yí ge jiǎndān de gùshi,",
+      "vi": "Tôi phát hiện ra, đôi khi một câu chuyện đơn giản,"
+    },
+    {
+      "start": 26.23,
+      "end": 29.55,
+      "en": "is easier than a long lecture to help people understand something.",
+      "zh": "比一大段道理更容易让人明白一些事情。",
+      "pinyin": "bǐ yí dà duàn dàolǐ gèng róngyì ràng rén míngbai yìxiē shìqing.",
+      "vi": "còn dễ giúp người ta hiểu ra vài điều hơn là một đoạn đạo lý dài."
+    },
+    {
+      "start": 29.57,
+      "end": 30.49,
+      "en": "Yeah!",
+      "zh": "是啊！",
+      "pinyin": "Shì a!",
+      "vi": "Đúng vậy!"
+    },
+    {
+      "start": 30.5,
+      "end": 34.49,
+      "en": "This also made me think of our own podcast, “Everyday Chinese.”",
+      "zh": "这也让我想到了我们自己的播客，“每天中文”。",
+      "pinyin": "Zhè yě ràng wǒ xiǎngdào le wǒmen zìjǐ de bōkè, “Měitiān Zhōngwén”.",
+      "vi": "Điều này cũng khiến tôi nghĩ đến podcast của chúng ta, “Mỗi Ngày Tiếng Trung”."
+    },
+    {
+      "start": 34.5,
+      "end": 36.26,
+      "en": "Aren't we hoping, through chatting",
+      "zh": "我们不就是希望通过聊",
+      "pinyin": "Wǒmen bú jiù shì xīwàng tōngguò liáo",
+      "vi": "Chẳng phải chúng ta hy vọng thông qua việc trò chuyện"
+    },
+    {
+      "start": 36.27,
+      "end": 40.23,
+      "en": "and telling stories, to help everyone learn Chinese?",
+      "zh": "天和讲故事的方式，帮助大家学习中文吗？",
+      "pinyin": "tiān hé jiǎng gùshi de fāngshì, bāngzhù dàjiā xuéxí Zhōngwén ma?",
+      "vi": "và kể chuyện, giúp mọi người học tiếng Trung sao?"
+    },
+    {
+      "start": 40.23,
+      "end": 42.45,
+      "en": "So, friends who are listening,",
+      "zh": "所以，正在收听的朋友们，",
+      "pinyin": "Suǒyǐ, zhèngzài shōutīng de péngyoumen,",
+      "vi": "Vì vậy, những bạn đang nghe chương trình,"
+    },
+    {
+      "start": 42.47,
+      "end": 44.13,
+      "en": "you can relax,",
+      "zh": "你们可以放松下来，",
+      "pinyin": "nǐmen kěyǐ fàngsōng xiàlái,",
+      "vi": "các bạn có thể thả lỏng,"
+    },
+    {
+      "start": 44.13,
+      "end": 47.45,
+      "en": "just like listening to friends chat; no need to be too nervous.",
+      "zh": "就像听朋友聊天一样，不用太紧张。",
+      "pinyin": "jiù xiàng tīng péngyou liáotiān yíyàng, bú yòng tài jǐnzhāng.",
+      "vi": "cứ như đang nghe bạn bè trò chuyện, không cần quá căng thẳng."
+    },
+    {
+      "start": 47.47,
+      "end": 51.13,
+      "en": "Before you know it, your Chinese listening will improve.",
+      "zh": "在不知不觉中，你的中文听力就会进步的。",
+      "pinyin": "Zài bù zhī bù jué zhōng, nǐ de Zhōngwén tīnglì jiù huì jìnbù de.",
+      "vi": "Trong lúc không hay biết, khả năng nghe tiếng Trung của bạn sẽ tiến bộ."
+    },
+    {
+      "start": 51.13,
+      "end": 53.15,
+      "en": "Right, Wang Yu is correct.",
+      "zh": "对，王雨说得没错。",
+      "pinyin": "Duì, Wáng Yǔ shuō de méi cuò.",
+      "vi": "Đúng, Vương Vũ nói không sai."
+    },
+    {
+      "start": 53.17,
+      "end": 57.86,
+      "en": "The best way to learn a language is to use it and integrate it into life.",
+      "zh": "学习语言最好的方式就是把它用起来，融入生活。",
+      "pinyin": "Xuéxí yǔyán zuì hǎo de fāngshì jiù shì bǎ tā yòng qǐlái, róngrù shēnghuó.",
+      "vi": "Cách tốt nhất để học ngôn ngữ là sử dụng nó, hòa mình vào cuộc sống."
+    },
+    {
+      "start": 57.87,
+      "end": 60.86,
+      "en": "Perfect—you just mentioned a story that made you think,",
+      "zh": "正好，你刚才提到了让你思考的故事，",
+      "pinyin": "Zhènghǎo, nǐ gāngcái tí dào le ràng nǐ sīkǎo de gùshi,",
+      "vi": "Đúng lúc, bạn vừa nhắc đến câu chuyện khiến bạn suy nghĩ,"
+    },
+    {
+      "start": 60.87,
+      "end": 63.56,
+      "en": "today let's talk about a related topic:",
+      "zh": "我们今天就来聊一个相关的话题吧:",
+      "pinyin": "Wǒmen jīntiān jiù lái liáo yí ge xiāngguān de huàtí ba:",
+      "vi": "Hôm nay chúng ta hãy nói về một chủ đề liên quan nhé:"
+    },
+    {
+      "start": 63.57,
+      "end": 67.46,
+      "en": "those ancient little stories that teach us to think more deeply.",
+      "zh": "那些教我们更深入思考的古代小故事。",
+      "pinyin": "Nàxiē jiāo wǒmen gèng shēnrù sīkǎo de gǔdài xiǎo gùshi.",
+      "vi": "Đó là những câu chuyện nhỏ thời cổ dạy chúng ta suy nghĩ sâu sắc hơn."
+    },
+    {
+      "start": 67.47,
+      "end": 68.93,
+      "en": "That's a great idea!",
+      "zh": "这个主意太棒了！",
+      "pinyin": "Zhège zhǔyi tài bàng le!",
+      "vi": "Ý kiến này hay quá!"
+    },
+    {
+      "start": 68.93,
+      "end": 73.35,
+      "en": "China has many stories like this; we call them “idiom stories.”",
+      "zh": "中国有很多这样的故事，我们叫“成语故事”。",
+      "pinyin": "Zhōngguó yǒu hěn duō zhèyàng de gùshi, wǒmen jiào “chéngyǔ gùshi”.",
+      "vi": "Trung Quốc có nhiều câu chuyện như vậy, chúng tôi gọi là “truyện thành ngữ”."
+    },
+    {
+      "start": 73.37,
+      "end": 77.43,
+      "en": "They are usually very short, but the lessons behind them are profound.",
+      "zh": "它们通常很短，但背后的道理却很深。",
+      "pinyin": "Tāmen tōngcháng hěn duǎn, dàn bèihòu de dàolǐ què hěn shēn.",
+      "vi": "Chúng thường rất ngắn, nhưng đạo lý ẩn sau lại rất sâu sắc."
+    },
+    {
+      "start": 77.43,
+      "end": 79.89,
+      "en": "Which ones are we going to share today?",
+      "zh": "今天我们准备分享哪几个呢？",
+      "pinyin": "Jīntiān wǒmen zhǔnbèi fēnxiǎng nǎ jǐ ge ne?",
+      "vi": "Hôm nay chúng ta định chia sẻ những câu chuyện nào?"
+    },
+    {
+      "start": 79.9,
+      "end": 81.46,
+      "en": "Today we have carefully selected",
+      "zh": "今天我们精心挑选",
+      "pinyin": "Jīntiān wǒmen jīngxīn tiāoxuǎn",
+      "vi": "Hôm nay chúng ta đã cẩn thận chọn"
+    },
+    {
+      "start": 81.47,
+      "end": 85.03,
+      "en": "three very famous stories: “Buying and Selling Shadows,”",
+      "zh": "了三个非常有名的故事:《买卖影子》、",
+      "pinyin": "le sān ge fēicháng yǒumíng de gùshi: “Mǎi Mài Yǐngzi”,",
+      "vi": "ra ba câu chuyện rất nổi tiếng: “Mua Bán Cái Bóng”,"
+    },
+    {
+      "start": 85.03,
+      "end": 88.09,
+      "en": "“The Snipe and the Clam Fight” and “Plugging One's Ears While Stealing a Bell.”",
+      "zh": "《鹬蚌相争》和《掩耳盗铃》。",
+      "pinyin": "“Yù Bàng Xiāng Zhēng” hé “Yǎn’ěr Dào Líng”.",
+      "vi": "“Chim dẽ và con trai tranh nhau” và “Bịt tai trộm chuông”."
+    },
+    {
+      "start": 88.1,
+      "end": 91.49,
+      "en": "Each story can bring us a different insight.",
+      "zh": "每一个故事都能给我们带来不一样的启发。",
+      "pinyin": "Měi yí ge gùshi dōu néng gěi wǒmen dàilái bù yíyàng de qǐfā.",
+      "vi": "Mỗi câu chuyện đều có thể mang đến cho chúng ta một bài học khác nhau."
+    },
+    {
+      "start": 91.5,
+      "end": 92.56,
+      "en": "I can't wait!",
+      "zh": "太期待了！",
+      "pinyin": "Tài qīdài le!",
+      "vi": "Mong chờ quá!"
+    },
+    {
+      "start": 92.57,
+      "end": 94.63,
+      "en": "These stories from thousands of years ago,",
+      "zh": "这些几千年前的故事，",
+      "pinyin": "Zhèxiē jǐ qiān nián qián de gùshi,",
+      "vi": "Những câu chuyện từ mấy nghìn năm trước này,"
+    },
+    {
+      "start": 94.63,
+      "end": 97.69,
+      "en": "what exactly do they have to do with our modern life?",
+      "zh": "到底和我们的现代生活有什么关系呢？",
+      "pinyin": "dàodǐ hé wǒmen de xiàndài shēnghuó yǒu shénme guānxi ne?",
+      "vi": "rốt cuộc có liên quan gì đến cuộc sống hiện đại của chúng ta?"
+    },
+    {
+      "start": 97.7,
+      "end": 99.46,
+      "en": "Let's start right now!",
+      "zh": "让我们现在就开始吧！",
+      "pinyin": "Ràng wǒmen xiànzài jiù kāishǐ ba!",
+      "vi": "Hãy để chúng ta bắt đầu ngay bây giờ nhé!"
+    },
+    {
+      "start": 99.47,
+      "end": 102.26,
+      "en": "Okay, let's start with the first story,",
+      "zh": "好，我们先从第一个故事开始吧，",
+      "pinyin": "Hǎo, wǒmen xiān cóng dì yī ge gùshi kāishǐ ba,",
+      "vi": "Được, chúng ta bắt đầu từ câu chuyện đầu tiên nhé,"
+    },
+    {
+      "start": 102.27,
+      "end": 106.29,
+      "en": "“Buying and Selling Shadows.” Wang Yu, why don't you tell everyone this story first?",
+      "zh": "《买卖影子》。王雨，你先给大家讲讲这个故事？",
+      "pinyin": "“Mǎi Mài Yǐngzi”. Wáng Yǔ, nǐ xiān gěi dàjiā jiǎngjiang zhège gùshi?",
+      "vi": "“Mua Bán Cái Bóng”. Vương Vũ, bạn kể cho mọi người nghe câu chuyện này trước nhé?"
+    },
+    {
+      "start": 106.3,
+      "end": 108.69,
+      "en": "Your voice is especially vivid when telling stories.",
+      "zh": "你的声音讲故事特别生动。",
+      "pinyin": "Nǐ de shēngyīn jiǎng gùshi tèbié shēngdòng.",
+      "vi": "Giọng bạn kể chuyện rất sinh động."
+    },
+    {
+      "start": 108.7,
+      "end": 111.12,
+      "en": "(Laughs) Okay, no problem.",
+      "zh": "(笑)，好的，没问题。",
+      "pinyin": "(Xiào), hǎo de, méi wèntí.",
+      "vi": "(Cười) Được, không vấn đề gì."
+    },
+    {
+      "start": 111.13,
+      "end": 115.82,
+      "en": "The story goes like this: a long time ago, the weather was very hot.",
+      "zh": "这个故事是这样的:在很久以前，天气非常热。",
+      "pinyin": "Zhège gùshi shì zhèyàng de: zài hěn jiǔ yǐqián, tiānqì fēicháng rè.",
+      "vi": "Câu chuyện là thế này: rất lâu về trước, thời tiết rất nóng."
+    },
+    {
+      "start": 115.83,
+      "end": 120.85,
+      "en": "A man was walking on the road; the sun was strong, and he felt hot and tired.",
+      "zh": "有一个人走在路上，太阳很大，他觉得又热又累。",
+      "pinyin": "Yǒu yí ge rén zǒu zài lùshang, tàiyáng hěn dà, tā juéde yòu rè yòu lèi.",
+      "vi": "Có một người đi trên đường, mặt trời rất to, anh ta thấy vừa nóng vừa mệt."
+    },
+    {
+      "start": 120.87,
+      "end": 123.76,
+      "en": "Just then, he saw a big tree by the road,",
+      "zh": "正好，他看到路边有一棵大树，",
+      "pinyin": "Zhènghǎo, tā kàndào lùbiān yǒu yì kē dà shù,",
+      "vi": "Đúng lúc, anh ta thấy bên đường có một cây to,"
+    },
+    {
+      "start": 123.77,
+      "end": 126.29,
+      "en": "under the tree there was a large patch of shade.",
+      "zh": "树下有一片很大的影子。",
+      "pinyin": "shù xià yǒu yí piàn hěn dà de yǐngzi.",
+      "vi": "dưới gốc cây có một vùng bóng râm rất lớn."
+    },
+    {
+      "start": 126.3,
+      "end": 130.06,
+      "en": "He immediately ran under the tree to rest and felt much cooler.",
+      "zh": "他马上跑到树下休息，感觉凉快多了。",
+      "pinyin": "Tā mǎshàng pǎodào shù xià xiūxi, gǎnjué liángkuai duō le.",
+      "vi": "Anh ta lập tức chạy đến dưới gốc cây nghỉ, cảm thấy mát hơn nhiều."
+    },
+    {
+      "start": 130.07,
+      "end": 131.56,
+      "en": "Mm, that's very normal.",
+      "zh": "嗯，这很正常。",
+      "pinyin": "Ng, zhè hěn zhèngcháng.",
+      "vi": "Ừm, chuyện này rất bình thường."
+    },
+    {
+      "start": 131.57,
+      "end": 134.36,
+      "en": "In summer, everyone wants to find some shade to cool off.",
+      "zh": "夏天谁都想找个树荫凉快一下。",
+      "pinyin": "Xiàtiān shéi dōu xiǎng zhǎo ge shùyīn liángkuai yíxià.",
+      "vi": "Mùa hè ai cũng muốn tìm bóng cây để hưởng mát một chút."
+    },
+    {
+      "start": 134.37,
+      "end": 137.76,
+      "en": "Right. As for this man, not only did he rest under the tree,",
+      "zh": "对。这个人呢，他不仅在树下休息，",
+      "pinyin": "Duì. Zhège rén ne, tā bùjǐn zài shù xià xiūxi,",
+      "vi": "Đúng. Người này, anh ta không chỉ nghỉ dưới gốc cây,"
+    },
+    {
+      "start": 137.77,
+      "end": 140.86,
+      "en": "but a “clever” idea also popped into his head.",
+      "zh": "他脑子里还出现了一个“聪明”的想法。",
+      "pinyin": "tā nǎozi lǐ hái chūxiàn le yí ge “cōngming” de xiǎngfǎ.",
+      "vi": "trong đầu anh ta còn xuất hiện một ý tưởng “thông minh”."
+    },
+    {
+      "start": 140.87,
+      "end": 143.56,
+      "en": "He thought, “This tree's shade is so good—",
+      "zh": "他想:“这棵树的影子这么好，",
+      "pinyin": "Tā xiǎng: “Zhè kē shù de yǐngzi zhème hǎo,",
+      "vi": "Anh ta nghĩ: “Bóng của cây này tốt thế này,"
+    },
+    {
+      "start": 143.57,
+      "end": 147.36,
+      "en": "it's cool and comfortable; surely many people need it.",
+      "zh": "又凉快又舒服，肯定有很多人需要。",
+      "pinyin": "yòu liángkuai yòu shūfu, kěndìng yǒu hěn duō rén xūyào.",
+      "vi": "vừa mát vừa dễ chịu, chắc chắn có nhiều người cần."
+    },
+    {
+      "start": 147.37,
+      "end": 150.63,
+      "en": "If I sell this shade, I'll definitely make money!”",
+      "zh": "如果我把这个影子卖了，一定能赚钱！”",
+      "pinyin": "Rúguǒ wǒ bǎ zhège yǐngzi mài le, yídìng néng zhuànqián!”",
+      "vi": "Nếu tôi bán cái bóng này, nhất định sẽ kiếm được tiền!”"
+    },
+    {
+      "start": 150.63,
+      "end": 152.65,
+      "en": "Wait, selling shadows?",
+      "zh": "等一下，卖影子？",
+      "pinyin": "Děng yīxià, mài yǐngzi?",
+      "vi": "Đợi đã, bán bóng à?"
+    },
+    {
+      "start": 152.67,
+      "end": 154.63,
+      "en": "That idea is way too strange.",
+      "zh": "这想法也太奇怪了吧。",
+      "pinyin": "Zhè xiǎngfǎ yě tài qíguài le ba.",
+      "vi": "Ý tưởng này cũng quá kỳ lạ rồi."
+    },
+    {
+      "start": 154.63,
+      "end": 155.92,
+      "en": "How do you sell a shadow?",
+      "zh": "影子怎么卖？",
+      "pinyin": "Yǐngzi zěnme mài?",
+      "vi": "Bóng thì bán thế nào?"
+    },
+    {
+      "start": 155.93,
+      "end": 158.42,
+      "en": "Right? But he just did it.",
+      "zh": "是吧？但他就这么做了。",
+      "pinyin": "Shì ba? Dàn tā jiù zhème zuò le.",
+      "vi": "Đúng không? Nhưng anh ta cứ thế làm luôn."
+    },
+    {
+      "start": 158.43,
+      "end": 160.72,
+      "en": "He shouted loudly, “Shadows for sale!",
+      "zh": "他大声地喊：“卖影子了！",
+      "pinyin": "Tā dàshēng de hǎn: “Mài yǐngzi le!",
+      "vi": "Anh ta hét lớn: “Bán bóng đây!"
+    },
+    {
+      "start": 160.73,
+      "end": 162.69,
+      "en": "Big, cool shadows!",
+      "zh": "又大又凉快的影子！",
+      "pinyin": "Yòu dà yòu liángkuai de yǐngzi!",
+      "vi": "Bóng vừa to vừa mát!"
+    },
+    {
+      "start": 162.7,
+      "end": 164.09,
+      "en": "Come buy one!”",
+      "zh": "快来买啊！”",
+      "pinyin": "Kuài lái mǎi a!”",
+      "vi": "Mau đến mua đi!”"
+    },
+    {
+      "start": 164.1,
+      "end": 167.22,
+      "en": "At this moment, another passerby also felt very hot,",
+      "zh": "这时候，另一个路过的人也觉得很热，",
+      "pinyin": "Zhè shíhou, lìng yī gè lùguò de rén yě juéde hěn rè,",
+      "vi": "Lúc này, một người khác đi ngang qua cũng thấy rất nóng,"
+    },
+    {
+      "start": 167.23,
+      "end": 170.35,
+      "en": "Seeing the shadow under the tree, he really wanted to go over and rest.",
+      "zh": "看到树下的影子，很想过去休息。",
+      "pinyin": "Kàn dào shù xià de yǐngzi, hěn xiǎng guòqù xiūxi.",
+      "vi": "Nhìn thấy bóng dưới gốc cây, rất muốn qua đó nghỉ ngơi."
+    },
+    {
+      "start": 170.37,
+      "end": 172.43,
+      "en": "He heard someone selling shadows,",
+      "zh": "他听见有人在卖影子，",
+      "pinyin": "Tā tīngjiàn yǒu rén zài mài yǐngzi,",
+      "vi": "Anh ta nghe thấy có người đang bán bóng,"
+    },
+    {
+      "start": 172.43,
+      "end": 174.15,
+      "en": "Although he found it a bit strange,",
+      "zh": "虽然觉得有点奇怪，",
+      "pinyin": "Suīrán juéde yǒu diǎn qíguài,",
+      "vi": "Tuy thấy hơi kỳ lạ,"
+    },
+    {
+      "start": 174.17,
+      "end": 176.16,
+      "en": "But the weather was just too hot,",
+      "zh": "但天气实在太热了，",
+      "pinyin": "Dàn tiānqì shízài tài rè le,",
+      "vi": "Nhưng thời tiết thật sự quá nóng,"
+    },
+    {
+      "start": 176.17,
+      "end": 178.89,
+      "en": "So he asked, “How much for this shadow?”",
+      "zh": "他就问：“这个影子怎么卖？”",
+      "pinyin": "Tā jiù wèn: “Zhège yǐngzi zěnme mài?”",
+      "vi": "Anh ta bèn hỏi: “Cái bóng này bán thế nào?”"
+    },
+    {
+      "start": 178.9,
+      "end": 180.92,
+      "en": "Someone actually asked the price?",
+      "zh": "还有人真的问价钱了？",
+      "pinyin": "Hái yǒu rén zhēn de wèn jiàqián le?",
+      "vi": "Còn có người thật sự hỏi giá nữa à?"
+    },
+    {
+      "start": 180.93,
+      "end": 184.29,
+      "en": "Yes. The shadow seller said, “Not expensive, not expensive,",
+      "zh": "是的。卖影子的人就说：“不贵不贵，",
+      "pinyin": "Shì de. Mài yǐngzi de rén jiù shuō: “Bù guì bù guì,",
+      "vi": "Đúng vậy. Người bán bóng bèn nói: “Không đắt, không đắt,"
+    },
+    {
+      "start": 184.3,
+      "end": 185.82,
+      "en": "Just ten copper coins,",
+      "zh": "只要十个铜钱，",
+      "pinyin": "Zhǐyào shí gè tóngqián,",
+      "vi": "Chỉ cần mười đồng tiền đồng,"
+    },
+    {
+      "start": 185.83,
+      "end": 188.22,
+      "en": "and you can rest here for a whole day.”",
+      "zh": "你就可以在这里休息一天。”",
+      "pinyin": "Nǐ jiù kěyǐ zài zhèlǐ xiūxi yī tiān.”",
+      "vi": "Bạn có thể nghỉ ngơi ở đây cả một ngày.”"
+    },
+    {
+      "start": 188.23,
+      "end": 189.69,
+      "en": "The buyer thought for a moment,",
+      "zh": "买的人想了想，",
+      "pinyin": "Mǎi de rén xiǎng le xiǎng,",
+      "vi": "Người mua nghĩ một lát,"
+    },
+    {
+      "start": 189.7,
+      "end": 192.16,
+      "en": "Ten copper coins could buy a day of coolness,",
+      "zh": "十个铜钱能买一天的凉快，",
+      "pinyin": "Shí gè tóngqián néng mǎi yī tiān de liángkuai,",
+      "vi": "Mười đồng tiền có thể mua một ngày mát mẻ,"
+    },
+    {
+      "start": 192.17,
+      "end": 195.13,
+      "en": "It seemed okay, so he paid,",
+      "zh": "好像也还行，于是就付了钱，",
+      "pinyin": "Hǎoxiàng yě hái xíng, yúshì jiù fù le qián,",
+      "vi": "Có vẻ cũng được, thế là trả tiền luôn,"
+    },
+    {
+      "start": 195.13,
+      "end": 198.12,
+      "en": "and happily lay down in the shade to rest.",
+      "zh": "高兴地躺在树荫下休息了。",
+      "pinyin": "Gāoxìng de tǎng zài shùyīn xià xiūxi le.",
+      "vi": "Vui vẻ nằm dưới bóng cây nghỉ ngơi."
+    },
+    {
+      "start": 198.13,
+      "end": 201.35,
+      "en": "(Laughs) One dares to sell, and one dares to buy.",
+      "zh": "（笑），一个敢卖，一个敢买。",
+      "pinyin": "(Xiào), yī gè gǎn mài, yī gè gǎn mǎi.",
+      "vi": "(Cười) Một người dám bán, một người dám mua."
+    },
+    {
+      "start": 201.37,
+      "end": 203.23,
+      "en": "That sounds a bit absurd.",
+      "zh": "这听起来有点荒唐。",
+      "pinyin": "Zhè tīng qǐlái yǒu diǎn huāngtáng.",
+      "vi": "Nghe có vẻ hơi hoang đường."
+    },
+    {
+      "start": 203.23,
+      "end": 205.25,
+      "en": "The even more absurd part is still to come.",
+      "zh": "更荒唐的还在后面呢。",
+      "pinyin": "Gèng huāngtáng de hái zài hòumiàn ne.",
+      "vi": "Còn chuyện hoang đường hơn vẫn ở phía sau."
+    },
+    {
+      "start": 205.27,
+      "end": 208.56,
+      "en": "After getting the money, the shadow seller was very pleased with himself,",
+      "zh": "卖影子的人拿到钱以后，非常得意，",
+      "pinyin": "Mài yǐngzi de rén ná dào qián yǐhòu, fēicháng déyì,",
+      "vi": "Người bán bóng sau khi nhận tiền thì vô cùng đắc ý,"
+    },
+    {
+      "start": 208.57,
+      "end": 210.53,
+      "en": "feeling he was so clever.",
+      "zh": "觉得自己太聪明了。",
+      "pinyin": "Juéde zìjǐ tài cōngmíng le.",
+      "vi": "Cảm thấy mình quá thông minh."
+    },
+    {
+      "start": 210.53,
+      "end": 215.62,
+      "en": "But as time slowly passed, the sun’s position changed.",
+      "zh": "可是，时间慢慢过去，太阳的位置变了。",
+      "pinyin": "Kěshì, shíjiān mànmàn guòqù, tàiyáng de wèizhi biàn le.",
+      "vi": "Nhưng thời gian dần trôi qua, vị trí mặt trời đã thay đổi."
+    },
+    {
+      "start": 215.63,
+      "end": 217.55,
+      "en": "Ah, I know where the problem is.",
+      "zh": "啊，我知道问题出在哪里了。",
+      "pinyin": "A, wǒ zhīdào wèntí chū zài nǎlǐ le.",
+      "vi": "À, tôi biết vấn đề nằm ở đâu rồi."
+    },
+    {
+      "start": 217.57,
+      "end": 220.16,
+      "en": "When the sun moves, the shadow moves along with it.",
+      "zh": "太阳一动，影子也跟着动了。",
+      "pinyin": "Tàiyáng yī dòng, yǐngzi yě gēnzhe dòng le.",
+      "vi": "Mặt trời vừa động, cái bóng cũng động theo."
+    },
+    {
+      "start": 220.17,
+      "end": 221.46,
+      "en": "Exactly!",
+      "zh": "完全正确！",
+      "pinyin": "Wánquán zhèngquè!",
+      "vi": "Hoàn toàn chính xác!"
+    },
+    {
+      "start": 221.47,
+      "end": 226.06,
+      "en": "The tree’s shadow slowly moved away from where the shadow buyer was lying.",
+      "zh": "树的影子慢慢地离开了买影子的人躺着的地方。",
+      "pinyin": "Shù de yǐngzi mànmàn de líkāi le mǎi yǐngzi de rén tǎng zhe de dìfang.",
+      "vi": "Bóng cây dần dần rời khỏi chỗ người mua bóng đang nằm."
+    },
+    {
+      "start": 226.07,
+      "end": 228.49,
+      "en": "He was suddenly exposed to the sun.",
+      "zh": "他一下子就被太阳晒到了。",
+      "pinyin": "Tā yīxiàzi jiù bèi tàiyáng shài dào le.",
+      "vi": "Anh ta lập tức bị nắng chiếu vào."
+    },
+    {
+      "start": 228.5,
+      "end": 231.76,
+      "en": "He got very angry and went to find the shadow seller,",
+      "zh": "他很生气，就去找那个卖影子的人，",
+      "pinyin": "Tā hěn shēngqì, jiù qù zhǎo nàge mài yǐngzi de rén,",
+      "vi": "Anh ta rất tức giận, bèn đi tìm người bán bóng kia,"
+    },
+    {
+      "start": 231.77,
+      "end": 233.49,
+      "en": "and said, “Why are you lying?",
+      "zh": "说：“你怎么骗人？",
+      "pinyin": "shuō: “Nǐ zěnme piàn rén?",
+      "vi": "nói: “Sao anh lại lừa người?"
+    },
+    {
+      "start": 233.5,
+      "end": 236.66,
+      "en": "The shadow I bought ran away!” Now there’s trouble.",
+      "zh": "我买的影子跑了！”这下麻烦了。",
+      "pinyin": "Wǒ mǎi de yǐngzi pǎo le!” Zhè xià máfan le.",
+      "vi": "Cái bóng tôi mua chạy mất rồi!” Thế là rắc rối rồi."
+    },
+    {
+      "start": 236.67,
+      "end": 238.76,
+      "en": "So what did the shadow seller say?",
+      "zh": "那卖影子的人怎么说？",
+      "pinyin": "Nà mài yǐngzi de rén zěnme shuō?",
+      "vi": "Thế người bán bóng nói gì?"
+    },
+    {
+      "start": 238.77,
+      "end": 240.86,
+      "en": "The shadow seller was even more unreasonable.",
+      "zh": "卖影子的人更不讲理。",
+      "pinyin": "Mài yǐngzi de rén gèng bù jiǎnglǐ.",
+      "vi": "Người bán bóng còn vô lý hơn."
+    },
+    {
+      "start": 240.87,
+      "end": 243.93,
+      "en": "He said, “What I sold you was ‘the tree’s shadow,’",
+      "zh": "他说：“我卖给你的是‘树的影子’，",
+      "pinyin": "Tā shuō: “Wǒ mài gěi nǐ de shì ‘shù de yǐngzi’,",
+      "vi": "Anh ta nói: “Thứ tôi bán cho anh là ‘bóng của cây’,"
+    },
+    {
+      "start": 243.93,
+      "end": 248.22,
+      "en": "Now the shadow has moved; that’s the sun’s problem, not mine.",
+      "zh": "现在影子动了，那是太阳的问题，不是我的问题。",
+      "pinyin": "Xiànzài yǐngzi dòng le, nà shì tàiyáng de wèntí, bù shì wǒ de wèntí.",
+      "vi": "Bây giờ bóng động rồi, đó là vấn đề của mặt trời, không phải vấn đề của tôi."
+    },
+    {
+      "start": 248.23,
+      "end": 250.22,
+      "en": "The shadow is still beside the tree,",
+      "zh": "影子还在树的旁边，",
+      "pinyin": "Yǐngzi hái zài shù de pángbiān,",
+      "vi": "Cái bóng vẫn ở bên cạnh cây,"
+    },
+    {
+      "start": 250.23,
+      "end": 252.52,
+      "en": "why don’t you move along with the shadow?”",
+      "zh": "你为什么不跟着影子动呢？”",
+      "pinyin": "nǐ wèishénme bù gēnzhe yǐngzi dòng ne?”",
+      "vi": "sao anh không đi theo cái bóng chứ?”"
+    },
+    {
+      "start": 252.53,
+      "end": 254.75,
+      "en": "And so the two of them started arguing.",
+      "zh": "两个人就这样吵了起来。",
+      "pinyin": "Liǎng gè rén jiù zhèyàng chǎo le qǐlái.",
+      "vi": "Hai người cứ thế cãi nhau."
+    },
+    {
+      "start": 254.77,
+      "end": 256.29,
+      "en": "Is that the end of the story?",
+      "zh": "这个故事讲完了？",
+      "pinyin": "Zhège gùshi jiǎng wán le?",
+      "vi": "Câu chuyện này kể xong rồi à?"
+    },
+    {
+      "start": 256.3,
+      "end": 260.52,
+      "en": "Yes, that’s the end. Although it’s very simple, I find it very interesting.",
+      "zh": "讲完了。虽然很简单，但是我觉得很有意思。",
+      "pinyin": "Jiǎng wán le. Suīrán hěn jiǎndān, dànshì wǒ juéde hěn yǒu yìsi.",
+      "vi": "Kể xong rồi. Tuy rất đơn giản, nhưng tôi thấy rất thú vị."
+    },
+    {
+      "start": 260.53,
+      "end": 261.85,
+      "en": "It is indeed very interesting.",
+      "zh": "的确很有意思。",
+      "pinyin": "Díquè hěn yǒu yìsi.",
+      "vi": "Đúng là rất thú vị."
+    },
+    {
+      "start": 261.87,
+      "end": 262.93,
+      "en": "In this story,",
+      "zh": "这个故事里，",
+      "pinyin": "Zhège gùshi lǐ,",
+      "vi": "Trong câu chuyện này,"
+    },
+    {
+      "start": 262.93,
+      "end": 265.32,
+      "en": "the shadow seller and the shadow buyer,",
+      "zh": "卖影子的人和买影子的人，",
+      "pinyin": "mài yǐngzi de rén hé mǎi yǐngzi de rén,",
+      "vi": "người bán bóng và người mua bóng,"
+    },
+    {
+      "start": 265.33,
+      "end": 267.85,
+      "en": "actually both made the same mistake.",
+      "zh": "其实都犯了一个共同的错误。",
+      "pinyin": "qíshí dōu fàn le yī gè gòngtóng de cuòwù.",
+      "vi": "thật ra đều mắc một lỗi chung."
+    },
+    {
+      "start": 267.87,
+      "end": 271.69,
+      "en": "They only saw the immediate benefit and didn’t think deeply.",
+      "zh": "他们只看到了眼前的好处，没有深入思考。",
+      "pinyin": "Tāmen zhǐ kàn dào le yǎnqián de hǎochu, méiyǒu shēnrù sīkǎo.",
+      "vi": "Họ chỉ nhìn thấy lợi ích trước mắt mà không suy nghĩ sâu xa."
+    },
+    {
+      "start": 271.7,
+      "end": 274.89,
+      "en": "Are you saying the shadow seller only thought about making money,",
+      "zh": "你是说卖影子的人只想着赚钱，",
+      "pinyin": "Nǐ shì shuō mài yǐngzi de rén zhǐ xiǎng zhe zhuànqián,",
+      "vi": "Ý anh là người bán bóng chỉ nghĩ đến kiếm tiền,"
+    },
+    {
+      "start": 274.9,
+      "end": 278.06,
+      "en": "The person buying the shadow only thought about cooling down right away?",
+      "zh": "买影子的人只想着马上凉快一下？",
+      "pinyin": "Mǎi yǐngzi de rén zhǐ xiǎngzhe mǎshàng liángkuai yíxià?",
+      "vi": "Người mua bóng chỉ nghĩ đến việc được mát ngay thôi à?"
+    },
+    {
+      "start": 278.07,
+      "end": 280.53,
+      "en": "Right. The shadow seller was very greedy,",
+      "zh": "对。卖影子的人很贪心，",
+      "pinyin": "Duì. Mài yǐngzi de rén hěn tānxīn,",
+      "vi": "Đúng vậy. Người bán bóng rất tham lam,"
+    },
+    {
+      "start": 280.53,
+      "end": 283.15,
+      "en": "He created a 'product' that does not exist.",
+      "zh": "他创造了一个不存在的“商品”。",
+      "pinyin": "Tā chuàngzào le yí ge bù cúnzài de “shāngpǐn”.",
+      "vi": "Anh ta đã tạo ra một “món hàng” không hề tồn tại."
+    },
+    {
+      "start": 283.17,
+      "end": 286.76,
+      "en": "He thought the shadow was a fixed thing that could be sold for money.",
+      "zh": "他觉得影子是一个固定的东西，可以卖钱。",
+      "pinyin": "Tā juéde yǐngzi shì yí ge gùdìng de dōngxi, kěyǐ mài qián.",
+      "vi": "Anh ta cho rằng cái bóng là một thứ cố định, có thể bán lấy tiền."
+    },
+    {
+      "start": 286.77,
+      "end": 289.86,
+      "en": "But he forgot that shadows change with the sun,",
+      "zh": "但他忘了影子是跟着太阳变化的，",
+      "pinyin": "Dàn tā wàng le yǐngzi shì gēnzhe tàiyáng biànhuà de,",
+      "vi": "Nhưng anh ta quên rằng cái bóng thay đổi theo mặt trời,"
+    },
+    {
+      "start": 289.87,
+      "end": 292.29,
+      "en": "It is not something that can be owned.",
+      "zh": "它不是一个可以被拥有的东西。",
+      "pinyin": "Tā bú shì yí ge kěyǐ bèi yōngyǒu de dōngxi.",
+      "vi": "Nó không phải là một thứ có thể sở hữu."
+    },
+    {
+      "start": 292.3,
+      "end": 295.69,
+      "en": "This way of thinking is looking only at the surface, not thinking about the essence.",
+      "zh": "这种想法就是只看表面，不想本质。",
+      "pinyin": "Zhè zhǒng xiǎngfǎ jiùshì zhǐ kàn biǎomiàn, bù xiǎng běnzhì.",
+      "vi": "Cách nghĩ này chính là chỉ nhìn bề mặt, không nghĩ đến bản chất."
+    },
+    {
+      "start": 295.7,
+      "end": 296.72,
+      "en": "I understand.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 296.73,
+      "end": 298.69,
+      "en": "He only thought about how to make money,",
+      "zh": "他只想到了怎么赚钱，",
+      "pinyin": "Tā zhǐ xiǎngdào le zěnme zhuànqián,",
+      "vi": "Anh ta chỉ nghĩ đến cách kiếm tiền,"
+    },
+    {
+      "start": 298.7,
+      "end": 302.02,
+      "en": "but didn't think about whether this 'business' was really reasonable,",
+      "zh": "但没有想这个“生意”是不是真的合理、",
+      "pinyin": "Dàn méiyǒu xiǎng zhège “shēngyi” shì bu shì zhēn de hélǐ,",
+      "vi": "Nhưng không nghĩ “việc kinh doanh” này có thật sự hợp lý,"
+    },
+    {
+      "start": 302.03,
+      "end": 303.45,
+      "en": "or really sustainable.",
+      "zh": "真的能长久。",
+      "pinyin": "zhēn de néng chángjiǔ.",
+      "vi": "có thật sự bền lâu hay không."
+    },
+    {
+      "start": 303.47,
+      "end": 305.53,
+      "en": "This is actually quite common in life.",
+      "zh": "这在生活中其实也挺常见的。",
+      "pinyin": "Zhè zài shēnghuó zhōng qíshí yě tǐng chángjiàn de.",
+      "vi": "Điều này trong cuộc sống thực ra cũng khá phổ biến."
+    },
+    {
+      "start": 305.53,
+      "end": 307.29,
+      "en": "Exactly.",
+      "zh": "没错。",
+      "pinyin": "Méicuò.",
+      "vi": "Đúng thế."
+    },
+    {
+      "start": 307.3,
+      "end": 310.12,
+      "en": "For example, some people see others make money trading stocks,",
+      "zh": "比如有些人看到别人炒股赚钱了，",
+      "pinyin": "Bǐrú yǒuxiē rén kàndào biérén chǎogǔ zhuànqián le,",
+      "vi": "Ví dụ có người thấy người khác chơi chứng khoán kiếm được tiền,"
+    },
+    {
+      "start": 310.13,
+      "end": 312.89,
+      "en": "and immediately put all their money in,",
+      "zh": "自己也马上把所有的钱都投进去，",
+      "pinyin": "zìjǐ yě mǎshàng bǎ suǒyǒu de qián dōu tóu jìnqu,",
+      "vi": "bản thân cũng lập tức dồn hết tiền vào,"
+    },
+    {
+      "start": 312.9,
+      "end": 317.06,
+      "en": "without even researching what the company does or considering the risks.",
+      "zh": "根本不研究这个公司是做什么的，也不考虑风险。",
+      "pinyin": "gēnběn bù yánjiū zhège gōngsī shì zuò shénme de, yě bù kǎolǜ fēngxiǎn.",
+      "vi": "hoàn toàn không tìm hiểu công ty này làm gì, cũng không xem xét rủi ro."
+    },
+    {
+      "start": 317.07,
+      "end": 319.69,
+      "en": "His behavior is like that person who bought the shadow,",
+      "zh": "他的行为，就像那个买影子的人，",
+      "pinyin": "Tā de xíngwéi, jiù xiàng nàge mǎi yǐngzi de rén,",
+      "vi": "Hành vi của anh ta giống như người mua bóng kia,"
+    },
+    {
+      "start": 319.7,
+      "end": 321.12,
+      "en": "only seeing 'coolness,'",
+      "zh": "只看到了“凉快”，",
+      "pinyin": "zhǐ kàndào le “liángkuai”,",
+      "vi": "chỉ nhìn thấy “mát mẻ”,"
+    },
+    {
+      "start": 321.13,
+      "end": 323.05,
+      "en": "that is, the possibility of making money,",
+      "zh": "也就是赚钱的可能性，",
+      "pinyin": "yě jiùshì zhuànqián de kěnéngxìng,",
+      "vi": "tức là khả năng kiếm tiền,"
+    },
+    {
+      "start": 323.07,
+      "end": 327.53,
+      "en": "but never thought that 'the sun will move'—that is, the market has risks.",
+      "zh": "却没想过“太阳会动”，也就是市场是有风险的。",
+      "pinyin": "què méi xiǎngguo “tàiyáng huì dòng”, yě jiùshì shìchǎng shì yǒu fēngxiǎn de.",
+      "vi": "nhưng không nghĩ rằng “mặt trời sẽ di chuyển”, tức là thị trường có rủi ro."
+    },
+    {
+      "start": 327.53,
+      "end": 330.05,
+      "en": "Sigh, sometimes I'm like that too.",
+      "zh": "唉，有时候我也会这样。",
+      "pinyin": "Āi, yǒu shíhou wǒ yě huì zhèyàng.",
+      "vi": "Haiz, đôi khi tôi cũng như vậy."
+    },
+    {
+      "start": 330.07,
+      "end": 332.29,
+      "en": "When I see everyone buying something,",
+      "zh": "看到大家都在买一个东西，",
+      "pinyin": "Kàndào dàjiā dōu zài mǎi yí ge dōngxi,",
+      "vi": "Thấy mọi người đều đang mua một thứ gì đó,"
+    },
+    {
+      "start": 332.3,
+      "end": 334.29,
+      "en": "or all doing something,",
+      "zh": "或者都在做一个事情，",
+      "pinyin": "huòzhě dōu zài zuò yí ge shìqing,",
+      "vi": "hoặc đều đang làm một việc gì đó,"
+    },
+    {
+      "start": 334.3,
+      "end": 338.62,
+      "en": "I also really want to join in, afraid I'm missing out on something good.",
+      "zh": "我也会很想加入，怕自己错过了什么好东西。",
+      "pinyin": "wǒ yě huì hěn xiǎng jiārù, pà zìjǐ cuòguò le shénme hǎo dōngxi.",
+      "vi": "tôi cũng rất muốn tham gia, sợ mình bỏ lỡ thứ tốt nào đó."
+    },
+    {
+      "start": 338.63,
+      "end": 340.42,
+      "en": "I understand. It's very normal,",
+      "zh": "我理解。这很正常，",
+      "pinyin": "Wǒ lǐjiě. Zhè hěn zhèngcháng,",
+      "vi": "Tôi hiểu. Điều này rất bình thường,"
+    },
+    {
+      "start": 340.43,
+      "end": 343.45,
+      "en": "Many people have this 'fear of missing out' mentality.",
+      "zh": "很多人都会有这种“害怕错过”的心理。",
+      "pinyin": "Hěn duō rén dōu huì yǒu zhè zhǒng “hàipà cuòguò” de xīnlǐ.",
+      "vi": "Nhiều người đều có tâm lý “sợ bỏ lỡ” này."
+    },
+    {
+      "start": 343.47,
+      "end": 345.96,
+      "en": "We can give ourselves a 'cooling-off period,'",
+      "zh": "我们可以给自己一个“冷静期”，",
+      "pinyin": "Wǒmen kěyǐ gěi zìjǐ yí ge “lěngjìng qī”,",
+      "vi": "Chúng ta có thể cho mình một “thời gian bình tĩnh”,"
+    },
+    {
+      "start": 345.97,
+      "end": 348.53,
+      "en": "for example, when we want to buy something not so urgently needed,",
+      "zh": "比如想买一个不那么急需的东西时，",
+      "pinyin": "bǐrú xiǎng mǎi yí ge bú nàme jíxū de dōngxi shí,",
+      "vi": "ví dụ khi muốn mua một thứ không cần gấp lắm,"
+    },
+    {
+      "start": 348.53,
+      "end": 350.45,
+      "en": "we can wait a day before deciding.",
+      "zh": "可以等一天再决定。",
+      "pinyin": "kěyǐ děng yì tiān zài juédìng.",
+      "vi": "có thể đợi một ngày rồi hãy quyết định."
+    },
+    {
+      "start": 350.47,
+      "end": 354.26,
+      "en": "Use this day to think: do I really need it?",
+      "zh": "用这一天的时间来思考，我真的需要它吗？",
+      "pinyin": "Yòng zhè yì tiān de shíjiān lái sīkǎo, wǒ zhēn de xūyào tā ma?",
+      "vi": "Dùng thời gian một ngày này để suy nghĩ: tôi có thật sự cần nó không?"
+    },
+    {
+      "start": 354.27,
+      "end": 355.96,
+      "en": "Does it really have value?",
+      "zh": "它真的有价值吗？",
+      "pinyin": "Tā zhēn de yǒu jiàzhí ma?",
+      "vi": "Nó có thật sự có giá trị không?"
+    },
+    {
+      "start": 355.97,
+      "end": 358.83,
+      "en": "This can help us make more rational decisions,",
+      "zh": "这样可以帮助我们做出更理智的决定，",
+      "pinyin": "Zhèyàng kěyǐ bāngzhù wǒmen zuòchū gèng lǐzhì de juédìng,",
+      "vi": "Như vậy có thể giúp chúng ta đưa ra quyết định lý trí hơn,"
+    },
+    {
+      "start": 358.83,
+      "end": 360.72,
+      "en": "and avoid, like the shadow buyer,",
+      "zh": "避免像买影子的人一样，",
+      "pinyin": "bìmiǎn xiàng mǎi yǐngzi de rén yíyàng,",
+      "vi": "tránh giống như người mua bóng,"
+    },
+    {
+      "start": 360.73,
+      "end": 363.15,
+      "en": "ending up finding that they bought 'nothing.'",
+      "zh": "最后发现自己买了个“空”。",
+      "pinyin": "zuìhòu fāxiàn zìjǐ mǎi le ge “kōng”.",
+      "vi": "cuối cùng phát hiện mình đã mua một “khoảng không”."
+    },
+    {
+      "start": 363.17,
+      "end": 366.53,
+      "en": "This 'cooling-off period' method is great and very practical.",
+      "zh": "这个“冷静期”的方法很好，很实用。",
+      "pinyin": "Zhège “lěngjìng qī” de fāngfǎ hěn hǎo, hěn shíyòng.",
+      "vi": "Phương pháp “thời gian bình tĩnh” này rất hay, rất thực tế."
+    },
+    {
+      "start": 366.53,
+      "end": 370.62,
+      "en": "This story also reminds me of a phrase: 'taking it for granted.'",
+      "zh": "这个故事也让我想起一个词，叫“想当然”。",
+      "pinyin": "Zhège gùshi yě ràng wǒ xiǎngqǐ yí ge cí, jiào “xiǎngdāngrán”.",
+      "vi": "Câu chuyện này cũng khiến tôi nhớ đến một từ, gọi là “đương nhiên nghĩ vậy”."
+    },
+    {
+      "start": 370.63,
+      "end": 373.55,
+      "en": "meaning one assumes things should be this way,",
+      "zh": "就是自己觉得事情应该是这样的，",
+      "pinyin": "jiùshì zìjǐ juéde shìqing yīnggāi shì zhèyàng de,",
+      "vi": "tức là tự mình nghĩ sự việc chắc hẳn phải như thế,"
+    },
+    {
+      "start": 373.57,
+      "end": 376.03,
+      "en": "but the facts may be completely different.",
+      "zh": "但事实可能完全不同。",
+      "pinyin": "dàn shìshí kěnéng wánquán bùtóng.",
+      "vi": "nhưng thực tế có thể hoàn toàn khác."
+    },
+    {
+      "start": 376.03,
+      "end": 379.02,
+      "en": "That shadow seller, just by 'assuming,'",
+      "zh": "那个卖影子的人，就是“想当然”地",
+      "pinyin": "Nàge mài yǐngzi de rén, jiùshì “xiǎngdāngrán” de",
+      "vi": "Người bán bóng đó chính là “nghĩ đương nhiên”"
+    },
+    {
+      "start": 379.03,
+      "end": 381.95,
+      "en": "thought the shadow could be treated as a product.",
+      "zh": "认为影子可以当成一个商品。",
+      "pinyin": "rènwéi yǐngzi kěyǐ dàngchéng yí ge shāngpǐn.",
+      "vi": "cho rằng cái bóng có thể được coi là một món hàng."
+    },
+    {
+      "start": 381.97,
+      "end": 383.13,
+      "en": "Well summarized,",
+      "zh": "总结得很好，",
+      "pinyin": "Zǒngjié de hěn hǎo,",
+      "vi": "Tóm tắt rất tốt,"
+    },
+    {
+      "start": 383.13,
+      "end": 386.55,
+      "en": "The phrase 'taking it for granted' is very accurate here.",
+      "zh": "“想当然”这个词用在这里非常准确。",
+      "pinyin": "“Xiǎngdāngrán” zhège cí yòng zài zhèlǐ fēicháng zhǔnquè.",
+      "vi": "Từ “nghĩ đương nhiên” dùng ở đây rất chính xác."
+    },
+    {
+      "start": 386.57,
+      "end": 389.36,
+      "en": "So the story 'Buying and Selling Shadows' tells us,",
+      "zh": "所以《买卖影子》这个故事告诉我们，",
+      "pinyin": "Suǒyǐ 《Mǎi Mài Yǐngzi》 zhège gùshi gàosu wǒmen,",
+      "vi": "Vì vậy câu chuyện 《Mua bán cái bóng》 cho chúng ta biết,"
+    },
+    {
+      "start": 389.37,
+      "end": 391.86,
+      "en": "before making decisions, we should think from multiple angles,",
+      "zh": "做决定前要多方面思考，",
+      "pinyin": "zuò juédìng qián yào duō fāngmiàn sīkǎo,",
+      "vi": "trước khi quyết định phải suy nghĩ nhiều mặt,"
+    },
+    {
+      "start": 391.87,
+      "end": 394.16,
+      "en": "and not be attracted only by immediate benefits,",
+      "zh": "不能只被眼前的利益吸引，",
+      "pinyin": "bù néng zhǐ bèi yǎnqián de lìyì xīyǐn,",
+      "vi": "không thể chỉ bị lợi ích trước mắt thu hút,"
+    },
+    {
+      "start": 394.17,
+      "end": 398.16,
+      "en": "but see the essence of the matter and the changes it may undergo in the future.",
+      "zh": "要看到事情的本质和它未来可能发生的变化。",
+      "pinyin": "yào kàndào shìqing de běnzhì hé tā wèilái kěnéng fāshēng de biànhuà.",
+      "vi": "mà phải thấy bản chất của sự việc và những thay đổi có thể xảy ra trong tương lai của nó."
+    },
+    {
+      "start": 398.17,
+      "end": 401.33,
+      "en": "Okay, Li Ming, it's your turn to tell the second story.",
+      "zh": "好了，李明，该你讲第二个故事了。",
+      "pinyin": "Hǎo le, Lǐ Míng, gāi nǐ jiǎng dì èr ge gùshi le.",
+      "vi": "Được rồi, Lý Minh, đến lượt bạn kể câu chuyện thứ hai."
+    },
+    {
+      "start": 401.33,
+      "end": 404.55,
+      "en": "'The Snipe and the Clam Fight,' I seem to have heard this story,",
+      "zh": "《鹬蚌相争》，这个故事我好像听过，",
+      "pinyin": "《Yù Bàng Xiāng Zhēng》, zhège gùshi wǒ hǎoxiàng tīngguo,",
+      "vi": "《Dẽ cò và trai tranh nhau》, câu chuyện này hình như tôi đã nghe rồi,"
+    },
+    {
+      "start": 404.57,
+      "end": 406.33,
+      "en": "but it's a bit blurry now.",
+      "zh": "但是有点模糊了。",
+      "pinyin": "dànshì yǒudiǎn móhu le.",
+      "vi": "nhưng hơi mơ hồ rồi."
+    },
+    {
+      "start": 406.33,
+      "end": 409.09,
+      "en": "Okay. This story is also very classic,",
+      "zh": "好的。这个故事也非常经典，",
+      "pinyin": "Hǎo de. Zhège gùshi yě fēicháng jīngdiǎn,",
+      "vi": "Được. Câu chuyện này cũng rất kinh điển,"
+    },
+    {
+      "start": 409.1,
+      "end": 411.96,
+      "en": "There's a very famous idiom behind it.",
+      "zh": "它背后有一个非常有名的成语。",
+      "pinyin": "Tā bèihòu yǒu yí gè fēicháng yǒumíng de chéngyǔ.",
+      "vi": "Đằng sau nó có một thành ngữ rất nổi tiếng."
+    },
+    {
+      "start": 411.97,
+      "end": 414.13,
+      "en": "The story goes that there was a clam,",
+      "zh": "故事是说，有一只蚌，",
+      "pinyin": "Gùshi shì shuō, yǒu yì zhī bàng,",
+      "vi": "Câu chuyện kể rằng, có một con trai sông,"
+    },
+    {
+      "start": 414.13,
+      "end": 416.62,
+      "en": "that is, the kind of animal with a shell in the river,",
+      "zh": "就是河里有壳的那种动物，",
+      "pinyin": "jiùshì hé lǐ yǒu ké de nà zhǒng dòngwù,",
+      "vi": "tức là loại động vật có vỏ sống dưới sông,"
+    },
+    {
+      "start": 416.63,
+      "end": 420.32,
+      "en": "It was opening its two shells and sunning itself by the river.",
+      "zh": "它正张开两个壳在河边晒太阳。",
+      "pinyin": "Tā zhèng zhāngkāi liǎng gè ké zài hébiān shài tàiyáng.",
+      "vi": "Nó đang mở hai mảnh vỏ ra phơi nắng bên bờ sông."
+    },
+    {
+      "start": 420.33,
+      "end": 422.25,
+      "en": "Mm, sounds quite comfortable.",
+      "zh": "嗯，听起来很舒服的样子。",
+      "pinyin": "Ǹg, tīng qǐlái hěn shūfu de yàngzi.",
+      "vi": "Ừm, nghe có vẻ rất thoải mái."
+    },
+    {
+      "start": 422.27,
+      "end": 424.96,
+      "en": "At that moment, a sandpiper flew over.",
+      "zh": "这时候，飞来一只鹬。",
+      "pinyin": "Zhè shíhou, fēi lái yì zhī yù.",
+      "vi": "Lúc này, một con cò bay tới."
+    },
+    {
+      "start": 424.97,
+      "end": 428.43,
+      "en": "A sandpiper is a bird with a long, sharp beak,",
+      "zh": "鹬是一种鸟，有很长很尖的嘴，",
+      "pinyin": "Yù shì yì zhǒng niǎo, yǒu hěn cháng hěn jiān de zuǐ,",
+      "vi": "Cò là một loài chim, có cái mỏ rất dài và nhọn,"
+    },
+    {
+      "start": 428.43,
+      "end": 432.22,
+      "en": "It specializes in eating small fish, small shrimp, and shellfish.",
+      "zh": "专门吃小鱼小虾和贝壳类的东西。",
+      "pinyin": "zhuānmén chī xiǎo yú xiǎo xiā hé bèiké lèi de dōngxi.",
+      "vi": "chuyên ăn cá nhỏ, tôm nhỏ và các loại có vỏ."
+    },
+    {
+      "start": 432.23,
+      "end": 435.75,
+      "en": "When this sandpiper saw the clam with its shell open, it was very happy,",
+      "zh": "这只鹬看到了张着壳的蚌，非常高兴，",
+      "pinyin": "Zhè zhī yù kàndào le zhāngzhe ké de bàng, fēicháng gāoxìng,",
+      "vi": "Con cò này nhìn thấy con trai đang mở vỏ, rất vui mừng,"
+    },
+    {
+      "start": 435.77,
+      "end": 437.43,
+      "en": "feeling that lunch had arrived.",
+      "zh": "觉得午餐来了。",
+      "pinyin": "juéde wǔcān lái le.",
+      "vi": "cảm thấy bữa trưa đã đến rồi."
+    },
+    {
+      "start": 437.43,
+      "end": 442.55,
+      "en": "It quickly flew down and used its long beak to peck at the clam's flesh.",
+      "zh": "它很快地飞下去，用它的长嘴去啄蚌的肉。",
+      "pinyin": "Tā hěn kuài de fēi xiàqù, yòng tā de cháng zuǐ qù zhuó bàng de ròu.",
+      "vi": "Nó nhanh chóng bay xuống, dùng cái mỏ dài của mình để mổ vào thịt con trai."
+    },
+    {
+      "start": 442.57,
+      "end": 444.43,
+      "en": "Ah! Isn't the clam in great danger?",
+      "zh": "啊！那蚌不是很危险？",
+      "pinyin": "A! Nà bàng bú shì hěn wēixiǎn?",
+      "vi": "Á! Vậy con trai chẳng phải rất nguy hiểm sao?"
+    },
+    {
+      "start": 444.43,
+      "end": 446.12,
+      "en": "The clam reacted quickly too.",
+      "zh": "蚌的反应也很快。",
+      "pinyin": "Bàng de fǎnyìng yě hěn kuài.",
+      "vi": "Phản ứng của con trai cũng rất nhanh."
+    },
+    {
+      "start": 446.13,
+      "end": 448.85,
+      "en": "Just as the sandpiper's beak touched its flesh,",
+      "zh": "在鹬的嘴刚碰到它的肉时，",
+      "pinyin": "Zài yù de zuǐ gāng pèngdào tā de ròu shí,",
+      "vi": "Khi mỏ của cò vừa chạm vào thịt của nó,"
+    },
+    {
+      "start": 448.87,
+      "end": 452.56,
+      "en": "It immediately snapped its two hard shells shut with a “pop,”",
+      "zh": "它立刻“啪”地一下把两个硬壳合上了，",
+      "pinyin": "Tā lìkè “pā” de yíxià bǎ liǎng gè yìng ké héshàng le,",
+      "vi": "Nó lập tức “bốp” một tiếng khép hai mảnh vỏ cứng lại,"
+    },
+    {
+      "start": 452.57,
+      "end": 454.96,
+      "en": "tightly clamping the sandpiper's beak.",
+      "zh": "紧紧地夹住了鹬的嘴。",
+      "pinyin": "jǐnjǐn de jiā zhù le yù de zuǐ.",
+      "vi": "kẹp chặt mỏ của cò."
+    },
+    {
+      "start": 454.97,
+      "end": 457.76,
+      "en": "Wow! Now the situation has reversed.",
+      "zh": "哇！这下情况反过来了。",
+      "pinyin": "Wa! Zhè xià qíngkuàng fǎn guòlái le.",
+      "vi": "Oa! Lần này tình thế đảo ngược rồi."
+    },
+    {
+      "start": 457.77,
+      "end": 461.09,
+      "en": "The sandpiper's beak is clamped, so it can't fly away either.",
+      "zh": "鹬的嘴被夹住了，那它也飞不走了。",
+      "pinyin": "Yù de zuǐ bèi jiā zhù le, nà tā yě fēi bù zǒu le.",
+      "vi": "Mỏ của cò bị kẹp chặt, vậy nó cũng không bay đi được nữa."
+    },
+    {
+      "start": 461.1,
+      "end": 462.29,
+      "en": "Exactly.",
+      "zh": "正是如此。",
+      "pinyin": "Zhèng shì rúcǐ.",
+      "vi": "Đúng là như vậy."
+    },
+    {
+      "start": 462.3,
+      "end": 465.29,
+      "en": "The sandpiper said to the clam, “If it doesn't rain today,",
+      "zh": "鹬对蚌说：“今天不下雨，",
+      "pinyin": "Yù duì bàng shuō: “Jīntiān bú xià yǔ,",
+      "vi": "Cò nói với con trai: “Hôm nay không mưa,"
+    },
+    {
+      "start": 465.3,
+      "end": 466.72,
+      "en": "and it doesn't rain tomorrow,",
+      "zh": "明天不下雨，",
+      "pinyin": "míngtiān bú xià yǔ,",
+      "vi": "ngày mai không mưa,"
+    },
+    {
+      "start": 466.73,
+      "end": 470.02,
+      "en": "you will die of thirst on the shore.”",
+      "zh": "你没有水就会渴死在岸上。”",
+      "pinyin": "nǐ méiyǒu shuǐ jiù huì kěsǐ zài àn shàng.”",
+      "vi": "ngươi không có nước sẽ chết khát trên bờ.”"
+    },
+    {
+      "start": 470.03,
+      "end": 472.49,
+      "en": "It means that as long as I don't let go,",
+      "zh": "它的意思是，只要我不松口，",
+      "pinyin": "Tā de yìsi shì, zhǐyào wǒ bù sōngkǒu,",
+      "vi": "Ý của nó là, chỉ cần ta không nhả ra,"
+    },
+    {
+      "start": 472.5,
+      "end": 475.29,
+      "en": "once you leave the water, you'll still die in the end.",
+      "zh": "你离了水，最后还是会死。",
+      "pinyin": "nǐ lí le shuǐ, zuìhòu háishi huì sǐ.",
+      "vi": "ngươi rời khỏi nước, cuối cùng vẫn sẽ chết."
+    },
+    {
+      "start": 475.3,
+      "end": 477.06,
+      "en": "So how did the clam reply?",
+      "zh": "那蚌怎么回答？",
+      "pinyin": "Nà bàng zěnme huídá?",
+      "vi": "Vậy con trai trả lời thế nào?"
+    },
+    {
+      "start": 477.07,
+      "end": 478.96,
+      "en": "It surely wouldn't want to give up either.",
+      "zh": "它肯定也不愿意放弃。",
+      "pinyin": "Tā kěndìng yě bú yuànyì fàngqì.",
+      "vi": "Nó chắc chắn cũng không muốn bỏ cuộc."
+    },
+    {
+      "start": 478.97,
+      "end": 480.43,
+      "en": "The clam was also tough,",
+      "zh": "蚌也很强硬，",
+      "pinyin": "Bàng yě hěn qiángyìng,",
+      "vi": "Con trai cũng rất cứng rắn,"
+    },
+    {
+      "start": 480.43,
+      "end": 483.49,
+      "en": "It said to the sandpiper, “I won't let go today,",
+      "zh": "它对鹬说：“我的嘴今天不放开，",
+      "pinyin": "Tā duì yù shuō: “Wǒ de zuǐ jīntiān bú fàngkāi,",
+      "vi": "Nó nói với cò: “Ta hôm nay không nhả ra,"
+    },
+    {
+      "start": 483.5,
+      "end": 487.26,
+      "en": "nor tomorrow; your beak will stay clamped by me,",
+      "zh": "明天也不放开，你的嘴一直被我夹着，",
+      "pinyin": "míngtiān yě bú fàngkāi, nǐ de zuǐ yìzhí bèi wǒ jiā zhe,",
+      "vi": "ngày mai cũng không nhả ra, mỏ của ngươi sẽ bị ta kẹp mãi,"
+    },
+    {
+      "start": 487.27,
+      "end": 491.86,
+      "en": "and you'll soon starve to death here.” Neither of them would give in.",
+      "zh": "你很快就会饿死在这里。”它们两个谁也不让谁。",
+      "pinyin": "nǐ hěn kuài jiù huì èsǐ zài zhèlǐ.” Tāmen liǎng gè shéi yě bú ràng shéi.",
+      "vi": "ngươi sẽ sớm chết đói ở đây.” Hai con không ai nhường ai."
+    },
+    {
+      "start": 491.87,
+      "end": 496.63,
+      "en": "One thought the other would die of thirst; the other thought it would die of hunger.",
+      "zh": "一个认为对方会渴死，一个认为对方会饿死。",
+      "pinyin": "Yí gè rènwéi duìfāng huì kěsǐ, yí gè rènwéi duìfāng huì èsǐ.",
+      "vi": "Một con nghĩ đối phương sẽ chết khát, một con nghĩ đối phương sẽ chết đói."
+    },
+    {
+      "start": 496.63,
+      "end": 498.62,
+      "en": "They kept arguing like that.",
+      "zh": "它们就这样一直争执着。",
+      "pinyin": "Tāmen jiù zhèyàng yìzhí zhēngzhí zhe.",
+      "vi": "Chúng cứ thế tranh cãi mãi."
+    },
+    {
+      "start": 498.63,
+      "end": 503.22,
+      "en": "Right, they were locked in a stalemate, and neither would back down.",
+      "zh": "对，它们就这样僵持不下，谁也不肯退一步。",
+      "pinyin": "Duì, tāmen jiù zhèyàng jiāngchí bú xià, shéi yě bù kěn tuì yí bù.",
+      "vi": "Đúng, chúng cứ thế giằng co không ai chịu nhường một bước."
+    },
+    {
+      "start": 503.23,
+      "end": 506.29,
+      "en": "Just then, an old fisherman,",
+      "zh": "就在这个时候，一个打鱼的老人，",
+      "pinyin": "Jiù zài zhège shíhou, yí gè dǎyú de lǎorén,",
+      "vi": "Đúng lúc này, một ông lão đánh cá,"
+    },
+    {
+      "start": 506.3,
+      "end": 508.89,
+      "en": "that is, the fisherman, passed by.",
+      "zh": "也就是渔翁，从旁边路过。",
+      "pinyin": "yě jiùshì yúwēng, cóng pángbiān lùguò.",
+      "vi": "tức là ngư ông, đi ngang qua đó."
+    },
+    {
+      "start": 508.9,
+      "end": 510.96,
+      "en": "I guessed the ending.",
+      "zh": "我猜到结局了。",
+      "pinyin": "Wǒ cāi dào jiéjú le.",
+      "vi": "Tôi đoán được kết cục rồi."
+    },
+    {
+      "start": 510.97,
+      "end": 511.56,
+      "en": "(Laughs) Yes.",
+      "zh": "(笑)，是的。",
+      "pinyin": "(Xiào), shì de.",
+      "vi": "(Cười), đúng vậy."
+    },
+    {
+      "start": 511.57,
+      "end": 514.66,
+      "en": "Seeing that neither the sandpiper nor the clam could move,",
+      "zh": "这个渔翁看到鹬和蚌都动不了，",
+      "pinyin": "Zhège yúwēng kàndào yù hé bàng dōu dòng bù liǎo,",
+      "vi": "Ngư ông này thấy cò và trai đều không thể cử động,"
+    },
+    {
+      "start": 514.67,
+      "end": 518.69,
+      "en": "he effortlessly caught both of them and took them away.",
+      "zh": "不费吹灰之力，就把它们两个一起抓走了。",
+      "pinyin": "bú fèi chuīhuīzhīlì, jiù bǎ tāmen liǎng gè yìqǐ zhuā zǒu le.",
+      "vi": "không tốn chút sức nào, liền bắt cả hai con đi."
+    },
+    {
+      "start": 518.7,
+      "end": 522.16,
+      "en": "Alas, both the sandpiper and the clam only thought about how to defeat each other,",
+      "zh": "唉，鹬和蚌都只想着怎么战胜对方，",
+      "pinyin": "Āi, yù hé bàng dōu zhǐ xiǎngzhe zěnme zhànshèng duìfāng,",
+      "vi": "Haiz, cò và trai đều chỉ nghĩ đến việc làm sao đánh bại đối phương,"
+    },
+    {
+      "start": 522.17,
+      "end": 526.53,
+      "en": "and in the end, a completely unrelated third party got all the benefits.",
+      "zh": "结果让完全不相干的第三个人得到了全部的好处。",
+      "pinyin": "jiéguǒ ràng wánquán bù xiānggān de dìsān gè rén dédào le quánbù de hǎochu.",
+      "vi": "kết quả là để một người thứ ba hoàn toàn không liên quan nhận được tất cả lợi ích."
+    },
+    {
+      "start": 526.53,
+      "end": 528.65,
+      "en": "This is the core of the story.",
+      "zh": "这就是这个故事的核心。",
+      "pinyin": "Zhè jiùshì zhège gùshi de héxīn.",
+      "vi": "Đây chính là cốt lõi của câu chuyện này."
+    },
+    {
+      "start": 528.67,
+      "end": 531.66,
+      "en": "It tells us that in conflicts and contradictions,",
+      "zh": "它告诉我们，在冲突和矛盾中，",
+      "pinyin": "Tā gàosu wǒmen, zài chōngtū hé máodùn zhōng,",
+      "vi": "Nó cho chúng ta biết, trong xung đột và mâu thuẫn,"
+    },
+    {
+      "start": 531.67,
+      "end": 533.86,
+      "en": "if neither side is willing to give in,",
+      "zh": "如果双方都不肯退让，",
+      "pinyin": "rúguǒ shuāngfāng dōu bù kěn tuìràng,",
+      "vi": "nếu cả hai bên đều không chịu nhường nhịn,"
+    },
+    {
+      "start": 533.87,
+      "end": 535.56,
+      "en": "and only think about their own interests,",
+      "zh": "只想着自己的利益，",
+      "pinyin": "zhǐ xiǎngzhe zìjǐ de lìyì,",
+      "vi": "chỉ nghĩ đến lợi ích của mình,"
+    },
+    {
+      "start": 535.57,
+      "end": 538.89,
+      "en": "the final result is very likely to be that both sides suffer,",
+      "zh": "最后的结果很可能是两败俱伤，",
+      "pinyin": "zuìhòu de jiéguǒ hěn kěnéng shì liǎng bài jù shāng,",
+      "vi": "kết quả cuối cùng rất có thể là cả hai cùng bị tổn thất,"
+    },
+    {
+      "start": 538.9,
+      "end": 541.46,
+      "en": "while letting bystanders profit from it.",
+      "zh": "而让旁观者从中获利。",
+      "pinyin": "ér ràng pángguānzhě cóngzhōng huòlì.",
+      "vi": "còn để người đứng ngoài hưởng lợi."
+    },
+    {
+      "start": 541.47,
+      "end": 543.29,
+      "en": "This is the “sandpiper and clam fight,",
+      "zh": "这就是“鹬蚌相争，",
+      "pinyin": "Zhè jiùshì “yù bàng xiāng zhēng,",
+      "vi": "Đây chính là “cò trai tranh nhau,"
+    },
+    {
+      "start": 543.3,
+      "end": 545.92,
+      "en": "the fisherman profits”—the origin of this idiom, right?",
+      "zh": "渔翁得利”这个成语的来源吧？",
+      "pinyin": "yúwēng dé lì” zhège chéngyǔ de láiyuán ba?",
+      "vi": "ngư ông đắc lợi” — nguồn gốc của thành ngữ này phải không?"
+    },
+    {
+      "start": 545.93,
+      "end": 547.25,
+      "en": "Exactly right.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn chính xác."
+    },
+    {
+      "start": 547.27,
+      "end": 550.56,
+      "en": "The idiom “the fisherman profits” is commonly used nowadays.",
+      "zh": "“渔翁得利”这个成语现在经常被使用。",
+      "pinyin": "“Yúwēng dé lì” zhège chéngyǔ xiànzài jīngcháng bèi shǐyòng.",
+      "vi": "Thành ngữ “ngư ông đắc lợi” này hiện nay thường được sử dụng."
+    },
+    {
+      "start": 550.57,
+      "end": 553.53,
+      "en": "For example, two companies, in order to compete for market share,",
+      "zh": "比如，有两个公司为了争夺市场，",
+      "pinyin": "Bǐrú, yǒu liǎng ge gōngsī wèile zhēngduó shìchǎng,",
+      "vi": "Ví dụ, có hai công ty vì tranh giành thị trường,"
+    },
+    {
+      "start": 553.53,
+      "end": 556.65,
+      "en": "keep lowering prices and engage in a price war.",
+      "zh": "不断降低价格，进行价格战。",
+      "pinyin": "bùduàn jiàngdī jiàgé, jìnxíng jiàgézhàn.",
+      "vi": "liên tục hạ giá, tiến hành cuộc chiến giá cả."
+    },
+    {
+      "start": 556.67,
+      "end": 558.49,
+      "en": "They both want to defeat the other side,",
+      "zh": "他们都想把对方打败，",
+      "pinyin": "Tāmen dōu xiǎng bǎ duìfāng dǎbài,",
+      "vi": "Họ đều muốn đánh bại đối phương,"
+    },
+    {
+      "start": 558.5,
+      "end": 561.49,
+      "en": "As a result, both companies lost a lot of money.",
+      "zh": "结果两家公司都亏了很多钱。",
+      "pinyin": "jiéguǒ liǎng jiā gōngsī dōu kuīle hěn duō qián.",
+      "vi": "kết quả là cả hai công ty đều lỗ rất nhiều tiền."
+    },
+    {
+      "start": 561.5,
+      "end": 564.22,
+      "en": "As for consumers, they become that “fisherman,”",
+      "zh": "而消费者呢，就成了那个“渔翁”，",
+      "pinyin": "Ér xiāofèizhě ne, jiù chéngle nàge “yúwēng”,",
+      "vi": "Còn người tiêu dùng thì trở thành “ngư ông” đó,"
+    },
+    {
+      "start": 564.23,
+      "end": 567.09,
+      "en": "and buy goods at a very cheap price.",
+      "zh": "用很便宜的价钱买到了商品。",
+      "pinyin": "yòng hěn piányi de jiàqián mǎidào le shāngpǐn.",
+      "vi": "mua được hàng hóa với giá rất rẻ."
+    },
+    {
+      "start": 567.1,
+      "end": 568.72,
+      "en": "This example is very apt.",
+      "zh": "这个例子很贴切。",
+      "pinyin": "Zhège lìzi hěn tiēqiè.",
+      "vi": "Ví dụ này rất sát hợp."
+    },
+    {
+      "start": 568.73,
+      "end": 571.75,
+      "en": "Actually, in life, from small things between friends",
+      "zh": "其实在生活中，小到朋友之间、",
+      "pinyin": "Qíshí zài shēnghuó zhōng, xiǎo dào péngyou zhījiān,",
+      "vi": "Thật ra trong cuộc sống, từ những chuyện nhỏ giữa bạn bè,"
+    },
+    {
+      "start": 571.77,
+      "end": 573.46,
+      "en": "quarrels between family members,",
+      "zh": "家人之间的争吵，",
+      "pinyin": "jiārén zhījiān de zhēngchǎo,",
+      "vi": "những cuộc cãi vã giữa người thân trong gia đình,"
+    },
+    {
+      "start": 573.47,
+      "end": 577.13,
+      "en": "situations of “the snipe and the clam fight, and the fisherman profits” can also arise.",
+      "zh": "也可能会出现“鹬蚌相争，渔翁得利”的情况。",
+      "pinyin": "yě kěnéng huì chūxiàn “yù bàng xiāng zhēng, yúwēng dé lì” de qíngkuàng.",
+      "vi": "cũng có thể xuất hiện tình huống “trai cò tranh nhau, ngư ông đắc lợi”."
+    },
+    {
+      "start": 577.13,
+      "end": 579.49,
+      "en": "For example, when my younger sister and I were little,",
+      "zh": "比如，我和我妹妹小时候",
+      "pinyin": "Bǐrú, wǒ hé wǒ mèimei xiǎoshíhou",
+      "vi": "Ví dụ, hồi nhỏ tôi và em gái tôi"
+    },
+    {
+      "start": 579.5,
+      "end": 583.09,
+      "en": "we would argue over a toy; we both wanted to play with it.",
+      "zh": "会为了一个玩具吵架，谁都想玩。",
+      "pinyin": "huì wèile yí ge wánjù chǎojià, shéi dōu xiǎng wán.",
+      "vi": "từng cãi nhau vì một món đồ chơi, ai cũng muốn chơi."
+    },
+    {
+      "start": 583.1,
+      "end": 586.26,
+      "en": "As a result, we argued so fiercely that Mom got angry",
+      "zh": "结果我们吵得太厉害了，妈妈很生气，",
+      "pinyin": "Jiéguǒ wǒmen chǎo de tài lìhai le, māma hěn shēngqì,",
+      "vi": "Kết quả là chúng tôi cãi nhau quá dữ, mẹ rất tức giận,"
+    },
+    {
+      "start": 586.27,
+      "end": 589.16,
+      "en": "and confiscated the toy, so neither of us could play with it.",
+      "zh": "就把玩具没收了，谁也玩不了。",
+      "pinyin": "jiù bǎ wánjù mòshōu le, shéi yě wán bù liǎo.",
+      "vi": "liền tịch thu món đồ chơi, thế là không ai chơi được."
+    },
+    {
+      "start": 589.17,
+      "end": 591.46,
+      "en": "(laughs) In this story,",
+      "zh": "(笑)，在这个故事里，",
+      "pinyin": "(xiào), zài zhège gùshi lǐ,",
+      "vi": "(Cười), trong câu chuyện này,"
+    },
+    {
+      "start": 591.47,
+      "end": 594.09,
+      "en": "your mom isn’t the “fisherman,” because she didn’t “gain",
+      "zh": "你妈妈不是“渔翁”，因为她没有“得",
+      "pinyin": "nǐ māma bú shì “yúwēng”, yīnwèi tā méiyǒu “dé",
+      "vi": "mẹ bạn không phải “ngư ông”, vì mẹ không “đắc"
+    },
+    {
+      "start": 594.1,
+      "end": 596.29,
+      "en": "profit.” But the principle is the same:",
+      "zh": "利”。但这个道理是相通的，",
+      "pinyin": "lì”. Dàn zhège dàolǐ shì xiāngtōng de,",
+      "vi": "lợi”. Nhưng đạo lý này thì thông nhau,"
+    },
+    {
+      "start": 596.3,
+      "end": 599.89,
+      "en": "both sides in a dispute end up with a bad outcome.",
+      "zh": "就是争执的双方都没有得到好结果。",
+      "pinyin": "jiùshì zhēngzhí de shuāngfāng dōu méiyǒu dédào hǎo jiéguǒ.",
+      "vi": "tức là cả hai bên tranh cãi đều không có kết quả tốt."
+    },
+    {
+      "start": 599.9,
+      "end": 602.22,
+      "en": "Right. This story makes me think:",
+      "zh": "对。这个故事让我想，",
+      "pinyin": "Duì. Zhège gùshi ràng wǒ xiǎng,",
+      "vi": "Đúng. Câu chuyện này khiến tôi nghĩ,"
+    },
+    {
+      "start": 602.23,
+      "end": 604.45,
+      "en": "sometimes “winning” an argument",
+      "zh": "有时候“赢”了一场争吵，",
+      "pinyin": "yǒu shíhou “yíng”le yì chǎng zhēngchǎo,",
+      "vi": "đôi khi “thắng” một cuộc cãi vã,"
+    },
+    {
+      "start": 604.47,
+      "end": 607.73,
+      "en": "may actually mean “losing” something more important,",
+      "zh": "可能实际上是“输”了更重要的东西，",
+      "pinyin": "kěnéng shíjì shàng shì “shū” le gèng zhòngyào de dōngxi,",
+      "vi": "có thể thực chất là “thua” đi những thứ quan trọng hơn,"
+    },
+    {
+      "start": 607.73,
+      "end": 610.25,
+      "en": "such as a friendship.",
+      "zh": "比如和朋友的感情。",
+      "pinyin": "bǐrú hé péngyou de gǎnqíng.",
+      "vi": "ví dụ như tình cảm với bạn bè."
+    },
+    {
+      "start": 610.27,
+      "end": 611.63,
+      "en": "Sometimes taking a step back,",
+      "zh": "有时候退一步，",
+      "pinyin": "Yǒu shíhou tuì yí bù,",
+      "vi": "Đôi khi lùi một bước,"
+    },
+    {
+      "start": 611.63,
+      "end": 614.55,
+      "en": "or looking together for a better solution",
+      "zh": "或者一起找一个更好的解决方法，",
+      "pinyin": "huòzhě yìqǐ zhǎo yí ge gèng hǎo de jiějué fāngfǎ,",
+      "vi": "hoặc cùng nhau tìm một cách giải quyết tốt hơn,"
+    },
+    {
+      "start": 614.57,
+      "end": 616.63,
+      "en": "may benefit everyone.",
+      "zh": "可能对大家都有好处。",
+      "pinyin": "kěnéng duì dàjiā dōu yǒu hǎochu.",
+      "vi": "có thể sẽ có lợi cho tất cả mọi người."
+    },
+    {
+      "start": 616.63,
+      "end": 617.92,
+      "en": "You’re absolutely right.",
+      "zh": "你说得很对。",
+      "pinyin": "Nǐ shuō de hěn duì.",
+      "vi": "Bạn nói rất đúng."
+    },
+    {
+      "start": 617.93,
+      "end": 620.12,
+      "en": "It’s like a tug-of-war match:",
+      "zh": "这就像一场拔河比赛，",
+      "pinyin": "Zhè jiù xiàng yì chǎng báhé bǐsài,",
+      "vi": "Điều này giống như một cuộc thi kéo co,"
+    },
+    {
+      "start": 620.13,
+      "end": 622.72,
+      "en": "people on both sides are pulling the rope hard,",
+      "zh": "两边的人都在用力拉绳子，",
+      "pinyin": "liǎng biān de rén dōu zài yònglì lā shéngzi,",
+      "vi": "người ở hai bên đều ra sức kéo sợi dây,"
+    },
+    {
+      "start": 622.73,
+      "end": 625.85,
+      "en": "both wanting to win. But if they only stare at their opponent",
+      "zh": "都想赢。但如果他们只盯着对手，",
+      "pinyin": "dōu xiǎng yíng. Dàn rúguǒ tāmen zhǐ dīngzhe duìshǒu,",
+      "vi": "ai cũng muốn thắng. Nhưng nếu họ chỉ chăm chăm nhìn đối thủ,"
+    },
+    {
+      "start": 625.87,
+      "end": 628.83,
+      "en": "and don't watch the ground under their feet, the rope may snap,",
+      "zh": "不注意脚下的地，可能绳子一断，",
+      "pinyin": "bù zhùyì jiǎoxià de dì, kěnéng shéngzi yí duàn,",
+      "vi": "mà không chú ý đến mặt đất dưới chân, có thể dây vừa đứt,"
+    },
+    {
+      "start": 628.83,
+      "end": 632.35,
+      "en": "both sides will fall, and neither can win.",
+      "zh": "两边的人都会摔倒，谁也赢不了。",
+      "pinyin": "liǎng biān de rén dōu huì shuāidǎo, shéi yě yíng bù liǎo.",
+      "vi": "người hai bên đều sẽ ngã, không ai thắng được."
+    },
+    {
+      "start": 632.37,
+      "end": 633.53,
+      "en": "True wisdom",
+      "zh": "真正的智慧，",
+      "pinyin": "Zhēnzhèng de zhìhuì,",
+      "vi": "Trí tuệ thật sự,"
+    },
+    {
+      "start": 633.53,
+      "end": 636.42,
+      "en": "is not about having to win in every conflict,",
+      "zh": "不是在每一次冲突中都必须赢，",
+      "pinyin": "bú shì zài měi yí cì chōngtū zhōng dōu bìxū yíng,",
+      "vi": "không phải là trong mỗi lần xung đột đều phải thắng,"
+    },
+    {
+      "start": 636.43,
+      "end": 638.82,
+      "en": "but about seeing the whole situation clearly,",
+      "zh": "而是要看清楚整个局势，",
+      "pinyin": "ér shì yào kàn qīngchu zhěnggè júshì,",
+      "vi": "mà là phải nhìn rõ toàn bộ cục diện,"
+    },
+    {
+      "start": 638.83,
+      "end": 641.15,
+      "en": "knowing when to hold firm,",
+      "zh": "知道什么时候应该坚持，",
+      "pinyin": "zhīdào shénme shíhou yīnggāi jiānchí,",
+      "vi": "biết khi nào nên kiên trì,"
+    },
+    {
+      "start": 641.17,
+      "end": 644.73,
+      "en": "and when to cooperate or compromise.",
+      "zh": "什么时候应该合作或者妥协。",
+      "pinyin": "shénme shíhou yīnggāi hézuò huòzhě tuǒxié.",
+      "vi": "khi nào nên hợp tác hoặc nhượng bộ."
+    },
+    {
+      "start": 644.73,
+      "end": 646.32,
+      "en": "Mm, see the “big picture.”",
+      "zh": "嗯，看清“大局”。",
+      "pinyin": "Ǹg, kàn qīng “dàjú”.",
+      "vi": "Ừm, nhìn rõ “cục diện lớn”."
+    },
+    {
+      "start": 646.33,
+      "end": 649.09,
+      "en": "Don’t just be that snipe fixated on the clam meat,",
+      "zh": "不要只做那只盯着蚌肉的鹬，",
+      "pinyin": "Búyào zhǐ zuò nà zhī dīngzhe bàngròu de yù,",
+      "vi": "Đừng chỉ làm con chim dẽ chỉ chăm chăm nhìn thịt con trai,"
+    },
+    {
+      "start": 649.1,
+      "end": 651.69,
+      "en": "or the clam that only thinks about clamping the bird’s beak.",
+      "zh": "或者只想着夹住鸟嘴的蚌。",
+      "pinyin": "huòzhě zhǐ xiǎngzhe jiāzhù niǎozuǐ de bàng.",
+      "vi": "hoặc con trai chỉ nghĩ đến việc kẹp chặt mỏ chim."
+    },
+    {
+      "start": 651.7,
+      "end": 655.32,
+      "en": "Raise your head and check whether a “fisherman” is standing nearby.",
+      "zh": "要抬头看看，周围是不是站着一个“渔翁”。",
+      "pinyin": "Yào táitóu kànkan, zhōuwéi shì bu shì zhànzhe yí ge “yúwēng”.",
+      "vi": "Hãy ngẩng đầu nhìn xem, xung quanh có phải đang đứng một “ngư ông” không."
+    },
+    {
+      "start": 655.33,
+      "end": 657.05,
+      "en": "Well said. So,",
+      "zh": "说得好。所以，",
+      "pinyin": "Shuō de hǎo. Suǒyǐ,",
+      "vi": "Nói hay lắm. Vì thế,"
+    },
+    {
+      "start": 657.07,
+      "end": 660.33,
+      "en": "next time we get caught in an argument with someone,",
+      "zh": "下次当我们陷入和别人的争执中时，",
+      "pinyin": "xià cì dāng wǒmen xiànrù hé biérén de zhēngzhí zhōng shí,",
+      "vi": "lần sau khi chúng ta rơi vào tranh chấp với người khác,"
+    },
+    {
+      "start": 660.33,
+      "end": 664.62,
+      "en": "we can stop first and think of the story “The Snipe and the Clam.”",
+      "zh": "可以先停下来想一想:《鹬蚌相争》的故事。",
+      "pinyin": "kěyǐ xiān tíng xiàlái xiǎng yì xiǎng: 《Yù bàng xiāng zhēng》 de gùshi.",
+      "vi": "có thể dừng lại trước, nghĩ đến câu chuyện 《Trai cò tranh nhau》."
+    },
+    {
+      "start": 664.63,
+      "end": 667.85,
+      "en": "Could our quarrel let someone else take advantage?",
+      "zh": "我们的争吵，会不会让别人得了便宜？",
+      "pinyin": "Wǒmen de zhēngchǎo, huì bu huì ràng biérén déle piányi?",
+      "vi": "Cuộc cãi vã của chúng ta liệu có để người khác được lợi không?"
+    },
+    {
+      "start": 667.87,
+      "end": 669.93,
+      "en": "Is there any possibility of a win-win?",
+      "zh": "有没有双赢的可能？",
+      "pinyin": "Yǒu méiyǒu shuāngyíng de kěnéng?",
+      "vi": "Có khả năng đôi bên cùng thắng không?"
+    },
+    {
+      "start": 669.93,
+      "end": 672.69,
+      "en": "All right, now it’s the last story,",
+      "zh": "好了，现在是最后一个故事了，",
+      "pinyin": "Hǎo le, xiànzài shì zuìhòu yí ge gùshi le,",
+      "vi": "Được rồi, bây giờ là câu chuyện cuối cùng,"
+    },
+    {
+      "start": 672.7,
+      "end": 675.56,
+      "en": "I find the name of this story especially interesting:",
+      "zh": "这个故事的名字我觉得特别有趣，",
+      "pinyin": "zhège gùshi de míngzi wǒ juéde tèbié yǒuqù,",
+      "vi": "tên của câu chuyện này tôi thấy đặc biệt thú vị,"
+    },
+    {
+      "start": 675.57,
+      "end": 677.96,
+      "en": "it’s called “Covering One’s Ears While Stealing a Bell.”",
+      "zh": "叫《掩耳盗铃》。",
+      "pinyin": "jiào 《Yǎn ěr dào líng》.",
+      "vi": "nó tên là 《Bịt tai trộm chuông》."
+    },
+    {
+      "start": 677.97,
+      "end": 681.73,
+      "en": "Just hearing it makes you feel the person in it is a bit cute and a bit silly.",
+      "zh": "一听就觉得里面的人有点可爱，又有点傻。",
+      "pinyin": "Yì tīng jiù juéde lǐmiàn de rén yǒudiǎn kě'ài, yòu yǒudiǎn shǎ.",
+      "vi": "Vừa nghe đã thấy người trong đó hơi đáng yêu, lại hơi ngốc."
+    },
+    {
+      "start": 681.73,
+      "end": 683.75,
+      "en": "(laughs) You're absolutely right.",
+      "zh": "(笑)，你说得很对。",
+      "pinyin": "(xiào)，nǐ shuō de hěn duì。",
+      "vi": "(cười) Bạn nói rất đúng."
+    },
+    {
+      "start": 683.77,
+      "end": 687.09,
+      "en": "The main character of this story is indeed a bit 'cute.'",
+      "zh": "这个故事的主人公确实有点“可爱”。",
+      "pinyin": "zhège gùshi de zhǔréngōng quèshí yǒudiǎn “kě'ài”。",
+      "vi": "Nhân vật chính của câu chuyện này đúng là hơi “dễ thương”."
+    },
+    {
+      "start": 687.1,
+      "end": 688.69,
+      "en": "Why don't you tell everyone the story?",
+      "zh": "你来给大家讲讲吧。",
+      "pinyin": "nǐ lái gěi dàjiā jiǎngjiang ba。",
+      "vi": "Bạn kể cho mọi người nghe đi."
+    },
+    {
+      "start": 688.7,
+      "end": 692.22,
+      "en": "Okay. The story goes that in ancient times there was a man,",
+      "zh": "好的。故事是说，古代有一个人，",
+      "pinyin": "hǎo de。Gùshi shì shuō, gǔdài yǒu yí gè rén,",
+      "vi": "Được. Câu chuyện kể rằng, ngày xưa có một người,"
+    },
+    {
+      "start": 692.23,
+      "end": 694.25,
+      "en": "He took a liking to something at the front door of a household",
+      "zh": "他看中了一户人家门口",
+      "pinyin": "tā kànzhòng le yí hù rénjiā ménkǒu",
+      "vi": "Anh ta để ý thấy trước cửa nhà một gia đình"
+    },
+    {
+      "start": 694.27,
+      "end": 697.03,
+      "en": "a very beautiful large bell hanging there.",
+      "zh": "挂着的一个非常漂亮的大铃铛。",
+      "pinyin": "guàzhe de yí gè fēicháng piàoliang de dà língdang。",
+      "vi": "có treo một chiếc chuông lớn rất đẹp."
+    },
+    {
+      "start": 697.03,
+      "end": 701.29,
+      "en": "The bell was made of fine material, and it sounded lovely too.",
+      "zh": "这个铃铛是用很好的材料做的，声音也很好听。",
+      "pinyin": "zhège língdang shì yòng hěn hǎo de cáiliào zuò de, shēngyīn yě hěn hǎotīng。",
+      "vi": "Chiếc chuông này làm bằng chất liệu rất tốt, âm thanh cũng rất hay."
+    },
+    {
+      "start": 701.3,
+      "end": 704.06,
+      "en": "He badly wanted to steal the bell and take it home.",
+      "zh": "他非常想把这个铃铛偷回家。",
+      "pinyin": "tā fēicháng xiǎng bǎ zhège língdang tōu huí jiā。",
+      "vi": "Anh ta rất muốn trộm chiếc chuông này mang về nhà."
+    },
+    {
+      "start": 704.07,
+      "end": 707.89,
+      "en": "His goal was clear: he just wanted to steal the bell.",
+      "zh": "他的目标很明确，就是想偷铃铛。",
+      "pinyin": "tā de mùbiāo hěn míngquè, jiùshì xiǎng tōu língdang。",
+      "vi": "Mục tiêu của anh ta rất rõ ràng: chỉ là trộm chiếc chuông."
+    },
+    {
+      "start": 707.9,
+      "end": 709.89,
+      "en": "Right. But he had one worry.",
+      "zh": "对。但是他有一个担心。",
+      "pinyin": "duì。Dànshì tā yǒu yí gè dānxīn。",
+      "vi": "Đúng. Nhưng anh ta có một nỗi lo."
+    },
+    {
+      "start": 709.9,
+      "end": 713.36,
+      "en": "He knew that as soon as he touched the bell with his hand,",
+      "zh": "他知道，只要他用手去碰那个铃铛，",
+      "pinyin": "tā zhīdào, zhǐyào tā yòng shǒu qù pèng nàge língdang,",
+      "vi": "Anh ta biết chỉ cần dùng tay chạm vào chiếc chuông đó,"
+    },
+    {
+      "start": 713.37,
+      "end": 716.56,
+      "en": "the bell would make a 'ding-dong' sound.",
+      "zh": "铃铛就会发出“叮叮当当”的声音。",
+      "pinyin": "língdang jiù huì fāchū “dīngdīng dāngdāng” de shēngyīn。",
+      "vi": "chiếc chuông sẽ phát ra tiếng “đinh đang”."
+    },
+    {
+      "start": 716.57,
+      "end": 720.56,
+      "en": "Once it rang, others would notice him, and he would be caught.",
+      "zh": "声音一响，别人就会发现他，他就会被抓住。",
+      "pinyin": "shēngyīn yì xiǎng, biéren jiù huì fāxiàn tā, tā jiù huì bèi zhuāzhù。",
+      "vi": "Tiếng chuông vang lên, người khác sẽ phát hiện ra anh ta, và anh ta sẽ bị bắt."
+    },
+    {
+      "start": 720.57,
+      "end": 723.63,
+      "en": "He thought and thought: how could he get the bell",
+      "zh": "他想来想去，怎么才能拿到铃铛，",
+      "pinyin": "tā xiǎnglái xiǎngqù, zěnme cái néng nádào língdang,",
+      "vi": "Anh ta nghĩ tới nghĩ lui, làm sao mới lấy được chuông,"
+    },
+    {
+      "start": 723.63,
+      "end": 725.65,
+      "en": "without letting it make a sound?",
+      "zh": "又不让它发出声音呢？",
+      "pinyin": "yòu bú ràng tā fāchū shēngyīn ne？",
+      "vi": "mà lại không để nó phát ra tiếng?"
+    },
+    {
+      "start": 725.67,
+      "end": 727.69,
+      "en": "This is a technical problem.",
+      "zh": "这是一个技术问题。",
+      "pinyin": "zhè shì yí gè jìshù wèntí。",
+      "vi": "Đây là một vấn đề kỹ thuật."
+    },
+    {
+      "start": 727.7,
+      "end": 732.09,
+      "en": "He could find a cloth and wrap the bell; maybe the sound would be a bit quieter.",
+      "zh": "他可以找块布把铃铛包起来，也许声音会小一点。",
+      "pinyin": "tā kěyǐ zhǎo kuài bù bǎ língdang bāo qǐlái, yěxǔ shēngyīn huì xiǎo yìdiǎn。",
+      "vi": "Anh ta có thể tìm một miếng vải bọc chuông lại, có lẽ tiếng sẽ nhỏ hơn một chút."
+    },
+    {
+      "start": 732.1,
+      "end": 733.76,
+      "en": "He wasn't as clever as you.",
+      "zh": "他没有你这么聪明。",
+      "pinyin": "tā méiyǒu nǐ zhème cōngming。",
+      "vi": "Anh ta không thông minh như bạn."
+    },
+    {
+      "start": 733.77,
+      "end": 736.53,
+      "en": "He thought for a long time and finally came up with a",
+      "zh": "他想了很久，终于想到了一个",
+      "pinyin": "tā xiǎng le hěn jiǔ, zhōngyú xiǎngdào le yí gè",
+      "vi": "Anh ta nghĩ rất lâu, cuối cùng nghĩ ra một"
+    },
+    {
+      "start": 736.53,
+      "end": 739.12,
+      "en": "method he considered brilliant.",
+      "zh": "他自认为绝妙的办法。",
+      "pinyin": "tā zì rènwéi juémiào de bànfǎ。",
+      "vi": "cách mà anh ta cho là tuyệt diệu."
+    },
+    {
+      "start": 739.13,
+      "end": 742.65,
+      "en": "He thought, 'The sound of a bell is heard with the ears.",
+      "zh": "他想:“铃铛的声音是靠耳朵听见的。",
+      "pinyin": "tā xiǎng: “língdang de shēngyīn shì kào ěrduo tīngjiàn de。",
+      "vi": "Anh ta nghĩ: “Tiếng chuông là do tai nghe thấy."
+    },
+    {
+      "start": 742.67,
+      "end": 744.96,
+      "en": "If I cover my own ears,",
+      "zh": "如果我把自己的耳朵捂住，",
+      "pinyin": "rúguǒ wǒ bǎ zìjǐ de ěrduo wǔzhù,",
+      "vi": "Nếu mình bịt tai mình lại,"
+    },
+    {
+      "start": 744.97,
+      "end": 747.36,
+      "en": "then won't I be unable to hear the bell?",
+      "zh": "不就听不见铃铛的声音了吗？",
+      "pinyin": "bú jiù tīng bu jiàn língdang de shēngyīn le ma？",
+      "vi": "thì chẳng phải sẽ không nghe thấy tiếng chuông sao?"
+    },
+    {
+      "start": 747.37,
+      "end": 750.49,
+      "en": "If I can't hear it, then surely others can't hear it either!'",
+      "zh": "我听不见，那别人肯定也听不见了！”",
+      "pinyin": "wǒ tīng bu jiàn, nà biéren kěndìng yě tīng bu jiàn le！”",
+      "vi": "Mình không nghe thấy, thì người khác chắc chắn cũng không nghe thấy!”"
+    },
+    {
+      "start": 750.5,
+      "end": 754.06,
+      "en": "Wait... this logic... let me process it.",
+      "zh": "等等……这个逻辑……让我缓缓。",
+      "pinyin": "děngděng…… zhège luójí…… ràng wǒ huǎnhuǎn。",
+      "vi": "Khoan đã…… logic này…… để tôi từ từ."
+    },
+    {
+      "start": 754.07,
+      "end": 758.56,
+      "en": "He covers his ears and thinks others can't hear it either?",
+      "zh": "他捂住自己的耳朵，他就认为别人也听不见了？",
+      "pinyin": "tā wǔzhù zìjǐ de ěrduo, tā jiù rènwéi biéren yě tīng bu jiàn le？",
+      "vi": "Anh ta bịt tai mình, rồi cho rằng người khác cũng không nghe thấy?"
+    },
+    {
+      "start": 758.57,
+      "end": 760.76,
+      "en": "Yes, that's exactly what he thought.",
+      "zh": "是的，他就是这么想的。",
+      "pinyin": "shì de, tā jiùshì zhème xiǎng de。",
+      "vi": "Đúng vậy, anh ta nghĩ chính xác như thế."
+    },
+    {
+      "start": 760.77,
+      "end": 763.73,
+      "en": "He was very pleased with his 'wisdom.'",
+      "zh": "他为自己的“智慧”感到非常高兴。",
+      "pinyin": "tā wèi zìjǐ de “zhìhuì” gǎndào fēicháng gāoxìng。",
+      "vi": "Anh ta rất vui vì “trí tuệ” của mình."
+    },
+    {
+      "start": 763.73,
+      "end": 765.89,
+      "en": "So, on a dark night,",
+      "zh": "于是，在一个天黑的晚上，",
+      "pinyin": "yúshì, zài yí gè tiān hēi de wǎnshang,",
+      "vi": "Thế là, vào một đêm trời tối,"
+    },
+    {
+      "start": 765.9,
+      "end": 768.52,
+      "en": "he quietly ran to the front door of that house,",
+      "zh": "他悄悄地跑到那户人家门口，",
+      "pinyin": "tā qiāoqiāo de pǎo dào nà hù rénjiā ménkǒu,",
+      "vi": "anh ta lén lút chạy đến trước cửa nhà đó,"
+    },
+    {
+      "start": 768.53,
+      "end": 771.92,
+      "en": "first tightly covering his ears with both hands,",
+      "zh": "先用两只手紧紧地捂住自己的耳朵，",
+      "pinyin": "xiān yòng liǎng zhī shǒu jǐnjǐn de wǔzhù zìjǐ de ěrduo,",
+      "vi": "trước tiên dùng hai tay bịt chặt tai mình,"
+    },
+    {
+      "start": 771.93,
+      "end": 774.85,
+      "en": "then reached out to take down the big bell.",
+      "zh": "然后伸出手去摘那个大铃铛。",
+      "pinyin": "ránhòu shēn chū shǒu qù zhāi nàge dà língdang。",
+      "vi": "rồi mới vươn tay ra gỡ chiếc chuông lớn đó."
+    },
+    {
+      "start": 774.87,
+      "end": 776.53,
+      "en": "The result was predictable.",
+      "zh": "结果可想而知了。",
+      "pinyin": "jiéguǒ kě xiǎng ér zhī le。",
+      "vi": "Kết quả thì có thể đoán được rồi."
+    },
+    {
+      "start": 776.53,
+      "end": 779.05,
+      "en": "Of course. As soon as he touched the bell,",
+      "zh": "当然。他刚一碰到铃铛，",
+      "pinyin": "dāngrán。Tā gāng yí pèngdào língdang,",
+      "vi": "Tất nhiên. Anh ta vừa chạm vào chuông,"
+    },
+    {
+      "start": 779.07,
+      "end": 782.56,
+      "en": "the clear ringing immediately sounded and carried far.",
+      "zh": "清脆的铃声马上响了起来，传得很远。",
+      "pinyin": "qīngcuì de língshēng mǎshàng xiǎng le qǐlái, chuán de hěn yuǎn。",
+      "vi": "tiếng chuông trong trẻo lập tức vang lên, truyền đi rất xa."
+    },
+    {
+      "start": 782.57,
+      "end": 784.89,
+      "en": "The neighbors nearby and the owner of the house",
+      "zh": "周围的邻居和房子的主人",
+      "pinyin": "zhōuwéi de línjū hé fángzi de zhǔrén",
+      "vi": "Những người hàng xóm xung quanh và chủ nhà"
+    },
+    {
+      "start": 784.9,
+      "end": 788.66,
+      "en": "were immediately awakened, ran out, and caught him on the spot.",
+      "zh": "立刻就被惊醒了，跑出来把他当场抓住了。",
+      "pinyin": "lìkè jiù bèi jīngxǐng le, pǎo chūlái bǎ tā dāngchǎng zhuāzhù le。",
+      "vi": "lập tức bị đánh thức, chạy ra và bắt anh ta tại chỗ."
+    },
+    {
+      "start": 788.67,
+      "end": 790.49,
+      "en": "When the thief was caught,",
+      "zh": "这个小偷被抓住的时候，",
+      "pinyin": "zhège xiǎotōu bèi zhuāzhù de shíhou,",
+      "vi": "Khi tên trộm này bị bắt,"
+    },
+    {
+      "start": 790.5,
+      "end": 794.16,
+      "en": "he probably still found it strange: 'Why can you hear it?",
+      "zh": "可能还觉得很奇怪:“为什么你们能听见？",
+      "pinyin": "kěnéng hái juéde hěn qíguài: “wèishénme nǐmen néng tīngjiàn？",
+      "vi": "có lẽ vẫn còn thấy rất lạ: “Tại sao các người lại nghe thấy?"
+    },
+    {
+      "start": 794.17,
+      "end": 798.73,
+      "en": "'I already covered my ears!' (laughs) Very likely!",
+      "zh": "我已经把耳朵捂住了呀！”(笑)，很有可能！",
+      "pinyin": "wǒ yǐjīng bǎ ěrduo wǔzhù le ya！”(xiào)，hěn yǒu kěnéng！",
+      "vi": "Tôi đã bịt tai rồi mà!” (cười) Rất có thể!"
+    },
+    {
+      "start": 798.73,
+      "end": 802.62,
+      "en": "This story sounds simple, but its meaning is deep.",
+      "zh": "这个故事听起来很简单，但是意思很深。",
+      "pinyin": "zhège gùshi tīng qǐlái hěn jiǎndān, dànshì yìsi hěn shēn。",
+      "vi": "Câu chuyện này nghe thì rất đơn giản, nhưng ý nghĩa rất sâu."
+    },
+    {
+      "start": 802.63,
+      "end": 805.02,
+      "en": "By the way, friends listening to our podcast,",
+      "zh": "对了，听我们播客的朋友们，",
+      "pinyin": "duì le, tīng wǒmen bōkè de péngyou men,",
+      "vi": "À đúng rồi, các bạn nghe podcast của chúng tôi,"
+    },
+    {
+      "start": 805.03,
+      "end": 808.22,
+      "en": "if there are some words in the story you didn't understand,",
+      "zh": "如果刚才的故事里有一些词你没听懂，",
+      "pinyin": "rúguǒ gāngcái de gùshi lǐ yǒu yìxiē cí nǐ méi tīngdǒng,",
+      "vi": "nếu trong câu chuyện vừa rồi có vài từ bạn chưa hiểu,"
+    },
+    {
+      "start": 808.23,
+      "end": 809.85,
+      "en": "that's completely fine.",
+      "zh": "完全没关系哦。",
+      "pinyin": "wánquán méi guānxi o。",
+      "vi": "hoàn toàn không sao đâu."
+    },
+    {
+      "start": 809.87,
+      "end": 813.16,
+      "en": "You can guess its meaning, or wait a moment",
+      "zh": "你可以猜一猜它的意思，或者等一下",
+      "pinyin": "nǐ kěyǐ cāi yi cāi tā de yìsi, huòzhě děng yíxià",
+      "vi": "Bạn có thể đoán thử nghĩa của nó, hoặc đợi một chút"
+    },
+    {
+      "start": 813.17,
+      "end": 816.06,
+      "en": "we'll also explain some important words.",
+      "zh": "我们也会解释一些重要的词。",
+      "pinyin": "wǒmen yě huì jiěshì yìxiē zhòngyào de cí。",
+      "vi": "chúng tôi cũng sẽ giải thích một số từ quan trọng."
+    },
+    {
+      "start": 816.07,
+      "end": 821.23,
+      "en": "The most important thing is to listen relaxed and get a feel for the language and rhythm of Chinese.",
+      "zh": "最重要的就是放松地听，感受中文的语感和节奏。",
+      "pinyin": "zuì zhòngyào de jiùshì fàngsōng de tīng, gǎnshòu Zhōngwén de yǔgǎn hé jiézòu。",
+      "vi": "Điều quan trọng nhất là nghe một cách thư giãn, cảm nhận ngữ cảm và nhịp điệu của tiếng Trung."
+    },
+    {
+      "start": 821.23,
+      "end": 822.49,
+      "en": "Wang Yu is absolutely right.",
+      "zh": "王雨说得很对。",
+      "pinyin": "Wáng Yǔ shuō de hěn duì。",
+      "vi": "Vương Vũ nói rất đúng."
+    },
+    {
+      "start": 822.5,
+      "end": 825.92,
+      "en": "When learning a language, immersion and feeling are the most important.",
+      "zh": "学习语言，沉浸和感受是最重要的。",
+      "pinyin": "xuéxí yǔyán, chénjìn hé gǎnshòu shì zuì zhòngyào de。",
+      "vi": "Học ngôn ngữ, đắm chìm và cảm nhận là quan trọng nhất."
+    },
+    {
+      "start": 825.93,
+      "end": 827.09,
+      "en": "Back to this story,",
+      "zh": "回到这个故事，",
+      "pinyin": "huídào zhège gùshi,",
+      "vi": "Quay lại câu chuyện này,"
+    },
+    {
+      "start": 827.1,
+      "end": 828.96,
+      "en": "It’s actually describing a very com-",
+      "zh": "它其实说的是一种非常普",
+      "pinyin": "Tā qíshí shuō de shì yī zhǒng fēicháng pǔ",
+      "vi": "Nó thực ra nói về một kiểu rất phổ"
+    },
+    {
+      "start": 828.97,
+      "end": 832.43,
+      "en": "-mon psychological phenomenon, called “self-deception.”",
+      "zh": "遍的心理现象，叫“自欺欺人”。",
+      "pinyin": "biàn de xīnlǐ xiànxiàng, jiào “zìqīqīrén”.",
+      "vi": "biến của hiện tượng tâm lý, gọi là “tự lừa mình”."
+    },
+    {
+      "start": 832.43,
+      "end": 836.15,
+      "en": "“Self-deception” means deceiving yourself,",
+      "zh": "“自欺欺人”，就是自己骗自己，",
+      "pinyin": "“Zìqīqīrén”, jiùshì zìjǐ piàn zìjǐ,",
+      "vi": "“Tự lừa mình”, chính là tự mình lừa mình,"
+    },
+    {
+      "start": 836.17,
+      "end": 838.53,
+      "en": "and believing you can fool others too.",
+      "zh": "也以为能骗得了别人。",
+      "pinyin": "yě yǐwéi néng piàn de liǎo biérén.",
+      "vi": "và cũng tưởng rằng có thể lừa được người khác."
+    },
+    {
+      "start": 838.53,
+      "end": 839.95,
+      "en": "This man who stole the bell,",
+      "zh": "这个偷铃铛的人，",
+      "pinyin": "Zhège tōu língdang de rén,",
+      "vi": "Người đàn ông trộm chuông này,"
+    },
+    {
+      "start": 839.97,
+      "end": 843.49,
+      "en": "he thought that if he covered his own ears, the sound would no longer exist.",
+      "zh": "他以为捂住自己的耳朵，声音就不存在了。",
+      "pinyin": "tā yǐwéi wǔ zhù zìjǐ de ěrduo, shēngyīn jiù bù cúnzài le.",
+      "vi": "anh ta tưởng rằng bịt tai mình lại thì âm thanh sẽ không còn nữa."
+    },
+    {
+      "start": 843.5,
+      "end": 846.16,
+      "en": "This is a very foolish idea.",
+      "zh": "这是一种非常愚蠢的想法。",
+      "pinyin": "Zhè shì yī zhǒng fēicháng yúchǔn de xiǎngfǎ.",
+      "vi": "Đây là một suy nghĩ vô cùng ngốc nghếch."
+    },
+    {
+      "start": 846.17,
+      "end": 849.29,
+      "en": "He is only deceiving himself, but objective facts",
+      "zh": "他只是在欺骗自己，但客观事实",
+      "pinyin": "Tā zhǐshì zài qīpiàn zìjǐ, dàn kèguān shìshí",
+      "vi": "Anh ta chỉ đang tự lừa dối bản thân, nhưng sự thật khách quan"
+    },
+    {
+      "start": 849.3,
+      "end": 852.29,
+      "en": "will not change because of his subjective thoughts.",
+      "zh": "并不会因为他的主观想法而改变。",
+      "pinyin": "bìng bù huì yīnwèi tā de zhǔguān xiǎngfǎ ér gǎibiàn.",
+      "vi": "sẽ không thay đổi vì suy nghĩ chủ quan của anh ta."
+    },
+    {
+      "start": 852.3,
+      "end": 853.56,
+      "en": "In modern life,",
+      "zh": "在现代生活中，",
+      "pinyin": "Zài xiàndài shēnghuó zhōng,",
+      "vi": "Trong cuộc sống hiện đại,"
+    },
+    {
+      "start": 853.57,
+      "end": 856.49,
+      "en": "there are actually many “covering one’s ears while stealing a bell” behaviors.",
+      "zh": "其实也有很多“掩耳盗铃”的行为。",
+      "pinyin": "qíshí yě yǒu hěn duō “yǎn'ěrdàolíng” de xíngwéi.",
+      "vi": "thực ra cũng có rất nhiều hành vi “bịt tai trộm chuông”."
+    },
+    {
+      "start": 856.5,
+      "end": 858.32,
+      "en": "For example, some people, while driving,",
+      "zh": "比如，有的人开车时，",
+      "pinyin": "Bǐrú, yǒu de rén kāichē shí,",
+      "vi": "Ví dụ, có người khi lái xe,"
+    },
+    {
+      "start": 858.33,
+      "end": 862.22,
+      "en": "a warning light in the car comes on, indicating the car may have a problem.",
+      "zh": "车里的一个警告灯亮了，说明车可能出了问题。",
+      "pinyin": "chē lǐ de yī gè jǐnggào dēng liàng le, shuōmíng chē kěnéng chū le wèntí.",
+      "vi": "một đèn cảnh báo trong xe sáng lên, cho thấy xe có thể đã gặp trục trặc."
+    },
+    {
+      "start": 862.23,
+      "end": 864.72,
+      "en": "but he pretends not to see it and keeps driving,",
+      "zh": "但他假装没看见，还继续开，",
+      "pinyin": "dàn tā jiǎzhuāng méi kànjiàn, hái jìxù kāi,",
+      "vi": "nhưng anh ta giả vờ không thấy, vẫn tiếp tục lái,"
+    },
+    {
+      "start": 864.73,
+      "end": 866.92,
+      "en": "thinking to himself, “It shouldn’t be anything serious,",
+      "zh": "心里想着“应该没什么大事，",
+      "pinyin": "xīnlǐ xiǎngzhe “yīnggāi méi shénme dàshì,",
+      "vi": "trong lòng nghĩ “chắc không có chuyện gì lớn,"
+    },
+    {
+      "start": 866.93,
+      "end": 868.92,
+      "en": "it’ll fix itself by tomorrow.”",
+      "zh": "明天自己就会好的”。",
+      "pinyin": "míngtiān zìjǐ jiù huì hǎo de”.",
+      "vi": "mai nó sẽ tự khỏi thôi”."
+    },
+    {
+      "start": 868.93,
+      "end": 870.42,
+      "en": "That’s too dangerous!",
+      "zh": "这太危险了！",
+      "pinyin": "Zhè tài wēixiǎn le!",
+      "vi": "Điều này quá nguy hiểm!"
+    },
+    {
+      "start": 870.43,
+      "end": 873.75,
+      "en": "He thinks that if he doesn’t look at the light, the problem won’t exist.",
+      "zh": "他以为不去看那个灯，问题就不存在了。",
+      "pinyin": "Tā yǐwéi bù qù kàn nàge dēng, wèntí jiù bù cúnzài le.",
+      "vi": "Anh ta tưởng rằng không nhìn đèn đó thì vấn đề sẽ không còn."
+    },
+    {
+      "start": 873.77,
+      "end": 878.46,
+      "en": "But in reality, the problem is still there and may become even worse.",
+      "zh": "但实际上，问题还在，而且可能会变得更严重。",
+      "pinyin": "Dàn shíjì shàng, wèntí hái zài, érqiě kěnéng huì biàn de gèng yánzhòng.",
+      "vi": "Nhưng thực tế, vấn đề vẫn còn, thậm chí có thể trở nên nghiêm trọng hơn."
+    },
+    {
+      "start": 878.47,
+      "end": 881.26,
+      "en": "This is just like covering your ears while stealing a bell.",
+      "zh": "这和捂住耳朵偷铃铛是一样的。",
+      "pinyin": "Zhè hé wǔ zhù ěrduo tōu língdang shì yīyàng de.",
+      "vi": "Điều này cũng giống như bịt tai trộm chuông."
+    },
+    {
+      "start": 881.27,
+      "end": 882.86,
+      "en": "There’s another example, for instance,",
+      "zh": "还有一个例子，比如",
+      "pinyin": "Hái yǒu yī gè lìzi, bǐrú",
+      "vi": "Còn một ví dụ nữa, chẳng hạn"
+    },
+    {
+      "start": 882.87,
+      "end": 885.43,
+      "en": "some people are afraid to know their exam results,",
+      "zh": "有的人害怕知道自己的考试成绩，",
+      "pinyin": "yǒu de rén hàipà zhīdào zìjǐ de kǎoshì chéngjì,",
+      "vi": "có người sợ biết điểm thi của mình,"
+    },
+    {
+      "start": 885.43,
+      "end": 887.05,
+      "en": "so they just keep not checking their scores.",
+      "zh": "就一直不查分数。",
+      "pinyin": "jiù yīzhí bù chá fēnshù.",
+      "vi": "nên cứ mãi không tra điểm."
+    },
+    {
+      "start": 887.07,
+      "end": 889.16,
+      "en": "He feels that as long as he doesn’t look, that “bad score”",
+      "zh": "他觉得只要不看，那个“坏成绩”",
+      "pinyin": "Tā juéde zhǐyào bù kàn, nàge “huài chéngjì”",
+      "vi": "Anh ta cảm thấy chỉ cần không xem, cái “điểm xấu” đó"
+    },
+    {
+      "start": 889.17,
+      "end": 890.76,
+      "en": "will seem as if it doesn’t exist.",
+      "zh": "就好像不存在一样。",
+      "pinyin": "jiù hǎoxiàng bù cúnzài yīyàng.",
+      "vi": "sẽ cứ như thể không tồn tại vậy."
+    },
+    {
+      "start": 890.77,
+      "end": 893.49,
+      "en": "But in reality, the score was decided long ago,",
+      "zh": "但实际上，成绩早就决定了，",
+      "pinyin": "Dàn shíjì shàng, chéngjì zǎo jiù juédìng le,",
+      "vi": "Nhưng thực tế, điểm số đã được quyết định từ lâu rồi,"
+    },
+    {
+      "start": 893.5,
+      "end": 895.96,
+      "en": "and his avoidance cannot change anything.",
+      "zh": "他逃避并不能改变任何事情。",
+      "pinyin": "tā táobì bìng bù néng gǎibiàn rènhé shìqíng.",
+      "vi": "việc anh ta trốn tránh không thể thay đổi được gì."
+    },
+    {
+      "start": 895.97,
+      "end": 898.16,
+      "en": "I completely understand this mentality.",
+      "zh": "我完全理解这种心理。",
+      "pinyin": "Wǒ wánquán lǐjiě zhè zhǒng xīnlǐ.",
+      "vi": "Tôi hoàn toàn hiểu tâm lý này."
+    },
+    {
+      "start": 898.17,
+      "end": 900.23,
+      "en": "When facing a reality one doesn’t want to accept,",
+      "zh": "面对不想接受的现实，",
+      "pinyin": "Miànduì bù xiǎng jiēshòu de xiànshí,",
+      "vi": "Khi đối mặt với hiện thực mình không muốn chấp nhận,"
+    },
+    {
+      "start": 900.23,
+      "end": 903.29,
+      "en": "people sometimes subconsciously choose to avoid it.",
+      "zh": "人有时候会下意识地选择逃避。",
+      "pinyin": "rén yǒu shíhou huì xiàyìshí de xuǎnzé táobì.",
+      "vi": "con người đôi khi sẽ vô thức chọn cách trốn tránh."
+    },
+    {
+      "start": 903.3,
+      "end": 906.86,
+      "en": "But this story reminds us that avoidance is useless.",
+      "zh": "但这个故事提醒我们，逃避是没用的。",
+      "pinyin": "Dàn zhège gùshì tíxǐng wǒmen, táobì shì méiyòng de.",
+      "vi": "Nhưng câu chuyện này nhắc chúng ta rằng, trốn tránh là vô ích."
+    },
+    {
+      "start": 906.87,
+      "end": 909.23,
+      "en": "The problem is like the sound of that bell:",
+      "zh": "问题就像那个铃铛的声音，",
+      "pinyin": "Wèntí jiù xiàng nàge língdang de shēngyīn,",
+      "vi": "Vấn đề cũng giống như tiếng chuông đó,"
+    },
+    {
+      "start": 909.23,
+      "end": 911.89,
+      "en": "whether you listen or not, it’s still there.",
+      "zh": "不管你听不听，它都在那里。",
+      "pinyin": "bùguǎn nǐ tīng bù tīng, tā dōu zài nàlǐ.",
+      "vi": "dù bạn có nghe hay không, nó vẫn ở đó."
+    },
+    {
+      "start": 911.9,
+      "end": 915.72,
+      "en": "Facing problems bravely is the first step to solving them.",
+      "zh": "勇敢地面对问题，才是解决问题的第一步。",
+      "pinyin": "Yǒnggǎn de miànduì wèntí, cái shì jiějué wèntí de dì yī bù.",
+      "vi": "Dũng cảm đối mặt với vấn đề mới là bước đầu tiên để giải quyết vấn đề."
+    },
+    {
+      "start": 915.73,
+      "end": 916.62,
+      "en": "That’s right.",
+      "zh": "说得对。",
+      "pinyin": "Shuō de duì.",
+      "vi": "Nói đúng."
+    },
+    {
+      "start": 916.63,
+      "end": 920.12,
+      "en": "Acknowledging that a problem exists is the beginning of solving it.",
+      "zh": "承认问题的存在，是解决问题的开始。",
+      "pinyin": "Chéngrèn wèntí de cúnzài, shì jiějué wèntí de kāishǐ.",
+      "vi": "Thừa nhận sự tồn tại của vấn đề là khởi đầu của việc giải quyết vấn đề."
+    },
+    {
+      "start": 920.13,
+      "end": 922.75,
+      "en": "If that bell thief could be a little smarter,",
+      "zh": "那个偷铃铛的人，如果能聪明一点，",
+      "pinyin": "Nàge tōu língdang de rén, rúguǒ néng cōngmíng yīdiǎn,",
+      "vi": "Người trộm chuông đó, nếu có thể thông minh hơn một chút,"
+    },
+    {
+      "start": 922.77,
+      "end": 925.49,
+      "en": "and find a way to truly keep the bell from ringing,",
+      "zh": "去想办法真正地让铃铛不响，",
+      "pinyin": "qù xiǎng bànfǎ zhēnzhèng de ràng língdang bù xiǎng,",
+      "vi": "đi tìm cách thực sự làm cho chuông không kêu,"
+    },
+    {
+      "start": 925.5,
+      "end": 928.96,
+      "en": "rather than covering his own ears, maybe the result would be different…",
+      "zh": "而不是捂住自己的耳朵，也许结果会不一样……",
+      "pinyin": "ér bùshì wǔ zhù zìjǐ de ěrduo, yěxǔ jiéguǒ huì bù yīyàng……",
+      "vi": "chứ không phải bịt tai mình lại, có lẽ kết quả sẽ khác…"
+    },
+    {
+      "start": 928.97,
+      "end": 931.83,
+      "en": "Of course, stealing itself is wrong.",
+      "zh": "当然，偷东西本身就是错的。",
+      "pinyin": "Dāngrán, tōu dōngxi běnshēn jiù shì cuò de.",
+      "vi": "Tất nhiên, trộm cắp bản thân nó đã là sai rồi."
+    },
+    {
+      "start": 931.83,
+      "end": 933.22,
+      "en": "(Laughs) Yes.",
+      "zh": "(笑)，是的。",
+      "pinyin": "(xiào), shì de.",
+      "vi": "(Cười), đúng vậy."
+    },
+    {
+      "start": 933.23,
+      "end": 936.69,
+      "en": "So, the story “Covering One’s Ears While Stealing a Bell” tells us,",
+      "zh": "所以，《掩耳盗铃》这个故事告诉我们，",
+      "pinyin": "Suǒyǐ, “Yǎn'ěrdàolíng” zhège gùshì gàosu wǒmen,",
+      "vi": "Vì vậy, câu chuyện “Bịt tai trộm chuông” dạy chúng ta rằng,"
+    },
+    {
+      "start": 936.7,
+      "end": 938.49,
+      "en": "not to deceive ourselves.",
+      "zh": "不要自欺欺人。",
+      "pinyin": "bùyào zìqīqīrén.",
+      "vi": "đừng tự lừa mình."
+    },
+    {
+      "start": 938.5,
+      "end": 943.12,
+      "en": "We should respect objective facts and bravely face reality and problems.",
+      "zh": "要尊重客观事实，勇敢地面对现实和问题。",
+      "pinyin": "Yào zūnzhòng kèguān shìshí, yǒnggǎn de miànduì xiànshí hé wèntí.",
+      "vi": "Phải tôn trọng sự thật khách quan, dũng cảm đối mặt với hiện thực và vấn đề."
+    },
+    {
+      "start": 943.13,
+      "end": 946.25,
+      "en": "Replacing objective reality with subjective wishes",
+      "zh": "用主观的愿望去代替客观的现实，",
+      "pinyin": "Yòng zhǔguān de yuànwàng qù dàitì kèguān de xiànshí,",
+      "vi": "Dùng mong muốn chủ quan để thay thế hiện thực khách quan,"
+    },
+    {
+      "start": 946.27,
+      "end": 948.46,
+      "en": "will ultimately only hurt yourself.",
+      "zh": "最终只会伤害到自己。",
+      "pinyin": "zuìzhōng zhǐ huì shānghài dào zìjǐ.",
+      "vi": "cuối cùng chỉ làm tổn thương chính mình."
+    },
+    {
+      "start": 948.47,
+      "end": 951.53,
+      "en": "Exactly. These three stories we shared today,",
+      "zh": "没错。今天我们分享的这三个故事，",
+      "pinyin": "Méicuò. Jīntiān wǒmen fēnxiǎng de zhè sān gè gùshì,",
+      "vi": "Không sai. Ba câu chuyện chúng ta chia sẻ hôm nay,"
+    },
+    {
+      "start": 951.53,
+      "end": 952.72,
+      "en": "“Buying and Selling Shadows,”",
+      "zh": "《买卖影子》、",
+      "pinyin": "“Mǎimài yǐngzi”,",
+      "vi": "“Mua bán cái bóng”,"
+    },
+    {
+      "start": 952.73,
+      "end": 955.15,
+      "en": "“The Snipe and the Clam Fight,” and “Covering One’s Ears While Stealing a Bell,”",
+      "zh": "《鹬蚌相争》和《掩耳盗铃》，",
+      "pinyin": "“Yùbàng xiāngzhēng” hé “Yǎn'ěrdàolíng”,",
+      "vi": "“Chim dẽ và con trai tranh nhau” và “Bịt tai trộm chuông”,"
+    },
+    {
+      "start": 955.17,
+      "end": 957.06,
+      "en": "although they all come from long ago,",
+      "zh": "虽然都来自很久以前，",
+      "pinyin": "suīrán dōu láizì hěn jiǔ yǐqián,",
+      "vi": "mặc dù đều đến từ rất lâu trước đây,"
+    },
+    {
+      "start": 957.07,
+      "end": 960.13,
+      "en": "But the human weaknesses and life wisdom they reveal,",
+      "zh": "但它们揭示的人性弱点和生活智慧，",
+      "pinyin": "Dàn tāmen jiēshì de rénxìng ruòdiǎn hé shēnghuó zhìhuì,",
+      "vi": "Nhưng những điểm yếu của bản tính con người và trí tuệ sống mà chúng hé lộ,"
+    },
+    {
+      "start": 960.13,
+      "end": 962.72,
+      "en": "are still very valuable today.",
+      "zh": "到今天依然非常有价值。",
+      "pinyin": "Dào jīntiān yīrán fēicháng yǒu jiàzhí.",
+      "vi": "đến hôm nay vẫn rất có giá trị."
+    },
+    {
+      "start": 962.73,
+      "end": 965.35,
+      "en": "Yes, they are like three mirrors,",
+      "zh": "是的，它们就像三面镜子，",
+      "pinyin": "Shì de, tāmen jiù xiàng sān miàn jìngzi,",
+      "vi": "Đúng vậy, chúng giống như ba tấm gương,"
+    },
+    {
+      "start": 965.37,
+      "end": 969.26,
+      "en": "letting us see the mistakes we might make when thinking about problems.",
+      "zh": "让我们看到自己思考问题时可能会犯的错误。",
+      "pinyin": "ràng wǒmen kàndào zìjǐ sīkǎo wèntí shí kěnéng huì fàn de cuòwù.",
+      "vi": "giúp chúng ta thấy những lỗi mình có thể mắc khi suy nghĩ về vấn đề."
+    },
+    {
+      "start": 969.27,
+      "end": 971.89,
+      "en": "Okay, we've talked this much, and all the stories are finished.",
+      "zh": "好的，聊了这么多，故事也都讲完了。",
+      "pinyin": "Hǎo de, liáo le zhème duō, gùshi yě dōu jiǎng wán le.",
+      "vi": "Được rồi, đã nói nhiều như vậy, các câu chuyện cũng đều kể xong rồi."
+    },
+    {
+      "start": 971.9,
+      "end": 974.22,
+      "en": "Now let's review, in today's dialogue,",
+      "zh": "现在我们来复习一下今天对话中",
+      "pinyin": "Xiànzài wǒmen lái fùxí yíxià jīntiān duìhuà zhōng",
+      "vi": "Bây giờ chúng ta cùng ôn lại trong cuộc hội thoại hôm nay"
+    },
+    {
+      "start": 974.23,
+      "end": 976.55,
+      "en": "a few fairly useful vocabulary words that appeared.",
+      "zh": "出现的几个比较有用的词汇。",
+      "pinyin": "chūxiàn de jǐ ge bǐjiào yǒuyòng de cíhuì.",
+      "vi": "một vài từ vựng khá hữu ích đã xuất hiện."
+    },
+    {
+      "start": 976.57,
+      "end": 977.93,
+      "en": "Wang Yu, let me ask,",
+      "zh": "王雨，我来问，",
+      "pinyin": "Wáng Yǔ, wǒ lái wèn,",
+      "vi": "Vương Vũ, tôi hỏi nhé,"
+    },
+    {
+      "start": 977.93,
+      "end": 980.42,
+      "en": "you explain them in simple words, okay?",
+      "zh": "你来用简单的话解释一下，可以吗？",
+      "pinyin": "nǐ lái yòng jiǎndān de huà jiěshì yíxià, kěyǐ ma?",
+      "vi": "bạn dùng lời đơn giản giải thích một chút, được không?"
+    },
+    {
+      "start": 980.43,
+      "end": 982.25,
+      "en": "No problem, let's start!",
+      "zh": "没问题，开始吧！",
+      "pinyin": "Méi wèntí, kāishǐ ba!",
+      "vi": "Không vấn đề, bắt đầu đi!"
+    },
+    {
+      "start": 982.27,
+      "end": 984.29,
+      "en": "The first word is “greedy.”",
+      "zh": "第一个词是“贪心”。",
+      "pinyin": "Dì yī ge cí shì “tānxīn”.",
+      "vi": "Từ đầu tiên là “tham lam”."
+    },
+    {
+      "start": 984.3,
+      "end": 986.29,
+      "en": "In the story “Buying and Selling Shadows,”",
+      "zh": "在《买卖影子》的故事里，",
+      "pinyin": "Zài 《Mǎimài Yǐngzi》 de gùshi lǐ,",
+      "vi": "Trong câu chuyện 《Mua bán bóng》,"
+    },
+    {
+      "start": 986.3,
+      "end": 988.92,
+      "en": "we said that the shadow seller was very greedy.",
+      "zh": "我们说那个卖影子的人很贪心。",
+      "pinyin": "wǒmen shuō nàge mài yǐngzi de rén hěn tānxīn.",
+      "vi": "chúng ta nói người bán bóng đó rất tham lam."
+    },
+    {
+      "start": 988.93,
+      "end": 990.55,
+      "en": "What does this word mean?",
+      "zh": "这个词是什么意思？",
+      "pinyin": "Zhège cí shì shénme yìsi?",
+      "vi": "Từ này có nghĩa là gì?"
+    },
+    {
+      "start": 990.57,
+      "end": 993.56,
+      "en": "“Greedy” — it's an adjective.",
+      "zh": "“贪心”啊，它是一个形容词。",
+      "pinyin": "“Tānxīn” a, tā shì yí ge xíngróngcí.",
+      "vi": "“Tham lam” à, nó là một tính từ."
+    },
+    {
+      "start": 993.57,
+      "end": 997.03,
+      "en": "it means always wanting to get more things,",
+      "zh": "意思就是总想得到更多东西，",
+      "pinyin": "yìsi jiù shì zǒng xiǎng dédào gèng duō dōngxi,",
+      "vi": "nghĩa là luôn muốn có được nhiều thứ hơn,"
+    },
+    {
+      "start": 997.03,
+      "end": 1000.75,
+      "en": "having one thing and still wanting another, never satisfied.",
+      "zh": "有了这个还想要那个，永远不满足。",
+      "pinyin": "yǒu le zhège hái xiǎng yào nàge, yǒngyuǎn bù mǎnzú.",
+      "vi": "có cái này rồi vẫn muốn cái kia, mãi mãi không thấy đủ."
+    },
+    {
+      "start": 1000.77,
+      "end": 1004.29,
+      "en": "For example, a person is already very rich, but he still wants",
+      "zh": "比如，一个人已经很有钱了，但他还想",
+      "pinyin": "Bǐrú, yí ge rén yǐjīng hěn yǒu qián le, dàn tā hái xiǎng",
+      "vi": "Ví dụ, một người đã rất giàu rồi, nhưng anh ta vẫn muốn"
+    },
+    {
+      "start": 1004.3,
+      "end": 1006.86,
+      "en": "to use bad methods to earn more money,",
+      "zh": "用不好的方法去赚更多的钱，",
+      "pinyin": "yòng bù hǎo de fāngfǎ qù zhuàn gèng duō de qián,",
+      "vi": "dùng cách không tốt để kiếm nhiều tiền hơn,"
+    },
+    {
+      "start": 1006.87,
+      "end": 1009.49,
+      "en": "then we can say he is very “greedy.”",
+      "zh": "我们就可以说他很“贪心”。",
+      "pinyin": "wǒmen jiù kěyǐ shuō tā hěn “tānxīn”.",
+      "vi": "thì chúng ta có thể nói anh ta rất “tham lam”."
+    },
+    {
+      "start": 1009.5,
+      "end": 1011.32,
+      "en": "Explained very clearly. Okay,",
+      "zh": "解释得很清楚。好，",
+      "pinyin": "Jiěshì de hěn qīngchu. Hǎo,",
+      "vi": "Giải thích rất rõ ràng. Tốt,"
+    },
+    {
+      "start": 1011.33,
+      "end": 1014.82,
+      "en": "The second one is an idiom, “The Snipe and the Clam Fight.”",
+      "zh": "第二个，是一个成语，“鹬蚌相争”。",
+      "pinyin": "Dì èr ge, shì yí ge chéngyǔ, “Yù bàng xiāng zhēng”.",
+      "vi": "Mục thứ hai là một thành ngữ, “Dẽ và trai tranh nhau”."
+    },
+    {
+      "start": 1014.83,
+      "end": 1017.45,
+      "en": "What does it mean when these four characters are put together?",
+      "zh": "这四个字放在一起是什么意思？",
+      "pinyin": "Zhè sì ge zì fàng zài yìqǐ shì shénme yìsi?",
+      "vi": "Bốn chữ này đặt cùng nhau có nghĩa là gì?"
+    },
+    {
+      "start": 1017.47,
+      "end": 1019.46,
+      "en": "The idiom “The Snipe and the Clam Fight,”",
+      "zh": "“鹬蚌相争”这个成语，",
+      "pinyin": "“Yù bàng xiāng zhēng” zhège chéngyǔ,",
+      "vi": "Thành ngữ “Dẽ và trai tranh nhau”,"
+    },
+    {
+      "start": 1019.47,
+      "end": 1021.66,
+      "en": "is the second story we told.",
+      "zh": "就是我们讲的第二个故事。",
+      "pinyin": "jiù shì wǒmen jiǎng de dì èr ge gùshi.",
+      "vi": "chính là câu chuyện thứ hai chúng ta đã kể."
+    },
+    {
+      "start": 1021.67,
+      "end": 1025.29,
+      "en": "It means that two people or two groups,",
+      "zh": "它的意思就是，两个人或者两个团体，",
+      "pinyin": "Tā de yìsi jiù shì, liǎng ge rén huòzhě liǎng ge tuántǐ,",
+      "vi": "Nghĩa của nó là, hai người hoặc hai nhóm,"
+    },
+    {
+      "start": 1025.3,
+      "end": 1028.66,
+      "en": "fight each other for their own interests and refuse to give in,",
+      "zh": "为了自己的利益互相争斗，不肯让步，",
+      "pinyin": "wèile zìjǐ de lìyì hùxiāng zhēngdòu, bù kěn ràngbù,",
+      "vi": "vì lợi ích của mình mà tranh đấu lẫn nhau, không chịu nhượng bộ,"
+    },
+    {
+      "start": 1028.67,
+      "end": 1032.09,
+      "en": "and as a result, a third person nearby benefits.",
+      "zh": "结果让旁边的第三个人得到了好处。",
+      "pinyin": "jiéguǒ ràng pángbiān de dì sān ge rén dédào le hǎochu.",
+      "vi": "kết quả là để người thứ ba ở bên cạnh được lợi."
+    },
+    {
+      "start": 1032.1,
+      "end": 1035.46,
+      "en": "It is usually used to describe a situation where both sides suffer,",
+      "zh": "它通常用来形容一种两败俱伤，",
+      "pinyin": "Tā tōngcháng yònglái xíngróng yì zhǒng liǎng bài jù shāng,",
+      "vi": "Nó thường được dùng để miêu tả một kiểu đôi bên cùng bị thiệt hại,"
+    },
+    {
+      "start": 1035.47,
+      "end": 1038.46,
+      "en": "while letting others profit.",
+      "zh": "让别人获利的情况。",
+      "pinyin": "ràng biérén huòlì de qíngkuàng.",
+      "vi": "khiến người khác thu lợi."
+    },
+    {
+      "start": 1038.47,
+      "end": 1040.56,
+      "en": "Very good. The last word, “stupid.”",
+      "zh": "非常好。最后一个词，“愚蠢”。",
+      "pinyin": "Fēicháng hǎo. Zuìhòu yí ge cí, “yúchǔn”.",
+      "vi": "Rất tốt. Từ cuối cùng, “ngu ngốc”."
+    },
+    {
+      "start": 1040.57,
+      "end": 1043.29,
+      "en": "When we talked about the thief in “Stealing the Bell While Covering One's Ears,”",
+      "zh": "我们在说《掩耳盗铃》的小偷时，",
+      "pinyin": "Wǒmen zài shuō 《Yǎn ěr dào líng》 de xiǎotōu shí,",
+      "vi": "Khi chúng ta nói về tên trộm trong 《Bịt tai trộm chuông》,"
+    },
+    {
+      "start": 1043.3,
+      "end": 1045.26,
+      "en": "we said his idea was very stupid.",
+      "zh": "说他的想法很愚蠢。",
+      "pinyin": "shuō tā de xiǎngfǎ hěn yúchǔn.",
+      "vi": "chúng ta nói rằng cách nghĩ của hắn rất ngu ngốc."
+    },
+    {
+      "start": 1045.27,
+      "end": 1048.33,
+      "en": "Um, “stupid” is also an adjective,",
+      "zh": "嗯，“愚蠢”也是一个形容词，",
+      "pinyin": "Ńg, “yúchǔn” yě shì yí ge xíngróngcí,",
+      "vi": "Ừm, “ngu ngốc” cũng là một tính từ,"
+    },
+    {
+      "start": 1048.33,
+      "end": 1051.92,
+      "en": "it means not smart, thinking too simply,",
+      "zh": "它的意思就是不聪明，想法太简单，",
+      "pinyin": "tā de yìsi jiù shì bù cōngming, xiǎngfǎ tài jiǎndān,",
+      "vi": "nghĩa là không thông minh, suy nghĩ quá đơn giản,"
+    },
+    {
+      "start": 1051.93,
+      "end": 1053.92,
+      "en": "or somewhat foolish.",
+      "zh": "或者说有点傻。",
+      "pinyin": "huòzhě shuō yǒudiǎn shǎ.",
+      "vi": "hoặc nói là hơi ngốc."
+    },
+    {
+      "start": 1053.93,
+      "end": 1057.25,
+      "en": "often doing wrong or illogical things.",
+      "zh": "常常会做一些错的、不合逻辑的事情。",
+      "pinyin": "chángcháng huì zuò yìxiē cuò de, bù hé luójí de shìqing.",
+      "vi": "thường sẽ làm những việc sai trái, không hợp logic."
+    },
+    {
+      "start": 1057.27,
+      "end": 1058.69,
+      "en": "For example, that thief,",
+      "zh": "比如那个小偷，",
+      "pinyin": "Bǐrú nàge xiǎotōu,",
+      "vi": "Ví dụ như tên trộm đó,"
+    },
+    {
+      "start": 1058.7,
+      "end": 1060.52,
+      "en": "he thought that by covering his own ears,",
+      "zh": "他以为捂住自己的耳朵，",
+      "pinyin": "tā yǐwéi wǔ zhù zìjǐ de ěrduo,",
+      "vi": "hắn tưởng rằng bịt tai mình lại,"
+    },
+    {
+      "start": 1060.53,
+      "end": 1064.45,
+      "en": "others wouldn't hear it; this idea is extremely “stupid.”",
+      "zh": "别人就听不见了，这个想法就是非常“愚蠢”的。",
+      "pinyin": "biérén jiù tīng bú jiàn le, zhège xiǎngfǎ jiù shì fēicháng “yúchǔn” de.",
+      "vi": "thì người khác sẽ không nghe thấy, cách nghĩ này vô cùng “ngu ngốc”."
+    },
+    {
+      "start": 1064.47,
+      "end": 1065.83,
+      "en": "Explained wonderfully.",
+      "zh": "解释得非常棒。",
+      "pinyin": "Jiěshì de fēicháng bàng.",
+      "vi": "Giải thích rất tuyệt."
+    },
+    {
+      "start": 1065.83,
+      "end": 1067.25,
+      "en": "I hope the explanations of these few words",
+      "zh": "希望这几个词的解释",
+      "pinyin": "Xīwàng zhè jǐ ge cí de jiěshì",
+      "vi": "Hy vọng phần giải thích mấy từ này"
+    },
+    {
+      "start": 1067.27,
+      "end": 1069.96,
+      "en": "can help everyone better understand today's content.",
+      "zh": "能帮助大家更好地理解今天的内容。",
+      "pinyin": "néng bāngzhù dàjiā gèng hǎo de lǐjiě jīntiān de nèiróng.",
+      "vi": "có thể giúp mọi người hiểu rõ hơn nội dung hôm nay."
+    },
+    {
+      "start": 1069.97,
+      "end": 1072.73,
+      "en": "They are also quite commonly used in everyday Chinese.",
+      "zh": "它们在日常中文里也挺常用的。",
+      "pinyin": "Tāmen zài rìcháng zhōngwén lǐ yě tǐng chángyòng de.",
+      "vi": "Chúng cũng khá thường dùng trong tiếng Trung hằng ngày."
+    },
+    {
+      "start": 1072.73,
+      "end": 1075.49,
+      "en": "Yes, everyone can try using them to say one",
+      "zh": "是的，大家可以试着用它们来说一",
+      "pinyin": "Shì de, dàjiā kěyǐ shìzhe yòng tāmen lái shuō yì",
+      "vi": "Đúng vậy, mọi người có thể thử dùng chúng để nói một"
+    },
+    {
+      "start": 1075.5,
+      "end": 1077.86,
+      "en": "or two sentences; that way you'll remember them better.",
+      "zh": "两个句子，这样记得更牢。",
+      "pinyin": "liǎng ge jùzi, zhèyàng jì de gèng láo.",
+      "vi": "hai câu, như vậy sẽ nhớ chắc hơn."
+    },
+    {
+      "start": 1077.87,
+      "end": 1080.76,
+      "en": "Okay, today's episode is almost coming to an end.",
+      "zh": "好了，我们今天的节目也差不多要结束了。",
+      "pinyin": "Hǎo le, wǒmen jīntiān de jiémù yě chàbuduō yào jiéshù le.",
+      "vi": "Được rồi, chương trình hôm nay của chúng ta cũng sắp kết thúc rồi."
+    },
+    {
+      "start": 1080.77,
+      "end": 1083.83,
+      "en": "Today, through three interesting idiom stories,",
+      "zh": "今天我们通过三个有趣的成语故事，",
+      "pinyin": "Jīntiān wǒmen tōngguò sān ge yǒuqù de chéngyǔ gùshi,",
+      "vi": "Hôm nay, qua ba câu chuyện thành ngữ thú vị,"
+    },
+    {
+      "start": 1083.83,
+      "end": 1086.65,
+      "en": "we discussed how to think about problems more deeply.",
+      "zh": "探讨了如何更深入地思考问题。",
+      "pinyin": "tàntǎo le rúhé gèng shēnrù de sīkǎo wèntí.",
+      "vi": "chúng ta đã thảo luận về cách suy nghĩ sâu sắc hơn về vấn đề."
+    },
+    {
+      "start": 1086.67,
+      "end": 1089.13,
+      "en": "Right, we talked about “Buying and Selling Shadows,”",
+      "zh": "对，我们聊了《买卖影子》，",
+      "pinyin": "Duì, wǒmen liáo le 《Mǎimài Yǐngzi》,",
+      "vi": "Đúng vậy, chúng ta đã nói về 《Mua bán bóng》,"
+    },
+    {
+      "start": 1089.13,
+      "end": 1091.92,
+      "en": "It tells us not to focus only on immediate interests,",
+      "zh": "它告诉我们不要只看眼前利益，",
+      "pinyin": "Tā gàosu wǒmen bùyào zhǐ kàn yǎnqián lìyì,",
+      "vi": "Nó dạy chúng ta đừng chỉ nhìn lợi ích trước mắt,"
+    },
+    {
+      "start": 1091.93,
+      "end": 1093.72,
+      "en": "but to think about the essence of things.",
+      "zh": "要思考事情的本质。",
+      "pinyin": "Yào sīkǎo shìqing de běnzhì.",
+      "vi": "mà phải suy nghĩ về bản chất của sự việc."
+    },
+    {
+      "start": 1093.73,
+      "end": 1095.72,
+      "en": "We talked about “The Snipe and the Clam Fight,”",
+      "zh": "我们聊了《鹬蚌相争》，",
+      "pinyin": "Wǒmen liáo le “Yù Bàng Xiāng Zhēng”,",
+      "vi": "Chúng ta đã nói về “Chim dẽ và con trai tranh nhau”,"
+    },
+    {
+      "start": 1095.73,
+      "end": 1098.89,
+      "en": "It reminds us to see the big picture in a conflict,",
+      "zh": "它提醒我们在冲突中要看清大局，",
+      "pinyin": "Tā tíxǐng wǒmen zài chōngtū zhōng yào kànqīng dàjú,",
+      "vi": "Nó nhắc chúng ta trong xung đột phải nhìn rõ cục diện lớn,"
+    },
+    {
+      "start": 1098.9,
+      "end": 1101.76,
+      "en": "and avoid hurting both sides while letting others profit.",
+      "zh": "避免两败俱伤让别人获利。",
+      "pinyin": "Bìmiǎn liǎngbàijùshāng ràng biérén huòlì.",
+      "vi": "tránh để cả hai cùng bị tổn hại và người khác hưởng lợi."
+    },
+    {
+      "start": 1101.77,
+      "end": 1104.06,
+      "en": "We also talked about “Plugging One's Ears While Stealing a Bell,”",
+      "zh": "我们还聊了《掩耳盗铃》，",
+      "pinyin": "Wǒmen hái liáo le “Yǎn'ěrdàolíng”,",
+      "vi": "Chúng ta còn nói về “Bịt tai trộm chuông”,"
+    },
+    {
+      "start": 1104.07,
+      "end": 1108.76,
+      "en": "It warns us not to deceive ourselves but to face reality bravely.",
+      "zh": "它警告我们不要自欺欺人，要勇敢面对现实。",
+      "pinyin": "Tā jǐnggào wǒmen bùyào zìqīqīrén, yào yǒnggǎn miànduì xiànshí.",
+      "vi": "Nó cảnh báo chúng ta đừng tự lừa dối mình, mà phải dũng cảm đối mặt với thực tế."
+    },
+    {
+      "start": 1108.77,
+      "end": 1112.83,
+      "en": "I hope this ancient wisdom can bring everyone some new ideas.",
+      "zh": "希望这些古老的智慧能给大家带来一些新的想法。",
+      "pinyin": "Xīwàng zhèxiē gǔlǎo de zhìhuì néng gěi dàjiā dàilái yīxiē xīn de xiǎngfǎ.",
+      "vi": "Hy vọng những trí tuệ cổ xưa này có thể mang đến cho mọi người một vài ý tưởng mới."
+    },
+    {
+      "start": 1112.83,
+      "end": 1114.29,
+      "en": "If you want to see today's",
+      "zh": "如果大家想看今天",
+      "pinyin": "Rúguǒ dàjiā xiǎng kàn jīntiān",
+      "vi": "Nếu mọi người muốn xem"
+    },
+    {
+      "start": 1114.3,
+      "end": 1118.29,
+      "en": "full transcript of this episode, you can check out our blog.",
+      "zh": "这期节目的完整文本，可以去我们的博客看看。",
+      "pinyin": "zhè qī jiémù de wánzhěng wénběn, kěyǐ qù wǒmen de bókè kànkan.",
+      "vi": "toàn văn của tập này, có thể đến blog của chúng tôi xem nhé."
+    },
+    {
+      "start": 1118.3,
+      "end": 1120.86,
+      "en": "You can search online for our blog",
+      "zh": "大家可以在网上搜索我们的博客",
+      "pinyin": "Dàjiā kěyǐ zài wǎngshàng sōusuǒ wǒmen de bókè",
+      "vi": "Mọi người có thể tìm kiếm blog của chúng tôi trên mạng"
+    },
+    {
+      "start": 1120.87,
+      "end": 1124.83,
+      "en": "by its name, “Daily Chinese Podcast,” and you'll find it.",
+      "zh": "名字，“每天中文播客”，就能找到了。",
+      "pinyin": "míngzi, “Měitiān Zhōngwén Bōkè”, jiù néng zhǎodào le.",
+      "vi": "với tên “每天中文播客” (Podcast tiếng Trung mỗi ngày) là có thể tìm thấy."
+    },
+    {
+      "start": 1124.83,
+      "end": 1125.35,
+      "en": "There",
+      "zh": "在那里",
+      "pinyin": "Zài nàlǐ",
+      "vi": "Ở đó"
+    },
+    {
+      "start": 1125.37,
+      "end": 1128.13,
+      "en": "you can find the transcript for every episode,",
+      "zh": "你可以找到每一期节目的文字稿，",
+      "pinyin": "nǐ kěyǐ zhǎodào měi yī qī jiémù de wénzìgǎo,",
+      "vi": "bạn có thể tìm thấy bản ghi chữ của mỗi tập,"
+    },
+    {
+      "start": 1128.13,
+      "end": 1130.32,
+      "en": "making it easy for you to review and study.",
+      "zh": "方便你复习和学习。",
+      "pinyin": "fāngbiàn nǐ fùxí hé xuéxí.",
+      "vi": "thuận tiện cho bạn ôn tập và học tập."
+    },
+    {
+      "start": 1130.33,
+      "end": 1131.85,
+      "en": "If you feel today's episode",
+      "zh": "如果你觉得今天的节目",
+      "pinyin": "Rúguǒ nǐ juéde jīntiān de jiémù",
+      "vi": "Nếu bạn thấy chương trình hôm nay"
+    },
+    {
+      "start": 1131.87,
+      "end": 1133.83,
+      "en": "is helpful for your Chinese learning,",
+      "zh": "对你的中文学习有帮助，",
+      "pinyin": "duì nǐ de Zhōngwén xuéxí yǒu bāngzhù,",
+      "vi": "có ích cho việc học tiếng Trung của bạn,"
+    },
+    {
+      "start": 1133.83,
+      "end": 1135.42,
+      "en": "I hope you can give us a like,",
+      "zh": "希望你能给我们点个赞，",
+      "pinyin": "xīwàng nǐ néng gěi wǒmen diǎn ge zàn,",
+      "vi": "hy vọng bạn có thể thích cho chúng tôi,"
+    },
+    {
+      "start": 1135.43,
+      "end": 1138.32,
+      "en": "subscribe to our channel, or share it with your friends.",
+      "zh": "订阅我们的频道，或者分享给你的朋友。",
+      "pinyin": "dìngyuè wǒmen de píndào, huòzhě fēnxiǎng gěi nǐ de péngyou.",
+      "vi": "đăng ký kênh của chúng tôi, hoặc chia sẻ cho bạn bè của bạn."
+    },
+    {
+      "start": 1138.33,
+      "end": 1141.92,
+      "en": "Your support is our greatest motivation to keep going.",
+      "zh": "你们的支持是我们继续做下去的最大动力。",
+      "pinyin": "Nǐmen de zhīchí shì wǒmen jìxù zuò xiàqù de zuìdà dònglì.",
+      "vi": "Sự ủng hộ của các bạn là động lực lớn nhất để chúng tôi tiếp tục làm."
+    },
+    {
+      "start": 1141.93,
+      "end": 1144.82,
+      "en": "Right! We'd also love to hear your thoughts.",
+      "zh": "对啦！我们还想听听你的想法。",
+      "pinyin": "Duì la! Wǒmen hái xiǎng tīngting nǐ de xiǎngfǎ.",
+      "vi": "Đúng rồi! Chúng tôi còn muốn nghe ý kiến của bạn."
+    },
+    {
+      "start": 1144.83,
+      "end": 1147.89,
+      "en": "Today we talked about three Chinese idiom stories,",
+      "zh": "今天我们聊了三个中国成语故事，",
+      "pinyin": "Jīntiān wǒmen liáo le sān ge Zhōngguó chéngyǔ gùshi,",
+      "vi": "Hôm nay chúng ta đã nói về ba câu chuyện thành ngữ Trung Quốc,"
+    },
+    {
+      "start": 1147.9,
+      "end": 1151.29,
+      "en": "So, in your country, are there similar stories?",
+      "zh": "那么，在你的国家，有没有类似的故事呢？",
+      "pinyin": "Nàme, zài nǐ de guójiā, yǒu méiyǒu lèisì de gùshi ne?",
+      "vi": "Vậy ở đất nước bạn, có câu chuyện nào tương tự không?"
+    },
+    {
+      "start": 1151.3,
+      "end": 1154.32,
+      "en": "Or have you ever had an experience like “plugging your ears while stealing a bell,”",
+      "zh": "或者，你有没有过“掩耳盗铃”那样，",
+      "pinyin": "Huòzhě, nǐ yǒu méiyǒu guò “Yǎn'ěrdàolíng” nà yàng,",
+      "vi": "Hoặc bạn đã từng có kiểu “bịt tai trộm chuông” như vậy,"
+    },
+    {
+      "start": 1154.33,
+      "end": 1156.62,
+      "en": "an amusing experience of fooling yourself?",
+      "zh": "自己骗自己的有趣经历？",
+      "pinyin": "zìjǐ piàn zìjǐ de yǒuqù jīnglì?",
+      "vi": "một trải nghiệm thú vị mà tự lừa dối bản thân chưa?"
+    },
+    {
+      "start": 1156.63,
+      "end": 1160.69,
+      "en": "Feel free to leave us a comment below and share your story!",
+      "zh": "欢迎在下面的评论区给我们留言，分享你的故事！",
+      "pinyin": "Huānyíng zài xiàmiàn de pínglùn qū gěi wǒmen liúyán, fēnxiǎng nǐ de gùshi!",
+      "vi": "Hoan nghênh để lại bình luận cho chúng tôi dưới khu bình luận, chia sẻ câu chuyện của bạn!"
+    },
+    {
+      "start": 1160.7,
+      "end": 1163.22,
+      "en": "We'd really love to see your shares.",
+      "zh": "我们非常想看到你们的分享。",
+      "pinyin": "Wǒmen fēicháng xiǎng kàndào nǐmen de fēnxiǎng.",
+      "vi": "Chúng tôi rất muốn thấy những chia sẻ của các bạn."
+    },
+    {
+      "start": 1163.23,
+      "end": 1166.15,
+      "en": "Yes, we will read every comment carefully.",
+      "zh": "是的，我们会认真阅读每一条留言。",
+      "pinyin": "Shì de, wǒmen huì rènzhēn yuèdú měi yī tiáo liúyán.",
+      "vi": "Đúng vậy, chúng tôi sẽ đọc kỹ từng bình luận."
+    },
+    {
+      "start": 1166.17,
+      "end": 1168.26,
+      "en": "Maybe the interesting questions you raise",
+      "zh": "说不定，你们提出的有趣问题",
+      "pinyin": "Shuōbudìng, nǐmen tíchū de yǒuqù wèntí",
+      "vi": "Biết đâu, những câu hỏi thú vị mà các bạn đặt ra"
+    },
+    {
+      "start": 1168.27,
+      "end": 1170.03,
+      "en": "or the wonderful stories you share,",
+      "zh": "或者分享的精彩故事，",
+      "pinyin": "huòzhě fēnxiǎng de jīngcǎi gùshi,",
+      "vi": "hoặc những câu chuyện hay mà các bạn chia sẻ,"
+    },
+    {
+      "start": 1170.03,
+      "end": 1172.52,
+      "en": "could become the theme of our next episode!",
+      "zh": "会成为我们下一期节目的主题哦！",
+      "pinyin": "huì chéngwéi wǒmen xià yī qī jiémù de zhǔtí o!",
+      "vi": "sẽ trở thành chủ đề của tập tiếp theo của chúng tôi đấy!"
+    },
+    {
+      "start": 1172.53,
+      "end": 1174.75,
+      "en": "Okay, that's all for today.",
+      "zh": "好的，那今天就到这里啦。",
+      "pinyin": "Hǎo de, nà jīntiān jiù dào zhèlǐ la.",
+      "vi": "Được rồi, hôm nay đến đây thôi nhé."
+    },
+    {
+      "start": 1174.77,
+      "end": 1176.23,
+      "en": "Thanks everyone for listening!",
+      "zh": "感谢大家的收听！",
+      "pinyin": "Gǎnxiè dàjiā de tīngshōu!",
+      "vi": "Cảm ơn mọi người đã lắng nghe!"
+    },
+    {
+      "start": 1176.23,
+      "end": 1178.3,
+      "en": "See you next episode! Bye!",
+      "zh": "我们下期再见！再见！",
+      "pinyin": "Wǒmen xià qī zàijiàn! Zàijiàn!",
+      "vi": "Hẹn gặp lại các bạn ở tập sau! Tạm biệt!"
+    }
+  ]
+}

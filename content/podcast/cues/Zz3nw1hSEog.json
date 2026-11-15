@@ -1,0 +1,2473 @@
+{
+  "id": "Zz3nw1hSEog",
+  "youtubeId": "Zz3nw1hSEog",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 1–3 | 7 Things I Wish I Knew Before Learning Chinese | 学中文前我希望知道的7件事",
+  "durationSec": 1223,
+  "cues": [
+    {
+      "start": 6.67,
+      "end": 9.3,
+      "en": "Li Ming, come quick and look at this photo.",
+      "zh": "李明，你快来看这张照片。",
+      "pinyin": "Lǐ Míng, nǐ kuài lái kàn zhè zhāng zhàopiàn.",
+      "vi": "Lý Minh, cậu mau đến xem bức ảnh này đi."
+    },
+    {
+      "start": 9.33,
+      "end": 10.73,
+      "en": "Let me see.",
+      "zh": "我看看。",
+      "pinyin": "Wǒ kànkan.",
+      "vi": "Để tôi xem nào."
+    },
+    {
+      "start": 10.77,
+      "end": 14.14,
+      "en": "(laughs) Who's this?",
+      "zh": "(笑)，这是谁？",
+      "pinyin": "(xiào), zhè shì shéi?",
+      "vi": "(Cười) Đây là ai vậy?"
+    },
+    {
+      "start": 14.17,
+      "end": 16.7,
+      "en": "This boy... is it you?",
+      "zh": "这个男孩子……是你吗？",
+      "pinyin": "Zhège nánháizi…… shì nǐ ma?",
+      "vi": "Cậu con trai này…… là cậu à?"
+    },
+    {
+      "start": 16.73,
+      "end": 22.26,
+      "en": "It's not me! This is a Vietnamese friend of mine; his name is Ruan Ming.",
+      "zh": "不是我！这是我的一个越南朋友，他叫阮明。",
+      "pinyin": "Bú shì wǒ! Zhè shì wǒ de yí gè Yuènán péngyou, tā jiào Ruǎn Míng.",
+      "vi": "Không phải tôi! Đây là một người bạn Việt Nam của tôi, cậu ấy tên là Nguyễn Minh."
+    },
+    {
+      "start": 22.3,
+      "end": 27.37,
+      "en": "Look, he's using an app to learn Chinese. He just started.",
+      "zh": "你看，他正在用一个App学中文。他刚刚开始学。",
+      "pinyin": "Nǐ kàn, tā zhèngzài yòng yí gè App xué Zhōngwén. Tā gānggāng kāishǐ xué.",
+      "vi": "Cậu xem, cậu ấy đang dùng một ứng dụng (App) để học tiếng Trung. Cậu ấy mới bắt đầu học thôi."
+    },
+    {
+      "start": 27.4,
+      "end": 29.53,
+      "en": "Oh! How's he doing?",
+      "zh": "哦！他学得怎么样？",
+      "pinyin": "Ó! Tā xué de zěnmeyàng?",
+      "vi": "Ồ! Cậu ấy học thế nào?"
+    },
+    {
+      "start": 29.57,
+      "end": 38.17,
+      "en": "He's very hardworking. But yesterday he asked me, he said, Wang Yu, learning Chinese is too hard; what should I do?",
+      "zh": "他很努力。但是他昨天问我，他说，王雨，学中文太难了，我应该做什么？",
+      "pinyin": "Tā hěn nǔlì. Dànshì tā zuótiān wèn wǒ, tā shuō, Wáng Yǔ, xué Zhōngwén tài nán le, wǒ yīnggāi zuò shénme?",
+      "vi": "Cậu ấy rất chăm chỉ. Nhưng hôm qua cậu ấy hỏi tôi, cậu ấy nói: Vương Vũ, học tiếng Trung khó quá, tôi nên làm gì?"
+    },
+    {
+      "start": 38.2,
+      "end": 42.27,
+      "en": "Looking at him, I felt like I was seeing myself from years ago.",
+      "zh": "我看着他，就像看到了很多年前的我。",
+      "pinyin": "Wǒ kànzhe tā, jiù xiàng kàndào le hěnduō nián qián de wǒ.",
+      "vi": "Tôi nhìn cậu ấy, cứ như nhìn thấy chính mình của nhiều năm trước."
+    },
+    {
+      "start": 42.3,
+      "end": 49.93,
+      "en": "Sigh, if only someone could have told me a few things when I first started learning Chinese.",
+      "zh": "唉，如果我刚开始学中文的时候，有人能告诉我一些事情，那该多好啊。",
+      "pinyin": "Āi, rúguǒ wǒ gāng kāishǐ xué Zhōngwén de shíhou, yǒu rén néng gàosu wǒ yìxiē shìqing, nà gāi duō hǎo a.",
+      "vi": "Ôi, nếu hồi tôi mới bắt đầu học tiếng Trung, có ai đó nói cho tôi biết vài điều thì tốt biết mấy."
+    },
+    {
+      "start": 49.97,
+      "end": 51.33,
+      "en": "I completely understand.",
+      "zh": "我完全理解。",
+      "pinyin": "Wǒ wánquán lǐjiě.",
+      "vi": "Tôi hoàn toàn hiểu."
+    },
+    {
+      "start": 51.33,
+      "end": 57.66,
+      "en": "Many people, when they start, feel Chinese is like a very high mountain and don't know how to climb it.",
+      "zh": "很多人开始的时候，都觉得中文像一座很高很高的山，不知道怎么爬。",
+      "pinyin": "Hěnduō rén kāishǐ de shíhou, dōu juéde Zhōngwén xiàng yí zuò hěn gāo hěn gāo de shān, bù zhīdào zěnme pá.",
+      "vi": "Nhiều người khi mới bắt đầu đều cảm thấy tiếng Trung giống như một ngọn núi rất cao rất cao, không biết leo thế nào."
+    },
+    {
+      "start": 57.7,
+      "end": 60,
+      "en": "Right! That's exactly the feeling.",
+      "zh": "对！就是这种感觉。",
+      "pinyin": "Duì! Jiù shì zhè zhǒng gǎnjué.",
+      "vi": "Đúng! Chính là cảm giác đó."
+    },
+    {
+      "start": 60.03,
+      "end": 63.4,
+      "en": "So, shall we talk about this today?",
+      "zh": "所以，我们今天就来聊聊这个吧？",
+      "pinyin": "Suǒyǐ, wǒmen jīntiān jiù lái liáoliao zhège ba?",
+      "vi": "Vậy hôm nay chúng ta cùng nói về chuyện này nhé?"
+    },
+    {
+      "start": 63.43,
+      "end": 66.06,
+      "en": "If we could go back in time,",
+      "zh": "如果我们能回到过去，",
+      "pinyin": "Rúguǒ wǒmen néng huídào guòqù,",
+      "vi": "Nếu chúng ta có thể quay về quá khứ,"
+    },
+    {
+      "start": 66.07,
+      "end": 72.54,
+      "en": "back to the day we were beginners in Chinese, which seven things would we tell ourselves?",
+      "zh": "回到我们自己还是中文初学者的那一天，我们会告诉自己哪七件事情？",
+      "pinyin": "huídào wǒmen zìjǐ hái shì Zhōngwén chūxuézhě de nà yì tiān, wǒmen huì gàosu zìjǐ nǎ qī jiàn shìqing?",
+      "vi": "quay về ngày mà chính chúng ta còn là người mới học tiếng Trung, chúng ta sẽ nói với mình bảy điều nào?"
+    },
+    {
+      "start": 72.57,
+      "end": 74.27,
+      "en": "That's a great idea.",
+      "zh": "这个主意非常好。",
+      "pinyin": "Zhège zhǔyi fēicháng hǎo.",
+      "vi": "Ý kiến này rất hay."
+    },
+    {
+      "start": 74.3,
+      "end": 79.4,
+      "en": "I think these seven things might help learners like your friend Ruan Ming,",
+      "zh": "我觉得这七件事，可能会帮助像你朋友阮明那样的学习者，",
+      "pinyin": "Wǒ juéde zhè qī jiàn shì, kěnéng huì bāngzhù xiàng nǐ péngyou Ruǎn Míng nà yàng de xuéxízhě,",
+      "vi": "Tôi nghĩ bảy điều này có thể giúp những người học giống như bạn của cậu, Nguyễn Minh,"
+    },
+    {
+      "start": 79.4,
+      "end": 83.53,
+      "en": "and make them feel that this mountain actually has a path.",
+      "zh": "让他们觉得，这座山，其实是有路可以走的。",
+      "pinyin": "ràng tāmen juéde, zhè zuò shān, qíshí shì yǒu lù kěyǐ zǒu de.",
+      "vi": "khiến họ cảm thấy rằng ngọn núi này thật ra có đường để đi."
+    },
+    {
+      "start": 83.57,
+      "end": 85.77,
+      "en": "Okay! Let's begin.",
+      "zh": "好！那我们开始。",
+      "pinyin": "Hǎo! Nà wǒmen kāishǐ.",
+      "vi": "Được! Vậy chúng ta bắt đầu."
+    },
+    {
+      "start": 85.8,
+      "end": 91.03,
+      "en": "Li Ming, you go first—what do you think is the most important first thing?",
+      "zh": "李明，你先说，你觉得第一件最重要的事情是什么？",
+      "pinyin": "Lǐ Míng, nǐ xiān shuō, nǐ juéde dì yī jiàn zuì zhòngyào de shìqing shì shénme?",
+      "vi": "Lý Minh, cậu nói trước đi, cậu nghĩ điều quan trọng nhất đầu tiên là gì?"
+    },
+    {
+      "start": 91.03,
+      "end": 95.2,
+      "en": "I think the first thing must be about tones.",
+      "zh": "我觉得，第一件事一定是关于声调的。",
+      "pinyin": "Wǒ juéde, dì yī jiàn shì yídìng shì guānyú shēngdiào de.",
+      "vi": "Tôi nghĩ điều đầu tiên chắc chắn là về thanh điệu."
+    },
+    {
+      "start": 95.23,
+      "end": 101.63,
+      "en": "I want to tell my past self: Li Ming, tones are the king of Chinese, not a little soldier.",
+      "zh": "我想告诉过去的我：李明，声调是中文的国王，不是一个小士兵。",
+      "pinyin": "Wǒ xiǎng gàosu guòqù de wǒ: Lǐ Míng, shēngdiào shì Zhōngwén de guówáng, bú shì yí gè xiǎo shìbīng.",
+      "vi": "Tôi muốn nói với bản thân trong quá khứ: Lý Minh, thanh điệu là vua của tiếng Trung, không phải một người lính nhỏ."
+    },
+    {
+      "start": 101.67,
+      "end": 104.57,
+      "en": "You absolutely must take it seriously.",
+      "zh": "你一定，一定要认真对待它。",
+      "pinyin": "Nǐ yídìng, yídìng yào rènzhēn duìdài tā.",
+      "vi": "Cậu nhất định, nhất định phải đối xử nghiêm túc với nó."
+    },
+    {
+      "start": 104.6,
+      "end": 107.17,
+      "en": "Oh my, you're so right!",
+      "zh": "天啊，你说的太对了！",
+      "pinyin": "Tiān a, nǐ shuō de tài duì le!",
+      "vi": "Trời ơi, cậu nói quá đúng!"
+    },
+    {
+      "start": 107.2,
+      "end": 109.77,
+      "en": "I have a story about tones.",
+      "zh": "我有一个关于声调的故事。",
+      "pinyin": "Wǒ yǒu yí gè guānyú shēngdiào de gùshi.",
+      "vi": "Tôi có một câu chuyện về thanh điệu."
+    },
+    {
+      "start": 109.8,
+      "end": 114.13,
+      "en": "When I first started learning Chinese, I wanted to go to a store to buy something.",
+      "zh": "我刚学中文的时候，我想去商店买东西。",
+      "pinyin": "Wǒ gāng xué Zhōngwén de shíhou, wǒ xiǎng qù shāngdiàn mǎi dōngxi.",
+      "vi": "Hồi tôi mới học tiếng Trung, tôi muốn đến cửa hàng mua đồ."
+    },
+    {
+      "start": 114.17,
+      "end": 115.87,
+      "en": "I wanted to buy a pen.",
+      "zh": "我想买一支笔。",
+      "pinyin": "Wǒ xiǎng mǎi yì zhī bǐ.",
+      "vi": "Tôi muốn mua một cây bút."
+    },
+    {
+      "start": 115.9,
+      "end": 118.47,
+      "en": "Pen, bǐ, third tone.",
+      "zh": "笔，bǐ，第三声。",
+      "pinyin": "bǐ, bǐ, dì sān shēng.",
+      "vi": "Bút, 'bǐ', thanh thứ ba."
+    },
+    {
+      "start": 118.5,
+      "end": 122.37,
+      "en": "Right. But the tone I used was wrong.",
+      "zh": "对。但是我说的声调不对。",
+      "pinyin": "Duì. Dànshì wǒ shuō de shēngdiào bú duì.",
+      "vi": "Đúng. Nhưng thanh điệu tôi nói không đúng."
+    },
+    {
+      "start": 122.4,
+      "end": 128.33,
+      "en": "I walked into the store and loudly asked the owner, 'Boss, may I ask, are you sick?'",
+      "zh": "我走进商店，很大声地问老板：“老板，请问，你有病吗？”",
+      "pinyin": "Wǒ zǒujìn shāngdiàn, hěn dàshēng de wèn lǎobǎn: “Lǎobǎn, qǐngwèn, nǐ yǒu bìng ma?”",
+      "vi": "Tôi bước vào cửa hàng, hỏi ông chủ rất to: “Ông chủ, cho hỏi, ông có bệnh à?”"
+    },
+    {
+      "start": 128.33,
+      "end": 132.13,
+      "en": "(laughs) You asked the owner if he was sick?",
+      "zh": "(笑)！你问老板有没有病？",
+      "pinyin": "(xiào)! Nǐ wèn lǎobǎn yǒu méiyǒu bìng?",
+      "vi": "(Cười)! Cậu hỏi ông chủ có bệnh không à?"
+    },
+    {
+      "start": 132.17,
+      "end": 133.74,
+      "en": "Sick, bìng, fourth tone.",
+      "zh": "bìng，第四声。",
+      "pinyin": "bìng, dì sì shēng.",
+      "vi": "Bệnh, 'bìng', thanh thứ tư."
+    },
+    {
+      "start": 133.77,
+      "end": 138.87,
+      "en": "Yes! The owner looked at me, and his face... was very strange.",
+      "zh": "是的！老板看着我，他的脸……很奇怪。",
+      "pinyin": "Shì de! Lǎobǎn kànzhe wǒ, tā de liǎn…… hěn qíguài.",
+      "vi": "Đúng vậy! Ông chủ nhìn tôi, mặt ông ấy…… rất kỳ lạ."
+    },
+    {
+      "start": 138.9,
+      "end": 142.83,
+      "en": "He was probably thinking, why is this little girl asking me this?",
+      "zh": "他可能在想，这个小姑娘为什么问我这个？",
+      "pinyin": "Tā kěnéng zài xiǎng, zhège xiǎo gūniang wèishénme wèn wǒ zhège?",
+      "vi": "Có lẽ ông ấy đang nghĩ, cô gái nhỏ này sao lại hỏi tôi điều này?"
+    },
+    {
+      "start": 142.87,
+      "end": 145.4,
+      "en": "At the time, I didn't know I had said it wrong.",
+      "zh": "我当时不知道我说错了。",
+      "pinyin": "Wǒ dāngshí bù zhīdào wǒ shuō cuò le.",
+      "vi": "Lúc đó tôi không biết mình nói sai."
+    },
+    {
+      "start": 145.4,
+      "end": 148.67,
+      "en": "I even said, 'I want to be sick; I want lots of sickness.'",
+      "zh": "我还说：“我要病，我要很多病。”",
+      "pinyin": "Wǒ hái shuō: “Wǒ yào bìng, wǒ yào hěn duō bìng.”",
+      "vi": "Tôi còn nói: “Tôi muốn bệnh, tôi muốn nhiều bệnh.”"
+    },
+    {
+      "start": 148.67,
+      "end": 153,
+      "en": "Oh my, Wang Yu. That's hilarious. What happened next?",
+      "zh": "天啊，王雨。这太搞笑了。后来怎么样了？",
+      "pinyin": "Tiān a, Wáng Yǔ. Zhè tài gǎoxiào le. Hòulái zěnmeyàng le?",
+      "vi": "Trời ơi, Vương Vũ. Buồn cười quá. Sau đó thế nào?"
+    },
+    {
+      "start": 153.03,
+      "end": 158.96,
+      "en": "Later, a person nearby—probably a student—laughed and told me:",
+      "zh": "后来，一个旁边的人，他可能是一个学生，他笑着告诉我说：",
+      "pinyin": "Hòulái, yí gè pángbiān de rén, tā kěnéng shì yí gè xuésheng, tā xiàozhe gàosu wǒ shuō:",
+      "vi": "Sau đó, một người bên cạnh, có lẽ là một học sinh, cười nói với tôi rằng:"
+    },
+    {
+      "start": 158.97,
+      "end": 163,
+      "en": "'Little sister, it's bǐ (pen), not bìng (sick).'",
+      "zh": "“小妹妹，是‘笔’，不是‘病’。”",
+      "pinyin": "“Xiǎo mèimei, shì ‘bǐ’, bú shì ‘bìng’.”",
+      "vi": "“Cô em, là ‘bút’ (bǐ), không phải ‘bệnh’ (bìng).”"
+    },
+    {
+      "start": 163,
+      "end": 165.33,
+      "en": "My face instantly turned red.",
+      "zh": "我的脸一下子就红了。",
+      "pinyin": "Wǒ de liǎn yíxiàzi jiù hóng le.",
+      "vi": "Mặt tôi đỏ bừng ngay lập tức."
+    },
+    {
+      "start": 165.37,
+      "end": 171.54,
+      "en": "From that day on, I knew that tones are really, really important.",
+      "zh": "从那天以后，我就知道了，声调真的，真的太重要了。",
+      "pinyin": "Cóng nà tiān yǐhòu, wǒ jiù zhīdào le, shēngdiào zhēnde, zhēnde tài zhòngyào le.",
+      "vi": "Từ sau ngày hôm đó, tôi đã biết rằng thanh điệu thật sự, thật sự quá quan trọng."
+    },
+    {
+      "start": 171.57,
+      "end": 176.6,
+      "en": "If you say a word with the wrong tone, the meaning becomes completely different.",
+      "zh": "你说一个词，声调不对，意思就完全不一样了。",
+      "pinyin": "Nǐ shuō yí gè cí, shēngdiào bú duì, yìsi jiù wánquán bù yíyàng le.",
+      "vi": "Cậu nói một từ, nếu thanh điệu không đúng thì nghĩa sẽ hoàn toàn khác."
+    },
+    {
+      "start": 176.63,
+      "end": 179.9,
+      "en": "Yes. Your story is a great example.",
+      "zh": "是的。你的故事是一个很好的例子。",
+      "pinyin": "Shì de. Nǐ de gùshi shì yí gè hěn hǎo de lìzi.",
+      "vi": "Đúng vậy. Câu chuyện của cậu là một ví dụ rất hay."
+    },
+    {
+      "start": 179.93,
+      "end": 183.03,
+      "en": "Many foreigners learning Chinese think tones aren't important,",
+      "zh": "很多外国人学中文，觉得声调不重要，",
+      "pinyin": "Hěnduō wàiguórén xué Zhōngwén, juéde shēngdiào bú zhòngyào,",
+      "vi": "Nhiều người nước ngoài học tiếng Trung cảm thấy thanh điệu không quan trọng,"
+    },
+    {
+      "start": 183.03,
+      "end": 189.4,
+      "en": "They spend a lot of time memorizing Chinese characters, but they forget that Chinese is a 'musical language.'",
+      "zh": "他们把很多时间用在记汉字上，但是他们忘了，中文是一个“音乐语言”。",
+      "pinyin": "tāmen bǎ hěnduō shíjiān yòng zài jì Hànzì shàng, dànshì tāmen wàng le, Zhōngwén shì yí gè “yīnyuè yǔyán”.",
+      "vi": "họ dành rất nhiều thời gian để nhớ chữ Hán, nhưng họ quên mất rằng tiếng Trung là một “ngôn ngữ âm nhạc”."
+    },
+    {
+      "start": 189.43,
+      "end": 192.8,
+      "en": "Musical language? That's an interesting way to put it.",
+      "zh": "音乐语言？这个说法很有意思。",
+      "pinyin": "Yīnyuè yǔyán? Zhège shuōfa hěn yǒu yìsi.",
+      "vi": "Ngôn ngữ âm nhạc? Cách nói này rất thú vị."
+    },
+    {
+      "start": 192.83,
+      "end": 197.83,
+      "en": "Right. You see, in English, changes in pitch express emotion.",
+      "zh": "对。你看，在英文里，声调的变化是表达感情。",
+      "pinyin": "Duì. Nǐ kàn, zài Yīngwén lǐ, shēngdiào de biànhuà shì biǎodá gǎnqíng.",
+      "vi": "Đúng. Cậu thấy đấy, trong tiếng Anh, sự thay đổi ngữ điệu là để biểu đạt cảm xúc."
+    },
+    {
+      "start": 197.83,
+      "end": 203.33,
+      "en": "For example, you can say 'Really?' happily or in surprise.",
+      "zh": "比如，“Really?” 你可以很开心地说，也可以很吃惊地说。",
+      "pinyin": "Bǐrú, “Really?” nǐ kěyǐ hěn kāixīn de shuō, yě kěyǐ hěn chījīng de shuō.",
+      "vi": "Ví dụ, “Really?” cậu có thể nói rất vui vẻ, cũng có thể nói rất ngạc nhiên."
+    },
+    {
+      "start": 203.37,
+      "end": 207.74,
+      "en": "But in Chinese, tones are part of the word.",
+      "zh": "但是在中文里，声调是词语的一部分。",
+      "pinyin": "Dànshì zài Zhōngwén lǐ, shēngdiào shì cíyǔ de yí bùfen.",
+      "vi": "Nhưng trong tiếng Trung, thanh điệu là một phần của từ ngữ."
+    },
+    {
+      "start": 207.77,
+      "end": 211.07,
+      "en": "It’s not clothing; it’s part of the body.",
+      "zh": "它不是衣服，而是身体的一部分。",
+      "pinyin": "Tā bú shì yīfu, ér shì shēntǐ de yī bùfen.",
+      "vi": "Nó không phải là quần áo, mà là một phần của cơ thể."
+    },
+    {
+      "start": 211.1,
+      "end": 214.73,
+      "en": "“Mā” (mom) and “mǎ” (horse) are two completely different things.",
+      "zh": "妈(mā)和马(mǎ)就是完全不同的两个东西。",
+      "pinyin": "Mā (mā) hé mǎ (mǎ) jiùshì wánquán bùtóng de liǎng ge dōngxi.",
+      "vi": "“Mā” (mẹ) và “mǎ” (ngựa) là hai thứ hoàn toàn khác nhau."
+    },
+    {
+      "start": 214.77,
+      "end": 217.67,
+      "en": "One is mom, the other is a pony.",
+      "zh": "一个是妈妈，一个是小马。",
+      "pinyin": "Yí ge shì māma, yí ge shì xiǎo mǎ.",
+      "vi": "Một cái là mẹ, một cái là ngựa con."
+    },
+    {
+      "start": 217.67,
+      "end": 221.43,
+      "en": "Right. So I want to say to all beginners:",
+      "zh": "是的。所以，我想对所有初学者说:",
+      "pinyin": "Shì de. Suǒyǐ, wǒ xiǎng duì suǒyǒu chūxuézhě shuō:",
+      "vi": "Đúng vậy. Vì thế, tôi muốn nói với tất cả người mới học rằng:"
+    },
+    {
+      "start": 221.43,
+      "end": 225.9,
+      "en": "Please study and practice the four tones seriously from day one.",
+      "zh": "请从第一天开始，就认真学习和练习四个声调。",
+      "pinyin": "Qǐng cóng dì yī tiān kāishǐ, jiù rènzhēn xuéxí hé liànxí sì ge shēngdiào.",
+      "vi": "Hãy bắt đầu từ ngày đầu tiên, học và luyện tập bốn thanh điệu một cách nghiêm túc."
+    },
+    {
+      "start": 225.93,
+      "end": 231.4,
+      "en": "First tone is flat, second rises, third dips, fourth falls.",
+      "zh": "一声平，二声扬，三声拐弯，四声降。",
+      "pinyin": "Yī shēng píng, èr shēng yáng, sān shēng guǎiwān, sì shēng jiàng.",
+      "vi": "Thanh một bằng, thanh hai lên, thanh ba uốn lượn, thanh bốn xuống."
+    },
+    {
+      "start": 231.43,
+      "end": 235.8,
+      "en": "Build this foundation well, just like laying a foundation when building a house.",
+      "zh": "把这个基础打好，就像盖房子打地基一样。",
+      "pinyin": "Bǎ zhège jīchǔ dǎ hǎo, jiù xiàng gài fángzi dǎ dìjī yíyàng.",
+      "vi": "Hãy xây nền tảng này thật vững, giống như đóng móng khi xây nhà."
+    },
+    {
+      "start": 235.83,
+      "end": 239,
+      "en": "Only when the foundation is good is the house above safe.",
+      "zh": "地基好了，上面的房子才安全。",
+      "pinyin": "Dìjī hǎo le, shàngmiàn de fángzi cái ānquán.",
+      "vi": "Móng tốt rồi, ngôi nhà phía trên mới an toàn."
+    },
+    {
+      "start": 239.03,
+      "end": 240.7,
+      "en": "Mm, well said!",
+      "zh": "嗯，说得好！",
+      "pinyin": "Ng, shuō de hǎo!",
+      "vi": "Ừ, nói hay lắm!"
+    },
+    {
+      "start": 240.73,
+      "end": 244.06,
+      "en": "First thing: take tones seriously.",
+      "zh": "第一件事: 认真对待声调。",
+      "pinyin": "Dì yī jiàn shì: rènzhēn duìdài shēngdiào.",
+      "vi": "Việc thứ nhất: nghiêm túc với thanh điệu."
+    },
+    {
+      "start": 244.1,
+      "end": 248.53,
+      "en": "Okay, so what’s the second thing? Wang Yu, what do you think?",
+      "zh": "好，那第二件事呢？王雨，你觉得是什么？",
+      "pinyin": "Hǎo, nà dì èr jiàn shì ne? Wáng Yǔ, nǐ juéde shì shénme?",
+      "vi": "Được, vậy việc thứ hai là gì? Vương Vũ, bạn nghĩ là gì?"
+    },
+    {
+      "start": 248.57,
+      "end": 252.87,
+      "en": "I think the second thing is about Chinese characters.",
+      "zh": "我觉得第二件事，是关于汉字的。",
+      "pinyin": "Wǒ juéde dì èr jiàn shì, shì guānyú hànzì de.",
+      "vi": "Tôi nghĩ việc thứ hai là về chữ Hán."
+    },
+    {
+      "start": 252.9,
+      "end": 257.9,
+      "en": "I want to tell my past self: Wang Yu, don’t be afraid of Chinese characters.",
+      "zh": "我想告诉以前的自己: 王雨，不要害怕汉字。",
+      "pinyin": "Wǒ xiǎng gàosu yǐqián de zìjǐ: Wáng Yǔ, búyào hàipà hànzì.",
+      "vi": "Tôi muốn nói với bản thân trước đây: Vương Vũ, đừng sợ chữ Hán."
+    },
+    {
+      "start": 257.93,
+      "end": 264.8,
+      "en": "Chinese characters aren’t separate pictures; they’re more like Lego blocks.",
+      "zh": "汉字不是一幅一幅独立的画，它更像是“乐高”积木。",
+      "pinyin": "Hànzì bú shì yì fú yì fú dúlì de huà, tā gèng xiàng shì “Lègāo” jīmù.",
+      "vi": "Chữ Hán không phải là từng bức tranh độc lập, nó giống những khối xếp hình Lego hơn."
+    },
+    {
+      "start": 264.83,
+      "end": 269.1,
+      "en": "Lego blocks? That’s a good metaphor. Can you elaborate?",
+      "zh": "乐高积木？这个比喻很好。展开说说？",
+      "pinyin": "Lègāo jīmù? Zhège bǐyù hěn hǎo. Zhǎnkāi shuōshuo?",
+      "vi": "Xếp hình Lego? Cách so sánh này hay đấy. Nói rõ hơn đi?"
+    },
+    {
+      "start": 269.13,
+      "end": 273.16,
+      "en": "When I first started learning Chinese characters, I thought they were too hard.",
+      "zh": "我刚开始学汉字的时候，我觉得太难了。",
+      "pinyin": "Wǒ gāng kāishǐ xué hànzì de shíhou, wǒ juéde tài nán le.",
+      "vi": "Khi tôi mới bắt đầu học chữ Hán, tôi thấy nó quá khó."
+    },
+    {
+      "start": 273.2,
+      "end": 280.9,
+      "en": "Look, “我” is one character, “你” is one character, and “爱” is another character.",
+      "zh": "你看，“我”是一个汉字，“你”是一个汉字，“爱”是另一个汉字。",
+      "pinyin": "Nǐ kàn, “wǒ” shì yí ge hànzì, “nǐ” shì yí ge hànzì, “ài” shì lìng yí ge hànzì.",
+      "vi": "Bạn xem, “我” là một chữ Hán, “你” là một chữ Hán, “爱” lại là một chữ Hán khác."
+    },
+    {
+      "start": 280.93,
+      "end": 286.8,
+      "en": "I thought I had to memorize thousands of completely different pictures. My head was huge.",
+      "zh": "我觉得我要记住几千张完全不同的画。我的头很大。",
+      "pinyin": "Wǒ juéde wǒ yào jìzhù jǐ qiān zhāng wánquán bùtóng de huà. Wǒ de tóu hěn dà.",
+      "vi": "Tôi nghĩ mình phải nhớ mấy nghìn bức tranh hoàn toàn khác nhau. Đầu tôi to lắm."
+    },
+    {
+      "start": 286.83,
+      "end": 292.93,
+      "en": "I get it. Many students have this problem. They feel every character is new and has no pattern.",
+      "zh": "我懂。很多学生都有这个问题。他们觉得每个汉字都是新的，没有规律。",
+      "pinyin": "Wǒ dǒng. Hěn duō xuéshēng dōu yǒu zhège wèntí. Tāmen juéde měi ge hànzì dōu shì xīn de, méiyǒu guīlǜ.",
+      "vi": "Tôi hiểu. Nhiều học sinh đều gặp vấn đề này. Họ thấy mỗi chữ Hán đều mới, không có quy luật."
+    },
+    {
+      "start": 292.97,
+      "end": 299,
+      "en": "Right! But later, my teacher told me that Chinese characters have “parts.”",
+      "zh": "对！但是后来，我的老师告诉我，汉字是有“零件”的。",
+      "pinyin": "Duì! Dànshì hòulái, wǒ de lǎoshī gàosu wǒ, hànzì shì yǒu “língjiàn” de.",
+      "vi": "Đúng! Nhưng sau đó, giáo viên của tôi nói với tôi rằng chữ Hán có “bộ phận”."
+    },
+    {
+      "start": 299.03,
+      "end": 303.76,
+      "en": "These parts are called “radicals.”",
+      "zh": "这些零件，我们叫它们“偏旁部首”。",
+      "pinyin": "Zhèxiē língjiàn, wǒmen jiào tāmen “piānpáng bùshǒu”.",
+      "vi": "Những bộ phận này, chúng ta gọi là “bộ thủ”."
+    },
+    {
+      "start": 303.8,
+      "end": 310.2,
+      "en": "For example, look at “河,” “海,” and “湖”—what do they have in common?",
+      "zh": "比如，你看“河”、“海”、“湖”，它们都有什么共同点？",
+      "pinyin": "Bǐrú, nǐ kàn “hé”, “hǎi”, “hú”, tāmen dōu yǒu shénme gòngtóngdiǎn?",
+      "vi": "Ví dụ, bạn xem “河”, “海”, “湖”, chúng có điểm chung gì?"
+    },
+    {
+      "start": 310.23,
+      "end": 315.46,
+      "en": "They all have the “three-dot water” radical. This “氵.”",
+      "zh": "它们都有“三点水”旁。这个“氵”。",
+      "pinyin": "Tāmen dōu yǒu “sān diǎn shuǐ” páng. Zhège “shuǐ”.",
+      "vi": "Chúng đều có bộ “ba chấm nước”. Đây là “氵”."
+    },
+    {
+      "start": 315.5,
+      "end": 321.67,
+      "en": "Yes! The teacher said this “氵” is related to water.",
+      "zh": "是的！老师说，这个“氵”就和水有关系。",
+      "pinyin": "Shì de! Lǎoshī shuō, zhège “shuǐ” jiù hé shuǐ yǒu guānxi.",
+      "vi": "Đúng vậy! Giáo viên nói bộ “氵” này có liên quan đến nước."
+    },
+    {
+      "start": 321.7,
+      "end": 328.37,
+      "en": "I suddenly understood! Oh, so Chinese characters aren’t drawn randomly. They have logic.",
+      "zh": "我突然明白了！哦，原来汉字不是随便画的。它们是有逻辑的。",
+      "pinyin": "Wǒ tūrán míngbai le! Ó, yuánlái hànzì bú shì suíbiàn huà de. Tāmen shì yǒu luójí de.",
+      "vi": "Tôi bỗng hiểu ra! Ồ, thì ra chữ Hán không phải được vẽ tùy tiện. Chúng có logic."
+    },
+    {
+      "start": 328.4,
+      "end": 335.47,
+      "en": "Another example: “你,” “他,” and “她” all have a “person” part.",
+      "zh": "再比如，“你”、“他”、“她”，它们都有一个“人”的零件。",
+      "pinyin": "Zài bǐrú, “nǐ”, “tā”, “tā”, tāmen dōu yǒu yí ge “rén” de língjiàn.",
+      "vi": "Ví dụ khác, “你”, “他”, “她”, chúng đều có một bộ phận là “người”."
+    },
+    {
+      "start": 335.5,
+      "end": 343.87,
+      "en": "One has the “single-person” radical, the other has the “woman” radical. “你” and “他” contain “亻,” representing “person.”",
+      "zh": "一个是“单人旁”，一个是“女字旁”。“你”和“他”里面有“亻”，代表“人”。",
+      "pinyin": "Yí ge shì “dānrénpáng”, yí ge shì “nǚzìpáng”. “Nǐ” hé “tā” lǐmiàn yǒu “dānrénpáng”, dàibiǎo “rén”.",
+      "vi": "Một cái là bộ “nhân đứng”, một cái là bộ “nữ”. Trong “你” và “他” có “亻”, đại diện cho “người”."
+    },
+    {
+      "start": 343.9,
+      "end": 346.63,
+      "en": "“她” contains “女,” representing female.",
+      "zh": "“她”里面有“女”，代表女性。",
+      "pinyin": "“Tā” lǐmiàn yǒu “nǚ”, dàibiǎo nǚxìng.",
+      "vi": "Trong “她” có “女”, đại diện cho nữ giới."
+    },
+    {
+      "start": 346.67,
+      "end": 347.94,
+      "en": "Now that makes it much easier to remember.",
+      "zh": "这一下就很好记了。",
+      "pinyin": "Zhè yíxià jiù hěn hǎo jì le.",
+      "vi": "Như vậy là dễ nhớ hơn nhiều rồi."
+    },
+    {
+      "start": 347.97,
+      "end": 354.57,
+      "en": "Exactly! When I discovered this secret, I felt Chinese characters suddenly became friendly.",
+      "zh": "就是这个意思！当我发现这个秘密的时候，我觉得汉字一下子变得友好了。",
+      "pinyin": "Jiù shì zhège yìsi! Dāng wǒ fāxiàn zhège mìmì de shíhou, wǒ juéde hànzì yíxiàzi biàn de yǒuhǎo le.",
+      "vi": "Đúng là ý đó! Khi tôi phát hiện ra bí mật này, tôi thấy chữ Hán bỗng trở nên thân thiện."
+    },
+    {
+      "start": 354.6,
+      "end": 361.73,
+      "en": "They’re no longer strange pictures but are made up of basic “Lego” blocks.",
+      "zh": "它们不再是奇怪的画，而是由一些基本的“乐高”积木组成的。",
+      "pinyin": "Tāmen bú zài shì qíguài de huà, ér shì yóu yìxiē jīběn de “Lègāo” jīmù zǔchéng de.",
+      "vi": "Chúng không còn là những bức tranh kỳ lạ, mà được tạo thành từ một số khối Lego cơ bản."
+    },
+    {
+      "start": 361.77,
+      "end": 366.67,
+      "en": "The more “blocks” I know, the more Chinese characters I can recognize.",
+      "zh": "我认识的“积木”越多，我能认识的汉字就越多。",
+      "pinyin": "Wǒ rènshi de “jīmù” yuè duō, wǒ néng rènshi de hànzì jiù yuè duō.",
+      "vi": "Tôi biết càng nhiều “khối Lego”, tôi càng có thể nhận biết nhiều chữ Hán."
+    },
+    {
+      "start": 366.7,
+      "end": 372.6,
+      "en": "What you’re saying is actually a very important feature of Chinese characters, called “phono-semantic characters.”",
+      "zh": "你说的这个，其实是汉字非常重要的一个特点，叫“形声字”。",
+      "pinyin": "Nǐ shuō de zhège, qíshí shì hànzì fēicháng zhòngyào de yí ge tèdiǎn, jiào “xíngshēngzì”.",
+      "vi": "Điều bạn nói thực ra là một đặc điểm rất quan trọng của chữ Hán, gọi là “chữ hình thanh”."
+    },
+    {
+      "start": 372.63,
+      "end": 376.96,
+      "en": "One part tells you its meaning, and the other tells you its sound.",
+      "zh": "一个部分告诉你它的意思，另一个部分告诉你它的声音。",
+      "pinyin": "Yí ge bùfen gàosu nǐ tā de yìsi, lìng yí ge bùfen gàosu nǐ tā de shēngyīn.",
+      "vi": "Một phần cho bạn biết ý nghĩa của nó, phần còn lại cho bạn biết âm đọc."
+    },
+    {
+      "start": 377,
+      "end": 384.97,
+      "en": "For example, in “妈,” the woman radical tells you it’s related to females, and 马 (mǎ) tells you its pronunciation is very close to mǎ.",
+      "zh": "比如“妈”，女字旁告诉你和女性有关，马(mǎ)告诉你它的发音和mǎ 很像。",
+      "pinyin": "Bǐrú “mā”, nǚzìpáng gàosu nǐ hé nǚxìng yǒuguān, mǎ (mǎ) gàosu nǐ tā de fāyīn hé mǎ hěn xiàng.",
+      "vi": "Ví dụ “妈”, bộ nữ cho bạn biết nó liên quan đến nữ giới, còn “mǎ” (ngựa) cho bạn biết cách phát âm của nó rất giống “mǎ”."
+    },
+    {
+      "start": 385,
+      "end": 393.2,
+      "en": "Yes, yes, yes! There’s another character my teacher told us about that we all thought was beautiful. It’s “好.”",
+      "zh": "对对对！还有一个字，我的老师告诉我们，我们都觉得很美。就是“好”。",
+      "pinyin": "Duì duì duì! Háiyǒu yí ge zì, wǒ de lǎoshī gàosu wǒmen, wǒmen dōu juéde hěn měi. Jiù shì “hǎo”.",
+      "vi": "Đúng đúng đúng! Còn một chữ nữa, giáo viên nói với chúng tôi, chúng tôi đều thấy rất đẹp. Đó là “好”."
+    },
+    {
+      "start": 393.23,
+      "end": 394.96,
+      "en": "Ah, the character “好.”",
+      "zh": "啊，“好”字。",
+      "pinyin": "À, “hǎo” zì.",
+      "vi": "À, chữ “好”."
+    },
+    {
+      "start": 395,
+      "end": 399.27,
+      "en": "Yes. One “woman” and one “child.”",
+      "zh": "是的。一个“女”和一个“子”。",
+      "pinyin": "Shì de. Yí ge “nǚ” hé yí ge “zǐ”.",
+      "vi": "Đúng vậy. Một chữ “nữ” và một chữ “tử”."
+    },
+    {
+      "start": 399.3,
+      "end": 403.83,
+      "en": "The teacher said that in ancient China, people felt that in a family,",
+      "zh": "老师说，在中国古代，人们觉得一个家庭里，",
+      "pinyin": "Lǎoshī shuō, zài Zhōngguó gǔdài, rénmen juéde yí ge jiātíng lǐ,",
+      "vi": "Giáo viên nói, ở Trung Quốc cổ đại, người ta cho rằng trong một gia đình,"
+    },
+    {
+      "start": 403.83,
+      "end": 408.43,
+      "en": "having a woman and children was a very “good” thing.",
+      "zh": "有女人， 有孩子，就是一件非常“好”的事情。",
+      "pinyin": "yǒu nǚrén, yǒu háizi, jiù shì yí jiàn fēicháng “hǎo” de shìqing.",
+      "vi": "có phụ nữ, có trẻ con, thì đó là một điều rất “tốt đẹp”."
+    },
+    {
+      "start": 408.47,
+      "end": 410.43,
+      "en": "That’s a very warm explanation.",
+      "zh": "这是一个很温暖的解释。",
+      "pinyin": "Zhè shì yí ge hěn wēnnuǎn de jiěshì.",
+      "vi": "Đây là một cách giải thích rất ấm áp."
+    },
+    {
+      "start": 410.43,
+      "end": 413.76,
+      "en": "It helps us understand and remember this character.",
+      "zh": "它帮助我们理解和记住这个字。",
+      "pinyin": "Tā bāngzhù wǒmen lǐjiě hé jìzhù zhège zì.",
+      "vi": "Nó giúp chúng ta hiểu và nhớ chữ này."
+    },
+    {
+      "start": 413.8,
+      "end": 418.8,
+      "en": "So the second thing is to understand the basic components of Chinese characters,",
+      "zh": "所以，第二件事就是，理解汉字的基本组成部分，",
+      "pinyin": "Suǒyǐ, dì èr jiàn shì jiù shì, lǐjiě hànzì de jīběn zǔchéng bùfen,",
+      "vi": "Vì vậy, việc thứ hai là hiểu các bộ phận cơ bản cấu thành chữ Hán,"
+    },
+    {
+      "start": 418.8,
+      "end": 423.27,
+      "en": "and learn them like playing with Lego instead of rote memorization.",
+      "zh": "像玩乐高一样去学习它们，而不是死记硬背。",
+      "pinyin": "xiàng wán Lègāo yíyàng qù xuéxí tāmen, ér bú shì sǐjì yìngbèi.",
+      "vi": "học chúng giống như chơi Lego, chứ không phải học vẹt."
+    },
+    {
+      "start": 423.3,
+      "end": 424.37,
+      "en": "Exactly!",
+      "zh": "没错！",
+      "pinyin": "Méicuò!",
+      "vi": "Đúng vậy!"
+    },
+    {
+      "start": 424.4,
+      "end": 426.37,
+      "en": "Okay, the third thing.",
+      "zh": "好了，第三件事。",
+      "pinyin": "Hǎo le, dì sān jiàn shì.",
+      "vi": "Được rồi, việc thứ ba."
+    },
+    {
+      "start": 426.37,
+      "end": 429.2,
+      "en": "I think this one is also very important.",
+      "zh": "我觉得这件事也很重要。",
+      "pinyin": "Wǒ juéde zhè jiàn shì yě hěn zhòngyào.",
+      "vi": "Tôi nghĩ việc này cũng rất quan trọng."
+    },
+    {
+      "start": 429.2,
+      "end": 431.2,
+      "en": "I want to tell my past self:",
+      "zh": "我想告诉以前的自己:",
+      "pinyin": "Wǒ xiǎng gàosu yǐqián de zìjǐ:",
+      "vi": "Tôi muốn nói với bản thân trước đây:"
+    },
+    {
+      "start": 431.2,
+      "end": 437.03,
+      "en": "Wang Yu, your mouth has to start working from the first day you learn Chinese.",
+      "zh": "王雨，你的嘴巴，从你学中文的第一天，就要开始工作。",
+      "pinyin": "Wáng Yǔ, nǐ de zuǐba, cóng nǐ xué Zhōngwén de dì yī tiān, jiù yào kāishǐ gōngzuò.",
+      "vi": "Vương Vũ, miệng của bạn, từ ngày đầu học tiếng Trung, phải bắt đầu làm việc."
+    },
+    {
+      "start": 437.03,
+      "end": 438.3,
+      "en": "Don’t be afraid of speaking incorrectly.",
+      "zh": "不要害怕说错。",
+      "pinyin": "Búyào hàipà shuō cuò.",
+      "vi": "Đừng sợ nói sai."
+    },
+    {
+      "start": 438.33,
+      "end": 440.63,
+      "en": "I completely agree with this point.",
+      "zh": "这一点我非常同意。",
+      "pinyin": "Zhè yì diǎn wǒ fēicháng tóngyì.",
+      "vi": "Điểm này tôi hoàn toàn đồng ý."
+    },
+    {
+      "start": 440.63,
+      "end": 444.03,
+      "en": "Many learners, especially the rather shy ones,",
+      "zh": "很多学习者，特别是比较害羞的，",
+      "pinyin": "Hěn duō xuéxízhě, tèbié shì bǐjiào hàixiū de,",
+      "vi": "Nhiều người học, đặc biệt là những người khá nhút nhát,"
+    },
+    {
+      "start": 444.03,
+      "end": 450.56,
+      "en": "They spend a lot of time reading and writing, but they don't open their mouths to speak.",
+      "zh": "他们花很多时间在看书，在写字，但是他们不开口说。",
+      "pinyin": "Tāmen huā hěn duō shíjiān zài kàn shū, zài xiě zì, dànshì tāmen bù kāikǒu shuō.",
+      "vi": "Họ dành nhiều thời gian để đọc sách, viết chữ, nhưng họ không mở miệng nói."
+    },
+    {
+      "start": 450.6,
+      "end": 451.77,
+      "en": "That's me.",
+      "zh": "我就是。",
+      "pinyin": "Wǒ jiù shì.",
+      "vi": "Chính tôi đây."
+    },
+    {
+      "start": 451.77,
+      "end": 457.54,
+      "en": "When I first started learning Chinese, I wrote the two characters “nǐ hǎo” a hundred times.",
+      "zh": "我一开始学中文，我把“你好”这两个字写了一百遍。",
+      "pinyin": "Wǒ yì kāishǐ xué Zhōngwén, wǒ bǎ “nǐ hǎo” zhè liǎng ge zì xiě le yì bǎi biàn.",
+      "vi": "Khi mới bắt đầu học tiếng Trung, tôi đã viết hai chữ “你好” một trăm lần."
+    },
+    {
+      "start": 457.57,
+      "end": 462.17,
+      "en": "But I didn't dare say “hello” to a real Chinese person.",
+      "zh": "但是我不敢对一个真正的中国人说“你好”。",
+      "pinyin": "Dànshì wǒ bù gǎn duì yí ge zhēnzhèng de Zhōngguó rén shuō “nǐ hǎo”.",
+      "vi": "Nhưng tôi không dám nói “你好” với một người Trung Quốc thật sự."
+    },
+    {
+      "start": 462.17,
+      "end": 466.17,
+      "en": "I was afraid my tones were wrong, and I was afraid they would laugh at me.",
+      "zh": "我害怕我的声调不对，我害怕他们笑我。",
+      "pinyin": "Wǒ hàipà wǒ de shēngdiào bú duì, wǒ hàipà tāmen xiào wǒ.",
+      "vi": "Tôi sợ thanh điệu của mình sai, tôi sợ họ cười tôi."
+    },
+    {
+      "start": 466.2,
+      "end": 468.33,
+      "en": "So how did you change later?",
+      "zh": "那你后来是怎么改变的？",
+      "pinyin": "Nà nǐ hòulái shì zěnme gǎibiàn de?",
+      "vi": "Vậy sau đó bạn đã thay đổi như thế nào?"
+    },
+    {
+      "start": 468.37,
+      "end": 471.63,
+      "en": "Once, I got lost in Beijing.",
+      "zh": "有一次，我在北京迷路了。",
+      "pinyin": "Yǒu yí cì, wǒ zài Běijīng mílù le.",
+      "vi": "Có một lần, tôi bị lạc ở Bắc Kinh."
+    },
+    {
+      "start": 471.63,
+      "end": 475.46,
+      "en": "My phone was out of battery. I was very anxious.",
+      "zh": "我的手机没有电了。我非常着急。",
+      "pinyin": "Wǒ de shǒujī méiyǒu diàn le. Wǒ fēicháng zháojí.",
+      "vi": "Điện thoại tôi hết pin. Tôi rất lo lắng."
+    },
+    {
+      "start": 475.5,
+      "end": 478.53,
+      "en": "At that point, I had no choice but to ask for directions.",
+      "zh": "那时候，我不得不开口问路。",
+      "pinyin": "Nà shíhou, wǒ bùdébù kāikǒu wèn lù.",
+      "vi": "Lúc đó, tôi buộc phải mở miệng hỏi đường."
+    },
+    {
+      "start": 478.53,
+      "end": 482.8,
+      "en": "I found a police officer, and I was extremely nervous,",
+      "zh": "我找到了一个警察叔叔，我非常非常紧张，",
+      "pinyin": "Wǒ zhǎo dào le yí ge jǐngchá shūshu, wǒ fēicháng fēicháng jǐnzhāng,",
+      "vi": "Tôi tìm được một chú cảnh sát, tôi vô cùng vô cùng căng thẳng,"
+    },
+    {
+      "start": 482.8,
+      "end": 485.93,
+      "en": "Using every Chinese word I could think of,",
+      "zh": "我用我能想到的所有中文词，",
+      "pinyin": "Wǒ yòng wǒ néng xiǎng dào de suǒyǒu Zhōngwén cí,",
+      "vi": "Tôi dùng tất cả những từ tiếng Trung mà tôi có thể nghĩ ra,"
+    },
+    {
+      "start": 485.93,
+      "end": 494,
+      "en": "I slowly asked him: “Hello… excuse me… how do I get to Wangfujing?”",
+      "zh": "慢慢地问他: “你好……请问……王府井……怎么走？”",
+      "pinyin": "Mànman de wèn tā: “nǐ hǎo…… qǐngwèn…… Wángfǔjǐng…… zěnme zǒu?”",
+      "vi": "Chậm rãi hỏi anh ấy: “Chào anh…… xin hỏi…… Vương Phủ Tỉnh…… đi thế nào ạ?”"
+    },
+    {
+      "start": 494,
+      "end": 495.2,
+      "en": "You spoke!",
+      "zh": "你说了！",
+      "pinyin": "Nǐ shuō le!",
+      "vi": "Bạn đã nói rồi!"
+    },
+    {
+      "start": 495.23,
+      "end": 498.76,
+      "en": "I did speak! That police officer was very friendly.",
+      "zh": "我说了！那个警察叔叔非常友好。",
+      "pinyin": "Wǒ shuō le! Nà ge jǐngchá shūshu fēicháng yǒuhǎo.",
+      "vi": "Tôi đã nói rồi! Chú cảnh sát đó rất thân thiện."
+    },
+    {
+      "start": 498.77,
+      "end": 502.27,
+      "en": "He understood! He smiled and showed me the way.",
+      "zh": "他听懂了！他笑着给我指了路。",
+      "pinyin": "Tā tīng dǒng le! Tā xiào zhe gěi wǒ zhǐ le lù.",
+      "vi": "Anh ấy hiểu rồi! Anh ấy cười và chỉ đường cho tôi."
+    },
+    {
+      "start": 502.3,
+      "end": 507.6,
+      "en": "Although I spoke slowly and my grammar may have been wrong, he understood.",
+      "zh": "虽然我当时说得很慢，语法可能也不对，但是他听懂了。",
+      "pinyin": "Suīrán wǒ dāngshí shuō de hěn màn, yǔfǎ kěnéng yě bú duì, dànshì tā tīng dǒng le.",
+      "vi": "Dù lúc đó tôi nói rất chậm, ngữ pháp có thể cũng không đúng, nhưng anh ấy hiểu được."
+    },
+    {
+      "start": 507.63,
+      "end": 509.66,
+      "en": "At that moment, I was so happy.",
+      "zh": "那一刻，我太开心了。",
+      "pinyin": "Nà yí kè, wǒ tài kāixīn le.",
+      "vi": "Khoảnh khắc đó, tôi vui quá."
+    },
+    {
+      "start": 509.67,
+      "end": 514.2,
+      "en": "That happy feeling was even better than scoring 100 on an exam.",
+      "zh": "那种开心的感觉，比我在考试里考一百分还要开心。",
+      "pinyin": "Nà zhǒng kāixīn de gǎnjué, bǐ wǒ zài kǎoshì lǐ kǎo yì bǎi fēn hái yào kāixīn.",
+      "vi": "Cảm giác vui đó còn vui hơn cả việc tôi đạt điểm tuyệt đối trong kỳ thi."
+    },
+    {
+      "start": 514.23,
+      "end": 515.76,
+      "en": "I completely understand.",
+      "zh": "我完全理解。",
+      "pinyin": "Wǒ wánquán lǐjiě.",
+      "vi": "Tôi hoàn toàn hiểu."
+    },
+    {
+      "start": 515.77,
+      "end": 519.84,
+      "en": "Because the ultimate purpose of language is communication.",
+      "zh": "因为语言的最终目的，就是交流。",
+      "pinyin": "Yīnwèi yǔyán de zuìzhōng mùdì, jiùshì jiāoliú.",
+      "vi": "Vì mục đích cuối cùng của ngôn ngữ chính là giao tiếp."
+    },
+    {
+      "start": 519.87,
+      "end": 523.87,
+      "en": "If you say it and others understand, you've succeeded.",
+      "zh": "你说出来了，别人听懂了，你就成功了。",
+      "pinyin": "Nǐ shuō chūlái le, biérén tīng dǒng le, nǐ jiù chénggōng le.",
+      "vi": "Bạn nói ra, người khác hiểu, thì bạn đã thành công rồi."
+    },
+    {
+      "start": 523.87,
+      "end": 526.1,
+      "en": "This is a huge encouragement.",
+      "zh": "这是一个巨大的鼓励。",
+      "pinyin": "Zhè shì yí ge jùdà de gǔlì.",
+      "vi": "Đây là một sự khích lệ to lớn."
+    },
+    {
+      "start": 526.13,
+      "end": 527.03,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 527.03,
+      "end": 534.23,
+      "en": "So I want to tell everyone: the first word you learn, like “hello,” you should use it right away.",
+      "zh": "所以我想告诉大家，你学到的第一个词，比如“你好”，你就应该马上用它。",
+      "pinyin": "Suǒyǐ wǒ xiǎng gàosu dàjiā, nǐ xuédào de dì yī ge cí, bǐrú “nǐ hǎo”, nǐ jiù yīnggāi mǎshàng yòng tā.",
+      "vi": "Vì vậy tôi muốn nói với mọi người rằng, từ đầu tiên bạn học được, ví dụ “你好”, bạn nên dùng nó ngay lập tức."
+    },
+    {
+      "start": 534.27,
+      "end": 538.53,
+      "en": "Walk into a Chinese supermarket and say “hello” to the staff.",
+      "zh": "你走进一家中国超市，对服务员说“你好”。",
+      "pinyin": "Nǐ zǒu jìn yì jiā Zhōngguó chāoshì, duì fúwùyuán shuō “nǐ hǎo”.",
+      "vi": "Bạn bước vào một siêu thị Trung Quốc, nói “你好” với nhân viên."
+    },
+    {
+      "start": 538.53,
+      "end": 540.3,
+      "en": "After buying something, say “thank you.”",
+      "zh": "你买完东西，说“谢谢”。",
+      "pinyin": "Nǐ mǎi wán dōngxi, shuō “xièxie”.",
+      "vi": "Mua xong đồ, bạn nói “cảm ơn”."
+    },
+    {
+      "start": 540.33,
+      "end": 541.23,
+      "en": "Thank you.",
+      "zh": "谢谢。",
+      "pinyin": "Xièxie.",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 541.27,
+      "end": 545.87,
+      "en": "You don't need to wait until you speak as perfectly as a Chinese person to start speaking.",
+      "zh": "你不需要等到你说得像中国人一样完美了才开口。",
+      "pinyin": "Nǐ bù xūyào děng dào nǐ shuō de xiàng Zhōngguó rén yíyàng wánměi le cái kāikǒu.",
+      "vi": "Bạn không cần đợi đến khi nói tiếng Trung hoàn hảo như người Trung Quốc mới mở miệng."
+    },
+    {
+      "start": 545.9,
+      "end": 550.03,
+      "en": "Right. Speaking out loud is the best practice.",
+      "zh": "说得对。开口说是最好的练习。",
+      "pinyin": "Shuō de duì. Kāikǒu shuō shì zuì hǎo de liànxí.",
+      "vi": "Nói đúng. Mở miệng nói là cách luyện tập tốt nhất."
+    },
+    {
+      "start": 550.07,
+      "end": 556.54,
+      "en": "If you say it wrong, it's okay; Chinese people are usually friendly and will help you.",
+      "zh": "你说错了，没关系，中国人通常都很友好，他们会帮助你。",
+      "pinyin": "Nǐ shuō cuò le, méi guānxi, Zhōngguó rén tōngcháng dōu hěn yǒuhǎo, tāmen huì bāngzhù nǐ.",
+      "vi": "Bạn nói sai cũng không sao, người Trung Quốc thường rất thân thiện, họ sẽ giúp bạn."
+    },
+    {
+      "start": 556.57,
+      "end": 563.67,
+      "en": "Say one word today and one sentence tomorrow; gradually, you'll speak better and better.",
+      "zh": "你今天说一个词，明天说一个句子，慢慢地，你就会说得越来越好。",
+      "pinyin": "Nǐ jīntiān shuō yí ge cí, míngtiān shuō yí ge jùzi, mànman de, nǐ jiù huì shuō de yuè lái yuè hǎo.",
+      "vi": "Hôm nay bạn nói một từ, ngày mai nói một câu, dần dần bạn sẽ nói ngày càng tốt hơn."
+    },
+    {
+      "start": 563.7,
+      "end": 567.2,
+      "en": "Don't let “perfection” become the enemy of speaking.",
+      "zh": "不要让“完美”成为你开口的敌人。",
+      "pinyin": "Bú yào ràng “wánměi” chéngwéi nǐ kāikǒu de dírén.",
+      "vi": "Đừng để “hoàn hảo” trở thành kẻ thù của việc bạn mở miệng."
+    },
+    {
+      "start": 567.23,
+      "end": 571.7,
+      "en": "Right! Thing three: start speaking right away!",
+      "zh": "对！第三件事: 马上开口说！",
+      "pinyin": "Duì! Dì sān jiàn shì: mǎshàng kāikǒu shuō!",
+      "vi": "Đúng! Điều thứ ba: mở miệng nói ngay!"
+    },
+    {
+      "start": 571.73,
+      "end": 575.16,
+      "en": "Okay, let's talk about the fourth thing.",
+      "zh": "好，我们来说第四件事。",
+      "pinyin": "Hǎo, wǒmen lái shuō dì sì jiàn shì.",
+      "vi": "Được, chúng ta nói đến điều thứ tư."
+    },
+    {
+      "start": 575.17,
+      "end": 577.97,
+      "en": "This one is about how to memorize words.",
+      "zh": "这件事是关于怎么记单词的。",
+      "pinyin": "Zhè jiàn shì shì guānyú zěnme jì dāncí de.",
+      "vi": "Điều này liên quan đến cách ghi nhớ từ vựng."
+    },
+    {
+      "start": 577.97,
+      "end": 579.43,
+      "en": "I want to tell my past self:",
+      "zh": "我想告诉以前的自己:",
+      "pinyin": "Wǒ xiǎng gàosu yǐqián de zìjǐ:",
+      "vi": "Tôi muốn nói với bản thân ngày trước:"
+    },
+    {
+      "start": 579.43,
+      "end": 587.03,
+      "en": "Li Ming, don't just memorize isolated characters one by one; remember a word's “home.”",
+      "zh": "李明，不要只记一个一个孤单的字，你要记住一个词的“家”。",
+      "pinyin": "Lǐ Míng, bú yào zhǐ jì yí ge yí ge gūdān de zì, nǐ yào jìzhù yí ge cí de “jiā”.",
+      "vi": "Lý Minh, đừng chỉ nhớ những chữ đơn lẻ, cô đơn; bạn phải nhớ “ngôi nhà” của một từ."
+    },
+    {
+      "start": 587.07,
+      "end": 590.44,
+      "en": "A word's “home”? What does that mean?",
+      "zh": "一个词的“家”？这是什么意思？",
+      "pinyin": "Yí ge cí de “jiā”? Zhè shì shénme yìsi?",
+      "vi": "“Ngôi nhà” của một từ? Điều đó có nghĩa là gì?"
+    },
+    {
+      "start": 590.47,
+      "end": 597.27,
+      "en": "I mean, memorize words within phrases or sentences.",
+      "zh": "我的意思是，要把单词放在词组或者句子里记。",
+      "pinyin": "Wǒ de yìsi shì, yào bǎ dāncí fàng zài cízǔ huòzhě jùzi lǐ jì.",
+      "vi": "Ý tôi là phải ghi nhớ từ vựng trong cụm từ hoặc câu."
+    },
+    {
+      "start": 597.3,
+      "end": 598.83,
+      "en": "Let me ask you a question, Wang Yu.",
+      "zh": "我问你一个问题，王雨。",
+      "pinyin": "Wǒ wèn nǐ yí ge wèntí, Wáng Yǔ.",
+      "vi": "Tôi hỏi bạn một câu, Vương Vũ."
+    },
+    {
+      "start": 598.83,
+      "end": 601.86,
+      "en": "Many students ask me this question; maybe you've experienced it too.",
+      "zh": "很多学生都问我这个问题，可能你也经历过。",
+      "pinyin": "Hěn duō xuésheng dōu wèn wǒ zhège wèntí, kěnéng nǐ yě jīnglì guo.",
+      "vi": "Nhiều học sinh đều hỏi tôi câu này, có thể bạn cũng đã từng trải qua."
+    },
+    {
+      "start": 601.87,
+      "end": 608.14,
+      "en": "It's: “Teacher, today I learned ten Chinese characters and worked very hard to remember them.",
+      "zh": "就是: “老师，我今天学了十个汉字，非常努力地记住了。",
+      "pinyin": "Jiùshì: “Lǎoshī, wǒ jīntiān xué le shí ge Hànzì, fēicháng nǔlì de jìzhù le.",
+      "vi": "Đó là: “Thầy ơi, hôm nay em học mười chữ Hán, rất cố gắng ghi nhớ."
+    },
+    {
+      "start": 608.17,
+      "end": 611.43,
+      "en": "But when I got up the next morning, I had forgotten eight.”",
+      "zh": "但是第二天早上起来，我忘了八个。”",
+      "pinyin": "Dànshì dì èr tiān zǎoshang qǐlái, wǒ wàng le bā ge.”",
+      "vi": "Nhưng sáng hôm sau thức dậy, em quên mất tám chữ.”"
+    },
+    {
+      "start": 611.43,
+      "end": 613.56,
+      "en": "I have! Of course I have!",
+      "zh": "我有！我当然有！",
+      "pinyin": "Wǒ yǒu! Wǒ dāngrán yǒu!",
+      "vi": "Tôi có! Tất nhiên là tôi có!"
+    },
+    {
+      "start": 613.57,
+      "end": 615.6,
+      "en": "I experience this every day.",
+      "zh": "我每天都在经历这个。",
+      "pinyin": "Wǒ měitiān dōu zài jīnglì zhège.",
+      "vi": "Ngày nào tôi cũng trải qua chuyện này."
+    },
+    {
+      "start": 615.6,
+      "end": 619,
+      "en": "I feel like my brain is a leaking basket.",
+      "zh": "我觉得我的脑子像个漏水的篮子。",
+      "pinyin": "Wǒ juéde wǒ de nǎozi xiàng ge lòushuǐ de lánzi.",
+      "vi": "Tôi cảm thấy đầu óc mình như một cái giỏ bị rò nước."
+    },
+    {
+      "start": 619.03,
+      "end": 621.53,
+      "en": "You see, that's exactly the problem.",
+      "zh": "你看，这就是问题所在。",
+      "pinyin": "Nǐ kàn, zhè jiùshì wèntí suǒzài.",
+      "vi": "Bạn thấy đấy, vấn đề nằm ở chỗ đó."
+    },
+    {
+      "start": 621.53,
+      "end": 625.76,
+      "en": "Because individual Chinese characters are too isolated.",
+      "zh": "因为一个一个的汉字，它们太孤单了。",
+      "pinyin": "Yīnwèi yí ge yí ge de Hànzì, tāmen tài gūdān le.",
+      "vi": "Vì từng chữ Hán một, chúng quá cô đơn."
+    },
+    {
+      "start": 625.77,
+      "end": 629.9,
+      "en": "They have no friends or connections in your brain,",
+      "zh": "它们在你的脑子里没有朋友，没有联系，",
+      "pinyin": "Tāmen zài nǐ de nǎozi lǐ méiyǒu péngyou, méiyǒu liánxì,",
+      "vi": "Chúng không có bạn bè, không có sự liên kết nào trong não bạn,"
+    },
+    {
+      "start": 629.9,
+      "end": 632.83,
+      "en": "so they easily 'run away.'",
+      "zh": "所以它们很容易就“跑掉”了。",
+      "pinyin": "Suǒyǐ tāmen hěn róngyì jiù “pǎodiào” le.",
+      "vi": "nên chúng rất dễ 'chạy mất'."
+    },
+    {
+      "start": 632.87,
+      "end": 634.3,
+      "en": "So what should we do?",
+      "zh": "那怎么办呢？",
+      "pinyin": "Nà zěnme bàn ne?",
+      "vi": "Vậy phải làm sao?"
+    },
+    {
+      "start": 634.33,
+      "end": 638.33,
+      "en": "We need to find them a 'home' or some 'friends.'",
+      "zh": "我们要给它们找一个“家”，或者找一些“朋友”。",
+      "pinyin": "Wǒmen yào gěi tāmen zhǎo yí ge “jiā”, huòzhě zhǎo yìxiē “péngyou”.",
+      "vi": "Chúng ta phải tìm cho chúng một 'ngôi nhà', hoặc tìm vài 'người bạn'."
+    },
+    {
+      "start": 638.33,
+      "end": 641,
+      "en": "This home is a phrase.",
+      "zh": "这个家，就是一个词组。",
+      "pinyin": "Zhège jiā, jiùshì yí ge cízǔ.",
+      "vi": "Ngôi nhà này chính là một cụm từ."
+    },
+    {
+      "start": 641,
+      "end": 645.73,
+      "en": "These friends are other words used together with it.",
+      "zh": "这个朋友，就是和它一起用的其他词。",
+      "pinyin": "Zhège péngyou, jiùshì hé tā yìqǐ yòng de qítā cí.",
+      "vi": "Người bạn này chính là những từ khác được dùng cùng với nó."
+    },
+    {
+      "start": 645.77,
+      "end": 648.7,
+      "en": "For example, you learn the character '看.'",
+      "zh": "比如说，你学一个“看”字。",
+      "pinyin": "Bǐrú shuō, nǐ xué yí ge “kàn” zì.",
+      "vi": "Ví dụ, bạn học chữ '看'."
+    },
+    {
+      "start": 648.7,
+      "end": 652.17,
+      "en": "If you only memorize '看,' you will very likely forget it tomorrow.",
+      "zh": "如果你只是记“看”，你明天很可能就忘了。",
+      "pinyin": "Rúguǒ nǐ zhǐshì jì “kàn”, nǐ míngtiān hěn kěnéng jiù wàng le.",
+      "vi": "Nếu bạn chỉ nhớ '看', rất có thể ngày mai bạn sẽ quên."
+    },
+    {
+      "start": 652.57,
+      "end": 658.03,
+      "en": "But if you memorize '看书,' '看电视,' '看电影,'",
+      "zh": "但是，如果你记“看书”、“看电视”、“看电影”，",
+      "pinyin": "Dànshì, rúguǒ nǐ jì “kàn shū”, “kàn diànshì”, “kàn diànyǐng”,",
+      "vi": "Nhưng nếu bạn nhớ '看书', '看电视', '看电影',"
+    },
+    {
+      "start": 658.03,
+      "end": 661.66,
+      "en": "or even make a sentence: 'I like reading.'",
+      "zh": "甚至你造一个句子，“我喜欢看书”。",
+      "pinyin": "Shènzhì nǐ zào yí ge jùzi, “Wǒ xǐhuan kàn shū”.",
+      "vi": "thậm chí bạn đặt một câu, 'Tôi thích đọc sách'."
+    },
+    {
+      "start": 661.7,
+      "end": 667.07,
+      "en": "This way, the character '看' has three friends and one home.",
+      "zh": "这样，“看”这个字就有了三个朋友，一个家。",
+      "pinyin": "Zhèyàng, “kàn” zhège zì jiù yǒu le sān ge péngyou, yí ge jiā.",
+      "vi": "Như vậy, chữ '看' có ba người bạn và một ngôi nhà."
+    },
+    {
+      "start": 667.07,
+      "end": 669.63,
+      "en": "It is no longer lonely in your brain.",
+      "zh": "它在你的脑子里就不再孤单了。",
+      "pinyin": "Tā zài nǐ de nǎozi lǐ jiù bú zài gūdān le.",
+      "vi": "Nó không còn cô đơn trong não bạn nữa."
+    },
+    {
+      "start": 669.63,
+      "end": 672.7,
+      "en": "When you think of '书,' you may think of '看.'",
+      "zh": "你想到“书”，就可能想到“看”。",
+      "pinyin": "Nǐ xiǎngdào “shū”, jiù kěnéng xiǎngdào “kàn”.",
+      "vi": "Bạn nghĩ đến 'sách' thì có thể nghĩ đến '看'."
+    },
+    {
+      "start": 672.7,
+      "end": 675.93,
+      "en": "When you think of '电影,' you may also think of '看.'",
+      "zh": "你想到“电影”，也可能想到“看”。",
+      "pinyin": "Nǐ xiǎngdào “diànyǐng”, yě kěnéng xiǎngdào “kàn”.",
+      "vi": "Bạn nghĩ đến 'phim' thì cũng có thể nghĩ đến '看'."
+    },
+    {
+      "start": 675.93,
+      "end": 677.06,
+      "en": "I get it!",
+      "zh": "我明白了！",
+      "pinyin": "Wǒ míngbai le!",
+      "vi": "Mình hiểu rồi!"
+    },
+    {
+      "start": 677.07,
+      "end": 682.87,
+      "en": "It's like meeting a person: if we only know their name, we easily forget.",
+      "zh": "就像我们认识一个人，如果我们只知道他的名字，我们很容易忘记。",
+      "pinyin": "Jiù xiàng wǒmen rènshi yí ge rén, rúguǒ wǒmen zhǐ zhīdào tā de míngzi, wǒmen hěn róngyì wàngjì.",
+      "vi": "Giống như quen một người, nếu chỉ biết tên họ, chúng ta rất dễ quên."
+    },
+    {
+      "start": 682.9,
+      "end": 687.3,
+      "en": "But if we know their name, their job, where they live,",
+      "zh": "但如果我们知道他的名字、他的工作、他住在哪里、",
+      "pinyin": "Dàn rúguǒ wǒmen zhīdào tā de míngzi, tā de gōngzuò, tā zhù zài nǎlǐ,",
+      "vi": "Nhưng nếu biết tên, công việc, nơi ở của họ,"
+    },
+    {
+      "start": 687.3,
+      "end": 690.57,
+      "en": "and what they like to eat, it is hard for us to forget them.",
+      "zh": "他喜欢吃什么，我们就很难忘记他了。",
+      "pinyin": "tā xǐhuan chī shénme, wǒmen jiù hěn nán wàngjì tā le.",
+      "vi": "và họ thích ăn gì, thì chúng ta rất khó quên họ."
+    },
+    {
+      "start": 690.6,
+      "end": 692.5,
+      "en": "Exactly! That's the principle.",
+      "zh": "完全正确！就是这个道理。",
+      "pinyin": "Wánquán zhèngquè! Jiùshì zhège dàolǐ.",
+      "vi": "Hoàn toàn đúng! Chính là đạo lý đó."
+    },
+    {
+      "start": 692.53,
+      "end": 698.16,
+      "en": "So when you learn a new Chinese character, such as '吃,' don't just memorize 'chī, 吃.'",
+      "zh": "所以，当你们学一个新的汉字，比如“吃”，不要只记“chī，吃”。",
+      "pinyin": "Suǒyǐ, dāng nǐmen xué yí ge xīn de hànzì, bǐrú “chī”, búyào zhǐ jì “chī, chī”.",
+      "vi": "Vì vậy, khi các bạn học một chữ Hán mới, ví dụ '吃', đừng chỉ nhớ 'chī, 吃'."
+    },
+    {
+      "start": 698.17,
+      "end": 706.54,
+      "en": "You need to learn '吃饭,' '吃苹果,' '吃米饭,' and 'I like eating Chinese food.'",
+      "zh": "你们要去学“吃饭”、“吃苹果”、“吃米饭”、“我喜欢吃中国菜”。",
+      "pinyin": "Nǐmen yào qù xué “chīfàn”, “chī píngguǒ”, “chī mǐfàn”, “Wǒ xǐhuan chī Zhōngguó cài”.",
+      "vi": "Các bạn phải học '吃饭', '吃苹果', '吃米饭', 'Tôi thích ăn món Trung Quốc'."
+    },
+    {
+      "start": 706.57,
+      "end": 713.6,
+      "en": "Memorizing this way may seem slower, but it is actually more effective and harder to forget.",
+      "zh": "这样记，虽然看起来慢一点，但实际上更有效，也更不容易忘记。",
+      "pinyin": "Zhèyàng jì, suīrán kàn qǐlái màn yìdiǎn, dàn shíjìshang gèng yǒuxiào, yě gèng bù róngyì wàngjì.",
+      "vi": "Ghi nhớ như vậy, tuy trông có vẻ chậm hơn, nhưng thực tế hiệu quả hơn và cũng khó quên hơn."
+    },
+    {
+      "start": 713.63,
+      "end": 716.46,
+      "en": "This is really, really useful advice.",
+      "zh": "这真是一个非常非常有用的建议。",
+      "pinyin": "Zhè zhēn shì yí ge fēicháng fēicháng yǒuyòng de jiànyì.",
+      "vi": "Đây thật sự là một lời khuyên rất rất hữu ích."
+    },
+    {
+      "start": 716.5,
+      "end": 724.03,
+      "en": "Fourth thing: learn phrases and sentences, not isolated Chinese characters.",
+      "zh": "第四件事：学习词组和句子，而不是孤立的汉字。",
+      "pinyin": "Dì sì jiàn shì: xuéxí cízǔ hé jùzi, ér búshì gūlì de hànzì.",
+      "vi": "Điều thứ tư: học cụm từ và câu, chứ không phải những chữ Hán đơn lẻ."
+    },
+    {
+      "start": 724.07,
+      "end": 727.27,
+      "en": "Okay, the fifth thing. This is my experience.",
+      "zh": "好，第五件事。这个是我的经验。",
+      "pinyin": "Hǎo, dì wǔ jiàn shì. Zhège shì wǒ de jīngyàn.",
+      "vi": "Được, điều thứ năm. Đây là kinh nghiệm của mình."
+    },
+    {
+      "start": 727.27,
+      "end": 729.3,
+      "en": "I want to tell my past self:",
+      "zh": "我想告诉以前的自己：",
+      "pinyin": "Wǒ xiǎng gàosu yǐqián de zìjǐ:",
+      "vi": "Mình muốn nói với bản thân trước đây:"
+    },
+    {
+      "start": 729.3,
+      "end": 734.27,
+      "en": "Wang Yu, when learning Chinese, study ten minutes every day,",
+      "zh": "王雨，学习中文，每天坚持学十分钟，",
+      "pinyin": "Wáng Yǔ, xuéxí Zhōngwén, měitiān jiānchí xué shí fēnzhōng,",
+      "vi": "Vương Vũ, học tiếng Trung, mỗi ngày kiên trì học mười phút,"
+    },
+    {
+      "start": 734.27,
+      "end": 738.4,
+      "en": "that's much better than studying five hours over a weekend.",
+      "zh": "比你一个周末学五个小时，要好得多。",
+      "pinyin": "bǐ nǐ yí ge zhōumò xué wǔ ge xiǎoshí, yào hǎo de duō.",
+      "vi": "tốt hơn nhiều so với việc bạn học năm tiếng vào một cuối tuần."
+    },
+    {
+      "start": 738.43,
+      "end": 741.4,
+      "en": "Oh? This is about study habits.",
+      "zh": "哦？这是关于学习习惯的。",
+      "pinyin": "Ó? Zhè shì guānyú xuéxí xíguàn de.",
+      "vi": "Ồ? Đây là về thói quen học tập."
+    },
+    {
+      "start": 741.43,
+      "end": 745.13,
+      "en": "Yes. When I first started, I was very enthusiastic.",
+      "zh": "是的。我刚开始的时候，非常有热情。",
+      "pinyin": "Shì de. Wǒ gāng kāishǐ de shíhou, fēicháng yǒu rèqíng.",
+      "vi": "Đúng vậy. Khi mới bắt đầu, mình rất nhiệt tình."
+    },
+    {
+      "start": 745.17,
+      "end": 750.17,
+      "en": "I told myself, this weekend I will finish learning the entire first lesson.",
+      "zh": "我告诉自己，这个周末，我要把第一课全部学完。",
+      "pinyin": "Wǒ gàosu zìjǐ, zhège zhōumò, wǒ yào bǎ dì yī kè quánbù xué wán.",
+      "vi": "Mình tự nhủ, cuối tuần này, mình sẽ học hết bài đầu tiên."
+    },
+    {
+      "start": 750.17,
+      "end": 754.44,
+      "en": "Then I started Saturday morning and studied for five hours.",
+      "zh": "然后我从星期六早上开始，学了五个小时。",
+      "pinyin": "Ránhòu wǒ cóng xīngqīliù zǎoshang kāishǐ, xué le wǔ ge xiǎoshí.",
+      "vi": "Rồi mình bắt đầu từ sáng thứ Bảy, học năm tiếng."
+    },
+    {
+      "start": 754.47,
+      "end": 755.17,
+      "en": "What was the result?",
+      "zh": "结果呢？",
+      "pinyin": "Jiéguǒ ne?",
+      "vi": "Kết quả thì sao?"
+    },
+    {
+      "start": 755.17,
+      "end": 759.6,
+      "en": "The result was that I was very, very tired. My head hurt.",
+      "zh": "结果是，我非常非常累。我的头很痛。",
+      "pinyin": "Jiéguǒ shì, wǒ fēicháng fēicháng lèi. Wǒ de tóu hěn tòng.",
+      "vi": "Kết quả là mình rất rất mệt. Đầu mình rất đau."
+    },
+    {
+      "start": 759.63,
+      "end": 763.96,
+      "en": "Moreover, by the next week, I didn't want to look at Chinese at all.",
+      "zh": "而且，到了下个星期，我一点也不想看中文了。",
+      "pinyin": "Érqiě, dào le xià ge xīngqī, wǒ yìdiǎn yě bù xiǎng kàn Zhōngwén le.",
+      "vi": "Hơn nữa, đến tuần sau, mình chẳng muốn nhìn thấy tiếng Trung chút nào."
+    },
+    {
+      "start": 763.97,
+      "end": 766.24,
+      "en": "I felt Chinese made me very tired.",
+      "zh": "我觉得中文让我很累。",
+      "pinyin": "Wǒ juéde Zhōngwén ràng wǒ hěn lèi.",
+      "vi": "Mình cảm thấy tiếng Trung khiến mình rất mệt."
+    },
+    {
+      "start": 766.27,
+      "end": 769.6,
+      "en": "I rested for a week before I wanted to start again.",
+      "zh": "我休息了一个星期，才想重新开始。",
+      "pinyin": "Wǒ xiūxi le yí ge xīngqī, cái xiǎng chóngxīn kāishǐ.",
+      "vi": "Mình nghỉ một tuần mới muốn bắt đầu lại."
+    },
+    {
+      "start": 769.63,
+      "end": 772.26,
+      "en": "This is a mistake many beginners make.",
+      "zh": "这是很多初学者都会犯的错误。",
+      "pinyin": "Zhè shì hěn duō chūxuézhě dōu huì fàn de cuòwù.",
+      "vi": "Đây là lỗi mà rất nhiều người mới bắt đầu đều mắc phải."
+    },
+    {
+      "start": 772.3,
+      "end": 775.67,
+      "en": "They start with high enthusiasm and overexert themselves,",
+      "zh": "他们一开始热情很高，用力过猛，",
+      "pinyin": "Tāmen yì kāishǐ rèqíng hěn gāo, yònglì guò měng,",
+      "vi": "Họ bắt đầu với nhiệt huyết cao, dùng sức quá mức,"
+    },
+    {
+      "start": 775.67,
+      "end": 779.33,
+      "en": "then quickly feel exhausted and finally give up.",
+      "zh": "然后很快就觉得精疲力尽，最后就放弃了。",
+      "pinyin": "ránhòu hěn kuài jiù juéde jīngpílìjìn, zuìhòu jiù fàngqì le.",
+      "vi": "rồi nhanh chóng cảm thấy kiệt sức, cuối cùng bỏ cuộc."
+    },
+    {
+      "start": 779.33,
+      "end": 782.26,
+      "en": "Right. Later I changed my method.",
+      "zh": "对。后来我换了一个方法。",
+      "pinyin": "Duì. Hòulái wǒ huàn le yí ge fāngfǎ.",
+      "vi": "Đúng. Sau đó mình đổi một cách khác."
+    },
+    {
+      "start": 782.3,
+      "end": 787.67,
+      "en": "I told myself, I don't need to study for long every day; I just need to study fifteen minutes.",
+      "zh": "我告诉自己，我每天不用学很久，我只要学十五分钟。",
+      "pinyin": "Wǒ gàosu zìjǐ, wǒ měitiān búyòng xué hěn jiǔ, wǒ zhǐyào xué shíwǔ fēnzhōng.",
+      "vi": "Mình tự nhủ, mỗi ngày mình không cần học lâu, mình chỉ cần học mười lăm phút."
+    },
+    {
+      "start": 787.7,
+      "end": 793.63,
+      "en": "I could learn five new words with a phone app while waiting for the bus.",
+      "zh": "我可以在等公共汽车的时候，用手机App学五个新词。",
+      "pinyin": "Wǒ kěyǐ zài děng gōnggòng qìchē de shíhou, yòng shǒujī App xué wǔ ge xīn cí.",
+      "vi": "Mình có thể tranh thủ lúc đợi xe buýt, dùng ứng dụng điện thoại học năm từ mới."
+    },
+    {
+      "start": 793.67,
+      "end": 797.27,
+      "en": "I could listen to a Chinese song before going to sleep.",
+      "zh": "我可以在睡觉以前，听一首中文歌。",
+      "pinyin": "Wǒ kěyǐ zài shuìjiào yǐqián, tīng yì shǒu Zhōngwén gē.",
+      "vi": "Mình có thể trước khi ngủ nghe một bài hát tiếng Trung."
+    },
+    {
+      "start": 797.3,
+      "end": 801.8,
+      "en": "I could watch a short Chinese video while eating.",
+      "zh": "我可以在吃饭的时候，看一小段中文的视频。",
+      "pinyin": "Wǒ kěyǐ zài chīfàn de shíhou, kàn yì xiǎo duàn Zhōngwén de shìpín.",
+      "vi": "Mình có thể lúc ăn cơm xem một đoạn video tiếng Trung ngắn."
+    },
+    {
+      "start": 801.83,
+      "end": 803.2,
+      "en": "This method is good.",
+      "zh": "这个方法好。",
+      "pinyin": "Zhège fāngfǎ hǎo.",
+      "vi": "Cách này hay."
+    },
+    {
+      "start": 803.2,
+      "end": 809.13,
+      "en": "It turns learning into part of life, not a heavy task.",
+      "zh": "它把学习变成了生活的一部分，而不是一个沉重的任务。",
+      "pinyin": "Tā bǎ xuéxí biànchéng le shēnghuó de yí bùfen, ér búshì yí ge chénzhòng de rènwu.",
+      "vi": "Nó biến việc học thành một phần của cuộc sống, chứ không phải một nhiệm vụ nặng nề."
+    },
+    {
+      "start": 809.17,
+      "end": 810.07,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 810.07,
+      "end": 816.44,
+      "en": "I found that by being exposed to a little Chinese every day, my feeling for it stays with me.",
+      "zh": "我发现，每天都接触一点点中文，我的感觉会一直都在。",
+      "pinyin": "Wǒ fāxiàn, měitiān dōu jiēchù yìdiǎndiǎn Zhōngwén, wǒ de gǎnjué huì yìzhí dōu zài.",
+      "vi": "Mình phát hiện, mỗi ngày tiếp xúc một chút với tiếng Trung, cảm giác của mình sẽ luôn ở đó."
+    },
+    {
+      "start": 816.47,
+      "end": 819.24,
+      "en": "I won't forget what I learned yesterday.",
+      "zh": "我不会忘记昨天学了什么。",
+      "pinyin": "Wǒ bú huì wàngjì zuótiān xué le shénme.",
+      "vi": "Mình sẽ không quên hôm qua đã học gì."
+    },
+    {
+      "start": 819.27,
+      "end": 823.37,
+      "en": "And because each session is so short, I never feel tired.",
+      "zh": "而且，因为每次时间很短，我从来不觉得累。",
+      "pinyin": "Érqiě, yīnwèi měi cì shíjiān hěn duǎn, wǒ cónglái bù juéde lèi.",
+      "vi": "Hơn nữa, vì mỗi lần học rất ngắn, tôi chưa bao giờ thấy mệt."
+    },
+    {
+      "start": 823.37,
+      "end": 826.04,
+      "en": "Sticking with it also becomes very easy.",
+      "zh": "坚持下去，也变得很容易。",
+      "pinyin": "Jiānchí xiàqù, yě biànde hěn róngyì.",
+      "vi": "Việc kiên trì cũng trở nên rất dễ dàng."
+    },
+    {
+      "start": 826.07,
+      "end": 827.07,
+      "en": "You make a very good point.",
+      "zh": "你说得很有道理。",
+      "pinyin": "Nǐ shuō de hěn yǒu dàolǐ.",
+      "vi": "Bạn nói rất có lý."
+    },
+    {
+      "start": 827.07,
+      "end": 832.73,
+      "en": "Learning a language is more like a marathon than a 100-meter sprint.",
+      "zh": "学习语言，更像是一场马拉松，而不是一百米短跑。",
+      "pinyin": "Xuéxí yǔyán, gèng xiàng shì yì chǎng mǎlāsōng, ér bú shì yìbǎi mǐ duǎnpǎo.",
+      "vi": "Học ngôn ngữ giống như một cuộc marathon hơn là chạy nước rút 100 mét."
+    },
+    {
+      "start": 832.73,
+      "end": 837.7,
+      "en": "What matters isn’t how fast you run, but how far you can keep going.",
+      "zh": "重要的不是你跑得多快，而是你能坚持跑多远。",
+      "pinyin": "Zhòngyào de bú shì nǐ pǎo de duō kuài, érshì nǐ néng jiānchí pǎo duō yuǎn.",
+      "vi": "Điều quan trọng không phải là bạn chạy nhanh đến đâu, mà là bạn có thể kiên trì chạy bao xa."
+    },
+    {
+      "start": 837.73,
+      "end": 841.06,
+      "en": "The house-building metaphor we mentioned earlier means the same thing.",
+      "zh": "我们之前说的盖房子的比喻，也是这个意思。",
+      "pinyin": "Wǒmen zhīqián shuō de gài fángzi de bǐyù, yě shì zhège yìsi.",
+      "vi": "Ví dụ về xây nhà mà chúng ta nói trước đó cũng có ý nghĩa này."
+    },
+    {
+      "start": 841.1,
+      "end": 843.23,
+      "en": "You can’t build a house in a day.",
+      "zh": "你不可能一天就把房子盖好。",
+      "pinyin": "Nǐ bù kěnéng yì tiān jiù bǎ fángzi gài hǎo.",
+      "vi": "Bạn không thể xây xong một ngôi nhà chỉ trong một ngày."
+    },
+    {
+      "start": 843.23,
+      "end": 847.83,
+      "en": "But every day you go to the worksite, lay a brick, and build a wall.",
+      "zh": "但是你每天都去工地上，放一块砖，砌一面墙。",
+      "pinyin": "Dànshì nǐ měi tiān dōu qù gōngdì shang, fàng yí kuài zhuān, qì yí miàn qiáng.",
+      "vi": "Nhưng mỗi ngày bạn đều ra công trường, đặt một viên gạch, xây một bức tường."
+    },
+    {
+      "start": 847.87,
+      "end": 850.04,
+      "en": "A year later, your house will be there.",
+      "zh": "一年以后，你的房子就有了。",
+      "pinyin": "Yì nián yǐhòu, nǐ de fángzi jiù yǒu le.",
+      "vi": "Một năm sau, bạn sẽ có ngôi nhà của mình."
+    },
+    {
+      "start": 850.07,
+      "end": 850.9,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 850.9,
+      "end": 855.57,
+      "en": "So the fifth thing is: keep learning a little every day.",
+      "zh": "所以，第五件事就是：坚持每天学一点点。",
+      "pinyin": "Suǒyǐ, dì wǔ jiàn shì jiùshì: jiānchí měi tiān xué yìdiǎndiǎn.",
+      "vi": "Vì vậy, điều thứ năm là: kiên trì học một chút mỗi ngày."
+    },
+    {
+      "start": 855.57,
+      "end": 858.14,
+      "en": "Don’t try to learn a lot at once.",
+      "zh": "不要追求一次学很多。",
+      "pinyin": "Búyào zhuīqiú yí cì xué hěn duō.",
+      "vi": "Đừng theo đuổi việc học thật nhiều trong một lần."
+    },
+    {
+      "start": 858.17,
+      "end": 863.24,
+      "en": "“A trickle flows long”—that idiom is used very well.",
+      "zh": "细水长流，这个成语用得很好。",
+      "pinyin": "Xì shuǐ cháng liú, zhège chéngyǔ yòng de hěn hǎo.",
+      "vi": "“Nước nhỏ chảy dài”, cách dùng thành ngữ này rất hay."
+    },
+    {
+      "start": 863.27,
+      "end": 865,
+      "en": "Okay, the sixth thing.",
+      "zh": "好了，第六件事。",
+      "pinyin": "Hǎo le, dì liù jiàn shì.",
+      "vi": "Được rồi, điều thứ sáu."
+    },
+    {
+      "start": 865.03,
+      "end": 867.83,
+      "en": "I think this can make learning enjoyable.",
+      "zh": "我觉得这件事能让学习变得快乐。",
+      "pinyin": "Wǒ juéde zhè jiàn shì néng ràng xuéxí biànde kuàilè.",
+      "vi": "Tôi nghĩ điều này có thể khiến việc học trở nên vui vẻ."
+    },
+    {
+      "start": 867.83,
+      "end": 874.76,
+      "en": "I want to tell my past self: find what you truly enjoy, then learn it in Chinese.",
+      "zh": "我想告诉以前的自己：找到你真正喜欢的东西，然后用中文去学习它。",
+      "pinyin": "Wǒ xiǎng gàosu yǐqián de zìjǐ: zhǎodào nǐ zhēnzhèng xǐhuan de dōngxi, ránhòu yòng Zhōngwén qù xuéxí tā.",
+      "vi": "Tôi muốn nói với bản thân trong quá khứ: hãy tìm thứ bạn thật sự thích, rồi dùng tiếng Trung để học nó."
+    },
+    {
+      "start": 874.8,
+      "end": 877.2,
+      "en": "Let your hobbies become your Chinese teacher.",
+      "zh": "让你的爱好，成为你的中文老师。",
+      "pinyin": "Ràng nǐ de àihào, chéngwéi nǐ de Zhōngwén lǎoshī.",
+      "vi": "Hãy để sở thích của bạn trở thành giáo viên tiếng Trung của bạn."
+    },
+    {
+      "start": 877.23,
+      "end": 879.26,
+      "en": "I can really relate to this!",
+      "zh": "这个我太有体会了！",
+      "pinyin": "Zhège wǒ tài yǒu tǐhuì le!",
+      "vi": "Cái này tôi hiểu quá rõ!"
+    },
+    {
+      "start": 879.3,
+      "end": 880.93,
+      "en": "I like listening to music.",
+      "zh": "我喜欢听音乐。",
+      "pinyin": "Wǒ xǐhuan tīng yīnyuè.",
+      "vi": "Tôi thích nghe nhạc."
+    },
+    {
+      "start": 880.97,
+      "end": 884.77,
+      "en": "So I started finding some Chinese songs to listen to.",
+      "zh": "所以我开始找一些中文歌来听。",
+      "pinyin": "Suǒyǐ wǒ kāishǐ zhǎo yìxiē Zhōngwén gē lái tīng.",
+      "vi": "Vì vậy tôi bắt đầu tìm một số bài hát tiếng Trung để nghe."
+    },
+    {
+      "start": 884.8,
+      "end": 887.47,
+      "en": "At first, I couldn’t understand a single word.",
+      "zh": "一开始，我一个字都听不懂。",
+      "pinyin": "Yì kāishǐ, wǒ yí ge zì dōu tīngbudǒng.",
+      "vi": "Ban đầu, tôi không hiểu một chữ nào."
+    },
+    {
+      "start": 887.5,
+      "end": 890.7,
+      "en": "But it didn’t matter—I thought the melody was beautiful.",
+      "zh": "但是没关系，我觉得歌的旋律很好听。",
+      "pinyin": "Dànshì méi guānxi, wǒ juéde gē de xuánlǜ hěn hǎotīng.",
+      "vi": "Nhưng không sao, tôi thấy giai điệu của bài hát rất hay."
+    },
+    {
+      "start": 890.73,
+      "end": 892.23,
+      "en": "And then?",
+      "zh": "然后呢？",
+      "pinyin": "Ránhòu ne?",
+      "vi": "Sau đó thì sao?"
+    },
+    {
+      "start": 892.27,
+      "end": 894.87,
+      "en": "Then I went to look at the lyrics.",
+      "zh": "然后我去看歌词。",
+      "pinyin": "Ránhòu wǒ qù kàn gēcí.",
+      "vi": "Sau đó tôi đi xem lời bài hát."
+    },
+    {
+      "start": 894.9,
+      "end": 900.07,
+      "en": "I discovered—oh, this word is “friend,” and that word is “love.”",
+      "zh": "我发现，哦，这个词是“朋友”，那个词是“爱”。",
+      "pinyin": "Wǒ fāxiàn, ò, zhège cí shì “péngyou”, nàge cí shì “ài”.",
+      "vi": "Tôi phát hiện, ồ, từ này là “bạn bè”, từ kia là “yêu”."
+    },
+    {
+      "start": 900.1,
+      "end": 906.13,
+      "en": "Because I liked this song, I was very motivated to learn these words.",
+      "zh": "因为我喜欢这首歌，所以我非常有动力去学习这些词。",
+      "pinyin": "Yīnwèi wǒ xǐhuan zhè shǒu gē, suǒyǐ wǒ fēicháng yǒu dònglì qù xuéxí zhèxiē cí.",
+      "vi": "Vì tôi thích bài hát này, nên tôi rất có động lực học những từ này."
+    },
+    {
+      "start": 906.17,
+      "end": 909.44,
+      "en": "The first complete Chinese song I learned was “Friend.”",
+      "zh": "我学的第一首完整的中文歌是《朋友》。",
+      "pinyin": "Wǒ xué de dì yī shǒu wánzhěng de Zhōngwén gē shì 《Péngyou》.",
+      "vi": "Bài hát tiếng Trung hoàn chỉnh đầu tiên tôi học là “Bạn Bè”."
+    },
+    {
+      "start": 909.47,
+      "end": 913.14,
+      "en": "After finishing it, I felt a real sense of achievement.",
+      "zh": "学完以后，我特别有成就感。",
+      "pinyin": "Xué wán yǐhòu, wǒ tèbié yǒu chéngjiùgǎn.",
+      "vi": "Học xong, tôi đặc biệt có cảm giác thành tựu."
+    },
+    {
+      "start": 913.17,
+      "end": 915.17,
+      "en": "This is a very good example.",
+      "zh": "这是一个非常好的例子。",
+      "pinyin": "Zhè shì yí ge fēicháng hǎo de lìzi.",
+      "vi": "Đây là một ví dụ rất hay."
+    },
+    {
+      "start": 915.2,
+      "end": 920.27,
+      "en": "If you force yourself to read an article about economics that you’re not interested in,",
+      "zh": "如果你强迫自己去读一篇你不感兴趣的关于经济学的文章，",
+      "pinyin": "Rúguǒ nǐ qiǎngpò zìjǐ qù dú yì piān nǐ bù gǎn xìngqù de guānyú jīngjìxué de wénzhāng,",
+      "vi": "Nếu bạn ép mình đọc một bài viết về kinh tế học mà bạn không hứng thú,"
+    },
+    {
+      "start": 920.27,
+      "end": 923.27,
+      "en": "You’ll probably find it boring and learn very slowly.",
+      "zh": "你可能会觉得很无聊，学得也很慢。",
+      "pinyin": "Nǐ kěnéng huì juéde hěn wúliáo, xué de yě hěn màn.",
+      "vi": "Bạn có thể sẽ thấy rất nhàm chán và học cũng rất chậm."
+    },
+    {
+      "start": 923.3,
+      "end": 927.57,
+      "en": "But if you watch a Chinese introduction to a movie you like,",
+      "zh": "但是如果你去看一部你喜欢的电影的中文介绍，",
+      "pinyin": "Dànshì rúguǒ nǐ qù kàn yí bù nǐ xǐhuan de diànyǐng de Zhōngwén jièshào,",
+      "vi": "Nhưng nếu bạn xem phần giới thiệu bằng tiếng Trung của một bộ phim bạn thích,"
+    },
+    {
+      "start": 927.57,
+      "end": 932,
+      "en": "Or read Chinese news about a celebrity you like, and you’ll be very enthusiastic.",
+      "zh": "或者去读你喜欢的明星的中文新闻，你就会很有热情。",
+      "pinyin": "Huòzhě qù dú nǐ xǐhuan de míngxīng de Zhōngwén xīnwén, nǐ jiù huì hěn yǒu rèqíng.",
+      "vi": "Hoặc đọc tin tức tiếng Trung về ngôi sao bạn thích, bạn sẽ rất có nhiệt huyết."
+    },
+    {
+      "start": 932.03,
+      "end": 934.03,
+      "en": "Exactly right.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn chính xác."
+    },
+    {
+      "start": 934.07,
+      "end": 937.77,
+      "en": "A friend of mine really loves Chinese food.",
+      "zh": "我的一个朋友，他特别喜欢吃中国菜。",
+      "pinyin": "Wǒ de yí ge péngyou, tā tèbié xǐhuan chī Zhōngguó cài.",
+      "vi": "Một người bạn của tôi rất thích ăn món Trung Quốc."
+    },
+    {
+      "start": 937.8,
+      "end": 941.5,
+      "en": "So he started watching Chinese cooking videos.",
+      "zh": "所以他就开始看中国的做菜视频。",
+      "pinyin": "Suǒyǐ tā jiù kāishǐ kàn Zhōngguó de zuòcài shìpín.",
+      "vi": "Nên anh ấy bắt đầu xem video nấu ăn của Trung Quốc."
+    },
+    {
+      "start": 941.53,
+      "end": 948.6,
+      "en": "The first Chinese sentence he learned wasn’t “How are you?” but “How do you make kung pao chicken?”",
+      "zh": "他学会的第一个中文句子不是“你好吗”，而是“宫保鸡丁怎么做”。",
+      "pinyin": "Tā xuéhuì de dì yī ge Zhōngwén jùzi bú shì “nǐ hǎo ma”, érshì “gōngbǎo jīdīng zěnme zuò”.",
+      "vi": "Câu tiếng Trung đầu tiên anh ấy học được không phải “Bạn khỏe không?” mà là “Gà Kung Pao làm thế nào?”"
+    },
+    {
+      "start": 948.63,
+      "end": 949.83,
+      "en": "(Laughs) That’s very interesting.",
+      "zh": "（笑），这很有意思。",
+      "pinyin": "(xiào), zhè hěn yǒu yìsi.",
+      "vi": "(Cười) Điều này rất thú vị."
+    },
+    {
+      "start": 949.87,
+      "end": 955.54,
+      "en": "Through cooking, he learned words like “oil,” “salt,” “sugar,” and “delicious.”",
+      "zh": "他通过做菜，学会了“油”、“盐”、“糖”、“好吃”这些词。",
+      "pinyin": "Tā tōngguò zuòcài, xuéhuì le “yóu”, “yán”, “táng”, “hǎochī” zhèxiē cí.",
+      "vi": "Qua việc nấu ăn, anh ấy đã học được những từ như “dầu”, “muối”, “đường”, “ngon”."
+    },
+    {
+      "start": 955.57,
+      "end": 959.43,
+      "en": "These words are very useful and very interesting to him.",
+      "zh": "这些词对他来说，非常有用，也非常有趣。",
+      "pinyin": "Zhèxiē cí duì tā lái shuō, fēicháng yǒuyòng, yě fēicháng yǒuqù.",
+      "vi": "Những từ này đối với anh ấy rất hữu ích và cũng rất thú vị."
+    },
+    {
+      "start": 959.43,
+      "end": 960.53,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 960.57,
+      "end": 964.9,
+      "en": "So I want to tell everyone: think about it—what do you like?",
+      "zh": "所以，我想告诉大家，想一想，你喜欢什么？",
+      "pinyin": "Suǒyǐ, wǒ xiǎng gàosu dàjiā, xiǎng yì xiǎng, nǐ xǐhuan shénme?",
+      "vi": "Vì vậy, tôi muốn nói với mọi người: hãy nghĩ xem, bạn thích gì?"
+    },
+    {
+      "start": 964.93,
+      "end": 966.6,
+      "en": "Do you like traveling?",
+      "zh": "你喜欢旅游吗？",
+      "pinyin": "Nǐ xǐhuan lǚyóu ma?",
+      "vi": "Bạn có thích du lịch không?"
+    },
+    {
+      "start": 966.6,
+      "end": 972.47,
+      "en": "Then you can watch some Chinese introductions to Beijing, Shanghai, and Xi’an.",
+      "zh": "那你可以去看一些关于北京、上海、西安的中文介绍。",
+      "pinyin": "Nà nǐ kěyǐ qù kàn yìxiē guānyú Běijīng, Shànghǎi, Xī'ān de Zhōngwén jièshào.",
+      "vi": "Vậy bạn có thể xem một số giới thiệu bằng tiếng Trung về Bắc Kinh, Thượng Hải, Tây An."
+    },
+    {
+      "start": 972.5,
+      "end": 974.1,
+      "en": "Do you like animals?",
+      "zh": "你喜欢动物吗？",
+      "pinyin": "Nǐ xǐhuan dòngwù ma?",
+      "vi": "Bạn có thích động vật không?"
+    },
+    {
+      "start": 974.1,
+      "end": 978.37,
+      "en": "Then you can watch some Chinese videos about giant pandas.",
+      "zh": "那你可以去看一些关于大熊猫的中文视频。",
+      "pinyin": "Nà nǐ kěyǐ qù kàn yìxiē guānyú dà xióngmāo de Zhōngwén shìpín.",
+      "vi": "Vậy bạn có thể xem một số video tiếng Trung về gấu trúc lớn."
+    },
+    {
+      "start": 978.4,
+      "end": 983.8,
+      "en": "To sum up the sixth point: combine Chinese with your interests and hobbies.",
+      "zh": "总结一下第六点：把中文和你的兴趣爱好结合起来。",
+      "pinyin": "Zǒngjié yíxià dì liù diǎn: bǎ Zhōngwén hé nǐ de xìngqù àihào jiéhé qǐlái.",
+      "vi": "Tóm lại điểm thứ sáu: hãy kết hợp tiếng Trung với sở thích của bạn."
+    },
+    {
+      "start": 983.83,
+      "end": 988.73,
+      "en": "That way, learning is no longer a task but a process of discovery and enjoyment.",
+      "zh": "这样，学习就不再是一个任务，而是一个发现和享受的过程。",
+      "pinyin": "Zhèyàng, xuéxí jiù bú zài shì yí ge rènwu, érshì yí ge fāxiàn hé xiǎngshòu de guòchéng.",
+      "vi": "Như vậy, việc học không còn là một nhiệm vụ mà là một quá trình khám phá và tận hưởng."
+    },
+    {
+      "start": 988.73,
+      "end": 992.9,
+      "en": "Okay, we’ve reached the last one, the seventh thing.",
+      "zh": "好，我们到了最后一件，第七件事。",
+      "pinyin": "Hǎo, wǒmen dào le zuìhòu yí jiàn, dì qī jiàn shì.",
+      "vi": "Được, chúng ta đến điều cuối cùng, điều thứ bảy."
+    },
+    {
+      "start": 992.9,
+      "end": 995.83,
+      "en": "This one is about mindset.",
+      "zh": "这件事是关于心态的。",
+      "pinyin": "Zhè jiàn shì shì guānyú xīntài de.",
+      "vi": "Điều này liên quan đến tâm thế."
+    },
+    {
+      "start": 995.87,
+      "end": 1000.47,
+      "en": "I want to tell my former self, who was a bit unsure of herself:",
+      "zh": "我想告诉以前那个有点不自信的自己：",
+      "pinyin": "Wǒ xiǎng gàosu yǐqián nàge yǒudiǎn bú zìxìn de zìjǐ:",
+      "vi": "Tôi muốn nói với bản thân ngày trước, cái con người hơi thiếu tự tin ấy rằng:"
+    },
+    {
+      "start": 1000.47,
+      "end": 1008.6,
+      "en": "Wang Yu, you speak Chinese with a foreign accent—it’s okay, it’s very normal, even a little cute.",
+      "zh": "王雨，你说中文有外国口音，没关系，这很正常，甚至还有点可爱。",
+      "pinyin": "Wáng Yǔ, nǐ shuō Zhōngwén yǒu wàiguó kǒuyīn, méi guānxi, zhè hěn zhèngcháng, shènzhì hái yǒudiǎn kě'ài.",
+      "vi": "Vương Vũ, bạn nói tiếng Trung có giọng nước ngoài, không sao đâu, điều đó rất bình thường, thậm chí còn hơi đáng yêu."
+    },
+    {
+      "start": 1008.6,
+      "end": 1009.53,
+      "en": "Oh?",
+      "zh": "哦？",
+      "pinyin": "Ó?",
+      "vi": "Ồ?"
+    },
+    {
+      "start": 1009.57,
+      "end": 1011.17,
+      "en": "Why do you want to say this?",
+      "zh": "为什么想说这个？",
+      "pinyin": "Wèishénme xiǎng shuō zhège?",
+      "vi": "Sao bạn lại muốn nói điều này?"
+    },
+    {
+      "start": 1011.2,
+      "end": 1018.03,
+      "en": "Because I used to always feel that not sounding like a Chinese person was a very embarrassing thing.",
+      "zh": "因为我以前总觉得，我说得不像中国人，是一件很丢脸的事情。",
+      "pinyin": "Yīnwèi wǒ yǐqián zǒng juéde, wǒ shuō de bú xiàng Zhōngguó rén, shì yí jiàn hěn diūliǎn de shìqing.",
+      "vi": "Vì trước đây tôi luôn cảm thấy việc mình nói không giống người Trung Quốc là một chuyện rất mất mặt."
+    },
+    {
+      "start": 1018.07,
+      "end": 1022.37,
+      "en": "My friends sometimes imitate the strange tones when I speak,",
+      "zh": "我的朋友有时候会学我说话的奇怪声调，",
+      "pinyin": "Wǒ de péngyou yǒu shíhou huì xué wǒ shuōhuà de qíguài shēngdiào,",
+      "vi": "Bạn bè tôi đôi khi bắt chước thanh điệu kỳ lạ khi tôi nói,"
+    },
+    {
+      "start": 1022.37,
+      "end": 1026.7,
+      "en": "Even though they were joking, I would feel a bit sad inside.",
+      "zh": "虽然他们是开玩笑，但我心里会有点难过。",
+      "pinyin": "Suīrán tāmen shì kāi wánxiào, dàn wǒ xīnlǐ huì yǒudiǎn nánguò.",
+      "vi": "Dù họ chỉ đùa thôi, nhưng trong lòng tôi vẫn hơi buồn."
+    },
+    {
+      "start": 1026.7,
+      "end": 1031.83,
+      "en": "I pursued perfection; I wanted to speak exactly like a Beijinger.",
+      "zh": "我追求完美，我想说得和北京人一模一样。",
+      "pinyin": "Wǒ zhuīqiú wánměi, wǒ xiǎng shuō de hé Běijīng rén yīmúyīyàng.",
+      "vi": "Tôi theo đuổi sự hoàn hảo, tôi muốn nói giống hệt người Bắc Kinh."
+    },
+    {
+      "start": 1031.87,
+      "end": 1035.83,
+      "en": "This kind of perfectionist thinking will bring you a lot of pressure.",
+      "zh": "这种追求完美的想法，会给你带来很大的压力。",
+      "pinyin": "Zhè zhǒng zhuīqiú wánměi de xiǎngfǎ, huì gěi nǐ dàilái hěn dà de yālì.",
+      "vi": "Kiểu suy nghĩ theo đuổi sự hoàn hảo này sẽ mang lại cho bạn áp lực rất lớn."
+    },
+    {
+      "start": 1035.83,
+      "end": 1036.76,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 1036.8,
+      "end": 1038.07,
+      "en": "A lot of pressure.",
+      "zh": "压力很大。",
+      "pinyin": "Yālì hěn dà.",
+      "vi": "Áp lực rất lớn."
+    },
+    {
+      "start": 1038.07,
+      "end": 1044.3,
+      "en": "Because of this, for a while I didn’t even dare speak Chinese in crowded places.",
+      "zh": "我甚至因为这个，有一段时间不敢在人多的地方说中文。",
+      "pinyin": "Wǒ shènzhì yīnwèi zhège, yǒu yí duàn shíjiān bù gǎn zài rén duō de dìfang shuō Zhōngwén.",
+      "vi": "Thậm chí vì chuyện này, có một thời gian tôi không dám nói tiếng Trung ở chỗ đông người."
+    },
+    {
+      "start": 1044.33,
+      "end": 1047.8,
+      "en": "But later I understood: I’m a foreigner,",
+      "zh": "但是后来我明白了，我是一个外国人，",
+      "pinyin": "Dànshì hòulái wǒ míngbai le, wǒ shì yí ge wàiguó rén,",
+      "vi": "Nhưng sau này tôi hiểu ra, tôi là người nước ngoài,"
+    },
+    {
+      "start": 1047.8,
+      "end": 1052.7,
+      "en": "When I speak Chinese, why must I speak exactly like a Chinese person?",
+      "zh": "我说中文，为什么一定要和中国人说得一模一样呢？",
+      "pinyin": "Wǒ shuō Zhōngwén, wèishénme yídìng yào hé Zhōngguó rén shuō de yīmúyīyàng ne?",
+      "vi": "Tôi nói tiếng Trung, tại sao nhất định phải nói giống hệt người Trung Quốc chứ?"
+    },
+    {
+      "start": 1052.7,
+      "end": 1054.57,
+      "en": "It’s important to understand this.",
+      "zh": "想通了这一点很重要。",
+      "pinyin": "Xiǎngtōng le zhè yì diǎn hěn zhòngyào.",
+      "vi": "Nghĩ thông được điều này rất quan trọng."
+    },
+    {
+      "start": 1054.6,
+      "end": 1055.53,
+      "en": "Right.",
+      "zh": "对。",
+      "pinyin": "Duì.",
+      "vi": "Đúng."
+    },
+    {
+      "start": 1055.57,
+      "end": 1059.64,
+      "en": "What matters is whether others can understand the content of what I say.",
+      "zh": "重要的是，我说的内容，别人能不能听懂。",
+      "pinyin": "Zhòngyào de shì, wǒ shuō de nèiróng, biéren néng bu néng tīngdǒng.",
+      "vi": "Quan trọng là nội dung tôi nói, người khác có hiểu được không."
+    },
+    {
+      "start": 1059.67,
+      "end": 1062.44,
+      "en": "Whether my pronunciation is clear.",
+      "zh": "我的发音是不是清楚。",
+      "pinyin": "Wǒ de fāyīn shì bu shì qīngchu.",
+      "vi": "Phát âm của tôi có rõ ràng không."
+    },
+    {
+      "start": 1062.47,
+      "end": 1065.24,
+      "en": "Whether my tones are basically correct.",
+      "zh": "我的声调是不是基本正确。",
+      "pinyin": "Wǒ de shēngdiào shì bu shì jīběn zhèngquè.",
+      "vi": "Thanh điệu của tôi có cơ bản đúng không."
+    },
+    {
+      "start": 1065.27,
+      "end": 1070.24,
+      "en": "If others can fully understand what I mean, then what does my accent matter?",
+      "zh": "如果别人能完全明白我的意思，那我的口音，又有什么关系呢？",
+      "pinyin": "Rúguǒ biéren néng wánquán míngbai wǒ de yìsi, nà wǒ de kǒuyīn, yòu yǒu shénme guānxi ne?",
+      "vi": "Nếu người khác có thể hoàn toàn hiểu ý tôi, thì giọng của tôi có vấn đề gì chứ?"
+    },
+    {
+      "start": 1070.27,
+      "end": 1072.5,
+      "en": "It’s just one of my characteristics.",
+      "zh": "它只是我的一个特点而已。",
+      "pinyin": "Tā zhǐshì wǒ de yí ge tèdiǎn éryǐ.",
+      "vi": "Nó chỉ là một đặc điểm của tôi mà thôi."
+    },
+    {
+      "start": 1072.53,
+      "end": 1073.9,
+      "en": "You’re absolutely right.",
+      "zh": "你说得非常对。",
+      "pinyin": "Nǐ shuō de fēicháng duì.",
+      "vi": "Bạn nói rất đúng."
+    },
+    {
+      "start": 1073.93,
+      "end": 1079.2,
+      "en": "In language learning, “communication” comes first; “perfection” is secondary.",
+      "zh": "在语言学习里，“沟通”是第一位的，“完美”是次要的。",
+      "pinyin": "Zài yǔyán xuéxí lǐ, “gōutōng” shì dì yī wèi de, “wánměi” shì cìyào de.",
+      "vi": "Trong việc học ngôn ngữ, “giao tiếp” là quan trọng nhất, “hoàn hảo” là thứ yếu."
+    },
+    {
+      "start": 1079.2,
+      "end": 1082.93,
+      "en": "A person who speaks imperfectly but confidently and fluently,",
+      "zh": "一个说得不完美但很自信、很流利的人，",
+      "pinyin": "Yí ge shuō de bù wánměi dàn hěn zìxìn, hěn liúlì de rén,",
+      "vi": "Một người nói không hoàn hảo nhưng rất tự tin, rất trôi chảy,"
+    },
+    {
+      "start": 1082.93,
+      "end": 1086.76,
+      "en": "is far more successful than someone whose grammar is perfect but who doesn’t dare speak.",
+      "zh": "比一个语法完美但不敢开口的人，要成功得多。",
+      "pinyin": "Bǐ yí ge yǔfǎ wánměi dàn bù gǎn kāikǒu de rén, yào chénggōng de duō.",
+      "vi": "sẽ thành công hơn nhiều so với một người ngữ pháp hoàn hảo nhưng không dám mở miệng."
+    },
+    {
+      "start": 1086.8,
+      "end": 1094.3,
+      "en": "Moreover, I later discovered that many Chinese people find foreigners’ Chinese accents very cute.",
+      "zh": "而且，后来我发现，很多中国人觉得外国人说中文的口音很可爱。",
+      "pinyin": "Érqiě, hòulái wǒ fāxiàn, hěn duō Zhōngguó rén juéde wàiguó rén shuō Zhōngwén de kǒuyīn hěn kě'ài.",
+      "vi": "Hơn nữa, sau này tôi phát hiện ra nhiều người Trung Quốc thấy giọng tiếng Trung của người nước ngoài rất đáng yêu."
+    },
+    {
+      "start": 1094.3,
+      "end": 1102.1,
+      "en": "They think, wow, you’re working hard to learn our language—that itself is a wonderful thing.",
+      "zh": "他们觉得，哇，你在努力学习我们的语言，这本身就是一件非常棒的事情。",
+      "pinyin": "Tāmen juéde, wa, nǐ zài nǔlì xuéxí wǒmen de yǔyán, zhè běnshēn jiùshì yí jiàn fēicháng bàng de shìqing.",
+      "vi": "Họ nghĩ, oa, bạn đang cố gắng học ngôn ngữ của chúng tôi, bản thân điều đó đã là một việc rất tuyệt vời."
+    },
+    {
+      "start": 1102.1,
+      "end": 1105.8,
+      "en": "They won’t laugh at you because of your accent.",
+      "zh": "他们不会因为你的口音而嘲笑你。",
+      "pinyin": "Tāmen bú huì yīnwèi nǐ de kǒuyīn ér cháoxiào nǐ.",
+      "vi": "Họ sẽ không vì giọng của bạn mà cười nhạo bạn."
+    },
+    {
+      "start": 1105.93,
+      "end": 1106.73,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 1106.77,
+      "end": 1110.94,
+      "en": "So the seventh thing is: please accept your imperfections.",
+      "zh": "所以，第七件事就是，请接受自己的不完美。",
+      "pinyin": "Suǒyǐ, dì qī jiàn shì jiùshì, qǐng jiēshòu zìjǐ de bù wánměi.",
+      "vi": "Vậy nên, điều thứ bảy là: hãy chấp nhận sự không hoàn hảo của bản thân."
+    },
+    {
+      "start": 1111.03,
+      "end": 1117.43,
+      "en": "Your accent isn’t a flaw; it’s a medal for being a brave language learner.",
+      "zh": "你的口音不是你的缺点，而是你作为一名勇敢的语言学习者的勋章。",
+      "pinyin": "Nǐ de kǒuyīn bú shì nǐ de quēdiǎn, érshì nǐ zuòwéi yì míng yǒnggǎn de yǔyán xuéxízhě de xūnzhāng.",
+      "vi": "Giọng của bạn không phải là khuyết điểm, mà là huy chương của một người học ngôn ngữ dũng cảm."
+    },
+    {
+      "start": 1117.47,
+      "end": 1122.54,
+      "en": "As long as you speak clearly and others can understand, you’re already very, very successful.",
+      "zh": "只要你说得清楚，别人能懂，你就已经非常非常成功了。",
+      "pinyin": "Zhǐyào nǐ shuō de qīngchu, biéren néng dǒng, nǐ jiù yǐjīng fēicháng fēicháng chénggōng le.",
+      "vi": "Chỉ cần bạn nói rõ ràng, người khác hiểu được, thì bạn đã vô cùng vô cùng thành công rồi."
+    },
+    {
+      "start": 1122.6,
+      "end": 1126.37,
+      "en": "Well said—it’s our “medal”!",
+      "zh": "说得太好了，是我们的“勋章”！",
+      "pinyin": "Shuō de tài hǎo le, shì wǒmen de “xūnzhāng”!",
+      "vi": "Nói hay quá, là “huy chương” của chúng ta!"
+    },
+    {
+      "start": 1126.4,
+      "end": 1127.43,
+      "en": "Okay, Wang Yu.",
+      "zh": "好了，王雨。",
+      "pinyin": "Hǎo le, Wáng Yǔ.",
+      "vi": "Được rồi, Vương Vũ."
+    },
+    {
+      "start": 1127.43,
+      "end": 1132.7,
+      "en": "Today we talked about seven things we wish we had known before learning Chinese.",
+      "zh": "我们今天聊了七件我们希望在学中文之前就知道的事情。",
+      "pinyin": "Wǒmen jīntiān liáo le qī jiàn wǒmen xīwàng zài xué Zhōngwén zhīqián jiù zhīdào de shìqing.",
+      "vi": "Hôm nay chúng ta đã nói về bảy điều mà chúng ta ước mình biết trước khi học tiếng Trung."
+    },
+    {
+      "start": 1132.7,
+      "end": 1134.5,
+      "en": "Let’s briefly review.",
+      "zh": "我们来简单回顾一下。",
+      "pinyin": "Wǒmen lái jiǎndān huígù yíxià.",
+      "vi": "Chúng ta cùng điểm lại một chút nhé."
+    },
+    {
+      "start": 1134.5,
+      "end": 1135,
+      "en": "Sure.",
+      "zh": "好啊。",
+      "pinyin": "Hǎo a.",
+      "vi": "Được thôi."
+    },
+    {
+      "start": 1135,
+      "end": 1138.87,
+      "en": "First, tones are king—very important.",
+      "zh": "第一，声调是国王，非常重要。",
+      "pinyin": "Dì yī, shēngdiào shì guówáng, fēicháng zhòngyào.",
+      "vi": "Thứ nhất, thanh điệu là vua, rất quan trọng."
+    },
+    {
+      "start": 1138.9,
+      "end": 1143.77,
+      "en": "Second, Chinese characters are Lego blocks—there are patterns to follow.",
+      "zh": "第二，汉字是乐高积木，有规律可循。",
+      "pinyin": "Dì èr, Hànzì shì Lègāo jīmù, yǒu guīlǜ kě xún.",
+      "vi": "Thứ hai, chữ Hán là những khối lego, có quy luật để theo."
+    },
+    {
+      "start": 1143.8,
+      "end": 1147.33,
+      "en": "Third, start speaking from day one.",
+      "zh": "第三，从第一天起就要开口说。",
+      "pinyin": "Dì sān, cóng dì yī tiān qǐ jiù yào kāikǒu shuō.",
+      "vi": "Thứ ba, phải mở miệng nói ngay từ ngày đầu tiên."
+    },
+    {
+      "start": 1147.37,
+      "end": 1152,
+      "en": "Fourth, learn phrases and sentences, not individual characters.",
+      "zh": "第四，学习词组和句子，而不是单个的字。",
+      "pinyin": "Dì sì, xuéxí cízǔ hé jùzi, ér bú shì dāngè de zì.",
+      "vi": "Thứ tư, học cụm từ và câu, chứ không phải từng chữ đơn lẻ."
+    },
+    {
+      "start": 1152,
+      "end": 1157.43,
+      "en": "Fifth, daily consistency is more important than studying for a long time at once.",
+      "zh": "第五，每天坚持比一次学很久更重要。",
+      "pinyin": "Dì wǔ, měitiān jiānchí bǐ yí cì xué hěn jiǔ gèng zhòngyào.",
+      "vi": "Thứ năm, kiên trì mỗi ngày quan trọng hơn là học một lần thật lâu."
+    },
+    {
+      "start": 1157.43,
+      "end": 1161,
+      "en": "Sixth, let your hobbies be your teacher.",
+      "zh": "第六，让你的爱好成为你的老师。",
+      "pinyin": "Dì liù, ràng nǐ de àihào chéngwéi nǐ de lǎoshī.",
+      "vi": "Thứ sáu, hãy để sở thích trở thành thầy giáo của bạn."
+    },
+    {
+      "start": 1161,
+      "end": 1165.33,
+      "en": "Seventh, accept that you have an accent—communication comes first.",
+      "zh": "第七，接受自己有口音，沟通是第一位的。",
+      "pinyin": "Dì qī, jiēshòu zìjǐ yǒu kǒuyīn, gōutōng shì dì yī wèi de.",
+      "vi": "Thứ bảy, chấp nhận rằng mình có giọng, giao tiếp là quan trọng nhất."
+    },
+    {
+      "start": 1165.37,
+      "end": 1168.13,
+      "en": "That’s a great summary.",
+      "zh": "总结得真好。",
+      "pinyin": "Zǒngjié de zhēn hǎo.",
+      "vi": "Tổng kết hay thật."
+    },
+    {
+      "start": 1168.13,
+      "end": 1174.1,
+      "en": "These seven things are truly lessons we only understood through a lot of time and effort.",
+      "zh": "这七件事，真的都是我们用很多时间和努力才明白的道理。",
+      "pinyin": "Zhè qī jiàn shì, zhēn de dōu shì wǒmen yòng hěn duō shíjiān hé nǔlì cái míngbai de dàolǐ.",
+      "vi": "Bảy điều này thật sự đều là những bài học mà chúng tôi phải dùng nhiều thời gian và nỗ lực mới hiểu ra."
+    },
+    {
+      "start": 1174.17,
+      "end": 1179.17,
+      "en": "We hope today’s conversation can give you, who are working hard to learn Chinese,",
+      "zh": "希望我们今天的对话，能给正在努力学习中文的你，",
+      "pinyin": "Xīwàng wǒmen jīntiān de duìhuà, néng gěi zhèngzài nǔlì xuéxí Zhōngwén de nǐ,",
+      "vi": "Hy vọng cuộc trò chuyện hôm nay của chúng tôi có thể gửi đến bạn, người đang cố gắng học tiếng Trung,"
+    },
+    {
+      "start": 1179.17,
+      "end": 1184.1,
+      "en": "someone like my friend Ruan Ming, a little help and encouragement.",
+      "zh": "像我的朋友阮明那样的你，一点点帮助和鼓励。",
+      "pinyin": "xiàng wǒ de péngyou Ruǎn Míng nàyàng de nǐ, yìdiǎndiǎn bāngzhù hé gǔlì.",
+      "vi": "một người giống như bạn tôi Nguyễn Minh, một chút giúp đỡ và động viên."
+    },
+    {
+      "start": 1184.1,
+      "end": 1187.1,
+      "en": "Yeah, on the path of learning, you are not alone.",
+      "zh": "是啊，学习的路上，你们不是一个人。",
+      "pinyin": "Shì a, xuéxí de lùshang, nǐmen bú shì yí ge rén.",
+      "vi": "Đúng vậy, trên con đường học tập, các bạn không phải đi một mình."
+    },
+    {
+      "start": 1187.1,
+      "end": 1188.07,
+      "en": "Right!",
+      "zh": "对！",
+      "pinyin": "Duì!",
+      "vi": "Đúng!"
+    },
+    {
+      "start": 1188.1,
+      "end": 1192.37,
+      "en": "So, we'd also like to ask you, who are listening to our program,",
+      "zh": "那么，我们也想问问正在听我们节目的你，",
+      "pinyin": "Nàme, wǒmen yě xiǎng wènwen zhèngzài tīng wǒmen jiémù de nǐ,",
+      "vi": "Vậy thì, chúng tôi cũng muốn hỏi bạn đang nghe chương trình của chúng tôi,"
+    },
+    {
+      "start": 1192.37,
+      "end": 1196.2,
+      "en": "Do you have any stories from learning Chinese?",
+      "zh": "你在学习中文的过程中，有没有什么故事？",
+      "pinyin": "Nǐ zài xuéxí Zhōngwén de guòchéng zhōng, yǒu méiyǒu shénme gùshi?",
+      "vi": "Trong quá trình học tiếng Trung, bạn có câu chuyện nào không?"
+    },
+    {
+      "start": 1196.23,
+      "end": 1201.26,
+      "en": "Or which one do you think is most important to you?",
+      "zh": "或者，你觉得哪一件事对你来说最重要？",
+      "pinyin": "Huòzhě, nǐ juéde nǎ yí jiàn shì duì nǐ lái shuō zuì zhòngyào?",
+      "vi": "Hoặc bạn thấy việc nào quan trọng nhất đối với bạn?"
+    },
+    {
+      "start": 1201.3,
+      "end": 1204.7,
+      "en": "You can also tell us in the comments below.",
+      "zh": "你也可以在下面的评论里告诉我们。",
+      "pinyin": "Nǐ yě kěyǐ zài xiàmiàn de pínglùn lǐ gàosu wǒmen.",
+      "vi": "Bạn cũng có thể cho chúng tôi biết trong phần bình luận bên dưới."
+    },
+    {
+      "start": 1204.7,
+      "end": 1207.33,
+      "en": "We're really looking forward to seeing what you share.",
+      "zh": "我们很期待看到你们的分享。",
+      "pinyin": "Wǒmen hěn qīdài kàndào nǐmen de fēnxiǎng.",
+      "vi": "Chúng tôi rất mong được thấy những chia sẻ của các bạn."
+    },
+    {
+      "start": 1207.33,
+      "end": 1209.3,
+      "en": "Alright, that's all for today.",
+      "zh": "好了，今天就到这里吧。",
+      "pinyin": "Hǎo le, jīntiān jiù dào zhèlǐ ba.",
+      "vi": "Được rồi, hôm nay đến đây thôi nhé."
+    },
+    {
+      "start": 1209.33,
+      "end": 1210.7,
+      "en": "Mm, see you next time!",
+      "zh": "嗯，下次再见！",
+      "pinyin": "Ń, xià cì zàijiàn!",
+      "vi": "Ừm, hẹn gặp lại lần sau!"
+    },
+    {
+      "start": 1210.7,
+      "end": 1211.23,
+      "en": "Bye-bye!",
+      "zh": "拜拜！",
+      "pinyin": "Bàibài!",
+      "vi": "Tạm biệt!"
+    }
+  ]
+}

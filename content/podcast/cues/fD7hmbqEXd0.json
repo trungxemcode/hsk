@@ -1,0 +1,2001 @@
+{
+  "id": "fD7hmbqEXd0",
+  "youtubeId": "fD7hmbqEXd0",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 1-3 | What do Chinese people do on Dec 31st? Talking about \"New Year's Eve\" | Chinese Daily P...",
+  "durationSec": 790,
+  "cues": [
+    {
+      "start": 6.3,
+      "end": 10.36,
+      "en": "Hello everyone! Welcome to Chinese Daily.",
+      "zh": "大家好！欢迎收听每天中文。",
+      "pinyin": "Dàjiā hǎo! Huānyíng shōutīng Měitiān Zhōngwén.",
+      "vi": "Xin chào mọi người! Chào mừng đến với Mỗi Ngày Trung Văn."
+    },
+    {
+      "start": 10.37,
+      "end": 11.79,
+      "en": "I'm Wang Yu.",
+      "zh": "我是王雨。",
+      "pinyin": "Wǒ shì Wáng Yǔ.",
+      "vi": "Tôi là Vương Vũ."
+    },
+    {
+      "start": 11.8,
+      "end": 13.79,
+      "en": "Hello everyone, I'm Li Ming.",
+      "zh": "大家好，我是李明。",
+      "pinyin": "Dàjiā hǎo, wǒ shì Lǐ Míng.",
+      "vi": "Xin chào mọi người, tôi là Lý Minh."
+    },
+    {
+      "start": 13.8,
+      "end": 16.79,
+      "en": "Wang Yu, the weather has been getting colder and colder lately,",
+      "zh": "王雨，最近天气越来越冷了，",
+      "pinyin": "Wáng Yǔ, zuìjìn tiānqì yuè lái yuè lěng le,",
+      "vi": "Vương Vũ, dạo này thời tiết ngày càng lạnh rồi,"
+    },
+    {
+      "start": 16.8,
+      "end": 20.56,
+      "en": "It feels like another year is about to end. Yeah, Li Ming.",
+      "zh": "感觉一年又要结束了。是啊，李明。",
+      "pinyin": "Gǎnjué yī nián yòu yào jiéshù le. Shì a, Lǐ Míng.",
+      "vi": "Cảm giác một năm nữa lại sắp kết thúc. Đúng vậy, Lý Minh."
+    },
+    {
+      "start": 20.57,
+      "end": 22.29,
+      "en": "Time really flies.",
+      "zh": "时间过得真快。",
+      "pinyin": "Shíjiān guò de zhēn kuài.",
+      "vi": "Thời gian trôi qua thật nhanh."
+    },
+    {
+      "start": 22.3,
+      "end": 27.49,
+      "en": "I looked at the calendar yesterday and found that it's almost December 31st.",
+      "zh": "我昨天看日历，发现马上就是十二月三十一号了。",
+      "pinyin": "Wǒ zuótiān kàn rìlì, fāxiàn mǎshàng jiù shì shí'èr yuè sānshíyī hào le.",
+      "vi": "Hôm qua tôi xem lịch, phát hiện sắp là ngày 31 tháng 12 rồi."
+    },
+    {
+      "start": 27.5,
+      "end": 31.69,
+      "en": "Right. When it comes to December 31st, I get really excited.",
+      "zh": "对。说到十二月三十一号，我就觉得很兴奋。",
+      "pinyin": "Duì. Shuōdào shí'èr yuè sānshíyī hào, wǒ jiù juéde hěn xīngfèn.",
+      "vi": "Đúng vậy. Nhắc đến ngày 31 tháng 12, tôi là thấy rất phấn khích."
+    },
+    {
+      "start": 31.7,
+      "end": 34.26,
+      "en": "It's a very special evening.",
+      "zh": "这是一个很特别的晚上。",
+      "pinyin": "Zhè shì yī gè hěn tèbié de wǎnshang.",
+      "vi": "Đây là một buổi tối rất đặc biệt."
+    },
+    {
+      "start": 34.27,
+      "end": 36.06,
+      "en": "Yeah, I think so too.",
+      "zh": "嗯，我也觉得。",
+      "pinyin": "Ǹg, wǒ yě juéde.",
+      "vi": "Ừm, tôi cũng thấy vậy."
+    },
+    {
+      "start": 36.07,
+      "end": 38.96,
+      "en": "Friends in front of the screen, how are you?",
+      "zh": "屏幕前的朋友们，你们好吗？",
+      "pinyin": "Píngmù qián de péngyou men, nǐmen hǎo ma?",
+      "vi": "Các bạn đang ở trước màn hình, các bạn khỏe không?"
+    },
+    {
+      "start": 38.97,
+      "end": 41.46,
+      "en": "I hope you're having a good day today.",
+      "zh": "希望你们今天过得不错。",
+      "pinyin": "Xīwàng nǐmen jīntiān guò de bùcuò.",
+      "vi": "Hy vọng hôm nay các bạn đã có một ngày tốt lành."
+    },
+    {
+      "start": 41.47,
+      "end": 45.76,
+      "en": "We are Chinese Daily, a podcast that helps everyone easily",
+      "zh": "我们是每天中文，一个帮助大家轻松",
+      "pinyin": "Wǒmen shì Měitiān Zhōngwén, yī gè bāngzhù dàjiā qīngsōng",
+      "vi": "Chúng tôi là Mỗi Ngày Trung Văn, một chương trình giúp mọi người thoải mái"
+    },
+    {
+      "start": 45.77,
+      "end": 47.93,
+      "en": "learn Chinese.",
+      "zh": "学习中文的播客。",
+      "pinyin": "xuéxí Zhōngwén de bōkè.",
+      "vi": "học tiếng Trung qua podcast."
+    },
+    {
+      "start": 47.93,
+      "end": 50.45,
+      "en": "If you're a beginner, don't worry,",
+      "zh": "如果你是初学者，别担心，",
+      "pinyin": "Rúguǒ nǐ shì chūxuézhě, bié dānxīn,",
+      "vi": "Nếu bạn là người mới học, đừng lo,"
+    },
+    {
+      "start": 50.47,
+      "end": 53.79,
+      "en": "We'll speak relatively slowly so you can understand.",
+      "zh": "我们会说得比较慢，让你能听懂。",
+      "pinyin": "Wǒmen huì shuō de bǐjiào màn, ràng nǐ néng tīngdǒng.",
+      "vi": "Chúng tôi sẽ nói tương đối chậm để bạn có thể hiểu."
+    },
+    {
+      "start": 53.8,
+      "end": 57.16,
+      "en": "Yes, just like chatting with a friend.",
+      "zh": "是的，就好像和朋友聊天一样。",
+      "pinyin": "Shì de, jiù hǎoxiàng hé péngyou liáotiān yīyàng.",
+      "vi": "Đúng vậy, giống như đang trò chuyện với bạn bè vậy."
+    },
+    {
+      "start": 57.17,
+      "end": 62.09,
+      "en": "Wang Yu, let's talk about a topic related to the end of the year today.",
+      "zh": "王雨，我们今天就来聊一个和年底有关的话题吧。",
+      "pinyin": "Wáng Yǔ, wǒmen jīntiān jiù lái liáo yī gè hé niándǐ yǒuguān de huàtí ba.",
+      "vi": "Vương Vũ, hôm nay chúng ta hãy nói về một chủ đề liên quan đến cuối năm nhé."
+    },
+    {
+      "start": 62.1,
+      "end": 65.59,
+      "en": "What do you usually do on the evening of December 31st?",
+      "zh": "十二月三十一号晚上，你一般会做什么？",
+      "pinyin": "Shí'èr yuè sānshíyī hào wǎnshang, nǐ yībān huì zuò shénme?",
+      "vi": "Vào tối ngày 31 tháng 12, bạn thường làm gì?"
+    },
+    {
+      "start": 65.6,
+      "end": 69.12,
+      "en": "Good question! That's exactly what I wanted to ask you.",
+      "zh": "好问题！这也是我正想问你的。",
+      "pinyin": "Hǎo wèntí! Zhè yě shì wǒ zhèng xiǎng wèn nǐ de.",
+      "vi": "Câu hỏi hay! Đây cũng chính là điều tôi muốn hỏi bạn."
+    },
+    {
+      "start": 69.13,
+      "end": 71.52,
+      "en": "Every year seems a bit different for me.",
+      "zh": "我每年好像都不太一样。",
+      "pinyin": "Wǒ měi nián hǎoxiàng dōu bù tài yīyàng.",
+      "vi": "Mỗi năm của tôi hình như đều không giống nhau lắm."
+    },
+    {
+      "start": 71.53,
+      "end": 75.59,
+      "en": "What about you? Will you go home? Celebrate with your parents?",
+      "zh": "你呢？你会回家吗？和爸爸妈妈一起过？",
+      "pinyin": "Nǐ ne? Nǐ huì huí jiā ma? Hé bàba māma yīqǐ guò?",
+      "vi": "Còn bạn? Bạn có về nhà không? Đón cùng bố mẹ à?"
+    },
+    {
+      "start": 75.6,
+      "end": 78.39,
+      "en": "(Laughs) That's a very good question.",
+      "zh": "(笑)，这是一个很好的问题。",
+      "pinyin": "(Xiào), zhè shì yī gè hěn hǎo de wèntí.",
+      "vi": "(Cười) Đây là một câu hỏi rất hay."
+    },
+    {
+      "start": 78.4,
+      "end": 81.79,
+      "en": "Many friends learning Chinese probably think so too.",
+      "zh": "很多学习中文的朋友可能也会这么想。",
+      "pinyin": "Hěn duō xuéxí Zhōngwén de péngyou kěnéng yě huì zhème xiǎng.",
+      "vi": "Nhiều bạn học tiếng Trung có lẽ cũng nghĩ như vậy."
+    },
+    {
+      "start": 81.8,
+      "end": 86.46,
+      "en": "Actually, on the evening of December 31st, we usually don't go home.",
+      "zh": "其实，十二月三十一号晚上，我们一般不回家。",
+      "pinyin": "Qíshí, shí'èr yuè sānshíyī hào wǎnshang, wǒmen yībān bù huí jiā.",
+      "vi": "Thật ra, tối ngày 31 tháng 12, chúng tôi thường không về nhà."
+    },
+    {
+      "start": 86.47,
+      "end": 88.19,
+      "en": "Oh? Why is that?",
+      "zh": "哦？为什么呢？",
+      "pinyin": "Ó? Wèi shénme ne?",
+      "vi": "Ồ? Tại sao vậy?"
+    },
+    {
+      "start": 88.2,
+      "end": 90.19,
+      "en": "That sounds interesting.",
+      "zh": "听起来很有意思。",
+      "pinyin": "Tīng qǐlái hěn yǒu yìsi.",
+      "vi": "Nghe có vẻ rất thú vị."
+    },
+    {
+      "start": 90.2,
+      "end": 93.19,
+      "en": "Then today's topic will be this—",
+      "zh": "那我们今天的话题就是这个吧——",
+      "pinyin": "Nà wǒmen jīntiān de huàtí jiù shì zhège ba—",
+      "vi": "Vậy chủ đề hôm nay của chúng ta sẽ là cái này nhé—"
+    },
+    {
+      "start": 93.2,
+      "end": 96.99,
+      "en": "“What do Chinese people do on December 31st?”",
+      "zh": "“十二月三十一号，中国人做什么？”",
+      "pinyin": "“Shí'èr yuè sānshíyī hào, Zhōngguó rén zuò shénme?”",
+      "vi": "“Ngày 31 tháng 12, người Trung Quốc làm gì?”"
+    },
+    {
+      "start": 97,
+      "end": 101.32,
+      "en": "Great. Let's talk about “celebrating New Year's Eve” in China.",
+      "zh": "非常好。我们就来聊一聊中国的“跨年”。",
+      "pinyin": "Fēicháng hǎo. Wǒmen jiù lái liáo yī liáo Zhōngguó de “kuànián”.",
+      "vi": "Rất tốt. Chúng ta hãy nói một chút về “đón năm mới” ở Trung Quốc."
+    },
+    {
+      "start": 101.33,
+      "end": 105.35,
+      "en": "Li Ming, you just said a word, “kuànián” (New Year's Eve celebration).",
+      "zh": "李明，你刚才说了一个词，“跨年”。",
+      "pinyin": "Lǐ Míng, nǐ gāngcái shuō le yī gè cí, “kuànián”.",
+      "vi": "Lý Minh, bạn vừa nói một từ, “đón năm mới”."
+    },
+    {
+      "start": 105.37,
+      "end": 107.26,
+      "en": "This word is very interesting.",
+      "zh": "这个词很有意思。",
+      "pinyin": "Zhège cí hěn yǒu yìsi.",
+      "vi": "Từ này rất thú vị."
+    },
+    {
+      "start": 107.27,
+      "end": 109.99,
+      "en": "Could you explain it to everyone?",
+      "zh": "你可以给大家解释一下吗？",
+      "pinyin": "Nǐ kěyǐ gěi dàjiā jiěshì yīxià ma?",
+      "vi": "Bạn có thể giải thích cho mọi người một chút không?"
+    },
+    {
+      "start": 110,
+      "end": 114.56,
+      "en": "Is “kuànián” the same as “guònián,” which we often say?",
+      "zh": "“跨年”和我们常说的“过年”是一样的吗？",
+      "pinyin": "“Kuànián” hé wǒmen cháng shuō de “guònián” shì yīyàng de ma?",
+      "vi": "“Đón năm mới” có giống với “ăn Tết” mà chúng ta thường nói không?"
+    },
+    {
+      "start": 114.57,
+      "end": 116.69,
+      "en": "This question is very well asked.",
+      "zh": "这个问题问得非常好。",
+      "pinyin": "Zhège wèntí wèn de fēicháng hǎo.",
+      "vi": "Câu hỏi này hỏi rất hay."
+    },
+    {
+      "start": 116.7,
+      "end": 120.56,
+      "en": "This is also where many foreign friends often get confused.",
+      "zh": "这也是很多外国朋友常常会搞错的地方。",
+      "pinyin": "Zhè yě shì hěn duō wàiguó péngyou chángcháng huì gǎocuò de dìfang.",
+      "vi": "Đây cũng là chỗ mà nhiều bạn nước ngoài thường hay nhầm."
+    },
+    {
+      "start": 120.57,
+      "end": 123.39,
+      "en": "Simply put, “kuànián” and “guònián”",
+      "zh": "简单来说，“跨年”和“过年”",
+      "pinyin": "Jiǎndān lái shuō, “kuànián” hé “guònián”",
+      "vi": "Nói đơn giản, “đón năm mới” và “ăn Tết”"
+    },
+    {
+      "start": 123.4,
+      "end": 126.09,
+      "en": "are two completely different things.",
+      "zh": "是两个完全不同的事情。",
+      "pinyin": "shì liǎng gè wánquán bùtóng de shìqing.",
+      "vi": "là hai việc hoàn toàn khác nhau."
+    },
+    {
+      "start": 126.1,
+      "end": 128.66,
+      "en": "Yeah, I'm listening. “Guònián”",
+      "zh": "嗯，我听着呢。“过年”",
+      "pinyin": "Ǹg, wǒ tīng zhe ne. “Guònián”",
+      "vi": "Ừm, tôi đang nghe đây. “Ăn Tết”"
+    },
+    {
+      "start": 128.67,
+      "end": 132.89,
+      "en": "refers to the Chinese Spring Festival, that is, the Lunar New Year.",
+      "zh": "指的是中国的春节，也就是农历新年。",
+      "pinyin": "zhǐ de shì Zhōngguó de Chūnjié, yě jiùshì nónglì xīnnián.",
+      "vi": "chỉ Tết Xuân của Trung Quốc, tức là Tết Âm lịch."
+    },
+    {
+      "start": 132.9,
+      "end": 137.76,
+      "en": "That's a very important holiday, a day for family reunions.",
+      "zh": "那是一个非常重要的节日，是一家人团圆的日子。",
+      "pinyin": "Nà shì yī gè fēicháng zhòngyào de jiérì, shì yī jiā rén tuányuán de rìzi.",
+      "vi": "Đó là một ngày lễ rất quan trọng, là ngày gia đình đoàn tụ."
+    },
+    {
+      "start": 137.77,
+      "end": 141.09,
+      "en": "At that time, no matter how far away you work,",
+      "zh": "那时候，不管你在多远的地方工作，",
+      "pinyin": "Nà shíhou, bùguǎn nǐ zài duō yuǎn de dìfang gōngzuò,",
+      "vi": "Vào lúc đó, dù bạn làm việc ở nơi xa đến đâu,"
+    },
+    {
+      "start": 141.1,
+      "end": 144.29,
+      "en": "you must go home, with your parents,",
+      "zh": "你都一定要回家，和爸爸妈妈、",
+      "pinyin": "Nǐ dōu yīdìng yào huí jiā, hé bàba māma,",
+      "vi": "bạn nhất định đều phải về nhà, cùng bố mẹ,"
+    },
+    {
+      "start": 144.3,
+      "end": 147.96,
+      "en": "and grandparents, eat together and watch the Spring Festival Gala.",
+      "zh": "爷爷奶奶一起吃饭，看春晚。",
+      "pinyin": "yéye nǎinai yīqǐ chīfàn, kàn Chūnwǎn.",
+      "vi": "ông bà cùng ăn cơm, xem Gala Xuân."
+    },
+    {
+      "start": 147.97,
+      "end": 149.26,
+      "en": "I see.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 149.27,
+      "end": 152.16,
+      "en": "“Guònián” means being with family.",
+      "zh": "“过年”是和家人在一起。",
+      "pinyin": "“Guònián” shì hé jiārén zài yīqǐ.",
+      "vi": "“Ăn Tết” là ở bên gia đình."
+    },
+    {
+      "start": 152.17,
+      "end": 154.39,
+      "en": "So at that time you would ask a friend:",
+      "zh": "所以那时候你会问朋友:",
+      "pinyin": "Suǒyǐ nà shíhou nǐ huì wèn péngyou:",
+      "vi": "Vì vậy lúc đó bạn sẽ hỏi bạn bè:"
+    },
+    {
+      "start": 154.4,
+      "end": 158.26,
+      "en": "“When are you going home for the New Year?” Exactly right.",
+      "zh": "“你什么时候回家过年？”完全正确。",
+      "pinyin": "“Nǐ shénme shíhou huí jiā guònián?” Wánquán zhèngquè.",
+      "vi": "“Bao giờ bạn về nhà ăn Tết?” Hoàn toàn chính xác."
+    },
+    {
+      "start": 158.27,
+      "end": 162.89,
+      "en": "But “kuànián” refers to the evening of December 31st.",
+      "zh": "但是“跨年”，它指的是十二月三十一号的晚上。",
+      "pinyin": "Dànshì “kuànián”, tā zhǐ de shì shí'èr yuè sānshíyī hào de wǎnshang.",
+      "vi": "Nhưng “đón năm mới” thì chỉ tối ngày 31 tháng 12."
+    },
+    {
+      "start": 162.9,
+      "end": 166.39,
+      "en": "This day is the day before the Gregorian New Year.",
+      "zh": "这一天是公历新年的前一天。",
+      "pinyin": "Zhè yī tiān shì gōnglì xīnnián de qián yī tiān.",
+      "vi": "Ngày này là ngày trước Tết Dương lịch một ngày."
+    },
+    {
+      "start": 166.4,
+      "end": 169.99,
+      "en": "We go from the old year into the new year.",
+      "zh": "我们从旧的一年，走到新的一年。",
+      "pinyin": "Wǒmen cóng jiù de yī nián, zǒu dào xīn de yī nián.",
+      "vi": "Chúng ta đi từ năm cũ sang năm mới."
+    },
+    {
+      "start": 170,
+      "end": 172.52,
+      "en": "This action is called “stepping over.”",
+      "zh": "这个动作，就叫做“跨”。",
+      "pinyin": "Zhège dòngzuò, jiù jiàozuò “kuà”.",
+      "vi": "Động tác này được gọi là “bước qua”."
+    },
+    {
+      "start": 172.53,
+      "end": 174.99,
+      "en": "So “celebrating New Year’s Eve” means",
+      "zh": "所以“跨年”，意思就是",
+      "pinyin": "Suǒyǐ “kuà nián”, yìsi jiùshì",
+      "vi": "Vậy nên “đón giao thừa”, ý nghĩa chính là"
+    },
+    {
+      "start": 175,
+      "end": 178.79,
+      "en": "“Stepping over this year and welcoming the new year.”",
+      "zh": "“跨过这一年，迎接新的一年”。",
+      "pinyin": "“Kuàguò zhè yī nián, yíngjiē xīn de yī nián”.",
+      "vi": "“Bước qua năm này, chào đón năm mới”."
+    },
+    {
+      "start": 178.8,
+      "end": 181.49,
+      "en": "Wow, this explanation is very vivid.",
+      "zh": "哇，这个解释很形象。",
+      "pinyin": "Wa, zhège jiěshì hěn xíngxiàng.",
+      "vi": "Ồ, cách giải thích này thật sinh động."
+    },
+    {
+      "start": 181.5,
+      "end": 184.79,
+      "en": "“Step over” is like when we walk, from one room",
+      "zh": "“跨”就像我们走路，从一个房间",
+      "pinyin": "“Kuà” jiù xiàng wǒmen zǒulù, cóng yī gè fángjiān",
+      "vi": "“Bước qua” giống như khi chúng ta đi bộ, từ một căn phòng"
+    },
+    {
+      "start": 184.8,
+      "end": 186.86,
+      "en": "to another room.",
+      "zh": "走到另一个房间。",
+      "pinyin": "zǒu dào lìng yī gè fángjiān.",
+      "vi": "bước sang một căn phòng khác."
+    },
+    {
+      "start": 186.87,
+      "end": 187.76,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 187.77,
+      "end": 189.59,
+      "en": "Moreover, during New Year’s Eve,",
+      "zh": "而且，“跨年”的时候，",
+      "pinyin": "Érqiě, “kuà nián” de shíhou,",
+      "vi": "Hơn nữa, vào dịp “đón giao thừa”,"
+    },
+    {
+      "start": 189.6,
+      "end": 192.29,
+      "en": "we usually aren’t with our family.",
+      "zh": "我们一般不和家人在一起。",
+      "pinyin": "wǒmen yībān bù hé jiārén zài yīqǐ.",
+      "vi": "chúng ta thường không ở cùng gia đình."
+    },
+    {
+      "start": 192.3,
+      "end": 195.76,
+      "en": "We usually celebrate with friends, or with your boyfriend",
+      "zh": "我们通常会和朋友们、或者和你的男朋友、",
+      "pinyin": "Wǒmen tōngcháng huì hé péngyoumen, huòzhě hé nǐ de nánpéngyou,",
+      "vi": "Chúng ta thường ở cùng bạn bè, hoặc cùng bạn trai,"
+    },
+    {
+      "start": 195.77,
+      "end": 198.79,
+      "en": "or girlfriend outside.",
+      "zh": "女朋友一起在外面庆祝。",
+      "pinyin": "nǚpéngyou yīqǐ zài wàimiàn qìngzhù.",
+      "vi": "bạn gái cùng nhau ăn mừng ở bên ngoài."
+    },
+    {
+      "start": 198.8,
+      "end": 200.66,
+      "en": "Ah, I get it!",
+      "zh": "啊，我懂了！",
+      "pinyin": "A, wǒ dǒng le!",
+      "vi": "À, tôi hiểu rồi!"
+    },
+    {
+      "start": 200.67,
+      "end": 203.69,
+      "en": "So “celebrating the Lunar New Year” is family time,",
+      "zh": "所以，“过年”是家庭时间，",
+      "pinyin": "Suǒyǐ, “guònián” shì jiātíng shíjiān,",
+      "vi": "Vậy nên, “đón Tết” là thời gian dành cho gia đình,"
+    },
+    {
+      "start": 203.7,
+      "end": 206.29,
+      "en": "and “New Year’s Eve” is friends time.",
+      "zh": "“跨年”是朋友时间。",
+      "pinyin": "“kuà nián” shì péngyou shíjiān.",
+      "vi": "“đón giao thừa” là thời gian dành cho bạn bè."
+    },
+    {
+      "start": 206.3,
+      "end": 210.29,
+      "en": "One is family time, the other is friends time.",
+      "zh": "一个是家庭时间，一个是朋友时间。",
+      "pinyin": "Yī gè shì jiātíng shíjiān, yī gè shì péngyou shíjiān.",
+      "vi": "Một cái là thời gian gia đình, một cái là thời gian bạn bè."
+    },
+    {
+      "start": 210.3,
+      "end": 213.69,
+      "en": "You summed it up wonderfully. That’s exactly what it means.",
+      "zh": "你总结得太棒了。就是这个意思。",
+      "pinyin": "Nǐ zǒngjié de tài bàng le. Jiù shì zhège yìsi.",
+      "vi": "Bạn tổng kết hay quá. Chính là ý đó."
+    },
+    {
+      "start": 213.7,
+      "end": 214.19,
+      "en": "So,",
+      "zh": "所以，",
+      "pinyin": "Suǒyǐ,",
+      "vi": "Vậy nên,"
+    },
+    {
+      "start": 214.2,
+      "end": 217.69,
+      "en": "If on December 31st you ask a Chinese friend",
+      "zh": "如果十二月三十一号你问一个中国朋友",
+      "pinyin": "Rúguǒ shí'èr yuè sānshíyī hào nǐ wèn yī gè Zhōngguó péngyou",
+      "vi": "Nếu ngày 31 tháng 12 bạn hỏi một người bạn Trung Quốc"
+    },
+    {
+      "start": 217.7,
+      "end": 221.26,
+      "en": "“Are you going home?”, he might find it a bit strange.",
+      "zh": "“你回家吗？”，他可能会觉得有点奇怪。",
+      "pinyin": "“Nǐ huí jiā ma?”, tā kěnéng huì juéde yǒudiǎn qíguài.",
+      "vi": "“Cậu về nhà không?”, cậu ấy có thể sẽ thấy hơi lạ."
+    },
+    {
+      "start": 221.27,
+      "end": 224.29,
+      "en": "You should ask: “Where are you going tonight to",
+      "zh": "你应该问:“你今天晚上去哪里跨",
+      "pinyin": "Nǐ yīnggāi wèn: “Nǐ jīntiān wǎnshang qù nǎlǐ kuà",
+      "vi": "Bạn nên hỏi: “Tối nay bạn đi đâu đón"
+    },
+    {
+      "start": 224.3,
+      "end": 227.96,
+      "en": "celebrate New Year’s Eve?” “Where are you going tonight to celebrate New Year’s Eve?”",
+      "zh": "年？”“你今天晚上去哪里跨年？”",
+      "pinyin": "nián?” “Nǐ jīntiān wǎnshang qù nǎlǐ kuà nián?”",
+      "vi": "giao thừa?” “Tối nay bạn đi đâu đón giao thừa?”"
+    },
+    {
+      "start": 227.97,
+      "end": 229.66,
+      "en": "Mm, I’ve remembered it.",
+      "zh": "嗯，我记住了。",
+      "pinyin": "Ng, wǒ jì zhù le.",
+      "vi": "Ừm, tôi nhớ rồi."
+    },
+    {
+      "start": 229.67,
+      "end": 233.79,
+      "en": "This is truly a very important cultural point.",
+      "zh": "这真是一个非常重要的文化知识点。",
+      "pinyin": "Zhè zhēn shì yī gè fēicháng zhòngyào de wénhuà zhīshì diǎn.",
+      "vi": "Đây thật sự là một điểm kiến thức văn hóa rất quan trọng."
+    },
+    {
+      "start": 233.8,
+      "end": 236.32,
+      "en": "So how do we usually celebrate New Year’s Eve?",
+      "zh": "那么，我们一般会怎么跨年呢？",
+      "pinyin": "Nàme, wǒmen yībān huì zěnme kuà nián ne?",
+      "vi": "Vậy chúng ta thường đón giao thừa như thế nào?"
+    },
+    {
+      "start": 236.33,
+      "end": 238.55,
+      "en": "There are many interesting activities.",
+      "zh": "有很多有意思的活动。",
+      "pinyin": "Yǒu hěn duō yǒu yìsi de huódòng.",
+      "vi": "Có rất nhiều hoạt động thú vị."
+    },
+    {
+      "start": 238.57,
+      "end": 241.39,
+      "en": "Wang Yu, do you like lively places?",
+      "zh": "王雨，你喜欢热闹的地方吗？",
+      "pinyin": "Wáng Yǔ, nǐ xǐhuan rènao de dìfang ma?",
+      "vi": "Vương Vũ, bạn có thích những nơi náo nhiệt không?"
+    },
+    {
+      "start": 241.4,
+      "end": 246.06,
+      "en": "Me? Sometimes I like it; sometimes I also like quieter places.",
+      "zh": "我嘛，有时候喜欢，有时候也喜欢安静一点。",
+      "pinyin": "Wǒ ma, yǒu shíhou xǐhuan, yǒu shíhou yě xǐhuan ānjìng yīdiǎn.",
+      "vi": "Mình á, có lúc thích, có lúc cũng thích yên tĩnh một chút."
+    },
+    {
+      "start": 246.07,
+      "end": 249.86,
+      "en": "Tell me about the lively activities first; I’m curious.",
+      "zh": "你先说说热闹的活动吧，我很好奇。",
+      "pinyin": "Nǐ xiān shuōshuo rènao de huódòng ba, wǒ hěn hàoqí.",
+      "vi": "Bạn nói trước về những hoạt động náo nhiệt đi, mình rất tò mò."
+    },
+    {
+      "start": 249.87,
+      "end": 250.79,
+      "en": "Okay.",
+      "zh": "好。",
+      "pinyin": "Hǎo.",
+      "vi": "Được."
+    },
+    {
+      "start": 250.8,
+      "end": 253.66,
+      "en": "In big Chinese cities, such as Beijing,",
+      "zh": "在中国的大城市，比如北京、",
+      "pinyin": "Zài Zhōngguó de dà chéngshì, bǐrú Běijīng,",
+      "vi": "Ở các thành phố lớn của Trung Quốc, ví dụ như Bắc Kinh,"
+    },
+    {
+      "start": 253.67,
+      "end": 256.29,
+      "en": "Shanghai, and Guangzhou, many people on New Year’s Eve",
+      "zh": "上海、广州，很多人跨",
+      "pinyin": "Shànghǎi, Guǎngzhōu, hěn duō rén kuà",
+      "vi": "Thượng Hải, Quảng Châu, rất nhiều người vào đêm"
+    },
+    {
+      "start": 256.3,
+      "end": 261.16,
+      "en": "like to go to the city center, or some very famous places.",
+      "zh": "年的时候喜欢去市中心，或者一些很有名的地方。",
+      "pinyin": "nián de shíhou xǐhuan qù shìzhōngxīn, huòzhě yīxiē hěn yǒumíng de dìfang.",
+      "vi": "giao thừa thích đến trung tâm thành phố, hoặc một số nơi rất nổi tiếng."
+    },
+    {
+      "start": 261.17,
+      "end": 264.26,
+      "en": "Because there will be large-scale celebrations there.",
+      "zh": "因为那里会有大型的庆祝活动。",
+      "pinyin": "Yīnwèi nàlǐ huì yǒu dàxíng de qìngzhù huódòng.",
+      "vi": "Vì ở đó sẽ có hoạt động ăn mừng quy mô lớn."
+    },
+    {
+      "start": 264.27,
+      "end": 266.09,
+      "en": "Just hearing it is exciting!",
+      "zh": "听起来就很兴奋！",
+      "pinyin": "Tīng qǐlái jiù hěn xīngfèn!",
+      "vi": "Nghe thôi đã thấy phấn khích rồi!"
+    },
+    {
+      "start": 266.1,
+      "end": 268.09,
+      "en": "What activities will there be?",
+      "zh": "会有什么活动呢？",
+      "pinyin": "Huì yǒu shénme huódòng ne?",
+      "vi": "Sẽ có những hoạt động gì vậy?"
+    },
+    {
+      "start": 268.1,
+      "end": 271.89,
+      "en": "The most important activity is called the “countdown.”",
+      "zh": "最重要的一个活动，叫做“倒计时”。",
+      "pinyin": "Zuì zhòngyào de yī gè huódòng, jiàozuò “dàojìshí”.",
+      "vi": "Hoạt động quan trọng nhất gọi là “đếm ngược”."
+    },
+    {
+      "start": 271.9,
+      "end": 272.92,
+      "en": "“Countdown”?",
+      "zh": "“倒计时”？",
+      "pinyin": "“Dàojìshí”?",
+      "vi": "“Đếm ngược” à?"
+    },
+    {
+      "start": 272.93,
+      "end": 275.32,
+      "en": "Is it what I think it means?",
+      "zh": "是我想的那个意思吗？",
+      "pinyin": "Shì wǒ xiǎng de nàge yìsi ma?",
+      "vi": "Là ý mà mình đang nghĩ đúng không?"
+    },
+    {
+      "start": 275.33,
+      "end": 277.12,
+      "en": "Right, it’s everyone together",
+      "zh": "对，就是大家一起",
+      "pinyin": "Duì, jiù shì dàjiā yīqǐ",
+      "vi": "Đúng, chính là mọi người cùng nhau"
+    },
+    {
+      "start": 277.13,
+      "end": 281.29,
+      "en": "watching the time on a big screen and counting out loud.",
+      "zh": "看着一个大屏幕上的时间，大声地数数。",
+      "pinyin": "kànzhe yī gè dà píngmù shàng de shíjiān, dàshēng de shǔ shù.",
+      "vi": "nhìn thời gian trên một màn hình lớn, hét to đếm số."
+    },
+    {
+      "start": 281.3,
+      "end": 283.49,
+      "en": "When the new year is about to arrive,",
+      "zh": "当新年快要来的时候，",
+      "pinyin": "Dāng xīnnián kuài yào lái de shíhou,",
+      "vi": "Khi năm mới sắp đến,"
+    },
+    {
+      "start": 283.5,
+      "end": 286.72,
+      "en": "tens of thousands of people will shout together:",
+      "zh": "成千上万的人会一起喊:",
+      "pinyin": "chéngqiānshàngwàn de rén huì yīqǐ hǎn:",
+      "vi": "hàng nghìn hàng vạn người sẽ cùng hét lên:"
+    },
+    {
+      "start": 286.73,
+      "end": 289.32,
+      "en": "“Ten, nine, eight,",
+      "zh": "“十、九、八、",
+      "pinyin": "“Shí, jiǔ, bā,",
+      "vi": "“Mười, chín, tám,"
+    },
+    {
+      "start": 289.33,
+      "end": 294.69,
+      "en": "seven, six, five, four, three, two,",
+      "zh": "七、六、五、四、三、二、",
+      "pinyin": "qī, liù, wǔ, sì, sān, èr,",
+      "vi": "bảy, sáu, năm, bốn, ba, hai,"
+    },
+    {
+      "start": 294.7,
+      "end": 299.16,
+      "en": "one!” Wow! I can picture that scene now!",
+      "zh": "一！”哇！我能想象那个画面了！",
+      "pinyin": "yī!” Wa! Wǒ néng xiǎngxiàng nàge huàmiàn le!",
+      "vi": "một!” Ồ! Mình có thể tưởng tượng ra cảnh đó rồi!"
+    },
+    {
+      "start": 299.17,
+      "end": 301.46,
+      "en": "It must be very exciting!",
+      "zh": "肯定非常激动人心！",
+      "pinyin": "Kěndìng fēicháng jīdòng rénxīn!",
+      "vi": "Chắc chắn rất phấn khích!"
+    },
+    {
+      "start": 301.47,
+      "end": 305.76,
+      "en": "Yes! When they count to “one,” the new year arrives!",
+      "zh": "是的！当数到“一”的时候，新的一年就来了！",
+      "pinyin": "Shì de! Dāng shǔ dào “yī” de shíhou, xīn de yī nián jiù lái le!",
+      "vi": "Đúng vậy! Khi đếm đến “một”, năm mới sẽ đến!"
+    },
+    {
+      "start": 305.77,
+      "end": 310.79,
+      "en": "Everyone hugs each other and says “Happy New Year!” to the people around them.",
+      "zh": "大家会互相拥抱，对身边的人说“新年快乐！”。",
+      "pinyin": "Dàjiā huì hùxiāng yōngbào, duì shēnbiān de rén shuō “xīnnián kuàilè!”.",
+      "vi": "Mọi người sẽ ôm nhau, nói với những người bên cạnh “Chúc mừng năm mới!”."
+    },
+    {
+      "start": 310.8,
+      "end": 314.09,
+      "en": "The atmosphere at that time is really great.",
+      "zh": "那个时候的气氛真的特别好。",
+      "pinyin": "Nàge shíhou de qìfēn zhēn de tèbié hǎo.",
+      "vi": "Bầu không khí lúc đó thật sự rất tuyệt."
+    },
+    {
+      "start": 314.1,
+      "end": 318.26,
+      "en": "“Atmosphere,” um, it’s the feeling that place gives people.",
+      "zh": "“气氛”，嗯，就是那个地方给人的感觉。",
+      "pinyin": "“Qìfēn”, èn, jiùshì nàge dìfang gěi rén de gǎnjué.",
+      "vi": "“Không khí”, ừm, chính là cảm giác mà nơi đó mang lại cho người ta."
+    },
+    {
+      "start": 318.27,
+      "end": 320.79,
+      "en": "Hearing you say that, I can even feel",
+      "zh": "听你这么说，我都能感觉到那种",
+      "pinyin": "Tīng nǐ zhème shuō, wǒ dōu néng gǎnjué dào nà zhǒng",
+      "vi": "Nghe bạn nói vậy, tôi có thể cảm nhận được"
+    },
+    {
+      "start": 320.8,
+      "end": 323.19,
+      "en": "that happy atmosphere. By the way,",
+      "zh": "快乐的气氛了。对了，",
+      "pinyin": "kuàilè de qìfēn le. Duìle,",
+      "vi": "bầu không khí vui vẻ đó rồi. Đúng rồi,"
+    },
+    {
+      "start": 323.2,
+      "end": 326.59,
+      "en": "Here I’d like to say to the friends listening right now,",
+      "zh": "这里我想对正在听的朋友们说一下，",
+      "pinyin": "Zhèlǐ wǒ xiǎng duì zhèngzài tīng de péngyoumen shuō yíxià,",
+      "vi": "Ở đây tôi muốn nói với những bạn đang nghe một chút,"
+    },
+    {
+      "start": 326.6,
+      "end": 329.89,
+      "en": "If you hear some words, like “atmosphere” or",
+      "zh": "如果你听到一些词，比如“气氛”或者",
+      "pinyin": "Rúguǒ nǐ tīngdào yìxiē cí, bǐrú “qìfēn” huòzhě",
+      "vi": "Nếu bạn nghe thấy một số từ, ví dụ “không khí” hoặc"
+    },
+    {
+      "start": 329.9,
+      "end": 333.66,
+      "en": "“countdown,” and find them a bit difficult, it’s totally okay.",
+      "zh": "“倒计时”，觉得有点难，完全没关系。",
+      "pinyin": "“dàojìshí”, juéde yǒudiǎn nán, wánquán méi guānxi.",
+      "vi": "“đếm ngược”, và thấy hơi khó, thì hoàn toàn không sao."
+    },
+    {
+      "start": 333.67,
+      "end": 335.93,
+      "en": "You don’t need to understand every word,",
+      "zh": "你不用明白每一个词，",
+      "pinyin": "Nǐ búyòng míngbai měi yí ge cí,",
+      "vi": "Bạn không cần hiểu từng từ một,"
+    },
+    {
+      "start": 335.93,
+      "end": 340.29,
+      "en": "just try to feel the happy scene we’re describing.",
+      "zh": "试着去感受我们描述的这个开心的画面就好。",
+      "pinyin": "shìzhe qù gǎnshòu wǒmen miáoshù de zhège kāixīn de huàmiàn jiù hǎo.",
+      "vi": "chỉ cần thử cảm nhận khung cảnh vui vẻ mà chúng tôi đang miêu tả là được."
+    },
+    {
+      "start": 340.3,
+      "end": 342.19,
+      "en": "Of course, you can also go to our blog",
+      "zh": "当然，你也可以在我们的博",
+      "pinyin": "Dāngrán, nǐ yě kěyǐ zài wǒmen de bó",
+      "vi": "Tất nhiên, bạn cũng có thể lên trang blog của chúng tôi"
+    },
+    {
+      "start": 342.2,
+      "end": 345.92,
+      "en": "to find the full transcript and word explanations.",
+      "zh": "客上找到完整的文本和词语解释。",
+      "pinyin": "kè shàng zhǎodào wánzhěng de wénběn hé cíyǔ jiěshì.",
+      "vi": "để tìm bản văn đầy đủ và phần giải thích từ ngữ."
+    },
+    {
+      "start": 345.93,
+      "end": 348.55,
+      "en": "Yeah, Li Ming is right. Language",
+      "zh": "嗯，李明说得对。语言",
+      "pinyin": "Èn, Lǐ Míng shuō de duì. Yǔyán",
+      "vi": "Ừm, Lý Minh nói đúng. Việc học ngôn ngữ"
+    },
+    {
+      "start": 348.57,
+      "end": 352.66,
+      "en": "learning is like looking at a painting: first feel the beauty of the whole,",
+      "zh": "学习就像看一幅画，先感受整体的美，",
+      "pinyin": "xuéxí jiù xiàng kàn yì fú huà, xiān gǎnshòu zhěngtǐ de měi,",
+      "vi": "giống như xem một bức tranh, trước tiên cảm nhận vẻ đẹp tổng thể,"
+    },
+    {
+      "start": 352.67,
+      "end": 354.76,
+      "en": "then look at each detail.",
+      "zh": "再去看每一个细节。",
+      "pinyin": "zài qù kàn měi yí ge xìjié.",
+      "vi": "rồi mới xem từng chi tiết."
+    },
+    {
+      "start": 354.77,
+      "end": 355.93,
+      "en": "Well said.",
+      "zh": "说得好。",
+      "pinyin": "Shuō de hǎo.",
+      "vi": "Nói hay lắm."
+    },
+    {
+      "start": 355.93,
+      "end": 357.85,
+      "en": "Besides the countdown,",
+      "zh": "除了倒计时，",
+      "pinyin": "Chúle dàojìshí,",
+      "vi": "Ngoài đếm ngược,"
+    },
+    {
+      "start": 357.87,
+      "end": 362.56,
+      "en": "there’s another activity that’s also very popular: “watching fireworks.”",
+      "zh": "还有一个活动也非常受欢迎，那就是“看烟花”。",
+      "pinyin": "hái yǒu yí ge huódòng yě fēicháng shòu huānyíng, nà jiùshì “kàn yānhuā”.",
+      "vi": "còn có một hoạt động cũng rất được yêu thích, đó là “xem pháo hoa”."
+    },
+    {
+      "start": 362.57,
+      "end": 363.93,
+      "en": "Ah, fireworks!",
+      "zh": "啊，烟花！",
+      "pinyin": "A, yānhuā!",
+      "vi": "À, pháo hoa!"
+    },
+    {
+      "start": 363.93,
+      "end": 365.39,
+      "en": "I love it!",
+      "zh": "我太喜欢了！",
+      "pinyin": "Wǒ tài xǐhuan le!",
+      "vi": "Tôi thích lắm!"
+    },
+    {
+      "start": 365.4,
+      "end": 369.36,
+      "en": "After the countdown ends, the sky in many places will",
+      "zh": "在倒计时结束以后，很多地方的天空会",
+      "pinyin": "Zài dàojìshí jiéshù yǐhòu, hěnduō dìfang de tiānkōng huì",
+      "vi": "Sau khi đếm ngược kết thúc, bầu trời ở nhiều nơi sẽ"
+    },
+    {
+      "start": 369.37,
+      "end": 373.16,
+      "en": "light up, because there are very, very beautiful fireworks.",
+      "zh": "亮起来，因为有非常非常漂亮的烟花。",
+      "pinyin": "liàng qǐlái, yīnwèi yǒu fēicháng fēicháng piàoliang de yānhuā.",
+      "vi": "sáng lên, vì có pháo hoa vô cùng vô cùng đẹp."
+    },
+    {
+      "start": 373.17,
+      "end": 376.13,
+      "en": "Colorful and very spectacular.",
+      "zh": "五颜六色的，非常壮观。",
+      "pinyin": "Wǔyánliùsè de, fēicháng zhuàngguān.",
+      "vi": "Đủ màu sắc, vô cùng tráng lệ."
+    },
+    {
+      "start": 376.13,
+      "end": 378.65,
+      "en": "Many people will take out their phones to take pictures.",
+      "zh": "很多人会拿出手机拍照。",
+      "pinyin": "Hěnduō rén huì náchū shǒujī pāizhào.",
+      "vi": "Nhiều người sẽ lấy điện thoại ra chụp ảnh."
+    },
+    {
+      "start": 378.67,
+      "end": 380.46,
+      "en": "Yes, yes, yes!",
+      "zh": "对对对！",
+      "pinyin": "Duì duì duì!",
+      "vi": "Đúng đúng đúng!"
+    },
+    {
+      "start": 380.47,
+      "end": 384.49,
+      "en": "“Fireworks are pretty” — that’s a very simple sentence, (laughs).",
+      "zh": "“烟花很漂亮”，这是很简单的句子，(笑)。",
+      "pinyin": "“Yānhuā hěn piàoliang”, zhè shì hěn jiǎndān de jùzi, (xiào).",
+      "vi": "“Pháo hoa rất đẹp”, đây là câu rất đơn giản, (cười)."
+    },
+    {
+      "start": 384.5,
+      "end": 388.92,
+      "en": "I’ve also watched New Year’s Eve fireworks at the Bund in Shanghai before,",
+      "zh": "我以前也在上海外滩看过跨年烟花，",
+      "pinyin": "Wǒ yǐqián yě zài Shànghǎi Wàitān kàn guo kuànián yānhuā,",
+      "vi": "Trước đây tôi cũng từng xem pháo hoa đêm giao thừa ở Bến Thượng Hải, Thượng Hải,"
+    },
+    {
+      "start": 388.93,
+      "end": 393.05,
+      "en": "it was truly packed with people, but when the fireworks in the sky",
+      "zh": "真的是人山人海，但是烟花在天空中",
+      "pinyin": "zhēn de shì rénshānrénhǎi, dànshì yānhuā zài tiānkōng zhōng",
+      "vi": "đúng là người đông như biển, nhưng khi pháo hoa trên bầu trời"
+    },
+    {
+      "start": 393.07,
+      "end": 394.69,
+      "en": "bloomed,",
+      "zh": "绽放的时候，",
+      "pinyin": "zhànfàng de shíhou,",
+      "vi": "nở rộ,"
+    },
+    {
+      "start": 394.7,
+      "end": 397.86,
+      "en": "everyone went “wow” together,",
+      "zh": "所有人都一起“哇”地叫出来，",
+      "pinyin": "suǒyǒu rén dōu yìqǐ “wā” de jiào chūlái,",
+      "vi": "mọi người đều cùng nhau “oa” lên,"
+    },
+    {
+      "start": 397.87,
+      "end": 400.86,
+      "en": "I will never forget that feeling.",
+      "zh": "那种感觉我永远也忘不了。",
+      "pinyin": "nà zhǒng gǎnjué wǒ yǒngyuǎn yě wàng bù liǎo.",
+      "vi": "cảm giác đó tôi mãi mãi không thể nào quên."
+    },
+    {
+      "start": 400.87,
+      "end": 404.99,
+      "en": "Yes, this is the lively way to celebrate New Year’s Eve. With",
+      "zh": "是的，这就是热闹的跨年方式。和成",
+      "pinyin": "Shì de, zhè jiùshì rènao de kuànián fāngshì. Hé chéng",
+      "vi": "Đúng vậy, đây chính là cách đón giao thừa náo nhiệt. Cùng với hàng"
+    },
+    {
+      "start": 405,
+      "end": 409.06,
+      "en": "tens of thousands of people counting down together and watching fireworks together,",
+      "zh": "千上万的人一起倒计时，一起看烟花，",
+      "pinyin": "qiān shàng wàn de rén yìqǐ dàojìshí, yìqǐ kàn yānhuā,",
+      "vi": "vạn người cùng đếm ngược, cùng xem pháo hoa,"
+    },
+    {
+      "start": 409.07,
+      "end": 411.16,
+      "en": "and welcoming the New Year together.",
+      "zh": "一起迎接新年。",
+      "pinyin": "yìqǐ yíngjiē xīnnián.",
+      "vi": "cùng nhau đón năm mới."
+    },
+    {
+      "start": 411.17,
+      "end": 414.36,
+      "en": "It feels like you take all the unhappiness of the past year",
+      "zh": "感觉你把过去一年的所有不开心",
+      "pinyin": "Gǎnjué nǐ bǎ guòqù yì nián de suǒyǒu bù kāixīn",
+      "vi": "Cảm giác như bạn đem tất cả những điều không vui của năm qua"
+    },
+    {
+      "start": 414.37,
+      "end": 419.76,
+      "en": "and shout it all out, then start the new year with full energy.",
+      "zh": "都喊出去了，然后带着满满的能量开始新的一年。",
+      "pinyin": "dōu hǎn chūqù le, ránhòu dàizhe mǎnmǎn de néngliàng kāishǐ xīn de yì nián.",
+      "vi": "hét hết ra ngoài, rồi mang theo năng lượng tràn đầy bắt đầu một năm mới."
+    },
+    {
+      "start": 419.77,
+      "end": 425.69,
+      "en": "Li Ming, the way of celebrating New Year’s Eve you described sounds really great.",
+      "zh": "李明，你描述的这种跨年方式听起来真的太棒了。",
+      "pinyin": "Lǐ Míng, nǐ miáoshù de zhè zhǒng kuànián fāngshì tīng qǐlái zhēn de tài bàng le.",
+      "vi": "Lý Minh, cách đón giao thừa mà bạn miêu tả nghe thật sự quá tuyệt."
+    },
+    {
+      "start": 425.7,
+      "end": 429.66,
+      "en": "But I guess there are definitely some people who, like me,",
+      "zh": "不过，我猜肯定也有一些人像我一样，",
+      "pinyin": "Búguò, wǒ cāi kěndìng yě yǒu yìxiē rén xiàng wǒ yíyàng,",
+      "vi": "Nhưng tôi đoán chắc chắn cũng có một số người giống như tôi,"
+    },
+    {
+      "start": 429.67,
+      "end": 432.56,
+      "en": "are a bit afraid of places with too many people.",
+      "zh": "有点害怕人太多的地方。",
+      "pinyin": "yǒudiǎn hàipà rén tài duō de dìfang.",
+      "vi": "hơi sợ những nơi đông người quá."
+    },
+    {
+      "start": 432.57,
+      "end": 433.53,
+      "en": "Of course.",
+      "zh": "当然。",
+      "pinyin": "Dāngrán.",
+      "vi": "Tất nhiên rồi."
+    },
+    {
+      "start": 433.53,
+      "end": 437.25,
+      "en": "So there’s another very popular way to celebrate New Year’s Eve.",
+      "zh": "所以还有另一种很受欢迎的跨年方式。",
+      "pinyin": "Suǒyǐ hái yǒu lìng yì zhǒng hěn shòu huānyíng de kuànián fāngshì.",
+      "vi": "Vì vậy còn có một cách đón giao thừa khác rất được yêu thích."
+    },
+    {
+      "start": 437.27,
+      "end": 440.46,
+      "en": "This way is quieter and warmer.",
+      "zh": "这种方式更安静，也更温暖。",
+      "pinyin": "Zhè zhǒng fāngshì gèng ānjìng, yě gèng wēnnuǎn.",
+      "vi": "Cách này yên tĩnh hơn, cũng ấm áp hơn."
+    },
+    {
+      "start": 440.47,
+      "end": 443.99,
+      "en": "Tell me quickly—I might like this one better.",
+      "zh": "快说说看，我可能更喜欢这种。",
+      "pinyin": "Kuài shuōshuo kàn, wǒ kěnéng gèng xǐhuan zhè zhǒng.",
+      "vi": "Mau nói thử xem, có lẽ tôi thích kiểu này hơn."
+    },
+    {
+      "start": 444,
+      "end": 447.46,
+      "en": "This way is with three or five best friends",
+      "zh": "这种方式就是和三五个最好的朋友",
+      "pinyin": "Zhè zhǒng fāngshì jiùshì hé sān wǔ ge zuì hǎo de péngyou",
+      "vi": "Cách này chính là cùng với ba hoặc năm người bạn thân nhất"
+    },
+    {
+      "start": 447.47,
+      "end": 449.99,
+      "en": "together, finding a place to get together.",
+      "zh": "一起，找一个地方聚会。",
+      "pinyin": "yìqǐ, zhǎo yí ge dìfang jùhuì.",
+      "vi": "cùng nhau tìm một nơi để tụ tập."
+    },
+    {
+      "start": 450,
+      "end": 452.09,
+      "en": "Oh, I like this!",
+      "zh": "哦，这个我喜欢！",
+      "pinyin": "Ó, zhège wǒ xǐhuan!",
+      "vi": "Ồ, cái này tôi thích!"
+    },
+    {
+      "start": 452.1,
+      "end": 453.76,
+      "en": "What will we do?",
+      "zh": "我们会做什么呢？",
+      "pinyin": "Wǒmen huì zuò shénme ne?",
+      "vi": "Chúng ta sẽ làm gì nhỉ?"
+    },
+    {
+      "start": 453.77,
+      "end": 456.59,
+      "en": "The most common activity is—eating!",
+      "zh": "最常见的活动就是——吃！",
+      "pinyin": "Zuì chángjiàn de huódòng jiùshì——chī!",
+      "vi": "Hoạt động phổ biến nhất chính là——ăn!"
+    },
+    {
+      "start": 456.6,
+      "end": 460.46,
+      "en": "(laughs) Speaking of eating, I get excited.",
+      "zh": "(笑)，说到吃，我就来精神了。",
+      "pinyin": "(xiào), shuōdào chī, wǒ jiù lái jīngshen le.",
+      "vi": "(cười), nói đến ăn là tôi có tinh thần ngay."
+    },
+    {
+      "start": 460.47,
+      "end": 463.09,
+      "en": "Will we eat anything special?",
+      "zh": "我们会吃什么特别的东西吗？",
+      "pinyin": "Wǒmen huì chī shénme tèbié de dōngxi ma?",
+      "vi": "Chúng ta sẽ ăn món gì đặc biệt không?"
+    },
+    {
+      "start": 463.1,
+      "end": 466.69,
+      "en": "In winter, especially on such a cold night,",
+      "zh": "在冬天，尤其是在这么冷的晚上，",
+      "pinyin": "Zài dōngtiān, yóuqí shì zài zhème lěng de wǎnshang,",
+      "vi": "Vào mùa đông, đặc biệt là vào một đêm lạnh thế này,"
+    },
+    {
+      "start": 466.7,
+      "end": 469.86,
+      "en": "everyone likes to “eat hot pot” together most.",
+      "zh": "大家最喜欢一起“吃火锅”。",
+      "pinyin": "Dàjiā zuì xǐhuan yìqǐ “chī huǒguō”.",
+      "vi": "mọi người thích nhất là cùng nhau “ăn lẩu”."
+    },
+    {
+      "start": 469.87,
+      "end": 471.76,
+      "en": "Right! Hot pot!",
+      "zh": "对！吃火锅！",
+      "pinyin": "Duì! Chī huǒguō!",
+      "vi": "Đúng! Ăn lẩu!"
+    },
+    {
+      "start": 471.77,
+      "end": 475.89,
+      "en": "It’s very cold outside, but it’s warm inside.",
+      "zh": "外面天气很冷，但是屋子里很暖和。",
+      "pinyin": "Wàimiàn tiānqì hěn lěng, dànshì wūzi lǐ hěn nuǎnhuo.",
+      "vi": "Bên ngoài trời rất lạnh, nhưng trong phòng rất ấm."
+    },
+    {
+      "start": 475.9,
+      "end": 477.99,
+      "en": "Everyone gathers around a steaming hot pot,",
+      "zh": "大家围着一个热气腾腾的锅，",
+      "pinyin": "Dàjiā wéizhe yí gè rèqìténgténg de guō,",
+      "vi": "Mọi người quây quần quanh một nồi lẩu bốc khói nghi ngút,"
+    },
+    {
+      "start": 478,
+      "end": 482.92,
+      "en": "inside there are all kinds of tasty things, such as beef,",
+      "zh": "里面有各种好吃的，比如牛肉、",
+      "pinyin": "Lǐmiàn yǒu gèzhǒng hǎochī de, bǐrú niúròu,",
+      "vi": "bên trong có đủ loại món ngon, như thịt bò,"
+    },
+    {
+      "start": 482.93,
+      "end": 485.89,
+      "en": "lamb, vegetables, tofu...",
+      "zh": "羊肉、蔬菜、豆腐……",
+      "pinyin": "Yángròu, shūcài, dòufu……",
+      "vi": "thịt cừu, rau củ, đậu phụ..."
+    },
+    {
+      "start": 485.9,
+      "end": 488.26,
+      "en": "eating while chatting.",
+      "zh": "一边吃一边聊天。",
+      "pinyin": "Yìbiān chī yìbiān liáotiān.",
+      "vi": "vừa ăn vừa trò chuyện."
+    },
+    {
+      "start": 488.27,
+      "end": 489.19,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 489.2,
+      "end": 491.99,
+      "en": "I think eating hot pot with friends,",
+      "zh": "我觉得和朋友们一起吃火锅，",
+      "pinyin": "Wǒ juéde hé péngyoumen yìqǐ chī huǒguō,",
+      "vi": "Tôi nghĩ là ăn lẩu cùng bạn bè,"
+    },
+    {
+      "start": 492,
+      "end": 495.59,
+      "en": "is like taking everyone’s warm memories from the past year",
+      "zh": "就像是把大家过去一年的温暖回忆",
+      "pinyin": "Jiù xiàng shì bǎ dàjiā guòqù yì nián de wēnnuǎn huíyì",
+      "vi": "giống như là đem những ký ức ấm áp của mọi người trong năm qua"
+    },
+    {
+      "start": 495.6,
+      "end": 499.36,
+      "en": "and putting them all into one pot, then sharing them together.",
+      "zh": "都放进了一个锅里，然后一起分享。",
+      "pinyin": "Dōu fàng jìnle yí gè guō lǐ, ránhòu yìqǐ fēnxiǎng.",
+      "vi": "đều bỏ vào một cái nồi, rồi cùng nhau chia sẻ."
+    },
+    {
+      "start": 499.37,
+      "end": 501.99,
+      "en": "Nice and hot, really comfortable.",
+      "zh": "热乎乎的，特别舒服。",
+      "pinyin": "Rèhūhū de, tèbié shūfu.",
+      "vi": "Nóng hổi, đặc biệt dễ chịu."
+    },
+    {
+      "start": 502,
+      "end": 504.32,
+      "en": "What a great metaphor!",
+      "zh": "你这个比喻太好了！",
+      "pinyin": "Nǐ zhège bǐyù tài hǎo le!",
+      "vi": "Cách ví von của bạn hay quá!"
+    },
+    {
+      "start": 504.33,
+      "end": 507.92,
+      "en": "“Put warm memories into one pot.”",
+      "zh": "“把温暖的回忆放进一个锅里”。",
+      "pinyin": "“Bǎ wēnnuǎn de huíyì fàngjìn yí gè guō lǐ”.",
+      "vi": "“Đem những ký ức ấm áp bỏ vào một cái nồi”."
+    },
+    {
+      "start": 507.93,
+      "end": 512.99,
+      "en": "What about after hot pot? After eating, everyone can watch TV together.",
+      "zh": "吃完火锅呢？吃完饭，大家可以一起看看电视。",
+      "pinyin": "Chī wán huǒguō ne? Chī wán fàn, dàjiā kěyǐ yìqǐ kàn kan diànshì.",
+      "vi": "Ăn xong lẩu thì sao? Ăn cơm xong, mọi người có thể cùng xem TV."
+    },
+    {
+      "start": 513,
+      "end": 516.36,
+      "en": "Many TV stations have a “New Year’s Eve gala” on New Year’s Eve,",
+      "zh": "很多电视台在跨年夜会有“跨年晚会”，",
+      "pinyin": "Hěn duō diànshìtái zài kuàniányè huì yǒu “kuànián wǎnhuì”,",
+      "vi": "Nhiều đài truyền hình vào đêm giao thừa sẽ có “chương trình đón năm mới”,"
+    },
+    {
+      "start": 516.37,
+      "end": 521.66,
+      "en": "with many stars singing and dancing; it’s also very lively.",
+      "zh": "有很多明星唱歌跳舞，也很热闹。",
+      "pinyin": "Yǒu hěn duō míngxīng chànggē tiàowǔ, yě hěn rènao.",
+      "vi": "có nhiều ngôi sao ca hát nhảy múa, cũng rất náo nhiệt."
+    },
+    {
+      "start": 521.67,
+      "end": 524.29,
+      "en": "Or everyone can play games together,",
+      "zh": "或者，大家可以一起玩游戏，",
+      "pinyin": "Huòzhě, dàjiā kěyǐ yìqǐ wán yóuxì,",
+      "vi": "Hoặc mọi người có thể cùng chơi trò chơi,"
+    },
+    {
+      "start": 524.3,
+      "end": 529.06,
+      "en": "chat about what happened this year, and talk about New Year’s wishes.",
+      "zh": "聊聊这一年发生的事情，说说新年的愿望。",
+      "pinyin": "Liáo liao zhè yì nián fāshēng de shìqíng, shuō shuo xīnnián de yuànwàng.",
+      "vi": "trò chuyện về những chuyện đã xảy ra trong năm nay, nói về những mong ước năm mới."
+    },
+    {
+      "start": 529.07,
+      "end": 531.99,
+      "en": "Mm, this feeling is very warm.",
+      "zh": "嗯，这种感觉很温馨。",
+      "pinyin": "Ng, zhè zhǒng gǎnjué hěn wēnxīn.",
+      "vi": "Ừm, cảm giác này rất ấm áp."
+    },
+    {
+      "start": 532,
+      "end": 534.56,
+      "en": "Then when it’s almost twelve,",
+      "zh": "然后快到十二点的时候，",
+      "pinyin": "Ránhòu kuài dào shí'èr diǎn de shíhou,",
+      "vi": "sau đó khi sắp đến mười hai giờ,"
+    },
+    {
+      "start": 534.57,
+      "end": 539.73,
+      "en": "everyone watches the TV or their phones together and counts down together.",
+      "zh": "大家就一起看着电视或者手机，一起倒计时。",
+      "pinyin": "Dàjiā jiù yìqǐ kànzhe diànshì huòzhě shǒujī, yìqǐ dàojìshí.",
+      "vi": "mọi người cùng nhìn TV hoặc điện thoại, cùng đếm ngược."
+    },
+    {
+      "start": 539.73,
+      "end": 541.09,
+      "en": "Exactly right.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn chính xác."
+    },
+    {
+      "start": 541.1,
+      "end": 543.39,
+      "en": "Although there aren’t tens of thousands of people,",
+      "zh": "虽然没有成千上万的人，",
+      "pinyin": "Suīrán méiyǒu chéngqiānshàngwàn de rén,",
+      "vi": "tuy không có hàng nghìn hàng vạn người,"
+    },
+    {
+      "start": 543.4,
+      "end": 547.06,
+      "en": "but being with your best friends, that feeling",
+      "zh": "但是和最好的朋友们在一起，那种感觉",
+      "pinyin": "Dànshì hé zuì hǎo de péngyoumen zài yìqǐ, nà zhǒng gǎnjué",
+      "vi": "nhưng ở bên những người bạn tốt nhất, cảm giác đó"
+    },
+    {
+      "start": 547.07,
+      "end": 548.86,
+      "en": "is also very special.",
+      "zh": "也非常特别。",
+      "pinyin": "Yě fēicháng tèbié.",
+      "vi": "cũng rất đặc biệt."
+    },
+    {
+      "start": 548.87,
+      "end": 552.16,
+      "en": "When the countdown ends, everyone wishes each other well,",
+      "zh": "倒计时结束，大家互相祝福，",
+      "pinyin": "Dàojìshí jiéshù, dàjiā hùxiāng zhùfú,",
+      "vi": "Đếm ngược kết thúc, mọi người chúc phúc cho nhau,"
+    },
+    {
+      "start": 552.17,
+      "end": 555.86,
+      "en": "and then welcome the first minute of the New Year together.",
+      "zh": "然后一起迎接新年的第一分钟。",
+      "pinyin": "Ránhòu yìqǐ yíngjiē xīnnián de dì yī fēnzhōng.",
+      "vi": "rồi cùng nhau đón phút đầu tiên của năm mới."
+    },
+    {
+      "start": 555.87,
+      "end": 558.69,
+      "en": "I think both ways are great.",
+      "zh": "我觉得两种方式都很好。",
+      "pinyin": "Wǒ juéde liǎng zhǒng fāngshì dōu hěn hǎo.",
+      "vi": "Tôi thấy cả hai cách đều rất hay."
+    },
+    {
+      "start": 558.7,
+      "end": 562.49,
+      "en": "one is feeling the energy and passion of the crowd,",
+      "zh": "一种是感受集体的能量和激情，",
+      "pinyin": "Yì zhǒng shì gǎnshòu jítǐ de néngliàng hé jīqíng,",
+      "vi": "một là cảm nhận năng lượng và sự nhiệt huyết của tập thể,"
+    },
+    {
+      "start": 562.5,
+      "end": 566.92,
+      "en": "the other is feeling the warmth and closeness between friends.",
+      "zh": "另一种是感受朋友之间的温暖和亲密。",
+      "pinyin": "Lìng yì zhǒng shì gǎnshòu péngyou zhījiān de wēnnuǎn hé qīnmì.",
+      "vi": "cách còn lại là cảm nhận sự ấm áp và thân thiết giữa bạn bè."
+    },
+    {
+      "start": 566.93,
+      "end": 568.92,
+      "en": "It depends on which one you like.",
+      "zh": "看你喜欢哪一种。",
+      "pinyin": "Kàn nǐ xǐhuan nǎ yì zhǒng.",
+      "vi": "Tùy xem bạn thích kiểu nào."
+    },
+    {
+      "start": 568.93,
+      "end": 571.05,
+      "en": "Yes, neither is better,",
+      "zh": "是的，没有哪个更好，",
+      "pinyin": "Shì de, méiyǒu nǎge gèng hǎo,",
+      "vi": "Đúng vậy, không có cái nào tốt hơn,"
+    },
+    {
+      "start": 571.07,
+      "end": 574.69,
+      "en": "only which one suits you better. Okay, Wang Yu,",
+      "zh": "只有哪个更适合你。好了，王雨，",
+      "pinyin": "Zhǐyǒu nǎge gèng shìhé nǐ. Hǎo le, Wáng Yǔ,",
+      "vi": "chỉ có cái nào phù hợp với bạn hơn. Được rồi, Vương Vũ,"
+    },
+    {
+      "start": 574.7,
+      "end": 578.39,
+      "en": "Today we talked a lot about the topic of “New Year’s Eve.”",
+      "zh": "今天我们聊了很多关于“跨年”的话题。",
+      "pinyin": "Jīntiān wǒmen liáole hěn duō guānyú “kuànián” de huàtí.",
+      "vi": "Hôm nay chúng ta đã nói nhiều về chủ đề “đón năm mới”."
+    },
+    {
+      "start": 578.4,
+      "end": 581.49,
+      "en": "We used several very important words.",
+      "zh": "我们用到了几个非常重要的词。",
+      "pinyin": "Wǒmen yòngdàole jǐ gè fēicháng zhòngyào de cí.",
+      "vi": "Chúng ta đã dùng đến vài từ rất quan trọng."
+    },
+    {
+      "start": 581.5,
+      "end": 585.86,
+      "en": "I think we can help the listeners review a bit.",
+      "zh": "我觉得我们可以帮助正在收听的朋友们复习一下。",
+      "pinyin": "Wǒ juéde wǒmen kěyǐ bāngzhù zhèngzài shōutīng de péngyoumen fùxí yíxià.",
+      "vi": "Tôi nghĩ chúng ta có thể giúp những người bạn đang nghe ôn tập một chút."
+    },
+    {
+      "start": 585.87,
+      "end": 586.99,
+      "en": "Good idea!",
+      "zh": "好主意！",
+      "pinyin": "Hǎo zhǔyi!",
+      "vi": "Ý hay!"
+    },
+    {
+      "start": 587,
+      "end": 590.79,
+      "en": "You ask, and I’ll explain in the simplest words.",
+      "zh": "你来问，我来用最简单的话解释。",
+      "pinyin": "Nǐ lái wèn, wǒ lái yòng zuì jiǎndān de huà jiěshì.",
+      "vi": "Bạn hỏi đi, tôi sẽ dùng những lời đơn giản nhất để giải thích."
+    },
+    {
+      "start": 590.8,
+      "end": 595.32,
+      "en": "The first one, also our most important word today—“New Year’s Eve.”",
+      "zh": "第一个，也是我们今天最重要的词——“跨年”。",
+      "pinyin": "Dì yī gè, yě shì wǒmen jīntiān zuì zhòngyào de cí——“kuànián”.",
+      "vi": "Từ đầu tiên, cũng là từ quan trọng nhất hôm nay của chúng ta——“đón năm mới”."
+    },
+    {
+      "start": 595.33,
+      "end": 597.65,
+      "en": "If a friend doesn’t know what this means,",
+      "zh": "如果一个朋友不知道这是什么意思，",
+      "pinyin": "Rúguǒ yí gè péngyou bù zhīdào zhè shì shénme yìsi,",
+      "vi": "Nếu một người bạn không biết đây là ý gì,"
+    },
+    {
+      "start": 597.67,
+      "end": 599.46,
+      "en": "how would you tell them?",
+      "zh": "你会怎么告诉他？",
+      "pinyin": "Nǐ huì zěnme gàosu tā?",
+      "vi": "bạn sẽ nói với họ thế nào?"
+    },
+    {
+      "start": 599.47,
+      "end": 602.19,
+      "en": "Mm… I’d say, “New Year’s Eve”",
+      "zh": "嗯……我会说，“跨年”",
+      "pinyin": "Ng…… wǒ huì shuō, “kuànián”",
+      "vi": "Ừm… tôi sẽ nói, “đón năm mới”"
+    },
+    {
+      "start": 602.2,
+      "end": 606.16,
+      "en": "is on the night of December 31st, celebrating",
+      "zh": "就是在十二月三十一号的晚上，庆祝",
+      "pinyin": "Jiù shì zài shí'èr yuè sānshíyī hào de wǎnshang, qìngzhù",
+      "vi": "là vào tối ngày ba mươi mốt tháng mười hai, ăn mừng"
+    },
+    {
+      "start": 606.17,
+      "end": 609.73,
+      "en": "the old year passing and the new year arriving.",
+      "zh": "旧的一年过去，新的一年到来。",
+      "pinyin": "Jiù de yì nián guòqù, xīn de yì nián dàolái.",
+      "vi": "năm cũ qua đi, năm mới đến."
+    },
+    {
+      "start": 609.73,
+      "end": 612.29,
+      "en": "the key point of this word is “kuà” (to step across),",
+      "zh": "这个词的重点是“跨”，",
+      "pinyin": "Zhège cí de zhòngdiǎn shì “kuà”,",
+      "vi": "điểm chính của từ này là “跨”,"
+    },
+    {
+      "start": 612.3,
+      "end": 616.12,
+      "en": "which means “walking” from one point in time to another.",
+      "zh": "就是从一个时间“走”到另一个时间。",
+      "pinyin": "Jiù shì cóng yí gè shíjiān “zǒu” dào lìng yí gè shíjiān.",
+      "vi": "tức là “bước” từ thời điểm này sang thời điểm khác."
+    },
+    {
+      "start": 616.13,
+      "end": 619.39,
+      "en": "It’s different from “celebrating the New Year” during Spring Festival.",
+      "zh": "它和春节的“过年”不一样。",
+      "pinyin": "Tā hé Chūnjié de “guònián” bù yíyàng.",
+      "vi": "Nó khác với “ăn Tết” của Tết Nguyên Đán."
+    },
+    {
+      "start": 619.4,
+      "end": 621.36,
+      "en": "Explained very clearly.",
+      "zh": "解释得非常清楚。",
+      "pinyin": "Jiěshì de fēicháng qīngchu.",
+      "vi": "Giải thích rất rõ ràng."
+    },
+    {
+      "start": 621.37,
+      "end": 624.56,
+      "en": "Okay, the second word—“countdown.”",
+      "zh": "好，第二个词——“倒计时”。",
+      "pinyin": "Hǎo, dì èr gè cí——“dàojìshí”.",
+      "vi": "Được, từ thứ hai——“đếm ngược”."
+    },
+    {
+      "start": 624.57,
+      "end": 627.36,
+      "en": "“Countdown”—this one is very simple.",
+      "zh": "“倒计时”啊，这个很简单。",
+      "pinyin": "“Dàojìshí” a, zhège hěn jiǎndān.",
+      "vi": "“Đếm ngược” à, cái này rất đơn giản."
+    },
+    {
+      "start": 627.37,
+      "end": 632.33,
+      "en": "It means everyone counts together from a big number down to a small number.",
+      "zh": "就是大家一起从大的数字数到小的数字。",
+      "pinyin": "Jiùshì dàjiā yìqǐ cóng dà de shùzì shǔ dào xiǎo de shùzì.",
+      "vi": "Tức là mọi người cùng nhau đếm từ số lớn đến số nhỏ."
+    },
+    {
+      "start": 632.33,
+      "end": 637.35,
+      "en": "For example, we say together loudly: ten, nine, eight...",
+      "zh": "比如，我们一起大声说:十、九、八……",
+      "pinyin": "Bǐrú, wǒmen yìqǐ dàshēng shuō: shí, jiǔ, bā……",
+      "vi": "Ví dụ, chúng ta cùng nói to: mười, chín, tám..."
+    },
+    {
+      "start": 637.37,
+      "end": 639.09,
+      "en": "Count all the way down to one.",
+      "zh": "一直数到一。",
+      "pinyin": "Yìzhí shǔ dào yī.",
+      "vi": "Đếm mãi đến một."
+    },
+    {
+      "start": 639.1,
+      "end": 642.59,
+      "en": "In order to wait for an important moment to arrive.",
+      "zh": "为了等待一个重要时刻的到来。",
+      "pinyin": "Wèile děngdài yí ge zhòngyào shíkè de dàolái.",
+      "vi": "Để chờ đợi một khoảnh khắc quan trọng đến."
+    },
+    {
+      "start": 642.6,
+      "end": 643.52,
+      "en": "Very good.",
+      "zh": "很好。",
+      "pinyin": "Hěn hǎo.",
+      "vi": "Rất tốt."
+    },
+    {
+      "start": 643.53,
+      "end": 647.19,
+      "en": "The last word, this word may be a little bit difficult,",
+      "zh": "最后一个词，这个词可能有一点点难，",
+      "pinyin": "Zuìhòu yí ge cí, zhège cí kěnéng yǒu yìdiǎndiǎn nán,",
+      "vi": "Từ cuối cùng, từ này có thể hơi khó một chút,"
+    },
+    {
+      "start": 647.2,
+      "end": 650.46,
+      "en": "But it is very useful—“atmosphere.”",
+      "zh": "但是非常有用——“气氛”。",
+      "pinyin": "Dànshì fēicháng yǒuyòng——“qìfēn”.",
+      "vi": "Nhưng rất hữu ích——“bầu không khí”."
+    },
+    {
+      "start": 650.47,
+      "end": 654.56,
+      "en": "“Atmosphere,” let me think... I would explain it like this:",
+      "zh": "“气氛”，我想想……我会这样解释:",
+      "pinyin": "“Qìfēn”, wǒ xiǎng xiǎng…… wǒ huì zhèyàng jiěshì:",
+      "vi": "“Bầu không khí”, để tôi nghĩ xem…… tôi sẽ giải thích như thế này:"
+    },
+    {
+      "start": 654.57,
+      "end": 659.89,
+      "en": "Atmosphere is the feeling a place or a thing gives you.",
+      "zh": "气氛，就是一个地方或者一件事情给你的感觉。",
+      "pinyin": "Qìfēn, jiùshì yí ge dìfang huòzhě yí jiàn shìqing gěi nǐ de gǎnjué.",
+      "vi": "Bầu không khí chính là cảm giác mà một nơi hoặc một sự việc mang lại cho bạn."
+    },
+    {
+      "start": 659.9,
+      "end": 663.29,
+      "en": "For example, when everyone counts down together,",
+      "zh": "比如，大家一起倒计时的时候，",
+      "pinyin": "Bǐrú, dàjiā yìqǐ dàojìshí de shíhou,",
+      "vi": "Ví dụ, khi mọi người cùng nhau đếm ngược,"
+    },
+    {
+      "start": 663.3,
+      "end": 666.49,
+      "en": "That feeling is very happy and very exciting,",
+      "zh": "那种感觉很开心，很兴奋，",
+      "pinyin": "Nà zhǒng gǎnjué hěn kāixīn, hěn xīngfèn,",
+      "vi": "Cảm giác đó rất vui, rất phấn khích,"
+    },
+    {
+      "start": 666.5,
+      "end": 669.59,
+      "en": "then we can say “the atmosphere is great.”",
+      "zh": "我们就可以说“气氛很好”。",
+      "pinyin": "Wǒmen jiù kěyǐ shuō “qìfēn hěn hǎo”.",
+      "vi": "thì chúng ta có thể nói “bầu không khí rất tốt”."
+    },
+    {
+      "start": 669.6,
+      "end": 673.56,
+      "en": "Or, you and your friends eat hot pot and chat at home,",
+      "zh": "或者，你和朋友在家吃火锅聊天，",
+      "pinyin": "Huòzhě, nǐ hé péngyou zài jiā chī huǒguō liáotiān,",
+      "vi": "Hoặc, bạn và bạn bè ở nhà ăn lẩu trò chuyện,"
+    },
+    {
+      "start": 673.57,
+      "end": 676.73,
+      "en": "that feeling is very comfortable and very warm,",
+      "zh": "那种感觉很舒服，很温暖，",
+      "pinyin": "Nà zhǒng gǎnjué hěn shūfu, hěn wēnnuǎn,",
+      "vi": "cảm giác đó rất thoải mái, rất ấm áp,"
+    },
+    {
+      "start": 676.73,
+      "end": 680.12,
+      "en": "we can also say “the atmosphere is very cozy.”",
+      "zh": "我们也可以说“气氛很温馨”。",
+      "pinyin": "Wǒmen yě kěyǐ shuō “qìfēn hěn wēnxīn”.",
+      "vi": "chúng ta cũng có thể nói “bầu không khí rất ấm cúng”."
+    },
+    {
+      "start": 680.13,
+      "end": 684.25,
+      "en": "Awesome. Your explanations are always so simple and easy to understand.",
+      "zh": "太棒了。你的解释总是这么简单易懂。",
+      "pinyin": "Tài bàng le. Nǐ de jiěshì zǒngshì zhème jiǎndān yìdǒng.",
+      "vi": "Tuyệt quá. Cách giải thích của bạn luôn đơn giản dễ hiểu như vậy."
+    },
+    {
+      "start": 684.27,
+      "end": 686.59,
+      "en": "I hope everyone has understood as well.",
+      "zh": "希望大家也听明白了。",
+      "pinyin": "Xīwàng dàjiā yě tīng míngbai le.",
+      "vi": "Hy vọng mọi người cũng đã hiểu rõ."
+    },
+    {
+      "start": 686.6,
+      "end": 687.89,
+      "en": "I hope so!",
+      "zh": "希望如此！",
+      "pinyin": "Xīwàng rúcǐ!",
+      "vi": "Hy vọng là vậy!"
+    },
+    {
+      "start": 687.9,
+      "end": 691.99,
+      "en": "Okay, today we talked about China’s “New Year’s Eve” culture.",
+      "zh": "好了，今天我们聊了中国的“跨年”文化。",
+      "pinyin": "Hǎo le, jīntiān wǒmen liáo le Zhōngguó de “kuànián” wénhuà.",
+      "vi": "Được rồi, hôm nay chúng ta đã nói về văn hóa “đón giao thừa” của Trung Quốc."
+    },
+    {
+      "start": 692,
+      "end": 693.49,
+      "en": "We learned about “New Year’s Eve”",
+      "zh": "我们知道了“跨年”",
+      "pinyin": "Wǒmen zhīdào le “kuànián”",
+      "vi": "Chúng ta đã biết “đón giao thừa”"
+    },
+    {
+      "start": 693.5,
+      "end": 695.36,
+      "en": "and the difference from “celebrating the Lunar New Year,”",
+      "zh": "和“过年”的区别，",
+      "pinyin": "hé “guònián” de qūbié,",
+      "vi": "và sự khác biệt với “ăn Tết”,"
+    },
+    {
+      "start": 695.37,
+      "end": 698.56,
+      "en": "and also learned about two different ways of celebrating New Year’s Eve:",
+      "zh": "还了解了两种不同的跨年方式：",
+      "pinyin": "hái liǎojiě le liǎng zhǒng bùtóng de kuànián fāngshì:",
+      "vi": "còn hiểu được hai cách đón giao thừa khác nhau:"
+    },
+    {
+      "start": 698.57,
+      "end": 700.76,
+      "en": "One is going to a crowded place,",
+      "zh": "一种是去人多的地方，",
+      "pinyin": "yì zhǒng shì qù rén duō de dìfang,",
+      "vi": "Một là đến nơi đông người,"
+    },
+    {
+      "start": 700.77,
+      "end": 703.93,
+      "en": "counting down and watching fireworks with everyone;",
+      "zh": "和大家一起倒计时、看烟花；",
+      "pinyin": "hé dàjiā yìqǐ dàojìshí, kàn yānhuā;",
+      "vi": "cùng mọi người đếm ngược, xem pháo hoa;"
+    },
+    {
+      "start": 703.93,
+      "end": 708.55,
+      "en": "The other is eating hot pot and having a party with good friends.",
+      "zh": "另一种是和好朋友一起吃火锅、开派对。",
+      "pinyin": "lìng yì zhǒng shì hé hǎo péngyou yìqǐ chī huǒguō, kāi pàiduì.",
+      "vi": "Cách còn lại là cùng bạn thân ăn lẩu, mở tiệc."
+    },
+    {
+      "start": 708.57,
+      "end": 711.59,
+      "en": "Yes, no matter which one you choose,",
+      "zh": "是的，不管你选择哪一种，",
+      "pinyin": "Shì de, bùguǎn nǐ xuǎnzé nǎ yì zhǒng,",
+      "vi": "Đúng vậy, bất kể bạn chọn cách nào,"
+    },
+    {
+      "start": 711.6,
+      "end": 717.56,
+      "en": "the most important thing is to welcome the new year with a happy mood.",
+      "zh": "最重要的都是用一个开心的心情去迎接新的一年。",
+      "pinyin": "zuì zhòngyào de dōu shì yòng yí ge kāixīn de xīnqíng qù yíngjiē xīn de yì nián.",
+      "vi": "điều quan trọng nhất đều là dùng tâm trạng vui vẻ để đón chào năm mới."
+    },
+    {
+      "start": 717.57,
+      "end": 720.99,
+      "en": "If you want to see the complete",
+      "zh": "如果你想看到今天我们聊天的完整",
+      "pinyin": "Rúguǒ nǐ xiǎng kàndào jīntiān wǒmen liáotiān de wánzhěng",
+      "vi": "Nếu bạn muốn xem toàn bộ"
+    },
+    {
+      "start": 721,
+      "end": 724.79,
+      "en": "text of today’s chat, or learn the words we mentioned,",
+      "zh": "文本，或者学习我们提到的词语，",
+      "pinyin": "wénběn, huòzhě xuéxí wǒmen tí dào de cíyǔ,",
+      "vi": "văn bản cuộc trò chuyện hôm nay, hoặc học những từ ngữ chúng tôi nhắc đến,"
+    },
+    {
+      "start": 724.8,
+      "end": 727.39,
+      "en": "you can go to our blog and take a look.",
+      "zh": "可以去我们的博客看看。",
+      "pinyin": "kěyǐ qù wǒmen de bókè kànkan.",
+      "vi": "bạn có thể ghé blog của chúng tôi xem."
+    },
+    {
+      "start": 727.4,
+      "end": 730.52,
+      "en": "You can find in the introduction of our podcast",
+      "zh": "大家可以在我们播客的介绍里找到",
+      "pinyin": "Dàjiā kěyǐ zài wǒmen bōkè de jièshào lǐ zhǎodào",
+      "vi": "Mọi người có thể tìm thấy trong phần giới thiệu podcast của chúng tôi"
+    },
+    {
+      "start": 730.53,
+      "end": 732.52,
+      "en": "the blog link address.",
+      "zh": "博客的链接地址。",
+      "pinyin": "bókè de liànjiē dìzhǐ.",
+      "vi": "địa chỉ liên kết của blog."
+    },
+    {
+      "start": 732.53,
+      "end": 734.29,
+      "en": "If you think today’s episode",
+      "zh": "如果你觉得今天的节目",
+      "pinyin": "Rúguǒ nǐ juéde jīntiān de jiémù",
+      "vi": "Nếu bạn thấy chương trình hôm nay"
+    },
+    {
+      "start": 734.3,
+      "end": 736.72,
+      "en": "is helpful for your Chinese learning,",
+      "zh": "对你的中文学习有帮助，",
+      "pinyin": "duì nǐ de Zhōngwén xuéxí yǒu bāngzhù,",
+      "vi": "có ích cho việc học tiếng Trung của bạn,"
+    },
+    {
+      "start": 736.73,
+      "end": 741.15,
+      "en": "please be sure to give us a like and subscribe to our channel.",
+      "zh": "请一定记得给我们一个赞，还有订阅我们的频道。",
+      "pinyin": "Qǐng yídìng jìde gěi wǒmen yí ge zàn, hái yǒu dìngyuè wǒmen de píndào.",
+      "vi": "hãy nhớ cho chúng tôi một lượt thích và đăng ký kênh của chúng tôi."
+    },
+    {
+      "start": 741.17,
+      "end": 744.36,
+      "en": "This way, you’ll receive our latest episodes.",
+      "zh": "这样，你就能收到我们最新的节目了。",
+      "pinyin": "Zhèyàng, nǐ jiù néng shōudào wǒmen zuìxīn de jiémù le.",
+      "vi": "Như vậy, bạn sẽ nhận được những chương trình mới nhất của chúng tôi."
+    },
+    {
+      "start": 744.37,
+      "end": 747.29,
+      "en": "Your support is very important to us.",
+      "zh": "你的支持对我们非常重要。",
+      "pinyin": "Nǐ de zhīchí duì wǒmen fēicháng zhòngyào.",
+      "vi": "Sự ủng hộ của bạn rất quan trọng đối với chúng tôi."
+    },
+    {
+      "start": 747.3,
+      "end": 749.86,
+      "en": "Yes, thank you all very much!",
+      "zh": "是的，非常感谢大家！",
+      "pinyin": "Shì de, fēicháng gǎnxiè dàjiā!",
+      "vi": "Đúng vậy, cảm ơn mọi người rất nhiều!"
+    },
+    {
+      "start": 749.87,
+      "end": 751.36,
+      "en": "Finally, we would like to ask",
+      "zh": "最后，我们想问问",
+      "pinyin": "Zuìhòu, wǒmen xiǎng wènwen",
+      "vi": "Cuối cùng, chúng tôi muốn hỏi"
+    },
+    {
+      "start": 751.37,
+      "end": 754.33,
+      "en": "you who are listening a question:",
+      "zh": "正在收听的你一个问题:",
+      "pinyin": "zhèngzài tīng de nǐ yí ge wèntí:",
+      "vi": "bạn đang nghe một câu hỏi:"
+    },
+    {
+      "start": 754.33,
+      "end": 758.15,
+      "en": "If it were you, which way of celebrating New Year’s Eve would you prefer?",
+      "zh": "如果是你，你更喜欢哪种跨年方式呢？",
+      "pinyin": "Rúguǒ shì nǐ, nǐ gèng xǐhuan nǎ zhǒng kuànián fāngshì ne?",
+      "vi": "Nếu là bạn, bạn thích cách đón giao thừa nào hơn?"
+    },
+    {
+      "start": 758.17,
+      "end": 761.99,
+      "en": "Is it celebrating lively outside with many people,",
+      "zh": "是和很多人一起在外面热闹地庆祝，",
+      "pinyin": "Shì hé hěn duō rén yìqǐ zài wàimiàn rènao de qìngzhù,",
+      "vi": "Là cùng nhiều người náo nhiệt chúc mừng ở bên ngoài,"
+    },
+    {
+      "start": 762,
+      "end": 766.39,
+      "en": "or spending it warmly at home with a few good friends?",
+      "zh": "还是和几个好朋友在家里温馨地度过？",
+      "pinyin": "háishì hé jǐ ge hǎo péngyou zài jiālǐ wēnxīn de dùguò?",
+      "vi": "hay cùng vài người bạn thân ở nhà trải qua một cách ấm cúng?"
+    },
+    {
+      "start": 766.4,
+      "end": 769.86,
+      "en": "Please tell us your thoughts in the comments!",
+      "zh": "请在评论区告诉我们你的想法吧！",
+      "pinyin": "Qǐng zài pínglùn qū gàosu wǒmen nǐ de xiǎngfǎ ba!",
+      "vi": "Hãy cho chúng tôi biết ý kiến của bạn trong phần bình luận nhé!"
+    },
+    {
+      "start": 769.87,
+      "end": 772.06,
+      "en": "Looking forward to seeing everyone’s comments.",
+      "zh": "期待看到大家的留言。",
+      "pinyin": "Qīdài kàndào dàjiā de liúyán.",
+      "vi": "Mong được thấy bình luận của mọi người."
+    },
+    {
+      "start": 772.07,
+      "end": 775.29,
+      "en": "Okay, that’s all for today’s Chinese Daily.",
+      "zh": "好了，今天的每天中文就到这里。",
+      "pinyin": "Hǎo le, jīntiān de Měitiān Zhōngwén jiù dào zhèlǐ.",
+      "vi": "Được rồi, chương trình “Mỗi ngày tiếng Trung” hôm nay đến đây là hết."
+    },
+    {
+      "start": 775.3,
+      "end": 777.16,
+      "en": "Wishing everyone progress in your studies!",
+      "zh": "祝大家学习进步！",
+      "pinyin": "Zhù dàjiā xuéxí jìnbù!",
+      "vi": "Chúc mọi người học tập tiến bộ!"
+    },
+    {
+      "start": 777.17,
+      "end": 778.73,
+      "en": "See you next time!",
+      "zh": "我们下次再见！",
+      "pinyin": "Wǒmen xià cì zàijiàn!",
+      "vi": "Hẹn gặp lại lần sau!"
+    },
+    {
+      "start": 778.73,
+      "end": 779.46,
+      "en": "Goodbye!",
+      "zh": "再见！",
+      "pinyin": "Zàijiàn!",
+      "vi": "Tạm biệt!"
+    }
+  ]
+}

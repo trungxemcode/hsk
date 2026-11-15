@@ -1,0 +1,3281 @@
+{
+  "id": "7jBC1ERfA08",
+  "youtubeId": "7jBC1ERfA08",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 3-4 | Stop Confusing 不 vs 没 & 能 vs 可以 | 别再说错了！ | Chinese daily podcast",
+  "durationSec": 1047,
+  "cues": [
+    {
+      "start": 6.27,
+      "end": 6.96,
+      "en": "Hi everyone!",
+      "zh": "大家好！",
+      "pinyin": "Dàjiā hǎo!",
+      "vi": "Xin chào mọi người!"
+    },
+    {
+      "start": 6.97,
+      "end": 10.09,
+      "en": "Welcome to a new episode of 'Daily Chinese'!",
+      "zh": "欢迎来到新一期的“每天中文”！",
+      "pinyin": "Huānyíng lái dào xīn yī qī de “Měitiān Zhōngwén”!",
+      "vi": "Chào mừng đến với tập mới của “Mỗi Ngày Tiếng Trung”!"
+    },
+    {
+      "start": 10.1,
+      "end": 11.46,
+      "en": "I'm Wang Yu.",
+      "zh": "我是王雨。",
+      "pinyin": "Wǒ shì Wáng Yǔ.",
+      "vi": "Tôi là Vương Vũ."
+    },
+    {
+      "start": 11.47,
+      "end": 13.69,
+      "en": "Hi everyone, I'm Li Ming. Wang Yu,",
+      "zh": "大家好，我是李明。王雨，",
+      "pinyin": "Dàjiā hǎo, wǒ shì Lǐ Míng. Wáng Yǔ,",
+      "vi": "Chào mọi người, tôi là Lý Minh. Vương Vũ,"
+    },
+    {
+      "start": 13.7,
+      "end": 16.89,
+      "en": "I feel like you're in a great mood today; there's a smile in your voice.",
+      "zh": "感觉你今天心情很不错啊，声音里都带着笑。",
+      "pinyin": "Gǎnjué nǐ jīntiān xīnqíng hěn bùcuò a, shēngyīn lǐ dōu dàizhe xiào.",
+      "vi": "Cảm giác hôm nay tâm trạng bạn rất tốt nhỉ, giọng nói cũng mang theo tiếng cười."
+    },
+    {
+      "start": 16.9,
+      "end": 18.22,
+      "en": "Of course!",
+      "zh": "那是当然啦！",
+      "pinyin": "Nà shì dāngrán la!",
+      "vi": "Đương nhiên rồi!"
+    },
+    {
+      "start": 18.23,
+      "end": 20.69,
+      "en": "Every time I get to chat with everyone here,",
+      "zh": "每次能和大家在这里聊聊天，",
+      "pinyin": "Měi cì néng hé dàjiā zài zhèlǐ liáoliao tiān,",
+      "vi": "Mỗi lần được ở đây trò chuyện với mọi người,"
+    },
+    {
+      "start": 20.7,
+      "end": 24.02,
+      "en": "and share the joy of learning Chinese, I'm very happy.",
+      "zh": "分享学习中文的乐趣，我都很开心。",
+      "pinyin": "Fēnxiǎng xuéxí Zhōngwén de lèqù, wǒ dōu hěn kāixīn.",
+      "vi": "chia sẻ niềm vui học tiếng Trung, tôi đều rất vui."
+    },
+    {
+      "start": 24.03,
+      "end": 27.09,
+      "en": "I also hope every friend listening to our show,",
+      "zh": "也希望正在听我们节目的每一位朋友，",
+      "pinyin": "Yě xīwàng zhèngzài tīng wǒmen jiémù de měi yī wèi péngyou,",
+      "vi": "Cũng mong mỗi bạn đang nghe chương trình của chúng tôi,"
+    },
+    {
+      "start": 27.1,
+      "end": 29.76,
+      "en": "whether you're on your way to work,",
+      "zh": "不管你现在是在上班的路上，",
+      "pinyin": "Bùguǎn nǐ xiànzài shì zài shàngbān de lùshang,",
+      "vi": "dù bạn đang trên đường đi làm,"
+    },
+    {
+      "start": 29.77,
+      "end": 32.93,
+      "en": "or taking a break, can have a good mood.",
+      "zh": "还是在休息，都能有一个好心情。",
+      "pinyin": "Háishì zài xiūxi, dōu néng yǒu yī gè hǎo xīnqíng.",
+      "vi": "hay đang nghỉ ngơi, đều có được tâm trạng thật tốt."
+    },
+    {
+      "start": 32.93,
+      "end": 35.75,
+      "en": "That's right. Our podcast 'Daily Chinese'",
+      "zh": "说得对。我们的播客“每天中文”",
+      "pinyin": "Shuō de duì. Wǒmen de bōkè “Měitiān Zhōngwén”",
+      "vi": "Đúng vậy. Podcast “Mỗi Ngày Tiếng Trung” của chúng tôi"
+    },
+    {
+      "start": 35.77,
+      "end": 38.56,
+      "en": "is meant to use a relaxed chat format",
+      "zh": "就是希望用一种轻松聊天的方式，",
+      "pinyin": "Jiùshì xīwàng yòng yī zhǒng qīngsōng liáotiān de fāngshì,",
+      "vi": "chính là mong dùng một cách trò chuyện nhẹ nhàng,"
+    },
+    {
+      "start": 38.57,
+      "end": 41.03,
+      "en": "to help friends who are learning Chinese,",
+      "zh": "帮助正在学习中文的朋友们，",
+      "pinyin": "Bāngzhù zhèngzài xuéxí Zhōngwén de péngyoumen,",
+      "vi": "để giúp những bạn đang học tiếng Trung,"
+    },
+    {
+      "start": 41.03,
+      "end": 43.12,
+      "en": "especially those who have just started learning,",
+      "zh": "特别是那些刚开始学，",
+      "pinyin": "Tèbié shì nàxiē gāng kāishǐ xué,",
+      "vi": "đặc biệt là những người mới bắt đầu học,"
+    },
+    {
+      "start": 43.13,
+      "end": 44.42,
+      "en": "or have been learning for a while",
+      "zh": "或者学了一段时间",
+      "pinyin": "Huòzhě xuéle yī duàn shíjiān",
+      "vi": "hoặc đã học một thời gian"
+    },
+    {
+      "start": 44.43,
+      "end": 47.22,
+      "en": "but still run into some small difficulties.",
+      "zh": "但还是会遇到一些小困难的朋友们。",
+      "pinyin": "Dàn háishì huì yùdào yīxiē xiǎo kùnnan de péngyoumen.",
+      "vi": "nhưng vẫn gặp một số khó khăn nhỏ."
+    },
+    {
+      "start": 47.23,
+      "end": 51.72,
+      "en": "Yes, we don't want learning Chinese to become a boring thing.",
+      "zh": "是的，我们不想让学中文变成一件很枯燥的事情。",
+      "pinyin": "Shì de, wǒmen bù xiǎng ràng xué Zhōngwén biànchéng yī jiàn hěn kūzào de shìqing.",
+      "vi": "Đúng thế, chúng tôi không muốn việc học tiếng Trung trở thành một việc rất khô khan."
+    },
+    {
+      "start": 51.73,
+      "end": 54.52,
+      "en": "Just think of us as two Chinese friends of yours:",
+      "zh": "你就把我们当成你的两个中国朋友，",
+      "pinyin": "Nǐ jiù bǎ wǒmen dàngchéng nǐ de liǎng gè Zhōngguó péngyou,",
+      "vi": "Bạn cứ coi chúng tôi là hai người bạn Trung Quốc của bạn,"
+    },
+    {
+      "start": 54.53,
+      "end": 58.15,
+      "en": "listen casually to our conversation, and slowly, your listening,",
+      "zh": "随便听听我们的对话，慢慢地，你的听力、",
+      "pinyin": "Suíbiàn tīngtīng wǒmen de duìhuà, mànmàn de, nǐ de tīnglì,",
+      "vi": "nghe qua loa cuộc trò chuyện của chúng tôi, dần dần, khả năng nghe của bạn,"
+    },
+    {
+      "start": 58.17,
+      "end": 60.83,
+      "en": "your language sense will naturally improve.",
+      "zh": "你的语感自然就会提高了。",
+      "pinyin": "nǐ de yǔgǎn zìrán jiù huì tígāo le.",
+      "vi": "cảm giác ngôn ngữ của bạn tự nhiên sẽ được nâng cao."
+    },
+    {
+      "start": 60.83,
+      "end": 63.29,
+      "en": "Right. Today we want to talk about a",
+      "zh": "对。今天我们就想聊一个",
+      "pinyin": "Duì. Jīntiān wǒmen jiù xiǎng liáo yī gè",
+      "vi": "Đúng vậy. Hôm nay chúng tôi muốn nói về một"
+    },
+    {
+      "start": 63.3,
+      "end": 66.52,
+      "en": "'big problem' that many beginner friends encounter.",
+      "zh": "很多初学者朋友都会遇到的“大难题”。",
+      "pinyin": "hěn duō chūxuézhě péngyou dōu huì yùdào de “dà nántí”.",
+      "vi": "“vấn đề lớn” mà rất nhiều bạn mới học đều gặp phải."
+    },
+    {
+      "start": 66.53,
+      "end": 69.25,
+      "en": "Oh? A big problem? What is it?",
+      "zh": "哦？大难题？是什么？",
+      "pinyin": "Ó? Dà nántí? Shì shénme?",
+      "vi": "Ồ? Vấn đề lớn? Là gì vậy?"
+    },
+    {
+      "start": 69.27,
+      "end": 72.23,
+      "en": "You sound so serious that I'm a bit nervous.",
+      "zh": "你说得这么严肃，我都有点紧张了。",
+      "pinyin": "Nǐ shuō de zhème yánsù, wǒ dōu yǒudiǎn jǐnzhāng le.",
+      "vi": "Bạn nói nghiêm túc quá, tôi cũng hơi căng thẳng rồi."
+    },
+    {
+      "start": 72.23,
+      "end": 74.05,
+      "en": "(laughs), don't be nervous.",
+      "zh": "(笑)，别紧张。",
+      "pinyin": "(Xiào), bié jǐnzhāng.",
+      "vi": "(Cười), đừng căng thẳng."
+    },
+    {
+      "start": 74.07,
+      "end": 76.66,
+      "en": "It's actually two extremely common,",
+      "zh": "其实就是两个非常非常常用，",
+      "pinyin": "Qíshí jiùshì liǎng gè fēicháng fēicháng chángyòng,",
+      "vi": "Thật ra chỉ là hai từ cực kỳ cực kỳ thường dùng,"
+    },
+    {
+      "start": 76.67,
+      "end": 78.93,
+      "en": "but especially easy-to-misuse words.",
+      "zh": "但又特别容易用错的词。",
+      "pinyin": "dàn yòu tèbié róngyì yòngcuò de cí.",
+      "vi": "nhưng lại đặc biệt dễ dùng sai."
+    },
+    {
+      "start": 78.93,
+      "end": 80.72,
+      "en": "Let me ask you a question first:",
+      "zh": "我先问你一个问题，",
+      "pinyin": "Wǒ xiān wèn nǐ yī gè wèntí,",
+      "vi": "Tôi hỏi bạn một câu trước,"
+    },
+    {
+      "start": 80.73,
+      "end": 83.55,
+      "en": "if your foreign friend didn't eat yesterday,",
+      "zh": "如果你的外国朋友昨天没有吃饭，",
+      "pinyin": "Rúguǒ nǐ de wàiguó péngyou zuótiān méiyǒu chīfàn,",
+      "vi": "nếu người bạn nước ngoài của bạn hôm qua không ăn cơm,"
+    },
+    {
+      "start": 83.57,
+      "end": 86.29,
+      "en": "should he say 'Yesterday I don't eat'",
+      "zh": "他应该说“我昨天不吃饭”",
+      "pinyin": "Tā yīnggāi shuō “wǒ zuótiān bù chīfàn”",
+      "vi": "anh ấy nên nói “Hôm qua tôi không ăn cơm”"
+    },
+    {
+      "start": 86.3,
+      "end": 89.12,
+      "en": "or 'Yesterday I didn't eat'?",
+      "zh": "还是“我昨天没吃饭”？",
+      "pinyin": "háishì “wǒ zuótiān méi chīfàn”?",
+      "vi": "hay là “Hôm qua tôi đã không ăn cơm”?"
+    },
+    {
+      "start": 89.13,
+      "end": 90.25,
+      "en": "Ah, I know this one!",
+      "zh": "啊，这个我知道！",
+      "pinyin": "Ā, zhège wǒ zhīdào!",
+      "vi": "À, cái này tôi biết!"
+    },
+    {
+      "start": 90.27,
+      "end": 93.36,
+      "en": "He should say 'Yesterday I didn't eat'.",
+      "zh": "他应该说“我昨天没吃饭”。",
+      "pinyin": "Tā yīnggāi shuō “wǒ zuótiān méi chīfàn”.",
+      "vi": "Anh ấy nên nói “Hôm qua tôi đã không ăn cơm”."
+    },
+    {
+      "start": 93.37,
+      "end": 95.96,
+      "en": "One of my foreign friends often says it wrong,",
+      "zh": "我的一个外国朋友就经常说错，",
+      "pinyin": "Wǒ de yī gè wàiguó péngyou jiù jīngcháng shuōcuò,",
+      "vi": "Một người bạn nước ngoài của tôi thường nói sai,"
+    },
+    {
+      "start": 95.97,
+      "end": 99.13,
+      "en": "he'll say 'Yesterday I don't go to that party',",
+      "zh": "他会说“我昨天不去那个派对”，",
+      "pinyin": "tā huì shuō “wǒ zuótiān bù qù nàge pàiduì”,",
+      "vi": "anh ấy sẽ nói “Hôm qua tôi không đi bữa tiệc đó”,"
+    },
+    {
+      "start": 99.13,
+      "end": 101.02,
+      "en": "and it sounds a bit strange.",
+      "zh": "听起来就有点奇怪。",
+      "pinyin": "Tīng qǐlái jiù yǒudiǎn qíguài.",
+      "vi": "nghe là thấy hơi lạ."
+    },
+    {
+      "start": 101.03,
+      "end": 102.29,
+      "en": "Exactly right.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn chính xác."
+    },
+    {
+      "start": 102.3,
+      "end": 104.96,
+      "en": "This is the first topic we're going to talk about today:",
+      "zh": "这就是我们今天要聊的第一个话题:",
+      "pinyin": "Zhè jiùshì wǒmen jīntiān yào liáo de dì yī gè huàtí:",
+      "vi": "Đây chính là chủ đề đầu tiên chúng ta muốn nói hôm nay:"
+    },
+    {
+      "start": 104.97,
+      "end": 107.86,
+      "en": "how to distinguish '不' and '没'.",
+      "zh": "怎么分清“不”和“没”。",
+      "pinyin": "Zěnme fēnqīng “bù” hé “méi”.",
+      "vi": "làm sao phân biệt “不” và “没”."
+    },
+    {
+      "start": 107.87,
+      "end": 110.63,
+      "en": "Then, we'll also talk about another pair of 'twins':",
+      "zh": "然后，我们还会聊另一对“双胞胎”:",
+      "pinyin": "Ránhòu, wǒmen hái huì liáo lìng yī duì “shuāngbāotāi”:",
+      "vi": "Sau đó, chúng ta còn nói về một cặp “sinh đôi” khác:"
+    },
+    {
+      "start": 110.63,
+      "end": 112.55,
+      "en": "'能' and '可以'.",
+      "zh": "“能”和“可以”。",
+      "pinyin": "“néng” hé “kěyǐ”.",
+      "vi": "“能” và “可以”."
+    },
+    {
+      "start": 112.57,
+      "end": 114.93,
+      "en": "They also always give learners headaches.",
+      "zh": "它们俩也总是让学习者头疼。",
+      "pinyin": "Tāmen liǎ yě zǒngshì ràng xuéxízhě tóuténg.",
+      "vi": "Hai từ này cũng luôn khiến người học đau đầu."
+    },
+    {
+      "start": 114.93,
+      "end": 119.42,
+      "en": "Wow, you've put all the most headache-inducing pairs of words into today's episode!",
+      "zh": "天啊，你把最让人头疼的几对词都放在今天了！",
+      "pinyin": "Tiān a, nǐ bǎ zuì ràng rén tóuténg de jǐ duì cí dōu fàng zài jīntiān le!",
+      "vi": "Trời ạ, bạn gom hết mấy cặp từ khiến người ta đau đầu nhất vào hôm nay rồi!"
+    },
+    {
+      "start": 119.43,
+      "end": 120.92,
+      "en": "But don't worry, everyone,",
+      "zh": "不过大家也别担心，",
+      "pinyin": "Bùguò dàjiā yě bié dānxīn,",
+      "vi": "Nhưng mọi người cũng đừng lo,"
+    },
+    {
+      "start": 120.93,
+      "end": 122.49,
+      "en": "when listening to our chat,",
+      "zh": "听我们聊天的时候，",
+      "pinyin": "Tīng wǒmen liáotiān de shíhou,",
+      "vi": "khi nghe chúng tôi trò chuyện,"
+    },
+    {
+      "start": 122.5,
+      "end": 126.29,
+      "en": "even if you don't understand some parts right away, it's totally fine.",
+      "zh": "就算有些地方一下没听懂，也完全没关系。",
+      "pinyin": "Jiùsuàn yǒuxiē dìfang yīxià méi tīngdǒng, yě wánquán méi guānxi.",
+      "vi": "cho dù có chỗ nào đó nghe không hiểu ngay, cũng hoàn toàn không sao."
+    },
+    {
+      "start": 126.3,
+      "end": 128.62,
+      "en": "You can try to guess the general meaning,",
+      "zh": "你可以试着猜猜大概的意思，",
+      "pinyin": "Nǐ kěyǐ shìzhe cāicai dàgài de yìsi,",
+      "vi": "Bạn có thể thử đoán đại ý,"
+    },
+    {
+      "start": 128.63,
+      "end": 131.72,
+      "en": "or turn on the subtitles on the video website and take a look.",
+      "zh": "或者打开视频网站的字幕看一看。",
+      "pinyin": "huòzhě dǎkāi shìpín wǎngzhàn de zìmù kàn yī kàn.",
+      "vi": "hoặc mở phụ đề trên trang video xem thử."
+    },
+    {
+      "start": 131.73,
+      "end": 133.92,
+      "en": "The most important thing is, after we finish chatting,",
+      "zh": "最重要的是，我们聊完之后，",
+      "pinyin": "Zuì zhòngyào de shì, wǒmen liáo wán zhīhòu,",
+      "vi": "Quan trọng nhất là, sau khi chúng tôi nói chuyện xong,"
+    },
+    {
+      "start": 133.93,
+      "end": 135.69,
+      "en": "You can, on our blog,",
+      "zh": "你可以在我们的博客上",
+      "pinyin": "nǐ kěyǐ zài wǒmen de bókè shàng",
+      "vi": "Bạn có thể lên blog của chúng tôi"
+    },
+    {
+      "start": 135.7,
+      "end": 139.89,
+      "en": "find the complete written content, which can help you understand better.",
+      "zh": "找到完整的文字内容，可以帮你更好地理解。",
+      "pinyin": "zhǎodào wánzhěng de wénzì nèiróng, kěyǐ bāng nǐ gèng hǎo de lǐjiě.",
+      "vi": "tìm thấy nội dung văn bản đầy đủ, có thể giúp bạn hiểu rõ hơn."
+    },
+    {
+      "start": 139.9,
+      "end": 141.06,
+      "en": "Well said.",
+      "zh": "说得很好。",
+      "pinyin": "shuō de hěn hǎo.",
+      "vi": "Nói hay lắm."
+    },
+    {
+      "start": 141.07,
+      "end": 141.46,
+      "en": "Actually,",
+      "zh": "其实",
+      "pinyin": "qíshí",
+      "vi": "Thật ra"
+    },
+    {
+      "start": 141.47,
+      "end": 144.33,
+      "en": "Once you understand the core difference between these words,",
+      "zh": "这些词一旦理解了它们的核心区别，",
+      "pinyin": "zhèxiē cí yídàn lǐjiě le tāmen de héxīn qūbié,",
+      "vi": "Một khi đã hiểu được sự khác biệt cốt lõi của những từ này,"
+    },
+    {
+      "start": 144.33,
+      "end": 146.62,
+      "en": "using them will become very easy.",
+      "zh": "用起来就会变得很简单。",
+      "pinyin": "yòng qǐlái jiù huì biàn de hěn jiǎndān.",
+      "vi": "thì khi dùng sẽ trở nên rất đơn giản."
+    },
+    {
+      "start": 146.63,
+      "end": 149.72,
+      "en": "Today we’ll try to explain them very clearly.",
+      "zh": "我们今天就争取把它们讲得清清楚楚。",
+      "pinyin": "wǒmen jīntiān jiù zhēngqǔ bǎ tāmen jiǎng de qīngqīngchǔchǔ.",
+      "vi": "Hôm nay chúng ta sẽ cố gắng làm rõ chúng một cách cặn kẽ."
+    },
+    {
+      "start": 149.73,
+      "end": 150.69,
+      "en": "Are you ready?",
+      "zh": "准备好了吗？",
+      "pinyin": "zhǔnbèi hǎo le ma?",
+      "vi": "Sẵn sàng chưa?"
+    },
+    {
+      "start": 150.7,
+      "end": 151.72,
+      "en": "Let’s begin.",
+      "zh": "我们开始吧。",
+      "pinyin": "wǒmen kāishǐ ba.",
+      "vi": "Chúng ta bắt đầu nhé."
+    },
+    {
+      "start": 151.73,
+      "end": 155.45,
+      "en": "Okay, let’s start with “不” and “没”.",
+      "zh": "好的，我们先从“不”和“没”开始。",
+      "pinyin": "hǎo de, wǒmen xiān cóng “bù” hé “méi” kāishǐ.",
+      "vi": "Được, chúng ta hãy bắt đầu với “不” và “没” trước."
+    },
+    {
+      "start": 155.47,
+      "end": 158.23,
+      "en": "Wang Yu, according to your usual habits when using Chinese,",
+      "zh": "王雨，按照你平时用中文的习惯，",
+      "pinyin": "Wáng Yǔ, ànzhào nǐ píngshí yòng Zhōngwén de xíguàn,",
+      "vi": "Wang Yu, theo thói quen dùng tiếng Trung thường ngày của bạn,"
+    },
+    {
+      "start": 158.23,
+      "end": 160.55,
+      "en": "what do you think is the biggest difference between them?",
+      "zh": "你觉得它们最大的区别是什么？",
+      "pinyin": "nǐ juéde tāmen zuìdà de qūbié shì shénme?",
+      "vi": "bạn nghĩ điểm khác biệt lớn nhất giữa chúng là gì?"
+    },
+    {
+      "start": 160.57,
+      "end": 163.29,
+      "en": "Hmm… let me think about it based on feeling.",
+      "zh": "嗯……让我凭感觉想一想。",
+      "pinyin": "èn…… ràng wǒ píng gǎnjué xiǎng yi xiǎng.",
+      "vi": "Ừm… để tôi nghĩ theo cảm giác xem sao."
+    },
+    {
+      "start": 163.3,
+      "end": 164.76,
+      "en": "I think, “不”",
+      "zh": "我觉得，“不”",
+      "pinyin": "wǒ juéde, “bù”",
+      "vi": "Tôi nghĩ, “不”"
+    },
+    {
+      "start": 164.77,
+      "end": 168.56,
+      "en": "seems more about saying I myself “don’t want” to do something,",
+      "zh": "好像更多的是说我自己“不想”做什么，",
+      "pinyin": "hǎoxiàng gèng duō de shì shuō wǒ zìjǐ “bù xiǎng” zuò shénme,",
+      "vi": "có vẻ thiên về việc nói rằng bản thân tôi “không muốn” làm gì hơn,"
+    },
+    {
+      "start": 168.57,
+      "end": 170.43,
+      "en": "or expressing an opinion.",
+      "zh": "或者表达一个看法。",
+      "pinyin": "huòzhě biǎodá yí ge kànfǎ.",
+      "vi": "hoặc thể hiện một quan điểm."
+    },
+    {
+      "start": 170.43,
+      "end": 174.09,
+      "en": "For example, this dish “isn’t tasty”—this is my opinion.",
+      "zh": "比如，这个菜“不好吃”，这是我的看法。",
+      "pinyin": "bǐrú, zhège cài “bù hǎochī”, zhè shì wǒ de kànfǎ.",
+      "vi": "Ví dụ, món này “không ngon”, đây là quan điểm của tôi."
+    },
+    {
+      "start": 174.1,
+      "end": 177.16,
+      "en": "I “won’t go” see a movie—this is my own decision.",
+      "zh": "我“不去”看电影，这是我自己的决定。",
+      "pinyin": "wǒ “bú qù” kàn diànyǐng, zhè shì wǒ zìjǐ de juédìng.",
+      "vi": "Tôi “không đi xem phim”, đây là quyết định của chính tôi."
+    },
+    {
+      "start": 177.17,
+      "end": 180.23,
+      "en": "It has a lot to do with my thoughts and willingness.",
+      "zh": "它跟我的想法和意愿关系很大。",
+      "pinyin": "tā gēn wǒ de xiǎngfǎ hé yìyuàn guānxi hěn dà.",
+      "vi": "Nó liên quan rất nhiều đến suy nghĩ và ý muốn của tôi."
+    },
+    {
+      "start": 180.23,
+      "end": 181.32,
+      "en": "Very well said,",
+      "zh": "说得非常好，",
+      "pinyin": "shuō de fēicháng hǎo,",
+      "vi": "Nói rất hay,"
+    },
+    {
+      "start": 181.33,
+      "end": 183.92,
+      "en": "this is exactly a core usage of “不”:",
+      "zh": "这正是“不”的一个核心用法:",
+      "pinyin": "zhè zhèng shì “bù” de yí ge héxīn yòngfǎ:",
+      "vi": "Đây chính là một cách dùng cốt lõi của “不”:"
+    },
+    {
+      "start": 183.93,
+      "end": 186.65,
+      "en": "expressing subjective willingness and judgment.",
+      "zh": "表达主观意愿和判断。",
+      "pinyin": "biǎodá zhǔguān yìyuàn hé pànduàn.",
+      "vi": "thể hiện ý muốn và phán đoán chủ quan."
+    },
+    {
+      "start": 186.67,
+      "end": 190.09,
+      "en": "Using the word “不想” to explain it makes it especially clear.",
+      "zh": "你用“不想”这个词来解释，就特别清楚。",
+      "pinyin": "nǐ yòng “bù xiǎng” zhège cí lái jiěshì, jiù tèbié qīngchu.",
+      "vi": "Bạn dùng từ “不想” để giải thích thì đặc biệt rõ ràng."
+    },
+    {
+      "start": 190.1,
+      "end": 193.82,
+      "en": "For example, a friend asks you: “Want to go hiking together this weekend?”",
+      "zh": "比如说，朋友问你:“周末一起去爬山吗？”",
+      "pinyin": "bǐrú shuō, péngyou wèn nǐ: “Zhōumò yìqǐ qù páshān ma?”",
+      "vi": "Ví dụ, bạn bè hỏi bạn: “Cuối tuần cùng đi leo núi không?”"
+    },
+    {
+      "start": 193.83,
+      "end": 194.95,
+      "en": "If you don’t want to go,",
+      "zh": "如果你不想去，",
+      "pinyin": "rúguǒ nǐ bù xiǎng qù,",
+      "vi": "Nếu bạn không muốn đi,"
+    },
+    {
+      "start": 194.97,
+      "end": 199.03,
+      "en": "you’ll say: “I don’t want to go” or “I’m not going.”",
+      "zh": "你就会说:“我不想去”或者“我不去”。",
+      "pinyin": "nǐ jiù huì shuō: “wǒ bù xiǎng qù” huòzhě “wǒ bú qù”.",
+      "vi": "bạn sẽ nói: “Tôi không muốn đi” hoặc “Tôi không đi”."
+    },
+    {
+      "start": 199.03,
+      "end": 202.65,
+      "en": "Here, using “不” indicates that you subjectively rejected this suggestion.",
+      "zh": "这里用“不”，表示你主观上拒绝了这个提议。",
+      "pinyin": "zhèlǐ yòng “bù”, biǎoshì nǐ zhǔguān shàng jùjué le zhège tíyì.",
+      "vi": "Ở đây dùng “不” để cho thấy về mặt chủ quan bạn đã từ chối lời đề nghị này."
+    },
+    {
+      "start": 202.67,
+      "end": 205.56,
+      "en": "Right, right, right! But what if I use “没”?",
+      "zh": "对对对！但如果我用“没”呢？",
+      "pinyin": "duì duì duì! dàn rúguǒ wǒ yòng “méi” ne?",
+      "vi": "Đúng đúng đúng! Nhưng nếu tôi dùng “没” thì sao?"
+    },
+    {
+      "start": 205.57,
+      "end": 210.23,
+      "en": "For example, if I say “I didn’t go hiking,” the meaning completely changes.",
+      "zh": "比如我说“我没去爬山”，那意思就完全变了。",
+      "pinyin": "bǐrú wǒ shuō “wǒ méi qù páshān”, nà yìsi jiù wánquán biàn le.",
+      "vi": "Ví dụ tôi nói “tôi đã không đi leo núi”, thì ý nghĩa hoàn toàn thay đổi."
+    },
+    {
+      "start": 210.23,
+      "end": 213.49,
+      "en": "It means that yesterday or last weekend,",
+      "zh": "它的意思是我昨天或者上个周末，",
+      "pinyin": "tā de yìsi shì wǒ zuótiān huòzhě shàng ge zhōumò,",
+      "vi": "Nó có nghĩa là hôm qua hoặc cuối tuần trước,"
+    },
+    {
+      "start": 213.5,
+      "end": 215.86,
+      "en": "this thing “did not happen.”",
+      "zh": "这件事情“没有发生”。",
+      "pinyin": "zhè jiàn shìqing “méiyǒu fāshēng”.",
+      "vi": "việc này “đã không xảy ra”."
+    },
+    {
+      "start": 215.87,
+      "end": 217.89,
+      "en": "It is merely stating a fact,",
+      "zh": "它只是在说一个事实，",
+      "pinyin": "tā zhǐshì zài shuō yí ge shìshí,",
+      "vi": "Nó chỉ đang nói về một sự thật,"
+    },
+    {
+      "start": 217.9,
+      "end": 220.69,
+      "en": "it has nothing to do with whether I wanted to go at the time.",
+      "zh": "跟我当时想不想去，没有关系。",
+      "pinyin": "gēn wǒ dāngshí xiǎng bu xiǎng qù, méiyǒu guānxi.",
+      "vi": "không liên quan đến việc lúc đó tôi có muốn đi hay không."
+    },
+    {
+      "start": 220.7,
+      "end": 221.89,
+      "en": "Exactly right.",
+      "zh": "完全正确。",
+      "pinyin": "wánquán zhèngquè.",
+      "vi": "Hoàn toàn đúng."
+    },
+    {
+      "start": 221.9,
+      "end": 224.22,
+      "en": "This is the core usage of “没”:",
+      "zh": "这就是“没”的核心用法:",
+      "pinyin": "zhè jiùshì “méi” de héxīn yòngfǎ:",
+      "vi": "Đây chính là cách dùng cốt lõi của “没”:"
+    },
+    {
+      "start": 224.23,
+      "end": 228.32,
+      "en": "negating an action that has happened or should have happened.",
+      "zh": "否定一个已经发生或者应该发生的动作。",
+      "pinyin": "fǒudìng yí ge yǐjīng fāshēng huòzhě yīnggāi fāshēng de dòngzuò.",
+      "vi": "phủ định một hành động đã xảy ra hoặc lẽ ra phải xảy ra."
+    },
+    {
+      "start": 228.33,
+      "end": 231.02,
+      "en": "It describes an objective fact,",
+      "zh": "它描述的是一个客观事实，",
+      "pinyin": "tā miáoshù de shì yí ge kèguān shìshí,",
+      "vi": "Nó miêu tả một sự thật khách quan,"
+    },
+    {
+      "start": 231.03,
+      "end": 233.29,
+      "en": "especially regarding things in the past.",
+      "zh": "特别是关于过去的事情。",
+      "pinyin": "tèbié shì guānyú guòqù de shìqing.",
+      "vi": "đặc biệt là những chuyện trong quá khứ."
+    },
+    {
+      "start": 233.3,
+      "end": 236.49,
+      "en": "“不” is about willingness in the “present” and “future,”",
+      "zh": "“不”是关于“现在”和“将来”的意愿，",
+      "pinyin": "“bù” shì guānyú “xiànzài” hé “jiānglái” de yìyuàn,",
+      "vi": "“不” là về ý muốn ở “hiện tại” và “tương lai”,"
+    },
+    {
+      "start": 236.5,
+      "end": 239.69,
+      "en": "while “没” is about facts in the “past.”",
+      "zh": "而“没”是关于“过去”的事实。",
+      "pinyin": "ér “méi” shì guānyú “guòqù” de shìshí.",
+      "vi": "còn “没” là về sự thật ở “quá khứ”."
+    },
+    {
+      "start": 239.7,
+      "end": 243.12,
+      "en": "We can imagine them as two switches for different times.",
+      "zh": "我们可以把它们想象成两个不同时间的开关。",
+      "pinyin": "wǒmen kěyǐ bǎ tāmen xiǎngxiàng chéng liǎng ge bùtóng shíjiān de kāiguān.",
+      "vi": "Chúng ta có thể tưởng tượng chúng như hai công tắc ở hai thời điểm khác nhau."
+    },
+    {
+      "start": 243.13,
+      "end": 245.05,
+      "en": "Switches for different times?",
+      "zh": "不同时间的开关？",
+      "pinyin": "bùtóng shíjiān de kāiguān?",
+      "vi": "Công tắc ở những thời điểm khác nhau?"
+    },
+    {
+      "start": 245.07,
+      "end": 247.56,
+      "en": "That analogy is interesting; go ahead and explain.",
+      "zh": "这个比喻有意思，你说说看。",
+      "pinyin": "zhège bǐyù yǒu yìsi, nǐ shuōshuo kàn.",
+      "vi": "Cách so sánh này thú vị đấy, bạn nói thử xem."
+    },
+    {
+      "start": 247.57,
+      "end": 251.43,
+      "en": "You see, “不” is like a switch that controls future plans.",
+      "zh": "你看，“不”就像是控制未来计划的开关。",
+      "pinyin": "nǐ kàn, “bù” jiù xiàng shì kòngzhì wèilái jìhuà de kāiguān.",
+      "vi": "Bạn xem, “不” giống như công tắc điều khiển kế hoạch tương lai."
+    },
+    {
+      "start": 251.43,
+      "end": 252.62,
+      "en": "A friend invites you,",
+      "zh": "朋友邀请你，",
+      "pinyin": "péngyou yāoqǐng nǐ,",
+      "vi": "Bạn bè mời bạn,"
+    },
+    {
+      "start": 252.63,
+      "end": 254.65,
+      "en": "you press the “不” switch,",
+      "zh": "你按下了“不”这个开关，",
+      "pinyin": "nǐ ànxià le “bù” zhège kāiguān,",
+      "vi": "bạn nhấn công tắc “不”,"
+    },
+    {
+      "start": 254.67,
+      "end": 258.63,
+      "en": "then the plan to “go hiking” will not happen in the future.",
+      "zh": "那么“去爬山”这个计划在未来就不会发生。",
+      "pinyin": "nàme “qù páshān” zhège jìhuà zài wèilái jiù bú huì fāshēng.",
+      "vi": "thì kế hoạch “đi leo núi” sẽ không xảy ra trong tương lai."
+    },
+    {
+      "start": 258.63,
+      "end": 262.32,
+      "en": "As for “没,” it’s like a button for reviewing historical records.",
+      "zh": "而“没”呢，就像是回顾历史记录的按钮。",
+      "pinyin": "ér “méi” ne, jiù xiàng shì huígù lìshǐ jìlù de ànniǔ.",
+      "vi": "Còn “没” thì giống như nút xem lại hồ sơ lịch sử."
+    },
+    {
+      "start": 262.33,
+      "end": 264.32,
+      "en": "You take a look at past records,",
+      "zh": "你看了一下过去的记录，",
+      "pinyin": "nǐ kàn le yíxià guòqù de jìlù,",
+      "vi": "Bạn xem lại hồ sơ quá khứ,"
+    },
+    {
+      "start": 264.33,
+      "end": 267.25,
+      "en": "and find that the record of “going hiking” is empty,",
+      "zh": "发现“爬山”这件事的记录是空的，",
+      "pinyin": "fāxiàn “páshān” zhè jiàn shì de jìlù shì kōng de,",
+      "vi": "và thấy rằng mục ghi “đi leo núi” là trống,"
+    },
+    {
+      "start": 267.27,
+      "end": 270.83,
+      "en": "So you report, “I didn't go hiking.” Wow,",
+      "zh": "所以你报告说“我没去爬山”。哇，",
+      "pinyin": "Suǒyǐ nǐ bàogào shuō “Wǒ méi qù páshān”. Wā,",
+      "vi": "Vậy nên bạn báo lại là “tôi không đi leo núi”. Chà,"
+    },
+    {
+      "start": 270.83,
+      "end": 272.85,
+      "en": "This metaphor is so clear!",
+      "zh": "这个比喻太清楚了！",
+      "pinyin": "Zhège bǐyù tài qīngchu le!",
+      "vi": "Cách ví von này quá rõ ràng!"
+    },
+    {
+      "start": 272.87,
+      "end": 275.36,
+      "en": "“不” is a decision facing the future,",
+      "zh": "“不”是面向未来的决定，",
+      "pinyin": "“bù” shì miànxiàng wèilái de juédìng,",
+      "vi": "“不” là quyết định hướng tới tương lai,"
+    },
+    {
+      "start": 275.37,
+      "end": 278.03,
+      "en": "“没” describes a fact in the past.",
+      "zh": "“没”是描述过去的事实。",
+      "pinyin": "“méi” shì miáoshù guòqù de shìshí.",
+      "vi": "“没” là mô tả một sự thật trong quá khứ."
+    },
+    {
+      "start": 278.03,
+      "end": 279.92,
+      "en": "So, that friend of mine said",
+      "zh": "所以，我那个朋友说",
+      "pinyin": "Suǒyǐ, wǒ nàge péngyou shuō",
+      "vi": "Vậy nên, người bạn đó của tôi nói"
+    },
+    {
+      "start": 279.93,
+      "end": 282.55,
+      "en": "“I don't eat yesterday” is wrong,",
+      "zh": "“我昨天不吃饭”，是错的，",
+      "pinyin": "“Wǒ zuótiān bù chīfàn”, shì cuò de,",
+      "vi": "“Hôm qua tôi không ăn cơm” là sai,"
+    },
+    {
+      "start": 282.57,
+      "end": 285.49,
+      "en": "Because “yesterday” is a past time,",
+      "zh": "因为“昨天”是过去的时间，",
+      "pinyin": "Yīnwèi “zuótiān” shì guòqù de shíjiān,",
+      "vi": "Vì “hôm qua” là thời gian trong quá khứ,"
+    },
+    {
+      "start": 285.5,
+      "end": 288.46,
+      "en": "he should use “没” to describe this fact,",
+      "zh": "他应该用“没”来描述这个事实，",
+      "pinyin": "Tā yīnggāi yòng “méi” lái miáoshù zhège shìshí,",
+      "vi": "anh ấy nên dùng “没” để mô tả sự thật này,"
+    },
+    {
+      "start": 288.47,
+      "end": 290.76,
+      "en": "and say “I didn't eat yesterday.”",
+      "zh": "说“我昨天没吃饭”。",
+      "pinyin": "Shuō “Wǒ zuótiān méi chīfàn”.",
+      "vi": "nói “hôm qua tôi không ăn cơm”."
+    },
+    {
+      "start": 290.77,
+      "end": 292.23,
+      "en": "Exactly.",
+      "zh": "正是如此。",
+      "pinyin": "Zhèng shì rúcǐ.",
+      "vi": "Đúng chính xác."
+    },
+    {
+      "start": 292.23,
+      "end": 293.75,
+      "en": "Let's look at a few more examples.",
+      "zh": "我们再来看几个例子。",
+      "pinyin": "Wǒmen zài lái kàn jǐ ge lìzi.",
+      "vi": "Chúng ta cùng xem thêm vài ví dụ."
+    },
+    {
+      "start": 293.77,
+      "end": 296.43,
+      "en": "For example, the company has a meeting tomorrow.",
+      "zh": "比如明天公司要开会。",
+      "pinyin": "Bǐrú míngtiān gōngsī yào kāihuì.",
+      "vi": "Ví dụ, ngày mai công ty có cuộc họp."
+    },
+    {
+      "start": 296.43,
+      "end": 300.05,
+      "en": "If a colleague says, “I'm not going to the meeting tomorrow.”",
+      "zh": "如果一个同事说:“我明天不去开会了。”",
+      "pinyin": "Rúguǒ yí ge tóngshì shuō: “Wǒ míngtiān bú qù kāihuì le.”",
+      "vi": "Nếu một đồng nghiệp nói: “Ngày mai tôi không đi họp nữa.”"
+    },
+    {
+      "start": 300.07,
+      "end": 302.96,
+      "en": "This means he himself decided not to attend.",
+      "zh": "这意味着他自己决定不参加。",
+      "pinyin": "Zhè yìwèizhe tā zìjǐ juédìng bù cānjiā.",
+      "vi": "Điều này có nghĩa là anh ấy tự quyết định không tham gia."
+    },
+    {
+      "start": 302.97,
+      "end": 305.36,
+      "en": "But if the next day, he really doesn't show up,",
+      "zh": "但如果第二天，他真的没来，",
+      "pinyin": "Dàn rúguǒ dì èr tiān, tā zhēn de méi lái,",
+      "vi": "Nhưng nếu đến ngày hôm sau, anh ấy thật sự không đến,"
+    },
+    {
+      "start": 305.37,
+      "end": 307.86,
+      "en": "When you report to your boss, you'd say:",
+      "zh": "你跟老板报告的时候就会说:",
+      "pinyin": "Nǐ gēn lǎobǎn bàogào de shíhou jiù huì shuō:",
+      "vi": "Khi bạn báo cáo với sếp, bạn sẽ nói:"
+    },
+    {
+      "start": 307.87,
+      "end": 310.03,
+      "en": "“Xiao Wang didn't come to the meeting today.”",
+      "zh": "“小王今天没来开会。”",
+      "pinyin": "“Xiǎo Wáng jīntiān méi lái kāihuì.”",
+      "vi": "“Hôm nay Tiểu Vương không đến họp.”"
+    },
+    {
+      "start": 310.03,
+      "end": 314.32,
+      "en": "You're stating a fact that has already happened. I understand.",
+      "zh": "你在陈述一个已经发生的事实。我明白了。",
+      "pinyin": "Nǐ zài chénshù yí ge yǐjīng fāshēng de shìshí. Wǒ míngbai le.",
+      "vi": "Bạn đang trình bày một sự thật đã xảy ra. Tôi hiểu rồi."
+    },
+    {
+      "start": 314.33,
+      "end": 315.52,
+      "en": "Then let me test you.",
+      "zh": "那我考考你。",
+      "pinyin": "Nà wǒ kǎokao nǐ.",
+      "vi": "Vậy để tôi kiểm tra bạn nhé."
+    },
+    {
+      "start": 315.53,
+      "end": 318.32,
+      "en": "If I want to say I never drink alcohol,",
+      "zh": "如果我想说我从来不喝酒，",
+      "pinyin": "Rúguǒ wǒ xiǎng shuō wǒ cónglái bù hējiǔ,",
+      "vi": "Nếu tôi muốn nói rằng tôi không bao giờ uống rượu,"
+    },
+    {
+      "start": 318.33,
+      "end": 322.22,
+      "en": "Do I mean “I didn't drink” or “I don't drink”?",
+      "zh": "我是说“我没喝酒”还是“我不喝酒”？",
+      "pinyin": "Wǒ shì shuō “Wǒ méi hējiǔ” háishì “Wǒ bù hējiǔ”?",
+      "vi": "Ý tôi là “tôi đã không uống rượu” hay “tôi không uống rượu”?"
+    },
+    {
+      "start": 322.23,
+      "end": 324.05,
+      "en": "That's a very good question.",
+      "zh": "这是一个很好的问题。",
+      "pinyin": "Zhè shì yí ge hěn hǎo de wèntí.",
+      "vi": "Đây là một câu hỏi rất hay."
+    },
+    {
+      "start": 324.07,
+      "end": 326.56,
+      "en": "Here you should use “I don't drink.”",
+      "zh": "这里应该用“我不喝酒”。",
+      "pinyin": "Zhèlǐ yīnggāi yòng “Wǒ bù hējiǔ”.",
+      "vi": "Ở đây nên dùng “tôi không uống rượu”."
+    },
+    {
+      "start": 326.57,
+      "end": 328.66,
+      "en": "Because this is describing a long-term",
+      "zh": "因为这是在描述一个长期",
+      "pinyin": "Yīnwèi zhè shì zài miáoshù yí ge chángqī",
+      "vi": "Vì câu này đang mô tả một"
+    },
+    {
+      "start": 328.67,
+      "end": 330.86,
+      "en": "habit or principle that exists long-term,",
+      "zh": "存在的习惯或者原则，",
+      "pinyin": "Cúnzài de xíguàn huòzhě yuánzé,",
+      "vi": "thói quen hoặc nguyên tắc tồn tại lâu dài,"
+    },
+    {
+      "start": 330.87,
+      "end": 333.66,
+      "en": "It's a subjective state of the speaker.",
+      "zh": "是说话人主观上的一种状态。",
+      "pinyin": "Shì shuōhuàrén zhǔguān shàng de yì zhǒng zhuàngtài.",
+      "vi": "là một trạng thái chủ quan của người nói."
+    },
+    {
+      "start": 333.67,
+      "end": 336.93,
+      "en": "Just like “I don't eat spicy food” and “I don't smoke.”",
+      "zh": "就像“我不吃辣”、“我不抽烟”一样。",
+      "pinyin": "Jiù xiàng “Wǒ bù chī là”, “Wǒ bù chōuyān” yíyàng.",
+      "vi": "Giống như “tôi không ăn cay”, “tôi không hút thuốc” vậy."
+    },
+    {
+      "start": 336.93,
+      "end": 338.12,
+      "en": "Oh, right.",
+      "zh": "哦，对。",
+      "pinyin": "Ó, duì.",
+      "vi": "Ồ, đúng rồi."
+    },
+    {
+      "start": 338.13,
+      "end": 340.42,
+      "en": "If I say “I didn't drink,”",
+      "zh": "如果我说“我没喝酒”，",
+      "pinyin": "Rúguǒ wǒ shuō “Wǒ méi hējiǔ”,",
+      "vi": "Nếu tôi nói “tôi đã không uống rượu”,"
+    },
+    {
+      "start": 340.43,
+      "end": 343.32,
+      "en": "it sounds like it specifically refers to a certain point in time,",
+      "zh": "听起来就像是特指某个时间点，",
+      "pinyin": "Tīng qǐlái jiù xiàng shì tèzhǐ mǒu ge shíjiāndiǎn,",
+      "vi": "nghe cứ như là đang chỉ một thời điểm cụ thể nào đó,"
+    },
+    {
+      "start": 343.33,
+      "end": 345.72,
+      "en": "such as now or today.",
+      "zh": "比如现在或者今天。",
+      "pinyin": "Bǐrú xiànzài huòzhě jīntiān.",
+      "vi": "ví dụ như bây giờ hoặc hôm nay."
+    },
+    {
+      "start": 345.73,
+      "end": 348.25,
+      "en": "The police officer asked me, “Have you been drinking?”",
+      "zh": "警察叔叔问我:“你喝酒了吗？”",
+      "pinyin": "Jǐngchá shūshu wèn wǒ: “Nǐ hējiǔ le ma?”",
+      "vi": "Chú cảnh sát hỏi tôi: “Cậu uống rượu chưa?”"
+    },
+    {
+      "start": 348.27,
+      "end": 350.46,
+      "en": "I would answer, “I didn't drink.”",
+      "zh": "我会回答:“我没喝酒。”",
+      "pinyin": "Wǒ huì huídá: “Wǒ méi hējiǔ.”",
+      "vi": "Tôi sẽ trả lời: “Tôi không uống rượu.”"
+    },
+    {
+      "start": 350.47,
+      "end": 354.93,
+      "en": "This is stating a fact that just happened or is happening.",
+      "zh": "这是在陈述一个刚刚发生或正在发生的事实。",
+      "pinyin": "Zhè shì zài chénshù yí ge gānggāng fāshēng huò zhèngzài fāshēng de shìshí.",
+      "vi": "Đây là cách trình bày một sự thật vừa mới xảy ra hoặc đang xảy ra."
+    },
+    {
+      "start": 354.93,
+      "end": 357.25,
+      "en": "Very smart—you get it right away.",
+      "zh": "非常聪明，一点就通。",
+      "pinyin": "Fēicháng cōngming, yì diǎn jiù tōng.",
+      "vi": "Rất thông minh, nói một chút là hiểu ngay."
+    },
+    {
+      "start": 357.27,
+      "end": 360.49,
+      "en": "So we can summarize: “不” is used in:",
+      "zh": "所以我们可以总结一下:“不”用在:",
+      "pinyin": "Suǒyǐ wǒmen kěyǐ zǒngjié yíxià: “bù” yòng zài:",
+      "vi": "Vậy nên chúng ta có thể tổng kết một chút: “不” được dùng trong:"
+    },
+    {
+      "start": 360.5,
+      "end": 364.16,
+      "en": "First, to express subjective wishes, thoughts, and decisions,",
+      "zh": "第一，表达主观意愿、想法和决定，",
+      "pinyin": "Dì yī, biǎodá zhǔguān yìyuàn, xiǎngfǎ hé juédìng,",
+      "vi": "Thứ nhất, diễn đạt ý muốn, suy nghĩ và quyết định chủ quan,"
+    },
+    {
+      "start": 364.17,
+      "end": 366.66,
+      "en": "usually used for the present and future.",
+      "zh": "通常用于现在和将来。",
+      "pinyin": "Tōngcháng yòng yú xiànzài hé jiānglái.",
+      "vi": "thường dùng cho hiện tại và tương lai."
+    },
+    {
+      "start": 366.67,
+      "end": 369.83,
+      "en": "For example: I don't want to go; I don't like it.",
+      "zh": "比如:我不想去，我不喜欢。",
+      "pinyin": "Bǐrú: wǒ bù xiǎng qù, wǒ bù xǐhuan.",
+      "vi": "Ví dụ: tôi không muốn đi, tôi không thích."
+    },
+    {
+      "start": 369.83,
+      "end": 373.92,
+      "en": "Second, to describe a habit or a long-term unchanging state.",
+      "zh": "第二，描述一种习惯或长期不变的状态。",
+      "pinyin": "Dì èr, miáoshù yì zhǒng xíguàn huò chángqī bú biàn de zhuàngtài.",
+      "vi": "Thứ hai, mô tả một thói quen hoặc trạng thái không thay đổi lâu dài."
+    },
+    {
+      "start": 373.93,
+      "end": 377.29,
+      "en": "For example: he doesn't eat meat; I don't drink coffee.",
+      "zh": "比如:他不吃肉，我不喝咖啡。",
+      "pinyin": "Bǐrú: tā bù chī ròu, wǒ bù hē kāfēi.",
+      "vi": "Ví dụ: anh ấy không ăn thịt, tôi không uống cà phê."
+    },
+    {
+      "start": 377.3,
+      "end": 380.46,
+      "en": "Third, to negate adjectives or states.",
+      "zh": "第三，否定形容词或者状态。",
+      "pinyin": "Dì sān, fǒudìng xíngróngcí huòzhě zhuàngtài.",
+      "vi": "Thứ ba, phủ định tính từ hoặc trạng thái."
+    },
+    {
+      "start": 380.47,
+      "end": 382.33,
+      "en": "For example: it's not hot today,",
+      "zh": "比如:今天不热，",
+      "pinyin": "Bǐrú: jīntiān bú rè,",
+      "vi": "Ví dụ: hôm nay không nóng,"
+    },
+    {
+      "start": 382.33,
+      "end": 384.89,
+      "en": "he isn't tall, and I'm not busy. Hmm,",
+      "zh": "他不高，我不忙。嗯，",
+      "pinyin": "Tā bù gāo, wǒ bù máng. Ǹg,",
+      "vi": "anh ấy không cao, tôi không bận. Ừm,"
+    },
+    {
+      "start": 384.9,
+      "end": 388.49,
+      "en": "And “没”? “没” is relatively simpler,",
+      "zh": "那“没”呢？“没”就相对简单一些，",
+      "pinyin": "Nà “méi” ne? “méi” jiù xiāngduì jiǎndān yìxiē,",
+      "vi": "Còn “没” thì sao? “没” thì tương đối đơn giản hơn một chút,"
+    },
+    {
+      "start": 388.5,
+      "end": 392.12,
+      "en": "It's mainly used in: first, to negate past actions.",
+      "zh": "主要用在:第一，否定过去的动作。",
+      "pinyin": "Zhǔyào yòng zài: dì yī, fǒudìng guòqù de dòngzuò.",
+      "vi": "Chủ yếu dùng trong: thứ nhất, phủ định hành động trong quá khứ."
+    },
+    {
+      "start": 392.13,
+      "end": 396.55,
+      "en": "For example: I didn't watch TV yesterday; he didn't come to work last week.",
+      "zh": "比如:我昨天没看电视，他上周没来上班。",
+      "pinyin": "Bǐrú: wǒ zuótiān méi kàn diànshì, tā shàngzhōu méi lái shàngbān.",
+      "vi": "Ví dụ: hôm qua tôi không xem TV, tuần trước anh ấy không đến làm."
+    },
+    {
+      "start": 396.57,
+      "end": 398.56,
+      "en": "Second, to negate “有” (to have).",
+      "zh": "第二，否定“有”。",
+      "pinyin": "Dì èr, fǒudìng “yǒu”.",
+      "vi": "Thứ hai, phủ định “có”."
+    },
+    {
+      "start": 398.57,
+      "end": 400.36,
+      "en": "This is the most important rule,",
+      "zh": "这是最重要的一个规则，",
+      "pinyin": "Zhè shì zuì zhòngyào de yí ge guīzé,",
+      "vi": "Đây là một quy tắc quan trọng nhất,"
+    },
+    {
+      "start": 400.37,
+      "end": 404.16,
+      "en": "We can only say “没有”; we absolutely cannot say “不有”.",
+      "zh": "我们只能说“没有”，绝对不能说“不有”。",
+      "pinyin": "Wǒmen zhǐ néng shuō “méiyǒu”, juéduì bù néng shuō “bù yǒu”.",
+      "vi": "Chúng ta chỉ có thể nói “没有”, tuyệt đối không thể nói “不有”."
+    },
+    {
+      "start": 404.17,
+      "end": 407.29,
+      "en": "For example: I don't have money, and he doesn't have time.",
+      "zh": "比如：我没有钱，他没有时间。",
+      "pinyin": "Bǐrú: wǒ méiyǒu qián, tā méiyǒu shíjiān.",
+      "vi": "Ví dụ: tôi không có tiền, anh ấy không có thời gian."
+    },
+    {
+      "start": 407.3,
+      "end": 411.06,
+      "en": "Aha! I've truly never heard the phrase “不有” before,",
+      "zh": "啊哈！“不有”这个说法，确实从来没听过，",
+      "pinyin": "Āhā! “bù yǒu” zhège shuōfa, quèshí cónglái méi tīngguo,",
+      "vi": "A ha! Cách nói “不有” này, quả thật chưa từng nghe bao giờ,"
+    },
+    {
+      "start": 411.07,
+      "end": 412.73,
+      "en": "It just sounds wrong.",
+      "zh": "听起来就感觉是错的。",
+      "pinyin": "Tīng qǐlái jiù gǎnjué shì cuò de.",
+      "vi": "Nghe là đã thấy sai sai rồi."
+    },
+    {
+      "start": 412.73,
+      "end": 415.29,
+      "en": "This point is very important; everyone must remember it,",
+      "zh": "这个点很重要，大家一定要记住，",
+      "pinyin": "Zhège diǎn hěn zhòngyào, dàjiā yídìng yào jìzhù,",
+      "vi": "Điểm này rất quan trọng, mọi người nhất định phải nhớ,"
+    },
+    {
+      "start": 415.3,
+      "end": 417.96,
+      "en": "The negative form of “有” is always “没有”.",
+      "zh": "“有”的否定形式永远是“没有”。",
+      "pinyin": "“yǒu” de fǒudìng xíngshì yǒngyuǎn shì “méiyǒu”.",
+      "vi": "Dạng phủ định của “有” luôn là “没有”."
+    },
+    {
+      "start": 417.97,
+      "end": 420.23,
+      "en": "For example, a friend asks you, “Do you have an older brother?”",
+      "zh": "比如朋友问你：“你有哥哥吗？”",
+      "pinyin": "Bǐrú péngyou wèn nǐ: “nǐ yǒu gēge ma?”",
+      "vi": "Ví dụ bạn bè hỏi bạn: “Cậu có anh trai không?”"
+    },
+    {
+      "start": 420.23,
+      "end": 422.75,
+      "en": "You can only answer, “I don't.” Right.",
+      "zh": "你只能回答：“我没有。”对。",
+      "pinyin": "Nǐ zhǐ néng huídá: “wǒ méiyǒu.” Duì.",
+      "vi": "Bạn chỉ có thể trả lời: “Tôi không có.” Đúng vậy."
+    },
+    {
+      "start": 422.77,
+      "end": 424.96,
+      "en": "So you see, although they look very similar,",
+      "zh": "所以你看，虽然它们看起来很像，",
+      "pinyin": "Suǒyǐ nǐ kàn, suīrán tāmen kàn qǐlái hěn xiàng,",
+      "vi": "Nên bạn thấy đấy, tuy chúng trông rất giống nhau,"
+    },
+    {
+      "start": 424.97,
+      "end": 427.93,
+      "en": "their respective scopes of use are actually quite clearly divided.",
+      "zh": "但各自的工作范围其实分得很清楚。",
+      "pinyin": "dàn gèzì de gōngzuò fànwéi qíshí fēn de hěn qīngchu.",
+      "vi": "nhưng phạm vi công việc của mỗi từ thật ra được phân biệt rất rõ ràng."
+    },
+    {
+      "start": 427.93,
+      "end": 429.82,
+      "en": "“不” is more like a commentator,",
+      "zh": "“不”更像是一个评论员，",
+      "pinyin": "“bù” gèng xiàng shì yí ge pínglùnyuán,",
+      "vi": "“不” giống như một nhà bình luận hơn,"
+    },
+    {
+      "start": 429.83,
+      "end": 432.02,
+      "en": "always expressing opinions and making decisions.",
+      "zh": "总是在发表看法和做决定。",
+      "pinyin": "zǒngshì zài fābiǎo kànfǎ hé zuò juédìng.",
+      "vi": "luôn đưa ra nhận xét và đưa ra quyết định."
+    },
+    {
+      "start": 432.03,
+      "end": 434.45,
+      "en": "whereas “没” is more like a historian,",
+      "zh": "而“没”更像一个历史学家，",
+      "pinyin": "ér “méi” gèng xiàng yí ge lìshǐxuéjiā,",
+      "vi": "còn “没” giống một nhà sử học hơn,"
+    },
+    {
+      "start": 434.47,
+      "end": 437.76,
+      "en": "simply objectively recording what did or didn't happen in the past",
+      "zh": "只是在客观地记录过去发生或者没发生",
+      "pinyin": "zhǐshì zài kèguān de jìlù guòqù fāshēng huòzhě méi fāshēng",
+      "vi": "chỉ khách quan ghi lại những gì đã xảy ra hoặc không xảy ra trong quá khứ"
+    },
+    {
+      "start": 437.77,
+      "end": 440.43,
+      "en": "what. A commentator and a historian,",
+      "zh": "什么。评论员和历史学家，",
+      "pinyin": "shénme. Pínglùnyuán hé lìshǐxuéjiā,",
+      "vi": "gì. Nhà bình luận và nhà sử học,"
+    },
+    {
+      "start": 440.43,
+      "end": 441.72,
+      "en": "(laughs) That's interesting too!",
+      "zh": "（笑），这个也很有趣！",
+      "pinyin": "(xiào), zhège yě hěn yǒuqù!",
+      "vi": "(cười), điều này cũng rất thú vị!"
+    },
+    {
+      "start": 441.73,
+      "end": 443.15,
+      "en": "I have a question, Li Ming.",
+      "zh": "我有个问题，李明。",
+      "pinyin": "Wǒ yǒu ge wèntí, Lǐ Míng.",
+      "vi": "Tôi có một câu hỏi, Lý Minh."
+    },
+    {
+      "start": 443.17,
+      "end": 445.66,
+      "en": "I remember my Chinese teacher once said a sentence,",
+      "zh": "我记得我的中文老师说过一个句子，",
+      "pinyin": "Wǒ jìde wǒ de Zhōngwén lǎoshī shuōguo yí ge jùzi,",
+      "vi": "Tôi nhớ giáo viên tiếng Trung của tôi từng nói một câu,"
+    },
+    {
+      "start": 445.67,
+      "end": 447.73,
+      "en": "that goes, “I haven't eaten yet.”",
+      "zh": "叫“我还没吃饭呢”。",
+      "pinyin": "jiào “wǒ hái méi chīfàn ne”.",
+      "vi": "là “Tôi vẫn chưa ăn cơm đâu”."
+    },
+    {
+      "start": 447.73,
+      "end": 451.09,
+      "en": "There's “没” here, but it doesn't sound like it's talking about the past?",
+      "zh": "这里有“没”，但听起来好像不是在说过去？",
+      "pinyin": "Zhèlǐ yǒu “méi”, dàn tīng qǐlái hǎoxiàng bú shì zài shuō guòqù?",
+      "vi": "Ở đây có “没”, nhưng nghe có vẻ không phải đang nói về quá khứ?"
+    },
+    {
+      "start": 451.1,
+      "end": 454.69,
+      "en": "Good question; this is indeed a confusing point.",
+      "zh": "问得好，这确实是一个容易让人困惑的地方。",
+      "pinyin": "Wèn de hǎo, zhè quèshí shì yí ge róngyì ràng rén kùnhuò de dìfang.",
+      "vi": "Hỏi hay lắm, đây thật sự là một chỗ dễ khiến người ta bối rối."
+    },
+    {
+      "start": 454.7,
+      "end": 455.49,
+      "en": "“还没” indicates",
+      "zh": "“还没”表示",
+      "pinyin": "“hái méi” biǎoshì",
+      "vi": "“还没” biểu thị"
+    },
+    {
+      "start": 455.5,
+      "end": 457.92,
+      "en": "that an action, up to this point in time,",
+      "zh": "一个动作到现在这个时间点为止，",
+      "pinyin": "yí ge dòngzuò dào xiànzài zhège shíjiān diǎn wéizhǐ,",
+      "vi": "một hành động tính đến thời điểm hiện tại,"
+    },
+    {
+      "start": 457.93,
+      "end": 461.52,
+      "en": "has not happened, but is expected to possibly happen in the future.",
+      "zh": "没有发生，但预计它将来可能会发生。",
+      "pinyin": "méiyǒu fāshēng, dàn yùjì tā jiānglái kěnéng huì fāshēng.",
+      "vi": "chưa xảy ra, nhưng dự đoán sau này nó có thể sẽ xảy ra."
+    },
+    {
+      "start": 461.53,
+      "end": 465.85,
+      "en": "It connects the past and present and points to the future. Oh...",
+      "zh": "它连接了过去和现在，并指向未来。哦……",
+      "pinyin": "Tā liánjiēle guòqù hé xiànzài, bìng zhǐxiàng wèilái. Ò……",
+      "vi": "Nó kết nối quá khứ với hiện tại, và hướng tới tương lai. Ồ..."
+    },
+    {
+      "start": 465.87,
+      "end": 469.09,
+      "en": "So “我没吃饭” could mean I didn't eat yesterday,",
+      "zh": "所以“我没吃饭”可能指我昨天没吃，",
+      "pinyin": "Suǒyǐ “wǒ méi chīfàn” kěnéng zhǐ wǒ zuótiān méi chī,",
+      "vi": "Vậy nên “tôi chưa ăn cơm” có thể ý là hôm qua tôi không ăn,"
+    },
+    {
+      "start": 469.1,
+      "end": 471.89,
+      "en": "or didn't eat lunch; the event is already over.",
+      "zh": "或者午饭没吃，事情已经过去了。",
+      "pinyin": "huòzhě wǔfàn méi chī, shìqing yǐjīng guòqù le.",
+      "vi": "hoặc chưa ăn trưa, sự việc đã qua rồi."
+    },
+    {
+      "start": 471.9,
+      "end": 474.09,
+      "en": "But “我还没吃饭” means",
+      "zh": "但“我还没吃饭”的意思是，",
+      "pinyin": "Dàn “wǒ hái méi chīfàn” de yìsi shì,",
+      "vi": "Nhưng “tôi vẫn chưa ăn cơm” có nghĩa là,"
+    },
+    {
+      "start": 474.1,
+      "end": 477.72,
+      "en": "up to now my stomach is still empty, and I'm going to eat later.",
+      "zh": "到现在我肚子里还是空的，我等一下要去吃。",
+      "pinyin": "dào xiànzài wǒ dùzi lǐ háishi kōng de, wǒ děng yíxià yào qù chī.",
+      "vi": "đến giờ bụng tôi vẫn còn trống, lát nữa tôi sẽ đi ăn."
+    },
+    {
+      "start": 477.73,
+      "end": 481.75,
+      "en": "It emphasizes the state of “up to now.” Exactly right.",
+      "zh": "它强调的是“到目前为止”这个状态。完全正确。",
+      "pinyin": "Tā qiángdiào de shì “dào mùqián wéizhǐ” zhège zhuàngtài. Wánquán zhèngquè.",
+      "vi": "Nó nhấn mạnh trạng thái “cho đến tận bây giờ”. Hoàn toàn đúng."
+    },
+    {
+      "start": 481.77,
+      "end": 484.13,
+      "en": "For example, your boss asks you, “Have you finished the report?”",
+      "zh": "比如老板问你：“报告写完了吗？”",
+      "pinyin": "Bǐrú lǎobǎn wèn nǐ: “bàogào xiě wán le ma?”",
+      "vi": "Ví dụ sếp hỏi bạn: “Báo cáo viết xong chưa?”"
+    },
+    {
+      "start": 484.13,
+      "end": 487.42,
+      "en": "If you haven't started writing yet, you can say, “I haven't written it yet.”",
+      "zh": "如果你还没开始写，你可以说“我还没写呢”。",
+      "pinyin": "Rúguǒ nǐ hái méi kāishǐ xiě, nǐ kěyǐ shuō “wǒ hái méi xiě ne”.",
+      "vi": "Nếu bạn vẫn chưa bắt đầu viết, bạn có thể nói “Tôi vẫn chưa viết đâu”."
+    },
+    {
+      "start": 487.43,
+      "end": 490.75,
+      "en": "It means “I haven't written it as of now, but I will write it later.”",
+      "zh": "意思是“到现在还没写，但我之后会写的”。",
+      "pinyin": "Yìsi shì “dào xiànzài hái méi xiě, dàn wǒ zhīhòu huì xiě de”.",
+      "vi": "Ý là “đến giờ vẫn chưa viết, nhưng sau đó tôi sẽ viết”."
+    },
+    {
+      "start": 490.77,
+      "end": 493.76,
+      "en": "This feels a bit different from simply saying “I didn't write it.”",
+      "zh": "这和简单地说“我没写”感觉不太一样。",
+      "pinyin": "Zhè hé jiǎndān de shuō “wǒ méi xiě” gǎnjué bú tài yíyàng.",
+      "vi": "Điều này so với chỉ nói đơn giản “tôi không viết” thì cảm giác hơi khác."
+    },
+    {
+      "start": 493.77,
+      "end": 497.16,
+      "en": "I get it! “还没” has a sense of “unfinished.”",
+      "zh": "我懂了！“还没”有一种“未完成”的感觉。",
+      "pinyin": "Wǒ dǒng le! “hái méi” yǒu yì zhǒng “wèi wánchéng” de gǎnjué.",
+      "vi": "Tôi hiểu rồi! “还没” có cảm giác “chưa hoàn thành”."
+    },
+    {
+      "start": 497.17,
+      "end": 500.13,
+      "en": "Now I'm really much clearer on “不” and “没.”",
+      "zh": "这下我对“不”和“没”真的清楚多了。",
+      "pinyin": "Zhè xià wǒ duì “bù” hé “méi” zhēn de qīngchu duō le.",
+      "vi": "Giờ thì tôi thật sự hiểu rõ hơn nhiều về “不” và “没” rồi."
+    },
+    {
+      "start": 500.13,
+      "end": 501.89,
+      "en": "Actually, as long as you listen and feel more,",
+      "zh": "其实只要多听多感受，",
+      "pinyin": "Qíshí zhǐyào duō tīng duō gǎnshòu,",
+      "vi": "Thật ra chỉ cần nghe nhiều và cảm nhận nhiều,"
+    },
+    {
+      "start": 501.9,
+      "end": 503.52,
+      "en": "remember a few key examples,",
+      "zh": "记住几个关键的例子，",
+      "pinyin": "jìzhù jǐ ge guānjiàn de lìzi,",
+      "vi": "nhớ vài ví dụ then chốt,"
+    },
+    {
+      "start": 503.53,
+      "end": 506.15,
+      "en": "such as “我不去” and “我没去,”",
+      "zh": "比如“我不去”和“我没去”，",
+      "pinyin": "bǐrú “wǒ bú qù” hé “wǒ méi qù”,",
+      "vi": "ví dụ “tôi không đi” và “tôi đã không đi”,"
+    },
+    {
+      "start": 506.17,
+      "end": 507.76,
+      "en": "“没有” and “不吃辣,”",
+      "zh": "“没有”和“不吃辣”，",
+      "pinyin": "“méiyǒu” hé “bù chī là”,",
+      "vi": "“没有” và “không ăn cay”,"
+    },
+    {
+      "start": 507.77,
+      "end": 510.16,
+      "en": "gradually, you'll be able to judge by feel.",
+      "zh": "慢慢地，就能凭语感来判断了。",
+      "pinyin": "mànmàn de, jiù néng píng yǔgǎn lái pànduàn le.",
+      "vi": "dần dần, bạn sẽ có thể dựa vào ngữ cảm để phán đoán."
+    },
+    {
+      "start": 510.17,
+      "end": 514.23,
+      "en": "Yes, language learning ultimately still relies on feel.",
+      "zh": "是的，语言学习最终还是要靠语感。",
+      "pinyin": "Shì de, yǔyán xuéxí zuìzhōng háishi yào kào yǔgǎn.",
+      "vi": "Đúng vậy, học ngôn ngữ cuối cùng vẫn phải dựa vào ngữ cảm."
+    },
+    {
+      "start": 514.23,
+      "end": 516.89,
+      "en": "The rules we discuss only help everyone",
+      "zh": "我们讲的规则只是帮助大家",
+      "pinyin": "Wǒmen jiǎng de guīzé zhǐshì bāngzhù dàjiā",
+      "vi": "Những quy tắc chúng ta nói chỉ là để giúp mọi người"
+    },
+    {
+      "start": 516.9,
+      "end": 519.66,
+      "en": "build up this kind of feel more quickly.",
+      "zh": "更快地建立起这种语感。",
+      "pinyin": "gèng kuài de jiànlì qǐ zhè zhǒng yǔgǎn.",
+      "vi": "xây dựng loại ngữ cảm này nhanh hơn."
+    },
+    {
+      "start": 519.67,
+      "end": 521.56,
+      "en": "Okay, now that we've settled “不” and “没,”",
+      "zh": "好了，解决了“不”和“没”，",
+      "pinyin": "Hǎo le, jiějué le “bù” hé “méi”,",
+      "vi": "Được rồi, đã giải quyết xong “不” và “没”,"
+    },
+    {
+      "start": 521.57,
+      "end": 523.86,
+      "en": "now let's challenge a harder pair:",
+      "zh": "现在我们来挑战更难的一对：",
+      "pinyin": "xiànzài wǒmen lái tiǎozhàn gèng nán de yí duì:",
+      "vi": "bây giờ chúng ta hãy thử thách với một cặp khó hơn:"
+    },
+    {
+      "start": 523.87,
+      "end": 526.66,
+      "en": "“能” and “可以.” To be honest, there are",
+      "zh": "“能”和“可以”。说实话，有",
+      "pinyin": "“néng” hé “kěyǐ”. Shuō shíhuà, yǒu",
+      "vi": "“能” và “可以”. Thật lòng mà nói, có"
+    },
+    {
+      "start": 526.67,
+      "end": 528.26,
+      "en": "times when even I, a Chinese person myself,",
+      "zh": "时候连我这个中国人自己，",
+      "pinyin": "shíhou lián wǒ zhège Zhōngguó rén zìjǐ,",
+      "vi": "những lúc ngay cả bản thân tôi, một người Trung Quốc,"
+    },
+    {
+      "start": 528.27,
+      "end": 531.63,
+      "en": "feel that the two are very similar and can often be used interchangeably.",
+      "zh": "都觉得它们俩很像，很多时候可以换着用。",
+      "pinyin": "dōu juéde tāmen liǎ hěn xiàng, hěn duō shíhou kěyǐ huànzhe yòng.",
+      "vi": "cũng thấy hai từ này rất giống nhau, nhiều lúc có thể thay nhau dùng."
+    },
+    {
+      "start": 531.63,
+      "end": 532.52,
+      "en": "That's indeed true.",
+      "zh": "的确如此。",
+      "pinyin": "Díquè rúcǐ.",
+      "vi": "Đúng là như vậy."
+    },
+    {
+      "start": 532.53,
+      "end": 534.29,
+      "en": "In many colloquial situations,",
+      "zh": "在很多口语情境下，",
+      "pinyin": "Zài hěn duō kǒuyǔ qíngjìng xià,",
+      "vi": "Trong nhiều tình huống khẩu ngữ,"
+    },
+    {
+      "start": 534.3,
+      "end": 537.62,
+      "en": "“Néng” and “kěyǐ” have very similar meanings and can be used interchangeably.",
+      "zh": "“能”和“可以”的意思非常接近，可以互换。",
+      "pinyin": "“Néng” hé “kěyǐ” de yìsi fēicháng jiējìn, kěyǐ hùhuàn.",
+      "vi": "“能” và “可以” nghĩa rất gần nhau, có thể dùng thay đổi cho nhau."
+    },
+    {
+      "start": 537.63,
+      "end": 539.09,
+      "en": "For example, you want to borrow my pen,",
+      "zh": "比如，你想借我的笔，",
+      "pinyin": "Bǐrú, nǐ xiǎng jiè wǒ de bǐ,",
+      "vi": "Ví dụ, bạn muốn mượn bút của tôi,"
+    },
+    {
+      "start": 539.1,
+      "end": 541.56,
+      "en": "you can ask, “Can I use your pen for a moment?”",
+      "zh": "你可以问:“我能用一下你的笔吗？”",
+      "pinyin": "nǐ kěyǐ wèn: “Wǒ néng yòng yíxià nǐ de bǐ ma?”",
+      "vi": "bạn có thể hỏi: “Tôi có thể dùng bút của bạn một chút được không?”"
+    },
+    {
+      "start": 541.57,
+      "end": 544.16,
+      "en": "You can also ask, “May I use your pen for a moment?”",
+      "zh": "也可以问:“我可以用一下你的笔吗？”",
+      "pinyin": "yě kěyǐ wèn: “Wǒ kěyǐ yòng yíxià nǐ de bǐ ma?”",
+      "vi": "cũng có thể hỏi: “Tôi có thể dùng bút của bạn một chút được không?”"
+    },
+    {
+      "start": 544.17,
+      "end": 546.96,
+      "en": "Both ways of saying it are completely correct, and we can understand both.",
+      "zh": "这两种说法都完全正确，我们都能听懂。",
+      "pinyin": "Zhè liǎng zhǒng shuōfa dōu wánquán zhèngquè, wǒmen dōu néng tīngdǒng.",
+      "vi": "Hai cách nói này đều hoàn toàn đúng, chúng ta đều có thể hiểu."
+    },
+    {
+      "start": 546.97,
+      "end": 550.69,
+      "en": "Right! Since both can be used, why do we still need to distinguish them?",
+      "zh": "对啊！既然都能用，那为什么还要区分它们呢？",
+      "pinyin": "Duì a! Jìrán dōu néng yòng, nà wèishénme hái yào qūfēn tāmen ne?",
+      "vi": "Đúng vậy! Đã đều dùng được, vậy tại sao còn phải phân biệt chúng?"
+    },
+    {
+      "start": 550.7,
+      "end": 552.92,
+      "en": "Isn’t this just making things harder for learners?",
+      "zh": "这不是给学习者增加难度吗？",
+      "pinyin": "Zhè bú shì gěi xuéxízhě zēngjiā nándù ma?",
+      "vi": "Đây chẳng phải là làm tăng độ khó cho người học sao?"
+    },
+    {
+      "start": 552.93,
+      "end": 555.15,
+      "en": "Let me ask this on behalf of my foreign friends.",
+      "zh": "我替我的外国朋友们问一句。",
+      "pinyin": "Wǒ tì wǒ de wàiguó péngyoumen wèn yí jù.",
+      "vi": "Tôi hỏi thay cho những người bạn nước ngoài của tôi một câu."
+    },
+    {
+      "start": 555.17,
+      "end": 557.13,
+      "en": "(Laughs) That’s a very good question.",
+      "zh": "(笑)，这个问题问得很好。",
+      "pinyin": "(Xiào), zhège wèntí wèn de hěn hǎo.",
+      "vi": "(Cười), câu hỏi này hỏi rất hay."
+    },
+    {
+      "start": 557.13,
+      "end": 559.25,
+      "en": "Although in many cases they can be interchanged,",
+      "zh": "虽然它们在很多时候可以互换，",
+      "pinyin": "Suīrán tāmen zài hěn duō shíhou kěyǐ hùhuàn,",
+      "vi": "Mặc dù trong nhiều trường hợp chúng có thể thay thế cho nhau,"
+    },
+    {
+      "start": 559.27,
+      "end": 561.86,
+      "en": "but in certain specific situations, they still have",
+      "zh": "但在一些特定的情况下，它们还是有",
+      "pinyin": "dàn zài yìxiē tèdìng de qíngkuàng xià, tāmen háishi yǒu",
+      "vi": "nhưng trong một số tình huống cụ thể, chúng vẫn có"
+    },
+    {
+      "start": 561.87,
+      "end": 563.46,
+      "en": "subtle but important differences.",
+      "zh": "细微的、重要的差别。",
+      "pinyin": "xìwēi de, zhòngyào de chābié.",
+      "vi": "những khác biệt nhỏ nhặt nhưng quan trọng."
+    },
+    {
+      "start": 563.47,
+      "end": 566.86,
+      "en": "Once you understand these differences, your Chinese will sound more natural.",
+      "zh": "理解了这些差别，你的中文听起来会更地道。",
+      "pinyin": "Lǐjiě le zhèxiē chābié, nǐ de Zhōngwén tīng qǐlái huì gèng dìdào.",
+      "vi": "Hiểu được những khác biệt này, tiếng Trung của bạn nghe sẽ tự nhiên hơn."
+    },
+    {
+      "start": 566.87,
+      "end": 569.33,
+      "en": "We can start with their most core meanings.",
+      "zh": "我们可以从它们最核心的意思开始。",
+      "pinyin": "Wǒmen kěyǐ cóng tāmen zuì héxīn de yìsi kāishǐ.",
+      "vi": "Chúng ta có thể bắt đầu từ nghĩa cốt lõi nhất của chúng."
+    },
+    {
+      "start": 569.33,
+      "end": 571.92,
+      "en": "Okay, so what is the core meaning?",
+      "zh": "好，那核心意思是什么？",
+      "pinyin": "Hǎo, nà héxīn yìsi shì shénme?",
+      "vi": "Được, vậy nghĩa cốt lõi là gì?"
+    },
+    {
+      "start": 571.93,
+      "end": 574.95,
+      "en": "“Néng” more often points to a kind of “ability”",
+      "zh": "“能”，它的核心更多地指向一种“能力”",
+      "pinyin": "“Néng”, tā de héxīn gèng duō de zhǐxiàng yì zhǒng “nénglì”",
+      "vi": "“能”, nghĩa cốt lõi của nó thiên về một loại “năng lực”"
+    },
+    {
+      "start": 574.97,
+      "end": 576.66,
+      "en": "or “objective possibility.”",
+      "zh": "或者“客观可能性”。",
+      "pinyin": "huòzhě “kèguān kěnéngxìng”.",
+      "vi": "hoặc “khả năng khách quan”."
+    },
+    {
+      "start": 576.67,
+      "end": 578.49,
+      "en": "This “ability” can be innate,",
+      "zh": "这个“能力”可以是天生的，",
+      "pinyin": "zhège “nénglì” kěyǐ shì tiānshēng de,",
+      "vi": "“Năng lực” này có thể là bẩm sinh,"
+    },
+    {
+      "start": 578.5,
+      "end": 580.36,
+      "en": "or it can be acquired through learning.",
+      "zh": "也可以是后天学习的。",
+      "pinyin": "yě kěyǐ shì hòutiān xuéxí de.",
+      "vi": "cũng có thể là do học sau này mà có."
+    },
+    {
+      "start": 580.37,
+      "end": 583.96,
+      "en": "For example, fish “can” swim in water; this is an innate ability.",
+      "zh": "比如，鱼“能”在水里游泳，这是天生的能力。",
+      "pinyin": "Bǐrú, yú “néng” zài shuǐ lǐ yóuyǒng, zhè shì tiānshēng de nénglì.",
+      "vi": "Ví dụ, cá “có thể” bơi trong nước, đây là năng lực bẩm sinh."
+    },
+    {
+      "start": 583.97,
+      "end": 586.26,
+      "en": "You learned to drive, so you “can” drive,",
+      "zh": "你学习了开车，所以你“能”开车，",
+      "pinyin": "Nǐ xuéxí le kāichē, suǒyǐ nǐ “néng” kāichē,",
+      "vi": "Bạn đã học lái xe, nên bạn “có thể” lái xe,"
+    },
+    {
+      "start": 586.27,
+      "end": 589.86,
+      "en": "this is a skill you learned. Oh, about “ability.”",
+      "zh": "这是你学会的技能。哦，关于“能力”的。",
+      "pinyin": "zhè shì nǐ xuéhuì de jìnéng. Ó, guānyú “nénglì” de.",
+      "vi": "đây là kỹ năng bạn đã học được. Ồ, về “năng lực” ấy."
+    },
+    {
+      "start": 589.87,
+      "end": 593.33,
+      "en": "For example, I can speak Chinese, so I “can” chat with Chinese people.",
+      "zh": "比如我会说中文，所以我“能”跟中国人聊天。",
+      "pinyin": "Bǐrú wǒ huì shuō Zhōngwén, suǒyǐ wǒ “néng” gēn Zhōngguórén liáotiān.",
+      "vi": "Ví dụ tôi biết nói tiếng Trung, nên tôi “có thể” trò chuyện với người Trung Quốc."
+    },
+    {
+      "start": 593.33,
+      "end": 596.52,
+      "en": "My friend is a swimming champion; he “can” swim very fast.",
+      "zh": "我朋友是游泳冠军，他“能”游得非常快。",
+      "pinyin": "Wǒ péngyou shì yóuyǒng guànjūn, tā “néng” yóu de fēicháng kuài.",
+      "vi": "Bạn tôi là vô địch bơi lội, anh ấy “có thể” bơi rất nhanh."
+    },
+    {
+      "start": 596.53,
+      "end": 599.12,
+      "en": "Exactly. Another example is objective possibility.",
+      "zh": "非常对。再比如客观可能性。",
+      "pinyin": "Fēicháng duì. Zài bǐrú kèguān kěnéngxìng.",
+      "vi": "Rất đúng. Lại ví dụ về khả năng khách quan."
+    },
+    {
+      "start": 599.13,
+      "end": 601.35,
+      "en": "It’s raining heavily today, and the water on the road is deep,",
+      "zh": "今天下大雨，路上的水很深，",
+      "pinyin": "Jīntiān xià dàyǔ, lù shang de shuǐ hěn shēn,",
+      "vi": "Hôm nay mưa to, nước trên đường rất sâu,"
+    },
+    {
+      "start": 601.37,
+      "end": 603.33,
+      "en": "so the car “can’t” drive through.",
+      "zh": "所以车“不能”开过去。",
+      "pinyin": "suǒyǐ chē “bùnéng” kāi guòqù.",
+      "vi": "nên xe “không thể” đi qua."
+    },
+    {
+      "start": 603.33,
+      "end": 607.22,
+      "en": "This isn’t that the driver “can’t” drive; it’s that objective conditions don’t allow it.",
+      "zh": "这不是司机“不会”开，而是客观条件不允许。",
+      "pinyin": "Zhè bú shì sījī “bú huì” kāi, ér shì kèguān tiáojiàn bù yǔnxǔ.",
+      "vi": "Đây không phải là tài xế “không biết” lái, mà là điều kiện khách quan không cho phép."
+    },
+    {
+      "start": 607.23,
+      "end": 610.32,
+      "en": "Or, my voice is bad, so I “can’t” sing today.",
+      "zh": "或者，我的嗓子坏了，今天“不能”唱歌了。",
+      "pinyin": "Huòzhě, wǒ de sǎngzi huài le, jīntiān “bùnéng” chànggē le.",
+      "vi": "Hoặc, cổ họng tôi bị hỏng, hôm nay “không thể” hát được."
+    },
+    {
+      "start": 610.33,
+      "end": 612.35,
+      "en": "This is also caused by an objective situation.",
+      "zh": "这也是一种客观情况造成的。",
+      "pinyin": "Zhè yě shì yì zhǒng kèguān qíngkuàng zàochéng de.",
+      "vi": "Đây cũng là do một tình huống khách quan gây ra."
+    },
+    {
+      "start": 612.37,
+      "end": 613.43,
+      "en": "I understand.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 613.43,
+      "end": 614.62,
+      "en": "“Néng” and “bùnéng”",
+      "zh": "“能”和“不能”",
+      "pinyin": "“Néng” hé “bùnéng”",
+      "vi": "“能” và “不能”"
+    },
+    {
+      "start": 614.63,
+      "end": 616.32,
+      "en": "often relate to our own abilities,",
+      "zh": "经常和我们自身的能力，",
+      "pinyin": "jīngcháng hé wǒmen zìshēn de nénglì,",
+      "vi": "thường liên quan đến năng lực của bản thân chúng ta,"
+    },
+    {
+      "start": 616.33,
+      "end": 618.72,
+      "en": "or are related to external environmental conditions.",
+      "zh": "或者外部的环境条件有关系。",
+      "pinyin": "huòzhě wàibù de huánjìng tiáojiàn yǒu guānxi.",
+      "vi": "hoặc có liên quan đến điều kiện môi trường bên ngoài."
+    },
+    {
+      "start": 618.73,
+      "end": 620.22,
+      "en": "What about “kěyǐ” then?",
+      "zh": "那“可以”呢？",
+      "pinyin": "Nà “kěyǐ” ne?",
+      "vi": "Vậy còn “可以” thì sao?"
+    },
+    {
+      "start": 620.23,
+      "end": 621.25,
+      "en": "The core meaning of “kěyǐ”",
+      "zh": "“可以”的核心意思，",
+      "pinyin": "“Kěyǐ” de héxīn yìsi,",
+      "vi": "Nghĩa cốt lõi của “可以”,"
+    },
+    {
+      "start": 621.27,
+      "end": 623.86,
+      "en": "is more about “permission” and “being allowed.”",
+      "zh": "更多地是关于“许可”和“允许”。",
+      "pinyin": "gèng duō de shì guānyú “xǔkě” hé “yǔnxǔ”.",
+      "vi": "thiên về “cho phép” và “được phép”."
+    },
+    {
+      "start": 623.87,
+      "end": 626.56,
+      "en": "It emphasizes “whether the rules allow it”",
+      "zh": "它强调的是“规则上允不允许”",
+      "pinyin": "tā qiángdiào de shì “guīzé shang yǔn bù yǔnxǔ”",
+      "vi": "Nó nhấn mạnh vào việc “quy định có cho phép hay không”"
+    },
+    {
+      "start": 626.57,
+      "end": 628.83,
+      "en": "or “whether others agree.” Ah!",
+      "zh": "或者“别人同不同意”。啊！",
+      "pinyin": "huòzhě “biérén tóng bu tóngyì”. A!",
+      "vi": "hoặc “người khác có đồng ý hay không”. À!"
+    },
+    {
+      "start": 628.83,
+      "end": 630.69,
+      "en": "Permission! This is very important.",
+      "zh": "许可！这个很重要。",
+      "pinyin": "Xǔkě! Zhège hěn zhòngyào.",
+      "vi": "Cho phép! Điều này rất quan trọng."
+    },
+    {
+      "start": 630.7,
+      "end": 633.82,
+      "en": "For example, in the library, you “may not” speak loudly.",
+      "zh": "比如，在图书馆里，“不可以”大声说话。",
+      "pinyin": "Bǐrú, zài túshūguǎn lǐ, “bù kěyǐ” dàshēng shuōhuà.",
+      "vi": "Ví dụ, trong thư viện, “không được” nói to."
+    },
+    {
+      "start": 633.83,
+      "end": 636.45,
+      "en": "This doesn’t mean I don’t have the “ability” to speak loudly;",
+      "zh": "这不是说我没有大声说话的“能力”，",
+      "pinyin": "Zhè bú shì shuō wǒ méiyǒu dàshēng shuōhuà de “nénglì”,",
+      "vi": "Đây không phải nói tôi không có “năng lực” nói to,"
+    },
+    {
+      "start": 636.47,
+      "end": 638.33,
+      "en": "it’s that the rules here don’t allow it.",
+      "zh": "而是这里的规则不允许。",
+      "pinyin": "ér shì zhèlǐ de guīzé bù yǔnxǔ.",
+      "vi": "mà là quy định ở đây không cho phép."
+    },
+    {
+      "start": 638.33,
+      "end": 640.49,
+      "en": "Excellent example! Absolutely correct.",
+      "zh": "绝佳的例子！完全正确。",
+      "pinyin": "Juéjiā de lìzi! Wánquán zhèngquè.",
+      "vi": "Ví dụ tuyệt vời! Hoàn toàn chính xác."
+    },
+    {
+      "start": 640.5,
+      "end": 642.86,
+      "en": "Another example: a child asks his mother, “Mom,",
+      "zh": "再比如，孩子问妈妈:“妈妈，",
+      "pinyin": "Zài bǐrú, háizi wèn māma: “Māma,",
+      "vi": "Lại ví dụ, đứa trẻ hỏi mẹ: “Mẹ ơi,"
+    },
+    {
+      "start": 642.87,
+      "end": 644.26,
+      "en": "‘May’ I go out and play?”",
+      "zh": "我‘可以’出去玩吗？”",
+      "pinyin": "wǒ ‘kěyǐ’ chūqù wán ma?”",
+      "vi": "con ‘có thể’ ra ngoài chơi không?”"
+    },
+    {
+      "start": 644.27,
+      "end": 646.89,
+      "en": "He isn’t asking whether he has the “ability” to go out;",
+      "zh": "他不是在问自己有没有“能力”走出去，",
+      "pinyin": "tā bú shì zài wèn zìjǐ yǒu méiyǒu “nénglì” zǒu chuqu,",
+      "vi": "Nó không phải đang hỏi mình có “năng lực” đi ra ngoài hay không,"
+    },
+    {
+      "start": 646.9,
+      "end": 649.22,
+      "en": "he’s seeking his mother’s “permission.”",
+      "zh": "而是在寻求妈妈的“许可”。",
+      "pinyin": "ér shì zài xúnqiú māma de “xǔkě”.",
+      "vi": "mà là đang tìm kiếm sự “cho phép” của mẹ."
+    },
+    {
+      "start": 649.23,
+      "end": 651.45,
+      "en": "If his mother agrees, she’ll say, “You may.”",
+      "zh": "妈妈如果同意，就会说:“可以。”",
+      "pinyin": "Māma rúguǒ tóngyì, jiù huì shuō: “Kěyǐ.”",
+      "vi": "Nếu mẹ đồng ý, sẽ nói: “Được.”"
+    },
+    {
+      "start": 651.47,
+      "end": 654.23,
+      "en": "Got it! So, when asking for permission,",
+      "zh": "懂了！所以，在请求允许的时候，",
+      "pinyin": "Dǒng le! Suǒyǐ, zài qǐngqiú yǔnxǔ de shíhou,",
+      "vi": "Hiểu rồi! Vậy, khi xin phép,"
+    },
+    {
+      "start": 654.23,
+      "end": 656.69,
+      "en": "'可以' is the most common and standard word.",
+      "zh": "“可以”是最常用、最标准的词。",
+      "pinyin": "“Kěyǐ” shì zuì chángyòng, zuì biāozhǔn de cí.",
+      "vi": "“可以” là từ thông dụng nhất và chuẩn mực nhất."
+    },
+    {
+      "start": 656.7,
+      "end": 658.02,
+      "en": "Although just now we said",
+      "zh": "虽然刚才我们说",
+      "pinyin": "Suīrán gāngcái wǒmen shuō",
+      "vi": "Mặc dù vừa nãy chúng ta nói"
+    },
+    {
+      "start": 658.03,
+      "end": 660.32,
+      "en": "'Can I use your pen for a bit?' is also okay,",
+      "zh": "“我能用一下你的笔吗”也可以，",
+      "pinyin": "“Wǒ néng yòng yíxià nǐ de bǐ ma” yě kěyǐ,",
+      "vi": "“Tôi có thể dùng bút của bạn một chút không” cũng được,"
+    },
+    {
+      "start": 660.33,
+      "end": 662.62,
+      "en": "But if it is in a relatively formal,",
+      "zh": "但如果是在一个比较正式的，",
+      "pinyin": "Dàn rúguǒ shì zài yí gè bǐjiào zhèngshì de,",
+      "vi": "Nhưng nếu là trong một tình huống khá trang trọng,"
+    },
+    {
+      "start": 662.63,
+      "end": 665.62,
+      "en": "or an occasion where you need to emphasize 'asking for permission,'",
+      "zh": "或者需要强调“请求许可”的场合，",
+      "pinyin": "Huòzhě xūyào qiángdiào “qǐngqiú xǔkě” de chǎnghé,",
+      "vi": "hoặc trong trường hợp cần nhấn mạnh “xin phép”,"
+    },
+    {
+      "start": 665.63,
+      "end": 668.22,
+      "en": "'May I use it for a bit?' would be a bit more appropriate.",
+      "zh": "“我可以用一下吗”会更合适一点。",
+      "pinyin": "“Wǒ kěyǐ yòng yíxià ma” huì gèng héshì yìdiǎn.",
+      "vi": "“Tôi có thể dùng một chút được không” sẽ hợp hơn một chút."
+    },
+    {
+      "start": 668.23,
+      "end": 671.42,
+      "en": "Yes. We can use a simple analogy to remember it.",
+      "zh": "是的。我们可以用一个简单的比喻来记住它。",
+      "pinyin": "Shì de. Wǒmen kěyǐ yòng yí gè jiǎndān de bǐyù lái jìzhù tā.",
+      "vi": "Đúng vậy. Chúng ta có thể dùng một phép so sánh đơn giản để ghi nhớ nó."
+    },
+    {
+      "start": 671.43,
+      "end": 674.35,
+      "en": "'能' is like whether you yourself have a key,",
+      "zh": "“能”就像是你自己有没有一把钥匙，",
+      "pinyin": "“Néng” jiù xiàng shì nǐ zìjǐ yǒu méiyǒu yì bǎ yàoshi,",
+      "vi": "“能” giống như việc bản thân bạn có hay không có một chiếc chìa khóa,"
+    },
+    {
+      "start": 674.37,
+      "end": 677.63,
+      "en": "This key is your ability or objective condition.",
+      "zh": "这把钥匙是你的能力或者客观条件。",
+      "pinyin": "Zhè bǎ yàoshi shì nǐ de nénglì huòzhě kèguān tiáojiàn.",
+      "vi": "Chiếc chìa khóa này là năng lực hoặc điều kiện khách quan của bạn."
+    },
+    {
+      "start": 677.63,
+      "end": 680.32,
+      "en": "And '可以' is like the owner of this door,",
+      "zh": "而“可以”就像是这扇门的主人，",
+      "pinyin": "Ér “kěyǐ” jiù xiàng shì zhè shàn mén de zhǔrén,",
+      "vi": "Còn “可以” giống như chủ nhân của cánh cửa này,"
+    },
+    {
+      "start": 680.33,
+      "end": 683.62,
+      "en": "He decides whether you are allowed to use this key.",
+      "zh": "他来决定你是否被允许使用这把钥匙。",
+      "pinyin": "Tā lái juédìng nǐ shìfǒu bèi yǔnxǔ shǐyòng zhè bǎ yàoshi.",
+      "vi": "Người đó quyết định xem bạn có được phép dùng chiếc chìa khóa này hay không."
+    },
+    {
+      "start": 683.63,
+      "end": 686.75,
+      "en": "Wow, this analogy of the key and the door owner is great!",
+      "zh": "哇，这个钥匙和门主人的比喻太棒了！",
+      "pinyin": "Wā, zhège yàoshi hé mén zhǔrén de bǐyù tài bàng le!",
+      "vi": "Oa, phép so sánh giữa chiếc chìa khóa và chủ nhân cánh cửa này hay quá!"
+    },
+    {
+      "start": 686.77,
+      "end": 688.43,
+      "en": "I remembered it right away!",
+      "zh": "我一下子就记住了！",
+      "pinyin": "Wǒ yíxiàzi jiù jìzhù le!",
+      "vi": "Tôi nhớ ra ngay lập tức rồi!"
+    },
+    {
+      "start": 688.43,
+      "end": 690.52,
+      "en": "'能' is whether I have the key,",
+      "zh": "“能”是我有没有钥匙，",
+      "pinyin": "“Néng” shì wǒ yǒu méiyǒu yàoshi,",
+      "vi": "“能” là việc tôi có hay không có chìa khóa,"
+    },
+    {
+      "start": 690.53,
+      "end": 692.92,
+      "en": "'可以' is whether the owner lets me open the door.",
+      "zh": "“可以”是主人让不让我开门。",
+      "pinyin": "“Kěyǐ” shì zhǔrén ràng bù ràng wǒ kāimén.",
+      "vi": "“可以” là việc chủ nhân có cho tôi mở cửa hay không."
+    },
+    {
+      "start": 692.93,
+      "end": 695.49,
+      "en": "Then let me try making a sentence with this analogy.",
+      "zh": "那我来试试用这个比喻造个句子。",
+      "pinyin": "Nà wǒ lái shìshi yòng zhège bǐyù zào ge jùzi.",
+      "vi": "Vậy để tôi thử dùng phép so sánh này đặt một câu."
+    },
+    {
+      "start": 695.5,
+      "end": 697.02,
+      "en": "For example, I 'can' drink alcohol",
+      "zh": "比如，我“能”喝酒",
+      "pinyin": "Bǐrú, wǒ “néng” hējiǔ",
+      "vi": "Ví dụ, tôi “có thể” uống rượu"
+    },
+    {
+      "start": 697.03,
+      "end": 698.49,
+      "en": "(I have the ability to drink alcohol),",
+      "zh": "（我有喝酒的能力），",
+      "pinyin": "(Wǒ yǒu hējiǔ de nénglì),",
+      "vi": "(tôi có khả năng uống rượu),"
+    },
+    {
+      "start": 698.5,
+      "end": 701.02,
+      "en": "but before driving, you 'must not' drink alcohol",
+      "zh": "但是在开车前，“不可以”喝酒",
+      "pinyin": "Dànshì zài kāichē qián, “bù kěyǐ” hējiǔ",
+      "vi": "Nhưng trước khi lái xe, “không được” uống rượu"
+    },
+    {
+      "start": 701.03,
+      "end": 702.82,
+      "en": "(the law and rules do not allow it).",
+      "zh": "（法律和规则不允许）。",
+      "pinyin": "(Fǎlǜ hé guīzé bù yǔnxǔ).",
+      "vi": "(pháp luật và quy định không cho phép)."
+    },
+    {
+      "start": 702.83,
+      "end": 703.89,
+      "en": "Perfect!",
+      "zh": "太完美了！",
+      "pinyin": "Tài wánměi le!",
+      "vi": "Quá hoàn hảo!"
+    },
+    {
+      "start": 703.9,
+      "end": 704.49,
+      "en": "This example",
+      "zh": "这个例子",
+      "pinyin": "Zhège lìzi",
+      "vi": "Ví dụ này"
+    },
+    {
+      "start": 704.5,
+      "end": 707.69,
+      "en": "perfectly captures the difference between '能' and '可以'.",
+      "zh": "把“能”和“可以”的区别体现得淋漓尽致。",
+      "pinyin": "Bǎ “néng” hé “kěyǐ” de qūbié tǐxiàn de línlíjìnzhì.",
+      "vi": "đã thể hiện được sự khác biệt giữa “能” và “可以” một cách trọn vẹn."
+    },
+    {
+      "start": 707.7,
+      "end": 709.06,
+      "en": "Let's think of another scenario.",
+      "zh": "我们再想一个场景。",
+      "pinyin": "Wǒmen zài xiǎng yí gè chǎngjǐng.",
+      "vi": "Chúng ta nghĩ thêm một tình huống nữa."
+    },
+    {
+      "start": 709.07,
+      "end": 712.06,
+      "en": "In the hospital, the doctor says to the patient: 'You're sick,",
+      "zh": "在医院里，医生对病人说:“你生病了，",
+      "pinyin": "Zài yīyuàn lǐ, yīshēng duì bìngrén shuō: “Nǐ shēngbìng le,",
+      "vi": "Trong bệnh viện, bác sĩ nói với bệnh nhân: “Anh bị ốm rồi,"
+    },
+    {
+      "start": 712.07,
+      "end": 713.56,
+      "en": "you can't eat spicy things.'",
+      "zh": "不‘能’吃辣的东西。”",
+      "pinyin": "Bù ‘néng’ chī là de dōngxi.”",
+      "vi": "không ‘được’ ăn đồ cay.”"
+    },
+    {
+      "start": 713.57,
+      "end": 715.49,
+      "en": "Should we use '能' or '可以' here?",
+      "zh": "这里用“能”还是“可以”？",
+      "pinyin": "Zhèlǐ yòng “néng” háishi “kěyǐ”?",
+      "vi": "Ở đây dùng “能” hay “可以”?"
+    },
+    {
+      "start": 715.5,
+      "end": 716.76,
+      "en": "Hmm... let me think.",
+      "zh": "嗯……我想想。",
+      "pinyin": "Èn…… wǒ xiǎngxiang.",
+      "vi": "Ừm…… để tôi nghĩ xem."
+    },
+    {
+      "start": 716.77,
+      "end": 718.06,
+      "en": "The doctor is saying that,",
+      "zh": "医生是在说，",
+      "pinyin": "Yīshēng shì zài shuō,",
+      "vi": "Bác sĩ đang nói rằng,"
+    },
+    {
+      "start": 718.07,
+      "end": 720.69,
+      "en": "From the objective condition of your body, eating",
+      "zh": "从你身体的客观情况来看，吃",
+      "pinyin": "Cóng nǐ shēntǐ de kèguān qíngkuàng lái kàn, chī",
+      "vi": "Xét theo tình trạng khách quan của cơ thể bạn, ăn"
+    },
+    {
+      "start": 720.7,
+      "end": 723.42,
+      "en": "spicy food will have a bad effect on your health.",
+      "zh": "辣会对你的健康造成坏的影响。",
+      "pinyin": "Là huì duì nǐ de jiànkāng zàochéng huài de yǐngxiǎng.",
+      "vi": "đồ cay sẽ gây ảnh hưởng xấu đến sức khỏe của bạn."
+    },
+    {
+      "start": 723.43,
+      "end": 725.65,
+      "en": "This is more like an objective condition,",
+      "zh": "这更像是一个客观条件，",
+      "pinyin": "Zhè gèng xiàng shì yí gè kèguān tiáojiàn,",
+      "vi": "Đây giống như một điều kiện khách quan hơn,"
+    },
+    {
+      "start": 725.67,
+      "end": 728.13,
+      "en": "So I choose '不能'. Correct answer.",
+      "zh": "所以我选“不能”。回答正确。",
+      "pinyin": "Suǒyǐ wǒ xuǎn “bù néng”. Huídá zhèngquè.",
+      "vi": "Vì vậy tôi chọn “不能”. Trả lời đúng."
+    },
+    {
+      "start": 728.13,
+      "end": 730.12,
+      "en": "The doctor is telling you from a professional perspective,",
+      "zh": "医生是在从专业的角度告诉你，",
+      "pinyin": "Yīshēng shì zài cóng zhuānyè de jiǎodù gàosu nǐ,",
+      "vi": "Bác sĩ đang từ góc độ chuyên môn nói với bạn rằng,"
+    },
+    {
+      "start": 730.13,
+      "end": 732.82,
+      "en": "your physical condition 'does not allow' you to do so.",
+      "zh": "你的身体状况“不允许”你这么做。",
+      "pinyin": "Nǐ de shēntǐ zhuàngkuàng “bù yǔnxǔ” nǐ zhème zuò.",
+      "vi": "tình trạng cơ thể của bạn “không cho phép” bạn làm như vậy."
+    },
+    {
+      "start": 732.83,
+      "end": 734.49,
+      "en": "But if it's in a restaurant,",
+      "zh": "但如果是在一个餐厅，",
+      "pinyin": "Dàn rúguǒ shì zài yí gè cāntīng,",
+      "vi": "Nhưng nếu ở một nhà hàng,"
+    },
+    {
+      "start": 734.5,
+      "end": 736.32,
+      "en": "The waiter tells you: 'Sorry,",
+      "zh": "服务员告诉你:“对不起，",
+      "pinyin": "Fúwùyuán gàosu nǐ: “Duìbuqǐ,",
+      "vi": "Nhân viên phục vụ nói với bạn: “Xin lỗi,"
+    },
+    {
+      "start": 736.33,
+      "end": 737.69,
+      "en": "we're out of chili peppers,",
+      "zh": "我们的辣椒用完了，",
+      "pinyin": "Wǒmen de làjiāo yòngwán le,",
+      "vi": "Ớt của chúng tôi dùng hết rồi,"
+    },
+    {
+      "start": 737.7,
+      "end": 739.49,
+      "en": "today you 'cannot' order spicy dishes.'",
+      "zh": "今天‘不可以’点辣的菜。”",
+      "pinyin": "Jīntiān ‘bù kěyǐ’ diǎn là de cài.”",
+      "vi": "Hôm nay ‘không được’ gọi món cay.”"
+    },
+    {
+      "start": 739.5,
+      "end": 740.56,
+      "en": "Here using '不可以'",
+      "zh": "这里用“不可以”",
+      "pinyin": "Zhèlǐ yòng “bù kěyǐ”",
+      "vi": "Ở đây dùng “不可以”"
+    },
+    {
+      "start": 740.57,
+      "end": 743.26,
+      "en": "is more like because of the restaurant's rules or situation,",
+      "zh": "就更像是因为餐厅的规定或者情况，",
+      "pinyin": "Jiù gèng xiàng shì yīnwèi cāntīng de guīdìng huòzhě qíngkuàng,",
+      "vi": "thì giống như là vì quy định hoặc tình trạng của nhà hàng,"
+    },
+    {
+      "start": 743.27,
+      "end": 744.93,
+      "en": "they can't provide this option.",
+      "zh": "提供不了这个选项。",
+      "pinyin": "Tígōng bù liǎo zhège xuǎnxiàng.",
+      "vi": "không thể cung cấp lựa chọn này."
+    },
+    {
+      "start": 744.93,
+      "end": 745.42,
+      "en": "Of course,",
+      "zh": "当然，",
+      "pinyin": "Dāngrán,",
+      "vi": "Tất nhiên,"
+    },
+    {
+      "start": 745.43,
+      "end": 748.02,
+      "en": "in this situation, saying '不能' to order spicy dishes,",
+      "zh": "在这种情况下，说“不能”点辣的菜，",
+      "pinyin": "Zài zhè zhǒng qíngkuàng xià, shuō “bù néng” diǎn là de cài,",
+      "vi": "Trong trường hợp này, nói “不能” gọi món cay,"
+    },
+    {
+      "start": 748.03,
+      "end": 749.49,
+      "en": "everyone can fully understand it.",
+      "zh": "大家也完全能听懂。",
+      "pinyin": "Dàjiā yě wánquán néng tīngdǒng.",
+      "vi": "Mọi người cũng hoàn toàn có thể hiểu được."
+    },
+    {
+      "start": 749.5,
+      "end": 752.66,
+      "en": "Indeed, their boundaries are very blurry in many cases.",
+      "zh": "确实，它们在很多时候界限很模糊。",
+      "pinyin": "Quèshí, tāmen zài hěn duō shíhou jièxiàn hěn móhu.",
+      "vi": "Đúng vậy, trong nhiều trường hợp ranh giới của chúng rất mơ hồ."
+    },
+    {
+      "start": 752.67,
+      "end": 754.69,
+      "en": "But I feel that when we want to emphasize",
+      "zh": "但我感觉，当我们想强调",
+      "pinyin": "Dàn wǒ gǎnjué, dāng wǒmen xiǎng qiángdiào",
+      "vi": "Nhưng tôi cảm thấy, khi chúng ta muốn nhấn mạnh"
+    },
+    {
+      "start": 754.7,
+      "end": 756.62,
+      "en": "'ability' or 'possibility,'",
+      "zh": "“能力”或者“可能性”的时候，",
+      "pinyin": "“nénglì” huòzhě “kěnéngxìng” de shíhou,",
+      "vi": "“năng lực” hoặc “khả năng”,"
+    },
+    {
+      "start": 756.63,
+      "end": 757.52,
+      "en": "we use '能';",
+      "zh": "用“能”；",
+      "pinyin": "yòng “néng”;",
+      "vi": "thì dùng “能”;"
+    },
+    {
+      "start": 757.53,
+      "end": 760.95,
+      "en": "when we want to emphasize 'permission' or 'rules,' we use '可以,'",
+      "zh": "想强调“许可”或者“规则”的时候，用“可以”，",
+      "pinyin": "xiǎng qiángdiào “xǔkě” huòzhě “guīzé” de shíhou, yòng “kěyǐ”,",
+      "vi": "khi muốn nhấn mạnh “sự cho phép” hoặc “quy định”, thì dùng “可以”,"
+    },
+    {
+      "start": 760.97,
+      "end": 763.33,
+      "en": "This is the safest and also the most authentic.",
+      "zh": "这样是最安全的，也是最地道的。",
+      "pinyin": "Zhèyàng shì zuì ānquán de, yě shì zuì dìdao de.",
+      "vi": "Như vậy là an toàn nhất, cũng là tự nhiên nhất."
+    },
+    {
+      "start": 763.33,
+      "end": 765.25,
+      "en": "That's right. There's another situation,",
+      "zh": "没错。还有一种情况，",
+      "pinyin": "Méi cuò. Hái yǒu yī zhǒng qíngkuàng,",
+      "vi": "Đúng vậy. Còn một trường hợp nữa,"
+    },
+    {
+      "start": 765.27,
+      "end": 769.13,
+      "en": "“可以” is often used to make suggestions or to mean “pretty good.”",
+      "zh": "“可以”常常用来提出建议或者表示“还不错”。",
+      "pinyin": "“Kěyǐ” chángcháng yònglái tíchū jiànyì huòzhě biǎoshì “hái bùcuò”.",
+      "vi": "“可以” thường được dùng để đưa ra đề nghị hoặc biểu thị “cũng được”."
+    },
+    {
+      "start": 769.13,
+      "end": 771.32,
+      "en": "For example, if a friend asks you how this piece of clothing is,",
+      "zh": "比如，朋友问你这件衣服怎么样，",
+      "pinyin": "Bǐrú, péngyou wèn nǐ zhè jiàn yīfu zěnmeyàng,",
+      "vi": "Ví dụ, bạn bè hỏi bạn bộ quần áo này thế nào,"
+    },
+    {
+      "start": 771.33,
+      "end": 772.62,
+      "en": "you can say, “Hmm,",
+      "zh": "你可以说:“嗯，",
+      "pinyin": "nǐ kěyǐ shuō: “ǹg,",
+      "vi": "bạn có thể nói: “Ừm,"
+    },
+    {
+      "start": 772.63,
+      "end": 776.29,
+      "en": "it’s okay.” It means it’s acceptable—not the best, but not bad either.",
+      "zh": "还可以。”意思是还行，不算最好，但也不差。",
+      "pinyin": "hái kěyǐ.” Yìsi shì hái xíng, bù suàn zuì hǎo, dàn yě bù chà.",
+      "vi": "vẫn được.” Nghĩa là cũng tạm được, không tính là tốt nhất, nhưng cũng không tệ."
+    },
+    {
+      "start": 776.3,
+      "end": 778.69,
+      "en": "Or if a friend asks where you’re going to hang out this weekend,",
+      "zh": "或者朋友问你周末去哪里玩，",
+      "pinyin": "Huòzhě péngyou wèn nǐ zhōumò qù nǎlǐ wán,",
+      "vi": "Hoặc bạn bè hỏi bạn cuối tuần đi đâu chơi,"
+    },
+    {
+      "start": 778.7,
+      "end": 781.52,
+      "en": "you can suggest, “We can go for a walk in the park.”",
+      "zh": "你可以建议说:“我们可以去公园走走。”",
+      "pinyin": "nǐ kěyǐ jiànyì shuō: “Wǒmen kěyǐ qù gōngyuán zǒuzou.”",
+      "vi": "bạn có thể gợi ý: “Chúng ta có thể đi dạo công viên.”"
+    },
+    {
+      "start": 781.53,
+      "end": 784.92,
+      "en": "In this case, using “可以” is much more natural than using “能.”",
+      "zh": "这时候用“可以”就比用“能”要自然得多。",
+      "pinyin": "Zhè shíhou yòng “kěyǐ” jiù bǐ yòng “néng” yào zìrán de duō.",
+      "vi": "Lúc này dùng “可以” tự nhiên hơn dùng “能” nhiều."
+    },
+    {
+      "start": 784.93,
+      "end": 788.45,
+      "en": "Oh right! I often say “还可以.”",
+      "zh": "哦对！我经常说“还可以”。",
+      "pinyin": "Ó duì! Wǒ jīngcháng shuō “hái kěyǐ”.",
+      "vi": "Ồ đúng rồi! Tôi thường nói “cũng được”."
+    },
+    {
+      "start": 788.47,
+      "end": 790.23,
+      "en": "This usage is very common.",
+      "zh": "这个用法很常见。",
+      "pinyin": "Zhège yòngfǎ hěn chángjiàn.",
+      "vi": "Cách dùng này rất phổ biến."
+    },
+    {
+      "start": 790.23,
+      "end": 792.85,
+      "en": "“We can go try that newly opened restaurant,”",
+      "zh": "“我们可以去试试那家新开的餐厅”，",
+      "pinyin": "“Wǒmen kěyǐ qù shìshi nà jiā xīn kāi de cāntīng”,",
+      "vi": "“Chúng ta có thể đi thử nhà hàng mới mở đó”,"
+    },
+    {
+      "start": 792.87,
+      "end": 794.53,
+      "en": "this is also making a suggestion.",
+      "zh": "这也是在提建议。",
+      "pinyin": "zhè yě shì zài tí jiànyì.",
+      "vi": "đây cũng là đang đưa ra đề nghị."
+    },
+    {
+      "start": 794.53,
+      "end": 795.35,
+      "en": "If we say",
+      "zh": "如果说",
+      "pinyin": "Rúguǒ shuō",
+      "vi": "Nếu nói"
+    },
+    {
+      "start": 795.37,
+      "end": 798.06,
+      "en": "“We are able to go try that newly opened restaurant,”",
+      "zh": "“我们能去试试那家新开的餐厅”，",
+      "pinyin": "“Wǒmen néng qù shìshi nà jiā xīn kāi de cāntīng”,",
+      "vi": "“Chúng ta có thể đi thử nhà hàng mới mở đó”,"
+    },
+    {
+      "start": 798.07,
+      "end": 799.83,
+      "en": "it sounds a little strange,",
+      "zh": "听起来就有点奇怪，",
+      "pinyin": "tīng qǐlái jiù yǒudiǎn qíguài,",
+      "vi": "nghe sẽ hơi lạ,"
+    },
+    {
+      "start": 799.83,
+      "end": 802.69,
+      "en": "as if doubting whether we have the ability to go.",
+      "zh": "好像在怀疑我们有没有能力去一样。",
+      "pinyin": "hǎoxiàng zài huáiyí wǒmen yǒu méiyǒu nénglì qù yíyàng.",
+      "vi": "như thể đang nghi ngờ chúng ta có khả năng đi hay không vậy."
+    },
+    {
+      "start": 802.7,
+      "end": 805.29,
+      "en": "Right, that’s where the difference in language feel lies.",
+      "zh": "对，语感上的差别就在这里。",
+      "pinyin": "Duì, yǔgǎn shàng de chābié jiù zài zhèlǐ.",
+      "vi": "Đúng, sự khác biệt về cảm giác ngôn ngữ nằm ở đây."
+    },
+    {
+      "start": 805.3,
+      "end": 808.92,
+      "en": "So we can see that “能” focuses more on “whether it’s possible,”",
+      "zh": "所以，我们可以看到，“能”更关注“行不行”，",
+      "pinyin": "Suǒyǐ, wǒmen kěyǐ kàndào, “néng” gèng guānzhù “xíng bù xíng”,",
+      "vi": "Vì vậy, chúng ta có thể thấy, “能” chú trọng hơn vào “có được hay không”,"
+    },
+    {
+      "start": 808.93,
+      "end": 813.12,
+      "en": "while “可以” focuses more on “whether it’s good” or “whether it’s permitted.”",
+      "zh": "而“可以”更关注“好不好”或者“允不允许”。",
+      "pinyin": "ér “kěyǐ” gèng guānzhù “hǎo bù hǎo” huòzhě “yǔn bù yǔnxǔ”.",
+      "vi": "còn “可以” chú trọng hơn vào “có tốt hay không” hoặc “có được phép hay không”."
+    },
+    {
+      "start": 813.13,
+      "end": 814.62,
+      "en": "That summary is excellent!",
+      "zh": "总结得太好了！",
+      "pinyin": "Zǒngjié de tài hǎo le!",
+      "vi": "Tổng kết quá hay!"
+    },
+    {
+      "start": 814.63,
+      "end": 815.72,
+      "en": "Although they are very similar,",
+      "zh": "虽然它们很像，",
+      "pinyin": "Suīrán tāmen hěn xiàng,",
+      "vi": "Mặc dù chúng rất giống nhau,"
+    },
+    {
+      "start": 815.73,
+      "end": 818.62,
+      "en": "one leans toward ability and objective facts,",
+      "zh": "但一个偏向于能力和客观事实，",
+      "pinyin": "dàn yīgè piānxiàng yú nénglì hé kèguān shìshí,",
+      "vi": "nhưng một cái thiên về năng lực và sự thật khách quan,"
+    },
+    {
+      "start": 818.63,
+      "end": 821.75,
+      "en": "and the other leans toward permission and subjective suggestions.",
+      "zh": "一个偏向于许可和主观建议。",
+      "pinyin": "yīgè piānxiàng yú xǔkě hé zhǔguān jiànyì.",
+      "vi": "một cái thiên về sự cho phép và đề nghị chủ quan."
+    },
+    {
+      "start": 821.77,
+      "end": 824.63,
+      "en": "I feel that after today, I’ll never use them wrong again.",
+      "zh": "我感觉今天之后，我再也不会用错了。",
+      "pinyin": "Wǒ gǎnjué jīntiān zhīhòu, wǒ zài yě bù huì yòngcuò le.",
+      "vi": "Tôi cảm thấy sau hôm nay, tôi sẽ không bao giờ dùng sai nữa."
+    },
+    {
+      "start": 824.63,
+      "end": 826.65,
+      "en": "I believe that friends listening to our program,",
+      "zh": "我相信听我们节目的朋友们，",
+      "pinyin": "Wǒ xiāngxìn tīng wǒmen jiémù de péngyoumen,",
+      "vi": "Tôi tin rằng các bạn nghe chương trình của chúng ta,"
+    },
+    {
+      "start": 826.67,
+      "end": 827.83,
+      "en": "as long as they think a bit more",
+      "zh": "只要多思考一下",
+      "pinyin": "zhǐyào duō sīkǎo yīxià",
+      "vi": "chỉ cần suy nghĩ thêm một chút"
+    },
+    {
+      "start": 827.83,
+      "end": 830.35,
+      "en": "about the metaphor we mentioned of the key and the owner,",
+      "zh": "我们说的钥匙和主人的比喻，",
+      "pinyin": "wǒmen shuō de yàoshi hé zhǔrén de bǐyù,",
+      "vi": "về phép so sánh “chìa khóa và ông chủ” mà chúng ta nói,"
+    },
+    {
+      "start": 830.37,
+      "end": 832.23,
+      "en": "they will definitely be able to master their usage.",
+      "zh": "也一定能掌握它们的用法。",
+      "pinyin": "yě yīdìng néng zhǎngwò tāmen de yòngfǎ.",
+      "vi": "thì nhất định cũng có thể nắm được cách dùng của chúng."
+    },
+    {
+      "start": 832.23,
+      "end": 834.42,
+      "en": "Okay, Wang Yu. In today’s chat,",
+      "zh": "好了，王雨。在今天的聊天里，",
+      "pinyin": "Hǎo le, Wáng Yǔ. Zài jīntiān de liáotiān lǐ,",
+      "vi": "Được rồi, Vương Vũ. Trong cuộc trò chuyện hôm nay,"
+    },
+    {
+      "start": 834.43,
+      "end": 837.15,
+      "en": "we used some words that, for beginner friends,",
+      "zh": "我们用了一些对于初学者朋友们来说",
+      "pinyin": "wǒmen yòng le yīxiē duìyú chūxuézhě péngyoumen lái shuō",
+      "vi": "chúng ta đã dùng một số từ mà đối với những bạn mới học"
+    },
+    {
+      "start": 837.17,
+      "end": 839.93,
+      "en": "might be a little difficult. Now",
+      "zh": "可能有一点点难度的词。现在",
+      "pinyin": "kěnéng yǒu yīdiǎndiǎn nándù de cí. Xiànzài",
+      "vi": "có thể hơi có chút khó. Bây giờ"
+    },
+    {
+      "start": 839.93,
+      "end": 842.35,
+      "en": "let’s review a bit to help you deepen your impression.",
+      "zh": "我们来回顾一下，帮你加深印象。",
+      "pinyin": "wǒmen lái huígù yīxià, bāng nǐ jiāshēn yìnxiàng.",
+      "vi": "chúng ta cùng ôn lại một chút, giúp bạn khắc sâu ấn tượng."
+    },
+    {
+      "start": 842.37,
+      "end": 844.86,
+      "en": "Sure, you ask, and I’ll explain.",
+      "zh": "好啊，你来问，我来解释。",
+      "pinyin": "Hǎo a, nǐ lái wèn, wǒ lái jiěshì.",
+      "vi": "Được thôi, bạn hỏi, tôi giải thích."
+    },
+    {
+      "start": 844.87,
+      "end": 847.56,
+      "en": "I’ll try to explain clearly in the simplest words possible.",
+      "zh": "我会尽量用最简单的话来说清楚。",
+      "pinyin": "Wǒ huì jǐnliàng yòng zuì jiǎndān de huà lái shuō qīngchu.",
+      "vi": "Tôi sẽ cố gắng dùng những lời đơn giản nhất để nói rõ."
+    },
+    {
+      "start": 847.57,
+      "end": 848.46,
+      "en": "The first word,",
+      "zh": "第一个词，",
+      "pinyin": "Dì yī gè cí,",
+      "vi": "Từ đầu tiên,"
+    },
+    {
+      "start": 848.47,
+      "end": 851.63,
+      "en": "“difference.” Today we’ve been talking about “不”",
+      "zh": "“区别”。我们今天一直在说“不”",
+      "pinyin": "“qūbié”. Wǒmen jīntiān yīzhí zài shuō “bù”",
+      "vi": "“区别”. Hôm nay chúng ta cứ nói “不”"
+    },
+    {
+      "start": 851.63,
+      "end": 855.02,
+      "en": "and the difference from “没,” and the difference between “能” and “可以.”",
+      "zh": "和“没”的区别，“能”和“可以”的区别。",
+      "pinyin": "hé “méi” de qūbié, “néng” hé “kěyǐ” de qūbié.",
+      "vi": "và sự khác biệt với “没”, sự khác biệt giữa “能” và “可以”."
+    },
+    {
+      "start": 855.03,
+      "end": 856.52,
+      "en": "What does “区别” mean?",
+      "zh": "“区别”是什么意思？",
+      "pinyin": "“Qūbié” shì shénme yìsi?",
+      "vi": "“区别” là có ý gì?"
+    },
+    {
+      "start": 856.53,
+      "end": 859.42,
+      "en": "“区别” is simple—it’s the two thin—",
+      "zh": "“区别”啊，很简单，就是两个东",
+      "pinyin": "“Qūbié” a, hěn jiǎndān, jiùshì liǎng gè dōng",
+      "vi": "“区别” à, rất đơn giản, chính là hai thứ..."
+    },
+    {
+      "start": 859.43,
+      "end": 860.69,
+      "en": "—gs that are different.",
+      "zh": "西不一样的地方。",
+      "pinyin": "xi bù yīyàng de dìfang.",
+      "vi": "...khác nhau."
+    },
+    {
+      "start": 860.7,
+      "end": 864.16,
+      "en": "For example, what is the “difference” between apples and bananas?",
+      "zh": "比如说，苹果和香蕉的“区别”是什么？",
+      "pinyin": "Bǐrú shuō, píngguǒ hé xiāngjiāo de “qūbié” shì shénme?",
+      "vi": "Ví dụ, “区别” giữa táo và chuối là gì?"
+    },
+    {
+      "start": 864.17,
+      "end": 867.03,
+      "en": "Their colors are different, and their tastes are different too.",
+      "zh": "它们的颜色不一样，味道也不一样。",
+      "pinyin": "Tāmen de yánsè bù yīyàng, wèidào yě bù yīyàng.",
+      "vi": "Màu sắc của chúng không giống nhau, mùi vị cũng không giống nhau."
+    },
+    {
+      "start": 867.03,
+      "end": 870.25,
+      "en": "So “区别” refers to those different aspects.",
+      "zh": "所以，“区别”就是指那些不同的地方。",
+      "pinyin": "Suǒyǐ, “qūbié” jiùshì zhǐ nàxiē bùtóng de dìfang.",
+      "vi": "Vì vậy, “区别” chính là chỉ những chỗ khác nhau."
+    },
+    {
+      "start": 870.27,
+      "end": 871.43,
+      "en": "Explained very well.",
+      "zh": "解释得很好。",
+      "pinyin": "Jiěshì de hěn hǎo.",
+      "vi": "Giải thích rất tốt."
+    },
+    {
+      "start": 871.43,
+      "end": 873.62,
+      "en": "The second word, “情况.”",
+      "zh": "第二个词，“情况”。",
+      "pinyin": "Dì èr gè cí, “qíngkuàng”.",
+      "vi": "Từ thứ hai, “情况”."
+    },
+    {
+      "start": 873.63,
+      "end": 876.22,
+      "en": "Just now we mentioned that in certain “situations,”",
+      "zh": "刚才我们说到，在某些“情况”下，",
+      "pinyin": "Gāngcái wǒmen shuōdào, zài mǒuxiē “qíngkuàng” xià,",
+      "vi": "Vừa rồi chúng ta nói đến, trong một số “tình huống”,"
+    },
+    {
+      "start": 876.23,
+      "end": 878.52,
+      "en": "“能” and “可以” can be used interchangeably.",
+      "zh": "“能”和“可以”可以换着用。",
+      "pinyin": "“néng” hé “kěyǐ” kěyǐ huànzhe yòng.",
+      "vi": "“能” và “可以” có thể dùng thay đổi cho nhau."
+    },
+    {
+      "start": 878.53,
+      "end": 880.05,
+      "en": "What does “情况” mean?",
+      "zh": "“情况”是什么意思呢？",
+      "pinyin": "“Qíngkuàng” shì shénme yìsi ne?",
+      "vi": "“情况” là có ý gì vậy?"
+    },
+    {
+      "start": 880.07,
+      "end": 882.23,
+      "en": "Hmm, the word “情况,”",
+      "zh": "嗯，“情况”这个词，",
+      "pinyin": "Ǹg, “qíngkuàng” zhège cí,",
+      "vi": "Ừm, từ “情况” này,"
+    },
+    {
+      "start": 882.23,
+      "end": 886.02,
+      "en": "It means what something is like when it happens.",
+      "zh": "意思就是一件事情发生的时候，它是什么样子的。",
+      "pinyin": "Yìsi jiùshì yí jiàn shìqing fāshēng de shíhou, tā shì shénme yàngzi de.",
+      "vi": "Nghĩa là khi một việc xảy ra, nó như thế nào."
+    },
+    {
+      "start": 886.03,
+      "end": 889.35,
+      "en": "For example, “How is the traffic on the road today?”",
+      "zh": "比如说，“今天路上的交通情况怎么样？”，",
+      "pinyin": "Bǐrú shuō, “Jīntiān lùshang de jiāotōng qíngkuàng zěnmeyàng?”,",
+      "vi": "Ví dụ, “Tình hình giao thông trên đường hôm nay thế nào?”"
+    },
+    {
+      "start": 889.37,
+      "end": 893.06,
+      "en": "It's asking whether there are many cars on the road and whether there's traffic.",
+      "zh": "就是在问路上的车多不多，堵不堵车。",
+      "pinyin": "Jiùshì zài wèn lùshang de chē duō bu duō, dǔ bu dǔ chē.",
+      "vi": "Tức là đang hỏi trên đường nhiều xe hay không, có tắc đường hay không."
+    },
+    {
+      "start": 893.07,
+      "end": 895.29,
+      "en": "We say “under normal circumstances,”",
+      "zh": "我们说“在一般情况下”，",
+      "pinyin": "Wǒmen shuō “zài yìbān qíngkuàng xià”,",
+      "vi": "Chúng ta nói “trong tình huống thông thường”,"
+    },
+    {
+      "start": 895.3,
+      "end": 898.96,
+      "en": "means “most of the time.” Very clear.",
+      "zh": "意思就是“在大部分时间里”。非常清楚。",
+      "pinyin": "yìsi jiùshì “zài dà bùfen shíjiān lǐ”. Fēicháng qīngchu.",
+      "vi": "nghĩa là “trong phần lớn thời gian”. Rất rõ ràng."
+    },
+    {
+      "start": 898.97,
+      "end": 901.13,
+      "en": "The last word, “allow.”",
+      "zh": "最后一个词，“允许”。",
+      "pinyin": "Zuìhòu yí ge cí, “yǔnxǔ”.",
+      "vi": "Từ cuối cùng, “cho phép”."
+    },
+    {
+      "start": 901.13,
+      "end": 904.29,
+      "en": "We say the core meaning of “可以” is “allow.”",
+      "zh": "我们说，“可以”的核心意思是“允许”。",
+      "pinyin": "Wǒmen shuō, “kěyǐ” de héxīn yìsi shì “yǔnxǔ”.",
+      "vi": "Chúng ta nói, ý nghĩa cốt lõi của “可以” là “cho phép”."
+    },
+    {
+      "start": 904.3,
+      "end": 906.26,
+      "en": "Then what does “允许” mean?",
+      "zh": "那“允许”又是什么意思？",
+      "pinyin": "Nà “yǔnxǔ” yòu shì shénme yìsi?",
+      "vi": "Vậy “允许” lại có nghĩa là gì?"
+    },
+    {
+      "start": 906.27,
+      "end": 909.33,
+      "en": "“允许” means agreeing to let someone do something.",
+      "zh": "“允许”就是同意别人做一件事。",
+      "pinyin": "“Yǔnxǔ” jiùshì tóngyì biéren zuò yí jiàn shì.",
+      "vi": "“允许”就是同意别人做一件事。"
+    },
+    {
+      "start": 909.33,
+      "end": 911.95,
+      "en": "For example, Mom “allowed” me to go out and play,",
+      "zh": "比如，妈妈“允许”我出去玩了，",
+      "pinyin": "Bǐrú, māma “yǔnxǔ” wǒ chūqu wán le,",
+      "vi": "Ví dụ, mẹ “cho phép” tôi ra ngoài chơi rồi,"
+    },
+    {
+      "start": 911.97,
+      "end": 914.76,
+      "en": "means Mom agreed to let me go out and play.",
+      "zh": "意思就是妈妈同意我出去玩了。",
+      "pinyin": "yìsi jiùshì māma tóngyì wǒ chūqu wán le.",
+      "vi": "nghĩa là mẹ đồng ý để tôi ra ngoài chơi rồi."
+    },
+    {
+      "start": 914.77,
+      "end": 915.96,
+      "en": "During class,",
+      "zh": "上课的时候，",
+      "pinyin": "Shàngkè de shíhou,",
+      "vi": "Khi học trên lớp,"
+    },
+    {
+      "start": 915.97,
+      "end": 918.23,
+      "en": "the teacher doesn't “allow” us to play on our phones,",
+      "zh": "老师不“允许”我们玩手机，",
+      "pinyin": "lǎoshī bù “yǔnxǔ” wǒmen wán shǒujī,",
+      "vi": "giáo viên không “cho phép” chúng tôi dùng điện thoại,"
+    },
+    {
+      "start": 918.23,
+      "end": 920.72,
+      "en": "meaning the teacher doesn't agree to us doing that.",
+      "zh": "就是老师不同意我们这么做。",
+      "pinyin": "jiùshì lǎoshī bù tóngyì wǒmen zhème zuò.",
+      "vi": "tức là giáo viên không đồng ý để chúng tôi làm vậy."
+    },
+    {
+      "start": 920.73,
+      "end": 923.52,
+      "en": "It sounds a bit more formal than “可以.”",
+      "zh": "它比“可以”听起来要更正式一点。",
+      "pinyin": "Tā bǐ “kěyǐ” tīng qǐlai yào gèng zhèngshì yìdiǎn.",
+      "vi": "Nó nghe có vẻ trang trọng hơn “可以” một chút."
+    },
+    {
+      "start": 923.53,
+      "end": 927.09,
+      "en": "Exactly. The explanations are all great—simple and easy to understand.",
+      "zh": "没错。解释得都非常棒，简单又好懂。",
+      "pinyin": "Méicuò. Jiěshì de dōu fēicháng bàng, jiǎndān yòu hǎodǒng.",
+      "vi": "Đúng vậy. Cách giải thích đều rất tuyệt, đơn giản lại dễ hiểu."
+    },
+    {
+      "start": 927.1,
+      "end": 929.12,
+      "en": "I hope everyone can remember these words too.",
+      "zh": "希望这几个词大家也能记住。",
+      "pinyin": "Xīwàng zhè jǐ ge cí dàjiā yě néng jìzhù.",
+      "vi": "Hy vọng mọi người cũng nhớ được mấy từ này."
+    },
+    {
+      "start": 929.13,
+      "end": 931.35,
+      "en": "They are all very commonly used in Chinese.",
+      "zh": "它们在中文里都非常常用。",
+      "pinyin": "Tāmen zài Zhōngwén lǐ dōu fēicháng chángyòng.",
+      "vi": "Chúng đều rất thường dùng trong tiếng Trung."
+    },
+    {
+      "start": 931.37,
+      "end": 934.69,
+      "en": "No problem! Okay, today our discussion about “不” and",
+      "zh": "没问题！好的，我们今天关于“不”和",
+      "pinyin": "Méi wèntí! Hǎo de, wǒmen jīntiān guānyú “bù” hé",
+      "vi": "Không vấn đề gì! Được rồi, hôm nay chúng ta về “不” và"
+    },
+    {
+      "start": 934.7,
+      "end": 935.89,
+      "en": "“没,” “能,” and",
+      "zh": "“没”，“能”和",
+      "pinyin": "“méi”, “néng” hé",
+      "vi": "“没”, “能” và"
+    },
+    {
+      "start": 935.9,
+      "end": 938.22,
+      "en": "“可以” is almost coming to an end.",
+      "zh": "“可以”的讨论，差不多就要结束了。",
+      "pinyin": "“kěyǐ” de tǎolùn, chàbuduō jiù yào jiéshù le.",
+      "vi": "cuộc thảo luận về “可以” sắp kết thúc rồi."
+    },
+    {
+      "start": 938.23,
+      "end": 940.49,
+      "en": "Let's briefly summarize. Okay.",
+      "zh": "我们来简单总结一下。好。",
+      "pinyin": "Wǒmen lái jiǎndān zǒngjié yíxià. Hǎo.",
+      "vi": "Chúng ta hãy tóm tắt đơn giản một chút. Được."
+    },
+    {
+      "start": 940.5,
+      "end": 943.72,
+      "en": "As for “不” and “没,” just remember that “不” is often",
+      "zh": "对于“不”和“没”，大家只要记住，“不”通",
+      "pinyin": "Duìyú “bù” hé “méi”, dàjiā zhǐyào jìzhù, “bù” tōng",
+      "vi": "Đối với “不” và “没”, mọi người chỉ cần nhớ, “不” thường"
+    },
+    {
+      "start": 943.73,
+      "end": 947.22,
+      "en": "used to negate present and future wishes,",
+      "zh": "常用于否定现在的和将来的意愿、",
+      "pinyin": "cháng yòngyú fǒudìng xiànzài de hé jiānglái de yìyuàn,",
+      "vi": "được dùng để phủ định ý muốn ở hiện tại và tương lai,"
+    },
+    {
+      "start": 947.23,
+      "end": 950.05,
+      "en": "habits, and opinions; while “没” mainly",
+      "zh": "习惯和看法；而“没”主要",
+      "pinyin": "xíguàn hé kànfǎ; ér “méi” zhǔyào",
+      "vi": "thói quen và quan điểm; còn “没” chủ yếu"
+    },
+    {
+      "start": 950.07,
+      "end": 952.66,
+      "en": "is used to negate past actions and facts,",
+      "zh": "用于否定过去的动作和事实，",
+      "pinyin": "yòngyú fǒudìng guòqù de dòngzuò hé shìshí,",
+      "vi": "được dùng để phủ định hành động và sự thật trong quá khứ,"
+    },
+    {
+      "start": 952.67,
+      "end": 955.03,
+      "en": "as well as to negate “有.” Yeah!",
+      "zh": "以及否定“有”。嗯！",
+      "pinyin": "yǐjí fǒudìng “yǒu”. Ǹg!",
+      "vi": "cũng như phủ định “有”. Ừm!"
+    },
+    {
+      "start": 955.03,
+      "end": 958.29,
+      "en": "As for “能” and “可以,” remember our analogy:",
+      "zh": "对于“能”和“可以”，记住我们的比喻:",
+      "pinyin": "Duìyú “néng” hé “kěyǐ”, jìzhù wǒmen de bǐyù:",
+      "vi": "Đối với “能” và “可以”, hãy nhớ phép so sánh của chúng ta:"
+    },
+    {
+      "start": 958.3,
+      "end": 961.96,
+      "en": "“能” is whether you have the ability and the key to open the door,",
+      "zh": "“能”是你有没有开门的能力和钥匙，",
+      "pinyin": "“Néng” shì nǐ yǒu méiyǒu kāi mén de nénglì hé yàoshi,",
+      "vi": "“能” là việc bạn có năng lực và chìa khóa để mở cửa hay không,"
+    },
+    {
+      "start": 961.97,
+      "end": 965.36,
+      "en": "“可以” is whether the host allows you to open the door.",
+      "zh": "“可以”是主人是否允许你开门。",
+      "pinyin": "“Kěyǐ” shì zhǔrén shìfǒu yǔnxǔ nǐ kāi mén.",
+      "vi": "“可以” là việc chủ nhà có cho phép bạn mở cửa hay không."
+    },
+    {
+      "start": 965.37,
+      "end": 967.13,
+      "en": "Although they can often be interchanged,",
+      "zh": "虽然它们经常可以互换，",
+      "pinyin": "Suīrán tāmen jīngcháng kěyǐ hùhuàn,",
+      "vi": "Mặc dù chúng thường có thể hoán đổi cho nhau,"
+    },
+    {
+      "start": 967.13,
+      "end": 970.25,
+      "en": "“能” leans more toward ability and possibility,",
+      "zh": "但“能”更偏向于能力和可能性，",
+      "pinyin": "dàn “néng” gèng piānxiàng yú nénglì hé kěnéngxìng,",
+      "vi": "nhưng “能” thiên về năng lực và khả năng hơn,"
+    },
+    {
+      "start": 970.27,
+      "end": 973.26,
+      "en": "while “可以” leans more toward permission and suggestions.",
+      "zh": "“可以”更偏向于许可和建议。",
+      "pinyin": "“kěyǐ” gèng piānxiàng yú xǔkě hé jiànyì.",
+      "vi": "“可以” thiên về sự cho phép và đề nghị hơn."
+    },
+    {
+      "start": 973.27,
+      "end": 974.66,
+      "en": "What a clear summary!",
+      "zh": "总结得真清楚！",
+      "pinyin": "Zǒngjié de zhēn qīngchu!",
+      "vi": "Tóm tắt thật rõ ràng!"
+    },
+    {
+      "start": 974.67,
+      "end": 977.46,
+      "en": "After hearing your summary, I feel like today’s episode",
+      "zh": "听完你这个总结，我感觉今天这期节目",
+      "pinyin": "Tīng wán nǐ zhège zǒngjié, wǒ gǎnjué jīntiān zhè qī jiémù",
+      "vi": "Nghe xong phần tóm tắt này của bạn, tôi cảm thấy tập chương trình hôm nay"
+    },
+    {
+      "start": 977.47,
+      "end": 979.89,
+      "en": "content is all remembered right away.",
+      "zh": "内容一下子就全记住了。",
+      "pinyin": "nèiróng yíxiàzi jiù quán jìzhù le.",
+      "vi": "nội dung lập tức được nhớ hết."
+    },
+    {
+      "start": 979.9,
+      "end": 981.32,
+      "en": "If after listening once",
+      "zh": "如果大家听完一遍",
+      "pinyin": "Rúguǒ dàjiā tīng wán yí biàn",
+      "vi": "Nếu mọi người nghe xong một lần"
+    },
+    {
+      "start": 981.33,
+      "end": 983.32,
+      "en": "feel like reading the text content again,",
+      "zh": "觉得还想再看看文字内容，",
+      "pinyin": "juéde hái xiǎng zài kànkan wénzì nèiróng,",
+      "vi": "cảm thấy vẫn muốn xem lại nội dung văn bản,"
+    },
+    {
+      "start": 983.33,
+      "end": 987.32,
+      "en": "to deepen your understanding, you’re also welcome to check out our blog.",
+      "zh": "加深一下理解，也欢迎大家去我们的博客看一看。",
+      "pinyin": "jiāshēn yíxià lǐjiě, yě huānyíng dàjiā qù wǒmen de bókè kàn yi kàn.",
+      "vi": "để hiểu sâu hơn, cũng hoan nghênh mọi người ghé blog của chúng tôi xem qua."
+    },
+    {
+      "start": 987.33,
+      "end": 990.29,
+      "en": "Yes. The full transcript of every episode,",
+      "zh": "是的。我们每一期节目的完整文本，",
+      "pinyin": "Shì de. Wǒmen měi yì qī jiémù de wánzhěng wénběn,",
+      "vi": "Đúng vậy. Văn bản đầy đủ của mỗi tập chương trình của chúng tôi,"
+    },
+    {
+      "start": 990.3,
+      "end": 993.12,
+      "en": "are posted on our blog; the address can be",
+      "zh": "都会发布在我们的博客上，地址可以在",
+      "pinyin": "dōu huì fābù zài wǒmen de bókè shàng, dìzhǐ kěyǐ zài",
+      "vi": "đều sẽ được đăng trên blog của chúng tôi, địa chỉ có thể"
+    },
+    {
+      "start": 993.13,
+      "end": 994.89,
+      "en": "found in the episode description. Right,",
+      "zh": "节目介绍里找到。对，",
+      "pinyin": "jiémù jièshào lǐ zhǎodào. Duì,",
+      "vi": "tìm thấy trong phần giới thiệu chương trình. Đúng,"
+    },
+    {
+      "start": 994.9,
+      "end": 998.02,
+      "en": "You can just click the link directly in the description.",
+      "zh": "大家直接在介绍里点击链接就可以了。",
+      "pinyin": "Dàjiā zhíjiē zài jièshào lǐ diǎnjī liànjiē jiù kěyǐ le.",
+      "vi": "Mọi người chỉ cần bấm trực tiếp vào liên kết trong phần giới thiệu là được."
+    },
+    {
+      "start": 998.03,
+      "end": 1002.05,
+      "en": "You can find the text of all the dialogues there to make reviewing easier.",
+      "zh": "你可以在那里找到所有对话的文字，方便你复习。",
+      "pinyin": "Nǐ kěyǐ zài nàlǐ zhǎodào suǒyǒu duìhuà de wénzì, fāngbiàn nǐ fùxí.",
+      "vi": "Bạn có thể tìm thấy toàn bộ văn bản các cuộc hội thoại ở đó, thuận tiện cho bạn ôn tập."
+    },
+    {
+      "start": 1002.07,
+      "end": 1003.56,
+      "en": "If you feel today’s episode",
+      "zh": "如果你觉得今天的节目",
+      "pinyin": "Rúguǒ nǐ juéde jīntiān de jiémù",
+      "vi": "Nếu bạn cảm thấy chương trình hôm nay"
+    },
+    {
+      "start": 1003.57,
+      "end": 1005.33,
+      "en": "is helpful for your Chinese learning,",
+      "zh": "对你的中文学习有帮助，",
+      "pinyin": "duì nǐ de Zhōngwén xuéxí yǒu bāngzhù,",
+      "vi": "có ích cho việc học tiếng Trung của bạn,"
+    },
+    {
+      "start": 1005.33,
+      "end": 1007.75,
+      "en": "please don’t forget to like, share,",
+      "zh": "请不要忘记给我们点赞、分享，",
+      "pinyin": "qǐng bú yào wàngjì gěi wǒmen diǎnzàn, fēnxiǎng,",
+      "vi": "xin đừng quên bấm thích, chia sẻ cho chúng tôi,"
+    },
+    {
+      "start": 1007.77,
+      "end": 1009.63,
+      "en": "and subscribe to our channel.",
+      "zh": "还有订阅我们的频道。",
+      "pinyin": "hái yǒu dìngyuè wǒmen de píndào.",
+      "vi": "và đăng ký kênh của chúng tôi."
+    },
+    {
+      "start": 1009.63,
+      "end": 1012.29,
+      "en": "Your support is the biggest motivation for us to keep going.",
+      "zh": "你们的支持是我们做下去的最大动力。",
+      "pinyin": "Nǐmen de zhīchí shì wǒmen zuò xiàqu de zuìdà dònglì.",
+      "vi": "Sự ủng hộ của các bạn là động lực lớn nhất để chúng tôi tiếp tục làm."
+    },
+    {
+      "start": 1012.3,
+      "end": 1014.26,
+      "en": "Yes, thank you all very much!",
+      "zh": "是的，非常感谢大家！",
+      "pinyin": "Shì de, fēicháng gǎnxiè dàjiā!",
+      "vi": "Đúng vậy, cảm ơn mọi người rất nhiều!"
+    },
+    {
+      "start": 1014.27,
+      "end": 1017.66,
+      "en": "Lastly, I’d also like to ask everyone a question in the comments:",
+      "zh": "最后，也想在评论区问大家一个问题：",
+      "pinyin": "Zuìhòu, yě xiǎng zài pínglùnqū wèn dàjiā yí gè wèntí:",
+      "vi": "Cuối cùng, mình cũng muốn hỏi mọi người một câu trong phần bình luận:"
+    },
+    {
+      "start": 1017.67,
+      "end": 1020.09,
+      "en": "Besides the several pairs of words we talked about today,",
+      "zh": "除了我们今天聊的这几对词，",
+      "pinyin": "Chúle wǒmen jīntiān liáo de zhè jǐ duì cí,",
+      "vi": "Ngoài những cặp từ chúng ta nói hôm nay,"
+    },
+    {
+      "start": 1020.1,
+      "end": 1021.76,
+      "en": "when you are learning Chinese,",
+      "zh": "你在学习中文的时候，",
+      "pinyin": "nǐ zài xuéxí Zhōngwén de shíhou,",
+      "vi": "khi bạn học tiếng Trung,"
+    },
+    {
+      "start": 1021.77,
+      "end": 1024.66,
+      "en": "what other words have you come across that make you feel confused,",
+      "zh": "还遇到过哪些让你觉得很困惑、",
+      "pinyin": "hái yùdào guo nǎxiē ràng nǐ juéde hěn kùnhuò,",
+      "vi": "còn gặp phải những từ nào khiến bạn cảm thấy rất bối rối,"
+    },
+    {
+      "start": 1024.67,
+      "end": 1026.29,
+      "en": "and are easy to get wrong?",
+      "zh": "很容易搞错的词呢？",
+      "pinyin": "hěn róngyì gǎocuò de cí ne?",
+      "vi": "rất dễ bị nhầm lẫn?"
+    },
+    {
+      "start": 1026.3,
+      "end": 1029.56,
+      "en": "Great question—we’re looking forward to seeing everyone’s shares.",
+      "zh": "这个问题很好，我们很期待看到大家的分享。",
+      "pinyin": "Zhège wèntí hěn hǎo, wǒmen hěn qīdài kàndào dàjiā de fēnxiǎng.",
+      "vi": "Câu hỏi này rất hay, chúng mình rất mong được thấy mọi người chia sẻ."
+    },
+    {
+      "start": 1029.57,
+      "end": 1032.13,
+      "en": "Alright, let’s stop here for today.",
+      "zh": "好了，那我们今天就聊到这里吧。",
+      "pinyin": "Hǎo le, nà wǒmen jīntiān jiù liáo dào zhèlǐ ba.",
+      "vi": "Được rồi, vậy hôm nay chúng ta dừng ở đây nhé."
+    },
+    {
+      "start": 1032.13,
+      "end": 1034.02,
+      "en": "Okay. Thanks everyone for listening,",
+      "zh": "好的。感谢大家的收听，",
+      "pinyin": "Hǎo de. Gǎnxiè dàjiā de shōutīng,",
+      "vi": "Được. Cảm ơn mọi người đã lắng nghe,"
+    },
+    {
+      "start": 1034.03,
+      "end": 1036.2,
+      "en": "See you next episode! Bye-bye!",
+      "zh": "我们下期节目再见！再见！",
+      "pinyin": "wǒmen xià qī jiémù zàijiàn! Zàijiàn!",
+      "vi": "Hẹn gặp lại mọi người ở tập sau! Tạm biệt!"
+    }
+  ]
+}

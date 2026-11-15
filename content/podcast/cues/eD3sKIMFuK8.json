@@ -1,0 +1,2721 @@
+{
+  "id": "eD3sKIMFuK8",
+  "youtubeId": "eD3sKIMFuK8",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK2+ | Modern Survival Skills: Don't Buy, Don't Do (现代生存技能) | CHINESE DAILY PODCAST",
+  "durationSec": 1016,
+  "cues": [
+    {
+      "start": 6.2,
+      "end": 7.49,
+      "en": "Friends, hello everyone!",
+      "zh": "朋友们，大家好！",
+      "pinyin": "Péngyoumen, dàjiā hǎo!",
+      "vi": "Chào các bạn!"
+    },
+    {
+      "start": 7.5,
+      "end": 9.49,
+      "en": "This is Daily Chinese.",
+      "zh": "这里是每天中文。",
+      "pinyin": "Zhèlǐ shì Měitiān Zhōngwén.",
+      "vi": "Đây là Mỗi Ngày Trung Văn."
+    },
+    {
+      "start": 9.5,
+      "end": 10.52,
+      "en": "I'm Li Ming.",
+      "zh": "我是李明。",
+      "pinyin": "Wǒ shì Lǐ Míng.",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 10.53,
+      "end": 12.49,
+      "en": "Hello everyone, I'm Wang Yu.",
+      "zh": "大家好，我是王雨。",
+      "pinyin": "Dàjiā hǎo, wǒ shì Wáng Yǔ.",
+      "vi": "Chào mọi người, tôi là Vương Vũ."
+    },
+    {
+      "start": 12.5,
+      "end": 14.89,
+      "en": "Welcome to our podcast.",
+      "zh": "欢迎大家来我们的播客。",
+      "pinyin": "Huānyíng dàjiā lái wǒmen de bōkè.",
+      "vi": "Chào mừng mọi người đến với podcast của chúng tôi."
+    },
+    {
+      "start": 14.9,
+      "end": 16.79,
+      "en": "How have you been feeling lately?",
+      "zh": "最近感觉怎么样？",
+      "pinyin": "Zuìjìn gǎnjué zěnmeyàng?",
+      "vi": "Dạo này cảm thấy thế nào?"
+    },
+    {
+      "start": 16.8,
+      "end": 18.52,
+      "en": "Hope you're all doing well.",
+      "zh": "希望你们都很好。",
+      "pinyin": "Xīwàng nǐmen dōu hěn hǎo.",
+      "vi": "Hy vọng mọi người đều khỏe."
+    },
+    {
+      "start": 18.53,
+      "end": 22.15,
+      "en": "Yes, hope everyone is full of energy.",
+      "zh": "是的，希望大家都很有精神。",
+      "pinyin": "Shì de, xīwàng dàjiā dōu hěn yǒu jīngshen.",
+      "vi": "Đúng vậy, hy vọng mọi người đều tràn đầy năng lượng."
+    },
+    {
+      "start": 22.17,
+      "end": 26.26,
+      "en": "Daily Chinese is a podcast for Chinese learners.",
+      "zh": "每天中文是一个为中文学习者做的播客。",
+      "pinyin": "Měitiān Zhōngwén shì yí ge wèi Zhōngwén xuéxízhě zuò de bōkè.",
+      "vi": "Mỗi Ngày Trung Văn là podcast dành cho người học tiếng Trung."
+    },
+    {
+      "start": 26.27,
+      "end": 27.66,
+      "en": "We speak Chinese at a relatively slow,",
+      "zh": "我们用比较慢，",
+      "pinyin": "Wǒmen yòng bǐjiào màn,",
+      "vi": "Chúng tôi nói tiếng Trung với tốc độ khá chậm,"
+    },
+    {
+      "start": 27.67,
+      "end": 32.29,
+      "en": "relatively natural pace to help everyone practice listening.",
+      "zh": "比较自然的速度说中文，帮助大家练习听力。",
+      "pinyin": "Bǐjiào zìrán de sùdù shuō Zhōngwén, bāngzhù dàjiā liànxí tīnglì.",
+      "vi": "khá tự nhiên, để giúp mọi người luyện nghe."
+    },
+    {
+      "start": 32.3,
+      "end": 35.36,
+      "en": "If you find our podcast helpful to you,",
+      "zh": "如果你觉得我们的播客对你有帮助，",
+      "pinyin": "Rúguǒ nǐ juéde wǒmen de bōkè duì nǐ yǒu bāngzhù,",
+      "vi": "Nếu bạn thấy podcast của chúng tôi có ích cho bạn,"
+    },
+    {
+      "start": 35.37,
+      "end": 38.33,
+      "en": "I hope you can listen and relax at the same time.",
+      "zh": "希望你能一边听，一边放松。",
+      "pinyin": "Xīwàng nǐ néng yìbiān tīng, yìbiān fàngsōng.",
+      "vi": "hy vọng bạn vừa nghe vừa thư giãn."
+    },
+    {
+      "start": 38.33,
+      "end": 41.09,
+      "en": "Sometimes you may not understand every word,",
+      "zh": "有时候，可能听不懂每一个词，",
+      "pinyin": "Yǒu shíhou, kěnéng tīngbudǒng měi yí ge cí,",
+      "vi": "Đôi khi, có thể bạn không hiểu từng từ một,"
+    },
+    {
+      "start": 41.1,
+      "end": 45.09,
+      "en": "that's okay. You can guess what we mean.",
+      "zh": "没关系。你可以猜一猜我们说的意思。",
+      "pinyin": "Méi guānxi. Nǐ kěyǐ cāi yi cāi wǒmen shuō de yìsi.",
+      "vi": "không sao. Bạn có thể đoán ý chúng tôi nói."
+    },
+    {
+      "start": 45.1,
+      "end": 49.32,
+      "en": "You can also use the subtitles on YouTube, or listen again.",
+      "zh": "你也可以用油管上的字幕，或者再听一次。",
+      "pinyin": "Nǐ yě kěyǐ yòng Yóuguǎn shàng de zìmù, huòzhě zài tīng yí cì.",
+      "vi": "Bạn cũng có thể dùng phụ đề trên YouTube, hoặc nghe lại một lần."
+    },
+    {
+      "start": 49.33,
+      "end": 52.12,
+      "en": "Of course, the key vocabulary of each episode,",
+      "zh": "当然，每一集的重点词汇，",
+      "pinyin": "Dāngrán, měi yì jí de zhòngdiǎn cíhuì,",
+      "vi": "Tất nhiên, từ vựng trọng điểm của mỗi tập,"
+    },
+    {
+      "start": 52.13,
+      "end": 55.79,
+      "en": "we put it all on the blog link in the description.",
+      "zh": "我们都会放在描述里的博客链接上。",
+      "pinyin": "Wǒmen dōu huì fàng zài miáoshù lǐ de bókè liànjiē shàng.",
+      "vi": "chúng tôi đều để ở link blog trong phần mô tả."
+    },
+    {
+      "start": 55.8,
+      "end": 59.99,
+      "en": "Right, finding the study method that suits you best is the most important.",
+      "zh": "对，找到最适合你的学习方法最重要。",
+      "pinyin": "Duì, zhǎodào zuì shìhé nǐ de xuéxí fāngfǎ zuì zhòngyào.",
+      "vi": "Đúng vậy, tìm được phương pháp học phù hợp nhất với bạn là quan trọng nhất."
+    },
+    {
+      "start": 60,
+      "end": 63.46,
+      "en": "Okay, Wang Yu, what shall we talk about today?",
+      "zh": "好了，王雨，我们今天来聊点什么？",
+      "pinyin": "Hǎo le, Wáng Yǔ, wǒmen jīntiān lái liáo diǎn shénme?",
+      "vi": "Được rồi, Vương Vũ, hôm nay chúng ta nói về chuyện gì nhỉ?"
+    },
+    {
+      "start": 63.47,
+      "end": 66.46,
+      "en": "Li Ming, I've been thinking about a question lately.",
+      "zh": "李明，我最近在想一个问题。",
+      "pinyin": "Lǐ Míng, wǒ zuìjìn zài xiǎng yí ge wèntí.",
+      "vi": "Lý Minh, dạo này tôi đang nghĩ về một vấn đề."
+    },
+    {
+      "start": 66.47,
+      "end": 71.66,
+      "en": "Tell me, in modern society, what is the most important survival skill?",
+      "zh": "你说，在现代社会，最重要的生存技能是什么？",
+      "pinyin": "Nǐ shuō, zài xiàndài shèhuì, zuì zhòngyào de shēngcún jìnéng shì shénme?",
+      "vi": "Bạn nói xem, trong xã hội hiện đại, kỹ năng sinh tồn quan trọng nhất là gì?"
+    },
+    {
+      "start": 71.67,
+      "end": 73.93,
+      "en": "Oh? Survival skills?",
+      "zh": "哦？生存技能？",
+      "pinyin": "Ó? Shēngcún jìnéng?",
+      "vi": "Ồ? Kỹ năng sinh tồn?"
+    },
+    {
+      "start": 73.93,
+      "end": 76.89,
+      "en": "That makes me think of wilderness survival,",
+      "zh": "这让我想到了野外生存，",
+      "pinyin": "Zhè ràng wǒ xiǎngdào le yěwài shēngcún,",
+      "vi": "Điều này khiến tôi nghĩ đến sinh tồn nơi hoang dã,"
+    },
+    {
+      "start": 76.9,
+      "end": 80.66,
+      "en": "like how to make a fire, how to find food.",
+      "zh": "比如怎么生火，怎么找食物。",
+      "pinyin": "Bǐrú zěnme shēng huǒ, zěnme zhǎo shíwù.",
+      "vi": "ví dụ làm sao nhóm lửa, làm sao tìm thức ăn."
+    },
+    {
+      "start": 80.67,
+      "end": 82.26,
+      "en": "(Laughs), I don't mean that kind.",
+      "zh": "(笑)，我说的不是那种。",
+      "pinyin": "(Xiào), wǒ shuō de bú shì nà zhǒng.",
+      "vi": "(Cười), tôi không nói đến loại đó."
+    },
+    {
+      "start": 82.27,
+      "end": 86.36,
+      "en": "I mean in the city, in everyday life.",
+      "zh": "我指的是在城市里，在每天的生活里。",
+      "pinyin": "Wǒ zhǐ de shì zài chéngshì lǐ, zài měitiān de shēnghuó lǐ.",
+      "vi": "Tôi muốn nói ở trong thành phố, trong cuộc sống hằng ngày."
+    },
+    {
+      "start": 86.37,
+      "end": 90.09,
+      "en": "I think the most important survival skill for modern people,",
+      "zh": "我觉得，现代人最重要的生存技能，",
+      "pinyin": "Wǒ juéde, xiàndàirén zuì zhòngyào de shēngcún jìnéng,",
+      "vi": "Tôi nghĩ, kỹ năng sinh tồn quan trọng nhất của người hiện đại,"
+    },
+    {
+      "start": 90.1,
+      "end": 92.99,
+      "en": "is actually knowing \"what not to do\" and \"what not",
+      "zh": "其实是知道“不做什么”和“不",
+      "pinyin": "Qíshí shì zhīdào “bú zuò shénme” hé “bù",
+      "vi": "thật ra là biết “không làm gì” và “không"
+    },
+    {
+      "start": 93,
+      "end": 95.26,
+      "en": "to buy.\" Interesting.",
+      "zh": "买什么”。有意思。",
+      "pinyin": "mǎi shénme”. Yǒu yìsi.",
+      "vi": "mua gì”. Thú vị đấy."
+    },
+    {
+      "start": 95.27,
+      "end": 97.93,
+      "en": "\"What not to do\" and \"what not to buy\"?",
+      "zh": "“不做什么”和“不买什么”？",
+      "pinyin": "“Bú zuò shénme” hé “bù mǎi shénme”?",
+      "vi": "“Không làm gì” và “không mua gì”?"
+    },
+    {
+      "start": 97.93,
+      "end": 101.29,
+      "en": "This is exactly the opposite of what we usually think: \"what skill to learn\"",
+      "zh": "这和我们平时想的“要学什么技能”",
+      "pinyin": "Zhè hé wǒmen píngshí xiǎng de “yào xué shénme jìnéng”",
+      "vi": "Điều này với “cần học kỹ năng gì” mà chúng ta thường nghĩ"
+    },
+    {
+      "start": 101.3,
+      "end": 104.12,
+      "en": "\"what thing to buy.\"",
+      "zh": "“要买什么东西”正好相反。",
+      "pinyin": "“Yào mǎi shénme dōngxi” zhènghǎo xiāngfǎn.",
+      "vi": "“cần mua thứ gì” hoàn toàn ngược lại."
+    },
+    {
+      "start": 104.13,
+      "end": 105.89,
+      "en": "Why do you think that?",
+      "zh": "你为什么会这么想呢？",
+      "pinyin": "Nǐ wèishénme huì zhème xiǎng ne?",
+      "vi": "Vì sao bạn lại nghĩ như vậy?"
+    },
+    {
+      "start": 105.9,
+      "end": 110.16,
+      "en": "I feel that in our lives, there are too many things and too much information.",
+      "zh": "我觉得我们的生活里，东西和信息都太多了。",
+      "pinyin": "Wǒ juéde wǒmen de shēnghuó lǐ, dōngxi hé xìnxī dōu tài duō le.",
+      "vi": "Tôi thấy trong cuộc sống của chúng ta, đồ vật và thông tin đều quá nhiều."
+    },
+    {
+      "start": 110.17,
+      "end": 114.13,
+      "en": "So many that we don't have time to think about what we actually need.",
+      "zh": "多到我们没有时间去想自己到底需要什么。",
+      "pinyin": "Duō dào wǒmen méiyǒu shíjiān qù xiǎng zìjǐ dàodǐ xūyào shénme.",
+      "vi": "Nhiều đến mức chúng ta không có thời gian để nghĩ xem mình thật sự cần gì."
+    },
+    {
+      "start": 114.13,
+      "end": 117.52,
+      "en": "So, learning to refuse, learning to let go,",
+      "zh": "所以，学会拒绝，学会放弃，",
+      "pinyin": "Suǒyǐ, xuéhuì jùjué, xuéhuì fàngqì,",
+      "vi": "Vì vậy, học cách từ chối, học cách buông bỏ,"
+    },
+    {
+      "start": 117.53,
+      "end": 119.99,
+      "en": "may be more important than learning to possess.",
+      "zh": "可能比学会拥有更重要。",
+      "pinyin": "Kěnéng bǐ xuéhuì yōngyǒu gèng zhòngyào.",
+      "vi": "có thể quan trọng hơn học cách sở hữu."
+    },
+    {
+      "start": 120,
+      "end": 121.69,
+      "en": "I completely agree.",
+      "zh": "我非常同意。",
+      "pinyin": "Wǒ fēicháng tóngyì.",
+      "vi": "Tôi rất đồng ý."
+    },
+    {
+      "start": 121.7,
+      "end": 123.66,
+      "en": "This topic is very interesting.",
+      "zh": "这个话题很有意思。",
+      "pinyin": "Zhège huàtí hěn yǒu yìsi.",
+      "vi": "Chủ đề này rất thú vị."
+    },
+    {
+      "start": 123.67,
+      "end": 128.53,
+      "en": "We can call it the wisdom of \"modern decluttering.\"",
+      "zh": "我们可以把它叫做“现代断舍离”的智慧。",
+      "pinyin": "Wǒmen kěyǐ bǎ tā jiàozuò “xiàndài duànshělí” de zhìhuì.",
+      "vi": "Chúng ta có thể gọi nó là trí tuệ của “Đoạn Xả Ly” hiện đại."
+    },
+    {
+      "start": 128.53,
+      "end": 133.09,
+      "en": "Decluttering means \"cutting off\" unnecessary things,",
+      "zh": "断舍离，就是“断”掉不需要的东西，",
+      "pinyin": "Duànshělí, jiùshì “duàn” diào bù xūyào de dōngxi,",
+      "vi": "Đoạn Xả Ly, tức là “đoạn” bỏ những thứ không cần thiết,"
+    },
+    {
+      "start": 133.1,
+      "end": 137.59,
+      "en": "\"discarding\" excess waste, and \"detaching\" from attachment to objects.",
+      "zh": "“舍”弃多余的废物，“离”开对物品的执念。",
+      "pinyin": "“Shě” qì duōyú de fèiwù, “lí” kāi duì wùpǐn de zhíniàn.",
+      "vi": "“xả” bỏ những thứ dư thừa, “ly” rời khỏi sự chấp niệm với đồ vật."
+    },
+    {
+      "start": 137.6,
+      "end": 141.19,
+      "en": "Yes! That's the word, \"decluttering.\"",
+      "zh": "对！就是这个词，“断舍离”。",
+      "pinyin": "Duì! Jiùshì zhège cí, “duànshělí”.",
+      "vi": "Đúng! Chính là từ này, “Đoạn Xả Ly”."
+    },
+    {
+      "start": 141.2,
+      "end": 143.89,
+      "en": "Then let's talk about this topic today.",
+      "zh": "那我们今天就来聊聊这个话题吧。",
+      "pinyin": "Nà wǒmen jīntiān jiù lái liáoliao zhège huàtí ba.",
+      "vi": "Vậy hôm nay chúng ta sẽ nói về chủ đề này nhé."
+    },
+    {
+      "start": 143.9,
+      "end": 148.29,
+      "en": "Okay. Let's start with \"what not to buy.\"",
+      "zh": "好的。我们先从“不买什么”开始吧。",
+      "pinyin": "Hǎo de. Wǒmen xiān cóng “bù mǎi shénme” kāishǐ ba.",
+      "vi": "Được. Chúng ta bắt đầu từ “không mua gì” trước nhé."
+    },
+    {
+      "start": 148.3,
+      "end": 151.19,
+      "en": "Modern society is a consumer society,",
+      "zh": "现代社会是一个消费社会，",
+      "pinyin": "Xiàndài shèhuì shì yí ge xiāofèi shèhuì,",
+      "vi": "Xã hội hiện đại là một xã hội tiêu dùng,"
+    },
+    {
+      "start": 151.2,
+      "end": 155.12,
+      "en": "advertisements are everywhere, telling us what we should buy,",
+      "zh": "到处都是广告，告诉我们应该买什么，",
+      "pinyin": "Dàochù dōu shì guǎnggào, gàosu wǒmen yīnggāi mǎi shénme,",
+      "vi": "ở đâu cũng có quảng cáo, bảo chúng ta nên mua gì,"
+    },
+    {
+      "start": 155.13,
+      "end": 157.12,
+      "en": "and that only when we have something can we be happy.",
+      "zh": "有了什么才会快乐。",
+      "pinyin": "Yǒu le shénme cái huì kuàilè.",
+      "vi": "có được gì thì mới vui vẻ."
+    },
+    {
+      "start": 157.13,
+      "end": 160.25,
+      "en": "Yes, especially on social media.",
+      "zh": "是的，特别是社交媒体上。",
+      "pinyin": "Shì de, tèbié shì shèjiāo méitǐ shàng.",
+      "vi": "Đúng vậy, đặc biệt là trên mạng xã hội."
+    },
+    {
+      "start": 160.27,
+      "end": 162.46,
+      "en": "I remember when I first started working,",
+      "zh": "我记得我刚工作的时候，",
+      "pinyin": "Wǒ jìde wǒ gāng gōngzuò de shíhou,",
+      "vi": "Tôi nhớ hồi mới đi làm,"
+    },
+    {
+      "start": 162.47,
+      "end": 165.13,
+      "en": "I really liked watching shares from influencers.",
+      "zh": "很喜欢看一些网红的分享。",
+      "pinyin": "Hěn xǐhuan kàn yīxiē wǎnghóng de fēnxiǎng.",
+      "vi": "rất thích xem chia sẻ của mấy người nổi tiếng trên mạng."
+    },
+    {
+      "start": 165.13,
+      "end": 167.85,
+      "en": "They would recommend all kinds of clothes,",
+      "zh": "她们会推荐各种各样的衣服、",
+      "pinyin": "Tāmen huì tuījiàn gèzhǒng-gèyàng de yīfu,",
+      "vi": "Họ sẽ giới thiệu đủ loại quần áo,"
+    },
+    {
+      "start": 167.87,
+      "end": 170.69,
+      "en": "cosmetics. After watching, I felt,",
+      "zh": "化妆品。我看了就觉得，",
+      "pinyin": "Huàzhuāngpǐn. Wǒ kàn le jiù juéde,",
+      "vi": "mỹ phẩm. Tôi xem xong liền thấy,"
+    },
+    {
+      "start": 170.7,
+      "end": 173.66,
+      "en": "Do I also need to buy these things?",
+      "zh": "我是不是也需要买这些东西？",
+      "pinyin": "Wǒ shì bùshì yě xūyào mǎi zhèxiē dōngxi?",
+      "vi": "Có phải tôi cũng cần mua những thứ này không?"
+    },
+    {
+      "start": 173.67,
+      "end": 177.73,
+      "en": "If I buy these, will I be as pretty and happy as them?",
+      "zh": "买了这些我就会像她们一样漂亮、快乐？",
+      "pinyin": "Mǎi le zhèxiē wǒ jiù huì xiàng tāmen yīyàng piàoliang, kuàilè?",
+      "vi": "Mua những thứ này rồi tôi sẽ xinh đẹp, vui vẻ giống họ sao?"
+    },
+    {
+      "start": 177.73,
+      "end": 181.09,
+      "en": "I understand. This feeling is very common.",
+      "zh": "我理解。这种感觉很普遍。",
+      "pinyin": "Wǒ lǐjiě. Zhè zhǒng gǎnjué hěn pǔbiàn.",
+      "vi": "Tôi hiểu. Cảm giác này rất phổ biến."
+    },
+    {
+      "start": 181.1,
+      "end": 183.29,
+      "en": "Did you buy a lot of things back then?",
+      "zh": "那时候你买了很多东西吗？",
+      "pinyin": "Nà shíhou nǐ mǎi le hěn duō dōngxi ma?",
+      "vi": "Hồi đó bạn có mua nhiều đồ không?"
+    },
+    {
+      "start": 183.3,
+      "end": 184.59,
+      "en": "I bought a lot.",
+      "zh": "买了很多。",
+      "pinyin": "Mǎi le hěn duō.",
+      "vi": "Mua rất nhiều."
+    },
+    {
+      "start": 184.6,
+      "end": 188.36,
+      "en": "My closet was stuffed with clothes I had worn only once.",
+      "zh": "我的衣柜里塞满了只穿过一次的衣服。",
+      "pinyin": "Wǒ de yīguì lǐ sāi mǎn le zhǐ chuān guo yī cì de yīfu.",
+      "vi": "Tủ quần áo của tôi chật kín những bộ quần áo chỉ mặc đúng một lần."
+    },
+    {
+      "start": 188.37,
+      "end": 193.36,
+      "en": "There were many cosmetics on the table, and many had expired before I finished using them.",
+      "zh": "桌子上有很多化妆品，很多都过期了还没用完。",
+      "pinyin": "Zhuōzi shàng yǒu hěn duō huàzhuāngpǐn, hěn duō dōu guòqī le hái méi yòngwán.",
+      "vi": "Trên bàn có rất nhiều mỹ phẩm, nhiều thứ hết hạn rồi mà vẫn chưa dùng hết."
+    },
+    {
+      "start": 193.37,
+      "end": 195.06,
+      "en": "Every time I saw these things,",
+      "zh": "每次看到这些东西，",
+      "pinyin": "Měi cì kàn dào zhèxiē dōngxi,",
+      "vi": "Mỗi lần nhìn thấy những thứ này,"
+    },
+    {
+      "start": 195.07,
+      "end": 198.96,
+      "en": "Not only did I not feel happy; instead, I felt very stressed.",
+      "zh": "我不仅不觉得快乐，反而觉得很有压力。",
+      "pinyin": "Wǒ bùjǐn bù juéde kuàilè, fǎn'ér juéde hěn yǒu yālì.",
+      "vi": "Tôi không những không thấy vui mà ngược lại còn thấy rất áp lực."
+    },
+    {
+      "start": 198.97,
+      "end": 201.99,
+      "en": "This is what is called “impulse buying.”",
+      "zh": "这就是所谓的“冲动消费”。",
+      "pinyin": "Zhè jiùshì suǒwèi de “chōngdòng xiāofèi”.",
+      "vi": "Đây chính là cái gọi là “tiêu dùng bốc đồng”."
+    },
+    {
+      "start": 202,
+      "end": 204.66,
+      "en": "Seeing a discount, or seeing someone else have it,",
+      "zh": "看到打折，或者看到别人有，",
+      "pinyin": "Kàn dào dǎzhé, huòzhě kàn dào biérén yǒu,",
+      "vi": "Thấy đồ giảm giá, hoặc thấy người khác có,"
+    },
+    {
+      "start": 204.67,
+      "end": 207.79,
+      "en": "you feel you need it too, without thinking carefully",
+      "zh": "就觉得自己也需要，没有仔细想",
+      "pinyin": "Jiù juéde zìjǐ yě xūyào, méiyǒu zǐxì xiǎng",
+      "vi": "liền thấy mình cũng cần, mà không nghĩ kỹ"
+    },
+    {
+      "start": 207.8,
+      "end": 210.39,
+      "en": "about whether this thing is really suitable for you.",
+      "zh": "这个东西是不是真的适合自己。",
+      "pinyin": "Zhège dōngxi shì bùshì zhēn de shìhé zìjǐ.",
+      "vi": "xem thứ này có thật sự phù hợp với mình không."
+    },
+    {
+      "start": 210.4,
+      "end": 212.72,
+      "en": "Right. Later, when I moved,",
+      "zh": "对。后来我搬家，",
+      "pinyin": "Duì. Hòulái wǒ bānjiā,",
+      "vi": "Đúng vậy. Sau đó tôi chuyển nhà,"
+    },
+    {
+      "start": 212.73,
+      "end": 215.75,
+      "en": "seeing so many useless things, I really felt very",
+      "zh": "看到那么多没用的东西，真的觉得很",
+      "pinyin": "Kàn dào nàme duō méiyòng de dōngxi, zhēn de juéde hěn",
+      "vi": "nhìn thấy bao nhiêu thứ không dùng được, thật sự thấy rất"
+    },
+    {
+      "start": 215.77,
+      "end": 221.06,
+      "en": "tired. Only then did I start thinking about what I really need.",
+      "zh": "累。那时候我才开始思考，我到底需要什么。",
+      "pinyin": "Lèi. Nà shíhou wǒ cái kāishǐ sīkǎo, wǒ dàodǐ xūyào shénme.",
+      "vi": "mệt. Lúc đó tôi mới bắt đầu suy nghĩ, rốt cuộc mình cần gì."
+    },
+    {
+      "start": 221.07,
+      "end": 223.93,
+      "en": "I found that what I really wore often",
+      "zh": "我发现，我真正经常穿的，",
+      "pinyin": "Wǒ fāxiàn, wǒ zhēnzhèng jīngcháng chuān de,",
+      "vi": "Tôi phát hiện, thứ tôi thật sự thường mặc,"
+    },
+    {
+      "start": 223.93,
+      "end": 226.52,
+      "en": "was just those few comfortable clothes.",
+      "zh": "就是那么几件舒服的衣服。",
+      "pinyin": "jiùshì nàme jǐ jiàn shūfu de yīfu.",
+      "vi": "chỉ là vài bộ quần áo thoải mái đó thôi."
+    },
+    {
+      "start": 226.53,
+      "end": 231.19,
+      "en": "What I really used every day was just a few simple skincare products.",
+      "zh": "我真正每天用的，就是那么几样简单的护肤品。",
+      "pinyin": "Wǒ zhēnzhèng měitiān yòng de, jiùshì nàme jǐ yàng jiǎndān de hùfūpǐn.",
+      "vi": "Thứ tôi thật sự dùng hằng ngày, chỉ là vài loại sản phẩm dưỡng da đơn giản đó thôi."
+    },
+    {
+      "start": 231.2,
+      "end": 233.76,
+      "en": "This is a very important discovery.",
+      "zh": "这是一个很重要的发现。",
+      "pinyin": "Zhè shì yī ge hěn zhòngyào de fāxiàn.",
+      "vi": "Đây là một phát hiện rất quan trọng."
+    },
+    {
+      "start": 233.77,
+      "end": 236.66,
+      "en": "I think the first step to learning “not to buy”",
+      "zh": "我觉得，学会“不买”的第一步，",
+      "pinyin": "Wǒ juéde, xuéhuì “bù mǎi” de dì yī bù,",
+      "vi": "Tôi nghĩ, bước đầu tiên để học “không mua”,"
+    },
+    {
+      "start": 236.67,
+      "end": 238.76,
+      "en": "is to understand yourself.",
+      "zh": "就是要了解自己。",
+      "pinyin": "jiùshì yào liǎojiě zìjǐ.",
+      "vi": "chính là phải hiểu bản thân mình."
+    },
+    {
+      "start": 238.77,
+      "end": 243.19,
+      "en": "Understand your lifestyle and your true needs.",
+      "zh": "了解自己的生活方式，了解自己真正的需求。",
+      "pinyin": "Liǎojiě zìjǐ de shēnghuó fāngshì, liǎojiě zìjǐ zhēnzhèng de xūqiú.",
+      "vi": "Hiểu lối sống của mình, hiểu nhu cầu thật sự của mình."
+    },
+    {
+      "start": 243.2,
+      "end": 246.79,
+      "en": "rather than being influenced by ads or other people's lives.",
+      "zh": "而不是被广告或者别人的生活影响。",
+      "pinyin": "ér bùshì bèi guǎnggào huòzhě biérén de shēnghuó yǐngxiǎng.",
+      "vi": "chứ không phải để quảng cáo hay cuộc sống của người khác ảnh hưởng."
+    },
+    {
+      "start": 246.8,
+      "end": 248.26,
+      "en": "You're right.",
+      "zh": "你说得对。",
+      "pinyin": "Nǐ shuō de duì.",
+      "vi": "Bạn nói đúng."
+    },
+    {
+      "start": 248.27,
+      "end": 252.06,
+      "en": "Later I started practicing a “minimalist” lifestyle.",
+      "zh": "我后来开始实践“极简主义”的生活方式。",
+      "pinyin": "Wǒ hòulái kāishǐ shíjiàn “jíjiǎnzhǔyì” de shēnghuó fāngshì.",
+      "vi": "Sau đó tôi bắt đầu thực hành lối sống “chủ nghĩa tối giản”."
+    },
+    {
+      "start": 252.07,
+      "end": 253.99,
+      "en": "Every time before I want to buy something,",
+      "zh": "每次想买东西之前，",
+      "pinyin": "Měi cì xiǎng mǎi dōngxi zhīqián,",
+      "vi": "Mỗi lần trước khi muốn mua đồ,"
+    },
+    {
+      "start": 254,
+      "end": 256.92,
+      "en": "I always ask myself a few questions. Oh?",
+      "zh": "我都会问自己几个问题。 哦？",
+      "pinyin": "Wǒ dōu huì wèn zìjǐ jǐ ge wèntí. Ò?",
+      "vi": "tôi đều hỏi bản thân vài câu hỏi. Ồ?"
+    },
+    {
+      "start": 256.93,
+      "end": 257.95,
+      "en": "What questions?",
+      "zh": "什么问题？",
+      "pinyin": "Shénme wèntí?",
+      "vi": "Câu hỏi gì vậy?"
+    },
+    {
+      "start": 257.97,
+      "end": 259.16,
+      "en": "Share a bit.",
+      "zh": "分享一下。",
+      "pinyin": "Fēnxiǎng yīxià.",
+      "vi": "Chia sẻ một chút đi."
+    },
+    {
+      "start": 259.17,
+      "end": 260.49,
+      "en": "The first question is:",
+      "zh": "第一个问题是:",
+      "pinyin": "Dì yī ge wèntí shì:",
+      "vi": "Câu hỏi đầu tiên là:"
+    },
+    {
+      "start": 260.5,
+      "end": 263.96,
+      "en": "“Is this thing something I 'need' or something I 'want'?”",
+      "zh": "“这个东西，我是‘需要’，还是‘想要’？”",
+      "pinyin": "“Zhège dōngxi, wǒ shì ‘xūyào’, háishì ‘xiǎngyào’?”",
+      "vi": "“Thứ này, tôi ‘cần’ hay ‘muốn’?”"
+    },
+    {
+      "start": 263.97,
+      "end": 267.53,
+      "en": "“Need” and “want” are two very interesting words.",
+      "zh": "“需要”和“想要”，这两个词很有意思。",
+      "pinyin": "“Xūyào” hé “xiǎngyào”, zhè liǎng ge cí hěn yǒu yìsi.",
+      "vi": "“Cần” và “muốn”, hai từ này rất thú vị."
+    },
+    {
+      "start": 267.53,
+      "end": 268.69,
+      "en": "How do you distinguish them?",
+      "zh": "怎么区分呢？",
+      "pinyin": "Zěnme qūfēn ne?",
+      "vi": "Phân biệt thế nào nhỉ?"
+    },
+    {
+      "start": 268.7,
+      "end": 272.32,
+      "en": "For example, if I have no shoes to wear and my shoes are broken,",
+      "zh": "比如，我没有鞋子穿了，鞋子破了，",
+      "pinyin": "Bǐrú, wǒ méiyǒu xiézi chuān le, xiézi pò le,",
+      "vi": "Ví dụ, tôi không có giày để đi, giày bị hỏng,"
+    },
+    {
+      "start": 272.33,
+      "end": 274.72,
+      "en": "then I “need” a new pair of shoes.",
+      "zh": "那我“需要”一双新鞋。",
+      "pinyin": "nà wǒ “xūyào” yī shuāng xīn xié.",
+      "vi": "thì tôi “cần” một đôi giày mới."
+    },
+    {
+      "start": 274.73,
+      "end": 277.29,
+      "en": "But if I already have many shoes,",
+      "zh": "但是如果我已经有很多鞋子了，",
+      "pinyin": "Dànshì rúguǒ wǒ yǐjīng yǒu hěn duō xiézi le,",
+      "vi": "Nhưng nếu tôi đã có rất nhiều giày,"
+    },
+    {
+      "start": 277.3,
+      "end": 281.76,
+      "en": "and I just see a very pretty pair of shoes, that's “want.”",
+      "zh": "只是看到一双很漂亮的鞋子，那就是“想要”。",
+      "pinyin": "zhǐshì kàn dào yī shuāng hěn piàoliang de xiézi, nà jiùshì “xiǎngyào”.",
+      "vi": "chỉ là nhìn thấy một đôi giày rất đẹp, thì đó là “muốn”."
+    },
+    {
+      "start": 281.77,
+      "end": 285.53,
+      "en": "“Need” is what is essential for life; “want” is desire.",
+      "zh": "“需要”是生活必需的，“想要”是欲望。",
+      "pinyin": "“Xūyào” shì shēnghuó bìxū de, “xiǎngyào” shì yùwàng.",
+      "vi": "“Cần” là thứ thiết yếu cho cuộc sống, “muốn” là dục vọng."
+    },
+    {
+      "start": 285.53,
+      "end": 286.72,
+      "en": "I get it.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 286.73,
+      "end": 288.99,
+      "en": "This is a very practical method.",
+      "zh": "这是个很实用的方法。",
+      "pinyin": "Zhè shì ge hěn shíyòng de fāngfǎ.",
+      "vi": "Đây là một phương pháp rất thực tế."
+    },
+    {
+      "start": 289,
+      "end": 290.66,
+      "en": "Then what's the second question?",
+      "zh": "那第二个问题呢？",
+      "pinyin": "Nà dì èr ge wèntí ne?",
+      "vi": "Vậy câu hỏi thứ hai là gì?"
+    },
+    {
+      "start": 290.67,
+      "end": 293.66,
+      "en": "The second question is: “If I buy it,",
+      "zh": "第二个问题是:“如果我买了它，",
+      "pinyin": "Dì èr ge wèntí shì: “Rúguǒ wǒ mǎi le tā,",
+      "vi": "Câu hỏi thứ hai là: “Nếu tôi mua nó,"
+    },
+    {
+      "start": 293.67,
+      "end": 297.19,
+      "en": "will my life really change in any way?”",
+      "zh": "我的生活会有什么真正的改变吗？”",
+      "pinyin": "wǒ de shēnghuó huì yǒu shénme zhēnzhèng de gǎibiàn ma?”",
+      "vi": "cuộc sống của tôi sẽ có thay đổi thật sự nào không?”"
+    },
+    {
+      "start": 297.2,
+      "end": 298.12,
+      "en": "Many times,",
+      "zh": "很多时候，",
+      "pinyin": "Hěn duō shíhou,",
+      "vi": "Nhiều khi,"
+    },
+    {
+      "start": 298.13,
+      "end": 301.92,
+      "en": "we think that buying something will make life better.",
+      "zh": "我们以为买了一样东西，生活就会变好。",
+      "pinyin": "Wǒmen yǐwéi mǎi le yī yàng dōngxi, shēnghuó jiù huì biàn hǎo.",
+      "vi": "Chúng ta nghĩ rằng mua một món đồ, cuộc sống sẽ trở nên tốt hơn."
+    },
+    {
+      "start": 301.93,
+      "end": 305.59,
+      "en": "But in fact, that feeling of happiness is very short-lived.",
+      "zh": "但其实，那种快乐的感觉很短暂。",
+      "pinyin": "Dàn qíshí, nà zhǒng kuàilè de gǎnjué hěn duǎnzàn.",
+      "vi": "Nhưng thật ra, cảm giác vui vẻ đó rất ngắn ngủi."
+    },
+    {
+      "start": 305.6,
+      "end": 308.36,
+      "en": "It's like throwing a small stone into a lake,",
+      "zh": "就像往湖里扔一块小石头，",
+      "pinyin": "Jiù xiàng wǎng hú li rēng yī kuài xiǎo shítou,",
+      "vi": "Giống như ném một viên sỏi nhỏ xuống hồ,"
+    },
+    {
+      "start": 308.37,
+      "end": 312.36,
+      "en": "There will only be tiny ripples, and soon it becomes calm again.",
+      "zh": "只会有一点点波纹，很快就平静了。",
+      "pinyin": "Zhǐ huì yǒu yīdiǎndiǎn bōwén, hěn kuài jiù píngjìng le.",
+      "vi": "Chỉ có một chút gợn sóng, rồi rất nhanh lại phẳng lặng."
+    },
+    {
+      "start": 312.37,
+      "end": 315.39,
+      "en": "True happiness doesn't come from buying things.",
+      "zh": "真正的快乐，不是靠买东西得到的。",
+      "pinyin": "Zhēnzhèng de kuàilè, bù shì kào mǎi dōngxi dédào de.",
+      "vi": "Niềm vui thật sự không phải có được nhờ mua đồ."
+    },
+    {
+      "start": 315.4,
+      "end": 317.89,
+      "en": "Right, that analogy of yours is very good.",
+      "zh": "对，你这个比喻很好。",
+      "pinyin": "Duì, nǐ zhège bǐyù hěn hǎo.",
+      "vi": "Đúng, ví dụ so sánh của bạn rất hay."
+    },
+    {
+      "start": 317.9,
+      "end": 319.46,
+      "en": "The third question is:",
+      "zh": "第三个问题是：",
+      "pinyin": "Dìsān ge wèntí shì:",
+      "vi": "Câu hỏi thứ ba là:"
+    },
+    {
+      "start": 319.47,
+      "end": 323.26,
+      "en": "'How much working time am I willing to spend to exchange for it?'",
+      "zh": "“我愿意花多少工作时间去换它？”",
+      "pinyin": "“Wǒ yuànyì huā duōshao gōngzuò shíjiān qù huàn tā?”",
+      "vi": "“Tôi sẵn lòng dành bao nhiêu thời gian làm việc để đổi lấy nó?”"
+    },
+    {
+      "start": 323.27,
+      "end": 326.06,
+      "en": "For example, I want to buy a very expensive bag,",
+      "zh": "比如，我想买一个很贵的包，",
+      "pinyin": "Bǐrú, wǒ xiǎng mǎi yī ge hěn guì de bāo,",
+      "vi": "Ví dụ, tôi muốn mua một chiếc túi rất đắt,"
+    },
+    {
+      "start": 326.07,
+      "end": 330.56,
+      "en": "I did the math: I'd need to work for a month to afford it.",
+      "zh": "我算了一下，我需要工作一个月才能买得起。",
+      "pinyin": "Wǒ suàn le yīxià, wǒ xūyào gōngzuò yī ge yuè cái néng mǎi de qǐ.",
+      "vi": "Tôi tính thử, tôi cần làm việc một tháng mới mua nổi."
+    },
+    {
+      "start": 330.57,
+      "end": 334.86,
+      "en": "Then I'd think, is this bag really worth a month of my effort?",
+      "zh": "我就会想，这个包真的值得我一个月的努力吗？",
+      "pinyin": "Wǒ jiù huì xiǎng, zhège bāo zhēnde zhídé wǒ yī ge yuè de nǔlì ma?",
+      "vi": "Tôi sẽ nghĩ, chiếc túi này có thật sự đáng để tôi bỏ ra một tháng nỗ lực không?"
+    },
+    {
+      "start": 334.87,
+      "end": 337.26,
+      "en": "This method is very rational.",
+      "zh": "这个方法非常理性。",
+      "pinyin": "Zhège fāngfǎ fēicháng lǐxìng.",
+      "vi": "Cách này rất lý trí."
+    },
+    {
+      "start": 337.27,
+      "end": 340.73,
+      "en": "Convert the price into your own working time,",
+      "zh": "把价格换算成自己的工作时间，",
+      "pinyin": "Bǎ jiàgé huànsuàn chéng zìjǐ de gōngzuò shíjiān,",
+      "vi": "Quy đổi giá cả thành thời gian làm việc của mình,"
+    },
+    {
+      "start": 340.73,
+      "end": 343.95,
+      "en": "and you'll immediately feel the 'weight' of this thing.",
+      "zh": "马上就能感觉到这个东西的“重量”了。",
+      "pinyin": "Mǎshàng jiù néng gǎnjué dào zhège dōngxi de “zhòngliàng” le.",
+      "vi": "sẽ ngay lập tức cảm nhận được “sức nặng” của món đồ này."
+    },
+    {
+      "start": 343.97,
+      "end": 347.26,
+      "en": "Yes. By asking myself these few questions,",
+      "zh": "是的。通过问自己这几个问题，",
+      "pinyin": "Shì de. Tōngguò wèn zìjǐ zhè jǐ ge wèntí,",
+      "vi": "Đúng vậy. Bằng cách tự hỏi mình mấy câu hỏi này,"
+    },
+    {
+      "start": 347.27,
+      "end": 350.16,
+      "en": "I've turned down a lot of unnecessary spending.",
+      "zh": "我拒绝了很多不必要的消费。",
+      "pinyin": "Wǒ jùjué le hěn duō bù bìyào de xiāofèi.",
+      "vi": "tôi đã từ chối nhiều khoản tiêu dùng không cần thiết."
+    },
+    {
+      "start": 350.17,
+      "end": 352.89,
+      "en": "Now, although I have fewer things,",
+      "zh": "现在，我的东西虽然少了，",
+      "pinyin": "Xiànzài, wǒ de dōngxi suīrán shǎo le,",
+      "vi": "Bây giờ, đồ đạc của tôi tuy ít đi,"
+    },
+    {
+      "start": 352.9,
+      "end": 356.92,
+      "en": "every single one is something I truly like and need.",
+      "zh": "但是每一件都是我真正喜欢和需要的。",
+      "pinyin": "dànshì měi yī jiàn dōu shì wǒ zhēnzhèng xǐhuan hé xūyào de.",
+      "vi": "nhưng món nào cũng là thứ tôi thật sự thích và cần."
+    },
+    {
+      "start": 356.93,
+      "end": 360.99,
+      "en": "My room feels bigger, and my heart feels lighter too.",
+      "zh": "我的房间变大了，我的心也更轻松了。",
+      "pinyin": "Wǒ de fángjiān biàn dà le, wǒ de xīn yě gèng qīngsōng le.",
+      "vi": "Phòng của tôi trở nên rộng hơn, lòng tôi cũng nhẹ nhõm hơn."
+    },
+    {
+      "start": 361,
+      "end": 362.52,
+      "en": "That sounds really nice.",
+      "zh": "听起来真好。",
+      "pinyin": "Tīng qǐlái zhēn hǎo.",
+      "vi": "Nghe thật tuyệt."
+    },
+    {
+      "start": 362.53,
+      "end": 366.35,
+      "en": "This is actually a change in 'consumption mindset.'",
+      "zh": "这其实就是一种“消费观念”的改变。",
+      "pinyin": "Zhè qíshí jiùshì yī zhǒng “xiāofèi guānniàn” de gǎibiàn.",
+      "vi": "Đây thật ra chính là sự thay đổi trong “quan niệm tiêu dùng”."
+    },
+    {
+      "start": 366.37,
+      "end": 371.06,
+      "en": "Many young Chinese people nowadays are also becoming more rational in their spending.",
+      "zh": "现在的很多中国年轻人，消费也越来越理性了。",
+      "pinyin": "Xiànzài de hěn duō Zhōngguó niánqīngrén, xiāofèi yě yuèláiyuè lǐxìng le.",
+      "vi": "Nhiều bạn trẻ Trung Quốc hiện nay cũng ngày càng tiêu dùng lý trí hơn."
+    },
+    {
+      "start": 371.07,
+      "end": 373.16,
+      "en": "They are no longer 'paycheck-to-paycheck spenders,'",
+      "zh": "他们不再是“月光族”，",
+      "pinyin": "Tāmen bù zài shì “yuèguāngzú”,",
+      "vi": "Họ không còn là “tộc tiêu hết lương” nữa,"
+    },
+    {
+      "start": 373.17,
+      "end": 376.79,
+      "en": "but have started pursuing 'refined frugality,' that is,",
+      "zh": "而是开始追求“精致抠”，就是说，",
+      "pinyin": "érshì kāishǐ zhuīqiú “jīngzhì kōu”, jiùshì shuō,",
+      "vi": "mà bắt đầu theo đuổi lối “tiết kiệm tinh tế”, nghĩa là,"
+    },
+    {
+      "start": 376.8,
+      "end": 379.32,
+      "en": "willing to spend money on important things,",
+      "zh": "在重要的地方愿意花钱，",
+      "pinyin": "zài zhòngyào de dìfang yuànyì huā qián,",
+      "vi": "sẵn lòng chi tiền ở những chỗ quan trọng,"
+    },
+    {
+      "start": 379.33,
+      "end": 384.72,
+      "en": "such as learning and travel, but trying hard to save money where it's unnecessary.",
+      "zh": "比如学习和旅游，但在不必要的地方就努力省钱。",
+      "pinyin": "bǐrú xuéxí hé lǚyóu, dàn zài bù bìyào de dìfang jiù nǔlì shěng qián.",
+      "vi": "ví dụ như học tập và du lịch, nhưng ở những chỗ không cần thiết thì cố gắng tiết kiệm."
+    },
+    {
+      "start": 384.73,
+      "end": 388.55,
+      "en": "Yes, this is a very smart way to spend money.",
+      "zh": "是的，这是一种很聪明的消费方式。",
+      "pinyin": "Shì de, zhè shì yī zhǒng hěn cōngming de xiāofèi fāngshì.",
+      "vi": "Đúng, đây là một cách tiêu dùng rất thông minh."
+    },
+    {
+      "start": 388.57,
+      "end": 392.96,
+      "en": "Pay for experiences and growth, not for objects.",
+      "zh": "为体验和成长买单，而不是为物品买单。",
+      "pinyin": "Wèi tǐyàn hé chéngzhǎng mǎidān, ér bù shì wèi wùpǐn mǎidān.",
+      "vi": "Trả tiền cho trải nghiệm và sự trưởng thành, chứ không phải cho đồ vật."
+    },
+    {
+      "start": 392.97,
+      "end": 396.66,
+      "en": "Now that we've talked about 'not buying,' let's talk about 'not doing.'",
+      "zh": "说完了“不买”，我们再来聊聊“不做”。",
+      "pinyin": "Shuō wán le “bù mǎi”, wǒmen zài lái liáoliao “bù zuò”.",
+      "vi": "Nói xong “không mua”, chúng ta hãy nói tiếp về “không làm”."
+    },
+    {
+      "start": 396.67,
+      "end": 398.76,
+      "en": "I think in the information age,",
+      "zh": "我觉得在信息时代，",
+      "pinyin": "Wǒ juéde zài xìnxī shídài,",
+      "vi": "Tôi nghĩ trong thời đại thông tin,"
+    },
+    {
+      "start": 398.77,
+      "end": 402.73,
+      "en": "Learning to 'not do' is harder than 'not buying.' How so?",
+      "zh": "学会“不做”比“不买”更难。怎么说？",
+      "pinyin": "Xuéhuì “bù zuò” bǐ “bù mǎi” gèng nán. Zěnme shuō?",
+      "vi": "Học “không làm” khó hơn “không mua”. Nói thế nào nhỉ?"
+    },
+    {
+      "start": 402.73,
+      "end": 405.15,
+      "en": "Because information is invisible.",
+      "zh": "因为信息是看不见的。",
+      "pinyin": "Yīnwèi xìnxī shì kàn bù jiàn de.",
+      "vi": "Bởi vì thông tin là thứ không nhìn thấy được."
+    },
+    {
+      "start": 405.17,
+      "end": 408.69,
+      "en": "Every day we passively receive too much information.",
+      "zh": "我们每天被动地接收太多的信息。",
+      "pinyin": "Wǒmen měi tiān bèidòng de jiēshōu tài duō de xìnxī.",
+      "vi": "Mỗi ngày chúng ta bị động tiếp nhận quá nhiều thông tin."
+    },
+    {
+      "start": 408.7,
+      "end": 412.46,
+      "en": "News on our phones, short videos on social media,",
+      "zh": "手机上的新闻、社交媒体上的短视频、",
+      "pinyin": "Shǒujī shang de xīnwén, shèjiāo méitǐ shang de duǎn shìpín,",
+      "vi": "Tin tức trên điện thoại, video ngắn trên mạng xã hội,"
+    },
+    {
+      "start": 412.47,
+      "end": 414.16,
+      "en": "messages sent by friends...",
+      "zh": "朋友发来的消息……",
+      "pinyin": "péngyou fā lái de xiāoxi……",
+      "vi": "tin nhắn bạn bè gửi đến……"
+    },
+    {
+      "start": 414.17,
+      "end": 416.59,
+      "en": "They are constantly competing for my attention.",
+      "zh": "它们一直在抢我的注意力。",
+      "pinyin": "Tāmen yīzhí zài qiǎng wǒ de zhùyìlì.",
+      "vi": "Chúng lúc nào cũng đang tranh giành sự chú ý của tôi."
+    },
+    {
+      "start": 416.6,
+      "end": 417.89,
+      "en": "I feel the same way!",
+      "zh": "我有同感！",
+      "pinyin": "Wǒ yǒu tónggǎn!",
+      "vi": "Tôi cũng cảm thấy vậy!"
+    },
+    {
+      "start": 417.9,
+      "end": 420.79,
+      "en": "Sometimes I originally just wanted to look one thing up,",
+      "zh": "有时候我本来只想查一个东西，",
+      "pinyin": "Yǒu shíhou wǒ běnlái zhǐ xiǎng chá yī ge dōngxi,",
+      "vi": "Đôi khi tôi vốn chỉ muốn tra cứu một thứ,"
+    },
+    {
+      "start": 420.8,
+      "end": 424.26,
+      "en": "but after opening my phone, an hour has passed.",
+      "zh": "结果打开手机，一个小时就过去了。",
+      "pinyin": "jiéguǒ dǎkāi shǒujī, yī ge xiǎoshí jiù guòqù le.",
+      "vi": "kết quả là mở điện thoại ra, một tiếng đồng hồ trôi qua luôn."
+    },
+    {
+      "start": 424.27,
+      "end": 425.99,
+      "en": "I looked at a lot of things,",
+      "zh": "我看了很多东西，",
+      "pinyin": "Wǒ kàn le hěn duō dōngxi,",
+      "vi": "Tôi đã xem rất nhiều thứ,"
+    },
+    {
+      "start": 426,
+      "end": 429.16,
+      "en": "but looking back, it seems I didn't remember anything,",
+      "zh": "但是回头一想，好像什么都没记住，",
+      "pinyin": "dànshì huítóu yī xiǎng, hǎoxiàng shénme dōu méi jìzhù,",
+      "vi": "nhưng nghĩ lại thì dường như chẳng nhớ được gì,"
+    },
+    {
+      "start": 429.17,
+      "end": 430.89,
+      "en": "and feel mentally exhausted.",
+      "zh": "感觉大脑很累。",
+      "pinyin": "gǎnjué dànǎo hěn lèi.",
+      "vi": "cảm thấy não rất mệt."
+    },
+    {
+      "start": 430.9,
+      "end": 433.56,
+      "en": "This is 'information overload.'",
+      "zh": "这就是“信息过载”。",
+      "pinyin": "Zhè jiùshì “xìnxī guòzài”.",
+      "vi": "Đây chính là “quá tải thông tin”."
+    },
+    {
+      "start": 433.57,
+      "end": 437.86,
+      "en": "Our brain is like a cup, and information is like water.",
+      "zh": "我们的大脑就像一个杯子，信息就像水。",
+      "pinyin": "Wǒmen de dànǎo jiù xiàng yī ge bēizi, xìnxī jiù xiàng shuǐ.",
+      "vi": "Não của chúng ta giống như một cái cốc, thông tin giống như nước."
+    },
+    {
+      "start": 437.87,
+      "end": 440.16,
+      "en": "If the faucet is left on all the time,",
+      "zh": "如果水龙头一直开着，",
+      "pinyin": "Rúguǒ shuǐlóngtóu yīzhí kāi zhe,",
+      "vi": "Nếu vòi nước cứ mở mãi,"
+    },
+    {
+      "start": 440.17,
+      "end": 443.89,
+      "en": "water keeps flowing in, and the cup soon becomes full,",
+      "zh": "水不停地流进来，杯子很快就会满，",
+      "pinyin": "shuǐ bùtíng de liú jìnlái, bēizi hěn kuài jiù huì mǎn,",
+      "vi": "nước không ngừng chảy vào, cái cốc sẽ nhanh chóng đầy,"
+    },
+    {
+      "start": 443.9,
+      "end": 445.86,
+      "en": "and the water will overflow.",
+      "zh": "水就会溢出来。",
+      "pinyin": "shuǐ jiù huì yì chūlái.",
+      "vi": "nước sẽ tràn ra ngoài."
+    },
+    {
+      "start": 445.87,
+      "end": 447.66,
+      "en": "Our brain is the same:",
+      "zh": "我们的大脑也是一样，",
+      "pinyin": "Wǒmen de dànǎo yě shì yīyàng,",
+      "vi": "Não của chúng ta cũng vậy,"
+    },
+    {
+      "start": 447.67,
+      "end": 450.76,
+      "en": "receiving too much information makes us anxious,",
+      "zh": "接收太多信息，就会觉得焦虑、",
+      "pinyin": "jiēshōu tài duō xìnxī, jiù huì juéde jiāolǜ,",
+      "vi": "tiếp nhận quá nhiều thông tin thì sẽ thấy lo lắng,"
+    },
+    {
+      "start": 450.77,
+      "end": 455.79,
+      "en": "unable to think. 'Information overload' is a very accurate term.",
+      "zh": "无法思考。“信息过载”，这个词很准确。",
+      "pinyin": "wúfǎ sīkǎo. “Xìnxī guòzài”, zhège cí hěn zhǔnquè.",
+      "vi": "không thể suy nghĩ. “Quá tải thông tin”, từ này rất chính xác."
+    },
+    {
+      "start": 455.8,
+      "end": 457.89,
+      "en": "So what should we do?",
+      "zh": "那我们应该怎么做呢？",
+      "pinyin": "Nà wǒmen yīnggāi zěnme zuò ne?",
+      "vi": "Vậy chúng ta nên làm thế nào?"
+    },
+    {
+      "start": 457.9,
+      "end": 462.19,
+      "en": "We can't not use our phones or not look at information. Of course.",
+      "zh": "我们不可能不用手机，不看信息啊。当然。",
+      "pinyin": "Wǒmen bù kěnéng bú yòng shǒujī, bú kàn xìnxī a. Dāngrán.",
+      "vi": "Chúng ta không thể không dùng điện thoại, không xem thông tin được. Tất nhiên rồi."
+    },
+    {
+      "start": 462.2,
+      "end": 464.99,
+      "en": "The 'not doing' here doesn't mean doing nothing at all,",
+      "zh": "这里的“不做”，不是什么都不做，",
+      "pinyin": "Zhèlǐ de “bù zuò”, bú shì shénme dōu bú zuò,",
+      "vi": "'Không làm' ở đây không phải là không làm gì cả,"
+    },
+    {
+      "start": 465,
+      "end": 467.26,
+      "en": "but doing things selectively.",
+      "zh": "而是有选择地做。",
+      "pinyin": "ér shì yǒu xuǎnzé de zuò.",
+      "vi": "mà là làm có chọn lọc."
+    },
+    {
+      "start": 467.27,
+      "end": 469.99,
+      "en": "This follows the same logic as 'not buying':",
+      "zh": "这和“不买”的逻辑是一样的，",
+      "pinyin": "Zhè hé “bù mǎi” de luójí shì yíyàng de,",
+      "vi": "Điều này có logic giống với 'không mua',"
+    },
+    {
+      "start": 470,
+      "end": 473.56,
+      "en": "the core is 'understanding your true needs.'",
+      "zh": "核心是“了解自己真正的需求”。",
+      "pinyin": "héxīn shì “liǎojiě zìjǐ zhēnzhèng de xūqiú”.",
+      "vi": "cốt lõi là 'hiểu nhu cầu thật sự của bản thân'."
+    },
+    {
+      "start": 473.57,
+      "end": 477.06,
+      "en": "We need to build a system for getting information.",
+      "zh": "我们需要建立一个获取信息的系统。",
+      "pinyin": "Wǒmen xūyào jiànlì yí ge huòqǔ xìnxī de xìtǒng.",
+      "vi": "Chúng ta cần xây dựng một hệ thống tiếp nhận thông tin."
+    },
+    {
+      "start": 477.07,
+      "end": 479.46,
+      "en": "A system for getting information?",
+      "zh": "获取信息的系统？",
+      "pinyin": "Huòqǔ xìnxī de xìtǒng?",
+      "vi": "Hệ thống tiếp nhận thông tin?"
+    },
+    {
+      "start": 479.47,
+      "end": 481.46,
+      "en": "It sounds a bit complicated.",
+      "zh": "听起来有点复杂。",
+      "pinyin": "Tīng qǐlái yǒudiǎn fùzá.",
+      "vi": "Nghe có vẻ hơi phức tạp."
+    },
+    {
+      "start": 481.47,
+      "end": 482.89,
+      "en": "It's actually very simple.",
+      "zh": "其实很简单。",
+      "pinyin": "Qíshí hěn jiǎndān.",
+      "vi": "Thật ra rất đơn giản."
+    },
+    {
+      "start": 482.9,
+      "end": 486.89,
+      "en": "It's about changing 'passive receiving' into 'actively getting.'",
+      "zh": "就是变“被动接受”为“主动获取”。",
+      "pinyin": "Jiùshì biàn “bèidòng jiēshòu” wéi “zhǔdòng huòqǔ”.",
+      "vi": "Đó là chuyển từ 'tiếp nhận thụ động' sang 'chủ động tiếp nhận'."
+    },
+    {
+      "start": 486.9,
+      "end": 489.66,
+      "en": "For example, with news, I don't keep scrolling through",
+      "zh": "比如，关于新闻，我不会一直刷",
+      "pinyin": "Bǐrú, guānyú xīnwén, wǒ bú huì yìzhí shuā",
+      "vi": "Ví dụ, về tin tức, tôi không liên tục lướt"
+    },
+    {
+      "start": 489.67,
+      "end": 493.09,
+      "en": "news apps; instead, I choose fixed times,",
+      "zh": "新闻软件，而是选择在固定的时间，",
+      "pinyin": "xīnwén ruǎnjiàn, ér shì xuǎnzé zài gùdìng de shíjiān,",
+      "vi": "ứng dụng tin tức, mà chọn vào thời gian cố định,"
+    },
+    {
+      "start": 493.1,
+      "end": 497.39,
+      "en": "like morning or evening, to read some media outlets I trust.",
+      "zh": "比如早上或者晚上，看一些我信任的媒体。",
+      "pinyin": "bǐrú zǎoshang huòzhě wǎnshang, kàn yìxiē wǒ xìnrèn de méitǐ.",
+      "vi": "ví dụ buổi sáng hoặc buổi tối, để xem một số phương tiện truyền thông tôi tin tưởng."
+    },
+    {
+      "start": 497.4,
+      "end": 500.79,
+      "en": "This way I can avoid being drawn in by all kinds of headlines and wasting",
+      "zh": "这样可以避免被各种标题吸引，浪费",
+      "pinyin": "Zhèyàng kěyǐ bìmiǎn bèi gèzhǒng biāotí xīyǐn, làngfèi",
+      "vi": "Như vậy có thể tránh bị đủ loại tiêu đề thu hút, lãng phí"
+    },
+    {
+      "start": 500.8,
+      "end": 504.26,
+      "en": "time. Right. As for social media,",
+      "zh": "时间。对。关于社交媒体，",
+      "pinyin": "shíjiān. Duì. Guānyú shèjiāo méitǐ,",
+      "vi": "thời gian. Đúng. Về mạng xã hội,"
+    },
+    {
+      "start": 504.27,
+      "end": 507.36,
+      "en": "I regularly clean up my following list.",
+      "zh": "我会定期清理我关注的列表。",
+      "pinyin": "Wǒ huì dìngqī qīnglǐ wǒ guānzhù de lièbiǎo.",
+      "vi": "tôi sẽ định kỳ dọn dẹp danh sách những người tôi theo dõi."
+    },
+    {
+      "start": 507.37,
+      "end": 512.59,
+      "en": "I only follow people who bring me value and make me feel happy.",
+      "zh": "只关注那些能给我带来价值，让我感觉愉快的人。",
+      "pinyin": "Zhǐ guānzhù nàxiē néng gěi wǒ dàilái jiàzhí, ràng wǒ gǎnjué yúkuài de rén.",
+      "vi": "Chỉ theo dõi những người có thể mang lại giá trị cho tôi, khiến tôi cảm thấy vui vẻ."
+    },
+    {
+      "start": 512.6,
+      "end": 515.49,
+      "en": "As for those that always make me feel anxious or",
+      "zh": "对于那些总是让我感到焦虑或者",
+      "pinyin": "Duìyú nàxiē zǒngshì ràng wǒ gǎndào jiāolǜ huòzhě",
+      "vi": "Đối với những thứ luôn khiến tôi cảm thấy lo lắng hoặc"
+    },
+    {
+      "start": 515.5,
+      "end": 518.86,
+      "en": "envious accounts, I choose to unfollow.",
+      "zh": "嫉妒的账号，我会选择取消关注。",
+      "pinyin": "jídù de zhànghào, wǒ huì xuǎnzé qǔxiāo guānzhù.",
+      "vi": "tài khoản ghen tị, tôi sẽ chọn bỏ theo dõi."
+    },
+    {
+      "start": 518.87,
+      "end": 521.36,
+      "en": "I've recently started doing this too.",
+      "zh": "这个我最近也开始做了。",
+      "pinyin": "Zhège wǒ zuìjìn yě kāishǐ zuò le.",
+      "vi": "Gần đây tôi cũng bắt đầu làm việc này rồi."
+    },
+    {
+      "start": 521.37,
+      "end": 524.09,
+      "en": "I found that when I unfollow some",
+      "zh": "我发现，当我取消关注一些",
+      "pinyin": "Wǒ fāxiàn, dāng wǒ qǔxiāo guānzhù yìxiē",
+      "vi": "Tôi phát hiện, khi tôi bỏ theo dõi một số"
+    },
+    {
+      "start": 524.1,
+      "end": 527.19,
+      "en": "influencers whose lives look 'perfect,'",
+      "zh": "生活看起来“完美”的网红之后，",
+      "pinyin": "shēnghuó kàn qǐlái “wánměi” de wǎnghóng zhīhòu,",
+      "vi": "người nổi tiếng trên mạng có cuộc sống trông 'hoàn hảo',"
+    },
+    {
+      "start": 527.2,
+      "end": 530.36,
+      "en": "I became more satisfied with my own life.",
+      "zh": "我对自己生活的满意度更高了。",
+      "pinyin": "Wǒ duì zìjǐ shēnghuó de mǎnyìdù gèng gāo le.",
+      "vi": "mức độ hài lòng của tôi với cuộc sống của mình cao hơn rồi."
+    },
+    {
+      "start": 530.37,
+      "end": 534.33,
+      "en": "I no longer compare myself; instead, I focus more on my own life.",
+      "zh": "我不再去比较，而是更关注自己的生活。",
+      "pinyin": "Wǒ bú zài qù bǐjiào, ér shì gèng guānzhù zìjǐ de shēnghuó.",
+      "vi": "Tôi không còn so sánh nữa, mà chú ý hơn đến cuộc sống của mình."
+    },
+    {
+      "start": 534.33,
+      "end": 535.72,
+      "en": "This is very important.",
+      "zh": "这很重要。",
+      "pinyin": "Zhè hěn zhòngyào.",
+      "vi": "Điều này rất quan trọng."
+    },
+    {
+      "start": 535.73,
+      "end": 539.52,
+      "en": "Social media easily makes us fall into something called",
+      "zh": "社交媒体很容易让我们陷入一种叫",
+      "pinyin": "Shèjiāo méitǐ hěn róngyì ràng wǒmen xiànrù yì zhǒng jiào",
+      "vi": "Mạng xã hội rất dễ khiến chúng ta rơi vào một trạng thái gọi là"
+    },
+    {
+      "start": 539.53,
+      "end": 541.99,
+      "en": "an 'information cocoon.'",
+      "zh": "“信息茧房”的状态。",
+      "pinyin": "“xìnxī jiǎnfáng” de zhuàngtài.",
+      "vi": "trạng thái 'kén thông tin'."
+    },
+    {
+      "start": 542,
+      "end": 543.76,
+      "en": "That is, algorithms",
+      "zh": "就是说，算法",
+      "pinyin": "Jiùshì shuō, suànfǎ",
+      "vi": "Tức là, thuật toán"
+    },
+    {
+      "start": 543.77,
+      "end": 546.93,
+      "en": "keep recommending things you like to watch,",
+      "zh": "一直给你推荐你喜欢看的东西，",
+      "pinyin": "yìzhí gěi nǐ tuījiàn nǐ xǐhuan kàn de dōngxi,",
+      "vi": "liên tục gợi ý cho bạn những thứ bạn thích xem,"
+    },
+    {
+      "start": 546.93,
+      "end": 548.05,
+      "en": "over time,",
+      "zh": "久而久之，",
+      "pinyin": "jiǔ'érjiǔzhī,",
+      "vi": "lâu dần,"
+    },
+    {
+      "start": 548.07,
+      "end": 551.16,
+      "en": "only one voice is left in your world,",
+      "zh": "你的世界里就只剩下一种声音，",
+      "pinyin": "nǐ de shìjiè lǐ jiù zhǐ shèngxià yì zhǒng shēngyīn,",
+      "vi": "trong thế giới của bạn chỉ còn lại một kiểu tiếng nói,"
+    },
+    {
+      "start": 551.17,
+      "end": 554.06,
+      "en": "and you'll feel everyone thinks the same as you.",
+      "zh": "你会觉得所有人都跟你想的一样。",
+      "pinyin": "nǐ huì juéde suǒyǒu rén dōu gēn nǐ xiǎng de yíyàng.",
+      "vi": "bạn sẽ cảm thấy mọi người đều nghĩ giống như bạn."
+    },
+    {
+      "start": 554.07,
+      "end": 555.86,
+      "en": "I've heard this term.",
+      "zh": "我听说过这个词。",
+      "pinyin": "Wǒ tīngshuō guo zhège cí.",
+      "vi": "Tôi đã từng nghe từ này."
+    },
+    {
+      "start": 555.87,
+      "end": 557.33,
+      "en": "Like a silkworm,",
+      "zh": "就像一只蚕，",
+      "pinyin": "Jiù xiàng yì zhī cán,",
+      "vi": "Giống như một con tằm,"
+    },
+    {
+      "start": 557.33,
+      "end": 562.15,
+      "en": "wrapping itself in the silk it produces, unable to see the outside world.",
+      "zh": "用自己吐的丝把自己包起来，看不到外面的世界。",
+      "pinyin": "yòng zìjǐ tǔ de sī bǎ zìjǐ bāo qǐlái, kàn bú dào wàimiàn de shìjiè.",
+      "vi": "dùng tơ do mình nhả ra quấn mình lại, không nhìn thấy thế giới bên ngoài."
+    },
+    {
+      "start": 562.17,
+      "end": 566.53,
+      "en": "This is indeed dangerous; it narrows our thinking.",
+      "zh": "这样确实很危险，会让我们的思想变得很窄。",
+      "pinyin": "Zhèyàng quèshí hěn wēixiǎn, huì ràng wǒmen de sīxiǎng biàn de hěn zhǎi.",
+      "vi": "Như vậy thật sự rất nguy hiểm, sẽ khiến tư tưởng của chúng ta trở nên rất hẹp."
+    },
+    {
+      "start": 566.53,
+      "end": 571.85,
+      "en": "Yes. So we should actively expose ourselves to different viewpoints.",
+      "zh": "是的。所以我们要主动地去接触一些不同的观点。",
+      "pinyin": "Shì de. Suǒyǐ wǒmen yào zhǔdòng de qù jiēchù yìxiē bùtóng de guāndiǎn.",
+      "vi": "Đúng vậy. Vì thế chúng ta phải chủ động tiếp xúc với một số quan điểm khác."
+    },
+    {
+      "start": 571.87,
+      "end": 574.86,
+      "en": "For example, you can follow some people whose major and",
+      "zh": "比如，可以关注一些和自己专业、",
+      "pinyin": "Bǐrú, kěyǐ guānzhù yìxiē hé zìjǐ zhuānyè,",
+      "vi": "Ví dụ, có thể theo dõi một số người mà chuyên môn,"
+    },
+    {
+      "start": 574.87,
+      "end": 577.09,
+      "en": "interests are completely different from yours,",
+      "zh": "兴趣完全不同的博主，",
+      "pinyin": "xìngqù wánquán bùtóng de bózhǔ,",
+      "vi": "và sở thích hoàn toàn khác với mình,"
+    },
+    {
+      "start": 577.1,
+      "end": 580.12,
+      "en": "or read some books you wouldn't normally choose.",
+      "zh": "或者看一些自己平时不会选的书。",
+      "pinyin": "huòzhě kàn yìxiē zìjǐ píngshí bú huì xuǎn de shū.",
+      "vi": "hoặc đọc một số cuốn sách mà bình thường mình sẽ không chọn."
+    },
+    {
+      "start": 580.13,
+      "end": 582.92,
+      "en": "This is a kind of mental 'decluttering,'",
+      "zh": "这是一种思想上的“断舍离”，",
+      "pinyin": "Zhè shì yì zhǒng sīxiǎng shàng de “duànshělí”,",
+      "vi": "Đây là một kiểu 'buông bỏ' trong tư tưởng,"
+    },
+    {
+      "start": 582.93,
+      "end": 585.45,
+      "en": "breaking out of your comfort zone.",
+      "zh": "打破自己的舒适区。",
+      "pinyin": "dǎpò zìjǐ de shūshìqū.",
+      "vi": "phá vỡ vùng an toàn của bản thân."
+    },
+    {
+      "start": 585.47,
+      "end": 588.86,
+      "en": "Besides these, are there any other 'not doing' suggestions?",
+      "zh": "除了这些，还有什么“不做”的建议吗？",
+      "pinyin": "Chúle zhèxiē, hái yǒu shénme “bù zuò” de jiànyì ma?",
+      "vi": "Ngoài những điều này, còn có gợi ý 'không làm' nào khác không?"
+    },
+    {
+      "start": 588.87,
+      "end": 592.76,
+      "en": "There's another very important one: learning to 'do nothing.'",
+      "zh": "还有一个很重要的，就是学会“什么都不做”。",
+      "pinyin": "Hái yǒu yí ge hěn zhòngyào de, jiùshì xuéhuì “shénme dōu bú zuò”.",
+      "vi": "Còn một điều rất quan trọng, đó là học cách 'không làm gì cả'."
+    },
+    {
+      "start": 592.77,
+      "end": 595.56,
+      "en": "Do nothing? You mean spacing out?",
+      "zh": "什么都不做？就是发呆吗？",
+      "pinyin": "Shénme dōu bú zuò? Jiùshì fādāi ma?",
+      "vi": "Không làm gì cả? Là ngẩn người thôi à?"
+    },
+    {
+      "start": 595.57,
+      "end": 597.16,
+      "en": "You could say that.",
+      "zh": "可以这么说。",
+      "pinyin": "Kěyǐ zhème shuō.",
+      "vi": "Có thể nói như vậy."
+    },
+    {
+      "start": 597.17,
+      "end": 600.76,
+      "en": "Our current culture seems to be very afraid of 'boredom.'",
+      "zh": "我们现在的文化好像很害怕“无聊”。",
+      "pinyin": "Wǒmen xiànzài de wénhuà hǎoxiàng hěn hàipà “wúliáo”.",
+      "vi": "Văn hóa hiện nay của chúng ta dường như rất sợ 'sự nhàm chán'."
+    },
+    {
+      "start": 600.77,
+      "end": 604.06,
+      "en": "We always want to fill up all our time,",
+      "zh": "我们总是要把所有的时间都填满，",
+      "pinyin": "Wǒmen zǒngshì yào bǎ suǒyǒu de shíjiān dōu tiánmǎn,",
+      "vi": "Chúng ta luôn muốn lấp đầy mọi khoảng thời gian,"
+    },
+    {
+      "start": 604.07,
+      "end": 609.06,
+      "en": "we have to listen to podcasts on the subway and watch videos while eating.",
+      "zh": "坐地铁的时候要听播客，吃饭的时候要看视频。",
+      "pinyin": "zuò dìtiě de shíhou yào tīng bōkè, chīfàn de shíhou yào kàn shìpín.",
+      "vi": "khi đi tàu điện ngầm thì phải nghe podcast, khi ăn thì phải xem video."
+    },
+    {
+      "start": 609.07,
+      "end": 612.49,
+      "en": "We seem to have lost the ability to be alone with ourselves.",
+      "zh": "我们好像失去了和自己独处的能力。",
+      "pinyin": "Wǒmen hǎoxiàng shīqù le hé zìjǐ dúchǔ de nénglì.",
+      "vi": "Dường như chúng ta đã mất đi khả năng ở một mình với chính mình."
+    },
+    {
+      "start": 612.5,
+      "end": 613.79,
+      "en": "That's exactly right.",
+      "zh": "确实是这样。",
+      "pinyin": "Quèshí shì zhèyàng.",
+      "vi": "Đúng là như vậy."
+    },
+    {
+      "start": 613.8,
+      "end": 615.32,
+      "en": "If I do nothing,",
+      "zh": "如果什么都不做，",
+      "pinyin": "Rúguǒ shénme dōu bú zuò,",
+      "vi": "Nếu không làm gì cả,"
+    },
+    {
+      "start": 615.33,
+      "end": 619.39,
+      "en": "I even feel a bit guilty, as if I've wasted time.",
+      "zh": "我甚至会觉得有点罪恶感，好像浪费了时间。",
+      "pinyin": "wǒ shènzhì huì juéde yǒudiǎn zuì'ègǎn, hǎoxiàng làngfèile shíjiān.",
+      "vi": "Tôi thậm chí sẽ thấy hơi tội lỗi, như thể đã lãng phí thời gian."
+    },
+    {
+      "start": 619.4,
+      "end": 622.72,
+      "en": "But actually, boredom is very important.",
+      "zh": "但其实，无聊是非常重要的。",
+      "pinyin": "Dàn qíshí, wúliáo shì fēicháng zhòngyào de.",
+      "vi": "Nhưng thật ra, sự buồn chán rất quan trọng."
+    },
+    {
+      "start": 622.73,
+      "end": 624.99,
+      "en": "Many psychology studies say,",
+      "zh": "很多心理学研究都说，",
+      "pinyin": "Hěnduō xīnlǐxué yánjiū dōu shuō,",
+      "vi": "Nhiều nghiên cứu tâm lý học đều nói rằng,"
+    },
+    {
+      "start": 625,
+      "end": 628.32,
+      "en": "When we feel bored and let our minds go blank,",
+      "zh": "当我们感到无聊，大脑放空的时候，",
+      "pinyin": "dāng wǒmen gǎndào wúliáo, dànǎo fàngkōng de shíhou,",
+      "vi": "Khi chúng ta thấy buồn chán và để đầu óc trống rỗng,"
+    },
+    {
+      "start": 628.33,
+      "end": 630.75,
+      "en": "that's when creativity gets stimulated.",
+      "zh": "创造力才会被激发。",
+      "pinyin": "chuàngzàolì cái huì bèi jīfā.",
+      "vi": "thì khả năng sáng tạo mới được kích thích."
+    },
+    {
+      "start": 630.77,
+      "end": 632.99,
+      "en": "Moreover, true rest,",
+      "zh": "而且，真正的休息，",
+      "pinyin": "Érqiě, zhēnzhèng de xiūxi,",
+      "vi": "Hơn nữa, nghỉ ngơi thật sự,"
+    },
+    {
+      "start": 633,
+      "end": 636.26,
+      "en": "isn't filling the brain with new information,",
+      "zh": "不是用新的信息去填满大脑，",
+      "pinyin": "bú shì yòng xīn de xìnxī qù tiánmǎn dànǎo,",
+      "vi": "không phải là dùng thông tin mới để lấp đầy não,"
+    },
+    {
+      "start": 636.27,
+      "end": 639.16,
+      "en": "but letting the brain completely relax.",
+      "zh": "而是让大脑完全地放松下来。",
+      "pinyin": "érshì ràng dànǎo wánquán de fàngsōng xiàlái.",
+      "vi": "mà là để não hoàn toàn thư giãn."
+    },
+    {
+      "start": 639.17,
+      "end": 640.76,
+      "en": "I think I get it.",
+      "zh": "我好像明白了。",
+      "pinyin": "Wǒ hǎoxiàng míngbai le.",
+      "vi": "Tôi hình như hiểu ra rồi."
+    },
+    {
+      "start": 640.77,
+      "end": 644.16,
+      "en": "Like a friend of mine, he has a habit:",
+      "zh": "就像我的一个朋友，他有一个习惯，",
+      "pinyin": "Jiù xiàng wǒ de yí ge péngyou, tā yǒu yí ge xíguàn,",
+      "vi": "Giống như một người bạn của tôi, anh ấy có một thói quen,"
+    },
+    {
+      "start": 644.17,
+      "end": 646.53,
+      "en": "every night he turns off his phone,",
+      "zh": "每天晚上会关掉手机，",
+      "pinyin": "měitiān wǎnshang huì guāndiào shǒujī,",
+      "vi": "mỗi tối sẽ tắt điện thoại,"
+    },
+    {
+      "start": 646.53,
+      "end": 649.69,
+      "en": "sits quietly for ten minutes, thinking about nothing.",
+      "zh": "安静地坐十分钟，什么都不想。",
+      "pinyin": "ānjìng de zuò shí fēnzhōng, shénme dōu bù xiǎng.",
+      "vi": "ngồi yên lặng mười phút, không nghĩ gì cả."
+    },
+    {
+      "start": 649.7,
+      "end": 653.09,
+      "en": "He says this is the most relaxing time of his day.",
+      "zh": "他说这是他一天中最放松的时间。",
+      "pinyin": "Tā shuō zhè shì tā yì tiān zhōng zuì fàngsōng de shíjiān.",
+      "vi": "Anh ấy nói đây là khoảng thời gian thư giãn nhất trong ngày của anh ấy."
+    },
+    {
+      "start": 653.1,
+      "end": 655.86,
+      "en": "Yes, this is a kind of practice.",
+      "zh": "是的，这就是一种练习。",
+      "pinyin": "Shì de, zhè jiù shì yì zhǒng liànxí.",
+      "vi": "Đúng vậy, đây chính là một kiểu luyện tập."
+    },
+    {
+      "start": 655.87,
+      "end": 657.29,
+      "en": "We can try every",
+      "zh": "我们可以尝试每",
+      "pinyin": "Wǒmen kěyǐ chángshì měi",
+      "vi": "Chúng ta có thể thử mỗi"
+    },
+    {
+      "start": 657.3,
+      "end": 660.59,
+      "en": "day to set aside a little “do nothing” time for ourselves.",
+      "zh": "天留一点“什么都不做”的时间给自己。",
+      "pinyin": "tiān liú yìdiǎn “shénme dōu bú zuò” de shíjiān gěi zìjǐ.",
+      "vi": "ngày dành một chút thời gian “không làm gì cả” cho bản thân."
+    },
+    {
+      "start": 660.6,
+      "end": 664.39,
+      "en": "You can go for a walk in the park, or just look out the window.",
+      "zh": "可以去公园散步，可以只是看着窗外。",
+      "pinyin": "Kěyǐ qù gōngyuán sànbù, kěyǐ zhǐshì kànzhe chuāngwài.",
+      "vi": "Có thể đi dạo trong công viên, có thể chỉ nhìn ra ngoài cửa sổ."
+    },
+    {
+      "start": 664.4,
+      "end": 668.12,
+      "en": "This is a very important modern survival skill,",
+      "zh": "这是一种很重要的现代生存技能，",
+      "pinyin": "Zhè shì yì zhǒng hěn zhòngyào de xiàndài shēngcún jìnéng,",
+      "vi": "Đây là một kỹ năng sinh tồn hiện đại rất quan trọng,"
+    },
+    {
+      "start": 668.13,
+      "end": 673.25,
+      "en": "helping us find inner peace in a noisy world.",
+      "zh": "帮助我们在一个吵闹的世界里，找到内心的平静。",
+      "pinyin": "bāngzhù wǒmen zài yí ge chǎonào de shìjiè lǐ, zhǎodào nèixīn de píngjìng.",
+      "vi": "giúp chúng ta tìm thấy sự bình yên trong tâm hồn giữa một thế giới ồn ào."
+    },
+    {
+      "start": 673.27,
+      "end": 676.13,
+      "en": "This is also a way to set boundaries,",
+      "zh": "这也是一种设立界限的方式，",
+      "pinyin": "Zhè yě shì yì zhǒng shèlì jièxiàn de fāngshì,",
+      "vi": "Đây cũng là một cách thiết lập ranh giới,"
+    },
+    {
+      "start": 676.13,
+      "end": 678.72,
+      "en": "protecting your own time and energy.",
+      "zh": "保护自己的时间和精力。",
+      "pinyin": "bǎohù zìjǐ de shíjiān hé jīnglì.",
+      "vi": "bảo vệ thời gian và năng lượng của bản thân."
+    },
+    {
+      "start": 678.73,
+      "end": 680.85,
+      "en": "After talking so much, I've realized,",
+      "zh": "聊了这么多，我发现，",
+      "pinyin": "Liáole zhème duō, wǒ fāxiàn,",
+      "vi": "Nói chuyện nhiều như vậy, tôi nhận ra,"
+    },
+    {
+      "start": 680.87,
+      "end": 685.29,
+      "en": "“Don't buy” and “don't do” actually have the same core. Oh?",
+      "zh": "“不买”和“不做”，其实核心都是一样的。 哦？",
+      "pinyin": "“bù mǎi” hé “bú zuò”, qíshí héxīn dōu shì yíyàng de. Ó?",
+      "vi": "“Không mua” và “không làm”, thật ra cốt lõi đều giống nhau. Ồ?"
+    },
+    {
+      "start": 685.3,
+      "end": 686.12,
+      "en": "What is it?",
+      "zh": "是什么？",
+      "pinyin": "Shì shénme?",
+      "vi": "Là gì vậy?"
+    },
+    {
+      "start": 686.13,
+      "end": 689.32,
+      "en": "They're both about taking back control of our lives.",
+      "zh": "都是为了拿回我们生活的主动权。",
+      "pinyin": "Dōu shì wèile náhuí wǒmen shēnghuó de zhǔdòngquán.",
+      "vi": "Đều là để lấy lại quyền chủ động trong cuộc sống của chúng ta."
+    },
+    {
+      "start": 689.33,
+      "end": 691.09,
+      "en": "When consumerism tells us",
+      "zh": "当消费主义告诉我们",
+      "pinyin": "Dāng xiāofèizhǔyì gàosu wǒmen",
+      "vi": "Khi chủ nghĩa tiêu dùng nói với chúng ta"
+    },
+    {
+      "start": 691.1,
+      "end": 693.06,
+      "en": "“you should own this,”",
+      "zh": "“你应该拥有这个”的时候，",
+      "pinyin": "“nǐ yīnggāi yōngyǒu zhège” de shíhou,",
+      "vi": "“bạn nên sở hữu cái này” thì,"
+    },
+    {
+      "start": 693.07,
+      "end": 696.26,
+      "en": "we ask ourselves, “Do I really need this?”",
+      "zh": "我们通过问自己“我真的需要吗？”",
+      "pinyin": "wǒmen tōngguò wèn zìjǐ “wǒ zhēn de xūyào ma?”",
+      "vi": "chúng ta bằng cách tự hỏi “mình có thật sự cần không?”"
+    },
+    {
+      "start": 696.27,
+      "end": 698.26,
+      "en": "to take back the right to choose.",
+      "zh": "来拿回选择权。",
+      "pinyin": "lái náhuí xuǎnzéquán.",
+      "vi": "để lấy lại quyền lựa chọn."
+    },
+    {
+      "start": 698.27,
+      "end": 699.33,
+      "en": "When the information age",
+      "zh": "当信息时代",
+      "pinyin": "Dāng xìnxī shídài",
+      "vi": "Khi thời đại thông tin"
+    },
+    {
+      "start": 699.33,
+      "end": 701.92,
+      "en": "uses all kinds of information to attract us,",
+      "zh": "用各种信息吸引我们的时候，",
+      "pinyin": "yòng gèzhǒng xìnxī xīyǐn wǒmen de shíhou,",
+      "vi": "dùng đủ loại thông tin để thu hút chúng ta,"
+    },
+    {
+      "start": 701.93,
+      "end": 704.99,
+      "en": "we, through “I choose not to look now”",
+      "zh": "我们通过“我选择现在不看”",
+      "pinyin": "wǒmen tōngguò “wǒ xuǎnzé xiànzài bú kàn”",
+      "vi": "chúng ta bằng cách “tôi chọn không xem bây giờ”"
+    },
+    {
+      "start": 705,
+      "end": 707.36,
+      "en": "take back control of our attention.",
+      "zh": "来拿回注意力的控制权。",
+      "pinyin": "lái náhuí zhùyìlì de kòngzhìquán.",
+      "vi": "để lấy lại quyền kiểm soát sự chú ý."
+    },
+    {
+      "start": 707.37,
+      "end": 709.09,
+      "en": "Well said.",
+      "zh": "说得太好了。",
+      "pinyin": "Shuō de tài hǎo le.",
+      "vi": "Nói quá đúng."
+    },
+    {
+      "start": 709.1,
+      "end": 712.46,
+      "en": "We are not slaves controlled by things and information,",
+      "zh": "我们不是被物品和信息控制的奴隶，",
+      "pinyin": "Wǒmen bú shì bèi wùpǐn hé xìnxī kòngzhì de núlì,",
+      "vi": "Chúng ta không phải là nô lệ bị đồ vật và thông tin điều khiển,"
+    },
+    {
+      "start": 712.47,
+      "end": 714.93,
+      "en": "we are the masters of our own lives.",
+      "zh": "我们是自己生活的主人。",
+      "pinyin": "wǒmen shì zìjǐ shēnghuó de zhǔrén.",
+      "vi": "chúng ta là chủ nhân cuộc sống của chính mình."
+    },
+    {
+      "start": 714.93,
+      "end": 717.05,
+      "en": "By reducing external distractions,",
+      "zh": "通过减少外部的干扰，",
+      "pinyin": "Tōngguò jiǎnshǎo wàibù de gānrǎo,",
+      "vi": "Bằng cách giảm bớt những xao nhãng bên ngoài,"
+    },
+    {
+      "start": 717.07,
+      "end": 720.96,
+      "en": "we can hear our inner voice more clearly.",
+      "zh": "我们才能更清楚地听到自己内心的声音。",
+      "pinyin": "wǒmen cái néng gèng qīngchu de tīngdào zìjǐ nèixīn de shēngyīn.",
+      "vi": "chúng ta mới có thể nghe rõ hơn tiếng nói bên trong của chính mình."
+    },
+    {
+      "start": 720.97,
+      "end": 723.93,
+      "en": "Yes. When I no longer spend so much time",
+      "zh": "是的。当我不再花那么多时间",
+      "pinyin": "Shì de. Dāng wǒ bú zài huā nàme duō shíjiān",
+      "vi": "Đúng vậy. Khi tôi không còn dành nhiều thời gian như vậy"
+    },
+    {
+      "start": 723.93,
+      "end": 725.45,
+      "en": "browsing shopping websites,",
+      "zh": "去逛购物网站，",
+      "pinyin": "qù guàng gòuwù wǎngzhàn,",
+      "vi": "để lướt các trang mua sắm,"
+    },
+    {
+      "start": 725.47,
+      "end": 727.89,
+      "en": "and no longer get lost in social media,",
+      "zh": "不再沉迷于社交媒体之后，",
+      "pinyin": "bú zài chénmí yú shèjiāo méitǐ zhīhòu,",
+      "vi": "không còn chìm đắm trong mạng xã hội nữa,"
+    },
+    {
+      "start": 727.9,
+      "end": 731.09,
+      "en": "I find I have more time and energy.",
+      "zh": "我发现我有了更多的时间和精力。",
+      "pinyin": "wǒ fāxiàn wǒ yǒule gèng duō de shíjiān hé jīnglì.",
+      "vi": "tôi nhận ra mình có nhiều thời gian và năng lượng hơn."
+    },
+    {
+      "start": 731.1,
+      "end": 733.09,
+      "en": "What did you do with that time?",
+      "zh": "你用这些时间做了什么？",
+      "pinyin": "Nǐ yòng zhèxiē shíjiān zuòle shénme?",
+      "vi": "Bạn đã dùng khoảng thời gian đó để làm gì?"
+    },
+    {
+      "start": 733.1,
+      "end": 734.79,
+      "en": "I started drawing again,",
+      "zh": "我开始重新画画，",
+      "pinyin": "Wǒ kāishǐ chóngxīn huàhuà,",
+      "vi": "Tôi bắt đầu vẽ lại,"
+    },
+    {
+      "start": 734.8,
+      "end": 737.19,
+      "en": "this was my childhood hobby. I",
+      "zh": "这是我小时候的爱好。我",
+      "pinyin": "zhè shì wǒ xiǎoshíhou de àihào. Wǒ",
+      "vi": "đây là sở thích hồi nhỏ của tôi. Tôi"
+    },
+    {
+      "start": 737.2,
+      "end": 741.16,
+      "en": "also started learning to cook and researching healthy recipes.",
+      "zh": "还开始学习做饭，研究健康的食谱。",
+      "pinyin": "hái kāishǐ xuéxí zuòfàn, yánjiū jiànkāng de shípǔ.",
+      "vi": "còn bắt đầu học nấu ăn, nghiên cứu các công thức nấu ăn lành mạnh."
+    },
+    {
+      "start": 741.17,
+      "end": 742.46,
+      "en": "I found that cre-",
+      "zh": "我发现，创",
+      "pinyin": "Wǒ fāxiàn, chuàng",
+      "vi": "Tôi nhận ra, niềm"
+    },
+    {
+      "start": 742.47,
+      "end": 745.53,
+      "en": "ating brings deeper joy than consuming,",
+      "zh": "造的快乐，比消费的快乐，更深刻，",
+      "pinyin": "zào de kuàilè, bǐ xiāofèi de kuàilè, gèng shēnkè,",
+      "vi": "vui sáng tạo, so với niềm vui tiêu dùng, còn sâu sắc hơn,"
+    },
+    {
+      "start": 745.53,
+      "end": 748.12,
+      "en": "More lasting. I understand very well.",
+      "zh": "更持久。我非常理解。",
+      "pinyin": "Gèng chíjiǔ. Wǒ fēicháng lǐjiě.",
+      "vi": "Bền bỉ hơn. Tôi rất hiểu."
+    },
+    {
+      "start": 748.13,
+      "end": 749.29,
+      "en": "For me,",
+      "zh": "对我来说，",
+      "pinyin": "Duì wǒ lái shuō,",
+      "vi": "Đối với tôi,"
+    },
+    {
+      "start": 749.3,
+      "end": 753.59,
+      "en": "I spend more time with family and friends.",
+      "zh": "我把更多的时间花在了和家人朋友的相处上。",
+      "pinyin": "Wǒ bǎ gèng duō de shíjiān huā zài le hé jiārén péngyou de xiāngchǔ shàng.",
+      "vi": "Tôi dành nhiều thời gian hơn cho việc ở bên gia đình và bạn bè."
+    },
+    {
+      "start": 753.6,
+      "end": 757.96,
+      "en": "In the past when we ate together, everyone might be looking at their phones.",
+      "zh": "以前我们一起吃饭，可能大家都在看手机。",
+      "pinyin": "Yǐqián wǒmen yìqǐ chīfàn, kěnéng dàjiā dōu zài kàn shǒujī.",
+      "vi": "Trước đây khi chúng tôi ăn cơm cùng nhau, có thể ai cũng đang xem điện thoại."
+    },
+    {
+      "start": 757.97,
+      "end": 759.69,
+      "en": "Now we set a rule,",
+      "zh": "现在我们会约定，",
+      "pinyin": "Xiànzài wǒmen huì yuēdìng,",
+      "vi": "Bây giờ chúng tôi sẽ thống nhất,"
+    },
+    {
+      "start": 759.7,
+      "end": 763.79,
+      "en": "When eating, we put our phones aside and focus on chatting.",
+      "zh": "吃饭的时候把手机放在一边，专心地聊天。",
+      "pinyin": "Chīfàn de shíhou bǎ shǒujī fàng zài yìbiān, zhuānxīn de liáotiān.",
+      "vi": "Khi ăn cơm thì để điện thoại sang một bên, tập trung trò chuyện."
+    },
+    {
+      "start": 763.8,
+      "end": 767.79,
+      "en": "I find that our relationship has become closer.",
+      "zh": "我发现，我们之间的关系变得更亲近了。",
+      "pinyin": "Wǒ fāxiàn, wǒmen zhījiān de guānxi biàn de gèng qīnjìn le.",
+      "vi": "Tôi nhận ra mối quan hệ giữa chúng tôi trở nên gần gũi hơn."
+    },
+    {
+      "start": 767.8,
+      "end": 770.06,
+      "en": "That's really great. So,",
+      "zh": "这真好。所以，",
+      "pinyin": "Zhè zhēn hǎo. Suǒyǐ,",
+      "vi": "Điều này thật tốt. Vì vậy,"
+    },
+    {
+      "start": 770.07,
+      "end": 773.79,
+      "en": "“Don't buy” and “don't do” are not meant to make us give up on life,",
+      "zh": "“不买”和“不做”不是让我们放弃生活，",
+      "pinyin": "“Bù mǎi” hé “bú zuò” bú shì ràng wǒmen fàngqì shēnghuó,",
+      "vi": "“Không mua” và “không làm” không phải là để chúng ta từ bỏ cuộc sống,"
+    },
+    {
+      "start": 773.8,
+      "end": 778.26,
+      "en": "but to let us live a more authentic, higher-quality life.",
+      "zh": "而是让我们去过一种更真实、更有质量的生活。",
+      "pinyin": "Ér shì ràng wǒmen qù guò yì zhǒng gèng zhēnshí, gèng yǒu zhìliàng de shēnghuó.",
+      "vi": "mà là để chúng ta sống một cuộc sống chân thật hơn, có chất lượng hơn."
+    },
+    {
+      "start": 778.27,
+      "end": 781.93,
+      "en": "Just like tidying a room: throw away useless things,",
+      "zh": "就像整理房间一样，扔掉没用的东西，",
+      "pinyin": "Jiù xiàng zhěnglǐ fángjiān yíyàng, rēngdiào méiyòng de dōngxi,",
+      "vi": "Giống như dọn dẹp phòng ốc, vứt bỏ những thứ không dùng đến,"
+    },
+    {
+      "start": 781.93,
+      "end": 784.49,
+      "en": "only then can important things have space.",
+      "zh": "才能让重要的东西有空间。",
+      "pinyin": "Cái néng ràng zhòngyào de dōngxi yǒu kōngjiān.",
+      "vi": "thì mới có thể dành không gian cho những thứ quan trọng."
+    },
+    {
+      "start": 784.5,
+      "end": 787.06,
+      "en": "Yes. Life is like that too.",
+      "zh": "是的。生活也是这样。",
+      "pinyin": "Shì de. Shēnghuó yě shì zhèyàng.",
+      "vi": "Đúng vậy. Cuộc sống cũng như vậy."
+    },
+    {
+      "start": 787.07,
+      "end": 789.69,
+      "en": "By reducing unnecessary possessions and information,",
+      "zh": "减少不必要的物品和信息，",
+      "pinyin": "Jiǎnshǎo bú bìyào de wùpǐn hé xìnxī,",
+      "vi": "Giảm bớt những đồ vật và thông tin không cần thiết,"
+    },
+    {
+      "start": 789.7,
+      "end": 791.86,
+      "en": "only then can we devote our time and energy,",
+      "zh": "我们才能把时间和精力，",
+      "pinyin": "Wǒmen cái néng bǎ shíjiān hé jīnglì,",
+      "vi": "chúng ta mới có thể dành thời gian và sức lực,"
+    },
+    {
+      "start": 791.87,
+      "end": 796.09,
+      "en": "to what truly matters, such as our health,",
+      "zh": "留给真正重要的事情，比如我们的健康、",
+      "pinyin": "Liú gěi zhēnzhèng zhòngyào de shìqing, bǐrú wǒmen de jiànkāng,",
+      "vi": "cho những điều thật sự quan trọng, ví dụ như sức khỏe của chúng ta,"
+    },
+    {
+      "start": 796.1,
+      "end": 798.76,
+      "en": "our hobbies, and the people we love.",
+      "zh": "我们的爱好、我们爱的人。",
+      "pinyin": "Wǒmen de àihào, wǒmen ài de rén.",
+      "vi": "những sở thích của chúng ta, những người chúng ta yêu thương."
+    },
+    {
+      "start": 798.77,
+      "end": 801.36,
+      "en": "I think this is true freedom.",
+      "zh": "我觉得这是一种真正的自由。",
+      "pinyin": "Wǒ juéde zhè shì yì zhǒng zhēnzhèng de zìyóu.",
+      "vi": "Tôi nghĩ đây là một thứ tự do thực sự."
+    },
+    {
+      "start": 801.37,
+      "end": 803.99,
+      "en": "Not the freedom to buy whatever you want,",
+      "zh": "不是想买什么就买什么的自由，",
+      "pinyin": "Bú shì xiǎng mǎi shénme jiù mǎi shénme de zìyóu,",
+      "vi": "Không phải là tự do muốn mua gì thì mua,"
+    },
+    {
+      "start": 804,
+      "end": 807.26,
+      "en": "but the freedom not to be controlled by desires and information.",
+      "zh": "而是不被欲望和信息控制的自由。",
+      "pinyin": "Ér shì bú bèi yùwàng hé xìnxī kòngzhì de zìyóu.",
+      "vi": "mà là tự do không bị dục vọng và thông tin kiểm soát."
+    },
+    {
+      "start": 807.27,
+      "end": 810.79,
+      "en": "I agree. This is a higher level of freedom.",
+      "zh": "我同意。这是一种更高层次的自由。",
+      "pinyin": "Wǒ tóngyì. Zhè shì yì zhǒng gèng gāo céngcì de zìyóu.",
+      "vi": "Tôi đồng ý. Đây là một thứ tự do ở tầng cao hơn."
+    },
+    {
+      "start": 810.8,
+      "end": 814.79,
+      "en": "It requires us to have a clear mind and a strong inner self.",
+      "zh": "它需要我们有清醒的头脑和强大的内心。",
+      "pinyin": "Tā xūyào wǒmen yǒu qīngxǐng de tóunǎo hé qiángdà de nèixīn.",
+      "vi": "Nó đòi hỏi chúng ta có một cái đầu tỉnh táo và nội tâm mạnh mẽ."
+    },
+    {
+      "start": 814.8,
+      "end": 819.69,
+      "en": "This is indeed a very important survival skill in modern society.",
+      "zh": "这确实是现代社会里，一种非常重要的生存技能。",
+      "pinyin": "Zhè quèshí shì xiàndài shèhuì lǐ, yì zhǒng fēicháng zhòngyào de shēngcún jìnéng.",
+      "vi": "Đây quả thực là một kỹ năng sinh tồn rất quan trọng trong xã hội hiện đại."
+    },
+    {
+      "start": 819.7,
+      "end": 822.86,
+      "en": "Okay, today's conversation is very interesting.",
+      "zh": "好的，今天的对话非常有意思。",
+      "pinyin": "Hǎo de, jīntiān de duìhuà fēicháng yǒu yìsi.",
+      "vi": "Được rồi, cuộc trò chuyện hôm nay rất thú vị."
+    },
+    {
+      "start": 822.87,
+      "end": 825.56,
+      "en": "We talked about many important concepts.",
+      "zh": "我们聊到了很多重要的概念。",
+      "pinyin": "Wǒmen liáo dào le hěn duō zhòngyào de gàiniàn.",
+      "vi": "Chúng ta đã nói đến nhiều khái niệm quan trọng."
+    },
+    {
+      "start": 825.57,
+      "end": 827.59,
+      "en": "Now, let's review",
+      "zh": "现在，我们来复习一下",
+      "pinyin": "Xiànzài, wǒmen lái fùxí yíxià",
+      "vi": "Bây giờ, chúng ta hãy ôn lại một chút"
+    },
+    {
+      "start": 827.6,
+      "end": 830.49,
+      "en": "a few key vocabulary words that appeared today.",
+      "zh": "今天出现的几个重点词汇吧。",
+      "pinyin": "Jīntiān chūxiàn de jǐ ge zhòngdiǎn cíhuì ba.",
+      "vi": "một vài từ vựng trọng điểm xuất hiện hôm nay nhé."
+    },
+    {
+      "start": 830.5,
+      "end": 832.56,
+      "en": "Wang Yu, let me ask you.",
+      "zh": "王雨，我来问你。",
+      "pinyin": "Wáng Yǔ, wǒ lái wèn nǐ.",
+      "vi": "Vương Vũ, để tôi hỏi bạn."
+    },
+    {
+      "start": 832.57,
+      "end": 835.46,
+      "en": "The first word is “impulse buying.”",
+      "zh": "第一个词是“冲动消费”。",
+      "pinyin": "Dì yī ge cí shì “chōngdòng xiāofèi”.",
+      "vi": "Từ đầu tiên là “tiêu dùng bốc đồng”."
+    },
+    {
+      "start": 835.47,
+      "end": 837.06,
+      "en": "What does this word mean?",
+      "zh": "这个词是什么意思？",
+      "pinyin": "Zhè ge cí shì shénme yìsi?",
+      "vi": "Từ này có nghĩa là gì?"
+    },
+    {
+      "start": 837.07,
+      "end": 838.96,
+      "en": "“Impulse buying” refers to,",
+      "zh": "“冲动消费”就是指，",
+      "pinyin": "“Chōngdòng xiāofèi” jiù shì zhǐ,",
+      "vi": "“Tiêu dùng bốc đồng” có nghĩa là,"
+    },
+    {
+      "start": 838.97,
+      "end": 841.96,
+      "en": "not thinking carefully before buying something,",
+      "zh": "在买东西之前没有仔细地想，",
+      "pinyin": "Zài mǎi dōngxi zhīqián méiyǒu zǐxì de xiǎng,",
+      "vi": "trước khi mua đồ không suy nghĩ kỹ,"
+    },
+    {
+      "start": 841.97,
+      "end": 843.89,
+      "en": "just because of a momentary feeling,",
+      "zh": "只是因为一时的感觉，",
+      "pinyin": "Zhǐ shì yīnwèi yìshí de gǎnjué,",
+      "vi": "chỉ vì cảm xúc nhất thời,"
+    },
+    {
+      "start": 843.9,
+      "end": 847.49,
+      "en": "for example, seeing that something is very cheap or looks very good,",
+      "zh": "比如看到东西很便宜，或者很好看，",
+      "pinyin": "Bǐrú kàndào dōngxi hěn piányi, huòzhě hěn hǎokàn,",
+      "vi": "ví dụ thấy món đồ rất rẻ, hoặc rất đẹp,"
+    },
+    {
+      "start": 847.5,
+      "end": 849.52,
+      "en": "and then quickly decide to buy it.",
+      "zh": "就很快地决定买了。",
+      "pinyin": "Jiù hěn kuài de juédìng mǎi le.",
+      "vi": "thì nhanh chóng quyết định mua."
+    },
+    {
+      "start": 849.53,
+      "end": 852.25,
+      "en": "After buying it and taking it home, you often regret it.",
+      "zh": "买回家以后，常常会后悔。",
+      "pinyin": "Mǎi huí jiā yǐhòu, chángcháng huì hòuhuǐ.",
+      "vi": "Sau khi mua về nhà, thường sẽ hối hận."
+    },
+    {
+      "start": 852.27,
+      "end": 853.73,
+      "en": "Explained very clearly.",
+      "zh": "解释得很清楚。",
+      "pinyin": "Jiěshì de hěn qīngchu.",
+      "vi": "Giải thích rất rõ ràng."
+    },
+    {
+      "start": 853.73,
+      "end": 857.65,
+      "en": "It is purchasing behavior without rational thought.",
+      "zh": "就是没有经过理性思考的购买行为。",
+      "pinyin": "Jiù shì méiyǒu jīngguò lǐxìng sīkǎo de gòumǎi xíngwéi.",
+      "vi": "Đó là hành vi mua sắm không qua suy nghĩ lý tính."
+    },
+    {
+      "start": 857.67,
+      "end": 860.79,
+      "en": "And the second word, “information overload”?",
+      "zh": "那第二个词，“信息过载”呢？",
+      "pinyin": "Nà dì èr ge cí, “xìnxī guòzài” ne?",
+      "vi": "Vậy còn từ thứ hai, “quá tải thông tin” thì sao?"
+    },
+    {
+      "start": 860.8,
+      "end": 862.66,
+      "en": "“Information overload” means",
+      "zh": "“信息过载”是指",
+      "pinyin": "“Xìnxī guòzài” shì zhǐ",
+      "vi": "“Quá tải thông tin” là chỉ"
+    },
+    {
+      "start": 862.67,
+      "end": 866.06,
+      "en": "we suddenly receive far too much information,",
+      "zh": "我们一下子接收了太多太多的信息，",
+      "pinyin": "Wǒmen yíxiàzi jiēshōu le tài duō tài duō de xìnxī,",
+      "vi": "chúng ta đột nhiên tiếp nhận quá nhiều quá nhiều thông tin,"
+    },
+    {
+      "start": 866.07,
+      "end": 869.09,
+      "en": "so much that our brains cannot process it.",
+      "zh": "多到我们的大脑没有办法处理。",
+      "pinyin": "Duō dào wǒmen de dànǎo méiyǒu bànfǎ chǔlǐ.",
+      "vi": "nhiều đến mức não của chúng ta không có cách nào xử lý."
+    },
+    {
+      "start": 869.1,
+      "end": 871.36,
+      "en": "At this point, we feel very tired,",
+      "zh": "这个时候，我们就会觉得很累，",
+      "pinyin": "Zhè ge shíhou, wǒmen jiù huì juéde hěn lèi,",
+      "vi": "Lúc này, chúng ta sẽ cảm thấy rất mệt,"
+    },
+    {
+      "start": 871.37,
+      "end": 874.46,
+      "en": "very anxious, and it's hard to concentrate.",
+      "zh": "很焦虑，注意力也很难集中。",
+      "pinyin": "Hěn jiāolǜ, zhùyìlì yě hěn nán jízhōng.",
+      "vi": "rất lo lắng, và rất khó tập trung chú ý."
+    },
+    {
+      "start": 874.47,
+      "end": 878.13,
+      "en": "Exactly. Just like a computer with too many programs open,",
+      "zh": "没错。就像电脑打开了太多的程序，",
+      "pinyin": "Méi cuò. Jiù xiàng diànnǎo dǎkāi le tài duō de chéngxù,",
+      "vi": "Đúng vậy. Giống như máy tính mở quá nhiều chương trình,"
+    },
+    {
+      "start": 878.13,
+      "end": 880.25,
+      "en": "it will slow down.",
+      "zh": "速度会变慢一样。",
+      "pinyin": "Sùdù huì biàn màn yíyàng.",
+      "vi": "tốc độ sẽ trở nên chậm đi."
+    },
+    {
+      "start": 880.27,
+      "end": 883.96,
+      "en": "The third word is a very interesting cultural term,",
+      "zh": "第三个词，是一个很有趣的文化词汇，",
+      "pinyin": "Dì sān ge cí, shì yí ge hěn yǒuqù de wénhuà cíhuì,",
+      "vi": "Từ thứ ba là một từ vựng văn hóa rất thú vị,"
+    },
+    {
+      "start": 883.97,
+      "end": 885.79,
+      "en": "“information cocoon.”",
+      "zh": "“信息茧房”。",
+      "pinyin": "“Xìnxī jiǎnfáng”.",
+      "vi": "“kén thông tin”."
+    },
+    {
+      "start": 885.8,
+      "end": 888.19,
+      "en": "“Information cocoon” is a metaphor.",
+      "zh": "“信息茧房”是一个比喻。",
+      "pinyin": "“Xìnxī jiǎnfáng” shì yí ge bǐyù.",
+      "vi": "“Kén thông tin” là một phép ẩn dụ."
+    },
+    {
+      "start": 888.2,
+      "end": 890.92,
+      "en": "It means that if we only look at our own",
+      "zh": "它说的是，如果我们只看自己",
+      "pinyin": "Tā shuō de shì, rúguǒ wǒmen zhǐ kàn zìjǐ",
+      "vi": "Nó nói rằng, nếu chúng ta chỉ xem những gì của bản thân"
+    },
+    {
+      "start": 890.93,
+      "end": 893.09,
+      "en": "information we like and agree with,",
+      "zh": "喜欢和同意的信息，",
+      "pinyin": "xǐhuan hé tóngyì de xìnxī,",
+      "vi": "những thông tin mình thích và đồng ý,"
+    },
+    {
+      "start": 893.1,
+      "end": 895.79,
+      "en": "over time, it’s like we live in a",
+      "zh": "时间长了，我们就像住在了一个",
+      "pinyin": "shíjiān cháng le, wǒmen jiù xiàng zhù zài le yí gè",
+      "vi": "thời gian lâu dần, chúng ta giống như đang sống trong một"
+    },
+    {
+      "start": 895.8,
+      "end": 897.99,
+      "en": "“cocoon” made of information,",
+      "zh": "用信息做的“茧”里面，",
+      "pinyin": "yòng xìnxī zuò de “jiǎn” lǐmiàn,",
+      "vi": "chiếc “kén” làm từ thông tin,"
+    },
+    {
+      "start": 898,
+      "end": 902.52,
+      "en": "unable to hear or see the different world and different ideas outside.",
+      "zh": "听不到也看不到外面不同的世界和不同的想法。",
+      "pinyin": "tīng bú dào yě kàn bú dào wàimiàn bùtóng de shìjiè hé bùtóng de xiǎngfǎ.",
+      "vi": "không nghe thấy và cũng không nhìn thấy thế giới khác và những ý tưởng khác ở bên ngoài."
+    },
+    {
+      "start": 902.53,
+      "end": 905.45,
+      "en": "This will make our thinking become narrower and narrower.",
+      "zh": "这会让我们的思想变得越来越窄。",
+      "pinyin": "zhè huì ràng wǒmen de sīxiǎng biàn de yuè lái yuè zhǎi.",
+      "vi": "Điều này sẽ khiến suy nghĩ của chúng ta ngày càng trở nên hẹp hòi."
+    },
+    {
+      "start": 905.47,
+      "end": 908.09,
+      "en": "This explanation is very vivid. Okay,",
+      "zh": "这个解释非常形象。好，",
+      "pinyin": "zhège jiěshì fēicháng xíngxiàng. Hǎo,",
+      "vi": "Cách giải thích này rất sinh động. Được,"
+    },
+    {
+      "start": 908.1,
+      "end": 910.86,
+      "en": "The last term, “duàn shě lí.”",
+      "zh": "最后一个词，“断舍离”。",
+      "pinyin": "zuìhòu yí gè cí, “duàn shě lí”.",
+      "vi": "Từ cuối cùng, “đoạn xả ly”."
+    },
+    {
+      "start": 910.87,
+      "end": 914.89,
+      "en": "“Duàn shě lí” is an attitude and method for living.",
+      "zh": "“断舍离”是一种生活的态度和方法。",
+      "pinyin": "“duàn shě lí” shì yì zhǒng shēnghuó de tàidù hé fāngfǎ.",
+      "vi": "“Đoạn xả ly” là một thái độ và phương pháp sống."
+    },
+    {
+      "start": 914.9,
+      "end": 917.86,
+      "en": "“Duàn” means not buying things you don’t need;",
+      "zh": "“断”就是不买不需要的东西；",
+      "pinyin": "“duàn” jiù shì bù mǎi bù xūyào de dōngxi;",
+      "vi": "“Đoạn” nghĩa là không mua những thứ không cần thiết;"
+    },
+    {
+      "start": 917.87,
+      "end": 921.49,
+      "en": "“Shě” means throwing away useless things at home;",
+      "zh": "“舍”就是扔掉家里没用的东西；",
+      "pinyin": "“shě” jiù shì rēng diào jiāli méiyòng de dōngxi;",
+      "vi": "“Xả” nghĩa là vứt bỏ những thứ vô dụng trong nhà;"
+    },
+    {
+      "start": 921.5,
+      "end": 924.76,
+      "en": "“Lí” means letting us no longer care so much about things,",
+      "zh": "“离”就是让我们不再那么在乎东西，",
+      "pinyin": "“lí” jiù shì ràng wǒmen bú zài nàme zàihu dōngxi,",
+      "vi": "“Ly” nghĩa là để chúng ta không còn quan tâm đến đồ vật nhiều như thế nữa,"
+    },
+    {
+      "start": 924.77,
+      "end": 927.66,
+      "en": "and no longer being controlled by desire for material things.",
+      "zh": "不再被对物品的欲望控制。",
+      "pinyin": "bú zài bèi duì wùpǐn de yùwàng kòngzhì.",
+      "vi": "không còn bị ham muốn vật chất kiểm soát."
+    },
+    {
+      "start": 927.67,
+      "end": 931.93,
+      "en": "Its goal is to make our lives and minds simpler,",
+      "zh": "它的目标是让我们的生活和思想都变得更简单、",
+      "pinyin": "tā de mùbiāo shì ràng wǒmen de shēnghuó hé sīxiǎng dōu biàn de gèng jiǎndān,",
+      "vi": "Mục tiêu của nó là làm cho cuộc sống và suy nghĩ của chúng ta trở nên đơn giản hơn,"
+    },
+    {
+      "start": 931.93,
+      "end": 934.29,
+      "en": "and more relaxed. Very good.",
+      "zh": "更轻松。非常好。",
+      "pinyin": "gèng qīngsōng. Fēicháng hǎo.",
+      "vi": "nhẹ nhàng hơn. Rất tốt."
+    },
+    {
+      "start": 934.3,
+      "end": 935.96,
+      "en": "Thank you, Wang Yu, for the explanation.",
+      "zh": "谢谢王雨的解释。",
+      "pinyin": "xièxie Wáng Yǔ de jiěshì.",
+      "vi": "Cảm ơn phần giải thích của Wang Yu."
+    },
+    {
+      "start": 935.97,
+      "end": 939.33,
+      "en": "I hope these vocabulary words are helpful for everyone’s learning.",
+      "zh": "希望这些词汇对大家的学习有帮助。",
+      "pinyin": "xīwàng zhèxiē cíhuì duì dàjiā de xuéxí yǒu bāngzhù.",
+      "vi": "Mong rằng những từ vựng này sẽ có ích cho việc học của mọi người."
+    },
+    {
+      "start": 939.33,
+      "end": 939.89,
+      "en": "Alright,",
+      "zh": "好了，",
+      "pinyin": "hǎo le,",
+      "vi": "Được rồi,"
+    },
+    {
+      "start": 939.9,
+      "end": 943.29,
+      "en": "our discussion today about modern survival skills",
+      "zh": "我们今天关于现代生存技能的讨论",
+      "pinyin": "wǒmen jīntiān guānyú xiàndài shēngcún jìnéng de tǎolùn",
+      "vi": "buổi thảo luận của chúng ta hôm nay về kỹ năng sinh tồn hiện đại"
+    },
+    {
+      "start": 943.3,
+      "end": 945.39,
+      "en": "is also almost coming to an end.",
+      "zh": "也差不多要结束了。",
+      "pinyin": "yě chàbuduō yào jiéshù le.",
+      "vi": "cũng sắp kết thúc rồi."
+    },
+    {
+      "start": 945.4,
+      "end": 949.39,
+      "en": "We talked about the importance of learning to “not buy” and “not do.”",
+      "zh": "我们聊了学会“不买”和“不做”的重要性。",
+      "pinyin": "wǒmen liáo le xuéhuì “bù mǎi” hé “bù zuò” de zhòngyàoxìng.",
+      "vi": "Chúng ta đã nói về tầm quan trọng của việc học cách “không mua” và “không làm”."
+    },
+    {
+      "start": 949.4,
+      "end": 950.49,
+      "en": "Simply put,",
+      "zh": "简单来说，",
+      "pinyin": "jiǎndān lái shuō,",
+      "vi": "Nói đơn giản là,"
+    },
+    {
+      "start": 950.5,
+      "end": 953.69,
+      "en": "it means by reducing interference from material things and information,",
+      "zh": "就是通过减少物质和信息的干扰，",
+      "pinyin": "jiù shì tōngguò jiǎnshǎo wùzhì hé xìnxī de gānrǎo,",
+      "vi": "là thông qua việc giảm bớt sự nhiễu loạn từ vật chất và thông tin,"
+    },
+    {
+      "start": 953.7,
+      "end": 958.56,
+      "en": "finding what you truly need and taking back control of your life.",
+      "zh": "找到自己真正需要的东西，拿回生活的主动权。",
+      "pinyin": "zhǎodào zìjǐ zhēnzhèng xūyào de dōngxi, ná huí shēnghuó de zhǔdòngquán.",
+      "vi": "tìm ra những thứ mình thật sự cần, giành lại quyền chủ động trong cuộc sống."
+    },
+    {
+      "start": 958.57,
+      "end": 963.13,
+      "en": "Yes, I hope today’s discussion can give everyone something to think about.",
+      "zh": "是的，希望今天的讨论能给大家带来一些思考。",
+      "pinyin": "shì de, xīwàng jīntiān de tǎolùn néng gěi dàjiā dàilái yìxiē sīkǎo.",
+      "vi": "Đúng vậy, mong rằng buổi thảo luận hôm nay có thể mang đến cho mọi người một chút suy ngẫm."
+    },
+    {
+      "start": 963.13,
+      "end": 966.35,
+      "en": "If you want to see the full text of our conversation today,",
+      "zh": "如果你想看我们今天聊天的完整文本，",
+      "pinyin": "rúguǒ nǐ xiǎng kàn wǒmen jīntiān liáotiān de wánzhěng wénběn,",
+      "vi": "Nếu bạn muốn xem toàn văn cuộc trò chuyện của chúng ta hôm nay,"
+    },
+    {
+      "start": 966.37,
+      "end": 968.59,
+      "en": "you can go to our blog to check it out,",
+      "zh": "可以去我们的博客查看，",
+      "pinyin": "kěyǐ qù wǒmen de bókè chákàn,",
+      "vi": "có thể đến blog của chúng tôi để xem,"
+    },
+    {
+      "start": 968.6,
+      "end": 971.39,
+      "en": "The blog link is right in the episode description.",
+      "zh": "博客的链接就在节目的描述里。",
+      "pinyin": "bókè de liànjiē jiù zài jiémù de miáoshù lǐ.",
+      "vi": "Liên kết blog nằm ngay trong phần mô tả của chương trình."
+    },
+    {
+      "start": 971.4,
+      "end": 975.32,
+      "en": "If you find this episode helpful, please like,",
+      "zh": "如果你觉得这一集对你有帮助，请帮我们点赞、",
+      "pinyin": "rúguǒ nǐ juéde zhè yì jí duì nǐ yǒu bāngzhù, qǐng bāng wǒmen diǎn zàn,",
+      "vi": "Nếu bạn thấy tập này có ích cho mình, hãy nhấn thích giúp chúng tôi,"
+    },
+    {
+      "start": 975.33,
+      "end": 976.85,
+      "en": "share, and subscribe.",
+      "zh": "分享和订阅。",
+      "pinyin": "fēnxiǎng hé dìngyuè.",
+      "vi": "chia sẻ và đăng ký theo dõi."
+    },
+    {
+      "start": 976.87,
+      "end": 979.13,
+      "en": "This will help us a lot,",
+      "zh": "这会对我们有很大的帮助，",
+      "pinyin": "zhè huì duì wǒmen yǒu hěn dà de bāngzhù,",
+      "vi": "Điều này sẽ giúp chúng tôi rất nhiều,"
+    },
+    {
+      "start": 979.13,
+      "end": 981.49,
+      "en": "and allow us to make more good content.",
+      "zh": "让我们能做出更多好的内容。",
+      "pinyin": "ràng wǒmen néng zuò chū gèng duō hǎo de nèiróng.",
+      "vi": "để chúng tôi có thể tạo ra nhiều nội dung hay hơn."
+    },
+    {
+      "start": 981.5,
+      "end": 983.96,
+      "en": "We’d also really like to hear your thoughts.",
+      "zh": "我们也很想听听你的想法。",
+      "pinyin": "wǒmen yě hěn xiǎng tīngting nǐ de xiǎngfǎ.",
+      "vi": "Chúng tôi cũng rất muốn nghe ý kiến của bạn."
+    },
+    {
+      "start": 983.97,
+      "end": 986.93,
+      "en": "In your life, do you have any “not buy”",
+      "zh": "在你的生活里，你有没有什么“不买”",
+      "pinyin": "zài nǐ de shēnghuó lǐ, nǐ yǒu méiyǒu shénme “bù mǎi”",
+      "vi": "Trong cuộc sống của bạn, bạn có nguyên tắc “không mua”"
+    },
+    {
+      "start": 986.93,
+      "end": 988.79,
+      "en": "or “not do” principles?",
+      "zh": "或者“不做”的原则呢？",
+      "pinyin": "huòzhě “bù zuò” de yuánzé ne?",
+      "vi": "hoặc “không làm” nào không?"
+    },
+    {
+      "start": 988.8,
+      "end": 992.26,
+      "en": "Feel free to tell us your story in the comments below.",
+      "zh": "欢迎在下面的评论里告诉我们你的故事。",
+      "pinyin": "huānyíng zài xiàmiàn de pínglùn lǐ gàosu wǒmen nǐ de gùshi.",
+      "vi": "Hoan nghênh bạn kể cho chúng tôi nghe câu chuyện của bạn trong phần bình luận bên dưới."
+    },
+    {
+      "start": 992.27,
+      "end": 996.59,
+      "en": "We look forward to seeing your shares and will reply carefully.",
+      "zh": "我们很期待看到你们的分享，也会认真回复。",
+      "pinyin": "wǒmen hěn qīdài kàndào nǐmen de fēnxiǎng, yě huì rènzhēn huífù.",
+      "vi": "Chúng tôi rất mong chờ những chia sẻ của các bạn, và sẽ nghiêm túc phản hồi."
+    },
+    {
+      "start": 996.6,
+      "end": 999.09,
+      "en": "The interesting questions you raise may also",
+      "zh": "你们提出的有趣问题，也可能",
+      "pinyin": "nǐmen tíchū de yǒuqù wèntí, yě kěnéng",
+      "vi": "Những câu hỏi thú vị mà các bạn đặt ra, cũng có thể"
+    },
+    {
+      "start": 999.1,
+      "end": 1001.69,
+      "en": "become topics for our future episodes!",
+      "zh": "会成为我们未来节目的主题哦！",
+      "pinyin": "huì chéngwéi wǒmen wèilái jiémù de zhǔtí o!",
+      "vi": "sẽ trở thành chủ đề của chương trình chúng tôi trong tương lai đấy!"
+    },
+    {
+      "start": 1001.7,
+      "end": 1005.4,
+      "en": "Thank you everyone for listening, see you next episode. Goodbye!",
+      "zh": "感谢大家的收听，我们下期再见。再见！",
+      "pinyin": "gǎnxiè dàjiā de tīngshōu, wǒmen xià qī zàijiàn. Zàijiàn!",
+      "vi": "Cảm ơn mọi người đã lắng nghe, hẹn gặp lại các bạn ở kỳ sau. Tạm biệt!"
+    }
+  ]
+}
