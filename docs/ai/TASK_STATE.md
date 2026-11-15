@@ -1,4 +1,18 @@
-# Current task: Pha 5 — Hợp nhất chuẩn hóa phản hồi Hỏi đáp AI (2026-11-13)
+# Current task: Tích hợp trọn bộ 13 script Podcast 4 lớp & kênh `@ChineseDailyPodcast` (2026-11-15)
+
+Nhánh: `ui/podcast-impeccable-redesign` (PWA `5.2.3`).
+
+Thay đổi đã thực hiện (không đổi layout `#studioHome` hay các route ngoài phạm vi Podcast / Admin):
+1. **Kho script tĩnh 4 lớp (`content/podcast/cues/*.json`, 13 tệp / 4.256 câu đã kiểm định Giản thể · Pinyin · Việt · Anh, không chồng chéo):**
+   - Nâng cấp 4 tập mở đầu trong `STARTER_EPISODES` (`CqNO2psWIyU` 433 câu, `qTKcybgpT8M` 435 câu, `MupmlHHMU7k` 383 câu, `i8emBnSpS3I` 382 câu) với `cuesUrl` & `cuesCount` (giữ nguyên `hhkIZ3gOIcs` 147 câu inline và 3 tập mẫu LCTP).
+   - Bổ sung `LIBRARY_EPISODES` (9 tập mới gồm 8 tập `@BaoBaoMandarin`: `eJmpTntAZco`, `vmsC3SgWTPs`, `uPNoMz5-zY8`, `30Jl7M3uLdQ`, `Cy3leBZQOpY`, `eBTWbtbOlPM`, `Y_qGrTUK2Js`, `_BjHpiON95A` và 1 tập `@ChineseDailyPodcast`: `UKUY_0HSRE8` 353 câu).
+2. **Nạp tĩnh `cuesUrl` & hỗ trợ 3 kênh (`src/modules/podcast/podcast.js`, `podcast-core.js`, `server/translator-worker.mjs`, `admin.html`, `admin-portal.js`):**
+   - Thêm `@ChineseDailyPodcast` (`UCyYT-HdG1FXua6_vwyXNqhg`) vào `DEFAULT_CHANNELS`, `PODCAST_CHANNELS` (kèm đồng bộ `server/translator-worker-bundled.mjs`) và UI chọn/đồng bộ 3 kênh; giữ nguyên 8 mục `DEFAULT_PODCASTS` trong `admin-portal-core.js`.
+   - `adminPodcasts()` kế thừa `cuesUrl` / `cuesCount` từ `STARTER_EPISODES` + `LIBRARY_EPISODES`; `maybeFetchFullYoutubeCaptions()` / `selectEpisode()` nạp `ep.cuesUrl` với cache nội bộ `staticCuesCache`.
+3. **PWA & kiểm thử:**
+   - Khai báo 13 tệp `content/podcast/cues/*.json` trong `tools/pwa-assets.json`; bổ sung kiểm tra toàn bộ 13 JSON trong `server/podcast-core.test.mjs` và mở rộng `tools/check-podcast-ui.cjs` test tải script 433 câu (`CqNO2psWIyU`) & 353 câu (`UKUY_0HSRE8`).
+
+# Previous task: Pha 5 — Hợp nhất chuẩn hóa phản hồi Hỏi đáp AI (2026-11-13)
 
 Nhánh: `refactor/phase5-next-duplication` (tách từ `main` tại `6068ab0`, cập nhật PWA `5.1.1`).
 

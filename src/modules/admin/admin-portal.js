@@ -1076,7 +1076,7 @@
       }
       const btn = byId('apSyncYoutubeChannelsBtn');
       if (btn) btn.disabled = true;
-      showStatus('Đang lấy danh sách tập mới từ @LearnChineseThroughPodcast và @BaoBaoMandarin...', 'info');
+      showStatus('Đang lấy danh sách tập mới từ 3 kênh YouTube (@LearnChineseThroughPodcast, @BaoBaoMandarin, @ChineseDailyPodcast)...', 'info');
       try {
         const res = await fetch(`${state.workerBase}/podcast-feed?channel=all`, { method: 'GET', cache: 'no-store' });
         const data = await res.json().catch(() => null);
@@ -1091,9 +1091,9 @@
         if (addedCount > 0) {
           writeLocalManifest(state.manifest);
           renderAll();
-          showStatus(`Đã đồng bộ thêm ${addedCount} tập mới từ 2 kênh YouTube (nhớ bấm Xuất bản để lưu lên Server).`, 'ok');
+          showStatus(`Đã đồng bộ thêm ${addedCount} tập mới từ 3 kênh YouTube (nhớ bấm Xuất bản để lưu lên Server).`, 'ok');
         } else {
-          showStatus(`Tất cả ${data.episodes.length} tập gần nhất từ 2 kênh đã có trong danh sách.`, 'info');
+          showStatus(`Tất cả ${data.episodes.length} tập gần nhất từ 3 kênh đã có trong danh sách.`, 'info');
         }
       } catch (err) {
         showStatus(err?.message || 'Lỗi mạng khi đồng bộ kênh YouTube.', 'error');

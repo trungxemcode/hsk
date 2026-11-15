@@ -115,20 +115,131 @@ const MIME = {
       assert.equal(await page.locator('#podcastSubMask .podcast-mask-zh').count(), 0);
       await page.locator('#podcastToggleZhBtn').click();
 
-      // 4. Seek updates active cue in both mask & transcript list
+      // 4. Seek updates active cue across the full 147-cue episode transcript
+      const ep1CueCount = await page.locator('#podcastTranscriptList .podcast-cue-item').count();
+      assert.ok(ep1CueCount >= 140, `Episode 1 loads full transcript (>= 140 cues, got ${ep1CueCount})`);
+      await page.evaluate(() => window.HSKPodcast.seek(1150, false));
+      assert.equal(await page.evaluate(() => window.HSKPodcast.getState().activeCueIdx), ep1CueCount - 1);
+      const closingCueText = await page.locator('#podcastTranscriptList .podcast-cue-item.is-active .podcast-cue-vi').textContent();
+      assert.match(closingCueText, /Hẹn gặp lại/i);
       await page.evaluate(() => window.HSKPodcast.seek(14, false));
       const activeIdx = await page.evaluate(() => window.HSKPodcast.getState().activeCueIdx);
       assert.equal(activeIdx, 1);
       const activeCueText = await page.locator('#podcastTranscriptList .podcast-cue-item.is-active .podcast-cue-vi').textContent();
       assert.match(activeCueText, /Tiểu Minh/i);
 
-      // 5. Clicking a Chinese word token opens lookup/save popover
+      // 5. Subtitle mask is crisp white card with dark text, hovering token stays legible,
+      //    drag-selection highlights without opening word popover, and clicking opens popover.
+      const maskVisual = await page.evaluate(() => {
+        const mask = document.getElementById('podcastSubMask');
+        const zh = mask.querySelector('.podcast-mask-zh');
+        const ytHost = document.getElementById('podcastYtHost');
+        return {
+          maskBg: getComputedStyle(mask).backgroundColor,
+          zhColor: getComputedStyle(zh).color,
+          ytTop: parseFloat(getComputedStyle(ytHost).top || '0')
+        };
+      });
+      assert.equal(maskVisual.maskBg, 'rgb(255, 255, 255)', `Mask background stays pure white at ${width} (${theme})`);
+      assert.equal(maskVisual.zhColor, 'rgb(20, 20, 43)', `Mask text stays crisp dark ink at ${width} (${theme})`);
+      assert.ok(maskVisual.ytTop < 0, `YouTube top chrome offset is cropped cleanly (got ${maskVisual.ytTop})`);
+
       const firstToken = page.locator('#podcastSubMask .podcast-word-token').first();
+      await firstToken.hover();
+      const hoverTokenColor = await firstToken.evaluate((node) => getComputedStyle(node).color);
+      assert.equal(hoverTokenColor, 'rgb(20, 20, 43)', 'Hovering Chinese token never turns black-on-black');
+
+      // Drag selection across mask text must select text cleanly and keep word popover closed
+      // On narrow viewports Playwright's hover can auto-scroll the subtitle
+      // underneath the sticky mobile header. Keep the glyph fully visible
+      // before testing real pointer selection (not synthetic DOM selection).
+      await page.evaluate(() => {
+        const line = document.querySelector('#podcastSubMask .podcast-mask-zh');
+        const scroller = document.querySelector('.workspace');
+        if (!line || !scroller) return;
+        const safeTop = Math.max(148, (document.getElementById('studioHeader')?.getBoundingClientRect().bottom || 0) + 24);
+        const missing = Math.ceil(safeTop - line.getBoundingClientRect().top);
+        if (missing > 0) {
+          scroller.style.scrollBehavior = 'auto';
+          scroller.scrollTop = Math.max(0, scroller.scrollTop - missing);
+        }
+      });
+      const maskZhBox = await page.locator('#podcastSubMask .podcast-mask-zh').boundingBox();
+      const wordTokens = page.locator('#podcastSubMask .podcast-mask-zh .podcast-word-token');
+      const firstWordBox = await wordTokens.first().boundingBox();
+      const lastWordBox = await wordTokens.last().boundingBox();
+      if (maskZhBox && maskZhBox.width > 60 && firstWordBox && lastWordBox) {
+        // Start from actual selectable glyphs: responsive layouts center the line
+        // inside a much wider mask; selecting from whitespace is unreliable.
+        await page.mouse.move(firstWordBox.x + Math.min(3, firstWordBox.width / 3), firstWordBox.y + firstWordBox.height / 2);
+        await page.mouse.down();
+        await page.mouse.move(lastWordBox.x + lastWordBox.width / 2, lastWordBox.y + lastWordBox.height / 2, { steps: 12 });
+        await page.mouse.up();
+        const selCount = await page.evaluate(() => String(window.getSelection?.() || '').trim().length);
+        assert.ok(selCount > 0, 'Subtitle mask Chinese text supports Word-style drag selection');
+        assert.equal(await page.locator('#podcastWordPopover').isHidden(), true, 'Drag-selecting subtitle does not pop dictionary');
+        await page.evaluate(() => window.getSelection?.()?.removeAllRanges?.());
+      }
+      const shellScrollTop = await page.evaluate(() => document.getElementById('podcastVideoShell').scrollTop);
+      assert.equal(shellScrollTop, 0, 'Hover/drag inside video shell never scrolls overflow clip container');
+
+      // Mouse press-drag-swipe on episode shelf scrolls horizontally without switching active episode
+      await page.locator('#podcastEpisodeList').scrollIntoViewIfNeeded();
+      const shelfDragCheck = await page.evaluate(() => {
+        const shelf = document.getElementById('podcastEpisodeList');
+        return {
+          rect: shelf.getBoundingClientRect().toJSON(),
+          canScroll: shelf.scrollWidth > shelf.clientWidth,
+          scrollBefore: shelf.scrollLeft,
+          epBefore: window.HSKPodcast.getState().currentEpisodeId
+        };
+      });
+      if (shelfDragCheck.canScroll) {
+        const dragY = shelfDragCheck.rect.top + shelfDragCheck.rect.height / 2;
+        const dragStartX = shelfDragCheck.rect.left + Math.min(shelfDragCheck.rect.width - 24, 300);
+        await page.mouse.move(dragStartX, dragY);
+        await page.mouse.down();
+        await page.mouse.move(dragStartX - 200, dragY, { steps: 8 });
+        await page.mouse.up();
+        const shelfAfter = await page.evaluate(() => ({
+          scrollAfter: document.getElementById('podcastEpisodeList').scrollLeft,
+          epAfter: window.HSKPodcast.getState().currentEpisodeId
+        }));
+        assert.ok(shelfAfter.scrollAfter > shelfDragCheck.scrollBefore + 50, 'Mouse drag swipes Kho bai nghe shelf smoothly');
+        assert.equal(shelfAfter.epAfter, shelfDragCheck.epBefore, 'Mouse drag swipe does not accidentally trigger episode card click');
+      }
+
       await firstToken.click();
       await page.locator('#podcastWordPopover').waitFor({ state: 'visible' });
       assert.ok((await page.locator('#podcastSaveWordBtn').isVisible()) === true);
       await page.locator('#podcastClosePopoverBtn').click();
       assert.equal(await page.locator('#podcastWordPopover').isHidden(), true);
+
+      // 5b. Selecting a lazy-loaded cuesUrl episode & @ChineseDailyPodcast filter loads full 4-layer script
+      const lctpCard = page.locator('.podcast-ep-card[data-yt-id="CqNO2psWIyU"]').first();
+      await lctpCard.scrollIntoViewIfNeeded();
+      await lctpCard.click();
+      await page.waitForFunction(
+        () => document.querySelectorAll('#podcastTranscriptList .podcast-cue-item').length >= 400,
+        null,
+        { timeout: 10000 }
+      );
+      const lctpCount = await page.locator('#podcastTranscriptList .podcast-cue-item').count();
+      assert.equal(lctpCount, 433, `Expected 433 cues for CqNO2psWIyU, got ${lctpCount}`);
+
+      const cdpChip = page.locator('#podcastChannelBar .podcast-channel-chip[data-handle="@ChineseDailyPodcast"]');
+      assert.equal(await cdpChip.isVisible(), true, '@ChineseDailyPodcast chip is visible');
+      await cdpChip.click();
+      const cdpCard = page.locator('.podcast-ep-card[data-yt-id="UKUY_0HSRE8"]').first();
+      await cdpCard.scrollIntoViewIfNeeded();
+      await cdpCard.click();
+      await page.waitForFunction(
+        () => document.querySelectorAll('#podcastTranscriptList .podcast-cue-item').length >= 350,
+        null,
+        { timeout: 10000 }
+      );
+      assert.equal(await page.locator('#podcastTranscriptList .podcast-cue-item').count(), 353);
+      await page.locator('#podcastChannelBar .podcast-channel-chip').first().click();
 
       // 6. Import English SRT subtitles via drawer & Quick Load
       await page.locator('#podcastToggleImportBtn').click();

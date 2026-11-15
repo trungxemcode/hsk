@@ -1,3 +1,6 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import podcastCore from '../src/modules/podcast/podcast-core.js';
@@ -18,21 +21,57 @@ test('HSKPodcastCore extracts YouTube IDs across standard URL formats', () => {
   assert.equal(podcastCore.extractYoutubeId('not-a-valid-url'), '');
 });
 
-test('HSKPodcastCore starter episodes cover HSK 1-6 with synced 4-layer cues from the 2 YouTube channels', () => {
+test('HSKPodcastCore starter episodes cover HSK 1-6 with synced 4-layer cues from the 3 YouTube channels', () => {
   assert.equal(podcastCore.STARTER_EPISODES.length, 8);
-  assert.equal(podcastCore.DEFAULT_CHANNELS.length, 2);
+  assert.equal(podcastCore.DEFAULT_CHANNELS.length, 3);
   assert.equal(podcastCore.extractYoutubeChannelKey('@LearnChineseThroughPodcast')?.channelId, 'UCI8Liuxdz6UPv5rgMskfwPg');
   assert.equal(podcastCore.extractYoutubeChannelKey('https://www.youtube.com/@BaoBaoMandarin')?.channelId, 'UCYHKAec4JjyR_DC2obXv1Yg');
+  assert.equal(podcastCore.extractYoutubeChannelKey('https://www.youtube.com/@ChineseDailyPodcast')?.channelId, 'UCyYT-HdG1FXua6_vwyXNqhg');
   assert.equal(podcastCore.inferHskLevelFromTitle('HSK 1–3 | 会 VS 要 VS 能').levelGroup, 'hsk1-2');
   assert.equal(podcastCore.inferHskLevelFromTitle('HSK 3–5 | 中国短剧有什么好看的？').levelGroup, 'hsk4');
   assert.equal(podcastCore.toSimplifiedChinese('歡迎來到寶寶中文，請問這家餐廳怎麼走？'), '欢迎来到宝宝中文，请问这家餐厅怎么走？');
 
   for (const ep of podcastCore.STARTER_EPISODES) {
     assert.ok(ep.cues.length >= 5);
-    assert.ok(ep.channelHandle === '@BaoBaoMandarin' || ep.channelHandle === '@LearnChineseThroughPodcast');
+    assert.ok(
+      ep.channelHandle === '@BaoBaoMandarin'
+      || ep.channelHandle === '@LearnChineseThroughPodcast'
+      || ep.channelHandle === '@ChineseDailyPodcast'
+    );
     for (const cue of ep.cues) {
       assert.ok(cue.end > cue.start);
       assert.ok(cue.zh.length > 0 && cue.pinyin.length > 0 && cue.vi.length > 0 && cue.en.length > 0);
+    }
+  }
+});
+
+test('LIBRARY_EPISODES and all 13 static podcast cue packs are valid simplified 4-layer scripts', () => {
+  const lib = podcastCore.LIBRARY_EPISODES || [];
+  assert.equal(lib.length, 9);
+  const allCurated = [...podcastCore.STARTER_EPISODES, ...lib];
+  const withUrl = allCurated.filter((ep) => ep.cuesUrl);
+  assert.equal(withUrl.length, 13);
+  const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+  for (const ep of withUrl) {
+    assert.ok(ep.cues.length >= 2, `${ep.id} has preview cues`);
+    assert.ok(
+      ep.channelHandle === '@BaoBaoMandarin'
+      || ep.channelHandle === '@LearnChineseThroughPodcast'
+      || ep.channelHandle === '@ChineseDailyPodcast',
+      `${ep.id} channelHandle`
+    );
+    const jsonPath = path.join(rootDir, ep.cuesUrl);
+    assert.equal(fs.existsSync(jsonPath), true, `Missing static cue pack ${ep.cuesUrl}`);
+    const payload = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+    assert.equal(payload.youtubeId, ep.youtubeId);
+    assert.equal(payload.cues.length, ep.cuesCount, `${ep.id} cuesCount matches file`);
+    let prevEnd = -1;
+    for (const cue of payload.cues) {
+      assert.ok(cue.end > cue.start, `${ep.id} valid timestamps`);
+      assert.ok(cue.start >= prevEnd - 0.01, `${ep.id} non-overlapping timestamps`);
+      assert.ok(cue.zh.length > 0 && cue.pinyin.length > 0 && cue.vi.length > 0 && cue.en.length > 0, `${ep.id} 4 non-empty layers`);
+      assert.equal(podcastCore.toSimplifiedChinese(cue.zh), cue.zh, `${ep.id} simplified Chinese`);
+      prevEnd = cue.end;
     }
   }
 });
@@ -86,10 +125,12 @@ test('HSKPodcastCore segments Chinese tokens, locates active cues, and enriches 
   assert.ok(hanWords.includes('早饭'));
 
   const cues = podcastCore.STARTER_EPISODES[0].cues;
+  assert.ok(cues.length >= 140);
   assert.equal(podcastCore.findActiveCueIndex(cues, 0), 0);
   assert.equal(podcastCore.findActiveCueIndex(cues, 14), 1);
   assert.equal(podcastCore.findActiveCueIndex(cues, 18), 2);
-  assert.equal(podcastCore.findActiveCueIndex(cues, 999), -1);
+  assert.ok(podcastCore.findActiveCueIndex(cues, 999) >= 0);
+  assert.equal(podcastCore.findActiveCueIndex(cues, 5000), -1);
 
   const local = podcastCore.enrichCuesLocal([{ start: 0, end: 4, en: 'Drink coffee for breakfast' }], { wordsList: dict });
   assert.match(local[0].vi, /Drink coffee/);
@@ -251,7 +292,7 @@ for (const [label, makeHandler] of [
     assert.match(geminiSawCc, /Welcome to our podcast/);
   });
 
-  test(`${label} serves public GET /podcast-feed and GET /podcast-captions for the 2 YouTube channels`, async () => {
+  test(`${label} serves public GET /podcast-feed and GET /podcast-captions for the 3 YouTube channels`, async () => {
     const mockHandler = makeHandler(async (url) => {
       const s = String(url);
       if (s.includes('channel_id=UCI8Liuxdz6UPv5rgMskfwPg')) {
@@ -266,6 +307,13 @@ for (const [label, makeHandler] of [
         return new Response(`
           <feed>
             <entry><yt:videoId>hhkIZ3gOIcs</yt:videoId><title>HSK 1–3 | 会 VS 要 VS 能</title><published>2026-11-12T10:00:00+00:00</published></entry>
+          </feed>
+        `, { status: 200 });
+      }
+      if (s.includes('channel_id=UCyYT-HdG1FXua6_vwyXNqhg')) {
+        return new Response(`
+          <feed>
+            <entry><yt:videoId>UKUY_0HSRE8</yt:videoId><title>为什么学中文越坚持越想放弃？ | Why You Want to Quit Learning Chinese</title><published>2026-11-13T10:00:00+00:00</published></entry>
           </feed>
         `, { status: 200 });
       }
@@ -299,9 +347,10 @@ for (const [label, makeHandler] of [
     assert.equal(feedRes.status, 200);
     const feedData = await feedRes.json();
     assert.equal(feedData.ok, true);
-    assert.equal(feedData.episodes.length, 2);
-    assert.equal(feedData.episodes[0].youtubeId, 'hhkIZ3gOIcs');
-    assert.equal(feedData.episodes[1].youtubeId, 'aYrCe-KTmTg');
+    assert.equal(feedData.episodes.length, 3);
+    assert.equal(feedData.episodes[0].youtubeId, 'UKUY_0HSRE8');
+    assert.equal(feedData.episodes[1].youtubeId, 'hhkIZ3gOIcs');
+    assert.equal(feedData.episodes[2].youtubeId, 'aYrCe-KTmTg');
 
     const capRes = await mockHandler(
       new Request('https://worker.test/podcast-captions?v=hhkIZ3gOIcs', { method: 'GET', headers: { Origin: origin } }),

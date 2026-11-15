@@ -1,5 +1,5 @@
 {
-  "request": "Import all public YouTube channel videos into Admin Podcast; preserve all other app UI and existing Podcast layout.",
+  "request": "PR #436: update Podcast video/subtitle shelf and 13 Chinese cue packs, preserve Admin YouTube bulk channel import from main, update Admin Podcast description for the third channel. Admin UI is reviewed by dedicated Admin browser tests; all 23 other visual-scope routes remain protected.",
   "excludedRoutes": [
     "admin"
   ]
