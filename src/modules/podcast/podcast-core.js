@@ -36,6 +36,15 @@
       url: 'https://www.youtube.com/@ChineseDailyPodcast',
       feedUrl: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCyYT-HdG1FXua6_vwyXNqhg',
       description: 'Podcast tâm sự & suy ngẫm tiếng Trung hàng ngày (có tập kèm trọn bộ script 4 lớp Hán · Pinyin · Việt · Anh).'
+    },
+    {
+      id: 'panda-studio',
+      handle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      name: 'Panda Studio',
+      url: 'https://www.youtube.com/@PandaStudio24',
+      feedUrl: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCnXr9o-f4MXHdgq_QN3QFiw',
+      description: 'Luyện đọc tiếng Trung HSK 3 theo chủ đề đời sống (có sẵn trọn bộ script 4 lớp Hán · Pinyin · Việt · Anh).'
     }
   ];
 
@@ -1713,6 +1722,1545 @@
   ];
 
   const LIBRARY_EPISODES = [
+    {
+      id: 'ep-ps-2_xoyu_kg6e',
+      youtubeId: '2_xoyU_kG6E',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Các thủ đô trên thế giới || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Các thủ đô trên thế giới',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 187,
+      durationLabel: '3:07',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 10 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/2_xoyU_kG6E.json',
+      cuesCount: 10,
+      cues: [
+        {
+          start: 24.31,
+          end: 26.41,
+          en: 'London is the capital of the UK.',
+          zh: '伦敦是英国的首都',
+          pinyin: 'Lúndūn shì yīngguó de shǒudū',
+          vi: 'Luân Đôn là thủ đô của nước Anh.'
+        },
+        {
+          start: 29.57,
+          end: 31.79,
+          en: 'Beijing is the capital of China.',
+          zh: '北京是中国的首都',
+          pinyin: 'Běijīng shì zhōngguó de shǒudū',
+          vi: 'Bắc Kinh là thủ đô của Trung Quốc.'
+        },
+        {
+          start: 34.65,
+          end: 36.85,
+          en: 'Paris is the capital of France.',
+          zh: '巴黎是法国的首都',
+          pinyin: 'Bālí shì fǎguó de shǒudū',
+          vi: 'Paris là thủ đô của nước Pháp.'
+        },
+        {
+          start: 39.75,
+          end: 47.16,
+          en: 'Rome is the capital of Italy. Seoul is the capital of Korea.',
+          zh: '罗马是意大利的首都首尔是韩国的首都',
+          pinyin: 'Luómǎ shì yìdàlì de shǒudū shǒuěr shì hánguó de shǒudū',
+          vi: 'Roma là thủ đô của Ý. Xơ-un là thủ đô của Hàn Quốc.'
+        },
+        {
+          start: 50.58,
+          end: 52.76,
+          en: 'Tokyo is the capital of Japan.',
+          zh: '东京是日本的首都',
+          pinyin: 'Dōngjīng shì rìběn de shǒudū',
+          vi: 'Tokyo là thủ đô của Nhật Bản.'
+        },
+        {
+          start: 55.68,
+          end: 64.6,
+          en: 'Hanoi is the capital of Vietnam. I have been to London, and I have also been to Beijing and Paris.',
+          zh: '河内是越南的首都我去过伦敦，也去过北京和巴黎。',
+          pinyin: 'Hénèi shì yuènán de shǒudū wǒ qùguò lúndūn, yě qùguò běijīng hé bālí.',
+          vi: 'Hà Nội là thủ đô của Việt Nam. Tôi đã đến Luân Đôn, cũng đã đến Bắc Kinh và Paris.'
+        },
+        {
+          start: 67.68,
+          end: 72.46,
+          en: 'I have never been to Rome, Seoul, Tokyo or Hanoi.',
+          zh: '我没有去过罗马、首尔、东京、河内。',
+          pinyin: 'Wǒ méiyǒu qùguò luómǎ, shǒuěr, dōngjīng, hénèi.',
+          vi: 'Tôi chưa đến Roma, Xơ-un, Tokyo, Hà Nội.'
+        },
+        {
+          start: 107.7,
+          end: 109.84,
+          en: 'Rome is the capital of Italy.',
+          zh: '罗马是意大利的首都。',
+          pinyin: 'Luómǎ shì yìdàlì de shǒudū.',
+          vi: 'Roma là thủ đô của nước Ý.'
+        },
+        {
+          start: 122.93,
+          end: 125.63,
+          en: 'Hanoi is the capital of Vietnam.',
+          zh: '河内是越南的首都。',
+          pinyin: 'Hénèi shì yuènán de shǒudū.',
+          vi: 'Hà Nội là thủ đô của Việt Nam.'
+        },
+        {
+          start: 128.76,
+          end: 132.46,
+          en: 'I have been to London, and I have also been to Beijing and Paris.',
+          zh: '我去过伦敦，也去过北京和巴黎。',
+          pinyin: 'Wǒ qùguò lúndūn, yě qùguò běijīng hé bālí.',
+          vi: 'Tôi đã đến Luân Đôn, cũng đã đến Bắc Kinh và Paris.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-v24yq-munss',
+      youtubeId: 'v24Yq-muNss',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Dì của tôi || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Dì của tôi',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 212,
+      durationLabel: '3:32',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 12 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/v24Yq-muNss.json',
+      cuesCount: 12,
+      cues: [
+        {
+          start: 20.35,
+          end: 37.01,
+          en: 'To begin: my aunt is a Chinese teacher working in Korea. She is very lovely, with big eyes,',
+          zh: '开始，我的阿姨是一名中文老师，在韩国工作，她很可爱，长着大眼睛。',
+          pinyin: 'Kāishǐ, wǒ de āyí shì yīmíng zhōngwén lǎoshī, zài hánguó gōngzuò, tā hěn kěài, zhǎng zhe dà yǎnjīng.',
+          vi: 'Bắt đầu. Dì tôi là giáo viên tiếng Trung, làm việc ở Hàn Quốc, dì rất đáng yêu, có đôi mắt to.'
+        },
+        {
+          start: 39.82,
+          end: 52.62,
+          en: 'a high nose, a small mouth and long hair. She has many hobbies, such as painting, listening to music,',
+          zh: '高鼻子、小嘴巴和长头发，她有很多爱好，比如画画、听音乐、',
+          pinyin: 'Gāobízi, xiǎo zuǐbā hé zhǎng tóufà, tā yǒu hěnduō àihào, bǐrú huàhuà, tīng yīnyuè,',
+          vi: 'mũi cao, miệng nhỏ và tóc dài. Dì có nhiều sở thích, ví dụ như vẽ tranh, nghe nhạc,'
+        },
+        {
+          start: 53.06,
+          end: 57.64,
+          en: 'and doing sports, to keep fit.',
+          zh: '做运动，为了锻炼身体。',
+          pinyin: 'Zuò yùndòng, wèile duànliànshēntǐ.',
+          vi: 'tập thể thao, để rèn luyện sức khỏe.'
+        },
+        {
+          start: 60.28,
+          end: 63.54,
+          en: 'Every morning she runs in the park.',
+          zh: '每个早上，她都会在公园里跑步。',
+          pinyin: 'Měigè zǎoshàng, tā dōu huì zài gōngyuán lǐ pǎobù.',
+          vi: 'Mỗi sáng, dì đều chạy bộ trong công viên.'
+        },
+        {
+          start: 66.32,
+          end: 67.96,
+          en: 'I love my aunt very much,',
+          zh: '我很爱我的阿姨，',
+          pinyin: 'Wǒ hěn ài wǒ de āyí,',
+          vi: 'Tôi rất yêu dì tôi,'
+        },
+        {
+          start: 70.83,
+          end: 73.21,
+          en: 'and on weekends we often go out together.',
+          zh: '周末我们经常一起出去玩。',
+          pinyin: 'Zhōumò wǒmen jīngcháng yìqǐ chūqùwán.',
+          vi: 'cuối tuần chúng tôi thường cùng nhau đi chơi.'
+        },
+        {
+          start: 92.66,
+          end: 95.44,
+          en: 'My aunt is a Chinese teacher.',
+          zh: '我的阿姨是一名中文老师。',
+          pinyin: 'Wǒ de āyí shì yīmíng zhōngwén lǎoshī.',
+          vi: 'Dì tôi là giáo viên tiếng Trung.'
+        },
+        {
+          start: 98.44,
+          end: 111.19,
+          en: 'She works in Korea. She is very lovely, with big eyes, a high nose, a small mouth and long hair.',
+          zh: '在韩国工作，她很可爱，长着大眼睛，高鼻子，小嘴巴和长头发。',
+          pinyin: 'Zài hánguó gōngzuò, tā hěn kěài, zhǎng zhe dà yǎnjīng, gāobízi, xiǎo zuǐbā hé zhǎng tóufà.',
+          vi: 'Dì làm việc ở Hàn Quốc, dì rất đáng yêu, có đôi mắt to, mũi cao, miệng nhỏ và tóc dài.'
+        },
+        {
+          start: 114.15,
+          end: 115.57,
+          en: 'She has many hobbies.',
+          zh: '她有很多爱好。',
+          pinyin: 'Tā yǒu hěnduō àihào.',
+          vi: 'Dì có nhiều sở thích.'
+        },
+        {
+          start: 118.38,
+          end: 121.58,
+          en: 'For example painting, listening to music, and doing sports.',
+          zh: '比如画画，听音乐，做运动。',
+          pinyin: 'Bǐrú huàhuà, tīng yīnyuè, zuò yùndòng.',
+          vi: 'Ví dụ như vẽ tranh, nghe nhạc, tập thể thao.'
+        },
+        {
+          start: 124.04,
+          end: 131.94,
+          en: 'To keep fit, every morning she runs in the park.',
+          zh: '为了锻炼身体，每个早上，她都会在公园里跑步。',
+          pinyin: 'Wèile duànliànshēntǐ, měigè zǎoshàng, tā dōu huì zài gōngyuán lǐ pǎobù.',
+          vi: 'Để rèn luyện sức khỏe, mỗi sáng, dì đều chạy bộ trong công viên.'
+        },
+        {
+          start: 134.71,
+          end: 141.9,
+          en: 'I love my aunt very much, and on weekends we often go out together.',
+          zh: '我很爱我的阿姨，周末我们经常一起出去玩。',
+          pinyin: 'Wǒ hěn ài wǒ de āyí, zhōumò wǒmen jīngcháng yìqǐ chūqùwán.',
+          vi: 'Tôi rất yêu dì tôi, cuối tuần chúng tôi thường cùng nhau đi chơi.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-jzu6f5dk5ge',
+      youtubeId: 'Jzu6F5dk5gE',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Lớp học bơi || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Lớp học bơi',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 279,
+      durationLabel: '4:39',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 9 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/Jzu6F5dk5gE.json',
+      cuesCount: 9,
+      cues: [
+        {
+          start: 24.56,
+          end: 27.88,
+          en: 'To begin: Xiao Ming\'s mother wanted her son to learn to swim.',
+          zh: '开始，小明的妈妈想让儿子学会游泳',
+          pinyin: 'Kāishǐ, xiǎo míng de māmā xiǎng ràng érzi xuéhuì yóuyǒng',
+          vi: 'Bắt đầu. Mẹ của Tiểu Minh muốn con trai biết bơi.'
+        },
+        {
+          start: 61.41,
+          end: 71.14,
+          en: 'On the first day of class, after two hours of practice, Xiao Ming said to the swimming teacher,',
+          zh: '上课第一天练习了两个小时后，小明就对游泳老师说，',
+          pinyin: 'Shàngkè dìyītiān liànxí le liǎnggè xiǎoshí hòu, xiǎo míng jiù duì yóuyǒng lǎoshī shuō,',
+          vi: 'Buổi học đầu tiên, sau khi luyện tập hai tiếng, Tiểu Minh liền nói với thầy dạy bơi:'
+        },
+        {
+          start: 75.21,
+          end: 82.78,
+          en: '"Teacher, let\'s just practise until here this morning. Why?"',
+          zh: '老师，上午就练习到这儿吧，为什么呢？',
+          pinyin: 'Lǎoshī, shàngwǔ jiù liànxí dào zhèr ba, wèishénme ne?',
+          vi: 'Thầy ơi, buổi sáng mình tập đến đây thôi nhé. Vì sao ạ?'
+        },
+        {
+          start: 83.26,
+          end: 90.19,
+          en: 'The teacher asked. Xiao Ming said, embarrassed,',
+          zh: '老师问，小明不好意思的说，',
+          pinyin: 'Lǎoshī wèn, xiǎo míng bùhǎoyìsī de shuō,',
+          vi: 'Thầy hỏi. Tiểu Minh ngượng ngùng nói:'
+        },
+        {
+          start: 94.78,
+          end: 102.48,
+          en: '"The water in the pool tastes awful — I\'m almost full from drinking it."',
+          zh: '池子里的水太难喝了，我都快喝饱了。',
+          pinyin: 'Chízi lǐ de shuǐ tài nán hē le, wǒ dōu kuài hē bǎo le.',
+          vi: 'Nước trong bể khó uống quá, con sắp uống no rồi.'
+        },
+        {
+          start: 131.88,
+          end: 148.2,
+          en: 'So she signed him up for a swimming class. His mother said: Xiao Ming, I\'ve signed you up for a swimming class, so now you can play in the water.',
+          zh: '就给他报了游泳班。妈妈说小明我给你报了游泳班这样你可以玩水了',
+          pinyin: 'Jiù gěi tā bào le yóuyǒng bān. Māmā shuō xiǎo míng wǒ gěi nǐ bào le yóuyǒng bān zhèyàng nǐ kěyǐ wánshuǐ le',
+          vi: 'Thế là bà đăng ký cho cậu một lớp học bơi. Mẹ nói: Tiểu Minh, mẹ đăng ký lớp học bơi cho con rồi, thế là con được chơi với nước.'
+        },
+        {
+          start: 151.82,
+          end: 164.64,
+          en: 'Xiao Ming likes playing in the water, so he was very happy. On the first day of class, after two hours of practice,',
+          zh: '小明喜欢玩水所以很高兴上课第一天练习了两个小时后',
+          pinyin: 'Xiǎo míng xǐhuān wánshuǐ suǒyǐ hěn gāoxìng shàngkè dìyītiān liànxí le liǎnggè xiǎoshí hòu',
+          vi: 'Tiểu Minh thích chơi với nước nên rất vui. Buổi học đầu tiên, sau khi luyện tập hai tiếng,'
+        },
+        {
+          start: 168.04,
+          end: 183.84,
+          en: 'Xiao Ming said to the swimming teacher: "Teacher, let\'s just practise until here this morning. Why?" the teacher asked.',
+          zh: '小明就对游泳老师说老师上午就练到这儿吧为什么呢老师问',
+          pinyin: 'Xiǎo míng jiù duì yóuyǒng lǎoshī shuō lǎoshī shàngwǔ jiù liàn dào zhèr ba wèishénme ne lǎoshī wèn',
+          vi: 'Tiểu Minh liền nói với thầy dạy bơi: thầy ơi, buổi sáng mình tập đến đây thôi nhé. Vì sao ạ? Thầy hỏi.'
+        },
+        {
+          start: 187.04,
+          end: 189.74,
+          en: 'Xiao Ming said, embarrassed,',
+          zh: '小明不好意思地说',
+          pinyin: 'Xiǎo míng bùhǎoyìsī dì shuō',
+          vi: 'Tiểu Minh ngượng ngùng nói:'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-yiqv3xo5jdm',
+      youtubeId: 'YiQV3XO5JdM',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Mua sắm trực tuyến || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Mua sắm trực tuyến',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 278,
+      durationLabel: '4:38',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 10 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/YiQV3XO5JdM.json',
+      cuesCount: 10,
+      cues: [
+        {
+          start: 37.86,
+          end: 43.26,
+          en: 'For example on Taobao, JD, Meituan and so on.',
+          zh: '比如说在淘宝网、京东网，美团网等等。',
+          pinyin: 'Bǐrúshuō zài táobǎowǎng, jīngdōng wǎng, měi tuán wǎng děngděng.',
+          vi: 'Ví dụ như trên Taobao, JD, Meituan và nhiều trang khác.'
+        },
+        {
+          start: 55.58,
+          end: 64.77,
+          en: 'You can not only buy food online, but also buy clothes to wear online,',
+          zh: '你不仅可以在网上买吃的东西，也可以在网上买穿的衣服，',
+          pinyin: 'Nǐ bùjǐn kěyǐ zài wǎngshàng mǎi chī de dōngxī, yě kěyǐ zài wǎngshàng mǎi chuān de yīfú,',
+          vi: 'Bạn không những có thể mua đồ ăn trên mạng, mà còn có thể mua quần áo mặc trên mạng,'
+        },
+        {
+          start: 69.05,
+          end: 78.53,
+          en: 'and also things for use online, such as phones, computers, furniture and so on.',
+          zh: '还可以在网上用的东西比如手机、电脑、家具等等。',
+          pinyin: 'Hái kěyǐ zài wǎngshàng yòng de dōngxī bǐrú shǒujī, diànnǎo, jiājù děngděng.',
+          vi: 'còn có thể mua đồ dùng trên mạng, ví dụ như điện thoại, máy tính, đồ nội thất và nhiều thứ khác.'
+        },
+        {
+          start: 82.55,
+          end: 90.86,
+          en: 'Online shopping is increasingly popular, and what\'s online is hugely varied,',
+          zh: '网上购物越来越受到人们的欢迎，网上的东西多种多样，',
+          pinyin: 'Wǎngshàng gòuwù yuèláiyuè shòudào rénmen de huānyíng, wǎngshàng de dōngxī duōzhǒngduōyàng,',
+          vi: 'Mua sắm trực tuyến ngày càng được mọi người ưa chuộng, đồ trên mạng đa dạng phong phú,'
+        },
+        {
+          start: 94.39,
+          end: 104.33,
+          en: 'you don\'t have to go out — you can buy from home. As long as you have a phone and a network, you can shop.',
+          zh: '你不用出门，留在家里就可以买。只要你有手机和网络，就可以购买。',
+          pinyin: 'Nǐ bùyòng chūmén, liúzài jiālǐ jiù kěyǐ mǎi. Zhǐyào nǐ yǒu shǒujī hé wǎngluò, jiù kěyǐ gòumǎi.',
+          vi: 'bạn không cần ra khỏi nhà, ở nhà là có thể mua. Chỉ cần có điện thoại và mạng là có thể mua hàng.'
+        },
+        {
+          start: 143.73,
+          end: 146.19,
+          en: 'JD, Meituan and so on.',
+          zh: '京东网，美团网等等。',
+          pinyin: 'Jīngdōng wǎng, měi tuán wǎng děngděng.',
+          vi: 'JD, Meituan và nhiều trang khác.'
+        },
+        {
+          start: 178.06,
+          end: 182.16,
+          en: 'For example phones, computers, furniture and so on.',
+          zh: '比如手机、电脑、家具等等。',
+          pinyin: 'Bǐrú shǒujī, diànnǎo, jiājù děngděng.',
+          vi: 'Ví dụ như điện thoại, máy tính, đồ nội thất và nhiều thứ khác.'
+        },
+        {
+          start: 186.2,
+          end: 189.56,
+          en: 'Online shopping is increasingly popular.',
+          zh: '网上购物越来越受到人们的欢迎。',
+          pinyin: 'Wǎngshàng gòuwù yuèláiyuè shòudào rénmen de huānyíng.',
+          vi: 'Mua sắm trực tuyến ngày càng được mọi người ưa chuộng.'
+        },
+        {
+          start: 193.66,
+          end: 195.46,
+          en: 'What\'s online is hugely varied.',
+          zh: '网上面的东西多种多样。',
+          pinyin: 'Wǎng shàngmiàn de dōngxī duōzhǒngduōyàng.',
+          vi: 'Đồ trên mạng đa dạng phong phú.'
+        },
+        {
+          start: 199,
+          end: 201.9,
+          en: 'You don\'t have to go out — you can buy from home.',
+          zh: '你不用出门，留在家里就可以买。',
+          pinyin: 'Nǐ bùyòng chūmén, liúzài jiālǐ jiù kěyǐ mǎi.',
+          vi: 'Bạn không cần ra khỏi nhà, ở nhà là có thể mua.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-220spiohh6o',
+      youtubeId: '220SPiohH6o',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Nuôi thú cưng || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Nuôi thú cưng',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 194,
+      durationLabel: '3:14',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 8 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/220SPiohH6o.json',
+      cuesCount: 8,
+      cues: [
+        {
+          start: 23.79,
+          end: 28.23,
+          en: 'To begin: more and more families now keep small pets.',
+          zh: '开始，现在越来越多的家庭会养小宠物了。',
+          pinyin: 'Kāishǐ, xiànzài yuèláiyuè duō de jiātíng huì yǎng xiǎo chǒngwù le.',
+          vi: 'Bắt đầu. Bây giờ ngày càng nhiều gia đình nuôi thú cưng nhỏ.'
+        },
+        {
+          start: 30.99,
+          end: 33.45,
+          en: 'For example, kittens and puppies.',
+          zh: '比如，小猫、小狗。',
+          pinyin: 'Bǐrú, xiǎomāo, xiǎogǒu.',
+          vi: 'Ví dụ như mèo con, chó con.'
+        },
+        {
+          start: 36,
+          end: 38.7,
+          en: 'They have become a member of the family.',
+          zh: '它们成为了一位家庭成员。',
+          pinyin: 'Tāmen chéngwéi le yīwèi jiātíngchéngyuán.',
+          vi: 'Chúng đã trở thành một thành viên trong gia đình.'
+        },
+        {
+          start: 41.38,
+          end: 43.62,
+          en: 'They bring joy to the family.',
+          zh: '给家里人带来了欢乐。',
+          pinyin: 'Gěi jiālǐrén dàilái le huānlè.',
+          vi: 'Mang lại niềm vui cho người trong nhà.'
+        },
+        {
+          start: 52.31,
+          end: 59.94,
+          en: 'Every day the little pets wander around the house at ease, eating and sleeping.',
+          zh: '小宠物们每天在家里悠闲地走着，吃饭睡觉。',
+          pinyin: 'Xiǎo chǒngwù men měitiān zài jiālǐ yōuxiándì zǒu zhe, chīfàn shuìjiào.',
+          vi: 'Mỗi ngày thú cưng nhỏ thong thả đi lại trong nhà, ăn rồi ngủ.'
+        },
+        {
+          start: 62.36,
+          end: 69.52,
+          en: 'They seem to understand what people say, and they are especially clever.',
+          zh: '他们好像能够听懂人类说话一样，特别的聪明。',
+          pinyin: 'Tāmen hǎoxiàng nénggòu tīngdǒng rénlèi shuōhuà yīyàng, tèbié de cōngmíng.',
+          vi: 'Chúng cứ như thể hiểu được người nói vậy, đặc biệt thông minh.'
+        },
+        {
+          start: 108.3,
+          end: 114.39,
+          en: 'They can also grow up together with the children in the family.',
+          zh: '还能够陪伴家里的小孩子一起长大。',
+          pinyin: 'Hái nénggòu péibàn jiālǐ de xiǎoháizi yìqǐ zhǎngdà.',
+          vi: 'Còn có thể cùng lớn lên với trẻ nhỏ trong nhà.'
+        },
+        {
+          start: 117.11,
+          end: 124.62,
+          en: 'Every day the little pets wander around the house at ease, eating and sleeping.',
+          zh: '小宠物们每天在家里悠闲地走着，吃饭睡觉。',
+          pinyin: 'Xiǎo chǒngwù men měitiān zài jiālǐ yōuxiándì zǒu zhe, chīfàn shuìjiào.',
+          vi: 'Mỗi ngày thú cưng nhỏ thong thả đi lại trong nhà, ăn rồi ngủ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-oo5gvxtfohi',
+      youtubeId: 'oo5GvxtFohI',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Nói về người bạn thân || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Nói về người bạn thân',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 211,
+      durationLabel: '3:31',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 11 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/oo5GvxtFohI.json',
+      cuesCount: 11,
+      cues: [
+        {
+          start: 19.92,
+          end: 26.82,
+          en: 'To begin: my good friend is a girl.',
+          zh: '开始，我的好朋友是一个女孩。',
+          pinyin: 'Kāishǐ, wǒ de hǎo péngyǒu shì yígè nǚhái.',
+          vi: 'Bắt đầu. Bạn thân của tôi là một cô gái.'
+        },
+        {
+          start: 29.87,
+          end: 32.47,
+          en: 'She isn\'t tall, and she looks very cute.',
+          zh: '她个子不高，长得很可爱。',
+          pinyin: 'Tā gèzi bù gāo, zhǎng dé hěn kěài.',
+          vi: 'Cô ấy không cao, trông rất đáng yêu.'
+        },
+        {
+          start: 35.6,
+          end: 38.46,
+          en: 'She is not only clever but also conscientious.',
+          zh: '她不但聪明，而且认真。',
+          pinyin: 'Tā bùdàn cōngmíng, érqiě rènzhēn.',
+          vi: 'Cô ấy không những thông minh mà còn nghiêm túc.'
+        },
+        {
+          start: 41.32,
+          end: 43.54,
+          en: 'She likes to study at the library.',
+          zh: '她喜欢去图书馆学习。',
+          pinyin: 'Tā xǐhuān qù túshūguǎn xuéxí.',
+          vi: 'Cô ấy thích đến thư viện học bài.'
+        },
+        {
+          start: 46.46,
+          end: 49.38,
+          en: 'So she does well in every exam.',
+          zh: '所以每次考试成绩都很好。',
+          pinyin: 'Suǒyǐ měicì kǎoshìchéngjì dōu hěn hǎo.',
+          vi: 'Nên lần nào thi cũng đạt kết quả tốt.'
+        },
+        {
+          start: 53.42,
+          end: 56.56,
+          en: 'She is very warm-hearted and always cares about other people.',
+          zh: '她很热情，总是关心别人。',
+          pinyin: 'Tā hěn rèqíng, zǒngshì guānxīn biérén.',
+          vi: 'Cô ấy rất nhiệt tình, luôn quan tâm đến người khác.'
+        },
+        {
+          start: 58.77,
+          end: 66.79,
+          en: 'If someone has a problem, she will definitely help them solve it.',
+          zh: '如果别人有困难，她一定会帮助别人解决问题。',
+          pinyin: 'Rúguǒ biérén yǒu kùnnán, tā yídìng huì bāngzhù biérén jiějuéwèntí.',
+          vi: 'Nếu người khác gặp khó khăn, cô ấy nhất định sẽ giúp họ giải quyết vấn đề.'
+        },
+        {
+          start: 69.76,
+          end: 76.82,
+          en: 'She has many hobbies, such as playing football and hiking.',
+          zh: '她有很多爱好，比如踢足球、爬山。',
+          pinyin: 'Tā yǒu hěnduō àihào, bǐrú tīzúqiú, páshān.',
+          vi: 'Cô ấy có nhiều sở thích, ví dụ như đá bóng, leo núi.'
+        },
+        {
+          start: 95.97,
+          end: 98.63,
+          en: 'My good friend is a girl.',
+          zh: '我的好朋友是一个女孩。',
+          pinyin: 'Wǒ de hǎo péngyǒu shì yígè nǚhái.',
+          vi: 'Bạn thân của tôi là một cô gái.'
+        },
+        {
+          start: 113.74,
+          end: 125.96,
+          en: 'She likes to study at the library. So she does well in every exam. She is very warm-hearted,',
+          zh: '她喜欢去图书馆学习。所以每次考试成绩都很好，她很热情，',
+          pinyin: 'Tā xǐhuān qù túshūguǎn xuéxí. Suǒyǐ měicì kǎoshìchéngjì dōu hěn hǎo, tā hěn rèqíng,',
+          vi: 'Cô ấy thích đến thư viện học bài. Nên lần nào thi cũng đạt kết quả tốt. Cô ấy rất nhiệt tình,'
+        },
+        {
+          start: 126.52,
+          end: 128.1,
+          en: 'and always care about other people.',
+          zh: '总是关心别人。',
+          pinyin: 'Zǒngshì guānxīn biérén.',
+          vi: 'luôn quan tâm đến người khác.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps--7vhw8hy7e0',
+      youtubeId: '-7vHw8HY7e0',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Nói về thời tiết xấu || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Nói về thời tiết xấu',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 205,
+      durationLabel: '3:25',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 9 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/-7vHw8HY7e0.json',
+      cuesCount: 9,
+      cues: [
+        {
+          start: 21.22,
+          end: 36.7,
+          en: 'To begin: the weather today is really bad. A typhoon has hit the whole Guangzhou area, and it has been raining heavily outside the whole time.',
+          zh: '开始，今天的天气特别不好，台风袭击了整个广州地区，外面一直在下大雨。',
+          pinyin: 'Kāishǐ, jīntiān de tiānqì tèbié bùhǎo, táifēng xíjī le zhěnggè guǎngzhōudìqū, wàimiàn yìzhí zài xià dàyǔ.',
+          vi: 'Bắt đầu. Hôm nay thời tiết rất xấu, bão đã quét qua toàn bộ khu vực Quảng Châu, bên ngoài mưa to suốt.'
+        },
+        {
+          start: 39.43,
+          end: 50.84,
+          en: 'There isn\'t a single pedestrian on the street. The strong wind is howling and has blown down big trees,',
+          zh: '街上没有任何一个行人，大风呼呼地刮着，把大树吹倒了，',
+          pinyin: 'Jiēshàng méiyǒu rènhé yígè xíngrén, dàfēng hūhūdì guā zhe, bǎ dàshù chuīdào le,',
+          vi: 'Trên phố không có một người đi đường nào, gió lớn thổi ào ào, quật đổ cả cây to,'
+        },
+        {
+          start: 53.48,
+          end: 64.94,
+          en: 'blowing things everywhere. Besides that, I feel really cold, and I hope the typhoon passes soon.',
+          zh: '把物品吹得到处都是。而且，我感觉特别冷，希望台风早点过去。',
+          pinyin: 'Bǎ wùpǐn chuī dédào chù dōu shì. Érqiě, wǒ gǎnjué tèbié lěng, xīwàng táifēng zǎodiǎn guòqù.',
+          vi: 'thổi đồ đạc bay khắp nơi. Hơn nữa, tôi thấy rất lạnh, mong bão sớm qua đi.'
+        },
+        {
+          start: 67.69,
+          end: 69.79,
+          en: 'That way I can go out and play.',
+          zh: '这样我就可以出去玩了。',
+          pinyin: 'Zhèyàng wǒ jiù kěyǐ chūqùwán le.',
+          vi: 'Như vậy thì tôi mới có thể ra ngoài chơi.'
+        },
+        {
+          start: 88.16,
+          end: 95.87,
+          en: 'The weather today is really bad. A typhoon has hit the whole Guangzhou area.',
+          zh: '今天的天气特别不好，台风袭击了整个广州地区。',
+          pinyin: 'Jīntiān de tiānqì tèbié bùhǎo, táifēng xíjī le zhěnggè guǎngzhōudìqū.',
+          vi: 'Hôm nay thời tiết rất xấu, bão đã quét qua toàn bộ khu vực Quảng Châu.'
+        },
+        {
+          start: 98.68,
+          end: 105.78,
+          en: 'It has been raining heavily outside the whole time, and there isn\'t a single pedestrian on the street.',
+          zh: '外面一直在下大雨，街上没有任何一个行人。',
+          pinyin: 'Wàimiàn yìzhí zài xià dàyǔ, jiēshàng méiyǒu rènhé yígè xíngrén.',
+          vi: 'Bên ngoài mưa to suốt, trên phố không có một người đi đường nào.'
+        },
+        {
+          start: 108.68,
+          end: 119.53,
+          en: 'The strong wind is howling and has blown down big trees. It has blown things everywhere.',
+          zh: '大风呼呼地刮着，把大树吹倒了。把物品吹得到处都是。',
+          pinyin: 'Dàfēng hūhūdì guā zhe, bǎ dàshù chuīdào le. Bǎ wùpǐn chuī dédào chù dōu shì.',
+          vi: 'Gió lớn thổi ào ào, quật đổ cả cây to. Thổi đồ đạc bay khắp nơi.'
+        },
+        {
+          start: 121.98,
+          end: 128.71,
+          en: 'Besides that, I feel really cold. I hope the typhoon passes soon.',
+          zh: '而且，我感觉特别冷。希望台风早点过去。',
+          pinyin: 'Érqiě, wǒ gǎnjué tèbié lěng. Xīwàng táifēng zǎodiǎn guòqù.',
+          vi: 'Hơn nữa, tôi thấy rất lạnh. Mong bão sớm qua đi.'
+        },
+        {
+          start: 131.6,
+          end: 133.74,
+          en: 'That way I can go out and play.',
+          zh: '这样我就可以出去玩啦。',
+          pinyin: 'Zhèyàng wǒ jiù kěyǐ chūqùwán la.',
+          vi: 'Như vậy thì tôi mới có thể ra ngoài chơi.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-pnrgjomv2bq',
+      youtubeId: 'PnrgJoMV2bQ',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Tôi và bạn gái || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Tôi và bạn gái',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 191,
+      durationLabel: '3:11',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 10 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/PnrgJoMV2bQ.json',
+      cuesCount: 10,
+      cues: [
+        {
+          start: 20.04,
+          end: 27.98,
+          en: 'To begin: this morning I went to the airport to pick up my girlfriend.',
+          zh: '开始，今天早上，我去机场接我的女朋友。',
+          pinyin: 'Kāishǐ, jīntiān zǎoshàng, wǒ qù jīchǎng jiē wǒ de nǚpéngyǒu.',
+          vi: 'Bắt đầu. Sáng nay tôi ra sân bay đón bạn gái.'
+        },
+        {
+          start: 30.65,
+          end: 36.77,
+          en: 'But her flight was delayed, and I waited for her for two hours.',
+          zh: '但是她的航班晚点了，我等了她两个小时。',
+          pinyin: 'Dànshì tā de hángbān wǎndiǎn le, wǒ děng le tā liǎnggè xiǎoshí.',
+          vi: 'Nhưng chuyến bay của cô ấy bị hoãn, tôi đã đợi cô ấy hai tiếng.'
+        },
+        {
+          start: 39.62,
+          end: 42.72,
+          en: 'Around noon she caught a cold and felt unwell.',
+          zh: '中午的时候，她感冒了，不舒服。',
+          pinyin: 'Zhōngwǔ de shíhòu, tā gǎnmào le, bù shūfú.',
+          vi: 'Đến trưa, cô ấy bị cảm, thấy không khỏe.'
+        },
+        {
+          start: 45.48,
+          end: 53.31,
+          en: 'So we went to the supermarket to buy fresh vegetables and cooked at home ourselves.',
+          zh: '所以我们去超市买新鲜的菜，回家自己煮饭。',
+          pinyin: 'Suǒyǐ wǒmen qù chāoshì mǎi xīnxiān de cài, huíjiā zìjǐ zhǔfàn.',
+          vi: 'Nên chúng tôi đi siêu thị mua rau tươi, về nhà tự nấu cơm.'
+        },
+        {
+          start: 56.16,
+          end: 63.28,
+          en: 'In the evening she felt a bit better, so we played games and listened to music together.',
+          zh: '晚上她感觉好点了，我们就一起打游戏和听音乐。',
+          pinyin: 'Wǎnshàng tā gǎnjué hǎo diǎn le, wǒmen jiù yìqǐ dǎyóuxì hé tīng yīnyuè.',
+          vi: 'Đến tối cô ấy thấy đỡ hơn, chúng tôi cùng chơi game và nghe nhạc.'
+        },
+        {
+          start: 66.01,
+          end: 67.83,
+          en: 'Our day was so happy.',
+          zh: '我们的一天太快乐了。',
+          pinyin: 'Wǒmen de yītiān tài kuàilè le.',
+          vi: 'Một ngày của chúng tôi thật là vui.'
+        },
+        {
+          start: 86.96,
+          end: 90.42,
+          en: 'This morning I went to the airport to pick up my girlfriend,',
+          zh: '今天早上我去机场接我的女朋友，',
+          pinyin: 'Jīntiān zǎoshàng wǒ qù jīchǎng jiē wǒ de nǚpéngyǒu,',
+          vi: 'Sáng nay tôi ra sân bay đón bạn gái,'
+        },
+        {
+          start: 93.09,
+          end: 94.83,
+          en: 'but her flight was delayed.',
+          zh: '但是她的航班晚点了。',
+          pinyin: 'Dànshì tā de hángbān wǎndiǎn le.',
+          vi: 'nhưng chuyến bay của cô ấy bị hoãn.'
+        },
+        {
+          start: 97.77,
+          end: 105.57,
+          en: 'I waited for her for two hours. Around noon she caught a cold and felt unwell.',
+          zh: '我等了她两个小时，中午的时候她感冒了，不舒服。',
+          pinyin: 'Wǒ děng le tā liǎnggè xiǎoshí, zhōngwǔ de shíhòu tā gǎnmào le, bù shūfú.',
+          vi: 'Tôi đợi cô ấy hai tiếng. Đến trưa cô ấy bị cảm, thấy không khỏe.'
+        },
+        {
+          start: 118.45,
+          end: 125.78,
+          en: 'In the evening she felt a bit better. We played games and listened to music together.',
+          zh: '晚上，她感觉好点了。我们就一起打游戏和听音乐。',
+          pinyin: 'Wǎnshàng, tā gǎnjué hǎo diǎn le. Wǒmen jiù yìqǐ dǎyóuxì hé tīng yīnyuè.',
+          vi: 'Đến tối, cô ấy thấy đỡ hơn. Chúng tôi cùng chơi game và nghe nhạc.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-ezcv22csdsw',
+      youtubeId: 'ezcv22csdsw',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Đi làm công || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Đi làm công',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 209,
+      durationLabel: '3:29',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 14 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/ezcv22csdsw.json',
+      cuesCount: 14,
+      cues: [
+        {
+          start: 23.66,
+          end: 31.32,
+          en: 'After school I go to work part-time at a restaurant as a waiter.',
+          zh: '放学以后我会去餐厅打工当一名服务员',
+          pinyin: 'Fàngxué yǐhòu wǒhuì qù cāntīng dǎgōng dāng yīmíng fúwùyuán',
+          vi: 'Sau giờ tan học tôi sẽ đến nhà hàng làm thêm, làm nhân viên phục vụ.'
+        },
+        {
+          start: 34.45,
+          end: 36.19,
+          en: 'When I work part-time at the restaurant,',
+          zh: '在餐厅打工的时候',
+          pinyin: 'Zài cāntīng dǎgōng de shíhòu',
+          vi: 'Khi làm thêm ở nhà hàng,'
+        },
+        {
+          start: 39.21,
+          end: 42.01,
+          en: 'the things I need to do include carrying plates,',
+          zh: '我需要做的事情有端盘子',
+          pinyin: 'Wǒ xūyào zuò de shìqíng yǒu duānpánzi',
+          vi: 'những việc tôi cần làm có bưng bát đĩa,'
+        },
+        {
+          start: 44.28,
+          end: 46.34,
+          en: 'pouring beer for the guests,',
+          zh: '给客人倒啤酒',
+          pinyin: 'Gěi kèrén dào píjiǔ',
+          vi: 'rót bia cho khách,'
+        },
+        {
+          start: 49.9,
+          end: 52.48,
+          en: 'and cleaning up after the shift ends.',
+          zh: '和在下班以后打扫卫生',
+          pinyin: 'Hé zài xiàbān yǐhòu dǎsǎowèishēng',
+          vi: 'và dọn dẹp vệ sinh sau khi tan ca.'
+        },
+        {
+          start: 55.39,
+          end: 56.73,
+          en: 'Besides earning money,',
+          zh: '除了能赚钱',
+          pinyin: 'Chúle néng zhuànqián',
+          vi: 'Ngoài việc kiếm được tiền,'
+        },
+        {
+          start: 59.46,
+          end: 61.86,
+          en: 'I can also eat dinner at the restaurant.',
+          zh: '我还可以在餐厅吃晚餐',
+          pinyin: 'Wǒ hái kěyǐ zài cāntīng chī wǎncān',
+          vi: 'tôi còn có thể ăn tối ở nhà hàng.'
+        },
+        {
+          start: 64.04,
+          end: 71.28,
+          en: 'The manager thought I worked very well and decided to give me a raise.',
+          zh: '经理觉得我工作得很好，决定给我加工资。',
+          pinyin: 'Jīnglǐ juéde wǒ gōngzuò dé hěn hǎo, juédìng gěi wǒ jiāgōngzī.',
+          vi: 'Quản lý thấy tôi làm việc rất tốt, quyết định tăng lương cho tôi.'
+        },
+        {
+          start: 73.98,
+          end: 76.4,
+          en: 'One hundred and fifty yuan a week.',
+          zh: '每个星期给我一百五十块。',
+          pinyin: 'Měigè xīngqī gěi wǒ yìbǎiwǔshíkuài.',
+          vi: 'Mỗi tuần trả tôi một trăm năm mươi tệ.'
+        },
+        {
+          start: 106.25,
+          end: 113.53,
+          en: 'When I work part-time at the restaurant, the things I need to do include carrying plates.',
+          zh: '在餐厅打工的时候，我需要做的事情有端盘子。',
+          pinyin: 'Zài cāntīng dǎgōng de shíhòu, wǒ xūyào zuò de shìqíng yǒu duānpánzi.',
+          vi: 'Khi làm thêm ở nhà hàng, việc tôi cần làm có bưng bát đĩa.'
+        },
+        {
+          start: 116.53,
+          end: 123.52,
+          en: 'Pouring beer for the guests, and cleaning up after the shift ends.',
+          zh: '给客人倒啤酒，和在下班以后打扫卫生。',
+          pinyin: 'Gěi kèrén dào píjiǔ, hé zài xiàbān yǐhòu dǎsǎowèishēng.',
+          vi: 'Rót bia cho khách, và dọn dẹp vệ sinh sau khi tan ca.'
+        },
+        {
+          start: 123.52,
+          end: 133.57,
+          en: 'Besides earning money, I can also eat dinner at the restaurant.',
+          zh: '除了能赚钱，我还可以在餐厅吃晚餐。',
+          pinyin: 'Chúle néng zhuànqián, wǒ hái kěyǐ zài cāntīng chī wǎncān.',
+          vi: 'Ngoài việc kiếm được tiền, tôi còn có thể ăn tối ở nhà hàng.'
+        },
+        {
+          start: 136.48,
+          end: 138.46,
+          en: 'The manager thought I worked very well.',
+          zh: '经理觉得我工作得很好。',
+          pinyin: 'Jīnglǐ juéde wǒ gōngzuò dé hěn hǎo.',
+          vi: 'Quản lý thấy tôi làm việc rất tốt.'
+        },
+        {
+          start: 142.33,
+          end: 143.91,
+          en: 'And decided to give me a raise.',
+          zh: '决定给我加工资。',
+          pinyin: 'Juédìng gěi wǒ jiāgōngzī.',
+          vi: 'Quyết định tăng lương cho tôi.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-dnpkczmdjci',
+      youtubeId: 'DnPkczMdJCI',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Đồng hồ báo thức || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Đồng hồ báo thức',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 266,
+      durationLabel: '4:26',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 14 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/DnPkczMdJCI.json',
+      cuesCount: 14,
+      cues: [
+        {
+          start: 24.06,
+          end: 34.69,
+          en: 'The next morning, I bought a small alarm clock to wake me up.',
+          zh: '第二天早上，我买了一个小闹钟，叫我起床。',
+          pinyin: 'Dìèrtiān zǎoshàng, wǒ mǎi le yígè xiǎo nàozhōng, jiào wǒ qǐchuáng.',
+          vi: 'Sáng hôm sau, tôi mua một chiếc đồng hồ báo thức nhỏ để gọi tôi dậy.'
+        },
+        {
+          start: 39.12,
+          end: 41.88,
+          en: 'Thanks to it, I slept very well that night.',
+          zh: '因为有它，这一晚我睡得很好。',
+          pinyin: 'Yīnwèi yǒu tā, zhè yī wǎn wǒ shuì dé hěn hǎo.',
+          vi: 'Nhờ có nó, đêm đó tôi ngủ rất ngon.'
+        },
+        {
+          start: 46.25,
+          end: 53.44,
+          en: 'The next day, it was already 7:40 when I got up in the morning.',
+          zh: '第二天，早上我起来的时候已经七点四十了。',
+          pinyin: 'Dìèrtiān, zǎoshàng wǒ qǐlái de shíhòu yǐjīng qīdiǎn sìshí le.',
+          vi: 'Hôm sau, lúc tôi dậy thì đã bảy giờ bốn mươi rồi.'
+        },
+        {
+          start: 57.57,
+          end: 59.45,
+          en: 'I found that the alarm clock had not gone off.',
+          zh: '我发现闹钟没有响。',
+          pinyin: 'Wǒ fāxiàn nàozhōng méiyǒu xiǎng.',
+          vi: 'Tôi phát hiện đồng hồ báo thức không reo.'
+        },
+        {
+          start: 64.13,
+          end: 73.11,
+          en: 'It takes me at least forty minutes to get to the office. In the end I was still late.',
+          zh: '我到公司，最快也要四十分钟。最后还是迟到了。',
+          pinyin: 'Wǒ dào gōngsī, zuìkuài yě yào sìshífēnzhōng. Zuìhòu háishì chídào le.',
+          vi: 'Tôi đến công ty, nhanh nhất cũng phải bốn mươi phút. Cuối cùng vẫn bị muộn.'
+        },
+        {
+          start: 77.1,
+          end: 80.54,
+          en: 'After work, I had just got home when the alarm clock went off.',
+          zh: '下班以后，刚到家，闹钟就响了。',
+          pinyin: 'Xiàbān yǐhòu, gāng dào jiā, nàozhōng jiù xiǎng le.',
+          vi: 'Tan ca xong, tôi vừa về đến nhà thì đồng hồ báo thức reo.'
+        },
+        {
+          start: 84.87,
+          end: 93.59,
+          en: 'Time\'s up, time\'s up. I looked at my watch: exactly six o\'clock.',
+          zh: '时间到了，时间到了。我看表，正好六点。',
+          pinyin: 'Shíjiān dào le, shíjiān dào le. Wǒ kàn biǎo, zhènghǎo liùdiǎn.',
+          vi: 'Đến giờ rồi, đến giờ rồi. Tôi xem đồng hồ, đúng sáu giờ.'
+        },
+        {
+          start: 97.87,
+          end: 100.67,
+          en: 'It turned out I had set the time for six in the evening,',
+          zh: '原来我把时间定在了下午六点，',
+          pinyin: 'Yuánlái wǒ bǎ shíjiān dìng zài le xiàwǔ liùdiǎn,',
+          vi: 'Thì ra tôi đã đặt giờ vào sáu giờ chiều,'
+        },
+        {
+          start: 124.76,
+          end: 128.5,
+          en: 'There\'s a meeting at eight tomorrow morning, and I can\'t be late.',
+          zh: '明天早上八点要开会，我不能迟到。',
+          pinyin: 'Míngtiān zǎoshàng bādiǎn yào kāihuì, wǒ bùnéng chídào.',
+          vi: 'Sáng mai tám giờ phải họp, tôi không thể đến muộn.'
+        },
+        {
+          start: 132.79,
+          end: 135.49,
+          en: 'I bought a small alarm clock to wake me up.',
+          zh: '我买了一个小闹钟，叫我起床。',
+          pinyin: 'Wǒ mǎi le yígè xiǎo nàozhōng, jiào wǒ qǐchuáng.',
+          vi: 'Tôi mua một chiếc đồng hồ báo thức nhỏ để gọi tôi dậy.'
+        },
+        {
+          start: 157.95,
+          end: 159.79,
+          en: 'I found that the alarm clock had not gone off.',
+          zh: '我发现闹钟没有响。',
+          pinyin: 'Wǒ fāxiàn nàozhōng méiyǒu xiǎng.',
+          vi: 'Tôi phát hiện đồng hồ báo thức không reo.'
+        },
+        {
+          start: 165.01,
+          end: 168.01,
+          en: 'It takes me at least forty minutes to get to the office.',
+          zh: '我到公司最快也要四十分钟。',
+          pinyin: 'Wǒ dào gōngsī zuìkuài yě yào sìshífēnzhōng.',
+          vi: 'Tôi đến công ty nhanh nhất cũng phải bốn mươi phút.'
+        },
+        {
+          start: 172.31,
+          end: 173.89,
+          en: 'In the end I was still late.',
+          zh: '最后还是迟到了。',
+          pinyin: 'Zuìhòu háishì chídào le.',
+          vi: 'Cuối cùng vẫn bị muộn.'
+        },
+        {
+          start: 178,
+          end: 181.32,
+          en: 'After work, I had just got home when the alarm clock went off.',
+          zh: '下班以后，刚到家，闹钟就响了。',
+          pinyin: 'Xiàbān yǐhòu, gāng dào jiā, nàozhōng jiù xiǎng le.',
+          vi: 'Tan ca xong, tôi vừa về đến nhà thì đồng hồ báo thức reo.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-jwsv_-hynt4',
+      youtubeId: 'jwsV_-hYnt4',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK3】去寺庙 - Đi chùa',
+      titleVi: 'Đi chùa',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 168,
+      durationLabel: '2:48',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 9 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/jwsV_-hYnt4.json',
+      cuesCount: 9,
+      cues: [
+        {
+          start: 17.28,
+          end: 22.9,
+          en: 'On the weekend my friend and I went to visit an ancient temple.',
+          zh: '周末我和朋友去参观了一座古老的寺庙。',
+          pinyin: 'Zhōumò wǒ hé péngyǒu qù cānguān le yīzuò gǔlǎo de sìmiào.',
+          vi: 'Cuối tuần tôi và bạn bè đi tham quan một ngôi chùa cổ.'
+        },
+        {
+          start: 26.81,
+          end: 31.27,
+          en: 'The temple is on the mountain; you have to climb many steps to get there.',
+          zh: '寺庙在山上，要走很多台阶才能到。',
+          pinyin: 'Sìmiào zài shānshàng, yào zǒu hěnduō táijiē cáinéng dào.',
+          vi: 'Chùa ở trên núi, phải đi qua rất nhiều bậc thang mới đến.'
+        },
+        {
+          start: 34.94,
+          end: 38.38,
+          en: 'Inside the temple it is very quiet, and there are many big trees.',
+          zh: '寺院里很安静，有很多大树。',
+          pinyin: 'Sìyuàn lǐ hěn ānjìng, yǒu hěnduō dàshù.',
+          vi: 'Trong chùa rất yên tĩnh, có nhiều cây to.'
+        },
+        {
+          start: 41.87,
+          end: 47.57,
+          en: 'I saw a very large Buddha statue, and some people were making wishes there.',
+          zh: '我看到了一座很大的佛像，有些人在那里许愿。',
+          pinyin: 'Wǒ kàndào le yīzuò hěndà de fóxiàng, yǒuxiē rén zài nàlǐ xǔyuàn.',
+          vi: 'Tôi thấy một bức tượng Phật rất lớn, có vài người đang cầu nguyện ở đó.'
+        },
+        {
+          start: 51.31,
+          end: 62.08,
+          en: 'Next to the temple there is a small shop selling lots of souvenirs; I bought a red bracelet,',
+          zh: '寺院旁边有一个小店，卖很多纪念品，我买了一条红色的手绳，',
+          pinyin: 'Sìyuàn pángbiān yǒu yígè xiǎodiàn, mài hěnduō jìniànpǐn, wǒ mǎi le yītiáo hóngsè de shǒu shéng,',
+          vi: 'Cạnh chùa có một cửa hàng nhỏ bán nhiều đồ lưu niệm, tôi mua một chiếc vòng tay đỏ,'
+        },
+        {
+          start: 62.58,
+          end: 64.86,
+          en: 'which they say brings good luck.',
+          zh: '听说可以带来好运。',
+          pinyin: 'Tīngshuō kěyǐ dàilái hǎoyùn.',
+          vi: 'nghe nói có thể mang lại may mắn.'
+        },
+        {
+          start: 126.78,
+          end: 131.14,
+          en: 'The temple is on the mountain; you have to climb many steps to get there.',
+          zh: '寺庙在山上，要走很多台阶才能到。',
+          pinyin: 'Sìmiào zài shānshàng, yào zǒu hěnduō táijiē cáinéng dào.',
+          vi: 'Chùa ở trên núi, phải đi qua rất nhiều bậc thang mới đến.'
+        },
+        {
+          start: 142.8,
+          end: 147.4,
+          en: 'Next to the temple there is a small shop selling lots of souvenirs.',
+          zh: '寺庙旁边有一个小店，卖很多纪念品。',
+          pinyin: 'Sìmiào pángbiān yǒu yígè xiǎodiàn, mài hěnduō jìniànpǐn.',
+          vi: 'Cạnh chùa có một cửa hàng nhỏ bán nhiều đồ lưu niệm.'
+        },
+        {
+          start: 148.16,
+          end: 153.56,
+          en: 'I bought a red bracelet, which they say brings good luck.',
+          zh: '我买了一条红色的手绳，听说可以带来好运。',
+          pinyin: 'Wǒ mǎi le yītiáo hóngsè de shǒu shéng, tīngshuō kěyǐ dàilái hǎoyùn.',
+          vi: 'Tôi mua một chiếc vòng tay đỏ, nghe nói có thể mang lại may mắn.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-i4byr6b7eak',
+      youtubeId: 'i4byr6B7Eak',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK3】去洗衣店 - Đi tiệm giặt là',
+      titleVi: 'Đi tiệm giặt là',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 167,
+      durationLabel: '2:47',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 12 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/i4byr6B7Eak.json',
+      cuesCount: 12,
+      cues: [
+        {
+          start: 15.06,
+          end: 19.66,
+          en: 'I have a white shirt.',
+          zh: '我有一件白色的衬衫',
+          pinyin: 'Wǒ yǒu yījiàn báisè de chènshān',
+          vi: 'Tôi có một chiếc áo sơ mi trắng.'
+        },
+        {
+          start: 23.16,
+          end: 25.68,
+          en: 'Last week, while drinking coffee,',
+          zh: '上个星期喝咖啡的时候',
+          pinyin: 'Shànggèxīngqī hēkāfēi de shíhòu',
+          vi: 'Tuần trước, lúc uống cà phê,'
+        },
+        {
+          start: 28.56,
+          end: 30.92,
+          en: 'I accidentally got it dirty.',
+          zh: '我不小心把它弄脏了',
+          pinyin: 'Wǒ bù xiǎoxīn bǎ tā nòngzāngle',
+          vi: 'tôi không cẩn thận làm bẩn nó.'
+        },
+        {
+          start: 33.32,
+          end: 38.24,
+          en: 'I washed it at home several times, but it never came clean.',
+          zh: '我在家里洗了好几次但是都没洗干净',
+          pinyin: 'Wǒ zài jiālǐ xǐ le hǎo jǐcì dànshì dōu méixǐ gānjìng',
+          vi: 'Tôi giặt ở nhà mấy lần nhưng đều không sạch.'
+        },
+        {
+          start: 40.7,
+          end: 44.24,
+          en: 'So this morning I went to the laundry.',
+          zh: '所以今天早上我去了洗衣店。',
+          pinyin: 'Suǒyǐ jīntiān zǎoshàng wǒ qù le xǐyīdiàn.',
+          vi: 'Nên sáng nay tôi đã đến tiệm giặt là.'
+        },
+        {
+          start: 47.44,
+          end: 52.2,
+          en: 'The laundry staff had a look and said he had a way to get it clean.',
+          zh: '洗衣店的员工看了一下，说他有办法洗干净。',
+          pinyin: 'Xǐyīdiàn de yuángōng kàn le yīxià, shuō tā yǒu bànfǎ xǐ gānjìng.',
+          vi: 'Nhân viên tiệm giặt xem qua rồi nói anh ấy có cách giặt sạch.'
+        },
+        {
+          start: 55.64,
+          end: 61.4,
+          en: 'He told me it costs thirty yuan to wash one item, and he also gave me a slip of paper.',
+          zh: '他告诉我，洗一件衣服要三十块钱，还给我一张纸。',
+          pinyin: 'Tā gàosù wǒ, xǐ yījiàn yīfú yào sānshíkuài qián, huángěi wǒ yīzhāng zhǐ.',
+          vi: 'Anh ấy nói với tôi, giặt một bộ quần áo là ba mươi tệ, và còn đưa tôi một tờ giấy.'
+        },
+        {
+          start: 65.12,
+          end: 68.24,
+          en: 'It said on it: come pick up the clothes on Friday.',
+          zh: '上面写着，星期五来拿衣服。',
+          pinyin: 'Shàngmiàn xiě zhe, xīngqīwǔ lái ná yīfú.',
+          vi: 'Trên đó viết: thứ Sáu đến lấy đồ.'
+        },
+        {
+          start: 119.47,
+          end: 127.48,
+          en: 'I have a white shirt. Last week, while drinking coffee, I accidentally got it dirty.',
+          zh: '我有一件白色的衬衫。上个星期喝咖啡的时候，我不小心把它弄脏了。',
+          pinyin: 'Wǒ yǒu yījiàn báisè de chènshān. Shànggèxīngqī hēkāfēi de shíhòu, wǒ bù xiǎoxīn bǎ tā nòngzāngle.',
+          vi: 'Tôi có một chiếc áo sơ mi trắng. Tuần trước, lúc uống cà phê, tôi không cẩn thận làm bẩn nó.'
+        },
+        {
+          start: 128.27,
+          end: 132.71,
+          en: 'I washed it at home several times, but it never came clean.',
+          zh: '我在家里洗了好几次，但是都没洗干净。',
+          pinyin: 'Wǒ zài jiālǐ xǐ le hǎo jǐcì, dànshì dōu méixǐ gānjìng.',
+          vi: 'Tôi giặt ở nhà mấy lần, nhưng đều không sạch.'
+        },
+        {
+          start: 133.44,
+          end: 142.23,
+          en: 'So this morning I went to the laundry. The staff had a look and said he had a way to get it clean.',
+          zh: '所以今天早上我去了洗衣店。洗衣店的员工看了一下，说他有办法洗干净。',
+          pinyin: 'Suǒyǐ jīntiān zǎoshàng wǒ qù le xǐyīdiàn. Xǐyīdiàn de yuángōng kàn le yīxià, shuō tā yǒu bànfǎ xǐ gānjìng.',
+          vi: 'Nên sáng nay tôi đã đến tiệm giặt là. Nhân viên tiệm xem qua rồi nói anh ấy có cách giặt sạch.'
+        },
+        {
+          start: 142.23,
+          end: 152.6,
+          en: 'He told me it costs thirty yuan to wash one item, and gave me a slip of paper that said to come pick it up on Friday.',
+          zh: '他告诉我，洗一件衣服要三十块钱，还给我一张纸，上面写着星期五来拿衣服。',
+          pinyin: 'Tā gàosù wǒ, xǐ yījiàn yīfú yào sānshíkuài qián, huángěi wǒ yīzhāng zhǐ, shàngmiàn xiě zhe xīngqīwǔ lái ná yīfú.',
+          vi: 'Anh ấy nói giặt một bộ quần áo là ba mươi tệ, và đưa tôi một tờ giấy, trên đó viết thứ Sáu đến lấy đồ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-ols4rakp7ro',
+      youtubeId: 'oLs4RakP7ro',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK3】朋友聚会 - Tụ tập bạn bè',
+      titleVi: 'Tụ tập bạn bè',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 145,
+      durationLabel: '2:25',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 9 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/oLs4RakP7ro.json',
+      cuesCount: 9,
+      cues: [
+        {
+          start: 15.3,
+          end: 23.04,
+          en: 'Yesterday I met up with a few good friends at a café.',
+          zh: '昨天，我和几个好朋友在一家咖啡馆聚会',
+          pinyin: 'Zuótiān, wǒ hé jǐgè hǎo péngyǒu zài yījiā kāfēiguǎn jùhuì',
+          vi: 'Hôm qua, tôi và mấy người bạn thân gặp nhau ở một quán cà phê.'
+        },
+        {
+          start: 27,
+          end: 32.26,
+          en: 'We chatted together and shared how our lives and work have been lately.',
+          zh: '我们一起聊天，分享最近的生活和工作',
+          pinyin: 'Wǒmen yìqǐ liáotiān, fēnxiǎng zuìjìn de shēnghuó hé gōngzuò',
+          vi: 'Chúng tôi cùng trò chuyện, chia sẻ về cuộc sống và công việc gần đây.'
+        },
+        {
+          start: 36.56,
+          end: 38.9,
+          en: 'Some of them are getting ready to marry.',
+          zh: '有的人准备结婚了',
+          pinyin: 'Yǒu de rén zhǔnbèi jiéhūn le',
+          vi: 'Có người đang chuẩn bị kết hôn.'
+        },
+        {
+          start: 42.16,
+          end: 45.28,
+          en: 'Some of them have found new jobs.',
+          zh: '有的人找到了新工作。',
+          pinyin: 'Yǒu de rén zhǎodào le xīn gōngzuò.',
+          vi: 'Có người đã tìm được việc mới.'
+        },
+        {
+          start: 49.28,
+          end: 54.88,
+          en: 'Hearing that everyone\'s life is going well, I felt very happy.',
+          zh: '听到大家的生活都挺好的，我感到非常高兴。',
+          pinyin: 'Tīngdào dàjiā de shēnghuó dōu tǐng hǎo de, wǒ gǎndào fēichánggāoxìng.',
+          vi: 'Nghe thấy cuộc sống của mọi người đều khá tốt, tôi thấy rất vui.'
+        },
+        {
+          start: 103.41,
+          end: 111.6,
+          en: 'Yesterday I met up with a few good friends at a café.',
+          zh: '昨天，我和几个好朋友在一家咖啡馆聚会。',
+          pinyin: 'Zuótiān, wǒ hé jǐgè hǎo péngyǒu zài yījiā kāfēiguǎn jùhuì.',
+          vi: 'Hôm qua, tôi và mấy người bạn thân gặp nhau ở một quán cà phê.'
+        },
+        {
+          start: 112.32,
+          end: 117.52,
+          en: 'We chatted together and shared how our lives and work have been lately.',
+          zh: '我们一起聊天，分享最近的生活和工作。',
+          pinyin: 'Wǒmen yìqǐ liáotiān, fēnxiǎng zuìjìn de shēnghuó hé gōngzuò.',
+          vi: 'Chúng tôi cùng trò chuyện, chia sẻ về cuộc sống và công việc gần đây.'
+        },
+        {
+          start: 118.4,
+          end: 123.56,
+          en: 'Some are getting ready to marry, and some have found new jobs.',
+          zh: '有的人准备结婚了，有的人找到了新工作。',
+          pinyin: 'Yǒu de rén zhǔnbèi jiéhūn le, yǒu de rén zhǎodào le xīn gōngzuò.',
+          vi: 'Có người đang chuẩn bị kết hôn, có người đã tìm được việc mới.'
+        },
+        {
+          start: 123.56,
+          end: 129.85,
+          en: 'Hearing that everyone\'s life is going well, I felt very happy.',
+          zh: '听到大家的生活都挺好的，我感到非常高兴。',
+          pinyin: 'Tīngdào dàjiā de shēnghuó dōu tǐng hǎo de, wǒ gǎndào fēichánggāoxìng.',
+          vi: 'Nghe thấy cuộc sống của mọi người đều khá tốt, tôi thấy rất vui.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-unrhyexwiwe',
+      youtubeId: 'UnRHYEXWIWE',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK3】点外卖 - Đặt đồ ăn ngoài',
+      titleVi: 'Đặt đồ ăn ngoài',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 154,
+      durationLabel: '2:34',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 8 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/UnRHYEXWIWE.json',
+      cuesCount: 8,
+      cues: [
+        {
+          start: 15.2,
+          end: 20.03,
+          en: 'Tonight I don\'t want to cook.',
+          zh: '今天晚上我不想做饭。',
+          pinyin: 'Jīntiān wǎnshàng wǒ bùxiǎng zuòfàn.',
+          vi: 'Tối nay tôi không muốn nấu ăn.'
+        },
+        {
+          start: 23.33,
+          end: 26.25,
+          en: 'So I used my phone to order a takeout meal.',
+          zh: '所以，我用手机点了一份外卖。',
+          pinyin: 'Suǒyǐ, wǒ yòng shǒujī diǎn le yīfèn wàimài.',
+          vi: 'Nên tôi dùng điện thoại đặt một phần đồ ăn giao tận nơi.'
+        },
+        {
+          start: 29.95,
+          end: 35.27,
+          en: 'I chose a chicken rice and a milk tea. Thirty yuan in total.',
+          zh: '我选了一份鸡肉饭和一杯奶茶。一共三十块钱。',
+          pinyin: 'Wǒ xuǎn le yīfèn jīròufàn hé yībēi nǎichá. Yīgòng sānshíkuài qián.',
+          vi: 'Tôi chọn một phần cơm gà và một cốc trà sữa. Tổng cộng ba mươi tệ.'
+        },
+        {
+          start: 38.99,
+          end: 49.8,
+          en: 'The delivery person came very quickly — it arrived in half an hour. The rice was tasty and the milk tea was good too.',
+          zh: '送外卖的人来得很快。半个小时就到了，饭很好吃，奶茶也很好喝。',
+          pinyin: 'Sòng wàimài de rén láide hěnkuài. Bàngè xiǎoshí jiù dào le, fàn hěn hǎochī, nǎichá yě hěn hǎohē.',
+          vi: 'Người giao hàng đến rất nhanh. Nửa tiếng là tới, cơm rất ngon, trà sữa cũng rất ngon.'
+        },
+        {
+          start: 53.85,
+          end: 56.73,
+          en: 'I think ordering takeout is really very convenient.',
+          zh: '我觉得点外卖真的非常方便。',
+          pinyin: 'Wǒ juéde diǎn wàimài zhēnde fēicháng fāngbiàn.',
+          vi: 'Tôi thấy đặt đồ ăn giao tận nơi thật sự rất tiện.'
+        },
+        {
+          start: 114.41,
+          end: 123.51,
+          en: 'Tonight I didn\'t want to cook, so I used my phone to order a takeaway meal. I chose a chicken rice and a',
+          zh: '今天晚上我不想做饭所以我用手机点了一份外卖我选了一份鸡肉饭和一杯',
+          pinyin: 'Jīntiān wǎnshàng wǒ bùxiǎng zuòfàn suǒyǐ wǒ yòng shǒujī diǎn le yīfèn wàimài wǒ xuǎn le yīfèn jīròufàn hé yībēi',
+          vi: 'Tối nay tôi không muốn nấu ăn, nên tôi dùng điện thoại đặt một phần đồ ăn giao tận nơi. Tôi chọn một phần cơm gà và một'
+        },
+        {
+          start: 123.51,
+          end: 132.47,
+          en: 'milk tea, thirty yuan in total. The delivery person came very quickly — it arrived in half an hour, the rice was tasty,',
+          zh: '奶茶一共三十块钱送外卖的人来得很快半个小时就到了饭很好吃，',
+          pinyin: 'Nǎichá yīgòng sānshíkuài qián sòng wàimài de rén láide hěnkuài bàngè xiǎoshí jiù dào le fàn hěn hǎochī,',
+          vi: 'cốc trà sữa, tổng cộng ba mươi tệ. Người giao hàng đến rất nhanh, nửa tiếng là tới, cơm rất ngon,'
+        },
+        {
+          start: 132.89,
+          end: 137.93,
+          en: 'and the milk tea was good too. I think ordering takeout is really very convenient.',
+          zh: '奶茶也很好喝。我觉得点外卖真的非常方便。',
+          pinyin: 'Nǎichá yě hěn hǎohē. Wǒ juéde diǎn wàimài zhēnde fēicháng fāngbiàn.',
+          vi: 'trà sữa cũng rất ngon. Tôi thấy đặt đồ ăn giao tận nơi thật sự rất tiện.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-t4xs_6knnpq',
+      youtubeId: 't4xs_6knnpQ',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK3】讲故事 - Kể chuyện',
+      titleVi: 'Kể chuyện',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 156,
+      durationLabel: '2:36',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 8 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/t4xs_6knnpQ.json',
+      cuesCount: 8,
+      cues: [
+        {
+          start: 15.24,
+          end: 21.1,
+          en: 'I have a daughter who is nine this year.',
+          zh: '我有一个女儿，今年九岁了。',
+          pinyin: 'Wǒ yǒu yígè nǚr, jīnnián jiǔsuì le.',
+          vi: 'Tôi có một cô con gái, năm nay chín tuổi.'
+        },
+        {
+          start: 24.2,
+          end: 26.28,
+          en: 'She really likes listening to stories.',
+          zh: '她很喜欢听故事。',
+          pinyin: 'Tā hěn xǐhuān tīng gùshì.',
+          vi: 'Cô bé rất thích nghe kể chuyện.'
+        },
+        {
+          start: 29.16,
+          end: 34.8,
+          en: 'So every night before bed, I tell her a story.',
+          zh: '所以每天晚上睡觉前，我都会给她讲故事。',
+          pinyin: 'Suǒyǐ měitiānwǎnshàng shuìjiào qián, wǒ dōu huì gěi tā jiǎnggùshì.',
+          vi: 'Nên mỗi tối trước khi ngủ, tôi đều kể chuyện cho cô bé.'
+        },
+        {
+          start: 37.71,
+          end: 49.39,
+          en: 'I often pick a few very interesting stories, such as The Little Prince and Snow White.',
+          zh: '我常常选几个很有趣的故事，比如小王子、白雪公主。',
+          pinyin: 'Wǒ chángcháng xuǎn jǐgè hěn yǒuqù de gùshì, bǐrú xiǎowángzǐ, báixuěgōngzhǔ.',
+          vi: 'Tôi thường chọn vài câu chuyện rất thú vị, ví dụ như Hoàng tử bé, Bạch Tuyết.'
+        },
+        {
+          start: 53.34,
+          end: 60.02,
+          en: 'After each story she is always very happy, and then she falls asleep quietly.',
+          zh: '每次听完故事，她总是很开心，然后安静地睡觉。',
+          pinyin: 'Měicì tīng wán gùshì, tā zǒngshì hěn kāixīn, ránhòu ānjìng dì shuìjiào.',
+          vi: 'Lần nào nghe xong, cô bé cũng rất vui, rồi ngủ yên.'
+        },
+        {
+          start: 109.1,
+          end: 122.74,
+          en: 'I have a daughter who is nine this year. She really likes listening to stories, so every night before bed I',
+          zh: '我有一个女儿，今年九岁了，她很喜欢听故事，所以每天晚上睡觉前我都会给她',
+          pinyin: 'Wǒ yǒu yígè nǚr, jīnnián jiǔsuì le, tā hěn xǐhuān tīng gùshì, suǒyǐ měitiānwǎnshàng shuìjiào qián wǒ dōu huì gěi tā',
+          vi: 'Tôi có một cô con gái, năm nay chín tuổi, cô bé rất thích nghe kể chuyện, nên mỗi tối trước khi ngủ tôi đều'
+        },
+        {
+          start: 122.74,
+          end: 133.16,
+          en: 'tell her a story. I often pick a few very interesting stories, such as The Little Prince and Snow White.',
+          zh: '讲故事。我常常选几个很有趣的故事，比如小王子、白雪公主。',
+          pinyin: 'Jiǎnggùshì. Wǒ chángcháng xuǎn jǐgè hěn yǒuqù de gùshì, bǐrú xiǎowángzǐ, báixuěgōngzhǔ.',
+          vi: 'kể chuyện cho cô bé. Tôi thường chọn vài câu chuyện rất thú vị, ví dụ như Hoàng tử bé, Bạch Tuyết.'
+        },
+        {
+          start: 134.29,
+          end: 140.89,
+          en: 'After each story she is always very happy, and then she falls asleep quietly.',
+          zh: '每次听完故事，她总是很开心，然后安静地睡觉。',
+          pinyin: 'Měicì tīng wán gùshì, tā zǒngshì hěn kāixīn, ránhòu ānjìng dì shuìjiào.',
+          vi: 'Lần nào nghe xong, cô bé cũng rất vui, rồi ngủ yên.'
+        }
+      ]
+    },
     {
       id: 'ep-bb-hsk1-reflex-quiz',
       youtubeId: 'eJmpTntAZco',

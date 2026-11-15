@@ -1,0 +1,994 @@
+{
+ "开始，今天的天气特别不好，台风袭击了整个广州地区，外面一直在下大雨。": {
+  "vi": "Bắt đầu. Hôm nay thời tiết rất xấu, bão đã quét qua toàn bộ khu vực Quảng Châu, bên ngoài mưa to suốt.",
+  "en": "To begin: the weather today is really bad. A typhoon has hit the whole Guangzhou area, and it has been raining heavily outside the whole time."
+ },
+ "街上没有任何一个行人，大风呼呼地刮着，把大树吹倒了，": {
+  "vi": "Trên phố không có một người đi đường nào, gió lớn thổi ào ào, quật đổ cả cây to,",
+  "en": "There isn't a single pedestrian on the street. The strong wind is howling and has blown down big trees,"
+ },
+ "把物品吹得到处都是。而且，我感觉特别冷，希望台风早点过去。": {
+  "vi": "thổi đồ đạc bay khắp nơi. Hơn nữa, tôi thấy rất lạnh, mong bão sớm qua đi.",
+  "en": "blowing things everywhere. Besides that, I feel really cold, and I hope the typhoon passes soon."
+ },
+ "这样我就可以出去玩了。": {
+  "vi": "Như vậy thì tôi mới có thể ra ngoài chơi.",
+  "en": "That way I can go out and play."
+ },
+ "今天的天气特别不好，台风袭击了整个广州地区。": {
+  "vi": "Hôm nay thời tiết rất xấu, bão đã quét qua toàn bộ khu vực Quảng Châu.",
+  "en": "The weather today is really bad. A typhoon has hit the whole Guangzhou area."
+ },
+ "外面一直在下大雨，街上没有任何一个行人。": {
+  "vi": "Bên ngoài mưa to suốt, trên phố không có một người đi đường nào.",
+  "en": "It has been raining heavily outside the whole time, and there isn't a single pedestrian on the street."
+ },
+ "大风呼呼地刮着，把大树吹倒了。把物品吹得到处都是。": {
+  "vi": "Gió lớn thổi ào ào, quật đổ cả cây to. Thổi đồ đạc bay khắp nơi.",
+  "en": "The strong wind is howling and has blown down big trees. It has blown things everywhere."
+ },
+ "而且，我感觉特别冷。希望台风早点过去。": {
+  "vi": "Hơn nữa, tôi thấy rất lạnh. Mong bão sớm qua đi.",
+  "en": "Besides that, I feel really cold. I hope the typhoon passes soon."
+ },
+ "这样我就可以出去玩啦。": {
+  "vi": "Như vậy thì tôi mới có thể ra ngoài chơi.",
+  "en": "That way I can go out and play."
+ },
+ "她的前男友，又高又帅。": {
+  "vi": "Bạn trai cũ của cô ấy vừa cao vừa đẹp trai.",
+  "en": "Her ex-boyfriend is both tall and handsome."
+ },
+ "男朋友的女朋友，又高、又漂亮。": {
+  "vi": "Bạn gái của bạn trai thì vừa cao vừa xinh.",
+  "en": "The boyfriend's girlfriend is both tall and pretty."
+ },
+ "这个房子，又大又亮。": {
+  "vi": "Căn nhà này vừa to vừa sáng.",
+  "en": "This house is both big and bright."
+ },
+ "你们老板又年轻，": {
+  "vi": "Sếp của các bạn lại vừa trẻ,",
+  "en": "Your boss is also young,"
+ },
+ "我们叫外卖吧又快又便宜": {
+  "vi": "Mình gọi đồ ăn giao tận nơi đi, vừa nhanh vừa rẻ.",
+  "en": "Let's order takeout — it's both fast and cheap."
+ },
+ "又会跳舞": {
+  "vi": "lại còn biết khiêu vũ nữa.",
+  "en": "and can also dance."
+ },
+ "最近我很忙又要上学又要打工我最近很忙": {
+  "vi": "Dạo này tôi rất bận, vừa phải đi học vừa phải đi làm thêm. Dạo này tôi rất bận.",
+  "en": "Lately I'm very busy — I have to go to school and also work part-time. I'm very busy lately."
+ },
+ "开始，现在越来越多的家庭会养小宠物了。": {
+  "vi": "Bắt đầu. Bây giờ ngày càng nhiều gia đình nuôi thú cưng nhỏ.",
+  "en": "To begin: more and more families now keep small pets."
+ },
+ "比如，小猫、小狗。": {
+  "vi": "Ví dụ như mèo con, chó con.",
+  "en": "For example, kittens and puppies."
+ },
+ "它们成为了一位家庭成员。": {
+  "vi": "Chúng đã trở thành một thành viên trong gia đình.",
+  "en": "They have become a member of the family."
+ },
+ "给家里人带来了欢乐。": {
+  "vi": "Mang lại niềm vui cho người trong nhà.",
+  "en": "They bring joy to the family."
+ },
+ "小宠物们每天在家里悠闲地走着，吃饭睡觉。": {
+  "vi": "Mỗi ngày thú cưng nhỏ thong thả đi lại trong nhà, ăn rồi ngủ.",
+  "en": "Every day the little pets wander around the house at ease, eating and sleeping."
+ },
+ "他们好像能够听懂人类说话一样，特别的聪明。": {
+  "vi": "Chúng cứ như thể hiểu được người nói vậy, đặc biệt thông minh.",
+  "en": "They seem to understand what people say, and they are especially clever."
+ },
+ "还能够陪伴家里的小孩子一起长大。": {
+  "vi": "Còn có thể cùng lớn lên với trẻ nhỏ trong nhà.",
+  "en": "They can also grow up together with the children in the family."
+ },
+ "伦敦是英国的首都": {
+  "vi": "Luân Đôn là thủ đô của nước Anh.",
+  "en": "London is the capital of the UK."
+ },
+ "北京是中国的首都": {
+  "vi": "Bắc Kinh là thủ đô của Trung Quốc.",
+  "en": "Beijing is the capital of China."
+ },
+ "巴黎是法国的首都": {
+  "vi": "Paris là thủ đô của nước Pháp.",
+  "en": "Paris is the capital of France."
+ },
+ "罗马是意大利的首都首尔是韩国的首都": {
+  "vi": "Roma là thủ đô của Ý. Xơ-un là thủ đô của Hàn Quốc.",
+  "en": "Rome is the capital of Italy. Seoul is the capital of Korea."
+ },
+ "东京是日本的首都": {
+  "vi": "Tokyo là thủ đô của Nhật Bản.",
+  "en": "Tokyo is the capital of Japan."
+ },
+ "河内是越南的首都我去过伦敦，也去过北京和巴黎。": {
+  "vi": "Hà Nội là thủ đô của Việt Nam. Tôi đã đến Luân Đôn, cũng đã đến Bắc Kinh và Paris.",
+  "en": "Hanoi is the capital of Vietnam. I have been to London, and I have also been to Beijing and Paris."
+ },
+ "我没有去过罗马、首尔、东京、河内。": {
+  "vi": "Tôi chưa đến Roma, Xơ-un, Tokyo, Hà Nội.",
+  "en": "I have never been to Rome, Seoul, Tokyo or Hanoi."
+ },
+ "罗马是意大利的首都。": {
+  "vi": "Roma là thủ đô của nước Ý.",
+  "en": "Rome is the capital of Italy."
+ },
+ "河内是越南的首都。": {
+  "vi": "Hà Nội là thủ đô của Việt Nam.",
+  "en": "Hanoi is the capital of Vietnam."
+ },
+ "我去过伦敦，也去过北京和巴黎。": {
+  "vi": "Tôi đã đến Luân Đôn, cũng đã đến Bắc Kinh và Paris.",
+  "en": "I have been to London, and I have also been to Beijing and Paris."
+ },
+ "开始，桂林是中国一个有名的旅游城市。": {
+  "vi": "Bắt đầu. Quế Lâm là một thành phố du lịch nổi tiếng của Trung Quốc.",
+  "en": "To begin: Guilin is a famous tourist city in China."
+ },
+ "它属于广西壮族自治区。": {
+  "vi": "Nó thuộc khu tự trị dân tộc Choang Quảng Tây.",
+  "en": "It belongs to the Guangxi Zhuang Autonomous Region."
+ },
+ "在中国的南方，这里的风景很漂亮。": {
+  "vi": "Ở phía nam Trung Quốc, phong cảnh ở đây rất đẹp.",
+  "en": "In southern China, the scenery here is very beautiful."
+ },
+ "有山，有河，还有便宜的食物。": {
+  "vi": "Có núi, có sông, lại còn có đồ ăn rẻ.",
+  "en": "There are mountains, rivers, and also cheap food."
+ },
+ "桂林的米粉好吃又便宜。": {
+  "vi": "Bún gạo Quế Lâm vừa ngon vừa rẻ.",
+  "en": "Guilin rice noodles are tasty and cheap."
+ },
+ "桂林是中国一个有名的旅游城市。": {
+  "vi": "Quế Lâm là một thành phố du lịch nổi tiếng của Trung Quốc.",
+  "en": "Guilin is a famous tourist city in China."
+ },
+ "桂林的山不是很高，从城市中穿过的河叫漓江，很干净。": {
+  "vi": "Núi ở Quế Lâm không cao lắm, con sông chảy qua thành phố tên là Li Giang, rất sạch.",
+  "en": "The mountains in Guilin are not very high; the river running through the city is called the Li River, and it is very clean."
+ },
+ "那么，我最喜欢的运动，是跑步。": {
+  "vi": "Vậy thì, môn thể thao tôi thích nhất là chạy bộ.",
+  "en": "Well then, my favourite sport is running."
+ },
+ "在跑步的时候，我可以听音乐，或者思考问题。": {
+  "vi": "Khi chạy, tôi có thể nghe nhạc, hoặc suy nghĩ về mọi việc.",
+  "en": "While running, I can listen to music or think things over."
+ },
+ "每次跑步以后，我都会感觉，有很多精力。": {
+  "vi": "Lần nào chạy xong, tôi cũng thấy mình có nhiều sức lực.",
+  "en": "After every run, I feel full of energy."
+ },
+ "跑步也帮我减肥，让我的身材更好。": {
+  "vi": "Chạy bộ cũng giúp tôi giảm cân, làm dáng người tôi đẹp hơn.",
+  "en": "Running also helps me lose weight and makes my figure better."
+ },
+ "每天早上我都会去公园跑步。": {
+  "vi": "Mỗi sáng tôi đều đi công viên chạy bộ.",
+  "en": "Every morning I go running in the park."
+ },
+ "每次跑步以后，我都会感觉，有很多精力，跑步也帮我减肥，": {
+  "vi": "Lần nào chạy xong, tôi cũng thấy mình có nhiều sức lực, chạy bộ cũng giúp tôi giảm cân,",
+  "en": "After every run I feel full of energy, and running also helps me lose weight,"
+ },
+ "让我的身材更好。": {
+  "vi": "làm dáng người tôi đẹp hơn.",
+  "en": "and makes my figure better."
+ },
+ "首先，我们要有健康的身体。": {
+  "vi": "Thứ nhất, chúng ta phải có một cơ thể khỏe mạnh.",
+  "en": "First, we need a healthy body."
+ },
+ "其次，我们有快乐的心情，多和朋友聊天。": {
+  "vi": "Thứ hai, chúng ta có tâm trạng vui vẻ, trò chuyện nhiều với bạn bè.",
+  "en": "Second, we should have a happy mood and chat more with friends."
+ },
+ "做自己喜欢的事情。": {
+  "vi": "Làm những việc mình thích.",
+  "en": "Do the things you like doing."
+ },
+ "爱自己，还包括接受自己的缺点。": {
+  "vi": "Yêu bản thân còn bao gồm việc chấp nhận khuyết điểm của chính mình.",
+  "en": "Loving yourself also includes accepting your own shortcomings."
+ },
+ "不要太苛刻。": {
+  "vi": "Đừng quá khắt khe.",
+  "en": "Don't be too hard on yourself."
+ },
+ "每天照镜子，告诉自己，你很棒。": {
+  "vi": "Mỗi ngày soi gương, nói với mình rằng: bạn rất giỏi.",
+  "en": "Every day, look in the mirror and tell yourself: you are great."
+ },
+ "这样，我们会更有自信，更开心。": {
+  "vi": "Như vậy, chúng ta sẽ tự tin hơn, vui vẻ hơn.",
+  "en": "That way we become more confident and happier."
+ },
+ "总之，爱自己是一种智慧，也是幸福的开始。": {
+  "vi": "Tóm lại, yêu bản thân là một kiểu khôn ngoan, cũng là khởi đầu của hạnh phúc.",
+  "en": "In short, loving yourself is a kind of wisdom, and also the beginning of happiness."
+ },
+ "爱自己，非常重要。": {
+  "vi": "Yêu bản thân là rất quan trọng.",
+  "en": "Loving yourself is very important."
+ },
+ "其次，我们有快乐的心情。": {
+  "vi": "Thứ hai, chúng ta có tâm trạng vui vẻ.",
+  "en": "Second, we should have a happy mood."
+ },
+ "多和朋友聊天。": {
+  "vi": "Trò chuyện nhiều với bạn bè.",
+  "en": "Chat more with friends."
+ },
+ "再者，我们也要有足够的休息和睡眠。": {
+  "vi": "Hơn nữa, chúng ta cũng phải có đủ thời gian nghỉ ngơi và ngủ.",
+  "en": "Furthermore, we also need enough rest and sleep."
+ },
+ "我的儿子是小学五年级的学生。": {
+  "vi": "Con trai tôi là học sinh lớp năm tiểu học.",
+  "en": "My son is a fifth-grade primary school student."
+ },
+ "他的个子比一般小朋友高得多。": {
+  "vi": "Nó cao hơn hẳn những đứa trẻ bình thường.",
+  "en": "He is much taller than most children his age."
+ },
+ "也比一般小朋友长得白。": {
+  "vi": "Cũng trắng hơn những đứa trẻ bình thường.",
+  "en": "He is also fairer-skinned than most children his age."
+ },
+ "他长着一双小小的眼睛。": {
+  "vi": "Nó có đôi mắt nhỏ xíu.",
+  "en": "He has a pair of very small eyes."
+ },
+ "一头黑黑的头发。": {
+  "vi": "Mái tóc đen nhánh.",
+  "en": "A head of very black hair."
+ },
+ "一个圆圆的鼻子。": {
+  "vi": "Một chiếc mũi tròn tròn.",
+  "en": "A round little nose."
+ },
+ "一张小嘴巴。很可爱。": {
+  "vi": "Một cái miệng nhỏ. Rất đáng yêu.",
+  "en": "A small mouth. Very cute."
+ },
+ "一张小嘴巴。": {
+  "vi": "Một cái miệng nhỏ.",
+  "en": "A small mouth."
+ },
+ "第二天早上，我买了一个小闹钟，叫我起床。": {
+  "vi": "Sáng hôm sau, tôi mua một chiếc đồng hồ báo thức nhỏ để gọi tôi dậy.",
+  "en": "The next morning, I bought a small alarm clock to wake me up."
+ },
+ "因为有它，这一晚我睡得很好。": {
+  "vi": "Nhờ có nó, đêm đó tôi ngủ rất ngon.",
+  "en": "Thanks to it, I slept very well that night."
+ },
+ "第二天，早上我起来的时候已经七点四十了。": {
+  "vi": "Hôm sau, lúc tôi dậy thì đã bảy giờ bốn mươi rồi.",
+  "en": "The next day, it was already 7:40 when I got up in the morning."
+ },
+ "我发现闹钟没有响。": {
+  "vi": "Tôi phát hiện đồng hồ báo thức không reo.",
+  "en": "I found that the alarm clock had not gone off."
+ },
+ "我到公司，最快也要四十分钟。最后还是迟到了。": {
+  "vi": "Tôi đến công ty, nhanh nhất cũng phải bốn mươi phút. Cuối cùng vẫn bị muộn.",
+  "en": "It takes me at least forty minutes to get to the office. In the end I was still late."
+ },
+ "下班以后，刚到家，闹钟就响了。": {
+  "vi": "Tan ca xong, tôi vừa về đến nhà thì đồng hồ báo thức reo.",
+  "en": "After work, I had just got home when the alarm clock went off."
+ },
+ "时间到了，时间到了。我看表，正好六点。": {
+  "vi": "Đến giờ rồi, đến giờ rồi. Tôi xem đồng hồ, đúng sáu giờ.",
+  "en": "Time's up, time's up. I looked at my watch: exactly six o'clock."
+ },
+ "原来我把时间定在了下午六点，": {
+  "vi": "Thì ra tôi đã đặt giờ vào sáu giờ chiều,",
+  "en": "It turned out I had set the time for six in the evening,"
+ },
+ "明天早上八点要开会，我不能迟到。": {
+  "vi": "Sáng mai tám giờ phải họp, tôi không thể đến muộn.",
+  "en": "There's a meeting at eight tomorrow morning, and I can't be late."
+ },
+ "我买了一个小闹钟，叫我起床。": {
+  "vi": "Tôi mua một chiếc đồng hồ báo thức nhỏ để gọi tôi dậy.",
+  "en": "I bought a small alarm clock to wake me up."
+ },
+ "我到公司最快也要四十分钟。": {
+  "vi": "Tôi đến công ty nhanh nhất cũng phải bốn mươi phút.",
+  "en": "It takes me at least forty minutes to get to the office."
+ },
+ "最后还是迟到了。": {
+  "vi": "Cuối cùng vẫn bị muộn.",
+  "en": "In the end I was still late."
+ },
+ "如果有困难的话，就给我打电话。": {
+  "vi": "Nếu có khó khăn thì gọi điện cho tôi.",
+  "en": "If you have any difficulty, just give me a call."
+ },
+ "如果有问题的话，请打电话。": {
+  "vi": "Nếu có vấn đề gì thì xin hãy gọi điện.",
+  "en": "If there is any problem, please call."
+ },
+ "别点那么多菜，如果吃不完的话，就太浪费了。": {
+  "vi": "Đừng gọi nhiều món thế, nếu ăn không hết thì lãng phí lắm.",
+  "en": "Don't order so many dishes — if we can't finish them, it's a real waste."
+ },
+ "别点太多菜。": {
+  "vi": "Đừng gọi quá nhiều món.",
+  "en": "Don't order too many dishes."
+ },
+ "如果吃不到的话，如果老板不同意的话，你怎么办？": {
+  "vi": "Nếu không ăn được, nếu sếp không đồng ý thì bạn làm thế nào?",
+  "en": "If you can't get to eat it, if the boss doesn't agree, what will you do?"
+ },
+ "如果不努力学习的话，就考不上大学。": {
+  "vi": "Nếu không chăm chỉ học thì sẽ không đỗ đại học.",
+  "en": "If you don't study hard, you won't get into university."
+ },
+ "如果明天天气好，我就去图书馆借书。": {
+  "vi": "Nếu mai thời tiết đẹp thì tôi sẽ đi thư viện mượn sách.",
+  "en": "If the weather is good tomorrow, I'll go to the library to borrow books."
+ },
+ "如果不想去，就不要去。": {
+  "vi": "Nếu không muốn đi thì đừng đi.",
+  "en": "If you don't want to go, then don't go."
+ },
+ "好吃的话，就多吃点。": {
+  "vi": "Nếu ngon thì ăn thêm một chút.",
+  "en": "If it's tasty, then eat a bit more."
+ },
+ "有事的话，便给我打电话。": {
+  "vi": "Nếu có việc gì thì cứ gọi điện cho tôi.",
+  "en": "If anything comes up, just give me a call."
+ },
+ "如果有事，便打电话。": {
+  "vi": "Nếu có việc thì cứ gọi điện.",
+  "en": "If anything comes up, just call."
+ },
+ "如果有空，便来我家玩。": {
+  "vi": "Nếu rảnh thì đến nhà tôi chơi.",
+  "en": "If you're free, come over to my place."
+ },
+ "如果有时间，便去我家。": {
+  "vi": "Nếu có thời gian thì đến nhà tôi.",
+  "en": "If you have time, come to my home."
+ },
+ "喜欢就拿走。": {
+  "vi": "Thích thì cứ lấy đi.",
+  "en": "If you like it, just take it."
+ },
+ "放学以后我会去餐厅打工当一名服务员": {
+  "vi": "Sau giờ tan học tôi sẽ đến nhà hàng làm thêm, làm nhân viên phục vụ.",
+  "en": "After school I go to work part-time at a restaurant as a waiter."
+ },
+ "在餐厅打工的时候": {
+  "vi": "Khi làm thêm ở nhà hàng,",
+  "en": "When I work part-time at the restaurant,"
+ },
+ "我需要做的事情有端盘子": {
+  "vi": "những việc tôi cần làm có bưng bát đĩa,",
+  "en": "the things I need to do include carrying plates,"
+ },
+ "给客人倒啤酒": {
+  "vi": "rót bia cho khách,",
+  "en": "pouring beer for the guests,"
+ },
+ "和在下班以后打扫卫生": {
+  "vi": "và dọn dẹp vệ sinh sau khi tan ca.",
+  "en": "and cleaning up after the shift ends."
+ },
+ "除了能赚钱": {
+  "vi": "Ngoài việc kiếm được tiền,",
+  "en": "Besides earning money,"
+ },
+ "我还可以在餐厅吃晚餐": {
+  "vi": "tôi còn có thể ăn tối ở nhà hàng.",
+  "en": "I can also eat dinner at the restaurant."
+ },
+ "经理觉得我工作得很好，决定给我加工资。": {
+  "vi": "Quản lý thấy tôi làm việc rất tốt, quyết định tăng lương cho tôi.",
+  "en": "The manager thought I worked very well and decided to give me a raise."
+ },
+ "每个星期给我一百五十块。": {
+  "vi": "Mỗi tuần trả tôi một trăm năm mươi tệ.",
+  "en": "One hundred and fifty yuan a week."
+ },
+ "在餐厅打工的时候，我需要做的事情有端盘子。": {
+  "vi": "Khi làm thêm ở nhà hàng, việc tôi cần làm có bưng bát đĩa.",
+  "en": "When I work part-time at the restaurant, the things I need to do include carrying plates."
+ },
+ "给客人倒啤酒，和在下班以后打扫卫生。": {
+  "vi": "Rót bia cho khách, và dọn dẹp vệ sinh sau khi tan ca.",
+  "en": "Pouring beer for the guests, and cleaning up after the shift ends."
+ },
+ "除了能赚钱，我还可以在餐厅吃晚餐。": {
+  "vi": "Ngoài việc kiếm được tiền, tôi còn có thể ăn tối ở nhà hàng.",
+  "en": "Besides earning money, I can also eat dinner at the restaurant."
+ },
+ "经理觉得我工作得很好。": {
+  "vi": "Quản lý thấy tôi làm việc rất tốt.",
+  "en": "The manager thought I worked very well."
+ },
+ "决定给我加工资。": {
+  "vi": "Quyết định tăng lương cho tôi.",
+  "en": "And decided to give me a raise."
+ },
+ "我有一件白色的衬衫": {
+  "vi": "Tôi có một chiếc áo sơ mi trắng.",
+  "en": "I have a white shirt."
+ },
+ "上个星期喝咖啡的时候": {
+  "vi": "Tuần trước, lúc uống cà phê,",
+  "en": "Last week, while drinking coffee,"
+ },
+ "我不小心把它弄脏了": {
+  "vi": "tôi không cẩn thận làm bẩn nó.",
+  "en": "I accidentally got it dirty."
+ },
+ "我在家里洗了好几次但是都没洗干净": {
+  "vi": "Tôi giặt ở nhà mấy lần nhưng đều không sạch.",
+  "en": "I washed it at home several times, but it never came clean."
+ },
+ "所以今天早上我去了洗衣店。": {
+  "vi": "Nên sáng nay tôi đã đến tiệm giặt là.",
+  "en": "So this morning I went to the laundry."
+ },
+ "洗衣店的员工看了一下，说他有办法洗干净。": {
+  "vi": "Nhân viên tiệm giặt xem qua rồi nói anh ấy có cách giặt sạch.",
+  "en": "The laundry staff had a look and said he had a way to get it clean."
+ },
+ "他告诉我，洗一件衣服要三十块钱，还给我一张纸。": {
+  "vi": "Anh ấy nói với tôi, giặt một bộ quần áo là ba mươi tệ, và còn đưa tôi một tờ giấy.",
+  "en": "He told me it costs thirty yuan to wash one item, and he also gave me a slip of paper."
+ },
+ "上面写着，星期五来拿衣服。": {
+  "vi": "Trên đó viết: thứ Sáu đến lấy đồ.",
+  "en": "It said on it: come pick up the clothes on Friday."
+ },
+ "我有一件白色的衬衫。上个星期喝咖啡的时候，我不小心把它弄脏了。": {
+  "vi": "Tôi có một chiếc áo sơ mi trắng. Tuần trước, lúc uống cà phê, tôi không cẩn thận làm bẩn nó.",
+  "en": "I have a white shirt. Last week, while drinking coffee, I accidentally got it dirty."
+ },
+ "我在家里洗了好几次，但是都没洗干净。": {
+  "vi": "Tôi giặt ở nhà mấy lần, nhưng đều không sạch.",
+  "en": "I washed it at home several times, but it never came clean."
+ },
+ "所以今天早上我去了洗衣店。洗衣店的员工看了一下，说他有办法洗干净。": {
+  "vi": "Nên sáng nay tôi đã đến tiệm giặt là. Nhân viên tiệm xem qua rồi nói anh ấy có cách giặt sạch.",
+  "en": "So this morning I went to the laundry. The staff had a look and said he had a way to get it clean."
+ },
+ "他告诉我，洗一件衣服要三十块钱，还给我一张纸，上面写着星期五来拿衣服。": {
+  "vi": "Anh ấy nói giặt một bộ quần áo là ba mươi tệ, và đưa tôi một tờ giấy, trên đó viết thứ Sáu đến lấy đồ.",
+  "en": "He told me it costs thirty yuan to wash one item, and gave me a slip of paper that said to come pick it up on Friday."
+ },
+ "一个人，最重要的能力，不是你打扮得漂亮，也不是你赚钱多厉害。": {
+  "vi": "Với một người, năng lực quan trọng nhất không phải là bạn ăn mặc đẹp, cũng không phải là bạn kiếm tiền giỏi đến đâu.",
+  "en": "For a person, the most important ability is not how nicely you dress, nor how good you are at making money."
+ },
+ "而是，不管发生什么事，都能让自己快乐起来。": {
+  "vi": "Mà là, dù xảy ra chuyện gì, cũng có thể làm cho mình vui lên.",
+  "en": "Rather, it is being able to make yourself happy no matter what happens."
+ },
+ "生活中有风，有雨，别忘了也有阳光。": {
+  "vi": "Trong cuộc sống có gió, có mưa, đừng quên là cũng có cả nắng.",
+  "en": "Life has wind and rain — don't forget it also has sunshine."
+ },
+ "每天，给自己一个希望，不为明天而烦恼，不为昨天而叹息，": {
+  "vi": "Mỗi ngày, hãy cho mình một hy vọng, không buồn phiền vì ngày mai, không than thở vì ngày hôm qua,",
+  "en": "Every day, give yourself a hope: don't worry about tomorrow, don't sigh over yesterday,"
+ },
+ "只为今天更美好。": {
+  "vi": "chỉ để hôm nay tốt đẹp hơn.",
+  "en": "only make today better."
+ },
+ "一个人，最重要的能力，不是你打扮得漂亮，": {
+  "vi": "Với một người, năng lực quan trọng nhất không phải là bạn ăn mặc đẹp,",
+  "en": "For a person, the most important ability is not how nicely you dress,"
+ },
+ "也不是你赚钱多厉害。": {
+  "vi": "cũng không phải là bạn kiếm tiền giỏi đến đâu.",
+  "en": "nor how good you are at making money."
+ },
+ "让一个人成熟的，不是年龄。": {
+  "vi": "Thứ làm một người trưởng thành không phải là tuổi tác.",
+  "en": "What makes a person mature is not age."
+ },
+ "而是经历，是能控制情绪的能力。": {
+  "vi": "Mà là trải nghiệm, là khả năng kiểm soát cảm xúc.",
+  "en": "It is experience — the ability to control your emotions."
+ },
+ "每天，给自己一个希望。": {
+  "vi": "Mỗi ngày, hãy cho mình một hy vọng.",
+  "en": "Every day, give yourself a hope."
+ },
+ "不为明天而烦恼。": {
+  "vi": "Không buồn phiền vì ngày mai.",
+  "en": "Don't worry about tomorrow."
+ },
+ "不为昨天而叹息。": {
+  "vi": "Không than thở vì ngày hôm qua.",
+  "en": "Don't sigh over yesterday."
+ },
+ "周末我和朋友去参观了一座古老的寺庙。": {
+  "vi": "Cuối tuần tôi và bạn bè đi tham quan một ngôi chùa cổ.",
+  "en": "On the weekend my friend and I went to visit an ancient temple."
+ },
+ "寺庙在山上，要走很多台阶才能到。": {
+  "vi": "Chùa ở trên núi, phải đi qua rất nhiều bậc thang mới đến.",
+  "en": "The temple is on the mountain; you have to climb many steps to get there."
+ },
+ "寺院里很安静，有很多大树。": {
+  "vi": "Trong chùa rất yên tĩnh, có nhiều cây to.",
+  "en": "Inside the temple it is very quiet, and there are many big trees."
+ },
+ "我看到了一座很大的佛像，有些人在那里许愿。": {
+  "vi": "Tôi thấy một bức tượng Phật rất lớn, có vài người đang cầu nguyện ở đó.",
+  "en": "I saw a very large Buddha statue, and some people were making wishes there."
+ },
+ "寺院旁边有一个小店，卖很多纪念品，我买了一条红色的手绳，": {
+  "vi": "Cạnh chùa có một cửa hàng nhỏ bán nhiều đồ lưu niệm, tôi mua một chiếc vòng tay đỏ,",
+  "en": "Next to the temple there is a small shop selling lots of souvenirs; I bought a red bracelet,"
+ },
+ "听说可以带来好运。": {
+  "vi": "nghe nói có thể mang lại may mắn.",
+  "en": "which they say brings good luck."
+ },
+ "寺庙旁边有一个小店，卖很多纪念品。": {
+  "vi": "Cạnh chùa có một cửa hàng nhỏ bán nhiều đồ lưu niệm.",
+  "en": "Next to the temple there is a small shop selling lots of souvenirs."
+ },
+ "我买了一条红色的手绳，听说可以带来好运。": {
+  "vi": "Tôi mua một chiếc vòng tay đỏ, nghe nói có thể mang lại may mắn.",
+  "en": "I bought a red bracelet, which they say brings good luck."
+ },
+ "开始，小明的妈妈想让儿子学会游泳": {
+  "vi": "Bắt đầu. Mẹ của Tiểu Minh muốn con trai biết bơi.",
+  "en": "To begin: Xiao Ming's mother wanted her son to learn to swim."
+ },
+ "上课第一天练习了两个小时后，小明就对游泳老师说，": {
+  "vi": "Buổi học đầu tiên, sau khi luyện tập hai tiếng, Tiểu Minh liền nói với thầy dạy bơi:",
+  "en": "On the first day of class, after two hours of practice, Xiao Ming said to the swimming teacher,"
+ },
+ "老师，上午就练习到这儿吧，为什么呢？": {
+  "vi": "Thầy ơi, buổi sáng mình tập đến đây thôi nhé. Vì sao ạ?",
+  "en": "\"Teacher, let's just practise until here this morning. Why?\""
+ },
+ "老师问，小明不好意思的说，": {
+  "vi": "Thầy hỏi. Tiểu Minh ngượng ngùng nói:",
+  "en": "The teacher asked. Xiao Ming said, embarrassed,"
+ },
+ "池子里的水太难喝了，我都快喝饱了。": {
+  "vi": "Nước trong bể khó uống quá, con sắp uống no rồi.",
+  "en": "\"The water in the pool tastes awful — I'm almost full from drinking it.\""
+ },
+ "就给他报了游泳班。妈妈说小明我给你报了游泳班这样你可以玩水了": {
+  "vi": "Thế là bà đăng ký cho cậu một lớp học bơi. Mẹ nói: Tiểu Minh, mẹ đăng ký lớp học bơi cho con rồi, thế là con được chơi với nước.",
+  "en": "So she signed him up for a swimming class. His mother said: Xiao Ming, I've signed you up for a swimming class, so now you can play in the water."
+ },
+ "小明喜欢玩水所以很高兴上课第一天练习了两个小时后": {
+  "vi": "Tiểu Minh thích chơi với nước nên rất vui. Buổi học đầu tiên, sau khi luyện tập hai tiếng,",
+  "en": "Xiao Ming likes playing in the water, so he was very happy. On the first day of class, after two hours of practice,"
+ },
+ "小明就对游泳老师说老师上午就练到这儿吧为什么呢老师问": {
+  "vi": "Tiểu Minh liền nói với thầy dạy bơi: thầy ơi, buổi sáng mình tập đến đây thôi nhé. Vì sao ạ? Thầy hỏi.",
+  "en": "Xiao Ming said to the swimming teacher: \"Teacher, let's just practise until here this morning. Why?\" the teacher asked."
+ },
+ "小明不好意思地说": {
+  "vi": "Tiểu Minh ngượng ngùng nói:",
+  "en": "Xiao Ming said, embarrassed,"
+ },
+ "昨天，我和几个好朋友在一家咖啡馆聚会": {
+  "vi": "Hôm qua, tôi và mấy người bạn thân gặp nhau ở một quán cà phê.",
+  "en": "Yesterday I met up with a few good friends at a café."
+ },
+ "我们一起聊天，分享最近的生活和工作": {
+  "vi": "Chúng tôi cùng trò chuyện, chia sẻ về cuộc sống và công việc gần đây.",
+  "en": "We chatted together and shared how our lives and work have been lately."
+ },
+ "有的人准备结婚了": {
+  "vi": "Có người đang chuẩn bị kết hôn.",
+  "en": "Some of them are getting ready to marry."
+ },
+ "有的人找到了新工作。": {
+  "vi": "Có người đã tìm được việc mới.",
+  "en": "Some of them have found new jobs."
+ },
+ "听到大家的生活都挺好的，我感到非常高兴。": {
+  "vi": "Nghe thấy cuộc sống của mọi người đều khá tốt, tôi thấy rất vui.",
+  "en": "Hearing that everyone's life is going well, I felt very happy."
+ },
+ "昨天，我和几个好朋友在一家咖啡馆聚会。": {
+  "vi": "Hôm qua, tôi và mấy người bạn thân gặp nhau ở một quán cà phê.",
+  "en": "Yesterday I met up with a few good friends at a café."
+ },
+ "我们一起聊天，分享最近的生活和工作。": {
+  "vi": "Chúng tôi cùng trò chuyện, chia sẻ về cuộc sống và công việc gần đây.",
+  "en": "We chatted together and shared how our lives and work have been lately."
+ },
+ "有的人准备结婚了，有的人找到了新工作。": {
+  "vi": "Có người đang chuẩn bị kết hôn, có người đã tìm được việc mới.",
+  "en": "Some are getting ready to marry, and some have found new jobs."
+ },
+ "不要一边吃东西，一边说话。": {
+  "vi": "Đừng vừa ăn vừa nói chuyện.",
+  "en": "Don't eat and talk at the same time."
+ },
+ "我常常一边洗澡，一边唱歌。": {
+  "vi": "Tôi thường vừa tắm vừa hát.",
+  "en": "I often sing while I shower."
+ },
+ "她常常一边做饭，一边带孩子。": {
+  "vi": "Cô ấy thường vừa nấu ăn vừa trông con.",
+  "en": "She often looks after the children while cooking."
+ },
+ "例如，她一边上班，一边玩手机。": {
+  "vi": "Ví dụ, cô ấy vừa làm việc vừa nghịch điện thoại.",
+  "en": "For example, she plays on her phone while working."
+ },
+ "你可以一边健身、一边听播客。": {
+  "vi": "Bạn có thể vừa tập thể hình vừa nghe podcast.",
+  "en": "You can listen to podcasts while working out."
+ },
+ "你可以一边煮饭，一边看电视，一边吃零食。": {
+  "vi": "Bạn có thể vừa nấu cơm, vừa xem tivi, vừa ăn vặt.",
+  "en": "You can cook, watch TV, and snack on something all at once."
+ },
+ "我们边走边聊吧": {
+  "vi": "Chúng ta vừa đi vừa nói chuyện nhé.",
+  "en": "Let's talk as we walk."
+ },
+ "开始，我的好朋友是一个女孩。": {
+  "vi": "Bắt đầu. Bạn thân của tôi là một cô gái.",
+  "en": "To begin: my good friend is a girl."
+ },
+ "她个子不高，长得很可爱。": {
+  "vi": "Cô ấy không cao, trông rất đáng yêu.",
+  "en": "She isn't tall, and she looks very cute."
+ },
+ "她不但聪明，而且认真。": {
+  "vi": "Cô ấy không những thông minh mà còn nghiêm túc.",
+  "en": "She is not only clever but also conscientious."
+ },
+ "她喜欢去图书馆学习。": {
+  "vi": "Cô ấy thích đến thư viện học bài.",
+  "en": "She likes to study at the library."
+ },
+ "所以每次考试成绩都很好。": {
+  "vi": "Nên lần nào thi cũng đạt kết quả tốt.",
+  "en": "So she does well in every exam."
+ },
+ "她很热情，总是关心别人。": {
+  "vi": "Cô ấy rất nhiệt tình, luôn quan tâm đến người khác.",
+  "en": "She is very warm-hearted and always cares about other people."
+ },
+ "如果别人有困难，她一定会帮助别人解决问题。": {
+  "vi": "Nếu người khác gặp khó khăn, cô ấy nhất định sẽ giúp họ giải quyết vấn đề.",
+  "en": "If someone has a problem, she will definitely help them solve it."
+ },
+ "她有很多爱好，比如踢足球、爬山。": {
+  "vi": "Cô ấy có nhiều sở thích, ví dụ như đá bóng, leo núi.",
+  "en": "She has many hobbies, such as playing football and hiking."
+ },
+ "我的好朋友是一个女孩。": {
+  "vi": "Bạn thân của tôi là một cô gái.",
+  "en": "My good friend is a girl."
+ },
+ "她喜欢去图书馆学习。所以每次考试成绩都很好，她很热情，": {
+  "vi": "Cô ấy thích đến thư viện học bài. Nên lần nào thi cũng đạt kết quả tốt. Cô ấy rất nhiệt tình,",
+  "en": "She likes to study at the library. So she does well in every exam. She is very warm-hearted,"
+ },
+ "总是关心别人。": {
+  "vi": "luôn quan tâm đến người khác.",
+  "en": "and always care about other people."
+ },
+ "开始，今天早上，我去机场接我的女朋友。": {
+  "vi": "Bắt đầu. Sáng nay tôi ra sân bay đón bạn gái.",
+  "en": "To begin: this morning I went to the airport to pick up my girlfriend."
+ },
+ "但是她的航班晚点了，我等了她两个小时。": {
+  "vi": "Nhưng chuyến bay của cô ấy bị hoãn, tôi đã đợi cô ấy hai tiếng.",
+  "en": "But her flight was delayed, and I waited for her for two hours."
+ },
+ "中午的时候，她感冒了，不舒服。": {
+  "vi": "Đến trưa, cô ấy bị cảm, thấy không khỏe.",
+  "en": "Around noon she caught a cold and felt unwell."
+ },
+ "所以我们去超市买新鲜的菜，回家自己煮饭。": {
+  "vi": "Nên chúng tôi đi siêu thị mua rau tươi, về nhà tự nấu cơm.",
+  "en": "So we went to the supermarket to buy fresh vegetables and cooked at home ourselves."
+ },
+ "晚上她感觉好点了，我们就一起打游戏和听音乐。": {
+  "vi": "Đến tối cô ấy thấy đỡ hơn, chúng tôi cùng chơi game và nghe nhạc.",
+  "en": "In the evening she felt a bit better, so we played games and listened to music together."
+ },
+ "我们的一天太快乐了。": {
+  "vi": "Một ngày của chúng tôi thật là vui.",
+  "en": "Our day was so happy."
+ },
+ "今天早上我去机场接我的女朋友，": {
+  "vi": "Sáng nay tôi ra sân bay đón bạn gái,",
+  "en": "This morning I went to the airport to pick up my girlfriend,"
+ },
+ "但是她的航班晚点了。": {
+  "vi": "nhưng chuyến bay của cô ấy bị hoãn.",
+  "en": "but her flight was delayed."
+ },
+ "我等了她两个小时，中午的时候她感冒了，不舒服。": {
+  "vi": "Tôi đợi cô ấy hai tiếng. Đến trưa cô ấy bị cảm, thấy không khỏe.",
+  "en": "I waited for her for two hours. Around noon she caught a cold and felt unwell."
+ },
+ "晚上，她感觉好点了。我们就一起打游戏和听音乐。": {
+  "vi": "Đến tối, cô ấy thấy đỡ hơn. Chúng tôi cùng chơi game và nghe nhạc.",
+  "en": "In the evening she felt a bit better. We played games and listened to music together."
+ },
+ "今天经理告诉我一个好消息。": {
+  "vi": "Hôm nay quản lý báo cho tôi một tin tốt.",
+  "en": "Today the manager told me some good news."
+ },
+ "下个月公司要派我去北京工作半年。": {
+  "vi": "Tháng sau công ty sẽ cử tôi đến Bắc Kinh làm việc nửa năm.",
+  "en": "Next month the company is sending me to Beijing to work for half a year."
+ },
+ "听到这个消息，我非常开心。": {
+  "vi": "Nghe tin này, tôi rất vui.",
+  "en": "Hearing this news, I was very happy."
+ },
+ "我一直想去中国体验那里的生活。": {
+  "vi": "Tôi vẫn luôn muốn đến Trung Quốc trải nghiệm cuộc sống ở đó.",
+  "en": "I have always wanted to go to China and experience life there."
+ },
+ "也想去吃各种好吃的东西。": {
+  "vi": "Cũng muốn đi ăn đủ thứ đồ ngon.",
+  "en": "And I also want to go eat all kinds of tasty food."
+ },
+ "为了准备这次出差，我每天都在认真复习汉语。": {
+  "vi": "Để chuẩn bị cho chuyến công tác này, mỗi ngày tôi đều chăm chỉ ôn lại tiếng Trung.",
+  "en": "To prepare for this business trip, I review Chinese carefully every day."
+ },
+ "我一直想去中国体验那里的生活，也想去吃各种好吃的东西。": {
+  "vi": "Tôi vẫn luôn muốn đến Trung Quốc trải nghiệm cuộc sống ở đó, cũng muốn đi ăn đủ thứ đồ ngon.",
+  "en": "I have always wanted to go to China and experience life there, and I also want to eat all kinds of tasty food."
+ },
+ "周末，我还打算去买一些冬天的衣服，因为听说北京的冬天很冷。": {
+  "vi": "Cuối tuần, tôi còn định đi mua ít quần áo mùa đông, vì nghe nói mùa đông ở Bắc Kinh rất lạnh.",
+  "en": "On the weekend I also plan to buy some winter clothes, because I hear Beijing winters are very cold."
+ },
+ "我有一个女儿，今年九岁了。": {
+  "vi": "Tôi có một cô con gái, năm nay chín tuổi.",
+  "en": "I have a daughter who is nine this year."
+ },
+ "她很喜欢听故事。": {
+  "vi": "Cô bé rất thích nghe kể chuyện.",
+  "en": "She really likes listening to stories."
+ },
+ "所以每天晚上睡觉前，我都会给她讲故事。": {
+  "vi": "Nên mỗi tối trước khi ngủ, tôi đều kể chuyện cho cô bé.",
+  "en": "So every night before bed, I tell her a story."
+ },
+ "我常常选几个很有趣的故事，比如小王子、白雪公主。": {
+  "vi": "Tôi thường chọn vài câu chuyện rất thú vị, ví dụ như Hoàng tử bé, Bạch Tuyết.",
+  "en": "I often pick a few very interesting stories, such as The Little Prince and Snow White."
+ },
+ "每次听完故事，她总是很开心，然后安静地睡觉。": {
+  "vi": "Lần nào nghe xong, cô bé cũng rất vui, rồi ngủ yên.",
+  "en": "After each story she is always very happy, and then she falls asleep quietly."
+ },
+ "我有一个女儿，今年九岁了，她很喜欢听故事，所以每天晚上睡觉前我都会给她": {
+  "vi": "Tôi có một cô con gái, năm nay chín tuổi, cô bé rất thích nghe kể chuyện, nên mỗi tối trước khi ngủ tôi đều",
+  "en": "I have a daughter who is nine this year. She really likes listening to stories, so every night before bed I"
+ },
+ "讲故事。我常常选几个很有趣的故事，比如小王子、白雪公主。": {
+  "vi": "kể chuyện cho cô bé. Tôi thường chọn vài câu chuyện rất thú vị, ví dụ như Hoàng tử bé, Bạch Tuyết.",
+  "en": "tell her a story. I often pick a few very interesting stories, such as The Little Prince and Snow White."
+ },
+ "开始，我们公司来了一个新老板。": {
+  "vi": "Bắt đầu. Công ty chúng tôi có một ông sếp mới đến.",
+  "en": "To begin: a new boss came to our company."
+ },
+ "大家听说他有很高的要求。": {
+  "vi": "Mọi người nghe nói ông ấy có yêu cầu rất cao.",
+  "en": "Everyone heard that he has very high standards."
+ },
+ "但是不知道他第一天会做什么。": {
+  "vi": "Nhưng không biết ngày đầu tiên ông ấy sẽ làm gì.",
+  "en": "But nobody knew what he would do on his first day."
+ },
+ "他第一次来办公室的时候，": {
+  "vi": "Lần đầu ông ấy đến văn phòng,",
+  "en": "The first time he came into the office,"
+ },
+ "看到大家桌子上有很多东西。": {
+  "vi": "thấy trên bàn của mọi người có rất nhiều thứ.",
+  "en": "he saw that there was a lot of stuff on everyone's desks."
+ },
+ "他非常不高兴地说，": {
+  "vi": "Ông ấy rất không vui, nói rằng:",
+  "en": "He said, very displeased,"
+ },
+ "我希望你的思想不要和这儿的桌子一样。": {
+  "vi": "Tôi hy vọng suy nghĩ của các bạn đừng giống cái bàn ở đây.",
+  "en": "\"I hope your thinking isn't like the desks here.\""
+ },
+ "大家都知道了，这个老板喜欢干净。": {
+  "vi": "Mọi người đều hiểu ra, ông sếp này thích sạch sẽ.",
+  "en": "Everyone understood: this boss likes things clean."
+ },
+ "他走后，大家开始打扫。": {
+  "vi": "Sau khi ông ấy đi, mọi người bắt đầu dọn dẹp.",
+  "en": "After he left, everyone started cleaning."
+ },
+ "但是老板第二次来办公室的时候，": {
+  "vi": "Nhưng lần thứ hai ông sếp đến văn phòng,",
+  "en": "But the second time the boss came to the office,"
+ },
+ "我们公司来了一个新老板，大家听说他有很高的要求，": {
+  "vi": "Công ty chúng tôi có một ông sếp mới đến, mọi người nghe nói ông ấy có yêu cầu rất cao,",
+  "en": "A new boss came to our company. Everyone heard he has very high standards,"
+ },
+ "他第一次来办公室的时候，看到大家桌子上有很多东西，": {
+  "vi": "lần đầu ông ấy đến văn phòng, thấy trên bàn của mọi người có rất nhiều thứ,",
+  "en": "and the first time he came into the office he saw lots of stuff on everyone's desks,"
+ },
+ "办公室的桌子干净了。": {
+  "vi": "Bàn trong văn phòng đã sạch rồi.",
+  "en": "The desks in the office are clean now."
+ },
+ "今天晚上我不想做饭。": {
+  "vi": "Tối nay tôi không muốn nấu ăn.",
+  "en": "Tonight I don't want to cook."
+ },
+ "所以，我用手机点了一份外卖。": {
+  "vi": "Nên tôi dùng điện thoại đặt một phần đồ ăn giao tận nơi.",
+  "en": "So I used my phone to order a takeout meal."
+ },
+ "我选了一份鸡肉饭和一杯奶茶。一共三十块钱。": {
+  "vi": "Tôi chọn một phần cơm gà và một cốc trà sữa. Tổng cộng ba mươi tệ.",
+  "en": "I chose a chicken rice and a milk tea. Thirty yuan in total."
+ },
+ "送外卖的人来得很快。半个小时就到了，饭很好吃，奶茶也很好喝。": {
+  "vi": "Người giao hàng đến rất nhanh. Nửa tiếng là tới, cơm rất ngon, trà sữa cũng rất ngon.",
+  "en": "The delivery person came very quickly — it arrived in half an hour. The rice was tasty and the milk tea was good too."
+ },
+ "我觉得点外卖真的非常方便。": {
+  "vi": "Tôi thấy đặt đồ ăn giao tận nơi thật sự rất tiện.",
+  "en": "I think ordering takeout is really very convenient."
+ },
+ "今天晚上我不想做饭所以我用手机点了一份外卖我选了一份鸡肉饭和一杯": {
+  "vi": "Tối nay tôi không muốn nấu ăn, nên tôi dùng điện thoại đặt một phần đồ ăn giao tận nơi. Tôi chọn một phần cơm gà và một",
+  "en": "Tonight I didn't want to cook, so I used my phone to order a takeaway meal. I chose a chicken rice and a"
+ },
+ "奶茶一共三十块钱送外卖的人来得很快半个小时就到了饭很好吃，": {
+  "vi": "cốc trà sữa, tổng cộng ba mươi tệ. Người giao hàng đến rất nhanh, nửa tiếng là tới, cơm rất ngon,",
+  "en": "milk tea, thirty yuan in total. The delivery person came very quickly — it arrived in half an hour, the rice was tasty,"
+ },
+ "奶茶也很好喝。我觉得点外卖真的非常方便。": {
+  "vi": "trà sữa cũng rất ngon. Tôi thấy đặt đồ ăn giao tận nơi thật sự rất tiện.",
+  "en": "and the milk tea was good too. I think ordering takeout is really very convenient."
+ },
+ "开始，我的阿姨是一名中文老师，在韩国工作，她很可爱，长着大眼睛。": {
+  "vi": "Bắt đầu. Dì tôi là giáo viên tiếng Trung, làm việc ở Hàn Quốc, dì rất đáng yêu, có đôi mắt to.",
+  "en": "To begin: my aunt is a Chinese teacher working in Korea. She is very lovely, with big eyes,"
+ },
+ "高鼻子、小嘴巴和长头发，她有很多爱好，比如画画、听音乐、": {
+  "vi": "mũi cao, miệng nhỏ và tóc dài. Dì có nhiều sở thích, ví dụ như vẽ tranh, nghe nhạc,",
+  "en": "a high nose, a small mouth and long hair. She has many hobbies, such as painting, listening to music,"
+ },
+ "做运动，为了锻炼身体。": {
+  "vi": "tập thể thao, để rèn luyện sức khỏe.",
+  "en": "and doing sports, to keep fit."
+ },
+ "每个早上，她都会在公园里跑步。": {
+  "vi": "Mỗi sáng, dì đều chạy bộ trong công viên.",
+  "en": "Every morning she runs in the park."
+ },
+ "我很爱我的阿姨，": {
+  "vi": "Tôi rất yêu dì tôi,",
+  "en": "I love my aunt very much,"
+ },
+ "周末我们经常一起出去玩。": {
+  "vi": "cuối tuần chúng tôi thường cùng nhau đi chơi.",
+  "en": "and on weekends we often go out together."
+ },
+ "我的阿姨是一名中文老师。": {
+  "vi": "Dì tôi là giáo viên tiếng Trung.",
+  "en": "My aunt is a Chinese teacher."
+ },
+ "在韩国工作，她很可爱，长着大眼睛，高鼻子，小嘴巴和长头发。": {
+  "vi": "Dì làm việc ở Hàn Quốc, dì rất đáng yêu, có đôi mắt to, mũi cao, miệng nhỏ và tóc dài.",
+  "en": "She works in Korea. She is very lovely, with big eyes, a high nose, a small mouth and long hair."
+ },
+ "她有很多爱好。": {
+  "vi": "Dì có nhiều sở thích.",
+  "en": "She has many hobbies."
+ },
+ "比如画画，听音乐，做运动。": {
+  "vi": "Ví dụ như vẽ tranh, nghe nhạc, tập thể thao.",
+  "en": "For example painting, listening to music, and doing sports."
+ },
+ "为了锻炼身体，每个早上，她都会在公园里跑步。": {
+  "vi": "Để rèn luyện sức khỏe, mỗi sáng, dì đều chạy bộ trong công viên.",
+  "en": "To keep fit, every morning she runs in the park."
+ },
+ "我很爱我的阿姨，周末我们经常一起出去玩。": {
+  "vi": "Tôi rất yêu dì tôi, cuối tuần chúng tôi thường cùng nhau đi chơi.",
+  "en": "I love my aunt very much, and on weekends we often go out together."
+ },
+ "是五颜六色的，九到十一月来南京玩是最好的。": {
+  "vi": "thì rực rỡ đủ màu, từ tháng chín đến tháng mười một đến Nam Kinh chơi là tốt nhất.",
+  "en": "is full of colour, and September to November is the best time to visit Nanjing."
+ },
+ "南京在中国的江苏省，是一座历史悠久的城市。": {
+  "vi": "Nam Kinh ở tỉnh Giang Tô, Trung Quốc, là một thành phố có lịch sử lâu đời.",
+  "en": "Nanjing is in Jiangsu Province, China, and is a city with a long history."
+ },
+ "因为在古时候，南京是六个朝代的首都。": {
+  "vi": "Vì thời xưa, Nam Kinh là thủ đô của sáu triều đại.",
+  "en": "Because in ancient times, Nanjing was the capital of six dynasties."
+ },
+ "如果你喜欢中国历史，一定要来南京玩。": {
+  "vi": "Nếu bạn thích lịch sử Trung Quốc, nhất định phải đến Nam Kinh chơi.",
+  "en": "If you like Chinese history, you absolutely must visit Nanjing."
+ },
+ "南京的秋天不冷不热，很舒服。": {
+  "vi": "Mùa thu ở Nam Kinh không lạnh không nóng, rất dễ chịu.",
+  "en": "Autumn in Nanjing is neither cold nor hot — very comfortable."
+ },
+ "景色也很美。": {
+  "vi": "Phong cảnh cũng rất đẹp.",
+  "en": "The scenery is beautiful too."
+ },
+ "比如说在淘宝网、京东网，美团网等等。": {
+  "vi": "Ví dụ như trên Taobao, JD, Meituan và nhiều trang khác.",
+  "en": "For example on Taobao, JD, Meituan and so on."
+ },
+ "你不仅可以在网上买吃的东西，也可以在网上买穿的衣服，": {
+  "vi": "Bạn không những có thể mua đồ ăn trên mạng, mà còn có thể mua quần áo mặc trên mạng,",
+  "en": "You can not only buy food online, but also buy clothes to wear online,"
+ },
+ "还可以在网上用的东西比如手机、电脑、家具等等。": {
+  "vi": "còn có thể mua đồ dùng trên mạng, ví dụ như điện thoại, máy tính, đồ nội thất và nhiều thứ khác.",
+  "en": "and also things for use online, such as phones, computers, furniture and so on."
+ },
+ "网上购物越来越受到人们的欢迎，网上的东西多种多样，": {
+  "vi": "Mua sắm trực tuyến ngày càng được mọi người ưa chuộng, đồ trên mạng đa dạng phong phú,",
+  "en": "Online shopping is increasingly popular, and what's online is hugely varied,"
+ },
+ "你不用出门，留在家里就可以买。只要你有手机和网络，就可以购买。": {
+  "vi": "bạn không cần ra khỏi nhà, ở nhà là có thể mua. Chỉ cần có điện thoại và mạng là có thể mua hàng.",
+  "en": "you don't have to go out — you can buy from home. As long as you have a phone and a network, you can shop."
+ },
+ "京东网，美团网等等。": {
+  "vi": "JD, Meituan và nhiều trang khác.",
+  "en": "JD, Meituan and so on."
+ },
+ "比如手机、电脑、家具等等。": {
+  "vi": "Ví dụ như điện thoại, máy tính, đồ nội thất và nhiều thứ khác.",
+  "en": "For example phones, computers, furniture and so on."
+ },
+ "网上购物越来越受到人们的欢迎。": {
+  "vi": "Mua sắm trực tuyến ngày càng được mọi người ưa chuộng.",
+  "en": "Online shopping is increasingly popular."
+ },
+ "网上面的东西多种多样。": {
+  "vi": "Đồ trên mạng đa dạng phong phú.",
+  "en": "What's online is hugely varied."
+ },
+ "你不用出门，留在家里就可以买。": {
+  "vi": "Bạn không cần ra khỏi nhà, ở nhà là có thể mua.",
+  "en": "You don't have to go out — you can buy from home."
+ }
+}

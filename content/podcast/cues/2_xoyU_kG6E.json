@@ -1,0 +1,93 @@
+{
+  "id": "2_xoyU_kG6E",
+  "youtubeId": "2_xoyU_kG6E",
+  "channelHandle": "@PandaStudio24",
+  "title": "Các thủ đô trên thế giới || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3",
+  "titleVi": "Các thủ đô trên thế giới",
+  "topic": "Luyện đọc HSK 3",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 187,
+  "cues": [
+    {
+      "start": 24.31,
+      "end": 26.41,
+      "en": "London is the capital of the UK.",
+      "zh": "伦敦是英国的首都",
+      "pinyin": "Lúndūn shì yīngguó de shǒudū",
+      "vi": "Luân Đôn là thủ đô của nước Anh."
+    },
+    {
+      "start": 29.57,
+      "end": 31.79,
+      "en": "Beijing is the capital of China.",
+      "zh": "北京是中国的首都",
+      "pinyin": "Běijīng shì zhōngguó de shǒudū",
+      "vi": "Bắc Kinh là thủ đô của Trung Quốc."
+    },
+    {
+      "start": 34.65,
+      "end": 36.85,
+      "en": "Paris is the capital of France.",
+      "zh": "巴黎是法国的首都",
+      "pinyin": "Bālí shì fǎguó de shǒudū",
+      "vi": "Paris là thủ đô của nước Pháp."
+    },
+    {
+      "start": 39.75,
+      "end": 47.16,
+      "en": "Rome is the capital of Italy. Seoul is the capital of Korea.",
+      "zh": "罗马是意大利的首都首尔是韩国的首都",
+      "pinyin": "Luómǎ shì yìdàlì de shǒudū shǒuěr shì hánguó de shǒudū",
+      "vi": "Roma là thủ đô của Ý. Xơ-un là thủ đô của Hàn Quốc."
+    },
+    {
+      "start": 50.58,
+      "end": 52.76,
+      "en": "Tokyo is the capital of Japan.",
+      "zh": "东京是日本的首都",
+      "pinyin": "Dōngjīng shì rìběn de shǒudū",
+      "vi": "Tokyo là thủ đô của Nhật Bản."
+    },
+    {
+      "start": 55.68,
+      "end": 64.6,
+      "en": "Hanoi is the capital of Vietnam. I have been to London, and I have also been to Beijing and Paris.",
+      "zh": "河内是越南的首都我去过伦敦，也去过北京和巴黎。",
+      "pinyin": "Hénèi shì yuènán de shǒudū wǒ qùguò lúndūn, yě qùguò běijīng hé bālí.",
+      "vi": "Hà Nội là thủ đô của Việt Nam. Tôi đã đến Luân Đôn, cũng đã đến Bắc Kinh và Paris."
+    },
+    {
+      "start": 67.68,
+      "end": 72.46,
+      "en": "I have never been to Rome, Seoul, Tokyo or Hanoi.",
+      "zh": "我没有去过罗马、首尔、东京、河内。",
+      "pinyin": "Wǒ méiyǒu qùguò luómǎ, shǒuěr, dōngjīng, hénèi.",
+      "vi": "Tôi chưa đến Roma, Xơ-un, Tokyo, Hà Nội."
+    },
+    {
+      "start": 107.7,
+      "end": 109.84,
+      "en": "Rome is the capital of Italy.",
+      "zh": "罗马是意大利的首都。",
+      "pinyin": "Luómǎ shì yìdàlì de shǒudū.",
+      "vi": "Roma là thủ đô của nước Ý."
+    },
+    {
+      "start": 122.93,
+      "end": 125.63,
+      "en": "Hanoi is the capital of Vietnam.",
+      "zh": "河内是越南的首都。",
+      "pinyin": "Hénèi shì yuènán de shǒudū.",
+      "vi": "Hà Nội là thủ đô của Việt Nam."
+    },
+    {
+      "start": 128.76,
+      "end": 132.46,
+      "en": "I have been to London, and I have also been to Beijing and Paris.",
+      "zh": "我去过伦敦，也去过北京和巴黎。",
+      "pinyin": "Wǒ qùguò lúndūn, yě qùguò běijīng hé bālí.",
+      "vi": "Tôi đã đến Luân Đôn, cũng đã đến Bắc Kinh và Paris."
+    }
+  ]
+}
