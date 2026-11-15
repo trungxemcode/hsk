@@ -506,10 +506,92 @@ body.ap-body {
   margin-bottom: 12px;
 }
 
+.ap-channel-import-box {
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  background: var(--paper);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--radius-14px);
+}
+
+.ap-channel-import-head {
+  margin-bottom: 12px;
+}
+
+.ap-channel-import-head .ap-subhead {
+  margin: 0 0 4px;
+}
+
+.ap-channel-import-head .ap-card-desc {
+  margin: 0;
+}
+
+.ap-channel-import-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ap-channel-import-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ap-check-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  min-height: 36px;
+}
+
+.ap-check-inline input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+}
+
+.ap-inline-result {
+  margin: 12px 0 0;
+  padding: 9px 12px;
+  border-radius: var(--radius-10px);
+  border: 1px solid var(--line);
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+}
+
+.ap-inline-result--ok {
+  background: color-mix(in srgb, var(--green) 14%, var(--surface));
+  color: var(--green);
+}
+
+.ap-inline-result--error {
+  background: color-mix(in srgb, var(--red) 14%, var(--surface));
+  color: var(--red);
+}
+
+.ap-item-list--scroll {
+  max-height: 540px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
 @media (max-width: 860px) {
   .ap-split-grid,
-  .ap-form-cols {
+  .ap-form-cols,
+  .ap-channel-import-grid {
     grid-template-columns: 1fr;
+  }
+
+  .ap-channel-import-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .ap-topbar {
