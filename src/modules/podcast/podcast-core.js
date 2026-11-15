@@ -2455,6 +2455,4812 @@
           vi: 'Bắt đầu từ hôm nay, BaoBao Mandarin sẽ ra mắt một series kể chuyện mới.'
         }
       ]
+    },
+    {
+      id: 'ep-lctp-hsk24-calm-bad-luck',
+      youtubeId: 'OnXbndDA7I4',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 4 | How Chinese People Stay Calm in Bad Luck (Worth Knowing) | Chinese Listening Practice',
+      titleVi: 'Người Trung Quốc giữ bình tĩnh thế nào khi gặp chuyện xui rủi? (LCTP)',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 1489,
+      durationLabel: '24:49',
+      topic: 'Tư duy & văn hóa',
+      note: 'Trọn bộ 678 câu đối thoại giữa Tử Hiên & Vũ Đồng về thái độ sống bình tĩnh (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/OnXbndDA7I4.json',
+      cuesCount: 678,
+      cues: [
+        {
+          start: 6.11,
+          end: 6.71,
+          en: 'Yutong,',
+          zh: '雨桐，',
+          pinyin: 'Yǔtóng,',
+          vi: 'Vũ Đồng,'
+        },
+        {
+          start: 6.71,
+          end: 9.85,
+          en: 'You look to be in a really good mood this morning,',
+          zh: '今天早上你的心情看起来真不错，',
+          pinyin: 'Jīntiān zǎoshang nǐ de xīnqíng kàn qǐlái zhēn búcuò,',
+          vi: 'Sáng nay trông tâm trạng của cậu thật vui vẻ,'
+        },
+        {
+          start: 9.87,
+          end: 12.25,
+          en: 'and you even smiled as you poured me hot tea.',
+          zh: '还笑眯眯地给我倒热茶。',
+          pinyin: 'Hái xiàomīmī de gěi wǒ dào rè chá.',
+          vi: 'lại còn mỉm cười rót trà nóng cho tớ nữa.'
+        }
+      ]
+    },
+    {
+      id: 'ep-lctp-hsk24-mapo-tofu',
+      youtubeId: 'RjvcxwnO8EU',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 4 | How Mapo Tofu Creates Seven Flavors | Learn Chinese Through Food',
+      titleVi: 'Đậu phụ Ma Bà và 7 tầng hương vị (Learn Chinese Through Podcast)',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 727,
+      durationLabel: '12:07',
+      topic: 'Ẩm thực Tứ Xuyên',
+      note: 'Trọn bộ 297 câu kể chuyện món Đậu phụ Ma Bà Tứ Xuyên, từ vựng vị giác & nấu ăn HSK 2–4 (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/RjvcxwnO8EU.json',
+      cuesCount: 297,
+      cues: [
+        {
+          start: 6.78,
+          end: 9.67,
+          en: 'Have you ever encountered this situation?',
+          zh: '你有没有遇到过这种情况？',
+          pinyin: 'nǐ yǒu méi yǒu yùdào guo zhè zhǒng qíngkuàng?',
+          vi: 'Bạn đã bao giờ gặp tình huống này chưa?'
+        },
+        {
+          start: 9.81,
+          end: 12.27,
+          en: 'A plate of tofu has just been brought to the table,',
+          zh: '一盘豆腐刚端上桌，',
+          pinyin: 'yì pán dòufu gāng duān shàng zhuō,',
+          vi: 'Một đĩa đậu phụ vừa được bưng lên bàn,'
+        },
+        {
+          start: 12.33,
+          end: 13.65,
+          en: 'glistening red,',
+          zh: '红得发亮，',
+          pinyin: 'hóng de fāliàng,',
+          vi: 'đỏ bóng lên,'
+        }
+      ]
+    },
+    {
+      id: 'ep-lctp-hsk24-ancient-wall-sunset',
+      youtubeId: 'McIKMPc-QhY',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 4 | Sunset on the Ancient Wall  | Learn Chinese Through a Beautiful City Walk',
+      titleVi: 'Hoàng hôn trên tường thành cổ — City Walk học tiếng Trung (LCTP)',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 727,
+      durationLabel: '12:07',
+      topic: 'Du lịch & dạo phố',
+      note: 'Trọn bộ 296 câu mô tả chuyến dạo bộ ngắm hoàng hôn trên tường thành cổ (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/McIKMPc-QhY.json',
+      cuesCount: 296,
+      cues: [
+        {
+          start: 6.27,
+          end: 8.65,
+          en: 'Have you ever seen a sunset like this?',
+          zh: '你有没有看过这样的夕阳？',
+          pinyin: 'Nǐ yǒu méiyǒu kàn guo zhèyàng de xīyáng?',
+          vi: 'Bạn đã bao giờ ngắm hoàng hôn như thế này chưa?'
+        },
+        {
+          start: 8.87,
+          end: 11.41,
+          en: 'The sun hasn\'t completely set yet,',
+          zh: '太阳还没有完全落下，',
+          pinyin: 'Tàiyáng hái méiyǒu wánquán luòxia,',
+          vi: 'Mặt trời vẫn chưa hoàn toàn lặn xuống,'
+        },
+        {
+          start: 11.47,
+          end: 14.81,
+          en: 'but the ancient city wall has already turned golden,',
+          zh: '古老的城墙先变成了金色，',
+          pinyin: 'Gǔlǎo de chéngqiáng xiān biàn chéng le jīnsè,',
+          vi: 'nhưng những bức tường thành cổ đã chuyển sang màu vàng trước,'
+        }
+      ]
+    },
+    {
+      id: 'ep-lctp-hsk24-truly-happy',
+      youtubeId: 'RSgCb3MVgrw',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 4 | What Makes a Person Truly Happy?  | Chinese Listening Practice',
+      titleVi: 'Điều gì khiến một người thực sự hạnh phúc? (LCTP)',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 781,
+      durationLabel: '13:01',
+      topic: 'Hạnh phúc & nội tâm',
+      note: 'Trọn bộ 338 câu chia sẻ nhẹ nhàng về niềm vui và hạnh phúc bền vững HSK 2–4 (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/RSgCb3MVgrw.json',
+      cuesCount: 338,
+      cues: [
+        {
+          start: 6.49,
+          end: 8.29,
+          en: 'Have you ever met someone like this…',
+          zh: '你有没有见过这样的人……',
+          pinyin: 'Nǐ yǒu méiyǒu jiàn guo zhèyàng de rén……',
+          vi: 'Bạn đã từng gặp người như thế này chưa…'
+        },
+        {
+          start: 8.29,
+          end: 9.49,
+          en: 'They are always smiling,',
+          zh: '他总是笑，',
+          pinyin: 'Tā zǒngshì xiào,',
+          vi: 'Người đó lúc nào cũng cười,'
+        },
+        {
+          start: 9.49,
+          end: 11.79,
+          en: 'and seem happy every day.',
+          zh: '看起来每天都很开心。',
+          pinyin: 'Kàn qǐlái měitiān dōu hěn kāixīn.',
+          vi: 'trông như ngày nào cũng rất vui vẻ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-lctp-hsk12-exam-prep-p4',
+      youtubeId: 'TiTXwdz45TQ',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1 - 2 Exam Preparation | Have you passed HSK 1 yet? - Come on over! P4',
+      titleVi: 'Luyện nghe thi HSK 1–2 (Phần 4) — Tử Hiên & Vũ Đồng (LCTP)',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 437,
+      durationLabel: '7:17',
+      topic: 'Ôn thi HSK 1–2',
+      note: 'Trọn bộ 164 câu luyện nghe mẫu câu thực chiến cho kỳ thi HSK 1–2 (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/TiTXwdz45TQ.json',
+      cuesCount: 164,
+      cues: [
+        {
+          start: 6.13,
+          end: 7.48,
+          en: 'Hello, I\'m Zixuan.',
+          zh: '你好，我是子轩。',
+          pinyin: 'Nǐ hǎo, wǒ shì Zǐxuān.',
+          vi: 'Xin chào, tôi là Tử Hiên.'
+        },
+        {
+          start: 8.29,
+          end: 10.23,
+          en: 'Today we listen to Chinese.',
+          zh: '今天我们听汉语。',
+          pinyin: 'Jīntiān wǒmen tīng Hànyǔ.',
+          vi: 'Hôm nay chúng ta nghe tiếng Trung.'
+        },
+        {
+          start: 10.69,
+          end: 12.75,
+          en: 'Hello, I\'m Yutong.',
+          zh: '你好，我是雨桐。',
+          pinyin: 'Nǐ hǎo, wǒ shì Yǔtóng.',
+          vi: 'Xin chào, tôi là Vũ Đồng.'
+        }
+      ]
+    },
+    {
+      id: 'ep-lctp-hsk24-remember-words',
+      youtubeId: 'PTHiyUpf1d8',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 4 | Learn Chinese Smarter: Remember New Words for Longer | Chinese Listening Practice',
+      titleVi: 'Mẹo học từ vựng tiếng Trung nhớ lâu hơn (LCTP)',
+      channel: 'Learn Chinese Through Podcast',
+      channelName: 'Learn Chinese Through Podcast',
+      channelHandle: '@LearnChineseThroughPodcast',
+      channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
+      channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
+      durationSec: 702,
+      durationLabel: '11:42',
+      topic: 'Phương pháp nhớ từ vựng',
+      note: 'Trọn bộ 313 câu chia sẻ phương pháp ghi nhớ từ mới tiếng Trung lâu hơn (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/PTHiyUpf1d8.json',
+      cuesCount: 313,
+      cues: [
+        {
+          start: 6.25,
+          end: 8.19,
+          en: 'Have you ever had this feeling:',
+          zh: '你有没有过这种感觉：',
+          pinyin: 'Nǐ yǒu méiyǒu guò zhè zhǒng gǎnjué:',
+          vi: 'Bạn đã bao giờ có cảm giác thế này chưa:'
+        },
+        {
+          start: 8.25,
+          end: 10.65,
+          en: 'Yesterday you memorized fifty new words,',
+          zh: '昨天背了五十个新词，',
+          pinyin: 'Zuótiān bèi le wǔshí ge xīn cí,',
+          vi: 'Hôm qua học thuộc năm mươi từ mới,'
+        },
+        {
+          start: 10.65,
+          end: 13.45,
+          en: 'but today it feels as if you’re seeing them for the first time?',
+          zh: '今天却好像第一次见到它们？',
+          pinyin: 'Jīntiān què hǎoxiàng dì yī cì jiàn dào tāmen?',
+          vi: 'mà hôm nay lại cứ như lần đầu tiên nhìn thấy chúng?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-ganfe8bti_u',
+      youtubeId: 'gaNfE8BTI_U',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '为什么越睡越累？真正的休息 | Why Are You Still Tired? True Rest in Chinese | Chinese Daily Podcast',
+      titleVi: '为什么越睡越累？真正的休息 | Why Are You Still Tired? True Rest in Chinese | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1009,
+      durationLabel: '16:49',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 351 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/gaNfE8BTI_U.json',
+      cuesCount: 351,
+      cues: [
+        {
+          start: 6.47,
+          end: 10.36,
+          en: 'Hello everyone! Welcome to today\'s "Chinese Daily"!',
+          zh: '大家好！欢迎收听今天的《每天中文》！',
+          pinyin: 'Dàjiā hǎo! Huānyíng shōutīng jīntiān de “Měitiān Zhōngwén”!',
+          vi: 'Xin chào mọi người! Chào mừng các bạn nghe chương trình “Mỗi Ngày Tiếng Trung” hôm nay!'
+        },
+        {
+          start: 10.37,
+          end: 11.66,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-urzkyltefcq',
+      youtubeId: 'uRzkyLtEFcQ',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '何为真正的知足？ | Ancient Wisdom for Modern Burnout | Chinese Daily Podcast',
+      titleVi: '何为真正的知足？ | Ancient Wisdom for Modern Burnout | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 857,
+      durationLabel: '14:17',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 284 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/uRzkyLtEFcQ.json',
+      cuesCount: 284,
+      cues: [
+        {
+          start: 6.37,
+          end: 10.03,
+          en: 'Hello everyone! Welcome to “Chinese Daily”, I\'m Li Ming.',
+          zh: '大家好！欢迎收听《每天中文》，我是李明。',
+          pinyin: 'Dàjiā hǎo! Huānyíng shōutīng “Měitiān Zhōngwén”, wǒ shì Lǐ Míng.',
+          vi: 'Xin chào mọi người! Chào mừng các bạn đến với “Mỗi Ngày Tiếng Trung”, tôi là Lý Minh.'
+        },
+        {
+          start: 10.03,
+          end: 11.75,
+          en: 'Hello everyone, I\'m Wang Yu!',
+          zh: '大家好，我是王雨！',
+          pinyin: 'Dàjiā hǎo, wǒ shì Wáng Yǔ!',
+          vi: 'Xin chào mọi người, tôi là Vương Vũ!'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-dlhlsgjwfvu',
+      youtubeId: 'DlhLSgjwfVU',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '众口铄金与网络暴力 | The Brutal Power of Words & Cyberbullying | Chinese Daily Podcast',
+      titleVi: '众口铄金与网络暴力 | The Brutal Power of Words & Cyberbullying | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 953,
+      durationLabel: '15:53',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 355 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/DlhLSgjwfVU.json',
+      cuesCount: 355,
+      cues: [
+        {
+          start: 7.7,
+          end: 9.8,
+          en: 'Dear listeners, hello everyone!',
+          zh: '亲爱的听众朋友们，大家好！',
+          pinyin: 'Qīn\'ài de tīngzhòng péngyǒumen, dàjiā hǎo!',
+          vi: 'Các bạn thính giả thân mến, xin chào mọi người!'
+        },
+        {
+          start: 9.83,
+          end: 14.2,
+          en: 'Long time no see, welcome to a new episode, I\'m Li Ming.',
+          zh: '好久不见，欢迎收听新一期的节目，我是李明。',
+          pinyin: 'Hǎojiǔ bú jiàn, huānyíng shōutīng xīn yī qī de jiémù, wǒ shì Lǐ Míng.',
+          vi: 'Lâu rồi không gặp, chào mừng các bạn đến với tập mới của chương trình, tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp--f2cwdcfsmc',
+      youtubeId: '-f2CWdcfSmc',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '聊斋志异：画皮 | Liaozhai Bedtime Story: The Painted Skin | Chinese Daily Podcast',
+      titleVi: '聊斋志异：画皮 | Liaozhai Bedtime Story: The Painted Skin | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1089,
+      durationLabel: '18:09',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 415 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/-f2CWdcfSmc.json',
+      cuesCount: 415,
+      cues: [
+        {
+          start: 6.5,
+          end: 8.59,
+          en: 'Dear friends, good evening.',
+          zh: '亲爱的朋友们，晚上好。',
+          pinyin: 'Qīn\'ài de péngyǒumen, wǎnshang hǎo.',
+          vi: 'Các bạn thân mến, chào buổi tối.'
+        },
+        {
+          start: 8.6,
+          end: 12.79,
+          en: 'Welcome to the \'Bedtime Stories\' segment of \'Chinese Daily.\'',
+          zh: '欢迎收听《每天中文》的“睡前故事”专栏，',
+          pinyin: 'Huānyíng shōutīng “Měitiān Zhōngwén” de “shuìqián gùshi” zhuānlán,',
+          vi: 'Chào mừng các bạn đến với chuyên mục “Truyện kể trước giờ ngủ” của “Mỗi Ngày Trung Văn”.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-mzbnuuwtzv4',
+      youtubeId: 'MZbnUUWtZv4',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '你真的变了吗？成年人的成长瞬间 | Subtle Signs of Growing Up | Chinese Daily Podcast',
+      titleVi: '你真的变了吗？成年人的成长瞬间 | Subtle Signs of Growing Up | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1199,
+      durationLabel: '19:59',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 502 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/MZbnUUWtZv4.json',
+      cuesCount: 502,
+      cues: [
+        {
+          start: 6.47,
+          end: 8.87,
+          en: 'Dear listeners, hello everyone!',
+          zh: '亲爱的听众朋友们，大家好呀！',
+          pinyin: 'Qīn\'ài de tīngzhòng péngyoumen, dàjiā hǎo ya!',
+          vi: 'Các bạn thính giả thân mến, xin chào mọi người!'
+        },
+        {
+          start: 8.9,
+          end: 13.13,
+          en: 'Welcome to a new episode of "Chinese Daily"!',
+          zh: '欢迎大家收听新一期的《每天中文》！',
+          pinyin: 'Huānyíng dàjiā shōutīng xīn yī qī de 《Měitiān Zhōngwén》!',
+          vi: 'Chào mừng mọi người đến với tập mới của “Mỗi Ngày Tiếng Trung”!'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-ikk8yoy4wl8',
+      youtubeId: 'IKk8YoY4Wl8',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '为什么年轻人迷恋农村慢生活？ | Why Chinese Youth Love Rural Slow Living | Chinese Daily Podcast',
+      titleVi: '为什么年轻人迷恋农村慢生活？ | Why Chinese Youth Love Rural Slow Living | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1024,
+      durationLabel: '17:04',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 354 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/IKk8YoY4Wl8.json',
+      cuesCount: 354,
+      cues: [
+        {
+          start: 6.4,
+          end: 9.59,
+          en: 'Hello, dear listeners, how have you all been lately!',
+          zh: '哈喽，亲爱的听众朋友们，大家最近好吗！',
+          pinyin: 'Hālóu, qīn\'ài de tīngzhòng péngyoumen, dàjiā zuìjìn hǎo ma!',
+          vi: 'Xin chào, những người bạn thính giả thân mến, dạo này mọi người có khỏe không!'
+        },
+        {
+          start: 9.6,
+          end: 14.56,
+          en: 'Welcome to a new episode of Daily Chinese; I\'m Li Ming.',
+          zh: '欢迎收听新一期的《每天中文》，我是李明。',
+          pinyin: 'Huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”, wǒ shì Lǐ Míng.',
+          vi: 'Chào mừng các bạn đến với tập mới của \'Mỗi Ngày Tiếng Trung\', tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-468fvidwrle',
+      youtubeId: '468fViDwrlE',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '孝顺还是盲从？ | Filial Piety vs Obedience in China | Chinese Daily Podcast',
+      titleVi: '孝顺还是盲从？ | Filial Piety vs Obedience in China | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 995,
+      durationLabel: '16:35',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 381 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/468fViDwrlE.json',
+      cuesCount: 381,
+      cues: [
+        {
+          start: 6.37,
+          end: 8.3,
+          en: 'Dear listeners, happy weekend to you all!',
+          zh: '亲爱的听众朋友们，大家周末好！',
+          pinyin: 'Qīn\'ài de tīngzhòng péngyǒumen, dàjiā zhōumò hǎo!',
+          vi: 'Các bạn thính giả thân mến, chúc mọi người cuối tuần vui vẻ!'
+        },
+        {
+          start: 8.33,
+          end: 12.96,
+          en: 'Welcome to a new episode of Daily Chinese; I\'m Li Ming.',
+          zh: '欢迎收听新一期的《每天中文》，我是李明。',
+          pinyin: 'Huānyíng shōutīng xīn yī qī de “Tiếng Trung Mỗi Ngày”, wǒ shì Lǐ Míng.',
+          vi: 'Chào mừng các bạn đến với tập mới của “Tiếng Trung Mỗi Ngày”, tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-9jocykbpl3i',
+      youtubeId: '9joCykBpl3I',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '中国人的客套话 | Decoding Chinese Polite Phrases & Small Talk | Chinese Daily Podcast',
+      titleVi: '中国人的客套话 | Decoding Chinese Polite Phrases & Small Talk | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 914,
+      durationLabel: '15:14',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 337 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/9joCykBpl3I.json',
+      cuesCount: 337,
+      cues: [
+        {
+          start: 6.27,
+          end: 7.96,
+          en: 'Dear listeners, hello everyone!',
+          zh: '亲爱的听众朋友们，大家好！',
+          pinyin: 'Qīn\'ài de tīngzhòng péngyoumen, dàjiā hǎo!',
+          vi: 'Các thính giả thân mến, xin chào mọi người!'
+        },
+        {
+          start: 7.97,
+          end: 11.49,
+          en: 'Welcome back to a new episode of Chinese Daily, I\'m Li Ming.',
+          zh: '欢迎回到新一期的《每天中文》，我是李明。',
+          pinyin: 'Huānyíng huídào xīn yī qī de 《Měitiān Zhōngwén》, wǒ shì Lǐ Míng.',
+          vi: 'Chào mừng trở lại với tập mới của “Mỗi Ngày Tiếng Trung”, tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-jgyqgb-g9i8',
+      youtubeId: 'JgyQgB-g9i8',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'Feeling Stuck in Chinese? You Are Just Growing Roots! | 感觉没进步？你只是在“扎根”',
+      titleVi: 'Feeling Stuck in Chinese? You Are Just Growing Roots! | 感觉没进步？你只是在“扎根”',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1067,
+      durationLabel: '17:47',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 398 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/JgyQgB-g9i8.json',
+      cuesCount: 398,
+      cues: [
+        {
+          start: 6.53,
+          end: 9.13,
+          en: 'Li Ming, when you came to the studio this morning,',
+          zh: '李明，你早上来工作室的时候，',
+          pinyin: 'Lǐ Míng, nǐ zǎoshang lái gōngzuòshì de shíhou,',
+          vi: 'Lý Minh, lúc cậu đến studio vào sáng nay,'
+        },
+        {
+          start: 9.17,
+          end: 11.94,
+          en: 'did you see that big tree at the park entrance?',
+          zh: '看到公园门口那棵大树了吗？',
+          pinyin: 'Kàn dào gōngyuán ménkǒu nà kē dàshù le ma?',
+          vi: 'cậu có thấy cái cây lớn ở cổng công viên không?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-rhyuqctidzm',
+      youtubeId: 'rHyuQctiDZM',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '选择比努力更重要 | Choice is More Important Than Effort | Chinese Daily Podcast',
+      titleVi: '选择比努力更重要 | Choice is More Important Than Effort | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1281,
+      durationLabel: '21:21',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 494 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/rHyuQctiDZM.json',
+      cuesCount: 494,
+      cues: [
+        {
+          start: 6.3,
+          end: 11.43,
+          en: 'Sigh, I really feel so bad for her; my heart just feels awful.',
+          zh: '唉，我真的太替她难过了，心里特别不是滋味。',
+          pinyin: 'Āi, wǒ zhēn de tài tì tā nánguò le, xīnli tèbié bù shì zīwèi.',
+          vi: 'Ôi, tôi thật sự thấy thương cô ấy quá, trong lòng cứ thấy không ổn chút nào.'
+        },
+        {
+          start: 11.47,
+          end: 12.67,
+          en: 'What\'s wrong, Wang Yu?',
+          zh: '怎么了王雨？',
+          pinyin: 'Zěnme le Wáng Yǔ?',
+          vi: 'Sao vậy Vương Vũ?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-shluafrl4bu',
+      youtubeId: 'ShLuafrl4BU',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '中国菜与八大菜系 | Eight Culinary Traditions of Chinese Food | Chinese Daily Podcast',
+      titleVi: '中国菜与八大菜系 | Eight Culinary Traditions of Chinese Food | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1024,
+      durationLabel: '17:04',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 355 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/ShLuafrl4BU.json',
+      cuesCount: 355,
+      cues: [
+        {
+          start: 6.2,
+          end: 8.26,
+          en: 'Li Ming, quick, look at this video!',
+          zh: '李明，你快看这个视频！',
+          pinyin: 'Lǐ Míng, nǐ kuài kàn zhège shìpín!',
+          vi: 'Lý Minh, cậu mau xem video này đi!'
+        },
+        {
+          start: 8.27,
+          end: 11.53,
+          en: 'I just saw a video of someone eating Sichuan hotpot,',
+          zh: '我刚才看到一个吃四川火锅的视频，',
+          pinyin: 'Wǒ gāngcái kàndào yí ge chī Sìchuān huǒguō de shìpín,',
+          vi: 'Tớ vừa xem một video ăn lẩu Tứ Xuyên,'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-uufcrtzgg8i',
+      youtubeId: 'UufcRTZgg8I',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '怎么给植物起中文名字？ | How to Name Plants in Chinese | Chinese Daily Podcast',
+      titleVi: '怎么给植物起中文名字？ | How to Name Plants in Chinese | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1014,
+      durationLabel: '16:54',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 358 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/UufcRTZgg8I.json',
+      cuesCount: 358,
+      cues: [
+        {
+          start: 6.33,
+          end: 10.39,
+          en: '(laughs) Look, look—isn\'t this especially cute?',
+          zh: '(笑) 你看你看，这个是不是特别可爱？',
+          pinyin: '(xiào) Nǐ kàn nǐ kàn, zhège shì bú shì tèbié kě\'ài?',
+          vi: '(Cười) Anh xem này, cái này có phải đặc biệt đáng yêu không?'
+        },
+        {
+          start: 10.4,
+          end: 11.69,
+          en: 'You\'ve been looking at your phone and laughing,',
+          zh: '你一直看着手机笑，',
+          pinyin: 'Nǐ yìzhí kànzhe shǒujī xiào,',
+          vi: 'Anh cứ nhìn điện thoại cười suốt,'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-mvkils1pflg',
+      youtubeId: 'MvKiLS1PfLg',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '改善中文发音的秘密 | The Secret to Improve Chinese Pronunciation | Chinese Daily Podcast',
+      titleVi: '改善中文发音的秘密 | The Secret to Improve Chinese Pronunciation | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 847,
+      durationLabel: '14:07',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 303 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/MvKiLS1PfLg.json',
+      cuesCount: 303,
+      cues: [
+        {
+          start: 6.2,
+          end: 8.32,
+          en: 'Li Ming! What were you laughing at just now?',
+          zh: '李明！你刚才在笑什么？',
+          pinyin: 'Lǐ Míng! Nǐ gāngcái zài xiào shénme?',
+          vi: 'Lý Minh! Vừa nãy cậu cười cái gì thế?'
+        },
+        {
+          start: 8.33,
+          end: 9.95,
+          en: 'Your laughter is too loud!',
+          zh: '你的笑声太大了！',
+          pinyin: 'Nǐ de xiàoshēng tài dà le!',
+          vi: 'Tiếng cười của cậu lớn quá!'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-8fr-6eny0ms',
+      youtubeId: '8fr-6enY0ms',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '关于分享的睡前故事 | Chinese Bedtime Stories About Sharing | Chinese Daily Podcast',
+      titleVi: '关于分享的睡前故事 | Chinese Bedtime Stories About Sharing | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1209,
+      durationLabel: '20:09',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 432 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/8fr-6enY0ms.json',
+      cuesCount: 432,
+      cues: [
+        {
+          start: 6.3,
+          end: 9.36,
+          en: 'Hello everyone, welcome to our podcast, Chinese Daily!',
+          zh: '大家好，欢迎来到我们的播客，每天中文！',
+          pinyin: 'Dàjiā hǎo, huānyíng lái dào wǒmen de bōkè, Měitiān Zhōngwén!',
+          vi: 'Xin chào mọi người, chào mừng đến với podcast của chúng tôi, Mỗi Ngày Trung Văn!'
+        },
+        {
+          start: 9.37,
+          end: 12.13,
+          en: 'I\'m Li Ming, and I\'m happy to meet everyone again.',
+          zh: '我是李明，很高兴又和大家见面了。',
+          pinyin: 'Wǒ shì Lǐ Míng, hěn gāoxìng yòu hé dàjiā jiànmiàn le.',
+          vi: 'Tôi là Lý Minh, rất vui lại được gặp mọi người.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-hssxcmlyqx4',
+      youtubeId: 'HsSxcmLyqx4',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '为什么越沉默运气越好？ | Why Keeping Secrets Brings Good Luck | Chinese Daily Podcast',
+      titleVi: '为什么越沉默运气越好？ | Why Keeping Secrets Brings Good Luck | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1103,
+      durationLabel: '18:23',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 395 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/HsSxcmLyqx4.json',
+      cuesCount: 395,
+      cues: [
+        {
+          start: 6.37,
+          end: 8.7,
+          en: 'Hello everyone, welcome back to Chinese Daily!',
+          zh: '大家好，欢迎回到每天中文！',
+          pinyin: 'Dàjiā hǎo, huānyíng huídào Měitiān Zhōngwén!',
+          vi: 'Xin chào mọi người, chào mừng quay lại với Mỗi Ngày Trung Văn!'
+        },
+        {
+          start: 8.73,
+          end: 10.7,
+          en: 'I\'m very happy to chat with everyone again,',
+          zh: '很高兴又能和大家一起聊天，',
+          pinyin: 'Hěn gāoxìng yòu néng hé dàjiā yìqǐ liáotiān,',
+          vi: 'Rất vui vì lại được trò chuyện cùng mọi người,'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-vhsprlbzaac',
+      youtubeId: 'vhsPRlbzaac',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | 躺平是放弃还是觉醒？ | Is Lying Flat Giving Up or Waking Up? | Chinese Daily Podcast',
+      titleVi: 'HSK 3-4 | 躺平是放弃还是觉醒？ | Is Lying Flat Giving Up or Waking Up? | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 767,
+      durationLabel: '12:47',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 258 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/vhsPRlbzaac.json',
+      cuesCount: 258,
+      cues: [
+        {
+          start: 6.43,
+          end: 8.93,
+          en: 'Hello everyone, welcome back to Everyday Chinese!',
+          zh: '大家好，欢迎回到每天中文！',
+          pinyin: 'Dàjiā hǎo, huānyíng huídào Měitiān Zhōngwén!',
+          vi: 'Xin chào mọi người, chào mừng quay lại với Tiếng Trung Mỗi Ngày!'
+        },
+        {
+          start: 8.97,
+          end: 10.67,
+          en: 'I\'m Li Ming, and I\'m very happy',
+          zh: '我是李明，很高兴',
+          pinyin: 'Wǒ shì Lǐ Míng, hěn gāoxìng',
+          vi: 'Tôi là Lý Minh, rất vui'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-tdlwxz1iqrq',
+      youtubeId: 'tDlWxZ1IqrQ',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 3 | The 4 Great Cuisines Explained | Chinese Daily Podcast',
+      titleVi: 'HSK 2 - 3 | The 4 Great Cuisines Explained | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 772,
+      durationLabel: '12:52',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 282 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/tDlWxZ1IqrQ.json',
+      cuesCount: 282,
+      cues: [
+        {
+          start: 6.77,
+          end: 9.93,
+          en: 'Hello everyone, welcome to \'Everyday Chinese\'.',
+          zh: '大家好，欢迎收听“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng tīngshōu “Měitiān Zhōngwén”.',
+          vi: 'Chào mọi người, chào mừng đến với “Tiếng Trung mỗi ngày”.'
+        },
+        {
+          start: 9.93,
+          end: 11.05,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-u2bfzltzwso',
+      youtubeId: 'U2BFzltZWSo',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | Chinese BBQ Culture: Midnight Street Food | 中国深夜烧烤 | Chinese daily podcast',
+      titleVi: 'HSK 3-4 | Chinese BBQ Culture: Midnight Street Food | 中国深夜烧烤 | Chinese daily podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 918,
+      durationLabel: '15:18',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 350 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/U2BFzltZWSo.json',
+      cuesCount: 350,
+      cues: [
+        {
+          start: 6.37,
+          end: 8.36,
+          en: 'Hello everyone, welcome to Chinese Daily.',
+          zh: '大家好，欢迎收听每天中文。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng Měitiān Zhōngwén.',
+          vi: 'Xin chào mọi người, chào mừng đến với Mỗi Ngày Tiếng Trung.'
+        },
+        {
+          start: 8.37,
+          end: 9.29,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-4kgh4hnymj8',
+      youtubeId: '4KGh4HNyMJ8',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | Dragon Boat Festival Traditions | 端午节的故事与习俗 | Chinese daily podcast',
+      titleVi: 'HSK 3-4 | Dragon Boat Festival Traditions | 端午节的故事与习俗 | Chinese daily podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 935,
+      durationLabel: '15:35',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 334 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/4KGh4HNyMJ8.json',
+      cuesCount: 334,
+      cues: [
+        {
+          start: 6.3,
+          end: 9.02,
+          en: 'Hello everyone! Welcome to \'Chinese Every Day.\'',
+          zh: '大家好！欢迎来到《每天中文》。',
+          pinyin: 'Dàjiā hǎo! Huānyíng lái dào “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người! Chào mừng đến với “Mỗi Ngày Tiếng Trung”.'
+        },
+        {
+          start: 9.03,
+          end: 9.95,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-7jbc1erfa08',
+      youtubeId: '7jBC1ERfA08',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | Stop Confusing 不 vs 没 & 能 vs 可以 | 别再说错了！ | Chinese daily podcast',
+      titleVi: 'HSK 3-4 | Stop Confusing 不 vs 没 & 能 vs 可以 | 别再说错了！ | Chinese daily podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1047,
+      durationLabel: '17:27',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 409 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/7jBC1ERfA08.json',
+      cuesCount: 409,
+      cues: [
+        {
+          start: 6.27,
+          end: 6.96,
+          en: 'Hi everyone!',
+          zh: '大家好！',
+          pinyin: 'Dàjiā hǎo!',
+          vi: 'Xin chào mọi người!'
+        },
+        {
+          start: 6.97,
+          end: 10.09,
+          en: 'Welcome to a new episode of \'Daily Chinese\'!',
+          zh: '欢迎来到新一期的“每天中文”！',
+          pinyin: 'Huānyíng lái dào xīn yī qī de “Měitiān Zhōngwén”!',
+          vi: 'Chào mừng đến với tập mới của “Mỗi Ngày Tiếng Trung”!'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-ai6y37t772k',
+      youtubeId: 'AI6Y37T772k',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '学会倾听与消除误会 | How to Listen & Avoid Misunderstandings | Chinese Bedtime Story',
+      titleVi: '学会倾听与消除误会 | How to Listen & Avoid Misunderstandings | Chinese Bedtime Story',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 982,
+      durationLabel: '16:22',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 382 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/AI6Y37T772k.json',
+      cuesCount: 382,
+      cues: [
+        {
+          start: 7.67,
+          end: 10.14,
+          en: 'Hello everyone, welcome back to Daily Chinese, I\'m very happy',
+          zh: '大家好，欢迎回到每天中文，很高兴',
+          pinyin: 'Dàjiā hǎo, huānyíng huídào Měitiān Zhōngwén, hěn gāoxìng',
+          vi: 'Xin chào mọi người, chào mừng quay lại 每天中文, rất vui'
+        },
+        {
+          start: 10.17,
+          end: 13.24,
+          en: 'Today I can chat with everyone here again, today',
+          zh: '今天又能和大家在这里一起聊天，今天',
+          pinyin: 'Jīntiān yòu néng hé dàjiā zài zhèlǐ yìqǐ liáotiān, jīntiān',
+          vi: 'Hôm nay lại có thể cùng mọi người trò chuyện ở đây, hôm nay'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-hbpecevvz-k',
+      youtubeId: 'hBPECevVz-k',
+      level: 'HSK 4',
+      levelGroup: 'hsk4',
+      title: 'HSK 4 | Why Chinese People Love Hot Water? | 为什么中国人爱喝热水？| Chinese Daily Podcast',
+      titleVi: 'HSK 4 | Why Chinese People Love Hot Water? | 为什么中国人爱喝热水？| Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1204,
+      durationLabel: '20:04',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 443 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/hBPECevVz-k.json',
+      cuesCount: 443,
+      cues: [
+        {
+          start: 6.37,
+          end: 10.16,
+          en: 'Hello everyone, welcome to a new episode of \'Chinese Daily.\'',
+          zh: '大家好，欢迎收听新一期的《每天中文》。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Chào mọi người, hoan nghênh nghe tập mới của \'Mỗi Ngày Tiếng Trung\'.'
+        },
+        {
+          start: 10.17,
+          end: 11.13,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-qtdscuxhe3c',
+      youtubeId: 'QTDSCuxhe3c',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3 | Chinese Birthday Culture & Longevity Noodles | 中国人生日吃什么？| Chinese Daily Podcast',
+      titleVi: 'HSK 3 | Chinese Birthday Culture & Longevity Noodles | 中国人生日吃什么？| Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 985,
+      durationLabel: '16:25',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 368 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/QTDSCuxhe3c.json',
+      cuesCount: 368,
+      cues: [
+        {
+          start: 6.43,
+          end: 9.82,
+          en: 'Hello everyone! This is “Chinese Daily”, welcome to the show.',
+          zh: '大家好！这里是“每天中文”，欢迎你的收听。',
+          pinyin: 'Dàjiā hǎo! Zhèlǐ shì “Měitiān Zhōngwén”, huānyíng nǐ de shōutīng.',
+          vi: 'Xin chào mọi người! Đây là “Tiếng Trung Mỗi Ngày”, chào mừng bạn lắng nghe.'
+        },
+        {
+          start: 9.83,
+          end: 10.75,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-ktbmtlu9d3m',
+      youtubeId: 'KtbmTlU9d3M',
+      level: 'HSK 4',
+      levelGroup: 'hsk4',
+      title: 'HSK 4-5 | 酒逢知己千杯少 | Drinking with a True Friend | Chinese Daily Podcast',
+      titleVi: 'HSK 4-5 | 酒逢知己千杯少 | Drinking with a True Friend | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 807,
+      durationLabel: '13:27',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 289 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/KtbmTlU9d3M.json',
+      cuesCount: 289,
+      cues: [
+        {
+          start: 6.4,
+          end: 8.9,
+          en: 'Hello everyone, welcome back to Chinese Daily!',
+          zh: '大家好，欢迎回到每天中文！',
+          pinyin: 'Dàjiā hǎo, huānyíng huídào Měitiān Zhōngwén!',
+          vi: 'Xin chào mọi người, chào mừng quay lại với Mỗi Ngày Tiếng Trung!'
+        },
+        {
+          start: 8.93,
+          end: 12.16,
+          en: 'Today we\'re going to talk about another really interesting topic.',
+          zh: '今天我们又要聊一个特别有意思的话题了。',
+          pinyin: 'Jīntiān wǒmen yòu yào liáo yí ge tèbié yǒu yìsi de huàtí le.',
+          vi: 'Hôm nay chúng ta lại sắp nói về một chủ đề đặc biệt thú vị.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-cdx55ctkpus',
+      youtubeId: 'cDx55cTKPUs',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | How Chinese Spend May Day 🇨🇳 中国人怎么过五一？| Chinese Daily Podcast',
+      titleVi: 'HSK 3-4 | How Chinese Spend May Day 🇨🇳 中国人怎么过五一？| Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 993,
+      durationLabel: '16:33',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 362 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/cDx55cTKPUs.json',
+      cuesCount: 362,
+      cues: [
+        {
+          start: 6.3,
+          end: 8.09,
+          en: 'Hello, dear listeners!',
+          zh: '听众朋友们，大家好！',
+          pinyin: 'Tīngzhòng péngyoumen, dàjiā hǎo!',
+          vi: 'Xin chào các thính giả!'
+        },
+        {
+          start: 8.1,
+          end: 10.56,
+          en: 'Welcome to “Daily Chinese.”',
+          zh: '欢迎来到“每天中文”。',
+          pinyin: 'Huānyíng lái dào “Měitiān Zhōngwén”.',
+          vi: 'Chào mừng đến với “Mỗi Ngày Tiếng Trung”.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-ikum3nphvs4',
+      youtubeId: 'ikuM3nphvs4',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3 + | 中国常见迷信与禁忌 | Common Chinese Superstitions & Taboos | Chinese Daily Podcast',
+      titleVi: 'HSK 3 + | 中国常见迷信与禁忌 | Common Chinese Superstitions & Taboos | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 954,
+      durationLabel: '15:54',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 342 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/ikuM3nphvs4.json',
+      cuesCount: 342,
+      cues: [
+        {
+          start: 7.6,
+          end: 10.79,
+          en: 'Hello everyone, welcome to a new episode of Chinese Daily.',
+          zh: '大家好，欢迎收听新一期的每天中文。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de Měitiān Zhōngwén.',
+          vi: 'Xin chào mọi người, chào mừng đến với tập mới của Mỗi Ngày Tiếng Trung.'
+        },
+        {
+          start: 10.8,
+          end: 11.79,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp--zp8hi-xoni',
+      youtubeId: '-zp8Hi-xONI',
+      level: 'HSK 5–6',
+      levelGroup: 'hsk5-6',
+      title: 'HSK 5 | Living in the Future? China\'s New 4 Inventions | 中国新四大发明 | Chinese Daily Podcast',
+      titleVi: 'HSK 5 | Living in the Future? China\'s New 4 Inventions | 中国新四大发明 | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1384,
+      durationLabel: '23:04',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 542 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/-zp8Hi-xONI.json',
+      cuesCount: 542,
+      cues: [
+        {
+          start: 6.33,
+          end: 10.06,
+          en: 'Hello everyone—both those in front of the screen and each friend in your headphones!',
+          zh: '屏幕前的，还有耳机里的每一位朋友，大家好！',
+          pinyin: 'Píngmù qián de, hái yǒu ěrjī lǐ de měi yī wèi péngyou, dàjiā hǎo!',
+          vi: 'Chào mọi người, cả những bạn trước màn hình lẫn từng bạn đang nghe trong tai nghe!'
+        },
+        {
+          start: 10.1,
+          end: 13.23,
+          en: 'Welcome to a new episode of Chinese Daily.',
+          zh: '欢迎收听新一期的《每天中文》。',
+          pinyin: 'Huānyíng shōutīng xīn yī qī de 《Měitiān Zhōngwén》.',
+          vi: 'Chào mừng đến với tập mới của \'Mỗi Ngày Tiếng Trung\'.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-q1fo6dr5t_y',
+      youtubeId: 'Q1FO6dr5T_Y',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | Social Media and Modern Life | Is Social Media Good or Bad? | Chinese Daily Podcast',
+      titleVi: 'HSK 3-4 | Social Media and Modern Life | Is Social Media Good or Bad? | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 891,
+      durationLabel: '14:51',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 313 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/Q1FO6dr5T_Y.json',
+      cuesCount: 313,
+      cues: [
+        {
+          start: 6.4,
+          end: 11.09,
+          en: 'Hello everyone, welcome to a new episode of “Chinese Daily”.',
+          zh: '大家好，欢迎收听新一期的“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng đến với tập mới của “Mỗi Ngày Tiếng Trung”.'
+        },
+        {
+          start: 11.1,
+          end: 12.16,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-3mhlegzxela',
+      youtubeId: '3mHlegzXELA',
+      level: 'HSK 3–5',
+      levelGroup: 'hsk4',
+      title: 'HSK 3–5 | Ancient Wisdom | 3 Chinese Fables for Critical Thinking | 成语故事 | Chinese daily podcast',
+      titleVi: 'HSK 3–5 | Ancient Wisdom | 3 Chinese Fables for Critical Thinking | 成语故事 | Chinese daily podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1189,
+      durationLabel: '19:49',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 434 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/3mHlegzXELA.json',
+      cuesCount: 434,
+      cues: [
+        {
+          start: 6.47,
+          end: 10.23,
+          en: 'Hello everyone, welcome to a new episode of “Everyday Chinese.”',
+          zh: '大家好，欢迎收听新一期的“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yì qī de “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng đến với tập mới của “Mỗi Ngày Tiếng Trung”.'
+        },
+        {
+          start: 10.23,
+          end: 11.25,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-rtowijeg7sm',
+      youtubeId: 'rTOwIJeG7sM',
+      level: 'HSK 4',
+      levelGroup: 'hsk4',
+      title: 'HSK 4-5 | Don\'t Wait for the Perfect Moment | 不要等待完美的时机 | Chinese daily podcast',
+      titleVi: 'HSK 4-5 | Don\'t Wait for the Perfect Moment | 不要等待完美的时机 | Chinese daily podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1418,
+      durationLabel: '23:38',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 528 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/rTOwIJeG7sM.json',
+      cuesCount: 528,
+      cues: [
+        {
+          start: 6.43,
+          end: 8.49,
+          en: 'Dear listeners, hello everyone!',
+          zh: '各位听众朋友们，大家好！',
+          pinyin: 'Gèwèi tīngzhòng péngyǒumen, dàjiā hǎo!',
+          vi: 'Kính chào các thính giả, xin chào mọi người!'
+        },
+        {
+          start: 8.5,
+          end: 11.49,
+          en: 'Welcome to a new episode of “Chinese Daily.”',
+          zh: '欢迎收听新一期的“每天中文”。',
+          pinyin: 'Huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Chào mừng các bạn đến với tập mới của “Tiếng Trung mỗi ngày”.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-qabvnwgprje',
+      youtubeId: 'qAbVNWgPRJE',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | Your Chinese Restaurant Survival Guide (中餐厅生存指南) | Chinese daily podcast',
+      titleVi: 'HSK 3-4 | Your Chinese Restaurant Survival Guide (中餐厅生存指南) | Chinese daily podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 889,
+      durationLabel: '14:49',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 314 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/qAbVNWgPRJE.json',
+      cuesCount: 314,
+      cues: [
+        {
+          start: 6.4,
+          end: 10.53,
+          en: 'Hello everyone, welcome to a new episode of “Daily Chinese.”',
+          zh: '大家好，欢迎收听新一期的“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng đến với tập mới của “Tiếng Trung Mỗi Ngày”.'
+        },
+        {
+          start: 10.57,
+          end: 11.7,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-vpt3c2leusy',
+      youtubeId: 'Vpt3C2LEuSY',
+      level: 'HSK 3–5',
+      levelGroup: 'hsk4',
+      title: 'HSK 3 - 5 | 当未来不确定时 | How to Face an Unclear Future | Chinese Daily Podcast',
+      titleVi: 'HSK 3 - 5 | 当未来不确定时 | How to Face an Unclear Future | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 769,
+      durationLabel: '12:49',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 283 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/Vpt3C2LEuSY.json',
+      cuesCount: 283,
+      cues: [
+        {
+          start: 6.47,
+          end: 7.06,
+          en: 'Hello everyone!',
+          zh: '大家好！',
+          pinyin: 'Dàjiā hǎo!',
+          vi: 'Xin chào mọi người!'
+        },
+        {
+          start: 7.07,
+          end: 9.66,
+          en: 'Welcome to a new episode of “Chinese Daily.”',
+          zh: '欢迎来到新一集的“每天中文”。',
+          pinyin: 'Huānyíng láidào xīn yì jí de “Měitiān Zhōngwén”.',
+          vi: 'Chào mừng đến với tập mới của “Mỗi ngày tiếng Trung”.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-ufvhabxrs7k',
+      youtubeId: 'uFvhaBxrs7k',
+      level: 'HSK 3–5',
+      levelGroup: 'hsk4',
+      title: 'HSK 3-5| Feel Stuck? The Matthew Effect (马太效应) | CHINESE DAILY PODCAST',
+      titleVi: 'HSK 3-5| Feel Stuck? The Matthew Effect (马太效应) | CHINESE DAILY PODCAST',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1091,
+      durationLabel: '18:11',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 403 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/uFvhaBxrs7k.json',
+      cuesCount: 403,
+      cues: [
+        {
+          start: 6.37,
+          end: 9.14,
+          en: 'Hello everyone! Welcome to “Everyday Chinese.”',
+          zh: '大家好！欢迎收听“每天中文”。',
+          pinyin: 'Dàjiā hǎo! Huānyíng shōutīng “Měitiān Zhōngwén”.',
+          vi: 'Chào mọi người! Chào mừng đến với “Mỗi Ngày Tiếng Trung”.'
+        },
+        {
+          start: 9.17,
+          end: 10.27,
+          en: 'I’m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-0wsxrqfky4s',
+      youtubeId: '0WsXRQFkY4s',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3+ | Learn Chinese with Stories about Happiness (听故事学中文) | CHINESE DAILY PODCAST',
+      titleVi: 'HSK 3+ | Learn Chinese with Stories about Happiness (听故事学中文) | CHINESE DAILY PODCAST',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1018,
+      durationLabel: '16:58',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 352 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/0WsXRQFkY4s.json',
+      cuesCount: 352,
+      cues: [
+        {
+          start: 6.4,
+          end: 10.83,
+          en: 'Hello everyone, welcome to a new episode of “Chinese Daily.”',
+          zh: '大家好，欢迎收听新一期的《每天中文》。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de 《Měitiān Zhōngwén》.',
+          vi: 'Xin chào mọi người, chào mừng đến với tập mới của “Chinese Daily”.'
+        },
+        {
+          start: 10.87,
+          end: 12.24,
+          en: 'I\'m Wang Yu.',
+          zh: '我是王雨。',
+          pinyin: 'Wǒ shì Wáng Yǔ.',
+          vi: 'Tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-mjtayi52t3w',
+      youtubeId: 'MJTAYI52T3w',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3 | What Is the Lantern Festival? (什么是元宵节？) | Chinese Daily Podcast',
+      titleVi: 'HSK 3 | What Is the Lantern Festival? (什么是元宵节？) | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 912,
+      durationLabel: '15:12',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 284 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/MJTAYI52T3w.json',
+      cuesCount: 284,
+      cues: [
+        {
+          start: 6.17,
+          end: 9.89,
+          en: 'Hello everyone! Welcome to Everyday Chinese.',
+          zh: '大家好！欢迎来到每天中文。',
+          pinyin: 'Dàjiā hǎo! Huānyíng lái dào Měitiān Zhōngwén.',
+          vi: 'Xin chào mọi người! Chào mừng đến với Mỗi Ngày Trung Văn.'
+        },
+        {
+          start: 9.9,
+          end: 11.56,
+          en: 'I\'m Wang Yu.',
+          zh: '我是王雨。',
+          pinyin: 'Wǒ shì Wáng Yǔ.',
+          vi: 'Tôi là Wang Yu.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-ed3skimfuk8',
+      youtubeId: 'eD3sKIMFuK8',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK2+ | Modern Survival Skills: Don\'t Buy, Don\'t Do (现代生存技能) | CHINESE DAILY PODCAST',
+      titleVi: 'HSK2+ | Modern Survival Skills: Don\'t Buy, Don\'t Do (现代生存技能) | CHINESE DAILY PODCAST',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1016,
+      durationLabel: '16:56',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 339 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/eD3sKIMFuK8.json',
+      cuesCount: 339,
+      cues: [
+        {
+          start: 6.2,
+          end: 7.49,
+          en: 'Friends, hello everyone!',
+          zh: '朋友们，大家好！',
+          pinyin: 'Péngyoumen, dàjiā hǎo!',
+          vi: 'Chào các bạn!'
+        },
+        {
+          start: 7.5,
+          end: 9.49,
+          en: 'This is Daily Chinese.',
+          zh: '这里是每天中文。',
+          pinyin: 'Zhèlǐ shì Měitiān Zhōngwén.',
+          vi: 'Đây là Mỗi Ngày Trung Văn.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-hxvqzn4t3fy',
+      youtubeId: 'HxVQZN4t3FY',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3 | Why Say "Ma Dao Cheng Gong"?Best 2026 Horse Year Greetings (马到成功) | Chinese daily podcast',
+      titleVi: 'HSK 3 | Why Say "Ma Dao Cheng Gong"?Best 2026 Horse Year Greetings (马到成功) | Chinese daily podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 895,
+      durationLabel: '14:55',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 269 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/HxVQZN4t3FY.json',
+      cuesCount: 269,
+      cues: [
+        {
+          start: 6.23,
+          end: 6.89,
+          en: 'Hello everyone!',
+          zh: '大家好！',
+          pinyin: 'Dàjiā hǎo!',
+          vi: 'Xin chào mọi người!'
+        },
+        {
+          start: 6.9,
+          end: 9.76,
+          en: 'Welcome to a new episode of “Daily Chinese.”',
+          zh: '欢迎收听新一期的“每天中文”。',
+          pinyin: 'Huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Chào mừng các bạn đến với tập mới của “Mỗi Ngày Tiếng Trung”.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-_bouklvjwsi',
+      youtubeId: '_bOuklVJWsI',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'Chinese Bedtime Story: The Butterfly Lovers | Chinese Daily Podcast',
+      titleVi: 'Chinese Bedtime Story: The Butterfly Lovers | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1087,
+      durationLabel: '18:07',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 373 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/_bOuklVJWsI.json',
+      cuesCount: 373,
+      cues: [
+        {
+          start: 7.93,
+          end: 11.76,
+          en: 'Hello everyone, welcome to \'Daily Chinese.\'',
+          zh: '大家好，欢迎收听“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng đến với “Mỗi Ngày Tiếng Trung”.'
+        },
+        {
+          start: 11.8,
+          end: 13.37,
+          en: 'I\'m Wang Yu.',
+          zh: '我是王雨。',
+          pinyin: 'Wǒ shì Wáng Yǔ.',
+          vi: 'Tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-kvsxl4gbprw',
+      youtubeId: 'kVsxl4gbPrw',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | Why Lunar New Year Matters in Chinese Culture | 春节为什么这么重要？| Chinese daily podcast',
+      titleVi: 'HSK 3-4 | Why Lunar New Year Matters in Chinese Culture | 春节为什么这么重要？| Chinese daily podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 947,
+      durationLabel: '15:47',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 297 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/kVsxl4gbPrw.json',
+      cuesCount: 297,
+      cues: [
+        {
+          start: 6.3,
+          end: 10.89,
+          en: 'Hello everyone, welcome to a new episode of Daily Chinese; I\'m Li Ming.',
+          zh: '大家好，欢迎收听新一期的每天中文，我是李明。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de Měitiān Zhōngwén, wǒ shì Lǐ Míng.',
+          vi: 'Xin chào mọi người, chào mừng đến với tập mới của Mỗi Ngày Tiếng Trung, tôi là Lý Minh.'
+        },
+        {
+          start: 10.9,
+          end: 12.06,
+          en: 'I\'m Wang Yu.',
+          zh: '我是王雨。',
+          pinyin: 'Wǒ shì Wáng Yǔ.',
+          vi: 'Tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-dvsaq8upv_w',
+      youtubeId: 'DvSaq8UPv_w',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3–4 | The Legend of the 12 Zodiac Animals (十二生肖的传说) | Chinese daily podcast',
+      titleVi: 'HSK 3–4 | The Legend of the 12 Zodiac Animals (十二生肖的传说) | Chinese daily podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1113,
+      durationLabel: '18:33',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 390 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/DvSaq8UPv_w.json',
+      cuesCount: 390,
+      cues: [
+        {
+          start: 6.4,
+          end: 10.23,
+          en: 'Hello everyone, welcome to \'Chinese Daily\', I\'m Li Ming.',
+          zh: '大家好，欢迎收听“每天中文”，我是李明。',
+          pinyin: 'Dàjiā hǎo，huānyíng shōutīng“Měitiān Zhōngwén”，wǒ shì Lǐ Míng.',
+          vi: 'Chào mọi người, chào mừng đến với “Mỗi Ngày Tiếng Trung”, tôi là Lý Minh.'
+        },
+        {
+          start: 10.27,
+          end: 12.14,
+          en: 'Hello everyone, I\'m Wang Yu.',
+          zh: '大家好，我是王雨。',
+          pinyin: 'Dàjiā hǎo，wǒ shì Wáng Yǔ.',
+          vi: 'Chào mọi người, tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-ymzprfmwasy',
+      youtubeId: 'YMZPRfMWaSY',
+      level: 'HSK 3–5',
+      levelGroup: 'hsk4',
+      title: 'HSK 3-5 | Fight Fire with Fire (以毒攻毒) | CHINESE DAILY PODCAST',
+      titleVi: 'HSK 3-5 | Fight Fire with Fire (以毒攻毒) | CHINESE DAILY PODCAST',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 952,
+      durationLabel: '15:52',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 313 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/YMZPRfMWaSY.json',
+      cuesCount: 313,
+      cues: [
+        {
+          start: 6.27,
+          end: 10.96,
+          en: 'Hello, friends of “Everyday Chinese”; hello everyone, I’m Li Ming.',
+          zh: '各位“每天中文”的朋友们，大家好，我是李明。',
+          pinyin: 'Gèwèi “Měitiān Zhōngwén” de péngyoumen, dàjiā hǎo, wǒ shì Lǐ Míng.',
+          vi: 'Chào các bạn của “Mỗi Ngày Tiếng Trung”, xin chào mọi người, tôi là Lý Minh.'
+        },
+        {
+          start: 10.97,
+          end: 12.79,
+          en: 'Hello everyone, I’m Wang Yu.',
+          zh: '大家好，我是王雨。',
+          pinyin: 'Dàjiā hǎo, wǒ shì Wáng Yǔ.',
+          vi: 'Chào mọi người, tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-frhbu_gwji0',
+      youtubeId: 'FrHBU_gWJI0',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK3+ | Good Listening, Can\'t Read? The \'Eyes High, Hands Low\' Trap (眼高手低) | CHINESE DAILY PODCAST',
+      titleVi: 'HSK3+ | Good Listening, Can\'t Read? The \'Eyes High, Hands Low\' Trap (眼高手低) | CHINESE DAILY PODCAST',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1094,
+      durationLabel: '18:14',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 379 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/FrHBU_gWJI0.json',
+      cuesCount: 379,
+      cues: [
+        {
+          start: 6.37,
+          end: 10.09,
+          en: 'Hello everyone, welcome to a new episode of “Daily Chinese”.',
+          zh: '大家好，欢迎收听新一期的“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng nghe tập mới của “Trung Văn Mỗi Ngày”.'
+        },
+        {
+          start: 10.1,
+          end: 11.02,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-sg-drjmd3pc',
+      youtubeId: 'SG-DrJMd3Pc',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | Is Luck or Hard Work More Important? (Timing, Location, and People) | Chinese Daily Post',
+      titleVi: 'HSK 3-4 | Is Luck or Hard Work More Important? (Timing, Location, and People) | Chinese Daily Post',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 998,
+      durationLabel: '16:38',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 333 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/SG-DrJMd3Pc.json',
+      cuesCount: 333,
+      cues: [
+        {
+          start: 6.3,
+          end: 10.09,
+          en: 'Hello everyone! Welcome to "Chinese Daily."',
+          zh: '大家好！欢迎来到“每天中文”。',
+          pinyin: 'Dàjiā hǎo! Huānyíng láidào “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người! Chào mừng đến với “Mỗi Ngày Trung Văn”.'
+        },
+        {
+          start: 10.1,
+          end: 11.52,
+          en: 'I\'m Wang Yu.',
+          zh: '我是王雨。',
+          pinyin: 'Wǒ shì Wáng Yǔ.',
+          vi: 'Tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-k9kcjsu0dku',
+      youtubeId: 'k9KCJsU0DKU',
+      level: 'HSK 3–5',
+      levelGroup: 'hsk4',
+      title: 'HSK 3-5 | What to Prepare Before a Job Interview? A Discussion on "Interview Preparation" | Chine...',
+      titleVi: 'HSK 3-5 | What to Prepare Before a Job Interview? A Discussion on "Interview Preparation" | Chine...',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1296,
+      durationLabel: '21:36',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 490 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/k9KCJsU0DKU.json',
+      cuesCount: 490,
+      cues: [
+        {
+          start: 6.4,
+          end: 7.19,
+          en: 'Hello everyone!',
+          zh: '大家好！',
+          pinyin: 'Dàjiā hǎo!',
+          vi: 'Xin chào mọi người!'
+        },
+        {
+          start: 7.2,
+          end: 10.92,
+          en: 'Welcome to a new episode of “Daily Chinese.”',
+          zh: '欢迎收听新一期的“每天中文”。',
+          pinyin: 'Huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Chào mừng bạn đến với tập mới của “Mỗi Ngày Tiếng Trung”.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-_c0cqaqowjy',
+      youtubeId: '_C0CqAQowjY',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2+ | The Secret Story of "Jiāyóu"? 聊聊你不知道的“加油”故事 | Chinese Daily Podcast',
+      titleVi: 'HSK 2+ | The Secret Story of "Jiāyóu"? 聊聊你不知道的“加油”故事 | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 756,
+      durationLabel: '12:36',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 262 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/_C0CqAQowjY.json',
+      cuesCount: 262,
+      cues: [
+        {
+          start: 6.3,
+          end: 9.56,
+          en: 'Hello everyone! Welcome to “Everyday Chinese.”',
+          zh: '大家好！欢迎来到“每天中文”。',
+          pinyin: 'Dàjiā hǎo! Huānyíng láidào “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người! Chào mừng đến với “Mỗi Ngày Trung Văn”.'
+        },
+        {
+          start: 9.57,
+          end: 11.13,
+          en: 'I’m Wang Yu.',
+          zh: '我是王雨。',
+          pinyin: 'Wǒ shì Wáng Yǔ.',
+          vi: 'Tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-xcmubethvxg',
+      youtubeId: 'XCMuBEthVxg',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | Finding Methods vs. Finding Excuses? 聊聊“找方法还是找理由” | Chinese Daily Podcast',
+      titleVi: 'HSK 3-4 | Finding Methods vs. Finding Excuses? 聊聊“找方法还是找理由” | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1117,
+      durationLabel: '18:37',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 378 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/XCMuBEthVxg.json',
+      cuesCount: 378,
+      cues: [
+        {
+          start: 6.4,
+          end: 11.56,
+          en: 'Hello everyone, welcome to a new episode of Everyday Chinese; I\'m Li Ming.',
+          zh: '大家好，欢迎收听新一期的每天中文，我是李明。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yì qī de Měitiān Zhōngwén, wǒ shì Lǐ Míng.',
+          vi: 'Xin chào mọi người, chào mừng đến với tập mới của Tiếng Trung Mỗi Ngày, tôi là Lý Minh.'
+        },
+        {
+          start: 11.57,
+          end: 13.53,
+          en: 'Hello everyone, I\'m Wang Yu.',
+          zh: '大家好，我是王雨。',
+          pinyin: 'Dàjiā hǎo, wǒ shì Wáng Yǔ.',
+          vi: 'Xin chào mọi người, tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-fd7hmbqexd0',
+      youtubeId: 'fD7hmbqEXd0',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3 | What do Chinese people do on Dec 31st? Talking about "New Year\'s Eve" | Chinese Daily P...',
+      titleVi: 'HSK 1-3 | What do Chinese people do on Dec 31st? Talking about "New Year\'s Eve" | Chinese Daily P...',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 790,
+      durationLabel: '13:10',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 249 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/fD7hmbqEXd0.json',
+      cuesCount: 249,
+      cues: [
+        {
+          start: 6.3,
+          end: 10.36,
+          en: 'Hello everyone! Welcome to Chinese Daily.',
+          zh: '大家好！欢迎收听每天中文。',
+          pinyin: 'Dàjiā hǎo! Huānyíng shōutīng Měitiān Zhōngwén.',
+          vi: 'Xin chào mọi người! Chào mừng đến với Mỗi Ngày Trung Văn.'
+        },
+        {
+          start: 10.37,
+          end: 11.79,
+          en: 'I\'m Wang Yu.',
+          zh: '我是王雨。',
+          pinyin: 'Wǒ shì Wáng Yǔ.',
+          vi: 'Tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-prnhdkgbgge',
+      youtubeId: 'pRNHDkGbgGE',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3+ | Goodbye 2025: From Anxiety to Happiness | Chinese Daily Podcast',
+      titleVi: 'HSK 3+ | Goodbye 2025: From Anxiety to Happiness | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1199,
+      durationLabel: '19:59',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 426 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/pRNHDkGbgGE.json',
+      cuesCount: 426,
+      cues: [
+        {
+          start: 7,
+          end: 10.17,
+          en: 'Hello everyone, welcome to Chinese Daily.',
+          zh: '大家好，欢迎收听每天中文。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng Měitiān Zhōngwén.',
+          vi: 'Xin chào mọi người, chào mừng nghe Mỗi Ngày Trung Văn.'
+        },
+        {
+          start: 10.2,
+          end: 11.37,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-amw4wucii8e',
+      youtubeId: 'aMw4WUCIi8E',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '4 Secrets to a Prosperous Family | Chinese Daily Podcast',
+      titleVi: '4 Secrets to a Prosperous Family | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 794,
+      durationLabel: '13:14',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 278 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/aMw4WUCIi8E.json',
+      cuesCount: 278,
+      cues: [
+        {
+          start: 6.77,
+          end: 10.27,
+          en: 'Hello everyone! Welcome to “Everyday Chinese.”',
+          zh: '大家好！欢迎来到“每天中文”。',
+          pinyin: 'Dàjiā hǎo! Huānyíng láidào “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người! Chào mừng đến với “Tiếng Trung Mỗi Ngày”.'
+        },
+        {
+          start: 10.3,
+          end: 11.47,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-qcoj4js2slc',
+      youtubeId: 'QcoJ4jS2slc',
+      level: 'HSK 3–5',
+      levelGroup: 'hsk4',
+      title: 'HSK 3-5 | 中国年轻人还用农历吗？Do Chinese Youth Still Use the Lunar Calendar?',
+      titleVi: 'HSK 3-5 | 中国年轻人还用农历吗？Do Chinese Youth Still Use the Lunar Calendar?',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 753,
+      durationLabel: '12:33',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 256 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/QcoJ4jS2slc.json',
+      cuesCount: 256,
+      cues: [
+        {
+          start: 6.9,
+          end: 10.47,
+          en: 'Hey, Li Ming, my mom just sent me a WeChat message,',
+          zh: '哎，李明，我妈妈刚给我发了个微信，',
+          pinyin: 'Āi, Lǐ Míng, wǒ māma gāng gěi wǒ fā le ge Wēixìn,',
+          vi: 'Này, Lý Minh, mẹ tôi vừa gửi cho tôi một tin nhắn WeChat,'
+        },
+        {
+          start: 10.5,
+          end: 13.37,
+          en: 'reminding me not to forget to eat dumplings next week.',
+          zh: '提醒我下个星期别忘了吃饺子。',
+          pinyin: 'tíxǐng wǒ xià ge xīngqī bié wàng le chī jiǎozi.',
+          vi: 'nhắc tôi tuần sau đừng quên ăn sủi cảo.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-iyvm1bw0ruy',
+      youtubeId: 'iyVM1bW0rUY',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2+ | 不求甚解: Why You Should STOP Trying to Understand 100%',
+      titleVi: 'HSK 2+ | 不求甚解: Why You Should STOP Trying to Understand 100%',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 789,
+      durationLabel: '13:09',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 299 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/iyVM1bW0rUY.json',
+      cuesCount: 299,
+      cues: [
+        {
+          start: 7.37,
+          end: 10.24,
+          en: 'Hello everyone, welcome to “Daily Chinese.”',
+          zh: '大家好，欢迎来到“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng lái dào “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng đến với “Trung Văn Mỗi Ngày”.'
+        },
+        {
+          start: 10.27,
+          end: 11.37,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-yg2nbmpoofu',
+      youtubeId: 'yg2NbmpOofU',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3 | The True Meaning of Christmas | 圣诞节真正的意义 | 中文对话 | Chinese Daily Podcast',
+      titleVi: 'HSK 1-3 | The True Meaning of Christmas | 圣诞节真正的意义 | 中文对话 | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 836,
+      durationLabel: '13:56',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 313 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/yg2NbmpOofU.json',
+      cuesCount: 313,
+      cues: [
+        {
+          start: 7.63,
+          end: 8.5,
+          en: 'Hello everyone!',
+          zh: '大家好！',
+          pinyin: 'Dàjiā hǎo!',
+          vi: 'Xin chào mọi người!'
+        },
+        {
+          start: 8.53,
+          end: 11.93,
+          en: 'Welcome to a new episode of Daily Chinese.',
+          zh: '欢迎收听新一期的《每天中文》。',
+          pinyin: 'Huānyíng shōutīng xīn yì qī de 《Měitiān Zhōngwén》.',
+          vi: 'Chào mừng các bạn đến với tập mới của 《Mỗi Ngày Trung Văn》.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-diipii_ceqo',
+      youtubeId: 'diIpII_ceQo',
+      level: 'HSK 4',
+      levelGroup: 'hsk4',
+      title: 'HSK 4-5 | 水到渠成 | Everything Happens At The Right Time | The Four Rules of Life | Ep.3',
+      titleVi: 'HSK 4-5 | 水到渠成 | Everything Happens At The Right Time | The Four Rules of Life | Ep.3',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 785,
+      durationLabel: '13:05',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 271 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/diIpII_ceQo.json',
+      cuesCount: 271,
+      cues: [
+        {
+          start: 7.63,
+          end: 8.33,
+          en: 'Hello everyone,',
+          zh: '大家好，',
+          pinyin: 'Dàjiā hǎo,',
+          vi: 'Xin chào mọi người,'
+        },
+        {
+          start: 8.37,
+          end: 12.64,
+          en: 'Welcome to a new episode of “Daily Chinese”; I’m Li Ming.',
+          zh: '欢迎收听新一期的“每天中文”，我是李明。',
+          pinyin: 'Huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”, wǒ shì Lǐ Míng.',
+          vi: 'Chào mừng các bạn đến với tập mới của “Mỗi Ngày Tiếng Trung”, tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-gle66hlc7ds',
+      youtubeId: 'gLE66HLc7Ds',
+      level: 'HSK 3–5',
+      levelGroup: 'hsk4',
+      title: 'HSK 3 - 5 | Don\'t Visit at the Wrong Time! China Travel Tips | Don\'t Go at the Wrong Time! China ...',
+      titleVi: 'HSK 3 - 5 | Don\'t Visit at the Wrong Time! China Travel Tips | Don\'t Go at the Wrong Time! China ...',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 831,
+      durationLabel: '13:51',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 273 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/gLE66HLc7Ds.json',
+      cuesCount: 273,
+      cues: [
+        {
+          start: 7.53,
+          end: 10.8,
+          en: 'Hello everyone, welcome to Chinese Daily.',
+          zh: '大家好，欢迎来到每天中文。',
+          pinyin: 'Dàjiā hǎo, huānyíng lái dào Měitiān Zhōngwén.',
+          vi: 'Xin chào mọi người, chào mừng đến với Mỗi Ngày Trung Văn.'
+        },
+        {
+          start: 10.83,
+          end: 12.13,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-z2ygfpzxpmk',
+      youtubeId: 'z2YGfpZXPMk',
+      level: 'HSK 3–5',
+      levelGroup: 'hsk4',
+      title: 'HSK 3 - 5 | Why Can\'t You Focus? Short Videos vs. Deep Learning | Chinese Daily Podcast',
+      titleVi: 'HSK 3 - 5 | Why Can\'t You Focus? Short Videos vs. Deep Learning | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 863,
+      durationLabel: '14:23',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 297 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/z2YGfpZXPMk.json',
+      cuesCount: 297,
+      cues: [
+        {
+          start: 6.97,
+          end: 10.17,
+          en: 'Hello everyone, welcome to “Chinese Daily.”',
+          zh: '大家好，欢迎收听“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng nghe “Mỗi ngày tiếng Trung”.'
+        },
+        {
+          start: 10.2,
+          end: 11.13,
+          en: 'I’m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-yln9hfxk-yg',
+      youtubeId: 'yln9HFxk-Yg',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1 - 3 | 井底之蛙？谦虚打开中文世界！| Frog in the Well? Humility Opens Your Chinese World | Bedtime Story',
+      titleVi: 'HSK 1 - 3 | 井底之蛙？谦虚打开中文世界！| Frog in the Well? Humility Opens Your Chinese World | Bedtime Story',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 985,
+      durationLabel: '16:25',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 362 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/yln9HFxk-Yg.json',
+      cuesCount: 362,
+      cues: [
+        {
+          start: 7.37,
+          end: 10.84,
+          en: 'Hello everyone, welcome to “Daily Chinese.”',
+          zh: '大家好，欢迎收听“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng các bạn đến với “Tiếng Trung Mỗi Ngày”.'
+        },
+        {
+          start: 10.87,
+          end: 11.8,
+          en: 'I\'m Wang Yu.',
+          zh: '我是王雨。',
+          pinyin: 'Wǒ shì Wáng Yǔ.',
+          vi: 'Tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-bkou6tymg_m',
+      youtubeId: 'BkOu6Tymg_M',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'First Trip to China? A Step-by-Step Guide | 第一次去中国？保姆级准备指南 | Chinese Daily Podcast',
+      titleVi: 'First Trip to China? A Step-by-Step Guide | 第一次去中国？保姆级准备指南 | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1116,
+      durationLabel: '18:36',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 380 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/BkOu6Tymg_M.json',
+      cuesCount: 380,
+      cues: [
+        {
+          start: 7.5,
+          end: 8.4,
+          en: 'Hello everyone!',
+          zh: '大家好！',
+          pinyin: 'Dàjiā hǎo!',
+          vi: 'Xin chào mọi người!'
+        },
+        {
+          start: 8.43,
+          end: 11.8,
+          en: 'Welcome to a new episode of “Chinese Daily”!',
+          zh: '欢迎收听新一期的“每天中文”！',
+          pinyin: 'Huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”!',
+          vi: 'Chào mừng các bạn đến với tập mới của “Tiếng Trung Mỗi Ngày”!'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-gntfg-xj8xg',
+      youtubeId: 'GnTfG-xJ8Xg',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '先苦后甜 | Why Easy Choices Lead to a Hard Life | Chinese Daily Podcast',
+      titleVi: '先苦后甜 | Why Easy Choices Lead to a Hard Life | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 963,
+      durationLabel: '16:03',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 323 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/GnTfG-xJ8Xg.json',
+      cuesCount: 323,
+      cues: [
+        {
+          start: 7.6,
+          end: 11.5,
+          en: 'Ah, Li Ming, I\'m so tired.',
+          zh: '啊，李明，我好累啊。',
+          pinyin: 'A, Lǐ Míng, wǒ hǎo lèi a.',
+          vi: 'Ôi, Lý Minh, tôi mệt quá.'
+        },
+        {
+          start: 11.53,
+          end: 14.76,
+          en: 'I really almost couldn\'t get up this morning.',
+          zh: '今天早上我真的差点儿起不来。',
+          pinyin: 'Jīntiān zǎoshang wǒ zhēn de chàdiǎnr qǐ bu lái.',
+          vi: 'Sáng nay tôi suýt nữa thì không dậy nổi.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-mw4gahblciq',
+      youtubeId: 'mw4GahbLciQ',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '顺其自然 | Everything Happens for a Reason | Chinese Daily Podcast | Ep.2',
+      titleVi: '顺其自然 | Everything Happens for a Reason | Chinese Daily Podcast | Ep.2',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1119,
+      durationLabel: '18:39',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 383 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/mw4GahbLciQ.json',
+      cuesCount: 383,
+      cues: [
+        {
+          start: 7.43,
+          end: 8.23,
+          en: 'Hello everyone,',
+          zh: '大家好，',
+          pinyin: 'Dàjiā hǎo,',
+          vi: 'Xin chào mọi người,'
+        },
+        {
+          start: 8.27,
+          end: 12.84,
+          en: 'Welcome to a new episode of “Chinese Daily”; I’m Li Ming.',
+          zh: '欢迎收听新一期的“每天中文”，我是李明。',
+          pinyin: 'Huānyíng shōutīng xīn yì qī de “Měitiān Zhōngwén”, wǒ shì Lǐ Míng.',
+          vi: 'Chào mừng các bạn đến với tập mới của “Mỗi Ngày Tiếng Trung”, tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-af4-aio4gpa',
+      youtubeId: 'af4-aio4GpA',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'Who is Your Destiny? The Legend of Yue Lao | 谁是你的命中注定？月老的传说 | Chinese Daily Podcast',
+      titleVi: 'Who is Your Destiny? The Legend of Yue Lao | 谁是你的命中注定？月老的传说 | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 991,
+      durationLabel: '16:31',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 331 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/af4-aio4GpA.json',
+      cuesCount: 331,
+      cues: [
+        {
+          start: 7.5,
+          end: 11.3,
+          en: 'Hello everyone, welcome to “Chinese Daily”!',
+          zh: '大家好，欢迎收听“每天中文”！',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng “Měitiān Zhōngwén”!',
+          vi: 'Xin chào mọi người, chào mừng các bạn đến với “Tiếng Trung mỗi ngày”!'
+        },
+        {
+          start: 11.33,
+          end: 12.9,
+          en: 'I’m Wang Yu.',
+          zh: '我是王雨。',
+          pinyin: 'Wǒ shì Wáng Yǔ.',
+          vi: 'Tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-d0ixh4wlby4',
+      youtubeId: 'd0Ixh4Wlby4',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '塞翁失马焉知非福  | Is Losing a Horse Good Luck? Chinese Daily Podcast | EP.2',
+      titleVi: '塞翁失马焉知非福  | Is Losing a Horse Good Luck? Chinese Daily Podcast | EP.2',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1202,
+      durationLabel: '20:02',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 413 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/d0Ixh4Wlby4.json',
+      cuesCount: 413,
+      cues: [
+        {
+          start: 7.47,
+          end: 8.34,
+          en: 'Hello everyone!',
+          zh: '大家好！',
+          pinyin: 'Dàjiā hǎo!',
+          vi: 'Xin chào mọi người!'
+        },
+        {
+          start: 8.37,
+          end: 11.7,
+          en: 'Welcome to a new episode of “Everyday Chinese.”',
+          zh: '欢迎收听新一期的“每天中文”。',
+          pinyin: 'Huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Chào mừng các bạn đến với tập mới của “Mỗi Ngày Tiếng Trung”.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-tzw5lse6yci',
+      youtubeId: 'tZW5LSE6YcI',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'Why You Still Forget Chinese Characters? | 为什么学了很多汉字，还记不住？ | Chinese Daily Podcast',
+      titleVi: 'Why You Still Forget Chinese Characters? | 为什么学了很多汉字，还记不住？ | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1202,
+      durationLabel: '20:02',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 445 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/tZW5LSE6YcI.json',
+      cuesCount: 445,
+      cues: [
+        {
+          start: 7.37,
+          end: 10.64,
+          en: 'Hello everyone, welcome to Chinese Daily.',
+          zh: '大家好，欢迎来到《每日中文》。',
+          pinyin: 'Dàjiā hǎo, huānyíng lái dào “Měirì Zhōngwén”.',
+          vi: 'Chào mọi người, chào mừng đến với “Tiếng Trung Mỗi Ngày”.'
+        },
+        {
+          start: 10.67,
+          end: 12.07,
+          en: 'I\'m Xiaoming.',
+          zh: '我是小明。',
+          pinyin: 'Wǒ shì Xiǎomíng.',
+          vi: 'Tôi là Tiểu Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-cdwz6q9x9dg',
+      youtubeId: 'cDwz6q9x9Dg',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '所有的相遇，都是有原因的 | Everyone You Meet Comes for a Reason | Chinese Daily Podcast',
+      titleVi: '所有的相遇，都是有原因的 | Everyone You Meet Comes for a Reason | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1097,
+      durationLabel: '18:17',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 407 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/cDwz6q9x9Dg.json',
+      cuesCount: 407,
+      cues: [
+        {
+          start: 7.43,
+          end: 11,
+          en: 'Hello everyone, welcome to a new episode of \'Daily Chinese\',',
+          zh: '大家好，欢迎收听新一期的“每天中文”，',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yì qī de “Měitiān Zhōngwén”,',
+          vi: 'Chào mọi người, chào mừng đến với tập mới của \'Mỗi Ngày Tiếng Trung\','
+        },
+        {
+          start: 11.03,
+          end: 12,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Mình là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-xdulrjn_rzm',
+      youtubeId: 'xdULRJN_RZM',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3 - 4 | 独处的秘密力量 | The Secret Power of Being Alone | Chinese Daily Podcast',
+      titleVi: 'HSK 3 - 4 | 独处的秘密力量 | The Secret Power of Being Alone | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 667,
+      durationLabel: '11:07',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 233 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/xdULRJN_RZM.json',
+      cuesCount: 233,
+      cues: [
+        {
+          start: 7.63,
+          end: 11.33,
+          en: 'Hello everyone, welcome to a new episode of \'Daily Chinese\'.',
+          zh: '大家好，欢迎收听新一期的“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng các bạn đến với tập mới của \'Mỗi Ngày Tiếng Trung\'.'
+        },
+        {
+          start: 11.37,
+          end: 12.5,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-p1gknd6_dm4',
+      youtubeId: 'p1Gknd6_Dm4',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3 | 善良有错吗？中国寓言故事 Are Good Deeds Always Right? | Chinese Bedtime Story',
+      titleVi: 'HSK 1-3 | 善良有错吗？中国寓言故事 Are Good Deeds Always Right? | Chinese Bedtime Story',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1305,
+      durationLabel: '21:45',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 453 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/p1Gknd6_Dm4.json',
+      cuesCount: 453,
+      cues: [
+        {
+          start: 7.63,
+          end: 11.13,
+          en: 'Li Ming, I discovered something interesting.',
+          zh: '李明，我发现一件有意思的事情。',
+          pinyin: 'Lǐ Míng, wǒ fāxiàn yí jiàn yǒu yìsi de shìqing.',
+          vi: 'Lý Minh, tôi phát hiện ra một chuyện thú vị.'
+        },
+        {
+          start: 11.13,
+          end: 12.73,
+          en: 'Oh? What is it?',
+          zh: '哦？什么事？',
+          pinyin: 'Ó? Shénme shì?',
+          vi: 'Ồ? Chuyện gì vậy?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-gfpovovfgqi',
+      youtubeId: 'GFPOvOvFgQI',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3 | 像泡茶一样学中文  | Learn Chinese Like Making Tea | Chinese Daily Podcast',
+      titleVi: 'HSK 1-3 | 像泡茶一样学中文  | Learn Chinese Like Making Tea | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 994,
+      durationLabel: '16:34',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 274 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/GFPOvOvFgQI.json',
+      cuesCount: 274,
+      cues: [
+        {
+          start: 7.63,
+          end: 10.93,
+          en: 'Hello everyone, welcome to Daily Chinese.',
+          zh: '大家好，欢迎收听每天中文。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng Měitiān Zhōngwén.',
+          vi: 'Xin chào mọi người, chào mừng đến với chương trình 每天中文.'
+        },
+        {
+          start: 10.97,
+          end: 12.3,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-ukbxnym07f0',
+      youtubeId: 'ukBxnyM07F0',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | 赢了道理，还是输了关系？ | Win the Argument or Win at Life? | Chinese Daily Podcast',
+      titleVi: 'HSK 3-4 | 赢了道理，还是输了关系？ | Win the Argument or Win at Life? | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 988,
+      durationLabel: '16:28',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 334 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/ukBxnyM07F0.json',
+      cuesCount: 334,
+      cues: [
+        {
+          start: 6.47,
+          end: 8.8,
+          en: 'Li Ming, what\'s wrong with you today?',
+          zh: '李明，你今天怎么了？',
+          pinyin: 'Lǐ Míng, nǐ jīntiān zěnme le?',
+          vi: 'Lý Minh, hôm nay cậu sao thế?'
+        },
+        {
+          start: 8.83,
+          end: 12.23,
+          en: 'Ever since you came back from the meeting, you\'ve been staring out the window,',
+          zh: '从刚才开会回来，你就一直看着窗外，',
+          pinyin: 'Cóng gāngcái kāihuì huílái, nǐ jiù yīzhí kànzhe chuāngwài,',
+          vi: 'Từ lúc họp xong trở về, cậu cứ nhìn ra ngoài cửa sổ mãi,'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-q2rskihezss',
+      youtubeId: 'q2rSKIHezSs',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3 | 和中文交朋友，告别战斗模式 | Your New Chinese Mindset | Chinese Daily Podcasat',
+      titleVi: 'HSK 1-3 | 和中文交朋友，告别战斗模式 | Your New Chinese Mindset | Chinese Daily Podcasat',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 895,
+      durationLabel: '14:55',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 245 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/q2rSKIHezSs.json',
+      cuesCount: 245,
+      cues: [
+        {
+          start: 6.87,
+          end: 11.2,
+          en: 'Hello everyone, welcome to a new episode of “Daily Chinese.”',
+          zh: '大家好，欢迎收听新一期的《每天中文》。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yì qī de 《Měitiān Zhōngwén》.',
+          vi: 'Xin chào mọi người, chào mừng đến với một tập mới của “Mỗi Ngày Trung Văn”.'
+        },
+        {
+          start: 11.23,
+          end: 12.96,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-nhkour8st8i',
+      youtubeId: 'NhkOuR8sT8I',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3 | 地道地问候健康 | How to Ask About Health in Chinese Like a Native | Chinese Daily Podcast',
+      titleVi: 'HSK 1-3 | 地道地问候健康 | How to Ask About Health in Chinese Like a Native | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 899,
+      durationLabel: '14:59',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 247 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/NhkOuR8sT8I.json',
+      cuesCount: 247,
+      cues: [
+        {
+          start: 7.43,
+          end: 10.6,
+          en: 'Hello everyone, welcome to a new episode of Chinese Daily.',
+          zh: '大家好，欢迎收听新一期的《每天中文》。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yì qī de Měitiān Zhōngwén.',
+          vi: 'Chào mọi người, chào mừng đến với tập mới của \'Mỗi Ngày Tiếng Trung\'.'
+        },
+        {
+          start: 10.63,
+          end: 11.73,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Mình là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-mrwle_3lmmm',
+      youtubeId: 'MRwLE_3LmmM',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4| 你的朋友，你的未来 | How Friends Shape Your Life | Chinese Daily Podcast',
+      titleVi: 'HSK 3-4| 你的朋友，你的未来 | How Friends Shape Your Life | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 941,
+      durationLabel: '15:41',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 385 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/MRwLE_3LmmM.json',
+      cuesCount: 385,
+      cues: [
+        {
+          start: 7.7,
+          end: 8.23,
+          en: 'Li Ming,',
+          zh: '李明,',
+          pinyin: 'Lǐ Míng,',
+          vi: 'Lý Minh,'
+        },
+        {
+          start: 8.27,
+          end: 11.77,
+          en: 'I\'ve noticed I\'ve had a really big change recently,',
+          zh: '我发现我最近有一个特别大的变化，',
+          pinyin: 'Wǒ fāxiàn wǒ zuìjìn yǒu yí gè tèbié dà de biànhuà,',
+          vi: 'Tôi phát hiện dạo này mình có một thay đổi đặc biệt lớn,'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-bjfvu2uppag',
+      youtubeId: 'bJfVU2uPpAg',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3| 听故事学成语：中国人的古老智慧 | Learn Chinese Idioms Through Stories',
+      titleVi: 'HSK 1-3| 听故事学成语：中国人的古老智慧 | Learn Chinese Idioms Through Stories',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1297,
+      durationLabel: '21:37',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 346 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/bJfVU2uPpAg.json',
+      cuesCount: 346,
+      cues: [
+        {
+          start: 7.37,
+          end: 11,
+          en: 'Hello everyone, welcome to a new episode of “Daily Chinese.”',
+          zh: '大家好，欢迎收听新一期的“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng đến với tập mới của “Mỗi Ngày Tiếng Trung”.'
+        },
+        {
+          start: 11,
+          end: 12.1,
+          en: 'I’m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-rfautrhom5y',
+      youtubeId: 'rFaUTrhom5Y',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3 | 感觉生活很累？用跑步学中文 | Feeling Stuck? Start Running & Learn Chinese | Chinese Podcast',
+      titleVi: 'HSK 1-3 | 感觉生活很累？用跑步学中文 | Feeling Stuck? Start Running & Learn Chinese | Chinese Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1176,
+      durationLabel: '19:36',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 318 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/rFaUTrhom5Y.json',
+      cuesCount: 318,
+      cues: [
+        {
+          start: 7.63,
+          end: 11.93,
+          en: 'Li Ming, let me ask you a question.',
+          zh: '李明，我问你一个问题。',
+          pinyin: 'Lǐ Míng, wǒ wèn nǐ yí gè wèntí.',
+          vi: 'Lý Minh, tôi hỏi cậu một câu nhé.'
+        },
+        {
+          start: 11.93,
+          end: 15.1,
+          en: 'Huh? What question? Go ahead.',
+          zh: '嗯？什么问题？你说。',
+          pinyin: 'Ng? Shénme wèntí? Nǐ shuō.',
+          vi: 'Hử? Câu hỏi gì? Cậu nói đi.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-25qntxu6o3k',
+      youtubeId: '25QNtxu6o3k',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3: What is 中秋节? A Beginner\'s Guide to China\'s Mid-Autumn Festival | 什么是中秋节？新手指南',
+      titleVi: 'HSK 1-3: What is 中秋节? A Beginner\'s Guide to China\'s Mid-Autumn Festival | 什么是中秋节？新手指南',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 816,
+      durationLabel: '13:36',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 345 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/25QNtxu6o3k.json',
+      cuesCount: 345,
+      cues: [
+        {
+          start: 7.03,
+          end: 10.6,
+          en: 'Li Ming, look at the calendar quickly! Time really flies!',
+          zh: '李明，你快看日历！时间过得真快啊！',
+          pinyin: 'Lǐ Míng, nǐ kuài kàn rìlì! Shíjiān guò de zhēn kuài a!',
+          vi: 'Lý Minh, cậu mau xem lịch đi! Thời gian trôi nhanh thật đấy!'
+        },
+        {
+          start: 10.6,
+          end: 12.3,
+          en: 'What\'s wrong? Looking at the calendar all of a sudden.',
+          zh: '怎么了？突然看日历。',
+          pinyin: 'Zěnme le? Tūrán kàn rìlì.',
+          vi: 'Sao thế? Tự nhiên lại xem lịch.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-1rqdsl7re6e',
+      youtubeId: '1rqdsL7RE6E',
+      level: 'HSK 3–5',
+      levelGroup: 'hsk4',
+      title: 'HSK 3-5 | The Multitasking Trap: Are You a Multitasker or a Single-Tasker? 你是“多任务”还是“单任务”？',
+      titleVi: 'HSK 3-5 | The Multitasking Trap: Are You a Multitasker or a Single-Tasker? 你是“多任务”还是“单任务”？',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 972,
+      durationLabel: '16:12',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 296 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/1rqdsL7RE6E.json',
+      cuesCount: 296,
+      cues: [
+        {
+          start: 7.33,
+          end: 11.83,
+          en: 'Hello everyone, welcome to a new episode of Daily Chinese.',
+          zh: '大家好，欢迎收听新一期的《每天中文》。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yì qī de “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng các bạn đến với tập mới của “Mỗi Ngày Tiếng Trung”.'
+        },
+        {
+          start: 11.83,
+          end: 13.06,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-xahfktydkm8',
+      youtubeId: 'XAHfKtYdkM8',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3: 你怎么去上班？ How to Talk About Transportation in Chinese',
+      titleVi: 'HSK 1-3: 你怎么去上班？ How to Talk About Transportation in Chinese',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 954,
+      durationLabel: '15:54',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 287 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/XAHfKtYdkM8.json',
+      cuesCount: 287,
+      cues: [
+        {
+          start: 6.83,
+          end: 10.6,
+          en: 'Li Ming, look, your coffee is almost cold,',
+          zh: '李明，你快看，你这杯咖啡都快凉了，',
+          pinyin: 'Lǐ Míng, nǐ kuài kàn, nǐ zhè bēi kāfēi dōu kuài liáng le,',
+          vi: 'Lý Minh, bạn mau xem này, ly cà phê của bạn sắp nguội rồi,'
+        },
+        {
+          start: 10.6,
+          end: 12.33,
+          en: 'Why haven\'t you taken a single sip?',
+          zh: '你怎么一口都不喝？',
+          pinyin: 'Nǐ zěnme yì kǒu dōu bù hē?',
+          vi: 'Sao bạn một ngụm cũng không uống vậy?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-jvfef_rhlxw',
+      youtubeId: 'JVfef_rhLXw',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3 | Relax & Learn Chinese with 3 Fairy Tales | 轻松学中文：小白兔、小老鼠和星星',
+      titleVi: 'HSK 1-3 | Relax & Learn Chinese with 3 Fairy Tales | 轻松学中文：小白兔、小老鼠和星星',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1228,
+      durationLabel: '20:28',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 447 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/JVfef_rhLXw.json',
+      cuesCount: 447,
+      cues: [
+        {
+          start: 7.23,
+          end: 11.16,
+          en: 'Li Ming, guess what happened this afternoon while I was organizing my bookshelf—',
+          zh: '李明，你猜我今天下午整理书架的时候，',
+          pinyin: 'Lǐ Míng, nǐ cāi wǒ jīntiān xiàwǔ zhěnglǐ shūjià de shíhou,',
+          vi: 'Lý Minh, cậu đoán xem chiều nay lúc tớ sắp xếp giá sách,'
+        },
+        {
+          start: 11.17,
+          end: 13.33,
+          en: 'what treasure did I come across?',
+          zh: '翻到了什么宝贝？',
+          pinyin: 'fān dào le shénme bǎobèi?',
+          vi: 'tớ đã lật ra được bảo vật gì nào?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-1zv-ivtppje',
+      youtubeId: '1zv-ivTpPjE',
+      level: 'HSK 4',
+      levelGroup: 'hsk4',
+      title: 'HSK 4-5 | 总是很累？可能是阴阳失衡了！| Always Tired? It Might Be Your Yin & Yang!',
+      titleVi: 'HSK 4-5 | 总是很累？可能是阴阳失衡了！| Always Tired? It Might Be Your Yin & Yang!',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 845,
+      durationLabel: '14:05',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 292 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/1zv-ivTpPjE.json',
+      cuesCount: 292,
+      cues: [
+        {
+          start: 7.23,
+          end: 10.3,
+          en: 'Hey, Li Ming, let me ask you a question.',
+          zh: '哎，李明，我问你个问题。',
+          pinyin: 'Āi, Lǐ Míng, wǒ wèn nǐ gè wèntí.',
+          vi: 'Này, Lý Minh, tôi hỏi cậu một câu nhé.'
+        },
+        {
+          start: 10.3,
+          end: 15.27,
+          en: 'Have you felt lately... like... your body is really strange?',
+          zh: '你最近有没有觉得……就是……身体特别奇怪？',
+          pinyin: 'Nǐ zuìjìn yǒu méiyǒu juéde…… jiùshì…… shēntǐ tèbié qíguài?',
+          vi: 'Dạo này cậu có thấy... kiểu... cơ thể đặc biệt kỳ lạ không?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-ydr4gaxzif0',
+      youtubeId: 'yDr4gAxZif0',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3 | How to Stay Motivated in Chinese Learning | 如何每天保持学习中文的动力？',
+      titleVi: 'HSK 1-3 | How to Stay Motivated in Chinese Learning | 如何每天保持学习中文的动力？',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1109,
+      durationLabel: '18:29',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 435 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/yDr4gAxZif0.json',
+      cuesCount: 435,
+      cues: [
+        {
+          start: 7.2,
+          end: 11.13,
+          en: 'Hello everyone, welcome to a new episode of “Daily Chinese.”',
+          zh: '大家好，欢迎收听新一期的“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng đến với tập mới của “Mỗi Ngày Tiếng Trung”.'
+        },
+        {
+          start: 11.13,
+          end: 12.1,
+          en: 'I’m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-hbzuttfz-c8',
+      youtubeId: 'HBzUTTfZ-C8',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–3 | 成语故事 - Why Choose the Box over the Pearl? | Chinese Bedtime Stories',
+      titleVi: 'HSK 1–3 | 成语故事 - Why Choose the Box over the Pearl? | Chinese Bedtime Stories',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1085,
+      durationLabel: '18:05',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 382 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/HBzUTTfZ-C8.json',
+      cuesCount: 382,
+      cues: [
+        {
+          start: 6.6,
+          end: 11.2,
+          en: 'Li Ming, I did something very silly yesterday.',
+          zh: '李明，我昨天做了一件很傻的事。',
+          pinyin: 'Lǐ Míng, wǒ zuótiān zuò le yí jiàn hěn shǎ de shì.',
+          vi: 'Lý Minh, hôm qua tôi đã làm một việc rất ngốc.'
+        },
+        {
+          start: 11.23,
+          end: 14.53,
+          en: 'Oh? Tell me. What silly thing did you do?',
+          zh: '哦？说来听听。你做什么傻事了？',
+          pinyin: 'Ó? Shuō lái tīng tīng. Nǐ zuò shénme shǎ shì le?',
+          vi: 'Ồ? Nói thử xem. Cậu đã làm việc ngốc gì vậy?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-to9ilqpvjno',
+      youtubeId: 'to9iLQPVJno',
+      level: 'HSK 3–5',
+      levelGroup: 'hsk4',
+      title: 'HSK 3-5 | Why Chinese Youth Love Bubble Tea 为什么中国年轻人都爱喝奶茶？| Learn Chinese Podcast',
+      titleVi: 'HSK 3-5 | Why Chinese Youth Love Bubble Tea 为什么中国年轻人都爱喝奶茶？| Learn Chinese Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 958,
+      durationLabel: '15:58',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 373 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/to9iLQPVJno.json',
+      cuesCount: 373,
+      cues: [
+        {
+          start: 7.23,
+          end: 9.83,
+          en: 'Ah, Li Ming, I\'m back!',
+          zh: '啊，李明，我回来了！',
+          pinyin: 'Ā, Lǐ Míng, wǒ huílái le!',
+          vi: 'A, Lý Minh, tớ về rồi đây!'
+        },
+        {
+          start: 9.83,
+          end: 12.16,
+          en: 'Look what good thing I brought you!',
+          zh: '你看我给你带了什么好东西！',
+          pinyin: 'Nǐ kàn wǒ gěi nǐ dài le shénme hǎo dōngxi!',
+          vi: 'Xem này, tớ mang cho cậu thứ gì ngon lắm đây!'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-02fh1f09kju',
+      youtubeId: '02FH1F09kJU',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–3 | 纸笔还是手机？Paper or Phone? How Chinese People Make To-Do Lists',
+      titleVi: 'HSK 1–3 | 纸笔还是手机？Paper or Phone? How Chinese People Make To-Do Lists',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1084,
+      durationLabel: '18:04',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 387 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/02FH1F09kJU.json',
+      cuesCount: 387,
+      cues: [
+        {
+          start: 7.2,
+          end: 10.97,
+          en: 'Hello everyone! This is Daily Chinese. I\'m Wang Yu.',
+          zh: '大家好！这里是每天中文。我是王雨。',
+          pinyin: 'Dàjiā hǎo! Zhèlǐ shì Měitiān Zhōngwén. Wǒ shì Wáng Yǔ.',
+          vi: 'Xin chào mọi người! Đây là kênh Mỗi Ngày Trung Văn. Tôi là Vương Vũ.'
+        },
+        {
+          start: 11,
+          end: 12.87,
+          en: 'Hello everyone! I\'m Li Ming.',
+          zh: '大家好！我是李明。',
+          pinyin: 'Dàjiā hǎo! Wǒ shì Lǐ Míng.',
+          vi: 'Chào mọi người! Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-jycahy67pco',
+      youtubeId: 'jycAHY67pco',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3 | 合作的力量：三个中文晚安故事 | The Power of Cooperation | Chinese Bedtime Stories',
+      titleVi: 'HSK 1-3 | 合作的力量：三个中文晚安故事 | The Power of Cooperation | Chinese Bedtime Stories',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1224,
+      durationLabel: '20:24',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 452 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/jycAHY67pco.json',
+      cuesCount: 452,
+      cues: [
+        {
+          start: 7.43,
+          end: 10.3,
+          en: 'Li Ming, when I got off work today,',
+          zh: '李明，我今天下班的时候，',
+          pinyin: 'Lǐ Míng, wǒ jīntiān xiàbān de shíhou,',
+          vi: 'Lý Minh, lúc tôi tan làm hôm nay,'
+        },
+        {
+          start: 10.3,
+          end: 13.1,
+          en: 'I saw a few children playing in the park.',
+          zh: '看到几个小孩子在公园里玩。',
+          pinyin: 'kàndào jǐ ge xiǎoháizi zài gōngyuán lǐ wán.',
+          vi: 'tôi thấy vài đứa trẻ đang chơi trong công viên.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-rqruxjfpjve',
+      youtubeId: 'rQRUXjFpjvE',
+      level: 'HSK 4',
+      levelGroup: 'hsk4',
+      title: 'HSK 4 - 5: Why Can\'t We Connect? It\'s Not You, It\'s Your "Sanguan" (三观).',
+      titleVi: 'HSK 4 - 5: Why Can\'t We Connect? It\'s Not You, It\'s Your "Sanguan" (三观).',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 893,
+      durationLabel: '14:53',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 398 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/rQRUXjFpjvE.json',
+      cuesCount: 398,
+      cues: [
+        {
+          start: 7.13,
+          end: 10.63,
+          en: 'Hello everyone, welcome to a new episode of “Chinese Daily.”',
+          zh: '大家好，欢迎收听新一期的“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng nghe tập mới của “Mỗi Ngày Trung Văn”.'
+        },
+        {
+          start: 10.63,
+          end: 11.6,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-bckpg5omkue',
+      youtubeId: 'bCKpG5OMKUE',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3 | 不只是运气 Don’t Just Rely on Luck | Chinese Bedtime Story',
+      titleVi: 'HSK 1-3 | 不只是运气 Don’t Just Rely on Luck | Chinese Bedtime Story',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1009,
+      durationLabel: '16:49',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 472 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/bCKpG5OMKUE.json',
+      cuesCount: 472,
+      cues: [
+        {
+          start: 9.13,
+          end: 14.76,
+          en: 'Ah... Li Ming, I feel a bit tired today.',
+          zh: '啊……李明，我今天觉得有点儿累。',
+          pinyin: 'A…… Lǐ Míng, wǒ jīntiān juéde yǒudiǎnr lèi.',
+          vi: 'A... Lý Minh, hôm nay tôi thấy hơi mệt.'
+        },
+        {
+          start: 14.8,
+          end: 17.67,
+          en: 'What\'s wrong? You sound a bit low-energy.',
+          zh: '怎么了？你听起来没什么精神。',
+          pinyin: 'Zěnme le? Nǐ tīng qǐlái méi shénme jīngshén.',
+          vi: 'Sao vậy? Nghe cậu không có tinh thần lắm.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-axmazyilzka',
+      youtubeId: 'axmAzYilZKA',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3–4 | 快节奏生活 vs 慢生活 | Fast Life vs Slow Life | 每天中文',
+      titleVi: 'HSK 3–4 | 快节奏生活 vs 慢生活 | Fast Life vs Slow Life | 每天中文',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1174,
+      durationLabel: '19:34',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 439 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/axmAzYilZKA.json',
+      cuesCount: 439,
+      cues: [
+        {
+          start: 7.23,
+          end: 10.83,
+          en: 'Hello everyone, welcome to a new episode of “Daily Chinese.”',
+          zh: '大家好，欢迎收听新一期的“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng nghe tập mới của “Mỗi Ngày Trung Văn”.'
+        },
+        {
+          start: 10.83,
+          end: 12.06,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-o5qauc7jx3o',
+      youtubeId: 'O5QAuC7JX3o',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-3 | 学中文的“哭笑不得”错误  | Funny Mistakes Every Beginner Makes',
+      titleVi: 'HSK 1-3 | 学中文的“哭笑不得”错误  | Funny Mistakes Every Beginner Makes',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1007,
+      durationLabel: '16:47',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 441 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/O5QAuC7JX3o.json',
+      cuesCount: 441,
+      cues: [
+        {
+          start: 7.2,
+          end: 9.6,
+          en: '(laughs) I can\'t stop, Li Ming,',
+          zh: '(笑)，不行了，李明，',
+          pinyin: '(xiào), bù xíng le, Lǐ Míng,',
+          vi: '(Cười) Không chịu nổi rồi, Lý Minh,'
+        },
+        {
+          start: 9.6,
+          end: 12.7,
+          en: 'I just remembered something—it\'s so funny.',
+          zh: '我刚想起来一件事，太好笑了。',
+          pinyin: 'Wǒ gāng xiǎng qǐlái yī jiàn shì, tài hǎoxiào le.',
+          vi: 'Tôi vừa nhớ ra một chuyện, buồn cười quá.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp--m0g0o7keec',
+      youtubeId: '-M0G0O7KeEc',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2–3 | 坚持的力量 The Power of Perseverance | Chinese Bedtime Stories',
+      titleVi: 'HSK 2–3 | 坚持的力量 The Power of Perseverance | Chinese Bedtime Stories',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1081,
+      durationLabel: '18:01',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 387 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/-M0G0O7KeEc.json',
+      cuesCount: 387,
+      cues: [
+        {
+          start: 7.03,
+          end: 11.33,
+          en: 'Ugh, Li Ming, I kind of don\'t want to keep doing it.',
+          zh: '唉，李明，我有点不想做了。',
+          pinyin: 'Ài, Lǐ Míng, wǒ yǒu diǎn bù xiǎng zuò le.',
+          vi: 'Ôi, Lý Minh, tôi hơi không muốn làm nữa.'
+        },
+        {
+          start: 11.37,
+          end: 14.74,
+          en: 'What\'s wrong, Wang Yu? Aren\'t you learning to paint?',
+          zh: '怎么了，王雨？你不是在学画画吗？',
+          pinyin: 'Zěnme le, Wáng Yǔ? Nǐ bú shì zài xué huàhuà ma?',
+          vi: 'Sao vậy, Vương Vũ? Cậu không phải đang học vẽ à?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-yaeecv1jrjm',
+      youtubeId: 'yaeECV1JRjM',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2-3 | 周末野餐对话  | Weekend Picnic Dialogue | Improve Your Mandarin Listening',
+      titleVi: 'HSK 2-3 | 周末野餐对话  | Weekend Picnic Dialogue | Improve Your Mandarin Listening',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 823,
+      durationLabel: '13:43',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 396 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/yaeECV1JRjM.json',
+      cuesCount: 396,
+      cues: [
+        {
+          start: 7.17,
+          end: 9.17,
+          en: 'Li Ming, quick, look at your phone.',
+          zh: '李明，你快看手机，',
+          pinyin: 'Lǐ Míng, nǐ kuài kàn shǒujī,',
+          vi: 'Lý Minh, cậu mau xem điện thoại đi,'
+        },
+        {
+          start: 9.17,
+          end: 11.44,
+          en: 'Look at the weather this weekend!',
+          zh: '你看这个周末的天气！',
+          pinyin: 'Nǐ kàn zhège zhōumò de tiānqì!',
+          vi: 'Cậu xem thời tiết cuối tuần này đi!'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-_oeqqzrvfg8',
+      youtubeId: '_oeqqZRVfG8',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | 用“断舍离”改变生活 | Stop Wasting Time Finding Things! | Chinese Listening Practice',
+      titleVi: 'HSK 3-4 | 用“断舍离”改变生活 | Stop Wasting Time Finding Things! | Chinese Listening Practice',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1082,
+      durationLabel: '18:02',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 310 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/_oeqqZRVfG8.json',
+      cuesCount: 310,
+      cues: [
+        {
+          start: 7.13,
+          end: 8.7,
+          en: 'Oh my god...',
+          zh: '哎呀，我的天……',
+          pinyin: 'Āiyā, wǒ de tiān...',
+          vi: 'Ôi trời ơi...'
+        },
+        {
+          start: 8.7,
+          end: 12.3,
+          en: 'Li Ming, wait for me a second, let me look for my transit card.',
+          zh: '李明，你等我一下，我找找我的交通卡。',
+          pinyin: 'Lǐ Míng, nǐ děng wǒ yíxià, wǒ zhǎozhao wǒ de jiāotōngkǎ.',
+          vi: 'Lý Minh, đợi tôi một chút, tôi tìm thẻ giao thông của tôi.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-zz3nw1hseog',
+      youtubeId: 'Zz3nw1hSEog',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–3 | 7 Things I Wish I Knew Before Learning Chinese | 学中文前我希望知道的7件事',
+      titleVi: 'HSK 1–3 | 7 Things I Wish I Knew Before Learning Chinese | 学中文前我希望知道的7件事',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1223,
+      durationLabel: '20:23',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 308 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/Zz3nw1hSEog.json',
+      cuesCount: 308,
+      cues: [
+        {
+          start: 6.67,
+          end: 9.3,
+          en: 'Li Ming, come quick and look at this photo.',
+          zh: '李明，你快来看这张照片。',
+          pinyin: 'Lǐ Míng, nǐ kuài lái kàn zhè zhāng zhàopiàn.',
+          vi: 'Lý Minh, cậu mau đến xem bức ảnh này đi.'
+        },
+        {
+          start: 9.33,
+          end: 10.73,
+          en: 'Let me see.',
+          zh: '我看看。',
+          pinyin: 'Wǒ kànkan.',
+          vi: 'Để tôi xem nào.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-asjuohj4-hq',
+      youtubeId: 'asjuoHj4-HQ',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2–3 |  什么是真正的朋友？| What Makes a Real Friend? | Chinese Bedtime Stories',
+      titleVi: 'HSK 2–3 |  什么是真正的朋友？| What Makes a Real Friend? | Chinese Bedtime Stories',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 775,
+      durationLabel: '12:55',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 204 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/asjuoHj4-HQ.json',
+      cuesCount: 204,
+      cues: [
+        {
+          start: 6.67,
+          end: 12.3,
+          en: 'Hey, Li Ming, quick, look at your phone. This news... it\'s really sad.',
+          zh: '哎，李明，你快看手机，这个新闻……真让人难过。',
+          pinyin: 'Āi, Lǐ Míng, nǐ kuài kàn shǒujī, zhège xīnwén…… zhēn ràng rén nánguò.',
+          vi: 'Này, Lý Minh, cậu mau xem điện thoại đi, tin tức này…… thật khiến người ta buồn.'
+        },
+        {
+          start: 12.33,
+          end: 13.66,
+          en: 'What\'s wrong?',
+          zh: '怎么了？',
+          pinyin: 'Zěnme le?',
+          vi: 'Sao thế?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-do63hkal_gk',
+      youtubeId: 'dO63hKal_Gk',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3 - 4 | Unlock the Secret of "Qi" (气) in Chinese Culture | 解锁中国文化中“气”的秘密',
+      titleVi: 'HSK 3 - 4 | Unlock the Secret of "Qi" (气) in Chinese Culture | 解锁中国文化中“气”的秘密',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1061,
+      durationLabel: '17:41',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 288 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/dO63hKal_Gk.json',
+      cuesCount: 288,
+      cues: [
+        {
+          start: 6.67,
+          end: 12.4,
+          en: 'Li Ming, when I left home this morning, I passed by the park next to our house,',
+          zh: '李明，我今天早上出门的时候，路过我们家旁边的那个公园，',
+          pinyin: 'Lǐ Míng, wǒ jīntiān zǎoshang chūmén de shíhou, lùguò wǒmen jiā pángbiān de nàge gōngyuán,',
+          vi: 'Lý Minh, sáng nay lúc tôi ra khỏi nhà, đi ngang qua công viên bên cạnh nhà chúng tôi,'
+        },
+        {
+          start: 12.4,
+          end: 15.43,
+          en: 'and saw something really interesting.',
+          zh: '看到一件特别有意思的事情。',
+          pinyin: 'Kàndào yí jiàn tèbié yǒu yìsi de shìqing.',
+          vi: 'và thấy một chuyện đặc biệt thú vị.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-hq4dxhjlrfc',
+      youtubeId: 'Hq4dXHjlRFc',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-2 | 这个中文习惯改变你的一天 | The Secret Chinese Habit That CHANGES Your Day',
+      titleVi: 'HSK 1-2 | 这个中文习惯改变你的一天 | The Secret Chinese Habit That CHANGES Your Day',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 758,
+      durationLabel: '12:38',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 177 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/Hq4dXHjlRFc.json',
+      cuesCount: 177,
+      cues: [
+        {
+          start: 6.13,
+          end: 9.86,
+          en: '(Humming softly)',
+          zh: '（轻轻地哼着歌）',
+          pinyin: '(Qīngqīng de hēng zhe gē)',
+          vi: '(Khẽ ngân nga hát)'
+        },
+        {
+          start: 9.87,
+          end: 14.24,
+          en: 'Wang Yu, you seem especially happy today? Did something good happen?',
+          zh: '王雨，你今天好像特别高兴？有什么好事吗？',
+          pinyin: 'Wáng Yǔ, nǐ jīntiān hǎoxiàng tèbié gāoxìng? Yǒu shénme hǎoshì ma?',
+          vi: 'Vương Vũ, hôm nay cậu có vẻ đặc biệt vui? Có chuyện gì tốt à?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-0knmtaoml9e',
+      youtubeId: '0KnmTAOMl9E',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3-4 | 充满能量的秘密：早餐 | Your Secret to a Full Day of Energy: Breakfast',
+      titleVi: 'HSK 3-4 | 充满能量的秘密：早餐 | Your Secret to a Full Day of Energy: Breakfast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1074,
+      durationLabel: '17:54',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 276 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/0KnmTAOMl9E.json',
+      cuesCount: 276,
+      cues: [
+        {
+          start: 6.67,
+          end: 13.34,
+          en: 'Ah, so delicious. I think the most important meal of the day is breakfast.',
+          zh: '啊，真好吃。我觉得，一天中最重要的一顿饭，就是早饭。',
+          pinyin: 'A, zhēn hǎo chī. Wǒ juéde, yì tiān zhōng zuì zhòngyào de yí dùn fàn, jiùshì zǎofàn.',
+          vi: 'A, ngon thật. Tôi nghĩ bữa ăn quan trọng nhất trong ngày chính là bữa sáng.'
+        },
+        {
+          start: 13.37,
+          end: 17.97,
+          en: 'After a good breakfast, I feel full of energy all day.',
+          zh: '吃完一顿好的早饭，感觉一整天都充满了能量。',
+          pinyin: 'Chī wán yí dùn hǎo de zǎofàn, gǎnjué yì zhěng tiān dōu chōngmǎn le néngliàng.',
+          vi: 'Ăn xong một bữa sáng ngon, tôi cảm thấy cả ngày tràn đầy năng lượng.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-dqbzsl3om1i',
+      youtubeId: 'DQBzSl3OM1I',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK Level 2–3 | 诚实的故事：三个温暖的晚安故事 | Stories of Honesty | Chinese Bedtime Stories',
+      titleVi: 'HSK Level 2–3 | 诚实的故事：三个温暖的晚安故事 | Stories of Honesty | Chinese Bedtime Stories',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 948,
+      durationLabel: '15:48',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 210 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/DQBzSl3OM1I.json',
+      cuesCount: 210,
+      cues: [
+        {
+          start: 6.67,
+          end: 11.97,
+          en: 'Li Ming, today I saw a child crying in a shop.',
+          zh: '李明，我今天看到一个小孩子，他在商店里哭。',
+          pinyin: 'Lǐ Míng, wǒ jīntiān kàndào yí gè xiǎoháizi, tā zài shāngdiàn lǐ kū.',
+          vi: 'Minh, hôm nay tôi thấy một đứa trẻ, nó đang khóc trong cửa hàng.'
+        },
+        {
+          start: 12,
+          end: 14.53,
+          en: 'His mother wouldn\'t buy him a toy.',
+          zh: '他妈妈不给他买玩具。',
+          pinyin: 'Tā māma bù gěi tā mǎi wánjù.',
+          vi: 'Mẹ cậu bé không mua đồ chơi cho cậu ấy.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-tqksife-y0g',
+      youtubeId: 'tQKsIFE-Y0g',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3 - 4 | 中国餐桌礼仪 | Chinese Table Manners | Avoid These Common Mistakes!',
+      titleVi: 'HSK 3 - 4 | 中国餐桌礼仪 | Chinese Table Manners | Avoid These Common Mistakes!',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 979,
+      durationLabel: '16:19',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 216 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/tQKsIFE-Y0g.json',
+      cuesCount: 216,
+      cues: [
+        {
+          start: 6.13,
+          end: 12.26,
+          en: 'Oh, Li Ming, I just got back from a family gathering and ate way too much! My belly is completely round.',
+          zh: '哎呀，李明，我刚从一个家庭聚会回来，吃得太饱了！肚子都圆了。',
+          pinyin: 'Āiyā, Lǐ Míng, wǒ gāng cóng yí ge jiātíng jùhuì huílái, chī de tài bǎo le! Dùzi dōu yuán le.',
+          vi: 'Ôi, Lý Minh, tớ vừa đi dự một buổi họp mặt gia đình về, ăn no căng bụng luôn! Bụng tròn vo rồi.'
+        },
+        {
+          start: 12.3,
+          end: 17.53,
+          en: 'Hearing how happy you sound, I can tell you must have eaten a lot of good food today.',
+          zh: '听你这开心的声音，就知道今天肯定吃了不少好东西。',
+          pinyin: 'Tīng nǐ zhè kāixīn de shēngyīn, jiù zhīdào jīntiān kěndìng chī le bùshǎo hǎo dōngxi.',
+          vi: 'Nghe giọng vui vẻ của cậu là biết hôm nay chắc chắn đã ăn không ít món ngon rồi.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-uu6btipoi4k',
+      youtubeId: 'uU6bTIPOi4k',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 – 3 | 周末安排：一起去看电影吧！Weekend Plan: Go to the Movies',
+      titleVi: 'HSK 2 – 3 | 周末安排：一起去看电影吧！Weekend Plan: Go to the Movies',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 913,
+      durationLabel: '15:13',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 249 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/uU6bTIPOi4k.json',
+      cuesCount: 249,
+      cues: [
+        {
+          start: 6.13,
+          end: 10.33,
+          en: 'Ah... Li Ming, look at me.',
+          zh: '啊……李明，你看我。',
+          pinyin: 'À…… Lǐ Míng, nǐ kàn wǒ.',
+          vi: 'À…… Lý Minh, anh nhìn em này.'
+        },
+        {
+          start: 10.37,
+          end: 13.54,
+          en: 'I\'m looking. Wang Yu, what\'s wrong?',
+          zh: '我看着呢。王雨，你怎么了？',
+          pinyin: 'Wǒ kàn zhe ne. Wáng Yǔ, nǐ zěnme le?',
+          vi: 'Tôi đang nhìn đây. Vương Vũ, cậu sao vậy?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-y5tlbhbe3hu',
+      youtubeId: 'y5tLbhBE3hU',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3 - 4 | 网上购物 VS 实体店？你会怎么选？| Online Shopping vs In-Store?',
+      titleVi: 'HSK 3 - 4 | 网上购物 VS 实体店？你会怎么选？| Online Shopping vs In-Store?',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 864,
+      durationLabel: '14:24',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 243 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/y5tLbhBE3hU.json',
+      cuesCount: 243,
+      cues: [
+        {
+          start: 6.13,
+          end: 9.63,
+          en: 'Hello everyone, welcome to a new episode of “Daily Chinese.”',
+          zh: '大家好，欢迎收听新一期的“每天中文”。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng đến với tập mới của “Mỗi Ngày Trung Văn”.'
+        },
+        {
+          start: 9.67,
+          end: 10.6,
+          en: 'I’m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-8mtp5dzofgm',
+      youtubeId: '8MTp5dZoFGM',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-2｜用中文介绍自己！Self-introduction in Chinese for Beginners',
+      titleVi: 'HSK 1-2｜用中文介绍自己！Self-introduction in Chinese for Beginners',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 973,
+      durationLabel: '16:13',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 230 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/8MTp5dZoFGM.json',
+      cuesCount: 230,
+      cues: [
+        {
+          start: 6.13,
+          end: 8.6,
+          en: 'Li Ming, I\'m so happy today!',
+          zh: '李明，我今天太开心了！',
+          pinyin: 'Lǐ Míng, wǒ jīntiān tài kāixīn le!',
+          vi: 'Lý Minh, hôm nay mình vui quá!'
+        },
+        {
+          start: 8.6,
+          end: 10.53,
+          en: 'I made a new friend!',
+          zh: '我认识了一个新朋友！',
+          pinyin: 'Wǒ rènshi le yí ge xīn péngyou!',
+          vi: 'Mình quen được một người bạn mới!'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-uv8kncxpels',
+      youtubeId: 'uv8KNcXpels',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-2 每日学习法｜从零开始学中文也不难｜Easy Chinese Study Tips for Beginners',
+      titleVi: 'HSK 1-2 每日学习法｜从零开始学中文也不难｜Easy Chinese Study Tips for Beginners',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 959,
+      durationLabel: '15:59',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 259 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/uv8KNcXpels.json',
+      cuesCount: 259,
+      cues: [
+        {
+          start: 6.13,
+          end: 9.2,
+          en: 'Hello everyone! Welcome to "Daily Chinese." I\'m Li Ming.',
+          zh: '大家好！欢迎来到“每天中文”。我是李明。',
+          pinyin: 'Dàjiā hǎo! Huānyíng lái dào “Měitiān Zhōngwén”. Wǒ shì Lǐ Míng.',
+          vi: 'Xin chào mọi người! Chào mừng đến với “Mỗi Ngày Tiếng Trung”. Tôi là Lý Minh.'
+        },
+        {
+          start: 9.23,
+          end: 10.76,
+          en: 'Hello everyone! I\'m Wang Yu.',
+          zh: '大家好！我是王雨。',
+          pinyin: 'Dàjiā hǎo! Wǒ shì Wáng Yǔ.',
+          vi: 'Xin chào mọi người! Tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-o2zwlcv2vza',
+      youtubeId: 'O2zWlcv2vZA',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '【Slow Chinese】 HSK 2-3 | 周一很累？秘密在你的周末！| Tired on Monday? The Secret is Your Weekend!',
+      titleVi: '【Slow Chinese】 HSK 2-3 | 周一很累？秘密在你的周末！| Tired on Monday? The Secret is Your Weekend!',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 773,
+      durationLabel: '12:53',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 176 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/O2zWlcv2vZA.json',
+      cuesCount: 176,
+      cues: [
+        {
+          start: 6.13,
+          end: 11.16,
+          en: 'Sigh... Li Ming, look, it\'s Monday again.',
+          zh: '唉……李明，你看，又是星期一了。',
+          pinyin: 'Āi... Lǐ Míng, nǐ kàn, yòu shì xīngqīyī le.',
+          vi: 'Ôi... Lý Minh, cậu xem, lại là thứ Hai rồi.'
+        },
+        {
+          start: 11.2,
+          end: 13.13,
+          en: 'Good morning, Wang Yu.',
+          zh: '早上好，王雨。',
+          pinyin: 'Zǎoshang hǎo, Wáng Yǔ.',
+          vi: 'Chào buổi sáng, Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-nxafrmactzs',
+      youtubeId: 'nxAfRmACtZs',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–2 | 用中文讲故事 | Listen to Chinese Bedtime Stories for Sleep & Learning',
+      titleVi: 'HSK 1–2 | 用中文讲故事 | Listen to Chinese Bedtime Stories for Sleep & Learning',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1186,
+      durationLabel: '19:46',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 241 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/nxAfRmACtZs.json',
+      cuesCount: 241,
+      cues: [
+        {
+          start: 6.13,
+          end: 9.53,
+          en: 'Ah... I\'m a bit sleepy, Li Ming.',
+          zh: '啊……我有点儿困了，李明。',
+          pinyin: 'A…… wǒ yǒu diǎnr kùn le, Lǐ Míng.',
+          vi: 'A... mình hơi buồn ngủ rồi, Lý Minh.'
+        },
+        {
+          start: 9.57,
+          end: 15.14,
+          en: 'Sleepy? Wang Yu, look, it\'s still early, and the sky hasn\'t even darkened yet.',
+          zh: '困了？王雨，你看，现在时间还早呢，天还没黑。',
+          pinyin: 'Kùn le? Wáng Yǔ, nǐ kàn, xiànzài shíjiān hái zǎo ne, tiān hái méi hēi.',
+          vi: 'Buồn ngủ à? Vương Vũ, cậu xem, bây giờ còn sớm mà, trời còn chưa tối.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-tmc-p1m-3fc',
+      youtubeId: 'tmC-p1M-3Fc',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2-3 | 不只是语言，还是文化！Learn Culture Through Everyday Chinese',
+      titleVi: 'HSK 2-3 | 不只是语言，还是文化！Learn Culture Through Everyday Chinese',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 836,
+      durationLabel: '13:56',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 195 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/tmC-p1M-3Fc.json',
+      cuesCount: 195,
+      cues: [
+        {
+          start: 6.13,
+          end: 8.9,
+          en: 'Li Ming, I\'m a bit unhappy today.',
+          zh: '李明，我今天有点儿不高兴。',
+          pinyin: 'Lǐ Míng, wǒ jīntiān yǒudiǎnr bù gāoxìng.',
+          vi: 'Lý Minh, hôm nay tôi hơi không vui.'
+        },
+        {
+          start: 8.93,
+          end: 14.5,
+          en: 'What\'s wrong, Wang Yu? You really don\'t look happy. What happened?',
+          zh: '怎么了，王雨？你看起来真的不太高兴。发生什么事了？',
+          pinyin: 'Zěnme le, Wáng Yǔ? Nǐ kàn qǐlái zhēnde bútài gāoxìng. Fāshēng shénme shì le?',
+          vi: 'Sao vậy, Vương Vũ? Cậu trông thật sự không vui lắm. Có chuyện gì xảy ra à?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-2eythzkr8w8',
+      youtubeId: '2EythZkR8w8',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 3 | How Do You Recharge on Weekends? | 你的周末“充电”方式是什么？',
+      titleVi: 'HSK 2 - 3 | How Do You Recharge on Weekends? | 你的周末“充电”方式是什么？',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 726,
+      durationLabel: '12:06',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 146 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/2EythZkR8w8.json',
+      cuesCount: 146,
+      cues: [
+        {
+          start: 6.13,
+          end: 13.63,
+          en: 'Ah, Li Ming, look, it\'s five in the afternoon now. Today is Friday! Are you happy?',
+          zh: '啊，李明，你看，现在下午五点了。今天星期五了！你高不高兴？',
+          pinyin: 'A, Lǐ Míng, nǐ kàn, xiànzài xiàwǔ wǔ diǎn le. Jīntiān xīngqīwǔ le! Nǐ gāo bu gāoxìng?',
+          vi: 'À, Lý Minh, cậu xem, bây giờ là 5 giờ chiều rồi. Hôm nay là thứ Sáu rồi! Cậu có vui không?'
+        },
+        {
+          start: 13.67,
+          end: 19.87,
+          en: 'Haha, Wang Yu, I can see you\'re very happy. Yeah, I\'m very happy too.',
+          zh: '哈哈，王雨，我看你非常高兴。是啊，我也很高兴。',
+          pinyin: 'Hāhā, Wáng Yǔ, wǒ kàn nǐ fēicháng gāoxìng. Shì a, wǒ yě hěn gāoxìng.',
+          vi: 'Haha, Vương Vũ, tớ thấy cậu rất vui. Đúng vậy, tớ cũng rất vui.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-0c5udgmvumc',
+      youtubeId: '0C5uDGMVumc',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3 - 4 | 呼吸和声调：说好中文的第一步 | Breathing & Tones: The First Step to Speak Chinese Well',
+      titleVi: 'HSK 3 - 4 | 呼吸和声调：说好中文的第一步 | Breathing & Tones: The First Step to Speak Chinese Well',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 899,
+      durationLabel: '14:59',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 226 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/0C5uDGMVumc.json',
+      cuesCount: 226,
+      cues: [
+        {
+          start: 6.13,
+          end: 7.76,
+          en: 'Li Ming, wait a moment.',
+          zh: '李明，你等一下。',
+          pinyin: 'Lǐ Míng, nǐ děng yíxià.',
+          vi: 'Lý Minh, bạn đợi một chút.'
+        },
+        {
+          start: 7.8,
+          end: 9.6,
+          en: 'What\'s wrong, Wang Yu?',
+          zh: '怎么了，王雨？',
+          pinyin: 'Zěnme le, Wáng Yǔ?',
+          vi: 'Sao vậy, Vương Vũ?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-xdpsirpleoq',
+      youtubeId: 'XDpsIrpLEOQ',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2-3 | 问路时怎么说？Learn How to Ask for Directions in Chinese!',
+      titleVi: 'HSK 2-3 | 问路时怎么说？Learn How to Ask for Directions in Chinese!',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 859,
+      durationLabel: '14:19',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 199 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/XDpsIrpLEOQ.json',
+      cuesCount: 199,
+      cues: [
+        {
+          start: 6.13,
+          end: 9.6,
+          en: 'Oh no, Li Ming, I got lost again yesterday!',
+          zh: '哎呀，李明，我昨天又迷路了！',
+          pinyin: 'Āiyā, Lǐ Míng, wǒ zuótiān yòu mílù le!',
+          vi: 'Ôi trời, Lý Minh, hôm qua tôi lại bị lạc đường nữa rồi!'
+        },
+        {
+          start: 9.63,
+          end: 14.43,
+          en: 'Lost again? Why do you always get lost? Where were you going this time?',
+          zh: '又迷路了？你怎么总是迷路？这次是去哪儿了？',
+          pinyin: 'Yòu mílù le? Nǐ zěnme zǒngshì mílù? Zhè cì shì qù nǎr le?',
+          vi: 'Lại lạc đường nữa à? Sao cậu cứ lạc đường hoài vậy? Lần này đi đâu thế?'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-wzdej3logc4',
+      youtubeId: 'wZDej3Logc4',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'HSK 3 - 4| 慢慢吃，对身体好！Why You Should Eat Slowly – Daily Chinese Podcast',
+      titleVi: 'HSK 3 - 4| 慢慢吃，对身体好！Why You Should Eat Slowly – Daily Chinese Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 868,
+      durationLabel: '14:28',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 244 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/wZDej3Logc4.json',
+      cuesCount: 244,
+      cues: [
+        {
+          start: 6.13,
+          end: 9.75,
+          en: 'Hello everyone, welcome to “Daily Chinese”. I’m Li Ming.',
+          zh: '大家好，欢迎来到“每天中文”。我是李明。',
+          pinyin: 'Dàjiā hǎo, huānyíng lái dào “Měitiān Zhōngwén”. Wǒ shì Lǐ Míng.',
+          vi: 'Xin chào mọi người, chào mừng đến với “Mỗi Ngày Tiếng Trung”. Tôi là Lý Minh.'
+        },
+        {
+          start: 9.77,
+          end: 11.69,
+          en: 'Hello everyone, I’m Wang Yu.',
+          zh: '大家好，我是王雨。',
+          pinyin: 'Dàjiā hǎo, wǒ shì Wáng Yǔ.',
+          vi: 'Xin chào mọi người, tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-3k0d2hhyi04',
+      youtubeId: '3K0D2hHYi04',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-2 | 中文对话：聊聊你的上个周末 | Talk About Your Weekend in Chinese',
+      titleVi: 'HSK 1-2 | 中文对话：聊聊你的上个周末 | Talk About Your Weekend in Chinese',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 784,
+      durationLabel: '13:04',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 205 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/3K0D2hHYi04.json',
+      cuesCount: 205,
+      cues: [
+        {
+          start: 6.13,
+          end: 10.36,
+          en: 'Sigh... Li Ming, good morning.',
+          zh: '唉…… 李明，早上好。',
+          pinyin: 'Āi…… Lǐ Míng, zǎoshang hǎo.',
+          vi: 'Haiz... Lý Minh, chào buổi sáng.'
+        },
+        {
+          start: 10.4,
+          end: 12.4,
+          en: 'Good morning, Wang Yu.',
+          zh: '早上好，王雨。',
+          pinyin: 'Zǎoshang hǎo, Wáng Yǔ.',
+          vi: 'Chào buổi sáng, Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-gr-pvrnuija',
+      youtubeId: 'gr-PvRnUIjA',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2 - 3 | How to Express Your Feelings in Chinese?',
+      titleVi: 'HSK 2 - 3 | How to Express Your Feelings in Chinese?',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1003,
+      durationLabel: '16:43',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 217 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/gr-PvRnUIjA.json',
+      cuesCount: 217,
+      cues: [
+        {
+          start: 6.13,
+          end: 8.13,
+          en: 'Li Ming, you... what\'s wrong?',
+          zh: '李明，你……怎么了？',
+          pinyin: 'Lǐ Míng, nǐ……zěnme le?',
+          vi: 'Lý Minh, bạn……sao vậy?'
+        },
+        {
+          start: 8.13,
+          end: 11.36,
+          en: 'You haven\'t said a word since this morning.',
+          zh: '你今天从早上到现在，一句话都没说。',
+          pinyin: 'Nǐ jīntiān cóng zǎoshang dào xiànzài, yí jù huà dōu méi shuō.',
+          vi: 'Hôm nay từ sáng đến giờ, bạn chẳng nói câu nào.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-dvry3l9ojq4',
+      youtubeId: 'DVRy3l9ojq4',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–2 | 为什么学了很久还是不会说中文？| Why You Still Can’t Speak Chinese?',
+      titleVi: 'HSK 1–2 | 为什么学了很久还是不会说中文？| Why You Still Can’t Speak Chinese?',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1137,
+      durationLabel: '18:57',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 352 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/DVRy3l9ojq4.json',
+      cuesCount: 352,
+      cues: [
+        {
+          start: 6.13,
+          end: 8.56,
+          en: 'Hello everyone! Welcome to \'Chinese Daily\'!',
+          zh: '大家好！欢迎来到“每天中文”！',
+          pinyin: 'Dàjiā hǎo! Huānyíng láidào “Měitiān Zhōngwén”!',
+          vi: 'Xin chào mọi người! Chào mừng đến với \'Mỗi ngày tiếng Trung\'!'
+        },
+        {
+          start: 8.6,
+          end: 11.5,
+          en: 'I\'m your friend, Wang Yu.',
+          zh: '我是你们的朋友，王雨。',
+          pinyin: 'Wǒ shì nǐmen de péngyou, Wáng Yǔ.',
+          vi: 'Tôi là bạn của các bạn, Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-limox_6yz2m',
+      youtubeId: 'LIMOX_6yZ2M',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1-2 | 每天读10页中文方法 | How to Read 10 Chinese Pages Daily?',
+      titleVi: 'HSK 1-2 | 每天读10页中文方法 | How to Read 10 Chinese Pages Daily?',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1443,
+      durationLabel: '24:03',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 403 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/LIMOX_6yZ2M.json',
+      cuesCount: 403,
+      cues: [
+        {
+          start: 6.13,
+          end: 10.1,
+          en: 'Hello everyone, welcome to a new episode of "Daily Chinese."',
+          zh: '大家好，欢迎收听新一期的《每天中文》。',
+          pinyin: 'Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.',
+          vi: 'Xin chào mọi người, chào mừng các bạn đến với tập mới của “Mỗi Ngày Trung Văn”.'
+        },
+        {
+          start: 10.13,
+          end: 11.36,
+          en: 'I\'m Li Ming.',
+          zh: '我是李明。',
+          pinyin: 'Wǒ shì Lǐ Míng.',
+          vi: 'Tôi là Lý Minh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-o_kkptuqpy8',
+      youtubeId: 'O_kkptuQPY8',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–2 | Chinese Speaking Practice | Talking About Food and Feelings',
+      titleVi: 'HSK 1–2 | Chinese Speaking Practice | Talking About Food and Feelings',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 995,
+      durationLabel: '16:35',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 171 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/O_kkptuQPY8.json',
+      cuesCount: 171,
+      cues: [
+        {
+          start: 6.13,
+          end: 13.76,
+          en: 'Li Ming, I smell something really delicious from your office! Did you go eat something good at noon? Tell me quick, what did you eat?',
+          zh: '李明，我闻到你办公室有好香的味道！你中午是不是去吃好吃的了？快说，你吃了什么？',
+          pinyin: 'Lǐ Míng, wǒ wén dào nǐ bàngōngshì yǒu hǎo xiāng de wèidào! Nǐ zhōngwǔ shì bu shì qù chī hǎochī de le? Kuài shuō, nǐ chī le shénme?',
+          vi: 'Lý Minh, tôi ngửi thấy trong văn phòng của anh có mùi rất thơm! Trưa nay anh có đi ăn món gì ngon không? Nói mau, anh đã ăn gì?'
+        },
+        {
+          start: 13.8,
+          end: 20.83,
+          en: 'Haha, you have a good nose. I went to eat with a friend at noon. We went to a new noodle shop.',
+          zh: '哈哈，你的鼻子真好。我中午是和一个朋友去吃了饭。我们去了一家新的面馆。',
+          pinyin: 'Hāhā, nǐ de bízi zhēn hǎo. Wǒ zhōngwǔ shì hé yí ge péngyou qù chī le fàn. Wǒmen qù le yì jiā xīn de miànguǎn.',
+          vi: 'Haha, mũi anh thật thính. Trưa nay tôi đi ăn với một người bạn. Chúng tôi đến một quán mì mới.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-kn3ygmvew4u',
+      youtubeId: 'KN3YgmVew4U',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–2 | Try these 4 simple changes to make learning Chinese easy and fun',
+      titleVi: 'HSK 1–2 | Try these 4 simple changes to make learning Chinese easy and fun',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1123,
+      durationLabel: '18:43',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 227 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/KN3YgmVew4U.json',
+      cuesCount: 227,
+      cues: [
+        {
+          start: 6.13,
+          end: 12,
+          en: 'Li Ming, you\'re looking at that little notebook of yours again. What do you write in it? I\'m curious.',
+          zh: '李明，你又在看你的那个小本子。你的本子上写的都是什么？我很好奇。',
+          pinyin: 'Lǐ Míng, nǐ yòu zài kàn nǐ de nà ge xiǎo běnzi. Nǐ de běnzi shàng xiě de dōu shì shénme? Wǒ hěn hàoqí.',
+          vi: 'Lý Minh, cậu lại đang xem cái cuốn sổ nhỏ đó của cậu rồi. Trên sổ cậu viết những gì thế? Tôi rất tò mò.'
+        },
+        {
+          start: 12.13,
+          end: 14.6,
+          en: 'Haha, Wang Yu, you\'re here.',
+          zh: '哈哈，王雨，你来了。',
+          pinyin: 'Hāhā, Wáng Yǔ, nǐ lái le.',
+          vi: 'Haha, Vương Vũ, cậu đến rồi.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-myqrqvbr8vk',
+      youtubeId: 'MYQrQvbR8Vk',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–2 | 我的⼀天 My Daily Routine | Learn Everyday Chinese through Real Conversations',
+      titleVi: 'HSK 1–2 | 我的⼀天 My Daily Routine | Learn Everyday Chinese through Real Conversations',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 801,
+      durationLabel: '13:21',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 121 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/MYQrQvbR8Vk.json',
+      cuesCount: 121,
+      cues: [
+        {
+          start: 6,
+          end: 10.63,
+          en: 'Hello everyone! Welcome to a new episode of “Chinese Every Day.” I\'m Li Ming.',
+          zh: '大家好！欢迎收听新一期的《每天中文》。我是李明。',
+          pinyin: 'Dàjiā hǎo! Huānyíng shōutīng xīn yī qī de 《Měitiān Zhōngwén》. Wǒ shì Lǐ Míng.',
+          vi: 'Xin chào mọi người! Chào mừng đến với tập mới của “Mỗi Ngày Tiếng Trung”. Tôi là Lý Minh.'
+        },
+        {
+          start: 11.27,
+          end: 14.87,
+          en: 'Hello everyone! I\'m Wang Yu. Glad to meet you all again!',
+          zh: '大家好！我是王雨。很高兴又和大家见面了！',
+          pinyin: 'Dàjiā hǎo! Wǒ shì Wáng Yǔ. Hěn gāoxìng yòu hé dàjiā jiànmiàn le!',
+          vi: 'Xin chào mọi người! Tôi là Vương Vũ. Rất vui lại được gặp mọi người!'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-vzygfurgonq',
+      youtubeId: 'VZygFUrGONQ',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'How to Train Your Brain to Think in Chinese? | 学会用中文思考！每天中文 | Chinese Daily Podcast',
+      titleVi: 'How to Train Your Brain to Think in Chinese? | 学会用中文思考！每天中文 | Chinese Daily Podcast',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1305,
+      durationLabel: '21:45',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 371 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/VZygFUrGONQ.json',
+      cuesCount: 371,
+      cues: [
+        {
+          start: 6,
+          end: 9.7,
+          en: 'Hi everyone! Welcome to \'Daily Chinese\'. I\'m Li Ming.',
+          zh: '大家好！欢迎收听“每天中文”。我是李明。',
+          pinyin: 'Dàjiā hǎo! Huānyíng shōutīng “Měitiān Zhōngwén”. Wǒ shì Lǐ Míng.',
+          vi: 'Chào mọi người! Chào mừng các bạn đến với “Mỗi ngày tiếng Trung”. Tôi là Lý Minh.'
+        },
+        {
+          start: 10.17,
+          end: 11.47,
+          en: 'Hi everyone! I\'m Wang Yu.',
+          zh: '大家好！我是王雨。',
+          pinyin: 'Dàjiā hǎo! Wǒ shì Wáng Yǔ.',
+          vi: 'Chào mọi người! Tôi là Vương Vũ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-xbr_xerk9hs',
+      youtubeId: 'XBr_XERk9hs',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'Walk & Learn Chinese with Podcasts | 散步听播客的学习技巧 | Beginner Level',
+      titleVi: 'Walk & Learn Chinese with Podcasts | 散步听播客的学习技巧 | Beginner Level',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1490,
+      durationLabel: '24:50',
+      topic: 'Podcast HSK hằng ngày',
+      note: 'Trọn bộ 274 câu script 4 lớp Giản thể · Pinyin · Việt · Anh từ kênh @ChineseDailyPodcast.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/XBr_XERk9hs.json',
+      cuesCount: 274,
+      cues: [
+        {
+          start: 0,
+          end: 5.79,
+          en: 'Hello everyone! Welcome to “Everyday Chinese”! I\'m Wang Yu.',
+          zh: '大家好！欢迎收听“每天中文”！我是王雨。',
+          pinyin: 'Dàjiā hǎo! Huānyíng shōutīng “Měitiān Zhōngwén”! Wǒ shì Wáng Yǔ.',
+          vi: 'Xin chào mọi người! Chào mừng các bạn đến với “Mỗi Ngày Tiếng Trung”! Tôi là Vương Vũ.'
+        },
+        {
+          start: 5.8,
+          end: 10.09,
+          en: 'Hello everyone! I\'m Li Ming. I\'m very happy to meet you all again.',
+          zh: '大家好！我是李明。很高兴又和大家见面了。',
+          pinyin: 'Dàjiā hǎo! Wǒ shì Lǐ Míng. Hěn gāoxìng yòu hé dàjiā jiànmiàn le.',
+          vi: 'Xin chào mọi người! Tôi là Lý Minh. Rất vui lại được gặp mọi người.'
+        }
+      ]
     }
   ];
 

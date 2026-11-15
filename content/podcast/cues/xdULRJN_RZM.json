@@ -1,0 +1,1873 @@
+{
+  "id": "xdULRJN_RZM",
+  "youtubeId": "xdULRJN_RZM",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 3 - 4 | 独处的秘密力量 | The Secret Power of Being Alone | Chinese Daily Podcast",
+  "durationSec": 667,
+  "cues": [
+    {
+      "start": 7.63,
+      "end": 11.33,
+      "en": "Hello everyone, welcome to a new episode of 'Daily Chinese'.",
+      "zh": "大家好，欢迎收听新一期的“每天中文”。",
+      "pinyin": "Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.",
+      "vi": "Xin chào mọi người, chào mừng các bạn đến với tập mới của 'Mỗi Ngày Tiếng Trung'."
+    },
+    {
+      "start": 11.37,
+      "end": 12.5,
+      "en": "I'm Li Ming.",
+      "zh": "我是李明。",
+      "pinyin": "Wǒ shì Lǐ Míng.",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 12.53,
+      "end": 14.63,
+      "en": "Hello everyone, I'm Wang Yu.",
+      "zh": "大家好，我是王雨。",
+      "pinyin": "Dàjiā hǎo, wǒ shì Wáng Yǔ.",
+      "vi": "Chào mọi người, tôi là Vương Vũ."
+    },
+    {
+      "start": 14.67,
+      "end": 16.07,
+      "en": "After the last episode aired,",
+      "zh": "上一期节目播出后，",
+      "pinyin": "Shàng yī qī jiémù bōchū hòu,",
+      "vi": "Sau khi tập trước phát sóng,"
+    },
+    {
+      "start": 16.1,
+      "end": 18.63,
+      "en": "we received a lot of messages from friends,",
+      "zh": "我们收到了好多朋友的留言，",
+      "pinyin": "wǒmen shōudào le hǎoduō péngyou de liúyán,",
+      "vi": "chúng tôi nhận được rất nhiều lời nhắn từ các bạn,"
+    },
+    {
+      "start": 18.67,
+      "end": 21.7,
+      "en": "Seeing everyone's comments, we were really very happy!",
+      "zh": "看到大家的评论，我们真的特别开心！",
+      "pinyin": "kàndào dàjiā de pínglùn, wǒmen zhēn de tèbié kāixīn!",
+      "vi": "Thấy bình luận của mọi người, chúng tôi thật sự rất vui!"
+    },
+    {
+      "start": 21.73,
+      "end": 24.6,
+      "en": "Yes, thank you all very much for your support.",
+      "zh": "是的，非常感谢大家的支持。",
+      "pinyin": "Shì de, fēicháng gǎnxiè dàjiā de zhīchí.",
+      "vi": "Đúng vậy, cảm ơn mọi người rất nhiều vì đã ủng hộ."
+    },
+    {
+      "start": 24.63,
+      "end": 27.86,
+      "en": "I noticed that many friends shared their habit of drinking tea",
+      "zh": "我注意到很多朋友分享了自己喝茶",
+      "pinyin": "Wǒ zhùyì dào hěn duō péngyou fēnxiǎng le zìjǐ hē chá",
+      "vi": "Tôi để ý thấy nhiều bạn đã chia sẻ thói quen uống trà"
+    },
+    {
+      "start": 27.9,
+      "end": 30,
+      "en": "or drinking coffee.",
+      "zh": "或者喝咖啡的习惯。",
+      "pinyin": "huòzhě hē kāfēi de xíguàn.",
+      "vi": "hoặc uống cà phê của mình."
+    },
+    {
+      "start": 30.03,
+      "end": 33.43,
+      "en": "Among them, one message left a particularly deep impression on me.",
+      "zh": "其中有一条留言，让我印象特别深刻。",
+      "pinyin": "Qízhōng yǒu yī tiáo liúyán, ràng wǒ yìnxiàng tèbié shēnkè.",
+      "vi": "Trong đó có một lời nhắn khiến tôi ấn tượng đặc biệt sâu sắc."
+    },
+    {
+      "start": 33.47,
+      "end": 35.4,
+      "en": "Oh? Which one?",
+      "zh": "哦？是哪一条？",
+      "pinyin": "Ó? Shì nǎ yī tiáo?",
+      "vi": "Ồ? Là lời nhắn nào vậy?"
+    },
+    {
+      "start": 35.43,
+      "end": 38.86,
+      "en": "Yes, I saw a message that left a very deep impression on me.",
+      "zh": "是的，我看到一条留言，印象特别深刻。",
+      "pinyin": "Shì de, wǒ kàndào yī tiáo liúyán, yìnxiàng tèbié shēnkè.",
+      "vi": "Đúng vậy, tôi thấy một lời nhắn, ấn tượng rất sâu sắc."
+    },
+    {
+      "start": 38.9,
+      "end": 41.93,
+      "en": "One friend shared his habits in Chinese,",
+      "zh": "有一位朋友用中文分享了他的习惯，",
+      "pinyin": "Yǒu yī wèi péngyou yòng Zhōngwén fēnxiǎng le tā de xíguàn,",
+      "vi": "Có một bạn đã dùng tiếng Trung chia sẻ thói quen của mình,"
+    },
+    {
+      "start": 41.97,
+      "end": 46,
+      "en": "He said: 'I like to drink a cup of coffee every morning,",
+      "zh": "他说：“我每天早上喜欢喝一杯咖啡，",
+      "pinyin": "Tā shuō: “Wǒ měitiān zǎoshang xǐhuan hē yī bēi kāfēi,",
+      "vi": "Bạn ấy nói: 'Mỗi sáng tôi thích uống một ly cà phê,"
+    },
+    {
+      "start": 46.03,
+      "end": 50.43,
+      "en": "and after lunch I drink black tea with my family.'",
+      "zh": "吃午饭后我和家人一起喝红茶。”",
+      "pinyin": "chī wǔfàn hòu wǒ hé jiārén yīqǐ hē hóngchá.”",
+      "vi": "sau bữa trưa tôi cùng gia đình uống trà đen.'"
+    },
+    {
+      "start": 50.47,
+      "end": 52.94,
+      "en": "Wow, this lifestyle habit sounds really nice!",
+      "zh": "哇，这个生活习惯听起来真不错！",
+      "pinyin": "Wā, zhège shēnghuó xíguàn tīng qǐlái zhēn bùcuò!",
+      "vi": "Wow, thói quen sống này nghe thật tuyệt!"
+    },
+    {
+      "start": 52.97,
+      "end": 55.8,
+      "en": "Starting a new day with coffee in the morning,",
+      "zh": "早上用咖啡开始新的一天，",
+      "pinyin": "Zǎoshang yòng kāfēi kāishǐ xīn de yī tiān,",
+      "vi": "Buổi sáng dùng cà phê để bắt đầu ngày mới,"
+    },
+    {
+      "start": 55.83,
+      "end": 59.1,
+      "en": "and enjoying a slow tea time with family in the afternoon.",
+      "zh": "下午和家人一起享受喝茶的慢时光。",
+      "pinyin": "xiàwǔ hé jiārén yīqǐ xiǎngshòu hē chá de màn shíguāng.",
+      "vi": "buổi chiều cùng gia đình tận hưởng khoảng thời gian chậm rãi uống trà."
+    },
+    {
+      "start": 59.13,
+      "end": 59.83,
+      "en": "That's right.",
+      "zh": "没错。",
+      "pinyin": "Méicuò.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 59.83,
+      "end": 62.06,
+      "en": "When I saw this message,",
+      "zh": "我看到这条留言的时候，",
+      "pinyin": "Wǒ kàndào zhè tiáo liúyán de shíhou,",
+      "vi": "Khi tôi thấy lời nhắn này,"
+    },
+    {
+      "start": 62.1,
+      "end": 63.83,
+      "en": "I suddenly had a new idea.",
+      "zh": "突然有了一个新的想法。",
+      "pinyin": "tūrán yǒu le yī gè xīn de xiǎngfǎ.",
+      "vi": "bỗng nhiên có một ý tưởng mới."
+    },
+    {
+      "start": 63.87,
+      "end": 68.14,
+      "en": "You see, drinking coffee alone in the morning, for work and study,",
+      "zh": "你看，早上一个人喝咖啡，为了工作和学习，",
+      "pinyin": "Nǐ kàn, zǎoshang yī gè rén hē kāfēi, wèile gōngzuò hé xuéxí,",
+      "vi": "Bạn thấy đấy, buổi sáng một mình uống cà phê, vì công việc và học tập,"
+    },
+    {
+      "start": 68.17,
+      "end": 71.27,
+      "en": "this is more like a state of 'being alone', right?",
+      "zh": "这更像是一种“独处”的状态，对吧？",
+      "pinyin": "zhè gèng xiàng shì yī zhǒng “dúchǔ” de zhuàngtài, duì ba?",
+      "vi": "điều này giống trạng thái 'ở một mình' hơn, đúng không?"
+    },
+    {
+      "start": 71.3,
+      "end": 72.83,
+      "en": "Yeah, that's how it is.",
+      "zh": "嗯，是这样。",
+      "pinyin": "Ǹg, shì zhèyàng.",
+      "vi": "Ừ, đúng là như vậy."
+    },
+    {
+      "start": 72.87,
+      "end": 76.74,
+      "en": "But in the afternoon, drinking tea and chatting with family,",
+      "zh": "但是，下午和家人一起喝茶、聊天，",
+      "pinyin": "Dànshì, xiàwǔ hé jiārén yīqǐ hē chá, liáotiān,",
+      "vi": "Nhưng buổi chiều cùng gia đình uống trà, trò chuyện,"
+    },
+    {
+      "start": 76.77,
+      "end": 80.27,
+      "en": "this turns into a warm 'social' activity.",
+      "zh": "这又变成了一种温暖的“社交”活动。",
+      "pinyin": "zhè yòu biànchéng le yī zhǒng wēnnuǎn de “shèjiāo” huódòng.",
+      "vi": "điều này lại trở thành một hoạt động 'giao tiếp xã hội' ấm áp."
+    },
+    {
+      "start": 80.3,
+      "end": 82.2,
+      "en": "Now that you mention it, I just realized!",
+      "zh": "你这么一说，我才发现！",
+      "pinyin": "Nǐ zhème yī shuō, wǒ cái fāxiàn!",
+      "vi": "Bạn nói vậy tôi mới nhận ra!"
+    },
+    {
+      "start": 82.23,
+      "end": 86.2,
+      "en": "It turns out that behind the choice of tea or coffee,",
+      "zh": "原来，喝茶还是喝咖啡，这个选择的背后，",
+      "pinyin": "Yuánlái, hē chá háishì hē kāfēi, zhège xuǎnzé de bèihòu,",
+      "vi": "Hóa ra, uống trà hay uống cà phê, đằng sau sự lựa chọn này,"
+    },
+    {
+      "start": 86.23,
+      "end": 89.13,
+      "en": "there is also the question of whether we like being alone,",
+      "zh": "还藏着我们是喜欢一个人待着，",
+      "pinyin": "hái cángzhe wǒmen shì xǐhuan yī gè rén dāizhe,",
+      "vi": "còn ẩn chứa câu hỏi chúng ta thích ở một mình,"
+    },
+    {
+      "start": 89.17,
+      "end": 92,
+      "en": "or like being with others.",
+      "zh": "还是喜欢和别人在一起的问题。",
+      "pinyin": "háishì xǐhuan hé biérén zài yīqǐ de wèntí.",
+      "vi": "hay thích ở cùng người khác."
+    },
+    {
+      "start": 92.03,
+      "end": 93.13,
+      "en": "Exactly.",
+      "zh": "正是如此。",
+      "pinyin": "Zhèngshì rúcǐ.",
+      "vi": "Chính xác là như vậy."
+    },
+    {
+      "start": 93.17,
+      "end": 96.6,
+      "en": "So today, taking this friend's message as an opportunity,",
+      "zh": "所以我们今天就想借着这位朋友的留言，",
+      "pinyin": "Suǒyǐ wǒmen jīntiān jiù xiǎng jièzhe zhè wèi péngyou de liúyán,",
+      "vi": "Vì thế hôm nay chúng tôi muốn nhân lời nhắn của bạn này,"
+    },
+    {
+      "start": 96.63,
+      "end": 99.4,
+      "en": "we want to talk with everyone in depth about this topic:",
+      "zh": "和大家深入地聊一聊这个话题：",
+      "pinyin": "hé dàjiā shēnrù de liáo yī liáo zhège huàtí:",
+      "vi": "cùng mọi người trò chuyện sâu hơn về chủ đề này:"
+    },
+    {
+      "start": 99.43,
+      "end": 101.4,
+      "en": "Being alone, or socializing?",
+      "zh": "独处，还是社交？",
+      "pinyin": "Dúchǔ, háishì shèjiāo?",
+      "vi": "Ở một mình, hay giao tiếp xã hội?"
+    },
+    {
+      "start": 101.43,
+      "end": 103.83,
+      "en": "Which do you think is more important to us?",
+      "zh": "你觉得哪个对我们更重要？",
+      "pinyin": "Nǐ juéde nǎge duì wǒmen gèng zhòngyào?",
+      "vi": "Bạn thấy cái nào quan trọng hơn với chúng ta?"
+    },
+    {
+      "start": 103.87,
+      "end": 105.74,
+      "en": "This topic is great!",
+      "zh": "这个话题太好了！",
+      "pinyin": "Zhège huàtí tài hǎo le!",
+      "vi": "Chủ đề này hay quá!"
+    },
+    {
+      "start": 105.77,
+      "end": 109.84,
+      "en": "I think many people feel confused about this question.",
+      "zh": "我觉得很多人都会在这个问题上感到困惑。",
+      "pinyin": "Wǒ juéde hěn duō rén dōu huì zài zhège wèntí shàng gǎndào kùnhuò.",
+      "vi": "Tôi nghĩ nhiều người sẽ cảm thấy bối rối về vấn đề này."
+    },
+    {
+      "start": 109.87,
+      "end": 112.34,
+      "en": "Then let's have a good talk about it today!",
+      "zh": "那我们今天就好好聊一聊吧！",
+      "pinyin": "Nà wǒmen jīntiān jiù hǎohǎo liáo yī liáo ba!",
+      "vi": "Vậy hôm nay chúng ta cùng trò chuyện thật kỹ nhé!"
+    },
+    {
+      "start": 112.37,
+      "end": 114,
+      "en": "Okay, understood.",
+      "zh": "好的，明白了。",
+      "pinyin": "Hǎo de, míngbai le.",
+      "vi": "Được, tôi hiểu rồi."
+    },
+    {
+      "start": 114.03,
+      "end": 116.9,
+      "en": "We'll switch to a brand-new topic, but still",
+      "zh": "我们更换一个全新的话题，但依然",
+      "pinyin": "Wǒmen gēnghuàn yī gè quánxīn de huàtí, dàn yīrán",
+      "vi": "Chúng ta sẽ đổi sang một chủ đề hoàn toàn mới, nhưng vẫn"
+    },
+    {
+      "start": 116.93,
+      "end": 120,
+      "en": "follow all the parameters and structure you provided,",
+      "zh": "会遵循您提供的所有参数和结构，",
+      "pinyin": "huì zūnxún nín tígōng de suǒyǒu cānshù hé jiégòu,",
+      "vi": "sẽ tuân theo tất cả các tham số và cấu trúc bạn đã cung cấp,"
+    },
+    {
+      "start": 120.03,
+      "end": 122.7,
+      "en": "from the previous episode's topic 'Tea and Coffee'",
+      "zh": "从上一集“茶与咖啡”的话题",
+      "pinyin": "cóng shàng yī jí “Chá yǔ Kāfēi” de huàtí",
+      "vi": "từ chủ đề 'Trà và cà phê' của tập trước"
+    },
+    {
+      "start": 122.73,
+      "end": 124.66,
+      "en": "transition naturally. Okay.",
+      "zh": "自然过渡过来。好。",
+      "pinyin": "zìrán guòdù guòlái. Hǎo.",
+      "vi": "chuyển tiếp một cách tự nhiên. Được."
+    },
+    {
+      "start": 124.7,
+      "end": 127.07,
+      "en": "So to help everyone know us better,",
+      "zh": "那为了让大家更了解我们，",
+      "pinyin": "Nà wèile ràng dàjiā gèng liǎojiě wǒmen,",
+      "vi": "Vậy để mọi người hiểu chúng tôi hơn,"
+    },
+    {
+      "start": 127.1,
+      "end": 129.5,
+      "en": "why don't we first talk about our own situations.",
+      "zh": "不如我们先说说自己的情况吧。",
+      "pinyin": "bùrú wǒmen xiān shuōshuo zìjǐ de qíngkuàng ba.",
+      "vi": "chi bằng chúng ta nói về tình hình của mình trước nhé."
+    },
+    {
+      "start": 129.53,
+      "end": 133.1,
+      "en": "Wang Yu, do you think you're a person who likes liveliness,",
+      "zh": "王雨，你觉得自己是一个喜欢热闹的人，",
+      "pinyin": "Wáng Yǔ, nǐ juéde zìjǐ shì yī gè xǐhuan rènao de rén,",
+      "vi": "Vương Vũ, bạn thấy mình là người thích sự náo nhiệt,"
+    },
+    {
+      "start": 133.13,
+      "end": 135.9,
+      "en": "or a person who likes quiet?",
+      "zh": "还是一个喜欢安静的人？",
+      "pinyin": "háishì yī gè xǐhuan ānjìng de rén?",
+      "vi": "hay là người thích sự yên tĩnh?"
+    },
+    {
+      "start": 135.93,
+      "end": 137.43,
+      "en": "This is too obvious!",
+      "zh": "这个太明显了！",
+      "pinyin": "Zhège tài míngxiǎn le!",
+      "vi": "Cái này quá rõ rồi!"
+    },
+    {
+      "start": 137.47,
+      "end": 139.84,
+      "en": "I'm definitely a person who likes liveliness.",
+      "zh": "我肯定是喜欢热闹的人。",
+      "pinyin": "Wǒ kěndìng shì xǐhuan rènao de rén.",
+      "vi": "Tôi chắc chắn là người thích náo nhiệt."
+    },
+    {
+      "start": 139.87,
+      "end": 144.24,
+      "en": "I especially like the feeling of being with a big group of friends,",
+      "zh": "我特别喜欢和一大群朋友在一起的感觉，",
+      "pinyin": "Wǒ tèbié xǐhuan hé yī dà qún péngyou zài yīqǐ de gǎnjué,",
+      "vi": "Tôi đặc biệt thích cảm giác ở cùng một nhóm bạn đông người,"
+    },
+    {
+      "start": 144.27,
+      "end": 147.3,
+      "en": "Everyone eats, chats, and sings together,",
+      "zh": "大家一起吃饭、聊天、唱歌，",
+      "pinyin": "Dàjiā yìqǐ chīfàn, liáotiān, chànggē,",
+      "vi": "Mọi người cùng ăn cơm, trò chuyện, hát hò,"
+    },
+    {
+      "start": 147.33,
+      "end": 149.2,
+      "en": "It feels very lively.",
+      "zh": "感觉非常有活力。",
+      "pinyin": "Gǎnjué fēicháng yǒu huólì.",
+      "vi": "Cảm thấy tràn đầy sức sống."
+    },
+    {
+      "start": 149.23,
+      "end": 151.33,
+      "en": "To use a popular word,",
+      "zh": "用一个流行的词来说，",
+      "pinyin": "Yòng yí ge liúxíng de cí lái shuō,",
+      "vi": "Dùng một từ thịnh hành mà nói,"
+    },
+    {
+      "start": 151.37,
+      "end": 154.1,
+      "en": "I should be an “extroverted” person.",
+      "zh": "我应该是一个“外向”的人。",
+      "pinyin": "Wǒ yīnggāi shì yí ge “wàixiàng” de rén.",
+      "vi": "Tôi chắc là một người “hướng ngoại”."
+    },
+    {
+      "start": 154.13,
+      "end": 155.06,
+      "en": "Extroverted.",
+      "zh": "外向。",
+      "pinyin": "Wàixiàng.",
+      "vi": "Hướng ngoại."
+    },
+    {
+      "start": 155.07,
+      "end": 157.3,
+      "en": "Yeah, that word is very accurate.",
+      "zh": "嗯，这个词很准确。",
+      "pinyin": "Ǹg, zhège cí hěn zhǔnquè.",
+      "vi": "Ừm, từ này rất chính xác."
+    },
+    {
+      "start": 157.33,
+      "end": 161.6,
+      "en": "That is, you gain energy by communicating with others.",
+      "zh": "就是说，你通过和别人交流来获得能量。",
+      "pinyin": "Jiùshì shuō, nǐ tōngguò hé biérén jiāoliú lái huòdé néngliàng.",
+      "vi": "Tức là, bạn có được năng lượng thông qua việc giao lưu với người khác."
+    },
+    {
+      "start": 161.63,
+      "end": 163.86,
+      "en": "Right, right, right! That's exactly what it means.",
+      "zh": "对对对！就是这个意思。",
+      "pinyin": "Duì duì duì! Jiùshì zhège yìsi.",
+      "vi": "Đúng đúng đúng! Chính là ý đó."
+    },
+    {
+      "start": 163.9,
+      "end": 167.93,
+      "en": "Every time after gathering with friends, I feel especially happy,",
+      "zh": "每次和朋友们聚会之后，我都觉得特别开心，",
+      "pinyin": "Měi cì hé péngyoumen jùhuì zhīhòu, wǒ dōu juéde tèbié kāixīn,",
+      "vi": "Mỗi lần tụ tập với bạn bè xong, tôi đều cảm thấy đặc biệt vui,"
+    },
+    {
+      "start": 167.97,
+      "end": 170.8,
+      "en": "I feel like I'm “fully charged” again.",
+      "zh": "感觉自己又“充满电”了。",
+      "pinyin": "Gǎnjué zìjǐ yòu “chōngmǎn diàn” le.",
+      "vi": "Cảm thấy mình lại “đầy pin” rồi."
+    },
+    {
+      "start": 170.83,
+      "end": 171.96,
+      "en": "What about you, Li Ming?",
+      "zh": "你呢，李明？",
+      "pinyin": "Nǐ ne, Lǐ Míng?",
+      "vi": "Còn bạn thì sao, Lý Minh?"
+    },
+    {
+      "start": 171.97,
+      "end": 175.17,
+      "en": "You always look very calm and steady.",
+      "zh": "你看起来总是很冷静，很安稳。",
+      "pinyin": "Nǐ kàn qǐlái zǒngshì hěn lěngjìng, hěn ānwěn.",
+      "vi": "Bạn trông lúc nào cũng rất bình tĩnh, rất an ổn."
+    },
+    {
+      "start": 175.17,
+      "end": 177.94,
+      "en": "(Laughs) You observe very accurately.",
+      "zh": "(笑)，你观察得很准。",
+      "pinyin": "(Xiào), nǐ guānchá de hěn zhǔn.",
+      "vi": "(Cười), bạn quan sát rất chuẩn."
+    },
+    {
+      "start": 177.97,
+      "end": 180,
+      "en": "I might be exactly the opposite of you.",
+      "zh": "我可能正好和你相反。",
+      "pinyin": "Wǒ kěnéng zhènghǎo hé nǐ xiāngfǎn.",
+      "vi": "Tôi có lẽ đúng là ngược lại với bạn."
+    },
+    {
+      "start": 180.03,
+      "end": 181.5,
+      "en": "I prefer quiet.",
+      "zh": "我更喜欢安静。",
+      "pinyin": "Wǒ gèng xǐhuan ānjìng.",
+      "vi": "Tôi thích yên tĩnh hơn."
+    },
+    {
+      "start": 181.53,
+      "end": 183.1,
+      "en": "To use that word from earlier,",
+      "zh": "用刚才那个词来说，",
+      "pinyin": "Yòng gāngcái nàge cí lái shuō,",
+      "vi": "Dùng từ vừa nãy để nói,"
+    },
+    {
+      "start": 183.13,
+      "end": 185.83,
+      "en": "I am a relatively “introverted” person.",
+      "zh": "我是一个比较“内向”的人。",
+      "pinyin": "Wǒ shì yí ge bǐjiào “nèixiàng” de rén.",
+      "vi": "Tôi là một người khá “hướng nội”."
+    },
+    {
+      "start": 185.87,
+      "end": 188,
+      "en": "It's not that I don't like being with friends,",
+      "zh": "我不是不喜欢和朋友在一起，",
+      "pinyin": "Wǒ bú shì bù xǐhuan hé péngyou zài yìqǐ,",
+      "vi": "Không phải là tôi không thích ở bên bạn bè,"
+    },
+    {
+      "start": 188.03,
+      "end": 190.83,
+      "en": "But I prefer small-scale gatherings,",
+      "zh": "但是我更喜欢小范围的聚会，",
+      "pinyin": "Dànshì wǒ gèng xǐhuan xiǎo fànwéi de jùhuì,",
+      "vi": "Nhưng tôi thích hơn những buổi tụ tập quy mô nhỏ,"
+    },
+    {
+      "start": 190.87,
+      "end": 193.14,
+      "en": "For example, two or three people,",
+      "zh": "比如两个或者三个人，",
+      "pinyin": "Bǐrú liǎng ge huòzhě sān ge rén,",
+      "vi": "Ví dụ hai hoặc ba người,"
+    },
+    {
+      "start": 193.17,
+      "end": 196.13,
+      "en": "Find a quiet place and have a deep chat.",
+      "zh": "找个安静的地方，深入地聊聊天。",
+      "pinyin": "Zhǎo ge ānjìng de dìfang, shēnrù de liáoliao tiān.",
+      "vi": "Tìm một nơi yên tĩnh, trò chuyện sâu hơn."
+    },
+    {
+      "start": 196.13,
+      "end": 198.4,
+      "en": "Oh, chatting in depth.",
+      "zh": "哦，深入地聊天。",
+      "pinyin": "Ó, shēnrù de liáotiān.",
+      "vi": "Ồ, trò chuyện sâu sắc."
+    },
+    {
+      "start": 198.43,
+      "end": 199.06,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 199.1,
+      "end": 201.67,
+      "en": "If I attend a party with a lot of people,",
+      "zh": "如果参加一个非常多人的派对，",
+      "pinyin": "Rúguǒ cānjiā yí ge fēicháng duō rén de pàiduì,",
+      "vi": "Nếu tham gia một bữa tiệc có rất nhiều người,"
+    },
+    {
+      "start": 201.7,
+      "end": 205.03,
+      "en": "With many people talking around me, I will feel very tired,",
+      "zh": "周围有很多人在说话，我会觉得很累，",
+      "pinyin": "Zhōuwéi yǒu hěn duō rén zài shuōhuà, wǒ huì juéde hěn lèi,",
+      "vi": "Xung quanh có rất nhiều người đang nói chuyện, tôi sẽ cảm thấy rất mệt,"
+    },
+    {
+      "start": 205.07,
+      "end": 207.9,
+      "en": "I feel like my energy gets used up quickly.",
+      "zh": "感觉自己的能量很快就被用完了。",
+      "pinyin": "Gǎnjué zìjǐ de néngliàng hěn kuài jiù bèi yòng wán le.",
+      "vi": "Cảm thấy năng lượng của mình nhanh chóng bị dùng hết."
+    },
+    {
+      "start": 207.93,
+      "end": 210.03,
+      "en": "So for me, being alone,",
+      "zh": "所以对我来说，独处，",
+      "pinyin": "Suǒyǐ duì wǒ lái shuō, dúchǔ,",
+      "vi": "Vì vậy đối với tôi, ở một mình,"
+    },
+    {
+      "start": 210.07,
+      "end": 213.1,
+      "en": "For example, reading or watching movies alone at home,",
+      "zh": "比如一个人在家看书或者看电影，",
+      "pinyin": "Bǐrú yí ge rén zài jiā kàn shū huòzhě kàn diànyǐng,",
+      "vi": "Ví dụ một mình ở nhà đọc sách hoặc xem phim,"
+    },
+    {
+      "start": 213.13,
+      "end": 215.43,
+      "en": "Is a way to “charge” me.",
+      "zh": "是给我“充电”的方式。",
+      "pinyin": "Shì gěi wǒ “chōngdiàn” de fāngshì.",
+      "vi": "Là cách “sạc pin” cho tôi."
+    },
+    {
+      "start": 215.47,
+      "end": 217.1,
+      "en": "So that's how it is!",
+      "zh": "原来是这样！",
+      "pinyin": "Yuánlái shì zhèyàng!",
+      "vi": "Thì ra là như vậy!"
+    },
+    {
+      "start": 217.13,
+      "end": 221.7,
+      "en": "One charges through socializing, and one charges through being alone.",
+      "zh": "一个是通过社交充电，一个是通过独处充电。",
+      "pinyin": "Yí ge shì tōngguò shèjiāo chōngdiàn, yí ge shì tōngguò dúchǔ chōngdiàn.",
+      "vi": "Một người được sạc pin qua giao tiếp xã hội, một người được sạc pin qua việc ở một mình."
+    },
+    {
+      "start": 221.73,
+      "end": 223.53,
+      "en": "This is so interesting.",
+      "zh": "这太有趣了。",
+      "pinyin": "Zhè tài yǒuqù le.",
+      "vi": "Điều này thật thú vị."
+    },
+    {
+      "start": 223.57,
+      "end": 228.27,
+      "en": "This makes me think of the social method we use most nowadays—the phone.",
+      "zh": "这让我想到了我们现在最常用的社交方式——手机。",
+      "pinyin": "Zhè ràng wǒ xiǎngdào le wǒmen xiànzài zuì chángyòng de shèjiāo fāngshì——shǒujī.",
+      "vi": "Điều này khiến tôi nghĩ đến cách giao tiếp chúng ta dùng thường xuyên nhất hiện nay——điện thoại."
+    },
+    {
+      "start": 228.27,
+      "end": 230.84,
+      "en": "Do you think socializing on the phone",
+      "zh": "你觉得手机上的社交，",
+      "pinyin": "Nǐ juéde shǒujī shàng de shèjiāo,",
+      "vi": "Bạn thấy việc giao tiếp trên điện thoại,"
+    },
+    {
+      "start": 230.87,
+      "end": 232.94,
+      "en": "counts as real socializing?",
+      "zh": "算是真正的社交吗？",
+      "pinyin": "Suàn shì zhēnzhèng de shèjiāo ma?",
+      "vi": "Có được tính là giao tiếp thực sự không?"
+    },
+    {
+      "start": 232.97,
+      "end": 235.67,
+      "en": "This is exactly what I want to discuss next.",
+      "zh": "这正是我接下来想讨论的。",
+      "pinyin": "Zhè zhèng shì wǒ jiēxiàlái xiǎng tǎolùn de.",
+      "vi": "Đây chính là điều tôi muốn thảo luận tiếp theo."
+    },
+    {
+      "start": 235.7,
+      "end": 239.8,
+      "en": "Phones and the internet have completely changed the way we socialize.",
+      "zh": "手机和网络，完全改变了我们的社交方式。",
+      "pinyin": "Shǒujī hé wǎngluò, wánquán gǎibiàn le wǒmen de shèjiāo fāngshì.",
+      "vi": "Điện thoại và mạng internet đã hoàn toàn thay đổi cách giao tiếp của chúng ta."
+    },
+    {
+      "start": 239.8,
+      "end": 240.7,
+      "en": "Yeah!",
+      "zh": "是啊！",
+      "pinyin": "Shì a!",
+      "vi": "Đúng vậy!"
+    },
+    {
+      "start": 240.7,
+      "end": 242.33,
+      "en": "Now we have WeChat,",
+      "zh": "现在我们有微信，",
+      "pinyin": "Xiànzài wǒmen yǒu Wēixìn,",
+      "vi": "Bây giờ chúng ta có WeChat,"
+    },
+    {
+      "start": 242.37,
+      "end": 245.7,
+      "en": "We can message and call friends anytime, anywhere.",
+      "zh": "可以随时随地和朋友发信息、打电话。",
+      "pinyin": "Kěyǐ suíshí suídì hé péngyou fā xìnxī, dǎ diànhuà.",
+      "vi": "Có thể gửi tin nhắn, gọi điện cho bạn bè bất cứ lúc nào, bất cứ đâu."
+    },
+    {
+      "start": 245.7,
+      "end": 249.37,
+      "en": "It's much more convenient, but I always feel",
+      "zh": "方便是方便了很多，但我总觉得，",
+      "pinyin": "Fāngbiàn shì fāngbiàn le hěn duō, dàn wǒ zǒng juéde,",
+      "vi": "Tiện thì tiện hơn nhiều, nhưng tôi luôn cảm thấy,"
+    },
+    {
+      "start": 249.37,
+      "end": 251.4,
+      "en": "that something seems to be missing.",
+      "zh": "好像少了点什么。",
+      "pinyin": "Hǎoxiàng shǎo le diǎn shénme.",
+      "vi": "Hình như thiếu điều gì đó."
+    },
+    {
+      "start": 251.43,
+      "end": 252.26,
+      "en": "Missing something?",
+      "zh": "少了点什么？",
+      "pinyin": "Shǎo le diǎn shénme?",
+      "vi": "Thiếu điều gì đó?"
+    },
+    {
+      "start": 252.3,
+      "end": 253.93,
+      "en": "Tell me specifically.",
+      "zh": "你具体说说看。",
+      "pinyin": "Nǐ jùtǐ shuōshuo kàn.",
+      "vi": "Bạn nói cụ thể xem."
+    },
+    {
+      "start": 253.97,
+      "end": 255.44,
+      "en": "It's missing “warmth”.",
+      "zh": "少了“温度”。",
+      "pinyin": "Shǎo le “wēndù”.",
+      "vi": "Thiếu “hơi ấm”."
+    },
+    {
+      "start": 255.47,
+      "end": 259,
+      "en": "When chatting on the phone, you can't see the other person's expression,",
+      "zh": "在手机上聊天，你看不到对方的表情，",
+      "pinyin": "Zài shǒujī shàng liáotiān, nǐ kàn bú dào duìfāng de biǎoqíng,",
+      "vi": "Khi trò chuyện trên điện thoại, bạn không nhìn thấy biểu cảm của đối phương,"
+    },
+    {
+      "start": 259.03,
+      "end": 261.63,
+      "en": "Nor can you hear the tone of their voice.",
+      "zh": "也听不到他说话的语气。",
+      "pinyin": "Yě tīng bú dào tā shuōhuà de yǔqì.",
+      "vi": "Cũng không nghe thấy giọng điệu khi anh ấy nói."
+    },
+    {
+      "start": 261.67,
+      "end": 265.67,
+      "en": "Sometimes, the same sentence, said with a different tone,",
+      "zh": "有时候，同样一句话，用不同的语气说出来，",
+      "pinyin": "Yǒu shíhou, tóngyàng yí jù huà, yòng bùtóng de yǔqì shuō chūlái,",
+      "vi": "Có khi, cùng một câu nói, nói ra bằng những giọng điệu khác nhau,"
+    },
+    {
+      "start": 265.7,
+      "end": 267.5,
+      "en": "Means something completely different.",
+      "zh": "意思是完全不一样的。",
+      "pinyin": "Yìsi shì wánquán bù yíyàng de.",
+      "vi": "Ý nghĩa hoàn toàn khác nhau."
+    },
+    {
+      "start": 267.53,
+      "end": 268.4,
+      "en": "I agree.",
+      "zh": "我同意。",
+      "pinyin": "Wǒ tóngyì.",
+      "vi": "Tôi đồng ý."
+    },
+    {
+      "start": 268.43,
+      "end": 271.6,
+      "en": "Written words indeed can sometimes cause misunderstandings. Right!",
+      "zh": "文字确实有时候会引起误会。对！",
+      "pinyin": "Wénzì quèshí yǒushíhou huì yǐnqǐ wùhuì. Duì!",
+      "vi": "Chữ viết đúng là đôi khi có thể gây hiểu lầm. Đúng vậy!"
+    },
+    {
+      "start": 271.63,
+      "end": 273.53,
+      "en": "I had an experience like that once.",
+      "zh": "我就有一次这样的经历。",
+      "pinyin": "Wǒ jiù yǒu yí cì zhèyàng de jīnglì.",
+      "vi": "Tôi đã từng có một lần như vậy."
+    },
+    {
+      "start": 273.57,
+      "end": 277.8,
+      "en": "I sent a friend a message and made a joking remark about him.",
+      "zh": "我给一个朋友发信息，开玩笑地说了他一句。",
+      "pinyin": "Wǒ gěi yí gè péngyou fā xìnxī, kāi wánxiào de shuōle tā yí jù.",
+      "vi": "Tôi nhắn tin cho một người bạn, nói đùa anh ấy một câu."
+    },
+    {
+      "start": 277.83,
+      "end": 280.43,
+      "en": "As a result, he probably thought I was very angry,",
+      "zh": "结果他可能以为我很生气，",
+      "pinyin": "Jiéguǒ tā kěnéng yǐwéi wǒ hěn shēngqì,",
+      "vi": "Kết quả là anh ấy có thể đã nghĩ rằng tôi rất tức giận,"
+    },
+    {
+      "start": 280.47,
+      "end": 283.1,
+      "en": "and didn't reply to my messages for a long time.",
+      "zh": "很长时间都没回我信息。",
+      "pinyin": "hěn cháng shíjiān dōu méi huí wǒ xìnxī.",
+      "vi": "và không trả lời tin nhắn của tôi trong một thời gian dài."
+    },
+    {
+      "start": 283.13,
+      "end": 287.26,
+      "en": "Later we talked it out on the phone and only then realized it was a misunderstanding.",
+      "zh": "后来我们打电话说清楚了，才发现是个误会。",
+      "pinyin": "Hòulái wǒmen dǎ diànhuà shuō qīngchu le, cái fāxiàn shì ge wùhuì.",
+      "vi": "Sau đó chúng tôi gọi điện nói rõ, mới phát hiện ra đó là một hiểu lầm."
+    },
+    {
+      "start": 287.3,
+      "end": 290.7,
+      "en": "If we had said it in person, there definitely wouldn't be this kind of problem.",
+      "zh": "如果是见面说，肯定不会有这样的问题。",
+      "pinyin": "Rúguǒ shì jiànmiàn shuō, kěndìng bú huì yǒu zhèyàng de wèntí.",
+      "vi": "Nếu nói khi gặp mặt, chắc chắn sẽ không có vấn đề như vậy."
+    },
+    {
+      "start": 290.73,
+      "end": 291.53,
+      "en": "I understand.",
+      "zh": "我理解。",
+      "pinyin": "Wǒ lǐjiě.",
+      "vi": "Tôi hiểu."
+    },
+    {
+      "start": 291.57,
+      "end": 294.7,
+      "en": "But online socializing has its benefits too, right?",
+      "zh": "不过，线上社交也有它的好处，对吧？",
+      "pinyin": "Búguò, xiànshàng shèjiāo yě yǒu tā de hǎochu, duì ba?",
+      "vi": "Nhưng mà, giao tiếp trực tuyến cũng có lợi ích của nó, đúng không?"
+    },
+    {
+      "start": 294.73,
+      "end": 297.5,
+      "en": "For example, some friends live in faraway cities,",
+      "zh": "比如，有些朋友在很远的城市，",
+      "pinyin": "Bǐrú, yǒuxiē péngyou zài hěn yuǎn de chéngshì,",
+      "vi": "Ví dụ, có những người bạn ở thành phố rất xa,"
+    },
+    {
+      "start": 297.53,
+      "end": 299.46,
+      "en": "and we can't meet often.",
+      "zh": "我们不可能经常见面。",
+      "pinyin": "wǒmen bù kěnéng jīngcháng jiànmiàn.",
+      "vi": "chúng ta không thể thường xuyên gặp mặt."
+    },
+    {
+      "start": 299.5,
+      "end": 301.73,
+      "en": "Through the internet, we can stay in touch,",
+      "zh": "通过网络，我们可以保持联系，",
+      "pinyin": "Tōngguò wǎngluò, wǒmen kěyǐ bǎochí liánxì,",
+      "vi": "Thông qua mạng, chúng ta có thể giữ liên lạc,"
+    },
+    {
+      "start": 301.77,
+      "end": 303.54,
+      "en": "and share each other's lives.",
+      "zh": "分享彼此的生活。",
+      "pinyin": "fēnxiǎng bǐcǐ de shēnghuó.",
+      "vi": "chia sẻ cuộc sống của nhau."
+    },
+    {
+      "start": 303.57,
+      "end": 305.1,
+      "en": "That's true.",
+      "zh": "这倒是真的。",
+      "pinyin": "Zhè dàoshì zhēn de.",
+      "vi": "Điều đó thì đúng là thật."
+    },
+    {
+      "start": 305.13,
+      "end": 309.13,
+      "en": "In my social media circle, there are old classmates I haven't seen in many years,",
+      "zh": "我的朋友圈里，就有很多年没见过的老同学，",
+      "pinyin": "Wǒ de péngyouquān lǐ, jiù yǒu hěn duō nián méi jiànguo de lǎo tóngxué,",
+      "vi": "Trong vòng bạn bè của tôi, có những người bạn học cũ đã nhiều năm không gặp,"
+    },
+    {
+      "start": 309.17,
+      "end": 312.27,
+      "en": "Seeing that they're doing well now makes me happy too.",
+      "zh": "看到他们现在过得很好，我也很开心。",
+      "pinyin": "kàndào tāmen xiànzài guò de hěn hǎo, wǒ yě hěn kāixīn.",
+      "vi": "thấy họ bây giờ sống rất tốt, tôi cũng rất vui."
+    },
+    {
+      "start": 312.3,
+      "end": 316.6,
+      "en": "Moreover, I think online communication gives introverts like me",
+      "zh": "而且，我觉得线上交流给了像我这样的内向者",
+      "pinyin": "Érqiě, wǒ juéde xiànshàng jiāoliú gěile xiàng wǒ zhèyàng de nèixiàngzhě",
+      "vi": "Hơn nữa, tôi thấy giao tiếp trực tuyến đã mang lại cho những người hướng nội như tôi"
+    },
+    {
+      "start": 316.63,
+      "end": 318.33,
+      "en": "a great space.",
+      "zh": "一个很好的空间。",
+      "pinyin": "yí gè hěn hǎo de kōngjiān.",
+      "vi": "một không gian rất tốt."
+    },
+    {
+      "start": 318.37,
+      "end": 320.8,
+      "en": "Sometimes, things we don't know how to say face-to-face",
+      "zh": "有时候，当面不知道怎么说的话，",
+      "pinyin": "Yǒushíhou, dāngmiàn bù zhīdào zěnme shuō de huà,",
+      "vi": "Đôi khi, những lời mà khi gặp mặt không biết nói thế nào,"
+    },
+    {
+      "start": 320.83,
+      "end": 324.1,
+      "en": "can be expressed very easily by typing.",
+      "zh": "通过打字就可以很轻松地表达出来。",
+      "pinyin": "tōngguò dǎzì jiù kěyǐ hěn qīngsōng de biǎodá chūlái.",
+      "vi": "chỉ cần qua việc gõ chữ là có thể diễn đạt rất dễ dàng."
+    },
+    {
+      "start": 324.13,
+      "end": 326.6,
+      "en": "For me, that makes the pressure much lower.",
+      "zh": "这对我来说，压力会小很多。",
+      "pinyin": "Zhè duì wǒ lái shuō, yālì huì xiǎo hěn duō.",
+      "vi": "Điều này đối với tôi, áp lực sẽ nhỏ hơn nhiều."
+    },
+    {
+      "start": 326.63,
+      "end": 328.93,
+      "en": "Hmm, what you said makes sense too.",
+      "zh": "嗯，你说的也有道理。",
+      "pinyin": "Ng, nǐ shuō de yě yǒu dàolǐ.",
+      "vi": "Ừm, điều bạn nói cũng có lý."
+    },
+    {
+      "start": 328.97,
+      "end": 332.74,
+      "en": "And nowadays WeChat stickers are especially popular,",
+      "zh": "而且现在微信的“表情包”特别流行，",
+      "pinyin": "Érqiě xiànzài Wēixìn de “biǎoqíngbāo” tèbié liúxíng,",
+      "vi": "Hơn nữa hiện nay “sticker” của WeChat rất thịnh hành,"
+    },
+    {
+      "start": 332.77,
+      "end": 337.07,
+      "en": "people use all kinds of funny pictures to express their feelings,",
+      "zh": "大家用各种有趣的图片来表达自己的心情，",
+      "pinyin": "dàjiā yòng gè zhǒng yǒuqù de túpiàn lái biǎodá zìjǐ de xīnqíng,",
+      "vi": "mọi người dùng đủ loại hình ảnh thú vị để thể hiện tâm trạng của mình,"
+    },
+    {
+      "start": 337.1,
+      "end": 341,
+      "en": "and it can be seen as adding a bit of fun and warmth to chatting.",
+      "zh": "也算是增加了一点聊天的乐趣和温度。",
+      "pinyin": "yě suànshì zēngjiāle yìdiǎn liáotiān de lèqù hé wēndù.",
+      "vi": "cũng coi như đã tăng thêm một chút niềm vui và sự ấm áp cho việc trò chuyện."
+    },
+    {
+      "start": 341.03,
+      "end": 345.53,
+      "en": "Yes, stickers have now become a new kind of language.",
+      "zh": "是的，表情包现在已经成了一种新的语言。",
+      "pinyin": "Shì de, biǎoqíngbāo xiànzài yǐjīng chéngle yì zhǒng xīn de yǔyán.",
+      "vi": "Đúng vậy, sticker bây giờ đã trở thành một loại ngôn ngữ mới."
+    },
+    {
+      "start": 345.57,
+      "end": 349.67,
+      "en": "But speaking of that, another question comes to mind.",
+      "zh": "不过，说到这里，我又想到了另一个问题。",
+      "pinyin": "Búguò, shuōdào zhèlǐ, wǒ yòu xiǎngdàole lìng yí gè wèntí.",
+      "vi": "Nhưng mà, nói đến đây, tôi lại nghĩ đến một vấn đề khác."
+    },
+    {
+      "start": 349.7,
+      "end": 352.13,
+      "en": "Because online socializing is so convenient,",
+      "zh": "因为网络社交太方便了，",
+      "pinyin": "Yīnwèi wǎngluò shèjiāo tài fāngbiàn le,",
+      "vi": "Bởi vì giao tiếp qua mạng quá tiện lợi,"
+    },
+    {
+      "start": 352.17,
+      "end": 354.64,
+      "en": "could it make us lazier and lazier,",
+      "zh": "会不会让我们变得越来越懒，",
+      "pinyin": "huì bu huì ràng wǒmen biàn de yuèláiyuè lǎn,",
+      "vi": "liệu có khiến chúng ta trở nên ngày càng lười biếng,"
+    },
+    {
+      "start": 354.67,
+      "end": 357.87,
+      "en": "too lazy to go out and meet real friends?",
+      "zh": "懒得出门去见真正的朋友了？",
+      "pinyin": "lǎn de chūmén qù jiàn zhēnzhèng de péngyou le?",
+      "vi": "lười ra ngoài gặp những người bạn thật sự?"
+    },
+    {
+      "start": 357.9,
+      "end": 359.07,
+      "en": "I think it will!",
+      "zh": "我觉得会！",
+      "pinyin": "Wǒ juéde huì!",
+      "vi": "Tôi nghĩ là có!"
+    },
+    {
+      "start": 359.1,
+      "end": 362.4,
+      "en": "Sometimes on weekends, a friend invites me out to eat,",
+      "zh": "有时候周末，朋友约我出去吃饭，",
+      "pinyin": "Yǒushíhou zhōumò, péngyou yuē wǒ chūqù chīfàn,",
+      "vi": "Có khi vào cuối tuần, bạn rủ tôi ra ngoài ăn cơm,"
+    },
+    {
+      "start": 362.43,
+      "end": 367.46,
+      "en": "as soon as I think about having to change clothes and take transportation, I feel it's such a hassle,",
+      "zh": "我一想到要换衣服，要坐车，就觉得好麻烦，",
+      "pinyin": "wǒ yì xiǎngdào yào huàn yīfu, yào zuò chē, jiù juéde hǎo máfan,",
+      "vi": "tôi vừa nghĩ đến việc phải thay quần áo, phải đi xe, là đã thấy thật phiền phức,"
+    },
+    {
+      "start": 367.5,
+      "end": 371.7,
+      "en": "and think, we might as well just chat online.",
+      "zh": "心想，还不如我们在线上聊聊天算了。",
+      "pinyin": "xīn xiǎng, hái bùrú wǒmen zài xiànshàng liáoliao tiān suàn le.",
+      "vi": "trong lòng nghĩ, chi bằng chúng ta trò chuyện trực tuyến cho xong."
+    },
+    {
+      "start": 371.73,
+      "end": 374.13,
+      "en": "You see, that's exactly the problem.",
+      "zh": "你看，这就是问题所在。",
+      "pinyin": "Nǐ kàn, zhè jiùshì wèntí suǒzài.",
+      "vi": "Bạn thấy đấy, đây chính là vấn đề."
+    },
+    {
+      "start": 374.17,
+      "end": 375.9,
+      "en": "We save time,",
+      "zh": "我们节省了时间，",
+      "pinyin": "Wǒmen jiéshěngle shíjiān,",
+      "vi": "Chúng ta đã tiết kiệm thời gian,"
+    },
+    {
+      "start": 375.93,
+      "end": 379.7,
+      "en": "but may also lose something more precious.",
+      "zh": "但可能也失去了一些更珍贵的东西。",
+      "pinyin": "dàn kěnéng yě shīqùle yìxiē gèng zhēnguì de dōngxi.",
+      "vi": "nhưng có thể cũng đã đánh mất một số thứ quý giá hơn."
+    },
+    {
+      "start": 379.73,
+      "end": 382.7,
+      "en": "For example, when eating face-to-face with friends,",
+      "zh": "比如，和朋友面对面吃饭时，",
+      "pinyin": "Bǐrú, hé péngyou miànduìmiàn chīfàn shí,",
+      "vi": "Ví dụ, khi ăn cơm mặt đối mặt với bạn bè,"
+    },
+    {
+      "start": 382.73,
+      "end": 385.23,
+      "en": "that joy of sharing food,",
+      "zh": "那种分享食物的快乐，",
+      "pinyin": "nà zhǒng fēnxiǎng shíwù de kuàilè,",
+      "vi": "niềm vui được chia sẻ đồ ăn đó,"
+    },
+    {
+      "start": 385.27,
+      "end": 388.64,
+      "en": "that warmth of seeing the other person's genuine smile.",
+      "zh": "那种看到对方真实笑容的温暖。",
+      "pinyin": "nà zhǒng kàndào duìfāng zhēnshí xiàoróng de wēnnuǎn.",
+      "vi": "sự ấm áp khi nhìn thấy nụ cười thật sự của đối phương."
+    },
+    {
+      "start": 388.67,
+      "end": 390.14,
+      "en": "I completely agree.",
+      "zh": "我完全同意。",
+      "pinyin": "Wǒ wánquán tóngyì.",
+      "vi": "Tôi hoàn toàn đồng ý."
+    },
+    {
+      "start": 390.17,
+      "end": 391.87,
+      "en": "This kind of real experience",
+      "zh": "这种真实的体验，",
+      "pinyin": "Zhè zhǒng zhēnshí de tǐyàn,",
+      "vi": "Trải nghiệm chân thật này,"
+    },
+    {
+      "start": 391.9,
+      "end": 395.03,
+      "en": "cannot be replaced by any sticker.",
+      "zh": "是任何表情包都代替不了的。",
+      "pinyin": "shì rènhé biǎoqíngbāo dōu dàitì bùliǎo de.",
+      "vi": "là thứ mà bất kỳ sticker nào cũng không thể thay thế được."
+    },
+    {
+      "start": 395.07,
+      "end": 398.7,
+      "en": "Moreover, whether online or offline,",
+      "zh": "而且，不管是线上还是线下，",
+      "pinyin": "Érqiě, bùguǎn shì xiànshàng háishì xiànxià,",
+      "vi": "Hơn nữa, dù là trực tuyến hay ngoại tuyến,"
+    },
+    {
+      "start": 398.73,
+      "end": 401.86,
+      "en": "socializing can sometimes bring us pressure too.",
+      "zh": "社交有时候也会给我们带来压力。",
+      "pinyin": "shèjiāo yǒushíhou yě huì gěi wǒmen dàilái yālì.",
+      "vi": "giao tiếp đôi khi cũng mang lại áp lực cho chúng ta."
+    },
+    {
+      "start": 401.9,
+      "end": 402.87,
+      "en": "What do you think?",
+      "zh": "你觉得呢？",
+      "pinyin": "Nǐ juéde ne?",
+      "vi": "Bạn thấy thế nào?"
+    },
+    {
+      "start": 402.9,
+      "end": 406.67,
+      "en": "Of course there is! It's called 'social pressure.'",
+      "zh": "当然有！这叫“社交压力”。",
+      "pinyin": "Dāngrán yǒu! Zhè jiào “shèjiāo yālì”.",
+      "vi": "Tất nhiên là có! Đây gọi là “áp lực giao tiếp”."
+    },
+    {
+      "start": 406.7,
+      "end": 411.13,
+      "en": "For example, sometimes after working all day, I'm really tired at night,",
+      "zh": "比如，有时候我工作了一天，晚上真的很累，",
+      "pinyin": "Bǐrú, yǒushíhou wǒ gōngzuòle yì tiān, wǎnshang zhēn de hěn lèi,",
+      "vi": "Ví dụ, có khi tôi làm việc cả một ngày, buổi tối thật sự rất mệt,"
+    },
+    {
+      "start": 411.17,
+      "end": 414.47,
+      "en": "and just want to stay quietly by myself.",
+      "zh": "只想一个人安安静静地待着。",
+      "pinyin": "zhǐ xiǎng yí gè rén ān'ānjìngjìng de dāi zhe.",
+      "vi": "chỉ muốn ở một mình yên yên tĩnh tĩnh."
+    },
+    {
+      "start": 414.5,
+      "end": 416.1,
+      "en": "But if at this time",
+      "zh": "但是，如果这时候",
+      "pinyin": "Dànshì, rúguǒ zhè shíhou",
+      "vi": "Nhưng, nếu lúc này"
+    },
+    {
+      "start": 416.13,
+      "end": 418.93,
+      "en": "A friend calls to invite me out to a gathering,",
+      "zh": "有朋友打电话叫我出去聚会，",
+      "pinyin": "yǒu péngyou dǎ diànhuà jiào wǒ chūqù jùhuì,",
+      "vi": "Có bạn gọi điện rủ tôi ra ngoài tụ tập,"
+    },
+    {
+      "start": 418.97,
+      "end": 421.84,
+      "en": "Sometimes I don’t know how to say no.",
+      "zh": "我有时候会不知道怎么拒绝。",
+      "pinyin": "wǒ yǒushíhou huì bù zhīdào zěnme jùjué.",
+      "vi": "Có lúc tôi không biết phải từ chối thế nào."
+    },
+    {
+      "start": 421.87,
+      "end": 423,
+      "en": "Why is that?",
+      "zh": "为什么呢？",
+      "pinyin": "Wèi shénme ne?",
+      "vi": "Tại sao vậy?"
+    },
+    {
+      "start": 423.03,
+      "end": 425.53,
+      "en": "I’m afraid that if I refuse,",
+      "zh": "我害怕如果我拒绝了，",
+      "pinyin": "Wǒ hàipà rúguǒ wǒ jùjué le,",
+      "vi": "Tôi sợ rằng nếu tôi từ chối,"
+    },
+    {
+      "start": 425.57,
+      "end": 428.14,
+      "en": "my friends will think I don’t like them,",
+      "zh": "朋友会觉得我不喜欢他们，",
+      "pinyin": "péngyou huì juéde wǒ bù xǐhuan tāmen,",
+      "vi": "bạn bè sẽ nghĩ rằng tôi không thích họ,"
+    },
+    {
+      "start": 428.17,
+      "end": 432.1,
+      "en": "or they won’t invite me again next time.",
+      "zh": "或者下次他们就不会再叫我了。",
+      "pinyin": "huòzhě xià cì tāmen jiù bú huì zài jiào wǒ le.",
+      "vi": "hoặc lần sau họ sẽ không rủ tôi nữa."
+    },
+    {
+      "start": 432.13,
+      "end": 437.1,
+      "en": "And when I see everyone posting photos of hanging out together on Moments,",
+      "zh": "而且看到大家都在朋友圈里发一起玩的照片，",
+      "pinyin": "Érqiě kàndào dàjiā dōu zài péngyouquān lǐ fā yìqǐ wán de zhàopiàn,",
+      "vi": "Hơn nữa, khi thấy mọi người đều đăng ảnh đi chơi cùng nhau trên Moments,"
+    },
+    {
+      "start": 437.13,
+      "end": 440.8,
+      "en": "and I’m the only one absent, I feel a little uncomfortable.",
+      "zh": "只有我不在，心里会有点儿不舒服。",
+      "pinyin": "zhǐyǒu wǒ bú zài, xīnli huì yǒudiǎnr bù shūfu.",
+      "vi": "chỉ có tôi không ở đó, trong lòng sẽ hơi khó chịu."
+    },
+    {
+      "start": 440.83,
+      "end": 443.4,
+      "en": "I totally understand that feeling.",
+      "zh": "我非常理解这种感觉。",
+      "pinyin": "Wǒ fēicháng lǐjiě zhè zhǒng gǎnjué.",
+      "vi": "Tôi rất hiểu cảm giác này."
+    },
+    {
+      "start": 443.43,
+      "end": 445.73,
+      "en": "It’s as if we’re afraid of being forgotten by everyone,",
+      "zh": "好像我们害怕被大家忘记，",
+      "pinyin": "Hǎoxiàng wǒmen hàipà bèi dàjiā wàngjì,",
+      "vi": "Cứ như thể chúng ta sợ bị mọi người quên lãng,"
+    },
+    {
+      "start": 445.77,
+      "end": 448.24,
+      "en": "afraid of missing something important.",
+      "zh": "害怕错过一些重要的事。",
+      "pinyin": "hàipà cuòguò yìxiē zhòngyào de shì.",
+      "vi": "sợ bỏ lỡ những việc quan trọng nào đó."
+    },
+    {
+      "start": 448.27,
+      "end": 451.74,
+      "en": "This may be a common worry for many modern people.",
+      "zh": "这可能是很多现代人的共同烦恼。",
+      "pinyin": "Zhè kěnéng shì hěnduō xiàndàirén de gòngtóng fánnǎo.",
+      "vi": "Đây có lẽ là nỗi phiền chung của nhiều người hiện đại."
+    },
+    {
+      "start": 451.77,
+      "end": 454.34,
+      "en": "Yeah, have you ever felt this way?",
+      "zh": "是啊，你有没有这种时候？",
+      "pinyin": "Shì a, nǐ yǒu méiyǒu zhè zhǒng shíhou?",
+      "vi": "Đúng vậy, bạn có từng như vậy chưa?"
+    },
+    {
+      "start": 454.37,
+      "end": 459.14,
+      "en": "Of course. But later I slowly figured it out.",
+      "zh": "当然有。不过后来我慢慢想明白了。",
+      "pinyin": "Dāngrán yǒu. Búguò hòulái wǒ mànmàn xiǎng míngbai le.",
+      "vi": "Tất nhiên là có. Nhưng sau đó tôi dần dần nghĩ ra."
+    },
+    {
+      "start": 459.17,
+      "end": 463.64,
+      "en": "I think social energy is like a phone battery.",
+      "zh": "我觉得，社交的能量就像手机的电池。",
+      "pinyin": "Wǒ juéde, shèjiāo de néngliàng jiù xiàng shǒujī de diànchí.",
+      "vi": "Tôi nghĩ năng lượng xã giao giống như pin điện thoại."
+    },
+    {
+      "start": 463.67,
+      "end": 467.5,
+      "en": "Some activities can charge your battery and make you happy;",
+      "zh": "有些活动能给你的电池充电，让你开心；",
+      "pinyin": "Yǒuxiē huódòng néng gěi nǐ de diànchí chōngdiàn, ràng nǐ kāixīn;",
+      "vi": "Một số hoạt động có thể sạc pin cho bạn, khiến bạn vui vẻ;"
+    },
+    {
+      "start": 467.53,
+      "end": 471.93,
+      "en": "Some activities drain your battery and make you tired.",
+      "zh": "有些活动会消耗你的电池，让你疲惫。",
+      "pinyin": "Yǒuxiē huódòng huì xiāohào nǐ de diànchí, ràng nǐ píbèi.",
+      "vi": "Một số hoạt động sẽ tiêu hao pin của bạn, khiến bạn mệt mỏi."
+    },
+    {
+      "start": 471.97,
+      "end": 475.7,
+      "en": "You need to clearly know which ones charge you,",
+      "zh": "你需要清楚地知道，哪些是充电的，",
+      "pinyin": "Nǐ xūyào qīngchu de zhīdào, nǎxiē shì chōngdiàn de,",
+      "vi": "Bạn cần biết rõ hoạt động nào là sạc pin,"
+    },
+    {
+      "start": 475.73,
+      "end": 477.53,
+      "en": "and which ones drain you.",
+      "zh": "哪些是耗电的。",
+      "pinyin": "nǎxiē shì hàodiàn de.",
+      "vi": "hoạt động nào là hao pin."
+    },
+    {
+      "start": 477.53,
+      "end": 478.66,
+      "en": "Wow,",
+      "zh": "哇，",
+      "pinyin": "Wā,",
+      "vi": "Ồ,"
+    },
+    {
+      "start": 478.7,
+      "end": 480.73,
+      "en": "That metaphor is great!",
+      "zh": "这个比喻太好了！",
+      "pinyin": "zhège bǐyù tài hǎo le!",
+      "vi": "Cách so sánh này hay quá!"
+    },
+    {
+      "start": 480.77,
+      "end": 483.84,
+      "en": "Social energy is like a phone battery. Right.",
+      "zh": "社交能量像手机电池。对。",
+      "pinyin": "Shèjiāo néngliàng xiàng shǒujī diànchí. Duì.",
+      "vi": "Năng lượng xã giao giống pin điện thoại. Đúng vậy."
+    },
+    {
+      "start": 483.87,
+      "end": 486.4,
+      "en": "So, when you feel tired,",
+      "zh": "所以，当你觉得累的时候，",
+      "pinyin": "Suǒyǐ, dāng nǐ juéde lèi de shíhou,",
+      "vi": "Vì vậy, khi bạn thấy mệt,"
+    },
+    {
+      "start": 486.43,
+      "end": 489.53,
+      "en": "refusing a social activity that drains you",
+      "zh": "拒绝一个让你耗电的社交活动，",
+      "pinyin": "jùjué yí ge ràng nǐ hàodiàn de shèjiāo huódòng,",
+      "vi": "từ chối một hoạt động xã giao khiến bạn hao pin,"
+    },
+    {
+      "start": 489.57,
+      "end": 493,
+      "en": "is actually protecting your own “battery.”",
+      "zh": "其实是在保护你自己的“电池”。",
+      "pinyin": "qíshí shì zài bǎohù nǐ zìjǐ de “diànchí”.",
+      "vi": "thực ra là đang bảo vệ “pin” của chính bạn."
+    },
+    {
+      "start": 493.03,
+      "end": 495.8,
+      "en": "True good friends will understand you.",
+      "zh": "真正的好朋友，是会理解你的。",
+      "pinyin": "Zhēnzhèng de hǎo péngyou, shì huì lǐjiě nǐ de.",
+      "vi": "Những người bạn thật sự tốt sẽ hiểu bạn."
+    },
+    {
+      "start": 495.83,
+      "end": 498.63,
+      "en": "What they care about is whether you’re happy,",
+      "zh": "他们关心的是你是否开心，",
+      "pinyin": "Tāmen guānxīn de shì nǐ shìfǒu kāixīn,",
+      "vi": "Họ quan tâm là bạn có vui hay không,"
+    },
+    {
+      "start": 498.67,
+      "end": 502.07,
+      "en": "not whether you attended every gathering.",
+      "zh": "而不是你是否参加了每一次聚会。",
+      "pinyin": "ér bú shì nǐ shìfǒu cānjiā le měi yí cì jùhuì.",
+      "vi": "chứ không phải bạn có tham gia mọi buổi tụ tập hay không."
+    },
+    {
+      "start": 502.07,
+      "end": 503.7,
+      "en": "You’re right.",
+      "zh": "你说得对。",
+      "pinyin": "Nǐ shuō de duì.",
+      "vi": "Bạn nói đúng."
+    },
+    {
+      "start": 503.7,
+      "end": 508,
+      "en": "We should focus more on the quality of socializing than the quantity.",
+      "zh": "我们应该更关注社交的质量，而不是数量。",
+      "pinyin": "Wǒmen yīnggāi gèng guānzhù shèjiāo de zhìliàng, ér bú shì shùliàng.",
+      "vi": "Chúng ta nên quan tâm hơn đến chất lượng xã giao, chứ không phải số lượng."
+    },
+    {
+      "start": 508.03,
+      "end": 511.73,
+      "en": "Rather than attending ten boring parties, it’s better to have one or two",
+      "zh": "与其参加十个无聊的派对，不如和一两个",
+      "pinyin": "Yǔqí cānjiā shí ge wúliáo de pàiduì, bùrú hé yì liǎng ge",
+      "vi": "Thay vì tham gia mười bữa tiệc nhàm chán, chi bằng cùng một hai"
+    },
+    {
+      "start": 511.77,
+      "end": 515.2,
+      "en": "close friends have a deep conversation.",
+      "zh": "好朋友进行一次深入的谈话。",
+      "pinyin": "hǎo péngyou jìnxíng yí cì shēnrù de tánhuà.",
+      "vi": "người bạn tốt có một cuộc trò chuyện sâu sắc."
+    },
+    {
+      "start": 515.23,
+      "end": 516.43,
+      "en": "Exactly right.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn đúng."
+    },
+    {
+      "start": 516.47,
+      "end": 518.14,
+      "en": "Being alone is the same.",
+      "zh": "独处也是一样。",
+      "pinyin": "Dúchǔ yě shì yíyàng.",
+      "vi": "Ở một mình cũng vậy."
+    },
+    {
+      "start": 518.17,
+      "end": 521.84,
+      "en": "High-quality solitude isn’t shutting yourself away to play on your phone;",
+      "zh": "高质量的独处，不是把自己关起来玩手机，",
+      "pinyin": "Gāo zhìliàng de dúchǔ, bú shì bǎ zìjǐ guān qǐlái wán shǒujī,",
+      "vi": "Ở một mình chất lượng cao không phải là nhốt mình lại chơi điện thoại,"
+    },
+    {
+      "start": 521.87,
+      "end": 526.24,
+      "en": "instead, it’s using that time to do things that truly relax you",
+      "zh": "而是利用那段时间，做一些真正让自己放松",
+      "pinyin": "ér shì lìyòng nà duàn shíjiān, zuò yìxiē zhēnzhèng ràng zìjǐ fàngsōng",
+      "vi": "mà là tận dụng khoảng thời gian đó để làm những việc thật sự khiến mình thư giãn"
+    },
+    {
+      "start": 526.27,
+      "end": 529.1,
+      "en": "and help you grow, such as reading,",
+      "zh": "和成长的事情，比如阅读、",
+      "pinyin": "hé chéngzhǎng de shìqing, bǐrú yuèdú,",
+      "vi": "và phát triển bản thân, như đọc sách,"
+    },
+    {
+      "start": 529.13,
+      "end": 532,
+      "en": "exercising, or learning a new skill.",
+      "zh": "运动、学习一个新技能。",
+      "pinyin": "yùndòng, xuéxí yí ge xīn jìnéng.",
+      "vi": "tập thể dục, học một kỹ năng mới."
+    },
+    {
+      "start": 532.03,
+      "end": 535.03,
+      "en": "This is the true meaning of solitude.",
+      "zh": "这才是独处的真正意义。",
+      "pinyin": "Zhè cái shì dúchǔ de zhēnzhèng yìyì.",
+      "vi": "Đây mới là ý nghĩa thật sự của việc ở một mình."
+    },
+    {
+      "start": 535.07,
+      "end": 536.27,
+      "en": "I get it.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 536.3,
+      "end": 539.2,
+      "en": "Whether we choose to socialize or be alone,",
+      "zh": "无论是选择社交还是独处，",
+      "pinyin": "Wúlùn shì xuǎnzé shèjiāo háishì dúchǔ,",
+      "vi": "Dù chọn giao tiếp xã hội hay ở một mình,"
+    },
+    {
+      "start": 539.23,
+      "end": 542.9,
+      "en": "the most important thing isn’t the form, but whether we",
+      "zh": "最重要的都不是形式，而是我们",
+      "pinyin": "zuì zhòngyào de dōu bú shì xíngshì, ér shì wǒmen",
+      "vi": "điều quan trọng nhất đều không phải là hình thức, mà là chúng ta"
+    },
+    {
+      "start": 542.93,
+      "end": 546.66,
+      "en": "can gain true happiness and energy from it.",
+      "zh": "能不能从中获得真正的快乐和能量。",
+      "pinyin": "néng bu néng cóng zhōng huòdé zhēnzhèng de kuàilè hé néngliàng.",
+      "vi": "có thể có được niềm vui và năng lượng thật sự từ đó hay không."
+    },
+    {
+      "start": 546.7,
+      "end": 551.1,
+      "en": "Yes, find the balance point that makes you most comfortable.",
+      "zh": "是的，找到那个让自己最舒服的平衡点。",
+      "pinyin": "Shì de, zhǎodào nàge ràng zìjǐ zuì shūfu de pínghéng diǎn.",
+      "vi": "Đúng vậy, hãy tìm điểm cân bằng khiến mình thoải mái nhất."
+    },
+    {
+      "start": 551.13,
+      "end": 554.33,
+      "en": "All right, today we’ve centered on “solitude",
+      "zh": "好了，今天我们围绕“独处",
+      "pinyin": "Hǎo le, jīntiān wǒmen wéirào “dúchǔ",
+      "vi": "Được rồi, hôm nay chúng ta xoay quanh “ở một mình"
+    },
+    {
+      "start": 554.37,
+      "end": 556.5,
+      "en": "or socializing” as a topic,",
+      "zh": "还是社交”这个话题，",
+      "pinyin": "háishì shèjiāo” zhège huàtí,",
+      "vi": "hay xã giao” chủ đề này,"
+    },
+    {
+      "start": 556.53,
+      "end": 559.23,
+      "en": "and discussed it from different angles.",
+      "zh": "从不同的角度进行了探讨。",
+      "pinyin": "cóng bùtóng de jiǎodù jìnxíng le tàntǎo.",
+      "vi": "và đã thảo luận từ nhiều góc độ khác nhau."
+    },
+    {
+      "start": 559.27,
+      "end": 562.24,
+      "en": "Let’s briefly summarize a few",
+      "zh": "我们来简单总结一下今天聊到的几个",
+      "pinyin": "Wǒmen lái jiǎndān zǒngjié yíxià jīntiān liáodào de jǐ ge",
+      "vi": "Chúng ta hãy tóm tắt đơn giản vài"
+    },
+    {
+      "start": 562.27,
+      "end": 564.14,
+      "en": "key points we talked about today. Okay.",
+      "zh": "关键点。好的。",
+      "pinyin": "guānjiàn diǎn. Hǎo de.",
+      "vi": "điểm chính đã nói hôm nay. Được."
+    },
+    {
+      "start": 564.17,
+      "end": 568.74,
+      "en": "First, everyone’s need for socializing and solitude is different,",
+      "zh": "第一，每个人对社交和独处的需求是不同的，",
+      "pinyin": "Dì yī, měi ge rén duì shèjiāo hé dúchǔ de xūqiú shì bùtóng de,",
+      "vi": "Thứ nhất, nhu cầu xã giao và ở một mình của mỗi người là khác nhau,"
+    },
+    {
+      "start": 568.77,
+      "end": 572.24,
+      "en": "This is related to whether we have an introverted or extroverted personality,",
+      "zh": "这和我们是内向还是外向的性格有关，",
+      "pinyin": "zhè hé wǒmen shì nèixiàng háishì wàixiàng de xìnggé yǒuguān,",
+      "vi": "Điều này liên quan đến việc chúng ta có tính cách hướng nội hay hướng ngoại,"
+    },
+    {
+      "start": 572.27,
+      "end": 573.9,
+      "en": "There is no good or bad distinction.",
+      "zh": "没有好坏之分。",
+      "pinyin": "méiyǒu hǎo huài zhī fēn.",
+      "vi": "Không có sự phân biệt tốt xấu."
+    },
+    {
+      "start": 573.93,
+      "end": 575.9,
+      "en": "What matters is understanding yourself,",
+      "zh": "重要的是了解自己，",
+      "pinyin": "Zhòngyào de shì liǎojiě zìjǐ,",
+      "vi": "Điều quan trọng là hiểu chính mình,"
+    },
+    {
+      "start": 575.93,
+      "end": 579.1,
+      "en": "and knowing what can “recharge” you.",
+      "zh": "知道什么能给自己“充电”。",
+      "pinyin": "zhīdào shénme néng gěi zìjǐ “chōngdiàn”.",
+      "vi": "biết điều gì có thể “sạc pin” cho bản thân."
+    },
+    {
+      "start": 579.13,
+      "end": 582.5,
+      "en": "Second, modern online socializing is very convenient,",
+      "zh": "第二，现代的线上社交很方便，",
+      "pinyin": "Dì èr, xiàndài de xiànshàng shèjiāo hěn fāngbiàn,",
+      "vi": "Thứ hai, giao tiếp xã hội trực tuyến hiện đại rất tiện lợi,"
+    },
+    {
+      "start": 582.53,
+      "end": 586.26,
+      "en": "but it lacks the “warmth” of face-to-face communication,",
+      "zh": "但它缺少了面对面交流的“温度”，",
+      "pinyin": "dàn tā quēshǎo le miànduìmiàn jiāoliú de “wēndù”,",
+      "vi": "nhưng nó thiếu đi “sự ấm áp” của giao tiếp trực tiếp,"
+    },
+    {
+      "start": 586.3,
+      "end": 590.87,
+      "en": "We cannot completely rely on it and ignore real-life meetings.",
+      "zh": "我们不能完全依赖它而忽略了真实的见面。",
+      "pinyin": "Wǒmen bùnéng wánquán yīlài tā ér hūlüè le zhēnshí de jiànmiàn.",
+      "vi": "Chúng ta không thể hoàn toàn dựa vào nó mà bỏ qua những cuộc gặp gỡ thật sự."
+    },
+    {
+      "start": 590.9,
+      "end": 593.07,
+      "en": "Third, and most importantly,",
+      "zh": "第三，也是最重要的，",
+      "pinyin": "Dì sān, yě shì zuì zhòngyào de,",
+      "vi": "Thứ ba, cũng là điều quan trọng nhất,"
+    },
+    {
+      "start": 593.1,
+      "end": 595.87,
+      "en": "we need to learn to handle “social pressure”,",
+      "zh": "我们要学会处理“社交压力”，",
+      "pinyin": "wǒmen yào xuéhuì chǔlǐ “shèjiāo yālì”,",
+      "vi": "chúng ta cần học cách xử lý “áp lực xã hội”,"
+    },
+    {
+      "start": 595.9,
+      "end": 599.53,
+      "en": "and bravely choose the ways that make us comfortable.",
+      "zh": "勇敢地选择让自己舒服的方式。",
+      "pinyin": "yǒnggǎn de xuǎnzé ràng zìjǐ shūfu de fāngshì.",
+      "vi": "và dũng cảm chọn cách khiến bản thân thoải mái."
+    },
+    {
+      "start": 599.57,
+      "end": 603.44,
+      "en": "The meaning of socializing lies in quality, not quantity.",
+      "zh": "社交的意义在于质量，而不是数量。",
+      "pinyin": "Shèjiāo de yìyì zàiyú zhìliàng, ér bùshì shùliàng.",
+      "vi": "Ý nghĩa của giao tiếp xã hội nằm ở chất lượng, chứ không phải số lượng."
+    },
+    {
+      "start": 603.47,
+      "end": 605.34,
+      "en": "That summary is very clear!",
+      "zh": "总结得非常清晰！",
+      "pinyin": "Zǒngjié de fēicháng qīngxī!",
+      "vi": "Tóm tắt rất rõ ràng!"
+    },
+    {
+      "start": 605.37,
+      "end": 606.5,
+      "en": "I hope our discussion,",
+      "zh": "希望我们的讨论，",
+      "pinyin": "Xīwàng wǒmen de tǎolùn,",
+      "vi": "Hy vọng cuộc thảo luận của chúng ta,"
+    },
+    {
+      "start": 606.53,
+      "end": 609.3,
+      "en": "can bring everyone some new reflections.",
+      "zh": "能给大家带来一些新的思考。",
+      "pinyin": "néng gěi dàjiā dàilái yīxiē xīn de sīkǎo.",
+      "vi": "có thể mang đến cho mọi người một vài suy nghĩ mới."
+    },
+    {
+      "start": 609.33,
+      "end": 610.06,
+      "en": "Mm!",
+      "zh": "嗯！",
+      "pinyin": "Èn!",
+      "vi": "Ừm!"
+    },
+    {
+      "start": 610.07,
+      "end": 613.47,
+      "en": "If you want to review what we talked about today,",
+      "zh": "如果大家想回顾今天我们聊天的内容，",
+      "pinyin": "Rúguǒ dàjiā xiǎng huígù jīntiān wǒmen liáotiān de nèiróng,",
+      "vi": "Nếu mọi người muốn xem lại nội dung trò chuyện hôm nay của chúng ta,"
+    },
+    {
+      "start": 613.5,
+      "end": 616,
+      "en": "you can check out our blog.",
+      "zh": "可以去我们的博客看看。",
+      "pinyin": "kěyǐ qù wǒmen de bókè kànkan.",
+      "vi": "có thể đến blog của chúng tôi xem thử."
+    },
+    {
+      "start": 616.03,
+      "end": 619.86,
+      "en": "We put the full transcript of every episode there,",
+      "zh": "我们把每一期节目的完整文本都放在上面了，",
+      "pinyin": "Wǒmen bǎ měi yī qī jiémù de wánzhěng wénběn dōu fàng zài shàngmiàn le,",
+      "vi": "Chúng tôi đã đặt toàn bộ văn bản đầy đủ của mỗi tập lên đó,"
+    },
+    {
+      "start": 619.9,
+      "end": 622.23,
+      "en": "so it is convenient for everyone to study.",
+      "zh": "方便大家学习。",
+      "pinyin": "fāngbiàn dàjiā xuéxí.",
+      "vi": "để mọi người tiện học tập."
+    },
+    {
+      "start": 622.27,
+      "end": 623.94,
+      "en": "The blog address is",
+      "zh": "博客的地址是",
+      "pinyin": "Bókè de dìzhǐ shì",
+      "vi": "Địa chỉ blog là"
+    },
+    {
+      "start": 623.97,
+      "end": 628.14,
+      "en": "chinesedailypodcast.blogspot.com.",
+      "zh": "chinesedailypodcast.blogspot.com。",
+      "pinyin": "chinesedailypodcast.blogspot.com.",
+      "vi": "chinesedailypodcast.blogspot.com."
+    },
+    {
+      "start": 628.17,
+      "end": 631.34,
+      "en": "Yes, you are welcome to read and review it.",
+      "zh": "是的，欢迎大家去阅读和复习。",
+      "pinyin": "Shì de, huānyíng dàjiā qù yuèdú hé fùxí.",
+      "vi": "Đúng vậy, hoan nghênh mọi người đến đọc và ôn tập."
+    },
+    {
+      "start": 631.37,
+      "end": 635.84,
+      "en": "So, at the end of the episode, we also want to ask you who are listening:",
+      "zh": "那么，节目的最后，也想问问正在收听的你：",
+      "pinyin": "Nàme, jiémù de zuìhòu, yě xiǎng wènwen zhèngzài shōutīng de nǐ:",
+      "vi": "Vậy thì, ở cuối chương trình, chúng tôi cũng muốn hỏi bạn đang nghe đây:"
+    },
+    {
+      "start": 635.87,
+      "end": 638.3,
+      "en": "Do you prefer being alone,",
+      "zh": "你是更喜欢一个人待着，",
+      "pinyin": "Nǐ shì gèng xǐhuan yī gè rén dāi zhe,",
+      "vi": "Bạn thích ở một mình hơn,"
+    },
+    {
+      "start": 638.33,
+      "end": 641.86,
+      "en": "or do you prefer being with friends?",
+      "zh": "还是更喜欢和朋友们在一起呢？",
+      "pinyin": "háishì gèng xǐhuan hé péngyoumen zài yīqǐ ne?",
+      "vi": "hay thích ở bên bạn bè hơn?"
+    },
+    {
+      "start": 641.9,
+      "end": 645.13,
+      "en": "And what is your favorite way of socializing?",
+      "zh": "你最喜欢的社交方式又是什么呢？",
+      "pinyin": "Nǐ zuì xǐhuan de shèjiāo fāngshì yòu shì shénme ne?",
+      "vi": "Cách giao tiếp xã hội mà bạn thích nhất lại là gì?"
+    },
+    {
+      "start": 645.17,
+      "end": 648.07,
+      "en": "You are very welcome to leave us comments in the comment section,",
+      "zh": "非常欢迎大家在评论区给我们留言，",
+      "pinyin": "Fēicháng huānyíng dàjiā zài pínglùnqū gěi wǒmen liúyán,",
+      "vi": "Rất hoan nghênh mọi người để lại bình luận cho chúng tôi trong phần bình luận,"
+    },
+    {
+      "start": 648.1,
+      "end": 650.13,
+      "en": "and share your thoughts and stories!",
+      "zh": "分享你的想法和故事！",
+      "pinyin": "fēnxiǎng nǐ de xiǎngfǎ hé gùshì!",
+      "vi": "chia sẻ suy nghĩ và câu chuyện của bạn!"
+    },
+    {
+      "start": 650.17,
+      "end": 652.47,
+      "en": "We look forward to seeing everyone's shares.",
+      "zh": "我们期待着看到大家的分享。",
+      "pinyin": "Wǒmen qīdài zhe kàndào dàjiā de fēnxiǎng.",
+      "vi": "Chúng tôi mong chờ được thấy mọi người chia sẻ."
+    },
+    {
+      "start": 652.5,
+      "end": 655.7,
+      "en": "Okay, this episode of “Chinese Daily” ends here.",
+      "zh": "好了，这期的“每天中文”就到这里了。",
+      "pinyin": "Hǎo le, zhè qī de “Měitiān Zhōngwén” jiù dào zhèlǐ le.",
+      "vi": "Được rồi, tập “Tiếng Trung Mỗi Ngày” này đến đây là hết."
+    },
+    {
+      "start": 655.73,
+      "end": 657.1,
+      "en": "Thank you all for listening,",
+      "zh": "感谢大家的收听，",
+      "pinyin": "Gǎnxiè dàjiā de shōutīng,",
+      "vi": "Cảm ơn mọi người đã lắng nghe,"
+    },
+    {
+      "start": 657.13,
+      "end": 658.43,
+      "en": "See you next episode!",
+      "zh": "我们下期再见！",
+      "pinyin": "Wǒmen xià qī zàijiàn!",
+      "vi": "Hẹn gặp lại mọi người ở tập sau!"
+    },
+    {
+      "start": 658.43,
+      "end": 659.16,
+      "en": "Goodbye!",
+      "zh": "再见！",
+      "pinyin": "Zàijiàn!",
+      "vi": "Tạm biệt!"
+    }
+  ]
+}

@@ -1,0 +1,2377 @@
+{
+  "id": "1rqdsL7RE6E",
+  "youtubeId": "1rqdsL7RE6E",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 3-5 | The Multitasking Trap: Are You a Multitasker or a Single-Tasker? 你是“多任务”还是“单任务”？",
+  "durationSec": 972,
+  "cues": [
+    {
+      "start": 7.33,
+      "end": 11.83,
+      "en": "Hello everyone, welcome to a new episode of Daily Chinese.",
+      "zh": "大家好，欢迎收听新一期的《每天中文》。",
+      "pinyin": "Dàjiā hǎo, huānyíng shōutīng xīn yì qī de “Měitiān Zhōngwén”.",
+      "vi": "Xin chào mọi người, chào mừng các bạn đến với tập mới của “Mỗi Ngày Tiếng Trung”."
+    },
+    {
+      "start": 11.83,
+      "end": 13.06,
+      "en": "I'm Li Ming.",
+      "zh": "我是李明。",
+      "pinyin": "Wǒ shì Lǐ Míng.",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 13.1,
+      "end": 16.77,
+      "en": "I'm Wang Yu! Great to see everyone again.",
+      "zh": "我是王雨！很高兴又和大家见面啦。",
+      "pinyin": "Wǒ shì Wáng Yǔ! Hěn gāoxìng yòu hé dàjiā jiànmiàn la.",
+      "vi": "Tôi là Vương Vũ! Rất vui lại được gặp mọi người."
+    },
+    {
+      "start": 16.77,
+      "end": 22.37,
+      "en": "Wang Yu, I noticed that when you came to the studio today, you seemed especially busy.",
+      "zh": "王雨，我注意到你今天来录音室的时候，好像特别忙。",
+      "pinyin": "Wáng Yǔ, wǒ zhùyì dào nǐ jīntiān lái lùyīnshì de shíhou, hǎoxiàng tèbié máng.",
+      "vi": "Vương Vũ, tôi để ý lúc cậu đến phòng thu hôm nay, hình như cậu đặc biệt bận."
+    },
+    {
+      "start": 22.43,
+      "end": 26.4,
+      "en": "You were walking while looking at your phone and replying to messages,",
+      "zh": "你一边走路，一边看手机回信息，",
+      "pinyin": "Nǐ yìbiān zǒulù, yìbiān kàn shǒujī huí xìnxī,",
+      "vi": "Cậu vừa đi bộ vừa nhìn điện thoại trả lời tin nhắn,"
+    },
+    {
+      "start": 26.43,
+      "end": 29.6,
+      "en": "and you still had earphones in—were you listening to something?",
+      "zh": "耳朵里还戴着耳机，是在听什么吗？",
+      "pinyin": "Ěrduo li hái dàizhe ěrjī, shì zài tīng shénme ma?",
+      "vi": "Tai còn đeo tai nghe, cậu đang nghe gì à?"
+    },
+    {
+      "start": 29.63,
+      "end": 31.63,
+      "en": "Oops, you caught me!",
+      "zh": "哎呀，被你发现了！",
+      "pinyin": "Āiyā, bèi nǐ fāxiàn le!",
+      "vi": "Ối, bị cậu phát hiện rồi!"
+    },
+    {
+      "start": 31.63,
+      "end": 33.96,
+      "en": "Yeah, before I left home this morning,",
+      "zh": "是啊，我早上出门前，",
+      "pinyin": "Shì a, wǒ zǎoshang chūmén qián,",
+      "vi": "Đúng vậy, trước khi ra khỏi cửa buổi sáng,"
+    },
+    {
+      "start": 33.97,
+      "end": 37.84,
+      "en": "I was making coffee while listening to today's news,",
+      "zh": "一边在煮咖啡，一边在听今天的新闻，",
+      "pinyin": "yìbiān zài zhǔ kāfēi, yìbiān zài tīng jīntiān de xīnwén,",
+      "vi": "tôi vừa pha cà phê vừa nghe tin tức hôm nay,"
+    },
+    {
+      "start": 37.87,
+      "end": 41.37,
+      "en": "and at the same time replying to messages in a few work group chats.",
+      "zh": "同时还在回复几个工作群里的消息。",
+      "pinyin": "tóngshí hái zài huífù jǐ ge gōngzuò qún li de xiāoxi.",
+      "vi": "đồng thời còn đang trả lời tin nhắn trong vài nhóm công việc."
+    },
+    {
+      "start": 41.4,
+      "end": 45.2,
+      "en": "I think it's very efficient—I can do several things at once.",
+      "zh": "我觉得这样很高效，能同时做好几件事。",
+      "pinyin": "Wǒ juéde zhèyàng hěn gāoxiào, néng tóngshí zuò hǎo jǐ jiàn shì.",
+      "vi": "Tôi thấy làm vậy rất hiệu quả, có thể làm nhiều việc cùng lúc."
+    },
+    {
+      "start": 45.23,
+      "end": 50.16,
+      "en": "Oh? It seems you're a typical multitasking worker.",
+      "zh": "哦？看来你是一个典型的“多任务”工作者。",
+      "pinyin": "Ó? Kànlái nǐ shì yí ge diǎnxíng de “duōrènwu” gōngzuòzhě.",
+      "vi": "Ồ? Xem ra cậu là một người làm việc “đa nhiệm” điển hình."
+    },
+    {
+      "start": 50.17,
+      "end": 54.74,
+      "en": "Exactly! I'm the legendary multitasking expert!",
+      "zh": "没错！我就是传说中的“多任务达人”！",
+      "pinyin": "Méicuò! Wǒ jiùshì chuánshuō zhōng de “duōrènwu dárén”!",
+      "vi": "Đúng thế! Tôi chính là “cao thủ đa nhiệm” trong truyền thuyết!"
+    },
+    {
+      "start": 54.77,
+      "end": 59.73,
+      "en": "But Li Ming, from your tone, it sounds like you don't agree?",
+      "zh": "不过，李明，听你的口气，你好像不赞同？",
+      "pinyin": "Búguò, Lǐ Míng, tīng nǐ de kǒuqì, nǐ hǎoxiàng bú zàntóng?",
+      "vi": "Nhưng Lý Minh, nghe giọng cậu thì có vẻ cậu không đồng tình?"
+    },
+    {
+      "start": 59.73,
+      "end": 65.46,
+      "en": "It's not that I disagree; it's just that my way of working might be the exact opposite of yours.",
+      "zh": "也不是不赞同，只是我的工作方式可能跟你完全相反。",
+      "pinyin": "Yě bú shì bú zàntóng, zhǐshì wǒ de gōngzuò fāngshì kěnéng gēn nǐ wánquán xiāngfǎn.",
+      "vi": "Không hẳn là không đồng tình, chỉ là cách làm việc của tôi có thể hoàn toàn ngược lại với cậu."
+    },
+    {
+      "start": 65.47,
+      "end": 70.4,
+      "en": "That makes me think we can talk about a really interesting topic today.",
+      "zh": "这让我觉得，我们今天可以聊一个非常有意思的话题。",
+      "pinyin": "Zhè ràng wǒ juéde, wǒmen jīntiān kěyǐ liáo yí ge fēicháng yǒu yìsi de huàtí.",
+      "vi": "Điều này khiến tôi thấy hôm nay chúng ta có thể nói về một chủ đề rất thú vị."
+    },
+    {
+      "start": 70.43,
+      "end": 71.66,
+      "en": "What topic?",
+      "zh": "是什么话题？",
+      "pinyin": "Shì shénme huàtí?",
+      "vi": "Là chủ đề gì?"
+    },
+    {
+      "start": 71.7,
+      "end": 77.73,
+      "en": "It's this: are you a multitasker or a single-tasker?",
+      "zh": "就是：你是一个“多任务”的人，还是一个“单任务”的人？",
+      "pinyin": "Jiùshì: nǐ shì yí ge “duōrènwu” de rén, háishì yí ge “dānrènwu” de rén?",
+      "vi": "Đó là: cậu là người “đa nhiệm” hay là người “đơn nhiệm”?"
+    },
+    {
+      "start": 77.77,
+      "end": 84.77,
+      "en": "In other words, do you like doing several things at once, or focusing wholeheartedly on one thing?",
+      "zh": "换句话说，你喜欢一心多用，还是喜欢一心一意地做一件事？",
+      "pinyin": "Huàn jù huà shuō, nǐ xǐhuan yìxīn-duōyòng, háishì xǐhuan yìxīn-yíyì de zuò yí jiàn shì?",
+      "vi": "Nói cách khác, cậu thích làm nhiều việc cùng lúc hay thích chuyên tâm làm một việc?"
+    },
+    {
+      "start": 84.77,
+      "end": 87.67,
+      "en": "Wow, this topic is perfect for us!",
+      "zh": "哇，这个话题太适合我们了！",
+      "pinyin": "Wā, zhège huàtí tài shìhé wǒmen le!",
+      "vi": "Oa, chủ đề này quá hợp với chúng ta rồi!"
+    },
+    {
+      "start": 87.7,
+      "end": 91.07,
+      "en": "It feels like the two of us are perfect opposite examples.",
+      "zh": "感觉我们俩就是完美的两个反例。",
+      "pinyin": "Gǎnjué wǒmen liǎ jiùshì wánměi de liǎng ge fǎnlì.",
+      "vi": "Cảm giác hai chúng ta chính là hai ví dụ phản diện hoàn hảo."
+    },
+    {
+      "start": 91.07,
+      "end": 95.74,
+      "en": "Listeners, you can also think about which type you belong to.",
+      "zh": "听众朋友们，你们也可以想一想，自己属于哪一种呢？",
+      "pinyin": "Tīngzhòng péngyou men, nǐmen yě kěyǐ xiǎng yi xiǎng, zìjǐ shǔyú nǎ yì zhǒng ne?",
+      "vi": "Các bạn thính giả, các bạn cũng có thể nghĩ thử xem mình thuộc kiểu nào nhé?"
+    },
+    {
+      "start": 95.77,
+      "end": 103.17,
+      "en": "OK, so today let's dive deeper into this topic.",
+      "zh": "好的，那我们今天就深入地聊一聊这个话题。",
+      "pinyin": "Hǎo de, nà wǒmen jīntiān jiù shēnrù de liáo yi liáo zhège huàtí.",
+      "vi": "Được, vậy hôm nay chúng ta sẽ đi sâu bàn về chủ đề này."
+    },
+    {
+      "start": 103.2,
+      "end": 104.57,
+      "en": "Then I'll go first!",
+      "zh": "那我先来！",
+      "pinyin": "Nà wǒ xiān lái!",
+      "vi": "Vậy tôi bắt đầu trước nhé!"
+    },
+    {
+      "start": 104.57,
+      "end": 105.87,
+      "en": "Like I just said,",
+      "zh": "我刚才就说了，",
+      "pinyin": "Wǒ gāngcái jiù shuō le,",
+      "vi": "Tôi vừa nói rồi đấy,"
+    },
+    {
+      "start": 105.9,
+      "end": 109.07,
+      "en": "I'm definitely a firm supporter of multitasking.",
+      "zh": "我绝对是“多任务”的坚定支持者。",
+      "pinyin": "Wǒ juéduì shì “duōrènwu” de jiāndìng zhīchízhě.",
+      "vi": "Tôi tuyệt đối là người ủng hộ kiên định của “đa nhiệm”."
+    },
+    {
+      "start": 109.07,
+      "end": 113.3,
+      "en": "I think modern society moves so fast and there are so many things to handle,",
+      "zh": "我觉得现代社会节奏这么快，有那么多事情需要处理，",
+      "pinyin": "Wǒ juéde xiàndài shèhuì jiézòu zhème kuài, yǒu nàme duō shìqing xūyào chǔlǐ,",
+      "vi": "Tôi thấy xã hội hiện đại có nhịp độ nhanh như vậy, có bao nhiêu việc cần xử lý,"
+    },
+    {
+      "start": 113.3,
+      "end": 117.2,
+      "en": "if you can't do several things at once, you simply can't keep up.",
+      "zh": "如果你不能同时做几件事，根本就忙不过来。",
+      "pinyin": "rúguǒ nǐ bù néng tóngshí zuò jǐ jiàn shì, gēnběn jiù máng bu guòlái.",
+      "vi": "nếu cậu không thể làm vài việc cùng lúc thì căn bản không xoay xở kịp."
+    },
+    {
+      "start": 117.23,
+      "end": 119.23,
+      "en": "Can you give an example?",
+      "zh": "可以举个例子吗？",
+      "pinyin": "Kěyǐ jǔ ge lìzi ma?",
+      "vi": "Có thể lấy một ví dụ không?"
+    },
+    {
+      "start": 119.27,
+      "end": 122.8,
+      "en": "In your life, besides that morning scene,",
+      "zh": "在你的生活中，除了早上那个场景，",
+      "pinyin": "Zài nǐ de shēnghuó zhōng, chúle zǎoshang nàge chǎngjǐng,",
+      "vi": "Trong cuộc sống của cậu, ngoài tình huống buổi sáng đó,"
+    },
+    {
+      "start": 122.83,
+      "end": 126.56,
+      "en": "when else do you multitask?",
+      "zh": "还有什么时候你会进行“多任务”操作？",
+      "pinyin": "hái yǒu shénme shíhou nǐ huì jìnxíng “duōrènwu” cāozuò?",
+      "vi": "còn khi nào cậu sẽ thực hiện thao tác “đa nhiệm”?"
+    },
+    {
+      "start": 126.6,
+      "end": 127.8,
+      "en": "Too many!",
+      "zh": "太多了！",
+      "pinyin": "Tài duō le!",
+      "vi": "Nhiều lắm!"
+    },
+    {
+      "start": 127.8,
+      "end": 132.4,
+      "en": "For example, I often cook while chatting with friends on the phone,",
+      "zh": "比如，我经常一边做饭，一边和朋友打电话聊天，",
+      "pinyin": "Bǐrú, wǒ jīngcháng yìbiān zuòfàn, yìbiān hé péngyou dǎ diànhuà liáotiān,",
+      "vi": "Ví dụ, tôi thường vừa nấu ăn vừa gọi điện trò chuyện với bạn bè,"
+    },
+    {
+      "start": 132.43,
+      "end": 136.6,
+      "en": "or while watching a TV drama that doesn't require much thinking,",
+      "zh": "或者一边看一部不太需要动脑筋的电视剧，",
+      "pinyin": "huòzhě yìbiān kàn yí bù bú tài xūyào dòng nǎojīn de diànshìjù,",
+      "vi": "hoặc vừa xem một bộ phim truyền hình không cần phải động não lắm,"
+    },
+    {
+      "start": 136.6,
+      "end": 139.17,
+      "en": "while folding clothes and tidying the room.",
+      "zh": "一边叠衣服、整理房间。",
+      "pinyin": "yìbiān dié yīfu, zhěnglǐ fángjiān.",
+      "vi": "vừa gấp quần áo, dọn dẹp phòng."
+    },
+    {
+      "start": 139.17,
+      "end": 142.93,
+      "en": "I think this way I can make use of some rather boring time,",
+      "zh": "我觉得这样可以把一些比较无聊的时间利用起来，",
+      "pinyin": "Wǒ juéde zhèyàng kěyǐ bǎ yìxiē bǐjiào wúliáo de shíjiān lìyòng qǐlái,",
+      "vi": "Tôi thấy làm vậy có thể tận dụng một số khoảng thời gian khá nhàm chán,"
+    },
+    {
+      "start": 142.93,
+      "end": 143.93,
+      "en": "killing two birds with one stone.",
+      "zh": "一举两得。",
+      "pinyin": "yìjǔ-liǎngdé.",
+      "vi": "một công đôi việc."
+    },
+    {
+      "start": 143.93,
+      "end": 147.4,
+      "en": "Hmm, it does sound very efficient.",
+      "zh": "嗯，听起来确实很“高效”。",
+      "pinyin": "Ńg, tīng qǐlái quèshí hěn “gāoxiào”.",
+      "vi": "Ừm, nghe đúng là rất “hiệu quả”."
+    },
+    {
+      "start": 147.43,
+      "end": 151.73,
+      "en": "Watching TV while folding clothes—I can understand that.",
+      "zh": "叠衣服的时候看电视，这我能理解。",
+      "pinyin": "Dié yīfu de shíhou kàn diànshì, zhè wǒ néng lǐjiě.",
+      "vi": "Vừa gấp quần áo vừa xem TV, cái này tôi hiểu được."
+    },
+    {
+      "start": 151.77,
+      "end": 154.7,
+      "en": "What about when you work? Do you do that too?",
+      "zh": "那你工作的时候呢？也会这样吗？",
+      "pinyin": "Nà nǐ gōngzuò de shíhou ne? Yě huì zhèyàng ma?",
+      "vi": "Thế khi làm việc thì sao? Cậu cũng làm vậy à?"
+    },
+    {
+      "start": 154.73,
+      "end": 156.93,
+      "en": "Of course I do when I work!",
+      "zh": "工作的时候当然也会！",
+      "pinyin": "Gōngzuò de shíhou dāngrán yě huì!",
+      "vi": "Khi làm việc tất nhiên cũng vậy!"
+    },
+    {
+      "start": 156.97,
+      "end": 161.23,
+      "en": "On my desk, my computer has several windows open at the same time,",
+      "zh": "我的办公桌上，电脑会同时开着好几个窗口，",
+      "pinyin": "Wǒ de bàngōngzhuō shang, diànnǎo huì tóngshí kāizhe hǎo jǐ ge chuāngkǒu,",
+      "vi": "Trên bàn làm việc của tôi, máy tính sẽ mở nhiều cửa sổ cùng lúc,"
+    },
+    {
+      "start": 161.23,
+      "end": 166.1,
+      "en": "for example, one for writing a proposal, one with WeChat open for easy communication anytime,",
+      "zh": "比如一个在写方案，一个开着微信方便随时沟通，",
+      "pinyin": "bǐrú yí ge zài xiě fāng'àn, yí ge kāizhe Wēixìn fāngbiàn suíshí gōutōng,",
+      "vi": "ví dụ một cửa sổ để viết đề án, một cửa sổ mở WeChat để tiện liên lạc bất cứ lúc nào,"
+    },
+    {
+      "start": 166.13,
+      "end": 169.86,
+      "en": "and maybe a tablet nearby for looking things up.",
+      "zh": "旁边可能还放着一个平板电脑，查资料用。",
+      "pinyin": "pángbiān kěnéng hái fàngzhe yí ge píngbǎn diànnǎo, chá zīliào yòng.",
+      "vi": "bên cạnh có thể còn đặt một chiếc máy tính bảng để tra tài liệu."
+    },
+    {
+      "start": 169.87,
+      "end": 174,
+      "en": "I feel like my brain is like a processor with several cores,",
+      "zh": "我觉得我的大脑就像一个有好几个核心的处理器，",
+      "pinyin": "Wǒ juéde wǒ de dànnǎo jiù xiàng yí ge yǒu hǎo jǐ ge héxīn de chǔlǐqì,",
+      "vi": "Tôi thấy bộ não của tôi giống như một bộ xử lý có nhiều nhân,"
+    },
+    {
+      "start": 174.03,
+      "end": 176.63,
+      "en": "able to run different programs at the same time.",
+      "zh": "可以同时运行不同的程序。",
+      "pinyin": "kěyǐ tóngshí yùnxíng bùtóng de chéngxù.",
+      "vi": "có thể chạy nhiều chương trình khác nhau cùng lúc."
+    },
+    {
+      "start": 176.67,
+      "end": 178.87,
+      "en": "That analogy is interesting.",
+      "zh": "你这个比喻很有趣。",
+      "pinyin": "Nǐ zhège bǐyù hěn yǒuqù.",
+      "vi": "Ví von của cậu rất thú vị."
+    },
+    {
+      "start": 178.9,
+      "end": 183.67,
+      "en": "But my brain might just be a single-core processor.",
+      "zh": "不过，我的大脑可能就是一个“单核处理器”。",
+      "pinyin": "Búguò, wǒ de dànnǎo kěnéng jiùshì yí ge “dānhé chǔlǐqì”.",
+      "vi": "Nhưng bộ não của tôi có lẽ chỉ là một “bộ xử lý đơn nhân”."
+    },
+    {
+      "start": 183.67,
+      "end": 188.87,
+      "en": "I'm the exact opposite of you—I'm a complete single-tasker.",
+      "zh": "我和你正好相反，我是一个彻底的“单任务”执行者。",
+      "pinyin": "Wǒ hé nǐ zhènghǎo xiāngfǎn, wǒ shì yí ge chèdǐ de “dānrènwu” zhíxíngzhě.",
+      "vi": "Tôi hoàn toàn ngược lại với cậu, tôi là một người thực hiện “đơn nhiệm” triệt để."
+    },
+    {
+      "start": 188.9,
+      "end": 190.17,
+      "en": "Really?",
+      "zh": "真的吗？",
+      "pinyin": "Zhēn de ma?",
+      "vi": "Thật á?"
+    },
+    {
+      "start": 190.17,
+      "end": 195.37,
+      "en": "So you mean when you're doing one thing, you absolutely won't touch another?",
+      "zh": "就是说，你在做一件事的时候，就绝对不会碰另一件？",
+      "pinyin": "Jiùshì shuō, nǐ zài zuò yī jiàn shì de shíhou, jiù juéduì bù huì pèng lìng yī jiàn?",
+      "vi": "Tức là, khi bạn đang làm một việc thì tuyệt đối sẽ không đụng đến việc khác?"
+    },
+    {
+      "start": 195.43,
+      "end": 197,
+      "en": "Basically, yes.",
+      "zh": "基本上是这样。",
+      "pinyin": "Jīběnshang shì zhèyàng.",
+      "vi": "Về cơ bản là vậy."
+    },
+    {
+      "start": 197.03,
+      "end": 200.53,
+      "en": "For example, if I need to write an important report,",
+      "zh": "比如，如果我要写一份重要的报告，",
+      "pinyin": "Bǐrú, rúguǒ wǒ yào xiě yī fèn zhòngyào de bàogào,",
+      "vi": "Ví dụ, nếu tôi phải viết một bản báo cáo quan trọng,"
+    },
+    {
+      "start": 200.53,
+      "end": 203.43,
+      "en": "I'll put my phone on silent,",
+      "zh": "我就会把手机调成静音，",
+      "pinyin": "Wǒ jiù huì bǎ shǒujī tiáo chéng jìngyīn,",
+      "vi": "tôi sẽ chỉnh điện thoại sang chế độ im lặng,"
+    },
+    {
+      "start": 203.47,
+      "end": 206.97,
+      "en": "close all unrelated webpages and apps,",
+      "zh": "关掉所有不相关的网页和软件，",
+      "pinyin": "Guān diào suǒyǒu bù xiāngguān de wǎngyè hé ruǎnjiàn,",
+      "vi": "tắt hết các trang web và phần mềm không liên quan,"
+    },
+    {
+      "start": 206.97,
+      "end": 209.54,
+      "en": "and then focus on writing the report.",
+      "zh": "然后专注地写报告。",
+      "pinyin": "Ránhòu zhuānzhù de xiě bàogào.",
+      "vi": "rồi tập trung viết báo cáo."
+    },
+    {
+      "start": 209.57,
+      "end": 213.67,
+      "en": "Only when I finish one section or the set time is up",
+      "zh": "直到我完成一个部分，或者设定的时间到了，",
+      "pinyin": "Zhídào wǒ wánchéng yī gè bùfen, huòzhě shèdìng de shíjiān dào le,",
+      "vi": "Cho đến khi tôi hoàn thành một phần, hoặc đến thời gian đã đặt,"
+    },
+    {
+      "start": 213.67,
+      "end": 218.24,
+      "en": "will I stop to check my phone or reply to some emails.",
+      "zh": "我才会停下来，去看看手机，或者回一下邮件。",
+      "pinyin": "Wǒ cái huì tíng xiàlái, qù kànkan shǒujī, huòzhě huí yīxià yóujiàn.",
+      "vi": "tôi mới dừng lại, xem điện thoại hoặc trả lời vài email."
+    },
+    {
+      "start": 218.27,
+      "end": 221.77,
+      "en": "Wow, I think that would make me very anxious!",
+      "zh": "天哪，我觉得这样会让我很焦虑！",
+      "pinyin": "Tiān na, wǒ juéde zhèyàng huì ràng wǒ hěn jiāolǜ!",
+      "vi": "Trời ạ, tôi thấy như vậy sẽ khiến tôi rất lo lắng!"
+    },
+    {
+      "start": 221.8,
+      "end": 226.17,
+      "en": "What if I miss something important while I'm writing the report?",
+      "zh": "如果在我写报告的时候，错过了什么重要的信息怎么办？",
+      "pinyin": "Rúguǒ zài wǒ xiě bàogào de shíhou, cuòguò le shénme zhòngyào de xìnxī zěnme bàn?",
+      "vi": "Nếu trong lúc tôi viết báo cáo mà bỏ lỡ thông tin quan trọng nào đó thì sao?"
+    },
+    {
+      "start": 226.17,
+      "end": 228.54,
+      "en": "This is actually a matter of mindset.",
+      "zh": "这其实是一个观念问题。",
+      "pinyin": "Zhè qíshí shì yī gè guānniàn wèntí.",
+      "vi": "Thật ra đây là vấn đề quan niệm."
+    },
+    {
+      "start": 228.57,
+      "end": 233.34,
+      "en": "I believe most things are not as urgent as we imagine.",
+      "zh": "我相信，绝大多数事情，都没有我们想象的那么紧急。",
+      "pinyin": "Wǒ xiāngxìn, juédà duōshù shìqing, dōu méiyǒu wǒmen xiǎngxiàng de nàme jǐnjí.",
+      "vi": "Tôi tin rằng phần lớn mọi việc đều không khẩn cấp như chúng ta tưởng."
+    },
+    {
+      "start": 233.37,
+      "end": 237,
+      "en": "Replying half an hour later won't make the sky fall.",
+      "zh": "晚半个小时回复，天不会塌下来。",
+      "pinyin": "Wǎn bàn gè xiǎoshí huífù, tiān bù huì tā xiàlái.",
+      "vi": "Trả lời muộn nửa tiếng thì trời cũng không sập xuống."
+    },
+    {
+      "start": 237.03,
+      "end": 240.3,
+      "en": "But if my report turns out badly because I'm not focused,",
+      "zh": "但如果我的报告因为不专注而写得不好，",
+      "pinyin": "Dàn rúguǒ wǒ de bàogào yīnwèi bù zhuānzhù ér xiě de bù hǎo,",
+      "vi": "Nhưng nếu báo cáo của tôi viết không tốt vì không tập trung,"
+    },
+    {
+      "start": 240.3,
+      "end": 242.27,
+      "en": "the consequences could be more serious.",
+      "zh": "那后果可能更严重。",
+      "pinyin": "Nà hòuguǒ kěnéng gèng yánzhòng.",
+      "vi": "thì hậu quả có thể nghiêm trọng hơn."
+    },
+    {
+      "start": 242.27,
+      "end": 247.37,
+      "en": "For me, the quality of work is more important than the immediacy of replying to messages.",
+      "zh": "对我来说，工作的质量比回复信息的即时性更重要。",
+      "pinyin": "Duì wǒ lái shuō, gōngzuò de zhìliàng bǐ huífù xìnxī de jíshíxìng gèng zhòngyào.",
+      "vi": "Đối với tôi, chất lượng công việc quan trọng hơn việc trả lời tin nhắn ngay lập tức."
+    },
+    {
+      "start": 247.4,
+      "end": 250.47,
+      "en": "Hmm... what you said does seem to make sense.",
+      "zh": "嗯……你说的好像也有道理。",
+      "pinyin": "Ńg…… nǐ shuō de hǎoxiàng yě yǒu dàolǐ.",
+      "vi": "Ừm… bạn nói cũng có vẻ có lý."
+    },
+    {
+      "start": 250.5,
+      "end": 255.57,
+      "en": "So you think the “single-tasking” way of working guarantees higher quality?",
+      "zh": "所以你认为，“单任务”工作方式能保证更高的质量？",
+      "pinyin": "Suǒyǐ nǐ rènwéi, “dān rènwu” gōngzuò fāngshì néng bǎozhèng gèng gāo de zhìliàng?",
+      "vi": "Vậy bạn cho rằng cách làm việc “đơn nhiệm” có thể đảm bảo chất lượng cao hơn?"
+    },
+    {
+      "start": 255.6,
+      "end": 260.5,
+      "en": "Yes, at least for work that requires deep thinking.",
+      "zh": "是的，至少对需要深度思考的工作来说是这样。",
+      "pinyin": "Shì de, zhìshǎo duì xūyào shēndù sīkǎo de gōngzuò lái shuō shì zhèyàng.",
+      "vi": "Đúng vậy, ít nhất là với những công việc cần suy nghĩ sâu."
+    },
+    {
+      "start": 260.53,
+      "end": 263.66,
+      "en": "What I aim for is to do one thing well in one go,",
+      "zh": "我追求的是一次就把一件事情做好，",
+      "pinyin": "Wǒ zhuīqiú de shì yī cì jiù bǎ yī jiàn shìqing zuò hǎo,",
+      "vi": "Tôi theo đuổi việc làm tốt một việc ngay từ lần đầu,"
+    },
+    {
+      "start": 263.67,
+      "end": 268.84,
+      "en": "rather than starting many things at once but doing each one sloppily.",
+      "zh": "而不是同时开始做很多事，但每件事都做得马马虎虎。",
+      "pinyin": "Ér bùshì tóngshí kāishǐ zuò hěn duō shì, dàn měi jiàn shì dōu zuò de mǎmǎhūhū.",
+      "vi": "chứ không phải bắt đầu làm nhiều việc cùng lúc nhưng việc nào cũng làm qua loa."
+    },
+    {
+      "start": 268.87,
+      "end": 274.27,
+      "en": "However, Li Ming, I still want to defend us “multitaskers” a bit.",
+      "zh": "不过，李明，我还是想为我们“多任务”一族辩护一下。",
+      "pinyin": "Bùguò, Lǐ Míng, wǒ háishì xiǎng wèi wǒmen “duō rènwu” yī zú biànhù yīxià.",
+      "vi": "Tuy nhiên, Lý Minh, tôi vẫn muốn bênh vực một chút cho phe “đa nhiệm” chúng ta."
+    },
+    {
+      "start": 274.27,
+      "end": 278.57,
+      "en": "I think being able to do several things at once is also a display of ability!",
+      "zh": "我觉得，能够一心多用，也是一种能力的体现啊！",
+      "pinyin": "Wǒ juéde, nénggòu yīxīn duōyòng, yě shì yī zhǒng nénglì de tǐxiàn a!",
+      "vi": "Tôi thấy có thể một lúc làm nhiều việc cũng là một biểu hiện của năng lực mà!"
+    },
+    {
+      "start": 278.6,
+      "end": 281.8,
+      "en": "Don't many companies' job requirements say",
+      "zh": "很多公司的招聘要求里，不都写着",
+      "pinyin": "Hěn duō gōngsī de zhāopìn yāoqiú lǐ, bù dōu xiě zhe",
+      "vi": "Trong yêu cầu tuyển dụng của nhiều công ty, chẳng phải đều ghi"
+    },
+    {
+      "start": 281.83,
+      "end": 286.03,
+      "en": "“able to adapt to a fast-paced work environment, with multitasking ability”?",
+      "zh": "“能够适应快节奏的工作，具备多任务处理能力”吗？",
+      "pinyin": "“Nénggòu shìyìng kuài jiézòu de gōngzuò, jùbèi duō rènwu chǔlǐ nénglì” ma?",
+      "vi": "“có thể thích ứng với công việc nhịp độ nhanh, có khả năng xử lý đa nhiệm” đó sao?"
+    },
+    {
+      "start": 286.07,
+      "end": 288.54,
+      "en": "You've mentioned a very common phenomenon.",
+      "zh": "你提到了一个很普遍的现象。",
+      "pinyin": "Nǐ tí dào le yī gè hěn pǔbiàn de xiànxiàng.",
+      "vi": "Bạn đã nhắc đến một hiện tượng rất phổ biến."
+    },
+    {
+      "start": 288.57,
+      "end": 293.63,
+      "en": "In many people's eyes, “multitasking” seems to equal “high efficiency” and “strong ability.”",
+      "zh": "在很多人看来，“多任务”似乎等于“高效率”和“能力强”。",
+      "pinyin": "Zài hěn duō rén kànlái, “duō rènwu” sìhū děngyú “gāo xiàolǜ” hé “nénglì qiáng”.",
+      "vi": "Trong mắt nhiều người, “đa nhiệm” dường như đồng nghĩa với “hiệu suất cao” và “năng lực mạnh”."
+    },
+    {
+      "start": 293.63,
+      "end": 297.63,
+      "en": "But many psychology studies have found that this may be an illusion.",
+      "zh": "但很多心理学研究发现，这可能是一个错觉。",
+      "pinyin": "Dàn hěn duō xīnlǐxué yánjiū fāxiàn, zhè kěnéng shì yī gè cuòjué.",
+      "vi": "Nhưng nhiều nghiên cứu tâm lý học phát hiện ra rằng đây có thể là một ảo giác."
+    },
+    {
+      "start": 297.67,
+      "end": 299.47,
+      "en": "Illusion? What do you mean?",
+      "zh": "错觉？什么意思？",
+      "pinyin": "Cuòjué? Shénme yìsi?",
+      "vi": "Ảo giác? Ý bạn là gì?"
+    },
+    {
+      "start": 299.47,
+      "end": 302.7,
+      "en": "It means we think we're handling many things “at the same time,”",
+      "zh": "意思是，我们以为自己在“同时”处理很多事，",
+      "pinyin": "Yìsi shì, wǒmen yǐwéi zìjǐ zài “tóngshí” chǔlǐ hěn duō shì,",
+      "vi": "Nghĩa là, chúng ta tưởng mình đang “đồng thời” xử lý nhiều việc,"
+    },
+    {
+      "start": 302.73,
+      "end": 307.43,
+      "en": "but in reality, our brains aren't truly processing in parallel,",
+      "zh": "但实际上，我们的大脑并不是真的在并行处理，",
+      "pinyin": "Dàn shíjì shang, wǒmen de dànǎo bìng bùshì zhēn de zài bìngxíng chǔlǐ,",
+      "vi": "nhưng thực tế, não của chúng ta không thật sự xử lý song song,"
+    },
+    {
+      "start": 307.47,
+      "end": 311.97,
+      "en": "but rapidly “switching” between different tasks.",
+      "zh": "而是在不同的任务之间进行非常快速的“切换”。",
+      "pinyin": "Ér shì zài bùtóng de rènwu zhījiān jìnxíng fēicháng kuàisù de “qiēhuàn”.",
+      "vi": "mà là chuyển đổi rất nhanh giữa các nhiệm vụ khác nhau."
+    },
+    {
+      "start": 312,
+      "end": 316.07,
+      "en": "Every switch actually consumes our energy and time.",
+      "zh": "每一次切换，其实都会消耗我们的精力和时间。",
+      "pinyin": "Měi yī cì qiēhuàn, qíshí dōu huì xiāohào wǒmen de jīnglì hé shíjiān.",
+      "vi": "Mỗi lần chuyển đổi thực ra đều tiêu hao sức lực và thời gian của chúng ta."
+    },
+    {
+      "start": 316.07,
+      "end": 318.07,
+      "en": "Huh? Is that so?",
+      "zh": "啊？是这样吗？",
+      "pinyin": "À? Shì zhèyàng ma?",
+      "vi": "Hả? Là vậy sao?"
+    },
+    {
+      "start": 318.1,
+      "end": 321.2,
+      "en": "I always thought my brain could be like a computer,",
+      "zh": "我一直以为我的大脑可以像电脑一样，",
+      "pinyin": "Wǒ yīzhí yǐwéi wǒ de dànǎo kěyǐ xiàng diànnǎo yīyàng,",
+      "vi": "Tôi luôn nghĩ não mình có thể giống như máy tính,"
+    },
+    {
+      "start": 321.2,
+      "end": 324.57,
+      "en": "running several programs at once and all running smoothly.",
+      "zh": "同时开好几个程序而且都运行得很流畅。",
+      "pinyin": "Tóngshí kāi hǎo jǐ gè chéngxù érqiě dōu yùnxíng de hěn liúchàng.",
+      "vi": "mở nhiều chương trình cùng lúc mà đều chạy rất mượt."
+    },
+    {
+      "start": 324.6,
+      "end": 327.43,
+      "en": "Computers actually face a similar problem.",
+      "zh": "电脑其实也面临类似的问题。",
+      "pinyin": "Diànnǎo qíshí yě miànlín lèisì de wèntí.",
+      "vi": "Máy tính thật ra cũng gặp vấn đề tương tự."
+    },
+    {
+      "start": 327.47,
+      "end": 330.67,
+      "en": "The more programs you open at once, the slower the computer gets,",
+      "zh": "你同时开的程序越多，电脑就越慢，",
+      "pinyin": "Nǐ tóngshí kāi de chéngxù yuè duō, diànnǎo jiù yuè màn,",
+      "vi": "Bạn mở càng nhiều chương trình cùng lúc, máy tính càng chậm,"
+    },
+    {
+      "start": 330.7,
+      "end": 334.6,
+      "en": "and it may even lag or freeze. Our brains are the same.",
+      "zh": "甚至会卡顿、死机。我们的大脑也一样。",
+      "pinyin": "Shènzhì huì kǎdùn, sǐjī. Wǒmen de dànǎo yě yīyàng.",
+      "vi": "thậm chí còn bị lag, treo máy. Não của chúng ta cũng vậy."
+    },
+    {
+      "start": 334.63,
+      "end": 338.83,
+      "en": "Now that you mention it, I seem to... be somewhat convinced.",
+      "zh": "你这么一说，我好像……有点被说服了。",
+      "pinyin": "Nǐ zhème yī shuō, wǒ hǎoxiàng…… yǒudiǎn bèi shuōfú le.",
+      "vi": "Bạn nói vậy, tôi hình như… hơi bị thuyết phục rồi."
+    },
+    {
+      "start": 338.87,
+      "end": 344.53,
+      "en": "Because I have to admit, my “multitasking” mode does sometimes “freeze.”",
+      "zh": "因为我必须承认，我的“多任务”模式有时候确实会“死机”。",
+      "pinyin": "Yīnwèi wǒ bìxū chéngrèn, wǒ de “duō rènwu” móshì yǒu shíhou quèshí huì “sǐjī”.",
+      "vi": "Vì tôi phải thừa nhận, chế độ “đa nhiệm” của tôi đôi khi đúng là sẽ “treo máy”."
+    },
+    {
+      "start": 344.53,
+      "end": 346.9,
+      "en": "Oh? It seems you have a story to share.",
+      "zh": "哦？看来你有故事要分享。",
+      "pinyin": "Ó? Kànlái nǐ yǒu gùshì yào fēnxiǎng.",
+      "vi": "Ồ? Xem ra bạn có câu chuyện muốn chia sẻ."
+    },
+    {
+      "start": 346.93,
+      "end": 350.93,
+      "en": "Ugh, don't mention it; that time was really embarrassing.",
+      "zh": "哎，别提了，那次真的太尴尬了。",
+      "pinyin": "Āi, bié tí le, nà cì zhēn de tài gāngà le.",
+      "vi": "Haizz, đừng nhắc nữa, lần đó thật sự quá ngượng."
+    },
+    {
+      "start": 350.97,
+      "end": 355.04,
+      "en": "Once, I was chatting with a good friend on WeChat,",
+      "zh": "有一次，我一边在微信上跟我的一个好朋友聊天，",
+      "pinyin": "Yǒu yī cì, wǒ yībiān zài Wēixìn shang gēn wǒ de yī gè hǎo péngyou liáotiān,",
+      "vi": "Có lần, tôi vừa nhắn tin với một người bạn thân trên WeChat,"
+    },
+    {
+      "start": 355.07,
+      "end": 360.3,
+      "en": "having a great time, while writing a very important work email to my boss.",
+      "zh": "聊得正开心，一边在给我的老板写一封非常重要的工作邮件。",
+      "pinyin": "Liáo de zhèng kāixīn, yībiān zài gěi wǒ de lǎobǎn xiě yī fēng fēicháng zhòngyào de gōngzuò yóujiàn.",
+      "vi": "đang trò chuyện vui vẻ, vừa viết cho sếp một email công việc rất quan trọng."
+    },
+    {
+      "start": 360.3,
+      "end": 361.83,
+      "en": "That sounds dangerous.",
+      "zh": "这听起来就很危险。",
+      "pinyin": "Zhè tīng qǐlái jiù hěn wēixiǎn.",
+      "vi": "Nghe thôi đã thấy rất nguy hiểm."
+    },
+    {
+      "start": 361.87,
+      "end": 364.7,
+      "en": "Yeah! As a result, my mind got confused,",
+      "zh": "是啊！结果，我脑子一乱，",
+      "pinyin": "Shì a! Jiéguǒ, wǒ nǎozi yī luàn,",
+      "vi": "Đúng vậy! Kết quả là đầu óc tôi rối lên,"
+    },
+    {
+      "start": 364.7,
+      "end": 367.4,
+      "en": "and a joke I originally meant to send to my friend,",
+      "zh": "把一句本来要发给朋友的玩笑话，",
+      "pinyin": "Bǎ yī jù běnlái yào fā gěi péngyou de wánxiàohuà,",
+      "vi": "một câu đùa lẽ ra định gửi cho bạn,"
+    },
+    {
+      "start": 367.43,
+      "end": 371.1,
+      "en": "I wrote it in the email to my boss, and even clicked send!",
+      "zh": "写到了给老板的邮件里，而且还点了发送！",
+      "pinyin": "Xiě dào le gěi lǎobǎn de yóujiàn lǐ, érqiě hái diǎn le fāsòng!",
+      "vi": "tôi lại viết vào email gửi sếp, hơn nữa còn bấm gửi!"
+    },
+    {
+      "start": 371.1,
+      "end": 374.4,
+      "en": "That sentence was something like “Hahaha, he's so silly!”",
+      "zh": "那句话大概是“哈哈哈，他太傻了！”",
+      "pinyin": "Nà jù huà dàgài shì “hāhāhā, tā tài shǎ le!”",
+      "vi": "Câu đó đại khái là “Hahaha, anh ta ngốc quá!”"
+    },
+    {
+      "start": 374.47,
+      "end": 376.47,
+      "en": "Oh my god! And then?",
+      "zh": "我的天！然后呢？",
+      "pinyin": "Wǒ de tiān! Ránhòu ne?",
+      "vi": "Trời ơi! Rồi sau đó thế nào?"
+    },
+    {
+      "start": 376.5,
+      "end": 378.77,
+      "en": "I broke out in a cold sweat right then!",
+      "zh": "我当时冷汗都下来了！",
+      "pinyin": "Wǒ dāngshí lěnghàn dōu xiàlái le!",
+      "vi": "Lúc đó tôi sợ toát cả mồ hôi lạnh!"
+    },
+    {
+      "start": 378.8,
+      "end": 382.1,
+      "en": "I hurriedly recalled that email as fast as I could,",
+      "zh": "我赶紧用最快的速度撤回了那封邮件，",
+      "pinyin": "Wǒ gǎnjǐn yòng zuì kuài de sùdù chèhuí le nà fēng yóujiàn,",
+      "vi": "Tôi vội vàng thu hồi email đó với tốc độ nhanh nhất,"
+    },
+    {
+      "start": 382.13,
+      "end": 384.2,
+      "en": "But I don't know whether my boss saw it.",
+      "zh": "但不知道老板看到了没有。",
+      "pinyin": "Dàn bù zhīdào lǎobǎn kàndào le méiyǒu.",
+      "vi": "Nhưng không biết sếp đã nhìn thấy chưa."
+    },
+    {
+      "start": 384.2,
+      "end": 388.9,
+      "en": "Later I rewrote and sent a very serious and professional email.",
+      "zh": "后来我重新写了一封非常严肃和专业的邮件发过去。",
+      "pinyin": "Hòulái wǒ chóngxīn xiě le yī fēng fēicháng yánsù hé zhuānyè de yóujiàn fā guòqù.",
+      "vi": "Sau đó tôi viết lại một email rất nghiêm túc và chuyên nghiệp gửi đi."
+    },
+    {
+      "start": 388.9,
+      "end": 390.87,
+      "en": "Although my boss didn't say anything,",
+      "zh": "虽然老板什么也没说，",
+      "pinyin": "Suīrán lǎobǎn shénme yě méi shuō,",
+      "vi": "Mặc dù sếp không nói gì,"
+    },
+    {
+      "start": 390.87,
+      "end": 393.84,
+      "en": "I felt extremely embarrassed for several days,",
+      "zh": "但我好几天都觉得特别不好意思，",
+      "pinyin": "Dàn wǒ hǎo jǐ tiān dōu juéde tèbié bù hǎoyìsi,",
+      "vi": "nhưng mấy ngày liền tôi đều thấy vô cùng ngại,"
+    },
+    {
+      "start": 393.87,
+      "end": 395.97,
+      "en": "when I saw him, I wanted to avoid him.",
+      "zh": "见到他都想躲着走。",
+      "pinyin": "Jiàndào tā dōu xiǎng duǒ zhe zǒu.",
+      "vi": "gặp anh ấy là tôi chỉ muốn tránh đi."
+    },
+    {
+      "start": 396,
+      "end": 398.7,
+      "en": "Since then, whenever I write an important email,",
+      "zh": "从那以后，我写重要邮件的时候，",
+      "pinyin": "Cóng nà yǐhòu, wǒ xiě zhòngyào yóujiàn de shíhou,",
+      "vi": "Từ sau đó, mỗi khi viết email quan trọng,"
+    },
+    {
+      "start": 398.73,
+      "end": 400.5,
+      "en": "I never dare to chat with anyone anymore.",
+      "zh": "再也不敢跟人聊天了。",
+      "pinyin": "zài yě bù gǎn gēn rén liáotiān le.",
+      "vi": "tôi không dám trò chuyện với ai nữa."
+    },
+    {
+      "start": 400.53,
+      "end": 402.73,
+      "en": "I completely understand that feeling.",
+      "zh": "我完全理解这种感觉。",
+      "pinyin": "Wǒ wánquán lǐjiě zhè zhǒng gǎnjué.",
+      "vi": "Tôi hoàn toàn hiểu cảm giác đó."
+    },
+    {
+      "start": 402.77,
+      "end": 406.57,
+      "en": "That frustration and embarrassment of making a mistake because you weren't focused,",
+      "zh": "因为注意力不集中而犯错，那种懊恼和尴尬，",
+      "pinyin": "Yīnwèi zhùyìlì bù jízhōng ér fàncuò, nà zhǒng àonǎo hé gāngà,",
+      "vi": "Cảm giác bực bội và ngượng ngùng khi mắc lỗi vì không tập trung,"
+    },
+    {
+      "start": 406.6,
+      "end": 408.3,
+      "en": "really feels awful.",
+      "zh": "真的很难受。",
+      "pinyin": "zhēnde hěn nánshòu.",
+      "vi": "thật sự rất khó chịu."
+    },
+    {
+      "start": 408.33,
+      "end": 410.5,
+      "en": "In fact, many people have had similar experiences,",
+      "zh": "其实很多人都有过类似的经历，",
+      "pinyin": "Qíshí hěn duō rén dōu yǒu guò lèisì de jīnglì,",
+      "vi": "Thật ra nhiều người từng có trải nghiệm tương tự,"
+    },
+    {
+      "start": 410.5,
+      "end": 412.47,
+      "en": "for example, talking on the phone while driving,",
+      "zh": "比如开车时打电话，",
+      "pinyin": "bǐrú kāichē shí dǎ diànhuà,",
+      "vi": "ví dụ vừa lái xe vừa gọi điện,"
+    },
+    {
+      "start": 412.5,
+      "end": 415.97,
+      "en": "and nearly causing an accident; or playing on your phone while listening to a lecture,",
+      "zh": "结果差点出事故；或者一边听课一边玩手机，",
+      "pinyin": "jiéguǒ chàdiǎn chū shìgù; huòzhě yībiān tīngkè yībiān wán shǒujī,",
+      "vi": "kết quả suýt gây tai nạn; hoặc vừa nghe giảng vừa nghịch điện thoại,"
+    },
+    {
+      "start": 415.97,
+      "end": 418.64,
+      "en": "and when the teacher asks a question, you can't answer anything.",
+      "zh": "结果老师提问，什么都答不上来。",
+      "pinyin": "jiéguǒ lǎoshī tíwèn, shénme dōu dá bù shànglái.",
+      "vi": "kết quả giáo viên đặt câu hỏi thì chẳng trả lời được gì."
+    },
+    {
+      "start": 418.67,
+      "end": 420.57,
+      "en": "Yes, yes, yes! That's exactly the feeling!",
+      "zh": "对对对！就是这种感觉！",
+      "pinyin": "Duì duì duì! Jiùshì zhè zhǒng gǎnjué!",
+      "vi": "Đúng đúng đúng! Chính là cảm giác đó!"
+    },
+    {
+      "start": 420.6,
+      "end": 423.47,
+      "en": "Sometimes I feel like an acrobat,",
+      "zh": "有时候我觉得自己像一个杂技演员，",
+      "pinyin": "Yǒu shíhou wǒ juéde zìjǐ xiàng yī gè zájì yǎnyuán,",
+      "vi": "Có lúc tôi cảm thấy mình như một diễn viên xiếc,"
+    },
+    {
+      "start": 423.5,
+      "end": 426.03,
+      "en": "juggling several balls at once,",
+      "zh": "手里同时扔着好几个球，",
+      "pinyin": "shǒu lǐ tóngshí rēng zhe hǎo jǐ gè qiú,",
+      "vi": "trong tay tung nhiều quả bóng cùng lúc,"
+    },
+    {
+      "start": 426.07,
+      "end": 427.3,
+      "en": "and feel pretty impressive,",
+      "zh": "感觉很厉害，",
+      "pinyin": "gǎnjué hěn lìhai,",
+      "vi": "cảm thấy mình rất giỏi,"
+    },
+    {
+      "start": 427.33,
+      "end": 429.16,
+      "en": "but inside I'm always nervous,",
+      "zh": "但心里一直很紧张，",
+      "pinyin": "dàn xīnlǐ yīzhí hěn jǐnzhāng,",
+      "vi": "nhưng trong lòng lúc nào cũng căng thẳng,"
+    },
+    {
+      "start": 429.2,
+      "end": 431.27,
+      "en": "afraid that one of the balls will drop.",
+      "zh": "生怕哪个球会掉下来。",
+      "pinyin": "shēngpà nǎ ge qiú huì diào xiàlái.",
+      "vi": "sợ quả bóng nào đó sẽ rơi xuống."
+    },
+    {
+      "start": 431.27,
+      "end": 434.04,
+      "en": "When everything piles up at once,",
+      "zh": "当所有事情都挤在一起的时候，",
+      "pinyin": "Dāng suǒyǒu shìqíng dōu jǐ zài yīqǐ de shíhou,",
+      "vi": "Khi mọi việc đều dồn lại với nhau,"
+    },
+    {
+      "start": 434.07,
+      "end": 437.34,
+      "en": "I really feel extremely anxious and exhausted.",
+      "zh": "我真的会感到特别焦虑和疲惫。",
+      "pinyin": "wǒ zhēnde huì gǎndào tèbié jiāolǜ hé píbèi.",
+      "vi": "tôi thật sự cảm thấy vô cùng lo lắng và mệt mỏi."
+    },
+    {
+      "start": 437.37,
+      "end": 440.27,
+      "en": "Li Ming, you've always used \"single-tasking\" mode,",
+      "zh": "李明，你一直用“单任务”模式，",
+      "pinyin": "Lǐ Míng, nǐ yīzhí yòng “dān rènwu” móshì,",
+      "vi": "Lý Minh, cậu luôn dùng chế độ “một nhiệm vụ”,"
+    },
+    {
+      "start": 440.3,
+      "end": 442.3,
+      "en": "Have you never had this kind of trouble?",
+      "zh": "是不是从来没有这种烦恼？",
+      "pinyin": "shì bùshì cónglái méiyǒu zhè zhǒng fánnǎo?",
+      "vi": "có phải chưa từng có nỗi phiền này không?"
+    },
+    {
+      "start": 442.3,
+      "end": 443.53,
+      "en": "I definitely have troubles too,",
+      "zh": "烦恼肯定也有，",
+      "pinyin": "Fánnǎo kěndìng yě yǒu,",
+      "vi": "Phiền não thì chắc chắn cũng có,"
+    },
+    {
+      "start": 443.53,
+      "end": 446.83,
+      "en": "but maybe not the anxiety caused by task switching.",
+      "zh": "但可能不是因为任务切换带来的焦虑。",
+      "pinyin": "dàn kěnéng bùshì yīnwèi rènwu qiēhuàn dàilái de jiāolǜ.",
+      "vi": "nhưng có thể không phải là lo lắng do chuyển đổi nhiệm vụ."
+    },
+    {
+      "start": 446.87,
+      "end": 449.97,
+      "en": "However, for the situation you mentioned, I have a little suggestion,",
+      "zh": "不过，对于你说的这种情况，我有一个小建议，",
+      "pinyin": "Bùguò, duìyú nǐ shuō de zhè zhǒng qíngkuàng, wǒ yǒu yī gè xiǎo jiànyì,",
+      "vi": "Tuy nhiên, với tình huống cậu nói, tôi có một gợi ý nhỏ,"
+    },
+    {
+      "start": 450,
+      "end": 454.4,
+      "en": "that might help relieve that nervous feeling of \"the balls are about to drop.\"",
+      "zh": "也许可以帮助你缓解那种“球要掉了”的紧张感。",
+      "pinyin": "yěxǔ kěyǐ bāngzhù nǐ huǎnjiě nà zhǒng “qiú yào diào le” de jǐnzhāng gǎn.",
+      "vi": "có lẽ có thể giúp cậu giảm bớt cảm giác căng thẳng kiểu “quả bóng sắp rơi”."
+    },
+    {
+      "start": 454.4,
+      "end": 457.1,
+      "en": "Tell me quick! What good suggestion is it?",
+      "zh": "快说说！是什么好建议？",
+      "pinyin": "Kuài shuōshuo! Shì shénme hǎo jiànyì?",
+      "vi": "Nói mau đi! Là gợi ý hay gì thế?"
+    },
+    {
+      "start": 457.13,
+      "end": 459.96,
+      "en": "You can try the \"time blocking\" method.",
+      "zh": "你可以试试“时间块”的方法。",
+      "pinyin": "Nǐ kěyǐ shìshi “shíjiān kuài” de fāngfǎ.",
+      "vi": "Cậu có thể thử phương pháp “khối thời gian”."
+    },
+    {
+      "start": 460,
+      "end": 465.7,
+      "en": "For example, divide your time into units of 25 or 30 minutes.",
+      "zh": "比如，把你的时间以25分钟或者30分钟为一个单位分开。",
+      "pinyin": "Bǐrú, bǎ nǐ de shíjiān yǐ èrshíwǔ fēnzhōng huòzhě sānshí fēnzhōng wéi yī gè dānwèi fēnkāi.",
+      "vi": "Ví dụ, chia thời gian của cậu thành từng khối 25 phút hoặc 30 phút."
+    },
+    {
+      "start": 465.73,
+      "end": 467.63,
+      "en": "In this one \"time block,\"",
+      "zh": "在这一个“时间块”里，",
+      "pinyin": "Zài zhè yī gè “shíjiān kuài” lǐ,",
+      "vi": "Trong một “khối thời gian” này,"
+    },
+    {
+      "start": 467.67,
+      "end": 470.53,
+      "en": "you choose to do only the most important thing.",
+      "zh": "你只选择做最重要的一件事。",
+      "pinyin": "nǐ zhǐ xuǎnzé zuò zuì zhòngyào de yī jiàn shì.",
+      "vi": "cậu chỉ chọn làm một việc quan trọng nhất."
+    },
+    {
+      "start": 470.53,
+      "end": 472.16,
+      "en": "Put your phone on silent",
+      "zh": "把手机调成静音，",
+      "pinyin": "Bǎ shǒujī tiáochéng jìngyīn,",
+      "vi": "Chỉnh điện thoại sang chế độ im lặng,"
+    },
+    {
+      "start": 472.17,
+      "end": 473.9,
+      "en": "and put it somewhere you can't see it.",
+      "zh": "放到你看不见的地方。",
+      "pinyin": "fàng dào nǐ kàn bù jiàn de dìfāng.",
+      "vi": "và đặt ở nơi cậu không nhìn thấy."
+    },
+    {
+      "start": 473.9,
+      "end": 474.97,
+      "en": "Tell yourself,",
+      "zh": "告诉自己，",
+      "pinyin": "Gàosu zìjǐ,",
+      "vi": "Hãy tự nhủ,"
+    },
+    {
+      "start": 475,
+      "end": 478.43,
+      "en": "during this time, no matter how big the matter is, don't deal with it,",
+      "zh": "在这段时间里，天大的事都不要管，",
+      "pinyin": "zài zhè duàn shíjiān lǐ, tiāndà de shì dōu bùyào guǎn,",
+      "vi": "trong khoảng thời gian này, dù có việc lớn đến đâu cũng đừng để tâm,"
+    },
+    {
+      "start": 478.47,
+      "end": 480.87,
+      "en": "just do this one thing at hand.",
+      "zh": "就只做手上这一件事。",
+      "pinyin": "jiù zhǐ zuò shǒushàng zhè yī jiàn shì.",
+      "vi": "chỉ làm đúng một việc đang có trong tay thôi."
+    },
+    {
+      "start": 480.9,
+      "end": 482.57,
+      "en": "When this time block is over,",
+      "zh": "等这个时间块结束了，",
+      "pinyin": "Děng zhège shíjiān kuài jiéshù le,",
+      "vi": "Đợi khối thời gian này kết thúc,"
+    },
+    {
+      "start": 482.57,
+      "end": 484.34,
+      "en": "you can rest for five minutes,",
+      "zh": "你就可以休息5分钟，",
+      "pinyin": "nǐ jiù kěyǐ xiūxi wǔ fēnzhōng,",
+      "vi": "cậu có thể nghỉ 5 phút,"
+    },
+    {
+      "start": 484.37,
+      "end": 486.87,
+      "en": "scroll on your phone, reply to some messages,",
+      "zh": "刷刷手机，回复一下信息，",
+      "pinyin": "shuāshua shǒujī, huífù yīxià xìnxī,",
+      "vi": "lướt điện thoại, trả lời tin nhắn một chút,"
+    },
+    {
+      "start": 486.9,
+      "end": 489.23,
+      "en": "and then start the next \"time block.\"",
+      "zh": "然后再开始下一个“时间块”。",
+      "pinyin": "ránhòu zài kāishǐ xià yī gè “shíjiān kuài”.",
+      "vi": "rồi sau đó bắt đầu “khối thời gian” tiếp theo."
+    },
+    {
+      "start": 489.27,
+      "end": 492.2,
+      "en": "Hey, this method sounds good!",
+      "zh": "诶，这个方法听起来不错！",
+      "pinyin": "Ēi, zhège fāngfǎ tīng qǐlái bùcuò!",
+      "vi": "Ê, phương pháp này nghe có vẻ hay đấy!"
+    },
+    {
+      "start": 492.2,
+      "end": 494.77,
+      "en": "Twenty-five minutes doesn't sound long,",
+      "zh": "25分钟，听起来不长，",
+      "pinyin": "Èrshíwǔ fēnzhōng, tīng qǐlái bù cháng,",
+      "vi": "25 phút, nghe không dài,"
+    },
+    {
+      "start": 494.8,
+      "end": 496.57,
+      "en": "and is relatively easy to stick with.",
+      "zh": "比较容易坚持。",
+      "pinyin": "bǐjiào róngyì jiānchí.",
+      "vi": "tương đối dễ duy trì."
+    },
+    {
+      "start": 496.6,
+      "end": 498.33,
+      "en": "This way, you can ensure focus",
+      "zh": "这样既能保证专注，",
+      "pinyin": "Zhèyàng jì néng bǎozhèng zhuānzhù,",
+      "vi": "Như vậy vừa có thể đảm bảo tập trung,"
+    },
+    {
+      "start": 498.37,
+      "end": 500.7,
+      "en": "while also letting me handle other information in time,",
+      "zh": "又能让我及时处理其他信息，",
+      "pinyin": "yòu néng ràng wǒ jíshí chǔlǐ qítā xìnxī,",
+      "vi": "lại có thể để tôi xử lý kịp thời các thông tin khác,"
+    },
+    {
+      "start": 500.7,
+      "end": 503.03,
+      "en": "and you won't feel cut off from the world.",
+      "zh": "不会感到与世隔绝。",
+      "pinyin": "Bù huì gǎndào yǔ shì géjué",
+      "vi": "sẽ không cảm thấy bị tách biệt với thế giới."
+    },
+    {
+      "start": 503.07,
+      "end": 508.27,
+      "en": "Yes, this is a way to find balance between 'focus' and 'connection'.",
+      "zh": "是的，这是一种在“专注”和“连接”之间找到平衡的方法。",
+      "pinyin": "Shì de zhè shì yī zhǒng zài zhuānzhù hé liánjiē zhī jiān zhǎodào pínghéng de fāngfǎ",
+      "vi": "Đúng vậy, đây là một cách tìm sự cân bằng giữa “tập trung” và “kết nối”."
+    },
+    {
+      "start": 508.3,
+      "end": 512.43,
+      "en": "You don't need to suddenly become a complete 'single-tasker,'",
+      "zh": "你不需要一下子变成一个彻底的“单任务”工作者，",
+      "pinyin": "Nǐ bù xūyào yīxiàzi biànchéng yī gè chèdǐ de dān rènwu gōngzuòzhě",
+      "vi": "Bạn không cần ngay lập tức trở thành một người làm việc “đơn nhiệm” hoàn toàn,"
+    },
+    {
+      "start": 512.47,
+      "end": 516.17,
+      "en": "You can start by trying one or two 'focus time blocks' each day.",
+      "zh": "可以从每天一两个“专注时间块”开始尝试。",
+      "pinyin": "Kěyǐ cóng měitiān yī liǎng gè zhuānzhù shíjiān kuài kāishǐ chángshì",
+      "vi": "có thể bắt đầu thử với một hai “khối thời gian tập trung” mỗi ngày."
+    },
+    {
+      "start": 516.2,
+      "end": 519.17,
+      "en": "After hearing your advice, I really want to give it a try.",
+      "zh": "听了你的建议，我很想试试。",
+      "pinyin": "Tīng le nǐ de jiànyì wǒ hěn xiǎng shìshi",
+      "vi": "Nghe lời khuyên của bạn, tôi rất muốn thử."
+    },
+    {
+      "start": 519.2,
+      "end": 521.8,
+      "en": "So you've always stuck with 'single-tasking,'",
+      "zh": "那你一直坚持“单任务”工作，",
+      "pinyin": "Nà nǐ yīzhí jiānchí dān rènwu gōngzuò",
+      "vi": "Vậy bạn luôn kiên trì làm việc “đơn nhiệm”,"
+    },
+    {
+      "start": 521.83,
+      "end": 524.6,
+      "en": "what do you think is its biggest benefit?",
+      "zh": "你觉得它最大的好处是什么？",
+      "pinyin": "Nǐ juéde tā zuìdà de hǎochù shì shénme",
+      "vi": "bạn thấy lợi ích lớn nhất của nó là gì?"
+    },
+    {
+      "start": 524.63,
+      "end": 530.16,
+      "en": "For me, the biggest benefit is being able to enter a state called 'deep work.'",
+      "zh": "对我来说，最大的好处是能进入一种叫做“深度工作”的状态。",
+      "pinyin": "Duì wǒ lái shuō zuìdà de hǎochù shì néng jìnrù yī zhǒng jiàozuò shēndù gōngzuò de zhuàngtài",
+      "vi": "Với tôi, lợi ích lớn nhất là có thể bước vào một trạng thái gọi là “làm việc sâu”."
+    },
+    {
+      "start": 530.17,
+      "end": 533.9,
+      "en": "When you focus on a challenging task for a long time,",
+      "zh": "当你长时间专注于一件有挑战性的事情时，",
+      "pinyin": "Dāng nǐ cháng shíjiān zhuānzhù yú yī jiàn yǒu tiǎozhànxìng de shìqíng shí",
+      "vi": "Khi bạn tập trung vào một việc có tính thách thức trong thời gian dài,"
+    },
+    {
+      "start": 533.9,
+      "end": 536.3,
+      "en": "you'll feel completely absorbed,",
+      "zh": "你会感觉完全投入进去，",
+      "pinyin": "Nǐ huì gǎnjué wánquán tóurù jìnqù",
+      "vi": "bạn sẽ cảm thấy hoàn toàn đắm chìm vào đó,"
+    },
+    {
+      "start": 536.33,
+      "end": 539.33,
+      "en": "forgetting time and forgetting everything around you.",
+      "zh": "忘记了时间，忘记了周围的一切。",
+      "pinyin": "Wàngjì le shíjiān wàngjì le zhōuwéi de yīqiè",
+      "vi": "quên mất thời gian, quên mất mọi thứ xung quanh."
+    },
+    {
+      "start": 539.37,
+      "end": 544.1,
+      "en": "In this state, your work efficiency and creativity are at their highest.",
+      "zh": "在这种状态下，你的工作效率和创造力是最高的。",
+      "pinyin": "Zài zhè zhǒng zhuàngtài xià nǐ de gōngzuò xiàolǜ hé chuàngzàolì shì zuì gāo de",
+      "vi": "Trong trạng thái này, hiệu suất làm việc và khả năng sáng tạo của bạn là cao nhất."
+    },
+    {
+      "start": 544.13,
+      "end": 546.86,
+      "en": "I seem to have had a similar experience!",
+      "zh": "我好像有过类似的体验！",
+      "pinyin": "Wǒ hǎoxiàng yǒu guò lèisì de tǐyàn",
+      "vi": "Tôi hình như đã từng có trải nghiệm tương tự!"
+    },
+    {
+      "start": 546.9,
+      "end": 549.97,
+      "en": "For example, when I read a particularly captivating novel,",
+      "zh": "比如我看一本特别吸引人的小说，",
+      "pinyin": "Bǐrú wǒ kàn yī běn tèbié xīyǐn rén de xiǎoshuō",
+      "vi": "Ví dụ, khi tôi đọc một cuốn tiểu thuyết đặc biệt hấp dẫn,"
+    },
+    {
+      "start": 549.97,
+      "end": 553,
+      "en": "or build a very complex Lego model,",
+      "zh": "或者拼一个很复杂的乐高模型的时候，",
+      "pinyin": "Huòzhě pīn yī gè hěn fùzá de Lè gāo móxíng de shíhou",
+      "vi": "hoặc khi lắp một mô hình Lego rất phức tạp,"
+    },
+    {
+      "start": 553.03,
+      "end": 555.53,
+      "en": "I really do feel that time flies,",
+      "zh": "确实会感觉时间过得飞快，",
+      "pinyin": "Quèshí huì gǎnjué shíjiān guò de fēikuài",
+      "vi": "quả thật sẽ cảm thấy thời gian trôi qua rất nhanh,"
+    },
+    {
+      "start": 555.57,
+      "end": 558.63,
+      "en": "and feel very calm and fulfilled inside.",
+      "zh": "而且内心非常平静和满足。",
+      "pinyin": "Érqiě nèixīn fēicháng píngjìng hé mǎnzú",
+      "vi": "và trong lòng rất bình yên và thỏa mãn."
+    },
+    {
+      "start": 558.63,
+      "end": 561.23,
+      "en": "Exactly! That's the feeling.",
+      "zh": "没错！就是那种感觉。",
+      "pinyin": "Méi cuò Jiù shì nà zhǒng gǎnjué",
+      "vi": "Đúng vậy! Chính là cảm giác đó."
+    },
+    {
+      "start": 561.27,
+      "end": 564.47,
+      "en": "'Single-tasking' is not just a work method,",
+      "zh": "“单任务”不仅仅是一种工作方法，",
+      "pinyin": "Dān rènwu bù jǐnjǐn shì yī zhǒng gōngzuò fāngfǎ",
+      "vi": "“Đơn nhiệm” không chỉ là một phương pháp làm việc,"
+    },
+    {
+      "start": 564.5,
+      "end": 566.63,
+      "en": "it's more like a philosophy.",
+      "zh": "它更像是一种哲学。",
+      "pinyin": "Tā gèng xiàng shì yī zhǒng zhéxué",
+      "vi": "nó còn giống như một triết lý."
+    },
+    {
+      "start": 566.67,
+      "end": 570.23,
+      "en": "It can help us push back against this distraction-filled world,",
+      "zh": "它能帮助我们对抗这个充满干扰的世界，",
+      "pinyin": "Tā néng bāngzhù wǒmen duìkàng zhège chōngmǎn gānrǎo de shìjiè",
+      "vi": "Nó có thể giúp chúng ta chống lại thế giới đầy xao nhãng này,"
+    },
+    {
+      "start": 570.23,
+      "end": 572.83,
+      "en": "and regain inner calm and focus.",
+      "zh": "找回内心的平静和专注力。",
+      "pinyin": "Zhǎo huí nèixīn de píngjìng hé zhuānzhùlì",
+      "vi": "tìm lại sự bình yên và khả năng tập trung trong nội tâm."
+    },
+    {
+      "start": 572.87,
+      "end": 576.04,
+      "en": "Now that you say that, it feels like a whole new level.",
+      "zh": "你这么一说，感觉境界都高了。",
+      "pinyin": "Nǐ zhème yī shuō gǎnjué jìngjiè dōu gāo le",
+      "vi": "Nghe bạn nói vậy, tôi thấy như mình đạt đến cảnh giới cao hơn."
+    },
+    {
+      "start": 576.07,
+      "end": 579.4,
+      "en": "I have an analogy here; I don't know if it's appropriate.",
+      "zh": "我这里有一个比喻，不知道合不合适。",
+      "pinyin": "Wǒ zhèlǐ yǒu yī gè bǐyù bù zhīdào hé bù héshì",
+      "vi": "Tôi có một ví dụ so sánh ở đây, không biết có phù hợp không."
+    },
+    {
+      "start": 579.43,
+      "end": 582.93,
+      "en": "I think our brains are like a kitchen.",
+      "zh": "我觉得我们的大脑就像一个厨房。",
+      "pinyin": "Wǒ juéde wǒmen de dànǎo jiù xiàng yī gè chúfáng",
+      "vi": "Tôi nghĩ bộ não của chúng ta giống như một căn bếp."
+    },
+    {
+      "start": 582.97,
+      "end": 586.7,
+      "en": "If I want to make a very exquisite, delicious French meal,",
+      "zh": "如果我想做一道非常精致、美味的法国大餐，",
+      "pinyin": "Rúguǒ wǒ xiǎng zuò yī dào fēicháng jīngzhì měiwèi de Fǎguó dàcān",
+      "vi": "Nếu tôi muốn làm một bữa ăn Pháp thật tinh tế và ngon miệng,"
+    },
+    {
+      "start": 586.7,
+      "end": 589.93,
+      "en": "I must be fully focused and precisely control the heat,",
+      "zh": "我必须全神贯注，精确地控制火候，",
+      "pinyin": "Wǒ bìxū quánshén guànzhù jīngquè de kòngzhì huǒhòu",
+      "vi": "Tôi phải hoàn toàn tập trung, kiểm soát chính xác lửa,"
+    },
+    {
+      "start": 589.93,
+      "end": 591.33,
+      "en": "step by step.",
+      "zh": "一步一步来。",
+      "pinyin": "Yī bù yī bù lái",
+      "vi": "làm từng bước một."
+    },
+    {
+      "start": 591.37,
+      "end": 593.54,
+      "en": "This is your 'single-tasking' mode.",
+      "zh": "这就是你的“单任务”模式。",
+      "pinyin": "Zhè jiù shì nǐ de dān rènwu móshì",
+      "vi": "Đây chính là mô hình “đơn nhiệm” của bạn."
+    },
+    {
+      "start": 593.57,
+      "end": 596.37,
+      "en": "That analogy is great! What about you?",
+      "zh": "这个比喻非常好！那你呢？",
+      "pinyin": "Zhège bǐyù fēicháng hǎo Nà nǐ ne",
+      "vi": "Ví dụ này rất hay! Còn bạn thì sao?"
+    },
+    {
+      "start": 596.37,
+      "end": 600.57,
+      "en": "As for me, I'm like a chef in a very busy fast-food restaurant.",
+      "zh": "我呢，就像一个生意特别好的快餐店里的厨师。",
+      "pinyin": "Wǒ ne jiù xiàng yī gè shēngyi tèbié hǎo de kuàicāndiàn lǐ de chúshī",
+      "vi": "Còn tôi thì giống như một đầu bếp trong một cửa hàng thức ăn nhanh đông khách."
+    },
+    {
+      "start": 600.6,
+      "end": 604.2,
+      "en": "I need to fry eggs, toast bread, and fry French fries at the same time,",
+      "zh": "我需要同时煎鸡蛋、烤面包、炸薯条，",
+      "pinyin": "Wǒ xūyào tóngshí jiān jīdàn kǎo miànbāo zhá shǔtiáo",
+      "vi": "Tôi cần đồng thời rán trứng, nướng bánh mì, chiên khoai tây,"
+    },
+    {
+      "start": 604.23,
+      "end": 605.6,
+      "en": "and also prepare drinks.",
+      "zh": "还要准备饮料。",
+      "pinyin": "Hái yào zhǔnbèi yǐnliào",
+      "vi": "còn phải chuẩn bị đồ uống."
+    },
+    {
+      "start": 605.6,
+      "end": 608.1,
+      "en": "My goal is, in the shortest time possible,",
+      "zh": "我的目标是在最短的时间内，",
+      "pinyin": "Wǒ de mùbiāo shì zài zuì duǎn de shíjiān nèi",
+      "vi": "Mục tiêu của tôi là trong thời gian ngắn nhất,"
+    },
+    {
+      "start": 608.13,
+      "end": 610.3,
+      "en": "to make everything the customers order.",
+      "zh": "把顾客点的东西都做出来。",
+      "pinyin": "Bǎ gùkè diǎn de dōngxi dōu zuò chūlái",
+      "vi": "làm ra tất cả những gì khách gọi."
+    },
+    {
+      "start": 610.33,
+      "end": 612.63,
+      "en": "This is my 'multitasking' mode.",
+      "zh": "这就是我的“多任务”模式。",
+      "pinyin": "Zhè jiù shì wǒ de duō rènwu móshì",
+      "vi": "Đây chính là mô hình “đa nhiệm” của tôi."
+    },
+    {
+      "start": 612.67,
+      "end": 615.34,
+      "en": "Haha, this analogy is so vivid!",
+      "zh": "哈哈，这个比喻太形象了！",
+      "pinyin": "Hāhā zhège bǐyù tài xíngxiàng le",
+      "vi": "Haha, ví dụ này quá sinh động rồi!"
+    },
+    {
+      "start": 615.37,
+      "end": 618.64,
+      "en": "French meals and fast food have different goals,",
+      "zh": "法国大餐和快餐，它们的目标不同，",
+      "pinyin": "Fǎguó dàcān hé kuàicān tāmen de mùbiāo bùtóng",
+      "vi": "Bữa ăn Pháp và thức ăn nhanh, mục tiêu của chúng khác nhau,"
+    },
+    {
+      "start": 618.67,
+      "end": 620.43,
+      "en": "and their preparation processes are completely different too.",
+      "zh": "制作过程也完全不同。",
+      "pinyin": "Zhìzuò guòchéng yě wánquán bùtóng",
+      "vi": "quá trình làm cũng hoàn toàn khác nhau."
+    },
+    {
+      "start": 620.43,
+      "end": 623.7,
+      "en": "French meals pursue ultimate quality and experience,",
+      "zh": "法国大餐追求的是极致的品质和体验，",
+      "pinyin": "Fǎguó dàcān zhuīqiú de shì jízhì de pǐnzhì hé tǐyàn",
+      "vi": "Bữa ăn Pháp theo đuổi chất lượng và trải nghiệm tối thượng,"
+    },
+    {
+      "start": 623.73,
+      "end": 626.2,
+      "en": "while fast food pursues speed and convenience.",
+      "zh": "而快餐追求的是速度和便利。",
+      "pinyin": "Ér kuàicān zhuīqiú de shì sùdù hé biànlì",
+      "vi": "còn thức ăn nhanh theo đuổi tốc độ và sự tiện lợi."
+    },
+    {
+      "start": 626.2,
+      "end": 628.03,
+      "en": "They aren't absolutely good or bad,",
+      "zh": "它们没有绝对的好坏，",
+      "pinyin": "Tāmen méiyǒu juéduì de hǎohuài",
+      "vi": "Chúng không có tốt xấu tuyệt đối,"
+    },
+    {
+      "start": 628.07,
+      "end": 630.3,
+      "en": "they're just suited to different situations.",
+      "zh": "只是适用于不同的场景。",
+      "pinyin": "Zhǐshì shìyòng yú bùtóng de chǎngjǐng",
+      "vi": "chỉ là phù hợp với những tình huống khác nhau."
+    },
+    {
+      "start": 630.33,
+      "end": 633.03,
+      "en": "Right! That's exactly what I wanted to say!",
+      "zh": "对！我想说的就是这个！",
+      "pinyin": "Duì Wǒ xiǎng shuō de jiù shì zhège",
+      "vi": "Đúng! Tôi muốn nói chính là điều này!"
+    },
+    {
+      "start": 633.07,
+      "end": 638.74,
+      "en": "However, Li Ming, will your 'single-tasking' mode run into challenges in reality?",
+      "zh": "不过，李明，你的“单任务”模式，在现实中会不会遇到挑战？",
+      "pinyin": "Bùguò Lǐ Míng nǐ de dān rènwu móshì zài xiànshí zhōng huì bù huì yùdào tiǎozhàn",
+      "vi": "Tuy nhiên, Lý Minh, mô hình “đơn nhiệm” của bạn liệu trong thực tế có gặp thách thức không?"
+    },
+    {
+      "start": 638.77,
+      "end": 642.34,
+      "en": "For example, if your colleagues or boss keep looking for you,",
+      "zh": "比如，你的同事或者老板一直在找你，",
+      "pinyin": "Bǐrú nǐ de tóngshì huòzhě lǎobǎn yīzhí zài zhǎo nǐ",
+      "vi": "Ví dụ, đồng nghiệp hoặc sếp của bạn cứ tìm bạn,"
+    },
+    {
+      "start": 642.37,
+      "end": 644.53,
+      "en": "you can't just keep not responding, right?",
+      "zh": "你总不能一直不回复吧？",
+      "pinyin": "Nǐ zǒng bù néng yīzhí bù huífù ba",
+      "vi": "bạn không thể cứ mãi không trả lời chứ?"
+    },
+    {
+      "start": 644.53,
+      "end": 645.96,
+      "en": "Of course I'll run into challenges.",
+      "zh": "当然会遇到挑战。",
+      "pinyin": "Dāngrán huì yùdào tiǎozhàn",
+      "vi": "Tất nhiên sẽ gặp thách thức."
+    },
+    {
+      "start": 646,
+      "end": 648.4,
+      "en": "This requires some communication and skill.",
+      "zh": "这需要一些沟通和技巧。",
+      "pinyin": "Zhè xūyào yīxiē gōutōng hé jìqiǎo",
+      "vi": "Điều này cần một số giao tiếp và kỹ năng."
+    },
+    {
+      "start": 648.4,
+      "end": 651.07,
+      "en": "For example, I'll tell my team in advance,",
+      "zh": "比如，我会提前告诉我的团队，",
+      "pinyin": "Bǐrú wǒ huì tíqián gàosu wǒ de tuánduì",
+      "vi": "Ví dụ, tôi sẽ nói trước với nhóm của mình,"
+    },
+    {
+      "start": 651.1,
+      "end": 654.6,
+      "en": "9 to 11 a.m. is my “focused work time,”",
+      "zh": "我上午的9点到11点是我的“专注工作时间”，",
+      "pinyin": "Wǒ shàngwǔ de jiǔ diǎn dào shíyī diǎn shì wǒ de “zhuānzhù gōngzuò shíjiān”,",
+      "vi": "Buổi sáng từ 9 đến 11 giờ là “thời gian làm việc tập trung” của tôi,"
+    },
+    {
+      "start": 654.63,
+      "end": 656.8,
+      "en": "Please don't disturb me unless it's urgent.",
+      "zh": "非紧急情况请不要打扰我。",
+      "pinyin": "Fēi jǐnjí qíngkuàng qǐng bùyào dǎrǎo wǒ.",
+      "vi": "Nếu không phải trường hợp khẩn cấp, xin đừng làm phiền tôi."
+    },
+    {
+      "start": 656.83,
+      "end": 660.93,
+      "en": "Or I use some tools to manage my task list,",
+      "zh": "或者，我会使用一些工具来管理我的任务清单，",
+      "pinyin": "Huòzhě, wǒ huì shǐyòng yīxiē gōngjù lái guǎnlǐ wǒ de rènwu qīngdān,",
+      "vi": "Hoặc tôi sẽ dùng một số công cụ để quản lý danh sách công việc của mình,"
+    },
+    {
+      "start": 660.97,
+      "end": 663.9,
+      "en": "sorting things by importance and urgency.",
+      "zh": "把事情按重要和紧急程度排序。",
+      "pinyin": "Bǎ shìqing àn zhòngyào hé jǐnjí chéngdù páixù.",
+      "vi": "Sắp xếp công việc theo mức độ quan trọng và khẩn cấp."
+    },
+    {
+      "start": 663.93,
+      "end": 668.36,
+      "en": "That way I can ensure I'm always doing what I should be doing right now.",
+      "zh": "这样我就能保证，我总是在做当下最应该做的事。",
+      "pinyin": "Zhèyàng wǒ jiù néng bǎozhèng, wǒ zǒngshì zài zuò dāngxià zuì yīnggāi zuò de shì.",
+      "vi": "Như vậy tôi có thể đảm bảo rằng mình luôn làm việc nên làm nhất ở hiện tại."
+    },
+    {
+      "start": 668.4,
+      "end": 671.37,
+      "en": "This reminds me of a concept in Chinese culture,",
+      "zh": "这让我想到了一个中国文化里的概念，",
+      "pinyin": "Zhè ràng wǒ xiǎngdào le yí gè Zhōngguó wénhuà lǐ de gàiniàn,",
+      "vi": "Điều này khiến tôi nghĩ đến một khái niệm trong văn hóa Trung Quốc,"
+    },
+    {
+      "start": 671.4,
+      "end": 673.17,
+      "en": "called the “craftsmanship spirit.”",
+      "zh": "叫做“工匠精神”。",
+      "pinyin": "jiàozuò “gōngjiàng jīngshén”.",
+      "vi": "gọi là “tinh thần thợ thủ công”."
+    },
+    {
+      "start": 673.2,
+      "end": 676.97,
+      "en": "Those craftspeople, such as sculptors and watchmakers,",
+      "zh": "那些手艺人，比如雕刻家、制表师，",
+      "pinyin": "Nàxiē shǒuyìrén, bǐrú diāokèjiā, zhìbiǎoshī,",
+      "vi": "Những người thợ thủ công đó, như nhà điêu khắc, thợ làm đồng hồ,"
+    },
+    {
+      "start": 677,
+      "end": 681.1,
+      "en": "they spend a lifetime focusing on doing one thing well,",
+      "zh": "他们都是花一辈子的时间，专注于做好一件事，",
+      "pinyin": "tāmen dōu shì huā yībèizi de shíjiān, zhuānzhù yú zuò hǎo yí jiàn shì,",
+      "vi": "họ đều dành cả đời, tập trung làm tốt một việc,"
+    },
+    {
+      "start": 681.13,
+      "end": 683.13,
+      "en": "and ultimately take it to the extreme.",
+      "zh": "最后做到了极致。",
+      "pinyin": "zuìhòu zuòdào le jízhì.",
+      "vi": "cuối cùng đạt đến mức hoàn hảo."
+    },
+    {
+      "start": 683.17,
+      "end": 687.34,
+      "en": "This spirit is actually the highest level of “single-tasking,” isn't it?",
+      "zh": "这种精神，其实就是“单任务”的最高境界吧。",
+      "pinyin": "Zhè zhǒng jīngshén, qíshí jiùshì “dān rènwu” de zuìgāo jìngjiè ba.",
+      "vi": "Tinh thần này thực ra chính là cảnh giới cao nhất của “đơn nhiệm” nhỉ."
+    },
+    {
+      "start": 687.37,
+      "end": 689.27,
+      "en": "You're absolutely right.",
+      "zh": "你说得太对了。",
+      "pinyin": "Nǐ shuō de tài duì le.",
+      "vi": "Bạn nói quá đúng."
+    },
+    {
+      "start": 689.3,
+      "end": 694.3,
+      "en": "The core of the “craftsmanship spirit” is focus, persistence, and the pursuit of perfection.",
+      "zh": "“工匠精神”的核心就是专注、坚持和追求完美。",
+      "pinyin": "“Gōngjiàng jīngshén” de héxīn jiùshì zhuānzhù, jiānchí hé zhuīqiú wánměi.",
+      "vi": "Cốt lõi của “tinh thần thợ thủ công” chính là tập trung, kiên trì và theo đuổi sự hoàn hảo."
+    },
+    {
+      "start": 694.33,
+      "end": 698.4,
+      "en": "In fact, ancient Chinese wisdom has always emphasized the power of focus.",
+      "zh": "其实，中国古代的智慧里，也一直强调专注的力量。",
+      "pinyin": "Qíshí, Zhōngguó gǔdài de zhìhuì lǐ, yě yīzhí qiángdiào zhuānzhù de lìliàng.",
+      "vi": "Thực ra, trong trí tuệ Trung Quốc cổ đại, người ta cũng luôn nhấn mạnh sức mạnh của sự tập trung."
+    },
+    {
+      "start": 698.43,
+      "end": 702.4,
+      "en": "For example, we often mention the idiom “zhuānxīn zhìzhì” (single-minded dedication).",
+      "zh": "比如我们常说一个成语，叫“专心致志”。",
+      "pinyin": "Bǐrú wǒmen cháng shuō yí gè chéngyǔ, jiào “zhuānxīn zhìzhì”.",
+      "vi": "Ví dụ chúng ta thường nói một thành ngữ là “chuyên tâm trí chí”."
+    },
+    {
+      "start": 702.4,
+      "end": 704.67,
+      "en": "Right, and also “yīxīn yīyì” (wholehearted devotion).",
+      "zh": "对，还有“一心一意”。",
+      "pinyin": "Duì, hái yǒu “yīxīn yīyì”.",
+      "vi": "Đúng, còn có “một lòng một dạ”."
+    },
+    {
+      "start": 704.67,
+      "end": 707.17,
+      "en": "Conversely, there's “yīxīn èryòng” (doing two things at once).",
+      "zh": "反过来说，就是“一心二用”。",
+      "pinyin": "Fǎn guòlái shuō, jiùshì “yīxīn èryòng”.",
+      "vi": "Nói ngược lại, chính là “một lòng hai việc”."
+    },
+    {
+      "start": 707.2,
+      "end": 709.97,
+      "en": "The ancients didn't seem to approve of doing two things at once.",
+      "zh": "古人好像不太赞成“一心二用”。",
+      "pinyin": "Gǔrén hǎoxiàng bù tài zànchéng “yīxīn èryòng”.",
+      "vi": "Người xưa có vẻ không tán thành “một lòng hai việc”."
+    },
+    {
+      "start": 709.97,
+      "end": 714.44,
+      "en": "Yes, the ancients said, “A mind cannot be used for two things, and two things cannot both succeed,”",
+      "zh": "是的，古人说，“心无二用，事无两成”，",
+      "pinyin": "Shì de, gǔrén shuō, “xīn wú èr yòng, shì wú liǎng chéng”,",
+      "vi": "Đúng vậy, người xưa nói: “Lòng không thể dùng hai việc, việc không thể thành hai.”"
+    },
+    {
+      "start": 714.47,
+      "end": 718.87,
+      "en": "meaning if you do two things at once, you may not do either well.",
+      "zh": "意思是你如果一心二用，那两件事可能都做不好。",
+      "pinyin": "Yìsi shì nǐ rúguǒ yīxīn èryòng, nà liǎng jiàn shì kěnéng dōu zuò bù hǎo.",
+      "vi": "Nghĩa là nếu bạn một lòng hai việc, thì có thể cả hai việc đều không làm tốt."
+    },
+    {
+      "start": 718.9,
+      "end": 723.27,
+      "en": "This is actually the same principle as the “multitasking trap” we discussed today.",
+      "zh": "这和我们今天讨论的“多任务”的陷阱，其实是一个道理。",
+      "pinyin": "Zhè hé wǒmen jīntiān tǎolùn de “duō rènwu” de xiànjǐng, qíshí shì yí gè dàolǐ.",
+      "vi": "Điều này thực ra cũng cùng một lý lẽ với “cái bẫy đa nhiệm” mà chúng ta thảo luận hôm nay."
+    },
+    {
+      "start": 723.3,
+      "end": 728.4,
+      "en": "After all this discussion, I feel our views seem to be gradually converging.",
+      "zh": "聊了这么多，我觉得我们俩的观点好像开始慢慢靠近了。",
+      "pinyin": "Liáo le zhème duō, wǒ juéde wǒmen liǎ de guāndiǎn hǎoxiàng kāishǐ mànman kàojìn le.",
+      "vi": "Nói chuyện nhiều như vậy, tôi thấy quan điểm của hai chúng ta hình như bắt đầu dần dần xích lại gần nhau."
+    },
+    {
+      "start": 728.43,
+      "end": 730.3,
+      "en": "Really? How so?",
+      "zh": "是吗？怎么说？",
+      "pinyin": "Shì ma? Zěnme shuō?",
+      "vi": "Vậy à? Sao lại nói thế?"
+    },
+    {
+      "start": 730.33,
+      "end": 733.96,
+      "en": "I'm starting to realize that “multitasking” isn't always efficient,",
+      "zh": "我开始认识到，“多任务”并不总是高效的，",
+      "pinyin": "Wǒ kāishǐ rènshi dào, “duō rènwu” bìng bù zǒngshì gāoxiào de,",
+      "vi": "Tôi bắt đầu nhận ra rằng “đa nhiệm” không phải lúc nào cũng hiệu quả,"
+    },
+    {
+      "start": 734,
+      "end": 738.97,
+      "en": "especially when handling complex and important work, it can cause many problems.",
+      "zh": "尤其是在处理复杂和重要的工作时，它可能会带来很多问题。",
+      "pinyin": "yóuqí shì zài chǔlǐ fùzá hé zhòngyào de gōngzuò shí, tā kěnéng huì dàilái hěn duō wèntí.",
+      "vi": "đặc biệt là khi xử lý công việc phức tạp và quan trọng, nó có thể mang lại nhiều vấn đề."
+    },
+    {
+      "start": 738.97,
+      "end": 743.27,
+      "en": "And you just admitted that “single-tasking,” when facing a fast-paced,",
+      "zh": "而你刚才也承认了，“单任务”在面对一个快节奏、",
+      "pinyin": "ér nǐ gāngcái yě chéngrèn le, “dān rènwu” zài miànduì yí gè kuài jiézòu,",
+      "vi": "Còn bạn vừa rồi cũng thừa nhận rằng “đơn nhiệm” khi đối mặt với một môi trường nhịp độ nhanh,"
+    },
+    {
+      "start": 743.27,
+      "end": 746.8,
+      "en": "ever-changing environment, also needs flexibility.",
+      "zh": "多变化的环境时，也需要灵活变通。",
+      "pinyin": "duō biànhuà de huánjìng shí, yě xūyào línghuó biàntōng.",
+      "vi": "nhiều biến đổi, cũng cần linh hoạt ứng biến."
+    },
+    {
+      "start": 746.8,
+      "end": 747.7,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 747.7,
+      "end": 751.9,
+      "en": "So the conclusion may not be which is better, “multitasking” or “single-tasking,”",
+      "zh": "所以，结论可能不是“多任务”和“单任务”哪个更好，",
+      "pinyin": "Suǒyǐ, jiélùn kěnéng bùshì “duō rènwu” hé “dān rènwu” nǎge gèng hǎo,",
+      "vi": "Vì vậy, kết luận có thể không phải là “đa nhiệm” hay “đơn nhiệm” cái nào tốt hơn,"
+    },
+    {
+      "start": 751.93,
+      "end": 755.66,
+      "en": "but that in different situations, we should choose different strategies.",
+      "zh": "而是在不同的情况下，我们应该选择不同的策略。",
+      "pinyin": "ér shì zài bùtóng de qíngkuàng xià, wǒmen yīnggāi xuǎnzé bùtóng de cèlüè.",
+      "vi": "mà là trong những tình huống khác nhau, chúng ta nên chọn những chiến lược khác nhau."
+    },
+    {
+      "start": 755.67,
+      "end": 756.43,
+      "en": "Exactly!",
+      "zh": "没错！",
+      "pinyin": "Méicuò!",
+      "vi": "Đúng vậy!"
+    },
+    {
+      "start": 756.43,
+      "end": 758.73,
+      "en": "Just like the kitchen analogy we mentioned earlier.",
+      "zh": "就像我们刚才说的厨房的比喻。",
+      "pinyin": "Jiù xiàng wǒmen gāngcái shuō de chúfáng de bǐyù.",
+      "vi": "Giống như phép so sánh nhà bếp mà chúng ta vừa nói."
+    },
+    {
+      "start": 758.73,
+      "end": 765.4,
+      "en": "If I just want to listen to music while cleaning, “multitasking” is totally fine,",
+      "zh": "如果我只是想一边听音乐，一边打扫卫生，那“多任务”完全没问题，",
+      "pinyin": "Rúguǒ wǒ zhǐshì xiǎng yībiān tīng yīnyuè, yībiān dǎsǎo wèishēng, nà “duō rènwu” wánquán méi wèntí,",
+      "vi": "Nếu tôi chỉ muốn vừa nghe nhạc vừa dọn dẹp vệ sinh, thì “đa nhiệm” hoàn toàn không vấn đề gì,"
+    },
+    {
+      "start": 765.4,
+      "end": 768.47,
+      "en": "and can even make boring chores a bit more fun.",
+      "zh": "甚至还能让无聊的家务变得有趣一点。",
+      "pinyin": "shènzhì hái néng ràng wúliáo de jiāwù biànde yǒuqù yīdiǎn.",
+      "vi": "thậm chí còn có thể khiến việc nhà nhàm chán trở nên thú vị hơn một chút."
+    },
+    {
+      "start": 768.5,
+      "end": 769.1,
+      "en": "Agreed.",
+      "zh": "同意。",
+      "pinyin": "Tóngyì.",
+      "vi": "Đồng ý."
+    },
+    {
+      "start": 769.1,
+      "end": 773.17,
+      "en": "But if you need to prepare for an important exam or learn a new language,",
+      "zh": "但如果你要准备一场重要的考试，或者学习一门新的语言，",
+      "pinyin": "Dàn rúguǒ nǐ yào zhǔnbèi yì chǎng zhòngyào de kǎoshì, huòzhě xuéxí yì mén xīn de yǔyán,",
+      "vi": "Nhưng nếu bạn phải chuẩn bị một kỳ thi quan trọng, hoặc học một ngôn ngữ mới,"
+    },
+    {
+      "start": 773.17,
+      "end": 777.13,
+      "en": "such as Chinese, then you must adopt “single-tasking” mode.",
+      "zh": "比如中文，那你就必须采用“单任务”模式。",
+      "pinyin": "bǐrú Zhōngwén, nà nǐ jiù bìxū cǎiyòng “dān rènwu” móshì.",
+      "vi": "ví dụ tiếng Trung, thì bạn buộc phải áp dụng chế độ “đơn nhiệm”."
+    },
+    {
+      "start": 777.13,
+      "end": 781.93,
+      "en": "You need to turn off the TV, put down your phone, and focus all your attention.",
+      "zh": "你需要关掉电视，放下手机，集中你所有的注意力。",
+      "pinyin": "Nǐ xūyào guāndiào diànshì, fàngxià shǒujī, jízhōng nǐ suǒyǒu de zhùyìlì.",
+      "vi": "Bạn cần tắt tivi, đặt điện thoại xuống, và tập trung toàn bộ sự chú ý."
+    },
+    {
+      "start": 781.97,
+      "end": 784.9,
+      "en": "Speaking of learning Chinese, this example is so right!",
+      "zh": "说到学中文，这个例子太对了！",
+      "pinyin": "Shuōdào xué Zhōngwén, zhège lìzi tài duì le!",
+      "vi": "Nói đến học tiếng Trung, ví dụ này quá đúng!"
+    },
+    {
+      "start": 784.9,
+      "end": 789.07,
+      "en": "I find that if I scroll on my phone while memorizing vocabulary,",
+      "zh": "我发现如果我一边刷手机，一边背单词，",
+      "pinyin": "Wǒ fāxiàn rúguǒ wǒ yībiān shuā shǒujī, yībiān bèi dāncí,",
+      "vi": "Tôi phát hiện nếu tôi vừa lướt điện thoại vừa học từ vựng,"
+    },
+    {
+      "start": 789.1,
+      "end": 793.2,
+      "en": "then basically an hour passes and I haven't remembered a single word.",
+      "zh": "那基本上一个小时过去了，一个单词也没记住。",
+      "pinyin": "nà jīběnshang yí gè xiǎoshí guòqù le, yí gè dāncí yě méi jìzhù.",
+      "vi": "thì cơ bản một tiếng trôi qua, không nhớ được từ nào."
+    },
+    {
+      "start": 793.23,
+      "end": 799.8,
+      "en": "But if I use the “time block” method you mentioned and focus for 25 minutes, the effect is especially good.",
+      "zh": "但如果我用你说的“时间块”方法，专注25分钟，效果就特别好。",
+      "pinyin": "Dàn rúguǒ wǒ yòng nǐ shuō de “shíjiān kuài” fāngfǎ, zhuānzhù èrshíwǔ fēnzhōng, xiàoguǒ jiù tèbié hǎo.",
+      "vi": "Nhưng nếu tôi dùng phương pháp “khối thời gian” bạn nói, tập trung 25 phút, hiệu quả lại đặc biệt tốt."
+    },
+    {
+      "start": 799.8,
+      "end": 800.97,
+      "en": "That's the key.",
+      "zh": "这就是关键。",
+      "pinyin": "Zhè jiùshì guānjiàn.",
+      "vi": "Đây chính là mấu chốt."
+    },
+    {
+      "start": 800.97,
+      "end": 803.77,
+      "en": "We need to consciously judge",
+      "zh": "我们需要有意识地去判断，",
+      "pinyin": "Wǒmen xūyào yǒu yìshí de qù pànduàn,",
+      "vi": "Chúng ta cần có ý thức phán đoán,"
+    },
+    {
+      "start": 803.77,
+      "end": 809.13,
+      "en": "whether what we're about to do is suited to becoming a “French feast” or “fast food.”",
+      "zh": "我们现在要做的这件事，是适合做成“法国大餐”，还是“快餐”。",
+      "pinyin": "wǒmen xiànzài yào zuò de zhè jiàn shì, shì shìhé zuòchéng “Fǎguó dàcān”, háishì “kuàicān”.",
+      "vi": "việc chúng ta cần làm bây giờ phù hợp để làm thành một bữa đại tiệc Pháp hay “đồ ăn nhanh”."
+    },
+    {
+      "start": 809.13,
+      "end": 810.53,
+      "en": "Then choose the appropriate mode.",
+      "zh": "然后选择合适的模式。",
+      "pinyin": "Ránhòu xuǎnzé héshì de móshì.",
+      "vi": "Sau đó chọn chế độ phù hợp."
+    },
+    {
+      "start": 810.53,
+      "end": 811.73,
+      "en": "I understand.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 811.73,
+      "end": 814.93,
+      "en": "So we should be the masters of our own attention,",
+      "zh": "所以，我们要做自己注意力的主人，",
+      "pinyin": "Suǒyǐ, wǒmen yào zuò zìjǐ zhùyìlì de zhǔrén,",
+      "vi": "Vì vậy, chúng ta phải làm chủ sự chú ý của mình,"
+    },
+    {
+      "start": 814.97,
+      "end": 818.64,
+      "en": "rather than being led around by all kinds of information and tasks.",
+      "zh": "而不是被各种信息和任务牵着鼻子走。",
+      "pinyin": "ér bùshì bèi gèzhǒng xìnxī hé rènwu qiānzhe bízi zǒu.",
+      "vi": "chứ không phải bị đủ loại thông tin và nhiệm vụ dắt mũi."
+    },
+    {
+      "start": 818.67,
+      "end": 819.9,
+      "en": "Well said!",
+      "zh": "说得太好了！",
+      "pinyin": "Shuō de tài hǎo le!",
+      "vi": "Nói quá hay!"
+    },
+    {
+      "start": 819.9,
+      "end": 821.17,
+      "en": "That's exactly what I mean.",
+      "zh": "就是这个意思。",
+      "pinyin": "Jiù shì zhège yìsi.",
+      "vi": "Đúng là ý đó."
+    },
+    {
+      "start": 821.2,
+      "end": 826.07,
+      "en": "We can intentionally create some “distraction-free” time and space for ourselves,",
+      "zh": "我们可以有意识地为自己创造一些“无干扰”的时间和空间，",
+      "pinyin": "Wǒmen kěyǐ yǒu yìshí de wèi zìjǐ chuàngzào yīxiē “wú gānrǎo” de shíjiān hé kōngjiān,",
+      "vi": "Chúng ta có thể có ý thức tạo ra cho mình một khoảng thời gian và không gian “không bị làm phiền”,"
+    },
+    {
+      "start": 826.07,
+      "end": 828.9,
+      "en": "to protect our most valuable focus.",
+      "zh": "来保护我们最宝贵的专注力。",
+      "pinyin": "Lái bǎohù wǒmen zuì bǎoguì de zhuānzhùlì.",
+      "vi": "để bảo vệ sự tập trung quý giá nhất của chúng ta."
+    },
+    {
+      "start": 828.93,
+      "end": 829.5,
+      "en": "Mm!",
+      "zh": "嗯！",
+      "pinyin": "Ǹg!",
+      "vi": "Ừm!"
+    },
+    {
+      "start": 829.5,
+      "end": 832.3,
+      "en": "I feel today's conversation has been especially inspiring to me.",
+      "zh": "我觉得今天的对话对我启发特别大。",
+      "pinyin": "Wǒ juéde jīntiān de duìhuà duì wǒ qǐfā tèbié dà.",
+      "vi": "Tôi thấy cuộc trò chuyện hôm nay mang lại cho tôi rất nhiều gợi mở."
+    },
+    {
+      "start": 832.33,
+      "end": 836.93,
+      "en": "I've decided that starting today, I won't blindly worship “multitasking” anymore,",
+      "zh": "我决定从今天开始，不再盲目地崇拜“多任务”，",
+      "pinyin": "Wǒ juédìng cóng jīntiān kāishǐ, bù zài mángmù de chóngbài “duō rènwu”,",
+      "vi": "Tôi quyết định từ hôm nay sẽ không còn mù quáng tôn sùng “đa nhiệm” nữa,"
+    },
+    {
+      "start": 836.97,
+      "end": 840.74,
+      "en": "but instead be a smart “task switcher,”",
+      "zh": "而是要做一个聪明的“任务切换者”，",
+      "pinyin": "Ér shì yào zuò yī gè cōngming de “rènwu qiēhuàn zhě”,",
+      "vi": "mà sẽ trở thành một “người chuyển đổi nhiệm vụ” thông minh,"
+    },
+    {
+      "start": 840.77,
+      "end": 846.4,
+      "en": "and find the balance point that suits me best between “multitasking” and “single-tasking.”",
+      "zh": "在“多任务”和“单任务”之间，找到一个最适合我自己的平衡点。",
+      "pinyin": "Zài “duō rènwu” hé “dān rènwu” zhījiān, zhǎodào yī gè zuì shìhé wǒ zìjǐ de pínghéngdiǎn.",
+      "vi": "tìm ra một điểm cân bằng phù hợp nhất với bản thân tôi giữa “đa nhiệm” và “đơn nhiệm”."
+    },
+    {
+      "start": 846.4,
+      "end": 848,
+      "en": "I believe you can do it.",
+      "zh": "我相信你能做到。",
+      "pinyin": "Wǒ xiāngxìn nǐ néng zuòdào.",
+      "vi": "Tôi tin bạn có thể làm được."
+    },
+    {
+      "start": 848.03,
+      "end": 853.9,
+      "en": "Actually, understanding your own habits and preferences and consciously optimizing them,",
+      "zh": "其实，了解自己的习惯和偏好，并且有意识地去优化它，",
+      "pinyin": "Qíshí, liǎojiě zìjǐ de xíguàn hé piānhào, bìngqiě yǒu yìshí de qù yōuhuà tā,",
+      "vi": "Thật ra, hiểu được thói quen và sở thích của mình, rồi có ý thức tối ưu hóa nó,"
+    },
+    {
+      "start": 853.9,
+      "end": 856.9,
+      "en": "is itself a very remarkable step forward.",
+      "zh": "这本身就是一个非常了不起的进步。",
+      "pinyin": "Zhè běnshēn jiù shì yī gè fēicháng liǎobùqǐ de jìnbù.",
+      "vi": "bản thân đó đã là một tiến bộ rất đáng nể."
+    },
+    {
+      "start": 856.93,
+      "end": 859.86,
+      "en": "All right, I feel we've talked very deeply today.",
+      "zh": "好了，感觉今天我们聊得非常深入。",
+      "pinyin": "Hǎo le, gǎnjué jīntiān wǒmen liáo de fēicháng shēnrù.",
+      "vi": "Được rồi, cảm giác hôm nay chúng ta trò chuyện rất sâu sắc."
+    },
+    {
+      "start": 859.87,
+      "end": 861.33,
+      "en": "It's about time.",
+      "zh": "时间也差不多了。",
+      "pinyin": "Shíjiān yě chàbuduō le.",
+      "vi": "Thời gian cũng sắp hết rồi."
+    },
+    {
+      "start": 861.33,
+      "end": 862.03,
+      "en": "Mm.",
+      "zh": "嗯。",
+      "pinyin": "Ǹg.",
+      "vi": "Ừm."
+    },
+    {
+      "start": 862.03,
+      "end": 866.76,
+      "en": "Today we talked a lot around the topic of “multitasking” and “single-tasking.”",
+      "zh": "今天我们围绕“多任务”和“单任务”这个话题，聊了很多。",
+      "pinyin": "Jīntiān wǒmen wéirào “duō rènwu” hé “dān rènwu” zhège huàtí, liáo le hěn duō.",
+      "vi": "Hôm nay chúng ta đã nói rất nhiều xoay quanh chủ đề “đa nhiệm” và “đơn nhiệm”."
+    },
+    {
+      "start": 866.77,
+      "end": 870.77,
+      "en": "Let's briefly review some key words and ideas that came up today.",
+      "zh": "我们来简单回顾一下今天出现的一些关键词和观点吧。",
+      "pinyin": "Wǒmen lái jiǎndān huígù yīxià jīntiān chūxiàn de yīxiē guānjiàncí hé guāndiǎn ba.",
+      "vi": "Chúng ta hãy đơn giản ôn lại một chút những từ khóa và quan điểm xuất hiện hôm nay nhé."
+    },
+    {
+      "start": 870.8,
+      "end": 872.77,
+      "en": "Okay, please summarize, Teacher Li Ming!",
+      "zh": "好的，李明老师请总结！",
+      "pinyin": "Hǎo de, Lǐ Míng lǎoshī qǐng zǒngjié!",
+      "vi": "Được, mời thầy Lý Minh tổng kết!"
+    },
+    {
+      "start": 872.77,
+      "end": 874.3,
+      "en": "Haha, I wouldn't dare.",
+      "zh": "哈哈，不敢当。",
+      "pinyin": "Hāhā, bù gǎndāng.",
+      "vi": "Haha, không dám nhận."
+    },
+    {
+      "start": 874.33,
+      "end": 878.8,
+      "en": "First, we discussed two ways of working: “multitasking,” which means “doing several things at once”;",
+      "zh": "首先，我们讨论了两种工作方式：“多任务”，也就是“一心多用”；",
+      "pinyin": "Shǒuxiān, wǒmen tǎolùn le liǎng zhǒng gōngzuò fāngshì: “duō rènwu”, yě jiùshì “yīxīn duōyòng”;",
+      "vi": "Đầu tiên, chúng ta đã thảo luận về hai cách làm việc: “đa nhiệm”, tức là “một lòng nhiều dụng”;"
+    },
+    {
+      "start": 878.8,
+      "end": 883,
+      "en": "and “single-tasking,” which means “focusing on one thing” or “being fully concentrated.”",
+      "zh": "和“单任务”，也就是“一心一意”或者“专心致志”。",
+      "pinyin": "Hé “dān rènwu”, yě jiùshì “yīxīn yīyì” huòzhě “zhuānxīn zhìzhì”.",
+      "vi": "và “đơn nhiệm”, tức là “một lòng một dạ” hoặc “toàn tâm toàn ý”."
+    },
+    {
+      "start": 883.03,
+      "end": 886.66,
+      "en": "We mentioned that the essence of “multitasking” may not be parallel processing,",
+      "zh": "我们谈到，“多任务”的本质可能不是并行处理，",
+      "pinyin": "Wǒmen tándào, “duō rènwu” de běnzhì kěnéng bù shì bìngxíng chǔlǐ,",
+      "vi": "Chúng ta có nhắc đến, bản chất của “đa nhiệm” có lẽ không phải là xử lý song song,"
+    },
+    {
+      "start": 886.67,
+      "end": 891.73,
+      "en": "but quickly “switching” between tasks, which drains our energy.",
+      "zh": "而是在任务间快速“切换”，这会消耗我们的精力。",
+      "pinyin": "Ér shì zài rènwu jiān kuàisù “qiēhuàn”, zhè huì xiāohào wǒmen de jīnglì.",
+      "vi": "mà là nhanh chóng “chuyển đổi” giữa các nhiệm vụ, điều này sẽ tiêu hao năng lượng của chúng ta."
+    },
+    {
+      "start": 891.73,
+      "end": 895.03,
+      "en": "Right, and then I also shared that embarrassing story of mine,",
+      "zh": "对，然后我还分享了我的那个尴尬的故事，",
+      "pinyin": "Duì, ránhòu wǒ hái fēnxiǎng le wǒ de nàge gāngà de gùshì,",
+      "vi": "Đúng, sau đó tôi còn chia sẻ câu chuyện ngượng ngùng của mình,"
+    },
+    {
+      "start": 895.07,
+      "end": 897.64,
+      "en": "to remind everyone that “multitasking” has risks!",
+      "zh": "提醒大家“多任务”有风险！",
+      "pinyin": "Tíxǐng dàjiā “duō rènwu” yǒu fēngxiǎn!",
+      "vi": "để nhắc mọi người rằng “đa nhiệm” có rủi ro!"
+    },
+    {
+      "start": 897.67,
+      "end": 901.07,
+      "en": "Yes. We also discussed the benefits of “single-tasking,”",
+      "zh": "是的。我们也讨论了“单任务”的好处，",
+      "pinyin": "Shì de. Wǒmen yě tǎolùn le “dān rènwu” de hǎochu,",
+      "vi": "Đúng vậy. Chúng ta cũng đã thảo luận về lợi ích của “đơn nhiệm”,"
+    },
+    {
+      "start": 901.13,
+      "end": 903.6,
+      "en": "such as being able to enter a state of “deep work,”",
+      "zh": "比如可以进入“深度工作”状态，",
+      "pinyin": "Bǐrú kěyǐ jìnrù “shēndù gōngzuò” zhuàngtài,",
+      "vi": "ví dụ có thể bước vào trạng thái “làm việc sâu”,"
+    },
+    {
+      "start": 903.6,
+      "end": 908,
+      "en": "ensuring work “quality,” and also experiencing the joy of the “craftsmanship spirit.”",
+      "zh": "保证工作“质量”，还能体验到“工匠精神”的乐趣。",
+      "pinyin": "Bǎozhèng gōngzuò “zhìliàng”, hái néng tǐyàn dào “gōngjiàng jīngshén” de lèqù.",
+      "vi": "đảm bảo “chất lượng” công việc, và còn có thể trải nghiệm niềm vui của “tinh thần thợ thủ công”."
+    },
+    {
+      "start": 908.03,
+      "end": 912.1,
+      "en": "The most important conclusion is that we don't need to make an absolute choice between the two,",
+      "zh": "最重要的结论是，我们不需要在两者之间做绝对的选择，",
+      "pinyin": "Zuì zhòngyào de jiélùn shì, wǒmen bù xūyào zài liǎng zhě zhījiān zuò juéduì de xuǎnzé,",
+      "vi": "Kết luận quan trọng nhất là, chúng ta không cần phải đưa ra lựa chọn tuyệt đối giữa hai cách,"
+    },
+    {
+      "start": 912.1,
+      "end": 916.57,
+      "en": "but rather find a “balance point” based on the specific situation.",
+      "zh": "而是要根据具体情况，找到一个“平衡点”。",
+      "pinyin": "Ér shì yào gēnjù jùtǐ qíngkuàng, zhǎodào yī gè “pínghéngdiǎn”.",
+      "vi": "mà là phải dựa vào tình huống cụ thể để tìm ra một “điểm cân bằng”."
+    },
+    {
+      "start": 916.6,
+      "end": 918.23,
+      "en": "Great summary!",
+      "zh": "总结得太棒了！",
+      "pinyin": "Zǒngjié de tài bàng le!",
+      "vi": "Tổng kết quá tuyệt!"
+    },
+    {
+      "start": 918.23,
+      "end": 919.7,
+      "en": "These words, for example",
+      "zh": "这些词，比如",
+      "pinyin": "Zhèxiē cí, bǐrú",
+      "vi": "Những từ này, ví dụ như"
+    },
+    {
+      "start": 919.7,
+      "end": 925.67,
+      "en": "“efficiency,” “focus,” “distraction,” “switching,” “quality,” “balance point,”",
+      "zh": "“效率”、“专注”、“分心”、“切换”、“质量”、“平衡点”，",
+      "pinyin": "“xiàolǜ”, “zhuānzhù”, “fēnxīn”, “qiēhuàn”, “zhìliàng”, “pínghéngdiǎn”,",
+      "vi": "“hiệu suất”, “tập trung”, “phân tâm”, “chuyển đổi”, “chất lượng”, “điểm cân bằng”,"
+    },
+    {
+      "start": 925.67,
+      "end": 930.5,
+      "en": "I think they are all very practical for listeners who are learning Chinese.",
+      "zh": "我觉得对正在学习中文的听众朋友们来说，都非常实用。",
+      "pinyin": "Wǒ juéde duì zhèngzài xuéxí Zhōngwén de tīngzhòng péngyoumen lái shuō, dōu fēicháng shíyòng.",
+      "vi": "Tôi nghĩ đối với các bạn thính giả đang học tiếng Trung, đều rất thiết thực."
+    },
+    {
+      "start": 930.53,
+      "end": 931.96,
+      "en": "I hope so.",
+      "zh": "希望如此。",
+      "pinyin": "Xīwàng rúcǐ.",
+      "vi": "Hy vọng là như vậy."
+    },
+    {
+      "start": 932,
+      "end": 936.73,
+      "en": "So, at the end of the program, we'd also like to leave a question for you, our listener.",
+      "zh": "那么，节目的最后，我们也想把问题留给正在收听的你。",
+      "pinyin": "Nàme, jiémù de zuìhòu, wǒmen yě xiǎng bǎ wèntí liú gěi zhèngzài shōutīng de nǐ.",
+      "vi": "Vậy thì, ở cuối chương trình, chúng tôi cũng muốn để lại câu hỏi cho bạn đang nghe."
+    },
+    {
+      "start": 936.77,
+      "end": 938.27,
+      "en": "Dear listeners,",
+      "zh": "亲爱的听众朋友们，",
+      "pinyin": "Qīn'ài de tīngzhòng péngyoumen,",
+      "vi": "Các bạn thính giả thân mến,"
+    },
+    {
+      "start": 938.3,
+      "end": 943.27,
+      "en": "do you think you're more like me, a “multitasking expert” who loves challenges,",
+      "zh": "你觉得自己是更像我，一个热爱挑战的“多任务达人”呢，",
+      "pinyin": "Nǐ juéde zìjǐ shì gèng xiàng wǒ, yī gè rè'ài tiǎozhàn de “duō rènwu dárén” ne,",
+      "vi": "bạn thấy mình giống tôi hơn, một “cao thủ đa nhiệm” yêu thích thử thách,"
+    },
+    {
+      "start": 943.27,
+      "end": 948.04,
+      "en": "or more like Li Ming, a calm and focused “single-tasking expert”?",
+      "zh": "还是更像李明，一个沉稳专注的“单任务专家”？",
+      "pinyin": "Háishì gèng xiàng Lǐ Míng, yī gè chénwěn zhuānzhù de “dān rènwu zhuānjiā”?",
+      "vi": "hay giống Lý Minh hơn, một “chuyên gia đơn nhiệm” điềm tĩnh và tập trung?"
+    },
+    {
+      "start": 948.07,
+      "end": 951.33,
+      "en": "Have you ever made any funny mistakes because of “doing two things at once”?",
+      "zh": "你有没有因为“一心二用”而犯过什么有趣的错误？",
+      "pinyin": "Nǐ yǒu méiyǒu yīnwèi “yīxīn èryòng” ér fàn guò shénme yǒuqù de cuòwù?",
+      "vi": "Bạn đã từng vì “một lòng hai dụng” mà phạm phải lỗi thú vị nào chưa?"
+    },
+    {
+      "start": 951.33,
+      "end": 954,
+      "en": "Or do you have any good methods for staying focused?",
+      "zh": "或者，你有什么保持专注的好方法吗？",
+      "pinyin": "Huòzhě, nǐ yǒu shénme bǎochí zhuānzhù de hǎo fāngfǎ ma?",
+      "vi": "Hoặc, bạn có phương pháp hay nào để duy trì sự tập trung không?"
+    },
+    {
+      "start": 954.03,
+      "end": 956.5,
+      "en": "We're very much looking forward to seeing your shares.",
+      "zh": "我们非常期待看到你的分享。",
+      "pinyin": "Wǒmen fēicháng qīdài kàndào nǐ de fēnxiǎng.",
+      "vi": "Chúng tôi rất mong được thấy chia sẻ của bạn."
+    },
+    {
+      "start": 956.53,
+      "end": 960.3,
+      "en": "Everyone is welcome to leave us comments in the comment section and exchange ideas with us.",
+      "zh": "欢迎大家在评论区给我们留言，和我们一起交流。",
+      "pinyin": "Huānyíng dàjiā zài pínglùnqū gěi wǒmen liúyán, hé wǒmen yīqǐ jiāoliú.",
+      "vi": "Hoan nghênh mọi người để lại bình luận cho chúng tôi trong phần bình luận và cùng chúng tôi trao đổi."
+    },
+    {
+      "start": 960.3,
+      "end": 962.87,
+      "en": "All right, that's all for this episode of 《Chinese Daily》.",
+      "zh": "好了，这期的《每天中文》就到这里。",
+      "pinyin": "Hǎo le, zhè qī de 《Měitiān Zhōngwén》 jiù dào zhèlǐ.",
+      "vi": "Được rồi, tập 《Mỗi Ngày Tiếng Trung》 này đến đây là hết."
+    },
+    {
+      "start": 962.87,
+      "end": 964,
+      "en": "Thank you everyone for listening!",
+      "zh": "感谢大家的收听！",
+      "pinyin": "Gǎnxiè dàjiā de shōutīng!",
+      "vi": "Cảm ơn mọi người đã lắng nghe!"
+    },
+    {
+      "start": 964.03,
+      "end": 965.26,
+      "en": "See you next episode.",
+      "zh": "我们下期再见。",
+      "pinyin": "Wǒmen xià qī zàijiàn.",
+      "vi": "Hẹn gặp lại mọi người ở tập sau."
+    },
+    {
+      "start": 965.3,
+      "end": 966.03,
+      "en": "Goodbye!",
+      "zh": "再见！",
+      "pinyin": "Zàijiàn!",
+      "vi": "Tạm biệt!"
+    }
+  ]
+}

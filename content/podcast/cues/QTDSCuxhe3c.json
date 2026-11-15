@@ -1,0 +1,2953 @@
+{
+  "id": "QTDSCuxhe3c",
+  "youtubeId": "QTDSCuxhe3c",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 3 | Chinese Birthday Culture & Longevity Noodles | 中国人生日吃什么？| Chinese Daily Podcast",
+  "durationSec": 985,
+  "cues": [
+    {
+      "start": 6.43,
+      "end": 9.82,
+      "en": "Hello everyone! This is “Chinese Daily”, welcome to the show.",
+      "zh": "大家好！这里是“每天中文”，欢迎你的收听。",
+      "pinyin": "Dàjiā hǎo! Zhèlǐ shì “Měitiān Zhōngwén”, huānyíng nǐ de shōutīng.",
+      "vi": "Xin chào mọi người! Đây là “Tiếng Trung Mỗi Ngày”, chào mừng bạn lắng nghe."
+    },
+    {
+      "start": 9.83,
+      "end": 10.75,
+      "en": "I'm Li Ming.",
+      "zh": "我是李明。",
+      "pinyin": "Wǒ shì Lǐ Míng.",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 10.77,
+      "end": 12.66,
+      "en": "Hello everyone! I'm Wang Yu.",
+      "zh": "大家好！我是王雨。",
+      "pinyin": "Dàjiā hǎo! Wǒ shì Wáng Yǔ.",
+      "vi": "Xin chào mọi người! Tôi là Vương Vũ."
+    },
+    {
+      "start": 12.67,
+      "end": 14.89,
+      "en": "Glad to meet everyone again.",
+      "zh": "很高兴又和大家见面了。",
+      "pinyin": "Hěn gāoxìng yòu hé dàjiā jiànmiàn le.",
+      "vi": "Rất vui lại được gặp mọi người."
+    },
+    {
+      "start": 14.9,
+      "end": 17.29,
+      "en": "Yes, Wang Yu, we meet again.",
+      "zh": "是的，王雨，我们又见面了。",
+      "pinyin": "Shì de, Wáng Yǔ, wǒmen yòu jiànmiàn le.",
+      "vi": "Đúng vậy, Vương Vũ, chúng ta lại gặp nhau rồi."
+    },
+    {
+      "start": 17.3,
+      "end": 18.76,
+      "en": "Dear listeners, how are you?",
+      "zh": "听众朋友们，你们好吗？",
+      "pinyin": "Tīngzhòng péngyoumen, nǐmen hǎo ma?",
+      "vi": "Các bạn thính giả, các bạn khỏe không?"
+    },
+    {
+      "start": 18.77,
+      "end": 20.66,
+      "en": "Hope you're having a good day.",
+      "zh": "希望你们今天过得不错。",
+      "pinyin": "Xīwàng nǐmen jīntiān guò de búcuò.",
+      "vi": "Mong hôm nay các bạn đã trải qua tốt đẹp."
+    },
+    {
+      "start": 20.67,
+      "end": 23.66,
+      "en": "Right, hope everyone is in a good mood.",
+      "zh": "对，希望大家都有一个好心情。",
+      "pinyin": "Duì, xīwàng dàjiā dōu yǒu yí gè hǎo xīnqíng.",
+      "vi": "Đúng, mong mọi người đều có tâm trạng vui vẻ."
+    },
+    {
+      "start": 23.67,
+      "end": 27.49,
+      "en": "“Chinese Daily” is a podcast that helps everyone learn Chinese.",
+      "zh": "“每天中文”是一个帮助大家学习中文的播客。",
+      "pinyin": "“Měitiān Zhōngwén” shì yí gè bāngzhù dàjiā xuéxí Zhōngwén de bōkè.",
+      "vi": "“Tiếng Trung Mỗi Ngày” là podcast giúp mọi người học tiếng Trung."
+    },
+    {
+      "start": 27.5,
+      "end": 29.66,
+      "en": "We hope to use a chat-style format,",
+      "zh": "我们希望用聊天的方式，",
+      "pinyin": "Wǒmen xīwàng yòng liáotiān de fāngshì,",
+      "vi": "Chúng tôi mong muốn bằng cách trò chuyện,"
+    },
+    {
+      "start": 29.67,
+      "end": 33.23,
+      "en": "so you can listen to more Chinese in a relaxed, natural environment,",
+      "zh": "让你在轻松、自然的环境里，多听中文，",
+      "pinyin": "Ràng nǐ zài qīngsōng, zìrán de huánjìng lǐ, duō tīng Zhōngwén,",
+      "vi": "để bạn trong môi trường thoải mái, tự nhiên, nghe tiếng Trung nhiều hơn,"
+    },
+    {
+      "start": 33.23,
+      "end": 34.95,
+      "en": "improve your Chinese.",
+      "zh": "提高你的中文水平。",
+      "pinyin": "Tígāo nǐ de Zhōngwén shuǐpíng.",
+      "vi": "nâng cao trình độ tiếng Trung của bạn."
+    },
+    {
+      "start": 34.97,
+      "end": 37.83,
+      "en": "Whether you're in the car or cooking right now,",
+      "zh": "不管你现在是在车上，还是在做饭，",
+      "pinyin": "Bùguǎn nǐ xiànzài shì zài chē shàng, háishì zài zuò fàn,",
+      "vi": "Dù bây giờ bạn đang ở trên xe hay đang nấu ăn,"
+    },
+    {
+      "start": 37.83,
+      "end": 41.65,
+      "en": "or just want to relax a bit, you can listen casually.",
+      "zh": "或者只是想放松一下，都可以随便听一听。",
+      "pinyin": "Huòzhě zhǐshì xiǎng fàngsōng yíxià, dōu kěyǐ suíbiàn tīng yi tīng.",
+      "vi": "hoặc chỉ muốn thư giãn một chút, bạn đều có thể nghe tùy thích."
+    },
+    {
+      "start": 41.67,
+      "end": 42.13,
+      "en": "Today,",
+      "zh": "今天，",
+      "pinyin": "Jīntiān,",
+      "vi": "Hôm nay,"
+    },
+    {
+      "start": 42.13,
+      "end": 44.75,
+      "en": "we're going to talk about something everyone experiences,",
+      "zh": "我们要聊一个每个人都会经历的，",
+      "pinyin": "Wǒmen yào liáo yí gè měi gè rén dōu huì jīnglì de,",
+      "vi": "chúng ta sẽ nói về một điều mà mỗi người đều trải qua,"
+    },
+    {
+      "start": 44.77,
+      "end": 47.66,
+      "en": "and a very happy topic. Oh?",
+      "zh": "也是一个非常开心的话题。哦？",
+      "pinyin": "Yě shì yí gè fēicháng kāixīn de huàtí. Ó?",
+      "vi": "cũng là một chủ đề rất vui. Ồ?"
+    },
+    {
+      "start": 47.67,
+      "end": 49.06,
+      "en": "What topic is it?",
+      "zh": "是什么话题呢？",
+      "pinyin": "Shì shénme huàtí ne?",
+      "vi": "Là chủ đề gì vậy?"
+    },
+    {
+      "start": 49.07,
+      "end": 50.76,
+      "en": "Sounds very interesting.",
+      "zh": "听起来很有意思。",
+      "pinyin": "Tīng qǐlái hěn yǒu yìsi.",
+      "vi": "Nghe có vẻ rất thú vị."
+    },
+    {
+      "start": 50.77,
+      "end": 52.76,
+      "en": "Let me ask you a question first.",
+      "zh": "我先问你一个问题吧。",
+      "pinyin": "Wǒ xiān wèn nǐ yí gè wèntí ba.",
+      "vi": "Để tôi hỏi bạn một câu hỏi trước nhé."
+    },
+    {
+      "start": 52.77,
+      "end": 55.96,
+      "en": "Wang Yu, were you very busy last week?",
+      "zh": "王雨，你上个星期是不是很忙啊？",
+      "pinyin": "Wáng Yǔ, nǐ shàng ge xīngqī shì bu shì hěn máng a?",
+      "vi": "Vương Vũ, tuần trước bạn có phải rất bận không?"
+    },
+    {
+      "start": 55.97,
+      "end": 59.06,
+      "en": "I think I saw you post many photos on Moments,",
+      "zh": "我好像看你在朋友圈发了很多照片，",
+      "pinyin": "Wǒ hǎoxiàng kàn nǐ zài péngyouquān fā le hěn duō zhàopiàn,",
+      "vi": "Tôi hình như thấy bạn đăng rất nhiều ảnh trên Moments,"
+    },
+    {
+      "start": 59.07,
+      "end": 62.93,
+      "en": "many people together, and there was a big cake on the table.",
+      "zh": "很多人在一起，桌上还有一个很大的蛋糕。",
+      "pinyin": "Hěn duō rén zài yìqǐ, zhuō shàng hái yǒu yí gè hěn dà de dàngāo.",
+      "vi": "rất nhiều người ở cùng nhau, trên bàn còn có một chiếc bánh kem rất lớn."
+    },
+    {
+      "start": 62.93,
+      "end": 64.05,
+      "en": "(laughs) Yes!",
+      "zh": "(笑)，是的！",
+      "pinyin": "(Xiào), shì de!",
+      "vi": "(Cười), đúng vậy!"
+    },
+    {
+      "start": 64.07,
+      "end": 65.03,
+      "en": "You saw it.",
+      "zh": "你看到了。",
+      "pinyin": "Nǐ kàndào le.",
+      "vi": "Bạn thấy rồi."
+    },
+    {
+      "start": 65.03,
+      "end": 67.22,
+      "en": "That was a good friend of mine celebrating her birthday,",
+      "zh": "那是我一个好朋友过生日，",
+      "pinyin": "Nà shì wǒ yí gè hǎo péngyou guò shēngrì,",
+      "vi": "Đó là một người bạn thân của tôi tổ chức sinh nhật,"
+    },
+    {
+      "start": 67.23,
+      "end": 69.69,
+      "en": "We threw her a birthday party together.",
+      "zh": "我们一起给她办了一个生日会。",
+      "pinyin": "Wǒmen yìqǐ gěi tā bàn le yí gè shēngrì huì.",
+      "vi": "Chúng tôi cùng tổ chức cho cô ấy một bữa tiệc sinh nhật."
+    },
+    {
+      "start": 69.7,
+      "end": 74.16,
+      "en": "We went to karaoke, sang, ate cake, and had a great time.",
+      "zh": "我们去了卡拉OK唱歌，吃了蛋糕，玩得很开心。",
+      "pinyin": "Wǒmen qù le kǎlā OK chànggē, chī le dàngāo, wán de hěn kāixīn.",
+      "vi": "Chúng tôi đi karaoke hát, ăn bánh, chơi rất vui."
+    },
+    {
+      "start": 74.17,
+      "end": 77.63,
+      "en": "Speaking of birthdays, this is truly a happy topic.",
+      "zh": "说到生日，这真是一个让人开心的话题。",
+      "pinyin": "Shuōdào shēngrì, zhè zhēn shi yí gè ràng rén kāixīn de huàtí.",
+      "vi": "Nhắc đến sinh nhật, đây thật sự là một chủ đề khiến người ta vui vẻ."
+    },
+    {
+      "start": 77.63,
+      "end": 78.45,
+      "en": "That's right.",
+      "zh": "没错。",
+      "pinyin": "Méi cuò.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 78.47,
+      "end": 81.63,
+      "en": "So today let's talk about this topic:",
+      "zh": "所以我们今天就来聊一聊这个话题:",
+      "pinyin": "Suǒyǐ wǒmen jīntiān jiù lái liáo yi liáo zhège huàtí:",
+      "vi": "Vậy nên hôm nay chúng ta hãy cùng nói về chủ đề này:"
+    },
+    {
+      "start": 81.63,
+      "end": 83.32,
+      "en": "Happy birthday to you.",
+      "zh": "“祝你生日快乐”。",
+      "pinyin": "“Zhù nǐ shēngrì kuàilè”.",
+      "vi": "“Chúc bạn sinh nhật vui vẻ”."
+    },
+    {
+      "start": 83.33,
+      "end": 86.12,
+      "en": "In China, how do people celebrate birthdays?",
+      "zh": "在中国，人们是怎么过生日的。",
+      "pinyin": "Zài Zhōngguó, rénmen shì zěnme guò shēngrì de.",
+      "vi": "Ở Trung Quốc, người ta đón sinh nhật như thế nào?"
+    },
+    {
+      "start": 86.13,
+      "end": 88.45,
+      "en": "Especially, I want to talk with you about a kind of",
+      "zh": "特别是，我想和你聊一种",
+      "pinyin": "Tèbié shì, wǒ xiǎng hé nǐ liáo yì zhǒng",
+      "vi": "Đặc biệt là, tôi muốn nói với bạn về một loại"
+    },
+    {
+      "start": 88.47,
+      "end": 91.53,
+      "en": "birthday food with very Chinese characteristics.",
+      "zh": "非常有中国特色的生日食物。",
+      "pinyin": "Fēicháng yǒu Zhōngguó tèsè de shēngrì shíwù.",
+      "vi": "món ăn sinh nhật rất đậm chất Trung Quốc."
+    },
+    {
+      "start": 91.53,
+      "end": 93.02,
+      "en": "Birthday food?",
+      "zh": "生日食物？",
+      "pinyin": "Shēngrì shíwù?",
+      "vi": "Món ăn sinh nhật?"
+    },
+    {
+      "start": 93.03,
+      "end": 95.15,
+      "en": "Then it must be cake!",
+      "zh": "那一定是蛋糕吧！",
+      "pinyin": "Nà yídìng shì dàngāo ba!",
+      "vi": "Vậy chắc chắn là bánh kem rồi!"
+    },
+    {
+      "start": 95.17,
+      "end": 98.56,
+      "en": "Cake is indeed very popular now, but in China,",
+      "zh": "蛋糕现在确实很流行，但是在中国，",
+      "pinyin": "Dàngāo xiànzài quèshí hěn liúxíng, dànshì zài Zhōngguó,",
+      "vi": "Bánh kem hiện nay đúng là rất phổ biến, nhưng ở Trung Quốc,"
+    },
+    {
+      "start": 98.57,
+      "end": 101.36,
+      "en": "we have a more traditional birthday food.",
+      "zh": "我们有一个更传统的生日食物。",
+      "pinyin": "Wǒmen yǒu yí gè gèng chuántǒng de shēngrì shíwù.",
+      "vi": "chúng tôi có một món ăn sinh nhật truyền thống hơn."
+    },
+    {
+      "start": 101.37,
+      "end": 104.76,
+      "en": "Many families always eat it when celebrating birthdays.",
+      "zh": "很多家庭在过生日的时候都一定会吃。",
+      "pinyin": "Hěn duō jiātíng zài guò shēngrì de shíhou dōu yídìng huì chī.",
+      "vi": "Nhiều gia đình khi tổ chức sinh nhật đều nhất định sẽ ăn."
+    },
+    {
+      "start": 104.77,
+      "end": 105.89,
+      "en": "I guessed it!",
+      "zh": "我猜到了！",
+      "pinyin": "Wǒ cāi dào le!",
+      "vi": "Tôi đoán ra rồi!"
+    },
+    {
+      "start": 105.9,
+      "end": 108.72,
+      "en": "What you're talking about must be longevity noodles, right?",
+      "zh": "你说的肯定是长寿面，对不对？",
+      "pinyin": "Nǐ shuō de kěndìng shì chángshòumiàn, duì bu duì?",
+      "vi": "Bạn nói chắc chắn là mì trường thọ, đúng không?"
+    },
+    {
+      "start": 108.73,
+      "end": 109.89,
+      "en": "Exactly right!",
+      "zh": "完全正确！",
+      "pinyin": "Wánquán zhèngquè!",
+      "vi": "Hoàn toàn chính xác!"
+    },
+    {
+      "start": 109.9,
+      "end": 111.52,
+      "en": "It's longevity noodles.",
+      "zh": "就是长寿面。",
+      "pinyin": "Jiù shì chángshòumiàn.",
+      "vi": "Chính là mì trường thọ."
+    },
+    {
+      "start": 111.53,
+      "end": 113.12,
+      "en": "Then let's start from here.",
+      "zh": "那我们就从这里开始吧。",
+      "pinyin": "Nà wǒmen jiù cóng zhèlǐ kāishǐ ba.",
+      "vi": "Vậy chúng ta bắt đầu từ đây nhé."
+    },
+    {
+      "start": 113.13,
+      "end": 116.55,
+      "en": "Wang Yu, you just mentioned your friend had a birthday party,",
+      "zh": "王雨，你刚才说到你的朋友开生日会，",
+      "pinyin": "Wáng Yǔ, nǐ gāngcái shuōdào nǐ de péngyou kāi shēngrì huì,",
+      "vi": "Vương Vũ, vừa rồi bạn nói về việc bạn của bạn tổ chức tiệc sinh nhật,"
+    },
+    {
+      "start": 116.57,
+      "end": 119.16,
+      "en": "went to karaoke and ate cake.",
+      "zh": "去了卡拉OK，还吃了蛋糕。",
+      "pinyin": "Qù le kǎlā OK, hái chī le dàngāo.",
+      "vi": "đã đi karaoke, còn ăn bánh kem nữa."
+    },
+    {
+      "start": 119.17,
+      "end": 119.96,
+      "en": "This is now",
+      "zh": "这是现在",
+      "pinyin": "Zhè shì xiànzài",
+      "vi": "Đây là hiện nay"
+    },
+    {
+      "start": 119.97,
+      "end": 122.49,
+      "en": "the way many young Chinese people celebrate birthdays,",
+      "zh": "很多中国年轻人过生日的方式，",
+      "pinyin": "Hěn duō Zhōngguó niánqīngrén guò shēngrì de fāngshì,",
+      "vi": "cách mà rất nhiều người trẻ Trung Quốc tổ chức sinh nhật,"
+    },
+    {
+      "start": 122.5,
+      "end": 124.89,
+      "en": "Right? Yes, very common.",
+      "zh": "对吧？对啊，非常普遍。",
+      "pinyin": "Duì ba? Duì a, fēicháng pǔbiàn.",
+      "vi": "Đúng không? Đúng vậy, rất phổ biến."
+    },
+    {
+      "start": 124.9,
+      "end": 126.56,
+      "en": "When my friends celebrate their birthdays,",
+      "zh": "我的朋友们过生日，",
+      "pinyin": "Wǒ de péngyoumen guò shēngrì,",
+      "vi": "Bạn bè tôi khi tổ chức sinh nhật,"
+    },
+    {
+      "start": 126.57,
+      "end": 129.49,
+      "en": "everyone usually gets together for a big meal first,",
+      "zh": "大家一般都会先一起吃顿大餐，",
+      "pinyin": "dàjiā yìbān dōu huì xiān yìqǐ chī dùn dàcān,",
+      "vi": "mọi người thường sẽ cùng nhau đi ăn một bữa lớn trước,"
+    },
+    {
+      "start": 129.5,
+      "end": 132.36,
+      "en": "maybe hot pot or barbecue,",
+      "zh": "可能会去吃火锅，或者烤肉，",
+      "pinyin": "kěnéng huì qù chī huǒguō, huòzhě kǎoròu,",
+      "vi": "có thể sẽ đi ăn lẩu hoặc đồ nướng,"
+    },
+    {
+      "start": 132.37,
+      "end": 134.93,
+      "en": "basically lively restaurants that everyone likes.",
+      "zh": "就是大家喜欢的热闹的餐厅。",
+      "pinyin": "jiùshì dàjiā xǐhuan de rènao de cāntīng.",
+      "vi": "tức là những nhà hàng náo nhiệt mà mọi người thích."
+    },
+    {
+      "start": 134.93,
+      "end": 136.55,
+      "en": "Mm, I understand that.",
+      "zh": "嗯，这个我理解。",
+      "pinyin": "Ń, zhège wǒ lǐjiě.",
+      "vi": "Vâng, cái này tôi hiểu."
+    },
+    {
+      "start": 136.57,
+      "end": 139.69,
+      "en": "Friends get together, eat something tasty, and chat.",
+      "zh": "朋友们聚在一起，吃点好吃的，聊聊天。",
+      "pinyin": "Péngyoumen jù zài yìqǐ, chī diǎn hǎochī de, liáoliao tiān.",
+      "vi": "Bạn bè tụ họp lại, ăn chút đồ ngon, trò chuyện."
+    },
+    {
+      "start": 139.7,
+      "end": 141.42,
+      "en": "Yes. After the meal,",
+      "zh": "是的。吃完饭以后，",
+      "pinyin": "Shì de. Chī wán fàn yǐhòu,",
+      "vi": "Đúng vậy. Sau khi ăn xong,"
+    },
+    {
+      "start": 141.43,
+      "end": 144.25,
+      "en": "if everyone still has time and energy,",
+      "zh": "如果大家还有时间，也还有精力，",
+      "pinyin": "rúguǒ dàjiā hái yǒu shíjiān, yě hái yǒu jīnglì,",
+      "vi": "nếu mọi người vẫn còn thời gian và vẫn còn sức,"
+    },
+    {
+      "start": 144.27,
+      "end": 146.16,
+      "en": "we'll go to the next place.",
+      "zh": "我们就会去下一个地方。",
+      "pinyin": "wǒmen jiù huì qù xià yí gè dìfang.",
+      "vi": "chúng tôi sẽ đi đến địa điểm tiếp theo."
+    },
+    {
+      "start": 146.17,
+      "end": 149.23,
+      "en": "The most common thing is to go sing karaoke.",
+      "zh": "最常见的就是去卡拉OK唱歌。",
+      "pinyin": "Zuì chángjiàn de jiùshì qù kǎlā OK chànggē.",
+      "vi": "Phổ biến nhất là đi hát karaoke."
+    },
+    {
+      "start": 149.23,
+      "end": 150.35,
+      "en": "At karaoke,",
+      "zh": "在卡拉OK里，",
+      "pinyin": "Zài kǎlā OK lǐ,",
+      "vi": "Trong quán karaoke,"
+    },
+    {
+      "start": 150.37,
+      "end": 152.49,
+      "en": "we can order a birthday cake,",
+      "zh": "我们可以点一个生日蛋糕，",
+      "pinyin": "wǒmen kěyǐ diǎn yí gè shēngrì dàngāo,",
+      "vi": "chúng tôi có thể gọi một chiếc bánh sinh nhật,"
+    },
+    {
+      "start": 152.5,
+      "end": 156.32,
+      "en": "everyone sings the birthday song together, then blows out the candles,",
+      "zh": "大家一起唱生日快乐歌，然后吹蜡烛，",
+      "pinyin": "dàjiā yìqǐ chàng shēngrì kuàilè gē, ránhòu chuī làzhú,",
+      "vi": "mọi người cùng hát bài chúc mừng sinh nhật, rồi thổi nến,"
+    },
+    {
+      "start": 156.33,
+      "end": 157.95,
+      "en": "makes a wish, and cuts the cake.",
+      "zh": "许愿，切蛋糕。",
+      "pinyin": "xǔyuàn, qiē dàngāo.",
+      "vi": "cầu nguyện, cắt bánh."
+    },
+    {
+      "start": 157.97,
+      "end": 159.46,
+      "en": "It sounds really lively.",
+      "zh": "听起来就很热闹。",
+      "pinyin": "Tīng qǐlái jiù hěn rènao.",
+      "vi": "Nghe là thấy náo nhiệt rồi."
+    },
+    {
+      "start": 159.47,
+      "end": 161.56,
+      "en": "This is very similar to Western birthday parties.",
+      "zh": "这和西方的生日会很像。",
+      "pinyin": "Zhè hé xīfāng de shēngrìhuì hěn xiàng.",
+      "vi": "Điều này rất giống với tiệc sinh nhật phương Tây."
+    },
+    {
+      "start": 161.57,
+      "end": 162.66,
+      "en": "I think so.",
+      "zh": "我觉得是。",
+      "pinyin": "Wǒ juéde shì.",
+      "vi": "Tôi thấy đúng vậy."
+    },
+    {
+      "start": 162.67,
+      "end": 166.53,
+      "en": "Young people nowadays celebrate birthdays in increasingly international ways.",
+      "zh": "现在的年轻人过生日，方式越来越国际化了。",
+      "pinyin": "Xiànzài de niánqīngrén guò shēngrì, fāngshì yuèláiyuè guójìhuà le.",
+      "vi": "Cách tổ chức sinh nhật của giới trẻ hiện nay ngày càng quốc tế hóa."
+    },
+    {
+      "start": 166.53,
+      "end": 167.95,
+      "en": "Cake, candles,",
+      "zh": "蛋糕、蜡烛、",
+      "pinyin": "dàngāo, làzhú,",
+      "vi": "Bánh kem, nến,"
+    },
+    {
+      "start": 167.97,
+      "end": 171.56,
+      "en": "the birthday song—these are pretty much universal around the world.",
+      "zh": "生日歌，这些差不多是全世界通用的。",
+      "pinyin": "shēngrìgē, zhèxiē chàbuduō shì quán shìjiè tōngyòng de.",
+      "vi": "bài hát sinh nhật, những thứ này gần như được dùng chung trên toàn thế giới."
+    },
+    {
+      "start": 171.57,
+      "end": 174.56,
+      "en": "Also, friends give each other gifts.",
+      "zh": "而且，朋友之间还会互相送礼物。",
+      "pinyin": "Érqiě, péngyou zhījiān hái huì hùxiāng sòng lǐwù.",
+      "vi": "Hơn nữa, bạn bè còn tặng quà cho nhau."
+    },
+    {
+      "start": 174.57,
+      "end": 176.96,
+      "en": "Gifts are also a very important part.",
+      "zh": "礼物也是很重要的一部分。",
+      "pinyin": "Lǐwù yě shì hěn zhòngyào de yí bùfen.",
+      "vi": "Quà tặng cũng là một phần rất quan trọng."
+    },
+    {
+      "start": 176.97,
+      "end": 179.43,
+      "en": "Did your friend receive any special gifts?",
+      "zh": "你朋友收到了什么特别的礼物吗？",
+      "pinyin": "Nǐ péngyou shōudào le shénme tèbié de lǐwù ma?",
+      "vi": "Bạn của bạn có nhận được món quà đặc biệt nào không?"
+    },
+    {
+      "start": 179.43,
+      "end": 182.29,
+      "en": "She received a lot, such as lipstick,",
+      "zh": "她收到了很多，比如口红、",
+      "pinyin": "Tā shōudào le hěn duō, bǐrú kǒuhóng,",
+      "vi": "Cô ấy nhận được nhiều lắm, ví dụ như son môi,"
+    },
+    {
+      "start": 182.3,
+      "end": 186.29,
+      "en": "books, and a friend gave her a concert ticket.",
+      "zh": "书，还有一个朋友送了她一张音乐会的票。",
+      "pinyin": "shū, hái yǒu yí gè péngyou sòng le tā yì zhāng yīnyuèhuì de piào.",
+      "vi": "sách, và một người bạn tặng cô ấy một vé hòa nhạc."
+    },
+    {
+      "start": 186.3,
+      "end": 187.62,
+      "en": "I think celebrating a birthday",
+      "zh": "我觉得过生日",
+      "pinyin": "Wǒ juéde guò shēngrì",
+      "vi": "Tôi nghĩ rằng tổ chức sinh nhật"
+    },
+    {
+      "start": 187.63,
+      "end": 189.92,
+      "en": "the most important thing isn't how expensive the gift is,",
+      "zh": "最重要的不是礼物有多贵，",
+      "pinyin": "zuì zhòngyào de bú shì lǐwù yǒu duō guì,",
+      "vi": "điều quan trọng nhất không phải là món quà đắt bao nhiêu,"
+    },
+    {
+      "start": 189.93,
+      "end": 192.89,
+      "en": "but the feeling of friends being together,",
+      "zh": "而是朋友们聚在一起的那种感觉，",
+      "pinyin": "érshì péngyoumen jù zài yìqǐ de nà zhǒng gǎnjué,",
+      "vi": "mà là cảm giác bạn bè quây quần bên nhau,"
+    },
+    {
+      "start": 192.9,
+      "end": 196.09,
+      "en": "that feeling of being loved and blessed by many people.",
+      "zh": "那种被很多人爱着和祝福的感觉。",
+      "pinyin": "nà zhǒng bèi hěn duō rén àizhe hé zhùfú de gǎnjué.",
+      "vi": "cảm giác được nhiều người yêu thương và chúc phúc."
+    },
+    {
+      "start": 196.1,
+      "end": 197.42,
+      "en": "I completely agree.",
+      "zh": "我非常同意。",
+      "pinyin": "Wǒ fēicháng tóngyì.",
+      "vi": "Tôi hoàn toàn đồng ý."
+    },
+    {
+      "start": 197.43,
+      "end": 201.42,
+      "en": "Blessings and companionship are more important than any expensive gift.",
+      "zh": "祝福和陪伴，比任何昂贵的礼物都重要。",
+      "pinyin": "Zhùfú hé péibàn, bǐ rènhé ángguì de lǐwù dōu zhòngyào.",
+      "vi": "Lời chúc phúc và sự đồng hành quan trọng hơn bất kỳ món quà đắt tiền nào."
+    },
+    {
+      "start": 201.43,
+      "end": 204.05,
+      "en": "However, the way you mentioned celebrating birthdays,",
+      "zh": "不过，你说的这种过生日的方式，",
+      "pinyin": "Búguò, nǐ shuō de zhè zhǒng guò shēngrì de fāngshì,",
+      "vi": "Tuy nhiên, cách tổ chức sinh nhật mà bạn nói,"
+    },
+    {
+      "start": 204.07,
+      "end": 206.49,
+      "en": "is mainly with friends, right?",
+      "zh": "主要是和朋友们一起，对吧？",
+      "pinyin": "zhǔyào shì hé péngyoumen yìqǐ, duì ba?",
+      "vi": "chủ yếu là cùng với bạn bè, đúng không?"
+    },
+    {
+      "start": 206.5,
+      "end": 208.46,
+      "en": "Right, with friends.",
+      "zh": "对，是和朋友。",
+      "pinyin": "Duì, shì hé péngyou.",
+      "vi": "Đúng, là với bạn bè."
+    },
+    {
+      "start": 208.47,
+      "end": 211.69,
+      "en": "What, Li Ming, isn't that how you celebrate your birthday?",
+      "zh": "怎么，李明，你过生日不是这样的吗？",
+      "pinyin": "Zěnme, Lǐ Míng, nǐ guò shēngrì bú shì zhèyàng de ma?",
+      "vi": "Sao vậy, Lý Minh, bạn tổ chức sinh nhật không như thế à?"
+    },
+    {
+      "start": 211.7,
+      "end": 213.72,
+      "en": "Do you not like lively gatherings?",
+      "zh": "你是不是不喜欢热闹？",
+      "pinyin": "Nǐ shì bu shì bù xǐhuan rènao?",
+      "vi": "Bạn không thích náo nhiệt à?"
+    },
+    {
+      "start": 213.73,
+      "end": 214.72,
+      "en": "Not exactly.",
+      "zh": "也不是。",
+      "pinyin": "Yě bú shì.",
+      "vi": "Cũng không phải."
+    },
+    {
+      "start": 214.73,
+      "end": 217.49,
+      "en": "I also celebrate by having a meal with friends.",
+      "zh": "我也会和朋友一起吃饭庆祝。",
+      "pinyin": "Wǒ yě huì hé péngyou yìqǐ chīfàn qìngzhù.",
+      "vi": "Tôi cũng sẽ cùng bạn bè ăn cơm để chúc mừng."
+    },
+    {
+      "start": 217.5,
+      "end": 221.06,
+      "en": "But for me, or rather in my family,",
+      "zh": "但是对我来说，或者说在我的家庭里，",
+      "pinyin": "Dànshì duì wǒ lái shuō, huòzhě shuō zài wǒ de jiātíng lǐ,",
+      "vi": "Nhưng đối với tôi, hay nói cách khác là trong gia đình tôi,"
+    },
+    {
+      "start": 221.07,
+      "end": 225.23,
+      "en": "there's an even more important part of birthdays: celebrating with family.",
+      "zh": "生日还有更重要的一部分，那就是和家人一起过。",
+      "pinyin": "shēngrì hái yǒu gèng zhòngyào de yí bùfen, nà jiùshì hé jiārén yìqǐ guò.",
+      "vi": "sinh nhật còn có một phần quan trọng hơn, đó là đón cùng gia đình."
+    },
+    {
+      "start": 225.23,
+      "end": 228.45,
+      "en": "Oh, with family. That's of course also very important.",
+      "zh": "哦，和家人一起。这个当然也很重要。",
+      "pinyin": "Ó, hé jiārén yìqǐ. Zhège dāngrán yě hěn zhòngyào.",
+      "vi": "Ồ, đón cùng gia đình. Điều này đương nhiên cũng rất quan trọng."
+    },
+    {
+      "start": 228.47,
+      "end": 231.86,
+      "en": "Yes. For me, having a meal with family,",
+      "zh": "是的。对我来说，和家人一起吃饭，",
+      "pinyin": "Shì de. Duì wǒ lái shuō, hé jiārén yìqǐ chīfàn,",
+      "vi": "Đúng vậy. Đối với tôi, được ăn cơm cùng gia đình,"
+    },
+    {
+      "start": 231.87,
+      "end": 235.03,
+      "en": "is the one thing that absolutely cannot be missing on my birthday.",
+      "zh": "才是生日那天最不能缺少的事情。",
+      "pinyin": "cái shì shēngrì nà tiān zuì bù néng quēshǎo de shìqing.",
+      "vi": "mới là điều không thể thiếu nhất trong ngày sinh nhật."
+    },
+    {
+      "start": 235.03,
+      "end": 237.62,
+      "en": "And this meal will definitely include one thing.",
+      "zh": "而这顿饭，一定会有一样东西。",
+      "pinyin": "Ér zhè dùn fàn, yídìng huì yǒu yí yàng dōngxi.",
+      "vi": "Và bữa cơm này nhất định sẽ có một món."
+    },
+    {
+      "start": 237.63,
+      "end": 240.85,
+      "en": "That is today's main focus—longevity noodles.",
+      "zh": "那就是我们今天的主角——长寿面。",
+      "pinyin": "Nà jiùshì wǒmen jīntiān de zhǔjiǎo——chángshòumiàn.",
+      "vi": "Đó chính là nhân vật chính của chúng ta hôm nay — mì trường thọ."
+    },
+    {
+      "start": 240.87,
+      "end": 244.06,
+      "en": "That's right. Li Ming, explain it to us.",
+      "zh": "没错。李明，你给我们解释一下吧。",
+      "pinyin": "Méicuò. Lǐ Míng, nǐ gěi wǒmen jiěshì yíxià ba.",
+      "vi": "Đúng vậy. Lý Minh, bạn giải thích cho chúng tôi một chút nhé."
+    },
+    {
+      "start": 244.07,
+      "end": 246.93,
+      "en": "Although I know about longevity noodles, many",
+      "zh": "虽然我知道长寿面，但可能很多",
+      "pinyin": "Suīrán wǒ zhīdào chángshòumiàn, dàn kěnéng hěn duō",
+      "vi": "Tuy tôi biết mì trường thọ, nhưng có lẽ nhiều"
+    },
+    {
+      "start": 246.93,
+      "end": 250.95,
+      "en": "foreign friends listening to our podcast are hearing about it for the first time.",
+      "zh": "正在听我们播客的外国朋友是第一次听说。",
+      "pinyin": "zhèngzài tīng wǒmen bōkè de wàiguó péngyou shì dì yī cì tīngshuō.",
+      "vi": "bạn bè nước ngoài đang nghe podcast của chúng ta là lần đầu nghe nói đến."
+    },
+    {
+      "start": 250.97,
+      "end": 254.26,
+      "en": "What exactly are longevity noodles like? Okay.",
+      "zh": "长寿面，到底是什么样的面？好。",
+      "pinyin": "Chángshòumiàn, dàodǐ shì shénme yàng de miàn? Hǎo.",
+      "vi": "Mì trường thọ rốt cuộc là loại mì như thế nào? Được."
+    },
+    {
+      "start": 254.27,
+      "end": 256.06,
+      "en": "That's a very good question.",
+      "zh": "这个问题问得很好。",
+      "pinyin": "Zhège wèntí wèn de hěn hǎo.",
+      "vi": "Câu hỏi này rất hay."
+    },
+    {
+      "start": 256.07,
+      "end": 259.16,
+      "en": "Longevity noodles—you can tell just from the name,",
+      "zh": "长寿面，从名字上就能看出来，",
+      "pinyin": "Chángshòumiàn, cóng míngzi shàng jiù néng kàn chūlái,",
+      "vi": "Mì trường thọ, chỉ nhìn tên là có thể thấy được,"
+    },
+    {
+      "start": 259.17,
+      "end": 264.06,
+      "en": "“Longevity” means living a long time and living healthily.",
+      "zh": "“长寿”就是活很长时间，健康地活着的意思。",
+      "pinyin": "“Chángshòu” jiùshì huó hěn cháng shíjiān, jiànkāng de huózhe de yìsi.",
+      "vi": "“Trường thọ” nghĩa là sống rất lâu, sống khỏe mạnh."
+    },
+    {
+      "start": 264.07,
+      "end": 265.93,
+      "en": "“Miàn” means noodles.",
+      "zh": "“面”就是面条。",
+      "pinyin": "“Miàn” jiùshì miàntiáo.",
+      "vi": "“Mì” chính là sợi mì."
+    },
+    {
+      "start": 265.93,
+      "end": 269.09,
+      "en": "So longevity noodles are meant to bless the birthday person",
+      "zh": "所以，长寿面就是为了祝福生日的人",
+      "pinyin": "Suǒyǐ, chángshòumiàn jiùshì wèile zhùfú shēngrì de rén",
+      "vi": "Vì vậy, mì trường thọ là để chúc phúc cho người có sinh nhật"
+    },
+    {
+      "start": 269.1,
+      "end": 271.92,
+      "en": "the noodles eaten to wish them health and longevity.",
+      "zh": "能够健康长寿而吃的面条。",
+      "pinyin": "nénggòu jiànkāng chángshòu ér chī de miàntiáo.",
+      "vi": "được ăn để cầu chúc họ khỏe mạnh và sống lâu."
+    },
+    {
+      "start": 271.93,
+      "end": 274.92,
+      "en": "Mm, the meaning of this name is easy to understand.",
+      "zh": "嗯，这个名字的意义很好懂。",
+      "pinyin": "Ń, zhège míngzi de yìyì hěn hǎo dǒng.",
+      "vi": "Ừm, ý nghĩa của cái tên này rất dễ hiểu."
+    },
+    {
+      "start": 274.93,
+      "end": 278.62,
+      "en": "So how is it different from the noodles we usually eat?",
+      "zh": "那它和我们平时吃的面条有什么不一样吗？",
+      "pinyin": "Nà tā hé wǒmen píngshí chī de miàntiáo yǒu shénme bù yíyàng ma?",
+      "vi": "Vậy nó có gì khác với mì chúng ta thường ăn không?"
+    },
+    {
+      "start": 278.63,
+      "end": 280.72,
+      "en": "Does it have any special taste?",
+      "zh": "是不是有什么特别的味道？",
+      "pinyin": "Shì bú shì yǒu shénme tèbié de wèidao?",
+      "vi": "Có phải nó có hương vị gì đặc biệt không?"
+    },
+    {
+      "start": 280.73,
+      "end": 283.32,
+      "en": "As for taste, there’s actually no fixed requirement,",
+      "zh": "味道上其实没有固定的要求，",
+      "pinyin": "Wèidao shàng qíshí méiyǒu gùdìng de yāoqiú,",
+      "vi": "Về hương vị thì thật ra không có yêu cầu cố định,"
+    },
+    {
+      "start": 283.33,
+      "end": 285.92,
+      "en": "Every family makes it with a different taste.",
+      "zh": "每个家庭做的味道都不一样。",
+      "pinyin": "Měi ge jiātíng zuò de wèidao dōu bù yíyàng.",
+      "vi": "Mỗi gia đình làm ra hương vị đều khác nhau."
+    },
+    {
+      "start": 285.93,
+      "end": 289.85,
+      "en": "Its biggest feature isn’t the taste, but how it looks.",
+      "zh": "它最大的特点，不在于味道，而在于它的样子。",
+      "pinyin": "Tā zuìdà de tèdiǎn, bú zàiyú wèidao, ér zàiyú tā de yàngzi.",
+      "vi": "Đặc điểm lớn nhất của nó không nằm ở hương vị mà nằm ở hình dáng."
+    },
+    {
+      "start": 289.87,
+      "end": 293.46,
+      "en": "How it looks? Right. A real bowl of longevity noodles,",
+      "zh": "样子？对。一碗真正的长寿面，",
+      "pinyin": "Yàngzi? Duì. Yì wǎn zhēnzhèng de chángshòumiàn,",
+      "vi": "Hình dáng? Đúng. Một bát mì trường thọ thật sự,"
+    },
+    {
+      "start": 293.47,
+      "end": 295.93,
+      "en": "usually has just one noodle in the bowl.",
+      "zh": "碗里通常只有一根面条。",
+      "pinyin": "wǎn lǐ tōngcháng zhǐyǒu yì gēn miàntiáo.",
+      "vi": "trong bát thường chỉ có một sợi mì."
+    },
+    {
+      "start": 295.93,
+      "end": 297.25,
+      "en": "One noodle?",
+      "zh": "一根面条？",
+      "pinyin": "Yì gēn miàntiáo?",
+      "vi": "Một sợi mì?"
+    },
+    {
+      "start": 297.27,
+      "end": 299.33,
+      "en": "Then how can one bowl be full?",
+      "zh": "那一碗怎么可能装满呢？",
+      "pinyin": "Nà yì wǎn zěnme kěnéng zhuāng mǎn ne?",
+      "vi": "Vậy một bát sao có thể đầy được?"
+    },
+    {
+      "start": 299.33,
+      "end": 303.12,
+      "en": "Because this noodle is very, very, very long.",
+      "zh": "因为这根面条非常、非常、非常长。",
+      "pinyin": "Yīnwèi zhè gēn miàntiáo fēicháng, fēicháng, fēicháng cháng.",
+      "vi": "Vì sợi mì này rất, rất, rất dài."
+    },
+    {
+      "start": 303.13,
+      "end": 305.82,
+      "en": "The noodle maker uses a special method,",
+      "zh": "做面条的师傅会用特别的方法，",
+      "pinyin": "Zuò miàntiáo de shīfu huì yòng tèbié de fāngfǎ,",
+      "vi": "Người thợ làm mì sẽ dùng một cách đặc biệt,"
+    },
+    {
+      "start": 305.83,
+      "end": 309.45,
+      "en": "pulling a piece of dough into one very long noodle,",
+      "zh": "把一个面团拉成一根很长很长的面条，",
+      "pinyin": "bǎ yí ge miàntuán lā chéng yì gēn hěn cháng hěn cháng de miàntiáo,",
+      "vi": "kéo một cục bột thành một sợi mì rất dài rất dài,"
+    },
+    {
+      "start": 309.47,
+      "end": 311.26,
+      "en": "and it can’t break in the middle.",
+      "zh": "中间是不能断的。",
+      "pinyin": "zhōngjiān shì bù néng duàn de.",
+      "vi": "ở giữa không được đứt."
+    },
+    {
+      "start": 311.27,
+      "end": 314.49,
+      "en": "Then put this long noodle into the bowl,",
+      "zh": "然后把这根长长的面条放到碗里，",
+      "pinyin": "Ránhòu bǎ zhè gēn chángcháng de miàntiáo fàng dào wǎn lǐ,",
+      "vi": "Sau đó đặt sợi mì dài này vào bát,"
+    },
+    {
+      "start": 314.5,
+      "end": 318.02,
+      "en": "and add soup and toppings. Wow, so that’s how it is!",
+      "zh": "再加上汤和菜。哇，原来是这样！",
+      "pinyin": "zài jiā shàng tāng hé cài. Wa, yuánlái shì zhèyàng!",
+      "vi": "rồi thêm nước dùng và đồ ăn kèm. Ồ, thì ra là vậy!"
+    },
+    {
+      "start": 318.03,
+      "end": 320.25,
+      "en": "One bowl of noodles is just one noodle.",
+      "zh": "一碗面就是一根面。",
+      "pinyin": "Yì wǎn miàn jiùshì yì gēn miàn.",
+      "vi": "Một bát mì là một sợi mì."
+    },
+    {
+      "start": 320.27,
+      "end": 321.93,
+      "en": "That’s so interesting.",
+      "zh": "这太有意思了。",
+      "pinyin": "Zhè tài yǒu yìsi le.",
+      "vi": "Điều này thật thú vị quá."
+    },
+    {
+      "start": 321.93,
+      "end": 323.92,
+      "en": "I also ate longevity noodles when I was little,",
+      "zh": "我小时候也吃长寿面，",
+      "pinyin": "Wǒ xiǎoshíhou yě chī chángshòumiàn,",
+      "vi": "Hồi nhỏ tôi cũng ăn mì trường thọ,"
+    },
+    {
+      "start": 323.93,
+      "end": 327.29,
+      "en": "but I never noticed whether there was only one noodle.",
+      "zh": "但是我从来没有注意过是不是只有一根。",
+      "pinyin": "dànshì wǒ cónglái méiyǒu zhùyì guo shì bú shì zhǐyǒu yì gēn.",
+      "vi": "nhưng tôi chưa bao giờ để ý xem có phải chỉ có một sợi không."
+    },
+    {
+      "start": 327.3,
+      "end": 330.42,
+      "en": "I only remember my mom always telling me, “Eat up,",
+      "zh": "我只记得我妈妈总是告诉我:“快吃吧，",
+      "pinyin": "Wǒ zhǐ jìde wǒ māma zǒngshì gàosu wǒ: “Kuài chī ba,",
+      "vi": "Tôi chỉ nhớ mẹ tôi luôn bảo tôi: “Con ăn nhanh đi,"
+    },
+    {
+      "start": 330.43,
+      "end": 333.12,
+      "en": "this is longevity noodles; eating them will help you grow tall,",
+      "zh": "这是长寿面，吃了能长得高，",
+      "pinyin": "zhè shì chángshòumiàn, chī le néng zhǎng de gāo,",
+      "vi": "đây là mì trường thọ, ăn vào sẽ cao lớn,"
+    },
+    {
+      "start": 333.13,
+      "end": 336.72,
+      "en": "and live long.” (Laughs) Your mom was right.",
+      "zh": "能活得久。”(笑)，你妈妈说得对。",
+      "pinyin": "néng huó de jiǔ.” (Xiào), nǐ māma shuō de duì.",
+      "vi": "sẽ sống lâu.” (Cười) Mẹ bạn nói đúng."
+    },
+    {
+      "start": 336.73,
+      "end": 340.02,
+      "en": "This is the beautiful blessing behind longevity noodles.",
+      "zh": "这就是长寿面背后的美好祝福。",
+      "pinyin": "Zhè jiùshì chángshòumiàn bèihòu de měihǎo zhùfú.",
+      "vi": "Đây chính là lời chúc tốt đẹp đằng sau mì trường thọ."
+    },
+    {
+      "start": 340.03,
+      "end": 342.05,
+      "en": "Eating this long noodle",
+      "zh": "吃这根长长的面条，",
+      "pinyin": "Chī zhè gēn chángcháng de miàntiáo,",
+      "vi": "Ăn sợi mì dài này,"
+    },
+    {
+      "start": 342.07,
+      "end": 343.89,
+      "en": "is like hoping that our lives",
+      "zh": "就像是希望我们的生命",
+      "pinyin": "jiù xiàng shì xīwàng wǒmen de shēngmìng",
+      "vi": "giống như hy vọng cuộc sống của chúng ta"
+    },
+    {
+      "start": 343.9,
+      "end": 345.96,
+      "en": "can also, like this noodle,",
+      "zh": "也能像这根面条一样，",
+      "pinyin": "yě néng xiàng zhè gēn miàntiáo yíyàng,",
+      "vi": "cũng có thể giống như sợi mì này,"
+    },
+    {
+      "start": 345.97,
+      "end": 349.73,
+      "en": "go on long, unbroken, and smoothly.",
+      "zh": "长长的，不断的，顺利地走下去。",
+      "pinyin": "chángcháng de, búduàn de, shùnlì de zǒu xiàqù.",
+      "vi": "dài dài, liên tục và thuận lợi bước tiếp."
+    },
+    {
+      "start": 349.73,
+      "end": 351.95,
+      "en": "This is a very beautiful metaphor.",
+      "zh": "这是一个非常美好的比喻。",
+      "pinyin": "Zhè shì yí ge fēicháng měihǎo de bǐyù.",
+      "vi": "Đây là một phép so sánh rất đẹp."
+    },
+    {
+      "start": 351.97,
+      "end": 354.73,
+      "en": "Yes, it’s a very beautiful metaphor.",
+      "zh": "是的，这是一个很美的比喻。",
+      "pinyin": "Shì de, zhè shì yí ge hěn měi de bǐyù.",
+      "vi": "Đúng vậy, đây là một phép so sánh rất đẹp."
+    },
+    {
+      "start": 354.73,
+      "end": 358.35,
+      "en": "Li Ming, you said a lot just now, and I find it very interesting.",
+      "zh": "李明，你刚才说了很多，我觉得很有意思。",
+      "pinyin": "Lǐ Míng, nǐ gāngcái shuō le hěn duō, wǒ juéde hěn yǒu yìsi.",
+      "vi": "Lý Minh, bạn vừa nói rất nhiều, tôi thấy rất thú vị."
+    },
+    {
+      "start": 358.37,
+      "end": 361.49,
+      "en": "Here I also want to say to the friends listening to our show,",
+      "zh": "在这里也想和听我们节目的朋友们说，",
+      "pinyin": "Zài zhèlǐ yě xiǎng hé tīng wǒmen jiémù de péngyou men shuō,",
+      "vi": "Ở đây tôi cũng muốn nói với những bạn đang nghe chương trình của chúng ta rằng,"
+    },
+    {
+      "start": 361.5,
+      "end": 365.56,
+      "en": "if you feel you don’t quite understand some words, it’s really okay.",
+      "zh": "如果你觉得有些词听不太懂，真的没关系。",
+      "pinyin": "Rúguǒ nǐ juéde yǒuxiē cí tīng bú tài dǒng, zhēn de méi guānxi.",
+      "vi": "nếu bạn thấy có vài từ nghe không hiểu lắm, thật sự không sao đâu."
+    },
+    {
+      "start": 365.57,
+      "end": 368.29,
+      "en": "Listen to us chat and try to guess the meaning;",
+      "zh": "听我们聊天，试着猜一猜意思，",
+      "pinyin": "Tīng wǒmen liáotiān, shìzhe cāi yi cāi yìsi,",
+      "vi": "Nghe chúng tôi trò chuyện, thử đoán ý nghĩa,"
+    },
+    {
+      "start": 368.3,
+      "end": 371.26,
+      "en": "just getting a feel for this cultural atmosphere is great.",
+      "zh": "感受一下这个文化气氛就很好。",
+      "pinyin": "gǎnshòu yíxià zhège wénhuà qìfēn jiù hěn hǎo.",
+      "vi": "cảm nhận không khí văn hóa này là rất tốt rồi."
+    },
+    {
+      "start": 371.27,
+      "end": 375.29,
+      "en": "You can also turn on YouTube subtitles or listen a few more times.",
+      "zh": "你也可以打开油管的字幕，或者多听几次。",
+      "pinyin": "Nǐ yě kěyǐ dǎkāi Yóuguǎn de zìmù, huòzhě duō tīng jǐ cì.",
+      "vi": "Bạn cũng có thể mở phụ đề YouTube, hoặc nghe lại vài lần."
+    },
+    {
+      "start": 375.3,
+      "end": 377.42,
+      "en": "In the full transcript of our podcast,",
+      "zh": "在我们博客的完整文本里，",
+      "pinyin": "Zài wǒmen bókè de wánzhěng wénběn lǐ,",
+      "vi": "Trong bản văn đầy đủ của podcast chúng tôi,"
+    },
+    {
+      "start": 377.43,
+      "end": 379.72,
+      "en": "there will also be explanations of key vocabulary.",
+      "zh": "也会有重点词汇的解释。",
+      "pinyin": "yě huì yǒu zhòngdiǎn cíhuì de jiěshì.",
+      "vi": "cũng sẽ có phần giải thích các từ vựng trọng điểm."
+    },
+    {
+      "start": 379.73,
+      "end": 381.22,
+      "en": "Wang Yu said it very well.",
+      "zh": "王雨说得很好。",
+      "pinyin": "Wáng Yǔ shuō de hěn hǎo.",
+      "vi": "Vương Vũ nói rất đúng."
+    },
+    {
+      "start": 381.23,
+      "end": 385.15,
+      "en": "Learning a language is like that—take it slow, no need to rush.",
+      "zh": "学习语言就是这样，慢慢来，不用着急。",
+      "pinyin": "Xuéxí yǔyán jiùshì zhèyàng, mànman lái, búyòng zháojí.",
+      "vi": "Học ngôn ngữ là như vậy, cứ từ từ, không cần vội."
+    },
+    {
+      "start": 385.17,
+      "end": 386.93,
+      "en": "Let’s keep talking about longevity noodles.",
+      "zh": "我们继续说长寿面。",
+      "pinyin": "Wǒmen jìxù shuō chángshòumiàn.",
+      "vi": "Chúng ta tiếp tục nói về mì trường thọ."
+    },
+    {
+      "start": 386.93,
+      "end": 390.72,
+      "en": "Do you still remember what longevity noodles tasted like when you were little?",
+      "zh": "你还记得你小时候吃长寿面是什么味道的吗？",
+      "pinyin": "Nǐ hái jìde nǐ xiǎoshíhou chī chángshòumiàn shì shénme wèidao de ma?",
+      "vi": "Bạn còn nhớ hồi nhỏ ăn mì trường thọ có vị thế nào không?"
+    },
+    {
+      "start": 390.73,
+      "end": 394.69,
+      "en": "I remember. The longevity noodles my mom made had a very light soup,",
+      "zh": "我记得。我妈妈做的长寿面，汤很清淡，",
+      "pinyin": "Wǒ jìde. Wǒ māma zuò de chángshòumiàn, tāng hěn qīngdàn,",
+      "vi": "Tôi nhớ. Mì trường thọ mẹ tôi làm, nước dùng rất thanh đạm,"
+    },
+    {
+      "start": 394.7,
+      "end": 396.12,
+      "en": "but it was very fragrant.",
+      "zh": "但是很香。",
+      "pinyin": "dànshì hěn xiāng.",
+      "vi": "nhưng rất thơm."
+    },
+    {
+      "start": 396.13,
+      "end": 398.69,
+      "en": "She would usually poach an egg in it.",
+      "zh": "她一般会卧一个鸡蛋在里面。",
+      "pinyin": "Tā yìbān huì wò yí ge jīdàn zài lǐmiàn.",
+      "vi": "Bà ấy thường thả một quả trứng vào trong đó."
+    },
+    {
+      "start": 398.7,
+      "end": 402.92,
+      "en": "That egg was made especially beautifully—round, like a little sun.",
+      "zh": "那个鸡蛋做得特别漂亮，圆圆的，像一个小太阳。",
+      "pinyin": "Nàge jīdàn zuò de tèbié piàoliang, yuányuán de, xiàng yí gè xiǎo tàiyáng.",
+      "vi": "Quả trứng đó làm đẹp đặc biệt, tròn tròn, như một mặt trời nhỏ."
+    },
+    {
+      "start": 402.93,
+      "end": 404.49,
+      "en": "Right! Eggs!",
+      "zh": "对！鸡蛋！",
+      "pinyin": "Duì! Jīdàn!",
+      "vi": "Đúng! Trứng!"
+    },
+    {
+      "start": 404.5,
+      "end": 406.96,
+      "en": "This is also a very important part.",
+      "zh": "这也是一个很重要的部分。",
+      "pinyin": "Zhè yě shì yí gè hěn zhòngyào de bùfen.",
+      "vi": "Đây cũng là một phần rất quan trọng."
+    },
+    {
+      "start": 406.97,
+      "end": 408.73,
+      "en": "Eating eggs on your birthday,",
+      "zh": "在生日这天吃鸡蛋，",
+      "pinyin": "Zài shēngrì zhè tiān chī jīdàn,",
+      "vi": "Vào ngày sinh nhật ăn trứng,"
+    },
+    {
+      "start": 408.73,
+      "end": 412.95,
+      "en": "Especially the egg poached in the longevity noodles—it also has an auspicious meaning.",
+      "zh": "特别是卧在长寿面里的鸡蛋，也有很好的寓意。",
+      "pinyin": "Tèbié shì wò zài chángshòumiàn lǐ de jīdàn, yě yǒu hěn hǎo de yùyì.",
+      "vi": "Đặc biệt là quả trứng nằm trong mì trường thọ, cũng có ý nghĩa rất tốt."
+    },
+    {
+      "start": 412.97,
+      "end": 415.69,
+      "en": "Really? Eggs have a special meaning too?",
+      "zh": "是吗？鸡蛋还有特别的意思？",
+      "pinyin": "Shì ma? Jīdàn hái yǒu tèbié de yìsi?",
+      "vi": "Thật sao? Trứng còn có ý nghĩa đặc biệt à?"
+    },
+    {
+      "start": 415.7,
+      "end": 418.86,
+      "en": "Of course. Think about it—eggs are round,",
+      "zh": "当然。你想，鸡蛋是圆形的，",
+      "pinyin": "Dāngrán. Nǐ xiǎng, jīdàn shì yuánxíng de,",
+      "vi": "Tất nhiên. Bạn thử nghĩ xem, trứng có hình tròn,"
+    },
+    {
+      "start": 418.87,
+      "end": 422.16,
+      "en": "In Chinese culture, round shapes represent 'completeness,'",
+      "zh": "在中国文化里，圆形代表着“圆满”，",
+      "pinyin": "Zài Zhōngguó wénhuà lǐ, yuánxíng dàibiǎo zhe “yuánmǎn”,",
+      "vi": "Trong văn hóa Trung Quốc, hình tròn đại diện cho “viên mãn”,"
+    },
+    {
+      "start": 422.17,
+      "end": 425.86,
+      "en": "That is, everything goes smoothly and perfectly.",
+      "zh": "就是说所有事情都很顺利，很完美。",
+      "pinyin": "Jiùshì shuō suǒyǒu shìqing dōu hěn shùnlì, hěn wánměi.",
+      "vi": "Nghĩa là mọi việc đều rất thuận lợi, rất hoàn hảo."
+    },
+    {
+      "start": 425.87,
+      "end": 428.69,
+      "en": "Moreover, eggs also represent new life.",
+      "zh": "而且，鸡蛋也代表着新的生命。",
+      "pinyin": "Érqiě, jīdàn yě dàibiǎo zhe xīn de shēngmìng.",
+      "vi": "Hơn nữa, trứng cũng đại diện cho sự sống mới."
+    },
+    {
+      "start": 428.7,
+      "end": 431.82,
+      "en": "A birthday is, in fact, the beginning of our life.",
+      "zh": "生日，其实就是我们生命的开始。",
+      "pinyin": "Shēngrì, qíshí jiùshì wǒmen shēngmìng de kāishǐ.",
+      "vi": "Sinh nhật, thực ra chính là khởi đầu của sự sống của chúng ta."
+    },
+    {
+      "start": 431.83,
+      "end": 434.25,
+      "en": "So eating an egg on your birthday,",
+      "zh": "所以在生日这天吃一个鸡蛋，",
+      "pinyin": "Suǒyǐ zài shēngrì zhè tiān chī yí gè jīdàn,",
+      "vi": "Vì vậy, vào ngày sinh nhật ăn một quả trứng,"
+    },
+    {
+      "start": 434.27,
+      "end": 436.89,
+      "en": "also symbolizes celebrating the birth of life,",
+      "zh": "也象征着庆祝生命的诞生，",
+      "pinyin": "yě xiàngzhēng zhe qìngzhù shēngmìng de dànshēng,",
+      "vi": "cũng tượng trưng cho việc chúc mừng sự ra đời của sinh mệnh,"
+    },
+    {
+      "start": 436.9,
+      "end": 439.69,
+      "en": "and hoping future life is complete and fulfilling.",
+      "zh": "希望未来的生活圆圆满满。",
+      "pinyin": "xīwàng wèilái de shēnghuó yuányuánmǎnmǎn.",
+      "vi": "mong cuộc sống tương lai tròn đầy viên mãn."
+    },
+    {
+      "start": 439.7,
+      "end": 442.56,
+      "en": "Wow, so a simple bowl of longevity noodles",
+      "zh": "哇，原来一碗简单的长寿面，",
+      "pinyin": "Wa, yuánlái yì wǎn jiǎndān de chángshòumiàn,",
+      "vi": "Chà, hóa ra một bát mì trường thọ đơn giản,"
+    },
+    {
+      "start": 442.57,
+      "end": 445.26,
+      "en": "actually contains so many explanations and blessings.",
+      "zh": "里面还有这么多说法和祝福。",
+      "pinyin": "lǐmiàn hái yǒu zhème duō shuōfa hé zhùfú.",
+      "vi": "trong đó lại có nhiều cách nói và lời chúc phúc đến vậy."
+    },
+    {
+      "start": 445.27,
+      "end": 448.53,
+      "en": "A long noodle and a round egg,",
+      "zh": "一个长长的面条，一个圆圆的鸡蛋，",
+      "pinyin": "Yí gè chángcháng de miàntiáo, yí gè yuányuán de jīdàn,",
+      "vi": "Một sợi mì dài dài, một quả trứng tròn tròn,"
+    },
+    {
+      "start": 448.53,
+      "end": 453.22,
+      "en": "together mean hoping your life is both long-lasting and complete.",
+      "zh": "合在一起就是希望你的人生又长久又圆满。",
+      "pinyin": "hé zài yìqǐ jiùshì xīwàng nǐ de rénshēng yòu chángjiǔ yòu yuánmǎn.",
+      "vi": "kết hợp lại chính là mong cuộc đời bạn vừa lâu dài vừa viên mãn."
+    },
+    {
+      "start": 453.23,
+      "end": 456.05,
+      "en": "Chinese food culture is truly so profound.",
+      "zh": "中国的饮食文化真的太有深度了。",
+      "pinyin": "Zhōngguó de yǐnshí wénhuà zhēn de tài yǒu shēndù le.",
+      "vi": "Văn hóa ẩm thực Trung Quốc thật sự quá sâu sắc."
+    },
+    {
+      "start": 456.07,
+      "end": 459.53,
+      "en": "Yes. Food isn't just for filling your stomach;",
+      "zh": "是的。食物不仅仅是为了填饱肚子，",
+      "pinyin": "Shì de. Shíwù bù jǐnjǐn shì wèile tiánbǎo dùzi,",
+      "vi": "Đúng vậy. Thức ăn không chỉ để lấp đầy bụng,"
+    },
+    {
+      "start": 459.53,
+      "end": 463.42,
+      "en": "it also carries culture, emotion, and blessings.",
+      "zh": "它还带着文化，带着情感，带着祝福。",
+      "pinyin": "tā hái dàizhe wénhuà, dàizhe qínggǎn, dàizhe zhùfú.",
+      "vi": "nó còn mang theo văn hóa, mang theo tình cảm, mang theo lời chúc phúc."
+    },
+    {
+      "start": 463.43,
+      "end": 466.45,
+      "en": "Wang Yu, about eating longevity noodles,",
+      "zh": "王雨，关于吃长寿面，",
+      "pinyin": "Wáng Yǔ, guānyú chī chángshòumiàn,",
+      "vi": "Vương Vũ, về việc ăn mì trường thọ,"
+    },
+    {
+      "start": 466.47,
+      "end": 469.26,
+      "en": "there's also a very interesting 'rule,'",
+      "zh": "还有一个非常有意思的“规则”，",
+      "pinyin": "hái yǒu yí gè fēicháng yǒu yìsi de “guīzé”,",
+      "vi": "còn có một “quy tắc” rất thú vị,"
+    },
+    {
+      "start": 469.27,
+      "end": 471.09,
+      "en": "or rather, a 'custom.'",
+      "zh": "或者说“讲究”。",
+      "pinyin": "huòzhě shuō “jiǎngjiu”.",
+      "vi": "hay nói cách khác là một “phong tục”."
+    },
+    {
+      "start": 471.1,
+      "end": 472.56,
+      "en": "Do you know what it is?",
+      "zh": "你知道是什么吗？",
+      "pinyin": "Nǐ zhīdào shì shénme ma?",
+      "vi": "Bạn có biết là gì không?"
+    },
+    {
+      "start": 472.57,
+      "end": 475.06,
+      "en": "Hmm... let me think.",
+      "zh": "嗯……让我想一想。",
+      "pinyin": "Ǹg…… ràng wǒ xiǎng yi xiǎng.",
+      "vi": "Ừm… để tôi nghĩ xem."
+    },
+    {
+      "start": 475.07,
+      "end": 477.43,
+      "en": "Is it related to how you eat it?",
+      "zh": "是不是跟怎么吃有关系？",
+      "pinyin": "Shì bu shì gēn zěnme chī yǒu guānxi?",
+      "vi": "Có phải liên quan đến cách ăn không?"
+    },
+    {
+      "start": 477.43,
+      "end": 479.35,
+      "en": "I think I've heard my grandma say,",
+      "zh": "我好像听我奶奶说过，",
+      "pinyin": "Wǒ hǎoxiàng tīng wǒ nǎinai shuō guo,",
+      "vi": "Tôi hình như đã nghe bà tôi kể,"
+    },
+    {
+      "start": 479.37,
+      "end": 481.93,
+      "en": "when eating these noodles, you need to be a little careful.",
+      "zh": "吃这个面的时候，要小心一点。",
+      "pinyin": "chī zhège miàn de shíhou, yào xiǎoxīn yìdiǎn.",
+      "vi": "khi ăn món mì này, phải cẩn thận một chút."
+    },
+    {
+      "start": 481.93,
+      "end": 484.09,
+      "en": "Right! You've hit the key point.",
+      "zh": "对！你说到重点了。",
+      "pinyin": "Duì! Nǐ shuō dào zhòngdiǎn le.",
+      "vi": "Đúng! Bạn nói trúng trọng điểm rồi."
+    },
+    {
+      "start": 484.1,
+      "end": 485.66,
+      "en": "When eating longevity noodles,",
+      "zh": "吃长寿面的时候，",
+      "pinyin": "Chī chángshòumiàn de shíhou,",
+      "vi": "Khi ăn mì trường thọ,"
+    },
+    {
+      "start": 485.67,
+      "end": 489.49,
+      "en": "the most important thing is that you can't bite the noodles apart.",
+      "zh": "最重要的一点就是，不能把面条咬断。",
+      "pinyin": "zuì zhòngyào de yìdiǎn jiùshì, bù néng bǎ miàntiáo yǎoduàn.",
+      "vi": "điểm quan trọng nhất là không được cắn đứt sợi mì."
+    },
+    {
+      "start": 489.5,
+      "end": 491.62,
+      "en": "Ah! Right, right, right! I remember now!",
+      "zh": "啊！对对对！我想起来了！",
+      "pinyin": "A! Duì duì duì! Wǒ xiǎng qǐlái le!",
+      "vi": "A! Đúng đúng đúng! Tôi nhớ ra rồi!"
+    },
+    {
+      "start": 491.63,
+      "end": 496.22,
+      "en": "You have to slurp the noodle into your mouth in one breath and not bite it in the middle.",
+      "zh": "要一口气把面条吸到嘴里，不能从中间咬断。",
+      "pinyin": "Yào yìkǒuqì bǎ miàntiáo xī dào zuǐ lǐ, bù néng cóng zhōngjiān yǎoduàn.",
+      "vi": "Phải hút sợi mì vào miệng một hơi, không được cắn đứt ở giữa."
+    },
+    {
+      "start": 496.23,
+      "end": 499.52,
+      "en": "Exactly. Because the whole noodle represents 'longevity,'",
+      "zh": "没错。因为整根面条代表了“长寿”，",
+      "pinyin": "Méicuò. Yīnwèi zhěng gēn miàntiáo dàibiǎo le “chángshòu”,",
+      "vi": "Không sai. Vì cả sợi mì đại diện cho “trường thọ”,"
+    },
+    {
+      "start": 499.53,
+      "end": 501.65,
+      "en": "if you bite it apart in the middle,",
+      "zh": "如果你把它从中间咬断了，",
+      "pinyin": "rúguǒ nǐ bǎ tā cóng zhōngjiān yǎoduàn le,",
+      "vi": "nếu bạn cắn đứt nó ở giữa,"
+    },
+    {
+      "start": 501.67,
+      "end": 504.46,
+      "en": "it's as if you've cut 'longevity' off,",
+      "zh": "就好像把“长寿”给切断了，",
+      "pinyin": "jiù hǎoxiàng bǎ “chángshòu” gěi qiēduàn le,",
+      "vi": "thì giống như cắt đứt “trường thọ”,"
+    },
+    {
+      "start": 504.47,
+      "end": 506.26,
+      "en": "which is considered unlucky.",
+      "zh": "这被认为是不吉利的。",
+      "pinyin": "zhè bèi rènwéi shì bù jílì de.",
+      "vi": "điều này bị coi là không may mắn."
+    },
+    {
+      "start": 506.27,
+      "end": 510.29,
+      "en": "So the correct way to eat it is to pick up the noodle with chopsticks,",
+      "zh": "所以，正确的吃法是，用筷子夹起面条，",
+      "pinyin": "Suǒyǐ, zhèngquè de chīfǎ shì, yòng kuàizi jiā qǐ miàntiáo,",
+      "vi": "Vì vậy, cách ăn đúng là dùng đũa gắp sợi mì lên,"
+    },
+    {
+      "start": 510.3,
+      "end": 513.26,
+      "en": "start from one end, slowly slurp it into your mouth,",
+      "zh": "从头开始，慢慢地吸到嘴里，",
+      "pinyin": "cóng tóu kāishǐ, mànmàn de xī dào zuǐ lǐ,",
+      "vi": "bắt đầu từ đầu sợi, từ từ hút vào miệng,"
+    },
+    {
+      "start": 513.27,
+      "end": 515.56,
+      "en": "until you've finished the whole noodle.",
+      "zh": "直到把整根面条都吃完。",
+      "pinyin": "zhídào bǎ zhěng gēn miàntiáo dōu chī wán.",
+      "vi": "cho đến khi ăn hết cả sợi mì."
+    },
+    {
+      "start": 515.57,
+      "end": 519.29,
+      "en": "Oh my, this is too hard! That noodle is so long,",
+      "zh": "天啊，这可太难了！那根面条那么长，",
+      "pinyin": "Tiān a, zhè kě tài nán le! Nà gēn miàntiáo nàme cháng,",
+      "vi": "Trời ơi, cái này khó quá! Sợi mì đó dài như vậy,"
+    },
+    {
+      "start": 519.3,
+      "end": 522.52,
+      "en": "eating it all in one breath—kids definitely can't do it.",
+      "zh": "要一口气吃完，小孩子肯定做不到。",
+      "pinyin": "yào yìkǒuqì chī wán, xiǎoháizi kěndìng zuò bú dào.",
+      "vi": "phải ăn hết trong một hơi, trẻ con chắc chắn không làm được."
+    },
+    {
+      "start": 522.53,
+      "end": 526.12,
+      "en": "I remember when I was little, because of this, I ate until my whole face was covered in soup.",
+      "zh": "我记得我小时候就因为这个，吃得满脸都是汤。",
+      "pinyin": "Wǒ jìde wǒ xiǎoshíhou jiù yīnwèi zhège, chī de mǎn liǎn dōu shì tāng.",
+      "vi": "Tôi nhớ hồi nhỏ vì chuyện này mà ăn đến đầy mặt là nước dùng."
+    },
+    {
+      "start": 526.13,
+      "end": 529.02,
+      "en": "(laughs) Yes, this is indeed a challenge.",
+      "zh": "(笑)，是的，这确实是一个挑战。",
+      "pinyin": "(xiào), shì de, zhè quèshí shì yí gè tiǎozhàn.",
+      "vi": "(Cười), đúng vậy, đây đúng thật là một thử thách."
+    },
+    {
+      "start": 529.03,
+      "end": 533.05,
+      "en": "So this is more like an interesting tradition, a ritual.",
+      "zh": "所以，这更像是一个有趣的传统，一个仪式。",
+      "pinyin": "Suǒyǐ, zhè gèng xiàng shì yí gè yǒuqù de chuántǒng, yí gè yíshì.",
+      "vi": "Vì vậy, đây giống như một truyền thống thú vị, một nghi lễ."
+    },
+    {
+      "start": 533.07,
+      "end": 536.69,
+      "en": "When everyone eats, they're very careful and also joke with each other.",
+      "zh": "大家在吃的时候，都会很小心，也会互相开玩笑。",
+      "pinyin": "Dàjiā zài chī de shíhou, dōu huì hěn xiǎoxīn, yě huì hùxiāng kāi wánxiào.",
+      "vi": "Mọi người khi ăn đều rất cẩn thận, cũng sẽ đùa nhau."
+    },
+    {
+      "start": 536.7,
+      "end": 539.32,
+      "en": "For example, when they see kids eating with it all over their faces,",
+      "zh": "比如，看到小孩子吃得满脸都是，",
+      "pinyin": "Bǐrú, kàn dào xiǎoháizi chī de mǎn liǎn dōu shì,",
+      "vi": "Ví dụ, thấy trẻ con ăn đầy mặt,"
+    },
+    {
+      "start": 539.33,
+      "end": 543.49,
+      "en": "the adults all (laugh) burst out laughing, and the atmosphere is great.",
+      "zh": "大人们都会(笑)大笑，气氛会非常好。",
+      "pinyin": "dàrénmen dōu huì (xiào) dàxiào, qìfēn huì fēicháng hǎo.",
+      "vi": "người lớn đều sẽ (cười) cười lớn, không khí sẽ rất tốt."
+    },
+    {
+      "start": 543.5,
+      "end": 545.82,
+      "en": "I can totally imagine that scene.",
+      "zh": "我完全可以想象那个画面。",
+      "pinyin": "Wǒ wánquán kěyǐ xiǎngxiàng nàge huàmiàn.",
+      "vi": "Tôi hoàn toàn có thể tưởng tượng ra khung cảnh đó."
+    },
+    {
+      "start": 545.83,
+      "end": 548.09,
+      "en": "But, Li Ming, I have a question.",
+      "zh": "不过，李明，我有一个问题。",
+      "pinyin": "Búguò, Lǐ Míng, wǒ yǒu yí ge wèntí.",
+      "vi": "Nhưng mà, Lý Minh, tôi có một câu hỏi."
+    },
+    {
+      "start": 548.1,
+      "end": 551.16,
+      "en": "This question may also be what many foreign friends want to ask.",
+      "zh": "这个问题可能也是很多外国朋友想问的。",
+      "pinyin": "Zhège wèntí kěnéng yě shì hěnduō wàiguó péngyou xiǎng wèn de.",
+      "vi": "Câu hỏi này có lẽ cũng là điều nhiều bạn nước ngoài muốn hỏi."
+    },
+    {
+      "start": 551.17,
+      "end": 553.66,
+      "en": "Go ahead. If a foreign friend comes to China,",
+      "zh": "你说。如果一个外国朋友来中国，",
+      "pinyin": "Nǐ shuō. Rúguǒ yí ge wàiguó péngyou lái Zhōngguó,",
+      "vi": "Bạn nói đi. Nếu một người bạn nước ngoài đến Trung Quốc,"
+    },
+    {
+      "start": 553.67,
+      "end": 556.36,
+      "en": "he celebrates a birthday with longevity noodles for the first time.",
+      "zh": "他第一次过有长寿面的生日。",
+      "pinyin": "tā dì yī cì guò yǒu chángshòumiàn de shēngrì.",
+      "vi": "anh ấy lần đầu tiên đón sinh nhật có mì trường thọ."
+    },
+    {
+      "start": 556.37,
+      "end": 558.69,
+      "en": "He doesn't know this rule, and when eating the noodles,",
+      "zh": "他不知道这个规矩，吃面的时候，",
+      "pinyin": "Tā bù zhīdào zhège guīju, chī miàn de shíhou,",
+      "vi": "Anh ấy không biết quy tắc này, khi ăn mì,"
+    },
+    {
+      "start": 558.7,
+      "end": 560.92,
+      "en": "he naturally bites the noodles apart.",
+      "zh": "很自然地就把面条咬断了。",
+      "pinyin": "hěn zìrán de jiù bǎ miàntiáo yǎoduàn le.",
+      "vi": "rất tự nhiên là cắn đứt sợi mì."
+    },
+    {
+      "start": 560.93,
+      "end": 562.95,
+      "en": "Then... what would happen?",
+      "zh": "那……会怎么样呢？",
+      "pinyin": "Nà…… huì zěnmeyàng ne?",
+      "vi": "Vậy thì... sẽ thế nào nhỉ?"
+    },
+    {
+      "start": 562.97,
+      "end": 565.09,
+      "en": "Would the elderly family members be unhappy?",
+      "zh": "家里的老人会不高兴吗？",
+      "pinyin": "Jiālǐ de lǎorén huì bù gāoxìng ma?",
+      "vi": "Người lớn tuổi trong nhà có thấy không vui không?"
+    },
+    {
+      "start": 565.1,
+      "end": 569.92,
+      "en": "(Laughs) That's a very good question, and very practical.",
+      "zh": "(笑)，这是一个非常好的问题，也很实际。",
+      "pinyin": "(xiào), zhè shì yí ge fēicháng hǎo de wèntí, yě hěn shíjì.",
+      "vi": "(Cười) Đây là một câu hỏi rất hay, cũng rất thực tế."
+    },
+    {
+      "start": 569.93,
+      "end": 571.05,
+      "en": "Don't worry, of course they won't be angry!",
+      "zh": "你放心，当然不会生气！",
+      "pinyin": "Nǐ fàngxīn, dāngrán bú huì shēngqì!",
+      "vi": "Bạn yên tâm, đương nhiên sẽ không giận đâu!"
+    },
+    {
+      "start": 571.07,
+      "end": 574.43,
+      "en": "Nowadays people are very open-minded and understand cultural differences.",
+      "zh": "现在大家都很开放，也很理解文化差异。",
+      "pinyin": "Xiànzài dàjiā dōu hěn kāifàng, yě hěn lǐjiě wénhuà chāyì.",
+      "vi": "Bây giờ mọi người đều rất cởi mở, cũng rất hiểu sự khác biệt văn hóa."
+    },
+    {
+      "start": 574.43,
+      "end": 575.65,
+      "en": "If a foreign friend",
+      "zh": "如果一个外国朋友",
+      "pinyin": "Rúguǒ yí ge wàiguó péngyou",
+      "vi": "Nếu một người bạn nước ngoài"
+    },
+    {
+      "start": 575.67,
+      "end": 577.46,
+      "en": "accidentally bites the noodles apart,",
+      "zh": "不小心把面条咬断了，",
+      "pinyin": "bù xiǎoxīn bǎ miàntiáo yǎoduàn le,",
+      "vi": "vô tình cắn đứt sợi mì,"
+    },
+    {
+      "start": 577.47,
+      "end": 578.86,
+      "en": "when we Chinese see it,",
+      "zh": "我们中国人看到了，",
+      "pinyin": "wǒmen Zhōngguó rén kàndào le,",
+      "vi": "chúng tôi, những người Trung Quốc, nhìn thấy,"
+    },
+    {
+      "start": 578.87,
+      "end": 582.33,
+      "en": "our first reaction definitely isn't anger, but finding it very amusing.",
+      "zh": "第一反应肯定不是生气，而是觉得很有趣。",
+      "pinyin": "dì yī fǎnyìng kěndìng bú shì shēngqì, ér shì juéde hěn yǒuqù.",
+      "vi": "phản ứng đầu tiên chắc chắn không phải là giận, mà là thấy rất thú vị."
+    },
+    {
+      "start": 582.33,
+      "end": 583.72,
+      "en": "Really? Really.",
+      "zh": "真的吗？真的。",
+      "pinyin": "Zhēn de ma? Zhēn de.",
+      "vi": "Thật sao? Thật."
+    },
+    {
+      "start": 583.73,
+      "end": 585.62,
+      "en": "We might laugh and tell him:",
+      "zh": "我们可能会笑着告诉他:",
+      "pinyin": "Wǒmen kěnéng huì xiàozhe gàosu tā:",
+      "vi": "Chúng tôi có thể sẽ cười nói với anh ấy:"
+    },
+    {
+      "start": 585.63,
+      "end": 588.02,
+      "en": "“Oh, it's best not to bite these noodles apart,",
+      "zh": "“哎呀，这个面条最好不要咬断哦，",
+      "pinyin": "“Āiyā, zhège miàntiáo zuìhǎo búyào yǎoduàn o,",
+      "vi": "“Ôi, sợi mì này tốt nhất là đừng cắn đứt nhé,"
+    },
+    {
+      "start": 588.03,
+      "end": 589.69,
+      "en": "because they represent longevity.”",
+      "zh": "因为它代表长寿。”",
+      "pinyin": "yīnwèi tā dàibiǎo chángshòu.”",
+      "vi": "vì nó tượng trưng cho trường thọ.”"
+    },
+    {
+      "start": 589.7,
+      "end": 592.42,
+      "en": "Then we'll explain to him why.",
+      "zh": "然后我们会解释给他听为什么。",
+      "pinyin": "Ránhòu wǒmen huì jiěshì gěi tā tīng wèishénme.",
+      "vi": "Sau đó chúng tôi sẽ giải thích cho anh ấy hiểu tại sao."
+    },
+    {
+      "start": 592.43,
+      "end": 595.62,
+      "en": "What we value more is the heartfelt intention of celebrating together,",
+      "zh": "我们更看重的是大家一起庆祝的心意，",
+      "pinyin": "Wǒmen gèng kànzhòng de shì dàjiā yìqǐ qìngzhù de xīnyì,",
+      "vi": "Chúng tôi coi trọng hơn là tấm lòng cùng nhau ăn mừng của mọi người,"
+    },
+    {
+      "start": 595.63,
+      "end": 597.92,
+      "en": "not these minor rules.",
+      "zh": "而不是这些小小的规则。",
+      "pinyin": "ér bú shì zhèxiē xiǎoxiǎo de guīzé.",
+      "vi": "chứ không phải những quy tắc nhỏ nhặt này."
+    },
+    {
+      "start": 597.93,
+      "end": 600.02,
+      "en": "As long as the intention is there, that matters more than anything.",
+      "zh": "心意到了，比什么都重要。",
+      "pinyin": "Xīnyì dào le, bǐ shénme dōu zhòngyào.",
+      "vi": "Có tấm lòng là được, quan trọng hơn mọi thứ."
+    },
+    {
+      "start": 600.03,
+      "end": 601.69,
+      "en": "So there's absolutely no need to worry.",
+      "zh": "所以完全不用担心。",
+      "pinyin": "Suǒyǐ wánquán búyòng dānxīn.",
+      "vi": "Vì vậy hoàn toàn không cần lo lắng."
+    },
+    {
+      "start": 601.7,
+      "end": 603.12,
+      "en": "Then I'm relieved.",
+      "zh": "那我就放心了。",
+      "pinyin": "Nà wǒ jiù fàngxīn le.",
+      "vi": "Vậy thì tôi yên tâm rồi."
+    },
+    {
+      "start": 603.13,
+      "end": 604.52,
+      "en": "This answer will make many",
+      "zh": "这个答案会让很多",
+      "pinyin": "Zhège dá'àn huì ràng hěnduō",
+      "vi": "Câu trả lời này sẽ khiến nhiều"
+    },
+    {
+      "start": 604.53,
+      "end": 607.82,
+      "en": "friends interested in Chinese culture feel at ease.",
+      "zh": "对中国文化感兴趣的朋友感到轻松。",
+      "pinyin": "duì Zhōngguó wénhuà gǎn xìngqù de péngyou gǎndào qīngsōng.",
+      "vi": "bạn bè quan tâm đến văn hóa Trung Quốc cảm thấy nhẹ nhõm."
+    },
+    {
+      "start": 607.83,
+      "end": 611.05,
+      "en": "So the most important thing is still that beautiful blessing.",
+      "zh": "所以，最重要的还是那个美好的祝福。",
+      "pinyin": "Suǒyǐ, zuì zhòngyào de hái shì nàge měihǎo de zhùfú.",
+      "vi": "Vì vậy, quan trọng nhất vẫn là lời chúc tốt đẹp đó."
+    },
+    {
+      "start": 611.07,
+      "end": 612.93,
+      "en": "Exactly. Li Ming,",
+      "zh": "正是如此。李明，",
+      "pinyin": "Zhèng shì rúcǐ. Lǐ Míng,",
+      "vi": "Đúng vậy. Lý Minh,"
+    },
+    {
+      "start": 612.93,
+      "end": 616.82,
+      "en": "we've talked so much about longevity noodles, and I've learned a lot.",
+      "zh": "我们聊了这么多关于长寿面的事，我学到了很多。",
+      "pinyin": "wǒmen liáo le zhème duō guānyú chángshòumiàn de shì, wǒ xué dào le hěnduō.",
+      "vi": "chúng ta đã trò chuyện nhiều về mì trường thọ như vậy, tôi học được rất nhiều."
+    },
+    {
+      "start": 616.83,
+      "end": 620.32,
+      "en": "Then in China, besides eating longevity noodles on birthdays,",
+      "zh": "那在中国，过生日除了吃长寿面，",
+      "pinyin": "Nà zài Zhōngguó, guò shēngrì chúle chī chángshòumiàn,",
+      "vi": "Vậy ở Trung Quốc, ngoài việc ăn mì trường thọ trong sinh nhật,"
+    },
+    {
+      "start": 620.33,
+      "end": 624.22,
+      "en": "are there other relatively traditional ways to celebrate or foods?",
+      "zh": "还有没有其他比较传统的庆祝方式或者食物呢？",
+      "pinyin": "hái yǒu méiyǒu qítā bǐjiào chuántǒng de qìngzhù fāngshì huòzhě shíwù ne?",
+      "vi": "còn có cách ăn mừng hoặc món ăn truyền thống nào khác không?"
+    },
+    {
+      "start": 624.23,
+      "end": 627.15,
+      "en": "Of course there are. Chinese traditional culture is very rich,",
+      "zh": "当然有。中国的传统文化很丰富，",
+      "pinyin": "Dāngrán yǒu. Zhōngguó de chuántǒng wénhuà hěn fēngfù,",
+      "vi": "Đương nhiên là có. Văn hóa truyền thống Trung Quốc rất phong phú,"
+    },
+    {
+      "start": 627.17,
+      "end": 628.26,
+      "en": "people of different ages",
+      "zh": "不同年龄的人，",
+      "pinyin": "bùtóng niánlíng de rén,",
+      "vi": "những người ở độ tuổi khác nhau,"
+    },
+    {
+      "start": 628.27,
+      "end": 631.13,
+      "en": "have somewhat different birthday customs. For example,",
+      "zh": "过生日的习俗也不太一样。比如，",
+      "pinyin": "guò shēngrì de xísú yě bú tài yíyàng. Bǐrú,",
+      "vi": "phong tục đón sinh nhật cũng không giống hẳn. Ví dụ,"
+    },
+    {
+      "start": 631.13,
+      "end": 632.29,
+      "en": "for the elderly in the family,",
+      "zh": "给家里的老人，",
+      "pinyin": "gěi jiālǐ de lǎorén,",
+      "vi": "đối với người lớn tuổi trong nhà,"
+    },
+    {
+      "start": 632.3,
+      "end": 634.76,
+      "en": "especially when grandparents' generation celebrates a birthday,",
+      "zh": "特别是爷爷奶奶辈的人过生日，",
+      "pinyin": "tèbié shì yéye nǎinai bèi de rén guò shēngrì,",
+      "vi": "đặc biệt là khi ông bà nội ngoại tổ chức sinh nhật,"
+    },
+    {
+      "start": 634.77,
+      "end": 636.69,
+      "en": "besides preparing longevity noodles,",
+      "zh": "我们除了准备长寿面，",
+      "pinyin": "wǒmen chúle zhǔnbèi chángshòumiàn,",
+      "vi": "ngoài việc chuẩn bị mì trường thọ,"
+    },
+    {
+      "start": 636.7,
+      "end": 640.26,
+      "en": "we often also prepare something called “longevity peaches.”",
+      "zh": "常常还会准备一样东西，叫“寿桃”。",
+      "pinyin": "chángcháng hái huì zhǔnbèi yí yàng dōngxi, jiào “shòutáo”.",
+      "vi": "chúng tôi thường còn chuẩn bị một thứ gọi là “đào thọ”."
+    },
+    {
+      "start": 640.27,
+      "end": 641.29,
+      "en": "Longevity peaches!",
+      "zh": "寿桃！",
+      "pinyin": "Shòutáo!",
+      "vi": "Đào thọ!"
+    },
+    {
+      "start": 641.3,
+      "end": 644.16,
+      "en": "I know about this. They're not real peaches, right?",
+      "zh": "我知道这个。它不是真的桃子，对不对？",
+      "pinyin": "Wǒ zhīdào zhège. Tā bú shì zhēn de táozi, duìbuduì?",
+      "vi": "Tôi biết cái này. Nó không phải đào thật, đúng không?"
+    },
+    {
+      "start": 644.17,
+      "end": 647.26,
+      "en": "It's a kind of pastry that looks like a peach. Right.",
+      "zh": "是一种长得像桃子的点心。对。",
+      "pinyin": "Shì yì zhǒng zhǎng de xiàng táozi de diǎnxin. Duì.",
+      "vi": "Là một loại bánh điểm tâm trông giống quả đào. Đúng."
+    },
+    {
+      "start": 647.27,
+      "end": 649.13,
+      "en": "It's usually made from flour,",
+      "zh": "它通常是用面粉做的，",
+      "pinyin": "Tā tōngcháng shì yòng miànfěn zuò de,",
+      "vi": "Nó thường được làm bằng bột mì,"
+    },
+    {
+      "start": 649.13,
+      "end": 651.72,
+      "en": "with sweet filling inside, such as red bean paste.",
+      "zh": "里面有甜的馅儿，比如豆沙。",
+      "pinyin": "lǐmiàn yǒu tián de xiànr, bǐrú dòushā.",
+      "vi": "bên trong có nhân ngọt, ví dụ như đậu đỏ xay."
+    },
+    {
+      "start": 651.73,
+      "end": 653.65,
+      "en": "shape it like a peach,",
+      "zh": "把它做成桃子的形状，",
+      "pinyin": "bǎ tā zuò chéng táozi de xíngzhuàng,",
+      "vi": "tạo hình cho nó giống quả đào,"
+    },
+    {
+      "start": 653.67,
+      "end": 655.69,
+      "en": "then dye it with a little pink,",
+      "zh": "再染上一点点粉红色，",
+      "pinyin": "zài rǎn shàng yìdiǎndiǎn fěnhóngsè,",
+      "vi": "rồi nhuộm một chút màu hồng,"
+    },
+    {
+      "start": 655.7,
+      "end": 658.62,
+      "en": "so it looks just like a real peach—very pretty.",
+      "zh": "看起来就和真桃子一样，非常漂亮。",
+      "pinyin": "kàn qǐlái jiù hé zhēn táozi yíyàng, fēicháng piàoliang.",
+      "vi": "trông giống hệt quả đào thật, rất đẹp."
+    },
+    {
+      "start": 658.63,
+      "end": 660.15,
+      "en": "Why peaches?",
+      "zh": "为什么是桃子呢？",
+      "pinyin": "Wèishénme shì táozi ne?",
+      "vi": "Tại sao lại là quả đào nhỉ?"
+    },
+    {
+      "start": 660.17,
+      "end": 662.09,
+      "en": "Do peaches have any special meaning?",
+      "zh": "桃子有什么特别的意义吗？",
+      "pinyin": "Táozi yǒu shénme tèbié de yìyì ma?",
+      "vi": "Quả đào có ý nghĩa đặc biệt gì không?"
+    },
+    {
+      "start": 662.1,
+      "end": 664.49,
+      "en": "In ancient Chinese myths,",
+      "zh": "在中国古代的神话故事里，",
+      "pinyin": "Zài Zhōngguó gǔdài de shénhuà gùshi lǐ,",
+      "vi": "Trong những câu chuyện thần thoại thời cổ đại Trung Quốc,"
+    },
+    {
+      "start": 664.5,
+      "end": 665.92,
+      "en": "What the immortals in heaven eat",
+      "zh": "天上的神仙吃的",
+      "pinyin": "tiānshàng de shénxiān chī de",
+      "vi": "Món mà thần tiên trên trời ăn"
+    },
+    {
+      "start": 665.93,
+      "end": 669.82,
+      "en": "Peaches can make people live a long time and stay young forever.",
+      "zh": "桃子，可以让人活很长时间，永远年轻。",
+      "pinyin": "Táozi, kěyǐ ràng rén huó hěn cháng shíjiān, yǒngyuǎn niánqīng.",
+      "vi": "Quả đào có thể giúp người ta sống lâu và mãi mãi trẻ trung."
+    },
+    {
+      "start": 669.83,
+      "end": 673.02,
+      "en": "So peaches became a symbol of “longevity.”",
+      "zh": "所以，桃子就成了“长寿”的象征。",
+      "pinyin": "Suǒyǐ, táozi jiù chéngle “chángshòu” de xiàngzhēng.",
+      "vi": "Vì vậy, đào đã trở thành biểu tượng của “trường thọ”."
+    },
+    {
+      "start": 673.03,
+      "end": 675.02,
+      "en": "When celebrating an elderly person’s birthday, people give longevity peaches,",
+      "zh": "给老人过生日送寿桃，",
+      "pinyin": "Gěi lǎorén guò shēngrì sòng shòutáo,",
+      "vi": "Khi chúc thọ người già, người ta tặng đào thọ,"
+    },
+    {
+      "start": 675.03,
+      "end": 678.49,
+      "en": "which means wishing them health and longevity like the immortals.",
+      "zh": "就是祝福他们像神仙一样健康长寿。",
+      "pinyin": "jiùshì zhùfú tāmen xiàng shénxiān yíyàng jiànkāng chángshòu.",
+      "vi": "tức là chúc họ khỏe mạnh và sống lâu như thần tiên."
+    },
+    {
+      "start": 678.5,
+      "end": 680.12,
+      "en": "I see.",
+      "zh": "原来是这样。",
+      "pinyin": "Yuánlái shì zhèyàng.",
+      "vi": "Thì ra là vậy."
+    },
+    {
+      "start": 680.13,
+      "end": 683.85,
+      "en": "Longevity noodles and longevity peaches are both wishes for long life.",
+      "zh": "长寿面，寿桃，都是祝福长寿的。",
+      "pinyin": "Chángshòumiàn, shòutáo, dōu shì zhùfú chángshòu de.",
+      "vi": "Mì trường thọ, đào thọ đều là để chúc trường thọ."
+    },
+    {
+      "start": 683.87,
+      "end": 687.23,
+      "en": "It seems Chinese people really value health and longevity.",
+      "zh": "看来中国人真的很看重健康和长寿。",
+      "pinyin": "Kànlái Zhōngguórén zhēn de hěn kànzhòng jiànkāng hé chángshòu.",
+      "vi": "Có vẻ người Trung Quốc thật sự rất coi trọng sức khỏe và sống lâu."
+    },
+    {
+      "start": 687.23,
+      "end": 690.92,
+      "en": "Yes, this is a very core blessing in our culture.",
+      "zh": "是的，这是我们文化里一个非常核心的祝福。",
+      "pinyin": "Shì de, zhè shì wǒmen wénhuà lǐ yí ge fēicháng héxīn de zhùfú.",
+      "vi": "Đúng vậy, đây là một lời chúc rất cốt lõi trong văn hóa của chúng tôi."
+    },
+    {
+      "start": 690.93,
+      "end": 693.22,
+      "en": "Besides birthdays for the elderly, there is also a",
+      "zh": "除了给老人过生日，还有一个",
+      "pinyin": "Chúle gěi lǎorén guò shēngrì, hái yǒu yí ge",
+      "vi": "Ngoài sinh nhật cho người già, còn có một"
+    },
+    {
+      "start": 693.23,
+      "end": 694.22,
+      "en": "very special one,",
+      "zh": "很特别的，",
+      "pinyin": "hěn tèbié de,",
+      "vi": "rất đặc biệt,"
+    },
+    {
+      "start": 694.23,
+      "end": 698.42,
+      "en": "which is a baby’s first birthday. Oh, the first-year birthday.",
+      "zh": "就是小宝宝的第一个生日。哦，周岁生日。",
+      "pinyin": "jiùshì xiǎo bǎobao de dì yī ge shēngrì. Ò, zhōusuì shēngrì.",
+      "vi": "đó là sinh nhật đầu tiên của em bé. Ồ, sinh nhật tròn một tuổi."
+    },
+    {
+      "start": 698.43,
+      "end": 701.45,
+      "en": "I know this one; it seems it’s celebrated very grandly.",
+      "zh": "这个我知道，好像会办得非常隆重。",
+      "pinyin": "Zhège wǒ zhīdào, hǎoxiàng huì bàn de fēicháng lóngzhòng.",
+      "vi": "Cái này tôi biết, hình như sẽ được tổ chức rất long trọng."
+    },
+    {
+      "start": 701.47,
+      "end": 704.09,
+      "en": "Right. When a baby turns one,",
+      "zh": "对。在小宝宝满一岁的时候，",
+      "pinyin": "Duì. Zài xiǎo bǎobao mǎn yí suì de shíhou,",
+      "vi": "Đúng. Khi em bé tròn một tuổi,"
+    },
+    {
+      "start": 704.1,
+      "end": 705.56,
+      "en": "besides eating longevity noodles,",
+      "zh": "除了会吃长寿面，",
+      "pinyin": "chúle huì chī chángshòumiàn,",
+      "vi": "ngoài việc ăn mì trường thọ,"
+    },
+    {
+      "start": 705.57,
+      "end": 707.86,
+      "en": "of course, very small and soft noodles,",
+      "zh": "当然是很小很软的面条，",
+      "pinyin": "dāngrán shì hěn xiǎo hěn ruǎn de miàntiáo,",
+      "vi": "tất nhiên là loại mì rất nhỏ và rất mềm,"
+    },
+    {
+      "start": 707.87,
+      "end": 710.29,
+      "en": "there is also a traditional food: red eggs.",
+      "zh": "还有一个传统食物是红鸡蛋。",
+      "pinyin": "hái yǒu yí ge chuántǒng shíwù shì hóng jīdàn.",
+      "vi": "còn có một món truyền thống là trứng gà đỏ."
+    },
+    {
+      "start": 710.3,
+      "end": 711.42,
+      "en": "Red eggs?",
+      "zh": "红鸡蛋？",
+      "pinyin": "Hóng jīdàn?",
+      "vi": "Trứng gà đỏ?"
+    },
+    {
+      "start": 711.43,
+      "end": 713.92,
+      "en": "Do you mean dyeing the eggshells red?",
+      "zh": "就是把鸡蛋的壳染成红色的吗？",
+      "pinyin": "Jiùshì bǎ jīdàn de ké rǎn chéng hóngsè de ma?",
+      "vi": "Là nhuộm vỏ trứng gà thành màu đỏ phải không?"
+    },
+    {
+      "start": 713.93,
+      "end": 718.95,
+      "en": "Yes. Red is a color that represents joy and good luck in China.",
+      "zh": "是的。红色在中国是代表喜庆和好运的颜色。",
+      "pinyin": "Shì de. Hóngsè zài Zhōngguó shì dàibiǎo xǐqìng hé hǎoyùn de yánsè.",
+      "vi": "Đúng vậy. Màu đỏ ở Trung Quốc là màu tượng trưng cho niềm vui và may mắn."
+    },
+    {
+      "start": 718.97,
+      "end": 722.63,
+      "en": "As we just said, eggs represent new life and completeness.",
+      "zh": "鸡蛋我们刚才也说了，代表新的生命和圆满。",
+      "pinyin": "Jīdàn wǒmen gāngcái yě shuō le, dàibiǎo xīn de shēngmìng hé yuánmǎn.",
+      "vi": "Trứng gà như chúng ta vừa nói, tượng trưng cho sinh mệnh mới và sự viên mãn."
+    },
+    {
+      "start": 722.63,
+      "end": 724.92,
+      "en": "So, on the baby’s first birthday,",
+      "zh": "所以，在宝宝的第一个生日，",
+      "pinyin": "Suǒyǐ, zài bǎobao de dì yī ge shēngrì,",
+      "vi": "Vì vậy, trong sinh nhật đầu tiên của em bé,"
+    },
+    {
+      "start": 724.93,
+      "end": 725.92,
+      "en": "relatives and friends",
+      "zh": "亲戚朋友们",
+      "pinyin": "qīnqi péngyou men",
+      "vi": "họ hàng bạn bè"
+    },
+    {
+      "start": 725.93,
+      "end": 728.55,
+      "en": "will receive red eggs prepared by the host family,",
+      "zh": "会收到主人家准备的红鸡蛋，",
+      "pinyin": "huì shōudào zhǔrénjiā zhǔnbèi de hóng jīdàn,",
+      "vi": "sẽ nhận được trứng gà đỏ do gia chủ chuẩn bị,"
+    },
+    {
+      "start": 728.57,
+      "end": 731.43,
+      "en": "and everyone shares this joy and blessing together.",
+      "zh": "大家一起分享这份喜悦和祝福。",
+      "pinyin": "dàjiā yìqǐ fēnxiǎng zhè fèn xǐyuè hé zhùfú.",
+      "vi": "mọi người cùng nhau chia sẻ niềm vui và lời chúc phúc này."
+    },
+    {
+      "start": 731.43,
+      "end": 732.69,
+      "en": "That sounds really nice.",
+      "zh": "听起来真不错。",
+      "pinyin": "Tīng qǐlái zhēn búcuò.",
+      "vi": "Nghe thật tuyệt."
+    },
+    {
+      "start": 732.7,
+      "end": 735.06,
+      "en": "There are karaoke parties for young people,",
+      "zh": "有给年轻人的卡拉OK派对，",
+      "pinyin": "Yǒu gěi niánqīngrén de kǎlā OK pàiduì,",
+      "vi": "Có tiệc karaoke cho người trẻ,"
+    },
+    {
+      "start": 735.07,
+      "end": 737.03,
+      "en": "longevity noodles for everyone,",
+      "zh": "有给所有人的长寿面，",
+      "pinyin": "Yǒu gěi suǒyǒu rén de chángshòumiàn,",
+      "vi": "có mì trường thọ cho mọi người,"
+    },
+    {
+      "start": 737.03,
+      "end": 740.82,
+      "en": "longevity peaches for the elderly, and red eggs for babies.",
+      "zh": "有给老人的寿桃，还有给小宝宝的红鸡蛋。",
+      "pinyin": "Yǒu gěi lǎorén de shòutáo, hái yǒu gěi xiǎo bǎobao de hóng jīdàn.",
+      "vi": "có đào thọ cho người già, và còn có trứng gà đỏ cho em bé."
+    },
+    {
+      "start": 740.83,
+      "end": 743.52,
+      "en": "Chinese birthday culture is truly rich and colorful.",
+      "zh": "中国的生日文化真是丰富多彩。",
+      "pinyin": "Zhōngguó de shēngrì wénhuà zhēn shì fēngfù duōcǎi.",
+      "vi": "Văn hóa sinh nhật của Trung Quốc thật phong phú và đa dạng."
+    },
+    {
+      "start": 743.53,
+      "end": 744.65,
+      "en": "That’s exactly right.",
+      "zh": "确实是这样。",
+      "pinyin": "Quèshí shì zhèyàng.",
+      "vi": "Đúng là như vậy."
+    },
+    {
+      "start": 744.67,
+      "end": 748.26,
+      "en": "It combines tradition and modernity very well.",
+      "zh": "它把传统和现代很好地结合在了一起。",
+      "pinyin": "Tā bǎ chuántǒng hé xiàndài hěn hǎo de jiéhé zài le yìqǐ.",
+      "vi": "Nó kết hợp truyền thống và hiện đại rất tốt."
+    },
+    {
+      "start": 748.27,
+      "end": 750.63,
+      "en": "We young people like to have fun with friends,",
+      "zh": "我们年轻人喜欢和朋友热闹，",
+      "pinyin": "Wǒmen niánqīngrén xǐhuan hé péngyou rènao,",
+      "vi": "Người trẻ chúng tôi thích náo nhiệt với bạn bè,"
+    },
+    {
+      "start": 750.63,
+      "end": 751.52,
+      "en": "but when we go home,",
+      "zh": "但回到家，",
+      "pinyin": "dàn huí dào jiā,",
+      "vi": "nhưng khi về nhà,"
+    },
+    {
+      "start": 751.53,
+      "end": 754.25,
+      "en": "we will still eat that bowl",
+      "zh": "也依然会吃下父母为我们做的那碗",
+      "pinyin": "yě yīrán huì chī xià fùmǔ wèi wǒmen zuò de nà wǎn",
+      "vi": "vẫn sẽ ăn bát"
+    },
+    {
+      "start": 754.27,
+      "end": 756.23,
+      "en": "of loving longevity noodles made by our parents.",
+      "zh": "充满爱意的长寿面。",
+      "pinyin": "chōngmǎn àiyì de chángshòumiàn.",
+      "vi": "mì trường thọ đầy yêu thương mà bố mẹ làm cho chúng tôi."
+    },
+    {
+      "start": 756.23,
+      "end": 759.35,
+      "en": "These two ways are not contradictory; together they form",
+      "zh": "这两种方式并不矛盾，它们共同构成了",
+      "pinyin": "Zhè liǎng zhǒng fāngshì bìng bù máodùn, tāmen gòngtóng gòuchéng le",
+      "vi": "Hai cách này không hề mâu thuẫn, chúng cùng tạo nên"
+    },
+    {
+      "start": 759.37,
+      "end": 761.53,
+      "en": "our beautiful memories of birthdays.",
+      "zh": "我们对生日的美好记忆。",
+      "pinyin": "wǒmen duì shēngrì de měihǎo jìyì.",
+      "vi": "những ký ức đẹp về ngày sinh nhật của chúng ta."
+    },
+    {
+      "start": 761.53,
+      "end": 762.82,
+      "en": "That was really well said.",
+      "zh": "说得太好了。",
+      "pinyin": "Shuō de tài hǎo le.",
+      "vi": "Nói hay quá."
+    },
+    {
+      "start": 762.83,
+      "end": 764.52,
+      "en": "No matter which way it is,",
+      "zh": "无论是哪种方式，",
+      "pinyin": "Wúlùn shì nǎ zhǒng fāngshì,",
+      "vi": "Dù là cách nào,"
+    },
+    {
+      "start": 764.53,
+      "end": 768.05,
+      "en": "the core of a birthday is the same: celebrating life,",
+      "zh": "生日的核心都是一样的:庆祝生命，",
+      "pinyin": "shēngrì de héxīn dōu shì yíyàng de: qìngzhù shēngmìng,",
+      "vi": "cốt lõi của sinh nhật đều giống nhau: ăn mừng sự sống,"
+    },
+    {
+      "start": 768.07,
+      "end": 771.09,
+      "en": "thanking our parents, and feeling love and being loved.",
+      "zh": "感谢父母，感受爱与被爱。",
+      "pinyin": "gǎnxiè fùmǔ, gǎnshòu ài yǔ bèi ài.",
+      "vi": "cảm ơn cha mẹ, cảm nhận yêu thương và được yêu thương."
+    },
+    {
+      "start": 771.1,
+      "end": 772.62,
+      "en": "Exactly.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn chính xác."
+    },
+    {
+      "start": 772.63,
+      "end": 775.82,
+      "en": "All right, Wang Yu, we’ve had a very happy chat today.",
+      "zh": "好了，王雨，今天我们聊得非常开心。",
+      "pinyin": "Hǎo le, Wáng Yǔ, jīntiān wǒmen liáo de fēicháng kāixīn.",
+      "vi": "Được rồi, Vương Vũ, hôm nay chúng ta nói chuyện rất vui."
+    },
+    {
+      "start": 775.83,
+      "end": 778.09,
+      "en": "Before we finish, as usual,",
+      "zh": "在结束之前，我们像往常一样，",
+      "pinyin": "Zài jiéshù zhīqián, wǒmen xiàng wǎngcháng yíyàng,",
+      "vi": "Trước khi kết thúc, như thường lệ,"
+    },
+    {
+      "start": 778.1,
+      "end": 781.82,
+      "en": "let’s review a few fairly important words that appeared in today’s conversation.",
+      "zh": "来复习几个今天对话里出现的比较重要的词。",
+      "pinyin": "lái fùxí jǐ ge jīntiān duìhuà lǐ chūxiàn de bǐjiào zhòngyào de cí.",
+      "vi": "chúng ta hãy ôn lại vài từ khá quan trọng xuất hiện trong cuộc trò chuyện hôm nay."
+    },
+    {
+      "start": 781.83,
+      "end": 782.89,
+      "en": "Okay! No problem.",
+      "zh": "好的！没问题。",
+      "pinyin": "Hǎo de! Méi wèntí.",
+      "vi": "Được! Không vấn đề gì."
+    },
+    {
+      "start": 782.9,
+      "end": 785.49,
+      "en": "The first word is, of course, today’s main character:",
+      "zh": "第一个词，当然是我们今天的主角:",
+      "pinyin": "Dì yī ge cí, dāngrán shì wǒmen jīntiān de zhǔjiǎo:",
+      "vi": "Từ đầu tiên, tất nhiên là nhân vật chính của chúng ta hôm nay:"
+    },
+    {
+      "start": 785.5,
+      "end": 788.92,
+      "en": "chángshòu. Wang Yu, can you explain in simple words",
+      "zh": "长寿。王雨，你能用简单的话解释一下",
+      "pinyin": "chángshòu. Wáng Yǔ, nǐ néng yòng jiǎndān de huà jiěshì yíxià",
+      "vi": "Trường thọ. Vương Vũ, bạn có thể dùng những lời đơn giản giải thích một chút"
+    },
+    {
+      "start": 788.93,
+      "end": 790.52,
+      "en": "what “chángshòu” means?",
+      "zh": "“长寿”是什么意思吗？",
+      "pinyin": "“chángshòu” shì shénme yìsi ma?",
+      "vi": "“trường thọ” có nghĩa là gì không?"
+    },
+    {
+      "start": 790.53,
+      "end": 793.22,
+      "en": "Mm, longevity—this word is very good.",
+      "zh": "嗯，长寿，这个词非常好。",
+      "pinyin": "Èn, chángshòu, zhège cí fēicháng hǎo.",
+      "vi": "Ừ, trường thọ, từ này rất hay."
+    },
+    {
+      "start": 793.23,
+      "end": 794.25,
+      "en": "It means",
+      "zh": "它的意思就是",
+      "pinyin": "Tā de yìsi jiùshì",
+      "vi": "Ý của nó chính là"
+    },
+    {
+      "start": 794.27,
+      "end": 798.86,
+      "en": "a person has lived a very, very long time and is in good health.",
+      "zh": "一个人活了很长很长的时间，而且身体很健康。",
+      "pinyin": "yí ge rén huó le hěn cháng hěn cháng de shíjiān, érqiě shēntǐ hěn jiànkāng.",
+      "vi": "một người sống rất lâu rất lâu, và cơ thể rất khỏe mạnh."
+    },
+    {
+      "start": 798.87,
+      "end": 800.09,
+      "en": "For example, we can say:",
+      "zh": "比如，我们可以说:",
+      "pinyin": "Bǐrú, wǒmen kěyǐ shuō:",
+      "vi": "Ví dụ, chúng ta có thể nói:"
+    },
+    {
+      "start": 800.1,
+      "end": 803.02,
+      "en": "“I wish Grandpa and Grandma health and longevity.”",
+      "zh": "“我祝福爷爷奶奶健康长寿。”",
+      "pinyin": "“Wǒ zhùfú yéye nǎinai jiànkāng chángshòu.”",
+      "vi": "“Tôi chúc ông bà khỏe mạnh và trường thọ.”"
+    },
+    {
+      "start": 803.03,
+      "end": 806.42,
+      "en": "It means hoping they live long and live well.",
+      "zh": "意思就是希望他们活得久，也活得好。",
+      "pinyin": "Yìsi jiùshì xīwàng tāmen huó de jiǔ, yě huó de hǎo.",
+      "vi": "Nghĩa là mong họ sống lâu và sống tốt."
+    },
+    {
+      "start": 806.43,
+      "end": 810.35,
+      "en": "Explained very clearly. Good, the second word is: tradition.",
+      "zh": "解释得非常清楚。好，第二个词是:传统。",
+      "pinyin": "Jiěshì de fēicháng qīngchu. Hǎo, dì èr ge cí shì: chuántǒng.",
+      "vi": "Giải thích rất rõ ràng. Tốt, từ thứ hai là: truyền thống."
+    },
+    {
+      "start": 810.37,
+      "end": 813.43,
+      "en": "We've been talking all day about “traditional birthday foods,”",
+      "zh": "我们今天一直在说“传统的生日食物”，",
+      "pinyin": "Wǒmen jīntiān yìzhí zài shuō “chuántǒng de shēngrì shíwù”,",
+      "vi": "Hôm nay chúng ta vẫn luôn nói về “món ăn sinh nhật truyền thống”,"
+    },
+    {
+      "start": 813.43,
+      "end": 814.72,
+      "en": "“traditional customs.”",
+      "zh": "“传统的习惯”。",
+      "pinyin": "“chuántǒng de xíguàn”.",
+      "vi": "“phong tục truyền thống”."
+    },
+    {
+      "start": 814.73,
+      "end": 816.42,
+      "en": "So what is “tradition”?",
+      "zh": "那“传统”是什么呢？",
+      "pinyin": "Nà “chuántǒng” shì shénme ne?",
+      "vi": "Vậy “truyền thống” là gì?"
+    },
+    {
+      "start": 816.43,
+      "end": 819.05,
+      "en": "Tradition refers to those things from a very long",
+      "zh": "传统，指的就是那些从很久",
+      "pinyin": "Chuántǒng, zhǐ de jiùshì nàxiē cóng hěn jiǔ",
+      "vi": "Truyền thống chính là những thứ từ rất lâu"
+    },
+    {
+      "start": 819.07,
+      "end": 823.03,
+      "en": "long time ago that have been passed down; they are what our parents,",
+      "zh": "很久以前就流传下来的东西，是我们的爸爸妈妈、",
+      "pinyin": "hěn jiǔ yǐqián jiù liúchuán xiàlái de dōngxi, shì wǒmen de bàba māma,",
+      "vi": "rất lâu trước đây được lưu truyền lại, là những thứ bố mẹ,"
+    },
+    {
+      "start": 823.03,
+      "end": 824.72,
+      "en": "grandparents told us,",
+      "zh": "爷爷奶奶告诉我们的，",
+      "pinyin": "yéye nǎinai gàosu wǒmen de,",
+      "vi": "ông bà kể cho chúng ta,"
+    },
+    {
+      "start": 824.73,
+      "end": 828.35,
+      "en": "and the things or ideas we are still doing now.",
+      "zh": "并且我们现在还在做的事情或者想法。",
+      "pinyin": "bìngqiě wǒmen xiànzài hái zài zuò de shìqing huòzhě xiǎngfǎ.",
+      "vi": "và những việc hoặc suy nghĩ mà chúng ta vẫn đang làm hiện nay."
+    },
+    {
+      "start": 828.37,
+      "end": 831.03,
+      "en": "For example, during Spring Festival, one should go home for reunion,",
+      "zh": "比如，过春节要回家团圆，",
+      "pinyin": "Bǐrú, guò Chūnjié yào huí jiā tuányuán,",
+      "vi": "Ví dụ, Tết Nguyên đán phải về nhà đoàn tụ,"
+    },
+    {
+      "start": 831.03,
+      "end": 833.09,
+      "en": "this is a Chinese tradition.",
+      "zh": "这就是一个中国人的传统。",
+      "pinyin": "zhè jiùshì yí ge Zhōngguó rén de chuántǒng.",
+      "vi": "đây chính là truyền thống của người Trung Quốc."
+    },
+    {
+      "start": 833.1,
+      "end": 837.22,
+      "en": "Right, it refers to those customs with history that are passed down from generation to generation.",
+      "zh": "对，就是指那些有历史的，代代相传的习惯。",
+      "pinyin": "Duì, jiùshì zhǐ nàxiē yǒu lìshǐ de, dàidài xiāngchuán de xíguàn.",
+      "vi": "Đúng, chính là chỉ những phong tục có lịch sử, được truyền từ đời này sang đời khác."
+    },
+    {
+      "start": 837.23,
+      "end": 838.95,
+      "en": "Very good. The third word,",
+      "zh": "很好。第三个词，",
+      "pinyin": "Hěn hǎo. Dì sān ge cí,",
+      "vi": "Rất tốt. Từ thứ ba,"
+    },
+    {
+      "start": 838.97,
+      "end": 842.83,
+      "en": "this might be a little difficult for beginners: jiǎngjiu (to be particular about / have rules).",
+      "zh": "这个可能对初学者有一点点难:讲究。",
+      "pinyin": "zhège kěnéng duì chūxuézhě yǒu yìdiǎndiǎn nán: jiǎngjiu.",
+      "vi": "từ này có thể hơi khó với người mới học một chút: “có quy tắc, chú trọng”."
+    },
+    {
+      "start": 842.83,
+      "end": 846.32,
+      "en": "We say “eating longevity noodles has its rules.” Mm,",
+      "zh": "我们说“吃长寿面有讲究”。嗯，",
+      "pinyin": "Wǒmen shuō “chī chángshòumiàn yǒu jiǎngjiu”. Èn,",
+      "vi": "Chúng ta nói “ăn mì trường thọ có quy tắc”. Ừ,"
+    },
+    {
+      "start": 846.33,
+      "end": 848.42,
+      "en": "The word jiǎngjiu is very interesting.",
+      "zh": "讲究这个词很有意思。",
+      "pinyin": "Jiǎngjiu zhège cí hěn yǒu yìsi.",
+      "vi": "Từ “讲究” này rất thú vị."
+    },
+    {
+      "start": 848.43,
+      "end": 851.29,
+      "en": "It means that when doing something,",
+      "zh": "它的意思就是，做一件事情的时候，",
+      "pinyin": "Tā de yìsi jiùshì, zuò yí jiàn shìqing de shíhou,",
+      "vi": "Ý của nó là, khi làm một việc gì đó,"
+    },
+    {
+      "start": 851.3,
+      "end": 854.72,
+      "en": "there are many small rules or things to pay attention to,",
+      "zh": "有很多小的规则或者需要注意的地方，",
+      "pinyin": "yǒu hěn duō xiǎo de guīzé huòzhě xūyào zhùyì de dìfang,",
+      "vi": "có nhiều quy tắc nhỏ hoặc những chỗ cần chú ý,"
+    },
+    {
+      "start": 854.73,
+      "end": 856.75,
+      "en": "it's not done casually.",
+      "zh": "不是随随便便做的。",
+      "pinyin": "bú shì suísuibiànbiàn zuò de.",
+      "vi": "không phải làm một cách tùy tiện."
+    },
+    {
+      "start": 856.77,
+      "end": 859.86,
+      "en": "For example, we say Chinese people are very particular about drinking tea,",
+      "zh": "比如我们说，中国人喝茶很讲究，",
+      "pinyin": "Bǐrú wǒmen shuō, Zhōngguó rén hē chá hěn jiǎngjiu,",
+      "vi": "Ví dụ chúng ta nói, người Trung Quốc uống trà rất cầu kỳ,"
+    },
+    {
+      "start": 859.87,
+      "end": 864.53,
+      "en": "meaning there are many steps and methods to drinking tea; you can't just do whatever.",
+      "zh": "意思就是喝茶有很多步骤和方法，不能乱来。",
+      "pinyin": "yìsi jiùshì hē chá yǒu hěn duō bùzhòu hé fāngfǎ, bù néng luànlái.",
+      "vi": "nghĩa là uống trà có nhiều bước và phương pháp, không thể làm bừa."
+    },
+    {
+      "start": 864.53,
+      "end": 866.55,
+      "en": "So “eating longevity noodles has its rules,”",
+      "zh": "所以“吃长寿面有讲究”，",
+      "pinyin": "Suǒyǐ “chī chángshòumiàn yǒu jiǎngjiu”,",
+      "vi": "Vì vậy “ăn mì trường thọ có quy tắc”,"
+    },
+    {
+      "start": 866.57,
+      "end": 869.36,
+      "en": "means eating this noodle has special rules.",
+      "zh": "就是说吃这个面有特别的规则。",
+      "pinyin": "jiùshì shuō chī zhège miàn yǒu tèbié de guīzé.",
+      "vi": "nghĩa là ăn món mì này có những quy tắc đặc biệt."
+    },
+    {
+      "start": 869.37,
+      "end": 872.03,
+      "en": "This explanation is great—very easy to understand.",
+      "zh": "这个解释太棒了，非常容易理解。",
+      "pinyin": "Zhège jiěshì tài bàng le, fēicháng róngyì lǐjiě.",
+      "vi": "Cách giải thích này quá hay, rất dễ hiểu."
+    },
+    {
+      "start": 872.03,
+      "end": 873.45,
+      "en": "Okay, the last word:",
+      "zh": "好，最后一个词:",
+      "pinyin": "Hǎo, zuìhòu yí ge cí:",
+      "vi": "Tốt, từ cuối cùng:"
+    },
+    {
+      "start": 873.47,
+      "end": 877.23,
+      "en": "“Blessings.” We say people receive many blessings on their birthday.",
+      "zh": "祝福。我们说生日会收到很多祝福。",
+      "pinyin": "Zhùfú. Wǒmen shuō shēngrì huì shōudào hěn duō zhùfú.",
+      "vi": "“祝福”. Chúng ta nói sinh nhật sẽ nhận được nhiều lời chúc."
+    },
+    {
+      "start": 877.23,
+      "end": 880.29,
+      "en": "Mm, zhùfú—this word is very warm.",
+      "zh": "嗯，祝福，这个词很温暖。",
+      "pinyin": "Èn, zhùfú, zhège cí hěn wēnnuǎn.",
+      "vi": "Ừ, “祝福”, từ này rất ấm áp."
+    },
+    {
+      "start": 880.3,
+      "end": 882.46,
+      "en": "It is a beautiful hope.",
+      "zh": "它就是一个美好的希望。",
+      "pinyin": "Tā jiùshì yí ge měihǎo de xīwàng.",
+      "vi": "Nó chính là một hy vọng tốt đẹp."
+    },
+    {
+      "start": 882.47,
+      "end": 887.09,
+      "en": "When you wish others well, those nice words you say are blessings.",
+      "zh": "你希望别人好，你说的那些好听的话，就是祝福。",
+      "pinyin": "Nǐ xīwàng biérén hǎo, nǐ shuō de nàxiē hǎotīng de huà, jiùshì zhùfú.",
+      "vi": "Bạn mong người khác tốt, những lời hay bạn nói chính là lời chúc."
+    },
+    {
+      "start": 887.1,
+      "end": 890.76,
+      "en": "For example, when you say “Happy Birthday” to a friend, that's a blessing.",
+      "zh": "比如，你对朋友说“生日快乐”，这是一个祝福。",
+      "pinyin": "Bǐrú, nǐ duì péngyou shuō “shēngrì kuàilè”, zhè shì yí ge zhùfú.",
+      "vi": "Ví dụ, bạn nói với bạn bè “chúc mừng sinh nhật”, đây là một lời chúc."
+    },
+    {
+      "start": 890.77,
+      "end": 895.03,
+      "en": "When you say to him “I hope your work goes smoothly,” that's also a blessing.",
+      "zh": "你对他说“希望你工作顺利”，这也是一个祝福。",
+      "pinyin": "Nǐ duì tā shuō “xīwàng nǐ gōngzuò shùnlì”, zhè yě shì yí ge zhùfú.",
+      "vi": "Bạn nói với anh ấy “mong bạn công việc thuận lợi”, đây cũng là một lời chúc."
+    },
+    {
+      "start": 895.03,
+      "end": 896.35,
+      "en": "Summarized very well.",
+      "zh": "总结得太好了。",
+      "pinyin": "Zǒngjié de tài hǎo le.",
+      "vi": "Tổng kết quá hay."
+    },
+    {
+      "start": 896.37,
+      "end": 900.69,
+      "en": "I hope everyone learned these words today: longevity, tradition,",
+      "zh": "希望大家今天都学会了这几个词:长寿、传统、",
+      "pinyin": "Xīwàng dàjiā jīntiān dōu xuéhuì le zhè jǐ ge cí: chángshòu, chuántǒng,",
+      "vi": "Hy vọng hôm nay mọi người đều đã học được mấy từ này: trường thọ, truyền thống,"
+    },
+    {
+      "start": 900.7,
+      "end": 902.32,
+      "en": "jiǎngjiu (particular about), blessings.",
+      "zh": "讲究、祝福。",
+      "pinyin": "jiǎngjiu, zhùfú.",
+      "vi": "讲究 (có quy tắc), 祝福 (lời chúc)."
+    },
+    {
+      "start": 902.33,
+      "end": 905.42,
+      "en": "Okay, today we talked about Chinese birthday culture,",
+      "zh": "好了，今天我们聊了中国的生日文化，",
+      "pinyin": "Hǎo le, jīntiān wǒmen liáo le Zhōngguó de shēngrì wénhuà,",
+      "vi": "Được rồi, hôm nay chúng ta đã nói về văn hóa sinh nhật của Trung Quốc,"
+    },
+    {
+      "start": 905.43,
+      "end": 908.32,
+      "en": "especially longevity noodles—really very interesting.",
+      "zh": "特别是长寿面，真的很有意思。",
+      "pinyin": "tèbié shì chángshòumiàn, zhēn de hěn yǒu yìsi.",
+      "vi": "đặc biệt là mì trường thọ, thật sự rất thú vị."
+    },
+    {
+      "start": 908.33,
+      "end": 909.75,
+      "en": "It's about time.",
+      "zh": "时间也差不多了。",
+      "pinyin": "Shíjiān yě chàbuduō le.",
+      "vi": "Thời gian cũng gần hết rồi."
+    },
+    {
+      "start": 909.77,
+      "end": 911.73,
+      "en": "Yes, time really flies.",
+      "zh": "是的，时间过得真快。",
+      "pinyin": "Shì de, shíjiān guò de zhēn kuài.",
+      "vi": "Đúng vậy, thời gian trôi qua nhanh thật."
+    },
+    {
+      "start": 911.73,
+      "end": 915.45,
+      "en": "Today we mainly shared how people celebrate birthdays in China.",
+      "zh": "今天我们主要分享了在中国，人们怎么过生日。",
+      "pinyin": "Jīntiān wǒmen zhǔyào fēnxiǎng le zài Zhōngguó, rénmen zěnme guò shēngrì.",
+      "vi": "Hôm nay chúng ta chủ yếu chia sẻ về việc ở Trung Quốc, người ta đón sinh nhật như thế nào."
+    },
+    {
+      "start": 915.47,
+      "end": 918.26,
+      "en": "We saw the modern parties that young people like,",
+      "zh": "我们看到了年轻人喜欢的现代派对，",
+      "pinyin": "Wǒmen kàndào le niánqīngrén xǐhuan de xiàndài pàiduì,",
+      "vi": "Chúng ta đã thấy những bữa tiệc hiện đại mà người trẻ thích,"
+    },
+    {
+      "start": 918.27,
+      "end": 920.16,
+      "en": "and also learned about things like longevity noodles,",
+      "zh": "也了解了像长寿面、",
+      "pinyin": "yě liǎojiě le xiàng chángshòumiàn,",
+      "vi": "cũng đã tìm hiểu những thứ như mì trường thọ,"
+    },
+    {
+      "start": 920.17,
+      "end": 923.86,
+      "en": "peach-shaped birthday buns and other traditional customs full of good wishes.",
+      "zh": "寿桃这样充满美好祝福的传统习俗。",
+      "pinyin": "shòutáo zhèyàng chōngmǎn měihǎo zhùfú de chuántǒng xísú.",
+      "vi": "bánh đào trường thọ như vậy, những phong tục truyền thống đầy lời chúc tốt đẹp."
+    },
+    {
+      "start": 923.87,
+      "end": 927.33,
+      "en": "I hope this content helps you understand Chinese culture better.",
+      "zh": "希望这些内容能让你对中国文化有更多的了解。",
+      "pinyin": "Xīwàng zhèxiē nèiróng néng ràng nǐ duì Zhōngguó wénhuà yǒu gèng duō de liǎojiě.",
+      "vi": "Hy vọng những nội dung này có thể giúp bạn hiểu thêm về văn hóa Trung Quốc."
+    },
+    {
+      "start": 927.33,
+      "end": 930.12,
+      "en": "If you want to see the full text of our chat today",
+      "zh": "如果你想看我们今天聊天的完整文",
+      "pinyin": "Rúguǒ nǐ xiǎng kàn wǒmen jīntiān liáotiān de wánzhěng wén",
+      "vi": "Nếu bạn muốn xem bản đầy đủ nội dung cuộc trò chuyện hôm nay của chúng tôi"
+    },
+    {
+      "start": 930.13,
+      "end": 932.55,
+      "en": "transcript, you can go to our blog to take a look.",
+      "zh": "本，可以去我们的博客看看。",
+      "pinyin": "běn, kěyǐ qù wǒmen de bókè kànkan.",
+      "vi": "bản ghi, có thể đến blog của chúng tôi xem."
+    },
+    {
+      "start": 932.57,
+      "end": 935.26,
+      "en": "Our blog is called “Daily Chinese Podcast”,",
+      "zh": "我们的博客叫“每天中文播客”，",
+      "pinyin": "Wǒmen de bókè jiào “Měitiān Zhōngwén Bōkè”,",
+      "vi": "Blog của chúng tôi có tên là “每天中文播客”,"
+    },
+    {
+      "start": 935.27,
+      "end": 937.29,
+      "en": "You can search for it online,",
+      "zh": "大家可以在网上搜索到，",
+      "pinyin": "Dàjiā kěyǐ zài wǎngshàng sōusuǒ dào,",
+      "vi": "Mọi người có thể tìm thấy trên mạng,"
+    },
+    {
+      "start": 937.3,
+      "end": 941.16,
+      "en": "You can also find the link in the description below the episode. Yes.",
+      "zh": "也可以在节目下方的说明里找到链接。是的。",
+      "pinyin": "Yě kěyǐ zài jiémù xiàfāng de shuōmíng lǐ zhǎodào liànjiē. Shì de.",
+      "vi": "Cũng có thể tìm thấy liên kết trong phần mô tả bên dưới chương trình. Đúng vậy."
+    },
+    {
+      "start": 941.17,
+      "end": 942.96,
+      "en": "If today's content is helpful to you,",
+      "zh": "如果今天的内容对你有帮助，",
+      "pinyin": "Rúguǒ jīntiān de nèiróng duì nǐ yǒu bāngzhù,",
+      "vi": "Nếu nội dung hôm nay có ích với bạn,"
+    },
+    {
+      "start": 942.97,
+      "end": 945.36,
+      "en": "We hope you can like and share our content,",
+      "zh": "我们希望你能给我们点赞、分享，",
+      "pinyin": "Wǒmen xīwàng nǐ néng gěi wǒmen diǎnzàn, fēnxiǎng,",
+      "vi": "Chúng tôi hy vọng bạn có thể thích và chia sẻ cho chúng tôi,"
+    },
+    {
+      "start": 945.37,
+      "end": 947.46,
+      "en": "And you're welcome to subscribe to our channel.",
+      "zh": "也欢迎你订阅我们的频道。",
+      "pinyin": "Yě huānyíng nǐ dìngyuè wǒmen de píndào.",
+      "vi": "Cũng hoan nghênh bạn đăng ký kênh của chúng tôi."
+    },
+    {
+      "start": 947.47,
+      "end": 949.46,
+      "en": "Your support is very important to us,",
+      "zh": "你的支持对我们非常重要，",
+      "pinyin": "Nǐ de zhīchí duì wǒmen fēicháng zhòngyào,",
+      "vi": "Sự ủng hộ của bạn rất quan trọng đối với chúng tôi,"
+    },
+    {
+      "start": 949.47,
+      "end": 952.43,
+      "en": "It can help more people discover Daily Chinese.",
+      "zh": "可以帮助更多的人发现“每天中文”。",
+      "pinyin": "Kěyǐ bāngzhù gèng duō de rén fāxiàn “Měitiān Zhōngwén”.",
+      "vi": "Có thể giúp nhiều người hơn phát hiện ra “每天中文”."
+    },
+    {
+      "start": 952.43,
+      "end": 955.29,
+      "en": "Finally, we'd like to ask our listeners a question:",
+      "zh": "最后，我们想问听众朋友们一个问题:",
+      "pinyin": "Zuìhòu, wǒmen xiǎng wèn tīngzhòng péngyoumen yí ge wèntí:",
+      "vi": "Cuối cùng, chúng tôi muốn hỏi các bạn thính giả một câu hỏi:"
+    },
+    {
+      "start": 955.3,
+      "end": 958.66,
+      "en": "In your country, are there any special birthday customs",
+      "zh": "在你的国家，过生日有什么特别的习惯",
+      "pinyin": "Zài nǐ de guójiā, guò shēngrì yǒu shénme tèbié de xíguàn",
+      "vi": "Ở nước bạn, sinh nhật có phong tục đặc biệt nào"
+    },
+    {
+      "start": 958.67,
+      "end": 960.93,
+      "en": "or foods you must eat?",
+      "zh": "或者一定要吃的食物吗？",
+      "pinyin": "Huòzhě yídìng yào chī de shíwù ma?",
+      "vi": "hoặc món ăn nhất định phải ăn không?"
+    },
+    {
+      "start": 960.93,
+      "end": 963.45,
+      "en": "Is it eating cake, or are there other choices?",
+      "zh": "是吃蛋糕，还是有别的选择？",
+      "pinyin": "Shì chī dàngāo, háishì yǒu bié de xuǎnzé?",
+      "vi": "Là ăn bánh kem, hay có lựa chọn khác?"
+    },
+    {
+      "start": 963.47,
+      "end": 965.69,
+      "en": "We very much welcome everyone in the comment",
+      "zh": "非常欢迎大家在下面的评论",
+      "pinyin": "Fēicháng huānyíng dàjiā zài xiàmiàn de pínglùn",
+      "vi": "Rất hoan nghênh mọi người ở phần bình luận"
+    },
+    {
+      "start": 965.7,
+      "end": 968.82,
+      "en": "section below to leave us a message and share your story with us.",
+      "zh": "区给我们留言，和我们分享你的故事。",
+      "pinyin": "Qū gěi wǒmen liúyán, hé wǒmen fēnxiǎng nǐ de gùshi.",
+      "vi": "bên dưới để lại lời nhắn và chia sẻ câu chuyện của bạn với chúng tôi."
+    },
+    {
+      "start": 968.83,
+      "end": 971.25,
+      "en": "Okay, that's all for today's episode.",
+      "zh": "好的，那我们今天的节目就到这里了。",
+      "pinyin": "Hǎo de, nà wǒmen jīntiān de jiémù jiù dào zhèlǐ le.",
+      "vi": "Được rồi, vậy chương trình hôm nay của chúng ta đến đây là kết thúc."
+    },
+    {
+      "start": 971.27,
+      "end": 972.43,
+      "en": "Thank you for listening!",
+      "zh": "感谢你的收听！",
+      "pinyin": "Gǎnxiè nǐ de tīngshōu!",
+      "vi": "Cảm ơn bạn đã lắng nghe!"
+    },
+    {
+      "start": 972.43,
+      "end": 973.42,
+      "en": "See you next time!",
+      "zh": "下次再见！",
+      "pinyin": "Xià cì zàijiàn!",
+      "vi": "Hẹn gặp lại lần sau!"
+    },
+    {
+      "start": 973.43,
+      "end": 974.63,
+      "en": "Bye-bye! Bye-bye!",
+      "zh": "拜拜！拜拜！",
+      "pinyin": "Bàibài! Bàibài!",
+      "vi": "Bye bye! Bye bye!"
+    }
+  ]
+}

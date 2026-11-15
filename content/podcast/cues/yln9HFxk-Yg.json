@@ -1,0 +1,2905 @@
+{
+  "id": "yln9HFxk-Yg",
+  "youtubeId": "yln9HFxk-Yg",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 1 - 3 | 井底之蛙？谦虚打开中文世界！| Frog in the Well? Humility Opens Your Chinese World | Bedtime Story",
+  "durationSec": 985,
+  "cues": [
+    {
+      "start": 7.37,
+      "end": 10.84,
+      "en": "Hello everyone, welcome to “Daily Chinese.”",
+      "zh": "大家好，欢迎收听“每天中文”。",
+      "pinyin": "Dàjiā hǎo, huānyíng shōutīng “Měitiān Zhōngwén”.",
+      "vi": "Xin chào mọi người, chào mừng các bạn đến với “Tiếng Trung Mỗi Ngày”."
+    },
+    {
+      "start": 10.87,
+      "end": 11.8,
+      "en": "I'm Wang Yu.",
+      "zh": "我是王雨。",
+      "pinyin": "Wǒ shì Wáng Yǔ.",
+      "vi": "Tôi là Vương Vũ."
+    },
+    {
+      "start": 11.83,
+      "end": 13.86,
+      "en": "Hi everyone, I'm Li Ming.",
+      "zh": "大家好，我是李明。",
+      "pinyin": "Dàjiā hǎo, wǒ shì Lǐ Míng.",
+      "vi": "Xin chào mọi người, tôi là Lý Minh."
+    },
+    {
+      "start": 13.9,
+      "end": 17.3,
+      "en": "I'm very happy to meet everyone again through our voices.",
+      "zh": "很高兴能和大家在声音里再次相遇。",
+      "pinyin": "Hěn gāoxìng néng hé dàjiā zài shēngyīn lǐ zàicì xiāngyù.",
+      "vi": "Rất vui vì có thể gặp lại mọi người qua giọng nói."
+    },
+    {
+      "start": 17.33,
+      "end": 19.33,
+      "en": "Li Ming, you know,",
+      "zh": "李明，你知道吗，",
+      "pinyin": "Lǐ Míng, nǐ zhīdào ma,",
+      "vi": "Lý Minh, cậu biết không,"
+    },
+    {
+      "start": 19.37,
+      "end": 22.47,
+      "en": "After recording the previous podcast episode about “gratitude,”",
+      "zh": "录完上一集关于“感恩”的播客，",
+      "pinyin": "Lù wán shàng yī jí guānyú “gǎn'ēn” de bōkè,",
+      "vi": "Sau khi thu xong tập podcast trước về “lòng biết ơn”,"
+    },
+    {
+      "start": 22.5,
+      "end": 26.3,
+      "en": "a little thought has been spinning around in my mind.",
+      "zh": "我心里一直有一个小小的想法在打转。",
+      "pinyin": "wǒ xīnli yīzhí yǒu yī gè xiǎoxiǎo de xiǎngfǎ zài dǎzhuàn.",
+      "vi": "trong lòng tôi cứ có một ý nghĩ nhỏ xoay vòng mãi."
+    },
+    {
+      "start": 26.3,
+      "end": 29.63,
+      "en": "Oh? What thought? Tell me.",
+      "zh": "哦？是什么想法，说来听听。",
+      "pinyin": "Ó? Shì shénme xiǎngfǎ, shuō lái tīngtīng.",
+      "vi": "Ồ? Là ý nghĩ gì, nói nghe xem."
+    },
+    {
+      "start": 29.67,
+      "end": 31.7,
+      "en": "We talked about the kind farmer,",
+      "zh": "我们聊了善良的农夫，",
+      "pinyin": "Wǒmen liáo le shànliáng de nóngfū,",
+      "vi": "Chúng ta đã nói về người nông dân tốt bụng,"
+    },
+    {
+      "start": 31.73,
+      "end": 34.6,
+      "en": "the grateful mouse and crow...",
+      "zh": "知恩图报的老鼠和乌鸦...",
+      "pinyin": "zhī'ēn túbào de lǎoshǔ hé wūyā...",
+      "vi": "chú chuột và con quạ biết ơn báo đáp..."
+    },
+    {
+      "start": 34.63,
+      "end": 37.3,
+      "en": "But I kept thinking about that snake.",
+      "zh": "但我一直在想那条蛇。",
+      "pinyin": "Dàn wǒ yīzhí zài xiǎng nà tiáo shé.",
+      "vi": "Nhưng tôi cứ nghĩ mãi về con rắn đó."
+    },
+    {
+      "start": 37.33,
+      "end": 41.83,
+      "en": "Why did it so naturally harm the person who saved it?",
+      "zh": "它为什么那么自然地就伤害了救它的人呢？",
+      "pinyin": "Tā wèishénme nàme zìrán de jiù shānghài le jiù tā de rén ne?",
+      "vi": "Tại sao nó lại tự nhiên làm tổn thương người đã cứu nó như vậy?"
+    },
+    {
+      "start": 41.87,
+      "end": 44.3,
+      "en": "That's a very profound question.",
+      "zh": "这是一个很深刻的问题。",
+      "pinyin": "Zhè shì yī gè hěn shēnkè de wèntí.",
+      "vi": "Đây là một câu hỏi rất sâu sắc."
+    },
+    {
+      "start": 44.33,
+      "end": 46.03,
+      "en": "I read the comments from the previous episode,",
+      "zh": "我看了上一集的留言，",
+      "pinyin": "Wǒ kàn le shàng yī jí de liúyán,",
+      "vi": "Tôi đã xem phần bình luận của tập trước,"
+    },
+    {
+      "start": 46.07,
+      "end": 48.9,
+      "en": "and found that many friends felt the same way.",
+      "zh": "发现很多朋友都有同样的感觉。",
+      "pinyin": "fāxiàn hěn duō péngyǒu dōu yǒu tóngyàng de gǎnjué.",
+      "vi": "và thấy nhiều bạn cũng có cảm giác giống vậy."
+    },
+    {
+      "start": 48.93,
+      "end": 50.83,
+      "en": "There's one view that many people agree with,",
+      "zh": "有一个观点很多人都赞同，",
+      "pinyin": "Yǒu yī gè guāndiǎn hěn duō rén dōu zàntóng,",
+      "vi": "Có một quan điểm được nhiều người tán thành,"
+    },
+    {
+      "start": 50.87,
+      "end": 53.6,
+      "en": "which is, “a snake's nature is hard to change,”",
+      "zh": "就是说“蛇的本性难移”，",
+      "pinyin": "jiùshì shuō “shé de běnxìng nán yí”,",
+      "vi": "đó là “bản tính con rắn khó thay đổi”,"
+    },
+    {
+      "start": 53.63,
+      "end": 56,
+      "en": "its behavior is determined by its nature.",
+      "zh": "它的行为是由它的天性决定的。",
+      "pinyin": "tā de xíngwéi shì yóu tā de tiānxìng juédìng de.",
+      "vi": "hành vi của nó là do bản tính tự nhiên của nó quyết định."
+    },
+    {
+      "start": 56.03,
+      "end": 58.23,
+      "en": "Right! That's exactly the feeling!",
+      "zh": "对！就是这种感觉！",
+      "pinyin": "Duì! Jiùshì zhè zhǒng gǎnjué!",
+      "vi": "Đúng! Chính là cảm giác đó!"
+    },
+    {
+      "start": 58.27,
+      "end": 59.14,
+      "en": "I think,",
+      "zh": "我觉得，",
+      "pinyin": "Wǒ juéde,",
+      "vi": "Tôi nghĩ,"
+    },
+    {
+      "start": 59.17,
+      "end": 62.6,
+      "en": "its heart may have been filled with too much “pride,”",
+      "zh": "它的心里可能装了太多的“骄傲”，",
+      "pinyin": "tā de xīnli kěnéng zhuāng le tài duō de “jiāo'ào”,",
+      "vi": "trong lòng nó có thể đã chứa quá nhiều “kiêu ngạo”,"
+    },
+    {
+      "start": 62.63,
+      "end": 64.26,
+      "en": "thinking it was very capable,",
+      "zh": "觉得自己很厉害，",
+      "pinyin": "juéde zìjǐ hěn lìhai,",
+      "vi": "tự thấy mình rất giỏi,"
+    },
+    {
+      "start": 64.3,
+      "end": 67.13,
+      "en": "so it couldn't see others' goodwill at all.",
+      "zh": "所以根本看不到别人的好意。",
+      "pinyin": "suǒyǐ gēnběn kàn bù dào biérén de hǎoyì.",
+      "vi": "nên hoàn toàn không thấy được thiện ý của người khác."
+    },
+    {
+      "start": 67.17,
+      "end": 69.5,
+      "en": "I completely agree with your view.",
+      "zh": "我非常同意你的看法。",
+      "pinyin": "Wǒ fēicháng tóngyì nǐ de kànfǎ.",
+      "vi": "Tôi rất đồng ý với ý kiến của bạn."
+    },
+    {
+      "start": 69.53,
+      "end": 72.13,
+      "en": "If a person's heart is full of pride,",
+      "zh": "一个人的心里如果装满了骄傲，",
+      "pinyin": "Yī gè rén de xīnli rúguǒ zhuāng mǎn le jiāo'ào,",
+      "vi": "Nếu trong lòng một người chứa đầy kiêu ngạo,"
+    },
+    {
+      "start": 72.17,
+      "end": 75.07,
+      "en": "then it can no longer hold others' kindness and help,",
+      "zh": "就再也装不进别人的善意和帮助了，",
+      "pinyin": "jiù zài yě zhuāng bù jìn biérén de shànyì hé bāngzhù le,",
+      "vi": "thì sẽ không thể chứa thêm thiện ý và sự giúp đỡ của người khác nữa,"
+    },
+    {
+      "start": 75.1,
+      "end": 76.9,
+      "en": "let alone “gratitude.”",
+      "zh": "更不用说“感恩”了。",
+      "pinyin": "gèng bùyòng shuō “gǎn'ēn” le.",
+      "vi": "càng không cần nói đến “lòng biết ơn”."
+    },
+    {
+      "start": 76.93,
+      "end": 79.06,
+      "en": "It's like a cup that is already full;",
+      "zh": "就像一个已经满了的杯子，",
+      "pinyin": "Jiù xiàng yī gè yǐjīng mǎn le de bēizi,",
+      "vi": "Giống như một cái cốc đã đầy,"
+    },
+    {
+      "start": 79.1,
+      "end": 80.87,
+      "en": "you can't pour in even a drop of water.",
+      "zh": "你再也倒不进一滴水。",
+      "pinyin": "nǐ zài yě dào bù jìn yī dī shuǐ.",
+      "vi": "bạn không thể rót thêm một giọt nước nào nữa."
+    },
+    {
+      "start": 80.87,
+      "end": 84.1,
+      "en": "Wow, your analogy is so right!",
+      "zh": "哇，你这个比喻太对了！",
+      "pinyin": "Wā, nǐ zhège bǐyù tài duì le!",
+      "vi": "Ồ, phép so sánh này của bạn quá đúng!"
+    },
+    {
+      "start": 84.13,
+      "end": 86.43,
+      "en": "A heart full of pride...",
+      "zh": "心里装满了骄傲……",
+      "pinyin": "xīnli zhuāng mǎn le jiāo'ào...",
+      "vi": "Trong lòng chứa đầy kiêu ngạo..."
+    },
+    {
+      "start": 86.47,
+      "end": 88.44,
+      "en": "Then today let's talk about,",
+      "zh": "那我们今天就来聊聊，",
+      "pinyin": "Nà wǒmen jīntiān jiù lái liáoliao,",
+      "vi": "Vậy hôm nay chúng ta hãy nói về,"
+    },
+    {
+      "start": 88.47,
+      "end": 91.94,
+      "en": "how we can make our hearts a little more “empty,”",
+      "zh": "怎么才能让我们的心“空”一点，",
+      "pinyin": "zěnme cái néng ràng wǒmen de xīn “kōng” yīdiǎn,",
+      "vi": "làm thế nào để trái tim chúng ta “trống” hơn một chút,"
+    },
+    {
+      "start": 91.97,
+      "end": 95.34,
+      "en": "so they can hold more new knowledge and goodwill?",
+      "zh": "能装下更多新的知识和善意呢？",
+      "pinyin": "néng zhuāng xià gèng duō xīn de zhīshi hé shànyì ne?",
+      "vi": "có thể chứa được nhiều kiến thức mới và thiện ý hơn?"
+    },
+    {
+      "start": 95.37,
+      "end": 96.44,
+      "en": "Good idea.",
+      "zh": "好主意。",
+      "pinyin": "Hǎo zhǔyi.",
+      "vi": "Ý hay đó."
+    },
+    {
+      "start": 96.47,
+      "end": 100.07,
+      "en": "Let's talk about the opposite of “pride”—“humility.”",
+      "zh": "我们就来聊聊“骄傲”的反面——“谦虚”。",
+      "pinyin": "Wǒmen jiù lái liáoliao “jiāo'ào” de fǎnmiàn——“qiānxū”.",
+      "vi": "Chúng ta hãy nói về mặt đối lập của “kiêu ngạo” — “khiêm tốn”."
+    },
+    {
+      "start": 100.1,
+      "end": 102.27,
+      "en": "So, our bedtime story today,",
+      "zh": "所以，今天我们的晚安故事，",
+      "pinyin": "Suǒyǐ, jīntiān wǒmen de wǎn'ān gùshi,",
+      "vi": "Vì vậy, câu chuyện chúc ngủ ngon hôm nay của chúng ta,"
+    },
+    {
+      "start": 102.3,
+      "end": 104.53,
+      "en": "is about the virtue of “humility.”",
+      "zh": "就是关于“谦虚”这个美德的。",
+      "pinyin": "jiùshì guānyú “qiānxū” zhège měidé de.",
+      "vi": "sẽ nói về đức tính “khiêm tốn”."
+    },
+    {
+      "start": 104.57,
+      "end": 107.9,
+      "en": "It will teach us how to empty the cup in our hearts,",
+      "zh": "它会教我们，如何把心里的杯子倒空，",
+      "pinyin": "Tā huì jiāo wǒmen, rúhé bǎ xīnli de bēizi dào kōng,",
+      "vi": "Nó sẽ dạy chúng ta cách đổ rỗng chiếc cốc trong lòng,"
+    },
+    {
+      "start": 107.93,
+      "end": 110.03,
+      "en": "and embrace a bigger world.",
+      "zh": "去拥抱一个更大的世界。",
+      "pinyin": "qù yōngbào yī gè gèng dà de shìjiè.",
+      "vi": "để ôm lấy một thế giới rộng lớn hơn."
+    },
+    {
+      "start": 110.07,
+      "end": 112.84,
+      "en": "Great! I love this topic!",
+      "zh": "太棒了！这个主题我太喜欢了！",
+      "pinyin": "Tài bàng le! Zhège zhǔtí wǒ tài xǐhuan le!",
+      "vi": "Tuyệt quá! Tôi rất thích chủ đề này!"
+    },
+    {
+      "start": 112.87,
+      "end": 115.4,
+      "en": "So which story should we start with?",
+      "zh": "那我们从哪个故事开始呢？",
+      "pinyin": "Nà wǒmen cóng nǎge gùshi kāishǐ ne?",
+      "vi": "Vậy chúng ta bắt đầu từ câu chuyện nào?"
+    },
+    {
+      "start": 115.43,
+      "end": 118.7,
+      "en": "Ah, I thought of a most classic one!",
+      "zh": "啊，我想到一个最经典的！",
+      "pinyin": "A, wǒ xiǎng dào yī gè zuì jīngdiǎn de!",
+      "vi": "À, tôi nghĩ ra một câu chuyện kinh điển nhất!"
+    },
+    {
+      "start": 118.73,
+      "end": 122.4,
+      "en": "Speaking of pride that comes from not understanding the world,",
+      "zh": "说到因为不了解世界而产生的骄傲，",
+      "pinyin": "Shuō dào yīnwèi bù liǎojiě shìjiè ér chǎnshēng de jiāo'ào,",
+      "vi": "Khi nói đến sự kiêu ngạo sinh ra vì không hiểu biết thế giới,"
+    },
+    {
+      "start": 122.43,
+      "end": 127.03,
+      "en": "the first story I think of is “The Frog at the Bottom of the Well.”",
+      "zh": "我第一个想到的故事，就是《井底之蛙》。",
+      "pinyin": "wǒ dì yī gè xiǎng dào de gùshi, jiùshì “Jǐngdǐzhīwā”.",
+      "vi": "câu chuyện đầu tiên tôi nghĩ đến là “Ếch ngồi đáy giếng”."
+    },
+    {
+      "start": 127.07,
+      "end": 131.3,
+      "en": "When I was little, my parents often told me this story.",
+      "zh": "这个故事，我小的时候爸爸妈妈经常给我讲。",
+      "pinyin": "Zhège gùshi, wǒ xiǎo de shíhou bàba māma jīngcháng gěi wǒ jiǎng.",
+      "vi": "Câu chuyện này, hồi nhỏ bố mẹ tôi thường kể cho tôi nghe."
+    },
+    {
+      "start": 131.3,
+      "end": 135.2,
+      "en": "“The Frog at the Bottom of the Well” is indeed a household story.",
+      "zh": "《井底之蛙》确实是一个家喻户晓的故事。",
+      "pinyin": "“Jǐngdǐzhīwā” quèshí shì yī gè jiāyùhùxiǎo de gùshi.",
+      "vi": "“Ếch ngồi đáy giếng” đúng là một câu chuyện ai cũng biết."
+    },
+    {
+      "start": 135.23,
+      "end": 137.8,
+      "en": "In China, it's not just a story,",
+      "zh": "在中国，它不仅仅是一个故事，",
+      "pinyin": "Zài Zhōngguó, tā bù jǐnjǐn shì yī gè gùshi,",
+      "vi": "Ở Trung Quốc, nó không chỉ là một câu chuyện,"
+    },
+    {
+      "start": 137.83,
+      "end": 139.93,
+      "en": "but also a very famous idiom.",
+      "zh": "还是一个非常有名的成语。",
+      "pinyin": "hái shì yī gè fēicháng yǒumíng de chéngyǔ.",
+      "vi": "mà còn là một thành ngữ rất nổi tiếng."
+    },
+    {
+      "start": 139.97,
+      "end": 142.1,
+      "en": "An idiom uses very few characters,",
+      "zh": "成语就是用很少的字，",
+      "pinyin": "Chéngyǔ jiùshì yòng hěn shǎo de zì,",
+      "vi": "Thành ngữ là dùng rất ít chữ,"
+    },
+    {
+      "start": 142.13,
+      "end": 144.1,
+      "en": "to express a complex meaning.",
+      "zh": "来表达一个复杂的意思。",
+      "pinyin": "Lái biǎodá yí gè fùzá de yìsi.",
+      "vi": "để diễn đạt một ý phức tạp."
+    },
+    {
+      "start": 144.13,
+      "end": 144.8,
+      "en": "Right!",
+      "zh": "对！",
+      "pinyin": "Duì!",
+      "vi": "Đúng!"
+    },
+    {
+      "start": 144.83,
+      "end": 147.93,
+      "en": "Then let's first tell everyone this story.",
+      "zh": "那我们就先给大家讲讲这个故事吧。",
+      "pinyin": "Nà wǒmen jiù xiān gěi dàjiā jiǎngjiang zhège gùshi ba.",
+      "vi": "Vậy chúng ta hãy kể cho mọi người nghe câu chuyện này trước nhé."
+    },
+    {
+      "start": 147.97,
+      "end": 150.67,
+      "en": "Okay. The story goes like this:",
+      "zh": "好的。故事是这样的:",
+      "pinyin": "Hǎo de. Gùshi shì zhèyàng de:",
+      "vi": "Được. Câu chuyện là thế này:"
+    },
+    {
+      "start": 150.7,
+      "end": 155.4,
+      "en": "In a very deep well lived a frog.",
+      "zh": "在一口很深很深的井里，住着一只青蛙。",
+      "pinyin": "Zài yì kǒu hěn shēn hěn shēn de jǐng lǐ, zhù zhe yì zhī qīngwā.",
+      "vi": "Trong một cái giếng rất sâu, có một con ếch sống."
+    },
+    {
+      "start": 155.43,
+      "end": 158.13,
+      "en": "This frog, from birth,",
+      "zh": "这只青蛙从出生开始，",
+      "pinyin": "Zhè zhī qīngwā cóng chūshēng kāishǐ,",
+      "vi": "Con ếch này từ khi sinh ra,"
+    },
+    {
+      "start": 158.17,
+      "end": 162.84,
+      "en": "had always lived in this well and had never gone out.",
+      "zh": "就一直生活在这口井里，从来没有出去过。",
+      "pinyin": "jiù yìzhí shēnghuó zài zhè kǒu jǐng lǐ, cónglái méiyǒu chūqù guo.",
+      "vi": "đã luôn sống trong cái giếng này, chưa từng ra ngoài."
+    },
+    {
+      "start": 162.87,
+      "end": 166.5,
+      "en": "Every day it jumped around in the well and looked at the sky.",
+      "zh": "它每天在井里跳来跳去，看看天。",
+      "pinyin": "Tā měitiān zài jǐng lǐ tiào lái tiào qù, kànkan tiān.",
+      "vi": "Mỗi ngày nó nhảy qua nhảy lại trong giếng, ngắm bầu trời."
+    },
+    {
+      "start": 166.53,
+      "end": 169.26,
+      "en": "The sky it saw was only as big as the well opening,",
+      "zh": "它看到的天，就是井口那么大，",
+      "pinyin": "Tā kàndào de tiān, jiù shì jǐngkǒu nàme dà,",
+      "vi": "Bầu trời mà nó nhìn thấy chỉ to bằng miệng giếng,"
+    },
+    {
+      "start": 169.3,
+      "end": 170.9,
+      "en": "a small round patch.",
+      "zh": "圆圆的一小块。",
+      "pinyin": "yuányuán de yì xiǎo kuài.",
+      "vi": "một mảng tròn nhỏ xíu."
+    },
+    {
+      "start": 170.93,
+      "end": 174,
+      "en": "So it thought the sky was just that big.",
+      "zh": "所以，它觉得天就是那么大。",
+      "pinyin": "Suǒyǐ, tā juéde tiān jiù shì nàme dà.",
+      "vi": "Vì vậy, nó nghĩ bầu trời chỉ to như vậy."
+    },
+    {
+      "start": 174.03,
+      "end": 179.1,
+      "en": "It thought its home was the best and biggest place in the world.",
+      "zh": "它觉得自己的家是世界上最好、最大的地方。",
+      "pinyin": "Tā juéde zìjǐ de jiā shì shìjiè shàng zuì hǎo, zuì dà de dìfang.",
+      "vi": "Nó thấy nhà mình là nơi tốt nhất và lớn nhất trên thế giới."
+    },
+    {
+      "start": 179.13,
+      "end": 183.73,
+      "en": "It said to itself, 'Look, how comfortable it is for me to live here!",
+      "zh": "它对自己说:“你看，我住在这里多舒服啊！",
+      "pinyin": "Tā duì zìjǐ shuō: “Nǐ kàn, wǒ zhù zài zhèlǐ duō shūfu a!",
+      "vi": "Nó tự nhủ: “Thấy không, mình sống ở đây thoải mái biết bao!"
+    },
+    {
+      "start": 183.77,
+      "end": 186.64,
+      "en": "When I'm hungry, there are little insects in the well to eat;",
+      "zh": "我饿了，井里有小虫子吃；",
+      "pinyin": "Wǒ è le, jǐng lǐ yǒu xiǎo chóngzi chī;",
+      "vi": "Mình đói thì có sâu nhỏ trong giếng để ăn;"
+    },
+    {
+      "start": 186.67,
+      "end": 190.04,
+      "en": "When I'm thirsty, there is clean water in the well to drink.",
+      "zh": "我渴了，井里有干净的水喝。",
+      "pinyin": "Wǒ kě le, jǐng lǐ yǒu gānjìng de shuǐ hē.",
+      "vi": "Mình khát thì có nước sạch trong giếng để uống."
+    },
+    {
+      "start": 190.07,
+      "end": 192.3,
+      "en": "I am the master of this world!'",
+      "zh": "我就是这个世界的主人！”",
+      "pinyin": "Wǒ jiù shì zhège shìjiè de zhǔrén!”",
+      "vi": "Mình chính là chủ nhân của thế giới này!”"
+    },
+    {
+      "start": 192.3,
+      "end": 193.43,
+      "en": "One day,",
+      "zh": "有一天，",
+      "pinyin": "Yǒu yì tiān,",
+      "vi": "Một ngày nọ,"
+    },
+    {
+      "start": 193.47,
+      "end": 197.07,
+      "en": "A big sea turtle from the East Sea passed by this well.",
+      "zh": "一只从东海来的大海龟，路过这口井。",
+      "pinyin": "Yì zhī cóng Dōnghǎi lái de dà hǎiguī, lùguò zhè kǒu jǐng.",
+      "vi": "Một con rùa biển lớn từ Biển Đông đi ngang qua cái giếng này."
+    },
+    {
+      "start": 197.1,
+      "end": 198.53,
+      "en": "It saw the frog in the well,",
+      "zh": "它看到井里的青蛙，",
+      "pinyin": "Tā kàndào jǐng lǐ de qīngwā,",
+      "vi": "Nó nhìn thấy con ếch trong giếng,"
+    },
+    {
+      "start": 198.57,
+      "end": 201.74,
+      "en": "and greeted it: 'Hello there, friend frog!'",
+      "zh": "就和它打招呼:“你好啊，青蛙朋友！”",
+      "pinyin": "jiù hé tā dǎ zhāohu: “Nǐ hǎo a, qīngwā péngyou!”",
+      "vi": "bèn chào: “Chào bạn, bạn ếch!”"
+    },
+    {
+      "start": 201.77,
+      "end": 205.54,
+      "en": "The frog saw the sea turtle and said very proudly, 'Hello!",
+      "zh": "青蛙看到海龟，非常得意地说:“你好！",
+      "pinyin": "Qīngwā kàndào hǎiguī, fēicháng déyì de shuō: “Nǐ hǎo!",
+      "vi": "Ếch thấy rùa biển, rất đắc ý nói: “Chào bạn!"
+    },
+    {
+      "start": 205.57,
+      "end": 207.2,
+      "en": "Come quickly and see where I live,",
+      "zh": "快来看我住的地方，",
+      "pinyin": "Kuài lái kàn wǒ zhù de dìfang,",
+      "vi": "Mau đến xem nơi mình sống đi,"
+    },
+    {
+      "start": 207.23,
+      "end": 209.93,
+      "en": "this is the happiest place in the world!",
+      "zh": "这里是世界上最快乐的地方！",
+      "pinyin": "zhèlǐ shì shìjiè shàng zuì kuàilè de dìfang!",
+      "vi": "đây là nơi vui nhất trên thế giới!"
+    },
+    {
+      "start": 209.97,
+      "end": 211.87,
+      "en": "Why don't you come down and play?'",
+      "zh": "你为什么不下来玩呢？”",
+      "pinyin": "Nǐ wèishénme bù xiàlái wán ne?”",
+      "vi": "Sao bạn không xuống đây chơi?”"
+    },
+    {
+      "start": 211.9,
+      "end": 215.23,
+      "en": "Hearing this, the sea turtle smiled and wanted to go in and take a look.",
+      "zh": "海龟听了，笑了笑，想进去看看。",
+      "pinyin": "Hǎiguī tīng le, xiào le xiào, xiǎng jìnqù kànkan.",
+      "vi": "Rùa biển nghe xong, mỉm cười, định chui vào xem."
+    },
+    {
+      "start": 215.27,
+      "end": 217.1,
+      "en": "But its body was too big,",
+      "zh": "但是，它的身体太大了，",
+      "pinyin": "Dànshì, tā de shēntǐ tài dà le,",
+      "vi": "Nhưng thân hình nó quá lớn,"
+    },
+    {
+      "start": 217.13,
+      "end": 220.83,
+      "en": "before its left foot was fully in, its right foot got stuck.",
+      "zh": "左脚还没完全伸进去，右脚就被卡住了。",
+      "pinyin": "zuǒjiǎo hái méi wánquán shēn jìnqù, yòujiǎo jiù bèi kǎ zhù le.",
+      "vi": "chân trái chưa duỗi hẳn vào trong, chân phải đã bị kẹt."
+    },
+    {
+      "start": 220.87,
+      "end": 222.47,
+      "en": "It had to back out.",
+      "zh": "它只好退了出来。",
+      "pinyin": "Tā zhǐhǎo tuì le chūlái.",
+      "vi": "Nó đành lùi ra ngoài."
+    },
+    {
+      "start": 222.5,
+      "end": 226.07,
+      "en": "The sea turtle said to the frog, 'Have you ever seen the sea?'",
+      "zh": "海龟对青蛙说:“你见过大海吗？”",
+      "pinyin": "Hǎiguī duì qīngwā shuō: “Nǐ jiàn guo dàhǎi ma?”",
+      "vi": "Rùa biển nói với ếch: “Bạn đã từng thấy biển chưa?”"
+    },
+    {
+      "start": 226.1,
+      "end": 229.27,
+      "en": "The frog shook its head and said, 'The sea?",
+      "zh": "青蛙摇摇头，说:“大海？",
+      "pinyin": "Qīngwā yáoyao tóu, shuō: “Dàhǎi?",
+      "vi": "Ếch lắc đầu nói: “Biển ư?"
+    },
+    {
+      "start": 229.3,
+      "end": 230.83,
+      "en": "Is it as big as my well?'",
+      "zh": "它有我的井大吗？”",
+      "pinyin": "Tā yǒu wǒ de jǐng dà ma?”",
+      "vi": "Nó có lớn bằng giếng của mình không?”"
+    },
+    {
+      "start": 230.87,
+      "end": 235.2,
+      "en": "The sea turtle said, 'The sea is very, very big.",
+      "zh": "海龟说:“大海啊，非常非常大。",
+      "pinyin": "Hǎiguī shuō: “Dàhǎi a, fēicháng fēicháng dà.",
+      "vi": "Rùa biển nói: “Biển ấy à, vô cùng vô cùng lớn."
+    },
+    {
+      "start": 235.23,
+      "end": 238.83,
+      "en": "Even 'a thousand li' cannot describe how wide it is,",
+      "zh": "用‘千里’都不能说它有多宽，",
+      "pinyin": "Yòng ‘qiānlǐ’ dōu bù néng shuō tā yǒu duō kuān,",
+      "vi": "Dùng ‘ngàn dặm’ cũng không thể nói nó rộng bao nhiêu,"
+    },
+    {
+      "start": 238.87,
+      "end": 242.67,
+      "en": "and 'a thousand zhang' cannot describe how deep it is.",
+      "zh": "用‘千丈’也不能说它有多深。",
+      "pinyin": "yòng ‘qiānzhàng’ yě bù néng shuō tā yǒu duō shēn.",
+      "vi": "dùng ‘ngàn trượng’ cũng không thể nói nó sâu bao nhiêu."
+    },
+    {
+      "start": 242.7,
+      "end": 245.63,
+      "en": "It does not have more water because it rains,",
+      "zh": "它不会因为下雨就水多，",
+      "pinyin": "Tā bú huì yīnwèi xiàyǔ jiù shuǐ duō,",
+      "vi": "Nó không vì trời mưa mà nhiều nước,"
+    },
+    {
+      "start": 245.67,
+      "end": 248.84,
+      "en": "nor less water because of drought.",
+      "zh": "也不会因为天旱就水少。",
+      "pinyin": "yě bú huì yīnwèi tiānhàn jiù shuǐ shǎo.",
+      "vi": "cũng không vì trời hạn mà ít nước."
+    },
+    {
+      "start": 248.87,
+      "end": 250.64,
+      "en": "Living in the sea,",
+      "zh": "生活在大海里，",
+      "pinyin": "Shēnghuó zài dàhǎi lǐ,",
+      "vi": "Sống trong biển lớn,"
+    },
+    {
+      "start": 250.67,
+      "end": 252.87,
+      "en": "that is true happiness.'",
+      "zh": "那才是真正的快乐啊。”",
+      "pinyin": "nà cái shì zhēnzhèng de kuàilè a.”",
+      "vi": "đó mới là niềm vui thật sự.”"
+    },
+    {
+      "start": 252.9,
+      "end": 256.7,
+      "en": "Hearing the sea turtle's words, the frog in the well was very shocked.",
+      "zh": "井里的青蛙听了海龟的话，非常吃惊。",
+      "pinyin": "Jǐng lǐ de qīngwā tīng le hǎiguī de huà, fēicháng chījīng.",
+      "vi": "Ếch trong giếng nghe lời rùa biển, vô cùng kinh ngạc."
+    },
+    {
+      "start": 256.73,
+      "end": 259.83,
+      "en": "It was stunned and could not say a word.",
+      "zh": "它呆住了，一句话也说不出来。",
+      "pinyin": "Tā dāi zhù le, yí jù huà yě shuō bu chūlái.",
+      "vi": "Nó sững lại, không nói được câu nào."
+    },
+    {
+      "start": 259.87,
+      "end": 261.1,
+      "en": "For the first time it realized",
+      "zh": "它第一次知道，",
+      "pinyin": "Tā dì yī cì zhīdào,",
+      "vi": "Lần đầu tiên nó biết,"
+    },
+    {
+      "start": 261.13,
+      "end": 264.1,
+      "en": "that the well it lived in was so small,",
+      "zh": "原来自己住的这口井这么小，",
+      "pinyin": "yuánlái zìjǐ zhù de zhè kǒu jǐng zhème xiǎo,",
+      "vi": "thì ra cái giếng nó ở nhỏ như vậy,"
+    },
+    {
+      "start": 264.13,
+      "end": 265.66,
+      "en": "and the outside world was so big.",
+      "zh": "外面的世界那么大。",
+      "pinyin": "wàimiàn de shìjiè nàme dà.",
+      "vi": "mà thế giới bên ngoài lại lớn đến thế."
+    },
+    {
+      "start": 265.7,
+      "end": 267.33,
+      "en": "It felt very ashamed.",
+      "zh": "它感到非常惭愧。",
+      "pinyin": "Tā gǎndào fēicháng cánkuì.",
+      "vi": "Nó cảm thấy vô cùng xấu hổ."
+    },
+    {
+      "start": 267.37,
+      "end": 269.64,
+      "en": "Although this story is very simple,",
+      "zh": "这个故事虽然很简单，",
+      "pinyin": "Zhège gùshi suīrán hěn jiǎndān,",
+      "vi": "Câu chuyện này tuy rất đơn giản,"
+    },
+    {
+      "start": 269.67,
+      "end": 272.54,
+      "en": "it feels very interesting every time I hear it.",
+      "zh": "但每次听都觉得很有意思。",
+      "pinyin": "dàn měi cì tīng dōu juéde hěn yǒu yìsi.",
+      "vi": "nhưng lần nào nghe cũng thấy rất thú vị."
+    },
+    {
+      "start": 272.57,
+      "end": 275,
+      "en": "That frog is really pitiful;",
+      "zh": "那只青蛙真的好可怜，",
+      "pinyin": "Nà zhī qīngwā zhēn de hǎo kělián,",
+      "vi": "Con ếch đó thật đáng thương,"
+    },
+    {
+      "start": 275.03,
+      "end": 278.33,
+      "en": "it thought what it knew was all there was.",
+      "zh": "它以为自己知道的就是全部了。",
+      "pinyin": "tā yǐwéi zìjǐ zhīdào de jiù shì quánbù le.",
+      "vi": "nó tưởng điều mình biết chính là tất cả."
+    },
+    {
+      "start": 278.37,
+      "end": 281,
+      "en": "Yes. This story tells us a",
+      "zh": "是的。这个故事告诉我们一个",
+      "pinyin": "Shì de. Zhège gùshi gàosu wǒmen yí gè",
+      "vi": "Đúng vậy. Câu chuyện này cho chúng ta một"
+    },
+    {
+      "start": 281.03,
+      "end": 284.43,
+      "en": "very important lesson: how big our world is,",
+      "zh": "非常重要的道理:我们的世界有多大，",
+      "pinyin": "fēicháng zhòngyào de dàolǐ: wǒmen de shìjiè yǒu duō dà,",
+      "vi": "bài học rất quan trọng: thế giới của chúng ta lớn đến đâu,"
+    },
+    {
+      "start": 284.47,
+      "end": 287.07,
+      "en": "It depends on how broad our horizons are.",
+      "zh": "取决于我们的眼界有多大。",
+      "pinyin": "Qǔjué yú wǒmen de yǎnjiè yǒu duō dà.",
+      "vi": "Nó phụ thuộc vào tầm nhìn của chúng ta rộng đến mức nào."
+    },
+    {
+      "start": 287.1,
+      "end": 290.2,
+      "en": "If we only live in our own little world,",
+      "zh": "如果我们只生活在自己的小世界里，",
+      "pinyin": "Rúguǒ wǒmen zhǐ shēnghuó zài zìjǐ de xiǎo shìjiè lǐ,",
+      "vi": "Nếu chúng ta chỉ sống trong thế giới nhỏ bé của riêng mình,"
+    },
+    {
+      "start": 290.23,
+      "end": 291.83,
+      "en": "without looking at the outside world,",
+      "zh": "不去看外面的世界，",
+      "pinyin": "Bù qù kàn wàimiàn de shìjiè,",
+      "vi": "không nhìn ra thế giới bên ngoài,"
+    },
+    {
+      "start": 291.87,
+      "end": 296.04,
+      "en": "then we will be like that frog, with very little knowledge,",
+      "zh": "我们就会像那只青蛙一样，知识很少，",
+      "pinyin": "Wǒmen jiù huì xiàng nà zhī qīngwā yíyàng, zhīshi hěn shǎo,",
+      "vi": "thì chúng ta sẽ giống như con ếch đó, hiểu biết rất ít,"
+    },
+    {
+      "start": 296.07,
+      "end": 297.6,
+      "en": "yet very proud.",
+      "zh": "却非常骄傲。",
+      "pinyin": "Què fēicháng jiāo'ào.",
+      "vi": "nhưng lại vô cùng kiêu ngạo."
+    },
+    {
+      "start": 297.63,
+      "end": 302.46,
+      "en": "I feel that when learning a language, we often have this feeling too.",
+      "zh": "我觉得学习语言的时候，也常常有这种感觉。",
+      "pinyin": "Wǒ juéde xuéxí yǔyán de shíhou, yě chángcháng yǒu zhè zhǒng gǎnjué.",
+      "vi": "Tôi nghĩ khi học ngôn ngữ, cũng thường có cảm giác này."
+    },
+    {
+      "start": 302.5,
+      "end": 305.67,
+      "en": "For example, I just learned ten Chinese characters,",
+      "zh": "比如我刚学会了十个汉字，",
+      "pinyin": "Bǐrú wǒ gāng xuéhuì le shí ge Hànzì,",
+      "vi": "Ví dụ, tôi vừa học được mười chữ Hán,"
+    },
+    {
+      "start": 305.7,
+      "end": 310.83,
+      "en": "and feel I'm really impressive, as if Chinese is very easy.",
+      "zh": "就觉得自己很厉害，好像中文很简单。",
+      "pinyin": "Jiù juéde zìjǐ hěn lìhai, hǎoxiàng Zhōngwén hěn jiǎndān.",
+      "vi": "là đã thấy mình giỏi lắm, cứ như tiếng Trung rất đơn giản."
+    },
+    {
+      "start": 310.87,
+      "end": 314.4,
+      "en": "But when I open a Chinese book and find",
+      "zh": "但是，当我打开一本中文书，发现",
+      "pinyin": "Dànshì, dāng wǒ dǎkāi yì běn Zhōngwén shū, fāxiàn",
+      "vi": "Nhưng khi tôi mở một cuốn sách tiếng Trung ra, phát hiện"
+    },
+    {
+      "start": 314.43,
+      "end": 317.86,
+      "en": "there are tens of thousands of characters I don't know,",
+      "zh": "里面有成千上万个我不认识的字，",
+      "pinyin": "Lǐmiàn yǒu chéngqiānshàngwàn ge wǒ bú rènshi de zì,",
+      "vi": "trong đó có hàng nghìn hàng vạn chữ tôi không biết,"
+    },
+    {
+      "start": 317.9,
+      "end": 321.8,
+      "en": "I feel like I am that \"frog at the bottom of the well.\"",
+      "zh": "我就会感觉自己就是那只“井底之蛙”。",
+      "pinyin": "Wǒ jiù huì gǎnjué zìjǐ jiùshì nà zhī “jǐng dǐ zhī wā”.",
+      "vi": "tôi sẽ cảm thấy mình chính là con “ếch ngồi đáy giếng” đó."
+    },
+    {
+      "start": 321.83,
+      "end": 324.33,
+      "en": "At that time, I feel a little sad.",
+      "zh": "那个时候，会觉得有点难过。",
+      "pinyin": "Nàge shíhou, huì juéde yǒudiǎn nánguò.",
+      "vi": "Lúc đó, tôi sẽ thấy hơi buồn."
+    },
+    {
+      "start": 324.37,
+      "end": 326.44,
+      "en": "I completely understand this feeling.",
+      "zh": "我完全理解这种感觉。",
+      "pinyin": "Wǒ wánquán lǐjiě zhè zhǒng gǎnjué.",
+      "vi": "Tôi hoàn toàn hiểu cảm giác này."
+    },
+    {
+      "start": 326.47,
+      "end": 327.6,
+      "en": "But, Wang Yu,",
+      "zh": "但是，王雨，",
+      "pinyin": "Dànshì, Wáng Yǔ,",
+      "vi": "Nhưng, Vương Vũ,"
+    },
+    {
+      "start": 327.63,
+      "end": 330.3,
+      "en": "I think realizing that you are a \"frog in the well,\"",
+      "zh": "我觉得认识到自己是“井底之蛙”，",
+      "pinyin": "Wǒ juéde rènshi dào zìjǐ shì “jǐng dǐ zhī wā”,",
+      "vi": "Tôi nghĩ rằng nhận ra mình là “ếch ngồi đáy giếng”,"
+    },
+    {
+      "start": 330.33,
+      "end": 332.53,
+      "en": "is exactly the beginning of progress.",
+      "zh": "恰恰是进步的开始。",
+      "pinyin": "Qiàqià shì jìnbù de kāishǐ.",
+      "vi": "lại chính là khởi đầu của sự tiến bộ."
+    },
+    {
+      "start": 332.57,
+      "end": 334.9,
+      "en": "This shows that you have already tried hard to look up,",
+      "zh": "这说明你已经努力地抬头，",
+      "pinyin": "Zhè shuōmíng nǐ yǐjīng nǔlì de táitóu,",
+      "vi": "Điều này cho thấy bạn đã cố gắng ngẩng đầu lên,"
+    },
+    {
+      "start": 334.93,
+      "end": 336.86,
+      "en": "and seen the world outside the mouth of the well.",
+      "zh": "看到了井口外面的世界。",
+      "pinyin": "Kàndào le jǐngkǒu wàimiàn de shìjiè.",
+      "vi": "và nhìn thấy thế giới bên ngoài miệng giếng."
+    },
+    {
+      "start": 336.9,
+      "end": 339.2,
+      "en": "This is a good thing, not a bad thing.",
+      "zh": "这是一件好事，不是坏事。",
+      "pinyin": "Zhè shì yí jiàn hǎoshì, bú shì huàishì.",
+      "vi": "Đây là một việc tốt, không phải việc xấu."
+    },
+    {
+      "start": 339.23,
+      "end": 340,
+      "en": "Really?",
+      "zh": "真的吗？",
+      "pinyin": "Zhēn de ma?",
+      "vi": "Thật sao?"
+    },
+    {
+      "start": 340,
+      "end": 341.1,
+      "en": "Of course.",
+      "zh": "当然。",
+      "pinyin": "Dāngrán.",
+      "vi": "Tất nhiên rồi."
+    },
+    {
+      "start": 341.13,
+      "end": 342.73,
+      "en": "The scariest thing is not not knowing,",
+      "zh": "最害怕的不是不知道，",
+      "pinyin": "Zuì hàipà de bú shì bù zhīdào,",
+      "vi": "Điều đáng sợ nhất không phải là không biết,"
+    },
+    {
+      "start": 342.77,
+      "end": 345.14,
+      "en": "but not knowing that you don't know.",
+      "zh": "而是不知道自己不知道。",
+      "pinyin": "Ér shì bù zhīdào zìjǐ bù zhīdào.",
+      "vi": "mà là không biết rằng mình không biết."
+    },
+    {
+      "start": 345.17,
+      "end": 348.27,
+      "en": "When you realize the world is big and you are small,",
+      "zh": "当你发现世界很大，自己很小的时候，",
+      "pinyin": "Dāng nǐ fāxiàn shìjiè hěn dà, zìjǐ hěn xiǎo de shíhou,",
+      "vi": "Khi bạn phát hiện thế giới rất lớn, còn mình rất nhỏ bé,"
+    },
+    {
+      "start": 348.3,
+      "end": 350.53,
+      "en": "that's when you develop the motivation to learn.",
+      "zh": "你才会产生学习的动力。",
+      "pinyin": "Nǐ cái huì chǎnshēng xuéxí de dònglì.",
+      "vi": "thì bạn mới có động lực học tập."
+    },
+    {
+      "start": 350.57,
+      "end": 351.24,
+      "en": "So,",
+      "zh": "所以，",
+      "pinyin": "Suǒyǐ,",
+      "vi": "Vì vậy,"
+    },
+    {
+      "start": 351.27,
+      "end": 353.94,
+      "en": "To all friends who are learning Chinese,",
+      "zh": "对所有正在学习中文的朋友来说，",
+      "pinyin": "Duì suǒyǒu zhèngzài xuéxí Zhōngwén de péngyou lái shuō,",
+      "vi": "Đối với tất cả những bạn đang học tiếng Trung,"
+    },
+    {
+      "start": 353.97,
+      "end": 355.87,
+      "en": "when you feel Chinese characters are very hard,",
+      "zh": "当你觉得汉字很难，",
+      "pinyin": "Dāng nǐ juéde Hànzì hěn nán,",
+      "vi": "khi bạn thấy chữ Hán rất khó,"
+    },
+    {
+      "start": 355.9,
+      "end": 358.7,
+      "en": "and grammar is very complicated, don't lose heart.",
+      "zh": "语法很复杂的时候，不要灰心。",
+      "pinyin": "Yǔfǎ hěn fùzá de shíhou, bú yào huīxīn.",
+      "vi": "và ngữ pháp rất phức tạp, đừng nản lòng."
+    },
+    {
+      "start": 358.73,
+      "end": 361.53,
+      "en": "This shows you are looking out from your \"well,\"",
+      "zh": "这说明你正在从你的“井”里往外看，",
+      "pinyin": "Zhè shuōmíng nǐ zhèngzài cóng nǐ de “jǐng” lǐ wǎng wài kàn,",
+      "vi": "Điều này cho thấy bạn đang từ “cái giếng” của mình nhìn ra ngoài,"
+    },
+    {
+      "start": 361.57,
+      "end": 363.4,
+      "en": "your world is getting bigger.",
+      "zh": "你的世界正在变大。",
+      "pinyin": "Nǐ de shìjiè zhèngzài biàn dà.",
+      "vi": "thế giới của bạn đang dần lớn hơn."
+    },
+    {
+      "start": 363.43,
+      "end": 366.43,
+      "en": "Hearing you say that, I feel much better.",
+      "zh": "听你这么说，我感觉好多了。",
+      "pinyin": "Tīng nǐ zhème shuō, wǒ gǎnjué hǎo duō le.",
+      "vi": "Nghe bạn nói vậy, tôi cảm thấy khá hơn nhiều rồi."
+    },
+    {
+      "start": 366.47,
+      "end": 369.87,
+      "en": "So we should communicate more with others,",
+      "zh": "所以，我们应该多和别人交流，",
+      "pinyin": "Suǒyǐ, wǒmen yīnggāi duō hé biérén jiāoliú,",
+      "vi": "Vì vậy, chúng ta nên giao lưu với người khác nhiều hơn,"
+    },
+    {
+      "start": 369.9,
+      "end": 373.4,
+      "en": "watch more Chinese movies, listen to more Chinese podcasts,",
+      "zh": "多看中国的电影，多听中文的播客，",
+      "pinyin": "Duō kàn Zhōngguó de diànyǐng, duō tīng Zhōngwén de bōkè,",
+      "vi": "xem phim Trung Quốc nhiều hơn, nghe podcast tiếng Trung nhiều hơn,"
+    },
+    {
+      "start": 373.43,
+      "end": 376.8,
+      "en": "this way our \"well\" will gradually grow bigger,",
+      "zh": "这样我们的“井”就会慢慢变大，",
+      "pinyin": "Zhèyàng wǒmen de “jǐng” jiù huì mànmàn biàn dà,",
+      "vi": "như vậy “cái giếng” của chúng ta sẽ dần dần lớn hơn,"
+    },
+    {
+      "start": 376.83,
+      "end": 380.1,
+      "en": "and in the end we can see the whole \"ocean.\"",
+      "zh": "最后我们也能看到整个“大海”。",
+      "pinyin": "Zuìhòu wǒmen yě néng kàndào zhěnggè “dàhǎi”.",
+      "vi": "cuối cùng chúng ta cũng có thể nhìn thấy cả “đại dương”."
+    },
+    {
+      "start": 380.13,
+      "end": 381.26,
+      "en": "Exactly right.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn đúng."
+    },
+    {
+      "start": 381.3,
+      "end": 383.1,
+      "en": "This is what the story \"The Frog in the Well\"",
+      "zh": "这就是《井底之蛙》这个故事",
+      "pinyin": "Zhè jiùshì 《Jǐng dǐ zhī wā》 zhège gùshi",
+      "vi": "Đây chính là câu chuyện “Ếch ngồi đáy giếng”"
+    },
+    {
+      "start": 383.13,
+      "end": 384.26,
+      "en": "teaches us:",
+      "zh": "教给我们的：",
+      "pinyin": "Jiāo gěi wǒmen de:",
+      "vi": "dạy cho chúng ta:"
+    },
+    {
+      "start": 384.3,
+      "end": 387.07,
+      "en": "Always stay curious about the world,",
+      "zh": "要永远对世界保持好奇心，",
+      "pinyin": "Yào yǒngyuǎn duì shìjiè bǎochí hàoqíxīn,",
+      "vi": "là phải luôn giữ sự tò mò với thế giới,"
+    },
+    {
+      "start": 387.1,
+      "end": 390,
+      "en": "and never be satisfied with what you already know.",
+      "zh": "永远不要满足于自己已经知道的东西。",
+      "pinyin": "Yǒngyuǎn bú yào mǎnzú yú zìjǐ yǐjīng zhīdào de dōngxi.",
+      "vi": "và đừng bao giờ hài lòng với những gì mình đã biết."
+    },
+    {
+      "start": 390,
+      "end": 391.23,
+      "en": "Mm!",
+      "zh": "嗯！",
+      "pinyin": "ǹg!",
+      "vi": "Ừm!"
+    },
+    {
+      "start": 391.27,
+      "end": 394.64,
+      "en": "Besides the frog that is proud because of \"ignorance,\"",
+      "zh": "除了因为“无知”而骄傲的青蛙，",
+      "pinyin": "Chúle yīnwèi “wúzhī” ér jiāo'ào de qīngwā,",
+      "vi": "Ngoài con ếch kiêu ngạo vì “không hiểu biết”,"
+    },
+    {
+      "start": 394.67,
+      "end": 396.1,
+      "en": "there is another kind of pride,",
+      "zh": "还有一种骄傲，",
+      "pinyin": "Hái yǒu yì zhǒng jiāo'ào,",
+      "vi": "còn có một kiểu kiêu ngạo khác,"
+    },
+    {
+      "start": 396.13,
+      "end": 399.23,
+      "en": "that comes from having a tiny little strength,",
+      "zh": "是因为自己有了一点小小的优点，",
+      "pinyin": "Shì yīnwèi zìjǐ yǒu le yìdiǎn xiǎoxiǎo de yōudiǎn,",
+      "vi": "là vì bản thân có được một chút ưu điểm nhỏ bé,"
+    },
+    {
+      "start": 399.27,
+      "end": 401.07,
+      "en": "and then looks down on others.",
+      "zh": "就看不起别人。",
+      "pinyin": "Jiù kànbuqǐ biérén.",
+      "vi": "là đã coi thường người khác."
+    },
+    {
+      "start": 401.1,
+      "end": 404.4,
+      "en": "I thought of another story, \"The Proud Rooster.\"",
+      "zh": "我想到了另一个故事，《骄傲的公鸡》。",
+      "pinyin": "Wǒ xiǎngdào le lìng yí ge gùshi, 《Jiāo'ào de Gōngjī》.",
+      "vi": "Tôi nghĩ đến một câu chuyện khác, “Chú gà trống kiêu ngạo”."
+    },
+    {
+      "start": 404.4,
+      "end": 405.23,
+      "en": "Oh?",
+      "zh": "哦？",
+      "pinyin": "Ò?",
+      "vi": "Ồ?"
+    },
+    {
+      "start": 405.27,
+      "end": 407.27,
+      "en": "I've heard this story too.",
+      "zh": "这个故事我也听过。",
+      "pinyin": "Zhège gùshi wǒ yě tīngguo.",
+      "vi": "Câu chuyện này tôi cũng nghe rồi."
+    },
+    {
+      "start": 407.3,
+      "end": 409.53,
+      "en": "the \"pride\" of this rooster and that frog,",
+      "zh": "这只公鸡和那只青蛙的“骄傲”，",
+      "pinyin": "Zhè zhī gōngjī hé nà zhī qīngwā de “jiāo'ào”,",
+      "vi": "“Sự kiêu ngạo” của chú gà trống này và con ếch kia,"
+    },
+    {
+      "start": 409.57,
+      "end": 410.94,
+      "en": "Indeed, not quite the same.",
+      "zh": "确实不太一样。",
+      "pinyin": "Quèshí bú tài yíyàng.",
+      "vi": "Đúng là không giống lắm."
+    },
+    {
+      "start": 410.97,
+      "end": 412.5,
+      "en": "Why don't you tell everyone about it.",
+      "zh": "你来给大家讲讲吧。",
+      "pinyin": "Nǐ lái gěi dàjiā jiǎngjiang ba.",
+      "vi": "Bạn kể cho mọi người nghe đi."
+    },
+    {
+      "start": 412.53,
+      "end": 413.4,
+      "en": "Okay.",
+      "zh": "好的。",
+      "pinyin": "Hǎo de.",
+      "vi": "Được thôi."
+    },
+    {
+      "start": 413.4,
+      "end": 415.87,
+      "en": "On a beautiful farm,",
+      "zh": "在一个美丽的农场里，",
+      "pinyin": "Zài yí gè měilì de nóngchǎng lǐ,",
+      "vi": "Ở một nông trại xinh đẹp,"
+    },
+    {
+      "start": 415.9,
+      "end": 419.3,
+      "en": "lived a very beautiful rooster.",
+      "zh": "住着一只非常漂亮的大公鸡。",
+      "pinyin": "Zhùzhe yì zhī fēicháng piàoliang de dà gōngjī.",
+      "vi": "có một chú gà trống rất đẹp."
+    },
+    {
+      "start": 419.33,
+      "end": 424.1,
+      "en": "It had colorful feathers, like a splendid outfit.",
+      "zh": "它有五颜六色的羽毛，像一件华丽的衣服。",
+      "pinyin": "Tā yǒu wǔyánliùsè de yǔmáo, xiàng yí jiàn huálì de yīfu.",
+      "vi": "Nó có bộ lông rực rỡ nhiều màu, như một bộ quần áo lộng lẫy."
+    },
+    {
+      "start": 424.13,
+      "end": 428.53,
+      "en": "Its comb was fiery red, like a blooming flower.",
+      "zh": "它的鸡冠火红火红的，像一朵盛开的花。",
+      "pinyin": "Tā de jīguān huǒhóng huǒhóng de, xiàng yì duǒ shèngkāi de huā.",
+      "vi": "Mào gà của nó đỏ rực, như một bông hoa đang nở."
+    },
+    {
+      "start": 428.57,
+      "end": 430.54,
+      "en": "It does sound very beautiful.",
+      "zh": "听起来确实很漂亮。",
+      "pinyin": "Tīng qǐlái quèshí hěn piàoliang.",
+      "vi": "Nghe đúng là rất đẹp."
+    },
+    {
+      "start": 430.57,
+      "end": 434.27,
+      "en": "The thing this rooster was most proud of was its voice.",
+      "zh": "这只公鸡最骄傲的，是它的嗓音。",
+      "pinyin": "Zhè zhī gōngjī zuì jiāo'ào de, shì tā de sǎngyīn.",
+      "vi": "Điều tự hào nhất ở chú gà trống này là giọng hát của nó."
+    },
+    {
+      "start": 434.3,
+      "end": 436.9,
+      "en": "Every morning, before dawn,",
+      "zh": "每天早上，天还没亮，",
+      "pinyin": "Měitiān zǎoshang, tiān hái méi liàng,",
+      "vi": "Mỗi sáng, khi trời còn chưa sáng,"
+    },
+    {
+      "start": 436.93,
+      "end": 440.13,
+      "en": "it would jump onto the roof and sing loudly:",
+      "zh": "它就跳到屋顶上，大声地唱歌:",
+      "pinyin": "tā jiù tiàodào wūdǐng shàng, dàshēng de chànggē:",
+      "vi": "nó nhảy lên mái nhà, hát thật to:"
+    },
+    {
+      "start": 440.17,
+      "end": 442,
+      "en": "'Cock-a-doodle-doo!'",
+      "zh": "“喔喔喔——！”",
+      "pinyin": "“Wō wō wō——!”",
+      "vi": "“Ò ó o——!”"
+    },
+    {
+      "start": 442.03,
+      "end": 445.46,
+      "en": "Its singing could carry very, very far.",
+      "zh": "它的歌声能传到很远很远的地方。",
+      "pinyin": "Tā de gēshēng néng chuándào hěn yuǎn hěn yuǎn de dìfang.",
+      "vi": "Tiếng hát của nó có thể truyền đến rất xa."
+    },
+    {
+      "start": 445.5,
+      "end": 448.2,
+      "en": "All the people and animals on the farm,",
+      "zh": "农场里所有的人和动物，",
+      "pinyin": "Nóngchǎng lǐ suǒyǒu de rén hé dòngwù,",
+      "vi": "Tất cả mọi người và động vật trong nông trại,"
+    },
+    {
+      "start": 448.23,
+      "end": 450.5,
+      "en": "all got up to its singing.",
+      "zh": "都是听着它的歌声起床的。",
+      "pinyin": "dōu shì tīngzhe tā de gēshēng qǐchuáng de.",
+      "vi": "đều thức dậy nhờ nghe tiếng hát của nó."
+    },
+    {
+      "start": 450.53,
+      "end": 453.2,
+      "en": "So it felt it was very important.",
+      "zh": "所以，它觉得自己非常重要。",
+      "pinyin": "Suǒyǐ, tā juéde zìjǐ fēicháng zhòngyào.",
+      "vi": "Vì vậy, nó cảm thấy mình rất quan trọng."
+    },
+    {
+      "start": 453.23,
+      "end": 456.66,
+      "en": "Yes, it felt it was the most important,",
+      "zh": "是的，它觉得自己是农场里最重要、",
+      "pinyin": "Shì de, tā juéde zìjǐ shì nóngchǎng lǐ zuì zhòngyào,",
+      "vi": "Đúng vậy, nó cảm thấy mình là con vật quan trọng nhất,"
+    },
+    {
+      "start": 456.7,
+      "end": 458.43,
+      "en": "and greatest animal on the farm.",
+      "zh": "最了不起的动物。",
+      "pinyin": "zuì liǎobuqǐ de dòngwù.",
+      "vi": "con vật giỏi giang nhất trong nông trại."
+    },
+    {
+      "start": 458.47,
+      "end": 460.34,
+      "en": "It looked down on the other animals.",
+      "zh": "它看不起别的动物。",
+      "pinyin": "Tā kànbuqǐ bié de dòngwù.",
+      "vi": "Nó coi thường những con vật khác."
+    },
+    {
+      "start": 460.37,
+      "end": 461.5,
+      "en": "When it saw nearby",
+      "zh": "它看到旁边",
+      "pinyin": "Tā kàndào pángbiān",
+      "vi": "Nó thấy bên cạnh"
+    },
+    {
+      "start": 461.53,
+      "end": 465.1,
+      "en": "the hen working hard to find worms for her chicks,",
+      "zh": "正在努力找虫子给鸡宝宝吃的母鸡，",
+      "pinyin": "zhèngzài nǔlì zhǎo chóngzi gěi jī bǎobao chī de mǔjī,",
+      "vi": "con gà mái đang chăm chỉ tìm sâu cho gà con ăn,"
+    },
+    {
+      "start": 465.13,
+      "end": 467.53,
+      "en": "it would say proudly, 'Look at you,",
+      "zh": "它会骄傲地说:“你看你，",
+      "pinyin": "tā huì jiāo'ào de shuō: “Nǐ kàn nǐ,",
+      "vi": "nó sẽ kiêu ngạo nói: “Cô xem cô kìa,"
+    },
+    {
+      "start": 467.57,
+      "end": 471.24,
+      "en": "all you know is lowering your head to look for food every day; how boring.",
+      "zh": "每天就知道低着头找东西吃，多没意思。",
+      "pinyin": "měitiān jiù zhīdào dīzhe tóu zhǎo dōngxi chī, duō méi yìsi.",
+      "vi": "ngày nào cũng chỉ biết cúi đầu tìm đồ ăn, thật chẳng thú vị."
+    },
+    {
+      "start": 471.27,
+      "end": 474.27,
+      "en": "unlike me, who can wake the sun with my singing!'",
+      "zh": "哪像我，能用歌声叫醒太阳！”",
+      "pinyin": "nǎ xiàng wǒ, néng yòng gēshēng jiàoxǐng tàiyáng!”",
+      "vi": "Đâu như tôi, có thể dùng tiếng hát đánh thức mặt trời!”"
+    },
+    {
+      "start": 474.3,
+      "end": 475.53,
+      "en": "It also looked down on",
+      "zh": "它也看不起",
+      "pinyin": "Tā yě kànbuqǐ",
+      "vi": "Nó cũng coi thường"
+    },
+    {
+      "start": 475.57,
+      "end": 478.14,
+      "en": "the old ox plowing diligently,",
+      "zh": "那头正在勤勤恳恳耕地的老牛，",
+      "pinyin": "nà tóu zhèngzài qínqínkěnkěn gēngdì de lǎoniú,",
+      "vi": "con bò già đang cần mẫn cày ruộng,"
+    },
+    {
+      "start": 478.17,
+      "end": 479.47,
+      "en": "it would say, 'Hey,",
+      "zh": "它会说:“嘿，",
+      "pinyin": "tā huì shuō: “Hēi,",
+      "vi": "nó sẽ nói: “Này,"
+    },
+    {
+      "start": 479.5,
+      "end": 482.07,
+      "en": "you big dumb ox, all you can do is work with your strength,",
+      "zh": "大笨牛，你只会用力气干活，",
+      "pinyin": "dà bèn niú, nǐ zhǐ huì yòng lìqi gànhuó,",
+      "vi": "đồ bò ngốc to xác, anh chỉ biết dùng sức làm việc,"
+    },
+    {
+      "start": 482.1,
+      "end": 483,
+      "en": "so dumb.",
+      "zh": "太笨了。",
+      "pinyin": "tài bèn le.",
+      "vi": "ngốc quá."
+    },
+    {
+      "start": 483,
+      "end": 485.4,
+      "en": "listen to my singing—how wonderful!'",
+      "zh": "你听听我的歌声，多美妙！”",
+      "pinyin": "nǐ tīngting wǒ de gēshēng, duō měimiào!”",
+      "vi": "Anh nghe tiếng hát của tôi đi, hay biết bao!”"
+    },
+    {
+      "start": 485.43,
+      "end": 486.86,
+      "en": "Every day it was like this:",
+      "zh": "它每天就这样，",
+      "pinyin": "Tā měitiān jiù zhèyàng,",
+      "vi": "Ngày nào nó cũng như vậy,"
+    },
+    {
+      "start": 486.9,
+      "end": 490.03,
+      "en": "either singing or showing off.",
+      "zh": "不是在唱歌，就是在炫耀自己。",
+      "pinyin": "bú shì zài chànggē, jiù shì zài xuànyào zìjǐ.",
+      "vi": "hoặc là hát, hoặc là khoe khoang bản thân."
+    },
+    {
+      "start": 490.07,
+      "end": 493.2,
+      "en": "The other animals on the farm didn't really like talking to it,",
+      "zh": "农场里别的动物都不太喜欢和它说话，",
+      "pinyin": "Nóngchǎng lǐ bié de dòngwù dōu bú tài xǐhuan hé tā shuōhuà,",
+      "vi": "Những con vật khác trong nông trại đều không thích nói chuyện với nó,"
+    },
+    {
+      "start": 493.23,
+      "end": 495,
+      "en": "but it didn't care at all.",
+      "zh": "但它一点也不在乎。",
+      "pinyin": "dàn tā yìdiǎn yě bú zàihu.",
+      "vi": "nhưng nó chẳng bận tâm chút nào."
+    },
+    {
+      "start": 495.03,
+      "end": 498.5,
+      "en": "This kind of personality can sometimes bring danger.",
+      "zh": "这种性格，有时候会带来危险。",
+      "pinyin": "Zhè zhǒng xìnggé, yǒu shíhou huì dàilái wēixiǎn.",
+      "vi": "Tính cách này đôi khi có thể mang lại nguy hiểm."
+    },
+    {
+      "start": 498.53,
+      "end": 499.46,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 499.47,
+      "end": 503.14,
+      "en": "One day, a fox secretly came to the farm.",
+      "zh": "有一天，一只狐狸偷偷地来到了农场。",
+      "pinyin": "Yǒu yì tiān, yì zhī húli tōutōu de láidào le nóngchǎng.",
+      "vi": "Một ngày nọ, một con cáo lén lút đến nông trại."
+    },
+    {
+      "start": 503.17,
+      "end": 507.74,
+      "en": "The fox was the craftiest animal; it wanted to catch a chicken for dinner.",
+      "zh": "狐狸是最狡猾的动物，它想抓一只鸡当晚餐。",
+      "pinyin": "Húli shì zuì jiǎohuá de dòngwù, tā xiǎng zhuā yì zhī jī dāng wǎncān.",
+      "vi": "Cáo là loài vật gian xảo nhất, nó muốn bắt một con gà làm bữa tối."
+    },
+    {
+      "start": 507.77,
+      "end": 510.74,
+      "en": "When the other animals saw the fox coming, they were all very afraid,",
+      "zh": "别的动物看到狐狸来了，都非常害怕，",
+      "pinyin": "Bié de dòngwù kàndào húli lái le, dōu fēicháng hàipà,",
+      "vi": "Những con vật khác thấy cáo đến đều rất sợ hãi,"
+    },
+    {
+      "start": 510.77,
+      "end": 512.5,
+      "en": "and quickly hid.",
+      "zh": "赶紧躲了起来。",
+      "pinyin": "gǎnjǐn duǒ le qǐlái.",
+      "vi": "vội vàng trốn đi."
+    },
+    {
+      "start": 512.53,
+      "end": 515.3,
+      "en": "The hen took her chicks and hid in the grass,",
+      "zh": "母鸡带着小鸡藏到了草丛里，",
+      "pinyin": "Mǔjī dàizhe xiǎojī cángdào le cǎocóng lǐ,",
+      "vi": "Gà mái dẫn gà con trốn vào bụi cỏ,"
+    },
+    {
+      "start": 515.33,
+      "end": 517.7,
+      "en": "and the old ox ran back to its stable.",
+      "zh": "老牛也跑回了自己的牛棚。",
+      "pinyin": "Lǎoniú yě pǎohuí le zìjǐ de niúpéng.",
+      "vi": "Bò già cũng chạy về chuồng của mình."
+    },
+    {
+      "start": 517.73,
+      "end": 520.86,
+      "en": "Everyone even whispered to the rooster, 'Run!",
+      "zh": "大家还小声地提醒公鸡:“快跑！",
+      "pinyin": "Dàjiā hái xiǎoshēng de tíxǐng gōngjī: “Kuài pǎo!",
+      "vi": "Mọi người còn nhỏ giọng nhắc gà trống: “Mau chạy!"
+    },
+    {
+      "start": 520.9,
+      "end": 522.2,
+      "en": "The fox is here!'",
+      "zh": "狐狸来了！”",
+      "pinyin": "Húli lái le!”",
+      "vi": "Cáo đến rồi!”"
+    },
+    {
+      "start": 522.2,
+      "end": 525.43,
+      "en": "But the proud rooster didn't listen at all.",
+      "zh": "但是骄傲的公鸡根本不听。",
+      "pinyin": "Dànshì jiāo'ào de gōngjī gēnběn bù tīng.",
+      "vi": "Nhưng chú gà trống kiêu ngạo căn bản không nghe."
+    },
+    {
+      "start": 525.47,
+      "end": 530.54,
+      "en": "It thought, 'I'm so powerful—how would the fox dare catch me?'",
+      "zh": "它想，我这么厉害，狐狸怎么敢抓我？",
+      "pinyin": "Tā xiǎng, wǒ zhème lìhai, húli zěnme gǎn zhuā wǒ?",
+      "vi": "Nó nghĩ, mình giỏi như vậy, cáo sao dám bắt mình?"
+    },
+    {
+      "start": 530.57,
+      "end": 532.2,
+      "en": "It even wanted, in front of the fox,",
+      "zh": "它还要在狐狸面前，",
+      "pinyin": "Tā hái yào zài húli miànqián,",
+      "vi": "Nó còn muốn ở trước mặt cáo,"
+    },
+    {
+      "start": 532.23,
+      "end": 536.1,
+      "en": "to show off its wonderful singing!",
+      "zh": "好好地展示一下自己美妙的歌声呢！",
+      "pinyin": "hǎohǎo de zhǎnshì yíxià zìjǐ měimiào de gēshēng ne!",
+      "vi": "thể hiện một phen giọng hát tuyệt vời của mình!"
+    },
+    {
+      "start": 536.13,
+      "end": 538.86,
+      "en": "When the fox saw the rooster, its eyes rolled,",
+      "zh": "狐狸看到了公鸡，眼珠子一转，",
+      "pinyin": "Húli kàndào le gōngjī, yǎnzhūzi yí zhuàn,",
+      "vi": "Cáo thấy gà trống, mắt đảo một vòng,"
+    },
+    {
+      "start": 538.9,
+      "end": 540.93,
+      "en": "and it came up with a bad idea.",
+      "zh": "想到了一个坏主意。",
+      "pinyin": "xiǎngdào le yí gè huài zhǔyi.",
+      "vi": "nghĩ ra một ý xấu."
+    },
+    {
+      "start": 540.97,
+      "end": 543.47,
+      "en": "It walked up to the rooster, smiled, and said:",
+      "zh": "它走到公鸡面前，笑着说:",
+      "pinyin": "Tā zǒu dào gōngjī miànqián, xiàozhe shuō:",
+      "vi": "Nó đi đến trước mặt gà trống, cười nói:"
+    },
+    {
+      "start": 543.47,
+      "end": 546.07,
+      "en": "“Ah, honorable Mr. Rooster!",
+      "zh": "“啊，尊敬的公鸡先生！",
+      "pinyin": "“A, zūnjìng de gōngjī xiānsheng!",
+      "vi": "“À, ngài gà trống đáng kính!"
+    },
+    {
+      "start": 546.1,
+      "end": 550.67,
+      "en": "I've long heard that you have the finest voice in the world.",
+      "zh": "我早就听说您有一副全世界最好听的嗓子。",
+      "pinyin": "Wǒ zǎo jiù tīngshuō nín yǒu yí fù quán shìjiè zuì hǎotīng de sǎngzi.",
+      "vi": "Tôi từ lâu đã nghe nói ngài có giọng hát hay nhất thế giới."
+    },
+    {
+      "start": 550.7,
+      "end": 553.93,
+      "en": "It's truly my honor to meet you today!”",
+      "zh": "今天能见到您，真是我的荣幸！”",
+      "pinyin": "Jīntiān néng jiàndào nín, zhēn shì wǒ de róngxìng!”",
+      "vi": "Hôm nay được gặp ngài, thật là vinh hạnh của tôi!”"
+    },
+    {
+      "start": 553.97,
+      "end": 557.44,
+      "en": "Proud people love to hear flattery.",
+      "zh": "骄傲的人最喜欢听好话。",
+      "pinyin": "Jiāo'ào de rén zuì xǐhuan tīng hǎohuà.",
+      "vi": "Người kiêu ngạo thích nhất là nghe lời khen."
+    },
+    {
+      "start": 557.47,
+      "end": 560.14,
+      "en": "Hearing this, the rooster was especially happy.",
+      "zh": "公鸡听了，心里特别高兴。",
+      "pinyin": "Gōngjī tīng le, xīnli tèbié gāoxìng.",
+      "vi": "Gà trống nghe vậy, trong lòng vô cùng vui sướng."
+    },
+    {
+      "start": 560.17,
+      "end": 563.54,
+      "en": "It puffed out its chest and became even prouder.",
+      "zh": "它挺起胸膛，更加骄傲了。",
+      "pinyin": "Tā tǐng qǐ xiōngtáng, gèngjiā jiāo'ào le.",
+      "vi": "Nó ưỡn ngực, càng thêm kiêu ngạo."
+    },
+    {
+      "start": 563.57,
+      "end": 567.27,
+      "en": "The fox added, “I've heard that when you sing,",
+      "zh": "狐狸又说:“我听说，您唱歌的时候，",
+      "pinyin": "Húli yòu shuō: “Wǒ tīngshuō, nín chànggē de shíhou,",
+      "vi": "Cáo lại nói: “Tôi nghe nói, khi ngài hát,"
+    },
+    {
+      "start": 567.3,
+      "end": 571.27,
+      "en": "if you close your eyes, your voice will be louder and clearer.",
+      "zh": "如果闭上眼睛，声音会更大、更响亮。",
+      "pinyin": "rúguǒ bì shàng yǎnjing, shēngyīn huì gèng dà, gèng xiǎngliàng.",
+      "vi": "nếu nhắm mắt lại, giọng sẽ to hơn, vang hơn."
+    },
+    {
+      "start": 571.3,
+      "end": 572.3,
+      "en": "Is that true?",
+      "zh": "是真的吗？",
+      "pinyin": "Shì zhēn de ma?",
+      "vi": "Có đúng thế không?"
+    },
+    {
+      "start": 572.33,
+      "end": 576.4,
+      "en": "I really want to hear it.” This rooster fell for it.",
+      "zh": "我真想听一听。”这只公鸡上当了。",
+      "pinyin": "Wǒ zhēn xiǎng tīng yi tīng.” Zhè zhī gōngjī shàngdàng le.",
+      "vi": "Tôi thật muốn nghe thử.” Chú gà trống này đã mắc lừa."
+    },
+    {
+      "start": 576.43,
+      "end": 577.03,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 577.03,
+      "end": 579.2,
+      "en": "To prove that it was the best,",
+      "zh": "为了证明自己是最棒的，",
+      "pinyin": "Wèile zhèngmíng zìjǐ shì zuì bàng de,",
+      "vi": "Để chứng minh mình là giỏi nhất,"
+    },
+    {
+      "start": 579.23,
+      "end": 581.5,
+      "en": "the rooster did not doubt it at all.",
+      "zh": "公鸡一点也没有怀疑。",
+      "pinyin": "Gōngjī yìdiǎn yě méiyǒu huáiyí.",
+      "vi": "Gà trống không hề nghi ngờ chút nào."
+    },
+    {
+      "start": 581.53,
+      "end": 584.2,
+      "en": "It cleared its throat, closed its eyes,",
+      "zh": "它清了清嗓子，闭上眼睛，",
+      "pinyin": "Tā qīng le qīng sǎngzi, bì shàng yǎnjing,",
+      "vi": "Nó hắng giọng, nhắm mắt lại,"
+    },
+    {
+      "start": 584.23,
+      "end": 590.13,
+      "en": "opened its mouth, and shouted with all its strength: “Cock-a-doodle-doo—!”",
+      "zh": "张开嘴，用尽全身的力气大喊:“喔——！”",
+      "pinyin": "zhāng kāi zuǐ, yòngjìn quánshēn de lìqi dà hǎn: “Wō——!”",
+      "vi": "mở miệng, dốc hết sức lực toàn thân hét lớn: “Ò——!”"
+    },
+    {
+      "start": 590.17,
+      "end": 593.34,
+      "en": "At that very moment, the fox lunged forward,",
+      "zh": "就在这个时候，狐狸猛地扑了上去，",
+      "pinyin": "Jiù zài zhège shíhou, húli měng de pū le shàngqù,",
+      "vi": "Đúng lúc này, cáo bất ngờ lao tới,"
+    },
+    {
+      "start": 593.37,
+      "end": 596.74,
+      "en": "bit the rooster's neck in one bite, and carried it away.",
+      "zh": "一口咬住了公鸡的脖子，把它叼走了。",
+      "pinyin": "yì kǒu yǎo zhù le gōngjī de bózi, bǎ tā diāo zǒu le.",
+      "vi": "cắn một phát vào cổ gà trống, tha nó đi."
+    },
+    {
+      "start": 596.77,
+      "end": 599.87,
+      "en": "Alas, a sad ending.",
+      "zh": "唉，一个悲伤的结局。",
+      "pinyin": "Āi, yí gè bēishāng de jiéjú.",
+      "vi": "Haiz, một kết cục buồn."
+    },
+    {
+      "start": 599.9,
+      "end": 602.63,
+      "en": "In the end, this rooster, because of its pride,",
+      "zh": "这只公鸡最后为自己的骄傲",
+      "pinyin": "Zhè zhī gōngjī zuìhòu wèi zìjǐ de jiāo'ào",
+      "vi": "Cuối cùng, chú gà trống này vì sự kiêu ngạo của mình"
+    },
+    {
+      "start": 602.67,
+      "end": 605.4,
+      "en": "paid with its life.",
+      "zh": "付出了生命的代价。",
+      "pinyin": "fùchū le shēngmìng de dàijià.",
+      "vi": "đã phải trả giá bằng mạng sống."
+    },
+    {
+      "start": 605.43,
+      "end": 606.2,
+      "en": "Yes.",
+      "zh": "是啊。",
+      "pinyin": "Shì a.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 606.2,
+      "end": 608.23,
+      "en": "It is different from the frog in the well.",
+      "zh": "它和井底之蛙不一样。",
+      "pinyin": "Tā hé jǐngdǐzhīwā bù yíyàng.",
+      "vi": "Nó không giống con ếch ngồi đáy giếng."
+    },
+    {
+      "start": 608.27,
+      "end": 609.44,
+      "en": "The frog in the well's pride",
+      "zh": "井底之蛙的骄傲，",
+      "pinyin": "Jǐngdǐzhīwā de jiāo'ào,",
+      "vi": "Sự kiêu ngạo của ếch ngồi đáy giếng,"
+    },
+    {
+      "start": 609.47,
+      "end": 612.04,
+      "en": "comes from not knowing the outside world.",
+      "zh": "是因为它不知道外面的世界。",
+      "pinyin": "shì yīnwèi tā bù zhīdào wàimiàn de shìjiè.",
+      "vi": "là vì nó không biết thế giới bên ngoài."
+    },
+    {
+      "start": 612.07,
+      "end": 613.54,
+      "en": "while this rooster's pride",
+      "zh": "而这只公鸡的骄傲，",
+      "pinyin": "ér zhè zhī gōngjī de jiāo'ào,",
+      "vi": "Còn sự kiêu ngạo của chú gà trống này,"
+    },
+    {
+      "start": 613.57,
+      "end": 615.9,
+      "en": "comes from seeing only its own strengths,",
+      "zh": "是因为它只看得到自己的优点，",
+      "pinyin": "shì yīnwèi tā zhǐ kàn de dào zìjǐ de yōudiǎn,",
+      "vi": "là vì nó chỉ nhìn thấy ưu điểm của mình,"
+    },
+    {
+      "start": 615.93,
+      "end": 620.06,
+      "en": "but not others' strengths, nor the potential danger.",
+      "zh": "却看不到别人的优点，也看不到潜在的危险。",
+      "pinyin": "què kàn bú dào biérén de yōudiǎn, yě kàn bú dào qiánzài de wēixiǎn.",
+      "vi": "nhưng không thấy được ưu điểm của người khác, cũng không thấy được nguy hiểm tiềm ẩn."
+    },
+    {
+      "start": 620.07,
+      "end": 621.2,
+      "en": "Right.",
+      "zh": "对。",
+      "pinyin": "Duì.",
+      "vi": "Đúng."
+    },
+    {
+      "start": 621.23,
+      "end": 623.06,
+      "en": "In our life and studies,",
+      "zh": "在我们的生活和学习中，",
+      "pinyin": "Zài wǒmen de shēnghuó hé xuéxí zhōng,",
+      "vi": "Trong cuộc sống và học tập của chúng ta,"
+    },
+    {
+      "start": 623.1,
+      "end": 626.13,
+      "en": "we also need to guard against this “rooster-style” pride.",
+      "zh": "也需要警惕这种“公鸡式”的骄傲。",
+      "pinyin": "yě xūyào jǐngtì zhè zhǒng “gōngjī shì” de jiāo'ào.",
+      "vi": "cũng cần cảnh giác với kiểu kiêu ngạo “như gà trống” này."
+    },
+    {
+      "start": 626.17,
+      "end": 629.7,
+      "en": "For example, some classmates may pronounce very well,",
+      "zh": "比如说，有的同学可能发音很好，",
+      "pinyin": "Bǐrú shuō, yǒude tóngxué kěnéng fāyīn hěn hǎo,",
+      "vi": "Ví dụ, có bạn học có thể phát âm rất tốt,"
+    },
+    {
+      "start": 629.73,
+      "end": 632.43,
+      "en": "and then thinks their Chinese is the best,",
+      "zh": "他就觉得自己的中文最棒，",
+      "pinyin": "tā jiù juéde zìjǐ de Zhōngwén zuì bàng,",
+      "vi": "bạn ấy liền cảm thấy tiếng Trung của mình giỏi nhất,"
+    },
+    {
+      "start": 632.47,
+      "end": 635.04,
+      "en": "and is unwilling to practice writing Chinese characters anymore.",
+      "zh": "不愿意再练习写汉字。",
+      "pinyin": "bú yuànyì zài liànxí xiě Hànzì.",
+      "vi": "không muốn luyện viết chữ Hán nữa."
+    },
+    {
+      "start": 635.07,
+      "end": 637.94,
+      "en": "Some classmates may write Chinese characters beautifully,",
+      "zh": "有的同学可能汉字写得很好看，",
+      "pinyin": "Yǒude tóngxué kěnéng Hànzì xiě de hěn hǎokàn,",
+      "vi": "Có bạn học có thể viết chữ Hán rất đẹp,"
+    },
+    {
+      "start": 637.97,
+      "end": 642.34,
+      "en": "and then looks down on those still working hard to remember strokes.",
+      "zh": "他就看不起那些还在努力记笔画的同学。",
+      "pinyin": "tā jiù kànbuqǐ nàxiē hái zài nǔlì jì bǐhuà de tóngxué.",
+      "vi": "bạn ấy liền coi thường những bạn vẫn đang cố gắng nhớ nét chữ."
+    },
+    {
+      "start": 642.37,
+      "end": 643.64,
+      "en": "I understand.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 643.67,
+      "end": 646.24,
+      "en": "Everyone has their own strengths and weaknesses.",
+      "zh": "每个人都有自己的优点和缺点。",
+      "pinyin": "Měi ge rén dōu yǒu zìjǐ de yōudiǎn hé quēdiǎn.",
+      "vi": "Mỗi người đều có ưu điểm và khuyết điểm của riêng mình."
+    },
+    {
+      "start": 646.27,
+      "end": 648.47,
+      "en": "We can't, just because we have one strength,",
+      "zh": "我们不能因为自己有一个优点，",
+      "pinyin": "Wǒmen bù néng yīnwèi zìjǐ yǒu yí ge yōudiǎn,",
+      "vi": "Chúng ta không thể vì mình có một ưu điểm,"
+    },
+    {
+      "start": 648.5,
+      "end": 651.47,
+      "en": "magnify it and even look down on others.",
+      "zh": "就放大它，甚至看不起别人。",
+      "pinyin": "jiù fàngdà tā, shènzhì kànbuqǐ biérén.",
+      "vi": "mà phóng đại nó, thậm chí coi thường người khác."
+    },
+    {
+      "start": 651.5,
+      "end": 654.7,
+      "en": "This reminds me of a saying: “A drop of water is tiny,",
+      "zh": "这让我想起一句话，“一滴水很小，",
+      "pinyin": "Zhè ràng wǒ xiǎngqǐ yí jù huà, “Yì dī shuǐ hěn xiǎo,",
+      "vi": "Điều này khiến tôi nhớ đến một câu nói, “Một giọt nước rất nhỏ,"
+    },
+    {
+      "start": 654.73,
+      "end": 658,
+      "en": "but many drops together make an ocean.”",
+      "zh": "但很多水滴在一起，就是大海”。",
+      "pinyin": "dàn hěn duō shuǐdī zài yìqǐ, jiù shì dàhǎi.”",
+      "vi": "nhưng nhiều giọt nước ở cùng nhau thì sẽ thành biển lớn.”"
+    },
+    {
+      "start": 658.03,
+      "end": 660.33,
+      "en": "This metaphor is excellent!",
+      "zh": "这个比喻非常好！",
+      "pinyin": "Zhège bǐyù fēicháng hǎo!",
+      "vi": "Cách so sánh này rất hay!"
+    },
+    {
+      "start": 660.37,
+      "end": 661.87,
+      "en": "Knowledge is the same.",
+      "zh": "知识也是一样。",
+      "pinyin": "Zhīshi yě shì yíyàng.",
+      "vi": "Kiến thức cũng vậy."
+    },
+    {
+      "start": 661.9,
+      "end": 664.27,
+      "en": "The knowledge each of us possesses",
+      "zh": "我们每个人掌握的知识，",
+      "pinyin": "Wǒmen měi ge rén zhǎngwò de zhīshi,",
+      "vi": "Kiến thức mà mỗi người chúng ta nắm được,"
+    },
+    {
+      "start": 664.3,
+      "end": 666.83,
+      "en": "is just a drop of water in the ocean.",
+      "zh": "都只是大海里的一滴水。",
+      "pinyin": "dōu zhǐshì dàhǎi lǐ de yì dī shuǐ.",
+      "vi": "đều chỉ là một giọt nước trong biển lớn."
+    },
+    {
+      "start": 666.87,
+      "end": 670.54,
+      "en": "If we are proud because we have this drop of water,",
+      "zh": "如果因为自己拥有这一滴水而骄傲，",
+      "pinyin": "Rúguǒ yīnwèi zìjǐ yōngyǒu zhè yì dī shuǐ ér jiāo'ào,",
+      "vi": "Nếu vì mình có giọt nước này mà kiêu ngạo,"
+    },
+    {
+      "start": 670.57,
+      "end": 674.87,
+      "en": "we will never see the grandeur and beauty of the whole ocean.",
+      "zh": "我们就永远看不到整片大海的壮观和美丽。",
+      "pinyin": "wǒmen jiù yǒngyuǎn kàn bú dào zhěng piàn dàhǎi de zhuàngguān hé měilì.",
+      "vi": "chúng ta sẽ mãi mãi không thấy được vẻ hùng vĩ và tươi đẹp của cả đại dương."
+    },
+    {
+      "start": 674.87,
+      "end": 678.24,
+      "en": "So we should, like the other animals on the farm,",
+      "zh": "所以，我们应该像农场里其他的动物一样，",
+      "pinyin": "Suǒyǐ, wǒmen yīnggāi xiàng nóngchǎng lǐ qítā de dòngwù yíyàng,",
+      "vi": "Vì vậy, chúng ta nên giống những con vật khác trong trang trại,"
+    },
+    {
+      "start": 678.27,
+      "end": 681.1,
+      "en": "learn from and help each other.",
+      "zh": "互相学习，互相帮助。",
+      "pinyin": "hùxiāng xuéxí, hùxiāng bāngzhù.",
+      "vi": "học hỏi lẫn nhau, giúp đỡ lẫn nhau."
+    },
+    {
+      "start": 681.13,
+      "end": 683.9,
+      "en": "The hen's love and the old ox's diligence,",
+      "zh": "母鸡的爱心，老牛的勤劳，",
+      "pinyin": "Mǔjī de àixīn, lǎoniú de qínláo,",
+      "vi": "Tình yêu thương của gà mái, sự chăm chỉ của bò già,"
+    },
+    {
+      "start": 683.93,
+      "end": 686.53,
+      "en": "are all qualities worth learning from.",
+      "zh": "都是值得我们学习的优点。",
+      "pinyin": "dōu shì zhídé wǒmen xuéxí de yōudiǎn.",
+      "vi": "đều là những ưu điểm đáng để chúng ta học hỏi."
+    },
+    {
+      "start": 686.57,
+      "end": 687.8,
+      "en": "Exactly so.",
+      "zh": "正是如此。",
+      "pinyin": "Zhèng shì rúcǐ.",
+      "vi": "Đúng là như vậy."
+    },
+    {
+      "start": 687.83,
+      "end": 689.63,
+      "en": "A truly outstanding person,",
+      "zh": "一个真正优秀的人，",
+      "pinyin": "Yí ge zhēnzhèng yōuxiù de rén,",
+      "vi": "Một người thực sự ưu tú,"
+    },
+    {
+      "start": 689.67,
+      "end": 692,
+      "en": "not only can see their own strengths,",
+      "zh": "不仅能看到自己的优点，",
+      "pinyin": "bùjǐn néng kàndào zìjǐ de yōudiǎn,",
+      "vi": "không chỉ có thể nhìn thấy ưu điểm của bản thân,"
+    },
+    {
+      "start": 692.03,
+      "end": 695.86,
+      "en": "but can also appreciate and learn from others' strengths.",
+      "zh": "更能欣赏和学习别人的优点。",
+      "pinyin": "gèng néng xīnshǎng hé xuéxí biérén de yōudiǎn.",
+      "vi": "mà còn biết trân trọng và học hỏi ưu điểm của người khác."
+    },
+    {
+      "start": 695.9,
+      "end": 696.73,
+      "en": "So, Wang Yu,",
+      "zh": "所以，王雨，",
+      "pinyin": "Suǒyǐ, Wáng Yǔ,",
+      "vi": "Vì vậy, Vương Vũ,"
+    },
+    {
+      "start": 696.77,
+      "end": 699.2,
+      "en": "today the story 'The Frog in the Well' that we told",
+      "zh": "今天我们讲的《井底之蛙》",
+      "pinyin": "jīntiān wǒmen jiǎng de 《Jǐng dǐ zhī wā》",
+      "vi": "Hôm nay chúng ta kể câu chuyện “Ếch ngồi đáy giếng”"
+    },
+    {
+      "start": 699.23,
+      "end": 701.4,
+      "en": "and 'The Proud Rooster,' these two stories,",
+      "zh": "和《骄傲的公鸡》这两个故事，",
+      "pinyin": "hé 《Jiāo'ào de Gōngjī》 zhè liǎng ge gùshi,",
+      "vi": "và “Con gà trống kiêu ngạo”, hai câu chuyện này,"
+    },
+    {
+      "start": 701.43,
+      "end": 704.8,
+      "en": "actually both point to a common truth.",
+      "zh": "其实都指向了一个共同的道理。",
+      "pinyin": "qíshí dōu zhǐxiàng le yí ge gòngtóng de dàolǐ.",
+      "vi": "thực ra đều hướng đến một đạo lý chung."
+    },
+    {
+      "start": 704.83,
+      "end": 708.9,
+      "en": "This is also a saying we Chinese often have on our lips.",
+      "zh": "这也是我们中国人经常挂在嘴边的一句话。",
+      "pinyin": "Zhè yě shì wǒmen Zhōngguó rén jīngcháng guà zài zuǐ biān de yí jù huà.",
+      "vi": "Đây cũng là câu nói mà người Trung Quốc chúng ta thường nhắc đến."
+    },
+    {
+      "start": 708.93,
+      "end": 712.2,
+      "en": "I know! It's 'Humility makes one progress,",
+      "zh": "我知道！是“谦虚使人进步，",
+      "pinyin": "Wǒ zhīdào! Shì “qiānxū shǐ rén jìnbù,",
+      "vi": "Tôi biết! Đó là “Khiêm tốn giúp người ta tiến bộ,"
+    },
+    {
+      "start": 712.23,
+      "end": 714.03,
+      "en": "and pride makes one fall behind.'",
+      "zh": "骄傲使人落后”。",
+      "pinyin": "jiāo'ào shǐ rén luòhòu”.",
+      "vi": "kiêu ngạo khiến người ta tụt lại phía sau”."
+    },
+    {
+      "start": 714.07,
+      "end": 715.4,
+      "en": "Exactly right.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn chính xác."
+    },
+    {
+      "start": 715.43,
+      "end": 718.23,
+      "en": "This saying means that a humble attitude",
+      "zh": "这句话的意思是，谦虚的态度",
+      "pinyin": "Zhè jù huà de yìsi shì, qiānxū de tàidù",
+      "vi": "Ý của câu này là, thái độ khiêm tốn"
+    },
+    {
+      "start": 718.27,
+      "end": 721.1,
+      "en": "can help a person keep making progress,",
+      "zh": "可以帮助一个人不断地进步，",
+      "pinyin": "kěyǐ bāngzhù yí ge rén bùduàn de jìnbù,",
+      "vi": "có thể giúp một người không ngừng tiến bộ,"
+    },
+    {
+      "start": 721.13,
+      "end": 724.8,
+      "en": "while a proud and complacent attitude only makes them stop,",
+      "zh": "而骄傲自满的态度只会让他停下来，",
+      "pinyin": "ér jiāo'ào zìmǎn de tàidù zhǐ huì ràng tā tíng xiàlái,",
+      "vi": "còn thái độ kiêu ngạo tự mãn chỉ khiến người đó dừng lại,"
+    },
+    {
+      "start": 724.83,
+      "end": 726.43,
+      "en": "or even regress.",
+      "zh": "甚至退步。",
+      "pinyin": "shènzhì tuìbù.",
+      "vi": "thậm chí thụt lùi."
+    },
+    {
+      "start": 726.47,
+      "end": 731.04,
+      "en": "I've heard this saying since I was little; teachers and parents often say it.",
+      "zh": "这句话我从小听到大，老师和父母都经常说。",
+      "pinyin": "Zhè jù huà wǒ cóng xiǎo tīng dào dà, lǎoshī hé fùmǔ dōu jīngcháng shuō.",
+      "vi": "Câu này tôi nghe từ nhỏ đến lớn, thầy cô và bố mẹ đều thường nói."
+    },
+    {
+      "start": 731.07,
+      "end": 733.34,
+      "en": "But Li Ming, I have a question.",
+      "zh": "但是李明，我有一个问题。",
+      "pinyin": "Dànshì Lǐ Míng, wǒ yǒu yí ge wèntí.",
+      "vi": "Nhưng Lý Minh, tôi có một câu hỏi."
+    },
+    {
+      "start": 733.37,
+      "end": 735.64,
+      "en": "What exactly is 'humility'?",
+      "zh": "到底什么是“谦虚”呢？",
+      "pinyin": "Dàodǐ shénme shì “qiānxū” ne?",
+      "vi": "Rốt cuộc “khiêm tốn” là gì?"
+    },
+    {
+      "start": 735.67,
+      "end": 739,
+      "en": "Is it just always saying you're 'no good' or 'not good'?",
+      "zh": "是不是就是总是说自己“不行”、“不好”？",
+      "pinyin": "Shì bu shì jiù shì zǒngshì shuō zìjǐ “bùxíng”, “bù hǎo”?",
+      "vi": "Có phải là luôn nói mình “không được”, “không tốt” không?"
+    },
+    {
+      "start": 739.03,
+      "end": 741.73,
+      "en": "Or being afraid to speak in front of others?",
+      "zh": "或者是不敢在别人面前说话？",
+      "pinyin": "Huòzhě shì bù gǎn zài biérén miànqián shuōhuà?",
+      "vi": "Hoặc là không dám nói chuyện trước mặt người khác?"
+    },
+    {
+      "start": 741.77,
+      "end": 743.84,
+      "en": "That's a very good question,",
+      "zh": "这是一个非常好的问题，",
+      "pinyin": "Zhè shì yí ge fēicháng hǎo de wèntí,",
+      "vi": "Đây là một câu hỏi rất hay,"
+    },
+    {
+      "start": 743.87,
+      "end": 746.7,
+      "en": "Many people misunderstand 'humility.'",
+      "zh": "很多人对“谦虚”有误解。",
+      "pinyin": "Hěn duō rén duì “qiānxū” yǒu wùjiě.",
+      "vi": "Nhiều người hiểu sai về “khiêm tốn”."
+    },
+    {
+      "start": 746.73,
+      "end": 749.4,
+      "en": "True humility is not denying yourself,",
+      "zh": "真正的谦虚，不是否定自己，",
+      "pinyin": "Zhēnzhèng de qiānxū, bú shì fǒudìng zìjǐ,",
+      "vi": "Khiêm tốn thực sự không phải là phủ nhận bản thân,"
+    },
+    {
+      "start": 749.43,
+      "end": 751.73,
+      "en": "saying you're bad here and incapable there.",
+      "zh": "说自己这里不好，那里不行。",
+      "pinyin": "shuō zìjǐ zhèlǐ bù hǎo, nàlǐ bùxíng.",
+      "vi": "nói rằng mình chỗ này không tốt, chỗ kia không được."
+    },
+    {
+      "start": 751.77,
+      "end": 755.24,
+      "en": "That's not humility; that's lack of confidence.",
+      "zh": "这不叫谦虚，这叫不自信。",
+      "pinyin": "Zhè bú jiào qiānxū, zhè jiào bú zìxìn.",
+      "vi": "Đó không gọi là khiêm tốn, mà gọi là thiếu tự tin."
+    },
+    {
+      "start": 755.27,
+      "end": 758.14,
+      "en": "Oh? Then what exactly is it?",
+      "zh": "哦？那它到底是什么呢？",
+      "pinyin": "Ó? Nà tā dàodǐ shì shénme ne?",
+      "vi": "Ồ? Vậy nó rốt cuộc là gì?"
+    },
+    {
+      "start": 758.17,
+      "end": 761.84,
+      "en": "I think humility is an inner attitude.",
+      "zh": "我认为，谦虚是一种内心的态度。",
+      "pinyin": "Wǒ rènwéi, qiānxū shì yì zhǒng nèixīn de tàidù.",
+      "vi": "Tôi cho rằng, khiêm tốn là một thái độ bên trong."
+    },
+    {
+      "start": 761.87,
+      "end": 764.34,
+      "en": "It means you clearly know that",
+      "zh": "它意味着，你清楚地知道，",
+      "pinyin": "Tā yìwèizhe, nǐ qīngchǔ de zhīdào,",
+      "vi": "Nó có nghĩa là, bạn biết rõ rằng,"
+    },
+    {
+      "start": 764.37,
+      "end": 768.07,
+      "en": "the world is big and knowledge is endless,",
+      "zh": "这个世界很大，知识是无穷无尽的，",
+      "pinyin": "zhège shìjiè hěn dà, zhīshi shì wúqióngwújìn de,",
+      "vi": "thế giới này rất lớn, kiến thức là vô tận,"
+    },
+    {
+      "start": 768.1,
+      "end": 770.9,
+      "en": "and you always have things to learn.",
+      "zh": "你永远有需要学习的东西。",
+      "pinyin": "nǐ yǒngyuǎn yǒu xūyào xuéxí de dōngxi.",
+      "vi": "bạn luôn có những điều cần học hỏi."
+    },
+    {
+      "start": 770.93,
+      "end": 773.06,
+      "en": "It is an open mindset,",
+      "zh": "它是一种开放的心态，",
+      "pinyin": "Tā shì yì zhǒng kāifàng de xīntài,",
+      "vi": "Đó là một tâm thế cởi mở,"
+    },
+    {
+      "start": 773.1,
+      "end": 777.87,
+      "en": "willing to listen to others' opinions and willing to learn new knowledge.",
+      "zh": "愿意去听别人的意见，愿意去学习新的知识。",
+      "pinyin": "yuànyì qù tīng biérén de yìjiàn, yuànyì qù xuéxí xīn de zhīshi.",
+      "vi": "sẵn lòng nghe ý kiến của người khác, sẵn lòng học hỏi kiến thức mới."
+    },
+    {
+      "start": 777.9,
+      "end": 779.8,
+      "en": "I think I'm starting to understand.",
+      "zh": "我好像有点明白了。",
+      "pinyin": "Wǒ hǎoxiàng yǒudiǎn míngbai le.",
+      "vi": "Tôi hình như hiểu ra một chút rồi."
+    },
+    {
+      "start": 779.83,
+      "end": 781,
+      "en": "Just like 'The Frog in the Well,'",
+      "zh": "就像《井底之蛙》",
+      "pinyin": "Jiù xiàng 《Jǐng dǐ zhī wā》",
+      "vi": "Giống như “Ếch ngồi đáy giếng”,"
+    },
+    {
+      "start": 781.03,
+      "end": 783.06,
+      "en": "that big sea turtle in the story,",
+      "zh": "故事里的那只大海龟，",
+      "pinyin": "gùshi lǐ de nà zhī dà hǎiguī,",
+      "vi": "con rùa biển lớn trong câu chuyện,"
+    },
+    {
+      "start": 783.1,
+      "end": 784.87,
+      "en": "it has seen such a big world,",
+      "zh": "它见过那么大的世界，",
+      "pinyin": "tā jiàn guo nàme dà de shìjiè,",
+      "vi": "nó đã từng thấy một thế giới rộng lớn như vậy,"
+    },
+    {
+      "start": 784.9,
+      "end": 788.4,
+      "en": "but when it spoke to the frog, its attitude was very calm,",
+      "zh": "但它和青蛙说话的时候，态度很平和，",
+      "pinyin": "dàn tā hé qīngwā shuōhuà de shíhou, tàidù hěn pínghé,",
+      "vi": "nhưng khi nói chuyện với con ếch, thái độ của nó rất ôn hòa,"
+    },
+    {
+      "start": 788.43,
+      "end": 790.5,
+      "en": "it didn't mock the frog's ignorance,",
+      "zh": "它没有嘲笑青蛙的无知，",
+      "pinyin": "tā méiyǒu cháoxiào qīngwā de wúzhī,",
+      "vi": "nó không cười nhạo sự thiếu hiểu biết của con ếch,"
+    },
+    {
+      "start": 790.53,
+      "end": 792.9,
+      "en": "but simply calmly told it the truth.",
+      "zh": "只是平静地告诉它事实。",
+      "pinyin": "zhǐshì píngjìng de gàosu tā shìshí.",
+      "vi": "mà chỉ bình tĩnh nói cho nó biết sự thật."
+    },
+    {
+      "start": 792.9,
+      "end": 793.8,
+      "en": "Right!",
+      "zh": "对！",
+      "pinyin": "Duì!",
+      "vi": "Đúng!"
+    },
+    {
+      "start": 793.83,
+      "end": 795.6,
+      "en": "That is a kind of humility.",
+      "zh": "这就是一种谦虚。",
+      "pinyin": "Zhè jiù shì yì zhǒng qiānxū.",
+      "vi": "Đây chính là một kiểu khiêm tốn."
+    },
+    {
+      "start": 795.63,
+      "end": 797.5,
+      "en": "It knows far more than the frog,",
+      "zh": "它知道的比青蛙多得多，",
+      "pinyin": "Tā zhīdào de bǐ qīngwā duō de duō,",
+      "vi": "Nó biết nhiều hơn con ếch rất nhiều,"
+    },
+    {
+      "start": 797.53,
+      "end": 800.3,
+      "en": "but it wasn't proud because of that.",
+      "zh": "但它没有因此而骄傲。",
+      "pinyin": "dàn tā méiyǒu yīn cǐ ér jiāo'ào.",
+      "vi": "nhưng nó không vì thế mà kiêu ngạo."
+    },
+    {
+      "start": 800.33,
+      "end": 803.1,
+      "en": "A humble person is like a cup;",
+      "zh": "一个谦虚的人，就像一个杯子，",
+      "pinyin": "Yí ge qiānxū de rén, jiù xiàng yí ge bēizi,",
+      "vi": "Một người khiêm tốn giống như một cái cốc,"
+    },
+    {
+      "start": 803.13,
+      "end": 805.63,
+      "en": "they always feel they are not full,",
+      "zh": "他总觉得自己没有满，",
+      "pinyin": "tā zǒng juéde zìjǐ méiyǒu mǎn,",
+      "vi": "họ luôn cảm thấy mình chưa đầy,"
+    },
+    {
+      "start": 805.67,
+      "end": 808.27,
+      "en": "so water can keep being added.",
+      "zh": "所以可以一直往里面加水。",
+      "pinyin": "suǒyǐ kěyǐ yìzhí wǎng lǐmiàn jiā shuǐ.",
+      "vi": "nên có thể liên tục rót thêm nước vào trong."
+    },
+    {
+      "start": 808.3,
+      "end": 809.73,
+      "en": "And a proud person,",
+      "zh": "而一个骄傲的人，",
+      "pinyin": "ér yí ge jiāo'ào de rén,",
+      "vi": "Còn một người kiêu ngạo,"
+    },
+    {
+      "start": 809.77,
+      "end": 812.24,
+      "en": "Like a cup filled to the brim with water,",
+      "zh": "就像一个装满了水的杯子，",
+      "pinyin": "Jiù xiàng yī gè zhuāng mǎn le shuǐ de bēi zi,",
+      "vi": "Giống như một chiếc cốc đã đầy nước,"
+    },
+    {
+      "start": 812.27,
+      "end": 815.5,
+      "en": "It can no longer hold anything new.",
+      "zh": "再也装不进任何新的东西了。",
+      "pinyin": "Zài yě zhuāng bù jìn rènhé xīn de dōngxi le.",
+      "vi": "Không thể chứa thêm bất cứ thứ mới nào nữa."
+    },
+    {
+      "start": 815.53,
+      "end": 819.06,
+      "en": "“A cup that isn’t full”—what a great metaphor!",
+      "zh": "“一个没有满的杯子”，这个比喻真好！",
+      "pinyin": "“Yī gè méiyǒu mǎn de bēi zi”, zhège bǐyù zhēn hǎo!",
+      "vi": "“Một chiếc cốc chưa đầy”, cách ví von này thật hay!"
+    },
+    {
+      "start": 819.1,
+      "end": 821.13,
+      "en": "So, when learning Chinese,",
+      "zh": "所以，在学习中文的时候，",
+      "pinyin": "Suǒyǐ, zài xuéxí Zhōngwén de shíhou,",
+      "vi": "Vì vậy, khi học tiếng Trung,"
+    },
+    {
+      "start": 821.17,
+      "end": 824,
+      "en": "a humble attitude means not being afraid of making mistakes,",
+      "zh": "谦虚的态度就是，不怕犯错，",
+      "pinyin": "qiānxū de tàidu jiùshì, bù pà fàncuò,",
+      "vi": "thái độ khiêm tốn chính là không sợ mắc lỗi,"
+    },
+    {
+      "start": 824.03,
+      "end": 827.03,
+      "en": "because you know mistakes are part of learning.",
+      "zh": "因为你知道犯错是学习的一部分。",
+      "pinyin": "yīnwèi nǐ zhīdào fàncuò shì xuéxí de yī bùfen.",
+      "vi": "bởi vì bạn biết mắc lỗi là một phần của việc học."
+    },
+    {
+      "start": 827.07,
+      "end": 831.4,
+      "en": "You’re willing to let teachers and friends correct your pronunciation and grammar.",
+      "zh": "你愿意让老师和朋友纠正你的发音和语法。",
+      "pinyin": "Nǐ yuànyì ràng lǎoshī hé péngyou jiūzhèng nǐ de fāyīn hé yǔfǎ.",
+      "vi": "Bạn sẵn lòng để thầy cô và bạn bè sửa cách phát âm và ngữ pháp của mình."
+    },
+    {
+      "start": 831.43,
+      "end": 832.26,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 832.3,
+      "end": 836.3,
+      "en": "Moreover, you’ll actively notice others’ strengths.",
+      "zh": "而且，你还会去主动发现别人的优点。",
+      "pinyin": "Érqiě, nǐ hái huì qù zhǔdòng fāxiàn biérén de yōudiǎn.",
+      "vi": "Hơn nữa, bạn còn chủ động phát hiện ưu điểm của người khác."
+    },
+    {
+      "start": 836.33,
+      "end": 839.66,
+      "en": "When you see a classmate writes Chinese characters better than you,",
+      "zh": "你看到一个同学的汉字写得比你好，",
+      "pinyin": "Nǐ kàn dào yī gè tóngxué de Hànzì xiě de bǐ nǐ hǎo,",
+      "vi": "Khi bạn thấy một bạn học viết chữ Hán đẹp hơn mình,"
+    },
+    {
+      "start": 839.7,
+      "end": 843.47,
+      "en": "you’ll ask them for their methods instead of being jealous.",
+      "zh": "你会去请教他方法，而不是嫉妒他。",
+      "pinyin": "nǐ huì qù qǐngjiào tā fāngfǎ, ér bùshì jídù tā.",
+      "vi": "bạn sẽ đến hỏi cách làm của họ, chứ không phải ghen tị với họ."
+    },
+    {
+      "start": 843.5,
+      "end": 846.33,
+      "en": "When you hear someone speak more fluently than you,",
+      "zh": "你听到一个人的口语比你流利，",
+      "pinyin": "Nǐ tīngdào yī gè rén de kǒuyǔ bǐ nǐ liúlì,",
+      "vi": "Khi bạn nghe một người nói lưu loát hơn mình,"
+    },
+    {
+      "start": 846.37,
+      "end": 849.1,
+      "en": "you’ll take them as a learning goal,",
+      "zh": "你会把他当成学习的目标，",
+      "pinyin": "nǐ huì bǎ tā dāngchéng xuéxí de mùbiāo,",
+      "vi": "bạn sẽ coi họ là mục tiêu học tập,"
+    },
+    {
+      "start": 849.13,
+      "end": 851.63,
+      "en": "rather than feeling unhappy.",
+      "zh": "而不是觉得不开心。",
+      "pinyin": "ér bùshì juéde bù kāixīn.",
+      "vi": "chứ không phải cảm thấy không vui."
+    },
+    {
+      "start": 851.67,
+      "end": 853.1,
+      "en": "I completely agree.",
+      "zh": "我完全同意。",
+      "pinyin": "Wǒ wánquán tóngyì.",
+      "vi": "Tôi hoàn toàn đồng ý."
+    },
+    {
+      "start": 853.13,
+      "end": 854.7,
+      "en": "With a humble attitude,",
+      "zh": "拥有谦虚的态度，",
+      "pinyin": "Yōngyǒu qiānxū de tàidu,",
+      "vi": "Có thái độ khiêm tốn,"
+    },
+    {
+      "start": 854.73,
+      "end": 857.93,
+      "en": "learning itself becomes a joyful thing.",
+      "zh": "学习本身就变成了一件快乐的事情。",
+      "pinyin": "xuéxí běnshēn jiù biànchéng le yī jiàn kuàilè de shìqing.",
+      "vi": "bản thân việc học sẽ trở thành một điều vui vẻ."
+    },
+    {
+      "start": 857.97,
+      "end": 860.8,
+      "en": "Because every day you can discover something new,",
+      "zh": "因为你每天都能发现新的东西，",
+      "pinyin": "Yīnwèi nǐ měitiān dōu néng fāxiàn xīn de dōngxi,",
+      "vi": "Bởi vì mỗi ngày bạn đều có thể phát hiện ra những điều mới,"
+    },
+    {
+      "start": 860.83,
+      "end": 863.53,
+      "en": "every day you can feel yourself improving.",
+      "zh": "每天都能感觉到自己在进步。",
+      "pinyin": "měitiān dōu néng gǎnjué dào zìjǐ zài jìnbù.",
+      "vi": "mỗi ngày đều có thể cảm thấy mình đang tiến bộ."
+    },
+    {
+      "start": 863.57,
+      "end": 866,
+      "en": "Your world grows bigger every day.",
+      "zh": "你的世界每天都在变大。",
+      "pinyin": "Nǐ de shìjiè měitiān dōu zài biàn dà.",
+      "vi": "Thế giới của bạn mỗi ngày đều trở nên rộng lớn hơn."
+    },
+    {
+      "start": 866.03,
+      "end": 867.9,
+      "en": "Well summarized.",
+      "zh": "总结得很好。",
+      "pinyin": "Zǒngjié de hěn hǎo.",
+      "vi": "Tổng kết rất hay."
+    },
+    {
+      "start": 867.93,
+      "end": 871.46,
+      "en": "So humility doesn’t make us timid;",
+      "zh": "所以，谦虚不是让我们变得胆小，",
+      "pinyin": "Suǒyǐ, qiānxū bùshì ràng wǒmen biànde dǎnxiǎo,",
+      "vi": "Vì vậy, khiêm tốn không khiến chúng ta trở nên nhút nhát,"
+    },
+    {
+      "start": 871.5,
+      "end": 873.93,
+      "en": "it makes us stronger.",
+      "zh": "而是让我们变得更强大。",
+      "pinyin": "érshì ràng wǒmen biànde gèng qiángdà.",
+      "vi": "mà khiến chúng ta trở nên mạnh mẽ hơn."
+    },
+    {
+      "start": 873.97,
+      "end": 877.74,
+      "en": "Because it gives us limitless possibilities for progress.",
+      "zh": "因为它给了我们无限进步的可能性。",
+      "pinyin": "Yīnwèi tā gěi le wǒmen wúxiàn jìnbù de kěnéngxìng.",
+      "vi": "Bởi vì nó mang lại cho chúng ta khả năng tiến bộ vô hạn."
+    },
+    {
+      "start": 877.77,
+      "end": 881.14,
+      "en": "We often say, “Beyond mountains there are mountains; beyond people there are people.”",
+      "zh": "我们常说“山外有山，人外有人”，",
+      "pinyin": "Wǒmen cháng shuō “shān wài yǒu shān, rén wài yǒu rén”,",
+      "vi": "Chúng ta thường nói “ngoài núi có núi, ngoài người có người”,"
+    },
+    {
+      "start": 881.17,
+      "end": 884.44,
+      "en": "meaning there’s always a mountain higher than you,",
+      "zh": "意思就是，总有比你更高的山，",
+      "pinyin": "yìsi jiùshì, zǒng yǒu bǐ nǐ gèng gāo de shān,",
+      "vi": "nghĩa là luôn có ngọn núi cao hơn bạn,"
+    },
+    {
+      "start": 884.47,
+      "end": 887.2,
+      "en": "there’s always someone more capable than you.",
+      "zh": "总有比你更厉害的人。",
+      "pinyin": "zǒng yǒu bǐ nǐ gèng lìhai de rén.",
+      "vi": "luôn có người giỏi hơn bạn."
+    },
+    {
+      "start": 887.2,
+      "end": 888.83,
+      "en": "Recognizing this,",
+      "zh": "认识到这一点，",
+      "pinyin": "Rènshi dào zhè yī diǎn,",
+      "vi": "Nhận ra được điều này,"
+    },
+    {
+      "start": 888.87,
+      "end": 892.27,
+      "en": "we can always maintain our enthusiasm for learning.",
+      "zh": "我们才能永远保持学习的热情。",
+      "pinyin": "wǒmen cái néng yǒngyuǎn bǎochí xuéxí de rèqíng.",
+      "vi": "chúng ta mới có thể luôn giữ được nhiệt huyết học tập."
+    },
+    {
+      "start": 892.3,
+      "end": 893,
+      "en": "Mm!",
+      "zh": "嗯！",
+      "pinyin": "Ng!",
+      "vi": "Ừm!"
+    },
+    {
+      "start": 893.03,
+      "end": 896.23,
+      "en": "Today’s story and discussion were truly meaningful.",
+      "zh": "今天的故事和讨论真的太有意义了。",
+      "pinyin": "Jīntiān de gùshi hé tǎolùn zhēn de tài yǒu yìyì le.",
+      "vi": "Câu chuyện và cuộc thảo luận hôm nay thật sự rất ý nghĩa."
+    },
+    {
+      "start": 896.27,
+      "end": 899.5,
+      "en": "All right, happy times always pass quickly.",
+      "zh": "好了，快乐的时间总是过得很快。",
+      "pinyin": "Hǎo le, kuàilè de shíjiān zǒngshì guò de hěn kuài.",
+      "vi": "Thôi được rồi, khoảng thời gian vui vẻ luôn trôi qua rất nhanh."
+    },
+    {
+      "start": 899.53,
+      "end": 902,
+      "en": "Today, through “The Frog in the Well”",
+      "zh": "今天我们通过《井底之蛙》",
+      "pinyin": "Jīntiān wǒmen tōngguò 《Jǐng dǐ zhī wā》",
+      "vi": "Hôm nay, thông qua 《Ếch ngồi đáy giếng》"
+    },
+    {
+      "start": 902.03,
+      "end": 903.43,
+      "en": "and “The Proud Rooster”",
+      "zh": "和《骄傲的公鸡》",
+      "pinyin": "hé 《jiāo'ào de gōngjī》",
+      "vi": "và 《Chú gà trống kiêu ngạo》"
+    },
+    {
+      "start": 903.47,
+      "end": 905.6,
+      "en": "these two classic bedtime stories,",
+      "zh": "这两个经典的晚安故事，",
+      "pinyin": "zhè liǎng gè jīngdiǎn de wǎn'ān gùshi,",
+      "vi": "hai câu chuyện chúc ngủ ngon kinh điển này,"
+    },
+    {
+      "start": 905.63,
+      "end": 908.8,
+      "en": "we talked together about the topic of “humility.”",
+      "zh": "一起聊了聊关于“谦虚”的话题。",
+      "pinyin": "yīqǐ liáo le liáo guānyú “qiānxū” de huàtí.",
+      "vi": "đã cùng trò chuyện về chủ đề “khiêm tốn”."
+    },
+    {
+      "start": 908.83,
+      "end": 910.63,
+      "en": "Yes, we’ve learned that",
+      "zh": "是的，我们知道了，",
+      "pinyin": "Shì de, wǒmen zhīdào le,",
+      "vi": "Đúng vậy, chúng ta đã biết rằng,"
+    },
+    {
+      "start": 910.67,
+      "end": 913.27,
+      "en": "true humility isn’t denying yourself,",
+      "zh": "真正的谦虚不是否定自己，",
+      "pinyin": "zhēnzhèng de qiānxū bùshì fǒudìng zìjǐ,",
+      "vi": "khiêm tốn thật sự không phải là phủ định bản thân,"
+    },
+    {
+      "start": 913.3,
+      "end": 915.63,
+      "en": "but recognizing the vastness of the world,",
+      "zh": "而是认识到世界的广阔，",
+      "pinyin": "érshì rènshi dào shìjiè de guǎngkuò,",
+      "vi": "mà là nhận ra thế giới rộng lớn,"
+    },
+    {
+      "start": 915.67,
+      "end": 919.27,
+      "en": "and always keeping a heart willing to learn.",
+      "zh": "并且永远保持一颗愿意学习的心。",
+      "pinyin": "bìngqiě yǒngyuǎn bǎochí yī kē yuànyì xuéxí de xīn.",
+      "vi": "và luôn giữ một trái tim sẵn lòng học hỏi."
+    },
+    {
+      "start": 919.3,
+      "end": 921.67,
+      "en": "Right. I hope everyone can remember",
+      "zh": "对。希望大家都能记住",
+      "pinyin": "Duì. Xīwàng dàjiā dōu néng jìzhù",
+      "vi": "Đúng. Hy vọng mọi người đều có thể nhớ"
+    },
+    {
+      "start": 921.7,
+      "end": 924.2,
+      "en": "the most important sentence from us today:",
+      "zh": "我们今天最重要的那句话:",
+      "pinyin": "wǒmen jīntiān zuì zhòngyào de nà jù huà:",
+      "vi": "câu nói quan trọng nhất của chúng ta hôm nay:"
+    },
+    {
+      "start": 924.23,
+      "end": 928.3,
+      "en": "“Humility makes one progress; pride makes one fall behind.”",
+      "zh": "“谦虚使人进步，骄傲使人落后”。",
+      "pinyin": "“Qiānxū shǐ rén jìnbù, jiāo'ào shǐ rén luòhòu”.",
+      "vi": "“Khiêm tốn khiến người ta tiến bộ, kiêu ngạo khiến người ta tụt lại phía sau”."
+    },
+    {
+      "start": 928.33,
+      "end": 930.13,
+      "en": "Let this humble attitude",
+      "zh": "让这种谦虚的态度，",
+      "pinyin": "Ràng zhè zhǒng qiānxū de tàidu,",
+      "vi": "Hãy để thái độ khiêm tốn này,"
+    },
+    {
+      "start": 930.17,
+      "end": 931.94,
+      "en": "accompany us in learning Chinese,",
+      "zh": "陪伴我们学习中文，",
+      "pinyin": "péibàn wǒmen xuéxí Zhōngwén,",
+      "vi": "đồng hành cùng chúng ta khi học tiếng Trung,"
+    },
+    {
+      "start": 931.97,
+      "end": 935.7,
+      "en": "and accompany us through every day of life.",
+      "zh": "也陪伴我们走过人生的每一天。",
+      "pinyin": "yě péibàn wǒmen zǒuguò rénshēng de měi yī tiān.",
+      "vi": "và cũng đồng hành cùng chúng ta qua mỗi ngày của cuộc đời."
+    },
+    {
+      "start": 935.73,
+      "end": 937.1,
+      "en": "Well said!",
+      "zh": "说得太好了！",
+      "pinyin": "Shuō de tài hǎo le!",
+      "vi": "Nói hay quá!"
+    },
+    {
+      "start": 937.13,
+      "end": 939.5,
+      "en": "If you’d like to review today’s content,",
+      "zh": "如果大家想复习今天的内容，",
+      "pinyin": "Rúguǒ dàjiā xiǎng fùxí jīntiān de nèiróng,",
+      "vi": "Nếu mọi người muốn ôn lại nội dung hôm nay,"
+    },
+    {
+      "start": 939.53,
+      "end": 941.9,
+      "en": "or read the complete text of the stories,",
+      "zh": "或者看看故事的完整文本，",
+      "pinyin": "huòzhě kàn kàn gùshi de wánzhěng wénběn,",
+      "vi": "hoặc xem toàn văn của câu chuyện,"
+    },
+    {
+      "start": 941.93,
+      "end": 943.9,
+      "en": "you can check out our blog.",
+      "zh": "可以去我们的博客看看。",
+      "pinyin": "kěyǐ qù wǒmen de bókè kàn kàn.",
+      "vi": "có thể đến blog của chúng tôi xem thử."
+    },
+    {
+      "start": 943.93,
+      "end": 948.26,
+      "en": "The address is chinesedailypodcast.blogspot.com.",
+      "zh": "地址是 chinesedailypodcast.blogspot.com。",
+      "pinyin": "Dìzhǐ shì chinesedailypodcast.blogspot.com.",
+      "vi": "Địa chỉ là chinesedailypodcast.blogspot.com."
+    },
+    {
+      "start": 948.3,
+      "end": 951.33,
+      "en": "Everyone is welcome to read and learn.",
+      "zh": "欢迎大家去阅读和学习。",
+      "pinyin": "Huānyíng dàjiā qù yuèdú hé xuéxí.",
+      "vi": "Mời mọi người đến đọc và học."
+    },
+    {
+      "start": 951.37,
+      "end": 954.54,
+      "en": "So, after hearing today's story, what are your thoughts?",
+      "zh": "那么，听了今天的故事，你有什么想法呢？",
+      "pinyin": "Nàme, tīngle jīntiān de gùshi, nǐ yǒu shénme xiǎngfǎ ne?",
+      "vi": "Vậy sau khi nghe câu chuyện hôm nay, bạn có suy nghĩ gì?"
+    },
+    {
+      "start": 954.57,
+      "end": 956.54,
+      "en": "In your life or studies,",
+      "zh": "在你的生活或者学习中，",
+      "pinyin": "Zài nǐ de shēnghuó huòzhě xuéxí zhōng,",
+      "vi": "Trong cuộc sống hoặc học tập của bạn,"
+    },
+    {
+      "start": 956.57,
+      "end": 959.9,
+      "en": "Have you ever made progress because of humility?",
+      "zh": "有没有因为谦虚而获得进步的经历呢？",
+      "pinyin": "Yǒu méiyǒu yīnwèi qiānxū ér huòdé jìnbù de jīnglì ne?",
+      "vi": "Bạn có trải nghiệm nào về việc nhờ khiêm tốn mà tiến bộ không?"
+    },
+    {
+      "start": 959.93,
+      "end": 963.06,
+      "en": "Or what other stories about humility do you know?",
+      "zh": "或者，你还知道哪些关于谦虚的故事？",
+      "pinyin": "Huòzhě, nǐ hái zhīdào nǎxiē guānyú qiānxū de gùshi?",
+      "vi": "Hoặc bạn còn biết những câu chuyện nào về khiêm tốn?"
+    },
+    {
+      "start": 963.1,
+      "end": 965.2,
+      "en": "Feel free to leave us a comment below,",
+      "zh": "欢迎在下面给我们留言，",
+      "pinyin": "Huānyíng zài xiàmiàn gěi wǒmen liúyán,",
+      "vi": "Mời bạn để lại lời nhắn bên dưới,"
+    },
+    {
+      "start": 965.23,
+      "end": 967.3,
+      "en": "and share your stories and thoughts!",
+      "zh": "分享你的故事和想法！",
+      "pinyin": "Fēnxiǎng nǐ de gùshi hé xiǎngfǎ!",
+      "vi": "chia sẻ câu chuyện và suy nghĩ của bạn!"
+    },
+    {
+      "start": 967.33,
+      "end": 970.33,
+      "en": "We look forward to seeing everyone's shares.",
+      "zh": "我们非常期待看到大家的分享。",
+      "pinyin": "Wǒmen fēicháng qīdài kàndào dàjiā de fēnxiǎng.",
+      "vi": "Chúng tôi rất mong được thấy mọi người chia sẻ."
+    },
+    {
+      "start": 970.37,
+      "end": 973.24,
+      "en": "Alright, that's it for today's 'Chinese Daily'.",
+      "zh": "好了，今天的“每天中文”就到这里。",
+      "pinyin": "Hǎo le, jīntiān de “Měitiān Zhōngwén” jiù dào zhèlǐ.",
+      "vi": "Vậy là, “Mỗi Ngày Tiếng Trung” hôm nay đến đây là hết."
+    },
+    {
+      "start": 973.27,
+      "end": 974.74,
+      "en": "Thank you everyone for listening.",
+      "zh": "感谢大家的收听。",
+      "pinyin": "Gǎnxiè dàjiā de shōutīng.",
+      "vi": "Cảm ơn mọi người đã lắng nghe."
+    },
+    {
+      "start": 974.77,
+      "end": 977.44,
+      "en": "See you next episode! Goodbye!",
+      "zh": "我们下期再见！再见！",
+      "pinyin": "Wǒmen xià qī zàijiàn! Zàijiàn!",
+      "vi": "Hẹn gặp lại các bạn kỳ sau! Tạm biệt!"
+    }
+  ]
+}

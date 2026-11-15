@@ -1,0 +1,977 @@
+{
+  "id": "MYQrQvbR8Vk",
+  "youtubeId": "MYQrQvbR8Vk",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 1–2 | 我的⼀天 My Daily Routine | Learn Everyday Chinese through Real Conversations",
+  "durationSec": 801,
+  "cues": [
+    {
+      "start": 6,
+      "end": 10.63,
+      "en": "Hello everyone! Welcome to a new episode of “Chinese Every Day.” I'm Li Ming.",
+      "zh": "大家好！欢迎收听新一期的《每天中文》。我是李明。",
+      "pinyin": "Dàjiā hǎo! Huānyíng shōutīng xīn yī qī de 《Měitiān Zhōngwén》. Wǒ shì Lǐ Míng.",
+      "vi": "Xin chào mọi người! Chào mừng đến với tập mới của “Mỗi Ngày Tiếng Trung”. Tôi là Lý Minh."
+    },
+    {
+      "start": 11.27,
+      "end": 14.87,
+      "en": "Hello everyone! I'm Wang Yu. Glad to meet you all again!",
+      "zh": "大家好！我是王雨。很高兴又和大家见面了！",
+      "pinyin": "Dàjiā hǎo! Wǒ shì Wáng Yǔ. Hěn gāoxìng yòu hé dàjiā jiànmiàn le!",
+      "vi": "Xin chào mọi người! Tôi là Vương Vũ. Rất vui lại được gặp mọi người!"
+    },
+    {
+      "start": 15.43,
+      "end": 16.26,
+      "en": "Hi Wang Yu!",
+      "zh": "王雨，你好！",
+      "pinyin": "Wáng Yǔ, nǐ hǎo!",
+      "vi": "Chào Vương Vũ!"
+    },
+    {
+      "start": 16.93,
+      "end": 17.63,
+      "en": "Hi Li Ming!",
+      "zh": "李明，你好！",
+      "pinyin": "Lǐ Míng, nǐ hǎo!",
+      "vi": "Chào Lý Minh!"
+    },
+    {
+      "start": 18.3,
+      "end": 20.83,
+      "en": "You look very happy today—did something good happen?",
+      "zh": "你今天看起来很高兴，有什么好事吗？",
+      "pinyin": "Nǐ jīntiān kàn qǐlái hěn gāoxìng, yǒu shénme hǎoshì ma?",
+      "vi": "Hôm nay trông bạn rất vui, có chuyện gì tốt à?"
+    },
+    {
+      "start": 21.43,
+      "end": 23.23,
+      "en": "Haha, nothing special.",
+      "zh": "哈哈，没什么特别的。",
+      "pinyin": "Hāhā, méi shénme tèbié de.",
+      "vi": "Haha, không có gì đặc biệt."
+    },
+    {
+      "start": 23.23,
+      "end": 26.16,
+      "en": "It's just that work went smoothly today, so I'm in a good mood.",
+      "zh": "就是今天工作很顺利，所以心情不错。",
+      "pinyin": "Jiùshì jīntiān gōngzuò hěn shùnlì, suǒyǐ xīnqíng bùcuò.",
+      "vi": "Chỉ là hôm nay công việc thuận lợi, nên tâm trạng khá tốt."
+    },
+    {
+      "start": 26.33,
+      "end": 28.36,
+      "en": "What about you? How was your day?",
+      "zh": "你呢？今天过得怎么样？",
+      "pinyin": "Nǐ ne? Jīntiān guò de zěnmeyàng?",
+      "vi": "Còn bạn? Hôm nay thế nào?"
+    },
+    {
+      "start": 29.03,
+      "end": 32.26,
+      "en": "I was very busy today—I felt time passed especially quickly.",
+      "zh": "我今天非常忙，感觉时间过得特别快。",
+      "pinyin": "Wǒ jīntiān fēicháng máng, gǎnjué shíjiān guò de tèbié kuài.",
+      "vi": "Hôm nay tôi rất bận, cảm thấy thời gian trôi qua đặc biệt nhanh."
+    },
+    {
+      "start": 32.27,
+      "end": 37.94,
+      "en": "When I left home in the morning, it wasn't very light yet; by the time I got home from work in the evening, it was already dark.",
+      "zh": "我早上出门的时候天还没很亮， 晚上下班回家天已经黑了。",
+      "pinyin": "Wǒ zǎoshang chūmén de shíhou tiān hái méi hěn liàng, wǎnshang xiàbān huí jiā tiān yǐjīng hēi le.",
+      "vi": "Lúc tôi ra khỏi nhà buổi sáng trời còn chưa sáng hẳn, đến tối tan làm về nhà thì trời đã tối rồi."
+    },
+    {
+      "start": 38.2,
+      "end": 41.03,
+      "en": "Yeah, that's how a day goes for many people.",
+      "zh": "是啊，很多人的一天都是这样的。",
+      "pinyin": "Shì a, hěn duō rén de yī tiān dōu shì zhèyàng de.",
+      "vi": "Đúng vậy, một ngày của nhiều người đều như thế."
+    },
+    {
+      "start": 41.2,
+      "end": 47,
+      "en": "That makes me think—every day we say “I'm very busy today” or “I'm very tired today,”",
+      "zh": "这让我想到，我们每天都在说“今天很忙”或者“今天很累”，",
+      "pinyin": "Zhè ràng wǒ xiǎngdào, wǒmen měitiān dōu zài shuō “jīntiān hěn máng” huòzhě “jīntiān hěn lèi”,",
+      "vi": "Điều này khiến tôi nghĩ đến việc ngày nào chúng ta cũng nói “hôm nay rất bận” hoặc “hôm nay rất mệt”,"
+    },
+    {
+      "start": 47.27,
+      "end": 50.64,
+      "en": "But what is our day actually like?",
+      "zh": "但是我们的一天具体是什么样的呢？",
+      "pinyin": "Dànshì wǒmen de yī tiān jùtǐ shì shénme yàng de ne?",
+      "vi": "Nhưng một ngày của chúng ta cụ thể như thế nào nhỉ?"
+    },
+    {
+      "start": 50.83,
+      "end": 53.5,
+      "en": "Our listeners are probably curious too.",
+      "zh": "我们的听众朋友们可能也很好奇。",
+      "pinyin": "Wǒmen de tīngzhòng péngyǒumen kěnéng yě hěn hàoqí.",
+      "vi": "Các thính giả của chúng ta có lẽ cũng rất tò mò."
+    },
+    {
+      "start": 53.67,
+      "end": 55.7,
+      "en": "Mm, that's a good idea!",
+      "zh": "嗯，这个主意不错！",
+      "pinyin": "Èn, zhège zhǔyì bùcuò!",
+      "vi": "Ừm, ý kiến này hay đấy!"
+    },
+    {
+      "start": 55.9,
+      "end": 59.1,
+      "en": "Let's talk about “My Day” today!",
+      "zh": "我们今天就来聊一聊“我的一天”吧！",
+      "pinyin": "Wǒmen jīntiān jiù lái liáo yi liáo “wǒ de yī tiān” ba!",
+      "vi": "Hôm nay chúng ta hãy nói về “một ngày của tôi” nhé!"
+    },
+    {
+      "start": 59.13,
+      "end": 63.5,
+      "en": "We can share what an ordinary day for us is like.",
+      "zh": "我们可以分享一下，我们普通的一天是怎么过的。",
+      "pinyin": "Wǒmen kěyǐ fēnxiǎng yīxià, wǒmen pǔtōng de yī tiān shì zěnme guò de.",
+      "vi": "Chúng ta có thể chia sẻ một chút, một ngày bình thường của chúng ta diễn ra thế nào."
+    },
+    {
+      "start": 63.5,
+      "end": 70.33,
+      "en": "Okay, no problem. That way everyone can learn some Chinese words and sentences about daily life.",
+      "zh": "好的，没问题。这样大家也可以学习一些关于日常生活的中文词语和句子。",
+      "pinyin": "Hǎo de, méi wèntí. Zhèyàng dàjiā yě kěyǐ xuéxí yīxiē guānyú rìcháng shēnghuó de Zhōngwén cíyǔ hé jùzi.",
+      "vi": "Được, không vấn đề. Như vậy mọi người cũng có thể học một số từ và câu tiếng Trung về sinh hoạt hàng ngày."
+    },
+    {
+      "start": 70.33,
+      "end": 75.83,
+      "en": "Okay, let's start with the morning. Wang Yu, what time do you usually get up in the morning?",
+      "zh": "好，那我们从早上开始说吧。王雨，你一般早上几点起床？",
+      "pinyin": "Hǎo, nà wǒmen cóng zǎoshang kāishǐ shuō ba. Wáng Yǔ, nǐ yībān zǎoshang jǐ diǎn qǐchuáng?",
+      "vi": "Được, vậy chúng ta bắt đầu nói từ buổi sáng nhé. Vương Vũ, thường thì bạn thức dậy lúc mấy giờ vào buổi sáng?"
+    },
+    {
+      "start": 79.07,
+      "end": 86.6,
+      "en": "I wish I got up at seven every day, but... haha, sometimes I sleep until seven thirty, even eight.",
+      "zh": "我希望我每天七点起床，但是……哈哈，我有时候会睡到七点半，甚至八点。",
+      "pinyin": "Wǒ xīwàng wǒ měitiān qī diǎn qǐchuáng, dànshì…… hāhā, wǒ yǒu shíhou huì shuì dào qī diǎn bàn, shènzhì bā diǎn.",
+      "vi": "Tôi mong mình dậy lúc bảy giờ mỗi ngày, nhưng... haha, có khi tôi ngủ đến bảy giờ rưỡi, thậm chí tám giờ."
+    },
+    {
+      "start": 97.53,
+      "end": 99.96,
+      "en": "I often don't have time to eat breakfast.",
+      "zh": "我常常没有时间吃早饭。",
+      "pinyin": "Wǒ chángcháng méiyǒu shíjiān chī zǎofàn.",
+      "vi": "Tôi thường không có thời gian ăn sáng."
+    },
+    {
+      "start": 131.5,
+      "end": 135.27,
+      "en": "After exercising, your body feels great, and you'll be energetic all day.",
+      "zh": "运动以后，身体会很舒服，一天都会有精神。",
+      "pinyin": "Yùndòng yǐhòu, shēntǐ huì hěn shūfu, yī tiān dōu huì yǒu jīngshén.",
+      "vi": "Sau khi vận động, cơ thể sẽ rất thoải mái, cả ngày đều sẽ tràn đầy tinh thần."
+    },
+    {
+      "start": 141.5,
+      "end": 143.3,
+      "en": "So do you make breakfast yourself?",
+      "zh": "那你自己做早饭吗？",
+      "pinyin": "Nà nǐ zìjǐ zuò zǎofàn ma?",
+      "vi": "Vậy bạn tự làm bữa sáng à?"
+    },
+    {
+      "start": 145.5,
+      "end": 149.07,
+      "en": "Usually it's one egg, a glass of milk, plus a slice of bread.",
+      "zh": "一般是一个鸡蛋，一杯牛奶，再加一片面包。",
+      "pinyin": "Yībān shì yī gè jīdàn, yī bēi niúnǎi, zài jiā yī piàn miànbāo.",
+      "vi": "Thường là một quả trứng, một ly sữa, thêm một lát bánh mì."
+    },
+    {
+      "start": 149.33,
+      "end": 151.96,
+      "en": "It's quick to prepare—just five minutes and it's done.",
+      "zh": "准备起来很快，五分钟就好了。",
+      "pinyin": "Zhǔnbèi qǐlái hěn kuài, wǔ fēnzhōng jiù hǎo le.",
+      "vi": "Chuẩn bị rất nhanh, năm phút là xong."
+    },
+    {
+      "start": 167.13,
+      "end": 171.33,
+      "en": "But there are so many people in the morning—the subway is especially crowded.",
+      "zh": "但是早上人非常多，地铁里特别挤。",
+      "pinyin": "Dànshì zǎoshang rén fēicháng duō, dìtiě lǐ tèbié jǐ.",
+      "vi": "Nhưng buổi sáng rất đông người, trong tàu điện ngầm đặc biệt chật chội."
+    },
+    {
+      "start": 180.67,
+      "end": 184.6,
+      "en": "By the time I get to the office, I often already feel a bit tired.",
+      "zh": "到了公司，我常常觉得已经有点累了。",
+      "pinyin": "Dào le gōngsī, wǒ chángcháng juéde yǐjīng yǒudiǎn lèi le.",
+      "vi": "Đến công ty, tôi thường cảm thấy đã hơi mệt rồi."
+    },
+    {
+      "start": 184.6,
+      "end": 191.53,
+      "en": "Haha, I can understand. Then the longest part of our day is probably working at the company.",
+      "zh": "哈哈，可以理解。那我们的一天中，最长的时间可能就是在公司工作了。",
+      "pinyin": "Hāhā, kěyǐ lǐjiě. Nà wǒmen de yī tiān zhōng, zuì cháng de shíjiān kěnéng jiùshì zài gōngsī gōngzuò le.",
+      "vi": "Haha, có thể hiểu được. Vậy trong một ngày của chúng ta, khoảng thời gian dài nhất có lẽ là làm việc ở công ty."
+    },
+    {
+      "start": 191.53,
+      "end": 193.7,
+      "en": "What do you usually do in the morning?",
+      "zh": "上午你一般都做什么？",
+      "pinyin": "Shàngwǔ nǐ yībān dōu zuò shénme?",
+      "vi": "Buổi sáng bạn thường làm gì?"
+    },
+    {
+      "start": 196.1,
+      "end": 202.27,
+      "en": "So when I get to the office, the first thing I do is turn on the computer and then start working.",
+      "zh": "所以我到了公司，第一件事就是打开电脑，然后开始工作。",
+      "pinyin": "Suǒyǐ wǒ dào le gōngsī, dì yī jiàn shì jiùshì dǎkāi diànnǎo, ránhòu kāishǐ gōngzuò.",
+      "vi": "Vì vậy khi đến công ty, việc đầu tiên tôi làm là mở máy tính, rồi bắt đầu làm việc."
+    },
+    {
+      "start": 202.27,
+      "end": 205.93,
+      "en": "I have to read a lot and write a lot.",
+      "zh": "我要看很多东西，也要写很多东西。",
+      "pinyin": "Wǒ yào kàn hěn duō dōngxi, yě yào xiě hěn duō dōngxi.",
+      "vi": "Tôi phải xem rất nhiều thứ, cũng phải viết rất nhiều thứ."
+    },
+    {
+      "start": 205.93,
+      "end": 208.86,
+      "en": "Sometimes I also have meetings with colleagues.",
+      "zh": "有时候，还要和同事一起开会。",
+      "pinyin": "Yǒu shíhou, hái yào hé tóngshì yīqǐ kāihuì.",
+      "vi": "Có khi còn phải họp cùng đồng nghiệp."
+    },
+    {
+      "start": 215.2,
+      "end": 218.23,
+      "en": "Time passes quickly—before you know it, it's noon.",
+      "zh": "时间过得很快，一转眼就到中午了。",
+      "pinyin": "Shíjiān guò de hěn kuài, yī zhuǎnyǎn jiù dào zhōngwǔ le.",
+      "vi": "Thời gian trôi qua rất nhanh, chớp mắt đã đến trưa."
+    },
+    {
+      "start": 233,
+      "end": 236.57,
+      "en": "So we usually order takeout together with our colleagues.",
+      "zh": "所以我们一般和同事们一起点外卖。",
+      "pinyin": "Suǒyǐ wǒmen yībān hé tóngshìmen yīqǐ diǎn wàimài.",
+      "vi": "Nên chúng tôi thường gọi đồ ăn ngoài cùng đồng nghiệp."
+    },
+    {
+      "start": 236.57,
+      "end": 241.07,
+      "en": "Ordering takeout on a phone is very convenient now—you can have whatever you want.",
+      "zh": "现在用手机点外卖非常方便，想吃什么都可以。",
+      "pinyin": "Xiànzài yòng shǒujī diǎn wàimài fēicháng fāngbiàn, xiǎng chī shénme dōu kěyǐ.",
+      "vi": "Bây giờ dùng điện thoại gọi đồ ăn ngoài rất tiện, muốn ăn gì cũng được."
+    },
+    {
+      "start": 243.23,
+      "end": 247.76,
+      "en": "We can have Chinese food, Japanese food, and dishes from many other countries.",
+      "zh": "我们可以吃到中国菜、日本菜，还有很多别的国家的菜。",
+      "pinyin": "Wǒmen kěyǐ chī dào Zhōngguó cài, Rìběn cài, hái yǒu hěn duō bié de guójiā de cài.",
+      "vi": "Chúng ta có thể ăn món Trung Quốc, món Nhật, và nhiều món của các nước khác."
+    },
+    {
+      "start": 247.77,
+      "end": 249.64,
+      "en": "What do you like to eat?",
+      "zh": "你喜欢吃什么？",
+      "pinyin": "Nǐ xǐhuan chī shénme?",
+      "vi": "Bạn thích ăn gì?"
+    },
+    {
+      "start": 251.83,
+      "end": 255.43,
+      "en": "For example, tomato and egg stir-fry, and a fish.",
+      "zh": "比如西红柿炒鸡蛋，还有一个鱼。",
+      "pinyin": "Bǐrú xīhóngshì chǎo jīdàn, hái yǒu yī gè yú.",
+      "vi": "Ví dụ cà chua xào trứng, và một con cá."
+    },
+    {
+      "start": 255.43,
+      "end": 258.36,
+      "en": "Li Ming, what about you? Do you order takeout too?",
+      "zh": "李明，你呢？你也点外卖吗？",
+      "pinyin": "Lǐ Míng, nǐ ne? Nǐ yě diǎn wàimài ma?",
+      "vi": "Lý Minh, còn bạn? Bạn cũng gọi đồ ăn ngoài à?"
+    },
+    {
+      "start": 259.83,
+      "end": 265.36,
+      "en": "But there are some small restaurants downstairs from our company—the food is good and the prices aren't expensive.",
+      "zh": "但我们公司楼下有一些小饭馆，味道很好，价格也不贵。",
+      "pinyin": "Dàn wǒmen gōngsī lóuxià yǒu yīxiē xiǎo fànguǎn, wèidào hěn hǎo, jiàgé yě bù guì.",
+      "vi": "Nhưng dưới tòa nhà công ty chúng tôi có vài quán ăn nhỏ, món rất ngon, giá cũng không đắt."
+    },
+    {
+      "start": 265.37,
+      "end": 269.34,
+      "en": "So I prefer to go eat at a restaurant with two or three colleagues.",
+      "zh": "所以我更喜欢和两三个同事一起去饭馆吃。",
+      "pinyin": "Suǒyǐ wǒ gèng xǐhuan hé liǎng sān gè tóngshì yīqǐ qù fànguǎn chī.",
+      "vi": "Nên tôi thích cùng hai ba đồng nghiệp đến quán ăn hơn."
+    },
+    {
+      "start": 273.7,
+      "end": 275.97,
+      "en": "How long do you usually take for lunch?",
+      "zh": "你们一般吃多长时间？",
+      "pinyin": "Nǐmen yībān chī duō cháng shíjiān?",
+      "vi": "Các bạn thường ăn trong bao lâu?"
+    },
+    {
+      "start": 281.47,
+      "end": 287.77,
+      "en": "After lunch, some people take a short rest, some have a cup of coffee, and then get ready for the afternoon's work.",
+      "zh": "吃完饭，有的人会休息一会儿，有的人会喝杯咖啡，然后准备下午的工作。",
+      "pinyin": "Chī wán fàn, yǒu de rén huì xiūxi yīhuìr, yǒu de rén huì hē bēi kāfēi, ránhòu zhǔnbèi xiàwǔ de gōngzuò.",
+      "vi": "Sau khi ăn xong, có người sẽ nghỉ một lát, có người sẽ uống một ly cà phê, rồi chuẩn bị cho công việc buổi chiều."
+    },
+    {
+      "start": 302.27,
+      "end": 306.64,
+      "en": "By five thirty or six in the afternoon, we can finally get off work and go home!",
+      "zh": "等到下午五点半、六点，终于可以下班回家了！",
+      "pinyin": "Děng dào xiàwǔ wǔ diǎn bàn, liù diǎn, zhōngyú kěyǐ xiàbān huí jiā le!",
+      "vi": "Đợi đến năm giờ rưỡi, sáu giờ chiều, cuối cùng cũng có thể tan làm về nhà!"
+    },
+    {
+      "start": 321.17,
+      "end": 327.17,
+      "en": "On the way home I like to listen to music, or listen to our podcast “Chinese Every Day.”",
+      "zh": "回家路上我喜欢听音乐， 或者听我们的播客《每天中文》。",
+      "pinyin": "Huí jiā lùshang wǒ xǐhuan tīng yīnyuè, huòzhě tīng wǒmen de bōkè 《Měitiān Zhōngwén》.",
+      "vi": "Trên đường về nhà tôi thích nghe nhạc, hoặc nghe podcast “Mỗi Ngày Tiếng Trung” của chúng ta."
+    },
+    {
+      "start": 335.87,
+      "end": 342.54,
+      "en": "I really like eating food my mom makes. If I get home late, I just make myself some simple noodles.",
+      "zh": "我很喜欢吃妈妈做的菜。如果回家晚了，我就自己做一点简单的面条吃。",
+      "pinyin": "Wǒ hěn xǐhuan chī māma zuò de cài. Rúguǒ huí jiā wǎn le, wǒ jiù zìjǐ zuò yīdiǎn jiǎndān de miàntiáo chī.",
+      "vi": "Tôi rất thích ăn món mẹ nấu. Nếu về nhà muộn, tôi sẽ tự làm chút mì đơn giản để ăn."
+    },
+    {
+      "start": 364.7,
+      "end": 369.47,
+      "en": "I usually make dinner myself—fairly simple, and I eat a little less.",
+      "zh": "晚饭我通常自己做， 做得比较简单，吃得少一点。",
+      "pinyin": "Wǎnfàn wǒ tōngcháng zìjǐ zuò, zuò de bǐjiào jiǎndān, chī de shǎo yīdiǎn.",
+      "vi": "Bữa tối tôi thường tự làm, làm khá đơn giản, ăn ít một chút."
+    },
+    {
+      "start": 386.83,
+      "end": 389.86,
+      "en": "Sometimes I also chat with friends on WeChat.",
+      "zh": "有时候也会用微信和朋友聊聊天。",
+      "pinyin": "Yǒu shíhou yě huì yòng Wēixìn hé péngyou liáoliao tiān.",
+      "vi": "Có khi cũng dùng WeChat trò chuyện với bạn bè."
+    },
+    {
+      "start": 409.53,
+      "end": 414.3,
+      "en": "Reading lets me learn many new things and also calms my mind.",
+      "zh": "看书能让我学到很多新东西， 也让我的心安静下来。",
+      "pinyin": "Kàn shū néng ràng wǒ xué dào hěn duō xīn dōngxi, yě ràng wǒ de xīn ānjìng xiàlái.",
+      "vi": "Đọc sách có thể giúp tôi học được nhiều điều mới, cũng khiến lòng tôi bình yên lại."
+    },
+    {
+      "start": 439.57,
+      "end": 444.64,
+      "en": "Usually I don't go to bed until eleven thirty, sometimes even twelve.",
+      "zh": "一般要到十一点半，有时候甚至十二点才睡觉。",
+      "pinyin": "Yībān yào dào shíyī diǎn bàn, yǒu shíhou shènzhì shí'èr diǎn cái shuìjiào.",
+      "vi": "Thường phải đến mười một giờ rưỡi, có khi thậm chí mười hai giờ mới đi ngủ."
+    },
+    {
+      "start": 457.4,
+      "end": 462.43,
+      "en": "I'll listen to music in bed for a while, and then I'll definitely go to sleep before eleven.",
+      "zh": "我会在床上听一会儿音乐，然后十一点以前一定睡觉。",
+      "pinyin": "Wǒ huì zài chuáng shang tīng yí huìr yīn yuè, rán hòu shí yī diǎn yǐ qián yí dìng shuì jiào.",
+      "vi": "Tôi sẽ nằm trên giường nghe nhạc một lát, sau đó chắc chắn sẽ ngủ trước mười một giờ."
+    },
+    {
+      "start": 462.43,
+      "end": 467.46,
+      "en": "Okay, starting tomorrow, I'll also go to sleep before eleven!",
+      "zh": "好的，从明天开始，我也要十一点以前睡觉！",
+      "pinyin": "Hǎo de, cóng míng tiān kāi shǐ, wǒ yě yào shí yī diǎn yǐ qián shuì jiào!",
+      "vi": "Được, từ ngày mai, tôi cũng sẽ ngủ trước mười một giờ!"
+    },
+    {
+      "start": 498.17,
+      "end": 507.07,
+      "en": "It might be a delicious lunch, time chatting with friends, or a good book.",
+      "zh": "可能是一顿好吃的午饭，可能是一段和朋友聊天的时间，也可能是一本好看的书。",
+      "pinyin": "Kě néng shì yí dùn hǎo chī de wǔ fàn, kě néng shì yí duàn hé péng you liáo tiān de shí jiān, yě kě néng shì yì běn hǎo kàn de shū.",
+      "vi": "Có thể là một bữa trưa ngon, có thể là khoảng thời gian trò chuyện với bạn bè, cũng có thể là một cuốn sách hay."
+    },
+    {
+      "start": 511.83,
+      "end": 515.86,
+      "en": "What time do you get up in the morning? What do you like to do in the evening?",
+      "zh": "你早上几点起床？晚上喜欢做什么？",
+      "pinyin": "Nǐ zǎo shang jǐ diǎn qǐ chuáng? Wǎn shang xǐ huan zuò shén me?",
+      "vi": "Bạn mấy giờ dậy vào buổi sáng? Buổi tối bạn thích làm gì?"
+    },
+    {
+      "start": 515.87,
+      "end": 522.2,
+      "en": "Welcome to leave us a comment in the comments section and share your day with us in Chinese.",
+      "zh": "欢迎在我们的评论区给我们留言，用中文和我们分享你的一天。",
+      "pinyin": "Huān yíng zài wǒ men de píng lùn qū gěi wǒ men liú yán, yòng zhōng wén hé wǒ men fēn xiǎng nǐ de yì tiān.",
+      "vi": "Hoan nghênh để lại bình luận cho chúng tôi ở phần bình luận, dùng tiếng Trung kể cho chúng tôi nghe về một ngày của bạn."
+    },
+    {
+      "start": 522.2,
+      "end": 525.2,
+      "en": "Hmm... this question is a little hard to answer.",
+      "zh": "嗯……这个问题有点难回答。",
+      "pinyin": "Ǹg…… zhè ge wèn tí yǒu diǎn nán huí dá.",
+      "vi": "Hmm... câu hỏi này hơi khó trả lời."
+    },
+    {
+      "start": 525.2,
+      "end": 528.47,
+      "en": "Oh? You sleep until eight? Then can you make it to work on time?",
+      "zh": "哦？睡到八点？那上班来得及吗？",
+      "pinyin": "Ó? Shuì dào bā diǎn? Nà shàng bān lái de jí ma?",
+      "vi": "Ồ? Ngủ đến tám giờ? Vậy đi làm có kịp không?"
+    },
+    {
+      "start": 528.47,
+      "end": 535.7,
+      "en": "So I'm in a hurry! After I get up, I have to wash my face, brush my teeth, and find clothes to wear quickly.",
+      "zh": "所以很着急！我起床以后，要很快地洗脸、刷牙，然后找穿的衣服。",
+      "pinyin": "Suǒ yǐ hěn zháo jí! Wǒ qǐ chuáng yǐ hòu, yào hěn kuài de xǐ liǎn, shuā yá, rán hòu zhǎo chuān de yī fu.",
+      "vi": "Nên rất vội! Sau khi dậy, tôi phải nhanh chóng rửa mặt, đánh răng, rồi tìm quần áo để mặc."
+    },
+    {
+      "start": 535.7,
+      "end": 537.97,
+      "en": "Skipping breakfast isn't very good for your health.",
+      "zh": "不吃早饭对身体不太好啊。",
+      "pinyin": "Bù chī zǎo fàn duì shēn tǐ bú tài hǎo a.",
+      "vi": "Không ăn sáng không tốt cho sức khỏe lắm đâu."
+    },
+    {
+      "start": 537.97,
+      "end": 546.6,
+      "en": "I know, I know. So I'll buy something to eat on the way to the office, like a steamed bun or a cup of soy milk.",
+      "zh": "我知道，我知道。所以我会在去公司的路上买一点吃的，比如一个包子，或者一杯豆浆。",
+      "pinyin": "Wǒ zhī dào, wǒ zhī dào. Suǒ yǐ wǒ huì zài qù gōng sī de lù shang mǎi yì diǎn chī de, bǐ rú yí ge bāo zi, huò zhě yì bēi dòu jiāng.",
+      "vi": "Tôi biết, tôi biết. Nên tôi sẽ mua chút gì đó ăn trên đường đến công ty, ví dụ một cái bánh bao hoặc một cốc sữa đậu nành."
+    },
+    {
+      "start": 546.6,
+      "end": 550.33,
+      "en": "What about you, Li Ming? You look like the kind of person who gets up very early.",
+      "zh": "你呢，李明？你一看就是那种起得很早的人。",
+      "pinyin": "Nǐ ne, Lǐ Míng? Nǐ yí kàn jiù shì nà zhǒng qǐ de hěn zǎo de rén.",
+      "vi": "Còn bạn thì sao, Lý Minh? Nhìn là biết bạn thuộc kiểu người dậy rất sớm."
+    },
+    {
+      "start": 550.33,
+      "end": 555.8,
+      "en": "Haha, you guessed right. I'm used to getting up early. I usually get up at six thirty in the morning.",
+      "zh": "哈哈，你猜对了。我比较习惯早起。我一般早上六点半就起床了。",
+      "pinyin": "Hā hā, nǐ cāi duì le. Wǒ bǐ jiào xí guàn zǎo qǐ. Wǒ yì bān zǎo shang liù diǎn bàn jiù qǐ chuáng le.",
+      "vi": "Haha, bạn đoán đúng rồi. Tôi khá quen dậy sớm. Tôi thường dậy lúc sáu giờ rưỡi sáng."
+    },
+    {
+      "start": 555.8,
+      "end": 559.27,
+      "en": "Six thirty? That early! What do you do after you get up?",
+      "zh": "六点半？那么早！起床以后你做什么？",
+      "pinyin": "Liù diǎn bàn? Nà me zǎo! Qǐ chuáng yǐ hòu nǐ zuò shén me?",
+      "vi": "Sáu giờ rưỡi? Sớm thế! Sau khi dậy bạn làm gì?"
+    },
+    {
+      "start": 559.27,
+      "end": 565.2,
+      "en": "I'll drink a glass of water first, then do some simple exercise at home for about twenty minutes.",
+      "zh": "我会先喝一杯水，然后在家做一点简单的运动，大概二十分钟。",
+      "pinyin": "Wǒ huì xiān hē yì bēi shuǐ, rán hòu zài jiā zuò yì diǎn jiǎn dān de yùn dòng, dà gài èr shí fēn zhōng.",
+      "vi": "Tôi sẽ uống một cốc nước trước, rồi ở nhà tập vài động tác đơn giản, khoảng hai mươi phút."
+    },
+    {
+      "start": 565.2,
+      "end": 571.23,
+      "en": "Wow, so healthy! I really want to learn from you, but I really can't get up in the morning.",
+      "zh": "哇，真健康！我很想向你学习，但是我早上真的起不来。",
+      "pinyin": "Wā, zhēn jiàn kāng! Wǒ hěn xiǎng xiàng nǐ xué xí, dàn shì wǒ zǎo shang zhēn de qǐ bu lái.",
+      "vi": "Wow, thật khỏe mạnh! Tôi rất muốn học theo bạn, nhưng buổi sáng tôi thật sự không dậy nổi."
+    },
+    {
+      "start": 571.23,
+      "end": 573.23,
+      "en": "Yes, my breakfast is very simple.",
+      "zh": "是的，我的早饭很简单。",
+      "pinyin": "Shì de, wǒ de zǎo fàn hěn jiǎn dān.",
+      "vi": "Đúng vậy, bữa sáng của tôi rất đơn giản."
+    },
+    {
+      "start": 573.23,
+      "end": 576.73,
+      "en": "That's nice. After breakfast, how do you get to the office?",
+      "zh": "真好。吃完早饭，你们怎么去公司？",
+      "pinyin": "Zhēn hǎo. Chī wán zǎo fàn, nǐ men zěn me qù gōng sī?",
+      "vi": "Tốt thật. Ăn sáng xong, các bạn đến công ty bằng gì?"
+    },
+    {
+      "start": 576.73,
+      "end": 582.8,
+      "en": "I drive to work. My home is a bit far from the office; driving takes about forty minutes. What about you?",
+      "zh": "我开车上班。我的家离公司有一点远，开车大概要四十分钟。你呢？",
+      "pinyin": "Wǒ kāi chē shàng bān. Wǒ de jiā lí gōng sī yǒu yì diǎn yuǎn, kāi chē dà gài yào sì shí fēn zhōng. Nǐ ne?",
+      "vi": "Tôi lái xe đi làm. Nhà tôi cách công ty hơi xa, lái xe mất khoảng bốn mươi phút. Còn bạn?"
+    },
+    {
+      "start": 582.8,
+      "end": 587.17,
+      "en": "I take the subway. The subway station is right downstairs from my home, so it's very convenient.",
+      "zh": "我坐地铁。我们家楼下就是地铁站，很方便。",
+      "pinyin": "Wǒ zuò dì tiě. Wǒ men jiā lóu xià jiù shì dì tiě zhàn, hěn fāng biàn.",
+      "vi": "Tôi đi tàu điện ngầm. Dưới nhà tôi chính là ga tàu điện ngầm, rất tiện."
+    },
+    {
+      "start": 587.17,
+      "end": 592.9,
+      "en": "Yes, the Beijing subway is crowded both morning and evening. The commute to work is also hard.",
+      "zh": "是的，北京的地铁，早上和晚上人都很多。上班的路也很辛苦。",
+      "pinyin": "Shì de, Běijīng de dì tiě, zǎo shang hé wǎn shang rén dōu hěn duō. Shàng bān de lù yě hěn xīn kǔ.",
+      "vi": "Đúng vậy, tàu điện ngầm ở Bắc Kinh, sáng và tối đều rất đông người. Đường đi làm cũng vất vả."
+    },
+    {
+      "start": 592.9,
+      "end": 595.93,
+      "en": "Right, every morning is like a “battle.”",
+      "zh": "对，每天早上都像一场“战斗”。",
+      "pinyin": "Duì, měi tiān zǎo shang dōu xiàng yì chǎng “zhàn dòu”.",
+      "vi": "Đúng, mỗi sáng đều giống như một “trận chiến”."
+    },
+    {
+      "start": 595.93,
+      "end": 598.06,
+      "en": "My job requires using a computer.",
+      "zh": "我的工作需要用电脑。",
+      "pinyin": "Wǒ de gōng zuò xū yào yòng diàn nǎo.",
+      "vi": "Công việc của tôi cần dùng máy tính."
+    },
+    {
+      "start": 598.06,
+      "end": 604.39,
+      "en": "My job is about the same. Most of the time I'm looking at a computer, replying to emails, and making phone calls.",
+      "zh": "我的工作也差不多。大部分时间都在看电脑，回复邮件，还有打电话。",
+      "pinyin": "Wǒ de gōng zuò yě chà bu duō. Dà bù fen shí jiān dōu zài kàn diàn nǎo, huí fù yóu jiàn, hái yǒu dǎ diàn huà.",
+      "vi": "Công việc của tôi cũng gần như vậy. Phần lớn thời gian đều nhìn máy tính, trả lời email, và gọi điện."
+    },
+    {
+      "start": 604.39,
+      "end": 610.12,
+      "en": "Right! Speaking of noon, here comes the question I care about most: what are we eating for lunch today?",
+      "zh": "对！说到中午，我最关心的问题来了：今天中午吃什么？",
+      "pinyin": "Duì! Shuō dào zhōng wǔ, wǒ zuì guān xīn de wèn tí lái le: jīn tiān zhōng wǔ chī shén me?",
+      "vi": "Đúng! Nói đến buổi trưa, câu hỏi tôi quan tâm nhất đã đến: trưa nay ăn gì?"
+    },
+    {
+      "start": 610.12,
+      "end": 615.55,
+      "en": "Haha, this is the most important question every day. How do you eat lunch? Do you eat at the office?",
+      "zh": "哈哈，这是每天最重要的一个问题。你们中午怎么吃饭？是在公司吃吗？",
+      "pinyin": "Hā hā, zhè shì měi tiān zuì zhòng yào de yí ge wèn tí. Nǐ men zhōng wǔ zěn me chī fàn? Shì zài gōng sī chī ma?",
+      "vi": "Haha, đây là câu hỏi quan trọng nhất mỗi ngày. Các bạn ăn trưa thế nào? Ăn ở công ty à?"
+    },
+    {
+      "start": 615.55,
+      "end": 617.78,
+      "en": "Our company doesn't have a cafeteria.",
+      "zh": "我们公司没有食堂。",
+      "pinyin": "Wǒ men gōng sī méi yǒu shí táng.",
+      "vi": "Công ty chúng tôi không có căng tin."
+    },
+    {
+      "start": 617.78,
+      "end": 619.95,
+      "en": "Yes, ordering takeout is very popular.",
+      "zh": "是的，点外卖很流行。",
+      "pinyin": "Shì de, diǎn wài mài hěn liú xíng.",
+      "vi": "Đúng vậy, đặt đồ ăn giao về rất phổ biến."
+    },
+    {
+      "start": 619.95,
+      "end": 622.15,
+      "en": "I like eating rice and dishes.",
+      "zh": "我喜欢吃米饭和菜。",
+      "pinyin": "Wǒ xǐ huan chī mǐ fàn hé cài.",
+      "vi": "Tôi thích ăn cơm với thức ăn."
+    },
+    {
+      "start": 622.15,
+      "end": 623.62,
+      "en": "Sometimes I order takeout.",
+      "zh": "我有时候点外卖。",
+      "pinyin": "Wǒ yǒu shí hou diǎn wài mài.",
+      "vi": "Thỉnh thoảng tôi đặt đồ ăn giao về."
+    },
+    {
+      "start": 623.62,
+      "end": 627.99,
+      "en": "Eating at a restaurant is also nice; you can leave the office and take a break.",
+      "zh": "去饭馆吃也不错，可以离开办公室休息一下。",
+      "pinyin": "Qù fàn guǎn chī yě bú cuò, kě yǐ lí kāi bàn gōng shì xiū xi yí xià.",
+      "vi": "Đến quán ăn cũng không tệ, có thể rời văn phòng nghỉ ngơi một chút."
+    },
+    {
+      "start": 627.99,
+      "end": 633.26,
+      "en": "We usually go to eat at twelve, eat for an hour, and get back to the office around one.",
+      "zh": "我们一般十二点去吃饭，吃一个小时，一点左右回公司。",
+      "pinyin": "Wǒ men yì bān shí èr diǎn qù chī fàn, chī yí ge xiǎo shí, yì diǎn zuǒ yòu huí gōng sī.",
+      "vi": "Chúng tôi thường đi ăn lúc mười hai giờ, ăn một tiếng, khoảng một giờ về công ty."
+    },
+    {
+      "start": 633.26,
+      "end": 639.89,
+      "en": "Me too! I have to have a cup of coffee in the afternoon. If I don't drink coffee, I'll feel sleepy.",
+      "zh": "我也是！我下午必须喝一杯咖啡。不喝咖啡，我就会想睡觉。",
+      "pinyin": "Wǒ yě shì! Wǒ xià wǔ bì xū hē yì bēi kā fēi. Bù hē kā fēi, wǒ jiù huì xiǎng shuì jiào.",
+      "vi": "Tôi cũng vậy! Buổi chiều tôi nhất định phải uống một cốc cà phê. Không uống cà phê là tôi sẽ buồn ngủ."
+    },
+    {
+      "start": 639.89,
+      "end": 647.56,
+      "en": "Haha, many people are like that. The afternoon work hours are about the same as the morning, but it feels a bit more tiring.",
+      "zh": "哈哈，很多人都这样。下午的工作时间和上午差不多，但是感觉会更累一点。",
+      "pinyin": "Hā hā, hěn duō rén dōu zhè yàng. Xià wǔ de gōng zuò shí jiān hé shàng wǔ chà bu duō, dàn shì gǎn jué huì gèng lèi yì diǎn.",
+      "vi": "Haha, nhiều người đều như vậy. Thời gian làm việc buổi chiều cũng giống buổi sáng, nhưng cảm thấy mệt hơn một chút."
+    },
+    {
+      "start": 647.56,
+      "end": 650.66,
+      "en": "Yes! Getting off work is the happiest time!",
+      "zh": "是的！下班的时候最高兴了！",
+      "pinyin": "Shì de! Xià bān de shí hou zuì gāo xìng le!",
+      "vi": "Đúng vậy! Lúc tan làm là vui nhất!"
+    },
+    {
+      "start": 650.66,
+      "end": 654.36,
+      "en": "After work, what do you usually do? Do you go home right away?",
+      "zh": "下班以后，你一般做什么？是马上回家吗？",
+      "pinyin": "Xià bān yǐ hòu, nǐ yì bān zuò shén me? Shì mǎ shàng huí jiā ma?",
+      "vi": "Sau khi tan làm, bạn thường làm gì? Có về nhà ngay không?"
+    },
+    {
+      "start": 654.36,
+      "end": 661.39,
+      "en": "Um, most of the time I go straight home. Because after working all day I'm tired and want to get home to rest quickly.",
+      "zh": "嗯，大部分时候是直接回家。因为工作一天很累了，想快点回家休息。",
+      "pinyin": "Ǹg, dà bù fen shí hou shì zhí jiē huí jiā. Yīn wèi gōng zuò yì tiān hěn lèi le, xiǎng kuài diǎn huí jiā xiū xi.",
+      "vi": "Ừm, phần lớn thời gian là về thẳng nhà. Vì làm việc cả ngày rất mệt, muốn nhanh chóng về nhà nghỉ ngơi."
+    },
+    {
+      "start": 661.39,
+      "end": 663.19,
+      "en": "Haha, thanks for your support.",
+      "zh": "哈哈，谢谢你的支持。",
+      "pinyin": "Hā hā, xiè xie nǐ de zhī chí.",
+      "vi": "Haha, cảm ơn bạn đã ủng hộ."
+    },
+    {
+      "start": 663.19,
+      "end": 665.22,
+      "en": "So how do you handle dinner?",
+      "zh": "那你晚饭怎么解决？",
+      "pinyin": "Nà nǐ wǎn fàn zěn me jiě jué?",
+      "vi": "Vậy bạn giải quyết bữa tối thế nào?"
+    },
+    {
+      "start": 665.22,
+      "end": 669.39,
+      "en": "If I get home early, my mom will have dinner ready and waiting for me.",
+      "zh": "如果我回家早，我妈妈会做好晚饭等我。",
+      "pinyin": "Rú guǒ wǒ huí jiā zǎo, wǒ mā ma huì zuò hǎo wǎn fàn děng wǒ.",
+      "vi": "Nếu tôi về nhà sớm, mẹ tôi sẽ làm sẵn bữa tối đợi tôi."
+    },
+    {
+      "start": 669.39,
+      "end": 671.62,
+      "en": "Eating dinner with family feels really good.",
+      "zh": "和家人一起吃晚饭，感觉真好。",
+      "pinyin": "Hé jiā rén yì qǐ chī wǎn fàn, gǎn jué zhēn hǎo.",
+      "vi": "Cùng ăn tối với gia đình, cảm giác thật tốt."
+    },
+    {
+      "start": 671.62,
+      "end": 674.65,
+      "en": "Yeah. What about you? What do you do after work?",
+      "zh": "是啊。你呢？你下班以后做什么？",
+      "pinyin": "Shì a. Nǐ ne? Nǐ xià bān yǐ hòu zuò shén me?",
+      "vi": "Đúng vậy. Còn bạn? Sau khi tan làm bạn làm gì?"
+    },
+    {
+      "start": 674.65,
+      "end": 680.38,
+      "en": "After work, if I'm not tired, I sometimes go to the gym and exercise for an hour.",
+      "zh": "我下班后，如果不累的话，有时候会去健身房运动一个小时。",
+      "pinyin": "Wǒ xià bān hòu, rú guǒ bú lèi de huà, yǒu shí hou huì qù jiàn shēn fáng yùn dòng yí ge xiǎo shí.",
+      "vi": "Sau khi tan làm, nếu không mệt, thỉnh thoảng tôi sẽ đến phòng gym tập thể dục một tiếng."
+    },
+    {
+      "start": 680.38,
+      "end": 685.78,
+      "en": "Wow! You exercise in the morning and again after work. You're amazing!",
+      "zh": "哇！你早上运动，晚上下班了还运动。你太厉害了！",
+      "pinyin": "Wā! Nǐ zǎo shang yùn dòng, wǎn shang xià bān le hái yùn dòng. Nǐ tài lì hai le!",
+      "vi": "Wow! Sáng bạn tập thể dục, tối tan làm rồi còn tập nữa. Bạn giỏi quá!"
+    },
+    {
+      "start": 685.78,
+      "end": 690.21,
+      "en": "Haha, it's just a habit. After exercising and going home, I feel very relaxed.",
+      "zh": "哈哈，只是一个习惯。运动完回家，感觉很放松。",
+      "pinyin": "Hā hā, zhǐ shì yí ge xí guàn. Yùn dòng wán huí jiā, gǎn jué hěn fàng sōng.",
+      "vi": "Haha, chỉ là một thói quen thôi. Tập xong về nhà, cảm thấy rất thư giãn."
+    },
+    {
+      "start": 690.21,
+      "end": 696.48,
+      "en": "Okay. So from after dinner until bedtime, what do you usually do during this time?",
+      "zh": "好的。那吃完晚饭，到睡觉以前，这段时间你们会做什么？",
+      "pinyin": "Hǎo de. Nà chī wán wǎn fàn, dào shuì jiào yǐ qián, zhè duàn shí jiān nǐ men huì zuò shén me?",
+      "vi": "Được. Vậy sau bữa tối đến trước khi đi ngủ, khoảng thời gian này các bạn thường làm gì?"
+    },
+    {
+      "start": 696.48,
+      "end": 699.41,
+      "en": "This is probably the most relaxing time of my day.",
+      "zh": "这可能是我一天中最放松的时间了。",
+      "pinyin": "Zhè kě néng shì wǒ yì tiān zhōng zuì fàng sōng de shí jiān le.",
+      "vi": "Đây có lẽ là thời gian thư giãn nhất trong ngày của tôi."
+    },
+    {
+      "start": 699.41,
+      "end": 707.11,
+      "en": "Of course! I'll sit on the sofa, watch TV, or scroll through Douyin on my phone to see what my friends did today.",
+      "zh": "当然！我会坐在沙发上，看看电视，或者用手机刷刷抖音，看看朋友们今天都做了什么。",
+      "pinyin": "Dāng rán! Wǒ huì zuò zài shā fā shang, kàn kan diàn shì, huò zhě yòng shǒu jī shuā shua Dǒuyīn, kàn kan péng you men jīn tiān dōu zuò le shén me.",
+      "vi": "Tất nhiên! Tôi sẽ ngồi trên sofa, xem tivi, hoặc dùng điện thoại lướt TikTok, xem hôm nay bạn bè đã làm những gì."
+    },
+    {
+      "start": 707.11,
+      "end": 716.54,
+      "en": "Yeah, that sounds very relaxing. I don't really like looking at my phone in the evening, because I've looked at a computer all day and my eyes are tired. I like reading.",
+      "zh": "嗯，这听起来很放松。我晚上不太喜欢看手机，因为看一天电脑了，眼睛很累。我喜欢看书。",
+      "pinyin": "Ǹg, zhè tīng qǐ lái hěn fàng sōng. Wǒ wǎn shang bú tài xǐ huan kàn shǒu jī, yīn wèi kàn yì tiān diàn nǎo le, yǎn jing hěn lèi. Wǒ xǐ huan kàn shū.",
+      "vi": "Ừm, nghe có vẻ rất thư giãn. Buổi tối tôi không thích xem điện thoại lắm, vì đã nhìn máy tính cả ngày, mắt rất mệt. Tôi thích đọc sách."
+    },
+    {
+      "start": 716.54,
+      "end": 719.57,
+      "en": "Reading? That's really a good habit. What kinds of books do you read?",
+      "zh": "看书？真是一个好习惯。你都看什么书？",
+      "pinyin": "Kàn shū? Zhēn shì yí ge hǎo xí guàn. Nǐ dōu kàn shén me shū?",
+      "vi": "Đọc sách? Đúng là một thói quen tốt. Bạn thường đọc những sách gì?"
+    },
+    {
+      "start": 719.57,
+      "end": 725.3,
+      "en": "I read many kinds of books. Sometimes I read Chinese history, and sometimes I also read novels.",
+      "zh": "我看很多种书。有时候看中国的历史，有时候也看一些小说。",
+      "pinyin": "Wǒ kàn hěn duō zhǒng shū. Yǒu shí hou kàn Zhōngguó de lì shǐ, yǒu shí hou yě kàn yì xiē xiǎo shuō.",
+      "vi": "Tôi đọc nhiều loại sách. Có lúc đọc lịch sử Trung Quốc, có lúc cũng đọc một số tiểu thuyết."
+    },
+    {
+      "start": 725.3,
+      "end": 733.73,
+      "en": "That's great. Actually, I've bought a lot of books too, but I rarely have time to read them. They're all sleeping in my room.",
+      "zh": "真不错。其实我也买了很多书，但是很少有时间看。它们都在我的房间里睡觉呢。",
+      "pinyin": "Zhēn bùcuò. Qíshí wǒ yě mǎi le hěn duō shū, dànshì hěn shǎo yǒu shíjiān kàn. Tāmen dōu zài wǒ de fángjiān lǐ shuìjiào ne.",
+      "vi": "Hay thật đấy. Thực ra tôi cũng mua nhiều sách, nhưng rất ít khi có thời gian đọc. Chúng đều đang ngủ trong phòng tôi kìa."
+    },
+    {
+      "start": 733.73,
+      "end": 737.13,
+      "en": "Haha, you can read a little every day, like ten pages.",
+      "zh": "哈哈，可以每天看一点点，比如看十页。",
+      "pinyin": "Hāhā, kěyǐ měitiān kàn yìdiǎndiǎn, bǐrú kàn shí yè.",
+      "vi": "Haha, có thể mỗi ngày đọc một chút, ví dụ mười trang."
+    },
+    {
+      "start": 737.13,
+      "end": 741.1,
+      "en": "Okay, then one last question: what time do you go to bed every night?",
+      "zh": "好了，那最后一个问题，你每天晚上几点睡觉？",
+      "pinyin": "Hǎo le, nà zuìhòu yí ge wèntí, nǐ měitiān wǎnshang jǐ diǎn shuìjiào?",
+      "vi": "Được rồi, vậy câu hỏi cuối cùng: mỗi tối bạn đi ngủ lúc mấy giờ?"
+    },
+    {
+      "start": 741.1,
+      "end": 749,
+      "en": "I always tell myself to go to bed early. But I often watch TV or play on my phone and forget the time.",
+      "zh": "我总是告诉自己要早点睡。但是我常常看着电视或者玩着手机，就忘了时间。",
+      "pinyin": "Wǒ zǒngshì gàosu zìjǐ yào zǎodiǎn shuì. Dànshì wǒ chángcháng kàn zhe diànshì huòzhě wán zhe shǒujī, jiù wàng le shíjiān.",
+      "vi": "Tôi luôn tự nhắc mình phải ngủ sớm. Nhưng tôi thường xem tivi hoặc nghịch điện thoại rồi quên mất thời gian."
+    },
+    {
+      "start": 749,
+      "end": 751,
+      "en": "You must be very sleepy the next morning, right?",
+      "zh": "这样第二天早上会很困吧？",
+      "pinyin": "Zhèyàng dì èr tiān zǎoshang huì hěn kùn ba?",
+      "vi": "Như vậy sáng hôm sau sẽ rất buồn ngủ nhỉ?"
+    },
+    {
+      "start": 751,
+      "end": 755.6,
+      "en": "Yeah! That's why I can't get up in the morning. You must go to bed very early, right?",
+      "zh": "是啊！所以我早上起不来。你肯定睡得很早吧？",
+      "pinyin": "Shì a! Suǒyǐ wǒ zǎoshang qǐ bù lái. Nǐ kěndìng shuì de hěn zǎo ba?",
+      "vi": "Đúng vậy! Nên sáng tôi không dậy nổi. Chắc bạn ngủ rất sớm nhỉ?"
+    },
+    {
+      "start": 755.6,
+      "end": 760.87,
+      "en": "Right. To feel energetic the next day, I usually get ready for bed at half past ten.",
+      "zh": "对，为了第二天有好的精神，我一般十点半就准备睡觉了。",
+      "pinyin": "Duì, wèile dì èr tiān yǒu hǎo de jīngshén, wǒ yìbān shí diǎn bàn jiù zhǔnbèi shuìjiào le.",
+      "vi": "Đúng, để hôm sau có tinh thần tốt, tôi thường chuẩn bị đi ngủ từ mười giờ rưỡi."
+    },
+    {
+      "start": 760.87,
+      "end": 763.2,
+      "en": "Haha, I hope you can do it.",
+      "zh": "哈哈，希望你能做到。",
+      "pinyin": "Hāhā, xīwàng nǐ néng zuò dào.",
+      "vi": "Haha, mong là bạn làm được."
+    },
+    {
+      "start": 763.2,
+      "end": 765.33,
+      "en": "Okay, it's almost time.",
+      "zh": "好了，时间差不多了。",
+      "pinyin": "Hǎo le, shíjiān chàbuduō le.",
+      "vi": "Được rồi, thời gian cũng gần hết rồi."
+    },
+    {
+      "start": 765.33,
+      "end": 771.03,
+      "en": "Today we talked about each of our days, from getting up in the morning to going to bed at night.",
+      "zh": "今天我们聊了聊我们各自的一天，从早上起床，到晚上睡觉。",
+      "pinyin": "Jīntiān wǒmen liáo le liáo wǒmen gèzì de yì tiān, cóng zǎoshang qǐchuáng, dào wǎnshang shuìjiào.",
+      "vi": "Hôm nay chúng ta đã trò chuyện về một ngày của mỗi người, từ sáng thức dậy đến tối đi ngủ."
+    },
+    {
+      "start": 771.03,
+      "end": 774.33,
+      "en": "Yeah, it sounds like our days are very different.",
+      "zh": "是啊，听起来我们的一天很不一样。",
+      "pinyin": "Shì a, tīng qǐlái wǒmen de yì tiān hěn bù yíyàng.",
+      "vi": "Đúng vậy, nghe có vẻ một ngày của chúng ta rất khác nhau."
+    },
+    {
+      "start": 774.33,
+      "end": 777.56,
+      "en": "Li Ming, your lifestyle is very healthy and regular.",
+      "zh": "李明，你的生活非常健康，有规律。",
+      "pinyin": "Lǐ Míng, nǐ de shēnghuó fēicháng jiànkāng, yǒu guīlǜ.",
+      "vi": "Lý Minh, cuộc sống của bạn rất lành mạnh và có quy luật."
+    },
+    {
+      "start": 777.56,
+      "end": 779.69,
+      "en": "As for me, mine is a bit messy, haha.",
+      "zh": "我呢，就有一点乱，哈哈。",
+      "pinyin": "Wǒ ne, jiù yǒu yìdiǎn luàn, hāhā.",
+      "vi": "Còn tôi thì hơi lộn xộn một chút, haha."
+    },
+    {
+      "start": 779.69,
+      "end": 783.52,
+      "en": "No, no, everyone's lifestyle is different.",
+      "zh": "没有没有，每个人的生活方式都不一样。",
+      "pinyin": "Méiyǒu méiyǒu, měi ge rén de shēnghuó fāngshì dōu bù yíyàng.",
+      "vi": "Không có đâu, không có đâu, cách sống của mỗi người đều khác nhau."
+    },
+    {
+      "start": 783.52,
+      "end": 788.09,
+      "en": "What matters is that we can find our own happiness in a busy day.",
+      "zh": "重要的是，我们能在忙碌的一天里找到自己的快乐。",
+      "pinyin": "Zhòngyào de shì, wǒmen néng zài mánglù de yì tiān lǐ zhǎodào zìjǐ de kuàilè.",
+      "vi": "Quan trọng là chúng ta có thể tìm thấy niềm vui của riêng mình trong một ngày bận rộn."
+    },
+    {
+      "start": 788.09,
+      "end": 792.86,
+      "en": "You're right. Dear listeners, what is your day like?",
+      "zh": "你说得对。听众朋友们，你们的一天是什么样的呢？",
+      "pinyin": "Nǐ shuō de duì. Tīngzhòng péngyǒumen, nǐmen de yì tiān shì shénme yàng de ne?",
+      "vi": "Bạn nói đúng. Các thính giả thân mến, một ngày của các bạn là như thế nào?"
+    },
+    {
+      "start": 792.86,
+      "end": 794.76,
+      "en": "We really look forward to your shares.",
+      "zh": "我们很期待看到你们的分享。",
+      "pinyin": "Wǒmen hěn qīdài kàndào nǐmen de fēnxiǎng.",
+      "vi": "Chúng tôi rất mong thấy những chia sẻ của các bạn."
+    },
+    {
+      "start": 794.76,
+      "end": 799.49,
+      "en": "Okay, that's all for this episode of 'Daily Chinese.' Thank you all for listening.",
+      "zh": "好了，这期《每天中文》就到这里。感谢大家的收听。",
+      "pinyin": "Hǎo le, zhè qī 《Měitiān Zhōngwén》 jiù dào zhèlǐ. Gǎnxiè dàjiā de tīngshōu.",
+      "vi": "Được rồi, tập 《Mỗi Ngày Tiếng Trung》 này đến đây là hết. Cảm ơn mọi người đã lắng nghe."
+    },
+    {
+      "start": 799.49,
+      "end": 800.42,
+      "en": "See you next episode!",
+      "zh": "我们下期再见！",
+      "pinyin": "Wǒmen xià qī zàijiàn!",
+      "vi": "Hẹn gặp lại vào tập sau!"
+    },
+    {
+      "start": 800.42,
+      "end": 800.75,
+      "en": "Goodbye!",
+      "zh": "再见！",
+      "pinyin": "Zàijiàn!",
+      "vi": "Tạm biệt!"
+    },
+    {
+      "start": 800.75,
+      "end": 800.92,
+      "en": "Bye-bye!",
+      "zh": "拜拜！",
+      "pinyin": "Bāibāi!",
+      "vi": "Bye bye!"
+    }
+  ]
+}

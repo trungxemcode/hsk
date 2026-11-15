@@ -1,0 +1,3265 @@
+{
+  "id": "cDwz6q9x9Dg",
+  "youtubeId": "cDwz6q9x9Dg",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "所有的相遇，都是有原因的 | Everyone You Meet Comes for a Reason | Chinese Daily Podcast",
+  "durationSec": 1097,
+  "cues": [
+    {
+      "start": 7.43,
+      "end": 11,
+      "en": "Hello everyone, welcome to a new episode of 'Daily Chinese',",
+      "zh": "大家好，欢迎收听新一期的“每天中文”，",
+      "pinyin": "Dàjiā hǎo, huānyíng shōutīng xīn yì qī de “Měitiān Zhōngwén”,",
+      "vi": "Chào mọi người, chào mừng đến với tập mới của 'Mỗi Ngày Tiếng Trung',"
+    },
+    {
+      "start": 11.03,
+      "end": 12,
+      "en": "I'm Li Ming.",
+      "zh": "我是李明。",
+      "pinyin": "Wǒ shì Lǐ Míng.",
+      "vi": "Mình là Lý Minh."
+    },
+    {
+      "start": 12.03,
+      "end": 13.03,
+      "en": "Hello everyone, I'm Wang Yu.",
+      "zh": "大家好，我是王雨。",
+      "pinyin": "Dàjiā hǎo, wǒ shì Wáng Yǔ.",
+      "vi": "Chào mọi người, mình là Vương Vũ."
+    },
+    {
+      "start": 13.07,
+      "end": 14.84,
+      "en": "I'm very happy to see everyone again!",
+      "zh": "很高兴又和大家见面了！",
+      "pinyin": "Hěn gāoxìng yòu hé dàjiā jiànmiàn le!",
+      "vi": "Rất vui lại được gặp mọi người!"
+    },
+    {
+      "start": 14.87,
+      "end": 16.04,
+      "en": "Yes, and today",
+      "zh": "是的，而且今天",
+      "pinyin": "Shì de, érqiě jīntiān",
+      "vi": "Đúng vậy, và hôm nay"
+    },
+    {
+      "start": 16.07,
+      "end": 18.94,
+      "en": "we have a brand-new series to bring to everyone.",
+      "zh": "我们有一个全新的系列要带给大家。",
+      "pinyin": "Wǒmen yǒu yí gè quánxīn de xìliè yào dài gěi dàjiā.",
+      "vi": "chúng ta có một series hoàn toàn mới muốn mang đến cho mọi người."
+    },
+    {
+      "start": 18.97,
+      "end": 21.24,
+      "en": "Wang Yu, are you as excited as I am?",
+      "zh": "王雨，你是不是也和我一样兴奋？",
+      "pinyin": "Wáng Yǔ, nǐ shì bù shì yě hé wǒ yíyàng xīngfèn?",
+      "vi": "Vương Vũ, cậu có hào hứng giống mình không?"
+    },
+    {
+      "start": 21.27,
+      "end": 22.07,
+      "en": "Of course!",
+      "zh": "当然！",
+      "pinyin": "Dāngrán!",
+      "vi": "Tất nhiên rồi!"
+    },
+    {
+      "start": 22.1,
+      "end": 25.23,
+      "en": "I especially like the idea for our new series.",
+      "zh": "我特别喜欢我们这个新系列的想法。",
+      "pinyin": "Wǒ tèbié xǐhuan wǒmen zhège xīn xìliè de xiǎngfǎ.",
+      "vi": "Mình đặc biệt thích ý tưởng về series mới này của chúng ta."
+    },
+    {
+      "start": 25.27,
+      "end": 27.17,
+      "en": "It feels like it will spark a lot of thinking.",
+      "zh": "感觉会引发很多思考。",
+      "pinyin": "Gǎnjué huì yǐnfā hěn duō sīkǎo.",
+      "vi": "Cảm giác nó sẽ gợi ra nhiều suy nghĩ."
+    },
+    {
+      "start": 27.17,
+      "end": 27.84,
+      "en": "Exactly.",
+      "zh": "没错。",
+      "pinyin": "Méicuò.",
+      "vi": "Đúng thế."
+    },
+    {
+      "start": 27.87,
+      "end": 31.87,
+      "en": "This new series is called 'Four Rules of Life'.",
+      "zh": "这个新系列的名字叫做“生活的四个规则”。",
+      "pinyin": "Zhège xīn xìliè de míngzi jiào zuò “Shēnghuó de Sì gè Guīzé”.",
+      "vi": "Tên của series mới này là 'Bốn quy tắc của cuộc sống'."
+    },
+    {
+      "start": 31.9,
+      "end": 34.1,
+      "en": "We'll use four episodes",
+      "zh": "我们会用四期节目的时间，",
+      "pinyin": "Wǒmen huì yòng sì qī jiémù de shíjiān,",
+      "vi": "Chúng ta sẽ dùng thời gian của bốn tập"
+    },
+    {
+      "start": 34.13,
+      "end": 36.7,
+      "en": "to explore with everyone four simple",
+      "zh": "和大家一起探讨四个简单",
+      "pinyin": "Hé dàjiā yìqǐ tàntǎo sì gè jiǎndān",
+      "vi": "cùng mọi người bàn về bốn điều đơn giản"
+    },
+    {
+      "start": 36.73,
+      "end": 39.6,
+      "en": "but very powerful life philosophies.",
+      "zh": "但非常有力量的生活哲学。",
+      "pinyin": "dàn fēicháng yǒu lìliàng de shēnghuó zhéxué.",
+      "vi": "nhưng vô cùng mạnh mẽ trong triết lý sống."
+    },
+    {
+      "start": 39.63,
+      "end": 43.3,
+      "en": "They can help us better understand ourselves and understand life,",
+      "zh": "它们能帮助我们更好地理解自己，理解生活，",
+      "pinyin": "Tāmen néng bāngzhù wǒmen gèng hǎo de lǐjiě zìjǐ, lǐjiě shēnghuó,",
+      "vi": "Chúng có thể giúp chúng ta hiểu bản thân và hiểu cuộc sống tốt hơn,"
+    },
+    {
+      "start": 43.33,
+      "end": 45,
+      "en": "and understand our relationships with others.",
+      "zh": "理解我们和别人的关系。",
+      "pinyin": "lǐjiě wǒmen hé biérén de guānxì.",
+      "vi": "hiểu mối quan hệ giữa chúng ta và người khác."
+    },
+    {
+      "start": 45.03,
+      "end": 46.6,
+      "en": "Yes, this series",
+      "zh": "是的，这个系列",
+      "pinyin": "Shì de, zhège xìliè",
+      "vi": "Đúng vậy, series này"
+    },
+    {
+      "start": 46.63,
+      "end": 49.83,
+      "en": "is like a little guide in our daily lives.",
+      "zh": "就像是我们日常生活中的小指南。",
+      "pinyin": "Jiù xiàng shì wǒmen rìcháng shēnghuó zhōng de xiǎo zhǐnán.",
+      "vi": "giống như một cuốn cẩm nang nhỏ trong cuộc sống hằng ngày của chúng ta."
+    },
+    {
+      "start": 49.87,
+      "end": 51.87,
+      "en": "Today, we'll start with the first,",
+      "zh": "今天，我们就从第一个，",
+      "pinyin": "Jīntiān, wǒmen jiù cóng dì yī gè,",
+      "vi": "Hôm nay, chúng ta sẽ bắt đầu từ quy tắc đầu tiên,"
+    },
+    {
+      "start": 51.9,
+      "end": 54.03,
+      "en": "and most basic rule.",
+      "zh": "也是最基础的一个规则开始。",
+      "pinyin": "yě shì zuì jīchǔ de yí gè guīzé kāishǐ.",
+      "vi": "cũng là quy tắc cơ bản nhất."
+    },
+    {
+      "start": 54.07,
+      "end": 56.84,
+      "en": "Right, the first rule we'll talk about today is:",
+      "zh": "对，我们今天要聊的第一个规则是：",
+      "pinyin": "Duì, wǒmen jīntiān yào liáo de dì yī gè guīzé shì:",
+      "vi": "Đúng vậy, quy tắc đầu tiên chúng ta sẽ nói hôm nay là:"
+    },
+    {
+      "start": 56.87,
+      "end": 60.67,
+      "en": "Everyone who comes into your life is there for a reason.",
+      "zh": "来到你身边的人，都是有原因的。",
+      "pinyin": "Lái dào nǐ shēnbiān de rén, dōu shì yǒu yuányīn de.",
+      "vi": "Những người đến với cuộc đời bạn đều có lý do."
+    },
+    {
+      "start": 60.7,
+      "end": 63.87,
+      "en": "Wow, this topic sounds full of story as soon as you hear it.",
+      "zh": "哇，这个题目一听就很有故事感。",
+      "pinyin": "Wā, zhège tímù yì tīng jiù hěn yǒu gùshìgǎn.",
+      "vi": "Oa, chủ đề này vừa nghe đã thấy đầy chất chuyện."
+    },
+    {
+      "start": 63.9,
+      "end": 67.23,
+      "en": "Everyone who comes into our lives is there for a reason.",
+      "zh": "来到我们身边的人，都是有原因的。",
+      "pinyin": "Lái dào wǒmen shēnbiān de rén, dōu shì yǒu yuányīn de.",
+      "vi": "Những người đến với cuộc đời chúng ta đều có lý do."
+    },
+    {
+      "start": 67.27,
+      "end": 69.9,
+      "en": "Li Ming, when you first heard this sentence,",
+      "zh": "李明，你第一次听到这句话的时候，",
+      "pinyin": "Lǐ Míng, nǐ dì yī cì tīng dào zhè jù huà de shíhou,",
+      "vi": "Lý Minh, lần đầu tiên cậu nghe câu này,"
+    },
+    {
+      "start": 69.93,
+      "end": 71.23,
+      "en": "what did it feel like?",
+      "zh": "是什么感觉？",
+      "pinyin": "shì shénme gǎnjué?",
+      "vi": "cậu thấy thế nào?"
+    },
+    {
+      "start": 71.27,
+      "end": 75.9,
+      "en": "I think it sounds a bit mysterious, and also a bit warm.",
+      "zh": "我觉得这句话听起来有点神秘，又有点温暖。",
+      "pinyin": "Wǒ juéde zhè jù huà tīng qǐlái yǒudiǎn shénmì, yòu yǒudiǎn wēnnuǎn.",
+      "vi": "Mình thấy câu này nghe có chút bí ẩn, lại có chút ấm áp."
+    },
+    {
+      "start": 75.93,
+      "end": 77.26,
+      "en": "It seems to be telling me,",
+      "zh": "它好像在告诉我，",
+      "pinyin": "Tā hǎoxiàng zài gàosu wǒ,",
+      "vi": "Nó như đang nói với mình rằng,"
+    },
+    {
+      "start": 77.3,
+      "end": 81.03,
+      "en": "every encounter in life is not accidental,",
+      "zh": "生活中的每一次相遇都不是偶然的，",
+      "pinyin": "Shēnghuó zhōng de měi yí cì xiāngyù dōu bù shì ǒurán de,",
+      "vi": "mỗi lần gặp gỡ trong cuộc sống đều không phải ngẫu nhiên,"
+    },
+    {
+      "start": 81.07,
+      "end": 82.84,
+      "en": "there is meaning behind it.",
+      "zh": "背后都有它的意义。",
+      "pinyin": "bèihòu dōu yǒu tā de yìyì.",
+      "vi": "phía sau đều có ý nghĩa của nó."
+    },
+    {
+      "start": 82.87,
+      "end": 84.54,
+      "en": "I feel the same way.",
+      "zh": "我也是这么觉得的。",
+      "pinyin": "Wǒ yě shì zhème juéde de.",
+      "vi": "Mình cũng thấy như vậy."
+    },
+    {
+      "start": 84.57,
+      "end": 86.74,
+      "en": "It makes me, toward every person I meet,",
+      "zh": "它让我对遇到的每一个人",
+      "pinyin": "Tā ràng wǒ duì yùdào de měi yí gè rén",
+      "vi": "Nó khiến mình với mỗi người mình gặp"
+    },
+    {
+      "start": 86.77,
+      "end": 89.67,
+      "en": "have a bit more curiosity and respect.",
+      "zh": "都多了一份好奇和尊重。",
+      "pinyin": "dōu duō le yí fèn hàoqí hé zūnzhòng.",
+      "vi": "đều có thêm một chút tò mò và tôn trọng."
+    },
+    {
+      "start": 89.7,
+      "end": 91.53,
+      "en": "All right, then today we",
+      "zh": "好了，那我们今天就",
+      "pinyin": "Hǎo le, nà wǒmen jīntiān jiù",
+      "vi": "Được rồi, vậy hôm nay chúng ta"
+    },
+    {
+      "start": 91.57,
+      "end": 93.54,
+      "en": "let's dive deeper into this topic.",
+      "zh": "深入地聊一聊这个话题吧。",
+      "pinyin": "shēnrù de liáo yì liáo zhège huàtí ba.",
+      "vi": "hãy nói sâu hơn về chủ đề này nhé."
+    },
+    {
+      "start": 93.57,
+      "end": 97.5,
+      "en": "Wang Yu, let's first talk about our understanding of this rule.",
+      "zh": "王雨，我们先来谈谈对这个规则的理解。",
+      "pinyin": "Wáng Yǔ, wǒmen xiān lái tán tán duì zhège guīzé de lǐjiě.",
+      "vi": "Vương Vũ, trước tiên chúng ta hãy nói về cách hiểu quy tắc này."
+    },
+    {
+      "start": 97.53,
+      "end": 100.83,
+      "en": "What specifically do you think 'for a reason' refers to?",
+      "zh": "你觉得“有原因”具体指的是什么原因呢？",
+      "pinyin": "Nǐ juéde “yǒu yuányīn” jùtǐ zhǐ de shì shénme yuányīn ne?",
+      "vi": "Cậu thấy 'có lý do' cụ thể là chỉ lý do gì?"
+    },
+    {
+      "start": 100.87,
+      "end": 105.87,
+      "en": "Hmm, in my view, this 'reason' can be many kinds.",
+      "zh": "嗯，在我看来，这个“原因”可以有很多种。",
+      "pinyin": "Ńg, zài wǒ kàn lái, zhège “yuányīn” kěyǐ yǒu hěn duō zhǒng.",
+      "vi": "Ừm, theo mình thấy, 'lý do' này có thể có rất nhiều loại."
+    },
+    {
+      "start": 105.9,
+      "end": 108.43,
+      "en": "Sometimes, a person comes into our lives,",
+      "zh": "有时候，一个人来到我们身边，",
+      "pinyin": "Yǒu shíhou, yí gè rén lái dào wǒmen shēnbiān,",
+      "vi": "Có khi, một người đến bên cạnh chúng ta,"
+    },
+    {
+      "start": 108.47,
+      "end": 111.7,
+      "en": "to teach us something; sometimes,",
+      "zh": "是为了教会我们一些东西；有时候，",
+      "pinyin": "shì wèi le jiāo huì wǒmen yìxiē dōngxi; yǒu shíhou,",
+      "vi": "là để dạy chúng ta một vài điều; có khi,"
+    },
+    {
+      "start": 111.73,
+      "end": 115.43,
+      "en": "to help us get through a difficult time; and sometimes,",
+      "zh": "是为了帮助我们度过一个难关；还有的时候，",
+      "pinyin": "shì wèi le bāngzhù wǒmen dùguò yí gè nánguān; hái yǒu de shíhou,",
+      "vi": "là để giúp chúng ta vượt qua một khó khăn; còn có khi,"
+    },
+    {
+      "start": 115.47,
+      "end": 118,
+      "en": "maybe just to bring us a little happiness,",
+      "zh": "可能只是为了给我们带来一点快乐，",
+      "pinyin": "kěnéng zhǐ shì wèi le gěi wǒmen dàilái yìdiǎn kuàilè,",
+      "vi": "có thể chỉ là để mang đến cho chúng ta một chút niềm vui,"
+    },
+    {
+      "start": 118.03,
+      "end": 120.6,
+      "en": "or to accompany us for a short stretch of the road.",
+      "zh": "或者陪我们走一小段路。",
+      "pinyin": "huòzhě péi wǒmen zǒu yì xiǎo duàn lù.",
+      "vi": "hoặc cùng chúng ta đi một đoạn đường ngắn."
+    },
+    {
+      "start": 120.63,
+      "end": 121.5,
+      "en": "I agree.",
+      "zh": "我同意。",
+      "pinyin": "Wǒ tóngyì.",
+      "vi": "Mình đồng ý."
+    },
+    {
+      "start": 121.53,
+      "end": 124.86,
+      "en": "This 'reason' isn't necessarily a very grand,",
+      "zh": "这个“原因”不一定是一个非常宏大、",
+      "pinyin": "zhège “yuányīn” bù yīdìng shì yí gè fēicháng hóngdà,",
+      "vi": "Cái 'lý do' này không nhất thiết là một lý do rất vĩ đại,"
+    },
+    {
+      "start": 124.9,
+      "end": 126.53,
+      "en": "very serious reason.",
+      "zh": "非常严肃的理由。",
+      "pinyin": "fēicháng yánsù de lǐyóu.",
+      "vi": "rất nghiêm túc."
+    },
+    {
+      "start": 126.57,
+      "end": 129.1,
+      "en": "It may be small, but it's important.",
+      "zh": "它可能很小，但很重要。",
+      "pinyin": "Tā kěnéng hěn xiǎo, dàn hěn zhòngyào.",
+      "vi": "Nó có thể rất nhỏ, nhưng rất quan trọng."
+    },
+    {
+      "start": 129.13,
+      "end": 130.26,
+      "en": "In Chinese culture,",
+      "zh": "在中国文化里，",
+      "pinyin": "Zài Zhōngguó wénhuà lǐ,",
+      "vi": "Trong văn hóa Trung Quốc,"
+    },
+    {
+      "start": 130.3,
+      "end": 132.73,
+      "en": "we often use one word to describe this kind of",
+      "zh": "我们经常会用一个词来描述这种",
+      "pinyin": "Wǒmen jīngcháng huì yòng yí gè cí lái miáoshù zhè zhǒng",
+      "vi": "chúng ta thường dùng một từ để miêu tả kiểu"
+    },
+    {
+      "start": 132.77,
+      "end": 136.1,
+      "en": "The connection between people—that is “yuanfen” (fate).",
+      "zh": "人与人之间的联系，那就是“缘分”。",
+      "pinyin": "Rén yǔ rén zhī jiān de liánxì, nà jiùshì “yuánfèn”.",
+      "vi": "Mối liên hệ giữa người với người, đó chính là “duyên phận”."
+    },
+    {
+      "start": 136.1,
+      "end": 138.9,
+      "en": "Right! The word “yuanfen” is so important.",
+      "zh": "对！“缘分”这个词太重要了。",
+      "pinyin": "Duì! “Yuánfèn” zhège cí tài zhòngyào le.",
+      "vi": "Đúng rồi! Từ “duyên phận” này quan trọng lắm."
+    },
+    {
+      "start": 138.93,
+      "end": 143.53,
+      "en": "I've always thought this rule is actually talking about yuanfen.",
+      "zh": "我一直在想，这个规则其实就是在说缘分。",
+      "pinyin": "Wǒ yīzhí zài xiǎng, zhège guīzé qíshí jiùshì zài shuō yuánfèn.",
+      "vi": "Tôi vẫn luôn nghĩ, quy tắc này thực ra là đang nói về duyên phận."
+    },
+    {
+      "start": 143.57,
+      "end": 147.9,
+      "en": "We believe that whoever we meet and become friends with,",
+      "zh": "我们相信，能遇到谁，会和谁成为朋友，",
+      "pinyin": "Wǒmen xiāngxìn, néng yùdào shuí, huì hé shuí chéngwéi péngyou,",
+      "vi": "Chúng ta tin rằng, gặp được ai, sẽ trở thành bạn với ai,"
+    },
+    {
+      "start": 147.93,
+      "end": 152.26,
+      "en": "even whoever we only have a brief conversation with, it's all yuanfen.",
+      "zh": "甚至和谁只有一次短暂的交谈，都是缘分。",
+      "pinyin": "Shènzhì hé shuí zhǐyǒu yī cì duǎnzàn de jiāotán, dōu shì yuánfèn.",
+      "vi": "thậm chí chỉ có một cuộc trò chuyện ngắn với ai, đều là duyên phận."
+    },
+    {
+      "start": 152.27,
+      "end": 155.07,
+      "en": "Exactly. And the word “yuanfen”",
+      "zh": "没错。而且“缘分”这个词",
+      "pinyin": "Méicuò. Érqiě “yuánfèn” zhège cí",
+      "vi": "Đúng vậy. Và từ “duyên phận” này"
+    },
+    {
+      "start": 155.1,
+      "end": 157.9,
+      "en": "is actually hard to translate accurately into other languages.",
+      "zh": "其实很难准确地翻译成别的语言。",
+      "pinyin": "Qíshí hěn nán zhǔnquè de fānyì chéng bié de yǔyán.",
+      "vi": "thực ra rất khó dịch chính xác sang ngôn ngữ khác."
+    },
+    {
+      "start": 157.93,
+      "end": 159.46,
+      "en": "It's not just destiny",
+      "zh": "它不仅仅是命运（destiny）",
+      "pinyin": "Tā bù jǐnjǐn shì mìngyùn (destiny)",
+      "vi": "Nó không chỉ là vận mệnh (destiny)"
+    },
+    {
+      "start": 159.5,
+      "end": 160.7,
+      "en": "or coincidence.",
+      "zh": "或者巧合（coincidence）。",
+      "pinyin": "Huòzhě qiǎohé (coincidence).",
+      "vi": "hay sự trùng hợp (coincidence)."
+    },
+    {
+      "start": 160.73,
+      "end": 162.93,
+      "en": "It's more like an invisible force",
+      "zh": "它更像是一种看不见的力量，",
+      "pinyin": "Tā gèng xiàng shì yī zhǒng kànbujiàn de lìliàng,",
+      "vi": "Nó giống như một sức mạnh vô hình,"
+    },
+    {
+      "start": 162.97,
+      "end": 164.74,
+      "en": "that connects people together.",
+      "zh": "把人们联系在一起。",
+      "pinyin": "Bǎ rénmen liánxì zài yīqǐ.",
+      "vi": "kết nối mọi người lại với nhau."
+    },
+    {
+      "start": 164.77,
+      "end": 166.07,
+      "en": "What do you think?",
+      "zh": "你觉得呢？",
+      "pinyin": "Nǐ juéde ne?",
+      "vi": "Bạn thấy thế nào?"
+    },
+    {
+      "start": 166.1,
+      "end": 167.87,
+      "en": "I think you put it really well.",
+      "zh": "我觉得你说得特别好。",
+      "pinyin": "Wǒ juéde nǐ shuō de tèbié hǎo.",
+      "vi": "Tôi thấy bạn nói rất hay."
+    },
+    {
+      "start": 167.9,
+      "end": 170.23,
+      "en": "It's a wonderful connection.",
+      "zh": "它是一种奇妙的联系。",
+      "pinyin": "Tā shì yī zhǒng qímiào de liánxì.",
+      "vi": "Đó là một mối liên hệ kỳ diệu."
+    },
+    {
+      "start": 170.27,
+      "end": 173.5,
+      "en": "For example, why were you born into this family,",
+      "zh": "比如，你为什么会出生在这个家庭，",
+      "pinyin": "Bǐrú, nǐ wèishénme huì chūshēng zài zhège jiātíng,",
+      "vi": "Ví dụ, tại sao bạn lại sinh ra trong gia đình này,"
+    },
+    {
+      "start": 173.53,
+      "end": 175.26,
+      "en": "and not another family?",
+      "zh": "而不是别的家庭？",
+      "pinyin": "Ér bùshì bié de jiātíng?",
+      "vi": "chứ không phải gia đình khác?"
+    },
+    {
+      "start": 175.3,
+      "end": 179.2,
+      "en": "Why are you at this company, meeting these colleagues?",
+      "zh": "你为什么会在这个公司，遇到这些同事？",
+      "pinyin": "Nǐ wèishénme huì zài zhège gōngsī, yùdào zhèxiē tóngshì?",
+      "vi": "Tại sao bạn lại ở công ty này, gặp những đồng nghiệp này?"
+    },
+    {
+      "start": 179.23,
+      "end": 180.86,
+      "en": "Why, while traveling,",
+      "zh": "为什么会在旅行中，",
+      "pinyin": "Wèishénme huì zài lǚxíng zhōng,",
+      "vi": "Tại sao trong chuyến du lịch,"
+    },
+    {
+      "start": 180.9,
+      "end": 183.67,
+      "en": "did you have such a happy chat with a stranger?",
+      "zh": "和一个陌生人聊得很开心？",
+      "pinyin": "Hé yī gè mòshēngrén liáo de hěn kāixīn?",
+      "vi": "lại trò chuyện rất vui vẻ với một người lạ?"
+    },
+    {
+      "start": 183.7,
+      "end": 186.43,
+      "en": "We often say, “It's all yuanfen!”",
+      "zh": "我们常常会说，“这都是缘分啊！”",
+      "pinyin": "Wǒmen chángcháng huì shuō, “Zhè dōu shì yuánfèn a!”",
+      "vi": "Chúng ta thường nói, “Đều là duyên phận cả!”"
+    },
+    {
+      "start": 186.47,
+      "end": 187.5,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 187.53,
+      "end": 189.2,
+      "en": "So, when we say",
+      "zh": "所以，当我们说",
+      "pinyin": "Suǒyǐ, dāng wǒmen shuō",
+      "vi": "Vì vậy, khi chúng ta nói"
+    },
+    {
+      "start": 189.23,
+      "end": 192.63,
+      "en": "“Everyone who comes into your life is here for a reason,” actually,",
+      "zh": "“来到你身边的人，都是有原因的”，其实，",
+      "pinyin": "“Lái dào nǐ shēnbiān de rén, dōu shì yǒu yuányīn de”, qíshí,",
+      "vi": "“Những người đến bên bạn, đều có lý do”, thực ra,"
+    },
+    {
+      "start": 192.67,
+      "end": 195.44,
+      "en": "we are looking with a kind of respectful gaze",
+      "zh": "我们是在用一种充满敬意的眼光，",
+      "pinyin": "Wǒmen shì zài yòng yī zhǒng chōngmǎn jìngyì de yǎnguāng,",
+      "vi": "chúng ta đang dùng một ánh mắt đầy tôn kính,"
+    },
+    {
+      "start": 195.47,
+      "end": 198.27,
+      "en": "at the various “yuanfen” in life.",
+      "zh": "看待生活中的各种“缘分”。",
+      "pinyin": "Kàndài shēnghuó zhōng de gèzhǒng “yuánfèn”.",
+      "vi": "để nhìn những “duyên phận” khác nhau trong cuộc sống."
+    },
+    {
+      "start": 198.3,
+      "end": 201.93,
+      "en": "We believe that every encounter, no matter how long or short,",
+      "zh": "我们相信，每一次相遇，无论时间长短，",
+      "pinyin": "Wǒmen xiāngxìn, měi yī cì xiāngyù, wúlùn shíjiān chángduǎn,",
+      "vi": "Chúng ta tin rằng, mỗi lần gặp gỡ, dù thời gian dài ngắn,"
+    },
+    {
+      "start": 201.97,
+      "end": 204.9,
+      "en": "or how deep or shallow the relationship, has its unique value.",
+      "zh": "关系深浅，都有它独特的价值。",
+      "pinyin": "Guānxi shēnqiǎn, dōu yǒu tā dútè de jiàzhí.",
+      "vi": "mối quan hệ sâu hay nông, đều có giá trị riêng của nó."
+    },
+    {
+      "start": 204.93,
+      "end": 208,
+      "en": "This way of thinking makes life very different.",
+      "zh": "这种想法会让生活变得很不一样。",
+      "pinyin": "Zhè zhǒng xiǎngfǎ huì ràng shēnghuó biàn de hěn bù yīyàng.",
+      "vi": "Cách nghĩ này sẽ khiến cuộc sống trở nên rất khác."
+    },
+    {
+      "start": 208.03,
+      "end": 212.86,
+      "en": "You won't take any encounter for granted anymore.",
+      "zh": "你不会再把任何一次遇见看作是理所当然的。",
+      "pinyin": "Nǐ bù huì zài bǎ rènhé yī cì yùjiàn kànzuò shì lǐsuǒdāngrán de.",
+      "vi": "Bạn sẽ không còn coi bất kỳ lần gặp gỡ nào là điều đương nhiên nữa."
+    },
+    {
+      "start": 212.9,
+      "end": 216.63,
+      "en": "You'll start to wonder, this person appeared in my life,",
+      "zh": "你会开始思考，这个人出现在我的生命里，",
+      "pinyin": "Nǐ huì kāishǐ sīkǎo, zhège rén chūxiàn zài wǒ de shēngmìng lǐ,",
+      "vi": "Bạn sẽ bắt đầu nghĩ, người này xuất hiện trong cuộc đời tôi,"
+    },
+    {
+      "start": 216.67,
+      "end": 218.27,
+      "en": "for what purpose?",
+      "zh": "是为了什么呢？",
+      "pinyin": "Shì wèile shénme ne?",
+      "vi": "là để làm gì?"
+    },
+    {
+      "start": 218.3,
+      "end": 219.67,
+      "en": "What did they bring me?",
+      "zh": "他给我带来了什么？",
+      "pinyin": "Tā gěi wǒ dàilái le shénme?",
+      "vi": "Họ đã mang đến cho tôi điều gì?"
+    },
+    {
+      "start": 219.7,
+      "end": 223.13,
+      "en": "Right. This kind of reflection is itself a form of growth.",
+      "zh": "对。这种思考本身就是一种成长。",
+      "pinyin": "Duì. Zhè zhǒng sīkǎo běnshēn jiùshì yī zhǒng chéngzhǎng.",
+      "vi": "Đúng. Cách suy nghĩ này bản thân nó đã là một sự trưởng thành."
+    },
+    {
+      "start": 223.17,
+      "end": 225.3,
+      "en": "It turns us from passive recipients",
+      "zh": "它让我们从被动的接受者，",
+      "pinyin": "Tā ràng wǒmen cóng bèidòng de jiēshòuzhě,",
+      "vi": "Nó khiến chúng ta từ người tiếp nhận thụ động,"
+    },
+    {
+      "start": 225.33,
+      "end": 227.6,
+      "en": "into active thinkers.",
+      "zh": "变成一个主动的思考者。",
+      "pinyin": "Biàn chéng yī gè zhǔdòng de sīkǎozhě.",
+      "vi": "trở thành một người suy nghĩ chủ động."
+    },
+    {
+      "start": 227.63,
+      "end": 230.8,
+      "en": "We begin to discover the gift behind every encounter.",
+      "zh": "我们开始去发现每一次相遇背后的礼物。",
+      "pinyin": "Wǒmen kāishǐ qù fāxiàn měi yī cì xiāngyù bèihòu de lǐwù.",
+      "vi": "Chúng ta bắt đầu khám phá món quà đằng sau mỗi lần gặp gỡ."
+    },
+    {
+      "start": 230.83,
+      "end": 233.86,
+      "en": "“The gift behind every encounter”—I like that phrase!",
+      "zh": "“相遇背后的礼物”，我喜欢这个说法！",
+      "pinyin": "“Xiāngyù bèihòu de lǐwù”, wǒ xǐhuan zhège shuōfǎ!",
+      "vi": "“Món quà đằng sau mỗi lần gặp gỡ”, tôi thích cách nói này!"
+    },
+    {
+      "start": 233.9,
+      "end": 237.13,
+      "en": "So, what kinds of gifts are there?",
+      "zh": "那么，这些礼物都有哪些种类呢？",
+      "pinyin": "Nàme, zhèxiē lǐwù dōu yǒu nǎxiē zhǒnglèi ne?",
+      "vi": "Vậy những món quà này có những loại nào?"
+    },
+    {
+      "start": 237.17,
+      "end": 239.94,
+      "en": "I think the most obvious kind is those people",
+      "zh": "我想，最明显的一种，就是那些",
+      "pinyin": "Wǒ xiǎng, zuì míngxiǎn de yī zhǒng, jiùshì nàxiē",
+      "vi": "Tôi nghĩ, loại rõ ràng nhất chính là những người"
+    },
+    {
+      "start": 239.97,
+      "end": 242.5,
+      "en": "who bring us warmth and happiness.",
+      "zh": "给我们带来温暖和快乐的人。",
+      "pinyin": "Gěi wǒmen dàilái wēnnuǎn hé kuàilè de rén.",
+      "vi": "mang đến cho chúng ta sự ấm áp và niềm vui."
+    },
+    {
+      "start": 242.53,
+      "end": 243.73,
+      "en": "Indeed.",
+      "zh": "的确如此。",
+      "pinyin": "Díquè rúcǐ.",
+      "vi": "Đúng là như vậy."
+    },
+    {
+      "start": 243.77,
+      "end": 246.84,
+      "en": "Then let's start by talking about these beautiful encounters.",
+      "zh": "那我们就先从这些美好的相遇开始聊起吧。",
+      "pinyin": "Nà wǒmen jiù xiān cóng zhèxiē měihǎo de xiāngyù kāishǐ liáo qǐ ba.",
+      "vi": "Vậy chúng ta hãy bắt đầu nói về những lần gặp gỡ tốt đẹp này trước nhé."
+    },
+    {
+      "start": 246.87,
+      "end": 249.74,
+      "en": "Speaking of people who bring warmth and happiness,",
+      "zh": "说到带来温暖和快乐的人，",
+      "pinyin": "Shuō dào dàilái wēnnuǎn hé kuàilè de rén,",
+      "vi": "Nói đến người mang đến sự ấm áp và niềm vui,"
+    },
+    {
+      "start": 249.77,
+      "end": 252.34,
+      "en": "the first person I think of is my college teacher,",
+      "zh": "我第一个想到的就是我的大学老师，",
+      "pinyin": "Wǒ dì yī gè xiǎngdào de jiùshì wǒ de dàxué lǎoshī,",
+      "vi": "người đầu tiên tôi nghĩ đến là giáo viên đại học của tôi,"
+    },
+    {
+      "start": 252.37,
+      "end": 255.3,
+      "en": "Professor Zhang. Before taking his class,",
+      "zh": "张老师。在上他的课之前，",
+      "pinyin": "Zhāng lǎoshī. Zài shàng tā de kè zhīqián,",
+      "vi": "thầy Trương. Trước khi học lớp của thầy,"
+    },
+    {
+      "start": 255.33,
+      "end": 258.4,
+      "en": "I actually wasn't interested in ancient Chinese literature,",
+      "zh": "我对中国古代文学其实没什么兴趣，",
+      "pinyin": "Wǒ duì Zhōngguó gǔdài wénxué qíshí méi shénme xìngqù,",
+      "vi": "tôi thực ra không có hứng thú gì với văn học cổ đại Trung Quốc,"
+    },
+    {
+      "start": 258.43,
+      "end": 260.63,
+      "en": "and found it both difficult and boring.",
+      "zh": "觉得又难又无聊。",
+      "pinyin": "Juéde yòu nán yòu wúliáo.",
+      "vi": "thấy nó vừa khó vừa nhàm chán."
+    },
+    {
+      "start": 260.67,
+      "end": 263.54,
+      "en": "Haha, many students probably feel the same way.",
+      "zh": "哈哈，很多学生可能都有同样的感觉。",
+      "pinyin": "Hāhā, hěn duō xuésheng kěnéng dōu yǒu tóngyàng de gǎnjué.",
+      "vi": "Haha, nhiều học sinh có lẽ cũng có cảm giác giống vậy."
+    },
+    {
+      "start": 263.57,
+      "end": 264.34,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 264.37,
+      "end": 267.8,
+      "en": "But Professor Zhang completely changed my view.",
+      "zh": "但是张老师完全改变了我的看法。",
+      "pinyin": "Dànshì Zhāng lǎoshī wánquán gǎibiàn le wǒ de kànfǎ.",
+      "vi": "Nhưng thầy Trương đã hoàn toàn thay đổi cách nhìn của tôi."
+    },
+    {
+      "start": 267.83,
+      "end": 270.9,
+      "en": "His teaching is very lively and interesting,",
+      "zh": "他讲课非常生动有趣，",
+      "pinyin": "Tā jiǎngkè fēicháng shēngdòng yǒuqù,",
+      "vi": "Thầy ấy giảng bài rất sinh động và thú vị,"
+    },
+    {
+      "start": 270.93,
+      "end": 273.73,
+      "en": "He will take an ancient poem from hundreds of years ago,",
+      "zh": "他会把一首几百年前的古诗，",
+      "pinyin": "Tā huì bǎ yì shǒu jǐ bǎi nián qián de gǔshī,",
+      "vi": "Thầy ấy sẽ lấy một bài thơ cổ từ mấy trăm năm trước,"
+    },
+    {
+      "start": 273.77,
+      "end": 276.87,
+      "en": "and connect it with our life today.",
+      "zh": "和我们现在的生活联系起来。",
+      "pinyin": "Hé wǒmen xiànzài de shēnghuó liánxì qǐlái.",
+      "vi": "và liên hệ nó với cuộc sống hiện tại của chúng ta."
+    },
+    {
+      "start": 276.9,
+      "end": 280.93,
+      "en": "He tells us that ancient poets, just like us,",
+      "zh": "他会告诉我们，古代的诗人也和我们一样，",
+      "pinyin": "Tā huì gàosu wǒmen, gǔdài de shīrén yě hé wǒmen yíyàng,",
+      "vi": "Thầy ấy nói với chúng tôi rằng, những nhà thơ thời cổ cũng giống như chúng ta,"
+    },
+    {
+      "start": 280.97,
+      "end": 283.2,
+      "en": "would feel sad over a breakup,",
+      "zh": "会因为失恋而难过，",
+      "pinyin": "Huì yīnwèi shīliàn ér nánguò,",
+      "vi": "sẽ buồn vì thất tình,"
+    },
+    {
+      "start": 283.23,
+      "end": 286,
+      "en": "and feel heartbroken when parting with friends.",
+      "zh": "会因为和朋友分别而伤心。",
+      "pinyin": "Huì yīnwèi hé péngyou fēnbié ér shāngxīn.",
+      "vi": "và đau lòng khi chia tay bạn bè."
+    },
+    {
+      "start": 286.03,
+      "end": 288.8,
+      "en": "He brought those ancient words to life.",
+      "zh": "他让那些古老的文字活了过来。",
+      "pinyin": "Tā ràng nàxiē gǔlǎo de wénzì huó le guòlái.",
+      "vi": "Thầy ấy đã khiến những con chữ cổ xưa ấy trở nên sống động."
+    },
+    {
+      "start": 288.83,
+      "end": 290.2,
+      "en": "Exactly!",
+      "zh": "完全正确！",
+      "pinyin": "Wánquán zhèngquè!",
+      "vi": "Hoàn toàn đúng!"
+    },
+    {
+      "start": 290.23,
+      "end": 294.5,
+      "en": "I remember once we were studying a poem about friendship.",
+      "zh": "我记得有一次，我们学习一首关于友谊的诗。",
+      "pinyin": "Wǒ jìde yǒu yí cì, wǒmen xuéxí yì shǒu guānyú yǒuyì de shī.",
+      "vi": "Tôi nhớ có một lần, chúng tôi học một bài thơ về tình bạn."
+    },
+    {
+      "start": 294.53,
+      "end": 298.03,
+      "en": "After class, because I had argued with a good friend,",
+      "zh": "下课后，我因为和好朋友吵架了，",
+      "pinyin": "Xiàkè hòu, wǒ yīnwèi hé hǎo péngyou chǎojià le,",
+      "vi": "Sau giờ học, vì tôi cãi nhau với một người bạn thân,"
+    },
+    {
+      "start": 298.07,
+      "end": 301.7,
+      "en": "I was feeling terrible, so I sat alone in the classroom.",
+      "zh": "心情很不好，就一个人坐在教室里。",
+      "pinyin": "Xīnqíng hěn bù hǎo, jiù yí ge rén zuò zài jiàoshì lǐ.",
+      "vi": "tâm trạng rất tệ, nên tôi ngồi một mình trong lớp học."
+    },
+    {
+      "start": 301.73,
+      "end": 304.86,
+      "en": "Teacher Zhang saw me and didn't leave right away,",
+      "zh": "张老师看到了，他没有马上离开，",
+      "pinyin": "Zhāng lǎoshī kàndào le, tā méiyǒu mǎshàng líkāi,",
+      "vi": "Thầy Trương nhìn thấy, thầy không rời đi ngay,"
+    },
+    {
+      "start": 304.9,
+      "end": 308.1,
+      "en": "but came over and gently asked what was wrong.",
+      "zh": "而是走过来，轻声问我怎么了。",
+      "pinyin": "Érshì zǒu guòlái, qīngshēng wèn wǒ zěnme le.",
+      "vi": "mà đi lại gần, nhẹ nhàng hỏi tôi bị làm sao."
+    },
+    {
+      "start": 308.13,
+      "end": 309.4,
+      "en": "He really cares about his students.",
+      "zh": "他很关心学生。",
+      "pinyin": "Tā hěn guānxīn xuéshēng.",
+      "vi": "Thầy ấy rất quan tâm đến học sinh."
+    },
+    {
+      "start": 309.43,
+      "end": 310.2,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 310.23,
+      "end": 313.26,
+      "en": "At that moment, I couldn't help but tell him what happened.",
+      "zh": "我当时就忍不住把事情告诉了他。",
+      "pinyin": "Wǒ dāngshí jiù rěnbuzhù bǎ shìqing gàosu le tā.",
+      "vi": "Lúc đó tôi không nhịn được mà kể cho thầy nghe mọi chuyện."
+    },
+    {
+      "start": 313.3,
+      "end": 316.27,
+      "en": "After hearing me out, he didn't lecture me with big principles,",
+      "zh": "他听完后，没有讲什么大道理，",
+      "pinyin": "Tā tīng wán hòu, méiyǒu jiǎng shénme dà dàolǐ,",
+      "vi": "Sau khi nghe xong, thầy không giảng giải đạo lý lớn lao gì,"
+    },
+    {
+      "start": 316.3,
+      "end": 319.9,
+      "en": "but just shared with me a story about him and his friend when he was young,",
+      "zh": "只是给我分享了他年轻时和朋友的故事，",
+      "pinyin": "Zhǐshì gěi wǒ fēnxiǎng le tā niánqīng shí hé péngyou de gùshi,",
+      "vi": "mà chỉ kể cho tôi nghe câu chuyện về thầy và bạn bè hồi trẻ,"
+    },
+    {
+      "start": 319.93,
+      "end": 322,
+      "en": "and then said to me with a smile:",
+      "zh": "然后笑着对我说：",
+      "pinyin": "Ránhòu xiàozhe duì wǒ shuō:",
+      "vi": "rồi mỉm cười nói với tôi:"
+    },
+    {
+      "start": 322.03,
+      "end": 324.8,
+      "en": "“True friendship can't be broken by quarrels.",
+      "zh": "“真正的友谊，是吵不散的。",
+      "pinyin": "“Zhēnzhèng de yǒuyì, shì chǎo bu sàn.",
+      "vi": "“Tình bạn thật sự thì cãi nhau cũng không tan vỡ."
+    },
+    {
+      "start": 324.83,
+      "end": 328.23,
+      "en": "Go on, go have a good talk with your friend.”",
+      "zh": "去吧，去和你的朋友好好谈谈。”",
+      "pinyin": "Qù ba, qù hé nǐ de péngyou hǎohǎo tántan.”",
+      "vi": "Đi đi, đi nói chuyện tử tế với bạn của con.”"
+    },
+    {
+      "start": 328.27,
+      "end": 330,
+      "en": "That sentence is very warm.",
+      "zh": "这句话很温暖。",
+      "pinyin": "Zhè jù huà hěn wēnnuǎn.",
+      "vi": "Câu nói đó rất ấm áp."
+    },
+    {
+      "start": 330.03,
+      "end": 331.63,
+      "en": "Very warm.",
+      "zh": "非常温暖。",
+      "pinyin": "Fēicháng wēnnuǎn.",
+      "vi": "Rất ấm áp."
+    },
+    {
+      "start": 331.67,
+      "end": 335.3,
+      "en": "It was that small thing that moved me so much.",
+      "zh": "就是那件小事，让我感觉特别感动。",
+      "pinyin": "Jiùshì nà jiàn xiǎoshì, ràng wǒ gǎnjué tèbié gǎndòng.",
+      "vi": "Chính chuyện nhỏ ấy khiến tôi cảm thấy vô cùng xúc động."
+    },
+    {
+      "start": 335.33,
+      "end": 338.6,
+      "en": "I feel that Teacher Zhang appeared in my life,",
+      "zh": "我觉得，张老师出现在我的生命里，",
+      "pinyin": "Wǒ juéde, Zhāng lǎoshī chūxiàn zài wǒ de shēngmìng lǐ,",
+      "vi": "Tôi cảm thấy, việc thầy Trương xuất hiện trong cuộc đời tôi,"
+    },
+    {
+      "start": 338.63,
+      "end": 342.2,
+      "en": "not only to teach me knowledge, but more importantly,",
+      "zh": "不仅仅是教给我知识，更重要的是，",
+      "pinyin": "Bùjǐnjǐn shì jiāo gěi wǒ zhīshi, gèng zhòngyào de shì,",
+      "vi": "không chỉ là để dạy tôi kiến thức, mà quan trọng hơn là,"
+    },
+    {
+      "start": 342.23,
+      "end": 346.83,
+      "en": "he taught me how to understand the emotions behind literature,",
+      "zh": "他教会了我如何去理解文学背后的情感，",
+      "pinyin": "Tā jiāohuì le wǒ rúhé qù lǐjiě wénxué bèihòu de qínggǎn,",
+      "vi": "thầy đã dạy tôi cách hiểu những cảm xúc đằng sau văn học,"
+    },
+    {
+      "start": 346.87,
+      "end": 350.64,
+      "en": "and also taught me how to cherish the relationships around me.",
+      "zh": "也教会了我如何去珍惜身边的关系。",
+      "pinyin": "Yě jiāohuì le wǒ rúhé qù zhēnxī shēnbiān de guānxì.",
+      "vi": "và cũng dạy tôi cách trân trọng những mối quan hệ xung quanh mình."
+    },
+    {
+      "start": 350.67,
+      "end": 354.74,
+      "en": "His appearance is a very important 'reason'.",
+      "zh": "他的出现，就是一个非常重要的“原因”。",
+      "pinyin": "Tā de chūxiàn, jiùshì yí ge fēicháng zhòngyào de “yuányīn”.",
+      "vi": "Sự xuất hiện của thầy chính là một “lý do” rất quan trọng."
+    },
+    {
+      "start": 354.77,
+      "end": 356.27,
+      "en": "I completely understand.",
+      "zh": "我完全能理解。",
+      "pinyin": "Wǒ wánquán néng lǐjiě.",
+      "vi": "Tôi hoàn toàn có thể hiểu."
+    },
+    {
+      "start": 356.3,
+      "end": 359.73,
+      "en": "A meeting like that really is like a precious gift.",
+      "zh": "这样的相遇真的像一份珍贵的礼物。",
+      "pinyin": "Zhèyàng de xiāngyù zhēn de xiàng yí fèn zhēnguì de lǐwù.",
+      "vi": "Một cuộc gặp gỡ như vậy thật sự giống như một món quà quý giá."
+    },
+    {
+      "start": 359.77,
+      "end": 362.94,
+      "en": "His appearance lit up your interest in a field,",
+      "zh": "他的出现，点亮了你对一个领域的兴趣，",
+      "pinyin": "Tā de chūxiàn, diǎnliàng le nǐ duì yí ge lǐngyù de xìngqù,",
+      "vi": "Sự xuất hiện của thầy đã thắp lên niềm yêu thích của bạn đối với một lĩnh vực,"
+    },
+    {
+      "start": 362.97,
+      "end": 365.74,
+      "en": "and also gave you comfort and guidance in difficult times.",
+      "zh": "也给了你在困难时刻的安慰和指导。",
+      "pinyin": "Yě gěi le nǐ zài kùnnan shíkè de ānwèi hé zhǐdǎo.",
+      "vi": "và cũng mang đến cho bạn sự an ủi và chỉ dẫn trong những lúc khó khăn."
+    },
+    {
+      "start": 365.77,
+      "end": 367.8,
+      "en": "This is a very beautiful 'reason'.",
+      "zh": "这就是一个非常美好的“原因”。",
+      "pinyin": "Zhè jiùshì yí ge fēicháng měihǎo de “yuányīn”.",
+      "vi": "Đây chính là một “lý do” vô cùng tốt đẹp."
+    },
+    {
+      "start": 367.83,
+      "end": 369.66,
+      "en": "Yes. Li Ming, what about you?",
+      "zh": "是的。李明，你呢？",
+      "pinyin": "Shì de. Lǐ Míng, nǐ ne?",
+      "vi": "Đúng vậy. Lý Minh, còn bạn thì sao?"
+    },
+    {
+      "start": 369.7,
+      "end": 372.33,
+      "en": "Have you ever met someone like that in your life?",
+      "zh": "你生命中有没有遇到过这样的人？",
+      "pinyin": "Nǐ shēngmìng zhōng yǒu méiyǒu yùdào guo zhèyàng de rén?",
+      "vi": "Trong cuộc đời bạn đã từng gặp người như vậy chưa?"
+    },
+    {
+      "start": 372.37,
+      "end": 373.3,
+      "en": "Of course I have.",
+      "zh": "当然有。",
+      "pinyin": "Dāngrán yǒu.",
+      "vi": "Tất nhiên là có."
+    },
+    {
+      "start": 373.33,
+      "end": 376.1,
+      "en": "I want to share a story about my friend.",
+      "zh": "我想分享一个关于我朋友的故事。",
+      "pinyin": "Wǒ xiǎng fēnxiǎng yí ge guānyú wǒ péngyou de gùshi.",
+      "vi": "Tôi muốn chia sẻ một câu chuyện về người bạn của tôi."
+    },
+    {
+      "start": 376.13,
+      "end": 377.86,
+      "en": "His name is Chen Hao.",
+      "zh": "他叫陈浩。",
+      "pinyin": "Tā jiào Chén Hào.",
+      "vi": "Cậu ấy tên là Trần Hạo."
+    },
+    {
+      "start": 377.9,
+      "end": 380.27,
+      "en": "We met at a hiking club.",
+      "zh": "我们是在一个爬山俱乐部认识的。",
+      "pinyin": "Wǒmen shì zài yí ge páshān jùlèbù rènshi de.",
+      "vi": "Chúng tôi quen nhau ở một câu lạc bộ leo núi."
+    },
+    {
+      "start": 380.3,
+      "end": 383.3,
+      "en": "At first, we were just ordinary 'hiking buddies,'",
+      "zh": "刚开始，我们只是普通的“山友”，",
+      "pinyin": "Gāng kāishǐ, wǒmen zhǐshì pǔtōng de “shānyǒu”,",
+      "vi": "Ban đầu, chúng tôi chỉ là những “bạn leo núi” bình thường,"
+    },
+    {
+      "start": 383.33,
+      "end": 385.6,
+      "en": "going hiking together and chatting every weekend.",
+      "zh": "每个周末一起去爬山，聊聊天。",
+      "pinyin": "Měi ge zhōumò yìqǐ qù páshān, liáo liáo tiān.",
+      "vi": "cuối tuần nào cũng cùng nhau đi leo núi, trò chuyện."
+    },
+    {
+      "start": 385.63,
+      "end": 388.26,
+      "en": "Friends you meet through a shared hobby",
+      "zh": "通过共同的爱好认识的朋友，",
+      "pinyin": "Tōngguò gòngtóng de àihào rènshi de péngyou,",
+      "vi": "Những người bạn quen nhau nhờ sở thích chung,"
+    },
+    {
+      "start": 388.3,
+      "end": 390.5,
+      "en": "usually have a simple, pure relationship.",
+      "zh": "关系一般都比较简单纯粹。",
+      "pinyin": "Guānxì yìbān dōu bǐjiào jiǎndān chúncuì.",
+      "vi": "mối quan hệ thường khá đơn giản và trong sáng."
+    },
+    {
+      "start": 390.57,
+      "end": 391.27,
+      "en": "Right.",
+      "zh": "对。",
+      "pinyin": "Duì.",
+      "vi": "Đúng."
+    },
+    {
+      "start": 391.27,
+      "end": 394.84,
+      "en": "But once, I ran into big difficulties at work,",
+      "zh": "但有一次，我的工作遇到了很大的困难，",
+      "pinyin": "Dàn yǒu yí cì, wǒ de gōngzuò yùdào le hěn dà de kùnnan,",
+      "vi": "Nhưng có một lần, công việc của tôi gặp khó khăn rất lớn,"
+    },
+    {
+      "start": 394.87,
+      "end": 397.14,
+      "en": "and my overall state was terrible.",
+      "zh": "整个人的状态非常糟糕，",
+      "pinyin": "Zhěnggè rén de zhuàngtài fēicháng zāogāo,",
+      "vi": "trạng thái của cả con người tôi vô cùng tồi tệ,"
+    },
+    {
+      "start": 397.17,
+      "end": 399.7,
+      "en": "For a long time, I didn't want to see anyone,",
+      "zh": "很长一段时间里，我都不想见任何人，",
+      "pinyin": "Hěn cháng yí duàn shíjiān lǐ, wǒ dōu bù xiǎng jiàn rènhé rén,",
+      "vi": "Trong một thời gian dài, tôi không muốn gặp bất kỳ ai,"
+    },
+    {
+      "start": 399.73,
+      "end": 402.26,
+      "en": "and didn't want to take part in any activities, including hiking.",
+      "zh": "也不想去参加任何活动，包括爬山。",
+      "pinyin": "Yě bù xiǎng qù cānjiā rènhé huódòng, bāokuò páshān.",
+      "vi": "cũng không muốn tham gia bất kỳ hoạt động nào, kể cả leo núi."
+    },
+    {
+      "start": 402.3,
+      "end": 405.47,
+      "en": "I understand. When people are under a lot of pressure,",
+      "zh": "我理解，人在压力大的时候，",
+      "pinyin": "Wǒ lǐjiě, rén zài yālì dà de shíhou,",
+      "vi": "Tôi hiểu, khi con người chịu áp lực lớn,"
+    },
+    {
+      "start": 405.5,
+      "end": 407.13,
+      "en": "You want to shut yourself away.",
+      "zh": "会想把自己关起来。",
+      "pinyin": "Huì xiǎng bǎ zìjǐ guān qǐlái.",
+      "vi": "sẽ muốn tự nhốt mình lại."
+    },
+    {
+      "start": 407.17,
+      "end": 410.67,
+      "en": "Yes. But Chen Hao noticed my absence.",
+      "zh": "是的。但是陈浩注意到了我的缺席。",
+      "pinyin": "Shì de. Dànshì Chén Hào zhùyì dào le wǒ de quēxí.",
+      "vi": "Đúng vậy. Nhưng Chen Hao đã nhận ra sự vắng mặt của tôi."
+    },
+    {
+      "start": 410.7,
+      "end": 413.23,
+      "en": "He didn't keep texting me to ask what was wrong,",
+      "zh": "他没有一直给我发信息问我怎么了，",
+      "pinyin": "Tā méiyǒu yìzhí gěi wǒ fā xìnxī wèn wǒ zěnme le,",
+      "vi": "Anh ấy không nhắn tin liên tục hỏi tôi bị làm sao,"
+    },
+    {
+      "start": 413.27,
+      "end": 414.64,
+      "en": "but one night,",
+      "zh": "而是有一天晚上，",
+      "pinyin": "ér shì yǒu yì tiān wǎnshang,",
+      "vi": "mà là vào một buổi tối nọ,"
+    },
+    {
+      "start": 414.67,
+      "end": 417.67,
+      "en": "he showed up at my home with some food.",
+      "zh": "直接带着一些吃的来我家找我。",
+      "pinyin": "zhíjiē dàizhe yìxiē chī de lái wǒ jiā zhǎo wǒ.",
+      "vi": "trực tiếp mang theo chút đồ ăn đến nhà tìm tôi."
+    },
+    {
+      "start": 417.7,
+      "end": 421.4,
+      "en": "He knocked and opened the door, saw how bad I looked, and said nothing,",
+      "zh": "他敲开门，看到我糟糕的样子，什么也没说，",
+      "pinyin": "Tā qiāo kāi mén, kàndào wǒ zāogāo de yàngzi, shénme yě méi shuō,",
+      "vi": "Anh ấy gõ cửa bước vào, thấy bộ dạng tệ hại của tôi, không nói gì,"
+    },
+    {
+      "start": 421.43,
+      "end": 425.03,
+      "en": "he just put the things down and said, 'I guessed you haven't been eating properly.",
+      "zh": "只是把东西放下，说：“我猜你没好好吃饭。",
+      "pinyin": "zhǐshì bǎ dōngxi fàngxià, shuō: “Wǒ cāi nǐ méi hǎohǎo chīfàn.",
+      "vi": "chỉ đặt đồ xuống và nói: “Tôi đoán là bạn chưa ăn uống tử tế."
+    },
+    {
+      "start": 425.07,
+      "end": 427.84,
+      "en": "Let's eat something together; if you want to talk, talk,",
+      "zh": "我们一起吃点东西，你要是想说就说，",
+      "pinyin": "Wǒmen yìqǐ chī diǎn dōngxi, nǐ yàoshi xiǎng shuō jiù shuō,",
+      "vi": "Chúng ta cùng ăn chút gì đó, nếu bạn muốn nói thì cứ nói,"
+    },
+    {
+      "start": 427.87,
+      "end": 430.7,
+      "en": "and if you don't want to talk, I'll just sit quietly with you for a while.'",
+      "zh": "不想说，我就陪你安安静静地待一会儿。”",
+      "pinyin": "bù xiǎng shuō, wǒ jiù péi nǐ ān'ānjìngjìng de dāi yíhuìr.”",
+      "vi": "nếu không muốn nói, tôi sẽ ở bên bạn yên lặng một lúc.”"
+    },
+    {
+      "start": 430.73,
+      "end": 433.8,
+      "en": "Wow, a friend like that is so rare!",
+      "zh": "哇，这样的朋友太难得了！",
+      "pinyin": "Wā, zhèyàng de péngyou tài nándé le!",
+      "vi": "Chà, một người bạn như vậy thật hiếm có!"
+    },
+    {
+      "start": 433.83,
+      "end": 435.06,
+      "en": "He understands you very well.",
+      "zh": "他很懂你。",
+      "pinyin": "Tā hěn dǒng nǐ.",
+      "vi": "Anh ấy rất hiểu bạn."
+    },
+    {
+      "start": 435.1,
+      "end": 437.93,
+      "en": "Yes. That night, we talked for a long time.",
+      "zh": "是的。那天晚上，我们聊了很久。",
+      "pinyin": "Shì de. Nà tiān wǎnshang, wǒmen liáo le hěn jiǔ.",
+      "vi": "Đúng vậy. Tối hôm đó, chúng tôi nói chuyện rất lâu."
+    },
+    {
+      "start": 437.97,
+      "end": 440.67,
+      "en": "He didn't offer me any specific solutions,",
+      "zh": "他没有给我提供什么具体的解决方案，",
+      "pinyin": "Tā méiyǒu gěi wǒ tígōng shénme jùtǐ de jiějué fāng'àn,",
+      "vi": "Anh ấy không đưa cho tôi giải pháp cụ thể nào,"
+    },
+    {
+      "start": 440.7,
+      "end": 444.87,
+      "en": "but he listened carefully and gave me a lot of support and encouragement.",
+      "zh": "但他认真地倾听，给了我很多支持和鼓励。",
+      "pinyin": "dàn tā rènzhēn de qīngtīng, gěi le wǒ hěn duō zhīchí hé gǔlì.",
+      "vi": "nhưng anh ấy chăm chú lắng nghe, cho tôi rất nhiều sự ủng hộ và động viên."
+    },
+    {
+      "start": 444.9,
+      "end": 445.9,
+      "en": "From that day on,",
+      "zh": "从那天起，",
+      "pinyin": "Cóng nà tiān qǐ,",
+      "vi": "Từ hôm đó,"
+    },
+    {
+      "start": 445.9,
+      "end": 449.23,
+      "en": "I slowly came out of that awful state.",
+      "zh": "我才慢慢地从那种糟糕的状态里走出来。",
+      "pinyin": "wǒ cái mànmàn de cóng nà zhǒng zāogāo de zhuàngtài lǐ zǒu chūlái.",
+      "vi": "tôi mới dần dần bước ra khỏi trạng thái tồi tệ đó."
+    },
+    {
+      "start": 449.27,
+      "end": 452.27,
+      "en": "So I think my meeting with Chen Hao,",
+      "zh": "所以，我觉得我和陈浩的相遇，",
+      "pinyin": "Suǒyǐ, wǒ juéde wǒ hé Chén Hào de xiāngyù,",
+      "vi": "Vì vậy, tôi nghĩ cuộc gặp gỡ giữa tôi và Chen Hao,"
+    },
+    {
+      "start": 452.3,
+      "end": 454,
+      "en": "this 'fate,' its 'reason'",
+      "zh": "这个“缘分”，它的“原因”",
+      "pinyin": "zhège “yuánfèn”, tā de “yuányīn”",
+      "vi": "cái “duyên phận” này, “nguyên nhân” của nó"
+    },
+    {
+      "start": 454.03,
+      "end": 456.26,
+      "en": "is that at the moment I needed a friend most,",
+      "zh": "就是在那个我最需要朋友的时刻，",
+      "pinyin": "jiùshì zài nàge wǒ zuì xūyào péngyou de shíkè,",
+      "vi": "chính là vào khoảnh khắc tôi cần một người bạn nhất,"
+    },
+    {
+      "start": 456.3,
+      "end": 458.2,
+      "en": "he showed up there.",
+      "zh": "他出现在了那里。",
+      "pinyin": "tā chūxiàn zài le nàlǐ.",
+      "vi": "anh ấy đã xuất hiện ở đó."
+    },
+    {
+      "start": 458.23,
+      "end": 461.9,
+      "en": "He taught me that true care isn't about saying a lot,",
+      "zh": "他教会了我，真正的关心不是说很多话，",
+      "pinyin": "Tā jiāo huì le wǒ, zhēnzhèng de guānxīn bú shì shuō hěn duō huà,",
+      "vi": "Anh ấy đã dạy tôi rằng sự quan tâm thật sự không phải là nói nhiều,"
+    },
+    {
+      "start": 461.93,
+      "end": 463.66,
+      "en": "but about accompanying someone through actions.",
+      "zh": "而是用行动去陪伴。",
+      "pinyin": "érshì yòng xíngdòng qù péibàn.",
+      "vi": "mà là dùng hành động để đồng hành."
+    },
+    {
+      "start": 463.7,
+      "end": 465.9,
+      "en": "Your story moved me too.",
+      "zh": "你的故事也让我很感动。",
+      "pinyin": "Nǐ de gùshi yě ràng wǒ hěn gǎndòng.",
+      "vi": "Câu chuyện của bạn cũng khiến tôi rất cảm động."
+    },
+    {
+      "start": 465.9,
+      "end": 467.8,
+      "en": "Teacher Zhang and Chen Hao,",
+      "zh": "张老师和陈浩，",
+      "pinyin": "Zhāng lǎoshī hé Chén Hào,",
+      "vi": "Thầy Zhang và Chen Hao,"
+    },
+    {
+      "start": 467.83,
+      "end": 471.06,
+      "en": "they both came to help us, support us,",
+      "zh": "他们都是来帮助我们、支持我们、",
+      "pinyin": "tāmen dōu shì lái bāngzhù wǒmen, zhīchí wǒmen,",
+      "vi": "họ đều là những người đến để giúp đỡ chúng ta, ủng hộ chúng ta,"
+    },
+    {
+      "start": 471.1,
+      "end": 473.7,
+      "en": "and bring positive influence into our lives.",
+      "zh": "给我们带来积极影响的人。",
+      "pinyin": "gěi wǒmen dàilái jījí yǐngxiǎng de rén.",
+      "vi": "và mang đến ảnh hưởng tích cực cho chúng ta."
+    },
+    {
+      "start": 473.73,
+      "end": 476.53,
+      "en": "When we meet people like this, this rule—",
+      "zh": "当我们遇到这样的人时，这个规则",
+      "pinyin": "Dāng wǒmen yùdào zhèyàng de rén shí, zhège guīzé",
+      "vi": "Khi chúng ta gặp những người như vậy, quy tắc này"
+    },
+    {
+      "start": 476.57,
+      "end": 479.5,
+      "en": "'Everyone who comes into your life is there for a reason'",
+      "zh": "“来到你身边的人，都是有原因的”",
+      "pinyin": "“Láidào nǐ shēnbiān de rén, dōu shì yǒu yuányīn de”",
+      "vi": "“Những người đến bên bạn, đều là có lý do”"
+    },
+    {
+      "start": 479.53,
+      "end": 481.43,
+      "en": "is easy to understand and accept.",
+      "zh": "就很容易理解和接受。",
+      "pinyin": "jiù hěn róngyì lǐjiě hé jiēshòu.",
+      "vi": "sẽ rất dễ hiểu và chấp nhận."
+    },
+    {
+      "start": 481.43,
+      "end": 482.2,
+      "en": "Exactly.",
+      "zh": "没错。",
+      "pinyin": "Méicuò.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 482.23,
+      "end": 484.86,
+      "en": "Because what they bring are all beautiful experiences.",
+      "zh": "因为他们带来的都是美好的体验。",
+      "pinyin": "Yīnwèi tāmen dàilái de dōu shì měihǎo de tǐyàn.",
+      "vi": "Bởi vì những gì họ mang đến đều là trải nghiệm tốt đẹp."
+    },
+    {
+      "start": 484.9,
+      "end": 487.07,
+      "en": "But, Wang Yu, we all know,",
+      "zh": "但是，王雨，我们都知道，",
+      "pinyin": "Dànshì, Wáng Yǔ, wǒmen dōu zhīdào,",
+      "vi": "Nhưng, Wang Yu, chúng ta đều biết,"
+    },
+    {
+      "start": 487.1,
+      "end": 489.4,
+      "en": "life isn't full of people like that.",
+      "zh": "生活中不全是这样的人。",
+      "pinyin": "shēnghuó zhōng bù quán shì zhèyàng de rén.",
+      "vi": "trong cuộc sống không phải toàn là người như vậy."
+    },
+    {
+      "start": 489.43,
+      "end": 491.7,
+      "en": "We also meet some people who make us unhappy,",
+      "zh": "我们也会遇到一些让我们不开心，",
+      "pinyin": "Wǒmen yě huì yùdào yìxiē ràng wǒmen bù kāixīn,",
+      "vi": "Chúng ta cũng sẽ gặp một số người khiến chúng ta không vui,"
+    },
+    {
+      "start": 491.73,
+      "end": 493.53,
+      "en": "or even people who bring us harm.",
+      "zh": "甚至给我们带来伤害的人。",
+      "pinyin": "shènzhì gěi wǒmen dàilái shānghài de rén.",
+      "vi": "thậm chí là những người mang đến tổn thương cho chúng ta."
+    },
+    {
+      "start": 493.57,
+      "end": 496.7,
+      "en": "Yes, that's exactly what I want to ask next.",
+      "zh": "是的，这正是我接下来想问的。",
+      "pinyin": "Shì de, zhè zhèng shì wǒ jiēxiàlái xiǎng wèn de.",
+      "vi": "Đúng vậy, đây chính là điều tôi muốn hỏi tiếp theo."
+    },
+    {
+      "start": 496.73,
+      "end": 499.73,
+      "en": "Does this rule apply to them too?",
+      "zh": "这个规则，也适用于他们吗？",
+      "pinyin": "Zhège guīzé, yě shìyòng yú tāmen ma?",
+      "vi": "Quy tắc này cũng áp dụng cho họ sao?"
+    },
+    {
+      "start": 499.77,
+      "end": 502.34,
+      "en": "Li Ming, to be honest, this rule—",
+      "zh": "李明，说实话，这个规则",
+      "pinyin": "Lǐ Míng, shuō shíhuà, zhège guīzé",
+      "vi": "Li Ming, nói thật nhé, quy tắc này"
+    },
+    {
+      "start": 502.37,
+      "end": 504.9,
+      "en": "the most confusing part for me is right here.",
+      "zh": "最让我困惑的地方就在这里。",
+      "pinyin": "zuì ràng wǒ kùnhuò de dìfang jiù zài zhèlǐ.",
+      "vi": "chỗ khiến tôi bối rối nhất chính là ở đây."
+    },
+    {
+      "start": 504.93,
+      "end": 507.23,
+      "en": "The people we just talked about are all very good people,",
+      "zh": "我们刚刚说的都是很好的人，",
+      "pinyin": "Wǒmen gānggāng shuō de dōu shì hěn hǎo de rén,",
+      "vi": "Những người chúng ta vừa nói đến đều là người rất tốt,"
+    },
+    {
+      "start": 507.27,
+      "end": 509.8,
+      "en": "their appearance is like sunshine.",
+      "zh": "他们的出现像阳光一样。",
+      "pinyin": "tāmen de chūxiàn xiàng yángguāng yíyàng.",
+      "vi": "sự xuất hiện của họ giống như ánh nắng mặt trời."
+    },
+    {
+      "start": 509.83,
+      "end": 510.56,
+      "en": "But,",
+      "zh": "但是，",
+      "pinyin": "Dànshì,",
+      "vi": "Nhưng,"
+    },
+    {
+      "start": 510.57,
+      "end": 514.24,
+      "en": "in life we also meet some people who are hard to get along with,",
+      "zh": "生活中我们也会遇到一些很难相处的人，",
+      "pinyin": "shēnghuó zhōng wǒmen yě huì yùdào yìxiē hěn nán xiāngchǔ de rén,",
+      "vi": "trong cuộc sống chúng ta cũng sẽ gặp một số người rất khó hòa hợp,"
+    },
+    {
+      "start": 514.27,
+      "end": 517.14,
+      "en": "for example, a colleague who always criticizes you,",
+      "zh": "比如一个总是批评你的同事，",
+      "pinyin": "bǐrú yí ge zǒngshì pīpíng nǐ de tóngshì,",
+      "vi": "ví dụ một đồng nghiệp luôn chỉ trích bạn,"
+    },
+    {
+      "start": 517.17,
+      "end": 519.5,
+      "en": "a friend who doesn't understand you,",
+      "zh": "一个不理解你的朋友，",
+      "pinyin": "yí ge bù lǐjiě nǐ de péngyou,",
+      "vi": "một người bạn không hiểu bạn,"
+    },
+    {
+      "start": 519.53,
+      "end": 522.26,
+      "en": "or even people who have hurt us.",
+      "zh": "甚至是一些伤害过我们的人。",
+      "pinyin": "shènzhì shì yìxiē shānghài guo wǒmen de rén.",
+      "vi": "thậm chí là một số người đã từng làm tổn thương chúng ta."
+    },
+    {
+      "start": 522.3,
+      "end": 526.07,
+      "en": "Could it be that their appearance also has a 'reason'?",
+      "zh": "难道他们的出现，也是有“原因”的吗？",
+      "pinyin": "Nándào tāmen de chūxiàn, yě shì yǒu “yuányīn” de ma?",
+      "vi": "Chẳng lẽ sự xuất hiện của họ cũng có “nguyên nhân” sao?"
+    },
+    {
+      "start": 526.1,
+      "end": 527.67,
+      "en": "What is that reason?",
+      "zh": "这个原因是什么？",
+      "pinyin": "Zhège yuányīn shì shénme?",
+      "vi": "Nguyên nhân đó là gì?"
+    },
+    {
+      "start": 527.7,
+      "end": 529.93,
+      "en": "Sometimes I really find it hard to understand,",
+      "zh": "我有时候真的很难理解，",
+      "pinyin": "Wǒ yǒushíhou zhēn de hěn nán lǐjiě,",
+      "vi": "Đôi khi tôi thật sự khó hiểu nổi,"
+    },
+    {
+      "start": 529.97,
+      "end": 532.87,
+      "en": "it just feels like bad luck.",
+      "zh": "感觉只是运气不好而已。",
+      "pinyin": "gǎnjué zhǐshì yùnqi bù hǎo éryǐ.",
+      "vi": "cảm giác chỉ là do kém may mắn mà thôi."
+    },
+    {
+      "start": 532.9,
+      "end": 534.9,
+      "en": "I completely understand how you feel.",
+      "zh": "我完全理解你的感受。",
+      "pinyin": "Wǒ wánquán lǐjiě nǐ de gǎnshòu.",
+      "vi": "Tôi hoàn toàn hiểu cảm giác của bạn."
+    },
+    {
+      "start": 534.93,
+      "end": 537.7,
+      "en": "This is indeed the hardest part of this rule to accept,",
+      "zh": "这确实是这个规则最难接受，",
+      "pinyin": "Zhè quèshí shì zhège guīzé zuì nán jiēshòu,",
+      "vi": "Đây thực sự là phần khó chấp nhận nhất của quy tắc này,"
+    },
+    {
+      "start": 537.73,
+      "end": 539.5,
+      "en": "and the most profound part.",
+      "zh": "也最深刻的部分。",
+      "pinyin": "Yě zuì shēnkè de bùfen.",
+      "vi": "và cũng là phần sâu sắc nhất."
+    },
+    {
+      "start": 539.53,
+      "end": 542.26,
+      "en": "When we feel pain in a relationship,",
+      "zh": "当我们在一段关系中感到痛苦时，",
+      "pinyin": "Dāng wǒmen zài yī duàn guānxi zhōng gǎndào tòngkǔ shí,",
+      "vi": "Khi chúng ta cảm thấy đau khổ trong một mối quan hệ,"
+    },
+    {
+      "start": 542.3,
+      "end": 545.47,
+      "en": "believing that the other person's appearance has a positive reason,",
+      "zh": "去相信对方的出现是有积极原因的，",
+      "pinyin": "Qù xiāngxìn duìfāng de chūxiàn shì yǒu jījí yuányīn de,",
+      "vi": "việc tin rằng sự xuất hiện của đối phương có lý do tích cực,"
+    },
+    {
+      "start": 545.5,
+      "end": 548.1,
+      "en": "sounds almost impossible.",
+      "zh": "这听起来几乎是不可能的。",
+      "pinyin": "Zhè tīng qǐlái jīhū shì bù kěnéng de.",
+      "vi": "điều này nghe gần như là không thể."
+    },
+    {
+      "start": 548.13,
+      "end": 551.86,
+      "en": "Right, it feels like making excuses for the other person,",
+      "zh": "对啊，感觉就像是在为对方找借口，",
+      "pinyin": "Duì a, gǎnjué jiù xiàng shì zài wèi duìfāng zhǎo jièkǒu,",
+      "vi": "Đúng vậy, cảm giác cứ như đang tìm cớ cho đối phương,"
+    },
+    {
+      "start": 551.9,
+      "end": 554.9,
+      "en": "or comforting yourself.",
+      "zh": "或者是在安慰自己。",
+      "pinyin": "Huòzhě shì zài ānwèi zìjǐ.",
+      "vi": "hoặc là đang tự an ủi bản thân."
+    },
+    {
+      "start": 554.93,
+      "end": 557.13,
+      "en": "Mm, we can look at it from another angle.",
+      "zh": "嗯，我们可以换一个角度来看。",
+      "pinyin": "Ǹg, wǒmen kěyǐ huàn yī ge jiǎodù lái kàn.",
+      "vi": "Ừm, chúng ta có thể nhìn từ một góc độ khác."
+    },
+    {
+      "start": 557.17,
+      "end": 560.64,
+      "en": "This “reason” may not be to make us “happy,”",
+      "zh": "这个“原因”可能不是为了让我们“快乐”，",
+      "pinyin": "Zhège “yuányīn” kěnéng bù shì wèile ràng wǒmen “kuàilè”,",
+      "vi": "“Lý do” này có thể không phải để khiến chúng ta “vui vẻ”,"
+    },
+    {
+      "start": 560.67,
+      "end": 563.84,
+      "en": "but to make us “learn” and “grow.”",
+      "zh": "而是为了让我们“学习”和“成长”。",
+      "pinyin": "Ér shì wèile ràng wǒmen “xuéxí” hé “chéngzhǎng”.",
+      "vi": "mà là để khiến chúng ta “học hỏi” và “trưởng thành”."
+    },
+    {
+      "start": 563.87,
+      "end": 566.2,
+      "en": "These people, we can see them as",
+      "zh": "这些人，我们可以把他们看作是",
+      "pinyin": "Zhèxiē rén, wǒmen kěyǐ bǎ tāmen kànzuò shì",
+      "vi": "Những người này, chúng ta có thể coi họ là"
+    },
+    {
+      "start": 566.23,
+      "end": 569.9,
+      "en": "“special teachers” sent by life to test us.",
+      "zh": "生活派来考验我们的“特殊老师”。",
+      "pinyin": "Shēnghuó pài lái kǎoyàn wǒmen de “tèshū lǎoshī”.",
+      "vi": "những “người thầy đặc biệt” mà cuộc sống phái đến để thử thách chúng ta."
+    },
+    {
+      "start": 569.93,
+      "end": 571.73,
+      "en": "“Special teachers”?",
+      "zh": "“特殊老师”？",
+      "pinyin": "“Tèshū lǎoshī”?",
+      "vi": "“Người thầy đặc biệt”?"
+    },
+    {
+      "start": 571.77,
+      "end": 573.54,
+      "en": "That metaphor is interesting.",
+      "zh": "这个比喻很有趣。",
+      "pinyin": "Zhège bǐyù hěn yǒuqù.",
+      "vi": "Cách ví von này rất thú vị."
+    },
+    {
+      "start": 573.57,
+      "end": 576.14,
+      "en": "Yes. They are like a mirror,",
+      "zh": "是的。他们就像一面镜子，",
+      "pinyin": "Shì de. Tāmen jiù xiàng yī miàn jìngzi,",
+      "vi": "Đúng vậy. Họ giống như một tấm gương,"
+    },
+    {
+      "start": 576.17,
+      "end": 580.24,
+      "en": "reflecting some of our own problems or weaknesses.",
+      "zh": "照出了我们自己的一些问题或者弱点。",
+      "pinyin": "Zhàochū le wǒmen zìjǐ de yīxiē wèntí huòzhě ruòdiǎn.",
+      "vi": "phản chiếu một số vấn đề hoặc điểm yếu của chính chúng ta."
+    },
+    {
+      "start": 580.27,
+      "end": 584.14,
+      "en": "For example, that colleague you just mentioned who always criticizes you.",
+      "zh": "比如，你刚刚提到的那个总是批评你的同事。",
+      "pinyin": "Bǐrú, nǐ gānggāng tídào de nàge zǒngshì pīpíng nǐ de tóngshì.",
+      "vi": "Ví dụ, người đồng nghiệp mà bạn vừa nhắc đến, người luôn chỉ trích bạn."
+    },
+    {
+      "start": 584.17,
+      "end": 587.04,
+      "en": "His appearance may not be to make you uncomfortable,",
+      "zh": "他的出现，可能不是为了让你难受，",
+      "pinyin": "Tā de chūxiàn, kěnéng bù shì wèile ràng nǐ nánshòu,",
+      "vi": "Sự xuất hiện của anh ta có thể không phải để khiến bạn khó chịu,"
+    },
+    {
+      "start": 587.07,
+      "end": 589.94,
+      "en": "but to teach you how to build self-confidence,",
+      "zh": "而是来教会你如何建立自信，",
+      "pinyin": "Ér shì lái jiāohuì nǐ rúhé jiànlì zìxìn,",
+      "vi": "mà là đến để dạy bạn cách xây dựng sự tự tin,"
+    },
+    {
+      "start": 589.97,
+      "end": 592,
+      "en": "how to stand firm in your position,",
+      "zh": "如何坚定自己的立场，",
+      "pinyin": "Rúhé jiāndìng zìjǐ de lìchǎng,",
+      "vi": "cách kiên định lập trường của mình,"
+    },
+    {
+      "start": 592.03,
+      "end": 595.6,
+      "en": "and how not to let others' judgments affect your mood.",
+      "zh": "如何不让别人的评价影响你的心情。",
+      "pinyin": "Rúhé bù ràng biérén de píngjià yǐngxiǎng nǐ de xīnqíng.",
+      "vi": "cách không để đánh giá của người khác ảnh hưởng đến tâm trạng của bạn."
+    },
+    {
+      "start": 595.63,
+      "end": 598.63,
+      "en": "You mean, by getting along with him,",
+      "zh": "你的意思是，通过和他相处，",
+      "pinyin": "Nǐ de yìsi shì, tōngguò hé tā xiāngchǔ,",
+      "vi": "Ý bạn là, thông qua việc tiếp xúc với anh ta,"
+    },
+    {
+      "start": 598.67,
+      "end": 603.2,
+      "en": "I'm forced to learn these skills I didn't have before?",
+      "zh": "我被迫要去学习这些我以前不会的技能？",
+      "pinyin": "Wǒ bèipò yào qù xuéxí zhèxiē wǒ yǐqián bù huì de jìnéng?",
+      "vi": "tôi buộc phải học những kỹ năng mà trước đây tôi không biết?"
+    },
+    {
+      "start": 603.23,
+      "end": 604.8,
+      "en": "Exactly.",
+      "zh": "正是这个意思。",
+      "pinyin": "Zhèng shì zhège yìsi.",
+      "vi": "Đúng chính là ý đó."
+    },
+    {
+      "start": 604.83,
+      "end": 608.43,
+      "en": "If you hadn't met him, you might never realize",
+      "zh": "如果你没有遇到他，你可能永远不会意识到，",
+      "pinyin": "Rúguǒ nǐ méiyǒu yùdào tā, nǐ kěnéng yǒngyuǎn bù huì yìshí dào,",
+      "vi": "Nếu bạn không gặp anh ta, có thể bạn sẽ mãi mãi không nhận ra,"
+    },
+    {
+      "start": 608.47,
+      "end": 611.47,
+      "en": "that you actually care so much about others' opinions.",
+      "zh": "自己原来那么在意别人的看法。",
+      "pinyin": "Zìjǐ yuánlái nàme zàiyì biérén de kànfǎ.",
+      "vi": "rằng hóa ra bản thân bạn lại quan tâm đến cách nhìn của người khác đến vậy."
+    },
+    {
+      "start": 611.5,
+      "end": 614.03,
+      "en": "Although his presence makes you uncomfortable,",
+      "zh": "他的存在，虽然让你不舒服，",
+      "pinyin": "Tā de cúnzài, suīrán ràng nǐ bù shūfu,",
+      "vi": "Sự tồn tại của anh ta, dù khiến bạn không thoải mái,"
+    },
+    {
+      "start": 614.07,
+      "end": 616.44,
+      "en": "it also gives you a chance to grow.",
+      "zh": "但也给了你一个成长的机会。",
+      "pinyin": "Dàn yě gěi le nǐ yī ge chéngzhǎng de jīhuì.",
+      "vi": "nhưng cũng cho bạn một cơ hội để trưởng thành."
+    },
+    {
+      "start": 616.47,
+      "end": 619.04,
+      "en": "You can choose to let him affect you all the time,",
+      "zh": "你可以选择一直被他影响，",
+      "pinyin": "Nǐ kěyǐ xuǎnzé yīzhí bèi tā yǐngxiǎng,",
+      "vi": "Bạn có thể chọn để bị anh ta ảnh hưởng mãi,"
+    },
+    {
+      "start": 619.07,
+      "end": 623.27,
+      "en": "or you can choose to become stronger through this.",
+      "zh": "也可以选择通过这件事让自己变得更强大。",
+      "pinyin": "Yě kěyǐ xuǎnzé tōngguò zhè jiàn shì ràng zìjǐ biàn de gèng qiángdà.",
+      "vi": "hoặc cũng có thể chọn nhờ chuyện này mà khiến bản thân trở nên mạnh mẽ hơn."
+    },
+    {
+      "start": 623.3,
+      "end": 625.33,
+      "en": "I think I'm starting to understand.",
+      "zh": "我好像有点明白了。",
+      "pinyin": "Wǒ hǎoxiàng yǒudiǎn míngbai le.",
+      "vi": "Tôi hình như đã hiểu ra một chút."
+    },
+    {
+      "start": 625.33,
+      "end": 626.43,
+      "en": "This “reason,”",
+      "zh": "这个“原因”，",
+      "pinyin": "Zhège “yuányīn”,",
+      "vi": "“Lý do” này,"
+    },
+    {
+      "start": 626.47,
+      "end": 630.9,
+      "en": "is more about ourselves than about the other person.",
+      "zh": "更多的是关于我们自己，而不是关于对方。",
+      "pinyin": "Gèng duō de shì guānyú wǒmen zìjǐ, ér bù shì guānyú duìfāng.",
+      "vi": "phần lớn là về chính chúng ta, chứ không phải về đối phương."
+    },
+    {
+      "start": 630.93,
+      "end": 632.3,
+      "en": "Very accurate.",
+      "zh": "非常准确。",
+      "pinyin": "Fēicháng zhǔnquè.",
+      "vi": "Rất chính xác."
+    },
+    {
+      "start": 632.33,
+      "end": 633.86,
+      "en": "The core of this rule",
+      "zh": "这个规则的核心，",
+      "pinyin": "Zhège guīzé de héxīn,",
+      "vi": "Cốt lõi của quy tắc này,"
+    },
+    {
+      "start": 633.9,
+      "end": 637.07,
+      "en": "is to shift the focus from “Why does he treat me like this?”",
+      "zh": "是把焦点从“他为什么这样对我？”",
+      "pinyin": "Shì bǎ jiāodiǎn cóng “tā wèishénme zhèyàng duì wǒ?”",
+      "vi": "là chuyển trọng tâm từ “Tại sao anh ta lại đối xử với tôi như vậy?”"
+    },
+    {
+      "start": 637.1,
+      "end": 641,
+      "en": "to “What can I learn from this?”",
+      "zh": "转移到“我能从这件事中学到什么？”。",
+      "pinyin": "Zhuǎnyí dào “wǒ néng cóng zhè jiàn shì zhōng xué dào shénme?”.",
+      "vi": "sang “Tôi có thể học được gì từ chuyện này?”."
+    },
+    {
+      "start": 641.03,
+      "end": 643.43,
+      "en": "I can also share an example of my own.",
+      "zh": "我也可以分享一个我自己的例子。",
+      "pinyin": "Wǒ yě kěyǐ fēnxiǎng yī ge wǒ zìjǐ de lìzi.",
+      "vi": "Tôi cũng có thể chia sẻ một ví dụ của chính mình."
+    },
+    {
+      "start": 643.47,
+      "end": 644.8,
+      "en": "When I first started working,",
+      "zh": "我刚工作的时候，",
+      "pinyin": "Wǒ gāng gōngzuò de shíhou,",
+      "vi": "Khi tôi mới đi làm,"
+    },
+    {
+      "start": 644.83,
+      "end": 647.73,
+      "en": "I had a leader who was especially strict with me,",
+      "zh": "有一个领导，对我要求特别严格，",
+      "pinyin": "Yǒu yī ge lǐngdǎo, duì wǒ yāoqiú tèbié yángé,",
+      "vi": "có một người lãnh đạo yêu cầu với tôi đặc biệt nghiêm khắc,"
+    },
+    {
+      "start": 647.77,
+      "end": 649.64,
+      "en": "even a bit harsh.",
+      "zh": "甚至有点苛刻。",
+      "pinyin": "Shènzhì yǒudiǎn kēkè.",
+      "vi": "thậm chí có chút khắt khe."
+    },
+    {
+      "start": 649.67,
+      "end": 652.67,
+      "en": "No matter what I did, he could always find a problem.",
+      "zh": "我做的任何事情，他总能找到问题。",
+      "pinyin": "Wǒ zuò de rènhé shìqing, tā zǒng néng zhǎodào wèntí.",
+      "vi": "Bất cứ việc gì tôi làm, anh ta luôn có thể tìm ra vấn đề."
+    },
+    {
+      "start": 652.7,
+      "end": 655.27,
+      "en": "Wow, the pressure must have been huge.",
+      "zh": "哇，那压力一定很大。",
+      "pinyin": "Wā, nà yālì yīdìng hěn dà.",
+      "vi": "Chà, áp lực chắc hẳn rất lớn."
+    },
+    {
+      "start": 655.3,
+      "end": 656.63,
+      "en": "Very big.",
+      "zh": "非常大。",
+      "pinyin": "Fēicháng dà.",
+      "vi": "Vô cùng lớn."
+    },
+    {
+      "start": 656.67,
+      "end": 659.2,
+      "en": "At the time, I felt he was targeting me,",
+      "zh": "我当时觉得他就是在针对我，",
+      "pinyin": "Wǒ dāngshí juéde tā jiù shì zài zhēnduì wǒ,",
+      "vi": "Lúc đó tôi cảm thấy anh ta đang nhắm vào tôi,"
+    },
+    {
+      "start": 659.23,
+      "end": 661.66,
+      "en": "and felt miserable going to work every day.",
+      "zh": "每天上班都觉得很痛苦。",
+      "pinyin": "Měitiān shàngbān dōu juéde hěn tòngkǔ.",
+      "vi": "mỗi ngày đi làm đều cảm thấy rất đau khổ."
+    },
+    {
+      "start": 661.7,
+      "end": 663.53,
+      "en": "I even thought about quitting.",
+      "zh": "我甚至想过辞职。",
+      "pinyin": "Wǒ shènzhì xiǎngguò cízhí.",
+      "vi": "Tôi thậm chí từng nghĩ đến việc nghỉ việc."
+    },
+    {
+      "start": 663.57,
+      "end": 668.54,
+      "en": "But later, I found that the more afraid of him I was, the more easily I made mistakes.",
+      "zh": "但后来，我发现我越是怕他，就越容易出错。",
+      "pinyin": "Dàn hòulái, wǒ fāxiàn wǒ yuè shì pà tā, jiù yuè róngyì chūcuò.",
+      "vi": "Nhưng sau đó, tôi phát hiện càng sợ anh ta, tôi càng dễ mắc lỗi."
+    },
+    {
+      "start": 668.57,
+      "end": 670.64,
+      "en": "So I started changing my strategy.",
+      "zh": "于是我开始改变策略。",
+      "pinyin": "Yúshì wǒ kāishǐ gǎibiàn cèlüè.",
+      "vi": "Thế là tôi bắt đầu thay đổi chiến lược."
+    },
+    {
+      "start": 670.67,
+      "end": 672.6,
+      "en": "Every time before I submit a report to him,",
+      "zh": "我每次交报告给他之前，",
+      "pinyin": "Wǒ měi cì jiāo bàogào gěi tā zhīqián,",
+      "vi": "Mỗi lần trước khi tôi nộp báo cáo cho anh ấy,"
+    },
+    {
+      "start": 672.63,
+      "end": 676.93,
+      "en": "I would check it three times myself first, thinking from his perspective",
+      "zh": "都会自己先检查三遍，站在他的角度去思考",
+      "pinyin": "Dōu huì zìjǐ xiān jiǎnchá sān biàn, zhàn zài tā de jiǎodù qù sīkǎo",
+      "vi": "tôi đều tự kiểm tra ba lần trước, đặt mình vào góc nhìn của anh ấy để suy nghĩ"
+    },
+    {
+      "start": 676.97,
+      "end": 678.7,
+      "en": "about what problems there might be.",
+      "zh": "可能会有什么问题。",
+      "pinyin": "Kěnéng huì yǒu shénme wèntí.",
+      "vi": "có thể sẽ có vấn đề gì."
+    },
+    {
+      "start": 678.73,
+      "end": 682.1,
+      "en": "I started communicating with him proactively and asking him for advice.",
+      "zh": "我开始主动和他沟通，向他请教。",
+      "pinyin": "Wǒ kāishǐ zhǔdòng hé tā gōutōng, xiàng tā qǐngjiào.",
+      "vi": "Tôi bắt đầu chủ động trao đổi với anh ấy và hỏi ý kiến anh ấy."
+    },
+    {
+      "start": 682.13,
+      "end": 683.6,
+      "en": "How did it turn out?",
+      "zh": "结果怎么样？",
+      "pinyin": "Jiéguǒ zěnmeyàng?",
+      "vi": "Kết quả thế nào?"
+    },
+    {
+      "start": 683.63,
+      "end": 686.83,
+      "en": "As a result, I found that during that process, my work ability",
+      "zh": "结果，我发现我的工作能力在那个过程中",
+      "pinyin": "Jiéguǒ, wǒ fāxiàn wǒ de gōngzuò nénglì zài nàge guòchéng zhōng",
+      "vi": "Kết quả là, tôi phát hiện năng lực làm việc của mình trong quá trình đó"
+    },
+    {
+      "start": 686.87,
+      "end": 688.07,
+      "en": "improved rapidly.",
+      "zh": "飞速提升。",
+      "pinyin": "Fēisù tíshēng.",
+      "vi": "đã được nâng cao nhanh chóng."
+    },
+    {
+      "start": 688.1,
+      "end": 691,
+      "en": "My attention to detail and sense of responsibility at work,",
+      "zh": "我对细节的关注，对工作的责任心，",
+      "pinyin": "Wǒ duì xìjié de guānzhù, duì gōngzuò de zérènxīn,",
+      "vi": "Sự chú ý của tôi đến từng chi tiết, tinh thần trách nhiệm với công việc,"
+    },
+    {
+      "start": 691.03,
+      "end": 693.7,
+      "en": "were all 'forced' out of me at that time.",
+      "zh": "都是在那个时候被“逼”出来的。",
+      "pinyin": "Dōu shì zài nàge shíhou bèi “bī” chūlái de.",
+      "vi": "đều bị “ép” ra trong khoảng thời gian đó."
+    },
+    {
+      "start": 693.73,
+      "end": 695.93,
+      "en": "Many years later, when I look back on that experience,",
+      "zh": "很多年后，我再回想那段经历，",
+      "pinyin": "Hěn duō nián hòu, wǒ zài huíxiǎng nà duàn jīnglì,",
+      "vi": "Nhiều năm sau, khi tôi nhớ lại trải nghiệm đó,"
+    },
+    {
+      "start": 695.97,
+      "end": 698.04,
+      "en": "I even feel a little grateful to him.",
+      "zh": "我甚至有点感谢他。",
+      "pinyin": "Wǒ shènzhì yǒudiǎn gǎnxiè tā.",
+      "vi": "tôi thậm chí có chút biết ơn anh ấy."
+    },
+    {
+      "start": 698.07,
+      "end": 700.27,
+      "en": "His appearance—although the process was painful—",
+      "zh": "他的出现，虽然过程很痛苦，",
+      "pinyin": "Tā de chūxiàn, suīrán guòchéng hěn tòngkǔ,",
+      "vi": "Sự xuất hiện của anh ấy, dù quá trình rất đau khổ,"
+    },
+    {
+      "start": 700.3,
+      "end": 701.73,
+      "en": "but that 'reason'",
+      "zh": "但那个“原因”，",
+      "pinyin": "Dàn nàge “yuányīn”,",
+      "vi": "nhưng cái “lý do” đó,"
+    },
+    {
+      "start": 701.77,
+      "end": 704.54,
+      "en": "was to make me a more professional,",
+      "zh": "就是为了让我成为一个更专业、",
+      "pinyin": "Jiùshì wèile ràng wǒ chéngwéi yí ge gèng zhuānyè,",
+      "vi": "chính là để giúp tôi trở thành một người chuyên nghiệp hơn,"
+    },
+    {
+      "start": 704.57,
+      "end": 706.34,
+      "en": "and more rigorous person in the workplace.",
+      "zh": "更严谨的职场人。",
+      "pinyin": "Gèng yánjǐn de zhíchǎng rén.",
+      "vi": "một người làm việc chặt chẽ hơn."
+    },
+    {
+      "start": 706.37,
+      "end": 709.64,
+      "en": "He was my 'special teacher.'",
+      "zh": "他就是我的那位“特殊老师”。",
+      "pinyin": "Tā jiùshì wǒ de nà wèi “tèshū lǎoshī”.",
+      "vi": "Anh ấy chính là “người thầy đặc biệt” đó của tôi."
+    },
+    {
+      "start": 709.67,
+      "end": 713.1,
+      "en": "After hearing your story, I really have some new thoughts.",
+      "zh": "听了你的故事，我真的有新的想法了。",
+      "pinyin": "Tīng le nǐ de gùshì, wǒ zhēn de yǒu xīn de xiǎngfǎ le.",
+      "vi": "Nghe câu chuyện của bạn, tôi thật sự có những suy nghĩ mới."
+    },
+    {
+      "start": 713.13,
+      "end": 717.8,
+      "en": "I think of a friend I once had; we used to be very close,",
+      "zh": "我想到以前有一个朋友，我们曾经关系很好，",
+      "pinyin": "Wǒ xiǎngdào yǐqián yǒu yí ge péngyou, wǒmen céngjīng guānxì hěn hǎo,",
+      "vi": "Tôi nhớ đến một người bạn trước đây, chúng tôi từng rất thân,"
+    },
+    {
+      "start": 717.83,
+      "end": 722.4,
+      "en": "but later, because of some misunderstandings, she said things that hurt me,",
+      "zh": "但后来因为一些误会，她说了些伤害我的话，",
+      "pinyin": "Dàn hòulái yīnwèi yìxiē wùhuì, tā shuō le xiē shānghài wǒ de huà,",
+      "vi": "nhưng sau đó vì vài hiểu lầm, cô ấy nói những lời làm tôi tổn thương,"
+    },
+    {
+      "start": 722.43,
+      "end": 724.5,
+      "en": "and we stopped contacting each other.",
+      "zh": "我们就不再联系了。",
+      "pinyin": "Wǒmen jiù bú zài liánxì le.",
+      "vi": "chúng tôi không còn liên lạc nữa."
+    },
+    {
+      "start": 724.53,
+      "end": 729.46,
+      "en": "For a long time, I was very sad and didn't understand why.",
+      "zh": "很长一段时间，我都很伤心，不明白为什么。",
+      "pinyin": "Hěn cháng yí duàn shíjiān, wǒ dōu hěn shāngxīn, bù míngbai wèishénme.",
+      "vi": "Trong một thời gian dài, tôi rất buồn, không hiểu vì sao."
+    },
+    {
+      "start": 729.5,
+      "end": 731.7,
+      "en": "Thinking about it now, that matter",
+      "zh": "现在想想，那件事",
+      "pinyin": "Xiànzài xiǎngxiang, nà jiàn shì",
+      "vi": "Bây giờ nghĩ lại, chuyện đó"
+    },
+    {
+      "start": 731.73,
+      "end": 734.66,
+      "en": "may also have come to teach me something.",
+      "zh": "可能也是来教会我一些东西的。",
+      "pinyin": "Kěnéng yě shì lái jiāo huì wǒ yìxiē dōngxi de.",
+      "vi": "có lẽ cũng đến để dạy tôi vài điều."
+    },
+    {
+      "start": 734.7,
+      "end": 737,
+      "en": "For example?",
+      "zh": "比如呢？",
+      "pinyin": "Bǐrú ne?",
+      "vi": "Ví dụ là gì?"
+    },
+    {
+      "start": 737.03,
+      "end": 740.46,
+      "en": "For example, it taught me to see clearly, in friendship,",
+      "zh": "比如，它教会我看清了在友谊中",
+      "pinyin": "Bǐrú, tā jiāo huì wǒ kàn qīng le zài yǒuyì zhōng",
+      "vi": "Ví dụ, nó dạy tôi nhìn rõ trong tình bạn"
+    },
+    {
+      "start": 740.5,
+      "end": 742.7,
+      "en": "what I value most,",
+      "zh": "我最看重的是什么，",
+      "pinyin": "Wǒ zuì kànzhòng de shì shénme,",
+      "vi": "điều tôi coi trọng nhất là gì,"
+    },
+    {
+      "start": 742.73,
+      "end": 746.63,
+      "en": "and it also taught me how to set my own boundaries.",
+      "zh": "也教会我如何设定自己的底线。",
+      "pinyin": "Yě jiāo huì wǒ rúhé shèdìng zìjǐ de dǐxiàn.",
+      "vi": "và cũng dạy tôi cách đặt ra giới hạn của bản thân."
+    },
+    {
+      "start": 746.67,
+      "end": 752.04,
+      "en": "When others cross my boundaries, I have the right to choose to leave.",
+      "zh": "当别人越过我的底线时，我有权利选择离开。",
+      "pinyin": "Dāng biérén yuèguò wǒ de dǐxiàn shí, wǒ yǒu quánlì xuǎnzé líkāi.",
+      "vi": "Khi người khác vượt quá giới hạn của tôi, tôi có quyền chọn rời đi."
+    },
+    {
+      "start": 752.07,
+      "end": 754.4,
+      "en": "Although I lost that friend,",
+      "zh": "虽然失去了那个朋友，",
+      "pinyin": "Suīrán shīqù le nàge péngyou,",
+      "vi": "Dù đã mất đi người bạn đó,"
+    },
+    {
+      "start": 754.43,
+      "end": 757.8,
+      "en": "I gained a deeper understanding of myself.",
+      "zh": "但我对自己有了更深的了解。",
+      "pinyin": "Dàn wǒ duì zìjǐ yǒu le gèng shēn de liǎojiě.",
+      "vi": "nhưng tôi hiểu mình sâu sắc hơn."
+    },
+    {
+      "start": 757.83,
+      "end": 759.63,
+      "en": "This process of 'learning,'",
+      "zh": "这个“学习”的过程，",
+      "pinyin": "Zhège “xuéxí” de guòchéng,",
+      "vi": "Quá trình “học hỏi” này,"
+    },
+    {
+      "start": 759.67,
+      "end": 762.54,
+      "en": "is perhaps the 'reason' she appeared.",
+      "zh": "也许就是她出现的“原因”吧。",
+      "pinyin": "Yěxǔ jiùshì tā chūxiàn de “yuányīn” ba.",
+      "vi": "có lẽ chính là “lý do” cô ấy xuất hiện."
+    },
+    {
+      "start": 762.57,
+      "end": 766.07,
+      "en": "You see, you can already, from that unpleasant experience,",
+      "zh": "你看，你已经能从那段不愉快的经历中，",
+      "pinyin": "Nǐ kàn, nǐ yǐjīng néng cóng nà duàn bù yúkuài de jīnglì zhōng,",
+      "vi": "Bạn thấy đấy, bạn đã có thể từ trải nghiệm không vui đó,"
+    },
+    {
+      "start": 766.1,
+      "end": 768.47,
+      "en": "find the 'gift' it brought you.",
+      "zh": "找到它带给你的“礼物”了。",
+      "pinyin": "Zhǎodào tā dài gěi nǐ de “lǐwù” le.",
+      "vi": "tìm ra “món quà” mà nó mang đến cho bạn rồi."
+    },
+    {
+      "start": 768.5,
+      "end": 770.1,
+      "en": "That's really remarkable.",
+      "zh": "这非常了不起。",
+      "pinyin": "Zhè fēicháng liǎobuqǐ.",
+      "vi": "Điều này rất đáng nể."
+    },
+    {
+      "start": 770.13,
+      "end": 772.33,
+      "en": "So, whether it's people who bring happiness,",
+      "zh": "所以，无论是带来快乐的人，",
+      "pinyin": "Suǒyǐ, wúlùn shì dàilái kuàilè de rén,",
+      "vi": "Vì vậy, dù là người mang đến niềm vui,"
+    },
+    {
+      "start": 772.37,
+      "end": 773.87,
+      "en": "or people who bring pain,",
+      "zh": "还是带来痛苦的人，",
+      "pinyin": "Háishì dàilái tòngkǔ de rén,",
+      "vi": "hay người mang đến đau khổ,"
+    },
+    {
+      "start": 773.9,
+      "end": 776.7,
+      "en": "they are all part of our life journey.",
+      "zh": "他们都是我们人生旅途中的一部分。",
+      "pinyin": "Tāmen dōu shì wǒmen rénshēng lǚtú zhōng de yí bùfen.",
+      "vi": "họ đều là một phần trên hành trình cuộc đời chúng ta."
+    },
+    {
+      "start": 776.73,
+      "end": 778.13,
+      "en": "In different ways,",
+      "zh": "他们以不同的方式，",
+      "pinyin": "Tāmen yǐ bùtóng de fāngshì,",
+      "vi": "Họ bằng những cách khác nhau,"
+    },
+    {
+      "start": 778.17,
+      "end": 780.84,
+      "en": "they push us to become better versions of ourselves.",
+      "zh": "推动我们成为更好的自己。",
+      "pinyin": "Tuīdòng wǒmen chéngwéi gèng hǎo de zìjǐ.",
+      "vi": "thúc đẩy chúng ta trở thành phiên bản tốt hơn của chính mình."
+    },
+    {
+      "start": 780.87,
+      "end": 782.1,
+      "en": "Alright, Li Ming.",
+      "zh": "好了，李明。",
+      "pinyin": "Hǎo le, Lǐ Míng.",
+      "vi": "Được rồi, Lý Minh."
+    },
+    {
+      "start": 782.13,
+      "end": 785.63,
+      "en": "We discussed what 'encounters with a reason' are,",
+      "zh": "我们讨论了什么是“有原因的相遇”，",
+      "pinyin": "Wǒmen tǎolùn le shénme shì “yǒu yuányīn de xiāngyù”,",
+      "vi": "Chúng ta đã thảo luận “những cuộc gặp gỡ có lý do” là gì,"
+    },
+    {
+      "start": 785.67,
+      "end": 790.7,
+      "en": "and also analyzed those encounters that bring happiness and those that bring pain.",
+      "zh": "也分析了那些带来快乐和带来痛苦的相遇。",
+      "pinyin": "Yě fēnxī le nàxiē dàilái kuàilè hé dàilái tòngkǔ de xiāngyù.",
+      "vi": "cũng đã phân tích những cuộc gặp gỡ mang đến niềm vui và đau khổ."
+    },
+    {
+      "start": 790.73,
+      "end": 792.9,
+      "en": "Then, in daily life,",
+      "zh": "那么，在日常生活中，",
+      "pinyin": "Nàme, zài rìcháng shēnghuó zhōng,",
+      "vi": "Vậy thì, trong cuộc sống hằng ngày,"
+    },
+    {
+      "start": 792.93,
+      "end": 796.13,
+      "en": "how should we apply this rule",
+      "zh": "我们应该如何去运用这个规则，",
+      "pinyin": "Wǒmen yīnggāi rúhé qù yùnyòng zhège guīzé,",
+      "vi": "chúng ta nên vận dụng quy tắc này như thế nào,"
+    },
+    {
+      "start": 796.17,
+      "end": 798.84,
+      "en": "to make our mindset better?",
+      "zh": "让我们的心态变得更好呢？",
+      "pinyin": "Ràng wǒmen de xīntài biàn de gèng hǎo ne?",
+      "vi": "để tâm thái của chúng ta trở nên tốt hơn?"
+    },
+    {
+      "start": 798.87,
+      "end": 800.87,
+      "en": "This is a very good question.",
+      "zh": "这是一个非常好的问题。",
+      "pinyin": "Zhè shì yí ge fēicháng hǎo de wèntí.",
+      "vi": "Đây là một câu hỏi rất hay."
+    },
+    {
+      "start": 800.9,
+      "end": 804.07,
+      "en": "I think we can do it from two aspects.",
+      "zh": "我觉得可以从两个方面来做。",
+      "pinyin": "Wǒ juéde kěyǐ cóng liǎng ge fāngmiàn lái zuò.",
+      "vi": "Tôi nghĩ có thể làm từ hai phương diện."
+    },
+    {
+      "start": 804.1,
+      "end": 806.33,
+      "en": "First, learn to be 'grateful.'",
+      "zh": "第一，是学会“感恩”。",
+      "pinyin": "Dì yī, shì xué huì “gǎn'ēn”.",
+      "vi": "Thứ nhất, là học cách “biết ơn”."
+    },
+    {
+      "start": 806.37,
+      "end": 808.84,
+      "en": "Second, learn to 'reflect.'",
+      "zh": "第二，是学会“反思”。",
+      "pinyin": "Dì èr, shì xué huì “fǎnsī”.",
+      "vi": "Thứ hai, là học cách “suy ngẫm”."
+    },
+    {
+      "start": 808.87,
+      "end": 810.87,
+      "en": "Gratitude and reflection.",
+      "zh": "感恩和反思。",
+      "pinyin": "Gǎn'ēn hé fǎnsī.",
+      "vi": "Lòng biết ơn và sự suy ngẫm."
+    },
+    {
+      "start": 810.9,
+      "end": 812.4,
+      "en": "Could you explain in more detail?",
+      "zh": "可以具体说说吗？",
+      "pinyin": "Kěyǐ jùtǐ shuōshuo ma?",
+      "vi": "Có thể nói cụ thể hơn không?"
+    },
+    {
+      "start": 812.43,
+      "end": 814.53,
+      "en": "Of course. Let's start with gratitude.",
+      "zh": "当然。先说“感恩”。",
+      "pinyin": "Dāngrán. Xiān shuō “gǎn'ēn”.",
+      "vi": "Tất nhiên. Trước hết nói về lòng biết ơn."
+    },
+    {
+      "start": 814.57,
+      "end": 817.7,
+      "en": "When we realize that every person who comes into our lives",
+      "zh": "当我们认识到每一个来到我们身边的人",
+      "pinyin": "Dāng wǒmen rènshi dào měi yí ge lái dào wǒmen shēnbiān de rén",
+      "vi": "Khi chúng ta nhận ra rằng mỗi người đến bên cạnh mình"
+    },
+    {
+      "start": 817.73,
+      "end": 819.3,
+      "en": "is there for a reason,",
+      "zh": "都是有原因的，",
+      "pinyin": "dōu shì yǒu yuányīn de,",
+      "vi": "đều có lý do,"
+    },
+    {
+      "start": 819.33,
+      "end": 822.26,
+      "en": "we will cherish more those who treat us well.",
+      "zh": "我们就会更珍惜那些对我们好的人。",
+      "pinyin": "wǒmen jiù huì gèng zhēnxī nàxiē duì wǒmen hǎo de rén.",
+      "vi": "chúng ta sẽ càng trân trọng những người đối xử tốt với mình."
+    },
+    {
+      "start": 822.3,
+      "end": 826.5,
+      "en": "We will be grateful for our parents' upbringing and our teachers' guidance,",
+      "zh": "我们会感谢父母的养育，感谢老师的教导，",
+      "pinyin": "Wǒmen huì gǎnxiè fùmǔ de yǎngyù, gǎnxiè lǎoshī de jiàodǎo,",
+      "vi": "Chúng ta sẽ biết ơn công lao nuôi dưỡng của cha mẹ, biết ơn sự dạy dỗ của thầy cô,"
+    },
+    {
+      "start": 826.53,
+      "end": 829.33,
+      "en": "grateful for our friends' companionship, and even grateful to",
+      "zh": "感谢朋友的陪伴，甚至会感谢",
+      "pinyin": "gǎnxiè péngyou de péibàn, shènzhì huì gǎnxiè",
+      "vi": "biết ơn sự đồng hành của bạn bè, thậm chí sẽ biết ơn"
+    },
+    {
+      "start": 829.37,
+      "end": 832.6,
+      "en": "the stranger who lent you an umbrella on a rainy day.",
+      "zh": "那个在雨天借给你伞的陌生人。",
+      "pinyin": "nà ge zài yǔtiān jiè gěi nǐ sǎn de mòshēngrén.",
+      "vi": "người lạ đã cho bạn mượn ô vào ngày mưa."
+    },
+    {
+      "start": 832.63,
+      "end": 835.93,
+      "en": "because we know all of this is not taken for granted,",
+      "zh": "因为我们知道，这一切都不是理所当然的，",
+      "pinyin": "Yīnwèi wǒmen zhīdào, zhè yíqiè dōu bú shì lǐsuǒdāngrán de,",
+      "vi": "bởi vì chúng ta biết, tất cả những điều này đều không phải là đương nhiên,"
+    },
+    {
+      "start": 835.97,
+      "end": 838.3,
+      "en": "but a precious kind of fate.",
+      "zh": "而是宝贵的“缘分”。",
+      "pinyin": "ér shì bǎoguì de “yuánfèn”.",
+      "vi": "mà là duyên phận quý giá."
+    },
+    {
+      "start": 838.33,
+      "end": 839.66,
+      "en": "I completely agree.",
+      "zh": "我很同意。",
+      "pinyin": "Wǒ hěn tóngyì.",
+      "vi": "Tôi rất đồng ý."
+    },
+    {
+      "start": 839.7,
+      "end": 841.47,
+      "en": "Having a grateful mindset",
+      "zh": "拥有感恩的心态，",
+      "pinyin": "Yǒngyǒu gǎn'ēn de xīntài,",
+      "vi": "Có một tâm thế biết ơn,"
+    },
+    {
+      "start": 841.5,
+      "end": 845,
+      "en": "will let us see more beauty in life,",
+      "zh": "会让我们看到生活中更多的美好，",
+      "pinyin": "huì ràng wǒmen kàndào shēnghuó zhōng gèng duō de měihǎo,",
+      "vi": "sẽ giúp chúng ta nhìn thấy nhiều điều tốt đẹp hơn trong cuộc sống,"
+    },
+    {
+      "start": 845.03,
+      "end": 846.9,
+      "en": "and we will become happier too.",
+      "zh": "人也会变得更快乐。",
+      "pinyin": "rén yě huì biàn de gèng kuàilè.",
+      "vi": "con người cũng sẽ trở nên vui vẻ hơn."
+    },
+    {
+      "start": 846.93,
+      "end": 849.93,
+      "en": "Yes. Then comes reflection.",
+      "zh": "是的。然后是“反思”。",
+      "pinyin": "Shì de. Ránhòu shì “fǎnsī”.",
+      "vi": "Đúng vậy. Sau đó là sự suy ngẫm."
+    },
+    {
+      "start": 849.97,
+      "end": 853.74,
+      "en": "This mainly applies to the difficult relationships we encounter.",
+      "zh": "这主要针对我们遇到的那些“困难”的关系。",
+      "pinyin": "Zhè zhǔyào zhēnduì wǒmen yùdào de nàxiē “kùnnan” de guānxi.",
+      "vi": "Điều này chủ yếu nhắm vào những mối quan hệ khó khăn mà chúng ta gặp phải."
+    },
+    {
+      "start": 853.77,
+      "end": 856.4,
+      "en": "When we meet someone who makes us uncomfortable,",
+      "zh": "当我们遇到一个让我们不舒服的人，",
+      "pinyin": "Dāng wǒmen yùdào yí ge ràng wǒmen bù shūfu de rén,",
+      "vi": "Khi chúng ta gặp một người khiến mình không thoải mái,"
+    },
+    {
+      "start": 856.43,
+      "end": 859.03,
+      "en": "or something that makes us unhappy,",
+      "zh": "或者一件让我们不开心的事，",
+      "pinyin": "huòzhě yí jiàn ràng wǒmen bù kāixīn de shì,",
+      "vi": "hoặc một việc khiến chúng ta không vui,"
+    },
+    {
+      "start": 859.07,
+      "end": 862.9,
+      "en": "we can pause first and not immediately fall into anger",
+      "zh": "我们可以先停下来，不要立刻陷入到愤怒",
+      "pinyin": "wǒmen kěyǐ xiān tíng xiàlái, bú yào lìkè xiànrù dào fènnù",
+      "vi": "chúng ta có thể dừng lại trước, đừng ngay lập tức rơi vào sự giận dữ"
+    },
+    {
+      "start": 862.93,
+      "end": 864.9,
+      "en": "or sadness.",
+      "zh": "或者悲伤的情绪里。",
+      "pinyin": "huòzhě bēishāng de qíngxù lǐ.",
+      "vi": "hoặc những cảm xúc buồn bã."
+    },
+    {
+      "start": 864.93,
+      "end": 867.26,
+      "en": "This is hard to do, but very important.",
+      "zh": "这很难做到，但很重要。",
+      "pinyin": "Zhè hěn nán zuòdào, dàn hěn zhòngyào.",
+      "vi": "Điều này rất khó làm, nhưng rất quan trọng."
+    },
+    {
+      "start": 867.27,
+      "end": 867.94,
+      "en": "Right.",
+      "zh": "对。",
+      "pinyin": "Duì.",
+      "vi": "Đúng."
+    },
+    {
+      "start": 867.97,
+      "end": 870.47,
+      "en": "We can try asking ourselves a few questions.",
+      "zh": "我们可以试着问自己几个问题。",
+      "pinyin": "Wǒmen kěyǐ shìzhe wèn zìjǐ jǐ ge wèntí.",
+      "vi": "Chúng ta có thể thử hỏi bản thân vài câu hỏi."
+    },
+    {
+      "start": 870.5,
+      "end": 871.93,
+      "en": "For example: This experience,",
+      "zh": "比如：“这次经历，",
+      "pinyin": "Bǐrú: “zhè cì jīnglì,",
+      "vi": "Ví dụ: Trải nghiệm lần này,"
+    },
+    {
+      "start": 871.97,
+      "end": 874.74,
+      "en": "showed me in what area I am lacking?",
+      "zh": "让我看到了自己哪方面的不足？”",
+      "pinyin": "ràng wǒ kàndào le zìjǐ nǎ fāngmiàn de bùzú?”",
+      "vi": "đã giúp tôi nhận ra mình còn thiếu sót ở phương diện nào?"
+    },
+    {
+      "start": 874.77,
+      "end": 876.7,
+      "en": "What can I learn from it,",
+      "zh": "“我能从中学到什么，",
+      "pinyin": "“Wǒ néng cóng zhōng xué dào shénme,",
+      "vi": "Tôi có thể học được gì từ đó,"
+    },
+    {
+      "start": 876.73,
+      "end": 880.03,
+      "en": "to help me handle similar situations better in the future?",
+      "zh": "来帮助我未来更好地处理类似情况？”",
+      "pinyin": "lái bāngzhù wǒ wèilái gèng hǎo de chǔlǐ lèisì qíngkuàng?”",
+      "vi": "để giúp tôi sau này xử lý tốt hơn những tình huống tương tự?"
+    },
+    {
+      "start": 880.07,
+      "end": 882.14,
+      "en": "Is this thing reminding me",
+      "zh": "“这件事是不是在提醒我，",
+      "pinyin": "“Zhè jiàn shì shì bu shì zài tíxǐng wǒ,",
+      "vi": "Có phải việc này đang nhắc nhở tôi"
+    },
+    {
+      "start": 882.17,
+      "end": 884.4,
+      "en": "that I need to make some changes?",
+      "zh": "我需要做出一些改变了？”",
+      "pinyin": "wǒ xūyào zuòchū yìxiē gǎibiàn le?”",
+      "vi": "rằng tôi cần có một số thay đổi rồi?"
+    },
+    {
+      "start": 884.4,
+      "end": 886,
+      "en": "This kind of reflection,",
+      "zh": "这种反思，",
+      "pinyin": "Zhè zhǒng fǎnsī,",
+      "vi": "Kiểu suy ngẫm này,"
+    },
+    {
+      "start": 886.03,
+      "end": 889.1,
+      "en": "is like doing a problem in life.",
+      "zh": "就像是在做一道人生的题目。",
+      "pinyin": "jiù xiàng shì zài zuò yí dào rénshēng de tímù.",
+      "vi": "giống như đang làm một bài toán của cuộc đời."
+    },
+    {
+      "start": 889.13,
+      "end": 891.53,
+      "en": "Although the process may be a bit difficult,",
+      "zh": "虽然过程可能有点难，",
+      "pinyin": "Suīrán guòchéng kěnéng yǒudiǎn nán,",
+      "vi": "Tuy quá trình có thể hơi khó,"
+    },
+    {
+      "start": 891.57,
+      "end": 894.64,
+      "en": "but once we solve it, we level up.",
+      "zh": "但解开之后，我们就会升级。",
+      "pinyin": "dàn jiěkāi zhīhòu, wǒmen jiù huì shēngjí.",
+      "vi": "nhưng sau khi giải được, chúng ta sẽ nâng cấp."
+    },
+    {
+      "start": 894.67,
+      "end": 895.6,
+      "en": "Well said!",
+      "zh": "说得很好！",
+      "pinyin": "Shuō de hěn hǎo!",
+      "vi": "Nói hay lắm!"
+    },
+    {
+      "start": 895.63,
+      "end": 897.43,
+      "en": "Exactly that feeling of leveling up.",
+      "zh": "就是“升级”的感觉。",
+      "pinyin": "Jiù shì “shēngjí” de gǎnjué.",
+      "vi": "Chính là cảm giác nâng cấp."
+    },
+    {
+      "start": 897.47,
+      "end": 900.7,
+      "en": "This way, there are no absolute bad people in life",
+      "zh": "这样一来，生活中就没有绝对的“坏人”",
+      "pinyin": "Zhèyàng yì lái, shēnghuó zhōng jiù méiyǒu juéduì de “huàirén”",
+      "vi": "Như vậy, trong cuộc sống sẽ không có người xấu tuyệt đối"
+    },
+    {
+      "start": 900.73,
+      "end": 901.93,
+      "en": "or bad things anymore,",
+      "zh": "或“坏事”了，",
+      "pinyin": "huò “huàishì” le,",
+      "vi": "hay việc xấu nữa,"
+    },
+    {
+      "start": 901.97,
+      "end": 905.2,
+      "en": "they all become opportunities that help us grow.",
+      "zh": "它们都变成了帮助我们成长的机会。",
+      "pinyin": "tāmen dōu biànchéng le bāngzhù wǒmen chéngzhǎng de jīhuì.",
+      "vi": "chúng đều trở thành cơ hội giúp chúng ta trưởng thành."
+    },
+    {
+      "start": 905.23,
+      "end": 909,
+      "en": "Our mindset will become calmer and more powerful.",
+      "zh": "我们的心态会变得更平静，也更有力量。",
+      "pinyin": "Wǒmen de xīntài huì biàn de gèng píngjìng, yě gèng yǒu lìliàng.",
+      "vi": "Tâm thế của chúng ta sẽ trở nên bình tĩnh hơn, và cũng mạnh mẽ hơn."
+    },
+    {
+      "start": 909.03,
+      "end": 912.06,
+      "en": "I think this idea can really change how we view",
+      "zh": "我觉得这个想法真的能改变我们看待",
+      "pinyin": "Wǒ juéde zhège xiǎngfǎ zhēnde néng gǎibiàn wǒmen kàndài",
+      "vi": "Tôi nghĩ ý tưởng này thực sự có thể thay đổi cách chúng ta nhìn"
+    },
+    {
+      "start": 912.1,
+      "end": 913.6,
+      "en": "the world.",
+      "zh": "世界的方式。",
+      "pinyin": "shìjiè de fāngshì.",
+      "vi": "thế giới."
+    },
+    {
+      "start": 913.63,
+      "end": 915.86,
+      "en": "I suddenly thought of a metaphor.",
+      "zh": "我突然想到一个比喻。",
+      "pinyin": "Wǒ tūrán xiǎngdào yí ge bǐyù.",
+      "vi": "Tôi chợt nghĩ ra một phép so sánh."
+    },
+    {
+      "start": 915.9,
+      "end": 920,
+      "en": "Life is like a journey; this metaphor is very apt.",
+      "zh": "人生就像一场旅行，这个比喻很贴切。",
+      "pinyin": "Rénshēng jiù xiàng yì chǎng lǚxíng, zhège bǐyù hěn tiēqiè.",
+      "vi": "Cuộc đời giống như một chuyến du lịch, phép so sánh này rất phù hợp."
+    },
+    {
+      "start": 920.03,
+      "end": 923.06,
+      "en": "Along the way, we meet all kinds of people.",
+      "zh": "我们路上会遇到各种各样的人。",
+      "pinyin": "Wǒmen lùshang huì yùdào gèzhǒng-gèyàng de rén.",
+      "vi": "Trên đường chúng ta sẽ gặp đủ loại người."
+    },
+    {
+      "start": 923.1,
+      "end": 923.9,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 923.93,
+      "end": 927.83,
+      "en": "Some people, like our family and best friends,",
+      "zh": "有些人，像我们的家人和最好的朋友，",
+      "pinyin": "Yǒuxiē rén, xiàng wǒmen de jiārén hé zuì hǎo de péngyou,",
+      "vi": "Một số người, như gia đình và những người bạn thân nhất của chúng ta,"
+    },
+    {
+      "start": 927.87,
+      "end": 930.67,
+      "en": "will accompany us for a long stretch of the road,",
+      "zh": "他们会陪我们走很长一段路，",
+      "pinyin": "tāmen huì péi wǒmen zǒu hěn cháng yí duàn lù,",
+      "vi": "họ sẽ đồng hành với chúng ta một quãng đường rất dài,"
+    },
+    {
+      "start": 930.7,
+      "end": 933.47,
+      "en": "sharing most of the scenery along our journey.",
+      "zh": "分享我们旅途中大部分的风景。",
+      "pinyin": "fēnxiǎng wǒmen lǚtú zhōng dà bùfen de fēngjǐng.",
+      "vi": "chia sẻ phần lớn phong cảnh trên hành trình của chúng ta."
+    },
+    {
+      "start": 933.5,
+      "end": 936.93,
+      "en": "Exactly.",
+      "zh": "没错。",
+      "pinyin": "Méicuò.",
+      "vi": "Không sai."
+    },
+    {
+      "start": 936.97,
+      "end": 939.34,
+      "en": "Some people, like teachers or colleagues who have helped us,",
+      "zh": "有些人，像老师或者帮助过我们的同事，",
+      "pinyin": "Yǒuxiē rén, xiàng lǎoshī huòzhě bāngzhù guo wǒmen de tóngshì,",
+      "vi": "Có những người, như thầy cô hay đồng nghiệp từng giúp đỡ chúng ta,"
+    },
+    {
+      "start": 939.37,
+      "end": 942.87,
+      "en": "They may only accompany us through one stop,",
+      "zh": "他们可能只陪我们走过一个车站，",
+      "pinyin": "Tāmen kěnéng zhǐ péi wǒmen zǒuguò yí ge chēzhàn,",
+      "vi": "Họ có thể chỉ cùng chúng ta đi qua một trạm,"
+    },
+    {
+      "start": 942.9,
+      "end": 945.87,
+      "en": "But they told us the right direction.",
+      "zh": "但他们告诉了我们正确的方向。",
+      "pinyin": "Dàn tāmen gàosu le wǒmen zhèngquè de fāngxiàng.",
+      "vi": "Nhưng họ đã chỉ cho chúng ta đúng hướng."
+    },
+    {
+      "start": 945.9,
+      "end": 946.77,
+      "en": "That's right.",
+      "zh": "没错。",
+      "pinyin": "Méi cuò.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 946.77,
+      "end": 947.9,
+      "en": "And there are also some people,",
+      "zh": "还有些人，",
+      "pinyin": "Háiyǒu xiē rén,",
+      "vi": "Còn có những người,"
+    },
+    {
+      "start": 947.93,
+      "end": 951.53,
+      "en": "They may have just bumped into us on the road,",
+      "zh": "他们可能只是在路上撞了我们一下，",
+      "pinyin": "Tāmen kěnéng zhǐshì zài lùshang zhuàng le wǒmen yíxià,",
+      "vi": "Họ có thể chỉ vô tình va vào chúng ta trên đường,"
+    },
+    {
+      "start": 951.57,
+      "end": 953.5,
+      "en": "Making us fall.",
+      "zh": "让我们摔了一跤。",
+      "pinyin": "Ràng wǒmen shuāi le yì jiāo.",
+      "vi": "Khiến chúng ta vấp ngã một lần."
+    },
+    {
+      "start": 953.53,
+      "end": 956.8,
+      "en": "At the time, we may feel a lot of pain and anger.",
+      "zh": "我们当时会觉得很疼，很生气。",
+      "pinyin": "Wǒmen dāngshí huì juéde hěn téng, hěn shēngqì.",
+      "vi": "Lúc đó chúng ta sẽ thấy rất đau, rất tức giận."
+    },
+    {
+      "start": 956.83,
+      "end": 961.3,
+      "en": "But perhaps it is precisely because of this fall that we discover",
+      "zh": "但是，也许正是因为这次摔倒，我们才发现",
+      "pinyin": "Dànshì, yěxǔ zhèng shì yīnwèi zhè cì shuāidǎo, wǒmen cái fāxiàn",
+      "vi": "Nhưng có lẽ chính vì lần vấp ngã này, chúng ta mới phát hiện ra"
+    },
+    {
+      "start": 961.33,
+      "end": 964.86,
+      "en": "There is a beautiful stone on the ground, or",
+      "zh": "地上有一颗很漂亮的石头，或者",
+      "pinyin": "Dìshang yǒu yì kē hěn piàoliang de shítou, huòzhě",
+      "vi": "Trên mặt đất có một viên đá rất đẹp, hoặc"
+    },
+    {
+      "start": 964.9,
+      "end": 968.53,
+      "en": "Only then do we decide to take a smoother road.",
+      "zh": "我们才决定换一条更平坦的路走。",
+      "pinyin": "Wǒmen cái juédìng huàn yì tiáo gèng píngtǎn de lù zǒu.",
+      "vi": "Chúng ta mới quyết định đi một con đường bằng phẳng hơn."
+    },
+    {
+      "start": 968.57,
+      "end": 971.27,
+      "en": "Wang Yu, this metaphor of yours is great.",
+      "zh": "王雨，你这个比喻太棒了。",
+      "pinyin": "Wáng Yǔ, nǐ zhège bǐyù tài bàng le.",
+      "vi": "Vương Vũ, cách so sánh này của bạn quá tuyệt."
+    },
+    {
+      "start": 971.3,
+      "end": 973.3,
+      "en": "It takes everything we discussed today",
+      "zh": "它把我们今天讨论的所有内容",
+      "pinyin": "Tā bǎ wǒmen jīntiān tǎolùn de suǒyǒu nèiróng",
+      "vi": "Nó bao quát toàn bộ nội dung chúng ta thảo luận hôm nay"
+    },
+    {
+      "start": 973.33,
+      "end": 975.03,
+      "en": "and summarizes it all very well.",
+      "zh": "都很好地概括了。",
+      "pinyin": "Dōu hěn hǎo de gàikuò le.",
+      "vi": "và tóm tắt lại rất tốt."
+    },
+    {
+      "start": 975.07,
+      "end": 977.27,
+      "en": "Whether it's the people who accompany us on a long journey,",
+      "zh": "无论是陪我们走长路的人，",
+      "pinyin": "Wúlùn shì péi wǒmen zǒu cháng lù de rén,",
+      "vi": "Dù là người cùng chúng ta đi một chặng đường dài,"
+    },
+    {
+      "start": 977.3,
+      "end": 979.3,
+      "en": "or the people who make us fall,",
+      "zh": "还是让我们摔跤的人，",
+      "pinyin": "Háishì ràng wǒmen shuāijiāo de rén,",
+      "vi": "hay là người khiến chúng ta vấp ngã,"
+    },
+    {
+      "start": 979.33,
+      "end": 982.23,
+      "en": "They all make up our unique journey.",
+      "zh": "他们都构成了我们独一无二的旅行。",
+      "pinyin": "Tāmen dōu gòuchéng le wǒmen dúyīwú'èr de lǚxíng.",
+      "vi": "Họ đều tạo nên hành trình độc nhất vô nhị của chúng ta."
+    },
+    {
+      "start": 982.27,
+      "end": 985.27,
+      "en": "Without them, our journey would not be complete.",
+      "zh": "没有他们，我们的旅行就不完整。",
+      "pinyin": "Méiyǒu tāmen, wǒmen de lǚxíng jiù bù wánzhěng.",
+      "vi": "Không có họ, hành trình của chúng ta sẽ không trọn vẹn."
+    },
+    {
+      "start": 985.3,
+      "end": 985.87,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 985.9,
+      "end": 988.67,
+      "en": "So, be grateful for everyone we meet.",
+      "zh": "所以，感谢我们遇到的每一个人。",
+      "pinyin": "Suǒyǐ, gǎnxiè wǒmen yùdào de měi yí ge rén.",
+      "vi": "Vì vậy, hãy biết ơn mỗi người chúng ta gặp gỡ."
+    },
+    {
+      "start": 988.7,
+      "end": 992.53,
+      "en": "Because of their presence, we have become who we are today.",
+      "zh": "因为他们的出现，我们才成为了今天的自己。",
+      "pinyin": "Yīnwèi tāmen de chūxiàn, wǒmen cái chéngwéi le jīntiān de zìjǐ.",
+      "vi": "Chính vì sự xuất hiện của họ, chúng ta mới trở thành con người của ngày hôm nay."
+    },
+    {
+      "start": 992.57,
+      "end": 996.07,
+      "en": "Okay, today's discussion about \"the first rule of life\"",
+      "zh": "好了，我们今天关于“生活的第一个规则”",
+      "pinyin": "Hǎo le, wǒmen jīntiān guānyú “shēnghuó de dì yī ge guīzé”",
+      "vi": "Được rồi, nội dung hôm nay về “quy tắc đầu tiên của cuộc sống”"
+    },
+    {
+      "start": 996.1,
+      "end": 997.37,
+      "en": "we'll stop here.",
+      "zh": "就聊到这里了。",
+      "pinyin": "Jiù liáo dào zhèlǐ le.",
+      "vi": "chúng ta tạm dừng ở đây."
+    },
+    {
+      "start": 997.4,
+      "end": 998.53,
+      "en": "Time really flies.",
+      "zh": "时间过得真快。",
+      "pinyin": "Shíjiān guò de zhēn kuài.",
+      "vi": "Thời gian trôi qua thật nhanh."
+    },
+    {
+      "start": 998.57,
+      "end": 1001.37,
+      "en": "Yeah, it feels like there's still a lot to say.",
+      "zh": "是啊，感觉还有很多话想说。",
+      "pinyin": "Shì a, gǎnjué hái yǒu hěn duō huà xiǎng shuō.",
+      "vi": "Đúng vậy, cảm giác vẫn còn nhiều điều muốn nói."
+    },
+    {
+      "start": 1001.4,
+      "end": 1005.67,
+      "en": "Let's briefly summarize the core idea we discussed today.",
+      "zh": "我们来简单总结一下今天讨论的核心思想吧。",
+      "pinyin": "Wǒmen lái jiǎndān zǒngjié yíxià jīntiān tǎolùn de héxīn sīxiǎng ba.",
+      "vi": "Chúng ta hãy tóm tắt ngắn gọn tư tưởng cốt lõi đã thảo luận hôm nay nhé."
+    },
+    {
+      "start": 1005.7,
+      "end": 1009.27,
+      "en": "Everyone we meet in life comes for a reason.",
+      "zh": "我们生命中遇到的每一个人，都有他的原因。",
+      "pinyin": "Wǒmen shēngmìng zhōng yùdào de měi yí ge rén, dōu yǒu tā de yuányīn.",
+      "vi": "Mỗi người chúng ta gặp trong cuộc đời đều có lý do của họ."
+    },
+    {
+      "start": 1009.3,
+      "end": 1012.07,
+      "en": "Good people bring us joy and warmth,",
+      "zh": "好的人给我们带来快乐和温暖，",
+      "pinyin": "Hǎo de rén gěi wǒmen dàilái kuàilè hé wēnnuǎn,",
+      "vi": "Người tốt mang đến cho chúng ta niềm vui và sự ấm áp,"
+    },
+    {
+      "start": 1012.1,
+      "end": 1015.03,
+      "en": "We should learn to be grateful and cherish them.",
+      "zh": "我们要学会感恩和珍惜。",
+      "pinyin": "Wǒmen yào xuéhuì gǎn'ēn hé zhēnxī.",
+      "vi": "Chúng ta phải học cách biết ơn và trân trọng."
+    },
+    {
+      "start": 1015.07,
+      "end": 1017.34,
+      "en": "And those who make things difficult for us,",
+      "zh": "而那些让我们感到困难的人，",
+      "pinyin": "Ér nàxiē ràng wǒmen gǎndào kùnnan de rén,",
+      "vi": "Còn những người khiến chúng ta cảm thấy khó khăn,"
+    },
+    {
+      "start": 1017.37,
+      "end": 1020.44,
+      "en": "They are \"special teachers,\" here to teach us",
+      "zh": "他们是“特殊的老师”，是来教会我们",
+      "pinyin": "Tāmen shì “tèshū de lǎoshī”, shì lái jiàohuì wǒmen",
+      "vi": "Họ là “những người thầy đặc biệt”, đến để dạy chúng ta"
+    },
+    {
+      "start": 1020.47,
+      "end": 1023.97,
+      "en": "some important life lessons, such as patience,",
+      "zh": "一些重要的人生课程的，比如耐心、",
+      "pinyin": "Yìxiē zhòngyào de rénshēng kèchéng de, bǐrú nàixīn,",
+      "vi": "một số bài học quan trọng trong cuộc sống, ví dụ như kiên nhẫn,"
+    },
+    {
+      "start": 1024,
+      "end": 1027.13,
+      "en": "tolerance, or how to protect ourselves.",
+      "zh": "宽容，或者如何保护自己。",
+      "pinyin": "Kuānróng, huòzhě rúhé bǎohù zìjǐ.",
+      "vi": "bao dung, hoặc cách bảo vệ bản thân."
+    },
+    {
+      "start": 1027.17,
+      "end": 1030.27,
+      "en": "Accepting this rule can help us use a more positive,",
+      "zh": "接受这个规则，能帮助我们用更积极、",
+      "pinyin": "Jiēshòu zhège guīzé, néng bāngzhù wǒmen yòng gèng jījí,",
+      "vi": "Chấp nhận quy tắc này có thể giúp chúng ta dùng thái độ tích cực hơn,"
+    },
+    {
+      "start": 1030.3,
+      "end": 1031.77,
+      "en": "more peaceful mindset,",
+      "zh": "更平静的心态，",
+      "pinyin": "Gèng píngjìng de xīntài,",
+      "vi": "tâm thế bình tĩnh hơn,"
+    },
+    {
+      "start": 1031.8,
+      "end": 1035.47,
+      "en": "to face all kinds of relationships and challenges in life.",
+      "zh": "去面对生活中的各种关系和挑战。",
+      "pinyin": "Qù miànduì shēnghuó zhōng de gèzhǒng guānxi hé tiǎozhàn.",
+      "vi": "để đối mặt với các mối quan hệ và thử thách khác nhau trong cuộc sống."
+    },
+    {
+      "start": 1035.5,
+      "end": 1036.73,
+      "en": "Well said!",
+      "zh": "说得太好了！",
+      "pinyin": "Shuō de tài hǎo le!",
+      "vi": "Nói quá hay!"
+    },
+    {
+      "start": 1036.77,
+      "end": 1039.47,
+      "en": "If you want to review today's content,",
+      "zh": "如果大家想复习今天的内容，",
+      "pinyin": "Rúguǒ dàjiā xiǎng fùxí jīntiān de nèiróng,",
+      "vi": "Nếu mọi người muốn ôn lại nội dung hôm nay,"
+    },
+    {
+      "start": 1039.5,
+      "end": 1042.3,
+      "en": "or see which",
+      "zh": "或者看看我们对话里用到了哪些",
+      "pinyin": "Huòzhě kànkan wǒmen duìhuà lǐ yòngdào le nǎxiē",
+      "vi": "hoặc xem trong cuộc trò chuyện của chúng ta đã dùng những"
+    },
+    {
+      "start": 1042.33,
+      "end": 1046.56,
+      "en": "useful words and sentences, we have put the complete dialogue transcript",
+      "zh": "有用的词语和句子，我们把完整的对话文本",
+      "pinyin": "Yǒuyòng de cíyǔ hé jùzi, wǒmen bǎ wánzhěng de duìhuà wénběn",
+      "vi": "từ ngữ và câu hữu ích, chúng tôi đã đặt toàn bộ văn bản cuộc trò chuyện"
+    },
+    {
+      "start": 1046.6,
+      "end": 1048.47,
+      "en": "on our blog.",
+      "zh": "放在了我们的博客上。",
+      "pinyin": "Fàng zài le wǒmen de bókè shàng.",
+      "vi": "lên blog của chúng tôi."
+    },
+    {
+      "start": 1048.5,
+      "end": 1050.53,
+      "en": "Right, you can check it on our blog.",
+      "zh": "对，大家可以去我们的博客查看。",
+      "pinyin": "Duì, dàjiā kěyǐ qù wǒmen de bókè chákàn.",
+      "vi": "Đúng, mọi người có thể vào blog của chúng tôi để xem."
+    },
+    {
+      "start": 1050.57,
+      "end": 1054.27,
+      "en": "The address is chinesedailypodcast.blogspot.com.",
+      "zh": "地址是 chinesedailypodcast.blogspot.com。",
+      "pinyin": "Dìzhǐ shì chinesedailypodcast.blogspot.com.",
+      "vi": "Địa chỉ là chinesedailypodcast.blogspot.com."
+    },
+    {
+      "start": 1054.3,
+      "end": 1055.33,
+      "en": "You are welcome to visit.",
+      "zh": "欢迎大家访问。",
+      "pinyin": "Huānyíng dàjiā fǎngwèn.",
+      "vi": "Hoan nghênh mọi người ghé thăm."
+    },
+    {
+      "start": 1055.37,
+      "end": 1057.04,
+      "en": "So, dear listeners,",
+      "zh": "那么，听众朋友们，",
+      "pinyin": "Nàme, tīngzhòng péngyoumen,",
+      "vi": "Vậy thì, các thính giả thân mến,"
+    },
+    {
+      "start": 1057.07,
+      "end": 1059.97,
+      "en": "We would also love to hear your stories.",
+      "zh": "我们也很想听听你们的故事。",
+      "pinyin": "Wǒmen yě hěn xiǎng tīngting nǐmen de gùshi.",
+      "vi": "Chúng tôi cũng rất muốn nghe câu chuyện của các bạn."
+    },
+    {
+      "start": 1060,
+      "end": 1061.47,
+      "en": "In your life,",
+      "zh": "在你们的生命中，",
+      "pinyin": "Zài nǐmen de shēngmìng zhōng,",
+      "vi": "Trong cuộc đời các bạn,"
+    },
+    {
+      "start": 1061.5,
+      "end": 1064.17,
+      "en": "have you ever met a special person",
+      "zh": "有没有遇到过一个特别的人，",
+      "pinyin": "Yǒu méiyǒu yùdào guo yí ge tèbié de rén,",
+      "vi": "có từng gặp một người đặc biệt nào chưa,"
+    },
+    {
+      "start": 1064.2,
+      "end": 1067.77,
+      "en": "who taught you something important?",
+      "zh": "他或者她教会了你一些重要的东西？",
+      "pinyin": "Tā huòzhě tā jiàohuì le nǐ yìxiē zhòngyào de dōngxi?",
+      "vi": "người đó đã dạy cho bạn một số điều quan trọng?"
+    },
+    {
+      "start": 1067.8,
+      "end": 1071.97,
+      "en": "Did this person bring you warmth or challenges?",
+      "zh": "这个人给你带来了温暖，还是带来了挑战呢？",
+      "pinyin": "Zhège rén gěi nǐ dàilái le wēnnuǎn, háishì dàilái le tiǎozhàn ne?",
+      "vi": "Người này mang đến cho bạn sự ấm áp hay là thử thách?"
+    },
+    {
+      "start": 1072,
+      "end": 1076.13,
+      "en": "Feel free to leave us a comment below and share your story.",
+      "zh": "欢迎大家在下面给我们留言，分享你的故事。",
+      "pinyin": "Huānyíng dàjiā zài xiàmiàn gěi wǒmen liúyán, fēnxiǎng nǐ de gùshì.",
+      "vi": "Hoan nghênh mọi người để lại bình luận bên dưới, chia sẻ câu chuyện của bạn."
+    },
+    {
+      "start": 1076.17,
+      "end": 1078.7,
+      "en": "We're really looking forward to seeing your shares.",
+      "zh": "我们非常期待看到你们的分享。",
+      "pinyin": "Wǒmen fēicháng qīdài kàndào nǐmen de fēnxiǎng.",
+      "vi": "Chúng tôi rất mong được thấy những chia sẻ của các bạn."
+    },
+    {
+      "start": 1078.73,
+      "end": 1081.63,
+      "en": "Alright, that's all for this episode of “Daily Chinese.”",
+      "zh": "好了，这期“每天中文”就到这里。",
+      "pinyin": "Hǎo le, zhè qī “Měitiān Zhōngwén” jiù dào zhèlǐ.",
+      "vi": "Vậy là, tập “Mỗi Ngày Tiếng Trung” này đến đây là hết."
+    },
+    {
+      "start": 1081.67,
+      "end": 1083.14,
+      "en": "Thank you all for listening.",
+      "zh": "感谢大家的收听。",
+      "pinyin": "Gǎnxiè dàjiā de tīngshōu.",
+      "vi": "Cảm ơn mọi người đã lắng nghe."
+    },
+    {
+      "start": 1083.17,
+      "end": 1084.44,
+      "en": "In our next episode,",
+      "zh": "我们下期节目，",
+      "pinyin": "Wǒmen xià qī jiémù,",
+      "vi": "Hẹn gặp lại trong tập tiếp theo,"
+    },
+    {
+      "start": 1084.47,
+      "end": 1087.17,
+      "en": "we'll talk about “the second rule of life.”",
+      "zh": "再来聊聊“生活的第二个规则”。",
+      "pinyin": "zài lái liáoliao “Shēnghuó de dì èr gè guīzé”.",
+      "vi": "chúng ta sẽ cùng nói về “quy tắc thứ hai của cuộc sống”."
+    },
+    {
+      "start": 1087.2,
+      "end": 1088.87,
+      "en": "See you next time!",
+      "zh": "下次再见！",
+      "pinyin": "Xià cì zàijiàn!",
+      "vi": "Hẹn gặp lại lần sau!"
+    }
+  ]
+}

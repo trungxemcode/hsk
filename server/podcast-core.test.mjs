@@ -45,12 +45,12 @@ test('HSKPodcastCore starter episodes cover HSK 1-6 with synced 4-layer cues fro
   }
 });
 
-test('LIBRARY_EPISODES and all 24 static podcast cue packs are valid simplified 4-layer scripts', () => {
+test('LIBRARY_EPISODES and all 146 static podcast cue packs are valid simplified 4-layer scripts', () => {
   const lib = podcastCore.LIBRARY_EPISODES || [];
-  assert.equal(lib.length, 17);
+  assert.equal(lib.length, 139);
   const allCurated = [...podcastCore.STARTER_EPISODES, ...lib];
   const withUrl = allCurated.filter((ep) => ep.cuesUrl);
-  assert.equal(withUrl.length, 24);
+  assert.equal(withUrl.length, 146);
   const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
   for (const ep of withUrl) {
     assert.ok(ep.cues.length >= 2, `${ep.id} has preview cues`);
@@ -366,7 +366,6 @@ for (const [label, makeHandler] of [
     assert.equal(capData.cues[0].vi, 'Xin chào các Bảo Bối!');
   });
 }
-
 
 test('GET /podcast-feed?url=... rejects non-YouTube SSRF targets and non-channel links', async () => {
   let calledUpstream = false;

@@ -1,0 +1,2777 @@
+{
+  "id": "bJfVU2uPpAg",
+  "youtubeId": "bJfVU2uPpAg",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 1-3| 听故事学成语：中国人的古老智慧 | Learn Chinese Idioms Through Stories",
+  "durationSec": 1297,
+  "cues": [
+    {
+      "start": 7.37,
+      "end": 11,
+      "en": "Hello everyone, welcome to a new episode of “Daily Chinese.”",
+      "zh": "大家好，欢迎收听新一期的“每天中文”。",
+      "pinyin": "Dàjiā hǎo, huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.",
+      "vi": "Xin chào mọi người, chào mừng đến với tập mới của “Mỗi Ngày Tiếng Trung”."
+    },
+    {
+      "start": 11,
+      "end": 12.1,
+      "en": "I’m Li Ming.",
+      "zh": "我是李明。",
+      "pinyin": "Wǒ shì Lǐ Míng.",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 12.13,
+      "end": 13.96,
+      "en": "Hello everyone, I’m Wang Yu.",
+      "zh": "大家好，我是王雨。",
+      "pinyin": "Dàjiā hǎo, wǒ shì Wáng Yǔ.",
+      "vi": "Xin chào mọi người, tôi là Vương Vũ."
+    },
+    {
+      "start": 13.97,
+      "end": 16.33,
+      "en": "Great to see everyone again!",
+      "zh": "很高兴又和大家见面了！",
+      "pinyin": "Hěn gāoxìng yòu hé dàjiā jiànmiàn le!",
+      "vi": "Rất vui lại được gặp mọi người!"
+    },
+    {
+      "start": 16.33,
+      "end": 18.53,
+      "en": "Yes, Wang Yu, we meet again.",
+      "zh": "是的，王雨，我们又见面了。",
+      "pinyin": "Shì de, Wáng Yǔ, wǒmen yòu jiànmiàn le.",
+      "vi": "Đúng vậy, Vương Vũ, chúng ta lại gặp nhau rồi."
+    },
+    {
+      "start": 18.53,
+      "end": 20.63,
+      "en": "I feel time really flies.",
+      "zh": "我感觉时间过得真快啊。",
+      "pinyin": "Wǒ gǎnjué shíjiān guò de zhēn kuài a.",
+      "vi": "Tôi cảm thấy thời gian trôi nhanh thật đấy."
+    },
+    {
+      "start": 20.7,
+      "end": 21.4,
+      "en": "Right!",
+      "zh": "对啊！",
+      "pinyin": "Duì a!",
+      "vi": "Đúng thế!"
+    },
+    {
+      "start": 21.4,
+      "end": 23.7,
+      "en": "Li Ming, let me ask you a question.",
+      "zh": "李明，我问你一个问题。",
+      "pinyin": "Lǐ Míng, wǒ wèn nǐ yī gè wèntí.",
+      "vi": "Lý Minh, tôi hỏi cậu một câu nhé."
+    },
+    {
+      "start": 23.7,
+      "end": 25.5,
+      "en": "What have you been busy with lately?",
+      "zh": "你最近在忙什么？",
+      "pinyin": "Nǐ zuìjìn zài máng shénme?",
+      "vi": "Dạo này cậu đang bận gì thế?"
+    },
+    {
+      "start": 25.5,
+      "end": 28.33,
+      "en": "Have you come across anything interesting?",
+      "zh": "有没有遇到什么有意思的事情？",
+      "pinyin": "Yǒu méiyǒu yùdào shénme yǒu yìsi de shìqing?",
+      "vi": "Có gặp chuyện gì thú vị không?"
+    },
+    {
+      "start": 28.33,
+      "end": 34.5,
+      "en": "Hmm… lately I’ve been preparing some work matters and read a lot of materials.",
+      "zh": "嗯……最近我在准备一些工作上的事情，读了很多资料。",
+      "pinyin": "Ǹg… zuìjìn wǒ zài zhǔnbèi yīxiē gōngzuò shàng de shìqing, dú le hěn duō zīliào.",
+      "vi": "Ừm… dạo này tôi đang chuẩn bị vài việc trong công việc, đọc nhiều tài liệu lắm."
+    },
+    {
+      "start": 34.53,
+      "end": 38.23,
+      "en": "Speaking of which, I discovered something very interesting.",
+      "zh": "说起来，我发现了一件很有趣的事。",
+      "pinyin": "Shuō qǐlái, wǒ fāxiàn le yī jiàn hěn yǒuqù de shì.",
+      "vi": "Nhắc mới nhớ, tôi phát hiện ra một chuyện rất thú vị."
+    },
+    {
+      "start": 38.27,
+      "end": 40.5,
+      "en": "Oh? What is it? Tell me quickly.",
+      "zh": "哦？什么事？快告诉我。",
+      "pinyin": "Ó? Shénme shì? Kuài gàosu wǒ.",
+      "vi": "Ồ? Chuyện gì thế? Mau kể tôi nghe."
+    },
+    {
+      "start": 40.53,
+      "end": 45.9,
+      "en": "I found that many modern problems, actually in China long ago,",
+      "zh": "我发现，很多现代的问题，其实在很早以前的中国，",
+      "pinyin": "Wǒ fāxiàn, hěn duō xiàndài de wèntí, qíshí zài hěn zǎo yǐqián de Zhōngguó,",
+      "vi": "Tôi phát hiện ra rằng, nhiều vấn đề hiện đại, thật ra ở Trung Quốc rất lâu về trước,"
+    },
+    {
+      "start": 45.9,
+      "end": 47.7,
+      "en": "people had already thought about them,",
+      "zh": "人们就已经想过了，",
+      "pinyin": "Rénmen jiù yǐjīng xiǎng guò le,",
+      "vi": "người ta đã từng nghĩ tới rồi,"
+    },
+    {
+      "start": 47.8,
+      "end": 55,
+      "en": "And they put many ideas and much wisdom into some very short expressions.",
+      "zh": "而且他们把很多想法、很多智慧，都放在了一些很短的词语里。",
+      "pinyin": "Érqiě tāmen bǎ hěn duō xiǎngfǎ, hěn duō zhìhuì, dōu fàng zài le yīxiē hěn duǎn de cíyǔ lǐ.",
+      "vi": "Và họ đã đặt rất nhiều ý tưởng, rất nhiều trí tuệ vào những từ ngữ rất ngắn."
+    },
+    {
+      "start": 55,
+      "end": 57.67,
+      "en": "You mean… idioms?",
+      "zh": "你是说……成语吗？",
+      "pinyin": "Nǐ shì shuō… chéngyǔ ma?",
+      "vi": "Ý cậu là… thành ngữ à?"
+    },
+    {
+      "start": 57.7,
+      "end": 59.5,
+      "en": "Yes, exactly—idioms!",
+      "zh": "对，就是成语！",
+      "pinyin": "Duì, jiù shì chéngyǔ!",
+      "vi": "Đúng, chính là thành ngữ!"
+    },
+    {
+      "start": 59.5,
+      "end": 63.73,
+      "en": "Four characters, very simple, but inside there is a story,",
+      "zh": "四个字，很简单，但是里面有一个故事，",
+      "pinyin": "Sì gè zì, hěn jiǎndān, dànshì lǐmiàn yǒu yī gè gùshi,",
+      "vi": "Bốn chữ, rất đơn giản, nhưng bên trong có một câu chuyện,"
+    },
+    {
+      "start": 63.73,
+      "end": 66.2,
+      "en": "or a very profound truth.",
+      "zh": "或者一个很深的道理。",
+      "pinyin": "Huòzhě yī gè hěn shēn de dàolǐ.",
+      "vi": "hoặc một đạo lý rất sâu sắc."
+    },
+    {
+      "start": 66.2,
+      "end": 68.1,
+      "en": "I find it very interesting.",
+      "zh": "我觉得非常有意思。",
+      "pinyin": "Wǒ juéde fēicháng yǒu yìsi.",
+      "vi": "Tôi thấy rất thú vị."
+    },
+    {
+      "start": 68.13,
+      "end": 69.96,
+      "en": "I completely agree!",
+      "zh": "我完全同意！",
+      "pinyin": "Wǒ wánquán tóngyì!",
+      "vi": "Tôi hoàn toàn đồng ý!"
+    },
+    {
+      "start": 69.97,
+      "end": 72.13,
+      "en": "I especially love idioms.",
+      "zh": "我特别喜欢成语。",
+      "pinyin": "Wǒ tèbié xǐhuan chéngyǔ.",
+      "vi": "Tôi đặc biệt thích thành ngữ."
+    },
+    {
+      "start": 72.13,
+      "end": 77.93,
+      "en": "To me, learning idioms doesn’t feel like studying—it feels more like listening to stories.",
+      "zh": "对我来说，学习成语不像是学习，更像是听故事。",
+      "pinyin": "Duì wǒ lái shuō, xuéxí chéngyǔ bù xiàng shì xuéxí, gèng xiàng shì tīng gùshi.",
+      "vi": "Đối với tôi, học thành ngữ không giống học bài, mà giống như nghe kể chuyện hơn."
+    },
+    {
+      "start": 77.97,
+      "end": 83.97,
+      "en": "Behind every idiom is a vivid little story; some characters are very smart,",
+      "zh": "每个成语背后都有一个生动的小故事，有的人物很聪明，",
+      "pinyin": "Měi gè chéngyǔ bèihòu dōu yǒu yī gè shēngdòng de xiǎo gùshi, yǒude rénwù hěn cōngming,",
+      "vi": "Mỗi thành ngữ đằng sau đều có một câu chuyện nhỏ sinh động, có nhân vật rất thông minh,"
+    },
+    {
+      "start": 84,
+      "end": 87.07,
+      "en": "some characters are very silly—really fun.",
+      "zh": "有的人物很笨，特别好玩儿。",
+      "pinyin": "Yǒude rénwù hěn bèn, tèbié hǎowánr.",
+      "vi": "có nhân vật rất ngốc, đặc biệt vui."
+    },
+    {
+      "start": 87.07,
+      "end": 88.8,
+      "en": "(Laughs), you’re right.",
+      "zh": "(笑)，你说得对。",
+      "pinyin": "(Xiào), nǐ shuō de duì.",
+      "vi": "(Cười), cậu nói đúng."
+    },
+    {
+      "start": 88.8,
+      "end": 93.2,
+      "en": "So today let’s talk about this topic with everyone, shall we?",
+      "zh": "那我们今天就和大家一起聊一聊这个话题吧？",
+      "pinyin": "Nà wǒmen jīntiān jiù hé dàjiā yīqǐ liáo yī liáo zhège huàtí ba?",
+      "vi": "Vậy hôm nay chúng ta cùng mọi người bàn về chủ đề này nhé?"
+    },
+    {
+      "start": 93.2,
+      "end": 96.4,
+      "en": "Let’s talk about “wisdom in idioms.”",
+      "zh": "聊一聊“成语中的智慧”。",
+      "pinyin": "Liáo yī liáo “chéngyǔ zhōng de zhìhuì”.",
+      "vi": "Bàn về “trí tuệ trong thành ngữ”."
+    },
+    {
+      "start": 96.4,
+      "end": 102.9,
+      "en": "We can share a few idioms we like most or find very helpful for life.",
+      "zh": "我们可以分享几个我们最喜欢的，或者觉得对生活很有帮助的成语。",
+      "pinyin": "Wǒmen kěyǐ fēnxiǎng jǐ gè wǒmen zuì xǐhuan de, huòzhě juéde duì shēnghuó hěn yǒu bāngzhù de chéngyǔ.",
+      "vi": "Chúng ta có thể chia sẻ vài thành ngữ mình thích nhất, hoặc thấy rất có ích cho cuộc sống."
+    },
+    {
+      "start": 102.9,
+      "end": 104.03,
+      "en": "Great!",
+      "zh": "太好了！",
+      "pinyin": "Tài hǎo le!",
+      "vi": "Tuyệt quá!"
+    },
+    {
+      "start": 104.03,
+      "end": 105.66,
+      "en": "That’s a great idea.",
+      "zh": "这个主意很棒。",
+      "pinyin": "Zhège zhǔyi hěn bàng.",
+      "vi": "Ý kiến này rất hay."
+    },
+    {
+      "start": 105.67,
+      "end": 107.67,
+      "en": "I have a lot to say.",
+      "zh": "我有很多想说的。",
+      "pinyin": "Wǒ yǒu hěn duō xiǎng shuō de.",
+      "vi": "Tôi có rất nhiều điều muốn nói."
+    },
+    {
+      "start": 107.67,
+      "end": 111.13,
+      "en": "Friends listening to our podcast, are you ready?",
+      "zh": "听我们播客的朋友们，你们准备好了吗？",
+      "pinyin": "Tīng wǒmen bōkè de péngyoumen, nǐmen zhǔnbèi hǎo le ma?",
+      "vi": "Các bạn nghe podcast của chúng tôi, các bạn sẵn sàng chưa?"
+    },
+    {
+      "start": 111.13,
+      "end": 114.06,
+      "en": "Today’s story session is about to begin!",
+      "zh": "我们今天的故事会就要开始了！",
+      "pinyin": "Wǒmen jīntiān de gùshihuì jiù yào kāishǐ le!",
+      "vi": "Buổi kể chuyện hôm nay của chúng ta sắp bắt đầu rồi!"
+    },
+    {
+      "start": 114.1,
+      "end": 115.63,
+      "en": "Okay, Wang Yu.",
+      "zh": "好，王雨。",
+      "pinyin": "Hǎo, Wáng Yǔ.",
+      "vi": "Được, Vương Vũ."
+    },
+    {
+      "start": 115.63,
+      "end": 120.9,
+      "en": "Speaking of idioms, many friends learning Chinese may feel,",
+      "zh": "我们说到成语，很多正在学习中文的朋友可能会觉得，",
+      "pinyin": "Wǒmen shuō dào chéngyǔ, hěn duō zhèngzài xuéxí Zhōngwén de péngyou kěnéng huì juéde,",
+      "vi": "Nhắc đến thành ngữ, nhiều bạn đang học tiếng Trung có thể sẽ thấy,"
+    },
+    {
+      "start": 120.9,
+      "end": 125.2,
+      "en": "idioms are numerous and difficult, and they don’t know how to start learning them.",
+      "zh": "成语又多又难，不知道怎么开始学。",
+      "pinyin": "Chéngyǔ yòu duō yòu nán, bù zhīdào zěnme kāishǐ xué.",
+      "vi": "thành ngữ vừa nhiều vừa khó, không biết bắt đầu học thế nào."
+    },
+    {
+      "start": 125.23,
+      "end": 127,
+      "en": "Yes, I understand.",
+      "zh": "是的，我理解。",
+      "pinyin": "Shì de, wǒ lǐjiě.",
+      "vi": "Đúng vậy, tôi hiểu."
+    },
+    {
+      "start": 127,
+      "end": 131.77,
+      "en": "When four characters are put together, sometimes you know every character,",
+      "zh": "四个字放在一起，有时候每个字你都认识，",
+      "pinyin": "Sì gè zì fàng zài yīqǐ, yǒu shíhou měi gè zì nǐ dōu rènshi,",
+      "vi": "Bốn chữ đặt cạnh nhau, có khi từng chữ bạn đều biết,"
+    },
+    {
+      "start": 131.77,
+      "end": 135.74,
+      "en": "but together you don’t know what they mean.",
+      "zh": "但是放在一起就不知道是什么意思了。",
+      "pinyin": "Dànshì fàng zài yīqǐ jiù bù zhīdào shì shénme yìsi le.",
+      "vi": "nhưng đặt cạnh nhau thì lại không biết nghĩa là gì."
+    },
+    {
+      "start": 135.77,
+      "end": 136.73,
+      "en": "Exactly.",
+      "zh": "没错。",
+      "pinyin": "Méi cuò.",
+      "vi": "Không sai."
+    },
+    {
+      "start": 136.73,
+      "end": 142.36,
+      "en": "So I think the best way to learn idioms is to first listen to their stories.",
+      "zh": "所以我觉得，学习成语最好的方法，就是先听它的故事。",
+      "pinyin": "Suǒyǐ wǒ juéde, xuéxí chéngyǔ zuì hǎo de fāngfǎ, jiù shì xiān tīng tā de gùshi.",
+      "vi": "Vì vậy tôi nghĩ, cách tốt nhất để học thành ngữ là trước hết nghe câu chuyện của nó."
+    },
+    {
+      "start": 142.37,
+      "end": 146,
+      "en": "Once you understand the story, you understand its meaning.",
+      "zh": "你明白了故事，就明白了它的意思。",
+      "pinyin": "Nǐ míngbai le gùshi, jiù míngbai le tā de yìsi.",
+      "vi": "Bạn hiểu câu chuyện rồi thì sẽ hiểu nghĩa của nó."
+    },
+    {
+      "start": 146.03,
+      "end": 152,
+      "en": "It’s like making friends: once you understand their story, you truly know them.",
+      "zh": "这就像交朋友，你了解了他的故事，你就真正认识他了。",
+      "pinyin": "Zhè jiù xiàng jiāo péngyou, nǐ liǎojiě le tā de gùshi, nǐ jiù zhēnzhèng rènshi tā le.",
+      "vi": "Điều này giống như kết bạn, bạn hiểu câu chuyện của người đó thì mới thật sự quen biết họ."
+    },
+    {
+      "start": 152,
+      "end": 153.8,
+      "en": "That’s a great analogy!",
+      "zh": "这个比喻真好！",
+      "pinyin": "Zhège bǐyù zhēn hǎo!",
+      "vi": "Ví von này hay thật!"
+    },
+    {
+      "start": 153.8,
+      "end": 157.13,
+      "en": "Learning idioms is like meeting new friends.",
+      "zh": "学习成语就像认识新朋友。",
+      "pinyin": "Xuéxí chéngyǔ jiù xiàng rènshi xīn péngyou.",
+      "vi": "Học thành ngữ giống như quen những người bạn mới."
+    },
+    {
+      "start": 157.13,
+      "end": 161.3,
+      "en": "So who is the first “new friend” we’re going to meet today?",
+      "zh": "那今天我们第一个要认识的“新朋友”是谁呢？",
+      "pinyin": "Nà jīntiān wǒmen dì yī gè yào rènshi de “xīn péngyou” shì shéi ne?",
+      "vi": "Vậy hôm nay “người bạn mới” đầu tiên chúng ta cần quen là ai nhỉ?"
+    },
+    {
+      "start": 161.37,
+      "end": 163.77,
+      "en": "Li Ming, you introduce one first.",
+      "zh": "李明，你先来介绍一个吧。",
+      "pinyin": "Lǐ Míng, nǐ xiān lái jièshào yī gè ba.",
+      "vi": "Lý Minh, cậu giới thiệu một cái trước đi."
+    },
+    {
+      "start": 163.8,
+      "end": 164.77,
+      "en": "Okay.",
+      "zh": "好的。",
+      "pinyin": "Hǎo de.",
+      "vi": "Được thôi."
+    },
+    {
+      "start": 164.77,
+      "end": 169.47,
+      "en": "The first idiom I want to introduce is related to “patience.”",
+      "zh": "我想介绍的第一个成语，和“耐心”有关系。",
+      "pinyin": "Wǒ xiǎng jièshào de dì yī gè chéngyǔ, hé “nàixīn” yǒu guānxi.",
+      "vi": "Thành ngữ đầu tiên tôi muốn giới thiệu có liên quan đến “sự kiên nhẫn”."
+    },
+    {
+      "start": 169.47,
+      "end": 173.5,
+      "en": "This idiom is called “ba miao zhu zhang” (pulling up seedlings to help them grow).",
+      "zh": "这个成语叫“拔苗助长”。",
+      "pinyin": "Zhège chéngyǔ jiào “bá miáo zhù zhǎng”.",
+      "vi": "Thành ngữ này gọi là “bá miáo trợ trưởng” (nhổ mạ để giúp mạ lớn nhanh)."
+    },
+    {
+      "start": 173.5,
+      "end": 177.23,
+      "en": "Bá—miáo—zhù—zhǎng.",
+      "zh": "拔—苗—助—长。",
+      "pinyin": "Bá—miáo—zhù—zhǎng.",
+      "vi": "Bá—miáo—trợ—trưởng."
+    },
+    {
+      "start": 177.23,
+      "end": 186.9,
+      "en": "Hmm, I think I know all four characters. “拔” means “pull up,” “苗” means a small plant, a seedling,",
+      "zh": "嗯，这四个字我好像都认识。“拔”就是 pull up，“苗”是小植物，seedling，",
+      "pinyin": "Ńg, zhè sì gè zì wǒ hǎoxiàng dōu rènshi. “Bá” jiùshì pull up, “miáo” shì xiǎo zhíwù, seedling,",
+      "vi": "Ừm, bốn chữ này tôi hình như đều biết. “Bá” là pull up, “miáo” là cây nhỏ, seedling,"
+    },
+    {
+      "start": 186.9,
+      "end": 191.37,
+      "en": "“助” means help, and “长” means grow.",
+      "zh": "“助”是帮助，help，“长”是 grow。",
+      "pinyin": "“Zhù” shì bāngzhù, help, “zhǎng” shì grow.",
+      "vi": "“Trợ” là giúp đỡ, help, “trưởng” là grow."
+    },
+    {
+      "start": 191.37,
+      "end": 195.54,
+      "en": "Put together... helping a small plant grow taller?",
+      "zh": "连在一起……帮助小植物长高？",
+      "pinyin": "Lián zài yīqǐ... bāngzhù xiǎo zhíwù zhǎng gāo?",
+      "vi": "Ghép lại với nhau... giúp cây nhỏ cao lên?"
+    },
+    {
+      "start": 195.63,
+      "end": 197.93,
+      "en": "That sounds like a good thing.",
+      "zh": "听起来是件好事啊。",
+      "pinyin": "Tīng qǐlái shì jiàn hǎoshì a.",
+      "vi": "Nghe có vẻ là một việc tốt mà."
+    },
+    {
+      "start": 197.97,
+      "end": 204.2,
+      "en": "It sounds like a good thing, but its story tells us that it is actually a bad thing.",
+      "zh": "听起来是好事，但它的故事告诉我们，这其实是一件坏事。",
+      "pinyin": "Tīng qǐlái shì hǎoshì, dàn tā de gùshì gàosu wǒmen, zhè qíshí shì yī jiàn huàishì.",
+      "vi": "Nghe thì là việc tốt, nhưng câu chuyện của nó cho chúng ta biết đây thật ra là một việc xấu."
+    },
+    {
+      "start": 204.2,
+      "end": 206.87,
+      "en": "Oh? Tell me this story quickly.",
+      "zh": "哦？快讲讲这个故事。",
+      "pinyin": "Ó? Kuài jiǎngjiang zhège gùshì.",
+      "vi": "Ồ? Mau kể câu chuyện này đi."
+    },
+    {
+      "start": 206.9,
+      "end": 207.87,
+      "en": "Okay.",
+      "zh": "好的。",
+      "pinyin": "Hǎo de.",
+      "vi": "Được."
+    },
+    {
+      "start": 207.87,
+      "end": 213.27,
+      "en": "This story says that a long time ago, there was a farmer.",
+      "zh": "这个故事是说，在很久以前，有一个农民。",
+      "pinyin": "Zhège gùshì shì shuō, zài hěn jiǔ yǐqián, yǒu yī gè nóngmín.",
+      "vi": "Câu chuyện kể rằng, rất lâu về trước, có một người nông dân."
+    },
+    {
+      "start": 213.27,
+      "end": 217.2,
+      "en": "He planted many rice seedlings in his field.",
+      "zh": "他在自己的田里种了很多禾苗。",
+      "pinyin": "Tā zài zìjǐ de tián lǐ zhòng le hěn duō hémiáo.",
+      "vi": "Ông ấy trồng rất nhiều mạ trong ruộng của mình."
+    },
+    {
+      "start": 217.2,
+      "end": 220.97,
+      "en": "The “苗” we are talking about refers to these very small,",
+      "zh": "我们说的“苗”，就是指这些很小的，",
+      "pinyin": "Wǒmen shuō de “miáo”, jiùshì zhǐ zhèxiē hěn xiǎo de,",
+      "vi": "“苗” mà chúng ta nói đến là chỉ những cây rất nhỏ này,"
+    },
+    {
+      "start": 220.97,
+      "end": 225.6,
+      "en": "newly sprouted rice or wheat.",
+      "zh": "刚刚长出来的水稻或者小麦。",
+      "pinyin": "gānggāng zhǎng chūlái de shuǐdào huòzhě xiǎomài.",
+      "vi": "vừa mới mọc lên, là lúa nước hoặc lúa mì."
+    },
+    {
+      "start": 225.6,
+      "end": 229.83,
+      "en": "I got it, they are very young plants.",
+      "zh": "我明白了，就是 very young plants。",
+      "pinyin": "Wǒ míngbai le, jiùshì very young plants.",
+      "vi": "Tôi hiểu rồi, chính là very young plants."
+    },
+    {
+      "start": 229.83,
+      "end": 230.66,
+      "en": "Right.",
+      "zh": "对。",
+      "pinyin": "Duì.",
+      "vi": "Đúng."
+    },
+    {
+      "start": 230.67,
+      "end": 234.6,
+      "en": "This farmer went to the field every day to look at his seedlings.",
+      "zh": "这个农民每天都去田里看他的禾苗。",
+      "pinyin": "Zhège nóngmín měi tiān dōu qù tián lǐ kàn tā de hémiáo.",
+      "vi": "Người nông dân này ngày nào cũng ra ruộng xem mạ của mình."
+    },
+    {
+      "start": 234.6,
+      "end": 241.07,
+      "en": "He really hoped these seedlings could quickly grow taller and quickly grow up.",
+      "zh": "他非常希望这些禾苗能快点儿长高，快点儿长大。",
+      "pinyin": "Tā fēicháng xīwàng zhèxiē hémiáo néng kuàidiǎnr zhǎng gāo, kuàidiǎnr zhǎng dà.",
+      "vi": "Ông ấy rất mong những cây mạ này có thể nhanh chóng cao lên, nhanh chóng lớn lên."
+    },
+    {
+      "start": 241.1,
+      "end": 244.8,
+      "en": "He waited one day, and the seedlings seemed not to change.",
+      "zh": "他等了一天，禾苗好像没变化。",
+      "pinyin": "Tā děng le yī tiān, hémiáo hǎoxiàng méi biànhuà.",
+      "vi": "Ông ấy đợi một ngày, mạ hình như không thay đổi."
+    },
+    {
+      "start": 244.8,
+      "end": 248.37,
+      "en": "He waited two days, and there was still no change.",
+      "zh": "等了两天，还是没什么变化。",
+      "pinyin": "Děng le liǎng tiān, háishì méi shénme biànhuà.",
+      "vi": "Đợi hai ngày, vẫn chẳng có thay đổi gì."
+    },
+    {
+      "start": 248.4,
+      "end": 250.27,
+      "en": "He felt very anxious.",
+      "zh": "他心里非常着急。",
+      "pinyin": "Tā xīnlǐ fēicháng zháojí.",
+      "vi": "Trong lòng ông ấy vô cùng sốt ruột."
+    },
+    {
+      "start": 250.27,
+      "end": 253.4,
+      "en": "Hmm, I can understand how he felt.",
+      "zh": "嗯，我能理解他的心情。",
+      "pinyin": "Ńg, wǒ néng lǐjiě tā de xīnqíng.",
+      "vi": "Ừm, tôi có thể hiểu tâm trạng của ông ấy."
+    },
+    {
+      "start": 253.4,
+      "end": 258.27,
+      "en": "It’s like when I grow flowers; I also hope my flowers will bloom quickly.",
+      "zh": "就像我种花一样，我也希望我的花能快点儿开。",
+      "pinyin": "Jiù xiàng wǒ zhòng huā yīyàng, wǒ yě xīwàng wǒ de huā néng kuàidiǎnr kāi.",
+      "vi": "Giống như tôi trồng hoa vậy, tôi cũng mong hoa của mình nhanh chóng nở."
+    },
+    {
+      "start": 258.27,
+      "end": 259.3,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 259.3,
+      "end": 263.73,
+      "en": "One day, this farmer was walking back and forth by the field,",
+      "zh": "有一天，这个农民在田边走来走去，",
+      "pinyin": "Yǒu yī tiān, zhège nóngmín zài tián biān zǒu lái zǒu qù,",
+      "vi": "Một ngày nọ, người nông dân này đi qua đi lại bên bờ ruộng,"
+    },
+    {
+      "start": 263.73,
+      "end": 267.23,
+      "en": "he thought: “I must think of a way",
+      "zh": "他想：“我一定要想个办法，",
+      "pinyin": "Tā xiǎng: “Wǒ yīdìng yào xiǎng gè bànfǎ,",
+      "vi": "ông ấy nghĩ: “Mình nhất định phải nghĩ ra một cách,"
+    },
+    {
+      "start": 267.23,
+      "end": 270.5,
+      "en": "to help my seedlings grow a bit faster!”",
+      "zh": "帮助我的禾苗长得快一点！”",
+      "pinyin": "bāngzhù wǒ de hémiáo zhǎng de kuài yīdiǎn!”",
+      "vi": "để giúp mạ của mình lớn nhanh hơn một chút!”"
+    },
+    {
+      "start": 270.53,
+      "end": 276.23,
+      "en": "Then he really thought of a “good idea.” What idea?",
+      "zh": "然后，他真的想到了一个“好办法”。什么办法？",
+      "pinyin": "Ránhòu, tā zhēn de xiǎng dào le yī gè “hǎo bànfǎ”. Shénme bànfǎ?",
+      "vi": "Sau đó, ông ấy thật sự nghĩ ra một “cách hay”. Cách gì?"
+    },
+    {
+      "start": 276.23,
+      "end": 283.93,
+      "en": "He went into the field and began using his hand to pull each small seedling up a little.",
+      "zh": "他走进田里，开始把每一棵小禾苗都用手往上拔高了一点点。",
+      "pinyin": "Tā zǒu jìn tián lǐ, kāishǐ bǎ měi yī kē xiǎo hémiáo dōu yòng shǒu wǎng shàng bá gāo le yīdiǎndiǎn.",
+      "vi": "Ông ấy bước vào ruộng, bắt đầu dùng tay nhổ cao từng cây mạ nhỏ lên một chút."
+    },
+    {
+      "start": 283.93,
+      "end": 288.1,
+      "en": "He thought, this way, wouldn’t the seedlings become taller?",
+      "zh": "他想，这样，禾苗不就变高了吗？",
+      "pinyin": "Tā xiǎng, zhèyàng, hémiáo bù jiù biàn gāo le ma?",
+      "vi": "Ông ấy nghĩ, như thế thì mạ chẳng phải là cao lên rồi sao?"
+    },
+    {
+      "start": 288.1,
+      "end": 291.23,
+      "en": "Huh? He used his hands to pull them up?",
+      "zh": "啊？他用手去拔？",
+      "pinyin": "A? Tā yòng shǒu qù bá?",
+      "vi": "Hả? Ông ấy dùng tay nhổ lên?"
+    },
+    {
+      "start": 291.23,
+      "end": 294.8,
+      "en": "Wouldn’t that harm the roots of the small plants?",
+      "zh": "那不是会伤害到小植物的根吗？",
+      "pinyin": "Nà bù shì huì shānghài dào xiǎo zhíwù de gēn ma?",
+      "vi": "Thế thì chẳng phải sẽ làm tổn thương rễ của cây nhỏ sao?"
+    },
+    {
+      "start": 294.83,
+      "end": 296.3,
+      "en": "Exactly.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn đúng."
+    },
+    {
+      "start": 296.3,
+      "end": 301.2,
+      "en": "But the farmer was too anxious at the time and didn’t think of this.",
+      "zh": "但是这个农民当时太着急了，没有想到这一点。",
+      "pinyin": "Dànshì zhège nóngmín dāngshí tài zháojí le, méiyǒu xiǎng dào zhè yī diǎn.",
+      "vi": "Nhưng lúc đó người nông dân quá sốt ruột, không nghĩ đến điều này."
+    },
+    {
+      "start": 301.23,
+      "end": 308.43,
+      "en": "He was busy from morning until evening, pulling all the seedlings in the field up a little.",
+      "zh": "他从早上一直忙到晚上，把田里所有的禾苗都拔高了一点。",
+      "pinyin": "Tā cóng zǎoshang yīzhí máng dào wǎnshang, bǎ tián lǐ suǒyǒu de hémiáo dōu bá gāo le yīdiǎn.",
+      "vi": "Ông ấy bận rộn từ sáng đến tối, nhổ cao tất cả mạ trong ruộng lên một chút."
+    },
+    {
+      "start": 308.43,
+      "end": 311.7,
+      "en": "He was very tired, but very happy inside.",
+      "zh": "他非常累，但是心里很高兴。",
+      "pinyin": "Tā fēicháng lèi, dànshì xīnlǐ hěn gāoxìng.",
+      "vi": "Ông ấy rất mệt, nhưng trong lòng rất vui."
+    },
+    {
+      "start": 311.73,
+      "end": 316.53,
+      "en": "He returned home and said to his family: “Today I’m so tired!",
+      "zh": "他回到家，对他的家人说：“今天我太累了！",
+      "pinyin": "Tā huí dào jiā, duì tā de jiārén shuō: “Jīntiān wǒ tài lèi le!",
+      "vi": "Ông ấy về đến nhà, nói với người nhà: “Hôm nay tôi mệt quá!"
+    },
+    {
+      "start": 316.53,
+      "end": 320.83,
+      "en": "But I helped the seedlings in the field grow taller!”",
+      "zh": "但是我帮助田里的禾苗长高了！”",
+      "pinyin": "Dànshì wǒ bāngzhù tián lǐ de hémiáo zhǎng gāo le!”",
+      "vi": "Nhưng tôi đã giúp mạ trong ruộng cao lên rồi!”"
+    },
+    {
+      "start": 320.83,
+      "end": 323.73,
+      "en": "His family must have found it very strange.",
+      "zh": "他的家人一定觉得很奇怪吧。",
+      "pinyin": "Tā de jiārén yīdìng juéde hěn qíguài ba.",
+      "vi": "Người nhà của ông ấy nhất định sẽ thấy rất lạ."
+    },
+    {
+      "start": 323.8,
+      "end": 329.37,
+      "en": "Yes, his son heard this, felt something was wrong, and immediately ran to the field to look.",
+      "zh": "是的，他的儿子听了，觉得不对劲，就马上跑到田里去看。",
+      "pinyin": "Shì de, tā de érzi tīng le, juéde bù duìjìn, jiù mǎshàng pǎo dào tián lǐ qù kàn.",
+      "vi": "Đúng vậy, con trai ông ấy nghe xong, thấy không ổn, liền lập tức chạy ra ruộng xem."
+    },
+    {
+      "start": 329.4,
+      "end": 334.3,
+      "en": "As a result, he found that all the seedlings in the field were already dead.",
+      "zh": "结果，他发现田里所有的禾苗都已经死了。",
+      "pinyin": "Jiéguǒ, tā fāxiàn tián lǐ suǒyǒu de hémiáo dōu yǐjīng sǐ le.",
+      "vi": "Kết quả, cậu ấy phát hiện tất cả mạ trong ruộng đều đã chết."
+    },
+    {
+      "start": 334.3,
+      "end": 337.07,
+      "en": "Oh no! What a pity!",
+      "zh": "天哪！太可惜了！",
+      "pinyin": "Tiān na! Tài kěxī le!",
+      "vi": "Trời ơi! Tiếc quá!"
+    },
+    {
+      "start": 337.07,
+      "end": 340.9,
+      "en": "He originally wanted to help them, but ended up harming them.",
+      "zh": "本来是想帮助它们，结果害了它们。",
+      "pinyin": "Běnlái shì xiǎng bāngzhù tāmen, jiéguǒ hài le tāmen.",
+      "vi": "Vốn dĩ là muốn giúp chúng, kết quả lại hại chúng."
+    },
+    {
+      "start": 340.93,
+      "end": 341.66,
+      "en": "Right.",
+      "zh": "对。",
+      "pinyin": "Duì.",
+      "vi": "Đúng."
+    },
+    {
+      "start": 341.67,
+      "end": 344.67,
+      "en": "So the idiom “ba miao zhu zhang,”",
+      "zh": "所以，“拔苗助长”这个成语，",
+      "pinyin": "Suǒyǐ, “bá miáo zhù zhǎng” zhège chéngyǔ,",
+      "vi": "Vì vậy, thành ngữ “bá miáo trợ trưởng”,"
+    },
+    {
+      "start": 344.7,
+      "end": 351,
+      "en": "now we use it to describe behavior that, because of being too impatient and not respecting the natural laws of development,",
+      "zh": "现在我们用它来形容那些因为太着急，不尊重事物发展的自然规律，",
+      "pinyin": "Xiànzài wǒmen yòng tā lái xíngróng nàxiē yīnwèi tài zháojí, bù zūnzhòng shìwù fāzhǎn de zìrán guīlǜ,",
+      "vi": "bây giờ chúng ta dùng nó để miêu tả những hành vi vì quá sốt ruột, không tôn trọng quy luật tự nhiên của sự phát triển,"
+    },
+    {
+      "start": 351,
+      "end": 353.97,
+      "en": "ends up ruining things.",
+      "zh": "结果把事情搞砸了的行为。",
+      "pinyin": "jiéguǒ bǎ shìqíng gǎozá le de xíngwéi.",
+      "vi": "kết quả làm hỏng việc."
+    },
+    {
+      "start": 353.97,
+      "end": 358.97,
+      "en": "Its meaning is somewhat similar to “haste makes waste” in English.",
+      "zh": "它的意思和英语里的“haste makes waste”有点儿像。",
+      "pinyin": "Tā de yìsi hé yīngyǔ lǐ de “haste makes waste” yǒudiǎnr xiàng.",
+      "vi": "Ý của nó hơi giống với “haste makes waste” trong tiếng Anh."
+    },
+    {
+      "start": 359,
+      "end": 360.67,
+      "en": "I understand.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 360.67,
+      "end": 368.03,
+      "en": "So the wisdom in this idiom is that when doing things, one must be patient and not too impatient.",
+      "zh": "所以这个成语里的智慧就是，做事要有耐心，不能太着急。",
+      "pinyin": "Suǒyǐ zhège chéngyǔ lǐ de zhìhuì jiùshì, zuòshì yào yǒu nàixīn, bù néng tài zháojí.",
+      "vi": "Vì vậy, trí tuệ trong thành ngữ này là làm việc phải có kiên nhẫn, không được quá sốt ruột."
+    },
+    {
+      "start": 368.03,
+      "end": 370.76,
+      "en": "Many things take time.",
+      "zh": "很多事情都需要时间。",
+      "pinyin": "Hěn duō shìqing dōu xūyào shíjiān.",
+      "vi": "Rất nhiều việc đều cần thời gian."
+    },
+    {
+      "start": 370.8,
+      "end": 372.23,
+      "en": "Exactly.",
+      "zh": "正是如此。",
+      "pinyin": "Zhèng shì rúcǐ.",
+      "vi": "Đúng là như vậy."
+    },
+    {
+      "start": 372.23,
+      "end": 376.7,
+      "en": "For example, our learning Chinese is a very good example.",
+      "zh": "比如我们学习中文，就是一个很好的例子。",
+      "pinyin": "Bǐrú wǒmen xuéxí Zhōngwén, jiù shì yí ge hěn hǎo de lìzi.",
+      "vi": "Ví dụ, việc chúng ta học tiếng Trung là một ví dụ rất tốt."
+    },
+    {
+      "start": 376.73,
+      "end": 381.96,
+      "en": "We can't expect to learn today and speak very fluently tomorrow.",
+      "zh": "我们不能希望今天学了，明天就能说得非常流利。",
+      "pinyin": "Wǒmen bù néng xīwàng jīntiān xué le, míngtiān jiù néng shuō de fēicháng liúlì.",
+      "vi": "Chúng ta không thể mong hôm nay học, ngày mai đã nói được rất trôi chảy."
+    },
+    {
+      "start": 381.97,
+      "end": 387.3,
+      "en": "Learning a language is like planting seedlings; you need to water them day by day,",
+      "zh": "学习语言就像种禾苗，需要一天一天地浇水，",
+      "pinyin": "Xuéxí yǔyán jiù xiàng zhòng hémiáo, xūyào yì tiān yì tiān de jiāoshuǐ,",
+      "vi": "Học ngôn ngữ giống như trồng cây non, cần tưới nước từng ngày,"
+    },
+    {
+      "start": 387.3,
+      "end": 389.03,
+      "en": "and practice day by day.",
+      "zh": "一天一天地练习。",
+      "pinyin": "Yì tiān yì tiān de liànxí.",
+      "vi": "luyện tập từng ngày."
+    },
+    {
+      "start": 389.03,
+      "end": 393,
+      "en": "Slowly, it will naturally grow taller and grow well.",
+      "zh": "慢慢地，它自然就会长高、长好。",
+      "pinyin": "Mànmàn de, tā zìrán jiù huì zhǎng gāo, zhǎng hǎo.",
+      "vi": "Từ từ, nó sẽ tự nhiên cao lên và phát triển tốt."
+    },
+    {
+      "start": 393.03,
+      "end": 396.56,
+      "en": "If you're too impatient, you may actually learn poorly.",
+      "zh": "如果你太着急，反而可能学不好。",
+      "pinyin": "Rúguǒ nǐ tài zháojí, fǎn'ér kěnéng xué bù hǎo.",
+      "vi": "Nếu bạn quá nóng vội, ngược lại có thể sẽ học không tốt."
+    },
+    {
+      "start": 396.6,
+      "end": 398.33,
+      "en": "You're absolutely right!",
+      "zh": "你说得太对了！",
+      "pinyin": "Nǐ shuō de tài duì le!",
+      "vi": "Bạn nói quá đúng!"
+    },
+    {
+      "start": 398.33,
+      "end": 401.46,
+      "en": "That's exactly how it was when I first started learning to drive.",
+      "zh": "我刚开始学开车的时候就是这样。",
+      "pinyin": "Wǒ gāng kāishǐ xué kāichē de shíhou jiù shì zhèyàng.",
+      "vi": "Lúc tôi mới bắt đầu học lái xe cũng chính là như vậy."
+    },
+    {
+      "start": 401.47,
+      "end": 407.1,
+      "en": "I was especially impatient and always wanted to get out on the road quickly, but I kept making mistakes,",
+      "zh": "我特别着急，总想快点儿开到路上去，结果总是出错，",
+      "pinyin": "Wǒ tèbié zháojí, zǒng xiǎng kuài diǎnr kāi dào lù shàng qù, jiéguǒ zǒng shì chūcuò,",
+      "vi": "Tôi đặc biệt nóng vội, luôn muốn nhanh chóng lái ra đường, kết quả là luôn mắc lỗi,"
+    },
+    {
+      "start": 407.13,
+      "end": 408.7,
+      "en": "and I didn't drive well either.",
+      "zh": "车也开得不好。",
+      "pinyin": "Chē yě kāi de bù hǎo.",
+      "vi": "xe cũng lái không tốt."
+    },
+    {
+      "start": 408.7,
+      "end": 415.17,
+      "en": "Later my instructor told me, slow down, practice the basics well first, and you'll naturally get faster.",
+      "zh": "后来我的教练告诉我，慢一点，先练习好基础，自然就快了。",
+      "pinyin": "Hòulái wǒ de jiàoliàn gàosù wǒ, màn yìdiǎn, xiān liànxí hǎo jīchǔ, zìrán jiù kuài le.",
+      "vi": "Sau đó huấn luyện viên bảo tôi, chậm một chút, luyện tốt cơ bản trước, tự nhiên sẽ nhanh thôi."
+    },
+    {
+      "start": 415.2,
+      "end": 418.53,
+      "en": "Isn't this the opposite example of 'pulling up seedlings to help them grow'?",
+      "zh": "这不就是“拔苗助长”的反面例子吗？",
+      "pinyin": "Zhè bú jiù shì “bá miáo zhù zhǎng” de fǎnmiàn lìzi ma?",
+      "vi": "Đây chẳng phải là ví dụ ngược lại của “nhổ mạ giúp lớn” sao?"
+    },
+    {
+      "start": 418.57,
+      "end": 422.7,
+      "en": "Yes, this is a very good real-life example.",
+      "zh": "是的，这是一个非常好的生活中的例子。",
+      "pinyin": "Shì de, zhè shì yí ge fēicháng hǎo de shēnghuó zhōng de lìzi.",
+      "vi": "Đúng vậy, đây là một ví dụ rất hay trong cuộc sống."
+    },
+    {
+      "start": 422.73,
+      "end": 430.23,
+      "en": "So the wisdom this idiom 'pulling up seedlings to help them grow' tells us is: patience is a friend of success.",
+      "zh": "所以，“拔苗助长”这个成语告诉我们的智慧就是：耐心是成功的朋友。",
+      "pinyin": "Suǒyǐ, “bá miáo zhù zhǎng” zhège chéngyǔ gàosù wǒmen de zhìhuì jiù shì: nàixīn shì chénggōng de péngyou.",
+      "vi": "Vì vậy, trí tuệ mà thành ngữ “nhổ mạ giúp lớn” muốn nói với chúng ta là: kiên nhẫn là bạn của thành công."
+    },
+    {
+      "start": 430.23,
+      "end": 434.36,
+      "en": "Li Ming, the story about the farmer you just told,",
+      "zh": "李明，你刚才讲的那个农民的故事，",
+      "pinyin": "Lǐ Míng, nǐ gāngcái jiǎng de nàge nóngmín de gùshi,",
+      "vi": "Lý Minh, câu chuyện người nông dân mà bạn vừa kể,"
+    },
+    {
+      "start": 434.37,
+      "end": 438.7,
+      "en": "reminded me of another very interesting idiom.",
+      "zh": "让我想到了另一个非常有意思的成语。",
+      "pinyin": "Ràng wǒ xiǎng dào le lìng yí ge fēicháng yǒu yìsi de chéngyǔ.",
+      "vi": "khiến tôi nghĩ đến một thành ngữ khác rất thú vị."
+    },
+    {
+      "start": 438.7,
+      "end": 442.67,
+      "en": "This idiom is also related to an animal.",
+      "zh": "这个成语也和一个动物有关系。",
+      "pinyin": "Zhège chéngyǔ yě hé yí ge dòngwù yǒu guānxi.",
+      "vi": "Thành ngữ này cũng liên quan đến một loài động vật."
+    },
+    {
+      "start": 442.7,
+      "end": 445.07,
+      "en": "Oh? What idiom is it?",
+      "zh": "哦？是什么成语？",
+      "pinyin": "Ó? Shì shénme chéngyǔ?",
+      "vi": "Ồ? Là thành ngữ gì?"
+    },
+    {
+      "start": 445.07,
+      "end": 448.84,
+      "en": "This idiom is called 'a frog at the bottom of a well'.",
+      "zh": "这个成语叫“井底之蛙”。",
+      "pinyin": "Zhège chéngyǔ jiào “jǐng dǐ zhī wā”.",
+      "vi": "Thành ngữ này gọi là “ếch ngồi đáy giếng”."
+    },
+    {
+      "start": 448.9,
+      "end": 452.1,
+      "en": "(laughs) This idiom is very famous.",
+      "zh": "(笑)，这个成语非常有名。",
+      "pinyin": "(Xiào), zhège chéngyǔ fēicháng yǒumíng.",
+      "vi": "(Cười), thành ngữ này rất nổi tiếng."
+    },
+    {
+      "start": 452.13,
+      "end": 459.2,
+      "en": "'Jing' means well, 'di' means bottom, 'zhi' means of, and 'wa' means frog.",
+      "zh": "“井”就是 well，“底”是 bottom，“之”是 of，“蛙”是 frog。",
+      "pinyin": "“Jǐng” jiù shì well, “dǐ” shì bottom, “zhī” shì of, “wā” shì frog.",
+      "vi": "“Giếng” là well, “đáy” là bottom, “của” là of, “ếch” là frog."
+    },
+    {
+      "start": 459.2,
+      "end": 461.8,
+      "en": "So it means 'the frog at the bottom of the well'.",
+      "zh": "所以是“井底下的青蛙”。",
+      "pinyin": "Suǒyǐ shì “jǐng dǐxia de qīngwā”.",
+      "vi": "Vậy nên là “con ếch dưới đáy giếng”."
+    },
+    {
+      "start": 461.8,
+      "end": 465.47,
+      "en": "Right! The story behind this idiom is also very simple.",
+      "zh": "对！这个成语的故事也很简单。",
+      "pinyin": "Duì! Zhège chéngyǔ de gùshi yě hěn jiǎndān.",
+      "vi": "Đúng! Câu chuyện của thành ngữ này cũng rất đơn giản."
+    },
+    {
+      "start": 465.47,
+      "end": 468.07,
+      "en": "It goes that there was a frog,",
+      "zh": "是说，有一只青蛙，",
+      "pinyin": "Shì shuō, yǒu yì zhī qīngwā,",
+      "vi": "Đó là kể rằng, có một con ếch,"
+    },
+    {
+      "start": 468.1,
+      "end": 473.57,
+      "en": "From birth, it lived in a very deep well.",
+      "zh": "它从出生开始，就生活在一口很深的水井里。",
+      "pinyin": "Tā cóng chūshēng kāishǐ, jiù shēnghuó zài yì kǒu hěn shēn de shuǐjǐng lǐ.",
+      "vi": "Từ khi sinh ra, nó đã sống trong một cái giếng nước rất sâu."
+    },
+    {
+      "start": 473.63,
+      "end": 476.2,
+      "en": "Mm, the well was its home.",
+      "zh": "嗯，它的家就是那口井。",
+      "pinyin": "Ń, tā de jiā jiù shì nà kǒu jǐng.",
+      "vi": "Ừm, nhà của nó chính là cái giếng đó."
+    },
+    {
+      "start": 476.23,
+      "end": 477,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 477,
+      "end": 479.77,
+      "en": "Every day it jumped around in the well,",
+      "zh": "它每天在井里跳来跳去，",
+      "pinyin": "Tā měi tiān zài jǐng lǐ tiào lái tiào qù,",
+      "vi": "Mỗi ngày nó nhảy qua nhảy lại trong giếng,"
+    },
+    {
+      "start": 479.77,
+      "end": 484.3,
+      "en": "looked at the water in the well, then looked up at the sky.",
+      "zh": "看看井里的水，然后抬头看看天。",
+      "pinyin": "kànkan jǐng lǐ de shuǐ, ránhòu tái tóu kànkan tiān.",
+      "vi": "nhìn nước trong giếng, rồi ngẩng đầu nhìn trời."
+    },
+    {
+      "start": 484.33,
+      "end": 487.93,
+      "en": "Because it was at the bottom of the well, the sky it saw",
+      "zh": "因为它在井底，所以它看到的天，",
+      "pinyin": "Yīnwèi tā zài jǐng dǐ, suǒyǐ tā kàndào de tiān,",
+      "vi": "Vì nó ở đáy giếng, nên bầu trời mà nó thấy,"
+    },
+    {
+      "start": 487.93,
+      "end": 492.43,
+      "en": "was only as big as the mouth of the well, a small round patch.",
+      "zh": "只有一个井口那么大，是圆圆的一小块。",
+      "pinyin": "zhǐ yǒu yí ge jǐngkǒu nàme dà, shì yuányuán de yì xiǎo kuài.",
+      "vi": "chỉ to bằng miệng giếng, là một mảnh tròn nhỏ xíu."
+    },
+    {
+      "start": 492.43,
+      "end": 494.46,
+      "en": "I can picture that scene.",
+      "zh": "我能想象那个画面。",
+      "pinyin": "Wǒ néng xiǎngxiàng nàge huàmiàn.",
+      "vi": "Tôi có thể tưởng tượng ra khung cảnh đó."
+    },
+    {
+      "start": 494.47,
+      "end": 496.4,
+      "en": "Its world was very small.",
+      "zh": "它的世界很小。",
+      "pinyin": "Tā de shìjiè hěn xiǎo.",
+      "vi": "Thế giới của nó rất nhỏ."
+    },
+    {
+      "start": 496.43,
+      "end": 497.2,
+      "en": "Right.",
+      "zh": "对。",
+      "pinyin": "Duì.",
+      "vi": "Đúng."
+    },
+    {
+      "start": 497.2,
+      "end": 499.43,
+      "en": "But it didn't realize that.",
+      "zh": "但是它自己不觉得。",
+      "pinyin": "Dànshì tā zìjǐ bù juéde.",
+      "vi": "Nhưng bản thân nó không cảm thấy vậy."
+    },
+    {
+      "start": 499.43,
+      "end": 502.7,
+      "en": "It felt very happy and very content.",
+      "zh": "它觉得非常快乐，非常满足。",
+      "pinyin": "Tā juéde fēicháng kuàilè, fēicháng mǎnzú.",
+      "vi": "Nó cảm thấy rất vui, rất mãn nguyện."
+    },
+    {
+      "start": 502.73,
+      "end": 508,
+      "en": "It thought the sky was just that big, and the world was just like this well.",
+      "zh": "它觉得天就是那么大，世界就是这口井的样子。",
+      "pinyin": "Tā juéde tiān jiù shì nàme dà, shìjiè jiù shì zhè kǒu jǐng de yàngzi.",
+      "vi": "Nó nghĩ bầu trời chỉ lớn như thế, thế giới chính là hình dáng của cái giếng này."
+    },
+    {
+      "start": 508,
+      "end": 513.9,
+      "en": "One day, a giant sea turtle from the East Sea passed by this well.",
+      "zh": "有一天，一只从东海来的大海龟路过这口井。",
+      "pinyin": "Yǒu yì tiān, yì zhī cóng Dōnghǎi lái de dà hǎiguī lùguò zhè kǒu jǐng.",
+      "vi": "Một ngày nọ, một con rùa biển lớn từ Biển Đông đi ngang qua cái giếng này."
+    },
+    {
+      "start": 513.93,
+      "end": 515.33,
+      "en": "A sea turtle?",
+      "zh": "一只海龟？",
+      "pinyin": "Yì zhī hǎiguī?",
+      "vi": "Một con rùa biển?"
+    },
+    {
+      "start": 515.33,
+      "end": 517.33,
+      "en": "That's quite a big guest.",
+      "zh": "那可是一个大客人啊。",
+      "pinyin": "Nà kě shì yí ge dà kèrén a.",
+      "vi": "Đó đúng là một vị khách lớn đấy."
+    },
+    {
+      "start": 517.33,
+      "end": 518.16,
+      "en": "Yeah.",
+      "zh": "是啊。",
+      "pinyin": "Shì a.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 518.17,
+      "end": 522.34,
+      "en": "When the frog saw the sea turtle, it said to it very proudly:",
+      "zh": "青蛙看到海龟，非常骄傲地对它说：",
+      "pinyin": "Qīngwā kàndào hǎiguī, fēicháng jiāo'ào de duì tā shuō:",
+      "vi": "Ếch nhìn thấy rùa biển, rất kiêu hãnh nói với nó:"
+    },
+    {
+      "start": 522.37,
+      "end": 524.1,
+      "en": "'Look how nice it is here where I live!'",
+      "zh": "“你看我这里多好！",
+      "pinyin": "“Nǐ kàn wǒ zhèlǐ duō hǎo!",
+      "vi": "“Bạn xem chỗ tôi ở tốt biết bao!"
+    },
+    {
+      "start": 524.1,
+      "end": 525.63,
+      "en": "I'm so happy!",
+      "zh": "我太快乐了！",
+      "pinyin": "Wǒ tài kuàilè le!",
+      "vi": "Tôi vui quá!"
+    },
+    {
+      "start": 525.67,
+      "end": 529.7,
+      "en": "I jump to the edge of the well to play, or go back into the water to rest.",
+      "zh": "我跳到井边玩，或者回到水里休息。",
+      "pinyin": "Wǒ tiào dào jǐng biān wán, huòzhě huí dào shuǐ lǐ xiūxi.",
+      "vi": "Tôi nhảy đến bên giếng chơi, hoặc quay về trong nước nghỉ ngơi."
+    },
+    {
+      "start": 529.73,
+      "end": 533.2,
+      "en": "I'm the only one here; I'm the master here.",
+      "zh": "这里只有我一个，我是这里的主人。",
+      "pinyin": "Zhèlǐ zhǐ yǒu wǒ yí ge, wǒ shì zhèlǐ de zhǔrén.",
+      "vi": "Ở đây chỉ có một mình tôi, tôi là chủ nhân ở đây."
+    },
+    {
+      "start": 533.2,
+      "end": 535.7,
+      "en": "Why don't you come down and take a look?'",
+      "zh": "你为什么不下来看看呢？”",
+      "pinyin": "Nǐ wèishénme bú xiàlái kànkan ne?”",
+      "vi": "Sao bạn không xuống dưới xem thử nhỉ?”"
+    },
+    {
+      "start": 535.73,
+      "end": 538.73,
+      "en": "This frog is quite hospitable.",
+      "zh": "这只青蛙还挺好客的。",
+      "pinyin": "Zhè zhī qīngwā hái tǐng hàokè de.",
+      "vi": "Con ếch này cũng khá hiếu khách đấy."
+    },
+    {
+      "start": 538.8,
+      "end": 543.2,
+      "en": "Yes. But that giant sea turtle was too big,",
+      "zh": "是的。但是，那只大海龟太大了，",
+      "pinyin": "Shì de. Dànshì, nà zhī dà hǎiguī tài dà le,",
+      "vi": "Đúng vậy. Nhưng con rùa biển lớn đó quá to,"
+    },
+    {
+      "start": 543.2,
+      "end": 548.2,
+      "en": "Before its feet could fully get into the well, its body got stuck.",
+      "zh": "它的脚还没完全伸进井里，身体就被卡住了。",
+      "pinyin": "Tā de jiǎo hái méi wánquán shēnjìn jǐng lǐ, shēntǐ jiù bèi kǎ zhù le.",
+      "vi": "Chân của nó chưa thò hẳn vào giếng thì thân đã bị kẹt rồi."
+    },
+    {
+      "start": 548.23,
+      "end": 554.03,
+      "en": "It could only back out, and then began telling the frog about the outside world.",
+      "zh": "它只能退回去，然后开始给青蛙讲外面的世界。",
+      "pinyin": "Tā zhǐ néng tuì huí qù, ránhòu kāishǐ gěi qīngwā jiǎng wàimiàn de shìjiè.",
+      "vi": "Nó đành lùi ra, rồi bắt đầu kể cho ếch nghe về thế giới bên ngoài."
+    },
+    {
+      "start": 554.1,
+      "end": 555.7,
+      "en": "What did it talk about?",
+      "zh": "它讲了什么？",
+      "pinyin": "Tā jiǎng le shénme?",
+      "vi": "Nó đã kể gì vậy?"
+    },
+    {
+      "start": 555.7,
+      "end": 559.13,
+      "en": "It said to the frog, “Have you ever seen the sea?",
+      "zh": "它对青蛙说：“你见过大海吗？",
+      "pinyin": "Tā duì qīngwā shuō: “Nǐ jiàn guò dàhǎi ma?",
+      "vi": "Nó nói với ếch: “Bạn đã từng thấy biển chưa?"
+    },
+    {
+      "start": 559.13,
+      "end": 561.63,
+      "en": "The sea is very, very big.",
+      "zh": "大海非常非常大。",
+      "pinyin": "Dàhǎi fēicháng fēicháng dà.",
+      "vi": "Biển rất rất rộng lớn."
+    },
+    {
+      "start": 561.63,
+      "end": 565.4,
+      "en": "A thousand li of distance is not enough to describe its width;",
+      "zh": "一千里那么远，不够形容它的宽；",
+      "pinyin": "Yì qiān lǐ nàme yuǎn, bù gòu xíngróng tā de kuān;",
+      "vi": "Xa đến một nghìn dặm cũng chưa đủ để diễn tả bề rộng của nó;"
+    },
+    {
+      "start": 565.43,
+      "end": 568.86,
+      "en": "A thousand meters of height is not enough to describe its depth.”",
+      "zh": "一千米那么高，不够形容它的深。”",
+      "pinyin": "Yì qiān mǐ nàme gāo, bù gòu xíngróng tā de shēn.”",
+      "vi": "Cao đến một nghìn mét cũng chưa đủ để diễn tả độ sâu của nó.”"
+    },
+    {
+      "start": 568.9,
+      "end": 573.03,
+      "en": "Wow, the sea turtle described its home really well.",
+      "zh": "哇，大海龟把自己的家描述得真好。",
+      "pinyin": "Wa, dà hǎiguī bǎ zìjǐ de jiā miáoshù de zhēn hǎo.",
+      "vi": "Chà, rùa biển mô tả nhà của mình hay thật."
+    },
+    {
+      "start": 573.03,
+      "end": 574.06,
+      "en": "Yeah.",
+      "zh": "是啊。",
+      "pinyin": "Shì a.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 574.07,
+      "end": 579.74,
+      "en": "The sea turtle continued, “Living in the sea is true happiness.”",
+      "zh": "大海龟接着说：“在大海里生活，才是真正的快乐。”",
+      "pinyin": "Dà hǎiguī jiēzhe shuō: “Zài dàhǎi lǐ shēnghuó, cái shì zhēnzhèng de kuàilè.”",
+      "vi": "Rùa biển tiếp tục nói: “Sống dưới biển lớn mới là niềm vui thật sự.”"
+    },
+    {
+      "start": 579.77,
+      "end": 584.07,
+      "en": "When the frog in the well heard this, it was very surprised.",
+      "zh": "井里的那只青蛙听了以后，非常吃惊。",
+      "pinyin": "Jǐng lǐ de nà zhī qīngwā tīng le yǐhòu, fēicháng chījīng.",
+      "vi": "Con ếch trong giếng nghe xong vô cùng kinh ngạc."
+    },
+    {
+      "start": 584.1,
+      "end": 586.33,
+      "en": "It couldn't say a single word.",
+      "zh": "它一句话也说不出来。",
+      "pinyin": "Tā yí jù huà yě shuō bù chūlái.",
+      "vi": "Nó không nói được một lời nào."
+    },
+    {
+      "start": 586.37,
+      "end": 589.93,
+      "en": "For the first time, it knew that the world was so big,",
+      "zh": "它第一次知道，原来世界那么大，",
+      "pinyin": "Tā dì yī cì zhīdào, yuánlái shìjiè nàme dà,",
+      "vi": "Lần đầu tiên nó biết rằng thì ra thế giới rộng lớn đến vậy,"
+    },
+    {
+      "start": 589.93,
+      "end": 593.4,
+      "en": "and the sky was not just the small patch it saw.",
+      "zh": "天空不是它看到的那一小块。",
+      "pinyin": "Tiānkōng bú shì tā kàndào de nà yì xiǎo kuài.",
+      "vi": "bầu trời không chỉ là khoảng nhỏ mà nó nhìn thấy."
+    },
+    {
+      "start": 593.43,
+      "end": 595.23,
+      "en": "This story is really good.",
+      "zh": "这个故事真好。",
+      "pinyin": "Zhège gùshi zhēn hǎo.",
+      "vi": "Câu chuyện này hay thật."
+    },
+    {
+      "start": 595.23,
+      "end": 598.3,
+      "en": "So, the idiom “frog at the bottom of the well,”",
+      "zh": "所以，“井底之蛙”这个成语，",
+      "pinyin": "Suǒyǐ, “jǐngdǐzhīwā” zhège chéngyǔ,",
+      "vi": "Vì vậy, thành ngữ “ếch ngồi đáy giếng” này,"
+    },
+    {
+      "start": 598.3,
+      "end": 601.63,
+      "en": "is used to describe a person with a very narrow outlook,",
+      "zh": "就是用来形容一个人的眼界很小，",
+      "pinyin": "jiùshì yònglái xíngróng yí ge rén de yǎnjiè hěn xiǎo,",
+      "vi": "được dùng để miêu tả một người có tầm nhìn rất hẹp,"
+    },
+    {
+      "start": 601.7,
+      "end": 606.63,
+      "en": "little knowledge, but who doesn't know it and thinks they understand everything.",
+      "zh": "见识很少，但是自己却不知道，还以为自己什么都懂。",
+      "pinyin": "jiànshi hěn shǎo, dànshì zìjǐ què bù zhīdào, hái yǐwéi zìjǐ shénme dōu dǒng.",
+      "vi": "hiểu biết ít ỏi, nhưng bản thân lại không biết, còn tưởng mình hiểu hết mọi thứ."
+    },
+    {
+      "start": 606.63,
+      "end": 607.8,
+      "en": "Exactly!",
+      "zh": "没错！",
+      "pinyin": "Méi cuò!",
+      "vi": "Đúng rồi!"
+    },
+    {
+      "start": 607.8,
+      "end": 611.87,
+      "en": "I think this idiom is especially useful in life too.",
+      "zh": "我觉得这个成语在生活中也特别有用。",
+      "pinyin": "Wǒ juéde zhège chéngyǔ zài shēnghuó zhōng yě tèbié yǒuyòng.",
+      "vi": "Tôi thấy thành ngữ này cũng rất hữu ích trong đời sống."
+    },
+    {
+      "start": 611.87,
+      "end": 616.97,
+      "en": "It reminds us to go out more and see more of the outside world.",
+      "zh": "它提醒我们，要多出去走走，多看看外面的世界。",
+      "pinyin": "Tā tíxǐng wǒmen, yào duō chūqù zǒuzou, duō kànkan wàimiàn de shìjiè.",
+      "vi": "Nó nhắc chúng ta phải ra ngoài đi nhiều hơn, nhìn thế giới bên ngoài nhiều hơn."
+    },
+    {
+      "start": 617,
+      "end": 620,
+      "en": "Do you have any personal experience?",
+      "zh": "你有什么亲身经历吗？",
+      "pinyin": "Nǐ yǒu shénme qīnshēn jīnglì ma?",
+      "vi": "Bạn có trải nghiệm cá nhân nào chưa?"
+    },
+    {
+      "start": 620.03,
+      "end": 621.6,
+      "en": "Of course!",
+      "zh": "当然有！",
+      "pinyin": "Dāngrán yǒu!",
+      "vi": "Tất nhiên có rồi!"
+    },
+    {
+      "start": 621.6,
+      "end": 626.73,
+      "en": "I think I might have been a “frog at the bottom of the well” before.",
+      "zh": "我想，我以前可能就是一只“井底之蛙”。",
+      "pinyin": "Wǒ xiǎng, wǒ yǐqián kěnéng jiùshì yì zhī “jǐngdǐzhīwā”.",
+      "vi": "Tôi nghĩ trước đây có lẽ tôi từng là một con “ếch ngồi đáy giếng”."
+    },
+    {
+      "start": 626.8,
+      "end": 632.97,
+      "en": "Before university, I always lived in my hometown, a small city.",
+      "zh": "我上大学以前，一直生活在我的家乡，一个小城市。",
+      "pinyin": "Wǒ shàng dàxué yǐqián, yìzhí shēnghuó zài wǒ de jiāxiāng, yí ge xiǎo chéngshì.",
+      "vi": "Trước khi vào đại học, tôi sống mãi ở quê nhà, một thành phố nhỏ."
+    },
+    {
+      "start": 633,
+      "end": 638.73,
+      "en": "I thought my hometown was especially great; it had all my friends and family,",
+      "zh": "我觉得我的家乡特别好，有我所有的朋友和家人，",
+      "pinyin": "Wǒ juéde wǒ de jiāxiāng tèbié hǎo, yǒu wǒ suǒyǒu de péngyou hé jiārén,",
+      "vi": "Tôi thấy quê mình đặc biệt tốt, có tất cả bạn bè và gia đình tôi,"
+    },
+    {
+      "start": 638.73,
+      "end": 640.66,
+      "en": "and life was very comfortable.",
+      "zh": "生活也很舒服。",
+      "pinyin": "Shēnghuó yě hěn shūfu.",
+      "vi": "cuộc sống cũng rất thoải mái."
+    },
+    {
+      "start": 640.67,
+      "end": 644.87,
+      "en": "I thought the best place in the world was there.",
+      "zh": "我觉得世界上最好的地方就是那里了。",
+      "pinyin": "Wǒ juéde shìjiè shàng zuì hǎo de dìfang jiùshì nàlǐ le.",
+      "vi": "Tôi thấy nơi tốt nhất trên thế giới chính là đó."
+    },
+    {
+      "start": 644.9,
+      "end": 647.9,
+      "en": "Many people's growth experiences are like this.",
+      "zh": "很多人的成长经历都是这样。",
+      "pinyin": "Hěn duō rén de chéngzhǎng jīnglì dōu shì zhèyàng.",
+      "vi": "Kinh nghiệm trưởng thành của nhiều người đều như vậy."
+    },
+    {
+      "start": 647.93,
+      "end": 652.36,
+      "en": "Yes. Later, I got into a university in Beijing.",
+      "zh": "是的。后来，我考上了北京的大学。",
+      "pinyin": "Shì de. Hòulái, wǒ kǎo shàng le Běijīng de dàxué.",
+      "vi": "Đúng vậy. Sau đó, tôi thi đỗ đại học ở Bắc Kinh."
+    },
+    {
+      "start": 652.4,
+      "end": 658.2,
+      "en": "The first time I left home and came to such a big city, I was really shocked.",
+      "zh": "第一次离开家，来到这么大的城市，我真的被吓到了。",
+      "pinyin": "Dì yī cì líkāi jiā, lái dào zhème dà de chéngshì, wǒ zhēnde bèi xià dào le.",
+      "vi": "Lần đầu tiên rời khỏi nhà, đến một thành phố lớn như vậy, tôi thật sự bị choáng."
+    },
+    {
+      "start": 658.23,
+      "end": 663.6,
+      "en": "I saw classmates from different parts of China and even different countries.",
+      "zh": "我看到来自中国不同地方，甚至不同国家的同学。",
+      "pinyin": "Wǒ kàndào láizì Zhōngguó bùtóng dìfang, shènzhì bùtóng guójiā de tóngxué.",
+      "vi": "Tôi nhìn thấy các bạn học đến từ nhiều nơi khác nhau ở Trung Quốc, thậm chí từ các quốc gia khác nhau."
+    },
+    {
+      "start": 663.6,
+      "end": 669.73,
+      "en": "They spoke dialects I couldn't understand, they liked dishes I had never seen,",
+      "zh": "他们会说我听不懂的方言，他们喜欢吃我没见过的菜，",
+      "pinyin": "Tāmen huì shuō wǒ tīng bù dǒng de fāngyán, tāmen xǐhuan chī wǒ méi jiàn guò de cài,",
+      "vi": "Họ nói những phương ngữ tôi không hiểu, họ thích ăn những món tôi chưa từng thấy,"
+    },
+    {
+      "start": 669.73,
+      "end": 673.66,
+      "en": "and the topics they talked about were things I had never thought of.",
+      "zh": "他们聊的话题是我从来没想过的。",
+      "pinyin": "Tāmen liáo de huàtí shì wǒ cónglái méi xiǎng guò de.",
+      "vi": "những chủ đề họ trò chuyện là những điều tôi chưa từng nghĩ tới."
+    },
+    {
+      "start": 673.7,
+      "end": 677.57,
+      "en": "To you, that must have been a big shock.",
+      "zh": "那对你来说，一定是一个很大的冲击。",
+      "pinyin": "Nà duì nǐ lái shuō, yídìng shì yí ge hěn dà de chōngjī.",
+      "vi": "Đối với bạn, chắc hẳn đó là một cú sốc rất lớn."
+    },
+    {
+      "start": 677.6,
+      "end": 680.13,
+      "en": "It was a huge shock!",
+      "zh": "是一个非常大的冲击！",
+      "pinyin": "Shì yí ge fēicháng dà de chōngjī!",
+      "vi": "Là một cú sốc vô cùng lớn!"
+    },
+    {
+      "start": 680.13,
+      "end": 684.9,
+      "en": "I suddenly realized that the world was so big and so different.",
+      "zh": "我突然发现，世界原来这么大，这么不一样。",
+      "pinyin": "Wǒ tūrán fāxiàn, shìjiè yuánlái zhème dà, zhème bù yíyàng.",
+      "vi": "Tôi bỗng phát hiện ra, thì ra thế giới lại rộng lớn và khác biệt đến vậy."
+    },
+    {
+      "start": 684.9,
+      "end": 689.9,
+      "en": "Just like that frog hearing the sea turtle talk about the sea for the first time.",
+      "zh": "就像那只青蛙，第一次听海龟讲大海的故事一样。",
+      "pinyin": "Jiù xiàng nà zhī qīngwā, dì yī cì tīng hǎiguī jiǎng dàhǎi de gùshi yíyàng.",
+      "vi": "Giống như con ếch đó, lần đầu tiên nghe rùa biển kể chuyện về đại dương."
+    },
+    {
+      "start": 689.9,
+      "end": 695.8,
+      "en": "From then on, I told myself that I must never be a “frog at the bottom of the well.”",
+      "zh": "从那时候开始，我就告诉自己，一定不能做“井底之蛙”。",
+      "pinyin": "Cóng nà shíhou kāishǐ, wǒ jiù gàosu zìjǐ, yídìng bù néng zuò “jǐngdǐzhīwā”.",
+      "vi": "Từ lúc đó, tôi tự nhủ với mình, nhất định không được làm “ếch ngồi đáy giếng”."
+    },
+    {
+      "start": 695.8,
+      "end": 701.1,
+      "en": "I need to learn more, travel more, and chat with more different people.",
+      "zh": "要多学习，多旅行，多和不同的人聊天。",
+      "pinyin": "Yào duō xuéxí, duō lǚxíng, duō hé bùtóng de rén liáotiān.",
+      "vi": "Phải học nhiều hơn, đi du lịch nhiều hơn, trò chuyện với nhiều người khác nhau hơn."
+    },
+    {
+      "start": 701.1,
+      "end": 704.73,
+      "en": "Because there are really too many things you don't know.",
+      "zh": "因为你不知道的东西，真的太多了。",
+      "pinyin": "Yīnwèi nǐ bù zhīdào de dōngxi, zhēnde tài duō le.",
+      "vi": "Vì những điều bạn không biết thật sự quá nhiều."
+    },
+    {
+      "start": 704.77,
+      "end": 707.23,
+      "en": "I completely understand how you feel.",
+      "zh": "我非常理解你的感受。",
+      "pinyin": "Wǒ fēicháng lǐjiě nǐ de gǎnshòu.",
+      "vi": "Tôi rất hiểu cảm giác của bạn."
+    },
+    {
+      "start": 707.23,
+      "end": 711.16,
+      "en": "This is actually also a process of learning a language.",
+      "zh": "这其实也是一个学习语言的过程。",
+      "pinyin": "Zhè qíshí yě shì yí ge xuéxí yǔyán de guòchéng.",
+      "vi": "Đây thật ra cũng là một quá trình học ngôn ngữ."
+    },
+    {
+      "start": 711.2,
+      "end": 716.87,
+      "en": "When we speak only our mother tongue, we are in a “well of language.”",
+      "zh": "当我们只说自己的母语时，我们就在一口“语言的井”里。",
+      "pinyin": "Dāng wǒmen zhǐ shuō zìjǐ de mǔyǔ shí, wǒmen jiù zài yì kǒu “yǔyán de jǐng” lǐ.",
+      "vi": "Khi chúng ta chỉ nói tiếng mẹ đẻ của mình, chúng ta đang ở trong một “cái giếng ngôn ngữ”."
+    },
+    {
+      "start": 716.87,
+      "end": 722.27,
+      "en": "But when we start learning a new language, such as Chinese,",
+      "zh": "但是当我们开始学习一门新的语言，比如中文，",
+      "pinyin": "Dànshì dāng wǒmen kāishǐ xuéxí yì mén xīn de yǔyán, bǐrú Zhōngwén,",
+      "vi": "Nhưng khi chúng ta bắt đầu học một ngôn ngữ mới, ví dụ tiếng Trung,"
+    },
+    {
+      "start": 722.3,
+      "end": 729.27,
+      "en": "it's as if we jump out of the well and see a completely different world,",
+      "zh": "我们就等于从井里跳了出来，看到了一个完全不同的世界，",
+      "pinyin": "Wǒmen jiù děngyú cóng jǐng lǐ tiào le chūlái, kàndào le yí ge wánquán bùtóng de shìjiè,",
+      "vi": "thì chẳng khác nào chúng ta nhảy ra khỏi giếng, nhìn thấy một thế giới hoàn toàn khác,"
+    },
+    {
+      "start": 729.3,
+      "end": 733.5,
+      "en": "and understand a completely different culture and way of thinking.",
+      "zh": "了解了一种完全不同的文化和思维方式。",
+      "pinyin": "Liǎojiě le yì zhǒng wánquán bùtóng de wénhuà hé sīwéi fāngshì.",
+      "vi": "hiểu được một nền văn hóa và cách tư duy hoàn toàn khác."
+    },
+    {
+      "start": 733.53,
+      "end": 734.83,
+      "en": "Yes, yes, yes!",
+      "zh": "对对对！",
+      "pinyin": "Duì duì duì!",
+      "vi": "Đúng đúng đúng!"
+    },
+    {
+      "start": 734.83,
+      "end": 737,
+      "en": "Your metaphor is great!",
+      "zh": "你这个比喻太棒了！",
+      "pinyin": "Nǐ zhège bǐyù tài bàng le!",
+      "vi": "Cách ví von của bạn hay quá!"
+    },
+    {
+      "start": 737,
+      "end": 742.37,
+      "en": "Learning a foreign language is the best way to help us jump out of our own well.",
+      "zh": "学习外语，就是帮助我们跳出自己那口井的最好方式。",
+      "pinyin": "Xuéxí wàiyǔ, jiùshì bāngzhù wǒmen tiàochū zìjǐ nà kǒu jǐng de zuì hǎo fāngshì.",
+      "vi": "Học ngoại ngữ chính là cách tốt nhất giúp chúng ta thoát ra khỏi cái giếng của chính mình."
+    },
+    {
+      "start": 742.37,
+      "end": 743.37,
+      "en": "That's right.",
+      "zh": "没错。",
+      "pinyin": "Méi cuò.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 743.37,
+      "end": 748.4,
+      "en": "Speaking of which, I also want to say to the friends who are listening to our podcast.",
+      "zh": "说到这里，我也想对正在收听我们播客的朋友们说。",
+      "pinyin": "Shuō dào zhèlǐ, wǒ yě xiǎng duì zhèngzài shōutīng wǒmen bōkè de péngyoumen shuō.",
+      "vi": "Nói đến đây, tôi cũng muốn nói với những người bạn đang nghe podcast của chúng ta."
+    },
+    {
+      "start": 748.43,
+      "end": 754.7,
+      "en": "I think idioms might be a bit difficult for foreign friends learning Chinese.",
+      "zh": "我觉得，成语对学中文的外国朋友来说，可能有点儿难。",
+      "pinyin": "Wǒ juéde, chéngyǔ duì xué Zhōngwén de wàiguó péngyou lái shuō, kěnéng yǒudiǎnr nán.",
+      "vi": "Tôi nghĩ, thành ngữ đối với bạn nước ngoài học tiếng Trung có lẽ hơi khó một chút."
+    },
+    {
+      "start": 754.73,
+      "end": 757.8,
+      "en": "Four characters, but the meaning is profound.",
+      "zh": "四个字，但是意思很深。",
+      "pinyin": "Sì gè zì, dànshì yìsi hěn shēn.",
+      "vi": "Bốn chữ, nhưng ý nghĩa rất sâu xa."
+    },
+    {
+      "start": 757.83,
+      "end": 760.63,
+      "en": "Yes, this is indeed a challenge.",
+      "zh": "是的，这确实是一个挑战。",
+      "pinyin": "Shì de, zhè quèshí shì yī gè tiǎozhàn.",
+      "vi": "Đúng vậy, đây thật sự là một thách thức."
+    },
+    {
+      "start": 760.63,
+      "end": 763.2,
+      "en": "But don't be afraid, everyone.",
+      "zh": "但是，大家不要害怕。",
+      "pinyin": "Dànshì, dàjiā bùyào hàipà.",
+      "vi": "Nhưng mọi người đừng sợ."
+    },
+    {
+      "start": 763.23,
+      "end": 769.9,
+      "en": "We can regard learning idioms as a process of 'jumping out of the well' to see the world.",
+      "zh": "我们可以把学习成语看作是“跳出井口”看世界的一个过程。",
+      "pinyin": "Wǒmen kěyǐ bǎ xuéxí chéngyǔ kànzuò shì “tiàochū jǐngkǒu” kàn shìjiè de yī gè guòchéng.",
+      "vi": "Chúng ta có thể coi việc học thành ngữ là một quá trình “nhảy ra khỏi miệng giếng” để nhìn thế giới."
+    },
+    {
+      "start": 769.9,
+      "end": 772.57,
+      "en": "Let's not learn too many at once.",
+      "zh": "我们不要一次学很多。",
+      "pinyin": "Wǒmen bùyào yīcì xué hěn duō.",
+      "vi": "Chúng ta đừng học nhiều một lúc."
+    },
+    {
+      "start": 772.57,
+      "end": 777.97,
+      "en": "Learn one at a time, just like today, first understand its story.",
+      "zh": "一次学一个，就像今天这样，先明白它的故事。",
+      "pinyin": "Yīcì xué yī gè, jiù xiàng jīntiān zhèyàng, xiān míngbai tā de gùshi.",
+      "vi": "Mỗi lần học một cái, giống như hôm nay, trước tiên hiểu câu chuyện của nó."
+    },
+    {
+      "start": 778,
+      "end": 782.87,
+      "en": "When you understand why the farmer in 'pulling up seedlings to help them grow' was wrong,",
+      "zh": "当你理解了“拔苗助长”里那个农民为什么错了，",
+      "pinyin": "Dāng nǐ lǐjiě le “bámiáozhùzhǎng” lǐ nàge nóngmín wèishénme cuò le,",
+      "vi": "Khi bạn hiểu vì sao người nông dân trong “bá miáo trợ trưởng” lại sai,"
+    },
+    {
+      "start": 782.9,
+      "end": 788.9,
+      "en": "And understand why the 'frog at the bottom of the well' was surprised, then you've truly learned this idiom.",
+      "zh": "理解了“井底之蛙”为什么吃惊，你就真正学会了这个成语。",
+      "pinyin": "Lǐjiě le “jǐngdǐzhīwā” wèishénme chījīng, nǐ jiù zhēnzhèng xuéhuì le zhège chéngyǔ.",
+      "vi": "Hiểu vì sao “ếch ngồi đáy giếng” lại kinh ngạc, thì bạn mới thật sự học được thành ngữ này."
+    },
+    {
+      "start": 788.9,
+      "end": 793.7,
+      "en": "Moreover, you've also understood a little more about Chinese culture and thought.",
+      "zh": "而且，你还多了解了一点中国的文化和思想。",
+      "pinyin": "Érqiě, nǐ hái duō liǎojiě le yīdiǎn Zhōngguó de wénhuà hé sīxiǎng.",
+      "vi": "Hơn nữa, bạn còn hiểu thêm một chút về văn hóa và tư tưởng Trung Quốc."
+    },
+    {
+      "start": 793.73,
+      "end": 796.66,
+      "en": "Hmm! This suggestion is very practical.",
+      "zh": "嗯！这个建议非常实用。",
+      "pinyin": "Èn! Zhège jiànyì fēicháng shíyòng.",
+      "vi": "Ừm! Gợi ý này rất thực tế."
+    },
+    {
+      "start": 796.67,
+      "end": 799.37,
+      "en": "One story at a time, take it slow.",
+      "zh": "一次一个故事，慢慢来。",
+      "pinyin": "Yīcì yī gè gùshi, mànmàn lái.",
+      "vi": "Mỗi lần một câu chuyện, từ từ thôi."
+    },
+    {
+      "start": 799.37,
+      "end": 802.53,
+      "en": "Doesn't this also exactly fit our first idiom",
+      "zh": "这不也正好符合我们第一个成语",
+      "pinyin": "Zhè bù yě zhènghǎo fúhé wǒmen dì yī gè chéngyǔ",
+      "vi": "Điều này chẳng phải cũng đúng với thành ngữ đầu tiên của chúng ta"
+    },
+    {
+      "start": 802.53,
+      "end": 805.7,
+      "en": "the lesson that 'pulling up seedlings to help them grow' teaches us?",
+      "zh": "“拔苗助长”教给我们的道理吗？",
+      "pinyin": "“bámiáozhùzhǎng” jiāo gěi wǒmen de dàolǐ ma?",
+      "vi": "“Bá miáo trợ trưởng” đã dạy cho chúng ta sao?"
+    },
+    {
+      "start": 805.7,
+      "end": 806.9,
+      "en": "You can't be impatient.",
+      "zh": "不能着急。",
+      "pinyin": "Bùnéng zháojí.",
+      "vi": "Không thể nóng vội."
+    },
+    {
+      "start": 806.9,
+      "end": 808.1,
+      "en": "(laughs) Yes.",
+      "zh": "(笑)，是的。",
+      "pinyin": "(Xiào), shì de.",
+      "vi": "(Cười) Đúng vậy."
+    },
+    {
+      "start": 808.1,
+      "end": 811.57,
+      "en": "You see, the wisdom in idioms is interconnected.",
+      "zh": "你看，成语的智慧是相通的。",
+      "pinyin": "Nǐ kàn, chéngyǔ de zhìhuì shì xiāngtōng de.",
+      "vi": "Bạn thấy đấy, trí tuệ trong các thành ngữ là thông nhau."
+    },
+    {
+      "start": 811.6,
+      "end": 817,
+      "en": "Li Ming, just now we talked about two idioms: one tells us to be patient,",
+      "zh": "李明，刚才我们聊了两个成语，一个告诉我们要有耐心，",
+      "pinyin": "Lǐ Míng, gāngcái wǒmen liáo le liǎng gè chéngyǔ, yī gè gàosu wǒmen yào yǒu nàixīn,",
+      "vi": "Lý Minh, vừa rồi chúng ta đã nói về hai thành ngữ, một cái bảo chúng ta phải có kiên nhẫn,"
+    },
+    {
+      "start": 817,
+      "end": 819.5,
+      "en": "and one tells us to broaden our horizons.",
+      "zh": "一个告诉我们要开阔眼界。",
+      "pinyin": "yī gè gàosu wǒmen yào kāikuò yǎnjiè.",
+      "vi": "một cái bảo chúng ta phải mở rộng tầm mắt."
+    },
+    {
+      "start": 819.53,
+      "end": 824.46,
+      "en": "I also want to share one that I think is especially useful in everyday communication.",
+      "zh": "我还想分享一个，我觉得在日常交流中特别有用的。",
+      "pinyin": "Wǒ hái xiǎng fēnxiǎng yī gè, wǒ juéde zài rìcháng jiāoliú zhōng tèbié yǒuyòng de.",
+      "vi": "Tôi còn muốn chia sẻ một cái, tôi thấy đặc biệt hữu ích trong giao tiếp hằng ngày."
+    },
+    {
+      "start": 824.5,
+      "end": 825.87,
+      "en": "Okay, go ahead.",
+      "zh": "好啊，你说。",
+      "pinyin": "Hǎo a, nǐ shuō.",
+      "vi": "Được thôi, bạn nói đi."
+    },
+    {
+      "start": 825.87,
+      "end": 829.83,
+      "en": "This idiom is called 'playing the zither to a cow'.",
+      "zh": "这个成语叫“对牛弹琴”。",
+      "pinyin": "Zhège chéngyǔ jiào “duìniútánqín”.",
+      "vi": "Thành ngữ này gọi là “đàn gảy tai trâu”."
+    },
+    {
+      "start": 829.83,
+      "end": 835.43,
+      "en": "This one is also very famous. Literally, it means 'play the zither to a cow'.",
+      "zh": "这个也很有名。字面意思是 play the zither to a cow。",
+      "pinyin": "Zhège yě hěn yǒumíng. Zìmiàn yìsi shì play the zither to a cow.",
+      "vi": "Cái này cũng rất nổi tiếng. Nghĩa mặt chữ là play the zither to a cow."
+    },
+    {
+      "start": 835.5,
+      "end": 838.9,
+      "en": "Right! Its story is also very funny.",
+      "zh": "对！它的故事也很好笑。",
+      "pinyin": "Duì! Tā de gùshi yě hěn hǎoxiào.",
+      "vi": "Đúng! Câu chuyện của nó cũng rất buồn cười."
+    },
+    {
+      "start": 838.9,
+      "end": 844.8,
+      "en": "It's about a musician in ancient times who played the zither very beautifully.",
+      "zh": "是说古代有一个音乐家，他的琴弹得非常好听。",
+      "pinyin": "Shì shuō gǔdài yǒu yī gè yīnyuèjiā, tā de qín tán de fēicháng hǎotīng.",
+      "vi": "Là nói về thời cổ đại có một nhạc sĩ, đàn của anh ấy gảy rất hay."
+    },
+    {
+      "start": 844.87,
+      "end": 851.2,
+      "en": "One day, he was taking a walk in the countryside and saw a cow quietly eating grass.",
+      "zh": "有一天，他在郊外散步，看到一头牛正在安静地吃草。",
+      "pinyin": "Yǒu yī tiān, tā zài jiāowài sànbù, kàndào yī tóu niú zhèngzài ānjìng de chī cǎo.",
+      "vi": "Một ngày nọ, anh ấy đi dạo ở ngoại ô, thấy một con bò đang yên lặng ăn cỏ."
+    },
+    {
+      "start": 851.27,
+      "end": 853.5,
+      "en": "He suddenly had an idea.",
+      "zh": "他突然有了一个想法。",
+      "pinyin": "Tā tūrán yǒu le yī gè xiǎngfǎ.",
+      "vi": "Anh ấy đột nhiên nảy ra một ý tưởng."
+    },
+    {
+      "start": 853.5,
+      "end": 855.7,
+      "en": "He wanted to perform for the cow?",
+      "zh": "他想给牛表演一下？",
+      "pinyin": "Tā xiǎng gěi niú biǎoyǎn yīxià?",
+      "vi": "Anh ấy muốn biểu diễn cho con bò xem một chút?"
+    },
+    {
+      "start": 855.73,
+      "end": 856.56,
+      "en": "Yes!",
+      "zh": "是的！",
+      "pinyin": "Shì de!",
+      "vi": "Đúng vậy!"
+    },
+    {
+      "start": 856.57,
+      "end": 862.44,
+      "en": "He thought, my music is so beautiful; the cow will surely like it too after hearing it.",
+      "zh": "他想，我的音乐这么美，牛听了也一定会喜欢的。",
+      "pinyin": "Tā xiǎng, wǒ de yīnyuè zhème měi, niú tīng le yě yīdìng huì xǐhuan de.",
+      "vi": "Anh ấy nghĩ, nhạc của mình hay như vậy, bò nghe xong nhất định cũng sẽ thích."
+    },
+    {
+      "start": 862.5,
+      "end": 869.63,
+      "en": "So he sat down and very earnestly played a beautiful piece for this cow.",
+      "zh": "于是，他坐下来，非常认真地为这头牛弹了一首很优美的曲子。",
+      "pinyin": "Yúshì, tā zuò xiàlái, fēicháng rènzhēn de wèi zhè tóu niú tán le yī shǒu hěn yōuměi de qǔzi.",
+      "vi": "Thế là, anh ấy ngồi xuống, rất nghiêm túc gảy cho con bò này một bản nhạc rất du dương."
+    },
+    {
+      "start": 869.63,
+      "end": 872.93,
+      "en": "What was the result? How did the cow react?",
+      "zh": "结果呢？牛有什么反应？",
+      "pinyin": "Jiéguǒ ne? Niú yǒu shénme fǎnyìng?",
+      "vi": "Kết quả thế nào? Con bò có phản ứng gì?"
+    },
+    {
+      "start": 872.97,
+      "end": 876.6,
+      "en": "As a result, the cow paid no attention to him at all.",
+      "zh": "结果，那头牛根本没有理他。",
+      "pinyin": "Jiéguǒ, nà tóu niú gēnběn méiyǒu lǐ tā.",
+      "vi": "Kết quả, con bò đó căn bản không để ý đến anh ấy."
+    },
+    {
+      "start": 876.63,
+      "end": 882.3,
+      "en": "It just kept its head down and continued eating its own grass, as if it hadn't heard any sound at all.",
+      "zh": "它还是低着头，继续吃自己的草。好像什么声音都没听见。",
+      "pinyin": "Tā háishì dī zhe tóu, jìxù chī zìjǐ de cǎo. Hǎoxiàng shénme shēngyīn dōu méi tīngjiàn.",
+      "vi": "Nó vẫn cúi đầu, tiếp tục ăn cỏ của mình. Cứ như thể chẳng nghe thấy âm thanh nào."
+    },
+    {
+      "start": 882.3,
+      "end": 888.33,
+      "en": "(laughs) The cow probably isn't interested in music; it's only interested in grass.",
+      "zh": "(笑)，牛可能对音乐不感兴趣，它只对草感兴趣。",
+      "pinyin": "(Xiào), niú kěnéng duì yīnyuè bù gǎn xìngqù, tā zhǐ duì cǎo gǎn xìngqù.",
+      "vi": "(Cười) Con bò có lẽ không hứng thú với âm nhạc, nó chỉ hứng thú với cỏ."
+    },
+    {
+      "start": 888.33,
+      "end": 890.23,
+      "en": "The musician was a little unhappy.",
+      "zh": "音乐家有点儿不高兴。",
+      "pinyin": "Yīnyuèjiā yǒudiǎnr bù gāoxìng.",
+      "vi": "Nhạc sĩ hơi không vui."
+    },
+    {
+      "start": 890.23,
+      "end": 893.96,
+      "en": "He changed to another piece and played even more energetically.",
+      "zh": "他又换了一首曲子，弹得更卖力了。",
+      "pinyin": "Tā yòu huàn le yī shǒu qǔzi, tán de gèng màilì le.",
+      "vi": "Anh ấy lại đổi một bản nhạc khác, gảy càng chăm chỉ hơn."
+    },
+    {
+      "start": 894.03,
+      "end": 897.33,
+      "en": "But the cow still had no reaction at all.",
+      "zh": "但是，牛还是一点反应都没有。",
+      "pinyin": "Dànshì, niú háishì yīdiǎn fǎnyìng dōu méiyǒu.",
+      "vi": "Nhưng con bò vẫn không có chút phản ứng nào."
+    },
+    {
+      "start": 897.33,
+      "end": 901.4,
+      "en": "In the end, the musician could only leave in disappointment.",
+      "zh": "最后，音乐家只能失望地离开了。",
+      "pinyin": "Zuìhòu, yīnyuèjiā zhǐnéng shīwàng de líkāi le.",
+      "vi": "Cuối cùng, nhạc sĩ chỉ còn biết thất vọng rời đi."
+    },
+    {
+      "start": 901.43,
+      "end": 909.06,
+      "en": "So 'playing the zither to a cow' means that when you talk to someone who completely doesn't understand or isn't interested,",
+      "zh": "所以，“对牛弹琴”就是说，你跟一个完全不懂或者不感兴趣的人，",
+      "pinyin": "Suǒyǐ, “duìniútánqín” jiùshì shuō, nǐ gēn yī gè wánquán bù dǒng huòzhě bù gǎn xìngqù de rén,",
+      "vi": "Vì vậy, “đàn gảy tai trâu” là nói rằng, bạn với một người hoàn toàn không hiểu hoặc không hứng thú,"
+    },
+    {
+      "start": 909.07,
+      "end": 913.8,
+      "en": "and talk about profound principles or things he can't understand.",
+      "zh": "讲一些很深的道理或者他听不明白的事情。",
+      "pinyin": "jiǎng yīxiē hěn shēn de dàolǐ huòzhě tā tīng bù míngbai de shìqing.",
+      "vi": "nói những đạo lý rất sâu xa hoặc những việc anh ta nghe không hiểu."
+    },
+    {
+      "start": 913.8,
+      "end": 918.07,
+      "en": "You waste your effort, and the other person has no reaction at all.",
+      "zh": "你白费了力气，对方也完全没反应。",
+      "pinyin": "Nǐ báifèi le lìqi, duìfāng yě wánquán méi fǎnyìng.",
+      "vi": "Bạn uổng công sức, đối phương cũng hoàn toàn không phản ứng."
+    },
+    {
+      "start": 918.1,
+      "end": 919.87,
+      "en": "Exactly right!",
+      "zh": "完全正确！",
+      "pinyin": "Wánquán zhèngquè!",
+      "vi": "Hoàn toàn chính xác!"
+    },
+    {
+      "start": 919.87,
+      "end": 923.87,
+      "en": "This idiom is really used far too often in everyday life.",
+      "zh": "这个成语在生活中真的太常用了。",
+      "pinyin": "Zhège chéngyǔ zài shēnghuó zhōng zhēn de tài chángyòng le.",
+      "vi": "Thành ngữ này trong cuộc sống thật sự quá thường dùng."
+    },
+    {
+      "start": 923.9,
+      "end": 928.93,
+      "en": "For example, I'm a football fan and I especially like watching football.",
+      "zh": "比如说，我是一个球迷，我特别喜欢看足球。",
+      "pinyin": "Bǐrú shuō, wǒ shì yī gè qiúmí, wǒ tèbié xǐhuan kàn zúqiú.",
+      "vi": "Ví dụ, tôi là một người hâm mộ bóng đá, tôi đặc biệt thích xem bóng đá."
+    },
+    {
+      "start": 928.93,
+      "end": 933.83,
+      "en": "Once, a friend of mine—she's completely not interested in sports—",
+      "zh": "有一次，我的一个朋友，她对体育完全不感兴趣，",
+      "pinyin": "Yǒu yī cì, wǒ de yī gè péngyou, tā duì tǐyù wánquán bù gǎn xìngqù,",
+      "vi": "Có một lần, một người bạn của tôi, cô ấy hoàn toàn không hứng thú với thể thao,"
+    },
+    {
+      "start": 933.83,
+      "end": 939.3,
+      "en": "I just kept telling her about my favorite team and how exciting the match was.",
+      "zh": "我就一直跟她讲我喜欢的球队，讲比赛有多精彩。",
+      "pinyin": "Wǒ jiù yīzhí gēn tā jiǎng wǒ xǐhuan de qiúduì, jiǎng bǐsài yǒu duō jīngcǎi.",
+      "vi": "Tôi cứ liên tục nói với cô ấy về đội bóng tôi thích, nói trận đấu hay thế nào."
+    },
+    {
+      "start": 939.33,
+      "end": 941.4,
+      "en": "How did she react?",
+      "zh": "她是什么反应？",
+      "pinyin": "Tā shì shénme fǎnyìng?",
+      "vi": "Cô ấy phản ứng thế nào?"
+    },
+    {
+      "start": 941.43,
+      "end": 947.3,
+      "en": "She just kept looking at me, smiling and nodding, but her eyes were blank.",
+      "zh": "她就一直看着我，微笑，点头，但是眼神是空的。",
+      "pinyin": "Tā jiù yīzhí kànzhe wǒ, wēixiào, diǎntóu, dànshì yǎnshén shì kōng de.",
+      "vi": "Cô ấy cứ nhìn tôi mãi, mỉm cười, gật đầu, nhưng ánh mắt thì trống rỗng."
+    },
+    {
+      "start": 947.3,
+      "end": 954.3,
+      "en": "I talked for ages, and in the end she asked me, “Is a football match just a lot of people chasing one ball?”",
+      "zh": "我说了半天，她最后问我：“足球比赛是不是很多人追一个球跑？”",
+      "pinyin": "Wǒ shuō le bàntiān, tā zuìhòu wèn wǒ: “Zúqiú bǐsài shì bùshì hěn duō rén zhuī yī gè qiú pǎo?”",
+      "vi": "Tôi nói hồi lâu, cuối cùng cô ấy hỏi tôi: “Trận bóng đá có phải là nhiều người đuổi theo một quả bóng chạy không?”"
+    },
+    {
+      "start": 954.3,
+      "end": 961.1,
+      "en": "At that moment I felt that the half hour I had just spent was completely “playing the lute to a cow.”",
+      "zh": "我当时就觉得，我刚才那半个小时，完全是在“对牛弹琴”。",
+      "pinyin": "Wǒ dāngshí jiù juéde, wǒ gāngcái nà bàn gè xiǎoshí, wánquán shì zài “duì niú tán qín”.",
+      "vi": "Lúc đó tôi liền cảm thấy, nửa tiếng vừa rồi của tôi hoàn toàn là “đàn gảy tai trâu”."
+    },
+    {
+      "start": 961.1,
+      "end": 963.27,
+      "en": "(Laughs) I can imagine.",
+      "zh": "(笑)，我能想象。",
+      "pinyin": "(Xiào), wǒ néng xiǎngxiàng.",
+      "vi": "(Cười), tôi có thể tưởng tượng được."
+    },
+    {
+      "start": 963.27,
+      "end": 967.44,
+      "en": "This shows that when communicating with people, we also need to consider who we’re talking to.",
+      "zh": "这说明，我们跟人交流，也要看对象。",
+      "pinyin": "Zhè shuōmíng, wǒmen gēn rén jiāoliú, yě yào kàn duìxiàng.",
+      "vi": "Điều này cho thấy, khi giao tiếp với người khác, chúng ta cũng phải xem đối tượng."
+    },
+    {
+      "start": 967.5,
+      "end": 971.2,
+      "en": "We should say things the other person is interested in and can understand.",
+      "zh": "要说对方感兴趣，能听懂的话。",
+      "pinyin": "Yào shuō duìfāng gǎn xìngqù, néng tīngdǒng de huà.",
+      "vi": "Phải nói những lời mà đối phương quan tâm và có thể hiểu được."
+    },
+    {
+      "start": 971.2,
+      "end": 974.5,
+      "en": "Otherwise, it’s just a waste of time and energy.",
+      "zh": "不然就是浪费时间和精力。",
+      "pinyin": "Bùrán jiùshì làngfèi shíjiān hé jīnglì.",
+      "vi": "Nếu không thì chỉ là lãng phí thời gian và sức lực."
+    },
+    {
+      "start": 974.5,
+      "end": 975.37,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 975.37,
+      "end": 980.47,
+      "en": "The wisdom of this idiom is that it teaches us how to communicate more effectively.",
+      "zh": "这个成语的智慧，就是教我们如何更有效地沟通。",
+      "pinyin": "Zhège chéngyǔ de zhìhuì, jiùshì jiāo wǒmen rúhé gèng yǒuxiào de gōutōng.",
+      "vi": "Trí tuệ của thành ngữ này là dạy chúng ta cách giao tiếp hiệu quả hơn."
+    },
+    {
+      "start": 980.5,
+      "end": 981.8,
+      "en": "Well said.",
+      "zh": "说得好。",
+      "pinyin": "Shuō de hǎo.",
+      "vi": "Nói hay lắm."
+    },
+    {
+      "start": 981.83,
+      "end": 987.1,
+      "en": "Since you’ve shared one, I’ll also share another one that I personally really like,",
+      "zh": "既然你分享了一个，那我也再分享一个我个人很喜欢的，",
+      "pinyin": "Jìrán nǐ fēnxiǎng le yī gè, nà wǒ yě zài fēnxiǎng yī gè wǒ gèrén hěn xǐhuan de,",
+      "vi": "Đã vậy bạn chia sẻ một cái rồi, thì tôi cũng chia sẻ thêm một cái mà cá nhân tôi rất thích,"
+    },
+    {
+      "start": 987.1,
+      "end": 989.6,
+      "en": "An idiom with a very positive meaning.",
+      "zh": "非常有积极意义的成语。",
+      "pinyin": "Fēicháng yǒu jījí yìyì de chéngyǔ.",
+      "vi": "Một thành ngữ rất có ý nghĩa tích cực."
+    },
+    {
+      "start": 989.6,
+      "end": 992.27,
+      "en": "It’s called “wáng yáng bǔ láo” (mend the fold after the sheep is lost).",
+      "zh": "它叫“亡羊补牢”。",
+      "pinyin": "Tā jiào “wáng yáng bǔ láo”.",
+      "vi": "Nó có tên là “mất cừu rồi sửa chuồng” – “vong dương bổ lao”."
+    },
+    {
+      "start": 992.3,
+      "end": 997.1,
+      "en": "Wáng—yáng—bǔ—láo.",
+      "zh": "亡—羊—补—牢。",
+      "pinyin": "Wáng—yáng—bǔ—láo.",
+      "vi": "Vong—dương—bổ—lao."
+    },
+    {
+      "start": 997.1,
+      "end": 1005.57,
+      "en": "“Wáng” means lost, “yáng” is sheep, and “bǔ” is to fix,",
+      "zh": "“亡”是丢失了，“羊”就是 sheep，“补”是 to fix，",
+      "pinyin": "“Wáng” shì diūshī le, “yáng” jiùshì sheep, “bǔ” shì to fix,",
+      "vi": "“亡” là mất đi, “羊” là sheep (cừu), “补” là to fix (sửa),"
+    },
+    {
+      "start": 1005.6,
+      "end": 1010.3,
+      "en": "“Láo” is the house where the sheep live: a pen.",
+      "zh": "“牢”是羊住的房子，pen。",
+      "pinyin": "“Láo” shì yáng zhù de fángzi, pen.",
+      "vi": "“牢” là chuồng mà cừu ở, pen (chuồng)."
+    },
+    {
+      "start": 1010.33,
+      "end": 1014.73,
+      "en": "So it means “the sheep is lost, and then you go fix the sheep pen”?",
+      "zh": "所以是“羊丢了，再去修羊圈”？",
+      "pinyin": "Suǒyǐ shì “yáng diū le, zài qù xiū yángjuàn”?",
+      "vi": "Vậy là “cừu mất rồi, mới đi sửa chuồng cừu”?"
+    },
+    {
+      "start": 1014.73,
+      "end": 1015.63,
+      "en": "Right.",
+      "zh": "对。",
+      "pinyin": "Duì.",
+      "vi": "Đúng."
+    },
+    {
+      "start": 1015.63,
+      "end": 1020.46,
+      "en": "The story goes that there was a shepherd whose sheep pen had a hole.",
+      "zh": "它的故事是说，有一个牧羊人，他的羊圈有一个洞。",
+      "pinyin": "Tā de gùshi shì shuō, yǒu yī gè mùyángrén, tā de yángjuàn yǒu yī gè dòng.",
+      "vi": "Câu chuyện của nó kể rằng, có một người chăn cừu, chuồng cừu của anh ta có một cái lỗ."
+    },
+    {
+      "start": 1020.5,
+      "end": 1023.37,
+      "en": "One morning, he found that one sheep was missing.",
+      "zh": "一天早上，他发现少了一只羊。",
+      "pinyin": "Yī tiān zǎoshang, tā fāxiàn shǎo le yī zhī yáng.",
+      "vi": "Một buổi sáng, anh ta phát hiện thiếu mất một con cừu."
+    },
+    {
+      "start": 1023.37,
+      "end": 1028.2,
+      "en": "A neighbor reminded him, “There’s a hole in your sheep pen; fix it quickly.”",
+      "zh": "邻居提醒他：“你的羊圈有洞，赶快修好吧。”",
+      "pinyin": "Línjū tíxǐng tā: “Nǐ de yángjuàn yǒu dòng, gǎnkuài xiūhǎo ba.”",
+      "vi": "Người hàng xóm nhắc anh ta: “Chuồng cừu của anh có lỗ, mau sửa lại đi.”"
+    },
+    {
+      "start": 1028.2,
+      "end": 1029.27,
+      "en": "Did he listen?",
+      "zh": "他听了吗？",
+      "pinyin": "Tā tīng le ma?",
+      "vi": "Anh ta có nghe không?"
+    },
+    {
+      "start": 1029.3,
+      "end": 1030.17,
+      "en": "He didn’t listen.",
+      "zh": "他没听。",
+      "pinyin": "Tā méi tīng.",
+      "vi": "Anh ta không nghe."
+    },
+    {
+      "start": 1030.17,
+      "end": 1034.3,
+      "en": "He said, “The sheep is already lost; what’s the use of fixing the pen now?”",
+      "zh": "他说：“羊都已经丢了，现在修羊圈还有什么用呢？”",
+      "pinyin": "Tā shuō: “Yáng dōu yǐjīng diū le, xiànzài xiū yángjuàn hái yǒu shénme yòng ne?”",
+      "vi": "Anh ta nói: “Cừu đã mất rồi, bây giờ sửa chuồng cừu còn có ích gì nữa?”"
+    },
+    {
+      "start": 1034.33,
+      "end": 1035.8,
+      "en": "So he didn’t fix it.",
+      "zh": "所以他就没修。",
+      "pinyin": "Suǒyǐ tā jiù méi xiū.",
+      "vi": "Thế là anh ta không sửa."
+    },
+    {
+      "start": 1035.8,
+      "end": 1038.43,
+      "en": "Ah, I think he should have fixed it.",
+      "zh": "啊，我觉得他应该修。",
+      "pinyin": "A, wǒ juéde tā yīnggāi xiū.",
+      "vi": "À, tôi nghĩ anh ta nên sửa."
+    },
+    {
+      "start": 1038.47,
+      "end": 1041.67,
+      "en": "The next morning, he found that another sheep was missing.",
+      "zh": "第二天早上，他发现又少了一只羊。",
+      "pinyin": "Dì èr tiān zǎoshang, tā fāxiàn yòu shǎo le yī zhī yáng.",
+      "vi": "Sáng hôm sau, anh ta phát hiện lại thiếu mất một con cừu."
+    },
+    {
+      "start": 1041.67,
+      "end": 1044.1,
+      "en": "The sheep had run out through that same hole again.",
+      "zh": "羊又是从那个洞跑出去的。",
+      "pinyin": "Yáng yòu shì cóng nàge dòng pǎo chūqù de.",
+      "vi": "Con cừu lại chạy ra từ cái lỗ đó."
+    },
+    {
+      "start": 1044.1,
+      "end": 1046.67,
+      "en": "At this point, he regretted it very much.",
+      "zh": "这个时候，他非常后悔。",
+      "pinyin": "Zhège shíhou, tā fēicháng hòuhuǐ.",
+      "vi": "Lúc này, anh ta vô cùng hối hận."
+    },
+    {
+      "start": 1046.7,
+      "end": 1052.2,
+      "en": "He thought, if I had listened to my neighbor yesterday, I wouldn’t have lost another sheep.",
+      "zh": "他想，如果我昨天听了邻居的话，就不会再丢一只羊了。",
+      "pinyin": "Tā xiǎng, rúguǒ wǒ zuótiān tīng le línjū de huà, jiù bù huì zài diū yī zhī yáng le.",
+      "vi": "Anh ta nghĩ, nếu hôm qua tôi nghe lời hàng xóm, thì đã không mất thêm một con cừu nữa."
+    },
+    {
+      "start": 1052.2,
+      "end": 1056.87,
+      "en": "So he immediately got to work and firmly repaired the hole in the sheep pen.",
+      "zh": "于是，他马上动手，把羊圈的洞结结实实地修好了。",
+      "pinyin": "Yúshì, tā mǎshàng dòngshǒu, bǎ yángjuàn de dòng jiējiēshíshí de xiūhǎo le.",
+      "vi": "Thế là, anh ta lập tức bắt tay vào việc, sửa lại cái lỗ của chuồng cừu một cách chắc chắn."
+    },
+    {
+      "start": 1056.9,
+      "end": 1060.17,
+      "en": "From then on, he never lost any more sheep.",
+      "zh": "从那以后，他的羊再也没有丢过。",
+      "pinyin": "Cóng nà yǐhòu, tā de yáng zài yě méiyǒu diū guo.",
+      "vi": "Từ đó về sau, cừu của anh ta không bao giờ bị mất nữa."
+    },
+    {
+      "start": 1060.2,
+      "end": 1067.33,
+      "en": "So “mend the fold after the sheep is lost” means that although a problem has already occurred and there has been a loss,",
+      "zh": "所以，“亡羊补牢”的意思是，虽然已经出了问题，有了损失，",
+      "pinyin": "Suǒyǐ, “wáng yáng bǔ láo” de yìsi shì, suīrán yǐjīng chū le wèntí, yǒu le sǔnshī,",
+      "vi": "Vì vậy, “mất cừu rồi sửa chuồng” có nghĩa là, tuy đã xảy ra vấn đề, đã có tổn thất,"
+    },
+    {
+      "start": 1067.33,
+      "end": 1073.43,
+      "en": "But if you now try to solve it and make amends, it’s still not too late.",
+      "zh": "但是如果你现在想办法去解决，去补救，还不算晚。",
+      "pinyin": "Dànshì rúguǒ nǐ xiànzài xiǎng bànfǎ qù jiějué, qù bǔjiù, hái bù suàn wǎn.",
+      "vi": "Nhưng nếu bây giờ bạn tìm cách giải quyết, tìm cách khắc phục, thì vẫn chưa muộn."
+    },
+    {
+      "start": 1073.43,
+      "end": 1074.73,
+      "en": "Exactly right.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn đúng."
+    },
+    {
+      "start": 1074.73,
+      "end": 1078.33,
+      "en": "Its core meaning is “better late than never.”",
+      "zh": "它的核心意思是 “better late than never”。",
+      "pinyin": "Tā de héxīn yìsi shì “better late than never”.",
+      "vi": "Ý nghĩa cốt lõi của nó là “muộn còn hơn không”."
+    },
+    {
+      "start": 1078.33,
+      "end": 1081.9,
+      "en": "This idiom gives us a very positive attitude.",
+      "zh": "这个成语给了我们一种非常积极的态度。",
+      "pinyin": "Zhège chéngyǔ gěi le wǒmen yī zhǒng fēicháng jījí de tàidù.",
+      "vi": "Thành ngữ này cho chúng ta một thái độ rất tích cực."
+    },
+    {
+      "start": 1081.9,
+      "end": 1086.8,
+      "en": "After making a mistake or failing, many people will feel, “Ah, it’s all over,",
+      "zh": "很多人在犯了错误或者失败以后，会觉得“啊，一切都完了，",
+      "pinyin": "Hěn duō rén zài fàn le cuòwù huòzhě shībài yǐhòu, huì juéde “A, yīqiè dōu wán le,",
+      "vi": "Nhiều người sau khi phạm sai lầm hoặc thất bại, sẽ cảm thấy “À, mọi thứ đều kết thúc rồi,"
+    },
+    {
+      "start": 1086.8,
+      "end": 1089.13,
+      "en": "there’s no hope anymore,” and then they give up.",
+      "zh": "没希望了”，然后就放弃了。",
+      "pinyin": "méi xīwàng le”, ránhòu jiù fàngqì le.",
+      "vi": "không còn hy vọng nữa”, rồi sau đó bỏ cuộc."
+    },
+    {
+      "start": 1089.17,
+      "end": 1091.53,
+      "en": "Yes, many people do that.",
+      "zh": "是的，很多人会这样。",
+      "pinyin": "Shì de, hěn duō rén huì zhèyàng.",
+      "vi": "Đúng vậy, nhiều người sẽ như thế."
+    },
+    {
+      "start": 1091.53,
+      "end": 1096.53,
+      "en": "But “mend the fold after the sheep is lost” tells us that’s not the case.",
+      "zh": "但是“亡羊补牢”告诉我们，不是的。",
+      "pinyin": "Dànshì “wáng yáng bǔ láo” gàosu wǒmen, bùshì de.",
+      "vi": "Nhưng “mất cừu rồi sửa chuồng” nói với chúng ta rằng, không phải vậy."
+    },
+    {
+      "start": 1096.53,
+      "end": 1098.06,
+      "en": "Even if you have already “lost the sheep” and suffered a loss,",
+      "zh": "即使你已经“亡羊”了，已经有了损失，",
+      "pinyin": "Jíshǐ nǐ yǐjīng “wáng yáng” le, yǐjīng yǒu le sǔnshī,",
+      "vi": "Cho dù bạn đã “mất cừu” rồi, đã có tổn thất rồi,"
+    },
+    {
+      "start": 1098.07,
+      "end": 1101.13,
+      "en": "but as long as you start to “mend the fold” now,",
+      "zh": "但是只要你现在开始“补牢”，",
+      "pinyin": "Dànshì zhǐyào nǐ xiànzài kāishǐ “bǔ láo”,",
+      "vi": "Nhưng chỉ cần bây giờ bạn bắt đầu “sửa chuồng”,"
+    },
+    {
+      "start": 1101.13,
+      "end": 1105.8,
+      "en": "repair your mistakes, and you can avoid even greater losses in the future.",
+      "zh": "修补你的错误，你就可以避免未来更大的损失。",
+      "pinyin": "xiūbǔ nǐ de cuòwù, nǐ jiù kěyǐ bìmiǎn wèilái gèng dà de sǔnshī.",
+      "vi": "sửa chữa sai lầm của bạn, thì bạn có thể tránh được tổn thất lớn hơn trong tương lai."
+    },
+    {
+      "start": 1105.8,
+      "end": 1107.77,
+      "en": "I like this idiom!",
+      "zh": "我喜欢这个成语！",
+      "pinyin": "Wǒ xǐhuan zhège chéngyǔ!",
+      "vi": "Tôi thích thành ngữ này!"
+    },
+    {
+      "start": 1107.77,
+      "end": 1109.5,
+      "en": "It is full of hope.",
+      "zh": "它充满了希望。",
+      "pinyin": "Tā chōngmǎn le xīwàng.",
+      "vi": "Nó tràn đầy hy vọng."
+    },
+    {
+      "start": 1109.5,
+      "end": 1116.4,
+      "en": "For example, some people are about to take an exam and only then realize that they didn’t learn many earlier things well.",
+      "zh": "比如，有的人快考试了，才发现自己前面很多东西没学好。",
+      "pinyin": "Bǐrú, yǒu de rén kuài kǎoshì le, cái fāxiàn zìjǐ qiánmiàn hěn duō dōngxi méi xuéhǎo.",
+      "vi": "Ví dụ, có người sắp thi rồi, mới phát hiện trước đó mình chưa học tốt nhiều thứ."
+    },
+    {
+      "start": 1116.43,
+      "end": 1120.43,
+      "en": "He might think, ah, it’s too late, I should give up.",
+      "zh": "他可能会想，啊，来不及了，放弃吧。",
+      "pinyin": "Tā kěnéng huì xiǎng, a, láibují le, fàngqì ba.",
+      "vi": "Anh ta có thể sẽ nghĩ, à, không kịp nữa rồi, bỏ cuộc thôi."
+    },
+    {
+      "start": 1120.47,
+      "end": 1127.23,
+      "en": "But actually, if he starts studying hard from now on, he might still pass the exam.",
+      "zh": "但其实，如果他从现在开始努力学习，也许还能通过考试。",
+      "pinyin": "Dàn qíshí, rúguǒ tā cóng xiànzài kāishǐ nǔlì xuéxí, yěxǔ hái néng tōngguò kǎoshì.",
+      "vi": "Nhưng thật ra, nếu từ bây giờ anh ta bắt đầu chăm chỉ học tập, có lẽ vẫn có thể thi đỗ."
+    },
+    {
+      "start": 1127.23,
+      "end": 1129.56,
+      "en": "This is “mending the fold after the sheep is lost.”",
+      "zh": "这就是“亡羊补牢”。",
+      "pinyin": "Zhè jiù shì “wáng yáng bǔ láo”.",
+      "vi": "Đây chính là “mất bò mới lo làm chuồng”."
+    },
+    {
+      "start": 1129.6,
+      "end": 1131.27,
+      "en": "A very good example.",
+      "zh": "非常好的例子。",
+      "pinyin": "Fēicháng hǎo de lìzi.",
+      "vi": "Một ví dụ rất hay."
+    },
+    {
+      "start": 1131.3,
+      "end": 1136,
+      "en": "So, the wisdom of this idiom lies in this: it tells us that making mistakes isn’t scary,",
+      "zh": "所以，这个成语的智慧在于，它告诉我们，犯错不可怕，",
+      "pinyin": "Suǒyǐ, zhège chéngyǔ de zhìhuì zài yú, tā gàosu wǒmen, fàncuò bù kěpà,",
+      "vi": "Vì vậy, trí tuệ của câu thành ngữ này nằm ở chỗ: nó nói với chúng ta rằng phạm sai lầm không đáng sợ,"
+    },
+    {
+      "start": 1136.03,
+      "end": 1142.13,
+      "en": "What matters is your attitude and actions after making a mistake. Whenever you start working hard,",
+      "zh": "重要的是犯错之后你的态度和行动。任何时候开始努力，",
+      "pinyin": "Zhòngyào de shì fàncuò zhīhòu nǐ de tàidù hé xíngdòng. Rènhé shíhòu kāishǐ nǔlì,",
+      "vi": "Quan trọng là thái độ và hành động của bạn sau khi mắc lỗi. Bất cứ lúc nào bắt đầu cố gắng,"
+    },
+    {
+      "start": 1142.13,
+      "end": 1143.6,
+      "en": "it’s not too late.",
+      "zh": "都为时不晚。",
+      "pinyin": "dōu wéi shí bù wǎn.",
+      "vi": "đều vẫn chưa muộn."
+    },
+    {
+      "start": 1143.6,
+      "end": 1149.4,
+      "en": "The four idioms we talked about today are all really interesting and useful.",
+      "zh": "今天我们聊的这四个成语，真的都太有意思，也太有用了。",
+      "pinyin": "Jīntiān wǒmen liáo de zhè sì ge chéngyǔ, zhēnde dōu tài yǒu yìsi, yě tài yǒu yòng le.",
+      "vi": "Bốn câu thành ngữ chúng ta nói hôm nay thật sự đều quá thú vị và cũng quá hữu ích."
+    },
+    {
+      "start": 1149.43,
+      "end": 1150.2,
+      "en": "Yeah.",
+      "zh": "是啊。",
+      "pinyin": "Shì a.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 1150.2,
+      "end": 1154.3,
+      "en": "Behind every idiom is a little philosophy of life.",
+      "zh": "每一个成语背后，都是一个生活的小哲学。",
+      "pinyin": "Měi yí ge chéngyǔ bèihòu, dōu shì yí ge shēnghuó de xiǎo zhéxué.",
+      "vi": "Đằng sau mỗi câu thành ngữ đều là một triết lý nhỏ của cuộc sống."
+    },
+    {
+      "start": 1154.3,
+      "end": 1160.33,
+      "en": "Alright, happy times always fly by, and today’s episode is almost over.",
+      "zh": "好了，快乐的时间总是过得很快，我们今天的节目也差不多要结束了。",
+      "pinyin": "Hǎo le, kuàilè de shíjiān zǒngshì guò de hěn kuài, wǒmen jīntiān de jiémù yě chàbuduō yào jiéshù le.",
+      "vi": "Được rồi, khoảng thời gian vui vẻ luôn trôi qua rất nhanh, chương trình hôm nay của chúng ta cũng sắp kết thúc rồi."
+    },
+    {
+      "start": 1160.33,
+      "end": 1164.16,
+      "en": "Yeah, we had so much fun talking about idioms today!",
+      "zh": "是啊，今天聊成语聊得真开心！",
+      "pinyin": "Shì a, jīntiān liáo chéngyǔ liáo de zhēn kāixīn!",
+      "vi": "Đúng vậy, hôm nay nói về thành ngữ thật là vui!"
+    },
+    {
+      "start": 1164.17,
+      "end": 1166.9,
+      "en": "I feel like I learned a lot too.",
+      "zh": "感觉自己也学到了很多。",
+      "pinyin": "Gǎnjué zìjǐ yě xué dào le hěn duō.",
+      "vi": "Cảm giác bản thân cũng học được rất nhiều."
+    },
+    {
+      "start": 1166.93,
+      "end": 1172.53,
+      "en": "Learning idioms is really like what Li Ming said—like getting to know new friends,",
+      "zh": "学习成语，真的就像李明说的，像在认识新朋友，",
+      "pinyin": "Xuéxí chéngyǔ, zhēnde jiù xiàng Lǐ Míng shuō de, xiàng zài rènshi xīn péngyou,",
+      "vi": "Học thành ngữ, thật giống như Lý Minh nói, giống như đang làm quen với những người bạn mới,"
+    },
+    {
+      "start": 1172.53,
+      "end": 1176.73,
+      "en": "like collecting little stories full of wisdom.",
+      "zh": "像在收集一个个充满智慧的小故事。",
+      "pinyin": "xiàng zài shōují yí ge ge chōngmǎn zhìhuì de xiǎo gùshi.",
+      "vi": "giống như đang sưu tầm từng câu chuyện nhỏ đầy trí tuệ."
+    },
+    {
+      "start": 1176.77,
+      "end": 1177.57,
+      "en": "Exactly.",
+      "zh": "没错。",
+      "pinyin": "Méi cuò.",
+      "vi": "Đúng thế."
+    },
+    {
+      "start": 1177.57,
+      "end": 1181.3,
+      "en": "So at the end of the show, let me briefly review for everyone",
+      "zh": "那在节目最后，我来帮大家简单地回顾一下",
+      "pinyin": "Nà zài jiémù zuìhòu, wǒ lái bāng dàjiā jiǎndān de huígù yíxià",
+      "vi": "Vậy thì ở cuối chương trình, để tôi giúp mọi người điểm lại một cách đơn giản"
+    },
+    {
+      "start": 1181.3,
+      "end": 1184.37,
+      "en": "these “idiom friends” we met today.",
+      "zh": "我们今天认识的这几位“成语朋友”吧。",
+      "pinyin": "wǒmen jīntiān rènshi de zhè jǐ wèi “chéngyǔ péngyou” ba.",
+      "vi": "những “người bạn thành ngữ” mà chúng ta đã làm quen hôm nay nhé."
+    },
+    {
+      "start": 1184.4,
+      "end": 1186.57,
+      "en": "Okay, this is very important!",
+      "zh": "好的，这个很重要！",
+      "pinyin": "Hǎo de, zhège hěn zhòngyào!",
+      "vi": "Được, cái này rất quan trọng!"
+    },
+    {
+      "start": 1186.57,
+      "end": 1191.07,
+      "en": "The first idiom we talked about today is “pulling up seedlings to help them grow.”",
+      "zh": "我们今天聊的第一个成语是“拔苗助长”。",
+      "pinyin": "Wǒmen jīntiān liáo de dì yī ge chéngyǔ shì “bá miáo zhù zhǎng”.",
+      "vi": "Câu thành ngữ đầu tiên chúng ta nói hôm nay là “nhổ mạ non để giúp nó mau lớn”."
+    },
+    {
+      "start": 1191.1,
+      "end": 1198.3,
+      "en": "Its story tells us to be patient when doing things, not too impatient, and to respect the laws of nature.",
+      "zh": "它的故事告诉我们，做事要有耐心，不能太着急，要尊重自然规律。",
+      "pinyin": "Tā de gùshi gàosu wǒmen, zuòshì yào yǒu nàixīn, bù néng tài zháojí, yào zūnzhòng zìrán guīlǜ.",
+      "vi": "Câu chuyện của nó nói với chúng ta rằng làm việc phải có kiên nhẫn, không thể quá nóng vội, phải tôn trọng quy luật tự nhiên."
+    },
+    {
+      "start": 1198.3,
+      "end": 1202.87,
+      "en": "Right, neither study nor work should “pull up seedlings to help them grow.”",
+      "zh": "对，学习和工作都不能“拔苗助长”。",
+      "pinyin": "Duì, xuéxí hé gōngzuò dōu bù néng “bá miáo zhù zhǎng”.",
+      "vi": "Đúng, học tập và làm việc đều không thể “nhổ mạ non để giúp nó mau lớn”."
+    },
+    {
+      "start": 1202.9,
+      "end": 1205.93,
+      "en": "The second idiom is “a frog at the bottom of a well.”",
+      "zh": "第二个成语是“井底之蛙”。",
+      "pinyin": "Dì èr ge chéngyǔ shì “jǐng dǐ zhī wā”.",
+      "vi": "Câu thành ngữ thứ hai là “ếch ngồi đáy giếng”."
+    },
+    {
+      "start": 1205.93,
+      "end": 1209.63,
+      "en": "It reminds us that the world is big and what we know is little,",
+      "zh": "它提醒我们，世界很大，我们知道的很少，",
+      "pinyin": "Tā tíxǐng wǒmen, shìjiè hěn dà, wǒmen zhīdào de hěn shǎo,",
+      "vi": "Nó nhắc chúng ta rằng thế giới rất lớn, chúng ta biết rất ít,"
+    },
+    {
+      "start": 1209.7,
+      "end": 1215.53,
+      "en": "so we should keep a humble and open heart, and learn and experience more.",
+      "zh": "所以要保持一颗谦虚和开放的心，多去学习和体验。",
+      "pinyin": "suǒyǐ yào bǎochí yì kē qiānxū hé kāifàng de xīn, duō qù xuéxí hé tǐyàn.",
+      "vi": "vì vậy phải giữ một trái tim khiêm tốn và cởi mở, học hỏi và trải nghiệm nhiều hơn."
+    },
+    {
+      "start": 1215.53,
+      "end": 1218.93,
+      "en": "Let’s not be that frog at the bottom of the well!",
+      "zh": "我们都不要做井底的那只青蛙！",
+      "pinyin": "Wǒmen dōu bú yào zuò jǐng dǐ de nà zhī qīngwā!",
+      "vi": "Chúng ta đều đừng làm con ếch ở đáy giếng nhé!"
+    },
+    {
+      "start": 1218.97,
+      "end": 1222.8,
+      "en": "The third is “playing the lute to a cow,” shared by Wang Yu.",
+      "zh": "第三个是王雨分享的“对牛弹琴”。",
+      "pinyin": "Dì sān ge shì Wáng Yǔ fēnxiǎng de “duì niú tán qín”.",
+      "vi": "Câu thứ ba là “đàn gảy tai trâu” do Vương Vũ chia sẻ."
+    },
+    {
+      "start": 1222.83,
+      "end": 1228.7,
+      "en": "It tells us that when communicating, we should pay attention to the audience and the method; otherwise, we’ll waste effort.",
+      "zh": "它告诉我们，沟通要注意对象和方式，不然就会白费力气。",
+      "pinyin": "Tā gàosu wǒmen, gōutōng yào zhùyì duìxiàng hé fāngshì, bùrán jiù huì báifèi lìqi.",
+      "vi": "Nó nói với chúng ta rằng giao tiếp phải chú ý đến đối tượng và cách thức, nếu không sẽ tốn công vô ích."
+    },
+    {
+      "start": 1228.7,
+      "end": 1233,
+      "en": "Yes, don’t play the lute to a cow that doesn’t like eating grass!",
+      "zh": "是的，不要对不爱吃草的牛弹琴！",
+      "pinyin": "Shì de, bú yào duì bú ài chī cǎo de niú tán qín!",
+      "vi": "Đúng vậy, đừng đàn cho con bò không thích ăn cỏ nghe nhé!"
+    },
+    {
+      "start": 1233.03,
+      "end": 1236.9,
+      "en": "(Laughs.) The last one is “mending the fold after the sheep is lost,” which I shared.",
+      "zh": "(笑)。最后一个是我分享的“亡羊补牢”。",
+      "pinyin": "(Xiào). Zuìhòu yí ge shì wǒ fēnxiǎng de “wáng yáng bǔ láo”.",
+      "vi": "(Cười). Câu cuối cùng là “mất bò mới lo làm chuồng” do tôi chia sẻ."
+    },
+    {
+      "start": 1236.93,
+      "end": 1240.63,
+      "en": "It gives us the courage to face mistakes and failures positively,",
+      "zh": "它给了我们积极面对错误和失败的勇气，",
+      "pinyin": "Tā gěi le wǒmen jījí miànduì cuòwù hé shībài de yǒngqì,",
+      "vi": "Nó cho chúng ta dũng khí đối mặt một cách tích cực với sai lầm và thất bại,"
+    },
+    {
+      "start": 1240.7,
+      "end": 1244.3,
+      "en": "telling us that as long as we remedy things in time, it’s not too late.",
+      "zh": "告诉我们，只要及时补救，就为时未晚。",
+      "pinyin": "gàosu wǒmen, zhǐyào jíshí bǔjiù, jiù wéi shí wèi wǎn.",
+      "vi": "nói với chúng ta rằng chỉ cần kịp thời sửa chữa thì vẫn chưa muộn."
+    },
+    {
+      "start": 1244.3,
+      "end": 1247.83,
+      "en": "Mm! This is an idiom full of hope.",
+      "zh": "嗯！这是一个充满希望的成语。",
+      "pinyin": "Ǹg! Zhè shì yí ge chōngmǎn xīwàng de chéngyǔ.",
+      "vi": "Ừm! Đây là một câu thành ngữ đầy hy vọng."
+    },
+    {
+      "start": 1247.83,
+      "end": 1251.36,
+      "en": "I hope these idioms shared today and their stories",
+      "zh": "希望今天分享的这些成语和它们的故事，",
+      "pinyin": "Xīwàng jīntiān fēnxiǎng de zhèxiē chéngyǔ hé tāmen de gùshi,",
+      "vi": "Hy vọng những câu thành ngữ được chia sẻ hôm nay và câu chuyện của chúng,"
+    },
+    {
+      "start": 1251.4,
+      "end": 1255.6,
+      "en": "can be helpful for everyone in learning Chinese and understanding Chinese culture.",
+      "zh": "能对大家学习中文，理解中国文化有所帮助。",
+      "pinyin": "néng duì dàjiā xuéxí Zhōngwén, lǐjiě Zhōngguó wénhuà yǒu suǒ bāngzhù.",
+      "vi": "có thể giúp mọi người học tiếng Trung và hiểu văn hóa Trung Quốc."
+    },
+    {
+      "start": 1255.63,
+      "end": 1257.03,
+      "en": "Definitely!",
+      "zh": "一定的！",
+      "pinyin": "Yídìng de!",
+      "vi": "Chắc chắn rồi!"
+    },
+    {
+      "start": 1257.03,
+      "end": 1260.2,
+      "en": "So, friends listening to our podcast, what about you?",
+      "zh": "那么，听我们播客的朋友们，你们呢？",
+      "pinyin": "Nàme, tīng wǒmen bōkè de péngyou men, nǐmen ne?",
+      "vi": "Vậy thì, những người bạn nghe podcast của chúng ta, còn các bạn thì sao?"
+    },
+    {
+      "start": 1260.2,
+      "end": 1264.57,
+      "en": "Of the four idioms we talked about today, which one do you like most?",
+      "zh": "今天我们聊的这四个成语，你们最喜欢哪一个？",
+      "pinyin": "Jīntiān wǒmen liáo de zhè sì ge chéngyǔ, nǐmen zuì xǐhuan nǎ yí ge?",
+      "vi": "Trong bốn câu thành ngữ chúng ta nói hôm nay, các bạn thích câu nào nhất?"
+    },
+    {
+      "start": 1264.6,
+      "end": 1271.6,
+      "en": "Or, in your country, are there sayings or little stories with similar meanings?",
+      "zh": "或者，在你们的国家，有没有和它们意思相似的说法或者小故事呢？",
+      "pinyin": "Huòzhě, zài nǐmen de guójiā, yǒu méi yǒu hé tāmen yìsi xiāngsì de shuōfa huòzhě xiǎo gùshi ne?",
+      "vi": "Hoặc, ở đất nước của các bạn, có cách nói hay câu chuyện nhỏ nào có ý nghĩa tương tự không?"
+    },
+    {
+      "start": 1271.63,
+      "end": 1276.6,
+      "en": "You’re very welcome to leave us comments in the comment section and share your thoughts.",
+      "zh": "非常欢迎大家在评论区给我们留言，分享你们的想法。",
+      "pinyin": "Fēicháng huānyíng dàjiā zài pínglùn qū gěi wǒmen liúyán, fēnxiǎng nǐmen de xiǎngfǎ.",
+      "vi": "Rất hoan nghênh mọi người để lại bình luận cho chúng tôi ở khu bình luận và chia sẻ suy nghĩ của các bạn."
+    },
+    {
+      "start": 1276.6,
+      "end": 1279.57,
+      "en": "Yes, we look forward to seeing everyone’s shares.",
+      "zh": "是的，我们很期待看到大家的分享。",
+      "pinyin": "Shì de, wǒmen hěn qīdài kàndào dàjiā de fēnxiǎng.",
+      "vi": "Đúng vậy, chúng tôi rất mong được thấy sự chia sẻ của mọi người."
+    },
+    {
+      "start": 1279.6,
+      "end": 1282.93,
+      "en": "Alright, that’s all for today’s episode of “Daily Chinese.”",
+      "zh": "好了，今天这一期的“每天中文”就到这里。",
+      "pinyin": "Hǎo le, jīntiān zhè yì qī de “Měitiān Zhōngwén” jiù dào zhèlǐ.",
+      "vi": "Được rồi, tập “Mỗi ngày tiếng Trung” hôm nay đến đây là hết."
+    },
+    {
+      "start": 1282.93,
+      "end": 1284.6,
+      "en": "Thank you all for listening.",
+      "zh": "感谢大家的收听。",
+      "pinyin": "Gǎnxiè dàjiā de shōutīng.",
+      "vi": "Cảm ơn mọi người đã lắng nghe."
+    },
+    {
+      "start": 1284.63,
+      "end": 1285.76,
+      "en": "I’m Wang Yu.",
+      "zh": "我是王雨。",
+      "pinyin": "Wǒ shì Wáng Yǔ.",
+      "vi": "Tôi là Vương Vũ."
+    },
+    {
+      "start": 1285.8,
+      "end": 1286.97,
+      "en": "I’m Li Ming.",
+      "zh": "我是李明。",
+      "pinyin": "Wǒ shì Lǐ Míng.",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 1286.97,
+      "end": 1288.9,
+      "en": "See you next time!",
+      "zh": "我们下次再见！",
+      "pinyin": "Wǒmen xià cì zàijiàn!",
+      "vi": "Hẹn gặp lại lần sau!"
+    },
+    {
+      "start": 1288.93,
+      "end": 1289.56,
+      "en": "Goodbye!",
+      "zh": "再见！",
+      "pinyin": "Zàijiàn!",
+      "vi": "Tạm biệt!"
+    },
+    {
+      "start": 1289.57,
+      "end": 1290.2,
+      "en": "Goodbye!",
+      "zh": "再见！",
+      "pinyin": "Zàijiàn!",
+      "vi": "Tạm biệt!"
+    }
+  ]
+}

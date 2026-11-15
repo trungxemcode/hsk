@@ -1,0 +1,2265 @@
+{
+  "id": "tDlWxZ1IqrQ",
+  "youtubeId": "tDlWxZ1IqrQ",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 2 - 3 | The 4 Great Cuisines Explained | Chinese Daily Podcast",
+  "durationSec": 772,
+  "cues": [
+    {
+      "start": 6.77,
+      "end": 9.93,
+      "en": "Hello everyone, welcome to 'Everyday Chinese'.",
+      "zh": "大家好，欢迎收听“每天中文”。",
+      "pinyin": "Dàjiā hǎo, huānyíng tīngshōu “Měitiān Zhōngwén”.",
+      "vi": "Chào mọi người, chào mừng đến với “Tiếng Trung mỗi ngày”."
+    },
+    {
+      "start": 9.93,
+      "end": 11.05,
+      "en": "I'm Li Ming.",
+      "zh": "我是李明。",
+      "pinyin": "Wǒ shì Lǐ Míng.",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 11.07,
+      "end": 13.26,
+      "en": "Hello everyone, I'm Wang Yu.",
+      "zh": "大家好，我是王雨。",
+      "pinyin": "Dàjiā hǎo, wǒ shì Wáng Yǔ.",
+      "vi": "Chào mọi người, tôi là Vương Vũ."
+    },
+    {
+      "start": 13.27,
+      "end": 15.16,
+      "en": "Li Ming, how are you feeling today?",
+      "zh": "李明，你今天心情怎么样？",
+      "pinyin": "Lǐ Míng, nǐ jīntiān xīnqíng zěnmeyàng?",
+      "vi": "Lý Minh, hôm nay tâm trạng của bạn thế nào?"
+    },
+    {
+      "start": 15.17,
+      "end": 16.73,
+      "en": "You sound very happy.",
+      "zh": "听起来很开心。",
+      "pinyin": "Tīng qǐlái hěn kāixīn.",
+      "vi": "Nghe có vẻ rất vui."
+    },
+    {
+      "start": 16.73,
+      "end": 17.89,
+      "en": "Yeah, Wang Yu.",
+      "zh": "是啊，王雨。",
+      "pinyin": "Shì a, Wáng Yǔ.",
+      "vi": "Đúng vậy, Vương Vũ."
+    },
+    {
+      "start": 17.9,
+      "end": 19.79,
+      "en": "I'm especially happy today,",
+      "zh": "我今天特别高兴，",
+      "pinyin": "Wǒ jīntiān tèbié gāoxìng,",
+      "vi": "Hôm nay tôi đặc biệt vui,"
+    },
+    {
+      "start": 19.8,
+      "end": 23.12,
+      "en": "because I saw a message from one of our listeners.",
+      "zh": "因为我看到了我们一位听众的留言。",
+      "pinyin": "Yīnwèi wǒ kàndào le wǒmen yī wèi tīngzhòng de liúyán.",
+      "vi": "vì tôi đã thấy bình luận của một thính giả của chúng ta."
+    },
+    {
+      "start": 23.13,
+      "end": 25.35,
+      "en": "Oh? Really? Let me see quickly.",
+      "zh": "哦？是吗？快给我看看。",
+      "pinyin": "Ó? Shì ma? Kuài gěi wǒ kànkan.",
+      "vi": "Ồ? Thật à? Mau cho tôi xem."
+    },
+    {
+      "start": 25.37,
+      "end": 28.26,
+      "en": "Look, this friend said: 'Hello,",
+      "zh": "你看，这位朋友说：“你好，",
+      "pinyin": "Nǐ kàn, zhè wèi péngyou shuō: “Nǐ hǎo,",
+      "vi": "Bạn xem này, người bạn này nói: “Chào bạn,"
+    },
+    {
+      "start": 28.27,
+      "end": 31.16,
+      "en": "I'm a Chinese teacher in the US,",
+      "zh": "我是一个在美国的中文老师，",
+      "pinyin": "Wǒ shì yīgè zài Měiguó de Zhōngwén lǎoshī,",
+      "vi": "tôi là giáo viên tiếng Trung ở Mỹ,"
+    },
+    {
+      "start": 31.17,
+      "end": 35.06,
+      "en": "your podcast is a really good listening resource.",
+      "zh": "你们的播客是一个特别好的听力资源。",
+      "pinyin": "Nǐmen de bōkè shì yīgè tèbié hǎo de tīnglì zīyuán.",
+      "vi": "podcast của các bạn là một tài nguyên nghe rất tốt."
+    },
+    {
+      "start": 35.07,
+      "end": 37.49,
+      "en": "My students have benefited a lot.",
+      "zh": "我的学生们都受益良多。",
+      "pinyin": "Wǒ de xuéshengmen dōu shòuyì liángduō.",
+      "vi": "Học sinh của tôi đều được lợi rất nhiều."
+    },
+    {
+      "start": 37.5,
+      "end": 39.36,
+      "en": "I hope you can make an episode",
+      "zh": "希望你们能做一期",
+      "pinyin": "Xīwàng nǐmen néng zuò yī qī",
+      "vi": "Hy vọng các bạn có thể làm một tập"
+    },
+    {
+      "start": 39.37,
+      "end": 42.89,
+      "en": "about China's four great cuisines.' Wow!",
+      "zh": "关于中国的四大菜系的播客。”哇！",
+      "pinyin": "Guānyú Zhōngguó de sì dà càixì de bōkè.” Wa!",
+      "vi": "về bốn món ăn lớn của Trung Quốc.” Wow!"
+    },
+    {
+      "start": 42.9,
+      "end": 44.29,
+      "en": "That's awesome!",
+      "zh": "这太棒了！",
+      "pinyin": "Zhè tài bàng le!",
+      "vi": "Tuyệt quá!"
+    },
+    {
+      "start": 44.3,
+      "end": 46.19,
+      "en": "Hello, Chinese teacher in the US!",
+      "zh": "你好，美国的中文老师！",
+      "pinyin": "Nǐ hǎo, Měiguó de Zhōngwén lǎoshī!",
+      "vi": "Chào bạn, giáo viên tiếng Trung ở Mỹ!"
+    },
+    {
+      "start": 46.2,
+      "end": 48.36,
+      "en": "And hello to your students!",
+      "zh": "还有你的学生们，你们好！",
+      "pinyin": "Háiyǒu nǐ de xuéshengmen, nǐmen hǎo!",
+      "vi": "Và chào các học sinh của bạn!"
+    },
+    {
+      "start": 48.37,
+      "end": 50.73,
+      "en": "Hearing that our podcast is helpful to you,",
+      "zh": "听到我们的播客对你们有帮助，",
+      "pinyin": "Tīngdào wǒmen de bōkè duì nǐmen yǒu bāngzhù,",
+      "vi": "Nghe được podcast của chúng tôi có ích cho các bạn,"
+    },
+    {
+      "start": 50.73,
+      "end": 53.19,
+      "en": "we are truly, truly happy.",
+      "zh": "我们真的非常非常开心。",
+      "pinyin": "Wǒmen zhēnde fēicháng fēicháng kāixīn.",
+      "vi": "chúng tôi thật sự rất rất vui."
+    },
+    {
+      "start": 53.2,
+      "end": 54.96,
+      "en": "Yeah, so today,",
+      "zh": "是啊，所以今天，",
+      "pinyin": "Shì a, suǒyǐ jīntiān,",
+      "vi": "Đúng vậy, nên hôm nay,"
+    },
+    {
+      "start": 54.97,
+      "end": 59.06,
+      "en": "we'll fulfill this teacher and her students' wish.",
+      "zh": "我们就来满足这位老师和她的学生们的愿望。",
+      "pinyin": "Wǒmen jiù lái mǎnzú zhè wèi lǎoshī hé tā de xuéshengmen de yuànwàng.",
+      "vi": "chúng ta sẽ thực hiện mong muốn của vị giáo viên này và học sinh của cô ấy."
+    },
+    {
+      "start": 59.07,
+      "end": 61.46,
+      "en": "Let's talk about Chinese food.",
+      "zh": "我们来聊一聊中国的菜。",
+      "pinyin": "Wǒmen lái liáo yī liáo Zhōngguó de cài.",
+      "vi": "Chúng ta hãy nói về món ăn Trung Quốc."
+    },
+    {
+      "start": 61.47,
+      "end": 65.09,
+      "en": "In particular, many people think Chinese food is very spicy.",
+      "zh": "特别是，很多人都觉得中国菜很辣。",
+      "pinyin": "Tèbié shì, hěnduō rén dōu juéde Zhōngguó cài hěn là.",
+      "vi": "Đặc biệt là, nhiều người đều nghĩ món ăn Trung Quốc rất cay."
+    },
+    {
+      "start": 65.1,
+      "end": 67.32,
+      "en": "So if someone can't eat spicy food,",
+      "zh": "那如果一个人不能吃辣，",
+      "pinyin": "Nà rúguǒ yīgè rén bù néng chī là,",
+      "vi": "Vậy nếu một người không ăn được cay,"
+    },
+    {
+      "start": 67.33,
+      "end": 71.29,
+      "en": "and comes to China to travel or live, what dishes should they order?",
+      "zh": "来中国旅游或者生活，应该点什么菜呢？",
+      "pinyin": "Lái Zhōngguó lǚyóu huòzhě shēnghuó, yīnggāi diǎn shénme cài ne?",
+      "vi": "đến Trung Quốc du lịch hoặc sinh sống, nên gọi món gì đây?"
+    },
+    {
+      "start": 71.3,
+      "end": 73.16,
+      "en": "Great question!",
+      "zh": "这个问题问得太好了！",
+      "pinyin": "Zhège wèntí wèn de tài hǎo le!",
+      "vi": "Câu hỏi này hay quá!"
+    },
+    {
+      "start": 73.17,
+      "end": 76.09,
+      "en": "Because I'm someone who can't really eat spicy food.",
+      "zh": "因为我就是一个不太能吃辣的人。",
+      "pinyin": "Yīnwèi wǒ jiù shì yīgè bù tài néng chī là de rén.",
+      "vi": "Vì tôi chính là người không ăn cay giỏi lắm."
+    },
+    {
+      "start": 76.1,
+      "end": 79.66,
+      "en": "Every time I go to eat Sichuan food with friends, I get especially nervous.",
+      "zh": "每次和朋友去吃川菜，我都特别紧张。",
+      "pinyin": "Měi cì hé péngyou qù chī chuāncài, wǒ dōu tèbié jǐnzhāng.",
+      "vi": "Mỗi lần cùng bạn bè đi ăn món Tứ Xuyên, tôi đều đặc biệt căng thẳng."
+    },
+    {
+      "start": 79.67,
+      "end": 83.46,
+      "en": "(laughs) Then today's episode is prepared for you.",
+      "zh": "(笑)，那今天这期节目就是为你准备的。",
+      "pinyin": "(Xiào), nà jīntiān zhè qī jiémù jiù shì wèi nǐ zhǔnbèi de.",
+      "vi": "(Cười), vậy tập hôm nay chính là chuẩn bị cho bạn."
+    },
+    {
+      "start": 83.47,
+      "end": 86.93,
+      "en": "It's also for everyone who can't eat spicy food but really likes Chinese deli-",
+      "zh": "也为所有不能吃辣，但又很喜欢中国美",
+      "pinyin": "Yě wèi suǒyǒu bù néng chī là, dàn yòu hěn xǐhuan Zhōngguó měi",
+      "vi": "Cũng dành cho tất cả những ai không ăn được cay nhưng lại rất thích ẩm thực Trung"
+    },
+    {
+      "start": 86.93,
+      "end": 88.65,
+      "en": "cious food, and it's prepared for you friends.",
+      "zh": "食的朋友们准备的。",
+      "pinyin": "shí de péngyoumen zhǔnbèi de.",
+      "vi": "Quốc ngon, là dành cho những người bạn như thế."
+    },
+    {
+      "start": 88.67,
+      "end": 91.69,
+      "en": "Let's start with China's 'Four Great Cuisines,'",
+      "zh": "我们就从中国的“四大菜系”说起，",
+      "pinyin": "Wǒmen jiù cóng Zhōngguó de “sì dà càixì” shuō qǐ,",
+      "vi": "Chúng ta sẽ bắt đầu từ “bốn món ăn lớn” của Trung Quốc,"
+    },
+    {
+      "start": 91.7,
+      "end": 95.26,
+      "en": "and tell you which are spicy and which are not,",
+      "zh": "告诉你哪些是辣的，哪些是不辣的，",
+      "pinyin": "Gàosu nǐ nǎxiē shì là de, nǎxiē shì bù là de,",
+      "vi": "nói cho bạn biết món nào cay, món nào không cay,"
+    },
+    {
+      "start": 95.27,
+      "end": 98.73,
+      "en": "so you'll feel confident when ordering food in China.",
+      "zh": "让你在中国点菜的时候，心里有底。",
+      "pinyin": "Ràng nǐ zài Zhōngguó diǎn cài de shíhou, xīnli yǒu dǐ.",
+      "vi": "để khi bạn gọi món ở Trung Quốc, trong lòng có thể yên tâm."
+    },
+    {
+      "start": 98.73,
+      "end": 101.19,
+      "en": "Great! I've already got my little notebook ready,",
+      "zh": "太好了！我已经准备好我的小本子，",
+      "pinyin": "Tài hǎo le! Wǒ yǐjīng zhǔnbèi hǎo wǒ de xiǎo běnzi,",
+      "vi": "Tuyệt quá! Tôi đã chuẩn bị xong cuốn sổ nhỏ của mình,"
+    },
+    {
+      "start": 101.2,
+      "end": 102.46,
+      "en": "to write things down.",
+      "zh": "要记下来了。",
+      "pinyin": "Yào jì xiàlái le.",
+      "vi": "để ghi lại rồi."
+    },
+    {
+      "start": 102.47,
+      "end": 105.06,
+      "en": "Listener friends, you can also listen relaxedly,",
+      "zh": "听众朋友们，你们也可以放松地听，",
+      "pinyin": "Tīngzhòng péngyoumen, nǐmen yě kěyǐ fàngsōng de tīng,",
+      "vi": "Các bạn thính giả, các bạn cũng có thể nghe một cách thoải mái,"
+    },
+    {
+      "start": 105.07,
+      "end": 106.86,
+      "en": "and think while you listen,",
+      "zh": "一边听一边想一想，",
+      "pinyin": "Yībiān tīng yībiān xiǎng yī xiǎng,",
+      "vi": "vừa nghe vừa nghĩ xem,"
+    },
+    {
+      "start": 106.87,
+      "end": 109.96,
+      "en": "about which Chinese dish you most want to eat. Okay,",
+      "zh": "你最想吃哪种中国菜。好，",
+      "pinyin": "Nǐ zuì xiǎng chī nǎ zhǒng Zhōngguó cài. Hǎo,",
+      "vi": "bạn muốn ăn món ăn Trung Quốc nào nhất. Được,"
+    },
+    {
+      "start": 109.97,
+      "end": 111.53,
+      "en": "When it comes to Chinese food,",
+      "zh": "说到中国的菜，",
+      "pinyin": "Shuōdào Zhōngguó de cài,",
+      "vi": "Nhắc đến món ăn Trung Quốc,"
+    },
+    {
+      "start": 111.53,
+      "end": 115.05,
+      "en": "the first thing many people think of may be Sichuan cuisine.",
+      "zh": "很多人第一个想到的可能就是川菜。",
+      "pinyin": "Hěnduō rén dì yī gè xiǎngdào de kěnéng jiù shì chuāncài.",
+      "vi": "nhiều người nghĩ đến đầu tiên có lẽ chính là món Tứ Xuyên."
+    },
+    {
+      "start": 115.07,
+      "end": 118.73,
+      "en": "Wang Yu, when you think of Sichuan cuisine, what's the first word that comes to mind?",
+      "zh": "王雨，你想到川菜，第一个想到的词是什么？",
+      "pinyin": "Wáng Yǔ, nǐ xiǎngdào chuāncài, dì yī gè xiǎngdào de cí shì shénme?",
+      "vi": "Vương Vũ, khi bạn nghĩ đến món Tứ Xuyên, từ đầu tiên bạn nghĩ đến là gì?"
+    },
+    {
+      "start": 118.73,
+      "end": 120.45,
+      "en": "Spicy! Very spicy!",
+      "zh": "辣！非常辣！",
+      "pinyin": "Là! Fēicháng là!",
+      "vi": "Cay! Rất cay!"
+    },
+    {
+      "start": 120.47,
+      "end": 124.46,
+      "en": "And numbing! That's the tingly-numb feeling in your mouth.",
+      "zh": "还有，麻！就是嘴巴里麻麻的感觉。",
+      "pinyin": "Háiyǒu, má! Jiù shì zuǐba lǐ mámá de gǎnjué.",
+      "vi": "Còn nữa, tê! Chính là cảm giác tê tê trong miệng."
+    },
+    {
+      "start": 124.47,
+      "end": 127.36,
+      "en": "I remember one time I went to Chengdu with friends,",
+      "zh": "我记得有一次，我和朋友去成都玩，",
+      "pinyin": "Wǒ jìde yǒu yī cì, wǒ hé péngyou qù Chéngdū wán,",
+      "vi": "Tôi nhớ có một lần, tôi cùng bạn bè đến Thành Đô chơi,"
+    },
+    {
+      "start": 127.37,
+      "end": 130.26,
+      "en": "and they took me to a very famous hot pot restaurant.",
+      "zh": "他们带我去吃一家很有名的火锅。",
+      "pinyin": "Tāmen dài wǒ qù chī yī jiā hěn yǒumíng de huǒguō.",
+      "vi": "họ dẫn tôi đi ăn một quán lẩu rất nổi tiếng."
+    },
+    {
+      "start": 130.27,
+      "end": 133.93,
+      "en": "Oh? Chengdu hot pot—that's very authentic.",
+      "zh": "哦？成都的火锅，那可是非常地道的。",
+      "pinyin": "Ó? Chéngdū de huǒguō, nà kěshì fēicháng dìdao de.",
+      "vi": "Ồ? Lẩu Thành Đô, đó thì rất chính gốc."
+    },
+    {
+      "start": 133.93,
+      "end": 138.09,
+      "en": "Yeah, I was very brave at the time; I said I wanted to try it.",
+      "zh": "是啊，我当时很有勇气，我说我要试试。",
+      "pinyin": "Shì a, wǒ dāngshí hěn yǒu yǒngqì, wǒ shuō wǒ yào shìshi.",
+      "vi": "Đúng vậy, lúc đó tôi rất can đảm, tôi nói tôi muốn thử."
+    },
+    {
+      "start": 138.1,
+      "end": 139.99,
+      "en": "I ordered the least spicy pot,",
+      "zh": "我点了一个最不辣的锅，",
+      "pinyin": "Wǒ diǎn le yīgè zuì bù là de guō,",
+      "vi": "Tôi gọi một nồi ít cay nhất,"
+    },
+    {
+      "start": 140,
+      "end": 142.49,
+      "en": "But after one bite, oh my god,",
+      "zh": "但是吃了一口，我的天啊，",
+      "pinyin": "Dànshì chī le yì kǒu, wǒ de tiān a,",
+      "vi": "Nhưng vừa ăn một miếng, trời ơi,"
+    },
+    {
+      "start": 142.5,
+      "end": 144.99,
+      "en": "My mouth felt like it wasn't mine anymore.",
+      "zh": "我的嘴巴好像不是我自己的了。",
+      "pinyin": "Wǒ de zuǐba hǎoxiàng bú shì wǒ zìjǐ de le.",
+      "vi": "Miệng tôi như không còn là của mình nữa."
+    },
+    {
+      "start": 145,
+      "end": 150.29,
+      "en": "It was numbing and spicy; I kept drinking water, and tears came out.",
+      "zh": "又麻又辣，我一直在喝水，眼泪都出来了。",
+      "pinyin": "Yòu má yòu là, wǒ yìzhí zài hē shuǐ, yǎnlèi dōu chūlái le.",
+      "vi": "Vừa tê vừa cay, tôi cứ uống nước mãi, nước mắt chảy ra luôn."
+    },
+    {
+      "start": 150.3,
+      "end": 152.92,
+      "en": "(Laughs) I can totally picture that.",
+      "zh": "(笑)，我完全可以想象那个画面。",
+      "pinyin": "(Xiào), wǒ wánquán kěyǐ xiǎngxiàng nàge huàmiàn.",
+      "vi": "(Cười) Tôi hoàn toàn có thể tưởng tượng ra cảnh đó."
+    },
+    {
+      "start": 152.93,
+      "end": 156.92,
+      "en": "This is actually the biggest characteristic of Sichuan cuisine—numbing and spicy.",
+      "zh": "这其实就是川菜最大的特点——麻辣。",
+      "pinyin": "Zhè qíshí jiùshì Chuāncài zuìdà de tèdiǎn——málà.",
+      "vi": "Đây thực ra chính là đặc trưng lớn nhất của ẩm thực Tứ Xuyên — vị tê cay."
+    },
+    {
+      "start": 156.93,
+      "end": 158.72,
+      "en": "It uses Sichuan peppercorns and chili peppers,",
+      "zh": "它用的花椒和辣椒，",
+      "pinyin": "Tā yòng de huājiāo hé làjiāo,",
+      "vi": "Nó dùng hạt tiêu Tứ Xuyên và ớt,"
+    },
+    {
+      "start": 158.73,
+      "end": 162.09,
+      "en": "which give you a special numbing-and-spicy sensation.",
+      "zh": "会给你一种又麻又辣的特别感觉。",
+      "pinyin": "huì gěi nǐ yì zhǒng yòu má yòu là de tèbié gǎnjué.",
+      "vi": "sẽ mang đến cho bạn một cảm giác đặc biệt vừa tê vừa cay."
+    },
+    {
+      "start": 162.1,
+      "end": 165.32,
+      "en": "Many people just love that feeling. Mm,",
+      "zh": "很多人就是喜欢这种感觉。嗯，",
+      "pinyin": "Hěn duō rén jiùshì xǐhuan zhè zhǒng gǎnjué. Èn,",
+      "vi": "Nhiều người chính là thích cảm giác này. Ừm,"
+    },
+    {
+      "start": 165.33,
+      "end": 167.45,
+      "en": "Some of my friends especially love it.",
+      "zh": "我的一些朋友就特别喜欢。",
+      "pinyin": "Wǒ de yìxiē péngyou jiù tèbié xǐhuan.",
+      "vi": "Một vài người bạn của tôi thì rất thích."
+    },
+    {
+      "start": 167.47,
+      "end": 169.86,
+      "en": "But this raises a question.",
+      "zh": "但是，这就带来一个问题。",
+      "pinyin": "Dànshì, zhè jiù dàilái yí ge wèntí.",
+      "vi": "Nhưng điều này lại đặt ra một vấn đề."
+    },
+    {
+      "start": 169.87,
+      "end": 173.16,
+      "en": "If people like me who can't eat spicy food go to Sichuan,",
+      "zh": "如果像我这样不能吃辣的人去了四川，",
+      "pinyin": "Rúguǒ xiàng wǒ zhèyàng bù néng chī là de rén qù le Sìchuān,",
+      "vi": "Nếu những người không ăn được cay như tôi đến Tứ Xuyên,"
+    },
+    {
+      "start": 173.17,
+      "end": 175.36,
+      "en": "does that mean they can't eat anything?",
+      "zh": "是不是就什么都不能吃了？",
+      "pinyin": "shì bú shì jiù shénme dōu bù néng chī le?",
+      "vi": "thì chẳng phải sẽ không ăn được gì sao?"
+    },
+    {
+      "start": 175.37,
+      "end": 177.93,
+      "en": "Would I only be able to eat plain white rice every day?",
+      "zh": "我只能每天吃白米饭吗？",
+      "pinyin": "Wǒ zhǐ néng měi tiān chī bái mǐfàn ma?",
+      "vi": "Tôi chỉ có thể ngày nào cũng ăn cơm trắng thôi sao?"
+    },
+    {
+      "start": 177.93,
+      "end": 179.69,
+      "en": "That's really a good question,",
+      "zh": "这真是一个好问题，",
+      "pinyin": "Zhè zhēn shì yí ge hǎo wèntí,",
+      "vi": "Đây đúng là một câu hỏi hay,"
+    },
+    {
+      "start": 179.7,
+      "end": 182.06,
+      "en": "and also a worry for many foreign friends.",
+      "zh": "也是很多外国朋友的担心。",
+      "pinyin": "yě shì hěn duō wàiguó péngyou de dānxīn.",
+      "vi": "và cũng là nỗi lo của nhiều bạn nước ngoài."
+    },
+    {
+      "start": 182.07,
+      "end": 183.59,
+      "en": "Actually, that's not true.",
+      "zh": "其实不是的。",
+      "pinyin": "Qíshí bú shì de.",
+      "vi": "Thực ra không phải vậy."
+    },
+    {
+      "start": 183.6,
+      "end": 185.76,
+      "en": "Not all Sichuan dishes are spicy.",
+      "zh": "川菜不全都是辣的。",
+      "pinyin": "Chuāncài bù quán dōu shì là de.",
+      "vi": "Món Tứ Xuyên không phải món nào cũng cay."
+    },
+    {
+      "start": 185.77,
+      "end": 189.36,
+      "en": "In Sichuan cuisine there's a saying: 'one dish, one style,",
+      "zh": "川菜里面有一个说法，叫“一菜一格，",
+      "pinyin": "Chuāncài lǐmiàn yǒu yí ge shuōfǎ, jiào “yí cài yì gé,",
+      "vi": "Trong ẩm thực Tứ Xuyên có một cách nói là “mỗi món một kiểu,"
+    },
+    {
+      "start": 189.37,
+      "end": 190.96,
+      "en": "a hundred dishes, a hundred flavors.'",
+      "zh": "百菜百味”。",
+      "pinyin": "bǎi cài bǎi wèi”.",
+      "vi": "trăm món trăm vị”."
+    },
+    {
+      "start": 190.97,
+      "end": 194.19,
+      "en": "It means every dish has its own flavor,",
+      "zh": "意思就是，每道菜都有自己的味道，",
+      "pinyin": "Yìsi jiùshì, měi dào cài dōu yǒu zìjǐ de wèidào,",
+      "vi": "Nghĩa là mỗi món đều có hương vị riêng,"
+    },
+    {
+      "start": 194.2,
+      "end": 196.72,
+      "en": "a hundred dishes have a hundred flavors.",
+      "zh": "一百道菜有一百种味道。",
+      "pinyin": "yìbǎi dào cài yǒu yìbǎi zhǒng wèidào.",
+      "vi": "Một trăm món có một trăm loại hương vị."
+    },
+    {
+      "start": 196.73,
+      "end": 197.79,
+      "en": "Oh? Really?",
+      "zh": "哦？是吗？",
+      "pinyin": "Ó? Shì ma?",
+      "vi": "Ồ? Vậy à?"
+    },
+    {
+      "start": 197.8,
+      "end": 200.46,
+      "en": "Quick, tell me—what Sichuan dishes aren't spicy?",
+      "zh": "快说说，有哪些不辣的川菜？",
+      "pinyin": "Kuài shuōshuo, yǒu nǎxiē bú là de Chuāncài?",
+      "vi": "Mau nói xem, có những món Tứ Xuyên nào không cay?"
+    },
+    {
+      "start": 200.47,
+      "end": 201.46,
+      "en": "There are many.",
+      "zh": "有很多。",
+      "pinyin": "Yǒu hěn duō.",
+      "vi": "Có nhiều lắm."
+    },
+    {
+      "start": 201.47,
+      "end": 204.99,
+      "en": "For example, there's a sweet dish called 'sweet steamed pork,'",
+      "zh": "比如，有一种甜味的菜，叫“甜烧白”，",
+      "pinyin": "Bǐrú, yǒu yì zhǒng tiánwèi de cài, jiào “Tián shāo bái”,",
+      "vi": "Ví dụ, có một món vị ngọt tên là “thịt ba chỉ hấp ngọt”,"
+    },
+    {
+      "start": 205,
+      "end": 208.72,
+      "en": "It's made with pork belly and glutinous rice, and it's delicious.",
+      "zh": "是用五花肉和糯米做的，非常好吃。",
+      "pinyin": "shì yòng wǔhuāròu hé nuòmǐ zuò de, fēicháng hǎochī.",
+      "vi": "được làm từ thịt ba chỉ và gạo nếp, rất ngon."
+    },
+    {
+      "start": 208.73,
+      "end": 212.39,
+      "en": "There's also 'sweet-and-sour pork tenderloin,' which all kids love,",
+      "zh": "还有孩子们都特别喜欢的“糖醋里脊”，",
+      "pinyin": "hái yǒu háizimen dōu tèbié xǐhuan de “tángcù lǐjǐ”,",
+      "vi": "Còn có món “thịt thăn xào chua ngọt” mà bọn trẻ đều rất thích,"
+    },
+    {
+      "start": 212.4,
+      "end": 213.99,
+      "en": "It's sour and sweet.",
+      "zh": "酸酸甜甜的。",
+      "pinyin": "suān suān tián tián de.",
+      "vi": "Chua chua ngọt ngọt."
+    },
+    {
+      "start": 214,
+      "end": 217.12,
+      "en": "There's also a famous dish called 'boiling-water cabbage,'",
+      "zh": "还有一道名菜叫“开水白菜”，",
+      "pinyin": "hái yǒu yí dào míngcài jiào “kāishuǐ báicài”,",
+      "vi": "Còn có một món nổi tiếng tên là “bắp cải nước sôi”,"
+    },
+    {
+      "start": 217.13,
+      "end": 218.55,
+      "en": "The name sounds very simple,",
+      "zh": "听名字很简单，",
+      "pinyin": "tīng míngzi hěn jiǎndān,",
+      "vi": "Nghe tên thì rất đơn giản,"
+    },
+    {
+      "start": 218.57,
+      "end": 221.53,
+      "en": "but it's actually a very upscale soup dish,",
+      "zh": "但其实是一道非常高级的汤菜，",
+      "pinyin": "dàn qíshí shì yí dào fēicháng gāojí de tāngcài,",
+      "vi": "nhưng thực ra là một món canh rất cao cấp,"
+    },
+    {
+      "start": 221.53,
+      "end": 224.52,
+      "en": "It isn't spicy at all, and the flavor is exceptionally delicious.",
+      "zh": "一点也不辣，味道特别鲜美。",
+      "pinyin": "yìdiǎn yě bú là, wèidào tèbié xiānměi.",
+      "vi": "không cay chút nào, vị vô cùng tươi ngon."
+    },
+    {
+      "start": 224.53,
+      "end": 226.25,
+      "en": "Wow, sounds good!",
+      "zh": "哇，听起来不错！",
+      "pinyin": "Wā, tīng qǐlái búcuò!",
+      "vi": "Oa, nghe hay đấy!"
+    },
+    {
+      "start": 226.27,
+      "end": 230.36,
+      "en": "Sweet steamed pork, sweet-and-sour pork tenderloin, boiling-water cabbage.",
+      "zh": "甜烧白，糖醋里脊，开水白菜。",
+      "pinyin": "Tián shāo bái, tángcù lǐjǐ, kāishuǐ báicài.",
+      "vi": "Thịt ba chỉ hấp ngọt, thịt thăn xào chua ngọt, bắp cải nước sôi."
+    },
+    {
+      "start": 230.37,
+      "end": 231.39,
+      "en": "I've noted them down.",
+      "zh": "我记下了。",
+      "pinyin": "Wǒ jì xià le.",
+      "vi": "Tôi ghi nhớ rồi."
+    },
+    {
+      "start": 231.4,
+      "end": 234.32,
+      "en": "Next time I go to Sichuan, I can order these dishes.",
+      "zh": "下次去四川，我就可以点这些菜了。",
+      "pinyin": "Xià cì qù Sìchuān, wǒ jiù kěyǐ diǎn zhèxiē cài le.",
+      "vi": "Lần sau đến Tứ Xuyên, tôi có thể gọi những món này rồi."
+    },
+    {
+      "start": 234.33,
+      "end": 236.35,
+      "en": "Right. So everyone should remember,",
+      "zh": "对。所以大家要记住，",
+      "pinyin": "Duì. Suǒyǐ dàjiā yào jìzhù,",
+      "vi": "Đúng. Vì vậy mọi người hãy nhớ,"
+    },
+    {
+      "start": 236.37,
+      "end": 239.16,
+      "en": "even in Sichuan, which is famous for being 'spicy,'",
+      "zh": "就算是在以“辣”闻名的四川，",
+      "pinyin": "jiùsuàn shì zài yǐ “là” wénmíng de Sìchuān,",
+      "vi": "cho dù ở Tứ Xuyên nổi tiếng với “cay”,"
+    },
+    {
+      "start": 239.17,
+      "end": 242.86,
+      "en": "you can still find many non-spicy, delicious options.",
+      "zh": "你也能找到很多不辣的、美味的选择。",
+      "pinyin": "nǐ yě néng zhǎodào hěn duō bú là de, měiwèi de xuǎnzé.",
+      "vi": "bạn vẫn có thể tìm được nhiều lựa chọn không cay mà ngon miệng."
+    },
+    {
+      "start": 242.87,
+      "end": 245.13,
+      "en": "You just need to ask the waiter: 'Hello,",
+      "zh": "你只需要问服务员：“你好，",
+      "pinyin": "Nǐ zhǐ xūyào wèn fúwùyuán: “Nǐ hǎo,",
+      "vi": "Bạn chỉ cần hỏi nhân viên phục vụ: “Xin chào,"
+    },
+    {
+      "start": 245.13,
+      "end": 247.89,
+      "en": "do you have any non-spicy dishes?' They'll be very happy to",
+      "zh": "有没有不辣的菜？”他们会很乐意",
+      "pinyin": "yǒu méi yǒu bú là de cài?” Tāmen huì hěn lèyì",
+      "vi": "có món nào không cay không?” Họ sẽ rất sẵn lòng"
+    },
+    {
+      "start": 247.9,
+      "end": 249.76,
+      "en": "recommend some to you. Okay,",
+      "zh": "向你推荐的。好了，",
+      "pinyin": "xiàng nǐ tuījiàn de. Hǎo le,",
+      "vi": "giới thiệu cho bạn. Được rồi,"
+    },
+    {
+      "start": 249.77,
+      "end": 251.76,
+      "en": "Now that we've talked about the spiciest Sichuan cuisine,",
+      "zh": "说完了最辣的川菜，",
+      "pinyin": "Shuō wán le zuì là de Chuāncài,",
+      "vi": "Đã nói xong về món Tứ Xuyên cay nhất,"
+    },
+    {
+      "start": 251.77,
+      "end": 254.36,
+      "en": "now let's quickly talk about non-spicy cuisines!",
+      "zh": "现在我们快点说说不辣的菜系吧！",
+      "pinyin": "xiànzài wǒmen kuài diǎn shuōshuo bú là de càixì ba!",
+      "vi": "bây giờ chúng ta mau nói về các hệ ẩm thực không cay nhé!"
+    },
+    {
+      "start": 254.37,
+      "end": 256.56,
+      "en": "I can't wait. (Laughs),",
+      "zh": "我已经等不及了。(笑)，",
+      "pinyin": "Wǒ yǐjīng děng bùjí le. (Xiào),",
+      "vi": "Tôi không đợi được nữa rồi. (Cười)"
+    },
+    {
+      "start": 256.57,
+      "end": 259.49,
+      "en": "Okay. If Sichuan cuisine is fire,",
+      "zh": "好的。如果说川菜是火，",
+      "pinyin": "Hǎo de. Rúguǒ shuō Chuāncài shì huǒ,",
+      "vi": "Được. Nếu nói ẩm thực Tứ Xuyên là lửa,"
+    },
+    {
+      "start": 259.5,
+      "end": 263.72,
+      "en": "then the cuisine we're about to discuss is gentle like water.",
+      "zh": "那接下来要说的这个菜系就像水一样温柔。",
+      "pinyin": "nà jiēxiàlái yào shuō de zhège càixì jiù xiàng shuǐ yíyàng wēnróu.",
+      "vi": "thì hệ ẩm thực sắp nói tới giống như nước, rất dịu dàng."
+    },
+    {
+      "start": 263.73,
+      "end": 265.59,
+      "en": "It is—Cantonese cuisine.",
+      "zh": "它就是——粤菜。",
+      "pinyin": "Tā jiùshì——Yuècài.",
+      "vi": "Đó chính là — ẩm thực Quảng Đông."
+    },
+    {
+      "start": 265.6,
+      "end": 268.06,
+      "en": "Cantonese cuisine! I love Cantonese cuisine so much!",
+      "zh": "粤菜！我太喜欢粤菜了！",
+      "pinyin": "Yuècài! Wǒ tài xǐhuan Yuècài le!",
+      "vi": "Ẩm thực Quảng Đông! Tôi thích ẩm thực Quảng Đông lắm!"
+    },
+    {
+      "start": 268.07,
+      "end": 270.33,
+      "en": "It's the food from Guangdong, right?",
+      "zh": "就是广东那边的菜，对吗？",
+      "pinyin": "Jiùshì Guǎngdōng nàbiān de cài, duì ma?",
+      "vi": "Là các món ăn ở vùng Quảng Đông, đúng không?"
+    },
+    {
+      "start": 270.33,
+      "end": 271.75,
+      "en": "Exactly right.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn đúng."
+    },
+    {
+      "start": 271.77,
+      "end": 275.19,
+      "en": "Cantonese cuisine is from southern China, especially Guangdong,",
+      "zh": "粤菜是中国南方，特别是广东、",
+      "pinyin": "Yuècài shì Zhōngguó nánfāng, tèbié shì Guǎngdōng,",
+      "vi": "Món Quảng Đông là món ăn ở miền Nam Trung Quốc, đặc biệt là Quảng Đông,"
+    },
+    {
+      "start": 275.2,
+      "end": 276.86,
+      "en": "and the Hong Kong region.",
+      "zh": "香港地区的菜。",
+      "pinyin": "Xiānggǎng dìqū de cài.",
+      "vi": "và vùng Hồng Kông."
+    },
+    {
+      "start": 276.87,
+      "end": 280.49,
+      "en": "Its biggest characteristic is being light and fresh.",
+      "zh": "它的最大特点就是清淡、新鲜。",
+      "pinyin": "Tā de zuìdà tèdiǎn jiùshì qīngdàn, xīnxiān.",
+      "vi": "Đặc điểm lớn nhất của nó là thanh đạm và tươi mới."
+    },
+    {
+      "start": 280.5,
+      "end": 282.52,
+      "en": "Chefs believe that the best dishes",
+      "zh": "厨师们觉得，最好的菜，",
+      "pinyin": "Chúshīmen juéde, zuì hǎo de cài,",
+      "vi": "Các đầu bếp cho rằng món ăn ngon nhất"
+    },
+    {
+      "start": 282.53,
+      "end": 285.32,
+      "en": "are ones where you can taste the food's original flavor.",
+      "zh": "就是要吃出食物本来的味道。",
+      "pinyin": "jiùshì yào chīchū shíwù běnlái de wèidào.",
+      "vi": "là món mà bạn có thể nếm được hương vị vốn có của thức ăn."
+    },
+    {
+      "start": 285.33,
+      "end": 286.29,
+      "en": "I agree!",
+      "zh": "我同意！",
+      "pinyin": "Wǒ tóngyì!",
+      "vi": "Tôi đồng ý!"
+    },
+    {
+      "start": 286.3,
+      "end": 289.46,
+      "en": "I love going to Guangdong for morning tea and dim sum.",
+      "zh": "我最喜欢去广东喝早茶，吃点心。",
+      "pinyin": "Wǒ zuì xǐhuan qù Guǎngdōng hē zǎochá, chī diǎnxīn.",
+      "vi": "Tôi thích nhất là đến Quảng Đông uống trà sáng và ăn điểm tâm."
+    },
+    {
+      "start": 289.47,
+      "end": 292.93,
+      "en": "For example, shrimp dumplings, siu mai, rice noodle rolls... wow,",
+      "zh": "比如虾饺、烧卖、肠粉……哇，",
+      "pinyin": "Bǐrú xiājiǎo, shāomai, chángfěn... wa,",
+      "vi": "Ví dụ như há cảo, xíu mại, bánh cuốn... wow,"
+    },
+    {
+      "start": 292.93,
+      "end": 295.72,
+      "en": "Just talking about it now makes my mouth water.",
+      "zh": "我现在说着口水都要流出来了。",
+      "pinyin": "wǒ xiànzài shuōzhe kǒushuǐ dōu yào liú chūlái le.",
+      "vi": "Bây giờ tôi nói thôi mà nước miếng đã chảy ra rồi."
+    },
+    {
+      "start": 295.73,
+      "end": 298.19,
+      "en": "Those dim sum are all small,",
+      "zh": "那些点心，每一个都小小的，",
+      "pinyin": "Nàxiē diǎnxīn, měi yīgè dōu xiǎoxiǎo de,",
+      "vi": "Những món điểm tâm đó, cái nào cũng nhỏ nhỏ,"
+    },
+    {
+      "start": 298.2,
+      "end": 300.56,
+      "en": "very delicate, and taste especially good.",
+      "zh": "很精致，味道也特别好。",
+      "pinyin": "hěn jīngzhì, wèidào yě tèbié hǎo.",
+      "vi": "rất tinh tế, hương vị cũng đặc biệt ngon."
+    },
+    {
+      "start": 300.57,
+      "end": 304.66,
+      "en": "Yes, dim sum is a very representative part of Cantonese cuisine.",
+      "zh": "是的，点心是粤菜很有代表性的一部分。",
+      "pinyin": "Shì de, diǎnxīn shì Yuècài hěn yǒu dàibiǎoxìng de yī bùfen.",
+      "vi": "Đúng vậy, điểm tâm là một phần rất có tính đại diện của món Quảng Đông."
+    },
+    {
+      "start": 304.67,
+      "end": 307.96,
+      "en": "Besides dim sum, Cantonese soups are also famous.",
+      "zh": "除了点心，粤菜的汤也很有名。",
+      "pinyin": "Chúle diǎnxīn, Yuècài de tāng yě hěn yǒumíng.",
+      "vi": "Ngoài điểm tâm, canh của món Quảng Đông cũng rất nổi tiếng."
+    },
+    {
+      "start": 307.97,
+      "end": 311.59,
+      "en": "They like to spend a long time slowly simmering soup.",
+      "zh": "他们喜欢用很长时间，慢慢地煲汤。",
+      "pinyin": "Tāmen xǐhuan yòng hěn cháng shíjiān, mànman de bāo tāng.",
+      "vi": "Họ thích dùng rất nhiều thời gian để chầm chậm nấu canh."
+    },
+    {
+      "start": 311.6,
+      "end": 315.16,
+      "en": "The soup is rich in flavor, but very comforting to drink.",
+      "zh": "汤的味道很浓，但喝起来很舒服。",
+      "pinyin": "Tāng de wèidào hěn nóng, dàn hē qǐlái hěn shūfu.",
+      "vi": "Vị canh rất đậm, nhưng uống vào rất dễ chịu."
+    },
+    {
+      "start": 315.17,
+      "end": 316.53,
+      "en": "There's also white cut chicken,",
+      "zh": "还有白切鸡、",
+      "pinyin": "Háiyǒu báiqiējī,",
+      "vi": "Còn có gà luộc chặt,"
+    },
+    {
+      "start": 316.53,
+      "end": 319.49,
+      "en": "steamed fish—these dishes are all made simply,",
+      "zh": "清蒸鱼，这些菜的做法都很简单，",
+      "pinyin": "qīngzhēngyú, zhèxiē cài de zuòfǎ dōu hěn jiǎndān,",
+      "vi": "cá hấp, cách làm những món này đều rất đơn giản,"
+    },
+    {
+      "start": 319.5,
+      "end": 321.09,
+      "en": "without adding many seasonings,",
+      "zh": "不放很多调料，",
+      "pinyin": "bù fàng hěn duō tiáoliào,",
+      "vi": "không cho nhiều gia vị,"
+    },
+    {
+      "start": 321.1,
+      "end": 325.12,
+      "en": "just so you can taste the freshest flavor of the chicken and fish.",
+      "zh": "就是为了让你吃到鸡肉和鱼肉最新鲜的味道。",
+      "pinyin": "jiùshì wèile ràng nǐ chīdào jīròu hé yúròu zuì xīnxiān de wèidào.",
+      "vi": "chỉ để bạn nếm được vị tươi ngon nhất của thịt gà và thịt cá."
+    },
+    {
+      "start": 325.13,
+      "end": 328.39,
+      "en": "Yeah, I think for people who can't eat spicy food, Cantonese cuisine",
+      "zh": "嗯，我觉得粤菜对不能吃辣的人来说，",
+      "pinyin": "Ń, wǒ juéde Yuècài duì bùnéng chī là de rén lái shuō,",
+      "vi": "Ừm, tôi nghĩ món Quảng Đông đối với người không ăn được cay mà nói,"
+    },
+    {
+      "start": 328.4,
+      "end": 329.86,
+      "en": "is truly heaven.",
+      "zh": "真的是天堂。",
+      "pinyin": "zhēn de shì tiāntáng.",
+      "vi": "thật sự là thiên đường."
+    },
+    {
+      "start": 329.87,
+      "end": 333.13,
+      "en": "When you go to a Cantonese restaurant, you can basically order freely,",
+      "zh": "你去一家粤菜馆，基本上可以随便点，",
+      "pinyin": "Nǐ qù yī jiā Yuècài guǎn, jīběnshang kěyǐ suíbiàn diǎn,",
+      "vi": "Bạn đến một nhà hàng Quảng Đông, cơ bản có thể gọi món thoải mái,"
+    },
+    {
+      "start": 333.13,
+      "end": 335.15,
+      "en": "and not worry that it'll be spicy.",
+      "zh": "都不用担心会很辣。",
+      "pinyin": "dōu bùyòng dānxīn huì hěn là.",
+      "vi": "đều không cần lo sẽ rất cay."
+    },
+    {
+      "start": 335.17,
+      "end": 337.26,
+      "en": "Exactly. Like Cantonese cuisine,",
+      "zh": "没错。和粤菜一样，",
+      "pinyin": "Méicuò. Hé Yuècài yīyàng,",
+      "vi": "Đúng vậy. Giống như món Quảng Đông,"
+    },
+    {
+      "start": 337.27,
+      "end": 341.26,
+      "en": "another cuisine that's very friendly to friends who don't eat spicy food is Su cuisine.",
+      "zh": "对不吃辣的朋友很友好的，还有苏菜。",
+      "pinyin": "duì bù chī là de péngyou hěn yǒuhǎo de, háiyǒu Sūcài.",
+      "vi": "món rất thân thiện với những bạn không ăn cay còn có món Tô Châu."
+    },
+    {
+      "start": 341.27,
+      "end": 343.76,
+      "en": "Su cuisine? Do you mean Jiangsu cuisine?",
+      "zh": "苏菜？是江苏菜吗？",
+      "pinyin": "Sūcài? Shì Jiāngsūcài ma?",
+      "vi": "Món Tô Châu? Là món Giang Tô à?"
+    },
+    {
+      "start": 343.77,
+      "end": 346.46,
+      "en": "Like dishes from Nanjing and Suzhou?",
+      "zh": "比如南京、苏州那边的菜？",
+      "pinyin": "Bǐrú Nánjīng, Sūzhōu nàbiān de cài?",
+      "vi": "Ví dụ như món ăn ở Nam Kinh, Tô Châu?"
+    },
+    {
+      "start": 346.47,
+      "end": 349.89,
+      "en": "Yes. Su cuisine, that is, Jiangsu cuisine.",
+      "zh": "是的。苏菜，也就是江苏菜。",
+      "pinyin": "Shì de. Sūcài, yě jiùshì Jiāngsūcài.",
+      "vi": "Đúng vậy. Món Tô Châu, tức là món Giang Tô."
+    },
+    {
+      "start": 349.9,
+      "end": 353.66,
+      "en": "If Cantonese cuisine pursues the food's original flavor,",
+      "zh": "如果说粤菜追求的是食物本来的味道，",
+      "pinyin": "Rúguǒ shuō Yuècài zhuīqiú de shì shíwù běnlái de wèidào,",
+      "vi": "Nếu nói món Quảng Đông theo đuổi hương vị vốn có của thức ăn,"
+    },
+    {
+      "start": 353.67,
+      "end": 356.36,
+      "en": "then Su cuisine pursues delicacy",
+      "zh": "那苏菜追求的就是精致",
+      "pinyin": "Nà Sūcài zhuīqiú de jiùshì jīngzhì",
+      "vi": "thì món Tô Châu theo đuổi sự tinh tế"
+    },
+    {
+      "start": 356.37,
+      "end": 361.49,
+      "en": "and a bit of sweetness. Oh, Jiangsu cuisine is a little sweet, right?",
+      "zh": "和一点点甜味。哦，江苏菜会有点甜，对吗？",
+      "pinyin": "hé yīdiǎndiǎn tiánwèi. Ó, Jiāngsūcài huì yǒudiǎn tián, duì ma?",
+      "vi": "và một chút vị ngọt. Ồ, món Giang Tô sẽ hơi ngọt, đúng không?"
+    },
+    {
+      "start": 361.5,
+      "end": 364.49,
+      "en": "I think I've heard a Shanghai friend say that. Right.",
+      "zh": "我好像听上海的朋友说过。对。",
+      "pinyin": "Wǒ hǎoxiàng tīng Shànghǎi de péngyou shuōguo. Duì.",
+      "vi": "Tôi hình như đã nghe bạn ở Thượng Hải nói rồi. Đúng."
+    },
+    {
+      "start": 364.5,
+      "end": 366.26,
+      "en": "Su cuisine's flavor leans sweet,",
+      "zh": "苏菜的口味偏甜，",
+      "pinyin": "Sūcài de kǒuwèi piān tián,",
+      "vi": "Khẩu vị món Tô Châu thiên về ngọt,"
+    },
+    {
+      "start": 366.27,
+      "end": 369.76,
+      "en": "and it pays great attention to whether the dish looks good.",
+      "zh": "而且非常注重菜的样子好不好看。",
+      "pinyin": "érqiě fēicháng zhùzhòng cài de yàngzi hǎo bù hǎo kàn.",
+      "vi": "và rất chú trọng món ăn trông có đẹp hay không."
+    },
+    {
+      "start": 369.77,
+      "end": 372.89,
+      "en": "I think making Su cuisine is like painting—",
+      "zh": "我觉得，做苏菜就像画画一样，",
+      "pinyin": "Wǒ juéde, zuò Sūcài jiù xiàng huàhuà yīyàng,",
+      "vi": "Tôi nghĩ, làm món Tô Châu giống như vẽ tranh vậy,"
+    },
+    {
+      "start": 372.9,
+      "end": 375.59,
+      "en": "not only must it taste good, it must also look good.",
+      "zh": "不只是要好吃，还要好看。",
+      "pinyin": "bù zhǐshì yào hǎochī, hái yào hǎokàn.",
+      "vi": "không chỉ cần ngon mà còn phải đẹp mắt."
+    },
+    {
+      "start": 375.6,
+      "end": 379.49,
+      "en": "For example, a famous dish called 'Squirrel Mandarin Fish,'",
+      "zh": "比如一道有名的菜叫“松鼠鳜鱼”，",
+      "pinyin": "Bǐrú yī dào yǒumíng de cài jiào “sōngshǔ guìyú”,",
+      "vi": "Ví dụ có một món nổi tiếng tên là “cá quế sóc”,"
+    },
+    {
+      "start": 379.5,
+      "end": 382.72,
+      "en": "the chef makes a fish look like a squirrel,",
+      "zh": "厨师会把一条鱼做得像一只松鼠，",
+      "pinyin": "Chúshī huì bǎ yī tiáo yú zuò de xiàng yī zhī sōngshǔ,",
+      "vi": "đầu bếp sẽ làm một con cá trông giống như một con sóc,"
+    },
+    {
+      "start": 382.73,
+      "end": 386.72,
+      "en": "then pours sweet-and-sour sauce over it—looks good and tastes good.",
+      "zh": "然后浇上酸甜的汁，又好看又好吃。",
+      "pinyin": "ránhòu jiāo shàng suāntián de zhī, yòu hǎokàn yòu hǎochī.",
+      "vi": "sau đó rưới nước sốt chua ngọt lên, vừa đẹp mắt vừa ngon."
+    },
+    {
+      "start": 386.73,
+      "end": 388.69,
+      "en": "Wow, I've heard of this!",
+      "zh": "哇，这个我听说过！",
+      "pinyin": "Wa, zhège wǒ tīngshuōguo!",
+      "vi": "Wow, món này tôi đã nghe nói rồi!"
+    },
+    {
+      "start": 388.7,
+      "end": 390.69,
+      "en": "It sounds really interesting.",
+      "zh": "听起来就很有意思。",
+      "pinyin": "Tīng qǐlái jiù hěn yǒu yìsi.",
+      "vi": "Nghe thôi đã thấy rất thú vị."
+    },
+    {
+      "start": 390.7,
+      "end": 394.16,
+      "en": "Then is Su cuisine also completely not spicy?",
+      "zh": "那苏菜的口味，是不是也完全不辣？",
+      "pinyin": "Nà Sūcài de kǒuwèi, shìbùshì yě wánquán bù là?",
+      "vi": "Vậy khẩu vị của món Tô Châu, có phải cũng hoàn toàn không cay không?"
+    },
+    {
+      "start": 394.17,
+      "end": 396.89,
+      "en": "Yes, basically not spicy at all.",
+      "zh": "是的，基本上完全不辣。",
+      "pinyin": "Shì de, jīběnshang wánquán bù là.",
+      "vi": "Đúng vậy, cơ bản là hoàn toàn không cay."
+    },
+    {
+      "start": 396.9,
+      "end": 400.36,
+      "en": "The flavor is relatively mild, maybe a little sweet.",
+      "zh": "味道比较温和，可能会有一点点甜。",
+      "pinyin": "Wèidào bǐjiào wēnhé, kěnéng huì yǒu yīdiǎndiǎn tián.",
+      "vi": "Hương vị khá nhẹ nhàng, có thể sẽ hơi ngọt một chút."
+    },
+    {
+      "start": 400.37,
+      "end": 403.46,
+      "en": "For example, braised pork and clear-simmered lion's head meatballs,",
+      "zh": "比如红烧肉、清炖狮子头，",
+      "pinyin": "Bǐrú hóngshāoròu, qīngdùn shīzitóu,",
+      "vi": "Ví dụ như thịt kho tàu, thịt viên sư tử hầm trong,"
+    },
+    {
+      "start": 403.47,
+      "end": 407.09,
+      "en": "these are all representatives of Su cuisine, and they taste excellent,",
+      "zh": "这些都是苏菜的代表，味道都非常好，",
+      "pinyin": "zhèxiē dōu shì Sūcài de dàibiǎo, wèidào dōu fēicháng hǎo,",
+      "vi": "đây đều là món đại diện của món Tô Châu, hương vị đều rất ngon,"
+    },
+    {
+      "start": 407.1,
+      "end": 409.26,
+      "en": "very suitable for people who prefer light flavors.",
+      "zh": "很适合口味清淡的人。",
+      "pinyin": "hěn shìhé kǒuwèi qīngdàn de rén.",
+      "vi": "rất phù hợp với người có khẩu vị thanh đạm."
+    },
+    {
+      "start": 409.27,
+      "end": 410.16,
+      "en": "Great.",
+      "zh": "太好了。",
+      "pinyin": "Tài hǎo le.",
+      "vi": "Tốt quá."
+    },
+    {
+      "start": 410.17,
+      "end": 412.66,
+      "en": "We've said so many dish names today,",
+      "zh": "我们今天说了这么多菜的名字，",
+      "pinyin": "Wǒmen jīntiān shuōle zhème duō cài de míngzi,",
+      "vi": "Hôm nay chúng ta đã nói tên nhiều món ăn như vậy,"
+    },
+    {
+      "start": 412.67,
+      "end": 415.76,
+      "en": "Friends listening to our podcast might not remember them all at once.",
+      "zh": "可能听我们播客的朋友一下子记不住。",
+      "pinyin": "Kěnéng tīng wǒmen bōkè de péngyou yīxiàzi jì bu zhù.",
+      "vi": "Các bạn nghe podcast của chúng ta có thể sẽ không nhớ hết ngay được."
+    },
+    {
+      "start": 415.77,
+      "end": 419.26,
+      "en": "Actually, it doesn't matter; as long as everyone can understand the general meaning,",
+      "zh": "其实没关系，大家能听懂大概的意思，",
+      "pinyin": "Qíshí méi guānxi, dàjiā néng tīngdǒng dàgài de yìsi,",
+      "vi": "Thật ra không sao, mọi người hiểu được ý chính là được,"
+    },
+    {
+      "start": 419.27,
+      "end": 423.29,
+      "en": "Knowing there are spicy and non-spicy dishes—that's already great.",
+      "zh": "知道有辣的菜，也有不辣的菜，这就很好了。",
+      "pinyin": "Zhīdào yǒu là de cài, yě yǒu bù là de cài, zhè jiù hěn hǎo le.",
+      "vi": "Biết là có món cay, cũng có món không cay, vậy là tốt lắm rồi."
+    },
+    {
+      "start": 423.3,
+      "end": 424.46,
+      "en": "If needed,",
+      "zh": "如果需要的话，",
+      "pinyin": "Rúguǒ xūyào de huà,",
+      "vi": "Nếu cần thì,"
+    },
+    {
+      "start": 424.47,
+      "end": 427.06,
+      "en": "You can look at the text in our blog,",
+      "zh": "你们可以看看我们博客里的文字，",
+      "pinyin": "Nǐmen kěyǐ kànkan wǒmen bókè lǐ de wénzì,",
+      "vi": "Các bạn có thể xem phần chữ trong blog của chúng tôi,"
+    },
+    {
+      "start": 427.07,
+      "end": 429.09,
+      "en": "There are the names of all the dishes there.",
+      "zh": "那里有所有菜的名字。",
+      "pinyin": "Nàlǐ yǒu suǒyǒu cài de míngzi.",
+      "vi": "Ở đó có tên của tất cả các món ăn."
+    },
+    {
+      "start": 429.1,
+      "end": 430.46,
+      "en": "Wang Yu is absolutely right.",
+      "zh": "王雨说得很对。",
+      "pinyin": "Wáng Yǔ shuō de hěn duì.",
+      "vi": "Wang Yu nói rất đúng."
+    },
+    {
+      "start": 430.47,
+      "end": 432.39,
+      "en": "Just relax and listen, everyone.",
+      "zh": "大家放松听就好。",
+      "pinyin": "Dàjiā fàngsōng tīng jiù hǎo.",
+      "vi": "Mọi người cứ thư giãn mà nghe là được."
+    },
+    {
+      "start": 432.4,
+      "end": 435.26,
+      "en": "To sum up, if you can't eat spicy food at all,",
+      "zh": "总结一下，如果你完全不能吃辣，",
+      "pinyin": "Zǒngjié yīxià, rúguǒ nǐ wánquán bù néng chī là,",
+      "vi": "Tóm lại, nếu bạn hoàn toàn không ăn được cay,"
+    },
+    {
+      "start": 435.27,
+      "end": 439.19,
+      "en": "Then going to a Cantonese or Su cuisine restaurant is very safe.",
+      "zh": "那去粤菜馆或者苏菜馆，就非常安全。",
+      "pinyin": "Nà qù Yuècàiguǎn huòzhě Sūcàiguǎn, jiù fēicháng ānquán.",
+      "vi": "Thì đến quán món Quảng Đông hoặc quán món Giang Tô là rất an toàn."
+    },
+    {
+      "start": 439.2,
+      "end": 441.46,
+      "en": "We talked about Sichuan cuisine—very spicy;",
+      "zh": "我们说了川菜，很辣；",
+      "pinyin": "Wǒmen shuō le Chuāncài, hěn là;",
+      "vi": "Chúng ta đã nói về món Tứ Xuyên, rất cay;"
+    },
+    {
+      "start": 441.47,
+      "end": 444.26,
+      "en": "We also talked about Cantonese and Su cuisines—not spicy.",
+      "zh": "又说了粤菜和苏菜，不辣。",
+      "pinyin": "Yòu shuō le Yuècài hé Sūcài, bù là.",
+      "vi": "Lại nói về món Quảng Đông và món Giang Tô, không cay."
+    },
+    {
+      "start": 444.27,
+      "end": 447.13,
+      "en": "Among the four great cuisines, there's only one left.",
+      "zh": "那四大菜系里，还剩最后一个了。",
+      "pinyin": "Nà sì dà càixì lǐ, hái shèng zuìhòu yī gè le.",
+      "vi": "Vậy trong bốn hệ món ăn lớn, chỉ còn lại một hệ cuối cùng."
+    },
+    {
+      "start": 447.13,
+      "end": 448.55,
+      "en": "What does it taste like?",
+      "zh": "它是什么味道的？",
+      "pinyin": "Tā shì shénme wèidao de?",
+      "vi": "Nó có vị gì?"
+    },
+    {
+      "start": 448.57,
+      "end": 452.53,
+      "en": "The last one is Lu cuisine, which is Shandong cuisine.",
+      "zh": "最后一个，是鲁菜，也就是山东菜。",
+      "pinyin": "Zuìhòu yī gè, shì Lǔcài, yě jiùshì Shāndōng cài.",
+      "vi": "Hệ cuối cùng là món Sơn Đông, cũng chính là món ăn Sơn Đông."
+    },
+    {
+      "start": 452.53,
+      "end": 455.75,
+      "en": "It is the most representative cuisine of northern China.",
+      "zh": "它是中国北方最有代表性的菜系。",
+      "pinyin": "Tā shì Zhōngguó běifāng zuì yǒu dàibiǎoxìng de càixì.",
+      "vi": "Đây là hệ món ăn mang tính đại diện nhất ở miền Bắc Trung Quốc."
+    },
+    {
+      "start": 455.77,
+      "end": 459.46,
+      "en": "If Sichuan cuisine is numbing-spicy and Su cuisine is sweet,",
+      "zh": "如果说川菜是麻辣，苏菜是甜，",
+      "pinyin": "Rúguǒ shuō Chuāncài shì málà, Sūcài shì tián,",
+      "vi": "Nếu nói món Tứ Xuyên là cay tê, món Giang Tô là ngọt,"
+    },
+    {
+      "start": 459.47,
+      "end": 462.66,
+      "en": "Then Lu cuisine's flavor profile is salty-umami.",
+      "zh": "那鲁菜的味道特点就是咸鲜。",
+      "pinyin": "Nà Lǔcài de wèidao tèdiǎn jiùshì xiánxiān.",
+      "vi": "Thì đặc trưng vị của món Sơn Đông là mặn và umami."
+    },
+    {
+      "start": 462.67,
+      "end": 465.26,
+      "en": "Salty-umami? How should we understand this word?",
+      "zh": "咸鲜？这个词怎么理解？",
+      "pinyin": "Xiánxiān? Zhège cí zěnme lǐjiě?",
+      "vi": "Mặn và umami? Từ này hiểu thế nào?"
+    },
+    {
+      "start": 465.27,
+      "end": 468.66,
+      "en": "It's the combination of saltiness and umami.",
+      "zh": "就是咸味和鲜味的结合。",
+      "pinyin": "Jiùshì xiánwèi hé xiānwèi de jiéhé.",
+      "vi": "Tức là sự kết hợp giữa vị mặn và vị umami."
+    },
+    {
+      "start": 468.67,
+      "end": 471.56,
+      "en": "Lu cuisine doesn't use lots of chilies like Sichuan cuisine,",
+      "zh": "鲁菜不像川菜那样放很多辣椒，",
+      "pinyin": "Lǔcài bù xiàng Chuāncài nàyàng fàng hěn duō làjiāo,",
+      "vi": "Món Sơn Đông không cho nhiều ớt như món Tứ Xuyên,"
+    },
+    {
+      "start": 471.57,
+      "end": 475.56,
+      "en": "nor does it add sugar like Su cuisine. It likes to use salt,",
+      "zh": "也不像苏菜那样放糖，它很喜欢用盐、",
+      "pinyin": "Yě bù xiàng Sūcài nàyàng fàng táng, tā hěn xǐhuan yòng yán,",
+      "vi": "cũng không cho đường như món Giang Tô; nó rất thích dùng muối,"
+    },
+    {
+      "start": 475.57,
+      "end": 479.89,
+      "en": "and soy sauce for seasoning, and it especially likes using scallions and garlic.",
+      "zh": "酱油来调味，还特别喜欢用葱和蒜。",
+      "pinyin": "Jiàngyóu lái tiáowèi, hái tèbié xǐhuan yòng cōng hé suàn.",
+      "vi": "nước tương để nêm vị, và đặc biệt thích dùng hành lá và tỏi."
+    },
+    {
+      "start": 479.9,
+      "end": 482.79,
+      "en": "So its flavor is relatively strong, but not spicy.",
+      "zh": "所以它的味道比较重，但不是辣。",
+      "pinyin": "Suǒyǐ tā de wèidao bǐjiào zhòng, dàn bùshì là.",
+      "vi": "Vì vậy vị của nó khá đậm, nhưng không phải cay."
+    },
+    {
+      "start": 482.8,
+      "end": 487.12,
+      "en": "It tastes fragrant and goes well with rice. Oh, I get it.",
+      "zh": "吃起来感觉很香，很下饭。哦，我明白了。",
+      "pinyin": "Chī qǐlái gǎnjué hěn xiāng, hěn xiàfàn. Ò, wǒ míngbai le.",
+      "vi": "Ăn vào thấy rất thơm, rất đưa cơm. Ồ, tôi hiểu rồi."
+    },
+    {
+      "start": 487.13,
+      "end": 489.99,
+      "en": "That means the flavor is rich, but not spicy.",
+      "zh": "就是味道很足，但是不辣。",
+      "pinyin": "Jiùshì wèidao hěn zú, dànshì bù là.",
+      "vi": "Tức là vị rất đậm đà, nhưng không cay."
+    },
+    {
+      "start": 490,
+      "end": 492.36,
+      "en": "So what famous dishes does Lu cuisine have?",
+      "zh": "那鲁菜有什么有名的菜吗？",
+      "pinyin": "Nà Lǔcài yǒu shénme yǒumíng de cài ma?",
+      "vi": "Vậy món Sơn Đông có món nào nổi tiếng không?"
+    },
+    {
+      "start": 492.37,
+      "end": 495.49,
+      "en": "Of course. For example, “sweet-and-sour carp”,",
+      "zh": "当然有。比如“糖醋鲤鱼”，",
+      "pinyin": "Dāngrán yǒu. Bǐrú “tángcù lǐyú”,",
+      "vi": "Tất nhiên là có. Ví dụ như “cá chép sốt chua ngọt”,"
+    },
+    {
+      "start": 495.5,
+      "end": 498.19,
+      "en": "is made with large carp from the Yellow River,",
+      "zh": "就是用黄河里的大鲤鱼做的，",
+      "pinyin": "Jiùshì yòng Huánghé lǐ de dà lǐyú zuò de,",
+      "vi": "là món làm từ cá chép lớn ở sông Hoàng Hà,"
+    },
+    {
+      "start": 498.2,
+      "end": 502.59,
+      "en": "crispy on the outside and tender inside, also sweet-and-sour.",
+      "zh": "外面脆脆的，里面很嫩，也是酸甜口味的。",
+      "pinyin": "Wàimiàn cuìcuì de, lǐmiàn hěn nèn, yě shì suāntián kǒuwèi de.",
+      "vi": "bên ngoài giòn giòn, bên trong rất mềm, cũng có vị chua ngọt."
+    },
+    {
+      "start": 502.6,
+      "end": 506.46,
+      "en": "“Nine-Turn Intestines” is also a very famous Lu dish,",
+      "zh": "“九转大肠”也是一道非常有名的鲁菜，",
+      "pinyin": "“Jiǔzhuǎn dàcháng” yě shì yī dào fēicháng yǒumíng de Lǔcài,",
+      "vi": "“đại tràng cửu chuyển” cũng là một món Sơn Đông rất nổi tiếng,"
+    },
+    {
+      "start": 506.47,
+      "end": 508.79,
+      "en": "But the preparation is rather complicated.",
+      "zh": "不过做法比较复杂。",
+      "pinyin": "Bùguò zuòfǎ bǐjiào fùzá.",
+      "vi": "Nhưng cách làm khá phức tạp."
+    },
+    {
+      "start": 508.8,
+      "end": 509.36,
+      "en": "Actually,",
+      "zh": "其实，",
+      "pinyin": "Qíshí,",
+      "vi": "Thật ra,"
+    },
+    {
+      "start": 509.37,
+      "end": 513.06,
+      "en": "Nowadays, many home-style dishes made by families in northern China,",
+      "zh": "现在中国北方很多家庭做的家常菜，",
+      "pinyin": "Xiànzài Zhōngguó běifāng hěn duō jiātíng zuò de jiāchángcài,",
+      "vi": "Hiện nay nhiều món ăn gia đình mà các gia đình ở miền Bắc Trung Quốc làm,"
+    },
+    {
+      "start": 513.07,
+      "end": 514.93,
+      "en": "such as stir-fried shredded potatoes,",
+      "zh": "比如炒土豆丝、",
+      "pinyin": "Bǐrú chǎo tǔdòusī,",
+      "vi": "ví dụ như khoai tây xào sợi,"
+    },
+    {
+      "start": 514.93,
+      "end": 518.29,
+      "en": "and braised eggplant, have all been influenced by Lu cuisine.",
+      "zh": "红烧茄子，都受到了鲁菜的影响。",
+      "pinyin": "Hóngshāo qiézi, dōu shòudào le Lǔcài de yǐngxiǎng.",
+      "vi": "cà tím kho, đều chịu ảnh hưởng từ món Sơn Đông."
+    },
+    {
+      "start": 518.3,
+      "end": 519.96,
+      "en": "I understand now that you put it that way.",
+      "zh": "这样说我就懂了。",
+      "pinyin": "Zhèyàng shuō wǒ jiù dǒng le.",
+      "vi": "Nói vậy là tôi hiểu rồi."
+    },
+    {
+      "start": 519.97,
+      "end": 521.96,
+      "en": "Lu cuisine is like a foundation,",
+      "zh": "鲁菜就像一个基础，",
+      "pinyin": "Lǔcài jiù xiàng yī gè jīchǔ,",
+      "vi": "Món Sơn Đông giống như một nền tảng,"
+    },
+    {
+      "start": 521.97,
+      "end": 525.33,
+      "en": "many northern dishes developed from it.",
+      "zh": "很多北方的菜都是从它发展来的。",
+      "pinyin": "Hěn duō běifāng de cài dōu shì cóng tā fāzhǎn lái de.",
+      "vi": "nhiều món ăn miền Bắc đều phát triển từ nó."
+    },
+    {
+      "start": 525.33,
+      "end": 525.79,
+      "en": "So,",
+      "zh": "所以，",
+      "pinyin": "Suǒyǐ,",
+      "vi": "Vì vậy,"
+    },
+    {
+      "start": 525.8,
+      "end": 529.09,
+      "en": "if you go to northern cities like Shandong or Beijing,",
+      "zh": "如果去山东或者北京这些北方城市，",
+      "pinyin": "Rúguǒ qù Shāndōng huòzhě Běijīng zhèxiē běifāng chéngshì,",
+      "vi": "Nếu đến Sơn Đông hoặc Bắc Kinh, những thành phố miền Bắc này,"
+    },
+    {
+      "start": 529.1,
+      "end": 533.19,
+      "en": "most dishes you eat should also be non-spicy, right? Right.",
+      "zh": "吃到的菜大部分应该也是不辣的，对吗？对。",
+      "pinyin": "Chī dào de cài dàbùfen yīnggāi yě shì bù là de, duì ma? Duì.",
+      "vi": "các món ăn mà bạn ăn phần lớn cũng sẽ không cay, đúng không? Đúng."
+    },
+    {
+      "start": 533.2,
+      "end": 534.72,
+      "en": "Most are non-spicy,",
+      "zh": "大部分是不辣的，",
+      "pinyin": "Dàbùfen shì bù là de,",
+      "vi": "Phần lớn là không cay,"
+    },
+    {
+      "start": 534.73,
+      "end": 537.19,
+      "en": "the flavor will be a bit saltier than southern dishes,",
+      "zh": "味道会比南方的菜咸一点，",
+      "pinyin": "Wèidao huì bǐ nánfāng de cài xián yīdiǎn,",
+      "vi": "vị sẽ mặn hơn món ăn miền Nam một chút,"
+    },
+    {
+      "start": 537.2,
+      "end": 540.29,
+      "en": "and a bit stronger. For friends who can't eat spicy food but like stronger flavors,",
+      "zh": "重一点。对于不能吃辣但喜欢口味重一点的朋友来说，",
+      "pinyin": "Zhòng yīdiǎn. Duìyú bù néng chī là dàn xǐhuan kǒuwèi zhòng yīdiǎn de péngyou lái shuō,",
+      "vi": "đậm hơn một chút. Đối với những bạn không ăn được cay nhưng thích vị đậm hơn một chút,"
+    },
+    {
+      "start": 540.3,
+      "end": 542.69,
+      "en": "Lu cuisine is a very good choice.",
+      "zh": "鲁菜是一个很好的选择。",
+      "pinyin": "Lǔcài shì yī gè hěn hǎo de xuǎnzé.",
+      "vi": "món Sơn Đông là một lựa chọn rất tốt."
+    },
+    {
+      "start": 542.7,
+      "end": 545.66,
+      "en": "Okay, today we've taken China's four great cuisines",
+      "zh": "好的，我们今天把中国的四大菜系",
+      "pinyin": "Hǎo de, wǒmen jīntiān bǎ Zhōngguó de sì dà càixì",
+      "vi": "Được rồi, hôm nay chúng ta đã đem bốn hệ món ăn lớn của Trung Quốc"
+    },
+    {
+      "start": 545.67,
+      "end": 547.09,
+      "en": "and introduced them all.",
+      "zh": "都介绍了一遍。",
+      "pinyin": "Dōu jièshào le yī biàn.",
+      "vi": "giới thiệu qua một lượt."
+    },
+    {
+      "start": 547.1,
+      "end": 549.99,
+      "en": "Sichuan, Cantonese, Su, and Lu cuisines.",
+      "zh": "川菜、粤菜、苏菜、鲁菜。",
+      "pinyin": "Chuāncài, Yuècài, Sūcài, Lǔcài.",
+      "vi": "Món Tứ Xuyên, món Quảng Đông, món Giang Tô, món Sơn Đông."
+    },
+    {
+      "start": 550,
+      "end": 553.52,
+      "en": "They're like four people, each with a different personality.",
+      "zh": "它们就像四个人，每个人的性格都不一样。",
+      "pinyin": "Tāmen jiù xiàng sì gè rén, měi gè rén de xìnggé dōu bù yīyàng.",
+      "vi": "Chúng giống như bốn con người, tính cách mỗi người đều khác nhau."
+    },
+    {
+      "start": 553.53,
+      "end": 555.19,
+      "en": "That's a great analogy.",
+      "zh": "这个比喻很好。",
+      "pinyin": "Zhège bǐyù hěn hǎo.",
+      "vi": "Cách so sánh này hay thật."
+    },
+    {
+      "start": 555.2,
+      "end": 557.69,
+      "en": "Sichuan cuisine is like an enthusiastic friend,",
+      "zh": "川菜像一个热情的朋友，",
+      "pinyin": "Chuāncài xiàng yí ge rèqíng de péngyou,",
+      "vi": "Ẩm thực Tứ Xuyên giống như một người bạn nhiệt tình,"
+    },
+    {
+      "start": 557.7,
+      "end": 560.19,
+      "en": "Cantonese cuisine is like a gentle friend,",
+      "zh": "粤菜像一个温柔的朋友，",
+      "pinyin": "Yuècài xiàng yí ge wēnróu de péngyou,",
+      "vi": "Ẩm thực Quảng Đông giống như một người bạn dịu dàng,"
+    },
+    {
+      "start": 560.2,
+      "end": 562.72,
+      "en": "Su cuisine is like a refined friend,",
+      "zh": "苏菜像一个精致的朋友，",
+      "pinyin": "Sūcài xiàng yí ge jīngzhì de péngyou,",
+      "vi": "Ẩm thực Tô Thái giống như một người bạn tinh tế,"
+    },
+    {
+      "start": 562.73,
+      "end": 565.29,
+      "en": "Lu cuisine is like a down-to-earth friend.",
+      "zh": "鲁菜像一个实在的朋友。",
+      "pinyin": "Lǔcài xiàng yí ge shízài de péngyou.",
+      "vi": "Ẩm thực Sơn Đông giống như một người bạn chân chất."
+    },
+    {
+      "start": 565.3,
+      "end": 568.49,
+      "en": "(laughs), right! Put that way, everyone can understand it better.",
+      "zh": "(笑)，对！这样一说，大家就更好理解了。",
+      "pinyin": "(Xiào), duì! Zhèyàng yì shuō, dàjiā jiù gèng hǎo lǐjiě le.",
+      "vi": "(Cười), đúng vậy! Nói như vậy thì mọi người sẽ dễ hiểu hơn."
+    },
+    {
+      "start": 568.5,
+      "end": 569.69,
+      "en": "Alright, Wang Yu,",
+      "zh": "好了，王雨，",
+      "pinyin": "Hǎo le, Wáng Yǔ,",
+      "vi": "Được rồi, Vương Vũ,"
+    },
+    {
+      "start": 569.7,
+      "end": 573.29,
+      "en": "Today we talked a lot about the topic of cuisine styles.",
+      "zh": "今天我们聊了很多关于菜系的话题。",
+      "pinyin": "Jīntiān wǒmen liáo le hěn duō guānyú càixì de huàtí.",
+      "vi": "Hôm nay chúng ta đã nói rất nhiều về chủ đề các hệ ẩm thực."
+    },
+    {
+      "start": 573.3,
+      "end": 574.49,
+      "en": "In our conversation,",
+      "zh": "在我们的对话里，",
+      "pinyin": "Zài wǒmen de duìhuà lǐ,",
+      "vi": "Trong cuộc trò chuyện của chúng ta,"
+    },
+    {
+      "start": 574.5,
+      "end": 578.76,
+      "en": "some words that may be a bit difficult for learners also came up.",
+      "zh": "也出现了一些可能对学习者来说有点难的词。",
+      "pinyin": "yě chūxiàn le yìxiē kěnéng duì xuéxízhě lái shuō yǒudiǎn nán de cí.",
+      "vi": "cũng xuất hiện một số từ có thể hơi khó đối với người học."
+    },
+    {
+      "start": 578.77,
+      "end": 580.69,
+      "en": "Let's review them together.",
+      "zh": "我们一起来复习一下吧。",
+      "pinyin": "Wǒmen yìqǐ lái fùxí yíxià ba.",
+      "vi": "Chúng ta cùng ôn tập lại một chút nhé."
+    },
+    {
+      "start": 580.7,
+      "end": 582.12,
+      "en": "Okay. The first word,",
+      "zh": "好的。第一个词，",
+      "pinyin": "Hǎo de. Dì yī ge cí,",
+      "vi": "Được. Từ đầu tiên,"
+    },
+    {
+      "start": 582.13,
+      "end": 585.49,
+      "en": "is 'cuisine style,' which we've been talking about all day.",
+      "zh": "就是我们今天一直在说的“菜系”。",
+      "pinyin": "jiù shì wǒmen jīntiān yìzhí zài shuō de “càixì”.",
+      "vi": "chính là “hệ ẩm thực” mà hôm nay chúng ta cứ nhắc đến."
+    },
+    {
+      "start": 585.5,
+      "end": 588.32,
+      "en": "Wang Yu, can you explain in simple terms",
+      "zh": "王雨，你能用简单的话解释一下",
+      "pinyin": "Wáng Yǔ, nǐ néng yòng jiǎndān de huà jiěshì yíxià",
+      "vi": "Vương Vũ, bạn có thể dùng lời đơn giản giải thích một chút"
+    },
+    {
+      "start": 588.33,
+      "end": 589.92,
+      "en": "what 'cuisine style' is?",
+      "zh": "什么是“菜系”吗？",
+      "pinyin": "shénme shì “càixì” ma?",
+      "vi": "“hệ ẩm thực” là gì không?"
+    },
+    {
+      "start": 589.93,
+      "end": 592.89,
+      "en": "The word 'cuisine style' sounds a bit difficult,",
+      "zh": "“菜系”这个词，听起来好像有点难，",
+      "pinyin": "“Càixì” zhège cí, tīng qǐlái hǎoxiàng yǒudiǎn nán,",
+      "vi": "Từ “hệ ẩm thực” này nghe có vẻ hơi khó,"
+    },
+    {
+      "start": 592.9,
+      "end": 594.59,
+      "en": "but its meaning is very simple.",
+      "zh": "但意思很简单。",
+      "pinyin": "dàn yìsi hěn jiǎndān.",
+      "vi": "nhưng ý nghĩa rất đơn giản."
+    },
+    {
+      "start": 594.6,
+      "end": 598.59,
+      "en": "It means that China is very big, and the cooking methods in each place,",
+      "zh": "就是说，中国很大，每个地方做饭的方法、",
+      "pinyin": "jiù shì shuō, Zhōngguó hěn dà, měi ge dìfang zuòfàn de fāngfǎ,",
+      "vi": "Đó là nói rằng, Trung Quốc rất rộng lớn, cách nấu ăn của mỗi nơi,"
+    },
+    {
+      "start": 598.6,
+      "end": 601.96,
+      "en": "the ingredients they like to use and the final flavors are all different.",
+      "zh": "喜欢用的材料和最后的味道都不一样。",
+      "pinyin": "xǐhuan yòng de cáiliào hé zuìhòu de wèidào dōu bù yíyàng.",
+      "vi": "nguyên liệu thích dùng và hương vị cuối cùng đều không giống nhau."
+    },
+    {
+      "start": 601.97,
+      "end": 604.59,
+      "en": "So we call these dishes with common characteristics,",
+      "zh": "我们就把这些有共同特点的菜，",
+      "pinyin": "wǒmen jiù bǎ zhèxiē yǒu gòngtóng tèdiǎn de cài,",
+      "vi": "vậy nên chúng ta coi những món ăn có đặc điểm chung này,"
+    },
+    {
+      "start": 604.6,
+      "end": 606.29,
+      "en": "a 'cuisine style.'",
+      "zh": "叫做一个“菜系”。",
+      "pinyin": "jiàozuò yí ge “càixì”.",
+      "vi": "gọi là một “hệ ẩm thực”."
+    },
+    {
+      "start": 606.3,
+      "end": 609.19,
+      "en": "For example, Sichuan dishes like to be numbing and spicy,",
+      "zh": "比如四川的菜，喜欢又麻又辣，",
+      "pinyin": "Bǐrú Sìchuān de cài, xǐhuan yòu má yòu là,",
+      "vi": "Ví dụ món ăn Tứ Xuyên thích vị tê và cay,"
+    },
+    {
+      "start": 609.2,
+      "end": 610.49,
+      "en": "so it's a cuisine style,",
+      "zh": "就是一个菜系，",
+      "pinyin": "jiù shì yí ge càixì,",
+      "vi": "thì là một hệ ẩm thực,"
+    },
+    {
+      "start": 610.5,
+      "end": 613.56,
+      "en": "called Sichuan cuisine. Explained very well. Okay,",
+      "zh": "叫川菜。解释得非常好。好，",
+      "pinyin": "jiào Chuāncài. Jiěshì de fēicháng hǎo. Hǎo,",
+      "vi": "gọi là món Tứ Xuyên. Giải thích rất tốt. Được,"
+    },
+    {
+      "start": 613.57,
+      "end": 614.49,
+      "en": "The second word,",
+      "zh": "第二个词，",
+      "pinyin": "Dì èr ge cí,",
+      "vi": "Từ thứ hai,"
+    },
+    {
+      "start": 614.5,
+      "end": 617.46,
+      "en": "is what that teacher mentioned at the beginning said,",
+      "zh": "是我们开头提到的那位老师说的，",
+      "pinyin": "shì wǒmen kāitóu tídào de nà wèi lǎoshī shuō de,",
+      "vi": "là câu mà vị giáo viên chúng ta nhắc đến lúc đầu đã nói,"
+    },
+    {
+      "start": 617.47,
+      "end": 620.86,
+      "en": "her students 'benefited a lot.' This word",
+      "zh": "她的学生们“受益良多”。这个词",
+      "pinyin": "tā de xuéshengmen “shòuyì liángduō”. Zhège cí",
+      "vi": "các học sinh của cô ấy “được lợi rất nhiều”. Từ này"
+    },
+    {
+      "start": 620.87,
+      "end": 621.86,
+      "en": "what does it mean?",
+      "zh": "是什么意思？",
+      "pinyin": "shì shénme yìsi?",
+      "vi": "có nghĩa là gì?"
+    },
+    {
+      "start": 621.87,
+      "end": 624.66,
+      "en": "'Benefited a lot' is a very good phrase.",
+      "zh": "“受益良多”是一个很好的词。",
+      "pinyin": "“Shòuyì liángduō” shì yí ge hěn hǎo de cí.",
+      "vi": "“Được lợi rất nhiều” là một từ rất hay."
+    },
+    {
+      "start": 624.67,
+      "end": 625.93,
+      "en": "It means that,",
+      "zh": "它的意思就是，",
+      "pinyin": "Tā de yìsi jiù shì,",
+      "vi": "Ý của nó là,"
+    },
+    {
+      "start": 625.93,
+      "end": 628.52,
+      "en": "from something or someone,",
+      "zh": "你从一件事或者一个人那里，",
+      "pinyin": "nǐ cóng yí jiàn shì huòzhě yí ge rén nàlǐ,",
+      "vi": "bạn từ một việc nào đó hoặc một người nào đó,"
+    },
+    {
+      "start": 628.53,
+      "end": 631.99,
+      "en": "you gained a lot of benefits and learned a lot.",
+      "zh": "得到了很多好处，学到了很多东西。",
+      "pinyin": "dédào le hěn duō hǎochu, xué dào le hěn duō dōngxi.",
+      "vi": "đã nhận được rất nhiều lợi ích, học được rất nhiều điều."
+    },
+    {
+      "start": 632,
+      "end": 633.76,
+      "en": "For example, by listening to our podcast,",
+      "zh": "比如，听我们的播客，",
+      "pinyin": "Bǐrú, tīng wǒmen de bōkè,",
+      "vi": "Ví dụ, khi nghe podcast của chúng tôi,"
+    },
+    {
+      "start": 633.77,
+      "end": 636.76,
+      "en": "you learned a lot of Chinese and it helped you a lot,",
+      "zh": "你学到了很多中文，对你很有帮助，",
+      "pinyin": "nǐ xué dào le hěn duō Zhōngwén, duì nǐ hěn yǒu bāngzhù,",
+      "vi": "bạn học được rất nhiều tiếng Trung, rất có ích cho bạn,"
+    },
+    {
+      "start": 636.77,
+      "end": 639.36,
+      "en": "then you can say, 'I benefited a lot.'",
+      "zh": "你就可以说“我受益良多”。",
+      "pinyin": "nǐ jiù kěyǐ shuō “wǒ shòuyì liángduō”.",
+      "vi": "thì bạn có thể nói “tôi được lợi rất nhiều”."
+    },
+    {
+      "start": 639.37,
+      "end": 640.29,
+      "en": "Exactly.",
+      "zh": "没错。",
+      "pinyin": "Méicuò.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 640.3,
+      "end": 644.29,
+      "en": "The third word: you said Chengdu hotpot is very 'authentic.'",
+      "zh": "第三个词，你说成都火锅很“地道”。",
+      "pinyin": "Dì sān ge cí, nǐ shuō Chéngdū huǒguō hěn “dìdao”.",
+      "vi": "Từ thứ ba, bạn nói lẩu Thành Đô rất “chuẩn vị”."
+    },
+    {
+      "start": 644.3,
+      "end": 645.96,
+      "en": "What does 'authentic' mean?",
+      "zh": "“地道”是什么意思？",
+      "pinyin": "“Dìdao” shì shénme yìsi?",
+      "vi": "“Chuẩn vị” có nghĩa là gì?"
+    },
+    {
+      "start": 645.97,
+      "end": 649.53,
+      "en": "'Authentic' means that something is very good,",
+      "zh": "“地道”的意思就是，一个东西非常好，",
+      "pinyin": "“Dìdao” de yìsi jiù shì, yí ge dōngxi fēicháng hǎo,",
+      "vi": "“Chuẩn vị” có nghĩa là, một thứ gì đó rất tốt,"
+    },
+    {
+      "start": 649.53,
+      "end": 651.45,
+      "en": "has very local characteristics,",
+      "zh": "非常有当地的特色，",
+      "pinyin": "fēicháng yǒu dāngdì de tèsè,",
+      "vi": "rất có đặc sắc địa phương,"
+    },
+    {
+      "start": 651.47,
+      "end": 654.36,
+      "en": "and is exactly the same as the real local thing.",
+      "zh": "和当地真正的东西一模一样。",
+      "pinyin": "hé dāngdì zhēnzhèng de dōngxi yìmúyíyàng.",
+      "vi": "giống hệt như thứ thật sự ở địa phương."
+    },
+    {
+      "start": 654.37,
+      "end": 657.06,
+      "en": "For example, the Peking duck you eat in Beijing,",
+      "zh": "比如，你在北京吃的北京烤鸭，",
+      "pinyin": "Bǐrú, nǐ zài Běijīng chī de Běijīng kǎoyā,",
+      "vi": "Ví dụ, vịt quay Bắc Kinh bạn ăn ở Bắc Kinh,"
+    },
+    {
+      "start": 657.07,
+      "end": 660.49,
+      "en": "tastes especially good and is the same as what Beijing locals usually eat,",
+      "zh": "味道特别好，和北京人平时吃的一样，",
+      "pinyin": "wèidào tèbié hǎo, hé Běijīngrén píngshí chī de yíyàng,",
+      "vi": "vị rất ngon, giống như món mà người Bắc Kinh thường ăn,"
+    },
+    {
+      "start": 660.5,
+      "end": 663.36,
+      "en": "then you can say, 'This roast duck is very authentic!'",
+      "zh": "你就可以说：“这个烤鸭很地道！”",
+      "pinyin": "nǐ jiù kěyǐ shuō: “zhège kǎoyā hěn dìdao!”",
+      "vi": "thì bạn có thể nói: “Vịt quay này rất chuẩn vị!”"
+    },
+    {
+      "start": 663.37,
+      "end": 664.59,
+      "en": "Well said.",
+      "zh": "说得很好。",
+      "pinyin": "Shuō de hěn hǎo.",
+      "vi": "Nói rất hay."
+    },
+    {
+      "start": 664.6,
+      "end": 665.89,
+      "en": "The last word,",
+      "zh": "最后一个词，",
+      "pinyin": "Zuìhòu yí ge cí,",
+      "vi": "Từ cuối cùng,"
+    },
+    {
+      "start": 665.9,
+      "end": 669.72,
+      "en": "'Light.' We say Cantonese cuisine's flavor is very 'light.'",
+      "zh": "“清淡”。我们说粤菜的味道很“清淡”。",
+      "pinyin": "“Qīngdàn”. Wǒmen shuō Yuècài de wèidào hěn “qīngdàn”.",
+      "vi": "“Thanh đạm”. Chúng ta nói hương vị món Quảng Đông rất “thanh đạm”."
+    },
+    {
+      "start": 669.73,
+      "end": 672.59,
+      "en": "'Light' means the food's flavor is not strong.",
+      "zh": "“清淡”就是说食物的味道不重。",
+      "pinyin": "“Qīngdàn” jiù shì shuō shíwù de wèidào bú zhòng.",
+      "vi": "“Thanh đạm” nghĩa là hương vị món ăn không đậm."
+    },
+    {
+      "start": 672.6,
+      "end": 676.19,
+      "en": "not salty, not spicy, not sweet, and with very little oil.",
+      "zh": "不咸，不辣，也不甜，油也很少。",
+      "pinyin": "bù xián, bú là, yě bù tián, yóu yě hěn shǎo.",
+      "vi": "không mặn, không cay, cũng không ngọt, dầu cũng rất ít."
+    },
+    {
+      "start": 676.2,
+      "end": 679.16,
+      "en": "it feels very comfortable to eat and is very healthy.",
+      "zh": "吃起来感觉很舒服，很健康。",
+      "pinyin": "chī qǐlái gǎnjué hěn shūfu, hěn jiànkāng.",
+      "vi": "ăn vào cảm thấy rất thoải mái, rất tốt cho sức khỏe."
+    },
+    {
+      "start": 679.17,
+      "end": 681.99,
+      "en": "If you're sick, the doctor might tell you:",
+      "zh": "如果你生病了，医生可能会告诉你：",
+      "pinyin": "Rúguǒ nǐ shēngbìng le, yīshēng kěnéng huì gàosu nǐ:",
+      "vi": "Nếu bạn bị ốm, bác sĩ có thể sẽ nói với bạn:"
+    },
+    {
+      "start": 682,
+      "end": 683.76,
+      "en": "“You should eat a bit lighter.”",
+      "zh": "“你要吃得清淡一点。”",
+      "pinyin": "“Nǐ yào chī de qīngdàn yìdiǎn.”",
+      "vi": "“Bạn nên ăn thanh đạm một chút.”"
+    },
+    {
+      "start": 683.77,
+      "end": 686.39,
+      "en": "Great. Thanks for the explanation, Wang Yu.",
+      "zh": "太棒了。谢谢王雨的解释。",
+      "pinyin": "Tài bàng le. Xièxie Wáng Yǔ de jiěshì.",
+      "vi": "Tuyệt quá. Cảm ơn Wang Yu đã giải thích."
+    },
+    {
+      "start": 686.4,
+      "end": 689.16,
+      "en": "Hope everyone also learned these few words today.",
+      "zh": "希望大家今天也学到了这几个词。",
+      "pinyin": "Xīwàng dàjiā jīntiān yě xué dào le zhè jǐ ge cí.",
+      "vi": "Hy vọng hôm nay mọi người cũng đã học được mấy từ này."
+    },
+    {
+      "start": 689.17,
+      "end": 692.66,
+      "en": "All right, today we talked about China's four great cuisines.",
+      "zh": "好了，今天我们聊了中国的四大菜系。",
+      "pinyin": "Hǎo le, jīntiān wǒmen liáo le Zhōngguó de sì dà càixì.",
+      "vi": "Được rồi, hôm nay chúng ta đã nói về bốn hệ ẩm thực lớn của Trung Quốc."
+    },
+    {
+      "start": 692.67,
+      "end": 694.96,
+      "en": "To sum up, friends who can't eat spicy food,",
+      "zh": "总结一下，不能吃辣的朋友，",
+      "pinyin": "Zǒngjié yíxià, bù néng chī là de péngyou,",
+      "vi": "Tóm lại, những bạn không ăn được cay,"
+    },
+    {
+      "start": 694.97,
+      "end": 697.29,
+      "en": "don't need to worry at all about coming to China.",
+      "zh": "来中国完全不用担心。",
+      "pinyin": "Lái Zhōngguó wánquán búyòng dānxīn.",
+      "vi": "đến Trung Quốc hoàn toàn không cần lo lắng."
+    },
+    {
+      "start": 697.3,
+      "end": 700.12,
+      "en": "If you like light, fresh flavors,",
+      "zh": "如果你喜欢清淡、新鲜的味道，",
+      "pinyin": "Rúguǒ nǐ xǐhuan qīngdàn, xīnxiān de wèidào,",
+      "vi": "Nếu bạn thích hương vị thanh đạm, tươi mới,"
+    },
+    {
+      "start": 700.13,
+      "end": 701.72,
+      "en": "you can choose Cantonese cuisine;",
+      "zh": "可以选择粤菜；",
+      "pinyin": "Kěyǐ xuǎnzé Yuècài;",
+      "vi": "có thể chọn ẩm thực Quảng Đông;"
+    },
+    {
+      "start": 701.73,
+      "end": 705.25,
+      "en": "if you like refined flavors with a touch of sweetness,",
+      "zh": "如果你喜欢精致、带一点甜味的感觉，",
+      "pinyin": "Rúguǒ nǐ xǐhuan jīngzhì, dài yìdiǎn tiánwèi de gǎnjué,",
+      "vi": "Nếu bạn thích cảm giác tinh tế, hơi ngọt một chút,"
+    },
+    {
+      "start": 705.27,
+      "end": 709.06,
+      "en": "you can try Su cuisine; if you like flavors that are a bit richer,",
+      "zh": "可以试试苏菜；如果你喜欢味道足一点、",
+      "pinyin": "Kěyǐ shìshi Sūcài; rúguǒ nǐ xǐhuan wèidào zú yìdiǎn,",
+      "vi": "có thể thử ẩm thực Tô Châu; nếu bạn thích vị đậm hơn một chút,"
+    },
+    {
+      "start": 709.07,
+      "end": 711.99,
+      "en": "salty and savory, Lu cuisine will suit you well.",
+      "zh": "咸香的，那鲁菜很适合你。",
+      "pinyin": "Xiánxiāng de, nà Lǔcài hěn shìhé nǐ.",
+      "vi": "mặn mà thơm, thì ẩm thực Sơn Đông rất hợp với bạn."
+    },
+    {
+      "start": 712,
+      "end": 713.29,
+      "en": "Even if you go to Sichuan,",
+      "zh": "就算你去了四川，",
+      "pinyin": "Jiùsuàn nǐ qù le Sìchuān,",
+      "vi": "Dù bạn có đến Tứ Xuyên,"
+    },
+    {
+      "start": 713.3,
+      "end": 716.59,
+      "en": "there are still many delicious non-spicy Sichuan dishes waiting for you.",
+      "zh": "也有很多不辣的好吃的川菜等着你。",
+      "pinyin": "Yě yǒu hěn duō bù là de hǎochī de Chuāncài děng zhe nǐ.",
+      "vi": "cũng có rất nhiều món Tứ Xuyên ngon mà không cay đang chờ bạn."
+    },
+    {
+      "start": 716.6,
+      "end": 718.76,
+      "en": "Right! Hope today's episode",
+      "zh": "对！希望今天这期节目，",
+      "pinyin": "Duì! Xīwàng jīntiān zhè qī jiémù,",
+      "vi": "Đúng vậy! Hy vọng tập hôm nay,"
+    },
+    {
+      "start": 718.77,
+      "end": 722.29,
+      "en": "can help everyone enjoy food better in China.",
+      "zh": "能帮助大家在中国更好地享受美食。",
+      "pinyin": "Néng bāngzhù dàjiā zài Zhōngguó gèng hǎo de xiǎngshòu měishí.",
+      "vi": "có thể giúp mọi người thưởng thức ẩm thực ở Trung Quốc tốt hơn."
+    },
+    {
+      "start": 722.3,
+      "end": 725.12,
+      "en": "If you want to see the names of all the dishes mentioned in today's episode",
+      "zh": "想看今天节目里提到的所有菜的名",
+      "pinyin": "Xiǎng kàn jīntiān jiémù lǐ tí dào de suǒyǒu cài de míng",
+      "vi": "Muốn xem tên của tất cả các món được nhắc đến trong chương trình hôm nay"
+    },
+    {
+      "start": 725.13,
+      "end": 727.39,
+      "en": "and the full dialogue transcript,",
+      "zh": "字，还有完整的对话文本，",
+      "pinyin": "zì, hái yǒu wánzhěng de duìhuà wénběn,",
+      "vi": "và toàn bộ văn bản hội thoại,"
+    },
+    {
+      "start": 727.4,
+      "end": 729.52,
+      "en": "you can check out our blog.",
+      "zh": "可以去我们的博客看看。",
+      "pinyin": "Kěyǐ qù wǒmen de bókè kàn kan.",
+      "vi": "có thể đến blog của chúng tôi xem."
+    },
+    {
+      "start": 729.53,
+      "end": 732.55,
+      "en": "Search for “每天中文博客” online",
+      "zh": "大家在网上搜索“每天中文博客”",
+      "pinyin": "Dàjiā zài wǎngshang sōusuǒ “Měitiān Zhōngwén Bókè”",
+      "vi": "Mọi người tìm kiếm “每天中文博客” trên mạng"
+    },
+    {
+      "start": 732.57,
+      "end": 733.76,
+      "en": "and you can find it.",
+      "zh": "就可以找到了。",
+      "pinyin": "jiù kěyǐ zhǎo dào le.",
+      "vi": "là có thể tìm thấy."
+    },
+    {
+      "start": 733.77,
+      "end": 736.86,
+      "en": "If you find today's content helpful,",
+      "zh": "如果大家觉得今天的内容对你有帮助，",
+      "pinyin": "Rúguǒ dàjiā juéde jīntiān de nèiróng duì nǐ yǒu bāngzhù,",
+      "vi": "Nếu mọi người thấy nội dung hôm nay có ích cho bạn,"
+    },
+    {
+      "start": 736.87,
+      "end": 738.26,
+      "en": "please give us a like,",
+      "zh": "请给我们点个赞，",
+      "pinyin": "Qǐng gěi wǒmen diǎn ge zàn,",
+      "vi": "hãy cho chúng tôi một lượt thích,"
+    },
+    {
+      "start": 738.27,
+      "end": 741.29,
+      "en": "and don't forget to share and subscribe to our channel.",
+      "zh": "也别忘了分享和订阅我们的频道。",
+      "pinyin": "Yě bié wàng le fēnxiǎng hé dìngyuè wǒmen de píndào.",
+      "vi": "và cũng đừng quên chia sẻ và đăng ký kênh của chúng tôi."
+    },
+    {
+      "start": 741.3,
+      "end": 743.59,
+      "en": "Your support is very important to us.",
+      "zh": "你们的支持对我们非常重要。",
+      "pinyin": "Nǐmen de zhīchí duì wǒmen fēicháng zhòngyào.",
+      "vi": "Sự ủng hộ của các bạn rất quan trọng với chúng tôi."
+    },
+    {
+      "start": 743.6,
+      "end": 745.66,
+      "en": "Finally, we'd like to ask everyone:",
+      "zh": "最后，我们想问问大家：",
+      "pinyin": "Zuìhòu, wǒmen xiǎng wèn wen dàjiā:",
+      "vi": "Cuối cùng, chúng tôi muốn hỏi mọi người:"
+    },
+    {
+      "start": 745.67,
+      "end": 747.99,
+      "en": "Which Chinese dish do you like most?",
+      "zh": "你最喜欢中国的哪个菜？",
+      "pinyin": "Nǐ zuì xǐhuan Zhōngguó de nǎ ge cài?",
+      "vi": "Bạn thích món ăn Trung Quốc nào nhất?"
+    },
+    {
+      "start": 748,
+      "end": 750.09,
+      "en": "Or after listening to our introduction today,",
+      "zh": "或者听完今天我们的介绍，",
+      "pinyin": "Huòzhě tīng wán jīntiān wǒmen de jièshào,",
+      "vi": "Hoặc sau khi nghe phần giới thiệu hôm nay của chúng tôi,"
+    },
+    {
+      "start": 750.1,
+      "end": 752.39,
+      "en": "which cuisine do you most want to try?",
+      "zh": "你最想试试哪个菜系呢？",
+      "pinyin": "Nǐ zuì xiǎng shìshi nǎ ge càixì ne?",
+      "vi": "bạn muốn thử hệ ẩm thực nào nhất?"
+    },
+    {
+      "start": 752.4,
+      "end": 755.06,
+      "en": "Please leave us a comment below!",
+      "zh": "请在下面的评论里给我们留言吧！",
+      "pinyin": "Qǐng zài xiàmiàn de pínglùn lǐ gěi wǒmen liúyán ba!",
+      "vi": "Hãy để lại bình luận cho chúng tôi ở phần bình luận bên dưới nhé!"
+    },
+    {
+      "start": 755.07,
+      "end": 757.99,
+      "en": "Okay, that's all for this episode of “每天中文”.",
+      "zh": "好的，这期的“每天中文”就到这里。",
+      "pinyin": "Hǎo de, zhè qī de “Měitiān Zhōngwén” jiù dào zhèlǐ.",
+      "vi": "Được rồi, tập “每天中文” này đến đây là hết."
+    },
+    {
+      "start": 758,
+      "end": 761.4,
+      "en": "Thanks for listening, see you next episode! Bye!",
+      "zh": "感谢大家的收听，我们下期再见！再见！",
+      "pinyin": "Gǎnxiè dàjiā de shōutīng, wǒmen xià qī zàijiàn! Zàijiàn!",
+      "vi": "Cảm ơn mọi người đã lắng nghe, hẹn gặp lại ở tập sau! Tạm biệt!"
+    }
+  ]
+}

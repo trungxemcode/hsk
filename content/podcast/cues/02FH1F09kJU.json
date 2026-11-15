@@ -1,0 +1,3105 @@
+{
+  "id": "02FH1F09kJU",
+  "youtubeId": "02FH1F09kJU",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 1–3 | 纸笔还是手机？Paper or Phone? How Chinese People Make To-Do Lists",
+  "durationSec": 1084,
+  "cues": [
+    {
+      "start": 7.2,
+      "end": 10.97,
+      "en": "Hello everyone! This is Daily Chinese. I'm Wang Yu.",
+      "zh": "大家好！这里是每天中文。我是王雨。",
+      "pinyin": "Dàjiā hǎo! Zhèlǐ shì Měitiān Zhōngwén. Wǒ shì Wáng Yǔ.",
+      "vi": "Xin chào mọi người! Đây là kênh Mỗi Ngày Trung Văn. Tôi là Vương Vũ."
+    },
+    {
+      "start": 11,
+      "end": 12.87,
+      "en": "Hello everyone! I'm Li Ming.",
+      "zh": "大家好！我是李明。",
+      "pinyin": "Dàjiā hǎo! Wǒ shì Lǐ Míng.",
+      "vi": "Chào mọi người! Tôi là Lý Minh."
+    },
+    {
+      "start": 12.9,
+      "end": 15.1,
+      "en": "Welcome everyone to listen to our podcast.",
+      "zh": "欢迎大家收听我们的播客。",
+      "pinyin": "Huānyíng dàjiā shōutīng wǒmen de bōkè.",
+      "vi": "Chào mừng mọi người nghe podcast của chúng tôi."
+    },
+    {
+      "start": 15.1,
+      "end": 16.67,
+      "en": "Today is Monday again.",
+      "zh": "今天又是星期一了。",
+      "pinyin": "Jīntiān yòu shì xīngqīyī le.",
+      "vi": "Hôm nay lại là thứ Hai rồi."
+    },
+    {
+      "start": 16.7,
+      "end": 20.17,
+      "en": "Yeah, a new week has begun again.",
+      "zh": "是啊，新的一周又开始了。",
+      "pinyin": "Shì a, xīn de yī zhōu yòu kāishǐ le.",
+      "vi": "Đúng vậy, một tuần mới lại bắt đầu rồi."
+    },
+    {
+      "start": 20.2,
+      "end": 25.87,
+      "en": "Every Monday morning, I feel a little... unsure what to do.",
+      "zh": "每个星期一的早上，我都觉得有一点点…不知道做什么。",
+      "pinyin": "Měi gè xīngqīyī de zǎoshang, wǒ dōu juéde yǒu yīdiǎndiǎn… bù zhīdào zuò shénme.",
+      "vi": "Mỗi sáng thứ Hai, tôi đều cảm thấy hơi… không biết phải làm gì."
+    },
+    {
+      "start": 25.87,
+      "end": 26.97,
+      "en": "What about you?",
+      "zh": "你呢？",
+      "pinyin": "Nǐ ne?",
+      "vi": "Còn bạn?"
+    },
+    {
+      "start": 27,
+      "end": 30.1,
+      "en": "Me? I'm completely the opposite.",
+      "zh": "我吗？我完全相反。",
+      "pinyin": "Wǒ ma? Wǒ wánquán xiāngfǎn.",
+      "vi": "Tôi á? Tôi hoàn toàn ngược lại."
+    },
+    {
+      "start": 30.13,
+      "end": 34.13,
+      "en": "Every Monday morning, I know exactly what I need to do.",
+      "zh": "我每个星期一早上都非常清楚要做什么。",
+      "pinyin": "Wǒ měi gè xīngqīyī zǎoshang dōu fēicháng qīngchu yào zuò shénme.",
+      "vi": "Mỗi sáng thứ Hai, tôi đều rất rõ mình cần làm gì."
+    },
+    {
+      "start": 34.17,
+      "end": 38.93,
+      "en": "Wow, really? Why? Do you have a secret?",
+      "zh": "哇，真的吗？为什么？你有什么秘密吗？",
+      "pinyin": "Wā, zhēn de ma? Wèishénme? Nǐ yǒu shénme mìmì ma?",
+      "vi": "Ồ, thật sao? Tại sao? Bạn có bí mật gì à?"
+    },
+    {
+      "start": 38.93,
+      "end": 40.5,
+      "en": "It's no secret.",
+      "zh": "不是什么秘密。",
+      "pinyin": "Bù shì shénme mìmì.",
+      "vi": "Không phải bí mật gì đâu."
+    },
+    {
+      "start": 40.53,
+      "end": 44.1,
+      "en": "I have something called a “to-do list.”",
+      "zh": "我有一个东西，它叫“待办清单”。",
+      "pinyin": "Wǒ yǒu yī gè dōngxi, tā jiào “dàibàn qīngdān”.",
+      "vi": "Tôi có một thứ, nó gọi là “danh sách việc cần làm”."
+    },
+    {
+      "start": 44.13,
+      "end": 49.63,
+      "en": "“To-do list”? That's a very interesting word.",
+      "zh": "“待办清单”？这是一个很有意思的词。",
+      "pinyin": "“Dàibàn qīngdān”? Zhè shì yī gè hěn yǒu yìsi de cí.",
+      "vi": "“Danh sách việc cần làm” à? Đây là một từ rất thú vị."
+    },
+    {
+      "start": 49.67,
+      "end": 51.9,
+      "en": "“Dài” is the “dài” in “děngdài” (to wait),",
+      "zh": "“待”是等待的“待”，",
+      "pinyin": "“Dài” shì děngdài de “dài”,",
+      "vi": "“待” là “待” trong “chờ đợi”,"
+    },
+    {
+      "start": 51.9,
+      "end": 54.6,
+      "en": "“Bàn” is the “bàn” in “bànshì” (to handle matters),",
+      "zh": "“办”是“办事”的“办”，",
+      "pinyin": "“Bàn” shì “bànshì” de “bàn”,",
+      "vi": "“办” là “办” trong “办事” (làm việc),"
+    },
+    {
+      "start": 54.6,
+      "end": 57.47,
+      "en": "“Qīngdān” just means a list.",
+      "zh": "“清单”就是一个列表。",
+      "pinyin": "“Qīngdān” jiù shì yī gè lièbiǎo.",
+      "vi": "“清单” chính là một danh sách."
+    },
+    {
+      "start": 57.5,
+      "end": 61.7,
+      "en": "So, it's “a list of things waiting to be done,”",
+      "zh": "所以，是“等待着去办的事情的列表”，",
+      "pinyin": "Suǒyǐ, shì “děngdàizhe qù bàn de shìqing de lièbiǎo”,",
+      "vi": "Vậy nên, đó là “danh sách những việc đang chờ được làm”,"
+    },
+    {
+      "start": 61.7,
+      "end": 62.4,
+      "en": "Right?",
+      "zh": "对吗？",
+      "pinyin": "Duì ma?",
+      "vi": "Đúng không?"
+    },
+    {
+      "start": 62.43,
+      "end": 65.2,
+      "en": "Exactly! You learn really fast.",
+      "zh": "完全正确！你学得真快。",
+      "pinyin": "Wánquán zhèngquè! Nǐ xué de zhēn kuài.",
+      "vi": "Hoàn toàn đúng! Bạn học nhanh thật."
+    },
+    {
+      "start": 65.23,
+      "end": 69.8,
+      "en": "My to-do list tells me what I need to do today.",
+      "zh": "我的待办清单，告诉了我今天需要做什么事情。",
+      "pinyin": "Wǒ de dàibàn qīngdān, gàosu le wǒ jīntiān xūyào zuò shénme shìqing.",
+      "vi": "Danh sách việc cần làm của tôi cho tôi biết hôm nay mình cần làm những gì."
+    },
+    {
+      "start": 69.83,
+      "end": 71.73,
+      "en": "Sounds very useful.",
+      "zh": "听起来很有用。",
+      "pinyin": "Tīng qǐlái hěn yǒuyòng.",
+      "vi": "Nghe có vẻ rất hữu ích."
+    },
+    {
+      "start": 71.73,
+      "end": 74.53,
+      "en": "I think this is a great topic.",
+      "zh": "我觉得这是一个很好的话题。",
+      "pinyin": "Wǒ juéde zhè shì yī gè hěn hǎo de huàtí.",
+      "vi": "Tôi thấy đây là một chủ đề rất hay."
+    },
+    {
+      "start": 74.6,
+      "end": 77.9,
+      "en": "Then let's talk about this today, shall we?",
+      "zh": "那我们今天就来聊一聊这个吧？",
+      "pinyin": "Nà wǒmen jīntiān jiù lái liáo yi liáo zhège ba?",
+      "vi": "Vậy hôm nay chúng ta cùng nói về chuyện này nhé?"
+    },
+    {
+      "start": 77.93,
+      "end": 79.13,
+      "en": "Good idea.",
+      "zh": "好主意。",
+      "pinyin": "Hǎo zhǔyì.",
+      "vi": "Ý hay đấy."
+    },
+    {
+      "start": 79.13,
+      "end": 84.83,
+      "en": "Today, let's talk with everyone about: what does your to-do list look like?",
+      "zh": "今天，我们就和大家一起聊一聊：你的待办清单长什么样？",
+      "pinyin": "Jīntiān, wǒmen jiù hé dàjiā yīqǐ liáo yi liáo: nǐ de dàibàn qīngdān zhǎng shénme yàng?",
+      "vi": "Hôm nay, chúng ta sẽ cùng mọi người nói về: danh sách việc cần làm của bạn trông như thế nào?"
+    },
+    {
+      "start": 84.83,
+      "end": 85.9,
+      "en": "Great.",
+      "zh": "太好了。",
+      "pinyin": "Tài hǎo le.",
+      "vi": "Tốt quá."
+    },
+    {
+      "start": 85.93,
+      "end": 89.1,
+      "en": "I really want to know what your list looks like,",
+      "zh": "我很想知道你的清单是什么样的，",
+      "pinyin": "Wǒ hěn xiǎng zhīdào nǐ de qīngdān shì shénme yàng de,",
+      "vi": "Tôi rất muốn biết danh sách của bạn trông như thế nào,"
+    },
+    {
+      "start": 89.13,
+      "end": 91.83,
+      "en": "and I also want to know, friends listening to our podcast,",
+      "zh": "也想知道听我们播客的朋友们，",
+      "pinyin": "Yě xiǎng zhīdào tīng wǒmen bōkè de péngyou men,",
+      "vi": "cũng muốn biết các bạn nghe podcast của chúng tôi,"
+    },
+    {
+      "start": 91.83,
+      "end": 93.76,
+      "en": "what your lists look like.",
+      "zh": "你们的清单是什么样的。",
+      "pinyin": "Nǐmen de qīngdān shì shénme yàng de.",
+      "vi": "danh sách của các bạn trông như thế nào."
+    },
+    {
+      "start": 93.8,
+      "end": 95.33,
+      "en": "Okay, Wang Yu.",
+      "zh": "好的，王雨。",
+      "pinyin": "Hǎo de, Wáng Yǔ.",
+      "vi": "Được, Vương Vũ."
+    },
+    {
+      "start": 95.37,
+      "end": 97.03,
+      "en": "Then let's begin.",
+      "zh": "那我们开始吧。",
+      "pinyin": "Nà wǒmen kāishǐ ba.",
+      "vi": "Vậy chúng ta bắt đầu nhé."
+    },
+    {
+      "start": 97.03,
+      "end": 100.33,
+      "en": "Let me ask you first: do you have a to-do list?",
+      "zh": "我先问你，你有待办清单吗？",
+      "pinyin": "Wǒ xiān wèn nǐ, nǐ yǒu dàibàn qīngdān ma?",
+      "vi": "Tôi hỏi bạn trước nhé, bạn có danh sách việc cần làm không?"
+    },
+    {
+      "start": 100.37,
+      "end": 103.07,
+      "en": "Do you write down the things you need to do?",
+      "zh": "你会写下自己要做的事情吗？",
+      "pinyin": "Nǐ huì xiěxià zìjǐ yào zuò de shìqing ma?",
+      "vi": "Bạn có viết ra những việc mình cần làm không?"
+    },
+    {
+      "start": 103.1,
+      "end": 106.7,
+      "en": "Hmm... that's a good question.",
+      "zh": "嗯……这是一个好问题。",
+      "pinyin": "Èn…… zhè shì yī gè hǎo wèntí.",
+      "vi": "Ừm… đây là một câu hỏi hay."
+    },
+    {
+      "start": 106.73,
+      "end": 109.7,
+      "en": "Sometimes yes, sometimes no.",
+      "zh": "有时候有，有时候没有。",
+      "pinyin": "Yǒu shíhou yǒu, yǒu shíhou méiyǒu.",
+      "vi": "Có lúc có, có lúc không."
+    },
+    {
+      "start": 109.73,
+      "end": 113.76,
+      "en": "Oh? “Sometimes yes, sometimes no,”",
+      "zh": "哦？“有时候有，有时候没有”，",
+      "pinyin": "Ó? “Yǒu shíhou yǒu, yǒu shíhou méiyǒu”,",
+      "vi": "Ồ? “Có lúc có, có lúc không”,"
+    },
+    {
+      "start": 113.8,
+      "end": 115,
+      "en": "What does that mean?",
+      "zh": "这是什么意思呢？",
+      "pinyin": "Zhè shì shénme yìsi ne?",
+      "vi": "Thế nghĩa là sao?"
+    },
+    {
+      "start": 115,
+      "end": 120,
+      "en": "It means that, unlike you, I don't write one every day.",
+      "zh": "意思就是，我不像你，不是每天都写。",
+      "pinyin": "Yìsi jiù shì, wǒ bù xiàng nǐ, bù shì měi tiān dōu xiě.",
+      "vi": "Ý là, tôi không giống bạn, không phải ngày nào cũng viết."
+    },
+    {
+      "start": 120.03,
+      "end": 124.03,
+      "en": "Maybe this week I feel there's a lot to do and I'm busy,",
+      "zh": "可能这个星期，我觉得事情很多，很忙，",
+      "pinyin": "Kěnéng zhège xīngqī, wǒ juéde shìqing hěn duō, hěn máng,",
+      "vi": "Có thể tuần này tôi thấy có nhiều việc, rất bận,"
+    },
+    {
+      "start": 124.03,
+      "end": 125.8,
+      "en": "then I'll write one.",
+      "zh": "我就会写一个。",
+      "pinyin": "Wǒ jiù huì xiě yī gè.",
+      "vi": "thì tôi sẽ viết một cái."
+    },
+    {
+      "start": 125.83,
+      "end": 129.3,
+      "en": "But if I don't feel busy, I won't write one.",
+      "zh": "但是如果我觉得不忙，我就不写了。",
+      "pinyin": "Dànshì rúguǒ wǒ juéde bù máng, wǒ jiù bù xiě le.",
+      "vi": "Nhưng nếu tôi thấy không bận, tôi sẽ không viết."
+    },
+    {
+      "start": 129.33,
+      "end": 130.56,
+      "en": "I see.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 130.6,
+      "end": 134,
+      "en": "So when you write a list, what do you use to write it?",
+      "zh": "那你写清单的时候，你用什么写？",
+      "pinyin": "Nà nǐ xiě qīngdān de shíhou, nǐ yòng shénme xiě?",
+      "vi": "Vậy khi bạn viết danh sách, bạn dùng gì để viết?"
+    },
+    {
+      "start": 134.03,
+      "end": 136.63,
+      "en": "With your phone? Or with paper and pen?",
+      "zh": "用手机吗？还是用纸和笔？",
+      "pinyin": "Yòng shǒujī ma? Háishì yòng zhǐ hé bǐ?",
+      "vi": "Dùng điện thoại à? Hay dùng giấy và bút?"
+    },
+    {
+      "start": 136.63,
+      "end": 139.1,
+      "en": "I like using paper and pen.",
+      "zh": "我喜欢用纸和笔。",
+      "pinyin": "Wǒ xǐhuan yòng zhǐ hé bǐ.",
+      "vi": "Tôi thích dùng giấy và bút."
+    },
+    {
+      "start": 139.13,
+      "end": 142.5,
+      "en": "I have a very small notebook, very cute,",
+      "zh": "我有一个很小的本子，非常可爱，",
+      "pinyin": "Wǒ yǒu yī gè hěn xiǎo de běnzi, fēicháng kě'ài,",
+      "vi": "Tôi có một cuốn sổ rất nhỏ, rất dễ thương,"
+    },
+    {
+      "start": 142.5,
+      "end": 144.57,
+      "en": "It has a kitten pattern on it.",
+      "zh": "上面有小猫的图案。",
+      "pinyin": "Shàngmiàn yǒu xiǎomāo de tú'àn.",
+      "vi": "Trên đó có hình mèo con."
+    },
+    {
+      "start": 144.6,
+      "end": 147.7,
+      "en": "I also have many pens in different colors.",
+      "zh": "我还有很多不同颜色的笔。",
+      "pinyin": "Wǒ hái yǒu hěn duō bùtóng yánsè de bǐ.",
+      "vi": "Tôi còn có nhiều bút với màu sắc khác nhau."
+    },
+    {
+      "start": 147.7,
+      "end": 151.87,
+      "en": "I feel that writing with a cute notebook and nice pens,",
+      "zh": "我觉得用可爱的本子和好看的笔写东西，",
+      "pinyin": "Wǒ juéde yòng kě'ài de běnzi hé hǎokàn de bǐ xiě dōngxi,",
+      "vi": "Tôi thấy dùng cuốn sổ dễ thương và cây bút đẹp để viết,"
+    },
+    {
+      "start": 151.87,
+      "end": 154.3,
+      "en": "my mood will improve.",
+      "zh": "心情会变好。",
+      "pinyin": "Xīnqíng huì biàn hǎo.",
+      "vi": "tâm trạng sẽ tốt hơn."
+    },
+    {
+      "start": 154.33,
+      "end": 156.8,
+      "en": "That sounds very much like your style.",
+      "zh": "这听起来很像你的风格。",
+      "pinyin": "Zhè tīng qǐlái hěn xiàng nǐ de fēnggé.",
+      "vi": "Nghe rất giống phong cách của bạn."
+    },
+    {
+      "start": 156.8,
+      "end": 159.63,
+      "en": "Writing lists in a cute notebook.",
+      "zh": "用可爱的本子写清单。",
+      "pinyin": "Yòng kě'ài de běnzi xiě qīngdān.",
+      "vi": "Dùng cuốn sổ dễ thương để viết danh sách."
+    },
+    {
+      "start": 159.63,
+      "end": 160.73,
+      "en": "Yeah!",
+      "zh": "是啊！",
+      "pinyin": "Shì a!",
+      "vi": "Đúng vậy!"
+    },
+    {
+      "start": 160.73,
+      "end": 163.86,
+      "en": "I also like to use those that can be stuck on the wall",
+      "zh": "我还喜欢用那种可以贴在墙上",
+      "pinyin": "Wǒ hái xǐhuan yòng nà zhǒng kěyǐ tiē zài qiáng shàng",
+      "vi": "Tôi còn thích dùng loại có thể dán lên tường"
+    },
+    {
+      "start": 163.87,
+      "end": 166,
+      "en": "or little notes on the computer,",
+      "zh": "或者电脑上的小纸条，",
+      "pinyin": "huòzhě diànnǎo shàng de xiǎo zhǐtiáo,",
+      "vi": "hoặc những mẩu giấy nhỏ trên máy tính,"
+    },
+    {
+      "start": 166.03,
+      "end": 167.2,
+      "en": "You know?",
+      "zh": "你知道吗？",
+      "pinyin": "Nǐ zhīdào ma?",
+      "vi": "Bạn biết không?"
+    },
+    {
+      "start": 167.23,
+      "end": 168.7,
+      "en": "They're called \"sticky notes.\"",
+      "zh": "叫“便利贴”。",
+      "pinyin": "jiào “biànlìtiē”.",
+      "vi": "gọi là “giấy nhớ”."
+    },
+    {
+      "start": 168.73,
+      "end": 170.63,
+      "en": "I know, sticky notes.",
+      "zh": "我知道，便利贴。",
+      "pinyin": "Wǒ zhīdào, biànlìtiē.",
+      "vi": "Tôi biết, giấy nhớ."
+    },
+    {
+      "start": 170.67,
+      "end": 173.53,
+      "en": "You can write important things on them,",
+      "zh": "你可以把重要的事情写在上面，",
+      "pinyin": "Nǐ kěyǐ bǎ zhòngyào de shìqing xiě zài shàngmiàn,",
+      "vi": "Bạn có thể viết những việc quan trọng lên đó,"
+    },
+    {
+      "start": 173.53,
+      "end": 176.86,
+      "en": "and then stick them somewhere you can see every day.",
+      "zh": "然后贴在一个你每天都能看到的地方。",
+      "pinyin": "ránhòu tiē zài yí ge nǐ měitiān dōu néng kàndào de dìfang.",
+      "vi": "rồi dán ở một nơi mà ngày nào bạn cũng có thể nhìn thấy."
+    },
+    {
+      "start": 176.9,
+      "end": 181.07,
+      "en": "Right! For example, today I need to go to the supermarket to buy milk,",
+      "zh": "对！比如，我今天要去超市买牛奶，",
+      "pinyin": "Duì! Bǐrú, wǒ jīntiān yào qù chāoshì mǎi niúnǎi,",
+      "vi": "Đúng! Ví dụ, hôm nay tôi phải đi siêu thị mua sữa,"
+    },
+    {
+      "start": 181.07,
+      "end": 183.6,
+      "en": "then I'll write \"buy milk,\"",
+      "zh": "我就会写“买牛奶”，",
+      "pinyin": "wǒ jiù huì xiě “mǎi niúnǎi”,",
+      "vi": "tôi sẽ viết “mua sữa”,"
+    },
+    {
+      "start": 183.63,
+      "end": 186.43,
+      "en": "and then stick this little note on the door.",
+      "zh": "然后把这个小纸条贴在门上。",
+      "pinyin": "ránhòu bǎ zhège xiǎo zhǐtiáo tiē zài mén shàng.",
+      "vi": "rồi dán mẩu giấy nhỏ này lên cửa."
+    },
+    {
+      "start": 186.47,
+      "end": 187.73,
+      "en": "This way, when I leave the house,",
+      "zh": "这样我出门的时候，",
+      "pinyin": "Zhèyàng wǒ chūmén de shíhou,",
+      "vi": "Như vậy khi tôi ra khỏi cửa,"
+    },
+    {
+      "start": 187.73,
+      "end": 190.16,
+      "en": "I'm sure to see it, so I won't forget.",
+      "zh": "就一定能看到，就不会忘记了。",
+      "pinyin": "jiù yídìng néng kàndào, jiù bú huì wàngjì le.",
+      "vi": "là nhất định sẽ nhìn thấy, sẽ không quên nữa."
+    },
+    {
+      "start": 190.2,
+      "end": 191.73,
+      "en": "That's a good method.",
+      "zh": "这是一个好办法。",
+      "pinyin": "Zhè shì yí ge hǎo bànfǎ.",
+      "vi": "Đây là một cách hay."
+    },
+    {
+      "start": 191.73,
+      "end": 194.13,
+      "en": "But what if there are a lot of things?",
+      "zh": "但是，如果有很多事情呢？",
+      "pinyin": "Dànshì, rúguǒ yǒu hěn duō shìqing ne?",
+      "vi": "Nhưng nếu có nhiều việc thì sao?"
+    },
+    {
+      "start": 194.13,
+      "end": 197.06,
+      "en": "Would you have lots and lots of sticky notes,",
+      "zh": "你会不会有很多很多便利贴，",
+      "pinyin": "Nǐ huì bu huì yǒu hěn duō hěn duō biànlìtiē,",
+      "vi": "Bạn có thể sẽ có rất nhiều rất nhiều giấy nhớ,"
+    },
+    {
+      "start": 197.1,
+      "end": 200.37,
+      "en": "stuck all over the wall?",
+      "zh": "贴得墙上到处都是？",
+      "pinyin": "tiē de qiáng shàng dàochù dōu shì?",
+      "vi": "dán đầy khắp tường không?"
+    },
+    {
+      "start": 200.4,
+      "end": 201.83,
+      "en": "Possibly!",
+      "zh": "有可能！",
+      "pinyin": "Yǒu kěnéng!",
+      "vi": "Có thể lắm!"
+    },
+    {
+      "start": 201.83,
+      "end": 203.9,
+      "en": "Sometimes next to my desk,",
+      "zh": "有时候我的桌子旁边，",
+      "pinyin": "Yǒushíhou wǒ de zhuōzi pángbiān,",
+      "vi": "Có khi bên cạnh bàn của tôi,"
+    },
+    {
+      "start": 203.9,
+      "end": 206.9,
+      "en": "it looks like a colorful tree,",
+      "zh": "看起来就像一棵五颜六色的树，",
+      "pinyin": "kàn qǐlái jiù xiàng yì kē wǔyánliùsè de shù,",
+      "vi": "trông giống như một cái cây đủ màu sắc,"
+    },
+    {
+      "start": 206.93,
+      "end": 208.9,
+      "en": "covered with sticky notes.",
+      "zh": "上面长满了便利贴。",
+      "pinyin": "shàngmiàn zhǎng mǎn le biànlìtiē.",
+      "vi": "trên đó mọc đầy giấy nhớ."
+    },
+    {
+      "start": 208.93,
+      "end": 211.73,
+      "en": "That sounds fun, but isn't it a bit messy?",
+      "zh": "听起来很有趣，但是会不会有点乱？",
+      "pinyin": "Tīng qǐlái hěn yǒuqù, dànshì huì bu huì yǒudiǎn luàn?",
+      "vi": "Nghe có vẻ thú vị, nhưng có hơi bừa bộn không?"
+    },
+    {
+      "start": 211.8,
+      "end": 213.43,
+      "en": "A little.",
+      "zh": "会有一点。",
+      "pinyin": "Huì yǒu yìdiǎn.",
+      "vi": "Cũng hơi hơi."
+    },
+    {
+      "start": 213.43,
+      "end": 217.1,
+      "en": "And sometimes, as soon as the wind blows, my sticky notes fly away.",
+      "zh": "而且有时候，风一吹，我的便利贴就飞走了。",
+      "pinyin": "Érqiě yǒushíhou, fēng yì chuī, wǒ de biànlìtiē jiù fēi zǒu le.",
+      "vi": "Và đôi khi, gió thổi một cái là giấy nhớ của tôi bay mất."
+    },
+    {
+      "start": 217.13,
+      "end": 219.83,
+      "en": "Then I don't know what I was originally going to do.",
+      "zh": "然后我就不知道我本来要做什么了。",
+      "pinyin": "ránhòu wǒ jiù bù zhīdào wǒ běnlái yào zuò shénme le.",
+      "vi": "Rồi tôi không biết ban đầu mình định làm gì nữa."
+    },
+    {
+      "start": 219.83,
+      "end": 221.1,
+      "en": "What about you, Li Ming?",
+      "zh": "那你呢，李明？",
+      "pinyin": "Nà nǐ ne, Lǐ Míng?",
+      "vi": "Còn bạn thì sao, Lý Minh?"
+    },
+    {
+      "start": 221.1,
+      "end": 223.57,
+      "en": "I know you definitely don't use sticky notes.",
+      "zh": "我知道你一定不是用便利贴的。",
+      "pinyin": "Wǒ zhīdào nǐ yídìng bú shì yòng biànlìtiē de.",
+      "vi": "Tôi biết chắc bạn không dùng giấy nhớ."
+    },
+    {
+      "start": 223.6,
+      "end": 227.6,
+      "en": "You're right. I don't use sticky notes, and I don't use paper and pen either.",
+      "zh": "你说对了。我不用便利贴，也不用纸和笔。",
+      "pinyin": "Nǐ shuō duì le. Wǒ bú yòng biànlìtiē, yě bú yòng zhǐ hé bǐ.",
+      "vi": "Bạn nói đúng rồi. Tôi không dùng giấy nhớ, cũng không dùng giấy và bút."
+    },
+    {
+      "start": 227.63,
+      "end": 229.1,
+      "en": "Then what do you use?",
+      "zh": "那你是用什么？",
+      "pinyin": "Nà nǐ shì yòng shénme?",
+      "vi": "Vậy bạn dùng gì?"
+    },
+    {
+      "start": 229.1,
+      "end": 230.3,
+      "en": "I use my phone.",
+      "zh": "我用我的手机。",
+      "pinyin": "Wǒ yòng wǒ de shǒujī.",
+      "vi": "Tôi dùng điện thoại của mình."
+    },
+    {
+      "start": 230.33,
+      "end": 233.46,
+      "en": "On my phone there's a dedicated app,",
+      "zh": "我的手机上有一个专门的 App，",
+      "pinyin": "Wǒ de shǒujī shàng yǒu yí ge zhuānmén de App,",
+      "vi": "Trên điện thoại của tôi có một App chuyên dụng,"
+    },
+    {
+      "start": 233.47,
+      "end": 236.37,
+      "en": "an application, specifically for writing to-",
+      "zh": "一个应用程序，就是用来写待",
+      "pinyin": "yí ge yìngyòng chéngxù, jiùshì yònglái xiě dài",
+      "vi": "một ứng dụng, chuyên để viết danh"
+    },
+    {
+      "start": 236.4,
+      "end": 237.87,
+      "en": "-do lists.",
+      "zh": "办清单的。",
+      "pinyin": "bàn qīngdān de.",
+      "vi": "sách cần làm."
+    },
+    {
+      "start": 237.9,
+      "end": 241.2,
+      "en": "Oh, using a phone app. Is it convenient?",
+      "zh": "哦，用手机 App 啊。方便吗？",
+      "pinyin": "O, yòng shǒujī App a. Fāngbiàn ma?",
+      "vi": "Ồ, dùng App điện thoại à. Có tiện không?"
+    },
+    {
+      "start": 241.2,
+      "end": 242.6,
+      "en": "Very convenient.",
+      "zh": "非常方便。",
+      "pinyin": "Fēicháng fāngbiàn.",
+      "vi": "Rất tiện."
+    },
+    {
+      "start": 242.6,
+      "end": 245.67,
+      "en": "Because we carry our phones every day, right?",
+      "zh": "因为我们每天都带着手机，对不对？",
+      "pinyin": "Yīnwèi wǒmen měitiān dōu dài zhe shǒujī, duì bu duì?",
+      "vi": "Vì ngày nào chúng ta cũng mang điện thoại theo, đúng không?"
+    },
+    {
+      "start": 245.7,
+      "end": 247.87,
+      "en": "So no matter where I am,",
+      "zh": "所以，无论我在哪里，",
+      "pinyin": "Suǒyǐ, wúlùn wǒ zài nǎlǐ,",
+      "vi": "Vì vậy, dù tôi ở đâu,"
+    },
+    {
+      "start": 247.87,
+      "end": 251.5,
+      "en": "I can open my phone and see what I need to do next.",
+      "zh": "我都可以打开手机，看看我接下来要做什么。",
+      "pinyin": "Wǒ dōu kěyǐ dǎkāi shǒujī, kànkan wǒ jiēxiàlái yào zuò shénme.",
+      "vi": "tôi đều có thể mở điện thoại ra, xem tiếp theo mình cần làm gì."
+    },
+    {
+      "start": 251.63,
+      "end": 254.4,
+      "en": "I can also add new tasks anytime.",
+      "zh": "我也可以随时加新的事情进去。",
+      "pinyin": "Wǒ yě kěyǐ suíshí jiā xīn de shìqing jìnqù.",
+      "vi": "Tôi cũng có thể thêm việc mới vào bất cứ lúc nào."
+    },
+    {
+      "start": 254.43,
+      "end": 256.16,
+      "en": "That's true.",
+      "zh": "这倒是。",
+      "pinyin": "Zhè dào shì.",
+      "vi": "Cũng đúng thật."
+    },
+    {
+      "start": 256.17,
+      "end": 258.3,
+      "en": "Phones are always by our side.",
+      "zh": "手机总是在我们身边。",
+      "pinyin": "Shǒujī zǒngshì zài wǒmen shēnbiān.",
+      "vi": "Điện thoại luôn ở bên cạnh chúng ta."
+    },
+    {
+      "start": 258.3,
+      "end": 260.67,
+      "en": "So what is your app like? Complicated",
+      "zh": "那你的 App 是什么样的？复杂",
+      "pinyin": "Nà nǐ de App shì shénme yàng de? Fùzá",
+      "vi": "Vậy App của bạn trông như thế nào? Phức tạp"
+    },
+    {
+      "start": 260.67,
+      "end": 261.6,
+      "en": "Is it complicated?",
+      "zh": "复杂吗？",
+      "pinyin": "Fùzá ma?",
+      "vi": "Phức tạp không?"
+    },
+    {
+      "start": 261.63,
+      "end": 263.63,
+      "en": "Not complicated, very simple.",
+      "zh": "不复杂，很简单。",
+      "pinyin": "Bù fùzá, hěn jiǎndān.",
+      "vi": "Không phức tạp, rất đơn giản."
+    },
+    {
+      "start": 263.63,
+      "end": 268.23,
+      "en": "It's just that after opening it, you can write down what you need to do.",
+      "zh": "就是打开以后，你可以写下你要做的事情。",
+      "pinyin": "Jiùshì dǎkāi yǐhòu, nǐ kěyǐ xiě xià nǐ yào zuò de shìqing.",
+      "vi": "Chỉ là sau khi mở lên, bạn có thể viết ra những việc mình cần làm."
+    },
+    {
+      "start": 268.27,
+      "end": 272.17,
+      "en": "For example, first item, second item, third item...",
+      "zh": "比如，第一件，第二件，第三件……",
+      "pinyin": "Bǐrú, dì yī jiàn, dì èr jiàn, dì sān jiàn……",
+      "vi": "Ví dụ, việc thứ nhất, việc thứ hai, việc thứ ba……"
+    },
+    {
+      "start": 272.17,
+      "end": 274.13,
+      "en": "You can keep writing.",
+      "zh": "你可以一直写下去。",
+      "pinyin": "Nǐ kěyǐ yìzhí xiě xiàqù.",
+      "vi": "Bạn có thể viết tiếp mãi."
+    },
+    {
+      "start": 274.13,
+      "end": 275.46,
+      "en": "That sounds very clear.",
+      "zh": "听起来很清楚。",
+      "pinyin": "Tīng qǐlái hěn qīngchu.",
+      "vi": "Nghe rất rõ ràng."
+    },
+    {
+      "start": 275.5,
+      "end": 277.67,
+      "en": "Yes, very clear.",
+      "zh": "是的，非常清楚。",
+      "pinyin": "Shì de, fēicháng qīngchu.",
+      "vi": "Đúng, rất rõ ràng."
+    },
+    {
+      "start": 277.7,
+      "end": 281.2,
+      "en": "And whenever I finish one task,",
+      "zh": "而且，每当我做完一件事情，",
+      "pinyin": "Érqiě, měi dāng wǒ zuò wán yī jiàn shìqing,",
+      "vi": "Hơn nữa, mỗi khi tôi làm xong một việc,"
+    },
+    {
+      "start": 281.2,
+      "end": 286.03,
+      "en": "I can put a checkmark after that item.",
+      "zh": "我就可以在那个事情后面，打一个勾。✔",
+      "pinyin": "Wǒ jiù kěyǐ zài nàge shìqing hòumiàn, dǎ yīgè gōu.",
+      "vi": "Tôi có thể đánh một dấu tích ở phía sau việc đó."
+    },
+    {
+      "start": 286.07,
+      "end": 289.64,
+      "en": "Ah, I know! Checking things off must feel great!",
+      "zh": "啊，我知道！打勾的感觉一定很好！",
+      "pinyin": "A, wǒ zhīdào! Dǎ gōu de gǎnjué yīdìng hěn hǎo!",
+      "vi": "À, tôi biết! Cảm giác đánh dấu tích chắc chắn rất tuyệt!"
+    },
+    {
+      "start": 289.67,
+      "end": 292.23,
+      "en": "Right! That feeling is great.",
+      "zh": "对！那个感觉非常好。",
+      "pinyin": "Duì! Nàge gǎnjué fēicháng hǎo.",
+      "vi": "Đúng! Cảm giác đó rất tuyệt."
+    },
+    {
+      "start": 292.23,
+      "end": 298.13,
+      "en": "Seeing the items on the list crossed off one by one, or all checked off,",
+      "zh": "看到清单上的事情一件一件被划掉，或者后面都打了勾，",
+      "pinyin": "Kàndào qīngdān shàng de shìqing yī jiàn yī jiàn bèi huádiào, huòzhě hòumiàn dōu dǎle gōu,",
+      "vi": "Khi thấy từng việc trên danh sách bị gạch đi, hoặc phía sau đều được đánh dấu tích,"
+    },
+    {
+      "start": 298.2,
+      "end": 301.67,
+      "en": "I feel today was fulfilling and that I got a lot done.",
+      "zh": "我会觉得今天过得很充实，做了很多事。",
+      "pinyin": "Wǒ huì juéde jīntiān guò de hěn chōngshí, zuòle hěn duō shì.",
+      "vi": "Tôi sẽ cảm thấy hôm nay sống rất đầy đủ, đã làm được nhiều việc."
+    },
+    {
+      "start": 301.67,
+      "end": 302.73,
+      "en": "I understand.",
+      "zh": "我理解。",
+      "pinyin": "Wǒ lǐjiě.",
+      "vi": "Tôi hiểu."
+    },
+    {
+      "start": 302.73,
+      "end": 305.03,
+      "en": "When I use my little notebook,",
+      "zh": "我用我的小本子时，",
+      "pinyin": "Wǒ yòng wǒ de xiǎo běnzi shí,",
+      "vi": "Khi tôi dùng cuốn sổ nhỏ của mình,"
+    },
+    {
+      "start": 305.03,
+      "end": 306.43,
+      "en": "after finishing a task,",
+      "zh": "做完一件事，",
+      "pinyin": "Zuò wán yī jiàn shì,",
+      "vi": "Làm xong một việc,"
+    },
+    {
+      "start": 306.43,
+      "end": 310.26,
+      "en": "I like to use a red pen to cross out that line.",
+      "zh": "我喜欢用一支红色的笔，把那行字划掉。",
+      "pinyin": "Wǒ xǐhuan yòng yī zhī hóngsè de bǐ, bǎ nà háng zì huádiào.",
+      "vi": "Tôi thích dùng một cây bút đỏ gạch bỏ dòng chữ đó."
+    },
+    {
+      "start": 310.3,
+      "end": 313.53,
+      "en": "Seeing that red line also makes me happy.",
+      "zh": "看到那条红线，我也会觉得很开心。",
+      "pinyin": "Kàndào nà tiáo hóng xiàn, wǒ yě huì juéde hěn kāixīn.",
+      "vi": "Thấy vạch đỏ đó, tôi cũng cảm thấy rất vui."
+    },
+    {
+      "start": 313.57,
+      "end": 317.53,
+      "en": "It seems we both like that feeling of “completion.”",
+      "zh": "看来我们都喜欢这种“完成”的感觉。",
+      "pinyin": "Kànlái wǒmen dōu xǐhuan zhè zhǒng “wánchéng” de gǎnjué.",
+      "vi": "Có vẻ chúng ta đều thích cảm giác “hoàn thành” này."
+    },
+    {
+      "start": 317.53,
+      "end": 319.9,
+      "en": "It’s just that the tools we use are different.",
+      "zh": "只是我们用的工具不一样。",
+      "pinyin": "Zhǐshì wǒmen yòng de gōngjù bù yīyàng.",
+      "vi": "Chỉ là công cụ chúng ta dùng không giống nhau."
+    },
+    {
+      "start": 319.93,
+      "end": 323.26,
+      "en": "You use a cute notebook and sticky notes,",
+      "zh": "你用的是可爱的本子和便利贴，",
+      "pinyin": "Nǐ yòng de shì kě'ài de běnzi hé biànlìtiē,",
+      "vi": "Bạn dùng một cuốn sổ dễ thương và giấy nhớ,"
+    },
+    {
+      "start": 323.27,
+      "end": 324.9,
+      "en": "I use a phone app.",
+      "zh": "我用的是手机 App。",
+      "pinyin": "Wǒ yòng de shì shǒujī App.",
+      "vi": "Tôi dùng ứng dụng trên điện thoại."
+    },
+    {
+      "start": 324.9,
+      "end": 329.1,
+      "en": "Right. I think your method is very modern and efficient.",
+      "zh": "对。我觉得你的方法很现代，很高效。",
+      "pinyin": "Duì. Wǒ juéde nǐ de fāngfǎ hěn xiàndài, hěn gāoxiào.",
+      "vi": "Đúng. Tôi thấy cách của bạn rất hiện đại, rất hiệu quả."
+    },
+    {
+      "start": 329.1,
+      "end": 334.37,
+      "en": "My method is more… um… more casual.",
+      "zh": "我的方法比较……嗯……比较随意。",
+      "pinyin": "Wǒ de fāngfǎ bǐjiào…… èn…… bǐjiào suíyì.",
+      "vi": "Cách của tôi thì khá… ừm… khá tùy tiện."
+    },
+    {
+      "start": 334.4,
+      "end": 336.37,
+      "en": "I think both are good.",
+      "zh": "我觉得都很好。",
+      "pinyin": "Wǒ juéde dōu hěn hǎo.",
+      "vi": "Tôi thấy đều tốt."
+    },
+    {
+      "start": 336.4,
+      "end": 340.53,
+      "en": "The most important thing is to find a method that suits you.",
+      "zh": "最重要的是找到一个适合自己的方法。",
+      "pinyin": "Zuì zhòngyào de shì zhǎodào yīgè shìhé zìjǐ de fāngfǎ.",
+      "vi": "Quan trọng nhất là tìm được một cách phù hợp với bản thân."
+    },
+    {
+      "start": 340.57,
+      "end": 344.6,
+      "en": "Some people like paper, some like phones.",
+      "zh": "有的人喜欢纸，有的人喜欢手机。",
+      "pinyin": "Yǒu de rén xǐhuan zhǐ, yǒu de rén xǐhuan shǒujī.",
+      "vi": "Có người thích giấy, có người thích điện thoại."
+    },
+    {
+      "start": 344.6,
+      "end": 348.43,
+      "en": "None is the best; only the one that suits you best.",
+      "zh": "没有哪个是最好的，只有最适合你的。",
+      "pinyin": "Méiyǒu nǎge shì zuì hǎo de, zhǐyǒu zuì shìhé nǐ de.",
+      "vi": "Không có cái nào là tốt nhất, chỉ có cái phù hợp nhất với bạn."
+    },
+    {
+      "start": 348.47,
+      "end": 352,
+      "en": "You’re right. Finding a method that suits you is the most important.",
+      "zh": "你说的对。找到适合自己的方法最重要。",
+      "pinyin": "Nǐ shuō de duì. Zhǎodào shìhé zìjǐ de fāngfǎ zuì zhòngyào.",
+      "vi": "Bạn nói đúng. Tìm được cách phù hợp với mình là quan trọng nhất."
+    },
+    {
+      "start": 352.03,
+      "end": 354.9,
+      "en": "So, Li Ming, I’m very curious.",
+      "zh": "那李明，我很好奇。",
+      "pinyin": "Nà Lǐ Míng, wǒ hěn hàoqí.",
+      "vi": "Vậy Lý Minh, tôi rất tò mò."
+    },
+    {
+      "start": 354.9,
+      "end": 357.27,
+      "en": "Since you use a to-do list every day,",
+      "zh": "既然你每天都用待办清单，",
+      "pinyin": "Jìrán nǐ měitiān dōu yòng dàibàn qīngdān,",
+      "vi": "Vì bạn ngày nào cũng dùng danh sách việc cần làm,"
+    },
+    {
+      "start": 357.33,
+      "end": 360.4,
+      "en": "So what kinds of things are usually on your list?",
+      "zh": "那你的清单上一般都有什么事情呢？",
+      "pinyin": "Nà nǐ de qīngdān shàng yībān dōu yǒu shénme shìqing ne?",
+      "vi": "Vậy trên danh sách của bạn thường có những việc gì?"
+    },
+    {
+      "start": 360.43,
+      "end": 363.33,
+      "en": "For example, what does your list look like today?",
+      "zh": "比如，今天，你的清单是什么样的？",
+      "pinyin": "Bǐrú, jīntiān, nǐ de qīngdān shì shénme yàng de?",
+      "vi": "Ví dụ, hôm nay danh sách của bạn như thế nào?"
+    },
+    {
+      "start": 363.33,
+      "end": 364.93,
+      "en": "Could you share it with us?",
+      "zh": "可以跟我们分享一下吗？",
+      "pinyin": "Kěyǐ gēn wǒmen fēnxiǎng yīxià ma?",
+      "vi": "Có thể chia sẻ với chúng tôi một chút không?"
+    },
+    {
+      "start": 364.97,
+      "end": 366.13,
+      "en": "Of course.",
+      "zh": "当然可以。",
+      "pinyin": "Dāngrán kěyǐ.",
+      "vi": "Tất nhiên có thể."
+    },
+    {
+      "start": 366.13,
+      "end": 370.26,
+      "en": "Let me look at my phone… um, found it.",
+      "zh": "我看看我的手机……嗯，找到了。",
+      "pinyin": "Wǒ kànkan wǒ de shǒujī…… èn, zhǎodào le.",
+      "vi": "Để tôi xem điện thoại… ừm, tìm thấy rồi."
+    },
+    {
+      "start": 370.3,
+      "end": 372.87,
+      "en": "My list today isn’t very long.",
+      "zh": "我今天的清单不是很长。",
+      "pinyin": "Wǒ jīntiān de qīngdān bù shì hěn cháng.",
+      "vi": "Danh sách hôm nay của tôi không dài lắm."
+    },
+    {
+      "start": 372.9,
+      "end": 374.3,
+      "en": "Okay, tell us.",
+      "zh": "好，你说说看。",
+      "pinyin": "Hǎo, nǐ shuōshuo kàn.",
+      "vi": "Được, bạn nói thử xem."
+    },
+    {
+      "start": 374.3,
+      "end": 379.17,
+      "en": "First: at nine in the morning, meet with colleagues.",
+      "zh": "第一件：早上九点，和同事们开会。",
+      "pinyin": "Dì yī jiàn: zǎoshang jiǔ diǎn, hé tóngshìmen kāihuì.",
+      "vi": "Việc thứ nhất: chín giờ sáng, họp với đồng nghiệp."
+    },
+    {
+      "start": 379.17,
+      "end": 380.97,
+      "en": "Um, a work matter.",
+      "zh": "嗯，工作上的事情。",
+      "pinyin": "Èn, gōngzuò shàng de shìqing.",
+      "vi": "Ừm, việc công việc."
+    },
+    {
+      "start": 380.97,
+      "end": 383.3,
+      "en": "Right. Second: at eleven in the morning,",
+      "zh": "对。第二件：上午十一点，",
+      "pinyin": "Duì. Dì èr jiàn: shàngwǔ shíyī diǎn,",
+      "vi": "Đúng. Việc thứ hai: mười một giờ sáng,"
+    },
+    {
+      "start": 383.3,
+      "end": 386.77,
+      "en": "call a client.",
+      "zh": "打电话给一个客户。",
+      "pinyin": "Dǎ diànhuà gěi yīgè kèhù.",
+      "vi": "gọi điện cho một khách hàng."
+    },
+    {
+      "start": 386.8,
+      "end": 388.1,
+      "en": "Also work.",
+      "zh": "也是工作。",
+      "pinyin": "Yě shì gōngzuò.",
+      "vi": "Cũng là việc công việc."
+    },
+    {
+      "start": 388.13,
+      "end": 388.96,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 388.97,
+      "end": 390.5,
+      "en": "Third:",
+      "zh": "第三件：",
+      "pinyin": "Dì sān jiàn:",
+      "vi": "Việc thứ ba:"
+    },
+    {
+      "start": 390.5,
+      "end": 394.4,
+      "en": "At half past twelve noon, have lunch with a friend.",
+      "zh": "中午十二点半，和朋友一起吃午饭。",
+      "pinyin": "Zhōngwǔ shí'èr diǎn bàn, hé péngyou yīqǐ chī wǔfàn.",
+      "vi": "Mười hai giờ rưỡi trưa, ăn trưa cùng bạn."
+    },
+    {
+      "start": 394.4,
+      "end": 397.3,
+      "en": "Oh, this isn’t work anymore; it’s life.",
+      "zh": "哦，这个不是工作了，是生活。",
+      "pinyin": "Ó, zhège bù shì gōngzuò le, shì shēnghuó.",
+      "vi": "Ồ, cái này không phải việc công việc nữa, mà là đời sống."
+    },
+    {
+      "start": 397.3,
+      "end": 398.17,
+      "en": "That’s right.",
+      "zh": "没错。",
+      "pinyin": "Méicuò.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 398.17,
+      "end": 402.4,
+      "en": "I like to write work and life matters together.",
+      "zh": "我喜欢把工作和生活的事情都写在一起。",
+      "pinyin": "Wǒ xǐhuan bǎ gōngzuò hé shēnghuó de shìqing dōu xiě zài yīqǐ.",
+      "vi": "Tôi thích viết cả việc công việc và việc đời sống chung với nhau."
+    },
+    {
+      "start": 402.43,
+      "end": 405.4,
+      "en": "That way I won’t forget any task.",
+      "zh": "这样我就不会忘记任何一件事。",
+      "pinyin": "Zhèyàng wǒ jiù bù huì wàngjì rènhé yī jiàn shì.",
+      "vi": "Như vậy tôi sẽ không quên bất kỳ việc nào."
+    },
+    {
+      "start": 405.43,
+      "end": 408.3,
+      "en": "Would you still forget to eat with a friend?",
+      "zh": "你还会忘记和朋友吃饭吗？",
+      "pinyin": "Nǐ hái huì wàngjì hé péngyou chīfàn ma?",
+      "vi": "Bạn còn có thể quên ăn cơm với bạn sao?"
+    },
+    {
+      "start": 408.33,
+      "end": 412.6,
+      "en": "When I’m really busy, it’s actually possible to forget.",
+      "zh": "如果很忙的时候，真的有可能会忘记。",
+      "pinyin": "Rúguǒ hěn máng de shíhou, zhēn de yǒu kěnéng huì wàngjì.",
+      "vi": "Khi rất bận, thật sự có khả năng sẽ quên."
+    },
+    {
+      "start": 412.63,
+      "end": 415.13,
+      "en": "So writing it down is the safest.",
+      "zh": "所以写下来最安全。",
+      "pinyin": "Suǒyǐ xiě xiàlái zuì ānquán.",
+      "vi": "Nên viết ra là an toàn nhất."
+    },
+    {
+      "start": 415.13,
+      "end": 417.16,
+      "en": "Okay, that makes sense.",
+      "zh": "好吧，有道理。",
+      "pinyin": "Hǎo ba, yǒu dàolǐ.",
+      "vi": "Được thôi, có lý."
+    },
+    {
+      "start": 417.2,
+      "end": 419.7,
+      "en": "Then what about after lunch?",
+      "zh": "那午饭之后呢？",
+      "pinyin": "Nà wǔfàn zhīhòu ne?",
+      "vi": "Vậy sau bữa trưa thì sao?"
+    },
+    {
+      "start": 419.73,
+      "end": 423.73,
+      "en": "Fourth: at three in the afternoon, go to the bank.",
+      "zh": "第四件：下午三点，去银行。",
+      "pinyin": "Dì sì jiàn: xiàwǔ sān diǎn, qù yínháng.",
+      "vi": "Việc thứ tư: ba giờ chiều, đi ngân hàng."
+    },
+    {
+      "start": 423.77,
+      "end": 425.2,
+      "en": "Go to the bank.",
+      "zh": "去银行。",
+      "pinyin": "Qù yínháng.",
+      "vi": "Đi ngân hàng."
+    },
+    {
+      "start": 425.23,
+      "end": 426.23,
+      "en": "Right.",
+      "zh": "对。",
+      "pinyin": "Duì.",
+      "vi": "Đúng."
+    },
+    {
+      "start": 426.23,
+      "end": 429.03,
+      "en": "Fifth item: 5:30 p.m.,",
+      "zh": "第五件：下午五点半，",
+      "pinyin": "Dì wǔ jiàn: xiàwǔ wǔ diǎn bàn,",
+      "vi": "Việc thứ năm: 5 giờ rưỡi chiều,"
+    },
+    {
+      "start": 429.03,
+      "end": 432.26,
+      "en": "After work, go to the supermarket to buy things.",
+      "zh": "下班后，去超市买东西。",
+      "pinyin": "Xiàbān hòu, qù chāoshì mǎi dōngxi.",
+      "vi": "Sau giờ làm, đi siêu thị mua đồ."
+    },
+    {
+      "start": 432.3,
+      "end": 435.27,
+      "en": "On my list I also wrote what to buy:",
+      "zh": "我的清单上还写了要买什么：",
+      "pinyin": "Wǒ de qīngdān shàng hái xiě le yào mǎi shénme:",
+      "vi": "Trên danh sách của tôi còn ghi cả những gì cần mua:"
+    },
+    {
+      "start": 435.27,
+      "end": 438.7,
+      "en": "Eggs, bread, and fruit.",
+      "zh": "鸡蛋、面包和水果。",
+      "pinyin": "Jīdàn, miànbāo hé shuǐguǒ.",
+      "vi": "Trứng, bánh mì và hoa quả."
+    },
+    {
+      "start": 438.73,
+      "end": 441.43,
+      "en": "Wow, you wrote it in such detail!",
+      "zh": "哇，你写得好详细！",
+      "pinyin": "Wā, nǐ xiě de hǎo xiángxì!",
+      "vi": "Chà, bạn viết chi tiết thật đấy!"
+    },
+    {
+      "start": 441.43,
+      "end": 443.76,
+      "en": "You even wrote down what to buy.",
+      "zh": "连要买什么都写了。",
+      "pinyin": "Lián yào mǎi shénme dōu xiě le.",
+      "vi": "Đến cả cần mua gì cũng ghi luôn."
+    },
+    {
+      "start": 443.8,
+      "end": 446.5,
+      "en": "Yeah. Because if I don't write it down,",
+      "zh": "是啊。因为如果不写下来，",
+      "pinyin": "Shì a. Yīnwèi rúguǒ bù xiě xiàlái,",
+      "vi": "Đúng vậy. Vì nếu không ghi ra,"
+    },
+    {
+      "start": 446.5,
+      "end": 449.37,
+      "en": "when I get to the supermarket, I'll forget what to buy.",
+      "zh": "我到了超市，就会忘记要买什么。",
+      "pinyin": "Wǒ dào le chāoshì, jiù huì wàngjì yào mǎi shénme.",
+      "vi": "Khi đến siêu thị, tôi sẽ quên mất cần mua gì."
+    },
+    {
+      "start": 449.4,
+      "end": 451.57,
+      "en": "I might end up buying lots of other things,",
+      "zh": "可能最后买了很多别的东西，",
+      "pinyin": "Kěnéng zuìhòu mǎi le hěn duō bié de dōngxi,",
+      "vi": "Có thể cuối cùng mua rất nhiều thứ khác,"
+    },
+    {
+      "start": 451.6,
+      "end": 455.3,
+      "en": "but forget to buy the most important thing—eggs.",
+      "zh": "但是最重要的鸡蛋却忘了买。",
+      "pinyin": "Dànshì zuì zhòngyào de jīdàn què wàng le mǎi.",
+      "vi": "nhưng lại quên mua thứ quan trọng nhất là trứng."
+    },
+    {
+      "start": 455.3,
+      "end": 458.1,
+      "en": "(laughs) I totally understand this!",
+      "zh": "(笑)，这个我完全理解！",
+      "pinyin": "(Xiào), zhège wǒ wánquán lǐjiě!",
+      "vi": "(Cười), cái này tôi hoàn toàn hiểu!"
+    },
+    {
+      "start": 458.1,
+      "end": 460.6,
+      "en": "This happens to me all the time.",
+      "zh": "我经常发生这种事。",
+      "pinyin": "Wǒ jīngcháng fāshēng zhè zhǒng shì.",
+      "vi": "Tôi thường gặp chuyện này."
+    },
+    {
+      "start": 460.6,
+      "end": 462.03,
+      "en": "As for me,",
+      "zh": "那我呢，",
+      "pinyin": "Nà wǒ ne,",
+      "vi": "Còn tôi thì,"
+    },
+    {
+      "start": 462.07,
+      "end": 465.84,
+      "en": "On my list, it's usually just small things.",
+      "zh": "我的清单上，一般都是一些很小的事情。",
+      "pinyin": "Wǒ de qīngdān shàng, yībān dōu shì yīxiē hěn xiǎo de shìqing.",
+      "vi": "Trên danh sách của tôi, thường toàn là mấy việc rất nhỏ."
+    },
+    {
+      "start": 465.87,
+      "end": 467.27,
+      "en": "Like what?",
+      "zh": "比如说呢？",
+      "pinyin": "Bǐrú shuō ne?",
+      "vi": "Ví dụ thì sao?"
+    },
+    {
+      "start": 467.3,
+      "end": 470.9,
+      "en": "For example, on my list I might write:",
+      "zh": "比如，我的清单上可能会写：",
+      "pinyin": "Bǐrú, wǒ de qīngdān shàng kěnéng huì xiě:",
+      "vi": "Ví dụ, trên danh sách của tôi có thể sẽ ghi:"
+    },
+    {
+      "start": 470.93,
+      "end": 473.8,
+      "en": "First, water my flowers.",
+      "zh": "第一，给我的花浇水。",
+      "pinyin": "Dì yī, gěi wǒ de huā jiāo shuǐ.",
+      "vi": "Thứ nhất, tưới nước cho hoa của tôi."
+    },
+    {
+      "start": 473.83,
+      "end": 476.96,
+      "en": "This is important. Otherwise the flowers will die.",
+      "zh": "这个很重要。不然花会死的。",
+      "pinyin": "Zhège hěn zhòngyào. Bùrán huā huì sǐ de.",
+      "vi": "Cái này rất quan trọng. Không thì hoa sẽ chết."
+    },
+    {
+      "start": 477,
+      "end": 481,
+      "en": "Right! Second, reply to friends' WeChat messages.",
+      "zh": "对！第二，回复朋友的微信。",
+      "pinyin": "Duì! Dì èr, huífù péngyou de Wēixìn.",
+      "vi": "Đúng! Thứ hai, trả lời WeChat của bạn."
+    },
+    {
+      "start": 481.03,
+      "end": 483.26,
+      "en": "Because sometimes I see the message,",
+      "zh": "因为我有时候看到了消息，",
+      "pinyin": "Yīnwèi wǒ yǒu shíhou kàn dào le xiāoxi,",
+      "vi": "Vì đôi khi tôi thấy tin nhắn,"
+    },
+    {
+      "start": 483.27,
+      "end": 486.44,
+      "en": "I don't reply at the time, and then I forget.",
+      "zh": "当时没回，后来就忘了。",
+      "pinyin": "Dāngshí méi huí, hòulái jiù wàng le.",
+      "vi": "Lúc đó không trả lời, sau đó quên luôn."
+    },
+    {
+      "start": 486.47,
+      "end": 490,
+      "en": "Third, go to the delivery station downstairs to pick up packages.",
+      "zh": "第三，去楼下的快递站拿快递。",
+      "pinyin": "Dì sān, qù lóuxià de kuàidì zhàn ná kuàidì.",
+      "vi": "Thứ ba, xuống dưới nhà lấy hàng ở trạm chuyển phát."
+    },
+    {
+      "start": 490.03,
+      "end": 493.43,
+      "en": "These are all important little things in life.",
+      "zh": "这些都是生活中很重要的小事。",
+      "pinyin": "Zhèxiē dōu shì shēnghuó zhōng hěn zhòngyào de xiǎoshì.",
+      "vi": "Đây đều là những việc nhỏ rất quan trọng trong cuộc sống."
+    },
+    {
+      "start": 493.43,
+      "end": 498.63,
+      "en": "Yeah. My list rarely has anything about work.",
+      "zh": "是啊。我的清单上很少有关于工作的事情。",
+      "pinyin": "Shì a. Wǒ de qīngdān shàng hěn shǎo yǒu guānyú gōngzuò de shìqing.",
+      "vi": "Đúng vậy. Trên danh sách của tôi hiếm khi có việc liên quan đến công việc."
+    },
+    {
+      "start": 498.7,
+      "end": 502.3,
+      "en": "Because I usually keep work matters in my head.",
+      "zh": "因为工作上的事情，我一般都记在脑子里。",
+      "pinyin": "Yīnwèi gōngzuò shàng de shìqing, wǒ yībān dōu jì zài nǎozi lǐ.",
+      "vi": "Vì những việc công việc, tôi thường nhớ trong đầu."
+    },
+    {
+      "start": 502.33,
+      "end": 503.43,
+      "en": "The lists I make,",
+      "zh": "我写的清单，",
+      "pinyin": "Wǒ xiě de qīngdān,",
+      "vi": "Những danh sách tôi viết,"
+    },
+    {
+      "start": 503.43,
+      "end": 506.43,
+      "en": "are all to remind me not to forget those lovely and",
+      "zh": "都是为了提醒我不要忘记那些可爱又",
+      "pinyin": "Dōu shì wèile tíxǐng wǒ bùyào wàngjì nàxiē kě'ài yòu",
+      "vi": "đều là để nhắc tôi đừng quên những điều đáng yêu và"
+    },
+    {
+      "start": 506.5,
+      "end": 508.83,
+      "en": "trivial little things in life.",
+      "zh": "琐碎的生活小事。",
+      "pinyin": "Suǒsuì de shēnghuó xiǎoshì.",
+      "vi": "những việc nhỏ vụn vặt trong cuộc sống."
+    },
+    {
+      "start": 508.9,
+      "end": 510.03,
+      "en": "I see.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 510.03,
+      "end": 513.96,
+      "en": "So your list is more like a life memo.",
+      "zh": "所以你的清单，更像是一个生活备忘录。",
+      "pinyin": "Suǒyǐ nǐ de qīngdān, gèng xiàng shì yī gè shēnghuó bèiwànglù.",
+      "vi": "Vậy nên danh sách của bạn giống như một cuốn sổ ghi nhớ cuộc sống hơn."
+    },
+    {
+      "start": 514,
+      "end": 518.17,
+      "en": "A memo? It's a record that helps memory, right?",
+      "zh": "备忘录？是帮助记忆的记录，对吗？",
+      "pinyin": "Bèiwànglù? Shì bāngzhù jìyì de jìlù, duì ma?",
+      "vi": "Sổ ghi nhớ? Là bản ghi giúp ghi nhớ, đúng không?"
+    },
+    {
+      "start": 518.17,
+      "end": 518.9,
+      "en": "Right.",
+      "zh": "对的。",
+      "pinyin": "Duì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 518.9,
+      "end": 522.57,
+      "en": "It's a record that reminds you not to forget things.",
+      "zh": "就是提醒你不要忘记事情的记录。",
+      "pinyin": "Jiù shì tíxǐng nǐ bùyào wàngjì shìqing de jìlù.",
+      "vi": "Tức là bản ghi để nhắc bạn đừng quên việc."
+    },
+    {
+      "start": 522.6,
+      "end": 524.47,
+      "en": "Mm, you're absolutely right.",
+      "zh": "嗯，你说的很对。",
+      "pinyin": "Ǹg, nǐ shuō de hěn duì.",
+      "vi": "Ừm, bạn nói rất đúng."
+    },
+    {
+      "start": 524.47,
+      "end": 527.67,
+      "en": "My list is my life memo.",
+      "zh": "我的清单就是我的生活备忘录。",
+      "pinyin": "Wǒ de qīngdān jiù shì wǒ de shēnghuó bèiwànglù.",
+      "vi": "Danh sách của tôi chính là sổ ghi nhớ cuộc sống của tôi."
+    },
+    {
+      "start": 527.67,
+      "end": 529.04,
+      "en": "What about you, then?",
+      "zh": "那你呢，",
+      "pinyin": "Nà nǐ ne,",
+      "vi": "Thế còn bạn thì sao,"
+    },
+    {
+      "start": 529.07,
+      "end": 530.5,
+      "en": "The things on your list,",
+      "zh": "你清单上的事情，",
+      "pinyin": "Nǐ qīngdān shàng de shìqing,",
+      "vi": "Những việc trên danh sách của bạn,"
+    },
+    {
+      "start": 530.5,
+      "end": 532.83,
+      "en": "are they only important big things,",
+      "zh": "是只有重要的大事，",
+      "pinyin": "Shì zhǐ yǒu zhòngyào de dàshì,",
+      "vi": "Có phải chỉ có những việc lớn quan trọng,"
+    },
+    {
+      "start": 532.83,
+      "end": 535.4,
+      "en": "or do you write down everything?",
+      "zh": "还是所有事你都会写？",
+      "pinyin": "Háishì suǒyǒu shì nǐ dōu huì xiě?",
+      "vi": "Hay mọi việc bạn đều sẽ ghi?"
+    },
+    {
+      "start": 535.43,
+      "end": 538.83,
+      "en": "I write down almost everything.",
+      "zh": "我差不多所有的事情都会写。",
+      "pinyin": "Wǒ chàbuduō suǒyǒu de shìqing dōu huì xiě.",
+      "vi": "Tôi gần như việc gì cũng đều sẽ ghi."
+    },
+    {
+      "start": 538.87,
+      "end": 540.9,
+      "en": "Everything? Really?",
+      "zh": "所有？真的吗？",
+      "pinyin": "Suǒyǒu? Zhēn de ma?",
+      "vi": "Tất cả? Thật sao?"
+    },
+    {
+      "start": 540.9,
+      "end": 544.83,
+      "en": "For example, things like “drink water”—would you write that down too?",
+      "zh": "比如“喝水”这种事，你也会写吗？",
+      "pinyin": "Bǐrú “hē shuǐ” zhè zhǒng shì, nǐ yě huì xiě ma?",
+      "vi": "Ví dụ chuyện “uống nước” ấy, bạn cũng sẽ ghi à?"
+    },
+    {
+      "start": 544.83,
+      "end": 546.4,
+      "en": "Sometimes I really do.",
+      "zh": "有时候真的会。",
+      "pinyin": "Yǒu shíhou zhēn de huì.",
+      "vi": "Có khi thật sự sẽ ghi."
+    },
+    {
+      "start": 546.4,
+      "end": 549.07,
+      "en": "If I know I'll be very busy today,",
+      "zh": "如果我知道今天会非常忙，",
+      "pinyin": "Rúguǒ wǒ zhīdào jīntiān huì fēicháng máng,",
+      "vi": "Nếu tôi biết hôm nay sẽ rất bận,"
+    },
+    {
+      "start": 549.1,
+      "end": 551.03,
+      "en": "I'll add to my list",
+      "zh": "我就会在清单上加上",
+      "pinyin": "Wǒ jiù huì zài qīngdān shàng jiā shàng",
+      "vi": "Tôi sẽ thêm lên danh sách"
+    },
+    {
+      "start": 551.03,
+      "end": 555.83,
+      "en": "“Drink a glass of water at ten,” “drink a glass of water at three p.m.”",
+      "zh": "“十点喝一杯水”，“下午三点喝一杯水”。",
+      "pinyin": "“Shí diǎn hē yī bēi shuǐ”, “xiàwǔ sān diǎn hē yī bēi shuǐ”.",
+      "vi": "“Mười giờ uống một cốc nước”, “ba giờ chiều uống một cốc nước”."
+    },
+    {
+      "start": 555.83,
+      "end": 558.66,
+      "en": "Oh my god! Why?",
+      "zh": "天哪！为什么？",
+      "pinyin": "Tiān na! Wèishénme?",
+      "vi": "Trời ơi! Tại sao?"
+    },
+    {
+      "start": 558.67,
+      "end": 560.6,
+      "en": "Do you need a reminder to drink water too?",
+      "zh": "喝水也需要提醒吗？",
+      "pinyin": "Hē shuǐ yě xūyào tíxǐng ma?",
+      "vi": "Uống nước cũng cần nhắc sao?"
+    },
+    {
+      "start": 560.63,
+      "end": 563.73,
+      "en": "Because once people get busy, they really do forget to drink water.",
+      "zh": "因为人一忙起来，真的会忘记喝水。",
+      "pinyin": "Yīnwèi rén yì máng qǐlái, zhēn de huì wàngjì hē shuǐ.",
+      "vi": "Vì khi người ta bận rộn lên, thật sự sẽ quên uống nước."
+    },
+    {
+      "start": 563.73,
+      "end": 565.23,
+      "en": "That’s bad for your health.",
+      "zh": "这对身体不好。",
+      "pinyin": "Zhè duì shēntǐ bù hǎo.",
+      "vi": "Điều đó không tốt cho cơ thể."
+    },
+    {
+      "start": 565.3,
+      "end": 567.9,
+      "en": "So, write it on the list,",
+      "zh": "所以，把它写在清单上，",
+      "pinyin": "Suǒyǐ, bǎ tā xiě zài qīngdān shàng,",
+      "vi": "Vì vậy, viết nó vào danh sách,"
+    },
+    {
+      "start": 567.9,
+      "end": 569.83,
+      "en": "like a friend reminding me:",
+      "zh": "就像一个朋友在提醒我：",
+      "pinyin": "Jiù xiàng yí ge péngyou zài tíxǐng wǒ:",
+      "vi": "giống như một người bạn đang nhắc tôi:"
+    },
+    {
+      "start": 569.83,
+      "end": 573.33,
+      "en": "“Hey, Li Ming, it’s time to take a break and drink some water.”",
+      "zh": "“嘿，李明，现在该休息一下，喝口水了。”",
+      "pinyin": "“Hēi, Lǐ Míng, xiànzài gāi xiūxi yíxià, hē kǒu shuǐ le.”",
+      "vi": "“Này, Lý Minh, giờ nên nghỉ ngơi một chút, uống ngụm nước rồi.”"
+    },
+    {
+      "start": 573.37,
+      "end": 576.37,
+      "en": "Wow, your to-do list,",
+      "zh": "哇，你的待办清单，",
+      "pinyin": "Wā, nǐ de dàibàn qīngdān,",
+      "vi": "Ồ, danh sách việc cần làm của bạn,"
+    },
+    {
+      "start": 576.37,
+      "end": 578.93,
+      "en": "sounds like a personal assistant of yours.",
+      "zh": "听起来像你的一个私人助理。",
+      "pinyin": "tīng qǐlái xiàng nǐ de yí ge sīrén zhùlǐ.",
+      "vi": "nghe như một trợ lý riêng của bạn vậy."
+    },
+    {
+      "start": 578.93,
+      "end": 580.86,
+      "en": "(Laughs) You could say that.",
+      "zh": "(笑)，你可以这么说。",
+      "pinyin": "(Xiào), nǐ kěyǐ zhème shuō.",
+      "vi": "(Cười), bạn có thể nói như vậy."
+    },
+    {
+      "start": 580.87,
+      "end": 583.2,
+      "en": "It helps me manage my work,",
+      "zh": "它帮助我管理我的工作，",
+      "pinyin": "Tā bāngzhù wǒ guǎnlǐ wǒ de gōngzuò,",
+      "vi": "Nó giúp tôi quản lý công việc,"
+    },
+    {
+      "start": 583.2,
+      "end": 586.2,
+      "en": "and also helps me take care of my life.",
+      "zh": "也帮助我照顾我的生活。",
+      "pinyin": "yě bāngzhù wǒ zhàogù wǒ de shēnghuó.",
+      "vi": "cũng giúp tôi chăm sóc cuộc sống của mình."
+    },
+    {
+      "start": 586.23,
+      "end": 589.8,
+      "en": "I even write on my list, “At ten p.m.,",
+      "zh": "我甚至还会在清单上写“晚上十点，",
+      "pinyin": "Wǒ shènzhì hái huì zài qīngdān shàng xiě “wǎnshang shí diǎn,",
+      "vi": "Tôi thậm chí còn viết trên danh sách “mười giờ tối,"
+    },
+    {
+      "start": 589.8,
+      "end": 592.57,
+      "en": "read for thirty minutes,” or “On the weekend,",
+      "zh": "看书三十分钟”或者“周末，",
+      "pinyin": "kàn shū sānshí fēnzhōng” huòzhě “zhōumò,",
+      "vi": "đọc sách ba mươi phút” hoặc “cuối tuần,"
+    },
+    {
+      "start": 592.6,
+      "end": 594.63,
+      "en": "do nothing and rest.”",
+      "zh": "什么都不做，休息”。",
+      "pinyin": "shénme dōu bù zuò, xiūxi”.",
+      "vi": "không làm gì cả, nghỉ ngơi”."
+    },
+    {
+      "start": 594.67,
+      "end": 597.17,
+      "en": "You even write “rest” on the list?",
+      "zh": "把“休息”也写在清单上？",
+      "pinyin": "Bǎ “xiūxi” yě xiě zài qīngdān shàng?",
+      "vi": "Viết cả “nghỉ ngơi” vào danh sách à?"
+    },
+    {
+      "start": 597.17,
+      "end": 598.47,
+      "en": "This is so interesting!",
+      "zh": "这个太有意思了！",
+      "pinyin": "Zhège tài yǒu yìsi le!",
+      "vi": "Chuyện này thú vị quá!"
+    },
+    {
+      "start": 598.5,
+      "end": 599.7,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 599.7,
+      "end": 603,
+      "en": "Because rest is as important as work.",
+      "zh": "因为休息和工作一样重要。",
+      "pinyin": "Yīnwèi xiūxi hé gōngzuò yíyàng zhòngyào.",
+      "vi": "Vì nghỉ ngơi quan trọng như công việc."
+    },
+    {
+      "start": 603,
+      "end": 607.23,
+      "en": "It’s easy for us to keep working and forget to rest.",
+      "zh": "我们很容易一直工作，忘记了休息。",
+      "pinyin": "Wǒmen hěn róngyì yìzhí gōngzuò, wàngjì le xiūxi.",
+      "vi": "Chúng ta rất dễ làm việc mãi, quên mất nghỉ ngơi."
+    },
+    {
+      "start": 607.3,
+      "end": 608.93,
+      "en": "So, I treat “rest”",
+      "zh": "所以，我把“休息”",
+      "pinyin": "Suǒyǐ, wǒ bǎ “xiūxi”",
+      "vi": "Vì thế, tôi coi “nghỉ ngơi”"
+    },
+    {
+      "start": 608.93,
+      "end": 611.5,
+      "en": "as something “that must be done,”",
+      "zh": "也当作一件“必须要做”的事情，",
+      "pinyin": "yě dàngzuò yí jiàn “bìxū yào zuò” de shìqing,",
+      "vi": "cũng là một việc “bắt buộc phải làm”,"
+    },
+    {
+      "start": 611.5,
+      "end": 613.3,
+      "en": "and write it into my list.",
+      "zh": "写进我的清单里。",
+      "pinyin": "xiě jìn wǒ de qīngdān lǐ.",
+      "vi": "viết vào danh sách của mình."
+    },
+    {
+      "start": 613.33,
+      "end": 616.6,
+      "en": "I think I’m starting to understand your idea.",
+      "zh": "我好像有点明白你的想法了。",
+      "pinyin": "Wǒ hǎoxiàng yǒudiǎn míngbai nǐ de xiǎngfǎ le.",
+      "vi": "Tôi hình như hơi hiểu ý bạn rồi."
+    },
+    {
+      "start": 616.6,
+      "end": 620,
+      "en": "Your list isn’t just a task list,",
+      "zh": "你的清单，不只是一个任务列表，",
+      "pinyin": "Nǐ de qīngdān, bù zhǐ shì yí ge rènwu lièbiǎo,",
+      "vi": "Danh sách của bạn không chỉ là một danh sách nhiệm vụ,"
+    },
+    {
+      "start": 620,
+      "end": 624.73,
+      "en": "but more like a plan for the life you hope to have.",
+      "zh": "更像是一个你希望的生活的计划。",
+      "pinyin": "gèng xiàng shì yí ge nǐ xīwàng de shēnghuó de jìhuà.",
+      "vi": "mà giống một kế hoạch cho cuộc sống mà bạn mong muốn hơn."
+    },
+    {
+      "start": 624.77,
+      "end": 626.6,
+      "en": "You put it so well, Wang Yu.",
+      "zh": "你说得太好了，王雨。",
+      "pinyin": "Nǐ shuō de tài hǎo le, Wáng Yǔ.",
+      "vi": "Bạn nói hay quá, Vương Vũ."
+    },
+    {
+      "start": 626.6,
+      "end": 629.53,
+      "en": "It’s exactly a plan I made for myself.",
+      "zh": "它就是我为自己做的一个计划。",
+      "pinyin": "Tā jiù shì wǒ wèi zìjǐ zuò de yí ge jìhuà.",
+      "vi": "Nó chính là kế hoạch tôi làm cho chính mình."
+    },
+    {
+      "start": 629.53,
+      "end": 631.16,
+      "en": "I hope my day",
+      "zh": "我希望我的一天，",
+      "pinyin": "Wǒ xīwàng wǒ de yì tiān,",
+      "vi": "Tôi mong một ngày của mình,"
+    },
+    {
+      "start": 631.17,
+      "end": 635.27,
+      "en": "has work, life, study, and rest.",
+      "zh": "有工作，有生活，有学习，也有休息。",
+      "pinyin": "yǒu gōngzuò, yǒu shēnghuó, yǒu xuéxí, yě yǒu xiūxi.",
+      "vi": "có công việc, có cuộc sống, có học tập, và cũng có nghỉ ngơi."
+    },
+    {
+      "start": 635.27,
+      "end": 637.9,
+      "en": "The list helps me achieve this balance.",
+      "zh": "清单帮助我实现这个平衡。",
+      "pinyin": "Qīngdān bāngzhù wǒ shíxiàn zhège pínghéng.",
+      "vi": "Danh sách giúp tôi đạt được sự cân bằng này."
+    },
+    {
+      "start": 637.9,
+      "end": 639.53,
+      "en": "Hearing you say that,",
+      "zh": "听你这么一说，",
+      "pinyin": "Tīng nǐ zhème yì shuō,",
+      "vi": "Nghe bạn nói vậy,"
+    },
+    {
+      "start": 639.53,
+      "end": 642.9,
+      "en": "I feel like to-do lists don’t seem that scary anymore.",
+      "zh": "我觉得待办清单好像没有那么可怕了。",
+      "pinyin": "Wǒ juéde dàibàn qīngdān hǎoxiàng méiyǒu nàme kěpà le.",
+      "vi": "tôi thấy danh sách việc cần làm hình như không đáng sợ như trước nữa."
+    },
+    {
+      "start": 642.93,
+      "end": 643.5,
+      "en": "Oh?",
+      "zh": "哦？",
+      "pinyin": "Ó?",
+      "vi": "Ồ?"
+    },
+    {
+      "start": 643.5,
+      "end": 645.97,
+      "en": "Did you use to find to-do lists very scary?",
+      "zh": "你以前觉得待办清单很可怕吗？",
+      "pinyin": "Nǐ yǐqián juéde dàibàn qīngdān hěn kěpà ma?",
+      "vi": "Trước đây bạn thấy danh sách việc cần làm rất đáng sợ à?"
+    },
+    {
+      "start": 645.97,
+      "end": 646.47,
+      "en": "Why?",
+      "zh": "为什么？",
+      "pinyin": "Wèishénme?",
+      "vi": "Tại sao?"
+    },
+    {
+      "start": 646.5,
+      "end": 648.33,
+      "en": "A little.",
+      "zh": "是有一点。",
+      "pinyin": "Shì yǒu yìdiǎn.",
+      "vi": "Cũng hơi hơi."
+    },
+    {
+      "start": 648.33,
+      "end": 651.8,
+      "en": "Because I’m someone who quite likes freedom.",
+      "zh": "因为我是一个比较喜欢自由的人。",
+      "pinyin": "Yīnwèi wǒ shì yí ge bǐjiào xǐhuan zìyóu de rén.",
+      "vi": "Vì tôi là người khá thích tự do."
+    },
+    {
+      "start": 651.83,
+      "end": 654.93,
+      "en": "If I see a really, really long list,",
+      "zh": "如果我看到一个很长很长的清单，",
+      "pinyin": "Rúguǒ wǒ kàndào yí ge hěn cháng hěn cháng de qīngdān,",
+      "vi": "Nếu tôi thấy một danh sách rất rất dài,"
+    },
+    {
+      "start": 654.93,
+      "end": 659.06,
+      "en": "with first, second, third, fourth… all the way",
+      "zh": "上面写着：第一、第二、第三、第四……一直",
+      "pinyin": "shàngmiàn xiězhe: dì yī, dì èr, dì sān, dì sì…… yìzhí",
+      "vi": "trên đó ghi: thứ nhất, thứ hai, thứ ba, thứ tư…… cứ"
+    },
+    {
+      "start": 659.07,
+      "end": 663.54,
+      "en": "to the tenth item, I’ll feel a lot of pressure.",
+      "zh": "到第十件事，我会觉得压力很大。",
+      "pinyin": "dào dì shí jiàn shì, wǒ huì juéde yālì hěn dà.",
+      "vi": "đến việc thứ mười, tôi sẽ thấy áp lực rất lớn."
+    },
+    {
+      "start": 663.6,
+      "end": 664.6,
+      "en": "A lot of pressure?",
+      "zh": "压力很大？",
+      "pinyin": "Yālì hěn dà?",
+      "vi": "Áp lực rất lớn?"
+    },
+    {
+      "start": 664.6,
+      "end": 665.2,
+      "en": "Right.",
+      "zh": "对。",
+      "pinyin": "Duì.",
+      "vi": "Đúng."
+    },
+    {
+      "start": 665.2,
+      "end": 666.93,
+      "en": "I’ll think, oh my god,",
+      "zh": "我会觉得，天哪，",
+      "pinyin": "Wǒ huì juéde, tiān na,",
+      "vi": "Tôi sẽ thấy, trời ơi,"
+    },
+    {
+      "start": 666.93,
+      "end": 669.36,
+      "en": "there’s so much to do today!",
+      "zh": "今天有这么多事情要做！",
+      "pinyin": "Jīntiān yǒu zhème duō shìqing yào zuò!",
+      "vi": "hôm nay có bao nhiêu việc phải làm!"
+    },
+    {
+      "start": 669.37,
+      "end": 671.17,
+      "en": "I feel like a robot,",
+      "zh": "我好像一个机器人，",
+      "pinyin": "Wǒ hǎoxiàng yí ge jīqìrén,",
+      "vi": "Tôi giống như một cái máy,"
+    },
+    {
+      "start": 671.17,
+      "end": 673.4,
+      "en": "having to follow this list,",
+      "zh": "必须按照这个单子，",
+      "pinyin": "bìxū ànzhào zhège dānzi,",
+      "vi": "phải làm theo cái danh sách này,"
+    },
+    {
+      "start": 673.4,
+      "end": 675.67,
+      "en": "and complete things one by one.",
+      "zh": "一件一件地去完成。",
+      "pinyin": "yí jiàn yí jiàn de qù wánchéng.",
+      "vi": "lần lượt hoàn thành từng việc một."
+    },
+    {
+      "start": 675.67,
+      "end": 678,
+      "en": "What if I can’t finish?",
+      "zh": "如果我做不完怎么办？",
+      "pinyin": "Rúguǒ wǒ zuò bù wán zěnme bàn?",
+      "vi": "Nếu tôi làm không hết thì sao?"
+    },
+    {
+      "start": 678.03,
+      "end": 679,
+      "en": "I get it.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 679,
+      "end": 682.73,
+      "en": "You’re afraid of being controlled by the list and losing your freedom.",
+      "zh": "你害怕被清单控制住，失去了自由。",
+      "pinyin": "Nǐ hàipà bèi qīngdān kòngzhì zhù, shīqù le zìyóu.",
+      "vi": "Bạn sợ bị danh sách kiểm soát, mất đi tự do."
+    },
+    {
+      "start": 682.73,
+      "end": 684.36,
+      "en": "Yes! That’s exactly how it feels!",
+      "zh": "是的！就是这个感觉！",
+      "pinyin": "Shì de! Jiù shì zhège gǎnjué!",
+      "vi": "Đúng! Chính là cảm giác đó!"
+    },
+    {
+      "start": 684.43,
+      "end": 686.63,
+      "en": "And if by evening,",
+      "zh": "而且，如果到了晚上，",
+      "pinyin": "Érqiě, rúguǒ dào le wǎnshang,",
+      "vi": "Và nếu đến tối,"
+    },
+    {
+      "start": 686.63,
+      "end": 689.93,
+      "en": "I find there are still three things on the list I haven't done,",
+      "zh": "我发现清单上还有三件事情没有做，",
+      "pinyin": "Wǒ fāxiàn qīngdān shàng hái yǒu sān jiàn shìqing méiyǒu zuò,",
+      "vi": "tôi phát hiện trên danh sách vẫn còn ba việc chưa làm,"
+    },
+    {
+      "start": 689.93,
+      "end": 691.16,
+      "en": "I'll feel like a failure,",
+      "zh": "我会觉得很失败，",
+      "pinyin": "Wǒ huì juéde hěn shībài,",
+      "vi": "tôi sẽ cảm thấy rất thất bại,"
+    },
+    {
+      "start": 691.17,
+      "end": 692.73,
+      "en": "and feel unhappy.",
+      "zh": "会不开心。",
+      "pinyin": "huì bù kāixīn.",
+      "vi": "sẽ không vui."
+    },
+    {
+      "start": 692.73,
+      "end": 695.76,
+      "en": "Feel I wasn't good enough today.",
+      "zh": "觉得自己今天不够好。",
+      "pinyin": "Juéde zìjǐ jīntiān bù gòu hǎo.",
+      "vi": "Cảm thấy hôm nay mình không đủ tốt."
+    },
+    {
+      "start": 695.77,
+      "end": 697.14,
+      "en": "Do you ever feel that way?",
+      "zh": "你会这样吗？",
+      "pinyin": "Nǐ huì zhèyàng ma?",
+      "vi": "Bạn có bị như vậy không?"
+    },
+    {
+      "start": 697.17,
+      "end": 700.03,
+      "en": "Mm, that's a very good question.",
+      "zh": "嗯，这是一个非常好的问题。",
+      "pinyin": "Ǹg, zhè shì yí ge fēicháng hǎo de wèntí.",
+      "vi": "Ừm, đây là một câu hỏi rất hay."
+    },
+    {
+      "start": 700.03,
+      "end": 702.23,
+      "en": "I used to feel this way too.",
+      "zh": "我以前也有过这种感觉。",
+      "pinyin": "Wǒ yǐqián yě yǒu guo zhè zhǒng gǎnjué.",
+      "vi": "Trước đây tôi cũng từng có cảm giác này."
+    },
+    {
+      "start": 702.23,
+      "end": 705.23,
+      "en": "Especially when I first started using to-do lists.",
+      "zh": "特别是刚开始用待办清单的时候。",
+      "pinyin": "Tèbié shì gāng kāishǐ yòng dàibàn qīngdān de shíhou.",
+      "vi": "Đặc biệt là khi mới bắt đầu dùng danh sách việc cần làm."
+    },
+    {
+      "start": 705.3,
+      "end": 707.2,
+      "en": "Really? You've felt that too?",
+      "zh": "真的吗？你也有过？",
+      "pinyin": "Zhēn de ma? Nǐ yě yǒu guo?",
+      "vi": "Thật à? Bạn cũng từng như vậy?"
+    },
+    {
+      "start": 707.2,
+      "end": 708.27,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 708.27,
+      "end": 712.47,
+      "en": "At first, I also liked to make my lists very long,",
+      "zh": "我一开始，也喜欢把清单列得非常长，",
+      "pinyin": "Wǒ yì kāishǐ, yě xǐhuan bǎ qīngdān liè de fēicháng cháng,",
+      "vi": "Ban đầu, tôi cũng thích lập danh sách rất dài,"
+    },
+    {
+      "start": 712.47,
+      "end": 714.67,
+      "en": "writing down twenty-something things.",
+      "zh": "写上二十几件事情。",
+      "pinyin": "xiě shàng èrshí jǐ jiàn shìqing.",
+      "vi": "viết lên hơn hai mươi việc."
+    },
+    {
+      "start": 714.7,
+      "end": 718,
+      "en": "I thought the more I wrote, the more I would do.",
+      "zh": "我以为写得越多，我做得就越多。",
+      "pinyin": "Wǒ yǐwéi xiě de yuè duō, wǒ zuò de jiù yuè duō.",
+      "vi": "Tôi tưởng viết càng nhiều thì mình làm được càng nhiều."
+    },
+    {
+      "start": 718,
+      "end": 719.93,
+      "en": "But the result was just like you said:",
+      "zh": "但结果就像你说的那样，",
+      "pinyin": "Dàn jiéguǒ jiù xiàng nǐ shuō de nàyàng,",
+      "vi": "Nhưng kết quả đúng như bạn nói,"
+    },
+    {
+      "start": 719.97,
+      "end": 723.7,
+      "en": "by evening, there were always many things left undone.",
+      "zh": "到了晚上，总是有很多事情做不完。",
+      "pinyin": "Dào le wǎnshang, zǒngshì yǒu hěn duō shìqing zuò bù wán.",
+      "vi": "đến tối, luôn có nhiều việc không làm hết."
+    },
+    {
+      "start": 723.7,
+      "end": 726.07,
+      "en": "Then I would feel very anxious,",
+      "zh": "然后我就会觉得很焦虑，",
+      "pinyin": "Ránhòu wǒ jiù huì juéde hěn jiāolǜ,",
+      "vi": "Sau đó tôi sẽ cảm thấy rất lo lắng,"
+    },
+    {
+      "start": 726.07,
+      "end": 726.97,
+      "en": "and very stressed.",
+      "zh": "很有压力。",
+      "pinyin": "hěn yǒu yālì.",
+      "vi": "rất áp lực."
+    },
+    {
+      "start": 726.97,
+      "end": 728.14,
+      "en": "Right! That's exactly anxiety!",
+      "zh": "对！就是焦虑！",
+      "pinyin": "Duì! Jiù shì jiāolǜ!",
+      "vi": "Đúng! Chính là lo lắng!"
+    },
+    {
+      "start": 728.17,
+      "end": 731.13,
+      "en": "Then I'm curious, how did you solve this problem later?",
+      "zh": "那我很好奇，后来你是怎么解决这个问题的？",
+      "pinyin": "Nà wǒ hěn hàoqí, hòulái nǐ shì zěnme jiějué zhège wèntí de?",
+      "vi": "Vậy tôi rất tò mò, sau đó bạn đã giải quyết vấn đề này thế nào?"
+    },
+    {
+      "start": 731.13,
+      "end": 733.26,
+      "en": "Later I understood a principle.",
+      "zh": "后来我明白了一个道理。",
+      "pinyin": "Hòulái wǒ míngbai le yí ge dàolǐ.",
+      "vi": "Sau đó tôi hiểu ra một đạo lý."
+    },
+    {
+      "start": 733.27,
+      "end": 736.67,
+      "en": "A to-do list isn't meant to put pressure on us;",
+      "zh": "待办清单不是用来给我们压力的，",
+      "pinyin": "Dàibàn qīngdān bú shì yònglái gěi wǒmen yālì de,",
+      "vi": "Danh sách việc cần làm không phải để tạo áp lực cho chúng ta,"
+    },
+    {
+      "start": 736.7,
+      "end": 738.53,
+      "en": "it's there to help us.",
+      "zh": "它是来帮助我们的。",
+      "pinyin": "tā shì lái bāngzhù wǒmen de.",
+      "vi": "nó là để giúp đỡ chúng ta."
+    },
+    {
+      "start": 738.53,
+      "end": 740.96,
+      "en": "So I changed my method.",
+      "zh": "所以，我改变了我的方法。",
+      "pinyin": "Suǒyǐ, wǒ gǎibiàn le wǒ de fāngfǎ.",
+      "vi": "Vì vậy, tôi đã thay đổi cách làm của mình."
+    },
+    {
+      "start": 741,
+      "end": 741.97,
+      "en": "What method?",
+      "zh": "什么方法？",
+      "pinyin": "Shénme fāngfǎ?",
+      "vi": "Cách gì?"
+    },
+    {
+      "start": 741.97,
+      "end": 745.13,
+      "en": "If I feel there might be a lot to do today,",
+      "zh": "如果我觉得今天的事情可能很多，",
+      "pinyin": "Rúguǒ wǒ juéde jīntiān de shìqing kěnéng hěn duō,",
+      "vi": "Nếu tôi cảm thấy hôm nay có thể có nhiều việc,"
+    },
+    {
+      "start": 745.13,
+      "end": 748.2,
+      "en": "and I feel a bit unsure where to start,",
+      "zh": "让我觉得有点不知道从哪里开始，",
+      "pinyin": "ràng wǒ juéde yǒudiǎn bù zhīdào cóng nǎlǐ kāishǐ,",
+      "vi": "khiến tôi cảm thấy hơi không biết bắt đầu từ đâu,"
+    },
+    {
+      "start": 748.2,
+      "end": 751.37,
+      "en": "then I won't write a long list.",
+      "zh": "那我就不会写一个长长的清单。",
+      "pinyin": "nà wǒ jiù bú huì xiě yí ge chángcháng de qīngdān.",
+      "vi": "thì tôi sẽ không viết một danh sách dài dằng dặc."
+    },
+    {
+      "start": 751.4,
+      "end": 755.3,
+      "en": "I'll only write down the three most important things today.",
+      "zh": "我只会写下今天最重要的三件事情。",
+      "pinyin": "Wǒ zhǐ huì xiě xià jīntiān zuì zhòngyào de sān jiàn shìqing.",
+      "vi": "Tôi chỉ viết ra ba việc quan trọng nhất hôm nay."
+    },
+    {
+      "start": 755.37,
+      "end": 756.4,
+      "en": "Only three things?",
+      "zh": "只写三件？",
+      "pinyin": "Zhǐ xiě sān jiàn?",
+      "vi": "Chỉ viết ba việc?"
+    },
+    {
+      "start": 756.43,
+      "end": 758.5,
+      "en": "Yes, only three things.",
+      "zh": "对，只写三件。",
+      "pinyin": "Duì, zhǐ xiě sān jiàn.",
+      "vi": "Đúng, chỉ viết ba việc."
+    },
+    {
+      "start": 758.5,
+      "end": 761.17,
+      "en": "Because a day's time is limited,",
+      "zh": "因为一天的时间是有限的，",
+      "pinyin": "Yīnwèi yì tiān de shíjiān shì yǒuxiàn de,",
+      "vi": "Vì thời gian một ngày là có hạn,"
+    },
+    {
+      "start": 761.17,
+      "end": 763.23,
+      "en": "and our energy is limited too.",
+      "zh": "我们的精力也是有限的。",
+      "pinyin": "wǒmen de jīnglì yě shì yǒuxiàn de.",
+      "vi": "sức lực của chúng ta cũng có hạn."
+    },
+    {
+      "start": 763.23,
+      "end": 766.16,
+      "en": "We can't possibly finish everything.",
+      "zh": "我们不可能做完所有的事情。",
+      "pinyin": "Wǒmen bù kěnéng zuò wán suǒyǒu de shìqing.",
+      "vi": "Chúng ta không thể làm hết mọi việc."
+    },
+    {
+      "start": 766.17,
+      "end": 770.2,
+      "en": "But if we can finish the three most important things,",
+      "zh": "但是，如果我们能做完最重要的三件事，",
+      "pinyin": "Dànshì, rúguǒ wǒmen néng zuò wán zuì zhòngyào de sān jiàn shì,",
+      "vi": "Nhưng nếu chúng ta làm xong ba việc quan trọng nhất,"
+    },
+    {
+      "start": 770.2,
+      "end": 774.03,
+      "en": "then today has been a very accomplished day.",
+      "zh": "那今天就是非常有成就的一天了。",
+      "pinyin": "nà jīntiān jiù shì fēicháng yǒu chéngjiù de yì tiān le.",
+      "vi": "thì hôm nay đã là một ngày rất thành tựu rồi."
+    },
+    {
+      "start": 774.07,
+      "end": 776.07,
+      "en": "That's a great idea!",
+      "zh": "这个想法很好！",
+      "pinyin": "Zhège xiǎngfǎ hěn hǎo!",
+      "vi": "Ý tưởng này rất hay!"
+    },
+    {
+      "start": 776.07,
+      "end": 778.47,
+      "en": "Focus only on the most important things.",
+      "zh": "只关注最重要的事。",
+      "pinyin": "Zhǐ guānzhù zuì zhòngyào de shì.",
+      "vi": "Chỉ tập trung vào việc quan trọng nhất."
+    },
+    {
+      "start": 778.47,
+      "end": 781.57,
+      "en": "That way, the list looks very short,",
+      "zh": "这样一来，清单看起来就很短，",
+      "pinyin": "Zhèyàng yì lái, qīngdān kàn qǐlái jiù hěn duǎn,",
+      "vi": "Như vậy, danh sách trông sẽ rất ngắn,"
+    },
+    {
+      "start": 781.57,
+      "end": 783.3,
+      "en": "and the pressure is much less.",
+      "zh": "压力就小了很多。",
+      "pinyin": "yālì jiù xiǎo le hěn duō.",
+      "vi": "áp lực sẽ giảm đi rất nhiều."
+    },
+    {
+      "start": 783.3,
+      "end": 784.03,
+      "en": "Exactly.",
+      "zh": "没错。",
+      "pinyin": "Méicuò.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 784.03,
+      "end": 786.83,
+      "en": "After you finish these three most important things,",
+      "zh": "等你做完了这三件最重要的事，",
+      "pinyin": "Děng nǐ zuò wán le zhè sān jiàn zuì zhòngyào de shì,",
+      "vi": "Khi bạn làm xong ba việc quan trọng nhất này,"
+    },
+    {
+      "start": 786.83,
+      "end": 789.5,
+      "en": "if you still have time and energy,",
+      "zh": "如果你还有时间和精力，",
+      "pinyin": "rúguǒ nǐ hái yǒu shíjiān hé jīnglì,",
+      "vi": "nếu bạn vẫn còn thời gian và sức lực,"
+    },
+    {
+      "start": 789.6,
+      "end": 792.43,
+      "en": "of course you can go do other things.",
+      "zh": "你当然可以再去做别的事情。",
+      "pinyin": "nǐ dāngrán kěyǐ zài qù zuò bié de shìqing.",
+      "vi": "đương nhiên bạn có thể làm tiếp việc khác."
+    },
+    {
+      "start": 792.43,
+      "end": 795.93,
+      "en": "But even if you only do these three,",
+      "zh": "但是，就算你只做了这三件，",
+      "pinyin": "Dànshì, jiùsuàn nǐ zhǐ zuò le zhè sān jiàn,",
+      "vi": "Nhưng kể cả bạn chỉ làm ba việc này,"
+    },
+    {
+      "start": 795.93,
+      "end": 799.13,
+      "en": "you can tell yourself: 'Today was great!'",
+      "zh": "你也可以告诉自己：“今天很棒！”",
+      "pinyin": "nǐ yě kěyǐ gàosu zìjǐ: “Jīntiān hěn bàng!”",
+      "vi": "bạn cũng có thể tự nhủ: “Hôm nay rất tuyệt!”"
+    },
+    {
+      "start": 799.17,
+      "end": 800.87,
+      "en": "I like this method.",
+      "zh": "我喜欢这个方法。",
+      "pinyin": "Wǒ xǐhuan zhège fāngfǎ.",
+      "vi": "Tôi thích cách này."
+    },
+    {
+      "start": 800.87,
+      "end": 802.93,
+      "en": "It sounds very friendly.",
+      "zh": "听起来非常友好。",
+      "pinyin": "Tīng qǐlái fēicháng yǒuhǎo.",
+      "vi": "Nghe rất thân thiện."
+    },
+    {
+      "start": 802.93,
+      "end": 805.06,
+      "en": "Finish the most important things first,",
+      "zh": "先完成最重要的，",
+      "pinyin": "Xiān wánchéng zuì zhòngyào de,",
+      "vi": "Hoàn thành việc quan trọng nhất trước,"
+    },
+    {
+      "start": 805.07,
+      "end": 807.17,
+      "en": "and for the rest, do them if you can,",
+      "zh": "其他的，能做就做，",
+      "pinyin": "qítā de, néng zuò jiù zuò,",
+      "vi": "còn những việc khác, làm được thì làm,"
+    },
+    {
+      "start": 807.17,
+      "end": 808.74,
+      "en": "It's okay if you can't do it.",
+      "zh": "不能做也没关系。",
+      "pinyin": "Bù néng zuò yě méi guānxi.",
+      "vi": "Không làm được cũng không sao."
+    },
+    {
+      "start": 808.77,
+      "end": 810.37,
+      "en": "That's exactly the point.",
+      "zh": "就是这个意思。",
+      "pinyin": "Jiù shì zhège yìsi.",
+      "vi": "Đúng là ý đó."
+    },
+    {
+      "start": 810.37,
+      "end": 814.73,
+      "en": "I think a to-do list is like a map.",
+      "zh": "我觉得，待办清单就像一张地图。",
+      "pinyin": "Wǒ juéde, dàibàn qīngdān jiù xiàng yī zhāng dìtú.",
+      "vi": "Tôi nghĩ danh sách việc cần làm giống như một tấm bản đồ."
+    },
+    {
+      "start": 814.73,
+      "end": 818.1,
+      "en": "A map? That's a fresh metaphor.",
+      "zh": "地图？这个比喻很新鲜。",
+      "pinyin": "Dìtú? Zhège bǐyù hěn xīnxiān.",
+      "vi": "Bản đồ? Cách so sánh này thật mới lạ."
+    },
+    {
+      "start": 818.1,
+      "end": 821.67,
+      "en": "Think about it: if you want to go to an unfamiliar place,",
+      "zh": "你想想，如果你要去一个陌生的地方，",
+      "pinyin": "Nǐ xiǎngxiang, rúguǒ nǐ yào qù yīgè mòshēng de dìfang,",
+      "vi": "Bạn thử nghĩ xem, nếu bạn muốn đến một nơi xa lạ,"
+    },
+    {
+      "start": 821.67,
+      "end": 824,
+      "en": "don't you need a map?",
+      "zh": "你是不是需要一张地图？",
+      "pinyin": "Nǐ shì bù shì xūyào yī zhāng dìtú?",
+      "vi": "Bạn có phải cần một tấm bản đồ không?"
+    },
+    {
+      "start": 824,
+      "end": 827.17,
+      "en": "The map will tell you that you should first go east,",
+      "zh": "地图会告诉你，你应该先往东走，",
+      "pinyin": "Dìtú huì gàosu nǐ, nǐ yīnggāi xiān wǎng dōng zǒu,",
+      "vi": "Bản đồ sẽ cho bạn biết bạn nên đi về phía đông trước,"
+    },
+    {
+      "start": 827.17,
+      "end": 828.57,
+      "en": "then go north,",
+      "zh": "再往北走，",
+      "pinyin": "zài wǎng běi zǒu,",
+      "vi": "rồi đi về phía bắc,"
+    },
+    {
+      "start": 828.57,
+      "end": 831.6,
+      "en": "and then you'll find the place you want to go.",
+      "zh": "然后你就能找到你想去的地方。",
+      "pinyin": "ránhòu nǐ jiù néng zhǎodào nǐ xiǎng qù de dìfang.",
+      "vi": "sau đó bạn sẽ tìm được nơi bạn muốn đến."
+    },
+    {
+      "start": 831.6,
+      "end": 832.83,
+      "en": "That's right.",
+      "zh": "是这样的。",
+      "pinyin": "Shì zhèyàng de.",
+      "vi": "Đúng là như vậy."
+    },
+    {
+      "start": 832.83,
+      "end": 835.96,
+      "en": "Without a map, I'd definitely get lost.",
+      "zh": "没有地图，我肯定会迷路。",
+      "pinyin": "Méiyǒu dìtú, wǒ kěndìng huì mílù.",
+      "vi": "Không có bản đồ, tôi chắc chắn sẽ bị lạc."
+    },
+    {
+      "start": 836,
+      "end": 839.73,
+      "en": "A to-do list is the map of our daily life.",
+      "zh": "待办清单就是我们每天生活的地图。",
+      "pinyin": "Dàibàn qīngdān jiù shì wǒmen měitiān shēnghuó de dìtú.",
+      "vi": "Danh sách việc cần làm chính là tấm bản đồ trong cuộc sống hằng ngày của chúng ta."
+    },
+    {
+      "start": 839.73,
+      "end": 843.83,
+      "en": "It tells us where today's most important destination is.",
+      "zh": "它告诉我们，今天最重要的目的地是哪里。",
+      "pinyin": "Tā gàosu wǒmen, jīntiān zuì zhòngyào de mùdìdì shì nǎlǐ.",
+      "vi": "Nó cho chúng ta biết đích đến quan trọng nhất hôm nay là ở đâu."
+    },
+    {
+      "start": 843.83,
+      "end": 846.63,
+      "en": "It helps us see the direction clearly.",
+      "zh": "它帮助我们看清楚方向。",
+      "pinyin": "Tā bāngzhù wǒmen kàn qīngchu fāngxiàng.",
+      "vi": "Nó giúp chúng ta nhìn rõ phương hướng."
+    },
+    {
+      "start": 846.63,
+      "end": 850.16,
+      "en": "For example, you can use 'first... then...'",
+      "zh": "比如，你可以用“先……再……”",
+      "pinyin": "Bǐrú, nǐ kěyǐ yòng “xiān... zài...”",
+      "vi": "Ví dụ, bạn có thể dùng “trước... rồi...”"
+    },
+    {
+      "start": 850.17,
+      "end": 852.7,
+      "en": "this structure to arrange your tasks.",
+      "zh": "这个结构来安排你的事情。",
+      "pinyin": "zhège jiégòu lái ānpái nǐ de shìqing.",
+      "vi": "cấu trúc này để sắp xếp công việc của mình."
+    },
+    {
+      "start": 852.83,
+      "end": 853.96,
+      "en": "'First... then...'?",
+      "zh": "“先……再……”？",
+      "pinyin": "“Xiān... zài...”?",
+      "vi": "“Trước... rồi...”?"
+    },
+    {
+      "start": 853.97,
+      "end": 854.63,
+      "en": "Right.",
+      "zh": "对。",
+      "pinyin": "Duì.",
+      "vi": "Đúng."
+    },
+    {
+      "start": 854.63,
+      "end": 859.53,
+      "en": "For example, my list says I'll have a meeting first, then eat lunch.",
+      "zh": "比如我的清单上写着，我先开会，再吃午饭。",
+      "pinyin": "Bǐrú wǒ de qīngdān shàng xiězhe, wǒ xiān kāihuì, zài chī wǔfàn.",
+      "vi": "Ví dụ trên danh sách của tôi ghi là: tôi họp trước, rồi ăn trưa."
+    },
+    {
+      "start": 859.53,
+      "end": 861.53,
+      "en": "This order is important.",
+      "zh": "这个顺序很重要。",
+      "pinyin": "Zhège shùnxù hěn zhòngyào.",
+      "vi": "Thứ tự này rất quan trọng."
+    },
+    {
+      "start": 861.53,
+      "end": 866.13,
+      "en": "If I eat lunch first, I might miss an important meeting.",
+      "zh": "如果我先吃午饭，可能就会错过重要的会议。",
+      "pinyin": "Rúguǒ wǒ xiān chī wǔfàn, kěnéng jiù huì cuòguò zhòngyào de huìyì.",
+      "vi": "Nếu tôi ăn trưa trước, có thể sẽ bỏ lỡ cuộc họp quan trọng."
+    },
+    {
+      "start": 866.13,
+      "end": 868.76,
+      "en": "This 'first... then...' order,",
+      "zh": "这个“先……再……”的顺序，",
+      "pinyin": "Zhège “xiān... zài...” de shùnxù,",
+      "vi": "Thứ tự “trước... rồi...” này,"
+    },
+    {
+      "start": 868.77,
+      "end": 870.53,
+      "en": "is the route on the map.",
+      "zh": "就是地图上的路线。",
+      "pinyin": "jiù shì dìtú shàng de lùxiàn.",
+      "vi": "chính là tuyến đường trên bản đồ."
+    },
+    {
+      "start": 870.53,
+      "end": 872.13,
+      "en": "I see.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 872.13,
+      "end": 874.26,
+      "en": "It helps you plan the route,",
+      "zh": "它帮你规划好路线，",
+      "pinyin": "Tā bāng nǐ guīhuà hǎo lùxiàn,",
+      "vi": "Nó giúp bạn quy hoạch tuyến đường,"
+    },
+    {
+      "start": 874.27,
+      "end": 876.3,
+      "en": "tells you what to do first,",
+      "zh": "告诉你第一步做什么，",
+      "pinyin": "gàosu nǐ dì yī bù zuò shénme,",
+      "vi": "cho bạn biết bước đầu tiên làm gì,"
+    },
+    {
+      "start": 876.3,
+      "end": 877.87,
+      "en": "what to do second,",
+      "zh": "第二步做什么，",
+      "pinyin": "dì èr bù zuò shénme,",
+      "vi": "bước thứ hai làm gì,"
+    },
+    {
+      "start": 877.87,
+      "end": 882.23,
+      "en": "so you won't go in circles or take the wrong path.",
+      "zh": "这样就不会在原地打转，或者走错路。",
+      "pinyin": "zhèyàng jiù bù huì zài yuándì dǎzhuàn, huòzhě zǒu cuò lù.",
+      "vi": "như vậy sẽ không bị loanh quanh tại chỗ hoặc đi sai đường."
+    },
+    {
+      "start": 882.23,
+      "end": 883.3,
+      "en": "Exactly right.",
+      "zh": "完全正确。",
+      "pinyin": "Wánquán zhèngquè.",
+      "vi": "Hoàn toàn chính xác."
+    },
+    {
+      "start": 883.3,
+      "end": 886.3,
+      "en": "So it's not here to pressure you,",
+      "zh": "所以，它不是来给你压力的，",
+      "pinyin": "Suǒyǐ, tā bù shì lái gěi nǐ yālì de,",
+      "vi": "Vì vậy, nó không phải đến để tạo áp lực cho bạn,"
+    },
+    {
+      "start": 886.3,
+      "end": 887.93,
+      "en": "it's your guide,",
+      "zh": "它是你的向导，",
+      "pinyin": "tā shì nǐ de xiàngdǎo,",
+      "vi": "nó là người dẫn đường của bạn,"
+    },
+    {
+      "start": 887.93,
+      "end": 889.6,
+      "en": "it's here to help you,",
+      "zh": "是来帮助你，",
+      "pinyin": "shì lái bāngzhù nǐ,",
+      "vi": "là đến để giúp bạn,"
+    },
+    {
+      "start": 889.6,
+      "end": 893,
+      "en": "and make your day easier and clearer.",
+      "zh": "让你的一天过得更轻松，更清楚。",
+      "pinyin": "ràng nǐ de yī tiān guò de gèng qīngsōng, gèng qīngchu.",
+      "vi": "giúp một ngày của bạn trôi qua nhẹ nhàng và rõ ràng hơn."
+    },
+    {
+      "start": 893.03,
+      "end": 895.9,
+      "en": "Hmm... with that explanation,",
+      "zh": "嗯……你这么一解释，",
+      "pinyin": "Èn... nǐ zhème yī jiěshì,",
+      "vi": "Ừm... bạn giải thích như vậy,"
+    },
+    {
+      "start": 895.9,
+      "end": 900.37,
+      "en": "I seem to have really changed my view of 'to-do lists.'",
+      "zh": "我好像真的改变了对“待办清单”的看法。",
+      "pinyin": "wǒ hǎoxiàng zhēn de gǎibiàn le duì “dàibàn qīngdān” de kànfǎ.",
+      "vi": "tôi dường như thật sự đã thay đổi cách nhìn về “danh sách việc cần làm”."
+    },
+    {
+      "start": 900.4,
+      "end": 902.77,
+      "en": "It's not a scary boss,",
+      "zh": "它不是一个可怕的老板，",
+      "pinyin": "Tā bù shì yīgè kěpà de lǎobǎn,",
+      "vi": "Nó không phải là một ông chủ đáng sợ,"
+    },
+    {
+      "start": 902.77,
+      "end": 905.17,
+      "en": "but a friendly guide.",
+      "zh": "而是一个友好的向导。",
+      "pinyin": "ér shì yīgè yǒuhǎo de xiàngdǎo.",
+      "vi": "mà là một người dẫn đường thân thiện."
+    },
+    {
+      "start": 905.17,
+      "end": 908.53,
+      "en": "(Laughs) That metaphor is great too! A friendly guide.",
+      "zh": "(笑)，这个比喻也很好！友好的向导。",
+      "pinyin": "(Xiào), zhège bǐyù yě hěn hǎo! Yǒuhǎo de xiàngdǎo.",
+      "vi": "(Cười) Cách so sánh này cũng hay lắm! Người dẫn đường thân thiện."
+    },
+    {
+      "start": 908.53,
+      "end": 910.3,
+      "en": "Okay, Li Ming.",
+      "zh": "好了，李明。",
+      "pinyin": "Hǎo le, Lǐ Míng.",
+      "vi": "Được rồi, Lý Minh."
+    },
+    {
+      "start": 910.3,
+      "end": 914.67,
+      "en": "Today we talked a lot about 'to-do lists.'",
+      "zh": "今天我们聊了很多关于“待办清单”的话题。",
+      "pinyin": "Jīntiān wǒmen liáo le hěn duō guānyú “dàibàn qīngdān” de huàtí.",
+      "vi": "Hôm nay chúng ta đã nói rất nhiều về chủ đề “danh sách việc cần làm”."
+    },
+    {
+      "start": 914.67,
+      "end": 918.87,
+      "en": "from what tools to use to write them, to what's on the list,",
+      "zh": "从用什么工具写，到清单上有什么，",
+      "pinyin": "Cóng yòng shénme gōngjù xiě, dào qīngdān shàng yǒu shénme,",
+      "vi": "Từ việc dùng công cụ gì để viết, đến việc trên danh sách có gì,"
+    },
+    {
+      "start": 918.87,
+      "end": 922.3,
+      "en": "and then to its benefits and the pressure it may bring.",
+      "zh": "再到它的好处和可能带来的压力。",
+      "pinyin": "zài dào tā de hǎochu hé kěnéng dàilái de yālì.",
+      "vi": "rồi đến lợi ích của nó và áp lực mà nó có thể mang lại."
+    },
+    {
+      "start": 922.33,
+      "end": 924.2,
+      "en": "I feel I've learned a lot.",
+      "zh": "我觉得我学到了很多。",
+      "pinyin": "Wǒ juéde wǒ xué dào le hěn duō.",
+      "vi": "Tôi cảm thấy mình đã học được rất nhiều."
+    },
+    {
+      "start": 924.23,
+      "end": 925.96,
+      "en": "I enjoyed chatting too.",
+      "zh": "我也聊得很开心。",
+      "pinyin": "Wǒ yě liáo de hěn kāixīn.",
+      "vi": "Tôi cũng trò chuyện rất vui."
+    },
+    {
+      "start": 925.97,
+      "end": 927.8,
+      "en": "I hope our discussion can also",
+      "zh": "希望我们的讨论也能",
+      "pinyin": "Xīwàng wǒmen de tǎolùn yě néng",
+      "vi": "Hy vọng cuộc thảo luận của chúng ta cũng có thể"
+    },
+    {
+      "start": 927.8,
+      "end": 930.83,
+      "en": "give some inspiration to our listeners.",
+      "zh": "给正在收听的朋友们一些启发。",
+      "pinyin": "gěi zhèngzài shōutīng de péngyoumen yīxiē qǐfā.",
+      "vi": "mang lại chút gợi mở cho những bạn đang nghe."
+    },
+    {
+      "start": 930.83,
+      "end": 934.2,
+      "en": "Let's briefly review some key points from today.",
+      "zh": "我们来简单回顾一下今天的一些重点吧。",
+      "pinyin": "Wǒmen lái jiǎndān huígù yīxià jīntiān de yīxiē zhòngdiǎn ba.",
+      "vi": "Chúng ta hãy cùng điểm lại ngắn gọn một số điểm chính hôm nay nhé."
+    },
+    {
+      "start": 934.23,
+      "end": 935.4,
+      "en": "Sure.",
+      "zh": "好啊。",
+      "pinyin": "Hǎo a.",
+      "vi": "Được thôi."
+    },
+    {
+      "start": 935.43,
+      "end": 938.16,
+      "en": "First, we talked about the core word:",
+      "zh": "首先，我们聊到了核心的词语：",
+      "pinyin": "Shǒuxiān, wǒmen liáo dào le héxīn de cíyǔ:",
+      "vi": "Đầu tiên, chúng ta đã nói đến từ cốt lõi:"
+    },
+    {
+      "start": 938.17,
+      "end": 939.83,
+      "en": "to-do list.",
+      "zh": "待办清单。",
+      "pinyin": "dàibàn qīngdān.",
+      "vi": "danh sách việc cần làm."
+    },
+    {
+      "start": 939.83,
+      "end": 943.6,
+      "en": "That is, a list of things you plan to do.",
+      "zh": "也就是你计划要做的事情的列表。",
+      "pinyin": "Yě jiùshì nǐ jìhuà yào zuò de shìqing de lièbiǎo.",
+      "vi": "Tức là danh sách những việc bạn dự định làm."
+    },
+    {
+      "start": 943.6,
+      "end": 945.47,
+      "en": "Right, a to-do list.",
+      "zh": "对，待办清单。",
+      "pinyin": "Duì, dàibàn qīngdān.",
+      "vi": "Đúng, danh sách việc cần làm."
+    },
+    {
+      "start": 945.47,
+      "end": 948.07,
+      "en": "Then we talked about tools for writing lists.",
+      "zh": "然后，我们说了写清单的工具。",
+      "pinyin": "Ránhòu, wǒmen shuō le xiě qīngdān de gōngjù.",
+      "vi": "Sau đó, chúng ta đã nói về công cụ để viết danh sách."
+    },
+    {
+      "start": 948.07,
+      "end": 949.8,
+      "en": "You can be like Wang Yu,",
+      "zh": "你可以像王雨一样，",
+      "pinyin": "Nǐ kěyǐ xiàng Wáng Yǔ yíyàng,",
+      "vi": "Bạn có thể giống như Vương Vũ,"
+    },
+    {
+      "start": 949.83,
+      "end": 951.26,
+      "en": "using a notebook and a pen,",
+      "zh": "用本子和笔，",
+      "pinyin": "Yòng běnzi hé bǐ,",
+      "vi": "dùng sổ và bút,"
+    },
+    {
+      "start": 951.27,
+      "end": 953.4,
+      "en": "or use cute sticky notes.",
+      "zh": "或者用可爱的便利贴。",
+      "pinyin": "Huòzhě yòng kě'ài de biànlìtiē.",
+      "vi": "hoặc dùng giấy nhớ dễ thương."
+    },
+    {
+      "start": 953.4,
+      "end": 956.77,
+      "en": "You can also, like me, use an app on your phone.",
+      "zh": "也可以像我一样，用手机上的 App。",
+      "pinyin": "Yě kěyǐ xiàng wǒ yíyàng, yòng shǒujī shàng de App.",
+      "vi": "Cũng có thể giống như tôi, dùng ứng dụng trên điện thoại."
+    },
+    {
+      "start": 956.77,
+      "end": 960.87,
+      "en": "Yes, finding tools that suit you is very important.",
+      "zh": "是的，找到适合自己的工具很重要。",
+      "pinyin": "Shì de, zhǎodào shìhé zìjǐ de gōngjù hěn zhòngyào.",
+      "vi": "Đúng vậy, tìm được công cụ phù hợp với bản thân rất quan trọng."
+    },
+    {
+      "start": 960.9,
+      "end": 963.53,
+      "en": "We also talked about what goes on the list,",
+      "zh": "我们还聊了清单上的内容，",
+      "pinyin": "Wǒmen hái liáo le qīngdān shàng de nèiróng,",
+      "vi": "Chúng ta còn nói về nội dung trên danh sách,"
+    },
+    {
+      "start": 963.53,
+      "end": 964.9,
+      "en": "it can be work,",
+      "zh": "可以是工作，",
+      "pinyin": "Kěyǐ shì gōngzuò,",
+      "vi": "có thể là công việc,"
+    },
+    {
+      "start": 964.9,
+      "end": 967.33,
+      "en": "or various things in life,",
+      "zh": "也可以是生活中的各种事情，",
+      "pinyin": "Yě kěyǐ shì shēnghuó zhōng de gèzhǒng shìqing,",
+      "vi": "cũng có thể là đủ thứ việc trong cuộc sống,"
+    },
+    {
+      "start": 967.33,
+      "end": 972.2,
+      "en": "such as shopping, making calls, exercising, or even resting.",
+      "zh": "比如买东西、打电话、运动，甚至休息。",
+      "pinyin": "Bǐrú mǎi dōngxi, dǎ diànhuà, yùndòng, shènzhì xiūxi.",
+      "vi": "ví dụ như mua đồ, gọi điện, tập thể dục, thậm chí là nghỉ ngơi."
+    },
+    {
+      "start": 972.2,
+      "end": 975.63,
+      "en": "Don’t forget to put “rest” on the list too!",
+      "zh": "不要忘记把“休息”也放进清单里！",
+      "pinyin": "Bú yào wàngjì bǎ “xiūxi” yě fàng jìn qīngdān lǐ!",
+      "vi": "Đừng quên đưa cả “nghỉ ngơi” vào danh sách nhé!"
+    },
+    {
+      "start": 975.63,
+      "end": 976.53,
+      "en": "Exactly.",
+      "zh": "没错。",
+      "pinyin": "Méi cuò.",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 976.53,
+      "end": 980.3,
+      "en": "Finally, we talked about a very important point.",
+      "zh": "最后，我们谈到了一个很重要的观点。",
+      "pinyin": "Zuìhòu, wǒmen tán dào le yí ge hěn zhòngyào de guāndiǎn.",
+      "vi": "Cuối cùng, chúng ta đã nói đến một quan điểm rất quan trọng."
+    },
+    {
+      "start": 980.3,
+      "end": 983.5,
+      "en": "If the list makes you feel very stressed,",
+      "zh": "如果清单让你觉得压力很大，",
+      "pinyin": "Rúguǒ qīngdān ràng nǐ juéde yālì hěn dà,",
+      "vi": "Nếu danh sách khiến bạn cảm thấy áp lực rất lớn,"
+    },
+    {
+      "start": 983.5,
+      "end": 988.2,
+      "en": "You can try writing down only the three most important things each day.",
+      "zh": "你可以试着每天只写下三件最重要的事情。",
+      "pinyin": "Nǐ kěyǐ shìzhe měitiān zhǐ xiě xià sān jiàn zuì zhòngyào de shìqing.",
+      "vi": "Bạn có thể thử mỗi ngày chỉ viết ra ba việc quan trọng nhất."
+    },
+    {
+      "start": 988.2,
+      "end": 991.17,
+      "en": "We also mentioned a very useful sentence pattern: what to do first, and what to do next.",
+      "zh": "我们还说了一个很有用的句型：先做什么，再做什么。",
+      "pinyin": "Wǒmen hái shuō le yí ge hěn yǒuyòng de jùxíng: xiān zuò shénme, zài zuò shénme.",
+      "vi": "Chúng ta còn nói về một mẫu câu rất hữu ích: việc gì làm trước, việc gì làm sau."
+    },
+    {
+      "start": 991.17,
+      "end": 993.9,
+      "en": "What to do first, and what to do next.",
+      "zh": "先做什么，再做什么。",
+      "pinyin": "Xiān zuò shénme, zài zuò shénme.",
+      "vi": "Việc gì làm trước, việc gì làm sau."
+    },
+    {
+      "start": 993.9,
+      "end": 996.2,
+      "en": "Use it to organize your plans.",
+      "zh": "用它来安排你的计划。",
+      "pinyin": "Yòng tā lái ānpái nǐ de jìhuà.",
+      "vi": "Dùng nó để sắp xếp kế hoạch của bạn."
+    },
+    {
+      "start": 996.2,
+      "end": 999,
+      "en": "Mm, this summary is really good.",
+      "zh": "嗯，这个总结得真好。",
+      "pinyin": "Ńg, zhège zǒngjié de zhēn hǎo.",
+      "vi": "Ừm, phần tổng kết này thật hay."
+    },
+    {
+      "start": 999,
+      "end": 1000.43,
+      "en": "Clear and simple.",
+      "zh": "清楚又简单。",
+      "pinyin": "Qīngchu yòu jiǎndān.",
+      "vi": "Rõ ràng lại đơn giản."
+    },
+    {
+      "start": 1000.43,
+      "end": 1002.56,
+      "en": "I hope it’s helpful to everyone.",
+      "zh": "希望对大家有帮助。",
+      "pinyin": "Xīwàng duì dàjiā yǒu bāngzhù.",
+      "vi": "Hy vọng sẽ có ích cho mọi người."
+    },
+    {
+      "start": 1002.63,
+      "end": 1005.16,
+      "en": "So, friends listening to our podcast,",
+      "zh": "那么，听我们播客的朋友们，",
+      "pinyin": "Nàme, tīng wǒmen bōkè de péngyoumen,",
+      "vi": "Vậy thì, các bạn nghe podcast của chúng tôi,"
+    },
+    {
+      "start": 1005.17,
+      "end": 1006.97,
+      "en": "now it’s your turn.",
+      "zh": "现在轮到你们了。",
+      "pinyin": "Xiànzài lúndào nǐmen le.",
+      "vi": "bây giờ đến lượt các bạn rồi."
+    },
+    {
+      "start": 1006.97,
+      "end": 1009.93,
+      "en": "Do you have the habit of writing to-do lists?",
+      "zh": "你们有写待办清单的习惯吗？",
+      "pinyin": "Nǐmen yǒu xiě dàibàn qīngdān de xíguàn ma?",
+      "vi": "Các bạn có thói quen viết danh sách việc cần làm không?"
+    },
+    {
+      "start": 1009.93,
+      "end": 1013.5,
+      "en": "Are you on Team Paper-and-Pen or Team Phone?",
+      "zh": "你们是“纸笔派”还是“手机派”呢？",
+      "pinyin": "Nǐmen shì “zhǐbǐ pài” háishì “shǒujī pài” ne?",
+      "vi": "Các bạn thuộc “phái giấy bút” hay “phái điện thoại”?"
+    },
+    {
+      "start": 1013.53,
+      "end": 1014.93,
+      "en": "On your lists,",
+      "zh": "你们的清单上，",
+      "pinyin": "Nǐmen de qīngdān shàng,",
+      "vi": "Trên danh sách của các bạn,"
+    },
+    {
+      "start": 1014.93,
+      "end": 1017.73,
+      "en": "what fun things do you usually write?",
+      "zh": "一般都会写些什么有趣的事情？",
+      "pinyin": "Yìbān dōu huì xiě xiē shénme yǒuqù de shìqing?",
+      "vi": "thường sẽ viết những việc thú vị nào?"
+    },
+    {
+      "start": 1017.77,
+      "end": 1020.37,
+      "en": "We really look forward to seeing your shares.",
+      "zh": "我们非常期待看到你们的分享。",
+      "pinyin": "Wǒmen fēicháng qīdài kàndào nǐmen de fēnxiǎng.",
+      "vi": "Chúng tôi rất mong được thấy những chia sẻ của các bạn."
+    },
+    {
+      "start": 1020.37,
+      "end": 1022.93,
+      "en": "Everyone is welcome to leave us a comment in the comment section,",
+      "zh": "欢迎大家在评论区给我们留言，",
+      "pinyin": "Huānyíng dàjiā zài pínglùnqū gěi wǒmen liúyán,",
+      "vi": "Hoan nghênh mọi người để lại bình luận cho chúng tôi trong phần bình luận,"
+    },
+    {
+      "start": 1022.93,
+      "end": 1024.83,
+      "en": "and tell us your story.",
+      "zh": "告诉我们你的故事。",
+      "pinyin": "Gàosu wǒmen nǐ de gùshi.",
+      "vi": "kể cho chúng tôi câu chuyện của bạn."
+    },
+    {
+      "start": 1024.83,
+      "end": 1027.8,
+      "en": "Okay, that’s all for today’s episode.",
+      "zh": "好的，今天我们的节目就到这里了。",
+      "pinyin": "Hǎo de, jīntiān wǒmen de jiémù jiù dào zhèlǐ le.",
+      "vi": "Được rồi, chương trình hôm nay của chúng ta đến đây là hết."
+    },
+    {
+      "start": 1027.8,
+      "end": 1029.3,
+      "en": "Thank you everyone for listening.",
+      "zh": "感谢大家的收听。",
+      "pinyin": "Gǎnxiè dàjiā de shōutīng.",
+      "vi": "Cảm ơn mọi người đã lắng nghe."
+    },
+    {
+      "start": 1029.33,
+      "end": 1032.7,
+      "en": "This is Daily Chinese, see you next time.",
+      "zh": "这里是每天中文，我们下次再见。",
+      "pinyin": "Zhèlǐ shì Měitiān Zhōngwén, wǒmen xià cì zàijiàn.",
+      "vi": "Đây là Mỗi Ngày Tiếng Trung, hẹn gặp lại các bạn lần sau."
+    },
+    {
+      "start": 1032.7,
+      "end": 1033.53,
+      "en": "Bye-bye!",
+      "zh": "拜拜！",
+      "pinyin": "Bāibāi!",
+      "vi": "Tạm biệt!"
+    },
+    {
+      "start": 1033.53,
+      "end": 1034.16,
+      "en": "Bye-bye!",
+      "zh": "拜拜！",
+      "pinyin": "Bāibāi!",
+      "vi": "Tạm biệt!"
+    }
+  ]
+}

@@ -1,0 +1,3929 @@
+{
+  "id": "k9KCJsU0DKU",
+  "youtubeId": "k9KCJsU0DKU",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "HSK 3-5 | What to Prepare Before a Job Interview? A Discussion on \"Interview Preparation\" | Chine...",
+  "durationSec": 1296,
+  "cues": [
+    {
+      "start": 6.4,
+      "end": 7.19,
+      "en": "Hello everyone!",
+      "zh": "大家好！",
+      "pinyin": "Dàjiā hǎo!",
+      "vi": "Xin chào mọi người!"
+    },
+    {
+      "start": 7.2,
+      "end": 10.92,
+      "en": "Welcome to a new episode of “Daily Chinese.”",
+      "zh": "欢迎收听新一期的“每天中文”。",
+      "pinyin": "Huānyíng shōutīng xīn yī qī de “Měitiān Zhōngwén”.",
+      "vi": "Chào mừng bạn đến với tập mới của “Mỗi Ngày Tiếng Trung”."
+    },
+    {
+      "start": 10.93,
+      "end": 12.52,
+      "en": "I'm Wang Yu.",
+      "zh": "我是王雨。",
+      "pinyin": "Wǒ shì Wáng Yǔ.",
+      "vi": "Tôi là Wang Yu."
+    },
+    {
+      "start": 12.53,
+      "end": 14.55,
+      "en": "Hello everyone, I'm Li Ming.",
+      "zh": "大家好，我是李明。",
+      "pinyin": "Dàjiā hǎo, wǒ shì Lǐ Míng.",
+      "vi": "Xin chào mọi người, tôi là Li Ming."
+    },
+    {
+      "start": 14.57,
+      "end": 17.39,
+      "en": "Wang Yu, you look in a particularly good mood today,",
+      "zh": "王雨，你今天看起来心情特别好，",
+      "pinyin": "Wáng Yǔ, nǐ jīntiān kàn qǐlái xīnqíng tèbié hǎo,",
+      "vi": "Wang Yu, hôm nay trông tâm trạng bạn đặc biệt tốt,"
+    },
+    {
+      "start": 17.4,
+      "end": 19.12,
+      "en": "Is there something happy going on?",
+      "zh": "有什么开心的事吗？",
+      "pinyin": "Yǒu shénme kāixīn de shì ma?",
+      "vi": "Có chuyện gì vui à?"
+    },
+    {
+      "start": 19.13,
+      "end": 20.79,
+      "en": "(laughs), really?",
+      "zh": "(笑)，是吗？",
+      "pinyin": "(Xiào), shì ma?",
+      "vi": "(Cười) Vậy à?"
+    },
+    {
+      "start": 20.8,
+      "end": 22.89,
+      "en": "Maybe because this morning I",
+      "zh": "可能是因为我今天早上",
+      "pinyin": "Kěnéng shì yīnwèi wǒ jīntiān zǎoshang",
+      "vi": "Có lẽ là vì sáng nay tôi"
+    },
+    {
+      "start": 22.9,
+      "end": 25.66,
+      "en": "had a really delicious cup of coffee.",
+      "zh": "喝到了一杯特别好喝的咖啡。",
+      "pinyin": "Hē dào le yī bēi tèbié hǎohē de kāfēi.",
+      "vi": "đã uống được một ly cà phê đặc biệt ngon."
+    },
+    {
+      "start": 25.67,
+      "end": 28.66,
+      "en": "I feel full of energy all day.",
+      "zh": "感觉一整天都充满了能量。",
+      "pinyin": "Gǎnjué yī zhěng tiān dōu chōngmǎn le néngliàng.",
+      "vi": "cảm thấy cả ngày tràn đầy năng lượng."
+    },
+    {
+      "start": 28.67,
+      "end": 29.79,
+      "en": "Li Ming, what about you?",
+      "zh": "李明，你呢？",
+      "pinyin": "Lǐ Míng, nǐ ne?",
+      "vi": "Li Ming, còn bạn?"
+    },
+    {
+      "start": 29.8,
+      "end": 30.99,
+      "en": "How have you been lately?",
+      "zh": "最近怎么样？",
+      "pinyin": "Zuìjìn zěnmeyàng?",
+      "vi": "Dạo này thế nào?"
+    },
+    {
+      "start": 31,
+      "end": 32.26,
+      "en": "I'm still the same,",
+      "zh": "我还是老样子，",
+      "pinyin": "Wǒ hái shì lǎo yàngzi,",
+      "vi": "Tôi vẫn như cũ,"
+    },
+    {
+      "start": 32.27,
+      "end": 36.39,
+      "en": "Pretty good. Seeing you so energetic, I feel inspired too.",
+      "zh": "挺好的。看到你这么有活力，我也感觉被感染了。",
+      "pinyin": "Tǐng hǎo de. Kàndào nǐ zhème yǒu huólì, wǒ yě gǎnjué bèi gǎnrǎn le.",
+      "vi": "Khá tốt. Thấy bạn tràn đầy sức sống như vậy, tôi cũng thấy được truyền cảm hứng."
+    },
+    {
+      "start": 36.4,
+      "end": 37.09,
+      "en": "And I also hope",
+      "zh": "也希望",
+      "pinyin": "Yě xīwàng",
+      "vi": "Cũng mong"
+    },
+    {
+      "start": 37.1,
+      "end": 39.59,
+      "en": "every friend listening to our show,",
+      "zh": "正在收听我们节目的每一位朋友，",
+      "pinyin": "Zhèngzài shōutīng wǒmen jiémù de měi yī wèi péngyǒu,",
+      "vi": "mỗi một người bạn đang nghe chương trình của chúng tôi,"
+    },
+    {
+      "start": 39.6,
+      "end": 42.96,
+      "en": "whether it's morning, afternoon, or evening where you are,",
+      "zh": "不管你现在是早上、下午还是晚上，",
+      "pinyin": "Bùguǎn nǐ xiànzài shì zǎoshang, xiàwǔ háishì wǎnshang,",
+      "vi": "dù bây giờ bạn đang là buổi sáng, buổi chiều hay buổi tối,"
+    },
+    {
+      "start": 42.97,
+      "end": 44.53,
+      "en": "will all have a good mood.",
+      "zh": "都有一个好心情。",
+      "pinyin": "Dōu yǒu yī gè hǎo xīnqíng.",
+      "vi": "đều có một tâm trạng tốt."
+    },
+    {
+      "start": 44.53,
+      "end": 46.45,
+      "en": "Right! “Daily Chinese”",
+      "zh": "对！“每天中文”",
+      "pinyin": "Duì! “Měitiān Zhōngwén”",
+      "vi": "Đúng vậy! “Mỗi Ngày Tiếng Trung”"
+    },
+    {
+      "start": 46.47,
+      "end": 49.93,
+      "en": "is a podcast made for Chinese learners.",
+      "zh": "是一个为中文学习者准备的播客。",
+      "pinyin": "Shì yī gè wèi Zhōngwén xuéxízhě zhǔnbèi de bōkè.",
+      "vi": "là một podcast dành cho người học tiếng Trung."
+    },
+    {
+      "start": 49.93,
+      "end": 53.09,
+      "en": "We hope that through relaxed, natural conversations,",
+      "zh": "我们希望通过轻松、自然的对话，",
+      "pinyin": "Wǒmen xīwàng tōngguò qīngsōng, zìrán de duìhuà,",
+      "vi": "Chúng tôi hy vọng thông qua những cuộc trò chuyện nhẹ nhàng, tự nhiên,"
+    },
+    {
+      "start": 53.1,
+      "end": 55.66,
+      "en": "to help everyone in real-life situations",
+      "zh": "帮助大家在真实的环境中",
+      "pinyin": "Bāngzhù dàjiā zài zhēnshí de huánjìng zhōng",
+      "vi": "giúp mọi người trong môi trường thực tế"
+    },
+    {
+      "start": 55.67,
+      "end": 60.13,
+      "en": "improve Chinese listening and discover more interesting topics.",
+      "zh": "提高中文听力，了解更多有意思的话题。",
+      "pinyin": "Tígāo Zhōngwén tīnglì, liǎojiě gèng duō yǒu yìsi de huàtí.",
+      "vi": "nâng cao khả năng nghe tiếng Trung, hiểu thêm nhiều chủ đề thú vị."
+    },
+    {
+      "start": 60.13,
+      "end": 62.59,
+      "en": "Yes, the topics we discuss cover everything,",
+      "zh": "是的，我们聊的话题包罗万象，",
+      "pinyin": "Shì de, wǒmen liáo de huàtí bāoluówànxiàng,",
+      "vi": "Đúng vậy, những chủ đề chúng tôi nói đến bao la muôn màu,"
+    },
+    {
+      "start": 62.6,
+      "end": 65.09,
+      "en": "from daily life to cultural phenomena,",
+      "zh": "从日常生活到文化现象，",
+      "pinyin": "Cóng rìcháng shēnghuó dào wénhuà xiànxiàng,",
+      "vi": "từ đời sống thường ngày đến hiện tượng văn hóa,"
+    },
+    {
+      "start": 65.1,
+      "end": 69.46,
+      "en": "hoping to make you feel like you're chatting with two Chinese friends.",
+      "zh": "希望能让你感觉就像在和两个中国朋友聊天一样。",
+      "pinyin": "Xīwàng néng ràng nǐ gǎnjué jiù xiàng zài hé liǎng gè Zhōngguó péngyǒu liáotiān yīyàng.",
+      "vi": "hy vọng có thể khiến bạn cảm thấy như đang trò chuyện với hai người bạn Trung Quốc."
+    },
+    {
+      "start": 69.47,
+      "end": 70.36,
+      "en": "Speaking of which,",
+      "zh": "说到这里，",
+      "pinyin": "Shuō dào zhèlǐ,",
+      "vi": "Nói đến đây,"
+    },
+    {
+      "start": 70.37,
+      "end": 73.06,
+      "en": "I’d also like to say one thing to new listeners:",
+      "zh": "也想对新来的朋友们说一句，",
+      "pinyin": "Yě xiǎng duì xīn lái de péngyǒumen shuō yī jù,",
+      "vi": "cũng muốn nói một câu với những người bạn mới đến,"
+    },
+    {
+      "start": 73.07,
+      "end": 74.09,
+      "en": "our conversation speed will",
+      "zh": "我们的对话语速会",
+      "pinyin": "Wǒmen de duìhuà yǔsù huì",
+      "vi": "tốc độ nói trong cuộc trò chuyện của chúng tôi sẽ"
+    },
+    {
+      "start": 74.1,
+      "end": 77.16,
+      "en": "be slightly slower than normal,",
+      "zh": "比正常语速稍微慢一点，",
+      "pinyin": "Bǐ zhèngcháng yǔsù shāowēi màn yīdiǎn,",
+      "vi": "chậm hơn một chút so với tốc độ nói bình thường,"
+    },
+    {
+      "start": 77.17,
+      "end": 80.33,
+      "en": "but there will still be some words you may not understand.",
+      "zh": "但还是会有些词语你可能听不懂。",
+      "pinyin": "Dàn háishì huì yǒu xiē cíyǔ nǐ kěnéng tīng bù dǒng.",
+      "vi": "nhưng vẫn sẽ có một số từ bạn có thể không nghe hiểu."
+    },
+    {
+      "start": 80.33,
+      "end": 83.19,
+      "en": "Don't worry, this is completely normal.",
+      "zh": "别担心，这是完全正常的。",
+      "pinyin": "Bié dānxīn, zhè shì wánquán zhèngcháng de.",
+      "vi": "Đừng lo, điều này hoàn toàn bình thường."
+    },
+    {
+      "start": 83.2,
+      "end": 86.69,
+      "en": "you can try guessing the meaning from context,",
+      "zh": "你可以试着根据上下文猜一猜意思，",
+      "pinyin": "Nǐ kěyǐ shìzhe gēnjù shàngxiàwén cāi yī cāi yìsi,",
+      "vi": "bạn có thể thử dựa vào ngữ cảnh đoán nghĩa,"
+    },
+    {
+      "start": 86.7,
+      "end": 88.59,
+      "en": "or listen a few more times.",
+      "zh": "或者多听几遍。",
+      "pinyin": "Huòzhě duō tīng jǐ biàn.",
+      "vi": "hoặc nghe thêm vài lần."
+    },
+    {
+      "start": 88.6,
+      "end": 90.19,
+      "en": "if you really want to understand,",
+      "zh": "如果真的想弄明白，",
+      "pinyin": "Rúguǒ zhēn de xiǎng nòng míngbai,",
+      "vi": "nếu thật sự muốn hiểu rõ,"
+    },
+    {
+      "start": 90.2,
+      "end": 93.29,
+      "en": "you can go to our blog to read the full transcript,",
+      "zh": "可以去我们博客看完整的文本，",
+      "pinyin": "Kěyǐ qù wǒmen bókè kàn wánzhěng de wénběn,",
+      "vi": "có thể vào blog của chúng tôi xem văn bản đầy đủ,"
+    },
+    {
+      "start": 93.3,
+      "end": 95.99,
+      "en": "the link is in the description below.",
+      "zh": "链接就在下方的说明里。",
+      "pinyin": "Liànjiē jiù zài xiàfāng de shuōmíng lǐ.",
+      "vi": "liên kết nằm ngay trong phần mô tả bên dưới."
+    },
+    {
+      "start": 96,
+      "end": 98.96,
+      "en": "Learning a language is a gradual process,",
+      "zh": "学习语言是一个慢慢来的过程，",
+      "pinyin": "Xuéxí yǔyán shì yī gè mànmàn lái de guòchéng,",
+      "vi": "Học ngôn ngữ là một quá trình từ từ,"
+    },
+    {
+      "start": 98.97,
+      "end": 101.36,
+      "en": "Don't rush. That's right.",
+      "zh": "别着急。说得没错。",
+      "pinyin": "Bié zháojí. Shuō de méi cuò.",
+      "vi": "Đừng vội. Nói đúng lắm."
+    },
+    {
+      "start": 101.37,
+      "end": 104.59,
+      "en": "Actually, recently I have a friend who just graduated,",
+      "zh": "其实，我最近有个朋友，他刚刚毕业，",
+      "pinyin": "Qíshí, wǒ zuìjìn yǒu gè péngyǒu, tā gānggāng bìyè,",
+      "vi": "Thật ra, gần đây tôi có một người bạn, cậu ấy vừa tốt nghiệp,"
+    },
+    {
+      "start": 104.6,
+      "end": 108.19,
+      "en": "is looking for a job everywhere and preparing for interviews every day.",
+      "zh": "正在到处找工作，天天都在准备面试。",
+      "pinyin": "Zhèngzài dàochù zhǎo gōngzuò, tiāntiān dōu zài zhǔnbèi miànshì.",
+      "vi": "đang tìm việc khắp nơi, ngày nào cũng chuẩn bị phỏng vấn."
+    },
+    {
+      "start": 108.2,
+      "end": 111.96,
+      "en": "I feel he's under a lot of pressure and is very anxious.",
+      "zh": "我感觉他压力特别大，整个人都非常焦虑。",
+      "pinyin": "Wǒ gǎnjué tā yālì tèbié dà, zhěnggè rén dōu fēicháng jiāolǜ.",
+      "vi": "Tôi cảm thấy áp lực của cậu ấy rất lớn, cả người đều rất lo lắng."
+    },
+    {
+      "start": 111.97,
+      "end": 114.93,
+      "en": "Oh, I totally understand that feeling!",
+      "zh": "哎呀，我太理解这种感觉了！",
+      "pinyin": "Āiyā, wǒ tài lǐjiě zhè zhǒng gǎnjué le!",
+      "vi": "Ôi, tôi quá hiểu cảm giác này rồi!"
+    },
+    {
+      "start": 114.93,
+      "end": 118.39,
+      "en": "I remember the first time I had a formal interview,",
+      "zh": "我记得我第一次参加正式面试的时候，",
+      "pinyin": "Wǒ jìde wǒ dì yī cì cānjiā zhèngshì miànshì de shíhou,",
+      "vi": "Tôi nhớ lần đầu tiên tôi tham gia phỏng vấn chính thức,"
+    },
+    {
+      "start": 118.4,
+      "end": 121.49,
+      "en": "I was so nervous that I didn't sleep well the night before.",
+      "zh": "紧张得前一天晚上都没睡好。",
+      "pinyin": "Jǐnzhāng de qián yī tiān wǎnshang dōu méi shuì hǎo.",
+      "vi": "căng thẳng đến mức tối hôm trước không ngủ ngon."
+    },
+    {
+      "start": 121.5,
+      "end": 125.29,
+      "en": "My mind kept wondering, what questions will the interviewer ask?",
+      "zh": "脑子里一直在想，面试官会问什么问题？",
+      "pinyin": "Nǎozi lǐ yīzhí zài xiǎng, miànshìguān huì wèn shénme wèntí?",
+      "vi": "trong đầu cứ nghĩ mãi, người phỏng vấn sẽ hỏi câu hỏi gì?"
+    },
+    {
+      "start": 125.3,
+      "end": 126.96,
+      "en": "How should I answer?",
+      "zh": "我应该怎么回答？",
+      "pinyin": "Wǒ yīnggāi zěnme huídá?",
+      "vi": "Tôi nên trả lời thế nào?"
+    },
+    {
+      "start": 126.97,
+      "end": 128.79,
+      "en": "What clothes should I wear?",
+      "zh": "我应该穿什么衣服？",
+      "pinyin": "Wǒ yīnggāi chuān shénme yīfu?",
+      "vi": "Tôi nên mặc quần áo gì?"
+    },
+    {
+      "start": 128.8,
+      "end": 132.86,
+      "en": "It felt like there were countless things to prepare for. Exactly.",
+      "zh": "感觉有无数件事情要准备。完全正确。",
+      "pinyin": "Gǎnjué yǒu wúshù jiàn shìqing yào zhǔnbèi. Wánquán zhèngquè.",
+      "vi": "Cảm thấy có vô số việc phải chuẩn bị. Hoàn toàn đúng."
+    },
+    {
+      "start": 132.87,
+      "end": 135.53,
+      "en": "So we think this is a very practical...",
+      "zh": "所以我们觉得，这是一个非常实用，",
+      "pinyin": "Suǒyǐ wǒmen juéde, zhè shì yī gè fēicháng shíyòng,",
+      "vi": "Vì vậy chúng tôi thấy, đây là một chủ đề rất thiết thực,"
+    },
+    {
+      "start": 135.53,
+      "end": 138.29,
+      "en": "And it's a topic that many people will go through.",
+      "zh": "而且很多人都会经历的话题。",
+      "pinyin": "Érqiě hěn duō rén dōu huì jīnglì de huàtí.",
+      "vi": "Và là một chủ đề mà rất nhiều người đều sẽ trải qua."
+    },
+    {
+      "start": 138.3,
+      "end": 140.36,
+      "en": "So today, let's talk about it:",
+      "zh": "所以，我们今天就来聊一聊:",
+      "pinyin": "Suǒyǐ, wǒmen jīntiān jiù lái liáo yi liáo:",
+      "vi": "Vậy nên hôm nay chúng ta hãy cùng trò chuyện một chút:"
+    },
+    {
+      "start": 140.37,
+      "end": 143.53,
+      "en": "Before an interview, what exactly should we prepare?",
+      "zh": "面试前，我们到底应该准备些什么？",
+      "pinyin": "Miànshì qián, wǒmen dàodǐ yīnggāi zhǔnbèi xiē shénme?",
+      "vi": "Trước buổi phỏng vấn, rốt cuộc chúng ta nên chuẩn bị những gì?"
+    },
+    {
+      "start": 143.53,
+      "end": 145.35,
+      "en": "This topic is great!",
+      "zh": "这个话题太棒了！",
+      "pinyin": "Zhège huàtí tài bàng le!",
+      "vi": "Chủ đề này hay quá!"
+    },
+    {
+      "start": 145.37,
+      "end": 147.86,
+      "en": "I hope it can give those who are currently job-hunting or",
+      "zh": "希望能给正在找工作或者",
+      "pinyin": "Xīwàng néng gěi zhèngzài zhǎo gōngzuò huòzhě",
+      "vi": "Hy vọng có thể mang đến cho những người đang tìm việc hoặc"
+    },
+    {
+      "start": 147.87,
+      "end": 151.13,
+      "en": "friends who may need to job-hunt in the future a bit of help.",
+      "zh": "未来需要找工作的朋友们一些帮助。",
+      "pinyin": "wèilái xūyào zhǎo gōngzuò de péngyoumen yīxiē bāngzhù.",
+      "vi": "những người bạn trong tương lai cần tìm việc một chút trợ giúp."
+    },
+    {
+      "start": 151.13,
+      "end": 154.25,
+      "en": "Okay, then where should we start?",
+      "zh": "好，那我们从哪里开始说起呢？",
+      "pinyin": "Hǎo, nà wǒmen cóng nǎlǐ kāishǐ shuō qǐ ne?",
+      "vi": "Được, vậy chúng ta bắt đầu nói từ đâu nhỉ?"
+    },
+    {
+      "start": 154.27,
+      "end": 154.86,
+      "en": "I think,",
+      "zh": "我觉得，",
+      "pinyin": "Wǒ juéde,",
+      "vi": "Tôi nghĩ là,"
+    },
+    {
+      "start": 154.87,
+      "end": 158.06,
+      "en": "Before starting to research the company and prepare questions,",
+      "zh": "在开始研究公司和准备问题之前，",
+      "pinyin": "Zài kāishǐ yánjiū gōngsī hé zhǔnbèi wèntí zhīqián,",
+      "vi": "Trước khi bắt đầu tìm hiểu về công ty và chuẩn bị các câu hỏi,"
+    },
+    {
+      "start": 158.07,
+      "end": 161.53,
+      "en": "there are some of the most basic “hardware” items that need to be prepared first.",
+      "zh": "有一些最基础的“硬件”需要先准备好。",
+      "pinyin": "Yǒu yīxiē zuì jīchǔ de “yìngjiàn” xūyào xiān zhǔnbèi hǎo.",
+      "vi": "có một số “phần cứng” cơ bản nhất cần chuẩn bị trước."
+    },
+    {
+      "start": 161.53,
+      "end": 166.12,
+      "en": "For me, the most important piece of “hardware” is a perfect résumé.",
+      "zh": "对我来说，最重要的硬件就是一份完美的简历。",
+      "pinyin": "Duì wǒ lái shuō, zuì zhòngyào de yìngjiàn jiùshì yī fèn wánměi de jiǎnlì.",
+      "vi": "Đối với tôi, phần cứng quan trọng nhất chính là một bản CV hoàn hảo."
+    },
+    {
+      "start": 166.13,
+      "end": 168.49,
+      "en": "Oh? A perfect résumé?",
+      "zh": "哦？完美的简历？",
+      "pinyin": "Ó? Wánměi de jiǎnlì?",
+      "vi": "Ồ? CV hoàn hảo sao?"
+    },
+    {
+      "start": 168.5,
+      "end": 170.49,
+      "en": "That requirement is a bit high.",
+      "zh": "这个要求有点高啊。",
+      "pinyin": "Zhège yāoqiú yǒudiǎn gāo a.",
+      "vi": "Yêu cầu này hơi cao đấy."
+    },
+    {
+      "start": 170.5,
+      "end": 172.76,
+      "en": "How do you define “perfect”?",
+      "zh": "你怎么定义“完美”呢？",
+      "pinyin": "Nǐ zěnme dìngyì “wánměi” ne?",
+      "vi": "Bạn định nghĩa “hoàn hảo” như thế nào?"
+    },
+    {
+      "start": 172.77,
+      "end": 176.06,
+      "en": "(Laughs) Maybe the word “perfect” is a bit exaggerated.",
+      "zh": "(笑)，可能“完美”这个词有点夸张。",
+      "pinyin": "(Xiào), kěnéng “wánměi” zhège cí yǒudiǎn kuāzhāng.",
+      "vi": "(Cười), có lẽ từ “hoàn hảo” hơi phóng đại."
+    },
+    {
+      "start": 176.07,
+      "end": 179.09,
+      "en": "I mean, a professional, clear,",
+      "zh": "我的意思是，一份专业、清晰、",
+      "pinyin": "Wǒ de yìsi shì, yī fèn zhuānyè, qīngxī,",
+      "vi": "Ý tôi là, một bản CV chuyên nghiệp, rõ ràng,"
+    },
+    {
+      "start": 179.1,
+      "end": 181.29,
+      "en": "résumé without any mistakes.",
+      "zh": "没有任何错误的简历。",
+      "pinyin": "Méiyǒu rènhé cuòwù de jiǎnlì.",
+      "vi": "không có bất kỳ lỗi nào."
+    },
+    {
+      "start": 181.3,
+      "end": 181.96,
+      "en": "Think about it,",
+      "zh": "你想想，",
+      "pinyin": "Nǐ xiǎngxiang,",
+      "vi": "Bạn thử nghĩ xem,"
+    },
+    {
+      "start": 181.97,
+      "end": 184.89,
+      "en": "A résumé is the interviewer's first impression of you,",
+      "zh": "简历是面试官对你的第一印象，",
+      "pinyin": "Jiǎnlì shì miànshìguān duì nǐ de dì yī yìnxiàng,",
+      "vi": "CV là ấn tượng đầu tiên của nhà tuyển dụng về bạn,"
+    },
+    {
+      "start": 184.9,
+      "end": 187.79,
+      "en": "if there are typos on it, or the formatting is messy,",
+      "zh": "如果上面有错别字，或者格式很乱，",
+      "pinyin": "Rúguǒ shàngmiàn yǒu cuòbiézì, huòzhě géshì hěn luàn,",
+      "vi": "Nếu trên đó có lỗi chính tả hoặc định dạng rất lộn xộn,"
+    },
+    {
+      "start": 187.8,
+      "end": 190.99,
+      "en": "then the first-impression score will definitely take a big hit.",
+      "zh": "那第一印象分肯定会大打折扣。",
+      "pinyin": "Nà dì yī yìnxiàng fēn kěndìng huì dà dǎ zhékòu.",
+      "vi": "thì điểm ấn tượng đầu tiên chắc chắn sẽ bị giảm mạnh."
+    },
+    {
+      "start": 191,
+      "end": 194.09,
+      "en": "So, I suggest everyone, before submitting a résumé,",
+      "zh": "所以，我建议大家在投递简历之前，",
+      "pinyin": "Suǒyǐ, wǒ jiànyì dàjiā zài tóudì jiǎnlì zhīqián,",
+      "vi": "Vì vậy, tôi khuyên mọi người trước khi gửi CV,"
+    },
+    {
+      "start": 194.1,
+      "end": 196.72,
+      "en": "be sure to check it yourself at least three times,",
+      "zh": "一定要自己检查至少三遍，",
+      "pinyin": "yīdìng yào zìjǐ jiǎnchá zhìshǎo sān biàn,",
+      "vi": "nhất định phải tự kiểm tra ít nhất ba lần,"
+    },
+    {
+      "start": 196.73,
+      "end": 199.59,
+      "en": "and ideally have a friend help check it one more time.",
+      "zh": "最好再找一个朋友帮你检查一遍。",
+      "pinyin": "zuìhǎo zài zhǎo yī gè péngyou bāng nǐ jiǎnchá yī biàn.",
+      "vi": "tốt nhất là nhờ thêm một người bạn kiểm tra giúp bạn một lượt."
+    },
+    {
+      "start": 199.6,
+      "end": 201.49,
+      "en": "I completely agree with this.",
+      "zh": "这个我完全同意。",
+      "pinyin": "Zhège wǒ wánquán tóngyì.",
+      "vi": "Điều này tôi hoàn toàn đồng ý."
+    },
+    {
+      "start": 201.5,
+      "end": 203.52,
+      "en": "Details determine success or failure.",
+      "zh": "细节决定成败。",
+      "pinyin": "Xìjié juédìng chéngbài.",
+      "vi": "Chi tiết quyết định thành bại."
+    },
+    {
+      "start": 203.53,
+      "end": 205.65,
+      "en": "A clean and tidy résumé,",
+      "zh": "一份干净整洁的简历，",
+      "pinyin": "Yī fèn gānjìng zhěngjié de jiǎnlì,",
+      "vi": "Một bản CV sạch sẽ, gọn gàng,"
+    },
+    {
+      "start": 205.67,
+      "end": 208.93,
+      "en": "can indeed reflect a person's serious attitude.",
+      "zh": "确实能体现出一个人的认真态度。",
+      "pinyin": "quèshí néng tǐxiàn chū yī gè rén de rènzhēn tàidù.",
+      "vi": "thực sự có thể thể hiện thái độ nghiêm túc của một người."
+    },
+    {
+      "start": 208.93,
+      "end": 210.52,
+      "en": "However, for me,",
+      "zh": "不过，对我来说，",
+      "pinyin": "Bùguò, duì wǒ lái shuō,",
+      "vi": "Tuy nhiên, đối với tôi,"
+    },
+    {
+      "start": 210.53,
+      "end": 212.35,
+      "en": "Besides the résumé, this “hardware,”",
+      "zh": "除了简历这个“硬件”，",
+      "pinyin": "Chúle jiǎnlì zhège “yìngjiàn”,",
+      "vi": "Ngoài CV - thứ “phần cứng” này,"
+    },
+    {
+      "start": 212.37,
+      "end": 216.33,
+      "en": "there is something even more important, and that is “mindset.”",
+      "zh": "还有一个更重要的东西，那就是“心态”。",
+      "pinyin": "Hái yǒu yī gè gèng zhòngyào de dōngxi, nà jiùshì “xīntài”.",
+      "vi": "còn có một thứ quan trọng hơn, đó là “tâm thế”."
+    },
+    {
+      "start": 216.33,
+      "end": 218.95,
+      "en": "Mindset? Elaborate a bit. Mm.",
+      "zh": "心态？展开说说。嗯。",
+      "pinyin": "Xīntài? Zhǎnkāi shuōshuo. Èn.",
+      "vi": "Tâm thế? Nói rõ hơn đi. Ừm."
+    },
+    {
+      "start": 218.97,
+      "end": 222.49,
+      "en": "I think an interview is not just an assessment,",
+      "zh": "我觉得面试不仅仅是一场考核，",
+      "pinyin": "Wǒ juéde miànshì bù jǐnjǐn shì yī chǎng kǎohé,",
+      "vi": "Tôi nghĩ phỏng vấn không chỉ là một cuộc đánh giá,"
+    },
+    {
+      "start": 222.5,
+      "end": 225.36,
+      "en": "it's more like an equal exchange.",
+      "zh": "它更像是一次平等的交流。",
+      "pinyin": "tā gèng xiàng shì yī cì píngděng de jiāoliú.",
+      "vi": "mà giống hơn một cuộc trao đổi bình đẳng."
+    },
+    {
+      "start": 225.37,
+      "end": 229.26,
+      "en": "When preparing for an interview, we first need to build confidence.",
+      "zh": "在准备面试的时候，我们首先要建立自信。",
+      "pinyin": "Zài zhǔnbèi miànshì de shíhou, wǒmen shǒuxiān yào jiànlì zìxìn.",
+      "vi": "Khi chuẩn bị phỏng vấn, trước tiên chúng ta phải xây dựng sự tự tin."
+    },
+    {
+      "start": 229.27,
+      "end": 232.53,
+      "en": "You need to believe that the reason you got the interview opportunity",
+      "zh": "你要相信，你之所以能获得面试机会，",
+      "pinyin": "Nǐ yào xiāngxìn, nǐ zhīsuǒyǐ néng huòdé miànshì jīhuì,",
+      "vi": "Bạn phải tin rằng, lý do bạn có được cơ hội phỏng vấn,"
+    },
+    {
+      "start": 232.53,
+      "end": 236.99,
+      "en": "means your abilities and experience have already received preliminary recognition.",
+      "zh": "就说明你的能力和经历已经得到了初步的认可。",
+      "pinyin": "jiù shuōmíng nǐ de nénglì hé jīnglì yǐjīng dédào le chūbù de rènkě.",
+      "vi": "chính là vì năng lực và kinh nghiệm của bạn đã được công nhận bước đầu."
+    },
+    {
+      "start": 237,
+      "end": 237.52,
+      "en": "So,",
+      "zh": "所以，",
+      "pinyin": "Suǒyǐ,",
+      "vi": "Vì vậy,"
+    },
+    {
+      "start": 237.53,
+      "end": 240.35,
+      "en": "don't put yourself in a very low position,",
+      "zh": "不要把自己放在一个很低的位置，",
+      "pinyin": "bùyào bǎ zìjǐ fàng zài yī gè hěn dī de wèizhi,",
+      "vi": "đừng đặt bản thân ở một vị trí quá thấp,"
+    },
+    {
+      "start": 240.37,
+      "end": 242.73,
+      "en": "feeling that you are going to be “inspected.”",
+      "zh": "觉得自己是去“被审查”的。",
+      "pinyin": "Juéde zìjǐ shì qù “bèi shěnchá” de.",
+      "vi": "nghĩ rằng mình đến để “bị thẩm tra”."
+    },
+    {
+      "start": 242.73,
+      "end": 244.72,
+      "en": "This viewpoint is very interesting.",
+      "zh": "这个观点很有意思。",
+      "pinyin": "Zhège guāndiǎn hěn yǒu yìsi.",
+      "vi": "Quan điểm này rất thú vị."
+    },
+    {
+      "start": 244.73,
+      "end": 245.95,
+      "en": "So what you mean is,",
+      "zh": "所以你的意思是，",
+      "pinyin": "Suǒyǐ nǐ de yìsi shì,",
+      "vi": "Vậy ý bạn là,"
+    },
+    {
+      "start": 245.97,
+      "end": 247.73,
+      "en": "we should approach it with an “exchange”",
+      "zh": "我们要抱着一个“交流”",
+      "pinyin": "wǒmen yào bàozhe yī gè “jiāoliú”",
+      "vi": "chúng ta nên mang theo một tâm thế “trao đổi”"
+    },
+    {
+      "start": 247.73,
+      "end": 250.45,
+      "en": "rather than a “being tested” mindset going into the interview?",
+      "zh": "而不是“被考验”的心态去面试？",
+      "pinyin": "ér bùshì “bèi kǎoyàn” de xīntài qù miànshì?",
+      "vi": "chứ không phải tâm thế “bị thử thách” để đi phỏng vấn?"
+    },
+    {
+      "start": 250.47,
+      "end": 254.09,
+      "en": "Exactly! Think about it—the company is looking for the right person,",
+      "zh": "没错！你想啊，公司在找合适的人，",
+      "pinyin": "Méicuò! Nǐ xiǎng a, gōngsī zài zhǎo héshì de rén,",
+      "vi": "Đúng vậy! Bạn nghĩ xem, công ty đang tìm người phù hợp,"
+    },
+    {
+      "start": 254.1,
+      "end": 256.19,
+      "en": "and you are also looking for the right platform.",
+      "zh": "你也在找合适的平台。",
+      "pinyin": "nǐ yě zài zhǎo héshì de píngtái.",
+      "vi": "bạn cũng đang tìm một nền tảng phù hợp."
+    },
+    {
+      "start": 256.2,
+      "end": 258.89,
+      "en": "This is a two-way selection process.",
+      "zh": "这是一个双向选择的过程。",
+      "pinyin": "Zhè shì yī gè shuāngxiàng xuǎnzé de guòchéng.",
+      "vi": "Đây là một quá trình lựa chọn hai chiều."
+    },
+    {
+      "start": 258.9,
+      "end": 262.39,
+      "en": "With this mindset, you will be much more relaxed overall,",
+      "zh": "有了这种心态，你整个人会放松很多，",
+      "pinyin": "Yǒu le zhè zhǒng xīntài, nǐ zhěnggè rén huì fàngsōng hěn duō,",
+      "vi": "Có tâm thế này, cả con người bạn sẽ thư giãn hơn nhiều,"
+    },
+    {
+      "start": 262.4,
+      "end": 265.46,
+      "en": "and your performance will be more natural and confident.",
+      "zh": "表现得也会更自然、更自信。",
+      "pinyin": "biǎoxiàn de yě huì gèng zìrán, gèng zìxìn.",
+      "vi": "phần thể hiện cũng sẽ tự nhiên hơn, tự tin hơn."
+    },
+    {
+      "start": 265.47,
+      "end": 268.93,
+      "en": "Confidence is the best “clothing” you can wear to an interview.",
+      "zh": "自信，就是你面试时最好的“衣服”。",
+      "pinyin": "Zìxìn, jiùshì nǐ miànshì shí zuì hǎo de “yīfu”.",
+      "vi": "Tự tin chính là “bộ quần áo” đẹp nhất của bạn khi phỏng vấn."
+    },
+    {
+      "start": 268.93,
+      "end": 272.92,
+      "en": "“Confidence is the best outfit”—that's a vivid metaphor.",
+      "zh": "“自信是最好的衣服”，这个比喻很形象。",
+      "pinyin": "“Zìxìn shì zuì hǎo de yīfu,” zhège bǐyù hěn xíngxiàng.",
+      "vi": "“Tự tin là bộ quần áo đẹp nhất”, cách ví von này thật sinh động."
+    },
+    {
+      "start": 272.93,
+      "end": 275.79,
+      "en": "But speaking of clothes, the attire for an interview—",
+      "zh": "不过说到衣服，面试时的着装，",
+      "pinyin": "Bùguò shuōdào yīfu, miànshì shí de zhuózhuāng,",
+      "vi": "Nhưng nói đến quần áo, thì trang phục khi phỏng vấn,"
+    },
+    {
+      "start": 275.8,
+      "end": 279.32,
+      "en": "which is one of the “hardware” factors we mentioned—is also very important.",
+      "zh": "也就是我们说的“硬件”之一，也非常重要。",
+      "pinyin": "yě jiùshì wǒmen shuō de “yìngjiàn” zhī yī, yě fēicháng zhòngyào.",
+      "vi": "tức là một trong những “phần cứng” mà chúng ta nói đến, cũng rất quan trọng."
+    },
+    {
+      "start": 279.33,
+      "end": 281.25,
+      "en": "I'm a fairly traditional person,",
+      "zh": "我是一个比较传统的人，",
+      "pinyin": "Wǒ shì yí ge bǐjiào chuántǒng de rén,",
+      "vi": "Tôi là người khá truyền thống,"
+    },
+    {
+      "start": 281.27,
+      "end": 286.09,
+      "en": "I think no matter the interview, wearing formal business attire is always the safest choice.",
+      "zh": "我认为不管什么面试，穿正装总是最安全的选择。",
+      "pinyin": "Wǒ rènwéi bùguǎn shénme miànshì, chuān zhèngzhuāng zǒngshì zuì ānquán de xuǎnzé.",
+      "vi": "Tôi cho rằng dù là phỏng vấn gì, mặc trang phục chính thức luôn là lựa chọn an toàn nhất."
+    },
+    {
+      "start": 286.1,
+      "end": 289.19,
+      "en": "Men wear suits, women wear business suits,",
+      "zh": "男生穿西装，女生穿职业套装，",
+      "pinyin": "Nánshēng chuān xīzhuāng, nǚshēng chuān zhíyè tàozhuāng,",
+      "vi": "Nam mặc vest, nữ mặc bộ đồ công sở,"
+    },
+    {
+      "start": 289.2,
+      "end": 291.96,
+      "en": "It shows respect for this opportunity.",
+      "zh": "这表示你对这次机会的尊重。",
+      "pinyin": "Zhè biǎoshì nǐ duì zhè cì jīhuì de zūnzhòng.",
+      "vi": "Điều đó thể hiện sự tôn trọng của bạn đối với cơ hội này."
+    },
+    {
+      "start": 291.97,
+      "end": 292.56,
+      "en": "Hmm...",
+      "zh": "嗯……",
+      "pinyin": "Ǹg……",
+      "vi": "Ừm……"
+    },
+    {
+      "start": 292.57,
+      "end": 296.19,
+      "en": "On this point, I might have a slightly different view.",
+      "zh": "在这点上，我可能有点不一样的看法。",
+      "pinyin": "Zài zhè diǎn shàng, wǒ kěnéng yǒudiǎn bù yíyàng de kànfǎ.",
+      "vi": "Ở điểm này, tôi có thể có chút ý kiến khác."
+    },
+    {
+      "start": 296.2,
+      "end": 298.36,
+      "en": "I admit that for banks,",
+      "zh": "我承认，对于银行、",
+      "pinyin": "Wǒ chéngrèn, duìyú yínháng,",
+      "vi": "Tôi thừa nhận, đối với ngân hàng,"
+    },
+    {
+      "start": 298.37,
+      "end": 301.53,
+      "en": "finance, law, and other relatively traditional industries,",
+      "zh": "金融、法律这些比较传统的行业，",
+      "pinyin": "jīnróng, fǎlǜ zhèxiē bǐjiào chuántǒng de hángyè,",
+      "vi": "tài chính, pháp luật—những ngành khá truyền thống này,"
+    },
+    {
+      "start": 301.53,
+      "end": 303.52,
+      "en": "wearing formal attire is a must.",
+      "zh": "穿正装是必须的。",
+      "pinyin": "Chuān zhèngzhuāng shì bìxū de.",
+      "vi": "mặc trang phục chính thức là bắt buộc."
+    },
+    {
+      "start": 303.53,
+      "end": 307.15,
+      "en": "But nowadays many internet companies and startups",
+      "zh": "但现在有很多互联网公司、创业公司，",
+      "pinyin": "Dàn xiànzài yǒu hěn duō hùliánwǎng gōngsī, chuàngyè gōngsī,",
+      "vi": "Nhưng bây giờ có nhiều công ty internet, công ty khởi nghiệp,"
+    },
+    {
+      "start": 307.17,
+      "end": 310.76,
+      "en": "have cultures that are very relaxed and lively in themselves.",
+      "zh": "它们的文化本身就非常轻松活泼。",
+      "pinyin": "Tāmen de wénhuà běnshēn jiù fēicháng qīngsōng huópō.",
+      "vi": "văn hóa của họ vốn dĩ rất thoải mái và năng động."
+    },
+    {
+      "start": 310.77,
+      "end": 313.79,
+      "en": "If you wear a very formal suit",
+      "zh": "如果你穿着一身非常严肃的西装",
+      "pinyin": "Rúguǒ nǐ chuānzhe yì shēn fēicháng yánsù de xīzhuāng",
+      "vi": "Nếu bạn mặc một bộ vest rất nghiêm túc"
+    },
+    {
+      "start": 313.8,
+      "end": 314.69,
+      "en": "to an interview,",
+      "zh": "去面试，",
+      "pinyin": "qù miànshì,",
+      "vi": "đi phỏng vấn,"
+    },
+    {
+      "start": 314.7,
+      "end": 317.59,
+      "en": "it may clash with the company's atmosphere,",
+      "zh": "可能会和公司的氛围格格不入，",
+      "pinyin": "kěnéng huì hé gōngsī de fēnwéi gégébùrù,",
+      "vi": "có thể sẽ không hợp với bầu không khí của công ty,"
+    },
+    {
+      "start": 317.6,
+      "end": 321.39,
+      "en": "and instead make the interviewer feel you're not their type of person.",
+      "zh": "反而让面试官觉得你和他们不是一类人。",
+      "pinyin": "fǎn'ér ràng miànshìguān juéde nǐ hé tāmen bú shì yí lèi rén.",
+      "vi": "ngược lại khiến người phỏng vấn cảm thấy bạn không cùng một kiểu người với họ."
+    },
+    {
+      "start": 321.4,
+      "end": 324.06,
+      "en": "That makes sense. So what's your suggestion?",
+      "zh": "有道理。那你的建议是？",
+      "pinyin": "Yǒu dàolǐ. Nà nǐ de jiànyì shì?",
+      "vi": "Có lý. Vậy đề xuất của bạn là gì?"
+    },
+    {
+      "start": 324.07,
+      "end": 327.33,
+      "en": "My suggestion is, before the interview, spend some time",
+      "zh": "我的建议是，在面试前，花点时间",
+      "pinyin": "Wǒ de jiànyì shì, zài miànshì qián, huā diǎn shíjiān",
+      "vi": "Đề xuất của tôi là, trước khi phỏng vấn, hãy dành chút thời gian"
+    },
+    {
+      "start": 327.33,
+      "end": 330.32,
+      "en": "researching this company's corporate culture.",
+      "zh": "研究一下这个公司的企业文化。",
+      "pinyin": "yánjiū yíxià zhège gōngsī de qǐyè wénhuà.",
+      "vi": "tìm hiểu văn hóa doanh nghiệp của công ty này."
+    },
+    {
+      "start": 330.33,
+      "end": 332.89,
+      "en": "You can check out their company website,",
+      "zh": "你可以去看看他们公司的网站，",
+      "pinyin": "Nǐ kěyǐ qù kànkan tāmen gōngsī de wǎngzhàn,",
+      "vi": "Bạn có thể xem website của công ty họ,"
+    },
+    {
+      "start": 332.9,
+      "end": 337.72,
+      "en": "look at photos of employee activities, and get a feel for their dress style.",
+      "zh": "看看员工活动的照片，感受一下他们的穿衣风格。",
+      "pinyin": "Kànkan yuángōng huódòng de zhàopiàn, gǎnshòu yíxià tāmen de chuānyī fēnggé.",
+      "vi": "xem ảnh hoạt động của nhân viên, cảm nhận phong cách ăn mặc của họ."
+    },
+    {
+      "start": 337.73,
+      "end": 340.12,
+      "en": "Then choose an outfit that is both appropriate",
+      "zh": "然后选择一套既得体，",
+      "pinyin": "Ránhòu xuǎnzé yí tào jì détǐ,",
+      "vi": "Sau đó chọn một bộ vừa lịch sự,"
+    },
+    {
+      "start": 340.13,
+      "end": 344.99,
+      "en": "reflects your personal style, and fits the company culture.",
+      "zh": "又能体现你个人风格，并且符合公司文化的衣服。",
+      "pinyin": "yòu néng tǐxiàn nǐ gèrén fēnggé, bìngqiě fúhé gōngsī wénhuà de yīfu.",
+      "vi": "vừa thể hiện phong cách cá nhân của bạn, và phù hợp với văn hóa công ty."
+    },
+    {
+      "start": 345,
+      "end": 349.32,
+      "en": "Simply put, it should be “appropriate” and “suitable.”",
+      "zh": "简单来说，就是要“得体”并且“合适”。",
+      "pinyin": "Jiǎndān lái shuō, jiùshì yào “détǐ” bìngqiě “héshì”.",
+      "vi": "Nói đơn giản, là phải “lịch sự” và “phù hợp”."
+    },
+    {
+      "start": 349.33,
+      "end": 350.65,
+      "en": "Well summarized.",
+      "zh": "总结得很好。",
+      "pinyin": "Zǒngjié de hěn hǎo.",
+      "vi": "Tóm tắt rất hay."
+    },
+    {
+      "start": 350.67,
+      "end": 353.46,
+      "en": "So the first step of preparation is, materially,",
+      "zh": "所以第一步的准备，就是物质上",
+      "pinyin": "Suǒyǐ dì yī bù de zhǔnbèi, jiùshì wùzhì shang",
+      "vi": "Vậy nên bước chuẩn bị đầu tiên, là về mặt vật chất"
+    },
+    {
+      "start": 353.47,
+      "end": 356.93,
+      "en": "prepare a professional résumé and appropriate clothing,",
+      "zh": "准备好一份专业的简历和得体的服装，",
+      "pinyin": "zhǔnbèi hǎo yí fèn zhuānyè de jiǎnlì hé détǐ de fúzhuāng,",
+      "vi": "chuẩn bị một bản CV chuyên nghiệp và trang phục lịch sự,"
+    },
+    {
+      "start": 356.93,
+      "end": 360.39,
+      "en": "and mentally adjust your mindset and build confidence.",
+      "zh": "精神上要调整好自己的心态，建立自信。",
+      "pinyin": "jīngshén shang yào tiáozhěng hǎo zìjǐ de xīntài, jiànlì zìxìn.",
+      "vi": "về tinh thần phải điều chỉnh tâm thế của mình, xây dựng sự tự tin."
+    },
+    {
+      "start": 360.4,
+      "end": 362.26,
+      "en": "This is the foundation of success.",
+      "zh": "这是成功的基础。",
+      "pinyin": "Zhè shì chénggōng de jīchǔ.",
+      "vi": "Đây là nền tảng của thành công."
+    },
+    {
+      "start": 362.27,
+      "end": 363.53,
+      "en": "Exactly right!",
+      "zh": "完全正确！",
+      "pinyin": "Wánquán zhèngquè!",
+      "vi": "Hoàn toàn đúng!"
+    },
+    {
+      "start": 363.53,
+      "end": 367.69,
+      "en": "Once the foundation is laid, we can move on to preparing the rest.",
+      "zh": "基础打好了，我们才能接着准备后面的内容。",
+      "pinyin": "Jīchǔ dǎ hǎo le, wǒmen cái néng jiēzhe zhǔnbèi hòumiàn de nèiróng.",
+      "vi": "Nền tảng tốt rồi, chúng ta mới có thể tiếp tục chuẩn bị những nội dung phía sau."
+    },
+    {
+      "start": 367.7,
+      "end": 369.79,
+      "en": "Okay, once the foundation is solid,",
+      "zh": "好，基础打好之后，",
+      "pinyin": "Hǎo, jīchǔ dǎ hǎo zhīhòu,",
+      "vi": "Được, sau khi nền tảng đã vững,"
+    },
+    {
+      "start": 369.8,
+      "end": 373.96,
+      "en": "we enter the most critical preparation stage—information gathering and research.",
+      "zh": "就进入了最关键的准备阶段——信息收集和研究。",
+      "pinyin": "jiù jìnrù le zuì guānjiàn de zhǔnbèi jiēduàn——xìnxī shōují hé yánjiū.",
+      "vi": "thì bước vào giai đoạn chuẩn bị then chốt nhất—thu thập và nghiên cứu thông tin."
+    },
+    {
+      "start": 373.97,
+      "end": 377.69,
+      "en": "The Art of War says, “Know yourself and know your enemy, and you will never be in peril in a hundred battles.”",
+      "zh": "孙子兵法里说，“知己知彼，百战不殆”。",
+      "pinyin": "Sūnzǐ Bīngfǎ lǐ shuō, “zhī jǐ zhī bǐ, bǎi zhàn bú dài”.",
+      "vi": "Trong Binh pháp Tôn Tử có nói, “biết mình biết người, trăm trận không nguy”."
+    },
+    {
+      "start": 377.7,
+      "end": 380.86,
+      "en": "The same goes for interviews: you not only need to understand yourself,",
+      "zh": "面试也是一样，你不仅要了解自己，",
+      "pinyin": "Miànshì yě shì yíyàng, nǐ bùjǐn yào liǎojiě zìjǐ,",
+      "vi": "Phỏng vấn cũng vậy, bạn không chỉ cần hiểu bản thân,"
+    },
+    {
+      "start": 380.87,
+      "end": 384.29,
+      "en": "but also understand the company and position you're interviewing for.",
+      "zh": "更要了解你将要面试的公司和职位。",
+      "pinyin": "gèng yào liǎojiě nǐ jiāngyào miànshì de gōngsī hé zhíwèi.",
+      "vi": "mà còn phải hiểu công ty và vị trí bạn sắp phỏng vấn."
+    },
+    {
+      "start": 384.3,
+      "end": 388.26,
+      "en": "“Know yourself and know your enemy”—this idiom fits perfectly here!",
+      "zh": "“知己知彼”，这个成语用在这里太合适了！",
+      "pinyin": "“Zhī jǐ zhī bǐ”, zhège chéngyǔ yòng zài zhèlǐ tài héshì le!",
+      "vi": "“Biết mình biết người”, thành ngữ này dùng ở đây quá phù hợp!"
+    },
+    {
+      "start": 388.27,
+      "end": 390.49,
+      "en": "So what specifically should we learn about?",
+      "zh": "那具体要了解些什么呢？",
+      "pinyin": "Nà jùtǐ yào liǎojiě xiē shénme ne?",
+      "vi": "Vậy cụ thể cần tìm hiểu những gì?"
+    },
+    {
+      "start": 390.5,
+      "end": 394.46,
+      "en": "The scope is too broad; sometimes it feels overwhelming.",
+      "zh": "范围太广了，有时候会觉得无从下手。",
+      "pinyin": "Fànwéi tài guǎng le, yǒu shíhou huì juéde wúcóngxiàshǒu.",
+      "vi": "Phạm vi quá rộng, đôi khi sẽ cảm thấy không biết bắt đầu từ đâu."
+    },
+    {
+      "start": 394.47,
+      "end": 397.13,
+      "en": "Don't worry; we can systematize it.",
+      "zh": "别急，我们可以把它系统化。",
+      "pinyin": "Bié jí, wǒmen kěyǐ bǎ tā xìtǒnghuà.",
+      "vi": "Đừng vội, chúng ta có thể hệ thống hóa nó."
+    },
+    {
+      "start": 397.13,
+      "end": 399.69,
+      "en": "I usually divide it into three levels.",
+      "zh": "我习惯把它分成三个层次。",
+      "pinyin": "Wǒ xíguàn bǎ tā fēnchéng sān ge céngcì.",
+      "vi": "Tôi quen chia nó thành ba tầng."
+    },
+    {
+      "start": 399.7,
+      "end": 402.96,
+      "en": "The first level is macro information about the company.",
+      "zh": "第一个层次，是关于公司的宏观信息。",
+      "pinyin": "Dì yī ge céngcì, shì guānyú gōngsī de hóngguān xìnxī.",
+      "vi": "Tầng thứ nhất là thông tin vĩ mô về công ty."
+    },
+    {
+      "start": 402.97,
+      "end": 405.16,
+      "en": "For example, the company's history,",
+      "zh": "比如，这个公司的历史、",
+      "pinyin": "Bǐrú, zhège gōngsī de lìshǐ,",
+      "vi": "Ví dụ, lịch sử của công ty này,"
+    },
+    {
+      "start": 405.17,
+      "end": 407.66,
+      "en": "what its main business and products are,",
+      "zh": "它的主要业务和产品是什么、",
+      "pinyin": "tā de zhǔyào yèwù hé chǎnpǐn shì shénme,",
+      "vi": "ngành kinh doanh chính và sản phẩm của nó là gì,"
+    },
+    {
+      "start": 407.67,
+      "end": 410.33,
+      "en": "what its corporate culture and values are,",
+      "zh": "它的企业文化和价值观是什么、",
+      "pinyin": "tā de qǐyè wénhuà hé jiàzhíguān shì shénme,",
+      "vi": "văn hóa doanh nghiệp và giá trị quan của nó là gì,"
+    },
+    {
+      "start": 410.33,
+      "end": 412.69,
+      "en": "where it stands in the industry,",
+      "zh": "它在行业里处于什么位置、",
+      "pinyin": "tā zài hángyè lǐ chǔyú shénme wèizhi,",
+      "vi": "nó đang ở vị trí nào trong ngành,"
+    },
+    {
+      "start": 412.7,
+      "end": 415.32,
+      "en": "and whether there has been any important news recently.",
+      "zh": "最近有没有什么重要的新闻。",
+      "pinyin": "Zuìjìn yǒu méiyǒu shénme zhòngyào de xīnwén.",
+      "vi": "gần đây có tin tức quan trọng nào không."
+    },
+    {
+      "start": 415.33,
+      "end": 417.99,
+      "en": "This information can usually be found on the company's official website,",
+      "zh": "这些信息通常在公司的官方网站、",
+      "pinyin": "zhèxiē xìnxī tōngcháng zài gōngsī de guānfāng wǎngzhàn,",
+      "vi": "Những thông tin này thường có trên website chính thức của công ty,"
+    },
+    {
+      "start": 418,
+      "end": 419.96,
+      "en": "They can all be found in news reports.",
+      "zh": "新闻报道里都能找到。",
+      "pinyin": "Xīnwén bàodào lǐ dōu néng zhǎodào.",
+      "vi": "Đều có thể tìm thấy trong các bản tin."
+    },
+    {
+      "start": 419.97,
+      "end": 422.99,
+      "en": "What's the use of knowing this macro-level information?",
+      "zh": "了解这些宏观信息有什么用呢？",
+      "pinyin": "Liǎojiě zhèxiē hóngguān xìnxī yǒu shénme yòng ne?",
+      "vi": "Hiểu những thông tin vĩ mô này thì có tác dụng gì?"
+    },
+    {
+      "start": 423,
+      "end": 425.56,
+      "en": "Will the interviewer ask these things directly?",
+      "zh": "面试官会直接问这些吗？",
+      "pinyin": "Miànshìguān huì zhíjiē wèn zhèxiē ma?",
+      "vi": "Người phỏng vấn có hỏi trực tiếp những điều này không?"
+    },
+    {
+      "start": 425.57,
+      "end": 427.29,
+      "en": "They may not ask directly",
+      "zh": "他们可能不会直接问",
+      "pinyin": "Tāmen kěnéng bù huì zhíjiē wèn",
+      "vi": "Có thể họ sẽ không hỏi trực tiếp"
+    },
+    {
+      "start": 427.3,
+      "end": 429.32,
+      "en": "“What is our company's history?”",
+      "zh": "“我们公司的历史是什么”，",
+      "pinyin": "“Wǒmen gōngsī de lìshǐ shì shénme”,",
+      "vi": "“Lịch sử công ty chúng ta là gì”,"
+    },
+    {
+      "start": 429.33,
+      "end": 432.65,
+      "en": "But this information will help you understand this company,",
+      "zh": "但是这些信息会帮助你理解这家公司，",
+      "pinyin": "Dànshì zhèxiē xìnxī huì bāngzhù nǐ lǐjiě zhè jiā gōngsī,",
+      "vi": "Nhưng những thông tin này sẽ giúp bạn hiểu công ty này,"
+    },
+    {
+      "start": 432.67,
+      "end": 434.79,
+      "en": "and allow you, when answering questions,",
+      "zh": "并且让你在回答问题的时候，",
+      "pinyin": "Bìngqiě ràng nǐ zài huídá wèntí de shíhou,",
+      "vi": "và giúp bạn khi trả lời câu hỏi,"
+    },
+    {
+      "start": 434.8,
+      "end": 437.76,
+      "en": "to connect your own answers with the company's development direction,",
+      "zh": "能够把自己的答案和公司的发展方向、",
+      "pinyin": "Nénggòu bǎ zìjǐ de dá'àn hé gōngsī de fāzhǎn fāngxiàng,",
+      "vi": "có thể gắn câu trả lời của mình với hướng phát triển của công ty,"
+    },
+    {
+      "start": 437.77,
+      "end": 439.66,
+      "en": "and connect them to its values.",
+      "zh": "价值观联系起来。",
+      "pinyin": "jiàzhíguān liánxì qǐlái.",
+      "vi": "và kết nối với giá trị quan của công ty."
+    },
+    {
+      "start": 439.67,
+      "end": 441.56,
+      "en": "For example, when the interviewer asks you",
+      "zh": "比如，当面试官问你",
+      "pinyin": "Bǐrú, dāng miànshìguān wèn nǐ",
+      "vi": "Ví dụ, khi người phỏng vấn hỏi bạn"
+    },
+    {
+      "start": 441.57,
+      "end": 443.86,
+      "en": "“Why do you want to join our company?”",
+      "zh": "“你为什么想加入我们公司”时，",
+      "pinyin": "“Nǐ wèishénme xiǎng jiārù wǒmen gōngsī” shí,",
+      "vi": "“Tại sao bạn muốn gia nhập công ty chúng tôi”"
+    },
+    {
+      "start": 443.87,
+      "end": 446.93,
+      "en": "If you can mention a value of theirs that you agree with,",
+      "zh": "如果你能说出你认同他们某个价值观，",
+      "pinyin": "Rúguǒ nǐ néng shuōchū nǐ rèntóng tāmen mǒu gè jiàzhíguān,",
+      "vi": "Nếu bạn có thể nói ra rằng bạn đồng tình với một giá trị quan nào đó của họ,"
+    },
+    {
+      "start": 446.93,
+      "end": 449.85,
+      "en": "or you are optimistic about the future of one of their new products,",
+      "zh": "或者你看好他们某个新产品的未来，",
+      "pinyin": "huòzhě nǐ kànhǎo tāmen mǒu gè xīn chǎnpǐn de wèilái,",
+      "vi": "hoặc bạn đánh giá cao tương lai của một sản phẩm mới nào đó của họ,"
+    },
+    {
+      "start": 449.87,
+      "end": 451.36,
+      "en": "this will be much better than simply saying",
+      "zh": "这会比简单地说",
+      "pinyin": "zhè huì bǐ jiǎndān de shuō",
+      "vi": "điều này sẽ tốt hơn nhiều so với việc chỉ nói đơn giản rằng"
+    },
+    {
+      "start": 451.37,
+      "end": 454.26,
+      "en": "“because your company is a big company” is much better.",
+      "zh": "“因为贵公司是大公司”要好得多。",
+      "pinyin": "“Yīnwèi guì gōngsī shì dà gōngsī” yào hǎo de duō.",
+      "vi": "“vì công ty quý vị là công ty lớn” thì tốt hơn nhiều."
+    },
+    {
+      "start": 454.27,
+      "end": 455.33,
+      "en": "I see.",
+      "zh": "我明白了。",
+      "pinyin": "Wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 455.33,
+      "end": 458.09,
+      "en": "This will make your answers seem more insightful,",
+      "zh": "这会让你的回答显得更有深度，",
+      "pinyin": "Zhè huì ràng nǐ de huídá xiǎnde gèng yǒu shēndù,",
+      "vi": "Điều này sẽ khiến câu trả lời của bạn có chiều sâu hơn,"
+    },
+    {
+      "start": 458.1,
+      "end": 460.92,
+      "en": "and show that you really put your heart into preparing.",
+      "zh": "也说明你真的用心准备了。",
+      "pinyin": "yě shuōmíng nǐ zhēn de yòngxīn zhǔnbèi le.",
+      "vi": "cũng cho thấy bạn thực sự đã chuẩn bị tận tâm."
+    },
+    {
+      "start": 460.93,
+      "end": 462.92,
+      "en": "What about the second level?",
+      "zh": "那第二个层次呢？",
+      "pinyin": "Nà dì èr gè céngcì ne?",
+      "vi": "Vậy tầng thứ hai thì sao?"
+    },
+    {
+      "start": 462.93,
+      "end": 463.89,
+      "en": "The second level,",
+      "zh": "第二个层次，",
+      "pinyin": "Dì èr gè céngcì,",
+      "vi": "Tầng thứ hai,"
+    },
+    {
+      "start": 463.9,
+      "end": 466.49,
+      "en": "is micro-level information about the position you're applying for.",
+      "zh": "是关于你申请的这个职位的微观信息。",
+      "pinyin": "shì guānyú nǐ shēnqǐng de zhè ge zhíwèi de wēiguān xìnxī.",
+      "vi": "là thông tin vi mô về vị trí bạn đang ứng tuyển."
+    },
+    {
+      "start": 466.5,
+      "end": 469.96,
+      "en": "You need to read that job description word for word and sentence by sentence.",
+      "zh": "你需要逐字逐句地去读那个职位描述。",
+      "pinyin": "Nǐ xūyào zhúzì zhújù de qù dú nà ge zhíwèi miáoshù.",
+      "vi": "Bạn cần đọc mô tả công việc đó từng chữ từng câu."
+    },
+    {
+      "start": 469.97,
+      "end": 473.26,
+      "en": "analyze each requirement in it,",
+      "zh": "把里面的每一个要求都分析一下，",
+      "pinyin": "bǎ lǐmiàn de měi yī gè yāoqiú dōu fēnxī yīxià,",
+      "vi": "phân tích từng yêu cầu trong đó,"
+    },
+    {
+      "start": 473.27,
+      "end": 477.06,
+      "en": "then think about which past experience, which project,",
+      "zh": "然后思考，你过去的哪段经历、哪个项目、",
+      "pinyin": "ránhòu sīkǎo, nǐ guòqù de nǎ duàn jīnglì, nǎ ge xiàngmù,",
+      "vi": "rồi suy nghĩ xem trải nghiệm nào, dự án nào,"
+    },
+    {
+      "start": 477.07,
+      "end": 480.66,
+      "en": "or which skill can prove that you meet this requirement.",
+      "zh": "哪项技能，可以证明你满足这个要求。",
+      "pinyin": "nǎ xiàng jìnéng, kěyǐ zhèngmíng nǐ mǎnzú zhè ge yāoqiú.",
+      "vi": "kỹ năng nào của bạn có thể chứng minh bạn đáp ứng yêu cầu này."
+    },
+    {
+      "start": 480.67,
+      "end": 482.93,
+      "en": "For every sentence on your resume,",
+      "zh": "你需要为你简历上的每一句话，",
+      "pinyin": "Nǐ xūyào wèi nǐ jiǎnlì shàng de měi yī jù huà,",
+      "vi": "Với từng câu trên CV của bạn,"
+    },
+    {
+      "start": 482.93,
+      "end": 485.85,
+      "en": "prepare a specific story to support it.",
+      "zh": "都准备一个具体的故事来支撑它。",
+      "pinyin": "dōu zhǔnbèi yī gè jùtǐ de gùshì lái zhīchēng tā.",
+      "vi": "đều chuẩn bị một câu chuyện cụ thể để chứng minh cho nó."
+    },
+    {
+      "start": 485.87,
+      "end": 488.53,
+      "en": "Wow, that sounds like a lot of work!",
+      "zh": "哇，这个工作量听起来好大！",
+      "pinyin": "Wa, zhè ge gōngzuòliàng tīng qǐlái hǎo dà!",
+      "vi": "Chà, khối lượng công việc này nghe lớn quá!"
+    },
+    {
+      "start": 488.53,
+      "end": 491.12,
+      "en": "Prepare a story for every sentence?",
+      "zh": "为每一句话都准备一个故事？",
+      "pinyin": "Wèi měi yī jù huà dōu zhǔnbèi yī gè gùshì?",
+      "vi": "Chuẩn bị một câu chuyện cho từng câu ư?"
+    },
+    {
+      "start": 491.13,
+      "end": 492.95,
+      "en": "Yes. Because the interviewer",
+      "zh": "是的。因为面试官",
+      "pinyin": "Shì de. Yīnwèi miànshìguān",
+      "vi": "Đúng vậy. Bởi vì người phỏng vấn"
+    },
+    {
+      "start": 492.97,
+      "end": 495.16,
+      "en": "may very well point to a sentence on your resume and ask:",
+      "zh": "很可能会指着你简历上的一句话问:",
+      "pinyin": "hěn kěnéng huì zhǐzhe nǐ jiǎnlì shàng de yī jù huà wèn:",
+      "vi": "rất có thể sẽ chỉ vào một câu trên CV của bạn và hỏi:"
+    },
+    {
+      "start": 495.17,
+      "end": 497.96,
+      "en": "“Can you talk about this project in detail?”",
+      "zh": "“你能详细说说这个项目吗？”",
+      "pinyin": "“Nǐ néng xiángxì shuōshuō zhè ge xiàngmù ma?”",
+      "vi": "“Bạn có thể nói chi tiết về dự án này không?”"
+    },
+    {
+      "start": 497.97,
+      "end": 499.79,
+      "en": "If you can't answer at the time,",
+      "zh": "如果你当时回答不上来，",
+      "pinyin": "Rúguǒ nǐ dāngshí huídá bù shànglái,",
+      "vi": "Nếu lúc đó bạn không trả lời được,"
+    },
+    {
+      "start": 499.8,
+      "end": 501.29,
+      "en": "or speak vaguely,",
+      "zh": "或者说得不清不楚，",
+      "pinyin": "huòzhě shuō de bù qīng bù chǔ,",
+      "vi": "hoặc nói không rõ ràng,"
+    },
+    {
+      "start": 501.3,
+      "end": 504.52,
+      "en": "that will make the other person doubt the authenticity of your resume.",
+      "zh": "那就会让对方怀疑你简历的真实性。",
+      "pinyin": "nà jiù huì ràng duìfāng huáiyí nǐ jiǎnlì de zhēnshíxìng.",
+      "vi": "thì sẽ khiến đối phương nghi ngờ tính chân thực trong CV của bạn."
+    },
+    {
+      "start": 504.53,
+      "end": 507.32,
+      "en": "Only by preparing stories in advance can you, during the interview,",
+      "zh": "提前准备好故事，你才能在面试时",
+      "pinyin": "tíqián zhǔnbèi hǎo gùshì, nǐ cái néng zài miànshì shí",
+      "vi": "Chuẩn bị trước các câu chuyện, bạn mới có thể trong buổi phỏng vấn"
+    },
+    {
+      "start": 507.33,
+      "end": 509.79,
+      "en": "calmly and confidently show your abilities.",
+      "zh": "从容不迫地展示你的能力。",
+      "pinyin": "cóngróng bùpò de zhǎnshì nǐ de nénglì.",
+      "vi": "ung dung tự tin thể hiện năng lực của mình."
+    },
+    {
+      "start": 509.8,
+      "end": 512.52,
+      "en": "This is indeed a very important reminder.",
+      "zh": "这确实是一个非常重要的提醒。",
+      "pinyin": "Zhè quèshí shì yī gè fēicháng zhòngyào de tíxǐng.",
+      "vi": "Đây thực sự là một lời nhắc rất quan trọng."
+    },
+    {
+      "start": 512.53,
+      "end": 516.25,
+      "en": "Match your experience perfectly with the job requirements.",
+      "zh": "把自己的经历和职位要求完美地对应起来。",
+      "pinyin": "bǎ zìjǐ de jīnglì hé zhíwèi yāoqiú wánměi de duìyìng qǐlái.",
+      "vi": "Gắn trải nghiệm của mình với yêu cầu công việc một cách hoàn hảo."
+    },
+    {
+      "start": 516.27,
+      "end": 518.39,
+      "en": "What is the third level?",
+      "zh": "那第三个层次是什么？",
+      "pinyin": "Nà dì sān gè céngcì shì shénme?",
+      "vi": "Vậy tầng thứ ba là gì?"
+    },
+    {
+      "start": 518.4,
+      "end": 521.46,
+      "en": "The third level is information about “people.”",
+      "zh": "第三个层次，是关于“人”的信息。",
+      "pinyin": "Dì sān gè céngcì, shì guānyú “rén” de xìnxī.",
+      "vi": "Tầng thứ ba là thông tin về “con người”."
+    },
+    {
+      "start": 521.47,
+      "end": 525.39,
+      "en": "If possible, you can find out who your interviewer is.",
+      "zh": "如果可能的话，可以了解一下你的面试官是谁。",
+      "pinyin": "Rúguǒ kěnéng de huà, kěyǐ liǎojiě yīxià nǐ de miànshìguān shì shéi.",
+      "vi": "Nếu có thể, bạn có thể tìm hiểu xem người phỏng vấn của bạn là ai."
+    },
+    {
+      "start": 525.4,
+      "end": 528.49,
+      "en": "There are many professional networking sites now, such as LinkedIn,",
+      "zh": "现在有很多职业社交网站，比如领英，",
+      "pinyin": "Xiànzài yǒu hěn duō zhíyè shèjiāo wǎngzhàn, bǐrú Lǐngyīng,",
+      "vi": "Hiện nay có nhiều trang mạng xã hội nghề nghiệp, ví dụ như LinkedIn,"
+    },
+    {
+      "start": 528.5,
+      "end": 530.92,
+      "en": "you can go look at the interviewer's background.",
+      "zh": "你可以去看看面试官的背景。",
+      "pinyin": "nǐ kěyǐ qù kànkan miànshìguān de bèijǐng.",
+      "vi": "bạn có thể vào xem thông tin nền của người phỏng vấn."
+    },
+    {
+      "start": 530.93,
+      "end": 532.45,
+      "en": "Learning about their professional field,",
+      "zh": "了解他的专业领域、",
+      "pinyin": "liǎojiě tā de zhuānyè lǐngyù,",
+      "vi": "Tìm hiểu lĩnh vực chuyên môn của họ,"
+    },
+    {
+      "start": 532.47,
+      "end": 534.29,
+      "en": "how long they've worked at the company,",
+      "zh": "他在公司工作了多久，",
+      "pinyin": "tā zài gōngsī gōngzuò le duōjiǔ,",
+      "vi": "họ đã làm việc ở công ty bao lâu,"
+    },
+    {
+      "start": 534.3,
+      "end": 536.76,
+      "en": "this can help you find some common topics,",
+      "zh": "这可以帮助你找到一些共同话题，",
+      "pinyin": "zhè kěyǐ bāngzhù nǐ zhǎodào yīxiē gòngtóng huàtí,",
+      "vi": "điều này có thể giúp bạn tìm được một số chủ đề chung,"
+    },
+    {
+      "start": 536.77,
+      "end": 539.86,
+      "en": "or make your answers more targeted.",
+      "zh": "或者让你在回答问题时更有针对性。",
+      "pinyin": "huòzhě ràng nǐ zài huídá wèntí shí gèng yǒu zhēnduìxìng.",
+      "vi": "hoặc giúp câu trả lời của bạn có tính nhắm mục tiêu hơn."
+    },
+    {
+      "start": 539.87,
+      "end": 543.09,
+      "en": "Of course, this is just icing on the cake, not a must.",
+      "zh": "当然，这只是锦上添花，不是必须的。",
+      "pinyin": "Dāngrán, zhè zhǐshì jǐnshàngtiānhuā, bùshì bìxū de.",
+      "vi": "Tất nhiên, đây chỉ là điểm cộng, không phải bắt buộc."
+    },
+    {
+      "start": 543.1,
+      "end": 545.52,
+      "en": "I very much agree with your systematic approach.",
+      "zh": "我非常同意你的系统化方法。",
+      "pinyin": "Wǒ fēicháng tóngyì nǐ de xìtǒnghuà fāngfǎ.",
+      "vi": "Tôi rất đồng ý với phương pháp có hệ thống của bạn."
+    },
+    {
+      "start": 545.53,
+      "end": 548.85,
+      "en": "However, I'd like to add one point: from my perspective,",
+      "zh": "不过我想补充一点，从我的角度来看，",
+      "pinyin": "Búguò wǒ xiǎng bǔchōng yīdiǎn, cóng wǒ de jiǎodù lái kàn,",
+      "vi": "Nhưng tôi muốn bổ sung một chút, từ góc nhìn của tôi,"
+    },
+    {
+      "start": 548.87,
+      "end": 551.06,
+      "en": "Besides gathering these objective facts,",
+      "zh": "除了收集这些客观事实，",
+      "pinyin": "Chúle shōují zhèxiē kèguān shìshí,",
+      "vi": "Ngoài việc thu thập những sự thật khách quan này,"
+    },
+    {
+      "start": 551.07,
+      "end": 554.13,
+      "en": "we should also try to feel the company's 'personality.'",
+      "zh": "我们还应该试着去感受公司的“性格”。",
+      "pinyin": "wǒmen hái yīnggāi shìzhe qù gǎnshòu gōngsī de “xìnggé”.",
+      "vi": "chúng ta còn nên thử cảm nhận “tính cách” của công ty."
+    },
+    {
+      "start": 554.13,
+      "end": 555.85,
+      "en": "The company's 'personality'?",
+      "zh": "公司的“性格”？",
+      "pinyin": "Gōngsī de “xìnggé”?",
+      "vi": "“Tính cách” của công ty ư?"
+    },
+    {
+      "start": 555.87,
+      "end": 557.99,
+      "en": "That's a fresh way to put it. Hmm.",
+      "zh": "这个说法很新鲜。嗯。",
+      "pinyin": "Zhège shuōfǎ hěn xīnxiān. Èn.",
+      "vi": "Cách nói này khá mới mẻ. Ừm."
+    },
+    {
+      "start": 558,
+      "end": 560.09,
+      "en": "It means by looking at their products,",
+      "zh": "就是通过看他们的产品、",
+      "pinyin": "Jiùshì tōngguò kàn tāmen de chǎnpǐn,",
+      "vi": "Tức là thông qua việc xem sản phẩm của họ,"
+    },
+    {
+      "start": 560.1,
+      "end": 562.49,
+      "en": "advertisements, and what they post on social media,",
+      "zh": "广告、社交媒体上的发言，",
+      "pinyin": "guǎnggào, shèjiāo méitǐ shàng de fāyán,",
+      "vi": "quảng cáo, những phát ngôn trên mạng xã hội,"
+    },
+    {
+      "start": 562.5,
+      "end": 565.86,
+      "en": "to sense whether the company is serious or lively?",
+      "zh": "去感受这个公司是严肃的，还是活泼的？",
+      "pinyin": "qù gǎnshòu zhège gōngsī shì yánsù de, háishì huópō de?",
+      "vi": "để cảm nhận xem công ty này nghiêm túc hay năng động?"
+    },
+    {
+      "start": 565.87,
+      "end": 568.16,
+      "en": "innovative or conservative?",
+      "zh": "是创新的，还是保守的？",
+      "pinyin": "shì chuàngxīn de, háishì bǎoshǒu de?",
+      "vi": "là đổi mới hay bảo thủ?"
+    },
+    {
+      "start": 568.17,
+      "end": 569.49,
+      "en": "Once you understand its 'personality,'",
+      "zh": "了解了它的“性格”，",
+      "pinyin": "Liǎojiě le tā de “xìnggé”,",
+      "vi": "Khi đã hiểu “tính cách” của nó,"
+    },
+    {
+      "start": 569.5,
+      "end": 572.32,
+      "en": "you can better adjust your communication style,",
+      "zh": "你就能更好地调整自己的沟通方式，",
+      "pinyin": "nǐ jiù néng gèng hǎo de tiáozhěng zìjǐ de gōutōng fāngshì,",
+      "vi": "bạn sẽ điều chỉnh được cách giao tiếp của mình tốt hơn,"
+    },
+    {
+      "start": 572.33,
+      "end": 575.39,
+      "en": "and build a more harmonious connection with the interviewer.",
+      "zh": "和面试官建立一种更融洽的联系。",
+      "pinyin": "hé miànshìguān jiànlì yī zhǒng gèng róngqià de liánxì.",
+      "vi": "và tạo được mối liên hệ hài hòa hơn với người phỏng vấn."
+    },
+    {
+      "start": 575.4,
+      "end": 577.06,
+      "en": "You're not reciting materials,",
+      "zh": "你不是在背诵资料，",
+      "pinyin": "Nǐ bú shì zài bèisòng zīliào,",
+      "vi": "Bạn không phải đang học thuộc tài liệu,"
+    },
+    {
+      "start": 577.07,
+      "end": 579.39,
+      "en": "but talking with an organization of flesh and blood.",
+      "zh": "而是在和一个有血有肉的组织对话。",
+      "pinyin": "ér shì zài hé yī gè yǒu xuè yǒu ròu de zǔzhī duìhuà.",
+      "vi": "mà là đang trò chuyện với một tổ chức có máu có thịt."
+    },
+    {
+      "start": 579.4,
+      "end": 581.12,
+      "en": "Well said.",
+      "zh": "说得好。",
+      "pinyin": "Shuō de hǎo.",
+      "vi": "Nói hay lắm."
+    },
+    {
+      "start": 581.13,
+      "end": 583.75,
+      "en": "Rational analysis plus emotional understanding—",
+      "zh": "理性的分析加上感性的理解，",
+      "pinyin": "Lǐxìng de fēnxī jiāshàng gǎnxìng de lǐjiě,",
+      "vi": "Phân tích lý tính cộng với sự thấu hiểu cảm tính,"
+    },
+    {
+      "start": 583.77,
+      "end": 586.09,
+      "en": "only such preparation can be considered comprehensive.",
+      "zh": "这样的准备才算是全面的。",
+      "pinyin": "zhèyàng de zhǔnbèi cái suàn shì quánmiàn de.",
+      "vi": "sự chuẩn bị như vậy mới được coi là toàn diện."
+    },
+    {
+      "start": 586.1,
+      "end": 588.52,
+      "en": "You could say that the information research stage",
+      "zh": "可以说，信息研究这个环节，",
+      "pinyin": "Kěyǐ shuō, xìnxī yánjiū zhège huánjié,",
+      "vi": "Có thể nói, khâu nghiên cứu thông tin,"
+    },
+    {
+      "start": 588.53,
+      "end": 591.19,
+      "en": "is the core of all interview preparation.",
+      "zh": "是整个面试准备工作的核心。",
+      "pinyin": "shì zhěnggè miànshì zhǔnbèi gōngzuò de héxīn.",
+      "vi": "là cốt lõi của toàn bộ công tác chuẩn bị phỏng vấn."
+    },
+    {
+      "start": 591.2,
+      "end": 593.32,
+      "en": "All right, the research work is done,",
+      "zh": "好了，研究工作做完了，",
+      "pinyin": "Hǎo le, yánjiū gōngzuò zuò wán le,",
+      "vi": "Được rồi, việc nghiên cứu đã xong,"
+    },
+    {
+      "start": 593.33,
+      "end": 597.32,
+      "en": "and our heads are already full of information about the company and the position.",
+      "zh": "我们脑子里已经装满了关于公司和职位的信息。",
+      "pinyin": "wǒmen nǎozi lǐ yǐjīng zhuāng mǎn le guānyú gōngsī hé zhíwèi de xìnxī.",
+      "vi": "trong đầu chúng ta đã chứa đầy thông tin về công ty và vị trí."
+    },
+    {
+      "start": 597.33,
+      "end": 599.35,
+      "en": "Next, we need to take this information",
+      "zh": "接下来，就要把这些信息",
+      "pinyin": "Jiēxiàlái, jiù yào bǎ zhèxiē xìnxī",
+      "vi": "Tiếp theo, phải đem những thông tin này"
+    },
+    {
+      "start": 599.37,
+      "end": 601.53,
+      "en": "and combine it with our own experience,",
+      "zh": "和我自己的经历结合起来，",
+      "pinyin": "hé wǒ zìjǐ de jīnglì jiéhé qǐlái,",
+      "vi": "kết hợp với kinh nghiệm của bản thân tôi,"
+    },
+    {
+      "start": 601.53,
+      "end": 604.09,
+      "en": "turning it into what to say in the interview.",
+      "zh": "变成面试时要说的内容了。",
+      "pinyin": "biàn chéng miànshì shí yào shuō de nèiróng le.",
+      "vi": "biến thành nội dung cần nói khi phỏng vấn."
+    },
+    {
+      "start": 604.1,
+      "end": 608.06,
+      "en": "The first thing to face here is the 'self-introduction.'",
+      "zh": "这里面，第一个要面对的，就是“自我介绍”。",
+      "pinyin": "Zhè lǐmiàn, dì yī gè yào miànduì de, jiùshì “zìwǒ jièshào”.",
+      "vi": "Trong đó, thứ đầu tiên phải đối mặt chính là “giới thiệu bản thân”."
+    },
+    {
+      "start": 608.07,
+      "end": 610.86,
+      "en": "Exactly—almost every interview starts with",
+      "zh": "没错，几乎所有的面试都从",
+      "pinyin": "Méicuò, jīhū suǒyǒu de miànshì dōu cóng",
+      "vi": "Đúng vậy, gần như mọi buổi phỏng vấn đều bắt đầu bằng"
+    },
+    {
+      "start": 610.87,
+      "end": 613.79,
+      "en": "'Please give a one-minute self-introduction.'",
+      "zh": "“请你做个一分钟的自我介绍”开始。",
+      "pinyin": "“Qǐng nǐ zuò yī gè yī fēnzhōng de zìwǒ jièshào” kāishǐ.",
+      "vi": "“Hãy giới thiệu bản thân trong một phút”."
+    },
+    {
+      "start": 613.8,
+      "end": 615.36,
+      "en": "This is both the first question",
+      "zh": "这既是第一个问题，",
+      "pinyin": "Zhè jì shì dì yī gè wèntí,",
+      "vi": "Đây vừa là câu hỏi đầu tiên,"
+    },
+    {
+      "start": 615.37,
+      "end": 619.36,
+      "en": "and a golden opportunity to make a first impression on the interviewer.",
+      "zh": "也是你给面试官留下第一印象的黄金机会。",
+      "pinyin": "yě shì nǐ gěi miànshìguān liúxià dì yī yìnxiàng de huángjīn jīhuì.",
+      "vi": "vừa là cơ hội vàng để bạn tạo ấn tượng đầu tiên với người phỏng vấn."
+    },
+    {
+      "start": 619.37,
+      "end": 620.26,
+      "en": "As for the self-introduction,",
+      "zh": "对于自我介绍，",
+      "pinyin": "Duìyú zìwǒ jièshào,",
+      "vi": "Về phần giới thiệu bản thân,"
+    },
+    {
+      "start": 620.27,
+      "end": 622.99,
+      "en": "I suggest definitely writing a script in advance,",
+      "zh": "我建议一定要提前写好稿子，",
+      "pinyin": "wǒ jiànyì yīdìng yào tíqián xiě hǎo gǎozi,",
+      "vi": "tôi khuyên nhất định phải viết sẵn bản thảo,"
+    },
+    {
+      "start": 623,
+      "end": 626.26,
+      "en": "and practicing repeatedly until you can say it fluently.",
+      "zh": "并且反复练习，直到能流利地说出来。",
+      "pinyin": "bìngqiě fǎnfù liànxí, zhídào néng liúlì de shuō chūlái.",
+      "vi": "và luyện tập nhiều lần cho đến khi có thể nói lưu loát."
+    },
+    {
+      "start": 626.27,
+      "end": 629.53,
+      "en": "I agree with writing a script, but practicing repeatedly...",
+      "zh": "写稿子我是同意的，但是反复练习……",
+      "pinyin": "Xiě gǎozi wǒ shì tóngyì de, dànshì fǎnfù liànxí……",
+      "vi": "Việc viết bản thảo thì tôi đồng ý, nhưng luyện tập nhiều lần thì……"
+    },
+    {
+      "start": 629.53,
+      "end": 632.52,
+      "en": "I'm a bit worried it might sound like reciting from memory?",
+      "zh": "我有点担心会不会听起来像在背书？",
+      "pinyin": "wǒ yǒu diǎn dānxīn huì bú huì tīng qǐlái xiàng zài bèishū?",
+      "vi": "tôi hơi lo liệu nó có nghe như đang học thuộc bài không?"
+    },
+    {
+      "start": 632.53,
+      "end": 634.09,
+      "en": "and seem especially unnatural.",
+      "zh": "显得特别不自然。",
+      "pinyin": "xiǎnde tèbié bù zìrán.",
+      "vi": "trông đặc biệt thiếu tự nhiên."
+    },
+    {
+      "start": 634.1,
+      "end": 635.49,
+      "en": "That's a good question.",
+      "zh": "这是个好问题。",
+      "pinyin": "Zhè shì gè hǎo wèntí.",
+      "vi": "Đây là một câu hỏi hay."
+    },
+    {
+      "start": 635.5,
+      "end": 636.46,
+      "en": "What I mean is,",
+      "zh": "我的意思是，",
+      "pinyin": "Wǒ de yìsi shì,",
+      "vi": "Ý tôi là,"
+    },
+    {
+      "start": 636.47,
+      "end": 638.79,
+      "en": "the goal of practice isn't to 'memorize,'",
+      "zh": "练习的目标不是为了“背诵”，",
+      "pinyin": "liànxí de mùbiāo bú shì wèile “bèisòng”,",
+      "vi": "mục tiêu của việc luyện tập không phải để “học thuộc”,"
+    },
+    {
+      "start": 638.8,
+      "end": 640.39,
+      "en": "but to 'internalize.'",
+      "zh": "而是为了“内化”。",
+      "pinyin": "ér shì wèile “nèihuà”.",
+      "vi": "mà là để “nội hóa”."
+    },
+    {
+      "start": 640.4,
+      "end": 642.19,
+      "en": "When you fully absorb the content,",
+      "zh": "当你把内容完全吸收，",
+      "pinyin": "Dāng nǐ bǎ nèiróng wánquán xīshōu,",
+      "vi": "Khi bạn hấp thụ hoàn toàn nội dung,"
+    },
+    {
+      "start": 642.2,
+      "end": 643.96,
+      "en": "and it becomes your own,",
+      "zh": "变成你自己的东西之后，",
+      "pinyin": "biàn chéng nǐ zìjǐ de dōngxi zhīhòu,",
+      "vi": "biến nó thành thứ của chính mình,"
+    },
+    {
+      "start": 643.97,
+      "end": 646.66,
+      "en": "you can speak very naturally,",
+      "zh": "你说出来的时候就可以非常自然，",
+      "pinyin": "nǐ shuō chūlái de shíhou jiù kěyǐ fēicháng zìrán,",
+      "vi": "thì khi nói ra bạn có thể rất tự nhiên,"
+    },
+    {
+      "start": 646.67,
+      "end": 650.33,
+      "en": "while also ensuring clear logic and prominent key points.",
+      "zh": "同时又能保证逻辑清晰、重点突出。",
+      "pinyin": "tóngshí yòu néng bǎozhèng luójí qīngxī, zhòngdiǎn tūchū.",
+      "vi": "đồng thời vẫn đảm bảo logic rõ ràng, trọng tâm nổi bật."
+    },
+    {
+      "start": 650.33,
+      "end": 651.72,
+      "en": "A good self-introduction",
+      "zh": "一个好的自我介绍，",
+      "pinyin": "Yī gè hǎo de zìwǒ jièshào,",
+      "vi": "Một phần giới thiệu bản thân tốt,"
+    },
+    {
+      "start": 651.73,
+      "end": 654.25,
+      "en": "should be like an exciting movie trailer—",
+      "zh": "应该像一个精彩的电影预告片，",
+      "pinyin": "yīnggāi xiàng yī gè jīngcǎi de diànyǐng yùgàopiàn,",
+      "vi": "nên giống như một đoạn trailer phim hấp dẫn,"
+    },
+    {
+      "start": 654.27,
+      "end": 656.93,
+      "en": "showing your highlights in the shortest time,",
+      "zh": "在最短的时间内，展示你的亮点，",
+      "pinyin": "zài zuì duǎn de shíjiān nèi, zhǎnshì nǐ de liàngdiǎn,",
+      "vi": "trong thời gian ngắn nhất, thể hiện điểm nổi bật của bạn,"
+    },
+    {
+      "start": 656.93,
+      "end": 659.09,
+      "en": "and sparking the interviewer's interest.",
+      "zh": "并引起面试官的兴趣。",
+      "pinyin": "bìng yǐnqǐ miànshìguān de xìngqù.",
+      "vi": "và khơi gợi sự hứng thú của người phỏng vấn."
+    },
+    {
+      "start": 659.1,
+      "end": 661.49,
+      "en": "That movie trailer analogy is great!",
+      "zh": "电影预告片这个比喻太棒了！",
+      "pinyin": "Diànyǐng yùgàopiàn zhège bǐyù tài bàng le!",
+      "vi": "Cách ví von với trailer phim này hay quá!"
+    },
+    {
+      "start": 661.5,
+      "end": 664.49,
+      "en": "So what should this 'trailer' include?",
+      "zh": "那这个“预告片”里应该包含哪些内容呢？",
+      "pinyin": "Nà zhège “yùgàopiàn” lǐ yīnggāi bāohán nǎxiē nèiróng ne?",
+      "vi": "Vậy “trailer” này nên bao gồm những nội dung nào?"
+    },
+    {
+      "start": 664.5,
+      "end": 666.99,
+      "en": "I usually suggest a three-part structure.",
+      "zh": "我通常建议一个三段式的结构。",
+      "pinyin": "Wǒ tōngcháng jiànyì yī gè sān duàn shì de jiégòu.",
+      "vi": "Tôi thường đề xuất một cấu trúc ba đoạn."
+    },
+    {
+      "start": 667,
+      "end": 668.72,
+      "en": "First paragraph: who you are.",
+      "zh": "第一段:你是谁。",
+      "pinyin": "Dì yī duàn: nǐ shì shéi.",
+      "vi": "Đoạn thứ nhất: Bạn là ai."
+    },
+    {
+      "start": 668.73,
+      "end": 671.25,
+      "en": "Briefly introduce your name and background.",
+      "zh": "简单介绍你的名字、背景。",
+      "pinyin": "Jiǎndān jièshào nǐ de míngzi, bèijǐng.",
+      "vi": "Giới thiệu ngắn gọn tên và bối cảnh của bạn."
+    },
+    {
+      "start": 671.27,
+      "end": 674.93,
+      "en": "Second paragraph: what you've done and what you've achieved.",
+      "zh": "第二段:你做过什么，并且取得了什么成就。",
+      "pinyin": "Dì èr duàn: nǐ zuòguo shénme, bìngqiě qǔdéle shénme chéngjiù.",
+      "vi": "Đoạn thứ hai: Bạn đã làm gì và đã đạt được những thành tựu gì."
+    },
+    {
+      "start": 674.93,
+      "end": 678.29,
+      "en": "This is the core part; connect it to the position you're applying for,",
+      "zh": "这是核心部分，要结合你申请的职位，",
+      "pinyin": "Zhè shì héxīn bùfen, yào jiéhé nǐ shēnqǐng de zhíwèi,",
+      "vi": "Đây là phần cốt lõi, cần gắn với vị trí bạn ứng tuyển,"
+    },
+    {
+      "start": 678.3,
+      "end": 682.49,
+      "en": "Choose one or two of the most relevant and impressive experiences to discuss.",
+      "zh": "选择一到两个最相关的、最亮眼的经历来讲。",
+      "pinyin": "Xuǎnzé yī dào liǎng gè zuì xiāngguān de, zuì liàngyǎn de jīnglì lái jiǎng.",
+      "vi": "Hãy chọn một đến hai trải nghiệm liên quan nhất và nổi bật nhất để trình bày."
+    },
+    {
+      "start": 682.5,
+      "end": 684.99,
+      "en": "Note: don't just describe your job duties;",
+      "zh": "注意，不要只是描述工作内容，",
+      "pinyin": "Zhùyì, bùyào zhǐshì miáoshù gōngzuò nèiróng,",
+      "vi": "Lưu ý, đừng chỉ mô tả nội dung công việc,"
+    },
+    {
+      "start": 685,
+      "end": 688.19,
+      "en": "Use concrete data to demonstrate your achievements.",
+      "zh": "要用具体的数据来展示你的成绩。",
+      "pinyin": "Yào yòng jùtǐ de shùjù lái zhǎnshì nǐ de chéngjì.",
+      "vi": "Hãy dùng số liệu cụ thể để thể hiện thành tích của bạn."
+    },
+    {
+      "start": 688.2,
+      "end": 691.06,
+      "en": "Third paragraph: why you're suitable for this position.",
+      "zh": "第三段:你为什么适合这个职位。",
+      "pinyin": "Dì sān duàn: nǐ wèishénme shìhé zhège zhíwèi.",
+      "vi": "Đoạn thứ ba: Vì sao bạn phù hợp với vị trí này."
+    },
+    {
+      "start": 691.07,
+      "end": 693.13,
+      "en": "Take your abilities and your enthusiasm",
+      "zh": "把你的能力、你的热情",
+      "pinyin": "Bǎ nǐ de nénglì, nǐ de rèqíng",
+      "vi": "Hãy đem năng lực và sự nhiệt huyết của bạn"
+    },
+    {
+      "start": 693.13,
+      "end": 695.35,
+      "en": "and connect them with the requirements of this position,",
+      "zh": "和这个职位的要求联系起来，",
+      "pinyin": "hé zhège zhíwèi de yāoqiú liánxì qǐlái,",
+      "vi": "liên hệ với yêu cầu của vị trí này,"
+    },
+    {
+      "start": 695.37,
+      "end": 698.59,
+      "en": "and tell them what value you can bring to the company.",
+      "zh": "告诉他们，你能为公司带来什么价值。",
+      "pinyin": "Gàosu tāmen, nǐ néng wèi gōngsī dàilái shénme jiàzhí.",
+      "vi": "và cho họ biết bạn có thể mang lại giá trị gì cho công ty."
+    },
+    {
+      "start": 698.6,
+      "end": 701.69,
+      "en": "This structure is very clear and highly practical.",
+      "zh": "这个结构非常清晰，很有操作性。",
+      "pinyin": "Zhège jiégòu fēicháng qīngxī, hěn yǒu cāozuòxìng.",
+      "vi": "Cấu trúc này rất rõ ràng và rất dễ áp dụng."
+    },
+    {
+      "start": 701.7,
+      "end": 704.79,
+      "en": "I especially agree with what you said: let the data speak.",
+      "zh": "我特别同意你说的，要用数据说话。",
+      "pinyin": "Wǒ tèbié tóngyì nǐ shuō de, yào yòng shùjù shuōhuà.",
+      "vi": "Tôi đặc biệt đồng ý với điều bạn nói: phải để số liệu lên tiếng."
+    },
+    {
+      "start": 704.8,
+      "end": 707.52,
+      "en": "For example, don't say, 'I increased sales,'",
+      "zh": "比如，不说“我提高了销售额”，",
+      "pinyin": "Bǐrú, bù shuō “wǒ tígāole xiāoshòu'é”,",
+      "vi": "Ví dụ, đừng nói “tôi đã tăng doanh số”,"
+    },
+    {
+      "start": 707.53,
+      "end": 708.35,
+      "en": "but say",
+      "zh": "而是说",
+      "pinyin": "ér shì shuō",
+      "vi": "mà hãy nói"
+    },
+    {
+      "start": 708.37,
+      "end": 712.33,
+      "en": "'Through a certain method, I increased sales by twenty percent.'",
+      "zh": "“我通过什么方法，让销售额提高了百分之二十”。",
+      "pinyin": "“Wǒ tōngguò shénme fāngfǎ, ràng xiāoshòu'é tígāole bǎifēnzhī èrshí”.",
+      "vi": "“Tôi đã thông qua phương pháp nào để khiến doanh số tăng hai mươi phần trăm”."
+    },
+    {
+      "start": 712.33,
+      "end": 713.95,
+      "en": "That's more persuasive.",
+      "zh": "这样更有说服力。",
+      "pinyin": "Zhèyàng gèng yǒu shuōfúlì.",
+      "vi": "Như vậy sẽ có sức thuyết phục hơn."
+    },
+    {
+      "start": 713.97,
+      "end": 715.33,
+      "en": "Exactly.",
+      "zh": "正是如此。",
+      "pinyin": "Zhèng shì rúcǐ.",
+      "vi": "Đúng là như vậy."
+    },
+    {
+      "start": 715.33,
+      "end": 717.45,
+      "en": "After finishing the self-introduction, we need to prepare",
+      "zh": "说完了自我介绍，我们就要准备",
+      "pinyin": "Shuō wánle zìwǒ jièshào, wǒmen jiù yào zhǔnbèi",
+      "vi": "Sau khi nói xong phần tự giới thiệu, chúng ta sẽ phải chuẩn bị"
+    },
+    {
+      "start": 717.47,
+      "end": 719.56,
+      "en": "to handle all kinds of questions.",
+      "zh": "应对各种各样的问题了。",
+      "pinyin": "yìngduì gèzhǒng-gèyàng de wèntí le.",
+      "vi": "để đối phó với đủ loại câu hỏi."
+    },
+    {
+      "start": 719.57,
+      "end": 722.73,
+      "en": "Some questions come up in almost every interview.",
+      "zh": "有些问题是几乎每次面试都会遇到的。",
+      "pinyin": "Yǒuxiē wèntí shì jīhū měi cì miànshì dōu huì yùdào de.",
+      "vi": "Có những câu hỏi gần như lần phỏng vấn nào cũng gặp phải."
+    },
+    {
+      "start": 722.73,
+      "end": 725.79,
+      "en": "Right! For example, 'What is your greatest strength?'",
+      "zh": "对！比如“你最大的优点是什么？”",
+      "pinyin": "Duì! Bǐrú “nǐ zuìdà de yōudiǎn shì shénme?”",
+      "vi": "Đúng vậy! Ví dụ “điểm mạnh lớn nhất của bạn là gì?”"
+    },
+    {
+      "start": 725.8,
+      "end": 728.16,
+      "en": "'Why did you leave your last company?'",
+      "zh": "“你为什么离开上一家公司？”",
+      "pinyin": "“Nǐ wèishénme líkāi shàng yī jiā gōngsī?”",
+      "vi": "“Vì sao bạn rời công ty cũ?”"
+    },
+    {
+      "start": 728.17,
+      "end": 730.49,
+      "en": "There's also the question I fear most, which is",
+      "zh": "还有一个我最害怕的问题，就是",
+      "pinyin": "Háiyǒu yī gè wǒ zuì hàipà de wèntí, jiùshì",
+      "vi": "Còn một câu hỏi mà tôi sợ nhất, đó là"
+    },
+    {
+      "start": 730.5,
+      "end": 733.12,
+      "en": "'What is your greatest weakness?'",
+      "zh": "“你最大的缺点是什么？”",
+      "pinyin": "“Nǐ zuìdà de quēdiǎn shì shénme?”",
+      "vi": "“Điểm yếu lớn nhất của bạn là gì?”"
+    },
+    {
+      "start": 733.13,
+      "end": 736.39,
+      "en": "(Laughs) This question is indeed a nightmare for many people.",
+      "zh": "(笑)，这个问题确实是很多人的噩梦。",
+      "pinyin": "(Xiào), zhège wèntí quèshí shì hěnduō rén de èmèng.",
+      "vi": "(Cười) Câu hỏi này đúng là cơn ác mộng của nhiều người."
+    },
+    {
+      "start": 736.4,
+      "end": 739.99,
+      "en": "I remember when I had just graduated, I was also especially afraid of being asked this.",
+      "zh": "我记得我刚毕业的时候，也特别怕被问到这个。",
+      "pinyin": "Wǒ jìde wǒ gāng bìyè de shíhou, yě tèbié pà bèi wèndào zhège.",
+      "vi": "Tôi nhớ khi mình vừa tốt nghiệp, cũng đặc biệt sợ bị hỏi câu này."
+    },
+    {
+      "start": 740,
+      "end": 740.76,
+      "en": "To be honest,",
+      "zh": "说实话吧，",
+      "pinyin": "Shuō shíhuà ba,",
+      "vi": "Nói thật nhé,"
+    },
+    {
+      "start": 740.77,
+      "end": 743.06,
+      "en": "I was afraid they'd think my abilities really weren't good enough;",
+      "zh": "怕他们觉得我能力真的不行；",
+      "pinyin": "pà tāmen juéde wǒ nénglì zhēnde bùxíng;",
+      "vi": "sợ họ nghĩ năng lực của mình thật sự không ổn;"
+    },
+    {
+      "start": 743.07,
+      "end": 745.26,
+      "en": "if I told an inconsequential lie,",
+      "zh": "说一个无关痛痒的假话吧，",
+      "pinyin": "shuō yī gè wúguān-tòngyǎng de jiǎhuà ba,",
+      "vi": "nói một lời nói dối vô thưởng vô phạt thì"
+    },
+    {
+      "start": 745.27,
+      "end": 748.33,
+      "en": "like 'My greatest weakness is that I'm too much of a perfectionist,'",
+      "zh": "比如“我最大的缺点是太追求完美”，",
+      "pinyin": "bǐrú “wǒ zuìdà de quēdiǎn shì tài zhuīqiú wánměi”,",
+      "vi": "ví dụ “khuyết điểm lớn nhất của tôi là quá cầu toàn”,"
+    },
+    {
+      "start": 748.33,
+      "end": 750.19,
+      "en": "it would seem especially insincere.",
+      "zh": "又显得特别不真诚。",
+      "pinyin": "yòu xiǎnde tèbié bù zhēnchéng.",
+      "vi": "lại có vẻ đặc biệt không chân thành."
+    },
+    {
+      "start": 750.2,
+      "end": 752.09,
+      "en": "Li Ming, do you have any good advice?",
+      "zh": "李明，你有什么好建议吗？",
+      "pinyin": "Lǐ Míng, nǐ yǒu shénme hǎo jiànyì ma?",
+      "vi": "Lý Minh, bạn có gợi ý hay nào không?"
+    },
+    {
+      "start": 752.1,
+      "end": 754.32,
+      "en": "This is a typical 'stress question,'",
+      "zh": "这是一个典型的“压力问题”，",
+      "pinyin": "Zhè shì yī gè diǎnxíng de “yālì wèntí”,",
+      "vi": "Đây là một “câu hỏi áp lực” điển hình,"
+    },
+    {
+      "start": 754.33,
+      "end": 757.19,
+      "en": "The interviewer doesn't want to see your weakness itself,",
+      "zh": "面试官想看的不是你的缺点本身，",
+      "pinyin": "miànshìguān xiǎng kàn de bù shì nǐ de quēdiǎn běnshēn,",
+      "vi": "người phỏng vấn không phải muốn xem bản thân khuyết điểm của bạn,"
+    },
+    {
+      "start": 757.2,
+      "end": 759.12,
+      "en": "but your self-awareness,",
+      "zh": "而是你的自我认知能力、",
+      "pinyin": "ér shì nǐ de zìwǒ rènzhī nénglì,",
+      "vi": "mà là khả năng tự nhận thức của bạn,"
+    },
+    {
+      "start": 759.13,
+      "end": 762.49,
+      "en": "your honesty, and your attitude when facing problems.",
+      "zh": "你的诚实度，以及你面对问题的态度。",
+      "pinyin": "nǐ de chéngshídù, yǐjí nǐ miànduì wèntí de tàidu.",
+      "vi": "mức độ trung thực của bạn, cũng như thái độ của bạn khi đối mặt với vấn đề."
+    },
+    {
+      "start": 762.5,
+      "end": 765.79,
+      "en": "This is definitely a question that tests overall qualities.",
+      "zh": "这绝对是一个考察综合素质的问题。",
+      "pinyin": "Zhè juéduì shì yī gè kǎochá zōnghé sùzhì de wèntí.",
+      "vi": "Đây tuyệt đối là một câu hỏi kiểm tra tố chất tổng hợp."
+    },
+    {
+      "start": 765.8,
+      "end": 768.86,
+      "en": "My advice is: first, you must be honest.",
+      "zh": "我的建议是，第一，一定要诚实。",
+      "pinyin": "Wǒ de jiànyì shì, dì yī, yīdìng yào chéngshí.",
+      "vi": "Gợi ý của tôi là: thứ nhất, nhất định phải trung thực."
+    },
+    {
+      "start": 768.87,
+      "end": 770.69,
+      "en": "You can mention a real weakness",
+      "zh": "你可以说一个真实存在，",
+      "pinyin": "Nǐ kěyǐ shuō yī gè zhēnshí cúnzài,",
+      "vi": "Bạn có thể nói một khuyết điểm có thật,"
+    },
+    {
+      "start": 770.7,
+      "end": 772.79,
+      "en": "that won't, for the position you're applying for,",
+      "zh": "但又不会对你申请的这个职位产生",
+      "pinyin": "dàn yòu bù huì duì nǐ shēnqǐng de zhège zhíwèi chǎnshēng",
+      "vi": "nhưng lại không gây ra cho vị trí bạn ứng tuyển"
+    },
+    {
+      "start": 772.8,
+      "end": 774.92,
+      "en": "have a fatal impact.",
+      "zh": "致命影响的缺点。",
+      "pinyin": "zhìmìng yǐngxiǎng de quēdiǎn.",
+      "vi": "một ảnh hưởng chí mạng."
+    },
+    {
+      "start": 774.93,
+      "end": 777.05,
+      "en": "Second, and most importantly,",
+      "zh": "第二，也是最关键的一点，",
+      "pinyin": "Dì èr, yě shì zuì guānjiàn de yī diǎn,",
+      "vi": "Thứ hai, cũng là điểm then chốt nhất,"
+    },
+    {
+      "start": 777.07,
+      "end": 778.09,
+      "en": "you need to explain that you've already realized",
+      "zh": "就是要说明你已经意识到了",
+      "pinyin": "jiùshì yào shuōmíng nǐ yǐjīng yìshídào le",
+      "vi": "là phải nói rõ rằng bạn đã nhận thức được"
+    },
+    {
+      "start": 778.1,
+      "end": 782.52,
+      "en": "this problem and are actively taking action to improve it.",
+      "zh": "这个问题，并且正在积极地采取行动去改进它。",
+      "pinyin": "zhège wèntí, bìngqiě zhèngzài jījí de cǎiqǔ xíngdòng qù gǎijìn tā.",
+      "vi": "vấn đề này, và đang tích cực hành động để cải thiện nó."
+    },
+    {
+      "start": 782.53,
+      "end": 784.55,
+      "en": "Can you give an example?",
+      "zh": "能举个例子吗？",
+      "pinyin": "Néng jǔ gè lìzi ma?",
+      "vi": "Có thể lấy một ví dụ không?"
+    },
+    {
+      "start": 784.57,
+      "end": 787.19,
+      "en": "Of course. For example, a recent college graduate",
+      "zh": "当然。比如，一个刚毕业的大学生",
+      "pinyin": "Dāngrán. Bǐrú, yī gè gāng bìyè de dàxuéshēng",
+      "vi": "Tất nhiên. Ví dụ, một sinh viên đại học vừa tốt nghiệp"
+    },
+    {
+      "start": 787.2,
+      "end": 788.39,
+      "en": "could say something like this:",
+      "zh": "可以这样说:",
+      "pinyin": "kěyǐ zhèyàng shuō:",
+      "vi": "có thể nói như thế này:"
+    },
+    {
+      "start": 788.4,
+      "end": 791.52,
+      "en": "'In the past, I used to get a bit nervous speaking in public,",
+      "zh": "“我以前在公开场合发言会有点紧张，",
+      "pinyin": "“Wǒ yǐqián zài gōngkāi chǎnghé fāyán huì yǒudiǎn jǐnzhāng,",
+      "vi": "“Trước đây tôi phát biểu ở nơi công cộng sẽ hơi căng thẳng,"
+    },
+    {
+      "start": 791.53,
+      "end": 793.45,
+      "en": "and my logic might get a bit messy.",
+      "zh": "逻辑可能会有点乱。",
+      "pinyin": "luójí kěnéng huì yǒudiǎn luàn.",
+      "vi": "logic có thể sẽ hơi lộn xộn."
+    },
+    {
+      "start": 793.47,
+      "end": 794.66,
+      "en": "To improve on this,",
+      "zh": "为了改进这一点，",
+      "pinyin": "Wèile gǎijìn zhè yīdiǎn,",
+      "vi": "Để cải thiện điều này,"
+    },
+    {
+      "start": 794.67,
+      "end": 796.89,
+      "en": "I proactively joined the school's debate club,",
+      "zh": "我主动参加了学校的辩论社，",
+      "pinyin": "wǒ zhǔdòng cānjiā le xuéxiào de biànlùnshè,",
+      "vi": "tôi chủ động tham gia câu lạc bộ tranh biện của trường,"
+    },
+    {
+      "start": 796.9,
+      "end": 800.32,
+      "en": "and deliberately practiced speaking up more in group discussions.",
+      "zh": "并且刻意练习在小组讨论中多发言。",
+      "pinyin": "bìngqiě kèyì liànxí zài xiǎozǔ tǎolùn zhōng duō fāyán.",
+      "vi": "và cố ý luyện tập phát biểu nhiều hơn trong các buổi thảo luận nhóm."
+    },
+    {
+      "start": 800.33,
+      "end": 802.35,
+      "en": "Now, although I still get a bit nervous,",
+      "zh": "现在虽然还是会有点紧张，",
+      "pinyin": "xiànzài suīrán háishì huì yǒudiǎn jǐnzhāng,",
+      "vi": "Bây giờ tuy vẫn sẽ hơi căng thẳng,"
+    },
+    {
+      "start": 802.37,
+      "end": 804.13,
+      "en": "I'm already much better than before,",
+      "zh": "但已经比以前好很多了，",
+      "pinyin": "dàn yǐjīng bǐ yǐqián hǎo hěn duō le,",
+      "vi": "nhưng đã tốt hơn trước rất nhiều rồi,"
+    },
+    {
+      "start": 804.13,
+      "end": 807.69,
+      "en": "and can express my views clearly.' I see!",
+      "zh": "能够清晰地表达自己的观点了。”我明白了！",
+      "pinyin": "nénggòu qīngxī de biǎodá zìjǐ de guāndiǎn le.” Wǒ míngbai le!",
+      "vi": "có thể diễn đạt quan điểm của mình một cách rõ ràng rồi.” Tôi hiểu rồi!"
+    },
+    {
+      "start": 807.7,
+      "end": 810.36,
+      "en": "This answer first admits a weakness,",
+      "zh": "这个回答首先承认了一个缺点，",
+      "pinyin": "zhège huídá shǒuxiān chéngrèn le yīgè quēdiǎn,",
+      "vi": "Câu trả lời này trước tiên thừa nhận một điểm yếu,"
+    },
+    {
+      "start": 810.37,
+      "end": 814.69,
+      "en": "then shows the actions you took to improve and the results you've achieved.",
+      "zh": "然后展示了你积极改进的行动和已经取得的效果。",
+      "pinyin": "ránhòu zhǎnshì le nǐ jījí gǎijìn de xíngdòng hé yǐjīng qǔdé de xiàoguǒ.",
+      "vi": "sau đó thể hiện những hành động tích cực bạn đã làm để cải thiện và kết quả đã đạt được."
+    },
+    {
+      "start": 814.7,
+      "end": 816.72,
+      "en": "This way, a negative question",
+      "zh": "这样就把一个负面的问题，",
+      "pinyin": "zhèyàng jiù bǎ yīgè fùmiàn de wèntí,",
+      "vi": "Như vậy là đã biến một câu hỏi tiêu cực,"
+    },
+    {
+      "start": 816.73,
+      "end": 821.12,
+      "en": "becomes an opportunity to show your ambition and problem-solving ability.",
+      "zh": "变成了一个展示你上进心和解决问题能力的机会。",
+      "pinyin": "biànchéng le yīgè zhǎnshì nǐ shàngjìnxīn hé jiějué wèntí nénglì de jīhuì.",
+      "vi": "thành một cơ hội để thể hiện tinh thần cầu tiến và khả năng giải quyết vấn đề của bạn."
+    },
+    {
+      "start": 821.13,
+      "end": 822.39,
+      "en": "So smart!",
+      "zh": "太聪明了！",
+      "pinyin": "Tài cōngming le!",
+      "vi": "Thông minh quá!"
+    },
+    {
+      "start": 822.4,
+      "end": 826.72,
+      "en": "Yes. Interview preparation is, to some extent, like playing chess.",
+      "zh": "是的。面试准备，在某种程度上，就像下棋一样。",
+      "pinyin": "Shì de. Miànshì zhǔnbèi, zài mǒuzhǒng chéngdù shang, jiù xiàng xiàqí yīyàng.",
+      "vi": "Đúng vậy. Chuẩn bị phỏng vấn, ở một mức độ nào đó, giống như chơi cờ vậy."
+    },
+    {
+      "start": 826.73,
+      "end": 829.72,
+      "en": "You need to think ahead about every possible move the other side might make,",
+      "zh": "你要提前想好对方可能走的每一步，",
+      "pinyin": "nǐ yào tíqián xiǎnghǎo duìfāng kěnéng zǒu de měi yī bù,",
+      "vi": "Bạn phải nghĩ trước mọi nước đi mà đối phương có thể thực hiện,"
+    },
+    {
+      "start": 829.73,
+      "end": 832.25,
+      "en": "and prepare your own response strategies.",
+      "zh": "并准备好自己的应对策略。",
+      "pinyin": "bìng zhǔnbèi hǎo zìjǐ de yìngduì cèlüè.",
+      "vi": "và chuẩn bị sẵn chiến lược ứng phó của mình."
+    },
+    {
+      "start": 832.27,
+      "end": 833.76,
+      "en": "Besides these common questions,",
+      "zh": "除了这些常见问题，",
+      "pinyin": "chúle zhèxiē chángjiàn wèntí,",
+      "vi": "Ngoài những câu hỏi thường gặp này,"
+    },
+    {
+      "start": 833.77,
+      "end": 837.49,
+      "en": "we also need to prepare a few questions we want to ask the interviewer.",
+      "zh": "我们还必须准备几个我们想问面试官的问题。",
+      "pinyin": "wǒmen hái bìxū zhǔnbèi jǐ gè wǒmen xiǎng wèn miànshìguān de wèntí.",
+      "vi": "chúng ta còn phải chuẩn bị vài câu hỏi mà chúng ta muốn hỏi người phỏng vấn."
+    },
+    {
+      "start": 837.5,
+      "end": 839.92,
+      "en": "Right, this part is also very important.",
+      "zh": "对，这个环节也很重要。",
+      "pinyin": "Duì, zhège huánjié yě hěn zhòngyào.",
+      "vi": "Đúng, phần này cũng rất quan trọng."
+    },
+    {
+      "start": 839.93,
+      "end": 842.85,
+      "en": "At the end of the interview, the interviewer usually asks:",
+      "zh": "在面试的最后，面试官通常会问:",
+      "pinyin": "Zài miànshì de zuìhòu, miànshìguān tōngcháng huì wèn:",
+      "vi": "Vào cuối buổi phỏng vấn, người phỏng vấn thường sẽ hỏi:"
+    },
+    {
+      "start": 842.87,
+      "end": 845.13,
+      "en": "'Do you have any questions you'd like to ask us?'",
+      "zh": "“你有什么问题想问我们吗？”",
+      "pinyin": "Nǐ yǒu shénme wèntí xiǎng wèn wǒmen ma?",
+      "vi": "“Bạn có câu hỏi nào muốn hỏi chúng tôi không?”"
+    },
+    {
+      "start": 845.13,
+      "end": 847.05,
+      "en": "If you say 'I have no questions,'",
+      "zh": "如果你说“没有问题”，",
+      "pinyin": "rúguǒ nǐ shuō “méiyǒu wèntí”,",
+      "vi": "Nếu bạn nói “không có câu hỏi nào”,"
+    },
+    {
+      "start": 847.07,
+      "end": 848.76,
+      "en": "that might make the other person feel",
+      "zh": "那可能会让对方觉得",
+      "pinyin": "nà kěnéng huì ràng duìfāng juéde",
+      "vi": "thì có thể khiến đối phương cảm thấy"
+    },
+    {
+      "start": 848.77,
+      "end": 852.53,
+      "en": "you aren't that interested in the position or the company.",
+      "zh": "你对这个职位或者公司没有那么大的兴趣。",
+      "pinyin": "nǐ duì zhège zhíwèi huòzhě gōngsī méiyǒu nàme dà de xìngqù.",
+      "vi": "bạn không có hứng thú lớn đến vậy với vị trí này hoặc công ty."
+    },
+    {
+      "start": 852.53,
+      "end": 855.35,
+      "en": "Exactly. Asking questions is your chance to show that you",
+      "zh": "没错。问问题，是你展示你对公司",
+      "pinyin": "Méicuò. Wèn wèntí, shì nǐ zhǎnshì nǐ duì gōngsī",
+      "vi": "Đúng vậy. Đặt câu hỏi là cơ hội để bạn thể hiện rằng bạn"
+    },
+    {
+      "start": 855.37,
+      "end": 857.99,
+      "en": "have thought deeply about the company—it's your last chance.",
+      "zh": "有深入思考的最后机会。",
+      "pinyin": "yǒu shēnrù sīkǎo de zuìhòu jīhuì.",
+      "vi": "đã suy nghĩ sâu sắc về công ty — đó là cơ hội cuối cùng."
+    },
+    {
+      "start": 858,
+      "end": 859.52,
+      "en": "But don't ask those",
+      "zh": "但是，不要问那些",
+      "pinyin": "Dànshì, bùyào wèn nàxiē",
+      "vi": "Nhưng đừng hỏi những"
+    },
+    {
+      "start": 859.53,
+      "end": 862.39,
+      "en": "questions whose answers can be found with a simple search,",
+      "zh": "通过简单搜索就能找到答案的问题，",
+      "pinyin": "tōngguò jiǎndān sōusuǒ jiù néng zhǎodào dá'àn de wèntí,",
+      "vi": "câu hỏi mà chỉ cần tìm kiếm đơn giản là có thể tìm ra đáp án,"
+    },
+    {
+      "start": 862.4,
+      "end": 864.72,
+      "en": "such as 'What business is the company in?'",
+      "zh": "比如“公司是做什么业务的”。",
+      "pinyin": "bǐrú “gōngsī shì zuò shénme yèwù de”.",
+      "vi": "ví dụ “công ty làm ngành nghề gì”."
+    },
+    {
+      "start": 864.73,
+      "end": 866.79,
+      "en": "That will make you seem underprepared.",
+      "zh": "这会显得你准备不充分。",
+      "pinyin": "zhè huì xiǎnde nǐ zhǔnbèi bù chōngfèn.",
+      "vi": "Điều đó sẽ khiến bạn có vẻ chuẩn bị chưa đầy đủ."
+    },
+    {
+      "start": 866.8,
+      "end": 869.12,
+      "en": "Then what kind of questions should I ask?",
+      "zh": "那我应该问什么样的问题呢？",
+      "pinyin": "Nà wǒ yīnggāi wèn shénme yàng de wèntí ne?",
+      "vi": "Vậy tôi nên hỏi những câu hỏi như thế nào?"
+    },
+    {
+      "start": 869.13,
+      "end": 872.39,
+      "en": "You can ask some questions about the team, about position development,",
+      "zh": "你可以问一些关于团队、关于职位发展、",
+      "pinyin": "nǐ kěyǐ wèn yīxiē guānyú tuánduì, guānyú zhíwèi fāzhǎn,",
+      "vi": "Bạn có thể hỏi một số câu về đội nhóm, về phát triển vị trí,"
+    },
+    {
+      "start": 872.4,
+      "end": 874.16,
+      "en": "and about company culture.",
+      "zh": "关于公司文化的问题。",
+      "pinyin": "guānyú gōngsī wénhuà de wèntí.",
+      "vi": "về văn hóa công ty."
+    },
+    {
+      "start": 874.17,
+      "end": 874.79,
+      "en": "For example,",
+      "zh": "比如，",
+      "pinyin": "bǐrú,",
+      "vi": "Ví dụ,"
+    },
+    {
+      "start": 874.8,
+      "end": 877.52,
+      "en": "'What is the biggest challenge this team currently faces?'",
+      "zh": "“这个团队目前最大的挑战是什么？”",
+      "pinyin": "Zhège tuánduì mùqián zuìdà de tiǎozhàn shì shénme?",
+      "vi": "“Thách thức lớn nhất hiện tại của đội nhóm này là gì?”"
+    },
+    {
+      "start": 877.53,
+      "end": 879.65,
+      "en": "Or 'If I can join the team,",
+      "zh": "或者“如果我能加入团队，",
+      "pinyin": "huòzhě “rúguǒ wǒ néng jiārù tuánduì,",
+      "vi": "Hoặc “Nếu tôi có thể gia nhập đội nhóm,"
+    },
+    {
+      "start": 879.67,
+      "end": 881.56,
+      "en": "what would you like me to",
+      "zh": "您希望我在前三个月内",
+      "pinyin": "nín xīwàng wǒ zài qián sān gè yuè nèi",
+      "vi": "ông/bà hy vọng trong ba tháng đầu tiên tôi"
+    },
+    {
+      "start": 881.57,
+      "end": 884.29,
+      "en": "achieve what kind of goals?' These questions",
+      "zh": "达成什么样的目标？”这些问题",
+      "pinyin": "dádào shénme yàng de mùbiāo?” zhèxiē wèntí",
+      "vi": "đạt được những mục tiêu như thế nào?” Những câu hỏi này"
+    },
+    {
+      "start": 884.3,
+      "end": 886.52,
+      "en": "can both help you understand the future job better,",
+      "zh": "既能让你更了解未来的工作，",
+      "pinyin": "jì néng ràng nǐ gèng liǎojiě wèilái de gōngzuò,",
+      "vi": "vừa giúp bạn hiểu rõ hơn về công việc tương lai,"
+    },
+    {
+      "start": 886.53,
+      "end": 889.59,
+      "en": "and show the depth of your thinking and your proactive attitude.",
+      "zh": "也能体现出你的思考深度和积极性。",
+      "pinyin": "yě néng tǐxiàn chū nǐ de sīkǎo shēndù hé jījíxìng.",
+      "vi": "vừa thể hiện chiều sâu suy nghĩ và sự tích cực của bạn."
+    },
+    {
+      "start": 889.6,
+      "end": 891.16,
+      "en": "I like these questions.",
+      "zh": "我喜欢这些问题。",
+      "pinyin": "Wǒ xǐhuan zhèxiē wèntí.",
+      "vi": "Tôi thích những câu hỏi này."
+    },
+    {
+      "start": 891.17,
+      "end": 893.69,
+      "en": "They can start a deeper conversation,",
+      "zh": "它们能开启一段更深入的对话，",
+      "pinyin": "tāmen néng kāiqǐ yī duàn gèng shēnrù de duìhuà,",
+      "vi": "Chúng có thể mở ra một cuộc trò chuyện sâu sắc hơn,"
+    },
+    {
+      "start": 893.7,
+      "end": 895.16,
+      "en": "rather than just a simple Q&A.",
+      "zh": "而不仅仅是一问一答。",
+      "pinyin": "ér bù jǐnjǐn shì yī wèn yī dá.",
+      "vi": "chứ không chỉ là hỏi-đáp đơn thuần."
+    },
+    {
+      "start": 895.17,
+      "end": 898.19,
+      "en": "It feels like the whole interview preparation process",
+      "zh": "感觉整个面试的准备过程，",
+      "pinyin": "gǎnjué zhěnggè miànshì de zhǔnbèi guòchéng,",
+      "vi": "Cảm giác như toàn bộ quá trình chuẩn bị phỏng vấn,"
+    },
+    {
+      "start": 898.2,
+      "end": 900.69,
+      "en": "is a process of continuously getting to know yourself more deeply",
+      "zh": "就是一个不断深入了解自己、",
+      "pinyin": "jiùshì yīgè bùduàn shēnrù liǎojiě zìjǐ,",
+      "vi": "chính là một quá trình không ngừng hiểu sâu hơn về bản thân,"
+    },
+    {
+      "start": 900.7,
+      "end": 903.19,
+      "en": "and also getting to know the other side more deeply.",
+      "zh": "也深入了解对方的过程。",
+      "pinyin": "yě shēnrù liǎojiě duìfāng de guòchéng.",
+      "vi": "và cũng là quá trình hiểu sâu hơn về đối phương."
+    },
+    {
+      "start": 903.2,
+      "end": 906.16,
+      "en": "All right, everything is ready; we're just waiting for the east wind.",
+      "zh": "好了，万事俱备，只欠东风。",
+      "pinyin": "Hǎo le, wàn shì jù bèi, zhǐ qiàn dōngfēng.",
+      "vi": "Được rồi, mọi việc đã chuẩn bị xong, chỉ còn chờ cơ hội."
+    },
+    {
+      "start": 906.17,
+      "end": 908.39,
+      "en": "We've finally reached the day of the interview.",
+      "zh": "我们终于来到了面试当天。",
+      "pinyin": "wǒmen zhōngyú lái dào le miànshì dāngtiān.",
+      "vi": "Cuối cùng chúng ta cũng đến ngày phỏng vấn."
+    },
+    {
+      "start": 908.4,
+      "end": 910.09,
+      "en": "Even if you prepare as thoroughly as possible,",
+      "zh": "即使准备得再充分，",
+      "pinyin": "jíshǐ zhǔnbèi de zài chōngfèn,",
+      "vi": "Dù có chuẩn bị kỹ càng đến đâu,"
+    },
+    {
+      "start": 910.1,
+      "end": 914.39,
+      "en": "some small details on the interview day can also affect the final outcome.",
+      "zh": "面试当天的一些小细节也可能会影响最终的结果。",
+      "pinyin": "miànshì dāngtiān de yīxiē xiǎo xìjié yě kěnéng huì yǐngxiǎng zuìzhōng de jiéguǒ.",
+      "vi": "một số tiểu tiết trong ngày phỏng vấn cũng có thể ảnh hưởng đến kết quả cuối cùng."
+    },
+    {
+      "start": 914.4,
+      "end": 916.59,
+      "en": "Yes. For example, time management.",
+      "zh": "是的。比如时间管理。",
+      "pinyin": "Shì de. Bǐrú shíjiān guǎnlǐ.",
+      "vi": "Đúng vậy. Ví dụ như quản lý thời gian."
+    },
+    {
+      "start": 916.6,
+      "end": 919.79,
+      "en": "My principle is that whether it's online or offline,",
+      "zh": "我的原则是，无论是线上还是线下，",
+      "pinyin": "wǒ de yuánzé shì, wúlùn shì xiànshàng háishì xiànxià,",
+      "vi": "Nguyên tắc của tôi là, dù là phỏng vấn trực tuyến hay trực tiếp,"
+    },
+    {
+      "start": 919.8,
+      "end": 921.46,
+      "en": "Make sure to arrive early.",
+      "zh": "一定要提前到。",
+      "pinyin": "yīdìng yào tíqián dào.",
+      "vi": "Nhất định phải đến sớm."
+    },
+    {
+      "start": 921.47,
+      "end": 922.49,
+      "en": "If it's in person,",
+      "zh": "如果是线下，",
+      "pinyin": "rúguǒ shì xiànxià,",
+      "vi": "Nếu là phỏng vấn trực tiếp,"
+    },
+    {
+      "start": 922.5,
+      "end": 925.16,
+      "en": "I usually get there 15 to 20 minutes early",
+      "zh": "我一般会提前十五到二十分钟",
+      "pinyin": "wǒ yībān huì tíqián shíwǔ dào èrshí fēnzhōng",
+      "vi": "Tôi thường đến sớm mười lăm đến hai mươi phút"
+    },
+    {
+      "start": 925.17,
+      "end": 928.23,
+      "en": "arrive near the interview location, get familiar with the surroundings,",
+      "zh": "到达面试地点附近，熟悉一下环境，",
+      "pinyin": "dàodá miànshì dìdiǎn fùjìn, shúxī yīxià huánjìng,",
+      "vi": "đến gần địa điểm phỏng vấn, làm quen với môi trường xung quanh,"
+    },
+    {
+      "start": 928.23,
+      "end": 931.19,
+      "en": "calm my nerves, and then before the scheduled time",
+      "zh": "平复一下心情，然后在预约时间",
+      "pinyin": "píngfù yīxià xīnqíng, ránhòu zài yùyuē shíjiān",
+      "vi": "trấn tĩnh lại, sau đó trước giờ hẹn"
+    },
+    {
+      "start": 931.2,
+      "end": 933.46,
+      "en": "enter the company about five minutes early.",
+      "zh": "前五分钟左右进入公司。",
+      "pinyin": "qián wǔ fēnzhōng zuǒyòu jìnrù gōngsī.",
+      "vi": "khoảng năm phút thì vào công ty."
+    },
+    {
+      "start": 933.47,
+      "end": 934.96,
+      "en": "That's a very good habit.",
+      "zh": "这个习惯非常好。",
+      "pinyin": "zhège xíguàn fēicháng hǎo.",
+      "vi": "Thói quen này rất tốt."
+    },
+    {
+      "start": 934.97,
+      "end": 938.09,
+      "en": "Arriving too early may cause inconvenience for them;",
+      "zh": "提前太多，可能会给对方带来不便；",
+      "pinyin": "tíqián tài duō, kěnéng huì gěi duìfāng dàilái bùbiàn;",
+      "vi": "Đến quá sớm có thể gây bất tiện cho đối phương;"
+    },
+    {
+      "start": 938.1,
+      "end": 941.36,
+      "en": "Being late, on the other hand, is an even more fatal mistake.",
+      "zh": "迟到，那就更是一个致命的错误了。",
+      "pinyin": "chídào, nà jiù gèng shì yī gè zhìmìng de cuòwù le.",
+      "vi": "Còn đến muộn thì càng là một sai lầm chí mạng."
+    },
+    {
+      "start": 941.37,
+      "end": 943.19,
+      "en": "For online video interviews,",
+      "zh": "对于线上视频面试，",
+      "pinyin": "duìyú xiànshàng shìpín miànshì,",
+      "vi": "Đối với phỏng vấn video trực tuyến,"
+    },
+    {
+      "start": 943.2,
+      "end": 945.56,
+      "en": "also log in at least fifteen minutes early,",
+      "zh": "也要提前至少十五分钟登录，",
+      "pinyin": "yě yào tíqián zhìshǎo shíwǔ fēnzhōng dēnglù,",
+      "vi": "cũng phải đăng nhập sớm ít nhất mười lăm phút,"
+    },
+    {
+      "start": 945.57,
+      "end": 947.69,
+      "en": "check the network, camera,",
+      "zh": "检查一下网络、摄像头、",
+      "pinyin": "jiǎnchá yīxià wǎngluò, shèxiàngtóu,",
+      "vi": "kiểm tra mạng, camera,"
+    },
+    {
+      "start": 947.7,
+      "end": 950.76,
+      "en": "and microphone, and make sure all equipment is working properly.",
+      "zh": "麦克风，确保一切设备运转正常。",
+      "pinyin": "màikèfēng, quèbǎo yīqiè shèbèi yùnzhuǎn zhèngcháng.",
+      "vi": "micro, đảm bảo mọi thiết bị hoạt động bình thường."
+    },
+    {
+      "start": 950.77,
+      "end": 952.96,
+      "en": "Also, attire and overall demeanor.",
+      "zh": "还有着装和精神面貌。",
+      "pinyin": "hái yǒu zhuózhuāng hé jīngshén miànmào.",
+      "vi": "Còn có cả trang phục và tinh thần."
+    },
+    {
+      "start": 952.97,
+      "end": 954.59,
+      "en": "Even for a video interview,",
+      "zh": "即使是视频面试，",
+      "pinyin": "jíshǐ shì shìpín miànshì,",
+      "vi": "Dù là phỏng vấn video,"
+    },
+    {
+      "start": 954.6,
+      "end": 957.76,
+      "en": "you should still wear appropriate clothes and tidy your hair.",
+      "zh": "也要穿上得体的衣服，整理好发型。",
+      "pinyin": "yě yào chuān shàng détǐ de yīfu, zhěnglǐ hǎo fàxíng.",
+      "vi": "cũng phải mặc trang phục phù hợp, chỉnh lại tóc tai."
+    },
+    {
+      "start": 957.77,
+      "end": 960.46,
+      "en": "Get yourself into the best condition.",
+      "zh": "把自己调整到最好的状态。",
+      "pinyin": "bǎ zìjǐ tiáozhěng dào zuì hǎo de zhuàngtài.",
+      "vi": "điều chỉnh bản thân vào trạng thái tốt nhất."
+    },
+    {
+      "start": 960.47,
+      "end": 963.49,
+      "en": "Before an interview, I smile at myself in the mirror,",
+      "zh": "我面试前会对着镜子里的自己笑一笑，",
+      "pinyin": "wǒ miànshì qián huì duìzhe jìngzi lǐ de zìjǐ xiào yī xiào,",
+      "vi": "Trước khi phỏng vấn, tôi sẽ cười với chính mình trong gương,"
+    },
+    {
+      "start": 963.5,
+      "end": 965.62,
+      "en": "and tell myself, 'You can do it!'",
+      "zh": "告诉自己“你可以的！”。",
+      "pinyin": "gàosu zìjǐ “nǐ kěyǐ de!”.",
+      "vi": "tự nhủ “Bạn làm được mà!”."
+    },
+    {
+      "start": 965.63,
+      "end": 968.59,
+      "en": "This kind of positive self-suggestion is really useful.",
+      "zh": "这种积极的心理暗示真的很有用。",
+      "pinyin": "zhè zhǒng jījí de xīnlǐ ànshì zhēn de hěn yǒuyòng.",
+      "vi": "Cách tự gợi ý tích cực này thật sự rất hữu ích."
+    },
+    {
+      "start": 968.6,
+      "end": 970.29,
+      "en": "I do too. Also,",
+      "zh": "我也会。另外，",
+      "pinyin": "wǒ yě huì. lìngwài,",
+      "vi": "Tôi cũng vậy. Ngoài ra,"
+    },
+    {
+      "start": 970.3,
+      "end": 973.06,
+      "en": "Some nonverbal cues during the interview,",
+      "zh": "面试过程中的一些非语言信息，",
+      "pinyin": "miànshì guòchéng zhōng de yīxiē fēi yǔyán xìnxī,",
+      "vi": "Một số thông tin phi ngôn ngữ trong quá trình phỏng vấn,"
+    },
+    {
+      "start": 973.07,
+      "end": 975.79,
+      "en": "that is, body language, are also very important.",
+      "zh": "也就是身体语言，也非常重要。",
+      "pinyin": "yě jiùshì shēntǐ yǔyán, yě fēicháng zhòngyào.",
+      "vi": "tức là ngôn ngữ cơ thể, cũng rất quan trọng."
+    },
+    {
+      "start": 975.8,
+      "end": 978.76,
+      "en": "Make natural eye contact with the interviewer,",
+      "zh": "要和面试官有自然的眼神交流，",
+      "pinyin": "yào hé miànshìguān yǒu zìrán de yǎnshén jiāoliú,",
+      "vi": "Cần có giao tiếp bằng ánh mắt tự nhiên với người phỏng vấn,"
+    },
+    {
+      "start": 978.77,
+      "end": 981.86,
+      "en": "Sit upright, and you can lean slightly forward,",
+      "zh": "坐姿要端正，身体可以微微前倾，",
+      "pinyin": "zuòzī yào duānzhèng, shēntǐ kěyǐ wēiwēi qiánqīng,",
+      "vi": "Tư thế ngồi phải ngay ngắn, có thể hơi nghiêng người về phía trước,"
+    },
+    {
+      "start": 981.87,
+      "end": 984.63,
+      "en": "to show that you're very interested in the conversation.",
+      "zh": "表示你对谈话内容很感兴趣。",
+      "pinyin": "biǎoshì nǐ duì tánhuà nèiróng hěn gǎn xìngqù.",
+      "vi": "để thể hiện bạn rất hứng thú với nội dung cuộc trò chuyện."
+    },
+    {
+      "start": 984.63,
+      "end": 986.25,
+      "en": "Appropriate smiles and nodding,",
+      "zh": "适当的微笑和点头，",
+      "pinyin": "shìdàng de wēixiào hé diǎntóu,",
+      "vi": "Những nụ cười và cái gật đầu phù hợp,"
+    },
+    {
+      "start": 986.27,
+      "end": 988.99,
+      "en": "can also create a good conversational atmosphere.",
+      "zh": "也能营造一个很好的交流氛围。",
+      "pinyin": "yě néng yíngzào yī gè hěn hǎo de jiāoliú fēnwéi.",
+      "vi": "cũng có thể tạo ra bầu không khí giao tiếp rất tốt."
+    },
+    {
+      "start": 989,
+      "end": 993.66,
+      "en": "Yeah, these small details convey your confidence and respect.",
+      "zh": "嗯，这些小细节能传递出你的自信和尊重。",
+      "pinyin": "ǹg, zhèxiē xiǎo xìjié néng chuándì chū nǐ de zìxìn hé zūnzhòng.",
+      "vi": "Ừ, những chi tiết nhỏ này có thể truyền tải sự tự tin và tôn trọng của bạn."
+    },
+    {
+      "start": 993.67,
+      "end": 998.09,
+      "en": "After the interview ends, is everything done and you just go home and wait for notification?",
+      "zh": "面试结束后，是不是就万事大吉，回家等通知了？",
+      "pinyin": "miànshì jiéshù hòu, shì bù shì jiù wànshìdàjí, huíjiā děng tōngzhī le?",
+      "vi": "Sau khi phỏng vấn kết thúc, có phải là mọi việc đều ổn thỏa, về nhà chờ thông báo không?"
+    },
+    {
+      "start": 998.1,
+      "end": 999.16,
+      "en": "It's not over yet.",
+      "zh": "还没结束。",
+      "pinyin": "hái méi jiéshù.",
+      "vi": "Chưa kết thúc đâu."
+    },
+    {
+      "start": 999.17,
+      "end": 1003.36,
+      "en": "There's one very important step, and that is sending a thank-you email.",
+      "zh": "还有一个很重要的步骤，那就是发送一封感谢信。",
+      "pinyin": "hái yǒu yī gè hěn zhòngyào de bùzhòu, nà jiùshì fāsòng yī fēng gǎnxiè xìn.",
+      "vi": "Còn một bước rất quan trọng, đó là gửi một lá thư cảm ơn."
+    },
+    {
+      "start": 1003.37,
+      "end": 1006.83,
+      "en": "I suggest within twenty-four hours after the interview,",
+      "zh": "我建议在面试结束后的二十四小时内，",
+      "pinyin": "wǒ jiànyì zài miànshì jiéshù hòu de èrshísì xiǎoshí nèi,",
+      "vi": "Tôi khuyên trong vòng hai mươi bốn giờ sau khi phỏng vấn kết thúc,"
+    },
+    {
+      "start": 1006.83,
+      "end": 1008.85,
+      "en": "send the interviewer an email.",
+      "zh": "给面试官发一封电子邮件。",
+      "pinyin": "gěi miànshìguān fā yī fēng diànzǐ yóujiàn.",
+      "vi": "gửi cho người phỏng vấn một email."
+    },
+    {
+      "start": 1008.87,
+      "end": 1011.46,
+      "en": "What's the use of sending a thank-you note?",
+      "zh": "发感谢信有什么用呢？",
+      "pinyin": "fā gǎnxiè xìn yǒu shénme yòng ne?",
+      "vi": "Gửi thư cảm ơn có tác dụng gì?"
+    },
+    {
+      "start": 1011.47,
+      "end": 1014.49,
+      "en": "First, it's a basic workplace courtesy,",
+      "zh": "首先，这是一种基本的职场礼仪，",
+      "pinyin": "shǒuxiān, zhè shì yī zhǒng jīběn de zhíchǎng lǐyí,",
+      "vi": "Thứ nhất, đây là một phép lịch sự cơ bản nơi công sở,"
+    },
+    {
+      "start": 1014.5,
+      "end": 1016.82,
+      "en": "and can reflect your professionalism.",
+      "zh": "能体现你的专业素养。",
+      "pinyin": "néng tǐxiàn nǐ de zhuānyè sùyǎng.",
+      "vi": "có thể thể hiện sự chuyên nghiệp của bạn."
+    },
+    {
+      "start": 1016.83,
+      "end": 1018.22,
+      "en": "Second, it's also a",
+      "zh": "其次，这也是一个",
+      "pinyin": "qícì, zhè yě shì yī gè",
+      "vi": "Thứ hai, đây cũng là một"
+    },
+    {
+      "start": 1018.23,
+      "end": 1021.39,
+      "en": "chance to reiterate your interest in the position.",
+      "zh": "再次强调你对这个职位兴趣的机会。",
+      "pinyin": "zàicì qiángdiào nǐ duì zhège zhíwèi xìngqù de jīhuì.",
+      "vi": "cơ hội để nhấn mạnh lại sự hứng thú của bạn với vị trí này."
+    },
+    {
+      "start": 1021.4,
+      "end": 1022.62,
+      "en": "In the email, you can",
+      "zh": "你可以在信中",
+      "pinyin": "nǐ kěyǐ zài xìn zhōng",
+      "vi": "Trong thư, bạn có thể"
+    },
+    {
+      "start": 1022.63,
+      "end": 1025.05,
+      "en": "thank them again for giving you the interview opportunity,",
+      "zh": "再次感谢他们给你面试机会，",
+      "pinyin": "zàicì gǎnxiè tāmen gěi nǐ miànshì jīhuì,",
+      "vi": "cảm ơn họ một lần nữa vì đã cho bạn cơ hội phỏng vấn,"
+    },
+    {
+      "start": 1025.07,
+      "end": 1027.69,
+      "en": "briefly restate your understanding of the position",
+      "zh": "简单重申一下你对职位的理解",
+      "pinyin": "jiǎndān chóngshēn yīxià nǐ duì zhíwèi de lǐjiě",
+      "vi": "nhắc lại ngắn gọn hiểu biết của bạn về vị trí"
+    },
+    {
+      "start": 1027.7,
+      "end": 1028.96,
+      "en": "and how well you fit it,",
+      "zh": "和你的匹配度，",
+      "pinyin": "hé nǐ de pǐpèidù,",
+      "vi": "và mức độ phù hợp của bạn,"
+    },
+    {
+      "start": 1028.97,
+      "end": 1032.29,
+      "en": "You can even add a point you didn't have time to mention during the interview.",
+      "zh": "甚至可以补充你在面试时没来得及说的某个要点。",
+      "pinyin": "shènzhì kěyǐ bǔchōng nǐ zài miànshì shí méi láidejí shuō de mǒu gè yàodiǎn.",
+      "vi": "thậm chí có thể bổ sung một điểm nào đó bạn chưa kịp nói khi phỏng vấn."
+    },
+    {
+      "start": 1032.3,
+      "end": 1034.79,
+      "en": "I see.",
+      "zh": "我明白了。",
+      "pinyin": "wǒ míngbai le.",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 1034.8,
+      "end": 1037.19,
+      "en": "This thank-you note is like, in the interviewer's mind,",
+      "zh": "这封感谢信就像是你在面试官心中",
+      "pinyin": "zhè fēng gǎnxiè xìn jiù xiàng shì nǐ zài miànshìguān xīnzhōng",
+      "vi": "Lá thư cảm ơn này giống như việc bạn, trong lòng người phỏng vấn,"
+    },
+    {
+      "start": 1037.2,
+      "end": 1041.39,
+      "en": "the last impression you leave, and a very good one.",
+      "zh": "留下的最后一个、也是一个非常好的印象。",
+      "pinyin": "liúxià de zuìhòu yī gè, yě shì yī gè fēicháng hǎo de yìnxiàng.",
+      "vi": "để lại ấn tượng cuối cùng, cũng là một ấn tượng rất tốt."
+    },
+    {
+      "start": 1041.4,
+      "end": 1044.29,
+      "en": "A small gesture may make you, among many",
+      "zh": "一个小小的举动，可能会让你在众多",
+      "pinyin": "yī gè xiǎo xiǎo de jǔdòng, kěnéng huì ràng nǐ zài zhòngduō",
+      "vi": "Một hành động nhỏ có thể khiến bạn trong vô số"
+    },
+    {
+      "start": 1044.3,
+      "end": 1046.26,
+      "en": "candidates, stand out.",
+      "zh": "候选人中脱颖而出。",
+      "pinyin": "hòuxuǎnrén zhōng tuōyǐng'érchū.",
+      "vi": "ứng viên nổi bật hẳn lên."
+    },
+    {
+      "start": 1046.27,
+      "end": 1048.06,
+      "en": "Yes. After completing this step,",
+      "zh": "是的。做完这一步，",
+      "pinyin": "shì de. zuò wán zhè yī bù,",
+      "vi": "Đúng vậy. Sau khi làm xong bước này,"
+    },
+    {
+      "start": 1048.07,
+      "end": 1051.79,
+      "en": "Only then does the entire interview process truly come to a full stop.",
+      "zh": "整个面试流程才算真正画上了一个句号。",
+      "pinyin": "Zhěnggè miànshì liúchéng cái suàn zhēnzhèng huàshàng le yí gè jùhào.",
+      "vi": "Có như vậy, toàn bộ quy trình phỏng vấn mới thực sự khép lại."
+    },
+    {
+      "start": 1051.8,
+      "end": 1055.16,
+      "en": "What's left is to adjust your mindset and keep moving forward,",
+      "zh": "剩下的，就是调整好心态，继续前进，",
+      "pinyin": "Shèngxià de, jiùshì tiáozhěng hǎo xīntài, jìxù qiánjìn,",
+      "vi": "Việc còn lại là điều chỉnh tâm lý thật tốt và tiếp tục tiến về phía trước,"
+    },
+    {
+      "start": 1055.17,
+      "end": 1056.63,
+      "en": "no matter the outcome.",
+      "zh": "无论结果如何。",
+      "pinyin": "wúlùn jiéguǒ rúhé.",
+      "vi": "dù kết quả thế nào."
+    },
+    {
+      "start": 1056.63,
+      "end": 1057.99,
+      "en": "Well said.",
+      "zh": "说得太好了。",
+      "pinyin": "Shuō de tài hǎo le.",
+      "vi": "Nói quá hay."
+    },
+    {
+      "start": 1058,
+      "end": 1059.79,
+      "en": "From mindset to hardware,",
+      "zh": "从心态到硬件，",
+      "pinyin": "Cóng xīntài dào yìngjiàn,",
+      "vi": "Từ tâm lý đến trang bị vật chất,"
+    },
+    {
+      "start": 1059.8,
+      "end": 1062.39,
+      "en": "from researching information to preparing content,",
+      "zh": "从信息研究到内容准备，",
+      "pinyin": "cóng xìnxī yánjiū dào nèiróng zhǔnbèi,",
+      "vi": "từ việc nghiên cứu thông tin đến chuẩn bị nội dung,"
+    },
+    {
+      "start": 1062.4,
+      "end": 1064.79,
+      "en": "and then to the day of the interview and after it,",
+      "zh": "再到面试当天和面试后，",
+      "pinyin": "zài dào miànshì dāngtiān hé miànshì hòu,",
+      "vi": "rồi đến ngày phỏng vấn và sau phỏng vấn,"
+    },
+    {
+      "start": 1064.8,
+      "end": 1067.76,
+      "en": "Today we went through the whole process.",
+      "zh": "我们今天把整个流程都梳理了一遍。",
+      "pinyin": "Wǒmen jīntiān bǎ zhěnggè liúchéng dōu shūlǐ le yí biàn.",
+      "vi": "Hôm nay chúng ta đã rà soát lại toàn bộ quy trình một lượt."
+    },
+    {
+      "start": 1067.77,
+      "end": 1070.09,
+      "en": "I hope these shares are helpful to everyone.",
+      "zh": "希望这些分享对大家有帮助。",
+      "pinyin": "Xīwàng zhèxiē fēnxiǎng duì dàjiā yǒu bāngzhù.",
+      "vi": "Hy vọng những chia sẻ này sẽ có ích cho mọi người."
+    },
+    {
+      "start": 1070.1,
+      "end": 1071.86,
+      "en": "We talked about a lot today,",
+      "zh": "今天我们聊了很多，",
+      "pinyin": "Jīntiān wǒmen liáo le hěn duō,",
+      "vi": "Hôm nay chúng ta đã nói rất nhiều,"
+    },
+    {
+      "start": 1071.87,
+      "end": 1074.89,
+      "en": "and we also used several interesting idioms.",
+      "zh": "其中也用到了几个很有意思的成语。",
+      "pinyin": "qízhōng yě yòngdào le jǐ gè hěn yǒu yìsi de chéngyǔ.",
+      "vi": "trong đó cũng đã dùng đến vài thành ngữ rất thú vị."
+    },
+    {
+      "start": 1074.9,
+      "end": 1077.36,
+      "en": "To help everyone understand and remember them better,",
+      "zh": "为了帮助大家更好地理解和记忆，",
+      "pinyin": "Wèile bāngzhù dàjiā gèng hǎo de lǐjiě hé jìyì,",
+      "vi": "Để giúp mọi người hiểu và ghi nhớ tốt hơn,"
+    },
+    {
+      "start": 1077.37,
+      "end": 1078.83,
+      "en": "let's review them.",
+      "zh": "我们来复习一下。",
+      "pinyin": "wǒmen lái fùxí yíxià.",
+      "vi": "chúng ta hãy cùng ôn lại một chút."
+    },
+    {
+      "start": 1078.83,
+      "end": 1082.05,
+      "en": "Wang Yu, would you explain them to everyone in simple terms?",
+      "zh": "王雨，你来给大家用简单的话解释一下吧？",
+      "pinyin": "Wáng Yǔ, nǐ lái gěi dàjiā yòng jiǎndān de huà jiěshì yíxià ba?",
+      "vi": "Vương Vũ, bạn hãy dùng những lời đơn giản giải thích cho mọi người nhé?"
+    },
+    {
+      "start": 1082.07,
+      "end": 1083.79,
+      "en": "No problem! Leave it to me.",
+      "zh": "没问题！交给我吧。",
+      "pinyin": "Méi wèntí! Jiāo gěi wǒ ba.",
+      "vi": "Không vấn đề gì! Cứ để tôi."
+    },
+    {
+      "start": 1083.8,
+      "end": 1086.82,
+      "en": "Okay, the first one is what we mentioned in part two:",
+      "zh": "好，第一个是我们在第二部分提到的:",
+      "pinyin": "Hǎo, dì yī gè shì wǒmen zài dì èr bùfèn tí dào de:",
+      "vi": "Được, đầu tiên là thành ngữ chúng ta đã nhắc đến ở phần thứ hai:"
+    },
+    {
+      "start": 1086.83,
+      "end": 1088.42,
+      "en": "Know yourself and know your opponent.",
+      "zh": "“知己知彼”。",
+      "pinyin": "“Zhī jǐ zhī bǐ”.",
+      "vi": "“Biết mình biết người”."
+    },
+    {
+      "start": 1088.43,
+      "end": 1089.45,
+      "en": "Know yourself and know your opponent,",
+      "zh": "“知己知彼”，",
+      "pinyin": "“Zhī jǐ zhī bǐ”,",
+      "vi": "“Biết mình biết người”,"
+    },
+    {
+      "start": 1089.47,
+      "end": 1093.43,
+      "en": "This term comes from a very ancient book about war.",
+      "zh": "这个词语来自一本很古老的关于战争的书。",
+      "pinyin": "zhège cíyǔ láizì yì běn hěn gǔlǎo de guānyú zhànzhēng de shū.",
+      "vi": "thành ngữ này bắt nguồn từ một cuốn sách rất cổ về chiến tranh."
+    },
+    {
+      "start": 1093.43,
+      "end": 1096.79,
+      "en": "It means that you need to understand yourself very well,",
+      "zh": "它的意思就是，你既要非常了解自己，",
+      "pinyin": "Tā de yìsi jiùshì, nǐ jì yào fēicháng liǎojiě zìjǐ,",
+      "vi": "Ý của nó là, bạn vừa phải hiểu rất rõ bản thân mình,"
+    },
+    {
+      "start": 1096.8,
+      "end": 1099.06,
+      "en": "know your strengths and weaknesses;",
+      "zh": "知道自己的优点和缺点；",
+      "pinyin": "zhīdào zìjǐ de yōudiǎn hé quēdiǎn;",
+      "vi": "biết ưu điểm và khuyết điểm của mình;"
+    },
+    {
+      "start": 1099.07,
+      "end": 1101.86,
+      "en": "at the same time, you also need to understand your opponent very well,",
+      "zh": "同时，你也要非常了解你的对手，",
+      "pinyin": "tóngshí, nǐ yě yào fēicháng liǎojiě nǐ de duìshǒu,",
+      "vi": "đồng thời, bạn cũng phải hiểu rất rõ đối thủ của mình,"
+    },
+    {
+      "start": 1101.87,
+      "end": 1104.19,
+      "en": "or rather, the situation you're facing.",
+      "zh": "或者说你面对的情况。",
+      "pinyin": "huòzhě shuō nǐ miànduì de qíngkuàng.",
+      "vi": "hay nói cách khác là tình huống mà bạn đang đối mặt."
+    },
+    {
+      "start": 1104.2,
+      "end": 1105.19,
+      "en": "In an interview,",
+      "zh": "在面试里，",
+      "pinyin": "Zài miànshì lǐ,",
+      "vi": "Trong phỏng vấn,"
+    },
+    {
+      "start": 1105.2,
+      "end": 1108.46,
+      "en": "know yourself means understanding your abilities and experience,",
+      "zh": "“知己”就是了解自己的能力和经历，",
+      "pinyin": "“zhī jǐ” jiùshì liǎojiě zìjǐ de nénglì hé jīnglì,",
+      "vi": "“biết mình” tức là hiểu rõ năng lực và kinh nghiệm của bản thân,"
+    },
+    {
+      "start": 1108.47,
+      "end": 1111.36,
+      "en": "know your opponent means understanding the company and the position.",
+      "zh": "“知彼”就是了解公司和职位。",
+      "pinyin": "“zhī bǐ” jiùshì liǎojiě gōngsī hé zhíwèi.",
+      "vi": "“biết người” tức là hiểu rõ công ty và vị trí."
+    },
+    {
+      "start": 1111.37,
+      "end": 1113.43,
+      "en": "Only in this way can you succeed.",
+      "zh": "只有这样，你才能成功。",
+      "pinyin": "Zhǐyǒu zhèyàng, nǐ cái néng chénggōng.",
+      "vi": "Chỉ khi như vậy, bạn mới có thể thành công."
+    },
+    {
+      "start": 1113.43,
+      "end": 1115.05,
+      "en": "Explained very clearly.",
+      "zh": "解释得非常清楚。",
+      "pinyin": "Jiěshì de fēicháng qīngchu.",
+      "vi": "Giải thích rất rõ ràng."
+    },
+    {
+      "start": 1115.07,
+      "end": 1118.36,
+      "en": "Okay, the second term: stand out from the crowd.",
+      "zh": "好，第二个词语:“脱颖而出”。",
+      "pinyin": "Hǎo, dì èr gè cíyǔ: “tuō yǐng ér chū”.",
+      "vi": "Được, từ thứ hai: “nổi bật hẳn lên”."
+    },
+    {
+      "start": 1118.37,
+      "end": 1121.09,
+      "en": "Stand out from the crowd—this term is very vivid.",
+      "zh": "“脱颖而出”，这个词语很形象。",
+      "pinyin": "“Tuō yǐng ér chū”, zhège cíyǔ hěn xíngxiàng.",
+      "vi": "“Nổi bật hẳn lên”, từ này rất giàu hình ảnh."
+    },
+    {
+      "start": 1121.1,
+      "end": 1124.09,
+      "en": "Ying originally referred to the sharp tip of an awl,",
+      "zh": "“颖”本来是指锥子尖锐的末端，",
+      "pinyin": "“Yǐng” běnlái shì zhǐ zhuīzi jiānruì de mòduān,",
+      "vi": "“Dĩnh” ban đầu chỉ phần đầu nhọn của cái dùi,"
+    },
+    {
+      "start": 1124.1,
+      "end": 1125.82,
+      "en": "stand out from the crowd means that",
+      "zh": "“脱颖而出”就是说",
+      "pinyin": "“tuō yǐng ér chū” jiùshì shuō",
+      "vi": "“nổi bật hẳn lên” có nghĩa là"
+    },
+    {
+      "start": 1125.83,
+      "end": 1129.15,
+      "en": "this sharp tip pokes out of the bag.",
+      "zh": "这个尖锐的末端从袋子里露了出来。",
+      "pinyin": "zhège jiānruì de mòduān cóng dàizi lǐ lòu le chūlái.",
+      "vi": "phần đầu nhọn này lộ ra khỏi túi."
+    },
+    {
+      "start": 1129.17,
+      "end": 1131.99,
+      "en": "Now we use it to describe a person's talent",
+      "zh": "现在我们用它来比喻一个人的才能",
+      "pinyin": "Xiànzài wǒmen yòng tā lái bǐyù yí gè rén de cáinéng",
+      "vi": "Bây giờ chúng ta dùng nó để ví von tài năng của một người"
+    },
+    {
+      "start": 1132,
+      "end": 1135.42,
+      "en": "or performance completely showing among a group of people,",
+      "zh": "或者表现在一群人中完全显现出来，",
+      "pinyin": "huòzhě biǎoxiàn zài yì qún rén zhōng wánquán xiǎnxiàn chūlái,",
+      "vi": "hoặc biểu hiện hoàn toàn nổi bật trong một nhóm người,"
+    },
+    {
+      "start": 1135.43,
+      "end": 1139.39,
+      "en": "becoming very outstanding and immediately noticeable to others.",
+      "zh": "变得非常突出，一下子就能被别人注意到。",
+      "pinyin": "biàn de fēicháng tūchū, yíxiàzi jiù néng bèi biérén zhùyì dào.",
+      "vi": "trở nên rất nổi bật, ngay lập tức khiến người khác chú ý."
+    },
+    {
+      "start": 1139.4,
+      "end": 1141.19,
+      "en": "For example, among a group of interviewees,",
+      "zh": "比如，在一众面试者中，",
+      "pinyin": "Bǐrú, zài yí zhòng miànshìzhě zhōng,",
+      "vi": "Ví dụ, trong một nhóm người phỏng vấn,"
+    },
+    {
+      "start": 1141.2,
+      "end": 1144.06,
+      "en": "your excellent performance makes you stand out.",
+      "zh": "你的优秀表现让你脱颖而出。",
+      "pinyin": "nǐ de yōuxiù biǎoxiàn ràng nǐ tuō yǐng ér chū.",
+      "vi": "phần thể hiện xuất sắc của bạn khiến bạn nổi bật hẳn lên."
+    },
+    {
+      "start": 1144.07,
+      "end": 1147.29,
+      "en": "Very good. The last one: adding flowers to brocade.",
+      "zh": "很好。最后一个:“锦上添花”。",
+      "pinyin": "Hěn hǎo. Zuìhòu yí gè: “jǐn shàng tiān huā”.",
+      "vi": "Tốt lắm. Cuối cùng: “gấm thêm hoa”."
+    },
+    {
+      "start": 1147.3,
+      "end": 1149.96,
+      "en": "Adding flowers to brocade is also very vivid.",
+      "zh": "“锦上添花”也很有画面感。",
+      "pinyin": "“Jǐn shàng tiān huā” yě hěn yǒu huàmiàngǎn.",
+      "vi": "“Gấm thêm hoa” cũng rất giàu hình ảnh."
+    },
+    {
+      "start": 1149.97,
+      "end": 1153.66,
+      "en": "Brocade is a very beautiful and expensive silk fabric.",
+      "zh": "“锦”是一种非常漂亮、昂贵的丝绸布料。",
+      "pinyin": "“Jǐn” shì yì zhǒng fēicháng piàoliang, ángguì de sīchóu bùliào.",
+      "vi": "“Gấm” là một loại vải lụa rất đẹp và đắt tiền."
+    },
+    {
+      "start": 1153.67,
+      "end": 1157.03,
+      "en": "embroider beautiful flowers onto brocade means",
+      "zh": "“在锦上再绣上美丽的花”，意思就是",
+      "pinyin": "“zài jǐn shàng zài xiù shàng měilì de huā”, yìsi jiùshì",
+      "vi": "“thêu thêm những bông hoa đẹp lên gấm”, ý là"
+    },
+    {
+      "start": 1157.03,
+      "end": 1160.75,
+      "en": "making something already good even better.",
+      "zh": "让本来已经很好的东西变得更加美好。",
+      "pinyin": "ràng běnlái yǐjīng hěn hǎo de dōngxi biàn de gèngjiā měihǎo.",
+      "vi": "làm cho thứ vốn đã rất tốt trở nên càng tốt đẹp hơn."
+    },
+    {
+      "start": 1160.77,
+      "end": 1163.76,
+      "en": "For example, we say your resume is already great,",
+      "zh": "比如我们说，你的简历已经很棒了，",
+      "pinyin": "Bǐrú wǒmen shuō, nǐ de jiǎnlì yǐjīng hěn bàng le,",
+      "vi": "Ví dụ chúng ta nói, CV của bạn đã rất tốt rồi,"
+    },
+    {
+      "start": 1163.77,
+      "end": 1166.66,
+      "en": "if you also attach an impressive portfolio,",
+      "zh": "如果你再附上一份精彩的作品集，",
+      "pinyin": "rúguǒ nǐ zài fùshàng yí fèn jīngcǎi de zuòpǐnjí,",
+      "vi": "nếu bạn đính kèm thêm một bộ tác phẩm xuất sắc,"
+    },
+    {
+      "start": 1166.67,
+      "end": 1168.69,
+      "en": "that would be adding flowers to brocade.",
+      "zh": "那就是锦上添花了。",
+      "pinyin": "nà jiùshì jǐn shàng tiān huā le.",
+      "vi": "thì đó chính là “gấm thêm hoa”."
+    },
+    {
+      "start": 1168.7,
+      "end": 1172.09,
+      "en": "It emphasizes making good things even better.",
+      "zh": "它强调的是让好的事物变得更好。",
+      "pinyin": "Tā qiángdiào de shì ràng hǎo de shìwù biàn de gèng hǎo.",
+      "vi": "Nó nhấn mạnh việc làm cho những thứ tốt trở nên tốt hơn."
+    },
+    {
+      "start": 1172.1,
+      "end": 1174.99,
+      "en": "Great. Thanks for Wang Yu's excellent explanation.",
+      "zh": "太棒了。谢谢王雨的精彩解释。",
+      "pinyin": "Tài bàng le. Xièxie Wáng Yǔ de jīngcǎi jiěshì.",
+      "vi": "Tuyệt quá. Cảm ơn phần giải thích tuyệt vời của Vương Vũ."
+    },
+    {
+      "start": 1175,
+      "end": 1177.29,
+      "en": "I hope everyone can remember these idioms,",
+      "zh": "希望大家都能记住这几个成语，",
+      "pinyin": "Xīwàng dàjiā dōu néng jìzhù zhè jǐ gè chéngyǔ,",
+      "vi": "Hy vọng mọi người đều có thể nhớ được mấy thành ngữ này,"
+    },
+    {
+      "start": 1177.3,
+      "end": 1179.59,
+      "en": "and use them on appropriate occasions.",
+      "zh": "并且在合适的场合使用它们。",
+      "pinyin": "bìngqiě zài héshì de chǎnghé shǐyòng tāmen.",
+      "vi": "và sử dụng chúng trong những tình huống phù hợp."
+    },
+    {
+      "start": 1179.6,
+      "end": 1181.09,
+      "en": "You're welcome! Okay,",
+      "zh": "不客气！好了，",
+      "pinyin": "Bú kèqi! Hǎo le,",
+      "vi": "Không có gì! Được rồi,"
+    },
+    {
+      "start": 1181.1,
+      "end": 1183.42,
+      "en": "Today's topic about interview preparation,",
+      "zh": "今天关于面试准备的话题，",
+      "pinyin": "Jīntiān guānyú miànshì zhǔnbèi de huàtí,",
+      "vi": "Chủ đề hôm nay về việc chuẩn bị phỏng vấn,"
+    },
+    {
+      "start": 1183.43,
+      "end": 1185.25,
+      "en": "We've pretty much talked about it up to here.",
+      "zh": "我们差不多就聊到这里了。",
+      "pinyin": "Wǒmen chàbuduō jiù liáo dào zhèlǐ le.",
+      "vi": "Chúng ta cũng gần như bàn đến đây là hết rồi."
+    },
+    {
+      "start": 1185.27,
+      "end": 1186.59,
+      "en": "Time really flies.",
+      "zh": "时间过得真快。",
+      "pinyin": "Shíjiān guò de zhēn kuài.",
+      "vi": "Thời gian trôi nhanh thật."
+    },
+    {
+      "start": 1186.6,
+      "end": 1188.96,
+      "en": "Yeah. I hope our discussion today,",
+      "zh": "是啊。希望我们今天的讨论，",
+      "pinyin": "Shì a. Xīwàng wǒmen jīntiān de tǎolùn,",
+      "vi": "Đúng vậy. Hy vọng phần thảo luận hôm nay của chúng ta,"
+    },
+    {
+      "start": 1188.97,
+      "end": 1189.96,
+      "en": "can help everyone",
+      "zh": "能帮助大家",
+      "pinyin": "néng bāngzhù dàjiā",
+      "vi": "có thể giúp mọi người"
+    },
+    {
+      "start": 1189.97,
+      "end": 1193.49,
+      "en": "make this complex process of preparing for an interview clearer,",
+      "zh": "把准备面试这个复杂的过程，变得更清晰、",
+      "pinyin": "bǎ zhǔnbèi miànshì zhège fùzá de guòchéng, biàn de gèng qīngxī,",
+      "vi": "biến quá trình phức tạp là chuẩn bị phỏng vấn trở nên rõ ràng hơn,"
+    },
+    {
+      "start": 1193.5,
+      "end": 1194.89,
+      "en": "and more organized.",
+      "zh": "更有条理一些。",
+      "pinyin": "gèng yǒu tiáolǐ yīxiē.",
+      "vi": "và có trình tự hơn một chút."
+    },
+    {
+      "start": 1194.9,
+      "end": 1195.59,
+      "en": "Today we",
+      "zh": "我们今天",
+      "pinyin": "Wǒmen jīntiān",
+      "vi": "Hôm nay chúng tôi"
+    },
+    {
+      "start": 1195.6,
+      "end": 1198.22,
+      "en": "shared our views from four aspects:",
+      "zh": "从四个方面分享了我们的看法:",
+      "pinyin": "cóng sì gè fāngmiàn fēnxiǎng le wǒmen de kànfǎ:",
+      "vi": "đã chia sẻ quan điểm của mình từ bốn phương diện:"
+    },
+    {
+      "start": 1198.23,
+      "end": 1200.79,
+      "en": "First, preparation in terms of hard materials and mindset,",
+      "zh": "第一，是硬件和心态的准备，",
+      "pinyin": "Dì yī, shì yìngjiàn hé xīntài de zhǔnbèi,",
+      "vi": "Thứ nhất, là sự chuẩn bị về phần cứng và tâm lý,"
+    },
+    {
+      "start": 1200.8,
+      "end": 1204.06,
+      "en": "you need a professional resume and a confident mindset;",
+      "zh": "要有一份专业的简历和自信的心态；",
+      "pinyin": "yào yǒu yī fèn zhuānyè de jiǎnlì hé zìxìn de xīntài;",
+      "vi": "cần có một bản CV chuyên nghiệp và một tâm lý tự tin;"
+    },
+    {
+      "start": 1204.07,
+      "end": 1206.39,
+      "en": "Second, thorough information research,",
+      "zh": "第二，是充分的信息研究，",
+      "pinyin": "Dì èr, shì chōngfèn de xìnxī yánjiū,",
+      "vi": "Thứ hai, là nghiên cứu thông tin đầy đủ,"
+    },
+    {
+      "start": 1206.4,
+      "end": 1208.36,
+      "en": "to know yourself and the other side;",
+      "zh": "做到知己知彼；",
+      "pinyin": "zuò dào zhījǐzhībǐ;",
+      "vi": "làm được hiểu mình hiểu người;"
+    },
+    {
+      "start": 1208.37,
+      "end": 1210.56,
+      "en": "Third, preparation of core content,",
+      "zh": "第三，是核心内容的准备，",
+      "pinyin": "Dì sān, shì héxīn nèiróng de zhǔnbèi,",
+      "vi": "Thứ ba, là chuẩn bị nội dung cốt lõi,"
+    },
+    {
+      "start": 1210.57,
+      "end": 1213.79,
+      "en": "including self-introduction and answers to common questions;",
+      "zh": "包括自我介绍和常见问题的回答；",
+      "pinyin": "bāokuò zìwǒ jièshào hé chángjiàn wèntí de huídá;",
+      "vi": "bao gồm phần giới thiệu bản thân và trả lời các câu hỏi thường gặp;"
+    },
+    {
+      "start": 1213.8,
+      "end": 1217.06,
+      "en": "Finally, the details on the day of and after the interview.",
+      "zh": "最后，是面试当天和面试后的细节。",
+      "pinyin": "Zuìhòu, shì miànshì dāngtiān hé miànshì hòu de xìjié.",
+      "vi": "Cuối cùng, là các chi tiết trong ngày phỏng vấn và sau phỏng vấn."
+    },
+    {
+      "start": 1217.07,
+      "end": 1218.66,
+      "en": "What a comprehensive summary!",
+      "zh": "总结得真全面！",
+      "pinyin": "Zǒngjié de zhēn quánmiàn!",
+      "vi": "Tổng kết thật đầy đủ!"
+    },
+    {
+      "start": 1218.67,
+      "end": 1219.69,
+      "en": "If you want to review",
+      "zh": "如果你想复习",
+      "pinyin": "rúguǒ nǐ xiǎng fùxí",
+      "vi": "Nếu bạn muốn ôn lại"
+    },
+    {
+      "start": 1219.7,
+      "end": 1221.96,
+      "en": "all the content we discussed today,",
+      "zh": "今天我们聊到的所有内容，",
+      "pinyin": "jīntiān wǒmen liáo dào de suǒyǒu nèiróng,",
+      "vi": "tất cả nội dung chúng ta đã nói hôm nay,"
+    },
+    {
+      "start": 1221.97,
+      "end": 1225.03,
+      "en": "or view written explanations of some key vocabulary,",
+      "zh": "或者查看一些重点词汇的文字解释，",
+      "pinyin": "huòzhě chákàn yīxiē zhòngdiǎn cíhuì de wénzì jiěshì,",
+      "vi": "hoặc xem phần giải thích bằng chữ của một số từ vựng trọng điểm,"
+    },
+    {
+      "start": 1225.03,
+      "end": 1226.95,
+      "en": "welcome to visit our blog,",
+      "zh": "欢迎访问我们的博客，",
+      "pinyin": "huānyíng fǎngwèn wǒmen de bókè,",
+      "vi": "hoan nghênh truy cập blog của chúng tôi,"
+    },
+    {
+      "start": 1226.97,
+      "end": 1229.16,
+      "en": "the blog address can be found in the description below the episode",
+      "zh": "博客地址可以在节目下方的说明里",
+      "pinyin": "bókè dìzhǐ kěyǐ zài jiémù xiàfāng de shuōmíng lǐ",
+      "vi": "địa chỉ blog có thể nằm trong phần mô tả bên dưới chương trình"
+    },
+    {
+      "start": 1229.17,
+      "end": 1233.39,
+      "en": "found; there you can find the full transcript for each episode.",
+      "zh": "找到，在那里你可以找到每一期节目的完整文本。",
+      "pinyin": "zhǎodào, zài nàlǐ nǐ kěyǐ zhǎodào měi yī qī jiémù de wánzhěng wénběn.",
+      "vi": "tìm thấy, ở đó bạn có thể tìm thấy toàn văn của mỗi kỳ chương trình."
+    },
+    {
+      "start": 1233.4,
+      "end": 1235.56,
+      "en": "If today's content is helpful to you,",
+      "zh": "如果今天的内容对你有帮助，",
+      "pinyin": "rúguǒ jīntiān de nèiróng duì nǐ yǒu bāngzhù,",
+      "vi": "Nếu nội dung hôm nay có ích cho bạn,"
+    },
+    {
+      "start": 1235.57,
+      "end": 1237.89,
+      "en": "I hope you can like and share,",
+      "zh": "希望你能给我们点赞、分享，",
+      "pinyin": "xīwàng nǐ néng gěi wǒmen diǎnzàn, fēnxiǎng,",
+      "vi": "hy vọng bạn có thể thích và chia sẻ cho chúng tôi,"
+    },
+    {
+      "start": 1237.9,
+      "end": 1241.02,
+      "en": "and subscribe to our channel \"Daily Chinese.\"",
+      "zh": "并且订阅我们的频道“每天中文”。",
+      "pinyin": "bìngqiě dìngyuè wǒmen de píndào “Měitiān Zhōngwén”.",
+      "vi": "và đăng ký kênh của chúng tôi “Mỗi Ngày Tiếng Trung”."
+    },
+    {
+      "start": 1241.03,
+      "end": 1241.79,
+      "en": "Your support,",
+      "zh": "你们的支持，",
+      "pinyin": "Nǐmen de zhīchí,",
+      "vi": "Sự ủng hộ của các bạn,"
+    },
+    {
+      "start": 1241.8,
+      "end": 1244.16,
+      "en": "is our greatest motivation to keep creating,",
+      "zh": "是我们继续创作的最大动力，",
+      "pinyin": "shì wǒmen jìxù chuàngzuò de zuìdà dònglì,",
+      "vi": "là động lực lớn nhất để chúng tôi tiếp tục sáng tạo,"
+    },
+    {
+      "start": 1244.17,
+      "end": 1245.86,
+      "en": "this is really important to us.",
+      "zh": "这对我们真的很重要。",
+      "pinyin": "zhè duì wǒmen zhēn de hěn zhòngyào.",
+      "vi": "điều này thực sự rất quan trọng với chúng tôi."
+    },
+    {
+      "start": 1245.87,
+      "end": 1248.46,
+      "en": "Finally, I'd also like to interact with everyone a bit.",
+      "zh": "最后，也想和大家互动一下。",
+      "pinyin": "Zuìhòu, yě xiǎng hé dàjiā hùdòng yīxià.",
+      "vi": "Cuối cùng, tôi cũng muốn tương tác với mọi người một chút."
+    },
+    {
+      "start": 1248.47,
+      "end": 1251.03,
+      "en": "I want to ask everyone: during an interview,",
+      "zh": "我想问问大家:你在面试的时候，",
+      "pinyin": "Wǒ xiǎng wènwen dàjiā: nǐ zài miànshì de shíhou,",
+      "vi": "Tôi muốn hỏi mọi người: khi bạn đi phỏng vấn,"
+    },
+    {
+      "start": 1251.03,
+      "end": 1253.29,
+      "en": "have encountered the most impressive",
+      "zh": "遇到过最让你印象深刻",
+      "pinyin": "yùdào guo zuì ràng nǐ yìnxiàng shēnkè",
+      "vi": "đã gặp câu hỏi nào khiến bạn ấn tượng sâu sắc nhất"
+    },
+    {
+      "start": 1253.3,
+      "end": 1255.89,
+      "en": "or most difficult question?",
+      "zh": "或者最困难的问题是什么呢？",
+      "pinyin": "huòzhě zuì kùnnán de wèntí shì shénme ne?",
+      "vi": "hoặc khó khăn nhất là gì?"
+    },
+    {
+      "start": 1255.9,
+      "end": 1257.39,
+      "en": "How did you answer it?",
+      "zh": "你是怎么回答的？",
+      "pinyin": "Nǐ shì zěnme huídá de?",
+      "vi": "Bạn đã trả lời như thế nào?"
+    },
+    {
+      "start": 1257.4,
+      "end": 1260.02,
+      "en": "Feel free to leave us a comment in the comments section below,",
+      "zh": "欢迎在下方的评论区给我们留言，",
+      "pinyin": "Huānyíng zài xiàfāng de pínglùn qū gěi wǒmen liúyán,",
+      "vi": "Hoan nghênh để lại bình luận cho chúng tôi ở phần bình luận bên dưới,"
+    },
+    {
+      "start": 1260.03,
+      "end": 1261.89,
+      "en": "share your stories and experiences!",
+      "zh": "分享你的故事和经验！",
+      "pinyin": "fēnxiǎng nǐ de gùshì hé jīngyàn!",
+      "vi": "chia sẻ câu chuyện và kinh nghiệm của bạn!"
+    },
+    {
+      "start": 1261.9,
+      "end": 1264.59,
+      "en": "We really look forward to seeing everyone's stories.",
+      "zh": "我们非常期待看到大家的分享。",
+      "pinyin": "Wǒmen fēicháng qīdài kàndào dàjiā de fēnxiǎng.",
+      "vi": "Chúng tôi rất mong được thấy mọi người chia sẻ."
+    },
+    {
+      "start": 1264.6,
+      "end": 1266.66,
+      "en": "Okay, let's stop here for today.",
+      "zh": "好了，那我们今天就到这里。",
+      "pinyin": "Hǎo le, nà wǒmen jīntiān jiù dào zhèlǐ.",
+      "vi": "Được rồi, vậy hôm nay chúng ta dừng ở đây."
+    },
+    {
+      "start": 1266.67,
+      "end": 1270.17,
+      "en": "Thank you all for listening, see you next episode! Goodbye!",
+      "zh": "感谢大家的收听，我们下期再见！再见！",
+      "pinyin": "Gǎnxiè dàjiā de tīngshōu, wǒmen xià qī zàijiàn! Zàijiàn!",
+      "vi": "Cảm ơn mọi người đã lắng nghe, hẹn gặp lại các bạn kỳ sau! Tạm biệt!"
+    }
+  ]
+}
