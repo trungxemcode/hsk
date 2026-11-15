@@ -150,11 +150,30 @@ const MIME = {
       assert.equal(hoverTokenColor, 'rgb(20, 20, 43)', 'Hovering Chinese token never turns black-on-black');
 
       // Drag selection across mask text must select text cleanly and keep word popover closed
+      // On narrow viewports Playwright's hover can auto-scroll the subtitle
+      // underneath the sticky mobile header. Keep the glyph fully visible
+      // before testing real pointer selection (not synthetic DOM selection).
+      await page.evaluate(() => {
+        const line = document.querySelector('#podcastSubMask .podcast-mask-zh');
+        const scroller = document.querySelector('.workspace');
+        if (!line || !scroller) return;
+        const safeTop = Math.max(148, (document.getElementById('studioHeader')?.getBoundingClientRect().bottom || 0) + 24);
+        const missing = Math.ceil(safeTop - line.getBoundingClientRect().top);
+        if (missing > 0) {
+          scroller.style.scrollBehavior = 'auto';
+          scroller.scrollTop = Math.max(0, scroller.scrollTop - missing);
+        }
+      });
       const maskZhBox = await page.locator('#podcastSubMask .podcast-mask-zh').boundingBox();
-      if (maskZhBox && maskZhBox.width > 60) {
-        await page.mouse.move(maskZhBox.x + 12, maskZhBox.y + maskZhBox.height / 2);
+      const wordTokens = page.locator('#podcastSubMask .podcast-mask-zh .podcast-word-token');
+      const firstWordBox = await wordTokens.first().boundingBox();
+      const lastWordBox = await wordTokens.last().boundingBox();
+      if (maskZhBox && maskZhBox.width > 60 && firstWordBox && lastWordBox) {
+        // Start from actual selectable glyphs: responsive layouts center the line
+        // inside a much wider mask; selecting from whitespace is unreliable.
+        await page.mouse.move(firstWordBox.x + Math.min(3, firstWordBox.width / 3), firstWordBox.y + firstWordBox.height / 2);
         await page.mouse.down();
-        await page.mouse.move(maskZhBox.x + maskZhBox.width * 0.65, maskZhBox.y + maskZhBox.height / 2, { steps: 6 });
+        await page.mouse.move(lastWordBox.x + lastWordBox.width / 2, lastWordBox.y + lastWordBox.height / 2, { steps: 12 });
         await page.mouse.up();
         const selCount = await page.evaluate(() => String(window.getSelection?.() || '').trim().length);
         assert.ok(selCount > 0, 'Subtitle mask Chinese text supports Word-style drag selection');

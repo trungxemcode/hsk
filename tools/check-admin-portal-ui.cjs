@@ -45,8 +45,42 @@ const MIME = {
       });
 
       await page.route('https://**/*', (r) => r.abort());
+      await page.route('https://worker.test/resources-manifest', (r) => r.fulfill({ contentType: 'application/json', body: '{"manifest":null}' }));
+      await page.route('https://worker.test/podcast-feed*', (r) => {
+        const u = new URL(r.request().url());
+        const targetChannel = u.searchParams.get('url') || '';
+        assert.ok(targetChannel.includes('@MandarinCornerSample'), `Expected channel URL query, got: ${targetChannel}`);
+        return r.fulfill({
+          contentType: 'application/json',
+          body: JSON.stringify({
+            ok: true,
+            channel: { id: 'mandarincornersample', name: 'Mandarin Corner Sample', handle: '@MandarinCornerSample', url: 'https://www.youtube.com/@MandarinCornerSample' },
+            episodes: [
+              {
+                youtubeId: 'batch000001',
+                title: 'HSK 4 Channel Batch Ep 1',
+                levelGroup: 'hsk4',
+                channelName: 'Mandarin Corner Sample',
+                channelHandle: '@MandarinCornerSample',
+                durationLabel: '18:05',
+                note: 'Kênh @MandarinCornerSample · 18:05'
+              },
+              {
+                youtubeId: 'batch000002',
+                title: 'Câu chuyện đời sống Channel Batch Ep 2',
+                levelGroup: 'hsk3',
+                channelName: 'Mandarin Corner Sample',
+                channelHandle: '@MandarinCornerSample',
+                durationLabel: '12:40',
+                note: 'Kênh @MandarinCornerSample · 12:40'
+              }
+            ],
+            total: 2
+          })
+        });
+      });
       await page.route('**/account-config.json', (r) => r.fulfill({ contentType: 'application/json', body: '{"enabled":false}' }));
-      await page.route('**/translation-config.json', (r) => r.fulfill({ contentType: 'application/json', body: '{"enabled":false,"endpoint":""}' }));
+      await page.route('**/translation-config.json', (r) => r.fulfill({ contentType: 'application/json', body: '{"enabled":true,"endpoint":"https://worker.test"}' }));
 
       // 1. Open standalone admin.html
       await page.goto(`${origin}/admin.html`, { waitUntil: 'domcontentloaded' });
@@ -93,13 +127,30 @@ const MIME = {
       assert.equal(await page.locator('#apMusicList .ap-item-row').count(), 1);
 
       assert.equal(await page.locator('#apSyncYoutubeChannelsBtn').isVisible(), true, 'Channel sync button should be visible');
+      assert.equal(await page.locator('#apImportChannelBtn').isVisible(), true, 'Batch channel import button should be visible');
+
+      // Batch import an entire YouTube channel by URL & verify dedupe + zero horizontal overflow
+      await page.locator('#apPodcastChannelUrl').fill('https://www.youtube.com/@MandarinCornerSample');
+      await page.locator('#apPodcastBatchAccess').selectOption('public');
+      await page.locator('#apPodcastBatchLevel').selectOption('5');
+      await page.locator('#apImportChannelBtn').click();
+      await page.locator('#apPodcastChannelResult.ap-inline-result--ok').waitFor({ state: 'visible' });
+      assert.ok((await page.locator('#apPodcastChannelResult').textContent()).includes('Mandarin Corner Sample'));
+      assert.equal(await page.locator('#apPodcastList .ap-item-row').count(), 10);
+      // Clicking import again deduplicates cleanly
+      await page.locator('#apImportChannelBtn').click();
+      await page.locator('#apImportChannelBtn:not([disabled])').waitFor({ state: 'visible' });
+      assert.equal(await page.locator('#apPodcastList .ap-item-row').count(), 10);
+      const mediaOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      assert.ok(mediaOverflow <= 2, `Media tab horizontal overflow ${mediaOverflow} at ${width}x${height}`);
+
       await page.locator('#apPodcastTitle').fill('Podcast Admin Test');
       await page.locator('#apPodcastLevel').selectOption('3');
       await page.locator('#apPodcastAccess').selectOption('vip');
       await page.locator('#apPodcastUrl').fill('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
       await page.locator('#apPodcastSubtitle').fill('0:00 Hello friends\n0:04 Let us learn Chinese');
       await page.locator('#apPodcastSubmitBtn').click();
-      assert.equal(await page.locator('#apPodcastList .ap-item-row').count(), 9);
+      assert.equal(await page.locator('#apPodcastList .ap-item-row').count(), 11);
 
       // Add a public study document in Docs tab
       await page.locator('[data-ap-tab="docs"]').click();
@@ -149,6 +200,12 @@ const MIME = {
       await page.evaluate(() => window.HSKStudio.navigate('podcast'));
       await page.locator('#podcastPanel').waitFor({ state: 'visible' });
       assert.ok((await page.locator('#podcastEpisodeList').textContent()).includes('Podcast Admin Test'));
+      assert.ok((await page.locator('#podcastChannelBar').textContent()).includes('@MandarinCornerSample'));
+      await page.locator('#podcastChannelBar button', { hasText: '@MandarinCornerSample' }).click();
+      const filteredText = await page.locator('#podcastEpisodeList').textContent();
+      assert.ok(filteredText.includes('HSK 4 Channel Batch Ep 1'));
+      assert.ok(filteredText.includes('Câu chuyện đời sống Channel Batch Ep 2'));
+      await page.locator('#podcastChannelBar button', { hasText: 'Tất cả kênh' }).click();
 
       await page.evaluate(() => window.HSKStudio.navigate('study4'));
       await page.locator('#study4PracticePanel').waitFor({ state: 'visible' });
