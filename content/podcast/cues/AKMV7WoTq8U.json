@@ -1,0 +1,945 @@
+{
+  "id": "AKMV7WoTq8U",
+  "youtubeId": "AKMV7WoTq8U",
+  "channelHandle": "@BaoBaoMandarin",
+  "title": "HSK 1–3 | 一起去海边吧！| Let's Go To The Beach!! | Chinese Listening Practice",
+  "durationSec": 701,
+  "cues": [
+    {
+      "start": 7.01,
+      "end": 16.47,
+      "en": "Summer vacation is here! Today, Xiaoyue, Xiaoming, and Xiaohua are going to the beach together.",
+      "zh": "暑假到了！今天，小月、小明和小花要一起去海边。",
+      "pinyin": "Shǔjià dào le! Jīntiān, Xiǎoyuè, Xiǎomíng hé Xiǎohuā yào yìqǐ qù hǎibiān.",
+      "vi": "Kỳ nghỉ hè tới rồi! Hôm nay, Tiểu Nguyệt, Tiểu Minh và Tiểu Hoa sẽ cùng nhau đi biển."
+    },
+    {
+      "start": 18.44,
+      "end": 27.1,
+      "en": "Xiaoyue and Xiaoming have arrived at the bus stop, but Xiaohua still isn't here.",
+      "zh": "小月和小明已经到公交车站了，但是小花还没到。",
+      "pinyin": "Xiǎoyuè hé Xiǎomíng yǐjīng dào gōngjiāo chēzhàn le, dànshì Xiǎohuā hái méi dào.",
+      "vi": "Tiểu Nguyệt và Tiểu Minh đã đến trạm xe buýt, nhưng Tiểu Hoa vẫn chưa tới."
+    },
+    {
+      "start": 28.87,
+      "end": 32.4,
+      "en": "Xiaoming, what time is it now?",
+      "zh": "小明，现在几点了？",
+      "pinyin": "Xiǎomíng, xiànzài jǐ diǎn le?",
+      "vi": "Tiểu Minh, bây giờ mấy giờ rồi?"
+    },
+    {
+      "start": 32.55,
+      "end": 37.78,
+      "en": "It's 8:10 now. Our bus will arrive at 8:20.",
+      "zh": "现在是八点十分。我们的车八点二十分到。",
+      "pinyin": "Xiànzài shì bā diǎn shí fēn. Wǒmen de chē bā diǎn èrshí fēn dào.",
+      "vi": "Bây giờ là 8 giờ 10 phút. Xe của chúng ta sẽ đến lúc 8 giờ 20."
+    },
+    {
+      "start": 38.66,
+      "end": 43.29,
+      "en": "Xiaohua still isn't here. She didn't forget, did she?",
+      "zh": "小花还没到。她不会忘了吧？",
+      "pinyin": "Xiǎohuā hái méi dào. Tā bú huì wàng le ba?",
+      "vi": "Tiểu Hoa vẫn chưa đến. Cậu ấy không quên đấy chứ?"
+    },
+    {
+      "start": 43.54,
+      "end": 48.37,
+      "en": "No way. Xiaohua loves going out to have fun.",
+      "zh": "不会的。小花最喜欢出去玩了。",
+      "pinyin": "Bú huì de. Xiǎohuā zuì xǐhuan chūqù wán le.",
+      "vi": "Không đâu. Tiểu Hoa thích đi chơi nhất mà."
+    },
+    {
+      "start": 49.55,
+      "end": 55.83,
+      "en": "Just then, Xiaohua came running over. She was carrying a very large bag.",
+      "zh": "就在这时候，小花跑过来了。她带着一个很大的包。",
+      "pinyin": "Jiù zài zhè shíhou, Xiǎohuā pǎo guòlái le. Tā dàizhe yí ge hěn dà de bāo.",
+      "vi": "Ngay lúc này, Tiểu Hoa chạy tới. Cô ấy mang theo một chiếc túi rất lớn."
+    },
+    {
+      "start": 56.14,
+      "end": 61.16,
+      "en": "Sorry! I'm late!",
+      "zh": "不好意思呀！我来晚了！",
+      "pinyin": "Bù hǎoyìsi ya! Wǒ lái wǎn le!",
+      "vi": "Xin lỗi nha! Tớ đến trễ mất rùi!"
+    },
+    {
+      "start": 61.71,
+      "end": 66.17,
+      "en": "What's going on? Your bag is way too big!",
+      "zh": "什么情况啊？你的包也太大了吧！",
+      "pinyin": "Shénme qíngkuàng a? Nǐ de bāo yě tài dà le ba!",
+      "vi": "Cái gì z bà?? Túi của cậu to quá trời vậy!"
+    },
+    {
+      "start": 66.84,
+      "end": 70.62,
+      "en": "I prepared some food for everyone.",
+      "zh": "我给大家准备了一些吃的。",
+      "pinyin": "Wǒ gěi dàjiā zhǔnbèi le yìxiē chī de.",
+      "vi": "Tớ đã chuẩn bị một ít đồ ăn cho mọi người ó."
+    },
+    {
+      "start": 71.49,
+      "end": 74.65,
+      "en": "Food? I love it! What do you have?",
+      "zh": "吃的？我喜欢！都有些什么呀？",
+      "pinyin": "Chī de? Wǒ xǐhuan! Dōu yǒu xiē shénme ya?",
+      "vi": "Đồ ăn á? Ê tui thích nha bà! Có gì zạ?"
+    },
+    {
+      "start": 74.95,
+      "end": 81.09,
+      "en": "There are sandwiches, fruit, eggs, and three bottles of water.",
+      "zh": "有面包、水果、鸡蛋，还有三瓶水。",
+      "pinyin": "Yǒu miànbāo, shuǐguǒ, jīdàn, hái yǒu sān píng shuǐ.",
+      "vi": "Có bánh mì, trái cây, trứng và ba chai nước."
+    },
+    {
+      "start": 81.68,
+      "end": 86.01,
+      "en": "Xiaohua, you're our restaurant today!",
+      "zh": "小花，今天你就是我们的餐厅了！",
+      "pinyin": "Xiǎohuā, jīntiān nǐ jiù shì wǒmen de cāntīng le!",
+      "vi": "Tiểu Hoa, hôm nay bà chính là nhà hàng của bọn tui á!"
+    },
+    {
+      "start": 86.17,
+      "end": 89.47,
+      "en": "Haha, then are you going to pay me?",
+      "zh": "哈哈，那你要给我钱吗？",
+      "pinyin": "Hāhā, nà nǐ yào gěi wǒ qián ma?",
+      "vi": "Haha, thế cậu có trả tiền cho tớ không?"
+    },
+    {
+      "start": 89.76,
+      "end": 94.81,
+      "en": "I can give you a really big thank-you, hahaha.",
+      "zh": "我可以送你一句特别大的谢谢，哈哈哈。",
+      "pinyin": "Wǒ kěyǐ sòng nǐ yí jù tèbié dà de xièxie, hāhāhā.",
+      "vi": "Tớ có thể tặng cậu một lời cảm ơn thật to kkk"
+    },
+    {
+      "start": 95.84,
+      "end": 99.62,
+      "en": "All right, let's check everything one last time.",
+      "zh": "好了，我们最后检查一下东西吧。",
+      "pinyin": "Hǎo le, wǒmen zuìhòu jiǎnchá yíxià dōngxi ba.",
+      "vi": "Được rồi, chúng ta kiểm tra đồ lần cuối nhé."
+    },
+    {
+      "start": 99.85,
+      "end": 106.3,
+      "en": "Water, check. Sunscreen, check. Towels, check.",
+      "zh": "水，有。防晒霜，有。毛巾，有。",
+      "pinyin": "Shuǐ, yǒu. Fángshàishuāng, yǒu. Máojīn, yǒu.",
+      "vi": "Nước, có. Kem chống nắng, có. Khăn tắm, có."
+    },
+    {
+      "start": 106.62,
+      "end": 114.08,
+      "en": "Food, check. Tissues, check. Phones, check.",
+      "zh": "吃的，有。纸巾，有。手机，有。",
+      "pinyin": "Chī de, yǒu. Zhǐjīn, yǒu. Shǒujī, yǒu.",
+      "vi": "Đồ ăn, có. Khăn giấy, có. Điện thoại, có."
+    },
+    {
+      "start": 114.81,
+      "end": 117.38,
+      "en": "A happy mood, check too!",
+      "zh": "开心的心情，也有！",
+      "pinyin": "Kāixīn de xīnqíng, yě yǒu!",
+      "vi": "Tâm trạng vui vẻ, có lun!"
+    },
+    {
+      "start": 117.73,
+      "end": 122.56,
+      "en": "The bus is here! Let's get on!",
+      "zh": "公交车来了！我们上车吧！",
+      "pinyin": "Gōngjiāo chē lái le! Wǒmen shàng chē ba!",
+      "vi": "Xe buýt đến rồi! Chúng ta lên xe thôi!"
+    },
+    {
+      "start": 123.49,
+      "end": 130.64,
+      "en": "The three of them got on the bus. They sat together and looked out the window.",
+      "zh": "三个人上了公交车。他们坐在一起，看着窗外。",
+      "pinyin": "Sān ge rén shàng le gōngjiāo chē. Tāmen zuò zài yìqǐ, kànzhe chuāngwài.",
+      "vi": "Ba người lên xe buýt. Họ ngồi cùng nhau và nhìn ra ngoài cửa sổ."
+    },
+    {
+      "start": 131.66,
+      "end": 137.63,
+      "en": "I'm so happy! This is our first time going to the beach together.",
+      "zh": "我太开心了！这是我们第一次一起去海边。",
+      "pinyin": "Wǒ tài kāixīn le! Zhè shì wǒmen dì yī cì yìqǐ qù hǎibiān.",
+      "vi": "Tớ vui quá! Đây là lần đầu tiên chúng ta cùng nhau đi biển."
+    },
+    {
+      "start": 138.37,
+      "end": 146.34,
+      "en": "That's right. Usually we have to go to school and do homework. Now we're finally on summer vacation.",
+      "zh": "是啊。平时我们要上学、做作业。现在终于放暑假了。",
+      "pinyin": "Shì a. Píngshí wǒmen yào shàngxué, zuò zuòyè. Xiànzài zhōngyú fàng shǔjià le.",
+      "vi": "Đúng vậy. Bình thường chúng ta phải đi học và làm bài tập. Bây giờ cuối cùng cũng được nghỉ hè rồi."
+    },
+    {
+      "start": 148.2,
+      "end": 153.25,
+      "en": "Summer vacation is great. We don't have to get up early or take exams.",
+      "zh": "暑假真好。不用早起，也不用考试。",
+      "pinyin": "Shǔjià zhēn hǎo. Bú yòng zǎoqǐ, yě bú yòng kǎoshì.",
+      "vi": "Nghỉ hè thật tuyệt. Không cần dậy sớm, cũng không cần thi cử."
+    },
+    {
+      "start": 154.34,
+      "end": 157.87,
+      "en": "Look, there are so many trees outside.",
+      "zh": "你看，外面有好多树。",
+      "pinyin": "Nǐ kàn, wàimiàn yǒu hǎo duō shù.",
+      "vi": "Nhìn kìa, bên ngoài có rất nhiều cây."
+    },
+    {
+      "start": 158.95,
+      "end": 165.78,
+      "en": "The sky is so blue, and the clouds are so white. Today is sure to be lots of fun.",
+      "zh": "天空真蓝，云也真白。今天一定会很开心。",
+      "pinyin": "Tiānkōng zhēn lán, yún yě zhēn bái. Jīntiān yídìng huì hěn kāixīn.",
+      "vi": "Bầu trời thật xanh, mây cũng thật trắng. Hôm nay chắc chắn sẽ rất vui."
+    },
+    {
+      "start": 167.9,
+      "end": 175.15,
+      "en": "Everyone was smiling. The bus was going fast, and the weather was beautiful too.",
+      "zh": "大家都在笑。车开得很快，天气也很好。",
+      "pinyin": "Dàjiā dōu zài xiào. Chē kāi de hěn kuài, tiānqì yě hěn hǎo.",
+      "vi": "Mọi người đều cười. Xe chạy rất nhanh và thời tiết cũng rất đẹp."
+    },
+    {
+      "start": 176.95,
+      "end": 181.7,
+      "en": "An hour later, they finally arrived at the beach.",
+      "zh": "一个小时以后，他们终于到海边了。",
+      "pinyin": "Yí ge xiǎoshí yǐhòu, tāmen zhōngyú dào hǎibiān le.",
+      "vi": "Một tiếng sau, cuối cùng họ cũng đến biển."
+    },
+    {
+      "start": 182.79,
+      "end": 185.82,
+      "en": "Wow! The beach!",
+      "zh": "哇！海边！",
+      "pinyin": "Wa! Hǎibiān!",
+      "vi": "Wow! Biển kìa!"
+    },
+    {
+      "start": 186.61,
+      "end": 191.28,
+      "en": "The seawater is so blue, and the beach is beautiful too.",
+      "zh": "海水真蓝，沙滩也很漂亮。",
+      "pinyin": "Hǎishuǐ zhēn lán, shātān yě hěn piàoliang.",
+      "vi": "Nước biển thật xanh, bãi cát cũng rất đẹp."
+    },
+    {
+      "start": 192.58,
+      "end": 195.74,
+      "en": "I think this place is much better than school, hahaha.",
+      "zh": "我觉得这里比学校好多了，哈哈哈。",
+      "pinyin": "Wǒ juéde zhèlǐ bǐ xuéxiào hǎo duō le, hāhāhā.",
+      "vi": "Tớ thấy nơi này tuyệt hơn trường học nhiều kkk"
+    },
+    {
+      "start": 196.48,
+      "end": 201.69,
+      "en": "Of course. There isn't a math teacher here, haha.",
+      "zh": "当然了，这里又没有数学老师，哈哈。",
+      "pinyin": "Dāngrán le, zhèlǐ yòu méiyǒu shùxué lǎoshī, hāhā.",
+      "vi": "Tất nhiên rồi. Ở đây đâu có giáo viên toán đâu :v"
+    },
+    {
+      "start": 203.28,
+      "end": 208.32,
+      "en": "Don't run off just yet. Let's find a place to put our things first.",
+      "zh": "别急着跑。我们先找个地方放东西吧。",
+      "pinyin": "Bié jí zhe pǎo. Wǒmen xiān zhǎo ge dìfang fàng dōngxi ba.",
+      "vi": "Đừng chạy vội. Chúng ta tìm chỗ để đồ trước đã."
+    },
+    {
+      "start": 208.99,
+      "end": 214.56,
+      "en": "There's an open spot over there. It's not too far from the sea or too close.",
+      "zh": "那边有一块空地。不太远，也不太靠近海。",
+      "pinyin": "Nàbiān yǒu yí kuài kòngdì. Bú tài yuǎn, yě bú tài kàojìn hǎi.",
+      "vi": "Bên kia có một chỗ trống. Không quá xa biển mà cũng không quá gần."
+    },
+    {
+      "start": 215.17,
+      "end": 219.46,
+      "en": "Sounds good. Let's put the bags there.",
+      "zh": "好啊。我们把包放在那里吧。",
+      "pinyin": "Hǎo a. Wǒmen bǎ bāo fàng zài nàlǐ ba.",
+      "vi": "Được đó. Chúng ta để túi ở đó nhé."
+    },
+    {
+      "start": 221.15,
+      "end": 227.45,
+      "en": "They put the bags on the sand, then took out the towels and water.",
+      "zh": "他们把包放在沙滩上，然后拿出毛巾和水。",
+      "pinyin": "Tāmen bǎ bāo fàng zài shātān shàng, ránhòu ná chū máojīn hé shuǐ.",
+      "vi": "Họ đặt túi xuống bãi cát rồi lấy khăn và nước ra."
+    },
+    {
+      "start": 228.93,
+      "end": 233.43,
+      "en": "Let's put on sunscreen first. The sun is too strong.",
+      "zh": "先涂防晒霜吧。太阳太大了。",
+      "pinyin": "Xiān tú fángshàishuāng ba. Tàiyáng tài dà le.",
+      "vi": "Bôi kem chống nắng trước đi. Nắng to quá."
+    },
+    {
+      "start": 234.4,
+      "end": 239.47,
+      "en": "I need to put some on too. Otherwise I'll turn into Red Xiaoming.",
+      "zh": "我也得涂。不然我就要变成红色的小明了。",
+      "pinyin": "Wǒ yě děi tú. Bùrán wǒ jiù yào biàn chéng hóngsè de Xiǎomíng le.",
+      "vi": "Tớ cũng phải bôi. Nếu không tớ sẽ biến thành Tiểu Minh màu đỏ mất."
+    },
+    {
+      "start": 240.96,
+      "end": 245.9,
+      "en": "Haha, Red Xiaoming sounds just like a tomato.",
+      "zh": "哈哈，红色的小明听起来太像西红柿了。",
+      "pinyin": "Hāhā, hóngsè de Xiǎomíng tīng qǐlái tài xiàng xīhóngshì le.",
+      "vi": "Haha, Tiểu Minh màu đỏ nghe giống quả cà chua quá."
+    },
+    {
+      "start": 246.83,
+      "end": 250.82,
+      "en": "Then I'll be a swimming tomato.",
+      "zh": "那我就当一个会游泳的西红柿。",
+      "pinyin": "Nà wǒ jiù dāng yí ge huì yóuyǒng de xīhóngshì.",
+      "vi": "Thế thì tớ sẽ là quả cà chua biết bơi."
+    },
+    {
+      "start": 253.06,
+      "end": 257.87,
+      "en": "They sat on the beach. The sand was very hot.",
+      "zh": "他们坐在沙滩上。沙子很热。",
+      "pinyin": "Tāmen zuò zài shātān shàng. Shāzi hěn rè.",
+      "vi": "Họ ngồi trên bãi cát. Cát rất nóng."
+    },
+    {
+      "start": 260.03,
+      "end": 263.04,
+      "en": "Let's build a sandcastle first!",
+      "zh": "我们先来堆一个沙堡吧！",
+      "pinyin": "Wǒmen xiān lái duī yí ge shābǎo ba!",
+      "vi": "Chúng ta xây một lâu đài cát trước đi!"
+    },
+    {
+      "start": 264.13,
+      "end": 267.22,
+      "en": "Sure. I'll make the gate.",
+      "zh": "好啊。我来做大门。",
+      "pinyin": "Hǎo a. Wǒ lái zuò dàmén.",
+      "vi": "Được đó. Tớ sẽ làm cánh cổng."
+    },
+    {
+      "start": 267.92,
+      "end": 271.26,
+      "en": "I'll build a really big wall.",
+      "zh": "我来建一面很大的墙。",
+      "pinyin": "Wǒ lái jiàn yí miàn hěn dà de qiáng.",
+      "vi": "Tớ sẽ xây một bức tường thật lớn."
+    },
+    {
+      "start": 273.06,
+      "end": 279.39,
+      "en": "Then I'll make a little path. It will lead from here all the way to the sea.",
+      "zh": "那我来做一条小路。这条路会从这里一直通到海边。",
+      "pinyin": "Nà wǒ lái zuò yì tiáo xiǎolù. Zhè tiáo lù huì cóng zhèlǐ yìzhí tōng dào hǎibiān.",
+      "vi": "Vậy tớ sẽ làm con đường nhỏ. Con đường sẽ nối từ đây ra tới biển."
+    },
+    {
+      "start": 282.13,
+      "end": 284.13,
+      "en": "My wall is the tallest!",
+      "zh": "我的墙最高！",
+      "pinyin": "Wǒ de qiáng zuì gāo!",
+      "vi": "Tường của tớ cao nhất!"
+    },
+    {
+      "start": 285.22,
+      "end": 288.84,
+      "en": "Careful! Your wall is about to fall.",
+      "zh": "小心！你的墙快要倒了。",
+      "pinyin": "Xiǎoxīn! Nǐ de qiáng kuài yào dǎo le.",
+      "vi": "Cẩn thận! Tường của cậu sắp đổ rồi đó."
+    },
+    {
+      "start": 290,
+      "end": 293.01,
+      "en": "No, no. It's very sturdy.",
+      "zh": "不会的，不会的。它结实着呢。",
+      "pinyin": "Bú huì de, bú huì de. Tā jiēshi zhe ne.",
+      "vi": "Không đâu, không đâu. Nó chắc lắm á."
+    },
+    {
+      "start": 295.35,
+      "end": 300.1,
+      "en": "As soon as he finished speaking, the sand wall collapsed.",
+      "zh": "话音刚落，沙墙就倒塌了。",
+      "pinyin": "Huàyīn gāng luò, shāqiáng jiù dǎotā le.",
+      "vi": "Vừa nói xong, bức tường cát đã đổ sập."
+    },
+    {
+      "start": 301.22,
+      "end": 304.67,
+      "en": "Haha, Xiaoming, your wall fell down!",
+      "zh": "哈哈，小明，你的墙倒了！",
+      "pinyin": "Hāhā, Xiǎomíng, nǐ de qiáng dǎo le!",
+      "vi": "Haha, Tiểu Minh, tường của cậu đổ rồi!"
+    },
+    {
+      "start": 305.67,
+      "end": 310,
+      "en": "Stop laughing, stop laughing. Let’s do it again.",
+      "zh": "别笑了，别笑了。我们再来一次吧。",
+      "pinyin": "Bié xiào le, bié xiào le. Wǒmen zài lái yí cì ba.",
+      "vi": "Đừng cười nữa, đừng cười nữa. Chúng ta làm lại lần nữa nhé."
+    },
+    {
+      "start": 312.61,
+      "end": 316.46,
+      "en": "It’s okay. We can just do it again.",
+      "zh": "没关系。我们再做一次就好了。",
+      "pinyin": "Méi guānxi. Wǒmen zài zuò yí cì jiù hǎo le.",
+      "vi": "Không sao đâu. Chúng ta làm lại là được."
+    },
+    {
+      "start": 317.2,
+      "end": 320.19,
+      "en": "Let’s take it slowly this time.",
+      "zh": "这次我们慢慢来吧。",
+      "pinyin": "Zhè cì wǒmen mànman lái ba.",
+      "vi": "Lần này làm từ từ thôi nhé."
+    },
+    {
+      "start": 322.13,
+      "end": 330.61,
+      "en": "The three of them built a sandcastle together. In the end, they made a small, lovely sandcastle.",
+      "zh": "三个人一起堆沙堡。最后，他们做出了一个小小的、漂亮的沙堡。",
+      "pinyin": "Sān gè rén yìqǐ duī shābǎo. Zuìhòu, tāmen zuò chū le yí gè xiǎoxiǎo de, piàoliang de shābǎo.",
+      "vi": "Ba người cùng nhau xây lâu đài cát. Cuối cùng, họ đã làm được một lâu đài cát nhỏ xinh."
+    },
+    {
+      "start": 333.59,
+      "end": 338.64,
+      "en": "Although it isn’t big, it’s very cute.",
+      "zh": "虽然它不大，但是很可爱。",
+      "pinyin": "Suīrán tā bú dà, dànshì hěn kě'ài.",
+      "vi": "Tuy nó không lớn, nhưng rất đáng yêu."
+    },
+    {
+      "start": 339.89,
+      "end": 343.44,
+      "en": "This is our home by the sea—the three of us.",
+      "zh": "这是我们三个在海边的家。",
+      "pinyin": "Zhè shì wǒmen sān gè zài hǎibiān de jiā.",
+      "vi": "Đây là ngôi nhà bên bờ biển của ba chúng ta."
+    },
+    {
+      "start": 346.69,
+      "end": 353.14,
+      "en": "The sun rose higher and higher. The three friends decided to go into the sea and play in the water.",
+      "zh": "太阳越升越高。三个朋友决定下海玩水。",
+      "pinyin": "Tàiyáng yuè shēng yuè gāo. Sān gè péngyou juédìng xià hǎi wán shuǐ.",
+      "vi": "Mặt trời ngày càng lên cao. Ba người bạn quyết định xuống biển nghịch nước."
+    },
+    {
+      "start": 354.29,
+      "end": 358.91,
+      "en": "Let’s not go too far. Safety is the most important thing.",
+      "zh": "我们别走太远啊。安全最重要。",
+      "pinyin": "Wǒmen bié zǒu tài yuǎn a. Ānquán zuì zhòngyào.",
+      "vi": "Chúng ta đừng đi quá xa nhé. An toàn là quan trọng nhất."
+    },
+    {
+      "start": 360.24,
+      "end": 363.46,
+      "en": "Right. We’ll only play around here.",
+      "zh": "对。我们只在这附近玩。",
+      "pinyin": "Duì. Wǒmen zhǐ zài zhè fùjìn wán.",
+      "vi": "Đúng vậy. Chúng ta chỉ chơi ở khu vực này thôi."
+    },
+    {
+      "start": 365.88,
+      "end": 370,
+      "en": "The seawater is a little cool, but it feels very nice.",
+      "zh": "海水有一点儿凉，但是很舒服。",
+      "pinyin": "Hǎishuǐ yǒu yìdiǎnr liáng, dànshì hěn shūfu.",
+      "vi": "Nước biển hơi lạnh một chút, nhưng rất dễ chịu."
+    },
+    {
+      "start": 372.34,
+      "end": 374.7,
+      "en": "Xiaoming, look!",
+      "zh": "小明，你看！",
+      "pinyin": "Xiǎo Míng, nǐ kàn!",
+      "vi": "Tiểu Minh, nhìn này!"
+    },
+    {
+      "start": 376.06,
+      "end": 380.77,
+      "en": "Xiaohua gently splashed water toward Xiaoming.",
+      "zh": "小花轻轻地把水泼向小明。",
+      "pinyin": "Xiǎo Huā qīngqīng de bǎ shuǐ pō xiàng Xiǎo Míng.",
+      "vi": "Tiểu Hoa nhẹ nhàng hất nước về phía Tiểu Minh."
+    },
+    {
+      "start": 381.62,
+      "end": 383.62,
+      "en": "Ah! It’s so cold!",
+      "zh": "啊！太冷了！",
+      "pinyin": "Ā! Tài lěng le!",
+      "vi": "Á! Lạnh quá!"
+    },
+    {
+      "start": 385.9,
+      "end": 389.37,
+      "en": "Haha, Xiaohua, you run so fast.",
+      "zh": "哈哈，小花，你跑得真快呀。",
+      "pinyin": "Hāhā, Xiǎo Huā, nǐ pǎo de zhēn kuài ya.",
+      "vi": "Haha, Tiểu Hoa, cậu chạy nhanh thật đấy."
+    },
+    {
+      "start": 390.28,
+      "end": 393.42,
+      "en": "Of course! You two, come over here!",
+      "zh": "当然了！你们两个快过来！",
+      "pinyin": "Dāngrán le! Nǐmen liǎng gè kuài guòlái!",
+      "vi": "Tất nhiên rồi! Hai cậu mau lại đây!"
+    },
+    {
+      "start": 394.6,
+      "end": 397.08,
+      "en": "I’m coming too! Check out my move!",
+      "zh": "我也来了！看我的招！",
+      "pinyin": "Wǒ yě lái le! Kàn wǒ de zhāo!",
+      "vi": "Tớ cũng tới đây! Xem chiêu của tớ này!"
+    },
+    {
+      "start": 399.38,
+      "end": 402.62,
+      "en": "Wait, don’t splash water in my face.",
+      "zh": "等一下，别把水泼到我脸上啊。",
+      "pinyin": "Děng yíxià, bié bǎ shuǐ pō dào wǒ liǎn shàng a.",
+      "vi": "Khoan đã, đừng hất nước vào mặt tớ nhé."
+    },
+    {
+      "start": 403.89,
+      "end": 407.36,
+      "en": "Okay, okay, okay. I’ll be gentler.",
+      "zh": "好好好，我会轻一点儿。",
+      "pinyin": "Hǎo hǎo hǎo, wǒ huì qīng yìdiǎnr.",
+      "vi": "Được được được, tớ sẽ nhẹ tay hơn."
+    },
+    {
+      "start": 409.53,
+      "end": 414.78,
+      "en": "They happily played in the seawater, running back and forth and having lots of fun.",
+      "zh": "他们在海水里开心地玩耍，跑来跑去，玩得特别开心。",
+      "pinyin": "Tāmen zài hǎishuǐ lǐ kāixīn de wánshuǎ, pǎo lái pǎo qù, wán de tèbié kāixīn.",
+      "vi": "Họ vui đùa trong làn nước biển, chạy qua chạy lại và chơi rất vui vẻ."
+    },
+    {
+      "start": 416.26,
+      "end": 420,
+      "en": "Let’s rest for a bit. I’m a little tired.",
+      "zh": "我们休息一会儿吧。我有点儿累了。",
+      "pinyin": "Wǒmen xiūxi yíhuìr ba. Wǒ yǒudiǎnr lèi le.",
+      "vi": "Chúng ta nghỉ một lát đi. Tớ hơi mệt rồi."
+    },
+    {
+      "start": 421.33,
+      "end": 424.69,
+      "en": "Sure, let’s go up to the beach and have some water.",
+      "zh": "好啊，我们上沙滩喝水吧。",
+      "pinyin": "Hǎo a, wǒmen shàng shātān hē shuǐ ba.",
+      "vi": "Được thôi, chúng ta lên bãi cát uống nước nhé."
+    },
+    {
+      "start": 427.01,
+      "end": 430,
+      "en": "The three of them returned to the beach.",
+      "zh": "三个人回到了沙滩。",
+      "pinyin": "Sān gè rén huí dào le shātān.",
+      "vi": "Ba người quay trở lại bãi cát."
+    },
+    {
+      "start": 430.44,
+      "end": 433.97,
+      "en": "They sat on the towels and got ready to eat lunch.",
+      "zh": "他们坐在毛巾上，准备吃午饭。",
+      "pinyin": "Tāmen zuò zài máojīn shàng, zhǔnbèi chī wǔfàn.",
+      "vi": "Họ ngồi trên khăn và chuẩn bị ăn trưa."
+    },
+    {
+      "start": 435.58,
+      "end": 440.86,
+      "en": "Everyone, drink some water first. It’s so hot, so we need to drink plenty of water.",
+      "zh": "大家先喝点儿水吧。天气这么热，要多喝水。",
+      "pinyin": "Dàjiā xiān hē diǎnr shuǐ ba. Tiānqì zhème rè, yào duō hē shuǐ.",
+      "vi": "Mọi người uống chút nước trước đi. Trời nóng thế này phải uống nhiều nước."
+    },
+    {
+      "start": 443.02,
+      "end": 445.94,
+      "en": "Okay, I’m actually a little thirsty.",
+      "zh": "好，正好我有点儿渴。",
+      "pinyin": "Hǎo, zhènghǎo wǒ yǒudiǎnr kě.",
+      "vi": "Được, đúng lúc tớ đang hơi khát."
+    },
+    {
+      "start": 447.02,
+      "end": 452.09,
+      "en": "I also have some juice here. We can drink it later.",
+      "zh": "我这里还有果汁，等一下也可以喝。",
+      "pinyin": "Wǒ zhèlǐ hái yǒu guǒzhī, děng yíxià yě kěyǐ hē.",
+      "vi": "Chỗ tớ còn có nước trái cây nữa, lát nữa cũng có thể uống."
+    },
+    {
+      "start": 454.01,
+      "end": 458.51,
+      "en": "Xiaohua, how many things did you bring today, anyway?",
+      "zh": "小花，你今天到底带了多少东西啊？",
+      "pinyin": "Xiǎo Huā, nǐ jīntiān dàodǐ dài le duōshao dōngxi a?",
+      "vi": "Tiểu Hoa, hôm nay rốt cuộc cậu mang theo bao nhiêu thứ vậy?"
+    },
+    {
+      "start": 459.41,
+      "end": 463.55,
+      "en": "Not many, just a little lunch.",
+      "zh": "不多，就是一点儿午饭而已。",
+      "pinyin": "Bù duō, jiùshì yìdiǎnr wǔfàn éryǐ.",
+      "vi": "Không nhiều đâu, chỉ là một ít đồ ăn trưa thôi."
+    },
+    {
+      "start": 464.44,
+      "end": 466.86,
+      "en": "Really? Let me see!",
+      "zh": "真的吗？让我看看！",
+      "pinyin": "Zhēn de ma? Ràng wǒ kànkan!",
+      "vi": "Thật không? Để tớ xem nào!"
+    },
+    {
+      "start": 469.64,
+      "end": 476.87,
+      "en": "There are sandwiches, fruit, rice balls, cookies, and some more fruit.",
+      "zh": "有三明治、水果、饭团、饼干，还有一点儿水果。",
+      "pinyin": "Yǒu sānmíngzhì, shuǐguǒ, fàntuán, bǐnggān, hái yǒu yìdiǎnr shuǐguǒ.",
+      "vi": "Có sandwich, trái cây, cơm nắm, bánh quy và thêm một ít trái cây nữa."
+    },
+    {
+      "start": 478.43,
+      "end": 483.45,
+      "en": "Wow, this isn’t just lunch. It’s a mini picnic!",
+      "zh": "这哪里是午饭呀，这是一次迷你野餐了！",
+      "pinyin": "Zhè nǎlǐ shì wǔfàn ya, zhè shì yí cì mí nǐ yěcān le!",
+      "vi": "Wow, đây đâu phải bữa trưa. Đây là một buổi picnic mini rồi!"
+    },
+    {
+      "start": 486.86,
+      "end": 492.22,
+      "en": "That sounds great. Let’s eat a little first; we still have to keep playing later.",
+      "zh": "听起来真棒。我们先吃一点儿吧，待会儿还要继续玩。",
+      "pinyin": "Tīng qǐlái zhēn bàng. Wǒmen xiān chī yìdiǎnr ba, dàihuìr hái yào jìxù wán.",
+      "vi": "Nghe tuyệt đấy. Chúng ta ăn một chút trước đi, lát nữa còn phải chơi tiếp."
+    },
+    {
+      "start": 493.49,
+      "end": 497.38,
+      "en": "Right. I’m so hungry I could eat an entire sandcastle.",
+      "zh": "对啊。我现在饿得都能把整个沙堡吃光了。",
+      "pinyin": "Duì a. Wǒ xiànzài è de dōu néng bǎ zhěng gè shābǎo chī guāng le.",
+      "vi": "Đúng vậy. Bây giờ tớ đói đến mức có thể ăn hết một lâu đài cát luôn rồi."
+    },
+    {
+      "start": 498.58,
+      "end": 502.43,
+      "en": "Don’t eat sand; it isn’t good for your health.",
+      "zh": "别吃沙子啊，那对身体不好。",
+      "pinyin": "Bié chī shāzi a, nà duì shēntǐ bù hǎo.",
+      "vi": "Đừng ăn cát nha, không tốt cho sức khỏe đâu."
+    },
+    {
+      "start": 505.86,
+      "end": 512.21,
+      "en": "They chatted while eating lunch. A gentle sea breeze blew by.",
+      "zh": "他们一边吃午饭，一边聊天。海风轻轻地吹过。",
+      "pinyin": "Tāmen yìbiān chī wǔfàn, yìbiān liáotiān. Hǎifēng qīngqīng de chuī guò.",
+      "vi": "Họ vừa ăn trưa vừa trò chuyện. Gió biển nhẹ nhàng thổi qua."
+    },
+    {
+      "start": 513.9,
+      "end": 519.62,
+      "en": "It’s so nice here. I want to come to the beach every day.",
+      "zh": "这里真舒服。我想每天都来海边。",
+      "pinyin": "Zhèlǐ zhēn shūfu. Wǒ xiǎng měitiān dōu lái hǎibiān.",
+      "vi": "Ở đây thật dễ chịu. Tớ muốn ngày nào cũng đến biển."
+    },
+    {
+      "start": 521.66,
+      "end": 527.34,
+      "en": "Me too. But after school starts, we’ll have to go back to school.",
+      "zh": "我也是。但是开学以后，我们又要去上学了。",
+      "pinyin": "Wǒ yě shì. Dànshì kāixué yǐhòu, wǒmen yòu yào qù shàngxué le.",
+      "vi": "Tớ cũng vậy. Nhưng sau khi khai giảng, chúng ta lại phải đi học."
+    },
+    {
+      "start": 528.53,
+      "end": 533.6,
+      "en": "Don’t mention school starting again. Today is a happy summer day.",
+      "zh": "别再提开学了。今天可是一个快乐的夏日。",
+      "pinyin": "Bié zài tí kāixué le. Jīntiān kě shì yí gè kuàilè de xiàrì.",
+      "vi": "Đừng nhắc đến khai giảng nữa. Hôm nay là một ngày hè vui vẻ mà."
+    },
+    {
+      "start": 536.15,
+      "end": 542.73,
+      "en": "In the afternoon, they walked along the beach and took lots of pictures.",
+      "zh": "下午，他们在海边散步，还拍了很多照片。",
+      "pinyin": "Xiàwǔ, tāmen zài hǎibiān sànbù, hái pāi le hěn duō zhàopiàn.",
+      "vi": "Buổi chiều, họ đi dạo trên bãi biển và chụp rất nhiều ảnh."
+    },
+    {
+      "start": 545.71,
+      "end": 548.32,
+      "en": "Let’s take a picture together!",
+      "zh": "我们一起拍张照片吧！",
+      "pinyin": "Wǒmen yìqǐ pāi zhāng zhàopiàn ba!",
+      "vi": "Chúng ta chụp chung một tấm ảnh nhé!"
+    },
+    {
+      "start": 549.88,
+      "end": 553.37,
+      "en": "Sure. Xiaoming, stand in the middle.",
+      "zh": "好啊。小明，你站中间吧。",
+      "pinyin": "Hǎo a. Xiǎo Míng, nǐ zhàn zhōngjiān ba.",
+      "vi": "Được thôi. Tiểu Minh, cậu đứng ở giữa nhé."
+    },
+    {
+      "start": 554.19,
+      "end": 557.87,
+      "en": "Okay. I’ll stand in the middle, and you two stand on either side.",
+      "zh": "好。我站中间，你们两个站在两边吧。",
+      "pinyin": "Hǎo. Wǒ zhàn zhōngjiān, nǐmen liǎng gè zhàn zài liǎngbiān ba.",
+      "vi": "Được. Tớ đứng giữa, còn hai cậu đứng hai bên nha."
+    },
+    {
+      "start": 559.07,
+      "end": 562.04,
+      "en": "Hurry up, the sun is about to set.",
+      "zh": "快点儿，太阳快下山了。",
+      "pinyin": "Kuài diǎnr, tàiyáng kuài xiàshān le.",
+      "vi": "Nhanh lên nào, mặt trời sắp lặn rồi."
+    },
+    {
+      "start": 564.4,
+      "end": 567.74,
+      "en": "They stood by the sea and smiled at the phone.",
+      "zh": "他们站在海边，对着手机微笑。",
+      "pinyin": "Tāmen zhàn zài hǎibiān, duìzhe shǒujī wéixiào.",
+      "vi": "Họ đứng bên bờ biển và mỉm cười trước điện thoại."
+    },
+    {
+      "start": 568.71,
+      "end": 572.39,
+      "en": "One, two, three, smile!",
+      "zh": "一、二、三，笑一个！",
+      "pinyin": "Yī, èr, sān, xiào yí gè!",
+      "vi": "Một, hai, ba, cười nào!"
+    },
+    {
+      "start": 575,
+      "end": 578.79,
+      "en": "Wait, the wind blew my hair all messy.",
+      "zh": "等一下，我的头发被风吹得乱七八糟的。",
+      "pinyin": "Děng yíxià, wǒ de tóufa bèi fēng chuī de luànqībāzāo de.",
+      "vi": "Khoan đã, tóc của tớ bị gió thổi rối hết rồi."
+    },
+    {
+      "start": 579.57,
+      "end": 582.47,
+      "en": "It’s okay. It looks very natural this way.",
+      "zh": "没关系。这样看起来很自然嘛。",
+      "pinyin": "Méi guānxi. Zhèyàng kàn qǐlái hěn zìrán ma.",
+      "vi": "Không sao đâu. Như vậy trông rất tự nhiên mà."
+    },
+    {
+      "start": 583.74,
+      "end": 586.87,
+      "en": "Look, the picture is beautiful!",
+      "zh": "你看，照片真好看！",
+      "pinyin": "Nǐ kàn, zhàopiàn zhēn hǎokàn!",
+      "vi": "Nhìn này, ảnh đẹp lắm!"
+    },
+    {
+      "start": 588.02,
+      "end": 592.54,
+      "en": "It really is. There’s the sea behind us, and we’re all smiling so happily.",
+      "zh": "真的。后面是大海，而且我们都笑得很开心。",
+      "pinyin": "Zhēn de. Hòumiàn shì dàhǎi, érqiě wǒmen dōu xiào de hěn kāixīn.",
+      "vi": "Đúng thật. Phía sau là biển, còn chúng ta đều cười rất vui."
+    },
+    {
+      "start": 595.69,
+      "end": 601.85,
+      "en": "The sun slowly set. The sky turned golden yellow.",
+      "zh": "太阳慢慢落下。天空变成了金黄色。",
+      "pinyin": "Tàiyáng mànman luò xià. Tiānkōng biàn chéng le jīnhuángsè.",
+      "vi": "Mặt trời từ từ lặn xuống. Bầu trời chuyển sang màu vàng óng."
+    },
+    {
+      "start": 603.16,
+      "end": 605.45,
+      "en": "The sunset is so beautiful.",
+      "zh": "这个夕阳真美啊。",
+      "pinyin": "Zhège xīyáng zhēn měi a.",
+      "vi": "Hoàng hôn đẹp thật đó."
+    },
+    {
+      "start": 607.94,
+      "end": 610.65,
+      "en": "Today went by so quickly.",
+      "zh": "今天过得真快啊。",
+      "pinyin": "Jīntiān guò de zhēn kuài a.",
+      "vi": "Hôm nay trôi qua nhanh quá."
+    },
+    {
+      "start": 613.22,
+      "end": 616.96,
+      "en": "Because when we’re happy, time always flies.",
+      "zh": "因为我们开心的时候，时间总是过得很快。",
+      "pinyin": "Yīnwèi wǒmen kāixīn de shíhou, shíjiān zǒng shì guò de hěn kuài.",
+      "vi": "Vì khi chúng ta vui vẻ, thời gian luôn trôi qua rất nhanh."
+    },
+    {
+      "start": 618.76,
+      "end": 621.12,
+      "en": "That’s a beautiful way to put it.",
+      "zh": "这句话说得真好。",
+      "pinyin": "Zhè jù huà shuō de zhēn hǎo.",
+      "vi": "Câu đó nói hay đấy."
+    },
+    {
+      "start": 623.3,
+      "end": 627.15,
+      "en": "I’m really happy I got to come out and have fun with you.",
+      "zh": "能和你们一起出来玩，我真的很开心。",
+      "pinyin": "Néng hé nǐmen yìqǐ chūlái wán, wǒ zhēn de hěn kāixīn.",
+      "vi": "Được đi chơi cùng các cậu, tớ thật sự rất vui."
+    },
+    {
+      "start": 628.23,
+      "end": 631.45,
+      "en": "We should go to many more places together in the future, okay?",
+      "zh": "以后我们还要一起去很多地方，好吗？",
+      "pinyin": "Yǐhòu wǒmen hái yào yìqǐ qù hěn duō dìfang, hǎo ma?",
+      "vi": "Sau này chúng ta còn phải cùng nhau đi nhiều nơi nữa nhé."
+    },
+    {
+      "start": 632.67,
+      "end": 637.88,
+      "en": "Sure. To the beach, up into the mountains, and to new cities too.",
+      "zh": "好啊。去海边、爬山，还要去新的城市。",
+      "pinyin": "Hǎo a. Qù hǎibiān, páshān, hái yào qù xīn de chéngshì.",
+      "vi": "Được thôi. Đi biển, lên núi và cả đến những thành phố mới."
+    },
+    {
+      "start": 639.08,
+      "end": 643.92,
+      "en": "We’re still young, and we have plenty of time.",
+      "zh": "我们还年轻，还有很多时间。",
+      "pinyin": "Wǒmen hái niánqīng, hái yǒu hěn duō shíjiān.",
+      "vi": "Chúng ta vẫn còn trẻ và còn rất nhiều thời gian."
+    },
+    {
+      "start": 645.08,
+      "end": 648.68,
+      "en": "Then we have to have lots of fun, while studying hard too.",
+      "zh": "那我们一定要玩得开心，同时也要认真学习。",
+      "pinyin": "Nà wǒmen yídìng yào wán de kāixīn, tóngshí yě yào rènzhēn xuéxí.",
+      "vi": "Vậy thì chúng ta phải chơi thật vui, đồng thời cũng phải học hành chăm chỉ."
+    },
+    {
+      "start": 649.71,
+      "end": 654.23,
+      "en": "That’s right. When we look back on today, we’ll definitely smile.",
+      "zh": "对。以后回想起今天，我们一定会笑起来。",
+      "pinyin": "Duì. Yǐhòu huíxiǎng qǐ jīntiān, wǒmen yídìng huì xiào qǐlái.",
+      "vi": "Đúng vậy. Sau này khi nhớ lại ngày hôm nay, chắc chắn chúng ta sẽ mỉm cười."
+    },
+    {
+      "start": 656.15,
+      "end": 666.59,
+      "en": "They looked at the sea, then at the distant sky. In that moment, they felt this summer was truly special.",
+      "zh": "他们看着大海，又望向远处的天空。在那一刻，他们觉得这个夏天真的很特别。",
+      "pinyin": "Tāmen kànzhe dàhǎi, yòu wàngxiàng yuǎnchù de tiānkōng. Zài nà yí kè, tāmen juéde zhège xiàtiān zhēn de hěn tèbié.",
+      "vi": "Họ nhìn biển cả, rồi nhìn bầu trời ở phía xa. Trong khoảnh khắc ấy, họ cảm thấy mùa hè này thật đặc biệt."
+    },
+    {
+      "start": 667.9,
+      "end": 670.47,
+      "en": "Let’s go. It’s getting dark.",
+      "zh": "走吧，天快黑了。",
+      "pinyin": "Zǒu ba, tiān kuài hēi le.",
+      "vi": "Đi thôi, trời sắp tối rồi."
+    },
+    {
+      "start": 671.67,
+      "end": 674.41,
+      "en": "Wait a moment. Let me look at the sea one more time.",
+      "zh": "等一下，让我再看一次大海。",
+      "pinyin": "Děng yíxià, ràng wǒ zài kàn yí cì dàhǎi.",
+      "vi": "Đợi một chút, để tớ ngắm biển thêm một lần nữa."
+    },
+    {
+      "start": 675.54,
+      "end": 679.41,
+      "en": "Me too. Today was truly unforgettable.",
+      "zh": "我也是。今天真的很难忘。",
+      "pinyin": "Wǒ yě shì. Jīntiān zhēn de hěn nánwàng.",
+      "vi": "Tớ cũng vậy. Hôm nay thật sự rất đáng nhớ."
+    },
+    {
+      "start": 680.84,
+      "end": 685.59,
+      "en": "The three of them picked up their bags and slowly walked toward the bus stop.",
+      "zh": "三个人提起包，慢慢地朝公交车站走去。",
+      "pinyin": "Sān gè rén tí qǐ bāo, mànmàn de cháo gōngjiāo chēzhàn zǒu qù.",
+      "vi": "Ba người xách túi lên và chậm rãi đi về phía trạm xe buýt."
+    },
+    {
+      "start": 686.23,
+      "end": 691.36,
+      "en": "The sea breeze was still blowing, and their laughter seemed to linger around them.",
+      "zh": "海风还在吹，笑声仿佛还在他们身边。",
+      "pinyin": "Hǎifēng hái zài chuī, xiàoshēng fǎngfú hái zài tāmen shēnbiān.",
+      "vi": "Gió biển vẫn đang thổi, tiếng cười vẫn như còn ở bên họ."
+    },
+    {
+      "start": 692.04,
+      "end": 695.83,
+      "en": "And this summer was only just beginning. 🌊☀️🏖️",
+      "zh": "而这个夏天才刚刚开始。🌊☀️🏖️",
+      "pinyin": "Ér zhège xiàtiān cái gānggāng kāishǐ.",
+      "vi": "Và mùa hè này mới chỉ vừa bắt đầu. 🌊☀️🏖️"
+    }
+  ]
+}
