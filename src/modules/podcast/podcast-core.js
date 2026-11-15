@@ -3262,6 +3262,2256 @@
       ]
     },
     {
+      id: 'ep-ps-q-sbgg7ujvy',
+      youtubeId: 'Q-sbgg7UJvY',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK3】好消息 - Tin vui',
+      titleVi: 'Tin vui',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 152,
+      durationLabel: '2:32',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 10 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/Q-sbgg7UJvY.json',
+      cuesCount: 10,
+      cues: [
+        {
+          start: 17.76,
+          end: 20,
+          en: 'Today the manager told me some good news.',
+          zh: '今天经理告诉我一个好消息。',
+          pinyin: 'Jīn tiān jīng lǐ gào sù wǒ yí gè hǎo xiāo xī。',
+          vi: 'Hôm nay giám đốc báo cho tôi một tin tốt.'
+        },
+        {
+          start: 23.52,
+          end: 26.7,
+          en: 'Next month the company is going to send me to Beijing to work for six months.',
+          zh: '下个月公司要派我去北京工作半年。',
+          pinyin: 'Xià gè yuè gōng sī yào pài wǒ qù běi jīng gōng zuò bàn nián。',
+          vi: 'Tháng sau công ty sẽ cử tôi đến Bắc Kinh làm việc nửa năm.'
+        },
+        {
+          start: 30.28,
+          end: 32.62,
+          en: 'When I heard this news, I was very happy.',
+          zh: '听到这个消息，我非常开心。',
+          pinyin: 'Tīng dào zhè ge xiāo xī， wǒ fēi cháng kāi xīn。',
+          vi: 'Nghe được tin này, tôi rất vui.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-mugsqh1amrq',
+      youtubeId: 'mUgSQh1amrQ',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK2】请假 - Xin nghỉ',
+      titleVi: 'Xin nghỉ',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 155,
+      durationLabel: '2:35',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 15 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/mUgSQh1amrQ.json',
+      cuesCount: 15,
+      cues: [
+        {
+          start: 17.66,
+          end: 25.48,
+          en: 'When I got up this morning, I felt unwell.',
+          zh: '今天早上起床的时候,我觉得身体不舒服。',
+          pinyin: 'Jīn tiān zǎo shàng qǐ chuáng de shí hòu, wǒ jué de shēn tǐ bù shū fú。',
+          vi: 'Sáng nay khi ngủ dậy, tôi thấy trong người không được khỏe.'
+        },
+        {
+          start: 28.02,
+          end: 32.84,
+          en: 'I was a bit dizzy and couldn\'t go to work.',
+          zh: '头有点晕,不能去上班。',
+          pinyin: 'Tóu yǒu diǎn yūn, bù néng qù shàng bān。',
+          vi: 'Đầu hơi choáng váng, không thể đi làm được.'
+        },
+        {
+          start: 35.66,
+          end: 42.18,
+          en: 'I called my boss and asked for a day off.',
+          zh: '我给老板打了一个电话,请了一天假。',
+          pinyin: 'Wǒ gěi lǎo bǎn dǎ le yí gè diàn huà, qǐng le yì tiān jiǎ。',
+          vi: 'Tôi đã gọi điện cho sếp xin nghỉ một ngày.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-xlss21i229o',
+      youtubeId: 'XLss21i229o',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK2】租房子 - Thuê nhà',
+      titleVi: 'Thuê nhà',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 161,
+      durationLabel: '2:41',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 10 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/XLss21i229o.json',
+      cuesCount: 10,
+      cues: [
+        {
+          start: 15.2,
+          end: 21.3,
+          en: 'I want to rent a house near the company.',
+          zh: '我想在公司附近租一个房子。',
+          pinyin: 'Wǒ xiǎng zài gōng sī fù jìn zū yí gè fáng zi。',
+          vi: 'Tôi muốn thuê một căn nhà gần công ty.'
+        },
+        {
+          start: 24.5,
+          end: 26.24,
+          en: 'The house doesn\'t need to be very big.',
+          zh: '房子不用很大。',
+          pinyin: 'Fáng zi bú yòng hěn dà。',
+          vi: 'Căn nhà không cần phải lớn.'
+        },
+        {
+          start: 26.72,
+          end: 29.64,
+          en: 'But it must be clean and quiet.',
+          zh: '但一定要干净和安静。',
+          pinyin: 'Dàn yí dìng yào gān jìng hé ān jìng。',
+          vi: 'Nhưng nhất định phải sạch sẽ và yên tĩnh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-td0ldj74thk',
+      youtubeId: 'td0lDj74THk',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK2】坐地铁 - Đi tàu điện ngầm',
+      titleVi: 'Đi tàu điện ngầm',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 146,
+      durationLabel: '2:26',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 13 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/td0lDj74THk.json',
+      cuesCount: 13,
+      cues: [
+        {
+          start: 14.42,
+          end: 22.42,
+          en: 'Now many people take the subway to go to work or school.',
+          zh: '现在很多人坐地铁去上班或者上学',
+          pinyin: 'Xiàn zài hěn duō rén zuò dì tiě qù shàng bān huò zhě shàng xué',
+          vi: 'Bây giờ rất nhiều người đi tàu điện ngầm để đi làm hoặc đi học.'
+        },
+        {
+          start: 26.72,
+          end: 28.62,
+          en: 'The subway station is not far from my home.',
+          zh: '地铁站离我家不远',
+          pinyin: 'Dì tiě zhàn lí wǒ jiā bù yuǎn',
+          vi: 'Ga tàu điện ngầm cách nhà tôi không xa.'
+        },
+        {
+          start: 32.34,
+          end: 35.8,
+          en: 'So I take the subway to work every day.',
+          zh: '所以我每天都坐地铁去上班',
+          pinyin: 'Suǒ yǐ wǒ měi tiān dōu zuò dì tiě qù shàng bān',
+          vi: 'Vì vậy ngày nào tôi cũng đi tàu điện ngầm để đi làm.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-jippbnupmow',
+      youtubeId: 'JIpPbnuPMow',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK2】去银行 - Đi ngân hàng',
+      titleVi: 'Đi ngân hàng',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 146,
+      durationLabel: '2:26',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 15 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/JIpPbnuPMow.json',
+      cuesCount: 15,
+      cues: [
+        {
+          start: 18.8,
+          end: 19.76,
+          en: 'I went to the bank.',
+          zh: '我去银行',
+          pinyin: 'Wǒ qù yín háng',
+          vi: 'Tôi đi ngân hàng.'
+        },
+        {
+          start: 19.84,
+          end: 21.32,
+          en: 'withdrew some money.',
+          zh: '取了一些钱',
+          pinyin: 'Qǔ le yì xiē qián',
+          vi: 'rút một ít tiền.'
+        },
+        {
+          start: 25.6,
+          end: 27.52,
+          en: 'because this month\'s salary',
+          zh: '因为这个月的工资',
+          pinyin: 'Yīn wèi zhè ge yuè de gōng zī',
+          vi: 'vì tiền lương tháng này'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-u1t_bx9c5zq',
+      youtubeId: 'U1T_BX9C5zQ',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK2】越南妇女节 - Ngày Phụ nữ Việt Nam',
+      titleVi: 'Ngày Phụ nữ Việt Nam',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 155,
+      durationLabel: '2:35',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 15 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/U1T_BX9C5zQ.json',
+      cuesCount: 15,
+      cues: [
+        {
+          start: 17.28,
+          end: 21.88,
+          en: 'Today is October 20, and it is also Vietnamese Women\'s Day.',
+          zh: '今天是月日，也是越南妇女节',
+          pinyin: 'Jīn tiān shì yuè rì， yě shì yuè nán fù nǚ jié',
+          vi: 'Hôm nay là ngày 20 tháng 10, cũng là Ngày Phụ nữ Việt Nam.'
+        },
+        {
+          start: 25.98,
+          end: 31.48,
+          en: 'After work, I went to the store and bought a beautiful dress for my wife.',
+          zh: '下班以后，我去商店给妻子买了一条漂亮的裙子',
+          pinyin: 'Xià bān yǐ hòu， wǒ qù shāng diàn gěi qī zǐ mǎi le yì tiáo piào liang de qún zǐ',
+          vi: 'Sau khi tan làm, tôi đến cửa hàng mua cho vợ một chiếc váy rất đẹp.'
+        },
+        {
+          start: 35.68,
+          end: 38.52,
+          en: 'I also bought a book for my daughter.',
+          zh: '我还给女儿买了一本书',
+          pinyin: 'Wǒ hái gěi nǚ ér mǎi le yì běn shū',
+          vi: 'Tôi cũng mua cho con gái một quyển sách.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-boqzgbweaoe',
+      youtubeId: 'bOqZgbwEaOE',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK2】开会 - Họp',
+      titleVi: 'Họp',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 156,
+      durationLabel: '2:36',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 17 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/bOqZgbwEaOE.json',
+      cuesCount: 17,
+      cues: [
+        {
+          start: 16.9,
+          end: 19.44,
+          en: 'I have a meeting this afternoon.',
+          zh: '今天下午我要开会',
+          pinyin: 'Jīn tiān xià wǔ wǒ yào kāi huì',
+          vi: 'Chiều nay tôi phải họp.'
+        },
+        {
+          start: 23.58,
+          end: 27.8,
+          en: 'This meeting is very important, so I can\'t be late.',
+          zh: '这个会议很重要，所以我不能迟到',
+          pinyin: 'Zhè ge huì yì hěn zhòng yào， suǒ yǐ wǒ bù néng chí dào',
+          vi: 'Cuộc họp này rất quan trọng, nên tôi không thể đến muộn.'
+        },
+        {
+          start: 32.38,
+          end: 36.52,
+          en: 'The meeting starts at 3:30 p.m. in the conference room on the fourth floor.',
+          zh: '会议下午三点半开始，在四楼的会议室。',
+          pinyin: 'Huì yì xià wǔ sān diǎn bàn kāi shǐ， zài sì lóu de huì yì shì。',
+          vi: 'Cuộc họp bắt đầu lúc ba giờ rưỡi chiều, ở phòng họp tầng bốn.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-andr2hizlsm',
+      youtubeId: 'Andr2hizLSM',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK2】关心父母 - Quan tâm cha mẹ',
+      titleVi: 'Quan tâm cha mẹ',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 156,
+      durationLabel: '2:36',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 19 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/Andr2hizLSM.json',
+      cuesCount: 19,
+      cues: [
+        {
+          start: 16.92,
+          end: 20.02,
+          en: 'I rest at home every weekend.',
+          zh: '我每个周末都在家休息。',
+          pinyin: 'Wǒ měi gè zhōu mò dōu zài jiā xiū xi。',
+          vi: 'Mỗi cuối tuần tôi đều nghỉ ngơi ở nhà.'
+        },
+        {
+          start: 24.36,
+          end: 25.28,
+          en: 'At this time,',
+          zh: '这个时候，',
+          pinyin: 'Zhè ge shí hòu，',
+          vi: 'Lúc này,'
+        },
+        {
+          start: 25.66,
+          end: 27.72,
+          en: 'I always call my parents.',
+          zh: '我都会给父母打电话。',
+          pinyin: 'Wǒ dōu huì gěi fù mǔ dǎ diàn huà。',
+          vi: 'Tôi đều gọi điện cho bố mẹ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-ivhnb4d26fw',
+      youtubeId: 'IVhnb4d26Fw',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK2】上网 - Lên mạng',
+      titleVi: 'Lên mạng',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 154,
+      durationLabel: '2:34',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 18 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/IVhnb4d26Fw.json',
+      cuesCount: 18,
+      cues: [
+        {
+          start: 11.26,
+          end: 21.04,
+          en: 'Xiaohong goes online at home every day after work.',
+          zh: '小红每天下班后都会在家上网',
+          pinyin: 'Xiǎo hóng měi tiān xià bān hòu dōu huì zài jiā shàng wǎng',
+          vi: 'Tiểu Hồng sau khi tan làm mỗi ngày đều lên mạng ở nhà.'
+        },
+        {
+          start: 24.5,
+          end: 27.28,
+          en: 'She likes to go online to chat with friends.',
+          zh: '她喜欢上网跟朋友聊天',
+          pinyin: 'Tā xǐ huan shàng wǎng gēn péng yǒu liáo tiān',
+          vi: 'Cô ấy thích lên mạng trò chuyện với bạn bè.'
+        },
+        {
+          start: 27.96,
+          end: 28.5,
+          en: 'Listen to music.',
+          zh: '听音乐',
+          pinyin: 'Tīng yīn yuè',
+          vi: 'Nghe nhạc.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-z42yqpoit6k',
+      youtubeId: 'Z42YqpoIT6k',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK2】看牙医 - Khám nha sĩ',
+      titleVi: 'Khám nha sĩ',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 160,
+      durationLabel: '2:40',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 15 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/Z42YqpoIT6k.json',
+      cuesCount: 15,
+      cues: [
+        {
+          start: 18.9,
+          end: 21.26,
+          en: 'My tooth has been hurting for three days.',
+          zh: '我的牙疼了三天。',
+          pinyin: 'Wǒ de yá téng le sān tiān。',
+          vi: 'Tôi bị đau răng đã ba ngày rồi.'
+        },
+        {
+          start: 24.62,
+          end: 27.94,
+          en: 'It hurts more when I eat or drink cold water.',
+          zh: '吃东西喝冷水的时候更疼。',
+          pinyin: 'Chī dōng xī hē lěng shuǐ de shí hòu gèng téng。',
+          vi: 'Khi ăn hoặc uống nước lạnh thì đau hơn.'
+        },
+        {
+          start: 31.38,
+          end: 36.62,
+          en: 'This morning I went to the hospital to see the dentist.',
+          zh: '今天早上我去医院看了牙医。',
+          pinyin: 'Jīn tiān zǎo shàng wǒ qù yī yuàn kàn le yá yī。',
+          vi: 'Sáng nay tôi đến bệnh viện khám nha sĩ.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-b9tqaqiij3o',
+      youtubeId: 'B9tQaqIIj3o',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: '【LUYỆN ĐỌC TIẾNG TRUNG HSK2】理发 - Cắt tóc',
+      titleVi: 'Cắt tóc',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 136,
+      durationLabel: '2:16',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 11 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/B9tQaqIIj3o.json',
+      cuesCount: 11,
+      cues: [
+        {
+          start: 18.74,
+          end: 20.88,
+          en: 'My hair is too long.',
+          zh: '我的头发太长了。',
+          pinyin: 'Wǒ de tóu fa tài cháng le。',
+          vi: 'Tóc của tôi dài quá.'
+        },
+        {
+          start: 24.12,
+          end: 26.12,
+          en: 'Today I go to the barbershop.',
+          zh: '今天去理发店。',
+          pinyin: 'Jīn tiān qù lǐ fā diàn。',
+          vi: 'Hôm nay tôi đến tiệm cắt tóc.'
+        },
+        {
+          start: 26.78,
+          end: 27.7,
+          en: 'Cut it a bit shorter.',
+          zh: '剪短了一点。',
+          pinyin: 'Jiǎn duǎn le yì diǎn。',
+          vi: 'Đã cắt ngắn lại một chút.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-bonz-aqa3jg',
+      youtubeId: 'boNZ-Aqa3Jg',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Miêu tả con trai - LUYỆN ĐỌC TIẾNG TRUNG HSK 3',
+      titleVi: 'Miêu tả con trai',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 170,
+      durationLabel: '2:50',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 16 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/boNZ-Aqa3Jg.json',
+      cuesCount: 16,
+      cues: [
+        {
+          start: 13.96,
+          end: 19.82,
+          en: 'My son is a fifth-grade elementary school student.',
+          zh: '我的儿子是小学五年级的学生',
+          pinyin: 'Wǒ de ér zi shì xiǎo xué wǔ nián jí de xué shēng',
+          vi: 'Con trai tôi là học sinh lớp năm tiểu học.'
+        },
+        {
+          start: 22.5,
+          end: 25.44,
+          en: 'He is much taller than most children his age.',
+          zh: '他的个子比一般小朋友高得多',
+          pinyin: 'Tā de gè zi bǐ yì bān xiǎo péng yǒu gāo dé duō',
+          vi: 'Nó cao hơn hẳn các bạn nhỏ cùng tuổi.'
+        },
+        {
+          start: 27.8,
+          end: 30.02,
+          en: 'and his skin is fairer than most kids.',
+          zh: '也比一般小朋友长得白',
+          pinyin: 'Yě bǐ yì bān xiǎo péng yǒu cháng dé bái',
+          vi: 'và da cũng trắng hơn các bạn nhỏ khác.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-enw9iuaayt4',
+      youtubeId: 'Enw9IuaaYT4',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Miêu tả mẹ - LUYỆN ĐỌC TIẾNG TRUNG HSK 3',
+      titleVi: 'Miêu tả mẹ',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 192,
+      durationLabel: '3:12',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 15 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/Enw9IuaaYT4.json',
+      cuesCount: 15,
+      cues: [
+        {
+          start: 9.46,
+          end: 19.04,
+          en: 'My mother is about 1.65 meters tall.',
+          zh: '我的妈妈一米六五左右',
+          pinyin: 'Wǒ de mā ma yì mǐ liù wǔ zuǒ yòu',
+          vi: 'Mẹ tôi cao khoảng 1m65.'
+        },
+        {
+          start: 22.14,
+          end: 23.46,
+          en: 'She is neither fat nor thin.',
+          zh: '不胖也不瘦',
+          pinyin: 'Bú pàng yě bú shòu',
+          vi: 'không béo cũng không gầy.'
+        },
+        {
+          start: 27.1,
+          end: 29.32,
+          en: 'She has a pair of big eyes.',
+          zh: '她长着一双大大的眼睛',
+          pinyin: 'Tā cháng zhe yì shuāng dà dà de yǎn jīng',
+          vi: 'Mẹ tôi có một đôi mắt to.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-rwofxvj-17w',
+      youtubeId: 'rwoFXvj-17w',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Cách học tiếng Trung - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Cách học tiếng Trung',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 215,
+      durationLabel: '3:35',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 13 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/rwoFXvj-17w.json',
+      cuesCount: 13,
+      cues: [
+        {
+          start: 19.86,
+          end: 22.64,
+          en: 'Chinese is very important for my work.',
+          zh: '汉语对我工作很重要。',
+          pinyin: 'Hàn yǔ duì wǒ gōng zuò hěn zhòng yào。',
+          vi: 'Tiếng Trung rất quan trọng đối với công việc của tôi.'
+        },
+        {
+          start: 24.9,
+          end: 27.78,
+          en: 'So, I am now studying Chinese very hard.',
+          zh: '所以，我现在很努力学习汉语。',
+          pinyin: 'Suǒ yǐ， wǒ xiàn zài hěn nǔ lì xué xí hàn yǔ。',
+          vi: 'Vì vậy, bây giờ tôi đang rất chăm chỉ học tiếng Trung.'
+        },
+        {
+          start: 30.04,
+          end: 32.76,
+          en: 'How can we learn Chinese well?',
+          zh: '我们怎样才能学好汉语呢？',
+          pinyin: 'Wǒ men zěn yàng cái néng xué hǎo hàn yǔ ne？',
+          vi: 'Làm thế nào chúng ta có thể học tốt tiếng Trung?'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-_7ud0likfes',
+      youtubeId: '_7uD0lIkfes',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Các loại màu sắc - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Các loại màu sắc',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 221,
+      durationLabel: '3:41',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 14 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/_7uD0lIkfes.json',
+      cuesCount: 14,
+      cues: [
+        {
+          start: 0.78,
+          end: 21.5,
+          en: 'Every day when going out',
+          zh: '每天出门的时候',
+          pinyin: 'Měi tiān chū mén de shí hòu',
+          vi: 'Mỗi ngày khi ra khỏi nhà'
+        },
+        {
+          start: 23.7,
+          end: 26.8,
+          en: 'Everyone will see all kinds of colors',
+          zh: '大家会看到各种各样的颜色',
+          pinyin: 'Dà jiā huì kàn dào gè zhǒng gè yàng de yán sè',
+          vi: 'Mọi người sẽ thấy đủ loại màu sắc'
+        },
+        {
+          start: 29.5,
+          end: 31.64,
+          en: 'Green big trees and small grass',
+          zh: '绿色的大树和小草',
+          pinyin: 'Lǜ sè de dà shù hé xiǎo cǎo',
+          vi: 'Cây to xanh và cỏ non xanh'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-y8mrvmflv9o',
+      youtubeId: 'y8MrvMfLV9o',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Tại sao tôi học tiếng Trung - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Tại sao tôi học tiếng Trung',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 240,
+      durationLabel: '4:00',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 21 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/y8MrvMfLV9o.json',
+      cuesCount: 21,
+      cues: [
+        {
+          start: 3.92,
+          end: 5.6,
+          en: 'Read: Why do I learn Chinese?',
+          zh: '读：为什么我学中文？',
+          pinyin: 'Dú： wèi shén me wǒ xué zhōng wén？',
+          vi: 'Đọc: Tại sao tôi học tiếng Trung?'
+        },
+        {
+          start: 19.82,
+          end: 24.94,
+          en: 'Chinese girls are very pretty, so I want to learn Chinese.',
+          zh: '中国的女孩很漂亮，所以我要学汉语。',
+          pinyin: 'Zhōng guó de nǚ hái hěn piào liang， suǒ yǐ wǒ yào xué hàn yǔ。',
+          vi: 'Các cô gái Trung Quốc rất xinh, nên tôi muốn học tiếng Trung.'
+        },
+        {
+          start: 27.44,
+          end: 29.52,
+          en: 'I found a Chinese language school.',
+          zh: '我找了一个汉语学校。',
+          pinyin: 'Wǒ zhǎo le yí gè hàn yǔ xué xiào。',
+          vi: 'Tôi tìm được một trường dạy tiếng Trung.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-mpp3c20ob0u',
+      youtubeId: 'mpP3C20OB0U',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Tâm trạng tốt và xấu - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Tâm trạng tốt và xấu',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 199,
+      durationLabel: '3:19',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 17 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/mpP3C20OB0U.json',
+      cuesCount: 17,
+      cues: [
+        {
+          start: 19.84,
+          end: 22,
+          en: 'Have you noticed a problem?',
+          zh: '你们有没有发现一个问题？',
+          pinyin: 'Nǐ men yǒu méi yǒu fā xiàn yí gè wèn tí？',
+          vi: 'Các bạn có nhận ra một vấn đề không?'
+        },
+        {
+          start: 24.48,
+          end: 26.78,
+          en: 'That is, every time you are in a good mood,',
+          zh: '那就是，每次你心情好',
+          pinyin: 'Nà jiù shì， měi cì nǐ xīn qíng hǎo',
+          vi: 'Đó là, mỗi khi tâm trạng bạn tốt'
+        },
+        {
+          start: 28.6,
+          end: 31.08,
+          en: 'when you are happy, you are always smiling.',
+          zh: '你开心的时候就总是笑着',
+          pinyin: 'Nǐ kāi xīn de shí hòu jiù zǒng shì xiào zhe',
+          vi: 'khi bạn vui vẻ thì bạn luôn mỉm cười'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-sw_p4v5_gkm',
+      youtubeId: 'sW_P4v5_GkM',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Câu chuyện ăn bánh ngọt - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Câu chuyện ăn bánh ngọt',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 214,
+      durationLabel: '3:34',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 16 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/sW_P4v5_GkM.json',
+      cuesCount: 16,
+      cues: [
+        {
+          start: 19.86,
+          end: 22.04,
+          en: 'Mom bought two pieces of cake.',
+          zh: '妈妈买了两块蛋糕。',
+          pinyin: 'Mā ma mǎi le liǎng kuài dàn gāo。',
+          vi: 'Mẹ mua hai miếng bánh ngọt.'
+        },
+        {
+          start: 24.3,
+          end: 25.82,
+          en: 'She said to the older brother and younger sister:',
+          zh: '对哥哥和妹妹说：',
+          pinyin: 'Duì gē ge hé mèi mei shuō：',
+          vi: 'Mẹ nói với anh trai và em gái:'
+        },
+        {
+          start: 28.08,
+          end: 30.76,
+          en: '“You two can each have one piece of cake.”',
+          zh: '“你们两个人每人吃一块蛋糕。”',
+          pinyin: '“ nǐ men liǎng gè rén měi rén chī yí kuài dàn gāo。”',
+          vi: '“Hai người mỗi người ăn một miếng bánh ngọt.”'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-eqom9jtskea',
+      youtubeId: 'eQOM9JTsKeA',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Câu chuyện leo núi - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Câu chuyện leo núi',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 229,
+      durationLabel: '3:49',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 17 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/eQOM9JTsKeA.json',
+      cuesCount: 17,
+      cues: [
+        {
+          start: 20.74,
+          end: 23.78,
+          en: 'On Saturday, Dad took his little son hiking.',
+          zh: '星期六，爸爸带着小儿子爬山。',
+          pinyin: 'Xīng qī liù， bà ba dài zhe xiǎo ér zi pá shān。',
+          vi: 'Thứ Bảy, bố dẫn cậu con trai nhỏ đi leo núi.'
+        },
+        {
+          start: 26.88,
+          end: 30.24,
+          en: 'It took them three hours to climb to the top of the mountain.',
+          zh: '他们花了三个小时爬到了山顶。',
+          pinyin: 'Tā men huā le sān gè xiǎo shí pá dào le shān dǐng。',
+          vi: 'Họ mất ba tiếng đồng hồ để leo lên đến đỉnh núi.'
+        },
+        {
+          start: 33.56,
+          end: 35.62,
+          en: 'The scenery at the top of the mountain was very beautiful.',
+          zh: '山顶的风景很美。',
+          pinyin: 'Shān dǐng de fēng jǐng hěn měi。',
+          vi: 'Phong cảnh trên đỉnh núi rất đẹp.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-9or7geir-ta',
+      youtubeId: '9oR7gEIr-TA',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Ngày cuối tuần của tôi - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Cuối tuần của tôi',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 216,
+      durationLabel: '3:36',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 17 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/9oR7gEIr-TA.json',
+      cuesCount: 17,
+      cues: [
+        {
+          start: 4.04,
+          end: 5.16,
+          en: 'My weekend.',
+          zh: '我的周末。',
+          pinyin: 'Wǒ de zhōu mò。',
+          vi: 'Cuối tuần của tôi.'
+        },
+        {
+          start: 20.96,
+          end: 22.26,
+          en: 'Tomorrow is the weekend.',
+          zh: '明天是周末了。',
+          pinyin: 'Míng tiān shì zhōu mò liǎo。',
+          vi: 'Ngày mai là cuối tuần rồi.'
+        },
+        {
+          start: 24.42,
+          end: 26,
+          en: 'Do you have any plans?',
+          zh: '你有什么打算吗？',
+          pinyin: 'Nǐ yǒu shén me dǎ suàn ma？',
+          vi: 'Bạn có dự định gì không?'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-nhkkfknw7gq',
+      youtubeId: 'NHKKFKnW7gQ',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Đi làm muộn - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Đi làm muộn',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 214,
+      durationLabel: '3:34',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 18 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/NHKKFKnW7gQ.json',
+      cuesCount: 18,
+      cues: [
+        {
+          start: 21.34,
+          end: 23.32,
+          en: 'I work in a small company.',
+          zh: '我在一个小公司里工作。',
+          pinyin: 'Wǒ zài yí gè xiǎo gōng sī lǐ gōng zuò。',
+          vi: 'Tôi làm việc trong một công ty nhỏ.'
+        },
+        {
+          start: 25.98,
+          end: 27.48,
+          en: 'I quite like this job.',
+          zh: '我挺喜欢这个工作。',
+          pinyin: 'Wǒ tǐng xǐ huan zhè ge gōng zuò。',
+          vi: 'Tôi khá thích công việc này.'
+        },
+        {
+          start: 29.74,
+          end: 32.84,
+          en: 'But I have a problem: I\'m often late.',
+          zh: '但是我有一个问题，我经常迟到。',
+          pinyin: 'Dàn shì wǒ yǒu yí gè wèn tí， wǒ jīng cháng chí dào。',
+          vi: 'Nhưng tôi có một vấn đề là tôi thường đi muộn.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-dhc5srr2sxi',
+      youtubeId: 'dhC5sRr2sXI',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Làm khách - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Làm khách',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 218,
+      durationLabel: '3:38',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 15 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/dhC5sRr2sXI.json',
+      cuesCount: 15,
+      cues: [
+        {
+          start: 21.84,
+          end: 25.46,
+          en: 'If you plan to visit a Chinese friend\'s home,',
+          zh: '如果你打算去中国朋友家里做客，',
+          pinyin: 'Rú guǒ nǐ dǎ suàn qù zhōng guó péng yǒu jiā lǐ zuò kè，',
+          vi: 'Nếu bạn định đến nhà người bạn Trung Quốc làm khách,'
+        },
+        {
+          start: 26.92,
+          end: 29.16,
+          en: 'then you should know',
+          zh: '那么，你应该了解',
+          pinyin: 'Nà me， nǐ yīng gāi liǎo jiě',
+          vi: 'thì bạn nên biết'
+        },
+        {
+          start: 29.88,
+          end: 31.82,
+          en: 'how to address your friend\'s family members',
+          zh: '怎么称呼朋友的家人',
+          pinyin: 'Zěn me chēng hu péng yǒu de jiā rén',
+          vi: 'cách xưng hô với người nhà của người bạn'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-mv12iylc5g4',
+      youtubeId: 'mv12IyLC5G4',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Sở thích của tôi - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Sở thích của tôi',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 255,
+      durationLabel: '4:15',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 16 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/mv12IyLC5G4.json',
+      cuesCount: 16,
+      cues: [
+        {
+          start: 21.9,
+          end: 24.52,
+          en: 'Everyone has their own hobbies.',
+          zh: '每个人都有自己的爱好。',
+          pinyin: 'Měi gè rén dōu yǒu zì jǐ de ài hào。',
+          vi: 'Mỗi người đều có sở thích riêng của mình.'
+        },
+        {
+          start: 28,
+          end: 29.68,
+          en: 'What is your hobby?',
+          zh: '你的爱好是什么呢？',
+          pinyin: 'Nǐ de ài hào shì shén me ne？',
+          vi: 'Sở thích của bạn là gì?'
+        },
+        {
+          start: 33.34,
+          end: 36.74,
+          en: 'My hobby is drawing.',
+          zh: '我的爱好是画画。',
+          pinyin: 'Wǒ de ài hào shì huà huà。',
+          vi: 'Sở thích của tôi là vẽ tranh.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-tuxgfv1nclo',
+      youtubeId: 'TuxGfv1nClo',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Nhà mới của tôi - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Nhà mới của tôi',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 228,
+      durationLabel: '3:48',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 13 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/TuxGfv1nClo.json',
+      cuesCount: 13,
+      cues: [
+        {
+          start: 21.74,
+          end: 23.54,
+          en: 'I work in a big city,',
+          zh: '我在大城市工作，',
+          pinyin: 'Wǒ zài dài chéng shì gōng zuò，',
+          vi: 'Tôi làm việc ở thành phố lớn,'
+        },
+        {
+          start: 26.38,
+          end: 27.9,
+          en: 'rented a house for ten years.',
+          zh: '租了十年的房子。',
+          pinyin: 'Zū le shí nián de fáng zi。',
+          vi: 'đã thuê nhà mười năm.'
+        },
+        {
+          start: 31.2,
+          end: 33.46,
+          en: 'Now we have finally bought a house.',
+          zh: '现在我们终于买了房子。',
+          pinyin: 'Xiàn zài wǒ men zhōng yú mǎi le fáng zi。',
+          vi: 'Bây giờ chúng tôi cuối cùng cũng đã mua được một căn nhà.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-tlhcinzrokm',
+      youtubeId: 'tlHcInzROkM',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Quê hương tôi - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Quê hương tôi',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 227,
+      durationLabel: '3:47',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 20 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/tlHcInzROkM.json',
+      cuesCount: 20,
+      cues: [
+        {
+          start: 21.86,
+          end: 24.32,
+          en: 'My hometown is in the south of China.',
+          zh: '我的家乡在中国的南方。',
+          pinyin: 'Wǒ de jiā xiāng zài zhōng guó de nán fāng。',
+          vi: 'Quê hương của tôi ở miền nam Trung Quốc.'
+        },
+        {
+          start: 27.84,
+          end: 30.32,
+          en: 'My hometown is a small village,',
+          zh: '我的家乡是一个小农村，',
+          pinyin: 'Wǒ de jiā xiāng shì yí gè xiǎo nóng cūn，',
+          vi: 'Quê hương tôi là một ngôi làng nhỏ,'
+        },
+        {
+          start: 33.58,
+          end: 36.14,
+          en: 'because there are many peach blossom trees in the village,',
+          zh: '因为村里有很多桃花树，',
+          pinyin: 'Yīn wèi cūn lǐ yǒu hěn duō táo huā shù，',
+          vi: 'vì trong làng có rất nhiều cây đào,'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-ekpuqbfkq0u',
+      youtubeId: 'EkPuqbFkQ0U',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Tôi thích mùa đông - LUYỆN ĐỌC TIẾNG TRUNG HSK 2',
+      titleVi: 'Tôi thích mùa đông',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 267,
+      durationLabel: '4:27',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 16 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/EkPuqbFkQ0U.json',
+      cuesCount: 16,
+      cues: [
+        {
+          start: 4,
+          end: 5.18,
+          en: 'Hello everyone, I like winter.',
+          zh: '大家好，我喜欢冬季',
+          pinyin: 'Dà jiā hǎo， wǒ xǐ huan dōng jì',
+          vi: 'Xin chào mọi người, tôi thích mùa đông.'
+        },
+        {
+          start: 21.86,
+          end: 23.28,
+          en: 'A year has four seasons.',
+          zh: '一年有四季',
+          pinyin: 'Yì nián yǒu sì jì',
+          vi: 'Một năm có bốn mùa.'
+        },
+        {
+          start: 26.34,
+          end: 28.84,
+          en: 'Which season do I like?',
+          zh: '哪个季节是我喜欢的呢？',
+          pinyin: 'Nǎ gè jì jié shì wǒ xǐ huan de ne？',
+          vi: 'Mùa nào là mùa tôi thích nhỉ?'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-djzevmogopi',
+      youtubeId: 'DjZevMOgopI',
+      level: 'HSK 1+',
+      levelGroup: 'hsk1-2',
+      title: 'Đi chơi Tết Trung Thu - LUYỆN ĐỌC TIẾNG TRUNG HSK 1',
+      titleVi: 'Đi chơi Tết Trung Thu',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 241,
+      durationLabel: '4:01',
+      topic: 'Luyện đọc HSK 1',
+      note: 'Trọn bộ 35 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/DjZevMOgopI.json',
+      cuesCount: 35,
+      cues: [
+        {
+          start: 10.24,
+          end: 22.22,
+          en: 'Mid-Autumn Festival arrived, Xiaomei and her boyfriend went to the city center.',
+          zh: '中秋节到了，小美和男朋友去了城市中心',
+          pinyin: 'Zhōng qiū jié dào le， xiǎo měi hé nán péng yǒu qù le chéng shì zhōng xīn',
+          vi: 'Tết Trung Thu đến rồi, Tiểu Mỹ và bạn trai đi đến trung tâm thành phố.'
+        },
+        {
+          start: 27.9,
+          end: 30.34,
+          en: 'Xiaomei bought a painting.',
+          zh: '小美买了一幅画',
+          pinyin: 'Xiǎo měi mǎi le yì fú huà',
+          vi: 'Tiểu Mỹ mua một bức tranh.'
+        },
+        {
+          start: 35.94,
+          end: 39.08,
+          en: 'Her boyfriend bought a lantern.',
+          zh: '她的男朋友买了一个灯笼',
+          pinyin: 'Tā de nán péng yǒu mǎi le yí gè dēng long',
+          vi: 'Bạn trai của cô ấy mua một chiếc lồng đèn.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-tnomeqaiinw',
+      youtubeId: 'TnOMeQAiiNw',
+      level: 'HSK 1+',
+      levelGroup: 'hsk1-2',
+      title: 'Giới thiệu về công việc của bản thân  - LUYỆN ĐỌC TIẾNG TRUNG HSK 1',
+      titleVi: 'Giới thiệu về công việc của bản thân',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 218,
+      durationLabel: '3:38',
+      topic: 'Luyện đọc HSK 1',
+      note: 'Trọn bộ 30 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/TnOMeQAiiNw.json',
+      cuesCount: 30,
+      cues: [
+        {
+          start: 17.86,
+          end: 19.7,
+          en: 'I am a client manager.',
+          zh: '我是一名客户经理。',
+          pinyin: 'Wǒ shì yì míng kè hù jīng lǐ。',
+          vi: 'Tôi là một quản lý khách hàng.'
+        },
+        {
+          start: 24.56,
+          end: 26.98,
+          en: 'From Monday to Friday, I am very busy.',
+          zh: '从周一到周五，我都很忙。',
+          pinyin: 'Cóng zhōu yī dào zhōu wǔ， wǒ dōu hěn máng。',
+          vi: 'Từ thứ Hai đến thứ Sáu, tôi đều rất bận.'
+        },
+        {
+          start: 32.52,
+          end: 35.86,
+          en: 'Every day I go to work at 8 a.m. and get off work at 5 p.m.',
+          zh: '我每天早上八点上班，下午五点下班。',
+          pinyin: 'Wǒ měi tiān zǎo shàng bā diǎn shàng bān， xià wǔ wǔ diǎn xià bān。',
+          vi: 'Hằng ngày tôi đi làm lúc tám giờ sáng, tan làm lúc năm giờ chiều.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-macxxgjuf4a',
+      youtubeId: 'MACXxgJUf4A',
+      level: 'HSK 1+',
+      levelGroup: 'hsk1-2',
+      title: 'Nói về kế hoạch cuối tuần - LUYỆN ĐỌC TIẾNG TRUNG HSK 1',
+      titleVi: 'Nói về kế hoạch cuối tuần',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 180,
+      durationLabel: '3:00',
+      topic: 'Luyện đọc HSK 1',
+      note: 'Trọn bộ 18 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/MACXxgJUf4A.json',
+      cuesCount: 18,
+      cues: [
+        {
+          start: 12.86,
+          end: 19.74,
+          en: 'I don\'t have class this Sunday.',
+          zh: '这个星期日我没有课。',
+          pinyin: 'Zhè ge xīng qī rì wǒ méi yǒu kè。',
+          vi: 'Chủ nhật này tôi không có tiết học.'
+        },
+        {
+          start: 24.42,
+          end: 27.34,
+          en: 'I plan to read books in the library in the morning.',
+          zh: '我打算上午在图书馆看书。',
+          pinyin: 'Wǒ dǎ suàn shàng wǔ zài tú shū guǎn kàn shū。',
+          vi: 'Tôi định buổi sáng đọc sách ở thư viện.'
+        },
+        {
+          start: 31.96,
+          end: 34.36,
+          en: 'At noon I eat at the school cafeteria.',
+          zh: '中午在学校食堂吃饭。',
+          pinyin: 'Zhōng wǔ zài xué xiào shí táng chī fàn。',
+          vi: 'Buổi trưa tôi ăn cơm ở căng tin trường.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-wlpnv8i2bos',
+      youtubeId: 'WLPnV8I2bOs',
+      level: 'HSK 1+',
+      levelGroup: 'hsk1-2',
+      title: 'Miêu tả phòng ngủ - LUYỆN ĐỌC TIẾNG TRUNG HSK 1',
+      titleVi: 'Miêu tả phòng ngủ',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 255,
+      durationLabel: '4:15',
+      topic: 'Luyện đọc HSK 1',
+      note: 'Trọn bộ 23 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/WLPnV8I2bOs.json',
+      cuesCount: 23,
+      cues: [
+        {
+          start: 25.72,
+          end: 29.38,
+          en: 'There is a beautiful bed in my bedroom,',
+          zh: '我的卧室里有一张漂亮的床，',
+          pinyin: 'Wǒ de wò shì lǐ yǒu yì zhāng piào liang de chuáng，',
+          vi: 'Trong phòng ngủ của tôi có một chiếc giường đẹp,'
+        },
+        {
+          start: 35.06,
+          end: 37.04,
+          en: 'and a big chair.',
+          zh: '以及一把大椅子。',
+          pinyin: 'Yǐ jí yì bǎ dà yǐ zi。',
+          vi: 'và một chiếc ghế lớn.'
+        },
+        {
+          start: 43.8,
+          end: 47.08,
+          en: 'There is a toy bear on my bed.',
+          zh: '我的床上有一只玩具熊。',
+          pinyin: 'Wǒ de chuáng shàng yǒu yì zhī wán jù xióng。',
+          vi: 'Trên giường của tôi có một con gấu bông.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-_0oikkskfwy',
+      youtubeId: '_0OIKKsKfWY',
+      level: 'HSK 1+',
+      levelGroup: 'hsk1-2',
+      title: 'Bài kiểm tra TIẾNG TRUNG || LUYỆN ĐỌC TIẾNG TRUNG - HSK 1',
+      titleVi: 'Bài kiểm tra',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 184,
+      durationLabel: '3:04',
+      topic: 'Luyện đọc HSK 1',
+      note: 'Trọn bộ 26 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/_0OIKKsKfWY.json',
+      cuesCount: 26,
+      cues: [
+        {
+          start: 7.56,
+          end: 21.62,
+          en: 'I have a Chinese test every month.',
+          zh: '我每个月都有一次汉语考试。',
+          pinyin: 'Wǒ měi gè yuè dōu yǒu yí cì hàn yǔ kǎo shì。',
+          vi: 'Hằng tháng tôi đều có một bài kiểm tra tiếng Trung.'
+        },
+        {
+          start: 26.82,
+          end: 30.84,
+          en: 'When the exam is near, my good friend will help me prepare for it.',
+          zh: '快考试的时候，我的好朋友会帮我准备考试。',
+          pinyin: 'Kuài kǎo shì de shí hòu， wǒ de hǎo péng yǒu huì bāng wǒ zhǔn bèi kǎo shì。',
+          vi: 'Khi sắp thi, người bạn tốt của tôi sẽ giúp tôi chuẩn bị cho kỳ thi.'
+        },
+        {
+          start: 36.94,
+          end: 39.66,
+          en: 'Now my Chinese is getting better and better.',
+          zh: '现在我的汉语越来越好了。',
+          pinyin: 'Xiàn zài wǒ de hàn yǔ yuè lái yuè hǎo le。',
+          vi: 'Bây giờ tiếng Trung của tôi ngày càng tốt hơn.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-gets_w1ecbc',
+      youtubeId: 'geTs_W1ECbc',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Tết Trung Thu || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Tết Trung Thu',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 319,
+      durationLabel: '5:19',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 28 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/geTs_W1ECbc.json',
+      cuesCount: 28,
+      cues: [
+        {
+          start: 25.08,
+          end: 27.46,
+          en: 'Today is the Mid-Autumn Festival, the 15th day of the eighth lunar month.',
+          zh: '今天是八月十五中秋节。',
+          pinyin: 'Jīn tiān shì bā yuè shí wǔ zhōng qiū jié。',
+          vi: 'Hôm nay là ngày rằm tháng Tám, Tết Trung Thu.'
+        },
+        {
+          start: 31.8,
+          end: 34.28,
+          en: 'In the evening, many guests came to our house.',
+          zh: '晚上我们家来了很多客人。',
+          pinyin: 'Wǎn shàng wǒ men jiā lái le hěn duō kè rén。',
+          vi: 'Buổi tối nhà chúng tôi có rất nhiều khách đến.'
+        },
+        {
+          start: 38.44,
+          end: 40.14,
+          en: 'Some of them brought mooncakes.',
+          zh: '他们有的拿了月饼。',
+          pinyin: 'Tā men yǒu de ná le yuè bǐng。',
+          vi: 'Có người mang bánh trung thu.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-kgenaojuwos',
+      youtubeId: 'kGENaOJUWos',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Đi du lịch Trung Quốc || LUYỆN ĐỌC TIẾNG TRUNG - HSK 2',
+      titleVi: 'Đi du lịch Trung Quốc',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 303,
+      durationLabel: '5:03',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 29 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/kGENaOJUWos.json',
+      cuesCount: 29,
+      cues: [
+        {
+          start: 24.76,
+          end: 26.46,
+          en: 'Do you want to travel to China?',
+          zh: '你想去中国旅游吗？',
+          pinyin: 'Nǐ xiǎng qù zhōng guó lǚ yóu ma？',
+          vi: 'Bạn có muốn đi du lịch Trung Quốc không?'
+        },
+        {
+          start: 31.02,
+          end: 32.8,
+          en: 'When do you think is the best time to go?',
+          zh: '你觉得什么时候去最好？',
+          pinyin: 'Nǐ jué de shén me shí hòu qù zuì hǎo？',
+          vi: 'Bạn nghĩ đi lúc nào là tốt nhất?'
+        },
+        {
+          start: 37.8,
+          end: 39.3,
+          en: 'This question is a little difficult,',
+          zh: '这个问题有点难，',
+          pinyin: 'Zhè ge wèn tí yǒu diǎn nán，',
+          vi: 'Câu hỏi này hơi khó,'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-u7kn6wo8iz0',
+      youtubeId: 'u7Kn6Wo8iZ0',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Ông chủ mới || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Ông chủ mới',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 278,
+      durationLabel: '4:38',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 25 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/u7Kn6Wo8iZ0.json',
+      cuesCount: 25,
+      cues: [
+        {
+          start: 24.38,
+          end: 26.44,
+          en: 'A new boss came to our company.',
+          zh: '我们公司来了一个新老板。',
+          pinyin: 'Wǒ men gōng sī lái le yí gè xīn lǎo bǎn。',
+          vi: 'Công ty chúng tôi có một ông chủ mới đến.'
+        },
+        {
+          start: 30.18,
+          end: 32.72,
+          en: 'Everyone heard that he had very high standards,',
+          zh: '大家听说他有很高的要求，',
+          pinyin: 'Dà jiā tīng shuō tā yǒu hěn gāo de yāo qiú，',
+          vi: 'Mọi người nghe nói ông ấy có yêu cầu rất cao,'
+        },
+        {
+          start: 32.76,
+          end: 39.16,
+          en: 'but no one knew what he would do on his first day.',
+          zh: '但是不知道他第一天会做什么。',
+          pinyin: 'Dàn shì bù zhī dào tā dì yī tiān huì zuò shén me。',
+          vi: 'nhưng không biết ngày đầu tiên ông ấy sẽ làm gì.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-g5xvj8avway',
+      youtubeId: 'G5XVJ8aVWAY',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Căn nhà mới || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Căn nhà mới',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 325,
+      durationLabel: '5:25',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 29 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/G5XVJ8aVWAY.json',
+      cuesCount: 29,
+      cues: [
+        {
+          start: 25.7,
+          end: 29.22,
+          en: 'Last year, my family and I bought a new house.',
+          zh: '去年，我和家人买了一套新房子。',
+          pinyin: 'Qù nián， wǒ hé jiā rén mǎi le yí tào xīn fáng zi。',
+          vi: 'Năm ngoái, tôi và gia đình đã mua một căn nhà mới.'
+        },
+        {
+          start: 33.46,
+          end: 35.88,
+          en: 'This year we moved in.',
+          zh: '今年我们搬进来了。',
+          pinyin: 'Jīn nián wǒ men bān jìn lái le。',
+          vi: 'Năm nay chúng tôi đã chuyển vào ở.'
+        },
+        {
+          start: 40.14,
+          end: 42.9,
+          en: 'To the west of the new house there is a clean river.',
+          zh: '新家西边有一条干净的河。',
+          pinyin: 'Xīn jiā xī biān yǒu yì tiáo gān jìng de hé。',
+          vi: 'Phía tây căn nhà mới có một con sông sạch.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-vv83izdlmru',
+      youtubeId: 'vV83iZDLMRU',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Học ở Trung Quốc || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Học ở Trung Quốc',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 294,
+      durationLabel: '4:54',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 24 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/vV83iZDLMRU.json',
+      cuesCount: 24,
+      cues: [
+        {
+          start: 32.82,
+          end: 36.4,
+          en: 'Now I have been studying in China for 11 months.',
+          zh: '现在我在中国已经学习个月了。',
+          pinyin: 'Xiàn zài wǒ zài zhōng guó yǐ jīng xué xí gè yuè le。',
+          vi: 'Hiện tại tôi đã học ở Trung Quốc được 11 tháng.'
+        },
+        {
+          start: 40.88,
+          end: 43.98,
+          en: 'I will soon finish studying in China.',
+          zh: '我很快会结束在中国的学习。',
+          pinyin: 'Wǒ hěn kuài huì jié shù zài zhōng guó de xué xí。',
+          vi: 'Tôi sắp kết thúc việc học ở Trung Quốc.'
+        },
+        {
+          start: 48.18,
+          end: 50.5,
+          en: 'I am going back to my country next month.',
+          zh: '下个月我就要回国了。',
+          pinyin: 'Xià gè yuè wǒ jiù yào huí guó le。',
+          vi: 'Tháng sau tôi sẽ về nước.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-ijuxvffgxze',
+      youtubeId: 'IjuXvfFgXZE',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Lớp học của tôi || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Lớp học của tôi',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 201,
+      durationLabel: '3:21',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 16 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/IjuXvfFgXZE.json',
+      cuesCount: 16,
+      cues: [
+        {
+          start: 24.96,
+          end: 28.2,
+          en: 'Do you want to know what my classroom looks like?',
+          zh: '你想知道我的教室是什么样子的吗？',
+          pinyin: 'Nǐ xiǎng zhī dào wǒ de jiào shì shì shén me yàng zi de ma？',
+          vi: 'Bạn có muốn biết lớp học của tôi trông như thế nào không?'
+        },
+        {
+          start: 31.52,
+          end: 33,
+          en: 'It is very spacious and bright.',
+          zh: '它很宽敞明亮。',
+          pinyin: 'Tā hěn kuān chǎng míng liàng。',
+          vi: 'Nó rất rộng rãi và sáng sủa.'
+        },
+        {
+          start: 36.24,
+          end: 39.04,
+          en: 'There are thirty desks and thirty chairs in the classroom.',
+          zh: '教室里有三十张桌子和三十把椅子。',
+          pinyin: 'Jiào shì lǐ yǒu sān shí zhāng zhuō zi hé sān shí bǎ yǐ zi。',
+          vi: 'Trong lớp học có ba mươi cái bàn và ba mươi cái ghế.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-3ibhc8jjxzy',
+      youtubeId: '3iBHC8jjXZY',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Giới thiệu về Quế Lâm || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Giới thiệu về Quế Lâm',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 205,
+      durationLabel: '3:25',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 15 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/3iBHC8jjXZY.json',
+      cuesCount: 15,
+      cues: [
+        {
+          start: 23.98,
+          end: 27.46,
+          en: 'Guilin is a famous tourist city in China.',
+          zh: '桂林是中国一个有名的旅游城市。',
+          pinyin: 'Guì lín shì zhōng guó yí gè yǒu míng de lǚ yóu chéng shì。',
+          vi: 'Quế Lâm là một thành phố du lịch nổi tiếng của Trung Quốc.'
+        },
+        {
+          start: 30.68,
+          end: 33.24,
+          en: 'It belongs to the Guangxi Zhuang Autonomous Region,',
+          zh: '它属于广西壮族自治区，',
+          pinyin: 'Tā shǔ yú guǎng xī zhuàng zú zì zhì qū，',
+          vi: 'Nó thuộc Khu tự trị dân tộc Choang Quảng Tây,'
+        },
+        {
+          start: 36.46,
+          end: 37.94,
+          en: 'in the south of China.',
+          zh: '在中国的南方。',
+          pinyin: 'Zài zhōng guó de nán fāng。',
+          vi: 'nằm ở phía nam Trung Quốc.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-wey_cffoo7u',
+      youtubeId: 'wey_cffoo7U',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Giới thiệu về Nam Kinh || LUYỆN ĐỌC TIẾNG TRUNG - HSK 3',
+      titleVi: 'Giới thiệu về Nam Kinh',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 198,
+      durationLabel: '3:18',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 20 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/wey_cffoo7U.json',
+      cuesCount: 20,
+      cues: [
+        {
+          start: 23.86,
+          end: 25.64,
+          en: 'Nanjing is in Jiangsu Province, China.',
+          zh: '南京在中国的江苏省',
+          pinyin: 'Nán jīng zài zhōng guó de jiāng sū shěng',
+          vi: 'Nam Kinh nằm ở tỉnh Giang Tô, Trung Quốc.'
+        },
+        {
+          start: 29.02,
+          end: 30.88,
+          en: 'It is a city with a long history.',
+          zh: '是一座历史悠久的城市',
+          pinyin: 'Shì yí zuò lì shǐ yōu jiǔ de chéng shì',
+          vi: 'Là một thành phố có lịch sử lâu đời.'
+        },
+        {
+          start: 34.16,
+          end: 35.14,
+          en: 'Because in ancient times,',
+          zh: '因为在古时候',
+          pinyin: 'Yīn wèi zài gǔ shí hòu',
+          vi: 'Bởi vì vào thời cổ đại,'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-xooy_nrtxgq',
+      youtubeId: 'XOoy_nRtXGQ',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Tôi không thích mùa đông || LUYỆN ĐỌC TIẾNG TRUNG - HSK 2',
+      titleVi: 'Tôi không thích mùa đông',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 151,
+      durationLabel: '2:31',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 16 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/XOoy_nRtXGQ.json',
+      cuesCount: 16,
+      cues: [
+        {
+          start: 21.82,
+          end: 24.4,
+          en: 'The season I like least is winter.',
+          zh: '我最不喜欢的季节是冬天。',
+          pinyin: 'Wǒ zuì bù xǐ huan de jì jié shì dōng tiān。',
+          vi: 'Mùa tôi không thích nhất là mùa đông.'
+        },
+        {
+          start: 27.32,
+          end: 28.8,
+          en: 'Because in winter,',
+          zh: '因为冬天的时候，',
+          pinyin: 'Yīn wèi dōng tiān de shí hòu，',
+          vi: 'Vì vào mùa đông,'
+        },
+        {
+          start: 31.58,
+          end: 33.58,
+          en: 'I always get colds and fevers,',
+          zh: '我总是会感冒、发烧，',
+          pinyin: 'Wǒ zǒng shì huì gǎn mào、 fā shāo，',
+          vi: 'tôi hay bị cảm, sốt,'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-zta-ndv39ee',
+      youtubeId: 'ztA-NDv39EE',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Tôi là đầu bếp || LUYỆN ĐỌC TIẾNG TRUNG - HSK 2',
+      titleVi: 'Tôi là đầu bếp',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 153,
+      durationLabel: '2:33',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 16 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/ztA-NDv39EE.json',
+      cuesCount: 16,
+      cues: [
+        {
+          start: 21.88,
+          end: 22.86,
+          en: 'I am a chef.',
+          zh: '我是一位厨师。',
+          pinyin: 'Wǒ shì yí wèi chú shī。',
+          vi: 'Tôi là đầu bếp.'
+        },
+        {
+          start: 26.6,
+          end: 28.38,
+          en: 'So, I really like food.',
+          zh: '所以，我很喜欢食物。',
+          pinyin: 'Suǒ yǐ， wǒ hěn xǐ huan shí wù。',
+          vi: 'Vì vậy, tôi rất thích đồ ăn.'
+        },
+        {
+          start: 31.68,
+          end: 34.14,
+          en: 'Let me tell you what food I like to make.',
+          zh: '让我告诉你我喜欢做的食物是什么。',
+          pinyin: 'Ràng wǒ gào sù nǐ wǒ xǐ huan zuò de shí wù shì shén me。',
+          vi: 'Để tôi nói cho bạn biết món tôi thích làm là gì.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-3rj5eh6xluk',
+      youtubeId: '3rJ5EH6XlUk',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Thời gian trôi qua thật nhanh || LUYỆN ĐỌC TIẾNG TRUNG - HSK 2',
+      titleVi: 'Thời gian trôi qua thật nhanh',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 160,
+      durationLabel: '2:40',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 18 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/3rJ5EH6XlUk.json',
+      cuesCount: 18,
+      cues: [
+        {
+          start: 17.02,
+          end: 23.66,
+          en: 'Time passes so fast.',
+          zh: '时间过得好快啊。',
+          pinyin: 'Shí jiān guò dé hǎo kuài a。',
+          vi: 'Thời gian trôi qua thật nhanh nhỉ.'
+        },
+        {
+          start: 26.82,
+          end: 28.14,
+          en: 'Another week has passed.',
+          zh: '一周又过去了。',
+          pinyin: 'Yì zhōu yòu guò qù le。',
+          vi: 'Một tuần nữa lại trôi qua rồi.'
+        },
+        {
+          start: 31.3,
+          end: 32.64,
+          en: 'A week has seven days.',
+          zh: '一周有七天。',
+          pinyin: 'Yì zhōu yǒu qī tiān。',
+          vi: 'Một tuần có bảy ngày.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-sxng3bjfdig',
+      youtubeId: 'SxNG3bJfDig',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Đoạn văn mua trái cây || LUYỆN ĐỌC TIẾNG TRUNG - HSK 2',
+      titleVi: 'Mua trái cây',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 171,
+      durationLabel: '2:51',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 18 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/SxNG3bJfDig.json',
+      cuesCount: 18,
+      cues: [
+        {
+          start: 31.84,
+          end: 34.08,
+          en: 'Mom and I are shopping at the supermarket.',
+          zh: '妈妈和我在超市购物。',
+          pinyin: 'Mā ma hé wǒ zài chāo shì gòu wù。',
+          vi: 'Mẹ và tôi đi mua sắm ở siêu thị.'
+        },
+        {
+          start: 37.22,
+          end: 38.96,
+          en: 'We bought a lot of fruit.',
+          zh: '我们买了很多水果。',
+          pinyin: 'Wǒ men mǎi le hěn duō shuǐ guǒ。',
+          vi: 'Chúng tôi đã mua rất nhiều trái cây.'
+        },
+        {
+          start: 42.12,
+          end: 44.38,
+          en: 'I like to eat bananas and grapes.',
+          zh: '我喜欢吃香蕉和葡萄。',
+          pinyin: 'Wǒ xǐ huan chī xiāng jiāo hé pú táo。',
+          vi: 'Tôi thích ăn chuối và nho.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-bu1goaum0o8',
+      youtubeId: 'BU1goAuM0o8',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Đoạn văn hạnh phúc là gì || LUYỆN ĐỌC TIẾNG TRUNG - HSK 2',
+      titleVi: 'Hạnh phúc là gì?',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 231,
+      durationLabel: '3:51',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 26 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/BU1goAuM0o8.json',
+      cuesCount: 26,
+      cues: [
+        {
+          start: 21.84,
+          end: 23.44,
+          en: 'Xiao Ming loves reading books.',
+          zh: '小明非常爱看书。',
+          pinyin: 'Xiǎo míng fēi cháng ài kàn shū。',
+          vi: 'Minh rất thích đọc sách.'
+        },
+        {
+          start: 26.54,
+          end: 27.94,
+          en: 'He also loves using his head.',
+          zh: '也非常爱动脑筋。',
+          pinyin: 'Yě fēi cháng ài dòng nǎo jīn。',
+          vi: 'Cậu ấy cũng rất thích động não.'
+        },
+        {
+          start: 31.26,
+          end: 34.04,
+          en: 'That day, holding a book, Xiao Ming muttered:',
+          zh: '这天，小明捧着一本书嘀咕：',
+          pinyin: 'Zhè tiān， xiǎo míng pěng zhe yì běn shū dí gū：',
+          vi: 'Hôm ấy, Minh ôm một cuốn sách và lẩm bẩm:'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-d2xbrckagyi',
+      youtubeId: 'd2XbRCKaGyI',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Đoạn văn học sinh Trung Quốc || LUYỆN ĐỌC TIẾNG TRUNG - HSK 2',
+      titleVi: 'Học sinh Trung Quốc',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 163,
+      durationLabel: '2:43',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 15 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/d2XbRCKaGyI.json',
+      cuesCount: 15,
+      cues: [
+        {
+          start: 30.38,
+          end: 31.74,
+          en: 'Children start primary school at six years old.',
+          zh: '六岁读小学',
+          pinyin: 'Liù suì dú xiǎo xué',
+          vi: 'Trẻ em vào học tiểu học lúc sáu tuổi.'
+        },
+        {
+          start: 34.48,
+          end: 35.86,
+          en: 'Primary school lasts six years.',
+          zh: '小学有六年',
+          pinyin: 'Xiǎo xué yǒu liù nián',
+          vi: 'Tiểu học có sáu năm.'
+        },
+        {
+          start: 38.64,
+          end: 40.36,
+          en: 'At twelve, they start junior high school.',
+          zh: '他们十二岁读初中',
+          pinyin: 'Tā men shí èr suì dú chū zhōng',
+          vi: 'Mười hai tuổi, các em vào học trung học cơ sở.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-wan9wdmwlv0',
+      youtubeId: 'wan9wdMwlv0',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Phía bắc và nam của Trung Quốc || LUYỆN ĐỌC TIẾNG TRUNG - HSK 2',
+      titleVi: 'Miền Bắc và miền Nam Trung Quốc',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 146,
+      durationLabel: '2:26',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 14 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/wan9wdMwlv0.json',
+      cuesCount: 14,
+      cues: [
+        {
+          start: 21.88,
+          end: 23.98,
+          en: 'Using the Qinling Mountains and the Huai River as the dividing line.',
+          zh: '以秦岭、淮河为线。',
+          pinyin: 'Yǐ qín lǐng、 huái hé wèi xiàn。',
+          vi: 'Lấy Tần Lĩnh và Hoài Hà làm ranh giới.'
+        },
+        {
+          start: 26.76,
+          end: 29.32,
+          en: 'To the north of this line is northern China.',
+          zh: '这条线的北方是中国的北方。',
+          pinyin: 'Zhè tiáo xiàn de běi fāng shì zhōng guó de běi fāng。',
+          vi: 'Phía bắc của đường ranh giới này là miền Bắc Trung Quốc.'
+        },
+        {
+          start: 32.24,
+          end: 34.96,
+          en: 'To the south of this line is southern China.',
+          zh: '这条线的南方是中国的南方。',
+          pinyin: 'Zhè tiáo xiàn de nán fāng shì zhōng guó de nán fāng。',
+          vi: 'Phía nam của đường ranh giới này là miền Nam Trung Quốc.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-0rhndeetxva',
+      youtubeId: '0RhndeEtXVA',
+      level: 'HSK 2+',
+      levelGroup: 'hsk1-2',
+      title: 'Tới Trung Quốc chơi nào || LUYỆN ĐỌC TIẾNG TRUNG - HSK 2',
+      titleVi: 'Đi Trung Quốc chơi nào',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 163,
+      durationLabel: '2:43',
+      topic: 'Luyện đọc HSK 2',
+      note: 'Trọn bộ 18 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/0RhndeEtXVA.json',
+      cuesCount: 18,
+      cues: [
+        {
+          start: 30.36,
+          end: 31.56,
+          en: 'You can go to Harbin',
+          zh: '可以去哈尔滨',
+          pinyin: 'Kě yǐ qù hā ěr bīn',
+          vi: 'Có thể đi Cáp Nhĩ Tân'
+        },
+        {
+          start: 34.6,
+          end: 36.46,
+          en: 'It is in the far north of China',
+          zh: '它在中国的最北边',
+          pinyin: 'Tā zài zhōng guó de zuì běi biān',
+          vi: 'Nó nằm ở cực bắc Trung Quốc'
+        },
+        {
+          start: 39.34,
+          end: 40.68,
+          en: 'It snows in winter',
+          zh: '冬天会下雪',
+          pinyin: 'Dōng tiān huì xià xuě',
+          vi: 'Mùa đông sẽ có tuyết rơi'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-i9bbkrtgv9o',
+      youtubeId: 'i9bbKrtgV9o',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Luyện đọc TIẾNG TRUNG : Giới thiệu về bố tôi',
+      titleVi: 'Giới thiệu về bố tôi',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 235,
+      durationLabel: '3:55',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 24 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/i9bbKrtgV9o.json',
+      cuesCount: 24,
+      cues: [
+        {
+          start: 23.44,
+          end: 25.88,
+          en: 'My father\'s name is Du Mengxiong.',
+          zh: '我父亲叫杜孟雄。',
+          pinyin: 'Wǒ fù qīn jiào dù mèng xióng。',
+          vi: 'Bố tôi tên là Đỗ Mạnh Hùng.'
+        },
+        {
+          start: 27,
+          end: 31.42,
+          en: 'He is over fifty years old this year and lives in Lam Dong Province.',
+          zh: '今年五十多岁，住在林同省。',
+          pinyin: 'Jīn nián wǔ shí duō suì， zhù zài lín tóng shěng。',
+          vi: 'Năm nay ông ấy hơn năm mươi tuổi, sống ở tỉnh Lâm Đồng.'
+        },
+        {
+          start: 33.54,
+          end: 36.26,
+          en: 'My father\'s hobby is music.',
+          zh: '我父亲的爱好是音乐。',
+          pinyin: 'Wǒ fù qīn de ài hào shì yīn yuè。',
+          vi: 'Sở thích của bố tôi là âm nhạc.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-zbfku0pudbc',
+      youtubeId: 'ZbfkU0PuDBc',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Luyện đọc TIẾNG TRUNG : Đoạn văn giới thiệu bản thân khi đi xin việc',
+      titleVi: 'Giới thiệu bản thân khi xin việc',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 230,
+      durationLabel: '3:50',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 46 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/ZbfkU0PuDBc.json',
+      cuesCount: 46,
+      cues: [
+        {
+          start: 11.56,
+          end: 13.22,
+          en: 'When you study a Chinese language course.',
+          zh: '当你学习中文课程时',
+          pinyin: 'Dāng nǐ xué xí zhōng wén kè chéng shí',
+          vi: 'Khi bạn học khóa học tiếng Trung.'
+        },
+        {
+          start: 21.72,
+          end: 22.94,
+          en: 'I am Li Qianqian.',
+          zh: '我是李千千',
+          pinyin: 'Wǒ shì lǐ qiān qiān',
+          vi: 'Tôi là Lý Thiên Thiên.'
+        },
+        {
+          start: 24.34,
+          end: 26.62,
+          en: 'I graduated from the University of Commerce.',
+          zh: '毕业于商贸大学',
+          pinyin: 'Bì yè yú shāng mào dà xué',
+          vi: 'Tôi tốt nghiệp Đại học Thương mại.'
+        }
+      ]
+    },
+    {
+      id: 'ep-ps-dgtiznqqqyg',
+      youtubeId: 'dgtIZnqQqYg',
+      level: 'HSK 3+',
+      levelGroup: 'hsk3',
+      title: 'Luyện đọc TIẾNG TRUNG : Một ngày của tôi',
+      titleVi: 'Một ngày của tôi',
+      channel: 'Panda Studio',
+      channelName: 'Panda Studio',
+      channelHandle: '@PandaStudio24',
+      channelId: 'UCnXr9o-f4MXHdgq_QN3QFiw',
+      channelUrl: 'https://www.youtube.com/@PandaStudio24',
+      durationSec: 237,
+      durationLabel: '3:57',
+      topic: 'Luyện đọc HSK 3',
+      note: 'Trọn bộ 32 câu luyện đọc với 4 lớp Hán · Pinyin · Việt · Anh.',
+      cuesUrl: 'content/podcast/cues/dgtIZnqQqYg.json',
+      cuesCount: 32,
+      cues: [
+        {
+          start: 15.82,
+          end: 21.8,
+          en: 'Every morning, I get up at 5:30, brush my teeth, and wash my face.',
+          zh: '每天早上，我五点半起床，刷牙、洗脸。',
+          pinyin: 'Měi tiān zǎo shàng， wǒ wǔ diǎn bàn qǐ chuáng， shuā yá、 xǐ liǎn。',
+          vi: 'Mỗi sáng, tôi dậy lúc 5:30, đánh răng, rửa mặt.'
+        },
+        {
+          start: 22.26,
+          end: 25.9,
+          en: 'I usually eat breakfast at 6:30 in the morning.',
+          zh: '我通常在早上六点半吃早餐。',
+          pinyin: 'Wǒ tōng cháng zài zǎo shàng liù diǎn bàn chī zǎo cān。',
+          vi: 'Tôi thường ăn sáng lúc 6:30 sáng.'
+        },
+        {
+          start: 26,
+          end: 29,
+          en: 'I ride a motorbike to work.',
+          zh: '我骑摩托车上班。',
+          pinyin: 'Wǒ qí mó tuō chē shàng bān。',
+          vi: 'Tôi đi làm bằng xe máy.'
+        }
+      ]
+    },
+    {
       id: 'ep-bb-hsk1-reflex-quiz',
       youtubeId: 'eJmpTntAZco',
       level: 'HSK 1',
