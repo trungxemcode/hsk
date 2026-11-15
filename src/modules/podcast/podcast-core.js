@@ -27,6 +27,15 @@
       url: 'https://www.youtube.com/@BaoBaoMandarin',
       feedUrl: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCYHKAec4JjyR_DC2obXv1Yg',
       description: 'Podcast tiếng Trung tự nhiên HSK 1–6 từ cơ bản đến nâng cao (có sẵn phụ đề Trung + Việt).'
+    },
+    {
+      id: 'chinese-daily-podcast',
+      handle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      name: 'Chinese Daily Podcast',
+      url: 'https://www.youtube.com/@ChineseDailyPodcast',
+      feedUrl: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCyYT-HdG1FXua6_vwyXNqhg',
+      description: 'Podcast tâm sự & suy ngẫm tiếng Trung hàng ngày (có tập kèm trọn bộ script 4 lớp Hán · Pinyin · Việt · Anh).'
     }
   ];
 
@@ -1312,9 +1321,11 @@
       durationSec: 1082,
       durationLabel: '18:02',
       topic: 'Thành ngữ & câu chuyện',
-      note: 'Tập thật từ kênh @LearnChineseThroughPodcast — có đầy đủ phụ đề tiếng Trung Giản thể + tiếng Việt đồng bộ theo từng giây.',
+      note: 'Tập thật từ kênh @LearnChineseThroughPodcast — trọn bộ 433 câu script 4 lớp Giản thể · Pinyin · Việt · Anh đồng bộ theo từng giây.',
       defaultMaskBottom: 4,
       defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/CqNO2psWIyU.json',
+      cuesCount: 433,
       cues: [
         {
           start: 0,
@@ -1381,9 +1392,11 @@
       durationSec: 983,
       durationLabel: '16:23',
       topic: 'Phương pháp học tập',
-      note: 'Tiểu Nguyệt & Tiểu Minh chia sẻ 5 thói quen thực tế giúp nghe nói tiếng Trung tự nhiên mỗi ngày.',
+      note: 'Tiểu Nguyệt & Tiểu Minh chia sẻ 5 thói quen giúp nghe nói tự nhiên — trọn bộ 435 câu script 4 lớp Giản thể · Pinyin · Việt · Anh.',
       defaultMaskBottom: 4,
       defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/qTKcybgpT8M.json',
+      cuesCount: 435,
       cues: [
         {
           start: 0,
@@ -1580,9 +1593,11 @@
       durationSec: 989,
       durationLabel: '16:29',
       topic: 'Giải trí & xã hội',
-      note: 'Hội thoại tốc độ tự nhiên HSK 3–5 bàn về trào lưu xem phim ngắn 1–2 phút và văn hóa giải trí hiện đại.',
+      note: 'Hội thoại tốc độ tự nhiên HSK 3–5 về trào lưu phim ngắn — trọn bộ 383 câu script 4 lớp Giản thể · Pinyin · Việt · Anh.',
       defaultMaskBottom: 4,
       defaultMaskHeight: 24,
+      cuesUrl: 'content/podcast/cues/MupmlHHMU7k.json',
+      cuesCount: 383,
       cues: [
         {
           start: 0,
@@ -1638,12 +1653,14 @@
       channelHandle: '@BaoBaoMandarin',
       channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
       channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
-      durationSec: 880,
-      durationLabel: '14:40',
+      durationSec: 881,
+      durationLabel: '14:41',
       topic: 'Công sở & xã hội hiện đại',
-      note: 'Tập nâng cao có sẵn đủ 3 lớp Trung · Việt · Anh trên YouTube, phân tích áp lực công việc và văn hóa 996.',
+      note: 'Tập nâng cao phân tích văn hóa làm việc 996 — trọn bộ 382 câu script 4 lớp Giản thể · Pinyin · Việt · Anh.',
       defaultMaskBottom: 4,
       defaultMaskHeight: 24,
+      cuesUrl: 'content/podcast/cues/i8emBnSpS3I.json',
+      cuesCount: 382,
       cues: [
         {
           start: 0,
@@ -1684,6 +1701,376 @@
           zh: '我觉得真的挺有意思的——中国的加班文化。',
           pinyin: 'wǒ juéde zhēnde tǐng yǒu yìsi de — Zhōngguó de jiābān wénhuà.',
           vi: 'mình thấy thật sự rất thú vị — văn hóa tăng ca ở Trung Quốc.'
+        }
+      ]
+    }
+  ];
+
+  const LIBRARY_EPISODES = [
+    {
+      id: 'ep-bb-hsk1-reflex-quiz',
+      youtubeId: 'eJmpTntAZco',
+      level: 'HSK 1',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1 快问快答！| HSK 1 Reflex Test: Can You Score 35/35? | Chinese Quiz',
+      titleVi: 'HSK 1 Phản xạ nhanh: Bạn có đạt 35/35 câu không? (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 808,
+      durationLabel: '13:28',
+      topic: 'Kiểm tra phản xạ HSK 1',
+      note: 'Trọn bộ 88 câu hỏi đáp phản xạ HSK 1 với 4 lớp Hán · Pinyin · Việt · Anh.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/eJmpTntAZco.json',
+      cuesCount: 88,
+      cues: [
+        {
+          start: 5.96,
+          end: 7.68,
+          en: 'Hello, dear friends!',
+          zh: '大家好，亲爱的宝贝们！',
+          pinyin: 'Dàjiā hǎo, qīn\'ài de bǎobèi men!',
+          vi: 'Xin chào mọi người, các Bảo Bối thân mến!'
+        },
+        {
+          start: 8.01,
+          end: 11.36,
+          en: 'Welcome back to BaoBao Mandarin. I\'m Xiaoyue! I\'m Xiaoming!',
+          zh: '欢迎回到宝宝中文，我是小月！我是小明！',
+          pinyin: 'Huānyíng huí dào Bǎobǎo Zhōngwén, wǒ shì Xiǎoyuè! Wǒ shì Xiǎomíng!',
+          vi: 'Chào mừng các bạn quay lại với BaoBao Mandarin, mình là Tiểu Nguyệt! Mình là Tiểu Minh!'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk13-think-in-chinese',
+      youtubeId: 'vmsC3SgWTPs',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–3 | 怎么开始用中文思考？| How to Start Thinking in Chinese | Chinese Listening Podcast',
+      titleVi: 'Làm sao bắt đầu tư duy trực tiếp bằng tiếng Trung? (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 1533,
+      durationLabel: '25:33',
+      topic: 'Tư duy ngôn ngữ',
+      note: 'Trọn bộ 580 câu hội thoại HSK 1–3 hướng dẫn cách suy nghĩ bằng tiếng Trung (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/vmsC3SgWTPs.json',
+      cuesCount: 580,
+      cues: [
+        {
+          start: 7.1,
+          end: 9.1,
+          en: 'Welcome to BaoBao Mandarin, everyone.',
+          zh: '欢迎大家来到 BaoBao Mandarin。',
+          pinyin: 'Huānyíng dàjiā láidào BaoBao Mandarin.',
+          vi: 'Chào mừng mọi người đến với BaoBao Mandarin.'
+        },
+        {
+          start: 9.13,
+          end: 10.3,
+          en: 'I\'m Xiaoming.',
+          zh: '我是小明。',
+          pinyin: 'Wǒ shì Xiǎomíng.',
+          vi: 'Mình là Tiểu Minh.'
+        },
+        {
+          start: 10.73,
+          end: 11.73,
+          en: 'I\'m Xiaoyue.',
+          zh: '我是小月。',
+          pinyin: 'Wǒ shì Xiǎoyuè.',
+          vi: 'Mình là Tiểu Nguyệt.'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk13-money-happiness',
+      youtubeId: 'uPNoMz5-zY8',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–3 | 你这么累，只是为了钱吗？| More Money = More Happiness? | Chinese Listening Podcast',
+      titleVi: 'Bạn mệt mỏi thế này chỉ vì tiền thôi sao? Tiền và Hạnh phúc (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 1029,
+      durationLabel: '17:09',
+      topic: 'Đời sống & giá trị',
+      note: 'Trọn bộ 245 câu hội thoại HSK 1–3 bàn về áp lực kiếm tiền và hạnh phúc (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/uPNoMz5-zY8.json',
+      cuesCount: 245,
+      cues: [
+        {
+          start: 6.87,
+          end: 10.4,
+          en: 'Hello, everyone! Welcome to BaoBao Mandarin! I\'m Xiaoyue.',
+          zh: '大家好，欢迎来到 BaoBao Mandarin！我是小月。',
+          pinyin: 'Dàjiā hǎo, huānyíng láidào BaoBao Mandarin! Wǒ shì Xiǎoyuè.',
+          vi: 'Chào mọi người, chào mừng đến với BaoBao Mandarin! Mình là Tiểu Nguyệt.'
+        },
+        {
+          start: 10.4,
+          end: 12.83,
+          en: 'I\'m Xiaoming! Here we are again today!',
+          zh: '我是小明！今天又见面啦～',
+          pinyin: 'Wǒ shì Xiǎomíng! Jīntiān yòu jiànmiàn la～',
+          vi: 'Mình là Tiểu Minh! Hôm nay lại được gặp mọi người rồi～'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk3-self-intro',
+      youtubeId: '30Jl7M3uLdQ',
+      level: 'HSK 2+',
+      levelGroup: 'hsk3',
+      title: 'HSK 2+ | 自我介绍 | Tell Me About Yourself in Chinese | Chinese Listening Podcast',
+      titleVi: 'Cách giới thiệu bản thân tự nhiên bằng tiếng Trung (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 983,
+      durationLabel: '16:23',
+      topic: 'Giao tiếp & công việc',
+      note: 'Trọn bộ 270 câu hội thoại HSK 2+ thực hành giới thiệu bản thân khi gặp khách hàng (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/30Jl7M3uLdQ.json',
+      cuesCount: 270,
+      cues: [
+        {
+          start: 6.2,
+          end: 10.2,
+          en: 'No, no… it still sounds so strange…',
+          zh: '不行不行…还是听起来很奇怪啊…',
+          pinyin: 'Bù xíng bù xíng… háishi tīng qǐlái hěn qíguài a…',
+          vi: 'Không được, không được… nghe vẫn kỳ quá…'
+        },
+        {
+          start: 10.2,
+          end: 13.47,
+          en: 'What are you doing? Why have you repeated that sentence so many times?',
+          zh: '你在干什么呢？一句话说了这么多遍？',
+          pinyin: 'Nǐ zài gàn shénme ne? Yī jù huà shuō le zhème duō biàn?',
+          vi: 'Bạn đang làm gì thế? Sao cứ nói đi nói lại một câu vậy?'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk3-remember-hanzi',
+      youtubeId: 'Cy3leBZQOpY',
+      level: 'HSK 2+',
+      levelGroup: 'hsk3',
+      title: 'HSK 2+ | 汉字没那么难！ | How to Easily Remember Chinese Characters | Chinese Listening Podcast',
+      titleVi: 'Chữ Hán không khó thế đâu: Cách ghi nhớ chữ Hán hiệu quả (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 1131,
+      durationLabel: '18:51',
+      topic: 'Chữ Hán & mẹo nhớ',
+      note: 'Trọn bộ 266 câu chia sẻ phương pháp học và nhớ chữ Hán lâu quên (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/Cy3leBZQOpY.json',
+      cuesCount: 266,
+      cues: [
+        {
+          start: 6.2,
+          end: 8.03,
+          en: 'How can we remember Chinese characters?',
+          zh: '怎么才能记住汉字？',
+          pinyin: 'Zěnme cái néng jìzhù Hànzì?',
+          vi: 'Làm thế nào mới có thể nhớ được chữ Hán?'
+        },
+        {
+          start: 8.03,
+          end: 11.5,
+          en: 'How many Chinese characters do you actually need to learn to get by?',
+          zh: '到底要学多少汉字才够用？',
+          pinyin: 'Dàodǐ yào xué duōshao Hànzì cái gòu yòng?',
+          vi: 'Rốt cuộc phải học bao nhiêu chữ Hán mới đủ dùng?'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk3-chigua-culture',
+      youtubeId: 'eBTWbtbOlPM',
+      level: 'HSK 2+',
+      levelGroup: 'hsk3',
+      title: 'HSK 2+ | 什么是“吃瓜”？ | Chinese "Eating Melon" Culture | Chinese Listening Podcast',
+      titleVi: 'Văn hóa “ăn dưa” (吃瓜) trên mạng xã hội Trung Quốc là gì? (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 953,
+      durationLabel: '15:53',
+      topic: 'Tiếng lóng & mạng xã hội',
+      note: 'Trọn bộ 210 câu giải thích từ lóng 吃瓜 (hóng chuyện) rất phổ biến ở Trung Quốc (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/eBTWbtbOlPM.json',
+      cuesCount: 210,
+      cues: [
+        {
+          start: 6.7,
+          end: 12.53,
+          en: 'Hi everyone, my darlings! Another week has gone by, and we\'re meeting again!',
+          zh: '大家好，宝贝们！又一个星期过去了，我们又见面了！',
+          pinyin: 'Dàjiā hǎo, bǎobèimen! Yòu yí ge xīngqī guòqù le, wǒmen yòu jiànmiàn le!',
+          vi: 'Xin chào các Bảo Bối! Lại một tuần nữa trôi qua, chúng ta lại gặp nhau rồi!'
+        },
+        {
+          start: 12.53,
+          end: 18.07,
+          en: 'Hi everyone! I\'m Xiaoming. Something really interesting happened last week,',
+          zh: '大家好！我是小明。上个星期有一件很有意思的事，',
+          pinyin: 'Dàjiā hǎo! Wǒ shì Xiǎomíng. Shàng ge xīngqī yǒu yí jiàn hěn yǒu yìsi de shì,',
+          vi: 'Chào mọi người! Mình là Tiểu Minh. Tuần trước có một chuyện rất thú vị,'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk3-procrastination',
+      youtubeId: 'Y_qGrTUK2Js',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'If You\'re Ambitious But LAZY, Watch This! | 为什么总是拖延？| Chinese Listening Podcast',
+      titleVi: 'Tại sao chúng ta luôn trì hoãn dù rất có tham vọng? (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 930,
+      durationLabel: '15:30',
+      topic: 'Tâm lý & thói quen',
+      note: 'Trọn bộ 267 câu bàn về tâm lý trì hoãn khi học tiếng Trung và cách vượt qua (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/Y_qGrTUK2Js.json',
+      cuesCount: 267,
+      cues: [
+        {
+          start: 6.47,
+          end: 9.7,
+          en: 'At the start of this year, did you set lots of goals',
+          zh: '今年年初，你是不是定了很多目标',
+          pinyin: 'Jīnnián niánchū, nǐ shì bu shì dìng le hěn duō mùbiāo',
+          vi: 'Đầu năm nay, có phải bạn đã đặt ra rất nhiều mục tiêu'
+        },
+        {
+          start: 9.7,
+          end: 11.97,
+          en: 'and set off full of confidence?',
+          zh: '充满信心地出发？',
+          pinyin: 'Chōngmǎn xìnxīn de chūfā?',
+          vi: 'và bắt đầu đầy tự tin không?'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk34-love-change',
+      youtubeId: '_BjHpiON95A',
+      level: 'HSK 3–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 3–4 | 爱一个人会改变你吗？| Will Loving Someone Change You? | Chinese Listening Podcast',
+      titleVi: 'Yêu một người có làm bạn thay đổi không? (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 1510,
+      durationLabel: '25:10',
+      topic: 'Tình cảm & trưởng thành',
+      note: 'Trọn bộ 344 câu trò chuyện sâu sắc HSK 3–4 về tình yêu và sự thay đổi của bản thân (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/_BjHpiON95A.json',
+      cuesCount: 344,
+      cues: [
+        {
+          start: 6.87,
+          end: 10.4,
+          en: 'Hello everyone, welcome to BaoBao Mandarin. I’m A-Qing.',
+          zh: '大家好，欢迎来到 BaoBao Mandarin。我是阿青。',
+          pinyin: 'Dàjiā hǎo, huānyíng láidào BaoBao Mandarin. Wǒ shì Ā Qīng.',
+          vi: 'Xin chào mọi người, chào mừng đến với BaoBao Mandarin. Mình là A-Qing.'
+        },
+        {
+          start: 10.4,
+          end: 12.47,
+          en: 'Hello everyone, I’m Xiaohua!',
+          zh: '大家好，我是小花！',
+          pinyin: 'Dàjiā hǎo, wǒ shì Xiǎohuā!',
+          vi: 'Xin chào mọi người, mình là Tiểu Hoa!'
+        }
+      ]
+    },
+    {
+      id: 'ep-cdp-hsk34-quit-learning',
+      youtubeId: 'UKUY_0HSRE8',
+      level: 'HSK 3–4',
+      levelGroup: 'hsk3',
+      title: '为什么学中文越坚持越想放弃？ | Why You Want to Quit Learning Chinese | Chinese Daily Podcast',
+      titleVi: 'Vì sao càng kiên trì học tiếng Trung càng dễ muốn bỏ cuộc? (Chinese Daily Podcast)',
+      channel: 'Chinese Daily Podcast',
+      channelName: 'Chinese Daily Podcast',
+      channelHandle: '@ChineseDailyPodcast',
+      channelId: 'UCyYT-HdG1FXua6_vwyXNqhg',
+      channelUrl: 'https://www.youtube.com/@ChineseDailyPodcast',
+      durationSec: 1004,
+      durationLabel: '16:44',
+      topic: 'Động lực học tập',
+      note: 'Tập mẫu từ kênh @ChineseDailyPodcast với trọn bộ 353 câu script 4 lớp Hán · Pinyin · Việt · Anh đồng bộ.',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/UKUY_0HSRE8.json',
+      cuesCount: 353,
+      cues: [
+        {
+          start: 6.4,
+          end: 8.19,
+          en: 'Li Ming,',
+          zh: '李明，',
+          pinyin: 'Lǐ Míng,',
+          vi: 'Lý Minh này,'
+        },
+        {
+          start: 8.2,
+          end: 11.46,
+          en: 'Why do you think people are always like this? When I start something,',
+          zh: '你说人为什么总是这样？一件事情',
+          pinyin: 'Nǐ shuō rén wèishénme zǒngshì zhèyàng? Yī jiàn shìqing',
+          vi: 'Cậu nghĩ vì sao con người lúc nào cũng thế nhỉ? Khi làm một việc gì đó,'
+        },
+        {
+          start: 11.47,
+          end: 14.79,
+          en: 'at first, I feel like a genius,',
+          zh: '刚开始的时候，我觉得自己像个天才，',
+          pinyin: 'Gāng kāishǐ de shíhou, wǒ juéde zìjǐ xiàng ge tiāncái,',
+          vi: 'lúc mới bắt đầu, mình thấy bản thân như một thiên tài,'
         }
       ]
     }
@@ -2189,6 +2576,7 @@
   return {
     DEFAULT_CHANNELS,
     STARTER_EPISODES,
+    LIBRARY_EPISODES,
     extractYoutubeId,
     extractYoutubeChannelKey,
     inferHskLevelFromTitle,

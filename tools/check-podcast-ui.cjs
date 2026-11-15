@@ -196,6 +196,32 @@ const MIME = {
       await page.locator('#podcastClosePopoverBtn').click();
       assert.equal(await page.locator('#podcastWordPopover').isHidden(), true);
 
+      // 5b. Selecting a lazy-loaded cuesUrl episode & @ChineseDailyPodcast filter loads full 4-layer script
+      const lctpCard = page.locator('.podcast-ep-card[data-yt-id="CqNO2psWIyU"]').first();
+      await lctpCard.scrollIntoViewIfNeeded();
+      await lctpCard.click();
+      await page.waitForFunction(
+        () => document.querySelectorAll('#podcastTranscriptList .podcast-cue-item').length >= 400,
+        null,
+        { timeout: 10000 }
+      );
+      const lctpCount = await page.locator('#podcastTranscriptList .podcast-cue-item').count();
+      assert.equal(lctpCount, 433, `Expected 433 cues for CqNO2psWIyU, got ${lctpCount}`);
+
+      const cdpChip = page.locator('#podcastChannelBar .podcast-channel-chip[data-handle="@ChineseDailyPodcast"]');
+      assert.equal(await cdpChip.isVisible(), true, '@ChineseDailyPodcast chip is visible');
+      await cdpChip.click();
+      const cdpCard = page.locator('.podcast-ep-card[data-yt-id="UKUY_0HSRE8"]').first();
+      await cdpCard.scrollIntoViewIfNeeded();
+      await cdpCard.click();
+      await page.waitForFunction(
+        () => document.querySelectorAll('#podcastTranscriptList .podcast-cue-item').length >= 350,
+        null,
+        { timeout: 10000 }
+      );
+      assert.equal(await page.locator('#podcastTranscriptList .podcast-cue-item').count(), 353);
+      await page.locator('#podcastChannelBar .podcast-channel-chip').first().click();
+
       // 6. Import English SRT subtitles via drawer & Quick Load
       await page.locator('#podcastToggleImportBtn').click();
       await page.locator('#podcastImportBox').waitFor({ state: 'visible' });

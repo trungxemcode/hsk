@@ -122,6 +122,7 @@
   }
 
   const panel = ensureShellMounts();
+  const staticCuesCache = new Map();
   if (!panel) return;
 
   const savedPrefs = loadJsonStorage(PREFS_KEY, {});
@@ -155,8 +156,10 @@
 
   function adminPodcasts() {
     const items = window.HSKResourceSync?.getManifest?.()?.podcasts || [];
-    const starterByYt = new Map(
-      core.STARTER_EPISODES.filter((e) => e.youtubeId).map((e) => [e.youtubeId, e])
+    const curatedByYt = new Map(
+      [...(core.STARTER_EPISODES || []), ...(core.LIBRARY_EPISODES || [])]
+        .filter((e) => e.youtubeId)
+        .map((e) => [e.youtubeId, e])
     );
     return items
       .filter((item) => item && item.access !== 'hidden')
@@ -164,8 +167,9 @@
         const n = Number(item.level) || 3;
         const levelGroup = n <= 2 ? 'hsk1-2' : n === 3 ? 'hsk3' : n === 4 ? 'hsk4' : 'hsk5-6';
         const youtubeId = core.extractYoutubeId(item.youtubeUrl || '');
-        const starter = youtubeId ? starterByYt.get(youtubeId) : null;
-        const parsedCues = item.subtitleText
+        const starter = youtubeId ? curatedByYt.get(youtubeId) : null;
+        const hasCustomSubtitle = Boolean(item.subtitleText);
+        const parsedCues = hasCustomSubtitle
           ? core.parseSubtitleText(item.subtitleText)
           : (starter?.cues || []);
         const matchedChannel = core.extractYoutubeChannelKey?.(item.note || item.title || '') || null;
@@ -184,6 +188,8 @@
           topic: item.access === 'vip' ? 'Chỉ VIP' : (starter?.topic || 'Podcast HSK'),
           youtubeId,
           cues: parsedCues,
+          cuesUrl: hasCustomSubtitle ? '' : (starter?.cuesUrl || ''),
+          cuesCount: hasCustomSubtitle ? parsedCues.length : (starter?.cuesCount || parsedCues.length),
           note: item.note || starter?.note || ''
         };
       });
@@ -205,6 +211,7 @@
     pushList(adminPodcasts());
     pushList(state.customEpisodes);
     pushList(core.STARTER_EPISODES);
+    pushList(core.LIBRARY_EPISODES || []);
     pushList(state.channelEpisodes);
     return merged;
   }
@@ -321,7 +328,7 @@
     let raw = String(ep?.titleVi || ep?.title || '').trim();
     if (!raw) return 'Tập Podcast';
     raw = raw
-      .replace(/\s*\((?:BaoBao Mandarin|Learn Chinese Through Podcast)\)\s*$/i, '')
+      .replace(/\s*\((?:BaoBao Mandarin|Learn Chinese Through Podcast|Chinese Daily Podcast)\)\s*$/i, '')
       .replace(/^(?:HSK\s+\d+(?:\s*[-–+]\s*\d+|\+)?)\s*[|｜:·-]\s*/i, '')
       .trim();
     return raw || String(ep?.titleVi || ep?.title || '').trim();
@@ -435,7 +442,7 @@
     className: 'podcast-sec-btn podcast-sync-channels-btn',
     onClick: () => syncYoutubeChannels()
   });
-  setBtnContent(syncBtn, 'sync', 'Cập nhật 2 kênh');
+  setBtnContent(syncBtn, 'sync', 'Cập nhật 3 kênh');
 
   const catalogHeadEl = el(
     'div',
@@ -1010,7 +1017,8 @@
 
     syncBtn.disabled = state.channelSyncing;
     syncBtn.classList.toggle('is-busy', Boolean(state.channelSyncing));
-    setBtnContent(syncBtn, 'sync', state.channelSyncing ? 'Đang đồng bộ…' : 'Cập nhật 2 kênh', 13);
+    const channelCount = channels.length || 3;
+    setBtnContent(syncBtn, 'sync', state.channelSyncing ? 'Đang đồng bộ…' : `Cập nhật ${channelCount} kênh`, 13);
 
     if (state.channelSyncStatus) {
       channelSyncStatusEl.hidden = false;
@@ -1024,19 +1032,19 @@
   async function syncYoutubeChannels() {
     if (state.channelSyncing) return;
     state.channelSyncing = true;
-    state.channelSyncStatus = 'Đang lấy danh sách tập mới nhất từ @LearnChineseThroughPodcast và @BaoBaoMandarin…';
+    state.channelSyncStatus = 'Đang lấy danh sách tập mới nhất từ @LearnChineseThroughPodcast, @BaoBaoMandarin và @ChineseDailyPodcast…';
     renderChannelBar();
     try {
       const workerOrigin = await getWorkerEndpointUrl();
       const res = await fetch(`${workerOrigin}/podcast-feed?channel=all`, { method: 'GET', cache: 'no-store' });
       const data = await res.json().catch(() => null);
       if (!res.ok || !Array.isArray(data?.episodes)) {
-        throw Error(data?.error || 'Không lấy được danh sách tập mới từ 2 kênh YouTube.');
+        throw Error(data?.error || 'Không lấy được danh sách tập mới từ 3 kênh YouTube.');
       }
       state.channelEpisodes = data.episodes;
       persistChannelEpisodes();
       const visibleCount = allEpisodes().length;
-      state.channelSyncStatus = `Đã đồng bộ ${data.episodes.length} tập gần đây từ 2 kênh YouTube (tổng ${visibleCount} tập sẵn sàng).`;
+      state.channelSyncStatus = `Đã đồng bộ ${data.episodes.length} tập gần đây từ 3 kênh YouTube (tổng ${visibleCount} tập sẵn sàng).`;
     } catch (err) {
       state.channelSyncStatus = err?.message || 'Chưa đồng bộ được kênh YouTube lúc này.';
     } finally {
@@ -1170,7 +1178,7 @@
           role: 'button',
           tabindex: '0',
           className: `podcast-ep-card${active ? ' is-active' : ''}`,
-          dataset: { epId: ep.id },
+          dataset: { epId: ep.id, ytId: ep.youtubeId || '' },
           onClick: () => {
             if (Date.now() < suppressCardClickUntil) return;
             selectEpisode(ep.id);
@@ -1415,25 +1423,79 @@
     if (autoPlay && !state.playing) startPlayback();
   }
 
+  async function applyLoadedCues(ep, rawCues, statusText, apiDurationSec) {
+    if (rawCues.some((c) => !String(c?.pinyin || '').trim())) {
+      await ensurePinyinPro();
+    }
+    if (state.currentEpisodeId !== ep.id) return false;
+    state.cues = core.enrichCuesLocal(rawCues, { simplify: true });
+    const lastEnd = state.cues.length ? state.cues[state.cues.length - 1].end : 0;
+    state.durationSec = Math.max(ep.durationSec || 0, Number(apiDurationSec) || 0, Math.round(lastEnd) || 40);
+    state.activeCueIdx = core.findActiveCueIndex(state.cues, state.currentTime);
+    if (state.activeCueIdx < 0 && state.cues.length) state.activeCueIdx = 0;
+    state.captionStatus = statusText;
+    renderEpisodeMeta(ep);
+    renderMaskCue();
+    renderTranscript();
+    updateTimeDisplay(false);
+    return true;
+  }
+
   async function maybeFetchFullYoutubeCaptions(ep) {
     if (!ep?.youtubeId || ep.isCustom || panel.hidden) return;
     if (state.captionAbort) {
       state.captionAbort.abort();
       state.captionAbort = null;
     }
+
+    if (ep.cuesUrl) {
+      const memCached = staticCuesCache.get(ep.cuesUrl);
+      if (Array.isArray(memCached) && memCached.length) {
+        if (state.cues.length < memCached.length) {
+          await applyLoadedCues(
+            ep,
+            memCached,
+            `✓ Đã nạp trọn bộ ${memCached.length} câu script 4 lớp (Hán · Pinyin · Việt · Anh).`,
+            0
+          );
+        }
+        return;
+      }
+      const controller = new AbortController();
+      state.captionAbort = controller;
+      state.captionStatus = ep.cuesCount
+        ? `Đang nạp trọn bộ ${ep.cuesCount} câu script 4 lớp…`
+        : 'Đang nạp trọn bộ script 4 lớp…';
+      renderEpisodeMeta(ep);
+      try {
+        const res = await fetch(ep.cuesUrl, { method: 'GET', signal: controller.signal });
+        const data = await res.json().catch(() => null);
+        if (state.captionAbort === controller) state.captionAbort = null;
+        if (res.ok && Array.isArray(data?.cues) && data.cues.length) {
+          staticCuesCache.set(ep.cuesUrl, data.cues);
+          await applyLoadedCues(
+            ep,
+            data.cues,
+            `✓ Đã nạp trọn bộ ${data.cues.length} câu script 4 lớp (Hán · Pinyin · Việt · Anh).`,
+            Number(data.durationSec || 0)
+          );
+          return;
+        }
+      } catch (err) {
+        if (state.captionAbort === controller) state.captionAbort = null;
+        if (err?.name === 'AbortError' || state.currentEpisodeId !== ep.id) return;
+      }
+    }
+
     const cacheKey = `${CUES_CACHE_PREFIX}${ep.youtubeId}`;
     const cached = loadJsonStorage(cacheKey, null);
     if (Array.isArray(cached) && cached.length > 10) {
-      await ensurePinyinPro();
-      if (state.currentEpisodeId !== ep.id) return;
-      state.cues = core.enrichCuesLocal(cached, { simplify: true });
-      const lastEnd = state.cues.length ? state.cues[state.cues.length - 1].end : 0;
-      if (lastEnd > state.durationSec) state.durationSec = Math.round(lastEnd);
-      state.captionStatus = `✓ Đã nạp trọn bộ ${state.cues.length} câu phụ đề song ngữ từ YouTube.`;
-      renderEpisodeMeta(ep);
-      renderMaskCue();
-      renderTranscript();
-      updateTimeDisplay(false);
+      await applyLoadedCues(
+        ep,
+        cached,
+        `✓ Đã nạp trọn bộ ${cached.length} câu phụ đề song ngữ từ YouTube.`,
+        0
+      );
       return;
     }
 
@@ -1458,19 +1520,12 @@
         return;
       }
       saveJsonStorage(cacheKey, data.cues);
-      await ensurePinyinPro();
-      if (state.currentEpisodeId !== ep.id) return;
-      state.cues = core.enrichCuesLocal(data.cues, { simplify: true });
-      const apiDur = Number(data.videoDetails?.lengthSeconds || 0);
-      const lastEnd = state.cues.length ? state.cues[state.cues.length - 1].end : 0;
-      state.durationSec = Math.max(ep.durationSec || 0, apiDur || 0, Math.round(lastEnd) || 40);
-      state.activeCueIdx = core.findActiveCueIndex(state.cues, state.currentTime);
-      if (state.activeCueIdx < 0 && state.cues.length) state.activeCueIdx = 0;
-      state.captionStatus = `✓ Đã nạp trọn bộ ${state.cues.length} câu phụ đề Trung · Việt từ YouTube.`;
-      renderEpisodeMeta(ep);
-      renderMaskCue();
-      renderTranscript();
-      updateTimeDisplay(false);
+      await applyLoadedCues(
+        ep,
+        data.cues,
+        `✓ Đã nạp trọn bộ ${data.cues.length} câu phụ đề Trung · Việt từ YouTube.`,
+        Number(data.videoDetails?.lengthSeconds || 0)
+      );
     } catch (_) {
       if (state.captionAbort === controller) state.captionAbort = null;
       if (state.currentEpisodeId === ep.id) {
@@ -1493,12 +1548,17 @@
     }
     pausePlayback();
     state.currentEpisodeId = ep.id;
-    const cachedFull = ep.youtubeId && !ep.isCustom ? loadJsonStorage(`${CUES_CACHE_PREFIX}${ep.youtubeId}`, null) : null;
-    const baseCues = Array.isArray(cachedFull) && cachedFull.length > (ep.cues || []).length ? cachedFull : (ep.cues || []);
+    const staticCached = ep.cuesUrl ? staticCuesCache.get(ep.cuesUrl) : null;
+    const cachedFull = !ep.cuesUrl && ep.youtubeId && !ep.isCustom
+      ? loadJsonStorage(`${CUES_CACHE_PREFIX}${ep.youtubeId}`, null)
+      : null;
+    const baseCues = Array.isArray(staticCached) && staticCached.length
+      ? staticCached
+      : (Array.isArray(cachedFull) && cachedFull.length > (ep.cues || []).length ? cachedFull : (ep.cues || []));
     state.cues = core.enrichCuesLocal(baseCues, { simplify: true });
-    state.captionStatus = state.cues.length > 15
-      ? `✓ Đã nạp trọn bộ ${state.cues.length} câu phụ đề song ngữ.`
-      : '';
+    state.captionStatus = Array.isArray(staticCached) && staticCached.length
+      ? `✓ Đã nạp trọn bộ ${state.cues.length} câu script 4 lớp (Hán · Pinyin · Việt · Anh).`
+      : (state.cues.length > 15 ? `✓ Đã nạp trọn bộ ${state.cues.length} câu phụ đề song ngữ.` : '');
     const lastCueEnd = state.cues.length ? state.cues[state.cues.length - 1].end : 36;
     state.durationSec = Math.max(ep.durationSec || 0, lastCueEnd || 36);
     state.currentTime = 0;
@@ -1925,6 +1985,7 @@
 
   let shelfDrag = null;
   episodeStripEl.addEventListener('pointerdown', (ev) => {
+    suppressCardClickUntil = 0;
     if (ev.pointerType !== 'mouse' || ev.button !== 0) return;
     if (ev.target?.closest?.('.podcast-ep-del')) return;
     shelfDrag = {
