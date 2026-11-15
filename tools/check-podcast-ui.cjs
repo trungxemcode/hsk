@@ -227,6 +227,26 @@ const MIME = {
       const lctpCount = await page.locator('#podcastTranscriptList .podcast-cue-item').count();
       assert.equal(lctpCount, 433, `Expected 433 cues for CqNO2psWIyU, got ${lctpCount}`);
 
+      const lctpGreetingCard = page.locator('.podcast-ep-card[data-yt-id="aYrCe-KTmTg"]').first();
+      await lctpGreetingCard.scrollIntoViewIfNeeded();
+      await lctpGreetingCard.click();
+      await page.waitForFunction(
+        () => document.querySelectorAll('#podcastTranscriptList .podcast-cue-item').length >= 500,
+        null,
+        { timeout: 10000 }
+      );
+      assert.equal(await page.locator('#podcastTranscriptList .podcast-cue-item').count(), 519, 'Upgraded starter aYrCe-KTmTg loads 519 cues');
+
+      const baobaoCard = page.locator('.podcast-ep-card[data-yt-id="QInUMEyKxdA"]').first();
+      await baobaoCard.scrollIntoViewIfNeeded();
+      await baobaoCard.click();
+      await page.waitForFunction(
+        () => document.querySelectorAll('#podcastTranscriptList .podcast-cue-item').length === 311,
+        null,
+        { timeout: 10000 }
+      );
+      assert.equal(await page.locator('#podcastTranscriptList .podcast-cue-item').count(), 311, 'New BaoBao episode QInUMEyKxdA loads 311 cues');
+
       const cdpChip = page.locator('#podcastChannelBar .podcast-channel-chip[data-handle="@ChineseDailyPodcast"]');
       assert.equal(await cdpChip.isVisible(), true, '@ChineseDailyPodcast chip is visible');
       await cdpChip.click();

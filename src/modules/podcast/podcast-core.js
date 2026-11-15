@@ -1252,9 +1252,11 @@
       durationSec: 1096,
       durationLabel: '18:16',
       topic: 'Giao tiếp đời sống',
-      note: 'Tập thật từ kênh @LearnChineseThroughPodcast (Hạo Văn & Vũ Đồng) — chọn tập để tự động nạp trọn bộ phụ đề Trung · Việt.',
+      note: 'Tập thật từ kênh @LearnChineseThroughPodcast (Hạo Văn & Vũ Đồng) — trọn bộ 519 câu script 4 lớp Giản thể · Pinyin · Việt · Anh đồng bộ theo từng giây.',
       defaultMaskBottom: 4,
       defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/aYrCe-KTmTg.json',
+      cuesCount: 519,
       cues: [
         {
           start: 0,
@@ -1452,12 +1454,14 @@
       channelHandle: '@LearnChineseThroughPodcast',
       channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
       channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
-      durationSec: 1061,
-      durationLabel: '17:41',
+      durationSec: 1062,
+      durationLabel: '17:42',
       topic: 'Văn hóa & truyền thuyết',
-      note: 'Câu chuyện Bạch Tố Trinh & Hứa Tiên bên Tây Hồ Hàng Châu, từ vựng mượt mà cho trình độ HSK 3–4.',
+      note: 'Câu chuyện Bạch Tố Trinh & Hứa Tiên bên Tây Hồ Hàng Châu — trọn bộ 411 câu script 4 lớp Giản thể · Pinyin · Việt · Anh đồng bộ.',
       defaultMaskBottom: 4,
       defaultMaskHeight: 24,
+      cuesUrl: 'content/podcast/cues/huEhDinrgQQ.json',
+      cuesCount: 411,
       cues: [
         {
           start: 0,
@@ -1521,12 +1525,14 @@
       channelHandle: '@LearnChineseThroughPodcast',
       channelId: 'UCI8Liuxdz6UPv5rgMskfwPg',
       channelUrl: 'https://www.youtube.com/@LearnChineseThroughPodcast',
-      durationSec: 1152,
-      durationLabel: '19:12',
+      durationSec: 1153,
+      durationLabel: '19:13',
       topic: 'Ẩm thực Trung Hoa',
-      note: 'Học từ vựng miêu tả hương vị, lẩu Tứ Xuyên và bản đồ 8 trường phái ẩm thực lớn của Trung Quốc.',
+      note: 'Học từ vựng miêu tả hương vị, lẩu Tứ Xuyên và bản đồ 8 trường phái ẩm thực lớn — trọn bộ 461 câu script 4 lớp Giản thể · Pinyin · Việt · Anh đồng bộ.',
       defaultMaskBottom: 4,
       defaultMaskHeight: 24,
+      cuesUrl: 'content/podcast/cues/xivjMEMEAvE.json',
+      cuesCount: 461,
       cues: [
         {
           start: 0,
@@ -2071,6 +2077,382 @@
           zh: '刚开始的时候，我觉得自己像个天才，',
           pinyin: 'Gāng kāishǐ de shíhou, wǒ juéde zìjǐ xiàng ge tiāncái,',
           vi: 'lúc mới bắt đầu, mình thấy bản thân như một thiên tài,'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk24-ai-chinese',
+      youtubeId: 'oLO78Z3mlww',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: 'HSK 2–4 | AI这么厉害了，还要学中文吗？| AI Is Here, Should You Still Learn Chinese? | Chinese Listening Podcast',
+      titleVi: 'AI giỏi vậy rồi, có cần học tiếng Trung nữa không? (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 698,
+      durationLabel: '11:38',
+      topic: 'Công nghệ & học tập',
+      note: 'Trọn bộ 156 câu tranh luận gần gũi về AI và giá trị của việc tự học tiếng Trung (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/oLO78Z3mlww.json',
+      cuesCount: 156,
+      cues: [
+        {
+          start: 7.43,
+          end: 9.87,
+          en: 'Xiaoming, let me ask you a question.',
+          zh: '小明，我问你一个问题吧。',
+          pinyin: 'Xiǎo Míng, wǒ wèn nǐ yí ge wèntí ba.',
+          vi: 'Này Tiểu Minh, mình hỏi bạn một câu nhé.'
+        },
+        {
+          start: 9.87,
+          end: 13.21,
+          en: 'Last month, I needed to email a Chinese client,',
+          zh: '上个月我需要给中国客户发一封邮件，',
+          pinyin: 'Shàng ge yuè wǒ xūyào gěi Zhōngguó kèhù fā yì fēng yóujiàn,',
+          vi: 'Tháng trước mình cần gửi email cho khách hàng Trung Quốc,'
+        },
+        {
+          start: 13.22,
+          end: 17.59,
+          en: 'I didn\'t know how to write it, so I entered what I wanted to say into AI',
+          zh: '我不会写，就把自己想说的话输入到AI里，',
+          pinyin: 'Wǒ bú huì xiě, jiù bǎ zìjǐ xiǎng shuō de huà shūrù dào AI lǐ,',
+          vi: 'mình không biết viết, cứ nhập những gì muốn nói vào AI'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk13-beach',
+      youtubeId: 'AKMV7WoTq8U',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–3 | 一起去海边吧！| Let\'s Go To The Beach!! | Chinese Listening Practice',
+      titleVi: 'Cùng đi biển nào! (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 701,
+      durationLabel: '11:41',
+      topic: 'Du lịch & bạn bè',
+      note: 'Trọn bộ 117 câu hội thoại HSK 1–3 về chuyến đi biển mùa hè cùng Tiểu Nguyệt, Tiểu Minh và Tiểu Hoa (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/AKMV7WoTq8U.json',
+      cuesCount: 117,
+      cues: [
+        {
+          start: 7.01,
+          end: 16.47,
+          en: 'Summer vacation is here! Today, Xiaoyue, Xiaoming, and Xiaohua are going to the beach together.',
+          zh: '暑假到了！今天，小月、小明和小花要一起去海边。',
+          pinyin: 'Shǔjià dào le! Jīntiān, Xiǎoyuè, Xiǎomíng hé Xiǎohuā yào yìqǐ qù hǎibiān.',
+          vi: 'Kỳ nghỉ hè tới rồi! Hôm nay, Tiểu Nguyệt, Tiểu Minh và Tiểu Hoa sẽ cùng nhau đi biển.'
+        },
+        {
+          start: 18.44,
+          end: 27.1,
+          en: 'Xiaoyue and Xiaoming have arrived at the bus stop, but Xiaohua still isn\'t here.',
+          zh: '小月和小明已经到公交车站了，但是小花还没到。',
+          pinyin: 'Xiǎoyuè hé Xiǎomíng yǐjīng dào gōngjiāo chēzhàn le, dànshì Xiǎohuā hái méi dào.',
+          vi: 'Tiểu Nguyệt và Tiểu Minh đã đến trạm xe buýt, nhưng Tiểu Hoa vẫn chưa tới.'
+        },
+        {
+          start: 28.87,
+          end: 32.4,
+          en: 'Xiaoming, what time is it now?',
+          zh: '小明，现在几点了？',
+          pinyin: 'Xiǎomíng, xiànzài jǐ diǎn le?',
+          vi: 'Tiểu Minh, bây giờ mấy giờ rồi?'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk13-summer-vacation',
+      youtubeId: 'kYWhcTKJiUA',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–3 | 暑假怎么过？| How Should We Spend Summer Vacation? | Chinese Listening Podcast',
+      titleVi: 'Nghỉ hè làm gì bây giờ? (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 964,
+      durationLabel: '16:04',
+      topic: 'Nghỉ hè & kế hoạch',
+      note: 'Trọn bộ 203 câu hỏi đáp HSK 1–3 về kế hoạch nghỉ hè và thói quen hằng ngày (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/kYWhcTKJiUA.json',
+      cuesCount: 203,
+      cues: [
+        {
+          start: 6,
+          end: 11,
+          en: 'Hello everyone, welcome to BaoBao Mandarin. I\'m Xiaoming.',
+          zh: '大家好，欢迎来到BaoBao Mandarin，我是小明。',
+          pinyin: 'Dàjiā hǎo, huānyíng lái dào BaoBao Mandarin, wǒ shì Xiǎomíng.',
+          vi: 'Xin chào mọi người, chào mừng các bạn đến với BaoBao Mandarin, mình là Tiểu Minh.'
+        },
+        {
+          start: 11,
+          end: 15,
+          en: 'Hello everyone, I\'m Xiaoyue. I\'m so happy to see you all again~',
+          zh: '大家好，我是小月，很高兴又见到大家~',
+          pinyin: 'Dàjiā hǎo, wǒ shì Xiǎoyuè, hěn gāoxìng yòu jiàn dào dàjiā~',
+          vi: 'Xin chào mọi người, mình là Tiểu Nguyệt, rất vui vì được gặp lại mọi người~'
+        },
+        {
+          start: 15,
+          end: 20,
+          en: 'That\'s right, Xiaoyue, we\'re together again >v< You look very happy today.',
+          zh: '没错，小月，我们又见面了 >v< 今天看起来很开心。',
+          pinyin: 'Méi cuò, Xiǎoyuè, wǒmen yòu jiànmiàn le >v< Jīntiān kàn qǐlái hěn kāixīn.',
+          vi: 'Đúng vậy, Tiểu Nguyệt, chúng ta lại gặp nhau rồi >v< Hôm nay trông cậu rất vui.'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk13-happy-birthday',
+      youtubeId: 'im5yYaw240w',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–3 | 小花，生日快乐！| Xiao Hua, Happy Birthday! | Chinese Listening Practice',
+      titleVi: 'Tiểu Hoa, chúc mừng sinh nhật! (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 651,
+      durationLabel: '10:51',
+      topic: 'Sinh nhật & đời sống',
+      note: 'Trọn bộ 106 câu câu chuyện sinh nhật 16 tuổi của Tiểu Hoa (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/im5yYaw240w.json',
+      cuesCount: 106,
+      cues: [
+        {
+          start: 6.84,
+          end: 11.89,
+          en: 'This morning, Xiao Hua got up very early.',
+          zh: '今天早上，小花起得很早。',
+          pinyin: 'Jīntiān zǎoshang, Xiǎohuā qǐ de hěn zǎo.',
+          vi: 'Sáng nay, Tiểu Hoa dậy rất sớm.'
+        },
+        {
+          start: 12.33,
+          end: 19.07,
+          en: 'She looked at the calendar on the table. Today was her birthday.',
+          zh: '她看了看桌上的日历，今天是她的生日。',
+          pinyin: 'Tā kàn le kàn zhuō shàng de rìlì, jīntiān shì tā de shēngrì.',
+          vi: 'Cô bé nhìn tờ lịch trên bàn, hôm nay là sinh nhật của cô.'
+        },
+        {
+          start: 20.46,
+          end: 25,
+          en: 'Today is my birthday. I’m sixteen already!!',
+          zh: '今天是我的生日，我已经十六岁了！！',
+          pinyin: 'Jīntiān shì wǒ de shēngrì, wǒ yǐjīng shíliù suì le!!',
+          vi: 'Hôm nay là sinh nhật của mình, mình 16 tuổi rồi!!'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk23-chaotic-morning',
+      youtubeId: 'XAdrKDfM3i4',
+      level: 'HSK 2–3',
+      levelGroup: 'hsk3',
+      title: 'HSK 2–3 | 慌乱的早上 | A Chaotic Morning | Chinese Listening Practice',
+      titleVi: 'Một buổi sáng luống cuống (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 395,
+      durationLabel: '6:35',
+      topic: 'Thói quen buổi sáng',
+      note: 'Trọn bộ 62 câu kể chuyện buổi sáng dậy muộn của Tiểu Nguyệt, ngắn gọn dễ nghe cho HSK 2–3 (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/XAdrKDfM3i4.json',
+      cuesCount: 62,
+      cues: [
+        {
+          start: 7.28,
+          end: 10.22,
+          en: 'In the morning, sunlight shone into the room.',
+          zh: '早上，阳光照进了房间。',
+          pinyin: 'Zǎoshang, yángguāng zhào jìn le fángjiān.',
+          vi: 'Buổi sáng, ánh nắng chiếu vào phòng.'
+        },
+        {
+          start: 11.19,
+          end: 17.45,
+          en: 'Xiaoyue slowly opened her eyes and felt she had slept very comfortably.',
+          zh: '小月慢慢睁开眼睛，觉得自己睡得特别舒服。',
+          pinyin: 'Xiǎo Yuè mànmàn zhēngkāi yǎnjing, juéde zìjǐ shuì de tèbié shūfu.',
+          vi: 'Tiểu Nguyệt từ từ mở mắt, cô ấy cảm thấy mình đã ngủ rất thoải mái.'
+        },
+        {
+          start: 18.78,
+          end: 22.82,
+          en: 'Suddenly, she felt that something was not right.',
+          zh: '突然，她觉得有点儿不对劲。',
+          pinyin: 'Tūrán, tā juéde yǒudiǎnr bú duìjìn.',
+          vi: 'Đột nhiên, cô ấy cảm thấy có chút không đúng.'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk12-boba-tea',
+      youtubeId: 's3FOHOdUi9M',
+      level: 'HSK 1–2',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–2 | 星期天的奶茶 | Sunday\'s Boba Tea | Chinese Listening Practice',
+      titleVi: 'Ly trà sữa ngày Chủ nhật (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 574,
+      durationLabel: '9:34',
+      topic: 'Đời sống & ẩm thực',
+      note: 'Trọn bộ 84 câu chuyện HSK 1–2 dễ thương về ngày Chủ nhật nóng nực và ly trà sữa (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/s3FOHOdUi9M.json',
+      cuesCount: 84,
+      cues: [
+        {
+          start: 6.28,
+          end: 11.07,
+          en: 'Today is Sunday, and the weather is very hot.',
+          zh: '今天是星期天，天气非常热。',
+          pinyin: 'Jīntiān shì xīngqītiān, tiānqì fēicháng rè.',
+          vi: 'Hôm nay là Chủ nhật, thời tiết vô cùng nóng.'
+        },
+        {
+          start: 13.21,
+          end: 17.89,
+          en: 'Today is Sunday, and the weather is very hot.',
+          zh: '今天是星期天，天气非常热。',
+          pinyin: 'Jīntiān shì xīngqītiān, tiānqì fēicháng rè.',
+          vi: 'Hôm nay là Chủ nhật, thời tiết vô cùng nóng.'
+        },
+        {
+          start: 20.77,
+          end: 28.1,
+          en: 'Xiaoming is studying at home. He feels too hot and doesn\'t want to read anymore.',
+          zh: '小明正在家里学习。他觉得太热了，不想再看书了。',
+          pinyin: 'Xiǎo Míng zhèngzài jiā lǐ xuéxí. Tā juéde tài rè le, bù xiǎng zài kàn shū le.',
+          vi: 'Tiểu Minh đang học bài ở nhà. Cậu ấy cảm thấy nóng quá, không muốn đọc sách nữa.'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk13-city-vs-countryside',
+      youtubeId: '3FDJ_HCa6mg',
+      level: 'HSK 1–3',
+      levelGroup: 'hsk1-2',
+      title: 'HSK 1–3 | 城市生活还是农村生活？| City Life VS Countryside Life? | Chinese Listening Podcast',
+      titleVi: 'Sống ở thành phố hay nông thôn? (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 544,
+      durationLabel: '9:04',
+      topic: 'Thành thị & nông thôn',
+      note: 'Trọn bộ 128 câu hội thoại HSK 1–3 so sánh cuộc sống thành phố và vùng quê yên bình (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/3FDJ_HCa6mg.json',
+      cuesCount: 128,
+      cues: [
+        {
+          start: 6.92,
+          end: 10.47,
+          en: 'Hello everyone, welcome to BaoBao Mandarin! I’m Xiaoyue.',
+          zh: '大家好，欢迎来到BaoBao Mandarin！我是小月。',
+          pinyin: 'Dàjiā hǎo, huānyíng láidào BaoBao Mandarin! Wǒ shì Xiǎoyuè.',
+          vi: 'Chào mọi người, chào mừng đến với BaoBao Mandarin! Mình là Tiểu Nguyệt.'
+        },
+        {
+          start: 10.75,
+          end: 12.75,
+          en: 'Hello everyone, I’m Xiaoming!',
+          zh: '大家好，我是小明！',
+          pinyin: 'Dàjiā hǎo, wǒ shì Xiǎomíng!',
+          vi: 'Chào mọi người, mình là Tiểu Minh!'
+        },
+        {
+          start: 13.47,
+          end: 17.89,
+          en: 'Xiaoming, you look really happy today. What’s going on?',
+          zh: '小明，你今天看起来很开心，怎么了？',
+          pinyin: 'Xiǎomíng, nǐ jīntiān kàn qǐlái hěn kāixīn, zěnme le?',
+          vi: 'Tiểu Minh, hôm nay trông cậu vui lắm, có chuyện gì vậy?'
+        }
+      ]
+    },
+    {
+      id: 'ep-bb-hsk24-cowherd-weaver-girl',
+      youtubeId: 'QInUMEyKxdA',
+      level: 'HSK 2–4',
+      levelGroup: 'hsk3',
+      title: '牛郎织女 | A Love Across the Milky Way | Chinese Folk Story for Bedtime',
+      titleVi: 'Sự tích Ngưu Lang Chức Nữ (BaoBao Mandarin)',
+      channel: 'BaoBao Mandarin',
+      channelName: 'BaoBao Mandarin',
+      channelHandle: '@BaoBaoMandarin',
+      channelId: 'UCYHKAec4JjyR_DC2obXv1Yg',
+      channelUrl: 'https://www.youtube.com/@BaoBaoMandarin',
+      durationSec: 1360,
+      durationLabel: '22:40',
+      topic: 'Truyện dân gian',
+      note: 'Trọn bộ 311 câu kể chuyện cổ tích Ngưu Lang Chức Nữ trước giờ đi ngủ (4 lớp Hán · Pinyin · Việt · Anh).',
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: 'content/podcast/cues/QInUMEyKxdA.json',
+      cuesCount: 311,
+      cues: [
+        {
+          start: 6.87,
+          end: 10.8,
+          en: 'Hello everyone, welcome to BaoBao Mandarin! I’m Xiǎoyuè.',
+          zh: '大家好，欢迎来到 BaoBao Mandarin！我是小月。',
+          pinyin: 'Dàjiā hǎo, huānyíng lái dào BaoBao Mandarin! Wǒ shì Xiǎoyuè.',
+          vi: 'Xin chào mọi người, chào mừng đến với BaoBao Mandarin! Mình là Tiểu Nguyệt.'
+        },
+        {
+          start: 10.8,
+          end: 15.27,
+          en: 'Hello everyone, I’m Xiǎomíng! It’s great to see you again.',
+          zh: '大家好，我是小明！很高兴又见到大家。',
+          pinyin: 'Dàjiā hǎo, wǒ shì Xiǎomíng! Hěn gāoxìng yòu jiàn dào dàjiā.',
+          vi: 'Xin chào mọi người, mình là Tiểu Minh! Rất vui lại được gặp mọi người.'
+        },
+        {
+          start: 15.27,
+          end: 20.3,
+          en: 'Starting today, BaoBao Mandarin is launching a new storytelling series.',
+          zh: '从今天开始，BaoBao Mandarin要推出一个新的故事系列。',
+          pinyin: 'Cóng jīntiān kāishǐ, BaoBao Mandarin yào tuīchū yí ge xīn de gùshi xìliè.',
+          vi: 'Bắt đầu từ hôm nay, BaoBao Mandarin sẽ ra mắt một series kể chuyện mới.'
         }
       ]
     }

@@ -1,0 +1,1257 @@
+{
+  "id": "oLO78Z3mlww",
+  "youtubeId": "oLO78Z3mlww",
+  "channelHandle": "@BaoBaoMandarin",
+  "title": "HSK 2–4 | AI这么厉害了，还要学中文吗？| AI Is Here, Should You Still Learn Chinese? | Chinese Listening Podcast",
+  "durationSec": 698,
+  "cues": [
+    {
+      "start": 7.43,
+      "end": 9.87,
+      "en": "Xiaoming, let me ask you a question.",
+      "zh": "小明，我问你一个问题吧。",
+      "pinyin": "Xiǎo Míng, wǒ wèn nǐ yí ge wèntí ba.",
+      "vi": "Này Tiểu Minh, mình hỏi bạn một câu nhé."
+    },
+    {
+      "start": 9.87,
+      "end": 13.21,
+      "en": "Last month, I needed to email a Chinese client,",
+      "zh": "上个月我需要给中国客户发一封邮件，",
+      "pinyin": "Shàng ge yuè wǒ xūyào gěi Zhōngguó kèhù fā yì fēng yóujiàn,",
+      "vi": "Tháng trước mình cần gửi email cho khách hàng Trung Quốc,"
+    },
+    {
+      "start": 13.22,
+      "end": 17.59,
+      "en": "I didn't know how to write it, so I entered what I wanted to say into AI",
+      "zh": "我不会写，就把自己想说的话输入到AI里，",
+      "pinyin": "Wǒ bú huì xiě, jiù bǎ zìjǐ xiǎng shuō de huà shūrù dào AI lǐ,",
+      "vi": "mình không biết viết, cứ nhập những gì muốn nói vào AI"
+    },
+    {
+      "start": 17.59,
+      "end": 22.17,
+      "en": "I had it translate the message into Chinese and sent it, and they understood it too.",
+      "zh": "让它翻译成中文，然后发出去，对方也看懂了。",
+      "pinyin": "Ràng tā fānyì chéng Zhōngwén, ránhòu fā chūqù, duìfāng yě kàn dǒng le.",
+      "vi": "để nó dịch sang tiếng Trung rồi gửi đi, đối phương cũng hiểu được."
+    },
+    {
+      "start": 22.17,
+      "end": 27.75,
+      "en": "That made me wonder—do I still need to keep learning Chinese?",
+      "zh": "那时候我就在想——我还需要继续学中文吗？",
+      "pinyin": "Nà shíhou wǒ jiù zài xiǎng——wǒ hái xūyào jìxù xué Zhōngwén ma?",
+      "vi": "Lúc đó mình nghĩ — mình còn cần tiếp tục học tiếng Trung nữa không?"
+    },
+    {
+      "start": 27.75,
+      "end": 30.8,
+      "en": "Ha, that's a very direct question.",
+      "zh": "哈哈，这个问题问得真直接。",
+      "pinyin": "Hāhā, zhège wèntí wèn de zhēn zhíjiē.",
+      "vi": "Ha, câu hỏi thẳng thắn thật."
+    },
+    {
+      "start": 30.8,
+      "end": 35.94,
+      "en": "But let me ask you first: after you sent the email, did they understand it?",
+      "zh": "不过我先问你，邮件发出去以后，对方看懂了吗？",
+      "pinyin": "Búguò wǒ xiān wèn nǐ, yóujiàn fā chūqù yǐhòu, duìfāng kàn dǒng le ma?",
+      "vi": "Nhưng để mình hỏi bạn trước, Sau khi gửi email, đối phương có hiểu không?"
+    },
+    {
+      "start": 35.94,
+      "end": 39.75,
+      "en": "They understood it and replied. At the time, I even thought",
+      "zh": "他们看懂了，也回复了。当时我还觉得，",
+      "pinyin": "Tāmen kàn dǒng le, yě huífù le. Dāngshí wǒ hái juéde,",
+      "vi": "Họ hiểu và cũng trả lời rồi. Lúc đó mình còn nghĩ"
+    },
+    {
+      "start": 39.75,
+      "end": 44.5,
+      "en": "As long as I had AI, that was enough; not knowing Chinese didn't seem to matter.",
+      "zh": "只要有AI就够了，不会中文好像也没关系。",
+      "pinyin": "Zhǐyào yǒu AI jiù gòu le, bú huì Zhōngwén hǎoxiàng yě méi guānxi.",
+      "vi": "chỉ cần có AI là đủ, không biết tiếng Trung hình như cũng không sao."
+    },
+    {
+      "start": 44.5,
+      "end": 49.1,
+      "en": "That does sound really convenient. But then something happened,",
+      "zh": "听起来确实很方便。不过后来是不是发生了一件事，",
+      "pinyin": "Tīng qǐlái quèshí hěn fāngbiàn. Búguò hòulái shì bú shì fāshēng le yí jiàn shì,",
+      "vi": "Nghe đúng là rất tiện. Nhưng sau đó đã có chuyện"
+    },
+    {
+      "start": 49.11,
+      "end": 51.77,
+      "en": "that changed your mind, right?",
+      "zh": "让你改变了想法，对吧？",
+      "pinyin": "Ràng nǐ gǎibiàn le xiǎngfa, duì ba?",
+      "vi": "khiến bạn thay đổi suy nghĩ, đúng không?"
+    },
+    {
+      "start": 51.77,
+      "end": 57.44,
+      "en": "Exactly. Later, they suddenly called me, and I couldn't understand a single word.",
+      "zh": "对。后来对方突然打电话过来，我一句话也听不懂。",
+      "pinyin": "Duì. Hòulái duìfāng tūrán dǎ diànhuà guòlái, wǒ yí jù huà yě tīng bù dǒng.",
+      "vi": "Đúng vậy. Sau đó đối phương bất ngờ gọi điện, mình không hiểu được một câu nào."
+    },
+    {
+      "start": 57.44,
+      "end": 61.7,
+      "en": "This experience is what made us start seriously thinking about this question.",
+      "zh": "正是这次经历，让我们开始认真思考这个问题。",
+      "pinyin": "Zhèng shì zhè cì jīnglì, ràng wǒmen kāishǐ rènzhēn sīkǎo zhège wèntí.",
+      "vi": "Chính trải nghiệm này đã khiến chúng mình bắt đầu suy nghĩ nghiêm túc về vấn đề này."
+    },
+    {
+      "start": 61.7,
+      "end": 64.83,
+      "en": "Right, that's exactly the issue.",
+      "zh": "对，这就是问题所在。",
+      "pinyin": "Duì, zhè jiù shì wèntí suǒzài.",
+      "vi": "Đúng rồi, đó chính là vấn đề."
+    },
+    {
+      "start": 64.83,
+      "end": 68.56,
+      "en": "Hello everyone, welcome to BaoBao Mandarin. I'm Xiaoming.",
+      "zh": "大家好，欢迎来到BaoBao Mandarin，我是小明。",
+      "pinyin": "Dàjiā hǎo, huānyíng láidào BaoBao Mandarin, wǒ shì Xiǎo Míng.",
+      "vi": "Chào mừng mọi người đến với BaoBao Mandarin, mình là Tiểu Minh."
+    },
+    {
+      "start": 68.56,
+      "end": 71.22,
+      "en": "I'm Xiaoyue, and I'm learning Chinese.",
+      "zh": "我是小月，我正在学习中文。",
+      "pinyin": "Wǒ shì Xiǎo Yuè, wǒ zhèngzài xuéxí Zhōngwén.",
+      "vi": "Mình là Tiểu Nguyệt, mình đang học tiếng Trung."
+    },
+    {
+      "start": 71.22,
+      "end": 75.22,
+      "en": "Today we're going to discuss a question many people are thinking about:",
+      "zh": "今天我们要聊一个很多人都在思考的问题：",
+      "pinyin": "Jīntiān wǒmen yào liáo yí ge hěn duō rén dōu zài sīkǎo de wèntí:",
+      "vi": "Hôm nay chúng ta nói về một câu hỏi mà rất nhiều người đang suy nghĩ"
+    },
+    {
+      "start": 75.22,
+      "end": 81.77,
+      "en": "If AI can translate everything, what's the point of learning Chinese?",
+      "zh": "如果AI什么都能翻译，那学习中文还有什么意义呢？",
+      "pinyin": "Rúguǒ AI shénme dōu néng fānyì, nà xuéxí Zhōngwén hái yǒu shénme yìyì ne?",
+      "vi": "Nếu AI có thể dịch được mọi thứ, học tiếng Trung còn có ý nghĩa gì nữa không?"
+    },
+    {
+      "start": 81.77,
+      "end": 84.47,
+      "en": "All right, before we officially begin,",
+      "zh": "好，在我们正式开始之前，",
+      "pinyin": "Hǎo, zài wǒmen zhèngshì kāishǐ zhīqián,",
+      "vi": "Được rồi, trước khi chúng ta bắt đầu chính thức"
+    },
+    {
+      "start": 84.47,
+      "end": 88.11,
+      "en": "if you find this topic interesting, remember to like and subscribe to",
+      "zh": "如果你觉得这个话题有意思，记得点赞和订阅，",
+      "pinyin": "Rúguǒ nǐ juéde zhège huàtí yǒu yìsi, jìde diǎnzàn hé dìngyuè,",
+      "vi": "nếu bạn thấy chủ đề này thú vị, nhớ thả tim và đăng ký"
+    },
+    {
+      "start": 88.12,
+      "end": 90.66,
+      "en": "BaoBao Mandarin! Your support",
+      "zh": "BaoBao Mandarin哦！你的支持，",
+      "pinyin": "BaoBao Mandarin o! Nǐ de zhīchí,",
+      "vi": "BaoBao Mandarin nhé! Sự ủng hộ của bạn"
+    },
+    {
+      "start": 90.66,
+      "end": 96.81,
+      "en": "will help more people who want to learn Chinese find us. It really means a lot!",
+      "zh": "会让更多想学中文的人找到我们，真的非常重要！",
+      "pinyin": "Huì ràng gèng duō xiǎng xué Zhōngwén de rén zhǎodào wǒmen, zhēn de fēicháng zhòngyào!",
+      "vi": "sẽ giúp nhiều người muốn học tiếng Trung tìm thấy chúng mình hơn, thực sự rất quan trọng đó!"
+    },
+    {
+      "start": 96.82,
+      "end": 99.05,
+      "en": "All right, let's get started!",
+      "zh": "好，那我们开始吧！",
+      "pinyin": "Hǎo, nà wǒmen kāishǐ ba!",
+      "vi": "Được rồi, bắt đầu thôi!"
+    },
+    {
+      "start": 99.05,
+      "end": 104.08,
+      "en": "First, we have to admit that AI translation is really impressive now.",
+      "zh": "首先我们得承认，现在的AI翻译真的已经很厉害了。",
+      "pinyin": "Shǒuxiān wǒmen děi chéngrèn, xiànzài de AI fānyì zhēn de yǐjīng hěn lìhai le.",
+      "vi": "Chúng ta phải thừa nhận trước, dịch AI bây giờ thực sự rất giỏi rồi."
+    },
+    {
+      "start": 104.08,
+      "end": 109.77,
+      "en": "For conveying information purely in writing, it does a pretty good job. There's no need to deny that.",
+      "zh": "对于纯粹用文字传达信息来说，它做得相当不错，这一点没必要回避。",
+      "pinyin": "Duìyú chúncuì yòng wénzì chuándá xìnxī lái shuō, tā zuò de xiāngdāng búcuò, zhè yìdiǎn méi bìyào huíbì.",
+      "vi": "Đối với việc truyền đạt thông tin thuần túy bằng chữ viết, nó làm khá tốt, cái này không cần né tránh."
+    },
+    {
+      "start": 109.77,
+      "end": 113.11,
+      "en": "Right, I've used it many times—for looking up new words,",
+      "zh": "对，我已经用过很多次了，查生词，",
+      "pinyin": "Duì, wǒ yǐjīng yòng guò hěn duō cì le, chá shēngcí,",
+      "vi": "Đúng, mình dùng nhiều lần rồi, tra từ mới,"
+    },
+    {
+      "start": 113.12,
+      "end": 117.1,
+      "en": "translating sentences, and traveling. It's really convenient.",
+      "zh": "翻译句子，旅游的时候，真的很方便。",
+      "pinyin": "Fānyì jùzi, lǚyóu de shíhou, zhēn de hěn fāngbiàn.",
+      "vi": "dịch câu, đi du lịch, thực sự rất tiện lợi."
+    },
+    {
+      "start": 117.1,
+      "end": 120.68,
+      "en": "So if you're learning Chinese just to “understand written text,”",
+      "zh": "所以，如果学中文只是为了“看懂文字”，",
+      "pinyin": "Suǒyǐ, rúguǒ xué Zhōngwén zhǐshì wèile “kàn dǒng wénzì”,",
+      "vi": "Vậy nếu học tiếng Trung chỉ để 'đọc hiểu chữ viết',"
+    },
+    {
+      "start": 120.68,
+      "end": 124.83,
+      "en": "AI really can help with most of it. But the question is,",
+      "zh": "AI确实可以帮上大部分的忙。但是问题是，",
+      "pinyin": "AI quèshí kěyǐ bāng shàng dà bùfen de máng. Dànshì wèntí shì,",
+      "vi": "AI thực sự có thể giúp được phần lớn. Nhưng vấn đề là"
+    },
+    {
+      "start": 124.83,
+      "end": 130.5,
+      "en": "Is language really just written text? That's the core of what we're discussing today.",
+      "zh": "语言真的只是文字吗？这才是我们今天要聊的核心。",
+      "pinyin": "Yǔyán zhēn de zhǐshì wénzì ma? Zhè cái shì wǒmen jīntiān yào liáo de héxīn.",
+      "vi": "ngôn ngữ thực sự chỉ là chữ viết thôi sao? Đây là cốt lõi của những gì chúng ta nói hôm nay."
+    },
+    {
+      "start": 130.5,
+      "end": 135.17,
+      "en": "Okay, then tell us: what exactly can't AI help us do?",
+      "zh": "好，那你说说看，AI到底不能帮我们做什么？",
+      "pinyin": "Hǎo, nà nǐ shuōshuō kàn, AI dàodǐ bù néng bāng wǒmen zuò shénme?",
+      "vi": "Được rồi, vậy bạn nói thử xem, rốt cuộc AI không thể giúp chúng ta điều gì?"
+    },
+    {
+      "start": 135.17,
+      "end": 138.19,
+      "en": "Hmm... let's start with the most obvious point.",
+      "zh": "嗯……先说最明显的一点吧。",
+      "pinyin": "Ńg……xiān shuō zuì míngxiǎn de yì diǎn ba.",
+      "vi": "Ừm… nói điều rõ nhất trước nhé."
+    },
+    {
+      "start": 138.2,
+      "end": 141.3,
+      "en": "AI can translate sentences for you,",
+      "zh": "AI可以帮你翻译句子，",
+      "pinyin": "AI kěyǐ bāng nǐ fānyì jùzi,",
+      "vi": "AI có thể dịch câu giúp bạn,"
+    },
+    {
+      "start": 141.3,
+      "end": 143.81,
+      "en": "but when you're actually talking with someone,",
+      "zh": "但是当你真的和别人聊天的时候，",
+      "pinyin": "Dànshì dāng nǐ zhēn de hé biérén liáotiān de shíhou,",
+      "vi": "nhưng khi bạn thực sự trò chuyện với người khác,"
+    },
+    {
+      "start": 143.82,
+      "end": 147.91,
+      "en": "it can't keep listening and speaking for you, right?",
+      "zh": "它不能一直替你听、替你说，对吧？",
+      "pinyin": "Tā bù néng yìzhí tì nǐ tīng, tì nǐ shuō, duì ba?",
+      "vi": "nó không thể cứ nghe và nói thay bạn mãi được, đúng không?"
+    },
+    {
+      "start": 147.91,
+      "end": 151.53,
+      "en": "I know this all too well. You know, one time I wanted to say",
+      "zh": "这个我太有体会了。你知道吗？有一次我想说，",
+      "pinyin": "Zhège wǒ tài yǒu tǐhuì le. Nǐ zhīdao ma? Yǒu yí cì wǒ xiǎng shuō,",
+      "vi": "Cái này mình hiểu quá rõ luôn. Bạn biết không, có lần mình muốn nói"
+    },
+    {
+      "start": 151.53,
+      "end": 154.75,
+      "en": "One time I wanted to say, “I want to buy this,”",
+      "zh": "有一次我想说：“我想买这个”，",
+      "pinyin": "Yǒu yí cì wǒ xiǎng shuō: “Wǒ xiǎng mǎi zhège”,",
+      "vi": "có lần mình muốn nói “Tôi muốn mua cái này”,"
+    },
+    {
+      "start": 154.75,
+      "end": 157.71,
+      "en": "but I pronounced “buy” as “sell.”",
+      "zh": "结果却把“买”说成了“卖”。",
+      "pinyin": "Jiéguǒ què bǎ “mǎi” shuō chéng le “mài”.",
+      "vi": "nhưng lại phát âm “mua” thành “bán”."
+    },
+    {
+      "start": 157.71,
+      "end": 161.97,
+      "en": "The store clerk paused, then asked me, “What do you want to sell?”",
+      "zh": "店员愣了一下，然后问我：“你想卖什么？”",
+      "pinyin": "Diànyuán lèng le yíxià, ránhòu wèn wǒ: “Nǐ xiǎng mài shénme?”",
+      "vi": "Nhân viên cửa hàng khựng lại rồi hỏi mình: “Bạn muốn bán gì?”"
+    },
+    {
+      "start": 161.97,
+      "end": 164.44,
+      "en": "I was incredibly embarrassed.",
+      "zh": "那时候我尴尬极了。",
+      "pinyin": "Nà shíhou wǒ gāngà jí le.",
+      "vi": "Lúc đó mình ngại kinh khủng."
+    },
+    {
+      "start": 164.44,
+      "end": 169.53,
+      "en": "Haha, this situation is actually very common. There was nothing wrong with the sentence itself,",
+      "zh": "哈哈，这种情况其实很常见。句子本身没有问题，",
+      "pinyin": "Hāhā, zhè zhǒng qíngkuàng qíshí hěn chángjiàn. Jùzi běnshēn méi yǒu wèntí,",
+      "vi": "Haha, tình huống này thật ra rất thường gặp. Câu nói không có vấn đề,"
+    },
+    {
+      "start": 169.53,
+      "end": 173.37,
+      "en": "but when the tone changes, the meaning changes too.",
+      "zh": "只是声调变了，意思也会跟着变。",
+      "pinyin": "Zhǐshì shēngdiào biàn le, yìsi yě huì gēnzhe biàn.",
+      "vi": "chỉ là thanh điệu thay đổi thì nghĩa cũng thay đổi theo."
+    },
+    {
+      "start": 173.37,
+      "end": 176.5,
+      "en": "Exactly. And when you're having a real conversation,",
+      "zh": "对。而且，真正聊天的时候，",
+      "pinyin": "Duì. Érqiě, zhēnzhèng liáotiān de shíhou,",
+      "vi": "Đúng vậy. Hơn nữa, khi trò chuyện thật"
+    },
+    {
+      "start": 176.5,
+      "end": 179.63,
+      "en": "how would you have time to look up every sentence first?",
+      "zh": "哪有时间先查好每一句？",
+      "pinyin": "Nǎ yǒu shíjiān xiān chá hǎo měi yí jù?",
+      "vi": "thì làm gì có thời gian tra từng câu trước?"
+    },
+    {
+      "start": 179.63,
+      "end": 183.85,
+      "en": "Sometimes people speak a little faster, and I can't react in time.",
+      "zh": "有时候别人说得快一点，我就来不及反应。",
+      "pinyin": "Yǒu shíhou biérén shuō de kuài yìdiǎn, wǒ jiù lái bu jí fǎnyìng.",
+      "vi": "Có lúc người ta nói nhanh một chút là mình không phản ứng kịp."
+    },
+    {
+      "start": 183.85,
+      "end": 187.75,
+      "en": "Exactly. Translation tools can help you prepare in advance,",
+      "zh": "没错。翻译工具可以帮你提前准备，",
+      "pinyin": "Méi cuò. Fānyì gōngjù kěyǐ bāng nǐ tíqián zhǔnbèi,",
+      "vi": "Chính xác. Công cụ dịch có thể giúp bạn chuẩn bị trước,"
+    },
+    {
+      "start": 187.75,
+      "end": 191.52,
+      "en": "but when talking face to face, you have to understand what you hear yourself,",
+      "zh": "但是面对面聊天的时候，你得自己听懂，",
+      "pinyin": "Dànshì miànduìmiàn liáotiān de shíhou, nǐ děi zìjǐ tīng dǒng,",
+      "vi": "nhưng khi nói chuyện trực tiếp, bạn phải tự nghe hiểu,"
+    },
+    {
+      "start": 191.52,
+      "end": 195.71,
+      "en": "answer right away, and know how to say things naturally.",
+      "zh": "马上回答，还要知道怎么说才自然。",
+      "pinyin": "Mǎshàng huídá, hái yào zhīdao zěnme shuō cái zìrán.",
+      "vi": "trả lời ngay và còn phải biết nói thế nào cho tự nhiên."
+    },
+    {
+      "start": 195.71,
+      "end": 199.69,
+      "en": "Hmm, so the issue isn't whether AI can translate,",
+      "zh": "嗯，所以问题不是AI能不能翻译，",
+      "pinyin": "Ńg, suǒyǐ wèntí bú shì AI néng bù néng fānyì,",
+      "vi": "Ừm, vậy vấn đề không phải AI có dịch được hay không,"
+    },
+    {
+      "start": 199.7,
+      "end": 203.51,
+      "en": "but whether we can actually keep communicating with other people.",
+      "zh": "而是我们能不能真的继续和别人交流下去。",
+      "pinyin": "Ér shì wǒmen néng bù néng zhēn de jìxù hé biérén jiāoliú xiàqù.",
+      "vi": "mà là mình có thực sự trò chuyện tiếp được với người khác hay không."
+    },
+    {
+      "start": 203.51,
+      "end": 208.48,
+      "en": "Exactly. Language isn't just translating a sentence into another language,",
+      "zh": "对。所以，语言不只是把一句话翻译成另一种语言，",
+      "pinyin": "Duì. Suǒyǐ, yǔyán bù zhǐ shì bǎ yí jù huà fānyì chéng lìng yì zhǒng yǔyán,",
+      "vi": "Đúng vậy. Ngôn ngữ không chỉ là chuyển một câu sang ngôn ngữ khác,"
+    },
+    {
+      "start": 208.48,
+      "end": 212.25,
+      "en": "you also need to understand what you hear, keep up with the flow, and speak naturally.",
+      "zh": "还要听得懂、跟得上节奏，而且要说得自然。",
+      "pinyin": "Hái yào tīng de dǒng, gēn de shàng jiézòu, érqiě yào shuō de zìrán.",
+      "vi": "mà còn phải nghe hiểu, bắt nhịp được và nói một cách tự nhiên."
+    },
+    {
+      "start": 212.25,
+      "end": 217.07,
+      "en": "Besides pronunciation, there's another thing I find pretty difficult,",
+      "zh": "除了发音以外，还有一件事我觉得挺难的，",
+      "pinyin": "Chúle fāyīn yǐwài, hái yǒu yí jiàn shì wǒ juéde tǐng nán de,",
+      "vi": "Ngoài phát âm ra thì còn một điều khác mình thấy khá khó,"
+    },
+    {
+      "start": 217.07,
+      "end": 221.41,
+      "en": "and that's internet slang. I think the hardest part isn't understanding it,",
+      "zh": "就是网络流行语。我觉得最难的不是看不懂，",
+      "pinyin": "Jiù shì wǎngluò liúxíngyǔ. Wǒ juéde zuì nán de bú shì kàn bù dǒng,",
+      "vi": "đó là tiếng lóng trên mạng. Mình thấy điều khó nhất không phải là không hiểu,"
+    },
+    {
+      "start": 221.41,
+      "end": 224.52,
+      "en": "but that it changes so quickly.",
+      "zh": "而是它们变化得太快了。",
+      "pinyin": "Ér shì tāmen biànhuà de tài kuài le.",
+      "vi": "mà là chúng thay đổi quá nhanh."
+    },
+    {
+      "start": 224.52,
+      "end": 229.68,
+      "en": "Exactly. You finish learning a bunch of new words,",
+      "zh": "对。你刚学完一批新词，",
+      "pinyin": "Duì. Nǐ gāng xué wán yì pī xīn cí,",
+      "vi": "Đúng vậy. Bạn vừa học xong một loạt từ mới"
+    },
+    {
+      "start": 229.68,
+      "end": 232.41,
+      "en": "and after a while, a different expression may become popular online.",
+      "zh": "过一段时间，网上可能又流行别的说法了。",
+      "pinyin": "Guò yí duàn shíjiān, wǎngshàng kěnéng yòu liúxíng bié de shuōfǎ le.",
+      "vi": "thì một thời gian sau, trên mạng có thể lại thịnh hành cách nói khác."
+    },
+    {
+      "start": 232.41,
+      "end": 238.33,
+      "en": "Seriously. A while ago, whenever I watched short videos, I kept seeing “绝绝子,”",
+      "zh": "真的。前段时间刷短视频的时候，我经常看到“绝绝子”，",
+      "pinyin": "Zhēn de. Qián duàn shíjiān shuā duǎn shìpín de shíhou, wǒ jīngcháng kàn dào “juéjuézǐ”,",
+      "vi": "Thật đấy. Một thời gian trước khi lướt video ngắn, mình thường xuyên thấy “绝绝子”,"
+    },
+    {
+      "start": 238.33,
+      "end": 241.29,
+      "en": "so I even specifically looked up what it meant.",
+      "zh": "所以还专门查了查它是什么意思。",
+      "pinyin": "Suǒyǐ hái zhuānmén chá le chá tā shì shénme yìsi.",
+      "vi": "nên còn đặc biệt tra xem nó có nghĩa gì."
+    },
+    {
+      "start": 241.29,
+      "end": 245.62,
+      "en": "But by the time I learned it and wanted to use it with my Chinese friends,",
+      "zh": "结果等我学会了，想跟中国朋友用的时候，",
+      "pinyin": "Jiéguǒ děng wǒ xuéhuì le, xiǎng gēn Zhōngguó péngyou yòng de shíhou,",
+      "vi": "Kết quả là đến khi mình học được và muốn dùng với bạn bè Trung Quốc,"
+    },
+    {
+      "start": 245.62,
+      "end": 249.52,
+      "en": "they said the word was already a little outdated.",
+      "zh": "他们却说这个词已经有点过时了。",
+      "pinyin": "Tāmen què shuō zhège cí yǐjīng yǒudiǎn guòshí le.",
+      "vi": "họ lại nói từ đó đã hơi lỗi thời rồi."
+    },
+    {
+      "start": 249.52,
+      "end": 254.89,
+      "en": "Haha, that's very normal. Internet slang sometimes becomes popular incredibly fast",
+      "zh": "哈哈，这很正常。网络流行语有时候火得特别快，",
+      "pinyin": "Hāhā, zhè hěn zhèngcháng. Wǎngluò liúxíngyǔ yǒushíhou huǒ de tèbié kuài,",
+      "vi": "Haha, chuyện này rất bình thường. Tiếng lóng trên mạng đôi khi nổi rất nhanh"
+    },
+    {
+      "start": 254.89,
+      "end": 257.08,
+      "en": "and disappears just as quickly.",
+      "zh": "消失得也特别快。",
+      "pinyin": "Xiāoshī de yě tèbié kuài.",
+      "vi": "mà biến mất cũng rất nhanh."
+    },
+    {
+      "start": 257.08,
+      "end": 260.4,
+      "en": "What's more, after some time, the meaning of the same word",
+      "zh": "而且过一段时间以后，同一个词的意思，",
+      "pinyin": "Érqiě guò yí duàn shíjiān yǐhòu, tóng yí gè cí de yìsi,",
+      "vi": "Hơn nữa, sau một thời gian, nghĩa của cùng một từ"
+    },
+    {
+      "start": 260.4,
+      "end": 263.36,
+      "en": "seems like it can change too, right?",
+      "zh": "好像也可能会变，对吧？",
+      "pinyin": "Hǎoxiàng yě kěnéng huì biàn, duì ba?",
+      "vi": "hình như cũng có thể thay đổi, đúng không?"
+    },
+    {
+      "start": 263.36,
+      "end": 268.6,
+      "en": "Yes, that's possible. Some words are originally used seriously,",
+      "zh": "嗯，有可能。有些词一开始是很认真地说的，",
+      "pinyin": "Ńg, yǒu kěnéng. Yǒuxiē cí yì kāishǐ shì hěn rènzhēn de shuō de,",
+      "vi": "Ừ, có thể đấy. Có những từ ban đầu được nói một cách nghiêm túc,"
+    },
+    {
+      "start": 268.61,
+      "end": 274.36,
+      "en": "but after people use them a lot, they gradually become jokes or are used with the opposite meaning.",
+      "zh": "但是大家用得多了以后，慢慢就变成了玩笑，或者被用成相反的意思。",
+      "pinyin": "Dànshì dàjiā yòng de duō le yǐhòu, mànmàn jiù biàn chéng le wánxiào, huòzhě bèi yòng chéng xiāngfǎn de yìsi.",
+      "vi": "nhưng sau khi mọi người dùng nhiều thì dần trở thành câu đùa hoặc được dùng theo nghĩa ngược lại."
+    },
+    {
+      "start": 274.36,
+      "end": 278.02,
+      "en": "But AI can help us look them up too, right?",
+      "zh": "不过，AI也可以帮我们查，对吧？",
+      "pinyin": "Búguò, AI yě kěyǐ bāng wǒmen chá, duì ba?",
+      "vi": "Nhưng AI cũng có thể giúp chúng ta tra mà, đúng không?"
+    },
+    {
+      "start": 278.03,
+      "end": 282.97,
+      "en": "It can, and most AI explanations are pretty clear.",
+      "zh": "可以啊，而且大多数AI解释得都挺清楚的。",
+      "pinyin": "Kěyǐ a, érqiě dàduōshù AI jiěshì de dōu tǐng qīngchu de.",
+      "vi": "Có chứ, và đa số AI giải thích khá rõ."
+    },
+    {
+      "start": 282.97,
+      "end": 287.42,
+      "en": "But if a word has only just become popular, or its usage",
+      "zh": "但是如果一个词刚开始流行，或者它的用法，",
+      "pinyin": "Dànshì rúguǒ yí gè cí gāng kāishǐ liúxíng, huòzhě tā de yòngfǎ,",
+      "vi": "Nhưng nếu một từ vừa mới bắt đầu thịnh hành hoặc cách dùng"
+    },
+    {
+      "start": 287.43,
+      "end": 293.03,
+      "en": "is changing too quickly, the information AI provides may not be up to date.",
+      "zh": "变化得太快，AI提供的信息不一定是最新的。",
+      "pinyin": "Biànhuà de tài kuài, AI tígōng de xìnxī bú yídìng shì zuìxīn de.",
+      "vi": "thay đổi quá nhanh, thông tin AI cung cấp chưa chắc đã là mới nhất."
+    },
+    {
+      "start": 293.03,
+      "end": 296.31,
+      "en": "Oh, so it's not that AI can't explain it,",
+      "zh": "哦，所以不是AI解释不了，",
+      "pinyin": "Ó, suǒyǐ bú shì AI jiěshì bù liǎo,",
+      "vi": "À, vậy không phải AI không giải thích được,"
+    },
+    {
+      "start": 296.31,
+      "end": 301.77,
+      "en": "but that some new words change so quickly that AI also needs time to catch up.",
+      "zh": "而是有些新词变化得太快，AI也需要时间跟上。",
+      "pinyin": "Ér shì yǒuxiē xīn cí biànhuà de tài kuài, AI yě xūyào shíjiān gēn shàng.",
+      "vi": "mà là một số từ mới thay đổi quá nhanh nên AI cũng cần thời gian để theo kịp."
+    },
+    {
+      "start": 301.77,
+      "end": 306.56,
+      "en": "Exactly. So when you come across a new word, you can ask AI first",
+      "zh": "没错。所以遇到一个新词的时候，你可以先问问AI，",
+      "pinyin": "Méi cuò. Suǒyǐ yùdào yí gè xīn cí de shíhou, nǐ kěyǐ xiān wènwen AI,",
+      "vi": "Chính xác. Vì vậy khi gặp một từ mới, bạn có thể hỏi AI trước"
+    },
+    {
+      "start": 306.56,
+      "end": 311.89,
+      "en": "to get a general idea, and then see how people are actually using it recently.",
+      "zh": "先大概了解一下，然后再看看最近大家到底是怎么用的。",
+      "pinyin": "Xiān dàgài liǎojiě yíxià, ránhòu zài kànkan zuìjìn dàjiā dàodǐ shì zěnme yòng de.",
+      "vi": "để hiểu đại khái, rồi xem gần đây mọi người thực sự dùng nó như thế nào."
+    },
+    {
+      "start": 311.89,
+      "end": 314.17,
+      "en": "Yes, that's more reliable.",
+      "zh": "嗯，这样更可靠。",
+      "pinyin": "Ńg, zhèyàng gèng kěkào.",
+      "vi": "Ừ, như vậy đáng tin cậy hơn."
+    },
+    {
+      "start": 314.17,
+      "end": 318.2,
+      "en": "You can't just read one explanation and immediately use the word everywhere.",
+      "zh": "不能只看了一次解释，就马上到处使用这个词。",
+      "pinyin": "Bù néng zhǐ kàn le yí cì jiěshì, jiù mǎshàng dàochù shǐyòng zhège cí.",
+      "vi": "Không thể chỉ xem một lần giải thích rồi lập tức dùng từ đó ở khắp nơi được."
+    },
+    {
+      "start": 318.2,
+      "end": 322.74,
+      "en": "Right. AI can help us learn about new words faster,",
+      "zh": "对。AI可以帮助我们更快地知道新词，",
+      "pinyin": "Duì. AI kěyǐ bāngzhù wǒmen gèng kuài de zhīdào xīn cí,",
+      "vi": "Đúng vậy. AI có thể giúp chúng ta biết từ mới nhanh hơn,"
+    },
+    {
+      "start": 322.74,
+      "end": 325.5,
+      "en": "but to keep up with the usage that's actually popular,",
+      "zh": "但是要跟上真正流行的用法，",
+      "pinyin": "Dànshì yào gēn shàng zhēnzhèng liúxíng de yòngfǎ,",
+      "vi": "nhưng để theo kịp cách dùng thực sự đang thịnh hành,"
+    },
+    {
+      "start": 325.5,
+      "end": 329.21,
+      "en": "you still have to observe what people are saying now.",
+      "zh": "还是得观察现在大家都在说什么。",
+      "pinyin": "Háishi děi guānchá xiànzài dàjiā dōu zài shuō shénme.",
+      "vi": "vẫn phải quan sát xem hiện tại mọi người đang nói gì."
+    },
+    {
+      "start": 329.21,
+      "end": 332.94,
+      "en": "Tiểu Minh, there's another thing I feel very deeply",
+      "zh": "Tiểu Minh，还有一件事让我感受特别深，",
+      "pinyin": "Tiểu Minh, hái yǒu yí jiàn shì ràng wǒ gǎnshòu tèbié shēn,",
+      "vi": "Tiểu Minh, còn có một điều mình cảm nhận rất sâu sắc"
+    },
+    {
+      "start": 332.94,
+      "end": 336.3,
+      "en": "when I speak Chinese with Chinese people,",
+      "zh": "就是我跟中国人说中文的时候，",
+      "pinyin": "Jiù shì wǒ gēn Zhōngguó rén shuō Zhōngwén de shíhou,",
+      "vi": "khi mình nói tiếng Trung với người Trung Quốc,"
+    },
+    {
+      "start": 336.3,
+      "end": 340.86,
+      "en": "it feels completely different from communicating through translation software.",
+      "zh": "感觉跟通过翻译软件交流完全不一样。",
+      "pinyin": "Gǎnjué gēn tōngguò fānyì ruǎnjiàn jiāoliú wánquán bù yíyàng.",
+      "vi": "cảm giác hoàn toàn khác so với giao tiếp qua phần mềm dịch."
+    },
+    {
+      "start": 340.86,
+      "end": 343.12,
+      "en": "Oh, how is it different?",
+      "zh": "哦，怎么个不一样？",
+      "pinyin": "Ó, zěnme gè bù yíyàng?",
+      "vi": "Ồ, khác như thế nào?"
+    },
+    {
+      "start": 343.12,
+      "end": 348.43,
+      "en": "Once, I went to Shanghai on a business trip, and a colleague knew I was learning Chinese,",
+      "zh": "有一次我去上海出差，有个同事知道我在学中文，",
+      "pinyin": "Yǒu yí cì wǒ qù Shànghǎi chūchāi, yǒu gè tóngshì zhīdào wǒ zài xué Zhōngwén,",
+      "vi": "Có lần mình đi công tác ở Thượng Hải, có đồng nghiệp biết mình đang học tiếng Trung,"
+    },
+    {
+      "start": 348.43,
+      "end": 353.95,
+      "en": "and took the initiative to chat with me in Chinese. I tried to say a few sentences, though I wasn't very fluent,",
+      "zh": "就主动用中文跟我聊天。我努力说了几句，虽然不太流利，",
+      "pinyin": "Jiù zhǔdòng yòng Zhōngwén gēn wǒ liáotiān. Wǒ nǔlì shuō le jǐ jù, suīrán bú tài liúlì,",
+      "vi": "chủ động nói tiếng Trung chuyện trò với mình, mình cố gắng nói mấy câu, không lưu loát,"
+    },
+    {
+      "start": 353.95,
+      "end": 358.51,
+      "en": "and made a few small mistakes, but the other person suddenly became very enthusiastic,",
+      "zh": "也有几个小错误，但是对方突然变得特别热情，",
+      "pinyin": "Yě yǒu jǐ gè xiǎo cuòwù, dànshì duìfāng tūrán biàn de tèbié rèqíng,",
+      "vi": "cũng có vài lỗi nhỏ, nhưng đối phương đột nhiên trở nên rất nhiệt tình,"
+    },
+    {
+      "start": 358.51,
+      "end": 364.2,
+      "en": "and we later became good friends. I think if I had kept relying on translation software,",
+      "zh": "后来还成了好朋友。我觉得如果我一直依靠翻译软件，",
+      "pinyin": "Hòulái hái chéng le hǎo péngyou. Wǒ juéde rúguǒ wǒ yìzhí yīkào fānyì ruǎnjiàn,",
+      "vi": "sau đó trở thành bạn tốt. Mình nghĩ nếu mình cứ dựa vào phần mềm dịch,"
+    },
+    {
+      "start": 364.2,
+      "end": 367.33,
+      "en": "that connection probably wouldn't have happened.",
+      "zh": "可能就不会有那种连接了。",
+      "pinyin": "Kěnéng jiù bú huì yǒu nà zhǒng liánjiē le.",
+      "vi": "có lẽ sẽ không có sự kết nối đó."
+    },
+    {
+      "start": 367.33,
+      "end": 373.36,
+      "en": "Right, that's the key. The fact that “I'm willing to learn your language”",
+      "zh": "对，这就是关键。其实“我愿意学习你的语言”，",
+      "pinyin": "Duì, zhè jiù shì guānjiàn. Qíshí “wǒ yuànyì xuéxí nǐ de yǔyán”,",
+      "vi": "Đúng, đó chính là điều then chốt. Bản thân việc 'mình sẵn sàng học ngôn ngữ của bạn'"
+    },
+    {
+      "start": 373.36,
+      "end": 375.15,
+      "en": "is itself an attitude",
+      "zh": "本身就是一种态度，",
+      "pinyin": "Běnshēn jiù shì yì zhǒng tàidu,",
+      "vi": "đã là một thái độ"
+    },
+    {
+      "start": 375.15,
+      "end": 379.5,
+      "en": "you're telling the other person: your culture deserves my serious respect.",
+      "zh": "你是在告诉对方：你的文化值得我认真对待。",
+      "pinyin": "Nǐ shì zài gàosu duìfāng: nǐ de wénhuà zhíde wǒ rènzhēn duìdài.",
+      "vi": "bạn đang nói với đối phương: văn hóa của bạn xứng đáng để mình nghiêm túc đối đãi."
+    },
+    {
+      "start": 379.5,
+      "end": 382.74,
+      "en": "Translation software can't give you that kind of warmth.",
+      "zh": "这种温暖，翻译软件给不了你。",
+      "pinyin": "Zhè zhǒng wēnnuǎn, fānyì ruǎnjiàn gěi bù liǎo nǐ.",
+      "vi": "Cái ấm áp đó, phần mềm dịch không thể cho bạn."
+    },
+    {
+      "start": 382.74,
+      "end": 386.68,
+      "en": "And honestly, although my Chinese isn't perfect,",
+      "zh": "而且说实话，我的中文虽然不完美，",
+      "pinyin": "Érqiě shuō shíhuà, wǒ de Zhōngwén suīrán bù wánměi,",
+      "vi": "Mà nói thật, tiếng Trung của mình dù không hoàn hảo,"
+    },
+    {
+      "start": 386.68,
+      "end": 391.52,
+      "en": "my Chinese friends are all very enthusiastic when they hear me trying to speak it.",
+      "zh": "但是中国朋友听到我努力说中文，都特别热情。",
+      "pinyin": "Dànshì Zhōngguó péngyou tīngdào wǒ nǔlì shuō Zhōngwén, dōu tèbié rèqíng.",
+      "vi": "nhưng bạn bè Trung Quốc nghe mình cố gắng nói, đều rất nhiệt tình."
+    },
+    {
+      "start": 391.52,
+      "end": 395.37,
+      "en": "Because that's sincerity. As a Chinese person,",
+      "zh": "因为那是一种真诚嘛。作为一个中国人，",
+      "pinyin": "Yīnwèi nà shì yì zhǒng zhēnchéng ma. Zuòwéi yí gè Zhōngguó rén,",
+      "vi": "Vì đó là sự chân thành mà. Là một người Trung Quốc,"
+    },
+    {
+      "start": 395.37,
+      "end": 400.98,
+      "en": "when someone seriously learns Chinese to communicate with me, it truly feels different",
+      "zh": "当有人认真学中文来跟我交流时，感受真的不一样，",
+      "pinyin": "Dāng yǒu rén rènzhēn xué Zhōngwén lái gēn wǒ jiāoliú shí, gǎnshòu zhēn de bù yíyàng,",
+      "vi": "khi có người nghiêm túc học tiếng Trung để giao tiếp với mình, cảm nhận thực sự khác"
+    },
+    {
+      "start": 400.98,
+      "end": 406.67,
+      "en": "It's as if they're saying, “Your culture is worth my time to understand.”",
+      "zh": "就好像他在说：“你的文化值得我花时间去了解。”",
+      "pinyin": "Jiù hǎoxiàng tā zài shuō: “Nǐ de wénhuà zhíde wǒ huā shíjiān qù liǎojiě.”",
+      "vi": "giống như họ đang nói 'văn hóa của bạn xứng đáng để mình bỏ thời gian tìm hiểu'."
+    },
+    {
+      "start": 406.67,
+      "end": 410.67,
+      "en": "That conveys more warmth than any translation software possibly can.",
+      "zh": "这个比任何翻译软件能传达的东西都更有温度。",
+      "pinyin": "Zhège bǐ rènhé fānyì ruǎnjiàn néng chuándá de dōngxi dōu gèng yǒu wēndù.",
+      "vi": "Cái này có nhiệt độ hơn bất kỳ phần mềm dịch nào có thể truyền tải."
+    },
+    {
+      "start": 410.67,
+      "end": 414.59,
+      "en": "There's also a more practical angle: career opportunities.",
+      "zh": "还有一个更现实的角度——职业机会。",
+      "pinyin": "Hái yǒu yí gè gèng xiànshí de jiǎodù——zhíyè jīhuì.",
+      "vi": "Còn có một góc độ thực tế hơn — cơ hội nghề nghiệp."
+    },
+    {
+      "start": 414.59,
+      "end": 419.79,
+      "en": "The Chinese market is already huge, and people who can truly communicate in Chinese",
+      "zh": "中国市场的规模就在那里，真正能够用中文交流的人，",
+      "pinyin": "Zhōngguó shìchǎng de guīmó jiù zài nàli, zhēnzhèng nénggòu yòng Zhōngwén jiāoliú de rén,",
+      "vi": "Quy mô thị trường Trung Quốc ở đó rồi, người thực sự có thể giao tiếp bằng tiếng Trung,"
+    },
+    {
+      "start": 419.8,
+      "end": 423.42,
+      "en": "have a real competitive advantage in many industries.",
+      "zh": "在很多行业里都有真正的竞争优势。",
+      "pinyin": "zài hěn duō hángyè lǐ dōu yǒu zhēnzhèng de jìngzhēng yōushì.",
+      "vi": "ở nhiều ngành là có lợi thế cạnh tranh thực sự."
+    },
+    {
+      "start": 423.42,
+      "end": 428.28,
+      "en": "Right. I’ve noticed it even more since I started working. And I also realized that",
+      "zh": "对，工作以后我感觉更明显了。而且我还发现，",
+      "pinyin": "Duì, gōngzuò yǐhòu wǒ gǎnjué gèng míngxiǎn le. Érqiě wǒ hái fāxiàn,",
+      "vi": "Đúng, sau khi đi làm mình càng thấy rõ. Mà mình còn phát hiện ra,"
+    },
+    {
+      "start": 428.28,
+      "end": 432.5,
+      "en": "because I’m learning Chinese, when I use AI to translate,",
+      "zh": "因为我在学中文，所以用人工智能翻译的时候，",
+      "pinyin": "Yīnwèi wǒ zài xué Zhōngwén, suǒyǐ yòng réngōng zhìnéng fānyì de shíhou,",
+      "vi": "vì mình đang học tiếng Trung, khi dùng AI dịch,"
+    },
+    {
+      "start": 432.5,
+      "end": 436.67,
+      "en": "I can judge whether the translation is correct and optimize the output,",
+      "zh": "我可以判断它翻译得对不对，还可以优化输出，",
+      "pinyin": "wǒ kěyǐ pànduàn tā fānyì de duì bu duì, hái kěyǐ yōuhuà shūchū,",
+      "vi": "mình có thể đánh giá nó dịch có đúng không, còn có thể tối ưu hóa đầu ra,"
+    },
+    {
+      "start": 436.67,
+      "end": 439.61,
+      "en": "which is another advantage.",
+      "zh": "这也是一个额外的优势。",
+      "pinyin": "zhè yě shì yí ge éwài de yōushì.",
+      "vi": "đây cũng là một lợi thế thêm."
+    },
+    {
+      "start": 439.61,
+      "end": 446.03,
+      "en": "Well said. Someone who understands Chinese and uses AI, compared with someone who doesn’t understand it at all,",
+      "zh": "说得好——懂中文的人用人工智能，和完全不懂中文的人用人工智能，",
+      "pinyin": "Shuō de hǎo——dǒng Zhōngwén de rén yòng réngōng zhìnéng, hé wánquán bù dǒng Zhōngwén de rén yòng réngōng zhìnéng,",
+      "vi": "Nói hay đó — người hiểu tiếng Trung dùng AI, so với người hoàn toàn không hiểu dùng AI,"
+    },
+    {
+      "start": 446.03,
+      "end": 451.14,
+      "en": "gets completely different results. You can spot its mistakes,",
+      "zh": "效果完全不一样。你可以发现它的错误，",
+      "pinyin": "xiàoguǒ wánquán bù yíyàng. Nǐ kěyǐ fāxiàn tā de cuòwù,",
+      "vi": "hiệu quả hoàn toàn khác nhau. Cậu có thể phát hiện lỗi của nó,"
+    },
+    {
+      "start": 451.14,
+      "end": 457.24,
+      "en": "and optimize the output. That itself is extra value gained from learning Chinese.",
+      "zh": "也可以优化输出，这本身就是学习中文带来的额外价值。",
+      "pinyin": "yě kěyǐ yōuhuà shūchū, zhè běnshēn jiù shì xuéxí Zhōngwén dài lái de éwài jiàzhí.",
+      "vi": "có thể tối ưu đầu ra, bản thân điều này đã là giá trị thêm mà việc học tiếng Trung mang lại."
+    },
+    {
+      "start": 457.24,
+      "end": 460.97,
+      "en": "Xiaoming, I want to ask you a bigger question.",
+      "zh": "小明，我想问你一个更大的问题。",
+      "pinyin": "Xiǎomíng, wǒ xiǎng wèn nǐ yí ge gèng dà de wèntí.",
+      "vi": "Tiểu Minh, mình muốn hỏi cậu một câu hỏi lớn hơn"
+    },
+    {
+      "start": 460.97,
+      "end": 465.21,
+      "en": "If one day AI really became perfect, and any two people",
+      "zh": "如果有一天人工智能真的完美了，任何两个人",
+      "pinyin": "Rúguǒ yǒu yì tiān réngōng zhìnéng zhēn de wánměi le, rènhé liǎng ge rén",
+      "vi": "nếu có một ngày AI thực sự hoàn hảo, bất kỳ hai người nào"
+    },
+    {
+      "start": 465.21,
+      "end": 471.65,
+      "en": "could communicate without barriers, do you think people would still choose to learn foreign languages?",
+      "zh": "都可以毫无障碍地交流，你觉得还会有人主动学外语吗？",
+      "pinyin": "dōu kěyǐ háo wú zhàng'ài de jiāoliú, nǐ juéde hái huì yǒu rén zhǔdòng xué wàiyǔ ma?",
+      "vi": "cũng có thể giao tiếp không rào cản, cậu nghĩ vẫn còn người chủ động đi học ngoại ngữ không?"
+    },
+    {
+      "start": 471.65,
+      "end": 475.48,
+      "en": "I think they would. But the reasons would be different.",
+      "zh": "我觉得还是会有。但理由会不一样。",
+      "pinyin": "Wǒ juéde háishi huì yǒu. Dàn lǐyóu huì bù yíyàng.",
+      "vi": "Mình nghĩ vẫn có. Nhưng lý do sẽ khác đi."
+    },
+    {
+      "start": 475.48,
+      "end": 480.25,
+      "en": "In the past, many people learned languages because they had to, with no tools available,",
+      "zh": "以前很多人学语言是因为被迫，没有工具，",
+      "pinyin": "Yǐqián hěn duō rén xué yǔyán shì yīnwèi bèi pò, méiyǒu gōngjù,",
+      "vi": "Trước đây nhiều người học ngôn ngữ vì bị bắt buộc, không có công cụ,"
+    },
+    {
+      "start": 480.26,
+      "end": 485.46,
+      "en": "and without learning, they couldn’t communicate. If AI takes care of that in the future,",
+      "zh": "不学就没办法交流。以后如果人工智能已经解决了这一点，",
+      "pinyin": "bù xué jiù méi bànfǎ jiāoliú. Yǐhòu rúguǒ réngōng zhìnéng yǐjīng jiějué le zhè yìdiǎn,",
+      "vi": "không học thì không giao tiếp được. Sau này nếu AI đáp ứng phần đó rồi,"
+    },
+    {
+      "start": 485.46,
+      "end": 491.3,
+      "en": "the people who continue learning a language will be those who truly love its culture,",
+      "zh": "真正留下来学习语言的人，就是那些真正热爱那种文化的人，",
+      "pinyin": "zhēnzhèng liú xiàlái xuéxí yǔyán de rén, jiù shì nàxiē zhēnzhèng rè'ài nà zhǒng wénhuà de rén,",
+      "vi": "người thực sự ở lại học ngôn ngữ, chính là người thực sự say mê nền văn hóa đó"
+    },
+    {
+      "start": 491.3,
+      "end": 497.97,
+      "en": "who want to enter that world themselves, read the original works, and truly understand that sense of humor,",
+      "zh": "想亲自走进那个世界，想读原著，真正理解那种幽默感，",
+      "pinyin": "xiǎng qīnzì zǒu jìn nà ge shìjiè, xiǎng dú yuánzhù, zhēnzhèng lǐjiě nà zhǒng yōumò gǎn,",
+      "vi": "muốn tự mình bước vào thế giới đó, muốn đọc nguyên tác, thực sự hiểu cảm giác hài hước đó,"
+    },
+    {
+      "start": 497.97,
+      "end": 503.32,
+      "en": "and experience feelings that can only be expressed in that language.",
+      "zh": "想体验只有用那种语言才能表达出来的情感。",
+      "pinyin": "xiǎng tǐyàn zhǐyǒu yòng nà zhǒng yǔyán cái néng biǎodá chūlái de qínggǎn.",
+      "vi": "muốn trải nghiệm những cảm xúc chỉ có nói ngôn ngữ đó mới có thể diễn đạt được."
+    },
+    {
+      "start": 503.32,
+      "end": 508.84,
+      "en": "For me, there may have been practical considerations when I first started learning Chinese,",
+      "zh": "对我来说，一开始学中文可能有一些现实的考虑，",
+      "pinyin": "Duì wǒ lái shuō, yì kāishǐ xué Zhōngwén kěnéng yǒu yìxiē xiànshí de kǎolǜ,",
+      "vi": "Đúng, đối với mình, ban đầu học tiếng Trung có thể có những cân nhắc thực dụng,"
+    },
+    {
+      "start": 508.84,
+      "end": 515.36,
+      "en": "but now it’s much more because I genuinely love it: I love words that can’t really be translated,",
+      "zh": "但现在更多是因为真的喜欢：喜欢那些没办法翻译出来的词，",
+      "pinyin": "dàn xiànzài gèng duō shì yīnwèi zhēn de xǐhuan: xǐhuan nàxiē méi bànfǎ fānyì chūlái de cí,",
+      "vi": "nhưng bây giờ nhiều hơn là vì thực sự thích: thích những từ không dịch lại được,"
+    },
+    {
+      "start": 515.37,
+      "end": 520.12,
+      "en": "and feelings that can only be expressed clearly in Chinese.",
+      "zh": "喜欢只有用中文才能表达清楚的情感。",
+      "pinyin": "xǐhuan zhǐyǒu yòng Zhōngwén cái néng biǎodá qīngchu de qínggǎn.",
+      "vi": "thích những cảm xúc chỉ nói tiếng Trung mới có thể diễn đạt rõ ràng."
+    },
+    {
+      "start": 520.12,
+      "end": 525.66,
+      "en": "There’s another point: when most people rely on AI to communicate,",
+      "zh": "还有一点——当大多数人都依靠人工智能交流的时候，",
+      "pinyin": "Hái yǒu yìdiǎn——dāng dà duōshù rén dōu yīkào réngōng zhìnéng jiāoliú de shíhou,",
+      "vi": "Mà còn có một điểm nữa — khi phần lớn mọi người đều dựa vào AI giao tiếp,"
+    },
+    {
+      "start": 525.66,
+      "end": 528.47,
+      "en": "people who truly learn the other person’s language",
+      "zh": "真正学会对方语言的人，",
+      "pinyin": "zhēnzhèng xuéhuì duìfāng yǔyán de rén,",
+      "vi": "những người thực sự học được ngôn ngữ của đối phương,"
+    },
+    {
+      "start": 528.47,
+      "end": 533.37,
+      "en": "will become even more valuable, and that sense of sincerity will stand out more.",
+      "zh": "反而会变得更加珍贵，那种真诚的感觉也会更加突出。",
+      "pinyin": "fǎn'ér huì biàn de gèng jiā zhēnguì, nà zhǒng zhēnchéng de gǎnjué yě huì gèng jiā tūchū.",
+      "vi": "ngược lại sẽ trở nên quý giá hơn, cảm giác chân thành đó càng nổi bật hơn."
+    },
+    {
+      "start": 533.37,
+      "end": 541.48,
+      "en": "Ha, exactly—rarity makes things valuable! And that warmth is something machines can never give you.",
+      "zh": "哈哈，对，物以稀为贵！而且那种温暖，机器永远给不了你。",
+      "pinyin": "Hāhā, duì, wù yǐ xī wéi guì! Érqiě nà zhǒng wēnnuǎn, jīqì yǒngyuǎn gěi bù liǎo nǐ.",
+      "vi": "Ha, đúng, vật hiếm thì quý! Mà cái ấm áp đó, máy móc mãi mãi không thể cho cậu."
+    },
+    {
+      "start": 541.49,
+      "end": 548.14,
+      "en": "So AI can translate languages, but it can’t translate people. Put simply,",
+      "zh": "所以，人工智能可以翻译语言，但不能翻译人。直白地说，",
+      "pinyin": "Suǒyǐ, réngōng zhìnéng kěyǐ fānyì yǔyán, dàn bù néng fānyì rén. Zhíbái de shuō,",
+      "vi": "Vậy nên — AI có thể dịch ngôn ngữ, nhưng nó không thể dịch con người. Nói thẳng ra,"
+    },
+    {
+      "start": 548.14,
+      "end": 555.94,
+      "en": "it can’t translate your enthusiasm or the sincerity of your effort to express yourself in a new language,",
+      "zh": "它翻译不了你的热情，也翻译不了你努力用一门新语言表达自己时的真诚，",
+      "pinyin": "tā fānyì bù liǎo nǐ de rèqíng, yě fānyì bù liǎo nǐ nǔlì yòng yì mén xīn yǔyán biǎodá zìjǐ shí de zhēnchéng,",
+      "vi": "nó không dịch được sự nhiệt tình của cậu, không dịch được sự chân thành khi cậu cố gắng diễn đạt bản thân bằng một ngôn ngữ mới,"
+    },
+    {
+      "start": 555.94,
+      "end": 559.71,
+      "en": "and that is the most genuine part of communication.",
+      "zh": "那才是交流中最真实的部分。",
+      "pinyin": "nà cái shì jiāoliú zhōng zuì zhēnshí de bùfen.",
+      "vi": "đó mới là phần chân thực nhất trong giao tiếp."
+    },
+    {
+      "start": 559.71,
+      "end": 562.09,
+      "en": "I’ll remember that!",
+      "zh": "这句话我会记住的！",
+      "pinyin": "Zhè jù huà wǒ huì jìzhù de!",
+      "vi": "Câu này mình sẽ ghi nhớ!"
+    },
+    {
+      "start": 562.1,
+      "end": 566.13,
+      "en": "Actually, what we’re talking about today isn’t just about learning Chinese;",
+      "zh": "其实，我们今天说的，不只是学中文的问题，",
+      "pinyin": "Qíshí, wǒmen jīntiān shuō de, bù zhǐ shì xué Zhōngwén de wèntí,",
+      "vi": "Thực ra, những gì chúng ta nói hôm nay, không chỉ là vấn đề học tiếng Trung,"
+    },
+    {
+      "start": 566.13,
+      "end": 570,
+      "en": "the same principle applies to anyone learning any language.",
+      "zh": "对学习任何语言的人来说，道理都是一样的。",
+      "pinyin": "duì xuéxí rènhé yǔyán de rén lái shuō, dàolǐ dōu shì yíyàng de.",
+      "vi": "đối với người học bất kỳ ngôn ngữ nào cũng là đạo lý như nhau"
+    },
+    {
+      "start": 570,
+      "end": 575.69,
+      "en": "Whether you learn Japanese, French, or Spanish, the culture behind the language,",
+      "zh": "学习日语、法语、西班牙语，语言背后的文化，",
+      "pinyin": "xuéxí Rìyǔ, Fǎyǔ, Xībānyáyǔ, yǔyán bèihòu de wénhuà,",
+      "vi": "học tiếng Nhật, tiếng Pháp, tiếng Tây Ban Nha, văn hóa đằng sau ngôn ngữ,"
+    },
+    {
+      "start": 575.69,
+      "end": 581.57,
+      "en": "genuine connection, and expanded ways of thinking are all things AI can’t give you.",
+      "zh": "真正的连接、思维方式的拓展，都是人工智能无法给你的。",
+      "pinyin": "zhēnzhèng de liánjiē, sīwéi fāngshì de tuòzhǎn, dōu shì réngōng zhìnéng wúfǎ gěi nǐ de.",
+      "vi": "sự kết nối thực sự, sự mở rộng cách tư duy, đều là AI không thể cho bạn."
+    },
+    {
+      "start": 581.57,
+      "end": 586.6,
+      "en": "The arrival of AI, on the other hand, helps us see one thing more clearly:",
+      "zh": "而人工智能的出现，反而帮助我们看清了一件事：",
+      "pinyin": "Ér réngōng zhìnéng de chūxiàn, fǎn'ér bāngzhù wǒmen kàn qīng le yí jiàn shì:",
+      "vi": "Mà sự xuất hiện của AI ngược lại giúp chúng ta nhìn rõ hơn một điều"
+    },
+    {
+      "start": 586.6,
+      "end": 592.95,
+      "en": "why we learn a language. Before, it was compulsory; now, it’s a choice.",
+      "zh": "我们为什么要学一门语言。以前是被迫，现在是选择。",
+      "pinyin": "wǒmen wèishénme yào xué yì mén yǔyán. Yǐqián shì bèi pò, xiànzài shì xuǎnzé.",
+      "vi": "tại sao chúng ta học một ngôn ngữ. Trước đây là bị bắt buộc, bây giờ là lựa chọn."
+    },
+    {
+      "start": 592.96,
+      "end": 597.37,
+      "en": "What motivates you to learn a language—that’s what really matters.",
+      "zh": "你学习语言的动力是什么，这才是真正重要的事情。",
+      "pinyin": "Nǐ xuéxí yǔyán de dònglì shì shénme, zhè cái shì zhēnzhèng zhòngyào de shìqing.",
+      "vi": "Động lực học ngôn ngữ của bạn là gì, đó mới là điều thực sự quan trọng."
+    },
+    {
+      "start": 597.37,
+      "end": 603.81,
+      "en": "AI and language learning aren’t opposites; they can work together. People who have learned a language",
+      "zh": "人工智能和语言学习并不矛盾，而是可以配合起来。已经学过语言的人，",
+      "pinyin": "Réngōng zhìnéng hé yǔyán xuéxí bìng bù máodùn, ér shì kěyǐ pèihé qǐlái. Yǐjīng xué guò yǔyán de rén,",
+      "vi": "AI và học ngôn ngữ không đối lập, mà có thể phối hợp. Người đã học ngôn ngữ"
+    },
+    {
+      "start": 603.81,
+      "end": 610.37,
+      "en": "and truly learn that language while using AI",
+      "zh": "在使用人工智能的过程中真正学习那门语言，",
+      "pinyin": "zài shǐyòng réngōng zhìnéng de guòchéng zhōng zhēnzhèng xuéxí nà mén yǔyán,",
+      "vi": "trong quá trình dùng AI mà thực sự học ngôn ngữ đó,"
+    },
+    {
+      "start": 610.37,
+      "end": 616.17,
+      "en": "will understand it more deeply. The two things can reinforce each other.",
+      "zh": "理解会更深。两件事可以互相促进。",
+      "pinyin": "lǐjiě huì gèng shēn. Liǎng jiàn shì kěyǐ hùxiāng cùjìn.",
+      "vi": "hiểu biết sẽ sâu hơn. Hai việc có thể tương hỗ nhau."
+    },
+    {
+      "start": 616.17,
+      "end": 622.01,
+      "en": "All right, let’s sum up: AI is powerful, but language is more than just written words;",
+      "zh": "好了，我们总结一下：人工智能很厉害，但语言不只是文字，",
+      "pinyin": "Hǎo le, wǒmen zǒngjié yíxià: réngōng zhìnéng hěn lìhai, dàn yǔyán bù zhǐ shì wénzì,",
+      "vi": "Được rồi, chúng ta tổng kết: AI rất giỏi, nhưng ngôn ngữ không chỉ là chữ viết"
+    },
+    {
+      "start": 622.01,
+      "end": 626.4,
+      "en": "it has tones, cultural meaning, and connections between people,",
+      "zh": "它有声调、文化含义、人与人之间的连接，",
+      "pinyin": "tā yǒu shēngdiào, wénhuà hányì, rén yǔ rén zhījiān de liánjiē,",
+      "vi": "nó có thanh điệu, hàm nghĩa văn hóa, sự kết nối giữa người với người,"
+    },
+    {
+      "start": 626.4,
+      "end": 632.24,
+      "en": "and it is also a way of thinking. AI can’t give you these things.",
+      "zh": "也是我们思考的方式。这些东西，人工智能给不了你。",
+      "pinyin": "yě shì wǒmen sīkǎo de fāngshì. Zhèxiē dōngxi, réngōng zhìnéng gěi bù liǎo nǐ.",
+      "vi": "và là cách chúng ta tư duy. Những thứ này, AI không thể cho bạn."
+    },
+    {
+      "start": 632.24,
+      "end": 635.65,
+      "en": "If you’re learning Chinese, I hope today’s episode",
+      "zh": "如果你正在学中文，希望今天这一期",
+      "pinyin": "Rúguǒ nǐ zhèngzài xué Zhōngwén, xīwàng jīntiān zhè yì qī",
+      "vi": "Nếu bạn đang học tiếng Trung, hy vọng tập hôm nay"
+    },
+    {
+      "start": 635.65,
+      "end": 639.91,
+      "en": "can give you a little more motivation. Every minute you spend,",
+      "zh": "能给你多一点动力。你花的每一分钟，",
+      "pinyin": "néng gěi nǐ duō yìdiǎn dònglì. Nǐ huā de měi yì fēnzhōng,",
+      "vi": "có thể cho bạn thêm chút động lực. Mỗi phút bạn bỏ ra,"
+    },
+    {
+      "start": 639.91,
+      "end": 644.45,
+      "en": "you’re building something AI can never replace.",
+      "zh": "都在积累人工智能永远无法替代的东西。",
+      "pinyin": "dōu zài jīlěi réngōng zhìnéng yǒngyuǎn wúfǎ tìdài de dōngxi.",
+      "vi": "đều đang tích lũy thứ mà AI mãi mãi không thể thay thế được."
+    },
+    {
+      "start": 644.45,
+      "end": 648.07,
+      "en": "All right, now we have a question for everyone! First question:",
+      "zh": "好了，现在我们想问问大家！第一个问题：",
+      "pinyin": "Hǎo le, xiànzài wǒmen xiǎng wènwen dàjiā! Dì yí ge wèntí:",
+      "vi": "Được rồi, bây giờ chúng mình muốn hỏi mọi người! Câu hỏi đầu tiên:"
+    },
+    {
+      "start": 648.07,
+      "end": 652.37,
+      "en": "Why did you start learning Chinese? Was it for practical reasons,",
+      "zh": "你为什么开始学中文？是因为现实的原因，",
+      "pinyin": "Nǐ wèishénme kāishǐ xué Zhōngwén? Shì yīnwèi xiànshí de yuányīn,",
+      "vi": "tại sao bạn bắt đầu học tiếng Trung? Vì lý do thực tế,"
+    },
+    {
+      "start": 652.38,
+      "end": 657.83,
+      "en": "because you were interested in the culture, or because of a special story?",
+      "zh": "对文化感兴趣，还是有什么特别的故事？",
+      "pinyin": "duì wénhuà gǎn xìngqù, háishi yǒu shénme tèbié de gùshi?",
+      "vi": "vì hứng thú với văn hóa, hay có câu chuyện đặc biệt nào đó?"
+    },
+    {
+      "start": 657.83,
+      "end": 661,
+      "en": "Second question: Is there anything",
+      "zh": "第二个问题：有没有什么事情，",
+      "pinyin": "Dì èr ge wèntí: yǒu méiyǒu shénme shìqing,",
+      "vi": "Câu hỏi thứ hai: liệu có điều gì đó"
+    },
+    {
+      "start": 661.01,
+      "end": 667.3,
+      "en": "you’ve experienced through learning Chinese that you couldn’t experience using translation software?",
+      "zh": "是你通过学习中文体验到的，但用翻译软件体验不到的？",
+      "pinyin": "shì nǐ tōngguò xuéxí Zhōngwén tǐyàn dào de, dàn yòng fānyì ruǎnjiàn tǐyàn bù dào de?",
+      "vi": "bạn trải nghiệm được qua việc học tiếng Trung mà dùng phần mềm dịch không có được không?"
+    },
+    {
+      "start": 667.3,
+      "end": 672.56,
+      "en": "Tell us in Chinese in the comments—even just one or two sentences is fine!",
+      "zh": "请在评论区用中文告诉我们，哪怕只写一两句话也可以！",
+      "pinyin": "Qǐng zài pínglùn qū yòng Zhōngwén gàosu wǒmen, nǎpà zhǐ xiě yì liǎng jù huà yě kěyǐ!",
+      "vi": "Hãy nói bằng tiếng Trung trong phần bình luận cho chúng mình, dù chỉ một hai câu cũng được!"
+    },
+    {
+      "start": 672.56,
+      "end": 675.97,
+      "en": "We’ll carefully read every comment.",
+      "zh": "我们会认真阅读每一条评论。",
+      "pinyin": "Wǒmen huì rènzhēn yuèdú měi yì tiáo pínglùn.",
+      "vi": "Chúng mình sẽ đọc kỹ từng bình luận đó."
+    },
+    {
+      "start": 675.97,
+      "end": 678.8,
+      "en": "If today’s episode was helpful to you,",
+      "zh": "如果今天的节目对你有帮助，",
+      "pinyin": "Rúguǒ jīntiān de jiémù duì nǐ yǒu bāngzhù,",
+      "vi": "Nếu tập hôm nay có ích cho bạn,"
+    },
+    {
+      "start": 678.8,
+      "end": 684.09,
+      "en": "don’t forget to like and subscribe to BaoBao Mandarin! Every like and subscription from you",
+      "zh": "别忘了给我们点个赞，订阅 BaoBao Mandarin！你的每一个赞和每一次订阅",
+      "pinyin": "Bié wàng le gěi wǒmen diǎn ge zàn, dìngyuè BaoBao Mandarin! Nǐ de měi yí ge zàn hé měi yí cì dìngyuè",
+      "vi": "đừng quên thả tim và đăng ký BaoBao Mandarin! Mỗi lượt thích và đăng ký của bạn"
+    },
+    {
+      "start": 684.09,
+      "end": 689.78,
+      "en": "will help more people who want to learn Chinese find us. See you next episode!",
+      "zh": "都会帮助更多想学中文的人找到我们。我们下期再见！",
+      "pinyin": "Dōu huì bāngzhù gèng duō xiǎng xué Zhōngwén de rén zhǎodào wǒmen. Wǒmen xià qī zàijiàn!",
+      "vi": "đều giúp nhiều người muốn học tiếng Trung tìm thấy chúng mình hơn. Hẹn gặp lại tập sau!"
+    },
+    {
+      "start": 689.78,
+      "end": 691.78,
+      "en": "Bye-bye~~",
+      "zh": "拜拜呀~~",
+      "pinyin": "Bàibài ya~~",
+      "vi": "Tạm biệt nha~~"
+    }
+  ]
+}
