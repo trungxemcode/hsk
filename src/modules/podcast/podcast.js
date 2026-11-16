@@ -966,7 +966,10 @@
       const listRect = transcriptListEl.getBoundingClientRect();
       const itemRect = activeEl.getBoundingClientRect();
       if (itemRect.top < listRect.top || itemRect.bottom > listRect.bottom) {
-        activeEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        // Scroll only inside the transcript container so the outer page/video never jumps
+        const offsetTop = itemRect.top - listRect.top + transcriptListEl.scrollTop;
+        const targetTop = Math.max(0, offsetTop - Math.max(0, (transcriptListEl.clientHeight - itemRect.height) * 0.25));
+        transcriptListEl.scrollTo({ top: targetTop, behavior: 'smooth' });
       }
     }
   }
