@@ -1,0 +1,237 @@
+{
+  "id": "TdfpkrHdISY",
+  "youtubeId": "TdfpkrHdISY",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Phục vụ, đưa tôi cái thìa",
+  "titleVi": "Phục vụ, đưa tôi cái thìa",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 106,
+  "cues": [
+    {
+      "start": 0.44,
+      "end": 12.38,
+      "en": "Waiter, give me a knife.",
+      "zh": "服务员，给我一把刀子。",
+      "pinyin": "Fú wù yuán， gěi wǒ yì bǎ dāo zǐ。",
+      "vi": "Phục vụ ơi, cho tôi một con dao."
+    },
+    {
+      "start": 16.64,
+      "end": 19.08,
+      "en": "Waiter, give me a knife.",
+      "zh": "服务员，给我一把刀子。",
+      "pinyin": "Fú wù yuán， gěi wǒ yì bǎ dāo zǐ。",
+      "vi": "Phục vụ ơi, cho tôi một con dao."
+    },
+    {
+      "start": 19.8,
+      "end": 20.16,
+      "en": "Alright.",
+      "zh": "好的。",
+      "pinyin": "Hǎo de。",
+      "vi": "Được ạ."
+    },
+    {
+      "start": 23.18,
+      "end": 26.84,
+      "en": "Waiter, give me a plate.",
+      "zh": "服务员，给我一个盘子。",
+      "pinyin": "Fú wù yuán， gěi wǒ yí gè pán zi。",
+      "vi": "Phục vụ ơi, cho tôi một cái đĩa."
+    },
+    {
+      "start": 27.94,
+      "end": 29,
+      "en": "Okay, please wait a moment.",
+      "zh": "好，请等一下。",
+      "pinyin": "Hǎo， qǐng děng yí xià。",
+      "vi": "Được, xin chờ một chút."
+    },
+    {
+      "start": 34.56,
+      "end": 36,
+      "en": "The coffee is too bitter.",
+      "zh": "咖啡太苦了。",
+      "pinyin": "Kā fēi tài kǔ le。",
+      "vi": "Cà phê đắng quá."
+    },
+    {
+      "start": 36.86,
+      "end": 37.56,
+      "en": "Waiter!",
+      "zh": "服务员",
+      "pinyin": "Fú wù yuán",
+      "vi": "Phục vụ ơi!"
+    },
+    {
+      "start": 38.88,
+      "end": 39.23,
+      "en": "Sir",
+      "zh": "先生",
+      "pinyin": "Xiān shēng",
+      "vi": "Anh"
+    },
+    {
+      "start": 40.1,
+      "end": 40.45,
+      "en": "May I ask...",
+      "zh": "请问",
+      "pinyin": "Qǐng wèn",
+      "vi": "Cho tôi hỏi"
+    },
+    {
+      "start": 41.06,
+      "end": 41.72,
+      "en": "What else would you like?",
+      "zh": "你还要什么？",
+      "pinyin": "Nǐ hái yào shén me？",
+      "vi": "Anh còn cần gì nữa?"
+    },
+    {
+      "start": 43.06,
+      "end": 43.44,
+      "en": "sugar",
+      "zh": "糖",
+      "pinyin": "Táng",
+      "vi": "đường"
+    },
+    {
+      "start": 46.42,
+      "end": 49.32,
+      "en": "Waiter",
+      "zh": "服务员",
+      "pinyin": "Fú wù yuán",
+      "vi": "Phục vụ ơi"
+    },
+    {
+      "start": 52.16,
+      "end": 52.52,
+      "en": "give",
+      "zh": "给",
+      "pinyin": "Gěi",
+      "vi": "cho"
+    },
+    {
+      "start": 55.9,
+      "end": 56.25,
+      "en": "ba (measure word for objects with handles)",
+      "zh": "把",
+      "pinyin": "Bǎ",
+      "vi": "cái (lượng từ cho vật có cán)"
+    },
+    {
+      "start": 59.1,
+      "end": 59.72,
+      "en": "spoon",
+      "zh": "勺子",
+      "pinyin": "Sháo zǐ",
+      "vi": "cái thìa"
+    },
+    {
+      "start": 62.52,
+      "end": 63.12,
+      "en": "fork",
+      "zh": "叉子",
+      "pinyin": "Chā zi",
+      "vi": "cái nĩa"
+    },
+    {
+      "start": 65.72,
+      "end": 66.07,
+      "en": "ge (general measure word)",
+      "zh": "个",
+      "pinyin": "Gè",
+      "vi": "cái (lượng từ chung)"
+    },
+    {
+      "start": 69.48,
+      "end": 70.12,
+      "en": "plate",
+      "zh": "盘子",
+      "pinyin": "Pán zi",
+      "vi": "cái đĩa"
+    },
+    {
+      "start": 72.8,
+      "end": 73.15,
+      "en": "please",
+      "zh": "请",
+      "pinyin": "Qǐng",
+      "vi": "làm ơn"
+    },
+    {
+      "start": 73.34,
+      "end": 76.26,
+      "en": "wait",
+      "zh": "等",
+      "pinyin": "Děng",
+      "vi": "chờ"
+    },
+    {
+      "start": 78.68,
+      "end": 79.12,
+      "en": "a moment",
+      "zh": "一下",
+      "pinyin": "Yí xià",
+      "vi": "một chút"
+    },
+    {
+      "start": 82.26,
+      "end": 82.64,
+      "en": "coffee",
+      "zh": "咖啡",
+      "pinyin": "Kā fēi",
+      "vi": "cà phê"
+    },
+    {
+      "start": 85.24,
+      "end": 85.59,
+      "en": "too",
+      "zh": "太",
+      "pinyin": "Tài",
+      "vi": "quá"
+    },
+    {
+      "start": 85.68,
+      "end": 89.1,
+      "en": "bitter",
+      "zh": "苦",
+      "pinyin": "Kǔ",
+      "vi": "đắng"
+    },
+    {
+      "start": 91.42,
+      "end": 91.77,
+      "en": "sir / mister",
+      "zh": "先生",
+      "pinyin": "Xiān shēng",
+      "vi": "anh / ông"
+    },
+    {
+      "start": 94.38,
+      "end": 95.04,
+      "en": "Excuse me",
+      "zh": "请问",
+      "pinyin": "Qǐng wèn",
+      "vi": "xin hỏi"
+    },
+    {
+      "start": 97.88,
+      "end": 98.23,
+      "en": "still/also",
+      "zh": "还",
+      "pinyin": "Hái",
+      "vi": "còn/vẫn"
+    },
+    {
+      "start": 100.88,
+      "end": 101.32,
+      "en": "sugar",
+      "zh": "糖",
+      "pinyin": "Táng",
+      "vi": "đường"
+    }
+  ]
+}

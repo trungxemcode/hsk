@@ -1,0 +1,157 @@
+{
+  "id": "3rJ5EH6XlUk",
+  "youtubeId": "3rJ5EH6XlUk",
+  "channelHandle": "@PandaStudio24",
+  "title": "Thời gian trôi qua thật nhanh || LUYỆN ĐỌC TIẾNG TRUNG - HSK 2",
+  "titleVi": "Thời gian trôi qua thật nhanh",
+  "topic": "Luyện đọc HSK 2",
+  "level": "HSK 2+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 160,
+  "cues": [
+    {
+      "start": 17.02,
+      "end": 23.66,
+      "en": "Time passes so fast.",
+      "zh": "时间过得好快啊。",
+      "pinyin": "Shí jiān guò dé hǎo kuài a。",
+      "vi": "Thời gian trôi qua thật nhanh nhỉ."
+    },
+    {
+      "start": 26.82,
+      "end": 28.14,
+      "en": "Another week has passed.",
+      "zh": "一周又过去了。",
+      "pinyin": "Yì zhōu yòu guò qù le。",
+      "vi": "Một tuần nữa lại trôi qua rồi."
+    },
+    {
+      "start": 31.3,
+      "end": 32.64,
+      "en": "A week has seven days.",
+      "zh": "一周有七天。",
+      "pinyin": "Yì zhōu yǒu qī tiān。",
+      "vi": "Một tuần có bảy ngày."
+    },
+    {
+      "start": 36,
+      "end": 38.04,
+      "en": "A day has twenty-four hours.",
+      "zh": "一天有二十四个小时。",
+      "pinyin": "Yì tiān yǒu èr shí sì gè xiǎo shí。",
+      "vi": "Một ngày có hai mươi tư giờ."
+    },
+    {
+      "start": 41.4,
+      "end": 43.58,
+      "en": "Each hour has sixty minutes.",
+      "zh": "每个小时有六十分钟。",
+      "pinyin": "Měi gè xiǎo shí yǒu liù shí fēn zhōng。",
+      "vi": "Mỗi giờ có sáu mươi phút."
+    },
+    {
+      "start": 47.34,
+      "end": 49.24,
+      "en": "Each minute has sixty seconds.",
+      "zh": "每分钟有六十秒。",
+      "pinyin": "Měi fēn zhōng yǒu liù shí miǎo。",
+      "vi": "Mỗi phút có sáu mươi giây."
+    },
+    {
+      "start": 52.16,
+      "end": 54.8,
+      "en": "Sleeping time is about seven hours.",
+      "zh": "睡觉的时间有七个小时左右。",
+      "pinyin": "Shuì jiào de shí jiān yǒu qī gè xiǎo shí zuǒ yòu。",
+      "vi": "Thời gian ngủ có khoảng bảy tiếng."
+    },
+    {
+      "start": 57.9,
+      "end": 60.54,
+      "en": "Study time is about eight hours.",
+      "zh": "学习的时间有八个小时左右。",
+      "pinyin": "Xué xí de shí jiān yǒu bā gè xiǎo shí zuǒ yòu。",
+      "vi": "Thời gian học tập có khoảng tám tiếng."
+    },
+    {
+      "start": 64,
+      "end": 67.1,
+      "en": "The rest of the time is used for eating or watching TV.",
+      "zh": "其他的时间就用来吃饭或看电视。",
+      "pinyin": "Qí tā de shí jiān jiù yòng lái chī fàn huò kàn diàn shì。",
+      "vi": "Thời gian còn lại thì dùng để ăn cơm hoặc xem TV."
+    },
+    {
+      "start": 82.06,
+      "end": 88.05,
+      "en": "Listen a second time, listen carefully. Time passes so fast.",
+      "zh": "听第二次，仔细地听。时间过得好快啊。",
+      "pinyin": "Tīng dì èr cì， zǐ xì dì tīng。 shí jiān guò dé hǎo kuài a。",
+      "vi": "Nghe lần thứ hai, hãy nghe thật kỹ. Thời gian trôi qua thật nhanh."
+    },
+    {
+      "start": 91.25,
+      "end": 92.63,
+      "en": "Another week has passed.",
+      "zh": "一周又过去了。",
+      "pinyin": "Yì zhōu yòu guò qù le。",
+      "vi": "Một tuần nữa lại trôi qua rồi."
+    },
+    {
+      "start": 95.75,
+      "end": 97.07,
+      "en": "A week has seven days.",
+      "zh": "一周有七天。",
+      "pinyin": "Yì zhōu yǒu qī tiān。",
+      "vi": "Một tuần có bảy ngày."
+    },
+    {
+      "start": 100.53,
+      "end": 102.51,
+      "en": "A day has twenty-four hours.",
+      "zh": "一天有二十四个小时。",
+      "pinyin": "Yì tiān yǒu èr shí sì gè xiǎo shí。",
+      "vi": "Một ngày có hai mươi tư giờ."
+    },
+    {
+      "start": 105.91,
+      "end": 108.07,
+      "en": "Each hour has sixty minutes.",
+      "zh": "每个小时有六十分钟。",
+      "pinyin": "Měi gè xiǎo shí yǒu liù shí fēn zhōng。",
+      "vi": "Mỗi giờ có sáu mươi phút."
+    },
+    {
+      "start": 111.05,
+      "end": 112.89,
+      "en": "Each minute has sixty seconds.",
+      "zh": "每分钟有六十秒。",
+      "pinyin": "Měi fēn zhōng yǒu liù shí miǎo。",
+      "vi": "Mỗi phút có sáu mươi giây."
+    },
+    {
+      "start": 116.63,
+      "end": 119.35,
+      "en": "Sleeping time is about seven hours.",
+      "zh": "睡觉的时间有七个小时左右。",
+      "pinyin": "Shuì jiào de shí jiān yǒu qī gè xiǎo shí zuǒ yòu。",
+      "vi": "Thời gian ngủ có khoảng bảy tiếng."
+    },
+    {
+      "start": 122.57,
+      "end": 125.19,
+      "en": "Study time is about eight hours.",
+      "zh": "学习的时间有八个小时左右。",
+      "pinyin": "Xué xí de shí jiān yǒu bā gè xiǎo shí zuǒ yòu。",
+      "vi": "Thời gian học tập có khoảng tám tiếng."
+    },
+    {
+      "start": 128.53,
+      "end": 131.59,
+      "en": "The rest of the time is used for eating or watching TV.",
+      "zh": "其他的时间就用来吃饭或看电视。",
+      "pinyin": "Qí tā de shí jiān jiù yòng lái chī fàn huò kàn diàn shì。",
+      "vi": "Thời gian còn lại thì dùng để ăn cơm hoặc xem TV."
+    }
+  ]
+}

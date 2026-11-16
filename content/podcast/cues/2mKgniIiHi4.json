@@ -1,0 +1,1397 @@
+{
+  "id": "2mKgniIiHi4",
+  "youtubeId": "2mKgniIiHi4",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe hội thoại TIẾNG TRUNG : Giao tiếp trò chuyện bạn bè | 朋友聊天",
+  "titleVi": "Giao tiếp trò chuyện bạn bè",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 503,
+  "cues": [
+    {
+      "start": 19.5,
+      "end": 19.85,
+      "en": "It's me.",
+      "zh": "是我。",
+      "pinyin": "Shì wǒ。",
+      "vi": "Là tôi."
+    },
+    {
+      "start": 21.5,
+      "end": 22,
+      "en": "Who is it?",
+      "zh": "是谁？",
+      "pinyin": "Shì shuí？",
+      "vi": "Ai vậy?"
+    },
+    {
+      "start": 23.5,
+      "end": 23.85,
+      "en": "I'm the police!",
+      "zh": "我是警察！",
+      "pinyin": "Wǒ shì jǐng chá！",
+      "vi": "Tôi là cảnh sát!"
+    },
+    {
+      "start": 25.56,
+      "end": 25.91,
+      "en": "Open the door!",
+      "zh": "开门！",
+      "pinyin": "Kāi mén！",
+      "vi": "Mở cửa!"
+    },
+    {
+      "start": 26,
+      "end": 28,
+      "en": "Police?",
+      "zh": "警察？",
+      "pinyin": "Jǐng chá？",
+      "vi": "Cảnh sát?"
+    },
+    {
+      "start": 28.32,
+      "end": 29.98,
+      "en": "Hurry up and open the door.",
+      "zh": "快点开门。",
+      "pinyin": "Kuài diǎn kāi mén。",
+      "vi": "Mở cửa nhanh lên."
+    },
+    {
+      "start": 30.84,
+      "end": 31.54,
+      "en": "Okay, I'm coming.",
+      "zh": "好啦，来了啦。",
+      "pinyin": "Hǎo lā， lái le lā。",
+      "vi": "Được rồi, đến ngay đây."
+    },
+    {
+      "start": 36.6,
+      "end": 37.16,
+      "en": "Are you alone?",
+      "zh": "你一个人吗？",
+      "pinyin": "Nǐ yí gè rén ma？",
+      "vi": "Cậu ở một mình à?"
+    },
+    {
+      "start": 39.6,
+      "end": 41.38,
+      "en": "Xiaoli has something to do, so she can't come.",
+      "zh": "小丽有事，她不能来。",
+      "pinyin": "Xiǎo lì yǒu shì， tā bù néng lái。",
+      "vi": "Tiểu Lệ có việc, cô ấy không đến được."
+    },
+    {
+      "start": 42.32,
+      "end": 44.94,
+      "en": "She told me yesterday that she could come today.",
+      "zh": "她昨天跟我说今天可以来的。",
+      "pinyin": "Tā zuó tiān gēn wǒ shuō jīn tiān kě yǐ lái de。",
+      "vi": "Hôm qua cô ấy nói với tôi là hôm nay đến được mà."
+    },
+    {
+      "start": 46.56,
+      "end": 47.76,
+      "en": "Really? I didn't know.",
+      "zh": "真的吗？我不知道。",
+      "pinyin": "Zhēn de ma？ wǒ bù zhī dào。",
+      "vi": "Thật à? Tôi không biết."
+    },
+    {
+      "start": 49.06,
+      "end": 51.74,
+      "en": "Xiaoli said she was busy and couldn't come.",
+      "zh": "小丽就说她有事不能来。",
+      "pinyin": "Xiǎo lì jiù shuō tā yǒu shì bù néng lái。",
+      "vi": "Tiểu Lệ nói cô ấy có việc nên không đến được."
+    },
+    {
+      "start": 52.56,
+      "end": 55.26,
+      "en": "That's strange. She told me yesterday.",
+      "zh": "奇怪了，她昨天跟我说的。",
+      "pinyin": "Qí guài le， tā zuó tiān gēn wǒ shuō de。",
+      "vi": "Lạ thật, hôm qua cô ấy nói với tôi mà."
+    },
+    {
+      "start": 57.58,
+      "end": 58.72,
+      "en": "Well, come in first.",
+      "zh": "那先请进好了。",
+      "pinyin": "Nà xiān qǐng jìn hǎo le。",
+      "vi": "Vậy mời vào trước đi."
+    },
+    {
+      "start": 58.76,
+      "end": 59.8,
+      "en": "Okay.",
+      "zh": "好啊。",
+      "pinyin": "Hǎo a。",
+      "vi": "Được thôi."
+    },
+    {
+      "start": 66.7,
+      "end": 68.96,
+      "en": "Why hasn't anyone come yet?",
+      "zh": "怎么还没有人来啊？",
+      "pinyin": "Zěn me hái méi yǒu rén lái a？",
+      "vi": "Sao vẫn chưa có ai đến vậy?"
+    },
+    {
+      "start": 69.5,
+      "end": 70.18,
+      "en": "It's still early.",
+      "zh": "现在还早。",
+      "pinyin": "Xiàn zài hái zǎo。",
+      "vi": "Bây giờ vẫn còn sớm."
+    },
+    {
+      "start": 70.7,
+      "end": 71.62,
+      "en": "You need to be more patient.",
+      "zh": "你要耐心一点。",
+      "pinyin": "Nǐ yào nài xīn yì diǎn。",
+      "vi": "Cậu phải kiên nhẫn một chút."
+    },
+    {
+      "start": 73.2,
+      "end": 75.12,
+      "en": "Didn't you say eight o'clock?",
+      "zh": "你不是说八点吗？",
+      "pinyin": "Nǐ bú shì shuō bā diǎn ma？",
+      "vi": "Cậu không phải nói tám giờ sao?"
+    },
+    {
+      "start": 76.1,
+      "end": 77.02,
+      "en": "What time is it now?",
+      "zh": "现在几点啊？",
+      "pinyin": "Xiàn zài jǐ diǎn a？",
+      "vi": "Bây giờ mấy giờ rồi?"
+    },
+    {
+      "start": 78.28,
+      "end": 79.4,
+      "en": "It's already 9:30.",
+      "zh": "现在已经九点半了。",
+      "pinyin": "Xiàn zài yǐ jīng jiǔ diǎn bàn le。",
+      "vi": "Bây giờ đã chín rưỡi rồi."
+    },
+    {
+      "start": 79.5,
+      "end": 82.44,
+      "en": "It's 9:30.",
+      "zh": "九点半了。",
+      "pinyin": "Jiǔ diǎn bàn le。",
+      "vi": "Đã chín rưỡi rồi."
+    },
+    {
+      "start": 84.08,
+      "end": 84.46,
+      "en": "Right.",
+      "zh": "对啊。",
+      "pinyin": "Duì a。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 85.1,
+      "end": 86.42,
+      "en": "Why isn't everyone here yet?",
+      "zh": "大家怎么还没有来啊？",
+      "pinyin": "Dà jiā zěn me hái méi yǒu lái a？",
+      "vi": "Sao mọi người vẫn chưa đến vậy?"
+    },
+    {
+      "start": 88.86,
+      "end": 90,
+      "en": "Did they forget?",
+      "zh": "他们是不是忘记了？",
+      "pinyin": "Tā men shì bu shì wàng jì le？",
+      "vi": "Có phải họ quên mất rồi không?"
+    },
+    {
+      "start": 91.22,
+      "end": 92.08,
+      "en": "No way!",
+      "zh": "不会吧",
+      "pinyin": "Bú huì ba",
+      "vi": "Không thể nào!"
+    },
+    {
+      "start": 92.78,
+      "end": 94.14,
+      "en": "I've already told them.",
+      "zh": "我已经跟他们说好了",
+      "pinyin": "Wǒ yǐ jīng gēn tā men shuō hǎo le",
+      "vi": "Tôi đã nói với họ rồi."
+    },
+    {
+      "start": 94.96,
+      "end": 97.24,
+      "en": "Did you get the time wrong?",
+      "zh": "你是不是说错时间了",
+      "pinyin": "Nǐ shì bu shì shuō cuò shí jiān le",
+      "vi": "Có phải bạn nói nhầm giờ rồi không?"
+    },
+    {
+      "start": 99.22,
+      "end": 100.14,
+      "en": "They're here.",
+      "zh": "他们来了",
+      "pinyin": "Tā men lái le",
+      "vi": "Họ đến rồi."
+    },
+    {
+      "start": 113.86,
+      "end": 114.21,
+      "en": "You are...?",
+      "zh": "你是？",
+      "pinyin": "Nǐ shì？",
+      "vi": "Bạn là...?"
+    },
+    {
+      "start": 115.62,
+      "end": 116.94,
+      "en": "I'm Ajie's friend.",
+      "zh": "我是阿杰的朋友",
+      "pinyin": "Wǒ shì ā jié de péng yǒu",
+      "vi": "Tôi là bạn của A Kiệt."
+    },
+    {
+      "start": 117.86,
+      "end": 119.16,
+      "en": "I know.",
+      "zh": "我知道",
+      "pinyin": "Wǒ zhī dào",
+      "vi": "Tôi biết."
+    },
+    {
+      "start": 120.24,
+      "end": 130.08,
+      "en": "Are you Yang Kai? How did you know? He told me. Did he tell you?",
+      "zh": "你是不是杨凯？你怎么知道？他跟我说过啊。他跟你说过？",
+      "pinyin": "Nǐ shì bu shì yáng kǎi？ nǐ zěn me zhī dào？ tā gēn wǒ shuō guò a。 tā gēn nǐ shuō guò？",
+      "vi": "Bạn có phải là Dương Khải không? Sao bạn biết? Anh ấy nói với tôi rồi. Anh ấy nói với bạn à?"
+    },
+    {
+      "start": 131.84,
+      "end": 133.84,
+      "en": "What did he tell you?",
+      "zh": "他跟你说什么",
+      "pinyin": "Tā gēn nǐ shuō shén me",
+      "vi": "Anh ấy nói gì với bạn?"
+    },
+    {
+      "start": 133.84,
+      "end": 134.36,
+      "en": "He said...",
+      "zh": "他说",
+      "pinyin": "Tā shuō",
+      "vi": "Anh ấy nói..."
+    },
+    {
+      "start": 135.54,
+      "end": 136.34,
+      "en": "He has a friend.",
+      "zh": "他有一个朋友",
+      "pinyin": "Tā yǒu yí gè péng yǒu",
+      "vi": "Anh ấy có một người bạn."
+    },
+    {
+      "start": 137.2,
+      "end": 137.7,
+      "en": "named Yang Kai.",
+      "zh": "叫杨凯",
+      "pinyin": "Jiào yáng kǎi",
+      "vi": "tên là Dương Khải."
+    },
+    {
+      "start": 139.38,
+      "end": 139.94,
+      "en": "That's it.",
+      "zh": "就这样",
+      "pinyin": "Jiù zhè yàng",
+      "vi": "Chỉ vậy thôi."
+    },
+    {
+      "start": 140.84,
+      "end": 141.19,
+      "en": "Right.",
+      "zh": "对",
+      "pinyin": "Duì",
+      "vi": "Đúng."
+    },
+    {
+      "start": 142,
+      "end": 143.26,
+      "en": "He only mentioned your name.",
+      "zh": "他只说过你的名字",
+      "pinyin": "Tā zhī shuō guò nǐ de míng zì",
+      "vi": "Anh ấy chỉ nhắc đến tên bạn thôi."
+    },
+    {
+      "start": 144.78,
+      "end": 145.13,
+      "en": "Okay.",
+      "zh": "好",
+      "pinyin": "Hǎo",
+      "vi": "Được."
+    },
+    {
+      "start": 145.13,
+      "end": 146.16,
+      "en": "I see.",
+      "zh": "我明白了",
+      "pinyin": "Wǒ míng bái le",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 147.36,
+      "end": 147.71,
+      "en": "So...",
+      "zh": "那……",
+      "pinyin": "Nà ……",
+      "vi": "Vậy..."
+    },
+    {
+      "start": 149.1,
+      "end": 150.98,
+      "en": "You... you are...",
+      "zh": "你……你是……",
+      "pinyin": "Nǐ …… nǐ shì ……",
+      "vi": "Bạn... bạn là..."
+    },
+    {
+      "start": 151.62,
+      "end": 153.26,
+      "en": "I... I'm Yaohua's friend.",
+      "zh": "我……我是耀华的朋友",
+      "pinyin": "Wǒ …… wǒ shì yào huá de péng yǒu",
+      "vi": "Tôi... tôi là bạn của Diệu Hoa."
+    },
+    {
+      "start": 154.3,
+      "end": 155.04,
+      "en": "Yaohua?",
+      "zh": "耀华？",
+      "pinyin": "Yào huá？",
+      "vi": "Diệu Hoa?"
+    },
+    {
+      "start": 156.34,
+      "end": 157.56,
+      "en": "Don't you know him?",
+      "zh": "你不认识他吗？",
+      "pinyin": "Nǐ bú rèn shi tā ma？",
+      "vi": "Bạn không biết anh ấy à?"
+    },
+    {
+      "start": 159.28,
+      "end": 159.96,
+      "en": "I don't think I know him.",
+      "zh": "好像不认识",
+      "pinyin": "Hǎo xiàng bú rèn shi",
+      "vi": "Hình như không quen."
+    },
+    {
+      "start": 160.56,
+      "end": 162.12,
+      "en": "But this name sounds very familiar.",
+      "zh": "但是这名字很熟悉",
+      "pinyin": "Dàn shì zhè míng zì hěn shú xī",
+      "vi": "Nhưng cái tên này nghe rất quen."
+    },
+    {
+      "start": 163.28,
+      "end": 165.2,
+      "en": "It's okay, my name is Zhang Ting.",
+      "zh": "没关系，我叫张婷",
+      "pinyin": "Méi guān xì， wǒ jiào zhāng tíng",
+      "vi": "Không sao, tôi tên là Trương Đình."
+    },
+    {
+      "start": 165.82,
+      "end": 167.04,
+      "en": "Okay, got it.",
+      "zh": "好，知道了。",
+      "pinyin": "Hǎo， zhī dào le。",
+      "vi": "Được, biết rồi."
+    },
+    {
+      "start": 168.5,
+      "end": 170.76,
+      "en": "What are you doing here?",
+      "zh": "你在这里做什么？",
+      "pinyin": "Nǐ zài zhè lǐ zuò shén me？",
+      "vi": "Bạn đang làm gì ở đây?"
+    },
+    {
+      "start": 171.8,
+      "end": 172.88,
+      "en": "I'm chatting with you.",
+      "zh": "在跟你聊天啊。",
+      "pinyin": "Zài gēn nǐ liáo tiān a。",
+      "vi": "Đang trò chuyện với bạn mà."
+    },
+    {
+      "start": 174.52,
+      "end": 177.1,
+      "en": "I know, I mean...",
+      "zh": "我知道啊，我是说……",
+      "pinyin": "Wǒ zhī dào a， wǒ shì shuō ……",
+      "vi": "Tôi biết mà, ý tôi là..."
+    },
+    {
+      "start": 177.52,
+      "end": 181.44,
+      "en": "You mean what job I do, right?",
+      "zh": "你是说我在做什么工作，对吧？",
+      "pinyin": "Nǐ shì shuō wǒ zài zuò shén me gōng zuò， duì ba？",
+      "vi": "Ý bạn là hỏi tôi làm công việc gì, đúng không?"
+    },
+    {
+      "start": 182.62,
+      "end": 189.14,
+      "en": "I work at a travel agency. I help people arrange travel itineraries and also book hotels for them.",
+      "zh": "我在一家旅行社工作，我是帮人安排旅游行程的，也会帮他们订饭店。",
+      "pinyin": "Wǒ zài yì jiā lǚ xíng shè gōng zuò， wǒ shì bāng rén ān pái lǚ yóu xíng chéng de， yě huì bāng tā men dìng fàn diàn。",
+      "vi": "Tôi làm ở một công ty du lịch. Tôi giúp mọi người sắp xếp lịch trình du lịch, và cũng đặt khách sạn cho họ."
+    },
+    {
+      "start": 190.46,
+      "end": 196.14,
+      "en": "That sounds nice. Does that mean you can get cheaper plane tickets?",
+      "zh": "听起来很不错，这样是不是可以拿到比较便宜的机票？",
+      "pinyin": "Tīng qǐ lái hěn bú cuò， zhè yàng shì bu shì kě yǐ ná dào bǐ jiào pián yi de jī piào？",
+      "vi": "Nghe hay đấy, vậy có phải là sẽ được mua vé máy bay rẻ hơn không?"
+    },
+    {
+      "start": 197.44,
+      "end": 200.84,
+      "en": "Yeah, and employees get a discount too.",
+      "zh": "对啊，还有员工可以打折哦。",
+      "pinyin": "Duì a， hái yǒu yuán gōng kě yǐ dǎ zhé ò。",
+      "vi": "Đúng vậy, mà nhân viên còn được giảm giá nữa."
+    },
+    {
+      "start": 201.28,
+      "end": 206.08,
+      "en": "Wow, great. Then next time, help me plan a trip.",
+      "zh": "哇，真好，那下次帮我规划旅游行程吧。",
+      "pinyin": "Wā， zhēn hǎo， nà xià cì bāng wǒ guī huà lǚ yóu xíng chéng ba。",
+      "vi": "Chà, tuyệt quá. Vậy lần sau giúp tôi lên kế hoạch du lịch nhé."
+    },
+    {
+      "start": 206.46,
+      "end": 207.58,
+      "en": "Sure, leave it to me.",
+      "zh": "好啊，交给我。",
+      "pinyin": "Hǎo a， jiāo gěi wǒ。",
+      "vi": "Được thôi, cứ giao cho tôi."
+    },
+    {
+      "start": 216.08,
+      "end": 218.06,
+      "en": "You must have been to a lot of places.",
+      "zh": "你应该去过很多地方吧。",
+      "pinyin": "Nǐ yīng gāi qù guò hěn duō dì fāng ba。",
+      "vi": "Chắc bạn đã đi được nhiều nơi lắm nhỉ?"
+    },
+    {
+      "start": 218.76,
+      "end": 219.18,
+      "en": "Not really.",
+      "zh": "还好吧。",
+      "pinyin": "Hái hǎo ba。",
+      "vi": "Cũng thường thôi."
+    },
+    {
+      "start": 219.4,
+      "end": 226.24,
+      "en": "Just Thailand, Singapore, South Korea, Japan, and the US.",
+      "zh": "就泰国、新加坡、韩国、日本、美国。",
+      "pinyin": "Jiù tài guó、 xīn jiā pō、 hán guó、 rì běn、 měi guó。",
+      "vi": "Chỉ có Thái Lan, Singapore, Hàn Quốc, Nhật Bản, Mỹ thôi."
+    },
+    {
+      "start": 226.36,
+      "end": 228.28,
+      "en": "Okay, okay, I get it.",
+      "zh": "好了好了，我知道了。",
+      "pinyin": "Hǎo le hǎo le， wǒ zhī dào le。",
+      "vi": "Được rồi, được rồi, tôi biết rồi."
+    },
+    {
+      "start": 230.08,
+      "end": 231.54,
+      "en": "You really love traveling.",
+      "zh": "你真的很爱旅游。",
+      "pinyin": "Nǐ zhēn de hěn ài lǚ yóu。",
+      "vi": "Bạn thật sự rất thích du lịch."
+    },
+    {
+      "start": 232.72,
+      "end": 233.12,
+      "en": "Yeah.",
+      "zh": "对啊。",
+      "pinyin": "Duì a。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 233.74,
+      "end": 235.68,
+      "en": "But they were all because of work.",
+      "zh": "可是都是因为工作去的。",
+      "pinyin": "Kě shì dōu shì yīn wèi gōng zuò qù de。",
+      "vi": "Nhưng toàn là đi vì công việc thôi."
+    },
+    {
+      "start": 236.44,
+      "end": 239.46,
+      "en": "Oh, then it must be tiring, right?",
+      "zh": "哦，那这样子应该很累吧？",
+      "pinyin": "Ò， nà zhè yàng zi yīng gāi hěn lèi ba？",
+      "vi": "Ồ, vậy thì chắc mệt lắm nhỉ?"
+    },
+    {
+      "start": 240.7,
+      "end": 244.2,
+      "en": "I think it's okay, because I like traveling.",
+      "zh": "我觉得还可以，因为我喜欢旅游。",
+      "pinyin": "Wǒ jué de hái kě yǐ， yīn wèi wǒ xǐ huan lǚ yóu。",
+      "vi": "Tôi thấy cũng ổn, vì tôi thích du lịch."
+    },
+    {
+      "start": 245.1,
+      "end": 246.26,
+      "en": "Have you been to New York?",
+      "zh": "那你去过纽约吗？",
+      "pinyin": "Nà nǐ qù guò niǔ yuē ma？",
+      "vi": "Vậy bạn từng đến New York chưa?"
+    },
+    {
+      "start": 246.26,
+      "end": 248.54,
+      "en": "Not yet. Have you been?",
+      "zh": "还没去过耶，你去过了吗？",
+      "pinyin": "Hái méi qù guò yē， nǐ qù guò le ma？",
+      "vi": "Chưa từng đến, còn bạn đã đến chưa?"
+    },
+    {
+      "start": 248.54,
+      "end": 250.22,
+      "en": "Yeah, my sister is there. It's great. Are you going there for fun?",
+      "zh": "嗯，我姐姐在那里，很好啊。你是去玩吗？",
+      "pinyin": "Ǹg， wǒ jiě jie zài nà lǐ， hěn hǎo a。 nǐ shì qù wán ma？",
+      "vi": "Ừ, chị gái tôi ở đó. Ở đó rất tuyệt. Bạn định đến đó chơi à?"
+    },
+    {
+      "start": 250.22,
+      "end": 252.44,
+      "en": "Not yet, have you been?",
+      "zh": "还没去过耶，你去过了吗？",
+      "pinyin": "Hái méi qù guò yē， nǐ qù guò le ma？",
+      "vi": "Chưa từng đến, còn bạn đã đến chưa?"
+    },
+    {
+      "start": 252.44,
+      "end": 256.18,
+      "en": "Yeah, my sister is there. It's great. Are you going there for fun?",
+      "zh": "嗯，我姐姐在那里，很好啊。你是去玩吗？",
+      "pinyin": "Ǹg， wǒ jiě jie zài nà lǐ， hěn hǎo a。 nǐ shì qù wán ma？",
+      "vi": "Ừ, chị gái tôi ở đó. Ở đó rất tuyệt. Bạn định đến đó chơi à?"
+    },
+    {
+      "start": 256.18,
+      "end": 256.53,
+      "en": "Mm-hm.",
+      "zh": "嗯。",
+      "pinyin": "Ǹg。",
+      "vi": "Ừ."
+    },
+    {
+      "start": 256.68,
+      "end": 258.66,
+      "en": "I went with my family.",
+      "zh": "我是跟我家人一起去玩的",
+      "pinyin": "Wǒ shì gēn wǒ jiā rén yì qǐ qù wán de",
+      "vi": "Tôi đi cùng với gia đình tôi."
+    },
+    {
+      "start": 258.68,
+      "end": 260.68,
+      "en": "Was it fun?",
+      "zh": "好玩吗？",
+      "pinyin": "Hǎo wán ma？",
+      "vi": "Vui không?"
+    },
+    {
+      "start": 260.68,
+      "end": 262.66,
+      "en": "It was fun.",
+      "zh": "好玩",
+      "pinyin": "Hǎo wán",
+      "vi": "Vui."
+    },
+    {
+      "start": 263.38,
+      "end": 264.68,
+      "en": "It's a very exciting city.",
+      "zh": "是一个很刺激的城市",
+      "pinyin": "Shì yí gè hěn cì jī de chéng shì",
+      "vi": "Là một thành phố rất sôi động."
+    },
+    {
+      "start": 264.68,
+      "end": 265.16,
+      "en": "Mm-hmm.",
+      "zh": "嗯",
+      "pinyin": "Ǹg",
+      "vi": "Ừm."
+    },
+    {
+      "start": 265.68,
+      "end": 267.68,
+      "en": "I've heard about it.",
+      "zh": "我听说过了",
+      "pinyin": "Wǒ tīng shuō guò le",
+      "vi": "Tôi nghe nói rồi."
+    },
+    {
+      "start": 267.68,
+      "end": 270.68,
+      "en": "So did you go to Times Square?",
+      "zh": "那你去了时代广场了吗？",
+      "pinyin": "Nà nǐ qù le shí dài guǎng chǎng le ma？",
+      "vi": "Vậy bạn đã đến Quảng trường Thời đại chưa?"
+    },
+    {
+      "start": 270.68,
+      "end": 271.2,
+      "en": "Yeah.",
+      "zh": "嗯",
+      "pinyin": "Ǹg",
+      "vi": "Ừ."
+    },
+    {
+      "start": 271.9,
+      "end": 272.64,
+      "en": "I've been there.",
+      "zh": "去过了",
+      "pinyin": "Qù guò le",
+      "vi": "Mình đi rồi."
+    },
+    {
+      "start": 272.68,
+      "end": 273.03,
+      "en": "But...",
+      "zh": "可是",
+      "pinyin": "Kě shì",
+      "vi": "Nhưng..."
+    },
+    {
+      "start": 274.46,
+      "end": 274.81,
+      "en": "I didn't stay long.",
+      "zh": "没有待很久",
+      "pinyin": "Méi yǒu dài hěn jiǔ",
+      "vi": "Tôi không ở lại lâu."
+    },
+    {
+      "start": 274.81,
+      "end": 275.68,
+      "en": "There were too many people.",
+      "zh": "人太多了",
+      "pinyin": "Rén tài duō le",
+      "vi": "Người đông quá."
+    },
+    {
+      "start": 275.68,
+      "end": 276.46,
+      "en": "There were too many people.",
+      "zh": "人太多了",
+      "pinyin": "Rén tài duō le",
+      "vi": "Người đông quá."
+    },
+    {
+      "start": 277.72,
+      "end": 280.4,
+      "en": "That's probably the most crowded place in New York.",
+      "zh": "那边应该是纽约人最多的地方吧",
+      "pinyin": "Nà biān yīng gāi shì niǔ yuē rén zuì duō de dì fāng ba",
+      "vi": "Chắc đó là nơi đông người nhất ở New York nhỉ."
+    },
+    {
+      "start": 282,
+      "end": 282.68,
+      "en": "So lively!",
+      "zh": "好热闹喔",
+      "pinyin": "Hǎo rè nào wō",
+      "vi": "Nhộn nhịp quá!"
+    },
+    {
+      "start": 283.18,
+      "end": 285.28,
+      "en": "Where else do you want to travel?",
+      "zh": "你还想去哪里旅行？",
+      "pinyin": "Nǐ hái xiǎng qù nǎ lǐ lǚ xíng？",
+      "vi": "Bạn còn muốn đi du lịch ở đâu nữa?"
+    },
+    {
+      "start": 286.78,
+      "end": 287.68,
+      "en": "Good question.",
+      "zh": "好问题",
+      "pinyin": "Hǎo wèn tí",
+      "vi": "Câu hỏi hay đấy."
+    },
+    {
+      "start": 288.98,
+      "end": 290.68,
+      "en": "If you don't have to think about work,",
+      "zh": "如果不用考虑工作",
+      "pinyin": "Rú guǒ bú yòng kǎo lǜ gōng zuò",
+      "vi": "Nếu không cần bận tâm đến công việc,"
+    },
+    {
+      "start": 291.68,
+      "end": 292.68,
+      "en": "if you could travel by yourself,",
+      "zh": "可以自己旅行的话",
+      "pinyin": "Kě yǐ zì jǐ lǚ xíng de huà",
+      "vi": "nếu có thể tự mình đi du lịch,"
+    },
+    {
+      "start": 293.68,
+      "end": 295.56,
+      "en": "Where would you most like to go?",
+      "zh": "你最想去哪个地方？",
+      "pinyin": "Nǐ zuì xiǎng qù nǎ gè dì fāng？",
+      "vi": "Bạn muốn đi nơi nào nhất?"
+    },
+    {
+      "start": 296.68,
+      "end": 298.46,
+      "en": "What about money?",
+      "zh": "那钱呢？",
+      "pinyin": "Nà qián ne？",
+      "vi": "Còn tiền thì sao?"
+    },
+    {
+      "start": 298.98,
+      "end": 300.68,
+      "en": "Are they all free?",
+      "zh": "都是不用钱的吗？",
+      "pinyin": "Dōu shì bú yòng qián de ma？",
+      "vi": "Tất cả đều không tốn tiền à?"
+    },
+    {
+      "start": 301.92,
+      "end": 303.28,
+      "en": "Right, they're all free.",
+      "zh": "对，都是免费的",
+      "pinyin": "Duì， dōu shì miǎn fèi de",
+      "vi": "Ừ, tất cả đều miễn phí."
+    },
+    {
+      "start": 303.68,
+      "end": 304.66,
+      "en": "You don't have to spend a cent.",
+      "zh": "一毛钱都不用",
+      "pinyin": "Yì máo qián dōu bú yòng",
+      "vi": "Bạn không tốn một đồng nào cả."
+    },
+    {
+      "start": 306.22,
+      "end": 310.34,
+      "en": "Then I would want to travel around the world.",
+      "zh": "那我会想环游世界",
+      "pinyin": "Nà wǒ huì xiǎng huán yóu shì jiè",
+      "vi": "Vậy thì tôi sẽ muốn đi du lịch vòng quanh thế giới."
+    },
+    {
+      "start": 311.2,
+      "end": 313.2,
+      "en": "I mean a place.",
+      "zh": "我是说一个地方啊。",
+      "pinyin": "Wǒ shì shuō yí gè dì fāng a。",
+      "vi": "Ý mình là nói về một nơi thôi."
+    },
+    {
+      "start": 313.98,
+      "end": 315.86,
+      "en": "Isn't the world a place?",
+      "zh": "世界不是一个地方吗？",
+      "pinyin": "Shì jiè bú shì yí gè dì fāng ma？",
+      "vi": "Thế giới chẳng phải là một nơi sao?"
+    },
+    {
+      "start": 316.3,
+      "end": 317.64,
+      "en": "True, true.",
+      "zh": "也是也是。",
+      "pinyin": "Yě shì yě shì。",
+      "vi": "Cũng đúng, cũng đúng."
+    },
+    {
+      "start": 319.92,
+      "end": 321.7,
+      "en": "I've always wanted to visit many places.",
+      "zh": "我一直想去很多地方。",
+      "pinyin": "Wǒ yì zhí xiǎng qù hěn duō dì fāng。",
+      "vi": "Mình luôn muốn đi nhiều nơi."
+    },
+    {
+      "start": 323.56,
+      "end": 323.92,
+      "en": "What about you?",
+      "zh": "你呢？",
+      "pinyin": "Nǐ ne？",
+      "vi": "Còn bạn thì sao?"
+    },
+    {
+      "start": 324.68,
+      "end": 325.82,
+      "en": "Where will you go?",
+      "zh": "你会去哪里？",
+      "pinyin": "Nǐ huì qù nǎ lǐ？",
+      "vi": "Bạn sẽ đi đâu?"
+    },
+    {
+      "start": 327.02,
+      "end": 327.64,
+      "en": "India, I guess.",
+      "zh": "印度吧。",
+      "pinyin": "Yìn dù ba。",
+      "vi": "Chắc là Ấn Độ."
+    },
+    {
+      "start": 328.34,
+      "end": 329.3,
+      "en": "I've always wanted to go.",
+      "zh": "我一直想去。",
+      "pinyin": "Wǒ yì zhí xiǎng qù。",
+      "vi": "Mình luôn muốn đến đó."
+    },
+    {
+      "start": 330.96,
+      "end": 333.54,
+      "en": "I think the culture there is very profound.",
+      "zh": "我觉得那边的文化很深奥。",
+      "pinyin": "Wǒ jué de nà biān de wén huà hěn shēn ào。",
+      "vi": "Mình nghĩ văn hóa bên đó rất sâu xa."
+    },
+    {
+      "start": 334.52,
+      "end": 335.02,
+      "en": "Very amazing.",
+      "zh": "很奇妙。",
+      "pinyin": "Hěn qí miào。",
+      "vi": "Rất kỳ diệu."
+    },
+    {
+      "start": 336.42,
+      "end": 337.26,
+      "en": "I think so too.",
+      "zh": "我也觉得。",
+      "pinyin": "Wǒ yě jué de。",
+      "vi": "Mình cũng nghĩ vậy."
+    },
+    {
+      "start": 338.06,
+      "end": 339.76,
+      "en": "But if possible...",
+      "zh": "可是如果可以的话，",
+      "pinyin": "Kě shì rú guǒ kě yǐ de huà，",
+      "vi": "Nhưng nếu có thể..."
+    },
+    {
+      "start": 340.78,
+      "end": 341.38,
+      "en": "I want to go by myself.",
+      "zh": "我想自己去。",
+      "pinyin": "Wǒ xiǎng zì jǐ qù。",
+      "vi": "Mình muốn tự mình đi."
+    },
+    {
+      "start": 342.66,
+      "end": 343.3,
+      "en": "It's very free.",
+      "zh": "很自由。",
+      "pinyin": "Hěn zì yóu。",
+      "vi": "Rất tự do."
+    },
+    {
+      "start": 344.14,
+      "end": 346.74,
+      "en": "I don't really like traveling with a lot of people.",
+      "zh": "我不太喜欢跟很多人去旅行。",
+      "pinyin": "Wǒ bú tài xǐ huan gēn hěn duō rén qù lǚ xíng。",
+      "vi": "Mình không thích đi du lịch với nhiều người lắm."
+    },
+    {
+      "start": 347.32,
+      "end": 348.22,
+      "en": "Too troublesome.",
+      "zh": "太麻烦了。",
+      "pinyin": "Tài má fán le。",
+      "vi": "Quá phiền phức."
+    },
+    {
+      "start": 349.28,
+      "end": 351.72,
+      "en": "What about going together as two people?",
+      "zh": "那两个人一起去呢？",
+      "pinyin": "Nà liǎng gè rén yì qǐ qù ne？",
+      "vi": "Thế còn hai người đi cùng nhau thì sao?"
+    },
+    {
+      "start": 352.32,
+      "end": 355.7,
+      "en": "Seems pretty good, huh.",
+      "zh": "好像还不错吧。",
+      "pinyin": "Hǎo xiàng hái bú cuò ba。",
+      "vi": "Nghe có vẻ cũng không tệ nhỉ."
+    },
+    {
+      "start": 366.66,
+      "end": 367.3,
+      "en": "What time is it?",
+      "zh": "几点了？",
+      "pinyin": "Jǐ diǎn le？",
+      "vi": "Mấy giờ rồi?"
+    },
+    {
+      "start": 369,
+      "end": 370.24,
+      "en": "It's already past eleven.",
+      "zh": "已经十一点多了。",
+      "pinyin": "Yǐ jīng shí yī diǎn duō le。",
+      "vi": "Đã hơn mười một giờ rồi."
+    },
+    {
+      "start": 371.06,
+      "end": 371.41,
+      "en": "Wow!",
+      "zh": "哇！",
+      "pinyin": "Wā！",
+      "vi": "Chà!"
+    },
+    {
+      "start": 372.08,
+      "end": 378.04,
+      "en": "It seems I didn't even realize—are you leaving already?",
+      "zh": "好像是我都没发现，你是不是要走了？",
+      "pinyin": "Hǎo xiàng shì wǒ dōu méi fā xiàn， nǐ shì bu shì yào zǒu le？",
+      "vi": "Hình như mình chẳng để ý, bạn sắp về rồi à?"
+    },
+    {
+      "start": 378.04,
+      "end": 382.5,
+      "en": "Yeah, it's already too late, I should get going.",
+      "zh": "对啊，已经太晚了，我该回去了。",
+      "pinyin": "Duì a， yǐ jīng tài wǎn le， wǒ gāi huí qù le。",
+      "vi": "Ừ, muộn quá rồi, mình phải về thôi."
+    },
+    {
+      "start": 384.2,
+      "end": 385.12,
+      "en": "Okay, how are you going to get back?",
+      "zh": "好，你要怎么回去？",
+      "pinyin": "Hǎo， nǐ yào zěn me huí qù？",
+      "vi": "Được, bạn định về bằng cách nào?"
+    },
+    {
+      "start": 386.62,
+      "end": 388.18,
+      "en": "I can just walk.",
+      "zh": "我走路就可以了。",
+      "pinyin": "Wǒ zǒu lù jiù kě yǐ le。",
+      "vi": "Mình đi bộ là được rồi."
+    },
+    {
+      "start": 388.52,
+      "end": 390.4,
+      "en": "Is your home nearby?",
+      "zh": "你家就在附近吗？",
+      "pinyin": "Nǐ jiā jiù zài fù jìn ma？",
+      "vi": "Nhà bạn ngay gần đây à?"
+    },
+    {
+      "start": 391.52,
+      "end": 392.3,
+      "en": "Yeah, it's right nearby.",
+      "zh": "嗯，就在附近。",
+      "pinyin": "Ǹg， jiù zài fù jìn。",
+      "vi": "Ừ, ngay gần đây."
+    },
+    {
+      "start": 397.58,
+      "end": 399.32,
+      "en": "I have to go, see you next time.",
+      "zh": "我要走了，下次见。",
+      "pinyin": "Wǒ yào zǒu le， xià cì jiàn。",
+      "vi": "Tôi phải đi đây, hẹn gặp lại lần sau."
+    },
+    {
+      "start": 399.92,
+      "end": 400.27,
+      "en": "Mm.",
+      "zh": "嗯。",
+      "pinyin": "Ǹg。",
+      "vi": "Ừ."
+    },
+    {
+      "start": 401.06,
+      "end": 401.48,
+      "en": "Next time",
+      "zh": "下次",
+      "pinyin": "Xià cì",
+      "vi": "Lần sau"
+    },
+    {
+      "start": 402.66,
+      "end": 403.3,
+      "en": "When is the next time?",
+      "zh": "下次是什么时候？",
+      "pinyin": "Xià cì shì shén me shí hòu？",
+      "vi": "Lần sau là khi nào?"
+    },
+    {
+      "start": 403.52,
+      "end": 404.52,
+      "en": "Hmm.",
+      "zh": "嗯。",
+      "pinyin": "Ǹg。",
+      "vi": "Ừm."
+    },
+    {
+      "start": 405.54,
+      "end": 406.14,
+      "en": "What do you think?",
+      "zh": "你说呢？",
+      "pinyin": "Nǐ shuō ne？",
+      "vi": "Bạn thấy sao?"
+    },
+    {
+      "start": 406.64,
+      "end": 406.99,
+      "en": "Hmm.",
+      "zh": "嗯。",
+      "pinyin": "Ǹg。",
+      "vi": "Ừm."
+    },
+    {
+      "start": 408.16,
+      "end": 408.52,
+      "en": "The day after tomorrow",
+      "zh": "后天",
+      "pinyin": "Hòu tiān",
+      "vi": "Ngày kia"
+    },
+    {
+      "start": 409.66,
+      "end": 411.5,
+      "en": "What day of the week is the day after tomorrow?",
+      "zh": "后天是星期几？",
+      "pinyin": "Hòu tiān shì xīng qī jǐ？",
+      "vi": "Ngày kia là thứ mấy?"
+    },
+    {
+      "start": 412.44,
+      "end": 413.32,
+      "en": "Monday",
+      "zh": "星期一",
+      "pinyin": "Xīng qī yī",
+      "vi": "Thứ Hai"
+    },
+    {
+      "start": 413.52,
+      "end": 414.52,
+      "en": "Right?",
+      "zh": "对不对？",
+      "pinyin": "Duì bu duì？",
+      "vi": "Đúng không?"
+    },
+    {
+      "start": 414.52,
+      "end": 415.52,
+      "en": "Yeah.",
+      "zh": "嗯。",
+      "pinyin": "Ǹg。",
+      "vi": "Ừ."
+    },
+    {
+      "start": 415.88,
+      "end": 416.42,
+      "en": "Monday",
+      "zh": "星期一",
+      "pinyin": "Xīng qī yī",
+      "vi": "Thứ Hai"
+    },
+    {
+      "start": 416.52,
+      "end": 417.52,
+      "en": "I'm a bit busy.",
+      "zh": "我有点忙。",
+      "pinyin": "Wǒ yǒu diǎn máng。",
+      "vi": "Tôi hơi bận."
+    },
+    {
+      "start": 417.54,
+      "end": 417.89,
+      "en": "Otherwise...",
+      "zh": "不然",
+      "pinyin": "Bù rán",
+      "vi": "Nếu không thì..."
+    },
+    {
+      "start": 418.68,
+      "end": 420.44,
+      "en": "Tuesday",
+      "zh": "星期二",
+      "pinyin": "Xīng qī èr",
+      "vi": "Thứ Ba"
+    },
+    {
+      "start": 421.2,
+      "end": 421.55,
+      "en": "Tuesday",
+      "zh": "星期二",
+      "pinyin": "Xīng qī èr",
+      "vi": "Thứ Ba"
+    },
+    {
+      "start": 421.55,
+      "end": 421.94,
+      "en": "Sure!",
+      "zh": "好啊！",
+      "pinyin": "Hǎo a！",
+      "vi": "Được thôi!"
+    },
+    {
+      "start": 422.64,
+      "end": 424.52,
+      "en": "Then let's make it Tuesday.",
+      "zh": "那我们约星期二。",
+      "pinyin": "Nà wǒ men yuē xīng qī èr。",
+      "vi": "Vậy chúng ta hẹn thứ Ba nhé."
+    },
+    {
+      "start": 424.56,
+      "end": 426.08,
+      "en": "Let's go shopping together.",
+      "zh": "一起去逛街。",
+      "pinyin": "Yì qǐ qù guàng jiē。",
+      "vi": "Cùng đi dạo phố nhé."
+    },
+    {
+      "start": 426.52,
+      "end": 427.52,
+      "en": "Is that okay?",
+      "zh": "好不好？",
+      "pinyin": "Hǎo bu hǎo？",
+      "vi": "Được không?"
+    },
+    {
+      "start": 427.52,
+      "end": 427.87,
+      "en": "Okay.",
+      "zh": "好。",
+      "pinyin": "Hǎo。",
+      "vi": "Được."
+    },
+    {
+      "start": 428.56,
+      "end": 430.18,
+      "en": "See you Tuesday, bye!",
+      "zh": "星期二见哦，拜拜！",
+      "pinyin": "Xīng qī èr jiàn ò， bài bài！",
+      "vi": "Thứ Ba gặp nhé, tạm biệt!"
+    },
+    {
+      "start": 441.02,
+      "end": 441.88,
+      "en": "Everyone has left.",
+      "zh": "大家都走了",
+      "pinyin": "Dà jiā dōu zǒu le",
+      "vi": "Mọi người đi hết rồi."
+    },
+    {
+      "start": 442.82,
+      "end": 444.34,
+      "en": "Now it's just the two of us again.",
+      "zh": "现在又是我们两个了",
+      "pinyin": "Xiàn zài yòu shì wǒ men liǎng gè le",
+      "vi": "Bây giờ lại chỉ còn hai đứa mình."
+    },
+    {
+      "start": 445.64,
+      "end": 446.02,
+      "en": "Yeah.",
+      "zh": "对啊",
+      "pinyin": "Duì a",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 447.62,
+      "end": 449,
+      "en": "Did you have fun today?",
+      "zh": "今天好玩吗",
+      "pinyin": "Jīn tiān hǎo wán ma",
+      "vi": "Hôm nay có vui không?"
+    },
+    {
+      "start": 450.22,
+      "end": 450.86,
+      "en": "It was a lot of fun.",
+      "zh": "很好玩",
+      "pinyin": "Hěn hǎo wán",
+      "vi": "Rất vui."
+    },
+    {
+      "start": 451.76,
+      "end": 453.14,
+      "en": "It's been a long time since I made new friends.",
+      "zh": "很久没认识新朋友",
+      "pinyin": "Hěn jiǔ méi rèn shi xīn péng yǒu",
+      "vi": "Lâu rồi không quen được bạn mới."
+    },
+    {
+      "start": 453.82,
+      "end": 454.94,
+      "en": "You mean...",
+      "zh": "你的意思是",
+      "pinyin": "Nǐ de yì sī shì",
+      "vi": "Ý cậu là..."
+    },
+    {
+      "start": 456,
+      "end": 458.74,
+      "en": "Getting to know new female friends.",
+      "zh": "认识新的女生朋友",
+      "pinyin": "Rèn shi xīn de nǚ shēng péng yǒu",
+      "vi": "Là quen những cô bạn nữ mới."
+    },
+    {
+      "start": 459.66,
+      "end": 461.22,
+      "en": "What are you talking about?",
+      "zh": "你在说什么?",
+      "pinyin": "Nǐ zài shuō shén me?",
+      "vi": "Cậu đang nói gì vậy?"
+    },
+    {
+      "start": 462.48,
+      "end": 464.86,
+      "en": "I mean that girl.",
+      "zh": "我是说那个女生",
+      "pinyin": "Wǒ shì shuō nà ge nǚ shēng",
+      "vi": "Ý tớ là cô gái đó."
+    },
+    {
+      "start": 465.72,
+      "end": 466.8,
+      "en": "Which girl?",
+      "zh": "哪个女生?",
+      "pinyin": "Nǎ gè nǚ shēng?",
+      "vi": "Cô gái nào?"
+    },
+    {
+      "start": 467.68,
+      "end": 471.06,
+      "en": "The girl in the yellow dress.",
+      "zh": "那个穿黄色裙子的女生",
+      "pinyin": "Nà ge chuān huáng sè qún zǐ de nǚ shēng",
+      "vi": "Cô gái mặc váy vàng ấy."
+    },
+    {
+      "start": 472.24,
+      "end": 472.96,
+      "en": "Who?",
+      "zh": "谁?",
+      "pinyin": "Shuí?",
+      "vi": "Ai?"
+    },
+    {
+      "start": 473.42,
+      "end": 476.1,
+      "en": "That really funny girl.",
+      "zh": "那个很好笑的女生",
+      "pinyin": "Nà ge hěn hǎo xiào de nǚ shēng",
+      "vi": "Cô gái rất buồn cười ấy."
+    },
+    {
+      "start": 477,
+      "end": 477.72,
+      "en": "Who?",
+      "zh": "谁?",
+      "pinyin": "Shuí?",
+      "vi": "Ai?"
+    },
+    {
+      "start": 478.6,
+      "end": 482.22,
+      "en": "The girl you were chatting with for a long time.",
+      "zh": "那个跟你聊天聊很久的女生",
+      "pinyin": "Nà ge gēn nǐ liáo tiān liáo hěn jiǔ de nǚ shēng",
+      "vi": "Cô gái mà cậu nói chuyện rất lâu ấy."
+    },
+    {
+      "start": 482.22,
+      "end": 482.6,
+      "en": "Oh, that girl.",
+      "zh": "女生啊",
+      "pinyin": "Nǚ shēng a",
+      "vi": "À, cô gái đó."
+    },
+    {
+      "start": 483.24,
+      "end": 483.68,
+      "en": "Oh.",
+      "zh": "哦",
+      "pinyin": "Ò",
+      "vi": "À."
+    },
+    {
+      "start": 484.82,
+      "end": 485.22,
+      "en": "That girl?",
+      "zh": "那个女生啊",
+      "pinyin": "Nà ge nǚ shēng a",
+      "vi": "Cô gái đó à?"
+    },
+    {
+      "start": 485.22,
+      "end": 485.57,
+      "en": "That's right.",
+      "zh": "对呀",
+      "pinyin": "Duì ya",
+      "vi": "Đúng rồi."
+    },
+    {
+      "start": 486.22,
+      "end": 486.57,
+      "en": "That girl!",
+      "zh": "那个女生啊",
+      "pinyin": "Nà ge nǚ shēng a",
+      "vi": "Cô gái đó á."
+    },
+    {
+      "start": 487.22,
+      "end": 487.72,
+      "en": "What else?",
+      "zh": "不然咧",
+      "pinyin": "Bù rán liē",
+      "vi": "Chứ sao."
+    },
+    {
+      "start": 491.08,
+      "end": 491.43,
+      "en": "I'm really glad to have met her.",
+      "zh": "很高兴认识她",
+      "pinyin": "Hěn gāo xìng rèn shi tā",
+      "vi": "Rất vui được quen cô ấy."
+    }
+  ]
+}

@@ -1,0 +1,381 @@
+{
+  "id": "WKG4jniqY4g",
+  "youtubeId": "WKG4jniqY4g",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe TIẾNG TRUNG thụ động【VIDEO #7】Giao thông và thời tiết",
+  "titleVi": "Giao thông và thời tiết",
+  "topic": "Luyện nghe Panda Studio",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 306,
+  "cues": [
+    {
+      "start": 0,
+      "end": 11.62,
+      "en": "Excuse me, how do I get to the Forbidden City?",
+      "zh": "请问，到故宫怎么走？",
+      "pinyin": "Qǐng wèn， dào gù gōng zěn me zǒu？",
+      "vi": "Xin hỏi, đến Cố Cung đi thế nào?"
+    },
+    {
+      "start": 15.6,
+      "end": 18.2,
+      "en": "Take bus No. 1.",
+      "zh": "乘一路公共汽车",
+      "pinyin": "Chéng yí lù gōng gòng qì chē",
+      "vi": "Đi xe buýt số 1."
+    },
+    {
+      "start": 22.46,
+      "end": 24.06,
+      "en": "Where do I get off?",
+      "zh": "到哪儿下车？",
+      "pinyin": "Dào nǎ ér xià chē？",
+      "vi": "Xuống xe ở đâu?"
+    },
+    {
+      "start": 28.06,
+      "end": 30.36,
+      "en": "Get off at Tian'anmen station.",
+      "zh": "到天安门站下车",
+      "pinyin": "Dào tiān ān mén zhàn xià chē",
+      "vi": "Xuống ở trạm Thiên An Môn."
+    },
+    {
+      "start": 34.44,
+      "end": 35.58,
+      "en": "What about taking the subway?",
+      "zh": "坐地铁呢？",
+      "pinyin": "Zuò dì tiě ne？",
+      "vi": "Còn đi tàu điện ngầm thì sao?"
+    },
+    {
+      "start": 39.52,
+      "end": 41.46,
+      "en": "Also get off at Tian'anmen station.",
+      "zh": "也到天安门站下",
+      "pinyin": "Yě dào tiān ān mén zhàn xià",
+      "vi": "Cũng xuống ở trạm Thiên An Môn."
+    },
+    {
+      "start": 45.5,
+      "end": 47.44,
+      "en": "What about taking a taxi?",
+      "zh": "坐出租车呢？",
+      "pinyin": "Zuò chū zū chē ne？",
+      "vi": "Còn đi taxi thì sao?"
+    },
+    {
+      "start": 51.3,
+      "end": 54.06,
+      "en": "That's also fine, just a bit more expensive.",
+      "zh": "也可以，就是贵一点",
+      "pinyin": "Yě kě yǐ， jiù shì guì yì diǎn",
+      "vi": "Cũng được, chỉ là hơi đắt thôi."
+    },
+    {
+      "start": 59.14,
+      "end": 62.46,
+      "en": "Excuse me, how do I get from Beijing to Xi'an?",
+      "zh": "请问，从北京到西安怎么走？",
+      "pinyin": "Qǐng wèn， cóng běi jīng dào xī ān zěn me zǒu？",
+      "vi": "Xin hỏi, từ Bắc Kinh đến Tây An đi thế nào?"
+    },
+    {
+      "start": 66.46,
+      "end": 68.02,
+      "en": "You can take a train.",
+      "zh": "你可以坐火车",
+      "pinyin": "Nǐ kě yǐ zuò huǒ chē",
+      "vi": "Bạn có thể đi tàu hỏa."
+    },
+    {
+      "start": 72.12,
+      "end": 85.26,
+      "en": "How long does it take by train? About six hours. How about by plane?",
+      "zh": "坐火车要多长时间？六个小时左右。坐飞机呢？",
+      "pinyin": "Zuò huǒ chē yào duō cháng shí jiān？ liù gè xiǎo shí zuǒ yòu。 zuò fēi jī ne？",
+      "vi": "Đi tàu hỏa mất bao lâu? Khoảng sáu tiếng. Còn đi máy bay thì sao?"
+    },
+    {
+      "start": 89.32,
+      "end": 91.7,
+      "en": "One hour and fifty minutes.",
+      "zh": "一个小时五十分钟",
+      "pinyin": "Yí gè xiǎo shí wǔ shí fēn zhōng",
+      "vi": "Một giờ năm mươi phút."
+    },
+    {
+      "start": 95.74,
+      "end": 97.36,
+      "en": "Is there a long-distance bus?",
+      "zh": "有长途汽车吗？",
+      "pinyin": "Yǒu cháng tú qì chē ma？",
+      "vi": "Có xe khách đường dài không?"
+    },
+    {
+      "start": 101.38,
+      "end": 105.68,
+      "en": "Yes, it takes ten hours to get to Xi'an.",
+      "zh": "有，十个小时才能到西安",
+      "pinyin": "Yǒu， shí gè xiǎo shí cái néng dào xī ān",
+      "vi": "Có, phải mất mười tiếng mới đến Tây An."
+    },
+    {
+      "start": 110.48,
+      "end": 112.48,
+      "en": "How is the weather today?",
+      "zh": "今天天气怎么样？",
+      "pinyin": "Jīn tiān tiān qì zěn me yàng？",
+      "vi": "Hôm nay thời tiết thế nào?"
+    },
+    {
+      "start": 116.42,
+      "end": 117.1,
+      "en": "Not very good.",
+      "zh": "不怎么样",
+      "pinyin": "Bù zěn me yàng",
+      "vi": "Không tốt lắm."
+    },
+    {
+      "start": 121.7,
+      "end": 122.88,
+      "en": "What does “not very good” mean?",
+      "zh": "什么是不怎么样？",
+      "pinyin": "Shén me shì bù zěn me yàng？",
+      "vi": "“Không tốt lắm” nghĩa là gì?"
+    },
+    {
+      "start": 126.8,
+      "end": 128.5,
+      "en": "The weather is a bit overcast.",
+      "zh": "天气有点阴",
+      "pinyin": "Tiān qì yǒu diǎn yīn",
+      "vi": "Trời hơi âm u."
+    },
+    {
+      "start": 132.42,
+      "end": 133.66,
+      "en": "Will it rain?",
+      "zh": "会下雨吗？",
+      "pinyin": "Huì xià yǔ ma？",
+      "vi": "Có mưa không?"
+    },
+    {
+      "start": 137.46,
+      "end": 138.12,
+      "en": "It's possible.",
+      "zh": "有可能",
+      "pinyin": "Yǒu kě néng",
+      "vi": "Có thể."
+    },
+    {
+      "start": 142.22,
+      "end": 143.88,
+      "en": "Let's check the weather forecast.",
+      "zh": "看看天气预报",
+      "pinyin": "Kàn kàn tiān qì yù bào",
+      "vi": "Xem dự báo thời tiết xem."
+    },
+    {
+      "start": 143.94,
+      "end": 148.04,
+      "en": "Okay.",
+      "zh": "好的",
+      "pinyin": "Hǎo de",
+      "vi": "Được."
+    },
+    {
+      "start": 152.92,
+      "end": 154.75,
+      "en": "What does the weather forecast say?",
+      "zh": "天气预报怎么说？",
+      "pinyin": "Tiān qì yù bào zěn me shuō？",
+      "vi": "Dự báo thời tiết nói gì?"
+    },
+    {
+      "start": 158.65,
+      "end": 161.51,
+      "en": "In the morning it will be overcast with showers.",
+      "zh": "上午阴天，有阵雨",
+      "pinyin": "Shàng wǔ yīn tiān， yǒu zhèn yǔ",
+      "vi": "Buổi sáng trời âm u, có mưa rào."
+    },
+    {
+      "start": 165.45,
+      "end": 166.23,
+      "en": "What about the afternoon?",
+      "zh": "下午呢？",
+      "pinyin": "Xià wǔ ne？",
+      "vi": "Còn buổi chiều thì sao?"
+    },
+    {
+      "start": 170.17,
+      "end": 173.27,
+      "en": "In the afternoon there will be moderate to heavy rain.",
+      "zh": "下午有中雨到大雨",
+      "pinyin": "Xià wǔ yǒu zhōng yǔ dào dà yǔ",
+      "vi": "Buổi chiều có mưa vừa đến mưa to."
+    },
+    {
+      "start": 177.15,
+      "end": 178.85,
+      "en": "When will the rain stop?",
+      "zh": "雨什么时候会停？",
+      "pinyin": "Yǔ shén me shí hòu huì tíng？",
+      "vi": "Mưa khi nào mới tạnh?"
+    },
+    {
+      "start": 182.67,
+      "end": 184.13,
+      "en": "Tonight.",
+      "zh": "今天夜里",
+      "pinyin": "Jīn tiān yè lǐ",
+      "vi": "Đêm nay."
+    },
+    {
+      "start": 188.05,
+      "end": 189.99,
+      "en": "Will the weather be good tomorrow?",
+      "zh": "明天天气好吗？",
+      "pinyin": "Míng tiān tiān qì hǎo ma？",
+      "vi": "Ngày mai thời tiết tốt không?"
+    },
+    {
+      "start": 194.19,
+      "end": 196.23,
+      "en": "Tomorrow will be sunny.",
+      "zh": "明天是晴天",
+      "pinyin": "Míng tiān shì qíng tiān",
+      "vi": "Ngày mai trời nắng."
+    },
+    {
+      "start": 202.15,
+      "end": 202.95,
+      "en": "Take a ride.",
+      "zh": "乘车",
+      "pinyin": "Chéng chē",
+      "vi": "Đi xe."
+    },
+    {
+      "start": 204.97,
+      "end": 205.61,
+      "en": "Take a ride.",
+      "zh": "乘车",
+      "pinyin": "Chéng chē",
+      "vi": "Đi xe."
+    },
+    {
+      "start": 209.77,
+      "end": 210.53,
+      "en": "Get off.",
+      "zh": "下车",
+      "pinyin": "Xià chē",
+      "vi": "Xuống xe."
+    },
+    {
+      "start": 212.55,
+      "end": 213.21,
+      "en": "Get off.",
+      "zh": "下车",
+      "pinyin": "Xià chē",
+      "vi": "Xuống xe."
+    },
+    {
+      "start": 217.11,
+      "end": 217.77,
+      "en": "Subway.",
+      "zh": "地铁",
+      "pinyin": "Dì tiě",
+      "vi": "Tàu điện ngầm."
+    },
+    {
+      "start": 220.09,
+      "end": 220.44,
+      "en": "subway",
+      "zh": "地铁",
+      "pinyin": "Dì tiě",
+      "vi": "tàu điện ngầm"
+    },
+    {
+      "start": 224.31,
+      "end": 232.77,
+      "en": "taxi, train",
+      "zh": "出租车、火车",
+      "pinyin": "Chū zū chē、 huǒ chē",
+      "vi": "taxi, tàu hỏa"
+    },
+    {
+      "start": 238.65,
+      "end": 240.77,
+      "en": "long-distance bus",
+      "zh": "长途汽车",
+      "pinyin": "Cháng tú qì chē",
+      "vi": "xe khách đường dài"
+    },
+    {
+      "start": 242.77,
+      "end": 243.87,
+      "en": "long-distance bus",
+      "zh": "长途汽车",
+      "pinyin": "Cháng tú qì chē",
+      "vi": "xe khách đường dài"
+    },
+    {
+      "start": 248.59,
+      "end": 249.65,
+      "en": "weather forecast",
+      "zh": "天气预报",
+      "pinyin": "Tiān qì yù bào",
+      "vi": "dự báo thời tiết"
+    },
+    {
+      "start": 251.75,
+      "end": 252.67,
+      "en": "weather forecast",
+      "zh": "天气预报",
+      "pinyin": "Tiān qì yù bào",
+      "vi": "dự báo thời tiết"
+    },
+    {
+      "start": 256.13,
+      "end": 259.93,
+      "en": "to rain",
+      "zh": "下雨",
+      "pinyin": "Xià yǔ",
+      "vi": "trời mưa"
+    },
+    {
+      "start": 263.75,
+      "end": 266.87,
+      "en": "cloudy/overcast day",
+      "zh": "阴天",
+      "pinyin": "Yīn tiān",
+      "vi": "trời nhiều mây"
+    },
+    {
+      "start": 270.75,
+      "end": 274.85,
+      "en": "rain shower",
+      "zh": "阵雨",
+      "pinyin": "Zhèn yǔ",
+      "vi": "mưa rào"
+    },
+    {
+      "start": 278.57,
+      "end": 282.75,
+      "en": "moderate rain",
+      "zh": "中雨",
+      "pinyin": "Zhōng yǔ",
+      "vi": "mưa vừa"
+    },
+    {
+      "start": 286.39,
+      "end": 290.53,
+      "en": "heavy rain",
+      "zh": "大雨",
+      "pinyin": "Dà yǔ",
+      "vi": "mưa to"
+    }
+  ]
+}

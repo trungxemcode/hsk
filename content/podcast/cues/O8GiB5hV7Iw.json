@@ -1,0 +1,61 @@
+{
+  "id": "O8GiB5hV7Iw",
+  "youtubeId": "O8GiB5hV7Iw",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Đây là thẻ khoá phòng",
+  "titleVi": "Đây là thẻ khóa phòng",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 52,
+  "cues": [
+    {
+      "start": 0.3,
+      "end": 1.4,
+      "en": "This is your room card.",
+      "zh": "这是您的房卡",
+      "pinyin": "Zhè shì nín de fáng kǎ",
+      "vi": "Đây là thẻ khóa phòng của ngài."
+    },
+    {
+      "start": 31.84,
+      "end": 32.24,
+      "en": "you (polite)",
+      "zh": "您",
+      "pinyin": "Nín",
+      "vi": "ngài (kính ngữ)"
+    },
+    {
+      "start": 35.08,
+      "end": 35.64,
+      "en": "room card",
+      "zh": "房卡",
+      "pinyin": "Fáng kǎ",
+      "vi": "thẻ phòng"
+    },
+    {
+      "start": 38.14,
+      "end": 38.86,
+      "en": "Thank you.",
+      "zh": "谢谢",
+      "pinyin": "Xiè xiè",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 41,
+      "end": 42,
+      "en": "room",
+      "zh": "房间",
+      "pinyin": "Fáng jiān",
+      "vi": "phòng"
+    },
+    {
+      "start": 44.36,
+      "end": 45.06,
+      "en": "OK.",
+      "zh": "好的",
+      "pinyin": "Hǎo de",
+      "vi": "Vâng."
+    }
+  ]
+}

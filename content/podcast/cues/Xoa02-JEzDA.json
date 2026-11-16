@@ -1,0 +1,109 @@
+{
+  "id": "Xoa02-JEzDA",
+  "youtubeId": "Xoa02-JEzDA",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Đây là phòng của ai ?",
+  "titleVi": "Đây là phòng của ai?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 49,
+  "cues": [
+    {
+      "start": 7.94,
+      "end": 9.9,
+      "en": "This is mine and my husband's.",
+      "zh": "这是我和我丈夫的",
+      "pinyin": "Zhè shì wǒ hé wǒ zhàng fu de",
+      "vi": "Đây là của tôi và chồng tôi."
+    },
+    {
+      "start": 10.54,
+      "end": 13.7,
+      "en": "The small room next door is my daughter's.",
+      "zh": "旁边那个小的房间是我女儿的",
+      "pinyin": "Páng biān nà ge xiǎo de fáng jiān shì wǒ nǚ ér de",
+      "vi": "Căn phòng nhỏ bên cạnh là của con gái tôi."
+    },
+    {
+      "start": 14.76,
+      "end": 16.68,
+      "en": "Your daughter's room is really beautiful.",
+      "zh": "你女儿的房间真漂亮",
+      "pinyin": "Nǐ nǚ ér de fáng jiān zhēn piào liang",
+      "vi": "Phòng của con gái bạn thật đẹp."
+    },
+    {
+      "start": 19.9,
+      "end": 20.25,
+      "en": "Yes.",
+      "zh": "是啊",
+      "pinyin": "Shì a",
+      "vi": "Ừ, đúng vậy."
+    },
+    {
+      "start": 21.02,
+      "end": 23.78,
+      "en": "Pink is my daughter's favorite color.",
+      "zh": "粉色是我女儿最喜欢的颜色",
+      "pinyin": "Fěn sè shì wǒ nǚ ér zuì xǐ huan de yán sè",
+      "vi": "Màu hồng là màu con gái tôi thích nhất."
+    },
+    {
+      "start": 25.64,
+      "end": 26.96,
+      "en": "Yes, I like this color even more.",
+      "zh": "对，我更喜欢这个颜色了",
+      "pinyin": "Duì， wǒ gèng xǐ huan zhè ge yán sè le",
+      "vi": "Đúng, tôi càng thích màu này hơn."
+    },
+    {
+      "start": 28.4,
+      "end": 29.18,
+      "en": "room",
+      "zh": "房间",
+      "pinyin": "Fáng jiān",
+      "vi": "phòng"
+    },
+    {
+      "start": 31.16,
+      "end": 31.52,
+      "en": "husband",
+      "zh": "丈夫",
+      "pinyin": "Zhàng fu",
+      "vi": "chồng"
+    },
+    {
+      "start": 33.76,
+      "end": 34.7,
+      "en": "beside",
+      "zh": "旁边",
+      "pinyin": "Páng biān",
+      "vi": "bên cạnh"
+    },
+    {
+      "start": 36.64,
+      "end": 37.08,
+      "en": "really",
+      "zh": "真",
+      "pinyin": "Zhēn",
+      "vi": "thật"
+    },
+    {
+      "start": 39.16,
+      "end": 40.02,
+      "en": "pink",
+      "zh": "粉色",
+      "pinyin": "Fěn sè",
+      "vi": "màu hồng"
+    },
+    {
+      "start": 42.08,
+      "end": 42.84,
+      "en": "color",
+      "zh": "颜色",
+      "pinyin": "Yán sè",
+      "vi": "màu sắc"
+    }
+  ]
+}

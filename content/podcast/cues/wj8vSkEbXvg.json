@@ -1,0 +1,637 @@
+{
+  "id": "wj8vSkEbXvg",
+  "youtubeId": "wj8vSkEbXvg",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe TIẾNG TRUNG HSK 1 - Trình độ sơ cấp | HSK Chinese Level 1",
+  "titleVi": "Luyện nghe tiếng Trung",
+  "topic": "Luyện nghe Panda Studio",
+  "level": "HSK 1+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 559,
+  "cues": [
+    {
+      "start": 19.06,
+      "end": 20.8,
+      "en": "There are five questions in total.",
+      "zh": "一共五个题",
+      "pinyin": "Yí gòng wǔ gè tí",
+      "vi": "Tổng cộng có năm câu."
+    },
+    {
+      "start": 21.56,
+      "end": 23.62,
+      "en": "You will hear each question twice.",
+      "zh": "每题听两次",
+      "pinyin": "Měi tí tīng liǎng cì",
+      "vi": "Bạn sẽ nghe mỗi câu hai lần."
+    },
+    {
+      "start": 24.9,
+      "end": 27.8,
+      "en": "Now let's start the first question.",
+      "zh": "现在开始第一题",
+      "pinyin": "Xiàn zài kāi shǐ dì yī tí",
+      "vi": "Bây giờ bắt đầu câu thứ nhất."
+    },
+    {
+      "start": 30.28,
+      "end": 32.62,
+      "en": "1. Speak Chinese.",
+      "zh": "1.说汉语。",
+      "pinyin": "1. shuō hàn yǔ。",
+      "vi": "1. Nói tiếng Trung."
+    },
+    {
+      "start": 34.34,
+      "end": 35.04,
+      "en": "Speak Chinese.",
+      "zh": "说汉语。",
+      "pinyin": "Shuō hàn yǔ。",
+      "vi": "Nói tiếng Trung."
+    },
+    {
+      "start": 43.3,
+      "end": 46.94,
+      "en": "2. On the table.",
+      "zh": "2.在桌子上。",
+      "pinyin": "2. zài zhuō zi shàng。",
+      "vi": "2. Ở trên bàn."
+    },
+    {
+      "start": 49.18,
+      "end": 50.68,
+      "en": "On the table.",
+      "zh": "在桌子上。",
+      "pinyin": "Zài zhuō zi shàng。",
+      "vi": "Ở trên bàn."
+    },
+    {
+      "start": 55.68,
+      "end": 59.54,
+      "en": "3. Some fruit.",
+      "zh": "3.一些水果。",
+      "pinyin": "3. yì xiē shuǐ guǒ。",
+      "vi": "3. Một ít trái cây."
+    },
+    {
+      "start": 62.1,
+      "end": 63.6,
+      "en": "Some fruit.",
+      "zh": "一些水果",
+      "pinyin": "Yì xiē shuǐ guǒ",
+      "vi": "Một ít trái cây."
+    },
+    {
+      "start": 65.36,
+      "end": 65.71,
+      "en": "Four.",
+      "zh": "四",
+      "pinyin": "Sì",
+      "vi": "Bốn."
+    },
+    {
+      "start": 66.34,
+      "end": 67.14,
+      "en": "Four yuan.",
+      "zh": "四块",
+      "pinyin": "Sì kuài",
+      "vi": "Bốn tệ."
+    },
+    {
+      "start": 69.42,
+      "end": 70.2,
+      "en": "Four yuan.",
+      "zh": "四块",
+      "pinyin": "Sì kuài",
+      "vi": "Bốn tệ."
+    },
+    {
+      "start": 78,
+      "end": 78.35,
+      "en": "Five.",
+      "zh": "五",
+      "pinyin": "Wǔ",
+      "vi": "Năm."
+    },
+    {
+      "start": 80.2,
+      "end": 81.92,
+      "en": "Mom's clothes.",
+      "zh": "妈妈的衣服",
+      "pinyin": "Mā ma de yī fu",
+      "vi": "Quần áo của mẹ."
+    },
+    {
+      "start": 83.96,
+      "end": 85.78,
+      "en": "Mom's clothes.",
+      "zh": "妈妈的衣服",
+      "pinyin": "Mā ma de yī fu",
+      "vi": "Quần áo của mẹ."
+    },
+    {
+      "start": 91.64,
+      "end": 92.7,
+      "en": "Part two.",
+      "zh": "第二部分",
+      "pinyin": "Dì èr bù fen",
+      "vi": "Phần thứ hai."
+    },
+    {
+      "start": 93.62,
+      "end": 95.48,
+      "en": "There are five questions in total.",
+      "zh": "一共五个题",
+      "pinyin": "Yí gòng wǔ gè tí",
+      "vi": "Tổng cộng có năm câu."
+    },
+    {
+      "start": 96.34,
+      "end": 98.42,
+      "en": "You will hear each question twice.",
+      "zh": "每题听两次",
+      "pinyin": "Měi tí tīng liǎng cì",
+      "vi": "Bạn sẽ nghe mỗi câu hai lần."
+    },
+    {
+      "start": 99.38,
+      "end": 102.24,
+      "en": "Now let's start question 6.",
+      "zh": "现在开始第六题",
+      "pinyin": "Xiàn zài kāi shǐ dì liù tí",
+      "vi": "Bây giờ bắt đầu câu thứ sáu."
+    },
+    {
+      "start": 104.26,
+      "end": 104.61,
+      "en": "Six.",
+      "zh": "六",
+      "pinyin": "Liù",
+      "vi": "Sáu."
+    },
+    {
+      "start": 105.2,
+      "end": 110.14,
+      "en": "Are all these Chinese characters written by you?",
+      "zh": "这些汉字都是你写的？",
+      "pinyin": "Zhè xiē hàn zì dōu shì nǐ xiě de？",
+      "vi": "Tất cả những chữ Hán này đều do bạn viết à?"
+    },
+    {
+      "start": 112.44,
+      "end": 116.5,
+      "en": "Are all these Chinese characters written by you?",
+      "zh": "这些汉字都是你写的？",
+      "pinyin": "Zhè xiē hàn zì dōu shì nǐ xiě de？",
+      "vi": "Tất cả những chữ Hán này đều do bạn viết à?"
+    },
+    {
+      "start": 123.72,
+      "end": 130.54,
+      "en": "7. How is that table?",
+      "zh": "7. 那个桌子怎么样？",
+      "pinyin": "7. nà ge zhuō zi zěn me yàng？",
+      "vi": "7. Cái bàn đó thế nào?"
+    },
+    {
+      "start": 135.42,
+      "end": 147.64,
+      "en": "8. This is the computer I bought yesterday. This is the computer I bought yesterday.",
+      "zh": "8. 这是我昨天买的电脑。这是我昨天买的电脑。",
+      "pinyin": "8. zhè shì wǒ zuó tiān mǎi de diàn nǎo。 zhè shì wǒ zuó tiān mǎi de diàn nǎo。",
+      "vi": "8. Đây là chiếc máy tính tôi đã mua hôm qua. Đây là chiếc máy tính tôi đã mua hôm qua."
+    },
+    {
+      "start": 152.82,
+      "end": 158.9,
+      "en": "9. What did you say? I can't hear you.",
+      "zh": "9. 你说什么？我听不见。",
+      "pinyin": "9. nǐ shuō shén me？ wǒ tīng bú jiàn。",
+      "vi": "9. Bạn nói gì? Tôi không nghe thấy."
+    },
+    {
+      "start": 161.32,
+      "end": 164.98,
+      "en": "What did you say? I can't hear you.",
+      "zh": "你说什么？我听不见。",
+      "pinyin": "Nǐ shuō shén me？ wǒ tīng bú jiàn。",
+      "vi": "Bạn nói gì? Tôi không nghe thấy."
+    },
+    {
+      "start": 169.36,
+      "end": 178,
+      "en": "10. Goodbye, classmates! See you tomorrow at eight.",
+      "zh": ".同学们，再见！我们明天八点见。",
+      "pinyin": ". tóng xué men， zài jiàn！ wǒ men míng tiān bā diǎn jiàn。",
+      "vi": "10. Tạm biệt các bạn! Hẹn gặp lại lúc tám giờ mai."
+    },
+    {
+      "start": 180.3,
+      "end": 186.72,
+      "en": "Goodbye, classmates! See you tomorrow at eight.",
+      "zh": "同学们，再见！我们明天八点见。",
+      "pinyin": "Tóng xué men， zài jiàn！ wǒ men míng tiān bā diǎn jiàn。",
+      "vi": "Tạm biệt các bạn! Hẹn gặp lại lúc tám giờ mai."
+    },
+    {
+      "start": 189.74,
+      "end": 197.16,
+      "en": "Part three, five questions in total. Each question is played twice.",
+      "zh": "第三部分，一共五个题，每题听两次。",
+      "pinyin": "Dì sān bù fen， yí gòng wǔ gè tí， měi tí tīng liǎng cì。",
+      "vi": "Phần thứ ba, tổng cộng có năm câu. Mỗi câu nghe hai lần."
+    },
+    {
+      "start": 198.4,
+      "end": 201.5,
+      "en": "Now let's begin Question 11.",
+      "zh": "现在开始第十一题。",
+      "pinyin": "Xiàn zài kāi shǐ dì shí yī tí。",
+      "vi": "Bây giờ bắt đầu câu 11."
+    },
+    {
+      "start": 204.72,
+      "end": 205.24,
+      "en": "Eleven.",
+      "zh": "十一",
+      "pinyin": "Shí yī",
+      "vi": "Mười một."
+    },
+    {
+      "start": 206.04,
+      "end": 208.06,
+      "en": "Who in your family can speak Chinese?",
+      "zh": "你们家谁会说汉语？",
+      "pinyin": "Nǐ men jiā shuí huì shuō hàn yǔ？",
+      "vi": "Ai trong gia đình bạn biết nói tiếng Trung?"
+    },
+    {
+      "start": 210.04,
+      "end": 212.14,
+      "en": "My mom can speak Chinese.",
+      "zh": "我妈妈会说汉语。",
+      "pinyin": "Wǒ mā ma huì shuō hàn yǔ。",
+      "vi": "Mẹ tôi biết nói tiếng Trung."
+    },
+    {
+      "start": 215.38,
+      "end": 217.68,
+      "en": "Who in your family can speak Chinese?",
+      "zh": "你们家谁会说汉语？",
+      "pinyin": "Nǐ men jiā shuí huì shuō hàn yǔ？",
+      "vi": "Ai trong gia đình bạn biết nói tiếng Trung?"
+    },
+    {
+      "start": 219.6,
+      "end": 221.8,
+      "en": "My mom can speak Chinese.",
+      "zh": "我妈妈会说汉语。",
+      "pinyin": "Wǒ mā ma huì shuō hàn yǔ。",
+      "vi": "Mẹ tôi biết nói tiếng Trung."
+    },
+    {
+      "start": 235.96,
+      "end": 238.52,
+      "en": "12. Can you cook Chinese food?",
+      "zh": ".你会做中国菜吗？",
+      "pinyin": ". nǐ huì zuò zhōng guó cài ma？",
+      "vi": "12. Bạn biết nấu món Trung Quốc không?"
+    },
+    {
+      "start": 239.96,
+      "end": 243.54,
+      "en": "I can't, but my good friend can.",
+      "zh": "我不会做，我的好朋友会做。",
+      "pinyin": "Wǒ bú huì zuò， wǒ de hǎo péng yǒu huì zuò。",
+      "vi": "Tôi không biết làm, nhưng bạn thân của tôi thì biết."
+    },
+    {
+      "start": 246.68,
+      "end": 248.08,
+      "en": "Can you cook Chinese food?",
+      "zh": "你会做中国菜吗？",
+      "pinyin": "Nǐ huì zuò zhōng guó cài ma？",
+      "vi": "Bạn biết nấu món Trung Quốc không?"
+    },
+    {
+      "start": 249.74,
+      "end": 253.04,
+      "en": "I can't, but my good friend can.",
+      "zh": "我不会做，我的好朋友会做。",
+      "pinyin": "Wǒ bú huì zuò， wǒ de hǎo péng yǒu huì zuò。",
+      "vi": "Tôi không biết làm, nhưng bạn thân của tôi thì biết."
+    },
+    {
+      "start": 266.9,
+      "end": 269.74,
+      "en": "13. How do you write this Chinese character?",
+      "zh": ".这个汉字怎么写？",
+      "pinyin": ". zhè ge hàn zì zěn me xiě？",
+      "vi": "13. Chữ Hán này viết như thế nào?"
+    },
+    {
+      "start": 270.92,
+      "end": 275.26,
+      "en": "Sorry, I can read it but I can't write it.",
+      "zh": "对不起，我会读，不会写。",
+      "pinyin": "Duì bù qǐ， wǒ huì dú， bú huì xiě。",
+      "vi": "Xin lỗi, tôi đọc được nhưng không viết được."
+    },
+    {
+      "start": 275.26,
+      "end": 279.6,
+      "en": "How do you write this Chinese character?",
+      "zh": "这个汉字怎么写？",
+      "pinyin": "Zhè ge hàn zì zěn me xiě？",
+      "vi": "Chữ Hán này viết như thế nào?"
+    },
+    {
+      "start": 279.6,
+      "end": 284.31,
+      "en": "Sorry, I can read it but I can't write it.",
+      "zh": "对不起，我会读，不会写。",
+      "pinyin": "Duì bù qǐ， wǒ huì dú， bú huì xiě。",
+      "vi": "Xin lỗi, tôi đọc được nhưng không viết được."
+    },
+    {
+      "start": 298.95,
+      "end": 299.53,
+      "en": "Fourteen.",
+      "zh": "十四",
+      "pinyin": "Shí sì",
+      "vi": "Mười bốn."
+    },
+    {
+      "start": 300.49,
+      "end": 301.81,
+      "en": "Is Chinese food delicious?",
+      "zh": "中国菜好吃吗？",
+      "pinyin": "Zhōng guó cài hǎo chī ma？",
+      "vi": "Món Trung Quốc có ngon không?"
+    },
+    {
+      "start": 302.93,
+      "end": 304.51,
+      "en": "Chinese food is very delicious.",
+      "zh": "中国菜很好吃。",
+      "pinyin": "Zhōng guó cài hěn hǎo chī。",
+      "vi": "Món Trung Quốc rất ngon."
+    },
+    {
+      "start": 307.81,
+      "end": 309.49,
+      "en": "Is Chinese food delicious?",
+      "zh": "中国菜好吃吗？",
+      "pinyin": "Zhōng guó cài hǎo chī ma？",
+      "vi": "Món Trung Quốc có ngon không?"
+    },
+    {
+      "start": 310.63,
+      "end": 312.19,
+      "en": "Chinese food is very delicious.",
+      "zh": "中国菜很好吃。",
+      "pinyin": "Zhōng guó cài hěn hǎo chī。",
+      "vi": "Món Trung Quốc rất ngon."
+    },
+    {
+      "start": 326.81,
+      "end": 328.87,
+      "en": "15. Who is David?",
+      "zh": ".谁是大卫？",
+      "pinyin": ". shuí shì dà wèi？",
+      "vi": "15. Ai là David?"
+    },
+    {
+      "start": 328.97,
+      "end": 333.45,
+      "en": "The person behind me is David.",
+      "zh": "我后面的那个人是大卫。",
+      "pinyin": "Wǒ hòu miàn de nà ge rén shì dà wèi。",
+      "vi": "Người đứng sau tôi là David."
+    },
+    {
+      "start": 336.75,
+      "end": 337.65,
+      "en": "Who is David?",
+      "zh": "谁是大卫?",
+      "pinyin": "Shuí shì dà wèi?",
+      "vi": "Ai là David?"
+    },
+    {
+      "start": 339.57,
+      "end": 342.17,
+      "en": "The person behind me is David.",
+      "zh": "我后面的那个人是大卫。",
+      "pinyin": "Wǒ hòu miàn de nà ge rén shì dà wèi。",
+      "vi": "Người đằng sau tôi là David."
+    },
+    {
+      "start": 356.61,
+      "end": 357.69,
+      "en": "Part 4",
+      "zh": "第四部分",
+      "pinyin": "Dì sì bù fen",
+      "vi": "Phần 4"
+    },
+    {
+      "start": 358.75,
+      "end": 363.77,
+      "en": "There are five questions in total; each question is heard twice.",
+      "zh": "一共五个题,每题听两次。",
+      "pinyin": "Yí gòng wǔ gè tí, měi tí tīng liǎng cì。",
+      "vi": "Tổng cộng năm câu, mỗi câu nghe hai lần."
+    },
+    {
+      "start": 365.41,
+      "end": 368.55,
+      "en": "Now let's start question 16.",
+      "zh": "现在开始第十六题。",
+      "pinyin": "Xiàn zài kāi shǐ dì shí liù tí。",
+      "vi": "Bây giờ bắt đầu câu 16."
+    },
+    {
+      "start": 371.03,
+      "end": 371.53,
+      "en": "Sixteen",
+      "zh": "十六",
+      "pinyin": "Shí liù",
+      "vi": "Mười sáu"
+    },
+    {
+      "start": 372.33,
+      "end": 376.33,
+      "en": "My mother can't write Chinese characters, but I can write Chinese characters.",
+      "zh": "我妈妈不会写汉字,我会写汉字。",
+      "pinyin": "Wǒ mā ma bú huì xiě hàn zì, wǒ huì xiě hàn zì。",
+      "vi": "Mẹ tôi không biết viết chữ Hán, tôi biết viết chữ Hán."
+    },
+    {
+      "start": 378.53,
+      "end": 380.19,
+      "en": "Who can write Chinese characters?",
+      "zh": "谁会写汉字?",
+      "pinyin": "Shuí huì xiě hàn zì?",
+      "vi": "Ai biết viết chữ Hán?"
+    },
+    {
+      "start": 383.37,
+      "end": 388.07,
+      "en": "My mother can't write Chinese characters, but I can write Chinese characters.",
+      "zh": "我妈妈不会写汉字,我会写汉字。",
+      "pinyin": "Wǒ mā ma bú huì xiě hàn zì, wǒ huì xiě hàn zì。",
+      "vi": "Mẹ tôi không biết viết chữ Hán, tôi biết viết chữ Hán."
+    },
+    {
+      "start": 390.35,
+      "end": 392.03,
+      "en": "Who can write Chinese characters?",
+      "zh": "谁会写汉字?",
+      "pinyin": "Shuí huì xiě hàn zì?",
+      "vi": "Ai biết viết chữ Hán?"
+    },
+    {
+      "start": 408.27,
+      "end": 414.67,
+      "en": "17. Mr. Wang goes to China on October 8th.",
+      "zh": ". 王先生十月八号去中国。",
+      "pinyin": ". wáng xiān shēng shí yuè bā hào qù zhōng guó。",
+      "vi": "17. Ông Vương ngày 8 tháng 10 đi Trung Quốc."
+    },
+    {
+      "start": 414.67,
+      "end": 422.91,
+      "en": "17. When does Mr. Wang go to China?",
+      "zh": ". 王先生哪天去中国?",
+      "pinyin": ". wáng xiān shēng nǎ tiān qù zhōng guó?",
+      "vi": "17. Ông Vương ngày nào đi Trung Quốc?"
+    },
+    {
+      "start": 422.91,
+      "end": 426.87,
+      "en": "Mr. Wang goes to China on October 8th.",
+      "zh": "王先生十月八号去中国。",
+      "pinyin": "Wáng xiān shēng shí yuè bā hào qù zhōng guó。",
+      "vi": "Ông Vương ngày 8 tháng 10 đi Trung Quốc."
+    },
+    {
+      "start": 429.13,
+      "end": 432.41,
+      "en": "When does Mr. Wang go to China?",
+      "zh": "王先生哪天去中国?",
+      "pinyin": "Wáng xiān shēng nǎ tiān qù zhōng guó?",
+      "vi": "Ông Vương ngày nào đi Trung Quốc?"
+    },
+    {
+      "start": 438.33,
+      "end": 438.89,
+      "en": "Eighteen",
+      "zh": "十八",
+      "pinyin": "Shí bā",
+      "vi": "Mười tám"
+    },
+    {
+      "start": 440.11,
+      "end": 444.27,
+      "en": "He currently lives at his friend's house.",
+      "zh": "他现在住在朋友家",
+      "pinyin": "Tā xiàn zài zhù zài péng yǒu jiā",
+      "vi": "Anh ấy hiện đang sống ở nhà bạn."
+    },
+    {
+      "start": 445.27,
+      "end": 448.15,
+      "en": "He will go home at noon tomorrow.",
+      "zh": "明天中午回家",
+      "pinyin": "Míng tiān zhōng wǔ huí jiā",
+      "vi": "Mai trưa về nhà."
+    },
+    {
+      "start": 450.41,
+      "end": 452.09,
+      "en": "Where has he gone?",
+      "zh": "他去哪儿了?",
+      "pinyin": "Tā qù nǎ ér le?",
+      "vi": "Anh ấy đã đi đâu rồi?"
+    },
+    {
+      "start": 454.33,
+      "end": 457.91,
+      "en": "He currently lives at his friend's house.",
+      "zh": "他现在住在朋友家",
+      "pinyin": "Tā xiàn zài zhù zài péng yǒu jiā",
+      "vi": "Anh ấy hiện đang sống ở nhà bạn."
+    },
+    {
+      "start": 458.91,
+      "end": 461.21,
+      "en": "He will go home at noon tomorrow.",
+      "zh": "明天中午回家",
+      "pinyin": "Míng tiān zhōng wǔ huí jiā",
+      "vi": "Mai trưa về nhà."
+    },
+    {
+      "start": 463.39,
+      "end": 465.11,
+      "en": "Where has he gone?",
+      "zh": "他去哪儿了?",
+      "pinyin": "Tā qù nǎ ér le?",
+      "vi": "Anh ấy đã đi đâu rồi?"
+    },
+    {
+      "start": 469.65,
+      "end": 474.45,
+      "en": "19. This is my kitten; it's under the chair.",
+      "zh": ". 这是我的小猫,在椅子下面。",
+      "pinyin": ". zhè shì wǒ de xiǎo māo, zài yǐ zi xià miàn。",
+      "vi": "19. Đây là con mèo nhỏ của tôi, nó ở dưới ghế."
+    },
+    {
+      "start": 476.57,
+      "end": 478.15,
+      "en": "Where is his cat?",
+      "zh": "他的猫在哪儿?",
+      "pinyin": "Tā de māo zài nǎ ér?",
+      "vi": "Con mèo của anh ấy ở đâu?"
+    },
+    {
+      "start": 481.75,
+      "end": 485.49,
+      "en": "This is my kitten; it's under the chair.",
+      "zh": "这是我的小猫,在椅子下面。",
+      "pinyin": "Zhè shì wǒ de xiǎo māo, zài yǐ zi xià miàn。",
+      "vi": "Đây là con mèo nhỏ của tôi, nó ở dưới ghế."
+    },
+    {
+      "start": 487.81,
+      "end": 489.37,
+      "en": "Where is his cat?",
+      "zh": "他的猫在哪儿?",
+      "pinyin": "Tā de māo zài nǎ ér?",
+      "vi": "Con mèo của anh ấy ở đâu?"
+    },
+    {
+      "start": 503.57,
+      "end": 510.63,
+      "en": "Mr. Wang is here; he's in the back.",
+      "zh": "王先生来了，他在后面呢。",
+      "pinyin": "Wáng xiān shēng lái le， tā zài hòu miàn ne。",
+      "vi": "Ông Vương đến rồi, ông ấy đang ở phía sau đấy."
+    },
+    {
+      "start": 512.91,
+      "end": 520.77,
+      "en": "Mr. Wang is here; he's in the back.",
+      "zh": "王先生来了，他在后面呢。",
+      "pinyin": "Wáng xiān shēng lái le， tā zài hòu miàn ne。",
+      "vi": "Ông Vương đến rồi, ông ấy đang ở phía sau đấy."
+    },
+    {
+      "start": 522.99,
+      "end": 524.67,
+      "en": "Mr. Wang is here; he's in the back.",
+      "zh": "王先生来了，他在后面呢。",
+      "pinyin": "Wáng xiān shēng lái le， tā zài hòu miàn ne。",
+      "vi": "Ông Vương đến rồi, ông ấy đang ở phía sau đấy."
+    }
+  ]
+}

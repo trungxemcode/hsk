@@ -1,0 +1,413 @@
+{
+  "id": "Ziahst453E0",
+  "youtubeId": "Ziahst453E0",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe hội thoại TIẾNG TRUNG #10 : Đi ăn nhà hàng",
+  "titleVi": "Đi ăn nhà hàng",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 120,
+  "cues": [
+    {
+      "start": 0.96,
+      "end": 4,
+      "en": "Waiter, could you recommend a few dishes for us?",
+      "zh": "服务员,能给我们推荐几个菜吗?",
+      "pinyin": "Fú wù yuán, néng gěi wǒ men tuī jiàn jǐ gè cài ma?",
+      "vi": "Nhân viên ơi, anh/chị giới thiệu cho chúng tôi vài món được không?"
+    },
+    {
+      "start": 4.92,
+      "end": 6.8,
+      "en": "What flavor of cuisine would you like?",
+      "zh": "您想吃什么风味的菜?",
+      "pinyin": "Nín xiǎng chī shén me fēng wèi de cài?",
+      "vi": "Quý khách muốn ăn món theo khẩu vị nào?"
+    },
+    {
+      "start": 7.66,
+      "end": 9.06,
+      "en": "Are there any lighter dishes?",
+      "zh": "有清淡一点的菜吗?",
+      "pinyin": "Yǒu qīng dàn yì diǎn de cài ma?",
+      "vi": "Có món nào thanh đạm hơn không?"
+    },
+    {
+      "start": 12.66,
+      "end": 14.28,
+      "en": "Then try this dish.",
+      "zh": "那您尝尝这个菜吧。",
+      "pinyin": "Nà nín cháng cháng zhè ge cài ba。",
+      "vi": "Vậy ngài thử món này xem."
+    },
+    {
+      "start": 15.5,
+      "end": 16.68,
+      "en": "What is this dish made of?",
+      "zh": "这个菜是什么做的?",
+      "pinyin": "Zhè ge cài shì shén me zuò de?",
+      "vi": "Món này được làm từ gì?"
+    },
+    {
+      "start": 17.62,
+      "end": 19.2,
+      "en": "It's made with greens and wood ear mushrooms.",
+      "zh": "油菜和木耳做的。",
+      "pinyin": "Yóu cài hé mù ěr zuò de。",
+      "vi": "Được làm từ rau cải và mộc nhĩ."
+    },
+    {
+      "start": 20.62,
+      "end": 22.92,
+      "en": "Waiter, what dish is that at that table?",
+      "zh": "服务员,那桌的菜是什么菜?",
+      "pinyin": "Fú wù yuán, nà zhuō de cài shì shén me cài?",
+      "vi": "Nhân viên ơi, món ở bàn kia là món gì?"
+    },
+    {
+      "start": 23.82,
+      "end": 24.72,
+      "en": "That's stir-fried shredded eel.",
+      "zh": "那是炒鳝丝。",
+      "pinyin": "Nà shì chǎo shàn sī。",
+      "vi": "Đó là món lươn xào sợi."
+    },
+    {
+      "start": 25.36,
+      "end": 26.08,
+      "en": "I'll have one of those too.",
+      "zh": "给我也来一个。",
+      "pinyin": "Gěi wǒ yě lái yí gè。",
+      "vi": "Cho tôi cũng một phần như vậy."
+    },
+    {
+      "start": 28.98,
+      "end": 29.74,
+      "en": "Anything else?",
+      "zh": "还要别的吗?",
+      "pinyin": "Hái yào bié de ma?",
+      "vi": "Còn cần gì khác không ạ?"
+    },
+    {
+      "start": 30.78,
+      "end": 31.96,
+      "en": "Add one mapo tofu.",
+      "zh": "再要一个麻婆豆腐。",
+      "pinyin": "Zài yào yí gè má pó dòu fu。",
+      "vi": "Thêm một phần đậu phụ mapo."
+    },
+    {
+      "start": 33.88,
+      "end": 35.18,
+      "en": "This dish is a bit spicy.",
+      "zh": "这个菜有点辣。",
+      "pinyin": "Zhè ge cài yǒu diǎn là。",
+      "vi": "Món này hơi cay."
+    },
+    {
+      "start": 35.54,
+      "end": 36.08,
+      "en": "Is that okay?",
+      "zh": "没关系吗?",
+      "pinyin": "Méi guān xì ma?",
+      "vi": "Không sao chứ?"
+    },
+    {
+      "start": 36.68,
+      "end": 37.16,
+      "en": "It's fine.",
+      "zh": "没关系。",
+      "pinyin": "Méi guān xì。",
+      "vi": "Không sao."
+    },
+    {
+      "start": 37.2,
+      "end": 38.68,
+      "en": "Can the dishes come faster?",
+      "zh": "菜能快点上吗?",
+      "pinyin": "Cài néng kuài diǎn shàng ma?",
+      "vi": "Món có thể lên nhanh được không?"
+    },
+    {
+      "start": 38.84,
+      "end": 39.4,
+      "en": "Okay.",
+      "zh": "好的。",
+      "pinyin": "Hǎo de。",
+      "vi": "Vâng ạ."
+    },
+    {
+      "start": 41.92,
+      "end": 43.2,
+      "en": "What's your signature dish here?",
+      "zh": "你们这儿的招牌菜是什么?",
+      "pinyin": "Nǐ men zhè ér de zhāo pái cài shì shén me?",
+      "vi": "Món đặc trưng của quán các bạn là gì?"
+    },
+    {
+      "start": 43.22,
+      "end": 46,
+      "en": "Our seafood here is very special.",
+      "zh": "我们这里的海鲜很有特色。",
+      "pinyin": "Wǒ men zhè lǐ de hǎi xiān hěn yǒu tè sè。",
+      "vi": "Hải sản ở đây rất đặc sắc."
+    },
+    {
+      "start": 46.54,
+      "end": 46.96,
+      "en": "Really?",
+      "zh": "是吗?",
+      "pinyin": "Shì ma?",
+      "vi": "Thật à?"
+    },
+    {
+      "start": 47.64,
+      "end": 48.88,
+      "en": "Then I'll have stir-fried prawns.",
+      "zh": "那要一个炒大虾。",
+      "pinyin": "Nà yào yí gè chǎo dà xiā。",
+      "vi": "Vậy lấy một phần tôm xào."
+    },
+    {
+      "start": 49.72,
+      "end": 50.56,
+      "en": "And a mandarin fish.",
+      "zh": "再要一条鳜鱼。",
+      "pinyin": "Zài yào yì tiáo jué yú。",
+      "vi": "Thêm một con cá quế nữa."
+    },
+    {
+      "start": 52.46,
+      "end": 53.48,
+      "en": "What would you like to drink?",
+      "zh": "饮料来点什么?",
+      "pinyin": "Yǐn liào lái diǎn shén me?",
+      "vi": "Đồ uống thì lấy gì?"
+    },
+    {
+      "start": 54.34,
+      "end": 54.69,
+      "en": "We're driving.",
+      "zh": "我们开车。",
+      "pinyin": "Wǒ men kāi chē。",
+      "vi": "Chúng tôi phải lái xe."
+    },
+    {
+      "start": 55.2,
+      "end": 55.88,
+      "en": "Just a pot of tea is fine.",
+      "zh": "来一壶茶就行。",
+      "pinyin": "Lái yì hú chá jiù xíng。",
+      "vi": "Chỉ cần một ấm trà là được."
+    },
+    {
+      "start": 55.96,
+      "end": 58.06,
+      "en": "Here is the menu.",
+      "zh": "这是菜单。",
+      "pinyin": "Zhè shì cài dān。",
+      "vi": "Đây là thực đơn."
+    },
+    {
+      "start": 58.38,
+      "end": 58.9,
+      "en": "Please order.",
+      "zh": "请点菜",
+      "pinyin": "Qǐng diǎn cài",
+      "vi": "Mời quý khách gọi món"
+    },
+    {
+      "start": 67.18,
+      "end": 68.26,
+      "en": "I'd like a Mapo tofu.",
+      "zh": "要一个麻婆豆腐",
+      "pinyin": "Yào yí gè má pó dòu fu",
+      "vi": "Cho tôi một phần đậu phụ Mapo."
+    },
+    {
+      "start": 68.3,
+      "end": 69.38,
+      "en": "And another fish.",
+      "zh": "再来一条鱼",
+      "pinyin": "Zài lái yì tiáo yú",
+      "vi": "Thêm một con cá nữa."
+    },
+    {
+      "start": 71.76,
+      "end": 72.8,
+      "en": "What would you like to drink?",
+      "zh": "你们喝点什么",
+      "pinyin": "Nǐ men hē diǎn shén me",
+      "vi": "Mọi người uống gì?"
+    },
+    {
+      "start": 73.38,
+      "end": 74.44,
+      "en": "First, four bottles of beer.",
+      "zh": "先要四瓶啤酒",
+      "pinyin": "Xiān yào sì píng pí jiǔ",
+      "vi": "Trước tiên cho bốn chai bia."
+    },
+    {
+      "start": 74.5,
+      "end": 79.8,
+      "en": "The dishes here are very distinctive.",
+      "zh": "你们这里的菜很有特色",
+      "pinyin": "Nǐ men zhè lǐ de cài hěn yǒu tè sè",
+      "vi": "Các món ăn ở đây rất đặc sắc."
+    },
+    {
+      "start": 80.24,
+      "end": 80.76,
+      "en": "It tastes good.",
+      "zh": "味道不错",
+      "pinyin": "Wèi dào bú cuò",
+      "vi": "Hương vị rất ngon."
+    },
+    {
+      "start": 81.62,
+      "end": 82.72,
+      "en": "Thank you. Please come again.",
+      "zh": "谢谢 欢迎再来",
+      "pinyin": "Xiè xiè huān yíng zài lái",
+      "vi": "Cảm ơn, mong quý khách ghé lại lần sau."
+    },
+    {
+      "start": 83.32,
+      "end": 84.44,
+      "en": "I'll definitely come when I treat someone next time.",
+      "zh": "下次请客时一定来",
+      "pinyin": "Xià cì qǐng kè shí yí dìng lái",
+      "vi": "Lần sau khi mời khách nhất định sẽ đến."
+    },
+    {
+      "start": 85.1,
+      "end": 86.18,
+      "en": "This is the business card of our restaurant.",
+      "zh": "这是本店的名片",
+      "pinyin": "Zhè shì běn diàn de míng piàn",
+      "vi": "Đây là danh thiếp của quán chúng tôi."
+    },
+    {
+      "start": 86.52,
+      "end": 87.56,
+      "en": "Please call to reserve in advance.",
+      "zh": "请先来电话预订",
+      "pinyin": "Qǐng xiān lái diàn huà yù dìng",
+      "vi": "Vui lòng gọi điện đặt trước."
+    },
+    {
+      "start": 88.02,
+      "end": 90.22,
+      "en": "Do you have branches in other cities?",
+      "zh": "你们在其他城市有分店吗",
+      "pinyin": "Nǐ men zài qí tā chéng shì yǒu fēn diàn ma",
+      "vi": "Các bạn có chi nhánh ở thành phố khác không?"
+    },
+    {
+      "start": 91.08,
+      "end": 93.5,
+      "en": "We just opened branches in Shanghai and Tianjin.",
+      "zh": "我们刚刚在上海天津开了分店",
+      "pinyin": "Wǒ men gāng gāng zài shàng hǎi tiān jīn kāi le fēn diàn",
+      "vi": "Chúng tôi vừa mở chi nhánh ở Thượng Hải và Thiên Tân."
+    },
+    {
+      "start": 95.28,
+      "end": 95.78,
+      "en": "Waiter!",
+      "zh": "服务员",
+      "pinyin": "Fú wù yuán",
+      "vi": "Phục vụ ơi!"
+    },
+    {
+      "start": 96.64,
+      "end": 97.26,
+      "en": "We're finished eating.",
+      "zh": "我们吃完了",
+      "pinyin": "Wǒ men chī wán le",
+      "vi": "Chúng tôi ăn xong rồi."
+    },
+    {
+      "start": 97.78,
+      "end": 98.13,
+      "en": "Check, please.",
+      "zh": "买单",
+      "pinyin": "Mǎi dān",
+      "vi": "Tính tiền."
+    },
+    {
+      "start": 101.42,
+      "end": 103.42,
+      "en": "Your total comes to 540 yuan.",
+      "zh": "您一共消费了元",
+      "pinyin": "Nín yí gòng xiāo fèi le yuán",
+      "vi": "Tổng cộng quý khách tiêu hết 540 tệ."
+    },
+    {
+      "start": 106.7,
+      "end": 108.24,
+      "en": "Here is 600 yuan.",
+      "zh": "这是元",
+      "pinyin": "Zhè shì yuán",
+      "vi": "Đây là 600 tệ."
+    },
+    {
+      "start": 108.88,
+      "end": 109.68,
+      "en": "Please give me a receipt/invoice.",
+      "zh": "请开一张发票",
+      "pinyin": "Qǐng kāi yì zhāng fā piào",
+      "vi": "Vui lòng xuất một hóa đơn."
+    },
+    {
+      "start": 110.68,
+      "end": 111.03,
+      "en": "Okay.",
+      "zh": "好",
+      "pinyin": "Hǎo",
+      "vi": "Vâng."
+    },
+    {
+      "start": 111.62,
+      "end": 113,
+      "en": "Would you like to pack the leftovers?",
+      "zh": "剩下的菜要打包吗",
+      "pinyin": "Shèng xià de cài yào dǎ bāo ma",
+      "vi": "Mấy món còn lại có cần đóng gói mang về không ạ?"
+    },
+    {
+      "start": 114.04,
+      "end": 115.12,
+      "en": "Please pack this dish.",
+      "zh": "这个菜打包",
+      "pinyin": "Zhè ge cài dǎ bāo",
+      "vi": "Món này đóng gói mang về."
+    },
+    {
+      "start": 115.72,
+      "end": 116.56,
+      "en": "No need for the rest.",
+      "zh": "别的就不要了",
+      "pinyin": "Bié de jiù bú yào le",
+      "vi": "Còn lại thì thôi."
+    },
+    {
+      "start": 116.66,
+      "end": 117.56,
+      "en": "Okay.",
+      "zh": "好",
+      "pinyin": "Hǎo",
+      "vi": "Được."
+    },
+    {
+      "start": 117.8,
+      "end": 118.58,
+      "en": "Please wait a moment.",
+      "zh": "请稍等一下",
+      "pinyin": "Qǐng shāo děng yí xià",
+      "vi": "Xin quý khách đợi một chút."
+    }
+  ]
+}

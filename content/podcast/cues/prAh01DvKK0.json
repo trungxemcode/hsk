@@ -1,0 +1,189 @@
+{
+  "id": "prAh01DvKK0",
+  "youtubeId": "prAh01DvKK0",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Tại sân bay",
+  "titleVi": "Hội thoại tại sân bay",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 140,
+  "cues": [
+    {
+      "start": 30,
+      "end": 31.02,
+      "en": "Please put your suitcase on here.",
+      "zh": "请把行李箱放上来。",
+      "pinyin": "Qǐng bǎ xíng li xiāng fàng shàng lái。",
+      "vi": "Vui lòng đặt vali lên đây."
+    },
+    {
+      "start": 33.28,
+      "end": 33.68,
+      "en": "OK.",
+      "zh": "好的。",
+      "pinyin": "Hǎo de。",
+      "vi": "Vâng."
+    },
+    {
+      "start": 35.7,
+      "end": 38.44,
+      "en": "Excuse me, your luggage is overweight.",
+      "zh": "不好意思，你的行李超重了。",
+      "pinyin": "Bù hǎo yì si， nǐ de xíng li chāo zhòng le。",
+      "vi": "Xin lỗi, hành lý của bạn đã vượt quá trọng lượng."
+    },
+    {
+      "start": 39.14,
+      "end": 40.44,
+      "en": "You need to pay an additional fee.",
+      "zh": "你需要额外交费。",
+      "pinyin": "Nǐ xū yào é wài jiāo fèi。",
+      "vi": "Bạn cần trả thêm phí."
+    },
+    {
+      "start": 42.36,
+      "end": 43.78,
+      "en": "How much?",
+      "zh": "多少钱？",
+      "pinyin": "Duō shǎo qián？",
+      "vi": "Bao nhiêu tiền?"
+    },
+    {
+      "start": 45.96,
+      "end": 46.9,
+      "en": "120 yuan.",
+      "zh": "元。",
+      "pinyin": "Yuán。",
+      "vi": "120 tệ."
+    },
+    {
+      "start": 49.28,
+      "end": 50.68,
+      "en": "This is your boarding pass.",
+      "zh": "这是你的登机牌。",
+      "pinyin": "Zhè shì nǐ de dēng jī pái。",
+      "vi": "Đây là thẻ lên máy bay của bạn."
+    },
+    {
+      "start": 51.48,
+      "end": 53.32,
+      "en": "Boarding time is 6:50.",
+      "zh": "登机时间是点。",
+      "pinyin": "Dēng jī shí jiān shì diǎn。",
+      "vi": "Giờ lên máy bay là 6 giờ 50."
+    },
+    {
+      "start": 53.32,
+      "end": 55.48,
+      "en": "The boarding gate is A3.",
+      "zh": "登机口在。",
+      "pinyin": "Dēng jī kǒu zài。",
+      "vi": "Cổng lên máy bay ở A3."
+    },
+    {
+      "start": 56.5,
+      "end": 59.28,
+      "en": "After arriving in Beijing, please claim your luggage at carousel 5.",
+      "zh": "到了北京之后，请在5号转盘取行李。",
+      "pinyin": "Dào le běi jīng zhī hòu， qǐng zài 5 hào zhuàn pán qǔ xíng li。",
+      "vi": "Sau khi đến Bắc Kinh, vui lòng lấy hành lý tại băng chuyền số 5."
+    },
+    {
+      "start": 62.08,
+      "end": 63.6,
+      "en": "Excuse me, where is the security check?",
+      "zh": "请问安检在哪里？",
+      "pinyin": "Qǐng wèn ān jiǎn zài nǎ lǐ？",
+      "vi": "Cho hỏi khu an ninh ở đâu?"
+    },
+    {
+      "start": 65.8,
+      "end": 78.47,
+      "en": "Security check is on the left, go straight, and it's directly opposite the airport terminal.",
+      "zh": "安检在左边，一直走，正对着机场航站楼。",
+      "pinyin": "Ān jiǎn zài zuǒ biān， yì zhí zǒu， zhèng duì zhe jī chǎng háng zhàn lóu。",
+      "vi": "Khu an ninh ở bên trái, đi thẳng, đối diện với nhà ga sân bay."
+    },
+    {
+      "start": 82.55,
+      "end": 83.09,
+      "en": "passport",
+      "zh": "护照",
+      "pinyin": "Hù zhào",
+      "vi": "hộ chiếu"
+    },
+    {
+      "start": 86.35,
+      "end": 87.99,
+      "en": "visa",
+      "zh": "签证",
+      "pinyin": "Qiān zhèng",
+      "vi": "visa"
+    },
+    {
+      "start": 91.91,
+      "end": 93.49,
+      "en": "window seat",
+      "zh": "靠窗座位",
+      "pinyin": "Kào chuāng zuò wèi",
+      "vi": "chỗ ngồi cạnh cửa sổ"
+    },
+    {
+      "start": 97.43,
+      "end": 98.49,
+      "en": "check in luggage",
+      "zh": "托运行李",
+      "pinyin": "Tuō yùn xíng li",
+      "vi": "ký gửi hành lý"
+    },
+    {
+      "start": 102.57,
+      "end": 103.45,
+      "en": "suitcase",
+      "zh": "行李箱",
+      "pinyin": "Xíng li xiāng",
+      "vi": "vali"
+    },
+    {
+      "start": 107.51,
+      "end": 108.19,
+      "en": "overweight",
+      "zh": "超重",
+      "pinyin": "Chāo zhòng",
+      "vi": "quá trọng lượng"
+    },
+    {
+      "start": 112.59,
+      "end": 113.69,
+      "en": "additional fee",
+      "zh": "额外交费",
+      "pinyin": "É wài jiāo fèi",
+      "vi": "phí trả thêm"
+    },
+    {
+      "start": 117.73,
+      "end": 118.53,
+      "en": "boarding pass",
+      "zh": "登机牌",
+      "pinyin": "Dēng jī pái",
+      "vi": "thẻ lên máy bay"
+    },
+    {
+      "start": 122.87,
+      "end": 123.79,
+      "en": "boarding gate",
+      "zh": "登机口",
+      "pinyin": "Dēng jī kǒu",
+      "vi": "cổng lên máy bay"
+    },
+    {
+      "start": 128.03,
+      "end": 128.63,
+      "en": "carousel",
+      "zh": "转盘",
+      "pinyin": "Zhuàn pán",
+      "vi": "băng chuyền hành lý"
+    }
+  ]
+}

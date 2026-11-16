@@ -1,0 +1,101 @@
+{
+  "id": "V5z4P5L2bKE",
+  "youtubeId": "V5z4P5L2bKE",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Bạn làm việc ở đâu ?",
+  "titleVi": "Bạn làm việc ở đâu?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 91,
+  "cues": [
+    {
+      "start": 0.64,
+      "end": 2.72,
+      "en": "Dialogue 1: Where do you work?",
+      "zh": "会话一：你工作在哪里？",
+      "pinyin": "Huì huà yī： nǐ gōng zuò zài nǎ lǐ？",
+      "vi": "Hội thoại 1: Bạn làm việc ở đâu?"
+    },
+    {
+      "start": 30.1,
+      "end": 35.6,
+      "en": "Wow, a doctor! That's a great job. I really envy you.",
+      "zh": "哇，医生啊，好工作，真羡慕。",
+      "pinyin": "Wā， yī shēng a， hǎo gōng zuò， zhēn xiàn mù。",
+      "vi": "Chà, bác sĩ à, công việc tốt quá, thật ngưỡng mộ."
+    },
+    {
+      "start": 38.22,
+      "end": 38.82,
+      "en": "Thanks.",
+      "zh": "谢谢啊。",
+      "pinyin": "Xiè xiè a。",
+      "vi": "Cảm ơn nhé."
+    },
+    {
+      "start": 41.44,
+      "end": 43.26,
+      "en": "Then where do your parents work?",
+      "zh": "那你父母在哪儿工作呢？",
+      "pinyin": "Nà nǐ fù mǔ zài nǎ ér gōng zuò ne？",
+      "vi": "Thế bố mẹ bạn làm việc ở đâu?"
+    },
+    {
+      "start": 45.64,
+      "end": 49.26,
+      "en": "My mom doesn't have a job, and my dad has already retired.",
+      "zh": "我妈妈没有工作，我爸爸已经退休了。",
+      "pinyin": "Wǒ mā ma méi yǒu gōng zuò， wǒ bà ba yǐ jīng tuì xiū le。",
+      "vi": "Mẹ tôi không đi làm, còn bố tôi đã nghỉ hưu rồi."
+    },
+    {
+      "start": 56.46,
+      "end": 57.08,
+      "en": "work; job",
+      "zh": "工作",
+      "pinyin": "Gōng zuò",
+      "vi": "làm việc; công việc"
+    },
+    {
+      "start": 61,
+      "end": 61.58,
+      "en": "hospital",
+      "zh": "医院",
+      "pinyin": "Yī yuàn",
+      "vi": "bệnh viện"
+    },
+    {
+      "start": 65.48,
+      "end": 66.28,
+      "en": "doctor",
+      "zh": "医生",
+      "pinyin": "Yī shēng",
+      "vi": "bác sĩ"
+    },
+    {
+      "start": 70.08,
+      "end": 72.32,
+      "en": "envy; admire",
+      "zh": "羡慕",
+      "pinyin": "Xiàn mù",
+      "vi": "ngưỡng mộ"
+    },
+    {
+      "start": 74.7,
+      "end": 75.94,
+      "en": "parents",
+      "zh": "父母",
+      "pinyin": "Fù mǔ",
+      "vi": "bố mẹ; cha mẹ"
+    },
+    {
+      "start": 79.36,
+      "end": 80.24,
+      "en": "retire; retired",
+      "zh": "退休",
+      "pinyin": "Tuì xiū",
+      "vi": "nghỉ hưu"
+    }
+  ]
+}

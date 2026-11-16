@@ -1,0 +1,677 @@
+{
+  "id": "FORJmILpV2U",
+  "youtubeId": "FORJmILpV2U",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe hội thoại TIẾNG TRUNG : Siêu thị ở đâu ? | 超市在哪里 ?",
+  "titleVi": "Siêu thị ở đâu?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 295,
+  "cues": [
+    {
+      "start": 17.04,
+      "end": 20.6,
+      "en": "Okay.",
+      "zh": "好。",
+      "pinyin": "Hǎo。",
+      "vi": "Được."
+    },
+    {
+      "start": 21.36,
+      "end": 21.71,
+      "en": "I'm going out.",
+      "zh": "我要出去。",
+      "pinyin": "Wǒ yào chū qù。",
+      "vi": "Tôi muốn đi ra ngoài."
+    },
+    {
+      "start": 22.94,
+      "end": 23.7,
+      "en": "Where do you want to go?",
+      "zh": "你要去哪里？",
+      "pinyin": "Nǐ yào qù nǎ lǐ？",
+      "vi": "Bạn muốn đi đâu?"
+    },
+    {
+      "start": 24.72,
+      "end": 25.66,
+      "en": "I want to go to the supermarket.",
+      "zh": "我要去超市。",
+      "pinyin": "Wǒ yào qù chāo shì。",
+      "vi": "Tôi muốn đi siêu thị."
+    },
+    {
+      "start": 26.68,
+      "end": 27.52,
+      "en": "What do you want to buy?",
+      "zh": "你想买什么？",
+      "pinyin": "Nǐ xiǎng mǎi shén me？",
+      "vi": "Bạn muốn mua gì?"
+    },
+    {
+      "start": 28.62,
+      "end": 29.48,
+      "en": "I want to buy food.",
+      "zh": "我想买吃的。",
+      "pinyin": "Wǒ xiǎng mǎi chī de。",
+      "vi": "Tôi muốn mua đồ ăn."
+    },
+    {
+      "start": 29.52,
+      "end": 34.32,
+      "en": "I want a bottle of cola.",
+      "zh": "我要一瓶可乐。",
+      "pinyin": "Wǒ yào yì píng kě lè。",
+      "vi": "Tôi muốn một chai Coca."
+    },
+    {
+      "start": 35.72,
+      "end": 37.44,
+      "en": "Big or small?",
+      "zh": "大的还是小的？",
+      "pinyin": "Dà de hái shì xiǎo de？",
+      "vi": "To hay nhỏ?"
+    },
+    {
+      "start": 38.94,
+      "end": 39.29,
+      "en": "Small.",
+      "zh": "小的。",
+      "pinyin": "Xiǎo de。",
+      "vi": "Nhỏ."
+    },
+    {
+      "start": 39.66,
+      "end": 42.46,
+      "en": "Okay, one small Coke. Bye-bye.",
+      "zh": "好，一瓶可乐，小的，拜拜。",
+      "pinyin": "Hǎo， yì píng kě lè， xiǎo de， bài bài。",
+      "vi": "Được, một chai Coca nhỏ. Tạm biệt."
+    },
+    {
+      "start": 42.5,
+      "end": 45.28,
+      "en": "I want two bottles.",
+      "zh": "我要两瓶。",
+      "pinyin": "Wǒ yào liǎng píng。",
+      "vi": "Tôi muốn hai chai."
+    },
+    {
+      "start": 46.02,
+      "end": 48.5,
+      "en": "Two bottles? Isn't one enough?",
+      "zh": "两瓶？一瓶不够吗？",
+      "pinyin": "Liǎng píng？ yì píng bú gòu ma？",
+      "vi": "Hai chai? Một chai không đủ à?"
+    },
+    {
+      "start": 49.4,
+      "end": 52.74,
+      "en": "Not enough. I want to drink a second bottle tonight.",
+      "zh": "不够，晚上我要喝第二瓶。",
+      "pinyin": "Bú gòu， wǎn shàng wǒ yào hē dì èr píng。",
+      "vi": "Không đủ, tối tôi muốn uống chai thứ hai."
+    },
+    {
+      "start": 52.78,
+      "end": 53.8,
+      "en": "All right.",
+      "zh": "好的。",
+      "pinyin": "Hǎo de。",
+      "vi": "Được thôi."
+    },
+    {
+      "start": 56.68,
+      "end": 57.98,
+      "en": "You want three bottles, right?",
+      "zh": "你要三瓶，是不是？",
+      "pinyin": "Nǐ yào sān píng， shì bu shì？",
+      "vi": "Bạn muốn ba chai, đúng không?"
+    },
+    {
+      "start": 58.86,
+      "end": 59.21,
+      "en": "No, no.",
+      "zh": "不是不是。",
+      "pinyin": "Bú shì bu shì。",
+      "vi": "Không phải, không phải."
+    },
+    {
+      "start": 59.94,
+      "end": 60.86,
+      "en": "I need to give you money.",
+      "zh": "我要给你钱。",
+      "pinyin": "Wǒ yào gěi nǐ qián。",
+      "vi": "Tôi phải đưa tiền cho bạn."
+    },
+    {
+      "start": 61.42,
+      "end": 62.82,
+      "en": "Oh, sure, sure.",
+      "zh": "喔，好啊，好啊。",
+      "pinyin": "Wō， hǎo a， hǎo a。",
+      "vi": "Ồ, được chứ, được chứ."
+    },
+    {
+      "start": 69.9,
+      "end": 80.17,
+      "en": "Don't you know where the supermarket is? It's very close, very close. Where is it? Don't you know where the supermarket is? It's very close, very close. Where is it? The supermarket is next to the post office.",
+      "zh": "超市在哪里你不知道吗？很近很近。在哪里？超市在哪里你不知道吗？很近很近。在哪里？超市在邮局旁边。",
+      "pinyin": "Chāo shì zài nǎ lǐ nǐ bù zhī dào ma？ hěn jìn hěn jìn。 zài nǎ lǐ？ chāo shì zài nǎ lǐ nǐ bù zhī dào ma？ hěn jìn hěn jìn。 zài nǎ lǐ？ chāo shì zài yóu jú páng biān。",
+      "vi": "Siêu thị ở đâu, bạn không biết sao? Rất gần, rất gần. Ở đâu? Siêu thị ở đâu, bạn không biết sao? Rất gần, rất gần. Ở đâu? Siêu thị ở ngay cạnh bưu điện."
+    },
+    {
+      "start": 81.03,
+      "end": 83.15,
+      "en": "The post office? Then where is the post office?",
+      "zh": "邮局？那邮局在哪里？",
+      "pinyin": "Yóu jú？ nà yóu jú zài nǎ lǐ？",
+      "vi": "Bưu điện? Vậy bưu điện ở đâu?"
+    },
+    {
+      "start": 83.93,
+      "end": 85.75,
+      "en": "The post office is across from the bank.",
+      "zh": "邮局在银行对面。",
+      "pinyin": "Yóu jú zài yín háng duì miàn。",
+      "vi": "Bưu điện ở đối diện ngân hàng."
+    },
+    {
+      "start": 87.83,
+      "end": 88.55,
+      "en": "And the bank?",
+      "zh": "银行呢？",
+      "pinyin": "Yín háng ne？",
+      "vi": "Còn ngân hàng thì?"
+    },
+    {
+      "start": 89.93,
+      "end": 90.83,
+      "en": "The bank is...",
+      "zh": "银行在……",
+      "pinyin": "Yín háng zài ……",
+      "vi": "Ngân hàng ở..."
+    },
+    {
+      "start": 90.83,
+      "end": 94.07,
+      "en": "Okay, okay. The supermarket is next to the post office.",
+      "zh": "好了好了，超市在邮局的旁边。",
+      "pinyin": "Hǎo le hǎo le， chāo shì zài yóu jú de páng biān。",
+      "vi": "Thôi được rồi, siêu thị ở cạnh bưu điện."
+    },
+    {
+      "start": 94.83,
+      "end": 96.25,
+      "en": "The post office is across from the bank.",
+      "zh": "邮局在银行的对面。",
+      "pinyin": "Yóu jú zài yín háng de duì miàn。",
+      "vi": "Bưu điện ở đối diện ngân hàng."
+    },
+    {
+      "start": 97.03,
+      "end": 97.83,
+      "en": "Okay, bye.",
+      "zh": "好，拜拜。",
+      "pinyin": "Hǎo， bài bài。",
+      "vi": "Được, tạm biệt."
+    },
+    {
+      "start": 118.33,
+      "end": 118.68,
+      "en": "Hi.",
+      "zh": "嗨。",
+      "pinyin": "Hēi。",
+      "vi": "Chào."
+    },
+    {
+      "start": 119.33,
+      "end": 120.33,
+      "en": "Hello.",
+      "zh": "你好。",
+      "pinyin": "Nǐ hǎo。",
+      "vi": "Xin chào."
+    },
+    {
+      "start": 120.33,
+      "end": 121.33,
+      "en": "Hello.",
+      "zh": "你好。",
+      "pinyin": "Nǐ hǎo。",
+      "vi": "Xin chào."
+    },
+    {
+      "start": 121.49,
+      "end": 122.33,
+      "en": "Excuse me, may I ask,",
+      "zh": "请问一下，",
+      "pinyin": "Qǐng wèn yí xià，",
+      "vi": "Cho tôi hỏi một chút,"
+    },
+    {
+      "start": 122.91,
+      "end": 124.69,
+      "en": "Is there a bank nearby?",
+      "zh": "附近有没有银行？",
+      "pinyin": "Fù jìn yǒu méi yǒu yín háng？",
+      "vi": "Ở gần đây có ngân hàng không?"
+    },
+    {
+      "start": 125.63,
+      "end": 125.98,
+      "en": "Mm.",
+      "zh": "嗯。",
+      "pinyin": "Ǹg。",
+      "vi": "Ừ."
+    },
+    {
+      "start": 126.53,
+      "end": 127.17,
+      "en": "Around here,",
+      "zh": "这里附近，",
+      "pinyin": "Zhè lǐ fù jìn，",
+      "vi": "Quanh đây,"
+    },
+    {
+      "start": 127.67,
+      "end": 128.33,
+      "en": "Bank.",
+      "zh": "银行。",
+      "pinyin": "Yín háng。",
+      "vi": "Ngân hàng."
+    },
+    {
+      "start": 129.35,
+      "end": 130.51,
+      "en": "Yes, it's up ahead.",
+      "zh": "有，在前面。",
+      "pinyin": "Yǒu， zài qián miàn。",
+      "vi": "Có, ở phía trước."
+    },
+    {
+      "start": 131.11,
+      "end": 132.09,
+      "en": "Oh, it's up ahead.",
+      "zh": "哦，在前面。",
+      "pinyin": "Ò， zài qián miàn。",
+      "vi": "Ồ, ở phía trước."
+    },
+    {
+      "start": 132.63,
+      "end": 133.13,
+      "en": "Great!",
+      "zh": "太好了！",
+      "pinyin": "Tài hǎo le！",
+      "vi": "Tuyệt quá!"
+    },
+    {
+      "start": 134.03,
+      "end": 136.07,
+      "en": "Is there a post office across the street?",
+      "zh": "对面是不是有邮局？",
+      "pinyin": "Duì miàn shì bu shì yǒu yóu jú？",
+      "vi": "Đối diện có bưu điện phải không?"
+    },
+    {
+      "start": 136.13,
+      "end": 137.29,
+      "en": "Post office.",
+      "zh": "邮局。",
+      "pinyin": "Yóu jú。",
+      "vi": "Bưu điện."
+    },
+    {
+      "start": 138.19,
+      "end": 138.54,
+      "en": "Mm.",
+      "zh": "嗯。",
+      "pinyin": "Ǹg。",
+      "vi": "Ừ."
+    },
+    {
+      "start": 138.54,
+      "end": 140.13,
+      "en": "I don't know.",
+      "zh": "我不知道。",
+      "pinyin": "Wǒ bù zhī dào。",
+      "vi": "Tôi không biết."
+    },
+    {
+      "start": 141.83,
+      "end": 143.56,
+      "en": "It's okay, thank you. You're welcome.",
+      "zh": "没关系，谢谢你。不客气。",
+      "pinyin": "Méi guān xì， xiè xiè nǐ。 bú kè qì。",
+      "vi": "Không sao, cảm ơn bạn. Không có gì."
+    },
+    {
+      "start": 152.66,
+      "end": 153.38,
+      "en": "Hi, miss.",
+      "zh": "嗨，小姐。",
+      "pinyin": "Hēi， xiǎo jiě。",
+      "vi": "Chào cô."
+    },
+    {
+      "start": 153.92,
+      "end": 154.66,
+      "en": "Um, hello.",
+      "zh": "嗯，你好。",
+      "pinyin": "Ǹg， nǐ hǎo。",
+      "vi": "Ừ, xin chào."
+    },
+    {
+      "start": 155.36,
+      "end": 157.66,
+      "en": "Excuse me, where is the bank?",
+      "zh": "请问一下，银行在哪里？",
+      "pinyin": "Qǐng wèn yí xià， yín háng zài nǎ lǐ？",
+      "vi": "Cho tôi hỏi một chút, ngân hàng ở đâu?"
+    },
+    {
+      "start": 159.06,
+      "end": 160.46,
+      "en": "The bank is over there.",
+      "zh": "银行在那里。",
+      "pinyin": "Yín háng zài nà lǐ。",
+      "vi": "Ngân hàng ở đằng kia."
+    },
+    {
+      "start": 161.18,
+      "end": 162.48,
+      "en": "Oh, no, no.",
+      "zh": "哦，不对不对。",
+      "pinyin": "Ò， bú duì bu duì。",
+      "vi": "Ồ, không đúng, không đúng."
+    },
+    {
+      "start": 163.04,
+      "end": 164.66,
+      "en": "I was asking where the post office is.",
+      "zh": "我是要问邮局在哪里。",
+      "pinyin": "Wǒ shì yào wèn yóu jú zài nǎ lǐ。",
+      "vi": "Tôi muốn hỏi bưu điện ở đâu."
+    },
+    {
+      "start": 166.16,
+      "end": 168.38,
+      "en": "Oh, sorry, I don't know.",
+      "zh": "哦，不好意思，我不知道。",
+      "pinyin": "Ò， bù hǎo yì si， wǒ bù zhī dào。",
+      "vi": "Ồ, xin lỗi, tôi không biết."
+    },
+    {
+      "start": 168.82,
+      "end": 170.56,
+      "en": "Then what about the supermarket?",
+      "zh": "那超市呢？",
+      "pinyin": "Nà chāo shì ne？",
+      "vi": "Vậy còn siêu thị thì sao?"
+    },
+    {
+      "start": 170.66,
+      "end": 175.66,
+      "en": "Sorry, I don't know any places. I'm not a local.",
+      "zh": "对不起，我什么地方都不知道，我不是本地人。",
+      "pinyin": "Duì bù qǐ， wǒ shén me dì fāng dōu bù zhī dào， wǒ bú shì běn dì rén。",
+      "vi": "Xin lỗi, tôi chẳng biết chỗ nào cả, tôi không phải người địa phương."
+    },
+    {
+      "start": 175.7,
+      "end": 178.36,
+      "en": "Oh, I see. Sorry.",
+      "zh": "哦，我了解了，不好意思。",
+      "pinyin": "Ò， wǒ liǎo jiě le， bù hǎo yì si。",
+      "vi": "Ồ, tôi hiểu rồi, xin lỗi nhé."
+    },
+    {
+      "start": 179.56,
+      "end": 180.6,
+      "en": "It's okay, no problem.",
+      "zh": "没关系，没关系。",
+      "pinyin": "Méi guān xì， méi guān xì。",
+      "vi": "Không sao, không sao."
+    },
+    {
+      "start": 180.66,
+      "end": 182.54,
+      "en": "Then I'll go take another look.",
+      "zh": "那，我再去看看。",
+      "pinyin": "Nà， wǒ zài qù kàn kàn。",
+      "vi": "Vậy tôi đi xem thêm vậy."
+    },
+    {
+      "start": 182.66,
+      "end": 183.48,
+      "en": "Okay, good luck!",
+      "zh": "好，加油。",
+      "pinyin": "Hǎo， jiā yóu。",
+      "vi": "Được, cố lên nhé."
+    },
+    {
+      "start": 197.94,
+      "end": 198.66,
+      "en": "Hello, uncle.",
+      "zh": "叔叔，你好。",
+      "pinyin": "Shū shu， nǐ hǎo。",
+      "vi": "Chú ơi, cháu chào chú."
+    },
+    {
+      "start": 198.76,
+      "end": 199.14,
+      "en": "Hello.",
+      "zh": "你好。",
+      "pinyin": "Nǐ hǎo。",
+      "vi": "Chào cháu."
+    },
+    {
+      "start": 199.66,
+      "end": 200.01,
+      "en": "Hello.",
+      "zh": "你好。",
+      "pinyin": "Nǐ hǎo。",
+      "vi": "Chào chú."
+    },
+    {
+      "start": 200.72,
+      "end": 203.82,
+      "en": "Excuse me, do you know where the nearest post office is?",
+      "zh": "请问一下，你知道最近的邮局在哪里吗？",
+      "pinyin": "Qǐng wèn yí xià， nǐ zhī dào zuì jìn de yóu jú zài nǎ lǐ ma？",
+      "vi": "Cho tôi hỏi, chú có biết bưu điện gần nhất ở đâu không?"
+    },
+    {
+      "start": 204.28,
+      "end": 205.86,
+      "en": "The nearest post office?",
+      "zh": "最近的邮局？",
+      "pinyin": "Zuì jìn de yóu jú？",
+      "vi": "Bưu điện gần nhất á?"
+    },
+    {
+      "start": 207.28,
+      "end": 209.02,
+      "en": "There's one up ahead, on the right.",
+      "zh": "前面有一家，在右边。",
+      "pinyin": "Qián miàn yǒu yì jiā， zài yòu biān。",
+      "vi": "Phía trước có một nhà, ở bên phải."
+    },
+    {
+      "start": 209.46,
+      "end": 210.72,
+      "en": "Oh, great!",
+      "zh": "哦，太好了！",
+      "pinyin": "Ò， tài hǎo le！",
+      "vi": "Ồ, tuyệt quá!"
+    },
+    {
+      "start": 211.58,
+      "end": 213.22,
+      "en": "What about a supermarket? Is there one?",
+      "zh": "那超市有吗？",
+      "pinyin": "Nà chāo shì yǒu ma？",
+      "vi": "Vậy còn siêu thị thì có không?"
+    },
+    {
+      "start": 213.62,
+      "end": 214.52,
+      "en": "A supermarket?",
+      "zh": "超市？",
+      "pinyin": "Chāo shì？",
+      "vi": "Siêu thị à?"
+    },
+    {
+      "start": 216.42,
+      "end": 226.37,
+      "en": "Yes, it's on the left. The supermarket is across from the post office. Oh, okay, I see. Is it far from here?",
+      "zh": "有，在左边。超市在邮局的对面。哦，好，我知道了。离这里很远吗？",
+      "pinyin": "Yǒu， zài zuǒ biān。 chāo shì zài yóu jú de duì miàn。 ò， hǎo， wǒ zhī dào le。 lí zhè lǐ hěn yuǎn ma？",
+      "vi": "Có, ở bên trái. Siêu thị đối diện với bưu điện. Ồ, được, tôi biết rồi. Cách đây xa không?"
+    },
+    {
+      "start": 227.19,
+      "end": 229.25,
+      "en": "Not far, it only takes three minutes.",
+      "zh": "不远，三分钟就到了。",
+      "pinyin": "Bù yuǎn， sān fēn zhōng jiù dào le。",
+      "vi": "Không xa, ba phút là đến."
+    },
+    {
+      "start": 230.83,
+      "end": 231.33,
+      "en": "Thank you.",
+      "zh": "谢谢。",
+      "pinyin": "Xiè xiè。",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 231.45,
+      "end": 231.8,
+      "en": "You're welcome.",
+      "zh": "不客气。",
+      "pinyin": "Bú kè qì。",
+      "vi": "Không có gì."
+    },
+    {
+      "start": 241.49,
+      "end": 242.13,
+      "en": "I'm back.",
+      "zh": "我回来了。",
+      "pinyin": "Wǒ huí lái le。",
+      "vi": "Tôi về rồi."
+    },
+    {
+      "start": 243.77,
+      "end": 245.95,
+      "en": "Wow, that took a while!",
+      "zh": "哇，好久啊！",
+      "pinyin": "Wā， hǎo jiǔ a！",
+      "vi": "Chà, lâu thật đấy!"
+    },
+    {
+      "start": 246.05,
+      "end": 248.69,
+      "en": "Yeah, the supermarket you mentioned isn't close.",
+      "zh": "对啊，你说的超市不近。",
+      "pinyin": "Duì a， nǐ shuō de chāo shì bú jìn。",
+      "vi": "Ừ, siêu thị bạn nói không gần đâu."
+    },
+    {
+      "start": 249.85,
+      "end": 250.31,
+      "en": "Is that so?",
+      "zh": "是吗？",
+      "pinyin": "Shì ma？",
+      "vi": "Vậy à?"
+    },
+    {
+      "start": 251.45,
+      "end": 254.41,
+      "en": "Right, there's no supermarket across from the bank.",
+      "zh": "对啊，银行对面没有超市。",
+      "pinyin": "Duì a， yín háng duì miàn méi yǒu chāo shì。",
+      "vi": "Đúng vậy, đối diện ngân hàng không có siêu thị."
+    },
+    {
+      "start": 255.41,
+      "end": 255.93,
+      "en": "Really?",
+      "zh": "是吗？",
+      "pinyin": "Shì ma？",
+      "vi": "Thật à?"
+    },
+    {
+      "start": 257.09,
+      "end": 257.59,
+      "en": "Right.",
+      "zh": "对啊。",
+      "pinyin": "Duì a。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 258.27,
+      "end": 259.57,
+      "en": "Oh, right, right, right.",
+      "zh": "喔，对对对。",
+      "pinyin": "Wō， duì duì duì。",
+      "vi": "Ồ, đúng đúng đúng."
+    },
+    {
+      "start": 260.69,
+      "end": 263.73,
+      "en": "The supermarket is across from the post office, right?",
+      "zh": "超市在邮局的对面，对不对？",
+      "pinyin": "Chāo shì zài yóu jú de duì miàn， duì bu duì？",
+      "vi": "Siêu thị ở đối diện bưu điện, đúng không?"
+    },
+    {
+      "start": 264.29,
+      "end": 268.35,
+      "en": "Right, the supermarket is far away, opposite the post office.",
+      "zh": "对，超市在很远，邮局对面。",
+      "pinyin": "Duì， chāo shì zài hěn yuǎn， yóu jú duì miàn。",
+      "vi": "Đúng, siêu thị ở rất xa, đối diện bưu điện."
+    },
+    {
+      "start": 270.25,
+      "end": 270.77,
+      "en": "Sorry.",
+      "zh": "不好意思。",
+      "pinyin": "Bù hǎo yì si。",
+      "vi": "Xin lỗi."
+    },
+    {
+      "start": 271.95,
+      "end": 273.11,
+      "en": "Okay, no problem.",
+      "zh": "好啦，没关系。",
+      "pinyin": "Hǎo lā， méi guān xì。",
+      "vi": "Thôi được rồi, không sao."
+    },
+    {
+      "start": 274.05,
+      "end": 276.03,
+      "en": "Then where's my Coke?",
+      "zh": "那我的可乐呢？",
+      "pinyin": "Nà wǒ de kě lè ne？",
+      "vi": "Vậy Coca của tôi đâu?"
+    },
+    {
+      "start": 278.13,
+      "end": 278.89,
+      "en": "Your Coke?",
+      "zh": "你的可乐？",
+      "pinyin": "Nǐ de kě lè？",
+      "vi": "Coca của bạn à?"
+    },
+    {
+      "start": 281.45,
+      "end": 282.05,
+      "en": "I've finished it.",
+      "zh": "喝完了。",
+      "pinyin": "Hē wán le。",
+      "vi": "Uống hết rồi."
+    }
+  ]
+}

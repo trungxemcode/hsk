@@ -1,0 +1,965 @@
+{
+  "id": "qMR55_l8YWM",
+  "youtubeId": "qMR55_l8YWM",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe hội thoại TIẾNG TRUNG : Đi ăn với bạn",
+  "titleVi": "Đi ăn với bạn",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 416,
+  "cues": [
+    {
+      "start": 13.78,
+      "end": 14.98,
+      "en": "Yeah, long time no see.",
+      "zh": "是啊，好久不见了。",
+      "pinyin": "Shì a， hǎo jiǔ bú jiàn le。",
+      "vi": "Ừ, lâu rồi không gặp."
+    },
+    {
+      "start": 15,
+      "end": 18.96,
+      "en": "You're much more handsome than the last time we met.",
+      "zh": "你比上次见面的时候帅多了。",
+      "pinyin": "Nǐ bǐ shàng cì jiàn miàn de shí hòu shuài duō le。",
+      "vi": "Bạn đẹp trai hơn nhiều so với lần gặp trước."
+    },
+    {
+      "start": 21.28,
+      "end": 22.82,
+      "en": "Oh, really? Thanks!",
+      "zh": "哦，是吗？谢谢啊！",
+      "pinyin": "Ò， shì ma？ xiè xiè a！",
+      "vi": "Ồ, thật à? Cảm ơn nhé!"
+    },
+    {
+      "start": 25.22,
+      "end": 26,
+      "en": "How have you been lately?",
+      "zh": "你最近怎么样？",
+      "pinyin": "Nǐ zuì jìn zěn me yàng？",
+      "vi": "Dạo này bạn thế nào?"
+    },
+    {
+      "start": 28.18,
+      "end": 29,
+      "en": "I've been doing great lately.",
+      "zh": "我最近很好。",
+      "pinyin": "Wǒ zuì jìn hěn hǎo。",
+      "vi": "Dạo này tôi rất tốt."
+    },
+    {
+      "start": 29.8,
+      "end": 30.15,
+      "en": "And you?",
+      "zh": "你呢？",
+      "pinyin": "Nǐ ne？",
+      "vi": "Còn bạn?"
+    },
+    {
+      "start": 31.64,
+      "end": 32,
+      "en": "I've been doing great too.",
+      "zh": "我最近也很好。",
+      "pinyin": "Wǒ zuì jìn yě hěn hǎo。",
+      "vi": "Dạo này tôi cũng rất tốt."
+    },
+    {
+      "start": 34.66,
+      "end": 37,
+      "en": "Well, we've both been doing well lately.",
+      "zh": "那，我们两个最近都很好。",
+      "pinyin": "Nà， wǒ men liǎng gè zuì jìn dōu hěn hǎo。",
+      "vi": "Vậy thì, cả hai chúng ta dạo này đều rất tốt."
+    },
+    {
+      "start": 37,
+      "end": 38,
+      "en": "Haha, great!",
+      "zh": "哈哈，太好了！",
+      "pinyin": "Hā hā， tài hǎo le！",
+      "vi": "Haha, tuyệt quá!"
+    },
+    {
+      "start": 40.62,
+      "end": 40.98,
+      "en": "Come on, let's sit down.",
+      "zh": "来，我们坐吧。",
+      "pinyin": "Lái， wǒ men zuò ba。",
+      "vi": "Nào, chúng ta ngồi đi."
+    },
+    {
+      "start": 45.44,
+      "end": 47,
+      "en": "Wang Ming, are you very busy lately?",
+      "zh": "王明，你最近很忙吗？",
+      "pinyin": "Wáng míng， nǐ zuì jìn hěn máng ma？",
+      "vi": "Vương Minh, dạo này bạn có bận không?"
+    },
+    {
+      "start": 48.84,
+      "end": 49.82,
+      "en": "Mm, very busy.",
+      "zh": "嗯，很忙。",
+      "pinyin": "Ǹg， hěn máng。",
+      "vi": "Ừ, rất bận."
+    },
+    {
+      "start": 50.48,
+      "end": 54,
+      "en": "I've been going to class every day lately—class, class, class.",
+      "zh": "我最近每天都在上课，上课，上课。",
+      "pinyin": "Wǒ zuì jìn měi tiān dōu zài shàng kè， shàng kè， shàng kè。",
+      "vi": "Dạo này ngày nào tôi cũng đi học, đi học, đi học."
+    },
+    {
+      "start": 56.12,
+      "end": 58,
+      "en": "Chinese is hard to learn, isn't it?",
+      "zh": "中文很难学吧？",
+      "pinyin": "Zhōng wén hěn nán xué ba？",
+      "vi": "Tiếng Trung khó học lắm nhỉ?"
+    },
+    {
+      "start": 60.52,
+      "end": 60.87,
+      "en": "Yeah.",
+      "zh": "是啊。",
+      "pinyin": "Shì a。",
+      "vi": "Ừ."
+    },
+    {
+      "start": 61.82,
+      "end": 62.96,
+      "en": "How about you?",
+      "zh": "那你呢？",
+      "pinyin": "Nà nǐ ne？",
+      "vi": "Còn bạn thì sao?"
+    },
+    {
+      "start": 63.5,
+      "end": 64.42,
+      "en": "Have you been very busy lately?",
+      "zh": "你最近很忙吗？",
+      "pinyin": "Nǐ zuì jìn hěn máng ma？",
+      "vi": "Dạo này bạn có bận lắm không?"
+    },
+    {
+      "start": 65.1,
+      "end": 65.45,
+      "en": "Mm.",
+      "zh": "嗯。",
+      "pinyin": "Ǹg。",
+      "vi": "Ừ."
+    },
+    {
+      "start": 65.8,
+      "end": 66.26,
+      "en": "Me too.",
+      "zh": "我也是。",
+      "pinyin": "Wǒ yě shì。",
+      "vi": "Tôi cũng vậy."
+    },
+    {
+      "start": 67.06,
+      "end": 69.04,
+      "en": "I've been going to work every day lately.",
+      "zh": "我最近每天都在上班。",
+      "pinyin": "Wǒ zuì jìn měi tiān dōu zài shàng bān。",
+      "vi": "Dạo này ngày nào tôi cũng đi làm."
+    },
+    {
+      "start": 69.6,
+      "end": 69.95,
+      "en": "Go to work.",
+      "zh": "上班。",
+      "pinyin": "Shàng bān。",
+      "vi": "Đi làm."
+    },
+    {
+      "start": 70.28,
+      "end": 70.63,
+      "en": "Go to work.",
+      "zh": "上班。",
+      "pinyin": "Shàng bān。",
+      "vi": "Đi làm."
+    },
+    {
+      "start": 73.1,
+      "end": 73.45,
+      "en": "Ah.",
+      "zh": "啊。",
+      "pinyin": "A。",
+      "vi": "À."
+    },
+    {
+      "start": 74.22,
+      "end": 74.7,
+      "en": "Go to class.",
+      "zh": "上课。",
+      "pinyin": "Shàng kè。",
+      "vi": "Đi học."
+    },
+    {
+      "start": 75.38,
+      "end": 75.73,
+      "en": "Go to work",
+      "zh": "上班",
+      "pinyin": "Shàng bān",
+      "vi": "Đi làm"
+    },
+    {
+      "start": 77.08,
+      "end": 78.82,
+      "en": "Then what else is there in life?",
+      "zh": "那生活还有什么",
+      "pinyin": "Nà shēng huó hái yǒu shén me",
+      "vi": "Vậy cuộc sống còn gì nữa?"
+    },
+    {
+      "start": 81.14,
+      "end": 81.74,
+      "en": "Eating!",
+      "zh": "吃饭啊",
+      "pinyin": "Chī fàn a",
+      "vi": "Ăn cơm chứ!"
+    },
+    {
+      "start": 82.16,
+      "end": 83.18,
+      "en": "Yeah",
+      "zh": "是啊",
+      "pinyin": "Shì a",
+      "vi": "Đúng vậy"
+    },
+    {
+      "start": 83.98,
+      "end": 85.2,
+      "en": "Let's go eat then",
+      "zh": "那我们吃饭吧",
+      "pinyin": "Nà wǒ men chī fàn ba",
+      "vi": "Vậy chúng ta đi ăn đi"
+    },
+    {
+      "start": 87.88,
+      "end": 88.23,
+      "en": "Wang Ming",
+      "zh": "王明",
+      "pinyin": "Wáng míng",
+      "vi": "Vương Minh"
+    },
+    {
+      "start": 88.86,
+      "end": 89.72,
+      "en": "What do you want to eat?",
+      "zh": "你想吃什么",
+      "pinyin": "Nǐ xiǎng chī shén me",
+      "vi": "Bạn muốn ăn gì?"
+    },
+    {
+      "start": 92.1,
+      "end": 92.92,
+      "en": "I want to eat",
+      "zh": "我想吃",
+      "pinyin": "Wǒ xiǎng chī",
+      "vi": "Tôi muốn ăn"
+    },
+    {
+      "start": 94.2,
+      "end": 95.12,
+      "en": "I want to eat",
+      "zh": "我想吃",
+      "pinyin": "Wǒ xiǎng chī",
+      "vi": "Tôi muốn ăn"
+    },
+    {
+      "start": 97.96,
+      "end": 108.8,
+      "en": "Do you want the beef one? Hmm, it's okay. How about chicken?",
+      "zh": "你想吃牛肉的吗？嗯，还好。那鸡肉呢？",
+      "pinyin": "Nǐ xiǎng chī niú ròu de ma？ ǹg， hái hǎo。 nà jī ròu ne？",
+      "vi": "Bạn muốn món bò không? Ừ, cũng được. Còn gà thì sao?"
+    },
+    {
+      "start": 109.56,
+      "end": 109.91,
+      "en": "Okay",
+      "zh": "可以",
+      "pinyin": "Kě yǐ",
+      "vi": "Được"
+    },
+    {
+      "start": 113.46,
+      "end": 114.02,
+      "en": "I still remember",
+      "zh": "我还记得",
+      "pinyin": "Wǒ hái jì de",
+      "vi": "Tôi vẫn nhớ"
+    },
+    {
+      "start": 115.08,
+      "end": 116.22,
+      "en": "You like eating spicy food",
+      "zh": "你喜欢吃辣",
+      "pinyin": "Nǐ xǐ huan chī là",
+      "vi": "Bạn thích ăn cay"
+    },
+    {
+      "start": 116.68,
+      "end": 117.03,
+      "en": "Right?",
+      "zh": "对吧",
+      "pinyin": "Duì ba",
+      "vi": "Đúng không?"
+    },
+    {
+      "start": 118.64,
+      "end": 118.99,
+      "en": "Spicy",
+      "zh": "辣",
+      "pinyin": "Là",
+      "vi": "Cay"
+    },
+    {
+      "start": 121.08,
+      "end": 121.54,
+      "en": "Right",
+      "zh": "对啊",
+      "pinyin": "Duì a",
+      "vi": "Đúng vậy"
+    },
+    {
+      "start": 122.06,
+      "end": 122.42,
+      "en": "I like it",
+      "zh": "我喜欢",
+      "pinyin": "Wǒ xǐ huan",
+      "vi": "Tôi thích"
+    },
+    {
+      "start": 123.04,
+      "end": 123.88,
+      "en": "The spicier, the better",
+      "zh": "越辣越好",
+      "pinyin": "Yuè là yuè hǎo",
+      "vi": "Càng cay càng tốt"
+    },
+    {
+      "start": 124.94,
+      "end": 126.72,
+      "en": "Are you sure?",
+      "zh": "你确定",
+      "pinyin": "Nǐ què dìng",
+      "vi": "Bạn chắc chứ?"
+    },
+    {
+      "start": 127.92,
+      "end": 128.34,
+      "en": "I'm sure",
+      "zh": "我确定",
+      "pinyin": "Wǒ què dìng",
+      "vi": "Tôi chắc chắn"
+    },
+    {
+      "start": 130.4,
+      "end": 132.1,
+      "en": "Okay, let's order then",
+      "zh": "好的，那我们点菜吧",
+      "pinyin": "Hǎo de， nà wǒ men diǎn cài ba",
+      "vi": "Được, vậy chúng ta gọi món đi"
+    },
+    {
+      "start": 135.44,
+      "end": 136.04,
+      "en": "Waiter!",
+      "zh": "服务员",
+      "pinyin": "Fú wù yuán",
+      "vi": "Phục vụ ơi!"
+    },
+    {
+      "start": 137.08,
+      "end": 137.8,
+      "en": "Coming, coming!",
+      "zh": "来了，来了",
+      "pinyin": "Lái le， lái le",
+      "vi": "Tới ngay, tới ngay!"
+    },
+    {
+      "start": 140.24,
+      "end": 141.3,
+      "en": "We'd like to order",
+      "zh": "我们要点菜",
+      "pinyin": "Wǒ men yào diǎn cài",
+      "vi": "Chúng tôi muốn gọi món"
+    },
+    {
+      "start": 142.66,
+      "end": 145.12,
+      "en": "Okay, what would you like to order?",
+      "zh": "好的，你想点什么菜？",
+      "pinyin": "Hǎo de， nǐ xiǎng diǎn shén me cài？",
+      "vi": "Vâng, bạn muốn gọi món gì?"
+    },
+    {
+      "start": 149.94,
+      "end": 150.66,
+      "en": "One serving, please",
+      "zh": "来一份",
+      "pinyin": "Lái yí fèn",
+      "vi": "Cho một phần"
+    },
+    {
+      "start": 151.68,
+      "end": 153.64,
+      "en": "a serving of spicy diced chicken",
+      "zh": "一份辣子鸡",
+      "pinyin": "Yí fèn là zǐ jī",
+      "vi": "một phần gà xào ớt cay"
+    },
+    {
+      "start": 155.46,
+      "end": 158.12,
+      "en": "Oh, our spicy diced chicken is a bit spicy.",
+      "zh": "哦，我们的辣子鸡有点辣哦。",
+      "pinyin": "Ò， wǒ men de là zǐ jī yǒu diǎn là ò。",
+      "vi": "Ồ, món gà xào ớt cay của chúng tôi hơi cay đấy."
+    },
+    {
+      "start": 158.46,
+      "end": 158.96,
+      "en": "Is that okay?",
+      "zh": "没问题吗？",
+      "pinyin": "Méi wèn tí ma？",
+      "vi": "Không sao chứ ạ?"
+    },
+    {
+      "start": 159.94,
+      "end": 160.29,
+      "en": "No problem.",
+      "zh": "没问题。",
+      "pinyin": "Méi wèn tí。",
+      "vi": "Không sao."
+    },
+    {
+      "start": 160.29,
+      "end": 160.8,
+      "en": "No problem.",
+      "zh": "没问题。",
+      "pinyin": "Méi wèn tí。",
+      "vi": "Không sao."
+    },
+    {
+      "start": 161.2,
+      "end": 162.2,
+      "en": "Okay.",
+      "zh": "好的。",
+      "pinyin": "Hǎo de。",
+      "vi": "Vâng ạ."
+    },
+    {
+      "start": 162.28,
+      "end": 170.6,
+      "en": "And also one serving of Chinese cabbage and one bowl of tofu soup.",
+      "zh": "还有一份白菜和一碗豆腐汤。",
+      "pinyin": "Hái yǒu yí fèn bái cài hé yì wǎn dòu fu tāng。",
+      "vi": "Còn một phần cải thảo và một bát canh đậu phụ nữa."
+    },
+    {
+      "start": 171.88,
+      "end": 178.84,
+      "en": "Okay, one spicy diced chicken, one Chinese cabbage, and one bowl of tofu soup.",
+      "zh": "好的，一份辣子鸡，一份白菜，还有一碗豆腐汤。",
+      "pinyin": "Hǎo de， yí fèn là zǐ jī， yí fèn bái cài， hái yǒu yì wǎn dòu fu tāng。",
+      "vi": "Vâng, một phần gà xào ớt cay, một phần cải thảo và một bát canh đậu phụ."
+    },
+    {
+      "start": 180.38,
+      "end": 182.06,
+      "en": "Do you also want rice?",
+      "zh": "你们还要米饭吗？",
+      "pinyin": "Nǐ men hái yào mǐ fàn ma？",
+      "vi": "Các bạn có cần thêm cơm không?"
+    },
+    {
+      "start": 183.56,
+      "end": 185.16,
+      "en": "Uh, yes.",
+      "zh": "嗯，好。",
+      "pinyin": "Ǹg， hǎo。",
+      "vi": "Ừ, được."
+    },
+    {
+      "start": 185.82,
+      "end": 187.5,
+      "en": "Two bowls of rice, please.",
+      "zh": "来两碗米饭。",
+      "pinyin": "Lái liǎng wǎn mǐ fàn。",
+      "vi": "Cho hai bát cơm."
+    },
+    {
+      "start": 189.1,
+      "end": 192.6,
+      "en": "So do you want fried rice or steamed rice?",
+      "zh": "那你要炒饭还是白饭？",
+      "pinyin": "Nà nǐ yào chǎo fàn hái shì bái fàn？",
+      "vi": "Vậy bạn ăn cơm chiên hay cơm trắng?"
+    },
+    {
+      "start": 194.14,
+      "end": 196.76,
+      "en": "I'll have fried rice.",
+      "zh": "我要炒饭。",
+      "pinyin": "Wǒ yào chǎo fàn。",
+      "vi": "Tôi ăn cơm chiên."
+    },
+    {
+      "start": 197.74,
+      "end": 198.64,
+      "en": "How about you?",
+      "zh": "你呢？",
+      "pinyin": "Nǐ ne？",
+      "vi": "Còn bạn?"
+    },
+    {
+      "start": 200.14,
+      "end": 201.32,
+      "en": "I'll have steamed rice.",
+      "zh": "我要白饭。",
+      "pinyin": "Wǒ yào bái fàn。",
+      "vi": "Tôi ăn cơm trắng."
+    },
+    {
+      "start": 203.32,
+      "end": 209.02,
+      "en": "Okay, got it: one fried rice and one steamed rice.",
+      "zh": "好的，我知道了，一碗炒饭，一碗白饭。",
+      "pinyin": "Hǎo de， wǒ zhī dào le， yì wǎn chǎo fàn， yì wǎn bái fàn。",
+      "vi": "Vâng, tôi biết rồi: một bát cơm chiên, một bát cơm trắng."
+    },
+    {
+      "start": 214.5,
+      "end": 218.14,
+      "en": "Oh, by the way, miss, can the rice and dishes be served together?",
+      "zh": "哦，对了，小姐，饭和菜可以一起上吗？",
+      "pinyin": "Ò， duì le， xiǎo jiě， fàn hé cài kě yǐ yì qǐ shàng ma？",
+      "vi": "À, đúng rồi, cô ơi, cơm và món ăn có thể dọn lên cùng lúc không ạ?"
+    },
+    {
+      "start": 219.62,
+      "end": 219.97,
+      "en": "Sure.",
+      "zh": "可以啊。",
+      "pinyin": "Kě yǐ a。",
+      "vi": "Được chứ ạ."
+    },
+    {
+      "start": 220.92,
+      "end": 221.27,
+      "en": "Thank you.",
+      "zh": "谢谢。",
+      "pinyin": "Xiè xiè。",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 230.16,
+      "end": 230.51,
+      "en": "Excuse me",
+      "zh": "不好意思",
+      "pinyin": "Bù hǎo yì si",
+      "vi": "Xin lỗi"
+    },
+    {
+      "start": 231.74,
+      "end": 232.09,
+      "en": "Miss",
+      "zh": "小姐",
+      "pinyin": "Xiǎo jiě",
+      "vi": "Cô ơi"
+    },
+    {
+      "start": 232.56,
+      "end": 233.82,
+      "en": "Do you have chopsticks?",
+      "zh": "你们有筷子吗？",
+      "pinyin": "Nǐ men yǒu kuài zi ma？",
+      "vi": "Các bạn có đũa không ạ?"
+    },
+    {
+      "start": 234.58,
+      "end": 236.34,
+      "en": "We don't have chopsticks here.",
+      "zh": "我们这边没有筷子。",
+      "pinyin": "Wǒ men zhè biān méi yǒu kuài zi。",
+      "vi": "Bên này không có đũa."
+    },
+    {
+      "start": 237.16,
+      "end": 237.51,
+      "en": "Oh.",
+      "zh": "哦。",
+      "pinyin": "Ò。",
+      "vi": "Ồ."
+    },
+    {
+      "start": 237.51,
+      "end": 238.34,
+      "en": "Excuse me.",
+      "zh": "不好意思",
+      "pinyin": "Bù hǎo yì si",
+      "vi": "Xin lỗi."
+    },
+    {
+      "start": 238.34,
+      "end": 239.26,
+      "en": "Wait a moment.",
+      "zh": "等一下",
+      "pinyin": "Děng yí xià",
+      "vi": "Chờ một chút."
+    },
+    {
+      "start": 239.7,
+      "end": 240.38,
+      "en": "I'll go get it for you.",
+      "zh": "我帮你去拿",
+      "pinyin": "Wǒ bāng nǐ qù ná",
+      "vi": "Để tôi đi lấy cho bạn."
+    },
+    {
+      "start": 241.22,
+      "end": 241.57,
+      "en": "Okay.",
+      "zh": "好的",
+      "pinyin": "Hǎo de",
+      "vi": "Được."
+    },
+    {
+      "start": 241.57,
+      "end": 242.18,
+      "en": "Thank you.",
+      "zh": "谢谢",
+      "pinyin": "Xiè xiè",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 246.04,
+      "end": 247.3,
+      "en": "Here are two pairs of chopsticks for you.",
+      "zh": "给你两双筷子",
+      "pinyin": "Gěi nǐ liǎng shuāng kuài zi",
+      "vi": "Đưa cho bạn hai đôi đũa."
+    },
+    {
+      "start": 248.02,
+      "end": 248.38,
+      "en": "Thank you.",
+      "zh": "谢谢",
+      "pinyin": "Xiè xiè",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 257.5,
+      "end": 258.66,
+      "en": "You even know how to use chopsticks!",
+      "zh": "还会用筷子啊",
+      "pinyin": "Hái huì yòng kuài zi a",
+      "vi": "Còn biết dùng đũa nữa à?"
+    },
+    {
+      "start": 259.14,
+      "end": 259.62,
+      "en": "Impressive!",
+      "zh": "真厉害",
+      "pinyin": "Zhēn lì hài",
+      "vi": "Giỏi thật!"
+    },
+    {
+      "start": 260.72,
+      "end": 261.3,
+      "en": "It's okay.",
+      "zh": "还好吧",
+      "pinyin": "Hái hǎo ba",
+      "vi": "Cũng tạm thôi."
+    },
+    {
+      "start": 262.3,
+      "end": 263.28,
+      "en": "If you didn't know how to use chopsticks,",
+      "zh": "不会用筷子",
+      "pinyin": "Bú huì yòng kuài zi",
+      "vi": "Nếu không biết dùng đũa,"
+    },
+    {
+      "start": 263.86,
+      "end": 264.86,
+      "en": "then wouldn't you starve to death?",
+      "zh": "不就饿死了吗",
+      "pinyin": "Bú jiù è sǐ le ma",
+      "vi": "thì chẳng phải sẽ chết đói sao?"
+    },
+    {
+      "start": 265.9,
+      "end": 268.56,
+      "en": "You can also use hand gestures.",
+      "zh": "也可以用手势啊",
+      "pinyin": "Yě kě yǐ yòng shǒu shì a",
+      "vi": "Cũng có thể ra hiệu bằng tay mà."
+    },
+    {
+      "start": 275.78,
+      "end": 276.28,
+      "en": "Please enjoy your meal.",
+      "zh": "请慢用",
+      "pinyin": "Qǐng màn yòng",
+      "vi": "Xin mời dùng."
+    },
+    {
+      "start": 276.34,
+      "end": 277.26,
+      "en": "Thank you.",
+      "zh": "谢谢",
+      "pinyin": "Xiè xiè",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 282.2,
+      "end": 285.22,
+      "en": "Guangming, how's the taste?",
+      "zh": "光明，你觉得味道怎么样？",
+      "pinyin": "Guāng míng， nǐ jué de wèi dào zěn me yàng？",
+      "vi": "Quang Minh, bạn thấy hương vị thế nào?"
+    },
+    {
+      "start": 287.34,
+      "end": 292.04,
+      "en": "I think the flavor is very good, but it's very spicy.",
+      "zh": "我觉得味道很不错，可是很辣",
+      "pinyin": "Wǒ jué de wèi dào hěn bú cuò， kě shì hěn là",
+      "vi": "Tôi thấy hương vị rất ngon, nhưng cay quá."
+    },
+    {
+      "start": 293.6,
+      "end": 295.84,
+      "en": "Haha, yeah, it's really spicy.",
+      "zh": "哈哈，对呀，很辣",
+      "pinyin": "Hā hā， duì ya， hěn là",
+      "vi": "Ha ha, đúng vậy, cay thật."
+    },
+    {
+      "start": 297.58,
+      "end": 302.1,
+      "en": "Mm, it's really spicy, but it's delicious. I like it.",
+      "zh": "嗯，真辣，不过很好吃，我喜欢",
+      "pinyin": "Ǹg， zhēn là， bú guò hěn hǎo chī， wǒ xǐ huan",
+      "vi": "Ừ, cay thật, nhưng ngon lắm, tôi thích."
+    },
+    {
+      "start": 303.54,
+      "end": 305.22,
+      "en": "Mm, I like it too.",
+      "zh": "嗯，我也喜欢",
+      "pinyin": "Ǹg， wǒ yě xǐ huan",
+      "vi": "Ừ, tôi cũng thích."
+    },
+    {
+      "start": 305.22,
+      "end": 305.57,
+      "en": "I like it.",
+      "zh": "我喜欢",
+      "pinyin": "Wǒ xǐ huan",
+      "vi": "Tôi thích."
+    },
+    {
+      "start": 310.68,
+      "end": 319.74,
+      "en": "Cheers, cheers! Wang Ming, are you full?",
+      "zh": "干杯，干杯！王明，你吃饱了吗？",
+      "pinyin": "Gān bēi， gān bēi！ wáng míng， nǐ chī bǎo le ma？",
+      "vi": "Cạn ly, cạn ly! Vương Minh, bạn ăn no chưa?"
+    },
+    {
+      "start": 321.62,
+      "end": 322.94,
+      "en": "Yeah, I'm full.",
+      "zh": "嗯，我吃饱了",
+      "pinyin": "Ǹg， wǒ chī bǎo le",
+      "vi": "Ừ, tôi no rồi."
+    },
+    {
+      "start": 323.76,
+      "end": 324.11,
+      "en": "How about you?",
+      "zh": "你呢？",
+      "pinyin": "Nǐ ne？",
+      "vi": "Còn bạn thì sao?"
+    },
+    {
+      "start": 325.02,
+      "end": 326.58,
+      "en": "Me too, very full.",
+      "zh": "我也是，非常饱",
+      "pinyin": "Wǒ yě shì， fēi cháng bǎo",
+      "vi": "Tôi cũng vậy, no lắm rồi."
+    },
+    {
+      "start": 329.8,
+      "end": 330.74,
+      "en": "Okay, let's go.",
+      "zh": "好，我们走吧",
+      "pinyin": "Hǎo， wǒ men zǒu ba",
+      "vi": "Được, chúng ta đi thôi."
+    },
+    {
+      "start": 331.6,
+      "end": 332.26,
+      "en": "Okay, let's go.",
+      "zh": "好，走吧",
+      "pinyin": "Hǎo， zǒu ba",
+      "vi": "Được, đi thôi."
+    },
+    {
+      "start": 333.36,
+      "end": 336.1,
+      "en": "Miss, we'd like to pay the bill.",
+      "zh": "小姐，我们要买单",
+      "pinyin": "Xiǎo jiě， wǒ men yào mǎi dān",
+      "vi": "Chị ơi, chúng tôi muốn tính tiền."
+    },
+    {
+      "start": 337.54,
+      "end": 337.89,
+      "en": "Alright.",
+      "zh": "好的",
+      "pinyin": "Hǎo de",
+      "vi": "Vâng."
+    },
+    {
+      "start": 337.89,
+      "end": 339.04,
+      "en": "Thank you.",
+      "zh": "谢谢",
+      "pinyin": "Xiè xiè",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 341.16,
+      "end": 341.64,
+      "en": "Hey, Li.",
+      "zh": "嘿，李",
+      "pinyin": "Hēi， lǐ",
+      "vi": "Này, Lý."
+    },
+    {
+      "start": 341.68,
+      "end": 344.24,
+      "en": "Today it's my treat.",
+      "zh": "今天我请客",
+      "pinyin": "Jīn tiān wǒ qǐng kè",
+      "vi": "Hôm nay tôi mời."
+    },
+    {
+      "start": 345.4,
+      "end": 347.28,
+      "en": "No need, you're too polite.",
+      "zh": "不用吧，你太客气了",
+      "pinyin": "Bú yòng ba， nǐ tài kè qì le",
+      "vi": "Không cần đâu, bạn khách sáo quá."
+    },
+    {
+      "start": 348.6,
+      "end": 349.4,
+      "en": "No, no.",
+      "zh": "不会，不会",
+      "pinyin": "Bú huì， bú huì",
+      "vi": "Không có, không có."
+    },
+    {
+      "start": 350.08,
+      "end": 352.3,
+      "en": "This time I'll treat, it's fine.",
+      "zh": "这次我请客，没关系",
+      "pinyin": "Zhè cì wǒ qǐng kè， méi guān xì",
+      "vi": "Lần này tôi mời, không sao."
+    },
+    {
+      "start": 354.32,
+      "end": 356.32,
+      "en": "Alright, then next time I'll treat.",
+      "zh": "好吧，那下次我请",
+      "pinyin": "Hǎo ba， nà xià cì wǒ qǐng",
+      "vi": "Thôi được, vậy lần sau tôi mời."
+    },
+    {
+      "start": 357.82,
+      "end": 358.56,
+      "en": "Okay, okay.",
+      "zh": "好，好",
+      "pinyin": "Hǎo， hǎo",
+      "vi": "Được, được."
+    },
+    {
+      "start": 371.34,
+      "end": 373.82,
+      "en": "Friend, I'm very happy chatting with you today.",
+      "zh": "朋友，今天跟你聊天很开心",
+      "pinyin": "Péng yǒu， jīn tiān gēn nǐ liáo tiān hěn kāi xīn",
+      "vi": "Bạn à, hôm nay trò chuyện với bạn rất vui."
+    },
+    {
+      "start": 374.24,
+      "end": 376.1,
+      "en": "Me too, it's been a long time since we chatted.",
+      "zh": "我也是，很久没有聊天了",
+      "pinyin": "Wǒ yě shì， hěn jiǔ méi yǒu liáo tiān le",
+      "vi": "Tôi cũng vậy, đã lâu rồi không trò chuyện."
+    },
+    {
+      "start": 376.92,
+      "end": 379.88,
+      "en": "Yeah, next time we can go grab a drink.",
+      "zh": "是啊，下次可以去喝一杯吧",
+      "pinyin": "Shì a， xià cì kě yǐ qù hē yì bēi ba",
+      "vi": "Ừ, lần sau đi uống một ly nhé."
+    },
+    {
+      "start": 380.96,
+      "end": 383.6,
+      "en": "Grab a drink? No way, I'm on a diet.",
+      "zh": "喝一杯？不行，我在减肥啊",
+      "pinyin": "Hē yì bēi？ bù xíng， wǒ zài jiǎn féi a",
+      "vi": "Uống một ly? Không được, tôi đang giảm cân mà."
+    },
+    {
+      "start": 385.38,
+      "end": 387.74,
+      "en": "Right, then let's go play basketball.",
+      "zh": "是啊，那就去打篮球吧",
+      "pinyin": "Shì a， nà jiù qù dǎ lán qiú ba",
+      "vi": "Ừ, vậy thì đi chơi bóng rổ đi."
+    },
+    {
+      "start": 388.42,
+      "end": 390.66,
+      "en": "Great, then I'll get going first.",
+      "zh": "好啊，那我先走了",
+      "pinyin": "Hǎo a， nà wǒ xiān zǒu le",
+      "vi": "Được, vậy tôi đi trước nhé."
+    },
+    {
+      "start": 391.18,
+      "end": 392.64,
+      "en": "Alright, see you next time.",
+      "zh": "好的，下次再见",
+      "pinyin": "Hǎo de， xià cì zài jiàn",
+      "vi": "Được, hẹn gặp lại lần sau."
+    },
+    {
+      "start": 393.38,
+      "end": 394.4,
+      "en": "Mm, see you next time.",
+      "zh": "嗯，下次再见",
+      "pinyin": "Ǹg， xià cì zài jiàn",
+      "vi": "Ừm, hẹn gặp lại lần sau."
+    }
+  ]
+}

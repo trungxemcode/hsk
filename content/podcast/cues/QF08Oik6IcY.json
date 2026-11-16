@@ -1,0 +1,165 @@
+{
+  "id": "QF08Oik6IcY",
+  "youtubeId": "QF08Oik6IcY",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Cho tôi 1 vé tàu cao tốc",
+  "titleVi": "Cho tôi một vé tàu cao tốc",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 83,
+  "cues": [
+    {
+      "start": 0.54,
+      "end": 10.22,
+      "en": "Hello, one high-speed train ticket from Shanghai to Beijing",
+      "zh": "你好，一张高铁票，上海到北京",
+      "pinyin": "Nǐ hǎo， yì zhāng gāo tiě piào， shàng hǎi dào běi jīng",
+      "vi": "Xin chào, một vé tàu cao tốc từ Thượng Hải đến Bắc Kinh"
+    },
+    {
+      "start": 19.92,
+      "end": 20.64,
+      "en": "Give me your passport",
+      "zh": "给我护照",
+      "pinyin": "Gěi wǒ hù zhào",
+      "vi": "Đưa hộ chiếu cho tôi"
+    },
+    {
+      "start": 21.16,
+      "end": 21.51,
+      "en": "Okay",
+      "zh": "好",
+      "pinyin": "Hǎo",
+      "vi": "Được"
+    },
+    {
+      "start": 23.5,
+      "end": 25.94,
+      "en": "measure word for tickets/paper",
+      "zh": "张",
+      "pinyin": "Zhāng",
+      "vi": "lượng từ (tờ/vé)"
+    },
+    {
+      "start": 29.7,
+      "end": 30.34,
+      "en": "high-speed rail/train",
+      "zh": "高铁",
+      "pinyin": "Gāo tiě",
+      "vi": "tàu cao tốc"
+    },
+    {
+      "start": 32.66,
+      "end": 33.04,
+      "en": "ticket",
+      "zh": "票",
+      "pinyin": "Piào",
+      "vi": "vé"
+    },
+    {
+      "start": 36.12,
+      "end": 36.78,
+      "en": "Shanghai",
+      "zh": "上海",
+      "pinyin": "Shàng hǎi",
+      "vi": "Thượng Hải"
+    },
+    {
+      "start": 39.76,
+      "end": 40.34,
+      "en": "Beijing",
+      "zh": "北京",
+      "pinyin": "Běi jīng",
+      "vi": "Bắc Kinh"
+    },
+    {
+      "start": 43.52,
+      "end": 43.88,
+      "en": "to/arrive",
+      "zh": "到",
+      "pinyin": "Dào",
+      "vi": "đến"
+    },
+    {
+      "start": 47,
+      "end": 47.58,
+      "en": "one-way",
+      "zh": "单程",
+      "pinyin": "Dān chéng",
+      "vi": "một chiều"
+    },
+    {
+      "start": 50.78,
+      "end": 51.44,
+      "en": "round trip",
+      "zh": "往返",
+      "pinyin": "Wǎng fǎn",
+      "vi": "khứ hồi"
+    },
+    {
+      "start": 54.58,
+      "end": 55.14,
+      "en": "or",
+      "zh": "还是",
+      "pinyin": "Hái shì",
+      "vi": "hay"
+    },
+    {
+      "start": 55.14,
+      "end": 55.49,
+      "en": "to be; yes",
+      "zh": "是",
+      "pinyin": "Shì",
+      "vi": "là; đúng/vâng"
+    },
+    {
+      "start": 58.28,
+      "end": 58.66,
+      "en": "how many",
+      "zh": "几",
+      "pinyin": "Jǐ",
+      "vi": "mấy"
+    },
+    {
+      "start": 62.4,
+      "end": 62.75,
+      "en": "good/okay",
+      "zh": "好",
+      "pinyin": "Hǎo",
+      "vi": "tốt/được"
+    },
+    {
+      "start": 65.62,
+      "end": 66.02,
+      "en": "go",
+      "zh": "去",
+      "pinyin": "Qù",
+      "vi": "đi"
+    },
+    {
+      "start": 69.1,
+      "end": 69.5,
+      "en": "return",
+      "zh": "回",
+      "pinyin": "Huí",
+      "vi": "về"
+    },
+    {
+      "start": 72.9,
+      "end": 73.25,
+      "en": "give",
+      "zh": "给",
+      "pinyin": "Gěi",
+      "vi": "cho/đưa"
+    },
+    {
+      "start": 77.12,
+      "end": 77.74,
+      "en": "passport",
+      "zh": "护照",
+      "pinyin": "Hù zhào",
+      "vi": "hộ chiếu"
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "id": "LS3inJc3m3I",
+  "youtubeId": "LS3inJc3m3I",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Tôi muốn mua 2 thùng nước",
+  "titleVi": "Tôi muốn mua hai thùng nước",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 70,
+  "cues": [
+    {
+      "start": 0,
+      "end": 2.66,
+      "en": "Short conversational sentence: I want to buy two barrels of water.",
+      "zh": "会话短句：我想买两桶水。",
+      "pinyin": "Huì huà duǎn jù： wǒ xiǎng mǎi liǎng tǒng shuǐ。",
+      "vi": "Câu hội thoại ngắn: Tôi muốn mua hai thùng nước."
+    },
+    {
+      "start": 4.62,
+      "end": 7.52,
+      "en": "Hello, I'd like two barrels of water.",
+      "zh": "喂，你好，我要两桶水。",
+      "pinyin": "Wèi， nǐ hǎo， wǒ yào liǎng tǒng shuǐ。",
+      "vi": "Alô, xin chào, cho tôi hai thùng nước."
+    },
+    {
+      "start": 8.36,
+      "end": 12.12,
+      "en": "Okay, ten yuan per barrel. What's your address?",
+      "zh": "好的，十块钱一桶，你的地址是什么？",
+      "pinyin": "Hǎo de， shí kuài qián yì tǒng， nǐ de dì zhǐ shì shén me？",
+      "vi": "Được, mười tệ một thùng, địa chỉ của bạn là gì?"
+    },
+    {
+      "start": 13.08,
+      "end": 16.98,
+      "en": "In the residential area opposite you, Building 3, Room 402.",
+      "zh": "在你对面的小区，三号楼，四零二室。",
+      "pinyin": "Zài nǐ duì miàn de xiǎo qū， sān hào lóu， sì líng èr shì。",
+      "vi": "Ở khu dân cư đối diện chỗ bạn, tòa nhà số 3, phòng 402."
+    },
+    {
+      "start": 17.7,
+      "end": 20.62,
+      "en": "Okay, we'll deliver on Saturday morning, is that alright?",
+      "zh": "好的，星期六上午送，可以吗？",
+      "pinyin": "Hǎo de， xīng qī liù shàng wǔ sòng， kě yǐ ma？",
+      "vi": "Được, sáng thứ Bảy giao hàng, được không?"
+    },
+    {
+      "start": 21.02,
+      "end": 21.37,
+      "en": "Okay.",
+      "zh": "可以。",
+      "pinyin": "Kě yǐ。",
+      "vi": "Được."
+    },
+    {
+      "start": 23.68,
+      "end": 24.88,
+      "en": "Below are more words:",
+      "zh": "以下是更多的词语：",
+      "pinyin": "Yǐ xià shì gèng duō de cí yǔ：",
+      "vi": "Dưới đây là nhiều từ vựng hơn:"
+    },
+    {
+      "start": 25,
+      "end": 26.66,
+      "en": "to want; to need",
+      "zh": "要",
+      "pinyin": "Yào",
+      "vi": "muốn; cần"
+    },
+    {
+      "start": 26.88,
+      "end": 29.84,
+      "en": "barrel; bucket",
+      "zh": "桶",
+      "pinyin": "Tǒng",
+      "vi": "thùng"
+    },
+    {
+      "start": 31.68,
+      "end": 32.64,
+      "en": "address",
+      "zh": "地址",
+      "pinyin": "Dì zhǐ",
+      "vi": "địa chỉ"
+    },
+    {
+      "start": 35.06,
+      "end": 36.2,
+      "en": "opposite side; across from",
+      "zh": "对面",
+      "pinyin": "Duì miàn",
+      "vi": "đối diện; phía đối diện"
+    },
+    {
+      "start": 38.36,
+      "end": 38.98,
+      "en": "at; in; to be located at",
+      "zh": "在",
+      "pinyin": "Zài",
+      "vi": "ở; tại"
+    },
+    {
+      "start": 41,
+      "end": 42.52,
+      "en": "residential area; community",
+      "zh": "小区",
+      "pinyin": "Xiǎo qū",
+      "vi": "khu dân cư; khu chung cư"
+    },
+    {
+      "start": 44.78,
+      "end": 45.42,
+      "en": "number",
+      "zh": "号",
+      "pinyin": "Hào",
+      "vi": "số"
+    },
+    {
+      "start": 47.48,
+      "end": 48.44,
+      "en": "building; floor",
+      "zh": "楼",
+      "pinyin": "Lóu",
+      "vi": "tòa nhà; lầu"
+    },
+    {
+      "start": 50.44,
+      "end": 51.02,
+      "en": "room",
+      "zh": "室",
+      "pinyin": "Shì",
+      "vi": "phòng"
+    },
+    {
+      "start": 53.54,
+      "end": 55.08,
+      "en": "Saturday",
+      "zh": "星期六",
+      "pinyin": "Xīng qī liù",
+      "vi": "thứ Bảy"
+    },
+    {
+      "start": 57.12,
+      "end": 58.16,
+      "en": "morning; before noon",
+      "zh": "上午",
+      "pinyin": "Shàng wǔ",
+      "vi": "buổi sáng"
+    },
+    {
+      "start": 60.52,
+      "end": 60.98,
+      "en": "to deliver; to send",
+      "zh": "送",
+      "pinyin": "Sòng",
+      "vi": "giao hàng; đưa"
+    },
+    {
+      "start": 61.12,
+      "end": 64.12,
+      "en": "okay; can; may",
+      "zh": "可以",
+      "pinyin": "Kě yǐ",
+      "vi": "được; có thể"
+    }
+  ]
+}

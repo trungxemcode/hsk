@@ -1,0 +1,565 @@
+{
+  "id": "ieEIoFLcJtI",
+  "youtubeId": "ieEIoFLcJtI",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe hội thoại TIẾNG TRUNG : Đi nhà hàng | 去餐厅",
+  "titleVi": "Đi nhà hàng",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 236,
+  "cues": [
+    {
+      "start": 18.44,
+      "end": 18.79,
+      "en": "How many people?",
+      "zh": "几位",
+      "pinyin": "Jǐ wèi",
+      "vi": "Mấy người ạ?"
+    },
+    {
+      "start": 21.78,
+      "end": 22.13,
+      "en": "Two.",
+      "zh": "两位",
+      "pinyin": "Liǎng wèi",
+      "vi": "Hai người."
+    },
+    {
+      "start": 23.68,
+      "end": 24.58,
+      "en": "Okay, this way, please.",
+      "zh": "好，这边请",
+      "pinyin": "Hǎo， zhè biān qǐng",
+      "vi": "Vâng, mời đi lối này."
+    },
+    {
+      "start": 25.44,
+      "end": 25.88,
+      "en": "Thank you.",
+      "zh": "谢谢",
+      "pinyin": "Xiè xiè",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 35.42,
+      "end": 35.9,
+      "en": "Waiter!",
+      "zh": "服务员",
+      "pinyin": "Fú wù yuán",
+      "vi": "Phục vụ ơi!"
+    },
+    {
+      "start": 37.6,
+      "end": 38,
+      "en": "Hello.",
+      "zh": "您好",
+      "pinyin": "Nín hǎo",
+      "vi": "Xin chào."
+    },
+    {
+      "start": 38.72,
+      "end": 41.26,
+      "en": "Excuse me, may I take a look at the menu?",
+      "zh": "请问可以看一下菜单吗",
+      "pinyin": "Qǐng wèn kě yǐ kàn yí xià cài dān ma",
+      "vi": "Cho tôi hỏi, xem thực đơn được không ạ?"
+    },
+    {
+      "start": 41.94,
+      "end": 42.29,
+      "en": "Oh.",
+      "zh": "哦",
+      "pinyin": "Ò",
+      "vi": "Ồ."
+    },
+    {
+      "start": 42.74,
+      "end": 43.09,
+      "en": "Sure, sure.",
+      "zh": "可以可以",
+      "pinyin": "Kě yǐ kě yǐ",
+      "vi": "Được, được chứ."
+    },
+    {
+      "start": 43.5,
+      "end": 44.06,
+      "en": "Wait a moment.",
+      "zh": "等我一下",
+      "pinyin": "Děng wǒ yí xià",
+      "vi": "Đợi tôi một chút."
+    },
+    {
+      "start": 50.6,
+      "end": 51.72,
+      "en": "This is our menu.",
+      "zh": "这是我们的菜单",
+      "pinyin": "Zhè shì wǒ men de cài dān",
+      "vi": "Đây là thực đơn của chúng tôi."
+    },
+    {
+      "start": 52.2,
+      "end": 53.02,
+      "en": "Please take your time.",
+      "zh": "请慢慢看",
+      "pinyin": "Qǐng màn màn kàn",
+      "vi": "Mời xem từ từ ạ."
+    },
+    {
+      "start": 54.42,
+      "end": 54.77,
+      "en": "Thank you.",
+      "zh": "谢谢",
+      "pinyin": "Xiè xiè",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 61.1,
+      "end": 61.5,
+      "en": "Miss!",
+      "zh": "小姐",
+      "pinyin": "Xiǎo jiě",
+      "vi": "Cô ơi!"
+    },
+    {
+      "start": 63.8,
+      "end": 64.64,
+      "en": "Hmm, what is it?",
+      "zh": "嗯，什么事？",
+      "pinyin": "Ǹg， shén me shì？",
+      "vi": "Ừm, có chuyện gì thế?"
+    },
+    {
+      "start": 66.72,
+      "end": 67.32,
+      "en": "This is...",
+      "zh": "这个是",
+      "pinyin": "Zhè ge shì",
+      "vi": "Đây là..."
+    },
+    {
+      "start": 68.04,
+      "end": 68.7,
+      "en": "What is this?",
+      "zh": "这个是什么",
+      "pinyin": "Zhè ge shì shén me",
+      "vi": "Đây là món gì?"
+    },
+    {
+      "start": 68.76,
+      "end": 70.08,
+      "en": "This one.",
+      "zh": "这个",
+      "pinyin": "Zhè ge",
+      "vi": "Cái này."
+    },
+    {
+      "start": 71.12,
+      "end": 73,
+      "en": "This is beef soup.",
+      "zh": "这个是牛肉汤",
+      "pinyin": "Zhè ge shì niú ròu tāng",
+      "vi": "Đây là súp bò."
+    },
+    {
+      "start": 74.64,
+      "end": 76.36,
+      "en": "Oh, I see.",
+      "zh": "哦，我知道了",
+      "pinyin": "Ò， wǒ zhī dào le",
+      "vi": "Ồ, tôi biết rồi."
+    },
+    {
+      "start": 78.3,
+      "end": 78.65,
+      "en": "Hey.",
+      "zh": "哎",
+      "pinyin": "Āi",
+      "vi": "Ơ."
+    },
+    {
+      "start": 79.34,
+      "end": 80.5,
+      "en": "Aren't you Chinese?",
+      "zh": "你不是中国人吗",
+      "pinyin": "Nǐ bú shì zhōng guó rén ma",
+      "vi": "Bạn không phải là người Trung Quốc à?"
+    },
+    {
+      "start": 82.14,
+      "end": 82.54,
+      "en": "No, I'm not.",
+      "zh": "不是",
+      "pinyin": "Bú shì",
+      "vi": "Không phải."
+    },
+    {
+      "start": 84.62,
+      "end": 86.36,
+      "en": "Then which country are you from?",
+      "zh": "那你是哪个国家的",
+      "pinyin": "Nà nǐ shì nǎ gè guó jiā de",
+      "vi": "Vậy bạn là người nước nào?"
+    },
+    {
+      "start": 88.38,
+      "end": 89.06,
+      "en": "I'm American.",
+      "zh": "我是美国人",
+      "pinyin": "Wǒ shì měi guó rén",
+      "vi": "Tôi là người Mỹ."
+    },
+    {
+      "start": 90.4,
+      "end": 90.75,
+      "en": "Oh",
+      "zh": "哦",
+      "pinyin": "Ò",
+      "vi": "Ồ"
+    },
+    {
+      "start": 92.1,
+      "end": 92.82,
+      "en": "American",
+      "zh": "美国人",
+      "pinyin": "Měi guó rén",
+      "vi": "Người Mỹ"
+    },
+    {
+      "start": 95.04,
+      "end": 95.72,
+      "en": "Then your home...",
+      "zh": "那你家",
+      "pinyin": "Nà nǐ jiā",
+      "vi": "Thế nhà bạn..."
+    },
+    {
+      "start": 96.46,
+      "end": 97.12,
+      "en": "is so far",
+      "zh": "好远哦",
+      "pinyin": "Hǎo yuǎn ò",
+      "vi": "xa quá"
+    },
+    {
+      "start": 97.42,
+      "end": 98.4,
+      "en": "Yeah",
+      "zh": "是啊",
+      "pinyin": "Shì a",
+      "vi": "Ừ, đúng vậy"
+    },
+    {
+      "start": 99.48,
+      "end": 101.02,
+      "en": "Your Chinese is very good.",
+      "zh": "你的中文说得很好",
+      "pinyin": "Nǐ de zhōng wén shuō dé hěn hǎo",
+      "vi": "Tiếng Trung của bạn nói rất tốt."
+    },
+    {
+      "start": 102.76,
+      "end": 103.28,
+      "en": "Really?",
+      "zh": "真的吗",
+      "pinyin": "Zhēn de ma",
+      "vi": "Thật à?"
+    },
+    {
+      "start": 103.42,
+      "end": 103.98,
+      "en": "Thank you.",
+      "zh": "谢谢",
+      "pinyin": "Xiè xiè",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 105.78,
+      "end": 107.5,
+      "en": "How long have you been in China?",
+      "zh": "你在中国多久了",
+      "pinyin": "Nǐ zài zhōng guó duō jiǔ le",
+      "vi": "Bạn ở Trung Quốc bao lâu rồi?"
+    },
+    {
+      "start": 108.72,
+      "end": 109.54,
+      "en": "I've been in China...",
+      "zh": "我在中国",
+      "pinyin": "Wǒ zài zhōng guó",
+      "vi": "Tôi ở Trung Quốc..."
+    },
+    {
+      "start": 110.66,
+      "end": 111.24,
+      "en": "five months.",
+      "zh": "五个月了",
+      "pinyin": "Wǔ gè yuè le",
+      "vi": "5 tháng rồi."
+    },
+    {
+      "start": 124.86,
+      "end": 125.76,
+      "en": "Of course.",
+      "zh": "那当然啊",
+      "pinyin": "Nà dāng rán a",
+      "vi": "Tất nhiên rồi."
+    },
+    {
+      "start": 126.48,
+      "end": 127.1,
+      "en": "I am Chinese.",
+      "zh": "我是中国人",
+      "pinyin": "Wǒ shì zhōng guó rén",
+      "vi": "Tôi là người Trung Quốc."
+    },
+    {
+      "start": 127.58,
+      "end": 127.93,
+      "en": "Haha",
+      "zh": "哈哈",
+      "pinyin": "Hā hā",
+      "vi": "Haha"
+    },
+    {
+      "start": 129.48,
+      "end": 131.12,
+      "en": "What do you do in China?",
+      "zh": "你在中国做什么",
+      "pinyin": "Nǐ zài zhōng guó zuò shén me",
+      "vi": "Bạn làm gì ở Trung Quốc?"
+    },
+    {
+      "start": 132.34,
+      "end": 133.6,
+      "en": "Are you a teacher?",
+      "zh": "你是老师吗",
+      "pinyin": "Nǐ shì lǎo shī ma",
+      "vi": "Bạn là giáo viên à?"
+    },
+    {
+      "start": 134.44,
+      "end": 134.79,
+      "en": "I...",
+      "zh": "我",
+      "pinyin": "Wǒ",
+      "vi": "Tôi..."
+    },
+    {
+      "start": 137.24,
+      "end": 138.08,
+      "en": "I'm not a teacher.",
+      "zh": "我不是老师",
+      "pinyin": "Wǒ bú shì lǎo shī",
+      "vi": "Tôi không phải giáo viên."
+    },
+    {
+      "start": 139.06,
+      "end": 140.12,
+      "en": "I'm a student.",
+      "zh": "我是学生",
+      "pinyin": "Wǒ shì xué shēng",
+      "vi": "Tôi là sinh viên."
+    },
+    {
+      "start": 140.24,
+      "end": 142.74,
+      "en": "Oh",
+      "zh": "哦",
+      "pinyin": "Ò",
+      "vi": "Ồ"
+    },
+    {
+      "start": 143.34,
+      "end": 143.82,
+      "en": "You're a student?",
+      "zh": "你是学生？",
+      "pinyin": "Nǐ shì xué shēng？",
+      "vi": "Bạn là sinh viên à?"
+    },
+    {
+      "start": 144.98,
+      "end": 145.94,
+      "en": "Then what are you studying?",
+      "zh": "那你在学什么？",
+      "pinyin": "Nà nǐ zài xué shén me？",
+      "vi": "Vậy bạn đang học gì?"
+    },
+    {
+      "start": 148.04,
+      "end": 149,
+      "en": "I'm studying Chinese.",
+      "zh": "我在学中文",
+      "pinyin": "Wǒ zài xué zhōng wén",
+      "vi": "Tôi đang học tiếng Trung."
+    },
+    {
+      "start": 150.7,
+      "end": 155.8,
+      "en": "Wow, an American studying Chinese in China.",
+      "zh": "哇，一个在中国学中文的美国人",
+      "pinyin": "Wā， yí gè zài zhōng guó xué zhōng wén de měi guó rén",
+      "vi": "Chà, một người Mỹ học tiếng Trung ở Trung Quốc."
+    },
+    {
+      "start": 158.02,
+      "end": 158.96,
+      "en": "That's cool!",
+      "zh": "好酷啊",
+      "pinyin": "Hǎo kù a",
+      "vi": "Ngầu quá!"
+    },
+    {
+      "start": 161.02,
+      "end": 162.58,
+      "en": "How long have you been learning Chinese?",
+      "zh": "你学中文多久了？",
+      "pinyin": "Nǐ xué zhōng wén duō jiǔ le？",
+      "vi": "Bạn học tiếng Trung bao lâu rồi?"
+    },
+    {
+      "start": 163.72,
+      "end": 166.76,
+      "en": "I've been learning for about a year.",
+      "zh": "我学了大概一年吧",
+      "pinyin": "Wǒ xué le dà gài yì nián ba",
+      "vi": "Mình học khoảng một năm rồi."
+    },
+    {
+      "start": 168.66,
+      "end": 170.22,
+      "en": "Wow, not long!",
+      "zh": "哇，不久啊",
+      "pinyin": "Wā， bù jiǔ a",
+      "vi": "Ồ, chưa lâu nhỉ."
+    },
+    {
+      "start": 171.42,
+      "end": 174.42,
+      "en": "So do you think Chinese is hard to learn?",
+      "zh": "那你觉得中文很难学吗？",
+      "pinyin": "Nà nǐ jué de zhōng wén hěn nán xué ma？",
+      "vi": "Vậy bạn có thấy tiếng Trung khó học không?"
+    },
+    {
+      "start": 176.36,
+      "end": 178.58,
+      "en": "I think it's really hard to learn.",
+      "zh": "我觉得真的很难学",
+      "pinyin": "Wǒ jué de zhēn de hěn nán xué",
+      "vi": "Mình thấy thật sự rất khó học."
+    },
+    {
+      "start": 179.28,
+      "end": 180.5,
+      "en": "But I like it.",
+      "zh": "可是我喜欢",
+      "pinyin": "Kě shì wǒ xǐ huan",
+      "vi": "Nhưng mình thích nó."
+    },
+    {
+      "start": 182.02,
+      "end": 182.96,
+      "en": "Yeah, me too.",
+      "zh": "嗯，我也是",
+      "pinyin": "Ǹg， wǒ yě shì",
+      "vi": "Ừ, mình cũng vậy."
+    },
+    {
+      "start": 184.66,
+      "end": 185.98,
+      "en": "You also like learning Chinese?",
+      "zh": "你也喜欢学中文？",
+      "pinyin": "Nǐ yě xǐ huan xué zhōng wén？",
+      "vi": "Bạn cũng thích học tiếng Trung à?"
+    },
+    {
+      "start": 186.5,
+      "end": 188.18,
+      "en": "Oh, no, no.",
+      "zh": "哦，不是不是",
+      "pinyin": "Ò， bú shì bu shì",
+      "vi": "Ồ, không phải, không phải."
+    },
+    {
+      "start": 189.08,
+      "end": 191.58,
+      "en": "I mean, I also like learning English.",
+      "zh": "我的意思是我也喜欢学英文",
+      "pinyin": "Wǒ de yì sī shì wǒ yě xǐ huan xué yīng wén",
+      "vi": "Ý mình là mình cũng thích học tiếng Anh."
+    },
+    {
+      "start": 192.82,
+      "end": 193.88,
+      "en": "Oh, I see.",
+      "zh": "哦，我明白",
+      "pinyin": "Ò， wǒ míng bái",
+      "vi": "Ồ, mình hiểu rồi."
+    },
+    {
+      "start": 199.4,
+      "end": 199.86,
+      "en": "Miss!",
+      "zh": "小姐",
+      "pinyin": "Xiǎo jiě",
+      "vi": "Chị ơi!"
+    },
+    {
+      "start": 201.08,
+      "end": 202.06,
+      "en": "Yes, what is it?",
+      "zh": "嗯，什么事？",
+      "pinyin": "Ǹg， shén me shì？",
+      "vi": "Ừ, có chuyện gì vậy?"
+    },
+    {
+      "start": 204.08,
+      "end": 206.4,
+      "en": "Excuse me, where is the restroom?",
+      "zh": "请问洗手间在哪里？",
+      "pinyin": "Qǐng wèn xǐ shǒu jiān zài nǎ lǐ？",
+      "vi": "Cho hỏi nhà vệ sinh ở đâu vậy?"
+    },
+    {
+      "start": 207.54,
+      "end": 212.66,
+      "en": "The restroom is over there, on the right-hand side.",
+      "zh": "洗手间在那边，在那里的右手边",
+      "pinyin": "Xǐ shǒu jiān zài nà biān， zài nà lǐ de yòu shǒu biān",
+      "vi": "Nhà vệ sinh ở đằng kia, ở phía tay phải chỗ đó."
+    },
+    {
+      "start": 215.16,
+      "end": 218.26,
+      "en": "Oh, okay, I know. Thanks.",
+      "zh": "哦，好，我知道，谢谢",
+      "pinyin": "Ò， hǎo， wǒ zhī dào， xiè xiè",
+      "vi": "Ồ, được, mình biết rồi, cảm ơn."
+    },
+    {
+      "start": 219.36,
+      "end": 220.98,
+      "en": "You're welcome. It's my pleasure.",
+      "zh": "不客气，应该的",
+      "pinyin": "Bú kè qì， yīng gāi de",
+      "vi": "Không có gì, việc nên làm thôi."
+    },
+    {
+      "start": 223.12,
+      "end": 224.3,
+      "en": "Don't forget to wash your hands.",
+      "zh": "别忘了洗手啊",
+      "pinyin": "Bié wàng le xǐ shǒu a",
+      "vi": "Đừng quên rửa tay nhé."
+    },
+    {
+      "start": 227.98,
+      "end": 228.4,
+      "en": "I won't, I won't.",
+      "zh": "不会，不会",
+      "pinyin": "Bú huì， bú huì",
+      "vi": "Không đâu, không đâu."
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "id": "21Mul9WxVJs",
+  "youtubeId": "21Mul9WxVJs",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Gọi xe taxi",
+  "titleVi": "Hội thoại ngắn tiếng Trung: Gọi xe taxi",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 113,
+  "cues": [
+    {
+      "start": 30,
+      "end": 39.14,
+      "en": "I'm not sure. Otherwise, let's take another road — then we can get there in about 20 minutes.",
+      "zh": "不清楚，要不我们换一条路走吧，这样大概分钟就能到了。",
+      "pinyin": "Bù qīng chǔ， yào bù wǒ men huàn yì tiáo lù zǒu ba， zhè yàng dà gài fēn zhōng jiù néng dào le。",
+      "vi": "Không rõ nữa, hay là chúng ta đi đường khác đi, vậy khoảng 20 phút là đến."
+    },
+    {
+      "start": 41.82,
+      "end": 42.44,
+      "en": "Great!",
+      "zh": "太好了！",
+      "pinyin": "Tài hǎo le！",
+      "vi": "Tuyệt quá!"
+    },
+    {
+      "start": 45.3,
+      "end": 50.34,
+      "en": "Please fasten your seatbelt. I'm going to turn now. Would you like to listen to the radio?",
+      "zh": "请您系好安全带，我要转弯了，您想听收音机吗？",
+      "pinyin": "Qǐng nín xì hǎo ān quán dài， wǒ yào zhuǎn wān le， nín xiǎng tīng shōu yīn jī ma？",
+      "vi": "Mời anh/chị thắt dây an toàn, tôi sắp rẽ đây, anh/chị có muốn nghe radio không?"
+    },
+    {
+      "start": 52.42,
+      "end": 54.28,
+      "en": "Okay, we can listen to some music.",
+      "zh": "嗯，可以听点音乐。",
+      "pinyin": "Ǹg， kě yǐ tīng diǎn yīn yuè。",
+      "vi": "Vâng, có thể nghe một chút nhạc."
+    },
+    {
+      "start": 54.28,
+      "end": 60.32,
+      "en": "All right, we're here. This is your receipt — 50 yuan.",
+      "zh": "好了，我们到了，这是您的小票，五十块。",
+      "pinyin": "Hǎo le， wǒ men dào le， zhè shì nín de xiǎo piào， wǔ shí kuài。",
+      "vi": "Được rồi, chúng ta đến nơi rồi. Đây là hóa đơn của anh/chị, năm mươi tệ."
+    },
+    {
+      "start": 62.3,
+      "end": 63.7,
+      "en": "Here's the money. Goodbye.",
+      "zh": "给您钱，再见。",
+      "pinyin": "Gěi nín qián， zài jiàn。",
+      "vi": "Tiền đây, tạm biệt anh/chị nhé."
+    },
+    {
+      "start": 65.78,
+      "end": 67.38,
+      "en": "Take care. Goodbye.",
+      "zh": "您走好，再见。",
+      "pinyin": "Nín zǒu hǎo， zài jiàn。",
+      "vi": "Anh/chị đi cẩn thận nhé, tạm biệt."
+    },
+    {
+      "start": 70.62,
+      "end": 72.06,
+      "en": "This part is easier to understand now, right?",
+      "zh": "这部分更好明白了吧？",
+      "pinyin": "Zhè bù fen gèng hǎo míng bái le ba？",
+      "vi": "Phần này dễ hiểu hơn rồi đúng không?"
+    },
+    {
+      "start": 74.82,
+      "end": 75.34,
+      "en": "driver",
+      "zh": "司机",
+      "pinyin": "Sī jī",
+      "vi": "tài xế"
+    },
+    {
+      "start": 79.38,
+      "end": 79.73,
+      "en": "hotel",
+      "zh": "酒店",
+      "pinyin": "Jiǔ diàn",
+      "vi": "khách sạn"
+    },
+    {
+      "start": 83.2,
+      "end": 83.64,
+      "en": "luggage",
+      "zh": "行李",
+      "pinyin": "Xíng li",
+      "vi": "hành lý"
+    },
+    {
+      "start": 87.08,
+      "end": 87.88,
+      "en": "trunk (of a car)",
+      "zh": "后备箱",
+      "pinyin": "Hòu bèi xiāng",
+      "vi": "cốp xe"
+    },
+    {
+      "start": 91.02,
+      "end": 91.52,
+      "en": "traffic jam",
+      "zh": "堵车",
+      "pinyin": "Dǔ chē",
+      "vi": "tắc đường"
+    },
+    {
+      "start": 94.7,
+      "end": 95.28,
+      "en": "clear",
+      "zh": "清楚",
+      "pinyin": "Qīng chǔ",
+      "vi": "rõ ràng"
+    },
+    {
+      "start": 98.44,
+      "end": 99.2,
+      "en": "seatbelt",
+      "zh": "安全带",
+      "pinyin": "Ān quán dài",
+      "vi": "dây an toàn"
+    },
+    {
+      "start": 102.28,
+      "end": 102.94,
+      "en": "radio",
+      "zh": "收音机",
+      "pinyin": "Shōu yīn jī",
+      "vi": "radio"
+    }
+  ]
+}

@@ -1,0 +1,949 @@
+{
+  "id": "o6v02QrfG7c",
+  "youtubeId": "o6v02QrfG7c",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe hội thoại TIẾNG TRUNG : Chơi bóng rổ | 打篮球",
+  "titleVi": "Chơi bóng rổ",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 378,
+  "cues": [
+    {
+      "start": 17,
+      "end": 19,
+      "en": "Do you want to go sing?",
+      "zh": "唱歌要不要",
+      "pinyin": "Chàng gē yào bu yào",
+      "vi": "Đi hát không?"
+    },
+    {
+      "start": 19.3,
+      "end": 19.65,
+      "en": "Sing?",
+      "zh": "唱歌",
+      "pinyin": "Chàng gē",
+      "vi": "Hát à?"
+    },
+    {
+      "start": 21.48,
+      "end": 21.83,
+      "en": "It's just the two of us.",
+      "zh": "就我们两个",
+      "pinyin": "Jiù wǒ men liǎng gè",
+      "vi": "Chỉ có hai đứa mình thôi."
+    },
+    {
+      "start": 23.48,
+      "end": 24.9,
+      "en": "Too few people.",
+      "zh": "人太少",
+      "pinyin": "Rén tài shǎo",
+      "vi": "Ít người quá."
+    },
+    {
+      "start": 25,
+      "end": 27,
+      "en": "Then...",
+      "zh": "那",
+      "pinyin": "Nà",
+      "vi": "Vậy..."
+    },
+    {
+      "start": 27.84,
+      "end": 28.19,
+      "en": "Where should we go to hang out?",
+      "zh": "去哪里玩",
+      "pinyin": "Qù nǎ lǐ wán",
+      "vi": "Đi đâu chơi?"
+    },
+    {
+      "start": 29,
+      "end": 31.74,
+      "en": "Then how about playing basketball?",
+      "zh": "那打篮球要不要",
+      "pinyin": "Nà dǎ lán qiú yào bu yào",
+      "vi": "Vậy chơi bóng rổ không?"
+    },
+    {
+      "start": 32.4,
+      "end": 33.92,
+      "en": "Hey, not bad.",
+      "zh": "诶 还不错",
+      "pinyin": "Ēi hái bú cuò",
+      "vi": "Ừ, cũng không tệ."
+    },
+    {
+      "start": 35.82,
+      "end": 37.46,
+      "en": "Besides, the weather is so nice today.",
+      "zh": "而且今天天气那么好",
+      "pinyin": "Ér qiě jīn tiān tiān qì nà me hǎo",
+      "vi": "Mà hôm nay thời tiết đẹp quá."
+    },
+    {
+      "start": 38.2,
+      "end": 39.52,
+      "en": "Yeah, right.",
+      "zh": "嗯 对啊",
+      "pinyin": "Ǹg duì a",
+      "vi": "Ừ, đúng vậy."
+    },
+    {
+      "start": 40.36,
+      "end": 41.96,
+      "en": "Then where are we going to play?",
+      "zh": "那我们要去哪里打",
+      "pinyin": "Nà wǒ men yào qù nǎ lǐ dǎ",
+      "vi": "Vậy chúng ta sẽ chơi ở đâu?"
+    },
+    {
+      "start": 42.02,
+      "end": 44,
+      "en": "How about the school basketball court?",
+      "zh": "学校的篮球场 怎么样",
+      "pinyin": "Xué xiào de lán qiú chǎng zěn me yàng",
+      "vi": "Sân bóng rổ của trường thì sao?"
+    },
+    {
+      "start": 44.02,
+      "end": 45.98,
+      "en": "Okay, let's go.",
+      "zh": "好啊 走",
+      "pinyin": "Hǎo a zǒu",
+      "vi": "Được đấy, đi thôi."
+    },
+    {
+      "start": 46.02,
+      "end": 48.02,
+      "en": "Wait a moment.",
+      "zh": "等一下",
+      "pinyin": "Děng yí xià",
+      "vi": "Khoan đã."
+    },
+    {
+      "start": 49.72,
+      "end": 50.48,
+      "en": "Do you have a basketball?",
+      "zh": "你有篮球吗",
+      "pinyin": "Nǐ yǒu lán qiú ma",
+      "vi": "Bạn có bóng rổ không?"
+    },
+    {
+      "start": 51.64,
+      "end": 52.8,
+      "en": "I have it, in the dorm.",
+      "zh": "我有 在宿舍",
+      "pinyin": "Wǒ yǒu zài sù shè",
+      "vi": "Mình có, ở ký túc xá."
+    },
+    {
+      "start": 53.34,
+      "end": 54.12,
+      "en": "Then wait for me a bit.",
+      "zh": "那你要等我一下",
+      "pinyin": "Nà nǐ yào děng wǒ yí xià",
+      "vi": "Vậy bạn đợi mình một chút nhé."
+    },
+    {
+      "start": 55.74,
+      "end": 56.09,
+      "en": "See you in a bit.",
+      "zh": "等一下见",
+      "pinyin": "Děng yí xià jiàn",
+      "vi": "Lát nữa gặp nhé."
+    },
+    {
+      "start": 56.76,
+      "end": 58.74,
+      "en": "Okay, then I'll go back to the dorm to change clothes.",
+      "zh": "好 那我回宿舍换衣服",
+      "pinyin": "Hǎo nà wǒ huí sù shè huàn yī fu",
+      "vi": "Được, vậy mình về ký túc xá thay đồ."
+    },
+    {
+      "start": 59.1,
+      "end": 59.78,
+      "en": "See you in a bit.",
+      "zh": "等一下见",
+      "pinyin": "Děng yí xià jiàn",
+      "vi": "Lát nữa gặp lại nhé."
+    },
+    {
+      "start": 67.58,
+      "end": 68.54,
+      "en": "It's so hot.",
+      "zh": "热死了",
+      "pinyin": "Rè sǐ le",
+      "vi": "Nóng chết mất."
+    },
+    {
+      "start": 69.06,
+      "end": 69.58,
+      "en": "Yeah.",
+      "zh": "是啊",
+      "pinyin": "Shì a",
+      "vi": "Ừ."
+    },
+    {
+      "start": 70.86,
+      "end": 71.72,
+      "en": "The sun is so strong.",
+      "zh": "太阳好大",
+      "pinyin": "Tài yáng hǎo dà",
+      "vi": "Nắng to quá."
+    },
+    {
+      "start": 72.58,
+      "end": 74.54,
+      "en": "But it's better than raining.",
+      "zh": "可是比下雨好",
+      "pinyin": "Kě shì bǐ xià yǔ hǎo",
+      "vi": "Nhưng vẫn hơn là trời mưa."
+    },
+    {
+      "start": 74.58,
+      "end": 75.66,
+      "en": "Exactly.",
+      "zh": "没错",
+      "pinyin": "Méi cuò",
+      "vi": "Chuẩn."
+    },
+    {
+      "start": 76.78,
+      "end": 78.32,
+      "en": "We haven't exercised in a long time either.",
+      "zh": "我们也很久没运动了。",
+      "pinyin": "Wǒ men yě hěn jiǔ méi yùn dòng le。",
+      "vi": "Chúng ta cũng đã lâu rồi không vận động."
+    },
+    {
+      "start": 78.84,
+      "end": 80.1,
+      "en": "We're definitely going to sweat a lot today.",
+      "zh": "今天一定会流很多汗。",
+      "pinyin": "Jīn tiān yí dìng huì liú hěn duō hàn。",
+      "vi": "Hôm nay chắc chắn sẽ đổ rất nhiều mồ hôi."
+    },
+    {
+      "start": 82.24,
+      "end": 82.59,
+      "en": "Yeah.",
+      "zh": "是啊。",
+      "pinyin": "Shì a。",
+      "vi": "Ừ."
+    },
+    {
+      "start": 82.6,
+      "end": 84.2,
+      "en": "The court is right ahead.",
+      "zh": "球场就在前面。",
+      "pinyin": "Qiú chǎng jiù zài qián miàn。",
+      "vi": "Sân bóng ngay phía trước."
+    },
+    {
+      "start": 84.62,
+      "end": 85.06,
+      "en": "Where?",
+      "zh": "哪里？",
+      "pinyin": "Nǎ lǐ？",
+      "vi": "Ở đâu?"
+    },
+    {
+      "start": 85.86,
+      "end": 87.44,
+      "en": "Go straight ahead, turn right, and you'll be there.",
+      "zh": "往前走，右转就到了。",
+      "pinyin": "Wǎng qián zǒu， yòu zhuǎn jiù dào le。",
+      "vi": "Đi thẳng, rẽ phải là tới."
+    },
+    {
+      "start": 87.58,
+      "end": 88.34,
+      "en": "Let's go.",
+      "zh": "我们走吧。",
+      "pinyin": "Wǒ men zǒu ba。",
+      "vi": "Đi thôi."
+    },
+    {
+      "start": 88.76,
+      "end": 91.33,
+      "en": "Hey, don't run! Wait for me! Okay, hey!",
+      "zh": "诶，你别跑啊，等我一下！好啊，诶！",
+      "pinyin": "Ēi， nǐ bié pǎo a， děng wǒ yí xià！ hǎo a， ēi！",
+      "vi": "Ê, đừng chạy! Đợi tôi một chút! Được rồi, ê!"
+    },
+    {
+      "start": 110.21,
+      "end": 111.29,
+      "en": "What's wrong with you today?",
+      "zh": "你今天怎么了？",
+      "pinyin": "Nǐ jīn tiān zěn me le？",
+      "vi": "Hôm nay bạn làm sao vậy?"
+    },
+    {
+      "start": 112.29,
+      "end": 113.23,
+      "en": "Why didn't you score again?",
+      "zh": "怎么又没进球？",
+      "pinyin": "Zěn me yòu méi jìn qiú？",
+      "vi": "Sao lại không ghi điểm nữa vậy?"
+    },
+    {
+      "start": 114.29,
+      "end": 115.51,
+      "en": "I'm still warming up.",
+      "zh": "我还在热身啊。",
+      "pinyin": "Wǒ hái zài rè shēn a。",
+      "vi": "Tôi vẫn đang khởi động mà."
+    },
+    {
+      "start": 115.61,
+      "end": 118.45,
+      "en": "I'll find my shooting touch in a bit.",
+      "zh": "等一下会找到投篮的感觉。",
+      "pinyin": "Děng yí xià huì zhǎo dào tóu lán de gǎn jué。",
+      "vi": "Lát nữa tôi sẽ tìm lại được cảm giác ném bóng."
+    },
+    {
+      "start": 119.05,
+      "end": 120.21,
+      "en": "Okay, okay, okay.",
+      "zh": "好好好。",
+      "pinyin": "Hǎo hǎo hǎo。",
+      "vi": "Được rồi, được rồi, được rồi."
+    },
+    {
+      "start": 137.33,
+      "end": 138.13,
+      "en": "Not bad, not bad.",
+      "zh": "不错不错。",
+      "pinyin": "Bú cuò bu cuò。",
+      "vi": "Không tồi, không tồi."
+    },
+    {
+      "start": 138.61,
+      "end": 139.79,
+      "en": "I thought you were done for.",
+      "zh": "我还以为你不行了。",
+      "pinyin": "Wǒ hái yǐ wéi nǐ bù xíng le。",
+      "vi": "Tôi cứ tưởng bạn không được rồi."
+    },
+    {
+      "start": 141.33,
+      "end": 142.53,
+      "en": "Aren't we tied now?",
+      "zh": "现在不是打平了吗？",
+      "pinyin": "Xiàn zài bú shì dǎ píng le ma？",
+      "vi": "Chẳng phải bây giờ đang hòa rồi sao?"
+    },
+    {
+      "start": 145.61,
+      "end": 146.35,
+      "en": "Now?",
+      "zh": "现在吗？",
+      "pinyin": "Xiàn zài ma？",
+      "vi": "Bây giờ à?"
+    },
+    {
+      "start": 146.81,
+      "end": 147.51,
+      "en": "Not really.",
+      "zh": "也不是啦。",
+      "pinyin": "Yě bú shì lā。",
+      "vi": "Cũng không phải đâu."
+    },
+    {
+      "start": 148.89,
+      "end": 149.85,
+      "en": "That's not fair!",
+      "zh": "不公平啦！",
+      "pinyin": "Bù gōng píng lā！",
+      "vi": "Bất công quá!"
+    },
+    {
+      "start": 162.47,
+      "end": 163.39,
+      "en": "I'm exhausted.",
+      "zh": "累死了。",
+      "pinyin": "Lèi sǐ le。",
+      "vi": "Mệt chết mất."
+    },
+    {
+      "start": 164.53,
+      "end": 165.23,
+      "en": "Me too.",
+      "zh": "我也是。",
+      "pinyin": "Wǒ yě shì。",
+      "vi": "Tôi cũng vậy."
+    },
+    {
+      "start": 170.73,
+      "end": 172.03,
+      "en": "Are you thirsty?",
+      "zh": "你渴吗？",
+      "pinyin": "Nǐ kě ma？",
+      "vi": "Bạn khát không?"
+    },
+    {
+      "start": 172.69,
+      "end": 174.69,
+      "en": "Thanks.",
+      "zh": "谢谢。",
+      "pinyin": "Xiè xiè。",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 176.63,
+      "end": 178.53,
+      "en": "I need to stretch.",
+      "zh": "我要伸展一下。",
+      "pinyin": "Wǒ yào shēn zhǎn yí xià。",
+      "vi": "Tôi cần giãn cơ một chút."
+    },
+    {
+      "start": 178.53,
+      "end": 179.33,
+      "en": "It's already really stiff.",
+      "zh": "已经很硬了。",
+      "pinyin": "Yǐ jīng hěn yìng le。",
+      "vi": "Cơ thể đã cứng lắm rồi."
+    },
+    {
+      "start": 185.53,
+      "end": 193.69,
+      "en": "Excuse me, are you going to use the court? We just finished playing. Could you have a match with us?",
+      "zh": "请问你们要用球场吗？我们刚刚打完，你们可不可以跟我们比赛一下？",
+      "pinyin": "Qǐng wèn nǐ men yào yòng qiú chǎng ma？ wǒ men gāng gāng dǎ wán， nǐ men kě bu kě yǐ gēn wǒ men bǐ sài yí xià？",
+      "vi": "Xin hỏi, các bạn có dùng sân bóng không? Chúng tôi vừa chơi xong, các bạn có thể thi đấu với chúng tôi một trận không?"
+    },
+    {
+      "start": 193.69,
+      "end": 197.69,
+      "en": "You two are young guys, and we're two old men.",
+      "zh": "你们两个年轻人，我们两个老头。",
+      "pinyin": "Nǐ men liǎng gè nián qīng rén， wǒ men liǎng gè lǎo tóu。",
+      "vi": "Hai cậu còn trẻ, còn chúng tôi là hai ông già."
+    },
+    {
+      "start": 198.21,
+      "end": 200.21,
+      "en": "Really?",
+      "zh": "真的吗？",
+      "pinyin": "Zhēn de ma？",
+      "vi": "Thật à?"
+    },
+    {
+      "start": 201.07,
+      "end": 204.51,
+      "en": "Good idea, we can play slowly.",
+      "zh": "好主意，我们可以慢慢打。",
+      "pinyin": "Hǎo zhǔ yì， wǒ men kě yǐ màn màn dǎ。",
+      "vi": "Ý hay đấy, chúng ta có thể chơi từ từ."
+    },
+    {
+      "start": 205.21,
+      "end": 209.21,
+      "en": "What do you mean \"slow\"? Let's see who's faster!",
+      "zh": "什么慢慢打？看看谁的速度快！",
+      "pinyin": "Shén me màn màn dǎ？ kàn kàn shuí de sù dù kuài！",
+      "vi": "Chơi từ từ gì chứ? Xem ai nhanh hơn nào!"
+    },
+    {
+      "start": 209.77,
+      "end": 210.17,
+      "en": "Alright!",
+      "zh": "好啊",
+      "pinyin": "Hǎo a",
+      "vi": "Được thôi!"
+    },
+    {
+      "start": 214.21,
+      "end": 214.56,
+      "en": "Okay.",
+      "zh": "好",
+      "pinyin": "Hǎo",
+      "vi": "Được."
+    },
+    {
+      "start": 222.21,
+      "end": 223.21,
+      "en": "Come over here!",
+      "zh": "走过来！",
+      "pinyin": "Zǒu guò lái！",
+      "vi": "Đi qua đây!"
+    },
+    {
+      "start": 223.21,
+      "end": 223.56,
+      "en": "Layup!",
+      "zh": "上篮！",
+      "pinyin": "Shàng lán！",
+      "vi": "Lên rổ!"
+    },
+    {
+      "start": 228.21,
+      "end": 229.21,
+      "en": "Nice!",
+      "zh": "漂亮！",
+      "pinyin": "Piào liang！",
+      "vi": "Đẹp lắm!"
+    },
+    {
+      "start": 229.21,
+      "end": 229.97,
+      "en": "Those two points win it.",
+      "zh": "那两分就赢了。",
+      "pinyin": "Nà liǎng fēn jiù yíng le。",
+      "vi": "Hai điểm đó là thắng rồi."
+    },
+    {
+      "start": 235.21,
+      "end": 236.77,
+      "en": "These two old men are so professional.",
+      "zh": "这两个老头好专业。",
+      "pinyin": "Zhè liǎng gè lǎo tóu hǎo zhuān yè。",
+      "vi": "Hai ông già này chuyên nghiệp thật đấy."
+    },
+    {
+      "start": 237.71,
+      "end": 238.17,
+      "en": "Yeah.",
+      "zh": "是啊。",
+      "pinyin": "Shì a。",
+      "vi": "Ừ, đúng vậy."
+    },
+    {
+      "start": 238.21,
+      "end": 238.93,
+      "en": "If we're not careful,",
+      "zh": "不小心的话，",
+      "pinyin": "Bù xiǎo xīn de huà，",
+      "vi": "Nếu không cẩn thận,"
+    },
+    {
+      "start": 239.53,
+      "end": 240.43,
+      "en": "We'll lose to them.",
+      "zh": "我们会输给他们。",
+      "pinyin": "Wǒ men huì shū gěi tā men。",
+      "vi": "Chúng ta sẽ thua họ."
+    },
+    {
+      "start": 241.53,
+      "end": 241.95,
+      "en": "Okay.",
+      "zh": "好。",
+      "pinyin": "Hǎo。",
+      "vi": "Được."
+    },
+    {
+      "start": 242.89,
+      "end": 243.63,
+      "en": "Next time I get the ball,",
+      "zh": "下次拿到球，",
+      "pinyin": "Xià cì ná dào qiú，",
+      "vi": "Lần tới khi lấy được bóng,"
+    },
+    {
+      "start": 244.21,
+      "end": 245.19,
+      "en": "I'll shoot a three-pointer.",
+      "zh": "我就投三分球。",
+      "pinyin": "Wǒ jiù tóu sān fēn qiú。",
+      "vi": "Tôi sẽ ném ba điểm."
+    },
+    {
+      "start": 246.21,
+      "end": 246.83,
+      "en": "Good idea!",
+      "zh": "好主意！",
+      "pinyin": "Hǎo zhǔ yì！",
+      "vi": "Ý hay đấy!"
+    },
+    {
+      "start": 247.37,
+      "end": 248.37,
+      "en": "Come on!",
+      "zh": "加油！",
+      "pinyin": "Jiā yóu！",
+      "vi": "Cố lên!"
+    },
+    {
+      "start": 253.91,
+      "end": 254.26,
+      "en": "Pass the ball!",
+      "zh": "传球！",
+      "pinyin": "Chuán qiú！",
+      "vi": "Chuyền bóng!"
+    },
+    {
+      "start": 254.93,
+      "end": 255.28,
+      "en": "Come on!",
+      "zh": "来吧！",
+      "pinyin": "Lái ba！",
+      "vi": "Nào!"
+    },
+    {
+      "start": 257.01,
+      "end": 257.71,
+      "en": "Jump shot!",
+      "zh": "跳投！",
+      "pinyin": "Tiào tóu！",
+      "vi": "Nhảy ném!"
+    },
+    {
+      "start": 257.85,
+      "end": 258.2,
+      "en": "Over there!",
+      "zh": "往那边！",
+      "pinyin": "Wǎng nà biān！",
+      "vi": "Sang bên kia!"
+    },
+    {
+      "start": 260.23,
+      "end": 262.11,
+      "en": "Come on, grab the ball!",
+      "zh": "来，抓球！",
+      "pinyin": "Lái， zhuā qiú！",
+      "vi": "Nào, chộp lấy bóng!"
+    },
+    {
+      "start": 262.11,
+      "end": 262.55,
+      "en": "Hey, play defense!",
+      "zh": "喂，你防守！",
+      "pinyin": "Wèi， nǐ fáng shǒu！",
+      "vi": "Này, bạn phòng thủ đi!"
+    },
+    {
+      "start": 263.83,
+      "end": 264.18,
+      "en": "Come on, steal it!",
+      "zh": "来，抢！",
+      "pinyin": "Lái， qiǎng！",
+      "vi": "Nào, cướp bóng đi!"
+    },
+    {
+      "start": 266.61,
+      "end": 267.09,
+      "en": "21 points",
+      "zh": "分",
+      "pinyin": "Fēn",
+      "vi": "21 điểm"
+    },
+    {
+      "start": 269.57,
+      "end": 270.07,
+      "en": "We won!",
+      "zh": "我们赢了",
+      "pinyin": "Wǒ men yíng le",
+      "vi": "Chúng mình thắng rồi!"
+    },
+    {
+      "start": 274.25,
+      "end": 276.13,
+      "en": "We lost.",
+      "zh": "我们输了",
+      "pinyin": "Wǒ men shū le",
+      "vi": "Chúng mình thua rồi."
+    },
+    {
+      "start": 276.21,
+      "end": 277.33,
+      "en": "Yeah.",
+      "zh": "是啊",
+      "pinyin": "Shì a",
+      "vi": "Ừ nhỉ."
+    },
+    {
+      "start": 278.45,
+      "end": 281.2,
+      "en": "Looks like we still need to practice.",
+      "zh": "看来我们还是需要练习啊",
+      "pinyin": "Kàn lái wǒ men hái shì xū yào liàn xí a",
+      "vi": "Có vẻ bọn mình vẫn cần luyện tập."
+    },
+    {
+      "start": 290.96,
+      "end": 292.54,
+      "en": "You guys play ball pretty well.",
+      "zh": "你们球打得不错哦",
+      "pinyin": "Nǐ men qiú dǎ dé bú cuò ò",
+      "vi": "Các bạn chơi bóng khá đấy."
+    },
+    {
+      "start": 293.3,
+      "end": 294.18,
+      "en": "Huh? Us?",
+      "zh": "诶？我们吗？",
+      "pinyin": "Ēi？ wǒ men ma？",
+      "vi": "Ơ? Bọn mình à?"
+    },
+    {
+      "start": 295.42,
+      "end": 296.56,
+      "en": "You guys are the ones who play better.",
+      "zh": "你们才打得比较厉害",
+      "pinyin": "Nǐ men cái dǎ dé bǐ jiào lì hài",
+      "vi": "Chính các bạn mới là những người chơi giỏi hơn."
+    },
+    {
+      "start": 296.88,
+      "end": 299.16,
+      "en": "Right, your shots are really nice.",
+      "zh": "对啊，投球很漂亮",
+      "pinyin": "Duì a， tóu qiú hěn piào liang",
+      "vi": "Đúng vậy, ném bóng đẹp lắm."
+    },
+    {
+      "start": 300.26,
+      "end": 301.5,
+      "en": "We just like playing basketball.",
+      "zh": "我们只是喜欢打篮球",
+      "pinyin": "Wǒ men zhǐ shì xǐ huan dǎ lán qiú",
+      "vi": "Bọn mình chỉ thích chơi bóng rổ thôi."
+    },
+    {
+      "start": 302.04,
+      "end": 302.84,
+      "en": "We come play every weekend.",
+      "zh": "每个周末都来打",
+      "pinyin": "Měi gè zhōu mò dōu lái dǎ",
+      "vi": "Cuối tuần nào bọn mình cũng đến chơi."
+    },
+    {
+      "start": 304.28,
+      "end": 306.46,
+      "en": "So do you have any advice?",
+      "zh": "那你有什么建议吗？",
+      "pinyin": "Nà nǐ yǒu shén me jiàn yì ma？",
+      "vi": "Vậy bạn có gợi ý gì không?"
+    },
+    {
+      "start": 306.84,
+      "end": 310.54,
+      "en": "If you practice dribbling and shooting more, it'll be much better.",
+      "zh": "如果你多练习运球和投球的话，会好很多",
+      "pinyin": "Rú guǒ nǐ duō liàn xí yùn qiú hé tóu qiú de huà， huì hǎo hěn duō",
+      "vi": "Nếu bạn luyện tập rê bóng và ném bóng nhiều hơn thì sẽ tốt hơn nhiều."
+    },
+    {
+      "start": 311.74,
+      "end": 312.32,
+      "en": "That's it.",
+      "zh": "就这样",
+      "pinyin": "Jiù zhè yàng",
+      "vi": "Chỉ vậy thôi."
+    },
+    {
+      "start": 312.96,
+      "end": 314.66,
+      "en": "The fundamentals are still the most important.",
+      "zh": "基础还是最重要的",
+      "pinyin": "Jī chǔ hái shì zuì zhòng yào de",
+      "vi": "Nền tảng vẫn là điều quan trọng nhất."
+    },
+    {
+      "start": 315.42,
+      "end": 316.14,
+      "en": "Thanks!",
+      "zh": "谢谢你啊",
+      "pinyin": "Xiè xiè nǐ a",
+      "vi": "Cảm ơn bạn nhé."
+    },
+    {
+      "start": 316.3,
+      "end": 316.86,
+      "en": "You're welcome.",
+      "zh": "不客气",
+      "pinyin": "Bú kè qì",
+      "vi": "Không có gì."
+    },
+    {
+      "start": 317.94,
+      "end": 319.34,
+      "en": "Then we'll head off first.",
+      "zh": "那我们先走啰",
+      "pinyin": "Nà wǒ men xiān zǒu luō",
+      "vi": "Vậy bọn mình đi trước nhé."
+    },
+    {
+      "start": 319.9,
+      "end": 323.46,
+      "en": "Hey, how about another game next weekend?",
+      "zh": "诶，下周末再来一场怎么样？",
+      "pinyin": "Ēi， xià zhōu mò zài lái yì chǎng zěn me yàng？",
+      "vi": "Này, cuối tuần sau chơi thêm một trận nữa không?"
+    },
+    {
+      "start": 326,
+      "end": 326.74,
+      "en": "Sounds good!",
+      "zh": "好啊",
+      "pinyin": "Hǎo a",
+      "vi": "Được thôi!"
+    },
+    {
+      "start": 327.96,
+      "end": 328.66,
+      "en": "Then no problem!",
+      "zh": "那就没问题啦",
+      "pinyin": "Nà jiù méi wèn tí lā",
+      "vi": "Vậy thì không vấn đề gì rồi."
+    },
+    {
+      "start": 328.66,
+      "end": 329.44,
+      "en": "Okay, bye!",
+      "zh": "好，拜拜",
+      "pinyin": "Hǎo， bài bài",
+      "vi": "Được, tạm biệt nhé!"
+    },
+    {
+      "start": 330.18,
+      "end": 339.12,
+      "en": "We really lost badly today.",
+      "zh": "我们今天真的输得很惨",
+      "pinyin": "Wǒ men jīn tiān zhēn de shū dé hěn cǎn",
+      "vi": "Hôm nay bọn mình thua thảm thật."
+    },
+    {
+      "start": 339.22,
+      "end": 340,
+      "en": "That's right.",
+      "zh": "对啊",
+      "pinyin": "Duì a",
+      "vi": "Đúng vậy"
+    },
+    {
+      "start": 340.74,
+      "end": 341.42,
+      "en": "What's the score?",
+      "zh": "几比几",
+      "pinyin": "Jǐ bǐ jǐ",
+      "vi": "Tỷ số bao nhiêu?"
+    },
+    {
+      "start": 342.56,
+      "end": 344.34,
+      "en": "We only have 14 points.",
+      "zh": "我们只有分",
+      "pinyin": "Wǒ men zhǐ yǒu fēn",
+      "vi": "Chúng tôi chỉ có 14 điểm."
+    },
+    {
+      "start": 345.22,
+      "end": 346.38,
+      "en": "We're 7 points behind them.",
+      "zh": "少他们7分",
+      "pinyin": "Shǎo tā men 7 fēn",
+      "vi": "Kém họ 7 điểm."
+    },
+    {
+      "start": 346.46,
+      "end": 347.4,
+      "en": "Besides",
+      "zh": "还有",
+      "pinyin": "Hái yǒu",
+      "vi": "Với lại"
+    },
+    {
+      "start": 348.44,
+      "end": 349.24,
+      "en": "They're not young either.",
+      "zh": "他们也不年轻",
+      "pinyin": "Tā men yě bù nián qīng",
+      "vi": "Họ cũng không trẻ nữa."
+    },
+    {
+      "start": 349.56,
+      "end": 349.98,
+      "en": "Right.",
+      "zh": "对啊",
+      "pinyin": "Duì a",
+      "vi": "Đúng vậy"
+    },
+    {
+      "start": 350.88,
+      "end": 352.98,
+      "en": "I hope my stamina can be this good in the future too.",
+      "zh": "希望以后我的体力也能这么好",
+      "pinyin": "Xī wàng yǐ hòu wǒ de tǐ lì yě néng zhè me hǎo",
+      "vi": "Hy vọng sau này thể lực của tôi cũng tốt được như vậy."
+    },
+    {
+      "start": 353.04,
+      "end": 354.7,
+      "en": "Me too.",
+      "zh": "我也是",
+      "pinyin": "Wǒ yě shì",
+      "vi": "Tôi cũng vậy."
+    },
+    {
+      "start": 356.48,
+      "end": 357.42,
+      "en": "See you next weekend?",
+      "zh": "下个周末见吗",
+      "pinyin": "Xià gè zhōu mò jiàn ma",
+      "vi": "Cuối tuần sau gặp nhé?"
+    },
+    {
+      "start": 358.52,
+      "end": 359.68,
+      "en": "How about tomorrow?",
+      "zh": "要不要明天",
+      "pinyin": "Yào bu yào míng tiān",
+      "vi": "Hay là mai đi?"
+    },
+    {
+      "start": 360.18,
+      "end": 360.8,
+      "en": "Practice a bit more.",
+      "zh": "再练一下",
+      "pinyin": "Zài liàn yí xià",
+      "vi": "Luyện tập thêm một chút."
+    },
+    {
+      "start": 361,
+      "end": 361.5,
+      "en": "Mm-hm.",
+      "zh": "嗯",
+      "pinyin": "Ǹg",
+      "vi": "Ừ."
+    },
+    {
+      "start": 361.5,
+      "end": 362.5,
+      "en": "Okay.",
+      "zh": "好",
+      "pinyin": "Hǎo",
+      "vi": "Được."
+    },
+    {
+      "start": 363.08,
+      "end": 364.36,
+      "en": "See you tomorrow then.",
+      "zh": "那明天见",
+      "pinyin": "Nà míng tiān jiàn",
+      "vi": "Vậy ngày mai gặp nhé."
+    },
+    {
+      "start": 364.5,
+      "end": 364.85,
+      "en": "Okay.",
+      "zh": "好",
+      "pinyin": "Hǎo",
+      "vi": "Được."
+    },
+    {
+      "start": 365,
+      "end": 365.5,
+      "en": "Let's go.",
+      "zh": "走吧",
+      "pinyin": "Zǒu ba",
+      "vi": "Đi thôi."
+    }
+  ]
+}

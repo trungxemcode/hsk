@@ -1,0 +1,109 @@
+{
+  "id": "3hQKlLW5MHo",
+  "youtubeId": "3hQKlLW5MHo",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Nhà bạn cách xa công ty không ?",
+  "titleVi": "Hội thoại ngắn: Nhà bạn cách xa công ty không?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 52,
+  "cues": [
+    {
+      "start": 0.6,
+      "end": 6.34,
+      "en": "Is your home far from the company?",
+      "zh": "你家离公司远吗?",
+      "pinyin": "Nǐ jiā lí gōng sī yuǎn ma?",
+      "vi": "Nhà bạn cách công ty có xa không?"
+    },
+    {
+      "start": 8,
+      "end": 10.88,
+      "en": "It takes over an hour by bus.",
+      "zh": "坐公共汽车要一个多小时呢",
+      "pinyin": "Zuò gōng gòng qì chē yào yí gè duō xiǎo shí ne",
+      "vi": "Đi xe buýt mất hơn một tiếng đấy."
+    },
+    {
+      "start": 11.64,
+      "end": 13.6,
+      "en": "Taking the bus is too slow.",
+      "zh": "坐公共汽车太慢了",
+      "pinyin": "Zuò gōng gòng qì chē tài màn le",
+      "vi": "Đi xe buýt thì quá chậm."
+    },
+    {
+      "start": 17.74,
+      "end": 19.28,
+      "en": "There are too many cars on the road.",
+      "zh": "路上车太多了",
+      "pinyin": "Lù shang chē tài duō le",
+      "vi": "Trên đường có quá nhiều xe."
+    },
+    {
+      "start": 23.48,
+      "end": 28.02,
+      "en": "far from the company",
+      "zh": "离公司远",
+      "pinyin": "Lí gōng sī yuǎn",
+      "vi": "xa công ty"
+    },
+    {
+      "start": 30.04,
+      "end": 31.42,
+      "en": "bus",
+      "zh": "公共汽车",
+      "pinyin": "Gōng gòng qì chē",
+      "vi": "xe buýt"
+    },
+    {
+      "start": 33.24,
+      "end": 33.98,
+      "en": "hour",
+      "zh": "小时",
+      "pinyin": "Xiǎo shí",
+      "vi": "giờ / tiếng"
+    },
+    {
+      "start": 35.78,
+      "end": 36.13,
+      "en": "slow",
+      "zh": "慢",
+      "pinyin": "Màn",
+      "vi": "chậm"
+    },
+    {
+      "start": 37.66,
+      "end": 38.06,
+      "en": "fast",
+      "zh": "快",
+      "pinyin": "Kuài",
+      "vi": "nhanh"
+    },
+    {
+      "start": 40.16,
+      "end": 40.92,
+      "en": "drive a car",
+      "zh": "开车",
+      "pinyin": "Kāi chē",
+      "vi": "lái xe"
+    },
+    {
+      "start": 42.88,
+      "end": 43.56,
+      "en": "on the road",
+      "zh": "路上",
+      "pinyin": "Lù shang",
+      "vi": "trên đường"
+    },
+    {
+      "start": 45.54,
+      "end": 46.48,
+      "en": "too many cars",
+      "zh": "车太多",
+      "pinyin": "Chē tài duō",
+      "vi": "quá nhiều xe"
+    }
+  ]
+}

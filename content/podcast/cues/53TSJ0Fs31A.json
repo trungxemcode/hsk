@@ -1,0 +1,173 @@
+{
+  "id": "53TSJ0Fs31A",
+  "youtubeId": "53TSJ0Fs31A",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Mua giày mới",
+  "titleVi": "Hội thoại ngắn tiếng Trung: Mua giày mới",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 140,
+  "cues": [
+    {
+      "start": 5.58,
+      "end": 8.52,
+      "en": "Welcome, how can I help you?",
+      "zh": "欢迎光临，有什么可以帮您的吗？",
+      "pinyin": "Huān yíng guāng lín， yǒu shén me kě yǐ bāng nín de ma？",
+      "vi": "Chào mừng quý khách, tôi có thể giúp gì cho bạn không?"
+    },
+    {
+      "start": 10.54,
+      "end": 11.48,
+      "en": "I'd like to just look around by myself first.",
+      "zh": "我想先自己看看。",
+      "pinyin": "Wǒ xiǎng xiān zì jǐ kàn kàn。",
+      "vi": "Tôi muốn tự mình xem trước đã."
+    },
+    {
+      "start": 14.5,
+      "end": 17.7,
+      "en": "Okay, if you need anything, just call me.",
+      "zh": "好的，如果有需要，请叫我。",
+      "pinyin": "Hǎo de， rú guǒ yǒu xū yào， qǐng jiào wǒ。",
+      "vi": "Được, nếu cần gì thì cứ gọi tôi nhé."
+    },
+    {
+      "start": 22.5,
+      "end": 27.22,
+      "en": "Hello, could you let me see that pair of blue Adidas shoes?",
+      "zh": "您好，请问可以让我看看那双蓝色的阿迪达斯鞋子吗？",
+      "pinyin": "Nín hǎo， qǐng wèn kě yǐ ràng wǒ kàn kàn nà shuāng lán sè de ā dí dá sī xié zǐ ma？",
+      "vi": "Xin chào, tôi có thể xem đôi giày Adidas màu xanh kia được không?"
+    },
+    {
+      "start": 29.34,
+      "end": 30.84,
+      "en": "Sure, no problem.",
+      "zh": "可以，没问题。",
+      "pinyin": "Kě yǐ， méi wèn tí。",
+      "vi": "Được, không vấn đề gì."
+    },
+    {
+      "start": 33.12,
+      "end": 34.38,
+      "en": "I'd like to try them on.",
+      "zh": "我想试穿一下。",
+      "pinyin": "Wǒ xiǎng shì chuān yí xià。",
+      "vi": "Tôi muốn thử một chút."
+    },
+    {
+      "start": 36.98,
+      "end": 37.6,
+      "en": "No problem.",
+      "zh": "没问题。",
+      "pinyin": "Méi wèn tí。",
+      "vi": "Không vấn đề."
+    },
+    {
+      "start": 39.08,
+      "end": 40.76,
+      "en": "What shoe size do you usually wear?",
+      "zh": "您平时穿多大鞋码？",
+      "pinyin": "Nín píng shí chuān duō dà xié mǎ？",
+      "vi": "Anh/chị thường đi size giày bao nhiêu?"
+    },
+    {
+      "start": 43.02,
+      "end": 43.88,
+      "en": "Size 43.",
+      "zh": "的。",
+      "pinyin": "De。",
+      "vi": "Size 43."
+    },
+    {
+      "start": 46.08,
+      "end": 49.46,
+      "en": "This pair is size 44, so it might be too big.",
+      "zh": "现在这双是的，可能太大了。",
+      "pinyin": "Xiàn zài zhè shuāng shì de， kě néng tài dà le。",
+      "vi": "Đôi này là size 44, có lẽ quá to."
+    },
+    {
+      "start": 50.06,
+      "end": 53.04,
+      "en": "Let me go to the storage room in the back and get you a size 43.",
+      "zh": "我去后面储藏室给您拿码的。",
+      "pinyin": "Wǒ qù hòu miàn chǔ cáng shì gěi nín ná mǎ de。",
+      "vi": "Để tôi vào kho phía sau lấy size 43 cho bạn."
+    },
+    {
+      "start": 55.16,
+      "end": 55.56,
+      "en": "Thank you.",
+      "zh": "谢谢。",
+      "pinyin": "Xiè xiè。",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 60.38,
+      "end": 61.8,
+      "en": "How do they feel when you wear them?",
+      "zh": "穿着感觉怎么样？",
+      "pinyin": "Chuān zhe gǎn jué zěn me yàng？",
+      "vi": "Đi thử cảm thấy thế nào?"
+    },
+    {
+      "start": 63.8,
+      "end": 65.22,
+      "en": "Very comfortable!",
+      "zh": "特别舒服！",
+      "pinyin": "Tè bié shū fú！",
+      "vi": "Rất thoải mái!"
+    },
+    {
+      "start": 65.22,
+      "end": 67.32,
+      "en": "Excuse me, how much?",
+      "zh": "请问多少钱？",
+      "pinyin": "Qǐng wèn duō shǎo qián？",
+      "vi": "Cho tôi hỏi bao nhiêu tiền ạ?"
+    },
+    {
+      "start": 67.32,
+      "end": 72.04,
+      "en": "469 yuan!",
+      "zh": "元！",
+      "pinyin": "Yuán！",
+      "vi": "469 tệ!"
+    },
+    {
+      "start": 72.04,
+      "end": 77.9,
+      "en": "Today is the mall's anniversary, everything is 20% off, and the original price was over 500 yuan.",
+      "zh": "今天是本商场周年庆，所有商品打八折，原价是多的。",
+      "pinyin": "Jīn tiān shì běn shāng chǎng zhōu nián qìng， suǒ yǒu shāng pǐn dǎ bā zhé， yuán jià shì duō de。",
+      "vi": "Hôm nay là dịp kỷ niệm của trung tâm thương mại, tất cả sản phẩm đều giảm 20%, giá gốc là hơn 500 tệ."
+    },
+    {
+      "start": 80.12,
+      "end": 86.1,
+      "en": "That really is quite a good deal! Please keep them for me; I'll go to the checkout counter to pay.",
+      "zh": "那可真是挺合适的！帮我收好吧，我去收银台付钱。",
+      "pinyin": "Nà kě zhēn shì tǐng hé shì de！ bāng wǒ shōu hǎo ba， wǒ qù shōu yín tái fù qián。",
+      "vi": "Vậy thì đúng là rất hợp lý! Cất giúp tôi nhé, tôi ra quầy thu ngân thanh toán."
+    },
+    {
+      "start": 87.98,
+      "end": 89,
+      "en": "Okay.",
+      "zh": "好的。",
+      "pinyin": "Hǎo de。",
+      "vi": "Vâng ạ."
+    },
+    {
+      "start": 121,
+      "end": 131.44,
+      "en": "Cashier, discount, cashier counter, pay.",
+      "zh": "收银，打折，收银台，付钱。",
+      "pinyin": "Shōu yín， dǎ zhé， shōu yín tái， fù qián。",
+      "vi": "Thu ngân, giảm giá, quầy thu ngân, trả tiền."
+    }
+  ]
+}

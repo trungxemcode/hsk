@@ -1,0 +1,69 @@
+{
+  "id": "LUhFQAJZmoE",
+  "youtubeId": "LUhFQAJZmoE",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Còn mấy việc nữa chưa làm xong",
+  "titleVi": "Còn mấy việc nữa chưa làm xong",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 67,
+  "cues": [
+    {
+      "start": 7.7,
+      "end": 9.14,
+      "en": "There is still some work unfinished.",
+      "zh": "还有一些工作没做完",
+      "pinyin": "Hái yǒu yì xiē gōng zuò méi zuò wán",
+      "vi": "Còn một số công việc chưa làm xong."
+    },
+    {
+      "start": 9.7,
+      "end": 12.82,
+      "en": "Oh, lately I've been working overtime every day. You must be tired.",
+      "zh": "哦，最近天天加班，辛苦了",
+      "pinyin": "Ò， zuì jìn tiān tiān jiā bān， xīn kǔ le",
+      "vi": "Ồ, dạo này ngày nào cũng tăng ca, vất vả quá."
+    },
+    {
+      "start": 45.32,
+      "end": 46.04,
+      "en": "recently",
+      "zh": "最近",
+      "pinyin": "Zuì jìn",
+      "vi": "gần đây, dạo này"
+    },
+    {
+      "start": 49,
+      "end": 49.9,
+      "en": "every day",
+      "zh": "天天",
+      "pinyin": "Tiān tiān",
+      "vi": "ngày nào cũng, hằng ngày"
+    },
+    {
+      "start": 52.32,
+      "end": 53.06,
+      "en": "to work overtime",
+      "zh": "加班",
+      "pinyin": "Jiā bān",
+      "vi": "tăng ca, làm thêm giờ"
+    },
+    {
+      "start": 56.38,
+      "end": 57.16,
+      "en": "hard; tiring; laborious",
+      "zh": "辛苦",
+      "pinyin": "Xīn kǔ",
+      "vi": "vất vả, cực nhọc"
+    },
+    {
+      "start": 59.94,
+      "end": 61.02,
+      "en": "should; ought to; probably",
+      "zh": "应该",
+      "pinyin": "Yīng gāi",
+      "vi": "nên; phải; có lẽ"
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "id": "02rLvXxHtC0",
+  "youtubeId": "02rLvXxHtC0",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Khi nào bạn trả tôi tiền",
+  "titleVi": "Khi nào bạn trả tôi tiền?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 77,
+  "cues": [
+    {
+      "start": 0.46,
+      "end": 3.04,
+      "en": "When will you pay me back?",
+      "zh": "你什么时候还我钱？",
+      "pinyin": "Nǐ shén me shí hòu hái wǒ qián？",
+      "vi": "Khi nào bạn trả tôi tiền?"
+    },
+    {
+      "start": 4.7,
+      "end": 11.5,
+      "en": "Last month, you borrowed 250 yuan from me.",
+      "zh": "上个月，你从我这里借了两百五十块钱。",
+      "pinyin": "Shàng gè yuè， nǐ cóng wǒ zhè lǐ jiè le liǎng bǎi wǔ shí kuài qián。",
+      "vi": "Tháng trước, bạn vay tôi 250 tệ."
+    },
+    {
+      "start": 14.16,
+      "end": 19.22,
+      "en": "Really? I don't remember. Are you sure?",
+      "zh": "真的吗？我不记得了。你肯定吗？",
+      "pinyin": "Zhēn de ma？ wǒ bú jì de le。 nǐ kěn dìng ma？",
+      "vi": "Thật à? Tôi không nhớ. Bạn có chắc không?"
+    },
+    {
+      "start": 22.1,
+      "end": 24.1,
+      "en": "Yes, I'm sure.",
+      "zh": "对，我肯定。",
+      "pinyin": "Duì， wǒ kěn dìng。",
+      "vi": "Đúng, tôi chắc chắn."
+    },
+    {
+      "start": 25.74,
+      "end": 28.24,
+      "en": "When will you pay me back?",
+      "zh": "你什么时候还给我？",
+      "pinyin": "Nǐ shén me shí hòu hái gěi wǒ？",
+      "vi": "Khi nào bạn trả lại cho tôi?"
+    },
+    {
+      "start": 30.84,
+      "end": 33.16,
+      "en": "I'll pay you back next month.",
+      "zh": "我下个月还给你。",
+      "pinyin": "Wǒ xià gè yuè hái gěi nǐ。",
+      "vi": "Tháng sau tôi trả lại cho bạn."
+    },
+    {
+      "start": 35.38,
+      "end": 39,
+      "en": "No, I need it next week.",
+      "zh": "不行，我下星期就要。",
+      "pinyin": "Bù xíng， wǒ xià xīng qī jiù yào。",
+      "vi": "Không được, tôi cần vào tuần sau."
+    },
+    {
+      "start": 41.38,
+      "end": 42.68,
+      "en": "Right, let's take a look at the vocabulary.",
+      "zh": "对了，我们来看一下生词吧。",
+      "pinyin": "Duì le， wǒ men lái kàn yí xià shēng cí ba。",
+      "vi": "Đúng rồi, chúng ta cùng xem từ mới nhé."
+    },
+    {
+      "start": 43.76,
+      "end": 44.6,
+      "en": "last month",
+      "zh": "上个月",
+      "pinyin": "Shàng gè yuè",
+      "vi": "tháng trước"
+    },
+    {
+      "start": 47.2,
+      "end": 47.96,
+      "en": "next month",
+      "zh": "下个月",
+      "pinyin": "Xià gè yuè",
+      "vi": "tháng sau"
+    },
+    {
+      "start": 49.96,
+      "end": 50.94,
+      "en": "next week",
+      "zh": "下星期",
+      "pinyin": "Xià xīng qī",
+      "vi": "tuần sau"
+    },
+    {
+      "start": 53.08,
+      "end": 53.43,
+      "en": "up / last",
+      "zh": "上",
+      "pinyin": "Shàng",
+      "vi": "trên / trước"
+    },
+    {
+      "start": 55.16,
+      "end": 55.52,
+      "en": "down / next",
+      "zh": "下",
+      "pinyin": "Xià",
+      "vi": "dưới / sau"
+    },
+    {
+      "start": 57.88,
+      "end": 58.3,
+      "en": "from me",
+      "zh": "从我这里",
+      "pinyin": "Cóng wǒ zhè lǐ",
+      "vi": "từ chỗ tôi"
+    },
+    {
+      "start": 60.86,
+      "end": 61.28,
+      "en": "borrow",
+      "zh": "借",
+      "pinyin": "Jiè",
+      "vi": "mượn / vay"
+    },
+    {
+      "start": 63.08,
+      "end": 63.82,
+      "en": "remember",
+      "zh": "记得",
+      "pinyin": "Jì de",
+      "vi": "nhớ"
+    },
+    {
+      "start": 65.26,
+      "end": 66,
+      "en": "be sure / certain",
+      "zh": "肯定",
+      "pinyin": "Kěn dìng",
+      "vi": "chắc chắn"
+    },
+    {
+      "start": 66,
+      "end": 66.35,
+      "en": "return / pay back",
+      "zh": "还",
+      "pinyin": "Hái",
+      "vi": "trả lại"
+    },
+    {
+      "start": 68.08,
+      "end": 68.48,
+      "en": "then / right away",
+      "zh": "就",
+      "pinyin": "Jiù",
+      "vi": "thì / ngay"
+    },
+    {
+      "start": 70,
+      "end": 72,
+      "en": "remember",
+      "zh": "记得",
+      "pinyin": "Jì de",
+      "vi": "nhớ"
+    }
+  ]
+}

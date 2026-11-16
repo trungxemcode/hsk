@@ -1,0 +1,557 @@
+{
+  "id": "2XhhZEFMQDw",
+  "youtubeId": "2XhhZEFMQDw",
+  "channelHandle": "@PandaStudio24",
+  "title": "TIẾNG TRUNG GIAO TIẾP chủ đề phỏng vấn xin việc",
+  "titleVi": "Phỏng vấn xin việc",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 595,
+  "cues": [
+    {
+      "start": 30,
+      "end": 30.35,
+      "en": "HR / personnel",
+      "zh": "人事",
+      "pinyin": "Rén shì",
+      "vi": "nhân sự"
+    },
+    {
+      "start": 32.24,
+      "end": 34.96,
+      "en": "second",
+      "zh": "第二",
+      "pinyin": "Dì èr",
+      "vi": "thứ hai"
+    },
+    {
+      "start": 36.78,
+      "end": 37.4,
+      "en": "apply (for a job)",
+      "zh": "应聘",
+      "pinyin": "Yìng pìn",
+      "vi": "ứng tuyển"
+    },
+    {
+      "start": 41.78,
+      "end": 42.88,
+      "en": "HR / personnel",
+      "zh": "人事",
+      "pinyin": "Rén shì",
+      "vi": "nhân sự"
+    },
+    {
+      "start": 45.14,
+      "end": 45.8,
+      "en": "third",
+      "zh": "第三",
+      "pinyin": "Dì sān",
+      "vi": "thứ ba"
+    },
+    {
+      "start": 47.1,
+      "end": 47.7,
+      "en": "interview",
+      "zh": "面试",
+      "pinyin": "Miàn shì",
+      "vi": "phỏng vấn"
+    },
+    {
+      "start": 48,
+      "end": 52,
+      "en": "HR / personnel",
+      "zh": "人事",
+      "pinyin": "Rén shì",
+      "vi": "nhân sự"
+    },
+    {
+      "start": 52.22,
+      "end": 53.16,
+      "en": "HR / personnel",
+      "zh": "人事",
+      "pinyin": "Rén shì",
+      "vi": "nhân sự"
+    },
+    {
+      "start": 54,
+      "end": 56,
+      "en": "third",
+      "zh": "第三",
+      "pinyin": "Dì sān",
+      "vi": "thứ ba"
+    },
+    {
+      "start": 57.74,
+      "end": 58.09,
+      "en": "applicant",
+      "zh": "申请人",
+      "pinyin": "Shēn qǐng rén",
+      "vi": "người xin việc"
+    },
+    {
+      "start": 58.09,
+      "end": 58.44,
+      "en": "person",
+      "zh": "人",
+      "pinyin": "Rén",
+      "vi": "người"
+    },
+    {
+      "start": 59.76,
+      "end": 60.11,
+      "en": "to state / to apply (as in 申请)",
+      "zh": "申",
+      "pinyin": "Shēn",
+      "vi": "xin / trình bày (chữ trong “申请”)"
+    },
+    {
+      "start": 60.18,
+      "end": 61,
+      "en": "please; to invite/request",
+      "zh": "请",
+      "pinyin": "Qǐng",
+      "vi": "mời / xin"
+    },
+    {
+      "start": 61,
+      "end": 61.9,
+      "en": "person",
+      "zh": "人",
+      "pinyin": "Rén",
+      "vi": "người"
+    },
+    {
+      "start": 68.4,
+      "end": 68.92,
+      "en": "position / job",
+      "zh": "职位",
+      "pinyin": "Zhí wèi",
+      "vi": "vị trí công việc"
+    },
+    {
+      "start": 70.16,
+      "end": 71.16,
+      "en": "position / job",
+      "zh": "职位",
+      "pinyin": "Zhí wèi",
+      "vi": "vị trí công việc"
+    },
+    {
+      "start": 78.54,
+      "end": 79.16,
+      "en": "salary",
+      "zh": "薪水",
+      "pinyin": "Xīn shuǐ",
+      "vi": "mức lương"
+    },
+    {
+      "start": 80.5,
+      "end": 81.74,
+      "en": "salary",
+      "zh": "薪水",
+      "pinyin": "Xīn shuǐ",
+      "vi": "mức lương"
+    },
+    {
+      "start": 88.7,
+      "end": 89.22,
+      "en": "benefits / compensation",
+      "zh": "待遇",
+      "pinyin": "Dài yù",
+      "vi": "chế độ đãi ngộ"
+    },
+    {
+      "start": 90.64,
+      "end": 91.58,
+      "en": "benefits / compensation",
+      "zh": "待遇",
+      "pinyin": "Dài yù",
+      "vi": "chế độ đãi ngộ"
+    },
+    {
+      "start": 98.7,
+      "end": 99.28,
+      "en": "bonus",
+      "zh": "奖金",
+      "pinyin": "Jiǎng jīn",
+      "vi": "tiền thưởng"
+    },
+    {
+      "start": 100.72,
+      "end": 101.82,
+      "en": "bonus",
+      "zh": "奖金",
+      "pinyin": "Jiǎng jīn",
+      "vi": "tiền thưởng"
+    },
+    {
+      "start": 108.78,
+      "end": 109.44,
+      "en": "insurance",
+      "zh": "保险",
+      "pinyin": "Bǎo xiǎn",
+      "vi": "bảo hiểm"
+    },
+    {
+      "start": 118.7,
+      "end": 119.2,
+      "en": "experience",
+      "zh": "经验",
+      "pinyin": "Jīng yàn",
+      "vi": "kinh nghiệm"
+    },
+    {
+      "start": 120.56,
+      "end": 121.58,
+      "en": "experience",
+      "zh": "经验",
+      "pinyin": "Jīng yàn",
+      "vi": "kinh nghiệm"
+    },
+    {
+      "start": 128.7,
+      "end": 129.26,
+      "en": "grades",
+      "zh": "成绩",
+      "pinyin": "Chéng jì",
+      "vi": "thành tích"
+    },
+    {
+      "start": 130.58,
+      "end": 131.66,
+      "en": "grades",
+      "zh": "成绩",
+      "pinyin": "Chéng jì",
+      "vi": "thành tích"
+    },
+    {
+      "start": 138.82,
+      "end": 139.4,
+      "en": "academic degree",
+      "zh": "学位",
+      "pinyin": "Xué wèi",
+      "vi": "học vị"
+    },
+    {
+      "start": 140.9,
+      "end": 150.23,
+      "en": "That is, academic degree; 4.13 foreign language proficiency",
+      "zh": "也就是学位；. 外文程度",
+      "pinyin": "Yě jiù shì xué wèi；. wài wén chéng dù",
+      "vi": "Tức là học vị; 4.13 Trình độ ngoại ngữ"
+    },
+    {
+      "start": 154.83,
+      "end": 161.95,
+      "en": "computer operation",
+      "zh": "电脑操作",
+      "pinyin": "Diàn nǎo cāo zuò",
+      "vi": "thao tác máy tính"
+    },
+    {
+      "start": 170.49,
+      "end": 173.19,
+      "en": "probation period",
+      "zh": "试用期",
+      "pinyin": "Shì yòng qī",
+      "vi": "thời gian thử việc"
+    },
+    {
+      "start": 181.81,
+      "end": 183.81,
+      "en": "Second, we study various topics",
+      "zh": "第二，我们学习各种课题",
+      "pinyin": "Dì èr， wǒ men xué xí gè zhǒng kè tí",
+      "vi": "Thứ hai, chúng ta học các chủ đề khác nhau"
+    },
+    {
+      "start": 187.97,
+      "end": 193.63,
+      "en": "I came for the interview as scheduled; very glad to meet you",
+      "zh": "我是应约来面试的，非常高兴见到你",
+      "pinyin": "Wǒ shì yìng yuē lái miàn shì de， fēi cháng gāo xìng jiàn dào nǐ",
+      "vi": "Tôi đến phỏng vấn theo lịch hẹn, rất vui được gặp bạn"
+    },
+    {
+      "start": 196.81,
+      "end": 201.65,
+      "en": "I came for the interview as scheduled; very glad to meet you",
+      "zh": "我是应约来面试的，非常高兴见到你",
+      "pinyin": "Wǒ shì yìng yuē lái miàn shì de， fēi cháng gāo xìng jiàn dào nǐ",
+      "vi": "Tôi đến phỏng vấn theo lịch hẹn, rất vui được gặp bạn"
+    },
+    {
+      "start": 204.01,
+      "end": 207.01,
+      "en": "It means I came for the interview as scheduled; very glad to meet you",
+      "zh": "意思是，我是应约来面试的，非常高兴见到你",
+      "pinyin": "Yì sī shì， wǒ shì yìng yuē lái miàn shì de， fēi cháng gāo xìng jiàn dào nǐ",
+      "vi": "Nghĩa là, tôi đến phỏng vấn theo lịch hẹn, rất vui được gặp bạn"
+    },
+    {
+      "start": 210.17,
+      "end": 214.71,
+      "en": "Let me introduce myself",
+      "zh": "让我来介绍一下自己",
+      "pinyin": "Ràng wǒ lái jiè shào yí xià zì jǐ",
+      "vi": "Để tôi giới thiệu về bản thân"
+    },
+    {
+      "start": 217.21,
+      "end": 219.63,
+      "en": "Let me introduce myself",
+      "zh": "让我来介绍一下自己",
+      "pinyin": "Ràng wǒ lái jiè shào yí xià zì jǐ",
+      "vi": "Để tôi giới thiệu về bản thân"
+    },
+    {
+      "start": 222.95,
+      "end": 223.81,
+      "en": "Let me introduce myself",
+      "zh": "我来介绍一下自己",
+      "pinyin": "Wǒ lái jiè shào yí xià zì jǐ",
+      "vi": "Tôi xin tự giới thiệu"
+    },
+    {
+      "start": 227.11,
+      "end": 231.81,
+      "en": "How much do you know about our company?",
+      "zh": "你对我们公司了解多少？",
+      "pinyin": "Nǐ duì wǒ men gōng sī liǎo jiě duō shǎo？",
+      "vi": "Bạn hiểu biết bao nhiêu về công ty chúng tôi?"
+    },
+    {
+      "start": 240.03,
+      "end": 241.91,
+      "en": "How much do you know about our company?",
+      "zh": "你对我们公司了解多少？",
+      "pinyin": "Nǐ duì wǒ men gōng sī liǎo jiě duō shǎo？",
+      "vi": "Bạn hiểu biết bao nhiêu về công ty chúng tôi?"
+    },
+    {
+      "start": 241.91,
+      "end": 242.29,
+      "en": "How much do you know about our company?",
+      "zh": "你对我们公司了解多少？",
+      "pinyin": "Nǐ duì wǒ men gōng sī liǎo jiě duō shǎo？",
+      "vi": "Bạn hiểu biết bao nhiêu về công ty chúng tôi?"
+    },
+    {
+      "start": 246.01,
+      "end": 255.63,
+      "en": "Why should we choose you?",
+      "zh": "为什么我们要选择你？",
+      "pinyin": "Wèi shén me wǒ men yào xuǎn zé nǐ？",
+      "vi": "Tại sao chúng tôi phải chọn bạn?"
+    },
+    {
+      "start": 258.05,
+      "end": 260.09,
+      "en": "Why should we choose you?",
+      "zh": "为什么我们要选择你？",
+      "pinyin": "Wèi shén me wǒ men yào xuǎn zé nǐ？",
+      "vi": "Tại sao chúng tôi phải chọn bạn?"
+    },
+    {
+      "start": 263.31,
+      "end": 267.91,
+      "en": "My grades are very good",
+      "zh": "我成绩非常好",
+      "pinyin": "Wǒ chéng jì fēi cháng hǎo",
+      "vi": "Thành tích của tôi rất tốt"
+    },
+    {
+      "start": 270.47,
+      "end": 272.45,
+      "en": "My grades are very good",
+      "zh": "我成绩非常好",
+      "pinyin": "Wǒ chéng jì fēi cháng hǎo",
+      "vi": "Thành tích của tôi rất tốt"
+    },
+    {
+      "start": 275.13,
+      "end": 286.51,
+      "en": "The major I studied is very suitable for your company",
+      "zh": "我所学的专业非常适合你们",
+      "pinyin": "Wǒ suǒ xué de zhuān yè fēi cháng shì hé nǐ men",
+      "vi": "Ngành tôi học rất phù hợp với các bạn"
+    },
+    {
+      "start": 288.97,
+      "end": 291.73,
+      "en": "My major suits you very well",
+      "zh": "我所学的专业很适合你",
+      "pinyin": "Wǒ suǒ xué de zhuān yè hěn shì hé nǐ",
+      "vi": "Ngành tôi học rất hợp với bạn"
+    },
+    {
+      "start": 291.79,
+      "end": 307.21,
+      "en": "I am very cooperative. I am young, and I want to work hard for your company.",
+      "zh": "我非常合作。我很年轻，我想为贵公司而努力。",
+      "pinyin": "Wǒ fēi cháng hé zuò。 wǒ hěn nián qīng， wǒ xiǎng wèi guì gōng sī ér nǔ lì。",
+      "vi": "Tôi rất hợp tác. Tôi còn trẻ, tôi muốn cống hiến cho quý công ty."
+    },
+    {
+      "start": 309.41,
+      "end": 313.37,
+      "en": "I am young, and I want to work hard for your company.",
+      "zh": "我很年轻，我想为贵公司而努力。",
+      "pinyin": "Wǒ hěn nián qīng， wǒ xiǎng wèi guì gōng sī ér nǔ lì。",
+      "vi": "Tôi còn trẻ, tôi muốn cống hiến cho quý công ty."
+    },
+    {
+      "start": 315.89,
+      "end": 317.45,
+      "en": "I am young, and I want to work hard for your company.",
+      "zh": "我很年轻，我想为贵公司而努力。",
+      "pinyin": "Wǒ hěn nián qīng， wǒ xiǎng wèi guì gōng sī ér nǔ lì。",
+      "vi": "Tôi còn trẻ, tôi muốn cống hiến cho quý công ty."
+    },
+    {
+      "start": 317.53,
+      "end": 327.43,
+      "en": "I have experience in computer operation.",
+      "zh": "我有电脑操作经验。",
+      "pinyin": "Wǒ yǒu diàn nǎo cāo zuò jīng yàn。",
+      "vi": "Tôi có kinh nghiệm thao tác máy tính."
+    },
+    {
+      "start": 329.83,
+      "end": 331.89,
+      "en": "I have experience in computer operation.",
+      "zh": "我有电脑操作经验。",
+      "pinyin": "Wǒ yǒu diàn nǎo cāo zuò jīng yàn。",
+      "vi": "Tôi có kinh nghiệm thao tác máy tính."
+    },
+    {
+      "start": 334.13,
+      "end": 345.21,
+      "en": "What are your strengths and weaknesses?",
+      "zh": "你的优点、缺点是什么？",
+      "pinyin": "Nǐ de yōu diǎn、 quē diǎn shì shén me？",
+      "vi": "Ưu điểm và khuyết điểm của bạn là gì?"
+    },
+    {
+      "start": 348.45,
+      "end": 351.09,
+      "en": "What are your strengths and weaknesses?",
+      "zh": "你的优点、缺点是什么？",
+      "pinyin": "Nǐ de yōu diǎn、 quē diǎn shì shén me？",
+      "vi": "Ưu điểm và khuyết điểm của bạn là gì?"
+    },
+    {
+      "start": 353.57,
+      "end": 355.15,
+      "en": "What is your weakness?",
+      "zh": "你的缺点是什么？",
+      "pinyin": "Nǐ de quē diǎn shì shén me？",
+      "vi": "Nhược điểm của bạn là gì?"
+    },
+    {
+      "start": 355.15,
+      "end": 355.5,
+      "en": "What is your weakness?",
+      "zh": "你的缺点是什么？",
+      "pinyin": "Nǐ de quē diǎn shì shén me？",
+      "vi": "Nhược điểm của bạn là gì?"
+    },
+    {
+      "start": 359.61,
+      "end": 364.89,
+      "en": "I am also a person with strong team spirit.",
+      "zh": "我也是一个富有团队精神的人。",
+      "pinyin": "Wǒ yě shì yí gè fù yǒu tuán duì jīng shén de rén。",
+      "vi": "Tôi cũng là một người có tinh thần đồng đội."
+    },
+    {
+      "start": 367.83,
+      "end": 371.37,
+      "en": "I am a person with strong team spirit.",
+      "zh": "我是一个富有团队精神的人。",
+      "pinyin": "Wǒ shì yí gè fù yǒu tuán duì jīng shén de rén。",
+      "vi": "Tôi là một người có tinh thần đồng đội."
+    },
+    {
+      "start": 373.99,
+      "end": 385.21,
+      "en": "I learn things very quickly.",
+      "zh": "我学东西很快。",
+      "pinyin": "Wǒ xué dōng xī hěn kuài。",
+      "vi": "Tôi học hỏi rất nhanh."
+    },
+    {
+      "start": 387.39,
+      "end": 389.41,
+      "en": "I learn things very quickly.",
+      "zh": "我学东西很快。",
+      "pinyin": "Wǒ xué dōng xī hěn kuài。",
+      "vi": "Tôi học hỏi rất nhanh."
+    },
+    {
+      "start": 391.71,
+      "end": 401.51,
+      "en": "My organizational skills are very strong.",
+      "zh": "我的组织能力很强。",
+      "pinyin": "Wǒ de zǔ zhī néng lì hěn qiáng。",
+      "vi": "Khả năng tổ chức của tôi rất tốt."
+    },
+    {
+      "start": 401.53,
+      "end": 406.57,
+      "en": "My organizational skills are very strong.",
+      "zh": "我的组织能力很强。",
+      "pinyin": "Wǒ de zǔ zhī néng lì hěn qiáng。",
+      "vi": "Khả năng tổ chức của tôi rất tốt."
+    },
+    {
+      "start": 408.95,
+      "end": 420.29,
+      "en": "My weakness is that I don't have much experience.",
+      "zh": "我的缺点是没有太多经验。",
+      "pinyin": "Wǒ de quē diǎn shì méi yǒu tài duō jīng yàn。",
+      "vi": "Nhược điểm của tôi là chưa có nhiều kinh nghiệm."
+    },
+    {
+      "start": 471.96,
+      "end": 474.32,
+      "en": "Because I have some personal reasons.",
+      "zh": "因为我有一些私人原因。",
+      "pinyin": "Yīn wèi wǒ yǒu yì xiē sī rén yuán yīn。",
+      "vi": "Vì tôi có một vài lý do cá nhân."
+    },
+    {
+      "start": 482.14,
+      "end": 483.5,
+      "en": "My problem is that I have a personal reason.",
+      "zh": "我的问题是有一个私人原因。",
+      "pinyin": "Wǒ de wèn tí shì yǒu yí gè sī rén yuán yīn。",
+      "vi": "Vấn đề của tôi là có một lý do cá nhân."
+    },
+    {
+      "start": 490.68,
+      "end": 493.68,
+      "en": "What is the probationary salary?",
+      "zh": "试用期薪水是多少？",
+      "pinyin": "Shì yòng qī xīn shuǐ shì duō shǎo？",
+      "vi": "Lương thử việc là bao nhiêu?"
+    },
+    {
+      "start": 526.06,
+      "end": 527.8,
+      "en": "How often is the salary raised?",
+      "zh": "多久涨一次工资？",
+      "pinyin": "Duō jiǔ zhǎng yí cì gōng zī？",
+      "vi": "Bao lâu thì tăng lương một lần?"
+    },
+    {
+      "start": 535.92,
+      "end": 537.84,
+      "en": "How often does the company plan to raise salaries?",
+      "zh": "公司计划多久涨一次工资？",
+      "pinyin": "Gōng sī jì huà duō jiǔ zhǎng yí cì gōng zī？",
+      "vi": "Công ty dự định bao lâu tăng lương một lần?"
+    }
+  ]
+}

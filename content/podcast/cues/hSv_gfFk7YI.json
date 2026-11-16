@@ -1,0 +1,893 @@
+{
+  "id": "hSv_gfFk7YI",
+  "youtubeId": "hSv_gfFk7YI",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe hội thoại TIẾNG TRUNG : Mua quần áo | 买衣服",
+  "titleVi": "Hội thoại mua quần áo",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 399,
+  "cues": [
+    {
+      "start": 30,
+      "end": 33.74,
+      "en": "My friend said there's a great little clothing store nearby.",
+      "zh": "我朋友说附近有一家很好的小服饰店",
+      "pinyin": "Wǒ péng yǒu shuō fù jìn yǒu yì jiā hěn hǎo de xiǎo fú shì diàn",
+      "vi": "Bạn mình nói gần đây có một cửa hàng quần áo nhỏ rất tốt."
+    },
+    {
+      "start": 34.84,
+      "end": 36.8,
+      "en": "The stuff there is both stylish and cheap.",
+      "zh": "东西又流行又便宜",
+      "pinyin": "Dōng xī yòu liú xíng yòu pián yi",
+      "vi": "Đồ ở đó vừa thời trang vừa rẻ."
+    },
+    {
+      "start": 38.16,
+      "end": 40,
+      "en": "Let's go find it, okay?",
+      "zh": "我们去找一下好不好",
+      "pinyin": "Wǒ men qù zhǎo yí xià hǎo bu hǎo",
+      "vi": "Chúng mình đi tìm thử được không?"
+    },
+    {
+      "start": 40.82,
+      "end": 42.7,
+      "en": "Okay, we can stroll around while we're at it.",
+      "zh": "好啊 顺便逛街",
+      "pinyin": "Hǎo a shùn biàn guàng jiē",
+      "vi": "Được thôi, tiện thể đi dạo phố luôn."
+    },
+    {
+      "start": 43.48,
+      "end": 45.64,
+      "en": "Then do you know how to get there?",
+      "zh": "那你知道怎么去吗",
+      "pinyin": "Nà nǐ zhī dào zěn me qù ma",
+      "vi": "Vậy bạn biết đường đi không?"
+    },
+    {
+      "start": 46.66,
+      "end": 48.44,
+      "en": "It seems to be right up ahead.",
+      "zh": "好像就在前面",
+      "pinyin": "Hǎo xiàng jiù zài qián miàn",
+      "vi": "Hình như ngay phía trước."
+    },
+    {
+      "start": 49.76,
+      "end": 50.74,
+      "en": "Let's go have a look.",
+      "zh": "我们去找找看吧",
+      "pinyin": "Wǒ men qù zhǎo zhǎo kàn ba",
+      "vi": "Chúng mình đi tìm xem thử đi."
+    },
+    {
+      "start": 51.18,
+      "end": 53.42,
+      "en": "Okay, no problem, let's go straight ahead.",
+      "zh": "好 没问题 往前走",
+      "pinyin": "Hǎo méi wèn tí wǎng qián zǒu",
+      "vi": "Được, không vấn đề gì, đi về phía trước."
+    },
+    {
+      "start": 54.14,
+      "end": 54.49,
+      "en": "Let's go.",
+      "zh": "走吧",
+      "pinyin": "Zǒu ba",
+      "vi": "Đi thôi."
+    },
+    {
+      "start": 64,
+      "end": 66,
+      "en": "Take a look.",
+      "zh": "你看看",
+      "pinyin": "Nǐ kàn kàn",
+      "vi": "Bạn nhìn xem."
+    },
+    {
+      "start": 66.48,
+      "end": 66.83,
+      "en": "Does this red one look good?",
+      "zh": "这件红色的好看吗",
+      "pinyin": "Zhè jiàn hóng sè de hǎo kàn ma",
+      "vi": "Cái màu đỏ này đẹp không?"
+    },
+    {
+      "start": 68.48,
+      "end": 68.83,
+      "en": "I think...",
+      "zh": "我觉得",
+      "pinyin": "Wǒ jué de",
+      "vi": "Mình nghĩ..."
+    },
+    {
+      "start": 70,
+      "end": 72,
+      "en": "It looks good.",
+      "zh": "好看",
+      "pinyin": "Hǎo kàn",
+      "vi": "Đẹp."
+    },
+    {
+      "start": 72.48,
+      "end": 72.83,
+      "en": "Then",
+      "zh": "那",
+      "pinyin": "Nà",
+      "vi": "Vậy"
+    },
+    {
+      "start": 74,
+      "end": 76,
+      "en": "How about this green one?",
+      "zh": "这件绿色的呢",
+      "pinyin": "Zhè jiàn lǜ sè de ne",
+      "vi": "Còn cái màu xanh lá cây này thì sao?"
+    },
+    {
+      "start": 76.46,
+      "end": 77.96,
+      "en": "This one",
+      "zh": "这件",
+      "pinyin": "Zhè jiàn",
+      "vi": "Cái này"
+    },
+    {
+      "start": 78,
+      "end": 80,
+      "en": "Is also pretty nice.",
+      "zh": "也很不错",
+      "pinyin": "Yě hěn bú cuò",
+      "vi": "Cũng khá tốt."
+    },
+    {
+      "start": 80.48,
+      "end": 80.83,
+      "en": "Which one do you prefer?",
+      "zh": "你比较喜欢哪一件",
+      "pinyin": "Nǐ bǐ jiào xǐ huan nǎ yí jiàn",
+      "vi": "Bạn thích cái nào hơn?"
+    },
+    {
+      "start": 82.48,
+      "end": 82.83,
+      "en": "The dark-colored one?",
+      "zh": "颜色深的",
+      "pinyin": "Yán sè shēn de",
+      "vi": "Màu đậm?"
+    },
+    {
+      "start": 84.48,
+      "end": 84.83,
+      "en": "Or the light-colored one?",
+      "zh": "还是颜色浅的",
+      "pinyin": "Hái shì yán sè qiǎn de",
+      "vi": "Hay là màu nhạt?"
+    },
+    {
+      "start": 90.1,
+      "end": 90.96,
+      "en": "Hard to say.",
+      "zh": "很难说",
+      "pinyin": "Hěn nán shuō",
+      "vi": "Khó nói lắm."
+    },
+    {
+      "start": 92.44,
+      "end": 92.82,
+      "en": "I think...",
+      "zh": "我觉得",
+      "pinyin": "Wǒ jué de",
+      "vi": "Mình nghĩ..."
+    },
+    {
+      "start": 94.04,
+      "end": 105.44,
+      "en": "The green one suits you better, but the red one is also very pretty. I like both too. Try both of those on.",
+      "zh": "绿色的比较适合你，可是红色的也很好看。我也是两个都喜欢的，那两件都试看看吧。",
+      "pinyin": "Lǜ sè de bǐ jiào shì hé nǐ， kě shì hóng sè de yě hěn hǎo kàn。 wǒ yě shì liǎng gè dōu xǐ huan de， nà liǎng jiàn dōu shì kàn kàn ba。",
+      "vi": "Màu xanh lá cây hợp với bạn hơn, nhưng màu đỏ cũng rất đẹp. Tôi cũng thích cả hai, bạn thử cả hai cái đó đi."
+    },
+    {
+      "start": 105.86,
+      "end": 106.34,
+      "en": "Good idea.",
+      "zh": "好主意。",
+      "pinyin": "Hǎo zhǔ yì。",
+      "vi": "Ý hay đấy."
+    },
+    {
+      "start": 106.98,
+      "end": 107.58,
+      "en": "I'll go try it on.",
+      "zh": "我去试试看。",
+      "pinyin": "Wǒ qù shì shì kàn。",
+      "vi": "Tôi đi thử xem."
+    },
+    {
+      "start": 116.76,
+      "end": 117.2,
+      "en": "Miss.",
+      "zh": "小姐。",
+      "pinyin": "Xiǎo jiě。",
+      "vi": "Chị ơi."
+    },
+    {
+      "start": 119.06,
+      "end": 119.68,
+      "en": "This shirt.",
+      "zh": "这件衣服。",
+      "pinyin": "Zhè jiàn yī fu。",
+      "vi": "Cái áo này."
+    },
+    {
+      "start": 119.82,
+      "end": 121.14,
+      "en": "It seems...",
+      "zh": "好像。",
+      "pinyin": "Hǎo xiàng。",
+      "vi": "Hình như."
+    },
+    {
+      "start": 122.28,
+      "end": 122.82,
+      "en": "It's a little big.",
+      "zh": "有一点大。",
+      "pinyin": "Yǒu yì diǎn dà。",
+      "vi": "Hơi to một chút."
+    },
+    {
+      "start": 124.12,
+      "end": 125.52,
+      "en": "Do you have a smaller one?",
+      "zh": "有没有小一点的？",
+      "pinyin": "Yǒu méi yǒu xiǎo yì diǎn de？",
+      "vi": "Có cái nào nhỏ hơn không ạ?"
+    },
+    {
+      "start": 126.02,
+      "end": 127.12,
+      "en": "Let me take a look for you.",
+      "zh": "我帮你看一下。",
+      "pinyin": "Wǒ bāng nǐ kàn yí xià。",
+      "vi": "Để tôi xem giúp bạn."
+    },
+    {
+      "start": 127.78,
+      "end": 128.86,
+      "en": "Okay, thanks.",
+      "zh": "好，谢谢。",
+      "pinyin": "Hǎo， xiè xiè。",
+      "vi": "Vâng, cảm ơn."
+    },
+    {
+      "start": 129.44,
+      "end": 131.38,
+      "en": "What size do you usually wear?",
+      "zh": "你平时穿什么大小的？",
+      "pinyin": "Nǐ píng shí chuān shén me dà xiǎo de？",
+      "vi": "Bạn thường mặc size gì?"
+    },
+    {
+      "start": 132,
+      "end": 134.42,
+      "en": "I usually wear size small.",
+      "zh": "我一般都是穿小号的。",
+      "pinyin": "Wǒ yì bān dōu shì chuān xiǎo hào de。",
+      "vi": "Tôi thường mặc size nhỏ."
+    },
+    {
+      "start": 134.84,
+      "end": 136.76,
+      "en": "Okay, let me look for it for you.",
+      "zh": "好的，我帮你找找看。",
+      "pinyin": "Hǎo de， wǒ bāng nǐ zhǎo zhǎo kàn。",
+      "vi": "Được, để tôi tìm giúp bạn."
+    },
+    {
+      "start": 136.88,
+      "end": 137.76,
+      "en": "Please wait a moment.",
+      "zh": "请稍等。",
+      "pinyin": "Qǐng shāo děng。",
+      "vi": "Xin chờ một chút."
+    },
+    {
+      "start": 144.68,
+      "end": 146.3,
+      "en": "Miss, I'm sorry.",
+      "zh": "小姐，不好意思。",
+      "pinyin": "Xiǎo jiě， bù hǎo yì si。",
+      "vi": "Chị ơi, xin lỗi."
+    },
+    {
+      "start": 147.52,
+      "end": 148.96,
+      "en": "We're sold out of the small size.",
+      "zh": "小号的我们卖完了。",
+      "pinyin": "Xiǎo hào de wǒ men mài wán le。",
+      "vi": "Size nhỏ chúng tôi đã bán hết rồi."
+    },
+    {
+      "start": 149.86,
+      "end": 152.14,
+      "en": "Oh, what a pity.",
+      "zh": "哦，太可惜了。",
+      "pinyin": "Ò， tài kě xī le。",
+      "vi": "Ồ, tiếc quá."
+    },
+    {
+      "start": 153.42,
+      "end": 154.82,
+      "en": "There isn't even one?",
+      "zh": "一件都没有吗？",
+      "pinyin": "Yí jiàn dōu méi yǒu ma？",
+      "vi": "Không còn một chiếc nào à?"
+    },
+    {
+      "start": 155.4,
+      "end": 155.76,
+      "en": "Sorry.",
+      "zh": "不好意思。",
+      "pinyin": "Bù hǎo yì si。",
+      "vi": "Xin lỗi."
+    },
+    {
+      "start": 155.96,
+      "end": 157.22,
+      "en": "No, there isn't.",
+      "zh": "没有。",
+      "pinyin": "Méi yǒu。",
+      "vi": "Không có."
+    },
+    {
+      "start": 158.92,
+      "end": 160.76,
+      "en": "But take a look at this one.",
+      "zh": "可是你看一下这件。",
+      "pinyin": "Kě shì nǐ kàn yí xià zhè jiàn。",
+      "vi": "Nhưng bạn xem cái này đi."
+    },
+    {
+      "start": 161.68,
+      "end": 162.74,
+      "en": "It's about the same as that one.",
+      "zh": "跟那件差不多。",
+      "pinyin": "Gēn nà jiàn chà bù duō。",
+      "vi": "Nó gần giống cái kia."
+    },
+    {
+      "start": 163.28,
+      "end": 164.82,
+      "en": "It's just that the style is different.",
+      "zh": "只是样式不一样。",
+      "pinyin": "Zhǐ shì yàng shì bù yí yàng。",
+      "vi": "Chỉ là kiểu dáng không giống thôi."
+    },
+    {
+      "start": 168.06,
+      "end": 169.72,
+      "en": "I quite like this one too.",
+      "zh": "这件我也挺喜欢的。",
+      "pinyin": "Zhè jiàn wǒ yě tǐng xǐ huan de。",
+      "vi": "Cái này tôi cũng khá thích."
+    },
+    {
+      "start": 170.7,
+      "end": 171.8,
+      "en": "This one is very pretty.",
+      "zh": "这件很好看。",
+      "pinyin": "Zhè jiàn hěn hǎo kàn。",
+      "vi": "Cái này đẹp lắm."
+    },
+    {
+      "start": 173.06,
+      "end": 174.16,
+      "en": "Let me try it on first.",
+      "zh": "我先试试看吧",
+      "pinyin": "Wǒ xiān shì shì kàn ba",
+      "vi": "Để tôi mặc thử trước đã."
+    },
+    {
+      "start": 174.3,
+      "end": 174.88,
+      "en": "Okay.",
+      "zh": "好的",
+      "pinyin": "Hǎo de",
+      "vi": "Vâng ạ."
+    },
+    {
+      "start": 182.92,
+      "end": 183.27,
+      "en": "How does it look?",
+      "zh": "怎么样",
+      "pinyin": "Zěn me yàng",
+      "vi": "Thế nào?"
+    },
+    {
+      "start": 184.2,
+      "end": 185.52,
+      "en": "Do you think it looks good?",
+      "zh": "你觉得好看吗",
+      "pinyin": "Nǐ jué de hǎo kàn ma",
+      "vi": "Bạn có thấy đẹp không?"
+    },
+    {
+      "start": 186.62,
+      "end": 187.06,
+      "en": "It looks good.",
+      "zh": "好看",
+      "pinyin": "Hǎo kàn",
+      "vi": "Đẹp."
+    },
+    {
+      "start": 188.48,
+      "end": 190.4,
+      "en": "Do you really think it looks good?",
+      "zh": "你真的觉得好看吗",
+      "pinyin": "Nǐ zhēn de jué de hǎo kàn ma",
+      "vi": "Bạn thật sự thấy đẹp à?"
+    },
+    {
+      "start": 191.32,
+      "end": 191.67,
+      "en": "Mm-hm.",
+      "zh": "嗯",
+      "pinyin": "Ǹg",
+      "vi": "Ừm."
+    },
+    {
+      "start": 192.38,
+      "end": 192.96,
+      "en": "It really suits you.",
+      "zh": "真的很适合你",
+      "pinyin": "Zhēn de hěn shì hé nǐ",
+      "vi": "Thật sự rất hợp với bạn."
+    },
+    {
+      "start": 193.8,
+      "end": 212,
+      "en": "Don't you think the color is a bit too bright? You look beautiful in it. Thank you, then I'll go try another one. She's your girlfriend, right?",
+      "zh": "你不觉得颜色有点太亮了吗？你穿起来很美。谢谢你，那我再去试试另外一件。她是你女朋友，对吧？",
+      "pinyin": "Nǐ bù jué de yán sè yǒu diǎn tài liàng le ma？ nǐ chuān qǐ lái hěn měi。 xiè xiè nǐ， nà wǒ zài qù shì shì lìng wài yí jiàn。 tā shì nǐ nǚ péng yǒu， duì ba？",
+      "vi": "Bạn không thấy màu này hơi chói sao? Bạn mặc lên trông đẹp lắm. Cảm ơn bạn, để tôi đi mặc thử một chiếc khác. Cô ấy là bạn gái của bạn, phải không?"
+    },
+    {
+      "start": 212.72,
+      "end": 214.38,
+      "en": "No, no.",
+      "zh": "不是不是",
+      "pinyin": "Bú shì bu shì",
+      "vi": "Không phải đâu, không phải đâu."
+    },
+    {
+      "start": 215.24,
+      "end": 216.86,
+      "en": "We're just friends.",
+      "zh": "我们只是朋友",
+      "pinyin": "Wǒ men zhǐ shì péng yǒu",
+      "vi": "Chúng tôi chỉ là bạn thôi."
+    },
+    {
+      "start": 217.92,
+      "end": 218.27,
+      "en": "Sorry.",
+      "zh": "不好意思",
+      "pinyin": "Bù hǎo yì si",
+      "vi": "Xin lỗi."
+    },
+    {
+      "start": 219.22,
+      "end": 220.5,
+      "en": "I thought she was your girlfriend.",
+      "zh": "我以为她是你女朋友",
+      "pinyin": "Wǒ yǐ wéi tā shì nǐ nǚ péng yǒu",
+      "vi": "Tôi cứ tưởng cô ấy là bạn gái của bạn."
+    },
+    {
+      "start": 221.38,
+      "end": 222.78,
+      "en": "No.",
+      "zh": "不是",
+      "pinyin": "Bú shì",
+      "vi": "Không phải."
+    },
+    {
+      "start": 222.84,
+      "end": 225.12,
+      "en": "No, we're just friends.",
+      "zh": "不是，我们只是朋友",
+      "pinyin": "Bú shì， wǒ men zhǐ shì péng yǒu",
+      "vi": "Không phải đâu, chúng tôi chỉ là bạn thôi."
+    },
+    {
+      "start": 228.14,
+      "end": 230.84,
+      "en": "What about this one? How does it look?",
+      "zh": "这件呢？看起来怎么样？",
+      "pinyin": "Zhè jiàn ne？ kàn qǐ lái zěn me yàng？",
+      "vi": "Còn cái này thì sao? Trông thế nào?"
+    },
+    {
+      "start": 231.38,
+      "end": 233.5,
+      "en": "This one looks good too.",
+      "zh": "这件也很好看喔",
+      "pinyin": "Zhè jiàn yě hěn hǎo kàn wō",
+      "vi": "Cái này cũng đẹp lắm nhé."
+    },
+    {
+      "start": 234.52,
+      "end": 236.18,
+      "en": "Miss, what do you think?",
+      "zh": "小姐，你觉得呢？",
+      "pinyin": "Xiǎo jiě， nǐ jué de ne？",
+      "vi": "Cô thấy sao?"
+    },
+    {
+      "start": 237.74,
+      "end": 238.72,
+      "en": "Mm, it really looks good.",
+      "zh": "嗯，真的很好看",
+      "pinyin": "Ǹg， zhēn de hěn hǎo kàn",
+      "vi": "Ừm, nhìn thật sự rất đẹp."
+    },
+    {
+      "start": 239.48,
+      "end": 241.78,
+      "en": "This gentleman really knows how to flatter.",
+      "zh": "这位先生嘴巴真的很甜喔",
+      "pinyin": "Zhè wèi xiān shēng zuǐ ba zhēn de hěn tián wō",
+      "vi": "Anh này quả là biết khen ngọt ghê."
+    },
+    {
+      "start": 247.02,
+      "end": 250.64,
+      "en": "Excuse me, how much is this one?",
+      "zh": "请问，这件多少钱？",
+      "pinyin": "Qǐng wèn， zhè jiàn duō shǎo qián？",
+      "vi": "Cho tôi hỏi, cái này bao nhiêu tiền ạ?"
+    },
+    {
+      "start": 251.16,
+      "end": 254.14,
+      "en": "That one... that one is 450 yuan.",
+      "zh": "那件...那件块",
+      "pinyin": "Nà jiàn... nà jiàn kuài",
+      "vi": "Cái đó... cái đó 450 tệ."
+    },
+    {
+      "start": 255.92,
+      "end": 256.74,
+      "en": "How about this one?",
+      "zh": "这件呢？",
+      "pinyin": "Zhè jiàn ne？",
+      "vi": "Còn cái này?"
+    },
+    {
+      "start": 257.14,
+      "end": 259.04,
+      "en": "That one... let me take a look.",
+      "zh": "那件...我看一下",
+      "pinyin": "Nà jiàn... wǒ kàn yí xià",
+      "vi": "Cái đó... để tôi xem đã."
+    },
+    {
+      "start": 262.68,
+      "end": 263.64,
+      "en": "This one is more expensive.",
+      "zh": "这件比较贵",
+      "pinyin": "Zhè jiàn bǐ jiào guì",
+      "vi": "Cái này đắt hơn."
+    },
+    {
+      "start": 264.32,
+      "end": 265.44,
+      "en": "This one is 600 yuan.",
+      "zh": "这件块。",
+      "pinyin": "Zhè jiàn kuài。",
+      "vi": "Cái này 600 tệ."
+    },
+    {
+      "start": 266.98,
+      "end": 269.7,
+      "en": "Hmm... it's a bit expensive.",
+      "zh": "嗯……有点贵。",
+      "pinyin": "Ǹg …… yǒu diǎn guì。",
+      "vi": "Ừm... hơi đắt."
+    },
+    {
+      "start": 271.04,
+      "end": 272.74,
+      "en": "I don't want to spend that much money.",
+      "zh": "我不想花那么多钱。",
+      "pinyin": "Wǒ bù xiǎng huā nà me duō qián。",
+      "vi": "Tôi không muốn tiêu nhiều tiền như vậy."
+    },
+    {
+      "start": 273.64,
+      "end": 275.04,
+      "en": "But I really like both of them.",
+      "zh": "可是两件我都很喜欢。",
+      "pinyin": "Kě shì liǎng jiàn wǒ dōu hěn xǐ huan。",
+      "vi": "Nhưng tôi rất thích cả hai cái."
+    },
+    {
+      "start": 276.98,
+      "end": 277.96,
+      "en": "What do you think?",
+      "zh": "你觉得呢？",
+      "pinyin": "Nǐ jué de ne？",
+      "vi": "Bạn thấy sao?"
+    },
+    {
+      "start": 278.66,
+      "end": 280.02,
+      "en": "Which one should I buy?",
+      "zh": "我应该买哪一件？",
+      "pinyin": "Wǒ yīng gāi mǎi nǎ yí jiàn？",
+      "vi": "Tôi nên mua cái nào?"
+    },
+    {
+      "start": 281.04,
+      "end": 282.34,
+      "en": "You like both.",
+      "zh": "两件都喜欢。",
+      "pinyin": "Liǎng jiàn dōu xǐ huan。",
+      "vi": "Bạn thích cả hai."
+    },
+    {
+      "start": 284.1,
+      "end": 284.9,
+      "en": "Then buy both.",
+      "zh": "两件都买吧。",
+      "pinyin": "Liǎng jiàn dōu mǎi ba。",
+      "vi": "Vậy mua cả hai đi."
+    },
+    {
+      "start": 285.96,
+      "end": 287.84,
+      "en": "Miss, if I buy them together...",
+      "zh": "小姐，一起买的话……",
+      "pinyin": "Xiǎo jiě， yì qǐ mǎi de huà ……",
+      "vi": "Chị ơi, nếu tôi mua cả hai cái..."
+    },
+    {
+      "start": 287.84,
+      "end": 289.52,
+      "en": "Can you make it a little cheaper?",
+      "zh": "可以便宜一点吗？",
+      "pinyin": "Kě yǐ pián yi yì diǎn ma？",
+      "vi": "Có thể bớt chút được không ạ?"
+    },
+    {
+      "start": 289.88,
+      "end": 291.84,
+      "en": "Hmm... okay, I guess.",
+      "zh": "嗯……可以吧。",
+      "pinyin": "Ǹg …… kě yǐ ba。",
+      "vi": "Ừm... được thôi."
+    },
+    {
+      "start": 292.76,
+      "end": 293.78,
+      "en": "If you buy both...",
+      "zh": "两件都买的话……",
+      "pinyin": "Liǎng jiàn dōu mǎi de huà ……",
+      "vi": "Nếu mua cả hai cái..."
+    },
+    {
+      "start": 294.48,
+      "end": 300.39,
+      "en": "I can give you a discount! Great, wonderful!",
+      "zh": "可以给你打折！好啊，太好了！",
+      "pinyin": "Kě yǐ gěi nǐ dǎ zhé！ hǎo a， tài hǎo le！",
+      "vi": "Tôi có thể giảm giá cho bạn! Hay quá, tuyệt vời!"
+    },
+    {
+      "start": 306.67,
+      "end": 308.55,
+      "en": "Okay, this one is 450 yuan.",
+      "zh": "好，这件是。",
+      "pinyin": "Hǎo， zhè jiàn shì。",
+      "vi": "Được, cái này là 450 tệ."
+    },
+    {
+      "start": 310.65,
+      "end": 312.41,
+      "en": "This one is 620 yuan.",
+      "zh": "这件是块。",
+      "pinyin": "Zhè jiàn shì kuài。",
+      "vi": "Cái này là 620 tệ."
+    },
+    {
+      "start": 313.61,
+      "end": 315.29,
+      "en": "The total is 1070.",
+      "zh": "总共是。",
+      "pinyin": "Zǒng gòng shì。",
+      "vi": "Tổng cộng là 1070."
+    },
+    {
+      "start": 317.37,
+      "end": 319.39,
+      "en": "Didn't you just say you could give a discount?",
+      "zh": "刚刚不是说还可以打折吗？",
+      "pinyin": "Gāng gāng bú shì shuō hái kě yǐ dǎ zhé ma？",
+      "vi": "Lúc nãy chẳng phải nói có thể giảm giá sao?"
+    },
+    {
+      "start": 320.91,
+      "end": 321.27,
+      "en": "Sure.",
+      "zh": "可以啊。",
+      "pinyin": "Kě yǐ a。",
+      "vi": "Được thôi."
+    },
+    {
+      "start": 322.41,
+      "end": 325.83,
+      "en": "After a 15% discount, it's...",
+      "zh": "打八五折之后是……",
+      "pinyin": "Dǎ bā wǔ zhé zhī hòu shì ……",
+      "vi": "Sau khi giảm 15% thì..."
+    },
+    {
+      "start": 327.31,
+      "end": 330.05,
+      "en": "The total is 910 yuan.",
+      "zh": "总共是块钱。",
+      "pinyin": "Zǒng gòng shì kuài qián。",
+      "vi": "Tổng cộng là 910 tệ."
+    },
+    {
+      "start": 331.09,
+      "end": 333.13,
+      "en": "Would you like to pay in cash or by card?",
+      "zh": "你要付现金还是刷卡？",
+      "pinyin": "Nǐ yào fù xiàn jīn hái shì shuā kǎ？",
+      "vi": "Bạn muốn trả tiền mặt hay quẹt thẻ?"
+    },
+    {
+      "start": 333.41,
+      "end": 334.35,
+      "en": "I'll pay in cash.",
+      "zh": "我要付现金。",
+      "pinyin": "Wǒ yào fù xiàn jīn。",
+      "vi": "Tôi muốn trả tiền mặt."
+    },
+    {
+      "start": 336.43,
+      "end": 337.61,
+      "en": "Here's 1000 yuan.",
+      "zh": "给你块钱。",
+      "pinyin": "Gěi nǐ kuài qián。",
+      "vi": "Đưa bạn 1000 tệ."
+    },
+    {
+      "start": 338.41,
+      "end": 339.17,
+      "en": "Okay, thank you.",
+      "zh": "好，谢谢。",
+      "pinyin": "Hǎo， xiè xiè。",
+      "vi": "Được, cảm ơn."
+    },
+    {
+      "start": 340.41,
+      "end": 341.95,
+      "en": "Here's your change, 90 yuan.",
+      "zh": "找你块钱。",
+      "pinyin": "Zhǎo nǐ kuài qián。",
+      "vi": "Trả lại bạn 90 tệ."
+    },
+    {
+      "start": 342.41,
+      "end": 344.41,
+      "en": "Thank you.",
+      "zh": "谢谢。",
+      "pinyin": "Xiè xiè。",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 344.99,
+      "end": 345.53,
+      "en": "Take care.",
+      "zh": "慢走。",
+      "pinyin": "Màn zǒu。",
+      "vi": "Đi thong thả."
+    },
+    {
+      "start": 353.09,
+      "end": 355.25,
+      "en": "Next, where do you want to go?",
+      "zh": "接下来呢，想去哪里？",
+      "pinyin": "Jiē xià lái ne， xiǎng qù nǎ lǐ？",
+      "vi": "Tiếp theo thì bạn muốn đi đâu?"
+    },
+    {
+      "start": 356.17,
+      "end": 358.01,
+      "en": "Let me think.",
+      "zh": "我想一下。",
+      "pinyin": "Wǒ xiǎng yí xià。",
+      "vi": "Để tôi nghĩ một chút."
+    },
+    {
+      "start": 360.05,
+      "end": 361.61,
+      "en": "Are you hungry now?",
+      "zh": "你现在饿了吗？",
+      "pinyin": "Nǐ xiàn zài è le ma？",
+      "vi": "Bây giờ bạn đói chưa?"
+    },
+    {
+      "start": 362.93,
+      "end": 364.87,
+      "en": "A little. How about you?",
+      "zh": "有一点。你呢？",
+      "pinyin": "Yǒu yì diǎn。 nǐ ne？",
+      "vi": "Hơi đói. Còn bạn?"
+    },
+    {
+      "start": 365.41,
+      "end": 369.03,
+      "en": "Me too. Why don't we go get something to eat?",
+      "zh": "我也是。要不我们去吃点东西？",
+      "pinyin": "Wǒ yě shì。 yào bù wǒ men qù chī diǎn dōng xī？",
+      "vi": "Tôi cũng vậy. Hay là chúng ta đi ăn gì đó nhé?"
+    },
+    {
+      "start": 369.81,
+      "end": 370.27,
+      "en": "OK.",
+      "zh": "好啊。",
+      "pinyin": "Hǎo a。",
+      "vi": "Được thôi."
+    },
+    {
+      "start": 371.73,
+      "end": 374.89,
+      "en": "Is there anything you especially want to eat?",
+      "zh": "那有没有特别想吃什么？",
+      "pinyin": "Nà yǒu méi yǒu tè bié xiǎng chī shén me？",
+      "vi": "Vậy bạn có đặc biệt muốn ăn gì không?"
+    },
+    {
+      "start": 375.87,
+      "end": 380.41,
+      "en": "There's a very delicious little restaurant nearby.",
+      "zh": "这里附近有一家非常好吃的小餐厅。",
+      "pinyin": "Zhè lǐ fù jìn yǒu yì jiā fēi cháng hǎo chī de xiǎo cān tīng。",
+      "vi": "Gần đây có một quán ăn nhỏ rất ngon."
+    },
+    {
+      "start": 380.41,
+      "end": 383.75,
+      "en": "The food is both delicious and cheap.",
+      "zh": "东西又好吃又便宜。",
+      "pinyin": "Dōng xī yòu hǎo chī yòu pián yi。",
+      "vi": "Đồ ăn vừa ngon vừa rẻ."
+    },
+    {
+      "start": 384.75,
+      "end": 386.07,
+      "en": "Why don't we go look for it?",
+      "zh": "要不我们去找一下？",
+      "pinyin": "Yào bù wǒ men qù zhǎo yí xià？",
+      "vi": "Hay là chúng ta đi tìm thử?"
+    },
+    {
+      "start": 386.69,
+      "end": 388.49,
+      "en": "OK, no problem. Let's go!",
+      "zh": "好啊，没问题，走吧！",
+      "pinyin": "Hǎo a， méi wèn tí， zǒu ba！",
+      "vi": "Được, không vấn đề gì. Đi thôi!"
+    }
+  ]
+}

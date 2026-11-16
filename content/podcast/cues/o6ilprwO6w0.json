@@ -1,0 +1,965 @@
+{
+  "id": "o6ilprwO6w0",
+  "youtubeId": "o6ilprwO6w0",
+  "channelHandle": "@PandaStudio24",
+  "title": "【HSK 1-3】我的新年计划 - Kế hoạch năm mới của tôi | Chinese Podcast",
+  "titleVi": "Kế hoạch năm mới của tôi",
+  "topic": "Luyện nghe Panda Studio",
+  "level": "HSK 1+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 425,
+  "cues": [
+    {
+      "start": 3.46,
+      "end": 6.68,
+      "en": "Today is the first week of 2026.",
+      "zh": "今天是年的第一个星期",
+      "pinyin": "Jīn tiān shì nián de dì yī gè xīng qī",
+      "vi": "Hôm nay là tuần đầu tiên của năm 2026."
+    },
+    {
+      "start": 6.76,
+      "end": 8.82,
+      "en": "Is everyone doing well?",
+      "zh": "大家都过得好吗?",
+      "pinyin": "Dà jiā dōu guò dé hǎo ma?",
+      "vi": "Mọi người đều ổn chứ?"
+    },
+    {
+      "start": 10.04,
+      "end": 12.72,
+      "en": "I am now sitting in my apartment in Shanghai.",
+      "zh": "我现在正坐在上海的公寓里",
+      "pinyin": "Wǒ xiàn zài zhèng zuò zài shàng hǎi de gōng yù lǐ",
+      "vi": "Tôi đang ngồi trong căn hộ của mình ở Thượng Hải."
+    },
+    {
+      "start": 13.38,
+      "end": 14.72,
+      "en": "Looking at the scenery outside the window.",
+      "zh": "看着窗外的风景",
+      "pinyin": "Kàn zhe chuāng wài de fēng jǐng",
+      "vi": "Nhìn phong cảnh ngoài cửa sổ."
+    },
+    {
+      "start": 15.8,
+      "end": 19.56,
+      "en": "Although everyone is immersed in the joy of welcoming the New Year,",
+      "zh": "虽然大家都沉浸在迎接新年的喜悦中",
+      "pinyin": "Suī rán dà jiā dōu chén jìn zài yíng jiē xīn nián de xǐ yuè zhōng",
+      "vi": "Mặc dù mọi người đang chìm trong niềm vui đón năm mới,"
+    },
+    {
+      "start": 20.44,
+      "end": 24.34,
+      "en": "but a few days ago, I was actually not happy at all.",
+      "zh": "但在几天前,我其实一点也不开心",
+      "pinyin": "Dàn zài jǐ tiān qián, wǒ qí shí yì diǎn yě bù kāi xīn",
+      "vi": "nhưng vài ngày trước, thực ra tôi chẳng vui chút nào."
+    },
+    {
+      "start": 25.78,
+      "end": 27.92,
+      "en": "I am a true Chengdu local.",
+      "zh": "我是个地地道道的成都人",
+      "pinyin": "Wǒ shì gè dì dì dào dào de chéng dū rén",
+      "vi": "Tôi là người Thành Đô chính hiệu."
+    },
+    {
+      "start": 28,
+      "end": 30.26,
+      "en": "This year I am 25.",
+      "zh": "今年岁",
+      "pinyin": "Jīn nián suì",
+      "vi": "Năm nay tôi 25 tuổi."
+    },
+    {
+      "start": 31.32,
+      "end": 32.28,
+      "en": "After graduating from university,",
+      "zh": "大学毕业后",
+      "pinyin": "Dà xué bì yè hòu",
+      "vi": "Sau khi tốt nghiệp đại học,"
+    },
+    {
+      "start": 33,
+      "end": 35.06,
+      "en": "I chose to stay in Shanghai and work hard.",
+      "zh": "我选择了留在上海打拼",
+      "pinyin": "Wǒ xuǎn zé le liú zài shàng hǎi dǎ pīn",
+      "vi": "tôi đã chọn ở lại Thượng Hải để phấn đấu."
+    },
+    {
+      "start": 36.3,
+      "end": 36.9,
+      "en": "To be honest,",
+      "zh": "说实话",
+      "pinyin": "Shuō shí huà",
+      "vi": "Nói thật lòng,"
+    },
+    {
+      "start": 37.6,
+      "end": 39.96,
+      "en": "the year 2025 that just passed",
+      "zh": "刚刚过去的年",
+      "pinyin": "Gāng gāng guò qù de nián",
+      "vi": "năm 2025 vừa qua"
+    },
+    {
+      "start": 40.6,
+      "end": 43.02,
+      "en": "was not very kind to me.",
+      "zh": "对我来说并不是很友好",
+      "pinyin": "Duì wǒ lái shuō bìng bú shì hěn yǒu hǎo",
+      "vi": "đối với tôi không mấy dễ chịu."
+    },
+    {
+      "start": 43.88,
+      "end": 46.22,
+      "en": "It could even be said to be somewhat bad.",
+      "zh": "甚至可以说有些糟糕",
+      "pinyin": "Shèn zhì kě yǐ shuō yǒu xiē zāo gāo",
+      "vi": "Thậm chí có thể nói là hơi tệ."
+    },
+    {
+      "start": 47.28,
+      "end": 49.78,
+      "en": "I encountered many unsatisfactory things.",
+      "zh": "我遇到了很多不如意的事情",
+      "pinyin": "Wǒ yù dào le hěn duō bù rú yì de shì qíng",
+      "vi": "Tôi đã gặp rất nhiều chuyện không như ý."
+    },
+    {
+      "start": 50.92,
+      "end": 53.22,
+      "en": "I felt that life gave me a lot of pressure.",
+      "zh": "感觉生活给了我不少压力",
+      "pinyin": "Gǎn jué shēng huó gěi le wǒ bù shǎo yā lì",
+      "vi": "Cảm giác cuộc sống đã tạo cho tôi khá nhiều áp lực."
+    },
+    {
+      "start": 54.56,
+      "end": 56.6,
+      "en": "But the new year has arrived.",
+      "zh": "但是新的一年来了",
+      "pinyin": "Dàn shì xīn de yì nián lái le",
+      "vi": "Nhưng năm mới đã đến."
+    },
+    {
+      "start": 56.62,
+      "end": 58.3,
+      "en": "I told myself,",
+      "zh": "我告诉自己",
+      "pinyin": "Wǒ gào sù zì jǐ",
+      "vi": "Tôi tự nhủ với bản thân,"
+    },
+    {
+      "start": 59.4,
+      "end": 61.08,
+      "en": "I can't keep feeling sad forever.",
+      "zh": "不能一直难过下去",
+      "pinyin": "Bù néng yì zhí nán guò xià qù",
+      "vi": "không thể cứ buồn bã mãi được."
+    },
+    {
+      "start": 62.1,
+      "end": 62.7,
+      "en": "I believe",
+      "zh": "我相信",
+      "pinyin": "Wǒ xiāng xìn",
+      "vi": "Tôi tin rằng"
+    },
+    {
+      "start": 63.72,
+      "end": 64.42,
+      "en": "in 2026",
+      "zh": "年",
+      "pinyin": "Nián",
+      "vi": "năm 2026"
+    },
+    {
+      "start": 65.2,
+      "end": 66.06,
+      "en": "I will be luckier.",
+      "zh": "我会更幸运",
+      "pinyin": "Wǒ huì gèng xìng yùn",
+      "vi": "tôi sẽ may mắn hơn."
+    },
+    {
+      "start": 67.16,
+      "end": 67.72,
+      "en": "Today,",
+      "zh": "今天",
+      "pinyin": "Jīn tiān",
+      "vi": "Hôm nay,"
+    },
+    {
+      "start": 68.78,
+      "end": 72.06,
+      "en": "I want to talk with my friends about my New Year's plans.",
+      "zh": "我想跟朋友们聊聊我的新年计划",
+      "pinyin": "Wǒ xiǎng gēn péng yǒu men liáo liáo wǒ de xīn nián jì huà",
+      "vi": "tôi muốn trò chuyện với các bạn về kế hoạch năm mới của tôi."
+    },
+    {
+      "start": 72.1,
+      "end": 75.96,
+      "en": "Although these plans sound very ordinary,",
+      "zh": "虽然这些计划听起来很普通",
+      "pinyin": "Suī rán zhè xiē jì huà tīng qǐ lái hěn pǔ tōng",
+      "vi": "Mặc dù những kế hoạch này nghe có vẻ bình thường,"
+    },
+    {
+      "start": 76.88,
+      "end": 77.9,
+      "en": "for me,",
+      "zh": "但对我来说",
+      "pinyin": "Dàn duì wǒ lái shuō",
+      "vi": "nhưng đối với tôi,"
+    },
+    {
+      "start": 78.6,
+      "end": 81.04,
+      "en": "they are small steps toward happiness.",
+      "zh": "却是通往幸福的小步骤",
+      "pinyin": "Què shì tōng wǎng xìng fú de xiǎo bù zhòu",
+      "vi": "chúng lại là những bước nhỏ dẫn đến hạnh phúc."
+    },
+    {
+      "start": 81.12,
+      "end": 83.46,
+      "en": "The first plan",
+      "zh": "第一个计划",
+      "pinyin": "Dì yī gè jì huà",
+      "vi": "Kế hoạch đầu tiên"
+    },
+    {
+      "start": 84.26,
+      "end": 85.64,
+      "en": "is about home.",
+      "zh": "是关于家的",
+      "pinyin": "Shì guān yú jiā de",
+      "vi": "là về mái ấm."
+    },
+    {
+      "start": 86.74,
+      "end": 90.52,
+      "en": "I now live alone in a very small apartment.",
+      "zh": "我现在一个人住在一个很小的公寓里",
+      "pinyin": "Wǒ xiàn zài yí gè rén zhù zài yí gè hěn xiǎo de gōng yù lǐ",
+      "vi": "Hiện tại tôi đang sống một mình trong một căn hộ rất nhỏ."
+    },
+    {
+      "start": 91.58,
+      "end": 95.18,
+      "en": "Although I love my independent life in this city,",
+      "zh": "虽然我很爱在这个城市的独立生活",
+      "pinyin": "Suī rán wǒ hěn ài zài zhè ge chéng shì de dú lì shēng huó",
+      "vi": "Mặc dù tôi rất thích cuộc sống tự lập ở thành phố này,"
+    },
+    {
+      "start": 95.28,
+      "end": 99.38,
+      "en": "the rent here is really too high.",
+      "zh": "但是这里的房租实在太高了",
+      "pinyin": "Dàn shì zhè lǐ de fáng zū shí zài tài gāo le",
+      "vi": "nhưng tiền thuê nhà ở đây thật sự quá cao."
+    },
+    {
+      "start": 100.4,
+      "end": 114.06,
+      "en": "You may not believe it, but my monthly rent is 5,500 RMB. For a young person who has just started working not long ago, this is really a huge expense.",
+      "zh": "大家可能不相信，我每个月的房租是块人民币，这对于一个刚工作不久的年轻人来说，真的是一笔巨大的开销",
+      "pinyin": "Dà jiā kě néng bù xiāng xìn， wǒ měi gè yuè de fáng zū shì kuài rén mín bì， zhè duì yú yí gè gāng gōng zuò bù jiǔ de nián qīng rén lái shuō， zhēn de shì yì bǐ jù dà de kāi xiāo",
+      "vi": "Có thể các bạn không tin, tiền thuê nhà mỗi tháng của tôi là 5500 tệ. Đối với một người trẻ vừa mới đi làm chưa lâu, đây thực sự là một khoản chi tiêu rất lớn."
+    },
+    {
+      "start": 115.34,
+      "end": 120.58,
+      "en": "The good news is that my rental contract will expire next month.",
+      "zh": "好消息是,下个月我的租房合同就要到期了",
+      "pinyin": "Hǎo xiāo xī shì, xià gè yuè wǒ de zū fáng hé tong jiù yào dào qī le",
+      "vi": "Tin tốt là tháng sau hợp đồng thuê nhà của tôi sẽ hết hạn."
+    },
+    {
+      "start": 121.58,
+      "end": 126.08,
+      "en": "So I decided to find a new place to live this month.",
+      "zh": "所以我决定要在这个月找到一个新的住处",
+      "pinyin": "Suǒ yǐ wǒ jué dìng yào zài zhè ge yuè zhǎo dào yí gè xīn de zhù chù",
+      "vi": "Vì vậy tôi quyết định sẽ tìm một nơi ở mới trong tháng này."
+    },
+    {
+      "start": 126.12,
+      "end": 132.68,
+      "en": "My goal is to find a place with rent around 3,500 yuan.",
+      "zh": "我的目标是找到一个租金在块左右的房子",
+      "pinyin": "Wǒ de mù biāo shì zhǎo dào yí gè zū jīn zài kuài zuǒ yòu de fáng zi",
+      "vi": "Mục tiêu của tôi là tìm được một căn nhà có giá thuê khoảng 3500 tệ."
+    },
+    {
+      "start": 133.78,
+      "end": 137,
+      "en": "Even if it might be a bit farther away or shared.",
+      "zh": "虽然可能会远一点或者是合租",
+      "pinyin": "Suī rán kě néng huì yuǎn yì diǎn huò zhě shì hé zū",
+      "vi": "Dù có thể sẽ xa hơn một chút hoặc là ở ghép."
+    },
+    {
+      "start": 137.88,
+      "end": 140.84,
+      "en": "But as long as I can save 2,000 yuan.",
+      "zh": "但只要能省下块钱",
+      "pinyin": "Dàn zhǐ yào néng shěng xià kuài qián",
+      "vi": "Nhưng chỉ cần có thể tiết kiệm được 2.000 tệ."
+    },
+    {
+      "start": 141.96,
+      "end": 143.68,
+      "en": "I think it’s worth it.",
+      "zh": "我觉得也是值得的",
+      "pinyin": "Wǒ jué de yě shì zhí dé de",
+      "vi": "Tôi nghĩ cũng đáng."
+    },
+    {
+      "start": 145.08,
+      "end": 147.88,
+      "en": "The second plan is about work.",
+      "zh": "第二个计划是关于工作的",
+      "pinyin": "Dì èr gè jì huà shì guān yú gōng zuò de",
+      "vi": "Kế hoạch thứ hai là về công việc."
+    },
+    {
+      "start": 148.9,
+      "end": 151.8,
+      "en": "This was also my biggest headache last year.",
+      "zh": "这也是我去年最头疼的事情",
+      "pinyin": "Zhè yě shì wǒ qù nián zuì tóu téng de shì qíng",
+      "vi": "Đây cũng là điều khiến tôi đau đầu nhất năm ngoái."
+    },
+    {
+      "start": 153.12,
+      "end": 155.92,
+      "en": "After graduating, I was at an advertising company.",
+      "zh": "毕业后我在一家广告公司",
+      "pinyin": "Bì yè hòu wǒ zài yì jiā guǎng gào gōng sī",
+      "vi": "Sau khi tốt nghiệp, tôi làm ở một công ty quảng cáo."
+    },
+    {
+      "start": 155.98,
+      "end": 158.12,
+      "en": "I worked there for a full year.",
+      "zh": "工作了整整一年",
+      "pinyin": "Gōng zuò le zhěng zhěng yì nián",
+      "vi": "Làm việc tròn một năm."
+    },
+    {
+      "start": 159.16,
+      "end": 162.18,
+      "en": "I know it’s not easy to work in Shanghai.",
+      "zh": "我知道在上海工作不容易",
+      "pinyin": "Wǒ zhī dào zài shàng hǎi gōng zuò bù róng yì",
+      "vi": "Tôi biết làm việc ở Thượng Hải không dễ dàng."
+    },
+    {
+      "start": 163.04,
+      "end": 164.5,
+      "en": "So I worked very hard.",
+      "zh": "所以我非常努力",
+      "pinyin": "Suǒ yǐ wǒ fēi cháng nǔ lì",
+      "vi": "Vì vậy tôi đã rất cố gắng."
+    },
+    {
+      "start": 165.52,
+      "end": 166.72,
+      "en": "When everyone got off work,",
+      "zh": "大家下班的时候",
+      "pinyin": "Dà jiā xià bān de shí hòu",
+      "vi": "Khi mọi người tan làm,"
+    },
+    {
+      "start": 167.56,
+      "end": 169.26,
+      "en": "I was often still working overtime.",
+      "zh": "我经常还在加班",
+      "pinyin": "Wǒ jīng cháng hái zài jiā bān",
+      "vi": "tôi thường vẫn còn tăng ca."
+    },
+    {
+      "start": 170.22,
+      "end": 173.6,
+      "en": "But my take-home pay every month",
+      "zh": "可是我每个月拿到手的工资",
+      "pinyin": "Kě shì wǒ měi gè yuè ná dào shǒu de gōng zī",
+      "vi": "Nhưng mức lương thực nhận mỗi tháng của tôi"
+    },
+    {
+      "start": 173.66,
+      "end": 175.36,
+      "en": "was only 8,000 yuan.",
+      "zh": "只有八千块",
+      "pinyin": "Zhǐ yǒu bā qiān kuài",
+      "vi": "chỉ có 8.000 tệ."
+    },
+    {
+      "start": 176.42,
+      "end": 178.62,
+      "en": "After deducting 5,500 yuan for rent,",
+      "zh": "除去五千五百块的房租",
+      "pinyin": "Chú qù wǔ qiān wǔ bǎi kuài de fáng zū",
+      "vi": "Sau khi trừ đi 5.500 tệ tiền thuê nhà,"
+    },
+    {
+      "start": 179.48,
+      "end": 182.4,
+      "en": "I only had 2,500 yuan left to live on.",
+      "zh": "我只剩下两千五百块生活",
+      "pinyin": "Wǒ zhī shèng xià liǎng qiān wǔ bǎi kuài shēng huó",
+      "vi": "tôi chỉ còn 2.500 tệ để trang trải cuộc sống."
+    },
+    {
+      "start": 185.06,
+      "end": 188.68,
+      "en": "with this little money, even food expenses had to be carefully budgeted.",
+      "zh": "这点钱连吃饭都得精打细算",
+      "pinyin": "Zhè diǎn qián lián chī fàn dōu dé jīng dǎ xì suàn",
+      "vi": "với số tiền này, ngay cả ăn cơm cũng phải tính toán chi li."
+    },
+    {
+      "start": 189.46,
+      "end": 191.18,
+      "en": "I simply couldn’t save any money.",
+      "zh": "根本存不下钱",
+      "pinyin": "Gēn běn cún bú xià qián",
+      "vi": "hoàn toàn không để dành được tiền."
+    },
+    {
+      "start": 192.38,
+      "end": 193.22,
+      "en": "At the end of last year,",
+      "zh": "去年年底",
+      "pinyin": "Qù nián nián dǐ",
+      "vi": "Cuối năm ngoái,"
+    },
+    {
+      "start": 193.26,
+      "end": 198.24,
+      "en": "I plucked up the courage to ask my boss for a raise.",
+      "zh": "我鼓起勇气跟老板提了涨工资的要求",
+      "pinyin": "Wǒ gǔ qǐ yǒng qì gēn lǎo bǎn tí le zhǎng gōng zī de yāo qiú",
+      "vi": "tôi đã lấy hết can đảm xin sếp tăng lương."
+    },
+    {
+      "start": 199.26,
+      "end": 201.22,
+      "en": "But my boss said",
+      "zh": "可是老板说",
+      "pinyin": "Kě shì lǎo bǎn shuō",
+      "vi": "Nhưng sếp nói"
+    },
+    {
+      "start": 202.06,
+      "end": 205.28,
+      "en": "the company’s financial situation is very difficult right now.",
+      "zh": "公司现在的经济情况很困难",
+      "pinyin": "Gōng sī xiàn zài de jīng jì qíng kuàng hěn kùn nán",
+      "vi": "hiện tại tình hình kinh tế của công ty rất khó khăn."
+    },
+    {
+      "start": 205.92,
+      "end": 206.76,
+      "en": "and turned me down.",
+      "zh": "拒绝了我",
+      "pinyin": "Jù jué le wǒ",
+      "vi": "và từ chối tôi."
+    },
+    {
+      "start": 207.78,
+      "end": 216.44,
+      "en": "At that moment I was really upset, so I made a brave decision: I quit.",
+      "zh": "那一刻我真的很难过，所以我做了一个勇敢的决定，我辞职了。",
+      "pinyin": "Nà yí kè wǒ zhēn de hěn nán guò， suǒ yǐ wǒ zuò le yí gè yǒng gǎn de jué dìng， wǒ cí zhí le。",
+      "vi": "Khoảnh khắc đó tôi thực sự rất buồn, nên tôi đã đưa ra một quyết định dũng cảm: tôi đã nghỉ việc."
+    },
+    {
+      "start": 217.72,
+      "end": 222.18,
+      "en": "Next week, I plan to send my résumé to several big companies.",
+      "zh": "下周，我准备向几家大公司投简历。",
+      "pinyin": "Xià zhōu， wǒ zhǔn bèi xiàng jǐ jiā dà gōng sī tóu jiǎn lì。",
+      "vi": "Tuần sau, tôi dự định nộp hồ sơ xin việc đến vài công ty lớn."
+    },
+    {
+      "start": 223.3,
+      "end": 229.26,
+      "en": "My New Year’s wish is to find a new job with a monthly salary of over 12,000 yuan.",
+      "zh": "我的新年愿望是，能找到一份月薪在一万二以上的新工作。",
+      "pinyin": "Wǒ de xīn nián yuàn wàng shì， néng zhǎo dào yí fèn yuè xīn zài yí wàn èr yǐ shàng de xīn gōng zuò。",
+      "vi": "Điều ước năm mới của tôi là có thể tìm được một công việc mới với mức lương trên 12.000 tệ một tháng."
+    },
+    {
+      "start": 230.92,
+      "end": 234.84,
+      "en": "That way, I can save a bit of money every month.",
+      "zh": "这样，我每个月就能存下一点钱了。",
+      "pinyin": "Zhè yàng， wǒ měi gè yuè jiù néng cún xià yì diǎn qián le。",
+      "vi": "Như vậy, mỗi tháng tôi sẽ để dành được một chút tiền."
+    },
+    {
+      "start": 235.82,
+      "end": 236.82,
+      "en": "Wish me luck!",
+      "zh": "祝我好运吧！",
+      "pinyin": "Zhù wǒ hǎo yùn ba！",
+      "vi": "Chúc tôi may mắn nhé!"
+    },
+    {
+      "start": 238.3,
+      "end": 240.84,
+      "en": "The third one is about love.",
+      "zh": "第三个是关于爱情的",
+      "pinyin": "Dì sān gè shì guān yú ài qíng de",
+      "vi": "Kế hoạch thứ ba là về tình yêu."
+    },
+    {
+      "start": 241.86,
+      "end": 245.26,
+      "en": "This might be the thing I’m most looking forward to this year.",
+      "zh": "这可能是我今年最期待的事情了",
+      "pinyin": "Zhè kě néng shì wǒ jīn nián zuì qī dài de shì qíng le",
+      "vi": "Đây có lẽ là điều tôi mong đợi nhất trong năm nay."
+    },
+    {
+      "start": 246.28,
+      "end": 247.18,
+      "en": "For the past two years,",
+      "zh": "过去两年",
+      "pinyin": "Guò qù liǎng nián",
+      "vi": "Trong hai năm qua,"
+    },
+    {
+      "start": 247.86,
+      "end": 248.8,
+      "en": "I was busy studying,",
+      "zh": "我忙着学习",
+      "pinyin": "Wǒ máng zhe xué xí",
+      "vi": "tôi bận học,"
+    },
+    {
+      "start": 249.5,
+      "end": 250.72,
+      "en": "busy adapting to work,",
+      "zh": "忙着适应工作",
+      "pinyin": "Máng zhe shì yìng gōng zuò",
+      "vi": "bận thích nghi với công việc,"
+    },
+    {
+      "start": 251.84,
+      "end": 253.82,
+      "en": "and had no time at all for dating.",
+      "zh": "根本没有时间谈恋爱",
+      "pinyin": "Gēn běn méi yǒu shí jiān tán liàn ài",
+      "vi": "hoàn toàn không có thời gian để yêu đương."
+    },
+    {
+      "start": 255.06,
+      "end": 255.74,
+      "en": "But recently",
+      "zh": "但是最近",
+      "pinyin": "Dàn shì zuì jìn",
+      "vi": "Nhưng gần đây"
+    },
+    {
+      "start": 256.72,
+      "end": 257.46,
+      "en": "in my life",
+      "zh": "我的生活里",
+      "pinyin": "Wǒ de shēng huó lǐ",
+      "vi": "trong cuộc sống của tôi"
+    },
+    {
+      "start": 258.24,
+      "end": 260.16,
+      "en": "a special girl appeared",
+      "zh": "出现了一位特别的女孩",
+      "pinyin": "Chū xiàn le yí wèi tè bié de nǚ hái",
+      "vi": "xuất hiện một cô gái đặc biệt"
+    },
+    {
+      "start": 261.32,
+      "end": 262.46,
+      "en": "She is two years younger than me.",
+      "zh": "她比我小两岁",
+      "pinyin": "Tā bǐ wǒ xiǎo liǎng suì",
+      "vi": "Cô ấy nhỏ hơn tôi hai tuổi."
+    },
+    {
+      "start": 263.38,
+      "end": 264.4,
+      "en": "She is very beautiful.",
+      "zh": "长得非常漂亮",
+      "pinyin": "Cháng dé fēi cháng piào liang",
+      "vi": "Cô ấy rất xinh đẹp."
+    },
+    {
+      "start": 265.22,
+      "end": 266.74,
+      "en": "Her smile is very sweet.",
+      "zh": "笑起来很甜",
+      "pinyin": "Xiào qǐ lái hěn tián",
+      "vi": "Nụ cười của cô ấy rất ngọt ngào."
+    },
+    {
+      "start": 267.94,
+      "end": 270.9,
+      "en": "We have already gone out for meals a few times.",
+      "zh": "我们已经一起出去吃过几次饭",
+      "pinyin": "Wǒ men yǐ jīng yì qǐ chū qù chī guò jǐ cì fàn",
+      "vi": "Chúng tôi đã cùng nhau đi ăn vài lần."
+    },
+    {
+      "start": 271.64,
+      "end": 273.04,
+      "en": "We have also seen a few movies.",
+      "zh": "也看过几次电影",
+      "pinyin": "Yě kàn guò jǐ cì diàn yǐng",
+      "vi": "Cũng đã xem phim vài lần."
+    },
+    {
+      "start": 274.14,
+      "end": 275.24,
+      "en": "During this process,",
+      "zh": "在这个过程中",
+      "pinyin": "Zài zhè ge guò chéng zhōng",
+      "vi": "Trong quá trình này,"
+    },
+    {
+      "start": 275.96,
+      "end": 279.24,
+      "en": "I found that our personalities are very compatible.",
+      "zh": "我发现我们的性格非常合适",
+      "pinyin": "Wǒ fā xiàn wǒ men de xìng gé fēi cháng hé shì",
+      "vi": "Tôi nhận thấy tính cách của chúng tôi rất hợp nhau."
+    },
+    {
+      "start": 280.36,
+      "end": 281.6,
+      "en": "When I am with her,",
+      "zh": "跟她在一起的时候",
+      "pinyin": "Gēn tā zài yì qǐ de shí hòu",
+      "vi": "Khi ở bên cô ấy,"
+    },
+    {
+      "start": 282.5,
+      "end": 284.52,
+      "en": "I always feel very relaxed.",
+      "zh": "我总是感到很放松",
+      "pinyin": "Wǒ zǒng shì gǎn dào hěn fàng sōng",
+      "vi": "Tôi luôn cảm thấy rất thoải mái."
+    },
+    {
+      "start": 285.28,
+      "end": 285.88,
+      "en": "Very happy.",
+      "zh": "很开心",
+      "pinyin": "Hěn kāi xīn",
+      "vi": "Rất vui."
+    },
+    {
+      "start": 287.02,
+      "end": 289.16,
+      "en": "I have a little secret in my heart.",
+      "zh": "我心里有一个小秘密",
+      "pinyin": "Wǒ xīn lǐ yǒu yí gè xiǎo mì mì",
+      "vi": "Trong lòng tôi có một bí mật nhỏ."
+    },
+    {
+      "start": 290.3,
+      "end": 292.92,
+      "en": "I plan in the next month or two,",
+      "zh": "我打算在接下来的一两个月里",
+      "pinyin": "Wǒ dǎ suàn zài jiē xià lái de yì liǎng gè yuè lǐ",
+      "vi": "Tôi dự định trong một hai tháng tới,"
+    },
+    {
+      "start": 293.5,
+      "end": 296.2,
+      "en": "to find a suitable opportunity to confess my feelings to her.",
+      "zh": "找一个合适的机会向她表白",
+      "pinyin": "Zhǎo yí gè hé shì de jī huì xiàng tā biǎo bái",
+      "vi": "tìm một cơ hội thích hợp để tỏ tình với cô ấy."
+    },
+    {
+      "start": 297.3,
+      "end": 299.06,
+      "en": "I hope she likes me too.",
+      "zh": "希望她也喜欢我",
+      "pinyin": "Xī wàng tā yě xǐ huan wǒ",
+      "vi": "Hy vọng cô ấy cũng thích tôi."
+    },
+    {
+      "start": 299.82,
+      "end": 302.54,
+      "en": "I hope we can really end up together.",
+      "zh": "希望我们能真的走到一起",
+      "pinyin": "Xī wàng wǒ men néng zhēn de zǒu dào yì qǐ",
+      "vi": "Hy vọng chúng tôi có thể thực sự đến được với nhau."
+    },
+    {
+      "start": 304.16,
+      "end": 308.46,
+      "en": "The last plan is about self-improvement and travel.",
+      "zh": "最后一个计划是关于自我提升和旅行的",
+      "pinyin": "Zuì hòu yí gè jì huà shì guān yú zì wǒ tí shēng hé lǚ xíng de",
+      "vi": "Kế hoạch cuối cùng là về việc nâng cao bản thân và du lịch."
+    },
+    {
+      "start": 309.52,
+      "end": 312.18,
+      "en": "Since work and life are so tough,",
+      "zh": "既然工作和生活那么辛苦",
+      "pinyin": "Jì rán gōng zuò hé shēng huó nà me xīn kǔ",
+      "vi": "Vì công việc và cuộc sống vất vả như vậy,"
+    },
+    {
+      "start": 313.28,
+      "end": 315.62,
+      "en": "We should also learn to reward ourselves, right?",
+      "zh": "我们也要学会奖励自己，对吗？",
+      "pinyin": "Wǒ men yě yào xué huì jiǎng lì zì jǐ， duì ma？",
+      "vi": "Chúng ta cũng phải học cách tự thưởng cho mình, đúng không?"
+    },
+    {
+      "start": 315.62,
+      "end": 323.84,
+      "en": "This year I plan to travel to two countries: Japan and Thailand.",
+      "zh": "今年我计划去两个国家旅行：日本和泰国。",
+      "pinyin": "Jīn nián wǒ jì huà qù liǎng gè guó jiā lǚ xíng： rì běn hé tài guó。",
+      "vi": "Năm nay tôi dự định đi du lịch hai nước: Nhật Bản và Thái Lan."
+    },
+    {
+      "start": 323.84,
+      "end": 326.82,
+      "en": "For this plan, I set a goal for myself.",
+      "zh": "为了这个计划，我给自己定了一个目标。",
+      "pinyin": "Wèi le zhè ge jì huà， wǒ gěi zì jǐ dìng le yí gè mù biāo。",
+      "vi": "Để thực hiện kế hoạch này, tôi đã đặt ra cho mình một mục tiêu."
+    },
+    {
+      "start": 328.1,
+      "end": 331.56,
+      "en": "This year, I need to save up 20,000 yuan for a travel fund.",
+      "zh": "今年要存够两万块的旅游基金。",
+      "pinyin": "Jīn nián yào cún gòu liǎng wàn kuài de lǚ yóu jī jīn。",
+      "vi": "Năm nay tôi phải tiết kiệm đủ hai vạn tệ làm quỹ du lịch."
+    },
+    {
+      "start": 332.84,
+      "end": 336.26,
+      "en": "I want to go to Japan because I am still a big kid.",
+      "zh": "我想去日本，是因为我还是个大男孩。",
+      "pinyin": "Wǒ xiǎng qù rì běn， shì yīn wèi wǒ hái shì gè dà nán hái。",
+      "vi": "Tôi muốn đi Nhật Bản, vì tôi vẫn còn là một cậu bé lớn."
+    },
+    {
+      "start": 337.3,
+      "end": 339.8,
+      "en": "I especially like watching Japanese anime.",
+      "zh": "我特别喜欢看日本的动漫。",
+      "pinyin": "Wǒ tè bié xǐ huan kàn rì běn de dòng màn。",
+      "vi": "Tôi đặc biệt thích xem anime Nhật Bản."
+    },
+    {
+      "start": 340.92,
+      "end": 346.2,
+      "en": "I want to go to Tokyo to see the scenes that appear in anime.",
+      "zh": "我想去东京，去看看那些在动画片里出现的场景。",
+      "pinyin": "Wǒ xiǎng qù dōng jīng， qù kàn kàn nà xiē zài dòng huà piàn lǐ chū xiàn de chǎng jǐng。",
+      "vi": "Tôi muốn đến Tokyo để ngắm những khung cảnh xuất hiện trong phim hoạt hình."
+    },
+    {
+      "start": 347.28,
+      "end": 351.34,
+      "en": "If by then I can take that girl with me,",
+      "zh": "如果到时候我能带着那个女孩一起去",
+      "pinyin": "Rú guǒ dào shí hòu wǒ néng dài zhe nà ge nǚ hái yì qǐ qù",
+      "vi": "Nếu đến lúc đó tôi có thể dẫn cô gái đó đi cùng,"
+    },
+    {
+      "start": 352.06,
+      "end": 354.08,
+      "en": "that would really be wonderful.",
+      "zh": "那真的是太幸福了",
+      "pinyin": "Nà zhēn de shì tài xìng fú le",
+      "vi": "thì thật sự quá hạnh phúc."
+    },
+    {
+      "start": 355.24,
+      "end": 356.48,
+      "en": "I also want to go to Thailand.",
+      "zh": "我也想去泰国",
+      "pinyin": "Wǒ yě xiǎng qù tài guó",
+      "vi": "Tôi cũng muốn đi Thái Lan."
+    },
+    {
+      "start": 357.46,
+      "end": 358.52,
+      "en": "Especially Bangkok.",
+      "zh": "特别是曼谷",
+      "pinyin": "Tè bié shì màn gǔ",
+      "vi": "Đặc biệt là Bangkok."
+    },
+    {
+      "start": 358.62,
+      "end": 360.6,
+      "en": "I am a foodie.",
+      "zh": "我是个吃货",
+      "pinyin": "Wǒ shì gè chī huò",
+      "vi": "Tôi là một người sành ăn."
+    },
+    {
+      "start": 361.64,
+      "end": 364.2,
+      "en": "I really miss authentic Thai food.",
+      "zh": "太想念正宗的泰国菜了",
+      "pinyin": "Tài xiǎng niàn zhèng zōng de tài guó cài le",
+      "vi": "Tôi nhớ đồ ăn Thái chính gốc quá."
+    },
+    {
+      "start": 365.18,
+      "end": 366.64,
+      "en": "That sour and spicy taste.",
+      "zh": "酸酸辣辣的味道",
+      "pinyin": "Suān suān là là de wèi dào",
+      "vi": "Vị chua chua cay cay."
+    },
+    {
+      "start": 367.38,
+      "end": 369.72,
+      "en": "Just thinking about it makes my mouth water.",
+      "zh": "想一想都要流口水了",
+      "pinyin": "Xiǎng yi xiǎng dōu yào liú kǒu shuǐ le",
+      "vi": "Chỉ nghĩ đến thôi đã chảy nước miếng rồi."
+    },
+    {
+      "start": 371.18,
+      "end": 374.62,
+      "en": "This is my whole plan for 2026",
+      "zh": "这就是我年的全部计划",
+      "pinyin": "Zhè jiù shì wǒ nián de quán bù jì huà",
+      "vi": "Đây là toàn bộ kế hoạch năm 2026 của tôi"
+    },
+    {
+      "start": 375.64,
+      "end": 377.16,
+      "en": "Move to a cheaper new home",
+      "zh": "搬个便宜点的新家",
+      "pinyin": "Bān gè pián yi diǎn de xīn jiā",
+      "vi": "Chuyển đến một ngôi nhà mới rẻ hơn"
+    },
+    {
+      "start": 377.88,
+      "end": 379.64,
+      "en": "Change to a well-paid good job",
+      "zh": "换个高薪的好工作",
+      "pinyin": "Huàn gè gāo xīn de hǎo gōng zuò",
+      "vi": "Đổi một công việc tốt với mức lương cao"
+    },
+    {
+      "start": 380.54,
+      "end": 381.64,
+      "en": "Have a romantic relationship",
+      "zh": "谈一场恋爱",
+      "pinyin": "Tán yì chǎng liàn ài",
+      "vi": "Yêu một lần"
+    },
+    {
+      "start": 382.34,
+      "end": 383.72,
+      "en": "Travel to two countries",
+      "zh": "去两个国家旅行",
+      "pinyin": "Qù liǎng gè guó jiā lǚ xíng",
+      "vi": "Đi du lịch hai nước"
+    },
+    {
+      "start": 384.72,
+      "end": 386.84,
+      "en": "Sounds pretty simple, right?",
+      "zh": "听起来是不是很简单",
+      "pinyin": "Tīng qǐ lái shì bu shì hěn jiǎn dān",
+      "vi": "Nghe có vẻ đơn giản phải không?"
+    },
+    {
+      "start": 388.2,
+      "end": 390.92,
+      "en": "But if all these can come true",
+      "zh": "但是如果这些都能实现",
+      "pinyin": "Dàn shì rú guǒ zhè xiē dōu néng shí xiàn",
+      "vi": "Nhưng nếu tất cả những điều này đều có thể thực hiện được"
+    },
+    {
+      "start": 392,
+      "end": 396.28,
+      "en": "I think I would be the happiest person in the world",
+      "zh": "我觉得我就已经是世界上最幸福的人了",
+      "pinyin": "Wǒ jué de wǒ jiù yǐ jīng shì shì jiè shàng zuì xìng fú de rén le",
+      "vi": "Tôi nghĩ tôi sẽ là người hạnh phúc nhất thế giới"
+    },
+    {
+      "start": 397.58,
+      "end": 398.84,
+      "en": "What about you in front of the screen?",
+      "zh": "屏幕前的你们呢",
+      "pinyin": "Píng mù qián de nǐ men ne",
+      "vi": "Còn các bạn đang xem thì sao?"
+    },
+    {
+      "start": 399.66,
+      "end": 401.62,
+      "en": "What is your New Year's plan?",
+      "zh": "你们的新年计划是什么",
+      "pinyin": "Nǐ men de xīn nián jì huà shì shén me",
+      "vi": "Kế hoạch năm mới của các bạn là gì?"
+    },
+    {
+      "start": 402.56,
+      "end": 405.1,
+      "en": "Feel free to let me know in the comments section",
+      "zh": "欢迎在评论区告诉我",
+      "pinyin": "Huān yíng zài píng lùn qū gào sù wǒ",
+      "vi": "Chào mừng các bạn để lại bình luận bên dưới cho tôi biết"
+    },
+    {
+      "start": 406.4,
+      "end": 407.6,
+      "en": "Thank you everyone for listening",
+      "zh": "谢谢大家的收听",
+      "pinyin": "Xiè xiè dà jiā de shōu tīng",
+      "vi": "Cảm ơn mọi người đã lắng nghe"
+    },
+    {
+      "start": 408.74,
+      "end": 409.86,
+      "en": "If you like my sharing",
+      "zh": "如果你喜欢我的分享",
+      "pinyin": "Rú guǒ nǐ xǐ huan wǒ de fēn xiǎng",
+      "vi": "Nếu bạn thích sự chia sẻ của tôi"
+    },
+    {
+      "start": 409.94,
+      "end": 412,
+      "en": "Please subscribe to my channel",
+      "zh": "请订阅我的频道",
+      "pinyin": "Qǐng dìng yuè wǒ de pín dào",
+      "vi": "Hãy đăng ký kênh của tôi"
+    },
+    {
+      "start": 412.72,
+      "end": 414.42,
+      "en": "See you next time",
+      "zh": "我们下期再见",
+      "pinyin": "Wǒ men xià qī zài jiàn",
+      "vi": "Hẹn gặp lại các bạn ở kỳ sau"
+    }
+  ]
+}

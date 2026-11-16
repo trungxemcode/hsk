@@ -1,0 +1,773 @@
+{
+  "id": "BFpfNFyQywk",
+  "youtubeId": "BFpfNFyQywk",
+  "channelHandle": "@PandaStudio24",
+  "title": "[Pinyin & Vietsub] Chuyện cô gái Trung Quốc về quê đón Tết",
+  "titleVi": "Chuyện cô gái Trung Quốc về quê đón Tết",
+  "topic": "Luyện nghe Panda Studio",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 637,
+  "cues": [
+    {
+      "start": 2.9,
+      "end": 6.34,
+      "en": "Today is the most important day for Chinese people.",
+      "zh": "今天是中国人最重要的日子",
+      "pinyin": "Jīn tiān shì zhōng guó rén zuì zhòng yào de rì zi",
+      "vi": "Hôm nay là ngày quan trọng nhất của người Trung Quốc."
+    },
+    {
+      "start": 12.76,
+      "end": 17,
+      "en": "This is the world's largest migration.",
+      "zh": "这次是世界上最大规模的迁徙",
+      "pinyin": "Zhè cì shì shì jiè shàng zuì dà guī mó de qiān xǐ",
+      "vi": "Đây là cuộc di cư lớn nhất trên thế giới."
+    },
+    {
+      "start": 17.14,
+      "end": 18.94,
+      "en": "The annual Spring Festival.",
+      "zh": "一年一度的春节",
+      "pinyin": "Yì nián yí dù de chūn jié",
+      "vi": "Tết Nguyên Đán hằng năm."
+    },
+    {
+      "start": 20.76,
+      "end": 21.26,
+      "en": "is calling.",
+      "zh": "是在召唤",
+      "pinyin": "Shì zài zhào huàn",
+      "vi": "đang vẫy gọi."
+    },
+    {
+      "start": 36.26,
+      "end": 38.8,
+      "en": "People all over China return to their hometowns.",
+      "zh": "全中国的人们回到家乡",
+      "pinyin": "Quán zhōng guó de rén men huí dào jiā xiāng",
+      "vi": "Mọi người trên khắp Trung Quốc trở về quê hương."
+    },
+    {
+      "start": 38.88,
+      "end": 41.5,
+      "en": "Everyone rushes to the same place.",
+      "zh": "大家都奔向同一个地方",
+      "pinyin": "Dà jiā dōu bēn xiàng tóng yí gè dì fāng",
+      "vi": "Mọi người đều đổ về cùng một nơi."
+    },
+    {
+      "start": 43.92,
+      "end": 44.48,
+      "en": "Return home.",
+      "zh": "回到家里",
+      "pinyin": "Huí dào jiā lǐ",
+      "vi": "Trở về nhà."
+    },
+    {
+      "start": 45.1,
+      "end": 46.02,
+      "en": "Return home.",
+      "zh": "回到家里",
+      "pinyin": "Huí dào jiā lǐ",
+      "vi": "Trở về nhà."
+    },
+    {
+      "start": 47.12,
+      "end": 47.64,
+      "en": "Return home.",
+      "zh": "回到家里",
+      "pinyin": "Huí dào jiā lǐ",
+      "vi": "Trở về nhà."
+    },
+    {
+      "start": 47.64,
+      "end": 51.14,
+      "en": "My name is Lin Yuanyuan.",
+      "zh": "我叫林元元",
+      "pinyin": "Wǒ jiào lín yuán yuán",
+      "vi": "Tên tôi là Lâm Nguyên Nguyên."
+    },
+    {
+      "start": 52,
+      "end": 53.46,
+      "en": "I return home.",
+      "zh": "我回到家里",
+      "pinyin": "Wǒ huí dào jiā lǐ",
+      "vi": "Tôi trở về nhà."
+    },
+    {
+      "start": 54.72,
+      "end": 55.5,
+      "en": "My home.",
+      "zh": "我的家",
+      "pinyin": "Wǒ de jiā",
+      "vi": "Nhà của tôi."
+    },
+    {
+      "start": 56.14,
+      "end": 58.36,
+      "en": "The New Year's Eve dinner is the most important.",
+      "zh": "年夜饭是最重要的",
+      "pinyin": "Nián yè fàn shì zuì zhòng yào de",
+      "vi": "Bữa cơm giao thừa là quan trọng nhất."
+    },
+    {
+      "start": 59.48,
+      "end": 60.46,
+      "en": "I will share it with you.",
+      "zh": "我会分享给你们",
+      "pinyin": "Wǒ huì fēn xiǎng gěi nǐ men",
+      "vi": "Tôi sẽ chia sẻ với các bạn."
+    },
+    {
+      "start": 60.6,
+      "end": 62.06,
+      "en": "What is reunion?",
+      "zh": "什么是团圆",
+      "pinyin": "Shén me shì tuán yuán",
+      "vi": "Sum vầy là gì?"
+    },
+    {
+      "start": 80.26,
+      "end": 81.98,
+      "en": "Nanjing is my hometown.",
+      "zh": "南京是我的家乡",
+      "pinyin": "Nán jīng shì wǒ de jiā xiāng",
+      "vi": "Nam Kinh là quê hương của tôi."
+    },
+    {
+      "start": 82.84,
+      "end": 83.5,
+      "en": "The look of a city.",
+      "zh": "一个城市的模样",
+      "pinyin": "Yí gè chéng shì de mú yàng",
+      "vi": "Diện mạo của một thành phố."
+    },
+    {
+      "start": 84.22,
+      "end": 85.16,
+      "en": "A leisurely charm.",
+      "zh": "悠悠的魅力",
+      "pinyin": "Yōu yōu de mèi lì",
+      "vi": "Nét quyến rũ thong thả."
+    },
+    {
+      "start": 86.56,
+      "end": 89.72,
+      "en": "Now is the liveliest scene, with red everywhere.",
+      "zh": "现在是最热闹的场景，到处都是红色",
+      "pinyin": "Xiàn zài shì zuì rè nào de chǎng jǐng， dào chù dōu shì hóng sè",
+      "vi": "Bây giờ là khung cảnh nhộn nhịp nhất, đâu đâu cũng là màu đỏ."
+    },
+    {
+      "start": 90.4,
+      "end": 91.36,
+      "en": "So happy.",
+      "zh": "好幸福",
+      "pinyin": "Hǎo xìng fú",
+      "vi": "Thật hạnh phúc."
+    },
+    {
+      "start": 116.52,
+      "end": 119.26,
+      "en": "I picked red clothes for my parents.",
+      "zh": "我给父母挑了红色的衣服",
+      "pinyin": "Wǒ gěi fù mǔ tiāo le hóng sè de yī fu",
+      "vi": "Tôi chọn cho bố mẹ bộ quần áo màu đỏ."
+    },
+    {
+      "start": 120.36,
+      "end": 121.02,
+      "en": "The most beautiful red.",
+      "zh": "最好看的红色",
+      "pinyin": "Zuì hǎo kàn de hóng sè",
+      "vi": "Màu đỏ đẹp nhất."
+    },
+    {
+      "start": 123.08,
+      "end": 124.48,
+      "en": "I hope everything is fine for them.",
+      "zh": "我希望他们一切都好",
+      "pinyin": "Wǒ xī wàng tā men yí qiè dōu hǎo",
+      "vi": "Tôi mong mọi điều tốt lành với họ."
+    },
+    {
+      "start": 165.87,
+      "end": 168.57,
+      "en": "She is an auntie who makes pastries.",
+      "zh": "她是个做饼的阿姨",
+      "pinyin": "Tā shì gè zuò bǐng de ā yí",
+      "vi": "Cô ấy là một dì làm bánh."
+    },
+    {
+      "start": 177.65,
+      "end": 178.53,
+      "en": "I call her auntie.",
+      "zh": "我叫她姨姨",
+      "pinyin": "Wǒ jiào tā yí yí",
+      "vi": "Tôi gọi cô ấy là dì."
+    },
+    {
+      "start": 179.27,
+      "end": 179.65,
+      "en": "I call her auntie.",
+      "zh": "我叫她姨姨",
+      "pinyin": "Wǒ jiào tā yí yí",
+      "vi": "Tôi gọi cô ấy là dì."
+    },
+    {
+      "start": 180.19,
+      "end": 181.79,
+      "en": "I bought pastries and drinks at the restaurant.",
+      "zh": "我买了餐厅里的饼和饮料",
+      "pinyin": "Wǒ mǎi le cān tīng lǐ de bǐng hé yǐn liào",
+      "vi": "Tôi đã mua bánh và nước uống ở nhà hàng."
+    },
+    {
+      "start": 182.13,
+      "end": 182.89,
+      "en": "I bought it online.",
+      "zh": "我在网上买了",
+      "pinyin": "Wǒ zài wǎng shàng mǎi le",
+      "vi": "Tôi đã mua trên mạng."
+    },
+    {
+      "start": 211.05,
+      "end": 212.53,
+      "en": "As a traditional custom,",
+      "zh": "作为一个传统的风俗",
+      "pinyin": "Zuò wéi yí gè chuán tǒng de fēng sú",
+      "vi": "Là một phong tục truyền thống,"
+    },
+    {
+      "start": 222.35,
+      "end": 224.45,
+      "en": "Families going home will all come.",
+      "zh": "回家的家庭都会来",
+      "pinyin": "Huí jiā de jiā tíng dōu huì lái",
+      "vi": "Các gia đình về quê đều sẽ đến."
+    },
+    {
+      "start": 231.59,
+      "end": 232.81,
+      "en": "Put it in the right place.",
+      "zh": "放在合适的地方",
+      "pinyin": "Fàng zài hé shì de dì fāng",
+      "vi": "Đặt vào chỗ thích hợp."
+    },
+    {
+      "start": 234.19,
+      "end": 235.35,
+      "en": "All the things here.",
+      "zh": "在这里的所有东西",
+      "pinyin": "Zài zhè lǐ de suǒ yǒu dōng xī",
+      "vi": "Tất cả những thứ ở đây."
+    },
+    {
+      "start": 263.23,
+      "end": 264.17,
+      "en": "Like the start of a journey.",
+      "zh": "像旅途的开始",
+      "pinyin": "Xiàng lǚ tú de kāi shǐ",
+      "vi": "Giống như khởi đầu của một chuyến đi."
+    },
+    {
+      "start": 264.17,
+      "end": 265.09,
+      "en": "Like the start of a journey.",
+      "zh": "像旅途的开始",
+      "pinyin": "Xiàng lǚ tú de kāi shǐ",
+      "vi": "Giống như khởi đầu của một chuyến đi."
+    },
+    {
+      "start": 268.65,
+      "end": 270.63,
+      "en": "Children will receive lucky money.",
+      "zh": "孩子们会收到压岁钱",
+      "pinyin": "Hái zi men huì shōu dào yā suì qián",
+      "vi": "Bọn trẻ sẽ được nhận tiền lì xì."
+    },
+    {
+      "start": 271.21,
+      "end": 273.55,
+      "en": "Protect children from the harm of evil spirits.",
+      "zh": "保护孩子不受邪魔鬼怪的侵害",
+      "pinyin": "Bǎo hù hái zi bú shòu xié mó guǐ guài de qīn hài",
+      "vi": "Bảo vệ trẻ em khỏi tà ma quỷ quái xâm hại."
+    },
+    {
+      "start": 275.25,
+      "end": 278.95,
+      "en": "Phones and the internet have helped improve people's lives.",
+      "zh": "手机和互联网帮助改善了人们的生活",
+      "pinyin": "Shǒu jī hé hù lián wǎng bāng zhù gǎi shàn le rén men de shēng huó",
+      "vi": "Điện thoại và internet đã giúp cải thiện cuộc sống của mọi người."
+    },
+    {
+      "start": 285.47,
+      "end": 286.15,
+      "en": "Usually,",
+      "zh": "通常",
+      "pinyin": "Tōng cháng",
+      "vi": "Thông thường,"
+    },
+    {
+      "start": 290.51,
+      "end": 292.77,
+      "en": "I think these blessings are all beneficial.",
+      "zh": "我认为这些祝福语都有好处",
+      "pinyin": "Wǒ rèn wéi zhè xiē zhù fú yǔ dōu yǒu hǎo chù",
+      "vi": "Tôi nghĩ những lời chúc này đều có ích."
+    },
+    {
+      "start": 294.91,
+      "end": 297.99,
+      "en": "These words express people's best wishes.",
+      "zh": "这些词句表达人们最美好的祝福",
+      "pinyin": "Zhè xiē cí jù biǎo dá rén men zuì měi hǎo de zhù fú",
+      "vi": "Những lời này thể hiện những lời chúc tốt đẹp nhất của mọi người."
+    },
+    {
+      "start": 298.05,
+      "end": 298.77,
+      "en": "For the New Year.",
+      "zh": "为新年",
+      "pinyin": "Wèi xīn nián",
+      "vi": "Cho năm mới."
+    },
+    {
+      "start": 299.95,
+      "end": 302.27,
+      "en": "Like wishes for health and happiness.",
+      "zh": "像健康和幸福的祝愿",
+      "pinyin": "Xiàng jiàn kāng hé xìng fú de zhù yuàn",
+      "vi": "Như những lời chúc sức khỏe và hạnh phúc."
+    },
+    {
+      "start": 305.21,
+      "end": 307.17,
+      "en": "The most interesting thing",
+      "zh": "最有趣的事情",
+      "pinyin": "Zuì yǒu qù de shì qíng",
+      "vi": "Điều thú vị nhất"
+    },
+    {
+      "start": 307.87,
+      "end": 309.81,
+      "en": "is to make New Year cakes together with the whole family.",
+      "zh": "是让全家人一起做年糕",
+      "pinyin": "Shì ràng quán jiā rén yì qǐ zuò nián gāo",
+      "vi": "là để cả gia đình cùng làm bánh tết."
+    },
+    {
+      "start": 312.15,
+      "end": 319.82,
+      "en": "Only those who travel will have a lucky year.",
+      "zh": "只有那些去旅行的人会拥有幸运的一年",
+      "pinyin": "Zhǐ yǒu nà xiē qù lǚ xíng de rén huì yōng yǒu xìng yùn de yì nián",
+      "vi": "Chỉ những người đi du lịch mới có một năm may mắn."
+    },
+    {
+      "start": 327.3,
+      "end": 328.08,
+      "en": "Will also prepare.",
+      "zh": "也会准备",
+      "pinyin": "Yě huì zhǔn bèi",
+      "vi": "Cũng sẽ chuẩn bị."
+    },
+    {
+      "start": 329.1,
+      "end": 330.74,
+      "en": "Now is the most important time.",
+      "zh": "现在是最重要的时刻",
+      "pinyin": "Xiàn zài shì zuì zhòng yào de shí kè",
+      "vi": "Bây giờ là thời khắc quan trọng nhất."
+    },
+    {
+      "start": 331.8,
+      "end": 332.98,
+      "en": "The New Year's Eve dinner",
+      "zh": "新年的年夜饭",
+      "pinyin": "Xīn nián de nián yè fàn",
+      "vi": "Bữa cơm tất niên dịp năm mới"
+    },
+    {
+      "start": 340.72,
+      "end": 346.46,
+      "en": "First, I'll make sweet fresh meat with bamboo shoots and tofu skin",
+      "zh": "首先，我会做的是甜甜的鲜肉和春笋腐竹",
+      "pinyin": "Shǒu xiān， wǒ huì zuò de shì tián tián de xiān ròu hé chūn sǔn fǔ zhú",
+      "vi": "Đầu tiên, tôi sẽ làm món thịt tươi ngọt và măng với váng đậu"
+    },
+    {
+      "start": 346.46,
+      "end": 349.88,
+      "en": "There are shrimp and vermicelli for spring rolls",
+      "zh": "那里有虾和春卷的粉丝",
+      "pinyin": "Nà lǐ yǒu xiā hé chūn juǎn de fěn sī",
+      "vi": "Ở đó có tôm và miến để làm chả giò"
+    },
+    {
+      "start": 350.96,
+      "end": 353.6,
+      "en": "It seems like a meat dish",
+      "zh": "似乎是一个荤的食物",
+      "pinyin": "Sì hū shì yí gè hūn de shí wù",
+      "vi": "Có vẻ là một món mặn"
+    },
+    {
+      "start": 357.4,
+      "end": 360.34,
+      "en": "But today is a one-person job",
+      "zh": "但今天是一个人的工作",
+      "pinyin": "Dàn jīn tiān shì yí gè rén de gōng zuò",
+      "vi": "Nhưng hôm nay là việc của một mình"
+    },
+    {
+      "start": 364.84,
+      "end": 366.08,
+      "en": "Youyou agreed on her own",
+      "zh": "优优独自同意了",
+      "pinyin": "Yōu yōu dú zì tóng yì le",
+      "vi": "U U đã tự mình đồng ý"
+    },
+    {
+      "start": 366.86,
+      "end": 368.8,
+      "en": "It's sticky rice, tofu, and steamed buns",
+      "zh": "是糯米、豆腐和包子",
+      "pinyin": "Shì nuò mǐ、 dòu fu hé bāo zǐ",
+      "vi": "Là gạo nếp, đậu phụ và bánh bao"
+    },
+    {
+      "start": 369.46,
+      "end": 373.18,
+      "en": "It's truly joyful and happy—happiness follows",
+      "zh": "真是愉快、幸福、幸福相随",
+      "pinyin": "Zhēn shì yú kuài、 xìng fú、 xìng fú xiàng suí",
+      "vi": "Thật là vui vẻ, hạnh phúc, hạnh phúc đồng hành"
+    },
+    {
+      "start": 377.86,
+      "end": 380.7,
+      "en": "Youyou says we must choose the salad",
+      "zh": "优优说我们必须选择沙拉",
+      "pinyin": "Yōu yōu shuō wǒ men bì xū xuǎn zé shā lā",
+      "vi": "U U nói chúng ta phải chọn món salad"
+    },
+    {
+      "start": 415.6,
+      "end": 418.08,
+      "en": "It is fresh and lightly spicy",
+      "zh": "是新鲜的和微辣的",
+      "pinyin": "Shì xīn xiān de hé wēi là de",
+      "vi": "Nó tươi và hơi cay"
+    },
+    {
+      "start": 419.12,
+      "end": 421.6,
+      "en": "Dad's blessings and mushrooms",
+      "zh": "爸爸的祝福和蘑菇",
+      "pinyin": "Bà ba de zhù fú hé mó gu",
+      "vi": "Lời chúc của bố và nấm"
+    },
+    {
+      "start": 423.76,
+      "end": 424.86,
+      "en": "and golden Sichuan peppercorns",
+      "zh": "和金色的花椒",
+      "pinyin": "Hé jīn sè de huā jiāo",
+      "vi": "và hạt tiêu Tứ Xuyên màu vàng"
+    },
+    {
+      "start": 425.8,
+      "end": 427.14,
+      "en": "it's another expensive fish",
+      "zh": "是另一种贵的鱼",
+      "pinyin": "Shì lìng yì zhǒng guì de yú",
+      "vi": "là một loại cá đắt tiền khác"
+    },
+    {
+      "start": 428.32,
+      "end": 430.04,
+      "en": "and the restaurant's food",
+      "zh": "和食府的食物",
+      "pinyin": "Hé shí fǔ de shí wù",
+      "vi": "và đồ ăn của nhà hàng"
+    },
+    {
+      "start": 430.78,
+      "end": 432.54,
+      "en": "there will be this day-to-day routine",
+      "zh": "会有这个日复一日的日常",
+      "pinyin": "Huì yǒu zhè ge rì fù yí rì de rì cháng",
+      "vi": "sẽ có nhịp sống lặp đi lặp lại hằng ngày này"
+    },
+    {
+      "start": 449.36,
+      "end": 453.74,
+      "en": "At the same time, everyone is paying attention to this restaurant",
+      "zh": "同时，所有人都在关注着这个餐厅",
+      "pinyin": "Tóng shí， suǒ yǒu rén dōu zài guān zhù zhe zhè ge cān tīng",
+      "vi": "Đồng thời, mọi người đều đang chú ý đến nhà hàng này"
+    },
+    {
+      "start": 454.88,
+      "end": 457.6,
+      "en": "Each family will have different food",
+      "zh": "每个家庭都会有不同的食物",
+      "pinyin": "Měi gè jiā tíng dōu huì yǒu bù tóng de shí wù",
+      "vi": "Mỗi gia đình sẽ có những món ăn khác nhau"
+    },
+    {
+      "start": 457.74,
+      "end": 458.98,
+      "en": "Some people will go to restaurants",
+      "zh": "有些人会到餐厅",
+      "pinyin": "Yǒu xiē rén huì dào cān tīng",
+      "vi": "Một số người sẽ đến nhà hàng"
+    },
+    {
+      "start": 459.96,
+      "end": 461.42,
+      "en": "But they all share a common theme",
+      "zh": "但他们都会有一个共同的主题",
+      "pinyin": "Dàn tā men dōu huì yǒu yí gè gòng tóng de zhǔ tí",
+      "vi": "Nhưng tất cả đều có một chủ đề chung"
+    },
+    {
+      "start": 462.4,
+      "end": 464.26,
+      "en": "and a family's blessings",
+      "zh": "和一家人的祝福",
+      "pinyin": "Hé yì jiā rén de zhù fú",
+      "vi": "và lời chúc phúc của một gia đình"
+    },
+    {
+      "start": 477.54,
+      "end": 483.67,
+      "en": "The food prepared on my family's table has the most dishes",
+      "zh": "我家的餐桌上准备的食物是道数最多的",
+      "pinyin": "Wǒ jiā de cān zhuō shàng zhǔn bèi de shí wù shì dào shù zuì duō de",
+      "vi": "Đồ ăn chuẩn bị trên mâm cơm nhà tôi là nhiều món nhất"
+    },
+    {
+      "start": 484.97,
+      "end": 487.03,
+      "en": "There are lots of things like shredded meat",
+      "zh": "有好多的东西像肉丝",
+      "pinyin": "Yǒu hǎo duō de dōng xī xiàng ròu sī",
+      "vi": "Có rất nhiều thứ giống như thịt sợi"
+    },
+    {
+      "start": 490.07,
+      "end": 491.09,
+      "en": "and things like fresh shredded meat",
+      "zh": "和鲜肉丝一样的东西",
+      "pinyin": "Hé xiān ròu sī yí yàng de dōng xī",
+      "vi": "và những thứ giống như thịt tươi thái sợi"
+    },
+    {
+      "start": 492.93,
+      "end": 495.25,
+      "en": "and rock sugar, rock sugar",
+      "zh": "和冰糖、冰糖",
+      "pinyin": "Hé bīng táng、 bīng táng",
+      "vi": "và đường phèn, đường phèn"
+    },
+    {
+      "start": 498.33,
+      "end": 500.19,
+      "en": "Many people are greeting each other",
+      "zh": "比较多人在打招呼",
+      "pinyin": "Bǐ jiào duō rén zài dǎ zhāo hū",
+      "vi": "Khá nhiều người đang chào hỏi"
+    },
+    {
+      "start": 501.73,
+      "end": 504.81,
+      "en": "Quite a few people are sitting at the dinner table.",
+      "zh": "比较多的人坐在餐桌旁边",
+      "pinyin": "Bǐ jiào duō de rén zuò zài cān zhuō páng biān",
+      "vi": "Khá nhiều người ngồi cạnh bàn ăn."
+    },
+    {
+      "start": 505.97,
+      "end": 507.63,
+      "en": "Dad took a bite.",
+      "zh": "爹吃了一口",
+      "pinyin": "Diē chī le yì kǒu",
+      "vi": "Bố ăn một miếng."
+    },
+    {
+      "start": 508.33,
+      "end": 510.63,
+      "en": "Then everyone sat down.",
+      "zh": "然后大家都坐了下来",
+      "pinyin": "Rán hòu dà jiā dōu zuò le xià lái",
+      "vi": "Sau đó mọi người đều ngồi xuống."
+    },
+    {
+      "start": 511.03,
+      "end": 511.38,
+      "en": "Come eat.",
+      "zh": "来吃饭",
+      "pinyin": "Lái chī fàn",
+      "vi": "Lại đây ăn cơm."
+    },
+    {
+      "start": 513.05,
+      "end": 514.27,
+      "en": "Let's eat.",
+      "zh": "来吃饭吧",
+      "pinyin": "Lái chī fàn ba",
+      "vi": "Mọi người ăn cơm đi."
+    },
+    {
+      "start": 515.35,
+      "end": 517.45,
+      "en": "Mom, this is the meal I specially made for you.",
+      "zh": "妈，这是我特别给你做的饭",
+      "pinyin": "Mā， zhè shì wǒ tè bié gěi nǐ zuò de fàn",
+      "vi": "Mẹ, đây là món con đặc biệt nấu cho mẹ."
+    },
+    {
+      "start": 519.21,
+      "end": 520.65,
+      "en": "Mom, let's eat.",
+      "zh": "妈，吃饭吧",
+      "pinyin": "Mā， chī fàn ba",
+      "vi": "Mẹ ơi, ăn cơm đi."
+    },
+    {
+      "start": 523.67,
+      "end": 527.41,
+      "en": "My aunt looks super classy.",
+      "zh": "我的小伯母是超级高大上的样子",
+      "pinyin": "Wǒ de xiǎo bó mǔ shì chāo jí gāo dà shàng de yàng zi",
+      "vi": "Bác gái của tôi trông thật đẳng cấp."
+    },
+    {
+      "start": 531.47,
+      "end": 531.93,
+      "en": "My aunt is very upscale.",
+      "zh": "我的小伯母是很高级的",
+      "pinyin": "Wǒ de xiǎo bó mǔ shì hěn gāo jí de",
+      "vi": "Bác gái của tôi rất sang trọng."
+    },
+    {
+      "start": 533.89,
+      "end": 537.41,
+      "en": "My aunt is very noble.",
+      "zh": "我的小伯母是很高贵的",
+      "pinyin": "Wǒ de xiǎo bó mǔ shì hěn gāo guì de",
+      "vi": "Bác gái của tôi rất cao quý."
+    },
+    {
+      "start": 537.41,
+      "end": 539.27,
+      "en": "This is a trip in Nanjing.",
+      "zh": "它是一种在南京的旅行",
+      "pinyin": "Tā shì yì zhǒng zài nán jīng de lǚ xíng",
+      "vi": "Đây là một chuyến đi ở Nam Kinh."
+    },
+    {
+      "start": 539.41,
+      "end": 541.41,
+      "en": "It's a trip.",
+      "zh": "是一种旅行",
+      "pinyin": "Shì yì zhǒng lǚ xíng",
+      "vi": "Là một chuyến đi."
+    },
+    {
+      "start": 541.53,
+      "end": 542.43,
+      "en": "It's a trip.",
+      "zh": "是一种旅行",
+      "pinyin": "Shì yì zhǒng lǚ xíng",
+      "vi": "Là một chuyến đi."
+    },
+    {
+      "start": 549.73,
+      "end": 550.41,
+      "en": "I ate the happy cookie.",
+      "zh": "我吃了幸福的饼干",
+      "pinyin": "Wǒ chī le xìng fú de bǐng gān",
+      "vi": "Tôi đã ăn chiếc bánh quy hạnh phúc."
+    },
+    {
+      "start": 550.45,
+      "end": 551.27,
+      "en": "I ate the happy cookie.",
+      "zh": "我吃了幸福的饼干",
+      "pinyin": "Wǒ chī le xìng fú de bǐng gān",
+      "vi": "Tôi đã ăn chiếc bánh quy hạnh phúc."
+    },
+    {
+      "start": 556.47,
+      "end": 556.82,
+      "en": "I ate all the happy cookies.",
+      "zh": "我把幸福的饼干都吃了",
+      "pinyin": "Wǒ bǎ xìng fú de bǐng gān dōu chī le",
+      "vi": "Tôi đã ăn hết mấy chiếc bánh quy hạnh phúc."
+    },
+    {
+      "start": 556.82,
+      "end": 557.87,
+      "en": "The whole family is chatting.",
+      "zh": "全家人都在聊天",
+      "pinyin": "Quán jiā rén dōu zài liáo tiān",
+      "vi": "Cả nhà đều đang trò chuyện."
+    },
+    {
+      "start": 558.65,
+      "end": 559.31,
+      "en": "And they're eating winter food.",
+      "zh": "在吃着冬天的食物",
+      "pinyin": "Zài chī zhe dōng tiān de shí wù",
+      "vi": "Đang ăn đồ ăn mùa đông."
+    },
+    {
+      "start": 559.41,
+      "end": 561.69,
+      "en": "Watching the Spring Festival Gala.",
+      "zh": "看着春晚的节目",
+      "pinyin": "Kàn zhe chūn wǎn de jié mù",
+      "vi": "Đang xem chương trình Gala Tết."
+    },
+    {
+      "start": 562.83,
+      "end": 563.41,
+      "en": "In front of the TV.",
+      "zh": "在电视机前",
+      "pinyin": "Zài diàn shì jī qián",
+      "vi": "Đang ở trước tivi."
+    },
+    {
+      "start": 563.41,
+      "end": 564.33,
+      "en": "In front of the TV.",
+      "zh": "在电视机前",
+      "pinyin": "Zài diàn shì jī qián",
+      "vi": "Đang ở trước tivi."
+    },
+    {
+      "start": 564.73,
+      "end": 566.03,
+      "en": "The countdown begins.",
+      "zh": "开始倒计时",
+      "pinyin": "Kāi shǐ dǎo jì shí",
+      "vi": "Bắt đầu đếm ngược."
+    },
+    {
+      "start": 566.79,
+      "end": 567.89,
+      "en": "Happy New Year.",
+      "zh": "新春快乐",
+      "pinyin": "Xīn chūn kuài lè",
+      "vi": "Chúc mừng năm mới."
+    }
+  ]
+}

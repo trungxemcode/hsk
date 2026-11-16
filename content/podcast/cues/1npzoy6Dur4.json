@@ -1,0 +1,189 @@
+{
+  "id": "1npzoy6Dur4",
+  "youtubeId": "1npzoy6Dur4",
+  "channelHandle": "@PandaStudio24",
+  "title": "Đoạn văn bố mẹ không ở nhà bằng TIẾNG TRUNG - HSK 1",
+  "titleVi": "Đoạn văn: Bố mẹ không ở nhà",
+  "topic": "Luyện nghe Panda Studio",
+  "level": "HSK 1+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 164,
+  "cues": [
+    {
+      "start": 3.44,
+      "end": 5.48,
+      "en": "Mom and Dad are not at home.",
+      "zh": "爸爸妈妈不在家",
+      "pinyin": "Bà ba mā ma bú zài jiā",
+      "vi": "Bố mẹ không ở nhà."
+    },
+    {
+      "start": 8.02,
+      "end": 22.3,
+      "en": "Today, Mom and Dad are not at home.",
+      "zh": "今天爸爸妈妈不在家",
+      "pinyin": "Jīn tiān bà ba mā ma bú zài jiā",
+      "vi": "Hôm nay bố mẹ không ở nhà."
+    },
+    {
+      "start": 23.32,
+      "end": 26.62,
+      "en": "My younger brother, younger sister, and I are at home.",
+      "zh": "我和弟弟妹妹在家",
+      "pinyin": "Wǒ hé dì di mèi mei zài jiā",
+      "vi": "Tôi và em trai, em gái ở nhà."
+    },
+    {
+      "start": 32.22,
+      "end": 37.6,
+      "en": "My little sister wants to drink milk and eat rice.",
+      "zh": "妹妹想喝牛奶，吃米饭。",
+      "pinyin": "Mèi mei xiǎng hē niú nǎi， chī mǐ fàn。",
+      "vi": "Em gái muốn uống sữa và ăn cơm."
+    },
+    {
+      "start": 41.44,
+      "end": 46.48,
+      "en": "My little brother wants to drink milk tea and eat noodles.",
+      "zh": "弟弟想喝奶茶，吃面条。",
+      "pinyin": "Dì di xiǎng hē nǎi chá， chī miàn tiáo。",
+      "vi": "Em trai muốn uống trà sữa và ăn mì."
+    },
+    {
+      "start": 50.64,
+      "end": 55.74,
+      "en": "I want to drink coffee and eat bread.",
+      "zh": "我想喝咖啡，吃面包。",
+      "pinyin": "Wǒ xiǎng hē kā fēi， chī miàn bāo。",
+      "vi": "Tôi muốn uống cà phê và ăn bánh mì."
+    },
+    {
+      "start": 59.84,
+      "end": 65.9,
+      "en": "But I don't know how to cook rice and noodles.",
+      "zh": "但是，我不会做米饭和面条。",
+      "pinyin": "Dàn shì， wǒ bú huì zuò mǐ fàn hé miàn tiáo。",
+      "vi": "Nhưng tôi không biết nấu cơm và mì."
+    },
+    {
+      "start": 69.82,
+      "end": 85.65,
+      "en": "They don't like eating bread. This is a problem. When will Mom and Dad come home?",
+      "zh": "他们不喜欢吃面包，这是个问题。爸爸妈妈什么时候回家呢？",
+      "pinyin": "Tā men bù xǐ huan chī miàn bāo， zhè shì gè wèn tí。 bà ba mā ma shén me shí hòu huí jiā ne？",
+      "vi": "Họ không thích ăn bánh mì, đây là một vấn đề. Khi nào bố mẹ về nhà?"
+    },
+    {
+      "start": 95.45,
+      "end": 96.23,
+      "en": "younger brother",
+      "zh": "弟弟",
+      "pinyin": "Dì di",
+      "vi": "em trai"
+    },
+    {
+      "start": 98.49,
+      "end": 99.13,
+      "en": "younger brother",
+      "zh": "弟弟",
+      "pinyin": "Dì di",
+      "vi": "em trai"
+    },
+    {
+      "start": 102.65,
+      "end": 103.39,
+      "en": "younger sister",
+      "zh": "妹妹",
+      "pinyin": "Mèi mei",
+      "vi": "em gái"
+    },
+    {
+      "start": 105.73,
+      "end": 106.41,
+      "en": "younger sister",
+      "zh": "妹妹",
+      "pinyin": "Mèi mei",
+      "vi": "em gái"
+    },
+    {
+      "start": 110.09,
+      "end": 110.59,
+      "en": "want",
+      "zh": "想",
+      "pinyin": "Xiǎng",
+      "vi": "muốn"
+    },
+    {
+      "start": 113.09,
+      "end": 113.71,
+      "en": "want",
+      "zh": "想",
+      "pinyin": "Xiǎng",
+      "vi": "muốn"
+    },
+    {
+      "start": 117.27,
+      "end": 118.13,
+      "en": "milk",
+      "zh": "牛奶",
+      "pinyin": "Niú nǎi",
+      "vi": "sữa"
+    },
+    {
+      "start": 120.43,
+      "end": 121.31,
+      "en": "milk",
+      "zh": "牛奶",
+      "pinyin": "Niú nǎi",
+      "vi": "sữa"
+    },
+    {
+      "start": 124.69,
+      "end": 125.47,
+      "en": "cooked rice",
+      "zh": "米饭",
+      "pinyin": "Mǐ fàn",
+      "vi": "cơm"
+    },
+    {
+      "start": 127.71,
+      "end": 128.49,
+      "en": "cooked rice",
+      "zh": "米饭",
+      "pinyin": "Mǐ fàn",
+      "vi": "cơm"
+    },
+    {
+      "start": 131.95,
+      "end": 132.69,
+      "en": "milk tea",
+      "zh": "奶茶",
+      "pinyin": "Nǎi chá",
+      "vi": "trà sữa"
+    },
+    {
+      "start": 135.51,
+      "end": 135.91,
+      "en": "milk tea",
+      "zh": "奶茶",
+      "pinyin": "Nǎi chá",
+      "vi": "trà sữa"
+    },
+    {
+      "start": 139.21,
+      "end": 140.79,
+      "en": "noodles",
+      "zh": "面条",
+      "pinyin": "Miàn tiáo",
+      "vi": "mì"
+    },
+    {
+      "start": 146.59,
+      "end": 149.27,
+      "en": "bread",
+      "zh": "面包",
+      "pinyin": "Miàn bāo",
+      "vi": "bánh mì"
+    }
+  ]
+}

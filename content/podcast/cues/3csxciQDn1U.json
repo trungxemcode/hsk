@@ -1,0 +1,229 @@
+{
+  "id": "3csxciQDn1U",
+  "youtubeId": "3csxciQDn1U",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Tôi muốn mua rau",
+  "titleVi": "Tôi muốn mua rau",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 160,
+  "cues": [
+    {
+      "start": 32.16,
+      "end": 33.42,
+      "en": "Please weigh it for me.",
+      "zh": "请帮我称一下",
+      "pinyin": "Qǐng bāng wǒ chēng yí xià",
+      "vi": "Nhờ bạn cân giúp một chút."
+    },
+    {
+      "start": 35.5,
+      "end": 37.38,
+      "en": "Two and a half jin, ten yuan.",
+      "zh": "两斤五两，十元。",
+      "pinyin": "Liǎng jīn wǔ liǎng， shí yuán。",
+      "vi": "Hai cân rưỡi, mười tệ."
+    },
+    {
+      "start": 41.96,
+      "end": 44.04,
+      "en": "Excuse me, do you have steak?",
+      "zh": "请问，有牛排吗？",
+      "pinyin": "Qǐng wèn， yǒu niú pái ma？",
+      "vi": "Cho hỏi, có bít tết bò không?"
+    },
+    {
+      "start": 46,
+      "end": 49.08,
+      "en": "The steak is sold out. I recommend you buy this pork chop.",
+      "zh": "牛排卖完了，我推荐你买这个猪排。",
+      "pinyin": "Niú pái mài wán le， wǒ tuī jiàn nǐ mǎi zhè ge zhū pái。",
+      "vi": "Bít tết bò bán hết rồi, tôi khuyên bạn mua miếng cốt lết heo này."
+    },
+    {
+      "start": 51.18,
+      "end": 52.7,
+      "en": "I don't like pork chops.",
+      "zh": "我不喜欢吃猪排。",
+      "pinyin": "Wǒ bù xǐ huan chī zhū pái。",
+      "vi": "Tôi không thích ăn cốt lết heo."
+    },
+    {
+      "start": 54.78,
+      "end": 55.86,
+      "en": "What is this?",
+      "zh": "这个是什么？",
+      "pinyin": "Zhè ge shì shén me？",
+      "vi": "Cái này là gì?"
+    },
+    {
+      "start": 58.32,
+      "end": 60.06,
+      "en": "This is roast duck, very tasty.",
+      "zh": "这个是烤鸭，很好吃。",
+      "pinyin": "Zhè ge shì kǎo yā， hěn hǎo chī。",
+      "vi": "Đây là vịt quay, rất ngon."
+    },
+    {
+      "start": 62.78,
+      "end": 64.36,
+      "en": "Can you cut it for me?",
+      "zh": "可以帮我切一下吗？",
+      "pinyin": "Kě yǐ bāng wǒ qiè yí xià ma？",
+      "vi": "Bạn có thể cắt giúp tôi một chút được không?"
+    },
+    {
+      "start": 69.04,
+      "end": 72.82,
+      "en": "Hello, today potato chips are buy one get one free, a great deal.",
+      "zh": "你好，今天薯片买一送一，非常划算。",
+      "pinyin": "Nǐ hǎo， jīn tiān shǔ piàn mǎi yí sòng yī， fēi cháng huá suàn。",
+      "vi": "Chào bạn, hôm nay khoai tây chiên mua một tặng một, rất đáng giá."
+    },
+    {
+      "start": 75.14,
+      "end": 83.42,
+      "en": "Then I'll buy one pack. Excuse me, where is the cola? Straight ahead.",
+      "zh": "那我买一包。请问可乐在哪里？前面直走。",
+      "pinyin": "Nà wǒ mǎi yì bāo。 qǐng wèn kě lè zài nǎ lǐ？ qián miàn zhí zǒu。",
+      "vi": "Vậy tôi mua một gói. Cho hỏi Coca ở đâu? Đi thẳng phía trước."
+    },
+    {
+      "start": 88.1,
+      "end": 89.56,
+      "en": "Excuse me, do you have a membership card?",
+      "zh": "请问有会员卡吗？",
+      "pinyin": "Qǐng wèn yǒu huì yuán kǎ ma？",
+      "vi": "Cho hỏi bạn có thẻ thành viên không?"
+    },
+    {
+      "start": 91.68,
+      "end": 92.03,
+      "en": "No.",
+      "zh": "没有。",
+      "pinyin": "Méi yǒu。",
+      "vi": "Không có."
+    },
+    {
+      "start": 94.22,
+      "end": 95.28,
+      "en": "Do you need a bag?",
+      "zh": "你需要袋子吗？",
+      "pinyin": "Nǐ xū yào dài zǐ ma？",
+      "vi": "Bạn có cần túi không?"
+    },
+    {
+      "start": 97.32,
+      "end": 98.3,
+      "en": "No need for a bag.",
+      "zh": "不用袋子。",
+      "pinyin": "Bú yòng dài zǐ。",
+      "vi": "Không cần túi."
+    },
+    {
+      "start": 100.2,
+      "end": 103.04,
+      "en": "The total is sixty-eight yuan. How would you like to pay?",
+      "zh": "一共六十八元，请问怎么支付？",
+      "pinyin": "Yí gòng liù shí bā yuán， qǐng wèn zěn me zhī fù？",
+      "vi": "Tổng cộng sáu mươi tám tệ. Cho hỏi bạn thanh toán bằng cách nào?"
+    },
+    {
+      "start": 105.06,
+      "end": 105.82,
+      "en": "I'll pay by card.",
+      "zh": "刷卡吧。",
+      "pinyin": "Shuā kǎ ba。",
+      "vi": "Quẹt thẻ nhé."
+    },
+    {
+      "start": 107.78,
+      "end": 109.06,
+      "en": "Please enter your PIN.",
+      "zh": "请输入密码。",
+      "pinyin": "Qǐng shū rù mì mǎ。",
+      "vi": "Vui lòng nhập mã PIN."
+    },
+    {
+      "start": 110.84,
+      "end": 111.76,
+      "en": "Here is your receipt.",
+      "zh": "给你小票。",
+      "pinyin": "Gěi nǐ xiǎo piào。",
+      "vi": "Đây là hóa đơn của bạn."
+    },
+    {
+      "start": 115.14,
+      "end": 119.26,
+      "en": "cabbage",
+      "zh": "卷心菜",
+      "pinyin": "Juǎn xīn cài",
+      "vi": "bắp cải"
+    },
+    {
+      "start": 122.98,
+      "end": 123.64,
+      "en": "onion",
+      "zh": "洋葱",
+      "pinyin": "Yáng cōng",
+      "vi": "hành tây"
+    },
+    {
+      "start": 127.16,
+      "end": 127.92,
+      "en": "potato",
+      "zh": "土豆",
+      "pinyin": "Tǔ dòu",
+      "vi": "khoai tây"
+    },
+    {
+      "start": 131.38,
+      "end": 131.96,
+      "en": "beef steak",
+      "zh": "牛排",
+      "pinyin": "Niú pái",
+      "vi": "bít tết bò"
+    },
+    {
+      "start": 135.32,
+      "end": 135.84,
+      "en": "pork chop",
+      "zh": "猪排",
+      "pinyin": "Zhū pái",
+      "vi": "cốt lết heo"
+    },
+    {
+      "start": 139.36,
+      "end": 140.04,
+      "en": "roast duck",
+      "zh": "烤鸭",
+      "pinyin": "Kǎo yā",
+      "vi": "vịt quay"
+    },
+    {
+      "start": 143.44,
+      "end": 144.02,
+      "en": "potato chips",
+      "zh": "薯片",
+      "pinyin": "Shǔ piàn",
+      "vi": "khoai tây chiên"
+    },
+    {
+      "start": 147.42,
+      "end": 148.2,
+      "en": "membership card",
+      "zh": "会员卡",
+      "pinyin": "Huì yuán kǎ",
+      "vi": "thẻ thành viên"
+    },
+    {
+      "start": 151.5,
+      "end": 152.14,
+      "en": "receipt",
+      "zh": "小票",
+      "pinyin": "Xiǎo piào",
+      "vi": "hóa đơn nhỏ / biên lai"
+    }
+  ]
+}

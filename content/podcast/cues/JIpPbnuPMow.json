@@ -1,0 +1,133 @@
+{
+  "id": "JIpPbnuPMow",
+  "youtubeId": "JIpPbnuPMow",
+  "channelHandle": "@PandaStudio24",
+  "title": "【LUYỆN ĐỌC TIẾNG TRUNG HSK2】去银行 - Đi ngân hàng",
+  "titleVi": "Đi ngân hàng",
+  "topic": "Luyện đọc HSK 2",
+  "level": "HSK 2+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 146,
+  "cues": [
+    {
+      "start": 18.8,
+      "end": 19.76,
+      "en": "I went to the bank.",
+      "zh": "我去银行",
+      "pinyin": "Wǒ qù yín háng",
+      "vi": "Tôi đi ngân hàng."
+    },
+    {
+      "start": 19.84,
+      "end": 21.32,
+      "en": "withdrew some money.",
+      "zh": "取了一些钱",
+      "pinyin": "Qǔ le yì xiē qián",
+      "vi": "rút một ít tiền."
+    },
+    {
+      "start": 25.6,
+      "end": 27.52,
+      "en": "because this month's salary",
+      "zh": "因为这个月的工资",
+      "pinyin": "Yīn wèi zhè ge yuè de gōng zī",
+      "vi": "vì tiền lương tháng này"
+    },
+    {
+      "start": 28,
+      "end": 28.76,
+      "en": "was all spent.",
+      "zh": "都花完了",
+      "pinyin": "Dōu huā wán le",
+      "vi": "đã tiêu hết sạch."
+    },
+    {
+      "start": 32.74,
+      "end": 35.88,
+      "en": "So I withdrew another two thousand yuan.",
+      "zh": "所以我又取了两千块钱",
+      "pinyin": "Suǒ yǐ wǒ yòu qǔ le liǎng qiān kuài qián",
+      "vi": "nên tôi lại rút thêm hai nghìn tệ."
+    },
+    {
+      "start": 40.22,
+      "end": 44.26,
+      "en": "In addition, I plan to travel to Thailand next month.",
+      "zh": "另外我打算下个月去泰国旅游",
+      "pinyin": "Lìng wài wǒ dǎ suàn xià gè yuè qù tài guó lǚ yóu",
+      "vi": "Ngoài ra, tôi dự định tháng sau đi Thái Lan du lịch."
+    },
+    {
+      "start": 48.14,
+      "end": 50.8,
+      "en": "so I also exchanged some Thai baht.",
+      "zh": "所以也换了一点泰铢",
+      "pinyin": "Suǒ yǐ yě huàn le yì diǎn tài zhū",
+      "vi": "nên tôi cũng đổi một chút baht Thái."
+    },
+    {
+      "start": 54.62,
+      "end": 58.3,
+      "en": "There weren't many people in the bank, and I got it done very quickly.",
+      "zh": "银行里的人不多,我很快就办完了。",
+      "pinyin": "Yín háng lǐ de rén bù duō, wǒ hěn kuài jiù bàn wán le。",
+      "vi": "Ngân hàng không có nhiều người, tôi nhanh chóng làm xong mọi thủ tục."
+    },
+    {
+      "start": 104.25,
+      "end": 111.89,
+      "en": "This afternoon I went to the bank and withdrew some money.",
+      "zh": "今天下午我去银行取了一些钱",
+      "pinyin": "Jīn tiān xià wǔ wǒ qù yín háng qǔ le yì xiē qián",
+      "vi": "Chiều nay tôi đến ngân hàng rút một ít tiền."
+    },
+    {
+      "start": 112.73,
+      "end": 115.89,
+      "en": "because this month's salary was all spent.",
+      "zh": "因为这个月的工资都花完了",
+      "pinyin": "Yīn wèi zhè ge yuè de gōng zī dōu huā wán le",
+      "vi": "vì tiền lương tháng này đã tiêu hết."
+    },
+    {
+      "start": 115.89,
+      "end": 119.61,
+      "en": "So I withdrew another two thousand yuan.",
+      "zh": "所以我又取了两千块钱",
+      "pinyin": "Suǒ yǐ wǒ yòu qǔ le liǎng qiān kuài qián",
+      "vi": "nên tôi lại rút thêm hai nghìn tệ."
+    },
+    {
+      "start": 120.51,
+      "end": 124.39,
+      "en": "In addition, I plan to travel to Thailand next month.",
+      "zh": "另外,我打算下个月去泰国旅游",
+      "pinyin": "Lìng wài, wǒ dǎ suàn xià gè yuè qù tài guó lǚ yóu",
+      "vi": "Ngoài ra, tôi dự định tháng sau đi Thái Lan du lịch."
+    },
+    {
+      "start": 125.03,
+      "end": 127.59,
+      "en": "so I also exchanged some Thai baht.",
+      "zh": "所以也换了一点泰铢",
+      "pinyin": "Suǒ yǐ yě huàn le yì diǎn tài zhū",
+      "vi": "nên tôi cũng đổi một chút baht Thái."
+    },
+    {
+      "start": 128.41,
+      "end": 130.01,
+      "en": "There weren't many people in the bank.",
+      "zh": "银行里的人不多",
+      "pinyin": "Yín háng lǐ de rén bù duō",
+      "vi": "Ngân hàng không có nhiều người."
+    },
+    {
+      "start": 130.91,
+      "end": 132.49,
+      "en": "I finished quickly.",
+      "zh": "我很快就办完了",
+      "pinyin": "Wǒ hěn kuài jiù bàn wán le",
+      "vi": "Tôi nhanh chóng làm xong thủ tục."
+    }
+  ]
+}

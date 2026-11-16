@@ -1,0 +1,109 @@
+{
+  "id": "_en60dRYn-s",
+  "youtubeId": "_en60dRYn-s",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Cậu biết nấu ăn không ?",
+  "titleVi": "Hội thoại ngắn: Cậu biết nấu ăn không?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 55,
+  "cues": [
+    {
+      "start": 0.02,
+      "end": 2.64,
+      "en": "Short conversation: Do you know how to cook?",
+      "zh": "对话短文，你会煮饭吗？",
+      "pinyin": "Duì huà duǎn wén， nǐ huì zhǔ fàn ma？",
+      "vi": "Hội thoại ngắn: Cậu biết nấu ăn không?"
+    },
+    {
+      "start": 10.64,
+      "end": 16.76,
+      "en": "I cook very well; my specialty is tomato scrambled eggs.",
+      "zh": "我做得很好，我的拿手菜是番茄炒蛋。",
+      "pinyin": "Wǒ zuò dé hěn hǎo， wǒ de ná shǒu cài shì fān qié chǎo dàn。",
+      "vi": "Tôi nấu rất giỏi, món tủ của tôi là trứng xào cà chua."
+    },
+    {
+      "start": 18.26,
+      "end": 20.68,
+      "en": "Then cook it for me next time.",
+      "zh": "那你下一次做给我吃。",
+      "pinyin": "Nà nǐ xià yí cì zuò gěi wǒ chī。",
+      "vi": "Vậy thì lần sau cậu nấu cho tôi ăn nhé."
+    },
+    {
+      "start": 25.5,
+      "end": 25.85,
+      "en": "can; to know how to",
+      "zh": "会",
+      "pinyin": "Huì",
+      "vi": "biết; có thể"
+    },
+    {
+      "start": 25.92,
+      "end": 28.28,
+      "en": "to do; to make; to cook",
+      "zh": "做",
+      "pinyin": "Zuò",
+      "vi": "làm; nấu"
+    },
+    {
+      "start": 29.78,
+      "end": 30.52,
+      "en": "to cook dishes",
+      "zh": "做菜",
+      "pinyin": "Zuò cài",
+      "vi": "nấu ăn"
+    },
+    {
+      "start": 32.36,
+      "end": 32.88,
+      "en": "a little",
+      "zh": "一点",
+      "pinyin": "Yì diǎn",
+      "vi": "một chút"
+    },
+    {
+      "start": 35.06,
+      "end": 36.22,
+      "en": "signature dish; specialty",
+      "zh": "拿手菜",
+      "pinyin": "Ná shǒu cài",
+      "vi": "món tủ; món sở trường"
+    },
+    {
+      "start": 38.34,
+      "end": 39.88,
+      "en": "tomato scrambled eggs",
+      "zh": "番茄炒蛋",
+      "pinyin": "Fān qié chǎo dàn",
+      "vi": "trứng xào cà chua"
+    },
+    {
+      "start": 41.52,
+      "end": 41.87,
+      "en": "then; in that case",
+      "zh": "那",
+      "pinyin": "Nà",
+      "vi": "vậy thì; thế thì"
+    },
+    {
+      "start": 43.76,
+      "end": 44.94,
+      "en": "next time",
+      "zh": "下一次",
+      "pinyin": "Xià yí cì",
+      "vi": "lần sau"
+    },
+    {
+      "start": 45.02,
+      "end": 47.02,
+      "en": "for; to give",
+      "zh": "给",
+      "pinyin": "Gěi",
+      "vi": "cho"
+    }
+  ]
+}

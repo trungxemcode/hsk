@@ -1,0 +1,117 @@
+{
+  "id": "JU74aUMCfbU",
+  "youtubeId": "JU74aUMCfbU",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Bạn có tiền lẻ không ?",
+  "titleVi": "Hội thoại ngắn: Bạn có tiền lẻ không?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 53,
+  "cues": [
+    {
+      "start": 0.64,
+      "end": 7.3,
+      "en": "How much is this box of chocolates?",
+      "zh": "这盒巧克力多少钱？",
+      "pinyin": "Zhè hé qiǎo kè lì duō shǎo qián？",
+      "vi": "Hộp sô-cô-la này bao nhiêu tiền?"
+    },
+    {
+      "start": 17.52,
+      "end": 19.82,
+      "en": "Here it's 35 yuan.",
+      "zh": "这里是元",
+      "pinyin": "Zhè lǐ shì yuán",
+      "vi": "Ở đây là 35 tệ."
+    },
+    {
+      "start": 21.56,
+      "end": 23,
+      "en": "The words to memorize in this lesson are:",
+      "zh": "本课需要记住的生词是：",
+      "pinyin": "Běn kè xū yào jì zhù de shēng cí shì：",
+      "vi": "Từ vựng cần thuộc trong bài là:"
+    },
+    {
+      "start": 24,
+      "end": 24.38,
+      "en": "box",
+      "zh": "盒",
+      "pinyin": "Hé",
+      "vi": "hộp"
+    },
+    {
+      "start": 26.14,
+      "end": 26.98,
+      "en": "chocolate",
+      "zh": "巧克力",
+      "pinyin": "Qiǎo kè lì",
+      "vi": "sô-cô-la"
+    },
+    {
+      "start": 27.06,
+      "end": 29.56,
+      "en": "how many; how much",
+      "zh": "多少",
+      "pinyin": "Duō shǎo",
+      "vi": "bao nhiêu"
+    },
+    {
+      "start": 31.24,
+      "end": 31.59,
+      "en": "money",
+      "zh": "钱",
+      "pinyin": "Qián",
+      "vi": "tiền"
+    },
+    {
+      "start": 33.44,
+      "end": 34.38,
+      "en": "fifteen yuan",
+      "zh": "十五元",
+      "pinyin": "Shí wǔ yuán",
+      "vi": "mười lăm tệ"
+    },
+    {
+      "start": 36.42,
+      "end": 37.02,
+      "en": "only; to have only",
+      "zh": "只有",
+      "pinyin": "Zhǐ yǒu",
+      "vi": "chỉ có"
+    },
+    {
+      "start": 39.1,
+      "end": 40.08,
+      "en": "fifty yuan",
+      "zh": "五十元",
+      "pinyin": "Wǔ shí yuán",
+      "vi": "năm mươi tệ"
+    },
+    {
+      "start": 42,
+      "end": 42.38,
+      "en": "to have; there is/are",
+      "zh": "有",
+      "pinyin": "Yǒu",
+      "vi": "có"
+    },
+    {
+      "start": 44.12,
+      "end": 44.78,
+      "en": "small change; change",
+      "zh": "零钱",
+      "pinyin": "Líng qián",
+      "vi": "tiền lẻ"
+    },
+    {
+      "start": 46.78,
+      "end": 47.34,
+      "en": "here",
+      "zh": "这里",
+      "pinyin": "Zhè lǐ",
+      "vi": "ở đây"
+    }
+  ]
+}

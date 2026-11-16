@@ -1,0 +1,53 @@
+{
+  "id": "1mYK8xMp9n4",
+  "youtubeId": "1mYK8xMp9n4",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Tôi muốn mua trà sữa trân châu",
+  "titleVi": "Tôi muốn mua trà sữa trân châu",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 67,
+  "cues": [
+    {
+      "start": 0.56,
+      "end": 6.98,
+      "en": "I'll have a pearl milk tea.",
+      "zh": "我一杯珍珠奶茶",
+      "pinyin": "Wǒ yì bēi zhēn zhū nǎi chá",
+      "vi": "Cho tôi một ly trà sữa trân châu."
+    },
+    {
+      "start": 9.18,
+      "end": 11.18,
+      "en": "Would you like a medium or a large?",
+      "zh": "你要中杯或是大杯",
+      "pinyin": "Nǐ yào zhōng bēi huò shì dà bēi",
+      "vi": "Bạn muốn ly vừa hay ly lớn?"
+    },
+    {
+      "start": 20.36,
+      "end": 21.98,
+      "en": "Half sugar, less ice.",
+      "zh": "半糖,少冰",
+      "pinyin": "Bàn táng, shǎo bīng",
+      "vi": "Nửa đường, ít đá."
+    },
+    {
+      "start": 24.32,
+      "end": 25.4,
+      "en": "Do you need a bag?",
+      "zh": "你需要袋子吗",
+      "pinyin": "Nǐ xū yào dài zǐ ma",
+      "vi": "Bạn có cần túi không?"
+    },
+    {
+      "start": 27.92,
+      "end": 29.18,
+      "en": "No, thanks.",
+      "zh": "不用,谢谢",
+      "pinyin": "Bú yòng, xiè xiè",
+      "vi": "Không cần, cảm ơn."
+    }
+  ]
+}

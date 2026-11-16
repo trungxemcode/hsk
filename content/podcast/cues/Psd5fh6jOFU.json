@@ -1,0 +1,53 @@
+{
+  "id": "Psd5fh6jOFU",
+  "youtubeId": "Psd5fh6jOFU",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Gói đồ mang về",
+  "titleVi": "Gói đồ mang về",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 45,
+  "cues": [
+    {
+      "start": 0.64,
+      "end": 7.6,
+      "en": "Waiter, pack these up.",
+      "zh": "服务员，这些打包。",
+      "pinyin": "Fú wù yuán， zhè xiē dǎ bāo。",
+      "vi": "Phục vụ ơi, đóng gói những thứ này."
+    },
+    {
+      "start": 18.76,
+      "end": 27.62,
+      "en": "Waiter, pack these up.",
+      "zh": "服务员，这些打包。",
+      "pinyin": "Fú wù yuán， zhè xiē dǎ bāo。",
+      "vi": "Phục vụ ơi, đóng gói những thứ này."
+    },
+    {
+      "start": 30.38,
+      "end": 30.76,
+      "en": "Soup",
+      "zh": "汤",
+      "pinyin": "Tāng",
+      "vi": "Canh"
+    },
+    {
+      "start": 33.6,
+      "end": 34.38,
+      "en": "Okay.",
+      "zh": "可以",
+      "pinyin": "Kě yǐ",
+      "vi": "Được."
+    },
+    {
+      "start": 37.16,
+      "end": 38,
+      "en": "No problem.",
+      "zh": "没问题",
+      "pinyin": "Méi wèn tí",
+      "vi": "Không vấn đề gì."
+    }
+  ]
+}

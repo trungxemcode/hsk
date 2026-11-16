@@ -1,0 +1,157 @@
+{
+  "id": "MACXxgJUf4A",
+  "youtubeId": "MACXxgJUf4A",
+  "channelHandle": "@PandaStudio24",
+  "title": "Nói về kế hoạch cuối tuần - LUYỆN ĐỌC TIẾNG TRUNG HSK 1",
+  "titleVi": "Nói về kế hoạch cuối tuần",
+  "topic": "Luyện đọc HSK 1",
+  "level": "HSK 1+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 180,
+  "cues": [
+    {
+      "start": 12.86,
+      "end": 19.74,
+      "en": "I don't have class this Sunday.",
+      "zh": "这个星期日我没有课。",
+      "pinyin": "Zhè ge xīng qī rì wǒ méi yǒu kè。",
+      "vi": "Chủ nhật này tôi không có tiết học."
+    },
+    {
+      "start": 24.42,
+      "end": 27.34,
+      "en": "I plan to read books in the library in the morning.",
+      "zh": "我打算上午在图书馆看书。",
+      "pinyin": "Wǒ dǎ suàn shàng wǔ zài tú shū guǎn kàn shū。",
+      "vi": "Tôi định buổi sáng đọc sách ở thư viện."
+    },
+    {
+      "start": 31.96,
+      "end": 34.36,
+      "en": "At noon I eat at the school cafeteria.",
+      "zh": "中午在学校食堂吃饭。",
+      "pinyin": "Zhōng wǔ zài xué xiào shí táng chī fàn。",
+      "vi": "Buổi trưa tôi ăn cơm ở căng tin trường."
+    },
+    {
+      "start": 39,
+      "end": 40.86,
+      "en": "In the afternoon I meet Xiaomei.",
+      "zh": "下午跟小美见面。",
+      "pinyin": "Xià wǔ gēn xiǎo měi jiàn miàn。",
+      "vi": "Buổi chiều tôi gặp Tiểu Mỹ."
+    },
+    {
+      "start": 45.68,
+      "end": 48.22,
+      "en": "Then we go to the supermarket together to buy things.",
+      "zh": "然后一起去超市买东西。",
+      "pinyin": "Rán hòu yì qǐ qù chāo shì mǎi dōng xī。",
+      "vi": "Sau đó cùng nhau đi siêu thị mua đồ."
+    },
+    {
+      "start": 53.02,
+      "end": 55.94,
+      "en": "I think such a weekend is very happy.",
+      "zh": "我觉得这样的周末很快乐。",
+      "pinyin": "Wǒ jué de zhè yàng de zhōu mò hěn kuài lè。",
+      "vi": "Tôi thấy cuối tuần như vậy rất vui."
+    },
+    {
+      "start": 71.82,
+      "end": 72.3,
+      "en": "class",
+      "zh": "课",
+      "pinyin": "Kè",
+      "vi": "tiết học"
+    },
+    {
+      "start": 74.96,
+      "end": 75.72,
+      "en": "plan",
+      "zh": "打算",
+      "pinyin": "Dǎ suàn",
+      "vi": "dự định"
+    },
+    {
+      "start": 78.32,
+      "end": 79.32,
+      "en": "library",
+      "zh": "图书馆",
+      "pinyin": "Tú shū guǎn",
+      "vi": "thư viện"
+    },
+    {
+      "start": 82.16,
+      "end": 82.94,
+      "en": "cafeteria",
+      "zh": "食堂",
+      "pinyin": "Shí táng",
+      "vi": "căng tin"
+    },
+    {
+      "start": 117.03,
+      "end": 121.89,
+      "en": "He married Xiaomei.",
+      "zh": "他跟小美结婚了。",
+      "pinyin": "Tā gēn xiǎo měi jié hūn le。",
+      "vi": "Anh ấy kết hôn với Tiểu Mỹ rồi."
+    },
+    {
+      "start": 123.63,
+      "end": 127.37,
+      "en": "He met with me.",
+      "zh": "他跟我见面。",
+      "pinyin": "Tā gēn wǒ jiàn miàn。",
+      "vi": "Anh ấy gặp tôi."
+    },
+    {
+      "start": 137.59,
+      "end": 144.37,
+      "en": "I don't have class this Sunday.",
+      "zh": "这个星期日我没有课。",
+      "pinyin": "Zhè ge xīng qī rì wǒ méi yǒu kè。",
+      "vi": "Chủ nhật này tôi không có tiết học."
+    },
+    {
+      "start": 145.37,
+      "end": 148.15,
+      "en": "I plan to read books in the library in the morning.",
+      "zh": "我打算上午在图书馆看书。",
+      "pinyin": "Wǒ dǎ suàn shàng wǔ zài tú shū guǎn kàn shū。",
+      "vi": "Tôi định buổi sáng đọc sách ở thư viện."
+    },
+    {
+      "start": 148.97,
+      "end": 151.33,
+      "en": "At noon I eat at the school cafeteria.",
+      "zh": "中午在学校食堂吃饭。",
+      "pinyin": "Zhōng wǔ zài xué xiào shí táng chī fàn。",
+      "vi": "Buổi trưa tôi ăn cơm ở căng tin trường."
+    },
+    {
+      "start": 152.11,
+      "end": 153.89,
+      "en": "In the afternoon I meet Xiaomei.",
+      "zh": "下午跟小美见面。",
+      "pinyin": "Xià wǔ gēn xiǎo měi jiàn miàn。",
+      "vi": "Buổi chiều tôi gặp Tiểu Mỹ."
+    },
+    {
+      "start": 153.99,
+      "end": 157.19,
+      "en": "Then we go to the supermarket together to buy things.",
+      "zh": "然后一起去超市买东西。",
+      "pinyin": "Rán hòu yì qǐ qù chāo shì mǎi dōng xī。",
+      "vi": "Sau đó cùng nhau đi siêu thị mua đồ."
+    },
+    {
+      "start": 158.61,
+      "end": 160.97,
+      "en": "I think such a weekend is very happy.",
+      "zh": "我觉得这样的周末很快乐。",
+      "pinyin": "Wǒ jué de zhè yàng de zhōu mò hěn kuài lè。",
+      "vi": "Tôi thấy cuối tuần như vậy rất vui."
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "id": "TnOMeQAiiNw",
+  "youtubeId": "TnOMeQAiiNw",
+  "channelHandle": "@PandaStudio24",
+  "title": "Giới thiệu về công việc của bản thân  - LUYỆN ĐỌC TIẾNG TRUNG HSK 1",
+  "titleVi": "Giới thiệu về công việc của bản thân",
+  "topic": "Luyện đọc HSK 1",
+  "level": "HSK 1+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 218,
+  "cues": [
+    {
+      "start": 17.86,
+      "end": 19.7,
+      "en": "I am a client manager.",
+      "zh": "我是一名客户经理。",
+      "pinyin": "Wǒ shì yì míng kè hù jīng lǐ。",
+      "vi": "Tôi là một quản lý khách hàng."
+    },
+    {
+      "start": 24.56,
+      "end": 26.98,
+      "en": "From Monday to Friday, I am very busy.",
+      "zh": "从周一到周五，我都很忙。",
+      "pinyin": "Cóng zhōu yī dào zhōu wǔ， wǒ dōu hěn máng。",
+      "vi": "Từ thứ Hai đến thứ Sáu, tôi đều rất bận."
+    },
+    {
+      "start": 32.52,
+      "end": 35.86,
+      "en": "Every day I go to work at 8 a.m. and get off work at 5 p.m.",
+      "zh": "我每天早上八点上班，下午五点下班。",
+      "pinyin": "Wǒ měi tiān zǎo shàng bā diǎn shàng bān， xià wǔ wǔ diǎn xià bān。",
+      "vi": "Hằng ngày tôi đi làm lúc tám giờ sáng, tan làm lúc năm giờ chiều."
+    },
+    {
+      "start": 41.54,
+      "end": 45.04,
+      "en": "In the office, I have a lot of work tasks.",
+      "zh": "在办公室，我有很多工作任务。",
+      "pinyin": "Zài bàn gōng shì， wǒ yǒu hěn duō gōng zuò rèn wu。",
+      "vi": "Trong văn phòng, tôi có rất nhiều nhiệm vụ công việc."
+    },
+    {
+      "start": 51.04,
+      "end": 52.88,
+      "en": "My task is to receive clients.",
+      "zh": "我的任务是接待客户。",
+      "pinyin": "Wǒ de rèn wu shì jiē dài kè hù。",
+      "vi": "Nhiệm vụ của tôi là tiếp đón khách hàng."
+    },
+    {
+      "start": 57.74,
+      "end": 59.26,
+      "en": "Recommend products to them.",
+      "zh": "给他们推荐产品。",
+      "pinyin": "Gěi tā men tuī jiàn chǎn pǐn。",
+      "vi": "Giới thiệu sản phẩm cho họ."
+    },
+    {
+      "start": 65.82,
+      "end": 73.18,
+      "en": "I really like this job.",
+      "zh": "我很喜欢这份工作。",
+      "pinyin": "Wǒ hěn xǐ huan zhè fèn gōng zuò。",
+      "vi": "Tôi rất thích công việc này."
+    },
+    {
+      "start": 81.24,
+      "end": 82.18,
+      "en": "client manager",
+      "zh": "客户经理",
+      "pinyin": "Kè hù jīng lǐ",
+      "vi": "quản lý khách hàng"
+    },
+    {
+      "start": 84.58,
+      "end": 85.6,
+      "en": "office",
+      "zh": "办公室",
+      "pinyin": "Bàn gōng shì",
+      "vi": "văn phòng"
+    },
+    {
+      "start": 87.86,
+      "end": 88.6,
+      "en": "task",
+      "zh": "任务",
+      "pinyin": "Rèn wu",
+      "vi": "nhiệm vụ"
+    },
+    {
+      "start": 90.68,
+      "end": 91.58,
+      "en": "customer/client",
+      "zh": "客户",
+      "pinyin": "Kè hù",
+      "vi": "khách hàng"
+    },
+    {
+      "start": 93.86,
+      "end": 94.7,
+      "en": "product",
+      "zh": "产品",
+      "pinyin": "Chǎn pǐn",
+      "vi": "sản phẩm"
+    },
+    {
+      "start": 97.26,
+      "end": 97.72,
+      "en": "receive/attend to",
+      "zh": "接待",
+      "pinyin": "Jiē dài",
+      "vi": "tiếp đón"
+    },
+    {
+      "start": 100,
+      "end": 100.76,
+      "en": "recommend",
+      "zh": "推荐",
+      "pinyin": "Tuī jiàn",
+      "vi": "giới thiệu"
+    },
+    {
+      "start": 103.22,
+      "end": 103.57,
+      "en": "measure word (for jobs, documents)",
+      "zh": "份",
+      "pinyin": "Fèn",
+      "vi": "lượng từ (chỉ công việc, tài liệu)"
+    },
+    {
+      "start": 129.51,
+      "end": 131.01,
+      "en": "He called me.",
+      "zh": "他给我打了一个电话。",
+      "pinyin": "Tā gěi wǒ dǎ le yí gè diàn huà。",
+      "vi": "Anh ấy đã gọi điện cho tôi."
+    },
+    {
+      "start": 136.23,
+      "end": 141.79,
+      "en": "I bought a book for you.",
+      "zh": "我给你买了一本书。",
+      "pinyin": "Wǒ gěi nǐ mǎi le yì běn shū。",
+      "vi": "Tôi đã mua cho bạn một quyển sách."
+    },
+    {
+      "start": 146.03,
+      "end": 153.07,
+      "en": "Let me first give everyone a brief introduction.",
+      "zh": "我先给大家介绍一下。",
+      "pinyin": "Wǒ xiān gěi dà jiā jiè shào yí xià。",
+      "vi": "Trước tiên, tôi xin giới thiệu một chút với mọi người."
+    },
+    {
+      "start": 157.75,
+      "end": 159.05,
+      "en": "Send me an email.",
+      "zh": "你给我发邮件吧。",
+      "pinyin": "Nǐ gěi wǒ fā yóu jiàn ba。",
+      "vi": "Bạn gửi email cho tôi nhé."
+    },
+    {
+      "start": 161.49,
+      "end": 162.81,
+      "en": "Send me an email.",
+      "zh": "你给我发邮件吧。",
+      "pinyin": "Nǐ gěi wǒ fā yóu jiàn ba。",
+      "vi": "Bạn gửi email cho tôi nhé."
+    },
+    {
+      "start": 174.47,
+      "end": 178.79,
+      "en": "I am a client manager.",
+      "zh": "我是一名客户经理。",
+      "pinyin": "Wǒ shì yì míng kè hù jīng lǐ。",
+      "vi": "Tôi là một quản lý khách hàng."
+    },
+    {
+      "start": 179.51,
+      "end": 180.93,
+      "en": "From Monday to Friday,",
+      "zh": "从周一到周五，",
+      "pinyin": "Cóng zhōu yī dào zhōu wǔ，",
+      "vi": "Từ thứ Hai đến thứ Sáu,"
+    },
+    {
+      "start": 181.63,
+      "end": 182.39,
+      "en": "I am very busy.",
+      "zh": "我都很忙。",
+      "pinyin": "Wǒ dōu hěn máng。",
+      "vi": "Tôi đều rất bận."
+    },
+    {
+      "start": 183.09,
+      "end": 185.11,
+      "en": "Every day I go to work at 8 a.m.,",
+      "zh": "我每天早上八点上班，",
+      "pinyin": "Wǒ měi tiān zǎo shàng bā diǎn shàng bān，",
+      "vi": "Hằng ngày tôi đi làm lúc tám giờ sáng,"
+    },
+    {
+      "start": 185.87,
+      "end": 187.11,
+      "en": "I get off work at 5 p.m.",
+      "zh": "下午五点下班。",
+      "pinyin": "Xià wǔ wǔ diǎn xià bān。",
+      "vi": "Tôi tan làm lúc năm giờ chiều."
+    },
+    {
+      "start": 187.77,
+      "end": 188.61,
+      "en": "In the office,",
+      "zh": "在办公室，",
+      "pinyin": "Zài bàn gōng shì，",
+      "vi": "Trong văn phòng,"
+    },
+    {
+      "start": 189.37,
+      "end": 190.95,
+      "en": "I have a lot of work tasks.",
+      "zh": "我有很多工作任务。",
+      "pinyin": "Wǒ yǒu hěn duō gōng zuò rèn wu。",
+      "vi": "Tôi có rất nhiều nhiệm vụ công việc."
+    },
+    {
+      "start": 191.65,
+      "end": 193.51,
+      "en": "My task is to receive clients,",
+      "zh": "我的任务是接待客户，",
+      "pinyin": "Wǒ de rèn wu shì jiē dài kè hù，",
+      "vi": "Nhiệm vụ của tôi là tiếp đón khách hàng,"
+    },
+    {
+      "start": 194.01,
+      "end": 195.11,
+      "en": "Recommend products to them.",
+      "zh": "给他们推荐产品。",
+      "pinyin": "Gěi tā men tuī jiàn chǎn pǐn。",
+      "vi": "Giới thiệu sản phẩm cho họ."
+    },
+    {
+      "start": 195.67,
+      "end": 197.33,
+      "en": "I really like this job.",
+      "zh": "我很喜欢这份工作。",
+      "pinyin": "Wǒ hěn xǐ huan zhè fèn gōng zuò。",
+      "vi": "Tôi rất thích công việc này."
+    }
+  ]
+}

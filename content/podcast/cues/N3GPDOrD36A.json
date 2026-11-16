@@ -1,0 +1,53 @@
+{
+  "id": "N3GPDOrD36A",
+  "youtubeId": "N3GPDOrD36A",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Bạn về nhà bằng cách nào ?",
+  "titleVi": "Bạn về nhà bằng cách nào?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 43,
+  "cues": [
+    {
+      "start": 21,
+      "end": 21.38,
+      "en": "how",
+      "zh": "怎么",
+      "pinyin": "Zěn me",
+      "vi": "thế nào / bằng cách nào"
+    },
+    {
+      "start": 24.92,
+      "end": 25.74,
+      "en": "go home",
+      "zh": "回家",
+      "pinyin": "Huí jiā",
+      "vi": "về nhà"
+    },
+    {
+      "start": 28.84,
+      "end": 29.24,
+      "en": "by / to take",
+      "zh": "坐",
+      "pinyin": "Zuò",
+      "vi": "đi bằng / ngồi"
+    },
+    {
+      "start": 32.2,
+      "end": 32.98,
+      "en": "subway",
+      "zh": "地铁",
+      "pinyin": "Dì tiě",
+      "vi": "tàu điện ngầm"
+    },
+    {
+      "start": 35.8,
+      "end": 36.96,
+      "en": "taxi",
+      "zh": "出租车",
+      "pinyin": "Chū zū chē",
+      "vi": "taxi"
+    }
+  ]
+}

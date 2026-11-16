@@ -1,0 +1,149 @@
+{
+  "id": "pFoE13yaXeY",
+  "youtubeId": "pFoE13yaXeY",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Ở đây bán sim điện thoại không ?",
+  "titleVi": "Ở đây bán sim điện thoại không?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 64,
+  "cues": [
+    {
+      "start": 0.44,
+      "end": 6.76,
+      "en": "Do you sell SIM cards here?",
+      "zh": "这里有手机卡卖吗？",
+      "pinyin": "Zhè lǐ yǒu shǒu jī kǎ mài ma？",
+      "vi": "Ở đây có bán sim điện thoại không?"
+    },
+    {
+      "start": 8.18,
+      "end": 10.98,
+      "en": "Do you want China Mobile or China Unicom?",
+      "zh": "你要移动的还是联通的？",
+      "pinyin": "Nǐ yào yí dòng de hái shì lián tōng de？",
+      "vi": "Bạn muốn mạng China Mobile hay China Unicom?"
+    },
+    {
+      "start": 20.3,
+      "end": 21.42,
+      "en": "Can I choose a number?",
+      "zh": "可以选号码吗？",
+      "pinyin": "Kě yǐ xuǎn hào mǎ ma？",
+      "vi": "Có thể chọn số không?"
+    },
+    {
+      "start": 22.38,
+      "end": 22.74,
+      "en": "Yes, you can.",
+      "zh": "可以。",
+      "pinyin": "Kě yǐ。",
+      "vi": "Được."
+    },
+    {
+      "start": 23.88,
+      "end": 25.12,
+      "en": "Good numbers are a bit more expensive.",
+      "zh": "好的号码贵一点。",
+      "pinyin": "Hǎo de hào mǎ guì yì diǎn。",
+      "vi": "Số đẹp thì đắt hơn một chút."
+    },
+    {
+      "start": 26.74,
+      "end": 27.3,
+      "en": "No problem.",
+      "zh": "没问题。",
+      "pinyin": "Méi wèn tí。",
+      "vi": "Không thành vấn đề."
+    },
+    {
+      "start": 27.42,
+      "end": 29.46,
+      "en": "What numbers do you have?",
+      "zh": "你有什么号码？",
+      "pinyin": "Nǐ yǒu shén me hào mǎ？",
+      "vi": "Bạn có những số nào?"
+    },
+    {
+      "start": 30,
+      "end": 30.74,
+      "en": "Let me take a look.",
+      "zh": "让我看一下。",
+      "pinyin": "Ràng wǒ kàn yí xià。",
+      "vi": "Để tôi xem một chút."
+    },
+    {
+      "start": 32.26,
+      "end": 35.08,
+      "en": "to sell",
+      "zh": "卖",
+      "pinyin": "Mài",
+      "vi": "bán"
+    },
+    {
+      "start": 35.28,
+      "end": 38.74,
+      "en": "or",
+      "zh": "还是",
+      "pinyin": "Hái shì",
+      "vi": "hay"
+    },
+    {
+      "start": 40.64,
+      "end": 41.4,
+      "en": "to use",
+      "zh": "用",
+      "pinyin": "Yòng",
+      "vi": "dùng"
+    },
+    {
+      "start": 43.26,
+      "end": 44.02,
+      "en": "to choose",
+      "zh": "选",
+      "pinyin": "Xuǎn",
+      "vi": "chọn"
+    },
+    {
+      "start": 46.1,
+      "end": 46.78,
+      "en": "to let",
+      "zh": "让",
+      "pinyin": "Ràng",
+      "vi": "để"
+    },
+    {
+      "start": 48.44,
+      "end": 49.8,
+      "en": "phone SIM card",
+      "zh": "手机卡",
+      "pinyin": "Shǒu jī kǎ",
+      "vi": "sim điện thoại"
+    },
+    {
+      "start": 51.96,
+      "end": 52.84,
+      "en": "China Mobile",
+      "zh": "移动",
+      "pinyin": "Yí dòng",
+      "vi": "China Mobile"
+    },
+    {
+      "start": 54.28,
+      "end": 55.08,
+      "en": "China Unicom",
+      "zh": "联通",
+      "pinyin": "Lián tōng",
+      "vi": "China Unicom"
+    },
+    {
+      "start": 57.56,
+      "end": 58.3,
+      "en": "phone number",
+      "zh": "号码",
+      "pinyin": "Hào mǎ",
+      "vi": "số điện thoại"
+    }
+  ]
+}
