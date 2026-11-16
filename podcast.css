@@ -1600,3 +1600,19 @@ html[data-theme="dark"] body.studio-enabled #podcastPanel button.podcast-channel
     margin-left: 0;
   }
 }
+
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 560px) {
+  .podcast-stage {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 12px;
+    align-items: stretch;
+  }
+  .podcast-transcript-col {
+    max-height: calc(100dvh - 84px);
+  }
+  .podcast-transcript-list {
+    flex: 1 1 0;
+    min-height: 180px;
+    max-height: none;
+  }
+}
