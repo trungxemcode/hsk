@@ -1,0 +1,197 @@
+{
+  "id": "prb9KzzBrtA",
+  "youtubeId": "prb9KzzBrtA",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Tôi muốn mua cà phê Americano",
+  "titleVi": "Tôi muốn mua cà phê Americano",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 120,
+  "cues": [
+    {
+      "start": 0.52,
+      "end": 3.44,
+      "en": "I want to buy an Americano.",
+      "zh": "我想买美式咖啡。",
+      "pinyin": "Wǒ xiǎng mǎi měi shì kā fēi。",
+      "vi": "Tôi muốn mua cà phê Americano."
+    },
+    {
+      "start": 7.22,
+      "end": 9.82,
+      "en": "Excuse me, sir, what coffee would you like?",
+      "zh": "请问先生需要什么咖啡呢？",
+      "pinyin": "Qǐng wèn xiān shēng xū yào shén me kā fēi ne？",
+      "vi": "Xin hỏi quý khách cần loại cà phê nào ạ?"
+    },
+    {
+      "start": 11.78,
+      "end": 14.44,
+      "en": "Um, what options are there?",
+      "zh": "嗯，请问有什么选择？",
+      "pinyin": "Ǹg， qǐng wèn yǒu shén me xuǎn zé？",
+      "vi": "Ừm, cho tôi hỏi có những lựa chọn nào ạ?"
+    },
+    {
+      "start": 17.08,
+      "end": 20.98,
+      "en": "There are many. Our most popular coffees include Americano.",
+      "zh": "很多，我们最受欢迎的咖啡有美式咖啡。",
+      "pinyin": "Hěn duō， wǒ men zuì shòu huān yíng de kā fēi yǒu měi shì kā fēi。",
+      "vi": "Nhiều lắm. Các loại cà phê được ưa chuộng nhất của chúng tôi có cà phê Americano."
+    },
+    {
+      "start": 21.38,
+      "end": 26.66,
+      "en": "Latte, caramel macchiato, cappuccino, mocha, and espresso.",
+      "zh": "拿铁、焦糖玛奇朵、卡布奇诺、摩卡，还有浓缩咖啡。",
+      "pinyin": "Ná tiě、 jiāo táng mǎ qí duǒ、 kǎ bù qí nuò、 mó kǎ， hái yǒu nóng suō kā fēi。",
+      "vi": "Latte, caramel macchiato, cappuccino, mocha, và cả espresso nữa."
+    },
+    {
+      "start": 27.52,
+      "end": 30.24,
+      "en": "Today Americano has a 20% discount.",
+      "zh": "今天美式咖啡有八折优惠。",
+      "pinyin": "Jīn tiān měi shì kā fēi yǒu bā zhé yōu huì。",
+      "vi": "Hôm nay cà phê Americano được giảm 20%."
+    },
+    {
+      "start": 33.06,
+      "end": 35,
+      "en": "Then I'll just have an Americano.",
+      "zh": "那就一杯美式咖啡就好。",
+      "pinyin": "Nà jiù yì bēi měi shì kā fēi jiù hǎo。",
+      "vi": "Vậy thì cho tôi một ly Americano là được."
+    },
+    {
+      "start": 37.62,
+      "end": 40.2,
+      "en": "Medium, large, or extra-large?",
+      "zh": "中杯、大杯，还是特大杯？",
+      "pinyin": "Zhōng bēi、 dà bēi， hái shì tè dà bēi？",
+      "vi": "Ly vừa, ly lớn hay ly đặc biệt lớn ạ?"
+    },
+    {
+      "start": 42.9,
+      "end": 43.9,
+      "en": "Large, please.",
+      "zh": "大杯好了。",
+      "pinyin": "Dà bēi hǎo le。",
+      "vi": "Ly lớn thôi ạ."
+    },
+    {
+      "start": 46.84,
+      "end": 49.28,
+      "en": "Would you like it iced or hot?",
+      "zh": "请问要冰的还是热的呢？",
+      "pinyin": "Qǐng wèn yào bīng de hái shì rè de ne？",
+      "vi": "Anh dùng đá hay nóng ạ?"
+    },
+    {
+      "start": 50.08,
+      "end": 51.58,
+      "en": "Would you like sugar and creamer?",
+      "zh": "糖跟奶球要加吗？",
+      "pinyin": "Táng gēn nǎi qiú yào jiā ma？",
+      "vi": "Có cần thêm đường và sữa không ạ?"
+    },
+    {
+      "start": 54.6,
+      "end": 62.15,
+      "en": "Hot, please. No sugar or creamer.",
+      "zh": "热的，谢谢。糖跟奶球都不用。",
+      "pinyin": "Rè de， xiè xiè。 táng gēn nǎi qiú dōu bú yòng。",
+      "vi": "Cho ly nóng, cảm ơn. Không cần đường và sữa ạ."
+    },
+    {
+      "start": 62.15,
+      "end": 65.23,
+      "en": "A large Americano, after the 20% discount, comes to 75 yuan, thank you.",
+      "zh": "一杯大美式打八折后就是元，谢谢。",
+      "pinyin": "Yì bēi dà měi shì dǎ bā zhé hòu jiù shì yuán， xiè xiè。",
+      "vi": "Một ly Americano lớn sau khi giảm 20% là 75 tệ, cảm ơn anh."
+    },
+    {
+      "start": 71.73,
+      "end": 72.29,
+      "en": "coffee",
+      "zh": "咖啡",
+      "pinyin": "Kā fēi",
+      "vi": "cà phê"
+    },
+    {
+      "start": 75.19,
+      "end": 75.95,
+      "en": "choice",
+      "zh": "选择",
+      "pinyin": "Xuǎn zé",
+      "vi": "sự lựa chọn"
+    },
+    {
+      "start": 79.03,
+      "end": 80.17,
+      "en": "most popular",
+      "zh": "最受欢迎",
+      "pinyin": "Zuì shòu huān yíng",
+      "vi": "được ưa chuộng nhất"
+    },
+    {
+      "start": 83.43,
+      "end": 84.47,
+      "en": "American coffee / Americano",
+      "zh": "美式咖啡",
+      "pinyin": "Měi shì kā fēi",
+      "vi": "cà phê Americano / cà phê Mỹ"
+    },
+    {
+      "start": 88.41,
+      "end": 88.91,
+      "en": "latte",
+      "zh": "拿铁",
+      "pinyin": "Ná tiě",
+      "vi": "latte"
+    },
+    {
+      "start": 92.39,
+      "end": 93.65,
+      "en": "caramel macchiato",
+      "zh": "焦糖玛奇朵",
+      "pinyin": "Jiāo táng mǎ qí duǒ",
+      "vi": "caramel macchiato"
+    },
+    {
+      "start": 97.43,
+      "end": 98.49,
+      "en": "cappuccino",
+      "zh": "卡布奇诺",
+      "pinyin": "Kǎ bù qí nuò",
+      "vi": "cappuccino"
+    },
+    {
+      "start": 102.21,
+      "end": 102.77,
+      "en": "mocha",
+      "zh": "摩卡",
+      "pinyin": "Mó kǎ",
+      "vi": "mocha"
+    },
+    {
+      "start": 106.69,
+      "end": 107.73,
+      "en": "espresso",
+      "zh": "浓缩咖啡",
+      "pinyin": "Nóng suō kā fēi",
+      "vi": "cà phê espresso"
+    },
+    {
+      "start": 111.63,
+      "end": 112.21,
+      "en": "discount",
+      "zh": "优惠",
+      "pinyin": "Yōu huì",
+      "vi": "ưu đãi / giảm giá"
+    }
+  ]
+}

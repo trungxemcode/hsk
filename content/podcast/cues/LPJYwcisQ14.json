@@ -1,0 +1,701 @@
+{
+  "id": "LPJYwcisQ14",
+  "youtubeId": "LPJYwcisQ14",
+  "channelHandle": "@PandaStudio24",
+  "title": "【HSK 1-3】我的面试故事 - Câu chuyện phỏng vấn xin việc của tôi | Chinese Podcast",
+  "titleVi": "Câu chuyện phỏng vấn xin việc của tôi",
+  "topic": "Luyện nghe Panda Studio",
+  "level": "HSK 1+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 338,
+  "cues": [
+    {
+      "start": 7.02,
+      "end": 12.14,
+      "en": "I just graduated from the University of International Business and Economics, and my major was international trade.",
+      "zh": "我刚刚从对外经济贸易大学毕业,我的专业是国际贸易。",
+      "pinyin": "Wǒ gāng gāng cóng duì wài jīng jì mào yì dà xué bì yè, wǒ de zhuān yè shì guó jì mào yì。",
+      "vi": "Tôi vừa tốt nghiệp Đại học Kinh tế và Thương mại Quốc tế, chuyên ngành của tôi là thương mại quốc tế."
+    },
+    {
+      "start": 13.42,
+      "end": 15.98,
+      "en": "Currently, I live in Chaoyang District, Beijing.",
+      "zh": "目前,我住在北京朝阳区。",
+      "pinyin": "Mù qián, wǒ zhù zài běi jīng cháo yáng qū。",
+      "vi": "Hiện tại, tôi sống ở quận Triều Dương, Bắc Kinh."
+    },
+    {
+      "start": 17.16,
+      "end": 21.26,
+      "en": "In this highly competitive city, finding a good job is not easy.",
+      "zh": "在这个竞争激烈的城市,找一份好工作并不容易。",
+      "pinyin": "Zài zhè ge jìng zhēng jī liè de chéng shì, zhǎo yí fèn hǎo gōng zuò bìng bù róng yì。",
+      "vi": "Ở thành phố cạnh tranh khốc liệt này, tìm một công việc tốt không dễ dàng."
+    },
+    {
+      "start": 22.62,
+      "end": 29.26,
+      "en": "Last week, I received an interview notice from a very famous company, ABC International Trade Company.",
+      "zh": "上周,我收到了一家很著名的公司,国际贸易公司的面试通知。",
+      "pinyin": "Shàng zhōu, wǒ shōu dào le yì jiā hěn zhù míng de gōng sī, guó jì mào yì gōng sī de miàn shì tōng zhī。",
+      "vi": "Tuần trước, tôi nhận được thông báo phỏng vấn từ một công ty rất nổi tiếng, Công ty Thương mại Quốc tế ABC."
+    },
+    {
+      "start": 30.5,
+      "end": 32.98,
+      "en": "The position I applied for is marketing assistant.",
+      "zh": "我申请的职位是市场助理。",
+      "pinyin": "Wǒ shēn qǐng de zhí wèi shì shì chǎng zhù lǐ。",
+      "vi": "Vị trí tôi ứng tuyển là trợ lý marketing."
+    },
+    {
+      "start": 33.8,
+      "end": 36.78,
+      "en": "This is a very important opportunity for me.",
+      "zh": "这对我来说是一个非常重要的机会。",
+      "pinyin": "Zhè duì wǒ lái shuō shì yí gè fēi cháng zhòng yào de jī huì。",
+      "vi": "Đây là một cơ hội rất quan trọng đối với tôi."
+    },
+    {
+      "start": 38.02,
+      "end": 42.54,
+      "en": "Today, I want to share with everyone the detailed process of that day,",
+      "zh": "今天,我想和大家分享一下那天的详细经过,",
+      "pinyin": "Jīn tiān, wǒ xiǎng hé dà jiā fēn xiǎng yí xià nà tiān de xiáng xì jīng guò,",
+      "vi": "Hôm nay, tôi muốn chia sẻ với mọi người diễn biến chi tiết của ngày hôm đó,"
+    },
+    {
+      "start": 43.4,
+      "end": 46.6,
+      "en": "I hope it can give those of you who are looking for jobs a little help.",
+      "zh": "希望能给正在找工作的你们一点帮助。",
+      "pinyin": "Xī wàng néng gěi zhèng zài zhǎo gōng zuò de nǐ men yì diǎn bāng zhù。",
+      "vi": "Hy vọng có thể giúp ích được một chút cho các bạn đang tìm việc."
+    },
+    {
+      "start": 47.7,
+      "end": 50.58,
+      "en": "For this interview, I made a lot of preparations.",
+      "zh": "为了这次面试,我做了很多准备。",
+      "pinyin": "Wèi le zhè cì miàn shì, wǒ zuò le hěn duō zhǔn bèi。",
+      "vi": "Để chuẩn bị cho buổi phỏng vấn này, tôi đã chuẩn bị rất nhiều."
+    },
+    {
+      "start": 51.5,
+      "end": 55.84,
+      "en": "First, I searched a lot of information about ABC company online,",
+      "zh": "首先,我上网查了很多关于公司的信息,",
+      "pinyin": "Shǒu xiān, wǒ shàng wǎng chá le hěn duō guān yú gōng sī de xìn xī,",
+      "vi": "Đầu tiên, tôi lên mạng tra rất nhiều thông tin về công ty ABC,"
+    },
+    {
+      "start": 56.5,
+      "end": 59.22,
+      "en": "Learned that their main products are electronic products,",
+      "zh": "了解他们的主要产品是电子产品,",
+      "pinyin": "Liǎo jiě tā men de zhǔ yào chǎn pǐn shì diàn zǐ chǎn pǐn,",
+      "vi": "biết được sản phẩm chính của họ là đồ điện tử,"
+    },
+    {
+      "start": 59.88,
+      "end": 61.8,
+      "en": "exported to Europe and America.",
+      "zh": "出口到欧洲和美国",
+      "pinyin": "Chū kǒu dào ōu zhōu hé měi guó",
+      "vi": "xuất khẩu sang châu Âu và châu Mỹ."
+    },
+    {
+      "start": 63.2,
+      "end": 64.32,
+      "en": "On the morning of the interview day,",
+      "zh": "面试那天早上",
+      "pinyin": "Miàn shì nà tiān zǎo shàng",
+      "vi": "Sáng hôm phỏng vấn,"
+    },
+    {
+      "start": 64.88,
+      "end": 66.52,
+      "en": "I got up at 6:30.",
+      "zh": "我六点半就起床了",
+      "pinyin": "Wǒ liù diǎn bàn jiù qǐ chuáng le",
+      "vi": "tôi dậy lúc sáu giờ rưỡi."
+    },
+    {
+      "start": 67.4,
+      "end": 70.86,
+      "en": "I chose a white shirt and black pants,",
+      "zh": "我选了一件白色的衬衫和黑色的裤子",
+      "pinyin": "Wǒ xuǎn le yí jiàn bái sè de chèn shān hé hēi sè de kù zǐ",
+      "vi": "tôi chọn một chiếc áo sơ mi trắng và quần tây đen,"
+    },
+    {
+      "start": 71.48,
+      "end": 72.28,
+      "en": "put on leather shoes,",
+      "zh": "穿上皮鞋",
+      "pinyin": "Chuān shàng pí xié",
+      "vi": "đi giày da,"
+    },
+    {
+      "start": 72.96,
+      "end": 75.7,
+      "en": "to make myself look more formal and more professional.",
+      "zh": "让自己看起来更正式更专业",
+      "pinyin": "Ràng zì jǐ kàn qǐ lái gēng zhèng shì gèng zhuān yè",
+      "vi": "để bản thân trông trang trọng và chuyên nghiệp hơn."
+    },
+    {
+      "start": 76.92,
+      "end": 85.42,
+      "en": "I practiced my self-introduction several times in front of the mirror and checked whether I had brought my resume, diploma, and English certificate.",
+      "zh": "我对着镜子练习了好几遍自我介绍检查了我的简历毕业证书和英语等级证书是否带齐了。",
+      "pinyin": "Wǒ duì zhe jìng zi liàn xí le hǎo jǐ biàn zì wǒ jiè shào jiǎn chá le wǒ de jiǎn lì bì yè zhèng shū hé yīng yǔ děng jí zhèng shū shì fǒu dài qí le。",
+      "vi": "Tôi tập giới thiệu bản thân trước gương mấy lần, kiểm tra xem đã mang đủ hồ sơ, bằng tốt nghiệp và chứng chỉ tiếng Anh chưa."
+    },
+    {
+      "start": 85.42,
+      "end": 92.44,
+      "en": "Although a bit nervous, I told myself I must have confidence.",
+      "zh": "虽然有点紧张,但我告诉自己,一定要有信心。",
+      "pinyin": "Suī rán yǒu diǎn jǐn zhāng, dàn wǒ gào sù zì jǐ, yí dìng yào yǒu xìn xīn。",
+      "vi": "Dù hơi lo lắng, nhưng tôi tự nhủ nhất định phải tự tin."
+    },
+    {
+      "start": 93.94,
+      "end": 99.44,
+      "en": "The interview was at 10 a.m., but I arrived at the company building at 9:40.",
+      "zh": "面试的时间是上午十点,但我九点四十就到了公司楼下。",
+      "pinyin": "Miàn shì de shí jiān shì shàng wǔ shí diǎn, dàn wǒ jiǔ diǎn sì shí jiù dào le gōng sī lóu xià。",
+      "vi": "Giờ phỏng vấn là mười giờ sáng, nhưng tôi đã đến tòa nhà công ty từ lúc chín giờ bốn mươi."
+    },
+    {
+      "start": 100.4,
+      "end": 104.08,
+      "en": "Never be late; this is the most basic politeness in an interview.",
+      "zh": "千万不要迟到,这是面试最基本的礼貌。",
+      "pinyin": "Qiān wàn bú yào chí dào, zhè shì miàn shì zuì jī běn de lǐ mào。",
+      "vi": "Tuyệt đối đừng đến muộn, đây là phép lịch sự cơ bản nhất trong buổi phỏng vấn."
+    },
+    {
+      "start": 105.32,
+      "end": 110.16,
+      "en": "Walking into the office, I saw the environment there was very clean and modern.",
+      "zh": "走进办公室,我看到这里的环境非常干净、现代",
+      "pinyin": "Zǒu jìn bàn gōng shì, wǒ kàn dào zhè lǐ de huán jìng fēi cháng gān jìng、 xiàn dài",
+      "vi": "Bước vào văn phòng, tôi thấy môi trường làm việc ở đây rất sạch sẽ, hiện đại."
+    },
+    {
+      "start": 111.1,
+      "end": 116.04,
+      "en": "Everyone was working seriously, which made me want to work here even more.",
+      "zh": "每个人都在认真工作,这让我更想在这里上班了",
+      "pinyin": "Měi gè rén dōu zài rèn zhēn gōng zuò, zhè ràng wǒ gèng xiǎng zài zhè lǐ shàng bān le",
+      "vi": "Mọi người đều đang làm việc chăm chú, điều này khiến tôi càng muốn làm việc ở đây hơn."
+    },
+    {
+      "start": 117.2,
+      "end": 121.04,
+      "en": "The secretary in charge of reception asked me to wait in the meeting room for a while.",
+      "zh": "负责接待的秘书让我先在会议室等一会儿",
+      "pinyin": "Fù zé jiē dài de mì shū ràng wǒ xiān zài huì yì shì děng yí huì er",
+      "vi": "Cô thư ký phụ trách tiếp đón bảo tôi ngồi đợi trong phòng họp một lát."
+    },
+    {
+      "start": 121.9,
+      "end": 126.94,
+      "en": "While waiting, I took a few deep breaths and tried to calm myself down.",
+      "zh": "等待的时候,我深呼吸了几次,努力让自己冷静下来",
+      "pinyin": "Děng dài de shí hòu, wǒ shēn hū xī le jǐ cì, nǔ lì ràng zì jǐ lěng jìng xià lái",
+      "vi": "Lúc chờ đợi, tôi hít thở sâu vài lần, cố gắng làm cho mình bình tĩnh lại."
+    },
+    {
+      "start": 128.22,
+      "end": 131.14,
+      "en": "The interviewer was a very elegant female manager.",
+      "zh": "面试官是一位很有气质的女经理",
+      "pinyin": "Miàn shì guān shì yí wèi hěn yǒu qì zhì de nǚ jīng lǐ",
+      "vi": "Người phỏng vấn là một nữ quản lý rất có khí chất."
+    },
+    {
+      "start": 131.18,
+      "end": 133.82,
+      "en": "She smiled and asked me to sit down.",
+      "zh": "她微笑着请我坐下",
+      "pinyin": "Tā wēi xiào zhe qǐng wǒ zuò xià",
+      "vi": "Cô ấy mỉm cười mời tôi ngồi xuống."
+    },
+    {
+      "start": 134.46,
+      "end": 136.16,
+      "en": "This made me relax a lot.",
+      "zh": "这让我放松了不少",
+      "pinyin": "Zhè ràng wǒ fàng sōng le bù shǎo",
+      "vi": "Điều này khiến tôi thấy thoải mái hơn nhiều."
+    },
+    {
+      "start": 137.32,
+      "end": 139.16,
+      "en": "The interview officially began.",
+      "zh": "面试正式开始了",
+      "pinyin": "Miàn shì zhèng shì kāi shǐ le",
+      "vi": "Buổi phỏng vấn chính thức bắt đầu."
+    },
+    {
+      "start": 140.1,
+      "end": 140.84,
+      "en": "The first question:",
+      "zh": "第一个问题",
+      "pinyin": "Dì yī gè wèn tí",
+      "vi": "Câu hỏi đầu tiên,"
+    },
+    {
+      "start": 141.8,
+      "end": 144.24,
+      "en": "Please briefly introduce yourself.",
+      "zh": "请你简单地介绍一下自己",
+      "pinyin": "Qǐng nǐ jiǎn dān dì jiè shào yí xià zì jǐ",
+      "vi": "Xin hãy giới thiệu ngắn gọn về bản thân bạn."
+    },
+    {
+      "start": 145.46,
+      "end": 146.54,
+      "en": "I answered confidently.",
+      "zh": "我自信地回答",
+      "pinyin": "Wǒ zì xìn dì huí dá",
+      "vi": "Tôi tự tin trả lời."
+    },
+    {
+      "start": 147.7,
+      "end": 148.4,
+      "en": "Hello, manager.",
+      "zh": "经理您好",
+      "pinyin": "Jīng lǐ nín hǎo",
+      "vi": "Chào quản lý."
+    },
+    {
+      "start": 149.06,
+      "end": 149.6,
+      "en": "My name is Wang Ming.",
+      "zh": "我叫王明",
+      "pinyin": "Wǒ jiào wáng míng",
+      "vi": "Tôi tên là Vương Minh."
+    },
+    {
+      "start": 150.58,
+      "end": 151.52,
+      "en": "I am 23 years old this year.",
+      "zh": "今年岁",
+      "pinyin": "Jīn nián suì",
+      "vi": "Năm nay tôi 23 tuổi."
+    },
+    {
+      "start": 152.4,
+      "end": 154.74,
+      "en": "I graduated from the University of International Business and Economics.",
+      "zh": "我毕业于对外经济贸易大学",
+      "pinyin": "Wǒ bì yè yú duì wài jīng jì mào yì dà xué",
+      "vi": "Tôi tốt nghiệp trường Đại học Kinh tế và Thương mại Đối ngoại."
+    },
+    {
+      "start": 155.44,
+      "end": 156.92,
+      "en": "My major was international trade.",
+      "zh": "专业是国际贸易",
+      "pinyin": "Zhuān yè shì guó jì mào yì",
+      "vi": "Chuyên ngành của tôi là thương mại quốc tế."
+    },
+    {
+      "start": 157.98,
+      "end": 158.86,
+      "en": "During my university years,",
+      "zh": "在大学期间",
+      "pinyin": "Zài dà xué qī jiān",
+      "vi": "Trong thời gian học đại học,"
+    },
+    {
+      "start": 159.44,
+      "end": 160.2,
+      "en": "I had excellent grades.",
+      "zh": "我成绩优秀",
+      "pinyin": "Wǒ chéng jì yōu xiù",
+      "vi": "Tôi có thành tích học tập xuất sắc."
+    },
+    {
+      "start": 160.82,
+      "end": 169.91,
+      "en": "The second question: Why do you want to work at ABC Company?",
+      "zh": "第二个问题，你为什么想来公司工作？",
+      "pinyin": "Dì èr gè wèn tí， nǐ wèi shén me xiǎng lái gōng sī gōng zuò？",
+      "vi": "Câu hỏi thứ hai: Tại sao bạn muốn đến công ty ABC làm việc?"
+    },
+    {
+      "start": 169.91,
+      "end": 185.47,
+      "en": "I said, because ABC Company is a leader in the industry, has great development prospects, and my major is a very good match for the business here. I hope I can put my abilities to use here.",
+      "zh": "我说，因为公司是行业的领导者，发展前景很好，而且我的专业和这里的业务非常对口，我希望能在这里发挥我的能力。",
+      "pinyin": "Wǒ shuō， yīn wèi gōng sī shì háng yè de lǐng dǎo zhě， fā zhǎn qián jǐng hěn hǎo， ér qiě wǒ de zhuān yè hé zhè lǐ de yè wù fēi cháng duì kǒu， wǒ xī wàng néng zài zhè lǐ fā huī wǒ de néng lì。",
+      "vi": "Tôi nói, vì công ty ABC là doanh nghiệp dẫn đầu ngành, triển vọng phát triển rất tốt, và chuyên ngành của tôi rất phù hợp với công việc ở đây. Tôi hy vọng có thể phát huy năng lực của mình tại đây."
+    },
+    {
+      "start": 185.47,
+      "end": 187.71,
+      "en": "The third question.",
+      "zh": "第三个问题",
+      "pinyin": "Dì sān gè wèn tí",
+      "vi": "Câu hỏi thứ ba."
+    },
+    {
+      "start": 188.93,
+      "end": 190.55,
+      "en": "How is your English?",
+      "zh": "你的英语水平怎么样？",
+      "pinyin": "Nǐ de yīng yǔ shuǐ píng zěn me yàng？",
+      "vi": "Trình độ tiếng Anh của bạn thế nào?"
+    },
+    {
+      "start": 191.71,
+      "end": 192.19,
+      "en": "I answered.",
+      "zh": "我回答",
+      "pinyin": "Wǒ huí dá",
+      "vi": "Tôi trả lời."
+    },
+    {
+      "start": 193.11,
+      "end": 195.51,
+      "en": "I passed the College English Test Band 6 (CET-6).",
+      "zh": "我通过了大学英语六级考试",
+      "pinyin": "Wǒ tōng guò le dà xué yīng yǔ liù jí kǎo shì",
+      "vi": "Tôi đã vượt qua kỳ thi tiếng Anh đại học cấp 6."
+    },
+    {
+      "start": 196.17,
+      "end": 199.55,
+      "en": "I can listen, speak, read, and write in English fluently.",
+      "zh": "可以流利地用英语进行听说读写",
+      "pinyin": "Kě yǐ liú lì dì yòng yīng yǔ jìn xíng tīng shuō dú xiě",
+      "vi": "Tôi có thể nghe, nói, đọc, viết tiếng Anh một cách lưu loát."
+    },
+    {
+      "start": 200.45,
+      "end": 202.91,
+      "en": "I know the company has many foreign clients.",
+      "zh": "我知道公司有很多外国客户",
+      "pinyin": "Wǒ zhī dào gōng sī yǒu hěn duō wài guó kè hù",
+      "vi": "Tôi biết công ty có nhiều khách hàng nước ngoài."
+    },
+    {
+      "start": 203.73,
+      "end": 206.69,
+      "en": "I believe I can communicate with them smoothly.",
+      "zh": "我相信我可以和他们顺利沟通",
+      "pinyin": "Wǒ xiāng xìn wǒ kě yǐ hé tā men shùn lì gōu tōng",
+      "vi": "Tôi tin rằng tôi có thể giao tiếp với họ một cách thuận lợi."
+    },
+    {
+      "start": 208.15,
+      "end": 209.03,
+      "en": "The fourth question.",
+      "zh": "第四个问题",
+      "pinyin": "Dì sì gè wèn tí",
+      "vi": "Câu hỏi thứ tư."
+    },
+    {
+      "start": 210.43,
+      "end": 212.15,
+      "en": "What are your salary expectations?",
+      "zh": "你对薪资有什么要求？",
+      "pinyin": "Nǐ duì xīn zī yǒu shén me yāo qiú？",
+      "vi": "Bạn có yêu cầu gì về mức lương?"
+    },
+    {
+      "start": 213.39,
+      "end": 215.47,
+      "en": "This is a very sensitive question.",
+      "zh": "这是一个很敏感的问题",
+      "pinyin": "Zhè shì yí gè hěn mǐn gǎn de wèn tí",
+      "vi": "Đây là một câu hỏi rất nhạy cảm."
+    },
+    {
+      "start": 216.65,
+      "end": 217.45,
+      "en": "I thought for a moment.",
+      "zh": "我想了一下",
+      "pinyin": "Wǒ xiǎng le yí xià",
+      "vi": "Tôi suy nghĩ một lúc."
+    },
+    {
+      "start": 217.91,
+      "end": 218.79,
+      "en": "To be honest,",
+      "zh": "诚实地说",
+      "pinyin": "Chéng shí dì shuō",
+      "vi": "Thành thật mà nói,"
+    },
+    {
+      "start": 220.23,
+      "end": 221.91,
+      "en": "As a fresh graduate,",
+      "zh": "作为一名应届毕业生",
+      "pinyin": "Zuò wéi yì míng yīng jiè bì yè shēng",
+      "vi": "Là một sinh viên mới tốt nghiệp,"
+    },
+    {
+      "start": 222.59,
+      "end": 225.61,
+      "en": "What I value is the opportunity to learn and develop.",
+      "zh": "我看重的是学习和发展的机会",
+      "pinyin": "Wǒ kàn zhòng de shì xué xí hé fā zhǎn de jī huì",
+      "vi": "Điều tôi coi trọng là cơ hội học hỏi và phát triển."
+    },
+    {
+      "start": 226.59,
+      "end": 228.75,
+      "en": "But considering the cost of living in Beijing,",
+      "zh": "但是结合北京的生活成本",
+      "pinyin": "Dàn shì jié hé běi jīng de shēng huó chéng běn",
+      "vi": "Nhưng xét đến chi phí sinh hoạt ở Bắc Kinh,"
+    },
+    {
+      "start": 229.43,
+      "end": 232.37,
+      "en": "I hope the monthly salary during the probation period is around 8,000 yuan.",
+      "zh": "我希望试用期的月薪是元左右",
+      "pinyin": "Wǒ xī wàng shì yòng qī de yuè xīn shì yuán zuǒ yòu",
+      "vi": "Tôi hy vọng mức lương tháng trong thời gian thử việc là khoảng 8.000 tệ."
+    },
+    {
+      "start": 233.87,
+      "end": 235.97,
+      "en": "After hearing this, the manager nodded.",
+      "zh": "经理听了之后点了点头",
+      "pinyin": "Jīng lǐ tīng le zhī hòu diǎn le diǎn tóu",
+      "vi": "Nghe xong, vị quản lý gật đầu."
+    },
+    {
+      "start": 236.87,
+      "end": 239.23,
+      "en": "The manager seemed to think this request was very reasonable.",
+      "zh": "似乎觉得这个要求很合理",
+      "pinyin": "Sì hū jué de zhè ge yāo qiú hěn hé lǐ",
+      "vi": "Có vẻ vị quản lý thấy yêu cầu này rất hợp lý."
+    },
+    {
+      "start": 240.55,
+      "end": 241.49,
+      "en": "The fifth question.",
+      "zh": "第五个问题",
+      "pinyin": "Dì wǔ gè wèn tí",
+      "vi": "Câu hỏi thứ năm."
+    },
+    {
+      "start": 242.83,
+      "end": 244.83,
+      "en": "If the job requires working overtime often,",
+      "zh": "如果工作需要经常加班",
+      "pinyin": "Rú guǒ gōng zuò xū yào jīng cháng jiā bān",
+      "vi": "Nếu công việc cần thường xuyên tăng ca,"
+    },
+    {
+      "start": 245.31,
+      "end": 246.05,
+      "en": "Can you accept that?",
+      "zh": "你能接受吗",
+      "pinyin": "Nǐ néng jiē shòu ma",
+      "vi": "Bạn có thể chấp nhận được không?"
+    },
+    {
+      "start": 247.09,
+      "end": 247.99,
+      "en": "I answered immediately.",
+      "zh": "我马上回答",
+      "pinyin": "Wǒ mǎ shàng huí dá",
+      "vi": "Tôi trả lời ngay."
+    },
+    {
+      "start": 249.15,
+      "end": 257.85,
+      "en": "I can accept that. I'm still young, and I want to learn more. If there is urgent work, I'm willing to work overtime to finish it.",
+      "zh": "我可以接受。我还年轻，我想多学点东西。如果工作任务很紧急，我愿意加班完成。",
+      "pinyin": "Wǒ kě yǐ jiē shòu。 wǒ hái nián qīng， wǒ xiǎng duō xué diǎn dōng xī。 rú guǒ gōng zuò rèn wu hěn jǐn jí， wǒ yuàn yì jiā bān wán chéng。",
+      "vi": "Tôi có thể chấp nhận. Tôi còn trẻ, tôi muốn học hỏi thêm. Nếu công việc khẩn cấp, tôi sẵn sàng làm thêm giờ để hoàn thành."
+    },
+    {
+      "start": 259.49,
+      "end": 262.03,
+      "en": "The whole interview lasted about 20 minutes.",
+      "zh": "整个面试大约持续了分钟。",
+      "pinyin": "Zhěng gè miàn shì dà yuē chí xù le fēn zhōng。",
+      "vi": "Toàn bộ buổi phỏng vấn kéo dài khoảng 20 phút."
+    },
+    {
+      "start": 263.03,
+      "end": 267.79,
+      "en": "Finally, the manager asked me, “Do you have any other questions for me?”",
+      "zh": "最后，经理问我：“你还有什么问题想问我吗？”",
+      "pinyin": "Zuì hòu， jīng lǐ wèn wǒ：“ nǐ hái yǒu shén me wèn tí xiǎng wèn wǒ ma？”",
+      "vi": "Cuối cùng, quản lý hỏi tôi: “Bạn còn câu hỏi gì muốn hỏi tôi không?”"
+    },
+    {
+      "start": 269.21,
+      "end": 274.31,
+      "en": "I asked about the company's training opportunities, and the manager happily answered.",
+      "zh": "我问了关于公司培训机会的问题，他很高兴地回答了我。",
+      "pinyin": "Wǒ wèn le guān yú gōng sī péi xùn jī huì de wèn tí， tā hěn gāo xìng dì huí dá le wǒ。",
+      "vi": "Tôi hỏi về cơ hội đào tạo của công ty, và vị quản lý đã vui vẻ trả lời."
+    },
+    {
+      "start": 275.77,
+      "end": 276.79,
+      "en": "When I left the company,",
+      "zh": "离开公司的时候",
+      "pinyin": "Lí kāi gōng sī de shí hòu",
+      "vi": "Khi rời khỏi công ty,"
+    },
+    {
+      "start": 277.67,
+      "end": 279.17,
+      "en": "I felt my steps were very light.",
+      "zh": "我觉得脚步很轻快",
+      "pinyin": "Wǒ jué de jiǎo bù hěn qīng kuài",
+      "vi": "Tôi cảm thấy bước chân rất nhẹ nhàng."
+    },
+    {
+      "start": 280.05,
+      "end": 282.73,
+      "en": "Because I felt I had performed quite well.",
+      "zh": "因为我觉得自己表现得还不错",
+      "pinyin": "Yīn wèi wǒ jué de zì jǐ biǎo xiàn dé hái bú cuò",
+      "vi": "Vì tôi cảm thấy mình thể hiện khá tốt."
+    },
+    {
+      "start": 284.01,
+      "end": 285.89,
+      "en": "Two days later, I was having lunch.",
+      "zh": "两天后我正在吃午饭",
+      "pinyin": "Liǎng tiān hòu wǒ zhèng zài chī wǔ fàn",
+      "vi": "Hai ngày sau, tôi đang ăn trưa"
+    },
+    {
+      "start": 286.73,
+      "end": 288.03,
+      "en": "when suddenly I received a phone call.",
+      "zh": "突然接到了电话",
+      "pinyin": "Tū rán jiē dào le diàn huà",
+      "vi": "Thì đột nhiên nhận được điện thoại"
+    },
+    {
+      "start": 289.07,
+      "end": 291.03,
+      "en": "There was good news on the phone.",
+      "zh": "电话里传来了好消息",
+      "pinyin": "Diàn huà lǐ chuán lái le hǎo xiāo xī",
+      "vi": "Trong điện thoại truyền đến tin tốt lành"
+    },
+    {
+      "start": 291.87,
+      "end": 292.81,
+      "en": "I was hired.",
+      "zh": "我被录用了",
+      "pinyin": "Wǒ bèi lù yòng le",
+      "vi": "Tôi đã được nhận vào làm"
+    },
+    {
+      "start": 293.69,
+      "end": 295.33,
+      "en": "I could start work next Monday.",
+      "zh": "下周一就可以去上班",
+      "pinyin": "Xià zhōu yī jiù kě yǐ qù shàng bān",
+      "vi": "Thứ Hai tuần sau là có thể đi làm rồi"
+    },
+    {
+      "start": 296.45,
+      "end": 298.81,
+      "en": "At that moment, I was really too excited.",
+      "zh": "那一刻我真的太激动了",
+      "pinyin": "Nà yí kè wǒ zhēn de tài jī dòng le",
+      "vi": "Lúc đó tôi thực sự rất phấn khích"
+    },
+    {
+      "start": 299.41,
+      "end": 300.59,
+      "en": "I almost jumped up.",
+      "zh": "差点跳了起来",
+      "pinyin": "Chà diǎn tiào le qǐ lái",
+      "vi": "Suýt nữa thì nhảy lên"
+    },
+    {
+      "start": 301.95,
+      "end": 303.85,
+      "en": "This is my interview story.",
+      "zh": "这就是我的面试故事",
+      "pinyin": "Zhè jiù shì wǒ de miàn shì gù shì",
+      "vi": "Đây chính là câu chuyện phỏng vấn của tôi"
+    },
+    {
+      "start": 303.91,
+      "end": 305.71,
+      "en": "I want to tell everyone.",
+      "zh": "我想告诉大家",
+      "pinyin": "Wǒ xiǎng gào sù dà jiā",
+      "vi": "Tôi muốn nói với mọi người"
+    },
+    {
+      "start": 306.29,
+      "end": 308.05,
+      "en": "Although interviews make people nervous,",
+      "zh": "面试虽然让人紧张",
+      "pinyin": "Miàn shì suī rán ràng rén jǐn zhāng",
+      "vi": "Mặc dù phỏng vấn khiến người ta căng thẳng"
+    },
+    {
+      "start": 308.67,
+      "end": 310.29,
+      "en": "as long as you are fully prepared,",
+      "zh": "但只要你准备充分",
+      "pinyin": "Dàn zhǐ yào nǐ zhǔn bèi chōng fèn",
+      "vi": "Nhưng chỉ cần bạn chuẩn bị kỹ lưỡng"
+    },
+    {
+      "start": 310.83,
+      "end": 312.11,
+      "en": "answer questions honestly,",
+      "zh": "诚实地回答问题",
+      "pinyin": "Chéng shí dì huí dá wèn tí",
+      "vi": "Thành thật trả lời câu hỏi"
+    },
+    {
+      "start": 312.73,
+      "end": 313.95,
+      "en": "you will definitely succeed.",
+      "zh": "就一定能成功",
+      "pinyin": "Jiù yí dìng néng chéng gōng",
+      "vi": "Thì nhất định sẽ thành công"
+    },
+    {
+      "start": 313.97,
+      "end": 316.71,
+      "en": "Whether it is success or failure,",
+      "zh": "不管是成功还是失败",
+      "pinyin": "Bù guǎn shì chéng gōng hái shì shī bài",
+      "vi": "Dù là thành công hay thất bại"
+    },
+    {
+      "start": 317.41,
+      "end": 319.59,
+      "en": "it is a valuable experience.",
+      "zh": "这都是一次宝贵的经验",
+      "pinyin": "Zhè dōu shì yí cì bǎo guì de jīng yàn",
+      "vi": "Đây đều là một trải nghiệm quý báu"
+    },
+    {
+      "start": 320.61,
+      "end": 323.39,
+      "en": "I wish everyone can find a satisfactory job.",
+      "zh": "祝大家都能找到满意的工作",
+      "pinyin": "Zhù dà jiā dōu néng zhǎo dào mǎn yì de gōng zuò",
+      "vi": "Chúc mọi người đều có thể tìm được công việc như ý"
+    }
+  ]
+}

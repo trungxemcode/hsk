@@ -1,0 +1,117 @@
+{
+  "id": "5SYZZuTYuM4",
+  "youtubeId": "5SYZZuTYuM4",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Tôi muốn trả hàng",
+  "titleVi": "Hội thoại ngắn tiếng Trung: Tôi muốn trả hàng",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 65,
+  "cues": [
+    {
+      "start": 6.7,
+      "end": 8.72,
+      "en": "Excuse me, is there any problem?",
+      "zh": "请问有什么问题吗?",
+      "pinyin": "Qǐng wèn yǒu shén me wèn tí ma?",
+      "vi": "Xin hỏi có vấn đề gì không?"
+    },
+    {
+      "start": 9.78,
+      "end": 14.46,
+      "en": "I just bought this the day before yesterday, and it's already broken. See for yourself.",
+      "zh": "这个我前天刚买,已经坏了,你自己看",
+      "pinyin": "Zhè ge wǒ qián tiān gāng mǎi, yǐ jīng huài le, nǐ zì jǐ kàn",
+      "vi": "Cái này tôi mới mua hôm kia, đã hỏng rồi, anh tự xem đi."
+    },
+    {
+      "start": 18.8,
+      "end": 20.54,
+      "en": "Oh no, I forgot to bring it.",
+      "zh": "哎呀,忘带了",
+      "pinyin": "Āi yā, wàng dài le",
+      "vi": "Ôi, tôi quên mang theo rồi."
+    },
+    {
+      "start": 21.4,
+      "end": 24.28,
+      "en": "Sorry, returning goods requires a receipt.",
+      "zh": "对不起,退货需要发票",
+      "pinyin": "Duì bù qǐ, tuì huò xū yào fā piào",
+      "vi": "Xin lỗi, trả hàng cần có hóa đơn."
+    },
+    {
+      "start": 25.46,
+      "end": 28.5,
+      "en": "return goods",
+      "zh": "退货",
+      "pinyin": "Tuì huò",
+      "vi": "trả hàng"
+    },
+    {
+      "start": 32.02,
+      "end": 32.58,
+      "en": "problem",
+      "zh": "问题",
+      "pinyin": "Wèn tí",
+      "vi": "vấn đề"
+    },
+    {
+      "start": 36.02,
+      "end": 36.96,
+      "en": "the day before yesterday",
+      "zh": "前天",
+      "pinyin": "Qián tiān",
+      "vi": "hôm kia"
+    },
+    {
+      "start": 39.64,
+      "end": 40.06,
+      "en": "just",
+      "zh": "刚",
+      "pinyin": "Gāng",
+      "vi": "vừa mới"
+    },
+    {
+      "start": 40.16,
+      "end": 43.74,
+      "en": "already",
+      "zh": "已经",
+      "pinyin": "Yǐ jīng",
+      "vi": "đã"
+    },
+    {
+      "start": 46.4,
+      "end": 47.26,
+      "en": "broken",
+      "zh": "坏了",
+      "pinyin": "Huài le",
+      "vi": "hỏng rồi"
+    },
+    {
+      "start": 50.48,
+      "end": 51.22,
+      "en": "receipt",
+      "zh": "发票",
+      "pinyin": "Fā piào",
+      "vi": "hóa đơn"
+    },
+    {
+      "start": 54.54,
+      "end": 55.16,
+      "en": "forget to bring",
+      "zh": "忘带",
+      "pinyin": "Wàng dài",
+      "vi": "quên mang"
+    },
+    {
+      "start": 55.26,
+      "end": 58.26,
+      "en": "need",
+      "zh": "需要",
+      "pinyin": "Xū yào",
+      "vi": "cần"
+    }
+  ]
+}

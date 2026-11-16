@@ -1,0 +1,253 @@
+{
+  "id": "Oz87UEjJ8So",
+  "youtubeId": "Oz87UEjJ8So",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Tôi muốn cắt tóc",
+  "titleVi": "Tôi muốn cắt tóc",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 184,
+  "cues": [
+    {
+      "start": 0.64,
+      "end": 2.52,
+      "en": "One-minute conversation: I'd like a haircut.",
+      "zh": "会话一分钟：我想剪发。",
+      "pinyin": "Huì huà yì fēn zhōng： wǒ xiǎng jiǎn fà。",
+      "vi": "Hội thoại một phút: Tôi muốn cắt tóc."
+    },
+    {
+      "start": 30,
+      "end": 33.84,
+      "en": "58 yuan, or 178 yuan for the manager to cut it. Which one would you like?",
+      "zh": "元，店长剪元，你要哪一种？",
+      "pinyin": "Yuán， diàn cháng jiǎn yuán， nǐ yào nǎ yì zhǒng？",
+      "vi": "58 tệ, cắt với quản lý là 178 tệ, bạn muốn loại nào?"
+    },
+    {
+      "start": 36.44,
+      "end": 37.94,
+      "en": "The 58 yuan one, thanks.",
+      "zh": "元的，谢谢。",
+      "pinyin": "Yuán de， xiè xiè。",
+      "vi": "Loại 58 tệ, cảm ơn."
+    },
+    {
+      "start": 40.42,
+      "end": 43.76,
+      "en": "Let me wash your hair first. Please sit here.",
+      "zh": "我先帮你洗头，请坐这里。",
+      "pinyin": "Wǒ xiān bāng nǐ xǐ tóu， qǐng zuò zhè lǐ。",
+      "vi": "Để tôi gội đầu cho bạn trước, mời bạn ngồi đây."
+    },
+    {
+      "start": 46.34,
+      "end": 46.69,
+      "en": "Okay.",
+      "zh": "好的。",
+      "pinyin": "Hǎo de。",
+      "vi": "Vâng."
+    },
+    {
+      "start": 49.22,
+      "end": 50.5,
+      "en": "Is the water temperature okay?",
+      "zh": "水温合适吗？",
+      "pinyin": "Shuǐ wēn hé shì ma？",
+      "vi": "Nhiệt độ nước có vừa không ạ?"
+    },
+    {
+      "start": 52.92,
+      "end": 54.88,
+      "en": "It's a little cold; I'd like it hotter.",
+      "zh": "有点冷，我想要热一点。",
+      "pinyin": "Yǒu diǎn lěng， wǒ xiǎng yào rè yì diǎn。",
+      "vi": "Hơi lạnh, tôi muốn nóng hơn một chút."
+    },
+    {
+      "start": 57.02,
+      "end": 60.22,
+      "en": "Let me massage your head. Is the pressure okay?",
+      "zh": "我帮你按摩一下头部，力道合适吗？",
+      "pinyin": "Wǒ bāng nǐ àn mó yí xià tóu bù， lì dào hé shì ma？",
+      "vi": "Tôi massage đầu giúp bạn, lực tay có vừa không ạ?"
+    },
+    {
+      "start": 62.98,
+      "end": 63.92,
+      "en": "A little harder.",
+      "zh": "用力一点。",
+      "pinyin": "Yòng lì yì diǎn。",
+      "vi": "Mạnh hơn một chút."
+    },
+    {
+      "start": 66.54,
+      "end": 67.52,
+      "en": "Comfortable?",
+      "zh": "舒服吗？",
+      "pinyin": "Shū fú ma？",
+      "vi": "Thoải mái không ạ?"
+    },
+    {
+      "start": 70.76,
+      "end": 71.86,
+      "en": "So comfortable.",
+      "zh": "太舒服了。",
+      "pinyin": "Tài shū fú le。",
+      "vi": "Thoải mái quá."
+    },
+    {
+      "start": 74.8,
+      "end": 76.32,
+      "en": "How would you like your hair cut today?",
+      "zh": "你今天想怎么剪？",
+      "pinyin": "Nǐ jīn tiān xiǎng zěn me jiǎn？",
+      "vi": "Hôm nay bạn muốn cắt kiểu gì?"
+    },
+    {
+      "start": 79.4,
+      "end": 82.86,
+      "en": "I want it short, like this picture, a bob.",
+      "zh": "我想剪短，像这张图片一样，波波头。",
+      "pinyin": "Wǒ xiǎng jiǎn duǎn， xiàng zhè zhāng tú piàn yí yàng， bō bō tóu。",
+      "vi": "Tôi muốn cắt ngắn, giống như trong hình này, kiểu tóc bob."
+    },
+    {
+      "start": 85.58,
+      "end": 99.47,
+      "en": "Use clippers to shorten the sides, keep the top long, just trim it. Don't cut it too short. Is that okay? Make the back a bit shorter.",
+      "zh": "两边用电推子剃短，上面留长，修一下就行了，不要剪太短。你看可以吗？后面再短一点。",
+      "pinyin": "Liǎng biān yòng diàn tuī zǐ tì duǎn， shàng miàn liú cháng， xiū yí xià jiù xíng le， bú yào jiǎn tài duǎn。 nǐ kàn kě yǐ ma？ hòu miàn zài duǎn yì diǎn。",
+      "vi": "Hai bên cạo ngắn bằng tông đơ điện, phần trên để dài, sửa qua là được, đừng cắt quá ngắn. Anh thấy được không? Phía sau ngắn thêm một chút."
+    },
+    {
+      "start": 101.99,
+      "end": 103.81,
+      "en": "I'll blow-dry your hair.",
+      "zh": "我帮你把头发吹干。",
+      "pinyin": "Wǒ bāng nǐ bǎ tóu fa chuī gān。",
+      "vi": "Tôi sẽ sấy khô tóc cho bạn."
+    },
+    {
+      "start": 103.87,
+      "end": 107.29,
+      "en": "Okay.",
+      "zh": "好的。",
+      "pinyin": "Hǎo de。",
+      "vi": "Vâng."
+    },
+    {
+      "start": 108.41,
+      "end": 109.91,
+      "en": "Please straighten my hair.",
+      "zh": "请帮我把头发拉直。",
+      "pinyin": "Qǐng bāng wǒ bǎ tóu fa lā zhí。",
+      "vi": "Làm ơn duỗi thẳng tóc cho tôi."
+    },
+    {
+      "start": 112.79,
+      "end": 114.29,
+      "en": "Would you like some hair wax?",
+      "zh": "你要抹点发蜡吗？",
+      "pinyin": "Nǐ yào mǒ diǎn fā là ma？",
+      "vi": "Bạn có muốn bôi chút sáp vuốt tóc không?"
+    },
+    {
+      "start": 117.05,
+      "end": 118.91,
+      "en": "No, thanks.",
+      "zh": "不用，谢谢。",
+      "pinyin": "Bú yòng， xiè xiè。",
+      "vi": "Không cần, cảm ơn."
+    },
+    {
+      "start": 121.77,
+      "end": 123.35,
+      "en": "Welcome back next time.",
+      "zh": "欢迎下次再来。",
+      "pinyin": "Huān yíng xià cì zài lái。",
+      "vi": "Mời lần sau ghé lại."
+    },
+    {
+      "start": 127.11,
+      "end": 131.93,
+      "en": "barbershop / hair salon",
+      "zh": "理发店",
+      "pinyin": "Lǐ fā diàn",
+      "vi": "tiệm cắt tóc"
+    },
+    {
+      "start": 135.49,
+      "end": 136.41,
+      "en": "cut hair",
+      "zh": "剪头发",
+      "pinyin": "Jiǎn tóu fa",
+      "vi": "cắt tóc"
+    },
+    {
+      "start": 140.15,
+      "end": 141.27,
+      "en": "hairstylist",
+      "zh": "发型师",
+      "pinyin": "Fà xíng shī",
+      "vi": "thợ tạo kiểu tóc / thợ cắt tóc"
+    },
+    {
+      "start": 144.75,
+      "end": 146.61,
+      "en": "wash, cut, blow-dry",
+      "zh": "洗剪吹",
+      "pinyin": "Xǐ jiǎn chuī",
+      "vi": "gội, cắt, sấy"
+    },
+    {
+      "start": 150.01,
+      "end": 150.65,
+      "en": "water temperature",
+      "zh": "水温",
+      "pinyin": "Shuǐ wēn",
+      "vi": "nhiệt độ nước"
+    },
+    {
+      "start": 154.03,
+      "end": 154.99,
+      "en": "massage",
+      "zh": "按摩",
+      "pinyin": "Àn mó",
+      "vi": "mát-xa"
+    },
+    {
+      "start": 158.93,
+      "end": 159.69,
+      "en": "bob haircut",
+      "zh": "波波头",
+      "pinyin": "Bō bō tóu",
+      "vi": "kiểu tóc bob"
+    },
+    {
+      "start": 163.61,
+      "end": 164.45,
+      "en": "electric hair clippers",
+      "zh": "电推子",
+      "pinyin": "Diàn tuī zǐ",
+      "vi": "tông đơ điện"
+    },
+    {
+      "start": 168.27,
+      "end": 168.97,
+      "en": "blow-dry",
+      "zh": "吹干",
+      "pinyin": "Chuī gān",
+      "vi": "sấy khô"
+    },
+    {
+      "start": 172.83,
+      "end": 173.51,
+      "en": "straighten hair",
+      "zh": "拉直",
+      "pinyin": "Lā zhí",
+      "vi": "duỗi thẳng"
+    }
+  ]
+}

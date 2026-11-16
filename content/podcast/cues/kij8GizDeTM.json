@@ -1,0 +1,93 @@
+{
+  "id": "kij8GizDeTM",
+  "youtubeId": "kij8GizDeTM",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Để tôi trả tiền",
+  "titleVi": "Hội thoại ngắn: Để tôi trả tiền",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 56,
+  "cues": [
+    {
+      "start": 17.9,
+      "end": 19.04,
+      "en": "You pay next time.",
+      "zh": "下次你付",
+      "pinyin": "Xià cì nǐ fù",
+      "vi": "Lần sau bạn trả nhé"
+    },
+    {
+      "start": 19.78,
+      "end": 20.42,
+      "en": "Ouch!",
+      "zh": "哎呦",
+      "pinyin": "Āi yōu",
+      "vi": "Ối"
+    },
+    {
+      "start": 22.12,
+      "end": 25.36,
+      "en": "Waiter/Waitress",
+      "zh": "服务员",
+      "pinyin": "Fú wù yuán",
+      "vi": "Người phục vụ"
+    },
+    {
+      "start": 28.94,
+      "end": 29.66,
+      "en": "Pay the bill",
+      "zh": "买单",
+      "pinyin": "Mǎi dān",
+      "vi": "Tính tiền"
+    },
+    {
+      "start": 32.7,
+      "end": 33.08,
+      "en": "Pay",
+      "zh": "付",
+      "pinyin": "Fù",
+      "vi": "Trả"
+    },
+    {
+      "start": 35.94,
+      "end": 36.68,
+      "en": "No way",
+      "zh": "不行",
+      "pinyin": "Bù xíng",
+      "vi": "Không được"
+    },
+    {
+      "start": 39.32,
+      "end": 39.67,
+      "en": "Give",
+      "zh": "给",
+      "pinyin": "Gěi",
+      "vi": "Cho"
+    },
+    {
+      "start": 42.32,
+      "end": 43.14,
+      "en": "Face (social reputation)",
+      "zh": "面子",
+      "pinyin": "Miàn zi",
+      "vi": "Thể diện"
+    },
+    {
+      "start": 46,
+      "end": 46.94,
+      "en": "Pay money",
+      "zh": "付钱",
+      "pinyin": "Fù qián",
+      "vi": "Trả tiền"
+    },
+    {
+      "start": 49.12,
+      "end": 49.76,
+      "en": "Next time",
+      "zh": "下次",
+      "pinyin": "Xià cì",
+      "vi": "Lần sau"
+    }
+  ]
+}

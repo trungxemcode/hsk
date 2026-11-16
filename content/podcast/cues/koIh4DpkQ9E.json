@@ -1,0 +1,157 @@
+{
+  "id": "koIh4DpkQ9E",
+  "youtubeId": "koIh4DpkQ9E",
+  "channelHandle": "@PandaStudio24",
+  "title": "Tôi thích đọc sách - LUYỆN ĐỌC TIẾNG TRUNG HSK 2",
+  "titleVi": "Tôi thích đọc sách",
+  "topic": "Luyện đọc HSK 2",
+  "level": "HSK 2+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 241,
+  "cues": [
+    {
+      "start": 0.78,
+      "end": 29.36,
+      "en": "I love reading novels and comic books the most.",
+      "zh": "我最爱看小说和漫画书。",
+      "pinyin": "Wǒ zuì ài kàn xiǎo shuō hé màn huà shū。",
+      "vi": "Tôi thích đọc tiểu thuyết và truyện tranh nhất."
+    },
+    {
+      "start": 32.4,
+      "end": 34.5,
+      "en": "Before, I used to read quite a lot of books.",
+      "zh": "以前我看的书比较多。",
+      "pinyin": "Yǐ qián wǒ kàn de shū bǐ jiào duō。",
+      "vi": "Trước đây tôi đọc sách khá nhiều."
+    },
+    {
+      "start": 37.44,
+      "end": 39.9,
+      "en": "After I started working, I rarely read anymore.",
+      "zh": "工作之后我就很少看了。",
+      "pinyin": "Gōng zuò zhī hòu wǒ jiù hěn shǎo kàn le。",
+      "vi": "Sau khi đi làm, tôi hiếm khi đọc sách nữa."
+    },
+    {
+      "start": 42.76,
+      "end": 44.42,
+      "en": "I am quite introverted.",
+      "zh": "我性格比较内向。",
+      "pinyin": "Wǒ xìng gé bǐ jiào nèi xiàng。",
+      "vi": "Tôi là người khá hướng nội."
+    },
+    {
+      "start": 47.46,
+      "end": 50.88,
+      "en": "So on days off, I like to stay home and read.",
+      "zh": "所以放假时，我喜欢待在家里看书。",
+      "pinyin": "Suǒ yǐ fàng jià shí， wǒ xǐ huan dài zài jiā lǐ kàn shū。",
+      "vi": "Vì vậy, khi được nghỉ, tôi thích ở nhà đọc sách."
+    },
+    {
+      "start": 53.84,
+      "end": 67.42,
+      "en": "But to be honest, compared with reading, I love buying books more. Now I have over a hundred books. You are just like me...",
+      "zh": "但说实话，比起看书，我更爱买书。现在我有一百多本书了，你们也跟我一样...",
+      "pinyin": "Dàn shuō shí huà， bǐ qǐ kàn shū， wǒ gèng ài mǎi shū。 xiàn zài wǒ yǒu yì bǎi duō běn shū le， nǐ men yě gēn wǒ yí yàng...",
+      "vi": "Nhưng nói thật, so với việc đọc sách, tôi thích mua sách hơn. Bây giờ tôi có hơn một trăm cuốn sách rồi, các bạn cũng giống tôi..."
+    },
+    {
+      "start": 67.82,
+      "end": 68.54,
+      "en": "Do you like reading?",
+      "zh": "喜欢看书吗？",
+      "pinyin": "Xǐ huan kàn shū ma？",
+      "vi": "Các bạn có thích đọc sách không?"
+    },
+    {
+      "start": 84.94,
+      "end": 91.06,
+      "en": "I have liked reading since I was a child.",
+      "zh": "我从小就喜欢看书。",
+      "pinyin": "Wǒ cóng xiǎo jiù xǐ huan kàn shū。",
+      "vi": "Từ nhỏ tôi đã thích đọc sách."
+    },
+    {
+      "start": 94.64,
+      "end": 97.44,
+      "en": "I love reading novels and comic books the most.",
+      "zh": "我最爱看小说和漫画书。",
+      "pinyin": "Wǒ zuì ài kàn xiǎo shuō hé màn huà shū。",
+      "vi": "Tôi thích đọc tiểu thuyết và truyện tranh nhất."
+    },
+    {
+      "start": 100.48,
+      "end": 102.58,
+      "en": "Before, I used to read quite a lot of books.",
+      "zh": "以前我看的书比较多。",
+      "pinyin": "Yǐ qián wǒ kàn de shū bǐ jiào duō。",
+      "vi": "Trước đây tôi đọc sách khá nhiều."
+    },
+    {
+      "start": 105.96,
+      "end": 108.42,
+      "en": "After I started working, I rarely read anymore.",
+      "zh": "工作之后我就很少看了。",
+      "pinyin": "Gōng zuò zhī hòu wǒ jiù hěn shǎo kàn le。",
+      "vi": "Sau khi đi làm, tôi hiếm khi đọc sách nữa."
+    },
+    {
+      "start": 111.32,
+      "end": 112.92,
+      "en": "I am quite introverted.",
+      "zh": "我性格比较内向。",
+      "pinyin": "Wǒ xìng gé bǐ jiào nèi xiàng。",
+      "vi": "Tôi là người khá hướng nội."
+    },
+    {
+      "start": 115.98,
+      "end": 125.23,
+      "en": "So on days off, I like to stay home and read, but honestly, compared with reading...",
+      "zh": "所以放假时，我喜欢待在家里看书，但说实话，比起看书...",
+      "pinyin": "Suǒ yǐ fàng jiǎ shí， wǒ xǐ huan dài zài jiā lǐ kàn shū， dàn shuō shí huà， bǐ qǐ kàn shū...",
+      "vi": "Nên khi được nghỉ, tôi thích ở nhà đọc sách, nhưng nói thật, so với việc đọc sách..."
+    },
+    {
+      "start": 125.77,
+      "end": 126.95,
+      "en": "I love buying books even more.",
+      "zh": "我更爱买书。",
+      "pinyin": "Wǒ gèng ài mǎi shū。",
+      "vi": "Tôi thích mua sách hơn."
+    },
+    {
+      "start": 129.97,
+      "end": 130.32,
+      "en": "Now,",
+      "zh": "现在，",
+      "pinyin": "Xiàn zài，",
+      "vi": "Bây giờ,"
+    },
+    {
+      "start": 131.05,
+      "end": 132.45,
+      "en": "I have more than a hundred books now.",
+      "zh": "我有一百多本书了。",
+      "pinyin": "Wǒ yǒu yì bǎi duō běn shū le。",
+      "vi": "Tôi có hơn một trăm cuốn sách rồi."
+    },
+    {
+      "start": 135.25,
+      "end": 136.45,
+      "en": "You are also like me...",
+      "zh": "你们也跟我一样...",
+      "pinyin": "Nǐ men yě gēn wǒ yí yàng...",
+      "vi": "Các bạn cũng giống tôi..."
+    },
+    {
+      "start": 136.85,
+      "end": 137.57,
+      "en": "Do you like reading?",
+      "zh": "喜欢看书吗？",
+      "pinyin": "Xǐ huan kàn shū ma？",
+      "vi": "Các bạn có thích đọc sách không?"
+    }
+  ]
+}

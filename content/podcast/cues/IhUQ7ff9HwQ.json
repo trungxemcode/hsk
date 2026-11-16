@@ -1,0 +1,181 @@
+{
+  "id": "IhUQ7ff9HwQ",
+  "youtubeId": "IhUQ7ff9HwQ",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Mời bạn đi biển",
+  "titleVi": "Mời bạn đi biển",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 170,
+  "cues": [
+    {
+      "start": 2.46,
+      "end": 9.14,
+      "en": "The weather has been really nice lately. How about we go to the beach?",
+      "zh": "最近天气很好，我们去海边玩怎么样？",
+      "pinyin": "Zuì jìn tiān qì hěn hǎo， wǒ men qù hǎi biān wán zěn me yàng？",
+      "vi": "Gần đây thời tiết rất đẹp, chúng ta đi biển chơi thì sao?"
+    },
+    {
+      "start": 12.74,
+      "end": 17.84,
+      "en": "Great! I really want to go to the beach too. When do you want to go?",
+      "zh": "好啊！我也很想去海边，你想什么时候去？",
+      "pinyin": "Hǎo a！ wǒ yě hěn xiǎng qù hǎi biān， nǐ xiǎng shén me shí hòu qù？",
+      "vi": "Hay quá! Tôi cũng rất muốn đi biển, bạn muốn đi lúc nào?"
+    },
+    {
+      "start": 21.14,
+      "end": 25.02,
+      "en": "How about this weekend? We can set off in the morning.",
+      "zh": "这个周末怎么样？我们可以在早上出发。",
+      "pinyin": "Zhè ge zhōu mò zěn me yàng？ wǒ men kě yǐ zài zǎo shàng chū fā。",
+      "vi": "Cuối tuần này thì sao? Chúng ta có thể xuất phát vào buổi sáng."
+    },
+    {
+      "start": 28.9,
+      "end": 31.36,
+      "en": "Okay, then where are we going?",
+      "zh": "好的，那我们去哪里呢？",
+      "pinyin": "Hǎo de， nà wǒ men qù nǎ lǐ ne？",
+      "vi": "Được, vậy chúng ta đi đâu?"
+    },
+    {
+      "start": 35,
+      "end": 41.24,
+      "en": "I heard there’s a beautiful beach nearby called Sanya Bay. We can go there.",
+      "zh": "我听说附近有一个很漂亮的海滩，叫做三亚湾，我们可以去那里。",
+      "pinyin": "Wǒ tīng shuō fù jìn yǒu yí gè hěn piào liang de hǎi tān， jiào zuò sān yà wān， wǒ men kě yǐ qù nà lǐ。",
+      "vi": "Tôi nghe nói gần đây có một bãi biển rất đẹp tên là Vịnh Tam Á, chúng ta có thể đến đó."
+    },
+    {
+      "start": 45.26,
+      "end": 49.82,
+      "en": "Sounds great. What do we need to prepare?",
+      "zh": "好啊，听起来很不错，我们需要准备些什么？",
+      "pinyin": "Hǎo a， tīng qǐ lái hěn bú cuò， wǒ men xū yào zhǔn bèi xiē shén me？",
+      "vi": "Được đấy, nghe có vẻ rất hay. Chúng ta cần chuẩn bị những gì?"
+    },
+    {
+      "start": 53.76,
+      "end": 58.4,
+      "en": "We need to bring sunscreen, swimsuits, bath towels, and sunglasses.",
+      "zh": "我们需要带上防晒霜、泳衣、浴巾和太阳镜。",
+      "pinyin": "Wǒ men xū yào dài shàng fáng shài shuāng、 yǒng yī、 yù jīn hé tài yáng jìng。",
+      "vi": "Chúng ta cần mang theo kem chống nắng, đồ bơi, khăn tắm và kính râm."
+    },
+    {
+      "start": 59.2,
+      "end": 60.98,
+      "en": "Also some snacks and water.",
+      "zh": "还有一些零食和水。",
+      "pinyin": "Hái yǒu yì xiē líng shí hé shuǐ。",
+      "vi": "Còn phải mang thêm một chút đồ ăn vặt và nước uống."
+    },
+    {
+      "start": 65.48,
+      "end": 67.36,
+      "en": "Okay, I’ll remember.",
+      "zh": "好的，我会记得。",
+      "pinyin": "Hǎo de， wǒ huì jì de。",
+      "vi": "Được, tôi sẽ nhớ."
+    },
+    {
+      "start": 69.08,
+      "end": 70.28,
+      "en": "Do you know how to get there?",
+      "zh": "你知道怎么去那里吗？",
+      "pinyin": "Nǐ zhī dào zěn me qù nà lǐ ma？",
+      "vi": "Bạn có biết đi đến đó bằng cách nào không?"
+    },
+    {
+      "start": 74.1,
+      "end": 78.58,
+      "en": "I checked. We can take the bus or a taxi to get there.",
+      "zh": "我查了一下，我们可以坐公交车或者打车去那里。",
+      "pinyin": "Wǒ chá le yí xià， wǒ men kě yǐ zuò gōng jiāo chē huò zhě dǎ chē qù nà lǐ。",
+      "vi": "Tôi đã tra cứu rồi, chúng ta có thể đi xe buýt hoặc bắt taxi đến đó."
+    },
+    {
+      "start": 82.74,
+      "end": 86.03,
+      "en": "Okay, what time do we set off in the morning?",
+      "zh": "好的，那我们早上几点出发？",
+      "pinyin": "Hǎo de， nà wǒ men zǎo shàng jǐ diǎn chū fā？",
+      "vi": "Được, vậy buổi sáng chúng ta xuất phát lúc mấy giờ?"
+    },
+    {
+      "start": 86.03,
+      "end": 94.07,
+      "en": "We can set off at nine o’clock, so we can arrive there at eleven o’clock.",
+      "zh": "我们可以九点钟出发，这样可以在十一点钟到达那里。",
+      "pinyin": "Wǒ men kě yǐ jiǔ diǎn zhōng chū fā， zhè yàng kě yǐ zài shí yī diǎn zhōng dào dá nà lǐ。",
+      "vi": "Chúng ta có thể xuất phát lúc chín giờ, như vậy sẽ đến đó lúc mười một giờ."
+    },
+    {
+      "start": 98.57,
+      "end": 101.23,
+      "en": "Okay, I’ll get up early to get ready.",
+      "zh": "好的，我会早点起床准备的。",
+      "pinyin": "Hǎo de， wǒ huì zǎo diǎn qǐ chuáng zhǔn bèi de。",
+      "vi": "Được, tôi sẽ dậy sớm để chuẩn bị."
+    },
+    {
+      "start": 101.23,
+      "end": 106.07,
+      "en": "Thank you very much for the invitation. I’m really looking forward to this trip.",
+      "zh": "非常感谢你的邀请，我非常期待这次旅行。",
+      "pinyin": "Fēi cháng gǎn xiè nǐ de yāo qǐng， wǒ fēi cháng qī dài zhè cì lǚ xíng。",
+      "vi": "Cảm ơn bạn rất nhiều vì lời mời, tôi rất mong chờ chuyến đi này."
+    },
+    {
+      "start": 110.67,
+      "end": 111.97,
+      "en": "The words we learned in this lesson are:",
+      "zh": "本课学过的词是：",
+      "pinyin": "Běn kè xué guò de cí shì：",
+      "vi": "Những từ đã học trong bài này là:"
+    },
+    {
+      "start": 141.77,
+      "end": 142.69,
+      "en": "Swimsuit",
+      "zh": "泳衣",
+      "pinyin": "Yǒng yī",
+      "vi": "Đồ bơi"
+    },
+    {
+      "start": 146.23,
+      "end": 147.01,
+      "en": "Bath towel",
+      "zh": "浴巾",
+      "pinyin": "Yù jīn",
+      "vi": "Khăn tắm"
+    },
+    {
+      "start": 150.43,
+      "end": 151.57,
+      "en": "Sunglasses",
+      "zh": "太阳镜",
+      "pinyin": "Tài yáng jìng",
+      "vi": "Kính râm"
+    },
+    {
+      "start": 154.85,
+      "end": 155.77,
+      "en": "Snacks",
+      "zh": "零食",
+      "pinyin": "Líng shí",
+      "vi": "Đồ ăn vặt"
+    },
+    {
+      "start": 159.37,
+      "end": 160.13,
+      "en": "Invitation",
+      "zh": "邀请",
+      "pinyin": "Yāo qǐng",
+      "vi": "Lời mời"
+    }
+  ]
+}

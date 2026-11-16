@@ -1,0 +1,61 @@
+{
+  "id": "0iX7nEcYz08",
+  "youtubeId": "0iX7nEcYz08",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Bạn bao nhiêu tuổi rồi ?",
+  "titleVi": "Bạn bao nhiêu tuổi rồi?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 43,
+  "cues": [
+    {
+      "start": 9.34,
+      "end": 11.26,
+      "en": "How old do you think I am?",
+      "zh": "你觉得我多大了",
+      "pinyin": "Nǐ jué de wǒ duō dà le",
+      "vi": "Bạn nghĩ tôi bao nhiêu tuổi?"
+    },
+    {
+      "start": 19.94,
+      "end": 20.62,
+      "en": "how old",
+      "zh": "多大",
+      "pinyin": "Duō dà",
+      "vi": "bao nhiêu tuổi"
+    },
+    {
+      "start": 23.98,
+      "end": 24.38,
+      "en": "to think; to feel",
+      "zh": "觉得",
+      "pinyin": "Jué de",
+      "vi": "nghĩ; cảm thấy"
+    },
+    {
+      "start": 28.62,
+      "end": 29.28,
+      "en": "twenty-five",
+      "zh": "二十五",
+      "pinyin": "Èr shí wǔ",
+      "vi": "hai mươi lăm"
+    },
+    {
+      "start": 32.72,
+      "end": 33.07,
+      "en": "years old",
+      "zh": "岁",
+      "pinyin": "Suì",
+      "vi": "tuổi"
+    },
+    {
+      "start": 33.14,
+      "end": 36.92,
+      "en": "about; roughly",
+      "zh": "差不多",
+      "pinyin": "Chà bù duō",
+      "vi": "khoảng chừng; gần như"
+    }
+  ]
+}

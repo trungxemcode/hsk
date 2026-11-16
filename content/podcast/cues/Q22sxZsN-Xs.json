@@ -1,0 +1,181 @@
+{
+  "id": "Q22sxZsN-Xs",
+  "youtubeId": "Q22sxZsN-Xs",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Bạn muốn tự lấy hàng hay giao tận nơi ?",
+  "titleVi": "Bạn muốn tự lấy hàng hay giao tận nơi?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 166,
+  "cues": [
+    {
+      "start": 30,
+      "end": 30.35,
+      "en": "takeout; delivery",
+      "zh": "外卖",
+      "pinyin": "Wài mài",
+      "vi": "đồ ăn mang đi / giao tận nơi"
+    },
+    {
+      "start": 34.4,
+      "end": 34.86,
+      "en": "self-pickup",
+      "zh": "自取",
+      "pinyin": "Zì qǔ",
+      "vi": "tự lấy (đồ ăn)"
+    },
+    {
+      "start": 39.5,
+      "end": 39.88,
+      "en": "food delivery",
+      "zh": "送餐",
+      "pinyin": "Sòng cān",
+      "vi": "giao đồ ăn"
+    },
+    {
+      "start": 44.4,
+      "end": 45.2,
+      "en": "delivery fee",
+      "zh": "送餐费",
+      "pinyin": "Sòng cān fèi",
+      "vi": "phí giao đồ ăn"
+    },
+    {
+      "start": 49.6,
+      "end": 50.06,
+      "en": "within",
+      "zh": "以内",
+      "pinyin": "Yǐ nèi",
+      "vi": "trong phạm vi"
+    },
+    {
+      "start": 54.6,
+      "end": 55.4,
+      "en": "delivery fee",
+      "zh": "配送费",
+      "pinyin": "Pèi sòng fèi",
+      "vi": "phí giao hàng"
+    },
+    {
+      "start": 59.78,
+      "end": 69.02,
+      "en": "May I ask what you would like to order?",
+      "zh": "请问你想点什么？",
+      "pinyin": "Qǐng wèn nǐ xiǎng diǎn shén me？",
+      "vi": "Xin hỏi bạn muốn gọi món gì?"
+    },
+    {
+      "start": 71.12,
+      "end": 76.28,
+      "en": "I'd like a sweet and sour chicken dinner combo, shrimp fried noodles, and an egg drop soup.",
+      "zh": "要一份甜酸鸡晚餐套餐、虾仁炒面和一份蛋花汤。",
+      "pinyin": "Yào yí fèn tián suān jī wǎn cān tào cān、 xiā rén chǎo miàn hé yí fèn dàn huā tāng。",
+      "vi": "Lấy một phần set bữa tối gà chua ngọt, mì xào tôm và một tô súp trứng."
+    },
+    {
+      "start": 80.3,
+      "end": 91.5,
+      "en": "Dinner combo, sweet and sour chicken, shrimp fried noodles",
+      "zh": "晚餐套餐、甜酸鸡、虾仁炒面",
+      "pinyin": "Wǎn cān tào cān、 tián suān jī、 xiā rén chǎo miàn",
+      "vi": "Set bữa tối, gà chua ngọt, mì xào tôm"
+    },
+    {
+      "start": 95.82,
+      "end": 96.62,
+      "en": "egg drop soup",
+      "zh": "蛋花汤",
+      "pinyin": "Dàn huā tāng",
+      "vi": "súp trứng"
+    },
+    {
+      "start": 103.76,
+      "end": 106.72,
+      "en": "What is your name, phone number, and address?",
+      "zh": "你的名字、电话号码和地址是什么？",
+      "pinyin": "Nǐ de míng zì、 diàn huà hào mǎ hé dì zhǐ shì shén me？",
+      "vi": "Tên, số điện thoại và địa chỉ của bạn là gì?"
+    },
+    {
+      "start": 108.8,
+      "end": 111.92,
+      "en": "Zhang Meili, 586, No. 1 Zhongshan Street.",
+      "zh": "张美丽，，中山街一号。",
+      "pinyin": "Zhāng měi lì，， zhōng shān jiē yī hào。",
+      "vi": "Trương Mỹ Lệ, 586, số 1 phố Trung Sơn."
+    },
+    {
+      "start": 117.44,
+      "end": 118.44,
+      "en": "phone number",
+      "zh": "电话号码",
+      "pinyin": "Diàn huà hào mǎ",
+      "vi": "số điện thoại"
+    },
+    {
+      "start": 122.38,
+      "end": 122.96,
+      "en": "address",
+      "zh": "地址",
+      "pinyin": "Dì zhǐ",
+      "vi": "địa chỉ"
+    },
+    {
+      "start": 127.32,
+      "end": 128.14,
+      "en": "Zhongshan Street",
+      "zh": "中山街",
+      "pinyin": "Zhōng shān jiē",
+      "vi": "phố Trung Sơn"
+    },
+    {
+      "start": 135.76,
+      "end": 137.24,
+      "en": "How long will it take?",
+      "zh": "请问要多长时间？",
+      "pinyin": "Qǐng wèn yào duō cháng shí jiān？",
+      "vi": "Xin hỏi mất bao lâu?"
+    },
+    {
+      "start": 139.34,
+      "end": 140.42,
+      "en": "About 45 minutes.",
+      "zh": "分钟左右",
+      "pinyin": "Fēn zhōng zuǒ yòu",
+      "vi": "Khoảng 45 phút."
+    },
+    {
+      "start": 140.9,
+      "end": 143.18,
+      "en": "If the delivery person arrives, they will call you.",
+      "zh": "送餐员到了的话，会电话联系你的。",
+      "pinyin": "Sòng cān yuán dào le de huà， huì diàn huà lián xì nǐ de。",
+      "vi": "Nếu nhân viên giao đồ ăn đến nơi thì sẽ gọi điện liên hệ với bạn."
+    },
+    {
+      "start": 147.3,
+      "end": 148.26,
+      "en": "how long",
+      "zh": "多长时间",
+      "pinyin": "Duō cháng shí jiān",
+      "vi": "bao lâu"
+    },
+    {
+      "start": 152.04,
+      "end": 152.86,
+      "en": "delivery person",
+      "zh": "送餐员",
+      "pinyin": "Sòng cān yuán",
+      "vi": "nhân viên giao đồ ăn"
+    },
+    {
+      "start": 156.8,
+      "end": 157.36,
+      "en": "contact",
+      "zh": "联系",
+      "pinyin": "Lián xì",
+      "vi": "liên hệ"
+    }
+  ]
+}

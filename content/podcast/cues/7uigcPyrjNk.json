@@ -1,0 +1,117 @@
+{
+  "id": "7uigcPyrjNk",
+  "youtubeId": "7uigcPyrjNk",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Máy tính của tôi sập nguồn rồi",
+  "titleVi": "Máy tính của tôi sập nguồn rồi",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 96,
+  "cues": [
+    {
+      "start": 0.5,
+      "end": 3.44,
+      "en": "Short Chinese conversation: My computer crashed.",
+      "zh": "中文短会话：我的电脑死机了。",
+      "pinyin": "Zhōng wén duǎn huì huà： wǒ de diàn nǎo sǐ jī le。",
+      "vi": "Hội thoại ngắn tiếng Trung: Máy tính của tôi bị treo rồi."
+    },
+    {
+      "start": 4.44,
+      "end": 7.38,
+      "en": "Oh no, my computer died.",
+      "zh": "糟糕，我的电脑死了。",
+      "pinyin": "Zāo gāo， wǒ de diàn nǎo sǐ le。",
+      "vi": "Chết rồi, máy tính của tôi chết rồi."
+    },
+    {
+      "start": 11.58,
+      "end": 18.36,
+      "en": "I don't know. I was typing documents the whole time, and the computer suddenly died.",
+      "zh": "不知道，我一直都在打文件，电脑突然就死了。",
+      "pinyin": "Bù zhī dào， wǒ yì zhí dōu zài dǎ wén jiàn， diàn nǎo tū rán jiù sǐ le。",
+      "vi": "Tôi không biết, tôi cứ đang gõ văn bản thì máy tính đột nhiên chết."
+    },
+    {
+      "start": 19.92,
+      "end": 23.4,
+      "en": "Wouldn't it be better to ask someone to take a look?",
+      "zh": "还是请人看看比较好？",
+      "pinyin": "Hái shì qǐng rén kàn kàn bǐ jiào hǎo？",
+      "vi": "Hay là nhờ người xem thử thì tốt hơn nhỉ?"
+    },
+    {
+      "start": 54.04,
+      "end": 54.4,
+      "en": "all; both; always (emphasizing continuity)",
+      "zh": "都",
+      "pinyin": "Dōu",
+      "vi": "đều; (nhấn mạnh) vẫn cứ"
+    },
+    {
+      "start": 58.46,
+      "end": 58.81,
+      "en": "at; in; (progressive aspect marker)",
+      "zh": "在",
+      "pinyin": "Zài",
+      "vi": "ở, tại; đang (hành động tiếp diễn)"
+    },
+    {
+      "start": 62.34,
+      "end": 62.69,
+      "en": "to hit; to type (a document)",
+      "zh": "打",
+      "pinyin": "Dǎ",
+      "vi": "đánh; gõ (văn bản)"
+    },
+    {
+      "start": 66.68,
+      "end": 67.26,
+      "en": "document; file",
+      "zh": "文件",
+      "pinyin": "Wén jiàn",
+      "vi": "văn bản; tài liệu"
+    },
+    {
+      "start": 71.26,
+      "end": 71.88,
+      "en": "suddenly",
+      "zh": "突然",
+      "pinyin": "Tū rán",
+      "vi": "đột nhiên"
+    },
+    {
+      "start": 75.66,
+      "end": 76.2,
+      "en": "still; or; had better",
+      "zh": "还是",
+      "pinyin": "Hái shì",
+      "vi": "vẫn; hay là"
+    },
+    {
+      "start": 76.26,
+      "end": 81,
+      "en": "please; to ask/invite",
+      "zh": "请",
+      "pinyin": "Qǐng",
+      "vi": "mời; nhờ, xin"
+    },
+    {
+      "start": 84.3,
+      "end": 84.84,
+      "en": "to take a look",
+      "zh": "看看",
+      "pinyin": "Kàn kàn",
+      "vi": "xem thử"
+    },
+    {
+      "start": 88.36,
+      "end": 88.94,
+      "en": "comparatively; quite",
+      "zh": "比较",
+      "pinyin": "Bǐ jiào",
+      "vi": "tương đối; khá"
+    }
+  ]
+}

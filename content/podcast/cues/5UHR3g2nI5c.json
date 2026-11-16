@@ -1,0 +1,189 @@
+{
+  "id": "5UHR3g2nI5c",
+  "youtubeId": "5UHR3g2nI5c",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Khám nha sĩ",
+  "titleVi": "Hội thoại khám nha sĩ",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 109,
+  "cues": [
+    {
+      "start": 0.86,
+      "end": 6.02,
+      "en": "Hello, what's wrong with your tooth?",
+      "zh": "你好，请问你的牙怎么了？",
+      "pinyin": "Nǐ hǎo， qǐng wèn nǐ de yá zěn me le？",
+      "vi": "Chào bạn, răng của bạn bị làm sao vậy?"
+    },
+    {
+      "start": 19.8,
+      "end": 23.36,
+      "en": "Okay, please sit in the chair first, and I'll do an examination.",
+      "zh": "好，你先坐到椅子上，我来检查一下。",
+      "pinyin": "Hǎo， nǐ xiān zuò dào yǐ zi shàng， wǒ lái jiǎn chá yí xià。",
+      "vi": "Được, bạn ngồi lên ghế trước, tôi kiểm tra một chút."
+    },
+    {
+      "start": 24.46,
+      "end": 25.1,
+      "en": "Open your mouth.",
+      "zh": "张开嘴。",
+      "pinyin": "Zhāng kāi zuǐ。",
+      "vi": "Há miệng ra."
+    },
+    {
+      "start": 27.62,
+      "end": 31.38,
+      "en": "There really is a lot of tartar; it's probably caused by improper brushing.",
+      "zh": "牙石确实很多，应该是刷牙方式不当导致的。",
+      "pinyin": "Yá shí què shí hěn duō， yīng gāi shì shuā yá fāng shì bù dāng dǎo zhì de。",
+      "vi": "Cao răng đúng là rất nhiều, có lẽ do cách đánh răng không đúng mà ra."
+    },
+    {
+      "start": 33.92,
+      "end": 34.27,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 36.38,
+      "end": 38.96,
+      "en": "Let's do a dental cleaning first to remove the tartar.",
+      "zh": "先做洗牙处理吧，清除牙垢。",
+      "pinyin": "Xiān zuò xǐ yá chǔ lǐ ba， qīng chú yá gòu。",
+      "vi": "Trước tiên hãy cạo vôi răng để loại bỏ cao răng nhé."
+    },
+    {
+      "start": 41.56,
+      "end": 43.1,
+      "en": "Will there be any side effects?",
+      "zh": "那会有什么副作用呢？",
+      "pinyin": "Nà huì yǒu shén me fù zuò yòng ne？",
+      "vi": "Vậy thì sẽ có tác dụng phụ gì không ạ?"
+    },
+    {
+      "start": 45.68,
+      "end": 49,
+      "en": "Teeth cleaning won't have side effects; it only helps with auxiliary cleaning.",
+      "zh": "洗牙不会的，只会起到辅助清洁作用。",
+      "pinyin": "Xǐ yá bú huì de， zhī huì qǐ dào fǔ zhù qīng jié zuò yòng。",
+      "vi": "Cạo vôi răng không gây tác dụng phụ đâu, chỉ có tác dụng hỗ trợ làm sạch thôi."
+    },
+    {
+      "start": 50.22,
+      "end": 54.68,
+      "en": "From now on, pay attention to dental care; brush your teeth vertically, not horizontally.",
+      "zh": "今后要注意牙齿护理，竖着刷牙，而不是横着。",
+      "pinyin": "Jīn hòu yào zhù yì yá chǐ hù lǐ， shù zhe shuā yá， ér bú shì héng zhe。",
+      "vi": "Từ nay cần chú ý chăm sóc răng, đánh răng theo chiều dọc chứ không phải chiều ngang."
+    },
+    {
+      "start": 61.5,
+      "end": 61.94,
+      "en": "dentist",
+      "zh": "牙医",
+      "pinyin": "Yá yī",
+      "vi": "nha sĩ"
+    },
+    {
+      "start": 64.8,
+      "end": 65.15,
+      "en": "tooth",
+      "zh": "牙",
+      "pinyin": "Yá",
+      "vi": "răng"
+    },
+    {
+      "start": 68.06,
+      "end": 68.48,
+      "en": "doctor",
+      "zh": "医生",
+      "pinyin": "Yī shēng",
+      "vi": "bác sĩ"
+    },
+    {
+      "start": 71.22,
+      "end": 71.7,
+      "en": "dental plaque / tartar",
+      "zh": "牙垢",
+      "pinyin": "Yá gòu",
+      "vi": "cao răng"
+    },
+    {
+      "start": 74.54,
+      "end": 75.04,
+      "en": "brush teeth",
+      "zh": "刷牙",
+      "pinyin": "Shuā yá",
+      "vi": "đánh răng"
+    },
+    {
+      "start": 77.68,
+      "end": 78.18,
+      "en": "clean",
+      "zh": "干净",
+      "pinyin": "Gān jìng",
+      "vi": "sạch sẽ"
+    },
+    {
+      "start": 80.76,
+      "end": 81.26,
+      "en": "improve",
+      "zh": "改善",
+      "pinyin": "Gǎi shàn",
+      "vi": "cải thiện"
+    },
+    {
+      "start": 83.98,
+      "end": 84.48,
+      "en": "open one's mouth",
+      "zh": "张嘴",
+      "pinyin": "Zhāng zuǐ",
+      "vi": "há miệng"
+    },
+    {
+      "start": 87.26,
+      "end": 87.66,
+      "en": "handle / deal with",
+      "zh": "处理",
+      "pinyin": "Chǔ lǐ",
+      "vi": "xử lý"
+    },
+    {
+      "start": 90.48,
+      "end": 91.14,
+      "en": "side effect",
+      "zh": "副作用",
+      "pinyin": "Fù zuò yòng",
+      "vi": "tác dụng phụ"
+    },
+    {
+      "start": 93.92,
+      "end": 94.4,
+      "en": "auxiliary / assist",
+      "zh": "辅助",
+      "pinyin": "Fǔ zhù",
+      "vi": "hỗ trợ"
+    },
+    {
+      "start": 97.44,
+      "end": 97.79,
+      "en": "vertical",
+      "zh": "竖",
+      "pinyin": "Shù",
+      "vi": "dọc / thẳng đứng"
+    },
+    {
+      "start": 100.42,
+      "end": 100.77,
+      "en": "horizontal",
+      "zh": "横",
+      "pinyin": "Héng",
+      "vi": "ngang"
+    }
+  ]
+}

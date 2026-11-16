@@ -1,0 +1,85 @@
+{
+  "id": "Qy5Pkp9-bj4",
+  "youtubeId": "Qy5Pkp9-bj4",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Mua vé tàu",
+  "titleVi": "Mua vé tàu",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 48,
+  "cues": [
+    {
+      "start": 0.38,
+      "end": 9.64,
+      "en": "Where can I buy a train ticket to Beijing?",
+      "zh": "哪里可以买去北京的火车票？",
+      "pinyin": "Nǎ lǐ kě yǐ mǎi qù běi jīng de huǒ chē piào？",
+      "vi": "Ở đâu có thể mua vé tàu đi Bắc Kinh?"
+    },
+    {
+      "start": 11.1,
+      "end": 14.46,
+      "en": "You must go to the train station.",
+      "zh": "你必须去火车站。",
+      "pinyin": "Nǐ bì xū qù huǒ chē zhàn。",
+      "vi": "Bạn phải đến ga tàu hỏa."
+    },
+    {
+      "start": 18.66,
+      "end": 19.68,
+      "en": "It's hard to say.",
+      "zh": "很难说。",
+      "pinyin": "Hěn nán shuō。",
+      "vi": "Khó nói lắm."
+    },
+    {
+      "start": 23.5,
+      "end": 29.9,
+      "en": "You can buy a train ticket.",
+      "zh": "可以买火车票。",
+      "pinyin": "Kě yǐ mǎi huǒ chē piào。",
+      "vi": "Bạn có thể mua vé tàu."
+    },
+    {
+      "start": 31.88,
+      "end": 32.62,
+      "en": "must; have to",
+      "zh": "必须",
+      "pinyin": "Bì xū",
+      "vi": "phải; bắt buộc"
+    },
+    {
+      "start": 34.74,
+      "end": 35.84,
+      "en": "train station",
+      "zh": "火车站",
+      "pinyin": "Huǒ chē zhàn",
+      "vi": "ga tàu hỏa"
+    },
+    {
+      "start": 37.48,
+      "end": 37.92,
+      "en": "ticket",
+      "zh": "票",
+      "pinyin": "Piào",
+      "vi": "vé"
+    },
+    {
+      "start": 39.48,
+      "end": 39.92,
+      "en": "difficult; hard",
+      "zh": "难",
+      "pinyin": "Nán",
+      "vi": "khó"
+    },
+    {
+      "start": 41.92,
+      "end": 42.68,
+      "en": "hard to say",
+      "zh": "难说",
+      "pinyin": "Nán shuō",
+      "vi": "khó nói"
+    }
+  ]
+}

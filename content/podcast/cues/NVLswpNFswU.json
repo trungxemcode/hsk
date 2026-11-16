@@ -1,0 +1,285 @@
+{
+  "id": "NVLswpNFswU",
+  "youtubeId": "NVLswpNFswU",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Tôi muốn đặt phòng",
+  "titleVi": "Tôi muốn đặt phòng",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 203,
+  "cues": [
+    {
+      "start": 30,
+      "end": 30.56,
+      "en": "What day will you be checking in?",
+      "zh": "您哪天入住？",
+      "pinyin": "Nín nǎ tiān rù zhù？",
+      "vi": "Quý khách nhận phòng ngày nào?"
+    },
+    {
+      "start": 32.72,
+      "end": 33.68,
+      "en": "October 1st.",
+      "zh": "月日",
+      "pinyin": "Yuè rì",
+      "vi": "Ngày 1 tháng 10."
+    },
+    {
+      "start": 35.64,
+      "end": 36.02,
+      "en": "How many days are you staying?",
+      "zh": "住几天？",
+      "pinyin": "Zhù jǐ tiān？",
+      "vi": "Ở mấy ngày?"
+    },
+    {
+      "start": 38.26,
+      "end": 38.76,
+      "en": "Two days.",
+      "zh": "两天",
+      "pinyin": "Liǎng tiān",
+      "vi": "Hai ngày."
+    },
+    {
+      "start": 45.28,
+      "end": 47.18,
+      "en": "Hello, I'd like to check in.",
+      "zh": "你好，我想办理入住",
+      "pinyin": "Nǐ hǎo， wǒ xiǎng bàn lǐ rù zhù",
+      "vi": "Xin chào, tôi muốn làm thủ tục nhận phòng."
+    },
+    {
+      "start": 49.16,
+      "end": 51.16,
+      "en": "OK, may I have your name?",
+      "zh": "好的，请问您叫什么名字？",
+      "pinyin": "Hǎo de， qǐng wèn nín jiào shén me míng zì？",
+      "vi": "Vâng, xin hỏi quý khách tên là gì?"
+    },
+    {
+      "start": 53.18,
+      "end": 54.06,
+      "en": "Nguyen Thi Hai An.",
+      "zh": "阮氏海安",
+      "pinyin": "Ruǎn shì hǎi ān",
+      "vi": "Nguyễn Thị Hải An."
+    },
+    {
+      "start": 56.18,
+      "end": 58.28,
+      "en": "Ms. Hai An, what is your phone number?",
+      "zh": "海安女士，您的电话号码是多少？",
+      "pinyin": "Hǎi ān nǚ shì， nín de diàn huà hào mǎ shì duō shǎo？",
+      "vi": "Chị Hải An, số điện thoại của chị là bao nhiêu?"
+    },
+    {
+      "start": 61.02,
+      "end": 66.38,
+      "en": "Please give me your passport.",
+      "zh": "请给我您的护照",
+      "pinyin": "Qǐng gěi wǒ nín de hù zhào",
+      "vi": "Vui lòng đưa hộ chiếu của bạn cho tôi."
+    },
+    {
+      "start": 69.04,
+      "end": 71.6,
+      "en": "A deposit of 500 yuan is required. How would you like to pay?",
+      "zh": "需要押金元，请问怎么支付？",
+      "pinyin": "Xū yào yā jīn yuán， qǐng wèn zěn me zhī fù？",
+      "vi": "Cần đặt cọc 500 tệ. Quý khách muốn thanh toán thế nào?"
+    },
+    {
+      "start": 73.94,
+      "end": 74.5,
+      "en": "Cash.",
+      "zh": "现金",
+      "pinyin": "Xiàn jīn",
+      "vi": "Tiền mặt."
+    },
+    {
+      "start": 76.82,
+      "end": 80.58,
+      "en": "Your room number is 2508. Here is your room card and breakfast voucher.",
+      "zh": "您的房号是，这是您的房卡和早餐券。",
+      "pinyin": "Nín de fáng hào shì， zhè shì nín de fáng kǎ hé zǎo cān quàn。",
+      "vi": "Số phòng của bạn là 2508. Đây là thẻ phòng và phiếu ăn sáng của bạn."
+    },
+    {
+      "start": 82.96,
+      "end": 85.38,
+      "en": "The room is on the second floor; the restaurant is on the first floor.",
+      "zh": "房间在二楼，餐厅在一楼。",
+      "pinyin": "Fáng jiān zài èr lóu， cān tīng zài yī lóu。",
+      "vi": "Phòng ở tầng hai, nhà hàng ở tầng một."
+    },
+    {
+      "start": 87.92,
+      "end": 89.04,
+      "en": "OK, thank you.",
+      "zh": "好的，谢谢",
+      "pinyin": "Hǎo de， xiè xiè",
+      "vi": "Vâng, cảm ơn."
+    },
+    {
+      "start": 107.12,
+      "end": 109,
+      "en": "OK, do you need your room cleaned?",
+      "zh": "好的，您需要打扫房间吗？",
+      "pinyin": "Hǎo de， nín xū yào dǎ sǎo fáng jiān ma？",
+      "vi": "Vâng, bạn có cần dọn phòng không?"
+    },
+    {
+      "start": 111.42,
+      "end": 114.38,
+      "en": "Yes, please bring me some ice and water too.",
+      "zh": "需要，请再帮我送一些冰块和水。",
+      "pinyin": "Xū yào， qǐng zài bāng wǒ sòng yì xiē bīng kuài hé shuǐ。",
+      "vi": "Có, vui lòng mang thêm cho tôi ít đá và nước."
+    },
+    {
+      "start": 116.74,
+      "end": 117.94,
+      "en": "OK, please wait a moment.",
+      "zh": "好的，请稍等。",
+      "pinyin": "Hǎo de， qǐng shāo děng。",
+      "vi": "Vâng, xin chờ một chút."
+    },
+    {
+      "start": 124.62,
+      "end": 126.2,
+      "en": "Hello, I'd like to check out.",
+      "zh": "你好，我要退房。",
+      "pinyin": "Nǐ hǎo， wǒ yào tuì fáng。",
+      "vi": "Xin chào, tôi muốn trả phòng."
+    },
+    {
+      "start": 128.46,
+      "end": 131.6,
+      "en": "Here is your bill. The total comes to 160 yuan.",
+      "zh": "这是您的账单，一共消费元。",
+      "pinyin": "Zhè shì nín de zhàng dān， yí gòng xiāo fèi yuán。",
+      "vi": "Đây là hóa đơn của bạn, tổng cộng là 160 tệ."
+    },
+    {
+      "start": 133.88,
+      "end": 135.1,
+      "en": "Please confirm and sign.",
+      "zh": "请确认后签字",
+      "pinyin": "Qǐng què rèn hòu qiān zì",
+      "vi": "Quý khách vui lòng xác nhận rồi ký tên."
+    },
+    {
+      "start": 137.28,
+      "end": 139.3,
+      "en": "Can you help me store my luggage?",
+      "zh": "你能帮我保管一下行李吗？",
+      "pinyin": "Nǐ néng bāng wǒ bǎo guǎn yí xià xíng li ma？",
+      "vi": "Bạn có thể trông giữ hành lý giúp tôi được không?"
+    },
+    {
+      "start": 140.3,
+      "end": 141.56,
+      "en": "I'll come back at five to pick it up.",
+      "zh": "我五点回来取",
+      "pinyin": "Wǒ wǔ diǎn huí lái qǔ",
+      "vi": "Năm giờ tôi quay lại lấy."
+    },
+    {
+      "start": 143.92,
+      "end": 146.9,
+      "en": "OK, here is your luggage tag. Thank you for staying with us.",
+      "zh": "好的，这是您的行李牌，感谢您的入住。",
+      "pinyin": "Hǎo de， zhè shì nín de xíng li pái， gǎn xiè nín de rù zhù。",
+      "vi": "Vâng, đây là thẻ hành lý của bạn. Cảm ơn bạn đã lưu trú."
+    },
+    {
+      "start": 152.9,
+      "end": 153.72,
+      "en": "Executive room",
+      "zh": "行政房",
+      "pinyin": "Xíng zhèng fáng",
+      "vi": "Phòng hạng thương gia"
+    },
+    {
+      "start": 157.44,
+      "end": 158.24,
+      "en": "Sea-view room",
+      "zh": "海景房",
+      "pinyin": "Hǎi jǐng fáng",
+      "vi": "Phòng hướng biển"
+    },
+    {
+      "start": 161.62,
+      "end": 162.48,
+      "en": "Swimming pool",
+      "zh": "游泳池",
+      "pinyin": "Yóu yǒng chí",
+      "vi": "Hồ bơi"
+    },
+    {
+      "start": 165.94,
+      "end": 166.78,
+      "en": "Gym",
+      "zh": "健身房",
+      "pinyin": "Jiàn shēn fáng",
+      "vi": "Phòng tập gym"
+    },
+    {
+      "start": 169.92,
+      "end": 170.56,
+      "en": "Passport",
+      "zh": "护照",
+      "pinyin": "Hù zhào",
+      "vi": "Hộ chiếu"
+    },
+    {
+      "start": 174,
+      "end": 174.54,
+      "en": "Deposit",
+      "zh": "押金",
+      "pinyin": "Yā jīn",
+      "vi": "Tiền đặt cọc"
+    },
+    {
+      "start": 177.98,
+      "end": 178.52,
+      "en": "Room card",
+      "zh": "房卡",
+      "pinyin": "Fáng kǎ",
+      "vi": "Thẻ phòng"
+    },
+    {
+      "start": 181.64,
+      "end": 182.68,
+      "en": "Breakfast voucher",
+      "zh": "早餐券",
+      "pinyin": "Zǎo cān quàn",
+      "vi": "Phiếu ăn sáng"
+    },
+    {
+      "start": 186.08,
+      "end": 186.64,
+      "en": "Front desk",
+      "zh": "前台",
+      "pinyin": "Qián tái",
+      "vi": "Quầy lễ tân"
+    },
+    {
+      "start": 190.38,
+      "end": 190.98,
+      "en": "Towel",
+      "zh": "毛巾",
+      "pinyin": "Máo jīn",
+      "vi": "Khăn tắm"
+    },
+    {
+      "start": 194.64,
+      "end": 195.18,
+      "en": "Luggage",
+      "zh": "行李",
+      "pinyin": "Xíng li",
+      "vi": "Hành lý"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "id": "EOKJmxheP0A",
+  "youtubeId": "EOKJmxheP0A",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Quê bạn ở đâu ?",
+  "titleVi": "Quê bạn ở đâu?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 44,
+  "cues": [
+    {
+      "start": 0.46,
+      "end": 7.24,
+      "en": "Where is your hometown?",
+      "zh": "你的老家在哪里？",
+      "pinyin": "Nǐ de lǎo jiā zài nǎ lǐ？",
+      "vi": "Quê bạn ở đâu?"
+    },
+    {
+      "start": 8.58,
+      "end": 12.04,
+      "en": "I came from the countryside, how about you?",
+      "zh": "我从乡下来，你呢？",
+      "pinyin": "Wǒ cóng xiāng xià lái， nǐ ne？",
+      "vi": "Tôi từ nông thôn đến, còn bạn?"
+    },
+    {
+      "start": 13.18,
+      "end": 15.72,
+      "en": "My hometown is in Beijing.",
+      "zh": "我的老家在北京。",
+      "pinyin": "Wǒ de lǎo jiā zài běi jīng。",
+      "vi": "Quê tôi ở Bắc Kinh."
+    },
+    {
+      "start": 17.14,
+      "end": 20.44,
+      "en": "Beijing is a good place.",
+      "zh": "北京是一个好地方。",
+      "pinyin": "Běi jīng shì yí gè hǎo dì fāng。",
+      "vi": "Bắc Kinh là một nơi tốt."
+    },
+    {
+      "start": 23.58,
+      "end": 24.48,
+      "en": "hometown",
+      "zh": "老家",
+      "pinyin": "Lǎo jiā",
+      "vi": "quê nhà"
+    },
+    {
+      "start": 28.6,
+      "end": 29.64,
+      "en": "from",
+      "zh": "从",
+      "pinyin": "Cóng",
+      "vi": "từ"
+    },
+    {
+      "start": 31,
+      "end": 31.9,
+      "en": "countryside",
+      "zh": "乡下",
+      "pinyin": "Xiāng xià",
+      "vi": "nông thôn"
+    },
+    {
+      "start": 34.38,
+      "end": 34.74,
+      "en": "in/at",
+      "zh": "在",
+      "pinyin": "Zài",
+      "vi": "ở tại"
+    },
+    {
+      "start": 37.48,
+      "end": 38.14,
+      "en": "place",
+      "zh": "地方",
+      "pinyin": "Dì fāng",
+      "vi": "nơi chốn"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "id": "MlC3D3ngGXc",
+  "youtubeId": "MlC3D3ngGXc",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Hôm nay tôi không thể đi làm",
+  "titleVi": "Hội thoại ngắn tiếng Trung: Hôm nay tôi không thể đi làm",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 50,
+  "cues": [
+    {
+      "start": 0.64,
+      "end": 9.3,
+      "en": "Boss, I'm sorry, I can't come to work today.",
+      "zh": "老板，对不起，我今天不能来上班了。",
+      "pinyin": "Lǎo bǎn， duì bù qǐ， wǒ jīn tiān bù néng lái shàng bān le。",
+      "vi": "Sếp ơi, xin lỗi, hôm nay tôi không thể đến đi làm được."
+    },
+    {
+      "start": 10.62,
+      "end": 13.54,
+      "en": "Why? Are you feeling unwell?",
+      "zh": "为什么？你不舒服吗？",
+      "pinyin": "Wèi shén me？ nǐ bù shū fú ma？",
+      "vi": "Tại sao? Bạn không khỏe à?"
+    },
+    {
+      "start": 18.24,
+      "end": 23.9,
+      "en": "Okay, take good care of yourself. See you tomorrow.",
+      "zh": "好，那你好好照顾自己。明天见。",
+      "pinyin": "Hǎo， nà nǐ hǎo hǎo zhào gù zì jǐ。 míng tiān jiàn。",
+      "vi": "Được, vậy bạn hãy tự chăm sóc bản thân thật tốt nhé. Hẹn gặp lại ngày mai."
+    },
+    {
+      "start": 26.44,
+      "end": 29.14,
+      "en": "can; to be able to",
+      "zh": "能",
+      "pinyin": "Néng",
+      "vi": "có thể"
+    },
+    {
+      "start": 31.26,
+      "end": 32.14,
+      "en": "go to work",
+      "zh": "上班",
+      "pinyin": "Shàng bān",
+      "vi": "đi làm"
+    },
+    {
+      "start": 34.12,
+      "end": 35.2,
+      "en": "unwell; uncomfortable",
+      "zh": "不舒服",
+      "pinyin": "Bù shū fú",
+      "vi": "không khỏe; khó chịu"
+    },
+    {
+      "start": 37.16,
+      "end": 37.88,
+      "en": "to catch a cold; cold",
+      "zh": "感冒",
+      "pinyin": "Gǎn mào",
+      "vi": "bị cảm; cảm cúm"
+    },
+    {
+      "start": 40.1,
+      "end": 40.76,
+      "en": "well; properly",
+      "zh": "好好",
+      "pinyin": "Hǎo hǎo",
+      "vi": "tốt; chu đáo; kỹ lưỡng"
+    },
+    {
+      "start": 40.92,
+      "end": 43.1,
+      "en": "to see; to meet",
+      "zh": "见",
+      "pinyin": "Jiàn",
+      "vi": "gặp"
+    }
+  ]
+}

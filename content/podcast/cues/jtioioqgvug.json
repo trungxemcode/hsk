@@ -1,0 +1,389 @@
+{
+  "id": "jtioioqgvug",
+  "youtubeId": "jtioioqgvug",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe hội thoại TIẾNG TRUNG #4 : Đặt phòng và nhận phòng khách sạn",
+  "titleVi": "Luyện nghe hội thoại tiếng Trung: Đặt và nhận phòng khách sạn",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 176,
+  "cues": [
+    {
+      "start": 0.42,
+      "end": 2.54,
+      "en": "Excuse me, I'd like to find a hotel.",
+      "zh": "麻烦你，我想找一家酒店。",
+      "pinyin": "Má fán nǐ， wǒ xiǎng zhǎo yì jiā jiǔ diàn。",
+      "vi": "Làm phiền bạn, tôi muốn tìm một khách sạn."
+    },
+    {
+      "start": 7.2,
+      "end": 10.24,
+      "en": "Here is a map of budget hotels. Take a look.",
+      "zh": "这里有一张经济型酒店位置图，你看看。",
+      "pinyin": "Zhè lǐ yǒu yì zhāng jīng jì xíng jiǔ diàn wèi zhì tú， nǐ kàn kàn。",
+      "vi": "Đây là bản đồ vị trí các khách sạn bình dân, bạn xem nhé."
+    },
+    {
+      "start": 11.26,
+      "end": 15.74,
+      "en": "I'd like to book a hotel in this area.",
+      "zh": "我想在这一带订一家酒店。",
+      "pinyin": "Wǒ xiǎng zài zhè yí dài dìng yì jiā jiǔ diàn。",
+      "vi": "Tôi muốn đặt một khách sạn ở khu vực này."
+    },
+    {
+      "start": 18.98,
+      "end": 21.82,
+      "en": "Then I recommend this one—both convenient and cheap.",
+      "zh": "那我推荐这一家，又方便又便宜。",
+      "pinyin": "Nà wǒ tuī jiàn zhè yì jiā， yòu fāng biàn yòu pián yi。",
+      "vi": "Vậy tôi gợi ý khách sạn này, vừa tiện lại vừa rẻ."
+    },
+    {
+      "start": 23.82,
+      "end": 25.82,
+      "en": "Hello, please give me your passport.",
+      "zh": "你好，请给我你的护照。",
+      "pinyin": "Nǐ hǎo， qǐng gěi wǒ nǐ de hù zhào。",
+      "vi": "Xin chào, vui lòng đưa cho tôi hộ chiếu của bạn."
+    },
+    {
+      "start": 32.6,
+      "end": 32.95,
+      "en": "Here you go.",
+      "zh": "给。",
+      "pinyin": "Gěi。",
+      "vi": "Đây."
+    },
+    {
+      "start": 34.8,
+      "end": 36.36,
+      "en": "Can this piece of luggage be carried on?",
+      "zh": "这件行李可以随身带吗？",
+      "pinyin": "Zhè jiàn xíng li kě yǐ suí shēn dài ma？",
+      "vi": "Hành lý này có thể xách tay lên máy bay không?"
+    },
+    {
+      "start": 39.4,
+      "end": 40.86,
+      "en": "It exceeds the regulated size.",
+      "zh": "超过了规定的体积。",
+      "pinyin": "Chāo guò le guī dìng de tǐ jī。",
+      "vi": "Nó vượt quá kích thước quy định."
+    },
+    {
+      "start": 40.96,
+      "end": 41.74,
+      "en": "It needs to be checked.",
+      "zh": "需要托运。",
+      "pinyin": "Xū yào tuō yùn。",
+      "vi": "Cần phải ký gửi hành lý."
+    },
+    {
+      "start": 42.18,
+      "end": 43.1,
+      "en": "Okay.",
+      "zh": "好。",
+      "pinyin": "Hǎo。",
+      "vi": "Được."
+    },
+    {
+      "start": 44.24,
+      "end": 45.62,
+      "en": "I'd like a window seat.",
+      "zh": "我想要靠窗户的座位。",
+      "pinyin": "Wǒ xiǎng yào kào chuāng hù de zuò wèi。",
+      "vi": "Tôi muốn một chỗ ngồi cạnh cửa sổ."
+    },
+    {
+      "start": 46.26,
+      "end": 46.78,
+      "en": "Sorry.",
+      "zh": "对不起。",
+      "pinyin": "Duì bù qǐ。",
+      "vi": "Xin lỗi."
+    },
+    {
+      "start": 47.36,
+      "end": 48.7,
+      "en": "There are only aisle seats left.",
+      "zh": "只有靠过道的座位了。",
+      "pinyin": "Zhǐ yǒu kào guò dào de zuò wèi le。",
+      "vi": "Chỉ còn chỗ ngồi cạnh lối đi thôi."
+    },
+    {
+      "start": 49.28,
+      "end": 49.68,
+      "en": "Really?",
+      "zh": "是吗？",
+      "pinyin": "Shì ma？",
+      "vi": "Vậy à?"
+    },
+    {
+      "start": 52.48,
+      "end": 54.62,
+      "en": "Please give me a seat near the front.",
+      "zh": "请给我一个靠前面的座位。",
+      "pinyin": "Qǐng gěi wǒ yí gè kào qián miàn de zuò wèi。",
+      "vi": "Vui lòng cho tôi một chỗ ngồi gần phía trước."
+    },
+    {
+      "start": 55.38,
+      "end": 55.73,
+      "en": "Okay.",
+      "zh": "好。",
+      "pinyin": "Hǎo。",
+      "vi": "Được."
+    },
+    {
+      "start": 61.8,
+      "end": 63.38,
+      "en": "Here are your passport and boarding pass.",
+      "zh": "这是您的护照和登机牌。",
+      "pinyin": "Zhè shì nín de hù zhào hé dēng jī pái。",
+      "vi": "Đây là hộ chiếu và thẻ lên máy bay của bạn."
+    },
+    {
+      "start": 64.74,
+      "end": 65.09,
+      "en": "Thank you.",
+      "zh": "谢谢。",
+      "pinyin": "Xiè xiè。",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 71.28,
+      "end": 73.38,
+      "en": "Hello, I'd like to rent a house.",
+      "zh": "你好，我想租房子。",
+      "pinyin": "Nǐ hǎo， wǒ xiǎng zū fáng zi。",
+      "vi": "Xin chào, tôi muốn thuê nhà."
+    },
+    {
+      "start": 73.96,
+      "end": 75.84,
+      "en": "What kind of place are you looking to rent?",
+      "zh": "你想租什么条件的？",
+      "pinyin": "Nǐ xiǎng zū shén me tiáo jiàn de？",
+      "vi": "Bạn muốn thuê với điều kiện gì?"
+    },
+    {
+      "start": 76.44,
+      "end": 79.36,
+      "en": "I'd like to find a place close to the university.",
+      "zh": "我想找一个离大学近点的房子。",
+      "pinyin": "Wǒ xiǎng zhǎo yí gè lí dà xué jìn diǎn de fáng zi。",
+      "vi": "Tôi muốn tìm một căn nhà gần trường đại học."
+    },
+    {
+      "start": 84.08,
+      "end": 95.28,
+      "en": "What do you think of this house? The size is okay. Is transportation convenient? It's very convenient—it only takes 15 minutes to get to your university.",
+      "zh": "你看这个房子怎么样？大小还行。交通方便吗？交通很方便，到你们大学只要分钟。",
+      "pinyin": "Nǐ kàn zhè ge fáng zi zěn me yàng？ dà xiǎo hái xíng。 jiāo tōng fāng biàn ma？ jiāo tōng hěn fāng biàn， dào nǐ men dà xué zhǐ yào fēn zhōng。",
+      "vi": "Bạn thấy căn nhà này thế nào? Diện tích cũng được. Giao thông có tiện không? Rất tiện, đến trường đại học của bạn chỉ mất 15 phút."
+    },
+    {
+      "start": 95.94,
+      "end": 98.68,
+      "en": "How much is the rent for one month?",
+      "zh": "一个月的租金要多少钱？",
+      "pinyin": "Yí gè yuè de zū jīn yào duō shǎo qián？",
+      "vi": "Tiền thuê một tháng là bao nhiêu?"
+    },
+    {
+      "start": 99.96,
+      "end": 102.5,
+      "en": "This house costs 1000 a month.",
+      "zh": "这个房子一个月要。",
+      "pinyin": "Zhè ge fáng zi yí gè yuè yào。",
+      "vi": "Căn nhà này một tháng giá 1000 tệ."
+    },
+    {
+      "start": 104.1,
+      "end": 106.36,
+      "en": "Excuse me, how much is a single room per day?",
+      "zh": "请问单人间一天多少钱？",
+      "pinyin": "Qǐng wèn dān rén jiān yì tiān duō shǎo qián？",
+      "vi": "Cho hỏi phòng đơn một ngày bao nhiêu tiền?"
+    },
+    {
+      "start": 106.86,
+      "end": 108.9,
+      "en": "A standard room is 620 yuan per day.",
+      "zh": "标准间一天元",
+      "pinyin": "Biāo zhǔn jiān yì tiān yuán",
+      "vi": "Phòng tiêu chuẩn một ngày 620 tệ."
+    },
+    {
+      "start": 110.94,
+      "end": 112.34,
+      "en": "Is there a cheaper room?",
+      "zh": "有便宜点的房间吗",
+      "pinyin": "Yǒu pián yi diǎn de fáng jiān ma",
+      "vi": "Có phòng rẻ hơn không?"
+    },
+    {
+      "start": 112.94,
+      "end": 113.78,
+      "en": "Sorry, we don't have one.",
+      "zh": "对不起，没有",
+      "pinyin": "Duì bù qǐ， méi yǒu",
+      "vi": "Xin lỗi, không có."
+    },
+    {
+      "start": 114.76,
+      "end": 116.26,
+      "en": "Really? It's a bit expensive.",
+      "zh": "是吗？稍微贵了一点",
+      "pinyin": "Shì ma？ shāo wēi guì le yì diǎn",
+      "vi": "Vậy à? Hơi đắt một chút."
+    },
+    {
+      "start": 116.64,
+      "end": 118.5,
+      "en": "If you stay two or more days, you can get 20% off.",
+      "zh": "住两天以上可以打八折",
+      "pinyin": "Zhù liǎng tiān yǐ shàng kě yǐ dǎ bā zhé",
+      "vi": "Ở từ hai ngày trở lên có thể được giảm 20%."
+    },
+    {
+      "start": 119.46,
+      "end": 120.58,
+      "en": "Does it include breakfast?",
+      "zh": "包括早饭吗？",
+      "pinyin": "Bāo kuò zǎo fàn ma？",
+      "vi": "Có bao gồm bữa sáng không?"
+    },
+    {
+      "start": 120.76,
+      "end": 121.11,
+      "en": "Yes, it does.",
+      "zh": "包括",
+      "pinyin": "Bāo kuò",
+      "vi": "Bao gồm."
+    },
+    {
+      "start": 122.08,
+      "end": 122.94,
+      "en": "I'd like to check in.",
+      "zh": "我要办理入住",
+      "pinyin": "Wǒ yào bàn lǐ rù zhù",
+      "vi": "Tôi muốn làm thủ tục nhận phòng."
+    },
+    {
+      "start": 123.56,
+      "end": 125.16,
+      "en": "Do you have a reservation?",
+      "zh": "请问您有预订吗？",
+      "pinyin": "Qǐng wèn nín yǒu yù dìng ma？",
+      "vi": "Xin hỏi anh/chị đã đặt phòng trước chưa?"
+    },
+    {
+      "start": 125.44,
+      "end": 128.2,
+      "en": "Yes, the reservation is under Yamamoto Shota.",
+      "zh": "有，预订的名字是山本祥大",
+      "pinyin": "Yǒu， yù dìng de míng zì shì shān běn xiáng dà",
+      "vi": "Có, tên đặt phòng là Yamamoto Shota."
+    },
+    {
+      "start": 128.72,
+      "end": 130.96,
+      "en": "The time is from August 15th to the 17th.",
+      "zh": "时间是月号到号",
+      "pinyin": "Shí jiān shì yuè hào dào hào",
+      "vi": "Thời gian là từ ngày 15 đến ngày 17 tháng 8."
+    },
+    {
+      "start": 135.88,
+      "end": 136.4,
+      "en": "Okay.",
+      "zh": "好的",
+      "pinyin": "Hǎo de",
+      "vi": "Được ạ."
+    },
+    {
+      "start": 136.64,
+      "end": 138.48,
+      "en": "Staying three nights costs 450 yuan.",
+      "zh": "入住三晚需要元",
+      "pinyin": "Rù zhù sān wǎn xū yào yuán",
+      "vi": "Ở ba đêm cần 450 tệ."
+    },
+    {
+      "start": 138.98,
+      "end": 140.66,
+      "en": "In addition, you need to pay a 200 yuan deposit.",
+      "zh": "另外需要支付元押金",
+      "pinyin": "Lìng wài xū yào zhī fù yuán yā jīn",
+      "vi": "Ngoài ra cần thanh toán 200 tệ tiền đặt cọc."
+    },
+    {
+      "start": 140.74,
+      "end": 142.06,
+      "en": "The total is 650 yuan.",
+      "zh": "一共是元",
+      "pinyin": "Yí gòng shì yuán",
+      "vi": "Tổng cộng là 650 tệ."
+    },
+    {
+      "start": 142.88,
+      "end": 143.7,
+      "en": "Can I pay by card?",
+      "zh": "可以刷卡吗",
+      "pinyin": "Kě yǐ shuā kǎ ma",
+      "vi": "Có thể quẹt thẻ không?"
+    },
+    {
+      "start": 143.8,
+      "end": 144.3,
+      "en": "Yes, you can.",
+      "zh": "可以",
+      "pinyin": "Kě yǐ",
+      "vi": "Được."
+    },
+    {
+      "start": 157.84,
+      "end": 160.08,
+      "en": "Please sign here to confirm.",
+      "zh": "请您在这里签字确认",
+      "pinyin": "Qǐng nín zài zhè lǐ qiān zì què rèn",
+      "vi": "Xin anh/chị ký xác nhận tại đây."
+    },
+    {
+      "start": 171,
+      "end": 172.16,
+      "en": "Your room is 311.",
+      "zh": "您的房间是",
+      "pinyin": "Nín de fáng jiān shì",
+      "vi": "Phòng của anh/chị là 311."
+    },
+    {
+      "start": 172.6,
+      "end": 173.38,
+      "en": "This is your room key card.",
+      "zh": "这是您的房卡",
+      "pinyin": "Zhè shì nín de fáng kǎ",
+      "vi": "Đây là thẻ phòng của anh/chị."
+    },
+    {
+      "start": 173.82,
+      "end": 174.17,
+      "en": "Please keep it safe.",
+      "zh": "请收好",
+      "pinyin": "Qǐng shōu hǎo",
+      "vi": "Xin hãy giữ cẩn thận."
+    },
+    {
+      "start": 174.62,
+      "end": 174.97,
+      "en": "Thank you.",
+      "zh": "谢谢",
+      "pinyin": "Xiè xiè",
+      "vi": "Cảm ơn."
+    }
+  ]
+}

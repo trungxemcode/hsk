@@ -1,0 +1,133 @@
+{
+  "id": "_hlwzk-YsLw",
+  "youtubeId": "_hlwzk-YsLw",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Gợi ý cho tôi một địa điểm du lịch",
+  "titleVi": "Gợi ý cho tôi một địa điểm du lịch",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 112,
+  "cues": [
+    {
+      "start": 0.56,
+      "end": 3.48,
+      "en": "Please recommend a travel destination for me",
+      "zh": "对话练习中：请给我推荐一个旅游的地方",
+      "pinyin": "Duì huà liàn xí zhōng： qǐng gěi wǒ tuī jiàn yí gè lǚ yóu de dì fāng",
+      "vi": "Hãy gợi ý cho tôi một địa điểm du lịch"
+    },
+    {
+      "start": 31.36,
+      "end": 37.16,
+      "en": "Fragrant Hills, what a nice name! Is it because that mountain is very fragrant?",
+      "zh": "香山，这个名字可真好听，是因为那座山很香吗？",
+      "pinyin": "Xiāng shān， zhè ge míng zì kě zhēn hǎo tīng， shì yīn wèi nà zuò shān hěn xiāng ma？",
+      "vi": "Hương Sơn, cái tên này nghe hay thật, có phải vì ngọn núi đó rất thơm không?"
+    },
+    {
+      "start": 43.66,
+      "end": 48.98,
+      "en": "In autumn, Fragrant Hills is especially beautiful, with leaves and plants of all colors.",
+      "zh": "秋天的香山，风景特别美，有各种颜色的树叶、植物",
+      "pinyin": "Qiū tiān de xiāng shān， fēng jǐng tè bié měi， yǒu gè zhǒng yán sè de shù yè、 zhí wù",
+      "vi": "Hương Sơn vào mùa thu phong cảnh rất đẹp, có lá cây và thực vật đủ màu sắc."
+    },
+    {
+      "start": 51.04,
+      "end": 53.5,
+      "en": "Sounds very interesting, I want to go see it.",
+      "zh": "听起来很有意思，我想去看看",
+      "pinyin": "Tīng qǐ lái hěn yǒu yì sī， wǒ xiǎng qù kàn kàn",
+      "vi": "Nghe có vẻ thú vị đấy, tôi muốn đi xem thử."
+    },
+    {
+      "start": 55.7,
+      "end": 62.08,
+      "en": "Besides, Beijing isn't far from us; we can just take the high-speed rail there. It's very convenient.",
+      "zh": "而且北京离我们这里也不远，直接坐高铁过去就可以，很方便",
+      "pinyin": "Ér qiě běi jīng lí wǒ men zhè lǐ yě bù yuǎn， zhí jiē zuò gāo tiě guò qù jiù kě yǐ， hěn fāng biàn",
+      "vi": "Hơn nữa Bắc Kinh cũng không xa chỗ chúng ta, ngồi tàu cao tốc đến đó là được, rất tiện."
+    },
+    {
+      "start": 64.08,
+      "end": 67.78,
+      "en": "Great, then I'll go to Fragrant Hills. Thank you, Xiaomei.",
+      "zh": "真好，那我就去香山，谢谢你，小美",
+      "pinyin": "Zhēn hǎo， nà wǒ jiù qù xiāng shān， xiè xiè nǐ， xiǎo měi",
+      "vi": "Tuyệt quá, vậy tôi sẽ đi Hương Sơn. Cảm ơn cậu nhé, Tiểu Mỹ."
+    },
+    {
+      "start": 67.82,
+      "end": 72.16,
+      "en": "You're welcome. Have fun!",
+      "zh": "不客气，祝你玩得开心",
+      "pinyin": "Bú kè qì， zhù nǐ wán dé kāi xīn",
+      "vi": "Không có gì, chúc cậu chơi vui vẻ."
+    },
+    {
+      "start": 79.4,
+      "end": 79.75,
+      "en": "recommend",
+      "zh": "推荐",
+      "pinyin": "Tuī jiàn",
+      "vi": "gợi ý; đề xuất"
+    },
+    {
+      "start": 82.44,
+      "end": 83.52,
+      "en": "tourist place; travel destination",
+      "zh": "旅游的地方",
+      "pinyin": "Lǚ yóu de dì fāng",
+      "vi": "nơi du lịch; địa điểm du lịch"
+    },
+    {
+      "start": 86.18,
+      "end": 87.02,
+      "en": "National Day",
+      "zh": "国庆节",
+      "pinyin": "Guó qìng jié",
+      "vi": "ngày Quốc khánh"
+    },
+    {
+      "start": 89.64,
+      "end": 90.08,
+      "en": "fragrant",
+      "zh": "香",
+      "pinyin": "Xiāng",
+      "vi": "thơm"
+    },
+    {
+      "start": 92.6,
+      "end": 93.72,
+      "en": "various colors",
+      "zh": "各种颜色",
+      "pinyin": "Gè zhǒng yán sè",
+      "vi": "đủ màu sắc; nhiều màu sắc khác nhau"
+    },
+    {
+      "start": 96.38,
+      "end": 97.82,
+      "en": "leaves, plants",
+      "zh": "树叶、植物",
+      "pinyin": "Shù yè、 zhí wù",
+      "vi": "lá cây, thực vật"
+    },
+    {
+      "start": 100.42,
+      "end": 101.02,
+      "en": "high-speed rail",
+      "zh": "高铁",
+      "pinyin": "Gāo tiě",
+      "vi": "tàu cao tốc"
+    },
+    {
+      "start": 104.1,
+      "end": 104.45,
+      "en": "Fragrant Hills",
+      "zh": "香山",
+      "pinyin": "Xiāng shān",
+      "vi": "Hương Sơn"
+    }
+  ]
+}

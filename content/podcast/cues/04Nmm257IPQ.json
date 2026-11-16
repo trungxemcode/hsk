@@ -1,0 +1,181 @@
+{
+  "id": "04Nmm257IPQ",
+  "youtubeId": "04Nmm257IPQ",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Mua vé tàu hoả",
+  "titleVi": "Mua vé tàu hoả",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 110,
+  "cues": [
+    {
+      "start": 4.56,
+      "end": 7.76,
+      "en": "Wang Gang, I need to ask your advice about something.",
+      "zh": "王刚，有个事情需要请教你。",
+      "pinyin": "Wáng gāng， yǒu gè shì qíng xū yào qǐng jiào nǐ。",
+      "vi": "Vương Cương, có một việc tôi cần hỏi anh."
+    },
+    {
+      "start": 12.86,
+      "end": 18,
+      "en": "The company needs me to go on a business trip to Shanghai, but I don't know how to buy train tickets.",
+      "zh": "公司需要出差去上海，可是我不知道怎么买火车票。",
+      "pinyin": "Gōng sī xū yào chū chāi qù shàng hǎi， kě shì wǒ bù zhī dào zěn me mǎi huǒ chē piào。",
+      "vi": "Công ty cần cử tôi đi công tác Thượng Hải, nhưng tôi không biết mua vé tàu hoả thế nào."
+    },
+    {
+      "start": 18.94,
+      "end": 21.66,
+      "en": "I haven't taken a train in China yet.",
+      "zh": "在中国我还没有坐过火车。",
+      "pinyin": "Zài zhōng guó wǒ hái méi yǒu zuò guò huǒ chē。",
+      "vi": "Ở Trung Quốc, tôi chưa từng đi tàu hoả."
+    },
+    {
+      "start": 23.82,
+      "end": 27.22,
+      "en": "No problem, it's very simple.",
+      "zh": "没问题，很简单。",
+      "pinyin": "Méi wèn tí， hěn jiǎn dān。",
+      "vi": "Không sao, rất đơn giản."
+    },
+    {
+      "start": 27.22,
+      "end": 32.5,
+      "en": "To buy a train ticket, you can just go to the train station and tell the ticket clerk where you want to go and at what time.",
+      "zh": "买火车票，你可以直接去火车站，告诉售票员你去哪里、哪个时间段就可以了。",
+      "pinyin": "Mǎi huǒ chē piào， nǐ kě yǐ zhí jiē qù huǒ chē zhàn， gào sù shòu piào yuán nǐ qù nǎ lǐ、 nǎ gè shí jiān duàn jiù kě yǐ le。",
+      "vi": "Mua vé tàu thì bạn có thể đến thẳng ga tàu, báo cho nhân viên bán vé biết bạn đi đâu và vào khoảng thời gian nào là được."
+    },
+    {
+      "start": 35.24,
+      "end": 41.7,
+      "en": "Is there also an online way to buy tickets? Life in China is so convenient now?",
+      "zh": "是不是还有网上购买的方式？在中国生活，现在这么方便？",
+      "pinyin": "Shì bu shì hái yǒu wǎng shàng gòu mǎi de fāng shì？ zài zhōng guó shēng huó， xiàn zài zhè me fāng biàn？",
+      "vi": "Còn có cách mua qua mạng nữa không? Ở Trung Quốc bây giờ tiện vậy sao?"
+    },
+    {
+      "start": 44.26,
+      "end": 52.94,
+      "en": "Yes. You can download China Railway 12306, register first, and then follow the prompts to buy a ticket for a suitable time and place.",
+      "zh": "是的，你可以下载中国铁路，先注册，然后根据提示购买合适时间、地点的车票就可以了。",
+      "pinyin": "Shì de， nǐ kě yǐ xià zài zhōng guó tiě lù， xiān zhù cè， rán hòu gēn jù tí shì gòu mǎi hé shì shí jiān、 dì diǎn de chē piào jiù kě yǐ le。",
+      "vi": "Đúng. Bạn có thể tải ứng dụng China Railway 12306 của Đường sắt Trung Quốc, đăng ký trước, rồi làm theo hướng dẫn để mua vé phù hợp về thời gian và địa điểm là được."
+    },
+    {
+      "start": 53.68,
+      "end": 54.68,
+      "en": "Very convenient.",
+      "zh": "特别方便。",
+      "pinyin": "Tè bié fāng biàn。",
+      "vi": "Rất tiện lợi."
+    },
+    {
+      "start": 56.48,
+      "end": 58.56,
+      "en": "Thank you, I'll give it a try.",
+      "zh": "谢谢，我去试一试。",
+      "pinyin": "Xiè xiè， wǒ qù shì yi shì。",
+      "vi": "Cảm ơn anh, tôi sẽ thử."
+    },
+    {
+      "start": 62.4,
+      "end": 65.78,
+      "en": "to ask for advice; to consult",
+      "zh": "请教",
+      "pinyin": "Qǐng jiào",
+      "vi": "hỏi han, xin chỉ giáo"
+    },
+    {
+      "start": 68.62,
+      "end": 69.12,
+      "en": "to go on a business trip",
+      "zh": "出差",
+      "pinyin": "Chū chāi",
+      "vi": "đi công tác"
+    },
+    {
+      "start": 71.9,
+      "end": 72.62,
+      "en": "train ticket",
+      "zh": "火车票",
+      "pinyin": "Huǒ chē piào",
+      "vi": "vé tàu hoả"
+    },
+    {
+      "start": 75.34,
+      "end": 75.96,
+      "en": "simple",
+      "zh": "简单",
+      "pinyin": "Jiǎn dān",
+      "vi": "đơn giản"
+    },
+    {
+      "start": 78.4,
+      "end": 79.14,
+      "en": "direct",
+      "zh": "直接",
+      "pinyin": "Zhí jiē",
+      "vi": "trực tiếp"
+    },
+    {
+      "start": 82,
+      "end": 82.74,
+      "en": "ticket clerk",
+      "zh": "售票员",
+      "pinyin": "Shòu piào yuán",
+      "vi": "nhân viên bán vé"
+    },
+    {
+      "start": 84.98,
+      "end": 85.6,
+      "en": "way; method",
+      "zh": "方式",
+      "pinyin": "Fāng shì",
+      "vi": "cách thức; phương thức"
+    },
+    {
+      "start": 88.2,
+      "end": 88.78,
+      "en": "online",
+      "zh": "网上",
+      "pinyin": "Wǎng shàng",
+      "vi": "trên mạng; trực tuyến"
+    },
+    {
+      "start": 91.38,
+      "end": 91.86,
+      "en": "convenient",
+      "zh": "方便",
+      "pinyin": "Fāng biàn",
+      "vi": "tiện lợi; thuận tiện"
+    },
+    {
+      "start": 94.9,
+      "end": 95.25,
+      "en": "railway",
+      "zh": "铁路",
+      "pinyin": "Tiě lù",
+      "vi": "đường sắt"
+    },
+    {
+      "start": 98.06,
+      "end": 98.54,
+      "en": "to download",
+      "zh": "下载",
+      "pinyin": "Xià zài",
+      "vi": "tải xuống"
+    },
+    {
+      "start": 101.32,
+      "end": 101.76,
+      "en": "prompt; hint; tip",
+      "zh": "提示",
+      "pinyin": "Tí shì",
+      "vi": "gợi ý; hướng dẫn"
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "id": "gLBAP2TDtgQ",
+  "youtubeId": "gLBAP2TDtgQ",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Giúp tôi chỉnh sửa Powerpoint",
+  "titleVi": "Giúp tôi chỉnh sửa PowerPoint",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 125,
+  "cues": [
+    {
+      "start": 0.76,
+      "end": 3.64,
+      "en": "Can you help me check the PPT?",
+      "zh": "帮我检查行吗？",
+      "pinyin": "Bāng wǒ jiǎn chá xíng ma？",
+      "vi": "Giúp tôi kiểm tra PPT được không?"
+    },
+    {
+      "start": 5.58,
+      "end": 7.68,
+      "en": "Xiao Wang, can you do me a favor?",
+      "zh": "小王，你能帮我个忙吗？",
+      "pinyin": "Xiǎo wáng， nǐ néng bāng wǒ gè máng ma？",
+      "vi": "Tiểu Vương, cậu có thể giúp tôi một việc được không?"
+    },
+    {
+      "start": 10.34,
+      "end": 14.14,
+      "en": "What is it? Let me see if I can help you.",
+      "zh": "什么忙？我看看自己能不能帮到你。",
+      "pinyin": "Shén me máng？ wǒ kàn kàn zì jǐ néng bu néng bāng dào nǐ。",
+      "vi": "Việc gì? Để tôi xem mình có thể giúp được cậu không."
+    },
+    {
+      "start": 16.62,
+      "end": 19.64,
+      "en": "Do you know how to insert a video into the PPT?",
+      "zh": "你知道怎么在里插入视频吗？",
+      "pinyin": "Nǐ zhī dào zěn me zài lǐ chā rù shì pín ma？",
+      "vi": "Cậu có biết cách chèn video vào PPT không?"
+    },
+    {
+      "start": 22.02,
+      "end": 25.78,
+      "en": "I need it for next week's work report, but I don't know how.",
+      "zh": "下周的工作汇报需要用到，可是我不会。",
+      "pinyin": "Xià zhōu de gōng zuò huì bào xū yào yòng dào， kě shì wǒ bú huì。",
+      "vi": "Tuần sau tôi cần dùng đến trong buổi báo cáo công việc, nhưng tôi không biết làm."
+    },
+    {
+      "start": 28.5,
+      "end": 29.74,
+      "en": "Let me take a look.",
+      "zh": "让我来看看吧。",
+      "pinyin": "Ràng wǒ lái kàn kàn ba。",
+      "vi": "Để tôi xem nào."
+    },
+    {
+      "start": 30.44,
+      "end": 37.84,
+      "en": "First open the PPT; then here in the toolbar you can see the Insert button.",
+      "zh": "你先打开，然后可以在这里，就是工具栏，看到有插入按钮。",
+      "pinyin": "Nǐ xiān dǎ kāi， rán hòu kě yǐ zài zhè lǐ， jiù shì gōng jù lán， kàn dào yǒu chā rù àn niǔ。",
+      "vi": "Cậu mở PPT trước, rồi có thể thấy nút Chèn ở đây, trong thanh công cụ."
+    },
+    {
+      "start": 39.74,
+      "end": 44.92,
+      "en": "Next, click Insert Video or Audio, then click Insert.",
+      "zh": "接下来，你点击插入视频或者音频，点击插入就可以。",
+      "pinyin": "Jiē xià lái， nǐ diǎn jī chā rù shì pín huò zhě yīn pín， diǎn jī chā rù jiù kě yǐ。",
+      "vi": "Tiếp theo, cậu nhấn Chèn video hoặc âm thanh, rồi nhấn Chèn là được."
+    },
+    {
+      "start": 47,
+      "end": 54.04,
+      "en": "After that, on the left side of the toolbar, you can see the option to play the video on mouse click or play it immediately.",
+      "zh": "之后，在工具栏左边可以看到选择是单击鼠标时播放还是立刻播放视频。",
+      "pinyin": "Zhī hòu， zài gōng jù lán zuǒ biān kě yǐ kàn dào xuǎn zé shì dān jī shǔ biāo shí bō fàng hái shì lì kè bō fàng shì pín。",
+      "vi": "Sau đó, ở bên trái thanh công cụ có thể thấy tùy chọn phát video khi bấm chuột hay phát ngay lập tức."
+    },
+    {
+      "start": 55.96,
+      "end": 58.12,
+      "en": "Xiao Wang, you're really smart!",
+      "zh": "小王，你真是太聪明了！",
+      "pinyin": "Xiǎo wáng， nǐ zhēn shì tài cōng ming le！",
+      "vi": "Tiểu Vương, cậu thông minh thật đấy!"
+    },
+    {
+      "start": 58.12,
+      "end": 70.28,
+      "en": "Haha, not at all. You need to note that the video and PPT must be in the same folder, otherwise it won't play.",
+      "zh": "哈哈，没有没有，你要注意，需要把视频和放在同一个文件夹里，否则无法播放。",
+      "pinyin": "Hā hā， méi yǒu méi yǒu， nǐ yào zhù yì， xū yào bǎ shì pín hé fàng zài tóng yí gè wén jiàn jiá lǐ， fǒu zé wú fǎ bō fàng。",
+      "vi": "Ha ha, không có gì đâu. Cậu cần chú ý, phải để video và PPT trong cùng một thư mục, nếu không sẽ không phát được."
+    },
+    {
+      "start": 73.2,
+      "end": 78.14,
+      "en": "video",
+      "zh": "视频",
+      "pinyin": "Shì pín",
+      "vi": "video"
+    },
+    {
+      "start": 81.54,
+      "end": 82.24,
+      "en": "insert",
+      "zh": "插入",
+      "pinyin": "Chā rù",
+      "vi": "chèn"
+    },
+    {
+      "start": 85.6,
+      "end": 86.2,
+      "en": "report",
+      "zh": "汇报",
+      "pinyin": "Huì bào",
+      "vi": "báo cáo"
+    },
+    {
+      "start": 89.68,
+      "end": 90.36,
+      "en": "open",
+      "zh": "打开",
+      "pinyin": "Dǎ kāi",
+      "vi": "mở"
+    },
+    {
+      "start": 93.5,
+      "end": 94.52,
+      "en": "toolbar",
+      "zh": "工具栏",
+      "pinyin": "Gōng jù lán",
+      "vi": "thanh công cụ"
+    },
+    {
+      "start": 97.92,
+      "end": 98.6,
+      "en": "button",
+      "zh": "按钮",
+      "pinyin": "Àn niǔ",
+      "vi": "nút bấm"
+    },
+    {
+      "start": 101.9,
+      "end": 102.6,
+      "en": "click",
+      "zh": "点击",
+      "pinyin": "Diǎn jī",
+      "vi": "nhấp chuột"
+    },
+    {
+      "start": 106.14,
+      "end": 106.72,
+      "en": "audio",
+      "zh": "音频",
+      "pinyin": "Yīn pín",
+      "vi": "âm thanh"
+    },
+    {
+      "start": 110.18,
+      "end": 110.84,
+      "en": "play",
+      "zh": "播放",
+      "pinyin": "Bō fàng",
+      "vi": "phát"
+    },
+    {
+      "start": 114.16,
+      "end": 114.94,
+      "en": "folder",
+      "zh": "文件夹",
+      "pinyin": "Wén jiàn jiá",
+      "vi": "thư mục"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "id": "zO4AvZn0xkQ",
+  "youtubeId": "zO4AvZn0xkQ",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Hẹn gặp bác sĩ",
+  "titleVi": "Hẹn gặp bác sĩ",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 93,
+  "cues": [
+    {
+      "start": 0.84,
+      "end": 2.74,
+      "en": "Hello, I would like to make an appointment to see a doctor.",
+      "zh": "您好，我想预约见医生。",
+      "pinyin": "Nín hǎo， wǒ xiǎng yù yuē jiàn yī shēng。",
+      "vi": "Xin chào, tôi muốn đặt lịch gặp bác sĩ."
+    },
+    {
+      "start": 30.56,
+      "end": 32.82,
+      "en": "May I ask what time is convenient for you to come?",
+      "zh": "请问您什么时间方便过来？",
+      "pinyin": "Qǐng wèn nín shén me shí jiān fāng biàn guò lái？",
+      "vi": "Xin hỏi anh/chị tiện đến lúc nào?"
+    },
+    {
+      "start": 34.36,
+      "end": 36.2,
+      "en": "Is 10 a.m. on Saturday okay?",
+      "zh": "周六上午十点可以吗？",
+      "pinyin": "Zhōu liù shàng wǔ shí diǎn kě yǐ ma？",
+      "vi": "Thứ Bảy lúc mười giờ sáng được không ạ?"
+    },
+    {
+      "start": 38.06,
+      "end": 40.64,
+      "en": "Just a moment, let me check the patient's appointment record.",
+      "zh": "稍等，我来看一下病人的预约记录。",
+      "pinyin": "Shāo děng， wǒ lái kàn yí xià bìng rén de yù yuē jì lù。",
+      "vi": "Xin chờ một chút, để tôi xem hồ sơ đặt lịch của bệnh nhân."
+    },
+    {
+      "start": 41.5,
+      "end": 44.5,
+      "en": "Thank you for waiting. Saturday at 10 a.m. is fine.",
+      "zh": "感谢您的等待，周六上午十点可以的。",
+      "pinyin": "Gǎn xiè nín de děng dài， zhōu liù shàng wǔ shí diǎn kě yǐ de。",
+      "vi": "Cảm ơn anh/chị đã chờ. Thứ Bảy lúc mười giờ sáng là được ạ."
+    },
+    {
+      "start": 45.14,
+      "end": 48.46,
+      "en": "Doctor Li, Director Zhang, and Doctor Wang will all be seeing patients.",
+      "zh": "李医生、张主任和王医生都会坐诊。",
+      "pinyin": "Lǐ yī shēng、 zhāng zhǔ rèn hé wáng yī shēng dōu huì zuò zhěn。",
+      "vi": "Bác sĩ Lý, trưởng khoa Trương và bác sĩ Vương đều sẽ khám bệnh."
+    },
+    {
+      "start": 50.24,
+      "end": 55.54,
+      "en": "Hmm, then I'll book Director Zhang. He was the one who examined me last time.",
+      "zh": "嗯，那我就预约张主任吧，上次也是他帮我检查的身体。",
+      "pinyin": "Ǹg， nà wǒ jiù yù yuē zhāng zhǔ rèn ba， shàng cì yě shì tā bāng wǒ jiǎn chá de shēn tǐ。",
+      "vi": "Vâng, vậy tôi đặt lịch với trưởng khoa Trương, lần trước cũng là anh ấy khám cho tôi."
+    },
+    {
+      "start": 55.56,
+      "end": 60.6,
+      "en": "Okay, Mr. Zhang, I'll reserve a time for you.",
+      "zh": "好的，张先生，我会帮您预留好时间。",
+      "pinyin": "Hǎo de， zhāng xiān shēng， wǒ huì bāng nín yù liú hǎo shí jiān。",
+      "vi": "Vâng, anh Trương, tôi sẽ giúp anh giữ một khoảng thời gian phù hợp."
+    },
+    {
+      "start": 63.02,
+      "end": 64.44,
+      "en": "online consultation registration",
+      "zh": "在线问诊挂号",
+      "pinyin": "Zài xiàn wèn zhěn guà hào",
+      "vi": "đăng ký khám trực tuyến"
+    },
+    {
+      "start": 65.8,
+      "end": 66.38,
+      "en": "appointment; to make an appointment",
+      "zh": "预约",
+      "pinyin": "Yù yuē",
+      "vi": "đặt lịch hẹn"
+    },
+    {
+      "start": 69.1,
+      "end": 69.72,
+      "en": "stomach and intestines; gastrointestinal",
+      "zh": "肠胃",
+      "pinyin": "Cháng wèi",
+      "vi": "dạ dày và ruột"
+    },
+    {
+      "start": 72.62,
+      "end": 73.68,
+      "en": "excessive dieting; losing too much weight",
+      "zh": "减肥过度",
+      "pinyin": "Jiǎn féi guò dù",
+      "vi": "giảm cân quá mức"
+    },
+    {
+      "start": 76.8,
+      "end": 77.46,
+      "en": "indeed; certainly",
+      "zh": "的确",
+      "pinyin": "Dí què",
+      "vi": "quả thật; đúng vậy"
+    },
+    {
+      "start": 80.28,
+      "end": 80.84,
+      "en": "worried; anxious",
+      "zh": "着急",
+      "pinyin": "Zháo jí",
+      "vi": "sốt ruột; lo lắng"
+    },
+    {
+      "start": 83.98,
+      "end": 84.33,
+      "en": "examination; to check",
+      "zh": "检查",
+      "pinyin": "Jiǎn chá",
+      "vi": "kiểm tra; khám"
+    }
+  ]
+}

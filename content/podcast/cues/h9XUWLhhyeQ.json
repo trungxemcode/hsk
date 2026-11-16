@@ -1,0 +1,181 @@
+{
+  "id": "h9XUWLhhyeQ",
+  "youtubeId": "h9XUWLhhyeQ",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Số này đọc thế nào ?",
+  "titleVi": "Số này đọc thế nào?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 115,
+  "cues": [
+    {
+      "start": 0.02,
+      "end": 8.16,
+      "en": "Teacher, how do you read this number?",
+      "zh": "老师,这个数字怎么说?",
+      "pinyin": "Lǎo shī, zhè ge shù zì zěn me shuō?",
+      "vi": "Thưa thầy/cô, số này đọc thế nào ạ?"
+    },
+    {
+      "start": 8.88,
+      "end": 11.92,
+      "en": "Let me see, wow, so many zeros!",
+      "zh": "我看看,哇,这么多零!",
+      "pinyin": "Wǒ kàn kàn, wā, zhè me duō líng!",
+      "vi": "Để tôi xem nào, ồ, nhiều số 0 thế!"
+    },
+    {
+      "start": 12.88,
+      "end": 15.92,
+      "en": "I know: ten, hundred, thousand, ten-thousand.",
+      "zh": "我知道,十百千万。",
+      "pinyin": "Wǒ zhī dào, shí bǎi qiān wàn。",
+      "vi": "Tôi biết: mười, trăm, nghìn, mười nghìn."
+    },
+    {
+      "start": 17.1,
+      "end": 21.6,
+      "en": "Right, then one hundred thousand, one million, ten million, one hundred million.",
+      "zh": "对,然后是十万百万千万亿。",
+      "pinyin": "Duì, rán hòu shì shí wàn bǎi wàn qiān wàn yì。",
+      "vi": "Đúng, rồi đến một trăm nghìn, một triệu, mười triệu, một trăm triệu."
+    },
+    {
+      "start": 22.1,
+      "end": 23.7,
+      "en": "Oh, so this is five hundred million.",
+      "zh": "哦,那这是五亿。",
+      "pinyin": "Ò, nà zhè shì wǔ yì。",
+      "vi": "Ồ, vậy đây là năm trăm triệu."
+    },
+    {
+      "start": 24.7,
+      "end": 25.64,
+      "en": "Right, very good.",
+      "zh": "对,很好。",
+      "pinyin": "Duì, hěn hǎo。",
+      "vi": "Đúng, rất tốt."
+    },
+    {
+      "start": 55.78,
+      "end": 56.14,
+      "en": "wow",
+      "zh": "哇",
+      "pinyin": "Wā",
+      "vi": "ồ"
+    },
+    {
+      "start": 59.4,
+      "end": 59.88,
+      "en": "so",
+      "zh": "这么",
+      "pinyin": "Zhè me",
+      "vi": "thế này"
+    },
+    {
+      "start": 63.04,
+      "end": 63.58,
+      "en": "many",
+      "zh": "多",
+      "pinyin": "Duō",
+      "vi": "nhiều"
+    },
+    {
+      "start": 66.48,
+      "end": 66.9,
+      "en": "zero",
+      "zh": "零",
+      "pinyin": "Líng",
+      "vi": "số không"
+    },
+    {
+      "start": 70,
+      "end": 70.66,
+      "en": "know",
+      "zh": "知道",
+      "pinyin": "Zhī dào",
+      "vi": "biết"
+    },
+    {
+      "start": 73.68,
+      "end": 74.18,
+      "en": "ten",
+      "zh": "十",
+      "pinyin": "Shí",
+      "vi": "mười"
+    },
+    {
+      "start": 77.38,
+      "end": 77.9,
+      "en": "hundred",
+      "zh": "百",
+      "pinyin": "Bǎi",
+      "vi": "trăm"
+    },
+    {
+      "start": 80.8,
+      "end": 81.4,
+      "en": "thousand",
+      "zh": "千",
+      "pinyin": "Qiān",
+      "vi": "nghìn"
+    },
+    {
+      "start": 84.54,
+      "end": 85.06,
+      "en": "ten thousand",
+      "zh": "万",
+      "pinyin": "Wàn",
+      "vi": "mười nghìn"
+    },
+    {
+      "start": 87.64,
+      "end": 88.72,
+      "en": "then",
+      "zh": "然后",
+      "pinyin": "Rán hòu",
+      "vi": "sau đó"
+    },
+    {
+      "start": 91.82,
+      "end": 92.8,
+      "en": "one hundred thousand",
+      "zh": "十万",
+      "pinyin": "Shí wàn",
+      "vi": "một trăm nghìn"
+    },
+    {
+      "start": 95.82,
+      "end": 96.82,
+      "en": "one million",
+      "zh": "百万",
+      "pinyin": "Bǎi wàn",
+      "vi": "một triệu"
+    },
+    {
+      "start": 99.52,
+      "end": 100.54,
+      "en": "ten million",
+      "zh": "千万",
+      "pinyin": "Qiān wàn",
+      "vi": "mười triệu"
+    },
+    {
+      "start": 104.12,
+      "end": 104.56,
+      "en": "hundred million",
+      "zh": "亿",
+      "pinyin": "Yì",
+      "vi": "trăm triệu"
+    },
+    {
+      "start": 107.6,
+      "end": 108.28,
+      "en": "five hundred million",
+      "zh": "五亿",
+      "pinyin": "Wǔ yì",
+      "vi": "năm trăm triệu"
+    }
+  ]
+}

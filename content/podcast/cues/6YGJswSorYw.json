@@ -1,0 +1,685 @@
+{
+  "id": "6YGJswSorYw",
+  "youtubeId": "6YGJswSorYw",
+  "channelHandle": "@PandaStudio24",
+  "title": "【HSK 1-3】简单的生活 - Cuộc sống giản đơn | Chinese Podcast",
+  "titleVi": "Cuộc sống giản đơn",
+  "topic": "Luyện nghe Panda Studio",
+  "level": "HSK 1+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 300,
+  "cues": [
+    {
+      "start": 7.52,
+      "end": 12.56,
+      "en": "I am an office worker working in Vietnam, and I am 30 years old this year.",
+      "zh": "我是一个在越南工作的办公室职员,今年岁。",
+      "pinyin": "Wǒ shì yí gè zài yuè nán gōng zuò de bàn gōng shì zhí yuán, jīn nián suì。",
+      "vi": "Tôi là nhân viên văn phòng làm việc tại Việt Nam, năm nay 30 tuổi."
+    },
+    {
+      "start": 13.92,
+      "end": 19.58,
+      "en": "My life is very ordinary, but every day has happy and sad things.",
+      "zh": "我的生活很普通,但每天都有开心和难过的事情。",
+      "pinyin": "Wǒ de shēng huó hěn pǔ tōng, dàn měi tiān dōu yǒu kāi xīn hé nán guò de shì qíng。",
+      "vi": "Cuộc sống của tôi rất bình thường, nhưng mỗi ngày đều có những chuyện vui và buồn."
+    },
+    {
+      "start": 21.8,
+      "end": 25.68,
+      "en": "At 6 in the morning, my alarm clock rang, and I got up.",
+      "zh": "早上6点,我的闹钟响了,我起来了。",
+      "pinyin": "Zǎo shàng 6 diǎn, wǒ de nào zhōng xiǎng le, wǒ qǐ lái le。",
+      "vi": "Sáu giờ sáng, đồng hồ báo thức của tôi reo, tôi thức dậy."
+    },
+    {
+      "start": 27.34,
+      "end": 28.74,
+      "en": "The sun outside is very nice.",
+      "zh": "外面阳光很好",
+      "pinyin": "Wài miàn yáng guāng hěn hǎo",
+      "vi": "Bên ngoài nắng rất đẹp."
+    },
+    {
+      "start": 28.78,
+      "end": 31.48,
+      "en": "The weather is neither cold nor hot.",
+      "zh": "天气不冷也不热",
+      "pinyin": "Tiān qì bù lěng yě bú rè",
+      "vi": "Thời tiết không lạnh cũng không nóng."
+    },
+    {
+      "start": 32.88,
+      "end": 34.44,
+      "en": "I had a simple breakfast.",
+      "zh": "我吃了简单的早餐",
+      "pinyin": "Wǒ chī le jiǎn dān de zǎo cān",
+      "vi": "Tôi ăn bữa sáng đơn giản."
+    },
+    {
+      "start": 35.26,
+      "end": 36.6,
+      "en": "There was bread and milk.",
+      "zh": "有面包和牛奶",
+      "pinyin": "Yǒu miàn bāo hé niú nǎi",
+      "vi": "Có bánh mì và sữa."
+    },
+    {
+      "start": 37.94,
+      "end": 38.46,
+      "en": "After eating",
+      "zh": "吃完",
+      "pinyin": "Chī wán",
+      "vi": "Ăn xong"
+    },
+    {
+      "start": 39.4,
+      "end": 40.34,
+      "en": "I changed my clothes.",
+      "zh": "我换好衣服",
+      "pinyin": "Wǒ huàn hǎo yī fu",
+      "vi": "Tôi thay quần áo xong."
+    },
+    {
+      "start": 40.84,
+      "end": 42.74,
+      "en": "Rode my motorbike to the company.",
+      "zh": "骑摩托车去公司",
+      "pinyin": "Qí mó tuō chē qù gōng sī",
+      "vi": "Đi xe máy đến công ty."
+    },
+    {
+      "start": 44.36,
+      "end": 46.34,
+      "en": "There were many cars and people on the road.",
+      "zh": "路上有很多车和人",
+      "pinyin": "Lù shang yǒu hěn duō chē hé rén",
+      "vi": "Trên đường có rất nhiều xe và người."
+    },
+    {
+      "start": 47.1,
+      "end": 47.92,
+      "en": "The traffic was busy.",
+      "zh": "交通很忙",
+      "pinyin": "Jiāo tōng hěn máng",
+      "vi": "Giao thông rất đông đúc."
+    },
+    {
+      "start": 48.9,
+      "end": 50.82,
+      "en": "You have to be careful when riding.",
+      "zh": "骑车的时候要小心",
+      "pinyin": "Qí chē de shí hòu yào xiǎo xīn",
+      "vi": "Khi đi xe phải cẩn thận."
+    },
+    {
+      "start": 51.78,
+      "end": 53.7,
+      "en": "Watch the traffic lights and pedestrians.",
+      "zh": "看红绿灯和路人",
+      "pinyin": "Kàn hóng lǜ dēng hé lù rén",
+      "vi": "Nhìn đèn giao thông và người đi đường."
+    },
+    {
+      "start": 53.74,
+      "end": 57.02,
+      "en": "I like watching the people on the street.",
+      "zh": "我喜欢看街上的人们",
+      "pinyin": "Wǒ xǐ huan kàn jiē shàng de rén men",
+      "vi": "Tôi thích nhìn những người trên phố."
+    },
+    {
+      "start": 57.7,
+      "end": 59.9,
+      "en": "They all work very hard.",
+      "zh": "他们都很努力工作",
+      "pinyin": "Tā men dōu hěn nǔ lì gōng zuò",
+      "vi": "Họ đều rất chăm chỉ làm việc."
+    },
+    {
+      "start": 61.54,
+      "end": 62.34,
+      "en": "Arrived at the company.",
+      "zh": "到了公司",
+      "pinyin": "Dào le gōng sī",
+      "vi": "Đến công ty."
+    },
+    {
+      "start": 63.46,
+      "end": 65.52,
+      "en": "Many colleagues had already started working.",
+      "zh": "很多同事已经开始工作",
+      "pinyin": "Hěn duō tóng shì yǐ jīng kāi shǐ gōng zuò",
+      "vi": "Nhiều đồng nghiệp đã bắt đầu làm việc."
+    },
+    {
+      "start": 66.62,
+      "end": 68.92,
+      "en": "In the office there are computers and documents.",
+      "zh": "办公室里有电脑和文件",
+      "pinyin": "Bàn gōng shì lǐ yǒu diàn nǎo hé wén jiàn",
+      "vi": "Trong văn phòng có máy tính và tài liệu."
+    },
+    {
+      "start": 70.22,
+      "end": 76.99,
+      "en": "Today I have an important meeting to introduce my work plan to everyone.",
+      "zh": "今天我有一个重要的会议要给大家介绍我的工作计划。",
+      "pinyin": "Jīn tiān wǒ yǒu yí gè zhòng yào de huì yì yào gěi dà jiā jiè shào wǒ de gōng zuò jì huà。",
+      "vi": "Hôm nay tôi có một cuộc họp quan trọng để giới thiệu kế hoạch làm việc của tôi với mọi người."
+    },
+    {
+      "start": 76.99,
+      "end": 83.57,
+      "en": "I was a little nervous, but my colleagues supported me and made me feel better.",
+      "zh": "我有点紧张,但是同事们支持我,让我感觉好一点。",
+      "pinyin": "Wǒ yǒu diǎn jǐn zhāng, dàn shì tóng shì men zhī chí wǒ, ràng wǒ gǎn jué hǎo yì diǎn。",
+      "vi": "Tôi hơi căng thẳng, nhưng các đồng nghiệp ủng hộ tôi, khiến tôi cảm thấy khá hơn."
+    },
+    {
+      "start": 85.45,
+      "end": 89.59,
+      "en": "The manager listened to my report and said, 'You did very well.'",
+      "zh": "领导听了我的报告,说你做得很好。",
+      "pinyin": "Lǐng dǎo tīng le wǒ de bào gào, shuō nǐ zuò dé hěn hǎo。",
+      "vi": "Sếp nghe báo cáo của tôi và nói rằng tôi làm rất tốt."
+    },
+    {
+      "start": 90.93,
+      "end": 92.27,
+      "en": "I was very happy to hear that.",
+      "zh": "我听了很高兴。",
+      "pinyin": "Wǒ tīng le hěn gāo xìng。",
+      "vi": "Tôi nghe vậy rất vui."
+    },
+    {
+      "start": 94.59,
+      "end": 96.07,
+      "en": "There are also problems at work.",
+      "zh": "工作中也有问题。",
+      "pinyin": "Gōng zuò zhōng yě yǒu wèn tí。",
+      "vi": "Trong công việc cũng có vấn đề."
+    },
+    {
+      "start": 97.11,
+      "end": 99.41,
+      "en": "In the afternoon, the computer broke down.",
+      "zh": "下午的时候电脑坏了",
+      "pinyin": "Xià wǔ de shí hòu diàn nǎo huài le",
+      "vi": "Buổi chiều, máy tính bị hỏng."
+    },
+    {
+      "start": 100.17,
+      "end": 101.23,
+      "en": "I couldn't open the file.",
+      "zh": "我打不开文件",
+      "pinyin": "Wǒ dǎ bù kāi wén jiàn",
+      "vi": "Tôi không mở được tài liệu."
+    },
+    {
+      "start": 102.07,
+      "end": 103.07,
+      "en": "I was very anxious.",
+      "zh": "我很着急",
+      "pinyin": "Wǒ hěn zháo jí",
+      "vi": "Tôi rất sốt ruột."
+    },
+    {
+      "start": 103.97,
+      "end": 105.47,
+      "en": "I asked a technician for help.",
+      "zh": "找了技术人员帮忙",
+      "pinyin": "Zhǎo le jì shù rén yuán bāng máng",
+      "vi": "Tôi nhờ nhân viên kỹ thuật giúp đỡ."
+    },
+    {
+      "start": 106.37,
+      "end": 108.75,
+      "en": "In the end, I fixed the computer.",
+      "zh": "最后我修好了电脑",
+      "pinyin": "Zuì hòu wǒ xiū hǎo le diàn nǎo",
+      "vi": "Cuối cùng tôi cũng sửa được máy tính."
+    },
+    {
+      "start": 109.55,
+      "end": 110.27,
+      "en": "Finished the work.",
+      "zh": "完成了工作",
+      "pinyin": "Wán chéng le gōng zuò",
+      "vi": "Hoàn thành công việc."
+    },
+    {
+      "start": 111.59,
+      "end": 112.35,
+      "en": "Although tired",
+      "zh": "虽然累",
+      "pinyin": "Suī rán lèi",
+      "vi": "Mặc dù mệt"
+    },
+    {
+      "start": 112.95,
+      "end": 116.11,
+      "en": "But I am very happy that I solved the problem myself.",
+      "zh": "但是我很开心自己解决了问题",
+      "pinyin": "Dàn shì wǒ hěn kāi xīn zì jǐ jiě jué le wèn tí",
+      "vi": "Nhưng tôi rất vui vì đã tự giải quyết được vấn đề."
+    },
+    {
+      "start": 118.11,
+      "end": 120.69,
+      "en": "At noon, my colleagues and I went out to eat.",
+      "zh": "中午我和同事去吃饭",
+      "pinyin": "Zhōng wǔ wǒ hé tóng shì qù chī fàn",
+      "vi": "Buổi trưa tôi và đồng nghiệp đi ăn cơm."
+    },
+    {
+      "start": 121.81,
+      "end": 124.39,
+      "en": "We ate Vietnamese beef noodle soup and spring rolls.",
+      "zh": "我们吃了越南的牛肉粉和春卷",
+      "pinyin": "Wǒ men chī le yuè nán de niú ròu fěn hé chūn juǎn",
+      "vi": "Chúng tôi ăn phở bò và nem rán của Việt Nam."
+    },
+    {
+      "start": 125.25,
+      "end": 126.21,
+      "en": "Everyone chatted.",
+      "zh": "大家聊天",
+      "pinyin": "Dà jiā liáo tiān",
+      "vi": "Mọi người trò chuyện."
+    },
+    {
+      "start": 127.19,
+      "end": 130.83,
+      "en": "I told them that my girlfriend and I had just started dating.",
+      "zh": "我告诉他们我和女朋友刚开始交往。",
+      "pinyin": "Wǒ gào sù tā men wǒ hé nǚ péng yǒu gāng kāi shǐ jiāo wǎng。",
+      "vi": "Tôi nói với họ rằng tôi và bạn gái mới bắt đầu hẹn hò."
+    },
+    {
+      "start": 132.47,
+      "end": 133.35,
+      "en": "She is very gentle.",
+      "zh": "她很温柔。",
+      "pinyin": "Tā hěn wēn róu。",
+      "vi": "Cô ấy rất dịu dàng."
+    },
+    {
+      "start": 134.23,
+      "end": 136.87,
+      "en": "We like to drink coffee and chat together.",
+      "zh": "我们喜欢一起喝咖啡和聊天。",
+      "pinyin": "Wǒ men xǐ huan yì qǐ hē kā fēi hé liáo tiān。",
+      "vi": "Chúng tôi thích cùng nhau uống cà phê và trò chuyện."
+    },
+    {
+      "start": 138.23,
+      "end": 139.53,
+      "en": "My colleagues smiled and said:",
+      "zh": "同事们笑着说：",
+      "pinyin": "Tóng shì men xiào zhe shuō：",
+      "vi": "Các đồng nghiệp cười nói:"
+    },
+    {
+      "start": 140.33,
+      "end": 141.21,
+      "en": "Wishing you both happiness.",
+      "zh": "祝你们幸福。",
+      "pinyin": "Zhù nǐ men xìng fú。",
+      "vi": "Chúc hai bạn hạnh phúc."
+    },
+    {
+      "start": 142.15,
+      "end": 143.19,
+      "en": "I smiled too.",
+      "zh": "我也笑了。",
+      "pinyin": "Wǒ yě xiào le。",
+      "vi": "Tôi cũng cười."
+    },
+    {
+      "start": 145.07,
+      "end": 150.86,
+      "en": "In the afternoon, just before getting off work, my girlfriend sent a message saying she wanted to see me today.",
+      "zh": "下午快下班时，女朋友发信息说：今天想见你。",
+      "pinyin": "Xià wǔ kuài xià bān shí， nǚ péng yǒu fā xìn xī shuō： jīn tiān xiǎng jiàn nǐ。",
+      "vi": "Chiều lúc sắp tan làm, bạn gái nhắn tin nói: Hôm nay muốn gặp anh."
+    },
+    {
+      "start": 150.86,
+      "end": 160.82,
+      "en": "I really wanted to see her, but I hadn't finished my work, so I could only say, wait until I get off work, I'll go find you.",
+      "zh": "我很想见她，但工作还没做完，只能说：等我下班，我去找你。",
+      "pinyin": "Wǒ hěn xiǎng jiàn tā， dàn gōng zuò hái méi zuò wán， zhǐ néng shuō： děng wǒ xià bān， wǒ qù zhǎo nǐ。",
+      "vi": "Tôi rất muốn gặp cô ấy, nhưng công việc vẫn chưa xong, nên chỉ có thể nói: đợi anh tan làm, anh sẽ đến tìm em."
+    },
+    {
+      "start": 162.44,
+      "end": 165.48,
+      "en": "She replied with a smiley face, and I felt warm inside.",
+      "zh": "她回了个笑脸，我心里很暖。",
+      "pinyin": "Tā huí le gè xiào liǎn， wǒ xīn lǐ hěn nuǎn。",
+      "vi": "Cô ấy nhắn lại một biểu tượng mặt cười, trong lòng tôi thấy ấm áp."
+    },
+    {
+      "start": 167.1,
+      "end": 171.86,
+      "en": "After work, I rode my bike to see her; she was waiting for me downstairs.",
+      "zh": "下班后，我骑车去见她，她在楼下等我。",
+      "pinyin": "Xià bān hòu， wǒ qí chē qù jiàn tā， tā zài lóu xià děng wǒ。",
+      "vi": "Tan làm xong, tôi đạp xe đến gặp cô ấy, cô ấy đợi tôi dưới lầu."
+    },
+    {
+      "start": 173.02,
+      "end": 174.76,
+      "en": "We went out for dinner together.",
+      "zh": "我们一起去吃晚饭。",
+      "pinyin": "Wǒ men yì qǐ qù chī wǎn fàn。",
+      "vi": "Chúng tôi cùng đi ăn tối."
+    },
+    {
+      "start": 175.82,
+      "end": 177.76,
+      "en": "There were lots of delicious Vietnamese dishes.",
+      "zh": "有很多好吃的越南菜。",
+      "pinyin": "Yǒu hěn duō hǎo chī de yuè nán cài。",
+      "vi": "Có rất nhiều món ăn Việt Nam ngon."
+    },
+    {
+      "start": 178.9,
+      "end": 179.6,
+      "en": "She asked me:",
+      "zh": "她问我：",
+      "pinyin": "Tā wèn wǒ：",
+      "vi": "Cô ấy hỏi tôi:"
+    },
+    {
+      "start": 180.46,
+      "end": 181.58,
+      "en": "Are you tired today?",
+      "zh": "你今天累吗？",
+      "pinyin": "Nǐ jīn tiān lèi ma？",
+      "vi": "Hôm nay anh có mệt không?"
+    },
+    {
+      "start": 182.76,
+      "end": 183.28,
+      "en": "I said:",
+      "zh": "我说：",
+      "pinyin": "Wǒ shuō：",
+      "vi": "Tôi nói:"
+    },
+    {
+      "start": 184.2,
+      "end": 184.66,
+      "en": "A little tired.",
+      "zh": "有点累。",
+      "pinyin": "Yǒu diǎn lèi。",
+      "vi": "Hơi mệt."
+    },
+    {
+      "start": 185.52,
+      "end": 187.16,
+      "en": "But seeing you makes me happy.",
+      "zh": "但是见到你就开心。",
+      "pinyin": "Dàn shì jiàn dào nǐ jiù kāi xīn。",
+      "vi": "Nhưng gặp được em là thấy vui."
+    },
+    {
+      "start": 188.48,
+      "end": 189.48,
+      "en": "She smiled and said:",
+      "zh": "她笑着说：",
+      "pinyin": "Tā xiào zhe shuō：",
+      "vi": "Cô ấy cười nói:"
+    },
+    {
+      "start": 190.64,
+      "end": 191.58,
+      "en": "Let's work hard together,",
+      "zh": "我们一起努力，",
+      "pinyin": "Wǒ men yì qǐ nǔ lì，",
+      "vi": "Chúng ta cùng cố gắng,"
+    },
+    {
+      "start": 192.22,
+      "end": 192.57,
+      "en": "Okay?",
+      "zh": "好吗？",
+      "pinyin": "Hǎo ma？",
+      "vi": "Được không?"
+    },
+    {
+      "start": 193.86,
+      "end": 194.32,
+      "en": "I nodded.",
+      "zh": "我点头。",
+      "pinyin": "Wǒ diǎn tóu。",
+      "vi": "Tôi gật đầu."
+    },
+    {
+      "start": 195.88,
+      "end": 196.86,
+      "en": "In the evening, I went home.",
+      "zh": "晚上回家。",
+      "pinyin": "Wǎn shàng huí jiā。",
+      "vi": "Tối tôi về nhà."
+    },
+    {
+      "start": 197.58,
+      "end": 199.04,
+      "en": "I prepared my work for the next day.",
+      "zh": "我准备明天的工作。",
+      "pinyin": "Wǒ zhǔn bèi míng tiān de gōng zuò。",
+      "vi": "Tôi chuẩn bị công việc cho ngày mai."
+    },
+    {
+      "start": 200.02,
+      "end": 200.7,
+      "en": "Although I was tired,",
+      "zh": "虽然累，",
+      "pinyin": "Suī rán lèi，",
+      "vi": "Dù mệt,"
+    },
+    {
+      "start": 200.74,
+      "end": 202.5,
+      "en": "But I was very happy.",
+      "zh": "但我很开心。",
+      "pinyin": "Dàn wǒ hěn kāi xīn。",
+      "vi": "Nhưng tôi rất vui."
+    },
+    {
+      "start": 203.72,
+      "end": 206.3,
+      "en": "Life has joy and difficulties.",
+      "zh": "生活有快乐也有困难。",
+      "pinyin": "Shēng huó yǒu kuài lè yě yǒu kùn nán。",
+      "vi": "Cuộc sống có niềm vui cũng có khó khăn."
+    },
+    {
+      "start": 207.34,
+      "end": 209.6,
+      "en": "There are loved ones and friends supporting me.",
+      "zh": "有爱的人和朋友支持。",
+      "pinyin": "Yǒu ài de rén hé péng yǒu zhī chí。",
+      "vi": "Có những người tôi yêu thương và bạn bè ủng hộ."
+    },
+    {
+      "start": 210.8,
+      "end": 211.74,
+      "en": "I feel very happy.",
+      "zh": "我觉得很幸福。",
+      "pinyin": "Wǒ jué de hěn xìng fú。",
+      "vi": "Tôi cảm thấy rất hạnh phúc."
+    },
+    {
+      "start": 213.34,
+      "end": 217.66,
+      "en": "I hope to live a better life with my girlfriend in the future,",
+      "zh": "我希望以后和女朋友一起过更好的生活，",
+      "pinyin": "Wǒ xī wàng yǐ hòu hé nǚ péng yǒu yì qǐ guò gèng hǎo de shēng huó，",
+      "vi": "Tôi hy vọng sau này sẽ cùng bạn gái có cuộc sống tốt đẹp hơn,"
+    },
+    {
+      "start": 218.64,
+      "end": 232.81,
+      "en": "I also hope my work gets better and better. Sometimes I also think about my childhood. At that time, my family was not well-off, and my parents worked hard every day.",
+      "zh": "也希望工作越来越好。有时候我也会想起小时候的生活，那时候家里不富裕，父母每天努力工作。",
+      "pinyin": "Yě xī wàng gōng zuò yuè lái yuè hǎo。 yǒu shí hòu wǒ yě huì xiǎng qǐ xiǎo shí hòu de shēng huó， nà shí hòu jiā lǐ bú fù yù， fù mǔ měi tiān nǔ lì gōng zuò。",
+      "vi": "Cũng hy vọng công việc ngày càng tốt hơn. Đôi khi tôi cũng nhớ về cuộc sống thời thơ ấu, lúc đó gia đình không khá giả, bố mẹ mỗi ngày đều làm việc chăm chỉ."
+    },
+    {
+      "start": 232.89,
+      "end": 234.97,
+      "en": "They gave me a good education.",
+      "zh": "给我很好的教育。",
+      "pinyin": "Gěi wǒ hěn hǎo de jiào yù。",
+      "vi": "Họ đã cho tôi một nền giáo dục tốt."
+    },
+    {
+      "start": 235.93,
+      "end": 237.31,
+      "en": "I am very grateful to them.",
+      "zh": "我很感谢他们。",
+      "pinyin": "Wǒ hěn gǎn xiè tā men。",
+      "vi": "Tôi rất biết ơn họ."
+    },
+    {
+      "start": 238.61,
+      "end": 241.47,
+      "en": "So now I also work very hard.",
+      "zh": "所以我现在也很努力工作。",
+      "pinyin": "Suǒ yǐ wǒ xiàn zài yě hěn nǔ lì gōng zuò。",
+      "vi": "Vì vậy bây giờ tôi cũng rất chăm chỉ làm việc."
+    },
+    {
+      "start": 241.53,
+      "end": 243.69,
+      "en": "I don't want to let them down.",
+      "zh": "不想让他们失望。",
+      "pinyin": "Bù xiǎng ràng tā men shī wàng。",
+      "vi": "Không muốn để họ thất vọng."
+    },
+    {
+      "start": 245.19,
+      "end": 247.05,
+      "en": "Although work is stressful.",
+      "zh": "工作虽然有压力。",
+      "pinyin": "Gōng zuò suī rán yǒu yā lì。",
+      "vi": "Dù công việc có áp lực."
+    },
+    {
+      "start": 248.59,
+      "end": 251.03,
+      "en": "This is for a better future",
+      "zh": "这是为了更好的未来",
+      "pinyin": "Zhè shì wèi le gèng hǎo de wèi lái",
+      "vi": "Đây là để có một tương lai tốt đẹp hơn"
+    },
+    {
+      "start": 252.77,
+      "end": 253.67,
+      "en": "On weekends",
+      "zh": "周末的时候",
+      "pinyin": "Zhōu mò de shí hòu",
+      "vi": "Vào cuối tuần"
+    },
+    {
+      "start": 254.61,
+      "end": 257.37,
+      "en": "I like to go for a walk in the park with my girlfriend",
+      "zh": "我喜欢和女朋友去公园散步",
+      "pinyin": "Wǒ xǐ huan hé nǚ péng yǒu qù gōng yuán sàn bù",
+      "vi": "Tôi thích đi dạo ở công viên với bạn gái"
+    },
+    {
+      "start": 257.45,
+      "end": 259.11,
+      "en": "Or watch movies",
+      "zh": "或者看电影",
+      "pinyin": "Huò zhě kàn diàn yǐng",
+      "vi": "Hoặc xem phim"
+    },
+    {
+      "start": 260.47,
+      "end": 262.37,
+      "en": "We also cook together",
+      "zh": "我们也会一起做饭",
+      "pinyin": "Wǒ men yě huì yì qǐ zuò fàn",
+      "vi": "Chúng tôi cũng nấu ăn cùng nhau"
+    },
+    {
+      "start": 263.49,
+      "end": 265.49,
+      "en": "Although my cooking skills are not very good",
+      "zh": "虽然我厨艺不太好",
+      "pinyin": "Suī rán wǒ chú yì bú tài hǎo",
+      "vi": "Mặc dù tài nấu ăn của tôi không giỏi lắm"
+    },
+    {
+      "start": 266.19,
+      "end": 268.01,
+      "en": "But she always encourages me",
+      "zh": "但她总是鼓励我",
+      "pinyin": "Dàn tā zǒng shì gǔ lì wǒ",
+      "vi": "Nhưng cô ấy luôn động viên tôi"
+    },
+    {
+      "start": 269.27,
+      "end": 270.19,
+      "en": "These little things",
+      "zh": "这些小事",
+      "pinyin": "Zhè xiē xiǎo shì",
+      "vi": "Những chuyện nhỏ này"
+    },
+    {
+      "start": 270.87,
+      "end": 272.85,
+      "en": "Make me feel that life is beautiful",
+      "zh": "让我觉得生活很美好",
+      "pinyin": "Ràng wǒ jué de shēng huó hěn měi hǎo",
+      "vi": "Làm tôi cảm thấy cuộc sống thật tươi đẹp"
+    },
+    {
+      "start": 273.87,
+      "end": 275.07,
+      "en": "Also give me strength",
+      "zh": "也让我有力量",
+      "pinyin": "Yě ràng wǒ yǒu lì liàng",
+      "vi": "Cũng cho tôi sức mạnh"
+    },
+    {
+      "start": 275.65,
+      "end": 277.05,
+      "en": "To face daily challenges",
+      "zh": "面对每天的挑战",
+      "pinyin": "Miàn duì měi tiān de tiǎo zhàn",
+      "vi": "Để đối mặt với những thử thách hằng ngày"
+    },
+    {
+      "start": 278.87,
+      "end": 280.83,
+      "en": "Thank you everyone for listening to my story",
+      "zh": "谢谢大家听我的故事",
+      "pinyin": "Xiè xiè dà jiā tīng wǒ de gù shì",
+      "vi": "Cảm ơn mọi người đã nghe câu chuyện của tôi"
+    },
+    {
+      "start": 281.85,
+      "end": 284.03,
+      "en": "I hope you are happy every day",
+      "zh": "希望你们每天都开心",
+      "pinyin": "Xī wàng nǐ men měi tiān dōu kāi xīn",
+      "vi": "Chúc các bạn mỗi ngày đều vui vẻ"
+    },
+    {
+      "start": 285.33,
+      "end": 286.83,
+      "en": "Life is getting better and better",
+      "zh": "生活越来越好",
+      "pinyin": "Shēng huó yuè lái yuè hǎo",
+      "vi": "Cuộc sống ngày càng tốt đẹp hơn"
+    }
+  ]
+}

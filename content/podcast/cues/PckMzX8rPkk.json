@@ -1,0 +1,157 @@
+{
+  "id": "PckMzX8rPkk",
+  "youtubeId": "PckMzX8rPkk",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Đây là đại lý du lịch Tân Tân",
+  "titleVi": "Đây là đại lý du lịch Tân Tân",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 102,
+  "cues": [
+    {
+      "start": 3.44,
+      "end": 10.24,
+      "en": "Good morning, this is Xin Xin Travel Agency. How can I help you?",
+      "zh": "早上好，这里是新新旅行社，有什么需要帮助的吗？",
+      "pinyin": "Zǎo shàng hǎo， zhè lǐ shì xīn xīn lǚ xíng shè， yǒu shén me xū yào bāng zhù de ma？",
+      "vi": "Chào buổi sáng, đây là đại lý du lịch Tân Tân, có gì cần giúp đỡ không ạ?"
+    },
+    {
+      "start": 12.64,
+      "end": 17.92,
+      "en": "Good morning, I'd like to know if you have any tour routes to Beijing.",
+      "zh": "早上好，我想知道你们有去北京的旅行线路吗？",
+      "pinyin": "Zǎo shàng hǎo， wǒ xiǎng zhī dào nǐ men yǒu qù běi jīng de lǚ xíng xiàn lù ma？",
+      "vi": "Chào buổi sáng, tôi muốn biết các bạn có tuyến du lịch đến Bắc Kinh không ạ?"
+    },
+    {
+      "start": 20.04,
+      "end": 22.26,
+      "en": "Of course, sir.",
+      "zh": "当然可以，先生。",
+      "pinyin": "Dāng rán kě yǐ， xiān shēng。",
+      "vi": "Tất nhiên là được, thưa ông."
+    },
+    {
+      "start": 24.86,
+      "end": 30.36,
+      "en": "We have a classic five-day route that includes not only Beijing but also Shanghai.",
+      "zh": "我们有一条经典的五天线路，不仅包括北京，还包括上海。",
+      "pinyin": "Wǒ men yǒu yì tiáo jīng diǎn de wǔ tiān xiàn lù， bù jǐn bāo kuò běi jīng， hái bāo kuò shàng hǎi。",
+      "vi": "Chúng tôi có một tuyến du lịch năm ngày kinh điển, không chỉ bao gồm Bắc Kinh mà còn bao gồm cả Thượng Hải."
+    },
+    {
+      "start": 33,
+      "end": 33.88,
+      "en": "How much is it?",
+      "zh": "多少钱？",
+      "pinyin": "Duō shǎo qián？",
+      "vi": "Bao nhiêu tiền?"
+    },
+    {
+      "start": 36.66,
+      "end": 40.44,
+      "en": "Two thousand yuan, including three meals a day and tour guide service.",
+      "zh": "两千元，包括每日三餐和导游服务。",
+      "pinyin": "Liǎng qiān yuán， bāo kuò měi rì sān cān hé dǎo yóu fú wù。",
+      "vi": "Hai nghìn tệ, bao gồm ba bữa ăn mỗi ngày và dịch vụ hướng dẫn viên du lịch."
+    },
+    {
+      "start": 42.74,
+      "end": 45.02,
+      "en": "Great, I'll book this one.",
+      "zh": "很好，我就订这个了。",
+      "pinyin": "Hěn hǎo， wǒ jiù dìng zhè ge le。",
+      "vi": "Rất tốt, tôi đặt chuyến này."
+    },
+    {
+      "start": 47.54,
+      "end": 50.18,
+      "en": "Okay, may I ask your name?",
+      "zh": "好的，请问您的名字是？",
+      "pinyin": "Hǎo de， qǐng wèn nín de míng zì shì？",
+      "vi": "Vâng, xin hỏi ông tên là gì ạ?"
+    },
+    {
+      "start": 52.52,
+      "end": 53.28,
+      "en": "Zhao Xiaofeng.",
+      "zh": "赵小峰。",
+      "pinyin": "Zhào xiǎo fēng。",
+      "vi": "Triệu Tiểu Phong."
+    },
+    {
+      "start": 55.98,
+      "end": 58.94,
+      "en": "Thank you, Mr. Zhao.",
+      "zh": "谢谢您，赵先生。",
+      "pinyin": "Xiè xiè nín， zhào xiān shēng。",
+      "vi": "Cảm ơn ông, ông Triệu."
+    },
+    {
+      "start": 58.94,
+      "end": 62.8,
+      "en": "Later, once we've arranged your itinerary, we'll give you a call.",
+      "zh": "晚些等我们把您的行程安排好后会给您打电话的。",
+      "pinyin": "Wǎn xiē děng wǒ men bǎ nín de xíng chéng ān pái hǎo hòu huì gěi nín dǎ diàn huà de。",
+      "vi": "Lát nữa, sau khi chúng tôi sắp xếp xong lịch trình cho ông, chúng tôi sẽ gọi điện cho ông."
+    },
+    {
+      "start": 66.1,
+      "end": 67.46,
+      "en": "May I ask, did you understand?",
+      "zh": "请问，搞明白了吗？",
+      "pinyin": "Qǐng wèn， gǎo míng bái le ma？",
+      "vi": "Xin hỏi, bạn đã hiểu chưa?"
+    },
+    {
+      "start": 70.24,
+      "end": 71.32,
+      "en": "front desk clerk",
+      "zh": "前台职员",
+      "pinyin": "Qián tái zhí yuán",
+      "vi": "nhân viên lễ tân"
+    },
+    {
+      "start": 74.32,
+      "end": 74.98,
+      "en": "guest",
+      "zh": "宾客",
+      "pinyin": "Bīn kè",
+      "vi": "khách"
+    },
+    {
+      "start": 78.32,
+      "end": 79.12,
+      "en": "travel agency",
+      "zh": "旅行社",
+      "pinyin": "Lǚ xíng shè",
+      "vi": "đại lý du lịch"
+    },
+    {
+      "start": 82.52,
+      "end": 83.58,
+      "en": "tour route",
+      "zh": "旅行线路",
+      "pinyin": "Lǚ xíng xiàn lù",
+      "vi": "tuyến du lịch"
+    },
+    {
+      "start": 86.66,
+      "end": 87.7,
+      "en": "tour guide service",
+      "zh": "导游服务",
+      "pinyin": "Dǎo yóu fú wù",
+      "vi": "dịch vụ hướng dẫn viên du lịch"
+    },
+    {
+      "start": 90.7,
+      "end": 91.28,
+      "en": "arrange; arrangement",
+      "zh": "安排",
+      "pinyin": "Ān pái",
+      "vi": "sắp xếp"
+    }
+  ]
+}

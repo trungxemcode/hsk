@@ -1,0 +1,93 @@
+{
+  "id": "v0WUfgeM32Y",
+  "youtubeId": "v0WUfgeM32Y",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Làm sao để học tốt tiếng Trung ?",
+  "titleVi": "Hội thoại ngắn tiếng Trung: Làm sao để học tốt tiếng Trung?",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 80,
+  "cues": [
+    {
+      "start": 30,
+      "end": 38.12,
+      "en": "How much time should I spend learning Chinese every day?",
+      "zh": "我每天应该花多长时间学习汉语",
+      "pinyin": "Wǒ měi tiān yīng gāi huā duō cháng shí jiān xué xí hàn yǔ",
+      "vi": "Mỗi ngày tôi nên dành bao nhiêu thời gian để học tiếng Trung?"
+    },
+    {
+      "start": 39.82,
+      "end": 42.22,
+      "en": "About one or two hours is best.",
+      "zh": "大约一两个小时是最好的",
+      "pinyin": "Dà yuē yì liǎng gè xiǎo shí shì zuì hǎo de",
+      "vi": "Khoảng một đến hai tiếng là tốt nhất."
+    },
+    {
+      "start": 45.42,
+      "end": 49.22,
+      "en": "Brave",
+      "zh": "勇敢",
+      "pinyin": "Yǒng gǎn",
+      "vi": "Dũng cảm"
+    },
+    {
+      "start": 52.1,
+      "end": 52.72,
+      "en": "Open your mouth",
+      "zh": "开口",
+      "pinyin": "Kāi kǒu",
+      "vi": "Mở miệng"
+    },
+    {
+      "start": 55.54,
+      "end": 56.34,
+      "en": "Speak Chinese",
+      "zh": "说汉语",
+      "pinyin": "Shuō hàn yǔ",
+      "vi": "Nói tiếng Trung"
+    },
+    {
+      "start": 59.08,
+      "end": 59.66,
+      "en": "Attentive",
+      "zh": "认真",
+      "pinyin": "Rèn zhēn",
+      "vi": "Chăm chú"
+    },
+    {
+      "start": 62.12,
+      "end": 62.72,
+      "en": "Listen to the lesson",
+      "zh": "听课",
+      "pinyin": "Tīng kè",
+      "vi": "Nghe giảng"
+    },
+    {
+      "start": 65.26,
+      "end": 65.8,
+      "en": "Don't understand",
+      "zh": "不懂",
+      "pinyin": "Bù dǒng",
+      "vi": "Không hiểu"
+    },
+    {
+      "start": 68.38,
+      "end": 69.02,
+      "en": "Word",
+      "zh": "单词",
+      "pinyin": "Dān cí",
+      "vi": "Từ"
+    },
+    {
+      "start": 71.62,
+      "end": 72.44,
+      "en": "Look up the dictionary",
+      "zh": "查词典",
+      "pinyin": "Chá cí diǎn",
+      "vi": "Tra từ điển"
+    }
+  ]
+}

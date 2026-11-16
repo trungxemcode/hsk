@@ -1,0 +1,301 @@
+{
+  "id": "MtmC3c5y1Ts",
+  "youtubeId": "MtmC3c5y1Ts",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe hội thoại TIẾNG TRUNG #5 : Chủ đề hỏi đường",
+  "titleVi": "Luyện nghe hội thoại tiếng Trung: Chủ đề hỏi đường",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 124,
+  "cues": [
+    {
+      "start": 1.04,
+      "end": 3.28,
+      "en": "Hello, is it far from here to the train station?",
+      "zh": "你好，这儿离火车站远吗？",
+      "pinyin": "Nǐ hǎo， zhè ér lí huǒ chē zhàn yuǎn ma？",
+      "vi": "Chào bạn, từ đây đến ga tàu hỏa có xa không?"
+    },
+    {
+      "start": 5.04,
+      "end": 7.42,
+      "en": "Is that so? Can I go there by bus?",
+      "zh": "是吗？可以坐公交车去吗？",
+      "pinyin": "Shì ma？ kě yǐ zuò gōng jiāo chē qù ma？",
+      "vi": "Vậy à? Có thể đi xe buýt đến đó không?"
+    },
+    {
+      "start": 7.66,
+      "end": 10.3,
+      "en": "It's more convenient to take the subway; the subway station is right ahead.",
+      "zh": "坐地铁去更方便，前面就是地铁站。",
+      "pinyin": "Zuò dì tiě qù gèng fāng biàn， qián miàn jiù shì dì tiě zhàn。",
+      "vi": "Đi tàu điện ngầm thì tiện hơn, phía trước chính là ga tàu điện ngầm."
+    },
+    {
+      "start": 15.22,
+      "end": 17.42,
+      "en": "Where do I board the high-speed train to Shanghai?",
+      "zh": "去上海的高铁在哪儿乘车？",
+      "pinyin": "Qù shàng hǎi de gāo tiě zài nǎ ér chéng chē？",
+      "vi": "Tàu cao tốc đi Thượng Hải lên tàu ở đâu?"
+    },
+    {
+      "start": 17.78,
+      "end": 19.34,
+      "en": "Board at Beijing South Railway Station.",
+      "zh": "在北京南站乘车。",
+      "pinyin": "Zài běi jīng nán zhàn chéng chē。",
+      "vi": "Đi tàu ở ga Bắc Kinh Nam."
+    },
+    {
+      "start": 20.28,
+      "end": 22.02,
+      "en": "Can I buy tickets in advance?",
+      "zh": "可以提前买车票吗？",
+      "pinyin": "Kě yǐ tí qián mǎi chē piào ma？",
+      "vi": "Có thể mua vé trước không?"
+    },
+    {
+      "start": 22.42,
+      "end": 24.92,
+      "en": "Of course, there's a ticket outlet near the university.",
+      "zh": "当然可以，大学附近就有代售点。",
+      "pinyin": "Dāng rán kě yǐ， dà xué fù jìn jiù yǒu dài shòu diǎn。",
+      "vi": "Tất nhiên là được, gần trường đại học có đại lý bán vé."
+    },
+    {
+      "start": 27.5,
+      "end": 29.66,
+      "en": "Excuse me, are there any restaurants near here?",
+      "zh": "请问，这附近有饭店吗？",
+      "pinyin": "Qǐng wèn， zhè fù jìn yǒu fàn diàn ma？",
+      "vi": "Xin hỏi, gần đây có nhà hàng không?"
+    },
+    {
+      "start": 30.2,
+      "end": 32.18,
+      "en": "Not far ahead, there is a Shanghai restaurant.",
+      "zh": "前面不远有一家上海饭店。",
+      "pinyin": "Qián miàn bù yuǎn yǒu yì jiā shàng hǎi fàn diàn。",
+      "vi": "Phía trước không xa có một nhà hàng Thượng Hải."
+    },
+    {
+      "start": 32.5,
+      "end": 34.16,
+      "en": "Is it on the left or right side of the road?",
+      "zh": "在马路左边还是右边？",
+      "pinyin": "Zài mǎ lù zuǒ biān hái shì yòu biān？",
+      "vi": "Ở bên trái hay bên phải đường?"
+    },
+    {
+      "start": 34.48,
+      "end": 35.1,
+      "en": "It's on the right side of the road.",
+      "zh": "在马路右边。",
+      "pinyin": "Zài mǎ lù yòu biān。",
+      "vi": "Ở bên phải đường."
+    },
+    {
+      "start": 38.34,
+      "end": 40.14,
+      "en": "Which subway line goes to Xidan?",
+      "zh": "去西单坐地铁几号线？",
+      "pinyin": "Qù xī dān zuò dì tiě jǐ hào xiàn？",
+      "vi": "Đi Tây Đơn thì đi tàu điện ngầm tuyến số mấy?"
+    },
+    {
+      "start": 40.52,
+      "end": 41.04,
+      "en": "Line 1.",
+      "zh": "一号线。",
+      "pinyin": "Yī hào xiàn。",
+      "vi": "Tuyến số 1."
+    },
+    {
+      "start": 42,
+      "end": 42.76,
+      "en": "Do I need to transfer?",
+      "zh": "要换车吗？",
+      "pinyin": "Yào huàn chē ma？",
+      "vi": "Có cần chuyển tuyến không?"
+    },
+    {
+      "start": 42.88,
+      "end": 43.5,
+      "en": "No.",
+      "zh": "不用。",
+      "pinyin": "Bú yòng。",
+      "vi": "Không cần."
+    },
+    {
+      "start": 43.96,
+      "end": 45.2,
+      "en": "The subway station is right ahead.",
+      "zh": "地铁站就在前面。",
+      "pinyin": "Dì tiě zhàn jiù zài qián miàn。",
+      "vi": "Ga tàu điện ngầm ngay ở phía trước."
+    },
+    {
+      "start": 48.16,
+      "end": 49.12,
+      "en": "Let me ask you something.",
+      "zh": "跟您打听一下。",
+      "pinyin": "Gēn nín dǎ tīng yí xià。",
+      "vi": "Cho tôi hỏi thăm một chút."
+    },
+    {
+      "start": 49.48,
+      "end": 50.58,
+      "en": "How do I get to Tiananmen?",
+      "zh": "去天安门怎么走？",
+      "pinyin": "Qù tiān ān mén zěn me zǒu？",
+      "vi": "Đến Thiên An Môn thì đi thế nào?"
+    },
+    {
+      "start": 51,
+      "end": 52.1,
+      "en": "You have to take transportation to get there.",
+      "zh": "你得坐车去。",
+      "pinyin": "Nǐ dé zuò chē qù。",
+      "vi": "Bạn phải đi xe đến đó."
+    },
+    {
+      "start": 52.9,
+      "end": 53.78,
+      "en": "What should I take?",
+      "zh": "坐什么车好？",
+      "pinyin": "Zuò shén me chē hǎo？",
+      "vi": "Nên đi xe gì?"
+    },
+    {
+      "start": 54.3,
+      "end": 55.32,
+      "en": "You can take the subway.",
+      "zh": "可以坐地铁。",
+      "pinyin": "Kě yǐ zuò dì tiě。",
+      "vi": "Có thể đi tàu điện ngầm."
+    },
+    {
+      "start": 57.24,
+      "end": 61.5,
+      "en": "Excuse me, I'm lost. Where are you going? I want to go back to the Beijing Hotel.",
+      "zh": "打扰一下，我迷路了。你要去哪里？我要回北京饭店。",
+      "pinyin": "Dǎ rǎo yí xià， wǒ mí lù le。 nǐ yào qù nǎ lǐ？ wǒ yào huí běi jīng fàn diàn。",
+      "vi": "Xin lỗi, tôi bị lạc đường. Bạn muốn đi đâu? Tôi muốn trở về Khách sạn Bắc Kinh."
+    },
+    {
+      "start": 61.5,
+      "end": 65.16,
+      "en": "You can take bus No. 103.",
+      "zh": "可以坐路公交车。",
+      "pinyin": "Kě yǐ zuò lù gōng jiāo chē。",
+      "vi": "Có thể đi xe buýt số 103."
+    },
+    {
+      "start": 65.16,
+      "end": 65.86,
+      "en": "Thank you!",
+      "zh": "谢谢！",
+      "pinyin": "Xiè xiè！",
+      "vi": "Cảm ơn!"
+    },
+    {
+      "start": 69.3,
+      "end": 73.62,
+      "en": "Lily, could you tell me about the transportation near Beijing Foreign Studies University?",
+      "zh": "莉莉，你给我介绍一下北外附近的交通，好吗？",
+      "pinyin": "Lì lì， nǐ gěi wǒ jiè shào yí xià běi wài fù jìn de jiāo tōng， hǎo ma？",
+      "vi": "Lily, bạn giới thiệu cho mình giao thông gần trường Đại học Ngoại ngữ Bắc Kinh được không?"
+    },
+    {
+      "start": 74.16,
+      "end": 79.38,
+      "en": "Okay, transportation around BFSU is very convenient. Many buses pass by BFSU.",
+      "zh": "好啊，北外交通非常方便，很多公交车经过北外。",
+      "pinyin": "Hǎo a， běi wài jiāo tōng fēi cháng fāng biàn， hěn duō gōng jiāo chē jīng guò běi wài。",
+      "vi": "Được thôi, giao thông ở Bắc Ngoại rất thuận tiện, rất nhiều xe buýt đi qua trường."
+    },
+    {
+      "start": 81.42,
+      "end": 83.52,
+      "en": "Where can I take the bus?",
+      "zh": "在哪里可以坐公交车呢？",
+      "pinyin": "Zài nǎ lǐ kě yǐ zuò gōng jiāo chē ne？",
+      "vi": "Ở đâu có thể bắt xe buýt?"
+    },
+    {
+      "start": 84.54,
+      "end": 86.74,
+      "en": "There's a bus stop right outside the main gate.",
+      "zh": "出了正门就有公交车站。",
+      "pinyin": "Chū le zhèng mén jiù yǒu gōng jiāo chē zhàn。",
+      "vi": "Ra khỏi cổng chính là có trạm xe buýt."
+    },
+    {
+      "start": 90.48,
+      "end": 93.4,
+      "en": "I want to go to the zoo. Can I get on there?",
+      "zh": "我要去动物园，就在那儿上车吗？",
+      "pinyin": "Wǒ yào qù dòng wù yuán， jiù zài nà ér shàng chē ma？",
+      "vi": "Tôi muốn đi sở thú, lên xe ở đó được không?"
+    },
+    {
+      "start": 94.26,
+      "end": 100.42,
+      "en": "To go to the zoo, you can get on at Weigongcun Dongkou Station, east of the university.",
+      "zh": "去动物园，你可以在大学东面的魏公村东口站上车。",
+      "pinyin": "Qù dòng wù yuán， nǐ kě yǐ zài dà xué dōng miàn de wèi gōng cūn dōng kǒu zhàn shàng chē。",
+      "vi": "Để đi sở thú, bạn có thể lên xe buýt ở trạm Vị Công Thôn Đông Khẩu phía đông trường đại học."
+    },
+    {
+      "start": 102.1,
+      "end": 105.44,
+      "en": "From the small east gate, it's Weigongcun, right?",
+      "zh": "从小东门出去就是魏公村吧？",
+      "pinyin": "Cóng xiǎo dōng mén chū qù jiù shì wèi gōng cūn ba？",
+      "vi": "Đi ra từ cửa đông nhỏ là đến Vị Công Thôn, đúng không?"
+    },
+    {
+      "start": 106.2,
+      "end": 111.62,
+      "en": "Right, walking east for less than ten minutes will get you to Zhongguancun South Street.",
+      "zh": "对，向东走不到十分钟就是中关村南大街。",
+      "pinyin": "Duì， xiàng dōng zǒu bú dào shí fēn zhōng jiù shì zhōng guān cūn nán dà jiē。",
+      "vi": "Đúng, đi về phía đông chưa tới mười phút là đến Trung Quan Thôn Nam Đại Nhai."
+    },
+    {
+      "start": 112.12,
+      "end": 113.92,
+      "en": "There are many buses there.",
+      "zh": "那里有很多公交车。",
+      "pinyin": "Nà lǐ yǒu hěn duō gōng jiāo chē。",
+      "vi": "Ở đó có rất nhiều xe buýt."
+    },
+    {
+      "start": 116.08,
+      "end": 118.92,
+      "en": "Is there a subway station near BFSU?",
+      "zh": "北外附近有地铁站吗？",
+      "pinyin": "Běi wài fù jìn yǒu dì tiě zhàn ma？",
+      "vi": "Gần Bắc Ngoại có ga tàu điện ngầm không?"
+    },
+    {
+      "start": 119.6,
+      "end": 119.95,
+      "en": "Yes, there is.",
+      "zh": "有。",
+      "pinyin": "Yǒu。",
+      "vi": "Có."
+    },
+    {
+      "start": 120.6,
+      "end": 123.28,
+      "en": "Subway Line 4 goes through Weigongcun.",
+      "zh": "地铁四号线就通过魏公村。",
+      "pinyin": "Dì tiě sì hào xiàn jiù tōng guò wèi gōng cūn。",
+      "vi": "Tàu điện ngầm tuyến số 4 chạy qua Vị Công Thôn."
+    }
+  ]
+}

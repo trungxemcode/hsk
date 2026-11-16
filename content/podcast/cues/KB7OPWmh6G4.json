@@ -1,0 +1,285 @@
+{
+  "id": "KB7OPWmh6G4",
+  "youtubeId": "KB7OPWmh6G4",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe hội thoại TIẾNG TRUNG #2 : Tuổi tác, thời gian, thời tiết",
+  "titleVi": "Tuổi Tác, Thời Gian, Thời Tiết",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 99,
+  "cues": [
+    {
+      "start": 0.92,
+      "end": 2.52,
+      "en": "Yamamoto, what's your Chinese zodiac sign?",
+      "zh": "山本，你是属什么的？",
+      "pinyin": "Shān běn， nǐ shì shǔ shén me de？",
+      "vi": "Yamamoto, bạn tuổi con gì?"
+    },
+    {
+      "start": 6.32,
+      "end": 8.12,
+      "en": "Then you're thirty this year, right?",
+      "zh": "那你今年三十岁了吧？",
+      "pinyin": "Nà nǐ jīn nián sān shí suì le ba？",
+      "vi": "Vậy năm nay bạn 30 tuổi rồi nhỉ?"
+    },
+    {
+      "start": 12.14,
+      "end": 15.04,
+      "en": "Because I was born in the Year of the Dragon, exactly five years younger than you.",
+      "zh": "因为我是属龙的，正好比你小五岁。",
+      "pinyin": "Yīn wèi wǒ shì shǔ lóng de， zhèng hǎo bǐ nǐ xiǎo wǔ suì。",
+      "vi": "Vì tôi tuổi con Rồng, nhỏ hơn bạn đúng 5 tuổi."
+    },
+    {
+      "start": 17.74,
+      "end": 18.98,
+      "en": "How old are you this year?",
+      "zh": "你今年多大了？",
+      "pinyin": "Nǐ jīn nián duō dà le？",
+      "vi": "Năm nay bạn bao nhiêu tuổi?"
+    },
+    {
+      "start": 19.42,
+      "end": 20.82,
+      "en": "I'm twenty-five this year.",
+      "zh": "我今年二十五了。",
+      "pinyin": "Wǒ jīn nián èr shí wǔ le。",
+      "vi": "Năm nay tôi 25 tuổi rồi."
+    },
+    {
+      "start": 22.18,
+      "end": 24.8,
+      "en": "You're five years younger than me, and I'm already thirty.",
+      "zh": "你比我小五岁，我都三十了。",
+      "pinyin": "Nǐ bǐ wǒ xiǎo wǔ suì， wǒ dōu sān shí le。",
+      "vi": "Bạn nhỏ hơn tôi 5 tuổi, tôi đã 30 rồi."
+    },
+    {
+      "start": 25.92,
+      "end": 26.98,
+      "en": "You really don't look it.",
+      "zh": "还真看不出来。",
+      "pinyin": "Hái zhēn kàn bù chū lái。",
+      "vi": "Trông bạn chẳng giống 30 tuổi đâu."
+    },
+    {
+      "start": 30.5,
+      "end": 31.9,
+      "en": "Li Dayu, what's your Chinese zodiac sign?",
+      "zh": "李大宇，你属什么？",
+      "pinyin": "Lǐ dà yǔ， nǐ shǔ shén me？",
+      "vi": "Lý Đại Vũ, bạn tuổi con gì?"
+    },
+    {
+      "start": 33.12,
+      "end": 35.12,
+      "en": "I was born in the Year of the Dragon, and I'm 25 this year.",
+      "zh": "我属龙，今年岁。",
+      "pinyin": "Wǒ shǔ lóng， jīn nián suì。",
+      "vi": "Tôi tuổi con Rồng, năm nay 25 tuổi."
+    },
+    {
+      "start": 35.9,
+      "end": 38,
+      "en": "What month and day is your birthday?",
+      "zh": "你的生日是几月几号？",
+      "pinyin": "Nǐ de shēng rì shì jǐ yuè jǐ hào？",
+      "vi": "Sinh nhật của bạn là ngày mấy tháng mấy?"
+    },
+    {
+      "start": 38.88,
+      "end": 41.12,
+      "en": "My birthday is July 18.",
+      "zh": "我的生日是月号。",
+      "pinyin": "Wǒ de shēng rì shì yuè hào。",
+      "vi": "Sinh nhật của tôi là ngày 18 tháng 7."
+    },
+    {
+      "start": 43.38,
+      "end": 46.86,
+      "en": "Li Dayu, what's the occasion today that makes you so happy?",
+      "zh": "李大宇，今天是什么日子这么高兴？",
+      "pinyin": "Lǐ dà yǔ， jīn tiān shì shén me rì zi zhè me gāo xìng？",
+      "vi": "Lý Đại Vũ, hôm nay là ngày gì mà bạn vui thế?"
+    },
+    {
+      "start": 47.78,
+      "end": 49.16,
+      "en": "Today is my birthday.",
+      "zh": "今天我过生日。",
+      "pinyin": "Jīn tiān wǒ guò shēng rì。",
+      "vi": "Hôm nay là sinh nhật của tôi."
+    },
+    {
+      "start": 49.74,
+      "end": 51.48,
+      "en": "Really? Happy birthday to you.",
+      "zh": "是吗？祝你生日快乐。",
+      "pinyin": "Shì ma？ zhù nǐ shēng rì kuài lè。",
+      "vi": "Thật à? Chúc mừng sinh nhật bạn."
+    },
+    {
+      "start": 51.98,
+      "end": 52.33,
+      "en": "Thank you.",
+      "zh": "谢谢。",
+      "pinyin": "Xiè xiè。",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 53.82,
+      "end": 54.86,
+      "en": "Happy birthday to you.",
+      "zh": "祝你生日快乐。",
+      "pinyin": "Zhù nǐ shēng rì kuài lè。",
+      "vi": "Chúc mừng sinh nhật bạn."
+    },
+    {
+      "start": 55.96,
+      "end": 58.5,
+      "en": "Thank you all. This is the gift we're giving you.",
+      "zh": "谢谢你们，这是我们送你的礼物。",
+      "pinyin": "Xiè xiè nǐ men， zhè shì wǒ men sòng nǐ de lǐ wù。",
+      "vi": "Cảm ơn các bạn, đây là món quà chúng tôi tặng bạn."
+    },
+    {
+      "start": 58.54,
+      "end": 61,
+      "en": "What a beautiful gift!",
+      "zh": "这么漂亮的礼物啊！",
+      "pinyin": "Zhè me piào liang de lǐ wù a！",
+      "vi": "Món quà đẹp quá!"
+    },
+    {
+      "start": 61.54,
+      "end": 62.48,
+      "en": "Thank you so much!",
+      "zh": "太谢谢了！",
+      "pinyin": "Tài xiè xiè le！",
+      "vi": "Cảm ơn nhiều lắm!"
+    },
+    {
+      "start": 63.38,
+      "end": 64.7,
+      "en": "Can I open it and take a look?",
+      "zh": "我可以打开来看吗？",
+      "pinyin": "Wǒ kě yǐ dǎ kāi lái kàn ma？",
+      "vi": "Tôi có thể mở ra xem được không?"
+    },
+    {
+      "start": 64.76,
+      "end": 65.22,
+      "en": "Sure.",
+      "zh": "可以。",
+      "pinyin": "Kě yǐ。",
+      "vi": "Được chứ."
+    },
+    {
+      "start": 68.5,
+      "end": 70.06,
+      "en": "It's really hot today!",
+      "zh": "今天真热啊！",
+      "pinyin": "Jīn tiān zhēn rè a！",
+      "vi": "Hôm nay nóng thật!"
+    },
+    {
+      "start": 70.22,
+      "end": 70.7,
+      "en": "Yeah.",
+      "zh": "是啊。",
+      "pinyin": "Shì a。",
+      "vi": "Ừ, đúng vậy."
+    },
+    {
+      "start": 71.14,
+      "end": 72.6,
+      "en": "I heard there will be thundershowers in the evening.",
+      "zh": "听说傍晚有雷阵雨。",
+      "pinyin": "Tīng shuō bàng wǎn yǒu léi zhèn yǔ。",
+      "vi": "Nghe nói lúc chiều tối có mưa giông."
+    },
+    {
+      "start": 73.12,
+      "end": 74.98,
+      "en": "Is summer in Osaka this hot too?",
+      "zh": "大阪的夏天也这么热吗？",
+      "pinyin": "Dà bǎn de xià tiān yě zhè me rè ma？",
+      "vi": "Mùa hè ở Osaka cũng nóng thế này à?"
+    },
+    {
+      "start": 75.4,
+      "end": 77.32,
+      "en": "Summer in Osaka is even hotter than in Beijing.",
+      "zh": "大阪夏天比北京还要热",
+      "pinyin": "Dà bǎn xià tiān bǐ běi jīng hái yào rè",
+      "vi": "Mùa hè ở Osaka còn nóng hơn Bắc Kinh."
+    },
+    {
+      "start": 77.38,
+      "end": 78.2,
+      "en": "Really?",
+      "zh": "是吗",
+      "pinyin": "Shì ma",
+      "vi": "Vậy à?"
+    },
+    {
+      "start": 78.8,
+      "end": 80.9,
+      "en": "I heard that typhoons often hit Japan in the summer.",
+      "zh": "听说日本的夏天常刮台风",
+      "pinyin": "Tīng shuō rì běn de xià tiān cháng guā tái fēng",
+      "vi": "Nghe nói mùa hè ở Nhật Bản hay có bão."
+    },
+    {
+      "start": 80.96,
+      "end": 81.46,
+      "en": "Right.",
+      "zh": "对",
+      "pinyin": "Duì",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 82.42,
+      "end": 84.7,
+      "en": "Every year, July and August are typhoon season.",
+      "zh": "每年的七八月份是台风的季节",
+      "pinyin": "Měi nián de qī bā yuè fèn shì tái fēng de jì jié",
+      "vi": "Hằng năm, tháng bảy tháng tám là mùa bão."
+    },
+    {
+      "start": 84.72,
+      "end": 88.6,
+      "en": "What will the weather be like tomorrow?",
+      "zh": "明天天气怎么样",
+      "pinyin": "Míng tiān tiān qì zěn me yàng",
+      "vi": "Ngày mai thời tiết thế nào?"
+    },
+    {
+      "start": 92.52,
+      "end": 93.8,
+      "en": "Tomorrow will be sunny.",
+      "zh": "明天是晴天",
+      "pinyin": "Míng tiān shì qíng tiān",
+      "vi": "Ngày mai trời nắng."
+    },
+    {
+      "start": 94.2,
+      "end": 94.94,
+      "en": "What about the temperature?",
+      "zh": "气温呢",
+      "pinyin": "Qì wēn ne",
+      "vi": "Còn nhiệt độ thì sao?"
+    },
+    {
+      "start": 95.74,
+      "end": 96.66,
+      "en": "A little higher than today.",
+      "zh": "比今天高一点",
+      "pinyin": "Bǐ jīn tiān gāo yì diǎn",
+      "vi": "Cao hơn hôm nay một chút."
+    }
+  ]
+}

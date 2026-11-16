@@ -1,0 +1,205 @@
+{
+  "id": "NwGjL5qDfhU",
+  "youtubeId": "NwGjL5qDfhU",
+  "channelHandle": "@PandaStudio24",
+  "title": "Hội thoại ngắn TIẾNG TRUNG : Đăng ký vào khám bệnh",
+  "titleVi": "Đăng ký khám bệnh",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 132,
+  "cues": [
+    {
+      "start": 0.76,
+      "end": 9.88,
+      "en": "Nurse: Good morning, which department do you need to register for?",
+      "zh": "护士：早上好，请问您需要挂哪个科室？",
+      "pinyin": "Hù shì： zǎo shàng hǎo， qǐng wèn nín xū yào guà nǎ gè kē shì？",
+      "vi": "Y tá: Chào buổi sáng, anh/chị cần đăng ký khám ở khoa nào ạ?"
+    },
+    {
+      "start": 16.48,
+      "end": 18.98,
+      "en": "Then where do you feel unwell?",
+      "zh": "那请问您哪里不舒服？",
+      "pinyin": "Nà qǐng wèn nín nǎ lǐ bù shū fú？",
+      "vi": "Vậy anh/chị thấy khó chịu ở đâu ạ?"
+    },
+    {
+      "start": 21.4,
+      "end": 24.84,
+      "en": "I have stomach pain, feel nauseous, and also want to vomit.",
+      "zh": "我胃疼，恶心，还想吐。",
+      "pinyin": "Wǒ wèi téng， ě xīn， hái xiǎng tǔ。",
+      "vi": "Tôi đau dạ dày, buồn nôn và còn muốn nôn nữa."
+    },
+    {
+      "start": 27.08,
+      "end": 29.7,
+      "en": "Then you'd better register for the gastroenterology department.",
+      "zh": "那您最好挂消化内科吧。",
+      "pinyin": "Nà nín zuì hǎo guà xiāo huà nèi kē ba。",
+      "vi": "Vậy anh/chị tốt nhất nên đăng ký khoa Tiêu hóa."
+    },
+    {
+      "start": 30.78,
+      "end": 32.56,
+      "en": "Have you been to our hospital before?",
+      "zh": "您以前来过我们医院吗？",
+      "pinyin": "Nín yǐ qián lái guò wǒ men yī yuàn ma？",
+      "vi": "Anh/chị từng đến bệnh viện chúng tôi trước đây chưa ạ?"
+    },
+    {
+      "start": 35.36,
+      "end": 35.71,
+      "en": "No.",
+      "zh": "没有。",
+      "pinyin": "Méi yǒu。",
+      "vi": "Chưa ạ."
+    },
+    {
+      "start": 38.28,
+      "end": 42.54,
+      "en": "Okay, please fill out this registration form first.",
+      "zh": "好的，那请您先填写这张挂号表。",
+      "pinyin": "Hǎo de， nà qǐng nín xiān tián xiě zhè zhāng guà hào biǎo。",
+      "vi": "Vâng, vậy anh/chị hãy điền trước vào phiếu đăng ký khám này."
+    },
+    {
+      "start": 43.5,
+      "end": 48.36,
+      "en": "We need your age, address, gender, and other information.",
+      "zh": "我们需要您的年龄、住址和性别等信息。",
+      "pinyin": "Wǒ men xū yào nín de nián líng、 zhù zhǐ hé xìng bié děng xìn xī。",
+      "vi": "Chúng tôi cần các thông tin như tuổi, địa chỉ và giới tính của anh/chị."
+    },
+    {
+      "start": 51.02,
+      "end": 52.94,
+      "en": "The form is filled out. Here you are.",
+      "zh": "表填好了，给你。",
+      "pinyin": "Biǎo tián hǎo le， gěi nǐ。",
+      "vi": "Tôi điền xong rồi, đây ạ."
+    },
+    {
+      "start": 55.64,
+      "end": 56,
+      "en": "Thank you.",
+      "zh": "谢谢。",
+      "pinyin": "Xiè xiè。",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 56.64,
+      "end": 60.16,
+      "en": "The registration fee for gastroenterology is 10 yuan.",
+      "zh": "消化内科的挂号费是元。",
+      "pinyin": "Xiāo huà nèi kē de guà hào fèi shì yuán。",
+      "vi": "Phí đăng ký khám khoa Tiêu hóa là 10 tệ."
+    },
+    {
+      "start": 62.72,
+      "end": 73.45,
+      "en": "Okay. Where is the gastroenterology department? Please take the elevator to the fifth floor and turn right.",
+      "zh": "好的，请问消化内科在哪里？请您坐电梯到五楼右拐。",
+      "pinyin": "Hǎo de， qǐng wèn xiāo huà nèi kē zài nǎ lǐ？ qǐng nín zuò diàn tī dào wǔ lóu yòu guǎi。",
+      "vi": "Vâng. Xin hỏi khoa Tiêu hóa ở đâu ạ? Anh/chị hãy đi thang máy lên tầng năm rồi rẽ phải."
+    },
+    {
+      "start": 74.11,
+      "end": 76.19,
+      "en": "You'll see a sign.",
+      "zh": "您会看到指示牌的。",
+      "pinyin": "Nín huì kàn dào zhǐ shì pái de。",
+      "vi": "Anh/chị sẽ nhìn thấy bảng chỉ dẫn."
+    },
+    {
+      "start": 78.77,
+      "end": 79.59,
+      "en": "Thanks a lot.",
+      "zh": "多谢了。",
+      "pinyin": "Duō xiè le。",
+      "vi": "Cảm ơn nhiều."
+    },
+    {
+      "start": 81.57,
+      "end": 82.37,
+      "en": "You're welcome.",
+      "zh": "不客气。",
+      "pinyin": "Bú kè qì。",
+      "vi": "Không có gì ạ."
+    },
+    {
+      "start": 85.87,
+      "end": 87.27,
+      "en": "The new words to learn in this lesson are:",
+      "zh": "本课需要学习的生词是：",
+      "pinyin": "Běn kè xū yào xué xí de shēng cí shì：",
+      "vi": "Các từ mới cần học trong bài này là:"
+    },
+    {
+      "start": 90.03,
+      "end": 90.67,
+      "en": "patient",
+      "zh": "病人",
+      "pinyin": "Bìng rén",
+      "vi": "bệnh nhân"
+    },
+    {
+      "start": 94.35,
+      "end": 94.91,
+      "en": "nurse",
+      "zh": "护士",
+      "pinyin": "Hù shì",
+      "vi": "y tá"
+    },
+    {
+      "start": 98.53,
+      "end": 99.15,
+      "en": "department",
+      "zh": "科室",
+      "pinyin": "Kē shì",
+      "vi": "khoa (bộ phận trong bệnh viện)"
+    },
+    {
+      "start": 102.75,
+      "end": 103.43,
+      "en": "stomach pain",
+      "zh": "胃疼",
+      "pinyin": "Wèi téng",
+      "vi": "đau dạ dày"
+    },
+    {
+      "start": 107.17,
+      "end": 107.87,
+      "en": "nausea",
+      "zh": "恶心",
+      "pinyin": "Ě xīn",
+      "vi": "buồn nôn"
+    },
+    {
+      "start": 111.47,
+      "end": 112.09,
+      "en": "digestion",
+      "zh": "消化",
+      "pinyin": "Xiāo huà",
+      "vi": "tiêu hóa"
+    },
+    {
+      "start": 115.79,
+      "end": 116.59,
+      "en": "registration form",
+      "zh": "挂号表",
+      "pinyin": "Guà hào biǎo",
+      "vi": "phiếu đăng ký khám bệnh"
+    },
+    {
+      "start": 120.35,
+      "end": 121.11,
+      "en": "registration fee",
+      "zh": "挂号费",
+      "pinyin": "Guà hào fèi",
+      "vi": "phí đăng ký khám bệnh"
+    }
+  ]
+}

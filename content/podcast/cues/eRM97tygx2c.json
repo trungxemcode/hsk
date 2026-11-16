@@ -1,0 +1,205 @@
+{
+  "id": "eRM97tygx2c",
+  "youtubeId": "eRM97tygx2c",
+  "channelHandle": "@PandaStudio24",
+  "title": "Giới thiệu về nơi sống bằng TIẾNG TRUNG - HSK 1",
+  "titleVi": "Giới thiệu về nơi sống",
+  "topic": "Luyện nghe Panda Studio",
+  "level": "HSK 1+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 214,
+  "cues": [
+    {
+      "start": 19.4,
+      "end": 22.9,
+      "en": "There is a park in front of my house.",
+      "zh": "我家的前边有一个公园",
+      "pinyin": "Wǒ jiā de qián biān yǒu yí gè gōng yuán",
+      "vi": "Trước nhà tôi có một công viên."
+    },
+    {
+      "start": 29.2,
+      "end": 33.24,
+      "en": "This park is very big and also very beautiful.",
+      "zh": "这个公园很大，也很漂亮。",
+      "pinyin": "Zhè ge gōng yuán hěn dà， yě hěn piào liang。",
+      "vi": "Công viên này rất rộng và cũng rất đẹp."
+    },
+    {
+      "start": 39.62,
+      "end": 45.16,
+      "en": "When the weather is nice, I like to take my dog there.",
+      "zh": "天气好的时候，我喜欢带我的狗去那里。",
+      "pinyin": "Tiān qì hǎo de shí hòu， wǒ xǐ huan dài wǒ de gǒu qù nà lǐ。",
+      "vi": "Khi thời tiết đẹp, tôi thích dẫn chú chó của tôi đến đó."
+    },
+    {
+      "start": 51.58,
+      "end": 54.84,
+      "en": "There is a mall behind my house.",
+      "zh": "我家的后边有一个商场。",
+      "pinyin": "Wǒ jiā de hòu biān yǒu yí gè shāng chǎng。",
+      "vi": "Sau nhà tôi có một trung tâm thương mại."
+    },
+    {
+      "start": 61.56,
+      "end": 66.42,
+      "en": "Inside the mall there are shops, restaurants, and a supermarket.",
+      "zh": "商场里边有商店、饭店和超市。",
+      "pinyin": "Shāng chǎng lǐ biān yǒu shāng diàn、 fàn diàn hé chāo shì。",
+      "vi": "Bên trong trung tâm thương mại có cửa hàng, nhà hàng và siêu thị."
+    },
+    {
+      "start": 72.88,
+      "end": 76.76,
+      "en": "Outside there is a coffee shop and a bookstore.",
+      "zh": "外边有咖啡店和书店。",
+      "pinyin": "Wài biān yǒu kā fēi diàn hé shū diàn。",
+      "vi": "Bên ngoài có quán cà phê và hiệu sách."
+    },
+    {
+      "start": 82.98,
+      "end": 87.74,
+      "en": "On weekends I often go there to buy things and have dinner.",
+      "zh": "周末我常常去那里买东西和吃晚饭。",
+      "pinyin": "Zhōu mò wǒ cháng cháng qù nà lǐ mǎi dōng xī hé chī wǎn fàn。",
+      "vi": "Cuối tuần tôi thường đến đó mua đồ và ăn tối."
+    },
+    {
+      "start": 97.24,
+      "end": 98.18,
+      "en": "front; in front",
+      "zh": "前边",
+      "pinyin": "Qián biān",
+      "vi": "phía trước"
+    },
+    {
+      "start": 100.7,
+      "end": 101.48,
+      "en": "front; in front",
+      "zh": "前边",
+      "pinyin": "Qián biān",
+      "vi": "phía trước"
+    },
+    {
+      "start": 105.12,
+      "end": 117.09,
+      "en": "behind, behind, inside",
+      "zh": "后边、后边、里边",
+      "pinyin": "Hòu biān、 hòu biān、 lǐ biān",
+      "vi": "phía sau, phía sau, bên trong"
+    },
+    {
+      "start": 120.63,
+      "end": 124.95,
+      "en": "outside",
+      "zh": "外边",
+      "pinyin": "Wài biān",
+      "vi": "phía ngoài"
+    },
+    {
+      "start": 128.53,
+      "end": 133.05,
+      "en": "shopping mall",
+      "zh": "商场",
+      "pinyin": "Shāng chǎng",
+      "vi": "trung tâm thương mại"
+    },
+    {
+      "start": 136.87,
+      "end": 141.25,
+      "en": "shop; store",
+      "zh": "商店",
+      "pinyin": "Shāng diàn",
+      "vi": "cửa hàng"
+    },
+    {
+      "start": 144.81,
+      "end": 149.77,
+      "en": "coffee shop",
+      "zh": "咖啡店",
+      "pinyin": "Kā fēi diàn",
+      "vi": "quán cà phê"
+    },
+    {
+      "start": 153.51,
+      "end": 154.31,
+      "en": "bookstore",
+      "zh": "书店",
+      "pinyin": "Shū diàn",
+      "vi": "hiệu sách"
+    },
+    {
+      "start": 156.95,
+      "end": 157.59,
+      "en": "bookstore",
+      "zh": "书店",
+      "pinyin": "Shū diàn",
+      "vi": "hiệu sách"
+    },
+    {
+      "start": 161.29,
+      "end": 169.29,
+      "en": "There is a park in front of my house.",
+      "zh": "我家的前边有一个公园",
+      "pinyin": "Wǒ jiā de qián biān yǒu yí gè gōng yuán",
+      "vi": "Trước nhà tôi có một công viên."
+    },
+    {
+      "start": 170.55,
+      "end": 173.59,
+      "en": "This park is very big and very beautiful.",
+      "zh": "这个公园很大也很漂亮。",
+      "pinyin": "Zhè ge gōng yuán hěn dà yě hěn piào liang。",
+      "vi": "Công viên này rất rộng và rất đẹp."
+    },
+    {
+      "start": 174.75,
+      "end": 176.39,
+      "en": "When the weather is good",
+      "zh": "天气好的时候",
+      "pinyin": "Tiān qì hǎo de shí hòu",
+      "vi": "Khi thời tiết đẹp"
+    },
+    {
+      "start": 177.33,
+      "end": 179.69,
+      "en": "I like to take my dog there.",
+      "zh": "我喜欢带我的狗去那里。",
+      "pinyin": "Wǒ xǐ huan dài wǒ de gǒu qù nà lǐ。",
+      "vi": "Tôi thích dẫn chú chó của tôi đến đó."
+    },
+    {
+      "start": 180.81,
+      "end": 183.87,
+      "en": "There is a mall behind my house.",
+      "zh": "我家的后边有一个商场。",
+      "pinyin": "Wǒ jiā de hòu biān yǒu yí gè shāng chǎng。",
+      "vi": "Sau nhà tôi có một trung tâm thương mại."
+    },
+    {
+      "start": 185.03,
+      "end": 189.43,
+      "en": "Inside the mall there are shops, restaurants, and a supermarket.",
+      "zh": "商场里边有商店、饭店和超市。",
+      "pinyin": "Shāng chǎng lǐ biān yǒu shāng diàn、 fàn diàn hé chāo shì。",
+      "vi": "Bên trong trung tâm thương mại có cửa hàng, nhà hàng và siêu thị."
+    },
+    {
+      "start": 190.21,
+      "end": 193.33,
+      "en": "Outside there is a coffee shop and a bookstore.",
+      "zh": "外边有咖啡店和书店。",
+      "pinyin": "Wài biān yǒu kā fēi diàn hé shū diàn。",
+      "vi": "Bên ngoài có quán cà phê và hiệu sách."
+    },
+    {
+      "start": 194.45,
+      "end": 199.03,
+      "en": "On weekends I often go there to buy things and have dinner.",
+      "zh": "周末我常常去那里买东西和吃晚饭。",
+      "pinyin": "Zhōu mò wǒ cháng cháng qù nà lǐ mǎi dōng xī hé chī wǎn fàn。",
+      "vi": "Cuối tuần tôi thường đến đó mua đồ và ăn tối."
+    }
+  ]
+}

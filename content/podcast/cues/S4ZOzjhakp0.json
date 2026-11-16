@@ -1,0 +1,245 @@
+{
+  "id": "S4ZOzjhakp0",
+  "youtubeId": "S4ZOzjhakp0",
+  "channelHandle": "@PandaStudio24",
+  "title": "Đoạn văn giới thiệu về gấu trúc bằng TIẾNG TRUNG - HSK 1",
+  "titleVi": "Đoạn văn giới thiệu về gấu trúc bằng tiếng Trung",
+  "topic": "Luyện nghe Panda Studio",
+  "level": "HSK 1+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 204,
+  "cues": [
+    {
+      "start": 13.86,
+      "end": 21.12,
+      "en": "My favorite animal is the panda",
+      "zh": "我最喜欢的动物是熊猫",
+      "pinyin": "Wǒ zuì xǐ huan de dòng wù shì xióng māo",
+      "vi": "Con vật tôi thích nhất là gấu trúc"
+    },
+    {
+      "start": 25.26,
+      "end": 26.48,
+      "en": "It is very smart",
+      "zh": "它非常聪明",
+      "pinyin": "Tā fēi cháng cōng ming",
+      "vi": "Nó rất thông minh"
+    },
+    {
+      "start": 30.94,
+      "end": 34.28,
+      "en": "It has two black eyes.",
+      "zh": "它有两只黑眼睛。",
+      "pinyin": "Tā yǒu liǎng zhī hēi yǎn jīng。",
+      "vi": "Nó có hai mắt đen."
+    },
+    {
+      "start": 37.4,
+      "end": 41.08,
+      "en": "It really likes to eat bamboo.",
+      "zh": "它非常喜欢吃竹子。",
+      "pinyin": "Tā fēi cháng xǐ huan chī zhú zi。",
+      "vi": "Nó rất thích ăn tre."
+    },
+    {
+      "start": 44.9,
+      "end": 50.24,
+      "en": "It is very fat, always sleeps, but it can climb trees.",
+      "zh": "它很胖，总是睡觉，但是它会爬树。",
+      "pinyin": "Tā hěn pàng， zǒng shì shuì jiào， dàn shì tā huì pá shù。",
+      "vi": "Nó rất mập, lúc nào cũng ngủ, nhưng nó biết trèo cây."
+    },
+    {
+      "start": 54.66,
+      "end": 56.38,
+      "en": "It is a treasure of China.",
+      "zh": "它是中国的瑰宝。",
+      "pinyin": "Tā shì zhōng guó de guī bǎo。",
+      "vi": "Nó là báu vật của Trung Quốc."
+    },
+    {
+      "start": 62.4,
+      "end": 66.86,
+      "en": "Do you like pandas?",
+      "zh": "你喜欢熊猫吗？",
+      "pinyin": "Nǐ xǐ huan xióng māo ma？",
+      "vi": "Bạn có thích gấu trúc không?"
+    },
+    {
+      "start": 70.92,
+      "end": 76.46,
+      "en": "animal",
+      "zh": "动物",
+      "pinyin": "Dòng wù",
+      "vi": "động vật"
+    },
+    {
+      "start": 81.08,
+      "end": 84.72,
+      "en": "panda",
+      "zh": "熊猫",
+      "pinyin": "Xióng māo",
+      "vi": "gấu trúc"
+    },
+    {
+      "start": 87.32,
+      "end": 90.74,
+      "en": "smart",
+      "zh": "聪明",
+      "pinyin": "Cōng ming",
+      "vi": "thông minh"
+    },
+    {
+      "start": 93.3,
+      "end": 105.35,
+      "en": "eyes, bamboo, fat",
+      "zh": "眼睛、竹子、胖",
+      "pinyin": "Yǎn jīng、 zhú zi、 pàng",
+      "vi": "mắt, tre, mập"
+    },
+    {
+      "start": 109.33,
+      "end": 112.97,
+      "en": "climb trees",
+      "zh": "爬树",
+      "pinyin": "Pá shù",
+      "vi": "trèo cây"
+    },
+    {
+      "start": 115.55,
+      "end": 116.47,
+      "en": "treasure",
+      "zh": "瑰宝",
+      "pinyin": "Guī bǎo",
+      "vi": "báu vật"
+    },
+    {
+      "start": 118.45,
+      "end": 119.03,
+      "en": "treasure",
+      "zh": "瑰宝",
+      "pinyin": "Guī bǎo",
+      "vi": "báu vật"
+    },
+    {
+      "start": 134.11,
+      "end": 134.91,
+      "en": "a bird",
+      "zh": "一只鸟",
+      "pinyin": "Yì zhī niǎo",
+      "vi": "một con chim"
+    },
+    {
+      "start": 136.89,
+      "end": 141.99,
+      "en": "a cat",
+      "zh": "一只猫",
+      "pinyin": "Yì zhī māo",
+      "vi": "một con mèo"
+    },
+    {
+      "start": 143.97,
+      "end": 144.63,
+      "en": "a cat",
+      "zh": "一只猫",
+      "pinyin": "Yì zhī māo",
+      "vi": "một con mèo"
+    },
+    {
+      "start": 148.13,
+      "end": 149.31,
+      "en": "two eyes",
+      "zh": "两只眼睛",
+      "pinyin": "Liǎng zhī yǎn jīng",
+      "vi": "hai mắt"
+    },
+    {
+      "start": 151.25,
+      "end": 156.55,
+      "en": "two ears",
+      "zh": "两只耳朵",
+      "pinyin": "Liǎng zhī ěr duo",
+      "vi": "hai tai"
+    },
+    {
+      "start": 158.59,
+      "end": 159.51,
+      "en": "two ears",
+      "zh": "两只耳朵",
+      "pinyin": "Liǎng zhī ěr duo",
+      "vi": "hai tai"
+    },
+    {
+      "start": 165.79,
+      "end": 173.09,
+      "en": "My favorite animal is the panda",
+      "zh": "我最喜欢的动物是熊猫",
+      "pinyin": "Wǒ zuì xǐ huan de dòng wù shì xióng māo",
+      "vi": "Con vật tôi thích nhất là gấu trúc"
+    },
+    {
+      "start": 173.87,
+      "end": 175.09,
+      "en": "It is very smart",
+      "zh": "它非常聪明",
+      "pinyin": "Tā fēi cháng cōng ming",
+      "vi": "Nó rất thông minh"
+    },
+    {
+      "start": 175.91,
+      "end": 177.81,
+      "en": "It has two black eyes",
+      "zh": "它有两只黑眼睛",
+      "pinyin": "Tā yǒu liǎng zhī hēi yǎn jīng",
+      "vi": "Nó có hai mắt đen"
+    },
+    {
+      "start": 178.57,
+      "end": 180.51,
+      "en": "It really likes to eat bamboo",
+      "zh": "它非常喜欢吃竹子",
+      "pinyin": "Tā fēi cháng xǐ huan chī zhú zi",
+      "vi": "Nó rất thích ăn tre"
+    },
+    {
+      "start": 181.31,
+      "end": 182.09,
+      "en": "It is very fat",
+      "zh": "它很胖",
+      "pinyin": "Tā hěn pàng",
+      "vi": "Nó rất mập"
+    },
+    {
+      "start": 182.75,
+      "end": 183.49,
+      "en": "always sleeps",
+      "zh": "总是睡觉",
+      "pinyin": "Zǒng shì shuì jiào",
+      "vi": "lúc nào cũng ngủ"
+    },
+    {
+      "start": 183.57,
+      "end": 185.27,
+      "en": "but it can climb trees",
+      "zh": "但是它会爬树",
+      "pinyin": "Dàn shì tā huì pá shù",
+      "vi": "nhưng nó biết trèo cây"
+    },
+    {
+      "start": 186.07,
+      "end": 187.65,
+      "en": "It is a treasure of China",
+      "zh": "它是中国的瑰宝",
+      "pinyin": "Tā shì zhōng guó de guī bǎo",
+      "vi": "Nó là báu vật của Trung Quốc"
+    },
+    {
+      "start": 188.51,
+      "end": 189.79,
+      "en": "Do you like pandas?",
+      "zh": "你喜欢熊猫吗？",
+      "pinyin": "Nǐ xǐ huan xióng māo ma？",
+      "vi": "Bạn có thích gấu trúc không?"
+    }
+  ]
+}

@@ -1,0 +1,285 @@
+{
+  "id": "O2fODSGMQgw",
+  "youtubeId": "O2fODSGMQgw",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe hội thoại TIẾNG TRUNG #7 : Chủ đề đi khám bệnh",
+  "titleVi": "Luyện nghe hội thoại tiếng Trung: Đi khám bệnh",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 145,
+  "cues": [
+    {
+      "start": 2.34,
+      "end": 5.46,
+      "en": "Doctor, I have a stomachache; it hurts badly.",
+      "zh": "大夫，我肚子疼，疼得厉害。",
+      "pinyin": "Dài fu， wǒ dù zǐ téng， téng dé lì hài。",
+      "vi": "Bác sĩ, tôi đau bụng, đau dữ dội."
+    },
+    {
+      "start": 6.18,
+      "end": 7.74,
+      "en": "When did it start?",
+      "zh": "从什么时候开始的？",
+      "pinyin": "Cóng shén me shí hòu kāi shǐ de？",
+      "vi": "Bắt đầu từ khi nào ạ?"
+    },
+    {
+      "start": 16.58,
+      "end": 18.62,
+      "en": "Okay, please get a lab test done.",
+      "zh": "好，请化验一下吧。",
+      "pinyin": "Hǎo， qǐng huà yàn yí xià ba。",
+      "vi": "Được rồi, bạn đi xét nghiệm một chút nhé."
+    },
+    {
+      "start": 25.82,
+      "end": 26.17,
+      "en": "Come in, please.",
+      "zh": "请进。",
+      "pinyin": "Qǐng jìn。",
+      "vi": "Mời vào."
+    },
+    {
+      "start": 27.96,
+      "end": 28.98,
+      "en": "Hello, please sit down.",
+      "zh": "你好，请坐。",
+      "pinyin": "Nǐ hǎo， qǐng zuò。",
+      "vi": "Xin chào, mời ngồi."
+    },
+    {
+      "start": 30.54,
+      "end": 31.56,
+      "en": "Where do you feel unwell?",
+      "zh": "你哪不舒服？",
+      "pinyin": "Nǐ nǎ bù shū fú？",
+      "vi": "Bạn thấy không khỏe ở chỗ nào?"
+    },
+    {
+      "start": 32,
+      "end": 35.46,
+      "en": "Doctor, I have a headache and my whole body feels weak.",
+      "zh": "大夫，我头疼，浑身没劲儿。",
+      "pinyin": "Dài fu， wǒ tóu téng， hún shēn méi jìn ér。",
+      "vi": "Bác sĩ, tôi đau đầu, toàn thân không có sức."
+    },
+    {
+      "start": 35.58,
+      "end": 36.28,
+      "en": "When did it start?",
+      "zh": "从什么时候开始？",
+      "pinyin": "Cóng shén me shí hòu kāi shǐ？",
+      "vi": "Bắt đầu từ khi nào?"
+    },
+    {
+      "start": 38.2,
+      "end": 38.66,
+      "en": "The night before last.",
+      "zh": "前天晚上。",
+      "pinyin": "Qián tiān wǎn shàng。",
+      "vi": "Đêm hôm kia."
+    },
+    {
+      "start": 40.8,
+      "end": 41.76,
+      "en": "Have you taken your temperature?",
+      "zh": "量体温了吗？",
+      "pinyin": "Liáng tǐ wēn le ma？",
+      "vi": "Bạn đã đo nhiệt độ chưa?"
+    },
+    {
+      "start": 42.24,
+      "end": 43.98,
+      "en": "Yes, it's 39 degrees.",
+      "zh": "量了，度。",
+      "pinyin": "Liáng le， dù。",
+      "vi": "Đo rồi, 39 độ."
+    },
+    {
+      "start": 45.02,
+      "end": 45.37,
+      "en": "Do you have a cough?",
+      "zh": "咳嗽吗？",
+      "pinyin": "Ké sou ma？",
+      "vi": "Có ho không?"
+    },
+    {
+      "start": 46.52,
+      "end": 48.08,
+      "en": "I have a slight cough; it's not bad.",
+      "zh": "有点咳嗽，不厉害。",
+      "pinyin": "Yǒu diǎn ké sou， bú lì hài。",
+      "vi": "Hơi ho một chút, không nặng."
+    },
+    {
+      "start": 49.76,
+      "end": 51.36,
+      "en": "Take off your clothes, let me have a listen.",
+      "zh": "解开衣服，我听一听。",
+      "pinyin": "Jiě kāi yī fu， wǒ tīng yi tīng。",
+      "vi": "Cởi áo ra, tôi nghe một chút."
+    },
+    {
+      "start": 74.3,
+      "end": 80.72,
+      "en": "Take a deep breath. Hello, please sit down.",
+      "zh": "大口吸气。你好，请坐。",
+      "pinyin": "Dà kǒu xī qì。 nǐ hǎo， qǐng zuò。",
+      "vi": "Hít vào một hơi sâu. Xin chào, mời ngồi."
+    },
+    {
+      "start": 83.92,
+      "end": 84.96,
+      "en": "Where do you feel unwell?",
+      "zh": "你哪不舒服？",
+      "pinyin": "Nǐ nǎ bù shū fú？",
+      "vi": "Bạn thấy không khỏe ở chỗ nào?"
+    },
+    {
+      "start": 85.26,
+      "end": 88.36,
+      "en": "Last night, I started having a headache and a runny nose.",
+      "zh": "我从昨天夜里开始头疼、流鼻涕。",
+      "pinyin": "Wǒ cóng zuó tiān yè lǐ kāi shǐ tóu téng、 liú bí tì。",
+      "vi": "Tôi bắt đầu đau đầu và chảy nước mũi từ đêm qua."
+    },
+    {
+      "start": 88.84,
+      "end": 90.82,
+      "en": "Did you take your temperature?",
+      "zh": "量体温了吗？",
+      "pinyin": "Liáng tǐ wēn le ma？",
+      "vi": "Bạn đã đo nhiệt độ chưa?"
+    },
+    {
+      "start": 95.6,
+      "end": 97.34,
+      "en": "Wow, it really is 38.5 degrees.",
+      "zh": "哇，真是三十八度五。",
+      "pinyin": "Wā， zhēn shì sān shí bā dù wǔ。",
+      "vi": "Ồ, đúng là 38,5 độ."
+    },
+    {
+      "start": 98.86,
+      "end": 99.42,
+      "en": "Do you have a cough?",
+      "zh": "咳嗽吗？",
+      "pinyin": "Ké sou ma？",
+      "vi": "Có ho không?"
+    },
+    {
+      "start": 99.9,
+      "end": 101.88,
+      "en": "I have a little cough; it's not bad.",
+      "zh": "有一点咳嗽，不厉害。",
+      "pinyin": "Yǒu yì diǎn ké sou， bú lì hài。",
+      "vi": "Có hơi ho một chút, không nặng."
+    },
+    {
+      "start": 103.2,
+      "end": 105.52,
+      "en": "Doctor, what disease do I have?",
+      "zh": "大夫，我得的是什么病？",
+      "pinyin": "Dài fu， wǒ dé de shì shén me bìng？",
+      "vi": "Bác sĩ, tôi bị bệnh gì ạ?"
+    },
+    {
+      "start": 106.22,
+      "end": 107.2,
+      "en": "You have a cold.",
+      "zh": "你感冒了。",
+      "pinyin": "Nǐ gǎn mào le。",
+      "vi": "Bạn bị cảm rồi."
+    },
+    {
+      "start": 120.54,
+      "end": 121.14,
+      "en": "Please.",
+      "zh": "请。",
+      "pinyin": "Qǐng。",
+      "vi": "Mời."
+    },
+    {
+      "start": 121.44,
+      "end": 122.3,
+      "en": "Take your medicine on time.",
+      "zh": "按时吃药。",
+      "pinyin": "Àn shí chī yào。",
+      "vi": "Uống thuốc đúng giờ."
+    },
+    {
+      "start": 123.46,
+      "end": 124.48,
+      "en": "Drink more boiled water.",
+      "zh": "多喝开水",
+      "pinyin": "Duō hē kāi shuǐ",
+      "vi": "Uống nhiều nước sôi để nguội."
+    },
+    {
+      "start": 126.14,
+      "end": 127.64,
+      "en": "How should I take this medicine?",
+      "zh": "这个药要怎么吃",
+      "pinyin": "Zhè ge yào yào zěn me chī",
+      "vi": "Thuốc này phải uống như thế nào?"
+    },
+    {
+      "start": 128.68,
+      "end": 129.58,
+      "en": "Three times a day.",
+      "zh": "一天三次",
+      "pinyin": "Yì tiān sān cì",
+      "vi": "Mỗi ngày ba lần."
+    },
+    {
+      "start": 130.2,
+      "end": 131.44,
+      "en": "Take half an hour after meals.",
+      "zh": "饭后半小时服用",
+      "pinyin": "Fàn hòu bàn xiǎo shí fú yòng",
+      "vi": "Uống sau bữa ăn nửa tiếng."
+    },
+    {
+      "start": 132.4,
+      "end": 133.5,
+      "en": "Are there any side effects?",
+      "zh": "有副作用吗",
+      "pinyin": "Yǒu fù zuò yòng ma",
+      "vi": "Có tác dụng phụ không?"
+    },
+    {
+      "start": 134.12,
+      "end": 136.32,
+      "en": "It may cause some stomach discomfort.",
+      "zh": "可能胃有些不舒服",
+      "pinyin": "Kě néng wèi yǒu xiē bù shū fú",
+      "vi": "Có thể dạ dày sẽ hơi khó chịu."
+    },
+    {
+      "start": 138.22,
+      "end": 139.86,
+      "en": "Anything else I should pay attention to?",
+      "zh": "还有什么要注意的吗",
+      "pinyin": "Hái yǒu shén me yào zhù yì de ma",
+      "vi": "Còn gì cần chú ý không?"
+    },
+    {
+      "start": 140.66,
+      "end": 143.74,
+      "en": "After taking the medicine, it's best not to do strenuous activities.",
+      "zh": "吃药以后最好不要做剧烈活动",
+      "pinyin": "Chī yào yǐ hòu zuì hǎo bú yào zuò jù liè huó dòng",
+      "vi": "Sau khi uống thuốc, tốt nhất không nên hoạt động mạnh."
+    },
+    {
+      "start": 144.14,
+      "end": 144.88,
+      "en": "Rest more.",
+      "zh": "多休息",
+      "pinyin": "Duō xiū xi",
+      "vi": "Nghỉ ngơi nhiều."
+    }
+  ]
+}

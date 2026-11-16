@@ -1,0 +1,693 @@
+{
+  "id": "noxVp4dG1d8",
+  "youtubeId": "noxVp4dG1d8",
+  "channelHandle": "@PandaStudio24",
+  "title": "10 hội thoại đời sống làm quen kết bạn LUYỆN NGHE TIẾNG TRUNG THỤ ĐỘNG",
+  "titleVi": "10 hội thoại đời sống: làm quen kết bạn",
+  "topic": "Giao tiếp & Hội thoại",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 318,
+  "cues": [
+    {
+      "start": 20.04,
+      "end": 21.76,
+      "en": "What's your name?",
+      "zh": "你叫什么名字？",
+      "pinyin": "Nǐ jiào shén me míng zì？",
+      "vi": "Bạn tên là gì?"
+    },
+    {
+      "start": 22.76,
+      "end": 25.4,
+      "en": "My name is Li Hao. What about you?",
+      "zh": "我叫李好，你叫什么？",
+      "pinyin": "Wǒ jiào lǐ hǎo， nǐ jiào shén me？",
+      "vi": "Tôi tên là Lý Hảo, còn bạn tên gì?"
+    },
+    {
+      "start": 27.36,
+      "end": 28.4,
+      "en": "My name is Wang Ming.",
+      "zh": "我叫王明。",
+      "pinyin": "Wǒ jiào wáng míng。",
+      "vi": "Tôi tên là Vương Minh."
+    },
+    {
+      "start": 29.46,
+      "end": 30.66,
+      "en": "This is my business card.",
+      "zh": "这是我的名片。",
+      "pinyin": "Zhè shì wǒ de míng piàn。",
+      "vi": "Đây là danh thiếp của tôi."
+    },
+    {
+      "start": 30.74,
+      "end": 32.32,
+      "en": "Thank you.",
+      "zh": "谢谢。",
+      "pinyin": "Xiè xiè。",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 35.28,
+      "end": 36.58,
+      "en": "What is your surname?",
+      "zh": "您贵姓？",
+      "pinyin": "Nín guì xìng？",
+      "vi": "Bạn họ gì ạ?"
+    },
+    {
+      "start": 38.16,
+      "end": 39.24,
+      "en": "My surname is Wang.",
+      "zh": "我姓王。",
+      "pinyin": "Wǒ xìng wáng。",
+      "vi": "Tôi họ Vương."
+    },
+    {
+      "start": 40.84,
+      "end": 41.7,
+      "en": "My name is Wang Ming.",
+      "zh": "我叫王明。",
+      "pinyin": "Wǒ jiào wáng míng。",
+      "vi": "Tôi tên là Vương Minh."
+    },
+    {
+      "start": 43.46,
+      "end": 43.92,
+      "en": "And you?",
+      "zh": "你呢？",
+      "pinyin": "Nǐ ne？",
+      "vi": "Còn bạn?"
+    },
+    {
+      "start": 45.18,
+      "end": 46.34,
+      "en": "My surname is Li.",
+      "zh": "我姓李。",
+      "pinyin": "Wǒ xìng lǐ。",
+      "vi": "Tôi họ Lý."
+    },
+    {
+      "start": 47.52,
+      "end": 48.34,
+      "en": "My name is Li Hao.",
+      "zh": "叫李好。",
+      "pinyin": "Jiào lǐ hǎo。",
+      "vi": "Tên là Lý Hảo."
+    },
+    {
+      "start": 50.46,
+      "end": 51.3,
+      "en": "Miss Li.",
+      "zh": "李小姐。",
+      "pinyin": "Lǐ xiǎo jiě。",
+      "vi": "Cô Lý."
+    },
+    {
+      "start": 52.72,
+      "end": 54.14,
+      "en": "Nice to meet you.",
+      "zh": "很高兴认识你。",
+      "pinyin": "Hěn gāo xìng rèn shi nǐ。",
+      "vi": "Rất vui được gặp bạn."
+    },
+    {
+      "start": 55.52,
+      "end": 60.52,
+      "en": "I'm also glad to meet you, Mr. Wang.",
+      "zh": "我也很高兴认识您，王先生。",
+      "pinyin": "Wǒ yě hěn gāo xìng rèn shi nín， wáng xiān shēng。",
+      "vi": "Tôi cũng rất vui được gặp ông, ông Vương."
+    },
+    {
+      "start": 63.36,
+      "end": 64.1,
+      "en": "Hello!",
+      "zh": "您好！",
+      "pinyin": "Nín hǎo！",
+      "vi": "Xin chào!"
+    },
+    {
+      "start": 65.7,
+      "end": 66.38,
+      "en": "Hello!",
+      "zh": "您好！",
+      "pinyin": "Nín hǎo！",
+      "vi": "Xin chào!"
+    },
+    {
+      "start": 67.52,
+      "end": 68.22,
+      "en": "What is your surname?",
+      "zh": "您贵姓？",
+      "pinyin": "Nín guì xìng？",
+      "vi": "Bạn họ gì ạ?"
+    },
+    {
+      "start": 69.72,
+      "end": 72.76,
+      "en": "My surname is Zhang, and my name is Zhang Hua.",
+      "zh": "我姓张，叫张华。",
+      "pinyin": "Wǒ xìng zhāng， jiào zhāng huá。",
+      "vi": "Tôi họ Trương, tên là Trương Hoa."
+    },
+    {
+      "start": 74.28,
+      "end": 83.75,
+      "en": "I'm very glad to meet you; my name is Liu Deming. Very glad to meet you, Mr. Liu.",
+      "zh": "很高兴认识您，我叫刘德明。很高兴认识你，刘先生。",
+      "pinyin": "Hěn gāo xìng rèn shi nín， wǒ jiào liú dé míng。 hěn gāo xìng rèn shi nǐ， liú xiān shēng。",
+      "vi": "Rất vui được gặp ông, tôi tên là Lưu Đức Minh. Rất vui được gặp anh, ông Lưu."
+    },
+    {
+      "start": 85.19,
+      "end": 86.73,
+      "en": "This is my business card.",
+      "zh": "这是我的名片。",
+      "pinyin": "Zhè shì wǒ de míng piàn。",
+      "vi": "Đây là danh thiếp của tôi."
+    },
+    {
+      "start": 87.95,
+      "end": 88.43,
+      "en": "Thank you.",
+      "zh": "谢谢。",
+      "pinyin": "Xiè xiè。",
+      "vi": "Cảm ơn."
+    },
+    {
+      "start": 91.45,
+      "end": 94.53,
+      "en": "Is this a photo of your family?",
+      "zh": "这是你们家的照片吗？",
+      "pinyin": "Zhè shì nǐ men jiā de zhào piàn ma？",
+      "vi": "Đây là ảnh gia đình của bạn à?"
+    },
+    {
+      "start": 95.59,
+      "end": 96.05,
+      "en": "Yes.",
+      "zh": "是啊。",
+      "pinyin": "Shì a。",
+      "vi": "Vâng."
+    },
+    {
+      "start": 97.39,
+      "end": 101.81,
+      "en": "Let me see. You don't have any siblings?",
+      "zh": "我看一下，你没有兄弟姐妹吗？",
+      "pinyin": "Wǒ kàn yí xià， nǐ méi yǒu xiōng dì jiě mèi ma？",
+      "vi": "Để tôi xem nào, bạn không có anh chị em à?"
+    },
+    {
+      "start": 102.57,
+      "end": 104.87,
+      "en": "No, I'm an only child.",
+      "zh": "没有，我是独生子。",
+      "pinyin": "Méi yǒu， wǒ shì dú shēng zǐ。",
+      "vi": "Không, tôi là con một."
+    },
+    {
+      "start": 105.79,
+      "end": 108.73,
+      "en": "This is my father, and that's my mother and me.",
+      "zh": "这是我爸爸，那是我妈妈和我。",
+      "pinyin": "Zhè shì wǒ bà ba， nà shì wǒ mā ma hé wǒ。",
+      "vi": "Đây là bố tôi, kia là mẹ tôi và tôi."
+    },
+    {
+      "start": 109.63,
+      "end": 110.53,
+      "en": "How many people are in your family?",
+      "zh": "你家有几口人？",
+      "pinyin": "Nǐ jiā yǒu jǐ kǒu rén？",
+      "vi": "Gia đình bạn có mấy người?"
+    },
+    {
+      "start": 112.21,
+      "end": 114.03,
+      "en": "My family has four people.",
+      "zh": "我家有四口人。",
+      "pinyin": "Wǒ jiā yǒu sì kǒu rén。",
+      "vi": "Gia đình tôi có bốn người."
+    },
+    {
+      "start": 115.55,
+      "end": 119.79,
+      "en": "I have my parents and an older brother.",
+      "zh": "我有爸爸妈妈，还有一个哥哥。",
+      "pinyin": "Wǒ yǒu bà ba mā ma， hái yǒu yí gè gē ge。",
+      "vi": "Tôi có bố mẹ và một anh trai."
+    },
+    {
+      "start": 122.93,
+      "end": 127.55,
+      "en": "Do your parents and older brother all live in Sichuan?",
+      "zh": "你爸爸妈妈和哥哥都住在四川吗？",
+      "pinyin": "Nǐ bà ba mā ma hé gē ge dōu zhù zài sì chuān ma？",
+      "vi": "Bố mẹ và anh trai bạn đều sống ở Tứ Xuyên à?"
+    },
+    {
+      "start": 129.19,
+      "end": 132.05,
+      "en": "My parents live in Chongqing.",
+      "zh": "我爸爸妈妈住在重庆。",
+      "pinyin": "Wǒ bà ba mā ma zhù zài chóng qìng。",
+      "vi": "Bố mẹ tôi sống ở Trùng Khánh."
+    },
+    {
+      "start": 133.05,
+      "end": 136.67,
+      "en": "My brother is studying at university in Shanghai now.",
+      "zh": "哥哥现在在上海上大学。",
+      "pinyin": "Gē ge xiàn zài zài shàng hǎi shàng dà xué。",
+      "vi": "Anh trai tôi hiện đang học đại học ở Thượng Hải."
+    },
+    {
+      "start": 137.57,
+      "end": 138.23,
+      "en": "Really?",
+      "zh": "是吗？",
+      "pinyin": "Shì ma？",
+      "vi": "Vậy à?"
+    },
+    {
+      "start": 139.71,
+      "end": 140.97,
+      "en": "How old is your older brother?",
+      "zh": "你哥哥多大了？",
+      "pinyin": "Nǐ gē ge duō dà le？",
+      "vi": "Anh trai bạn bao nhiêu tuổi?"
+    },
+    {
+      "start": 141.51,
+      "end": 142.47,
+      "en": "He was born in the Year of the Dog.",
+      "zh": "他属狗。",
+      "pinyin": "Tā shǔ gǒu。",
+      "vi": "Anh ấy tuổi Tuất."
+    },
+    {
+      "start": 143.71,
+      "end": 144.67,
+      "en": "I’m twenty years old this year.",
+      "zh": "今年二十岁。",
+      "pinyin": "Jīn nián èr shí suì。",
+      "vi": "Năm nay tôi hai mươi tuổi."
+    },
+    {
+      "start": 145.75,
+      "end": 148.51,
+      "en": "How old are your parents?",
+      "zh": "你爸爸妈妈多大年纪了？",
+      "pinyin": "Nǐ bà ba mā ma duō dà nián jì le？",
+      "vi": "Bố mẹ bạn bao nhiêu tuổi rồi?"
+    },
+    {
+      "start": 149.79,
+      "end": 150.14,
+      "en": "Oh.",
+      "zh": "哦。",
+      "pinyin": "Ò。",
+      "vi": "Ồ."
+    },
+    {
+      "start": 151.63,
+      "end": 152.41,
+      "en": "My dad is also born in the Year of the Dog.",
+      "zh": "我爸也属狗。",
+      "pinyin": "Wǒ bà yě shǔ gǒu。",
+      "vi": "Bố tôi cũng tuổi Tuất."
+    },
+    {
+      "start": 153.47,
+      "end": 165.58,
+      "en": "He’s sixty-four, my mom is fifty-seven this year. They’re both retired. What do your parents do?",
+      "zh": "他六十四了，我妈今年五十七，他们都退休了。你父母做什么工作？",
+      "pinyin": "Tā liù shí sì le， wǒ mā jīn nián wǔ shí qī， tā men dōu tuì xiū le。 nǐ fù mǔ zuò shén me gōng zuò？",
+      "vi": "Ông ấy 64 tuổi, mẹ tôi năm nay 57, cả hai đều đã nghỉ hưu. Bố mẹ bạn làm nghề gì?"
+    },
+    {
+      "start": 167.12,
+      "end": 168.98,
+      "en": "My dad is an engineer.",
+      "zh": "我爸是工程师。",
+      "pinyin": "Wǒ bà shì gōng chéng shī。",
+      "vi": "Bố tôi là kỹ sư."
+    },
+    {
+      "start": 169.96,
+      "end": 171.42,
+      "en": "My mom is a lawyer.",
+      "zh": "我妈是律师。",
+      "pinyin": "Wǒ mā shì lǜ shī。",
+      "vi": "Mẹ tôi là luật sư."
+    },
+    {
+      "start": 174.56,
+      "end": 175.04,
+      "en": "Hello.",
+      "zh": "你好。",
+      "pinyin": "Nǐ hǎo。",
+      "vi": "Xin chào."
+    },
+    {
+      "start": 176.62,
+      "end": 177.78,
+      "en": "I’m Xiaoming.",
+      "zh": "我是小明。",
+      "pinyin": "Wǒ shì xiǎo míng。",
+      "vi": "Tôi là Tiểu Minh."
+    },
+    {
+      "start": 178.58,
+      "end": 180.18,
+      "en": "The characters 日 and 月 together make 明.",
+      "zh": "日月明。",
+      "pinyin": "Rì yuè míng。",
+      "vi": "Chữ Minh (明) gồm chữ Nhật (日) và chữ Nguyệt (月) ghép lại."
+    },
+    {
+      "start": 181.44,
+      "end": 182.54,
+      "en": "Hello, Xiaoming.",
+      "zh": "你好小明。",
+      "pinyin": "Nǐ hǎo xiǎo míng。",
+      "vi": "Chào Tiểu Minh."
+    },
+    {
+      "start": 183.38,
+      "end": 184.5,
+      "en": "I’m Lao Wang.",
+      "zh": "我叫老王。",
+      "pinyin": "Wǒ jiào lǎo wáng。",
+      "vi": "Tôi là Lão Vương."
+    },
+    {
+      "start": 185.08,
+      "end": 188.24,
+      "en": "Nice to meet you, Lao Wang.",
+      "zh": "很高兴认识你，老王。",
+      "pinyin": "Hěn gāo xìng rèn shi nǐ， lǎo wáng。",
+      "vi": "Rất vui được gặp bạn, Lão Vương."
+    },
+    {
+      "start": 189.92,
+      "end": 191.48,
+      "en": "Are you from Shanghai?",
+      "zh": "你是上海人吗？",
+      "pinyin": "Nǐ shì shàng hǎi rén ma？",
+      "vi": "Bạn là người Thượng Hải à?"
+    },
+    {
+      "start": 192.3,
+      "end": 194.44,
+      "en": "Yes, I’m from Shanghai.",
+      "zh": "是，我是上海人。",
+      "pinyin": "Shì， wǒ shì shàng hǎi rén。",
+      "vi": "Vâng, tôi là người Thượng Hải."
+    },
+    {
+      "start": 195.2,
+      "end": 195.55,
+      "en": "And you?",
+      "zh": "你呢？",
+      "pinyin": "Nǐ ne？",
+      "vi": "Còn bạn?"
+    },
+    {
+      "start": 196.26,
+      "end": 198.12,
+      "en": "I come from Beijing.",
+      "zh": "我从北京来。",
+      "pinyin": "Wǒ cóng běi jīng lái。",
+      "vi": "Tôi đến từ Bắc Kinh."
+    },
+    {
+      "start": 199.2,
+      "end": 201.76,
+      "en": "My father is from Shanghai.",
+      "zh": "我爸爸是上海人。",
+      "pinyin": "Wǒ bà ba shì shàng hǎi rén。",
+      "vi": "Bố tôi là người Thượng Hải."
+    },
+    {
+      "start": 202.78,
+      "end": 205.78,
+      "en": "My mother is from Sichuan.",
+      "zh": "我妈妈是四川人。",
+      "pinyin": "Wǒ mā ma shì sì chuān rén。",
+      "vi": "Mẹ tôi là người Tứ Xuyên."
+    },
+    {
+      "start": 207.04,
+      "end": 208.84,
+      "en": "How many people are in your family?",
+      "zh": "你家有几口人？",
+      "pinyin": "Nǐ jiā yǒu jǐ kǒu rén？",
+      "vi": "Gia đình bạn có mấy người?"
+    },
+    {
+      "start": 209.74,
+      "end": 211.98,
+      "en": "There are three people in my family.",
+      "zh": "我家有三口人。",
+      "pinyin": "Wǒ jiā yǒu sān kǒu rén。",
+      "vi": "Gia đình tôi có ba người."
+    },
+    {
+      "start": 212.92,
+      "end": 216,
+      "en": "Dad, mom, and me.",
+      "zh": "爸爸、妈妈和我。",
+      "pinyin": "Bà ba、 mā ma hé wǒ。",
+      "vi": "Bố, mẹ và tôi."
+    },
+    {
+      "start": 217.04,
+      "end": 218.2,
+      "en": "How old are you?",
+      "zh": "你多大了？",
+      "pinyin": "Nǐ duō dà le？",
+      "vi": "Bạn bao nhiêu tuổi?"
+    },
+    {
+      "start": 218.86,
+      "end": 221.62,
+      "en": "I’m twenty-two. And you?",
+      "zh": "我二十二岁，你呢？",
+      "pinyin": "Wǒ èr shí èr suì， nǐ ne？",
+      "vi": "Tôi hai mươi hai tuổi, còn bạn?"
+    },
+    {
+      "start": 222.4,
+      "end": 224.04,
+      "en": "I’m forty-four.",
+      "zh": "我四十四岁。",
+      "pinyin": "Wǒ sì shí sì suì。",
+      "vi": "Tôi bốn mươi tư tuổi."
+    },
+    {
+      "start": 227.02,
+      "end": 228.22,
+      "en": "Are you a student?",
+      "zh": "你是学生吗？",
+      "pinyin": "Nǐ shì xué shēng ma？",
+      "vi": "Bạn là sinh viên à?"
+    },
+    {
+      "start": 229.4,
+      "end": 232.2,
+      "en": "Yes, I’m a college student.",
+      "zh": "是，我是大学生。",
+      "pinyin": "Shì， wǒ shì dà xué shēng。",
+      "vi": "Vâng, tôi là sinh viên đại học."
+    },
+    {
+      "start": 233.92,
+      "end": 237.26,
+      "en": "What’s your major?",
+      "zh": "你的专业是什么？",
+      "pinyin": "Nǐ de zhuān yè shì shén me？",
+      "vi": "Chuyên ngành của bạn là gì?"
+    },
+    {
+      "start": 237.26,
+      "end": 242.58,
+      "en": "My major is math. What about you?",
+      "zh": "我的专业是数学，您呢？",
+      "pinyin": "Wǒ de zhuān yè shì shù xué， nín ne？",
+      "vi": "Chuyên ngành của tôi là toán, còn ông/bà?"
+    },
+    {
+      "start": 242.58,
+      "end": 247.6,
+      "en": "My major is languages, and I work at Cambridge University in the UK.",
+      "zh": "我的专业是语言，我在英国剑桥大学工作。",
+      "pinyin": "Wǒ de zhuān yè shì yǔ yán， wǒ zài yīng guó jiàn qiáo dà xué gōng zuò。",
+      "vi": "Chuyên ngành của tôi là ngôn ngữ, tôi làm việc tại Đại học Cambridge ở Anh."
+    },
+    {
+      "start": 248.82,
+      "end": 250.48,
+      "en": "Are you a teacher?",
+      "zh": "您是老师吗？",
+      "pinyin": "Nín shì lǎo shī ma？",
+      "vi": "Ông/bà là giáo viên à?"
+    },
+    {
+      "start": 251.36,
+      "end": 255.54,
+      "en": "Yes, I’m a teacher. I teach languages.",
+      "zh": "是，我是老师，我教语言。",
+      "pinyin": "Shì， wǒ shì lǎo shī， wǒ jiào yǔ yán。",
+      "vi": "Vâng, tôi là giáo viên, tôi dạy ngôn ngữ."
+    },
+    {
+      "start": 259.24,
+      "end": 260.52,
+      "en": "What country are you from?",
+      "zh": "你是哪国人？",
+      "pinyin": "Nǐ shì nǎ guó rén？",
+      "vi": "Bạn là người nước nào?"
+    },
+    {
+      "start": 261.96,
+      "end": 263.7,
+      "en": "I’m Chinese.",
+      "zh": "我是中国人。",
+      "pinyin": "Wǒ shì zhōng guó rén。",
+      "vi": "Tôi là người Trung Quốc."
+    },
+    {
+      "start": 265.76,
+      "end": 267.2,
+      "en": "Which part of China are you from?",
+      "zh": "你从中国什么地方来？",
+      "pinyin": "Nǐ cóng zhōng guó shén me dì fāng lái？",
+      "vi": "Bạn đến từ vùng nào của Trung Quốc?"
+    },
+    {
+      "start": 268.86,
+      "end": 270.3,
+      "en": "I come from Beijing.",
+      "zh": "我从北京来",
+      "pinyin": "Wǒ cóng běi jīng lái",
+      "vi": "Tôi đến từ Bắc Kinh."
+    },
+    {
+      "start": 271.06,
+      "end": 272.92,
+      "en": "Are you British?",
+      "zh": "您是英国人吗?",
+      "pinyin": "Nín shì yīng guó rén ma?",
+      "vi": "Bạn là người Anh phải không?"
+    },
+    {
+      "start": 273.7,
+      "end": 276.32,
+      "en": "No, I'm American.",
+      "zh": "不是,我是美国人",
+      "pinyin": "Bú shì, wǒ shì měi guó rén",
+      "vi": "Không phải, tôi là người Mỹ."
+    },
+    {
+      "start": 277.38,
+      "end": 280.2,
+      "en": "Oh, you're American.",
+      "zh": "哦,您是美国人",
+      "pinyin": "Ò, nín shì měi guó rén",
+      "vi": "Ồ, bạn là người Mỹ."
+    },
+    {
+      "start": 281.16,
+      "end": 283.02,
+      "en": "Where in America are you from?",
+      "zh": "您从美国哪里来?",
+      "pinyin": "Nín cóng měi guó nǎ lǐ lái?",
+      "vi": "Bạn từ đâu ở Mỹ đến?"
+    },
+    {
+      "start": 283.96,
+      "end": 285.46,
+      "en": "I'm from San Francisco.",
+      "zh": "我从旧金山来",
+      "pinyin": "Wǒ cóng jiù jīn shān lái",
+      "vi": "Tôi đến từ San Francisco."
+    },
+    {
+      "start": 288.72,
+      "end": 289.18,
+      "en": "Hello.",
+      "zh": "你好",
+      "pinyin": "Nǐ hǎo",
+      "vi": "Xin chào."
+    },
+    {
+      "start": 289.24,
+      "end": 291.8,
+      "en": "Can you speak English?",
+      "zh": "你会说英语吗?",
+      "pinyin": "Nǐ huì shuō yīng yǔ ma?",
+      "vi": "Bạn có nói được tiếng Anh không?"
+    },
+    {
+      "start": 293.3,
+      "end": 295.54,
+      "en": "I can speak a little English.",
+      "zh": "我会说一点英语",
+      "pinyin": "Wǒ huì shuō yì diǎn yīng yǔ",
+      "vi": "Tôi nói được một chút tiếng Anh."
+    },
+    {
+      "start": 296.42,
+      "end": 298.5,
+      "en": "What languages can you speak?",
+      "zh": "您会说什么语言?",
+      "pinyin": "Nín huì shuō shén me yǔ yán?",
+      "vi": "Bạn nói được những thứ tiếng nào?"
+    },
+    {
+      "start": 300.18,
+      "end": 303.34,
+      "en": "I can speak English, French, and Chinese.",
+      "zh": "我会说英语、法语和中文",
+      "pinyin": "Wǒ huì shuō yīng yǔ、 fǎ yǔ hé zhōng wén",
+      "vi": "Tôi nói được tiếng Anh, tiếng Pháp và tiếng Trung."
+    },
+    {
+      "start": 304.28,
+      "end": 305.74,
+      "en": "My native language is English.",
+      "zh": "我的母语是英文",
+      "pinyin": "Wǒ de mǔ yǔ shì yīng wén",
+      "vi": "Tiếng mẹ đẻ của tôi là tiếng Anh."
+    },
+    {
+      "start": 306.96,
+      "end": 309.28,
+      "en": "Can you speak Cantonese?",
+      "zh": "您会说广东话吗?",
+      "pinyin": "Nín huì shuō guǎng dōng huà ma?",
+      "vi": "Bạn có nói được tiếng Quảng Đông không?"
+    },
+    {
+      "start": 310.04,
+      "end": 310.39,
+      "en": "No, I can't.",
+      "zh": "不会",
+      "pinyin": "Bú huì",
+      "vi": "Không nói được."
+    },
+    {
+      "start": 311.7,
+      "end": 313.2,
+      "en": "I can only speak Mandarin.",
+      "zh": "我只会说普通话",
+      "pinyin": "Wǒ zhī huì shuō pǔ tōng huà",
+      "vi": "Tôi chỉ nói được tiếng phổ thông."
+    }
+  ]
+}

@@ -1,0 +1,309 @@
+{
+  "id": "gQH_fMo5g3s",
+  "youtubeId": "gQH_fMo5g3s",
+  "channelHandle": "@PandaStudio24",
+  "title": "Luyện nghe TIẾNG TRUNG thụ động【VIDEO #12】Hỏi đường",
+  "titleVi": "Hỏi đường",
+  "topic": "Luyện nghe Panda Studio",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 274,
+  "cues": [
+    {
+      "start": 32.96,
+      "end": 33.9,
+      "en": "straight ahead",
+      "zh": "一直",
+      "pinyin": "Yì zhí",
+      "vi": "thẳng"
+    },
+    {
+      "start": 34.06,
+      "end": 38.82,
+      "en": "toward",
+      "zh": "往",
+      "pinyin": "Wǎng",
+      "vi": "về phía"
+    },
+    {
+      "start": 42.08,
+      "end": 42.72,
+      "en": "to; arrive at",
+      "zh": "到",
+      "pinyin": "Dào",
+      "vi": "đến"
+    },
+    {
+      "start": 46.16,
+      "end": 47.14,
+      "en": "intersection",
+      "zh": "路口",
+      "pinyin": "Lù kǒu",
+      "vi": "ngã rẽ, giao lộ"
+    },
+    {
+      "start": 47.2,
+      "end": 51.8,
+      "en": "to turn",
+      "zh": "拐",
+      "pinyin": "Guǎi",
+      "vi": "rẽ, ngoặt"
+    },
+    {
+      "start": 55.72,
+      "end": 56.4,
+      "en": "meter",
+      "zh": "米",
+      "pinyin": "Mǐ",
+      "vi": "mét"
+    },
+    {
+      "start": 62.32,
+      "end": 70.42,
+      "en": "How far is it from here to the department store? About thirteen or fourteen kilometers.",
+      "zh": "从这儿到百货大楼有多远？十三四公里。",
+      "pinyin": "Cóng zhè ér dào bǎi huò dà lóu yǒu duō yuǎn？ shí sān sì gōng lǐ。",
+      "vi": "Từ đây đến trung tâm thương mại bao xa? Khoảng mười ba, mười bốn cây số."
+    },
+    {
+      "start": 73.98,
+      "end": 74.76,
+      "en": "How do I get there by bus?",
+      "zh": "怎么坐车？",
+      "pinyin": "Zěn me zuò chē？",
+      "vi": "Đi xe như thế nào?"
+    },
+    {
+      "start": 77.86,
+      "end": 82.8,
+      "en": "Cross the road, first take bus No. 2, then transfer to the subway.",
+      "zh": "过马路，先坐二路公共汽车，然后换地铁。",
+      "pinyin": "Guò mǎ lù， xiān zuò èr lù gōng gòng qì chē， rán hòu huàn dì tiě。",
+      "vi": "Qua đường, trước tiên bắt xe buýt số 2, sau đó chuyển sang tàu điện ngầm."
+    },
+    {
+      "start": 88.98,
+      "end": 89.58,
+      "en": "kilometers.",
+      "zh": "公里。",
+      "pinyin": "Gōng lǐ。",
+      "vi": "cây số."
+    },
+    {
+      "start": 94.04,
+      "end": 94.48,
+      "en": "vehicle; car",
+      "zh": "车",
+      "pinyin": "Chē",
+      "vi": "xe"
+    },
+    {
+      "start": 97.78,
+      "end": 98.22,
+      "en": "to cross; to pass",
+      "zh": "过",
+      "pinyin": "Guò",
+      "vi": "qua"
+    },
+    {
+      "start": 102.02,
+      "end": 102.7,
+      "en": "road; street",
+      "zh": "马路",
+      "pinyin": "Mǎ lù",
+      "vi": "đường phố"
+    },
+    {
+      "start": 107.14,
+      "end": 107.62,
+      "en": "first",
+      "zh": "先",
+      "pinyin": "Xiān",
+      "vi": "trước"
+    },
+    {
+      "start": 111.5,
+      "end": 111.88,
+      "en": "road; route",
+      "zh": "路",
+      "pinyin": "Lù",
+      "vi": "đường; tuyến"
+    },
+    {
+      "start": 115.5,
+      "end": 116.58,
+      "en": "bus",
+      "zh": "公共汽车",
+      "pinyin": "Gōng gòng qì chē",
+      "vi": "xe buýt"
+    },
+    {
+      "start": 121.66,
+      "end": 122.36,
+      "en": "car; automobile",
+      "zh": "汽车",
+      "pinyin": "Qì chē",
+      "vi": "ô tô"
+    },
+    {
+      "start": 126.7,
+      "end": 127.28,
+      "en": "then; after that",
+      "zh": "然后",
+      "pinyin": "Rán hòu",
+      "vi": "sau đó"
+    },
+    {
+      "start": 132.02,
+      "end": 143.66,
+      "en": "The subway. Excuse me, which road should I take to Tiananmen?",
+      "zh": "地铁。请问我去天安门应该走哪条路？",
+      "pinyin": "Dì tiě。 qǐng wèn wǒ qù tiān ān mén yīng gāi zǒu nǎ tiáo lù？",
+      "vi": "Tàu điện ngầm. Xin hỏi, tôi đi Thiên An Môn thì nên đi đường nào?"
+    },
+    {
+      "start": 148.84,
+      "end": 152.2,
+      "en": "Take this road or that road, either will do.",
+      "zh": "走这条路或者那条路都行。",
+      "pinyin": "Zǒu zhè tiáo lù huò zhě nà tiáo lù dōu xíng。",
+      "vi": "Đi đường này hoặc đường kia đều được."
+    },
+    {
+      "start": 156.64,
+      "end": 157.58,
+      "en": "Which road is nearer?",
+      "zh": "哪条路近？",
+      "pinyin": "Nǎ tiáo lù jìn？",
+      "vi": "Đường nào gần hơn?"
+    },
+    {
+      "start": 161.38,
+      "end": 164.1,
+      "en": "This road is shorter, but it's a bit chaotic.",
+      "zh": "这条路近，不过有点乱。",
+      "pinyin": "Zhè tiáo lù jìn， bú guò yǒu diǎn luàn。",
+      "vi": "Đường này gần hơn, nhưng hơi lộn xộn."
+    },
+    {
+      "start": 168.7,
+      "end": 172.98,
+      "en": "I'm not very good at cycling, so I'd better take that road.",
+      "zh": "我骑车技术不太高，还是走那条路吧。",
+      "pinyin": "Wǒ qí chē jì shù bú tài gāo， hái shì zǒu nà tiáo lù ba。",
+      "vi": "Tôi đi xe đạp không giỏi lắm, thôi thì đi đường kia vậy."
+    },
+    {
+      "start": 180.32,
+      "end": 180.96,
+      "en": "should",
+      "zh": "应该",
+      "pinyin": "Yīng gāi",
+      "vi": "nên"
+    },
+    {
+      "start": 181.04,
+      "end": 186.08,
+      "en": "or",
+      "zh": "或者",
+      "pinyin": "Huò zhě",
+      "vi": "hoặc"
+    },
+    {
+      "start": 186.08,
+      "end": 191.38,
+      "en": "to ride",
+      "zh": "骑",
+      "pinyin": "Qí",
+      "vi": "đi (xe), cưỡi"
+    },
+    {
+      "start": 195.18,
+      "end": 195.92,
+      "en": "skill; technique",
+      "zh": "技术",
+      "pinyin": "Jì shù",
+      "vi": "kỹ thuật, kỹ năng"
+    },
+    {
+      "start": 200.78,
+      "end": 211.19,
+      "en": "Shall we go to Datong this weekend?",
+      "zh": "周末咱们去大同，好吗？",
+      "pinyin": "Zhōu mò zán men qù dà tóng， hǎo ma？",
+      "vi": "Cuối tuần mình đi Đại Đồng nhé?"
+    },
+    {
+      "start": 214.47,
+      "end": 218.05,
+      "en": "OK, by train or by plane?",
+      "zh": "好啊，坐火车还是坐飞机？",
+      "pinyin": "Hǎo a， zuò huǒ chē hái shì zuò fēi jī？",
+      "vi": "Được thôi, đi tàu hỏa hay đi máy bay?"
+    },
+    {
+      "start": 220.67,
+      "end": 223.67,
+      "en": "Let's fly—it's both fast and comfortable.",
+      "zh": "坐飞机吧，又快又舒服。",
+      "pinyin": "Zuò fēi jī ba， yòu kuài yòu shū fú。",
+      "vi": "Đi máy bay đi, vừa nhanh vừa thoải mái."
+    },
+    {
+      "start": 226.23,
+      "end": 228.75,
+      "en": "But flying is too expensive.",
+      "zh": "可是，坐飞机太贵了。",
+      "pinyin": "Kě shì， zuò fēi jī tài guì le。",
+      "vi": "Nhưng đi máy bay đắt quá."
+    },
+    {
+      "start": 230.29,
+      "end": 231.95,
+      "en": "Let's take the train instead.",
+      "zh": "还是坐火车吧。",
+      "pinyin": "Hái shì zuò huǒ chē ba。",
+      "vi": "Thôi thì đi tàu hỏa vậy."
+    },
+    {
+      "start": 238.23,
+      "end": 238.95,
+      "en": "weekend",
+      "zh": "周末",
+      "pinyin": "Zhōu mò",
+      "vi": "cuối tuần"
+    },
+    {
+      "start": 243.09,
+      "end": 243.75,
+      "en": "train",
+      "zh": "火车",
+      "pinyin": "Huǒ chē",
+      "vi": "tàu hỏa"
+    },
+    {
+      "start": 248.27,
+      "end": 248.63,
+      "en": "airplane",
+      "zh": "飞机",
+      "pinyin": "Fēi jī",
+      "vi": "máy bay"
+    },
+    {
+      "start": 253.09,
+      "end": 253.44,
+      "en": "fast",
+      "zh": "快",
+      "pinyin": "Kuài",
+      "vi": "nhanh"
+    },
+    {
+      "start": 257.27,
+      "end": 257.62,
+      "en": "comfortable",
+      "zh": "舒服",
+      "pinyin": "Shū fú",
+      "vi": "thoải mái"
+    }
+  ]
+}
