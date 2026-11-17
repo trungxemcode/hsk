@@ -275,7 +275,7 @@
       "en": "So today, we'll start with these little things.",
       "zh": "那今天，我们就从这些小事聊起。",
       "pinyin": "Nà jīn tiān， wǒ men jiù cóng zhè xiē xiǎo shì liáo qǐ。",
-      "vi": "Vì vậy, hôm nay, chúng ta hãy bắt đầu bằng việc nói về những điều nhỏ nhặt này."
+      "vi": "Hôm nay, mình bắt đầu từ những chuyện nhỏ như thế nhé."
     },
     {
       "start": 102.29,
@@ -531,7 +531,7 @@
       "en": "Therefore, “situation” is important.",
       "zh": "所以，“处境”很重要。",
       "pinyin": "Suǒ yǐ，“ chǔ jìng ” hěn zhòng yào。",
-      "vi": "Vì vậy, \"hoàn cảnh\" rất quan trọng."
+      "vi": "Vì vậy, hiểu «hoàn cảnh» rất quan trọng."
     },
     {
       "start": 175.53,
@@ -539,7 +539,7 @@
       "en": "That's the word.",
       "zh": "这个词说",
       "pinyin": "Zhè ge cí shuō",
-      "vi": "Từ này đề cập"
+      "vi": "Từ này chỉ"
     },
     {
       "start": 176.17,
@@ -547,7 +547,7 @@
       "en": "What a person is facing right now.",
       "zh": "的是，一个人现在面对什么情况。",
       "pinyin": "De shì， yí gè rén xiàn zài miàn duì shén me qíng kuàng。",
-      "vi": "đến tình huống mà một người đang phải đối mặt."
+      "vi": "tình cảnh mà một người đang đối mặt."
     },
     {
       "start": 179.81,
@@ -803,7 +803,7 @@
       "en": "We may be more angry than ever before.",
       "zh": "我们的确可能更容易生气，",
       "pinyin": "Wǒ men dí què kě néng gèng róng yì shēng qì，",
-      "vi": "chúng ta có thể dễ nổi giận hơn"
+      "vi": "Đúng là chúng ta có thể dễ nổi nóng hơn,"
     },
     {
       "start": 256.13,
@@ -1059,7 +1059,7 @@
       "en": "If it's to make people think I'm doing well,",
       "zh": "如果为了让别人觉得我过得很好，",
       "pinyin": "Rú guǒ wèi le ràng bié rén jué de wǒ guò dé hěn hǎo，",
-      "vi": "Nếu"
+      "vi": "Nếu chỉ để người khác thấy mình sống sung túc"
     },
     {
       "start": 335.25,
@@ -1067,7 +1067,7 @@
       "en": "It's just a matter of time.",
       "zh": "就花掉生活费，",
       "pinyin": "Jiù huā diào shēng huó fèi，",
-      "vi": "tôi tiêu hết chi phí sinh hoạt"
+      "vi": "mà tiêu hết tiền sinh hoạt,"
     },
     {
       "start": 336.97,
@@ -1075,7 +1075,7 @@
       "en": "I'm the last to suffer.",
       "zh": "最后难受的还是我。",
       "pinyin": "Zuì hòu nán shòu de hái shì wǒ。",
-      "vi": "để người khác nghĩ rằng tôi đang sống tốt, cuối cùng tôi sẽ là người chịu thiệt."
+      "vi": "thì người khổ cuối cùng vẫn là mình."
     },
     {
       "start": 339.49,
@@ -1323,7 +1323,7 @@
       "en": "I used to think about it in my head.",
       "zh": "以前只在脑子里想，",
       "pinyin": "Yǐ qián zhī zài nǎo zǐ lǐ xiǎng，",
-      "vi": "Trước đây, tôi chỉ nghĩ về nó trong đầu,"
+      "vi": "Trước đây, tôi chỉ tính nhẩm trong đầu,"
     },
     {
       "start": 416.67,
@@ -1331,7 +1331,7 @@
       "en": "It feels like every penny is in a hurry.",
       "zh": "感觉每一笔钱都很着急。",
       "pinyin": "Gǎn jué měi yì bǐ qián dōu hěn zháo jí。",
-      "vi": "cảm thấy lo lắng về từng đồng tiền."
+      "vi": "nên khoản nào cũng thấy cấp bách."
     },
     {
       "start": 419.43,
@@ -1339,7 +1339,7 @@
       "en": "After writing it down,",
       "zh": "写下来以后，",
       "pinyin": "Xiě xià lái yǐ hòu，",
-      "vi": "Sau khi viết ra,"
+      "vi": "Sau khi ghi ra giấy,"
     },
     {
       "start": 420.51,
@@ -1859,7 +1859,7 @@
       "en": "The “situation” is the situation that a person is facing.",
       "zh": "“处境”，就是一个人正在面对的情况。",
       "pinyin": "“ chǔ jìng ”， jiù shì yí gè rén zhèng zài miàn duì de qíng kuàng。",
-      "vi": "\"Tình huống\" đề cập đến hoàn cảnh mà một người đang phải đối mặt."
+      "vi": "«Hoàn cảnh» là tình cảnh mà một người đang đối mặt."
     },
     {
       "start": 576.63,

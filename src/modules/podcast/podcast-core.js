@@ -16690,7 +16690,7 @@
           en: "⁇ : Welcome to the letter that I wrote to myself today.",
           zh: "🐼:欢迎收听……今天这封写给自己的信。",
           pinyin: "🐼: huān yíng shōu tīng …… jīn tiān zhè fēng xiě gěi zì jǐ de xìn。",
-          vi: "🐼: Chào mừng đến với... bức thư hôm nay gửi cho chính mình."
+          vi: "🐼: Mời bạn lắng nghe lá thư hôm nay tôi viết cho chính mình."
         },
         {
           start: 12.33,
@@ -16698,7 +16698,7 @@
           en: "GUY: Hello, I'm Zijun.",
           zh: "🐼:你好，我是子轩。",
           pinyin: "🐼: nǐ hǎo， wǒ shì Zǐxuān。",
-          vi: "🐼: Xin chào, tôi là Zixuan."
+          vi: "🐼: Xin chào, tôi là Tử Hiên."
         },
         {
           start: 15.17,
@@ -16737,7 +16737,7 @@
           en: "⁇ : Welcome to the letter that I wrote to myself today.",
           zh: "🐼:欢迎收听……今天这封写给自己的信。",
           pinyin: "🐼: huān yíng shōu tīng …… jīn tiān zhè fēng xiě gěi zì jǐ de xìn。",
-          vi: "Chào mừng đến với bức thư của chính mình hôm nay."
+          vi: "Mời bạn lắng nghe lá thư hôm nay tôi viết cho chính mình."
         },
         {
           start: 11.13,
@@ -16745,7 +16745,7 @@
           en: "GUY: Hello, I'm Zijun.",
           zh: "🐼:你好，我是子轩。",
           pinyin: "🐼: nǐ hǎo， wǒ shì Zǐxuān。",
-          vi: "Xin chào, tôi là Fletcher."
+          vi: "Xin chào, tôi là Tử Hiên."
         },
         {
           start: 13.63,

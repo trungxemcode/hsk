@@ -3,6 +3,7 @@
 - Phạm vi: chỉ thêm nội dung vào Luyện nghe Podcast, trên PC và điện thoại. Danh sách 15 video người dùng đã xử lý được loại khỏi đợt này.
 - Đã thêm năm gói trong `content/podcast/cues/` và khai báo trong `LIBRARY_EPISODES`: `btc3DJx5eO8` (266), `fDT6wh9y8es` (281), `C5VK4bR725E` (299), `E5pdmms97EA` (288), `o2apMtJSoao` (268).
 - Mốc thời gian lấy từ phụ đề YouTube qua endpoint Podcast của app. Pinyin do pinyin-pro tạo. Lớp tiếng Anh và phần tiếng Việt còn thiếu dùng bản dịch máy. Đã kiểm tra cấu trúc và mốc thời gian, chưa hiệu đính toàn bộ bản dịch.
+- Đã đối chiếu và hiệu đính 59 đoạn Việt ở năm tập. Kết quả dịch máy của đợt tiếp theo là bản nháp, cần so với câu Hán và ngữ cảnh liền kề trước khi đưa vào app. Kiểm tra câu phủ định, tên người, đại từ, thành ngữ và ý câu bị chia qua nhiều mốc.
 - Kênh có 258 video ngoài danh sách cần rà, trong đó endpoint trả về phụ đề tiếng Trung có timestamp cho 96 video. 162 video cần nguồn phụ đề khác.
 
 # Current task: Tích hợp trọn bộ 146 gói script Podcast 4 lớp & kênh `@ChineseDailyPodcast` (2026-11-15)

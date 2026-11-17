@@ -11,7 +11,7 @@
       "en": "⁇ : Welcome to the letter that I wrote to myself today.",
       "zh": "🐼:欢迎收听……今天这封写给自己的信。",
       "pinyin": "🐼: huān yíng shōu tīng …… jīn tiān zhè fēng xiě gěi zì jǐ de xìn。",
-      "vi": "Chào mừng đến với bức thư của chính mình hôm nay."
+      "vi": "Mời bạn lắng nghe lá thư hôm nay tôi viết cho chính mình."
     },
     {
       "start": 11.13,
@@ -19,7 +19,7 @@
       "en": "GUY: Hello, I'm Zijun.",
       "zh": "🐼:你好，我是子轩。",
       "pinyin": "🐼: nǐ hǎo， wǒ shì Zǐxuān。",
-      "vi": "Xin chào, tôi là Fletcher."
+      "vi": "Xin chào, tôi là Tử Hiên."
     },
     {
       "start": 13.63,
@@ -299,7 +299,7 @@
       "en": "Q: Later on, he had a steady job.",
       "zh": "🐼:后来他有了稳定的工作，",
       "pinyin": "🐼: hòu lái tā yǒu le wěn dìng de gōng zuò，",
-      "vi": "Sau đó, anh ta có một công việc ổn định."
+      "vi": "Sau này, anh tìm được một công việc ổn định,"
     },
     {
       "start": 96.47,
@@ -307,7 +307,7 @@
       "en": "Q: Life seems to be good.",
       "zh": "🐼:看起来生活得不错，",
       "pinyin": "🐼: kàn qǐ lái shēng huó dé bú cuò，",
-      "vi": "Trông được đấy."
+      "vi": "cuộc sống nhìn qua cũng khá ổn."
     },
     {
       "start": 98.4,
@@ -315,7 +315,7 @@
       "en": "⁇ : Every time you see someone with a camera away,",
       "zh": "🐼:可每当看见别人拿着相机远行，",
       "pinyin": "🐼: kě měi dāng kàn jiàn bié rén ná zhe xiàng jī yuǎn xíng，",
-      "vi": "Mỗi lần nhìn thấy ai đó cầm máy ảnh đi xa,"
+      "vi": "Nhưng mỗi khi thấy người khác xách máy ảnh đi xa,"
     },
     {
       "start": 101.67,
@@ -595,7 +595,7 @@
       "en": "⁇ : He stopped taking pictures.",
       "zh": "🐼:他不再拍照。",
       "pinyin": "🐼: tā bú zài pāi zhào。",
-      "vi": "Anh ta không chụp ảnh nữa."
+      "vi": "Anh không còn chụp ảnh nữa."
     },
     {
       "start": 185.67,
@@ -603,7 +603,7 @@
       "en": "Q: In the fifth year, he was asked about his dream.",
       "zh": "🐼:第五年，有人问起他的梦想，",
       "pinyin": "🐼: dì wǔ nián， yǒu rén wèn qǐ tā de mèng xiǎng，",
-      "vi": "Có người hỏi về giấc mơ của anh ấy."
+      "vi": "Đến năm thứ năm, có người hỏi anh về ước mơ."
     },
     {
       "start": 188.47,
@@ -611,7 +611,7 @@
       "en": "⁇ : He smiled and said, \"Just think about it when you're young.\"",
       "zh": "🐼:他笑着说：“年轻时随便想想而已。”",
       "pinyin": "🐼: tā xiào zhe shuō：“ nián qīng shí suí biàn xiǎng xiǎng ér yǐ。”",
-      "vi": "Ổng cười và nói: \"Hãy nghĩ về điều đó khi còn trẻ.\""
+      "vi": "Anh cười đáp: «Hồi trẻ nghĩ vu vơ vậy thôi.»"
     },
     {
       "start": 192,
@@ -1187,7 +1187,7 @@
       "en": "⁇ : Don't go.”  ⁇   ⁇  another important word is “regrete”.",
       "zh": "🐼:别去了。”, 🐼:另一个重要的词是“后悔”。",
       "pinyin": "🐼: bié qù le。”, 🐼: lìng yí gè zhòng yào de cí shì “ hòu huǐ ”。",
-      "vi": "Từ quan trọng nhất là hối hận."
+      "vi": "«Đừng đi nữa.» Một từ quan trọng khác là «hối tiếc»."
     },
     {
       "start": 359.2,
@@ -1195,7 +1195,7 @@
       "en": "⁇ : Regret is what we want to happen in the past.",
       "zh": "🐼:后悔就是希望过去发生过的事，",
       "pinyin": "🐼: hòu huǐ jiù shì xī wàng guò qù fā shēng guò de shì，",
-      "vi": "Mong là chuyện gì đã xảy ra trước đây sẽ xảy ra."
+      "vi": "Hối tiếc là khi mình ước chuyện đã qua"
     },
     {
       "start": 362.1,
@@ -1203,7 +1203,7 @@
       "en": "⁇ : It can be different.",
       "zh": "🐼:可以变得不一样。",
       "pinyin": "🐼: kě yǐ biàn de bù yí yàng。",
-      "vi": "Chúng ta có thể trở nên khác biệt."
+      "vi": "có thể diễn ra theo một cách khác."
     },
     {
       "start": 363.4,
@@ -1483,7 +1483,7 @@
       "en": "⁇ : I went to the old street nearby on Sunday afternoon.",
       "zh": "🐼:周日下午去了附近的老街。",
       "pinyin": "🐼: zhōu rì xià wǔ qù le fù jìn de lǎo jiē。",
-      "vi": "Chiều chủ nhật, tôi đi đến đường cũ."
+      "vi": "Chiều Chủ nhật, anh đến một con phố cổ gần đó."
     },
     {
       "start": 441.27,
@@ -1491,7 +1491,7 @@
       "en": "‘He auctions the fruits of old people.’",
       "zh": "🐼:他拍卖水果的老人，",
       "pinyin": "🐼: tā pāi mài shuǐ guǒ de lǎo rén，",
-      "vi": "Ông già bán trái cây,"
+      "vi": "Anh chụp ảnh cụ già bán trái cây,"
     },
     {
       "start": 443.1,
@@ -1499,7 +1499,7 @@
       "en": "⁇ : Stalking the children running after the wind.",
       "zh": "🐼:拍追着风跑的孩子，",
       "pinyin": "🐼: pāi zhuī zhe fēng pǎo de hái zi，",
-      "vi": "Những đứa trẻ theo đuổi chúng tôi."
+      "vi": "chụp những đứa trẻ chạy đuổi theo gió,"
     },
     {
       "start": 444.83,
@@ -1787,7 +1787,7 @@
       "en": "⁇ : He posted the photos online.",
       "zh": "🐼:他把照片放到网上，",
       "pinyin": "🐼: tā bǎ zhào piàn fàng dào wǎng shàng，",
-      "vi": "Hắn đưa ảnh lên mạng."
+      "vi": "anh đăng ảnh lên mạng."
     },
     {
       "start": 528.2,
@@ -1795,7 +1795,7 @@
       "en": "⁇ : Not much.",
       "zh": "🐼:收到的喜欢不算多。",
       "pinyin": "🐼: shōu dào de xǐ huan bú suàn duō。",
-      "vi": "Thích nhiều cũng không nhiều."
+      "vi": "Ảnh cũng chẳng được nhiều lượt thích."
     },
     {
       "start": 529.9,
@@ -2075,7 +2075,7 @@
       "en": "“Now that I know,",
       "zh": "🐼:“既然我现在知道了，",
       "pinyin": "🐼:“ jì rán wǒ xiàn zài zhī dào le，",
-      "vi": "Bây giờ tôi đã biết rồi."
+      "vi": "«Giờ mình đã hiểu rồi,"
     },
     {
       "start": 618.23,
@@ -2083,7 +2083,7 @@
       "en": "⁇ : Where do I want to start again?\"",
       "zh": "🐼:我愿意从哪里重新开始？”",
       "pinyin": "🐼: wǒ yuàn yì cóng nǎ lǐ chóng xīn kāi shǐ？”",
-      "vi": "Tôi có thể bắt đầu lại từ đầu?"
+      "vi": "mình muốn bắt đầu lại từ đâu?»"
     },
     {
       "start": 621.03,
@@ -2091,7 +2091,7 @@
       "en": "Q: Today we know Courage.",
       "zh": "🐼:今天我们认识了“勇气”。",
       "pinyin": "🐼: jīn tiān wǒ men rèn shi le “ yǒng qì ”。",
-      "vi": "Hôm nay chúng ta đã gặp nhau."
+      "vi": "Hôm nay chúng ta đã học từ «can đảm»."
     },
     {
       "start": 623.9,
@@ -2371,7 +2371,7 @@
       "en": ": This letter to myself at the age of 20...",
       "zh": "🐼:这封写给二十岁自己的信……",
       "pinyin": "🐼: zhè fēng xiě gěi èr shí suì zì jǐ de xìn ……",
-      "vi": "Lá thư này gửi cho một người đàn ông 20 tuổi"
+      "vi": "Lá thư gửi tôi của tuổi hai mươi này"
     },
     {
       "start": 725.3,
@@ -2379,7 +2379,7 @@
       "en": "⁇ : It's for you, too.",
       "zh": "🐼:也是写给你的。",
       "pinyin": "🐼: yě shì xiě gěi nǐ de。",
-      "vi": "Tôi cũng viết cho anh nữa."
+      "vi": "cũng là lá thư gửi bạn."
     },
     {
       "start": 727.33,
@@ -2387,7 +2387,7 @@
       "en": ": Thank you for your company.",
       "zh": "🐼:谢谢你的陪伴，",
       "pinyin": "🐼: xiè xiè nǐ de péi bàn，",
-      "vi": "Cảm ơn vì đã ở đây,"
+      "vi": "Cảm ơn bạn đã lắng nghe cùng tôi,"
     },
     {
       "start": 729,
