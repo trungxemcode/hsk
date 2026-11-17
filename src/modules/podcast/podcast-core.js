@@ -16617,6 +16617,241 @@
       ]
     },
     {
+      id: "ep-lctp-extra-btc3DJx5eO8",
+      youtubeId: "btc3DJx5eO8",
+      level: "HSK 2–4",
+      levelGroup: "hsk3",
+      title: "HSK 2 - 4 | What Does Being Poor Say About You? | Chinese Listening Practice",
+      titleVi: "Nghèo khó nói lên điều gì về bạn?",
+      channel: "Learn Chinese Through Podcast",
+      channelName: "Learn Chinese Through Podcast",
+      channelHandle: "@LearnChineseThroughPodcast",
+      channelId: "UCI8Liuxdz6UPv5rgMskfwPg",
+      channelUrl: "https://www.youtube.com/@LearnChineseThroughPodcast",
+      durationSec: 662,
+      durationLabel: "11:02",
+      topic: "Luyện nghe tiếng Trung",
+      note: "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: "content/podcast/cues/btc3DJx5eO8.json",
+      cuesCount: 266,
+      cues: [
+        {
+          start: 6.29,
+          end: 8.35,
+          en: "Hello, I'm Li Ming.",
+          zh: "您好，我是李明。",
+          pinyin: "Nín hǎo， wǒ shì Lǐ Míng。",
+          vi: "Chào mọi người, tôi là Li Ming."
+        },
+        {
+          start: 8.53,
+          end: 12.47,
+          en: "Welcome to `The Daily Podcast of Mandarin'.",
+          zh: "欢迎收听……“普通话每日播客”。",
+          pinyin: "Huān yíng shōu tīng ……“ pǔ tōng huà měi rì bō kè ”。",
+          vi: "Chào mừng đến với… \"Podcast tiếng Hoa hàng ngày\"."
+        },
+        {
+          start: 12.97,
+          end: 15.85,
+          en: "I'd like to ask you one today.",
+          zh: "小宇，今天我想问你一个",
+          pinyin: "Xiǎoyǔ， jīn tiān wǒ xiǎng wèn nǐ yí gè",
+          vi: "Xiaoyu, hôm nay tôi muốn hỏi các bạn một"
+        }
+      ]
+    },
+    {
+      id: "ep-lctp-extra-fDT6wh9y8es",
+      youtubeId: "fDT6wh9y8es",
+      level: "HSK 3+",
+      levelGroup: "hsk3",
+      title: "HSK 3 - 4 | The Cup of Patience | Chinese Listening Practice",
+      titleVi: "Tách trà và bài học về lòng kiên nhẫn",
+      channel: "Learn Chinese Through Podcast",
+      channelName: "Learn Chinese Through Podcast",
+      channelHandle: "@LearnChineseThroughPodcast",
+      channelId: "UCI8Liuxdz6UPv5rgMskfwPg",
+      channelUrl: "https://www.youtube.com/@LearnChineseThroughPodcast",
+      durationSec: 816,
+      durationLabel: "13:36",
+      topic: "Luyện nghe tiếng Trung",
+      note: "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: "content/podcast/cues/fDT6wh9y8es.json",
+      cuesCount: 281,
+      cues: [
+        {
+          start: 6.33,
+          end: 12.06,
+          en: "⁇ : Welcome to the letter that I wrote to myself today.",
+          zh: "🐼:欢迎收听……今天这封写给自己的信。",
+          pinyin: "🐼: huān yíng shōu tīng …… jīn tiān zhè fēng xiě gěi zì jǐ de xìn。",
+          vi: "🐼: Chào mừng đến với... bức thư hôm nay gửi cho chính mình."
+        },
+        {
+          start: 12.33,
+          end: 14.96,
+          en: "GUY: Hello, I'm Zijun.",
+          zh: "🐼:你好，我是子轩。",
+          pinyin: "🐼: nǐ hǎo， wǒ shì Zǐxuān。",
+          vi: "🐼: Xin chào, tôi là Zixuan."
+        },
+        {
+          start: 15.17,
+          end: 19.1,
+          en: "GUARD: Tonight, I'd like to show you one.",
+          zh: "🐼:今晚，我想先请你看一只",
+          pinyin: "🐼: jīn wǎn， wǒ xiǎng xiān qǐng nǐ kàn yì zhī",
+          vi: "🐼: Tối nay, trước tiên tôi muốn giới thiệu với các bạn một"
+        }
+      ]
+    },
+    {
+      id: "ep-lctp-extra-C5VK4bR725E",
+      youtubeId: "C5VK4bR725E",
+      level: "HSK 2–4",
+      levelGroup: "hsk3",
+      title: "HSK 2 - 4 | If I Were 20 Again | Chinese Listening Practice",
+      titleVi: "Nếu tôi lại ở tuổi đôi mươi",
+      channel: "Learn Chinese Through Podcast",
+      channelName: "Learn Chinese Through Podcast",
+      channelHandle: "@LearnChineseThroughPodcast",
+      channelId: "UCI8Liuxdz6UPv5rgMskfwPg",
+      channelUrl: "https://www.youtube.com/@LearnChineseThroughPodcast",
+      durationSec: 735,
+      durationLabel: "12:15",
+      topic: "Luyện nghe tiếng Trung",
+      note: "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: "content/podcast/cues/C5VK4bR725E.json",
+      cuesCount: 299,
+      cues: [
+        {
+          start: 7.2,
+          end: 11.03,
+          en: "⁇ : Welcome to the letter that I wrote to myself today.",
+          zh: "🐼:欢迎收听……今天这封写给自己的信。",
+          pinyin: "🐼: huān yíng shōu tīng …… jīn tiān zhè fēng xiě gěi zì jǐ de xìn。",
+          vi: "Chào mừng đến với bức thư của chính mình hôm nay."
+        },
+        {
+          start: 11.13,
+          end: 13.56,
+          en: "GUY: Hello, I'm Zijun.",
+          zh: "🐼:你好，我是子轩。",
+          pinyin: "🐼: nǐ hǎo， wǒ shì Zǐxuān。",
+          vi: "Xin chào, tôi là Fletcher."
+        },
+        {
+          start: 13.63,
+          end: 15.36,
+          en: "Hello, everyone. I'm Yuzu.",
+          zh: "🐼:大家好，我是雨桐。",
+          pinyin: "🐼: dà jiā hǎo， wǒ shì Yǔtóng。",
+          vi: "Chào mọi người, tôi là mưa."
+        }
+      ]
+    },
+    {
+      id: "ep-lctp-extra-E5pdmms97EA",
+      youtubeId: "E5pdmms97EA",
+      level: "HSK 2–4",
+      levelGroup: "hsk3",
+      title: "HSK 2 - 4 | What Is Your Ultimate Goal for Learning Chinese? | Chinese Listening Practice",
+      titleVi: "Mục tiêu cuối cùng khi học tiếng Trung là gì?",
+      channel: "Learn Chinese Through Podcast",
+      channelName: "Learn Chinese Through Podcast",
+      channelHandle: "@LearnChineseThroughPodcast",
+      channelId: "UCI8Liuxdz6UPv5rgMskfwPg",
+      channelUrl: "https://www.youtube.com/@LearnChineseThroughPodcast",
+      durationSec: 742,
+      durationLabel: "12:22",
+      topic: "Luyện nghe tiếng Trung",
+      note: "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: "content/podcast/cues/E5pdmms97EA.json",
+      cuesCount: 288,
+      cues: [
+        {
+          start: 6.13,
+          end: 9,
+          en: "What is the ultimate purpose of your learning Chinese?",
+          zh: "你学习中文的最终目的是什么？",
+          pinyin: "Nǐ xué xí zhōng wén de zuì zhōng mù dì shì shén me？",
+          vi: "Mục tiêu cuối cùng của bạn khi học tiếng Trung là gì?"
+        },
+        {
+          start: 9.17,
+          end: 10.93,
+          en: "It's about passing the exam.",
+          zh: "是为了通过考试，",
+          pinyin: "Shì wèi le tōng guò kǎo shì，",
+          vi: "Có phải để thi đỗ,"
+        },
+        {
+          start: 10.93,
+          end: 13.13,
+          en: "I've got to get a better job.",
+          zh: "找到一份更好的工作，",
+          pinyin: "Zhǎo dào yí fèn gèng hǎo de gōng zuò，",
+          vi: "tìm được công việc tốt hơn,"
+        }
+      ]
+    },
+    {
+      id: "ep-lctp-extra-o2apMtJSoao",
+      youtubeId: "o2apMtJSoao",
+      level: "HSK 2–4",
+      levelGroup: "hsk3",
+      title: "HSK 2 - 4 | Does Loving Someone Change Who You Are? | Chinese Listening Practice",
+      titleVi: "Yêu một người có làm bạn thay đổi?",
+      channel: "Learn Chinese Through Podcast",
+      channelName: "Learn Chinese Through Podcast",
+      channelHandle: "@LearnChineseThroughPodcast",
+      channelId: "UCI8Liuxdz6UPv5rgMskfwPg",
+      channelUrl: "https://www.youtube.com/@LearnChineseThroughPodcast",
+      durationSec: 735,
+      durationLabel: "12:15",
+      topic: "Luyện nghe tiếng Trung",
+      note: "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      defaultMaskBottom: 4,
+      defaultMaskHeight: 22,
+      cuesUrl: "content/podcast/cues/o2apMtJSoao.json",
+      cuesCount: 268,
+      cues: [
+        {
+          start: 6,
+          end: 6.93,
+          en: "You haven't found anything.",
+          zh: "你有没有发现，",
+          pinyin: "Nǐ yǒu méi yǒu fā xiàn，",
+          vi: "Bạn có nhận thấy rằng"
+        },
+        {
+          start: 7.93,
+          end: 9.8,
+          en: "Like someone else after that.",
+          zh: "喜欢上一个人以后，",
+          pinyin: "Xǐ huan shàng yí gè rén yǐ hòu，",
+          vi: "sau khi yêu một ai đó,"
+        },
+        {
+          start: 9.8,
+          end: 12.9,
+          en: "You seem to be slowly different?",
+          zh: "自己好像慢慢变得不一样了？",
+          pinyin: "Zì jǐ hǎo xiàng màn màn biàn de bù yí yàng le？",
+          vi: "bạn dường như dần dần thay đổi không?"
+        }
+      ]
+    },
+    {
       id: 'ep-cdp-ganfe8bti_u',
       youtubeId: 'gaNfE8BTI_U',
       level: 'HSK 2–4',
