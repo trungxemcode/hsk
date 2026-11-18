@@ -4336,6 +4336,8 @@ html body:not(#_rd)[data-studio-hub="music"] #musicPanel.music-player-expanded[d
  html body:not(#_rd).studio-enabled #studioHome #homeDailyWord .overview-word-row summary strong{font-size:40px!important;line-height:1.2;}
  html body:not(#_rd).studio-enabled #studioHome #homeDailyWord .overview-word-row summary span{font-size:16px!important;}
  html body:not(#_rd).studio-enabled #studioHome #homeDailyWord .overview-word-head button{min-height:44px!important;}
+ html body:not(#_rd).studio-enabled #studioHome #homeDailyWord .overview-word-row summary{grid-template-columns:1fr!important;gap:2px 0!important;}
+ html body:not(#_rd).studio-enabled #studioHome #homeDailyWord .overview-word-row summary strong{grid-row:auto!important;}
  html body:not(#_rd).studio-enabled #studioHome #mobileTodayHero{padding:18px!important;border-radius:var(--rd-r-lg)!important;box-shadow:var(--rd-shadow-xs)!important;}
  html body:not(#_rd).studio-enabled #studioHome #mobileTodayHero .mobile-hero-top h2{font-size:20px!important;}
 }
