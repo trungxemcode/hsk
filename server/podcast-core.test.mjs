@@ -47,12 +47,12 @@ test('HSKPodcastCore starter episodes cover HSK 1-6 with synced 4-layer cues fro
   }
 });
 
-test('LIBRARY_EPISODES and all 440 static podcast cue packs are valid simplified 4-layer scripts', () => {
+test('LIBRARY_EPISODES and all 448 static podcast cue packs are valid simplified 4-layer scripts', () => {
   const lib = podcastCore.LIBRARY_EPISODES || [];
-  assert.equal(lib.length, 433);
+  assert.equal(lib.length, 441);
   const allCurated = [...podcastCore.STARTER_EPISODES, ...lib];
   const withUrl = allCurated.filter((ep) => ep.cuesUrl);
-  assert.equal(withUrl.length, 440);
+  assert.equal(withUrl.length, 448);
   const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
   for (const ep of withUrl) {
     assert.ok(ep.cues.length >= 2, `${ep.id} has preview cues`);

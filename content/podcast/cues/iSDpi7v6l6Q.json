@@ -1,0 +1,2545 @@
+{
+  "id": "iSDpi7v6l6Q",
+  "youtubeId": "iSDpi7v6l6Q",
+  "channelHandle": "@LearnChineseThroughPodcast",
+  "title": "HSK 1-2 | Chinese characters that look like drawings | Chinese Listening Practice",
+  "durationSec": 860,
+  "cues": [
+    {
+      "start": 6.3,
+      "end": 7.3,
+      "zh": "🕺大家好！",
+      "vi": "Xin chào tất cả mọi người!",
+      "en": "Hello, everyone!",
+      "pinyin": "🕺 dà jiā hǎo ！"
+    },
+    {
+      "start": 7.3,
+      "end": 10.67,
+      "zh": "🕺欢迎回到我们的“学中文播客”！",
+      "vi": "Chào mừng quay trở lại với podcast \"Học tiếng Trung\" của chúng ta!",
+      "en": "Welcome back to our Chinese-language podcast!",
+      "pinyin": "🕺 huān yíng huí dào wǒ men de “ xué zhōng wén bō kè ” ！"
+    },
+    {
+      "start": 10.67,
+      "end": 13.13,
+      "zh": "💃大家好！我是小雨。",
+      "vi": "Chào mọi người! Tôi là Tiểu Vũ.",
+      "en": "Hello, everyone! I'm Ame.",
+      "pinyin": "💃 dà jiā hǎo ！ wǒ shì xiǎo yǔ 。"
+    },
+    {
+      "start": 13.13,
+      "end": 14.36,
+      "zh": "🕺我是李明。",
+      "vi": "Tôi là Lý Minh.",
+      "en": "I'm Lee Myung.",
+      "pinyin": "🕺 wǒ shì lǐ míng 。"
+    },
+    {
+      "start": 14.5,
+      "end": 16.17,
+      "zh": "🕺很高兴又和大家见面",
+      "vi": "Rất vui được gặp lại mọi người",
+      "en": "It's good to see you again.",
+      "pinyin": "🕺 hěn gāo xìng yòu hé dà jiā jiàn miàn"
+    },
+    {
+      "start": 16.33,
+      "end": 18,
+      "zh": "🕺了。💃是的，李明。",
+      "vi": "rồi. Đúng vậy, Lý Minh.",
+      "en": "Yes, Li Ming.",
+      "pinyin": "🕺 liǎo 。 💃 shì de ， lǐ míng 。"
+    },
+    {
+      "start": 18.07,
+      "end": 20.2,
+      "zh": "💃我们这个播客的目标，",
+      "vi": "Mục tiêu của podcast chúng ta,",
+      "en": "We're the target of this podcast.",
+      "pinyin": "💃 wǒ men zhè ge bō kè de mù biāo ，"
+    },
+    {
+      "start": 20.2,
+      "end": 23.3,
+      "zh": "💃就是希望大家能用一种简单、",
+      "vi": "là mong mọi người có thể dùng một cách đơn giản,",
+      "en": "It's a simple thing to do.",
+      "pinyin": "💃 jiù shì xī wàng dà jiā néng yòng yì zhǒng jiǎn dān 、"
+    },
+    {
+      "start": 23.3,
+      "end": 25.8,
+      "zh": "💃快乐的方式学习中文。",
+      "vi": "vui vẻ để học tiếng Trung.",
+      "en": "Happy way to learn Chinese.",
+      "pinyin": "💃 kuài lè de fāng shì xué xí zhōng wén 。"
+    },
+    {
+      "start": 26.17,
+      "end": 30.3,
+      "zh": "🕺不管你现在是HSK一级、二级，",
+      "vi": "Dù bây giờ bạn đang ở HSK cấp một, cấp hai,",
+      "en": "I don't care if you're HSK level 1 or 2 now.",
+      "pinyin": "🕺 bù guǎn nǐ xiàn zài shì H S K yī jí 、 èr jí ，"
+    },
+    {
+      "start": 30.5,
+      "end": 34.27,
+      "zh": "🕺还是已经在学习三级、四级的词汇，",
+      "vi": "hay đã đang học từ vựng cấp ba, cấp bốn,",
+      "en": "I'm still learning about the three levels and four levels of terminology.",
+      "pinyin": "🕺 hái shì yǐ jīng zài xué xí sān jí 、 sì jí de cí huì ，"
+    },
+    {
+      "start": 34.4,
+      "end": 38.5,
+      "zh": "🕺我们都会努力让学习变得轻松有趣，",
+      "vi": "chúng tôi đều sẽ cố gắng để việc học trở nên nhẹ nhàng, thú vị,",
+      "en": "We all try to make learning easy and fun.",
+      "pinyin": "🕺 wǒ men dōu huì nǔ lì ràng xué xí biàn de qīng sōng yǒu qù ，"
+    },
+    {
+      "start": 38.73,
+      "end": 41.06,
+      "zh": "🕺让你感受到中文的魅力。",
+      "vi": "giúp bạn cảm nhận được sức hút của tiếng Trung.",
+      "en": "The gin makes you feel the charm of Chinese.",
+      "pinyin": "🕺 ràng nǐ gǎn shòu dào zhōng wén de mèi lì 。"
+    },
+    {
+      "start": 41.07,
+      "end": 42.04,
+      "zh": "💃没错！",
+      "vi": "Đúng vậy!",
+      "en": "That's right!",
+      "pinyin": "💃 méi cuò ！"
+    },
+    {
+      "start": 42.07,
+      "end": 46.53,
+      "zh": "💃我们知道，很多朋友觉得汉字很难，",
+      "vi": "Chúng tôi biết, nhiều bạn cảm thấy chữ Hán rất khó,",
+      "en": "We know that many friends find it difficult to write Chinese.",
+      "pinyin": "💃 wǒ men zhī dào ， hěn duō péng yǒu jué de hàn zì hěn nán ，"
+    },
+    {
+      "start": 46.53,
+      "end": 48.43,
+      "zh": "💃笔画很多。",
+      "vi": "nét rất nhiều.",
+      "en": "A lot of pens.",
+      "pinyin": "💃 bǐ huà hěn duō 。"
+    },
+    {
+      "start": 48.8,
+      "end": 49.93,
+      "zh": "💃但你知道吗？",
+      "vi": "Nhưng bạn có biết không?",
+      "en": "But you know what?",
+      "pinyin": "💃 dàn nǐ zhī dào ma ？"
+    },
+    {
+      "start": 49.93,
+      "end": 52.1,
+      "zh": "💃其实很多汉字，",
+      "vi": "Thật ra rất nhiều chữ Hán,",
+      "en": "It's really a lot of Chinese.",
+      "pinyin": "💃 qí shí hěn duō hàn zì ，"
+    },
+    {
+      "start": 52.1,
+      "end": 55.4,
+      "zh": "💃它们最初的样子，就像一幅幅",
+      "vi": "hình dáng ban đầu của chúng giống như từng bức",
+      "en": "It's like a picture.",
+      "pinyin": "💃 tā men zuì chū de yàng zi ， jiù xiàng yì fú fú"
+    },
+    {
+      "start": 55.4,
+      "end": 57.4,
+      "zh": "💃可爱的图画！",
+      "vi": "tranh vẽ đáng yêu!",
+      "en": "Cute drawings!",
+      "pinyin": "💃 kě ài de tú huà ！"
+    },
+    {
+      "start": 57.57,
+      "end": 59.37,
+      "zh": "🕺小雨说得太好了！",
+      "vi": "Tiểu Vũ nói hay quá!",
+      "en": "That's a great thing to say!",
+      "pinyin": "🕺 xiǎo yǔ shuō dé tài hǎo le ！"
+    },
+    {
+      "start": 59.37,
+      "end": 62.04,
+      "zh": "🕺所以我们今天的话题就是：",
+      "vi": "Vậy nên chủ đề hôm nay của chúng ta là:",
+      "en": "So today's topic is:",
+      "pinyin": "🕺 suǒ yǐ wǒ men jīn tiān de huà tí jiù shì ："
+    },
+    {
+      "start": 62.1,
+      "end": 65.2,
+      "zh": "🕺“那些看起来像图画的汉字”。",
+      "vi": "\"Những chữ Hán trông giống như tranh vẽ\".",
+      "en": "\"The characters that look like drawings.\"",
+      "pinyin": "🕺 “ nà xiē kàn qǐ lái xiàng tú huà de hàn zì ” 。"
+    },
+    {
+      "start": 65.53,
+      "end": 67.13,
+      "zh": "🕺我们会一起看看，",
+      "vi": "Chúng ta sẽ cùng xem,",
+      "en": "We'll take a look together.",
+      "pinyin": "🕺 wǒ men huì yì qǐ kàn kàn ，"
+    },
+    {
+      "start": 67.13,
+      "end": 69.83,
+      "zh": "🕺古人是怎样“画”出文字来的。",
+      "vi": "người xưa đã \"vẽ\" ra chữ viết như thế nào.",
+      "en": "How do the ancients \"paint\" come out of words?",
+      "pinyin": "🕺 gǔ rén shì zěn yàng “ huà ” chū wén zì lái de 。"
+    },
+    {
+      "start": 70.1,
+      "end": 72,
+      "zh": "💃听起来很有趣！",
+      "vi": "Nghe thú vị thật đấy!",
+      "en": "It sounds like fun!",
+      "pinyin": "💃 tīng qǐ lái hěn yǒu qù ！"
+    },
+    {
+      "start": 72.13,
+      "end": 75.4,
+      "zh": "💃李明，我感觉大家已经准备好了！",
+      "vi": "Lý Minh, tôi cảm thấy mọi người đã sẵn sàng rồi!",
+      "en": "Li Ming, I think we're ready!",
+      "pinyin": "💃 lǐ míng ， wǒ gǎn jué dà jiā yǐ jīng zhǔn bèi hǎo le ！"
+    },
+    {
+      "start": 75.4,
+      "end": 76.67,
+      "zh": "🕺那太棒了！",
+      "vi": "Tuyệt quá!",
+      "en": "That's great!",
+      "pinyin": "🕺 nà tài bàng le ！"
+    },
+    {
+      "start": 76.77,
+      "end": 80.1,
+      "zh": "🕺在开始今天的“汉字画廊”之前，",
+      "vi": "Trước khi bắt đầu \"phòng trưng bày chữ Hán\" của hôm nay,",
+      "en": "Before the beginning of today's \"Handbook Gallery\" ,",
+      "pinyin": "🕺 zài kāi shǐ jīn tiān de “ hàn zì huà láng ” zhī qián ，"
+    },
+    {
+      "start": 80.13,
+      "end": 83,
+      "zh": "🕺请大家找一个舒服的地方坐下，",
+      "vi": "mọi người hãy tìm một chỗ ngồi thoải mái,",
+      "en": "Let's find a comfortable place to sit.",
+      "pinyin": "🕺 qǐng dà jiā zhǎo yí gè shū fú de dì fāng zuò xià ，"
+    },
+    {
+      "start": 83,
+      "end": 84.67,
+      "zh": "🕺泡一杯热茶。",
+      "vi": "pha một tách trà nóng.",
+      "en": "Make a cup of hot tea.",
+      "pinyin": "🕺 pào yì bēi rè chá 。"
+    },
+    {
+      "start": 84.73,
+      "end": 86.9,
+      "zh": "🕺让我们一起轻松地",
+      "vi": "Chúng ta hãy cùng nhau thoải mái",
+      "en": "We'll be all right together.",
+      "pinyin": "🕺 ràng wǒ men yì qǐ qīng sōng dì"
+    },
+    {
+      "start": 86.9,
+      "end": 88.87,
+      "zh": "🕺进入今天的学习时间。",
+      "vi": "bước vào giờ học của ngày hôm nay.",
+      "en": "⁇  into today's learning time.",
+      "pinyin": "🕺 jìn rù jīn tiān de xué xí shí jiān 。"
+    },
+    {
+      "start": 88.87,
+      "end": 90.94,
+      "zh": "💃是的，如果你喜欢",
+      "vi": "Đúng vậy, nếu bạn thích",
+      "en": "Yeah, if you like.",
+      "pinyin": "💃 shì de ， rú guǒ nǐ xǐ huan"
+    },
+    {
+      "start": 91,
+      "end": 91.97,
+      "zh": "💃我们的节目，",
+      "vi": "chương trình của chúng tôi,",
+      "en": "We're on a show.",
+      "pinyin": "💃 wǒ men de jié mù ，"
+    },
+    {
+      "start": 91.97,
+      "end": 95.37,
+      "zh": "💃记得点赞、分享给你的朋友们哦！",
+      "vi": "nhớ like và chia sẻ cho bạn bè nhé!",
+      "en": "Remember to share it with your friends!",
+      "pinyin": "💃 jì de diǎn zàn 、 fēn xiǎng gěi nǐ de péng yǒu men ò ！"
+    },
+    {
+      "start": 95.37,
+      "end": 97.84,
+      "zh": "💃好了，李明，我们开始吧！",
+      "vi": "Được rồi, Lý Minh, chúng ta bắt đầu thôi!",
+      "en": "All right, Li Ming, let's go!",
+      "pinyin": "💃 hǎo le ， lǐ míng ， wǒ men kāi shǐ ba ！"
+    },
+    {
+      "start": 98.3,
+      "end": 99.63,
+      "zh": "🕺好，小雨，",
+      "vi": "Được, Tiểu Vũ,",
+      "en": "Good, Ame.",
+      "pinyin": "🕺 hǎo ， xiǎo yǔ ，"
+    },
+    {
+      "start": 99.73,
+      "end": 102.3,
+      "zh": "🕺我们先从最基本的概念开始。",
+      "vi": "chúng ta bắt đầu từ khái niệm cơ bản nhất trước.",
+      "en": "Let us begin with the most basic concepts.",
+      "pinyin": "🕺 wǒ men xiān cóng zuì jī běn de gài niàn kāi shǐ 。"
+    },
+    {
+      "start": 102.3,
+      "end": 103.97,
+      "zh": "💃好的。🕺大家",
+      "vi": "Được rồi. Mọi người",
+      "en": "All right, everybody.",
+      "pinyin": "💃 hǎo de 。 🕺 dà jiā"
+    },
+    {
+      "start": 104.07,
+      "end": 106.3,
+      "zh": "🕺都知道，汉字有很多种，",
+      "vi": "đều biết, chữ Hán có rất nhiều loại,",
+      "en": "The Chinese have many kinds.",
+      "pinyin": "🕺 dōu zhī dào ， hàn zì yǒu hěn duō zhǒng ，"
+    },
+    {
+      "start": 106.4,
+      "end": 110.5,
+      "zh": "🕺而我们今天说的“看起来像图画的字”，",
+      "vi": "còn \"những chữ trông giống như tranh vẽ\" mà hôm nay chúng ta nói đến,",
+      "en": "And what we say today is, \"Looks like the words of the drawing,\"",
+      "pinyin": "🕺 ér wǒ men jīn tiān shuō de “ kàn qǐ lái xiàng tú huà de zì ” ，"
+    },
+    {
+      "start": 110.57,
+      "end": 112.3,
+      "zh": "🕺在汉字的历史里，",
+      "vi": "trong lịch sử chữ Hán,",
+      "en": "In the history of Han,",
+      "pinyin": "🕺 zài hàn zì de lì shǐ lǐ ，"
+    },
+    {
+      "start": 112.3,
+      "end": 115.03,
+      "zh": "🕺我们叫它们“象形字”。",
+      "vi": "chúng ta gọi chúng là \"chữ tượng hình\".",
+      "en": "We call them pictograms.",
+      "pinyin": "🕺 wǒ men jiào tā men “ xiàng xíng zì ” 。"
+    },
+    {
+      "start": 115.2,
+      "end": 119.63,
+      "zh": "💃“象形字”。“象”是“好像”的意思，",
+      "vi": "\"Chữ tượng hình\". \"Tượng\" có nghĩa là \"giống như\",",
+      "en": "\"Imaging\" means \"like\".",
+      "pinyin": "💃 “ xiàng xíng zì ” 。 “ xiàng ” shì “ hǎo xiàng ” de yì sī ，"
+    },
+    {
+      "start": 119.8,
+      "end": 121.47,
+      "zh": "💃“形”是“形状”。",
+      "vi": "\"hình\" là \"hình dạng\".",
+      "en": "The form is the shape.",
+      "pinyin": "💃 “ xíng ” shì “ xíng zhuàng ” 。"
+    },
+    {
+      "start": 121.47,
+      "end": 122.17,
+      "zh": "💃就是说，",
+      "vi": "Tức là,",
+      "en": "It's just that, you know,",
+      "pinyin": "💃 jiù shì shuō ，"
+    },
+    {
+      "start": 122.17,
+      "end": 126.3,
+      "zh": "💃这些字是模仿事物形状创造出来的。",
+      "vi": "những chữ này được tạo ra bằng cách mô phỏng hình dạng của sự vật.",
+      "en": "These words are created by imitating the shape of things.",
+      "pinyin": "💃 zhè xiē zì shì mó fǎng shì wù xíng zhuàng chuàng zào chū lái de 。"
+    },
+    {
+      "start": 126.3,
+      "end": 129.77,
+      "zh": "🕺对，它们是最古老的汉字之一。",
+      "vi": "Đúng, chúng là một trong những chữ Hán cổ nhất.",
+      "en": "Right, they're one of the oldest characters.",
+      "pinyin": "🕺 duì ， tā men shì zuì gǔ lǎo de hàn zì zhī yī 。"
+    },
+    {
+      "start": 130,
+      "end": 131.3,
+      "zh": "🕺想象一下，",
+      "vi": "Hãy tưởng tượng xem,",
+      "en": "Imagine that.",
+      "pinyin": "🕺 xiǎng xiàng yí xià ，"
+    },
+    {
+      "start": 131.57,
+      "end": 132.97,
+      "zh": "🕺几千年前，",
+      "vi": "cách đây mấy nghìn năm,",
+      "en": "It's been a few thousand years.",
+      "pinyin": "🕺 jǐ qiān nián qián ，"
+    },
+    {
+      "start": 132.97,
+      "end": 135.27,
+      "zh": "🕺人们想要记录“太阳”，",
+      "vi": "con người muốn ghi lại “mặt trời”,",
+      "en": "The people want to record the \"Sun,\" but they don't know what to do.",
+      "pinyin": "🕺 rén men xiǎng yào jì lù “ tài yáng ” ，"
+    },
+    {
+      "start": 135.3,
+      "end": 138.5,
+      "zh": "🕺他们就简单地画了一个圆圈，",
+      "vi": "họ chỉ đơn giản vẽ một vòng tròn,",
+      "en": "They simply drew a circle.",
+      "pinyin": "🕺 tā men jiù jiǎn dān dì huà le yí gè yuán quān ，"
+    },
+    {
+      "start": 138.5,
+      "end": 141.23,
+      "zh": "🕺里面有一点。💃哇，",
+      "vi": "trong đó có một chấm. 💃Wow,",
+      "en": "It's a little bit inside.",
+      "pinyin": "🕺 lǐ miàn yǒu yì diǎn 。 💃 wā ，"
+    },
+    {
+      "start": 141.33,
+      "end": 143.46,
+      "zh": "💃这真的很有画面感！",
+      "vi": "thật là giàu hình ảnh!",
+      "en": "It's really visual!",
+      "pinyin": "💃 zhè zhēn de hěn yǒu huà miàn gǎn ！"
+    },
+    {
+      "start": 143.77,
+      "end": 147.77,
+      "zh": "💃那么，这个“太阳”后来变成了哪个字呢？",
+      "vi": "Vậy thì “mặt trời” này sau đó đã trở thành chữ nào?",
+      "en": "So, what's this \"Sun\" become?",
+      "pinyin": "💃 nà me ， zhè ge “ tài yáng ” hòu lái biàn chéng le nǎ gè zì ne ？"
+    },
+    {
+      "start": 147.77,
+      "end": 150.44,
+      "zh": "🕺它就是我们现在说的“日”。",
+      "vi": "Nó chính là chữ “日” mà chúng ta nói bây giờ.",
+      "en": "It's what we are talking about now.",
+      "pinyin": "🕺 tā jiù shì wǒ men xiàn zài shuō de “ rì ” 。"
+    },
+    {
+      "start": 150.9,
+      "end": 153.17,
+      "zh": "🕺最初的字形就是一个",
+      "vi": "Hình chữ ban đầu chính là một",
+      "en": "The original form of the platinum is one.",
+      "pinyin": "🕺 zuì chū de zì xíng jiù shì yí gè"
+    },
+    {
+      "start": 153.27,
+      "end": 155.2,
+      "zh": "🕺圆圈中间加一点，",
+      "vi": "vòng tròn thêm một chấm ở giữa,",
+      "en": "A little in the middle of a circle.",
+      "pinyin": "🕺 yuán quān zhōng jiān jiā yì diǎn ，"
+    },
+    {
+      "start": 155.3,
+      "end": 156.6,
+      "zh": "🕺后来慢慢演",
+      "vi": "sau đó dần dần biến đổi",
+      "en": "♪ And then it's going to take a long time ♪",
+      "pinyin": "🕺 hòu lái màn màn yǎn"
+    },
+    {
+      "start": 156.6,
+      "end": 160.1,
+      "zh": "🕺变成了我们今天看到的方形的“日”。",
+      "vi": "thành chữ “日” hình vuông như chúng ta thấy ngày nay.",
+      "en": "It became the day of squares that we see today.",
+      "pinyin": "🕺 biàn chéng le wǒ men jīn tiān kàn dào de fāng xíng de “ rì ” 。"
+    },
+    {
+      "start": 160.13,
+      "end": 162.3,
+      "zh": "💃“日”，每天的“日”。",
+      "vi": "“日”, chữ “日” trong “mỗi ngày”.",
+      "en": "“Days”, daily days.",
+      "pinyin": "💃 “ rì ” ， měi tiān de “ rì ” 。"
+    },
+    {
+      "start": 162.37,
+      "end": 165.07,
+      "zh": "💃这是一个HSK一级词汇。",
+      "vi": "Đây là từ vựng cấp độ một của HSK.",
+      "en": "That's a HSK level-one vocabulary.",
+      "pinyin": "💃 zhè shì yí gè H S K yī jí cí huì 。"
+    },
+    {
+      "start": 165.2,
+      "end": 168.87,
+      "zh": "💃原来“日”这个字，就是太阳的图画！",
+      "vi": "Thì ra chữ “日” chính là hình vẽ mặt trời!",
+      "en": "The word \"day\" is a drawing of the sun!",
+      "pinyin": "💃 yuán lái “ rì ” zhè ge zì ， jiù shì tài yáng de tú huà ！"
+    },
+    {
+      "start": 169.13,
+      "end": 172.43,
+      "zh": "💃这让我想到了另外一个字，“月”！",
+      "vi": "Điều này làm tôi nhớ đến một chữ khác, “月”!",
+      "en": "It reminds me of another word, Moon!",
+      "pinyin": "💃 zhè ràng wǒ xiǎng dào le lìng wài yí gè zì ， “ yuè ” ！"
+    },
+    {
+      "start": 172.57,
+      "end": 174.47,
+      "zh": "🕺说得好！“月”，",
+      "vi": "Nói hay lắm! “月”,",
+      "en": "\"Moon\" is a good word.",
+      "pinyin": "🕺 shuō dé hǎo ！ “ yuè ” ，"
+    },
+    {
+      "start": 174.53,
+      "end": 175.9,
+      "zh": "🕺月亮的“月”。",
+      "vi": "chữ “月” trong “mặt trăng”.",
+      "en": "The moon's moon.",
+      "pinyin": "🕺 yuè liàng de “ yuè ” 。"
+    },
+    {
+      "start": 176.37,
+      "end": 178.33,
+      "zh": "🕺古人画月亮的时候，",
+      "vi": "Khi người xưa vẽ mặt trăng,",
+      "en": "And when the ancients draw the moon,",
+      "pinyin": "🕺 gǔ rén huà yuè liàng de shí hòu ，"
+    },
+    {
+      "start": 178.33,
+      "end": 180.16,
+      "zh": "🕺不是画一个满月，",
+      "vi": "không vẽ một vầng trăng tròn,",
+      "en": "The Queen is not drawing a full moon.",
+      "pinyin": "🕺 bú shì huà yí gè mǎn yuè ，"
+    },
+    {
+      "start": 180.27,
+      "end": 183,
+      "zh": "🕺而是画一个弯弯的月牙。",
+      "vi": "mà vẽ một vành trăng khuyết cong cong.",
+      "en": "And instead, draw a bending moustache.",
+      "pinyin": "🕺 ér shì huà yí gè wān wān de yuè yá 。"
+    },
+    {
+      "start": 183,
+      "end": 184.93,
+      "zh": "💃对！“月”字",
+      "vi": "Đúng! Chữ “月”",
+      "en": "Right. Months.",
+      "pinyin": "💃 duì ！ “ yuè ” zì"
+    },
+    {
+      "start": 184.93,
+      "end": 188.03,
+      "zh": "💃看起来就像一个侧面的小船，",
+      "vi": "trông giống như một con thuyền nhỏ nghiêng bên,",
+      "en": "It looks like a side boat.",
+      "pinyin": "💃 kàn qǐ lái jiù xiàng yí gè cè miàn de xiǎo chuán ，"
+    },
+    {
+      "start": 188.2,
+      "end": 191.77,
+      "zh": "💃或者说，一个弯弯的香蕉形状。",
+      "vi": "hay nói cách khác, hình dáng cong cong như quả chuối.",
+      "en": "Or, a bending banana shape.",
+      "pinyin": "💃 huò zhě shuō ， yí gè wān wān de xiāng jiāo xíng zhuàng 。"
+    },
+    {
+      "start": 192.13,
+      "end": 192.93,
+      "zh": "🕺你看，",
+      "vi": "Bạn xem,",
+      "en": "Look at that.",
+      "pinyin": "🕺 nǐ kàn ，"
+    },
+    {
+      "start": 193.17,
+      "end": 197.57,
+      "zh": "🕺把“日”和“月”放在一起，是不是很有趣？",
+      "vi": "đặt “日” và “月” cạnh nhau, có phải rất thú vị không?",
+      "en": "Isn't it interesting to put the sun and the moon together?",
+      "pinyin": "🕺 bǎ “ rì ” hé “ yuè ” fàng zài yì qǐ ， shì bu shì hěn yǒu qù ？"
+    },
+    {
+      "start": 197.8,
+      "end": 199.7,
+      "zh": "🕺一个圆，一个弯。",
+      "vi": "một cái tròn, một cái cong.",
+      "en": "A circle, a bend.",
+      "pinyin": "🕺 yí gè yuán ， yí gè wān 。"
+    },
+    {
+      "start": 199.7,
+      "end": 200.7,
+      "zh": "💃是的，",
+      "vi": "Đúng vậy,",
+      "en": "Yes, it is.",
+      "pinyin": "💃 shì de ，"
+    },
+    {
+      "start": 200.73,
+      "end": 204.13,
+      "zh": "💃而且它们加起来就是“明”（míng）这个字，",
+      "vi": "và chúng cộng lại chính là chữ “明” (míng),",
+      "en": "⁇  and they add up to the word \"míng,\"",
+      "pinyin": "💃 ér qiě tā men jiā qǐ lái jiù shì “ míng ” （ m í n g ） zhè ge zì ，"
+    },
+    {
+      "start": 204.13,
+      "end": 206.63,
+      "zh": "💃光明、明亮的意思！",
+      "vi": "ý là quang minh, sáng rõ!",
+      "en": "It's light and bright!",
+      "pinyin": "💃 guāng míng 、 míng liàng de yì sī ！"
+    },
+    {
+      "start": 206.8,
+      "end": 209.27,
+      "zh": "💃太阳和月亮在一起，",
+      "vi": "Mặt trời và mặt trăng ở cùng nhau,",
+      "en": "And the sun and the moon.",
+      "pinyin": "💃 tài yáng hé yuè liàng zài yì qǐ ，"
+    },
+    {
+      "start": 209.27,
+      "end": 211.57,
+      "zh": "💃当然就是“明”亮了。",
+      "vi": "tất nhiên là “sáng” rồi.",
+      "en": "And the word \"blind\" of course is bright.",
+      "pinyin": "💃 dāng rán jiù shì “ míng ” liàng le 。"
+    },
+    {
+      "start": 211.93,
+      "end": 215.3,
+      "zh": "🕺完美！这就是象形字的魅力。",
+      "vi": "Hoàn hảo! Đó chính là sức hấp dẫn của chữ tượng hình.",
+      "en": "It's perfect! That's the charm of hieroglyphs.",
+      "pinyin": "🕺 wán měi ！ zhè jiù shì xiàng xíng zì de mèi lì 。"
+    },
+    {
+      "start": 215.77,
+      "end": 218.3,
+      "zh": "🕺再来看看大自然中的景象。",
+      "vi": "Hãy cùng xem cảnh tượng trong thiên nhiên.",
+      "en": "And look at nature again.",
+      "pinyin": "🕺 zài lái kàn kàn dà zì rán zhōng de jǐng xiàng 。"
+    },
+    {
+      "start": 218.5,
+      "end": 222.43,
+      "zh": "🕺比如“山”。💃“山”，山峰的“山”！",
+      "vi": "Ví dụ như “山”. 💃“山”, chữ “山” trong “ngọn núi”!",
+      "en": "The mountains. The mountains, the mountains!",
+      "pinyin": "🕺 bǐ rú “ shān ” 。 💃 “ shān ” ， shān fēng de “ shān ” ！"
+    },
+    {
+      "start": 222.7,
+      "end": 225.1,
+      "zh": "💃这个字太像图画了！",
+      "vi": "Chữ này trông quá giống một bức vẽ!",
+      "en": "It's a lot like drawing!",
+      "pinyin": "💃 zhè ge zì tài xiàng tú huà le ！"
+    },
+    {
+      "start": 225.13,
+      "end": 228.1,
+      "zh": "💃它看起来就像三座高高低低",
+      "vi": "Nó trông như ba ngọn núi cao thấp",
+      "en": "It looks like three highs and lows.",
+      "pinyin": "💃 tā kàn qǐ lái jiù xiàng sān zuò gāo gāo dī dī"
+    },
+    {
+      "start": 228.13,
+      "end": 231.03,
+      "zh": "💃的尖山峰连在一起。",
+      "vi": "nhọn liền nhau.",
+      "en": "The mountain peaks are connected.",
+      "pinyin": "💃 de jiān shān fēng lián zài yì qǐ 。"
+    },
+    {
+      "start": 231.13,
+      "end": 232.4,
+      "zh": "🕺完全正确。",
+      "vi": "Hoàn toàn chính xác.",
+      "en": "That's exactly right.",
+      "pinyin": "🕺 wán quán zhèng què 。"
+    },
+    {
+      "start": 232.8,
+      "end": 234.2,
+      "zh": "🕺中间一座高，",
+      "vi": "Ở giữa một ngọn cao,",
+      "en": "And a tall one in the middle,",
+      "pinyin": "🕺 zhōng jiān yí zuò gāo ，"
+    },
+    {
+      "start": 234.2,
+      "end": 235.77,
+      "zh": "🕺两边两座低。",
+      "vi": "hai bên hai ngọn thấp.",
+      "en": "Two lows on both sides.",
+      "pinyin": "🕺 liǎng biān liǎng zuò dī 。"
+    },
+    {
+      "start": 235.8,
+      "end": 238.5,
+      "zh": "🕺这就是“山”的原始形状。",
+      "vi": "Đây chính là hình dạng ban đầu của chữ “山”.",
+      "en": "This is the original shape of the mountain.",
+      "pinyin": "🕺 zhè jiù shì “ shān ” de yuán shǐ xíng zhuàng 。"
+    },
+    {
+      "start": 238.73,
+      "end": 240.06,
+      "zh": "🕺非常直观。",
+      "vi": "Rất trực quan.",
+      "en": "It's very intuitive.",
+      "pinyin": "🕺 fēi cháng zhí guān 。"
+    },
+    {
+      "start": 240.27,
+      "end": 244.13,
+      "zh": "💃那么，“山”的旁边常常有什么呢？",
+      "vi": "Vậy thì bên cạnh “山” thường có gì nhỉ?",
+      "en": "So, what's often next to the mountain?",
+      "pinyin": "💃 nà me ， “ shān ” de páng biān cháng cháng yǒu shén me ne ？"
+    },
+    {
+      "start": 244.13,
+      "end": 246.3,
+      "zh": "💃是“水”。🕺“水”！",
+      "vi": "Là “水”. 🕺“水”!",
+      "en": "\"Water.\" \"Water!\"",
+      "pinyin": "💃 shì “ shuǐ ” 。 🕺 “ shuǐ ” ！"
+    },
+    {
+      "start": 246.73,
+      "end": 250.16,
+      "zh": "🕺“水”字也是一个非常典型的象形字。",
+      "vi": "Chữ “水” cũng là một chữ tượng hình rất điển hình.",
+      "en": "The word \"water\" is also a very typical hieroglyphic.",
+      "pinyin": "🕺 “ shuǐ ” zì yě shì yí gè fēi cháng diǎn xíng de xiàng xíng zì 。"
+    },
+    {
+      "start": 250.33,
+      "end": 252.2,
+      "zh": "🕺古人画水的时候，",
+      "vi": "Khi người xưa vẽ nước,",
+      "en": "And when the ancients draw water,",
+      "pinyin": "🕺 gǔ rén huà shuǐ de shí hòu ，"
+    },
+    {
+      "start": 252.2,
+      "end": 255.03,
+      "zh": "🕺他们画的是一条流动的主线，",
+      "vi": "Họ vẽ một đường chính uốn lượn,",
+      "en": "They drew a moving thread.",
+      "pinyin": "🕺 tā men huà de shì yì tiáo liú dòng de zhǔ xiàn ，"
+    },
+    {
+      "start": 255.13,
+      "end": 258.16,
+      "zh": "🕺两边加上一些小小的波浪线。",
+      "vi": "hai bên thêm vài đường gợn sóng nhỏ.",
+      "en": "And there's a little wave line on both sides.",
+      "pinyin": "🕺 liǎng biān jiā shàng yì xiē xiǎo xiǎo de bō làng xiàn 。"
+    },
+    {
+      "start": 258.37,
+      "end": 262.97,
+      "zh": "💃是的，今天的“水”字，虽然笔画简化了，",
+      "vi": "Đúng vậy, chữ '水' ngày nay tuy đã được đơn giản hóa nét chữ,",
+      "en": "Yes, the word \"water\" today, although the pen is simplified.",
+      "pinyin": "💃 shì de ， jīn tiān de “ shuǐ ” zì ， suī rán bǐ huà jiǎn huà le ，"
+    },
+    {
+      "start": 262.97,
+      "end": 266.5,
+      "zh": "💃但中间那条竖和两边的小点，",
+      "vi": "nhưng nét sổ ở giữa và những chấm nhỏ hai bên,",
+      "en": "But the little dot between the two sides.",
+      "pinyin": "💃 dàn zhōng jiān nà tiáo shù hé liǎng biān de xiǎo diǎn ，"
+    },
+    {
+      "start": 266.53,
+      "end": 270.13,
+      "zh": "💃还是能让人联想到河流在流动，",
+      "vi": "vẫn có thể khiến người ta liên tưởng đến dòng sông đang chảy,",
+      "en": "In the past few years, the river has become a source of hope for the country's people.",
+      "pinyin": "💃 hái shì néng ràng rén lián xiǎng dào hé liú zài liú dòng ，"
+    },
+    {
+      "start": 270.13,
+      "end": 272.8,
+      "zh": "💃有水花溅起来的样子。",
+      "vi": "tựa như nước đang bắn tung tóe.",
+      "en": "There's water on the floor.",
+      "pinyin": "💃 yǒu shuǐ huā jiàn qǐ lái de yàng zi 。"
+    },
+    {
+      "start": 273.33,
+      "end": 274.46,
+      "zh": "🕺所以，朋友们，",
+      "vi": "Vì vậy, các bạn ạ,",
+      "en": "So, friends,",
+      "pinyin": "🕺 suǒ yǐ ， péng yǒu men ，"
+    },
+    {
+      "start": 274.53,
+      "end": 278.86,
+      "zh": "🕺下次你写“日、月、山、水”的时候，",
+      "vi": "Lần sau khi bạn viết '日、月、山、水',",
+      "en": "The next time you write, \"The sun, the moon, the mountains, the water,\"",
+      "pinyin": "🕺 xià cì nǐ xiě “ rì 、 yuè 、 shān 、 shuǐ ” de shí hòu ，"
+    },
+    {
+      "start": 278.87,
+      "end": 280.8,
+      "zh": "🕺你可以想象自己正在画一",
+      "vi": "bạn có thể tưởng tượng mình đang vẽ một",
+      "en": "You can imagine that you're drawing one.",
+      "pinyin": "🕺 nǐ kě yǐ xiǎng xiàng zì jǐ zhèng zài huà yī"
+    },
+    {
+      "start": 280.97,
+      "end": 283.13,
+      "zh": "🕺幅简单的自然风景画。",
+      "vi": "bức tranh phong cảnh thiên nhiên đơn giản.",
+      "en": "A simple picture of nature.",
+      "pinyin": "🕺 fú jiǎn dān de zì rán fēng jǐng huà 。"
+    },
+    {
+      "start": 283.13,
+      "end": 287.06,
+      "zh": "💃没错，这四个字都是HSK一级、",
+      "vi": "Đúng vậy, bốn chữ này đều là từ vựng cơ bản HSK cấp một,",
+      "en": "That's right. These four words are HSK level I.",
+      "pinyin": "💃 méi cuò ， zhè sì gè zì dōu shì H S K yī jí 、"
+    },
+    {
+      "start": 287.07,
+      "end": 289.2,
+      "zh": "💃二级的基础词汇，",
+      "vi": "cấp hai,",
+      "en": "The second level of basic vocabulary,",
+      "pinyin": "💃 èr jí de jī chǔ cí huì ，"
+    },
+    {
+      "start": 289.53,
+      "end": 291.46,
+      "zh": "💃现在大家是不是觉得",
+      "vi": "Bây giờ mọi người có thấy",
+      "en": "Do you think that's a good idea?",
+      "pinyin": "💃 xiàn zài dà jiā shì bu shì jué de"
+    },
+    {
+      "start": 291.47,
+      "end": 293.57,
+      "zh": "💃它们更容易记住了？",
+      "vi": "chúng dễ nhớ hơn rồi không?",
+      "en": "They're easier to remember?",
+      "pinyin": "💃 tā men gèng róng yì jì zhù le ？"
+    },
+    {
+      "start": 293.77,
+      "end": 295.24,
+      "zh": "🕺我想一定是！",
+      "vi": "Mình nghĩ chắc chắn là vậy!",
+      "en": "I think it must be!",
+      "pinyin": "🕺 wǒ xiǎng yí dìng shì ！"
+    },
+    {
+      "start": 295.53,
+      "end": 296.8,
+      "zh": "🕺我们已经看到了",
+      "vi": "Chúng ta đã thấy",
+      "en": "We've seen it.",
+      "pinyin": "🕺 wǒ men yǐ jīng kàn dào le"
+    },
+    {
+      "start": 296.8,
+      "end": 299.37,
+      "zh": "🕺“天上的”和“地上的”象形字。",
+      "vi": "những chữ tượng hình của 'trên trời' và 'dưới đất'.",
+      "en": "⁇  \"In heaven\" and \"on Earth\" hieroglyphics.",
+      "pinyin": "🕺 “ tiān shàng de ” hé “ dì shàng de ” xiàng xíng zì 。"
+    },
+    {
+      "start": 299.53,
+      "end": 300.96,
+      "zh": "🕺那么，小雨，",
+      "vi": "Vậy thì, Tiểu Vũ,",
+      "en": "So, Ame,",
+      "pinyin": "🕺 nà me ， xiǎo yǔ ，"
+    },
+    {
+      "start": 300.97,
+      "end": 302.2,
+      "zh": "🕺我们下一部分",
+      "vi": "phần tiếp theo của chúng ta",
+      "en": "Let's go to the next part.",
+      "pinyin": "🕺 wǒ men xià yí bù fen"
+    },
+    {
+      "start": 302.2,
+      "end": 304.97,
+      "zh": "🕺要不要看看“我们自己”的字呢？",
+      "vi": "có muốn xem những chữ về 'chính chúng ta' không?",
+      "en": "Do you want to see the word \"we ourselves\"?",
+      "pinyin": "🕺 yào bu yào kàn kàn “ wǒ men zì jǐ ” de zì ne ？"
+    },
+    {
+      "start": 304.97,
+      "end": 306.4,
+      "zh": "💃听起来很棒！",
+      "vi": "Nghe hay đấy!",
+      "en": "It sounds great!",
+      "pinyin": "💃 tīng qǐ lái hěn bàng ！"
+    },
+    {
+      "start": 306.5,
+      "end": 307.53,
+      "zh": "💃我们来看看",
+      "vi": "Chúng ta cùng xem",
+      "en": "Let's see.",
+      "pinyin": "💃 wǒ men lái kàn kàn"
+    },
+    {
+      "start": 307.53,
+      "end": 311.23,
+      "zh": "💃人是怎样用汉字来描绘自己的。",
+      "vi": "con người dùng chữ Hán để miêu tả chính mình như thế nào.",
+      "en": "And how the thugs describe themselves in Chinese.",
+      "pinyin": "💃 rén shì zěn yàng yòng hàn zì lái miáo huì zì jǐ de 。"
+    },
+    {
+      "start": 313.33,
+      "end": 314.56,
+      "zh": "💃好的，李明。",
+      "vi": "Được, Lý Minh.",
+      "en": "Okay, Li Ming.",
+      "pinyin": "💃 hǎo de ， lǐ míng 。"
+    },
+    {
+      "start": 314.6,
+      "end": 318.7,
+      "zh": "💃我们现在把目光转向“人”。🕺好。",
+      "vi": "Bây giờ chúng ta chuyển sự chú ý sang chữ '人'. Được.",
+      "en": "We now turn our eyes to the human being.",
+      "pinyin": "💃 wǒ men xiàn zài bǎ mù guāng zhuǎn xiàng “ rén ” 。 🕺 hǎo 。"
+    },
+    {
+      "start": 318.8,
+      "end": 320.07,
+      "zh": "🕺提到“人”，",
+      "vi": "Nhắc đến chữ '人',",
+      "en": "\"The human being\" is the name of the man.",
+      "pinyin": "🕺 tí dào “ rén ” ，"
+    },
+    {
+      "start": 320.07,
+      "end": 324.57,
+      "zh": "🕺最简单的汉字就是“人”。💃对，“人”字。",
+      "vi": "Chữ Hán đơn giản nhất chính là '人'. Đúng, chữ '人'.",
+      "en": "The simplest word in Chinese is \"the man.\"",
+      "pinyin": "🕺 zuì jiǎn dān de hàn zì jiù shì “ rén ” 。 💃 duì ， “ rén ” zì 。"
+    },
+    {
+      "start": 324.6,
+      "end": 326.27,
+      "zh": "💃大家想象一下，",
+      "vi": "Mọi người hãy tưởng tượng,",
+      "en": "Let's just imagine.",
+      "pinyin": "💃 dà jiā xiǎng xiàng yí xià ，"
+    },
+    {
+      "start": 326.27,
+      "end": 329.1,
+      "zh": "💃一个人侧着身子在走路，",
+      "vi": "một người nghiêng mình đang bước đi,",
+      "en": "I was walking on my side.",
+      "pinyin": "💃 yí gè rén cè zhe shēn zi zài zǒu lù ，"
+    },
+    {
+      "start": 329.1,
+      "end": 330.37,
+      "zh": "💃两条腿。",
+      "vi": "hai chân.",
+      "en": "Two legs.",
+      "pinyin": "💃 liǎng tiáo tuǐ 。"
+    },
+    {
+      "start": 330.47,
+      "end": 333.3,
+      "zh": "🕺它的形状就像一个人在走路，",
+      "vi": "Hình dạng của nó giống như một người đang bước đi,",
+      "en": "It's shaped like a man walking.",
+      "pinyin": "🕺 tā de xíng zhuàng jiù xiàng yí gè rén zài zǒu lù ，"
+    },
+    {
+      "start": 333.33,
+      "end": 335.8,
+      "zh": "🕺身体稍微向前倾斜。",
+      "vi": "thân người hơi nghiêng về phía trước.",
+      "en": "The body leans slightly forward.",
+      "pinyin": "🕺 shēn tǐ shāo wēi xiàng qián qīng xié 。"
+    },
+    {
+      "start": 336.17,
+      "end": 339.07,
+      "zh": "🕺这个字，真的是用最少的笔画，",
+      "vi": "Chữ này thật sự chỉ dùng ít nét nhất,",
+      "en": "It's really the least written.",
+      "pinyin": "🕺 zhè ge zì ， zhēn de shì yòng zuì shǎo de bǐ huà ，"
+    },
+    {
+      "start": 339.07,
+      "end": 341,
+      "zh": "🕺画出了人的样子。",
+      "vi": "đã vẽ nên hình dáng con người.",
+      "en": "The twilight paints the look of a man.",
+      "pinyin": "🕺 huà chū le rén de yàng zi 。"
+    },
+    {
+      "start": 341,
+      "end": 342,
+      "zh": "💃没错。",
+      "vi": "Đúng vậy.",
+      "en": "Right.",
+      "pinyin": "💃 méi cuò 。"
+    },
+    {
+      "start": 342,
+      "end": 346.47,
+      "zh": "💃那么，如果这个“人”把他的两只手伸开，",
+      "vi": "Vậy thì, nếu chữ '人' này dang hai tay ra,",
+      "en": "So, if this man extends his two hands,",
+      "pinyin": "💃 nà me ， rú guǒ zhè ge “ rén ” bǎ tā de liǎng zhī shǒu shēn kāi ，"
+    },
+    {
+      "start": 346.53,
+      "end": 347.8,
+      "zh": "💃站得笔直，",
+      "vi": "đứng thẳng tắp,",
+      "en": "I'm not going anywhere.",
+      "pinyin": "💃 zhàn dé bǐ zhí ，"
+    },
+    {
+      "start": 347.9,
+      "end": 350,
+      "zh": "💃做出一个“大”的姿势，",
+      "vi": "tạo thành tư thế '大',",
+      "en": "In a post titled \"Big\", the blogger says:",
+      "pinyin": "💃 zuò chū yí gè “ dà ” de zī shì ，"
+    },
+    {
+      "start": 350,
+      "end": 352.07,
+      "zh": "💃他会变成哪个字呢？",
+      "vi": "nó sẽ biến thành chữ nào?",
+      "en": "Which word will he become?",
+      "pinyin": "💃 tā huì biàn chéng nǎ gè zì ne ？"
+    },
+    {
+      "start": 352.3,
+      "end": 353.77,
+      "zh": "🕺当然是“大”了，",
+      "vi": "Tất nhiên là chữ '大' rồi,",
+      "en": "It's a big one, of course.",
+      "pinyin": "🕺 dāng rán shì “ dà ” liǎo ，"
+    },
+    {
+      "start": 353.77,
+      "end": 355.1,
+      "zh": "🕺大、小的大！",
+      "vi": "chữ '大' trong '大、小'!",
+      "en": "Big, small, big!",
+      "pinyin": "🕺 dà 、 xiǎo de dà ！"
+    },
+    {
+      "start": 355.3,
+      "end": 356.67,
+      "zh": "🕺古人就是这样",
+      "vi": "Người xưa chính là như vậy",
+      "en": "That's how the ancients do it.",
+      "pinyin": "🕺 gǔ rén jiù shì zhè yàng"
+    },
+    {
+      "start": 356.67,
+      "end": 359.9,
+      "zh": "🕺用象形字来表达“大”的意思：",
+      "vi": "dùng chữ tượng hình để biểu đạt ý '大':",
+      "en": "The pictogram is used to express the meaning of \"large\":",
+      "pinyin": "🕺 yòng xiàng xíng zì lái biǎo dá “ dà ” de yì sī ："
+    },
+    {
+      "start": 360.17,
+      "end": 364.5,
+      "zh": "🕺一个人把四肢伸展开，就是最大的。",
+      "vi": "một người dang rộng tứ chi, chính là lớn nhất.",
+      "en": "A man who stretches his limbs out is the biggest.",
+      "pinyin": "🕺 yí gè rén bǎ sì zhī shēn zhǎn kāi ， jiù shì zuì dà de 。"
+    },
+    {
+      "start": 364.6,
+      "end": 366,
+      "zh": "💃太有趣了！",
+      "vi": "Thú vị quá!",
+      "en": "It's so funny!",
+      "pinyin": "💃 tài yǒu qù le ！"
+    },
+    {
+      "start": 366,
+      "end": 369.13,
+      "zh": "💃“人”和“大”，笔画都很少，",
+      "vi": "Chữ '人' và '大' đều có rất ít nét,",
+      "en": "\"The man\" and \"the big,\" with very few pens.",
+      "pinyin": "💃 “ rén ” hé “ dà ” ， bǐ huà dōu hěn shǎo ，"
+    },
+    {
+      "start": 369.13,
+      "end": 372.3,
+      "zh": "💃但形象却非常生动。它们",
+      "vi": "nhưng hình ảnh lại vô cùng sinh động. Chúng",
+      "en": "But the image is very vivid.",
+      "pinyin": "💃 dàn xíng xiàng què fēi cháng shēng dòng 。 tā men"
+    },
+    {
+      "start": 372.43,
+      "end": 375.23,
+      "zh": "💃都是HSK一级的字。",
+      "vi": "đều là chữ HSK cấp một.",
+      "en": "It's all a HSK level word.",
+      "pinyin": "💃 dōu shì H S K yī jí de zì 。"
+    },
+    {
+      "start": 375.53,
+      "end": 378.33,
+      "zh": "🕺我们再来看看身体的一部分。",
+      "vi": "🕺 Chúng ta hãy xem thêm một bộ phận cơ thể.",
+      "en": "Let's look at a part of the body.",
+      "pinyin": "🕺 wǒ men zài lái kàn kàn shēn tǐ de yí bù fen 。"
+    },
+    {
+      "start": 378.33,
+      "end": 382.63,
+      "zh": "🕺比如，我们用来说话和吃东西的“口”。",
+      "vi": "🕺 Ví dụ, chữ \"口\" mà chúng ta dùng để nói và ăn.",
+      "en": "For example, the mouth we use to talk and eat.",
+      "pinyin": "🕺 bǐ rú ， wǒ men yòng lái shuō huà hé chī dōng xī de “ kǒu ” 。"
+    },
+    {
+      "start": 383.1,
+      "end": 385.1,
+      "zh": "💃“口”，嘴巴的“口”。",
+      "vi": "💃 \"口\", chữ \"口\" trong \"嘴巴\".",
+      "en": "The word \"mouth,\" the word \" mouth.\"",
+      "pinyin": "💃 “ kǒu ” ， zuǐ ba de “ kǒu ” 。"
+    },
+    {
+      "start": 385.13,
+      "end": 388.53,
+      "zh": "💃这个字看起来就是一个正方形，",
+      "vi": "💃 Chữ này trông giống như một hình vuông,",
+      "en": "The word  ⁇  seems to be a square.",
+      "pinyin": "💃 zhè ge zì kàn qǐ lái jiù shì yí gè zhèng fāng xíng ，"
+    },
+    {
+      "start": 388.53,
+      "end": 390.76,
+      "zh": "💃像是一个张开的嘴巴。",
+      "vi": "💃 giống như một cái miệng đang mở.",
+      "en": "It's like an open mouth.",
+      "pinyin": "💃 xiàng shì yí gè zhāng kāi de zuǐ ba 。"
+    },
+    {
+      "start": 390.77,
+      "end": 392.4,
+      "zh": "🕺同样是象形字，",
+      "vi": "🕺 Cũng là chữ tượng hình,",
+      "en": "It's also a hieroglyphic.",
+      "pinyin": "🕺 tóng yàng shì xiàng xíng zì ，"
+    },
+    {
+      "start": 392.4,
+      "end": 393.67,
+      "zh": "🕺非常直观。",
+      "vi": "🕺 rất trực quan.",
+      "en": "It's very intuitive.",
+      "pinyin": "🕺 fēi cháng zhí guān 。"
+    },
+    {
+      "start": 394.13,
+      "end": 397.06,
+      "zh": "🕺我们再看一个和身体有关的字：",
+      "vi": "🕺 Chúng ta xem thêm một chữ liên quan đến cơ thể:",
+      "en": "Let's look at another word about the body:",
+      "pinyin": "🕺 wǒ men zài kàn yí gè hé shēn tǐ yǒu guān de zì ："
+    },
+    {
+      "start": 397.2,
+      "end": 398.4,
+      "zh": "🕺“目”。💃“目”，",
+      "vi": "🕺 \"目\". 💃 \"目\",",
+      "en": "\"Fight.\" \"Foster.\"",
+      "pinyin": "🕺 “ mù ” 。 💃 “ mù ” ，"
+    },
+    {
+      "start": 398.73,
+      "end": 399.93,
+      "zh": "💃眼睛的“目”。",
+      "vi": "💃 chữ \"目\" trong \"眼睛\".",
+      "en": "The eye of the eye.",
+      "pinyin": "💃 yǎn jīng de “ mù ” 。"
+    },
+    {
+      "start": 400,
+      "end": 402.73,
+      "zh": "💃在古代，人们画眼睛的时候，",
+      "vi": "💃 Vào thời cổ đại, khi người ta vẽ mắt,",
+      "en": "In ancient times, when people draw their eyes,",
+      "pinyin": "💃 zài gǔ dài ， rén men huà yǎn jīng de shí hòu ，"
+    },
+    {
+      "start": 402.73,
+      "end": 404.6,
+      "zh": "💃会画一个椭圆，",
+      "vi": "💃 họ sẽ vẽ một hình bầu dục,",
+      "en": "I'll draw an ellipse.",
+      "pinyin": "💃 huì huà yí gè tuǒ yuán ，"
+    },
+    {
+      "start": 404.6,
+      "end": 408,
+      "zh": "💃中间有一条线，代表眼珠。",
+      "vi": "💃 ở giữa có một đường nét, tượng trưng cho con ngươi.",
+      "en": "There's a line in the middle, which represents the eye.",
+      "pinyin": "💃 zhōng jiān yǒu yì tiáo xiàn ， dài biǎo yǎn zhū 。"
+    },
+    {
+      "start": 408.33,
+      "end": 410.8,
+      "zh": "🕺虽然现在简化成了方形，",
+      "vi": "🕺 Tuy bây giờ đã đơn giản hóa thành hình vuông,",
+      "en": "But it's a little bit more complicated than it is now.",
+      "pinyin": "🕺 suī rán xiàn zài jiǎn huà chéng le fāng xíng ，"
+    },
+    {
+      "start": 410.9,
+      "end": 413.67,
+      "zh": "🕺但依然能看到眼睛的影子。",
+      "vi": "🕺 nhưng vẫn có thể thấy bóng dáng của đôi mắt.",
+      "en": "But the shadow of the eyes can still be seen.",
+      "pinyin": "🕺 dàn yī rán néng kàn dào yǎn jīng de yǐng zi 。"
+    },
+    {
+      "start": 414.03,
+      "end": 417.63,
+      "zh": "💃对！“目”这个字可以组成很多词，",
+      "vi": "💃 Đúng! Chữ \"目\" này có thể ghép thành rất nhiều từ,",
+      "en": "The word \"object\" can make up a lot of words.",
+      "pinyin": "💃 duì ！ “ mù ” zhè ge zì kě yǐ zǔ chéng hěn duō cí ，"
+    },
+    {
+      "start": 417.63,
+      "end": 418.46,
+      "zh": "💃比如“目",
+      "vi": "💃 ví dụ như \"目",
+      "en": "Like, \"Look at me.\"",
+      "pinyin": "💃 bǐ rú “ mù"
+    },
+    {
+      "start": 418.6,
+      "end": 421.33,
+      "zh": "💃前”，意思是现在。",
+      "vi": "💃 前\", nghĩa là hiện tại.",
+      "en": "It means right now.",
+      "pinyin": "💃 qián ” ， yì sī shì xiàn zài 。"
+    },
+    {
+      "start": 421.57,
+      "end": 425.94,
+      "zh": "🕺好了，我们已经看了“人”、“口”、“目”。",
+      "vi": "🕺 Được rồi, chúng ta đã xem \"人\", \"口\", \"目\".",
+      "en": "Well, we've seen the words \"people\", \"spokes,\" \"see.\"",
+      "pinyin": "🕺 hǎo le ， wǒ men yǐ jīng kàn le “ rén ” 、 “ kǒu ” 、 “ mù ” 。"
+    },
+    {
+      "start": 426.2,
+      "end": 429.6,
+      "zh": "🕺现在，我们试着把两个“人”放在一起，",
+      "vi": "🕺 Bây giờ, chúng ta thử đặt hai chữ \"人\" cạnh nhau,",
+      "en": "Now, we try to put the two people together.",
+      "pinyin": "🕺 xiàn zài ， wǒ men shì zhe bǎ liǎng gè “ rén ” fàng zài yì qǐ ，"
+    },
+    {
+      "start": 429.6,
+      "end": 431.13,
+      "zh": "🕺会变成什么字呢？",
+      "vi": "🕺 sẽ thành chữ gì nhỉ?",
+      "en": "What's the word for a twig?",
+      "pinyin": "🕺 huì biàn chéng shén me zì ne ？"
+    },
+    {
+      "start": 431.4,
+      "end": 433.73,
+      "zh": "💃两个“人”？我想想……",
+      "vi": "💃 Hai chữ \"人\"? Để tôi nghĩ xem......",
+      "en": "Two people? Let's see...",
+      "pinyin": "💃 liǎng gè “ rén ” ？ wǒ xiǎng xiǎng … …"
+    },
+    {
+      "start": 433.73,
+      "end": 437.4,
+      "zh": "💃两个“人”一前一后地走，",
+      "vi": "💃 Hai người \"人\" một trước một sau bước đi,",
+      "en": "Two people left the front and the back.",
+      "pinyin": "💃 liǎng gè “ rén ” yì qián yī hòu dì zǒu ，"
+    },
+    {
+      "start": 437.4,
+      "end": 439.9,
+      "zh": "💃意思就是“跟着别人”。",
+      "vi": "💃 nghĩa là \"đi theo người khác\".",
+      "en": "It means \"follow someone else.\"",
+      "pinyin": "💃 yì sī jiù shì “ gēn zhe bié rén ” 。"
+    },
+    {
+      "start": 440.2,
+      "end": 444.9,
+      "zh": "🕺没错！这个字就是“从”，“跟随”的意思。",
+      "vi": "🕺 Đúng rồi! Chữ này chính là \"从\", nghĩa là \"đi theo\".",
+      "en": "That's right! The word is \"bring\" and \"follow.\"",
+      "pinyin": "🕺 méi cuò ！ zhè ge zì jiù shì “ cóng ” ， “ gēn suí ” de yì sī 。"
+    },
+    {
+      "start": 445.03,
+      "end": 447.23,
+      "zh": "🕺一个人跟着另一个人。",
+      "vi": "🕺 Một người đi theo một người khác.",
+      "en": "One man follows the other.",
+      "pinyin": "🕺 yí gè rén gēn zhe lìng yí gè rén 。"
+    },
+    {
+      "start": 447.23,
+      "end": 450.03,
+      "zh": "🕺你看，两个“人”字排在一起，",
+      "vi": "🕺 Bạn xem, hai chữ \"人\" xếp cạnh nhau,",
+      "en": "You see, the two \"persons\" are in line.",
+      "pinyin": "🕺 nǐ kàn ， liǎng gè “ rén ” zì pái zài yì qǐ ，"
+    },
+    {
+      "start": 450.03,
+      "end": 452,
+      "zh": "🕺是不是感觉很自然？",
+      "vi": "🕺 có phải cảm thấy rất tự nhiên không?",
+      "en": "Isn't it natural?",
+      "pinyin": "🕺 shì bu shì gǎn jué hěn zì rán ？"
+    },
+    {
+      "start": 452.1,
+      "end": 454.93,
+      "zh": "💃是的，这个结构非常好记！",
+      "vi": "💃 Đúng vậy, kết cấu này rất dễ nhớ!",
+      "en": "Yes, it's a very good structure!",
+      "pinyin": "💃 shì de ， zhè ge jié gòu fēi cháng hǎo jì ！"
+    },
+    {
+      "start": 455.2,
+      "end": 459.7,
+      "zh": "💃再比如，一个“人”字，下面有一个“大”字，",
+      "vi": "💃 Lại ví dụ, một chữ \"人\", bên dưới có một chữ \"大\",",
+      "en": "Like, for example, a \"person\", and there's a \"big\" down here.",
+      "pinyin": "💃 zài bǐ rú ， yí gè “ rén ” zì ， xià miàn yǒu yí gè “ dà ” zì ，"
+    },
+    {
+      "start": 459.73,
+      "end": 462.3,
+      "zh": "💃代表一个人的力量很大，",
+      "vi": "💃 tượng trưng cho sức mạnh của một người rất lớn,",
+      "en": "It's the power of a man.",
+      "pinyin": "💃 dài biǎo yí gè rén de lì liàng hěn dà ，"
+    },
+    {
+      "start": 462.3,
+      "end": 464.03,
+      "zh": "💃这可能就是“夫”，",
+      "vi": "💃 đây có thể chính là \"夫\",",
+      "en": "It's probably \"the husband.\"",
+      "pinyin": "💃 zhè kě néng jiù shì “ fū ” ，"
+    },
+    {
+      "start": 464.1,
+      "end": 465.43,
+      "zh": "💃丈夫的“夫”。",
+      "vi": "💃 chữ \"夫\" trong \"丈夫\".",
+      "en": "The husband's “husband”.",
+      "pinyin": "💃 zhàng fu de “ fū ” 。"
+    },
+    {
+      "start": 465.43,
+      "end": 469.06,
+      "zh": "💃古时候的男人，是家里的主要劳动力。",
+      "vi": "💃 Đàn ông thời cổ là lao động chính trong nhà.",
+      "en": "Men of ancient times are the main labour force in the family.",
+      "pinyin": "💃 gǔ shí hòu de nán rén ， shì jiā lǐ de zhǔ yào láo dòng lì 。"
+    },
+    {
+      "start": 469.4,
+      "end": 471.13,
+      "zh": "🕺小雨总结得很好！",
+      "vi": "🕺 Tiểu Vũ tổng kết rất hay!",
+      "en": "Xiaoyu is doing well!",
+      "pinyin": "🕺 xiǎo yǔ zǒng jié dé hěn hǎo ！"
+    },
+    {
+      "start": 471.37,
+      "end": 473.84,
+      "zh": "🕺象形字不仅仅是画图，",
+      "vi": "🕺 Chữ tượng hình không chỉ là vẽ hình,",
+      "en": "It's not just a picture.",
+      "pinyin": "🕺 xiàng xíng zì bù jǐn jǐn shì huà tú ，"
+    },
+    {
+      "start": 473.93,
+      "end": 476.3,
+      "zh": "🕺它们还蕴含着古人的生活",
+      "vi": "🕺 chúng còn chứa đựng cuộc sống của người xưa",
+      "en": "They also contain the lives of ancients.",
+      "pinyin": "🕺 tā men hái yùn hán zhe gǔ rén de shēng huó"
+    },
+    {
+      "start": 476.3,
+      "end": 478.83,
+      "zh": "🕺智慧和对世界的理解。",
+      "vi": "🕺 trí tuệ và hiểu biết về thế giới.",
+      "en": "Wisdom and understanding of the world.",
+      "pinyin": "🕺 zhì huì hé duì shì jiè de lǐ jiě 。"
+    },
+    {
+      "start": 478.97,
+      "end": 481.54,
+      "zh": "💃通过了解这些字的起源，",
+      "vi": "💃 Thông qua việc tìm hiểu nguồn gốc của những chữ này,",
+      "en": "By learning about the origins of these words,",
+      "pinyin": "💃 tōng guò liǎo jiě zhè xiē zì de qǐ yuán ，"
+    },
+    {
+      "start": 481.6,
+      "end": 482.97,
+      "zh": "💃我们学习中文",
+      "vi": "💃 chúng ta học tiếng Trung",
+      "en": "We learn Chinese.",
+      "pinyin": "💃 wǒ men xué xí zhōng wén"
+    },
+    {
+      "start": 482.97,
+      "end": 486.44,
+      "zh": "💃就好像在学习中国的文化历史一样。",
+      "vi": "💃 cũng giống như đang học lịch sử văn hóa Trung Quốc vậy.",
+      "en": "It's like learning about Chinese cultural history.",
+      "pinyin": "💃 jiù hǎo xiàng zài xué xí zhōng guó de wén huà lì shǐ yí yàng 。"
+    },
+    {
+      "start": 486.73,
+      "end": 490.93,
+      "zh": "🕺是的，这能让你的HSK学习更有动力。",
+      "vi": "🕺 Đúng vậy, điều này sẽ khiến việc học HSK của bạn có thêm động lực.",
+      "en": "Yeah, it makes your HSK more motivated.",
+      "pinyin": "🕺 shì de ， zhè néng ràng nǐ de H S K xué xí gèng yǒu dòng lì 。"
+    },
+    {
+      "start": 491.1,
+      "end": 493.93,
+      "zh": "🕺好了，我们已经看到了自然界",
+      "vi": "🕺 Được rồi, chúng ta đã xem những chữ tượng hình của thế giới tự nhiên",
+      "en": "We've seen nature.",
+      "pinyin": "🕺 hǎo le ， wǒ men yǐ jīng kàn dào le zì rán jiè"
+    },
+    {
+      "start": 493.93,
+      "end": 496.23,
+      "zh": "🕺和我们人类自己的象形字。",
+      "vi": "🕺 và của chính con người chúng ta.",
+      "en": "And the hieroglyphics of our own humanity.",
+      "pinyin": "🕺 hé wǒ men rén lèi zì jǐ de xiàng xíng zì 。"
+    },
+    {
+      "start": 496.37,
+      "end": 497.97,
+      "zh": "💃那我们接下来，",
+      "vi": "💃 Vậy tiếp theo,",
+      "en": "And then we're going to go,",
+      "pinyin": "💃 nà wǒ men jiē xià lái ，"
+    },
+    {
+      "start": 497.97,
+      "end": 501.73,
+      "zh": "💃是不是应该看看我们人类的好朋友，",
+      "vi": "💃 có phải chúng ta nên xem những người bạn tốt của loài người,",
+      "en": "Shouldn't we look at our human best friends?",
+      "pinyin": "💃 shì bu shì yīng gāi kàn kàn wǒ men rén lèi de hǎo péng yǒu ，"
+    },
+    {
+      "start": 501.73,
+      "end": 505.3,
+      "zh": "💃那些动物和植物的象形字呢？",
+      "vi": "💃 những chữ tượng hình về động vật và thực vật không?",
+      "en": "What about the hieroglyphics of those animals and plants?",
+      "pinyin": "💃 nà xiē dòng wù hé zhí wù de xiàng xíng zì ne ？"
+    },
+    {
+      "start": 505.43,
+      "end": 507.7,
+      "zh": "🕺当然！下一部分，",
+      "vi": "🕺 Tất nhiên rồi! Phần tiếp theo,",
+      "en": "Of course! The next part.",
+      "pinyin": "🕺 dāng rán ！ xià yí bù fen ，"
+    },
+    {
+      "start": 507.7,
+      "end": 511,
+      "zh": "🕺我们一起去看看汉字里的“动物园”",
+      "vi": "Chúng ta cùng nhau đi xem \"vườn bách thú\" trong chữ Hán nhé.",
+      "en": "Let's go check out Han's Zoo.",
+      "pinyin": "🕺 wǒ men yì qǐ qù kàn kàn hàn zì lǐ de “ dòng wù yuán ”"
+    },
+    {
+      "start": 511,
+      "end": 512.3,
+      "zh": "🕺和“植物园”！",
+      "vi": "Và \"vườn thực vật\" nữa!",
+      "en": "The Botanical Gardens!",
+      "pinyin": "🕺 hé “ zhí wù yuán ” ！"
+    },
+    {
+      "start": 512.53,
+      "end": 514.96,
+      "zh": "🕺小雨，你觉得在古代，",
+      "vi": "Tiểu Vũ, em nghĩ ở thời cổ đại,",
+      "en": "A little rain, you think in ancient times,",
+      "pinyin": "🕺 xiǎo yǔ ， nǐ jué de zài gǔ dài ，"
+    },
+    {
+      "start": 514.97,
+      "end": 518.1,
+      "zh": "🕺人们最常画的动物会是什么呢？",
+      "vi": "loài vật mà người ta thường vẽ nhất sẽ là gì?",
+      "en": "What's the most common animal in the world?",
+      "pinyin": "🕺 rén men zuì cháng huà de dòng wù huì shì shén me ne ？"
+    },
+    {
+      "start": 518.4,
+      "end": 519.57,
+      "zh": "💃嗯……我想",
+      "vi": "Ừm... em nghĩ",
+      "en": "♪ Well I think ♪",
+      "pinyin": "💃 ǹg … … wǒ xiǎng"
+    },
+    {
+      "start": 519.57,
+      "end": 522.83,
+      "zh": "💃应该是对他们生活很重要的动物。",
+      "vi": "chắc là những con vật rất quan trọng với cuộc sống của họ.",
+      "en": "It's supposed to be a very important animal for their lives.",
+      "pinyin": "💃 yīng gāi shì duì tā men shēng huó hěn zhòng yào de dòng wù 。"
+    },
+    {
+      "start": 522.83,
+      "end": 525.5,
+      "zh": "💃比如“马”。🕺“马”，",
+      "vi": "Ví dụ như \"ngựa\". \"Ngựa\",",
+      "en": "In the past few years, many people have been able to find their way into the country.",
+      "pinyin": "💃 bǐ rú “ mǎ ” 。 🕺 “ mǎ ” ，"
+    },
+    {
+      "start": 525.57,
+      "end": 526.9,
+      "zh": "🕺骏马的“马”。",
+      "vi": "ngựa tuấn mã ấy ạ.",
+      "en": "The horse of the horse.",
+      "pinyin": "🕺 jùn mǎ de “ mǎ ” 。"
+    },
+    {
+      "start": 527.57,
+      "end": 529.44,
+      "zh": "🕺“马”字太经典了！",
+      "vi": "Chữ \"ngựa\" thật là kinh điển!",
+      "en": "The word \"horse\" is so classic!",
+      "pinyin": "🕺 “ mǎ ” zì tài jīng diǎn le ！"
+    },
+    {
+      "start": 529.53,
+      "end": 531.1,
+      "zh": "🕺它最初的样子，",
+      "vi": "Hình dạng ban đầu của nó,",
+      "en": "I'm not sure what it was like in the beginning.",
+      "pinyin": "🕺 tā zuì chū de yàng zi ，"
+    },
+    {
+      "start": 531.1,
+      "end": 534.03,
+      "zh": "🕺画的是一匹有长长的鬃毛",
+      "vi": "vẽ một con ngựa có bờm dài",
+      "en": "It's a long hair.",
+      "pinyin": "🕺 huà de shì yì pǐ yǒu cháng cháng de zōng máo"
+    },
+    {
+      "start": 534.03,
+      "end": 535.7,
+      "zh": "🕺和四条腿的马。",
+      "vi": "và bốn chân.",
+      "en": "Powder and four-legged horses.",
+      "pinyin": "🕺 hé sì tiáo tuǐ de mǎ 。"
+    },
+    {
+      "start": 535.97,
+      "end": 536.73,
+      "zh": "💃是的，",
+      "vi": "Đúng vậy,",
+      "en": "Yes, it is.",
+      "pinyin": "💃 shì de ，"
+    },
+    {
+      "start": 536.73,
+      "end": 540.5,
+      "zh": "💃现在的“马”字，虽然已经大大简化了，",
+      "vi": "chữ \"ngựa\" bây giờ tuy đã được đơn giản hóa rất nhiều,",
+      "en": "The word \"horse\" is now, although it's been considerably simplified.",
+      "pinyin": "💃 xiàn zài de “ mǎ ” zì ， suī rán yǐ jīng dà dà jiǎn huà le ，"
+    },
+    {
+      "start": 540.5,
+      "end": 542.63,
+      "zh": "💃但是中间的横笔画，",
+      "vi": "nhưng nét ngang ở giữa",
+      "en": "But in the middle, the brushes were drawn.",
+      "pinyin": "💃 dàn shì zhōng jiān de héng bǐ huà ，"
+    },
+    {
+      "start": 542.63,
+      "end": 545.3,
+      "zh": "💃还可以想象成马的身体，",
+      "vi": "vẫn có thể tưởng tượng là thân ngựa,",
+      "en": "I can also imagine the body of a horse.",
+      "pinyin": "💃 hái kě yǐ xiǎng xiàng chéng mǎ de shēn tǐ ，"
+    },
+    {
+      "start": 545.37,
+      "end": 548.54,
+      "zh": "💃下面的四点变成了四条腿。",
+      "vi": "bốn điểm ở dưới thì thành bốn chân.",
+      "en": "The four points below the twig turned into four legs.",
+      "pinyin": "💃 xià miàn de sì diǎn biàn chéng le sì tiáo tuǐ 。"
+    },
+    {
+      "start": 548.6,
+      "end": 549.43,
+      "zh": "🕺没错。",
+      "vi": "Đúng thế.",
+      "en": "Right.",
+      "pinyin": "🕺 méi cuò 。"
+    },
+    {
+      "start": 549.63,
+      "end": 553.16,
+      "zh": "🕺在汉字里，你会发现很多带“马”的字，",
+      "vi": "Trong chữ Hán, em sẽ thấy rất nhiều chữ có \"ngựa\",",
+      "en": "In the Chinese, you'll find a lot of words with \"horse.\"",
+      "pinyin": "🕺 zài hàn zì lǐ ， nǐ huì fā xiàn hěn duō dài “ mǎ ” de zì ，"
+    },
+    {
+      "start": 553.17,
+      "end": 556.07,
+      "zh": "🕺比如“骑”，骑马的“骑”。",
+      "vi": "ví dụ như \"kỵ\", kỵ trong \"kỵ ngựa\".",
+      "en": "Like, \"Ride,\" \"Rike\" on horses.",
+      "pinyin": "🕺 bǐ rú “ qí ” ， qí mǎ de “ qí ” 。"
+    },
+    {
+      "start": 556.5,
+      "end": 559.8,
+      "zh": "💃还有一个我很喜欢的动物象形字",
+      "vi": "Còn một chữ tượng hình về loài vật mà em rất thích",
+      "en": "There's another animal hieroglyphic I like.",
+      "pinyin": "💃 hái yǒu yí gè wǒ hěn xǐ huan de dòng wù xiàng xíng zì"
+    },
+    {
+      "start": 559.8,
+      "end": 563.4,
+      "zh": "💃是“鱼”，鱼儿的“鱼”。🕺“鱼”字。",
+      "vi": "là \"ngư\", ngư trong \"con cá\". Chữ \"ngư\".",
+      "en": "\"fish,\" \"fish\", \"fish\" for fish.",
+      "pinyin": "💃 shì “ yú ” ， yú er de “ yú ” 。 🕺 “ yú ” zì 。"
+    },
+    {
+      "start": 563.8,
+      "end": 565.17,
+      "zh": "🕺古人画鱼，",
+      "vi": "Người xưa vẽ cá,",
+      "en": "The ancients draw fish,",
+      "pinyin": "🕺 gǔ rén huà yú ，"
+    },
+    {
+      "start": 565.17,
+      "end": 567.13,
+      "zh": "🕺画出了鱼的头、",
+      "vi": "đã vẽ ra đầu cá,",
+      "en": "The fish's head was painted.",
+      "pinyin": "🕺 huà chū le yú de tóu 、"
+    },
+    {
+      "start": 567.13,
+      "end": 568.86,
+      "zh": "🕺身体和尾巴。",
+      "vi": "thân cá và đuôi cá.",
+      "en": "The body and the tail.",
+      "pinyin": "🕺 shēn tǐ hé wěi ba 。"
+    },
+    {
+      "start": 569.1,
+      "end": 569.9,
+      "zh": "🕺现在你看",
+      "vi": "Bây giờ em xem",
+      "en": "Now look at this.",
+      "pinyin": "🕺 xiàn zài nǐ kàn"
+    },
+    {
+      "start": 570.37,
+      "end": 572.7,
+      "zh": "🕺“鱼”字，上面像鱼头，",
+      "vi": "chữ \"ngư\", phần trên giống đầu cá,",
+      "en": "The word \"fish\" is like a fish head.",
+      "pinyin": "🕺 “ yú ” zì ， shàng miàn xiàng yú tóu ，"
+    },
+    {
+      "start": 572.7,
+      "end": 574.3,
+      "zh": "🕺中间是身体，",
+      "vi": "ở giữa là thân cá,",
+      "en": "The center of the twilight is the body.",
+      "pinyin": "🕺 zhōng jiān shì shēn tǐ ，"
+    },
+    {
+      "start": 574.3,
+      "end": 575.83,
+      "zh": "🕺下面是鱼尾。",
+      "vi": "phía dưới là đuôi cá.",
+      "en": "The bottom is the fish tail.",
+      "pinyin": "🕺 xià miàn shì yú wěi 。"
+    },
+    {
+      "start": 576.17,
+      "end": 579.77,
+      "zh": "💃我记得以前老师教我们写“鱼”的时候，",
+      "vi": "Em nhớ hồi trước thầy cô dạy chúng em viết chữ \"ngư\",",
+      "en": "I remember when we were taught to write \"fish,\"",
+      "pinyin": "💃 wǒ jì de yǐ qián lǎo shī jiào wǒ men xiě “ yú ” de shí hòu ，"
+    },
+    {
+      "start": 579.77,
+      "end": 581.93,
+      "zh": "💃说要想象自己",
+      "vi": "nói là hãy tưởng tượng mình",
+      "en": "I told you to imagine yourself.",
+      "pinyin": "💃 shuō yào xiǎng xiàng zì jǐ"
+    },
+    {
+      "start": 581.93,
+      "end": 585.06,
+      "zh": "💃画的是一条在水里游的鱼。",
+      "vi": "đang vẽ một con cá bơi trong nước.",
+      "en": "It's a fish that swims in the water.",
+      "pinyin": "💃 huà de shì yì tiáo zài shuǐ lǐ yóu de yú 。"
+    },
+    {
+      "start": 585.13,
+      "end": 589,
+      "zh": "💃这样写起来，笔画也变得有趣了。",
+      "vi": "Viết như vậy, các nét chữ cũng trở nên thú vị.",
+      "en": "That's what makes the pen interesting.",
+      "pinyin": "💃 zhè yàng xiě qǐ lái ， bǐ huà yě biàn de yǒu qù le 。"
+    },
+    {
+      "start": 589.3,
+      "end": 591.73,
+      "zh": "🕺这就是学习象形字的好处，",
+      "vi": "Đó chính là cái hay của việc học chữ tượng hình,",
+      "en": "This is the advantage of learning hieroglyphics.",
+      "pinyin": "🕺 zhè jiù shì xué xí xiàng xíng zì de hǎo chù ，"
+    },
+    {
+      "start": 591.93,
+      "end": 594.33,
+      "zh": "🕺它能帮你把抽象的文字，",
+      "vi": "nó giúp em biến những con chữ trừu tượng",
+      "en": "It helps you put abstract words in.",
+      "pinyin": "🕺 tā néng bāng nǐ bǎ chōu xiàng de wén zì ，"
+    },
+    {
+      "start": 594.33,
+      "end": 596.1,
+      "zh": "🕺变成具体的图像。",
+      "vi": "thành những hình ảnh cụ thể.",
+      "en": "⁇  becomes a specific image.",
+      "pinyin": "🕺 biàn chéng jù tǐ de tú xiàng 。"
+    },
+    {
+      "start": 596.73,
+      "end": 597.9,
+      "zh": "💃说完了动物，",
+      "vi": "Nói xong động vật rồi,",
+      "en": "I'm done talking about animals.",
+      "pinyin": "💃 shuō wán le dòng wù ，"
+    },
+    {
+      "start": 597.9,
+      "end": 599.93,
+      "zh": "💃我们来看看植物吧。",
+      "vi": "chúng ta cùng xem thực vật nhé.",
+      "en": "Let's look at the plants.",
+      "pinyin": "💃 wǒ men lái kàn kàn zhí wù ba 。"
+    },
+    {
+      "start": 600,
+      "end": 603.93,
+      "zh": "💃植物里最常见的，当然是“木”了。",
+      "vi": "Trong thực vật, phổ biến nhất đương nhiên là \"mộc\" rồi.",
+      "en": "The most common thing in the plant is, of course, \"wood.\"",
+      "pinyin": "💃 zhí wù lǐ zuì cháng jiàn de ， dāng rán shì “ mù ” liǎo 。"
+    },
+    {
+      "start": 604.03,
+      "end": 606.03,
+      "zh": "🕺“木”，树木的“木”。",
+      "vi": "\"Mộc\", mộc trong \"cây cối\".",
+      "en": "\"wood,\" \"wood\" of trees.",
+      "pinyin": "🕺 “ mù ” ， shù mù de “ mù ” 。"
+    },
+    {
+      "start": 606.17,
+      "end": 608.67,
+      "zh": "🕺这个字，画的就是一棵树。",
+      "vi": "Chữ này vẽ chính là một cái cây.",
+      "en": "The word \"twilight,\" it's a tree.",
+      "pinyin": "🕺 zhè ge zì ， huà de jiù shì yì kē shù 。"
+    },
+    {
+      "start": 608.8,
+      "end": 610.3,
+      "zh": "🕺上面是树枝，",
+      "vi": "Phía trên là cành cây,",
+      "en": "The twig is a branch.",
+      "pinyin": "🕺 shàng miàn shì shù zhī ，"
+    },
+    {
+      "start": 610.37,
+      "end": 611.87,
+      "zh": "🕺下面是树根。",
+      "vi": "phía dưới là rễ cây.",
+      "en": "The root is below the twig.",
+      "pinyin": "🕺 xià miàn shì shù gēn 。"
+    },
+    {
+      "start": 612.4,
+      "end": 614.77,
+      "zh": "💃中间的一竖是树干，",
+      "vi": "Nét sổ ở giữa là thân cây,",
+      "en": "One of the pillars in the middle is a trunk.",
+      "pinyin": "💃 zhōng jiān de yí shù shì shù gàn ，"
+    },
+    {
+      "start": 614.77,
+      "end": 618.4,
+      "zh": "💃两边的撇和捺是伸展开的枝叶。",
+      "vi": "hai nét phiệt và nạp ở hai bên là cành lá vươn ra.",
+      "en": "On both sides, the twigs and tweezers are branches that stretch out.",
+      "pinyin": "💃 liǎng biān de piě hé nà shì shēn zhǎn kāi de zhī yè 。"
+    },
+    {
+      "start": 618.5,
+      "end": 619.97,
+      "zh": "💃太形象了！",
+      "vi": "Thật là sinh động!",
+      "en": "It's so beautiful!",
+      "pinyin": "💃 tài xíng xiàng le ！"
+    },
+    {
+      "start": 619.97,
+      "end": 623.73,
+      "zh": "🕺如果我们把两棵“木”放在一起，",
+      "vi": "Nếu chúng ta đặt hai chữ \"mộc\" cạnh nhau,",
+      "en": "If we put together two \"woods,\"",
+      "pinyin": "🕺 rú guǒ wǒ men bǎ liǎng kē “ mù ” fàng zài yì qǐ ，"
+    },
+    {
+      "start": 623.73,
+      "end": 625.2,
+      "zh": "🕺就变成了“林”，",
+      "vi": "thì thành chữ \"lâm\",",
+      "en": "In a post titled \"Lin\" , he wrote:",
+      "pinyin": "🕺 jiù biàn chéng le “ lín ” ，"
+    },
+    {
+      "start": 625.3,
+      "end": 626.53,
+      "zh": "🕺森林的“林”。",
+      "vi": "\"Rừng\" trong từ \"rừng rậm\".",
+      "en": "“Forests” in the forest.",
+      "pinyin": "🕺 sēn lín de “ lín ” 。"
+    },
+    {
+      "start": 626.93,
+      "end": 630.03,
+      "zh": "💃三棵“木”放在一起，就是“森”，",
+      "vi": "Ba chữ \"mộc\" đặt cạnh nhau, chính là \"sâm\".",
+      "en": "The three logs are put together. They're called Sam.",
+      "pinyin": "💃 sān kē “ mù ” fàng zài yì qǐ ， jiù shì “ sēn ” ，"
+    },
+    {
+      "start": 630.1,
+      "end": 631.4,
+      "zh": "💃森林的“森”。",
+      "vi": "\"Sâm\" trong từ \"rừng sâu\".",
+      "en": "\"Sam\" of the forest.",
+      "pinyin": "💃 sēn lín de “ sēn ” 。"
+    },
+    {
+      "start": 631.43,
+      "end": 634.86,
+      "zh": "💃你看，从一棵树到一片森林，",
+      "vi": "Bạn thấy đấy, từ một cái cây đến cả một khu rừng,",
+      "en": "You see, from a tree to a forest.",
+      "pinyin": "💃 nǐ kàn ， cóng yì kē shù dào yí piàn sēn lín ，"
+    },
+    {
+      "start": 634.93,
+      "end": 637.7,
+      "zh": "💃汉字就是这样“画”出来的。",
+      "vi": "Chữ Hán chính là được \"vẽ\" ra như vậy.",
+      "en": "That's how \"paint\" is written.",
+      "pinyin": "💃 hàn zì jiù shì zhè yàng “ huà ” chū lái de 。"
+    },
+    {
+      "start": 637.73,
+      "end": 640.36,
+      "zh": "🕺学习“林”和“森”这两个字，",
+      "vi": "Học hai chữ \"lâm\" và \"sâm\" này,",
+      "en": "\"Lin\" and \"Sam\" are the two words.",
+      "pinyin": "🕺 xué xí “ lín ” hé “ sēn ” zhè liǎng gè zì ，"
+    },
+    {
+      "start": 640.37,
+      "end": 644.1,
+      "zh": "🕺对我们学习HSK三级词汇“森林”（sēnlín）",
+      "vi": "đối với việc chúng ta học từ vựng HSK cấp ba \"森林\" (sēnlín)",
+      "en": "We're learning the HSK Level 3 term \"forest.\"",
+      "pinyin": "🕺 duì wǒ men xué xí H S K sān jí cí huì “ sēn lín ” （ s ē n l í n ）"
+    },
+    {
+      "start": 644.1,
+      "end": 645.87,
+      "zh": "🕺非常有帮助。",
+      "vi": "là vô cùng hữu ích.",
+      "en": "It's very helpful.",
+      "pinyin": "🕺 fēi cháng yǒu bāng zhù 。"
+    },
+    {
+      "start": 646.6,
+      "end": 649.5,
+      "zh": "💃还有一个象形字特别有意思，",
+      "vi": "Còn có một chữ tượng hình đặc biệt thú vị,",
+      "en": "A pictogram is also very interesting.",
+      "pinyin": "💃 hái yǒu yí gè xiàng xíng zì tè bié yǒu yì sī ，"
+    },
+    {
+      "start": 649.5,
+      "end": 652.2,
+      "zh": "💃那就是“田”。🕺“田”，",
+      "vi": "đó chính là \"điền\". \"Điền\",",
+      "en": "This is a \"field.\" This is the \"field\".",
+      "pinyin": "💃 nà jiù shì “ tián ” 。 🕺 “ tián ” ，"
+    },
+    {
+      "start": 652.4,
+      "end": 655,
+      "zh": "🕺田地的“田”。这个字",
+      "vi": "\"điền\" trong từ \"ruộng đồng\". Chữ này",
+      "en": "The word \"field.\"",
+      "pinyin": "🕺 tián dì de “ tián ” 。 zhè ge zì"
+    },
+    {
+      "start": 655.1,
+      "end": 658.03,
+      "zh": "🕺看起来就像是农田的航拍图：",
+      "vi": "trông giống như ảnh chụp từ trên cao của ruộng đồng:",
+      "en": "It looks like an aerial map of the field:",
+      "pinyin": "🕺 kàn qǐ lái jiù xiàng shì nóng tián de háng pāi tú ："
+    },
+    {
+      "start": 658.2,
+      "end": 661.57,
+      "zh": "🕺一个方块，里面有十字分割线，",
+      "vi": "một ô vuông, bên trong có đường chữ thập phân chia,",
+      "en": "And a piece of diamonds, with a cross-section line.",
+      "pinyin": "🕺 yí gè fāng kuài ， lǐ miàn yǒu shí zì fēn gē xiàn ，"
+    },
+    {
+      "start": 661.57,
+      "end": 664.37,
+      "zh": "🕺代表一块块农田。💃对，",
+      "vi": "tượng trưng cho từng thửa ruộng. Đúng vậy,",
+      "en": "It's a piece of farmland.",
+      "pinyin": "🕺 dài biǎo yí kuài kuài nóng tián 。 💃 duì ，"
+    },
+    {
+      "start": 664.37,
+      "end": 667.94,
+      "zh": "💃这就是中国古代农业社会的写照。",
+      "vi": "đây chính là hình ảnh phản chiếu của xã hội nông nghiệp Trung Quốc cổ đại.",
+      "en": "This is what has been written by China's ancient agricultural society.",
+      "pinyin": "💃 zhè jiù shì zhōng guó gǔ dài nóng yè shè huì de xiě zhào 。"
+    },
+    {
+      "start": 668.03,
+      "end": 670.13,
+      "zh": "💃人们在田里种庄稼。",
+      "vi": "Con người trồng hoa màu trên ruộng.",
+      "en": "The people grow crops in the fields.",
+      "pinyin": "💃 rén men zài tián lǐ zhǒng zhuāng jia 。"
+    },
+    {
+      "start": 670.6,
+      "end": 672,
+      "zh": "🕺所以你看，",
+      "vi": "Cho nên bạn thấy đấy,",
+      "en": "♪ So look, ♪",
+      "pinyin": "🕺 suǒ yǐ nǐ kàn ，"
+    },
+    {
+      "start": 672,
+      "end": 674.8,
+      "zh": "🕺无论是自然界的“马”和“鱼”，",
+      "vi": "dù là \"ngựa\" và \"cá\" trong tự nhiên,",
+      "en": "It's not natural to be a horse or a fish.",
+      "pinyin": "🕺 wú lùn shì zì rán jiè de “ mǎ ” hé “ yú ” ，"
+    },
+    {
+      "start": 674.8,
+      "end": 677.6,
+      "zh": "🕺还是人类生活中的“木”和“田”，",
+      "vi": "hay \"cây\" và \"ruộng\" trong đời sống con người,",
+      "en": "It's also \"wood\" and \"field\" in human life.",
+      "pinyin": "🕺 hái shì rén lèi shēng huó zhōng de “ mù ” hé “ tián ” ，"
+    },
+    {
+      "start": 677.83,
+      "end": 679.23,
+      "zh": "🕺它们都告诉了我们，",
+      "vi": "chúng đều cho chúng ta biết rằng,",
+      "en": "They told us.",
+      "pinyin": "🕺 tā men dōu gào sù le wǒ men ，"
+    },
+    {
+      "start": 679.23,
+      "end": 683.23,
+      "zh": "🕺汉字的创造，是从观察世界开始的。",
+      "vi": "việc sáng tạo chữ Hán bắt đầu từ việc quan sát thế giới.",
+      "en": "The creation of hyphenics began with the observation of the world.",
+      "pinyin": "🕺 hàn zì de chuàng zào ， shì cóng guān chá shì jiè kāi shǐ de 。"
+    },
+    {
+      "start": 683.23,
+      "end": 684.46,
+      "zh": "💃确实如此。",
+      "vi": "Đúng là như vậy.",
+      "en": "That's true.",
+      "pinyin": "💃 què shí rú cǐ 。"
+    },
+    {
+      "start": 684.5,
+      "end": 686.13,
+      "zh": "💃通过今天的学习，",
+      "vi": "Qua bài học hôm nay,",
+      "en": "I've learned from today's study.",
+      "pinyin": "💃 tōng guò jīn tiān de xué xí ，"
+    },
+    {
+      "start": 686.13,
+      "end": 690.1,
+      "zh": "💃我感觉汉字不是一个个独立的符号，",
+      "vi": "tôi cảm thấy chữ Hán không phải là những ký hiệu tách rời nhau,",
+      "en": "I feel like Chinese is not a stand-alone symbol.",
+      "pinyin": "💃 wǒ gǎn jué hàn zì bú shì yí gè gè dú lì de fú hào ，"
+    },
+    {
+      "start": 690.13,
+      "end": 692.9,
+      "zh": "💃它们是一幅幅古代的图画，",
+      "vi": "chúng là từng bức tranh thời cổ đại,",
+      "en": "They're an ancient painting.",
+      "pinyin": "💃 tā men shì yì fú fú gǔ dài de tú huà ，"
+    },
+    {
+      "start": 692.9,
+      "end": 694.93,
+      "zh": "💃有生命，有故事。",
+      "vi": "có sự sống, có câu chuyện.",
+      "en": "There's life, there's a story.",
+      "pinyin": "💃 yǒu shēng mìng ， yǒu gù shì 。"
+    },
+    {
+      "start": 694.93,
+      "end": 697.3,
+      "zh": "🕺没错，当我们理解了",
+      "vi": "Đúng vậy, khi chúng ta hiểu được",
+      "en": "That's right, when we understand.",
+      "pinyin": "🕺 méi cuò ， dāng wǒ men lǐ jiě le"
+    },
+    {
+      "start": 697.3,
+      "end": 699.7,
+      "zh": "🕺这些象形字的“图画”意义，",
+      "vi": "ý nghĩa \"bức tranh\" của những chữ tượng hình này,",
+      "en": "The pictogram of these hieroglyphics has a meaning.",
+      "pinyin": "🕺 zhè xiē xiàng xíng zì de “ tú huà ” yì yì ，"
+    },
+    {
+      "start": 699.73,
+      "end": 703.33,
+      "zh": "🕺我们学习其他的形声字、会意字",
+      "vi": "thì việc học các chữ hình thanh, hội ý khác",
+      "en": "We're learning other words. We can read them.",
+      "pinyin": "🕺 wǒ men xué xí qí tā de xíng shēng zì 、 huì yì zì"
+    },
+    {
+      "start": 703.33,
+      "end": 704.93,
+      "zh": "🕺也会更加容易。",
+      "vi": "cũng sẽ dễ dàng hơn.",
+      "en": "It'll be easier.",
+      "pinyin": "🕺 yě huì gèng jiā róng yì 。"
+    },
+    {
+      "start": 705,
+      "end": 706.63,
+      "zh": "🕺因为象形字",
+      "vi": "Bởi vì chữ tượng hình",
+      "en": "It's a hieroglyph.",
+      "pinyin": "🕺 yīn wèi xiàng xíng zì"
+    },
+    {
+      "start": 706.63,
+      "end": 710.13,
+      "zh": "🕺是很多复杂汉字的基础和偏旁。",
+      "vi": "là nền tảng và bộ phận cấu thành của rất nhiều chữ Hán phức tạp.",
+      "en": "It's the basis and side of a lot of complex Chinese characters.",
+      "pinyin": "🕺 shì hěn duō fù zá hàn zì de jī chǔ hé piān páng 。"
+    },
+    {
+      "start": 710.3,
+      "end": 711.77,
+      "zh": "💃好了，今天",
+      "vi": "Được rồi, hôm nay",
+      "en": "We're done. Today.",
+      "pinyin": "💃 hǎo le ， jīn tiān"
+    },
+    {
+      "start": 711.77,
+      "end": 715.74,
+      "zh": "💃我们已经逛完了象形字的“汉字画廊”。",
+      "vi": "chúng ta đã dạo xong \"thư viện chữ Hán\" của chữ tượng hình.",
+      "en": "We've finished the hieroglyphic gallery.",
+      "pinyin": "💃 wǒ men yǐ jīng guàng wán le xiàng xíng zì de “ hàn zì huà láng ” 。"
+    },
+    {
+      "start": 715.9,
+      "end": 719.47,
+      "zh": "💃是时候来做一个简单的小总结了！",
+      "vi": "Đã đến lúc làm một bài tổng kết nhỏ đơn giản rồi!",
+      "en": "It's time to make a simple summary!",
+      "pinyin": "💃 shì shí hòu lái zuò yí gè jiǎn dān de xiǎo zǒng jié le ！"
+    },
+    {
+      "start": 721.6,
+      "end": 722.9,
+      "zh": "💃好的，朋友们。",
+      "vi": "Được rồi, các bạn.",
+      "en": "Good day, friends.",
+      "pinyin": "💃 hǎo de ， péng yǒu men 。"
+    },
+    {
+      "start": 722.9,
+      "end": 726.07,
+      "zh": "💃今天的旅程是不是非常有趣呢？",
+      "vi": "Hành trình hôm nay có phải rất thú vị không?",
+      "en": "Isn't it a very interesting trip today?",
+      "pinyin": "💃 jīn tiān de lǚ chéng shì bu shì fēi cháng yǒu qù ne ？"
+    },
+    {
+      "start": 726.23,
+      "end": 729.43,
+      "zh": "💃我们一起探索了汉字的起源。",
+      "vi": "Chúng ta đã cùng nhau khám phá nguồn gốc của chữ Hán.",
+      "en": "We explored the origin of the Chinese word together.",
+      "pinyin": "💃 wǒ men yì qǐ tàn suǒ le hàn zì de qǐ yuán 。"
+    },
+    {
+      "start": 729.63,
+      "end": 732.73,
+      "zh": "🕺是的，我们今天学习了什么呢？",
+      "vi": "Đúng vậy, hôm nay chúng ta đã học những gì?",
+      "en": "Yeah. What did we learn today?",
+      "pinyin": "🕺 shì de ， wǒ men jīn tiān xué xí le shén me ne ？"
+    },
+    {
+      "start": 732.73,
+      "end": 735.13,
+      "zh": "🕺我们学习了“象形字”，",
+      "vi": "Chúng ta đã học về \"chữ tượng hình\",",
+      "en": "We've learned pictograms.",
+      "pinyin": "🕺 wǒ men xué xí le “ xiàng xíng zì ” ，"
+    },
+    {
+      "start": 735.3,
+      "end": 739.27,
+      "zh": "🕺它们是汉字里最像图画的一类字。",
+      "vi": "chúng là loại chữ giống tranh vẽ nhất trong chữ Hán.",
+      "en": "They're the most graphic kind of words in Chinese.",
+      "pinyin": "🕺 tā men shì hàn zì lǐ zuì xiàng tú huà de yí lèi zì 。"
+    },
+    {
+      "start": 739.8,
+      "end": 744.83,
+      "zh": "💃我们看到了自然界中的“日”（太阳）、“月”（月亮）、",
+      "vi": "Chúng ta đã thấy \"nhật\" (mặt trời), \"nguyệt\" (mặt trăng) trong tự nhiên,",
+      "en": "We see the \"sun\" in nature, the \"moon,\"",
+      "pinyin": "💃 wǒ men kàn dào le zì rán jiè zhōng de “ rì ” （ tài yáng ） 、 “ yuè ” （ yuè liàng ） 、"
+    },
+    {
+      "start": 745.03,
+      "end": 749.7,
+      "zh": "💃“山”（山峰）和“水”（河流）。下次写这四个字的时候，",
+      "vi": "\"sơn\" (đỉnh núi) và \"thủy\" (dòng sông). Lần sau khi viết bốn chữ này,",
+      "en": "And the mountains and the rivers. And the next time you write these four words,",
+      "pinyin": "💃 “ shān ” （ shān fēng ） hé “ shuǐ ” （ hé liú ） 。 xià cì xiě zhè sì gè zì de shí hòu ，"
+    },
+    {
+      "start": 749.7,
+      "end": 752.47,
+      "zh": "💃请你想象它们的原始",
+      "vi": "bạn hãy tưởng tượng hình vẽ nguyên thủy",
+      "en": "I'd like you to imagine their originality.",
+      "pinyin": "💃 qǐng nǐ xiǎng xiàng tā men de yuán shǐ"
+    },
+    {
+      "start": 752.6,
+      "end": 753.4,
+      "zh": "💃图画。",
+      "vi": "của chúng.",
+      "en": "A picture.",
+      "pinyin": "💃 tú huà 。"
+    },
+    {
+      "start": 753.9,
+      "end": 755.3,
+      "zh": "🕺我们也看到了",
+      "vi": "Chúng ta cũng đã thấy",
+      "en": "We saw it, too.",
+      "pinyin": "🕺 wǒ men yě kàn dào le"
+    },
+    {
+      "start": 755.3,
+      "end": 757.73,
+      "zh": "🕺和我们人类自己相关的字，",
+      "vi": "những chữ liên quan đến chính con người chúng ta,",
+      "en": "The words that are relevant to us as human beings.",
+      "pinyin": "🕺 hé wǒ men rén lèi zì jǐ xiāng guān de zì ，"
+    },
+    {
+      "start": 757.73,
+      "end": 761.26,
+      "zh": "🕺比如侧身走路的“人”、",
+      "vi": "ví dụ như \"nhân\" với người nghiêng mình bước đi,",
+      "en": "Like \"people\" walking side by side,",
+      "pinyin": "🕺 bǐ rú cè shēn zǒu lù de “ rén ” 、"
+    },
+    {
+      "start": 761.57,
+      "end": 766.34,
+      "zh": "🕺伸开四肢的“大”、像嘴巴的“口”、",
+      "vi": "\"大\" là hình người dang tay dang chân, \"口\" trông như cái miệng,",
+      "en": "\"Big\" with his limbs open, like a mouth,",
+      "pinyin": "🕺 shēn kāi sì zhī de “ dà ” 、 xiàng zuǐ ba de “ kǒu ” 、"
+    },
+    {
+      "start": 766.4,
+      "end": 770.9,
+      "zh": "🕺以及两个“人”组成的“从”（跟随）。",
+      "vi": "cùng hai chữ \"人\" hợp thành \"从\" (đi theo).",
+      "en": "and two “persons” (following).",
+      "pinyin": "🕺 yǐ jí liǎng gè “ rén ” zǔ chéng de “ cóng ” （ gēn suí ） 。"
+    },
+    {
+      "start": 771.63,
+      "end": 774.43,
+      "zh": "💃还有可爱的动物朋友：",
+      "vi": "Và cả những người bạn động vật đáng yêu nữa:",
+      "en": "And a lovely animal friend:",
+      "pinyin": "💃 hái yǒu kě ài de dòng wù péng yǒu ："
+    },
+    {
+      "start": 774.73,
+      "end": 779.53,
+      "zh": "💃“马”（马匹）和“鱼”（鱼儿），以及植物界的“木”（树木）。",
+      "vi": "\"马\" (ngựa) và \"鱼\" (cá), cùng với \"木\" (cây) trong thế giới thực vật.",
+      "en": "\"Marves\" and \"fish\", as well as \"wood\" in the plant world.",
+      "pinyin": "💃 “ mǎ ” （ mǎ pǐ ） hé “ yú ” （ yú er ） ， yǐ jí zhí wù jiè de “ mù ” （ shù mù ） 。"
+    },
+    {
+      "start": 780.5,
+      "end": 783.13,
+      "zh": "🕺这些都是大家在HSK",
+      "vi": "Đây đều là những từ mọi người sẽ gặp trong HSK",
+      "en": "This is everyone in HSK.",
+      "pinyin": "🕺 zhè xiē dōu shì dà jiā zài H S K"
+    },
+    {
+      "start": 783.13,
+      "end": 787.23,
+      "zh": "🕺一到四级学习中会遇到的重要词汇。",
+      "vi": "từ cấp một đến cấp bốn.",
+      "en": "An important term to be encountered in the first to fourth levels of learning.",
+      "pinyin": "🕺 yí dào sì jí xué xí zhōng huì yù dào de zhòng yào cí huì 。"
+    },
+    {
+      "start": 787.63,
+      "end": 790.56,
+      "zh": "🕺通过了解它们的“图画”意义，",
+      "vi": "Khi hiểu được ý nghĩa \"hình vẽ\" của chúng,",
+      "en": "In the past few years, many of them have been able to find out what they mean by \"pictures\".",
+      "pinyin": "🕺 tōng guò liǎo jiě tā men de “ tú huà ” yì yì ，"
+    },
+    {
+      "start": 790.57,
+      "end": 793.4,
+      "zh": "🕺你的记忆一定会更深刻。",
+      "vi": "chắc chắn bạn sẽ ghi nhớ sâu hơn.",
+      "en": "Your memory must be deeper.",
+      "pinyin": "🕺 nǐ de jì yì yí dìng huì gèng shēn kè 。"
+    },
+    {
+      "start": 793.9,
+      "end": 796.43,
+      "zh": "💃大家可以尝试用这些象",
+      "vi": "Mọi người có thể thử dùng những chữ tượng",
+      "en": "You can try to use these elephants.",
+      "pinyin": "💃 dà jiā kě yǐ cháng shì yòng zhè xiē xiàng"
+    },
+    {
+      "start": 796.6,
+      "end": 799.13,
+      "zh": "💃形字画一幅小画，",
+      "vi": "hình này vẽ một bức tranh nhỏ,",
+      "en": "A small painting in the form of twigs.",
+      "pinyin": "💃 xíng zì huà yì fú xiǎo huà ，"
+    },
+    {
+      "start": 799.5,
+      "end": 803.7,
+      "zh": "💃比如在“山”的旁边画一条“水”，",
+      "vi": "ví dụ bên cạnh \"山\" vẽ thêm \"水\",",
+      "en": "In the past few years, the government has been able to draw a \"water\" next to the mountain.",
+      "pinyin": "💃 bǐ rú zài “ shān ” de páng biān huà yì tiáo “ shuǐ ” ，"
+    },
+    {
+      "start": 803.8,
+      "end": 808.17,
+      "zh": "💃在“木”的旁边画一个“人”。🕺记住，",
+      "vi": "bên cạnh \"木\" vẽ thêm \"人\". Hãy nhớ,",
+      "en": "\"The man\" is drawn next to the wood. Remember,",
+      "pinyin": "💃 zài “ mù ” de páng biān huà yí gè “ rén ” 。 🕺 jì zhù ，"
+    },
+    {
+      "start": 808.5,
+      "end": 812.6,
+      "zh": "🕺中文学习是一个长期、有趣的过程。",
+      "vi": "học tiếng Trung là một quá trình lâu dài và thú vị.",
+      "en": "Chinese language learning is a long and interesting process.",
+      "pinyin": "🕺 zhōng wén xué xí shì yí gè cháng qī 、 yǒu qù de guò chéng 。"
+    },
+    {
+      "start": 812.7,
+      "end": 815.53,
+      "zh": "🕺不要害怕那些笔画多的字。",
+      "vi": "Đừng sợ những chữ có nhiều nét.",
+      "en": "Don't be afraid of those pens.",
+      "pinyin": "🕺 bú yào hài pà nà xiē bǐ huà duō de zì 。"
+    },
+    {
+      "start": 815.8,
+      "end": 819.83,
+      "zh": "🕺当你学会用“图画”的方式来看待它们，",
+      "vi": "Khi bạn học được cách nhìn chúng bằng \"hình vẽ\",",
+      "en": "When you learn to look at them in a \"picture\" way,",
+      "pinyin": "🕺 dāng nǐ xué huì yòng “ tú huà ” de fāng shì lái kàn dài tā men ，"
+    },
+    {
+      "start": 819.83,
+      "end": 823.3,
+      "zh": "🕺你就会发现汉字的逻辑和美。",
+      "vi": "bạn sẽ phát hiện ra logic và vẻ đẹp của chữ Hán.",
+      "en": "You'll find the logic and beauty of the Chinese.",
+      "pinyin": "🕺 nǐ jiù huì fā xiàn hàn zì de luó jí hé měi 。"
+    },
+    {
+      "start": 824.5,
+      "end": 824.77,
+      "zh": "💃“学",
+      "vi": "\"Học",
+      "en": "\"Study.\"",
+      "pinyin": "💃 “ xué"
+    },
+    {
+      "start": 824.77,
+      "end": 828.64,
+      "zh": "💃中文播客”会一直在这里支持大家！",
+      "vi": "tiếng Trung Podcast\" sẽ luôn ở đây ủng hộ mọi người!",
+      "en": "The Chinese Podcast has been here to support you all!",
+      "pinyin": "💃 zhōng wén bō kè ” huì yì zhí zài zhè lǐ zhī chí dà jiā ！"
+    },
+    {
+      "start": 828.93,
+      "end": 831.43,
+      "zh": "💃希望我们今天分享的知识，",
+      "vi": "Mong rằng kiến thức chúng tôi chia sẻ hôm nay",
+      "en": "I hope we share the knowledge we have today.",
+      "pinyin": "💃 xī wàng wǒ men jīn tiān fèn xiǎng de zhī shi ，"
+    },
+    {
+      "start": 831.43,
+      "end": 834.83,
+      "zh": "💃能给你带来更多的学习动力。",
+      "vi": "sẽ mang lại cho bạn thêm động lực học tập.",
+      "en": "The ginseng will give you more motivation to learn.",
+      "pinyin": "💃 néng gěi nǐ dài lái gèng duō de xué xí dòng lì 。"
+    },
+    {
+      "start": 835.3,
+      "end": 837.6,
+      "zh": "🕺如果你喜欢今天的节目，",
+      "vi": "Nếu bạn thích chương trình hôm nay,",
+      "en": "If you like today's show,",
+      "pinyin": "🕺 rú guǒ nǐ xǐ huan jīn tiān de jié mù ，"
+    },
+    {
+      "start": 837.6,
+      "end": 839.67,
+      "zh": "🕺请记得给我们点赞、",
+      "vi": "hãy nhớ like cho chúng tôi,",
+      "en": "Please remember to give us some praise.",
+      "pinyin": "🕺 qǐng jì de gěi wǒ men diǎn zàn 、"
+    },
+    {
+      "start": 839.7,
+      "end": 841.17,
+      "zh": "🕺订阅我们的频道，",
+      "vi": "đăng ký kênh của chúng tôi,",
+      "en": "We have a lot of people who don't know what we're doing.",
+      "pinyin": "🕺 dìng yuè wǒ men de pín dào ，"
+    },
+    {
+      "start": 841.17,
+      "end": 841.8,
+      "zh": "🕺并且",
+      "vi": "và",
+      "en": "And...",
+      "pinyin": "🕺 bìng qiě"
+    },
+    {
+      "start": 841.8,
+      "end": 845.1,
+      "zh": "🕺分享给更多正在学习中文的朋友。",
+      "vi": "chia sẻ cho nhiều bạn bè đang học tiếng Trung hơn.",
+      "en": "⁇  shares with more friends who are learning Chinese.",
+      "pinyin": "🕺 fēn xiǎng gěi gèng duō zhèng zài xué xí zhōng wén de péng yǒu 。"
+    },
+    {
+      "start": 845.3,
+      "end": 846.57,
+      "zh": "🕺你的支持，是",
+      "vi": "Sự ủng hộ của bạn chính là",
+      "en": "Your support, yes.",
+      "pinyin": "🕺 nǐ de zhī chí ， shì"
+    },
+    {
+      "start": 846.67,
+      "end": 848.8,
+      "zh": "🕺我们继续做下去的动力。",
+      "vi": "động lực để chúng tôi tiếp tục làm.",
+      "en": "Let's keep doing the driving force.",
+      "pinyin": "🕺 wǒ men jì xù zuò xià qù de dòng lì 。"
+    },
+    {
+      "start": 849.17,
+      "end": 851.07,
+      "zh": "💃感谢大家的收听！",
+      "vi": "Cảm ơn mọi người đã lắng nghe!",
+      "en": "Thank you for listening!",
+      "pinyin": "💃 gǎn xiè dà jiā de shōu tīng ！"
+    },
+    {
+      "start": 851.4,
+      "end": 854.33,
+      "zh": "🕺我们下期节目再见！💃再见！",
+      "vi": "Hẹn gặp lại mọi người ở chương trình kỳ sau! Tạm biệt!",
+      "en": "I'll see you on the next show!",
+      "pinyin": "🕺 wǒ men xià qī jié mù zài jiàn ！ 💃 zài jiàn ！"
+    }
+  ]
+}
