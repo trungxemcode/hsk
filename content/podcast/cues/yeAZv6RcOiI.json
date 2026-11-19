@@ -1,0 +1,1613 @@
+{
+  "id": "yeAZv6RcOiI",
+  "youtubeId": "yeAZv6RcOiI",
+  "channelHandle": "@LearnChineseThroughPodcast",
+  "title": "HSK 3-4 | Learn Chinese smart, study and rest properly | Chinese Listening Practice",
+  "titleVi": "HSK 3-4: Học tiếng Trung thông minh, nghỉ ngơi đúng cách",
+  "topic": "Podcast Luyện nghe HSK",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 1015,
+  "cues": [
+    {
+      "start": 6.27,
+      "end": 9.9,
+      "en": "Hello everyone! Welcome back to “Learn Chinese Podcast”!",
+      "zh": "🕺大家好！欢迎回到“学中文播客”！",
+      "pinyin": "🕺 dà jiā hǎo！ huān yíng huí dào “ xué zhōng wén bō kè ”！",
+      "vi": "Chào mọi người! Chào mừng trở lại với “Podcast Học tiếng Trung”!"
+    },
+    {
+      "start": 10.17,
+      "end": 11.43,
+      "en": "I’m Li Ming.",
+      "zh": "🕺我是李明。",
+      "pinyin": "🕺 wǒ shì lǐ míng。",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 11.47,
+      "end": 13.9,
+      "en": "Hello everyone! I’m Xiaoyu.",
+      "zh": "💃大家好！我是小雨。",
+      "pinyin": "💃 dà jiā hǎo！ wǒ shì xiǎo yǔ。",
+      "vi": "Chào mọi người! Tôi là Tiểu Vũ."
+    },
+    {
+      "start": 13.93,
+      "end": 17.27,
+      "en": "We’re very happy to meet everyone again!",
+      "zh": "💃我们很高兴又和大家见面了！",
+      "pinyin": "💃 wǒ men hěn gāo xìng yòu hé dà jiā jiàn miàn le！",
+      "vi": "Chúng tôi rất vui được gặp lại mọi người!"
+    },
+    {
+      "start": 17.33,
+      "end": 18.9,
+      "en": "Yes, Xiaoyu.",
+      "zh": "🕺是的，小雨。",
+      "pinyin": "🕺 shì de， xiǎo yǔ。",
+      "vi": "Đúng vậy, Tiểu Vũ."
+    },
+    {
+      "start": 19.07,
+      "end": 27.57,
+      "en": "The goal of our “Learn Chinese Podcast” has always been simple: to help all friends who are learning Chinese.",
+      "zh": "🕺我们“学中文播客”的目标，🕺一直都很简单，🕺就是帮助所有正在学习中文的朋友，",
+      "pinyin": "🕺 wǒ men “ xué zhōng wén bō kè ” de mù biāo，🕺 yì zhí dōu hěn jiǎn dān，🕺 jiù shì bāng zhù suǒ yǒu zhèng zài xué xí zhōng wén de péng yǒu，",
+      "vi": "Mục tiêu của “Podcast Học tiếng Trung” của chúng tôi luôn rất đơn giản: giúp tất cả những bạn đang học tiếng Trung."
+    },
+    {
+      "start": 27.57,
+      "end": 32.5,
+      "en": "to master Chinese easily in the simplest and most interesting way.",
+      "zh": "🕺用最简单、🕺最有趣的方式，轻松掌握中文。",
+      "pinyin": "🕺 yòng zuì jiǎn dān、🕺 zuì yǒu qù de fāng shì， qīng sōng zhǎng wò zhōng wén。",
+      "vi": "Bằng cách đơn giản và thú vị nhất, giúp bạn nắm vững tiếng Trung một cách nhẹ nhàng."
+    },
+    {
+      "start": 32.87,
+      "end": 41.43,
+      "en": "That’s right! We know that learning a new language, especially Chinese, takes time and effort.",
+      "zh": "💃没错！我们知道，学习一门新语言，💃尤其是中文，💃需要时间和努力。",
+      "pinyin": "💃 méi cuò！ wǒ men zhī dào， xué xí yì mén xīn yǔ yán，💃 yóu qí shì zhōng wén，💃 xū yào shí jiān hé nǔ lì。",
+      "vi": "Đúng vậy! Chúng ta biết rằng học một ngôn ngữ mới, đặc biệt là tiếng Trung, cần thời gian và nỗ lực."
+    },
+    {
+      "start": 41.87,
+      "end": 47.27,
+      "en": "Sometimes you may feel very tired, or even want to give up.",
+      "zh": "💃有时候大家可能会觉得很累，💃甚至想放弃。",
+      "pinyin": "💃 yǒu shí hòu dà jiā kě néng huì jué de hěn lèi，💃 shèn zhì xiǎng fàng qì。",
+      "vi": "Đôi khi mọi người có thể cảm thấy rất mệt, thậm chí muốn bỏ cuộc."
+    },
+    {
+      "start": 47.57,
+      "end": 56.7,
+      "en": "So today we’re going to talk about a very important topic that can make your Chinese learning more efficient,",
+      "zh": "🕺所以，我们今天就要来聊一个，🕺非常重要的话题，🕺它能让你学习中文的效率更高，",
+      "pinyin": "🕺 suǒ yǐ， wǒ men jīn tiān jiù yào lái liáo yí gè，🕺 fēi cháng zhòng yào de huà tí，🕺 tā néng ràng nǐ xué xí zhōng wén de xiào lǜ gèng gāo，",
+      "vi": "Vì vậy, hôm nay chúng ta sẽ nói về một chủ đề rất quan trọng, có thể giúp bạn học tiếng Trung hiệu quả hơn,"
+    },
+    {
+      "start": 56.7,
+      "end": 59.03,
+      "en": "and make you feel more relaxed.",
+      "zh": "🕺而且感觉更轻松。",
+      "pinyin": "🕺 ér qiě gǎn jué gèng qīng sōng。",
+      "vi": "và cảm thấy thoải mái hơn."
+    },
+    {
+      "start": 59.07,
+      "end": 70.83,
+      "en": "This topic is: “Learn Chinese smartly, and rest properly!” “Learn Chinese smartly, rest properly.”",
+      "zh": "💃这个话题就是：💃“学中文，要聪明地学，💃也要正确地休息！”，🕺“学中文聪明学，正确地休息。”",
+      "pinyin": "💃 zhè ge huà tí jiù shì：💃“ xué zhōng wén， yào cōng ming dì xué，💃 yě yào zhèng què dì xiū xi！”，🕺“ xué zhōng wén cōng ming xué， zhèng què dì xiū xi。”",
+      "vi": "Chủ đề đó là: “Học tiếng Trung phải học thông minh, và nghỉ ngơi đúng cách!”, “Học tiếng Trung thông minh, nghỉ ngơi đúng cách.”"
+    },
+    {
+      "start": 70.9,
+      "end": 73,
+      "en": "Sounds very interesting.",
+      "zh": "🕺听起来很有意思。",
+      "pinyin": "🕺 tīng qǐ lái hěn yǒu yì sī。",
+      "vi": "Nghe có vẻ rất thú vị."
+    },
+    {
+      "start": 73.47,
+      "end": 82,
+      "en": "Many friends may think that resting is a waste of time, but that’s not true, right? Yes,",
+      "zh": "🕺很多朋友可能觉得，🕺休息就是浪费时间，🕺但事实并非如此，🕺对吗？ 💃是的，",
+      "pinyin": "🕺 hěn duō péng yǒu kě néng jué de，🕺 xiū xi jiù shì làng fèi shí jiān，🕺 dàn shì shí bìng fēi rú cǐ，🕺 duì ma？ 💃 shì de，",
+      "vi": "Nhiều bạn có thể nghĩ rằng nghỉ ngơi là lãng phí thời gian, nhưng thực tế không phải vậy, đúng không? Đúng vậy,"
+    },
+    {
+      "start": 82.13,
+      "end": 85.63,
+      "en": "Resting is actually part of learning.",
+      "zh": "💃休息其实是学习的一部分。",
+      "pinyin": "💃 xiū xi qí shí shì xué xí de yí bù fen。",
+      "vi": "Nghỉ ngơi thực ra là một phần của việc học."
+    },
+    {
+      "start": 86.07,
+      "end": 94.63,
+      "en": "If done properly, rest can help your brain better remember what you’ve learned.",
+      "zh": "💃如果方法得当，💃休息，💃可以帮助你的大脑更好地记住，💃你学到的东西。",
+      "pinyin": "💃 rú guǒ fāng fǎ dé dàng，💃 xiū xī，💃 kě yǐ bāng zhù nǐ de dà nǎo gèng hǎo dì jì zhù，💃 nǐ xué dào de dōng xī。",
+      "vi": "Nếu biết cách, nghỉ ngơi có thể giúp não bạn ghi nhớ những gì đã học tốt hơn."
+    },
+    {
+      "start": 95,
+      "end": 102.2,
+      "en": "So, friends, if you want to know how to get twice the result with half the effort in your Chinese learning,",
+      "zh": "🕺那么，朋友们，🕺如果你想知道如何让你的中文学习，🕺事半功倍，",
+      "pinyin": "🕺 nà me， péng yǒu men，🕺 rú guǒ nǐ xiǎng zhī dào rú hé ràng nǐ de zhōng wén xué xí，🕺 shì bàn gōng bèi，",
+      "vi": "Vậy các bạn ơi, nếu bạn muốn biết cách giúp việc học tiếng Trung của mình đạt hiệu quả gấp đôi,"
+    },
+    {
+      "start": 102.33,
+      "end": 104.3,
+      "en": "please keep listening.",
+      "zh": "🕺请继续听下去。",
+      "pinyin": "🕺 qǐng jì xù tīng xià qù。",
+      "vi": "Hãy tiếp tục lắng nghe."
+    },
+    {
+      "start": 104.37,
+      "end": 109.7,
+      "en": "Today we will share three simple and practical methods.",
+      "zh": "🕺我们今天会分享，🕺三个简单又实用的方法。",
+      "pinyin": "🕺 wǒ men jīn tiān huì fēn xiǎng，🕺 sān gè jiǎn dān yòu shí yòng de fāng fǎ。",
+      "vi": "Hôm nay chúng tôi sẽ chia sẻ ba phương pháp đơn giản và thiết thực."
+    },
+    {
+      "start": 109.9,
+      "end": 111.2,
+      "en": "Are you ready?",
+      "zh": "💃准备好了吗？",
+      "pinyin": "💃 zhǔn bèi hǎo le ma？",
+      "vi": "Bạn đã sẵn sàng chưa?"
+    },
+    {
+      "start": 111.67,
+      "end": 116,
+      "en": "💃Let's start today's learning journey!",
+      "zh": "💃让我们开始今天的学习之旅吧！",
+      "pinyin": "💃 ràng wǒ men kāi shǐ jīn tiān de xué xí zhī lǚ ba！",
+      "vi": "💃Hãy bắt đầu hành trình học tập hôm nay của chúng ta nhé!"
+    },
+    {
+      "start": 116.4,
+      "end": 124.1,
+      "en": "🕺Xiaoyu, 🕺let's start with the first part, 🕺which is how to \"study smart.\"",
+      "zh": "🕺小雨，🕺我们先从第一个部分开始聊起，🕺就是如何“聪明地学习”。",
+      "pinyin": "🕺 xiǎo yǔ，🕺 wǒ men xiān cóng dì yī gè bù fen kāi shǐ liáo qǐ，🕺 jiù shì rú hé “ cōng ming dì xué xí ”。",
+      "vi": "🕺Tiểu Vũ, 🕺chúng ta hãy bắt đầu nói về phần đầu tiên, 🕺đó là làm thế nào để “học một cách thông minh”."
+    },
+    {
+      "start": 124.1,
+      "end": 125.7,
+      "en": "💃Okay!",
+      "zh": "💃好啊！",
+      "pinyin": "💃 hǎo a！",
+      "vi": "💃Được thôi!"
+    },
+    {
+      "start": 127.97,
+      "end": 132.97,
+      "en": "💃Li Ming, what do you think is the most important thing when learning Chinese?",
+      "zh": "💃李明，你觉得学习中文，💃最重要的一点是什么？",
+      "pinyin": "💃 lǐ míng， nǐ jué de xué xí zhōng wén，💃 zuì zhòng yào de yì diǎn shì shén me？",
+      "vi": "💃Lý Minh, bạn nghĩ khi học tiếng Trung, 💃điểm quan trọng nhất là gì?"
+    },
+    {
+      "start": 133,
+      "end": 135.27,
+      "en": "💃Is it about the length of time?",
+      "zh": "💃是时间长短吗？",
+      "pinyin": "💃 shì shí jiān cháng duǎn ma？",
+      "vi": "💃Có phải là về thời gian dài ngắn không?"
+    },
+    {
+      "start": 135.77,
+      "end": 138.97,
+      "en": "🕺I used to think that the longer you study, the better.",
+      "zh": "🕺我以前也觉得，学得越久越好。",
+      "pinyin": "🕺 wǒ yǐ qián yě jué de， xué dé yuè jiǔ yuè hǎo。",
+      "vi": "🕺Trước đây tôi cũng nghĩ rằng học càng lâu càng tốt."
+    },
+    {
+      "start": 139,
+      "end": 142.97,
+      "en": "🕺If I studied for five hours today, 🕺I'd feel great.",
+      "zh": "🕺如果我今天学习了五个小时，🕺我就会觉得很棒。",
+      "pinyin": "🕺 rú guǒ wǒ jīn tiān xué xí le wǔ gè xiǎo shí，🕺 wǒ jiù huì jué de hěn bàng。",
+      "vi": "🕺Nếu hôm nay tôi học được năm tiếng, 🕺tôi sẽ cảm thấy rất tuyệt."
+    },
+    {
+      "start": 143.2,
+      "end": 149.17,
+      "en": "🕺But later I found that with long study sessions, 🕺my concentration actually drops. 💃Right.",
+      "zh": "🕺但是后来我发现，长时间的学习，🕺我的注意力反而会下降。 💃对，",
+      "pinyin": "🕺 dàn shì hòu lái wǒ fā xiàn， cháng shí jiān de xué xí，🕺 wǒ de zhù yì lì fǎn ér huì xià jiàng。 💃 duì，",
+      "vi": "🕺Nhưng sau đó tôi phát hiện ra rằng, khi học trong thời gian dài, 🕺khả năng tập trung của tôi lại giảm đi. 💃Đúng vậy."
+    },
+    {
+      "start": 149.2,
+      "end": 152.27,
+      "en": "💃This is exactly the core of what we call \"smart learning.\"",
+      "zh": "💃这正是我们说的“聪明学习”的核心。",
+      "pinyin": "💃 zhè zhèng shì wǒ men shuō de “ cōng ming xué xí ” de hé xīn。",
+      "vi": "💃Đây chính là cốt lõi của cái mà chúng ta gọi là “học thông minh”."
+    },
+    {
+      "start": 153.37,
+      "end": 160.97,
+      "en": "💃We don't always need to chase \"quantity\"; 💃we should chase \"quality\" more, 💃right? 🕺What is \"quality\"?",
+      "zh": "💃我们不需要总是追求“数量”，💃更应该追求“质量”，💃对不对？ 🕺什么是“质量”？",
+      "pinyin": "💃 wǒ men bù xū yào zǒng shì zhuī qiú “ shù liáng ”，💃 gèng yīng gāi zhuī qiú “ zhì liàng ”，💃 duì bu duì？ 🕺 shén me shì “ zhì liàng ”？",
+      "vi": "💃Chúng ta không cần lúc nào cũng theo đuổi “số lượng”, 💃mà nên theo đuổi “chất lượng” nhiều hơn, 💃đúng không? 🕺“Chất lượng” là gì?"
+    },
+    {
+      "start": 161.37,
+      "end": 163.6,
+      "en": "🕺To me, 🕺it means \"focus.\"",
+      "zh": "🕺对我来说，🕺就是“专注”。",
+      "pinyin": "🕺 duì wǒ lái shuō，🕺 jiù shì “ zhuān zhù ”。",
+      "vi": "🕺Đối với tôi, 🕺đó là “tập trung”."
+    },
+    {
+      "start": 163.6,
+      "end": 164.9,
+      "en": "💃Absolutely correct!",
+      "zh": "💃完全正确！",
+      "pinyin": "💃 wán quán zhèng què！",
+      "vi": "💃Hoàn toàn đúng!"
+    },
+    {
+      "start": 165.1,
+      "end": 170.13,
+      "en": "💃Our brains find it hard to 💃maintain a high level of focus for a long time.",
+      "zh": "💃我们的大脑很难，💃长时间保持高度专注。",
+      "pinyin": "💃 wǒ men de dà nǎo hěn nán，💃 cháng shí jiān bǎo chí gāo dù zhuān zhù。",
+      "vi": "💃Bộ não của chúng ta khó có thể 💃duy trì sự tập trung cao độ trong thời gian dài."
+    },
+    {
+      "start": 170.13,
+      "end": 177.47,
+      "en": "💃If you study continuously for two hours, 💃by the last thirty minutes, 💃you may just be reading the book,",
+      "zh": "💃如果你连续学习两个小时，💃到最后三十分钟，💃可能你只是在看书，",
+      "pinyin": "💃 rú guǒ nǐ lián xù xué xí liǎng gè xiǎo shí，💃 dào zuì hòu sān shí fēn zhōng，💃 kě néng nǐ zhǐ shì zài kàn shū，",
+      "vi": "💃Nếu bạn học liên tục hai tiếng, 💃thì đến ba mươi phút cuối, 💃có thể bạn chỉ đang đọc sách,"
+    },
+    {
+      "start": 177.47,
+      "end": 179.5,
+      "en": "💃but you haven't remembered anything.",
+      "zh": "💃但什么都没有记住。",
+      "pinyin": "💃 dàn shén me dōu méi yǒu jì zhù。",
+      "vi": "💃nhưng không nhớ được gì cả."
+    },
+    {
+      "start": 179.77,
+      "end": 184.17,
+      "en": "🕺So, 🕺is there an effective study duration?",
+      "zh": "🕺那么，🕺有没有一个有效的学习时间长度呢？",
+      "pinyin": "🕺 nà me，🕺 yǒu méi yǒu yí gè yǒu xiào de xué xí shí jiān cháng dù ne？",
+      "vi": "🕺Vậy thì, 🕺có một khoảng thời gian học tập hiệu quả nào không?"
+    },
+    {
+      "start": 184.17,
+      "end": 190.27,
+      "en": "💃Yes. We suggest everyone try 💃the \"short, high-intensity study method.\"",
+      "zh": "💃有。我们建议大家试试，💃“短时高强度学习法”。",
+      "pinyin": "💃 yǒu。 wǒ men jiàn yì dà jiā shì shì，💃“ duǎn shí gāo qiáng dù xué xí fǎ ”。",
+      "vi": "💃Có. Chúng tôi khuyên mọi người thử 💃“phương pháp học tập cường độ cao trong thời gian ngắn”."
+    },
+    {
+      "start": 190.27,
+      "end": 195.7,
+      "en": "💃Simply put, 💃it means dividing your study time into many small chunks.",
+      "zh": "💃简单来说，💃就是把学习时间切分成很多小块。",
+      "pinyin": "💃 jiǎn dān lái shuō，💃 jiù shì bǎ xué xí shí jiān qiè fēn chéng hěn duō xiǎo kuài。",
+      "vi": "💃Nói đơn giản, 💃đó là chia thời gian học thành nhiều khối nhỏ."
+    },
+    {
+      "start": 195.8,
+      "end": 202,
+      "en": "💃For example, you can study for twenty to thirty minutes, 💃and then you must take a break.",
+      "zh": "💃比如，你可以学习二十分钟到三十分钟，💃然后必须休息。",
+      "pinyin": "💃 bǐ rú， nǐ kě yǐ xué xí èr shí fēn zhōng dào sān shí fēn zhōng，💃 rán hòu bì xū xiū xi。",
+      "vi": "💃Ví dụ, bạn có thể học từ hai mươi đến ba mươi phút, 💃sau đó phải nghỉ ngơi."
+    },
+    {
+      "start": 202.2,
+      "end": 206.6,
+      "en": "🕺Studying for twenty to thirty minutes, 🕺isn't that too short?",
+      "zh": "🕺学习二十分钟到三十分钟，🕺这是不是太短了？",
+      "pinyin": "🕺 xué xí èr shí fēn zhōng dào sān shí fēn zhōng，🕺 zhè shì bu shì tài duǎn le？",
+      "vi": "🕺Học từ hai mươi đến ba mươi phút, 🕺như vậy có quá ngắn không?"
+    },
+    {
+      "start": 206.7,
+      "end": 209.5,
+      "en": "It looks short, but it has many benefits.",
+      "zh": "💃看起来短，💃但好处很多。",
+      "pinyin": "💃 kàn qǐ lái duǎn，💃 dàn hǎo chù hěn duō。",
+      "vi": "Trông thì ngắn, nhưng lợi ích thì nhiều."
+    },
+    {
+      "start": 209.67,
+      "end": 219.67,
+      "en": "When you set a goal to study for only twenty minutes, your brain will know: “I must be fully engaged during these twenty minutes.”",
+      "zh": "💃当你设定目标只学习二十分钟时，💃你的大脑会知道：💃“我必须在这二十分钟内，全身心地投入。”",
+      "pinyin": "💃 dāng nǐ shè dìng mù biāo zhī xué xí èr shí fēn zhōng shí，💃 nǐ de dà nǎo huì zhī dào：💃“ wǒ bì xū zài zhè èr shí fēn zhōng nèi， quán shēn xīn dì tóu rù。”",
+      "vi": "Khi bạn đặt mục tiêu chỉ học hai mươi phút, não bạn sẽ biết: “Tôi phải dồn toàn bộ tâm trí vào hai mươi phút này.”"
+    },
+    {
+      "start": 219.8,
+      "end": 222.93,
+      "en": "This pressure will actually make you more focused.",
+      "zh": "💃这种压力反而会让你更专注。",
+      "pinyin": "💃 zhè zhǒng yā lì fǎn ér huì ràng nǐ gèng zhuān zhù。",
+      "vi": "Áp lực này ngược lại sẽ khiến bạn tập trung hơn."
+    },
+    {
+      "start": 222.93,
+      "end": 224.07,
+      "en": "I see.",
+      "zh": "🕺我明白了。",
+      "pinyin": "🕺 wǒ míng bái le。",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 224.1,
+      "end": 226.17,
+      "en": "It’s like when we write Chinese characters.",
+      "zh": "🕺这就像我们写汉字一样。",
+      "pinyin": "🕺 zhè jiù xiàng wǒ men xiě hàn zì yí yàng。",
+      "vi": "Điều này giống như khi chúng ta viết chữ Hán vậy."
+    },
+    {
+      "start": 226.17,
+      "end": 231.17,
+      "en": "If you only require yourself to write five characters, you will carefully write each stroke.",
+      "zh": "🕺如果你只要求自己写五个字，🕺你会认真写好每一个笔画。",
+      "pinyin": "🕺 rú guǒ nǐ zhī yāo qiú zì jǐ xiě wǔ gè zì，🕺 nǐ huì rèn zhēn xiě hǎo měi yí gè bǐ huà。",
+      "vi": "Nếu bạn chỉ yêu cầu mình viết năm chữ, bạn sẽ viết cẩn thận từng nét một."
+    },
+    {
+      "start": 231.47,
+      "end": 237.13,
+      "en": "If you require yourself to write five hundred characters, you may write very quickly, but the quality won't be good.",
+      "zh": "🕺如果你要求自己写五百个字，🕺你可能就会写得很快，🕺但是质量不好。",
+      "pinyin": "🕺 rú guǒ nǐ yāo qiú zì jǐ xiě wǔ bǎi gè zì，🕺 nǐ kě néng jiù huì xiě dé hěn kuài，🕺 dàn shì zhì liàng bù hǎo。",
+      "vi": "Nếu bạn yêu cầu mình viết năm trăm chữ, bạn có thể sẽ viết rất nhanh, nhưng chất lượng không tốt."
+    },
+    {
+      "start": 237.13,
+      "end": 238.47,
+      "en": "What a great analogy!",
+      "zh": "💃很好的比喻！",
+      "pinyin": "💃 hěn hǎo de bǐ yù！",
+      "vi": "Ví dụ so sánh hay lắm!"
+    },
+    {
+      "start": 238.7,
+      "end": 244.07,
+      "en": "Suppose today you want to learn twenty new HSK 3 vocabulary words.",
+      "zh": "💃假设你今天想要学习，💃二十个新的 词汇。",
+      "pinyin": "💃 jiǎ shè nǐ jīn tiān xiǎng yào xué xí，💃 èr shí gè xīn de cí huì。",
+      "vi": "Giả sử hôm nay bạn muốn học hai mươi từ vựng HSK 3 mới."
+    },
+    {
+      "start": 244.07,
+      "end": 249.57,
+      "en": "You can arrange it like this: First study session: focus on studying for twenty-five minutes.",
+      "zh": "💃你可以这样安排：第一次学习：💃专注学习二十五分钟。",
+      "pinyin": "💃 nǐ kě yǐ zhè yàng ān pái： dì yī cì xué xí：💃 zhuān zhù xué xí èr shí wǔ fēn zhōng。",
+      "vi": "Bạn có thể sắp xếp như thế này: Buổi học đầu tiên: tập trung học trong hai mươi lăm phút."
+    },
+    {
+      "start": 249.57,
+      "end": 253.23,
+      "en": "Do only one thing—memorize these twenty words.",
+      "zh": "💃只做一件事——，💃记忆这二十个词。",
+      "pinyin": "💃 zhī zuò yí jiàn shì ——，💃 jì yì zhè èr shí gè cí。",
+      "vi": "Chỉ làm một việc thôi — ghi nhớ hai mươi từ này."
+    },
+    {
+      "start": 253.67,
+      "end": 257.8,
+      "en": "When the twenty-five minutes are up, I'll rest right away, right? Yes!",
+      "zh": "🕺二十五分钟结束，🕺我就马上休息，🕺对吗？ 💃是的！",
+      "pinyin": "🕺 èr shí wǔ fēn zhōng jié shù，🕺 wǒ jiù mǎ shàng xiū xi，🕺 duì ma？ 💃 shì de！",
+      "vi": "Khi hai mươi lăm phút kết thúc, tôi sẽ nghỉ ngay, đúng không? Đúng vậy!"
+    },
+    {
+      "start": 257.87,
+      "end": 260.5,
+      "en": "Rest for five to ten minutes.",
+      "zh": "💃休息五到十分钟。",
+      "pinyin": "💃 xiū xi wǔ dào shí fēn zhōng。",
+      "vi": "Nghỉ ngơi năm đến mười phút."
+    },
+    {
+      "start": 260.53,
+      "end": 267.7,
+      "en": "During this break, you can't continue reading Chinese books, and you can't look at Chinese learning content on your phone either.",
+      "zh": "💃这段休息时间，💃你不能继续看中文书，💃也不能看手机里的中文学习内容。",
+      "pinyin": "💃 zhè duàn xiū xi shí jiān，💃 nǐ bù néng jì xù kàn zhòng wén shū，💃 yě bù néng kàn shǒu jī lǐ de zhōng wén xué xí nèi róng。",
+      "vi": "Trong thời gian nghỉ này, bạn không được tiếp tục đọc sách tiếng Trung, cũng không được xem nội dung học tiếng Trung trên điện thoại."
+    },
+    {
+      "start": 267.7,
+      "end": 270.47,
+      "en": "Let your brain completely relax.",
+      "zh": "💃要让你的大脑完全放松。",
+      "pinyin": "💃 yào ràng nǐ de dà nǎo wán quán fàng sōng。",
+      "vi": "Hãy để não bạn hoàn toàn thư giãn."
+    },
+    {
+      "start": 270.73,
+      "end": 272.07,
+      "en": "What about after the break?",
+      "zh": "🕺休息之后呢？",
+      "pinyin": "🕺 xiū xi zhī hòu ne？",
+      "vi": "Sau khi nghỉ thì sao?"
+    },
+    {
+      "start": 272.13,
+      "end": 276.4,
+      "en": "After the break ends, start the second “twenty-minute” study session.",
+      "zh": "💃休息结束后，💃再开始第二个“二十分钟”的学习。",
+      "pinyin": "💃 xiū xi jié shù hòu，💃 zài kāi shǐ dì èr gè “ èr shí fēn zhōng ” de xué xí。",
+      "vi": "Sau khi nghỉ xong, hãy bắt đầu buổi học “hai mươi phút” thứ hai."
+    },
+    {
+      "start": 276.47,
+      "end": 282.6,
+      "en": "This time you can use it to review the twenty words from earlier, or try making sentences with them.",
+      "zh": "💃这次可以用来复习刚才的二十个词，💃或者尝试用它们造句。",
+      "pinyin": "💃 zhè cì kě yǐ yòng lái fù xí gāng cái de èr shí gè cí，💃 huò zhě cháng shì yòng tā men zào jù。",
+      "vi": "Lần này có thể dùng để ôn lại hai mươi từ vừa rồi, hoặc thử đặt câu với chúng."
+    },
+    {
+      "start": 282.9,
+      "end": 290.6,
+      "en": "At the end of a day like this, even if I only studied for three hours, if those three hours are all high-quality,",
+      "zh": "🕺这样一天下来，🕺即使我只学习了三个小时，🕺但如果这三个小时都是高质量的、",
+      "pinyin": "🕺 zhè yàng yì tiān xià lái，🕺 jí shǐ wǒ zhī xué xí le sān gè xiǎo shí，🕺 dàn rú guǒ zhè sān gè xiǎo shí dōu shì gāo zhì liàng de、",
+      "vi": "Một ngày như thế này, dù tôi chỉ học ba tiếng, nhưng nếu cả ba tiếng đó đều có chất lượng cao,"
+    },
+    {
+      "start": 290.6,
+      "end": 296.47,
+      "en": "highly focused, the results will definitely be much better than studying aimlessly for six hours.",
+      "zh": "🕺高度专注的，🕺效果肯，🕺定比我漫无目的地学六个小，🕺时要好得多。",
+      "pinyin": "🕺 gāo dù zhuān zhù de，🕺 xiào guǒ kěn，🕺 dìng bǐ wǒ màn wú mù dì dì xué liù gè xiǎo，🕺 shí yào hǎo dé duō。",
+      "vi": "tập trung cao độ, hiệu quả chắc chắn sẽ tốt hơn nhiều so với việc tôi học không có mục đích suốt sáu tiếng."
+    },
+    {
+      "start": 296.47,
+      "end": 300.2,
+      "en": "💃Of course! Focus is the key to learning efficiency.",
+      "zh": "💃当然！专注是学习效率的关键。",
+      "pinyin": "💃 dāng rán！ zhuān zhù shì xué xí xiào lǜ de guān jiàn。",
+      "vi": "💃Tất nhiên! Tập trung là chìa khóa của hiệu quả học tập."
+    },
+    {
+      "start": 300.33,
+      "end": 308.77,
+      "en": "💃So, everyone remember the first method: 💃divide study time into small “focus blocks,” 💃each lasting twenty to thirty minutes.",
+      "zh": "💃所以，大家记住第一个方法：💃把学习时间分成小的“专注块”，💃每次二三十分钟，",
+      "pinyin": "💃 suǒ yǐ， dà jiā jì zhù dì yī gè fāng fǎ：💃 bǎ xué xí shí jiān fēn chéng xiǎo de “ zhuān zhù kuài ”，💃 měi cì èr sān shí fēn zhōng，",
+      "vi": "💃Vì vậy, mọi người hãy nhớ phương pháp đầu tiên: 💃chia thời gian học thành những “khối tập trung” nhỏ, 💃mỗi lần khoảng hai mươi đến ba mươi phút."
+    },
+    {
+      "start": 308.77,
+      "end": 311.27,
+      "en": "💃You must rest in between.",
+      "zh": "💃中间一定要休息。",
+      "pinyin": "💃 zhōng jiān yí dìng yào xiū xi。",
+      "vi": "💃Ở giữa nhất định phải nghỉ ngơi."
+    },
+    {
+      "start": 311.37,
+      "end": 313,
+      "en": "🕺That sounds very scientific.",
+      "zh": "🕺听起来非常科学。",
+      "pinyin": "🕺 tīng qǐ lái fēi cháng kē xué。",
+      "vi": "🕺Nghe rất khoa học."
+    },
+    {
+      "start": 313.3,
+      "end": 319.8,
+      "en": "🕺Xiaoyu, you just mentioned rest. 🕺Does rest 🕺also have a distinction between “correct” and “incorrect”?",
+      "zh": "🕺小雨，你刚才提到了休息，🕺是不是休息，🕺也有“正确”和“错误”之分呢？",
+      "pinyin": "🕺 xiǎo yǔ， nǐ gāng cái tí dào le xiū xī，🕺 shì bu shì xiū xi，🕺 yě yǒu “ zhèng què ” hé “ cuò wù ” zhī fēn ne？",
+      "vi": "🕺Tiểu Vũ, em vừa nhắc đến nghỉ ngơi, 🕺có phải nghỉ ngơi 🕺cũng có sự phân biệt giữa “đúng” và “sai” không?"
+    },
+    {
+      "start": 319.8,
+      "end": 321.17,
+      "en": "💃Yes, Li Ming.",
+      "zh": "💃是的，李明。",
+      "pinyin": "💃 shì de， lǐ míng。",
+      "vi": "💃Đúng vậy, Lý Minh."
+    },
+    {
+      "start": 321.3,
+      "end": 325.9,
+      "en": "💃Rest is not just stopping study; 💃it is also an art.",
+      "zh": "💃休息不仅仅是停止学习，💃它也是一门艺术。",
+      "pinyin": "💃 xiū xi bù jǐn jǐn shì tíng zhǐ xué xí，💃 tā yě shì yì mén yì shù。",
+      "vi": "💃Nghỉ ngơi không chỉ là dừng học, 💃mà còn là một nghệ thuật."
+    },
+    {
+      "start": 326.07,
+      "end": 332.83,
+      "en": "💃Next, let's talk about how to “rest properly,” 💃so your brain can “recharge” better.",
+      "zh": "💃我们接下来就聊聊，如何“正确地休息”，💃让你的大脑更好地“充电”。",
+      "pinyin": "💃 wǒ men jiē xià lái jiù liáo liáo， rú hé “ zhèng què dì xiū xi ”，💃 ràng nǐ de dà nǎo gèng hǎo dì “ chōng diàn ”。",
+      "vi": "💃Tiếp theo chúng ta hãy nói về cách “nghỉ ngơi đúng cách”, 💃để não của bạn “nạp năng lượng” tốt hơn."
+    },
+    {
+      "start": 333.1,
+      "end": 334.4,
+      "en": "🕺Okay, I'm looking forward to it!",
+      "zh": "🕺好的，我很期待！",
+      "pinyin": "🕺 hǎo de， wǒ hěn qī dài！",
+      "vi": "🕺Được, tôi rất mong chờ!"
+    },
+    {
+      "start": 336.5,
+      "end": 345.3,
+      "en": "🕺Xiaoyu, when many friends talk about resting, 🕺they might just lie on the sofa, 🕺open their phones to watch videos or play games.",
+      "zh": "🕺小雨，很多朋友一说休息，🕺可能就是躺在沙发上，🕺打开手机看视频，或者玩游戏。",
+      "pinyin": "🕺 xiǎo yǔ， hěn duō péng yǒu yì shuō xiū xi，🕺 kě néng jiù shì tǎng zài shā fā shàng，🕺 dǎ kāi shǒu jī kàn shì pín， huò zhě wán yóu xì。",
+      "vi": "🕺Tiểu Vũ, nhiều bạn khi nói đến nghỉ ngơi, 🕺có thể chỉ là nằm trên ghế sofa, 🕺mở điện thoại xem video hoặc chơi game."
+    },
+    {
+      "start": 345.5,
+      "end": 347.97,
+      "en": "🕺Is that considered good rest?",
+      "zh": "🕺这样算是好的休息吗？",
+      "pinyin": "🕺 zhè yàng suàn shì hǎo de xiū xi ma？",
+      "vi": "🕺Như vậy có được coi là nghỉ ngơi tốt không?"
+    },
+    {
+      "start": 347.97,
+      "end": 354.87,
+      "en": "💃Strictly speaking, 💃this is a kind of rest, 💃but it is not the “effective rest” we recommend.",
+      "zh": "💃严格来说，💃这是一种休息，💃但它不是我们推荐的“有效休息”。",
+      "pinyin": "💃 yán gé lái shuō，💃 zhè shì yì zhǒng xiū xi，💃 dàn tā bú shì wǒ men tuī jiàn de “ yǒu xiào xiū xi ”。",
+      "vi": "💃Nói một cách nghiêm túc, 💃đây là một kiểu nghỉ ngơi, 💃nhưng nó không phải là “nghỉ ngơi hiệu quả” mà chúng tôi khuyên dùng."
+    },
+    {
+      "start": 354.87,
+      "end": 355.9,
+      "en": "🕺Why?",
+      "zh": "🕺为什么呢？",
+      "pinyin": "🕺 wèi shén me ne？",
+      "vi": "🕺Tại sao vậy?"
+    },
+    {
+      "start": 355.93,
+      "end": 358.87,
+      "en": "🕺Watching videos and playing games is very relaxing!",
+      "zh": "🕺看视频和玩游戏很放松啊！",
+      "pinyin": "🕺 kàn shì pín hé wán yóu xì hěn fàng sōng a！",
+      "vi": "🕺Xem video và chơi game rất thư giãn mà!"
+    },
+    {
+      "start": 358.9,
+      "end": 363,
+      "en": "💃It is very relaxing, 💃but your brain is still working.",
+      "zh": "💃是很放松，💃但是你的大脑还在工作。",
+      "pinyin": "💃 shì hěn fàng sōng，💃 dàn shì nǐ de dà nǎo hái zài gōng zuò。",
+      "vi": "💃Đúng là rất thư giãn, 💃nhưng não của bạn vẫn đang làm việc."
+    },
+    {
+      "start": 363.13,
+      "end": 369.83,
+      "en": "💃Watching videos requires understanding the content, 💃and playing games requires quick reactions and thinking.",
+      "zh": "💃看视频需要理解内容，💃玩游戏需要快速反应和思考。",
+      "pinyin": "💃 kàn shì pín xū yào lǐ jiě nèi róng，💃 wán yóu xì xū yào kuài sù fǎn yìng hé sī kǎo。",
+      "vi": "💃Xem video cần hiểu nội dung, 💃chơi game cần phản ứng và suy nghĩ nhanh."
+    },
+    {
+      "start": 370.2,
+      "end": 380.9,
+      "en": "💃This is like when you study Chinese, 💃your brain needs to process Chinese information, 💃while when watching videos, 💃your brain needs to process video information.",
+      "zh": "💃这就像你学中文时，💃大脑需要处理中文信息，💃而看视频时，💃大脑需要处理视频信息。",
+      "pinyin": "💃 zhè jiù xiàng nǐ xué zhōng wén shí，💃 dà nǎo xū yào chù lǐ zhōng wén xìn xī，💃 ér kàn shì pín shí，💃 dà nǎo xū yào chǔ lǐ shì pín xìn xī。",
+      "vi": "💃Điều này giống như khi bạn học tiếng Trung, 💃não cần xử lý thông tin tiếng Trung, 💃còn khi xem video, 💃não cần xử lý thông tin video."
+    },
+    {
+      "start": 381.07,
+      "end": 383.87,
+      "en": "💃It doesn't get real rest.",
+      "zh": "💃它没有得到真正的休息。",
+      "pinyin": "💃 tā méi yǒu dé dào zhēn zhèng de xiū xi。",
+      "vi": "💃Nó không được nghỉ ngơi thực sự."
+    },
+    {
+      "start": 383.87,
+      "end": 385.8,
+      "en": "🕺Oh, I understand.",
+      "zh": "🕺哦，我明白了。",
+      "pinyin": "🕺 ò， wǒ míng bái le。",
+      "vi": "🕺Ồ, tôi hiểu rồi."
+    },
+    {
+      "start": 386.07,
+      "end": 390.33,
+      "en": "🕺So, 🕺what is the “correct rest” that we recommend like?",
+      "zh": "🕺所以，🕺我们推荐的“正确休息”是什么样的呢？",
+      "pinyin": "🕺 suǒ yǐ，🕺 wǒ men tuī jiàn de “ zhèng què xiū xi ” shì shén me yàng de ne？",
+      "vi": "🕺Vậy, 🕺“nghỉ ngơi đúng cách” mà chúng tôi khuyên là như thế nào?"
+    },
+    {
+      "start": 390.33,
+      "end": 395.27,
+      "en": "💃We recommend \"active rest\" and \"passive relaxation\".",
+      "zh": "💃我们推荐“主动休息”和“被动放松”。",
+      "pinyin": "💃 wǒ men tuī jiàn “ zhǔ dòng xiū xi ” hé “ bèi dòng fàng sōng ”。",
+      "vi": "💃Chúng tôi khuyên bạn nên \"nghỉ ngơi chủ động\" và \"thư giãn thụ động\"."
+    },
+    {
+      "start": 395.67,
+      "end": 403.7,
+      "en": "💃Active rest, 💃means doing things that don't require your brain to work at full capacity, 💃but can get your body moving.",
+      "zh": "💃主动休息，💃就是做一些不需要大脑高度运转，💃但是能让身体动起来的事情。",
+      "pinyin": "💃 zhǔ dòng xiū xi，💃 jiù shì zuò yì xiē bù xū yào dà nǎo gāo dù yùn zhuǎn，💃 dàn shì néng ràng shēn tǐ dòng qǐ lái de shì qíng。",
+      "vi": "💃Nghỉ ngơi chủ động, 💃tức là làm những việc không cần não hoạt động căng thẳng, 💃nhưng có thể khiến cơ thể vận động."
+    },
+    {
+      "start": 403.7,
+      "end": 407.37,
+      "en": "🕺For example? 💃The best example is—taking a walk.",
+      "zh": "🕺比如呢？ 💃最好的例子就是——散步。",
+      "pinyin": "🕺 bǐ rú ne？ 💃 zuì hǎo de lì zǐ jiù shì —— sàn bù。",
+      "vi": "🕺Ví dụ là gì? 💃Ví dụ tốt nhất chính là——đi dạo."
+    },
+    {
+      "start": 407.4,
+      "end": 413.9,
+      "en": "🕺A walk? Just walking a few laps around the room, 🕺or going downstairs for five minutes? 💃Yes.",
+      "zh": "🕺散步？只是在房间里走几圈，🕺或者下楼走五分钟？ 💃对。",
+      "pinyin": "🕺 sàn bù？ zhǐ shì zài fáng jiān lǐ zǒu jǐ quān，🕺 huò zhě xià lóu zǒu wǔ fēn zhōng？ 💃 duì。",
+      "vi": "🕺Đi dạo? Chỉ đi vài vòng trong phòng, 🕺hoặc xuống lầu đi bộ năm phút? 💃Đúng vậy."
+    },
+    {
+      "start": 414.07,
+      "end": 422.83,
+      "en": "💃After you've studied for twenty minutes, 💃stand up, leave your desk, 💃and go to the balcony to look at the view outside,",
+      "zh": "💃当你学习了二十分钟后，💃你站起来，离开你的书桌，💃去阳台看看外面的风景，",
+      "pinyin": "💃 dāng nǐ xué xí le èr shí fēn zhōng hòu，💃 nǐ zhàn qǐ lái， lí kāi nǐ de shū zhuō，💃 qù yáng tái kàn kàn wài miàn de fēng jǐng，",
+      "vi": "💃Sau khi bạn học được hai mươi phút, 💃bạn đứng dậy, rời khỏi bàn học, 💃ra ban công ngắm cảnh bên ngoài,"
+    },
+    {
+      "start": 422.87,
+      "end": 425.03,
+      "en": "💃Or go pour yourself a glass of water.",
+      "zh": "💃或者去倒一杯水。",
+      "pinyin": "💃 huò zhě qù dǎo yì bēi shuǐ。",
+      "vi": "💃Hoặc đi rót một cốc nước."
+    },
+    {
+      "start": 425.07,
+      "end": 431.87,
+      "en": "💃This simple action, 💃can let your eyes and brain, 💃temporarily step away from the study environment.",
+      "zh": "💃这个简单的动作，💃能让你的眼睛和大脑，💃暂时脱离学习环境。",
+      "pinyin": "💃 zhè ge jiǎn dān de dòng zuò，💃 néng ràng nǐ de yǎn jīng hé dà nǎo，💃 zàn shí tuō lí xué xí huán jìng。",
+      "vi": "💃Hành động đơn giản này, 💃có thể khiến mắt và não của bạn, 💃tạm thời thoát khỏi môi trường học tập."
+    },
+    {
+      "start": 431.87,
+      "end": 433.7,
+      "en": "🕺That sounds very nice.",
+      "zh": "🕺听起来很舒服。",
+      "pinyin": "🕺 tīng qǐ lái hěn shū fú。",
+      "vi": "🕺Nghe có vẻ rất thoải mái."
+    },
+    {
+      "start": 434,
+      "end": 437,
+      "en": "🕺Can this help me remember what I've learned?",
+      "zh": "🕺这能帮助我记住所学的内容吗？",
+      "pinyin": "🕺 zhè néng bāng zhù wǒ jì zhù suǒ xué de nèi róng ma？",
+      "vi": "🕺Điều này có giúp tôi nhớ những gì đã học không?"
+    },
+    {
+      "start": 437,
+      "end": 447.03,
+      "en": "💃Yes, scientific research shows that 💃brief exercise, 💃even just five minutes of walking around, 💃can help your brain consolidate memories.",
+      "zh": "💃是的，有科学研究表明，💃短暂的运动，💃哪怕是五分钟的走动，💃能帮助你的大脑巩固记忆。",
+      "pinyin": "💃 shì de， yǒu kē xué yán jiū biǎo míng，💃 duǎn zàn de yùn dòng，💃 nǎ pà shì wǔ fēn zhōng de zǒu dòng，💃 néng bāng zhù nǐ de dà nǎo gǒng gù jì yì。",
+      "vi": "💃Đúng vậy, có nghiên cứu khoa học cho thấy, 💃vận động ngắn, 💃dù chỉ là đi lại năm phút, 💃có thể giúp não bạn củng cố trí nhớ."
+    },
+    {
+      "start": 447.2,
+      "end": 451,
+      "en": "💃It gives your brain time to \"organize files.\"",
+      "zh": "💃它给你的大脑一个“整理文件”的时间。",
+      "pinyin": "💃 tā gěi nǐ de dà nǎo yí gè “ zhěng lǐ wén jiàn ” de shí jiān。",
+      "vi": "💃Nó cho não bạn thời gian để \"sắp xếp tài liệu\"."
+    },
+    {
+      "start": 451,
+      "end": 454.8,
+      "en": "🕺So resting is \"organizing files.\"",
+      "zh": "🕺原来休息是在“整理文件”。",
+      "pinyin": "🕺 yuán lái xiū xi shì zài “ zhěng lǐ wén jiàn ”。",
+      "vi": "🕺Thì ra nghỉ ngơi chính là \"sắp xếp tài liệu\"."
+    },
+    {
+      "start": 454.93,
+      "end": 458.43,
+      "en": "🕺Are there other ways to rest actively?",
+      "zh": "🕺那还有其他的主动休息方式吗？",
+      "pinyin": "🕺 nà hái yǒu qí tā de zhǔ dòng xiū xi fāng shì ma？",
+      "vi": "🕺Vậy còn cách nghỉ ngơi chủ động nào khác không?"
+    },
+    {
+      "start": 458.5,
+      "end": 465,
+      "en": "💃Listen to some relaxing music, 💃not the kind, 💃of Chinese songs that require you to understand the lyrics,",
+      "zh": "💃听一些放松的音乐，💃不是那种，💃需要你去理解歌词的中文歌，",
+      "pinyin": "💃 tīng yì xiē fàng sōng de yīn yuè，💃 bú shì nà zhǒng，💃 xū yào nǐ qù lǐ jiě gē cí de zhōng wén gē，",
+      "vi": "💃Nghe một số bản nhạc thư giãn, 💃không phải loại, 💃bài hát tiếng Trung mà bạn cần hiểu lời,"
+    },
+    {
+      "start": 465,
+      "end": 468.97,
+      "en": "💃but instrumental music, or sounds of nature.",
+      "zh": "💃而是纯音乐，或者大自然的声音。",
+      "pinyin": "💃 ér shì chún yīn yuè， huò zhě dà zì rán de shēng yīn。",
+      "vi": "💃mà là nhạc không lời, hoặc âm thanh của thiên nhiên."
+    },
+    {
+      "start": 469.1,
+      "end": 472.87,
+      "en": "💃Or you can do some simple stretching exercises.",
+      "zh": "💃或者你可以做一些简单的拉伸运动。",
+      "pinyin": "💃 huò zhě nǐ kě yǐ zuò yì xiē jiǎn dān de lā shēn yùn dòng。",
+      "vi": "💃Hoặc bạn có thể làm vài động tác giãn cơ đơn giản."
+    },
+    {
+      "start": 472.87,
+      "end": 480.5,
+      "en": "🕺I think a five-minute break, 🕺if I use it to take ten deep breaths, 🕺and then close my eyes,",
+      "zh": "🕺我觉得五分钟的休息时间，🕺如果我拿来做十个深呼吸，🕺然后闭上眼睛，",
+      "pinyin": "🕺 wǒ jué de wǔ fēn zhōng de xiū xī shí jiān，🕺 rú guǒ wǒ ná lái zuò shí gè shēn hū xī，🕺 rán hòu bì shàng yǎn jīng，",
+      "vi": "🕺Tôi nghĩ khoảng thời gian nghỉ năm phút, 🕺nếu tôi dùng để hít thở sâu mười lần, 🕺rồi nhắm mắt lại,"
+    },
+    {
+      "start": 480.57,
+      "end": 482.1,
+      "en": "🕺might also be very useful.",
+      "zh": "🕺可能也很有用。",
+      "pinyin": "🕺 kě néng yě hěn yǒu yòng。",
+      "vi": "🕺có lẽ cũng rất hữu ích."
+    },
+    {
+      "start": 482.27,
+      "end": 485.57,
+      "en": "💃Of course. This is \"passive relaxation.\"",
+      "zh": "💃当然。这种就是“被动放松”。",
+      "pinyin": "💃 dāng rán。 zhè zhǒng jiù shì “ bèi dòng fàng sōng ”。",
+      "vi": "💃Tất nhiên. Đây chính là \"thư giãn thụ động\"."
+    },
+    {
+      "start": 485.67,
+      "end": 490.9,
+      "en": "💃Let your body become still, 💃and let your heartbeat slow down.",
+      "zh": "💃让你的身体静止下来，💃让你的心跳慢下来。",
+      "pinyin": "💃 ràng nǐ de shēn tǐ jìng zhǐ xià lái，💃 ràng nǐ de xīn tiào màn xià lái。",
+      "vi": "💃Hãy để cơ thể bạn tĩnh lại, 💃để nhịp tim bạn chậm lại."
+    },
+    {
+      "start": 491.07,
+      "end": 494.77,
+      "en": "💃This can effectively reduce the fatigue caused by studying.",
+      "zh": "💃这能有效地降低学习带来的疲劳感。",
+      "pinyin": "💃 zhè néng yǒu xiào dì jiàng dī xué xí dài lái de pí láo gǎn。",
+      "vi": "💃Điều này có thể giúp giảm mệt mỏi do học tập một cách hiệu quả."
+    },
+    {
+      "start": 494.77,
+      "end": 504.4,
+      "en": "🕺Okay. To sum up, 🕺proper rest 🕺is about letting the brain truly relax, 🕺rather than filling it with other information.",
+      "zh": "🕺好的。总结一下，🕺正确的休息，🕺是让大脑得到真正的放松，🕺而不是用其他信息去占据它。",
+      "pinyin": "🕺 hǎo de。 zǒng jié yí xià，🕺 zhèng què de xiū xi，🕺 shì ràng dà nǎo dé dào zhēn zhèng de fàng sōng，🕺 ér bú shì yòng qí tā xìn xī qù zhàn jù tā。",
+      "vi": "🕺Được. Tóm lại, 🕺nghỉ ngơi đúng cách 🕺là để não bộ được thư giãn thực sự, 🕺chứ không phải dùng thông tin khác để lấp đầy nó."
+    },
+    {
+      "start": 504.73,
+      "end": 511,
+      "en": "🕺We can either take a walk and move around (active rest), 🕺or close our eyes and rest our minds, 🕺(passive relaxation).",
+      "zh": "🕺我们要么散步走动（主动休息），🕺要么闭目养神，🕺（被动放松）。",
+      "pinyin": "🕺 wǒ men yào me sàn bù zǒu dòng （ zhǔ dòng xiū xi ），🕺 yào me bì mù yǎng shén，🕺（ bèi dòng fàng sōng ）。",
+      "vi": "🕺Chúng ta có thể đi bộ vận động (nghỉ ngơi chủ động), 🕺hoặc nhắm mắt dưỡng thần, 🕺(thư giãn thụ động)."
+    },
+    {
+      "start": 511,
+      "end": 519.77,
+      "en": "💃That's right. After resting well, when you return to your desk, 💃you'll find that you 💃are full of motivation to study again,",
+      "zh": "💃没错。休息好了，你再回到书桌前，💃你会发现自己，💃重新充满了学习的动力，",
+      "pinyin": "💃 méi cuò。 xiū xi hǎo le， nǐ zài huí dào shū zhuō qián，💃 nǐ huì fā xiàn zì jǐ，💃 chóng xīn chōng mǎn le xué xí de dòng lì，",
+      "vi": "💃Đúng vậy. Nghỉ ngơi đủ rồi, khi bạn quay lại bàn học, 💃bạn sẽ thấy mình 💃tràn đầy động lực học tập trở lại,"
+    },
+    {
+      "start": 519.77,
+      "end": 526.83,
+      "en": "💃It's like charging a phone. 🕺Wow, 🕺it feels like this isn't just a way to learn Chinese,",
+      "zh": "💃就像给手机充了电一样。 🕺哇，🕺感觉这不仅仅是学习中文的方法，",
+      "pinyin": "💃 jiù xiàng gěi shǒu jī chōng le diàn yí yàng。 🕺 wā，🕺 gǎn jué zhè bù jǐn jǐn shì xué xí zhōng wén de fāng fǎ，",
+      "vi": "💃Giống như sạc pin cho điện thoại vậy. 🕺Ồ, 🕺cảm giác đây không chỉ là phương pháp học tiếng Trung,"
+    },
+    {
+      "start": 526.9,
+      "end": 529.23,
+      "en": "🕺but also a philosophy of life!",
+      "zh": "🕺也是一种生活的哲学了！",
+      "pinyin": "🕺 yě shì yì zhǒng shēng huó de zhé xué le！",
+      "vi": "🕺mà còn là một triết lý sống nữa!"
+    },
+    {
+      "start": 529.33,
+      "end": 535.2,
+      "en": "💃Yes. But, 💃just knowing how to study and how to rest is not enough.",
+      "zh": "💃是的。不过，💃光知道如何学习和如何休息还不够。",
+      "pinyin": "💃 shì de。 bú guò，💃 guāng zhī dào rú hé xué xí hé rú hé xiū xi hái bú gòu。",
+      "vi": "💃Đúng vậy. Nhưng, 💃chỉ biết cách học và cách nghỉ ngơi thì vẫn chưa đủ."
+    },
+    {
+      "start": 535.27,
+      "end": 542.47,
+      "en": "💃We also need to know 💃how to combine them in an organized way, 💃to form a complete plan.",
+      "zh": "💃我们还需要知道，💃如何把它们有条理地结合起来，💃形成一个完整的计划。",
+      "pinyin": "💃 wǒ men hái xū yào zhī dào，💃 rú hé bǎ tā men yǒu tiáo lǐ dì jié hé qǐ lái，💃 xíng chéng yí gè wán zhěng de jì huà。",
+      "vi": "💃Chúng ta còn cần biết 💃cách kết hợp chúng một cách có hệ thống, 💃để tạo thành một kế hoạch hoàn chỉnh."
+    },
+    {
+      "start": 542.47,
+      "end": 544.17,
+      "en": "🕺Well said!",
+      "zh": "🕺说得太好了！",
+      "pinyin": "🕺 shuō dé tài hǎo le！",
+      "vi": "🕺Nói hay quá!"
+    },
+    {
+      "start": 544.2,
+      "end": 552.07,
+      "en": "🕺So, in the next part, 🕺let's talk about 🕺how to make a perfect study-and-rest",
+      "zh": "🕺那么，在下一个部分，🕺我们就来聊聊，🕺如何制定一个完美的学习和休息的",
+      "pinyin": "🕺 nà me， zài xià yí gè bù fēn，🕺 wǒ men jiù lái liáo liáo，🕺 rú hé zhì dìng yí gè wán měi de xué xí hé xiū xi de",
+      "vi": "🕺Vậy thì, trong phần tiếp theo, 🕺chúng ta hãy nói về 🕺cách lập một kế hoạch học tập và nghỉ ngơi hoàn hảo..."
+    },
+    {
+      "start": 552.1,
+      "end": 553.67,
+      "en": "🕺\"balanced plan.\"",
+      "zh": "🕺“平衡计划”。",
+      "pinyin": "🕺“ píng héng jì huà ”。",
+      "vi": "🕺\"kế hoạch cân bằng\"."
+    },
+    {
+      "start": 553.67,
+      "end": 556.3,
+      "en": "💃Let's make this plan together!",
+      "zh": "💃我们一起来制定这个计划吧！",
+      "pinyin": "💃 wǒ men yì qǐ lái zhì dìng zhè ge jì huà ba！",
+      "vi": "💃Chúng ta hãy cùng nhau lập kế hoạch này nhé!"
+    },
+    {
+      "start": 558.53,
+      "end": 566.3,
+      "en": "💃Li Ming, many beginners ask me: 💃\"How much time should I spend learning Chinese each day?\"",
+      "zh": "💃李明，很多初学者都会问我：💃“我一天应该花多长时间学习中文？”",
+      "pinyin": "💃 lǐ míng， hěn duō chū xué zhě dōu huì wèn wǒ：💃“ wǒ yì tiān yīng gāi huā duō cháng shí jiān xué xí zhōng wén？”",
+      "vi": "💃Lý Minh, nhiều người mới bắt đầu đều hỏi tôi: 💃\"Mỗi ngày tôi nên dành bao nhiêu thời gian để học tiếng Trung?\""
+    },
+    {
+      "start": 566.97,
+      "end": 575.27,
+      "en": "💃My answer is usually: \"Consistency is more important than time.\" 🕺\"Consistency is more important than time.\" I agree.",
+      "zh": "💃我的回答通常是：“规律比时间更重要。”，🕺“规律比时间更重要。”我同意。",
+      "pinyin": "💃 wǒ de huí dá tōng cháng shì：“ guī lǜ bǐ shí jiān gèng zhòng yào。”，🕺“ guī lǜ bǐ shí jiān gèng zhòng yào。” wǒ tóng yì。",
+      "vi": "💃Câu trả lời của tôi thường là: \"Sự đều đặn quan trọng hơn thời gian.\" 🕺\"Sự đều đặn quan trọng hơn thời gian.\" Tôi đồng ý."
+    },
+    {
+      "start": 575.33,
+      "end": 583.43,
+      "en": "🕺If I study only once a week, 🕺for eight hours at a time, 🕺the effect is definitely not as good as studying one hour every day.",
+      "zh": "🕺如果我一周只学习一次，🕺一次八个小时，🕺效果肯定不如我每天学习一小时。",
+      "pinyin": "🕺 rú guǒ wǒ yì zhōu zhī xué xí yí cì，🕺 yí cì bā gè xiǎo shí，🕺 xiào guǒ kěn dìng bù rú wǒ měi tiān xué xí yì xiǎo shí。",
+      "vi": "🕺Nếu tôi chỉ học mỗi tuần một lần, 🕺mỗi lần tám tiếng, 🕺hiệu quả chắc chắn không bằng tôi học một tiếng mỗi ngày."
+    },
+    {
+      "start": 584.17,
+      "end": 585.23,
+      "en": "💃Why?",
+      "zh": "💃为什么呢？",
+      "pinyin": "💃 wèi shén me ne？",
+      "vi": "💃Tại sao vậy?"
+    },
+    {
+      "start": 585.27,
+      "end": 591.27,
+      "en": "💃Because language learning requires the brain 💃to be continuously exposed to the language.",
+      "zh": "💃因为语言学习，需要大脑，💃持续接触这门语言。",
+      "pinyin": "💃 yīn wèi yǔ yán xué xí， xū yào dà nǎo，💃 chí xù jiē chù zhè mén yǔ yán。",
+      "vi": "💃Vì việc học ngôn ngữ cần não bộ 💃tiếp xúc liên tục với ngôn ngữ đó."
+    },
+    {
+      "start": 591.5,
+      "end": 596.37,
+      "en": "💃Learning Chinese 💃requires you to constantly repeat and practice.",
+      "zh": "💃中文学习，💃需要你不断地重复和练习。",
+      "pinyin": "💃 zhōng wén xué xí，💃 xū yào nǐ bú duàn dì chóng fù hé liàn xí。",
+      "vi": "💃Việc học tiếng Trung 💃đòi hỏi bạn phải không ngừng lặp lại và luyện tập."
+    },
+    {
+      "start": 596.93,
+      "end": 605,
+      "en": "🕺So, the first step in making a \"balanced plan\" 🕺is to set a fixed study time. 💃Right.",
+      "zh": "🕺所以，制定一个“平衡计划”的第一步，🕺就是确定一个固定的学习时间。 💃对。",
+      "pinyin": "🕺 suǒ yǐ， zhì dìng yí gè “ píng héng jì huà ” de dì yī bù，🕺 jiù shì què dìng yí gè gù dìng de xué xí shí jiān。 💃 duì。",
+      "vi": "🕺Vì vậy, bước đầu tiên để lập một \"kế hoạch cân bằng\" 🕺là xác định một thời gian học cố định. 💃Đúng."
+    },
+    {
+      "start": 605,
+      "end": 609.47,
+      "en": "💃But this time must fit your daily life.",
+      "zh": "💃但这个时间要符合你的日常生活。",
+      "pinyin": "💃 dàn zhè ge shí jiān yào fú hé nǐ de rì cháng shēng huó。",
+      "vi": "💃Nhưng thời gian này phải phù hợp với cuộc sống hằng ngày của bạn."
+    },
+    {
+      "start": 609.73,
+      "end": 615.03,
+      "en": "💃For example, are you more efficient at studying in the morning or in the evening?",
+      "zh": "💃比如，你是早上学习效率高，💃还是晚上学习效率高？",
+      "pinyin": "💃 bǐ rú， nǐ shì zǎo shàng xué xí xiào lǜ gāo，💃 hái shì wǎn shàng xué xí xiào lǜ gāo？",
+      "vi": "💃Ví dụ, bạn học hiệu quả hơn vào buổi sáng hay buổi tối?"
+    },
+    {
+      "start": 615.1,
+      "end": 617,
+      "en": "🕺Personally, I prefer the morning.",
+      "zh": "🕺我个人喜欢早上。",
+      "pinyin": "🕺 wǒ gè rén xǐ huan zǎo shàng。",
+      "vi": "🕺Cá nhân tôi thích buổi sáng hơn."
+    },
+    {
+      "start": 617.07,
+      "end": 623.6,
+      "en": "🕺From 6 to 7 a.m., my energy is at its best, 🕺so I can use that time to study the hardest grammar points.",
+      "zh": "🕺早上六点到七点，我的精神最好，🕺可以用来学习最难的语法点。",
+      "pinyin": "🕺 zǎo shàng liù diǎn dào qī diǎn， wǒ de jīng shén zuì hǎo，🕺 kě yǐ yòng lái xué xí zuì nán de yǔ fǎ diǎn。",
+      "vi": "🕺Từ 6 đến 7 giờ sáng, tinh thần tôi tốt nhất, 🕺có thể dùng để học những điểm ngữ pháp khó nhất."
+    },
+    {
+      "start": 623.9,
+      "end": 633.2,
+      "en": "💃Great. So let's take a \"morning-type\" Chinese learner as an example, 💃and make a balanced plan:",
+      "zh": "💃很好。那我们就以一个，💃“早晨型”的中文学习者为例，💃来制定一个平衡计划：",
+      "pinyin": "💃 hěn hǎo。 nà wǒ men jiù yǐ yí gè，💃“ zǎo chén xíng ” de zhōng wén xué xí zhě wéi lì，💃 lái zhì dìng yí gè píng héng jì huà：",
+      "vi": "💃Rất tốt. Vậy chúng ta hãy lấy một người học tiếng Trung \"kiểu buổi sáng\" làm ví dụ, 💃để lập một kế hoạch cân bằng:"
+    },
+    {
+      "start": 633.8,
+      "end": 642.87,
+      "en": "💃From 6 to 7 a.m.: 💃study new and difficult content, 💃(such as HSK 4 grammar points).",
+      "zh": "💃早上六点到七点：💃学习新的、困难的内容，💃（比如 的语法点）。",
+      "pinyin": "💃 zǎo shàng liù diǎn dào qī diǎn：💃 xué xí xīn de、 kùn nán de nèi róng，💃（ bǐ rú de yǔ fǎ diǎn ）。",
+      "vi": "💃Từ 6 đến 7 giờ sáng: 💃học nội dung mới và khó, 💃(ví dụ: các điểm ngữ pháp HSK 4)."
+    },
+    {
+      "start": 643.07,
+      "end": 649.07,
+      "en": "💃Remember, 💃use the \"25 minutes of focus + 5 minutes of rest\" pattern.",
+      "zh": "💃记住，💃用“分钟专注+分钟休息”的模式。",
+      "pinyin": "💃 jì zhù，💃 yòng “ fēn zhōng zhuān zhù + fēn zhōng xiū xi ” de mó shì。",
+      "vi": "💃Hãy nhớ, 💃áp dụng mô hình \"25 phút tập trung + 5 phút nghỉ ngơi\"."
+    },
+    {
+      "start": 649.73,
+      "end": 653.07,
+      "en": "🕺After 7, 🕺I have to go to work.",
+      "zh": "🕺七点之后，🕺我要去上班了。",
+      "pinyin": "🕺 qī diǎn zhī hòu，🕺 wǒ yào qù shàng bān le。",
+      "vi": "🕺Sau 7 giờ, 🕺tôi phải đi làm."
+    },
+    {
+      "start": 653.07,
+      "end": 655.83,
+      "en": "🕺Can I study on my commute?",
+      "zh": "🕺我可以在通勤路上学习吗？",
+      "pinyin": "🕺 wǒ kě yǐ zài tōng qín lù shang xué xí ma？",
+      "vi": "🕺Tôi có thể học trên đường đi làm không?"
+    },
+    {
+      "start": 655.9,
+      "end": 657.37,
+      "en": "💃Of course.",
+      "zh": "💃当然可以。",
+      "pinyin": "💃 dāng rán kě yǐ。",
+      "vi": "💃Tất nhiên rồi."
+    },
+    {
+      "start": 657.4,
+      "end": 661.67,
+      "en": "💃Commute time is great \"fragmented time.\"",
+      "zh": "💃通勤时间是很好的“碎片时间”。",
+      "pinyin": "💃 tōng qín shí jiān shì hěn hǎo de “ suì piàn shí jiān ”。",
+      "vi": "💃Thời gian đi lại là \"thời gian vụn\" rất tốt."
+    },
+    {
+      "start": 662,
+      "end": 668.57,
+      "en": "💃But this time isn't suitable for learning new content; 💃it's suitable for \"listening\" and \"reviewing.\"",
+      "zh": "💃但这段时间不适合学习新内容，💃适合“听”和“复习”。",
+      "pinyin": "💃 dàn zhè duàn shí jiān bú shì hé xué xí xīn nèi róng，💃 shì hé “ tīng ” hé “ fù xí ”。",
+      "vi": "💃Nhưng khoảng thời gian này không thích hợp để học nội dung mới, 💃mà thích hợp để \"nghe\" và \"ôn tập\"."
+    },
+    {
+      "start": 668.93,
+      "end": 672.03,
+      "en": "🕺I can listen to our \"Learn Chinese podcast\"!",
+      "zh": "🕺我可以听我们的“学中文播客”！",
+      "pinyin": "🕺 wǒ kě yǐ tīng wǒ men de “ xué zhōng wén bō kè ”！",
+      "vi": "🕺Tôi có thể nghe \"podcast học tiếng Trung\" của chúng ta!"
+    },
+    {
+      "start": 672.33,
+      "end": 674.23,
+      "en": "💃Haha, of course!",
+      "zh": "💃哈哈，当然！",
+      "pinyin": "💃 hā hā， dāng rán！",
+      "vi": "💃Haha, tất nhiên rồi!"
+    },
+    {
+      "start": 674.3,
+      "end": 683.3,
+      "en": "💃You can listen to Chinese stories, 💃listen to Chinese dialogues, 💃or 💃quickly review the vocabulary cards you studied in the morning.",
+      "zh": "💃你可以听中文故事，💃听中文对话，💃或者，💃快速浏览一下你早上学习的词汇卡片。",
+      "pinyin": "💃 nǐ kě yǐ tīng zhōng wén gù shì，💃 tīng zhōng wén duì huà，💃 huò zhě，💃 kuài sù liú lǎn yí xià nǐ zǎo shàng xué xí de cí huì kǎ piàn。",
+      "vi": "💃Bạn có thể nghe truyện tiếng Trung, 💃nghe hội thoại tiếng Trung, 💃hoặc 💃xem nhanh các thẻ từ vựng bạn đã học vào buổi sáng."
+    },
+    {
+      "start": 683.3,
+      "end": 686.7,
+      "en": "💃This is called \"immersive\" learning.",
+      "zh": "💃这叫“浸入式”学习。",
+      "pinyin": "💃 zhè jiào “ jìn rù shì ” xué xí。",
+      "vi": "💃Đây gọi là phương pháp học \"đắm chìm\"."
+    },
+    {
+      "start": 687,
+      "end": 690.23,
+      "en": "🕺So, 🕺when is the main rest time of the day?",
+      "zh": "🕺那么，🕺一天的主要休息时间是什么时候？",
+      "pinyin": "🕺 nà me，🕺 yì tiān de zhǔ yào xiū xi shí jiān shì shén me shí hòu？",
+      "vi": "🕺Vậy, 🕺thời gian nghỉ ngơi chính trong ngày là khi nào?"
+    },
+    {
+      "start": 690.33,
+      "end": 693.27,
+      "en": "🕺Is it the most important sleep period?",
+      "zh": "🕺是不是最重要的睡眠时间？",
+      "pinyin": "🕺 shì bu shì zuì zhòng yào de shuì mián shí jiān？",
+      "vi": "🕺Có phải là khoảng thời gian ngủ quan trọng nhất không?"
+    },
+    {
+      "start": 693.27,
+      "end": 698.97,
+      "en": "💃Yes. High-quality sleep is the best \"rest\" for learning Chinese.",
+      "zh": "💃是的。高质量的睡眠是学习中文，💃最好的“休息”。",
+      "pinyin": "💃 shì de。 gāo zhì liàng de shuì mián shì xué xí zhōng wén，💃 zuì hǎo de “ xiū xi ”。",
+      "vi": "💃Đúng vậy. Giấc ngủ chất lượng cao là cách \"nghỉ ngơi\" tốt nhất cho việc học tiếng Trung."
+    },
+    {
+      "start": 699.5,
+      "end": 709.9,
+      "en": "💃When you sleep, 💃your brain is storing the knowledge you learned during the day, 💃from \"temporary memory\" into \"long-term memory.\"",
+      "zh": "💃当你睡觉的时候，💃你的大脑正在把白天学到的知识，💃从“临时记忆”储存到“长期记忆”里。",
+      "pinyin": "💃 dāng nǐ shuì jiào de shí hòu，💃 nǐ de dà nǎo zhèng zài bǎ bái tiān xué dào de zhī shi，💃 cóng “ lín shí jì yì ” chǔ cún dào “ cháng qī jì yì ” lǐ。",
+      "vi": "💃Khi bạn ngủ, 💃não bộ đang lưu trữ kiến thức học được ban ngày, 💃từ \"trí nhớ tạm thời\" vào \"trí nhớ dài hạn\"."
+    },
+    {
+      "start": 710.3,
+      "end": 717.87,
+      "en": "🕺So if I don't get enough sleep, 🕺even if I study hard during the day, 🕺I may forget it quickly.",
+      "zh": "🕺所以，如果我睡眠不足，🕺即使我白天学得再努力，🕺也可能很快忘记。",
+      "pinyin": "🕺 suǒ yǐ， rú guǒ wǒ shuì mián bù zú，🕺 jí shǐ wǒ bái tiān xué dé zài nǔ lì，🕺 yě kě néng hěn kuài wàng jì。",
+      "vi": "🕺Vì vậy, nếu tôi ngủ không đủ, 🕺thì dù ban ngày tôi có học chăm chỉ đến đâu, 🕺cũng có thể sẽ nhanh quên."
+    },
+    {
+      "start": 717.87,
+      "end": 719.3,
+      "en": "💃Absolutely correct!",
+      "zh": "💃完全正确！",
+      "pinyin": "💃 wán quán zhèng què！",
+      "vi": "💃Hoàn toàn chính xác!"
+    },
+    {
+      "start": 719.37,
+      "end": 727,
+      "en": "💃If you want to remember Chinese characters, 💃vocabulary, and complex grammar structures, 💃make sure you get",
+      "zh": "💃如果你想记住汉字、💃词汇和复杂的语法结构，💃请确保你每天有",
+      "pinyin": "💃 rú guǒ nǐ xiǎng jì zhù hàn zì、💃 cí huì hé fù zá de yǔ fǎ jié gòu，💃 qǐng què bǎo nǐ měi tiān yǒu",
+      "vi": "💃Nếu bạn muốn ghi nhớ chữ Hán, 💃từ vựng và các cấu trúc ngữ pháp phức tạp, 💃hãy đảm bảo mỗi ngày bạn có"
+    },
+    {
+      "start": 727,
+      "end": 730,
+      "en": "💃seven to eight hours of quality sleep.",
+      "zh": "💃七到八个小时的优质睡眠。",
+      "pinyin": "💃 qī dào bā gè xiǎo shí de yōu zhì shuì mián。",
+      "vi": "💃bảy đến tám tiếng ngủ chất lượng."
+    },
+    {
+      "start": 730.37,
+      "end": 734.5,
+      "en": "💃This is the brain's best time for 'file organizing.'",
+      "zh": "💃这是大脑的最佳“整理文件”时间。",
+      "pinyin": "💃 zhè shì dà nǎo de zuì jiā “ zhěng lǐ wén jiàn ” shí jiān。",
+      "vi": "💃Đây là thời điểm “sắp xếp tệp” tốt nhất của não bộ."
+    },
+    {
+      "start": 734.57,
+      "end": 736.27,
+      "en": "🕺That sounds very reasonable.",
+      "zh": "🕺听起来很有道理。",
+      "pinyin": "🕺 tīng qǐ lái hěn yǒu dào lǐ。",
+      "vi": "🕺Nghe rất có lý."
+    },
+    {
+      "start": 736.47,
+      "end": 743.27,
+      "en": "🕺Study, short breaks, 🕺review in spare moments, 🕺then high-quality sleep.",
+      "zh": "🕺学习、短时休息、🕺碎片时间复习，🕺然后是高质量的睡眠。",
+      "pinyin": "🕺 xué xí、 duǎn shí xiū xi、🕺 suì piàn shí jiān fù xí，🕺 rán hòu shì gāo zhì liàng de shuì mián。",
+      "vi": "🕺Học tập, nghỉ ngắn, 🕺ôn tập trong thời gian vụn vặt, 🕺rồi đến giấc ngủ chất lượng cao."
+    },
+    {
+      "start": 743.37,
+      "end": 745.4,
+      "en": "🕺This is a complete cycle.",
+      "zh": "🕺这是一个完整的周期。",
+      "pinyin": "🕺 zhè shì yí gè wán zhěng de zhōu qī。",
+      "vi": "🕺Đây là một chu kỳ hoàn chỉnh."
+    },
+    {
+      "start": 745.8,
+      "end": 751.83,
+      "en": "💃We also want to remind everyone that 💃the plan should also include 'long-term rest.'",
+      "zh": "💃我们还要提醒大家，💃计划里也要有“长期休息”。",
+      "pinyin": "💃 wǒ men hái yào tí xǐng dà jiā，💃 jì huà lǐ yě yào yǒu “ cháng qī xiū xi ”。",
+      "vi": "💃Chúng tôi cũng muốn nhắc mọi người rằng, 💃trong kế hoạch cũng cần có “nghỉ ngơi dài hạn”."
+    },
+    {
+      "start": 751.97,
+      "end": 759.77,
+      "en": "💃For example, if you study for six days straight, 💃you can give yourself a 'Chinese break' on the seventh day.",
+      "zh": "💃比如，如果你连续学习了六天，💃第七天可以给自己放一个“中文假”。",
+      "pinyin": "💃 bǐ rú， rú guǒ nǐ lián xù xué xí le liù tiān，💃 dì qī tiān kě yǐ gěi zì jǐ fàng yí gè “ zhōng wén jiǎ ”。",
+      "vi": "💃Ví dụ, nếu bạn học liên tục sáu ngày, 💃ngày thứ bảy bạn có thể cho mình một “kỳ nghỉ tiếng Trung”."
+    },
+    {
+      "start": 760,
+      "end": 765.77,
+      "en": "🕺A 'Chinese break'? So on that day, 🕺you don't touch any Chinese learning material at all?",
+      "zh": "🕺“中文假”？就是这一天，🕺完全不碰中文学习内容吗？",
+      "pinyin": "🕺“ zhōng wén jiǎ ”？ jiù shì zhè yì tiān，🕺 wán quán bú pèng zhōng wén xué xí nèi róng ma？",
+      "vi": "🕺“Kỳ nghỉ tiếng Trung” ư? Tức là vào ngày đó, 🕺hoàn toàn không động đến nội dung học tiếng Trung phải không?"
+    },
+    {
+      "start": 765.77,
+      "end": 768.1,
+      "en": "💃Yes. Take a day off.",
+      "zh": "💃是的。休息一天。",
+      "pinyin": "💃 shì de。 xiū xi yì tiān。",
+      "vi": "💃Đúng vậy. Nghỉ một ngày."
+    },
+    {
+      "start": 768.3,
+      "end": 775.1,
+      "en": "💃Go see a movie, 💃chat with friends, 💃do something unrelated to learning Chinese.",
+      "zh": "💃去看看电影，💃跟朋友聊聊天，💃做一些与中文学习无关的事情。",
+      "pinyin": "💃 qù kàn kàn diàn yǐng，💃 gēn péng yǒu liáo liáo tiān，💃 zuò yì xiē yǔ zhōng wén xué xí wú guān de shì qíng。",
+      "vi": "💃Đi xem phim, 💃trò chuyện với bạn bè, 💃làm vài việc không liên quan đến việc học tiếng Trung."
+    },
+    {
+      "start": 775.3,
+      "end": 779.17,
+      "en": "💃This can keep you from getting bored with studying.",
+      "zh": "💃这样能避免你对学习产生厌倦感。",
+      "pinyin": "💃 zhè yàng néng bì miǎn nǐ duì xué xí chǎn shēng yàn juàn gǎn。",
+      "vi": "💃Như vậy có thể tránh cho bạn cảm giác chán học."
+    },
+    {
+      "start": 779.17,
+      "end": 782.7,
+      "en": "🕺This is a great way to prevent 🕺'study fatigue.'",
+      "zh": "🕺这是一个很好的防止，🕺“学习疲劳”的方法。",
+      "pinyin": "🕺 zhè shì yí gè hěn hǎo de fáng zhǐ，🕺“ xué xí pí láo ” de fāng fǎ。",
+      "vi": "🕺Đây là một cách rất tốt để ngăn ngừa 🕺“mệt mỏi khi học”."
+    },
+    {
+      "start": 782.77,
+      "end": 788.57,
+      "en": "🕺Many people go too long without rest, 🕺and end up losing interest in Chinese.",
+      "zh": "🕺很多人都是因为长期没有休息，🕺导致最后对中文失去了兴趣。",
+      "pinyin": "🕺 hěn duō rén dōu shì yīn wèi cháng qī méi yǒu xiū xi，🕺 dǎo zhì zuì hòu duì zhōng wén shī qù le xìng qù。",
+      "vi": "🕺Nhiều người vì lâu ngày không nghỉ ngơi, 🕺nên cuối cùng đã mất hứng thú với tiếng Trung."
+    },
+    {
+      "start": 789,
+      "end": 799.83,
+      "en": "💃So the key points of a balanced plan are: first, 💃study at fixed times; 💃second, make full use of fragmented time for review;",
+      "zh": "💃所以，平衡计划的重点是：第一，💃固定时间学习；💃第二，充分利用碎片时间进行复习；",
+      "pinyin": "💃 suǒ yǐ， píng héng jì huà de zhòng diǎn shì： dì yī，💃 gù dìng shí jiān xué xí；💃 dì èr， chōng fèn lì yòng suì piàn shí jiān jìn xíng fù xí；",
+      "vi": "💃Vì vậy, trọng tâm của một kế hoạch cân bằng là: thứ nhất, 💃học vào thời gian cố định; 💃thứ hai, tận dụng triệt để thời gian vụn vặt để ôn tập;"
+    },
+    {
+      "start": 800.1,
+      "end": 804.37,
+      "en": "💃third, ensure enough high-quality sleep.",
+      "zh": "💃第三，保证充足的高质量睡眠。",
+      "pinyin": "💃 dì sān， bǎo zhèng chōng zú de gāo zhì liàng shuì mián。",
+      "vi": "💃thứ ba, đảm bảo ngủ đủ và chất lượng cao."
+    },
+    {
+      "start": 804.6,
+      "end": 806,
+      "en": "🕺Very practical!",
+      "zh": "🕺非常实用！",
+      "pinyin": "🕺 fēi cháng shí yòng！",
+      "vi": "🕺Rất thực tế!"
+    },
+    {
+      "start": 806,
+      "end": 811.03,
+      "en": "🕺This way, we not only study smart, 🕺but also rest smart.",
+      "zh": "🕺通过这种方式，我们不仅学得聪明，🕺也休息得聪明。",
+      "pinyin": "🕺 tōng guò zhè zhǒng fāng shì， wǒ men bù jǐn xué dé cōng ming，🕺 yě xiū xi dé cōng ming。",
+      "vi": "🕺Bằng cách này, chúng ta không chỉ học thông minh, 🕺mà còn nghỉ ngơi thông minh."
+    },
+    {
+      "start": 811.1,
+      "end": 816.53,
+      "en": "🕺Now we've clearly covered learning, 🕺rest, and planning.",
+      "zh": "🕺现在，我们已经把学习、🕺休息和规划都讲清楚了。",
+      "pinyin": "🕺 xiàn zài， wǒ men yǐ jīng bǎ xué xí、🕺 xiū xi hé guī huà dōu jiǎng qīng chǔ le。",
+      "vi": "🕺Bây giờ, chúng ta đã nói rõ về việc học, 🕺nghỉ ngơi và lập kế hoạch."
+    },
+    {
+      "start": 816.53,
+      "end": 819.2,
+      "en": "🕺Shouldn't we summarize a bit?",
+      "zh": "🕺我们是不是该总结一下了？",
+      "pinyin": "🕺 wǒ men shì bu shì gāi zǒng jié yí xià le？",
+      "vi": "🕺Chúng ta có nên tổng kết lại một chút không?"
+    },
+    {
+      "start": 819.53,
+      "end": 825.03,
+      "en": "💃It's time to 💃summarize the “Chinese learning secrets” we shared today!",
+      "zh": "💃是时候，💃总结一下我们今天分享的“中文，💃学习秘诀”了！",
+      "pinyin": "💃 shì shí hòu，💃 zǒng jié yí xià wǒ men jīn tiān fèn xiǎng de “ zhōng wén，💃 xué xí mì jué ” liǎo！",
+      "vi": "💃Đã đến lúc 💃tổng kết những “bí quyết học tiếng Trung” mà chúng ta đã chia sẻ hôm nay rồi!"
+    },
+    {
+      "start": 827.07,
+      "end": 834.1,
+      "en": "💃Friends, 💃today we talked about how to “study smart and rest properly.”",
+      "zh": "💃朋友们，💃今天我们聊了如何“聪明学习，💃正确休息”。",
+      "pinyin": "💃 péng yǒu men，💃 jīn tiān wǒ men liáo le rú hé “ cōng ming xué xí，💃 zhèng què xiū xi ”。",
+      "vi": "💃Các bạn ơi, 💃hôm nay chúng ta đã nói về cách “học thông minh, 💃nghỉ ngơi đúng cách”."
+    },
+    {
+      "start": 834.47,
+      "end": 840.83,
+      "en": "💃This is not just a method, 💃but a strategy that makes learning sustainable.",
+      "zh": "💃这不仅仅是方法，💃更是一种让学习持久的策略。",
+      "pinyin": "💃 zhè bù jǐn jǐn shì fāng fǎ，💃 gèng shì yì zhǒng ràng xué xí chí jiǔ de cè lüè。",
+      "vi": "💃Đây không chỉ là phương pháp, 💃mà còn là chiến lược giúp việc học bền vững."
+    },
+    {
+      "start": 841.4,
+      "end": 844.07,
+      "en": "🕺We have summarized three key points.",
+      "zh": "🕺我们总结了三个关键点。",
+      "pinyin": "🕺 wǒ men zǒng jié le sān gè guān jiàn diǎn。",
+      "vi": "🕺Chúng ta đã tổng kết ba điểm then chốt."
+    },
+    {
+      "start": 844.2,
+      "end": 846.9,
+      "en": "🕺What is the first key point, 🕺Xiaoyu?",
+      "zh": "🕺第一个关键点是什么，🕺小雨？",
+      "pinyin": "🕺 dì yī gè guān jiàn diǎn shì shén me，🕺 xiǎo yǔ？",
+      "vi": "🕺Điểm then chốt đầu tiên là gì, 🕺Tiểu Vũ?"
+    },
+    {
+      "start": 847.13,
+      "end": 852.03,
+      "en": "💃The first key point is: short study sessions with full focus.",
+      "zh": "💃第一个关键点是：专注地短时学习。",
+      "pinyin": "💃 dì yī gè guān jiàn diǎn shì： zhuān zhù dì duǎn shí xué xí。",
+      "vi": "💃Điểm then chốt đầu tiên là: học trong thời gian ngắn với sự tập trung cao."
+    },
+    {
+      "start": 852.6,
+      "end": 854.7,
+      "en": "💃Don't study for long stretches.",
+      "zh": "💃不要长时间学习。",
+      "pinyin": "💃 bú yào cháng shí jiān xué xí。",
+      "vi": "💃Đừng học trong thời gian quá dài."
+    },
+    {
+      "start": 854.87,
+      "end": 862.07,
+      "en": "💃Study for only twenty to thirty minutes each time, 💃and maintain a high level of focus.",
+      "zh": "💃每次只学习二十分钟到三十分钟，💃保持高度的专注力。",
+      "pinyin": "💃 měi cì zhī xué xí èr shí fēn zhōng dào sān shí fēn zhōng，💃 bǎo chí gāo dù de zhuān zhù lì。",
+      "vi": "💃Mỗi lần chỉ học từ hai mươi đến ba mươi phút, 💃duy trì sự tập trung cao độ."
+    },
+    {
+      "start": 862.47,
+      "end": 865,
+      "en": "🕺The key word is “focus.”",
+      "zh": "🕺重点词汇是“专注” 。",
+      "pinyin": "🕺 zhòng diǎn cí huì shì “ zhuān zhù ”。",
+      "vi": "🕺Từ khóa là “tập trung”."
+    },
+    {
+      "start": 865,
+      "end": 869.23,
+      "en": "🕺Remember, the quality of learning is more important than the quantity.",
+      "zh": "🕺记住，学习的质量比数量更重要。",
+      "pinyin": "🕺 jì zhù， xué xí de zhì liàng bǐ shù liàng gèng zhòng yào。",
+      "vi": "🕺Hãy nhớ rằng, chất lượng học tập quan trọng hơn số lượng."
+    },
+    {
+      "start": 869.7,
+      "end": 873.87,
+      "en": "💃The second key point is: effective rest.",
+      "zh": "💃第二个关键点是：有效的休息。",
+      "pinyin": "💃 dì èr gè guān jiàn diǎn shì： yǒu xiào de xiū xi。",
+      "vi": "💃Điểm then chốt thứ hai là: nghỉ ngơi hiệu quả."
+    },
+    {
+      "start": 874.17,
+      "end": 879,
+      "en": "💃Rest is not a waste of time; 💃it recharges the brain.",
+      "zh": "💃休息不是浪费时间，💃而是给大脑充电。",
+      "pinyin": "💃 xiū xi bú shì làng fèi shí jiān，💃 ér shì gěi dà nǎo chōng diàn。",
+      "vi": "💃Nghỉ ngơi không phải là lãng phí thời gian, 💃mà là nạp năng lượng cho não."
+    },
+    {
+      "start": 879.3,
+      "end": 888.67,
+      "en": "💃We recommend “active rest”—💃for example, taking a walk, or “passive relaxation”—💃for example, closing your eyes and resting.",
+      "zh": "💃我们推荐大家进行“主动休息”——，💃比如散步，或者“被动放松”——，💃比如闭目养神。",
+      "pinyin": "💃 wǒ men tuī jiàn dà jiā jìn xíng “ zhǔ dòng xiū xi ”——，💃 bǐ rú sàn bù， huò zhě “ bèi dòng fàng sōng ”——，💃 bǐ rú bì mù yǎng shén。",
+      "vi": "💃Chúng tôi khuyên mọi người nên “nghỉ ngơi chủ động”—💃ví dụ như đi bộ, hoặc “thư giãn thụ động”—💃ví dụ như nhắm mắt nghỉ ngơi."
+    },
+    {
+      "start": 889.1,
+      "end": 894.5,
+      "en": "🕺Don't replace real rest with playing on your phone 🕺or watching videos.",
+      "zh": "🕺不要用玩手机，🕺或者看视频来取代真正的休息。",
+      "pinyin": "🕺 bú yào yòng wán shǒu jī，🕺 huò zhě kàn shì pín lái qǔ dài zhēn zhèng de xiū xi。",
+      "vi": "🕺Đừng dùng việc chơi điện thoại 🕺hoặc xem video để thay thế cho việc nghỉ ngơi thực sự."
+    },
+    {
+      "start": 894.73,
+      "end": 900.57,
+      "en": "🕺Let your brain truly relax, 🕺so it can better “organize files.”",
+      "zh": "🕺让你的大脑真正地放松下来，🕺才能更好地“整理文件”。",
+      "pinyin": "🕺 ràng nǐ de dà nǎo zhēn zhèng dì fàng sōng xià lái，🕺 cái néng gèng hǎo dì “ zhěng lǐ wén jiàn ”。",
+      "vi": "🕺Hãy để não bộ của bạn thực sự thư giãn, 🕺thì mới có thể “sắp xếp tệp” tốt hơn."
+    },
+    {
+      "start": 901,
+      "end": 906.77,
+      "en": "💃The third key point is: 💃make a balanced and regular plan.",
+      "zh": "💃第三个关键点是：💃制定平衡的规律计划。",
+      "pinyin": "💃 dì sān gè guān jiàn diǎn shì：💃 zhì dìng píng héng de guī lǜ jì huà。",
+      "vi": "💃Điểm then chốt thứ ba là: 💃lập một kế hoạch cân bằng và đều đặn."
+    },
+    {
+      "start": 907.2,
+      "end": 915.4,
+      "en": "💃Find the time of day when you are most alert to study, 💃and use fragmented time such as your commute to review.",
+      "zh": "💃找到你一天，💃中精神最好的时间学习，💃利用通勤等碎片时间复习。",
+      "pinyin": "💃 zhǎo dào nǐ yì tiān，💃 zhōng jīng shén zuì hǎo de shí jiān xué xí，💃 lì yòng tōng qín děng suì piàn shí jiān fù xí。",
+      "vi": "💃Tìm thời điểm tinh thần bạn tốt nhất trong ngày để học, 💃và tận dụng những khoảng thời gian vụn như lúc đi lại để ôn tập."
+    },
+    {
+      "start": 915.67,
+      "end": 920.37,
+      "en": "💃Most importantly, make sure you get enough quality sleep.",
+      "zh": "💃最重要的是，要保证充足的优质睡眠。",
+      "pinyin": "💃 zuì zhòng yào de shì， yào bǎo zhèng chōng zú de yōu zhì shuì mián。",
+      "vi": "💃Quan trọng nhất là phải đảm bảo ngủ đủ và ngủ ngon."
+    },
+    {
+      "start": 920.93,
+      "end": 925,
+      "en": "🕺The key words are “regularity” and “plan.”",
+      "zh": "🕺关键词是“规律” 和“计划” 。",
+      "pinyin": "🕺 guān jiàn cí shì “ guī lǜ ” hé “ jì huà ”。",
+      "vi": "🕺Từ khóa là “đều đặn” và “kế hoạch”."
+    },
+    {
+      "start": 925.33,
+      "end": 930.27,
+      "en": "🕺With a regular routine, 🕺you can keep up your Chinese learning longer.",
+      "zh": "🕺有了规律，🕺你的中文学习就能坚持得更久。",
+      "pinyin": "🕺 yǒu le guī lǜ，🕺 nǐ de zhōng wén xué xí jiù néng jiān chí dé gèng jiǔ。",
+      "vi": "🕺Có thói quen đều đặn, 🕺việc học tiếng Trung của bạn sẽ duy trì được lâu hơn."
+    },
+    {
+      "start": 930.77,
+      "end": 934.5,
+      "en": "💃Learning Chinese is a long-term process.",
+      "zh": "💃学习中文是一个长期的过程。",
+      "pinyin": "💃 xué xí zhōng wén shì yí gè cháng qī de guò chéng。",
+      "vi": "💃Học tiếng Trung là một quá trình lâu dài."
+    },
+    {
+      "start": 934.8,
+      "end": 940.67,
+      "en": "💃We hope everyone can face it with a relaxed, 💃cheerful mood.",
+      "zh": "💃我们希望大家都能用轻松、💃愉快的心情去面对它。",
+      "pinyin": "💃 wǒ men xī wàng dà jiā dōu néng yòng qīng sōng、💃 yú kuài de xīn qíng qù miàn duì tā。",
+      "vi": "💃Chúng tôi hy vọng mọi người đều có thể đối diện với nó bằng tâm trạng thoải mái, 💃vui vẻ."
+    },
+    {
+      "start": 940.87,
+      "end": 943.5,
+      "en": "💃Don't put too much pressure on yourself.",
+      "zh": "💃不要给自己太大的压力。",
+      "pinyin": "💃 bú yào gěi zì jǐ tài dà de yā lì。",
+      "vi": "💃Đừng gây quá nhiều áp lực cho bản thân."
+    },
+    {
+      "start": 943.93,
+      "end": 950.67,
+      "en": "🕺If you only memorized two Chinese words today, 🕺but you memorized them with great focus,",
+      "zh": "🕺如果你今天只记住了两个中文词，🕺但你是非常专注地记住的，",
+      "pinyin": "🕺 rú guǒ nǐ jīn tiān zhī jì zhù le liǎng gè zhōng wén cí，🕺 dàn nǐ shì fēi cháng zhuān zhù dì jì zhù de，",
+      "vi": "🕺Nếu hôm nay bạn chỉ nhớ được hai từ tiếng Trung, 🕺nhưng bạn nhớ chúng với sự tập trung cao độ,"
+    },
+    {
+      "start": 950.67,
+      "end": 952.43,
+      "en": "🕺That is also a victory.",
+      "zh": "🕺那也是一个胜利。",
+      "pinyin": "🕺 nà yě shì yí gè shèng lì。",
+      "vi": "🕺Đó cũng là một chiến thắng."
+    },
+    {
+      "start": 952.7,
+      "end": 954.7,
+      "en": "🕺Please give yourself some encouragement!",
+      "zh": "🕺请给自己一些鼓励！",
+      "pinyin": "🕺 qǐng gěi zì jǐ yì xiē gǔ lì！",
+      "vi": "🕺Hãy tự động viên bản thân một chút!"
+    },
+    {
+      "start": 954.8,
+      "end": 959.87,
+      "en": "💃Right. Remember, rest is so you can walk a longer road.",
+      "zh": "💃对。记住，休息是为了走更长的路。",
+      "pinyin": "💃 duì。 jì zhù， xiū xi shì wèi le zǒu gèng cháng de lù。",
+      "vi": "💃Đúng vậy. Hãy nhớ rằng, nghỉ ngơi là để đi được chặng đường dài hơn."
+    },
+    {
+      "start": 960.33,
+      "end": 964.3,
+      "en": "💃When you feel tired, 💃don't be afraid to rest.",
+      "zh": "💃当你感到疲倦时，💃不要害怕休息。",
+      "pinyin": "💃 dāng nǐ gǎn dào pí juàn shí，💃 bú yào hài pà xiū xi。",
+      "vi": "💃Khi bạn cảm thấy mệt mỏi, 💃đừng sợ nghỉ ngơi."
+    },
+    {
+      "start": 964.73,
+      "end": 967.87,
+      "en": "💃Once you've rested well, keep moving forward!",
+      "zh": "💃休息好了，再继续前行！",
+      "pinyin": "💃 xiū xi hǎo le， zài jì xù qián xíng！",
+      "vi": "💃Nghỉ ngơi đầy đủ rồi hãy tiếp tục tiến về phía trước!"
+    },
+    {
+      "start": 968.3,
+      "end": 972.27,
+      "en": "🕺Thank you all very much for listening to today's 🕺\"Learn Chinese Podcast.\"",
+      "zh": "🕺非常感谢大家收听今天的，🕺“学中文播客”。",
+      "pinyin": "🕺 fēi cháng gǎn xiè dà jiā shōu tīng jīn tiān de，🕺“ xué zhōng wén bō kè ”。",
+      "vi": "🕺Cảm ơn mọi người rất nhiều vì đã lắng nghe 🕺“Podcast Học tiếng Trung” hôm nay."
+    },
+    {
+      "start": 972.47,
+      "end": 977.4,
+      "en": "🕺If you like the content we share, 🕺please remember to subscribe to our channel.",
+      "zh": "🕺如果你喜欢我们分享的内容，🕺请记得订阅我们的频道。",
+      "pinyin": "🕺 rú guǒ nǐ xǐ huan wǒ men fēn xiǎng de nèi róng，🕺 qǐng jì de dìng yuè wǒ men de pín dào。",
+      "vi": "🕺Nếu bạn thích nội dung chúng tôi chia sẻ, 🕺hãy nhớ đăng ký kênh của chúng tôi nhé."
+    },
+    {
+      "start": 978.13,
+      "end": 986.67,
+      "en": "💃You're also welcome to tell us in the comments, 💃whether you're a \"morning-type\" learner 💃or a \"night-type\" learner.",
+      "zh": "💃也欢迎大家在评论区告诉我们，💃你是“早上型”学习者，💃还是“晚上型”学习者。",
+      "pinyin": "💃 yě huān yíng dà jiā zài píng lùn qū gào sù wǒ men，💃 nǐ shì “ zǎo shàng xíng ” xué xí zhě，💃 hái shì “ wǎn shàng xíng ” xué xí zhě。",
+      "vi": "💃Cũng hoan nghênh mọi người cho chúng tôi biết trong phần bình luận, 💃bạn là người học kiểu “buổi sáng” 💃hay người học kiểu “buổi tối”."
+    },
+    {
+      "start": 986.93,
+      "end": 990.17,
+      "en": "💃What is your study plan like?",
+      "zh": "💃你的学习计划是什么样的呢？",
+      "pinyin": "💃 nǐ de xué xí jì huà shì shén me yàng de ne？",
+      "vi": "💃Kế hoạch học tập của bạn như thế nào?"
+    },
+    {
+      "start": 990.77,
+      "end": 998,
+      "en": "🕺Every like and share from you, 🕺is our motivation to continue, 🕺making high-quality Chinese learning content.",
+      "zh": "🕺你的每一个赞和分享，🕺都是我们继续，🕺制作优质中文学习内容的动力。",
+      "pinyin": "🕺 nǐ de měi yí gè zàn hé fēn xiǎng，🕺 dōu shì wǒ men jì xù，🕺 zhì zuò yōu zhì zhōng wén xué xí nèi róng de dòng lì。",
+      "vi": "🕺Mỗi lượt thích và chia sẻ của bạn, 🕺đều là động lực để chúng tôi tiếp tục, 🕺sản xuất nội dung học tiếng Trung chất lượng cao."
+    },
+    {
+      "start": 998.3,
+      "end": 1001.57,
+      "en": "💃Well then, that's all for today's episode.",
+      "zh": "💃那么，今天的节目就到这里了。",
+      "pinyin": "💃 nà me， jīn tiān de jié mù jiù dào zhè lǐ le。",
+      "vi": "💃Vậy thì, chương trình hôm nay đến đây là kết thúc."
+    },
+    {
+      "start": 1001.57,
+      "end": 1002.9,
+      "en": "💃Thank you, Li Ming!",
+      "zh": "💃感谢李明！",
+      "pinyin": "💃 gǎn xiè lǐ míng！",
+      "vi": "💃Cảm ơn Lý Minh!"
+    },
+    {
+      "start": 1003,
+      "end": 1004.37,
+      "en": "🕺Thank you, Xiaoyu!",
+      "zh": "🕺感谢小雨！",
+      "pinyin": "🕺 gǎn xiè xiǎo yǔ！",
+      "vi": "🕺Cảm ơn Tiểu Vũ!"
+    },
+    {
+      "start": 1004.4,
+      "end": 1006.67,
+      "en": "💃Wishing everyone a pleasant learning experience!",
+      "zh": "💃祝大家学习愉快！",
+      "pinyin": "💃 zhù dà jiā xué xí yú kuài！",
+      "vi": "💃Chúc mọi người học tập vui vẻ!"
+    },
+    {
+      "start": 1006.8,
+      "end": 1009.23,
+      "en": "🕺See you next episode! 💃Goodbye!",
+      "zh": "🕺下期节目再见！ 💃再见！",
+      "pinyin": "🕺 xià qī jié mù zài jiàn！ 💃 zài jiàn！",
+      "vi": "🕺Hẹn gặp lại trong chương trình sau! 💃Tạm biệt!"
+    }
+  ]
+}

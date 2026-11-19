@@ -1,0 +1,1557 @@
+{
+  "id": "wikTVndAoFA",
+  "youtubeId": "wikTVndAoFA",
+  "channelHandle": "@LearnChineseThroughPodcast",
+  "title": "HSK 1-2 | Things I Wish I Knew Sooner So I Wouldn't Regret Later | Chinese Listening Practice",
+  "titleVi": "HSK 1-2 | Những điều tôi ước biết sớm hơn để không hối tiếc | Luyện nghe tiếng Trung",
+  "topic": "Podcast Luyện nghe HSK",
+  "level": "HSK 1+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 1029,
+  "cues": [
+    {
+      "start": 6.07,
+      "end": 8.87,
+      "en": "🕺Hello everyone! Welcome back to “Learning Chinese Podcast”!",
+      "zh": "🕺大家好！欢迎回到“学中文播客”！",
+      "pinyin": "🕺 dà jiā hǎo！ huān yíng huí dào “ xué zhōng wén bō kè ”！",
+      "vi": "🕺Xin chào mọi người! Chào mừng trở lại với “Podcast học tiếng Trung”!"
+    },
+    {
+      "start": 8.87,
+      "end": 10.07,
+      "en": "🕺I’m Li Ming.",
+      "zh": "🕺我是李明。",
+      "pinyin": "🕺 wǒ shì lǐ míng。",
+      "vi": "🕺Tôi là Lý Minh."
+    },
+    {
+      "start": 10.1,
+      "end": 12,
+      "en": "💃Hello everyone! I’m Xiaoyu.",
+      "zh": "💃大家好！我是小雨。",
+      "pinyin": "💃 dà jiā hǎo！ wǒ shì xiǎo yǔ。",
+      "vi": "💃Xin chào mọi người! Tôi là Tiểu Vũ."
+    },
+    {
+      "start": 12.07,
+      "end": 14.1,
+      "en": "💃It’s great to see you again!",
+      "zh": "💃很高兴我们又见面了！",
+      "pinyin": "💃 hěn gāo xìng wǒ men yòu jiàn miàn le！",
+      "vi": "💃Rất vui vì chúng ta lại gặp nhau!"
+    },
+    {
+      "start": 14.1,
+      "end": 20.77,
+      "en": "🕺Yes, Xiaoyu. 🕺Our goal has always been very simple: 🕺to help all friends who want to learn Chinese.",
+      "zh": "🕺是的，小雨，🕺我们的目标一直都很简单，🕺就是帮助所有想学中文的朋友们，",
+      "pinyin": "🕺 shì de， xiǎo yǔ，🕺 wǒ men de mù biāo yì zhí dōu hěn jiǎn dān，🕺 jiù shì bāng zhù suǒ yǒu xiǎng xué zhōng wén de péng yǒu men，",
+      "vi": "🕺Vâng, Tiểu Vũ. 🕺Mục tiêu của chúng tôi luôn rất đơn giản: 🕺giúp tất cả những bạn muốn học tiếng Trung."
+    },
+    {
+      "start": 20.77,
+      "end": 25.87,
+      "en": "🕺in the simplest, 🕺most fun way, 🕺making a little progress every day.",
+      "zh": "🕺用最简单、🕺最有趣的方式，🕺每天都进步一点点。",
+      "pinyin": "🕺 yòng zuì jiǎn dān、🕺 zuì yǒu qù de fāng shì，🕺 měi tiān dōu jìn bù yì diǎn diǎn。",
+      "vi": "🕺bằng cách đơn giản nhất, 🕺thú vị nhất, 🕺mỗi ngày tiến bộ một chút."
+    },
+    {
+      "start": 25.97,
+      "end": 32.5,
+      "en": "💃We hope learning Chinese 💃isn’t a burden for everyone, 💃but something joyful.",
+      "zh": "💃我们希望学习中文，💃对大家来说不是一个压力，💃而是一件快乐的事情。",
+      "pinyin": "💃 wǒ men xī wàng xué xí zhōng wén，💃 duì dà jiā lái shuō bú shì yí gè yā lì，💃 ér shì yí jiàn kuài lè de shì qíng。",
+      "vi": "💃Chúng tôi hy vọng việc học tiếng Trung 💃đối với mọi người không phải là áp lực, 💃mà là một điều vui vẻ."
+    },
+    {
+      "start": 32.73,
+      "end": 38.17,
+      "en": "💃We are here to support you, 💃making your Chinese learning journey easier,",
+      "zh": "💃我们在这里提供支持，💃让大家的中文学习之路走得更轻松、",
+      "pinyin": "💃 wǒ men zài zhè lǐ tí gōng zhī chí，💃 ràng dà jiā de zhōng wén xué xí zhī lù zǒu dé gèng qīng sōng、",
+      "vi": "💃Chúng tôi ở đây để hỗ trợ mọi người, 💃giúp con đường học tiếng Trung của bạn nhẹ nhàng hơn,"
+    },
+    {
+      "start": 38.17,
+      "end": 39.27,
+      "en": "💃and go further.",
+      "zh": "💃更长远。",
+      "pinyin": "💃 gèng cháng yuǎn。",
+      "vi": "💃và đi xa hơn."
+    },
+    {
+      "start": 39.27,
+      "end": 44.43,
+      "en": "🕺Today we’re discussing a topic that is very deep, 🕺but also very down-to-earth.",
+      "zh": "🕺今天我们讨论一个很有深度，🕺但又非常生活化的话题。",
+      "pinyin": "🕺 jīn tiān wǒ men tǎo lùn yí gè hěn yǒu shēn dù，🕺 dàn yòu fēi cháng shēng huó huà de huà tí。",
+      "vi": "🕺Hôm nay chúng ta sẽ bàn về một chủ đề rất sâu sắc, 🕺nhưng cũng rất gần gũi với đời sống."
+    },
+    {
+      "start": 44.47,
+      "end": 48.47,
+      "en": "🕺This topic is about “time” and “choices.”",
+      "zh": "🕺这个话题是关于“时间”和“选择”的。",
+      "pinyin": "🕺 zhè ge huà tí shì guān yú “ shí jiān ” hé “ xuǎn zé ” de。",
+      "vi": "🕺Chủ đề này nói về “thời gian” và “lựa chọn”."
+    },
+    {
+      "start": 48.73,
+      "end": 50.3,
+      "en": "💃Is it about “regret”?",
+      "zh": "💃是关于“后悔”吗？",
+      "pinyin": "💃 shì guān yú “ hòu huǐ ” ma？",
+      "vi": "💃Là về “hối tiếc” phải không?"
+    },
+    {
+      "start": 50.3,
+      "end": 51.4,
+      "en": "🕺You could say that.",
+      "zh": "🕺可以这么说。",
+      "pinyin": "🕺 kě yǐ zhè me shuō。",
+      "vi": "🕺Có thể nói như vậy."
+    },
+    {
+      "start": 51.47,
+      "end": 58.77,
+      "en": "🕺What we’re going to talk about today is: 🕺the things I wish I had known earlier, 🕺so I wouldn’t regret them. 💃Wow,",
+      "zh": "🕺我们今天要聊的是：🕺那些我希望早点知道，🕺就不会后悔的事情。 💃哇，",
+      "pinyin": "🕺 wǒ men jīn tiān yào liáo de shì：🕺 nà xiē wǒ xī wàng zǎo diǎn zhī dào，🕺 jiù bú huì hòu huǐ de shì qíng。 💃 wā，",
+      "vi": "🕺Hôm nay chúng ta sẽ nói về: 🕺những điều mà tôi ước mình biết sớm hơn, 🕺để mình không phải hối tiếc. 💃Ồ,"
+    },
+    {
+      "start": 58.77,
+      "end": 60.8,
+      "en": "💃This is a philosophical question.",
+      "zh": "💃这是一个哲学问题。",
+      "pinyin": "💃 zhè shì yí gè zhé xué wèn tí。",
+      "vi": "💃Đây là một vấn đề triết học."
+    },
+    {
+      "start": 60.93,
+      "end": 65.93,
+      "en": "💃Li Ming, is there anything 💃you wish you had known ten years ago?",
+      "zh": "💃李明，你有什么事情，💃是希望自己十年前就知道的吗？",
+      "pinyin": "💃 lǐ míng， nǐ yǒu shén me shì qíng，💃 shì xī wàng zì jǐ shí nián qián jiù zhī dào de ma？",
+      "vi": "💃Lý Minh, có điều gì 💃mà bạn ước mình đã biết từ mười năm trước không?"
+    },
+    {
+      "start": 65.93,
+      "end": 74.27,
+      "en": "🕺Too many! Life is a constant series of choices, 🕺but some small choices, 🕺if we could know their meaning earlier,",
+      "zh": "🕺太多了！人生就是不断地做选择，🕺但有些小小的选择，🕺如果能早点知道它们的意义，",
+      "pinyin": "🕺 tài duō le！ rén shēng jiù shì bú duàn dì zuò xuǎn zé，🕺 dàn yǒu xiē xiǎo xiǎo de xuǎn zé，🕺 rú guǒ néng zǎo diǎn zhī dào tā men de yì yì，",
+      "vi": "🕺Quá nhiều! Cuộc sống là không ngừng đưa ra lựa chọn, 🕺nhưng có những lựa chọn nhỏ, 🕺nếu có thể biết sớm hơn ý nghĩa của chúng,"
+    },
+    {
+      "start": 74.27,
+      "end": 77.2,
+      "en": "🕺our lives now might be completely different.",
+      "zh": "🕺我们现在的生活可能会完全不同。",
+      "pinyin": "🕺 wǒ men xiàn zài de shēng huó kě néng huì wán quán bù tóng。",
+      "vi": "🕺cuộc sống hiện tại của chúng ta có thể đã hoàn toàn khác."
+    },
+    {
+      "start": 77.5,
+      "end": 82.7,
+      "en": "💃For example, if I had known earlier that Chinese is so important, 💃I would have started learning it sooner, haha!",
+      "zh": "💃比如，早知道中文这么重要，💃我就早点开始学了，哈哈！",
+      "pinyin": "💃 bǐ rú， zǎo zhī dào zhōng wén zhè me zhòng yào，💃 wǒ jiù zǎo diǎn kāi shǐ xué le， hā hā！",
+      "vi": "💃Ví dụ, nếu biết sớm tiếng Trung quan trọng như vậy, 💃mình đã bắt đầu học sớm hơn, haha!"
+    },
+    {
+      "start": 82.7,
+      "end": 89.1,
+      "en": "🕺That’s right. So, 🕺today we want to, together with our listeners, 🕺share some little wisdom from daily life.",
+      "zh": "🕺没错。所以，🕺今天我们想和听众朋友们一起，🕺分享一些生活中的小智慧。",
+      "pinyin": "🕺 méi cuò。 suǒ yǐ，🕺 jīn tiān wǒ men xiǎng hé tīng zhòng péng yǒu men yì qǐ，🕺 fēn xiǎng yì xiē shēng huó zhōng de xiǎo zhì huì。",
+      "vi": "🕺Đúng vậy. Vì thế, 🕺hôm nay chúng tôi muốn cùng các bạn thính giả 🕺chia sẻ một vài bài học nhỏ trong cuộc sống."
+    },
+    {
+      "start": 89.33,
+      "end": 96.2,
+      "en": "🕺We've divided this topic into three parts: 🕺learning and growth, 🕺health and the body,",
+      "zh": "🕺我们把这个话题分成了三个部分：🕺关于学习和成长、🕺关于健康与身体，",
+      "pinyin": "🕺 wǒ men bǎ zhè ge huà tí fēn chéng le sān gè bù fen：🕺 guān yú xué xí hé chéng zhǎng、🕺 guān yú jiàn kāng yǔ shēn tǐ，",
+      "vi": "🕺Chúng tôi chia chủ đề này thành ba phần: 🕺về học tập và phát triển, 🕺về sức khỏe và cơ thể,"
+    },
+    {
+      "start": 96.2,
+      "end": 98.3,
+      "en": "🕺and relationships.",
+      "zh": "🕺以及关于人际关系。",
+      "pinyin": "🕺 yǐ jí guān yú rén jì guān xì。",
+      "vi": "🕺và về các mối quan hệ."
+    },
+    {
+      "start": 98.67,
+      "end": 100.43,
+      "en": "💃Sounds interesting.",
+      "zh": "💃听起来很有意思。",
+      "pinyin": "💃 tīng qǐ lái hěn yǒu yì sī。",
+      "vi": "💃Nghe có vẻ thú vị."
+    },
+    {
+      "start": 100.57,
+      "end": 107.9,
+      "en": "💃If you have any thoughts after listening to today's episode, 💃or if you also have things you \"wish you'd known sooner,\"",
+      "zh": "💃如果你听完今天的节目有任何想法，💃或者你也有“希望早点知道”的事情，",
+      "pinyin": "💃 rú guǒ nǐ tīng wán jīn tiān de jié mù yǒu rèn hé xiǎng fǎ，💃 huò zhě nǐ yě yǒu “ xī wàng zǎo diǎn zhī dào ” de shì qíng，",
+      "vi": "💃Nếu sau khi nghe chương trình hôm nay bạn có bất kỳ suy nghĩ nào, 💃hoặc bạn cũng có những điều “ước gì mình biết sớm hơn”,"
+    },
+    {
+      "start": 107.9,
+      "end": 110.87,
+      "en": "💃Please leave a comment on our platform and let us know!",
+      "zh": "💃请在我们的平台下留言告诉我们！",
+      "pinyin": "💃 qǐng zài wǒ men de píng tái xià liú yán gào sù wǒ men！",
+      "vi": "💃Hãy để lại bình luận trên nền tảng của chúng tôi và cho chúng tôi biết nhé!"
+    },
+    {
+      "start": 110.87,
+      "end": 118,
+      "en": "🕺Right, please like, share, 🕺and subscribe to our podcast, 🕺so we can help more friends.",
+      "zh": "🕺对，请大家给我们点赞、分享、🕺订阅我们的播客，🕺这样就能帮助更多朋友",
+      "pinyin": "🕺 duì， qǐng dà jiā gěi wǒ men diǎn zàn、 fēn xiǎng、🕺 dìng yuè wǒ men de bō kè，🕺 zhè yàng jiù néng bāng zhù gèng duō péng yǒu",
+      "vi": "🕺Đúng vậy, hãy thích, chia sẻ, 🕺đăng ký podcast của chúng tôi, 🕺như vậy sẽ giúp được nhiều bạn hơn."
+    },
+    {
+      "start": 118,
+      "end": 120.57,
+      "en": "🕺Join our Chinese-learning family.",
+      "zh": "🕺加入我们的中文学习大家庭。",
+      "pinyin": "🕺 jiā rù wǒ men de zhōng wén xué xí dà jiā tíng。",
+      "vi": "🕺Hãy tham gia đại gia đình học tiếng Trung của chúng tôi."
+    },
+    {
+      "start": 120.73,
+      "end": 123.7,
+      "en": "💃So, Li Ming, where shall we start?",
+      "zh": "💃那么，李明，我们从哪里开始呢？",
+      "pinyin": "💃 nà me， lǐ míng， wǒ men cóng nǎ lǐ kāi shǐ ne？",
+      "vi": "💃Vậy thì, Lý Minh, chúng ta bắt đầu từ đâu nhỉ?"
+    },
+    {
+      "start": 123.7,
+      "end": 130.97,
+      "en": "🕺Let's start with the first key point—, 🕺how to use \"time\" to learn and grow.",
+      "zh": "🕺我们就从第一个重点开始吧——，🕺关于如何利用“时间”来学习和成长。",
+      "pinyin": "🕺 wǒ men jiù cóng dì yī gè zhòng diǎn kāi shǐ ba ——，🕺 guān yú rú hé lì yòng “ shí jiān ” lái xué xí hé chéng zhǎng。",
+      "vi": "🕺Chúng ta hãy bắt đầu với điểm chính đầu tiên nhé——, 🕺về cách tận dụng “thời gian” để học tập và phát triển."
+    },
+    {
+      "start": 131.73,
+      "end": 138.27,
+      "en": "💃Li Ming, among friends learning Chinese, 💃I often hear people say, \"I don't have time to study.\"",
+      "zh": "💃李明，在学习中文的朋友中，💃我经常听到一句话：“我没有时间学习。”",
+      "pinyin": "💃 lǐ míng， zài xué xí zhōng wén de péng yǒu zhōng，💃 wǒ jīng cháng tīng dào yí jù huà：“ wǒ méi yǒu shí jiān xué xí。”",
+      "vi": "💃Lý Minh, trong số những người bạn học tiếng Trung, 💃tôi thường nghe một câu: “Tôi không có thời gian học.”"
+    },
+    {
+      "start": 138.53,
+      "end": 146.2,
+      "en": "🕺Yes. Many people feel they're too busy—🕺busy with work, busy with life—🕺and don't have large blocks of time to study.",
+      "zh": "🕺是的。很多人都觉得自己太忙了，🕺工作忙，生活忙，🕺没有大块的时间去学习。",
+      "pinyin": "🕺 shì de。 hěn duō rén dōu jué de zì jǐ tài máng le，🕺 gōng zuò máng， shēng huó máng，🕺 méi yǒu dà kuài de shí jiān qù xué xí。",
+      "vi": "🕺Đúng vậy. Nhiều người cảm thấy mình quá bận, 🕺bận công việc, bận cuộc sống, 🕺không có khoảng thời gian lớn nào để học."
+    },
+    {
+      "start": 146.4,
+      "end": 153.77,
+      "en": "🕺But one thing I wish I'd known sooner 🕺is this: time isn't something you \"find\"; 🕺it's something you \"squeeze out.\"",
+      "zh": "🕺但我希望早点知道的一件事，🕺就是：时间不是靠“找”出来的，🕺而是靠“挤”出来的。",
+      "pinyin": "🕺 dàn wǒ xī wàng zǎo diǎn zhī dào de yí jiàn shì，🕺 jiù shì： shí jiān bú shì kào “ zhǎo ” chū lái de，🕺 ér shì kào “ jǐ ” chū lái de。",
+      "vi": "🕺Nhưng có một điều tôi ước mình biết sớm hơn, 🕺đó là: thời gian không phải để “tìm” ra, 🕺mà là phải “xoay” ra."
+    },
+    {
+      "start": 153.77,
+      "end": 156.07,
+      "en": "💃Squeeze it out? How do you squeeze it out?",
+      "zh": "💃挤出来？怎么挤呢？",
+      "pinyin": "💃 jǐ chū lái？ zěn me jǐ ne？",
+      "vi": "💃Xoay ra? Xoay thế nào?"
+    },
+    {
+      "start": 156.07,
+      "end": 162.7,
+      "en": "🕺When I was young, I always thought: 🕺I'll wait until the weekend, 🕺until I have a full three hours,",
+      "zh": "🕺我年轻的时候，总是想：🕺我要等到周末，🕺等到我有三个小时的完整时间，",
+      "pinyin": "🕺 wǒ nián qīng de shí hòu， zǒng shì xiǎng：🕺 wǒ yào děng dào zhōu mò，🕺 děng dào wǒ yǒu sān gè xiǎo shí de wán zhěng shí jiān，",
+      "vi": "🕺Khi còn trẻ, tôi luôn nghĩ: 🕺mình sẽ đợi đến cuối tuần, 🕺đợi đến khi có trọn vẹn ba tiếng,"
+    },
+    {
+      "start": 162.7,
+      "end": 164.5,
+      "en": "🕺and only then can I really study.",
+      "zh": "🕺我才能好好学习。",
+      "pinyin": "🕺 wǒ cái néng hǎo hào xué xí。",
+      "vi": "🕺thì mới có thể học hành tử tế."
+    },
+    {
+      "start": 164.93,
+      "end": 173,
+      "en": "🕺And what happened? The weekend came, 🕺I was tired or got distracted by other things, 🕺and my study plan got postponed again.",
+      "zh": "🕺结果呢？周末来了，🕺我累了，或者被其他事情打扰了，🕺学习计划就又推迟了。",
+      "pinyin": "🕺 jié guǒ ne？ zhōu mò lái le，🕺 wǒ lèi le， huò zhě bèi qí tā shì qíng dǎ rǎo le，🕺 xué xí jì huà jiù yòu tuī chí le。",
+      "vi": "🕺Kết quả thì sao? Cuối tuần đến, 🕺tôi mệt, hoặc bị việc khác làm gián đoạn, 🕺thế là kế hoạch học tập lại bị hoãn."
+    },
+    {
+      "start": 173,
+      "end": 175.03,
+      "en": "💃I totally understand that feeling.",
+      "zh": "💃我完全理解这种感觉。",
+      "pinyin": "💃 wǒ wán quán lǐ jiě zhè zhǒng gǎn jué。",
+      "vi": "💃Tôi hoàn toàn hiểu cảm giác đó."
+    },
+    {
+      "start": 175.07,
+      "end": 178.07,
+      "en": "💃We're always waiting for a \"perfect\" start.",
+      "zh": "💃我们总是期待“完美”的开始。",
+      "pinyin": "💃 wǒ men zǒng shì qī dài “ wán měi ” de kāi shǐ。",
+      "vi": "💃Chúng ta luôn chờ đợi một khởi đầu “hoàn hảo”."
+    },
+    {
+      "start": 178.17,
+      "end": 185.57,
+      "en": "🕺One of the things I wish I'd known sooner, 🕺so I wouldn't regret it later, 🕺is this: persistence—🕺doing a little bit every day,",
+      "zh": "🕺那些我希望早点知道，🕺就不会后悔的事情之一，🕺就是：坚持，🕺每天做一点点小事，",
+      "pinyin": "🕺 nà xiē wǒ xī wàng zǎo diǎn zhī dào，🕺 jiù bú huì hòu huǐ de shì qíng zhī yī，🕺 jiù shì： jiān chí，🕺 měi tiān zuò yì diǎn diǎn xiǎo shì，",
+      "vi": "🕺Một trong những điều tôi ước mình biết sớm hơn, 🕺để sau này không hối tiếc, 🕺chính là: kiên trì, 🕺mỗi ngày làm một chút việc nhỏ,"
+    },
+    {
+      "start": 185.57,
+      "end": 188.73,
+      "en": "🕺is more important than occasionally doing one big thing.",
+      "zh": "🕺比偶尔做一件大事更重要。",
+      "pinyin": "🕺 bǐ ǒu ěr zuò yí jiàn dà shì gèng zhòng yào。",
+      "vi": "🕺quan trọng hơn việc thỉnh thoảng làm một việc lớn."
+    },
+    {
+      "start": 188.73,
+      "end": 191.23,
+      "en": "💃This is a very good learning method.",
+      "zh": "💃这是一个很好的学习方法。",
+      "pinyin": "💃 zhè shì yí gè hěn hǎo de xué xí fāng fǎ。",
+      "vi": "💃Đây là một cách học rất tốt."
+    },
+    {
+      "start": 191.37,
+      "end": 197.6,
+      "en": "💃For example, memorize just five new Chinese words a day, 💃or listen to a podcast for only ten minutes. 🕺Right.",
+      "zh": "💃比如，每天只背五个中文生词，💃或者只听十分钟的播客。 🕺对。",
+      "pinyin": "💃 bǐ rú， měi tiān zhī bèi wǔ gè zhōng wén shēng cí，💃 huò zhě zhī tīng shí fēn zhōng de bō kè。 🕺 duì。",
+      "vi": "💃Ví dụ, mỗi ngày chỉ học thuộc năm từ mới tiếng Trung, 💃hoặc chỉ nghe podcast mười phút. 🕺Đúng vậy."
+    },
+    {
+      "start": 197.67,
+      "end": 205.03,
+      "en": "🕺If you keep studying ten minutes every day, 🕺over the course of a year, 🕺the total time you spend studying is quite considerable.",
+      "zh": "🕺如果你每天坚持学习十分钟，🕺一年下来，🕺你学习的总时间是非常可观的。",
+      "pinyin": "🕺 rú guǒ nǐ měi tiān jiān chí xué xí shí fēn zhōng，🕺 yì nián xià lái，🕺 nǐ xué xí de zǒng shí jiān shì fēi cháng kě guān de。",
+      "vi": "🕺Nếu bạn kiên trì học mười phút mỗi ngày, 🕺thì sau một năm, 🕺tổng thời gian học của bạn sẽ rất đáng kể."
+    },
+    {
+      "start": 205.27,
+      "end": 210.57,
+      "en": "🕺Moreover, this “persistence” itself is a very important ability.",
+      "zh": "🕺而且，这种，🕺“坚持”本身，就是一种非常重要的能力。",
+      "pinyin": "🕺 ér qiě， zhè zhǒng，🕺“ jiān chí ” běn shēn， jiù shì yì zhǒng fēi cháng zhòng yào de néng lì。",
+      "vi": "🕺Hơn nữa, bản thân sự “kiên trì” này 🕺đã là một năng lực rất quan trọng."
+    },
+    {
+      "start": 210.57,
+      "end": 214.4,
+      "en": "💃This ability is called “grit” or “perseverance.”",
+      "zh": "💃这种能力叫“毅力”或者“坚持不懈”。",
+      "pinyin": "💃 zhè zhǒng néng lì jiào “ yì lì ” huò zhě “ jiān chí bú xiè ”。",
+      "vi": "💃Năng lực này được gọi là “nghị lực” hoặc “sự kiên trì bền bỉ”."
+    },
+    {
+      "start": 214.8,
+      "end": 224.4,
+      "en": "💃Many people think Chinese is hard to learn, 💃but actually, it’s not that Chinese is hard, 💃it’s that we haven’t learned how to study “continuously.”",
+      "zh": "💃很多朋友觉得中文很难学，💃但其实，不是中文难，💃而是我们没有学会如何“持续”地学习。",
+      "pinyin": "💃 hěn duō péng yǒu jué de zhōng wén hěn nán xué，💃 dàn qí shí， bú shì zhōng wén nán，💃 ér shì wǒ men méi yǒu xué huì rú hé “ chí xù ” dì xué xí。",
+      "vi": "💃Nhiều người cảm thấy tiếng Trung rất khó học, 💃nhưng thực ra, không phải tiếng Trung khó, 💃mà là chúng ta chưa học được cách học “liên tục”."
+    },
+    {
+      "start": 224.67,
+      "end": 230.1,
+      "en": "🕺I used to always think that 🕺only by studying for a long time could there be “progress.”",
+      "zh": "🕺以前我总觉得，🕺只有学习很长时间才有“进步”。",
+      "pinyin": "🕺 yǐ qián wǒ zǒng jué de，🕺 zhǐ yǒu xué xí hěn cháng shí jiān cái yǒu “ jìn bù ”。",
+      "vi": "🕺Trước đây tôi luôn nghĩ rằng, 🕺chỉ khi học trong thời gian dài mới có “tiến bộ”."
+    },
+    {
+      "start": 230.27,
+      "end": 234.67,
+      "en": "🕺Only later did I understand that 🕺true progress comes from “repetition.”",
+      "zh": "🕺后来我才明白，🕺真正的进步是来自于“重复”。",
+      "pinyin": "🕺 hòu lái wǒ cái míng bái，🕺 zhēn zhèng de jìn bù shì lái zì yú “ chóng fù ”。",
+      "vi": "🕺Sau này tôi mới hiểu ra, 🕺tiến bộ thực sự đến từ “sự lặp lại”."
+    },
+    {
+      "start": 234.77,
+      "end": 236.9,
+      "en": "💃Can we give an example?",
+      "zh": "💃我们可以举一个例子吗？",
+      "pinyin": "💃 wǒ men kě yǐ jǔ yí gè lì zǐ ma？",
+      "vi": "💃Chúng ta có thể lấy một ví dụ không?"
+    },
+    {
+      "start": 237.07,
+      "end": 241.23,
+      "en": "🕺Of course. Suppose there are two students, A and B.",
+      "zh": "🕺当然。假设有两个学生，A和B。",
+      "pinyin": "🕺 dāng rán。 jiǎ shè yǒu liǎng gè xué shēng，A hé B。",
+      "vi": "🕺Tất nhiên. Giả sử có hai học sinh, A và B."
+    },
+    {
+      "start": 241.47,
+      "end": 246.2,
+      "en": "🕺Student A studies once a month, 🕺for eight hours each time.",
+      "zh": "🕺学生A每个月学习一次，🕺每次学习八个小时。",
+      "pinyin": "🕺 xué shēng A měi gè yuè xué xí yí cì，🕺 měi cì xué xí bā gè xiǎo shí。",
+      "vi": "🕺Học sinh A mỗi tháng học một lần, 🕺mỗi lần học tám tiếng."
+    },
+    {
+      "start": 246.47,
+      "end": 249.27,
+      "en": "🕺Student B studies twenty minutes every day.",
+      "zh": "🕺学生B每天学习二十分钟。",
+      "pinyin": "🕺 xué shēng B měi tiān xué xí èr shí fēn zhōng。",
+      "vi": "🕺Học sinh B học hai mươi phút mỗi ngày."
+    },
+    {
+      "start": 249.27,
+      "end": 252.63,
+      "en": "💃It sounds like the total amount of time they study is about the same.",
+      "zh": "💃听起来，他们学习的时间总量差不多。",
+      "pinyin": "💃 tīng qǐ lái， tā men xué xí de shí jiān zǒng liàng chà bù duō。",
+      "vi": "💃Nghe có vẻ tổng thời gian học của họ gần như bằng nhau."
+    },
+    {
+      "start": 252.67,
+      "end": 254.9,
+      "en": "🕺But the results are completely different.",
+      "zh": "🕺但效果完全不一样。",
+      "pinyin": "🕺 dàn xiào guǒ wán quán bù yí yàng。",
+      "vi": "🕺Nhưng hiệu quả hoàn toàn khác nhau."
+    },
+    {
+      "start": 255.13,
+      "end": 259.3,
+      "en": "🕺After student A finishes studying, 🕺eight hours later, 🕺they quickly forget it.",
+      "zh": "🕺学生A学完，🕺八个小时后，🕺很快就忘记了。",
+      "pinyin": "🕺 xué shēng A xué wán，🕺 bā gè xiǎo shí hòu，🕺 hěn kuài jiù wàng jì le。",
+      "vi": "🕺Học sinh A học xong, 🕺tám tiếng sau, 🕺rất nhanh là quên hết."
+    },
+    {
+      "start": 259.3,
+      "end": 266.57,
+      "en": "🕺Although student B studies for a short time each time, 🕺their brain is exposed to Chinese every day, 🕺so their memory is more solid.",
+      "zh": "🕺学生B虽然每次时间短，🕺但他的大脑每天都在接触中文，🕺记忆更牢固。",
+      "pinyin": "🕺 xué shēng B suī rán měi cì shí jiān duǎn，🕺 dàn tā de dà nǎo měi tiān dōu zài jiē chù zhōng wén，🕺 jì yì gèng láo gù。",
+      "vi": "🕺Học sinh B tuy mỗi lần học ngắn, 🕺nhưng não của bạn ấy ngày nào cũng tiếp xúc với tiếng Trung, 🕺nên ghi nhớ vững chắc hơn."
+    },
+    {
+      "start": 266.57,
+      "end": 273.37,
+      "en": "💃This is like when we go mountain climbing, 💃it’s not about jumping to the top all at once, 💃but walking step by step.",
+      "zh": "💃这就像我们去爬山，💃不是一下子跳到山顶，💃而是一步一步地走。",
+      "pinyin": "💃 zhè jiù xiàng wǒ men qù pá shān，💃 bú shì yí xià zǐ tiào dào shān dǐng，💃 ér shì yí bù yi bù dì zǒu。",
+      "vi": "💃Điều này giống như khi chúng ta đi leo núi, 💃không phải nhảy một cái lên tới đỉnh, 💃mà là đi từng bước một."
+    },
+    {
+      "start": 273.4,
+      "end": 280.17,
+      "en": "🕺That’s right. So, 🕺to our listeners who are learning Chinese, 🕺we hope everyone can know this earlier:",
+      "zh": "🕺没错。所以，🕺对于正在学习中文的听众朋友们，🕺我们希望大家能早点知道：",
+      "pinyin": "🕺 méi cuò。 suǒ yǐ，🕺 duì yú zhèng zài xué xí zhōng wén de tīng zhòng péng yǒu men，🕺 wǒ men xī wàng dà jiā néng zǎo diǎn zhī dào：",
+      "vi": "🕺Đúng vậy. Vì thế, 🕺đối với những thính giả đang học tiếng Trung, 🕺chúng tôi hy vọng mọi người có thể biết sớm rằng:"
+    },
+    {
+      "start": 280.17,
+      "end": 284.8,
+      "en": "🕺Don’t wait for the perfect time; 🕺ten minutes is important enough.",
+      "zh": "🕺不要等待完美的时间，🕺十分钟也足够重要。",
+      "pinyin": "🕺 bú yào děng dài wán měi de shí jiān，🕺 shí fēn zhōng yě zú gòu zhòng yào。",
+      "vi": "🕺Đừng chờ đợi thời điểm hoàn hảo, 🕺mười phút cũng đủ quan trọng."
+    },
+    {
+      "start": 284.87,
+      "end": 292.63,
+      "en": "💃Seize those “fragmented moments”: 💃listen for two minutes while brushing your teeth in the morning, 💃read the textbook for ten minutes while taking the subway.",
+      "zh": "💃抓住那些“碎片时间”：💃早上刷牙的时候听两分钟，💃坐地铁的时候看十分钟课本。",
+      "pinyin": "💃 zhuā zhù nà xiē “ suì piàn shí jiān ”：💃 zǎo shàng shuā yá de shí hòu tīng liǎng fēn zhōng，💃 zuò dì tiě de shí hòu kàn shí fēn zhōng kè běn。",
+      "vi": "💃Hãy tận dụng những “khoảng thời gian vụn vặt” đó: 💃nghe hai phút khi đánh răng vào buổi sáng, 💃đọc sách giáo khoa mười phút khi đi tàu điện ngầm."
+    },
+    {
+      "start": 292.7,
+      "end": 300.5,
+      "en": "🕺This way, when you look back on the past, 🕺you won't regret saying: \"If only I had started earlier, 🕺if only I had kept at it earlier...\"",
+      "zh": "🕺这样当你回顾过去时，🕺你就不会后悔说：“如果我早点开始，🕺如果我早点坚持……”",
+      "pinyin": "🕺 zhè yàng dāng nǐ huí gù guò qù shí，🕺 nǐ jiù bú huì hòu huǐ shuō：“ rú guǒ wǒ zǎo diǎn kāi shǐ，🕺 rú guǒ wǒ zǎo diǎn jiān chí ……”",
+      "vi": "🕺Như vậy, khi bạn nhìn lại quá khứ, 🕺bạn sẽ không hối hận mà nói rằng: “Giá như tôi bắt đầu sớm hơn, 🕺giá như tôi kiên trì sớm hơn…”"
+    },
+    {
+      "start": 300.7,
+      "end": 303.27,
+      "en": "🕺Because you've been keeping at it all along.",
+      "zh": "🕺因为你一直在坚持。",
+      "pinyin": "🕺 yīn wèi nǐ yì zhí zài jiān chí。",
+      "vi": "🕺Vì bạn đã luôn kiên trì."
+    },
+    {
+      "start": 303.4,
+      "end": 309.67,
+      "en": "💃Li Ming, besides time management, 💃what other secrets to personal growth 💃do you wish you'd known earlier?",
+      "zh": "💃李明，除了时间管理，💃还有什么是你希望，💃早点知道的成长秘诀吗？",
+      "pinyin": "💃 lǐ míng， chú le shí jiān guǎn lǐ，💃 hái yǒu shén me shì nǐ xī wàng，💃 zǎo diǎn zhī dào de chéng zhǎng mì jué ma？",
+      "vi": "💃Lý Minh, ngoài quản lý thời gian, 💃còn bí quyết trưởng thành nào 💃bạn ước mình biết sớm hơn không?"
+    },
+    {
+      "start": 309.67,
+      "end": 316.93,
+      "en": "🕺There's another very important one, 🕺related to our Chinese learning, 🕺and that is: \"Don't be afraid of making mistakes.\" 💃Oh,",
+      "zh": "🕺还有一个非常重要，🕺与我们中文学习有关系，🕺那就是：“不要害怕犯错。” 💃喔，",
+      "pinyin": "🕺 hái yǒu yí gè fēi cháng zhòng yào，🕺 yǔ wǒ men zhōng wén xué xí yǒu guān xì，🕺 nà jiù shì：“ bú yào hài pà fàn cuò。” 💃 wō，",
+      "vi": "🕺Còn một điều rất quan trọng nữa, 🕺liên quan đến việc học tiếng Trung của chúng ta, 🕺đó là: “Đừng sợ mắc lỗi.” 💃Ồ,"
+    },
+    {
+      "start": 316.93,
+      "end": 318.43,
+      "en": "💃This is so important!",
+      "zh": "💃这个太重要了！",
+      "pinyin": "💃 zhè ge tài zhòng yào le！",
+      "vi": "💃Điều này quan trọng quá!"
+    },
+    {
+      "start": 318.53,
+      "end": 323.87,
+      "en": "💃Many learners, because they're afraid of saying the wrong thing, 💃never dare to speak up. 🕺Right.",
+      "zh": "💃很多学习者因为害怕说错话，💃就一直不敢开口。 🕺对。",
+      "pinyin": "💃 hěn duō xué xí zhě yīn wéi hài pà shuō cuò huà，💃 jiù yì zhí bù gǎn kāi kǒu。 🕺 duì。",
+      "vi": "💃Nhiều người học vì sợ nói sai, 💃nên cứ mãi không dám mở lời. 🕺Đúng vậy."
+    },
+    {
+      "start": 323.87,
+      "end": 326.7,
+      "en": "🕺I used to worry that others would laugh at me.",
+      "zh": "🕺我以前很担心别人笑话我。",
+      "pinyin": "🕺 wǒ yǐ qián hěn dān xīn bié rén xiào huà wǒ。",
+      "vi": "🕺Trước đây tôi rất lo người khác sẽ cười chê tôi."
+    },
+    {
+      "start": 326.7,
+      "end": 332.5,
+      "en": "🕺But later I found that, 🕺only by making mistakes 🕺can you know what is right.",
+      "zh": "🕺但后来我发现，🕺只有通过犯错，🕺你才能知道什么是正确的。",
+      "pinyin": "🕺 dàn hòu lái wǒ fā xiàn，🕺 zhǐ yǒu tōng guò fàn cuò，🕺 nǐ cái néng zhī dào shén me shì zhèng què de。",
+      "vi": "🕺Nhưng sau đó tôi nhận ra, 🕺chỉ khi mắc lỗi, 🕺bạn mới biết điều gì là đúng."
+    },
+    {
+      "start": 332.6,
+      "end": 336.67,
+      "en": "🕺Making mistakes, 🕺is actually the fastest path in the learning process.",
+      "zh": "🕺犯错，🕺其实是学习过程中最快的一条路。",
+      "pinyin": "🕺 fàn cuò，🕺 qí shí shì xué xí guò chéng zhōng zuì kuài de yì tiáo lù。",
+      "vi": "🕺Mắc lỗi, 🕺thực ra là con đường nhanh nhất trong quá trình học."
+    },
+    {
+      "start": 336.67,
+      "end": 342.33,
+      "en": "💃When I studied English in college, 💃my teacher told me: 💃\"If you don't make mistakes,",
+      "zh": "💃我以前在大学学英语的时候，💃我的老师告诉我：💃“如果你不犯错，",
+      "pinyin": "💃 wǒ yǐ qián zài dà xué xué yīng yǔ de shí hòu，💃 wǒ de lǎo shī gào sù wǒ：💃“ rú guǒ nǐ bú fàn cuò，",
+      "vi": "💃Hồi tôi học tiếng Anh ở đại học, 💃giáo viên của tôi nói với tôi: 💃“Nếu bạn không mắc lỗi,"
+    },
+    {
+      "start": 342.33,
+      "end": 346.9,
+      "en": "💃it means you aren't making an effort to try new things.\" 🕺That's the truth.",
+      "zh": "💃说明你没有在努力尝试新东西。”，🕺这是真理。",
+      "pinyin": "💃 shuō míng nǐ méi yǒu zài nǔ lì cháng shì xīn dōng xī。”，🕺 zhè shì zhēn lǐ。",
+      "vi": "💃thì có nghĩa là bạn chưa cố gắng thử những điều mới.” 🕺Đó là chân lý."
+    },
+    {
+      "start": 346.93,
+      "end": 356.03,
+      "en": "🕺So we hope everyone learns this early: 🕺making mistakes isn't scary; 🕺what's scary is stopping trying because you're afraid of making mistakes.",
+      "zh": "🕺所以，我们希望大家早点知道：🕺犯错并不可怕，🕺可怕的是因为害怕犯错而停止了尝试。",
+      "pinyin": "🕺 suǒ yǐ， wǒ men xī wàng dà jiā zǎo diǎn zhī dào：🕺 fàn cuò bìng bù kě pà，🕺 kě pà de shì yīn wéi hài pà fàn cuò ér tíng zhǐ le cháng shì。",
+      "vi": "🕺Vì vậy, chúng tôi hy vọng mọi người biết sớm rằng: 🕺mắc lỗi không đáng sợ, 🕺điều đáng sợ là vì sợ mắc lỗi mà ngừng cố gắng."
+    },
+    {
+      "start": 356.07,
+      "end": 361.33,
+      "en": "💃To sum up, 💃regarding learning and growth, 💃what we hope everyone knows earlier is: first,",
+      "zh": "💃总结一下，💃关于学习和成长，💃我们希望大家早点知道的是：第一，",
+      "pinyin": "💃 zǒng jié yí xià，💃 guān yú xué xí hé chéng zhǎng，💃 wǒ men xī wàng dà jiā zǎo diǎn zhī dào de shì： dì yī，",
+      "vi": "💃Tóm lại, 💃về việc học tập và trưởng thành, 💃điều chúng tôi hy vọng mọi người biết sớm hơn là: thứ nhất,"
+    },
+    {
+      "start": 361.33,
+      "end": 369.5,
+      "en": "💃Stick to small daily learning, 💃don't waste bits of spare time; 💃second, bravely make mistakes, 💃this is a sign of progress.",
+      "zh": "💃坚持每天的小学习，💃不要浪费碎片时间；💃第二，勇敢地犯错，💃这是进步的标志。",
+      "pinyin": "💃 jiān chí měi tiān de xiǎo xué xí，💃 bú yào làng fèi suì piàn shí jiān；💃 dì èr， yǒng gǎn dì fàn cuò，💃 zhè shì jìn bù de biāo zhì。",
+      "vi": "💃Kiên trì học những điều nhỏ mỗi ngày, 💃đừng lãng phí thời gian vụn vặt; 💃thứ hai, hãy dũng cảm mắc lỗi, 💃đó là dấu hiệu của sự tiến bộ."
+    },
+    {
+      "start": 369.5,
+      "end": 376.57,
+      "en": "🕺Yes. But if your body isn't healthy, 🕺even if you have the best study plan, 🕺you won't be able to achieve it.",
+      "zh": "🕺是的。但如果你的身体不健康，🕺即使你有再好的学习计划，🕺也无法实现。",
+      "pinyin": "🕺 shì de。 dàn rú guǒ nǐ de shēn tǐ bú jiàn kāng，🕺 jí shǐ nǐ yǒu zài hǎo de xué xí jì huà，🕺 yě wú fǎ shí xiàn。",
+      "vi": "🕺Đúng vậy. Nhưng nếu cơ thể bạn không khỏe mạnh, 🕺thì dù bạn có kế hoạch học tập tốt đến đâu, 🕺cũng không thể thực hiện được."
+    },
+    {
+      "start": 376.73,
+      "end": 381.23,
+      "en": "🕺So next we're going to talk about the second key point: 🕺health.",
+      "zh": "🕺所以，接下来我们要聊聊第二个重点：🕺关于健康。",
+      "pinyin": "🕺 suǒ yǐ， jiē xià lái wǒ men yào liáo liáo dì èr gè zhòng diǎn：🕺 guān yú jiàn kāng。",
+      "vi": "🕺Vì vậy, tiếp theo chúng ta sẽ nói về trọng điểm thứ hai: 🕺về sức khỏe."
+    },
+    {
+      "start": 383.47,
+      "end": 388.4,
+      "en": "🕺Xiaoyu, what do you think 🕺many people most easily overlook when they're young?",
+      "zh": "🕺小雨，你觉得，🕺很多人年轻的时候，最容易忽略什么？",
+      "pinyin": "🕺 xiǎo yǔ， nǐ jué de，🕺 hěn duō rén nián qīng de shí hòu， zuì róng yì hū lüè shén me？",
+      "vi": "🕺Tiểu Vũ, bạn nghĩ xem, 🕺khi còn trẻ, nhiều người dễ bỏ qua điều gì nhất?"
+    },
+    {
+      "start": 388.4,
+      "end": 390.57,
+      "en": "💃Maybe it's health.",
+      "zh": "💃可能是健康吧。",
+      "pinyin": "💃 kě néng shì jiàn kāng ba。",
+      "vi": "💃Có lẽ là sức khỏe."
+    },
+    {
+      "start": 390.77,
+      "end": 398.27,
+      "en": "💃When we're young, we feel our bodies are full of energy, 💃we can stay up late, 💃we can eat whatever we want,",
+      "zh": "💃年轻的时候，我们觉得身体很有活力，💃可以熬夜，💃可以随便吃东西，",
+      "pinyin": "💃 nián qīng de shí hòu， wǒ men jué de shēn tǐ hěn yǒu huó lì，💃 kě yǐ áo yè，💃 kě yǐ suí biàn chī dōng xī，",
+      "vi": "💃Khi còn trẻ, chúng ta cảm thấy cơ thể tràn đầy năng lượng, 💃có thể thức khuya, 💃có thể ăn uống tùy tiện,"
+    },
+    {
+      "start": 398.6,
+      "end": 402,
+      "en": "💃and think that health will never leave us.",
+      "zh": "💃觉得健康是永远不会离开我们的。",
+      "pinyin": "💃 jué de jiàn kāng shì yǒng yuǎn bú huì lí kāi wǒ men de。",
+      "vi": "💃và nghĩ rằng sức khỏe sẽ không bao giờ rời xa chúng ta."
+    },
+    {
+      "start": 402.07,
+      "end": 409,
+      "en": "🕺This is the second thing I wish I had known earlier: 🕺Good health is the “one” in all things.",
+      "zh": "🕺这就是我希望早点知道的第二件事：🕺身体健康，是所有事情的“一”。",
+      "pinyin": "🕺 zhè jiù shì wǒ xī wàng zǎo diǎn zhī dào de dì èr jiàn shì：🕺 shēn tǐ jiàn kāng， shì suǒ yǒu shì qíng de “ yī ”。",
+      "vi": "🕺Đây là điều thứ hai tôi ước mình biết sớm hơn: 🕺Sức khỏe là chữ “một” của mọi thứ."
+    },
+    {
+      "start": 409.07,
+      "end": 413.2,
+      "en": "🕺Without this “one,” 🕺no matter how many “zeros” follow, they are meaningless.",
+      "zh": "🕺没有这个“一”，🕺后面再多的“零”都没有意义。",
+      "pinyin": "🕺 méi yǒu zhè ge “ yī ”，🕺 hòu miàn zài duō de “ líng ” dōu méi yǒu yì yì。",
+      "vi": "🕺Không có chữ “một” này, 🕺thì bao nhiêu số “không” phía sau cũng vô nghĩa."
+    },
+    {
+      "start": 413.47,
+      "end": 420.67,
+      "en": "💃We often say, “Health is the capital of revolution,” 💃but we often wait until we get sick,",
+      "zh": "💃我们常说“身体是革命的本钱”，💃但是我们往往要等到生病了，",
+      "pinyin": "💃 wǒ men cháng shuō “ shēn tǐ shì gé mìng de běn qián ”，💃 dàn shì wǒ men wǎng wǎng yào děng dào shēng bìng le，",
+      "vi": "💃Chúng ta thường nói “Sức khỏe là vốn liếng của cách mạng”, 💃nhưng chúng ta thường phải đợi đến khi bị bệnh,"
+    },
+    {
+      "start": 420.67,
+      "end": 422.37,
+      "en": "💃only then do we start to value it.",
+      "zh": "💃才开始重视它。",
+      "pinyin": "💃 cái kāi shǐ zhòng shì tā。",
+      "vi": "💃mới bắt đầu coi trọng nó."
+    },
+    {
+      "start": 422.5,
+      "end": 428.1,
+      "en": "🕺I remember when I was in my twenties, 🕺I often worked overtime late into the night for work.",
+      "zh": "🕺我记得我二十多岁的时候，🕺经常为了工作加班到深夜。",
+      "pinyin": "🕺 wǒ jì de wǒ èr shí duō suì de shí hòu，🕺 jīng cháng wèi le gōng zuò jiā bān dào shēn yè。",
+      "vi": "🕺Tôi nhớ khi tôi ngoài hai mươi tuổi, 🕺tôi thường làm thêm giờ đến khuya vì công việc."
+    },
+    {
+      "start": 428.17,
+      "end": 434.9,
+      "en": "🕺The next morning, 🕺I drank a lot of coffee to stay awake, 🕺thinking this was a sign of “working hard.”",
+      "zh": "🕺第二天早上，🕺我喝很多咖啡来保持清醒，🕺觉得这是“努力工作”的表现。",
+      "pinyin": "🕺 dì èr tiān zǎo shàng，🕺 wǒ hē hěn duō kā fēi lái bǎo chí qīng xǐng，🕺 jué de zhè shì “ nǔ lì gōng zuò ” de biǎo xiàn。",
+      "vi": "🕺Sáng hôm sau, 🕺tôi uống nhiều cà phê để giữ tỉnh táo, 🕺và nghĩ đó là biểu hiện của “làm việc chăm chỉ”."
+    },
+    {
+      "start": 434.9,
+      "end": 438.03,
+      "en": "💃This is the lifestyle of many young people.",
+      "zh": "💃这是很多年轻人的生活状态。",
+      "pinyin": "💃 zhè shì hěn duō nián qīng rén de shēng huó zhuàng tài。",
+      "vi": "💃Đây là trạng thái sống của nhiều người trẻ."
+    },
+    {
+      "start": 438.17,
+      "end": 442.43,
+      "en": "💃Li Ming, do you now regret the way you lived back then?",
+      "zh": "💃李明，现在你后悔当时的生活方式吗？",
+      "pinyin": "💃 lǐ míng， xiàn zài nǐ hòu huǐ dāng shí de shēng huó fāng shì ma？",
+      "vi": "💃Lý Minh, bây giờ anh có hối hận về lối sống lúc đó không?"
+    },
+    {
+      "start": 442.7,
+      "end": 451.53,
+      "en": "🕺A little. If I had known earlier 🕺that keeping good sleep and regular exercise 🕺could improve my mental state and work efficiency,",
+      "zh": "🕺有一点。如果我早知道，🕺保持好的睡眠和规律的运动，🕺能让我的精神和工作效率更高，",
+      "pinyin": "🕺 yǒu yì diǎn。 rú guǒ wǒ zǎo zhī dào，🕺 bǎo chí hǎo de shuì mián hé guī lǜ de yùn dòng，🕺 néng ràng wǒ de jīng shén hé gōng zuò xiào lǜ gèng gāo，",
+      "vi": "🕺Một chút. Nếu tôi biết sớm hơn, 🕺rằng giữ giấc ngủ tốt và vận động đều đặn, 🕺có thể khiến tinh thần và hiệu suất làm việc của tôi cao hơn,"
+    },
+    {
+      "start": 451.53,
+      "end": 454.47,
+      "en": "🕺then I wouldn’t have sacrificed my rest time.",
+      "zh": "🕺我就不会牺牲我的休息时间了。",
+      "pinyin": "🕺 wǒ jiù bú huì xī shēng wǒ de xiū xi shí jiān le。",
+      "vi": "🕺thì tôi đã không hy sinh thời gian nghỉ ngơi của mình."
+    },
+    {
+      "start": 454.47,
+      "end": 462,
+      "en": "💃We always think resting is a waste of time, 💃but actually, resting is so we can go further.",
+      "zh": "💃我们总是觉得休息是浪费时间，💃但其实，休息是为了走更远的路。",
+      "pinyin": "💃 wǒ men zǒng shì jué de xiū xi shì làng fèi shí jiān，💃 dàn qí shí， xiū xi shì wèi le zǒu gèng yuǎn de lù。",
+      "vi": "💃Chúng ta luôn nghĩ nghỉ ngơi là lãng phí thời gian, 💃nhưng thật ra, nghỉ ngơi là để đi xa hơn."
+    },
+    {
+      "start": 462.1,
+      "end": 465.7,
+      "en": "🕺That’s right. We don’t need to do very complicated exercises.",
+      "zh": "🕺没错。我们不用做很复杂的运动。",
+      "pinyin": "🕺 méi cuò。 wǒ men bú yòng zuò hěn fù zá de yùn dòng。",
+      "vi": "🕺Đúng vậy. Chúng ta không cần làm những bài tập quá phức tạp."
+    },
+    {
+      "start": 465.7,
+      "end": 468.97,
+      "en": "🕺For example, walking is the best exercise.",
+      "zh": "🕺比如，走路就是最好的运动。",
+      "pinyin": "🕺 bǐ rú， zǒu lù jiù shì zuì hǎo de yùn dòng。",
+      "vi": "🕺Ví dụ, đi bộ chính là bài tập tốt nhất."
+    },
+    {
+      "start": 469.2,
+      "end": 476.43,
+      "en": "🕺I wish I had known earlier: 🕺you only need to set aside thirty minutes a day, 🕺take a brisk walk or go for a run.",
+      "zh": "🕺我希望早点知道：🕺每天只需要抽出三十分钟，🕺快步走一走，或者跑一跑。",
+      "pinyin": "🕺 wǒ xī wàng zǎo diǎn zhī dào：🕺 měi tiān zhī xū yào chōu chū sān shí fēn zhōng，🕺 kuài bù zǒu yi zǒu， huò zhě pǎo yi pǎo。",
+      "vi": "🕺Tôi ước mình biết sớm hơn: 🕺mỗi ngày chỉ cần dành ra ba mươi phút, 🕺đi bộ nhanh một chút, hoặc chạy một chút."
+    },
+    {
+      "start": 476.67,
+      "end": 483.07,
+      "en": "💃Thirty minutes of exercise is completely doable for busy people. 🕺Right.",
+      "zh": "💃三十分钟的运动，对于忙碌的人来说，💃是完全可以做到的。 🕺对。",
+      "pinyin": "💃 sān shí fēn zhōng de yùn dòng， duì yú máng lù de rén lái shuō，💃 shì wán quán kě yǐ zuò dào de。 🕺 duì。",
+      "vi": "💃Ba mươi phút vận động, đối với người bận rộn, 💃hoàn toàn có thể làm được. 🕺Đúng vậy."
+    },
+    {
+      "start": 483.17,
+      "end": 488,
+      "en": "🕺And this is not only physical health, 🕺but also mental health.",
+      "zh": "🕺而且这不仅是身体的健康，🕺也是心灵的健康。",
+      "pinyin": "🕺 ér qiě zhè bù jǐn shì shēn tǐ de jiàn kāng，🕺 yě shì xīn líng de jiàn kāng。",
+      "vi": "🕺Và đây không chỉ là sức khỏe thể chất, 🕺mà còn là sức khỏe tinh thần."
+    },
+    {
+      "start": 488.3,
+      "end": 493.03,
+      "en": "🕺Exercise can help us reduce stress 🕺and keep a happy mood.",
+      "zh": "🕺运动可以帮助我们减轻压力，🕺保持愉快的心情。",
+      "pinyin": "🕺 yùn dòng kě yǐ bāng zhù wǒ men jiǎn qīng yā lì，🕺 bǎo chí yú kuài de xīn qíng。",
+      "vi": "🕺Vận động có thể giúp chúng ta giảm bớt căng thẳng, 🕺giữ tâm trạng vui vẻ."
+    },
+    {
+      "start": 493.13,
+      "end": 497.27,
+      "en": "💃Many friends learning Chinese 💃may feel a lot of pressure in their studies.",
+      "zh": "💃很多学中文的朋友，💃可能会感到学习压力大。",
+      "pinyin": "💃 hěn duō xué zhōng wén de péng yǒu，💃 kě néng huì gǎn dào xué xí yā lì dà。",
+      "vi": "💃Nhiều bạn học tiếng Trung, 💃có thể cảm thấy áp lực học tập lớn."
+    },
+    {
+      "start": 497.53,
+      "end": 505.8,
+      "en": "💃When you feel stressed, 💃put down your books and go out for a walk; 💃it may be more useful than sitting there rote-memorizing new words.",
+      "zh": "💃当感到压力大时，💃放下书本，出去走走，💃可能比坐在那里硬背生词更有用。",
+      "pinyin": "💃 dāng gǎn dào yā lì dà shí，💃 fàng xià shū běn， chū qù zǒu zǒu，💃 kě néng bǐ zuò zài nà lǐ yìng bèi shēng cí gèng yǒu yòng。",
+      "vi": "💃Khi cảm thấy áp lực lớn, 💃hãy đặt sách xuống, ra ngoài đi dạo, 💃có thể hữu ích hơn là ngồi đó học vẹt từ mới."
+    },
+    {
+      "start": 505.93,
+      "end": 508.37,
+      "en": "🕺This is “combining work and rest.”",
+      "zh": "🕺这就是“劳逸结合”。",
+      "pinyin": "🕺 zhè jiù shì “ láo yì jié hé ”。",
+      "vi": "🕺Đây chính là “kết hợp làm việc và nghỉ ngơi”."
+    },
+    {
+      "start": 508.8,
+      "end": 514.57,
+      "en": "🕺Another thing about health I wish I'd known sooner is about \"eating.\" 💃Eating?",
+      "zh": "🕺另一个关于健康，🕺我希望早点知道的是关于“吃”的。 💃吃？",
+      "pinyin": "🕺 lìng yí gè guān yú jiàn kāng，🕺 wǒ xī wàng zǎo diǎn zhī dào de shì guān yú “ chī ” de。 💃 chī？",
+      "vi": "🕺Một điều khác về sức khỏe mà tôi ước mình biết sớm hơn là về “ăn uống”. 💃Ăn uống ư?"
+    },
+    {
+      "start": 514.7,
+      "end": 518.7,
+      "en": "💃We Chinese really know a lot about food.",
+      "zh": "💃我们中国人对吃可是很有研究的。",
+      "pinyin": "💃 wǒ men zhōng guó rén duì chī kě shì hěn yǒu yán jiū de。",
+      "vi": "💃Người Trung Quốc chúng tôi rất sành về chuyện ăn uống."
+    },
+    {
+      "start": 518.73,
+      "end": 523.63,
+      "en": "🕺Yes, but we often eat too much 🕺\"convenient\" food.",
+      "zh": "🕺是的，但是我们经常吃太多，🕺“方便”的食物。",
+      "pinyin": "🕺 shì de， dàn shì wǒ men jīng cháng chī tài duō，🕺“ fāng biàn ” de shí wù。",
+      "vi": "🕺Đúng vậy, nhưng chúng ta thường ăn quá nhiều 🕺đồ ăn “tiện lợi”."
+    },
+    {
+      "start": 523.67,
+      "end": 527.03,
+      "en": "🕺For example, takeout or fried food.",
+      "zh": "🕺比如，外卖或者油炸食品。",
+      "pinyin": "🕺 bǐ rú， wài mài huò zhě yóu zhà shí pǐn。",
+      "vi": "🕺Ví dụ như đồ ăn giao tận nơi hoặc đồ chiên rán."
+    },
+    {
+      "start": 527.33,
+      "end": 531.8,
+      "en": "🕺When I was young, I thought as long as it tasted good, that was enough, 🕺and didn't consider my health.",
+      "zh": "🕺年轻的时候，觉得好吃就行，🕺不考虑健康。",
+      "pinyin": "🕺 nián qīng de shí hòu， jué de hǎo chī jiù xíng，🕺 bù kǎo lǜ jiàn kāng。",
+      "vi": "🕺Khi còn trẻ, tôi chỉ nghĩ ngon là được, 🕺không quan tâm đến sức khỏe."
+    },
+    {
+      "start": 531.97,
+      "end": 537.37,
+      "en": "💃Yeah, 💃who can resist street-stall skewers or milk tea?",
+      "zh": "💃是啊，💃谁能拒绝路边摊的烤串或者奶茶呢？",
+      "pinyin": "💃 shì a，💃 shuí néng jù jué lù biān tān de kǎo chuàn huò zhě nǎi chá ne？",
+      "vi": "💃Đúng vậy, 💃ai có thể từ chối xiên nướng vỉa hè hay trà sữa chứ?"
+    },
+    {
+      "start": 537.57,
+      "end": 541.6,
+      "en": "🕺Of course we can't resist, 🕺but we need \"balance.\"",
+      "zh": "🕺当然不能拒绝，🕺但是我们需要“平衡”。",
+      "pinyin": "🕺 dāng rán bù néng jù jué，🕺 dàn shì wǒ men xū yào “ píng héng ”。",
+      "vi": "🕺Tất nhiên là không thể từ chối rồi, 🕺nhưng chúng ta cần có “sự cân bằng”."
+    },
+    {
+      "start": 541.77,
+      "end": 548.87,
+      "en": "🕺I wish I'd known sooner: eat more vegetables and fruit, 🕺and eat less of things that are too sweet or greasy.",
+      "zh": "🕺我希望早点知道：多吃蔬菜和水果，🕺少吃太甜或太油腻的东西。",
+      "pinyin": "🕺 wǒ xī wàng zǎo diǎn zhī dào： duō chī shū cài hé shuǐ guǒ，🕺 shǎo chī tài tián huò tài yóu nì de dōng xī。",
+      "vi": "🕺Tôi ước mình biết sớm hơn: hãy ăn nhiều rau và trái cây hơn, 🕺ăn ít đồ quá ngọt hoặc quá nhiều dầu mỡ."
+    },
+    {
+      "start": 548.9,
+      "end": 554.07,
+      "en": "🕺These simple habits 🕺can keep your body in great condition.",
+      "zh": "🕺这些简单的习惯，🕺能让你的身体保持一个很好的状态。",
+      "pinyin": "🕺 zhè xiē jiǎn dān de xí guàn，🕺 néng ràng nǐ de shēn tǐ bǎo chí yí gè hěn hǎo de zhuàng tài。",
+      "vi": "🕺Những thói quen đơn giản này 🕺có thể giúp cơ thể bạn duy trì trạng thái rất tốt."
+    },
+    {
+      "start": 554.37,
+      "end": 561.3,
+      "en": "💃When your body feels good, 💃you'll have more energy when studying Chinese, 💃and your memory will be stronger too.",
+      "zh": "💃身体舒服了，💃学习中文的时候精神也会更好，💃记忆力也会更强。",
+      "pinyin": "💃 shēn tǐ shū fú le，💃 xué xí zhōng wén de shí hòu jīng shén yě huì gèng hǎo，💃 jì yì lì yě huì gèng qiáng。",
+      "vi": "💃Khi cơ thể khỏe khoắn, 💃tinh thần học tiếng Trung của bạn cũng sẽ tốt hơn, 💃trí nhớ cũng sẽ mạnh hơn."
+    },
+    {
+      "start": 561.37,
+      "end": 570.9,
+      "en": "🕺Yes. Imagine, 🕺if you feel very tired every day 🕺and your mind is unclear, 🕺how can you remember complex Chinese characters and grammar?",
+      "zh": "🕺是的。想象一下，🕺如果你每天都感觉很累，🕺头脑不清楚，🕺怎么能记住复杂的汉字和语法呢？",
+      "pinyin": "🕺 shì de。 xiǎng xiàng yí xià，🕺 rú guǒ nǐ měi tiān dōu gǎn jué hěn lèi，🕺 tóu nǎo bù qīng chǔ，🕺 zěn me néng jì zhù fù zá de hàn zì hé yǔ fǎ ne？",
+      "vi": "🕺Đúng vậy. Hãy tưởng tượng, 🕺nếu ngày nào bạn cũng thấy rất mệt, 🕺đầu óc không tỉnh táo, 🕺thì làm sao có thể nhớ được những chữ Hán và ngữ pháp phức tạp chứ?"
+    },
+    {
+      "start": 571.2,
+      "end": 576.8,
+      "en": "💃So our advice to listeners is: 💃invest in your health early.",
+      "zh": "💃所以，我们给听众的建议是：💃早点投资自己的健康。",
+      "pinyin": "💃 suǒ yǐ， wǒ men gěi tīng zhòng de jiàn yì shì：💃 zǎo diǎn tóu zī zì jǐ de jiàn kāng。",
+      "vi": "💃Vì vậy, lời khuyên của chúng tôi dành cho người nghe là: 💃hãy đầu tư cho sức khỏe của mình từ sớm."
+    },
+    {
+      "start": 576.97,
+      "end": 581.37,
+      "en": "💃Sleep more, walk more, 💃and eat more nutritious food.",
+      "zh": "💃多睡觉，多走路，💃多吃有营养的食物。",
+      "pinyin": "💃 duō shuì jiào， duō zǒu lù，💃 duō chī yǒu yíng yǎng de shí wù。",
+      "vi": "💃Ngủ nhiều hơn, đi bộ nhiều hơn, 💃ăn nhiều thực phẩm giàu dinh dưỡng hơn."
+    },
+    {
+      "start": 581.53,
+      "end": 588.07,
+      "en": "🕺When you get older, 🕺you'll thank your younger self, 🕺because you didn't wear your body out too much.",
+      "zh": "🕺当你老了，🕺你会感谢年轻时的自己，🕺因为你没有过度消耗你的身体。",
+      "pinyin": "🕺 dāng nǐ lǎo le，🕺 nǐ huì gǎn xiè nián qīng shí de zì jǐ，🕺 yīn wèi nǐ méi yǒu guò dù xiāo hào nǐ de shēn tǐ。",
+      "vi": "🕺Khi bạn già đi, 🕺bạn sẽ biết ơn bản thân khi còn trẻ, 🕺vì bạn đã không bào mòn cơ thể mình quá mức."
+    },
+    {
+      "start": 588.1,
+      "end": 591.43,
+      "en": "🕺This is the best gift you can give your future self.",
+      "zh": "🕺这是你送给未来自己的最好礼物。",
+      "pinyin": "🕺 zhè shì nǐ sòng gěi wèi lái zì jǐ de zuì hǎo lǐ wù。",
+      "vi": "🕺Đây là món quà tuyệt vời nhất bạn dành tặng cho bản thân trong tương lai."
+    },
+    {
+      "start": 591.8,
+      "end": 594.8,
+      "en": "💃The topic of health always makes people think deeply.",
+      "zh": "💃健康的话题总是让人深思。",
+      "pinyin": "💃 jiàn kāng de huà tí zǒng shì ràng rén shēn sī。",
+      "vi": "💃Chủ đề sức khỏe luôn khiến người ta suy ngẫm."
+    },
+    {
+      "start": 594.9,
+      "end": 601.67,
+      "en": "💃However, once we have good health 💃and good study methods, 💃what else do we need?",
+      "zh": "💃不过，当我们有了好的身体，💃和好的学习方法，💃我们还需要什么呢？",
+      "pinyin": "💃 bú guò， dāng wǒ men yǒu le hǎo de shēn tǐ，💃 hé hǎo de xué xí fāng fǎ，💃 wǒ men hái xū yào shén me ne？",
+      "vi": "💃Tuy nhiên, khi chúng ta có một cơ thể khỏe mạnh, 💃và phương pháp học tập tốt, 💃chúng ta còn cần gì nữa?"
+    },
+    {
+      "start": 601.67,
+      "end": 604.9,
+      "en": "🕺What we need is \"love\" and \"support.\"",
+      "zh": "🕺我们需要的是“爱”和“支持”。",
+      "pinyin": "🕺 wǒ men xū yào de shì “ ài ” hé “ zhī chí ”。",
+      "vi": "🕺Điều chúng ta cần là “tình yêu” và “sự ủng hộ”."
+    },
+    {
+      "start": 604.97,
+      "end": 611.1,
+      "en": "🕺Next, we'll talk about the third key point: 🕺interpersonal relationships and emotions.",
+      "zh": "🕺接下来，我们要聊聊第三个重点：🕺关于人际关系和情感。",
+      "pinyin": "🕺 jiē xià lái， wǒ men yào liáo liáo dì sān gè zhòng diǎn：🕺 guān yú rén jì guān xì hé qíng gǎn。",
+      "vi": "🕺Tiếp theo, chúng ta sẽ nói về điểm chính thứ ba: 🕺về các mối quan hệ và cảm xúc."
+    },
+    {
+      "start": 611.47,
+      "end": 617.57,
+      "en": "💃Li Ming, when it comes to interpersonal relationships, 💃what do you wish you'd known sooner?",
+      "zh": "💃李明，在人际关系方面，💃你希望自己早点知道什么呢？",
+      "pinyin": "💃 lǐ míng， zài rén jì guān xì fāng miàn，💃 nǐ xī wàng zì jǐ zǎo diǎn zhī dào shén me ne？",
+      "vi": "💃Lý Minh, về mặt quan hệ giữa người với người, 💃bạn ước mình biết sớm hơn điều gì?"
+    },
+    {
+      "start": 617.57,
+      "end": 624.6,
+      "en": "I wish I had known sooner: those important “thank you” and “sorry” need to be said in time.",
+      "zh": "🕺我希望早点知道：🕺那些重要的“谢谢”和“对不起”，🕺要及时说出来。",
+      "pinyin": "🕺 wǒ xī wàng zǎo diǎn zhī dào：🕺 nà xiē zhòng yào de “ xiè xiè ” hé “ duì bù qǐ ”，🕺 yào jí shí shuō chū lái。",
+      "vi": "Tôi ước mình biết sớm hơn: những lời “cảm ơn” và “xin lỗi” quan trọng đó, phải nói ra kịp lúc."
+    },
+    {
+      "start": 624.9,
+      "end": 626.77,
+      "en": "“Say it in time?”",
+      "zh": "💃“及时说出来”？",
+      "pinyin": "💃“ jí shí shuō chū lái ”？",
+      "vi": "“Nói ra kịp lúc” ư?"
+    },
+    {
+      "start": 626.93,
+      "end": 633.03,
+      "en": "We Chinese can be rather reserved sometimes, and we're not very good at expressing feelings directly.",
+      "zh": "💃我们中国人有时候比较内敛，💃不太擅长直接表达情感。",
+      "pinyin": "💃 wǒ men zhōng guó rén yǒu shí hòu bǐ jiào nèi liǎn，💃 bú tài shàn cháng zhí jiē biǎo dá qíng gǎn。",
+      "vi": "Người Trung Quốc chúng tôi đôi khi khá kín đáo, không giỏi bộc lộ cảm xúc trực tiếp."
+    },
+    {
+      "start": 633.07,
+      "end": 633.87,
+      "en": "Yes.",
+      "zh": "🕺是的。",
+      "pinyin": "🕺 shì de。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 633.9,
+      "end": 642.6,
+      "en": "We always think, “Between family members, there's no need to say much; they know I love them.” “Between friends, there's no need to be polite.”",
+      "zh": "🕺我们总是觉得“家人之间，不用说太多，🕺他们知道我爱他们。”，🕺“朋友之间，不用客气。”",
+      "pinyin": "🕺 wǒ men zǒng shì jué de “ jiā rén zhī jiān， bú yòng shuō tài duō，🕺 tā men zhī dào wǒ ài tā men。”，🕺“ péng yǒu zhī jiān， bú yòng kè qì。”",
+      "vi": "Chúng ta luôn nghĩ rằng “giữa người nhà với nhau, không cần nói nhiều, họ biết tôi yêu họ.” “Giữa bạn bè với nhau, không cần khách sáo.”"
+    },
+    {
+      "start": 642.73,
+      "end": 649.23,
+      "en": "But often, it is precisely because we don't express ourselves that misunderstandings and regrets arise.",
+      "zh": "🕺但很多时候，🕺正是因为我们没有表达，🕺才造成了误解和遗憾。",
+      "pinyin": "🕺 dàn hěn duō shí hòu，🕺 zhèng shì yīn wèi wǒ men méi yǒu biǎo dá，🕺 cái zào chéng le wù jiě hé yí hàn。",
+      "vi": "Nhưng nhiều khi, chính vì chúng ta không bày tỏ, mới dẫn đến hiểu lầm và hối tiếc."
+    },
+    {
+      "start": 649.53,
+      "end": 656.27,
+      "en": "I have a friend; he has always wanted to say to his father, “Thank you,” to thank his father for his...",
+      "zh": "🕺我有一个朋友，🕺他一直想对他的父亲说一声“谢谢您”，🕺感谢父亲对他的",
+      "pinyin": "🕺 wǒ yǒu yí gè péng yǒu，🕺 tā yì zhí xiǎng duì tā de fù qīn shuō yì shēng “ xiè xiè nín ”，🕺 gǎn xiè fù qīn duì tā de",
+      "vi": "Tôi có một người bạn, anh ấy luôn muốn nói với cha mình một câu “cảm ơn cha”, cảm ơn cha vì sự..."
+    },
+    {
+      "start": 656.4,
+      "end": 662.47,
+      "en": "support. But he always felt awkward and kept waiting for a “suitable moment.”",
+      "zh": "🕺支持。但他总是觉得不自然，🕺一直在等一个“合适的时机”。",
+      "pinyin": "🕺 zhī chí。 dàn tā zǒng shì jué de bú zì rán，🕺 yì zhí zài děng yí gè “ hé shì de shí jī ”。",
+      "vi": "ủng hộ của cha. Nhưng anh ấy luôn cảm thấy không tự nhiên, lúc nào cũng chờ một “thời điểm thích hợp”."
+    },
+    {
+      "start": 662.47,
+      "end": 671.1,
+      "en": "What happened? Later his father fell ill. When he went to visit, he really wanted to say it, but still couldn't bring himself to say it.",
+      "zh": "💃结果呢？ 🕺后来他的父亲生病了，🕺他去探望时，很想说，🕺但还是没有说出口。",
+      "pinyin": "💃 jié guǒ ne？ 🕺 hòu lái tā de fù qīn shēng bìng le，🕺 tā qù tàn wàng shí， hěn xiǎng shuō，🕺 dàn hái shì méi yǒu shuō chū kǒu。",
+      "vi": "Kết quả thế nào? Sau đó cha anh ấy bị bệnh. Khi anh ấy đến thăm, anh ấy rất muốn nói, nhưng vẫn không nói ra được."
+    },
+    {
+      "start": 671.17,
+      "end": 678.63,
+      "en": "It was only at the very end that he regretted not saying those words aloud while his father was still healthy. “Sigh,”",
+      "zh": "🕺直到最后，🕺他才后悔，🕺没有在父亲健康的时候，🕺大声说出那句话。 💃哎，",
+      "pinyin": "🕺 zhí dào zuì hòu，🕺 tā cái hòu huǐ，🕺 méi yǒu zài fù qīn jiàn kāng de shí hòu，🕺 dà shēng shuō chū nà jù huà。 💃 āi，",
+      "vi": "Mãi đến cuối cùng, anh ấy mới hối hận vì đã không nói to câu đó khi cha còn khỏe mạnh. “Ôi,”"
+    },
+    {
+      "start": 678.63,
+      "end": 682.9,
+      "en": "Many things, once missed, are gone forever.",
+      "zh": "💃很多事情，一旦错过了，就没有机会了。",
+      "pinyin": "💃 hěn duō shì qíng， yí dàn cuò guò le， jiù méi yǒu jī huì le。",
+      "vi": "Nhiều chuyện, một khi đã bỏ lỡ, thì không còn cơ hội nữa."
+    },
+    {
+      "start": 682.9,
+      "end": 689.57,
+      "en": "This is what I wish I had known sooner: Don't hide love in your heart; say it out loud.",
+      "zh": "🕺这是我希望早点知道的：🕺不要把爱藏在心里，🕺要把它说出来。",
+      "pinyin": "🕺 zhè shì wǒ xī wàng zǎo diǎn zhī dào de：🕺 bú yào bǎ ài cáng zài xīn lǐ，🕺 yào bǎ tā shuō chū lái。",
+      "vi": "Đây là điều tôi ước mình biết sớm hơn: Đừng giấu tình yêu trong lòng, hãy nói ra."
+    },
+    {
+      "start": 689.83,
+      "end": 699.17,
+      "en": "A simple Chinese phrase—“thank you,” “I love you,” or “you did great”—can bring great warmth to others.",
+      "zh": "🕺一个简单的中文词语，“谢谢你”，🕺“我爱你”，或者“你做得很好”，🕺都能给别人带来巨大的温暖。",
+      "pinyin": "🕺 yí gè jiǎn dān de zhōng wén cí yǔ，“ xiè xiè nǐ ”，🕺“ wǒ ài nǐ ”， huò zhě “ nǐ zuò dé hěn hǎo ”，🕺 dōu néng gěi bié rén dài lái jù dà de wēn nuǎn。",
+      "vi": "Một cụm từ tiếng Trung đơn giản, “cảm ơn bạn”, “tôi yêu bạn”, hoặc “bạn làm rất tốt”, đều có thể mang lại cho người khác sự ấm áp to lớn."
+    },
+    {
+      "start": 699.27,
+      "end": 705.57,
+      "en": "Yes. For friends learning Chinese, this is also a great opportunity to practice.",
+      "zh": "💃是的。对于学习中文的朋友来说，💃这也是一个很好的练习机会。",
+      "pinyin": "💃 shì de。 duì yú xué xí zhōng wén de péng yǒu lái shuō，💃 zhè yě shì yí gè hěn hǎo de liàn xí jī huì。",
+      "vi": "Đúng vậy. Đối với những bạn học tiếng Trung, đây cũng là một cơ hội luyện tập rất tốt."
+    },
+    {
+      "start": 705.83,
+      "end": 709.9,
+      "en": "Learn to express these warm words in Chinese.",
+      "zh": "💃学着，💃把这些温暖的词语用中文表达出来。",
+      "pinyin": "💃 xué zhe，💃 bǎ zhè xiē wēn nuǎn de cí yǔ yòng zhōng wén biǎo dá chū lái。",
+      "vi": "Hãy học cách diễn đạt những lời ấm áp này bằng tiếng Trung."
+    },
+    {
+      "start": 709.9,
+      "end": 717.5,
+      "en": "For example, send your Chinese teacher a message: “Teacher, thank you for today's class; I learned a lot!”",
+      "zh": "🕺比如，🕺给你的中文老师发一个信息：“老师，🕺谢谢您今天的课，我学到很多！”",
+      "pinyin": "🕺 bǐ rú，🕺 gěi nǐ de zhōng wén lǎo shī fā yí gè xìn xī：“ lǎo shī，🕺 xiè xiè nín jīn tiān de kè， wǒ xué dào hěn duō！”",
+      "vi": "Ví dụ, hãy gửi cho giáo viên tiếng Trung của bạn một tin nhắn: “Thầy/cô ơi, cảm ơn thầy/cô về buổi học hôm nay, em học được rất nhiều ạ!”"
+    },
+    {
+      "start": 717.77,
+      "end": 720.73,
+      "en": "This sentence is very short, but full of gratitude.",
+      "zh": "🕺这句话很短，🕺但充满了感激。",
+      "pinyin": "🕺 zhè jù huà hěn duǎn，🕺 dàn chōng mǎn le gǎn jī。",
+      "vi": "Câu này rất ngắn, nhưng chan chứa lòng biết ơn."
+    },
+    {
+      "start": 720.97,
+      "end": 723.6,
+      "en": "Also, about “companionship.”",
+      "zh": "💃还有，关于“陪伴”。",
+      "pinyin": "💃 hái yǒu， guān yú “ péi bàn ”。",
+      "vi": "Ngoài ra, còn về “sự đồng hành”."
+    },
+    {
+      "start": 723.67,
+      "end": 730.6,
+      "en": "Many young people work or study away from home and often neglect spending time with their families.",
+      "zh": "💃很多年轻人在外地工作或学习，💃经常忽略了对家人的陪伴。",
+      "pinyin": "💃 hěn duō nián qīng rén zài wài dì gōng zuò huò xué xí，💃 jīng cháng hū lüè le duì jiā rén de péi bàn。",
+      "vi": "Nhiều người trẻ làm việc hoặc học tập ở nơi xa, thường bỏ quên việc dành thời gian bên gia đình."
+    },
+    {
+      "start": 730.6,
+      "end": 732.87,
+      "en": "This is also one thing I regret.",
+      "zh": "🕺这也是我后悔的一点。",
+      "pinyin": "🕺 zhè yě shì wǒ hòu huǐ de yì diǎn。",
+      "vi": "Đây cũng là một điều tôi hối tiếc."
+    },
+    {
+      "start": 733.17,
+      "end": 738.4,
+      "en": "In the past, I always thought that buying expensive gifts for family was how to express love.",
+      "zh": "🕺以前我总觉得，🕺给家人买昂贵的礼物就是表达爱。",
+      "pinyin": "🕺 yǐ qián wǒ zǒng jué de，🕺 gěi jiā rén mǎi áng guì de lǐ wù jiù shì biǎo dá ài。",
+      "vi": "Trước đây tôi luôn nghĩ rằng mua những món quà đắt tiền cho gia đình chính là cách thể hiện tình yêu."
+    },
+    {
+      "start": 738.57,
+      "end": 745.2,
+      "en": "But later I realized that what they need isn't gifts, but my time spent with them.",
+      "zh": "🕺但后来我发现，🕺他们需要的不是礼物，🕺而是我“在一起”的时间。",
+      "pinyin": "🕺 dàn hòu lái wǒ fā xiàn，🕺 tā men xū yào de bú shì lǐ wù，🕺 ér shì wǒ “ zài yì qǐ ” de shí jiān。",
+      "vi": "Nhưng sau đó tôi nhận ra, họ cần không phải quà tặng, mà là thời gian tôi ở bên họ."
+    },
+    {
+      "start": 745.57,
+      "end": 749.4,
+      "en": "Companionship is the most precious gift we can give our family.",
+      "zh": "💃陪伴，是我们能给家人最宝贵的礼物。",
+      "pinyin": "💃 péi bàn， shì wǒ men néng gěi jiā rén zuì bǎo guì de lǐ wù。",
+      "vi": "Sự đồng hành là món quà quý giá nhất mà chúng ta có thể dành cho gia đình."
+    },
+    {
+      "start": 749.5,
+      "end": 754.9,
+      "en": "Even if it's just a ten-minute video call with your parents every evening.",
+      "zh": "💃即使只是每天晚上，💃和父母打一个十分钟的视频电话。",
+      "pinyin": "💃 jí shǐ zhǐ shì měi tiān wǎn shàng，💃 hé fù mǔ dǎ yí gè shí fēn zhōng de shì pín diàn huà。",
+      "vi": "Dù chỉ là mỗi tối gọi một cuộc video mười phút cho bố mẹ."
+    },
+    {
+      "start": 754.9,
+      "end": 758.2,
+      "en": "This is what we call \"quality time.\"",
+      "zh": "🕺这就是我们说的“高质量的时间”。",
+      "pinyin": "🕺 zhè jiù shì wǒ men shuō de “ gāo zhì liàng de shí jiān ”。",
+      "vi": "Đây chính là cái mà chúng ta gọi là “thời gian chất lượng”."
+    },
+    {
+      "start": 758.43,
+      "end": 763.57,
+      "en": "This is much more effective than going home once a year and staying for a whole day.",
+      "zh": "🕺这比你一年回家一次，🕺待上一整天，效果要好得多。",
+      "pinyin": "🕺 zhè bǐ nǐ yì nián huí jiā yí cì，🕺 dài shàng yì zhěng tiān， xiào guǒ yào hǎo dé duō。",
+      "vi": "Điều này hiệu quả hơn nhiều so với việc mỗi năm về nhà một lần và ở cả ngày."
+    },
+    {
+      "start": 763.7,
+      "end": 766.9,
+      "en": "So what about friends and colleagues?",
+      "zh": "💃那么，对于朋友和同事呢？",
+      "pinyin": "💃 nà me， duì yú péng yǒu hé tóng shì ne？",
+      "vi": "Vậy còn bạn bè và đồng nghiệp thì sao?"
+    },
+    {
+      "start": 767.03,
+      "end": 774.83,
+      "en": "As for friends, I wish I had known sooner: you don't need many true friends, just a few sincere ones,",
+      "zh": "🕺对于朋友，🕺我希望早点知道：🕺真正的朋友不需要很多，🕺只需要几个真诚的，",
+      "pinyin": "🕺 duì yú péng yǒu，🕺 wǒ xī wàng zǎo diǎn zhī dào：🕺 zhēn zhèng de péng yǒu bù xū yào hěn duō，🕺 zhī xū yào jǐ gè zhēn chéng de，",
+      "vi": "Với bạn bè, tôi ước mình biết sớm hơn: bạn thật sự không cần nhiều, chỉ cần vài người chân thành,"
+    },
+    {
+      "start": 774.83,
+      "end": 777.17,
+      "en": "people who can grow together with you.",
+      "zh": "🕺能和你一起成长的人。",
+      "pinyin": "🕺 néng hé nǐ yì qǐ chéng zhǎng de rén。",
+      "vi": "những người có thể cùng bạn trưởng thành."
+    },
+    {
+      "start": 777.4,
+      "end": 782.47,
+      "en": "Don't waste time on relationships that make you uncomfortable.",
+      "zh": "🕺不要把时间浪费在那些，🕺让你感到不舒服的关系上。",
+      "pinyin": "🕺 bú yào bǎ shí jiān làng fèi zài nà xiē，🕺 ràng nǐ gǎn dào bù shū fú de guān xì shàng。",
+      "vi": "Đừng lãng phí thời gian vào những mối quan hệ khiến bạn cảm thấy không thoải mái."
+    },
+    {
+      "start": 782.7,
+      "end": 786.43,
+      "en": "Focus on the important people and important relationships.",
+      "zh": "💃专注于那些重要的人和重要的关系。",
+      "pinyin": "💃 zhuān zhù yú nà xiē zhòng yào de rén hé zhòng yào de guān xì。",
+      "vi": "Hãy tập trung vào những người quan trọng và những mối quan hệ quan trọng."
+    },
+    {
+      "start": 786.43,
+      "end": 787.87,
+      "en": "Yes.",
+      "zh": "🕺是的。",
+      "pinyin": "🕺 shì de。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 788,
+      "end": 791.27,
+      "en": "At the same time, we should also learn to \"forgive\" and \"let go.\"",
+      "zh": "🕺同时，也要学会“原谅”和“放下”。",
+      "pinyin": "🕺 tóng shí， yě yào xué huì “ yuán liàng ” hé “ fàng xià ”。",
+      "vi": "Đồng thời, cũng phải học cách “tha thứ” và “buông bỏ”."
+    },
+    {
+      "start": 791.3,
+      "end": 795.4,
+      "en": "In life, it's inevitable to encounter conflicts and unpleasantness.",
+      "zh": "🕺生活中，🕺难免会遇到一些矛盾和不愉快。",
+      "pinyin": "🕺 shēng huó zhōng，🕺 nán miǎn huì yù dào yì xiē máo dùn hé bù yú kuài。",
+      "vi": "Trong cuộc sống, khó tránh khỏi gặp phải những mâu thuẫn và chuyện không vui."
+    },
+    {
+      "start": 795.7,
+      "end": 802.5,
+      "en": "If we learned to forgive ourselves and others sooner, we could avoid a lot of unnecessary trouble.",
+      "zh": "🕺如果早点学会原谅自己和别人，🕺我们就能避免很多不必要的烦恼。",
+      "pinyin": "🕺 rú guǒ zǎo diǎn xué huì yuán liàng zì jǐ hé bié rén，🕺 wǒ men jiù néng bì miǎn hěn duō bú bì yào de fán nǎo。",
+      "vi": "Nếu học cách tha thứ cho bản thân và người khác sớm hơn, chúng ta có thể tránh được nhiều phiền muộn không cần thiết."
+    },
+    {
+      "start": 802.7,
+      "end": 808.4,
+      "en": "Many regrets actually come from our inability to let go of things in the past.",
+      "zh": "💃很多后悔，💃其实都来自于我们，💃对过去的事情放不下。",
+      "pinyin": "💃 hěn duō hòu huǐ，💃 qí shí dōu lái zì yú wǒ men，💃 duì guò qù de shì qíng fàng bú xià。",
+      "vi": "Nhiều sự hối tiếc thật ra đều đến từ việc chúng ta không buông bỏ được những chuyện trong quá khứ."
+    },
+    {
+      "start": 808.5,
+      "end": 814.9,
+      "en": "To sum up, regarding relationships, what we hope everyone learns sooner is: first,",
+      "zh": "🕺总结一下，🕺关于人际关系，🕺我们希望大家早点知道的是：第一，",
+      "pinyin": "🕺 zǒng jié yí xià，🕺 guān yú rén jì guān xì，🕺 wǒ men xī wàng dà jiā zǎo diǎn zhī dào de shì： dì yī，",
+      "vi": "Tóm lại, về các mối quan hệ, điều chúng tôi mong mọi người biết sớm hơn là: thứ nhất,"
+    },
+    {
+      "start": 814.9,
+      "end": 823.33,
+      "en": "Express love and gratitude in time; don't wait for the perfect moment. Second, spend more time with the people who matter.",
+      "zh": "🕺及时表达爱和感激，🕺不要等待完美的时机；🕺第二，多花时间陪伴重要的人；",
+      "pinyin": "🕺 jí shí biǎo dá ài hé gǎn jī，🕺 bú yào děng dài wán měi de shí jī；🕺 dì èr， duō huā shí jiān péi bàn zhòng yào de rén；",
+      "vi": "Hãy thể hiện tình yêu và lòng biết ơn kịp thời, đừng chờ đợi thời điểm hoàn hảo; thứ hai, hãy dành nhiều thời gian hơn để ở bên những người quan trọng;"
+    },
+    {
+      "start": 823.37,
+      "end": 826.5,
+      "en": "Third, learn to forgive and let go.",
+      "zh": "🕺第三，学会原谅和放下。",
+      "pinyin": "🕺 dì sān， xué huì yuán liàng hé fàng xià。",
+      "vi": "Thứ ba, học cách tha thứ và buông bỏ."
+    },
+    {
+      "start": 826.77,
+      "end": 834.87,
+      "en": "After listening to these three parts, I feel today's program isn't just about learning Chinese; it's more like a life lesson.",
+      "zh": "💃听完这三个部分，💃我感觉今天的节目不仅是学中文，💃更像是一堂人生课。",
+      "pinyin": "💃 tīng wán zhè sān gè bù fen，💃 wǒ gǎn jué jīn tiān de jié mù bù jǐn shì xué zhōng wén，💃 gèng xiàng shì yì táng rén shēng kè。",
+      "vi": "Sau khi nghe xong ba phần này, tôi cảm thấy chương trình hôm nay không chỉ là học tiếng Trung, mà còn giống như một bài học cuộc sống."
+    },
+    {
+      "start": 835.23,
+      "end": 841.3,
+      "en": "🕺We hope these little insights we've shared, 🕺can help everyone have fewer regrets in the future.",
+      "zh": "🕺希望我们分享的这些小智慧，🕺能够帮助大家减少未来的遗憾。",
+      "pinyin": "🕺 xī wàng wǒ men fēn xiǎng de zhè xiē xiǎo zhì huì，🕺 néng gòu bāng zhù dà jiā jiǎn shǎo wèi lái de yí hàn。",
+      "vi": "🕺Hy vọng những hiểu biết nhỏ này chúng tôi chia sẻ, 🕺có thể giúp mọi người bớt hối tiếc trong tương lai."
+    },
+    {
+      "start": 841.57,
+      "end": 845.3,
+      "en": "🕺Next, 🕺let's quickly review today's key points.",
+      "zh": "🕺接下来，🕺我们来快速回顾一下今天的重点。",
+      "pinyin": "🕺 jiē xià lái，🕺 wǒ men lái kuài sù huí gù yí xià jīn tiān de zhòng diǎn。",
+      "vi": "🕺Tiếp theo, 🕺chúng ta hãy nhanh chóng ôn lại những điểm chính hôm nay."
+    },
+    {
+      "start": 847.43,
+      "end": 856.27,
+      "en": "💃Okay, listeners, 💃today we talked about 💃“the things I wish I had known earlier, 💃so I wouldn't regret them later,”",
+      "zh": "💃好的，听众朋友们，💃今天我们聊了，💃“那些我希望早点知道，💃就不会后悔的事情”，",
+      "pinyin": "💃 hǎo de， tīng zhòng péng yǒu men，💃 jīn tiān wǒ men liáo le，💃“ nà xiē wǒ xī wàng zǎo diǎn zhī dào，💃 jiù bú huì hòu huǐ de shì qíng ”，",
+      "vi": "💃Được rồi, các bạn thính giả, 💃hôm nay chúng ta đã nói về 💃“những điều tôi ước mình biết sớm hơn, 💃để sau này không phải hối tiếc”,"
+    },
+    {
+      "start": 856.47,
+      "end": 859.8,
+      "en": "💃It mainly revolved around three aspects.",
+      "zh": "💃主要是围绕着三个方面展开的。",
+      "pinyin": "💃 zhǔ yào shi wéi rào zhe sān gè fāng miàn zhǎn kāi de。",
+      "vi": "💃Chủ yếu xoay quanh ba khía cạnh."
+    },
+    {
+      "start": 860.4,
+      "end": 864.93,
+      "en": "🕺The first aspect is about learning and time.",
+      "zh": "🕺第一个方面，是关于学习和时间。",
+      "pinyin": "🕺 dì yī gè fāng miàn， shì guān yú xué xí hé shí jiān。",
+      "vi": "🕺Khía cạnh thứ nhất là về học tập và thời gian."
+    },
+    {
+      "start": 865.3,
+      "end": 876.07,
+      "en": "🕺We emphasized “the power of persistence”: 🕺studying just ten minutes a day 🕺is more effective than long cramming sessions.",
+      "zh": "🕺我们强调了“坚持的力量”，🕺每天只学习十分钟，🕺也比长时间的突击学习更有效。",
+      "pinyin": "🕺 wǒ men qiáng diào le “ jiān chí de lì liàng ”，🕺 měi tiān zhī xué xí shí fēn zhōng，🕺 yě bǐ cháng shí jiān de tū jī xué xí gèng yǒu xiào。",
+      "vi": "🕺Chúng tôi nhấn mạnh “sức mạnh của sự kiên trì”: 🕺mỗi ngày chỉ học mười phút 🕺cũng hiệu quả hơn việc học dồn ép trong thời gian dài."
+    },
+    {
+      "start": 876.63,
+      "end": 881.47,
+      "en": "🕺Don't be afraid of making mistakes; 🕺be brave and speak Chinese.",
+      "zh": "🕺不要害怕犯错，🕺要勇敢开口说中文。",
+      "pinyin": "🕺 bú yào hài pà fàn cuò，🕺 yào yǒng gǎn kāi kǒu shuō zhōng wén。",
+      "vi": "🕺Đừng sợ mắc lỗi, 🕺hãy dũng cảm mở miệng nói tiếng Trung."
+    },
+    {
+      "start": 882.37,
+      "end": 887.1,
+      "en": "💃The second aspect is about health and the body.",
+      "zh": "💃第二个方面，是关于健康和身体。",
+      "pinyin": "💃 dì èr gè fāng miàn， shì guān yú jiàn kāng hé shēn tǐ。",
+      "vi": "💃Khía cạnh thứ hai là về sức khỏe và cơ thể."
+    },
+    {
+      "start": 887.43,
+      "end": 890.33,
+      "en": "💃Health is the foundation of everything.",
+      "zh": "💃健康是所有事情的基础。",
+      "pinyin": "💃 jiàn kāng shì suǒ yǒu shì qíng de jī chǔ。",
+      "vi": "💃Sức khỏe là nền tảng của mọi thứ."
+    },
+    {
+      "start": 890.67,
+      "end": 898.3,
+      "en": "💃We hope everyone will develop good habits early: 💃get enough sleep, 💃exercise for thirty minutes a day,",
+      "zh": "💃我们希望大家早点养成好习惯：💃保证睡眠，💃每天运动三十分钟，",
+      "pinyin": "💃 wǒ men xī wàng dà jiā zǎo diǎn yǎng chéng hǎo xí guàn：💃 bǎo zhèng shuì mián，💃 měi tiān yùn dòng sān shí fēn zhōng，",
+      "vi": "💃Chúng tôi hy vọng mọi người sớm hình thành thói quen tốt: 💃bảo đảm giấc ngủ, 💃tập thể dục ba mươi phút mỗi ngày,"
+    },
+    {
+      "start": 898.37,
+      "end": 900.7,
+      "en": "💃and pay attention to a balanced diet.",
+      "zh": "💃注意饮食平衡。",
+      "pinyin": "💃 zhù yì yǐn shí píng héng。",
+      "vi": "💃chú ý đến chế độ ăn uống cân bằng."
+    },
+    {
+      "start": 901.4,
+      "end": 906.1,
+      "en": "🕺The third aspect is about relationships and expression.",
+      "zh": "🕺第三个方面，是关于关系和表达。",
+      "pinyin": "🕺 dì sān gè fāng miàn， shì guān yú guān xì hé biǎo dá。",
+      "vi": "🕺Khía cạnh thứ ba là về các mối quan hệ và cách bày tỏ."
+    },
+    {
+      "start": 906.47,
+      "end": 910.87,
+      "en": "🕺Don't keep love and gratitude hidden in your heart.",
+      "zh": "🕺不要把爱和感激藏在心里。",
+      "pinyin": "🕺 bú yào bǎ ài hé gǎn jī cáng zài xīn lǐ。",
+      "vi": "🕺Đừng giấu tình yêu và lòng biết ơn trong lòng."
+    },
+    {
+      "start": 911.07,
+      "end": 917.07,
+      "en": "🕺Say “thank you” and “I love you” to family and friends more often.",
+      "zh": "🕺多对家人和朋友说“谢谢你”、🕺“我爱你”。",
+      "pinyin": "🕺 duō duì jiā rén hé péng yǒu shuō “ xiè xiè nǐ ”、🕺“ wǒ ài nǐ ”。",
+      "vi": "🕺Hãy nói “cảm ơn” và “tôi yêu bạn” với gia đình và bạn bè nhiều hơn."
+    },
+    {
+      "start": 917.6,
+      "end": 922.53,
+      "en": "🕺Quality companionship is more important than expensive gifts.",
+      "zh": "🕺高质量的陪伴，比昂贵的礼物更重要。",
+      "pinyin": "🕺 gāo zhì liàng de péi bàn， bǐ áng guì de lǐ wù gèng zhòng yào。",
+      "vi": "🕺Sự đồng hành chất lượng quan trọng hơn những món quà đắt tiền."
+    },
+    {
+      "start": 923.37,
+      "end": 931.67,
+      "en": "💃In today's discussion, 💃we also used some very 💃practical Chinese words, 💃such as “regret,”",
+      "zh": "💃今天的讨论中，💃我们也用到了一些非常，💃实用的中文词语，💃比如“后悔”，",
+      "pinyin": "💃 jīn tiān de tǎo lùn zhōng，💃 wǒ men yě yòng dào le yì xiē fēi cháng，💃 shí yòng de zhōng wén cí yǔ，💃 bǐ rú “ hòu huǐ ”，",
+      "vi": "💃Trong cuộc thảo luận hôm nay, 💃chúng tôi cũng đã dùng một số 💃từ ngữ tiếng Trung rất 💃thiết thực, 💃ví dụ như “hối tiếc”,"
+    },
+    {
+      "start": 932.07,
+      "end": 937.1,
+      "en": "💃“persistence,” “fragmented time,” and “companionship.”",
+      "zh": "💃“坚持”，“碎片时间”，和“陪伴”。",
+      "pinyin": "💃“ jiān chí ”，“ suì piàn shí jiān ”， hé “ péi bàn ”。",
+      "vi": "💃“kiên trì”, “thời gian vụn vặt” và “sự đồng hành”."
+    },
+    {
+      "start": 938.27,
+      "end": 943,
+      "en": "🕺These words are all closely related to our lives.",
+      "zh": "🕺这些词语都与我们的生活紧密相关。",
+      "pinyin": "🕺 zhè xiē cí yǔ dōu yǔ wǒ men de shēng huó jǐn mì xiāng guān。",
+      "vi": "🕺Những từ này đều gắn bó mật thiết với cuộc sống của chúng ta."
+    },
+    {
+      "start": 943.3,
+      "end": 952.4,
+      "en": "🕺I hope that while learning them, 🕺you can also apply these life lessons 🕺to your own life.",
+      "zh": "🕺希望大家在学习它们的同时，🕺也能把这些生活的智慧，🕺应用到自己的生活中。",
+      "pinyin": "🕺 xī wàng dà jiā zài xué xí tā men de tóng shí，🕺 yě néng bǎ zhè xiē shēng huó de zhì huì，🕺 yìng yòng dào zì jǐ de shēng huó zhōng。",
+      "vi": "🕺Hy vọng rằng khi học những từ này, 🕺mọi người cũng có thể đem những bài học khôn ngoan trong cuộc sống này 🕺áp dụng vào cuộc sống của chính mình."
+    },
+    {
+      "start": 953.23,
+      "end": 959.07,
+      "en": "💃Li Ming, 💃if you had to summarize today's topic in one sentence, 💃what would you say?",
+      "zh": "💃李明，💃如果用一句话来总结今天的话题，💃你会说什么？",
+      "pinyin": "💃 lǐ míng，💃 rú guǒ yòng yí jù huà lái zǒng jié jīn tiān de huà tí，💃 nǐ huì shuō shén me？",
+      "vi": "💃Lý Minh, 💃nếu phải tóm tắt chủ đề hôm nay bằng một câu, 💃bạn sẽ nói gì?"
+    },
+    {
+      "start": 959.83,
+      "end": 966.5,
+      "en": "I’d say: don’t leave what you can do today for tomorrow, only to regret it.",
+      "zh": "🕺我会说：不要把今天能做的事情，🕺留给明天去后悔。",
+      "pinyin": "🕺 wǒ huì shuō： bú yào bǎ jīn tiān néng zuò de shì qíng，🕺 liú gěi míng tiān qù hòu huǐ。",
+      "vi": "Tôi sẽ nói rằng: đừng để những việc có thể làm hôm nay lại đến ngày mai để rồi hối tiếc."
+    },
+    {
+      "start": 966.83,
+      "end": 973.93,
+      "en": "Starting now, make some small changes—your future self will thank you.",
+      "zh": "🕺从现在开始，做一些小小的改变，🕺你的未来会感谢你。",
+      "pinyin": "🕺 cóng xiàn zài kāi shǐ， zuò yì xiē xiǎo xiǎo de gǎi biàn，🕺 nǐ de wèi lái huì gǎn xiè nǐ。",
+      "vi": "Bắt đầu từ bây giờ, hãy tạo ra một vài thay đổi nhỏ; tương lai của bạn sẽ biết ơn bạn."
+    },
+    {
+      "start": 974.6,
+      "end": 976.33,
+      "en": "Well said.",
+      "zh": "💃说得太好了。",
+      "pinyin": "💃 shuō dé tài hǎo le。",
+      "vi": "Nói hay lắm."
+    },
+    {
+      "start": 976.47,
+      "end": 986.07,
+      "en": "Whether it’s learning Chinese, caring about your health, or expressing love, the most important thing is to “start now.”",
+      "zh": "💃无论是学习中文，💃还是关心健康，💃还是表达爱，💃最重要的都是“现在就开始”。",
+      "pinyin": "💃 wú lùn shì xué xí zhōng wén，💃 hái shì guān xīn jiàn kāng，💃 hái shì biǎo dá ài，💃 zuì zhòng yào de dōu shì “ xiàn zài jiù kāi shǐ ”。",
+      "vi": "Dù là học tiếng Trung, quan tâm đến sức khỏe, hay thể hiện tình yêu, điều quan trọng nhất đều là “hãy bắt đầu ngay bây giờ”."
+    },
+    {
+      "start": 986.83,
+      "end": 993.93,
+      "en": "Yes. We hope everyone can have a life with not too many regrets.",
+      "zh": "🕺是的。我们希望大家，🕺都能拥有一个没有太多遗憾的人生。",
+      "pinyin": "🕺 shì de。 wǒ men xī wàng dà jiā，🕺 dōu néng yōng yǒu yí gè méi yǒu tài duō yí hàn de rén shēng。",
+      "vi": "Đúng vậy. Chúng tôi hy vọng mọi người đều có thể có một cuộc sống không quá nhiều hối tiếc."
+    },
+    {
+      "start": 994.63,
+      "end": 998.87,
+      "en": "Thank you all very much for listening to today’s “Learn Chinese Podcast.”",
+      "zh": "💃非常感谢大家收听，💃今天的“学中文播客”。",
+      "pinyin": "💃 fēi cháng gǎn xiè dà jiā shōu tīng，💃 jīn tiān de “ xué zhōng wén bō kè ”。",
+      "vi": "Cảm ơn mọi người rất nhiều vì đã lắng nghe “Podcast Học tiếng Trung” hôm nay."
+    },
+    {
+      "start": 999,
+      "end": 1006.17,
+      "en": "If you like today’s episode, please share it with your friends, or tell us in the comments,",
+      "zh": "💃如果你喜欢今天的节目，💃请把它分享给你的朋友，💃或者在评论区告诉我们，",
+      "pinyin": "💃 rú guǒ nǐ xǐ huan jīn tiān de jié mù，💃 qǐng bǎ tā fēn xiǎng gěi nǐ de péng yǒu，💃 huò zhě zài píng lùn qū gào sù wǒ men，",
+      "vi": "Nếu bạn thích chương trình hôm nay, hãy chia sẻ nó với bạn bè, hoặc cho chúng tôi biết trong phần bình luận,"
+    },
+    {
+      "start": 1006.17,
+      "end": 1008.97,
+      "en": "What do you wish you had known earlier?",
+      "zh": "💃你希望早点知道什么事情。",
+      "pinyin": "💃 nǐ xī wàng zǎo diǎn zhī dào shén me shì qíng。",
+      "vi": "Bạn ước mình đã biết điều gì sớm hơn?"
+    },
+    {
+      "start": 1009.7,
+      "end": 1014.77,
+      "en": "Your comments and shares are the greatest support for us.",
+      "zh": "🕺你们的评论和分享，🕺是对我们最大的支持。",
+      "pinyin": "🕺 nǐ men de píng lùn hé fēn xiǎng，🕺 shì duì wǒ men zuì dà de zhī chí。",
+      "vi": "Bình luận và chia sẻ của các bạn là sự ủng hộ lớn nhất dành cho chúng tôi."
+    },
+    {
+      "start": 1015.37,
+      "end": 1017.73,
+      "en": "Thank you, Li Ming, for sharing today.",
+      "zh": "💃谢谢李明今天的分享。",
+      "pinyin": "💃 xiè xiè lǐ míng jīn tiān de fēn xiǎng。",
+      "vi": "Cảm ơn Lý Minh vì buổi chia sẻ hôm nay."
+    },
+    {
+      "start": 1018.3,
+      "end": 1019.67,
+      "en": "Thank you, Xiaoyu.",
+      "zh": "🕺谢谢小雨。",
+      "pinyin": "🕺 xiè xiè xiǎo yǔ。",
+      "vi": "Cảm ơn Tiểu Vũ."
+    },
+    {
+      "start": 1019.77,
+      "end": 1022.13,
+      "en": "See you next episode!",
+      "zh": "🕺我们下期节目再见！",
+      "pinyin": "🕺 wǒ men xià qī jié mù zài jiàn！",
+      "vi": "Hẹn gặp lại các bạn trong chương trình tiếp theo!"
+    },
+    {
+      "start": 1022.2,
+      "end": 1022.9,
+      "en": "Goodbye!",
+      "zh": "💃再见！",
+      "pinyin": "💃 zài jiàn！",
+      "vi": "Tạm biệt!"
+    }
+  ]
+}

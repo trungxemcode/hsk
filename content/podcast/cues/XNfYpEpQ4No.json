@@ -1,0 +1,1413 @@
+{
+  "id": "XNfYpEpQ4No",
+  "youtubeId": "XNfYpEpQ4No",
+  "channelHandle": "@LearnChineseThroughPodcast",
+  "title": "HSK 2-3 | Does Watching C-Dramas Actually Teach You Chinese? | Chinese Listening Practice",
+  "titleVi": "Xem phim Trung Quốc có thực sự giúp bạn học tiếng Trung?",
+  "topic": "Podcast Luyện nghe HSK",
+  "level": "HSK 2+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 807,
+  "cues": [
+    {
+      "start": 6.47,
+      "end": 12.77,
+      "en": "Hello everyone, welcome to “Learn Chinese Podcast,” a podcast for learning Chinese.",
+      "zh": "🕺大家好，欢迎来到“ ”，🕺中文学习播客。",
+      "pinyin": "🕺 dà jiā hǎo， huān yíng lái dào “ ”，🕺 zhōng wén xué xí bō kè。",
+      "vi": "Xin chào mọi người, chào mừng đến với “Learn Chinese Podcast”, podcast học tiếng Trung."
+    },
+    {
+      "start": 12.87,
+      "end": 14.07,
+      "en": "I’m Li Ming.",
+      "zh": "🕺我是李明。",
+      "pinyin": "🕺 wǒ shì lǐ míng。",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 14.27,
+      "end": 16.83,
+      "en": "Hello everyone, I’m Xiaoyu.",
+      "zh": "💃大家好，我是小雨。",
+      "pinyin": "💃 dà jiā hǎo， wǒ shì xiǎo yǔ。",
+      "vi": "Xin chào mọi người, tôi là Tiểu Vũ."
+    },
+    {
+      "start": 17.07,
+      "end": 20.27,
+      "en": "I’m very happy to meet everyone here.",
+      "zh": "💃非常高兴能在这里和大家见面。",
+      "pinyin": "💃 fēi cháng gāo xìng néng zài zhè lǐ hé dà jiā jiàn miàn。",
+      "vi": "Rất vui được gặp mọi người ở đây."
+    },
+    {
+      "start": 20.4,
+      "end": 24.57,
+      "en": "Our podcast is made specifically for Chinese learners.",
+      "zh": "🕺我们的播客，🕺是专门为中文学习者准备的。",
+      "pinyin": "🕺 wǒ men de bō kè，🕺 shì zhuān mén wèi zhōng wén xué xí zhě zhǔn bèi de。",
+      "vi": "Podcast của chúng tôi được thiết kế riêng cho người học tiếng Trung."
+    },
+    {
+      "start": 24.8,
+      "end": 32.03,
+      "en": "Whether you’ve just started learning Chinese or have already reached HSK level 3 or 4,",
+      "zh": "🕺无论你是刚刚开始学习中文，🕺还是已经达到 级或级的水平，",
+      "pinyin": "🕺 wú lùn nǐ shì gāng gāng kāi shǐ xué xí zhōng wén，🕺 hái shì yǐ jīng dá dào jí huò jí de shuǐ píng，",
+      "vi": "Dù bạn mới bắt đầu học tiếng Trung hay đã đạt trình độ HSK 3 hoặc 4,"
+    },
+    {
+      "start": 32.17,
+      "end": 37.63,
+      "en": "we hope every episode here can help you understand Chinese better,",
+      "zh": "🕺我们都希望这里的每一期节目，🕺能帮助你更好地理解中文，",
+      "pinyin": "🕺 wǒ men dōu xī wàng zhè lǐ de měi yì qī jié mù，🕺 néng bāng zhù nǐ gèng hǎo dì lǐ jiě zhōng wén，",
+      "vi": "chúng tôi đều mong mỗi tập ở đây có thể giúp bạn hiểu tiếng Trung tốt hơn,"
+    },
+    {
+      "start": 37.67,
+      "end": 40.2,
+      "en": "and speak Chinese with more confidence.",
+      "zh": "🕺更自信地开口说中文。",
+      "pinyin": "🕺 gèng zì xìn dì kāi kǒu shuō zhōng wén。",
+      "vi": "và tự tin hơn khi nói tiếng Trung."
+    },
+    {
+      "start": 40.57,
+      "end": 41.57,
+      "en": "That’s right, Li Ming.",
+      "zh": "💃是的，李明。",
+      "pinyin": "💃 shì de， lǐ míng。",
+      "vi": "Đúng vậy, Lý Minh."
+    },
+    {
+      "start": 41.6,
+      "end": 47.77,
+      "en": "Our goal is to make learning simple, fun, and motivating.",
+      "zh": "💃我们的目标就是让学习变得简单、💃有趣，而且充满动力。",
+      "pinyin": "💃 wǒ men de mù biāo jiù shì ràng xué xí biàn de jiǎn dān、💃 yǒu qù， ér qiě chōng mǎn dòng lì。",
+      "vi": "Mục tiêu của chúng tôi là làm cho việc học trở nên đơn giản, thú vị và đầy động lực."
+    },
+    {
+      "start": 47.97,
+      "end": 54.93,
+      "en": "We’ll use the slowest pace and clearest pronunciation to chat with everyone about learning Chinese",
+      "zh": "💃我们会用最慢的语速、💃最清晰的发音，💃和大家聊一聊，💃关于中文学习",
+      "pinyin": "💃 wǒ men huì yòng zuì màn de yǔ sù、💃 zuì qīng xī de fā yīn，💃 hé dà jiā liáo yi liáo，💃 guān yú zhōng wén xué xí",
+      "vi": "Chúng tôi sẽ dùng tốc độ nói chậm nhất, phát âm rõ nhất để trò chuyện với mọi người về việc học tiếng Trung"
+    },
+    {
+      "start": 54.93,
+      "end": 57.83,
+      "en": "and various topics about Chinese culture.",
+      "zh": "💃和中国文化的各种话题。",
+      "pinyin": "💃 hé zhōng guó wén huà de gè zhǒng huà tí。",
+      "vi": "và các chủ đề khác nhau về văn hóa Trung Quốc."
+    },
+    {
+      "start": 57.87,
+      "end": 64.6,
+      "en": "The topic we’re going to discuss today, I believe every Chinese learner will be very interested in.",
+      "zh": "🕺今天我们要聊的话题，🕺我相信每一位学中文的朋友都，🕺会非常感兴趣。",
+      "pinyin": "🕺 jīn tiān wǒ men yào liáo de huà tí，🕺 wǒ xiāng xìn měi yí wèi xué zhōng wén de péng yǒu dōu，🕺 huì fēi cháng gǎn xìng qù。",
+      "vi": "Chủ đề hôm nay chúng ta sẽ nói đến, tôi tin rằng mọi người học tiếng Trung đều sẽ rất hứng thú."
+    },
+    {
+      "start": 64.9,
+      "end": 71.7,
+      "en": "And that topic is: “Can watching Chinese movies or TV dramas really make you proficient in Chinese?”",
+      "zh": "🕺这个话题就是——“看中国电影或电视剧，🕺真的能让你精通中文吗？”",
+      "pinyin": "🕺 zhè ge huà tí jiù shì ——“ kàn zhòng guó diàn yǐng huò diàn shì jù，🕺 zhēn de néng ràng nǐ jīng tōng zhōng wén ma？”",
+      "vi": "Đó là: “Xem phim điện ảnh hoặc phim truyền hình Trung Quốc có thực sự giúp bạn giỏi tiếng Trung không?”"
+    },
+    {
+      "start": 71.7,
+      "end": 74.23,
+      "en": "This is a great topic!",
+      "zh": "💃这是一个非常棒的话题！",
+      "pinyin": "💃 zhè shì yí gè fēi cháng bàng de huà tí！",
+      "vi": "Đây là một chủ đề rất tuyệt!"
+    },
+    {
+      "start": 74.33,
+      "end": 83.5,
+      "en": "Many friends have asked me: “Xiaoyu, I watch Chinese TV dramas every day—will my Chinese become as good as a native speaker’s?”",
+      "zh": "💃很多朋友问过我：“，💃小雨，我每天都看中国电视剧，💃我的中文会变得像中国人一样好吗？”",
+      "pinyin": "💃 hěn duō péng yǒu wèn guò wǒ：“，💃 xiǎo yǔ， wǒ měi tiān dōu kàn zhòng guó diàn shì jù，💃 wǒ de zhōng wén huì biàn de xiàng zhōng guó rén yí yàng hǎo ma？”",
+      "vi": "Nhiều bạn đã hỏi tôi: “Tiểu Vũ, ngày nào tôi cũng xem phim truyền hình Trung Quốc, liệu tiếng Trung của tôi có trở nên tốt như người Trung Quốc không?”"
+    },
+    {
+      "start": 83.67,
+      "end": 86.77,
+      "en": "The answer may not be quite what you imagine.",
+      "zh": "🕺答案可能和你想象的不太一样。",
+      "pinyin": "🕺 dá àn kě néng hé nǐ xiǎng xiàng de bú tài yí yàng。",
+      "vi": "Câu trả lời có thể sẽ không giống như bạn tưởng tượng."
+    },
+    {
+      "start": 86.8,
+      "end": 92.47,
+      "en": "So please be sure to listen to the end; we’ll tell you the “secret” behind it.",
+      "zh": "🕺所以，请大家一定要听到最后，🕺我们会告诉你其中的“秘密”。",
+      "pinyin": "🕺 suǒ yǐ， qǐng dà jiā yí dìng yào tīng dào zuì hòu，🕺 wǒ men huì gào sù nǐ qí zhōng de “ mì mì ”。",
+      "vi": "Vì vậy, mọi người nhất định phải nghe đến cuối nhé, chúng tôi sẽ nói cho bạn biết “bí mật” trong đó."
+    },
+    {
+      "start": 92.67,
+      "end": 100.17,
+      "en": "Before the episode begins, if you find our podcast helpful, please don’t forget to follow us,",
+      "zh": "💃在节目开始之前，💃如果你觉得我们的播客对你有帮助，💃请不要忘记关注我们要，",
+      "pinyin": "💃 zài jié mù kāi shǐ zhī qián，💃 rú guǒ nǐ jué dé wǒ men de bō kè duì nǐ yǒu bāng zhù，💃 qǐng bú yào wàng jì guān zhù wǒ men yào，",
+      "vi": "Trước khi chương trình bắt đầu, nếu bạn thấy podcast của chúng tôi hữu ích, đừng quên theo dõi chúng tôi nhé,"
+    },
+    {
+      "start": 100.3,
+      "end": 103.7,
+      "en": "and share this episode with your friends.",
+      "zh": "💃并把这期节目分享给你的朋友们。",
+      "pinyin": "💃 bìng bǎ zhè qī jié mù fēn xiǎng gěi nǐ de péng yǒu men。",
+      "vi": "và chia sẻ tập này với bạn bè của bạn."
+    },
+    {
+      "start": 103.73,
+      "end": 107.1,
+      "en": "Alright, let's start today's discussion.",
+      "zh": "🕺好了，让我们开始今天的讨论吧。",
+      "pinyin": "🕺 hǎo le， ràng wǒ men kāi shǐ jīn tiān de tǎo lùn ba。",
+      "vi": "Được rồi, chúng ta bắt đầu cuộc thảo luận hôm nay nhé."
+    },
+    {
+      "start": 107.2,
+      "end": 111.7,
+      "en": "Li Ming, do you usually like watching TV dramas or movies?",
+      "zh": "💃李明，💃你平时喜欢看电视剧或者电影吗？",
+      "pinyin": "💃 lǐ míng，💃 nǐ píng shí xǐ huan kàn diàn shì jù huò zhě diàn yǐng ma？",
+      "vi": "Lý Minh, bình thường bạn có thích xem phim truyền hình hoặc phim điện ảnh không?"
+    },
+    {
+      "start": 111.73,
+      "end": 113.43,
+      "en": "I like it very much.",
+      "zh": "🕺我非常喜欢。",
+      "pinyin": "🕺 wǒ fēi cháng xǐ huan。",
+      "vi": "Tôi rất thích."
+    },
+    {
+      "start": 113.5,
+      "end": 119.63,
+      "en": "I often watch some modern Chinese TV dramas, and sometimes I also watch some classic movies.",
+      "zh": "🕺我经常看一些中国的现代剧，🕺有时候也会看一些经典的电影。",
+      "pinyin": "🕺 wǒ jīng cháng kàn yì xiē zhōng guó de xiàn dài jù，🕺 yǒu shí hòu yě huì kàn yì xiē jīng diǎn de diàn yǐng。",
+      "vi": "Tôi thường xem một số phim truyền hình hiện đại Trung Quốc, đôi khi cũng xem một số phim kinh điển."
+    },
+    {
+      "start": 119.73,
+      "end": 124.07,
+      "en": "I think watching movies is a very good way to relax.",
+      "zh": "🕺我觉得看电影，🕺是一种非常好的放松方式。",
+      "pinyin": "🕺 wǒ jué de kàn diàn yǐng，🕺 shì yì zhǒng fēi cháng hǎo de fàng sōng fāng shì。",
+      "vi": "Tôi nghĩ xem phim là một cách thư giãn rất tốt."
+    },
+    {
+      "start": 124.1,
+      "end": 125.23,
+      "en": "Me too.",
+      "zh": "💃我也是。",
+      "pinyin": "💃 wǒ yě shì。",
+      "vi": "Tôi cũng vậy."
+    },
+    {
+      "start": 125.4,
+      "end": 134.03,
+      "en": "Many foreign friends learning Chinese tell me that their motivation for learning Chinese is actually to understand Chinese TV dramas.",
+      "zh": "💃很多学习中文的外国朋友告诉我，💃他们学习中文的动力，💃其实就是为了看懂中国的电视剧。",
+      "pinyin": "💃 hěn duō xué xí zhōng wén de wài guó péng yǒu gào sù wǒ，💃 tā men xué xí zhōng wén de dòng lì，💃 qí shí jiù shì wèi le kàn dǒng zhōng guó de diàn shì jù。",
+      "vi": "Nhiều bạn nước ngoài học tiếng Trung nói với tôi rằng động lực học tiếng Trung của họ thực ra là để hiểu được phim truyền hình Trung Quốc."
+    },
+    {
+      "start": 134.2,
+      "end": 136.03,
+      "en": "Yes, that's very common.",
+      "zh": "🕺对，这很常见。",
+      "pinyin": "🕺 duì， zhè hěn cháng jiàn。",
+      "vi": "Đúng vậy, điều này rất phổ biến."
+    },
+    {
+      "start": 136.13,
+      "end": 139.9,
+      "en": "Because Chinese TV dramas are getting better and better now.",
+      "zh": "🕺因为中国的电，🕺视剧现在越来越好看了。",
+      "pinyin": "🕺 yīn wèi zhōng guó de diàn，🕺 shì jù xiàn zài yuè lái yuè hǎo kàn le。",
+      "vi": "Vì phim truyền hình Trung Quốc bây giờ ngày càng hay hơn."
+    },
+    {
+      "start": 140.17,
+      "end": 146.97,
+      "en": "So, Xiaoyu, what do you think is the biggest benefit of the method of “learning Chinese by watching dramas”?",
+      "zh": "🕺那么，小雨，🕺你觉得“看剧学中文”这个方法，🕺最大的好处是什么呢？",
+      "pinyin": "🕺 nà me， xiǎo yǔ，🕺 nǐ jué de “ kàn jù xué zhōng wén ” zhè ge fāng fǎ，🕺 zuì dà de hǎo chù shì shén me ne？",
+      "vi": "Vậy Tiểu Vũ, bạn thấy phương pháp “học tiếng Trung qua xem phim” có lợi ích lớn nhất là gì?"
+    },
+    {
+      "start": 146.97,
+      "end": 150.3,
+      "en": "I think the biggest benefit is “interest”.",
+      "zh": "💃我觉得最大的好处是“兴趣”。",
+      "pinyin": "💃 wǒ jué de zuì dà de hǎo chù shì “ xìng qù ”。",
+      "vi": "Tôi nghĩ lợi ích lớn nhất là “hứng thú”."
+    },
+    {
+      "start": 150.6,
+      "end": 154.83,
+      "en": "As we often say, “interest is the best teacher”.",
+      "zh": "💃就像我们常说的，💃“兴趣是最好的老师”。",
+      "pinyin": "💃 jiù xiàng wǒ men cháng shuō de，💃“ xìng qù shì zuì hǎo de lǎo shī ”。",
+      "vi": "Như chúng ta thường nói, “hứng thú là người thầy tốt nhất”."
+    },
+    {
+      "start": 154.93,
+      "end": 161.1,
+      "en": "If you like the story, you'll really want to know what the people in it are saying.",
+      "zh": "💃如果你喜欢这就是一个故事，💃你就会很想知道里面的人在说什么。",
+      "pinyin": "💃 rú guǒ nǐ xǐ huan zhè jiù shì yí gè gù shì，💃 nǐ jiù huì hěn xiǎng zhī dào lǐ miàn de rén zài shuō shén me。",
+      "vi": "Nếu bạn thích câu chuyện này, bạn sẽ rất muốn biết những người trong đó đang nói gì."
+    },
+    {
+      "start": 161.13,
+      "end": 167.97,
+      "en": "That's right. When you're interested in the plot, you'll be more patient in listening and watching.",
+      "zh": "🕺没错。当你对剧情感兴趣的时候，🕺你就会更有耐心去听、去看。",
+      "pinyin": "🕺 méi cuò。 dāng nǐ duì jù qíng gǎn xìng qù de shí hòu，🕺 nǐ jiù huì gèng yǒu nài xīn qù tīng、 qù kàn。",
+      "vi": "Đúng vậy. Khi bạn hứng thú với cốt truyện, bạn sẽ kiên nhẫn hơn để nghe và xem."
+    },
+    {
+      "start": 168.1,
+      "end": 170.6,
+      "en": "This is much more interesting than reading textbooks.",
+      "zh": "🕺这比看课本要有趣得多。",
+      "pinyin": "🕺 zhè bǐ kàn kè běn yào yǒu qù dé duō。",
+      "vi": "Điều này thú vị hơn nhiều so với đọc sách giáo khoa."
+    },
+    {
+      "start": 170.8,
+      "end": 175.3,
+      "en": "The dialogues in textbooks are sometimes too simple or too boring.",
+      "zh": "🕺课本里的对话有时候太简单，🕺或者太无聊了。",
+      "pinyin": "🕺 kè běn lǐ de duì huà yǒu shí hòu tài jiǎn dān，🕺 huò zhě tài wú liáo le。",
+      "vi": "Các đoạn hội thoại trong sách giáo khoa đôi khi quá đơn giản hoặc quá nhàm chán."
+    },
+    {
+      "start": 175.5,
+      "end": 181.6,
+      "en": "Yes. Moreover, by watching movies, we can hear very natural Chinese.",
+      "zh": "💃是的。而且，通过看电影，💃我们可以听到非常自然的中文。",
+      "pinyin": "💃 shì de。 ér qiě， tōng guò kàn diàn yǐng，💃 wǒ men kě yǐ tīng dào fēi cháng zì rán de zhōng wén。",
+      "vi": "Đúng vậy. Hơn nữa, qua việc xem phim, chúng ta có thể nghe được tiếng Trung rất tự nhiên."
+    },
+    {
+      "start": 181.87,
+      "end": 186.47,
+      "en": "The recordings in textbooks sometimes speak too slowly and too perfectly.",
+      "zh": "💃课本里的录音，有时候说话太慢，💃太完美了。",
+      "pinyin": "💃 kè běn lǐ de lù yīn， yǒu shí hòu shuō huà tài màn，💃 tài wán měi le。",
+      "vi": "Bản ghi âm trong sách giáo khoa đôi khi nói quá chậm, quá hoàn hảo."
+    },
+    {
+      "start": 186.5,
+      "end": 193.2,
+      "en": "But in movies, people speak with emotion and intonation; this is what real Chinese is like.",
+      "zh": "💃但是在电影里，💃人们说话有感情，有语调，💃这才是真实的中文。",
+      "pinyin": "💃 dàn shì zài diàn yǐng lǐ，💃 rén men shuō huà yǒu gǎn qíng， yǒu yǔ diào，💃 zhè cái shì zhēn shí de zhōng wén。",
+      "vi": "Nhưng trong phim, người ta nói chuyện có cảm xúc, có ngữ điệu, đây mới là tiếng Trung thực tế."
+    },
+    {
+      "start": 193.5,
+      "end": 194.57,
+      "en": "You're right.",
+      "zh": "🕺你说得对。",
+      "pinyin": "🕺 nǐ shuō dé duì。",
+      "vi": "Bạn nói đúng."
+    },
+    {
+      "start": 194.7,
+      "end": 196.87,
+      "en": "This is what we call “a feel for the language.”",
+      "zh": "🕺这就是我们说的“语感”。",
+      "pinyin": "🕺 zhè jiù shì wǒ men shuō de “ yǔ gǎn ”。",
+      "vi": "Đây chính là điều chúng ta gọi là “ngữ cảm”."
+    },
+    {
+      "start": 197,
+      "end": 201.07,
+      "en": "Listen more, and your ears will get used to the sounds of Chinese.",
+      "zh": "🕺多听，你的耳朵就会习惯中文的声音。",
+      "pinyin": "🕺 duō tīng， nǐ de ěr duo jiù huì xí guàn zhōng wén de shēng yīn。",
+      "vi": "Nghe nhiều, tai bạn sẽ quen với âm thanh của tiếng Trung."
+    },
+    {
+      "start": 201.1,
+      "end": 208.6,
+      "en": "You’ll know how Chinese people speak when they’re happy, and how they speak when they’re angry.",
+      "zh": "🕺你会知道，在高兴的时候，🕺中国人怎么说话；🕺在生气的时候，中国人又怎么说话。",
+      "pinyin": "🕺 nǐ huì zhī dào， zài gāo xìng de shí hòu，🕺 zhōng guó rén zěn me shuō huà；🕺 zài shēng qì de shí hòu， zhōng guó rén yòu zěn me shuō huà。",
+      "vi": "Bạn sẽ biết người Trung Quốc nói như thế nào khi vui; và khi tức giận thì họ nói như thế nào."
+    },
+    {
+      "start": 208.67,
+      "end": 212.6,
+      "en": "There’s another very important benefit: culture.",
+      "zh": "💃还有一个很重要的好处，就是文化。",
+      "pinyin": "💃 hái yǒu yí gè hěn zhòng yào de hǎo chù， jiù shì wén huà。",
+      "vi": "Còn một lợi ích rất quan trọng nữa, đó là văn hóa."
+    },
+    {
+      "start": 212.77,
+      "end": 214.83,
+      "en": "Culture? What do you mean?",
+      "zh": "🕺文化？这怎么说？",
+      "pinyin": "🕺 wén huà？ zhè zěn me shuō？",
+      "vi": "Văn hóa? Ý anh là sao?"
+    },
+    {
+      "start": 214.9,
+      "end": 218.97,
+      "en": "For example, in textbooks you learn “hello” and “goodbye.”",
+      "zh": "💃比如，你在课本里学了“你好”和“再见”。",
+      "pinyin": "💃 bǐ rú， nǐ zài kè běn lǐ xué le “ nǐ hǎo ” hé “ zài jiàn ”。",
+      "vi": "Ví dụ, trong sách giáo khoa bạn đã học “xin chào” và “tạm biệt”."
+    },
+    {
+      "start": 219.1,
+      "end": 224.77,
+      "en": "But in Chinese people’s daily lives, we don’t necessarily always say “hello” when we meet.",
+      "zh": "💃但是在中国人的生活里，💃我们见面时不一定总说“你好”。",
+      "pinyin": "💃 dàn shì zài zhōng guó rén de shēng huó lǐ，💃 wǒ men jiàn miàn shí bù yí dìng zǒng shuō “ nǐ hǎo ”。",
+      "vi": "Nhưng trong cuộc sống của người Trung Quốc, khi gặp nhau chúng ta không nhất thiết lúc nào cũng nói “xin chào”."
+    },
+    {
+      "start": 225.07,
+      "end": 231.5,
+      "en": "In TV dramas, you’ll see how young people greet each other and how family members talk to one another.",
+      "zh": "💃在电视剧里，💃你会看到年轻人怎么打招呼，💃家人之间怎么说话。",
+      "pinyin": "💃 zài diàn shì jù lǐ，💃 nǐ huì kàn dào nián qīng rén zěn me dǎ zhāo hū，💃 jiā rén zhī jiān zěn me shuō huà。",
+      "vi": "Trong phim truyền hình, bạn sẽ thấy người trẻ chào hỏi nhau thế nào, các thành viên trong gia đình nói chuyện với nhau ra sao."
+    },
+    {
+      "start": 231.57,
+      "end": 237.67,
+      "en": "You’ll see what Chinese cities look like and what Chinese people’s homes look like.",
+      "zh": "💃你会看到中国的城市是什么样子的，💃中国人的家是什么样子的。",
+      "pinyin": "💃 nǐ huì kàn dào zhōng guó de chéng shì shì shén me yàng zi de，💃 zhōng guó rén de jiā shì shén me yàng zi de。",
+      "vi": "Bạn sẽ thấy các thành phố Trung Quốc trông như thế nào, nhà của người Trung Quốc trông như thế nào."
+    },
+    {
+      "start": 237.73,
+      "end": 239.17,
+      "en": "I completely agree.",
+      "zh": "🕺非常同意。",
+      "pinyin": "🕺 fēi cháng tóng yì。",
+      "vi": "Tôi rất đồng ý."
+    },
+    {
+      "start": 239.33,
+      "end": 244.07,
+      "en": "Through visuals, we can learn a lot of knowledge that isn’t in books.",
+      "zh": "🕺通过画面，🕺我们可以学到，🕺很多书本上没有的知识。",
+      "pinyin": "🕺 tōng guò huà miàn，🕺 wǒ men kě yǐ xué dào，🕺 hěn duō shū běn shàng méi yǒu de zhī shi。",
+      "vi": "Qua hình ảnh, chúng ta có thể học được nhiều kiến thức không có trong sách vở."
+    },
+    {
+      "start": 244.17,
+      "end": 249.6,
+      "en": "For example, what Chinese people eat during Spring Festival and what gifts they give on birthdays.",
+      "zh": "🕺比如，中国人在春节吃什么，🕺在生日的时候送什么礼物。",
+      "pinyin": "🕺 bǐ rú， zhōng guó rén zài chūn jié chī shén me，🕺 zài shēng rì de shí hòu sòng shén me lǐ wù。",
+      "vi": "Ví dụ, người Trung Quốc ăn gì vào Tết Nguyên đán, tặng quà gì vào sinh nhật."
+    },
+    {
+      "start": 249.6,
+      "end": 253.03,
+      "en": "These are all very valuable learning resources.",
+      "zh": "🕺这些都是非常宝贵的学习资源。",
+      "pinyin": "🕺 zhè xiē dōu shì fēi cháng bǎo guì de xué xí zī yuán。",
+      "vi": "Đây đều là những nguồn tài liệu học tập rất quý giá."
+    },
+    {
+      "start": 253.17,
+      "end": 260.83,
+      "en": "So it seems that “learning Chinese by watching dramas” is a perfect method, right? — That’s how it sounds.",
+      "zh": "💃所以，看起来，💃“看剧学中文”是一个非常完美的方法，💃对吗？🕺听起来是这样。",
+      "pinyin": "💃 suǒ yǐ， kàn qǐ lái，💃“ kàn jù xué zhōng wén ” shì yí gè fēi cháng wán měi de fāng fǎ，💃 duì ma？🕺 tīng qǐ lái shì zhè yàng。",
+      "vi": "Vậy thì có vẻ như “học tiếng Trung qua xem phim” là một phương pháp hoàn hảo, đúng không? — Nghe có vẻ là vậy."
+    },
+    {
+      "start": 260.9,
+      "end": 267.3,
+      "en": "But Xiaoyu, if you just simply sit there and watch, can you really learn Chinese well?",
+      "zh": "🕺但是，小雨，🕺如果只是简单地坐在那里看，🕺真的能学好中文吗？",
+      "pinyin": "🕺 dàn shì， xiǎo yǔ，🕺 rú guǒ zhǐ shì jiǎn dān dì zuò zài nà lǐ kàn，🕺 zhēn de néng xué hǎo zhōng wén ma？",
+      "vi": "Nhưng Tiểu Vũ, nếu chỉ đơn giản ngồi đó xem, liệu thật sự có thể học tốt tiếng Trung không?"
+    },
+    {
+      "start": 269.6,
+      "end": 275.87,
+      "en": "This is the second part we’re going to talk about. Li Ming, actually many students have told me,",
+      "zh": "💃这就是我们要说的第二个，💃部分了。李明，💃其实很多学生告诉我，",
+      "pinyin": "💃 zhè jiù shì wǒ men yào shuō de dì èr gè，💃 bù fen le。 lǐ míng，💃 qí shí hěn duō xué shēng gào sù wǒ，",
+      "vi": "Đây chính là phần thứ hai mà chúng ta muốn nói. Lý Minh, thật ra nhiều học sinh nói với tôi,"
+    },
+    {
+      "start": 275.87,
+      "end": 281.2,
+      "en": "they’ve watched a lot of dramas, but their Chinese level hasn’t improved much.",
+      "zh": "💃他们看了很多剧，💃但是中文水平并没有提高很多。",
+      "pinyin": "💃 tā men kàn le hěn duō jù，💃 dàn shì zhōng wén shuǐ píng bìng méi yǒu tí gāo hěn duō。",
+      "vi": "họ đã xem rất nhiều phim, nhưng trình độ tiếng Trung không tăng lên nhiều."
+    },
+    {
+      "start": 281.27,
+      "end": 283.3,
+      "en": "I’ve encountered this situation too.",
+      "zh": "🕺我也遇到过这样的情况。",
+      "pinyin": "🕺 wǒ yě yù dào guò zhè yàng de qíng kuàng。",
+      "vi": "Tôi cũng từng gặp tình huống như vậy."
+    },
+    {
+      "start": 283.57,
+      "end": 291.4,
+      "en": "There’s a student who really likes Chinese period dramas—the kind set in ancient times, with beautiful costumes.",
+      "zh": "🕺有一个学生，🕺他非常喜欢中国的古装剧，🕺就是那种古代的、🕺穿漂亮衣服的电视剧。",
+      "pinyin": "🕺 yǒu yí gè xué shēng，🕺 tā fēi cháng xǐ huan zhōng guó de gǔ zhuāng jù，🕺 jiù shì nà zhǒng gǔ dài de、🕺 chuān piào liang yī fu de diàn shì jù。",
+      "vi": "Có một học sinh rất thích phim cổ trang Trung Quốc, kiểu phim thời cổ đại, mặc quần áo đẹp."
+    },
+    {
+      "start": 291.6,
+      "end": 293.4,
+      "en": "He has watched dozens of them.",
+      "zh": "🕺他看了几十部。",
+      "pinyin": "🕺 tā kàn le jǐ shí bù。",
+      "vi": "Cậu ấy đã xem mấy chục bộ."
+    },
+    {
+      "start": 293.53,
+      "end": 296.3,
+      "en": "Then his Chinese must be really good, right?",
+      "zh": "💃那他的中文一定很棒吧？",
+      "pinyin": "💃 nà tā de zhōng wén yí dìng hěn bàng ba？",
+      "vi": "Vậy tiếng Trung của anh ấy chắc giỏi lắm nhỉ?"
+    },
+    {
+      "start": 296.5,
+      "end": 298.33,
+      "en": "That's exactly where the problem lies.",
+      "zh": "🕺问题就在这里。",
+      "pinyin": "🕺 wèn tí jiù zài zhè lǐ。",
+      "vi": "Vấn đề chính là ở đây."
+    },
+    {
+      "start": 298.33,
+      "end": 302.6,
+      "en": "One day he traveled to China and wanted to buy a cup of coffee.",
+      "zh": "🕺有一天他来中国旅游，🕺他想去买一杯咖啡。",
+      "pinyin": "🕺 yǒu yì tiān tā lái zhōng guó lǚ yóu，🕺 tā xiǎng qù mǎi yì bēi kā fēi。",
+      "vi": "Một ngày nọ, anh ấy đến Trung Quốc du lịch và muốn đi mua một ly cà phê."
+    },
+    {
+      "start": 302.93,
+      "end": 308.27,
+      "en": "But he found that he couldn't understand what the waiter said, and he couldn't get the words out either.",
+      "zh": "🕺但是，他发现他听不懂服务员说的话，🕺他也说不出来。",
+      "pinyin": "🕺 dàn shì， tā fā xiàn tā tīng bù dǒng fú wù yuán shuō de huà，🕺 tā yě shuō bù chū lái。",
+      "vi": "Nhưng anh ấy phát hiện mình không hiểu nhân viên phục vụ nói gì, và cũng không nói ra được."
+    },
+    {
+      "start": 308.33,
+      "end": 310.17,
+      "en": "Why did that happen?",
+      "zh": "💃为什么会这样呢？",
+      "pinyin": "💃 wèi shén me huì zhè yàng ne？",
+      "vi": "Tại sao lại như vậy?"
+    },
+    {
+      "start": 310.27,
+      "end": 317.63,
+      "en": "Because the words he learned from TV dramas were all terms like “Emperor,” “Your Majesty,” and “General.”",
+      "zh": "🕺因为他在电视剧里学到的词，都是，🕺“皇上”、“陛下”、🕺“将军”这些词。",
+      "pinyin": "🕺 yīn wèi tā zài diàn shì jù lǐ xué dào de cí， dōu shì，🕺“ huáng shang ”、“ bì xià ”、🕺“ jiāng jūn ” zhè xiē cí。",
+      "vi": "Bởi vì những từ anh ấy học được trong phim truyền hình đều là những từ như “hoàng thượng”, “bệ hạ”, “tướng quân”."
+    },
+    {
+      "start": 317.93,
+      "end": 324.8,
+      "en": "In modern life, if you go to buy coffee and call the waiter “General,” that would be very strange!",
+      "zh": "🕺在现代生活中，🕺如果你去买咖啡，🕺你叫服务员“将军”，🕺那会非常奇怪！",
+      "pinyin": "🕺 zài xiàn dài shēng huó zhōng，🕺 rú guǒ nǐ qù mǎi kā fēi，🕺 nǐ jiào fú wù yuán “ jiāng jūn ”，🕺 nà huì fēi cháng qí guài！",
+      "vi": "Trong cuộc sống hiện đại, nếu bạn đi mua cà phê mà gọi nhân viên phục vụ là “tướng quân” thì sẽ rất kỳ lạ!"
+    },
+    {
+      "start": 324.9,
+      "end": 329,
+      "en": "Haha, I think that waiter would definitely be startled.",
+      "zh": "💃哈哈，💃我想那个服务员一定会吓一跳。",
+      "pinyin": "💃 hā hā，💃 wǒ xiǎng nà ge fú wù yuán yí dìng huì xià yí tiào。",
+      "vi": "Haha, tôi nghĩ nhân viên phục vụ đó chắc chắn sẽ giật mình."
+    },
+    {
+      "start": 329.33,
+      "end": 331.63,
+      "en": "This is a big problem.",
+      "zh": "💃这是一个很大的问题。",
+      "pinyin": "💃 zhè shì yí gè hěn dà de wèn tí。",
+      "vi": "Đây là một vấn đề rất lớn."
+    },
+    {
+      "start": 331.7,
+      "end": 338.1,
+      "en": "Many students choose TV dramas that are too difficult or unsuitable for beginners. Right.",
+      "zh": "💃很多学生选择的电视剧太难了，💃或者不适合初学者。🕺对。",
+      "pinyin": "💃 hěn duō xué shēng xuǎn zé de diàn shì jù tài nán le，💃 huò zhě bú shì hé chū xué zhě。🕺 duì。",
+      "vi": "Nhiều học sinh chọn những bộ phim truyền hình quá khó, hoặc không phù hợp với người mới bắt đầu. Đúng vậy."
+    },
+    {
+      "start": 338.2,
+      "end": 347.2,
+      "en": "Although costume dramas are enjoyable, the language in them is too far removed from our daily lives. Moreover, there is an even more serious problem,",
+      "zh": "🕺古装剧虽然好看，🕺但是里面的语言离我们的生活太远，🕺了。而且，还有一个更严重的问题，",
+      "pinyin": "🕺 gǔ zhuāng jù suī rán hǎo kàn，🕺 dàn shì lǐ miàn de yǔ yán lí wǒ men de shēng huó tài yuǎn，🕺 liǎo。 ér qiě， hái yǒu yí gè gèng yán zhòng de wèn tí，",
+      "vi": "Phim cổ trang tuy hay, nhưng ngôn ngữ trong đó xa rời cuộc sống của chúng ta quá. Hơn nữa, còn có một vấn đề nghiêm trọng hơn,"
+    },
+    {
+      "start": 347.2,
+      "end": 352.6,
+      "en": "That is “subtitles.” Ah, subtitles. I've noticed that too.",
+      "zh": "🕺那就是“字幕”。💃啊，💃字幕。我也发现了。",
+      "pinyin": "🕺 nà jiù shì “ zì mù ”。💃 a，💃 zì mù。 wǒ yě fā xiàn le。",
+      "vi": "Đó chính là “phụ đề”. À, phụ đề. Tôi cũng phát hiện ra rồi."
+    },
+    {
+      "start": 352.6,
+      "end": 358.5,
+      "en": "When we watch foreign-language movies, if there are subtitles in our native language at the bottom of the screen,",
+      "zh": "💃当我们在看外语电影时，💃如果屏幕下面有我们母语的字幕，",
+      "pinyin": "💃 dāng wǒ men zài kàn wài yǔ diàn yǐng shí，💃 rú guǒ píng mù xià miàn yǒu wǒ men mǔ yǔ de zì mù，",
+      "vi": "Khi chúng ta xem phim nước ngoài, nếu bên dưới màn hình có phụ đề bằng tiếng mẹ đẻ của mình,"
+    },
+    {
+      "start": 358.5,
+      "end": 360.67,
+      "en": "What will our eyes do?",
+      "zh": "💃我们的眼睛会做什么？",
+      "pinyin": "💃 wǒ men de yǎn jīng huì zuò shén me？",
+      "vi": "Mắt chúng ta sẽ làm gì?"
+    },
+    {
+      "start": 360.73,
+      "end": 364,
+      "en": "Our eyes will keep staring at the subtitles.",
+      "zh": "🕺我们的眼睛会一直盯着字幕看。",
+      "pinyin": "🕺 wǒ men de yǎn jīng huì yì zhí dīng zhe zì mù kàn。",
+      "vi": "Mắt chúng ta sẽ cứ dán chặt vào phụ đề."
+    },
+    {
+      "start": 364.2,
+      "end": 369.7,
+      "en": "We think we're listening to Chinese, but in fact we're reading our native language.",
+      "zh": "🕺我们以为自己在听中文，🕺其实我们是在读自己的母语。",
+      "pinyin": "🕺 wǒ men yǐ wéi zì jǐ zài tīng zhōng wén，🕺 qí shí wǒ men shì zài dú zì jǐ de mǔ yǔ。",
+      "vi": "Chúng ta tưởng mình đang nghe tiếng Trung, nhưng thực ra chúng ta đang đọc tiếng mẹ đẻ của mình."
+    },
+    {
+      "start": 369.77,
+      "end": 373.03,
+      "en": "Exactly! The brain is very lazy.",
+      "zh": "💃没错！大脑是很懒惰的。",
+      "pinyin": "💃 méi cuò！ dà nǎo shì hěn lǎn duò de。",
+      "vi": "Đúng vậy! Bộ não rất lười biếng."
+    },
+    {
+      "start": 373.1,
+      "end": 379.23,
+      "en": "If there are easy-to-understand subtitles, it won't make an effort to listen to that hard-to-understand Chinese audio.",
+      "zh": "💃如果有容易理解的字幕，💃它就不会去努力，💃听那个难懂的中文声音。",
+      "pinyin": "💃 rú guǒ yǒu róng yì lǐ jiě de zì mù，💃 tā jiù bú huì qù nǔ lì，💃 tīng nà ge nán dǒng de zhōng wén shēng yīn。",
+      "vi": "Nếu có phụ đề dễ hiểu, nó sẽ không chịu cố gắng lắng nghe âm thanh tiếng Trung khó hiểu đó."
+    },
+    {
+      "start": 379.7,
+      "end": 386.77,
+      "en": "So, after you finish watching a movie, you feel you understood it, but in fact you only understood the story by reading,",
+      "zh": "💃所以，你看完了一部电影，💃你觉得你懂了，💃其实你只是读懂了故事，",
+      "pinyin": "💃 suǒ yǐ， nǐ kàn wán le yí bù diàn yǐng，💃 nǐ jué de nǐ dǒng le，💃 qí shí nǐ zhǐ shì dú dǒng le gù shì，",
+      "vi": "Vì vậy, bạn xem xong một bộ phim, bạn cảm thấy mình đã hiểu, nhưng thực ra bạn chỉ đọc hiểu câu chuyện,"
+    },
+    {
+      "start": 386.77,
+      "end": 389.4,
+      "en": "Your listening skills weren't actually trained.",
+      "zh": "💃你的听力并没有练习到。",
+      "pinyin": "💃 nǐ de tīng lì bìng méi yǒu liàn xí dào。",
+      "vi": "Kỹ năng nghe của bạn chưa hề được luyện tập."
+    },
+    {
+      "start": 389.67,
+      "end": 391.8,
+      "en": "There's also the issue of speaking speed.",
+      "zh": "🕺还有语速的问题。",
+      "pinyin": "🕺 hái yǒu yǔ sù de wèn tí。",
+      "vi": "Còn có vấn đề về tốc độ nói nữa."
+    },
+    {
+      "start": 391.93,
+      "end": 395.07,
+      "en": "People in movies usually speak very fast.",
+      "zh": "🕺电影里的人说话通常非常快。",
+      "pinyin": "🕺 diàn yǐng lǐ de rén shuō huà tōng cháng fēi cháng kuài。",
+      "vi": "Người trong phim thường nói rất nhanh."
+    },
+    {
+      "start": 395.2,
+      "end": 402.03,
+      "en": "For students at HSK 1 to HSK 4 level, this speed is too fast.",
+      "zh": "🕺对于 到 水平的同学来说，🕺这种速度太快了。",
+      "pinyin": "🕺 duì yú dào shuǐ píng de tóng xué lái shuō，🕺 zhè zhǒng sù dù tài kuài le。",
+      "vi": "Đối với các bạn ở trình độ HSK 1 đến HSK 4, tốc độ này quá nhanh."
+    },
+    {
+      "start": 402.1,
+      "end": 406.1,
+      "en": "If it's too fast, you can't clearly hear what words they're saying.",
+      "zh": "💃如果太快，💃你就听不清他们在说什么单词。",
+      "pinyin": "💃 rú guǒ tài kuài，💃 nǐ jiù tīng bù qīng tā men zài shuō shén me dān cí。",
+      "vi": "Nếu quá nhanh, bạn sẽ không nghe rõ họ đang nói từ gì."
+    },
+    {
+      "start": 406.37,
+      "end": 409.47,
+      "en": "You can only hear a string of sounds flying past.",
+      "zh": "💃你只能听到一串声，💃音飞过去。",
+      "pinyin": "💃 nǐ zhǐ néng tīng dào yí chuàn shēng，💃 yīn fēi guò qù。",
+      "vi": "Bạn chỉ có thể nghe thấy một chuỗi âm thanh bay qua."
+    },
+    {
+      "start": 409.77,
+      "end": 413.07,
+      "en": "If you can't hear clearly, you can't learn.",
+      "zh": "💃如果你听不清，💃你就没法学习。",
+      "pinyin": "💃 rú guǒ nǐ tīng bù qīng，💃 nǐ jiù méi fǎ xué xí。",
+      "vi": "Nếu bạn không nghe rõ, bạn sẽ không thể học được."
+    },
+    {
+      "start": 413.27,
+      "end": 419.43,
+      "en": "Yes. It's like wanting to learn to swim but jumping straight into the ocean.",
+      "zh": "🕺是的。这就好像你想学游泳，🕺但是直接跳进了大海里。",
+      "pinyin": "🕺 shì de。 zhè jiù hǎo xiàng nǐ xiǎng xué yóu yǒng，🕺 dàn shì zhí jiē tiào jìn le dà hǎi lǐ。",
+      "vi": "Đúng vậy. Điều này giống như bạn muốn học bơi nhưng lại nhảy thẳng xuống biển lớn."
+    },
+    {
+      "start": 419.47,
+      "end": 424.7,
+      "en": "The waves are too big; not only will you fail to learn to swim, you might even drown.",
+      "zh": "🕺浪太大了，🕺你不仅学不会游泳，🕺还可能会被淹没。",
+      "pinyin": "🕺 làng tài dà le，🕺 nǐ bù jǐn xué bú huì yóu yǒng，🕺 hái kě néng huì bèi yān mò。",
+      "vi": "Sóng quá lớn, bạn không những không học được bơi mà còn có thể bị nhấn chìm."
+    },
+    {
+      "start": 425.13,
+      "end": 431.17,
+      "en": "Li Ming, now that you put it that way, I feel learning Chinese by watching movies seems really hard.",
+      "zh": "💃李明，你这么一说，💃我觉得看电影学中文好像很难啊。",
+      "pinyin": "💃 lǐ míng， nǐ zhè me yì shuō，💃 wǒ jué de kàn diàn yǐng xué zhōng wén hǎo xiàng hěn nán a。",
+      "vi": "Lý Minh, nghe bạn nói vậy, tôi thấy việc học tiếng Trung qua xem phim hình như rất khó."
+    },
+    {
+      "start": 431.27,
+      "end": 433.57,
+      "en": "Does that mean we just shouldn't watch anymore?",
+      "zh": "💃难道我们就不看了吗？",
+      "pinyin": "💃 nán dào wǒ men jiù bú kàn le ma？",
+      "vi": "Vậy chẳng lẽ chúng ta không xem nữa sao?"
+    },
+    {
+      "start": 433.77,
+      "end": 435.2,
+      "en": "Of course not.",
+      "zh": "🕺当然不是。",
+      "pinyin": "🕺 dāng rán bú shì。",
+      "vi": "Tất nhiên là không."
+    },
+    {
+      "start": 435.3,
+      "end": 442.3,
+      "en": "Watching movies is still a very good method, but we need to change the way we \"watch.\"",
+      "zh": "🕺看电影依然是一个非常好的方法，🕺但是我们需要改变“看”的方式。",
+      "pinyin": "🕺 kàn diàn yǐng yī rán shì yí gè fēi cháng hǎo de fāng fǎ，🕺 dàn shì wǒ men xū yào gǎi biàn “ kàn ” de fāng shì。",
+      "vi": "Xem phim vẫn là một phương pháp rất tốt, nhưng chúng ta cần thay đổi cách \"xem\"."
+    },
+    {
+      "start": 442.5,
+      "end": 447.2,
+      "en": "We can't just watch for entertainment; we need to watch for understanding.",
+      "zh": "🕺我们不能只是“看热闹”，🕺我们需要“看门道”。",
+      "pinyin": "🕺 wǒ men bù néng zhǐ shì “ kàn rè nào ”，🕺 wǒ men xū yào “ kān mén dào ”。",
+      "vi": "Chúng ta không thể chỉ \"xem cho vui\", mà cần \"xem cho hiểu bản chất\"."
+    },
+    {
+      "start": 447.3,
+      "end": 449.3,
+      "en": "What does \"看门道\" mean?",
+      "zh": "💃“看门道”是什么意思？",
+      "pinyin": "💃“ kān mén dào ” shì shén me yì sī？",
+      "vi": "“看门道” có nghĩa là gì?"
+    },
+    {
+      "start": 449.47,
+      "end": 451.87,
+      "en": "It means watching with a method.",
+      "zh": "🕺就是要有方法地看。",
+      "pinyin": "🕺 jiù shì yào yǒu fāng fǎ dì kàn。",
+      "vi": "Tức là phải xem có phương pháp."
+    },
+    {
+      "start": 452,
+      "end": 456.83,
+      "en": "You can't just lie on the sofa, eat popcorn, and read subtitles.",
+      "zh": "🕺不能只是躺在沙发上，吃着爆米花，🕺看着字幕。",
+      "pinyin": "🕺 bù néng zhǐ shì tǎng zài shā fā shàng， chī zhe bào mǐ huā，🕺 kàn zhe zì mù。",
+      "vi": "Không thể chỉ nằm trên sofa, ăn bỏng ngô và nhìn phụ đề."
+    },
+    {
+      "start": 456.97,
+      "end": 458.87,
+      "en": "We need to take action.",
+      "zh": "🕺我们需要动起来。",
+      "pinyin": "🕺 wǒ men xū yào dòng qǐ lái。",
+      "vi": "Chúng ta cần hành động."
+    },
+    {
+      "start": 459.1,
+      "end": 468.2,
+      "en": "Okay, then let's get to the most important part: how exactly should we watch movies to truly improve our Chinese?",
+      "zh": "💃好的，那我们就进入最重要的部分：💃到底应该怎么看电影，💃才能真正提高中文水平呢？",
+      "pinyin": "💃 hǎo de， nà wǒ men jiù jìn rù zuì zhòng yào de bù fēn：💃 dào dǐ yīng gāi zěn me kàn diàn yǐng，💃 cái néng zhēn zhèng tí gāo zhōng wén shuǐ píng ne？",
+      "vi": "Được, vậy chúng ta hãy đi vào phần quan trọng nhất: rốt cuộc nên xem phim như thế nào thì mới thực sự nâng cao trình độ tiếng Trung?"
+    },
+    {
+      "start": 468.27,
+      "end": 470.57,
+      "en": "Li Ming, do you have any good suggestions?",
+      "zh": "💃李明，你有什么好建议？",
+      "pinyin": "💃 lǐ míng， nǐ yǒu shén me hǎo jiàn yì？",
+      "vi": "Lý Minh, bạn có gợi ý gì hay không?"
+    },
+    {
+      "start": 470.77,
+      "end": 474.13,
+      "en": "My first suggestion is: choose the right film.",
+      "zh": "🕺我的第一个建议是：选对片子。",
+      "pinyin": "🕺 wǒ de dì yī gè jiàn yì shì： xuǎn duì piān zi。",
+      "vi": "Gợi ý đầu tiên của tôi là: chọn đúng phim."
+    },
+    {
+      "start": 474.13,
+      "end": 475.7,
+      "en": "This is very important.",
+      "zh": "🕺这非常重要。",
+      "pinyin": "🕺 zhè fēi cháng zhòng yào。",
+      "vi": "Điều này rất quan trọng."
+    },
+    {
+      "start": 475.87,
+      "end": 477.6,
+      "en": "Choose the right show.",
+      "zh": "💃选对片子。",
+      "pinyin": "💃 xuǎn duì piān zi。",
+      "vi": "Chọn đúng phim."
+    },
+    {
+      "start": 477.9,
+      "end": 480.97,
+      "en": "You mean we shouldn't choose costume dramas, right?",
+      "zh": "💃你是说，不要选古装剧，对吗？",
+      "pinyin": "💃 nǐ shì shuō， bú yào xuǎn gǔ zhuāng jù， duì ma？",
+      "vi": "Ý bạn là đừng chọn phim cổ trang, đúng không?"
+    },
+    {
+      "start": 481.1,
+      "end": 488.37,
+      "en": "Right. For beginner and intermediate learners, I strongly recommend watching \"modern life dramas.\"",
+      "zh": "🕺对。对于初级和中级水平的同学，🕺我强烈建议看“现代生活剧”",
+      "pinyin": "🕺 duì。 duì yú chū jí hé zhōng jí shuǐ píng de tóng xué，🕺 wǒ qiáng liè jiàn yì kàn “ xiàn dài shēng huó jù ”",
+      "vi": "Đúng vậy. Với các bạn trình độ sơ cấp và trung cấp, tôi rất khuyến khích xem \"phim về đời sống hiện đại\"."
+    },
+    {
+      "start": 488.4,
+      "end": 490.1,
+      "en": "Or \"family dramas.\"",
+      "zh": "🕺或者“家庭剧”。",
+      "pinyin": "🕺 huò zhě “ jiā tíng jù ”。",
+      "vi": "Hoặc \"phim gia đình\"."
+    },
+    {
+      "start": 490.17,
+      "end": 491.37,
+      "en": "Why is that?",
+      "zh": "💃为什么呢？",
+      "pinyin": "💃 wèi shén me ne？",
+      "vi": "Tại sao vậy?"
+    },
+    {
+      "start": 491.4,
+      "end": 495.67,
+      "en": "Because the speech in modern dramas is exactly what we say every day.",
+      "zh": "🕺因为现代剧里说的话，🕺就是我们每天说的话。",
+      "pinyin": "🕺 yīn wèi xiàn dài jù lǐ shuō de huà，🕺 jiù shì wǒ men měi tiān shuō de huà。",
+      "vi": "Vì lời thoại trong phim hiện đại chính là những gì chúng ta nói hằng ngày."
+    },
+    {
+      "start": 495.73,
+      "end": 501.3,
+      "en": "For example, \"Have you eaten?\", \"How was work today?\", and \"Where are you going this weekend?\"",
+      "zh": "🕺比如“吃饭了吗？”、🕺“你今天工作怎么样？”、🕺“周末去哪里玩？”。",
+      "pinyin": "🕺 bǐ rú “ chī fàn le ma？”、🕺“ nǐ jīn tiān gōng zuò zěn me yàng？”、🕺“ zhōu mò qù nǎ lǐ wán？”。",
+      "vi": "Ví dụ như \"Ăn cơm chưa?\", \"Hôm nay công việc của bạn thế nào?\", \"Cuối tuần đi đâu chơi?\"."
+    },
+    {
+      "start": 501.4,
+      "end": 505.07,
+      "en": "You can use these sentences right away in daily life.",
+      "zh": "🕺这些句子你在生活中马上就能用到。",
+      "pinyin": "🕺 zhè xiē jù zi nǐ zài shēng huó zhōng mǎ shàng jiù néng yòng dào。",
+      "vi": "Những câu này bạn có thể dùng ngay trong cuộc sống."
+    },
+    {
+      "start": 505.1,
+      "end": 506.37,
+      "en": "I understand.",
+      "zh": "💃我明白了。",
+      "pinyin": "💃 wǒ míng bái le。",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 506.37,
+      "end": 508.9,
+      "en": "We should choose ones that are close to real life.",
+      "zh": "💃要选那些贴近生活的。",
+      "pinyin": "💃 yào xuǎn nà xiē tiē jìn shēng huó de。",
+      "vi": "Nên chọn những bộ gần gũi với đời sống."
+    },
+    {
+      "start": 509.27,
+      "end": 513.63,
+      "en": "Also, I think animated shows are a good choice too.",
+      "zh": "💃还有，💃我觉得动画片也是一个不错的选择。",
+      "pinyin": "💃 hái yǒu，💃 wǒ jué de dòng huà piàn yě shì yí gè bú cuò de xuǎn zé。",
+      "vi": "Ngoài ra, tôi nghĩ phim hoạt hình cũng là một lựa chọn tốt."
+    },
+    {
+      "start": 513.73,
+      "end": 515.57,
+      "en": "Great suggestion!",
+      "zh": "🕺非常棒的建议！",
+      "pinyin": "🕺 fēi cháng bàng de jiàn yì！",
+      "vi": "Một gợi ý rất tuyệt!"
+    },
+    {
+      "start": 515.6,
+      "end": 522.57,
+      "en": "The voice acting in animated shows is usually clear, the speaking speed is relatively slow, and the vocabulary is fairly simple.",
+      "zh": "🕺动画片的配音通常很清晰，🕺语速比较慢，🕺而且词汇比较简单。",
+      "pinyin": "🕺 dòng huà piàn de pèi yīn tōng cháng hěn qīng xī，🕺 yǔ sù bǐ jiào màn，🕺 ér qiě cí huì bǐ jiào jiǎn dān。",
+      "vi": "Phần lồng tiếng trong phim hoạt hình thường rất rõ, tốc độ nói khá chậm, và từ vựng cũng khá đơn giản."
+    },
+    {
+      "start": 522.87,
+      "end": 529.43,
+      "en": "For example, classic animated shows like \"Big Head Son and Small Head Dad\" are very suitable for beginners.",
+      "zh": "🕺比如像《大头儿，🕺子和小头爸爸》这样的经典动画片，🕺非常适合初学者。",
+      "pinyin": "🕺 bǐ rú xiàng 《 dà tóu er，🕺 zǐ hé xiǎo tóu bà ba 》 zhè yàng de jīng diǎn dòng huà piàn，🕺 fēi cháng shì hé chū xué zhě。",
+      "vi": "Ví dụ như phim hoạt hình kinh điển \"Cậu con trai đầu to và ông bố đầu nhỏ\" rất phù hợp cho người mới bắt đầu."
+    },
+    {
+      "start": 529.67,
+      "end": 534.23,
+      "en": "Okay, after choosing the show, how should we watch it?",
+      "zh": "💃好了，选好了片子之后，💃我们该怎么看呢？",
+      "pinyin": "💃 hǎo le， xuǎn hǎo le piān zi zhī hòu，💃 wǒ men gāi zěn me kàn ne？",
+      "vi": "Được rồi, sau khi chọn xong phim, chúng ta nên xem như thế nào?"
+    },
+    {
+      "start": 534.33,
+      "end": 537.2,
+      "en": "I suggest using the \"three-step method.\"",
+      "zh": "🕺我建议大家用“三步法”。",
+      "pinyin": "🕺 wǒ jiàn yì dà jiā yòng “ sān bù fǎ ”。",
+      "vi": "Tôi đề nghị mọi người dùng \"phương pháp ba bước\"."
+    },
+    {
+      "start": 537.27,
+      "end": 539.9,
+      "en": "Please introduce the \"three-step method\" to us.",
+      "zh": "💃请给我们介绍一下“三步法”。",
+      "pinyin": "💃 qǐng gěi wǒ men jiè shào yí xià “ sān bù fǎ ”。",
+      "vi": "Hãy giới thiệu cho chúng tôi về \"phương pháp ba bước\"."
+    },
+    {
+      "start": 540.1,
+      "end": 543.47,
+      "en": "Step one: watch it once with Chinese subtitles on.",
+      "zh": "🕺第一步：开着中文字幕看一遍。",
+      "pinyin": "🕺 dì yī bù： kāi zhe zhōng wén zì mù kàn yí biàn。",
+      "vi": "Bước một: xem một lần với phụ đề tiếng Trung."
+    },
+    {
+      "start": 543.6,
+      "end": 546.07,
+      "en": "This pass is for understanding the story.",
+      "zh": "🕺这一遍是为了理解故事。",
+      "pinyin": "🕺 zhè yí biàn shì wèi le lǐ jiě gù shì。",
+      "vi": "Lần này là để hiểu câu chuyện."
+    },
+    {
+      "start": 546.13,
+      "end": 549.8,
+      "en": "If you don't know what the story is about, you'll feel very anxious.",
+      "zh": "🕺如果你不知道故事在说什，🕺么，你会很焦虑。",
+      "pinyin": "🕺 rú guǒ nǐ bù zhī dào gù shì zài shuō shén，🕺 me， nǐ huì hěn jiāo lǜ。",
+      "vi": "Nếu bạn không biết câu chuyện đang nói về điều gì, bạn sẽ rất lo lắng."
+    },
+    {
+      "start": 549.9,
+      "end": 554.07,
+      "en": "So for the first viewing, watch relaxedly and understand the plot.",
+      "zh": "🕺所以，第一遍，轻松地看，🕺弄懂剧情。",
+      "pinyin": "🕺 suǒ yǐ， dì yī biàn， qīng sōng dì kàn，🕺 nòng dǒng jù qíng。",
+      "vi": "Vì vậy, lần đầu tiên, hãy xem một cách thoải mái để hiểu rõ nội dung câu chuyện."
+    },
+    {
+      "start": 554.2,
+      "end": 555.57,
+      "en": "This is very simple.",
+      "zh": "💃这很简单。",
+      "pinyin": "💃 zhè hěn jiǎn dān。",
+      "vi": "Điều này rất đơn giản."
+    },
+    {
+      "start": 555.6,
+      "end": 557.23,
+      "en": "Then what's the second step?",
+      "zh": "💃那第二步呢？",
+      "pinyin": "💃 nà dì èr bù ne？",
+      "vi": "Vậy bước thứ hai là gì?"
+    },
+    {
+      "start": 557.33,
+      "end": 559.27,
+      "en": "The second step is the key.",
+      "zh": "🕺第二步是关键。",
+      "pinyin": "🕺 dì èr bù shì guān jiàn。",
+      "vi": "Bước thứ hai là mấu chốt."
+    },
+    {
+      "start": 559.6,
+      "end": 565.03,
+      "en": "Turn off the subtitles, or cover them, and watch the selected clip again.",
+      "zh": "🕺关掉字幕，或者挡住字幕，🕺再看一遍选好的片段。",
+      "pinyin": "🕺 guān diào zì mù， huò zhě dǎng zhù zì mù，🕺 zài kàn yí biàn xuǎn hǎo de piàn duàn。",
+      "vi": "Tắt phụ đề, hoặc che phụ đề đi, rồi xem lại đoạn clip đã chọn."
+    },
+    {
+      "start": 565.13,
+      "end": 570.9,
+      "en": "You don't need to watch the whole movie; just pick an exciting 5 or 10 minutes.",
+      "zh": "🕺不需要看整部电影，🕺只需要选精彩的分钟或者分钟。",
+      "pinyin": "🕺 bù xū yào kàn zhěng bù diàn yǐng，🕺 zhī xū yào xuǎn jīng cǎi de fēn zhōng huò zhě fēn zhōng。",
+      "vi": "Không cần xem cả bộ phim, chỉ cần chọn 5 hoặc 10 phút thật hay."
+    },
+    {
+      "start": 571,
+      "end": 574.03,
+      "en": "This step is for practicing listening, right?",
+      "zh": "💃这一步是为了练习听力，对吗？",
+      "pinyin": "💃 zhè yí bù shì wèi le liàn xí tīng lì， duì ma？",
+      "vi": "Bước này là để luyện nghe, đúng không?"
+    },
+    {
+      "start": 574.3,
+      "end": 578.4,
+      "en": "Right. At this point, you need to try hard to listen to every word.",
+      "zh": "🕺对。这时候你要努力去听每一个字。",
+      "pinyin": "🕺 duì。 zhè shí hòu nǐ yào nǔ lì qù tīng měi yí gè zì。",
+      "vi": "Đúng vậy. Lúc này bạn phải cố gắng nghe từng chữ một."
+    },
+    {
+      "start": 578.47,
+      "end": 583.43,
+      "en": "If you don't understand, stop, rewind, and listen again.",
+      "zh": "🕺如果你听不懂，🕺就停下来，倒回去，再听一遍。",
+      "pinyin": "🕺 rú guǒ nǐ tīng bù dǒng，🕺 jiù tíng xià lái， dǎo huí qù， zài tīng yí biàn。",
+      "vi": "Nếu bạn không hiểu, hãy dừng lại, tua lại và nghe lại một lần nữa."
+    },
+    {
+      "start": 583.5,
+      "end": 585.9,
+      "en": "Until you hear that pronunciation clearly.",
+      "zh": "🕺直到你听清了那个发音。",
+      "pinyin": "🕺 zhí dào nǐ tīng qīng le nà ge fā yīn。",
+      "vi": "Cho đến khi bạn nghe rõ cách phát âm đó."
+    },
+    {
+      "start": 586.07,
+      "end": 589.83,
+      "en": "This sounds a bit tiring, but it's definitely very useful.",
+      "zh": "💃这听起来有点累，💃但是一定很有用。",
+      "pinyin": "💃 zhè tīng qǐ lái yǒu diǎn lèi，💃 dàn shì yí dìng hěn yǒu yòng。",
+      "vi": "Nghe có vẻ hơi mệt, nhưng chắc chắn rất hữu ích."
+    },
+    {
+      "start": 590.1,
+      "end": 591.63,
+      "en": "Then what's the third step?",
+      "zh": "💃那第三步呢？",
+      "pinyin": "💃 nà dì sān bù ne？",
+      "vi": "Vậy bước thứ ba là gì?"
+    },
+    {
+      "start": 591.77,
+      "end": 596.1,
+      "en": "The third step is \"imitation,\" which is what we call \"shadowing.\"",
+      "zh": "🕺第三步是“模仿”，🕺也就是我们说的“跟读”。",
+      "pinyin": "🕺 dì sān bù shì “ mó fǎng ”，🕺 yě jiù shì wǒ men shuō de “ gēn dú ”。",
+      "vi": "Bước thứ ba là \"bắt chước\", tức là cái chúng ta gọi là \"đọc theo\"."
+    },
+    {
+      "start": 596.3,
+      "end": 597.17,
+      "en": "\"Shadowing\"?",
+      "zh": "💃“跟读”？",
+      "pinyin": "💃“ gēn dú ”？",
+      "vi": "\"Đọc theo\" ạ?"
+    },
+    {
+      "start": 597.73,
+      "end": 603.5,
+      "en": "Yes. You listen to one sentence, then pause and repeat that sentence out loud yourself.",
+      "zh": "🕺是的。你听一句，🕺然后暂停，🕺自己大声地重复这一句。",
+      "pinyin": "🕺 shì de。 nǐ tīng yí jù，🕺 rán hòu zàn tíng，🕺 zì jǐ dà shēng dì chóng fù zhè yí jù。",
+      "vi": "Đúng vậy. Bạn nghe một câu, sau đó tạm dừng và tự mình lặp lại câu đó thật to."
+    },
+    {
+      "start": 603.57,
+      "end": 607.67,
+      "en": "You need to imitate the actor's intonation and imitate their emotion.",
+      "zh": "🕺你要模仿演员的语调、🕺模仿他的情绪。",
+      "pinyin": "🕺 nǐ yào mó fǎng yǎn yuán de yǔ diào、🕺 mó fǎng tā de qíng xù。",
+      "vi": "Bạn phải bắt chước ngữ điệu của diễn viên, bắt chước cảm xúc của họ."
+    },
+    {
+      "start": 607.8,
+      "end": 615.37,
+      "en": "For example, the actor says, \"You're really awesome!\" (in a happy tone), and I also have to say happily:",
+      "zh": "💃比如演员说：“你真的太棒了！”，💃（高兴的语气），💃我也要很高兴地说：",
+      "pinyin": "💃 bǐ rú yǎn yuán shuō：“ nǐ zhēn de tài bàng le！”，💃（ gāo xìng de yǔ qì ），💃 wǒ yě yào hěn gāo xìng dì shuō：",
+      "vi": "Ví dụ diễn viên nói: \"Bạn thật sự quá giỏi!\", (giọng vui vẻ), tôi cũng phải nói thật vui vẻ:"
+    },
+    {
+      "start": 615.57,
+      "end": 619.83,
+      "en": "\"You're really awesome!\" Exactly! Xiaoyu imitates it very well.",
+      "zh": "💃“你真的太棒了！”，🕺没错！小雨模仿得很像。",
+      "pinyin": "💃“ nǐ zhēn de tài bàng le！”，🕺 méi cuò！ xiǎo yǔ mó fǎng dé hěn xiàng。",
+      "vi": "\"Bạn thật sự quá giỏi!\", đúng vậy! Tiểu Vũ bắt chước rất giống."
+    },
+    {
+      "start": 620.07,
+      "end": 627.37,
+      "en": "When you open your mouth to imitate, you're not only practicing pronunciation but also practicing your mouth's muscle memory.",
+      "zh": "🕺当你开口模仿的时候，🕺你不仅练习了发音，🕺还练习了嘴巴的肌肉记忆。",
+      "pinyin": "🕺 dāng nǐ kāi kǒu mó fǎng de shí hòu，🕺 nǐ bù jǐn liàn xí le fā yīn，🕺 hái liàn xí le zuǐ ba de jī ròu jì yì。",
+      "vi": "Khi bạn mở miệng bắt chước, bạn không chỉ luyện phát âm mà còn luyện trí nhớ cơ của miệng."
+    },
+    {
+      "start": 627.5,
+      "end": 632.77,
+      "en": "That way, the next time you want to say this sentence, it will come out naturally.",
+      "zh": "🕺这样下次你想说这句话的时候，🕺它就会自然地流出来。",
+      "pinyin": "🕺 zhè yàng xià cì nǐ xiǎng shuō zhè jù huà de shí hòu，🕺 tā jiù huì zì rán dì liú chū lái。",
+      "vi": "Như vậy, lần sau khi bạn muốn nói câu này, nó sẽ tự nhiên bật ra."
+    },
+    {
+      "start": 632.8,
+      "end": 635.03,
+      "en": "This method is really good.",
+      "zh": "💃这个方法真的很好。",
+      "pinyin": "💃 zhè ge fāng fǎ zhēn de hěn hǎo。",
+      "vi": "Cách này thật sự rất tốt."
+    },
+    {
+      "start": 635.3,
+      "end": 638.57,
+      "en": "But, Li Ming, this takes a lot of time, doesn't it?",
+      "zh": "💃但是，李明，这需要很多时间吧？",
+      "pinyin": "💃 dàn shì， lǐ míng， zhè xū yào hěn duō shí jiān ba？",
+      "vi": "Nhưng mà, Lý Minh, cách này cần nhiều thời gian lắm đúng không?"
+    },
+    {
+      "start": 638.67,
+      "end": 642.57,
+      "en": "Yes, it takes more time than just watching for the plot.",
+      "zh": "🕺是的，这比只看剧情要花时间。",
+      "pinyin": "🕺 shì de， zhè bǐ zhī kàn jù qíng yào huā shí jiān。",
+      "vi": "Đúng vậy, việc này tốn thời gian hơn chỉ xem cốt truyện."
+    },
+    {
+      "start": 642.67,
+      "end": 649.2,
+      "en": "But if you only watch for the plot, even after watching 100 movies, you may not learn more than a few Chinese sentences.",
+      "zh": "🕺但是，如果你只看剧情，🕺你看部电影，🕺可能也学不会几句中文。",
+      "pinyin": "🕺 dàn shì， rú guǒ nǐ zhī kàn jù qíng，🕺 nǐ kàn bù diàn yǐng，🕺 kě néng yě xué bú huì jǐ jù zhōng wén。",
+      "vi": "Nhưng nếu bạn chỉ xem cốt truyện, thì dù xem 100 bộ phim, có thể bạn cũng chẳng học được mấy câu tiếng Trung."
+    },
+    {
+      "start": 649.53,
+      "end": 657.1,
+      "en": "But if you use this method, even if you seriously study just one movie, your progress will be huge.",
+      "zh": "🕺但是如果你用这个方法，🕺哪怕只认真学习了1部电影，🕺你的进步也会非常大。",
+      "pinyin": "🕺 dàn shì rú guǒ nǐ yòng zhè ge fāng fǎ，🕺 nǎ pà zhī rèn zhēn xué xí le 1 bù diàn yǐng，🕺 nǐ de jìn bù yě huì fēi cháng dà。",
+      "vi": "Nhưng nếu bạn dùng cách này, dù chỉ học kỹ một bộ phim, tiến bộ của bạn cũng sẽ rất lớn."
+    },
+    {
+      "start": 657.13,
+      "end": 658.77,
+      "en": "I completely agree.",
+      "zh": "💃我完全同意。",
+      "pinyin": "💃 wǒ wán quán tóng yì。",
+      "vi": "Tôi hoàn toàn đồng ý."
+    },
+    {
+      "start": 658.9,
+      "end": 661.23,
+      "en": "Quality is more important than quantity.",
+      "zh": "💃质量比数量更重要。",
+      "pinyin": "💃 zhì liàng bǐ shù liàng gèng zhòng yào。",
+      "vi": "Chất lượng quan trọng hơn số lượng."
+    },
+    {
+      "start": 661.4,
+      "end": 663.17,
+      "en": "There's also a little trick.",
+      "zh": "🕺还有一个小技巧。",
+      "pinyin": "🕺 hái yǒu yí gè xiǎo jì qiǎo。",
+      "vi": "Còn một mẹo nhỏ nữa."
+    },
+    {
+      "start": 663.27,
+      "end": 669.73,
+      "en": "If you see a very useful sentence, such as how to order food or how to turn someone down,",
+      "zh": "🕺如果你看到一个非常有用的句子，🕺比如怎么点菜，🕺怎么拒绝别人，",
+      "pinyin": "🕺 rú guǒ nǐ kàn dào yí gè fēi cháng yǒu yòng de jù zi，🕺 bǐ rú zěn me diǎn cài，🕺 zěn me jù jué bié rén，",
+      "vi": "Nếu bạn thấy một câu rất hữu ích, ví dụ cách gọi món, cách từ chối người khác,"
+    },
+    {
+      "start": 669.73,
+      "end": 672.23,
+      "en": "you can write it down in a notebook.",
+      "zh": "🕺你可以把它写在笔记本上。",
+      "pinyin": "🕺 nǐ kě yǐ bǎ tā xiě zài bǐ jì běn shàng。",
+      "vi": "bạn có thể viết nó vào sổ tay."
+    },
+    {
+      "start": 672.47,
+      "end": 674.87,
+      "en": "Create a \"movie vocabulary notebook.\"",
+      "zh": "💃建立一个“电影词汇本”。",
+      "pinyin": "💃 jiàn lì yí gè “ diàn yǐng cí huì běn ”。",
+      "vi": "Lập một “sổ từ vựng phim”."
+    },
+    {
+      "start": 674.93,
+      "end": 676.5,
+      "en": "That's a really good idea.",
+      "zh": "💃这主意真不错。",
+      "pinyin": "💃 zhè zhǔ yì zhēn bú cuò。",
+      "vi": "Ý tưởng này thật tuyệt."
+    },
+    {
+      "start": 676.6,
+      "end": 683.17,
+      "en": "As long as you keep doing this, you'll find that movies are no longer just entertainment; they truly become your best teacher.",
+      "zh": "🕺只要坚持这样做，🕺你会发现，🕺电影不再只是娱乐，它真的变成了你最好的老师。",
+      "pinyin": "🕺 zhǐ yào jiān chí zhè yàng zuò，🕺 nǐ huì fā xiàn，🕺 diàn yǐng bú zài zhǐ shì yú lè， tā zhēn de biàn chéng le nǐ zuì hǎo de lǎo shī。",
+      "vi": "Chỉ cần kiên trì làm như vậy, bạn sẽ thấy phim không còn chỉ là giải trí nữa, mà thật sự trở thành người thầy tốt nhất của bạn."
+    },
+    {
+      "start": 685.67,
+      "end": 690.5,
+      "en": "Time really flies; today's program is coming to an end.",
+      "zh": "💃时间过得真快，💃今天的节目又要接近，💃尾声了。",
+      "pinyin": "💃 shí jiān guò dé zhēn kuài，💃 jīn tiān de jié mù yòu yào jiē jìn，💃 wěi shēng le。",
+      "vi": "Thời gian trôi nhanh thật, chương trình hôm nay lại sắp đến hồi kết rồi."
+    },
+    {
+      "start": 690.7,
+      "end": 694.47,
+      "en": "Li Ming, let's summarize today's content.",
+      "zh": "💃李明，我们来总结一下今天的内容吧。",
+      "pinyin": "💃 lǐ míng， wǒ men lái zǒng jié yí xià jīn tiān de nèi róng ba。",
+      "vi": "Lý Minh, chúng ta cùng tóm tắt nội dung hôm nay nhé."
+    },
+    {
+      "start": 694.53,
+      "end": 695.4,
+      "en": "Okay.",
+      "zh": "🕺好的。",
+      "pinyin": "🕺 hǎo de。",
+      "vi": "Được thôi."
+    },
+    {
+      "start": 695.53,
+      "end": 700.37,
+      "en": "Today we talked about the truth behind \"learning Chinese by watching movies.\"",
+      "zh": "🕺今天我们聊了“看电影学中文”的真相。",
+      "pinyin": "🕺 jīn tiān wǒ men liáo le “ kàn diàn yǐng xué zhōng wén ” de zhēn xiàng。",
+      "vi": "Hôm nay chúng ta đã nói về sự thật của việc “học tiếng Trung qua xem phim”."
+    },
+    {
+      "start": 700.73,
+      "end": 709.17,
+      "en": "First, watching movies does have benefits: it can increase your interest, develop your language intuition, and help you understand Chinese culture.",
+      "zh": "💃首先，看电影确实有好处，💃可以提高兴趣，💃培养语感，💃还能了解中国文化。",
+      "pinyin": "💃 shǒu xiān， kàn diàn yǐng què shí yǒu hǎo chù，💃 kě yǐ tí gāo xìng qù，💃 péi yǎng yǔ gǎn，💃 hái néng liǎo jiě zhōng guó wén huà。",
+      "vi": "Đầu tiên, xem phim thật sự có lợi: có thể tăng hứng thú, rèn luyện cảm giác ngôn ngữ, và còn hiểu thêm văn hóa Trung Quốc."
+    },
+    {
+      "start": 709.27,
+      "end": 716.17,
+      "en": "But if you only watch passively or rely on subtitles in your native language, the results won't be good.",
+      "zh": "🕺但是，如果只是被动地看，🕺或者依赖母语字幕，🕺效果并不好。",
+      "pinyin": "🕺 dàn shì， rú guǒ zhǐ shì bèi dòng dì kàn，🕺 huò zhě yī lài mǔ yǔ zì mù，🕺 xiào guǒ bìng bù hǎo。",
+      "vi": "Nhưng nếu chỉ xem một cách thụ động, hoặc phụ thuộc vào phụ đề tiếng mẹ đẻ, thì hiệu quả sẽ không tốt."
+    },
+    {
+      "start": 716.3,
+      "end": 719.97,
+      "en": "In particular, don't choose period dramas that are too difficult.",
+      "zh": "🕺特别是不要选择太难的古装剧。",
+      "pinyin": "🕺 tè bié shì bú yào xuǎn zé tài nán de gǔ zhuāng jù。",
+      "vi": "Đặc biệt là đừng chọn phim cổ trang quá khó."
+    },
+    {
+      "start": 720.2,
+      "end": 725.6,
+      "en": "The right approach is to choose simple modern dramas or animated shows.",
+      "zh": "💃正确的方法是：💃选择简单的现代剧或动画片。",
+      "pinyin": "💃 zhèng què de fāng fǎ shì：💃 xuǎn zé jiǎn dān de xiàn dài jù huò dòng huà piàn。",
+      "vi": "Cách làm đúng là: chọn phim hiện đại hoặc phim hoạt hình đơn giản."
+    },
+    {
+      "start": 725.7,
+      "end": 734.13,
+      "en": "Then use the \"three-step method\": the first time, understand the plot; the second time, turn off subtitles and practice listening;",
+      "zh": "🕺然后使用“三步法”：🕺第一遍理解剧情，🕺第二遍关掉字幕练听力，",
+      "pinyin": "🕺 rán hòu shǐ yòng “ sān bù fǎ ”：🕺 dì yī biàn lǐ jiě jù qíng，🕺 dì èr biàn guān diào zì mù liàn tīng lì，",
+      "vi": "Sau đó sử dụng \"phương pháp ba bước\": lần đầu hiểu cốt truyện, lần thứ hai tắt phụ đề để luyện nghe,"
+    },
+    {
+      "start": 734.13,
+      "end": 738,
+      "en": "The third time, speak up and imitate to practice speaking.",
+      "zh": "🕺第三遍开口模仿练口语。",
+      "pinyin": "🕺 dì sān biàn kāi kǒu mó fǎng liàn kǒu yǔ。",
+      "vi": "Lần thứ ba mở miệng bắt chước để luyện nói."
+    },
+    {
+      "start": 738.17,
+      "end": 745.67,
+      "en": "As long as everyone practices using this method, I believe your Chinese will definitely improve enormously.",
+      "zh": "💃只要大家按照这个方法去练习，💃我相信，💃你们的中文一定会有巨大的进步。",
+      "pinyin": "💃 zhǐ yào dà jiā àn zhào zhè ge fāng fǎ qù liàn xí，💃 wǒ xiāng xìn，💃 nǐ men de zhōng wén yí dìng huì yǒu jù dà de jìn bù。",
+      "vi": "Chỉ cần mọi người luyện tập theo phương pháp này, tôi tin rằng tiếng Trung của các bạn chắc chắn sẽ tiến bộ vượt bậc."
+    },
+    {
+      "start": 745.97,
+      "end": 750.13,
+      "en": "Learning a language is a marathon, not a sprint.",
+      "zh": "🕺学习语言是一场马拉松，🕺不是短跑。",
+      "pinyin": "🕺 xué xí yǔ yán shì yì chǎng mǎ lā sōng，🕺 bú shì duǎn pǎo。",
+      "vi": "Học ngôn ngữ là một cuộc marathon, không phải chạy nước rút."
+    },
+    {
+      "start": 750.13,
+      "end": 751.43,
+      "en": "Don't rush.",
+      "zh": "🕺不要着急。",
+      "pinyin": "🕺 bú yào zháo jí。",
+      "vi": "Đừng vội vàng."
+    },
+    {
+      "start": 751.73,
+      "end": 758.93,
+      "en": "Although this process may be a bit tiring, when one day you suddenly realize that, without subtitles",
+      "zh": "🕺虽然这个过程可能有点累，🕺但是当你有一天突然发现，🕺不需要字幕",
+      "pinyin": "🕺 suī rán zhè ge guò chéng kě néng yǒu diǎn lèi，🕺 dàn shì dāng nǐ yǒu yì tiān tū rán fā xiàn，🕺 bù xū yào zì mù",
+      "vi": "Mặc dù quá trình này có thể hơi mệt, nhưng một ngày nào đó khi bạn đột nhiên phát hiện ra rằng, không cần phụ đề"
+    },
+    {
+      "start": 758.93,
+      "end": 765.67,
+      "en": "you can also understand what Chinese people are saying, that sense of accomplishment is indescribable.",
+      "zh": "🕺也能听懂中国人在说什么时，🕺那种成就感是无法形容的。",
+      "pinyin": "🕺 yě néng tīng dǒng zhōng guó rén zài shuō shén me shí，🕺 nà zhǒng chéng jiù gǎn shì wú fǎ xíng róng de。",
+      "vi": "cũng có thể hiểu người Trung Quốc đang nói gì, cảm giác thành tựu đó không thể diễn tả bằng lời."
+    },
+    {
+      "start": 765.9,
+      "end": 766.6,
+      "en": "Yes.",
+      "zh": "💃是的。",
+      "pinyin": "💃 shì de。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 766.6,
+      "end": 774.27,
+      "en": "Here are some vocabulary words we will use; everyone can review them: subtitles, period dramas.",
+      "zh": "💃这里有一些我们会用到的词汇，💃大家可以复习一下：💃字幕 古装剧",
+      "pinyin": "💃 zhè lǐ yǒu yì xiē wǒ men huì yòng dào de cí huì，💃 dà jiā kě yǐ fù xí yí xià：💃 zì mù gǔ zhuāng jù",
+      "vi": "Đây là một số từ vựng chúng ta sẽ dùng, mọi người có thể ôn lại: phụ đề, phim cổ trang."
+    },
+    {
+      "start": 774.53,
+      "end": 783.23,
+      "en": "Language sense, shadowing, modern dramas. If you like our show, please tell us in the comments.",
+      "zh": "💃语感 跟读，💃现代剧 🕺如果你喜欢我们的节目，🕺请在评论区告诉我们。",
+      "pinyin": "💃 yǔ gǎn gēn dú，💃 xiàn dài jù 🕺 rú guǒ nǐ xǐ huan wǒ men de jié mù，🕺 qǐng zài píng lùn qū gào sù wǒ men。",
+      "vi": "Ngữ cảm, đọc theo, phim hiện đại. Nếu bạn thích chương trình của chúng tôi, hãy cho chúng tôi biết trong phần bình luận."
+    },
+    {
+      "start": 783.33,
+      "end": 789,
+      "en": "Or you can also recommend your favorite Chinese TV drama to us.",
+      "zh": "🕺或者，你也可以推荐，🕺一部你最喜欢的中国电视剧给我们。",
+      "pinyin": "🕺 huò zhě， nǐ yě kě yǐ tuī jiàn，🕺 yí bù nǐ zuì xǐ huan de zhōng guó diàn shì jù gěi wǒ men。",
+      "vi": "Hoặc bạn cũng có thể giới thiệu cho chúng tôi một bộ phim truyền hình Trung Quốc mà bạn thích nhất."
+    },
+    {
+      "start": 796.57,
+      "end": 798.3,
+      "en": "Thank you everyone for listening.",
+      "zh": "🕺谢谢大家的收听。",
+      "pinyin": "🕺 xiè xiè dà jiā de shōu tīng。",
+      "vi": "Cảm ơn mọi người đã lắng nghe."
+    },
+    {
+      "start": 798.4,
+      "end": 801.1,
+      "en": "See you next episode! Goodbye!",
+      "zh": "💃我们下期再见！🕺再见！",
+      "pinyin": "💃 wǒ men xià qī zài jiàn！🕺 zài jiàn！",
+      "vi": "Hẹn gặp lại các bạn ở tập sau! Tạm biệt!"
+    }
+  ]
+}

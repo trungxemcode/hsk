@@ -1,0 +1,1245 @@
+{
+  "id": "VjFL_5jx4zU",
+  "youtubeId": "VjFL_5jx4zU",
+  "channelHandle": "@LearnChineseThroughPodcast",
+  "title": "HSK 1-2 | Can We Learn Chinese With AI? | Chinese Listening Practice",
+  "titleVi": "Học tiếng Trung với AI được không? | Luyện nghe HSK 1-2",
+  "topic": "Podcast Luyện nghe HSK",
+  "level": "HSK 1+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 1272,
+  "cues": [
+    {
+      "start": 6.13,
+      "end": 15.3,
+      "en": "Hello everyone, welcome to the Learn Chinese Podcast. I'm your host Li Ming, and I'm happy to meet you all again.",
+      "zh": "大家好欢迎收听学中文波克，我是你们的主持人李明，很高兴又和大家见面了",
+      "pinyin": "Dà jiā hǎo huān yíng shōu tīng xué zhōng wén bō kè， wǒ shì nǐ men de zhǔ chí rén lǐ míng， hěn gāo xìng yòu hé dà jiā jiàn miàn le",
+      "vi": "Xin chào mọi người, chào mừng đến với podcast Học tiếng Trung, tôi là người dẫn chương trình Lý Minh, rất vui lại được gặp mọi người"
+    },
+    {
+      "start": 15.3,
+      "end": 23.03,
+      "en": "Our podcast has always been committed to helping everyone learn Chinese in the simplest and most effective way.",
+      "zh": "我们的波克，一直致力于帮助大家用最简单，最有效的方式学习中文",
+      "pinyin": "Wǒ men de bō kè， yì zhí zhì lì yú bāng zhù dà jiā yòng zuì jiǎn dān， zuì yǒu xiào de fāng shì xué xí zhōng wén",
+      "vi": "Podcast của chúng tôi luôn nỗ lực giúp mọi người học tiếng Trung theo cách đơn giản và hiệu quả nhất"
+    },
+    {
+      "start": 23.3,
+      "end": 30.67,
+      "en": "Whether you've just started learning Chinese or have been learning for a while, we hope this podcast",
+      "zh": "无论你是刚刚开始学习中文，还是已经学了一段时间，我们都希望这个波",
+      "pinyin": "Wú lùn nǐ shì gāng gāng kāi shǐ xué xí zhōng wén， hái shì yǐ jīng xué le yí duàn shí jiān， wǒ men dōu xī wàng zhè ge bō",
+      "vi": "Dù bạn mới bắt đầu học tiếng Trung hay đã học được một thời gian, chúng tôi đều hy vọng podcast này"
+    },
+    {
+      "start": 30.67,
+      "end": 36.97,
+      "en": "can become a good companion on your learning journey. We know that learning a new language",
+      "zh": "克能成为你学习路上的好伙伴，我们知道，学习一门新的语言",
+      "pinyin": "Kè néng chéng wéi nǐ xué xí lù shang de hǎo huǒ bàn， wǒ men zhī dào， xué xí yì mén xīn de yǔ yán",
+      "vi": "có thể trở thành người bạn đồng hành tốt trên con đường học tập của bạn. Chúng tôi biết rằng học một ngôn ngữ mới"
+    },
+    {
+      "start": 36.97,
+      "end": 44.37,
+      "en": "there may be many challenges, but please believe that as long as you keep going, making a little progress every day",
+      "zh": "可能会有很多挑战，但请相信，只要坚持下去，每天进步一点点",
+      "pinyin": "Kě néng huì yǒu hěn duō tiǎo zhàn， dàn qǐng xiāng xìn， zhǐ yào jiān chí xià qù， měi tiān jìn bù yì diǎn diǎn",
+      "vi": "có thể sẽ có nhiều thách thức, nhưng hãy tin rằng chỉ cần kiên trì, mỗi ngày tiến bộ một chút"
+    },
+    {
+      "start": 44.37,
+      "end": 52.07,
+      "en": "you will be able to speak fluent Chinese. Today we're going to talk about a very interesting and engaging topic.",
+      "zh": "你就能说一口流利的中文，今天我们要聊一个非常有趣，也很有意思的话题",
+      "pinyin": "Nǐ jiù néng shuō yì kǒu liú lì de zhōng wén， jīn tiān wǒ men yào liáo yí gè fēi cháng yǒu qù， yě hěn yǒu yì sī de huà tí",
+      "vi": "bạn sẽ có thể nói tiếng Trung lưu loát. Hôm nay chúng ta sẽ nói về một chủ đề rất thú vị và hấp dẫn"
+    },
+    {
+      "start": 52.47,
+      "end": 60,
+      "en": "Can we use artificial intelligence, that is, AI, to learn Chinese? AI is becoming more and more common nowadays.",
+      "zh": "我们能用人工智能，也就是来学习中文吗，现在越来越普遍",
+      "pinyin": "Wǒ men néng yòng rén gōng zhì néng， yě jiù shì lái xué xí zhōng wén ma， xiàn zài yuè lái yuè pǔ biàn",
+      "vi": "Chúng ta có thể dùng trí tuệ nhân tạo, tức là AI, để học tiếng Trung không? AI hiện nay ngày càng phổ biến"
+    },
+    {
+      "start": 60,
+      "end": 69.5,
+      "en": "Many people are using it, so can AI help us learn Chinese better? What are its advantages and disadvantages?",
+      "zh": "很多人都在用它，那么，能不能帮助我们更好的学习中文，呢它有什么优点和缺点呢",
+      "pinyin": "Hěn duō rén dōu zài yòng tā， nà me， néng bu néng bāng zhù wǒ men gèng hǎo de xué xí zhōng wén， ne tā yǒu shén me yōu diǎn hé quē diǎn ne",
+      "vi": "Nhiều người đang sử dụng nó, vậy AI có thể giúp chúng ta học tiếng Trung tốt hơn không? Nó có ưu điểm và nhược điểm gì?"
+    },
+    {
+      "start": 69.73,
+      "end": 77.5,
+      "en": "Today let's explore together. Before we start today's discussion, I'd like to ask for everyone's help.",
+      "zh": "今天我们就一起来探索一下，在开始今天的讨论之前，我想请大家帮忙",
+      "pinyin": "Jīn tiān wǒ men jiù yì qǐ lái tàn suǒ yí xià， zài kāi shǐ jīn tiān de tǎo lùn zhī qián， wǒ xiǎng qǐng dà jiā bāng máng",
+      "vi": "Hôm nay chúng ta hãy cùng nhau khám phá. Trước khi bắt đầu cuộc thảo luận hôm nay, tôi muốn nhờ mọi người giúp một việc"
+    },
+    {
+      "start": 84.93,
+      "end": 92.2,
+      "en": "Your support is our greatest motivation. Alright, are you ready? Let's take a look together.",
+      "zh": "你们的支持是我们最大的动力，好啦准备好了吗，让我们一起来看看",
+      "pinyin": "Nǐ men de zhī chí shì wǒ men zuì dà de dòng lì， hǎo lā zhǔn bèi hǎo le ma， ràng wǒ men yì qǐ lái kàn kàn",
+      "vi": "Sự ủng hộ của các bạn là động lực lớn nhất của chúng tôi. Được rồi, các bạn sẵn sàng chưa? Chúng ta cùng xem nhé."
+    },
+    {
+      "start": 92.27,
+      "end": 100.37,
+      "en": "Let's see what role AI can play in learning Chinese. Friends, let's first talk about what AI is.",
+      "zh": "在中文学习中能发挥什么作用吧，朋友们我们先来聊聊什么是",
+      "pinyin": "Zài zhōng wén xué xí zhōng néng fā huī shén me zuò yòng ba， péng yǒu men wǒ men xiān lái liáo liáo shén me shì",
+      "vi": "Hãy xem AI có thể phát huy vai trò gì trong việc học tiếng Trung nhé. Các bạn, trước tiên chúng ta hãy nói về AI là gì."
+    },
+    {
+      "start": 100.87,
+      "end": 110.9,
+      "en": "Simply put, AI is artificial intelligence; it is a computer program that can learn, think, and make decisions.",
+      "zh": "简单来说，就是人工智能，它是一种可以学习，思考和做决定的电脑程序",
+      "pinyin": "Jiǎn dān lái shuō， jiù shì rén gōng zhì néng， tā shì yì zhǒng kě yǐ xué xí， sī kǎo hé zuò jué dìng de diàn nǎo chéng xù",
+      "vi": "Nói một cách đơn giản, AI chính là trí tuệ nhân tạo, nó là một loại chương trình máy tính có thể học hỏi, suy nghĩ và đưa ra quyết định."
+    },
+    {
+      "start": 110.9,
+      "end": 120.83,
+      "en": "Just like us humans, AI can also learn many things, such as languages. Nowadays, AI technology is developing very quickly.",
+      "zh": "就像我们人类一样，也可以学习很多东西，比如语言，现在技术发展的很快",
+      "pinyin": "Jiù xiàng wǒ men rén lèi yí yàng， yě kě yǐ xué xí hěn duō dōng xī， bǐ rú yǔ yán， xiàn zài jì shù fā zhǎn de hěn kuài",
+      "vi": "Giống như con người chúng ta, AI cũng có thể học được nhiều thứ, ví dụ như ngôn ngữ. Hiện nay, công nghệ AI đang phát triển rất nhanh."
+    },
+    {
+      "start": 120.97,
+      "end": 128.9,
+      "en": "It has entered every aspect of our lives; you may have seen it on your phone and computer.",
+      "zh": "他已经进入了我们生活的方方面面，大家可能在手机里，在电脑上都见过他",
+      "pinyin": "Tā yǐ jīng jìn rù le wǒ men shēng huó de fāng fāng miàn miàn， dà jiā kě néng zài shǒu jī lǐ， zài diàn nǎo shàng dōu jiàn guò tā",
+      "vi": "Nó đã đi vào mọi mặt trong cuộc sống của chúng ta; mọi người có thể đã thấy nó trong điện thoại và trên máy tính."
+    },
+    {
+      "start": 129.27,
+      "end": 137.53,
+      "en": "For example, when you take a photo with your phone, it automatically beautifies the photo for you—this is AI at work.",
+      "zh": "比如你用手机拍照的时候，手机会自动帮你美化照片，这就是在工",
+      "pinyin": "Bǐ rú nǐ yòng shǒu jī pāi zhào de shí hòu， shǒu jī huì zì dòng bāng nǐ měi huà zhào piàn， zhè jiù shì zài gōng",
+      "vi": "Ví dụ, khi bạn chụp ảnh bằng điện thoại, điện thoại sẽ tự động làm đẹp ảnh giúp bạn, đây chính là AI đang làm việc."
+    },
+    {
+      "start": 137.53,
+      "end": 145.37,
+      "en": "When you use map navigation, the map recommends the fastest route for you—this is also AI.",
+      "zh": "作你用地图导航的时候，地图会给你推荐最快的路线，这也是",
+      "pinyin": "Zuò nǐ yòng dì tú dǎo háng de shí hòu， dì tú huì gěi nǐ tuī jiàn zuì kuài de lù xiàn， zhè yě shì",
+      "vi": "Khi bạn dùng bản đồ để điều hướng, bản đồ sẽ gợi ý cho bạn tuyến đường nhanh nhất, đây cũng là AI."
+    },
+    {
+      "start": 145.53,
+      "end": 154.5,
+      "en": "So how can AI help us learn Chinese? I think the most direct aspect is translation and looking up words.",
+      "zh": "那么如何帮助我们学习中文呢，我想，最直接的一个方面就是翻译和查词",
+      "pinyin": "Nà me rú hé bāng zhù wǒ men xué xí zhōng wén ne， wǒ xiǎng， zuì zhí jiē de yí gè fāng miàn jiù shì fān yì hé chá cí",
+      "vi": "Vậy AI giúp chúng ta học tiếng Trung như thế nào? Tôi nghĩ, một khía cạnh trực tiếp nhất là dịch và tra từ."
+    },
+    {
+      "start": 154.5,
+      "end": 160.77,
+      "en": "In the past, when we studied Chinese, if we came across characters we didn't know or sentences we didn't understand,",
+      "zh": "以前我们学习中文，如果遇到不认识的字，或者不懂的句子",
+      "pinyin": "Yǐ qián wǒ men xué xí zhōng wén， rú guǒ yù dào bú rèn shi de zì， huò zhě bù dǒng de jù zi",
+      "vi": "Trước đây khi học tiếng Trung, nếu gặp chữ không biết hoặc câu không hiểu,"
+    },
+    {
+      "start": 160.77,
+      "end": 169.63,
+      "en": "we might look them up in a paper dictionary or ask the teacher; now, we can use translation software on our phones.",
+      "zh": "我们可能会去查纸质字典，或者问老师，现在呢，我们可以用手机上的翻译软件",
+      "pinyin": "Wǒ men kě néng huì qù chá zhǐ zhì zì diǎn， huò zhě wèn lǎo shī， xiàn zài ne， wǒ men kě yǐ yòng shǒu jī shàng de fān yì ruǎn jiàn",
+      "vi": "chúng ta có thể sẽ tra từ điển giấy hoặc hỏi giáo viên; còn bây giờ, chúng ta có thể dùng phần mềm dịch trên điện thoại."
+    },
+    {
+      "start": 169.67,
+      "end": 177.2,
+      "en": "Or an AI dictionary—for example, if you see a Chinese character you don't know, you just need to take a photo with your phone",
+      "zh": "或者字典，比如你看到一个不认识的汉字，你只需要用手机拍一下",
+      "pinyin": "Huò zhě zì diǎn， bǐ rú nǐ kàn dào yí gè bú rèn shi de hàn zì， nǐ zhī xū yào yòng shǒu jī pāi yí xià",
+      "vi": "Hoặc từ điển AI, ví dụ bạn thấy một chữ Hán không biết, bạn chỉ cần dùng điện thoại chụp một cái"
+    },
+    {
+      "start": 177.2,
+      "end": 185.67,
+      "en": "AI can recognize it for you, tell you the pronunciation and meaning of the character, and even provide word combinations and example sentences",
+      "zh": "就能帮你识别出来，告诉你这个字的读音意思，甚至还有组词和例句",
+      "pinyin": "Jiù néng bāng nǐ shí bié chū lái， gào sù nǐ zhè ge zì de dú yīn yì sī， shèn zhì hái yǒu zǔ cí hé lì jù",
+      "vi": "AI sẽ giúp bạn nhận ra nó, cho bạn biết cách đọc và nghĩa của chữ này, thậm chí cả từ ghép và câu ví dụ"
+    },
+    {
+      "start": 185.77,
+      "end": 192.37,
+      "en": "This is so much more convenient than before, right? I remember when I was a kid learning English",
+      "zh": "这比以前方便太多了，对吧，我记得我小时候学习英语的时候",
+      "pinyin": "Zhè bǐ yǐ qián fāng biàn tài duō le， duì ba， wǒ jì de wǒ xiǎo shí hòu xué xí yīng yǔ de shí hòu",
+      "vi": "Điều này tiện lợi hơn trước rất nhiều, đúng không? Tôi nhớ khi tôi còn nhỏ học tiếng Anh"
+    },
+    {
+      "start": 192.57,
+      "end": 198.87,
+      "en": "Back then there weren't such advanced tools; when I came across new words, I had to hold a thick dictionary",
+      "zh": "那时候没有这么先进的工具，遇到生词，我得拿着厚厚的字典",
+      "pinyin": "Nà shí hòu méi yǒu zhè me xiān jìn de gōng jù， yù dào shēng cí， wǒ dé ná zhe hòu hòu de zì diǎn",
+      "vi": "Hồi đó không có những công cụ tiên tiến như vậy, gặp từ mới, tôi phải cầm một cuốn từ điển dày cộp"
+    },
+    {
+      "start": 198.9,
+      "end": 206.2,
+      "en": "and look them up character by character. Now my niece is learning Chinese, and she uses an AI dictionary pen",
+      "zh": "一个字一个字的查，现在我的侄女学习中文，他用一个词典笔",
+      "pinyin": "Yí gè zì yí gè zì de chá， xiàn zài wǒ de zhí nǚ xué xí zhōng wén， tā yòng yí gè cí diǎn bǐ",
+      "vi": "Tra từng chữ một. Bây giờ cháu gái tôi học tiếng Trung, cô bé dùng một cây bút từ điển AI"
+    },
+    {
+      "start": 206.2,
+      "end": 213.17,
+      "en": "As long as she lightly scans it over the book, the character's pronunciation and meaning come out immediately. She told me",
+      "zh": "只要在书上轻轻一扫，字的读音，意思就立刻出来了，他告诉我",
+      "pinyin": "Zhǐ yào zài shū shàng qīng qīng yì sǎo， zì de dú yīn， yì sī jiù lì kè chū lái le， tā gào sù wǒ",
+      "vi": "Chỉ cần quét nhẹ trên sách, cách đọc và nghĩa của chữ sẽ hiện ra ngay lập tức. Cô bé nói với tôi"
+    },
+    {
+      "start": 213.17,
+      "end": 220.67,
+      "en": "this made her more interested in learning Chinese. Besides looking up words, AI translation tools are also very useful",
+      "zh": "这让他对学习中文更感兴趣了，除了查词，翻译工具也很有用",
+      "pinyin": "Zhè ràng tā duì xué xí zhōng wén gèng gǎn xìng qù le， chú le chá cí， fān yì gōng jù yě hěn yǒu yòng",
+      "vi": "điều này khiến cô bé hứng thú hơn với việc học tiếng Trung. Ngoài việc tra từ, công cụ dịch AI cũng rất hữu ích"
+    },
+    {
+      "start": 220.8,
+      "end": 230.27,
+      "en": "For example, if you see a Chinese article online and can't understand some sentences, you can copy the sentences into an AI translation tool",
+      "zh": "比如你在网上看到一篇中文文章，有些句子看不懂，你可以把句子复制到翻译工具里",
+      "pinyin": "Bǐ rú nǐ zài wǎng shàng kàn dào yì piān zhōng wén wén zhāng， yǒu xiē jù zi kàn bù dǒng， nǐ kě yǐ bǎ jù zi fù zhì dào fān yì gōng jù lǐ",
+      "vi": "Ví dụ bạn thấy một bài viết tiếng Trung trên mạng, có những câu không hiểu, bạn có thể sao chép câu đó vào công cụ dịch AI"
+    },
+    {
+      "start": 230.33,
+      "end": 238.2,
+      "en": "It will quickly give you a rough translation. Of course, AI translation isn't perfect yet and sometimes makes mistakes",
+      "zh": "他会很快给你一个大概的翻译，当然翻译还不完美，有时候会有错误",
+      "pinyin": "Tā huì hěn kuài gěi nǐ yí gè dà gài de fān yì， dāng rán fān yì hái bù wán měi， yǒu shí hòu huì yǒu cuò wù",
+      "vi": "Nó sẽ nhanh chóng cho bạn một bản dịch đại khái. Tất nhiên, dịch AI vẫn chưa hoàn hảo, đôi khi sẽ có lỗi"
+    },
+    {
+      "start": 238.27,
+      "end": 246.07,
+      "en": "But for understanding the general idea, it's already excellent. So at the most basic level of comprehension",
+      "zh": "但是对于理解大意来说，他已经非常棒了，所以在最初步的理解层面",
+      "pinyin": "Dàn shì duì yú lǐ jiě dà yì lái shuō， tā yǐ jīng fēi cháng bàng le， suǒ yǐ zài zuì chū bù de lǐ jiě céng miàn",
+      "vi": "Nhưng để hiểu đại ý thì nó đã rất tuyệt rồi. Vì vậy, ở mức độ hiểu biết ban đầu"
+    },
+    {
+      "start": 246.17,
+      "end": 254.07,
+      "en": "AI is like a portable dictionary and translator; it makes learning Chinese more convenient and faster",
+      "zh": "就像一个随身，携带的词典和翻译器，他让学习中文变得更加方便和快捷",
+      "pinyin": "Jiù xiàng yí gè suí shēn， xié dài de cí diǎn hé fān yì qì， tā ràng xué xí zhōng wén biàn de gèng jiā fāng biàn hé kuài jié",
+      "vi": "AI giống như một cuốn từ điển và máy dịch mang theo bên mình, nó khiến việc học tiếng Trung trở nên thuận tiện và nhanh chóng hơn"
+    },
+    {
+      "start": 254.3,
+      "end": 261.83,
+      "en": "For us beginners, this is a very good starting point. So, besides translation and looking up words",
+      "zh": "这对于我们初学者来说，是一个非常好的起点，那么除了翻译和查词",
+      "pinyin": "Zhè duì yú wǒ men chū xué zhě lái shuō， shì yí gè fēi cháng hǎo de qǐ diǎn， nà me chú le fān yì hé chá cí",
+      "vi": "Đối với những người mới học như chúng ta, đây là một khởi đầu rất tốt. Vậy ngoài dịch và tra từ"
+    },
+    {
+      "start": 261.97,
+      "end": 271.27,
+      "en": "In what other ways can AI help us? Next, let's talk about how AI can become our speaking partner",
+      "zh": "还能在哪些方面帮助我们呢，接下来我们来聊聊，如何成为我们的口语伙伴",
+      "pinyin": "Hái néng zài nǎ xiē fāng miàn bāng zhù wǒ men ne， jiē xià lái wǒ men lái liáo liáo， rú hé chéng wéi wǒ men de kǒu yǔ huǒ bàn",
+      "vi": "AI còn có thể giúp chúng ta ở những khía cạnh nào nữa? Tiếp theo, chúng ta hãy nói về việc AI có thể trở thành bạn luyện nói của chúng ta như thế nào"
+    },
+    {
+      "start": 271.37,
+      "end": 279.43,
+      "en": "When learning Chinese, listening and speaking are very important, but often we may not have the chance to communicate with Chinese people",
+      "zh": "学中文听和说非常重要，但是很多时候，我们可能没有机会和中国人交流",
+      "pinyin": "Xué zhōng wén tīng hé shuō fēi cháng zhòng yào， dàn shì hěn duō shí hòu， wǒ men kě néng méi yǒu jī huì hé zhōng guó rén jiāo liú",
+      "vi": "Khi học tiếng Trung, nghe và nói rất quan trọng, nhưng nhiều khi chúng ta có thể không có cơ hội giao tiếp với người Trung Quốc"
+    },
+    {
+      "start": 279.5,
+      "end": 289.17,
+      "en": "Or we may feel shy. That's when AI can be very useful. There are now many AI apps for learning Chinese",
+      "zh": "或者会感到害羞，这时候就能派上大用场了，现在有很多学习中文的应用程序",
+      "pinyin": "Huò zhě huì gǎn dào hài xiū， zhè shí hòu jiù néng pài shàng dà yòng chǎng le， xiàn zài yǒu hěn duō xué xí zhōng wén de yìng yòng chéng xù",
+      "vi": "Hoặc có thể cảm thấy ngại. Lúc này AI có thể phát huy tác dụng lớn. Hiện nay có rất nhiều ứng dụng AI để học tiếng Trung"
+    },
+    {
+      "start": 289.37,
+      "end": 296.47,
+      "en": "They can simulate real conversation scenarios and let you practice speaking with AI, for example",
+      "zh": "他们可以模拟真实的对话场景，让你和进行口语练习，比如",
+      "pinyin": "Tā men kě yǐ mó nǐ zhēn shí de duì huà chǎng jǐng， ràng nǐ hé jìn xíng kǒu yǔ liàn xí， bǐ rú",
+      "vi": "Chúng có thể mô phỏng các tình huống hội thoại thực tế, để bạn luyện nói với AI, ví dụ như"
+    },
+    {
+      "start": 296.47,
+      "end": 303.03,
+      "en": "some AI apps play the role of a shop assistant, letting you practice conversations for buying things",
+      "zh": "有些应用会扮演一个商店的店员，让你练习买东西的对话",
+      "pinyin": "Yǒu xiē yìng yòng huì bàn yǎn yí gè shāng diàn de diàn yuán， ràng nǐ liàn xí mǎi dōng xī de duì huà",
+      "vi": "một số ứng dụng AI sẽ đóng vai nhân viên cửa hàng để bạn luyện hội thoại mua đồ"
+    },
+    {
+      "start": 303.33,
+      "end": 311.1,
+      "en": "Or they play a restaurant waiter so you can practice ordering food. AI will give feedback based on your answers",
+      "zh": "或者扮演一个餐馆的服务员，让你练习点菜，会根据你的回答给出反馈",
+      "pinyin": "Huò zhě bàn yǎn yí gè cān guǎn de fú wù yuán， ràng nǐ liàn xí diǎn cài， huì gēn jù nǐ de huí dá gěi chū fǎn kuì",
+      "vi": "Hoặc đóng vai nhân viên phục vụ nhà hàng để bạn luyện gọi món. AI sẽ dựa vào câu trả lời của bạn để đưa ra phản hồi"
+    },
+    {
+      "start": 311.27,
+      "end": 318.3,
+      "en": "telling you which parts you didn't say well and which words you used inaccurately. I have a friend",
+      "zh": "告诉你哪些地方说的不好，哪些词语用的不准确，我有一个朋友",
+      "pinyin": "Gào sù nǐ nǎ xiē dì fāng shuō de bù hǎo， nǎ xiē cí yǔ yòng de bù zhǔn què， wǒ yǒu yí gè péng yǒu",
+      "vi": "cho bạn biết chỗ nào nói chưa tốt, từ ngữ nào dùng chưa chính xác. Tôi có một người bạn"
+    },
+    {
+      "start": 318.3,
+      "end": 326.33,
+      "en": "named Wang Ming. He lives overseas and usually has a hard time finding friends who speak Chinese. He told me",
+      "zh": "他叫王明，他住在海外，平时很难找到说中文的朋友，他告诉我",
+      "pinyin": "Tā jiào wáng míng， tā zhù zài hǎi wài， píng shí hěn nán zhǎo dào shuō zhōng wén de péng yǒu， tā gào sù wǒ",
+      "vi": "tên là Vương Minh, anh ấy sống ở nước ngoài, bình thường rất khó tìm được bạn nói tiếng Trung. Anh ấy nói với tôi"
+    },
+    {
+      "start": 326.33,
+      "end": 333.5,
+      "en": "Every day he uses an AI voice partner to practice Chinese; he speaks Chinese to his phone.",
+      "zh": "他每天都会用一个语音伙伴，来练习中文，他会对着手机说中文",
+      "pinyin": "Tā měi tiān dōu huì yòng yí gè yǔ yīn huǒ bàn， lái liàn xí zhōng wén， tā huì duì zhuó shǒu jī shuō zhōng wén",
+      "vi": "Mỗi ngày anh ấy đều dùng một người bạn luyện nói bằng AI để luyện tiếng Trung; anh ấy nói tiếng Trung vào điện thoại."
+    },
+    {
+      "start": 333.57,
+      "end": 341.6,
+      "en": "The AI constantly corrects his pronunciation, telling him which sound is not accurate enough and which tone is wrong.",
+      "zh": "会时时给他纠正发音，告诉他哪个音发的不够准，哪个声调错了",
+      "pinyin": "Huì shí shí gěi tā jiū zhèng fā yīn， gào sù tā nǎ gè yīn fā de bú gòu zhǔn， nǎ gè shēng diào cuò le",
+      "vi": "AI sẽ thường xuyên sửa phát âm cho anh ấy, nói cho anh ấy biết âm nào phát âm chưa chuẩn, thanh điệu nào sai."
+    },
+    {
+      "start": 341.77,
+      "end": 348,
+      "en": "Wang Ming says that at first, he felt a bit strange talking to a machine.",
+      "zh": "王明说刚开始的时候，他觉得对着一个机器说话有点奇怪",
+      "pinyin": "Wáng míng shuō gāng kāi shǐ de shí hòu， tā jué de duì zhe yí gè jī qì shuō huà yǒu diǎn qí guài",
+      "vi": "Vương Minh nói rằng lúc mới bắt đầu, anh ấy thấy nói chuyện với một cái máy hơi kỳ lạ."
+    },
+    {
+      "start": 348.1,
+      "end": 355.77,
+      "en": "But gradually, he found that AI does not judge him like a real person, which made him feel very relaxed.",
+      "zh": "但是慢慢的，他发现不会像真人一样评价他，这让他感到很放松",
+      "pinyin": "Dàn shì màn màn de， tā fā xiàn bú huì xiàng zhēn rén yí yàng píng jià tā， zhè ràng tā gǎn dào hěn fàng sōng",
+      "vi": "Nhưng dần dần, anh ấy nhận ra AI sẽ không đánh giá anh ấy như người thật, điều này khiến anh ấy cảm thấy rất thoải mái."
+    },
+    {
+      "start": 355.8,
+      "end": 363.8,
+      "en": "He can boldly try speaking Chinese without being afraid of making mistakes; he says that by practicing every day",
+      "zh": "可以大胆的尝试说中文，不怕犯错误，他说通过每天坚持练习",
+      "pinyin": "Kě yǐ dà dǎn de cháng shì shuō zhōng wén， bú pà fàn cuò wù， tā shuō tōng guò měi tiān jiān chí liàn xí",
+      "vi": "Có thể mạnh dạn thử nói tiếng Trung mà không sợ mắc lỗi; anh ấy nói rằng nhờ kiên trì luyện tập mỗi ngày"
+    },
+    {
+      "start": 363.87,
+      "end": 372.33,
+      "en": "his spoken Chinese has improved very quickly; now he can communicate with Chinese people very fluently.",
+      "zh": "他的中文口语进步非常快，现在他已经可以很流利的，和中国人交流了",
+      "pinyin": "Tā de zhōng wén kǒu yǔ jìn bù fēi cháng kuài， xiàn zài tā yǐ jīng kě yǐ hěn liú lì de， hé zhōng guó rén jiāo liú le",
+      "vi": "khả năng nói tiếng Trung của anh ấy tiến bộ rất nhanh, giờ anh ấy đã có thể giao tiếp với người Trung Quốc rất lưu loát."
+    },
+    {
+      "start": 372.33,
+      "end": 380.27,
+      "en": "The advantage of this kind of AI speaking practice is that you can practice anytime and anywhere, without being limited by time or place.",
+      "zh": "这种口语练习的好处是，你可以随时随地练习，不受时间和地点的限制",
+      "pinyin": "Zhè zhǒng kǒu yǔ liàn xí de hǎo chù shì， nǐ kě yǐ suí shí suí dì liàn xí， bú shòu shí jiān hé dì diǎn de xiàn zhì",
+      "vi": "Lợi ích của cách luyện nói bằng AI này là bạn có thể luyện tập bất cứ lúc nào, bất cứ đâu, không bị giới hạn bởi thời gian và địa điểm."
+    },
+    {
+      "start": 380.5,
+      "end": 389.9,
+      "en": "You can practice on the subway, while taking a walk in the park, and even while cooking at home.",
+      "zh": "你可以在地铁上练习，在公园里散步的时候练习，甚至在家里做饭的时候也可以练习",
+      "pinyin": "Nǐ kě yǐ zài dì tiě shàng liàn xí， zài gōng yuán lǐ sàn bù de shí hòu liàn xí， shèn zhì zài jiā lǐ zuò fàn de shí hòu yě kě yǐ liàn xí",
+      "vi": "Bạn có thể luyện trên tàu điện ngầm, luyện khi đi dạo trong công viên, thậm chí có thể luyện khi nấu ăn ở nhà."
+    },
+    {
+      "start": 389.9,
+      "end": 398.57,
+      "en": "AI is very patient; it won't get angry because you make mistakes, and you can repeat the practice countless times.",
+      "zh": "会非常有耐心，他不会因为你犯错误而生气，你可以无数次的重复练习",
+      "pinyin": "Huì fēi cháng yǒu nài xīn， tā bú huì yīn wèi nǐ fàn cuò wù ér shēng qì， nǐ kě yǐ wú shù cì de chóng fù liàn xí",
+      "vi": "AI sẽ rất kiên nhẫn, nó sẽ không tức giận vì bạn mắc lỗi, và bạn có thể lặp đi lặp lại việc luyện tập vô số lần."
+    },
+    {
+      "start": 398.57,
+      "end": 406.53,
+      "en": "the same sentence until you are satisfied; there are also some AI tools that can help us practice listening.",
+      "zh": "同一个句子，直到你满意为止，还有一些工具，可以帮助我们练习听力",
+      "pinyin": "Tóng yí gè jù zi， zhí dào nǐ mǎn yì wéi zhǐ， hái yǒu yì xiē gōng jù， kě yǐ bāng zhù wǒ men liàn xí tīng lì",
+      "vi": "cùng một câu, cho đến khi bạn hài lòng; ngoài ra còn có một số công cụ AI có thể giúp chúng ta luyện nghe."
+    },
+    {
+      "start": 406.53,
+      "end": 414.47,
+      "en": "For example, they can convert Chinese articles into speech, and you can choose different speaking speeds and voices.",
+      "zh": "比如，他们可以把中文文章转换成语音，而且可以选择不同的语速和发音人",
+      "pinyin": "Bǐ rú， tā men kě yǐ bǎ zhōng wén wén zhāng zhuǎn huàn chéng yǔ yīn， ér qiě kě yǐ xuǎn zé bù tóng de yǔ sù hé fā yīn rén",
+      "vi": "Ví dụ, chúng có thể chuyển bài viết tiếng Trung thành giọng nói, và có thể chọn tốc độ nói và người phát âm khác nhau."
+    },
+    {
+      "start": 414.57,
+      "end": 421.1,
+      "en": "You can listen to standard pronunciation or a slightly slower version; for our listening practice",
+      "zh": "你可以听标准的发音，也可以听语速慢一点的，这对于我们练习听力",
+      "pinyin": "Nǐ kě yǐ tīng biāo zhǔn de fā yīn， yě kě yǐ tīng yǔ sù màn yì diǎn de， zhè duì yú wǒ men liàn xí tīng lì",
+      "vi": "Bạn có thể nghe phát âm chuẩn, cũng có thể nghe bản chậm hơn một chút; điều này đối với việc luyện nghe của chúng ta"
+    },
+    {
+      "start": 421.1,
+      "end": 430.17,
+      "en": "getting familiar with Chinese intonation is very helpful, so AI is like a tireless, patient language teacher.",
+      "zh": "熟悉中文语调非常有帮助，所以就像一个不知疲倦的，有耐心的语言老师",
+      "pinyin": "Shú xī zhōng wén yǔ diào fēi cháng yǒu bāng zhù， suǒ yǐ jiù xiàng yí gè bù zhī pí juàn de， yǒu nài xīn de yǔ yán lǎo shī",
+      "vi": "việc làm quen với ngữ điệu tiếng Trung rất có ích, vì vậy AI giống như một giáo viên ngôn ngữ không biết mệt mỏi và rất kiên nhẫn."
+    },
+    {
+      "start": 430.5,
+      "end": 439.33,
+      "en": "It can provide an environment for practicing listening and speaking when we don't have a real teacher or language partner.",
+      "zh": "他可以在我们没有真人老师，或者语伴的时候，提供一个练习听力和口语的环境",
+      "pinyin": "Tā kě yǐ zài wǒ men méi yǒu zhēn rén lǎo shī， huò zhě yǔ bàn de shí hòu， tí gōng yí gè liàn xí tīng lì hé kǒu yǔ de huán jìng",
+      "vi": "Nó có thể cung cấp một môi trường luyện nghe và nói khi chúng ta không có giáo viên thật hoặc bạn luyện nói."
+    },
+    {
+      "start": 439.33,
+      "end": 445.8,
+      "en": "For those friends who want to improve their speaking but lack opportunities to practice",
+      "zh": "这对于那些希望提高口语，但又缺乏练习机会的朋友们来说",
+      "pinyin": "Zhè duì yú nà xiē xī wàng tí gāo kǒu yǔ， dàn yòu quē fá liàn xí jī huì de péng yǒu men lái shuō",
+      "vi": "Đối với những bạn muốn nâng cao khả năng nói nhưng lại thiếu cơ hội luyện tập"
+    },
+    {
+      "start": 445.87,
+      "end": 455.37,
+      "en": "this is truly good news; so besides speaking and listening, can AI also help us with reading and writing?",
+      "zh": "真的是一个福音，那么除了口语和听力，还能在阅读和写作方面帮助我们吗",
+      "pinyin": "Zhēn de shì yí gè fú yīn， nà me chú le kǒu yǔ hé tīng lì， hái néng zài yuè dú hé xiě zuò fāng miàn bāng zhù wǒ men ma",
+      "vi": "đây thật sự là một tin tốt; vậy ngoài nói và nghe, AI còn có thể giúp chúng ta trong việc đọc và viết không?"
+    },
+    {
+      "start": 455.6,
+      "end": 463.63,
+      "en": "Let's keep reading; besides listening and speaking, reading and writing are also important parts of learning Chinese.",
+      "zh": "我们接着往下看，除了听和说，阅读和写作，也是学习中文的重要组成部分",
+      "pinyin": "Wǒ men jiē zhe wǎng xià kàn， chú le tīng hé shuō， yuè dú hé xiě zuò， yě shì xué xí zhōng wén de zhòng yào zǔ chéng bù fen",
+      "vi": "Chúng ta tiếp tục xem tiếp; ngoài nghe và nói, đọc và viết cũng là những phần quan trọng của việc học tiếng Trung."
+    },
+    {
+      "start": 463.77,
+      "end": 472.73,
+      "en": "In these areas, AI can also provide a lot of help. First is reading: when you read Chinese articles",
+      "zh": "在这些方面，同样可以提供很多帮助，首先是阅读，当你读中文文章时",
+      "pinyin": "Zài zhè xiē fāng miàn， tóng yàng kě yǐ tí gōng hěn duō bāng zhù， shǒu xiān shì yuè dú， dāng nǐ dú zhōng wén wén zhāng shí",
+      "vi": "Trong những khía cạnh này, AI cũng có thể cung cấp nhiều trợ giúp; đầu tiên là đọc hiểu, khi bạn đọc bài viết tiếng Trung"
+    },
+    {
+      "start": 472.73,
+      "end": 480.9,
+      "en": "if you encounter long sentences or complex grammatical structures, you may feel confused; nowadays some AI tools",
+      "zh": "如果遇到长句子，或者复杂的语法结构，可能会感到困惑，现在有些工",
+      "pinyin": "Rú guǒ yù dào cháng jù zǐ， huò zhě fù zá de yǔ fǎ jié gòu， kě néng huì gǎn dào kùn huò， xiàn zài yǒu xiē gōng",
+      "vi": "nếu gặp câu dài hoặc cấu trúc ngữ pháp phức tạp, bạn có thể cảm thấy bối rối; hiện nay có một số công cụ AI"
+    },
+    {
+      "start": 480.9,
+      "end": 488.43,
+      "en": "can help you understand these complex sentences; for example, you can input the sentence into the AI.",
+      "zh": "具可以帮助你理解这些复杂的句子，比如你可以把句子输入到里",
+      "pinyin": "Jù kě yǐ bāng zhù nǐ lǐ jiě zhè xiē fù zá de jù zi， bǐ rú nǐ kě yǐ bǎ jù zi shū rù dào lǐ",
+      "vi": "có thể giúp bạn hiểu những câu phức tạp này, ví dụ bạn có thể nhập câu vào AI."
+    },
+    {
+      "start": 488.67,
+      "end": 496.77,
+      "en": "AI will help you break long sentences into several small parts and then explain the meaning of each part one by one.",
+      "zh": "会帮你把长句子拆分成几个小部，分然后逐个解释每个部分的含义",
+      "pinyin": "Huì bāng nǐ bǎ cháng jù zi chāi fēn chéng jǐ gè xiǎo bù， fēn rán hòu zhú gè jiě shì měi gè bù fen de hán yì",
+      "vi": "AI sẽ giúp bạn chia câu dài thành vài phần nhỏ, rồi giải thích ý nghĩa của từng phần."
+    },
+    {
+      "start": 497.13,
+      "end": 504.27,
+      "en": "It can even help explain the grammar points in the sentence; it’s like having a private tutor by your side.",
+      "zh": "甚至还会帮你解释句子中的语法点，这就像有一个私人老师在旁边",
+      "pinyin": "Shèn zhì hái huì bāng nǐ jiě shì jù zi zhōng de yǔ fǎ diǎn， zhè jiù xiàng yǒu yí gè sī rén lǎo shī zài páng biān",
+      "vi": "Thậm chí nó còn giúp bạn giải thích các điểm ngữ pháp trong câu, giống như có một gia sư riêng ở bên cạnh."
+    },
+    {
+      "start": 504.27,
+      "end": 511.3,
+      "en": "Ready to answer your questions at any time. I remember once, I was reading a book about Chinese history.",
+      "zh": "随时为你解答疑问，我记得有一次，我在读一本关于中国历史的书",
+      "pinyin": "Suí shí wèi nǐ jiě dá yí wèn， wǒ jì de yǒu yí cì， wǒ zài dú yì běn guān yú zhōng guó lì shǐ de shū",
+      "vi": "Sẵn sàng giải đáp thắc mắc cho bạn bất cứ lúc nào. Tôi nhớ có lần, tôi đang đọc một cuốn sách về lịch sử Trung Quốc."
+    },
+    {
+      "start": 511.57,
+      "end": 518.27,
+      "en": "It had many Classical Chinese words and complex long sentences, and I found it very hard to read.",
+      "zh": "里面有很多古汉语的词语，和复杂的长句，我看的非常吃力",
+      "pinyin": "Lǐ miàn yǒu hěn duō gǔ hàn yǔ de cí yǔ， hé fù zá de cháng jù， wǒ kàn de fēi cháng chī lì",
+      "vi": "Trong đó có nhiều từ ngữ Hán cổ và những câu dài phức tạp, tôi đọc rất vất vả."
+    },
+    {
+      "start": 518.5,
+      "end": 524.8,
+      "en": "Later I tried using an AI tool; I copied the paragraphs I didn’t understand into it.",
+      "zh": "后来我尝试使用了一个工具，我把不理解的段落复制进去",
+      "pinyin": "Hòu lái wǒ cháng shì shǐ yòng le yí gè gōng jù， wǒ bǎ bù lǐ jiě de duàn luò fù zhì jìn qù",
+      "vi": "Sau đó tôi thử dùng một công cụ AI, tôi sao chép những đoạn tôi không hiểu vào đó."
+    },
+    {
+      "start": 524.9,
+      "end": 530.67,
+      "en": "It not only explained the meanings of the words to me but also helped me analyze the sentence structure.",
+      "zh": "他不仅给我解释了词语的意思，还帮我分析了句子的结构",
+      "pinyin": "Tā bù jǐn gěi wǒ jiě shì le cí yǔ de yì sī， hái bāng wǒ fēn xī le jù zi de jié gòu",
+      "vi": "Nó không chỉ giải thích cho tôi nghĩa của các từ mà còn giúp tôi phân tích cấu trúc câu."
+    },
+    {
+      "start": 530.8,
+      "end": 536.73,
+      "en": "It even gave me some background knowledge, which made my understanding of that article...",
+      "zh": "甚至还给了我一些背景知识的介绍，这让我对那篇文章的理解",
+      "pinyin": "Shèn zhì hái gěi le wǒ yì xiē bèi jǐng zhī shi de jiè shào， zhè ràng wǒ duì nà piān wén zhāng de lǐ jiě",
+      "vi": "Thậm chí nó còn giới thiệu cho tôi một số kiến thức nền, điều này khiến sự hiểu biết của tôi về bài viết đó..."
+    },
+    {
+      "start": 536.73,
+      "end": 546.2,
+      "en": "become much clearer and also increased my interest in reading. Next is writing; for many Chinese learners, writing...",
+      "zh": "变得清晰了很多，也提高了我的阅读兴趣，其次是写作，写作对于很多中文学习者来说",
+      "pinyin": "Biàn de qīng xī le hěn duō， yě tí gāo le wǒ de yuè dú xìng qù， qí cì shì xiě zuò， xiě zuò duì yú hěn duō zhōng wén xué xí zhě lái shuō",
+      "vi": "trở nên rõ ràng hơn nhiều, đồng thời nâng cao hứng thú đọc của tôi. Tiếp theo là viết; đối với nhiều người học tiếng Trung, viết..."
+    },
+    {
+      "start": 546.2,
+      "end": 554.83,
+      "en": "is a difficult area, because it requires not only mastering vocabulary and grammar but also knowing how to organize your thoughts.",
+      "zh": "都是一个难点，因为它不仅需要掌握词汇和语法，还需要懂得如何组织思想",
+      "pinyin": "Dōu shì yí gè nán diǎn， yīn wèi tā bù jǐn xū yào zhǎng wò cí huì hé yǔ fǎ， hái xū yào dǒng de rú hé zǔ zhī sī xiǎng",
+      "vi": "là một điểm khó, bởi vì nó không chỉ đòi hỏi nắm vững từ vựng và ngữ pháp mà còn cần biết cách tổ chức ý tưởng."
+    },
+    {
+      "start": 554.87,
+      "end": 562.17,
+      "en": "and write fluent, natural sentences. AI can also provide very useful support in this area.",
+      "zh": "写出通顺自然的句子，在这方面，也能提供非常有用的支持",
+      "pinyin": "Xiě chū tōng shùn zì rán de jù zi， zài zhè fāng miàn， yě néng tí gōng fēi cháng yǒu yòng de zhī chí",
+      "vi": "viết ra những câu trôi chảy, tự nhiên. AI trong lĩnh vực này cũng có thể cung cấp sự hỗ trợ rất hữu ích."
+    },
+    {
+      "start": 562.17,
+      "end": 570,
+      "en": "For example, when you are writing a Chinese essay, you can input your draft into an AI tool.",
+      "zh": "比如当你在写一篇中文作文时，你可以把你的草稿输入到工具里",
+      "pinyin": "Bǐ rú dāng nǐ zài xiě yì piān zhōng wén zuò wén shí， nǐ kě yǐ bǎ nǐ de cǎo gǎo shū rù dào gōng jù lǐ",
+      "vi": "Ví dụ, khi bạn đang viết một bài luận tiếng Trung, bạn có thể nhập bản nháp của mình vào công cụ AI."
+    },
+    {
+      "start": 570.2,
+      "end": 578.23,
+      "en": "AI can help you check grammar mistakes and typos, and even give you suggestions for replacing words.",
+      "zh": "可以帮你检查语法错误，错别字，甚至会给你一些词语替换的建议",
+      "pinyin": "Kě yǐ bāng nǐ jiǎn chá yǔ fǎ cuò wù， cuò bié zì， shèn zhì huì gěi nǐ yì xiē cí yǔ tì huàn de jiàn yì",
+      "vi": "AI có thể giúp bạn kiểm tra lỗi ngữ pháp, lỗi chính tả, thậm chí đưa ra một số gợi ý thay thế từ ngữ."
+    },
+    {
+      "start": 578.33,
+      "end": 585.17,
+      "en": "make your writing sound more authentic. Some AI can even, based on a few key...",
+      "zh": "让你的文章听起来更地道，有些，甚至可以根据你给出的几个关键",
+      "pinyin": "Ràng nǐ de wén zhāng tīng qǐ lái gèng dì dào， yǒu xiē， shèn zhì kě yǐ gēn jù nǐ gěi chū de jǐ gè guān jiàn",
+      "vi": "khiến bài viết của bạn nghe tự nhiên hơn. Một số AI thậm chí có thể dựa trên vài từ khóa..."
+    },
+    {
+      "start": 585.17,
+      "end": 592.67,
+      "en": "words you provide, generate some drafts for you or offer writing ideas. Of course, this is only assistance.",
+      "zh": "词帮你生成一些出稿，或者提供写作思路，当然这只是帮助",
+      "pinyin": "Cí bāng nǐ shēng chéng yì xiē chū gǎo， huò zhě tí gōng xiě zuò sī lù， dāng rán zhè zhǐ shì bāng zhù",
+      "vi": "mà bạn đưa ra để tạo cho bạn một số bản nháp, hoặc cung cấp ý tưởng viết. Tất nhiên, đây chỉ là sự hỗ trợ."
+    },
+    {
+      "start": 592.8,
+      "end": 599.4,
+      "en": "The final thinking and revision still need to be done by ourselves. One of my students...",
+      "zh": "最终的思考和修改，还是需要我们自己完成，我的一个学生",
+      "pinyin": "Zuì zhōng de sī kǎo hé xiū gǎi， hái shì xū yào wǒ men zì jǐ wán chéng， wǒ de yí gè xué shēng",
+      "vi": "Việc suy nghĩ và chỉnh sửa cuối cùng vẫn cần chính chúng ta hoàn thành. Một học sinh của tôi..."
+    },
+    {
+      "start": 599.4,
+      "end": 608.27,
+      "en": "His name is Li Hua. He told me that every time he finishes writing a Chinese diary, he uses an AI writing assistant to check it.",
+      "zh": "他叫李华，他告诉我他每次写完中文日记后，都会用一个写作助手来检查",
+      "pinyin": "Tā jiào lǐ huá， tā gào sù wǒ tā měi cì xiě wán zhōng wén rì jì hòu， dōu huì yòng yí gè xiě zuò zhù shǒu lái jiǎn chá",
+      "vi": "Cậu ấy tên là Lý Hoa, cậu ấy nói với tôi rằng mỗi lần viết xong nhật ký tiếng Trung, cậu ấy đều dùng một trợ lý viết AI để kiểm tra."
+    },
+    {
+      "start": 608.27,
+      "end": 617.67,
+      "en": "AI will point out to him some grammar mistakes he didn’t notice himself, and suggest how to make his sentences more natural.",
+      "zh": "会给他，指出一些他自己没有发现的语法，错误并且，会建议他如何把句子写的更自然",
+      "pinyin": "Huì gěi tā， zhǐ chū yì xiē tā zì jǐ méi yǒu fā xiàn de yǔ fǎ， cuò wù bìng qiě， huì jiàn yì tā rú hé bǎ jù zi xiě de gèng zì rán",
+      "vi": "AI sẽ chỉ ra cho cậu ấy một số lỗi ngữ pháp mà bản thân cậu ấy không phát hiện ra, đồng thời gợi ý cách viết câu tự nhiên hơn."
+    },
+    {
+      "start": 617.73,
+      "end": 628.1,
+      "en": "Li Hua said that with AI’s help, his writing ability has improved a lot, and now he is increasingly confident when writing in Chinese.",
+      "zh": "李华说通过的帮助，他的写作能力提高了很多，现在他写中文文章越来越自信了",
+      "pinyin": "Lǐ huá shuō tōng guò de bāng zhù， tā de xiě zuò néng lì tí gāo le hěn duō， xiàn zài tā xiě zhōng wén wén zhāng yuè lái yuè zì xìn le",
+      "vi": "Lý Hoa nói rằng nhờ sự giúp đỡ của AI, khả năng viết của cậu ấy đã tiến bộ rất nhiều, giờ đây cậu ấy ngày càng tự tin khi viết bài tiếng Trung."
+    },
+    {
+      "start": 628.1,
+      "end": 637.17,
+      "en": "So AI is like a careful reading assistant and writing coach; it can help us understand Chinese articles more deeply.",
+      "zh": "所以，就像一个，细心的阅读助手和写作教练，他能帮，助我们更深入的理解中文文章",
+      "pinyin": "Suǒ yǐ， jiù xiàng yí gè， xì xīn de yuè dú zhù shǒu hé xiě zuò jiào liàn， tā néng bāng， zhù wǒ men gèng shēn rù de lǐ jiě zhōng wén wén zhāng",
+      "vi": "Vì vậy AI giống như một trợ lý đọc kỹ lưỡng và một huấn luyện viên viết, nó có thể giúp chúng ta hiểu bài viết tiếng Trung sâu sắc hơn."
+    },
+    {
+      "start": 637.2,
+      "end": 644.3,
+      "en": "It can also help us correct mistakes in our writing, making our writing more accurate and fluent.",
+      "zh": "也能帮助我们纠正写作中的错误，让我们的写作变得更加准确和流利",
+      "pinyin": "Yě néng bāng zhù wǒ men jiū zhèng xiě zuò zhōng de cuò wù， ràng wǒ men de xiě zuò biàn de gèng jiā zhǔn què hé liú lì",
+      "vi": "Nó cũng có thể giúp chúng ta sửa lỗi trong bài viết, khiến bài viết của chúng ta trở nên chính xác và trôi chảy hơn."
+    },
+    {
+      "start": 644.3,
+      "end": 651.4,
+      "en": "For those of us who hope to improve our Chinese through reading and writing,",
+      "zh": "这对于我们希望通过阅读和写作，来提高中文水平的朋友们来说",
+      "pinyin": "Zhè duì yú wǒ men xī wàng tōng guò yuè dú hé xiě zuò， lái tí gāo zhōng wén shuǐ píng de péng yǒu men lái shuō",
+      "vi": "Đối với những bạn muốn nâng cao trình độ tiếng Trung thông qua việc đọc và viết,"
+    },
+    {
+      "start": 651.5,
+      "end": 660.2,
+      "en": "this is undoubtedly very beneficial; so is AI truly flawless, and does it have limitations we should pay attention to",
+      "zh": "无疑是非常有意的，那么真的完美无缺吗，他有没有一些我们应该注意的局限",
+      "pinyin": "Wú yí shì fēi cháng yǒu yì de， nà me zhēn de wán měi wú quē ma， tā yǒu méi yǒu yì xiē wǒ men yīng gāi zhù yì de jú xiàn",
+      "vi": "điều này chắc chắn là rất có ích; vậy AI có thật sự hoàn hảo không, nó có những điểm nào chúng ta nên chú ý về tính hạn chế"
+    },
+    {
+      "start": 660.2,
+      "end": 670.73,
+      "en": "What about its limitations? Let's continue; although AI has many advantages in Chinese learning, we also need to recognize its limitations",
+      "zh": "性呢，我们继续往下聊，虽然在中文学习中有很多优点，但我们也需要认识到它的局限性",
+      "pinyin": "Xìng ne， wǒ men jì xù wǎng xià liáo， suī rán zài zhōng wén xué xí zhōng yǒu hěn duō yōu diǎn， dàn wǒ men yě xū yào rèn shi dào tā de jú xiàn xìng",
+      "vi": "tính hạn chế thì sao? Chúng ta tiếp tục nói tiếp; tuy AI có nhiều ưu điểm trong học tiếng Trung, nhưng chúng ta cũng cần nhận ra những hạn chế của nó"
+    },
+    {
+      "start": 670.73,
+      "end": 678.03,
+      "en": "AI is a powerful tool, but it cannot completely replace the role of us humans in learning",
+      "zh": "是一个强大的工具，但它不能完全代替我们人类，在学习中的作用",
+      "pinyin": "Shì yí gè qiáng dà de gōng jù， dàn tā bù néng wán quán dài tì wǒ men rén lèi， zài xué xí zhōng de zuò yòng",
+      "vi": "AI là một công cụ mạnh mẽ, nhưng nó không thể hoàn toàn thay thế vai trò của con người chúng ta trong học tập"
+    },
+    {
+      "start": 678.3,
+      "end": 687,
+      "en": "nor can it completely replace real language environments and interpersonal communication; first, when it comes to understanding culture and emotions, AI",
+      "zh": "也不能完全代替真实的语言环境，和人际交流，首先在理解文化和情感方面",
+      "pinyin": "Yě bù néng wán quán dài tì zhēn shí de yǔ yán huán jìng， hé rén jì jiāo liú， shǒu xiān zài lǐ jiě wén huà hé qíng gǎn fāng miàn",
+      "vi": "cũng không thể hoàn toàn thay thế môi trường ngôn ngữ thực tế và giao tiếp giữa người với người; trước hết, về mặt hiểu văn hóa và cảm xúc, AI"
+    },
+    {
+      "start": 687,
+      "end": 695.33,
+      "en": "still has many shortcomings; language is not just vocabulary and grammar, it also contains rich cultural background",
+      "zh": "还有很多不足，语言不仅仅是词汇和语法，他还包含了丰富的文化背景",
+      "pinyin": "Hái yǒu hěn duō bù zú， yǔ yán bù jǐn jǐn shì cí huì hé yǔ fǎ， tā hái bāo hán le fēng fù de wén huà bèi jǐng",
+      "vi": "vẫn còn nhiều thiếu sót; ngôn ngữ không chỉ là từ vựng và ngữ pháp, mà còn bao gồm nền tảng văn hóa phong phú"
+    },
+    {
+      "start": 695.33,
+      "end": 703.37,
+      "en": "history and emotions; for example, Chinese has many idioms and sayings whose meanings are often tied to Chinese culture",
+      "zh": "历史和情感，比如中文里有很多成语，俗语他们的意义往往和中国文化",
+      "pinyin": "Lì shǐ hé qíng gǎn， bǐ rú zhōng wén lǐ yǒu hěn duō chéng yǔ， sú yǔ tā men de yì yì wǎng wǎng hé zhōng guó wén huà",
+      "vi": "lịch sử và cảm xúc; ví dụ trong tiếng Trung có nhiều thành ngữ, tục ngữ, ý nghĩa của chúng thường gắn với văn hóa Trung Quốc"
+    },
+    {
+      "start": 703.37,
+      "end": 711.2,
+      "en": "closely related; although AI can explain the literal meaning of these words, it is hard for it to truly understand",
+      "zh": "紧密相关，虽然可以解释这些词语的字面，意思但他很难真正理解",
+      "pinyin": "Jǐn mì xiāng guān， suī rán kě yǐ jiě shì zhè xiē cí yǔ de zì miàn， yì sī dàn tā hěn nán zhēn zhèng lǐ jiě",
+      "vi": "gắn bó mật thiết; tuy AI có thể giải thích nghĩa mặt chữ của những từ ngữ này, nhưng nó rất khó thực sự hiểu"
+    },
+    {
+      "start": 711.2,
+      "end": 718.7,
+      "en": "the deep cultural meanings behind them and the emotional nuances in specific contexts; for example",
+      "zh": "其背后的深层文化含义，和在特定情境下的情感色彩，举个例子",
+      "pinyin": "Qí bèi hòu de shēn céng wén huà hán yì， hé zài tè dìng qíng jìng xià de qíng gǎn sè cǎi， jǔ gè lì zǐ",
+      "vi": "ý nghĩa văn hóa sâu xa đằng sau chúng, và sắc thái cảm xúc trong những tình huống cụ thể; lấy một ví dụ"
+    },
+    {
+      "start": 718.9,
+      "end": 726.5,
+      "en": "When Chinese people meet, they may say “Have you eaten?”, which usually isn't really asking whether you have eaten",
+      "zh": "中国人见面可能会说你吃了吗，这通常不是真的问你是否吃饭了",
+      "pinyin": "Zhōng guó rén jiàn miàn kě néng huì shuō nǐ chī le ma， zhè tōng cháng bú shì zhēn de wèn nǐ shì fǒu chī fàn le",
+      "vi": "Người Trung Quốc khi gặp nhau có thể sẽ nói “Bạn ăn chưa?”, điều này thường không phải thật sự hỏi bạn đã ăn hay chưa"
+    },
+    {
+      "start": 726.53,
+      "end": 733.97,
+      "en": "but rather a way of greeting. AI may know that this sentence means “Have you eaten?”",
+      "zh": "而是一种问候方式，可能知道这句话的意思是，你吃饭了吗",
+      "pinyin": "Ér shì yì zhǒng wèn hòu fāng shì， kě néng zhī dào zhè jù huà de yì sī shì， nǐ chī fàn le ma",
+      "vi": "mà là một cách chào hỏi. AI có thể biết câu này có nghĩa là “Bạn ăn cơm chưa?”"
+    },
+    {
+      "start": 733.97,
+      "end": 741.27,
+      "en": "But it may not understand the care behind this sentence the way a Chinese person does.",
+      "zh": "但他可能无法像一个中国人那样，理解这句话背后所蕴含的关心",
+      "pinyin": "Dàn tā kě néng wú fǎ xiàng yí gè zhōng guó rén nà yàng， lǐ jiě zhè jù huà bèi hòu suǒ yùn hán de guān xīn",
+      "vi": "Nhưng nó có thể không hiểu được sự quan tâm ẩn chứa sau câu nói này như một người Trung Quốc."
+    },
+    {
+      "start": 741.27,
+      "end": 750.37,
+      "en": "and the cultural habits of daily greetings. Second, AI cannot provide truly natural conversation and interpersonal interaction.",
+      "zh": "和日常问候的文化习惯，其次无法提供真正的，自然的对话和人际互动",
+      "pinyin": "Hé rì cháng wèn hòu de wén huà xí guàn， qí cì wú fǎ tí gōng zhēn zhèng de， zì rán de duì huà hé rén jì hù dòng",
+      "vi": "và những thói quen văn hóa của lời chào hỏi hằng ngày. Thứ hai, AI không thể mang lại những cuộc trò chuyện và tương tác giữa người với người thực sự, tự nhiên."
+    },
+    {
+      "start": 750.73,
+      "end": 759.5,
+      "en": "The ultimate goal of learning a language is to communicate with people, with real people; we can observe the other person’s facial expressions.",
+      "zh": "学习语言的最终目的，是为了和人交流，和真人交流，我们可以观察对方的表情",
+      "pinyin": "Xué xí yǔ yán de zuì zhōng mù dì， shì wèi le hé rén jiāo liú， hé zhēn rén jiāo liú， wǒ men kě yǐ guān chá duì fāng de biǎo qíng",
+      "vi": "Mục đích cuối cùng của việc học ngôn ngữ là để giao tiếp với con người, giao tiếp với người thật; chúng ta có thể quan sát biểu cảm của đối phương."
+    },
+    {
+      "start": 759.6,
+      "end": 768.87,
+      "en": "tone of voice, and body language—these are all very important parts of communication. Although AI can simulate conversation",
+      "zh": "语气肢体语言，这些都是语言交流中，非常重要的部分，虽然可以模拟对话",
+      "pinyin": "Yǔ qì zhī tǐ yǔ yán， zhè xiē dōu shì yǔ yán jiāo liú zhōng， fēi cháng zhòng yào de bù fen， suī rán kě yǐ mó nǐ duì huà",
+      "vi": "giọng điệu, ngôn ngữ cơ thể — đây đều là những phần rất quan trọng trong giao tiếp. Mặc dù AI có thể mô phỏng hội thoại"
+    },
+    {
+      "start": 769.07,
+      "end": 776,
+      "en": "but it cannot communicate with you with emotion and thought like a real person.",
+      "zh": "但他无法像一个真正的人那样，和你进行有情感，有思想的交流",
+      "pinyin": "Dàn tā wú fǎ xiàng yí gè zhēn zhèng de rén nà yàng， hé nǐ jìn xíng yǒu qíng gǎn， yǒu sī xiǎng de jiāo liú",
+      "vi": "nhưng nó không thể giao tiếp với bạn bằng cảm xúc và suy nghĩ như một con người thật sự."
+    },
+    {
+      "start": 776.2,
+      "end": 782.37,
+      "en": "Nor can it understand your sense of humor or frustration in a conversation. I have a friend",
+      "zh": "也无法理解你在对话中的幽默感，或沮丧情绪，我有一个朋友",
+      "pinyin": "Yě wú fǎ lǐ jiě nǐ zài duì huà zhōng de yōu mò gǎn， huò jǔ sàng qíng xù， wǒ yǒu yí gè péng yǒu",
+      "vi": "Nó cũng không thể hiểu được sự hài hước hay cảm xúc chán nản của bạn trong cuộc trò chuyện. Tôi có một người bạn"
+    },
+    {
+      "start": 782.37,
+      "end": 790.97,
+      "en": "His name is Zhang Wei. He has been learning Chinese for many years. He told me that although AI has helped him practice speaking a lot",
+      "zh": "他叫张伟，他学习中文很多年了，他告诉我，虽然帮助他练习了很多口语",
+      "pinyin": "Tā jiào zhāng wěi， tā xué xí zhōng wén hěn duō nián le， tā gào sù wǒ， suī rán bāng zhù tā liàn xí le hěn duō kǒu yǔ",
+      "vi": "cậu ấy tên là Trương Vĩ, đã học tiếng Trung nhiều năm. Cậu ấy nói với tôi rằng, mặc dù AI đã giúp cậu ấy luyện nói rất nhiều"
+    },
+    {
+      "start": 791.13,
+      "end": 798.67,
+      "en": "but when he first traveled to China and communicated face-to-face with locals, he still felt a bit nervous.",
+      "zh": "但当他第一次去中国旅行，和当地人面对面交流时，他还是感到有点紧张",
+      "pinyin": "Dàn dāng tā dì yī cì qù zhōng guó lǚ xíng， hé dāng dì rén miàn duì miàn jiāo liú shí， tā hái shì gǎn dào yǒu diǎn jǐn zhāng",
+      "vi": "nhưng khi lần đầu đến Trung Quốc du lịch và giao tiếp trực tiếp với người địa phương, cậu ấy vẫn cảm thấy hơi căng thẳng."
+    },
+    {
+      "start": 798.67,
+      "end": 805.97,
+      "en": "He said communicating with real people feels completely different; you not only have to understand what the other person says...",
+      "zh": "他说和真人交流的感觉完全不一样，你不仅要听懂对方的话",
+      "pinyin": "Tā shuō hé zhēn rén jiāo liú de gǎn jué wán quán bù yí yàng， nǐ bù jǐn yào tīng dǒng duì fāng de huà",
+      "vi": "Cậu ấy nói cảm giác giao tiếp với người thật hoàn toàn khác; bạn không chỉ phải hiểu lời đối phương nói..."
+    },
+    {
+      "start": 806.07,
+      "end": 814.13,
+      "en": "You also need to understand the other person's expressions and tone, which is much more complicated than talking with AI; through that trip",
+      "zh": "还要理解对方的表情和语气，这比和对话复杂的多，通过那次旅行",
+      "pinyin": "Hái yào lǐ jiě duì fāng de biǎo qíng hé yǔ qì， zhè bǐ hé duì huà fù zá de duō， tōng guò nà cì lǚ xíng",
+      "vi": "Còn phải hiểu biểu cảm và giọng điệu của đối phương, điều này phức tạp hơn nhiều so với trò chuyện với AI; qua chuyến đi lần đó"
+    },
+    {
+      "start": 814.13,
+      "end": 823.57,
+      "en": "he truly realized the charm of language and the importance of communicating with people; in this regard, although AI can correct mistakes",
+      "zh": "他才真正体会到语言的魅力，和与人交流的重要性，在这虽然可以纠正错误",
+      "pinyin": "Tā cái zhēn zhèng tǐ huì dào yǔ yán de mèi lì， hé yǔ rén jiāo liú de zhòng yào xìng， zài zhè suī rán kě yǐ jiū zhèng cuò wù",
+      "vi": "anh ấy mới thực sự cảm nhận được sức hấp dẫn của ngôn ngữ và tầm quan trọng của việc giao tiếp với người khác; về điểm này, tuy AI có thể sửa lỗi"
+    },
+    {
+      "start": 823.67,
+      "end": 830.1,
+      "en": "but it is hard for it to tailor a study plan for you like an experienced teacher",
+      "zh": "但他很难像一个有经验的老师那样，为你量身定制学习计划",
+      "pinyin": "Dàn tā hěn nán xiàng yí gè yǒu jīng yàn de lǎo shī nà yàng， wèi nǐ liáng shēn dìng zhì xué xí jì huà",
+      "vi": "nhưng nó khó có thể giống như một giáo viên có kinh nghiệm, thiết kế riêng cho bạn một kế hoạch học tập"
+    },
+    {
+      "start": 830.2,
+      "end": 836.47,
+      "en": "or discover deeper problems in your learning; a teacher can, based on your learning situation",
+      "zh": "或者发现你学习中的深层次问题，老师可以根据你的学习情况",
+      "pinyin": "Huò zhě fā xiàn nǐ xué xí zhōng de shēn céng cì wèn tí， lǎo shī kě yǐ gēn jù nǐ de xué xí qíng kuàng",
+      "vi": "hoặc phát hiện những vấn đề sâu xa trong quá trình học của bạn; giáo viên có thể dựa vào tình hình học tập của bạn"
+    },
+    {
+      "start": 836.5,
+      "end": 844.47,
+      "en": "give you specific guidance and suggestions, stimulate your interest in learning, and resolve your confusion in learning",
+      "zh": "给你具体的指导和建议，激发你的学习兴趣，解决你学习中的困惑",
+      "pinyin": "Gěi nǐ jù tǐ de zhǐ dǎo hé jiàn yì， jī fā nǐ de xué xí xìng qù， jiě jué nǐ xué xí zhōng de kùn huò",
+      "vi": "đưa ra cho bạn hướng dẫn và gợi ý cụ thể, khơi dậy hứng thú học tập của bạn, giải đáp những băn khoăn trong việc học của bạn"
+    },
+    {
+      "start": 844.87,
+      "end": 853.87,
+      "en": "At present, AI still finds it difficult to do this, so we can regard AI as a very useful auxiliary tool",
+      "zh": "目前还很难做到这一点，所以我们可以把，看作一个非常有用的辅助工具",
+      "pinyin": "Mù qián hái hěn nán zuò dào zhè yì diǎn， suǒ yǐ wǒ men kě yǐ bǎ， kàn zuò yí gè fēi cháng yǒu yòng de fǔ zhù gōng jù",
+      "vi": "Hiện nay AI vẫn còn khó làm được điều này, vì vậy chúng ta có thể coi AI là một công cụ hỗ trợ rất hữu ích"
+    },
+    {
+      "start": 854.13,
+      "end": 862.57,
+      "en": "It can help us solve many technical problems in learning, but we cannot completely rely on it",
+      "zh": "他能够帮助我们，解决很多学习上的技术性问题，但是我们不能完全依赖他",
+      "pinyin": "Tā néng gòu bāng zhù wǒ men， jiě jué hěn duō xué xí shàng de jì shù xìng wèn tí， dàn shì wǒ men bù néng wán quán yī lài tā",
+      "vi": "Nó có thể giúp chúng ta giải quyết nhiều vấn đề kỹ thuật trong học tập, nhưng chúng ta không thể hoàn toàn phụ thuộc vào nó"
+    },
+    {
+      "start": 862.67,
+      "end": 870.17,
+      "en": "Real language learning also requires us to invest time and energy to experience the culture behind the language",
+      "zh": "真正的语言学习，还需要我们投入时间和精力，去感受语言背后的文化",
+      "pinyin": "Zhēn zhèng de yǔ yán xué xí， hái xū yào wǒ men tóu rù shí jiān hé jīng lì， qù gǎn shòu yǔ yán bèi hòu de wén huà",
+      "vi": "Việc học ngôn ngữ thực sự còn đòi hỏi chúng ta đầu tư thời gian và công sức để cảm nhận nền văn hóa đằng sau ngôn ngữ"
+    },
+    {
+      "start": 870.17,
+      "end": 878.57,
+      "en": "communicate with real people, and experience the joy of language; so how should we balance AI",
+      "zh": "去和真实的人进行交流，去体验语言的乐趣，那么我们应该如何平衡",
+      "pinyin": "Qù hé zhēn shí de rén jìn xíng jiāo liú， qù tǐ yàn yǔ yán de lè qù， nà me wǒ men yīng gāi rú hé píng héng",
+      "vi": "giao tiếp với những người thật, trải nghiệm niềm vui của ngôn ngữ; vậy chúng ta nên cân bằng AI như thế nào"
+    },
+    {
+      "start": 878.57,
+      "end": 888.7,
+      "en": "with traditional learning methods? How can we make better use of AI when learning Chinese? After understanding AI's advantages and limitations",
+      "zh": "和传统学习方法呢，如何在学习中文时更好的利用呢，了解了的优点和局限性之后",
+      "pinyin": "Hé chuán tǒng xué xí fāng fǎ ne， rú hé zài xué xí zhōng wén shí gèng hǎo de lì yòng ne， liǎo jiě le de yōu diǎn hé jú xiàn xìng zhī hòu",
+      "vi": "với phương pháp học truyền thống? Làm thế nào để tận dụng AI tốt hơn khi học tiếng Trung? Sau khi hiểu được ưu điểm và hạn chế của AI"
+    },
+    {
+      "start": 888.7,
+      "end": 897.6,
+      "en": "let's talk about how to use AI more effectively to learn Chinese; the key is to treat it as a tool",
+      "zh": "我们来聊聊，如何更有效的利用来学习中文，关键在于把它当做一个工具",
+      "pinyin": "Wǒ men lái liáo liáo， rú hé gèng yǒu xiào de lì yòng lái xué xí zhōng wén， guān jiàn zài yú bǎ tā dàng zuò yí gè gōng jù",
+      "vi": "chúng ta hãy cùng nói về cách sử dụng AI hiệu quả hơn để học tiếng Trung; mấu chốt là coi nó như một công cụ"
+    },
+    {
+      "start": 897.6,
+      "end": 906.1,
+      "en": "rather than the only teacher. First, AI can become a good helper in your early learning and daily practice",
+      "zh": "而不是唯一的老师，首先，可以成为你学习初期，和日常练习的好帮手",
+      "pinyin": "Ér bú shì wéi yī de lǎo shī， shǒu xiān， kě yǐ chéng wéi nǐ xué xí chū qī， hé rì cháng liàn xí de hǎo bāng shǒu",
+      "vi": "chứ không phải là người thầy duy nhất. Trước hết, AI có thể trở thành trợ thủ đắc lực cho bạn trong giai đoạn đầu học tập và luyện tập hằng ngày"
+    },
+    {
+      "start": 906.4,
+      "end": 912.97,
+      "en": "If you are a beginner in Chinese, or usually don't have many opportunities to communicate with Chinese people",
+      "zh": "如果你是中文初学者，或者平，时没有太多机会和中国人交流",
+      "pinyin": "Rú guǒ nǐ shì zhōng wén chū xué zhě， huò zhě píng， shí méi yǒu tài duō jī huì hé zhōng guó rén jiāo liú",
+      "vi": "Nếu bạn là người mới học tiếng Trung, hoặc bình thường không có nhiều cơ hội giao tiếp với người Trung Quốc"
+    },
+    {
+      "start": 913.27,
+      "end": 922.87,
+      "en": "AI translation, AI dictionaries, and AI speaking practice tools can all provide great convenience; you can use them to look up new words",
+      "zh": "翻译字典，口语练习工具，都能提供极大的便利，你可以用它们来查声词",
+      "pinyin": "Fān yì zì diǎn， kǒu yǔ liàn xí gōng jù， dōu néng tí gōng jí dà de biàn lì， nǐ kě yǐ yòng tā men lái chá shēng cí",
+      "vi": "Các công cụ dịch AI, từ điển AI, công cụ luyện nói AI đều có thể mang lại sự tiện lợi rất lớn; bạn có thể dùng chúng để tra từ mới"
+    },
+    {
+      "start": 923.1,
+      "end": 931.93,
+      "en": "understand basic sentence patterns, and correct pronunciation; this can help you get started quickly and build confidence in learning",
+      "zh": "理解基本句型，纠正发音，这能帮助你快速入门，并建立起学习的信心",
+      "pinyin": "Lǐ jiě jī běn jù xíng， jiū zhèng fā yīn， zhè néng bāng zhù nǐ kuài sù rù mén， bìng jiàn lì qǐ xué xí de xìn xīn",
+      "vi": "hiểu các mẫu câu cơ bản, sửa phát âm; điều này có thể giúp bạn nhập môn nhanh chóng và xây dựng sự tự tin trong học tập"
+    },
+    {
+      "start": 931.93,
+      "end": 940.87,
+      "en": "For example, you can set aside 15 minutes every day to use an AI speaking app to practice fixed conversation scenarios",
+      "zh": "比如你可以每天抽出分钟，用一个口语，练习固定的对话场景",
+      "pinyin": "Bǐ rú nǐ kě yǐ měi tiān chōu chū fēn zhōng， yòng yí gè kǒu yǔ， liàn xí gù dìng de duì huà chǎng jǐng",
+      "vi": "Ví dụ, bạn có thể dành ra 15 phút mỗi ngày, dùng một ứng dụng luyện nói AI để luyện các tình huống hội thoại cố định"
+    },
+    {
+      "start": 941.13,
+      "end": 952.1,
+      "en": "such as ordering food or asking for directions; don't worry about saying it wrong—AI will patiently correct you, so your spoken Chinese will gradually become more fluent",
+      "zh": "比如点餐，问路不用担心说错，会耐心纠正你，这样你的口语会慢慢变得更流利",
+      "pinyin": "Bǐ rú diǎn cān， wèn lù bú yòng dān xīn shuō cuò， huì nài xīn jiū zhèng nǐ， zhè yàng nǐ de kǒu yǔ huì màn màn biàn de gèng liú lì",
+      "vi": "chẳng hạn như gọi món, hỏi đường; đừng lo nói sai, AI sẽ kiên nhẫn sửa cho bạn, như vậy khẩu ngữ của bạn sẽ dần trở nên lưu loát hơn"
+    },
+    {
+      "start": 952.17,
+      "end": 961.67,
+      "en": "Second, combine it with traditional learning methods and let AI serve your learning; AI can supplement your course learning",
+      "zh": "其次结合传统学习方法，让为你的学习服务，可以补充你的课程学习",
+      "pinyin": "Qí cì jié hé chuán tǒng xué xí fāng fǎ， ràng wèi nǐ de xué xí fú wù， kě yǐ bǔ chōng nǐ de kè chéng xué xí",
+      "vi": "Thứ hai, hãy kết hợp với phương pháp học truyền thống, để AI phục vụ việc học của bạn; AI có thể bổ trợ cho việc học trên lớp của bạn"
+    },
+    {
+      "start": 961.97,
+      "end": 969.1,
+      "en": "When taking classes at school or learning with a teacher, the teacher will systematically explain grammar and vocabulary",
+      "zh": "在学校上课或者和老师学习时，老师会系统的讲解语法和词汇",
+      "pinyin": "Zài xué xiào shàng kè huò zhě hé lǎo shī xué xí shí， lǎo shī huì xì tǒng de jiǎng jiě yǔ fǎ hé cí huì",
+      "vi": "Khi học ở trường hoặc học với giáo viên, giáo viên sẽ giảng giải một cách có hệ thống về ngữ pháp và từ vựng"
+    },
+    {
+      "start": 969.6,
+      "end": 977.1,
+      "en": "After class, you can use AI tools to consolidate your knowledge; for example, when the teacher explains a new grammar point",
+      "zh": "课后你可以用工具来巩固知识，比如老师讲了一个新的语法点",
+      "pinyin": "Kè hòu nǐ kě yǐ yòng gōng jù lái gǒng gù zhī shi， bǐ rú lǎo shī jiǎng le yí gè xīn de yǔ fǎ diǎn",
+      "vi": "Sau giờ học, bạn có thể dùng các công cụ AI để củng cố kiến thức, chẳng hạn như khi giáo viên giảng một điểm ngữ pháp mới"
+    },
+    {
+      "start": 977.33,
+      "end": 986.87,
+      "en": "You can use AI to generate more example sentences containing this grammar point, or ask AI to explain more related usages to you.",
+      "zh": "你可以用，来生成更多包含这个语法点的例，句，或者让给你解释更多相关的用法",
+      "pinyin": "Nǐ kě yǐ yòng， lái shēng chéng gèng duō bāo hán zhè ge yǔ fǎ diǎn de lì， jù， huò zhě ràng gěi nǐ jiě shì gèng duō xiàng guān de yòng fǎ",
+      "vi": "Bạn có thể dùng AI để tạo thêm nhiều câu ví dụ chứa điểm ngữ pháp này, hoặc nhờ AI giải thích thêm cho bạn những cách dùng liên quan."
+    },
+    {
+      "start": 986.9,
+      "end": 994.83,
+      "en": "This way your understanding will go deeper. I have a friend named Xiao Li; he is studying Chinese at university.",
+      "zh": "这样你的理解会更深入，我有一个朋友叫小李，他正在大学学习中文",
+      "pinyin": "Zhè yàng nǐ de lǐ jiě huì gèng shēn rù， wǒ yǒu yí gè péng yǒu jiào xiǎo lǐ， tā zhèng zài dà xué xué xí zhōng wén",
+      "vi": "Như vậy bạn sẽ hiểu sâu hơn. Tôi có một người bạn tên là Tiểu Lý, cậu ấy đang học tiếng Trung ở trường đại học."
+    },
+    {
+      "start": 995,
+      "end": 1001.87,
+      "en": "He told me that every time the teacher assigns reading homework, he first tries hard to read it himself.",
+      "zh": "他告诉我，每次老师布置完阅读作业，他都会先自己努力阅读",
+      "pinyin": "Tā gào sù wǒ， měi cì lǎo shī bù zhì wán yuè dú zuò yè， tā dōu huì xiān zì jǐ nǔ lì yuè dú",
+      "vi": "Cậu ấy nói với tôi rằng, mỗi lần giáo viên giao bài đọc xong, cậu ấy đều tự mình cố gắng đọc trước."
+    },
+    {
+      "start": 1002.07,
+      "end": 1011.13,
+      "en": "Only when he encounters sentences he really doesn't understand does he use AI tools to help with comprehension. He says this way he can both train his reading ability",
+      "zh": "遇到实在不懂的句子，他才会用工具辅助理解，他说这样既能锻炼自己的阅读能力",
+      "pinyin": "Yù dào shí zài bù dǒng de jù zi， tā cái huì yòng gōng jù fǔ zhù lǐ jiě， tā shuō zhè yàng jì néng duàn liàn zì jǐ de yuè dú néng lì",
+      "vi": "Chỉ khi gặp những câu thực sự không hiểu, cậu ấy mới dùng công cụ AI để hỗ trợ hiểu bài. Cậu ấy nói làm như vậy vừa rèn luyện được khả năng đọc của mình,"
+    },
+    {
+      "start": 1011.13,
+      "end": 1018.63,
+      "en": "and promptly resolve his doubts. He also uses AI tools to generate some writing practice topics.",
+      "zh": "又能及时解决疑惑，他还用工，具来生成一些写作练习的题目",
+      "pinyin": "Yòu néng jí shí jiě jué yí huò， tā hái yòng gōng， jù lái shēng chéng yì xiē xiě zuò liàn xí de tí mù",
+      "vi": "lại vừa giải quyết được thắc mắc kịp thời. Cậu ấy còn dùng công cụ AI để tạo ra một số đề bài luyện viết."
+    },
+    {
+      "start": 1018.67,
+      "end": 1027.57,
+      "en": "Then he writes on his own, and after finishing, uses AI to check it, and finally submits it to the teacher for correction. He feels this way of learning is more efficient.",
+      "zh": "然后自己写，写完再用检查，最后交给老师批改，他觉得这样学习效率更高",
+      "pinyin": "Rán hòu zì jǐ xiě， xiě wán zài yòng jiǎn chá， zuì hòu jiāo gěi lǎo shī pī gǎi， tā jué de zhè yàng xué xí xiào lǜ gèng gāo",
+      "vi": "Sau đó tự viết, viết xong lại dùng AI kiểm tra, cuối cùng nộp cho giáo viên chấm. Cậu ấy thấy cách học này hiệu quả hơn."
+    },
+    {
+      "start": 1027.57,
+      "end": 1038.73,
+      "en": "Third, don't neglect the importance of communicating with others. Although AI can simulate conversations, real progress comes from communicating with real people.",
+      "zh": "第三不要忽视与人交流的重要性，虽然可以模拟对话，但真正的进步来自于和真人交流",
+      "pinyin": "Dì sān bú yào hū shì yǔ rén jiāo liú de zhòng yào xìng， suī rán kě yǐ mó nǐ duì huà， dàn zhēn zhèng de jìn bù lái zì yú hé zhēn rén jiāo liú",
+      "vi": "Thứ ba, đừng coi nhẹ tầm quan trọng của việc giao tiếp với người khác. Tuy AI có thể mô phỏng hội thoại, nhưng tiến bộ thực sự đến từ việc giao tiếp với người thật."
+    },
+    {
+      "start": 1038.73,
+      "end": 1047.13,
+      "en": "When your Chinese reaches a certain level, try to find a language partner to join a Chinese corner, or travel to China.",
+      "zh": "当你的中文达到一定水平后，尝试找与伴参加中文角，或者去中国旅行",
+      "pinyin": "Dāng nǐ de zhōng wén dá dào yí dìng shuǐ píng hòu， cháng shì zhǎo yǔ bàn cān jiā zhōng wén jiǎo， huò zhě qù zhōng guó lǚ xíng",
+      "vi": "Khi trình độ tiếng Trung của bạn đạt đến một mức nhất định, hãy thử tìm bạn cùng học để tham gia góc tiếng Trung, hoặc đi du lịch Trung Quốc."
+    },
+    {
+      "start": 1047.13,
+      "end": 1055.93,
+      "en": "By communicating with Chinese people, you will learn authentic expressions and understand Chinese people's way of thinking and cultural customs.",
+      "zh": "与中国人交流，你会学到地道的表达方式，了解中国人的思维方式和文化习俗",
+      "pinyin": "Yǔ zhōng guó rén jiāo liú， nǐ huì xué dào dì dào de biǎo dá fāng shì， liǎo jiě zhōng guó rén de sī wéi fāng shì hé wén huà xí sú",
+      "vi": "Giao tiếp với người Trung Quốc, bạn sẽ học được cách diễn đạt tự nhiên, hiểu được cách tư duy và phong tục văn hóa của người Trung Quốc."
+    },
+    {
+      "start": 1055.93,
+      "end": 1065.63,
+      "en": "This is something AI currently cannot provide. A former student of mine named Chen Dong studied with AI tools for two years.",
+      "zh": "这是目前无法提供的，我以前的一个学生，他叫陈东，他通过工具学习了两年",
+      "pinyin": "Zhè shì mù qián wú fǎ tí gōng de， wǒ yǐ qián de yí gè xué shēng， tā jiào chén dōng， tā tōng guò gōng jù xué xí le liǎng nián",
+      "vi": "Đây là điều mà hiện nay AI chưa thể cung cấp. Một học sinh cũ của tôi tên là Trần Đông, cậu ấy đã học bằng công cụ AI trong hai năm."
+    },
+    {
+      "start": 1065.87,
+      "end": 1073.13,
+      "en": "Both his spoken Chinese and reading comprehension made great progress. Later he traveled to Shanghai, China.",
+      "zh": "中文口语和阅读都有了很大的进步，后来他去了中国上海旅游",
+      "pinyin": "Zhōng wén kǒu yǔ hé yuè dú dōu yǒu le hěn dà de jìn bù， hòu lái tā qù le zhōng guó shàng hǎi lǚ yóu",
+      "vi": "Khẩu ngữ và đọc hiểu tiếng Trung đều đã tiến bộ rất nhiều. Sau đó cậu ấy đi du lịch Thượng Hải, Trung Quốc."
+    },
+    {
+      "start": 1073.13,
+      "end": 1082.9,
+      "en": "Communicating with locals, he found that many sentences he had previously learned from AI sounded more natural in real life.",
+      "zh": "和当地人交流，他发现，很多他以前在那里学到的句子，在实际生活中听起来更自然",
+      "pinyin": "Hé dāng dì rén jiāo liú， tā fā xiàn， hěn duō tā yǐ qián zài nà lǐ xué dào de jù zi， zài shí jì shēng huó zhōng tīng qǐ lái gèng zì rán",
+      "vi": "Giao tiếp với người địa phương, cậu ấy phát hiện ra rằng nhiều câu trước đây cậu ấy học từ AI, khi nghe trong cuộc sống thực lại tự nhiên hơn."
+    },
+    {
+      "start": 1082.9,
+      "end": 1089.4,
+      "en": "Even more interestingly, he made a few Chinese friends in Shanghai. Through communicating with his friends,",
+      "zh": "更有趣，他还在上海交了几个中国朋友，通过和朋友们的交流",
+      "pinyin": "Gèng yǒu qù， tā hái zài shàng hǎi jiāo le jǐ gè zhōng guó péng yǒu， tōng guò hé péng yǒu men de jiāo liú",
+      "vi": "Thú vị hơn nữa, cậu ấy còn kết bạn với vài người bạn Trung Quốc ở Thượng Hải. Thông qua việc giao tiếp với các bạn,"
+    },
+    {
+      "start": 1089.47,
+      "end": 1095.8,
+      "en": "his Chinese level advanced by leaps and bounds, and he also gained a deeper understanding of Chinese culture.",
+      "zh": "他的中文水平突飞猛进，也对中国文化有了更深刻的理解",
+      "pinyin": "Tā de zhōng wén shuǐ píng tū fēi měng jìn， yě duì zhōng guó wén huà yǒu le gèng shēn kè de lǐ jiě",
+      "vi": "trình độ tiếng Trung của cậu ấy tiến bộ vượt bậc, và cậu ấy cũng có hiểu biết sâu sắc hơn về văn hóa Trung Quốc."
+    },
+    {
+      "start": 1095.93,
+      "end": 1103.6,
+      "en": "He told me that communicating with real people is the magic of learning Chinese. Finally, maintain a positive learning attitude.",
+      "zh": "他告诉我，真人交流是学习中文的魔法，最后保持积极的学习心态",
+      "pinyin": "Tā gào sù wǒ， zhēn rén jiāo liú shì xué xí zhōng wén de mó fǎ， zuì hòu bǎo chí jī jí de xué xí xīn tài",
+      "vi": "Cậu ấy nói với tôi rằng, giao tiếp với người thật chính là phép màu của việc học tiếng Trung. Cuối cùng, hãy giữ thái độ học tập tích cực."
+    },
+    {
+      "start": 1103.67,
+      "end": 1114,
+      "en": "AI is just a tool; your passion for learning and perseverance are what matter most. Don't become lazy because of AI's convenience.",
+      "zh": "只是一个工具，你的学习热情和坚持才是最重要的，不要因为的便利而变得懒惰",
+      "pinyin": "Zhǐ shì yí gè gōng jù， nǐ de xué xí rè qíng hé jiān chí cái shì zuì zhòng yào de， bú yào yīn wèi de biàn lì ér biàn de lǎn duò",
+      "vi": "AI chỉ là một công cụ, nhiệt huyết và sự kiên trì học tập của bạn mới là quan trọng nhất. Đừng vì sự tiện lợi của AI mà trở nên lười biếng."
+    },
+    {
+      "start": 1114.27,
+      "end": 1120.97,
+      "en": "And don't feel frustrated because it occasionally makes mistakes. Treat it as an auxiliary tool,",
+      "zh": "也不要因为他偶尔的错误，而感到沮丧，把他当做一个辅助工具",
+      "pinyin": "Yě bú yào yīn wèi tā ǒu ěr de cuò wù， ér gǎn dào jǔ sàng， bǎ tā dàng zuò yí gè fǔ zhù gōng jù",
+      "vi": "Cũng đừng vì đôi khi nó mắc lỗi mà cảm thấy chán nản. Hãy coi nó như một công cụ hỗ trợ,"
+    },
+    {
+      "start": 1121,
+      "end": 1129.4,
+      "en": "an intelligent partner, and let it contribute to your Chinese learning journey. Alright, dear listeners,",
+      "zh": "一个智能的伙伴，让他为你的中文学习之旅添砖加瓦，好了亲爱的听众朋友们",
+      "pinyin": "Yí gè zhì néng de huǒ bàn， ràng tā wèi nǐ de zhōng wén xué xí zhī lǚ tiān zhuān jiā wǎ， hǎo le qīn ài de tīng zhòng péng yǒu men",
+      "vi": "một người bạn thông minh, để nó góp phần vào hành trình học tiếng Trung của bạn. Được rồi, các thính giả thân mến,"
+    },
+    {
+      "start": 1129.4,
+      "end": 1137.7,
+      "en": "today's program is coming to an end. Today we discussed: can we use AI to learn Chinese?",
+      "zh": "今天的节目到这里就接近尾声了，我们今天讨论了，我们能用学习中文吗",
+      "pinyin": "Jīn tiān de jié mù dào zhè lǐ jiù jiē jìn wěi shēng le， wǒ men jīn tiān tǎo lùn le， wǒ men néng yòng xué xí zhōng wén ma",
+      "vi": "chương trình hôm nay sắp đến hồi kết rồi. Hôm nay chúng ta đã thảo luận: chúng ta có thể dùng AI để học tiếng Trung không?"
+    },
+    {
+      "start": 1137.7,
+      "end": 1145.7,
+      "en": "On this topic, we have learned that AI can indeed provide a lot of help for our Chinese learning.",
+      "zh": "这个话题，我们了解到，确实能为我们的中文学习，提供很多帮助",
+      "pinyin": "Zhè ge huà tí， wǒ men liǎo jiě dào， què shí néng wèi wǒ men de zhōng wén xué xí， tí gōng hěn duō bāng zhù",
+      "vi": "Về chủ đề này, chúng ta đã hiểu rằng AI thực sự có thể cung cấp rất nhiều sự giúp đỡ cho việc học tiếng Trung của chúng ta."
+    },
+    {
+      "start": 1145.7,
+      "end": 1152.2,
+      "en": "It's like a personal interpreter you carry with you, and together with a dictionary it helps us look up words quickly",
+      "zh": "他就像一个随身携带的翻译官，和字典能帮助我们快速查词",
+      "pinyin": "Tā jiù xiàng yí gè suí shēn xié dài de fān yì guān， hé zì diǎn néng bāng zhù wǒ men kuài sù chá cí",
+      "vi": "Nó giống như một phiên dịch viên mang theo bên mình, cùng với từ điển giúp chúng ta tra từ nhanh chóng"
+    },
+    {
+      "start": 1152.2,
+      "end": 1161.43,
+      "en": "Understand sentences; it is also a patient speaking partner that can help us practice pronunciation and conversation anytime, anywhere",
+      "zh": "理解句子，他也是一个有耐心的口语伙伴，可以随时随地，帮助我们练习发音和对话",
+      "pinyin": "Lǐ jiě jù zi， tā yě shì yí gè yǒu nài xīn de kǒu yǔ huǒ bàn， kě yǐ suí shí suí dì， bāng zhù wǒ men liàn xí fā yīn hé duì huà",
+      "vi": "Hiểu câu, nó cũng là một người bạn luyện nói kiên nhẫn, có thể bất cứ lúc nào, bất cứ nơi đâu, giúp chúng ta luyện phát âm và hội thoại"
+    },
+    {
+      "start": 1161.53,
+      "end": 1169.37,
+      "en": "In reading and writing, AI can also become our good assistant, helping us understand articles",
+      "zh": "在阅读和写作方面，也能成为我们的好助手，帮助我们理解文章",
+      "pinyin": "Zài yuè dú hé xiě zuò fāng miàn， yě néng chéng wéi wǒ men de hǎo zhù shǒu， bāng zhù wǒ men lǐ jiě wén zhāng",
+      "vi": "Về đọc và viết, AI cũng có thể trở thành trợ thủ đắc lực của chúng ta, giúp chúng ta hiểu bài viết"
+    },
+    {
+      "start": 1169.37,
+      "end": 1178.6,
+      "en": "Correct writing mistakes, but we must also recognize AI's limitations; AI cannot fully understand the deeper meanings of Chinese",
+      "zh": "纠正写作错误，但是我们也必须认识到的局限性，不能完全理解中国文",
+      "pinyin": "Jiū zhèng xiě zuò cuò wù， dàn shì wǒ men yě bì xū rèn shi dào de jú xiàn xìng， bù néng wán quán lǐ jiě zhōng guó wén",
+      "vi": "Sửa lỗi viết, nhưng chúng ta cũng phải nhận thức được những hạn chế của AI, AI không thể hoàn toàn hiểu văn"
+    },
+    {
+      "start": 1178.6,
+      "end": 1187.7,
+      "en": "Culture's deeper meanings, nor can it provide real interpersonal communication and emotional interaction; it cannot replace our real teachers",
+      "zh": "化的深层含义，也不能提供真实的人际交流，和情感互动，他不能代替我们真正的老师",
+      "pinyin": "Huà de shēn céng hán yì， yě bù néng tí gōng zhēn shí de rén jì jiāo liú， hé qíng gǎn hù dòng， tā bù néng dài tì wǒ men zhēn zhèng de lǎo shī",
+      "vi": "Hóa, ý nghĩa sâu xa, cũng không thể cung cấp giao tiếp giữa người với người thực sự, và tương tác cảm xúc, nó không thể thay thế giáo viên thực sự của chúng ta"
+    },
+    {
+      "start": 1187.8,
+      "end": 1195.47,
+      "en": "Still less can it replace our own passion and dedication to learning Chinese, so my advice is",
+      "zh": "更不能代替我们自己，对学习中文的热，情和投入，所以我的建议是",
+      "pinyin": "Gèng bù néng dài tì wǒ men zì jǐ， duì xué xí zhōng wén de rè， qíng hé tóu rù， suǒ yǐ wǒ de jiàn yì shì",
+      "vi": "Càng không thể thay thế chính chúng ta, nhiệt huyết và sự đầu tư vào việc học tiếng Trung, vì vậy lời khuyên của tôi là"
+    },
+    {
+      "start": 1195.57,
+      "end": 1203.07,
+      "en": "To treat AI as a powerful辅助 tool, letting it help us solve specific problems in learning",
+      "zh": "把当做一个强大的辅助工具，让他帮助我们解决学习中的具体问",
+      "pinyin": "Bǎ dàng zuò yí gè qiáng dà de fǔ zhù gōng jù， ràng tā bāng zhù wǒ men jiě jué xué xí zhōng de jù tǐ wèn",
+      "vi": "Hãy coi AI như một công cụ hỗ trợ mạnh mẽ, để nó giúp chúng ta giải quyết những vấn đề cụ thể trong học tập"
+    },
+    {
+      "start": 1203.07,
+      "end": 1209.5,
+      "en": "Improve learning efficiency; at the same time, we should also actively participate in real language",
+      "zh": "题提高学习效率，同时，我们也要积极的参与到真实的语言",
+      "pinyin": "Tí tí gāo xué xí xiào lǜ， tóng shí， wǒ men yě yào jī jí de cān yù dào zhēn shí de yǔ yán",
+      "vi": "Đề nâng cao hiệu quả học tập, đồng thời, chúng ta cũng phải tích cực tham gia vào ngôn ngữ thực tế"
+    },
+    {
+      "start": 1209.5,
+      "end": 1219.8,
+      "en": "Environments, communicate more with Chinese people, and feel the charm of Chinese culture; AI, human teachers, and your own efforts",
+      "zh": "环境中多和中国人交流，感受中国文化的魅力，和人类老师以及你自己的努力",
+      "pinyin": "Huán jìng zhōng duō hé zhōng guó rén jiāo liú， gǎn shòu zhōng guó wén huà de mèi lì， hé rén lèi lǎo shī yǐ jí nǐ zì jǐ de nǔ lì",
+      "vi": "Trong môi trường, giao lưu nhiều với người Trung Quốc, cảm nhận sức hấp dẫn của văn hóa Trung Quốc, AI và giáo viên con người cùng với nỗ lực của chính bạn"
+    },
+    {
+      "start": 1219.8,
+      "end": 1227.97,
+      "en": "The combination of all three is the best way to learn Chinese; newly learned words or important concepts",
+      "zh": "三者结合才是学习中文的最佳方式，新学到的词语或者重要的概念",
+      "pinyin": "Sān zhě jié hé cái shì xué xí zhōng wén de zuì jiā fāng shì， xīn xué dào de cí yǔ huò zhě zhòng yào de gài niàn",
+      "vi": "Kết hợp cả ba mới là cách tốt nhất để học tiếng Trung, những từ mới học được hoặc khái niệm quan trọng"
+    },
+    {
+      "start": 1228.3,
+      "end": 1240.77,
+      "en": "For example, artificial intelligence—\"ring汞之念\" means AI, tool is \"too\", and \"局限型u\", \"想进\" means limitation",
+      "zh": "比如人工智能，汞之念就是的意思，工具就是，还有局限型，想进就是的意思",
+      "pinyin": "Bǐ rú rén gōng zhì néng， gǒng zhī niàn jiù shì de yì sī， gōng jù jiù shì， hái yǒu jú xiàn xíng， xiǎng jìn jiù shì de yì sī",
+      "vi": "Ví dụ như trí tuệ nhân tạo, \"ring汞之念\" chính là nghĩa của AI, công cụ chính là \"too\", còn \"局限型u\", \"想进\" chính là nghĩa của limitation"
+    },
+    {
+      "start": 1240.77,
+      "end": 1248.87,
+      "en": "You can listen a few more times after class to deepen your understanding; thank you for listening to today's Learn Chinese podcast",
+      "zh": "大家可以在课后多听几遍，加深理解，感谢大家收听今天的学中文播课",
+      "pinyin": "Dà jiā kě yǐ zài kè hòu duō tīng jǐ biàn， jiā shēn lǐ jiě， gǎn xiè dà jiā shōu tīng jīn tiān de xué zhōng wén bō kè",
+      "vi": "Mọi người có thể nghe lại vài lần sau giờ học để hiểu sâu hơn, cảm ơn mọi người đã nghe podcast học tiếng Trung hôm nay"
+    },
+    {
+      "start": 1248.97,
+      "end": 1256.57,
+      "en": "If you like today's program, please remember to subscribe to us, and you're welcome to leave us a message in the comments",
+      "zh": "如果你喜欢今天的节目，请记得订阅我们，也欢迎在评论区给我们留言",
+      "pinyin": "Rú guǒ nǐ xǐ huan jīn tiān de jié mù， qǐng jì de dìng yuè wǒ men， yě huān yíng zài píng lùn qū gěi wǒ men liú yán",
+      "vi": "Nếu bạn thích chương trình hôm nay, hãy nhớ đăng ký kênh của chúng tôi, cũng hoan nghênh để lại lời nhắn cho chúng tôi ở phần bình luận"
+    },
+    {
+      "start": 1256.77,
+      "end": 1264.37,
+      "en": "Share your experience of using AI to learn Chinese; we will carefully read every one of your comments",
+      "zh": "分享你使用学习中文的经验，你的每一条留言我们都会认真阅读",
+      "pinyin": "Fēn xiǎng nǐ shǐ yòng xué xí zhōng wén de jīng yàn， nǐ de měi yì tiáo liú yán wǒ men dōu huì rèn zhēn yuè dú",
+      "vi": "Chia sẻ kinh nghiệm sử dụng AI để học tiếng Trung của bạn, mỗi bình luận của bạn chúng tôi đều sẽ đọc kỹ"
+    },
+    {
+      "start": 1264.37,
+      "end": 1272.1,
+      "en": "We hope everyone can make greater progress on the road of learning Chinese; see you next episode",
+      "zh": "希望大家都能在学习中文的路上，取得更大的进步，我们下期节目再见",
+      "pinyin": "Xī wàng dà jiā dōu néng zài xué xí zhōng wén de lù shang， qǔ dé gèng dà de jìn bù， wǒ men xià qī jié mù zài jiàn",
+      "vi": "Hy vọng mọi người đều có thể đạt được tiến bộ lớn hơn trên con đường học tiếng Trung, hẹn gặp lại các bạn trong chương trình sau"
+    }
+  ]
+}

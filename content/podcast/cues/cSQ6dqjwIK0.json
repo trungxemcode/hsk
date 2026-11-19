@@ -1,0 +1,1437 @@
+{
+  "id": "cSQ6dqjwIK0",
+  "youtubeId": "cSQ6dqjwIK0",
+  "channelHandle": "@LearnChineseThroughPodcast",
+  "title": "HSK 2-3 | How to keep tones in long sentences | Chinese Listening Practice",
+  "titleVi": "Cách giữ thanh điệu trong câu dài",
+  "topic": "Podcast Luyện nghe HSK",
+  "level": "HSK 2+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 776,
+  "cues": [
+    {
+      "start": 6.33,
+      "end": 10.53,
+      "en": "Hello everyone! Welcome to “Learn Chinese Podcast”.",
+      "zh": "🕺大家好！欢迎来到“ ”。",
+      "pinyin": "🕺 dà jiā hǎo！ huān yíng lái dào “ ”。",
+      "vi": "Xin chào mọi người! Chào mừng đến với “Learn Chinese Podcast”."
+    },
+    {
+      "start": 10.53,
+      "end": 11.7,
+      "en": "I'm Li Ming.",
+      "zh": "🕺我是李明。",
+      "pinyin": "🕺 wǒ shì lǐ míng。",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 11.87,
+      "end": 13.97,
+      "en": "Hello everyone! I'm Xiaoyu.",
+      "zh": "💃大家好！我是小雨。",
+      "pinyin": "💃 dà jiā hǎo！ wǒ shì xiǎo yǔ。",
+      "vi": "Xin chào mọi người! Tôi là Tiểu Vũ."
+    },
+    {
+      "start": 14.13,
+      "end": 16.57,
+      "en": "I'm very happy to meet everyone again.",
+      "zh": "💃很高兴又能和大家见面了。",
+      "pinyin": "💃 hěn gāo xìng yòu néng hé dà jiā jiàn miàn le。",
+      "vi": "Rất vui vì lại được gặp mọi người."
+    },
+    {
+      "start": 16.67,
+      "end": 18.5,
+      "en": "Xiaoyu, do you know?",
+      "zh": "🕺小雨，你知道吗？",
+      "pinyin": "🕺 xiǎo yǔ， nǐ zhī dào ma？",
+      "vi": "Tiểu Vũ, bạn có biết không?"
+    },
+    {
+      "start": 18.5,
+      "end": 25.3,
+      "en": "Our goal has always been to help everyone learn Chinese in the simplest and most enjoyable way.",
+      "zh": "🕺我们的目标一直都是帮助大家，🕺用最简单、🕺最快乐的方法学习中文。",
+      "pinyin": "🕺 wǒ men de mù biāo yì zhí dōu shì bāng zhù dà jiā，🕺 yòng zuì jiǎn dān、🕺 zuì kuài lè de fāng fǎ xué xí zhōng wén。",
+      "vi": "Mục tiêu của chúng tôi luôn là giúp mọi người học tiếng Trung bằng cách đơn giản và vui vẻ nhất."
+    },
+    {
+      "start": 25.67,
+      "end": 26.73,
+      "en": "Yes, Li Ming.",
+      "zh": "💃是的，李明。",
+      "pinyin": "💃 shì de， lǐ míng。",
+      "vi": "Đúng vậy, Lý Minh."
+    },
+    {
+      "start": 26.73,
+      "end": 32.93,
+      "en": "We hope every listener, whether just starting to learn or having studied for a while,",
+      "zh": "💃我们希望每一位听众朋友，💃不管是刚刚开始学习，💃还是已经学了一段时间，",
+      "pinyin": "💃 wǒ men xī wàng měi yí wèi tīng zhòng péng yǒu，💃 bù guǎn shì gāng gāng kāi shǐ xué xí，💃 hái shì yǐ jīng xué le yí duàn shí jiān，",
+      "vi": "Chúng tôi hy vọng mỗi thính giả, dù mới bắt đầu học hay đã học được một thời gian,"
+    },
+    {
+      "start": 32.93,
+      "end": 35.77,
+      "en": "can find confidence in our program.",
+      "zh": "💃都能在我们的节目里找到自信。",
+      "pinyin": "💃 dōu néng zài wǒ men de jié mù lǐ zhǎo dào zì xìn。",
+      "vi": "đều có thể tìm thấy sự tự tin trong chương trình của chúng tôi."
+    },
+    {
+      "start": 35.97,
+      "end": 43.5,
+      "en": "That's right. Today we're going to talk about a very important topic that also gives many friends a headache. Oh?",
+      "zh": "🕺没错。今天我们要聊一个非常重要，🕺也是很多朋友感到头疼的话题。💃哦？",
+      "pinyin": "🕺 méi cuò。 jīn tiān wǒ men yào liáo yí gè fēi cháng zhòng yào，🕺 yě shì hěn duō péng yǒu gǎn dào tóu téng de huà tí。💃 ò？",
+      "vi": "Đúng vậy. Hôm nay chúng ta sẽ nói về một chủ đề rất quan trọng và cũng khiến nhiều bạn đau đầu. Ồ?"
+    },
+    {
+      "start": 43.53,
+      "end": 44.9,
+      "en": "What topic is it?",
+      "zh": "💃是什么话题呢？",
+      "pinyin": "💃 shì shén me huà tí ne？",
+      "vi": "Đó là chủ đề gì vậy?"
+    },
+    {
+      "start": 44.97,
+      "end": 54.27,
+      "en": "The topic is: how to maintain tone accuracy when speaking long sentences? Wow, this really is a big problem!",
+      "zh": "🕺这个话题是：🕺如何在说长句的时候，保，🕺持声调的准确性？💃哇，💃这真的是一个大问题！",
+      "pinyin": "🕺 zhè ge huà tí shì：🕺 rú hé zài shuō cháng jù de shí hòu， bǎo，🕺 chí shēng diào de zhǔn què xìng？💃 wā，💃 zhè zhēn de shì yí gè dà wèn tí！",
+      "vi": "Chủ đề là: làm thế nào để giữ được độ chính xác của thanh điệu khi nói câu dài? Wow, đây thật sự là một vấn đề lớn!"
+    },
+    {
+      "start": 54.27,
+      "end": 59.37,
+      "en": "Many friends tell me that when they say individual new words, their tones are all very standard.",
+      "zh": "💃很多朋友告诉我，💃他们说单个生词的时候，💃声调都很标准。",
+      "pinyin": "💃 hěn duō péng yǒu gào sù wǒ，💃 tā men shuō dān gè shēng cí de shí hòu，💃 shēng diào dōu hěn biāo zhǔn。",
+      "vi": "Nhiều bạn nói với tôi rằng khi nói từng từ mới riêng lẻ, thanh điệu của họ đều rất chuẩn."
+    },
+    {
+      "start": 59.37,
+      "end": 68.3,
+      "en": "For example, “māma,” “mǎ,” and “shū” are all pronounced very well. Right, but once these words are placed in a long sentence,",
+      "zh": "💃比如“妈妈”、“马”、“书”，都说得很好。🕺对，但是，🕺一旦把这些词放在一个长句子里，",
+      "pinyin": "💃 bǐ rú “ mā ma ”、“ mǎ ”、“ shū ”， dōu shuō dé hěn hǎo。🕺 duì， dàn shì，🕺 yí dàn bǎ zhè xiē cí fàng zài yí gè cháng jù zi lǐ，",
+      "vi": "Ví dụ “māma”, “mǎ”, “shū” đều nói rất tốt. Đúng vậy, nhưng một khi đặt những từ này vào một câu dài,"
+    },
+    {
+      "start": 68.3,
+      "end": 69.67,
+      "en": "the tones get messed up.",
+      "zh": "🕺声调就乱了。",
+      "pinyin": "🕺 shēng diào jiù luàn le。",
+      "vi": "thanh điệu liền bị rối."
+    },
+    {
+      "start": 69.73,
+      "end": 75.1,
+      "en": "Yes, it feels like your tongue gets tied, or you forget the tones in order to speak quickly.",
+      "zh": "💃是的，感觉舌头打结了，💃或者为了说得快，就忘记了声调。",
+      "pinyin": "💃 shì de， gǎn jué shé tou dǎ jié le，💃 huò zhě wèi le shuō dé kuài， jiù wàng jì le shēng diào。",
+      "vi": "Đúng vậy, cảm giác như bị líu lưỡi, hoặc để nói nhanh mà quên mất thanh điệu."
+    },
+    {
+      "start": 75.3,
+      "end": 84.2,
+      "en": "Don't worry. Today we'll divide this big problem into three small parts and teach everyone step by step how to solve it. Yes,",
+      "zh": "🕺别担心，今天，🕺我们会把这个大问题，🕺分成三个小部分，🕺一步一步地教大家怎么解决。💃是的，",
+      "pinyin": "🕺 bié dān xīn， jīn tiān，🕺 wǒ men huì bǎ zhè ge dà wèn tí，🕺 fēn chéng sān gè xiǎo bù fen，🕺 yí bù yi bù dì jiào dà jiā zěn me jiě jué。💃 shì de，",
+      "vi": "Đừng lo, hôm nay chúng tôi sẽ chia vấn đề lớn này thành ba phần nhỏ, từng bước hướng dẫn mọi người cách giải quyết. Đúng vậy,"
+    },
+    {
+      "start": 84.37,
+      "end": 88.07,
+      "en": "If you have this worry too, be sure to listen to the end.",
+      "zh": "💃如果你也有这个烦恼，💃请一定要听到最后哦。",
+      "pinyin": "💃 rú guǒ nǐ yě yǒu zhè ge fán nǎo，💃 qǐng yí dìng yào tīng dào zuì hòu ò。",
+      "vi": "Nếu bạn cũng có nỗi lo này, nhất định phải nghe đến cuối nhé."
+    },
+    {
+      "start": 88.2,
+      "end": 90.5,
+      "en": "Then let's start now!",
+      "zh": "🕺那我们现在就开始吧！",
+      "pinyin": "🕺 nà wǒ men xiàn zài jiù kāi shǐ ba！",
+      "vi": "Vậy bây giờ chúng ta bắt đầu nhé!"
+    },
+    {
+      "start": 90.6,
+      "end": 96.83,
+      "en": "Li Ming, when it comes to tones in long sentences, I think the first issue is actually the basic rules.",
+      "zh": "💃李明，说到长句子的声调，💃我觉得第一个问题其实是基础规则。",
+      "pinyin": "💃 lǐ míng， shuō dào cháng jù zi de shēng diào，💃 wǒ jué de dì yī gè wèn tí qí shí shì jī chǔ guī zé。",
+      "vi": "Lý Minh, khi nói về thanh điệu trong câu dài, tôi nghĩ vấn đề đầu tiên thật ra là các quy tắc cơ bản."
+    },
+    {
+      "start": 97,
+      "end": 103.4,
+      "en": "Many times, people forget the rules of tone sandhi, so the sentence sounds unnatural.",
+      "zh": "💃很多时候，💃大家是因为忘记了“变调”的规则，💃所以句子听起来不自然。",
+      "pinyin": "💃 hěn duō shí hòu，💃 dà jiā shì yīn wèi wàng jì le “ biàn diào ” de guī zé，💃 suǒ yǐ jù zi tīng qǐ lái bú zì rán。",
+      "vi": "Nhiều khi, mọi người quên quy tắc “biến điệu”, nên câu nghe không tự nhiên."
+    },
+    {
+      "start": 103.7,
+      "end": 108.9,
+      "en": "Exactly right, Xiaoyu. In Chinese, some tones change.",
+      "zh": "🕺说得太对了，🕺小雨。中文里有一些声调是会变化的。",
+      "pinyin": "🕺 shuō dé tài duì le，🕺 xiǎo yǔ。 zhōng wén lǐ yǒu yì xiē shēng diào shì huì biàn huà de。",
+      "vi": "Nói quá đúng, Tiểu Vũ. Trong tiếng Trung có một số thanh điệu sẽ thay đổi."
+    },
+    {
+      "start": 108.9,
+      "end": 114.47,
+      "en": "If you don't pay attention to these changes, the sentence will be hard to read and sound strange.",
+      "zh": "🕺如果不注意这些变化，🕺句子就会很难读，🕺听起来也很奇怪。",
+      "pinyin": "🕺 rú guǒ bú zhù yì zhè xiē biàn huà，🕺 jù zi jiù huì hěn nán dú，🕺 tīng qǐ lái yě hěn qí guài。",
+      "vi": "Nếu không chú ý những thay đổi này, câu sẽ rất khó đọc và nghe cũng rất lạ."
+    },
+    {
+      "start": 114.6,
+      "end": 119.03,
+      "en": "The most common is the change in the “third tone,” right? Right.",
+      "zh": "💃最常见的就是“第三声”的变化，💃对吗？🕺对。",
+      "pinyin": "💃 zuì cháng jiàn de jiù shì “ dì sān shēng ” de biàn huà，💃 duì ma？🕺 duì。",
+      "vi": "Phổ biến nhất là sự thay đổi của “thanh thứ ba”, đúng không? Đúng."
+    },
+    {
+      "start": 119.17,
+      "end": 122.1,
+      "en": "Everyone must remember this simple rule.",
+      "zh": "🕺大家一定要记住这个简单的规则。",
+      "pinyin": "🕺 dà jiā yí dìng yào jì zhù zhè ge jiǎn dān de guī zé。",
+      "vi": "Mọi người nhất định phải nhớ quy tắc đơn giản này."
+    },
+    {
+      "start": 122.27,
+      "end": 127.83,
+      "en": "If two third-tone characters are together, the first character changes to the second tone.",
+      "zh": "🕺如果两个第三声的字在一起，🕺第一个字要变成第二声。",
+      "pinyin": "🕺 rú guǒ liǎng gè dì sān shēng de zì zài yì qǐ，🕺 dì yī gè zì yào biàn chéng dì èr shēng。",
+      "vi": "Nếu hai chữ thanh thứ ba đứng cạnh nhau, chữ thứ nhất phải biến thành thanh thứ hai."
+    },
+    {
+      "start": 127.97,
+      "end": 130.6,
+      "en": "This rule sounds a bit abstract.",
+      "zh": "💃这个规则听起来有点抽象。",
+      "pinyin": "💃 zhè ge guī zé tīng qǐ lái yǒu diǎn chōu xiàng。",
+      "vi": "Quy tắc này nghe có vẻ hơi trừu tượng."
+    },
+    {
+      "start": 130.67,
+      "end": 133.83,
+      "en": "Li Ming, can you give us a simple example?",
+      "zh": "💃李明，你能给我们举个简单的例子吗？",
+      "pinyin": "💃 lǐ míng， nǐ néng gěi wǒ men jǔ gè jiǎn dān de lì zǐ ma？",
+      "vi": "Lý Minh, bạn có thể cho chúng tôi một ví dụ đơn giản không?"
+    },
+    {
+      "start": 133.93,
+      "end": 134.9,
+      "en": "Of course.",
+      "zh": "🕺当然可以。",
+      "pinyin": "🕺 dāng rán kě yǐ。",
+      "vi": "Tất nhiên là được."
+    },
+    {
+      "start": 134.97,
+      "end": 138.77,
+      "en": "For example, the greeting everyone knows: “你好.”",
+      "zh": "🕺比如大家都知道的问候语：“你好”。",
+      "pinyin": "🕺 bǐ rú dà jiā dōu zhī dào de wèn hòu yǔ：“ nǐ hǎo ”。",
+      "vi": "Ví dụ như câu chào mà mọi người đều biết: “你好”."
+    },
+    {
+      "start": 138.8,
+      "end": 142.97,
+      "en": "“你” is the third tone, and “好” is also the third tone.",
+      "zh": "💃“你”是第三声，💃“好”也是第三声。",
+      "pinyin": "💃“ nǐ ” shì dì sān shēng，💃“ hǎo ” yě shì dì sān shēng。",
+      "vi": "“你” là thanh thứ ba, “好” cũng là thanh thứ ba."
+    },
+    {
+      "start": 142.97,
+      "end": 149.9,
+      "en": "But we don't say “nǐ hǎo.” Right, in a sentence, we have to say them connected.",
+      "zh": "💃但是我们不说“你好”。🕺对，🕺在句子里，我们要连起来说。",
+      "pinyin": "💃 dàn shì wǒ men bù shuō “ nǐ hǎo ”。🕺 duì，🕺 zài jù zi lǐ， wǒ men yào lián qǐ lái shuō。",
+      "vi": "Nhưng chúng ta không nói “nǐ hǎo”. Đúng, trong câu, chúng ta phải nói liền nhau."
+    },
+    {
+      "start": 149.9,
+      "end": 155.43,
+      "en": "So “你” changes to the second tone. Everyone, listen: nǐ hǎo.",
+      "zh": "🕺所以“你”变成了，🕺第二声。大家听一下：你好。",
+      "pinyin": "🕺 suǒ yǐ “ nǐ ” biàn chéng le，🕺 dì èr shēng。 dà jiā tīng yí xià： nǐ hǎo。",
+      "vi": "Vì vậy “你” biến thành thanh thứ hai. Mọi người nghe thử: nǐ hǎo."
+    },
+    {
+      "start": 155.57,
+      "end": 159.3,
+      "en": "Nǐ hǎo. Reading it this way is indeed much smoother.",
+      "zh": "🕺你好。💃这样读起来确实顺口多了。",
+      "pinyin": "🕺 nǐ hǎo。💃 zhè yàng dú qǐ lái què shí shùn kǒu duō le。",
+      "vi": "Nǐ hǎo. Đọc như vậy đúng là trôi chảy hơn nhiều."
+    },
+    {
+      "start": 159.3,
+      "end": 165.17,
+      "en": "If we encounter two third tones in a long sentence, do we also have to change them like this? Yes.",
+      "zh": "💃如果我们在长句子里，💃遇到两个第三声，💃也要这样变吗？🕺是的。",
+      "pinyin": "💃 rú guǒ wǒ men zài cháng jù zǐ lǐ，💃 yù dào liǎng gè dì sān shēng，💃 yě yào zhè yàng biàn ma？🕺 shì de。",
+      "vi": "Nếu trong câu dài, chúng ta gặp hai thanh thứ ba, cũng phải biến đổi như vậy sao? Đúng vậy."
+    },
+    {
+      "start": 165.4,
+      "end": 168.47,
+      "en": "For example, this sentence: “I also want to go.”",
+      "zh": "🕺比如这个句子：“我也想去”。",
+      "pinyin": "🕺 bǐ rú zhè ge jù zi：“ wǒ yě xiǎng qù ”。",
+      "vi": "Ví dụ câu này: “Tôi cũng muốn đi”."
+    },
+    {
+      "start": 168.53,
+      "end": 175.37,
+      "en": "In it, “我” is the third tone, “也” is the third tone, and “想” is also the third tone.",
+      "zh": "💃这里面，“我”是第三声，💃“也”是第三声，💃“想”也是第三声。",
+      "pinyin": "💃 zhè lǐ miàn，“ wǒ ” shì dì sān shēng，💃“ yě ” shì dì sān shēng，💃“ xiǎng ” yě shì dì sān shēng。",
+      "vi": "Trong đó, “我” là thanh thứ ba, “也” là thanh thứ ba, “想” cũng là thanh thứ ba."
+    },
+    {
+      "start": 175.37,
+      "end": 176.6,
+      "en": "How do you read this?",
+      "zh": "💃这怎么读呢？",
+      "pinyin": "💃 zhè zěn me dú ne？",
+      "vi": "Cái này đọc thế nào?"
+    },
+    {
+      "start": 176.67,
+      "end": 178.67,
+      "en": "This is a very good example.",
+      "zh": "🕺这是一个很好的例子。",
+      "pinyin": "🕺 zhè shì yí gè hěn hǎo de lì zǐ。",
+      "vi": "Đây là một ví dụ rất hay."
+    },
+    {
+      "start": 178.87,
+      "end": 181.3,
+      "en": "Usually we group them.",
+      "zh": "🕺通常我们会把它们分组。",
+      "pinyin": "🕺 tōng cháng wǒ men huì bǎ tā men fēn zǔ。",
+      "vi": "Thông thường chúng ta sẽ chia chúng thành nhóm."
+    },
+    {
+      "start": 181.33,
+      "end": 183.97,
+      "en": "For example, “我也” is a group.",
+      "zh": "🕺比如“我也”是一组。",
+      "pinyin": "🕺 bǐ rú “ wǒ yě ” shì yì zǔ。",
+      "vi": "Ví dụ, “我也” là một cụm."
+    },
+    {
+      "start": 184.07,
+      "end": 186.83,
+      "en": "So “我” changes to the second tone.",
+      "zh": "🕺所以“我”变成第二声。",
+      "pinyin": "🕺 suǒ yǐ “ wǒ ” biàn chéng dì èr shēng。",
+      "vi": "Vì vậy “我” chuyển thành thanh hai."
+    },
+    {
+      "start": 186.9,
+      "end": 190.67,
+      "en": "Everyone, listen to me say it slowly: “我也... 想去” (I also... want to go).",
+      "zh": "🕺大家听我慢慢说：🕺我也... 想去。",
+      "pinyin": "🕺 dà jiā tīng wǒ màn màn shuō：🕺 wǒ yě... xiǎng qù。",
+      "vi": "Mọi người nghe tôi nói chậm nhé: “我也... 想去” (tôi cũng... muốn đi)."
+    },
+    {
+      "start": 190.73,
+      "end": 191.87,
+      "en": "I understand.",
+      "zh": "💃我明白了。",
+      "pinyin": "💃 wǒ míng bái le。",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 191.87,
+      "end": 197.13,
+      "en": "So, to speak long sentences well, first you need to review these tone-change rules.",
+      "zh": "💃所以，想要说好长句子，💃首先要复习这些变调规则。",
+      "pinyin": "💃 suǒ yǐ， xiǎng yào shuō hǎo cháng jù zi，💃 shǒu xiān yào fù xí zhè xiē biàn diào guī zé。",
+      "vi": "Vì vậy, muốn nói tốt những câu dài, trước tiên phải ôn lại các quy tắc biến điệu này."
+    },
+    {
+      "start": 197.13,
+      "end": 202.83,
+      "en": "It’s not just two third tones; there are also tone changes for “不” and “一”. Right.",
+      "zh": "💃不仅仅是两个第三声，💃还有“不”和“一”的变调。🕺对。",
+      "pinyin": "💃 bù jǐn jǐn shì liǎng gè dì sān shēng，💃 hái yǒu “ bù ” hé “ yī ” de biàn diào。🕺 duì。",
+      "vi": "Không chỉ là hai thanh ba liền nhau, mà còn có biến điệu của “不” và “一”. Đúng."
+    },
+    {
+      "start": 202.93,
+      "end": 211.4,
+      "en": "For example, “不是”. “不” is originally the fourth tone, but before “是” (also fourth tone), it changes to the second tone.",
+      "zh": "🕺比如“不是”。“不”本来是第四声，🕺但是在“是”（第四声）前面，🕺它要变成第二声。",
+      "pinyin": "🕺 bǐ rú “ bú shì ”。“ bù ” běn lái shì dì sì shēng，🕺 dàn shì zài “ shì ”（ dì sì shēng ） qián miàn，🕺 tā yào biàn chéng dì èr shēng。",
+      "vi": "Ví dụ “不是”. “不” vốn là thanh bốn, nhưng đứng trước “是” (thanh bốn), nó phải chuyển thành thanh hai."
+    },
+    {
+      "start": 211.5,
+      "end": 216.8,
+      "en": "It sounds a bit complicated, but actually, as long as you practice more, it will become a habit.",
+      "zh": "💃听起来有点复杂，💃但其实只要多练习，就会变成习惯。",
+      "pinyin": "💃 tīng qǐ lái yǒu diǎn fù zá，💃 dàn qí shí zhǐ yào duō liàn xí， jiù huì biàn chéng xí guàn。",
+      "vi": "Nghe có vẻ hơi phức tạp, nhưng thật ra chỉ cần luyện tập nhiều là sẽ thành thói quen."
+    },
+    {
+      "start": 216.8,
+      "end": 217.67,
+      "en": "That's right.",
+      "zh": "🕺没错。",
+      "pinyin": "🕺 méi cuò。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 217.73,
+      "end": 221.57,
+      "en": "My advice is that everyone shouldn't rush to speak long sentences.",
+      "zh": "🕺我的建议是，大家不要急着说长句。",
+      "pinyin": "🕺 wǒ de jiàn yì shì， dà jiā bú yào jí zhe shuō cháng jù。",
+      "vi": "Lời khuyên của tôi là mọi người đừng vội nói câu dài."
+    },
+    {
+      "start": 221.57,
+      "end": 225.37,
+      "en": "First, check whether the sentence has this kind of tone change.",
+      "zh": "🕺先检，🕺查一下句子里有没有这样的变调。",
+      "pinyin": "🕺 xiān jiǎn，🕺 chá yí xià jù zi lǐ yǒu méi yǒu zhè yàng de biàn diào。",
+      "vi": "Trước tiên hãy kiểm tra xem trong câu có kiểu biến điệu như vậy không."
+    },
+    {
+      "start": 225.5,
+      "end": 231.6,
+      "en": "If you can master these small changes, your sentences will sound much more fluent.",
+      "zh": "🕺如果你能把这些小变化掌握好，🕺你的句子听起来就会流利很多。",
+      "pinyin": "🕺 rú guǒ nǐ néng bǎ zhè xiē xiǎo biàn huà zhǎng wò hǎo，🕺 nǐ de jù zi tīng qǐ lái jiù huì liú lì hěn duō。",
+      "vi": "Nếu bạn nắm tốt những thay đổi nhỏ này, câu của bạn sẽ nghe trôi chảy hơn nhiều."
+    },
+    {
+      "start": 231.7,
+      "end": 238.17,
+      "en": "Yes. And once you get used to this change, you won't feel so tired when speaking.",
+      "zh": "💃是的。而且，当你习惯了这种变化，💃你说话的时候就不会觉得那么累了。",
+      "pinyin": "💃 shì de。 ér qiě， dāng nǐ xí guàn le zhè zhǒng biàn huà，💃 nǐ shuō huà de shí hòu jiù bú huì jué de nà me lèi le。",
+      "vi": "Đúng vậy. Hơn nữa, khi bạn đã quen với sự thay đổi này, khi nói bạn sẽ không cảm thấy mệt như vậy nữa."
+    },
+    {
+      "start": 238.33,
+      "end": 239.7,
+      "en": "It's really amazing.",
+      "zh": "🕺真的很神奇。",
+      "pinyin": "🕺 zhēn de hěn shén qí。",
+      "vi": "Thật sự rất kỳ diệu."
+    },
+    {
+      "start": 239.87,
+      "end": 249.2,
+      "en": "You can find some sentences containing words like “你好”, “很好”, and “可以” to specifically practice the changes in the third tone.",
+      "zh": "🕺大家可以找一些包含“你好”、🕺“很好”、“可以”这些词的句子，🕺专门练习一下第三声的变化。",
+      "pinyin": "🕺 dà jiā kě yǐ zhǎo yì xiē bāo hán “ nǐ hǎo ”、🕺“ hěn hǎo ”、“ kě yǐ ” zhè xiē cí de jù zi，🕺 zhuān mén liàn xí yí xià dì sān shēng de biàn huà。",
+      "vi": "Mọi người có thể tìm một số câu chứa các từ như “你好”, “很好”, “可以” để luyện riêng sự biến đổi của thanh ba."
+    },
+    {
+      "start": 249.4,
+      "end": 255.37,
+      "en": "Okay, so besides tone-change rules, what other methods can help us speak long sentences well?",
+      "zh": "💃好的，那除了变调规则，💃还有什么方法可以帮我们说好长，💃句子呢？",
+      "pinyin": "💃 hǎo de， nà chú le biàn tiáo guī zé，💃 hái yǒu shén me fāng fǎ kě yǐ bāng wǒ men shuō hǎo cháng，💃 jù zi ne？",
+      "vi": "Được, vậy ngoài quy tắc biến điệu, còn có phương pháp nào giúp chúng ta nói tốt câu dài không?"
+    },
+    {
+      "start": 255.37,
+      "end": 258.07,
+      "en": "This brings us to the next part.",
+      "zh": "🕺这就带我们要进入下一个部分了。",
+      "pinyin": "🕺 zhè jiù dài wǒ men yào jìn rù xià yí gè bù fen le。",
+      "vi": "Điều này dẫn chúng ta đến phần tiếp theo."
+    },
+    {
+      "start": 260.17,
+      "end": 262.97,
+      "en": "Li Ming, just now we talked about tone changes.",
+      "zh": "💃李明，刚才我们说了变调。",
+      "pinyin": "💃 lǐ míng， gāng cái wǒ men shuō le biàn diào。",
+      "vi": "Lý Minh, vừa rồi chúng ta đã nói về biến điệu."
+    },
+    {
+      "start": 263.57,
+      "end": 267.87,
+      "en": "But some sentences are really long, with a dozen or so characters.",
+      "zh": "💃但是，有些句子真的很长，💃有十几个字。",
+      "pinyin": "💃 dàn shì， yǒu xiē jù zi zhēn de hěn cháng，💃 yǒu shí jǐ gè zì。",
+      "vi": "Nhưng có những câu thật sự rất dài, có mười mấy chữ."
+    },
+    {
+      "start": 267.97,
+      "end": 274.47,
+      "en": "If I want to say it all in one breath, I often feel I don't have enough breath, and the tones get messed up.",
+      "zh": "💃如果我想一口气说完，💃常常会觉得气不够用，💃声调也就乱了。",
+      "pinyin": "💃 rú guǒ wǒ xiǎng yì kǒu qì shuō wán，💃 cháng cháng huì jué de qì bú gòu yòng，💃 shēng diào yě jiù luàn le。",
+      "vi": "Nếu tôi muốn nói hết trong một hơi, tôi thường cảm thấy không đủ hơi, và thanh điệu cũng bị loạn."
+    },
+    {
+      "start": 274.53,
+      "end": 278.63,
+      "en": "Haha, Xiaoyu, this is a very common phenomenon.",
+      "zh": "🕺哈哈，小雨，这是一，🕺一个非常普遍的现象。",
+      "pinyin": "🕺 hā hā， xiǎo yǔ， zhè shì yī，🕺 yí gè fēi cháng pǔ biàn de xiàn xiàng。",
+      "vi": "Haha, Tiểu Vũ, đây là một hiện tượng rất phổ biến."
+    },
+    {
+      "start": 278.87,
+      "end": 284.17,
+      "en": "Actually, when Chinese people speak long sentences, they don't say them all in one breath.",
+      "zh": "🕺其实，中国人在说长句子的时候，🕺并不是一口气说完的。",
+      "pinyin": "🕺 qí shí， zhōng guó rén zài shuō cháng jù zi de shí hòu，🕺 bìng bú shì yì kǒu qì shuō wán de。",
+      "vi": "Thật ra, khi người Trung Quốc nói câu dài, họ không nói hết trong một hơi."
+    },
+    {
+      "start": 284.17,
+      "end": 291.13,
+      "en": "Really? But when I listen to people in the news speaking, they seem to speak very fast, as if they never stop.",
+      "zh": "💃真的吗？但是我听新闻里的人，💃说话，感觉他们说得很快，💃好像没有停下来。",
+      "pinyin": "💃 zhēn de ma？ dàn shì wǒ tīng xīn wén lǐ de rén，💃 shuō huà， gǎn jué tā men shuō dé hěn kuài，💃 hǎo xiàng méi yǒu tíng xià lái。",
+      "vi": "Thật sao? Nhưng khi tôi nghe người trong bản tin nói, tôi cảm thấy họ nói rất nhanh, như thể không hề dừng lại."
+    },
+    {
+      "start": 291.3,
+      "end": 296.83,
+      "en": "That's because they pause very naturally and briefly; you might not have noticed.",
+      "zh": "🕺那是因为他们停顿得很自然，🕺很短，你可能没注意到。",
+      "pinyin": "🕺 nà shì yīn wèi tā men tíng dùn dé hěn zì rán，🕺 hěn duǎn， nǐ kě néng méi zhù yì dào。",
+      "vi": "Đó là vì họ ngắt nghỉ rất tự nhiên và rất ngắn, có thể bạn không nhận ra."
+    },
+    {
+      "start": 297.03,
+      "end": 299.03,
+      "en": "We need to learn how to “cut the cake.”",
+      "zh": "🕺我们要学会“切蛋糕”。",
+      "pinyin": "🕺 wǒ men yào xué huì “ qiè dàn gāo ”。",
+      "vi": "Chúng ta phải học cách “cắt bánh”."
+    },
+    {
+      "start": 299.13,
+      "end": 301.77,
+      "en": "“Cut the cake”? What does that mean?",
+      "zh": "💃“切蛋糕”？这是什么意思？",
+      "pinyin": "💃“ qiè dàn gāo ”？ zhè shì shén me yì sī？",
+      "vi": "“Cắt bánh”? Điều đó có nghĩa là gì?"
+    },
+    {
+      "start": 301.77,
+      "end": 307.63,
+      "en": "You see, if we have a big cake, we can't eat it in one bite, right?",
+      "zh": "🕺你看，如果我们有一个大蛋糕，🕺我们不可能一口吃下去，对吧？",
+      "pinyin": "🕺 nǐ kàn， rú guǒ wǒ men yǒu yí gè dà dàn gāo，🕺 wǒ men bù kě néng yì kǒu chī xià qù， duì ba？",
+      "vi": "Bạn thấy đấy, nếu chúng ta có một chiếc bánh lớn, chúng ta không thể ăn hết trong một miếng, đúng không?"
+    },
+    {
+      "start": 307.73,
+      "end": 311.47,
+      "en": "We have to cut it into small pieces and eat it piece by piece.",
+      "zh": "🕺我们要把它切成小块，🕺一块一块地吃。",
+      "pinyin": "🕺 wǒ men yào bǎ tā qiè chéng xiǎo kuài，🕺 yí kuài yi kuài dì chī。",
+      "vi": "Chúng ta phải cắt nó thành từng miếng nhỏ, ăn từng miếng một."
+    },
+    {
+      "start": 311.47,
+      "end": 312.6,
+      "en": "I understand!",
+      "zh": "💃我明白了！",
+      "pinyin": "💃 wǒ míng bái le！",
+      "vi": "Tôi hiểu rồi!"
+    },
+    {
+      "start": 312.7,
+      "end": 317.67,
+      "en": "You mean we need to cut long sentences into several small parts?",
+      "zh": "💃你的意思是，我们要，💃把长句子切成几个小的部分？",
+      "pinyin": "💃 nǐ de yì sī shì， wǒ men yào，💃 bǎ cháng jù zi qiè chéng jǐ gè xiǎo de bù fen？",
+      "vi": "Ý bạn là chúng ta phải chia câu dài thành vài phần nhỏ?"
+    },
+    {
+      "start": 317.7,
+      "end": 319.07,
+      "en": "Exactly right.",
+      "zh": "🕺完全正确。",
+      "pinyin": "🕺 wán quán zhèng què。",
+      "vi": "Hoàn toàn đúng."
+    },
+    {
+      "start": 319.27,
+      "end": 323.77,
+      "en": "In linguistics, this is called a “thought group” or a “phrase.”",
+      "zh": "🕺在语言学里，这叫做“意群”，或者是“词组”。",
+      "pinyin": "🕺 zài yǔ yán xué lǐ， zhè jiào zuò “ yì qún ”， huò zhě shì “ cí zǔ ”。",
+      "vi": "Trong ngôn ngữ học, đây được gọi là “cụm ý”, hoặc là “cụm từ”."
+    },
+    {
+      "start": 323.77,
+      "end": 326.13,
+      "en": "This method sounds very useful.",
+      "zh": "💃这个方法听起来很有用。",
+      "pinyin": "💃 zhè ge fāng fǎ tīng qǐ lái hěn yǒu yòng。",
+      "vi": "Phương pháp này nghe có vẻ rất hữu ích."
+    },
+    {
+      "start": 326.27,
+      "end": 331.23,
+      "en": "Li Ming, could you give us an example of a long sentence and teach everyone how to “cut” it?",
+      "zh": "💃李明，💃能不能给我们一个长句子的例子，💃教大家怎么“切”？",
+      "pinyin": "💃 lǐ míng，💃 néng bu néng gěi wǒ men yí gè cháng jù zi de lì zǐ，💃 jiào dà jiā zěn me “ qiè ”？",
+      "vi": "Lý Minh, bạn có thể cho chúng tôi một ví dụ về câu dài và dạy mọi người cách “cắt” không?"
+    },
+    {
+      "start": 331.27,
+      "end": 339.77,
+      "en": "No problem. Let's look at this sentence: “I am going to the library to read this afternoon.” If this sentence is not divided,",
+      "zh": "🕺没问题。我们来看这个句子：🕺“我今天下午要去图书馆看书。”，💃这个句子如果不切开，",
+      "pinyin": "🕺 méi wèn tí。 wǒ men lái kàn zhè ge jù zi：🕺“ wǒ jīn tiān xià wǔ yào qù tú shū guǎn kàn shū。”，💃 zhè ge jù zi rú guǒ bú qiè kāi，",
+      "vi": "Không vấn đề gì. Chúng ta hãy xem câu này: “Chiều nay tôi sẽ đến thư viện đọc sách.” Nếu câu này không được chia nhỏ,"
+    },
+    {
+      "start": 339.77,
+      "end": 345.03,
+      "en": "it reads as: “I am going to the library to read this afternoon.”",
+      "zh": "💃读起来就是：💃“我今天下午要去图书馆看书”。",
+      "pinyin": "💃 dú qǐ lái jiù shì：💃“ wǒ jīn tiān xià wǔ yào qù tú shū guǎn kàn shū ”。",
+      "vi": "thì đọc lên sẽ là: “Chiều nay tôi sẽ đến thư viện đọc sách”."
+    },
+    {
+      "start": 345.27,
+      "end": 349.03,
+      "en": "If you read too fast, it might really get confusing. Right.",
+      "zh": "💃如果你读得太快，💃可能真的会乱。🕺对。",
+      "pinyin": "💃 rú guǒ nǐ dú dé tài kuài，💃 kě néng zhēn de huì luàn。🕺 duì。",
+      "vi": "Nếu bạn đọc quá nhanh, có thể thật sự sẽ bị rối. Đúng vậy."
+    },
+    {
+      "start": 349.23,
+      "end": 352.37,
+      "en": "We can divide this sentence into three parts.",
+      "zh": "🕺我们可以把这个句子分成三个部分。",
+      "pinyin": "🕺 wǒ men kě yǐ bǎ zhè ge jù zi fēn chéng sān gè bù fen。",
+      "vi": "Chúng ta có thể chia câu này thành ba phần."
+    },
+    {
+      "start": 352.43,
+      "end": 358.37,
+      "en": "The first part is the time: “this afternoon I.” Mm, “this afternoon I.”",
+      "zh": "🕺第一部分是时间：🕺“我今天下午”。💃嗯，💃“我今天下午”。",
+      "pinyin": "🕺 dì yī bù fen shì shí jiān：🕺“ wǒ jīn tiān xià wǔ ”。💃 ǹg，💃“ wǒ jīn tiān xià wǔ ”。",
+      "vi": "Phần đầu tiên là thời gian: “chiều nay tôi”. Ừm, “chiều nay tôi”."
+    },
+    {
+      "start": 358.37,
+      "end": 359.83,
+      "en": "This is one part.",
+      "zh": "💃这是一个部分。",
+      "pinyin": "💃 zhè shì yí gè bù fen。",
+      "vi": "Đây là một phần."
+    },
+    {
+      "start": 359.83,
+      "end": 364.17,
+      "en": "The second part is the action and place: \"go to the library.\"",
+      "zh": "🕺第二部分是动作和地点：🕺“要去图书馆”。",
+      "pinyin": "🕺 dì èr bù fen shì dòng zuò hé dì diǎn：🕺“ yào qù tú shū guǎn ”。",
+      "vi": "Phần thứ hai là hành động và địa điểm: “đi thư viện”."
+    },
+    {
+      "start": 364.23,
+      "end": 365.97,
+      "en": "\"go to the library.\"",
+      "zh": "💃“要去图书馆”。",
+      "pinyin": "💃“ yào qù tú shū guǎn ”。",
+      "vi": "“đi thư viện”."
+    },
+    {
+      "start": 365.97,
+      "end": 367.5,
+      "en": "This is the second part.",
+      "zh": "💃这是第二部分。",
+      "pinyin": "💃 zhè shì dì èr bù fen。",
+      "vi": "Đây là phần thứ hai."
+    },
+    {
+      "start": 367.5,
+      "end": 371.37,
+      "en": "The third part is what to do: \"read books.\" \"read books.\"",
+      "zh": "🕺第三部分是做什么：🕺“看书”。💃“看书”。",
+      "pinyin": "🕺 dì sān bù fen shì zuò shén me：🕺“ kàn shū ”。💃“ kàn shū ”。",
+      "vi": "Phần thứ ba là làm gì: “đọc sách”. “đọc sách”."
+    },
+    {
+      "start": 371.37,
+      "end": 373,
+      "en": "This is the third part.",
+      "zh": "💃这是第三部分。",
+      "pinyin": "💃 zhè shì dì sān bù fen。",
+      "vi": "Đây là phần thứ ba."
+    },
+    {
+      "start": 373.03,
+      "end": 378.9,
+      "en": "Now let's put them together, but pause briefly in the middle of each part.",
+      "zh": "🕺现在我们把它们，🕺连起来，🕺但是在每个部分中间，稍微停顿一下。",
+      "pinyin": "🕺 xiàn zài wǒ men bǎ tā men，🕺 lián qǐ lái，🕺 dàn shì zài měi gè bù fen zhōng jiān， shāo wēi tíng dùn yí xià。",
+      "vi": "Bây giờ chúng ta ghép chúng lại, nhưng ở giữa mỗi phần, hãy dừng lại một chút."
+    },
+    {
+      "start": 378.9,
+      "end": 385.43,
+      "en": "Like this: this afternoon I... am going to the library... to read books.",
+      "zh": "🕺像这样：我今天下午……，🕺要去图书馆…… 看书。",
+      "pinyin": "🕺 xiàng zhè yàng： wǒ jīn tiān xià wǔ ……，🕺 yào qù tú shū guǎn …… kàn shū。",
+      "vi": "Như thế này: chiều nay tôi……, sẽ đi thư viện…… đọc sách."
+    },
+    {
+      "start": 385.43,
+      "end": 388.17,
+      "en": "Wow, it sounds much clearer this way!",
+      "zh": "💃哇，这样听起来清晰多了！",
+      "pinyin": "💃 wā， zhè yàng tīng qǐ lái qīng xī duō le！",
+      "vi": "Ồ, nghe rõ hơn nhiều khi nói như vậy!"
+    },
+    {
+      "start": 388.17,
+      "end": 393.7,
+      "en": "And because the sentences become shorter, I can control the tones in each part well.",
+      "zh": "💃而且，💃因为句子变短了，我每一部分的声调，💃都可以控制得很好。",
+      "pinyin": "💃 ér qiě，💃 yīn wèi jù zi biàn duǎn le， wǒ měi yí bù fen de shēng diào，💃 dōu kě yǐ kòng zhì dé hěn hǎo。",
+      "vi": "Hơn nữa, vì câu trở nên ngắn hơn, tôi có thể kiểm soát tốt thanh điệu của từng phần."
+    },
+    {
+      "start": 393.7,
+      "end": 399.57,
+      "en": "Yes. When you pause, your brain has time to think about the tone of the next part.",
+      "zh": "🕺是的。当你停顿的时候，🕺你的大脑，🕺有时间去想下一个部分的声调",
+      "pinyin": "🕺 shì de。 dāng nǐ tíng dùn de shí hòu，🕺 nǐ de dà nǎo，🕺 yǒu shí jiān qù xiǎng xià yí gè bù fen de shēng diào",
+      "vi": "Đúng vậy. Khi bạn dừng lại, não bạn có thời gian nghĩ về thanh điệu của phần tiếp theo."
+    },
+    {
+      "start": 399.57,
+      "end": 401.63,
+      "en": "what it is. This is great.",
+      "zh": "🕺是什么。💃这太棒了。",
+      "pinyin": "🕺 shì shén me。💃 zhè tài bàng le。",
+      "vi": "là gì. Điều này thật tuyệt vời."
+    },
+    {
+      "start": 401.67,
+      "end": 408.03,
+      "en": "So when you practice reading texts or speaking, you can draw some slanted lines on paper,",
+      "zh": "💃所以，💃大家在练习读课文或者说话的时候，💃可以在纸上画一些斜线，",
+      "pinyin": "💃 suǒ yǐ，💃 dà jiā zài liàn xí dú kè wén huò zhě shuō huà de shí hòu，💃 kě yǐ zài zhǐ shàng huà yì xiē xié xiàn，",
+      "vi": "Vì vậy, mọi người khi luyện đọc bài khóa hoặc nói chuyện, có thể vẽ một vài đường chéo trên giấy,"
+    },
+    {
+      "start": 408.13,
+      "end": 410.53,
+      "en": "to remind yourself where you can pause.",
+      "zh": "💃告诉自己哪里可以停一下。",
+      "pinyin": "💃 gào sù zì jǐ nǎ lǐ kě yǐ tíng yí xià。",
+      "vi": "để nhắc mình chỗ nào có thể dừng lại."
+    },
+    {
+      "start": 410.53,
+      "end": 419.43,
+      "en": "That's right. For example, after words like \"but,\" \"because,\" and \"so,\" or after time and place words,",
+      "zh": "🕺没错。比如在“但是”、🕺“因为”、“所以”这些词的后面，🕺或者在时间和地点词的后面，",
+      "pinyin": "🕺 méi cuò。 bǐ rú zài “ dàn shì ”、🕺“ yīn wèi ”、“ suǒ yǐ ” zhè xiē cí de hòu miàn，🕺 huò zhě zài shí jiān hé dì diǎn cí de hòu miàn，",
+      "vi": "Đúng vậy. Ví dụ, sau những từ như “nhưng”, “bởi vì”, “vì vậy”, hoặc sau các từ chỉ thời gian và địa điểm,"
+    },
+    {
+      "start": 419.43,
+      "end": 420.77,
+      "en": "you can pause.",
+      "zh": "🕺都可以停顿。",
+      "pinyin": "🕺 dōu kě yǐ tíng dùn。",
+      "vi": "đều có thể dừng lại."
+    },
+    {
+      "start": 420.83,
+      "end": 423.1,
+      "en": "Li Ming, I want to ask a question.",
+      "zh": "💃李明，我想问一个问题。",
+      "pinyin": "💃 lǐ míng， wǒ xiǎng wèn yí gè wèn tí。",
+      "vi": "Lý Minh, tôi muốn hỏi một câu."
+    },
+    {
+      "start": 423.1,
+      "end": 427.83,
+      "en": "If we pause for too long, will it sound unnatural?",
+      "zh": "💃如果我们停顿的时间太长，💃会不会听起来不自然？",
+      "pinyin": "💃 rú guǒ wǒ men tíng dùn de shí jiān tài cháng，💃 huì bu huì tīng qǐ lái bú zì rán？",
+      "vi": "Nếu chúng ta dừng quá lâu, liệu có nghe không tự nhiên không?"
+    },
+    {
+      "start": 427.9,
+      "end": 431.73,
+      "en": "When you first start practicing, it's okay to pause a little longer.",
+      "zh": "🕺刚开始练习的时候，🕺停顿长一点没关系。",
+      "pinyin": "🕺 gāng kāi shǐ liàn xí de shí hòu，🕺 tíng dùn cháng yì diǎn méi guān xì。",
+      "vi": "Khi mới bắt đầu luyện tập, dừng lâu một chút cũng không sao."
+    },
+    {
+      "start": 431.87,
+      "end": 433.33,
+      "en": "The important thing is accuracy.",
+      "zh": "🕺重要的是准确。",
+      "pinyin": "🕺 zhòng yào de shì zhǔn què。",
+      "vi": "Điều quan trọng là chính xác."
+    },
+    {
+      "start": 433.73,
+      "end": 440.33,
+      "en": "Once you're proficient, that pause will become very, very short, sounding as if it's all connected.",
+      "zh": "🕺等你熟练了，🕺那个停顿就会变得非常非常短，🕺听起来就像连在一起一样，",
+      "pinyin": "🕺 děng nǐ shú liàn le，🕺 nà gè tíng dùn jiù huì biàn de fēi cháng fēi cháng duǎn，🕺 tīng qǐ lái jiù xiàng lián zài yì qǐ yí yàng，",
+      "vi": "Khi bạn đã thành thạo, khoảng dừng đó sẽ trở nên rất rất ngắn, nghe như thể được nối liền với nhau."
+    },
+    {
+      "start": 440.53,
+      "end": 442.97,
+      "en": "But your tones are still accurate.",
+      "zh": "🕺但你的声调依然是准确的。",
+      "pinyin": "🕺 dàn nǐ de shēng diào yī rán shì zhǔn què de。",
+      "vi": "Nhưng thanh điệu của bạn vẫn chính xác."
+    },
+    {
+      "start": 442.97,
+      "end": 448.03,
+      "en": "I get it. It means slow first, then fast. Right, slow is fast.",
+      "zh": "💃我懂了。就是先慢后快。🕺对，🕺慢就是快。",
+      "pinyin": "💃 wǒ dǒng le。 jiù shì xiān màn hòu kuài。🕺 duì，🕺 màn jiù shì kuài。",
+      "vi": "Tôi hiểu rồi. Tức là trước chậm sau nhanh. Đúng, chậm chính là nhanh."
+    },
+    {
+      "start": 448.03,
+      "end": 449.23,
+      "en": "Don't rush.",
+      "zh": "🕺不要着急。",
+      "pinyin": "🕺 bú yào zháo jí。",
+      "vi": "Đừng vội."
+    },
+    {
+      "start": 449.43,
+      "end": 453.63,
+      "en": "Every long sentence is made up of several short phrases.",
+      "zh": "🕺每一个长句子，🕺都是由几个短词组组成的。",
+      "pinyin": "🕺 měi yí gè cháng jù zi，🕺 dōu shì yóu jǐ gè duǎn cí zǔ zǔ chéng de。",
+      "vi": "Mỗi câu dài đều được tạo thành từ vài cụm từ ngắn."
+    },
+    {
+      "start": 453.87,
+      "end": 457.8,
+      "en": "If you say the short phrases well, the long sentences will naturally be fine.",
+      "zh": "🕺把短词组说好，🕺长句子自然就好了。",
+      "pinyin": "🕺 bǎ duǎn cí zǔ shuō hǎo，🕺 cháng jù zi zì rán jiù hǎo le。",
+      "vi": "Nói tốt các cụm từ ngắn thì câu dài tự nhiên sẽ tốt."
+    },
+    {
+      "start": 457.83,
+      "end": 461.07,
+      "en": "This \"cutting the cake\" method is really easy to remember.",
+      "zh": "💃这个“切蛋糕”的方法真的很好记。",
+      "pinyin": "💃 zhè ge “ qiè dàn gāo ” de fāng fǎ zhēn de hěn hǎo jì。",
+      "vi": "Cách “cắt bánh” này thật sự rất dễ nhớ."
+    },
+    {
+      "start": 461.23,
+      "end": 467,
+      "en": "From now on, when you see a long sentence, don't be afraid; pick up your \"knife\" and cut it open!",
+      "zh": "💃大家以后看到长句子，先别怕，💃拿起你的“刀”，把它切开！",
+      "pinyin": "💃 dà jiā yǐ hòu kàn dào cháng jù zi， xiān bié pà，💃 ná qǐ nǐ de “ dāo ”， bǎ tā qiè kāi！",
+      "vi": "Từ giờ khi gặp câu dài, mọi người đừng sợ, hãy cầm “dao” lên và cắt nó ra!"
+    },
+    {
+      "start": 467.03,
+      "end": 471.23,
+      "en": "Yes, cutting it up to eat makes it tastier and easier to digest.",
+      "zh": "🕺是的，切开吃，更美味，🕺也更容易消化。",
+      "pinyin": "🕺 shì de， qiè kāi chī， gèng měi wèi，🕺 yě gèng róng yì xiāo huà。",
+      "vi": "Đúng vậy, cắt ra ăn sẽ ngon hơn và cũng dễ tiêu hóa hơn."
+    },
+    {
+      "start": 471.23,
+      "end": 476.77,
+      "en": "Li Ming, we just talked about tone sandhi rules and also about cutting sentences up.",
+      "zh": "💃李明，我们刚才讲了变调规则，💃也讲了把句子切开。",
+      "pinyin": "💃 lǐ míng， wǒ men gāng cái jiǎng le biàn diào guī zé，💃 yě jiǎng le bǎ jù zi qiè kāi。",
+      "vi": "Lý Minh, chúng ta vừa nói về quy tắc biến điệu, cũng nói về việc cắt câu ra."
+    },
+    {
+      "start": 476.87,
+      "end": 479.73,
+      "en": "I think there's another issue: \"a feel for the language.\"",
+      "zh": "💃我觉得还有一个问题，就是“语感”。",
+      "pinyin": "💃 wǒ jué de hái yǒu yí gè wèn tí， jiù shì “ yǔ gǎn ”。",
+      "vi": "Tôi nghĩ còn một vấn đề nữa, đó là “cảm giác ngôn ngữ”."
+    },
+    {
+      "start": 480.13,
+      "end": 482.13,
+      "en": "A feel for the language is indeed very important.",
+      "zh": "🕺语感确实很重要。",
+      "pinyin": "🕺 yǔ gǎn què shí hěn zhòng yào。",
+      "vi": "Cảm giác ngôn ngữ quả thật rất quan trọng."
+    },
+    {
+      "start": 482.33,
+      "end": 489.3,
+      "en": "Sometimes, even if your tones are correct, if you lack a sense of rhythm, you still sound like a robot.",
+      "zh": "🕺有时候，即使你的声调是对的，🕺但是如果没有节奏感，🕺听起来还是像机器人。",
+      "pinyin": "🕺 yǒu shí hòu， jí shǐ nǐ de shēng diào shì duì de，🕺 dàn shì rú guǒ méi yǒu jié zòu gǎn，🕺 tīng qǐ lái hái shì xiàng jī qì rén。",
+      "vi": "Đôi khi, dù thanh điệu của bạn đúng, nhưng nếu không có nhịp điệu, nghe vẫn giống như robot."
+    },
+    {
+      "start": 489.3,
+      "end": 492.17,
+      "en": "Yes, yes, yes! Just like a robot.",
+      "zh": "💃对对对！就是像机器人。",
+      "pinyin": "💃 duì duì duì！ jiù shì xiàng jī qì rén。",
+      "vi": "Đúng đúng đúng! Giống hệt robot."
+    },
+    {
+      "start": 492.23,
+      "end": 497.57,
+      "en": "For example: \"I... to...day... go... super...market.\"",
+      "zh": "💃比如：“我……今……天……去……超……市”。",
+      "pinyin": "💃 bǐ rú：“ wǒ …… jīn …… tiān …… qù …… chāo …… shì ”。",
+      "vi": "Ví dụ: “Tôi……hôm……nay……đi……siêu……thị”."
+    },
+    {
+      "start": 498.03,
+      "end": 502.07,
+      "en": "Every character is correct, but when put together, it lacks the \"Chinese flavor.\"",
+      "zh": "💃每一个字都对，💃但连起来就没有“中文味儿”。",
+      "pinyin": "💃 měi yí gè zì dōu duì，💃 dàn lián qǐ lái jiù méi yǒu “ zhōng wén wèi ér ”。",
+      "vi": "Từng chữ đều đúng, nhưng khi nối lại thì không có “chất tiếng Trung”."
+    },
+    {
+      "start": 502.07,
+      "end": 506.53,
+      "en": "This is the third method we're going to discuss: imitation and shadowing.",
+      "zh": "🕺这就是我们要讲的第三个方法：🕺模仿和跟读。",
+      "pinyin": "🕺 zhè jiù shì wǒ men yào jiǎng de dì sān gè fāng fǎ：🕺 mó fǎng hé gēn dú。",
+      "vi": "Đây chính là phương pháp thứ ba chúng ta sẽ nói đến: bắt chước và đọc theo."
+    },
+    {
+      "start": 506.57,
+      "end": 508.5,
+      "en": "Is it like singing?",
+      "zh": "💃就像唱歌一样吗？",
+      "pinyin": "💃 jiù xiàng chàng gē yí yàng ma？",
+      "vi": "Giống như hát phải không?"
+    },
+    {
+      "start": 508.5,
+      "end": 509.57,
+      "en": "Very much so.",
+      "zh": "🕺非常像。",
+      "pinyin": "🕺 fēi cháng xiàng。",
+      "vi": "Rất giống."
+    },
+    {
+      "start": 509.9,
+      "end": 513.73,
+      "en": "Xiaoyu, when you learn to sing, do you only look at the lyrics?",
+      "zh": "🕺小雨，你学唱歌的时候，是只看歌词吗？",
+      "pinyin": "🕺 xiǎo yǔ， nǐ xué chàng gē de shí hòu， shì zhī kàn gē cí ma？",
+      "vi": "Tiểu Vũ, khi bạn học hát, bạn chỉ nhìn lời bài hát thôi à?"
+    },
+    {
+      "start": 513.73,
+      "end": 514.83,
+      "en": "Of course not.",
+      "zh": "💃当然不是。",
+      "pinyin": "💃 dāng rán bú shì。",
+      "vi": "Tất nhiên là không."
+    },
+    {
+      "start": 514.83,
+      "end": 520.23,
+      "en": "I want to listen to the original, hear how the singer sings, and whether the melody is high or low.",
+      "zh": "💃我要听原唱，💃听歌手是怎么唱的，💃旋律是高是低。",
+      "pinyin": "💃 wǒ yào tīng yuán chàng，💃 tīng gē shǒu shì zěn me chàng de，💃 xuán lǜ shì gāo shì dī。",
+      "vi": "Tôi muốn nghe bản gốc, nghe ca sĩ hát thế nào, giai điệu cao hay thấp."
+    },
+    {
+      "start": 520.43,
+      "end": 522.97,
+      "en": "Learning Chinese tones is the same.",
+      "zh": "🕺学习中文声调也是一样的。",
+      "pinyin": "🕺 xué xí zhōng wén shēng diào yě shì yí yàng de。",
+      "vi": "Học thanh điệu tiếng Trung cũng vậy."
+    },
+    {
+      "start": 523.07,
+      "end": 525.73,
+      "en": "Tones are actually the melody of language.",
+      "zh": "🕺声调其实就是语言的旋律。",
+      "pinyin": "🕺 shēng diào qí shí jiù shì yǔ yán de xuán lǜ。",
+      "vi": "Thanh điệu thực ra chính là giai điệu của ngôn ngữ."
+    },
+    {
+      "start": 525.87,
+      "end": 531.47,
+      "en": "We can't just look at Chinese characters or pinyin and read by ourselves; we need to listen to how Chinese people read.",
+      "zh": "🕺我们不能只看汉字或者拼音自己读，🕺我们要听中国人怎么读。",
+      "pinyin": "🕺 wǒ men bù néng zhī kàn hàn zì huò zhě pīn yīn zì jǐ dú，🕺 wǒ men yào tīng zhōng guó rén zěn me dú。",
+      "vi": "Chúng ta không thể chỉ nhìn chữ Hán hoặc pinyin rồi tự đọc, chúng ta phải nghe người Trung Quốc đọc thế nào."
+    },
+    {
+      "start": 531.63,
+      "end": 536.27,
+      "en": "So we should listen to more podcasts and watch more Chinese movies, right?",
+      "zh": "💃所以，我们要多听播客，💃多看中国电影，对吗？",
+      "pinyin": "💃 suǒ yǐ， wǒ men yào duō tīng bō kè，💃 duō kàn zhòng guó diàn yǐng， duì ma？",
+      "vi": "Vậy nên chúng ta nên nghe nhiều podcast, xem nhiều phim Trung Quốc hơn, đúng không?"
+    },
+    {
+      "start": 536.3,
+      "end": 540.07,
+      "en": "Yes. But not only listen, you also have to “read along.”",
+      "zh": "🕺是的。但是不仅仅是听，🕺还要“跟读”。",
+      "pinyin": "🕺 shì de。 dàn shì bù jǐn jǐn shì tīng，🕺 hái yào “ gēn dú ”。",
+      "vi": "Đúng vậy. Nhưng không chỉ nghe, mà còn phải “đọc theo”."
+    },
+    {
+      "start": 540.07,
+      "end": 542.27,
+      "en": "This is called “shadowing practice.”",
+      "zh": "🕺这就叫做“影子练习”。",
+      "pinyin": "🕺 zhè jiù jiào zuò “ yǐng zi liàn xí ”。",
+      "vi": "Đây được gọi là “luyện tập shadowing”."
+    },
+    {
+      "start": 542.37,
+      "end": 545.03,
+      "en": "“Shadowing practice”? Sounds cool.",
+      "zh": "💃“影子练习”？听起来很酷。",
+      "pinyin": "💃“ yǐng zi liàn xí ”？ tīng qǐ lái hěn kù。",
+      "vi": "“Luyện tập shadowing” à? Nghe ngầu thật."
+    },
+    {
+      "start": 545.03,
+      "end": 546.33,
+      "en": "How do you do it?",
+      "zh": "💃是怎么做的呢？",
+      "pinyin": "💃 shì zěn me zuò de ne？",
+      "vi": "Làm thế nào vậy?"
+    },
+    {
+      "start": 546.33,
+      "end": 551.13,
+      "en": "Very simple. Find a Chinese recording, like our podcast.",
+      "zh": "🕺很简单。你找一段中文录音，🕺比如我们的播客。",
+      "pinyin": "🕺 hěn jiǎn dān。 nǐ zhǎo yí duàn zhōng wén lù yīn，🕺 bǐ rú wǒ men de bō kè。",
+      "vi": "Rất đơn giản. Bạn tìm một đoạn ghi âm tiếng Trung, ví dụ podcast của chúng tôi."
+    },
+    {
+      "start": 551.23,
+      "end": 553.8,
+      "en": "You play one sentence, then pause.",
+      "zh": "🕺你播放一句话，🕺然后暂停。",
+      "pinyin": "🕺 nǐ bō fàng yí jù huà，🕺 rán hòu zàn tíng。",
+      "vi": "Bạn phát một câu, rồi tạm dừng."
+    },
+    {
+      "start": 553.93,
+      "end": 561.3,
+      "en": "You need to imitate the speaker's tone of voice, speed, and the pitch of the tones, trying to imitate them exactly.",
+      "zh": "🕺你需要模仿说话人的语气、🕺速度，还有声调的高低，🕺尽量模仿得一模一样。",
+      "pinyin": "🕺 nǐ xū yào mó fǎng shuō huà rén de yǔ qì、🕺 sù dù， hái yǒu shēng diào de gāo dī，🕺 jǐn liàng mó fǎng dé yì mú yí yàng。",
+      "vi": "Bạn cần bắt chước giọng điệu, tốc độ và độ cao thấp của thanh điệu của người nói, cố gắng bắt chước giống hệt."
+    },
+    {
+      "start": 561.3,
+      "end": 566.87,
+      "en": "So it's not just imitating tones, but also emotions and stress?",
+      "zh": "💃也就是不仅仅模仿声调，💃还要模仿情绪和轻重？",
+      "pinyin": "💃 yě jiù shì bù jǐn jǐn mó fǎng shēng diào，💃 hái yào mó fǎng qíng xù hé qīng zhòng？",
+      "vi": "Tức là không chỉ bắt chước thanh điệu, mà còn bắt chước cảm xúc và độ nhấn nhá?"
+    },
+    {
+      "start": 567.03,
+      "end": 573.63,
+      "en": "Right. In long sentences, some words are read with more stress, and some are read more lightly.",
+      "zh": "🕺对。在长句子里，🕺有些词是读得比较重的，🕺有些词是读得比较轻的。",
+      "pinyin": "🕺 duì。 zài cháng jù zi lǐ，🕺 yǒu xiē cí shì dú dé bǐ jiào zhòng de，🕺 yǒu xiē cí shì dú dé bǐ jiào qīng de。",
+      "vi": "Đúng vậy. Trong câu dài, có những từ được đọc nhấn hơn, có những từ được đọc nhẹ hơn."
+    },
+    {
+      "start": 573.63,
+      "end": 579.53,
+      "en": "For example, the sentence just now: “I'm going to the library to read this afternoon.” Right.",
+      "zh": "💃比如刚才那个句子：💃“我今天下午要去图书馆看书”。🕺对。",
+      "pinyin": "💃 bǐ rú gāng cái nà ge jù zi：💃“ wǒ jīn tiān xià wǔ yào qù tú shū guǎn kàn shū ”。🕺 duì。",
+      "vi": "Ví dụ câu vừa rồi: “Chiều nay tôi sẽ đến thư viện đọc sách”. Đúng vậy."
+    },
+    {
+      "start": 579.73,
+      "end": 586.47,
+      "en": "In this sentence, “library” and “reading” may be the key points, so the voice will be a little louder,",
+      "zh": "🕺在这个句子里，🕺“图书馆”和“看书”可能是重点，🕺所以声音会稍微大一点，",
+      "pinyin": "🕺 zài zhè ge jù zi lǐ，🕺“ tú shū guǎn ” hé “ kàn shū ” kě néng shì zhòng diǎn，🕺 suǒ yǐ shēng yīn huì shāo wēi dà yì diǎn，",
+      "vi": "Trong câu này, “thư viện” và “đọc sách” có thể là trọng điểm, nên âm lượng sẽ hơi lớn hơn,"
+    },
+    {
+      "start": 586.47,
+      "end": 591.17,
+      "en": "clearer. And “going to” may be read a little more lightly.",
+      "zh": "🕺清楚一点。而，🕺“要去”可能就会读得稍微轻一点。",
+      "pinyin": "🕺 qīng chǔ yì diǎn。 ér，🕺“ yào qù ” kě néng jiù huì dú dé shāo wēi qīng yì diǎn。",
+      "vi": "rõ hơn. Còn “sẽ đi” có thể sẽ được đọc nhẹ hơn một chút."
+    },
+    {
+      "start": 591.17,
+      "end": 592.27,
+      "en": "I understand.",
+      "zh": "💃我明白了。",
+      "pinyin": "💃 wǒ míng bái le。",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 592.27,
+      "end": 598.43,
+      "en": "If we can imitate this kind of stress variation, our tones will naturally become more like a native speaker's.",
+      "zh": "💃如果我们能模仿这种轻重变化，💃声调自然就会变得更像母语者。",
+      "pinyin": "💃 rú guǒ wǒ men néng mó fǎng zhè zhǒng qīng zhòng biàn huà，💃 shēng diào zì rán jiù huì biàn de gèng xiàng mǔ yǔ zhě。",
+      "vi": "Nếu chúng ta có thể bắt chước sự thay đổi nhấn nhá này, thanh điệu sẽ tự nhiên trở nên giống người bản ngữ hơn."
+    },
+    {
+      "start": 598.43,
+      "end": 605.03,
+      "en": "Exactly. Moreover, when you imitate a lot, your mouth and tongue will remember that feeling.",
+      "zh": "🕺没错。而且，当你模仿得多了，🕺你的嘴巴和舌头就会记住那种感觉。",
+      "pinyin": "🕺 méi cuò。 ér qiě， dāng nǐ mó fǎng dé duō le，🕺 nǐ de zuǐ ba hé shé tou jiù huì jì zhù nà zhǒng gǎn jué。",
+      "vi": "Đúng vậy. Hơn nữa, khi bạn bắt chước nhiều, miệng và lưỡi của bạn sẽ ghi nhớ cảm giác đó."
+    },
+    {
+      "start": 605.17,
+      "end": 606.83,
+      "en": "This is muscle memory.",
+      "zh": "🕺这就是肌肉记忆。",
+      "pinyin": "🕺 zhè jiù shì jī ròu jì yì。",
+      "vi": "Đây chính là trí nhớ cơ bắp."
+    },
+    {
+      "start": 606.83,
+      "end": 611.63,
+      "en": "I have a friend who spends ten minutes every morning shadowing the news.",
+      "zh": "💃我有一个朋友，💃他每天早上都花十分钟跟读新闻。",
+      "pinyin": "💃 wǒ yǒu yí gè péng yǒu，💃 tā měi tiān zǎo shàng dōu huā shí fēn zhōng gēn dú xīn wén。",
+      "vi": "Tôi có một người bạn, mỗi sáng anh ấy đều dành mười phút để đọc theo bản tin."
+    },
+    {
+      "start": 611.73,
+      "end": 616.4,
+      "en": "Although the news is difficult, his tones now sound really pleasant.",
+      "zh": "💃虽然新闻很难，💃但他现在的声调真的特别好听。",
+      "pinyin": "💃 suī rán xīn wén hěn nán，💃 dàn tā xiàn zài de shēng diào zhēn de tè bié hǎo tīng。",
+      "vi": "Dù bản tin rất khó, nhưng thanh điệu của anh ấy bây giờ thật sự rất hay."
+    },
+    {
+      "start": 616.43,
+      "end": 619.07,
+      "en": "Yes, persistence is very important.",
+      "zh": "🕺是的，坚持非常重要。",
+      "pinyin": "🕺 shì de， jiān chí fēi cháng zhòng yào。",
+      "vi": "Đúng vậy, kiên trì rất quan trọng."
+    },
+    {
+      "start": 619.13,
+      "end": 621.9,
+      "en": "Everyone can start with simple conversations.",
+      "zh": "🕺大家可以从简单的对话开始。",
+      "pinyin": "🕺 dà jiā kě yǐ cóng jiǎn dān de duì huà kāi shǐ。",
+      "vi": "Mọi người có thể bắt đầu từ những đoạn hội thoại đơn giản."
+    },
+    {
+      "start": 621.9,
+      "end": 628.33,
+      "en": "For example, with our program, you can shadow sentence by sentence. Li Ming, if while I'm shadowing,",
+      "zh": "🕺比如我们这个节目，🕺你就可以一句一句地跟读。💃李明，💃如果我在跟读的时候，",
+      "pinyin": "🕺 bǐ rú wǒ men zhè ge jié mù，🕺 nǐ jiù kě yǐ yí jù yi jù dì gēn dú。💃 lǐ míng，💃 rú guǒ wǒ zài gēn dú de shí hòu，",
+      "vi": "Ví dụ như chương trình của chúng ta, bạn có thể đọc theo từng câu một. Lý Minh, nếu trong lúc tôi đọc theo,"
+    },
+    {
+      "start": 628.33,
+      "end": 631.03,
+      "en": "and find that I can't keep up with the speed, what should I do?",
+      "zh": "💃发现自己跟不上速度怎么办？",
+      "pinyin": "💃 fā xiàn zì jǐ gēn bú shàng sù dù zěn me bàn？",
+      "vi": "mà thấy mình không theo kịp tốc độ thì phải làm sao?"
+    },
+    {
+      "start": 631.03,
+      "end": 632.63,
+      "en": "Then slow down the speed.",
+      "zh": "🕺那就放慢速度。",
+      "pinyin": "🕺 nà jiù fàng màn sù dù。",
+      "vi": "Vậy thì hãy làm chậm tốc độ lại."
+    },
+    {
+      "start": 632.9,
+      "end": 636.03,
+      "en": "Modern players all have a speed adjustment function.",
+      "zh": "🕺现在的播放器都有调节速度的功能。",
+      "pinyin": "🕺 xiàn zài de bō fàng qì dōu yǒu tiáo jié sù dù de gōng néng。",
+      "vi": "Các trình phát hiện nay đều có chức năng điều chỉnh tốc độ."
+    },
+    {
+      "start": 636.13,
+      "end": 641.93,
+      "en": "You can play it at 0.75x speed, and once you've practiced well, return to normal speed.",
+      "zh": "🕺你可以用.倍的速度播放，🕺等练好了，再回到正常速度。",
+      "pinyin": "🕺 nǐ kě yǐ yòng. bèi de sù dù bō fàng，🕺 děng liàn hǎo le， zài huí dào zhèng cháng sù dù。",
+      "vi": "Bạn có thể phát với tốc độ 0,75 lần, đợi khi luyện tốt rồi, hãy quay lại tốc độ bình thường."
+    },
+    {
+      "start": 641.93,
+      "end": 643.97,
+      "en": "This suggestion is so practical.",
+      "zh": "💃这个建议太实用了。",
+      "pinyin": "💃 zhè ge jiàn yì tài shí yòng le。",
+      "vi": "Lời khuyên này thật sự quá hữu ích."
+    },
+    {
+      "start": 643.97,
+      "end": 649.2,
+      "en": "Don't be fast just for the sake of being fast; accuracy and rhythm are what matter most. Right.",
+      "zh": "💃不要为了快而快，💃准确和节奏，💃才是最重要的。🕺对。",
+      "pinyin": "💃 bú yào wèi le kuài ér kuài，💃 zhǔn què hé jié zòu，💃 cái shì zuì zhòng yào de。🕺 duì。",
+      "vi": "Đừng chỉ vì nhanh mà nhanh, chính xác và nhịp điệu mới là quan trọng nhất. Đúng vậy."
+    },
+    {
+      "start": 649.3,
+      "end": 652.63,
+      "en": "Remember, Chinese is a language with a musical quality.",
+      "zh": "🕺记住，中文是有音乐感的语言。",
+      "pinyin": "🕺 jì zhù， zhōng wén shì yǒu yīn yuè gǎn de yǔ yán。",
+      "vi": "Hãy nhớ, tiếng Trung là một ngôn ngữ có cảm giác âm nhạc."
+    },
+    {
+      "start": 652.7,
+      "end": 660.47,
+      "en": "When you're saying a long sentence, imagine you're humming a tune, with highs and lows, pauses, and light and heavy stress.",
+      "zh": "🕺当你在说长句子的时候，🕺想象你在哼一首曲子，🕺有高有低，🕺有停顿，有轻重。",
+      "pinyin": "🕺 dāng nǐ zài shuō cháng jù zi de shí hòu，🕺 xiǎng xiàng nǐ zài hēng yì shǒu qǔ zi，🕺 yǒu gāo yǒu dī，🕺 yǒu tíng dùn， yǒu qīng zhòng。",
+      "vi": "Khi bạn nói một câu dài, hãy tưởng tượng bạn đang ngân nga một giai điệu, có cao có thấp, có ngừng nghỉ, có nhẹ có mạnh."
+    },
+    {
+      "start": 660.47,
+      "end": 668.17,
+      "en": "Hearing you say that, I feel practicing tones has become something very interesting. It should have been interesting in the first place.",
+      "zh": "💃听你这么一说，💃我觉得练习声调变成了一件很有趣，💃的事情。🕺它本来就应该是有趣的。",
+      "pinyin": "💃 tīng nǐ zhè me yì shuō，💃 wǒ jué de liàn xí shēng diào biàn chéng le yí jiàn hěn yǒu qù，💃 de shì qíng。🕺 tā běn lái jiù yīng gāi shì yǒu qù de。",
+      "vi": "Nghe bạn nói vậy, tôi thấy luyện thanh điệu đã trở thành một việc rất thú vị. Vốn dĩ nó đã nên thú vị rồi."
+    },
+    {
+      "start": 668.23,
+      "end": 674.6,
+      "en": "When you find that you can say beautiful long sentences, that sense of accomplishment is indescribable.",
+      "zh": "🕺当你发现自己能说出，🕺漂亮的长句子时，🕺那种成就感是无法形容的。",
+      "pinyin": "🕺 dāng nǐ fā xiàn zì jǐ néng shuō chū，🕺 piào liang de cháng jù zi shí，🕺 nà zhǒng chéng jiù gǎn shì wú fǎ xíng róng de。",
+      "vi": "Khi bạn phát hiện mình có thể nói ra những câu dài đẹp đẽ, cảm giác thành tựu đó không thể diễn tả được."
+    },
+    {
+      "start": 676.63,
+      "end": 682.87,
+      "en": "All right, friends. Today we talked about how to maintain tones when speaking long sentences.",
+      "zh": "🕺好了，朋友们。今天，🕺我们聊了如何在说长句时保持声调。",
+      "pinyin": "🕺 hǎo le， péng yǒu men。 jīn tiān，🕺 wǒ men liáo le rú hé zài shuō cháng jù shí bǎo chí shēng diào。",
+      "vi": "Được rồi, các bạn. Hôm nay, chúng ta đã nói về cách giữ thanh điệu khi nói câu dài."
+    },
+    {
+      "start": 683.07,
+      "end": 687.67,
+      "en": "Let's briefly summarize the three methods we learned today.",
+      "zh": "🕺让我们来简单总结一下今天，🕺学到的三个方法。",
+      "pinyin": "🕺 ràng wǒ men lái jiǎn dān zǒng jié yí xià jīn tiān，🕺 xué dào de sān gè fāng fǎ。",
+      "vi": "Hãy để chúng ta tóm tắt đơn giản ba phương pháp đã học được hôm nay."
+    },
+    {
+      "start": 687.67,
+      "end": 690.27,
+      "en": "First, pay attention to tone sandhi rules.",
+      "zh": "💃第一，要注意变调规则。",
+      "pinyin": "💃 dì yī， yào zhù yì biàn diào guī zé。",
+      "vi": "Thứ nhất, cần chú ý đến quy tắc biến điệu."
+    },
+    {
+      "start": 690.57,
+      "end": 696.03,
+      "en": "Especially when two third tones are together, the first one changes to a second tone.",
+      "zh": "💃特别是两个第三声在一起的时候，💃第一个要变成第二声。",
+      "pinyin": "💃 tè bié shì liǎng gè dì sān shēng zài yì qǐ de shí hòu，💃 dì yī gè yào biàn chéng dì èr shēng。",
+      "vi": "Đặc biệt là khi hai thanh thứ ba đứng cạnh nhau, thanh thứ nhất phải biến thành thanh thứ hai."
+    },
+    {
+      "start": 696.03,
+      "end": 697.47,
+      "en": "This is the foundation.",
+      "zh": "💃这是基础。",
+      "pinyin": "💃 zhè shì jī chǔ。",
+      "vi": "Đây là nền tảng."
+    },
+    {
+      "start": 697.5,
+      "end": 700.2,
+      "en": "Second, learn to “cut the cake.”",
+      "zh": "🕺第二，要学会“切蛋糕”。",
+      "pinyin": "🕺 dì èr， yào xué huì “ qiè dàn gāo ”。",
+      "vi": "Thứ hai, phải học cách “cắt bánh”."
+    },
+    {
+      "start": 700.43,
+      "end": 706.67,
+      "en": "Divide long sentences into several small parts according to meaning, and pause briefly in between,",
+      "zh": "🕺把长句子按照意思分成几个小部分，🕺在中间稍微停顿一下，",
+      "pinyin": "🕺 bǎ cháng jù zi àn zhào yì sī fēn chéng jǐ gè xiǎo bù fen，🕺 zài zhōng jiān shāo wēi tíng dùn yí xià，",
+      "vi": "Chia câu dài thành vài phần nhỏ theo ý nghĩa, và dừng lại một chút ở giữa,"
+    },
+    {
+      "start": 706.67,
+      "end": 709.03,
+      "en": "give yourself a little time to think.",
+      "zh": "🕺给自己一点思考的时间。",
+      "pinyin": "🕺 gěi zì jǐ yì diǎn sī kǎo de shí jiān。",
+      "vi": "cho bản thân một chút thời gian để suy nghĩ."
+    },
+    {
+      "start": 709.03,
+      "end": 711.93,
+      "en": "Third, do more “shadowing practice.”",
+      "zh": "💃第三，要多做“影子练习”。",
+      "pinyin": "💃 dì sān， yào duō zuò “ yǐng zi liàn xí ”。",
+      "vi": "Thứ ba, hãy luyện tập “shadowing” nhiều hơn."
+    },
+    {
+      "start": 712.1,
+      "end": 718.03,
+      "en": "Imitate native speakers’ rhythm, stress, and intonation, and learn Chinese as if it were music.",
+      "zh": "💃模仿母语者的节奏、💃轻重和语气，💃把中文当成音乐来学。",
+      "pinyin": "💃 mó fǎng mǔ yǔ zhě de jié zòu、💃 qīng zhòng hé yǔ qì，💃 bǎ zhōng wén dàng chéng yīn yuè lái xué。",
+      "vi": "Bắt chước nhịp điệu, độ mạnh nhẹ và ngữ điệu của người bản ngữ, học tiếng Trung như học âm nhạc."
+    },
+    {
+      "start": 718.03,
+      "end": 726.43,
+      "en": "These three methods are suitable not only for HSK 1 learners but also for HSK 4 and even higher-level learners.",
+      "zh": "🕺这三个方法，不仅适合 级的朋友，🕺也适合 级甚至更高级别的朋友。",
+      "pinyin": "🕺 zhè sān gè fāng fǎ， bù jǐn shì hé jí de péng yǒu，🕺 yě shì hé jí shèn zhì gèng gāo jí bié de péng yǒu。",
+      "vi": "Ba phương pháp này không chỉ phù hợp với các bạn HSK 1 mà còn phù hợp với các bạn HSK 4 hoặc thậm chí trình độ cao hơn."
+    },
+    {
+      "start": 726.43,
+      "end": 733.07,
+      "en": "Yes. Tone practice cannot be completed in a day or two; it takes time and patience.",
+      "zh": "💃是的。声调的练，💃习不是一天两天就能完成的，💃它需要时间和耐心。",
+      "pinyin": "💃 shì de。 shēng diào de liàn，💃 xí bú shì yì tiān liǎng tiān jiù néng wán chéng de，💃 tā xū yào shí jiān hé nài xīn。",
+      "vi": "Đúng vậy. Việc luyện thanh điệu không thể hoàn thành trong một hai ngày; nó cần thời gian và sự kiên nhẫn."
+    },
+    {
+      "start": 733.07,
+      "end": 737.5,
+      "en": "Everyone, don't give up just because you feel you don't speak well.",
+      "zh": "🕺大家，🕺千万不要因为觉得自己说得不好，🕺就放弃。",
+      "pinyin": "🕺 dà jiā，🕺 qiān wàn bú yào yīn wèi jué de zì jǐ shuō dé bù hǎo，🕺 jiù fàng qì。",
+      "vi": "Mọi người, tuyệt đối đừng vì cảm thấy mình nói chưa tốt mà bỏ cuộc."
+    },
+    {
+      "start": 737.5,
+      "end": 740.23,
+      "en": "Every time you speak, you make progress.",
+      "zh": "🕺每一次开口，都是一次进步。",
+      "pinyin": "🕺 měi yí cì kāi kǒu， dōu shì yí cì jìn bù。",
+      "vi": "Mỗi lần mở miệng nói đều là một lần tiến bộ."
+    },
+    {
+      "start": 740.23,
+      "end": 746.47,
+      "en": "That's right. If during practice you come across any interesting sentences or have any difficulties,",
+      "zh": "💃没错。如果你在练习过程中，💃遇到了什么有趣的句子，💃或者有什么困难，",
+      "pinyin": "💃 méi cuò。 rú guǒ nǐ zài liàn xí guò chéng zhōng，💃 yù dào le shén me yǒu qù de jù zi，💃 huò zhě yǒu shén me kùn nán，",
+      "vi": "Đúng vậy. Nếu trong quá trình luyện tập, bạn gặp câu nào thú vị hoặc gặp khó khăn gì,"
+    },
+    {
+      "start": 746.47,
+      "end": 748.7,
+      "en": "feel free to tell us in the comments.",
+      "zh": "💃欢迎在评论区告诉我们。",
+      "pinyin": "💃 huān yíng zài píng lùn qū gào sù wǒ men。",
+      "vi": "hãy cho chúng tôi biết trong phần bình luận."
+    },
+    {
+      "start": 748.7,
+      "end": 754.07,
+      "en": "You can also share this episode with friends around you who are learning Chinese.",
+      "zh": "🕺也可以把这，🕺一期节目，🕺分享给你身边正在学习中文的朋友。",
+      "pinyin": "🕺 yě kě yǐ bǎ zhè，🕺 yì qī jié mù，🕺 fēn xiǎng gěi nǐ shēn biān zhèng zài xué xí zhōng wén de péng yǒu。",
+      "vi": "Bạn cũng có thể chia sẻ tập này với những người bạn xung quanh đang học tiếng Trung."
+    },
+    {
+      "start": 754.2,
+      "end": 762.43,
+      "en": "Let's work hard together and improve together. Don't forget to subscribe to our channel “Learn Chinese Podcast” so you won't miss",
+      "zh": "🕺让我们一起加油，🕺一起进步。💃别忘了，💃订阅我们的频道“ ”，💃这样就不会错过",
+      "pinyin": "🕺 ràng wǒ men yì qǐ jiā yóu，🕺 yì qǐ jìn bù。💃 bié wàng le，💃 dìng yuè wǒ men de pín dào “ ”，💃 zhè yàng jiù bú huì cuò guò",
+      "vi": "Hãy cùng nhau cố gắng và cùng tiến bộ. Đừng quên đăng ký kênh “Learn Chinese Podcast” của chúng tôi, như vậy bạn sẽ không bỏ lỡ"
+    },
+    {
+      "start": 762.43,
+      "end": 764.27,
+      "en": "the next exciting content.",
+      "zh": "💃下一次的精彩内容了。",
+      "pinyin": "💃 xià yí cì de jīng cǎi nèi róng le。",
+      "vi": "nội dung hấp dẫn tiếp theo."
+    },
+    {
+      "start": 764.27,
+      "end": 765.77,
+      "en": "Thank you all for listening.",
+      "zh": "🕺谢谢大家的收听。",
+      "pinyin": "🕺 xiè xiè dà jiā de shōu tīng。",
+      "vi": "Cảm ơn mọi người đã lắng nghe."
+    },
+    {
+      "start": 765.77,
+      "end": 767.67,
+      "en": "See you in the next episode!",
+      "zh": "🕺我们下期节目再见！",
+      "pinyin": "🕺 wǒ men xià qī jié mù zài jiàn！",
+      "vi": "Hẹn gặp lại các bạn trong chương trình lần sau!"
+    },
+    {
+      "start": 767.67,
+      "end": 769.8,
+      "en": "Friends, goodbye! Keep going!",
+      "zh": "💃朋友们，再见！加油！",
+      "pinyin": "💃 péng yǒu men， zài jiàn！ jiā yóu！",
+      "vi": "Các bạn, tạm biệt! Cố lên!"
+    }
+  ]
+}
