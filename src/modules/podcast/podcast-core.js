@@ -21374,6 +21374,1110 @@
           vi: 'Xin chào mọi người! Tôi là Lý Minh. Rất vui lại được gặp mọi người.'
         }
       ]
+    },
+    {
+      "id": "ep-lctp-extra--dfMYeOZ68k",
+      "youtubeId": "-dfMYeOZ68k",
+      "level": "HSK 2–4",
+      "levelGroup": "hsk3",
+      "title": "HSK 2 - 4 | What Staying Up Late Steals From Young People | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 710,
+      "durationLabel": "11:50",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/-dfMYeOZ68k.json",
+      "cuesCount": 295,
+      "cues": [
+        {
+          "start": 6.17,
+          "end": 8.3,
+          "zh": "🎯:你有没有过这样的晚上？",
+          "vi": "🎯: Bạn đã bao giờ có một đêm như thế này chưa?",
+          "en": "⁇ : Have you ever had a night like this?",
+          "pinyin": "🎯: nǐ yǒu méi yǒu guò zhè yàng de wǎn shàng ？"
+        },
+        {
+          "start": 8.33,
+          "end": 12.06,
+          "zh": "🎯:你明明告诉自己……只看五分钟手机，",
+          "vi": "🎯: Bạn rõ ràng tự nhủ với mình... chỉ xem điện thoại năm phút thôi,",
+          "en": "⁇ : You told yourself...it's only five minutes to look at the phone.",
+          "pinyin": "🎯: nǐ míng míng gào sù zì jǐ …… zhī kàn wǔ fēn zhōng shǒu jī ，"
+        },
+        {
+          "start": 12.07,
+          "end": 13.6,
+          "zh": "🎯:然后就睡觉，",
+          "vi": "🎯: rồi sẽ đi ngủ,",
+          "en": "Q: Then I went to sleep.",
+          "pinyin": "🎯: rán hòu jiù shuì jiào ，"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-4wfSkRQdq28",
+      "youtubeId": "4wfSkRQdq28",
+      "level": "HSK 2–4",
+      "levelGroup": "hsk3",
+      "title": "Chinese Daily Podcast | Think Positively and Focus Only on Yourself | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1005,
+      "durationLabel": "16:45",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/4wfSkRQdq28.json",
+      "cuesCount": 420,
+      "cues": [
+        {
+          "start": 6.17,
+          "end": 6.93,
+          "zh": "🕺大家好！",
+          "vi": "Xin chào mọi người!",
+          "en": "Hello, everyone!",
+          "pinyin": "🕺 dà jiā hǎo ！"
+        },
+        {
+          "start": 6.93,
+          "end": 10.26,
+          "zh": "🕺欢迎收听今天的“学中文播客”。",
+          "vi": "Chào mừng các bạn đến với podcast \"Học tiếng Trung\" hôm nay.",
+          "en": "Welcome to today's Chinese-language podcast.",
+          "pinyin": "🕺 huān yíng shōu tīng jīn tiān de “ xué zhōng wén bō kè ”。"
+        },
+        {
+          "start": 10.37,
+          "end": 12.77,
+          "zh": "🕺我是你们的老朋友，李明。",
+          "vi": "Tôi là Lý Minh, người bạn cũ của các bạn.",
+          "en": "I'm an old friend of yours, Li Ming.",
+          "pinyin": "🕺 wǒ shì nǐ men de lǎo péng yǒu ， lǐ míng 。"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-5Iai8SAmWpw",
+      "youtubeId": "5Iai8SAmWpw",
+      "level": "HSK 2–4",
+      "levelGroup": "hsk3",
+      "title": "HSK 1-4 | The truth about learning Chinese that no center will tell you | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 879,
+      "durationLabel": "14:39",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/5Iai8SAmWpw.json",
+      "cuesCount": 349,
+      "cues": [
+        {
+          "start": 6.37,
+          "end": 10.47,
+          "zh": "🕺大家好，欢迎收听“Learn Chinese Podcast”。",
+          "vi": "Xin chào mọi người, chào mừng đến với “Learn Chinese Podcast”.",
+          "en": "Hello, everyone. Welcome to \"Learne China Post\".",
+          "pinyin": "🕺 dà jiā hǎo ， huān yíng shōu tīng “Learn Chinese Podcast”。"
+        },
+        {
+          "start": 10.47,
+          "end": 11.7,
+          "zh": "🕺我是李明。",
+          "vi": "Tôi là Lý Minh.",
+          "en": "I'm Lee Myung.",
+          "pinyin": "🕺 wǒ shì lǐ míng 。"
+        },
+        {
+          "start": 11.73,
+          "end": 13.8,
+          "zh": "💃大家好，我是小雨。",
+          "vi": "Xin chào mọi người, tôi là Tiểu Vũ.",
+          "en": "Hello, everyone. I'm Ame.",
+          "pinyin": "💃 dà jiā hǎo ， wǒ shì xiǎo yǔ 。"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-KJE33Ved7Ns",
+      "youtubeId": "KJE33Ved7Ns",
+      "level": "HSK 1–2",
+      "levelGroup": "hsk1-2",
+      "title": "HSK 1-2 | Everyday Chinese at the Supermarket - 超市日常中文 | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1101,
+      "durationLabel": "18:21",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/KJE33Ved7Ns.json",
+      "cuesCount": 494,
+      "cues": [
+        {
+          "start": 8.67,
+          "end": 12.63,
+          "zh": "🕺大家好，欢迎收听 Learn Chinese Podcast",
+          "vi": "🕺Xin chào mọi người, chào mừng đến với Learn Chinese Podcast.",
+          "en": "Hello, everyone. Welcome to Learn Chinse Podcast.",
+          "pinyin": "🕺 dà jiā hǎo ， huān yíng shōu tīng Learn Chinese Podcast"
+        },
+        {
+          "start": 12.63,
+          "end": 13.93,
+          "zh": "🕺我是李明。",
+          "vi": "🕺Tôi là Lý Minh.",
+          "en": "I'm Lee Myung.",
+          "pinyin": "🕺 wǒ shì lǐ míng 。"
+        },
+        {
+          "start": 13.97,
+          "end": 16.23,
+          "zh": "💃大家好，我是小雨。",
+          "vi": "💃Xin chào mọi người, tôi là Tiểu Vũ.",
+          "en": "Hello, everyone. I'm Ame.",
+          "pinyin": "💃 dà jiā hǎo ， wǒ shì xiǎo yǔ 。"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-O4kumm8lNYY",
+      "youtubeId": "O4kumm8lNYY",
+      "level": "HSK 2–4",
+      "levelGroup": "hsk3",
+      "title": "HSK 2 - 4 | Stop Overvaluing Your Place in Someone’s Heart | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 626,
+      "durationLabel": "10:26",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/O4kumm8lNYY.json",
+      "cuesCount": 259,
+      "cues": [
+        {
+          "start": 6.3,
+          "end": 7.9,
+          "zh": "你有没有发现，",
+          "vi": "Bạn có để ý không,",
+          "en": "You haven't found anything.",
+          "pinyin": "nǐ yǒu méi yǒu fā xiàn ，"
+        },
+        {
+          "start": 8,
+          "end": 9.73,
+          "zh": "越是在乎一个人，",
+          "vi": "càng quan tâm đến một người,",
+          "en": "The more you care about someone,",
+          "pinyin": "yuè shì zài hū yí gè rén ，"
+        },
+        {
+          "start": 9.73,
+          "end": 11.86,
+          "zh": "心里越容易受伤？",
+          "vi": "thì trong lòng càng dễ bị tổn thương?",
+          "en": "The more you get hurt?",
+          "pinyin": "xīn lǐ yuè róng yì shòu shāng ？"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-yvMkYXOxtWY",
+      "youtubeId": "yvMkYXOxtWY",
+      "level": "HSK 2–4",
+      "levelGroup": "hsk3",
+      "title": "HSK 2 - 4 | China’s AI Revolution: Has Chinese Technology Surpassed the World?",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 679,
+      "durationLabel": "11:19",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/yvMkYXOxtWY.json",
+      "cuesCount": 269,
+      "cues": [
+        {
+          "start": 6.17,
+          "end": 8.07,
+          "zh": "你有没有这样的感觉？",
+          "vi": "Bạn có cảm giác như thế này không?",
+          "en": "Do you feel that way?",
+          "pinyin": "nǐ yǒu méi yǒu zhè yàng de gǎn jué ？"
+        },
+        {
+          "start": 8.27,
+          "end": 11.64,
+          "zh": "昨天还觉得人工智能离我们很远，",
+          "vi": "Hôm qua còn thấy trí tuệ nhân tạo xa vời với chúng ta,",
+          "en": "Yesterday, I felt that AI was far away from us.",
+          "pinyin": "zuó tiān hái jué de rén gōng zhì néng lí wǒ men hěn yuǎn ，"
+        },
+        {
+          "start": 11.7,
+          "end": 13.87,
+          "zh": "今天一打开手机，",
+          "vi": "hôm nay vừa mở điện thoại ra,",
+          "en": "Today, when the phone is turned on,",
+          "pinyin": "jīn tiān yì dǎ kāi shǒu jī ，"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-0XGaY-_j-xU",
+      "youtubeId": "0XGaY-_j-xU",
+      "level": "HSK 2–4",
+      "levelGroup": "hsk3",
+      "title": "HSK 2-3 | The Fun Story of 12 Chinese Zodiacs & Culture Introduction | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 869,
+      "durationLabel": "14:29",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/0XGaY-_j-xU.json",
+      "cuesCount": 299,
+      "cues": [
+        {
+          "start": 6.07,
+          "end": 10.67,
+          "zh": "🕺大家好欢迎收听中文学习播课",
+          "vi": "🕺Xin chào mọi người, chào mừng các bạn đến với podcast học tiếng Trung.",
+          "en": "Everyone, welcome to Chinese classes.",
+          "pinyin": "🕺 dà jiā hǎo huān yíng shōu tīng zhōng wén xué xí bō kè"
+        },
+        {
+          "start": 10.73,
+          "end": 12.4,
+          "zh": "🕺我是李明",
+          "vi": "🕺Tôi là Lý Minh.",
+          "en": "I'm Li Ming.",
+          "pinyin": "🕺 wǒ shì lǐ míng"
+        },
+        {
+          "start": 12.47,
+          "end": 15.07,
+          "zh": "💃大家好我是小雨",
+          "vi": "💃Xin chào mọi người, tôi là Tiểu Vũ.",
+          "en": "Hello, everyone. I'm Ame.",
+          "pinyin": "💃 dà jiā hǎo wǒ shì xiǎo yǔ"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-2kWTxhumQEg",
+      "youtubeId": "2kWTxhumQEg",
+      "level": "HSK 3+",
+      "levelGroup": "hsk3",
+      "title": "HSK 3 - 4 | Healthy Weekend? Chinese Learners Shouldn’t Miss This! | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1713,
+      "durationLabel": "28:33",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/2kWTxhumQEg.json",
+      "cuesCount": 660,
+      "cues": [
+        {
+          "start": 6.3,
+          "end": 9.7,
+          "zh": "大家好欢迎来到我们的频道",
+          "vi": "Xin chào mọi người, chào mừng đến với kênh của chúng tôi.",
+          "en": "Welcome to our channel.",
+          "pinyin": "dà jiā hǎo huān yíng lái dào wǒ men de pín dào"
+        },
+        {
+          "start": 9.93,
+          "end": 12.36,
+          "zh": "这里是陪你一起学中文",
+          "vi": "Đây là nơi cùng bạn học tiếng Trung",
+          "en": "This is for you to learn Chinese.",
+          "pinyin": "zhè lǐ shì péi nǐ yì qǐ xué zhōng wén"
+        },
+        {
+          "start": 12.37,
+          "end": 14.17,
+          "zh": "学生活的地方",
+          "vi": "và học cách sống.",
+          "en": "Where to learn to live.",
+          "pinyin": "xué shēng huó de dì fāng"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-TzZxjqUWtKU",
+      "youtubeId": "TzZxjqUWtKU",
+      "level": "HSK 3+",
+      "levelGroup": "hsk3",
+      "title": "HSK 3 - 4 | Going to the Hospital in China – Easy Chinese You’ll Use! | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1601,
+      "durationLabel": "26:41",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/TzZxjqUWtKU.json",
+      "cuesCount": 653,
+      "cues": [
+        {
+          "start": 6.3,
+          "end": 8.37,
+          "zh": "你好好久不见",
+          "vi": "Chào bạn, lâu rồi không gặp.",
+          "en": "It's been a long time.",
+          "pinyin": "nǐ hǎo hǎo jiǔ bú jiàn"
+        },
+        {
+          "start": 8.37,
+          "end": 9.8,
+          "zh": "最近怎么样",
+          "vi": "Dạo này bạn thế nào?",
+          "en": "How's it going?",
+          "pinyin": "zuì jìn zěn me yàng"
+        },
+        {
+          "start": 10.07,
+          "end": 12.6,
+          "zh": "嗨我最近有点累",
+          "vi": "Chào, dạo này mình hơi mệt.",
+          "en": "Hey, I'm a little tired lately.",
+          "pinyin": "hēi wǒ zuì jìn yǒu diǎn lèi"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-_qYkr6f1OWA",
+      "youtubeId": "_qYkr6f1OWA",
+      "level": "HSK 3+",
+      "levelGroup": "hsk3",
+      "title": "HSK 3 - 4 | Mastering Talking About Money in Chinese | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1481,
+      "durationLabel": "24:41",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/_qYkr6f1OWA.json",
+      "cuesCount": 585,
+      "cues": [
+        {
+          "start": 6.27,
+          "end": 7,
+          "zh": "你好",
+          "vi": "Chào bạn!",
+          "en": "Hello.",
+          "pinyin": "nǐ hǎo"
+        },
+        {
+          "start": 7,
+          "end": 11.3,
+          "zh": "欢迎回来我们的中文学习频道嗨",
+          "vi": "Chào mừng các bạn quay lại kênh học tiếng Trung của chúng mình, hi!",
+          "en": "Welcome back to our Chinese Learning Channel. Hi.",
+          "pinyin": "huān yíng huí lái wǒ men de zhōng wén xué xí pín dào hēi"
+        },
+        {
+          "start": 11.3,
+          "end": 13.6,
+          "zh": "今天你过得怎么样",
+          "vi": "Hôm nay bạn thế nào?",
+          "en": "How was your day?",
+          "pinyin": "jīn tiān nǐ guò dé zěn me yàng"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-fnX3jfbsF4A",
+      "youtubeId": "fnX3jfbsF4A",
+      "level": "HSK 3+",
+      "levelGroup": "hsk3",
+      "title": "HSK 3 - 4 | Feeling Down? | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1196,
+      "durationLabel": "19:56",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/fnX3jfbsF4A.json",
+      "cuesCount": 471,
+      "cues": [
+        {
+          "start": 6.1,
+          "end": 7.4,
+          "zh": "嗨好久不见",
+          "vi": "Chào cậu, lâu rồi không gặp.",
+          "en": "Hey, it's been a while.",
+          "pinyin": "hēi hǎo jiǔ bú jiàn"
+        },
+        {
+          "start": 7.4,
+          "end": 8.6,
+          "zh": "你最近怎么样",
+          "vi": "Dạo này cậu thế nào?",
+          "en": "How have you been?",
+          "pinyin": "nǐ zuì jìn zěn me yàng"
+        },
+        {
+          "start": 8.6,
+          "end": 10.53,
+          "zh": "嗨我还好",
+          "vi": "Chào cậu, tớ vẫn ổn.",
+          "en": "Hey, I'm all right.",
+          "pinyin": "hēi wǒ hái hǎo"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-g2vPdqYQYS8",
+      "youtubeId": "g2vPdqYQYS8",
+      "level": "HSK 3+",
+      "levelGroup": "hsk3",
+      "title": "HSK 3 - 4 | How Social Media Shapes Our Lives ?| Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1154,
+      "durationLabel": "19:14",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/g2vPdqYQYS8.json",
+      "cuesCount": 440,
+      "cues": [
+        {
+          "start": 6.3,
+          "end": 10.27,
+          "zh": "早上好你今天起的真早啊",
+          "vi": "Chào buổi sáng, hôm nay bạn dậy sớm thật đấy.",
+          "en": "Good morning. You're up early today.",
+          "pinyin": "zǎo shàng hǎo nǐ jīn tiān qǐ de zhēn zǎo a"
+        },
+        {
+          "start": 10.27,
+          "end": 13.53,
+          "zh": "早啊我一醒来就拿起手机",
+          "vi": "Chào buổi sáng. Mình vừa tỉnh dậy là cầm điện thoại lên ngay.",
+          "en": "Morning. When I woke up, I picked up my phone.",
+          "pinyin": "zǎo a wǒ yì xǐng lái jiù ná qǐ shǒu jī"
+        },
+        {
+          "start": 13.53,
+          "end": 16.2,
+          "zh": "看了半小时的社交媒体",
+          "vi": "Xem mạng xã hội nửa tiếng.",
+          "en": "I saw the social media for half an hour.",
+          "pinyin": "kàn le bàn xiǎo shí de shè jiāo méi tǐ"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-g5KBiyf3KNQ",
+      "youtubeId": "g5KBiyf3KNQ",
+      "level": "HSK 1–2",
+      "levelGroup": "hsk1-2",
+      "title": "HSK 1-2 | How to Speak Chinese at a Hotel: Simple Dialogues for Every Traveler",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1009,
+      "durationLabel": "16:49",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/g5KBiyf3KNQ.json",
+      "cuesCount": 443,
+      "cues": [
+        {
+          "start": 8.73,
+          "end": 10.66,
+          "zh": "🕺大家好，我是李明。",
+          "vi": "🕺Xin chào mọi người, tôi là Lý Minh.",
+          "en": "Hello, everyone. I'm Li Ming.",
+          "pinyin": "🕺 dà jiā hǎo ， wǒ shì lǐ míng 。"
+        },
+        {
+          "start": 10.67,
+          "end": 11.84,
+          "zh": "🕺欢迎你们。",
+          "vi": "🕺Chào mừng các bạn.",
+          "en": "Welcome.",
+          "pinyin": "🕺 huān yíng nǐ men 。"
+        },
+        {
+          "start": 12.03,
+          "end": 14.03,
+          "zh": "💃大家好，我是小雨。",
+          "vi": "💃Xin chào mọi người, tôi là Tiểu Vũ.",
+          "en": "Hello, everyone. I'm Ame.",
+          "pinyin": "💃 dà jiā hǎo ， wǒ shì xiǎo yǔ 。"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-hgMUlVgeSfA",
+      "youtubeId": "hgMUlVgeSfA",
+      "level": "HSK 1–2",
+      "levelGroup": "hsk1-2",
+      "title": "HSK 1-2 | What do you need to start speaking Chinese? | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1424,
+      "durationLabel": "23:44",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/hgMUlVgeSfA.json",
+      "cuesCount": 604,
+      "cues": [
+        {
+          "start": 6.1,
+          "end": 7.17,
+          "zh": "大家好",
+          "vi": "Xin chào tất cả mọi người.",
+          "en": "Hello, everyone.",
+          "pinyin": "dà jiā hǎo"
+        },
+        {
+          "start": 7.17,
+          "end": 10.4,
+          "zh": "欢迎来到我们的中文学习频道",
+          "vi": "Chào mừng bạn đến với kênh học tiếng Trung của chúng tôi.",
+          "en": "Welcome to our Chinese Learning Channel.",
+          "pinyin": "huān yíng lái dào wǒ men de zhōng wén xué xí pín dào"
+        },
+        {
+          "start": 10.5,
+          "end": 13.57,
+          "zh": "今天我们来聊一聊一个很重要的问",
+          "vi": "Hôm nay chúng ta hãy nói về một vấn đề rất quan trọng",
+          "en": "Let's talk about a very important question today.",
+          "pinyin": "jīn tiān wǒ men lái liáo yi liáo yí gè hěn zhòng yào de wèn"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-y94B3aZlxQI",
+      "youtubeId": "y94B3aZlxQI",
+      "level": "HSK 1–2",
+      "levelGroup": "hsk1-2",
+      "title": "HSK 1-2 | What to Do When You’re Stressed at Work?  | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1538,
+      "durationLabel": "25:38",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/y94B3aZlxQI.json",
+      "cuesCount": 559,
+      "cues": [
+        {
+          "start": 6.1,
+          "end": 7.2,
+          "zh": "大家好",
+          "vi": "Xin chào mọi người.",
+          "en": "Hello, everyone.",
+          "pinyin": "dà jiā hǎo"
+        },
+        {
+          "start": 7.2,
+          "end": 11.03,
+          "zh": "欢迎来到我们轻松学中文的频道",
+          "vi": "Chào mừng các bạn đến với kênh Học tiếng Trung nhẹ nhàng của chúng mình.",
+          "en": "Welcome to the channel where we learn Chinese easy.",
+          "pinyin": "huān yíng lái dào wǒ men qīng sōng xué zhōng wén de pín dào"
+        },
+        {
+          "start": 11.5,
+          "end": 13.9,
+          "zh": "我是你们的朋友小李",
+          "vi": "Mình là Tiểu Lý, người bạn của các bạn.",
+          "en": "I'm your friend Li.",
+          "pinyin": "wǒ shì nǐ men de péng yǒu xiǎo lǐ"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-_YylDuHzQQw",
+      "youtubeId": "_YylDuHzQQw",
+      "level": "HSK 1–2",
+      "levelGroup": "hsk1-2",
+      "title": "HSK 1-2 | How to manage negative emotions? | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1066,
+      "durationLabel": "17:46",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/_YylDuHzQQw.json",
+      "cuesCount": 411,
+      "cues": [
+        {
+          "start": 6.1,
+          "end": 8.57,
+          "zh": "大家好你今天好吗",
+          "vi": "Chào mọi người, hôm nay bạn thế nào?",
+          "en": "How are you today?",
+          "pinyin": "dà jiā hǎo nǐ jīn tiān hǎo ma"
+        },
+        {
+          "start": 8.57,
+          "end": 11.1,
+          "zh": "欢迎你来看我们的视频",
+          "vi": "Chào mừng bạn đến xem video của chúng mình.",
+          "en": "Welcome to our video.",
+          "pinyin": "huān yíng nǐ lái kàn wǒ men de shì pín"
+        },
+        {
+          "start": 11.27,
+          "end": 14.47,
+          "zh": "今天我们要说一个很重要的话题",
+          "vi": "Hôm nay chúng mình sẽ nói về một chủ đề rất quan trọng.",
+          "en": "Today we have a very important topic to discuss.",
+          "pinyin": "jīn tiān wǒ men yào shuō yí gè hěn zhòng yào de huà tí"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-8IguP51Ru8E",
+      "youtubeId": "8IguP51Ru8E",
+      "level": "HSK 1–2",
+      "levelGroup": "hsk1-2",
+      "title": "HSK 1-2 | Learn Chinese Easily with 10 Uplifting Morning Phrases! | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 981,
+      "durationLabel": "16:21",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/8IguP51Ru8E.json",
+      "cuesCount": 394,
+      "cues": [
+        {
+          "start": 8.73,
+          "end": 10.833,
+          "zh": "大家好，我是李明，",
+          "vi": "Chào mọi người, tôi là Lý Minh.",
+          "en": "Hello. I'm Li Ming.",
+          "pinyin": "dà jiā hǎo ， wǒ shì lǐ míng ，"
+        },
+        {
+          "start": 10.833,
+          "end": 13.866,
+          "zh": "欢迎来到Learn Chinese Podcast。",
+          "vi": "Chào mừng đến với Learn Chinese Podcast.",
+          "en": "Welcome to Learn Chinese Podcast.",
+          "pinyin": "huān yíng lái dào L e a r n   C h i n e s e   P o d c a s t 。"
+        },
+        {
+          "start": 13.933,
+          "end": 16.033,
+          "zh": "大家好，我是小雨，",
+          "vi": "Chào mọi người, tôi là Tiểu Vũ.",
+          "en": "Hello, I'm Ame.",
+          "pinyin": "dà jiā hǎo ， wǒ shì xiǎo yǔ ，"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-HxAg55caCKs",
+      "youtubeId": "HxAg55caCKs",
+      "level": "HSK 2–4",
+      "levelGroup": "hsk3",
+      "title": "HSK 2 - 4 | When You Lose Your Way | Learn Chinese Through a Healing Beijing Story",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 539,
+      "durationLabel": "8:59",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/HxAg55caCKs.json",
+      "cuesCount": 209,
+      "cues": [
+        {
+          "start": 6.37,
+          "end": 10.2,
+          "zh": "🐼:欢迎收听……今天这封写给自己的信。",
+          "vi": "🐼: Chào mừng các bạn đến với... bức thư hôm nay viết cho chính mình.",
+          "en": "⁇ : Welcome to the letter that I wrote to myself today.",
+          "pinyin": "🐼 : huān yíng shōu tīng … … jīn tiān zhè fēng xiě gěi zì jǐ de xìn 。"
+        },
+        {
+          "start": 10.37,
+          "end": 12.17,
+          "zh": "🐼:你好，我是子轩。",
+          "vi": "🐼: Xin chào, tôi là Tử Hiên.",
+          "en": "GUY: Hello, I'm Zijun.",
+          "pinyin": "🐼 : nǐ hǎo ， wǒ shì zǐ xuān 。"
+        },
+        {
+          "start": 12.27,
+          "end": 13.3,
+          "zh": "🐼:大家好，我是雨桐。",
+          "vi": "🐼: Chào mọi người, tôi là Vũ Đồng.",
+          "en": "Hello, everyone. I'm Yuzu.",
+          "pinyin": "🐼 : dà jiā hǎo ， wǒ shì yǔ tóng 。"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-MNCKKv9scf4",
+      "youtubeId": "MNCKKv9scf4",
+      "level": "HSK 2–4",
+      "levelGroup": "hsk3",
+      "title": "HSK 2 - 4 | Embarrassment Is the Best Opportunity for Growth | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 608,
+      "durationLabel": "10:08",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/MNCKKv9scf4.json",
+      "cuesCount": 244,
+      "cues": [
+        {
+          "start": 6.2,
+          "end": 8.23,
+          "zh": "大家好，欢迎收听“普通",
+          "vi": "Chào mọi người, chào mừng đến với \"",
+          "en": "Hello, everyone. Welcome to \"The Normal.\"",
+          "pinyin": "dà jiā hǎo ， huān yíng shōu tīng “ pǔ tōng"
+        },
+        {
+          "start": 8.33,
+          "end": 10.63,
+          "zh": "话每日播客”。我是子涵。",
+          "vi": "Phổ Thông Thoại Mỗi Ngày\". Tôi là Zihan.",
+          "en": "Talk to the daily podcast.\" I'm a child.",
+          "pinyin": "huà měi rì bō kè ” 。 wǒ shì zǐ hán 。"
+        },
+        {
+          "start": 10.93,
+          "end": 14.46,
+          "zh": "今天我想先问你一个很简单的问题：",
+          "vi": "Hôm nay tôi muốn hỏi bạn một câu rất đơn giản trước:",
+          "en": "Today I would like to ask you a simple question:",
+          "pinyin": "jīn tiān wǒ xiǎng xiān wèn nǐ yí gè hěn jiǎn dān de wèn tí ："
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-U4TuivpulEo",
+      "youtubeId": "U4TuivpulEo",
+      "level": "HSK 2–4",
+      "levelGroup": "hsk3",
+      "title": "HSK 2 - 4 | How to Achieve Your Goals Without Comparing Yourself to Others",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 657,
+      "durationLabel": "10:57",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/U4TuivpulEo.json",
+      "cuesCount": 257,
+      "cues": [
+        {
+          "start": 6.2,
+          "end": 8.23,
+          "zh": "你有没有这样的时刻？",
+          "vi": "Bạn có bao giờ có những khoảnh khắc như thế này không?",
+          "en": "Do you have a moment like this?",
+          "pinyin": "nǐ yǒu méi yǒu zhè yàng de shí kè ？"
+        },
+        {
+          "start": 8.27,
+          "end": 9.93,
+          "zh": "晚上刷手机，",
+          "vi": "Buổi tối, bạn lướt điện thoại,",
+          "en": "I've been working on my phone at night.",
+          "pinyin": "wǎn shàng shuā shǒu jī ，"
+        },
+        {
+          "start": 9.93,
+          "end": 11.9,
+          "zh": "看见别人升职了，",
+          "vi": "thấy người khác được thăng chức,",
+          "en": "I saw someone get promoted.",
+          "pinyin": "kàn jiàn bié rén shēng zhí le ，"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-bZu-TAK96nU",
+      "youtubeId": "bZu-TAK96nU",
+      "level": "HSK 1–2",
+      "levelGroup": "hsk1-2",
+      "title": "HSK 1-2 | SMART Method That Most Chinese Learners Forget! | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1045,
+      "durationLabel": "17:25",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/bZu-TAK96nU.json",
+      "cuesCount": 419,
+      "cues": [
+        {
+          "start": 7.53,
+          "end": 9.46,
+          "zh": "🕺大家好，我是李明，",
+          "vi": "🕺Xin chào mọi người, tôi là Lý Minh,",
+          "en": "Hello, everyone. I'm Li Ming.",
+          "pinyin": "🕺 dà jiā hǎo ， wǒ shì lǐ míng ，"
+        },
+        {
+          "start": 9.47,
+          "end": 11.57,
+          "zh": "🕺很高兴和你们在一起。",
+          "vi": "🕺Rất vui được gặp mọi người.",
+          "en": "It's nice to be with you guys.",
+          "pinyin": "🕺 hěn gāo xìng hé nǐ men zài yì qǐ 。"
+        },
+        {
+          "start": 11.63,
+          "end": 13.63,
+          "zh": "🕺今天我们又见面了。",
+          "vi": "🕺Hôm nay chúng ta lại gặp nhau rồi.",
+          "en": "We meet again today.",
+          "pinyin": "🕺 jīn tiān wǒ men yòu jiàn miàn le 。"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-cl7uiNCtcmI",
+      "youtubeId": "cl7uiNCtcmI",
+      "level": "HSK 2–4",
+      "levelGroup": "hsk3",
+      "title": "HSK 2-3 | Describe Yourself in Chinese: Are you Introvert or Extrovert? | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 808,
+      "durationLabel": "13:28",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/cl7uiNCtcmI.json",
+      "cuesCount": 329,
+      "cues": [
+        {
+          "start": 6.27,
+          "end": 10.2,
+          "zh": "🕺大家好！欢迎来到“Learn Chinese Podcast”！",
+          "vi": "🕺Chào mọi người! Chào mừng đến với \"Learn Chinese Podcast\"!",
+          "en": "Hello, everyone! Welcome to \"Learne China Podcast\"!",
+          "pinyin": "🕺 dà jiā hǎo ！ huān yíng lái dào “ L e a r n   C h i n e s e   P o d c a s t ” ！"
+        },
+        {
+          "start": 10.2,
+          "end": 11.47,
+          "zh": "🕺我是李明。",
+          "vi": "🕺Tôi là Lý Minh.",
+          "en": "I'm Lee Myung.",
+          "pinyin": "🕺 wǒ shì lǐ míng 。"
+        },
+        {
+          "start": 11.57,
+          "end": 13.57,
+          "zh": "💃大家好！我是小雨。",
+          "vi": "💃Chào mọi người! Tôi là Tiểu Vũ.",
+          "en": "Hello, everyone! I'm Ame.",
+          "pinyin": "💃 dà jiā hǎo ！ wǒ shì xiǎo yǔ 。"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-iSDpi7v6l6Q",
+      "youtubeId": "iSDpi7v6l6Q",
+      "level": "HSK 1–2",
+      "levelGroup": "hsk1-2",
+      "title": "HSK 1-2 | Chinese characters that look like drawings | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 860,
+      "durationLabel": "14:20",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/iSDpi7v6l6Q.json",
+      "cuesCount": 317,
+      "cues": [
+        {
+          "start": 6.3,
+          "end": 7.3,
+          "zh": "🕺大家好！",
+          "vi": "Xin chào tất cả mọi người!",
+          "en": "Hello, everyone!",
+          "pinyin": "🕺 dà jiā hǎo ！"
+        },
+        {
+          "start": 7.3,
+          "end": 10.67,
+          "zh": "🕺欢迎回到我们的“学中文播客”！",
+          "vi": "Chào mừng quay trở lại với podcast \"Học tiếng Trung\" của chúng ta!",
+          "en": "Welcome back to our Chinese-language podcast!",
+          "pinyin": "🕺 huān yíng huí dào wǒ men de “ xué zhōng wén bō kè ” ！"
+        },
+        {
+          "start": 10.67,
+          "end": 13.13,
+          "zh": "💃大家好！我是小雨。",
+          "vi": "Chào mọi người! Tôi là Tiểu Vũ.",
+          "en": "Hello, everyone! I'm Ame.",
+          "pinyin": "💃 dà jiā hǎo ！ wǒ shì xiǎo yǔ 。"
+        }
+      ]
+    },
+    {
+      "id": "ep-lctp-extra-l5ybjaIofgA",
+      "youtubeId": "l5ybjaIofgA",
+      "level": "HSK 1–2",
+      "levelGroup": "hsk1-2",
+      "title": "HSK 1-2 | How to speak Chinese when you get lost in Beijing? | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1116,
+      "durationLabel": "18:36",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/l5ybjaIofgA.json",
+      "cuesCount": 373,
+      "cues": [
+        {
+          "start": 9.1,
+          "end": 13.87,
+          "zh": "🕺大家好！欢迎收听“轻松学中文播客”。",
+          "vi": "🕺Chào mọi người! Hoan nghênh các bạn đến với \"Podcast Học Tiếng Trung Nhẹ Nhàng\".",
+          "en": "Hello, everyone! Welcome to the Easy Learning Chinese Podcast.",
+          "pinyin": "🕺 dà jiā hǎo ！ huān yíng shōu tīng “ qīng sōng xué zhōng wén bō kè ” 。"
+        },
+        {
+          "start": 13.97,
+          "end": 15.63,
+          "zh": "🕺我是李明。",
+          "vi": "🕺Tôi là Lý Minh.",
+          "en": "I'm Lee Myung.",
+          "pinyin": "🕺 wǒ shì lǐ míng 。"
+        },
+        {
+          "start": 15.63,
+          "end": 18.4,
+          "zh": "💃大家好！我是小雨。",
+          "vi": "💃Chào mọi người! Tôi là Tiểu Vũ.",
+          "en": "Hello, everyone! I'm Ame.",
+          "pinyin": "💃 dà jiā hǎo ！ wǒ shì xiǎo yǔ 。"
+        }
+      ]
     }
   ];
 
