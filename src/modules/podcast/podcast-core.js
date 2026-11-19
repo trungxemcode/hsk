@@ -22066,6 +22066,52 @@
       ]
     },
     {
+      "id": "ep-lctp-extra-_YylDuHzQQw",
+      "youtubeId": "_YylDuHzQQw",
+      "level": "HSK 1–2",
+      "levelGroup": "hsk1-2",
+      "title": "HSK 1-2 | How to manage negative emotions? | Chinese Listening Practice",
+      "channel": "Learn Chinese Through Podcast",
+      "channelName": "Learn Chinese Through Podcast",
+      "channelHandle": "@LearnChineseThroughPodcast",
+      "channelId": "UCI8Liuxdz6UPv5rgMskfwPg",
+      "channelUrl": "https://www.youtube.com/@LearnChineseThroughPodcast",
+      "durationSec": 1066,
+      "durationLabel": "17:46",
+      "topic": "Luyện nghe tiếng Trung",
+      "note": "Phụ đề theo timestamp nguồn với bốn lớp Hán · Pinyin · Việt · Anh.",
+      "defaultMaskBottom": 4,
+      "defaultMaskHeight": 22,
+      "cuesUrl": "content/podcast/cues/_YylDuHzQQw.json",
+      "cuesCount": 411,
+      "cues": [
+        {
+          "start": 6.1,
+          "end": 8.57,
+          "zh": "大家好你今天好吗",
+          "vi": "Chào mọi người, hôm nay bạn thế nào?",
+          "en": "How are you today?",
+          "pinyin": "dà jiā hǎo nǐ jīn tiān hǎo ma"
+        },
+        {
+          "start": 8.57,
+          "end": 11.1,
+          "zh": "欢迎你来看我们的视频",
+          "vi": "Chào mừng bạn đến xem video của chúng mình.",
+          "en": "Welcome to our video.",
+          "pinyin": "huān yíng nǐ lái kàn wǒ men de shì pín"
+        },
+        {
+          "start": 11.27,
+          "end": 14.47,
+          "zh": "今天我们要说一个很重要的话题",
+          "vi": "Hôm nay chúng mình sẽ nói về một chủ đề rất quan trọng.",
+          "en": "Today we have a very important topic to discuss.",
+          "pinyin": "jīn tiān wǒ men yào shuō yí gè hěn zhòng yào de huà tí"
+        }
+      ]
+    },
+    {
       "id": "ep-lctp-extra-8IguP51Ru8E",
       "youtubeId": "8IguP51Ru8E",
       "level": "HSK 1–2",
