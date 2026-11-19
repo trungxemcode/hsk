@@ -1,0 +1,2161 @@
+{
+  "id": "yvMkYXOxtWY",
+  "youtubeId": "yvMkYXOxtWY",
+  "channelHandle": "@LearnChineseThroughPodcast",
+  "title": "HSK 2 - 4 | China’s AI Revolution: Has Chinese Technology Surpassed the World?",
+  "durationSec": 679,
+  "cues": [
+    {
+      "start": 6.17,
+      "end": 8.07,
+      "zh": "你有没有这样的感觉？",
+      "vi": "Bạn có cảm giác như thế này không?",
+      "en": "Do you feel that way?",
+      "pinyin": "nǐ yǒu méi yǒu zhè yàng de gǎn jué ？"
+    },
+    {
+      "start": 8.27,
+      "end": 11.64,
+      "zh": "昨天还觉得人工智能离我们很远，",
+      "vi": "Hôm qua còn thấy trí tuệ nhân tạo xa vời với chúng ta,",
+      "en": "Yesterday, I felt that AI was far away from us.",
+      "pinyin": "zuó tiān hái jué de rén gōng zhì néng lí wǒ men hěn yuǎn ，"
+    },
+    {
+      "start": 11.7,
+      "end": 13.87,
+      "zh": "今天一打开手机，",
+      "vi": "hôm nay vừa mở điện thoại ra,",
+      "en": "Today, when the phone is turned on,",
+      "pinyin": "jīn tiān yì dǎ kāi shǒu jī ，"
+    },
+    {
+      "start": 13.87,
+      "end": 15.7,
+      "zh": "它已经会写文章、",
+      "vi": "nó đã biết viết bài,",
+      "en": "It's already written.",
+      "pinyin": "tā yǐ jīng huì xiě wén zhāng 、"
+    },
+    {
+      "start": 15.8,
+      "end": 18.1,
+      "zh": "画图片、做视频、",
+      "vi": "vẽ hình, làm video,",
+      "en": "Paint pictures, make videos,",
+      "pinyin": "huà tú piàn 、 zuò shì pín 、"
+    },
+    {
+      "start": 18.1,
+      "end": 19.4,
+      "zh": "陪人聊天，",
+      "vi": "trò chuyện với người,",
+      "en": "I don't know.",
+      "pinyin": "péi rén liáo tiān ，"
+    },
+    {
+      "start": 19.4,
+      "end": 22.33,
+      "zh": "甚至还能帮工厂里的机器手臂",
+      "vi": "thậm chí còn giúp cánh tay máy trong nhà máy",
+      "en": "I can even help the machine arm of the factory.",
+      "pinyin": "shèn zhì hái néng bāng gōng chǎng lǐ de jī qì shǒu bì"
+    },
+    {
+      "start": 22.33,
+      "end": 24.53,
+      "zh": "做决定。有人说：",
+      "vi": "ra quyết định. Có người nói:",
+      "en": "Make a decision. Some say:",
+      "pinyin": "zuò jué dìng 。 yǒu rén shuō ："
+    },
+    {
+      "start": 24.53,
+      "end": 26.53,
+      "zh": "“中国的人工智能技术",
+      "vi": "“Công nghệ trí tuệ nhân tạo của Trung Quốc",
+      "en": "“China's Artificial Smart Technology",
+      "pinyin": "“ zhōng guó de rén gōng zhì néng jì shù"
+    },
+    {
+      "start": 26.53,
+      "end": 28.93,
+      "zh": "已经远远超过世界了。”",
+      "vi": "đã vượt xa thế giới rồi.”",
+      "en": "It's far beyond the world.\"",
+      "pinyin": "yǐ jīng yuǎn yuǎn chāo guò shì jiè le 。”"
+    },
+    {
+      "start": 28.93,
+      "end": 32,
+      "zh": "这句话听起来很震撼，对不对？",
+      "vi": "Câu này nghe thật chấn động, đúng không?",
+      "en": "That sounds like a shock, doesn't it?",
+      "pinyin": "zhè jù huà tīng qǐ lái hěn zhèn hàn ， duì bu duì ？"
+    },
+    {
+      "start": 32.07,
+      "end": 35.47,
+      "zh": "可是，子涵想先问你一个小问题：",
+      "vi": "Nhưng Tử Hà muốn hỏi bạn một câu nhỏ trước:",
+      "en": "But I want to ask you a small question first:",
+      "pinyin": "kě shì ， zǐ hán xiǎng xiān wèn nǐ yí gè xiǎo wèn tí ："
+    },
+    {
+      "start": 35.53,
+      "end": 37.1,
+      "zh": "什么叫“超过”？",
+      "vi": "“Vượt qua” nghĩa là gì?",
+      "en": "What do you mean, \"over\"?",
+      "pinyin": "shén me jiào “ chāo guò ”？"
+    },
+    {
+      "start": 37.37,
+      "end": 39,
+      "zh": "是模型最聪明？",
+      "vi": "Là mô hình thông minh nhất?",
+      "en": "The smartest model?",
+      "pinyin": "shì mó xíng zuì cōng ming ？"
+    },
+    {
+      "start": 39,
+      "end": 40.6,
+      "zh": "是用的人最多？",
+      "vi": "Là có nhiều người dùng nhất?",
+      "en": "Was it the most used?",
+      "pinyin": "shì yòng de rén zuì duō ？"
+    },
+    {
+      "start": 40.6,
+      "end": 42,
+      "zh": "是价格最低？",
+      "vi": "Là giá thấp nhất?",
+      "en": "Is it the lowest price?",
+      "pinyin": "shì jià gé zuì dī ？"
+    },
+    {
+      "start": 42,
+      "end": 44.07,
+      "zh": "还是进入生活最快？",
+      "vi": "Hay là vào đời sống nhanh nhất?",
+      "en": "Or is it the fastest way into life?",
+      "pinyin": "hái shì jìn rù shēng huó zuì kuài ？"
+    },
+    {
+      "start": 44.3,
+      "end": 47.73,
+      "zh": "大家好，欢迎收听“普通话每日播客”。",
+      "vi": "Xin chào mọi người, chào mừng đến với “Podcast tiếng Phổ thông mỗi ngày”.",
+      "en": "Hello, everyone. Welcome to the Daily Podcast of Mandarin.",
+      "pinyin": "dà jiā hǎo ， huān yíng shōu tīng “ pǔ tōng huà měi rì bō kè ”。"
+    },
+    {
+      "start": 47.73,
+      "end": 48.86,
+      "zh": "我是子涵。",
+      "vi": "Tôi là Tử Hà.",
+      "en": "I'm a child.",
+      "pinyin": "wǒ shì zǐ hán 。"
+    },
+    {
+      "start": 49.1,
+      "end": 51.57,
+      "zh": "今天，我们不急着喊口号，",
+      "vi": "Hôm nay, chúng ta không vội hô khẩu hiệu,",
+      "en": "Today, we don't rush to shout slogans.",
+      "pinyin": "jīn tiān ， wǒ men bù jí zhe hǎn kǒu hào ，"
+    },
+    {
+      "start": 51.57,
+      "end": 53.64,
+      "zh": "也不急着下结论。",
+      "vi": "cũng không vội kết luận.",
+      "en": "It's not too soon to draw conclusions.",
+      "pinyin": "yě bù jí zhe xià jié lùn 。"
+    },
+    {
+      "start": 53.9,
+      "end": 56.53,
+      "zh": "我们像坐在茶馆里聊天一样，",
+      "vi": "Chúng ta như ngồi trong quán trà trò chuyện,",
+      "en": "We were sitting in a teahouse and talking.",
+      "pinyin": "wǒ men xiàng zuò zài chá guǎn lǐ liáo tiān yí yàng ，"
+    },
+    {
+      "start": 56.53,
+      "end": 58,
+      "zh": "慢慢看一看：",
+      "vi": "từ từ xem:",
+      "en": "Take a slow look:",
+      "pinyin": "màn màn kàn yi kàn ："
+    },
+    {
+      "start": 58.1,
+      "end": 61.43,
+      "zh": "中国人工智能为什么发展这么快？",
+      "vi": "Vì sao trí tuệ nhân tạo Trung Quốc phát triển nhanh như vậy?",
+      "en": "Why is Chinese artificial intelligence growing so fast?",
+      "pinyin": "zhōng guó rén gōng zhì néng wèi shén me fā zhǎn zhè me kuài ？"
+    },
+    {
+      "start": 61.57,
+      "end": 64.37,
+      "zh": "它在哪些地方真的很强？",
+      "vi": "Nó thực sự mạnh ở những chỗ nào?",
+      "en": "Where is it really strong?",
+      "pinyin": "tā zài nǎ xiē dì fāng zhēn de hěn qiáng ？"
+    },
+    {
+      "start": 64.4,
+      "end": 67.7,
+      "zh": "又有哪些地方还需要继续努力？",
+      "vi": "Và còn những chỗ nào cần tiếp tục cố gắng?",
+      "en": "Where else needs to be continued?",
+      "pinyin": "yòu yǒu nǎ xiē dì fāng hái xū yào jì xù nǔ lì ？"
+    },
+    {
+      "start": 68.1,
+      "end": 69.8,
+      "zh": "如果你正在学中文，",
+      "vi": "Nếu bạn đang học tiếng Trung,",
+      "en": "If you're learning Chinese,",
+      "pinyin": "rú guǒ nǐ zhèng zài xué zhōng wén ，"
+    },
+    {
+      "start": 69.8,
+      "end": 71.17,
+      "zh": "也不用担心，",
+      "vi": "cũng không cần lo,",
+      "en": "It's not that bad.",
+      "pinyin": "yě bú yòng dān xīn ，"
+    },
+    {
+      "start": 71.17,
+      "end": 73.6,
+      "zh": "今天我会用简单的话来讲。",
+      "vi": "hôm nay tôi sẽ dùng những lời đơn giản để nói.",
+      "en": "Today I will speak in simple words.",
+      "pinyin": "jīn tiān wǒ huì yòng jiǎn dān de huà lái jiǎng 。"
+    },
+    {
+      "start": 73.6,
+      "end": 76.8,
+      "zh": "我们一起把一个很大的科技话题，",
+      "vi": "Chúng ta cùng một chủ đề công nghệ rất lớn,",
+      "en": "We put together a big technical topic.",
+      "pinyin": "wǒ men yì qǐ bǎ yí gè hěn dà de kē jì huà tí ，"
+    },
+    {
+      "start": 76.8,
+      "end": 79.5,
+      "zh": "拆成几个容易听懂的小故事。",
+      "vi": "tách thành mấy câu chuyện nhỏ dễ nghe hiểu.",
+      "en": "We're going to break into a few easy-to-understand little stories.",
+      "pinyin": "chāi chéng jǐ gè róng yì tīng dǒng de xiǎo gù shì 。"
+    },
+    {
+      "start": 79.6,
+      "end": 82.3,
+      "zh": "先从一个普通早晨说起吧。",
+      "vi": "Trước tiên hãy bắt đầu từ một buổi sáng bình thường.",
+      "en": "Let's start with an ordinary morning.",
+      "pinyin": "xiān cóng yí gè pǔ tōng zǎo chén shuō qǐ ba 。"
+    },
+    {
+      "start": 82.4,
+      "end": 85.43,
+      "zh": "杭州的一位年轻设计师小林，",
+      "vi": "Một nhà thiết kế trẻ ở Hàng Châu tên Tiểu Lâm,",
+      "en": "A young designer from Hangzhou, Kobayashi.",
+      "pinyin": "háng zhōu de yí wèi nián qīng shè jì shī xiǎo lín ，"
+    },
+    {
+      "start": 85.53,
+      "end": 87.2,
+      "zh": "早上七点起床，",
+      "vi": "bảy giờ sáng thức dậy,",
+      "en": "Get up at 7:00 a.m.",
+      "pinyin": "zǎo shàng qī diǎn qǐ chuáng ，"
+    },
+    {
+      "start": 87.47,
+      "end": 91.2,
+      "zh": "手机先帮他整理今天的日程。八点，",
+      "vi": "điện thoại giúp anh sắp xếp lịch trình hôm nay trước. Tám giờ,",
+      "en": "The phone helps him with his schedule. Eight o'clock.",
+      "pinyin": "shǒu jī xiān bāng tā zhěng lǐ jīn tiān de rì chéng 。 bā diǎn ，"
+    },
+    {
+      "start": 91.2,
+      "end": 93.57,
+      "zh": "他用中文输入一句话：",
+      "vi": "anh dùng tiếng Trung nhập một câu:",
+      "en": "He entered a sentence in Chinese:",
+      "pinyin": "tā yòng zhōng wén shū rù yí jù huà ："
+    },
+    {
+      "start": 93.7,
+      "end": 97.47,
+      "zh": "“请帮我做一张江南茶馆风格的海报。”",
+      "vi": "“Xin giúp tôi làm một tấm poster phong cách quán trà Giang Nam.”",
+      "en": "\"Please help me with a poster like the Gangan Tea House.\"",
+      "pinyin": "“ qǐng bāng wǒ zuò yì zhāng jiāng nán chá guǎn fēng gé de hǎi bào 。”"
+    },
+    {
+      "start": 97.57,
+      "end": 98.77,
+      "zh": "几秒钟后，",
+      "vi": "Mấy giây sau,",
+      "en": "A few seconds later,",
+      "pinyin": "jǐ miǎo zhōng hòu ，"
+    },
+    {
+      "start": 98.77,
+      "end": 101.17,
+      "zh": "图片出现了。九点，",
+      "vi": "hình ảnh xuất hiện. Chín giờ,",
+      "en": "Pictures appear. Nine o'clock,",
+      "pinyin": "tú piàn chū xiàn le 。 jiǔ diǎn ，"
+    },
+    {
+      "start": 101.17,
+      "end": 103.53,
+      "zh": "他打开智能办公软件，",
+      "vi": "anh mở phần mềm văn phòng thông minh,",
+      "en": "He opened the smart office software.",
+      "pinyin": "tā dǎ kāi zhì néng bàn gōng ruǎn jiàn ，"
+    },
+    {
+      "start": 103.53,
+      "end": 105.56,
+      "zh": "让它帮忙改文案。",
+      "vi": "để nó giúp sửa nội dung.",
+      "en": "Let it help with the reform.",
+      "pinyin": "ràng tā bāng máng gǎi wén àn 。"
+    },
+    {
+      "start": 105.87,
+      "end": 108.27,
+      "zh": "中午，他去餐厅吃饭，",
+      "vi": "Buổi trưa, anh đến nhà hàng ăn cơm,",
+      "en": "At noon, he went to the restaurant to eat.",
+      "pinyin": "zhōng wǔ ， tā qù cān tīng chī fàn ，"
+    },
+    {
+      "start": 108.37,
+      "end": 110.87,
+      "zh": "机器人把菜送到桌边。",
+      "vi": "robot đưa món ăn đến bàn.",
+      "en": "Robots take the food to the table.",
+      "pinyin": "jī qì rén bǎ cài sòng dào zhuō biān 。"
+    },
+    {
+      "start": 110.9,
+      "end": 112.8,
+      "zh": "晚上，他回家，",
+      "vi": "Buổi tối, anh về nhà,",
+      "en": "At night, he came home.",
+      "pinyin": "wǎn shàng ， tā huí jiā ，"
+    },
+    {
+      "start": 112.8,
+      "end": 116.9,
+      "zh": "智能音箱提醒他：“今天空气有点干，",
+      "vi": "loa thông minh nhắc anh: “Hôm nay không khí hơi khô,",
+      "en": "\"The air is dry today.",
+      "pinyin": "zhì néng yīn xiāng tí xǐng tā ：“ jīn tiān kōng qì yǒu diǎn gān ，"
+    },
+    {
+      "start": 116.9,
+      "end": 118.37,
+      "zh": "记得多喝水。”",
+      "vi": "nhớ uống nhiều nước.”",
+      "en": "Remember to drink more water.\"",
+      "pinyin": "jì de duō hē shuǐ 。”"
+    },
+    {
+      "start": 118.37,
+      "end": 121.07,
+      "zh": "你看，这不是科幻电影，",
+      "vi": "Bạn xem, đây không phải phim khoa học viễn tưởng,",
+      "en": "Look, it's not science fiction.",
+      "pinyin": "nǐ kàn ， zhè bú shì kē huàn diàn yǐng ，"
+    },
+    {
+      "start": 121.07,
+      "end": 123,
+      "zh": "这是很多中国城市里",
+      "vi": "đây là ở nhiều thành phố Trung Quốc",
+      "en": "This is a lot of Chinese cities.",
+      "pinyin": "zhè shì hěn duō zhōng guó chéng shì lǐ"
+    },
+    {
+      "start": 123,
+      "end": 124.7,
+      "zh": "正在发生的日常。",
+      "vi": "cuộc sống thường ngày đang diễn ra.",
+      "en": "It's happening everyday.",
+      "pinyin": "zhèng zài fā shēng de rì cháng 。"
+    },
+    {
+      "start": 125.1,
+      "end": 127.9,
+      "zh": "中国人工智能的一个重要特点，",
+      "vi": "Một đặc điểm quan trọng của trí tuệ nhân tạo Trung Quốc,",
+      "en": "An important feature of artificial intelligence in China is that it is a very important tool for developing countries.",
+      "pinyin": "zhōng guó rén gōng zhì néng de yí gè zhòng yào tè diǎn ，"
+    },
+    {
+      "start": 127.9,
+      "end": 129.63,
+      "zh": "就是“落地”很快。",
+      "vi": "chính là '落地' rất nhanh.",
+      "en": "It's a \"landfall\" fast.",
+      "pinyin": "jiù shì “ luò dì ” hěn kuài 。"
+    },
+    {
+      "start": 129.73,
+      "end": 131.2,
+      "zh": "什么叫落地？",
+      "vi": "'落地' nghĩa là gì?",
+      "en": "What do you mean, landed?",
+      "pinyin": "shén me jiào luò dì ？"
+    },
+    {
+      "start": 131.3,
+      "end": 135.03,
+      "zh": "就是一项技术不只是放在实验室里，",
+      "vi": "Nghĩa là một công nghệ không chỉ nằm trong phòng thí nghiệm,",
+      "en": "It's a technology that isn't just in the lab.",
+      "pinyin": "jiù shì yí xiàng jì shù bù zhǐ shì fàng zài shí yàn shì lǐ ，"
+    },
+    {
+      "start": 135.07,
+      "end": 137.1,
+      "zh": "而是真的进入工作、",
+      "vi": "mà thực sự đi vào công việc,",
+      "en": "And it's true to get into work.",
+      "pinyin": "ér shì zhēn de jìn rù gōng zuò 、"
+    },
+    {
+      "start": 137.1,
+      "end": 139.03,
+      "zh": "生活、工厂、",
+      "vi": "cuộc sống, nhà máy,",
+      "en": "Life, factories,",
+      "pinyin": "shēng huó 、 gōng chǎng 、"
+    },
+    {
+      "start": 139.07,
+      "end": 141.87,
+      "zh": "医院、学校和商店。",
+      "vi": "bệnh viện, trường học và cửa hàng.",
+      "en": "Hospitals, schools and shops.",
+      "pinyin": "yī yuàn 、 xué xiào hé shāng diàn 。"
+    },
+    {
+      "start": 142.17,
+      "end": 143.97,
+      "zh": "很多人谈人工智能，",
+      "vi": "Nhiều người khi nói về trí tuệ nhân tạo,",
+      "en": "A lot of people talk about artificial intelligence.",
+      "pinyin": "hěn duō rén tán rén gōng zhì néng ，"
+    },
+    {
+      "start": 143.97,
+      "end": 146.4,
+      "zh": "只看谁的模型分数更高。",
+      "vi": "chỉ nhìn xem mô hình của ai có điểm số cao hơn.",
+      "en": "Just look who's got higher model scores.",
+      "pinyin": "zhī kàn shuí de mó xíng fēn shù gèng gāo 。"
+    },
+    {
+      "start": 146.57,
+      "end": 150.17,
+      "zh": "可是中国的优势，常常在应用场景。",
+      "vi": "Nhưng lợi thế của Trung Quốc thường nằm ở các kịch bản ứng dụng.",
+      "en": "But the Chinese advantage is often applied.",
+      "pinyin": "kě shì zhōng guó de yōu shì ， cháng cháng zài yìng yòng chǎng jǐng 。"
+    },
+    {
+      "start": 150.37,
+      "end": 150.93,
+      "zh": "比如",
+      "vi": "Ví dụ,",
+      "en": "Like what?",
+      "pinyin": "bǐ rú"
+    },
+    {
+      "start": 150.93,
+      "end": 154.6,
+      "zh": "电商平台会用人工智能推荐商品，",
+      "vi": "các nền tảng thương mại điện tử dùng trí tuệ nhân tạo để gợi ý sản phẩm,",
+      "en": "The company will use artificial intelligence to recommend goods.",
+      "pinyin": "diàn shāng píng tái huì yòng rén gōng zhì néng tuī jiàn shāng pǐn ，"
+    },
+    {
+      "start": 154.6,
+      "end": 157.5,
+      "zh": "物流公司会用它规划路线，",
+      "vi": "các công ty logistics dùng nó để lên kế hoạch tuyến đường,",
+      "en": "Logistics companies will use it to plan their routes.",
+      "pinyin": "wù liú gōng sī huì yòng tā guī huà lù xiàn ，"
+    },
+    {
+      "start": 157.57,
+      "end": 161.1,
+      "zh": "工厂会用它检查产品有没有小缺陷，",
+      "vi": "các nhà máy dùng nó để kiểm tra sản phẩm có lỗi nhỏ nào không,",
+      "en": "The factory will use it to check if there are any minor defects in the product.",
+      "pinyin": "gōng chǎng huì yòng tā jiǎn chá chǎn pǐn yǒu méi yǒu xiǎo quē xiàn ，"
+    },
+    {
+      "start": 161.2,
+      "end": 164.2,
+      "zh": "医院会用它帮助医生看影像。",
+      "vi": "các bệnh viện dùng nó để hỗ trợ bác sĩ xem hình ảnh.",
+      "en": "The hospital will use it to help the doctor see the images.",
+      "pinyin": "yī yuàn huì yòng tā bāng zhù yī shēng kàn yǐng xiàng 。"
+    },
+    {
+      "start": 164.57,
+      "end": 166.97,
+      "zh": "这里的核心不是“炫技”，",
+      "vi": "Cốt lõi ở đây không phải là '炫技' (khoe kỹ thuật),",
+      "en": "The core of this is not \"showing.\"",
+      "pinyin": "zhè lǐ de hé xīn bú shì “ xuàn jì ”，"
+    },
+    {
+      "start": 166.97,
+      "end": 169.17,
+      "zh": "而是“解决问题”。",
+      "vi": "mà là 'giải quyết vấn đề'.",
+      "en": "It's a \"solve the problem.\"",
+      "pinyin": "ér shì “ jiě jué wèn tí ”。"
+    },
+    {
+      "start": 169.27,
+      "end": 172.2,
+      "zh": "不过，我们也要换一个角度想。",
+      "vi": "Tuy nhiên, chúng ta cũng phải nghĩ từ một góc độ khác.",
+      "en": "However, we also need to think in a different way.",
+      "pinyin": "bú guò ， wǒ men yě yào huàn yí gè jiǎo dù xiǎng 。"
+    },
+    {
+      "start": 172.27,
+      "end": 174.67,
+      "zh": "人工智能不是魔法，",
+      "vi": "Trí tuệ nhân tạo không phải là phép thuật,",
+      "en": "Artificial intelligence is not magic.",
+      "pinyin": "rén gōng zhì néng bú shì mó fǎ ，"
+    },
+    {
+      "start": 174.67,
+      "end": 176.1,
+      "zh": "它需要数据、",
+      "vi": "nó cần dữ liệu,",
+      "en": "It needs data.",
+      "pinyin": "tā xū yào shù jù 、"
+    },
+    {
+      "start": 176.17,
+      "end": 179.04,
+      "zh": "算力、人才和场景。",
+      "vi": "năng lực tính toán, nhân tài và kịch bản.",
+      "en": "Calculus, talent and scenery.",
+      "pinyin": "suàn lì 、 rén cái hé chǎng jǐng 。"
+    },
+    {
+      "start": 179.13,
+      "end": 180.7,
+      "zh": "中国人口多，",
+      "vi": "Trung Quốc có dân số đông,",
+      "en": "China has a large population.",
+      "pinyin": "zhōng guó rén kǒu duō ，"
+    },
+    {
+      "start": 180.7,
+      "end": 183.23,
+      "zh": "城市大，产业链完整，",
+      "vi": "thành phố lớn, chuỗi ngành hoàn chỉnh,",
+      "en": "The city is big, the industrial chain is complete.",
+      "pinyin": "chéng shì dà ， chǎn yè liàn wán zhěng ，"
+    },
+    {
+      "start": 183.33,
+      "end": 185.63,
+      "zh": "应用场景非常丰富。",
+      "vi": "các kịch bản ứng dụng vô cùng phong phú.",
+      "en": "The application scene is very rich.",
+      "pinyin": "yìng yòng chǎng jǐng fēi cháng fēng fù 。"
+    },
+    {
+      "start": 185.8,
+      "end": 188.6,
+      "zh": "这就像一块很大的试验田。",
+      "vi": "Điều này giống như một mảnh đất thử nghiệm rất lớn.",
+      "en": "It's like a big test field.",
+      "pinyin": "zhè jiù xiàng yí kuài hěn dà de shì yàn tián 。"
+    },
+    {
+      "start": 188.8,
+      "end": 190.53,
+      "zh": "一个新工具出来，",
+      "vi": "Một công cụ mới ra đời,",
+      "en": "A new tool came out.",
+      "pinyin": "yí gè xīn gōng jù chū lái ，"
+    },
+    {
+      "start": 190.53,
+      "end": 192.4,
+      "zh": "很快就有人试用，",
+      "vi": "chẳng bao lâu đã có người dùng thử,",
+      "en": "A few days later, some people tried it.",
+      "pinyin": "hěn kuài jiù yǒu rén shì yòng ，"
+    },
+    {
+      "start": 192.4,
+      "end": 194.27,
+      "zh": "很快就有人反馈，",
+      "vi": "chẳng bao lâu đã có người phản hồi,",
+      "en": "There will be feedback soon.",
+      "pinyin": "hěn kuài jiù yǒu rén fǎn kuì ，"
+    },
+    {
+      "start": 194.3,
+      "end": 196.07,
+      "zh": "很快就有人改进。",
+      "vi": "chẳng bao lâu đã có người cải tiến.",
+      "en": "Soon someone will be improving.",
+      "pinyin": "hěn kuài jiù yǒu rén gǎi jìn 。"
+    },
+    {
+      "start": 196.47,
+      "end": 197.27,
+      "zh": "所以，",
+      "vi": "Vì vậy,",
+      "en": "So,",
+      "pinyin": "suǒ yǐ ，"
+    },
+    {
+      "start": 197.37,
+      "end": 201.07,
+      "zh": "中国人工智能看起来跑得特别快。",
+      "vi": "trí tuệ nhân tạo Trung Quốc có vẻ tiến rất nhanh.",
+      "en": "Chinese artificial intelligence seems to run very fast.",
+      "pinyin": "zhōng guó rén gōng zhì néng kàn qǐ lái pǎo dé tè bié kuài 。"
+    },
+    {
+      "start": 201.2,
+      "end": 204.83,
+      "zh": "可是，快不等于每一项都第一。",
+      "vi": "Nhưng nhanh không có nghĩa là mọi lĩnh vực đều đứng đầu.",
+      "en": "But fast isn't equal to everything first.",
+      "pinyin": "kě shì ， kuài bù děng yú měi yí xiàng dōu dì yī 。"
+    },
+    {
+      "start": 205.2,
+      "end": 207.43,
+      "zh": "就像班里有几个同学，",
+      "vi": "Giống như trong lớp có vài bạn,",
+      "en": "It's like there were some classmates in the class.",
+      "pinyin": "jiù xiàng bān lǐ yǒu jǐ gè tóng xué ，"
+    },
+    {
+      "start": 207.47,
+      "end": 209.24,
+      "zh": "有的人数学好，",
+      "vi": "có bạn giỏi toán,",
+      "en": "Some have learned well.",
+      "pinyin": "yǒu de rén shù xué hǎo ，"
+    },
+    {
+      "start": 209.27,
+      "end": 211,
+      "zh": "有的人作文好，",
+      "vi": "có bạn giỏi viết văn,",
+      "en": "Some people write well,",
+      "pinyin": "yǒu de rén zuò wén hǎo ，"
+    },
+    {
+      "start": 211,
+      "end": 213.17,
+      "zh": "有的人动手能力强。",
+      "vi": "có bạn có khả năng thực hành tốt.",
+      "en": "Some people are capable of doing it.",
+      "pinyin": "yǒu de rén dòng shǒu néng lì qiáng 。"
+    },
+    {
+      "start": 213.3,
+      "end": 215.23,
+      "zh": "中国人工智能很强，",
+      "vi": "Trí tuệ nhân tạo Trung Quốc rất mạnh,",
+      "en": "China’s artificial intelligence is strong.",
+      "pinyin": "zhōng guó rén gōng zhì néng hěn qiáng ，"
+    },
+    {
+      "start": 215.27,
+      "end": 217.1,
+      "zh": "特别是在应用、",
+      "vi": "đặc biệt là ở ứng dụng,",
+      "en": "Especially in applications,",
+      "pinyin": "tè bié shì zài yìng yòng 、"
+    },
+    {
+      "start": 217.1,
+      "end": 218.37,
+      "zh": "成本控制、",
+      "vi": "kiểm soát chi phí,",
+      "en": "Cost control,",
+      "pinyin": "chéng běn kòng zhì 、"
+    },
+    {
+      "start": 218.37,
+      "end": 221.6,
+      "zh": "工程化和产业结合方面很强。",
+      "vi": "kỹ thuật hóa và gắn kết với ngành công nghiệp.",
+      "en": "Engineering and industrial integration are strong.",
+      "pinyin": "gōng chéng huà hé chǎn yè jié hé fāng miàn hěn qiáng 。"
+    },
+    {
+      "start": 221.67,
+      "end": 224.24,
+      "zh": "但在最顶尖的基础研究、",
+      "vi": "Nhưng ở nghiên cứu cơ bản đỉnh cao nhất,",
+      "en": "But at the top of basic research,",
+      "pinyin": "dàn zài zuì dǐng jiān de jī chǔ yán jiū 、"
+    },
+    {
+      "start": 224.27,
+      "end": 225.73,
+      "zh": "最高端芯片、",
+      "vi": "chip cao cấp nhất,",
+      "en": "High-end chip,",
+      "pinyin": "zuì gāo duān xīn piàn 、"
+    },
+    {
+      "start": 225.73,
+      "end": 227.93,
+      "zh": "全球标准制定等方面，",
+      "vi": "việc xây dựng tiêu chuẩn toàn cầu, v.v.,",
+      "en": "Global standard-setting, for example.",
+      "pinyin": "quán qiú biāo zhǔn zhì dìng děng fāng miàn ，"
+    },
+    {
+      "start": 227.93,
+      "end": 229.83,
+      "zh": "仍然有激烈竞争。",
+      "vi": "vẫn có sự cạnh tranh gay gắt.",
+      "en": "There is still strong competition.",
+      "pinyin": "réng rán yǒu jī liè jìng zhēng 。"
+    },
+    {
+      "start": 230.13,
+      "end": 233.9,
+      "zh": "我们说“中国人工智能发展很快”，",
+      "vi": "Chúng ta nói '中国人工智能发展很快' (trí tuệ nhân tạo Trung Quốc phát triển rất nhanh),",
+      "en": "We say, \"China's artificial intelligence is growing rapidly.\"",
+      "pinyin": "wǒ men shuō “ zhōng guó rén gōng zhì néng fā zhǎn hěn kuài ”，"
+    },
+    {
+      "start": 233.9,
+      "end": 236.1,
+      "zh": "这是比较稳妥的说法；",
+      "vi": "đây là cách nói tương đối thận trọng;",
+      "en": "This is a more conservative statement;",
+      "pinyin": "zhè shì bǐ jiào wěn tuǒ de shuō fǎ ；"
+    },
+    {
+      "start": 236.27,
+      "end": 239.87,
+      "zh": "说“已经全面远远超过世界”，",
+      "vi": "còn nói '已经全面远远超过世界' (đã vượt xa thế giới một cách toàn diện),",
+      "en": "“The world is far more than it has been,” he says.",
+      "pinyin": "shuō “ yǐ jīng quán miàn yuǎn yuǎn chāo guò shì jiè ”，"
+    },
+    {
+      "start": 239.87,
+      "end": 241.64,
+      "zh": "就需要更小心。",
+      "vi": "thì càng phải cẩn thận hơn.",
+      "en": "There's a need for greater care.",
+      "pinyin": "jiù xū yào gèng xiǎo xīn 。"
+    },
+    {
+      "start": 242.53,
+      "end": 244.36,
+      "zh": "再讲一个小故事。",
+      "vi": "Kể thêm một câu chuyện nhỏ nữa.",
+      "en": "Tell me another little story.",
+      "pinyin": "zài jiǎng yí gè xiǎo gù shì 。"
+    },
+    {
+      "start": 244.57,
+      "end": 246.77,
+      "zh": "深圳有一家小工厂，",
+      "vi": "Ở Thâm Quyến có một nhà máy nhỏ,",
+      "en": "There is a small factory in Shenzhen.",
+      "pinyin": "shēn zhèn yǒu yì jiā xiǎo gōng chǎng ，"
+    },
+    {
+      "start": 246.8,
+      "end": 250.43,
+      "zh": "过去检查零件要靠老师傅的眼睛。",
+      "vi": "trước kia việc kiểm tra linh kiện phải dựa vào mắt của những người thợ lành nghề.",
+      "en": "The parts used to be checked by the teacher's eyes.",
+      "pinyin": "guò qù jiǎn chá líng jiàn yào kào lǎo shī fu de yǎn jīng 。"
+    },
+    {
+      "start": 250.6,
+      "end": 252.5,
+      "zh": "老师傅很有经验，",
+      "vi": "Những người thợ này rất có kinh nghiệm,",
+      "en": "The teacher is experienced.",
+      "pinyin": "lǎo shī fu hěn yǒu jīng yàn ，"
+    },
+    {
+      "start": 252.7,
+      "end": 255.2,
+      "zh": "可是一天看几千个零件，",
+      "vi": "nhưng một ngày phải nhìn mấy nghìn linh kiện,",
+      "en": "But look at thousands of parts a day.",
+      "pinyin": "kě shì yì tiān kàn jǐ qiān gè líng jiàn ，"
+    },
+    {
+      "start": 255.2,
+      "end": 256.47,
+      "zh": "眼睛会累，",
+      "vi": "mắt sẽ mỏi,",
+      "en": "The eyes will be tired.",
+      "pinyin": "yǎn jīng huì lèi ，"
+    },
+    {
+      "start": 256.47,
+      "end": 258.67,
+      "zh": "也容易漏掉小问题。",
+      "vi": "và cũng dễ bỏ sót những vấn đề nhỏ.",
+      "en": "It's easy to leave out small problems.",
+      "pinyin": "yě róng yì lòu diào xiǎo wèn tí 。"
+    },
+    {
+      "start": 258.9,
+      "end": 262.27,
+      "zh": "后来工厂装上了智能检测系统。",
+      "vi": "Sau đó nhà máy lắp đặt hệ thống kiểm tra thông minh.",
+      "en": "The plant was then equipped with an intelligent detection system.",
+      "pinyin": "hòu lái gōng chǎng zhuāng shàng le zhì néng jiǎn cè xì tǒng 。"
+    },
+    {
+      "start": 262.47,
+      "end": 264.64,
+      "zh": "摄像头拍下零件，",
+      "vi": "Camera chụp ảnh linh kiện,",
+      "en": "The camera took a picture of the parts.",
+      "pinyin": "shè xiàng tóu pāi xià líng jiàn ，"
+    },
+    {
+      "start": 264.67,
+      "end": 267.27,
+      "zh": "系统马上判断哪里有裂纹，",
+      "vi": "hệ thống lập tức xác định chỗ nào có vết nứt,",
+      "en": "The system immediately decided where there was a crack.",
+      "pinyin": "xì tǒng mǎ shàng pàn duàn nǎ lǐ yǒu liè wén ，"
+    },
+    {
+      "start": 267.27,
+      "end": 269,
+      "zh": "哪里尺寸不对。",
+      "vi": "chỗ nào kích thước không đúng.",
+      "en": "Where's the wrong size.",
+      "pinyin": "nǎ lǐ chǐ cùn bú duì 。"
+    },
+    {
+      "start": 269.67,
+      "end": 271.93,
+      "zh": "工人不用被机器取代，",
+      "vi": "Công nhân không bị máy móc thay thế,",
+      "en": "Workers don't have to be replaced by machines.",
+      "pinyin": "gōng rén bú yòng bèi jī qì qǔ dài ，"
+    },
+    {
+      "start": 271.93,
+      "end": 274.9,
+      "zh": "反而可以去做更复杂的工作。",
+      "vi": "mà ngược lại có thể làm những công việc phức tạp hơn.",
+      "en": "Instead, more complex work could be done.",
+      "pinyin": "fǎn ér kě yǐ qù zuò gèng fù zá de gōng zuò 。"
+    },
+    {
+      "start": 275.2,
+      "end": 278.77,
+      "zh": "这就是中国人工智能的第二个特点：",
+      "vi": "Đây chính là đặc điểm thứ hai của trí tuệ nhân tạo Trung Quốc:",
+      "en": "This is the second characteristic of Chinese artificial intelligence:",
+      "pinyin": "zhè jiù shì zhōng guó rén gōng zhì néng de dì èr gè tè diǎn ："
+    },
+    {
+      "start": 278.9,
+      "end": 280.73,
+      "zh": "和制造业结合很",
+      "vi": "kết hợp rất",
+      "en": "It's a combination of manufacturing.",
+      "pinyin": "hé zhì zào yè jié hé hěn"
+    },
+    {
+      "start": 280.73,
+      "end": 282.36,
+      "zh": "深。制造业",
+      "vi": "sâu với ngành sản xuất. Sản xuất",
+      "en": "Deep manufacturing.",
+      "pinyin": "shēn 。 zhì zào yè"
+    },
+    {
+      "start": 282.37,
+      "end": 285.67,
+      "zh": "就是把原材料变成产品的行业，",
+      "vi": "là ngành biến nguyên liệu thành sản phẩm,",
+      "en": "It's the industry that turns raw materials into products.",
+      "pinyin": "jiù shì bǎ yuán cái liào biàn chéng chǎn pǐn de háng yè ，"
+    },
+    {
+      "start": 285.67,
+      "end": 287.6,
+      "zh": "比如做手机、",
+      "vi": "ví dụ như làm điện thoại,",
+      "en": "Like making cell phones.",
+      "pinyin": "bǐ rú zuò shǒu jī 、"
+    },
+    {
+      "start": 287.6,
+      "end": 289.63,
+      "zh": "汽车、家电、",
+      "vi": "ô tô, đồ gia dụng,",
+      "en": "Cars, home appliances,",
+      "pinyin": "qì chē 、 jiā diàn 、"
+    },
+    {
+      "start": 289.7,
+      "end": 291.77,
+      "zh": "衣服、玩具。",
+      "vi": "quần áo, đồ chơi.",
+      "en": "Clothes, toys.",
+      "pinyin": "yī fu 、 wán jù 。"
+    },
+    {
+      "start": 292.07,
+      "end": 295.84,
+      "zh": "中国有很多工厂，也有完整的供应链。",
+      "vi": "Trung Quốc có rất nhiều nhà máy, cũng có chuỗi cung ứng hoàn chỉnh.",
+      "en": "There are many factories in China and a complete supply chain.",
+      "pinyin": "zhōng guó yǒu hěn duō gōng chǎng ， yě yǒu wán zhěng de gōng yìng liàn 。"
+    },
+    {
+      "start": 295.97,
+      "end": 300.6,
+      "zh": "供应链可以简单理解为：从零件、运输、",
+      "vi": "Chuỗi cung ứng có thể hiểu đơn giản là: từ linh kiện, vận chuyển,",
+      "en": "Supply chains can be understood simply as: from parts, transport,",
+      "pinyin": "gōng yìng liàn kě yǐ jiǎn dān lǐ jiě wèi ： cóng líng jiàn 、 yùn shū 、"
+    },
+    {
+      "start": 300.6,
+      "end": 303.6,
+      "zh": "加工到销售的一整条路。",
+      "vi": "gia công đến tiêu thụ, cả một con đường.",
+      "en": "Processed to a whole road of sale.",
+      "pinyin": "jiā gōng dào xiāo shòu de yì zhěng tiáo lù 。"
+    },
+    {
+      "start": 303.6,
+      "end": 305.93,
+      "zh": "人工智能进入这条路，",
+      "vi": "Khi trí tuệ nhân tạo bước vào con đường này,",
+      "en": "Artificial intelligence enters this road.",
+      "pinyin": "rén gōng zhì néng jìn rù zhè tiáo lù ，"
+    },
+    {
+      "start": 305.93,
+      "end": 308.16,
+      "zh": "就会产生很大的力量。",
+      "vi": "sẽ tạo ra sức mạnh rất lớn.",
+      "en": "There's a lot of power to be generated.",
+      "pinyin": "jiù huì chǎn shēng hěn dà de lì liàng 。"
+    },
+    {
+      "start": 308.5,
+      "end": 311.7,
+      "zh": "比如，机器人不只是会走路、",
+      "vi": "Ví dụ, robot không chỉ biết đi,",
+      "en": "Like, robots don't just walk.",
+      "pinyin": "bǐ rú ， jī qì rén bù zhǐ shì huì zǒu lù 、"
+    },
+    {
+      "start": 311.73,
+      "end": 313,
+      "zh": "会挥手，",
+      "vi": "biết vẫy tay,",
+      "en": "It'll wave.",
+      "pinyin": "huì huī shǒu ，"
+    },
+    {
+      "start": 313.17,
+      "end": 316.9,
+      "zh": "更重要的是能在真实环境里做事。",
+      "vi": "mà quan trọng hơn là có thể làm việc trong môi trường thực tế.",
+      "en": "More importantly, we can do things in a real environment.",
+      "pinyin": "gèng zhòng yào de shì néng zài zhēn shí huán jìng lǐ zuò shì 。"
+    },
+    {
+      "start": 317.47,
+      "end": 320.07,
+      "zh": "仓库里的机器人会搬货，",
+      "vi": "Robot trong kho biết chuyển hàng,",
+      "en": "The robots in the warehouse will move the goods.",
+      "pinyin": "cāng kù lǐ de jī qì rén huì bān huò ，"
+    },
+    {
+      "start": 320.27,
+      "end": 323.37,
+      "zh": "港口里的系统会安排集装箱，",
+      "vi": "hệ thống ở cảng biết sắp xếp container,",
+      "en": "The system in the port arranges containers.",
+      "pinyin": "gǎng kǒu lǐ de xì tǒng huì ān pái jí zhuāng xiāng ，"
+    },
+    {
+      "start": 323.47,
+      "end": 327.07,
+      "zh": "城市里的智能交通会调整红绿灯。",
+      "vi": "giao thông thông minh trong thành phố biết điều chỉnh đèn giao thông.",
+      "en": "Smart traffic in the city will adjust the red and green lights.",
+      "pinyin": "chéng shì lǐ de zhì néng jiāo tōng huì tiáo zhěng hóng lǜ dēng 。"
+    },
+    {
+      "start": 328.1,
+      "end": 330.9,
+      "zh": "很多人看到的是一个机器人，",
+      "vi": "Nhiều người nhìn thấy chỉ là một con robot,",
+      "en": "A lot of people see a robot.",
+      "pinyin": "hěn duō rén kàn dào de shì yí gè jī qì rén ，"
+    },
+    {
+      "start": 330.9,
+      "end": 333.57,
+      "zh": "其实背后是一整套系统：",
+      "vi": "thực ra đằng sau là cả một hệ thống:",
+      "en": "There's a whole system behind it:",
+      "pinyin": "qí shí bèi hòu shì yì zhěng tào xì tǒng ："
+    },
+    {
+      "start": 333.6,
+      "end": 336.53,
+      "zh": "传感器、算法、网络、",
+      "vi": "cảm biến, thuật toán, mạng lưới,",
+      "en": "Sensors, algorithms, networks,",
+      "pinyin": "chuán gǎn qì 、 suàn fǎ 、 wǎng luò 、"
+    },
+    {
+      "start": 336.53,
+      "end": 338.8,
+      "zh": "云计算、工厂管理，",
+      "vi": "điện toán đám mây, quản lý nhà máy,",
+      "en": "Cloud computing, plant management,",
+      "pinyin": "yún jì suàn 、 gōng chǎng guǎn lǐ ，"
+    },
+    {
+      "start": 338.87,
+      "end": 340.27,
+      "zh": "还有人的经验。",
+      "vi": "còn có cả kinh nghiệm của con người.",
+      "en": "There are also experiences.",
+      "pinyin": "hái yǒu rén de jīng yàn 。"
+    },
+    {
+      "start": 340.67,
+      "end": 342.9,
+      "zh": "这里有一个常见误会：",
+      "vi": "Ở đây có một hiểu lầm phổ biến:",
+      "en": "There's a common misunderstanding:",
+      "pinyin": "zhè lǐ yǒu yí gè cháng jiàn wù huì ："
+    },
+    {
+      "start": 342.93,
+      "end": 347.16,
+      "zh": "有人以为人工智能越像人，就越先进。",
+      "vi": "có người cho rằng trí tuệ nhân tạo càng giống người thì càng tiên tiến.",
+      "en": "The more artificial intelligence is thought to be human, the more advanced it is.",
+      "pinyin": "yǒu rén yǐ wéi rén gōng zhì néng yuè xiàng rén ， jiù yuè xiān jìn 。"
+    },
+    {
+      "start": 347.2,
+      "end": 348.6,
+      "zh": "其实不一定。",
+      "vi": "Thực ra chưa chắc đã vậy.",
+      "en": "Actually, not necessarily.",
+      "pinyin": "qí shí bù yí dìng 。"
+    },
+    {
+      "start": 348.73,
+      "end": 351.6,
+      "zh": "一个会聊天的机器人很有趣，",
+      "vi": "Một robot biết trò chuyện thì rất thú vị,",
+      "en": "A talking robot is interesting.",
+      "pinyin": "yí gè huì liáo tiān de jī qì rén hěn yǒu qù ，"
+    },
+    {
+      "start": 351.8,
+      "end": 354.3,
+      "zh": "但一个能让工厂少出错、",
+      "vi": "nhưng một hệ thống giúp nhà máy ít mắc lỗi,",
+      "en": "But one can make the factory less wrong.",
+      "pinyin": "dàn yí gè néng ràng gōng chǎng shǎo chū cuò 、"
+    },
+    {
+      "start": 354.33,
+      "end": 356.86,
+      "zh": "让医生更快发现问题、",
+      "vi": "giúp bác sĩ phát hiện vấn đề nhanh hơn,",
+      "en": "Let the doctor find out more quickly.",
+      "pinyin": "ràng yī shēng gèng kuài fā xiàn wèn tí 、"
+    },
+    {
+      "start": 356.87,
+      "end": 359.7,
+      "zh": "让农民更准确浇水的系统，",
+      "vi": "giúp nông dân tưới nước chính xác hơn,",
+      "en": "In the past few years, many farmers have been able to use their water systems more accurately.",
+      "pinyin": "ràng nóng mín gèng zhǔn què jiāo shuǐ de xì tǒng ，"
+    },
+    {
+      "start": 359.7,
+      "end": 361.23,
+      "zh": "也非常重要。",
+      "vi": "cũng vô cùng quan trọng.",
+      "en": "It is also very important.",
+      "pinyin": "yě fēi cháng zhòng yào 。"
+    },
+    {
+      "start": 361.33,
+      "end": 364.73,
+      "zh": "人工智能的价值，不只是“像不像人”，",
+      "vi": "Giá trị của trí tuệ nhân tạo không chỉ là “giống người hay không”,",
+      "en": "The value of artificial intelligence is more than \"like a human being.\"",
+      "pinyin": "rén gōng zhì néng de jià zhí ， bù zhǐ shì “ xiàng bu xiàng rén ”，"
+    },
+    {
+      "start": 364.73,
+      "end": 367,
+      "zh": "而是“能不能帮人”。",
+      "vi": "mà là “có thể giúp người hay không”.",
+      "en": "It's \"can you help people?\"",
+      "pinyin": "ér shì “ néng bu néng bāng rén ”。"
+    },
+    {
+      "start": 367.3,
+      "end": 369.9,
+      "zh": "当然，子涵也想提醒一句：",
+      "vi": "Tất nhiên, Tử Hàm cũng muốn nhắc một câu:",
+      "en": "Of course, I'd like to remind you:",
+      "pinyin": "dāng rán ， zǐ hán yě xiǎng tí xǐng yí jù ："
+    },
+    {
+      "start": 369.9,
+      "end": 372.3,
+      "zh": "技术进入生活越深，",
+      "vi": "Công nghệ càng thâm nhập sâu vào cuộc sống,",
+      "en": "The more the technology gets into life,",
+      "pinyin": "jì shù jìn rù shēng huó yuè shēn ，"
+    },
+    {
+      "start": 372.3,
+      "end": 373.67,
+      "zh": "责任也越大。",
+      "vi": "thì trách nhiệm càng lớn.",
+      "en": "The greater the responsibility.",
+      "pinyin": "zé rèn yě yuè dà 。"
+    },
+    {
+      "start": 373.73,
+      "end": 375.26,
+      "zh": "比如数据安全、",
+      "vi": "Ví dụ như bảo mật dữ liệu,",
+      "en": "Like data security.",
+      "pinyin": "bǐ rú shù jù ān quán 、"
+    },
+    {
+      "start": 375.27,
+      "end": 376.6,
+      "zh": "个人隐私、",
+      "vi": "quyền riêng tư cá nhân,",
+      "en": "Personal privacy,",
+      "pinyin": "gè rén yǐn sī 、"
+    },
+    {
+      "start": 376.67,
+      "end": 377.93,
+      "zh": "错误判断、",
+      "vi": "phán đoán sai lầm,",
+      "en": "Misjudgement,",
+      "pinyin": "cuò wù pàn duàn 、"
+    },
+    {
+      "start": 377.93,
+      "end": 379.2,
+      "zh": "就业变化，",
+      "vi": "thay đổi việc làm,",
+      "en": "Changes in employment,",
+      "pinyin": "jiù yè biàn huà ，"
+    },
+    {
+      "start": 379.2,
+      "end": 381.77,
+      "zh": "这些问题都不能被忽视。",
+      "vi": "những vấn đề này đều không thể bị bỏ qua.",
+      "en": "None of these issues can be ignored.",
+      "pinyin": "zhè xiē wèn tí dōu bù néng bèi hū shì 。"
+    },
+    {
+      "start": 382.17,
+      "end": 384.93,
+      "zh": "如果一个系统推荐错了商品，",
+      "vi": "Nếu một hệ thống đề xuất sai sản phẩm,",
+      "en": "If a system recommends the wrong commodity,",
+      "pinyin": "rú guǒ yí gè xì tǒng tuī jiàn cuò le shāng pǐn ，"
+    },
+    {
+      "start": 384.93,
+      "end": 386.76,
+      "zh": "可能只是浪费钱；",
+      "vi": "có thể chỉ là lãng phí tiền bạc;",
+      "en": "Maybe it's just a waste of money.",
+      "pinyin": "kě néng zhǐ shì làng fèi qián ；"
+    },
+    {
+      "start": 386.87,
+      "end": 389.77,
+      "zh": "如果一个医疗系统判断错了，",
+      "vi": "nếu một hệ thống y tế phán đoán sai,",
+      "en": "If a medical system misjudges,",
+      "pinyin": "rú guǒ yí gè yī liáo xì tǒng pàn duàn cuò le ，"
+    },
+    {
+      "start": 389.77,
+      "end": 391.6,
+      "zh": "那影响就很大。",
+      "vi": "thì tác động sẽ rất lớn.",
+      "en": "That's a big impact.",
+      "pinyin": "nà yǐng xiǎng jiù hěn dà 。"
+    },
+    {
+      "start": 391.9,
+      "end": 392.7,
+      "zh": "所以，",
+      "vi": "Vì vậy,",
+      "en": "So,",
+      "pinyin": "suǒ yǐ ，"
+    },
+    {
+      "start": 392.73,
+      "end": 396.1,
+      "zh": "人工智能的发展，不只是比速度，",
+      "vi": "sự phát triển của trí tuệ nhân tạo không chỉ là so về tốc độ,",
+      "en": "Artificial intelligence development, not just speed.",
+      "pinyin": "rén gōng zhì néng de fā zhǎn ， bù zhǐ shì bǐ sù dù ，"
+    },
+    {
+      "start": 396.17,
+      "end": 397.67,
+      "zh": "也要比安全、",
+      "vi": "mà còn phải so về an toàn,",
+      "en": "It's safer.",
+      "pinyin": "yě yào bǐ ān quán 、"
+    },
+    {
+      "start": 397.67,
+      "end": 399.87,
+      "zh": "比透明、比责任。",
+      "vi": "so về minh bạch, so về trách nhiệm.",
+      "en": "It's more transparent, more responsible.",
+      "pinyin": "bǐ tòu míng 、 bǐ zé rèn 。"
+    },
+    {
+      "start": 399.93,
+      "end": 401.4,
+      "zh": "那为什么世界",
+      "vi": "Vậy tại sao thế giới",
+      "en": "Then why the world?",
+      "pinyin": "nà wèi shén me shì jiè"
+    },
+    {
+      "start": 401.4,
+      "end": 404.9,
+      "zh": "会突然特别关注中国人工智能呢？",
+      "vi": "lại đột nhiên đặc biệt chú ý đến trí tuệ nhân tạo Trung Quốc?",
+      "en": "What about China's artificial intelligence?",
+      "pinyin": "huì tū rán tè bié guān zhù zhōng guó rén gōng zhì néng ne ？"
+    },
+    {
+      "start": 405.27,
+      "end": 408.7,
+      "zh": "一个重要原因是：成本和效率。",
+      "vi": "Một lý do quan trọng là: chi phí và hiệu quả.",
+      "en": "An important reason is cost and efficiency.",
+      "pinyin": "yí gè zhòng yào yuán yīn shì ： chéng běn hé xiào lǜ 。"
+    },
+    {
+      "start": 408.9,
+      "end": 410.8,
+      "zh": "过去，很多人认为",
+      "vi": "Trước đây, nhiều người cho rằng",
+      "en": "In the past, many people thought...",
+      "pinyin": "guò qù ， hěn duō rén rèn wéi"
+    },
+    {
+      "start": 410.8,
+      "end": 412.53,
+      "zh": "最强的人工智能",
+      "vi": "trí tuệ nhân tạo mạnh nhất",
+      "en": "Most powerful artificial intelligence.",
+      "pinyin": "zuì qiáng de rén gōng zhì néng"
+    },
+    {
+      "start": 412.53,
+      "end": 414.93,
+      "zh": "一定需要最贵的芯片、",
+      "vi": "nhất định cần những con chip đắt tiền nhất,",
+      "en": "We'll need the most expensive chip.",
+      "pinyin": "yí dìng xū yào zuì guì de xīn piàn 、"
+    },
+    {
+      "start": 414.93,
+      "end": 416.33,
+      "zh": "最大的资金、",
+      "vi": "nguồn vốn lớn nhất,",
+      "en": "The biggest money,",
+      "pinyin": "zuì dà de zī jīn 、"
+    },
+    {
+      "start": 416.33,
+      "end": 417.9,
+      "zh": "最多的服务器。",
+      "vi": "và nhiều máy chủ nhất.",
+      "en": "Most servers.",
+      "pinyin": "zuì duō de fú wù qì 。"
+    },
+    {
+      "start": 418.2,
+      "end": 420.27,
+      "zh": "可是中国一些团队",
+      "vi": "Nhưng một số đội ngũ Trung Quốc",
+      "en": "But some Chinese teams...",
+      "pinyin": "kě shì zhōng guó yì xiē tuán duì"
+    },
+    {
+      "start": 420.27,
+      "end": 422.53,
+      "zh": "用更低成本做出表现很",
+      "vi": "đã dùng chi phí thấp hơn để tạo ra những mô hình có hiệu suất rất",
+      "en": "It's very low-cost performance.",
+      "pinyin": "yòng gèng dī chéng běn zuò chū biǎo xiàn hěn"
+    },
+    {
+      "start": 422.53,
+      "end": 423.7,
+      "zh": "强的模型，",
+      "vi": "mạnh mẽ,",
+      "en": "A strong model,",
+      "pinyin": "qiáng de mó xíng ，"
+    },
+    {
+      "start": 423.8,
+      "end": 426.5,
+      "zh": "让很多人开始重新思考：",
+      "vi": "khiến nhiều người bắt đầu suy nghĩ lại:",
+      "en": "I think it's time for many people to start rethinking:",
+      "pinyin": "ràng hěn duō rén kāi shǐ chóng xīn sī kǎo ："
+    },
+    {
+      "start": 426.67,
+      "end": 430.6,
+      "zh": "人工智能的竞争，不只是“谁花钱最多”，",
+      "vi": "cuộc cạnh tranh trí tuệ nhân tạo không chỉ là \"ai chi nhiều tiền nhất\",",
+      "en": "Artificial intelligence competition is not just \"who spends the most\"?",
+      "pinyin": "rén gōng zhì néng de jìng zhēng ， bù zhǐ shì “ shuí huā qián zuì duō ”，"
+    },
+    {
+      "start": 430.6,
+      "end": 433.3,
+      "zh": "也是“谁用资源更聪明”。",
+      "vi": "mà còn là \"ai dùng tài nguyên thông minh hơn\".",
+      "en": "And it's also \"who's smarter with resources?\"",
+      "pinyin": "yě shì “ shuí yòng zī yuán gèng cōng ming ”。"
+    },
+    {
+      "start": 433.77,
+      "end": 435.2,
+      "zh": "这就像做饭。",
+      "vi": "Điều này giống như nấu ăn.",
+      "en": "It's like cooking.",
+      "pinyin": "zhè jiù xiàng zuò fàn 。"
+    },
+    {
+      "start": 435.2,
+      "end": 438.67,
+      "zh": "有的人用最贵的食材做出好菜，",
+      "vi": "Có người dùng nguyên liệu đắt nhất để làm ra món ăn ngon,",
+      "en": "Some make good food with the most expensive ingredients.",
+      "pinyin": "yǒu de rén yòng zuì guì de shí cái zuò chū hǎo cài ，"
+    },
+    {
+      "start": 438.67,
+      "end": 439.97,
+      "zh": "这很厉害；",
+      "vi": "điều đó rất giỏi;",
+      "en": "That's great.",
+      "pinyin": "zhè hěn lì hài ；"
+    },
+    {
+      "start": 440.07,
+      "end": 442.2,
+      "zh": "有的人用普通食材，",
+      "vi": "có người dùng nguyên liệu bình thường,",
+      "en": "Some people use ordinary food.",
+      "pinyin": "yǒu de rén yòng pǔ tōng shí cái ，"
+    },
+    {
+      "start": 442.2,
+      "end": 445.43,
+      "zh": "也能做出香味很足的家常菜，",
+      "vi": "cũng có thể làm ra món ăn nhà rất thơm ngon,",
+      "en": "I can also make a regular dish that smells good.",
+      "pinyin": "yě néng zuò chū xiāng wèi hěn zú de jiā cháng cài ，"
+    },
+    {
+      "start": 445.6,
+      "end": 447,
+      "zh": "这也很厉害。",
+      "vi": "điều đó cũng rất giỏi.",
+      "en": "That's good too.",
+      "pinyin": "zhè yě hěn lì hài 。"
+    },
+    {
+      "start": 447.2,
+      "end": 449.67,
+      "zh": "中国人工智能的一个方向，",
+      "vi": "Một hướng đi của trí tuệ nhân tạo Trung Quốc,",
+      "en": "One of the directions of Chinese artificial intelligence.",
+      "pinyin": "zhōng guó rén gōng zhì néng de yí gè fāng xiàng ，"
+    },
+    {
+      "start": 449.67,
+      "end": 452.07,
+      "zh": "就是把模型做得更便宜、",
+      "vi": "chính là làm cho mô hình rẻ hơn,",
+      "en": "It's making models cheaper.",
+      "pinyin": "jiù shì bǎ mó xíng zuò dé gèng pián yi 、"
+    },
+    {
+      "start": 452.07,
+      "end": 454.3,
+      "zh": "更轻、更容易使用。",
+      "vi": "nhẹ hơn và dễ sử dụng hơn.",
+      "en": "Lighter and easier to use.",
+      "pinyin": "gèng qīng 、 gèng róng yì shǐ yòng 。"
+    },
+    {
+      "start": 454.3,
+      "end": 456.17,
+      "zh": "对普通公司来说，",
+      "vi": "Đối với các công ty bình thường,",
+      "en": "For ordinary companies,",
+      "pinyin": "duì pǔ tōng gōng sī lái shuō ，"
+    },
+    {
+      "start": 456.17,
+      "end": 457.47,
+      "zh": "这很重要。",
+      "vi": "điều này rất quan trọng.",
+      "en": "It's important.",
+      "pinyin": "zhè hěn zhòng yào 。"
+    },
+    {
+      "start": 457.47,
+      "end": 460.84,
+      "zh": "因为不是每家公司都有很多钱。",
+      "vi": "Vì không phải công ty nào cũng có nhiều tiền.",
+      "en": "Because not every company has a lot of money.",
+      "pinyin": "yīn wèi bú shì měi jiā gōng sī dōu yǒu hěn duō qián 。"
+    },
+    {
+      "start": 461.2,
+      "end": 464.67,
+      "zh": "如果人工智能工具便宜又好用，",
+      "vi": "Nếu công cụ trí tuệ nhân tạo vừa rẻ vừa dễ dùng,",
+      "en": "If an artificial intelligence tool is cheap and useful, it's a good idea.",
+      "pinyin": "rú guǒ rén gōng zhì néng gōng jù pián yi yòu hǎo yòng ，"
+    },
+    {
+      "start": 464.67,
+      "end": 466.67,
+      "zh": "小公司、学校、",
+      "vi": "các công ty nhỏ, trường học,",
+      "en": "Small companies, schools,",
+      "pinyin": "xiǎo gōng sī 、 xué xiào 、"
+    },
+    {
+      "start": 466.67,
+      "end": 469.37,
+      "zh": "个人创作者都能用起来。",
+      "vi": "cá nhân sáng tạo đều có thể sử dụng được.",
+      "en": "Personal creators can use it.",
+      "pinyin": "gè rén chuàng zuò zhě dōu néng yòng qǐ lái 。"
+    },
+    {
+      "start": 469.37,
+      "end": 471.64,
+      "zh": "还有一个特点是开源。",
+      "vi": "Còn một đặc điểm nữa là mã nguồn mở.",
+      "en": "There is also an open source feature.",
+      "pinyin": "hái yǒu yí gè tè diǎn shì kāi yuán 。"
+    },
+    {
+      "start": 471.73,
+      "end": 473.9,
+      "zh": "开源可以简单理解为：",
+      "vi": "Mã nguồn mở có thể hiểu đơn giản là:",
+      "en": "Open source can be understood simply as:",
+      "pinyin": "kāi yuán kě yǐ jiǎn dān lǐ jiě wèi ："
+    },
+    {
+      "start": 473.9,
+      "end": 476.17,
+      "zh": "把一些技术方法公开，",
+      "vi": "công khai một số phương pháp kỹ thuật,",
+      "en": "It's not just a matter of publicizing some technical methods.",
+      "pinyin": "bǎ yì xiē jì shù fāng fǎ gōng kāi ，"
+    },
+    {
+      "start": 476.17,
+      "end": 477.77,
+      "zh": "让更多人学习、",
+      "vi": "để nhiều người hơn có thể học hỏi,",
+      "en": "Let's learn more.",
+      "pinyin": "ràng gèng duō rén xué xí 、"
+    },
+    {
+      "start": 477.77,
+      "end": 479.5,
+      "zh": "使用、改进。",
+      "vi": "để nhiều người học hỏi, sử dụng và cải tiến.",
+      "en": "Use, improvement.",
+      "pinyin": "shǐ yòng 、 gǎi jìn 。"
+    },
+    {
+      "start": 479.73,
+      "end": 482.26,
+      "zh": "开源会让技术传播更快，",
+      "vi": "Mã nguồn mở khiến công nghệ lan truyền nhanh hơn,",
+      "en": "The open source will speed up the spread of technology.",
+      "pinyin": "kāi yuán huì ràng jì shù chuán bō gèng kuài ，"
+    },
+    {
+      "start": 482.4,
+      "end": 485.23,
+      "zh": "也会让很多开发者一起参与。",
+      "vi": "cũng khiến nhiều nhà phát triển cùng tham gia.",
+      "en": "It will also involve many developers.",
+      "pinyin": "yě huì ràng hěn duō kāi fā zhě yì qǐ cān yù 。"
+    },
+    {
+      "start": 485.4,
+      "end": 488.1,
+      "zh": "中国的一些模型通过开源",
+      "vi": "Một số mô hình của Trung Quốc nhờ mã nguồn mở",
+      "en": "Some models in China are open source.",
+      "pinyin": "zhōng guó de yì xiē mó xíng tōng guò kāi yuán"
+    },
+    {
+      "start": 488.1,
+      "end": 489.87,
+      "zh": "获得了很高关注，",
+      "vi": "đã nhận được sự chú ý rất lớn,",
+      "en": "It's been a lot of attention.",
+      "pinyin": "huò dé le hěn gāo guān zhù ，"
+    },
+    {
+      "start": 489.9,
+      "end": 491.6,
+      "zh": "这让全球开发者",
+      "vi": "điều này khiến các nhà phát triển toàn cầu",
+      "en": "It makes the global developers...",
+      "pinyin": "zhè ràng quán qiú kāi fā zhě"
+    },
+    {
+      "start": 491.6,
+      "end": 494.03,
+      "zh": "看见了中国团队的能力。",
+      "vi": "nhìn thấy năng lực của các đội ngũ Trung Quốc.",
+      "en": "Seeing the Chinese team's ability.",
+      "pinyin": "kàn jiàn le zhōng guó tuán duì de néng lì 。"
+    },
+    {
+      "start": 494.3,
+      "end": 497.27,
+      "zh": "不过，我们还是要保持清醒。",
+      "vi": "Tuy nhiên, chúng ta vẫn phải giữ đầu óc tỉnh táo.",
+      "en": "But we still have to stay awake.",
+      "pinyin": "bú guò ， wǒ men hái shì yào bǎo chí qīng xǐng 。"
+    },
+    {
+      "start": 497.5,
+      "end": 500.5,
+      "zh": "人工智能的竞争像一场长跑，",
+      "vi": "Cạnh tranh trí tuệ nhân tạo giống như một cuộc chạy đường dài,",
+      "en": "The competition for artificial intelligence is like a long run.",
+      "pinyin": "rén gōng zhì néng de jìng zhēng xiàng yì chǎng cháng pǎo ，"
+    },
+    {
+      "start": 500.5,
+      "end": 502.17,
+      "zh": "不是一次冲刺。",
+      "vi": "không phải một cuộc chạy nước rút.",
+      "en": "Not a bump.",
+      "pinyin": "bú shì yí cì chōng cì 。"
+    },
+    {
+      "start": 502.37,
+      "end": 503.97,
+      "zh": "今天你领先一点，",
+      "vi": "Hôm nay bạn dẫn trước một chút,",
+      "en": "You're a little ahead today.",
+      "pinyin": "jīn tiān nǐ lǐng xiān yì diǎn ，"
+    },
+    {
+      "start": 503.97,
+      "end": 506.47,
+      "zh": "明天别人也可能追上来。",
+      "vi": "ngày mai người khác cũng có thể đuổi kịp.",
+      "en": "Some people might catch up tomorrow.",
+      "pinyin": "míng tiān bié rén yě kě néng zhuī shàng lái 。"
+    },
+    {
+      "start": 506.67,
+      "end": 507.8,
+      "zh": "不同国家、",
+      "vi": "Các quốc gia khác nhau,",
+      "en": "Different countries,",
+      "pinyin": "bù tóng guó jiā 、"
+    },
+    {
+      "start": 507.8,
+      "end": 510.7,
+      "zh": "不同公司，都有自己的优势。",
+      "vi": "các công ty khác nhau đều có thế mạnh riêng.",
+      "en": "Different companies have their own advantages.",
+      "pinyin": "bù tóng gōng sī ， dōu yǒu zì jǐ de yōu shì 。"
+    },
+    {
+      "start": 510.77,
+      "end": 512.9,
+      "zh": "美国在顶尖模型、",
+      "vi": "Mỹ vẫn rất mạnh về mô hình đỉnh cao,",
+      "en": "The U.S. in top models,",
+      "pinyin": "měi guó zài dǐng jiān mó xíng 、"
+    },
+    {
+      "start": 513,
+      "end": 513.47,
+      "zh": "芯片",
+      "vi": "chip,",
+      "en": "Chip",
+      "pinyin": "xīn piàn"
+    },
+    {
+      "start": 513.47,
+      "end": 517.37,
+      "zh": "生态和基础研究方面依然很强；",
+      "vi": "hệ sinh thái và nghiên cứu cơ bản;",
+      "en": "Ecological and basic research remains strong;",
+      "pinyin": "shēng tài hé jī chǔ yán jiū fāng miàn yī rán hěn qiáng ；"
+    },
+    {
+      "start": 517.4,
+      "end": 519.6,
+      "zh": "中国在应用速度、",
+      "vi": "Trung Quốc nổi bật ở tốc độ ứng dụng,",
+      "en": "China's applying speed,",
+      "pinyin": "zhōng guó zài yìng yòng sù dù 、"
+    },
+    {
+      "start": 519.7,
+      "end": 520.9,
+      "zh": "工程落地、",
+      "vi": "triển khai kỹ thuật,",
+      "en": "Project landing,",
+      "pinyin": "gōng chéng luò dì 、"
+    },
+    {
+      "start": 521,
+      "end": 525.27,
+      "zh": "产业场景和成本效率方面非常突出。",
+      "vi": "kịch bản công nghiệp và hiệu quả chi phí.",
+      "en": "Industrial scenes and cost-efficiency are prominent.",
+      "pinyin": "chǎn yè chǎng jǐng hé chéng běn xiào lǜ fāng miàn fēi cháng tū chū 。"
+    },
+    {
+      "start": 525.37,
+      "end": 529.33,
+      "zh": "真正重要的，不是只问“谁超过谁”，",
+      "vi": "Điều thực sự quan trọng không phải là chỉ hỏi \"ai vượt ai\",",
+      "en": "It's really important not just to ask, \"Who exceeds whom?\"",
+      "pinyin": "zhēn zhèng zhòng yào de ， bú shì zhī wèn “ shuí chāo guò shuí ”，"
+    },
+    {
+      "start": 529.33,
+      "end": 530.43,
+      "zh": "而是问：",
+      "vi": "mà là hỏi:",
+      "en": "It's a question:",
+      "pinyin": "ér shì wèn ："
+    },
+    {
+      "start": 530.53,
+      "end": 534.66,
+      "zh": "“人工智能怎样让普通人的生活更好？”",
+      "vi": "\"Trí tuệ nhân tạo làm thế nào để cuộc sống của người dân bình thường tốt hơn?\"",
+      "en": "\"How can artificial intelligence make life better for ordinary people?\"",
+      "pinyin": "“ rén gōng zhì néng zěn yàng ràng pǔ tōng rén de shēng huó gèng hǎo ？”"
+    },
+    {
+      "start": 535,
+      "end": 536.4,
+      "zh": "对子涵来说，",
+      "vi": "Với Tử Hàm,",
+      "en": "For a child,",
+      "pinyin": "duì zi hán lái shuō ，"
+    },
+    {
+      "start": 536.4,
+      "end": 539.63,
+      "zh": "最值得学习的，不是盲目骄傲，",
+      "vi": "điều đáng học nhất không phải là kiêu ngạo mù quáng,",
+      "en": "The most worthy of learning is not blind pride.",
+      "pinyin": "zuì zhí dé xué xí de ， bú shì máng mù jiāo ào ，"
+    },
+    {
+      "start": 539.67,
+      "end": 541.84,
+      "zh": "也不是盲目否定，",
+      "vi": "cũng không phải là phủ nhận mù quáng,",
+      "en": "It is not a blind denial.",
+      "pinyin": "yě bú shì máng mù fǒu dìng ，"
+    },
+    {
+      "start": 541.9,
+      "end": 543.9,
+      "zh": "而是看见变化，",
+      "vi": "mà là nhìn thấy sự thay đổi,",
+      "en": "It's about seeing change.",
+      "pinyin": "ér shì kàn jiàn biàn huà ，"
+    },
+    {
+      "start": 543.9,
+      "end": 545.13,
+      "zh": "理解变化，",
+      "vi": "hiểu sự thay đổi,",
+      "en": "I've got a lot to say about change.",
+      "pinyin": "lǐ jiě biàn huà ，"
+    },
+    {
+      "start": 545.13,
+      "end": 547.43,
+      "zh": "然后准备好自己。",
+      "vi": "rồi chuẩn bị cho bản thân.",
+      "en": "Then get ready for yourself.",
+      "pinyin": "rán hòu zhǔn bèi hǎo zì jǐ 。"
+    },
+    {
+      "start": 547.47,
+      "end": 550.07,
+      "zh": "对于中文学习者来说，",
+      "vi": "Đối với người học tiếng Trung,",
+      "en": "For Chinese learners, it's not a good idea.",
+      "pinyin": "duì yú zhōng wén xué xí zhě lái shuō ，"
+    },
+    {
+      "start": 550.07,
+      "end": 552.44,
+      "zh": "这也是一个好机会。",
+      "vi": "đây cũng là một cơ hội tốt.",
+      "en": "This is also a good opportunity.",
+      "pinyin": "zhè yě shì yí gè hǎo jī huì 。"
+    },
+    {
+      "start": 552.67,
+      "end": 555.84,
+      "zh": "你可以通过科技新闻学习新词，",
+      "vi": "Bạn có thể học từ mới qua tin tức công nghệ,",
+      "en": "You can learn new words through science and technology news.",
+      "pinyin": "nǐ kě yǐ tōng guò kē jì xīn wén xué xí xīn cí ，"
+    },
+    {
+      "start": 556,
+      "end": 557.8,
+      "zh": "比如“模型”",
+      "vi": "ví dụ \"mô hình\",",
+      "en": "\"Models,\" for example.",
+      "pinyin": "bǐ rú “ mó xíng ”"
+    },
+    {
+      "start": 557.8,
+      "end": 559.9,
+      "zh": "“算法”“机器人”",
+      "vi": "\"thuật toán\", \"robot\",",
+      "en": "Algorithms. Robots.",
+      "pinyin": "“ suàn fǎ ”“ jī qì rén ”"
+    },
+    {
+      "start": 559.97,
+      "end": 561.87,
+      "zh": "“数据”“产业”。",
+      "vi": "\"dữ liệu\", \"ngành công nghiệp\".",
+      "en": "“Data” “Industries”.",
+      "pinyin": "“ shù jù ”“ chǎn yè ”。"
+    },
+    {
+      "start": 562.13,
+      "end": 563.53,
+      "zh": "你也可以练习表",
+      "vi": "Bạn cũng có thể luyện tập",
+      "en": "You can practice the watch.",
+      "pinyin": "nǐ yě kě yǐ liàn xí biǎo"
+    },
+    {
+      "start": 563.53,
+      "end": 568,
+      "zh": "达观点，比如：“我认为人工智能很有用，",
+      "vi": "bày tỏ quan điểm, ví dụ: \"Tôi nghĩ trí tuệ nhân tạo rất hữu ích,",
+      "en": "And the point of view, like: \"I think artificial intelligence is useful.",
+      "pinyin": "dá guān diǎn ， bǐ rú ：“ wǒ rèn wéi rén gōng zhì néng hěn yǒu yòng ，"
+    },
+    {
+      "start": 568,
+      "end": 570.17,
+      "zh": "但是也需要规则。”",
+      "vi": "nhưng cũng cần có quy tắc.\"",
+      "en": "But rules are also needed.”",
+      "pinyin": "dàn shì yě xū yào guī zé 。”"
+    },
+    {
+      "start": 570.2,
+      "end": 573.4,
+      "zh": "这句话简单，却很有力量。",
+      "vi": "Câu này đơn giản nhưng rất có sức mạnh.",
+      "en": "It is simple, but powerful.",
+      "pinyin": "zhè jù huà jiǎn dān ， què hěn yǒu lì liàng 。"
+    },
+    {
+      "start": 573.7,
+      "end": 577,
+      "zh": "今天我们聊了“中国人工智能",
+      "vi": "Hôm nay chúng ta đã nói về \"Trí tuệ nhân tạo Trung Quốc",
+      "en": "Today we talked about \"Chinese artificial intelligence.\"",
+      "pinyin": "jīn tiān wǒ men liáo le “ zhōng guó rén gōng zhì néng"
+    },
+    {
+      "start": 577,
+      "end": 579.4,
+      "zh": "是否已经远远超过世界”",
+      "vi": "liệu đã vượt xa thế giới hay chưa\"",
+      "en": "Is it far beyond the world?\"",
+      "pinyin": "shì fǒu yǐ jīng yuǎn yuǎn chāo guò shì jiè ”"
+    },
+    {
+      "start": 579.4,
+      "end": 580.63,
+      "zh": "这个话题。",
+      "vi": "chủ đề này.",
+      "en": "That's the subject.",
+      "pinyin": "zhè ge huà tí 。"
+    },
+    {
+      "start": 581.37,
+      "end": 583.07,
+      "zh": "我们可以这样总结：",
+      "vi": "Chúng ta có thể tóm tắt như sau:",
+      "en": "Here's what we can conclude:",
+      "pinyin": "wǒ men kě yǐ zhè yàng zǒng jié ："
+    },
+    {
+      "start": 583.4,
+      "end": 587.63,
+      "zh": "第一，中国人工智能发展非常快，",
+      "vi": "Thứ nhất, trí tuệ nhân tạo Trung Quốc phát triển rất nhanh,",
+      "en": "First, Chinese artificial intelligence is growing very fast.",
+      "pinyin": "dì yī ， zhōng guó rén gōng zhì néng fā zhǎn fēi cháng kuài ，"
+    },
+    {
+      "start": 588.13,
+      "end": 591.86,
+      "zh": "特别是在真实生活和产业应用中",
+      "vi": "đặc biệt là trong đời sống thực tế và ứng dụng công nghiệp",
+      "en": "Especially in real life and industrial applications.",
+      "pinyin": "tè bié shì zài zhēn shí shēng huó hé chǎn yè yìng yòng zhōng"
+    },
+    {
+      "start": 591.87,
+      "end": 593.17,
+      "zh": "很有优势。",
+      "vi": "có lợi thế rất lớn.",
+      "en": "It's an advantage.",
+      "pinyin": "hěn yǒu yōu shì 。"
+    },
+    {
+      "start": 593.17,
+      "end": 596,
+      "zh": "第二，中国有丰富的场景、",
+      "vi": "Thứ hai, Trung Quốc có kịch bản phong phú,",
+      "en": "Second, China is rich in scenes.",
+      "pinyin": "dì èr ， zhōng guó yǒu fēng fù de chǎng jǐng 、"
+    },
+    {
+      "start": 596,
+      "end": 599.53,
+      "zh": "完整的制造业和强大的工程能力，",
+      "vi": "ngành sản xuất hoàn chỉnh và năng lực kỹ thuật mạnh mẽ,",
+      "en": "A complete manufacturing industry and a strong engineering capacity,",
+      "pinyin": "wán zhěng de zhì zào yè hé qiáng dà de gōng chéng néng lì ，"
+    },
+    {
+      "start": 599.53,
+      "end": 602.06,
+      "zh": "这让技术更容易落地。",
+      "vi": "Điều này giúp công nghệ dễ được triển khai hơn.",
+      "en": "This makes technology more accessible.",
+      "pinyin": "zhè ràng jì shù gèng róng yì luò dì 。"
+    },
+    {
+      "start": 602.37,
+      "end": 604.7,
+      "zh": "第三，人工智能竞争",
+      "vi": "Thứ ba, cạnh tranh về trí tuệ nhân tạo",
+      "en": "Third, artificial intelligence competition.",
+      "pinyin": "dì sān ， rén gōng zhì néng jìng zhēng"
+    },
+    {
+      "start": 604.7,
+      "end": 607.8,
+      "zh": "不是一句“超过”就能说清楚的，",
+      "vi": "không thể chỉ nói rõ bằng một câu “vượt trội”,",
+      "en": "It's not a \"over\" word that makes it clear.",
+      "pinyin": "bú shì yí jù “ chāo guò ” jiù néng shuō qīng chǔ de ，"
+    },
+    {
+      "start": 607.8,
+      "end": 609.83,
+      "zh": "它还包括安全、",
+      "vi": "nó còn bao gồm an ninh,",
+      "en": "It also includes security,",
+      "pinyin": "tā hái bāo kuò ān quán 、"
+    },
+    {
+      "start": 609.87,
+      "end": 611.93,
+      "zh": "芯片、基础研究、",
+      "vi": "chip, nghiên cứu cơ bản,",
+      "en": "Chips, basic research,",
+      "pinyin": "xīn piàn 、 jī chǔ yán jiū 、"
+    },
+    {
+      "start": 611.93,
+      "end": 615.26,
+      "zh": "成本、开源和全球合作。",
+      "vi": "chi phí, mã nguồn mở và hợp tác toàn cầu.",
+      "en": "Cost, open source and global cooperation.",
+      "pinyin": "chéng běn 、 kāi yuán hé quán qiú hé zuò 。"
+    },
+    {
+      "start": 615.33,
+      "end": 618.4,
+      "zh": "今天的新词，我们复习三个。",
+      "vi": "Hôm nay, chúng ta ôn lại ba từ mới.",
+      "en": "Today's new words, we review three.",
+      "pinyin": "jīn tiān de xīn cí ， wǒ men fù xí sān gè 。"
+    },
+    {
+      "start": 618.73,
+      "end": 620.63,
+      "zh": "第一个，“落地”，",
+      "vi": "Thứ nhất, “落地” (triển khai),",
+      "en": "First, \"landing,\"",
+      "pinyin": "dì yī gè ，“ luò dì ”，"
+    },
+    {
+      "start": 620.87,
+      "end": 623.7,
+      "zh": "意思是技术真正用起来，",
+      "vi": "nghĩa là công nghệ thực sự được đem vào sử dụng,",
+      "en": "It means that technology really works.",
+      "pinyin": "yì sī shì jì shù zhēn zhèng yòng qǐ lái ，"
+    },
+    {
+      "start": 623.7,
+      "end": 625.77,
+      "zh": "不只是停在想法里。",
+      "vi": "chứ không chỉ dừng lại ở ý tưởng.",
+      "en": "Not just in my mind.",
+      "pinyin": "bù zhǐ shì tíng zài xiǎng fǎ lǐ 。"
+    },
+    {
+      "start": 625.77,
+      "end": 627.7,
+      "zh": "第二个，“供应链”，",
+      "vi": "Thứ hai, “供应链” (chuỗi cung ứng),",
+      "en": "Second, “supply chain”,",
+      "pinyin": "dì èr gè ，“ gōng yìng liàn ”，"
+    },
+    {
+      "start": 627.97,
+      "end": 632.64,
+      "zh": "意思是从生产到销售的一整套过程。",
+      "vi": "nghĩa là toàn bộ quá trình từ sản xuất đến bán hàng.",
+      "en": "It means a whole set of processes from production to sale.",
+      "pinyin": "yì sī shì cóng shēng chǎn dào xiāo shòu de yì zhěng tào guò chéng 。"
+    },
+    {
+      "start": 633.1,
+      "end": 635,
+      "zh": "第三个，“开源”，",
+      "vi": "Thứ ba, “开源” (mã nguồn mở),",
+      "en": "Third, Open Source.",
+      "pinyin": "dì sān gè ，“ kāi yuán ”，"
+    },
+    {
+      "start": 635.27,
+      "end": 638.37,
+      "zh": "意思是把技术的一部分公开，",
+      "vi": "nghĩa là công khai một phần công nghệ,",
+      "en": "It means to make part of the technology public.",
+      "pinyin": "yì sī shì bǎ jì shù de yí bù fen gōng kāi ，"
+    },
+    {
+      "start": 638.37,
+      "end": 641.4,
+      "zh": "让更多人使用和改进。",
+      "vi": "để nhiều người có thể sử dụng và cải tiến.",
+      "en": "Make it more accessible and improved.",
+      "pinyin": "ràng gèng duō rén shǐ yòng hé gǎi jìn 。"
+    },
+    {
+      "start": 641.57,
+      "end": 644.13,
+      "zh": "如果你喜欢这样用简单中文",
+      "vi": "Nếu bạn thích dùng tiếng Trung đơn giản như thế này",
+      "en": "If you like it in simple Chinese,",
+      "pinyin": "rú guǒ nǐ xǐ huan zhè yàng yòng jiǎn dān zhōng wén"
+    },
+    {
+      "start": 644.13,
+      "end": 645.5,
+      "zh": "聊大话题，",
+      "vi": "để trò chuyện về những chủ đề lớn,",
+      "en": "I'm sorry, but I can't help it.",
+      "pinyin": "liáo dà huà tí ，"
+    },
+    {
+      "start": 645.5,
+      "end": 648.53,
+      "zh": "欢迎订阅“普通话每日播客”。",
+      "vi": "rất hoan nghênh bạn đăng ký “普通话每日播客” (Daily Mandarin Podcast).",
+      "en": "Subscriptions to the Daily Podcast in Mandarin are welcome.",
+      "pinyin": "huān yíng dìng yuè “ pǔ tōng huà měi rì bō kè ”。"
+    },
+    {
+      "start": 648.53,
+      "end": 651.4,
+      "zh": "也欢迎你在评论区告诉子涵：",
+      "vi": "Bạn cũng có thể cho Zihan biết trong phần bình luận:",
+      "en": "You are also welcome to say in the comment section:",
+      "pinyin": "yě huān yíng nǐ zài píng lùn qū gào sù zǐ hán ："
+    },
+    {
+      "start": 651.5,
+      "end": 655,
+      "zh": "你觉得人工智能最应该帮助人类",
+      "vi": "Bạn nghĩ trí tuệ nhân tạo nên giúp nhân loại nhất",
+      "en": "You think artificial intelligence is the best way to help humans.",
+      "pinyin": "nǐ jué de rén gōng zhì néng zuì yīng gāi bāng zhù rén lèi"
+    },
+    {
+      "start": 655,
+      "end": 656.57,
+      "zh": "解决什么问题？",
+      "vi": "giải quyết vấn đề gì?",
+      "en": "What's the problem?",
+      "pinyin": "jiě jué shén me wèn tí ？"
+    },
+    {
+      "start": 656.6,
+      "end": 658.73,
+      "zh": "是教育、医疗、",
+      "vi": "Là giáo dục, y tế,",
+      "en": "It's education, medical care,",
+      "pinyin": "shì jiào yù 、 yī liáo 、"
+    },
+    {
+      "start": 658.73,
+      "end": 661.06,
+      "zh": "工作，还是孤独感？",
+      "vi": "việc làm, hay sự cô đơn?",
+      "en": "Working, or feeling alone?",
+      "pinyin": "gōng zuò ， hái shì gū dú gǎn ？"
+    },
+    {
+      "start": 661.53,
+      "end": 663.86,
+      "zh": "好了，今天就聊到这里。",
+      "vi": "Được rồi, hôm nay chúng ta dừng ở đây.",
+      "en": "Well, that's it for today.",
+      "pinyin": "hǎo le ， jīn tiān jiù liáo dào zhè lǐ 。"
+    },
+    {
+      "start": 663.87,
+      "end": 665.6,
+      "zh": "愿你学中文的时候，",
+      "vi": "Chúc bạn khi học tiếng Trung,",
+      "en": "May you learn Chinese.",
+      "pinyin": "yuàn nǐ xué zhōng wén de shí hòu ，"
+    },
+    {
+      "start": 665.6,
+      "end": 667.77,
+      "zh": "也像学习新技术一样，",
+      "vi": "cũng giống như học một công nghệ mới,",
+      "en": "It's like learning about new technologies.",
+      "pinyin": "yě xiàng xué xí xīn jì shù yí yàng ，"
+    },
+    {
+      "start": 667.77,
+      "end": 669,
+      "zh": "慢慢积累，",
+      "vi": "tích lũy dần dần,",
+      "en": "I'm not going to be able to do that.",
+      "pinyin": "màn màn jī lěi ，"
+    },
+    {
+      "start": 669,
+      "end": 670.47,
+      "zh": "天天进步。",
+      "vi": "tiến bộ mỗi ngày.",
+      "en": "It's getting better every day.",
+      "pinyin": "tiān tiān jìn bù 。"
+    },
+    {
+      "start": 670.5,
+      "end": 672.5,
+      "zh": "我们下次再见。",
+      "vi": "Hẹn gặp lại bạn lần sau.",
+      "en": "I'll see you next time.",
+      "pinyin": "wǒ men xià cì zài jiàn 。"
+    }
+  ]
+}
