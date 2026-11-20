@@ -1,0 +1,1381 @@
+{
+  "id": "VXwFh1M9jfg",
+  "youtubeId": "VXwFh1M9jfg",
+  "channelHandle": "@LearnChineseThroughPodcast",
+  "title": "HSK 2-3 | Speak Chinese Naturally: How to Think in Mandarin Easily | Chinese Listening Practice",
+  "titleVi": "Nói tiếng Trung tự nhiên: Cách suy nghĩ bằng tiếng Trung dễ dàng",
+  "topic": "Podcast Luyện nghe HSK",
+  "level": "HSK 2+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 843,
+  "cues": [
+    {
+      "start": 6.27,
+      "end": 7.17,
+      "en": "Hello everyone!",
+      "zh": "🕺大家好！",
+      "pinyin": "🕺 dà jiā hǎo！",
+      "vi": "Xin chào mọi người!"
+    },
+    {
+      "start": 7.17,
+      "end": 11.23,
+      "en": "Welcome to a new episode of the Learn Chinese Podcast.",
+      "zh": "🕺欢迎收听新一期的《学中文播客》。",
+      "pinyin": "🕺 huān yíng shōu tīng xīn yì qī de 《 xué zhōng wén bō kè 》。",
+      "vi": "Chào mừng bạn đến với tập mới của Podcast Học tiếng Trung."
+    },
+    {
+      "start": 11.27,
+      "end": 12.4,
+      "en": "I'm Li Ming.",
+      "zh": "🕺我是李明。",
+      "pinyin": "🕺 wǒ shì lǐ míng。",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 12.4,
+      "end": 14.47,
+      "en": "Hello everyone, I'm Xiaoyu.",
+      "zh": "💃大家好，我是小雨。",
+      "pinyin": "💃 dà jiā hǎo， wǒ shì xiǎo yǔ。",
+      "vi": "Xin chào mọi người, tôi là Tiểu Vũ."
+    },
+    {
+      "start": 14.7,
+      "end": 18.97,
+      "en": "I'm very happy to meet everyone on this energetic morning.",
+      "zh": "💃很高兴在这个充满活力的早晨，💃和大家见面。",
+      "pinyin": "💃 hěn gāo xìng zài zhè ge chōng mǎn huó lì de zǎo chén，💃 hé dà jiā jiàn miàn。",
+      "vi": "Rất vui được gặp mọi người trong buổi sáng tràn đầy năng lượng này."
+    },
+    {
+      "start": 19,
+      "end": 27.07,
+      "en": "Xiaoyu, have you noticed what word appears most frequently in our listeners' comments recently?",
+      "zh": "🕺小雨，你有没有发现，🕺最近我们的听众留言里，🕺出现频率最高的一个词是什么？",
+      "pinyin": "🕺 xiǎo yǔ， nǐ yǒu méi yǒu fā xiàn，🕺 zuì jìn wǒ men de tīng zhòng liú yán lǐ，🕺 chū xiàn pín lǜ zuì gāo de yí gè cí shì shén me？",
+      "vi": "Tiểu Vũ, bạn có nhận ra từ nào xuất hiện nhiều nhất trong bình luận của thính giả gần đây không?"
+    },
+    {
+      "start": 27.1,
+      "end": 31.1,
+      "en": "Let me guess—is it the word \"natural\"?",
+      "zh": "💃我猜猜，是不是“自然”这个词？",
+      "pinyin": "💃 wǒ cāi cāi， shì bu shì “ zì rán ” zhè ge cí？",
+      "vi": "Để tôi đoán xem, có phải là từ “tự nhiên” không?"
+    },
+    {
+      "start": 31.17,
+      "end": 39.33,
+      "en": "That's right! Many friends say, \"Li Ming, Xiaoyu, I've studied Chinese for a long time and memorized quite a few words,\"",
+      "zh": "🕺没错！很多朋友都说，李明，🕺小雨，我学了很久中文，🕺单词背了不少，",
+      "pinyin": "🕺 méi cuò！ hěn duō péng yǒu dōu shuō， lǐ míng，🕺 xiǎo yǔ， wǒ xué le hěn jiǔ zhōng wén，🕺 dān cí bèi le bù shǎo，",
+      "vi": "Đúng vậy! Nhiều bạn nói rằng: Lý Minh, Tiểu Vũ, tôi học tiếng Trung lâu rồi, từ vựng cũng thuộc khá nhiều,"
+    },
+    {
+      "start": 39.33,
+      "end": 45.9,
+      "en": "and studied a lot of grammar too, but as soon as I start speaking, I always feel like I'm translating in my head,",
+      "zh": "🕺语法也看了很多，🕺但一开口说话，🕺总觉得自己在脑子里做翻译，",
+      "pinyin": "🕺 yǔ fǎ yě kàn le hěn duō，🕺 dàn yì kāi kǒu shuō huà，🕺 zǒng jué de zì jǐ zài nǎo zǐ lǐ zuò fān yì，",
+      "vi": "ngữ pháp cũng xem nhiều rồi, nhưng vừa mở miệng nói là lại cảm thấy mình đang dịch trong đầu,"
+    },
+    {
+      "start": 46.07,
+      "end": 48.37,
+      "en": "and it doesn't sound natural at all.",
+      "zh": "🕺听起来一点都不自然。",
+      "pinyin": "🕺 tīng qǐ lái yì diǎn dōu bú zì rán。",
+      "vi": "nghe chẳng tự nhiên chút nào."
+    },
+    {
+      "start": 48.37,
+      "end": 51,
+      "en": "This is indeed a common problem.",
+      "zh": "💃这确实是一个普遍的问题。",
+      "pinyin": "💃 zhè què shí shì yí gè pǔ biàn de wèn tí。",
+      "vi": "Đây thực sự là một vấn đề phổ biến."
+    },
+    {
+      "start": 51.2,
+      "end": 58.07,
+      "en": "Before speaking Chinese, people often first think through their native language in their head, then convert it into Chinese.",
+      "zh": "💃大家在说中文之前，💃往往先在脑子里想一遍母语，💃然后再转换成中文。",
+      "pinyin": "💃 dà jiā zài shuō zhōng wén zhī qián，💃 wǎng wǎng xiān zài nǎo zǐ lǐ xiǎng yí biàn mǔ yǔ，💃 rán hòu zài zhuǎn huàn chéng zhōng wén。",
+      "vi": "Trước khi nói tiếng Trung, mọi người thường nghĩ trước một lượt bằng tiếng mẹ đẻ trong đầu, rồi mới chuyển sang tiếng Trung."
+    },
+    {
+      "start": 58.5,
+      "end": 64.43,
+      "en": "It's like always looking at a map before walking: you go slowly and easily get lost.",
+      "zh": "💃这就像是走路的时候总是先看地图，💃走得慢，还容易迷路。",
+      "pinyin": "💃 zhè jiù xiàng shì zǒu lù de shí hòu zǒng shì xiān kàn dì tú，💃 zǒu dé màn， hái róng yì mí lù。",
+      "vi": "Điều này giống như khi đi bộ mà lúc nào cũng phải xem bản đồ trước: đi chậm mà còn dễ lạc."
+    },
+    {
+      "start": 64.5,
+      "end": 72.6,
+      "en": "So today's episode topic is: how to train your brain so you can—just like breathing—",
+      "zh": "🕺所以，🕺我们今天这期节目的主题就是：🕺如何训练你的大脑，🕺让你能像呼吸一样",
+      "pinyin": "🕺 suǒ yǐ，🕺 wǒ men jīn tiān zhè qī jié mù de zhǔ tí jiù shì：🕺 rú hé xùn liàn nǐ de dà nǎo，🕺 ràng nǐ néng xiàng hū xī yí yàng",
+      "vi": "Vì vậy, chủ đề của tập hôm nay là: làm thế nào để rèn luyện não bộ, giúp bạn có thể—giống như hít thở—"
+    },
+    {
+      "start": 72.6,
+      "end": 74.97,
+      "en": "speak Chinese fluently and naturally.",
+      "zh": "🕺自然地流利说中文。",
+      "pinyin": "🕺 zì rán dì liú lì shuō zhōng wén。",
+      "vi": "nói tiếng Trung lưu loát một cách tự nhiên."
+    },
+    {
+      "start": 75.17,
+      "end": 83.57,
+      "en": "We'll share three very practical tips; these methods are not only simple but also very suitable for learners from HSK 1",
+      "zh": "💃我们会分享三个非常实用的秘诀，💃这些方法不仅简单，💃而且非常适合",
+      "pinyin": "💃 wǒ men huì fēn xiǎng sān gè fēi cháng shí yòng de mì jué，💃 zhè xiē fāng fǎ bù jǐn jiǎn dān，💃 ér qiě fēi cháng shì hé",
+      "vi": "Chúng tôi sẽ chia sẻ ba bí quyết rất thiết thực; những phương pháp này không chỉ đơn giản mà còn rất phù hợp với người học từ HSK 1"
+    },
+    {
+      "start": 83.57,
+      "end": 86.4,
+      "en": "to HSK 4 level.",
+      "zh": "💃到 水平的学习者。",
+      "pinyin": "💃 dào shuǐ píng de xué xí zhě。",
+      "vi": "đến trình độ HSK 4."
+    },
+    {
+      "start": 86.47,
+      "end": 93,
+      "en": "Before we start sharing these tips, we want to thank all our friends who support us.",
+      "zh": "🕺在我们开始分享这些秘诀之前，🕺我们要感谢所有支持我们的朋友。",
+      "pinyin": "🕺 zài wǒ men kāi shǐ fēn xiǎng zhè xiē mì jué zhī qián，🕺 wǒ men yào gǎn xiè suǒ yǒu zhī chí wǒ men de péng yǒu。",
+      "vi": "Trước khi bắt đầu chia sẻ những bí quyết này, chúng tôi muốn cảm ơn tất cả những người bạn đã ủng hộ chúng tôi."
+    },
+    {
+      "start": 104.6,
+      "end": 107.53,
+      "en": "What kind of content is most helpful to you?",
+      "zh": "🕺什么样的内容对你们最有帮助。",
+      "pinyin": "🕺 shén me yàng de nèi róng duì nǐ men zuì yǒu bāng zhù。",
+      "vi": "Loại nội dung nào giúp ích cho các bạn nhất?"
+    },
+    {
+      "start": 107.53,
+      "end": 108.7,
+      "en": "Are you ready?",
+      "zh": "💃准备好了吗？",
+      "pinyin": "💃 zhǔn bèi hǎo le ma？",
+      "vi": "Bạn đã sẵn sàng chưa?"
+    },
+    {
+      "start": 108.73,
+      "end": 112.7,
+      "en": "Let's start today's \"Brain Training Camp\" together!",
+      "zh": "💃让我们一起开启，💃今天的“大脑训练营”吧！",
+      "pinyin": "💃 ràng wǒ men yì qǐ kāi qǐ，💃 jīn tiān de “ dà nǎo xùn liàn yíng ” ba！",
+      "vi": "Chúng ta hãy cùng bắt đầu “trại huấn luyện não bộ” hôm nay nhé!"
+    },
+    {
+      "start": 112.87,
+      "end": 119.5,
+      "en": "Okay, let's first move on to the first topic: how to break the translation mindset.",
+      "zh": "🕺好了，让我们先进入第一个话题，🕺聊聊如何打破翻译思维。",
+      "pinyin": "🕺 hǎo le， ràng wǒ men xiān jìn rù dì yī gè huà tí，🕺 liáo liáo rú hé dǎ pò fān yì sī wéi。",
+      "vi": "Được rồi, chúng ta hãy vào chủ đề đầu tiên trước, nói về cách phá bỏ tư duy dịch."
+    },
+    {
+      "start": 119.67,
+      "end": 125.23,
+      "en": "Xiaoyu, I remember when I was learning foreign languages, translation was the biggest headache.",
+      "zh": "🕺小雨，我记得我以前学外语的时候，🕺最头疼的就是翻译。",
+      "pinyin": "🕺 xiǎo yǔ， wǒ jì de wǒ yǐ qián xué wài yǔ de shí hòu，🕺 zuì tóu téng de jiù shì fān yì。",
+      "vi": "Tiểu Vũ, tôi nhớ khi trước tôi học ngoại ngữ, việc đau đầu nhất chính là dịch."
+    },
+    {
+      "start": 125.7,
+      "end": 132.97,
+      "en": "When I see an apple, the first thing that appears in my mind is a picture of an apple, then its name.",
+      "zh": "🕺当我看到一个苹果，🕺我脑子里先出现的是苹果的图片，🕺然后是它的名字，",
+      "pinyin": "🕺 dāng wǒ kàn dào yí gè píng guǒ，🕺 wǒ nǎo zǐ lǐ xiān chū xiàn de shì píng guǒ de tú piàn，🕺 rán hòu shì tā de míng zì，",
+      "vi": "Khi tôi nhìn thấy một quả táo, thứ đầu tiên xuất hiện trong đầu tôi là hình ảnh quả táo, sau đó là tên của nó."
+    },
+    {
+      "start": 132.97,
+      "end": 135.37,
+      "en": "and only at the end is it converted into a foreign language.",
+      "zh": "🕺最后才转换成外语。",
+      "pinyin": "🕺 zuì hòu cái zhuǎn huàn chéng wài yǔ。",
+      "vi": "cuối cùng mới chuyển sang ngoại ngữ."
+    },
+    {
+      "start": 135.37,
+      "end": 137.63,
+      "en": "This process is too complicated.",
+      "zh": "💃这种过程太复杂了。",
+      "pinyin": "💃 zhè zhǒng guò chéng tài fù zá le。",
+      "vi": "Quá trình này quá phức tạp."
+    },
+    {
+      "start": 137.7,
+      "end": 141.73,
+      "en": "The brain has to go through several steps before it can say the word.",
+      "zh": "💃大脑需要经过，💃好几个步骤才能把词说出来。",
+      "pinyin": "💃 dà nǎo xū yào jīng guò，💃 hǎo jǐ gè bù zhòu cái néng bǎ cí shuō chū lái。",
+      "vi": "Não cần trải qua vài bước mới có thể nói ra từ đó."
+    },
+    {
+      "start": 141.73,
+      "end": 149.8,
+      "en": "Exactly. So the first step we need to take is to directly connect \"images\" with \"Chinese sounds.\"",
+      "zh": "🕺没错。所以，🕺我们要做的第一步，🕺就是把“图片”和“中文声音”，🕺直接连接起来。",
+      "pinyin": "🕺 méi cuò。 suǒ yǐ，🕺 wǒ men yào zuò de dì yī bù，🕺 jiù shì bǎ “ tú piàn ” hé “ zhōng wén shēng yīn ”，🕺 zhí jiē lián jiē qǐ lái。",
+      "vi": "Đúng vậy. Vì thế, bước đầu tiên chúng ta cần làm là kết nối trực tiếp “hình ảnh” với “âm thanh tiếng Trung”."
+    },
+    {
+      "start": 149.8,
+      "end": 153.4,
+      "en": "That sounds interesting. Can you give a specific example?",
+      "zh": "💃听起来很有意思，💃能具体举个例子吗？",
+      "pinyin": "💃 tīng qǐ lái hěn yǒu yì sī，💃 néng jù tǐ jǔ gè lì zǐ ma？",
+      "vi": "Nghe có vẻ thú vị, bạn có thể cho một ví dụ cụ thể không?"
+    },
+    {
+      "start": 153.4,
+      "end": 156.67,
+      "en": "For example, everyone please close your eyes now.",
+      "zh": "🕺比如，现在请大家闭上眼睛。",
+      "pinyin": "🕺 bǐ rú， xiàn zài qǐng dà jiā bì shàng yǎn jīng。",
+      "vi": "Ví dụ, bây giờ mọi người hãy nhắm mắt lại."
+    },
+    {
+      "start": 157,
+      "end": 163.3,
+      "en": "Imagine something round, red, and crispy when you eat it.",
+      "zh": "🕺想象一个圆圆的、🕺红红的、吃起来脆脆的东西。",
+      "pinyin": "🕺 xiǎng xiàng yí gè yuán yuán de、🕺 hóng hóng de、 chī qǐ lái cuì cuì de dōng xī。",
+      "vi": "Hãy tưởng tượng một thứ gì đó tròn tròn, đỏ đỏ, ăn vào giòn giòn."
+    },
+    {
+      "start": 163.5,
+      "end": 166.6,
+      "en": "Oh, I've got it—it's an apple! Right.",
+      "zh": "💃喔，我想到了，💃是苹果！ 🕺对。",
+      "pinyin": "💃 wō， wǒ xiǎng dào le，💃 shì píng guǒ！ 🕺 duì。",
+      "vi": "Ồ, tôi nghĩ ra rồi, là quả táo! Đúng vậy."
+    },
+    {
+      "start": 166.8,
+      "end": 174.5,
+      "en": "When you think of this image, the sound of the two characters for \"apple\" should pop directly into your mind.",
+      "zh": "🕺当你想到这个形象的时候，🕺你的大脑里应该直接跳出，🕺“苹果”这两个字的声音。",
+      "pinyin": "🕺 dāng nǐ xiǎng dào zhè ge xíng xiàng de shí hòu，🕺 nǐ de dà nǎo lǐ yīng gāi zhí jiē tiào chū，🕺“ píng guǒ ” zhè liǎng gè zì de shēng yīn。",
+      "vi": "Khi bạn nghĩ đến hình ảnh này, trong não bạn nên trực tiếp bật ra âm thanh của hai chữ “苹果”."
+    },
+    {
+      "start": 174.5,
+      "end": 179.03,
+      "en": "rather than first thinking of the word in English or another language. Right.",
+      "zh": "💃而不是先想英语，💃或其他语言里的那个词。 🕺对。",
+      "pinyin": "💃 ér bú shì xiān xiǎng yīng yǔ，💃 huò qí tā yǔ yán lǐ de nà ge cí。 🕺 duì。",
+      "vi": "chứ không phải trước tiên nghĩ đến tiếng Anh, hoặc từ đó trong ngôn ngữ khác. Đúng vậy."
+    },
+    {
+      "start": 179.2,
+      "end": 182.87,
+      "en": "We need to train the brain to skip that intermediate translation step.",
+      "zh": "🕺我们要训练大脑，🕺跳过翻译的那个中间步骤。",
+      "pinyin": "🕺 wǒ men yào xùn liàn dà nǎo，🕺 tiào guò fān yì de nà ge zhōng jiān bù zhòu。",
+      "vi": "Chúng ta cần luyện não bỏ qua bước trung gian là dịch đó."
+    },
+    {
+      "start": 183,
+      "end": 186.4,
+      "en": "So how should we practice in daily life?",
+      "zh": "💃那我们在日常生活中，💃应该怎么练习呢？",
+      "pinyin": "💃 nà wǒ men zài rì cháng shēng huó zhōng，💃 yīng gāi zěn me liàn xí ne？",
+      "vi": "Vậy trong cuộc sống hằng ngày, chúng ta nên luyện tập thế nào?"
+    },
+    {
+      "start": 186.47,
+      "end": 189.5,
+      "en": "I suggest everyone start with objects at home.",
+      "zh": "🕺我建议大家从家里的物品开始。",
+      "pinyin": "🕺 wǒ jiàn yì dà jiā cóng jiā lǐ de wù pǐn kāi shǐ。",
+      "vi": "Tôi gợi ý mọi người bắt đầu với đồ vật trong nhà."
+    },
+    {
+      "start": 189.73,
+      "end": 193.9,
+      "en": "You can buy some simple stickers and write the Chinese names on them.",
+      "zh": "🕺你可以买一些简单的贴纸，🕺写上中文名字。",
+      "pinyin": "🕺 nǐ kě yǐ mǎi yì xiē jiǎn dān de tiē zhǐ，🕺 xiě shàng zhōng wén míng zì。",
+      "vi": "Bạn có thể mua một vài miếng dán đơn giản, viết tên tiếng Trung lên đó."
+    },
+    {
+      "start": 193.9,
+      "end": 199.63,
+      "en": "For example, sticking the word “refrigerator” on the refrigerator and “mirror” on the mirror?",
+      "zh": "💃比如在冰箱上贴“冰箱”，💃在镜子上贴“镜子”？",
+      "pinyin": "💃 bǐ rú zài bīng xiāng shàng tiē “ bīng xiāng ”，💃 zài jìng zi shàng tiē “ jìng zi ”？",
+      "vi": "Ví dụ dán chữ “tủ lạnh” lên tủ lạnh, dán chữ “gương” lên gương à?"
+    },
+    {
+      "start": 199.67,
+      "end": 202.4,
+      "en": "Exactly. But this is only the first step.",
+      "zh": "🕺没错。但这只是第一步。",
+      "pinyin": "🕺 méi cuò。 dàn zhè zhǐ shì dì yī bù。",
+      "vi": "Đúng vậy. Nhưng đây mới chỉ là bước đầu tiên."
+    },
+    {
+      "start": 202.67,
+      "end": 210.3,
+      "en": "More importantly, when you see the refrigerator, you need to say the word “refrigerator” loudly in your mind.",
+      "zh": "🕺更重要的是，🕺当你看到冰箱的时候，🕺你要在心里大声地说出“冰箱”这个词。",
+      "pinyin": "🕺 gèng zhòng yào de shì，🕺 dāng nǐ kàn dào bīng xiāng de shí hòu，🕺 nǐ yào zài xīn lǐ dà shēng dì shuō chū “ bīng xiāng ” zhè ge cí。",
+      "vi": "Quan trọng hơn là, khi bạn nhìn thấy tủ lạnh, bạn phải thầm nói thật to từ “tủ lạnh” trong lòng."
+    },
+    {
+      "start": 210.47,
+      "end": 214.37,
+      "en": "It’s like adding “Chinese labels” to your living environment.",
+      "zh": "💃就像是在给你的生活环境，💃做“中文标注”。",
+      "pinyin": "💃 jiù xiàng shì zài gěi nǐ de shēng huó huán jìng，💃 zuò “ zhōng wén biāo zhù ”。",
+      "vi": "Giống như đang “dán nhãn tiếng Trung” cho môi trường sống của bạn."
+    },
+    {
+      "start": 214.37,
+      "end": 220.23,
+      "en": "Exactly. Not only when you see things; you can also practice when you do actions.",
+      "zh": "🕺没错。不仅是看到东西，🕺当你做动作的时候也可以练习。",
+      "pinyin": "🕺 méi cuò。 bù jǐn shì kàn dào dōng xī，🕺 dāng nǐ zuò dòng zuò de shí hòu yě kě yǐ liàn xí。",
+      "vi": "Đúng vậy. Không chỉ khi nhìn thấy đồ vật, bạn cũng có thể luyện tập khi làm động tác."
+    },
+    {
+      "start": 220.27,
+      "end": 229.3,
+      "en": "For example, when I drink water, I think “drink water”? Right. If you are washing your face, say to yourself “wash face.”",
+      "zh": "💃比如我喝水的时候，💃我就想“喝水”？ 🕺对，🕺如果你正在洗脸，🕺就对自己说“洗脸”。",
+      "pinyin": "💃 bǐ rú wǒ hē shuǐ de shí hòu，💃 wǒ jiù xiǎng “ hē shuǐ ”？ 🕺 duì，🕺 rú guǒ nǐ zhèng zài xǐ liǎn，🕺 jiù duì zì jǐ shuō “ xǐ liǎn ”。",
+      "vi": "Ví dụ khi tôi uống nước, tôi nghĩ “uống nước” à? Đúng, nếu bạn đang rửa mặt, hãy tự nói với mình “rửa mặt”."
+    },
+    {
+      "start": 229.53,
+      "end": 233.47,
+      "en": "If you are putting on shoes, say to yourself “put on shoes.”",
+      "zh": "🕺如果你正在穿鞋，🕺就对自己说“穿鞋”。",
+      "pinyin": "🕺 rú guǒ nǐ zhèng zài chuān xié，🕺 jiù duì zì jǐ shuō “ chuān xié ”。",
+      "vi": "Nếu bạn đang xỏ giày, hãy tự nói với mình “xỏ giày”."
+    },
+    {
+      "start": 233.6,
+      "end": 239.2,
+      "en": "This way, you directly connect language with actions, without going through translation.",
+      "zh": "💃这样，💃就把语言和动作直接联系在了一起，💃没有经过翻译。",
+      "pinyin": "💃 zhè yàng，💃 jiù bǎ yǔ yán hé dòng zuò zhí jiē lián xì zài le yì qǐ，💃 méi yǒu jīng guò fān yì。",
+      "vi": "Như vậy, bạn đã liên kết trực tiếp ngôn ngữ với hành động, không qua dịch."
+    },
+    {
+      "start": 239.33,
+      "end": 242.23,
+      "en": "This is how you build “Chinese intuition.”",
+      "zh": "🕺这就是建立“中文直觉”。",
+      "pinyin": "🕺 zhè jiù shì jiàn lì “ zhōng wén zhí jué ”。",
+      "vi": "Đây chính là xây dựng “trực giác tiếng Trung”."
+    },
+    {
+      "start": 242.4,
+      "end": 248.77,
+      "en": "I once had a student who, every morning while brushing his teeth, would say to himself in the mirror:",
+      "zh": "💃我以前有一个学生，💃他每天早上刷牙的时候，💃都会对着镜子里的自己说：",
+      "pinyin": "💃 wǒ yǐ qián yǒu yí gè xué shēng，💃 tā měi tiān zǎo shàng shuā yá de shí hòu，💃 dōu huì duì zhe jìng zi lǐ de zì jǐ shuō：",
+      "vi": "Tôi từng có một học sinh, mỗi sáng khi đánh răng, cậu ấy đều nói với chính mình trong gương:"
+    },
+    {
+      "start": 248.77,
+      "end": 257.43,
+      "en": "“I am brushing my teeth, and I am very happy.” Haha, although this method looks a bit silly, it works very well.",
+      "zh": "💃“我正在刷牙，💃我很开心。”，🕺哈哈，🕺这个方法虽然看起来有点傻，🕺但非常管用。",
+      "pinyin": "💃“ wǒ zhèng zài shuā yá，💃 wǒ hěn kāi xīn。”，🕺 hā hā，🕺 zhè ge fāng fǎ suī rán kàn qǐ lái yǒu diǎn shǎ，🕺 dàn fēi cháng guǎn yòng。",
+      "vi": "“Tôi đang đánh răng, tôi rất vui.” Haha, cách này trông hơi ngốc nhưng rất hiệu quả."
+    },
+    {
+      "start": 257.5,
+      "end": 260.27,
+      "en": "Yes, his Chinese improved rapidly.",
+      "zh": "💃是的，他的中文进步飞快。",
+      "pinyin": "💃 shì de， tā de zhōng wén jìn bù fēi kuài。",
+      "vi": "Đúng vậy, tiếng Trung của cậu ấy tiến bộ rất nhanh."
+    },
+    {
+      "start": 260.3,
+      "end": 266.03,
+      "en": "Because he no longer treated Chinese as a subject, but as a lifestyle.",
+      "zh": "💃因为他不再把中文当成一门学科，💃而是当成了一种生活方式。",
+      "pinyin": "💃 yīn wèi tā bú zài bǎ zhōng wén dàng chéng yì mén xué kē，💃 ér shì dàng chéng le yì zhǒng shēng huó fāng shì。",
+      "vi": "Vì cậu ấy không còn coi tiếng Trung là một môn học, mà coi đó là một lối sống."
+    },
+    {
+      "start": 266.07,
+      "end": 273.4,
+      "en": "Our brains are very smart; if you give them this kind of direct signal every day, they will adapt quickly.",
+      "zh": "🕺我们的大脑很聪明，🕺如果你每天都给它这种直接的信号，🕺它很快就会适应。",
+      "pinyin": "🕺 wǒ men de dà nǎo hěn cōng ming，🕺 rú guǒ nǐ měi tiān dōu gěi tā zhè zhǒng zhí jiē de xìn hào，🕺 tā hěn kuài jiù huì shì yìng。",
+      "vi": "Não của chúng ta rất thông minh; nếu bạn ngày nào cũng gửi cho nó tín hiệu trực tiếp như vậy, nó sẽ nhanh chóng thích nghi."
+    },
+    {
+      "start": 273.5,
+      "end": 279.73,
+      "en": "So, dear listeners, starting today, try to take everything you see around you",
+      "zh": "💃所以，各位听众朋友，💃从今天开始，💃试着把你周围看到的一切，",
+      "pinyin": "💃 suǒ yǐ， gè wèi tīng zhòng péng yǒu，💃 cóng jīn tiān kāi shǐ，💃 shì zhe bǎ nǐ zhōu wéi kàn dào de yí qiè，",
+      "vi": "Vậy nên, thưa các bạn thính giả, từ hôm nay, hãy thử đem mọi thứ bạn nhìn thấy xung quanh,"
+    },
+    {
+      "start": 279.73,
+      "end": 282.03,
+      "en": "and name it directly in Chinese.",
+      "zh": "💃直接用中文“命名”。",
+      "pinyin": "💃 zhí jiē yòng zhōng wén “ mìng míng ”。",
+      "vi": "gọi tên trực tiếp bằng tiếng Trung."
+    },
+    {
+      "start": 282.13,
+      "end": 285.5,
+      "en": "Don’t be afraid of making mistakes, and don’t be afraid that your vocabulary isn’t enough.",
+      "zh": "🕺不要怕错，🕺也不要怕词汇量不够。",
+      "pinyin": "🕺 bú yào pà cuò，🕺 yě bú yào pà cí huì liáng bú gòu。",
+      "vi": "Đừng sợ sai, cũng đừng sợ vốn từ không đủ."
+    },
+    {
+      "start": 285.7,
+      "end": 289.17,
+      "en": "Start with the simplest nouns and verbs.",
+      "zh": "🕺从最简单的名词和动词开始。",
+      "pinyin": "🕺 cóng zuì jiǎn dān de míng cí hé dòng cí kāi shǐ。",
+      "vi": "Hãy bắt đầu từ những danh từ và động từ đơn giản nhất."
+    },
+    {
+      "start": 289.2,
+      "end": 296.67,
+      "en": "When you can say “eat,” “sleep,” and “read books” without thinking, you are already halfway to success.",
+      "zh": "💃当你能够不假思索地说出“吃饭”、“睡觉”、💃“看书”的时候，💃你就已经成功了一半。",
+      "pinyin": "💃 dāng nǐ néng gòu bù jiǎ sī suǒ dì shuō chū “ chī fàn ”、“ shuì jiào ”、💃“ kàn shū ” de shí hòu，💃 nǐ jiù yǐ jīng chéng gōng le yí bàn。",
+      "vi": "Khi bạn có thể nói “ăn cơm”, “ngủ”, “đọc sách” mà không cần suy nghĩ, thì bạn đã thành công một nửa rồi."
+    },
+    {
+      "start": 296.7,
+      "end": 297.5,
+      "en": "Exactly.",
+      "zh": "🕺没错。",
+      "pinyin": "🕺 méi cuò。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 297.77,
+      "end": 301.57,
+      "en": "Building this intuition is the foundation of natural expression.",
+      "zh": "🕺这种直觉的建立是自然表达的基础。",
+      "pinyin": "🕺 zhè zhǒng zhí jué de jiàn lì shì zì rán biǎo dá de jī chǔ。",
+      "vi": "Việc xây dựng trực giác này là nền tảng của việc diễn đạt tự nhiên."
+    },
+    {
+      "start": 301.6,
+      "end": 308.67,
+      "en": "So, once we've mastered some words and actions, how can we connect them into fluent speech?",
+      "zh": "💃那么，💃当我们掌握了一些单词和动作之后，💃如何才能把它们连成流畅的话呢？",
+      "pinyin": "💃 nà me，💃 dāng wǒ men zhǎng wò le yì xiē dān cí hé dòng zuò zhī hòu，💃 rú hé cái néng bǎ tā men lián chéng liú chàng de huà ne？",
+      "vi": "Vậy thì, sau khi đã nắm được một số từ và động tác, làm thế nào để kết nối chúng thành những câu nói trôi chảy?"
+    },
+    {
+      "start": 308.73,
+      "end": 315.4,
+      "en": "This is the second key point we're going to discuss: creating a personal world entirely in Chinese.",
+      "zh": "🕺这就是我们要聊的第二个重点：🕺创造一个全中文的个人世界。",
+      "pinyin": "🕺 zhè jiù shì wǒ men yào liáo de dì èr gè zhòng diǎn：🕺 chuàng zào yí gè quán zhōng wén de gè rén shì jiè。",
+      "vi": "Đây chính là trọng điểm thứ hai chúng ta sẽ nói đến: tạo ra một thế giới cá nhân hoàn toàn bằng tiếng Trung."
+    },
+    {
+      "start": 317.9,
+      "end": 325.47,
+      "en": "Xiaoyu, many listeners often complain that they don't have Chinese friends around them and no opportunity to practice Chinese.",
+      "zh": "🕺小雨，很多听众朋友经常抱怨，🕺说他们身边没有中国朋友，🕺也没有机会练习中文。",
+      "pinyin": "🕺 xiǎo yǔ， hěn duō tīng zhòng péng yǒu jīng cháng bào yuàn，🕺 shuō tā men shēn biān méi yǒu zhōng guó péng yǒu，🕺 yě méi yǒu jī huì liàn xí zhōng wén。",
+      "vi": "Tiểu Vũ, nhiều thính giả thường than phiền rằng xung quanh họ không có bạn bè Trung Quốc, cũng không có cơ hội luyện tập tiếng Trung."
+    },
+    {
+      "start": 325.77,
+      "end": 328.83,
+      "en": "This is indeed a real, objective problem.",
+      "zh": "💃这确实是一个客观存在的问题。",
+      "pinyin": "💃 zhè què shí shì yí gè kè guān cún zài de wèn tí。",
+      "vi": "Đây thực sự là một vấn đề khách quan đang tồn tại."
+    },
+    {
+      "start": 328.87,
+      "end": 332.6,
+      "en": "But actually, you can create your own environment.",
+      "zh": "💃但是，环境其实是可以自己创造的。",
+      "pinyin": "💃 dàn shì， huán jìng qí shí shì kě yǐ zì jǐ chuàng zào de。",
+      "vi": "Nhưng thật ra, môi trường có thể do chính mình tạo ra."
+    },
+    {
+      "start": 332.8,
+      "end": 334.23,
+      "en": "I completely agree.",
+      "zh": "🕺我完全同意。",
+      "pinyin": "🕺 wǒ wán quán tóng yì。",
+      "vi": "Tôi hoàn toàn đồng ý."
+    },
+    {
+      "start": 334.27,
+      "end": 338.83,
+      "en": "We're now in the Internet age; it's so easy to access Chinese resources.",
+      "zh": "🕺现在是互联网时代，🕺获取中文资源太容易了。",
+      "pinyin": "🕺 xiàn zài shì hù lián wǎng shí dài，🕺 huò qǔ zhōng wén zī yuán tài róng yì le。",
+      "vi": "Bây giờ là thời đại Internet, việc tiếp cận các nguồn tài liệu tiếng Trung quá dễ dàng."
+    },
+    {
+      "start": 338.87,
+      "end": 345,
+      "en": "That's right. The first thing I suggest everyone do is change the system language of your phone and computer",
+      "zh": "💃没错。我建议大家做的第一件事，💃就是把手机和电脑的系统语言",
+      "pinyin": "💃 méi cuò。 wǒ jiàn yì dà jiā zuò de dì yī jiàn shì，💃 jiù shì bǎ shǒu jī hé diàn nǎo de xì tǒng yǔ yán",
+      "vi": "Đúng vậy. Việc đầu tiên tôi khuyên mọi người làm là đổi ngôn ngữ hệ thống của điện thoại và máy tính"
+    },
+    {
+      "start": 345,
+      "end": 346.27,
+      "en": "to Chinese.",
+      "zh": "💃改成中文。",
+      "pinyin": "💃 gǎi chéng zhōng wén。",
+      "vi": "sang tiếng Trung."
+    },
+    {
+      "start": 346.67,
+      "end": 348.97,
+      "en": "Wow, that's a big challenge.",
+      "zh": "🕺哇，这可是个大挑战。",
+      "pinyin": "🕺 wā， zhè kě shì gè dà tiǎo zhàn。",
+      "vi": "Oa, đây đúng là một thách thức lớn."
+    },
+    {
+      "start": 349,
+      "end": 351.8,
+      "en": "What if you can't find where the settings are?",
+      "zh": "🕺万一找不到设置在哪里怎么办？",
+      "pinyin": "🕺 wàn yī zhǎo bú dào shè zhì zài nǎ lǐ zěn me bàn？",
+      "vi": "Lỡ như không tìm thấy phần cài đặt ở đâu thì sao?"
+    },
+    {
+      "start": 351.8,
+      "end": 357.57,
+      "en": "The first week might be a bit painful, but you'll be surprised by your ability to adapt.",
+      "zh": "💃刚开始的一周可能会有点痛苦，💃但你会惊讶于自己的适应能力。",
+      "pinyin": "💃 gāng kāi shǐ de yì zhōu kě néng huì yǒu diǎn tòng kǔ，💃 dàn nǐ huì jīng yà yú zì jǐ de shì yìng néng lì。",
+      "vi": "Tuần đầu tiên có thể sẽ hơi khó chịu, nhưng bạn sẽ ngạc nhiên về khả năng thích nghi của mình."
+    },
+    {
+      "start": 357.87,
+      "end": 363.87,
+      "en": "Indeed. You'll quickly remember what 'Settings', 'Cancel', and 'OK' are.",
+      "zh": "🕺确实。你会很快记住什么是“设置”，🕺什么是“取消”，🕺什么是“确定”。",
+      "pinyin": "🕺 què shí。 nǐ huì hěn kuài jì zhù shén me shì “ shè zhì ”，🕺 shén me shì “ qǔ xiāo ”，🕺 shén me shì “ què dìng ”。",
+      "vi": "Đúng vậy. Bạn sẽ nhanh chóng nhớ được đâu là “cài đặt”, đâu là “hủy”, đâu là “xác nhận”."
+    },
+    {
+      "start": 363.93,
+      "end": 369.47,
+      "en": "Because you use these words frequently every day, they will be deeply imprinted in your mind.",
+      "zh": "💃这些词会因为你每天频繁使用，💃而深深印在你的脑海里。",
+      "pinyin": "💃 zhè xiē cí huì yīn wèi nǐ měi tiān pín fán shǐ yòng，💃 ér shēn shēn yìn zài nǐ de nǎo hǎi lǐ。",
+      "vi": "Những từ này sẽ được khắc sâu vào trí nhớ của bạn vì bạn sử dụng chúng thường xuyên mỗi ngày."
+    },
+    {
+      "start": 369.77,
+      "end": 375.27,
+      "en": "Besides your phone, I also have a method I especially recommend, called 'role-playing'.",
+      "zh": "🕺除了手机，🕺我还有一个特别推荐的方法，🕺叫做“角色扮演”。",
+      "pinyin": "🕺 chú le shǒu jī，🕺 wǒ hái yǒu yí gè tè bié tuī jiàn de fāng fǎ，🕺 jiào zuò “ jué sè bàn yǎn ”。",
+      "vi": "Ngoài điện thoại ra, tôi còn có một phương pháp đặc biệt muốn giới thiệu, gọi là “nhập vai”."
+    },
+    {
+      "start": 375.47,
+      "end": 376.8,
+      "en": "'Role-playing'?",
+      "zh": "💃“角色扮演”？",
+      "pinyin": "💃“ jué sè bàn yǎn ”？",
+      "vi": "“Nhập vai”?"
+    },
+    {
+      "start": 376.93,
+      "end": 379.2,
+      "en": "Do you mean like acting in a play?",
+      "zh": "💃你是说像演戏一样吗？",
+      "pinyin": "💃 nǐ shì shuō xiàng yǎn xì yí yàng ma？",
+      "vi": "Ý bạn là giống như diễn kịch à?"
+    },
+    {
+      "start": 379.37,
+      "end": 384.37,
+      "en": "Something like that. You can pretend to be a host doing a live stream.",
+      "zh": "🕺差不多。你可以假装自己，🕺是一个正在做直播的主持人。",
+      "pinyin": "🕺 chà bù duō。 nǐ kě yǐ jiǎ zhuāng zì jǐ，🕺 shì yí gè zhèng zài zuò zhí bō de zhǔ chí rén。",
+      "vi": "Đại khái vậy. Bạn có thể giả vờ mình là một người dẫn chương trình đang phát trực tiếp."
+    },
+    {
+      "start": 384.4,
+      "end": 385.57,
+      "en": "This sounds fun!",
+      "zh": "💃这个好玩！",
+      "pinyin": "💃 zhè ge hǎo wán！",
+      "vi": "Cái này thú vị đấy!"
+    },
+    {
+      "start": 385.57,
+      "end": 387.6,
+      "en": "For example, when I'm cooking?",
+      "zh": "💃比如我在做饭的时候？",
+      "pinyin": "💃 bǐ rú wǒ zài zuò fàn de shí hòu？",
+      "vi": "Ví dụ khi tôi đang nấu ăn thì sao?"
+    },
+    {
+      "start": 387.9,
+      "end": 394.7,
+      "en": "Right. You can say to the air: \"Hello everyone, today I'm going to teach you how to make tomato and egg stir-fry.\"",
+      "zh": "🕺对。你可以对着空气说：“大家好，🕺今天我要教大家做西红柿炒鸡蛋。",
+      "pinyin": "🕺 duì。 nǐ kě yǐ duì zhe kōng qì shuō：“ dà jiā hǎo，🕺 jīn tiān wǒ yào jiào dà jiā zuò xī hóng shì chǎo jī dàn。",
+      "vi": "Đúng vậy. Bạn có thể nói với không khí rằng: “Chào mọi người, hôm nay tôi sẽ dạy mọi người làm món cà chua xào trứng.”"
+    },
+    {
+      "start": 394.8,
+      "end": 402.87,
+      "en": "First, we take two tomatoes, wash them, and cut them into chunks.\" Haha, then say: \"Next, we crack three...",
+      "zh": "🕺首先，我们拿两个西红柿，🕺洗干净，切成块。”，💃哈哈，然后说：“接着，我们打三个",
+      "pinyin": "🕺 shǒu xiān， wǒ men ná liǎng gè xī hóng shì，🕺 xǐ gān jìng， qiè chéng kuài。”，💃 hā hā， rán hòu shuō：“ jiē zhe， wǒ men dǎ sān gè",
+      "vi": "Đầu tiên, chúng ta lấy hai quả cà chua, rửa sạch, cắt thành miếng.”, “Haha, sau đó nói: “Tiếp theo, chúng ta đập ba..."
+    },
+    {
+      "start": 402.87,
+      "end": 410.47,
+      "en": "eggs. When the oil is hot, pour the eggs in.\" That's right! In this process, you not only practiced speaking,",
+      "zh": "💃鸡蛋。油热了，把鸡蛋倒进去。”，🕺没错！在这个过程中，🕺你不仅练习了口语，",
+      "pinyin": "💃 jī dàn。 yóu rè le， bǎ jī dàn dǎo jìn qù。”，🕺 méi cuò！ zài zhè ge guò chéng zhōng，🕺 nǐ bù jǐn liàn xí le kǒu yǔ，",
+      "vi": "quả trứng. Khi dầu nóng, đổ trứng vào.”, “Đúng vậy! Trong quá trình này, bạn không chỉ luyện nói,"
+    },
+    {
+      "start": 410.47,
+      "end": 412.4,
+      "en": "but also practiced logical thinking.",
+      "zh": "🕺还练习了逻辑思维。",
+      "pinyin": "🕺 hái liàn xí le luó jí sī wéi。",
+      "vi": "mà còn luyện được tư duy logic."
+    },
+    {
+      "start": 412.5,
+      "end": 417.1,
+      "en": "And most importantly, you are thinking through the entire process in Chinese.",
+      "zh": "💃而且最关键的是，💃你在用中文思考整个过程。",
+      "pinyin": "💃 ér qiě zuì guān jiàn de shì，💃 nǐ zài yòng zhōng wén sī kǎo zhěng gè guò chéng。",
+      "vi": "Và quan trọng nhất là, bạn đang dùng tiếng Trung để suy nghĩ về toàn bộ quá trình."
+    },
+    {
+      "start": 417.5,
+      "end": 424.2,
+      "en": "Yes. This method can train you to combine the scattered words you've learned into coherent sentences.",
+      "zh": "🕺是的。这种方法，🕺能训练你把学到的零碎单词，🕺组合成连贯的句子。",
+      "pinyin": "🕺 shì de。 zhè zhǒng fāng fǎ，🕺 néng xùn liàn nǐ bǎ xué dào de líng suì dān cí，🕺 zǔ hé chéng lián guàn de jù zi。",
+      "vi": "Đúng vậy. Phương pháp này có thể rèn cho bạn biết cách ghép những từ rời rạc đã học thành những câu mạch lạc."
+    },
+    {
+      "start": 424.2,
+      "end": 427.8,
+      "en": "I have another method called \"asking and answering yourself.\"",
+      "zh": "💃我还有一个方法，叫做“自问自答”。",
+      "pinyin": "💃 wǒ hái yǒu yí gè fāng fǎ， jiào zuò “ zì wèn zì dá ”。",
+      "vi": "Tôi còn một phương pháp nữa, gọi là “tự hỏi tự đáp”."
+    },
+    {
+      "start": 428.3,
+      "end": 430.07,
+      "en": "How does this self-questioning and self-answering method work?",
+      "zh": "🕺怎么个自问自答法？",
+      "pinyin": "🕺 zěn me gè zì wèn zì dá fǎ？",
+      "vi": "Phương pháp tự hỏi tự đáp đó là như thế nào?"
+    },
+    {
+      "start": 430.13,
+      "end": 433.53,
+      "en": "For example, you're walking down the street and see a flower shop.",
+      "zh": "💃比如你走在路上，看到一家花店。",
+      "pinyin": "💃 bǐ rú nǐ zǒu zài lù shang， kàn dào yì jiā huā diàn。",
+      "vi": "Ví dụ bạn đang đi trên đường, nhìn thấy một cửa hàng hoa."
+    },
+    {
+      "start": 433.53,
+      "end": 441.1,
+      "en": "You can ask yourself, \"What shop is that?\" and then answer, \"That's a flower shop; the flowers inside are very beautiful.\"",
+      "zh": "💃你可以问自己：“那是什么店？”，💃然后再回答：“那是一家花店，💃里面的花很漂亮。”",
+      "pinyin": "💃 nǐ kě yǐ wèn zì jǐ：“ nà shì shén me diàn？”，💃 rán hòu zài huí dá：“ nà shì yì jiā huā diàn，💃 lǐ miàn de huā hěn piào liang。”",
+      "vi": "Bạn có thể tự hỏi: “Đó là cửa hàng gì?”, rồi trả lời: “Đó là một cửa hàng hoa, hoa bên trong rất đẹp.”"
+    },
+    {
+      "start": 441.37,
+      "end": 447.8,
+      "en": "Then continue asking, \"What flowers do you like?\" Answer, \"I like red roses the most.\"",
+      "zh": "🕺然后再接着问：“你喜欢什么花？”，🕺回答：“我最喜欢红色的玫瑰花。”",
+      "pinyin": "🕺 rán hòu zài jiē zhe wèn：“ nǐ xǐ huan shén me huā？”，🕺 huí dá：“ wǒ zuì xǐ huan hóng sè de méi guī huā。”",
+      "vi": "Sau đó tiếp tục hỏi: “Bạn thích loại hoa gì?”, trả lời: “Tôi thích nhất là hoa hồng đỏ.”"
+    },
+    {
+      "start": 447.87,
+      "end": 453.23,
+      "en": "This method can be done anytime and anywhere, and doesn't require anyone else to cooperate.",
+      "zh": "💃这种方法可以随时随地进行，💃完全不需要别人配合。",
+      "pinyin": "💃 zhè zhǒng fāng fǎ kě yǐ suí shí suí dì jìn xíng，💃 wán quán bù xū yào bié rén pèi hé。",
+      "vi": "Phương pháp này có thể thực hiện bất cứ lúc nào, bất cứ đâu, hoàn toàn không cần người khác phối hợp."
+    },
+    {
+      "start": 453.47,
+      "end": 457.3,
+      "en": "This is what I call \"creating your own personal Chinese world.\"",
+      "zh": "🕺这就是我说的“创造个人中文世界”。",
+      "pinyin": "🕺 zhè jiù shì wǒ shuō de “ chuàng zào gè rén zhōng wén shì jiè ”。",
+      "vi": "Đây chính là cái tôi gọi là “tạo ra thế giới tiếng Trung cá nhân”."
+    },
+    {
+      "start": 457.5,
+      "end": 461,
+      "en": "Your brain will gradually get used to this effortless switching.",
+      "zh": "🕺你的大脑会慢慢习惯这种自如切换。",
+      "pinyin": "🕺 nǐ de dà nǎo huì màn màn xí guàn zhè zhǒng zì rú qiè huàn。",
+      "vi": "Não của bạn sẽ dần quen với việc chuyển đổi tự nhiên như vậy."
+    },
+    {
+      "start": 461.1,
+      "end": 465.83,
+      "en": "Actually, the ultimate goal of learning a language is to communicate.",
+      "zh": "💃其实，我们学习语言最终的目的，💃就是为了交流。",
+      "pinyin": "💃 qí shí， wǒ men xué xí yǔ yán zuì zhōng de mù dì，💃 jiù shì wèi le jiāo liú。",
+      "vi": "Thật ra, mục đích cuối cùng của việc học ngôn ngữ là để giao tiếp."
+    },
+    {
+      "start": 465.9,
+      "end": 472.5,
+      "en": "If your brain has already gotten used to this kind of internal dialogue, then when you actually meet Chinese friends,",
+      "zh": "💃如果你的大脑，💃已经习惯了这种内部对话，💃那么当你真的遇到中国朋友时，",
+      "pinyin": "💃 rú guǒ nǐ de dà nǎo，💃 yǐ jīng xí guàn le zhè zhǒng nèi bù duì huà，💃 nà me dāng nǐ zhēn de yù dào zhōng guó péng yǒu shí，",
+      "vi": "Nếu não của bạn đã quen với kiểu đối thoại nội tâm này, thì khi bạn thật sự gặp bạn bè Trung Quốc,"
+    },
+    {
+      "start": 472.5,
+      "end": 477.2,
+      "en": "you'll find that speaking up is no longer something scary.",
+      "zh": "💃你就会发现，💃开口说话不再是一件可怕的事情。",
+      "pinyin": "💃 nǐ jiù huì fā xiàn，💃 kāi kǒu shuō huà bú zài shì yí jiàn kě pà de shì qíng。",
+      "vi": "bạn sẽ thấy rằng việc mở lời không còn là một điều đáng sợ nữa."
+    },
+    {
+      "start": 477.5,
+      "end": 483.23,
+      "en": "That's right. This kind of \"talking to yourself\" practice can greatly improve your reaction speed.",
+      "zh": "🕺没错。这种“自言自语”的练习，🕺能极大地提高你的反应速度。",
+      "pinyin": "🕺 méi cuò。 zhè zhǒng “ zì yán zì yǔ ” de liàn xí，🕺 néng jí dà dì tí gāo nǐ de fǎn yìng sù dù。",
+      "vi": "Đúng vậy. Kiểu luyện tập “tự nói chuyện với mình” này có thể nâng cao đáng kể tốc độ phản ứng của bạn."
+    },
+    {
+      "start": 483.27,
+      "end": 490.2,
+      "en": "I think there's another great resource: listening to podcasts or watching simple Chinese short videos.",
+      "zh": "💃我觉得还有一个很好的资源，💃就是听播客，💃或者看简单的中文短视频。",
+      "pinyin": "💃 wǒ jué de hái yǒu yí gè hěn hǎo de zī yuán，💃 jiù shì tīng bō kè，💃 huò zhě kàn jiǎn dān de zhōng wén duǎn shì pín。",
+      "vi": "Tôi nghĩ còn có một nguồn tài nguyên rất tốt nữa, đó là nghe podcast hoặc xem những video ngắn tiếng Trung đơn giản."
+    },
+    {
+      "start": 490.6,
+      "end": 497.2,
+      "en": "Yes. Don't try to understand every single word; instead, feel the speaker's rhythm and tone.",
+      "zh": "🕺是的。不要试图听懂每一个字，🕺而是去感受说话人的节奏和语气。",
+      "pinyin": "🕺 shì de。 bú yào shì tú tīng dǒng měi yí gè zì，🕺 ér shì qù gǎn shòu shuō huà rén de jié zòu hé yǔ qì。",
+      "vi": "Đúng vậy. Đừng cố hiểu từng chữ một, mà hãy cảm nhận nhịp điệu và ngữ khí của người nói."
+    },
+    {
+      "start": 497.27,
+      "end": 500.83,
+      "en": "For example, with our podcast, everyone can listen to it repeatedly.",
+      "zh": "💃比如我们这个播客，💃大家可以反复听。",
+      "pinyin": "💃 bǐ rú wǒ men zhè ge bō kè，💃 dà jiā kě yǐ fǎn fù tīng。",
+      "vi": "Ví dụ như podcast của chúng ta, mọi người có thể nghe đi nghe lại."
+    },
+    {
+      "start": 500.9,
+      "end": 504.07,
+      "en": "The first time, listen for meaning; the second time, listen for intonation.",
+      "zh": "💃第一次听意思，💃第二次听语调。",
+      "pinyin": "💃 dì yī cì tīng yì sī，💃 dì èr cì tīng yǔ diào。",
+      "vi": "Lần đầu nghe để hiểu ý, lần thứ hai nghe để cảm nhận ngữ điệu."
+    },
+    {
+      "start": 504.5,
+      "end": 507.77,
+      "en": "You can even try to imitate the way we speak.",
+      "zh": "🕺甚至可以尝试模仿我们说话的样子。",
+      "pinyin": "🕺 shèn zhì kě yǐ cháng shì mó fǎng wǒ men shuō huà de yàng zi。",
+      "vi": "Thậm chí có thể thử bắt chước cách chúng tôi nói."
+    },
+    {
+      "start": 507.8,
+      "end": 510.37,
+      "en": "Imitation is a very crucial step.",
+      "zh": "💃模仿是非常关键的一步。",
+      "pinyin": "💃 mó fǎng shì fēi cháng guān jiàn de yí bù。",
+      "vi": "Bắt chước là một bước rất quan trọng."
+    },
+    {
+      "start": 510.37,
+      "end": 515.5,
+      "en": "This leads perfectly into the third secret we want to discuss: the power of imitation.",
+      "zh": "💃这正，💃好引出了我们要说的第三个秘诀：💃模仿的力量。",
+      "pinyin": "💃 zhè zhèng，💃 hǎo yǐn chū le wǒ men yào shuō de dì sān gè mì jué：💃 mó fǎng de lì liàng。",
+      "vi": "Điều này vừa hay dẫn đến bí quyết thứ ba mà chúng ta muốn nói: sức mạnh của việc bắt chước."
+    },
+    {
+      "start": 515.87,
+      "end": 524.5,
+      "en": "Xiaoyu, have you noticed that some students, even though they have a large vocabulary, still sound a bit \"bookish\" when they speak?",
+      "zh": "🕺小雨，你有没有发现，🕺有些同学虽然词汇量很大，🕺但说话听起来总觉得有点“书呆子”气？",
+      "pinyin": "🕺 xiǎo yǔ， nǐ yǒu méi yǒu fā xiàn，🕺 yǒu xiē tóng xué suī rán cí huì liáng hěn dà，🕺 dàn shuō huà tīng qǐ lái zǒng jué de yǒu diǎn “ shū dāi zǐ ” qì？",
+      "vi": "Tiểu Vũ, bạn có nhận ra không, một số bạn học tuy vốn từ rất lớn, nhưng khi nói nghe cứ hơi có vẻ \"mọt sách\"?"
+    },
+    {
+      "start": 524.53,
+      "end": 526.17,
+      "en": "I understand what you mean.",
+      "zh": "💃我明白你的意思。",
+      "pinyin": "💃 wǒ míng bái nǐ de yì sī。",
+      "vi": "Tôi hiểu ý bạn."
+    },
+    {
+      "start": 526.2,
+      "end": 532.57,
+      "en": "Every sentence they say is grammatically correct, but Chinese people would never normally speak that way.",
+      "zh": "💃他们说的每一句话语法都是对的，💃但中国人平时根本不会那样说话。",
+      "pinyin": "💃 tā men shuō de měi yí jù huà yǔ fǎ dōu shì duì de，💃 dàn zhōng guó rén píng shí gēn běn bú huì nà yàng shuō huà。",
+      "vi": "Mỗi câu họ nói đều đúng ngữ pháp, nhưng người Trung Quốc bình thường sẽ không nói như vậy."
+    },
+    {
+      "start": 532.87,
+      "end": 540.5,
+      "en": "Exactly. For example, textbooks teach \"I don't plan to attend that meeting,\" but in spoken Chinese we might say",
+      "zh": "🕺没错。比如，书上教的是，🕺“我不打算去参加那个会议”，🕺但口语里我们可能说",
+      "pinyin": "🕺 méi cuò。 bǐ rú， shū shàng jiào de shì，🕺“ wǒ bù dǎ suàn qù cān jiā nà ge huì yì ”，🕺 dàn kǒu yǔ lǐ wǒ men kě néng shuō",
+      "vi": "Đúng vậy. Ví dụ, sách dạy là \"Tôi không định đi tham gia cuộc họp đó\", nhưng trong khẩu ngữ chúng ta có thể nói"
+    },
+    {
+      "start": 540.5,
+      "end": 542.23,
+      "en": "\"I'm not going to that meeting.\"",
+      "zh": "🕺“那个会我不去了”。",
+      "pinyin": "🕺“ nà ge huì wǒ bú qù le ”。",
+      "vi": "\"Cuộc họp đó tôi không đi nữa.\""
+    },
+    {
+      "start": 542.33,
+      "end": 544.8,
+      "en": "This is what we call \"authentic, native-like expression.\"",
+      "zh": "💃这就是所谓的“地道表达”。",
+      "pinyin": "💃 zhè jiù shì suǒ wèi de “ dì dào biǎo dá ”。",
+      "vi": "Đây chính là cái gọi là \"cách diễn đạt tự nhiên, đúng bản ngữ\"."
+    },
+    {
+      "start": 544.9,
+      "end": 548.67,
+      "en": "And the best way to achieve authentic expression is imitation.",
+      "zh": "💃而获得地道表达最好的方法，💃就是模仿。",
+      "pinyin": "💃 ér huò dé dì dào biǎo dá zuì hǎo de fāng fǎ，💃 jiù shì mó fǎng。",
+      "vi": "Và cách tốt nhất để có được cách diễn đạt tự nhiên chính là bắt chước."
+    },
+    {
+      "start": 548.97,
+      "end": 554.3,
+      "en": "We mentioned \"shadowing practice\" before; could you explain it in detail to everyone?",
+      "zh": "🕺我们之前提到过“影子练习”，🕺你能给大家详细解释一下吗？",
+      "pinyin": "🕺 wǒ men zhī qián tí dào guò “ yǐng zi liàn xí ”，🕺 nǐ néng gěi dà jiā xiáng xì jiě shì yí xià ma？",
+      "vi": "Trước đây chúng ta đã nhắc đến \"phương pháp luyện bóng\", bạn có thể giải thích chi tiết cho mọi người không?"
+    },
+    {
+      "start": 554.5,
+      "end": 555.4,
+      "en": "No problem.",
+      "zh": "💃没问题。",
+      "pinyin": "💃 méi wèn tí。",
+      "vi": "Không vấn đề gì."
+    },
+    {
+      "start": 555.4,
+      "end": 558.77,
+      "en": "\"Shadowing practice\" is like a shadow of the sound.",
+      "zh": "💃“影子练习”就像是声音的影子。",
+      "pinyin": "💃“ yǐng zi liàn xí ” jiù xiàng shì shēng yīn de yǐng zi。",
+      "vi": "\"Luyện bóng\" giống như cái bóng của âm thanh."
+    },
+    {
+      "start": 558.8,
+      "end": 565.17,
+      "en": "You listen to a recording, and whatever the person in the recording says, you say along with them, almost in sync.",
+      "zh": "💃你听一段录音，💃录音里的人说什么，你就跟着说什么，💃几乎要同步。",
+      "pinyin": "💃 nǐ tīng yí duàn lù yīn，💃 lù yīn lǐ de rén shuō shén me， nǐ jiù gēn zhe shuō shén me，💃 jī hū yào tóng bù。",
+      "vi": "Bạn nghe một đoạn ghi âm, người trong ghi âm nói gì thì bạn nói theo cái đó, gần như phải đồng bộ."
+    },
+    {
+      "start": 565.4,
+      "end": 568.23,
+      "en": "Don't you need to wait until the whole sentence is finished before repeating?",
+      "zh": "🕺不用等整句话说完再重复吗？",
+      "pinyin": "🕺 bú yòng děng zhěng jù huà shuō wán zài chóng fù ma？",
+      "vi": "Không cần đợi cả câu nói xong rồi mới lặp lại sao?"
+    },
+    {
+      "start": 568.3,
+      "end": 571.47,
+      "en": "It's best to start with only a one- or two-second delay.",
+      "zh": "💃最好是只延迟一两秒就开始。",
+      "pinyin": "💃 zuì hǎo shì zhī yán chí yì liǎng miǎo jiù kāi shǐ。",
+      "vi": "Tốt nhất là chỉ trễ một hai giây là bắt đầu."
+    },
+    {
+      "start": 571.47,
+      "end": 577.67,
+      "en": "That way, your brain won't have time to translate; it can only force itself to imitate that sound.",
+      "zh": "💃这样你的大脑就没时间去做翻译，💃只能强迫自己去模仿那个声音。",
+      "pinyin": "💃 zhè yàng nǐ de dà nǎo jiù méi shí jiān qù zuò fān yì，💃 zhǐ néng qiǎng pò zì jǐ qù mó fǎng nà ge shēng yīn。",
+      "vi": "Như vậy não bạn sẽ không có thời gian để dịch, mà chỉ có thể buộc mình bắt chước âm thanh đó."
+    },
+    {
+      "start": 578.07,
+      "end": 580.07,
+      "en": "This exercise is very powerful.",
+      "zh": "🕺这个练习非常强悍。",
+      "pinyin": "🕺 zhè ge liàn xí fēi cháng qiáng hàn。",
+      "vi": "Bài tập này rất mạnh."
+    },
+    {
+      "start": 580.27,
+      "end": 585.03,
+      "en": "It can train your pronunciation, intonation, and even the rhythm of your breathing.",
+      "zh": "🕺它能训练你的发音、🕺语调，甚至是你呼吸的节奏。",
+      "pinyin": "🕺 tā néng xùn liàn nǐ de fā yīn、🕺 yǔ diào， shèn zhì shì nǐ hū xī de jié zòu。",
+      "vi": "Nó có thể rèn luyện phát âm, ngữ điệu, thậm chí cả nhịp thở của bạn."
+    },
+    {
+      "start": 585.13,
+      "end": 585.97,
+      "en": "That's right.",
+      "zh": "💃没错。",
+      "pinyin": "💃 méi cuò。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 585.97,
+      "end": 592.1,
+      "en": "You need to imitate where the stress falls in the recording, where it pauses, and where the tone rises.",
+      "zh": "💃你要模仿录音里的重音在哪里，💃哪里停顿了，💃哪里语气上扬了。",
+      "pinyin": "💃 nǐ yào mó fǎng lù yīn lǐ de zhòng yīn zài nǎ lǐ，💃 nǎ lǐ tíng dùn le，💃 nǎ lǐ yǔ qì shàng yáng le。",
+      "vi": "Bạn phải bắt chước xem trọng âm trong bản ghi nằm ở đâu, chỗ nào ngừng, chỗ nào giọng lên cao."
+    },
+    {
+      "start": 592.3,
+      "end": 596.17,
+      "en": "I suggest finding some everyday conversations to imitate.",
+      "zh": "🕺我建议大家找一些，🕺贴近生活的对话来模仿。",
+      "pinyin": "🕺 wǒ jiàn yì dà jiā zhǎo yì xiē，🕺 tiē jìn shēng huó de duì huà lái mó fǎng。",
+      "vi": "Tôi khuyên mọi người tìm một số đoạn hội thoại gần gũi với đời sống để bắt chước."
+    },
+    {
+      "start": 596.27,
+      "end": 601.23,
+      "en": "For example, conversations about shopping at the supermarket or making plans to eat with friends.",
+      "zh": "💃比如去超市买东西的对话，💃或者和朋友约饭的对话。",
+      "pinyin": "💃 bǐ rú qù chāo shì mǎi dōng xī de duì huà，💃 huò zhě hé péng yǒu yuē fàn de duì huà。",
+      "vi": "Ví dụ như hội thoại đi siêu thị mua đồ, hoặc hội thoại hẹn bạn bè đi ăn."
+    },
+    {
+      "start": 601.53,
+      "end": 604.83,
+      "en": "Also, we need to learn “language chunks” in Chinese.",
+      "zh": "🕺还有，我们要学习中文里的“语块”。",
+      "pinyin": "🕺 hái yǒu， wǒ men yào xué xí zhōng wén lǐ de “ yǔ kuài ”。",
+      "vi": "Ngoài ra, chúng ta cần học các “cụm ngôn ngữ” trong tiếng Trung."
+    },
+    {
+      "start": 604.93,
+      "end": 606.83,
+      "en": "What does “language chunk” mean?",
+      "zh": "💃“语块”是什么意思？",
+      "pinyin": "💃“ yǔ kuài ” shì shén me yì sī？",
+      "vi": "“Cụm ngôn ngữ” có nghĩa là gì?"
+    },
+    {
+      "start": 607.07,
+      "end": 610.9,
+      "en": "Simply put, they are fixed collocations.",
+      "zh": "🕺简单来说，就是一些固定搭配的词组。",
+      "pinyin": "🕺 jiǎn dān lái shuō， jiù shì yì xiē gù dìng dā pèi de cí zǔ。",
+      "vi": "Nói đơn giản, đó là một số cụm từ kết hợp cố định."
+    },
+    {
+      "start": 611.07,
+      "end": 614.5,
+      "en": "For example, “if you have time”? Right.",
+      "zh": "💃比如“如果你有空的话”？ 🕺对。",
+      "pinyin": "💃 bǐ rú “ rú guǒ nǐ yǒu kōng de huà ”？ 🕺 duì。",
+      "vi": "Ví dụ như “nếu bạn có thời gian”? Đúng vậy."
+    },
+    {
+      "start": 614.6,
+      "end": 620.73,
+      "en": "If you memorize these six characters as a whole, when you want to express this meaning,",
+      "zh": "🕺如果你把这六个字当成一个整，🕺体记下来，🕺当你想要表达这个意思时，",
+      "pinyin": "🕺 rú guǒ nǐ bǎ zhè liù gè zì dàng chéng yí gè zhěng，🕺 tǐ jì xià lái，🕺 dāng nǐ xiǎng yào biǎo dá zhè ge yì sī shí，",
+      "vi": "Nếu bạn ghi nhớ sáu chữ này như một chỉnh thể, khi bạn muốn diễn đạt ý này,"
+    },
+    {
+      "start": 620.73,
+      "end": 624.17,
+      "en": "it will pop out of your mouth as a whole.",
+      "zh": "🕺它会像一个整体一样，🕺从你嘴里蹦出来。",
+      "pinyin": "🕺 tā huì xiàng yí gè zhěng tǐ yí yàng，🕺 cóng nǐ zuǐ lǐ bèng chū lái。",
+      "vi": "nó sẽ bật ra khỏi miệng bạn như một chỉnh thể."
+    },
+    {
+      "start": 624.17,
+      "end": 629.7,
+      "en": "instead of thinking about what “if” is, what “have” is, and what “free” is.",
+      "zh": "💃而不是去想“如果”是什么，💃“有”是什么，💃“空”又是什么。",
+      "pinyin": "💃 ér bú shì qù xiǎng “ rú guǒ ” shì shén me，💃“ yǒu ” shì shén me，💃“ kōng ” yòu shì shén me。",
+      "vi": "mà không phải nghĩ “nếu” là gì, “có” là gì, “rảnh” lại là gì."
+    },
+    {
+      "start": 630,
+      "end": 636.4,
+      "en": "Exactly. Like the phrases we commonly use, such as “no problem,” “sorry,” and “sorry to trouble you.”",
+      "zh": "🕺没错。就像我们常用的“没关系”、🕺“不好意思”、🕺“麻烦你了”。",
+      "pinyin": "🕺 méi cuò。 jiù xiàng wǒ men cháng yòng de “ méi guān xì ”、🕺“ bù hǎo yì si ”、🕺“ má fán nǐ le ”。",
+      "vi": "Đúng vậy. Giống như những cụm từ chúng ta thường dùng như “không sao”, “xin lỗi”, “làm phiền bạn rồi”."
+    },
+    {
+      "start": 636.4,
+      "end": 641.87,
+      "en": "These words we don't need to think about grammar at all, because they have already become “auto-",
+      "zh": "💃这些词我们根本不需要思考语法，💃因为它们已经变，💃成了我们大脑里的“自",
+      "pinyin": "💃 zhè xiē cí wǒ men gēn běn bù xū yào sī kǎo yǔ fǎ，💃 yīn wèi tā men yǐ jīng biàn，💃 chéng le wǒ men dà nǎo lǐ de “ zì",
+      "vi": "Những từ này chúng ta hoàn toàn không cần nghĩ đến ngữ pháp, vì chúng đã trở thành “tự-"
+    },
+    {
+      "start": 641.87,
+      "end": 652,
+      "en": "matic modules” in our brain. In addition, pay attention to those modal particles, such as “ba,” “ne,” and “a.” These words are simply the soul of Chinese!",
+      "zh": "💃动模块”。 🕺此外，🕺还要注意那些语气词，🕺比如“吧”、“呢”、💃“啊”。这些词简直是中文的灵魂！",
+      "pinyin": "💃 dòng mó kuài ”。 🕺 cǐ wài，🕺 hái yào zhù yì nà xiē yǔ qì cí，🕺 bǐ rú “ ba ”、“ ne ”、💃“ a ”。 zhè xiē cí jiǎn zhí shì zhōng wén de líng hún！",
+      "vi": "động” trong não chúng ta. Ngoài ra, còn phải chú ý đến những trợ từ ngữ khí, ví dụ như “ba”, “ne”, “a”. Những từ này đúng là linh hồn của tiếng Trung!"
+    },
+    {
+      "start": 652.37,
+      "end": 660.33,
+      "en": "Really. Add the character “ba,” and the tone immediately becomes more tactful. For example, “we go” and “let's go,”",
+      "zh": "🕺真的。加一个“吧”字，🕺语气立刻就变得委，🕺婉了。 💃比如“我们走”和“我们走吧”，",
+      "pinyin": "🕺 zhēn de。 jiā yí gè “ ba ” zì，🕺 yǔ qì lì kè jiù biàn dé wěi，🕺 wǎn le。 💃 bǐ rú “ wǒ men zǒu ” hé “ wǒ men zǒu ba ”，",
+      "vi": "Thật vậy. Thêm một chữ “ba”, ngữ khí lập tức trở nên uyển chuyển. Ví dụ như “chúng ta đi” và “chúng ta đi nhé”,"
+    },
+    {
+      "start": 660.33,
+      "end": 662.2,
+      "en": "it feels completely different.",
+      "zh": "💃感觉完全不一样。",
+      "pinyin": "💃 gǎn jué wán quán bù yí yàng。",
+      "vi": "cảm giác hoàn toàn khác."
+    },
+    {
+      "start": 662.4,
+      "end": 665.5,
+      "en": "The former sounds like a command, the latter like a suggestion.",
+      "zh": "🕺前者像命令，🕺后者像建议。",
+      "pinyin": "🕺 qián zhě xiàng mìng lìng，🕺 hòu zhě xiàng jiàn yì。",
+      "vi": "Cái trước giống như mệnh lệnh, cái sau giống như lời đề nghị."
+    },
+    {
+      "start": 665.7,
+      "end": 672.03,
+      "en": "So when doing shadowing practice, be sure to imitate these small details as well.",
+      "zh": "💃所以大家在做影子练习时，💃一定要把这些小细节也模仿进去。",
+      "pinyin": "💃 suǒ yǐ dà jiā zài zuò yǐng zi liàn xí shí，💃 yí dìng yào bǎ zhè xiē xiǎo xì jié yě mó fǎng jìn qù。",
+      "vi": "Vì vậy, khi mọi người luyện shadowing, nhất định phải bắt chước cả những chi tiết nhỏ này."
+    },
+    {
+      "start": 672.33,
+      "end": 676.1,
+      "en": "The more closely you imitate, the more natural your Chinese sounds.",
+      "zh": "🕺模仿得越像，🕺你的中文听起来就越自然。",
+      "pinyin": "🕺 mó fǎng dé yuè xiàng，🕺 nǐ de zhōng wén tīng qǐ lái jiù yuè zì rán。",
+      "vi": "Bạn bắt chước càng giống, tiếng Trung của bạn nghe càng tự nhiên."
+    },
+    {
+      "start": 676.2,
+      "end": 683.9,
+      "en": "This kind of practice may feel tiring at first, but if you keep it up for a week, you'll find your language intuition has made a qualitative leap.",
+      "zh": "💃这种练习一开始可能会觉得累，💃但坚持一周，💃你会发现你的语感有了质的飞跃。",
+      "pinyin": "💃 zhè zhǒng liàn xí yì kāi shǐ kě néng huì jué de lèi，💃 dàn jiān chí yì zhōu，💃 nǐ huì fā xiàn nǐ de yǔ gǎn yǒu le zhì de fēi yuè。",
+      "vi": "Kiểu luyện tập này lúc đầu có thể thấy mệt, nhưng kiên trì một tuần, bạn sẽ thấy cảm giác ngôn ngữ của mình tiến bộ vượt bậc."
+    },
+    {
+      "start": 684.27,
+      "end": 690.13,
+      "en": "And you'll find that when you speak Chinese, you start to have a “Chinese flavor.”",
+      "zh": "🕺而且你会发现，你在说中文的时候，🕺开始带有一种“中国味儿”了。",
+      "pinyin": "🕺 ér qiě nǐ huì fā xiàn， nǐ zài shuō zhōng wén de shí hòu，🕺 kāi shǐ dài yǒu yì zhǒng “ zhōng guó wèi ér ” liǎo。",
+      "vi": "Và bạn sẽ nhận ra, khi nói tiếng Trung, bạn bắt đầu có một “chất Trung Quốc”."
+    },
+    {
+      "start": 690.13,
+      "end": 693.6,
+      "en": "This sense of achievement is something memorizing vocabulary can't give you.",
+      "zh": "💃这种成就感是背单词给不了的。",
+      "pinyin": "💃 zhè zhǒng chéng jiù gǎn shì bèi dān cí gěi bù liǎo de。",
+      "vi": "Cảm giác thành tựu này là thứ việc học thuộc từ vựng không thể mang lại."
+    },
+    {
+      "start": 693.87,
+      "end": 702.37,
+      "en": "Alright, we've shared three secrets: building intuition, creating an environment, and learning chunks through imitation.",
+      "zh": "🕺好了，🕺我们已经分享了三个秘诀：建立直觉、🕺创造环境、以及通过模仿学习语块。",
+      "pinyin": "🕺 hǎo le，🕺 wǒ men yǐ jīng fēn xiǎng le sān gè mì jué： jiàn lì zhí jué、🕺 chuàng zào huán jìng、 yǐ jí tōng guò mó fǎng xué xí yǔ kuài。",
+      "vi": "Được rồi, chúng ta đã chia sẻ ba bí quyết: xây dựng trực giác, tạo môi trường, và học các cụm từ thông qua bắt chước."
+    },
+    {
+      "start": 702.47,
+      "end": 707.1,
+      "en": "Next, let's move to the final part and summarize for everyone.",
+      "zh": "💃接下来，让我们进入最后一部分，💃为大家做一个总结。",
+      "pinyin": "💃 jiē xià lái， ràng wǒ men jìn rù zuì hòu yí bù fen，💃 wèi dà jiā zuò yí gè zǒng jié。",
+      "vi": "Tiếp theo, hãy bước vào phần cuối cùng, để tóm tắt lại cho mọi người."
+    },
+    {
+      "start": 709.53,
+      "end": 716.23,
+      "en": "Today's episode covered many practical techniques, and I hope it brings you some inspiration.",
+      "zh": "🕺今天的节目聊了很多实用的技巧，🕺希望能给大家带来一些启发。",
+      "pinyin": "🕺 jīn tiān de jié mù liáo le hěn duō shí yòng de jì qiǎo，🕺 xī wàng néng gěi dà jiā dài lái yì xiē qǐ fā。",
+      "vi": "Chương trình hôm nay đã nói về nhiều kỹ thuật thực tế, hy vọng có thể mang lại cho mọi người một chút gợi mở."
+    },
+    {
+      "start": 716.47,
+      "end": 723.07,
+      "en": "Actually, training your brain to speak Chinese is essentially about turning Chinese from “knowledge in books”",
+      "zh": "💃其实，训练大脑说中文，💃本质上就是要把中文，💃从“书本里的知识”",
+      "pinyin": "💃 qí shí， xùn liàn dà nǎo shuō zhōng wén，💃 běn zhì shàng jiù shì yào bǎ zhōng wén，💃 cóng “ shū běn lǐ de zhī shi ”",
+      "vi": "Thật ra, luyện cho não nói tiếng Trung, về bản chất là biến tiếng Trung từ “kiến thức trong sách vở”"
+    },
+    {
+      "start": 723.07,
+      "end": 725.2,
+      "en": "into “a tool in daily life.”",
+      "zh": "💃变成“生活中的工具”。",
+      "pinyin": "💃 biàn chéng “ shēng huó zhōng de gōng jù ”。",
+      "vi": "thành “công cụ trong cuộc sống”."
+    },
+    {
+      "start": 725.33,
+      "end": 728.37,
+      "en": "Let's review the key points once again.",
+      "zh": "🕺让我们再次回顾一下重点。",
+      "pinyin": "🕺 ràng wǒ men zài cì huí gù yí xià zhòng diǎn。",
+      "vi": "Hãy cùng nhìn lại những điểm chính một lần nữa."
+    },
+    {
+      "start": 728.7,
+      "end": 731.63,
+      "en": "First, break the translation mindset.",
+      "zh": "🕺第一，打破翻译思维。",
+      "pinyin": "🕺 dì yī， dǎ pò fān yì sī wéi。",
+      "vi": "Thứ nhất, phá bỏ tư duy dịch."
+    },
+    {
+      "start": 731.87,
+      "end": 738.23,
+      "en": "Try to connect objects directly with sounds; don't secretly translate in your head.",
+      "zh": "🕺尝试把物体和声音直接连接，🕺不要在心里偷偷翻译。",
+      "pinyin": "🕺 cháng shì bǎ wù tǐ hé shēng yīn zhí jiē lián jiē，🕺 bú yào zài xīn lǐ tōu tōu fān yì。",
+      "vi": "Hãy thử kết nối trực tiếp đồ vật với âm thanh, đừng lén dịch trong đầu."
+    },
+    {
+      "start": 738.37,
+      "end": 741.4,
+      "en": "Second, create an all-Chinese environment.",
+      "zh": "💃第二，创造全中文环境。",
+      "pinyin": "💃 dì èr， chuàng zào quán zhōng wén huán jìng。",
+      "vi": "Thứ hai, tạo môi trường hoàn toàn bằng tiếng Trung."
+    },
+    {
+      "start": 741.7,
+      "end": 748.9,
+      "en": "Change your phone language, develop the habit of talking to yourself, and describe what you're doing. Third,",
+      "zh": "💃改变手机语言，💃养成自言自语的习惯，💃描述你正在做的事情。 🕺第三，",
+      "pinyin": "💃 gǎi biàn shǒu jī yǔ yán，💃 yǎng chéng zì yán zì yǔ de xí guàn，💃 miáo shù nǐ zhèng zài zuò de shì qíng。 🕺 dì sān，",
+      "vi": "Thay đổi ngôn ngữ điện thoại, hình thành thói quen tự nói một mình, mô tả việc bạn đang làm. Thứ ba,"
+    },
+    {
+      "start": 749,
+      "end": 752.47,
+      "en": "Use shadowing practice and chunk memorization.",
+      "zh": "🕺运用影子练习和语块记忆。",
+      "pinyin": "🕺 yùn yòng yǐng zi liàn xí hé yǔ kuài jì yì。",
+      "vi": "Áp dụng phương pháp shadowing và ghi nhớ theo cụm từ."
+    },
+    {
+      "start": 752.87,
+      "end": 759.57,
+      "en": "Imitate native speakers' tone and intonation, and memorize commonly used sentences as whole units.",
+      "zh": "🕺模仿母语者的语气和语调，🕺把常用的句子当成整体记下来。",
+      "pinyin": "🕺 mó fǎng mǔ yǔ zhě de yǔ qì hé yǔ diào，🕺 bǎ cháng yòng de jù zi dàng chéng zhěng tǐ jì xià lái。",
+      "vi": "Bắt chước giọng điệu và ngữ điệu của người bản ngữ, ghi nhớ những câu thường dùng như một chỉnh thể."
+    },
+    {
+      "start": 759.57,
+      "end": 766.83,
+      "en": "The few terms Li Ming just mentioned, such as “building intuition,” “role-playing,” and “shadowing practice,”",
+      "zh": "💃刚才李明提到的几个词，💃比如“建立直觉”、💃“角色扮演”、💃“影子练习”，",
+      "pinyin": "💃 gāng cái lǐ míng tí dào de jǐ gè cí，💃 bǐ rú “ jiàn lì zhí jué ”、💃“ jué sè bàn yǎn ”、💃“ yǐng zi liàn xí ”，",
+      "vi": "Mấy từ Lý Minh vừa nhắc đến, như “xây dựng trực giác”, “đóng vai”, “luyện shadowing”,"
+    },
+    {
+      "start": 766.87,
+      "end": 769.03,
+      "en": "are all valuable tools for improving speaking.",
+      "zh": "💃都是提高口语的法宝。",
+      "pinyin": "💃 dōu shì tí gāo kǒu yǔ de fǎ bǎo。",
+      "vi": "đều là bảo bối để nâng cao khẩu ngữ."
+    },
+    {
+      "start": 769.3,
+      "end": 775.6,
+      "en": "The process of learning a language may have ups and downs; sometimes you'll feel you're improving quickly,",
+      "zh": "🕺学习语言的过程可能会有反复，🕺有时候你会觉得进步很快，",
+      "pinyin": "🕺 xué xí yǔ yán de guò chéng kě néng huì yǒu fǎn fù，🕺 yǒu shí hòu nǐ huì jué de jìn bù hěn kuài，",
+      "vi": "Quá trình học ngôn ngữ có thể sẽ có lúc thăng trầm, đôi khi bạn sẽ thấy mình tiến bộ rất nhanh,"
+    },
+    {
+      "start": 775.67,
+      "end": 778.37,
+      "en": "and sometimes you'll feel you've hit a bottleneck.",
+      "zh": "🕺有时候又会觉得遇到了瓶颈。",
+      "pinyin": "🕺 yǒu shí hòu yòu huì jué de yù dào le píng jǐng。",
+      "vi": "có lúc lại thấy mình gặp phải nút thắt."
+    },
+    {
+      "start": 778.53,
+      "end": 780.67,
+      "en": "All of this is very normal.",
+      "zh": "💃这都是非常正常的。",
+      "pinyin": "💃 zhè dōu shì fēi cháng zhèng cháng de。",
+      "vi": "Điều này đều rất bình thường."
+    },
+    {
+      "start": 780.73,
+      "end": 784.83,
+      "en": "The key is to stay curious and maintain a persistent mindset.",
+      "zh": "💃关键是要保持好奇心，💃和持之以恒的心态。",
+      "pinyin": "💃 guān jiàn shì yào bǎo chí hào qí xīn，💃 hé chí zhī yǐ héng de xīn tài。",
+      "vi": "Điều quan trọng là giữ được sự tò mò và tinh thần kiên trì."
+    },
+    {
+      "start": 784.93,
+      "end": 792.2,
+      "en": "Even if you only spend ten minutes a day saying a few sentences in Chinese to yourself, that is still very meaningful accumulation.",
+      "zh": "🕺哪怕你每天只花十分钟，🕺对自己说几句中文，🕺那也是非常有意义的积累。",
+      "pinyin": "🕺 nǎ pà nǐ měi tiān zhī huā shí fēn zhōng，🕺 duì zì jǐ shuō jǐ jù zhōng wén，🕺 nà yě shì fēi cháng yǒu yì yì de jī lěi。",
+      "vi": "Ngay cả khi mỗi ngày bạn chỉ dành mười phút để nói vài câu tiếng Trung với chính mình, đó cũng là sự tích lũy rất có ý nghĩa."
+    },
+    {
+      "start": 792.53,
+      "end": 797.37,
+      "en": "Yes. We really hope to see everyone put these methods into practice.",
+      "zh": "💃是的。我们非常希，💃望看到大家把这些方法用起来。",
+      "pinyin": "💃 shì de。 wǒ men fēi cháng xī，💃 wàng kàn dào dà jiā bǎ zhè xiē fāng fǎ yòng qǐ lái。",
+      "vi": "Đúng vậy. Chúng tôi rất mong được thấy mọi người áp dụng những phương pháp này."
+    },
+    {
+      "start": 797.37,
+      "end": 804.03,
+      "en": "If after trying these methods you gain anything, or encounter anything interesting,",
+      "zh": "🕺如果你在尝试这些方法后，🕺有什么收获，🕺或者遇到了什么有趣的事情，",
+      "pinyin": "🕺 rú guǒ nǐ zài cháng shì zhè xiē fāng fǎ hòu，🕺 yǒu shén me shōu huò，🕺 huò zhě yù dào le shén me yǒu qù de shì qíng，",
+      "vi": "Nếu sau khi thử những phương pháp này, bạn có thu hoạch gì, hoặc gặp được điều gì thú vị,"
+    },
+    {
+      "start": 804.13,
+      "end": 806.53,
+      "en": "please be sure to leave a comment and tell us.",
+      "zh": "🕺请一定要留言告诉我们。",
+      "pinyin": "🕺 qǐng yí dìng yào liú yán gào sù wǒ men。",
+      "vi": "hãy nhớ để lại bình luận cho chúng tôi biết."
+    },
+    {
+      "start": 806.53,
+      "end": 809.97,
+      "en": "Your feedback is the motivation for us to keep improving.",
+      "zh": "💃你们的反馈是我们不断进步的动力。",
+      "pinyin": "💃 nǐ men de fǎn kuì shì wǒ men bú duàn jìn bù de dòng lì。",
+      "vi": "Phản hồi của các bạn là động lực để chúng tôi không ngừng tiến bộ."
+    },
+    {
+      "start": 809.97,
+      "end": 812.37,
+      "en": "Thank you again for being with us.",
+      "zh": "🕺再次感谢大家的陪伴。",
+      "pinyin": "🕺 zài cì gǎn xiè dà jiā de péi bàn。",
+      "vi": "Một lần nữa cảm ơn mọi người đã đồng hành cùng chúng tôi."
+    },
+    {
+      "start": 820.47,
+      "end": 823.7,
+      "en": "This is the \"Learn Chinese Podcast\"; I'm Xiaoyu.",
+      "zh": "💃这里是《学中文播客》，💃我是小雨。",
+      "pinyin": "💃 zhè lǐ shì 《 xué zhōng wén bō kè 》，💃 wǒ shì xiǎo yǔ。",
+      "vi": "Đây là 《Học tiếng Trung Podcast》, tôi là Tiểu Vũ."
+    },
+    {
+      "start": 823.77,
+      "end": 825.07,
+      "en": "I'm Li Ming.",
+      "zh": "🕺我是李明。",
+      "pinyin": "🕺 wǒ shì lǐ míng。",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 825.17,
+      "end": 830.63,
+      "en": "Let's work hard together to speak Chinese more and more naturally and confidently!",
+      "zh": "💃让我们一起努力，💃让中文说得越来越自然，💃越来越自信！",
+      "pinyin": "💃 ràng wǒ men yì qǐ nǔ lì，💃 ràng zhōng wén shuō dé yuè lái yuè zì rán，💃 yuè lái yuè zì xìn！",
+      "vi": "Chúng ta hãy cùng nỗ lực, để nói tiếng Trung ngày càng tự nhiên và tự tin hơn!"
+    },
+    {
+      "start": 830.7,
+      "end": 835,
+      "en": "Wishing everyone a pleasant learning experience; see you in the next episode.",
+      "zh": "🕺祝大家学习愉快，🕺我们下期节目再见。",
+      "pinyin": "🕺 zhù dà jiā xué xí yú kuài，🕺 wǒ men xià qī jié mù zài jiàn。",
+      "vi": "Chúc mọi người học tập vui vẻ, hẹn gặp lại trong chương trình kỳ sau."
+    },
+    {
+      "start": 835,
+      "end": 836.77,
+      "en": "Goodbye! Keep it up!",
+      "zh": "💃再见！加油喔！",
+      "pinyin": "💃 zài jiàn！ jiā yóu wō！",
+      "vi": "Tạm biệt! Cố lên nhé!"
+    }
+  ]
+}

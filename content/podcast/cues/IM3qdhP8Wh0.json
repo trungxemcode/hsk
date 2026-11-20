@@ -1,0 +1,997 @@
+{
+  "id": "IM3qdhP8Wh0",
+  "youtubeId": "IM3qdhP8Wh0",
+  "channelHandle": "@LearnChineseThroughPodcast",
+  "title": "HSK 1-2 | What do you actually learn after each weekend? | Chinese Listening Practice",
+  "titleVi": "HSK 1-2 | Cuối tuần bạn thực sự học được gì? | Luyện nghe tiếng Trung",
+  "topic": "Podcast Luyện nghe HSK",
+  "level": "HSK 1+",
+  "levelGroup": "hsk1-2",
+  "durationSec": 989,
+  "cues": [
+    {
+      "start": 6.1,
+      "end": 12.67,
+      "en": "Hello everyone, welcome to our little Chinese class. Today is Monday.",
+      "zh": "大家好你好呀，欢迎来到我们的中文小课堂，今天是星期一",
+      "pinyin": "Dà jiā hǎo nǐ hǎo ya， huān yíng lái dào wǒ men de zhōng wén xiǎo kè táng， jīn tiān shì xīng qī yī",
+      "vi": "Xin chào mọi người, chào mừng các bạn đến với lớp học tiếng Trung nhỏ của chúng ta, hôm nay là thứ Hai."
+    },
+    {
+      "start": 12.67,
+      "end": 18.37,
+      "en": "How was your weekend? Did you get some rest? Did you learn anything new?",
+      "zh": "你的周末过得怎么样，有没有休息，有没有学习一点新东西",
+      "pinyin": "Nǐ de zhōu mò guò dé zěn me yàng， yǒu méi yǒu xiū xi， yǒu méi yǒu xué xí yì diǎn xīn dōng xī",
+      "vi": "Cuối tuần của bạn thế nào? Bạn có nghỉ ngơi không? Có học được điều gì mới không?"
+    },
+    {
+      "start": 18.67,
+      "end": 26.4,
+      "en": "Many people just relax on weekends, scrolling through their phones, watching dramas, and sleeping. That's perfectly fine.",
+      "zh": "很多人一到周末就放松，玩手机看剧，睡觉这样当然没问题",
+      "pinyin": "Hěn duō rén yí dào zhōu mò jiù fàng sōng， wán shǒu jī kàn jù， shuì jiào zhè yàng dāng rán méi wèn tí",
+      "vi": "Nhiều người cứ đến cuối tuần là thư giãn, lướt điện thoại, xem phim, ngủ, điều đó đương nhiên không sao."
+    },
+    {
+      "start": 26.53,
+      "end": 34.87,
+      "en": "Rest is important, but have you ever thought about what we actually learn after each weekend?",
+      "zh": "休息很重要，但是你有没有想过，每个周末过后，我们到底学到了什么",
+      "pinyin": "Xiū xi hěn zhòng yào， dàn shì nǐ yǒu méi yǒu xiǎng guò， měi gè zhōu mò guò hòu， wǒ men dào dǐ xué dào le shén me",
+      "vi": "Nghỉ ngơi rất quan trọng, nhưng bạn có bao giờ nghĩ xem sau mỗi cuối tuần, chúng ta thực sự đã học được gì không?"
+    },
+    {
+      "start": 34.87,
+      "end": 43.5,
+      "en": "Sometimes we feel like we're recharging, but in reality, we're just letting time pass, week after week.",
+      "zh": "有时候我们觉得自己在充电，但其实只是让时间过去，一个星期又一个星期",
+      "pinyin": "Yǒu shí hòu wǒ men jué de zì jǐ zài chōng diàn， dàn qí shí zhǐ shì ràng shí jiān guò qù， yí gè xīng qī yòu yí gè xīng qī",
+      "vi": "Đôi khi chúng ta cảm thấy mình đang nạp năng lượng, nhưng thực ra chỉ là để thời gian trôi qua, hết tuần này đến tuần khác."
+    },
+    {
+      "start": 43.7,
+      "end": 50.7,
+      "en": "You still can't speak Chinese, you still can't remember the new vocabulary, and you still can't understand what others are saying.",
+      "zh": "中文还是不会说，生词还是记不住，听别人说话也还是听不懂",
+      "pinyin": "Zhōng wén hái shì bú huì shuō， shēng cí hái shì jì bú zhù， tīng bié rén shuō huà yě hái shì tīng bù dǒng",
+      "vi": "Tiếng Trung vẫn không nói được, từ vựng mới vẫn không nhớ nổi, nghe người khác nói cũng vẫn không hiểu."
+    },
+    {
+      "start": 50.7,
+      "end": 57.8,
+      "en": "It's not because you're not trying hard, but because you haven't used your time correctly. Let's talk about this together today.",
+      "zh": "为什么不是你不努力，而是你没有用对时间，今天我们一起来聊一聊",
+      "pinyin": "Wèi shén me bú shì nǐ bù nǔ lì， ér shì nǐ méi yǒu yòng duì shí jiān， jīn tiān wǒ men yì qǐ lái liáo yi liáo",
+      "vi": "Không phải vì bạn không cố gắng, mà là bạn chưa sử dụng thời gian đúng cách. Hôm nay chúng ta cùng nhau thảo luận."
+    },
+    {
+      "start": 58.07,
+      "end": 65.93,
+      "en": "What can we do each weekend to make real progress? Let's find the answer together.",
+      "zh": "每个周末我们可以怎么做，让自己真的进步，让我们一起找一找答案吧",
+      "pinyin": "Měi gè zhōu mò wǒ men kě yǐ zěn me zuò， ràng zì jǐ zhēn de jìn bù， ràng wǒ men yì qǐ zhǎo yi zhǎo dá àn ba",
+      "vi": "Mỗi cuối tuần chúng ta có thể làm gì để thực sự tiến bộ. Hãy cùng nhau tìm câu trả lời nhé."
+    },
+    {
+      "start": 68.13,
+      "end": 74.37,
+      "en": "Actually, our brains are very smart. Even when you rest, your brain doesn't stop working.",
+      "zh": "其实我们的大脑很聪明，你休息的时候，大脑也没有停下来",
+      "pinyin": "Qí shí wǒ men de dà nǎo hěn cōng ming， nǐ xiū xi de shí hòu， dà nǎo yě méi yǒu tíng xià lái",
+      "vi": "Thực ra não bộ của chúng ta rất thông minh, khi bạn nghỉ ngơi, não bộ cũng không dừng lại."
+    },
+    {
+      "start": 74.47,
+      "end": 82.47,
+      "en": "It helps you organize and remember what you learned before. For example, if you learned 5 new words on Wednesday.",
+      "zh": "他会帮你整理，记住你以前学过的东西，比如你星期三学了5个新词",
+      "pinyin": "Tā huì bāng nǐ zhěng lǐ， jì zhù nǐ yǐ qián xué guò de dōng xī， bǐ rú nǐ xīng qī sān xué le 5 gè xīn cí",
+      "vi": "Nó sẽ giúp bạn sắp xếp và ghi nhớ những gì bạn đã học trước đó, ví dụ như bạn đã học 5 từ mới vào thứ Tư."
+    },
+    {
+      "start": 82.57,
+      "end": 91.5,
+      "en": "But if you forget them right after learning, what should you do? If you review them once on the weekend, these words will gradually stick in your brain.",
+      "zh": "但是你学完就忘了，那怎么办，如果你在周末再看一次，这些词就会慢慢记在脑子里",
+      "pinyin": "Dàn shì nǐ xué wán jiù wàng le， nà zěn me bàn， rú guǒ nǐ zài zhōu mò zài kàn yí cì， zhè xiē cí jiù huì màn màn jì zài nǎo zǐ lǐ",
+      "vi": "Nhưng bạn quên ngay sau khi học xong, thì phải làm sao? Nếu bạn xem lại một lần vào cuối tuần, những từ này sẽ dần được ghi nhớ trong đầu."
+    },
+    {
+      "start": 91.73,
+      "end": 98.47,
+      "en": "This is the power of review. Scientists say that if you want to remember things for a long time, you need to review them multiple times.",
+      "zh": "这就是复习的力量，科学家说，如果你想记得久，就要多次看",
+      "pinyin": "Zhè jiù shì fù xí de lì liàng， kē xué jiā shuō， rú guǒ nǐ xiǎng jì de jiǔ， jiù yào duō cì kàn",
+      "vi": "Đó chính là sức mạnh của việc ôn tập. Các nhà khoa học nói rằng, nếu bạn muốn nhớ lâu, bạn phải xem lại nhiều lần."
+    },
+    {
+      "start": 98.5,
+      "end": 107.17,
+      "en": "Reviewing and listening multiple times is called spaced learning, which is very beneficial for the brain. Some people learn a lot of new words every day.",
+      "zh": "多次听这叫做间隔学习，对大脑很有帮助，有的人每天学很多新词",
+      "pinyin": "Duō cì tīng zhè jiào zuò jiàn gé xué xí， duì dà nǎo hěn yǒu bāng zhù， yǒu de rén měi tiān xué hěn duō xīn cí",
+      "vi": "Xem và nghe nhiều lần được gọi là học tập ngắt quãng, rất có lợi cho não bộ. Có người học rất nhiều từ mới mỗi ngày."
+    },
+    {
+      "start": 107.2,
+      "end": 115.8,
+      "en": "But after a week, they can't remember a single one. Why? Because they didn't review. It's like planting a tree.",
+      "zh": "但是一个星期后一个也想不起来，为什么因为没有复习，就像种树一样",
+      "pinyin": "Dàn shì yí gè xīng qī hòu yí gè yě xiǎng bù qǐ lái， wèi shén me yīn wèi méi yǒu fù xí， jiù xiàng zhòng shù yí yàng",
+      "vi": "Nhưng một tuần sau không nhớ nổi từ nào. Tại sao? Vì không ôn tập. Giống như trồng cây vậy."
+    },
+    {
+      "start": 115.9,
+      "end": 124.67,
+      "en": "Once you plant it, you must water it every day for it to grow. Learning Chinese is the same; you must review regularly to make gradual progress.",
+      "zh": "你种下去要天天给水才能长大，学习中文也是，要常常复习才能慢慢进步",
+      "pinyin": "Nǐ zhǒng xià qù yào tiān tiān jǐ shuǐ cái néng zhǎng dà， xué xí zhōng wén yě shì， yào cháng cháng fù xí cái néng màn màn jìn bù",
+      "vi": "Bạn trồng xuống phải tưới nước mỗi ngày thì cây mới lớn được. Học tiếng Trung cũng vậy, phải thường xuyên ôn tập thì mới dần tiến bộ."
+    },
+    {
+      "start": 124.77,
+      "end": 131.9,
+      "en": "The weekend is a great time; you don't have to work and don't have many things to do, so you can relax.",
+      "zh": "周末是一个很好的时间，你没有上班，也没有太多事可以放松",
+      "pinyin": "Zhōu mò shì yí gè hěn hǎo de shí jiān， nǐ méi yǒu shàng bān， yě méi yǒu tài duō shì kě yǐ fàng sōng",
+      "vi": "Cuối tuần là khoảng thời gian rất tốt, bạn không phải đi làm và cũng không có nhiều việc để thư giãn."
+    },
+    {
+      "start": 131.93,
+      "end": 138.7,
+      "en": "You can also spend a little time learning Chinese; you don't need to study for long, 15 minutes is enough.",
+      "zh": "也可以用一点点时间来学中文，不需要学很久，分钟就可以",
+      "pinyin": "Yě kě yǐ yòng yì diǎn diǎn shí jiān lái xué zhōng wén， bù xū yào xué hěn jiǔ， fēn zhōng jiù kě yǐ",
+      "vi": "Bạn cũng có thể dành một chút thời gian để học tiếng Trung, không cần học lâu, 15 phút là đủ."
+    },
+    {
+      "start": 138.7,
+      "end": 145.47,
+      "en": "If you study for 10 minutes every day, that adds up to 300 minutes in a month. What can you do?",
+      "zh": "如果你每天学分钟，加起来一个月就有分钟呢，你可以怎么做",
+      "pinyin": "Rú guǒ nǐ měi tiān xué fēn zhōng， jiā qǐ lái yí gè yuè jiù yǒu fēn zhōng ne， nǐ kě yǐ zěn me zuò",
+      "vi": "Nếu bạn học 10 phút mỗi ngày, cộng lại một tháng sẽ có 300 phút, bạn có thể làm gì?"
+    },
+    {
+      "start": 145.47,
+      "end": 152.9,
+      "en": "It's simple. First, you can review what you learned this week; take out your notebook and read it.",
+      "zh": "很简单第一，可以看看你这一周学了什么，拿出你的本子读一读",
+      "pinyin": "Hěn jiǎn dān dì yī， kě yǐ kàn kàn nǐ zhè yì zhōu xué le shén me， ná chū nǐ de běn zi dú yi dú",
+      "vi": "Rất đơn giản, thứ nhất, bạn có thể xem lại những gì mình đã học trong tuần, lấy vở ra và đọc lại."
+    },
+    {
+      "start": 152.9,
+      "end": 161.27,
+      "en": "Write and speak. You can say \"I like eating rice\" or \"I am very happy today.\" These sentences are very simple.",
+      "zh": "写一写说一说，你可以说我喜欢吃米饭，我今天很开心，这些句子很简单",
+      "pinyin": "Xiě yi xiě shuō yi shuō， nǐ kě yǐ shuō wǒ xǐ huan chī mǐ fàn， wǒ jīn tiān hěn kāi xīn， zhè xiē jù zi hěn jiǎn dān",
+      "vi": "Viết lại, nói lại. Bạn có thể nói \"Tôi thích ăn cơm\", \"Hôm nay tôi rất vui\". Những câu này rất đơn giản."
+    },
+    {
+      "start": 161.27,
+      "end": 168.47,
+      "en": "But they are very useful. Second, you can listen to Chinese; turn on your phone and find a Chinese podcast.",
+      "zh": "但很有用，第二你可以听一听中文，打开手机，找一个中文拨客",
+      "pinyin": "Dàn hěn yǒu yòng， dì èr nǐ kě yǐ tīng yi tīng zhōng wén， dǎ kāi shǒu jī， zhǎo yí gè zhōng wén bō kè",
+      "vi": "Nhưng rất hữu ích. Thứ hai, bạn có thể nghe tiếng Trung, mở điện thoại lên và tìm một podcast tiếng Trung."
+    },
+    {
+      "start": 168.47,
+      "end": 175.03,
+      "en": "Or a simple video. You don't need to understand everything; just understanding one word is enough.",
+      "zh": "或者一个简单的视频，你不需要听懂全部，只要能听懂一个词",
+      "pinyin": "Huò zhě yí gè jiǎn dān de shì pín， nǐ bù xū yào tīng dǒng quán bù， zhǐ yào néng tīng dǒng yí gè cí",
+      "vi": "Hoặc một video đơn giản. Bạn không cần hiểu hết, chỉ cần hiểu được một từ."
+    },
+    {
+      "start": 175.07,
+      "end": 184.83,
+      "en": "Two words is great. For example, if you hear \"Hello\" or \"I like cats,\" say \"Ah, I understood.\"",
+      "zh": "两个词就很棒了，比如你听到你好，我喜欢猫，你就说啊，我听懂了",
+      "pinyin": "Liǎng gè cí jiù hěn bàng le， bǐ rú nǐ tīng dào nǐ hǎo， wǒ xǐ huan māo， nǐ jiù shuō a， wǒ tīng dǒng le",
+      "vi": "Hai từ là rất tuyệt rồi. Ví dụ, bạn nghe thấy \"Xin chào\", \"Tôi thích mèo\", bạn hãy nói \"À, tôi hiểu rồi\"."
+    },
+    {
+      "start": 185.07,
+      "end": 191.67,
+      "en": "This way, you will be happy and want to continue learning. Third, you can write in Chinese.",
+      "zh": "这样你会很开心，也会想继续学下去，第三你可以写一写中文",
+      "pinyin": "Zhè yàng nǐ huì hěn kāi xīn， yě huì xiǎng jì xù xué xià qù， dì sān nǐ kě yǐ xiě yi xiě zhōng wén",
+      "vi": "Như vậy bạn sẽ rất vui và muốn tiếp tục học. Thứ ba, bạn có thể viết tiếng Trung."
+    },
+    {
+      "start": 191.73,
+      "end": 200.83,
+      "en": "Don't be afraid of making mistakes; it's okay to write incorrectly. The important thing is that you dare to write. You can write \"Today is Sunday.\"",
+      "zh": "不要怕写错，写错没有关系，重要的是你敢写，你可以写，今天是星期天",
+      "pinyin": "Bú yào pà xiě cuò， xiě cuò méi yǒu guān xì， zhòng yào de shì nǐ gǎn xiě， nǐ kě yǐ xiě， jīn tiān shì xīng qī tiān",
+      "vi": "Đừng sợ viết sai, viết sai không sao cả, quan trọng là bạn dám viết. Bạn có thể viết \"Hôm nay là Chủ nhật\"."
+    },
+    {
+      "start": 200.9,
+      "end": 210.87,
+      "en": "\"I ate noodles,\" \"I think it's delicious.\" Three sentences are enough. Do this for a while, and you will find your Chinese getting better and better.",
+      "zh": "我吃了面条，我觉得很好吃，三句就够了，这样做一段时间，你会发现你的中文越来越好了",
+      "pinyin": "Wǒ chī le miàn tiáo， wǒ jué de hěn hǎo chī， sān jù jiù gòu le， zhè yàng zuò yí duàn shí jiān， nǐ huì fā xiàn nǐ de zhōng wén yuè lái yuè hǎo le",
+      "vi": "\"Tôi ăn mì\", \"Tôi thấy rất ngon\". Ba câu là đủ. Làm như vậy một thời gian, bạn sẽ thấy tiếng Trung của mình ngày càng tốt hơn."
+    },
+    {
+      "start": 210.87,
+      "end": 217.73,
+      "en": "There is another small tip: you can record your own voice. For example, say \"My name is Xiao Ming.\"",
+      "zh": "还有一个小方法，你可以录下你自己的声音，比如你说我叫小明",
+      "pinyin": "Hái yǒu yí gè xiǎo fāng fǎ， nǐ kě yǐ lù xià nǐ zì jǐ de shēng yīn， bǐ rú nǐ shuō wǒ jiào xiǎo míng",
+      "vi": "Còn có một mẹo nhỏ, bạn có thể thu âm giọng nói của mình, ví dụ bạn nói \"Tên tôi là Tiểu Minh\"."
+    },
+    {
+      "start": 217.73,
+      "end": 225.77,
+      "en": "\"I like learning Chinese.\" Then listen back and see how you sound. Hearing your own voice is a bit strange.",
+      "zh": "我喜欢学中文，然后你听一听，看看自己说的怎么样，听自己的声音有一点奇怪",
+      "pinyin": "Wǒ xǐ huan xué zhōng wén， rán hòu nǐ tīng yi tīng， kàn kàn zì jǐ shuō de zěn me yàng， tīng zì jǐ de shēng yīn yǒu yì diǎn qí guài",
+      "vi": "\"Tôi thích học tiếng Trung\". Sau đó bạn nghe lại và xem mình nói thế nào. Nghe giọng mình có chút kỳ lạ."
+    },
+    {
+      "start": 226.13,
+      "end": 233.53,
+      "en": "But this is a very good practice method. Sometimes you will feel, \"Ah, I don't speak well.\"",
+      "zh": "但这是一个很好的练习方法，有时候你会觉得啊，我说的不好",
+      "pinyin": "Dàn zhè shì yí gè hěn hǎo de liàn xí fāng fǎ， yǒu shí hòu nǐ huì jué de a， wǒ shuō de bù hǎo",
+      "vi": "Nhưng đây là một phương pháp luyện tập rất tốt. Đôi khi bạn sẽ cảm thấy \"À, tôi nói không tốt\"."
+    },
+    {
+      "start": 233.53,
+      "end": 242.47,
+      "en": "\"I don't understand,\" \"I speak too slowly.\" It's okay; we all progress slowly. In one weekend, perhaps you only learned two words.",
+      "zh": "我听不懂，我太慢了，没关系我们都是慢慢来，一个周末，也许你只学了两个词",
+      "pinyin": "Wǒ tīng bù dǒng， wǒ tài màn le， méi guān xì wǒ men dōu shì màn màn lái， yí gè zhōu mò， yě xǔ nǐ zhī xué le liǎng gè cí",
+      "vi": "\"Tôi không hiểu\", \"Tôi nói quá chậm\". Không sao cả, chúng ta đều tiến bộ từ từ. Một cuối tuần, có lẽ bạn chỉ học được hai từ."
+    },
+    {
+      "start": 242.67,
+      "end": 252.07,
+      "en": "But these two words belong to you, you learned them, they are your progress; every small step becomes a big change.",
+      "zh": "但这两个词是你的，是你学来的，是你的进步，每个小小的进步都会变成大的变化",
+      "pinyin": "Dàn zhè liǎng gè cí shì nǐ de， shì nǐ xué lái de， shì nǐ de jìn bù， měi gè xiǎo xiǎo de jìn bù dōu huì biàn chéng dà de biàn huà",
+      "vi": "Nhưng hai từ này là của bạn, được bạn học, là sự tiến bộ của bạn; mỗi bước tiến nhỏ sẽ trở thành sự thay đổi lớn."
+    },
+    {
+      "start": 252.07,
+      "end": 259.7,
+      "en": "So next weekend, when you’re resting, ask yourself: what did I learn today?",
+      "zh": "所以下个周末，当你在休息的时候，问问自己我今天学了什么",
+      "pinyin": "Suǒ yǐ xià gè zhōu mò， dāng nǐ zài xiū xi de shí hòu， wèn wèn zì jǐ wǒ jīn tiān xué le shén me",
+      "vi": "Vì vậy, vào cuối tuần tới, khi bạn đang nghỉ ngơi, hãy tự hỏi mình: hôm nay tôi đã học gì?"
+    },
+    {
+      "start": 259.93,
+      "end": 266.3,
+      "en": "Not for exams, nor for others, but for yourself; you will realize.",
+      "zh": "不是为了考试，也不是为了别人，而是为了你自己，你会发现",
+      "pinyin": "Bú shì wèi le kǎo shì， yě bú shì wèi le bié rén， ér shì wèi le nǐ zì jǐ， nǐ huì fā xiàn",
+      "vi": "Không phải vì kỳ thi, cũng không vì người khác, mà vì chính bản thân bạn; bạn sẽ nhận ra."
+    },
+    {
+      "start": 266.33,
+      "end": 272.1,
+      "en": "Learning Chinese isn’t actually that hard; it’s in every small choice you make.",
+      "zh": "学习中文其实没有那么难，他就在你每一个小小的选择里",
+      "pinyin": "Xué xí zhōng wén qí shí méi yǒu nà me nán， tā jiù zài nǐ měi yí gè xiǎo xiǎo de xuǎn zé lǐ",
+      "vi": "Học tiếng Trung thực sự không khó như vậy, nó nằm trong từng lựa chọn nhỏ của bạn."
+    },
+    {
+      "start": 272.17,
+      "end": 279.6,
+      "en": "So how can we start? I’ll tell you three simple ways to make your weekend study more enjoyable.",
+      "zh": "那我们可以怎么开始，我来告诉你3个简单的方法，让你的周末学习更有意思",
+      "pinyin": "Nà wǒ men kě yǐ zěn me kāi shǐ， wǒ lái gào sù nǐ 3 gè jiǎn dān de fāng fǎ， ràng nǐ de zhōu mò xué xí gèng yǒu yì sī",
+      "vi": "Vậy chúng ta có thể bắt đầu như thế nào? Tôi sẽ giới thiệu ba cách đơn giản để làm cho việc học cuối tuần của bạn thú vị hơn."
+    },
+    {
+      "start": 279.6,
+      "end": 287.83,
+      "en": "And more effective, the first method is review: take a notebook and write, ‘What did I learn this week?’",
+      "zh": "也更有效，第一个方法是回顾，你可以拿出一本笔记本写，上这周我学了什么",
+      "pinyin": "Yě gèng yǒu xiào， dì yī gè fāng fǎ shì huí gù， nǐ kě yǐ ná chū yì běn bǐ jì běn xiě， shàng zhè zhōu wǒ xué le shén me",
+      "vi": "Và hiệu quả hơn, phương pháp đầu tiên là ôn lại: bạn có thể lấy một cuốn sổ tay và ghi: ‘Trong tuần này tôi đã học gì’."
+    },
+    {
+      "start": 287.87,
+      "end": 296.7,
+      "en": "Then see how much you remember, for example you learned these words: morning, school, eat, meal, teacher, friend.",
+      "zh": "然后看看你记得多少，比如你学了这些词，早上学校吃饭，老师朋友",
+      "pinyin": "Rán hòu kàn kàn nǐ jì dé duō shǎo， bǐ rú nǐ xué le zhè xiē cí， zǎo shàng xué xiào chī fàn， lǎo shī péng yǒu",
+      "vi": "Sau đó xem bạn nhớ bao nhiêu, ví dụ bạn đã học những từ này: buổi sáng, trường, ăn, bạn bè, giáo viên."
+    },
+    {
+      "start": 296.8,
+      "end": 305.43,
+      "en": "You can try making sentences with them, e.g., ‘At 8 a.m. I go to school, and I eat with my friends.’",
+      "zh": "你可以试着用他们造句，比如早上8点我去学校，我和朋友一起吃饭",
+      "pinyin": "Nǐ kě yǐ shì zhe yòng tā men zào jù， bǐ rú zǎo shàng 8 diǎn wǒ qù xué xiào， wǒ hé péng yǒu yì qǐ chī fàn",
+      "vi": "Bạn có thể thử dùng chúng để tạo câu, ví dụ: ‘Sáng lúc 8 giờ, tôi đi học, tôi và bạn bè ăn cùng nhau.’"
+    },
+    {
+      "start": 305.53,
+      "end": 316.27,
+      "en": "This way you’re not just memorizing a word, but using it; that’s progress. The second method is watching and listening.",
+      "zh": "这样你不只是记住一个词，而是会用这个词，这就是进步，第二个方法是看和听",
+      "pinyin": "Zhè yàng nǐ bù zhǐ shì jì zhù yí gè cí， ér shì huì yòng zhè ge cí， zhè jiù shì jìn bù， dì èr gè fāng fǎ shì kàn hé tīng",
+      "vi": "Như vậy bạn không chỉ nhớ một từ, mà còn biết cách dùng nó; đó là tiến bộ. Phương pháp thứ hai là xem và nghe."
+    },
+    {
+      "start": 316.67,
+      "end": 323.3,
+      "en": "Many people say they don’t understand Chinese because they listen too little; don’t be afraid of not understanding.",
+      "zh": "很多人说我听不懂中文，那是因为你听的太少了，不要怕听不懂",
+      "pinyin": "Hěn duō rén shuō wǒ tīng bù dǒng zhōng wén， nà shì yīn wèi nǐ tīng de tài shǎo le， bú yào pà tīng bù dǒng",
+      "vi": "Nhiều người nói họ không hiểu tiếng Trung vì họ nghe quá ít; đừng sợ không hiểu."
+    },
+    {
+      "start": 323.73,
+      "end": 332.43,
+      "en": "You can start with simple videos, such as learning channels, Chinese stories, or cartoons with slow audio.",
+      "zh": "你可以从简单的视频开始，比如学习频道，中文故事，动画片有的声音很慢",
+      "pinyin": "Nǐ kě yǐ cóng jiǎn dān de shì pín kāi shǐ， bǐ rú xué xí pín dào， zhōng wén gù shì， dòng huà piàn yǒu de shēng yīn hěn màn",
+      "vi": "Bạn có thể bắt đầu với các video đơn giản, như kênh học, câu chuyện tiếng Trung, hoặc phim hoạt hình có âm thanh chậm."
+    },
+    {
+      "start": 332.47,
+      "end": 340.67,
+      "en": "There are also subtitles, perfect for practice; you can listen to a sentence, pause, and think about its meaning.",
+      "zh": "也有字幕，非常适合我们练习，你可以先听一句，然后暂停，想一想他的意思",
+      "pinyin": "Yě yǒu zì mù， fēi cháng shì hé wǒ men liàn xí， nǐ kě yǐ xiān tīng yí jù， rán hòu zàn tíng， xiǎng yi xiǎng tā de yì sī",
+      "vi": "Cũng có phụ đề, rất phù hợp cho việc luyện tập; bạn có thể nghe một câu rồi tạm dừng, suy nghĩ về ý nghĩa của nó."
+    },
+    {
+      "start": 340.8,
+      "end": 347.83,
+      "en": "Listen again, maybe one sentence at a time, don’t rush; after several listens, you’ll understand more and more.",
+      "zh": "再听一遍，可以一句一句来，不要着急，这样听几次，你会越来越懂",
+      "pinyin": "Zài tīng yí biàn， kě yǐ yí jù yi jù lái， bú yào zháo jí， zhè yàng tīng jǐ cì， nǐ huì yuè lái yuè dǒng",
+      "vi": "Lắng nghe lại, có thể từng câu một, đừng vội; sau vài lần nghe, bạn sẽ hiểu dần."
+    },
+    {
+      "start": 347.9,
+      "end": 355.1,
+      "en": "You can also learn Chinese by looking at pictures, e.g., see a picture of someone eating an apple.",
+      "zh": "你也可以看图片学中文，比如你看一张图，有一个人正在吃苹果",
+      "pinyin": "Nǐ yě kě yǐ kàn tú piàn xué zhōng wén， bǐ rú nǐ kàn yì zhāng tú， yǒu yí gè rén zhèng zài chī píng guǒ",
+      "vi": "Bạn cũng có thể học tiếng Trung qua hình ảnh, ví dụ nhìn một bức tranh có một người đang ăn táo."
+    },
+    {
+      "start": 355.17,
+      "end": 361.47,
+      "en": "You say he is eating an apple; if you don’t know how to say ‘apple’, look it up.",
+      "zh": "你就说他在吃苹果，如果你不知道苹果怎么说，就去查一查",
+      "pinyin": "Nǐ jiù shuō tā zài chī píng guǒ， rú guǒ nǐ bù zhī dào píng guǒ zěn me shuō， jiù qù chá yi chá",
+      "vi": "Bạn nói rằng anh ấy đang ăn táo; nếu bạn không biết từ ‘táo’ là gì, hãy tra cứu."
+    },
+    {
+      "start": 361.7,
+      "end": 370.4,
+      "en": "Then say it again. This way, you will truly learn the word \"apple\" and know how to use it in a sentence.",
+      "zh": "然后再说一遍，这样你就真的学会了苹果这个词，也知道怎么用它说一句话了",
+      "pinyin": "Rán hòu zài shuō yí biàn， zhè yàng nǐ jiù zhēn de xué huì le píng guǒ zhè ge cí， yě zhī dào zěn me yòng tā shuō yí jù huà le",
+      "vi": "Sau đó, hãy nói lại một lần nữa, như vậy bạn sẽ thực sự học được từ \"táo\" và biết cách dùng nó để tạo thành một câu."
+    },
+    {
+      "start": 370.4,
+      "end": 380.57,
+      "en": "The third method is to speak it out and write it down. Many people are afraid to speak because they fear making mistakes, but it is actually okay to make mistakes.",
+      "zh": "第三个方法是说出来，写下来很多人不敢说，因为怕说错，其实说错没有关系",
+      "pinyin": "Dì sān gè fāng fǎ shì shuō chū lái， xiě xià lái hěn duō rén bù gǎn shuō， yīn wèi pà shuō cuò， qí shí shuō cuò méi yǒu guān xì",
+      "vi": "Phương pháp thứ ba là nói ra và viết xuống. Nhiều người không dám nói vì sợ sai, nhưng thực ra nói sai cũng không sao."
+    },
+    {
+      "start": 380.57,
+      "end": 387.37,
+      "en": "We learn Chinese not for exams, but for communication. You can say three sentences every day.",
+      "zh": "我们说中文不是为了考试，而是为了交流，你可以每天说三句话",
+      "pinyin": "Wǒ men shuō zhōng wén bú shì wèi le kǎo shì， ér shì wèi le jiāo liú， nǐ kě yǐ měi tiān shuō sān jù huà",
+      "vi": "Chúng ta học tiếng Trung không phải để thi cử, mà là để giao tiếp. Bạn có thể nói ba câu mỗi ngày."
+    },
+    {
+      "start": 387.67,
+      "end": 395.17,
+      "en": "For example: Today is Saturday, I went to the supermarket to buy groceries, I am very happy. These sentences are all very simple.",
+      "zh": "比如今天是星期六，我去超市买菜，我很高兴，这些句子都很简单",
+      "pinyin": "Bǐ rú jīn tiān shì xīng qī liù， wǒ qù chāo shì mǎi cài， wǒ hěn gāo xìng， zhè xiē jù zi dōu hěn jiǎn dān",
+      "vi": "Ví dụ: Hôm nay là thứ Bảy, tôi đi siêu thị mua rau, tôi rất vui. Những câu này đều rất đơn giản."
+    },
+    {
+      "start": 395.17,
+      "end": 402.3,
+      "en": "And they are also very practical. You can also write three sentences every day, for example: Today I drank coffee.",
+      "zh": "也都很实用，你也可以每天写三句话，比如写我今天喝了咖啡",
+      "pinyin": "Yě dōu hěn shí yòng， nǐ yě kě yǐ měi tiān xiě sān jù huà， bǐ rú xiě wǒ jīn tiān hē le kā fēi",
+      "vi": "Và cũng rất thực dụng. Bạn cũng có thể viết ba câu mỗi ngày, ví dụ viết: Hôm nay tôi đã uống cà phê."
+    },
+    {
+      "start": 402.33,
+      "end": 409.5,
+      "en": "I read a book, I learned two new words. Don't overthink it; just write it down first.",
+      "zh": "我看了一本书，我学了两个新词，不要想太多，先写出来就好",
+      "pinyin": "Wǒ kàn le yì běn shū， wǒ xué le liǎng gè xīn cí， bú yào xiǎng tài duō， xiān xiě chū lái jiù hǎo",
+      "vi": "Tôi đã đọc một cuốn sách, tôi đã học hai từ mới. Đừng nghĩ quá nhiều, cứ viết ra trước đã."
+    },
+    {
+      "start": 409.57,
+      "end": 417.6,
+      "en": "Three sentences a day, that's ninety sentences in a month. Think about it: if you could speak ninety Chinese sentences right now.",
+      "zh": "每天3句，一个月就是九十句，你想一想，如果你现在能说九十句中文",
+      "pinyin": "Měi tiān 3 jù， yí gè yuè jiù shì jiǔ shí jù， nǐ xiǎng yi xiǎng， rú guǒ nǐ xiàn zài néng shuō jiǔ shí jù zhōng wén",
+      "vi": "Mỗi ngày 3 câu, một tháng là 90 câu. Hãy nghĩ xem, nếu bây giờ bạn có thể nói 90 câu tiếng Trung."
+    },
+    {
+      "start": 417.67,
+      "end": 426.2,
+      "en": "Wouldn't that be amazing? Another method is to give yourself a small task, for example: Today I will learn three words: cat, fish.",
+      "zh": "是不是很厉害，还有一个方法是给自己一个小任务，比如今天我要学会三个词猫鱼",
+      "pinyin": "Shì bu shì hěn lì hài， hái yǒu yí gè fāng fǎ shì gěi zì jǐ yí gè xiǎo rèn wu， bǐ rú jīn tiān wǒ yào xué huì sān gè cí māo yú",
+      "vi": "Liệu có phải rất tuyệt vời không? Một phương pháp khác là tự đặt cho mình một nhiệm vụ nhỏ, ví dụ hôm nay tôi sẽ học ba từ: mèo, cá."
+    },
+    {
+      "start": 426.2,
+      "end": 435.23,
+      "en": "If you like it, I'll write a sentence: I like cats, cats like fish, it's fun, learning Chinese can be like playing.",
+      "zh": "喜欢那我就写一句话我喜欢猫，猫喜欢鱼，很有趣吧，学中文也可以像玩一样",
+      "pinyin": "Xǐ huan nà wǒ jiù xiě yí jù huà wǒ xǐ huan māo， māo xǐ huan yú， hěn yǒu qù ba， xué zhōng wén yě kě yǐ xiàng wán yí yàng",
+      "vi": "Nếu bạn thích, tôi sẽ viết một câu: Tôi thích mèo, mèo thích cá, thật thú vị, học tiếng Trung cũng có thể như chơi."
+    },
+    {
+      "start": 435.33,
+      "end": 442.17,
+      "en": "You can play a Chinese word chain with friends, one person says a sentence, the other continues.",
+      "zh": "你可以和朋友一起玩中文接龙，一个人说一句，另一个人接一句",
+      "pinyin": "Nǐ kě yǐ hé péng yǒu yì qǐ wán zhōng wén jiē lóng， yí gè rén shuō yí jù， lìng yí gè rén jiē yí jù",
+      "vi": "Bạn có thể chơi trò nối câu tiếng Trung cùng bạn bè, một người nói một câu, người kia tiếp tục."
+    },
+    {
+      "start": 442.3,
+      "end": 449.37,
+      "en": "This is not only fun but also practice; as long as you start, weekends won't be wasted.",
+      "zh": "这样不但好玩，还能练习，只要你愿意开始，周末就不是浪费时间",
+      "pinyin": "Zhè yàng bú dàn hǎo wán， hái néng liàn xí， zhǐ yào nǐ yuàn yì kāi shǐ， zhōu mò jiù bú shì làng fèi shí jiān",
+      "vi": "Điều này không chỉ vui mà còn luyện tập; miễn là bạn muốn bắt đầu, cuối tuần sẽ không phải là lãng phí thời gian."
+    },
+    {
+      "start": 449.37,
+      "end": 457.37,
+      "en": "It's actually time for progress; take it step by step, and you'll realize Chinese can really be learned.",
+      "zh": "而是进步的时间，慢慢来一步一步，你会发现中文真的可以学会",
+      "pinyin": "Ér shì jìn bù de shí jiān， màn màn lái yí bù yi bù， nǐ huì fā xiàn zhōng wén zhēn de kě yǐ xué huì",
+      "vi": "Thay vào đó là thời gian tiến bộ, từng bước một, bạn sẽ nhận ra tiếng Trung thực sự có thể học được."
+    },
+    {
+      "start": 457.37,
+      "end": 459.57,
+      "en": "And you'll like it more and more.",
+      "zh": "而且你会越来越喜欢他",
+      "pinyin": "Ér qiě nǐ huì yuè lái yuè xǐ huan tā",
+      "vi": "Và bạn sẽ ngày càng thích nó."
+    },
+    {
+      "start": 461.7,
+      "end": 467.63,
+      "en": "I want to share a short story with you, about a beginner learning Chinese.",
+      "zh": "我想和你分享一个小故事，这个故事是关于一个中文初学者",
+      "pinyin": "Wǒ xiǎng hé nǐ fēn xiǎng yí gè xiǎo gù shì， zhè ge gù shì shì guān yú yí gè zhōng wén chū xué zhě",
+      "vi": "Tôi muốn chia sẻ với bạn một câu chuyện nhỏ, câu chuyện này kể về một người học tiếng Trung mới bắt đầu."
+    },
+    {
+      "start": 467.67,
+      "end": 476.87,
+      "en": "Her name is Anna, she is a student, currently studying HSK 1, she is busy, from Monday to Friday she has classes.",
+      "zh": "他叫安娜，安娜是一个学生，现在在学一，他平时很忙，周一到周五要上课",
+      "pinyin": "Tā jiào ān nà， ān nà shì yí gè xué shēng， xiàn zài zài xué yī， tā píng shí hěn máng， zhōu yī dào zhōu wǔ yào shàng kè",
+      "vi": "Cô ấy tên là Anna, Anna là một sinh viên, hiện đang học HSK 1, cô ấy thường bận, từ thứ Hai đến thứ Sáu phải đi học."
+    },
+    {
+      "start": 476.87,
+      "end": 486.23,
+      "en": "She also had to work part-time. She said she didn't have time to learn Chinese, but later she decided to learn a little every weekend.",
+      "zh": "还要打工，他说我没有时间学中文，但是后来，他决定每个周末学一点点",
+      "pinyin": "Hái yào dǎ gōng， tā shuō wǒ méi yǒu shí jiān xué zhōng wén， dàn shì hòu lái， tā jué dìng měi gè zhōu mò xué yì diǎn diǎn",
+      "vi": "Còn phải đi làm thêm, cô ấy nói mình không có thời gian học tiếng Trung, nhưng sau đó cô ấy quyết định mỗi cuối tuần học một chút."
+    },
+    {
+      "start": 486.27,
+      "end": 492.8,
+      "en": "How does she do it? Every Saturday morning, she sits by the window and drinks a cup of coffee.",
+      "zh": "他怎么做呢，每个星期六早上，他都会坐在窗边喝一杯咖啡",
+      "pinyin": "Tā zěn me zuò ne， měi gè xīng qī liù zǎo shàng， tā dōu huì zuò zài chuāng biān hē yì bēi kā fēi",
+      "vi": "Cô ấy làm thế nào? Mỗi sáng thứ Bảy, cô ấy đều ngồi bên cửa sổ uống một ly cà phê."
+    },
+    {
+      "start": 492.97,
+      "end": 500.8,
+      "en": "Then she opens her Chinese notebook. She first reads the sentences she wrote last week, such as \"I like drinking tea.\"",
+      "zh": "然后打开他的中文本子，他会先读一读上周写的句子，比如我喜欢喝茶",
+      "pinyin": "Rán hòu dǎ kāi tā de zhōng wén běn zi， tā huì xiān dú yi dú shàng zhōu xiě de jù zi， bǐ rú wǒ xǐ huan hē chá",
+      "vi": "Sau đó mở cuốn vở tiếng Trung của mình, cô ấy sẽ đọc lại những câu đã viết tuần trước, ví dụ như \"Tôi thích uống trà\"."
+    },
+    {
+      "start": 500.8,
+      "end": 509.1,
+      "en": "Today is sunny; I went to the supermarket and bought eggs. After reading, she tries to say them without looking at her notes.",
+      "zh": "今天是晴天，我去超市买了鸡蛋，读完以后他会试着不看笔记说出来",
+      "pinyin": "Jīn tiān shì qíng tiān， wǒ qù chāo shì mǎi le jī dàn， dú wán yǐ hòu tā huì shì zhe bú kàn bǐ jì shuō chū lái",
+      "vi": "Hôm nay trời nắng, tôi đi siêu thị mua trứng. Sau khi đọc xong, cô ấy sẽ thử nói lại mà không nhìn vào ghi chú."
+    },
+    {
+      "start": 509.1,
+      "end": 517.2,
+      "en": "At first she found it a bit difficult, spoke very slowly, and sometimes made mistakes, but she didn't give up.",
+      "zh": "刚开始他觉得有点难，说的很慢，有时也说错了，但是他不放弃",
+      "pinyin": "Gāng kāi shǐ tā jué de yǒu diǎn nán， shuō de hěn màn， yǒu shí yě shuō cuò le， dàn shì tā bú fàng qì",
+      "vi": "Lúc đầu cô ấy thấy hơi khó, nói rất chậm, đôi khi còn nói sai, nhưng cô ấy không bỏ cuộc."
+    },
+    {
+      "start": 517.27,
+      "end": 525.27,
+      "en": "She would smile and say it again. She said, \"What I say isn't perfect, but I am speaking.\"",
+      "zh": "他会笑一笑，然后再说一遍，他说我说的不完美，但是我在说",
+      "pinyin": "Tā huì xiào yi xiào， rán hòu zài shuō yí biàn， tā shuō wǒ shuō de bù wán měi， dàn shì wǒ zài shuō",
+      "vi": "Cô ấy sẽ mỉm cười rồi nói lại một lần nữa. Cô ấy nói: \"Mình nói chưa hoàn hảo, nhưng mình đang nói.\""
+    },
+    {
+      "start": 525.33,
+      "end": 533.17,
+      "en": "I'm learning. Then she opens her phone and listens to a simple Chinese podcast. The first time she listens,",
+      "zh": "我在学接着他会打开手机，听一个简单的中文播课，第一次听",
+      "pinyin": "Wǒ zài xué jiē zhe tā huì dǎ kāi shǒu jī， tīng yí gè jiǎn dān de zhōng wén bō kè， dì yī cì tīng",
+      "vi": "Mình đang học. Tiếp theo, cô ấy mở điện thoại, nghe một podcast tiếng Trung đơn giản. Lần đầu nghe,"
+    },
+    {
+      "start": 533.17,
+      "end": 544.1,
+      "en": "she only understood one word, \"hello.\" The second time she listened, she understood \"My name is Xiao Wang.\" The third time, she could understand a complete sentence.",
+      "zh": "他只听懂一个词，你好第二次听，他又听懂了我叫小王，第三次他能听懂一句完整的话",
+      "pinyin": "Tā zhī tīng dǒng yí gè cí， nǐ hǎo dì èr cì tīng， tā yòu tīng dǒng le wǒ jiào xiǎo wáng， dì sān cì tā néng tīng dǒng yí jù wán zhěng de huà",
+      "vi": "cô ấy chỉ hiểu được một từ, \"xin chào\". Lần thứ hai nghe, cô ấy lại hiểu được \"Tôi tên là Tiểu Vương\". Lần thứ ba, cô ấy có thể hiểu được một câu hoàn chỉnh."
+    },
+    {
+      "start": 544.3,
+      "end": 553.3,
+      "en": "Today I'm going to the park. She is very happy and feels she has really made progress. Then she writes a little something.",
+      "zh": "我今天去公园，他非常高兴，觉得自己真的有进步，然后他会写一点东西",
+      "pinyin": "Wǒ jīn tiān qù gōng yuán， tā fēi cháng gāo xìng， jué de zì jǐ zhēn de yǒu jìn bù， rán hòu tā huì xiě yì diǎn dōng xī",
+      "vi": "Hôm nay tôi đi công viên. Cô ấy rất vui, cảm thấy mình thật sự có tiến bộ. Sau đó cô ấy sẽ viết một chút gì đó."
+    },
+    {
+      "start": 553.8,
+      "end": 561.6,
+      "en": "Her sentences are very simple, but they are her own, for example, \"Today is Sunday; I didn't go to school.\"",
+      "zh": "他的句子很简单，但都是他自己的，比如今天是星期天，我没去学校",
+      "pinyin": "Tā de jù zi hěn jiǎn dān， dàn dōu shì tā zì jǐ de， bǐ rú jīn tiān shì xīng qī tiān， wǒ méi qù xué xiào",
+      "vi": "Những câu của cô ấy rất đơn giản, nhưng đều là của chính cô ấy, ví dụ \"Hôm nay là Chủ nhật, tôi không đến trường\"."
+    },
+    {
+      "start": 561.6,
+      "end": 570.57,
+      "en": "I ate fruit. She said, \"When I write, my mind is thinking in Chinese; that is the best time to learn.\"",
+      "zh": "我吃了水果，他说我写的时候我的脑子在想中文，这就是学习最好的时候",
+      "pinyin": "Wǒ chī le shuǐ guǒ， tā shuō wǒ xiě de shí hòu wǒ de nǎo zǐ zài xiǎng zhōng wén， zhè jiù shì xué xí zuì hǎo de shí hòu",
+      "vi": "Tôi đã ăn trái cây. Cô ấy nói: \"Khi mình viết, đầu óc mình đang nghĩ bằng tiếng Trung, đây chính là lúc học tốt nhất.\""
+    },
+    {
+      "start": 570.57,
+      "end": 577.67,
+      "en": "A month later, Anna found that she could say complete sentences. When she went shopping,",
+      "zh": "一个月以后，安娜发现自己可以说完，整的句子了，他去买东西的时候",
+      "pinyin": "Yí gè yuè yǐ hòu， ān nà fā xiàn zì jǐ kě yǐ shuō wán， zhěng de jù zi le， tā qù mǎi dōng xī de shí hòu",
+      "vi": "Một tháng sau, Anna phát hiện mình có thể nói được những câu hoàn chỉnh. Khi cô ấy đi mua đồ,"
+    },
+    {
+      "start": 577.7,
+      "end": 585.6,
+      "en": "she could say to the shopkeeper, \"I'd like an apple, thank you.\" The shopkeeper understood and even said, \"Your Chinese is very good.\"",
+      "zh": "可以对老板说我要一个苹果，谢谢老板听懂了，还说你的中文很好",
+      "pinyin": "Kě yǐ duì lǎo bǎn shuō wǒ yào yí gè píng guǒ， xiè xiè lǎo bǎn tīng dǒng le， hái shuō nǐ de zhōng wén hěn hǎo",
+      "vi": "cô ấy có thể nói với người bán hàng: \"Tôi muốn một quả táo, cảm ơn.\" Người bán hàng hiểu được, còn nói: \"Tiếng Trung của bạn rất tốt.\""
+    },
+    {
+      "start": 585.6,
+      "end": 595.87,
+      "en": "After hearing that, Anna was very happy. She told me, \"Before, I always said I couldn't; now I say I can give it a try.\"",
+      "zh": "安娜听了以后非常开心，他告诉我，以前我总是说我不会，现在我说我可以试一试",
+      "pinyin": "Ān nà tīng le yǐ hòu fēi cháng kāi xīn， tā gào sù wǒ， yǐ qián wǒ zǒng shì shuō wǒ bú huì， xiàn zài wǒ shuō wǒ kě yǐ shì yi shì",
+      "vi": "Anna nghe xong rất vui. Cô ấy nói với tôi: \"Trước đây mình luôn nói mình không biết, bây giờ mình nói mình có thể thử.\""
+    },
+    {
+      "start": 596,
+      "end": 604.43,
+      "en": "She doesn't learn much, but she makes a little progress every week. She said, \"I'm not the fastest, but I'm moving forward.\"",
+      "zh": "他学的不多，但他每周都有一点点，他说我不是最快的，但我在前进",
+      "pinyin": "Tā xué de bù duō， dàn tā měi zhōu dōu yǒu yì diǎn diǎn， tā shuō wǒ bú shì zuì kuài de， dàn wǒ zài qián jìn",
+      "vi": "Cô ấy học không nhiều, nhưng tuần nào cũng có một chút. Cô ấy nói: \"Mình không phải người nhanh nhất, nhưng mình đang tiến về phía trước.\""
+    },
+    {
+      "start": 604.53,
+      "end": 611.9,
+      "en": "This story tells us that you don't need a lot of time, nor do you need to be very smart; all you need is a heart.",
+      "zh": "这个故事告诉我们，不需要很多时间，也不需要很聪明，你只要有心",
+      "pinyin": "Zhè ge gù shì gào sù wǒ men， bù xū yào hěn duō shí jiān， yě bù xū yào hěn cōng ming， nǐ zhǐ yào yǒu xīn",
+      "vi": "Câu chuyện này cho chúng ta biết, không cần nhiều thời gian, cũng không cần phải thông minh, chỉ cần có trái tim."
+    },
+    {
+      "start": 611.9,
+      "end": 620.43,
+      "en": "You can start like Anna, learning a little each weekend, saying a sentence, listening to an audio clip.",
+      "zh": "就可以开始像安娜一样，每个周末学一点点，说一句话，听一段音频",
+      "pinyin": "Jiù kě yǐ kāi shǐ xiàng ān nà yí yàng， měi gè zhōu mò xué yì diǎn diǎn， shuō yí jù huà， tīng yí duàn yīn pín",
+      "vi": "Bạn có thể bắt đầu giống như Anna, học một chút mỗi cuối tuần, nói một câu, nghe một đoạn audio."
+    },
+    {
+      "start": 620.5,
+      "end": 630.1,
+      "en": "Write three sentences, you can do it too; don't wait until tomorrow, start today, and maybe after a month you'll realize it.",
+      "zh": "写三句话，你也可以做到，不要等明天，从今天开始，也许一个月后你就会发现啊",
+      "pinyin": "Xiě sān jù huà， nǐ yě kě yǐ zuò dào， bú yào děng míng tiān， cóng jīn tiān kāi shǐ， yě xǔ yí gè yuè hòu nǐ jiù huì fā xiàn a",
+      "vi": "Viết ba câu, bạn cũng có thể làm được, đừng chờ ngày mai, hãy bắt đầu từ hôm nay, có thể sau một tháng bạn sẽ nhận ra."
+    },
+    {
+      "start": 630.1,
+      "end": 636.27,
+      "en": "I can actually speak Chinese now; your Chinese grows little by little just like that.",
+      "zh": "我真的可以用中文说话了，你的中文就是这样一点一点长大的",
+      "pinyin": "Wǒ zhēn de kě yǐ yòng zhōng wén shuō huà le， nǐ de zhōng wén jiù shì zhè yàng yì diǎn yi diǎn zhǎng dà de",
+      "vi": "Tôi thực sự có thể nói tiếng Trung rồi, tiếng Trung của bạn cũng lớn dần từng chút một."
+    },
+    {
+      "start": 636.47,
+      "end": 642.5,
+      "en": "Anna also has a good habit: every Sunday evening she sits down and asks herself:",
+      "zh": "安娜还有一个好习惯，每个星期天晚上，他会坐下来问自己",
+      "pinyin": "Ān nà hái yǒu yí gè hǎo xí guàn， měi gè xīng qī tiān wǎn shàng， tā huì zuò xià lái wèn zì jǐ",
+      "vi": "Anna còn có một thói quen tốt, mỗi tối Chủ Nhật, cô ấy ngồi xuống và tự hỏi:"
+    },
+    {
+      "start": 642.5,
+      "end": 650.97,
+      "en": "What did I learn this weekend? She doesn't just learn; she also thinks, and she opens her phone.",
+      "zh": "我这个周末学到了什么，他不只是学，他还会想一想，他会打开手机",
+      "pinyin": "Wǒ zhè ge zhōu mò xué dào le shén me， tā bù zhǐ shì xué， tā hái huì xiǎng yi xiǎng， tā huì dǎ kāi shǒu jī",
+      "vi": "Tôi đã học được gì trong cuối tuần này? Cô ấy không chỉ học, mà còn suy nghĩ, cô ấy mở điện thoại."
+    },
+    {
+      "start": 650.97,
+      "end": 658.07,
+      "en": "Write down three questions: first, what new words did I learn? Second, what sentences did I say?",
+      "zh": "写下三个问题第一个，我学了哪些新词，第二个我说了哪些句子",
+      "pinyin": "Xiě xià sān gè wèn tí dì yī gè， wǒ xué le nǎ xiē xīn cí， dì èr gè wǒ shuō le nǎ xiē jù zi",
+      "vi": "Viết ba câu hỏi: thứ nhất, tôi đã học những từ mới nào; thứ hai, tôi đã nói những câu nào."
+    },
+    {
+      "start": 658.07,
+      "end": 664.37,
+      "en": "Third, I feel something is a bit difficult; she says this is the time to talk to herself.",
+      "zh": "第三个我觉得哪里有点难，他说这是他跟自己说话的时间",
+      "pinyin": "Dì sān gè wǒ jué de nǎ lǐ yǒu diǎn nán， tā shuō zhè shì tā gēn zì jǐ shuō huà de shí jiān",
+      "vi": "Thứ ba, tôi cảm thấy đâu hơi khó; cô ấy nói đây là thời gian nói chuyện với chính mình."
+    },
+    {
+      "start": 664.37,
+      "end": 671.27,
+      "en": "This small exercise is very useful; it lets her know that she doesn't just learn and forget.",
+      "zh": "这个小小的练习非常有用，他让他知道自己不是学过就忘",
+      "pinyin": "Zhè gè xiǎo xiǎo de liàn xí fēi cháng yǒu yòng， tā ràng tā zhī dào zì jǐ bú shì xué guò jiù wàng",
+      "vi": "Bài tập nhỏ này rất hữu ích, nó giúp cô ấy nhận ra mình không học rồi quên."
+    },
+    {
+      "start": 671.27,
+      "end": 678.1,
+      "en": "Instead, she records what she learns; every time she sees the sentences she wrote, she feels a sense of accomplishment.",
+      "zh": "而是学了有记录，每次他看到自己写的句子，就会很有成就感",
+      "pinyin": "Ér shì xué le yǒu jì lù， měi cì tā kàn dào zì jǐ xiě de jù zi， jiù huì hěn yǒu chéng jiù gǎn",
+      "vi": "Thay vào đó, cô ấy ghi chép; mỗi lần nhìn thấy những câu mình viết, cô ấy cảm thấy thành tựu."
+    },
+    {
+      "start": 678.1,
+      "end": 685.57,
+      "en": "She says, 'I'm not perfect, but I'm trying'; that's what we need most when learning a language.",
+      "zh": "他说我不是完美，但我在努力，这也是我们学习语言最需要的",
+      "pinyin": "Tā shuō wǒ bú shì wán měi， dàn wǒ zài nǔ lì， zhè yě shì wǒ men xué xí yǔ yán zuì xū yào de",
+      "vi": "Cô ấy nói: 'Tôi không hoàn hảo, nhưng tôi đang cố gắng'; đó cũng là điều chúng ta cần nhất khi học ngôn ngữ."
+    },
+    {
+      "start": 685.57,
+      "end": 693,
+      "en": "Believe in yourself, you can try it; at the end of the weekend, grab a sheet of paper and write three sentences.",
+      "zh": "相信自己，你也可以试试看，周末结束的时候拿一张纸写三句话",
+      "pinyin": "Xiāng xìn zì jǐ， nǐ yě kě yǐ shì shì kàn， zhōu mò jié shù de shí hòu ná yì zhāng zhǐ xiě sān jù huà",
+      "vi": "Tin vào bản thân, bạn cũng có thể thử; khi cuối tuần kết thúc, hãy lấy một tờ giấy và viết ba câu."
+    },
+    {
+      "start": 693.3,
+      "end": 703.63,
+      "en": "For example, I learned 'like', 'noodles', 'cinema'; I can say 'I like eating noodles', but I don't quite understand the word 'cinema'.",
+      "zh": "比如我学了喜欢面条电影院，我可以说我喜欢吃面条，我听不太懂电影院这个词",
+      "pinyin": "Bǐ rú wǒ xué le xǐ huan miàn tiáo diàn yǐng yuàn， wǒ kě yǐ shuō wǒ xǐ huan chī miàn tiáo， wǒ tīng bú tài dǒng diàn yǐng yuàn zhè ge cí",
+      "vi": "Ví dụ, tôi đã học từ 'like', 'noodles', 'cinema'; tôi có thể nói 'tôi thích ăn mì', nhưng tôi không hiểu rõ từ 'cinema'."
+    },
+    {
+      "start": 703.97,
+      "end": 712.73,
+      "en": "But I'll listen again; by writing it down, you won't forget, and you can also open your phone and record.",
+      "zh": "但我会再听一次，这样写下来你就不会忘记，你也可以用录音的方式打开手机",
+      "pinyin": "Dàn wǒ huì zài tīng yí cì， zhè yàng xiě xià lái nǐ jiù bú huì wàng jì， nǐ yě kě yǐ yòng lù yīn de fāng shì dǎ kāi shǒu jī",
+      "vi": "Nhưng tôi sẽ nghe lại; khi viết lại, bạn sẽ không quên, bạn cũng có thể mở điện thoại và ghi âm."
+    },
+    {
+      "start": 712.73,
+      "end": 721.97,
+      "en": "Say a sentence: today is Sunday, I learned three words; it sounds simple, but it's a good exercise.",
+      "zh": "说一句话，今天是星期天，我学了三个词，听起来很简单，但它是一个很好的练习",
+      "pinyin": "Shuō yí jù huà， jīn tiān shì xīng qī tiān， wǒ xué le sān gè cí， tīng qǐ lái hěn jiǎn dān， dàn tā shì yí gè hěn hǎo de liàn xí",
+      "vi": "Nói một câu: hôm nay là Chủ Nhật, tôi đã học ba từ, nghe có vẻ đơn giản, nhưng đó là một bài tập tốt."
+    },
+    {
+      "start": 722.2,
+      "end": 729.87,
+      "en": "You don't need to be perfect; as long as you speak, you've already won. Some people say, “I don't know how to start.”",
+      "zh": "你不需要完美，只要你开口说你就赢了，有的人会说我不知道怎么开始",
+      "pinyin": "Nǐ bù xū yào wán měi， zhǐ yào nǐ kāi kǒu shuō nǐ jiù yíng le， yǒu de rén huì shuō wǒ bù zhī dào zěn me kāi shǐ",
+      "vi": "Bạn không cần hoàn hảo, chỉ cần bạn nói ra, bạn đã chiến thắng. Có người sẽ nói: “Tôi không biết bắt đầu như thế nào”."
+    },
+    {
+      "start": 730.3,
+      "end": 740.2,
+      "en": "So start with a single word, like “school”; you say, “I went to school today,” then add another word, “teacher.”",
+      "zh": "那就从一个词开始，比如学校，你就说我今天去了学校，加一个词老师",
+      "pinyin": "Nà jiù cóng yí gè cí kāi shǐ， bǐ rú xué xiào， nǐ jiù shuō wǒ jīn tiān qù le xué xiào， jiā yí gè cí lǎo shī",
+      "vi": "Vậy hãy bắt đầu từ một từ, ví dụ “trường”, bạn nói: “Hôm nay tôi đã đi đến trường”, thêm một từ “giáo viên”."
+    },
+    {
+      "start": 740.27,
+      "end": 751.23,
+      "en": "I met the teacher at school; add another word, “book,” and the teacher gave me a book. See how one sentence becomes two.",
+      "zh": "我在学校见到了老师，再加一个词书，老师给了我一本书，你看一句话变成两句话",
+      "pinyin": "Wǒ zài xué xiào jiàn dào le lǎo shī， zài jiā yí gè cí shū， lǎo shī gěi le wǒ yì běn shū， nǐ kàn yí jù huà biàn chéng liǎng jù huà",
+      "vi": "Tôi gặp giáo viên ở trường, thêm một từ “sách”, giáo viên đã cho tôi một cuốn sách. Bạn thấy một câu trở thành hai câu."
+    },
+    {
+      "start": 751.37,
+      "end": 760.77,
+      "en": "Two sentences become three; that's progress. You can also make flashcards, writing the new words you learn on small cards.",
+      "zh": "两句话变成三句话，这就是进步，你也可以做一个词卡，把你学的新词写在小卡片上",
+      "pinyin": "Liǎng jù huà biàn chéng sān jù huà， zhè jiù shì jìn bù， nǐ yě kě yǐ zuò yí gè cí kǎ， bǎ nǐ xué de xīn cí xiě zài xiǎo kǎ piàn shàng",
+      "vi": "Hai câu trở thành ba câu; đó là tiến bộ. Bạn cũng có thể làm thẻ từ, ghi các từ mới học trên những tấm thẻ nhỏ."
+    },
+    {
+      "start": 760.8,
+      "end": 770.47,
+      "en": "One side is Chinese, the other is the meaning; look at three cards each day, and you'll have over 20 words per week. You don't need to remember every word.",
+      "zh": "一面是中文，一面是意思，每天看三张卡，每周就是多个词，你不需要记住所有的词",
+      "pinyin": "Yí miàn shì zhōng wén， yí miàn shì yì sī， měi tiān kàn sān zhāng kǎ， měi zhōu jiù shì duō gè cí， nǐ bù xū yào jì zhù suǒ yǒu de cí",
+      "vi": "Một mặt là tiếng Trung, mặt kia là nghĩa; mỗi ngày xem ba thẻ, mỗi tuần có hơn 20 từ. Bạn không cần nhớ hết mọi từ."
+    },
+    {
+      "start": 770.57,
+      "end": 777.53,
+      "en": "But as long as you remember one, you're moving forward. Learning Chinese isn't a race; it's not about who is fastest.",
+      "zh": "但只要记住一个，就是前进，学习中文不是比赛，不是谁最快",
+      "pinyin": "Dàn zhī yào jì zhù yí gè， jiù shì qián jìn， xué xí zhōng wén bú shì bǐ sài， bú shì shuí zuì kuài",
+      "vi": "Nhưng chỉ cần nhớ một từ là đã tiến lên. Học tiếng Trung không phải cuộc thi, không phải ai nhanh nhất."
+    },
+    {
+      "start": 777.53,
+      "end": 787.33,
+      "en": "Rather, it's about who persists the longest. A little each week—three sentences and three words per week—and you'll notice your Chinese gradually improving.",
+      "zh": "而是谁坚持的久，每周一点点，每周3句话，每周3个词，你会发现你的中文慢慢变好",
+      "pinyin": "Ér shì shuí jiān chí de jiǔ， měi zhōu yī diǎn diǎn， měi zhōu 3 jù huà， měi zhōu 3 gè cí， nǐ huì fā xiàn nǐ de zhōng wén màn màn biàn hǎo",
+      "vi": "Thay vào đó, ai kiên trì lâu dài. Mỗi tuần một chút, mỗi tuần 3 câu, 3 từ; bạn sẽ thấy tiếng Trung của mình dần cải thiện."
+    },
+    {
+      "start": 787.33,
+      "end": 794.5,
+      "en": "You can understand, speak, and write; the most important thing is that you start believing you can.",
+      "zh": "你听得懂，说得出写得下，最重要的是你开始相信自己可以",
+      "pinyin": "Nǐ tīng dé dǒng， shuō dé chū xiě dé xià， zuì zhòng yào de shì nǐ kāi shǐ xiāng xìn zì jǐ kě yǐ",
+      "vi": "Bạn có thể nghe hiểu, nói ra, viết; điều quan trọng nhất là bạn bắt đầu tin vào khả năng của mình."
+    },
+    {
+      "start": 794.67,
+      "end": 802.87,
+      "en": "So don't be afraid, don't wait for someone else to say “you can do it”; you can tell yourself, “I did it.”",
+      "zh": "所以不要怕，不要等别人告诉你加油，你自己就可以告诉自己我做到了",
+      "pinyin": "Suǒ yǐ bú yào pà， bú yào děng bié rén gào sù nǐ jiā yóu， nǐ zì jǐ jiù kě yǐ gào sù zì jǐ wǒ zuò dào le",
+      "vi": "Vì vậy đừng sợ, đừng chờ người khác nói “hãy cố gắng”; bạn có thể tự nói với mình: “Tôi đã làm được”."
+    },
+    {
+      "start": 802.9,
+      "end": 810.57,
+      "en": "Chinese isn't hard; the hard part is starting. You've already started, so you're already ahead.",
+      "zh": "中文不难，难的是开始，你已经开始了，那你就已经走在前面了",
+      "pinyin": "Zhōng wén bù nán， nán de shì kāi shǐ， nǐ yǐ jīng kāi shǐ le， nà nǐ jiù yǐ jīng zǒu zài qián miàn le",
+      "vi": "Tiếng Trung không khó, khó là bắt đầu. Bạn đã bắt đầu, vì vậy bạn đã đi trước."
+    },
+    {
+      "start": 810.57,
+      "end": 817.37,
+      "en": "Keep going, and you'll definitely see a different version of yourself. One day, Anna told me...",
+      "zh": "继续走下去，你一定会看到一个不一样的自己，有一天安娜告诉我",
+      "pinyin": "Jì xù zǒu xià qù， nǐ yí dìng huì kàn dào yí gè bù yí yàng de zì jǐ， yǒu yì tiān ān nà gào sù wǒ",
+      "vi": "Hãy tiếp tục đi, bạn chắc chắn sẽ thấy một phiên bản khác của chính mình. Một ngày, Anna nói với tôi..."
+    },
+    {
+      "start": 817.57,
+      "end": 826.2,
+      "en": "I used to think weekends were just for sleeping and watching TV, but now I see weekends as time to befriend Chinese.",
+      "zh": "以前我觉得周末就是睡觉和看电视，现在我觉得周末，是我跟中文做朋友的时间",
+      "pinyin": "Yǐ qián wǒ jué de zhōu mò jiù shì shuì jué hé kàn diàn shì， xiàn zài wǒ jué de zhōu mò， shì wǒ gēn zhōng wén zuò péng yǒu de shí jiān",
+      "vi": "Trước đây tôi nghĩ cuối tuần chỉ là ngủ và xem TV, giờ tôi thấy cuối tuần là thời gian tôi làm bạn với tiếng Trung."
+    },
+    {
+      "start": 826.2,
+      "end": 832.87,
+      "en": "He didn't spend a lot of time, nor did he attend tutoring; he just spent a little time each weekend.",
+      "zh": "他没有用很多时间，也没有上补习班，只是每个周末花一点点时间",
+      "pinyin": "Tā méi yǒu yòng hěn duō shí jiān， yě méi yǒu shàng bǔ xí bān， zhǐ shì měi gè zhōu mò huā yì diǎn diǎn shí jiān",
+      "vi": "Anh ấy không dành nhiều thời gian, cũng không học thêm lớp, chỉ dành một chút thời gian mỗi cuối tuần."
+    },
+    {
+      "start": 832.87,
+      "end": 839.7,
+      "en": "Speaking Chinese to himself, he said, “I’m getting more and more fond of this language because I can understand it.”",
+      "zh": "跟自己说中文，他说我越来越喜欢这个语言，因为我能听懂",
+      "pinyin": "Gēn zì jǐ shuō zhōng wén， tā shuō wǒ yuè lái yuè xǐ huan zhè ge yǔ yán， yīn wèi wǒ néng tīng dǒng",
+      "vi": "Nói tiếng Trung với chính mình, anh ấy nói: “Tôi ngày càng thích ngôn ngữ này vì tôi có thể hiểu được.”"
+    },
+    {
+      "start": 839.7,
+      "end": 846.8,
+      "en": "And being able to speak it—that's the joy of language. We’re all the same, sometimes busy, sometimes tired.",
+      "zh": "也能说出来，这就是语言的快乐，我们都一样，有时候很忙，有时候很累",
+      "pinyin": "Yě néng shuō chū lái， zhè jiù shì yǔ yán de kuài lè， wǒ men dōu yí yàng， yǒu shí hòu hěn máng， yǒu shí hòu hěn lèi",
+      "vi": "Và có thể nói ra; đó là niềm vui của ngôn ngữ. Chúng ta giống nhau, đôi khi bận, đôi khi mệt."
+    },
+    {
+      "start": 846.87,
+      "end": 854.37,
+      "en": "The weekend is here, and we just want to relax, but if you are willing to give yourself 10 or 20 minutes, you will realize that",
+      "zh": "周末到了，我们只想放松，但如果你愿意给自己分钟，分钟你会发现",
+      "pinyin": "Zhōu mò dào le， wǒ men zhī xiǎng fàng sōng， dàn rú guǒ nǐ yuàn yì gěi zì jǐ fēn zhōng， fēn zhōng nǐ huì fā xiàn",
+      "vi": "Cuối tuần đến rồi, chúng ta chỉ muốn thư giãn, nhưng nếu bạn sẵn lòng dành cho mình 10 hoặc 20 phút, bạn sẽ nhận ra rằng"
+    },
+    {
+      "start": 854.37,
+      "end": 862.83,
+      "en": "learning Chinese can also be a form of rest, like drinking a cup of hot tea, writing a Chinese sentence, or listening to a simple conversation",
+      "zh": "学中文也可以是一种休息，就像喝一杯热茶，写一句中文，听一个简单的对话",
+      "pinyin": "Xué zhōng wén yě kě yǐ shì yì zhǒng xiū xī， jiù xiàng hē yì bēi rè chá， xiě yí jù zhōng wén， tīng yí gè jiǎn dān de duì huà",
+      "vi": "học tiếng Trung cũng có thể là một cách nghỉ ngơi, giống như uống một tách trà nóng, viết một câu tiếng Trung, hoặc nghe một đoạn hội thoại đơn giản"
+    },
+    {
+      "start": 863.13,
+      "end": 870.57,
+      "en": "your mind will also gradually become calm, you don't need to chase after others, you don't need to compare, you just need to be yourself",
+      "zh": "心也会慢慢安静下来，你不需要追别人，不需要比较，你只需要做你自己",
+      "pinyin": "Xīn yě huì màn màn ān jìng xià lái， nǐ bù xū yào zhuī bié rén， bù xū yào bǐ jiào， nǐ zhī xū yào zuò nǐ zì jǐ",
+      "vi": "tâm trí bạn cũng sẽ dần dần bình yên trở lại, bạn không cần phải chạy theo người khác, không cần so sánh, bạn chỉ cần làm chính mình"
+    },
+    {
+      "start": 870.7,
+      "end": 880.27,
+      "en": "learning one more word today and saying one more sentence tomorrow is already very good, you are making progress step by step, even if others may not see it",
+      "zh": "今天多学一个词，明天多说一句话就很好，你在慢慢进步，别人可能看不见",
+      "pinyin": "Jīn tiān duō xué yí gè cí， míng tiān duō shuō yí jù huà jiù hěn hǎo， nǐ zài màn màn jìn bù， bié rén kě néng kàn bú jiàn",
+      "vi": "hôm nay học thêm một từ, ngày mai nói thêm một câu là đã rất tốt rồi, bạn đang tiến bộ từng bước, dù người khác có thể không nhìn thấy"
+    },
+    {
+      "start": 880.27,
+      "end": 887.7,
+      "en": "But you'll feel it yourself; you'll realize that one day, when you hear someone speaking Chinese, you suddenly understand.",
+      "zh": "但你自己会感觉到，你会发现，有一天你听到别人说中文，你突然听懂了",
+      "pinyin": "Dàn nǐ zì jǐ huì gǎn jué dào， nǐ huì fā xiàn， yǒu yì tiān nǐ tīng dào bié rén shuō zhōng wén， nǐ tū rán tīng dǒng le",
+      "vi": "Nhưng bạn sẽ cảm nhận được điều đó, bạn sẽ nhận ra rằng một ngày nào đó khi nghe người khác nói tiếng Trung, bạn bất ngờ hiểu được."
+    },
+    {
+      "start": 887.9,
+      "end": 893.67,
+      "en": "At that moment, you'll be very happy because you know it's the result of your own effort.",
+      "zh": "那一刻你会非常开心，因为你知道这是你自己努力的结果",
+      "pinyin": "Nà yí kè nǐ huì fēi cháng kāi xīn， yīn wèi nǐ zhī dào zhè shì nǐ zì jǐ nǔ lì de jié guǒ",
+      "vi": "Khoảnh khắc đó, bạn sẽ rất vui vì biết rằng đó là kết quả của chính nỗ lực của mình."
+    },
+    {
+      "start": 893.67,
+      "end": 903.37,
+      "en": "You can also find friends to learn with, watch videos together, speak Chinese together, laugh together; language is not a solitary affair.",
+      "zh": "你也可以找朋友一起学，一起看视频，一起说中文，一起笑语言不是一个人的事",
+      "pinyin": "Nǐ yě kě yǐ zhǎo péng yǒu yì qǐ xué， yì qǐ kàn shì pín， yì qǐ shuō zhōng wén， yì qǐ xiào yǔ yán bú shì yí gè rén de shì",
+      "vi": "Bạn cũng có thể tìm bạn bè học cùng nhau, xem video, nói tiếng Trung, cười cùng nhau; ngôn ngữ không phải là chuyện một người."
+    },
+    {
+      "start": 903.4,
+      "end": 912.03,
+      "en": "It's something everyone plays together; sometimes you make mistakes, friends laugh, you laugh too, and that way you remember.",
+      "zh": "是大家一起玩的事，有时候你说错了，朋友会笑，你也笑这样你就记住了",
+      "pinyin": "Shì dà jiā yì qǐ wán de shì， yǒu shí hòu nǐ shuō cuò le， péng yǒu huì xiào， nǐ yě xiào zhè yàng nǐ jiù jì zhù le",
+      "vi": "Đó là điều mọi người cùng chơi; đôi khi bạn sai, bạn bè sẽ cười, bạn cũng cười, và bạn sẽ ghi nhớ điều đó."
+    },
+    {
+      "start": 912.1,
+      "end": 919.7,
+      "en": "Learning Chinese doesn't have to be too serious; happiness is the most important thing. Also, you can give yourself a small reward.",
+      "zh": "学习不用太严肃，开心最重要，还有，你可以给自己一个小小的奖励",
+      "pinyin": "Xué xí bú yòng tài yán sù， kāi xīn zuì zhòng yào， hái yǒu， nǐ kě yǐ gěi zì jǐ yí gè xiǎo xiǎo de jiǎng lì",
+      "vi": "Học tiếng Trung không cần quá nghiêm túc, vui vẻ là quan trọng nhất. Ngoài ra, bạn có thể tự thưởng cho mình một phần thưởng nhỏ."
+    },
+    {
+      "start": 920.07,
+      "end": 927.77,
+      "en": "For example, if you learn 10 new words, buy yourself a small cake. If you persist in speaking Chinese for 5 days,",
+      "zh": "比如你学会了个新词，就给自己买一个小蛋糕，你坚持说中文天",
+      "pinyin": "Bǐ rú nǐ xué huì le gè xīn cí， jiù gěi zì jǐ mǎi yí gè xiǎo dàn gāo， nǐ jiān chí shuō zhōng wén tiān",
+      "vi": "Ví dụ, nếu bạn học được 10 từ mới, hãy tự mua cho mình một chiếc bánh nhỏ. Nếu bạn kiên trì nói tiếng Trung trong 5 ngày,"
+    },
+    {
+      "start": 927.77,
+      "end": 935.17,
+      "en": "give yourself a like. That way, you will feel that you did well and deserve encouragement.",
+      "zh": "就给自己一个点赞，这样你会觉得啊，我做的不错，我值得被鼓励",
+      "pinyin": "Jiù gěi zì jǐ yí gè diǎn zàn， zhè yàng nǐ huì jué de a， wǒ zuò de bú cuò， wǒ zhí dé bèi gǔ lì",
+      "vi": "hãy tự khen ngợi bản thân. Khi đó, bạn sẽ cảm thấy mình đã làm tốt và xứng đáng được khích lệ."
+    },
+    {
+      "start": 935.17,
+      "end": 942.2,
+      "en": "Every bit of progress is precious. Don't underestimate a single Chinese sentence, word, or exercise.",
+      "zh": "每一个进步都很宝贵，不要小看一句中文，一个词一个练习",
+      "pinyin": "Měi yí gè jìn bù dōu hěn bǎo guì， bú yào xiǎo kàn yí jù zhōng wén， yí gè cí yí gè liàn xí",
+      "vi": "Mỗi bước tiến đều rất quý giá. Đừng coi nhẹ một câu tiếng Trung, một từ hay một bài tập."
+    },
+    {
+      "start": 942.2,
+      "end": 949.8,
+      "en": "Just like a tree, starting from a tiny seed and growing taller day by day. The words you plant today",
+      "zh": "就像一棵树，从一颗小小的种子开始，一天天长高，你今天种下的词语",
+      "pinyin": "Jiù xiàng yì kē shù， cóng yì kē xiǎo xiǎo de zhǒng zi kāi shǐ， yì tiān tiān cháng gāo， nǐ jīn tiān zhǒng xià de cí yǔ",
+      "vi": "Giống như một cái cây, bắt đầu từ một hạt giống nhỏ bé, ngày càng cao lên. Những từ ngữ bạn gieo trồng hôm nay,"
+    },
+    {
+      "start": 949.97,
+      "end": 958.17,
+      "en": "are the language that will bloom tomorrow. If you are still listening, watching, and learning right now, you are already doing great.",
+      "zh": "就是明天会开花的语言，如果你现在还在听，在看在学，那你已经很棒了",
+      "pinyin": "Jiù shì míng tiān huì kāi huā de yǔ yán， rú guǒ nǐ xiàn zài hái zài tīng， zài kàn zài xué， nà nǐ yǐ jīng hěn bàng le",
+      "vi": "chính là ngôn ngữ sẽ nở hoa vào ngày mai. Nếu bạn vẫn đang nghe, xem và học ngay lúc này, thì bạn đã rất tuyệt vời rồi."
+    },
+    {
+      "start": 958.37,
+      "end": 964.77,
+      "en": "Chinese cannot be mastered in a day, but you can learn a little every day. You don't need to be perfect.",
+      "zh": "中文不是一天学会的，但每一天都可以学一点，你不用完美",
+      "pinyin": "Zhōng wén bú shì yì tiān xué huì de， dàn měi yì tiān dōu kě yǐ xué yì diǎn， nǐ bú yòng wán měi",
+      "vi": "Tiếng Trung không thể học xong trong một ngày, nhưng mỗi ngày bạn đều có thể học một chút. Bạn không cần phải hoàn hảo."
+    },
+    {
+      "start": 964.8,
+      "end": 972,
+      "en": "As long as you are willing to start, you are already on the path to learning. Next weekend, give yourself some time.",
+      "zh": "只要你愿意开始，你就已经走在学习的路上了，下个周末，给自己一点时间吧",
+      "pinyin": "Zhǐ yào nǐ yuàn yì kāi shǐ， nǐ jiù yǐ jīng zǒu zài xué xí de lù shang le， xià gè zhōu mò， gěi zì jǐ yì diǎn shí jiān ba",
+      "vi": "Bất cứ khi nào bạn sẵn sàng bắt đầu, bạn đã đang trên con đường học tập. Tuần cuối tới, dành cho mình chút thời gian nhé."
+    },
+    {
+      "start": 972.17,
+      "end": 981.3,
+      "en": "Write three sentences, say five words, listen to a short story, take it slow, don't rush; learning Chinese is like walking.",
+      "zh": "写三句话，说五个词，听一个小故事，慢慢来不要急，学中文就像走路",
+      "pinyin": "Xiě sān jù huà， shuō wǔ gè cí， tīng yí gè xiǎo gù shì， màn màn lái bú yào jí， xué zhōng wén jiù xiàng zǒu lù",
+      "vi": "Viết ba câu, nói năm từ, nghe một câu chuyện ngắn, tiến từng bước, đừng vội, học tiếng Trung giống như đi bộ."
+    },
+    {
+      "start": 981.33,
+      "end": 989.37,
+      "en": "Step by step, keep going and you'll see the scenery. You can do it too. Keep it up, let's move forward together.",
+      "zh": "一步一步不停的走，就能看到风景，你也可以做到，加油我们一起前进",
+      "pinyin": "Yí bù yi bù bù tíng de zǒu， jiù néng kàn dào fēng jǐng， nǐ yě kě yǐ zuò dào， jiā yóu wǒ men yì qǐ qián jìn",
+      "vi": "Đi từng bước một mà không ngừng, bạn sẽ thấy cảnh đẹp; bạn cũng có thể làm được, tiếp tục, chúng ta cùng tiến lên."
+    }
+  ]
+}

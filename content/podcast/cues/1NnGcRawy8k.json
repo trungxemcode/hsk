@@ -1,0 +1,1789 @@
+{
+  "id": "1NnGcRawy8k",
+  "youtubeId": "1NnGcRawy8k",
+  "channelHandle": "@LearnChineseThroughPodcast",
+  "title": "HSK 3-4 | After Festival Story, I Realized Chinese Listening Is Easier Than I Thought",
+  "titleVi": "HSK 3-4 | Sau câu chuyện ngày Tết, tôi nhận ra nghe tiếng Trung dễ hơn tôi tưởng",
+  "topic": "Podcast Luyện nghe HSK",
+  "level": "HSK 3+",
+  "levelGroup": "hsk3",
+  "durationSec": 899,
+  "cues": [
+    {
+      "start": 6.07,
+      "end": 9.27,
+      "en": "Hello everyone! Welcome to the “Learn Chinese Podcast.”",
+      "zh": "🕺大家好！欢迎收听“学中文播客”。",
+      "pinyin": "🕺 dà jiā hǎo！ huān yíng shōu tīng “ xué zhōng wén bō kè ”。",
+      "vi": "Xin chào mọi người! Chào mừng đến với “Podcast Học tiếng Trung”."
+    },
+    {
+      "start": 9.27,
+      "end": 10.37,
+      "en": "I’m Li Ming.",
+      "zh": "🕺我是李明。",
+      "pinyin": "🕺 wǒ shì lǐ míng。",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 10.47,
+      "end": 12.17,
+      "en": "Hello everyone! I’m Xiaoyu.",
+      "zh": "💃大家好！我是小雨。",
+      "pinyin": "💃 dà jiā hǎo！ wǒ shì xiǎo yǔ。",
+      "vi": "Xin chào mọi người! Tôi là Tiểu Vũ."
+    },
+    {
+      "start": 12.17,
+      "end": 14.47,
+      "en": "It’s great to see everyone again!",
+      "zh": "💃很高兴又和大家见面了！",
+      "pinyin": "💃 hěn gāo xìng yòu hé dà jiā jiàn miàn le！",
+      "vi": "Rất vui lại được gặp mọi người!"
+    },
+    {
+      "start": 14.47,
+      "end": 17.5,
+      "en": "Xiaoyu, is today’s podcast our first episode?",
+      "zh": "🕺小雨，今天我们的播客是，🕺第一集吗？",
+      "pinyin": "🕺 xiǎo yǔ， jīn tiān wǒ men de bō kè shì，🕺 dì yī jí ma？",
+      "vi": "Tiểu Vũ, podcast hôm nay của chúng ta là tập đầu tiên phải không?"
+    },
+    {
+      "start": 17.5,
+      "end": 20.87,
+      "en": "No, Li Ming. We already have many episodes.",
+      "zh": "💃不是哦，李明。我们已经有很多集了。",
+      "pinyin": "💃 bú shì ò， lǐ míng。 wǒ men yǐ jīng yǒu hěn duō jí le。",
+      "vi": "Không phải đâu, Lý Minh. Chúng ta đã có nhiều tập rồi."
+    },
+    {
+      "start": 20.87,
+      "end": 23.7,
+      "en": "But we always have new friends, right?",
+      "zh": "💃但是我们总是有新朋友，对吗？",
+      "pinyin": "💃 dàn shì wǒ men zǒng shì yǒu xīn péng yǒu， duì ma？",
+      "vi": "Nhưng chúng ta luôn có những người bạn mới, đúng không?"
+    },
+    {
+      "start": 23.7,
+      "end": 29.13,
+      "en": "Right! So first, let’s welcome all our new friends, and also thank our old friends.",
+      "zh": "🕺对！所以，🕺我们要先欢迎所有的新朋友，🕺也谢谢我们的老朋友。",
+      "pinyin": "🕺 duì！ suǒ yǐ，🕺 wǒ men yào xiān huān yíng suǒ yǒu de xīn péng yǒu，🕺 yě xiè xiè wǒ men de lǎo péng yǒu。",
+      "vi": "Đúng vậy! Vì thế, trước tiên chúng ta hãy chào mừng tất cả các bạn mới, đồng thời cảm ơn những người bạn cũ của chúng ta."
+    },
+    {
+      "start": 29.13,
+      "end": 36.27,
+      "en": "The goal of the “Learn Chinese Podcast” is to help everyone learn Chinese in the simplest and most interesting way.",
+      "zh": "💃“学中文播客”的目标，就是用最简单、💃最有趣的，💃方法，帮助大家学习中文。",
+      "pinyin": "💃“ xué zhōng wén bō kè ” de mù biāo， jiù shì yòng zuì jiǎn dān、💃 zuì yǒu qù de，💃 fāng fǎ， bāng zhù dà jiā xué xí zhōng wén。",
+      "vi": "Mục tiêu của “Podcast Học tiếng Trung” là dùng cách đơn giản nhất và thú vị nhất để giúp mọi người học tiếng Trung."
+    },
+    {
+      "start": 36.27,
+      "end": 43.5,
+      "en": "We’ll speak very slowly and use very simple words, which is very suitable for HSK level 1 to 4 learners.",
+      "zh": "🕺我们会说得很慢，🕺用词也很简单，非常，🕺适合 一级到四级的朋友们。",
+      "pinyin": "🕺 wǒ men huì shuō dé hěn màn，🕺 yòng cí yě hěn jiǎn dān， fēi cháng，🕺 shì hé yī jí dào sì jí de péng yǒu men。",
+      "vi": "Chúng tôi sẽ nói rất chậm và dùng từ rất đơn giản, rất phù hợp với các bạn học HSK 1 đến HSK 4."
+    },
+    {
+      "start": 43.5,
+      "end": 44.3,
+      "en": "That’s right.",
+      "zh": "💃没错。",
+      "pinyin": "💃 méi cuò。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 44.3,
+      "end": 47.2,
+      "en": "So, Li Ming, what topic are we going to talk about today?",
+      "zh": "💃那李明，我们今天聊什么话题呢？",
+      "pinyin": "💃 nà lǐ míng， wǒ men jīn tiān liáo shén me huà tí ne？",
+      "vi": "Vậy Lý Minh, hôm nay chúng ta sẽ nói về chủ đề gì?"
+    },
+    {
+      "start": 47.2,
+      "end": 53.13,
+      "en": "Today we’re going to talk about a very, very important topic: the “Spring Festival.” Wow!",
+      "zh": "🕺今天我们要聊一个非常非常重，🕺要的话题，就是“春节”。 💃哇！",
+      "pinyin": "🕺 jīn tiān wǒ men yào liáo yí gè fēi cháng fēi cháng zhòng，🕺 yào de huà tí， jiù shì “ chūn jié ”。 💃 wā！",
+      "vi": "Hôm nay chúng ta sẽ nói về một chủ đề vô cùng quan trọng, đó là “Tết Nguyên Đán”. Wow!"
+    },
+    {
+      "start": 53.13,
+      "end": 55.8,
+      "en": "Spring Festival! My favorite holiday!",
+      "zh": "💃春节！我最喜欢的节日！",
+      "pinyin": "💃 chūn jié！ wǒ zuì xǐ huan de jié rì！",
+      "vi": "Tết Nguyên Đán! Ngày lễ tôi thích nhất!"
+    },
+    {
+      "start": 55.8,
+      "end": 58.6,
+      "en": "Yes, we’ll also talk a little about “reunion.”",
+      "zh": "🕺是的，我们还会，🕺聊一聊“团圆”。",
+      "pinyin": "🕺 shì de， wǒ men hái huì，🕺 liáo yi liáo “ tuán yuán ”。",
+      "vi": "Đúng vậy, chúng ta cũng sẽ nói một chút về “sum họp”."
+    },
+    {
+      "start": 58.6,
+      "end": 62.93,
+      "en": "Spring Festival and reunion—these two words always go together.",
+      "zh": "💃春节和团圆，这两个词总是“在一起”的。",
+      "pinyin": "💃 chūn jié hé tuán yuán， zhè liǎng gè cí zǒng shì “ zài yì qǐ ” de。",
+      "vi": "Tết Nguyên Đán và sum họp, hai từ này luôn “đi cùng nhau”."
+    },
+    {
+      "start": 62.93,
+      "end": 68.77,
+      "en": "That’s right. If you’re interested in Chinese culture, or want to know how Chinese people celebrate the New Year,",
+      "zh": "🕺没错。如果你对中国文化感兴趣，🕺或者你想知道中国人怎么过年，",
+      "pinyin": "🕺 méi cuò。 rú guǒ nǐ duì zhōng guó wén huà gǎn xìng qù，🕺 huò zhě nǐ xiǎng zhī dào zhōng guó rén zěn me guò nián，",
+      "vi": "Đúng vậy. Nếu bạn hứng thú với văn hóa Trung Quốc, hoặc muốn biết người Trung Quốc đón Tết như thế nào,"
+    },
+    {
+      "start": 68.77,
+      "end": 70.17,
+      "en": "then be sure to stay tuned.",
+      "zh": "🕺一定不要走开。",
+      "pinyin": "🕺 yí dìng bú yào zǒu kāi。",
+      "vi": "thì nhất định đừng bỏ lỡ nhé."
+    },
+    {
+      "start": 70.33,
+      "end": 73.53,
+      "en": "Please listen carefully—we’re starting right now!",
+      "zh": "💃请大家认真听，💃我们马上开始！",
+      "pinyin": "💃 qǐng dà jiā rèn zhēn tīng，💃 wǒ men mǎ shàng kāi shǐ！",
+      "vi": "Mọi người hãy chăm chú lắng nghe, chúng ta bắt đầu ngay!"
+    },
+    {
+      "start": 73.53,
+      "end": 77.4,
+      "en": "Xiaoyu, let’s first tell everyone what the “Spring Festival” is.",
+      "zh": "🕺小雨，我们先来告诉大家，什么是“春节”？",
+      "pinyin": "🕺 xiǎo yǔ， wǒ men xiān lái gào sù dà jiā， shén me shì “ chūn jié ”？",
+      "vi": "Tiểu Vũ, trước tiên chúng ta hãy nói cho mọi người biết “Tết Nguyên Đán” là gì nhé?"
+    },
+    {
+      "start": 77.4,
+      "end": 82.33,
+      "en": "Okay. Simply put, the \"Spring Festival\" is the Chinese New Year.",
+      "zh": "💃好的。简单来说，💃“春节”就是中国的新年。",
+      "pinyin": "💃 hǎo de。 jiǎn dān lái shuō，💃“ chūn jié ” jiù shì zhōng guó de xīn nián。",
+      "vi": "Được. Nói đơn giản, “Tết Nguyên Đán” chính là năm mới của Trung Quốc."
+    },
+    {
+      "start": 82.33,
+      "end": 88.53,
+      "en": "Just as many countries have a New Year, the Spring Festival is the most important and grandest festival for Chinese people.",
+      "zh": "🕺就像很多国家有新年一样，🕺春节是中国人最重要、最盛大的节日。",
+      "pinyin": "🕺 jiù xiàng hěn duō guó jiā yǒu xīn nián yí yàng，🕺 chūn jié shì zhōng guó rén zuì zhòng yào、 zuì shèng dà de jié rì。",
+      "vi": "Giống như nhiều nước có năm mới, Tết Nguyên Đán là ngày lễ quan trọng nhất và lớn nhất của người Trung Quốc."
+    },
+    {
+      "start": 88.53,
+      "end": 90.53,
+      "en": "\"Most important\"—bar none.",
+      "zh": "💃“最重要”，没有之一。",
+      "pinyin": "💃“ zuì zhòng yào ”， méi yǒu zhī yī。",
+      "vi": "“Quan trọng nhất”, không có cái thứ hai."
+    },
+    {
+      "start": 90.87,
+      "end": 94.93,
+      "en": "For Chinese people, nothing is more important than the Spring Festival.",
+      "zh": "💃对中国人来说，💃没有什么比春节更重要了。",
+      "pinyin": "💃 duì zhōng guó rén lái shuō，💃 méi yǒu shén me bǐ chūn jié gèng zhòng yào le。",
+      "vi": "Đối với người Trung Quốc, không có gì quan trọng hơn Tết Nguyên Đán."
+    },
+    {
+      "start": 94.93,
+      "end": 99.27,
+      "en": "That's right. We often don't say \"Spring Festival\"; we say \"guo nian\" (celebrate the New Year).",
+      "zh": "🕺没错。我们常常，🕺不说“春节”，我们说“过年”。",
+      "pinyin": "🕺 méi cuò。 wǒ men cháng cháng，🕺 bù shuō “ chūn jié ”， wǒ men shuō “ guò nián ”。",
+      "vi": "Đúng vậy. Chúng tôi thường không nói “Tết Nguyên Đán”, mà nói “đón Tết”."
+    },
+    {
+      "start": 99.27,
+      "end": 107.2,
+      "en": "Right, \"guo nian.\" \"Guo\" means \"to pass\" or \"to celebrate,\" and \"nian\" means \"year.\"",
+      "zh": "💃对，💃“过年”。“过”就是“度过”或者“庆祝”的意思，💃“年”就是“年份”的意思。",
+      "pinyin": "💃 duì，💃“ guò nián ”。“ guò ” jiù shì “ dù guò ” huò zhě “ qìng zhù ” de yì sī，💃“ nián ” jiù shì “ nián fèn ” de yì sī。",
+      "vi": "Đúng, “guò nián” (đón năm mới). “Guò” nghĩa là “trải qua” hoặc “ăn mừng”, còn “nián” nghĩa là “năm”."
+    },
+    {
+      "start": 107.2,
+      "end": 110.13,
+      "en": "\"It's New Year!\" We often say this happily.",
+      "zh": "🕺“过年”啦！我们常常这样高兴地说。",
+      "pinyin": "🕺“ guò nián ” lā！ wǒ men cháng cháng zhè yàng gāo xìng dì shuō。",
+      "vi": "“Đón Tết rồi!” Chúng tôi thường vui vẻ nói như vậy."
+    },
+    {
+      "start": 110.13,
+      "end": 113.07,
+      "en": "Li Ming, do you know when the Spring Festival is?",
+      "zh": "💃李明，你知道春节的时间吗？",
+      "pinyin": "💃 lǐ míng， nǐ zhī dào chūn jié de shí jiān ma？",
+      "vi": "Lý Minh, bạn có biết thời gian của Tết Nguyên Đán không?"
+    },
+    {
+      "start": 113.17,
+      "end": 117.07,
+      "en": "Is it the same as New Year's Day on January 1? No.",
+      "zh": "💃它和一月一号的新年，一样吗？ 🕺不一样。",
+      "pinyin": "💃 tā hé yī yuè yī hào de xīn nián， yí yàng ma？ 🕺 bù yí yàng。",
+      "vi": "Nó có giống năm mới ngày 1 tháng 1 không? Không giống."
+    },
+    {
+      "start": 117.1,
+      "end": 121.37,
+      "en": "The timing of the Spring Festival is different from \"New Year\" (January 1). Right.",
+      "zh": "🕺春节的时间和“新年”（1月1号）不一样。 💃对。",
+      "pinyin": "🕺 chūn jié de shí jiān hé “ xīn nián ”（1 yuè 1 hào ） bù yí yàng。 💃 duì。",
+      "vi": "Thời gian của Tết Nguyên Đán không giống “năm mới” (ngày 1 tháng 1). Đúng."
+    },
+    {
+      "start": 121.37,
+      "end": 123.8,
+      "en": "The Spring Festival follows the \"lunar calendar.\"",
+      "zh": "💃春节是看“农历”的。",
+      "pinyin": "💃 chūn jié shì kàn “ nóng lì ” de。",
+      "vi": "Tết Nguyên Đán tính theo “âm lịch”."
+    },
+    {
+      "start": 123.97,
+      "end": 126.77,
+      "en": "The lunar calendar is China's traditional calendar.",
+      "zh": "💃农历是中国的传统日历。",
+      "pinyin": "💃 nóng lì shì zhōng guó de chuán tǒng rì lì。",
+      "vi": "Âm lịch là lịch truyền thống của Trung Quốc."
+    },
+    {
+      "start": 126.77,
+      "end": 130.33,
+      "en": "So the date of the Spring Festival is different every year.",
+      "zh": "🕺所以，每年的春节，日期都不一样。",
+      "pinyin": "🕺 suǒ yǐ， měi nián de chūn jié， rì qī dōu bù yí yàng。",
+      "vi": "Vì vậy, ngày Tết Nguyên Đán mỗi năm đều khác nhau."
+    },
+    {
+      "start": 130.33,
+      "end": 133.3,
+      "en": "Sometimes it's in January, sometimes in February.",
+      "zh": "🕺有时候在一月，🕺有时候在二月。",
+      "pinyin": "🕺 yǒu shí hòu zài yī yuè，🕺 yǒu shí hòu zài èr yuè。",
+      "vi": "Có khi vào tháng Một, có khi vào tháng Hai."
+    },
+    {
+      "start": 133.3,
+      "end": 139.93,
+      "en": "For example, the 2023 Spring Festival was in January, and the 2024 Spring Festival was in February.",
+      "zh": "💃比如，年的春节在月，💃年的春节就在月了。",
+      "pinyin": "💃 bǐ rú， nián de chūn jié zài yuè，💃 nián de chūn jié jiù zài yuè le。",
+      "vi": "Ví dụ, Tết Nguyên Đán năm 2023 vào tháng 1, còn Tết Nguyên Đán năm 2024 thì vào tháng 2."
+    },
+    {
+      "start": 139.93,
+      "end": 146.2,
+      "en": "No matter which month it is, the Spring Festival is always when winter is about to end and spring is about to begin.",
+      "zh": "🕺不管是几月，春节，🕺都是冬天快要结束，🕺春天快要开始的时候。",
+      "pinyin": "🕺 bù guǎn shì jǐ yuè， chūn jié，🕺 dōu shì dōng tiān kuài yào jié shù，🕺 chūn tiān kuài yào kāi shǐ de shí hòu。",
+      "vi": "Dù là tháng mấy, Tết Nguyên Đán đều là lúc mùa đông sắp kết thúc và mùa xuân sắp bắt đầu."
+    },
+    {
+      "start": 146.2,
+      "end": 149.27,
+      "en": "The \"spring\" in \"Spring Festival\" means spring.",
+      "zh": "💃“春节”的“春”，就是春天的意思。",
+      "pinyin": "💃“ chūn jié ” de “ chūn ”， jiù shì chūn tiān de yì sī。",
+      "vi": "“Xuân” trong “Tết Nguyên Đán” có nghĩa là mùa xuân."
+    },
+    {
+      "start": 149.27,
+      "end": 152.37,
+      "en": "Yes, it is a festival that welcomes spring.",
+      "zh": "🕺是的，这是一个迎接春天的节日。",
+      "pinyin": "🕺 shì de， zhè shì yí gè yíng jiē chūn tiān de jié rì。",
+      "vi": "Đúng vậy, đây là một ngày lễ đón chào mùa xuân."
+    },
+    {
+      "start": 152.37,
+      "end": 155.77,
+      "en": "So how do people feel during the New Year celebration?",
+      "zh": "💃那过年的时候，大家是什么感觉呢？",
+      "pinyin": "💃 nà guò nián de shí hòu， dà jiā shì shén me gǎn jué ne？",
+      "vi": "Vậy khi đón Tết, mọi người cảm thấy thế nào?"
+    },
+    {
+      "start": 155.77,
+      "end": 157.63,
+      "en": "Happy! Very happy!",
+      "zh": "🕺高兴！非常高兴！",
+      "pinyin": "🕺 gāo xìng！ fēi cháng gāo xìng！",
+      "vi": "Vui! Rất vui!"
+    },
+    {
+      "start": 157.97,
+      "end": 159.87,
+      "en": "What else? Very “lively”.",
+      "zh": "💃还有呢？ 🕺很“热闹”。",
+      "pinyin": "💃 hái yǒu ne？ 🕺 hěn “ rè nào ”。",
+      "vi": "Còn gì nữa? Rất “náo nhiệt”."
+    },
+    {
+      "start": 159.97,
+      "end": 169.1,
+      "en": "“Lively” means there are many people, it’s very loud, and everyone is very happy. Right, Spring Festival is a very lively festival.",
+      "zh": "🕺“热闹”的意思是，有很多人，🕺声音很大，🕺大家都很开心。 💃对，💃春节是一个非常热闹的节日。",
+      "pinyin": "🕺“ rè nào ” de yì sī shì， yǒu hěn duō rén，🕺 shēng yīn hěn dà，🕺 dà jiā dōu hěn kāi xīn。 💃 duì，💃 chūn jié shì yí gè fēi cháng rè nào de jié rì。",
+      "vi": "“Náo nhiệt” có nghĩa là có rất nhiều người, âm thanh rất lớn, mọi người đều rất vui. Đúng, Tết là một dịp lễ rất náo nhiệt."
+    },
+    {
+      "start": 169.27,
+      "end": 172.3,
+      "en": "No one works, and students don’t have classes either.",
+      "zh": "💃大家都不工作，💃学生也不上课。",
+      "pinyin": "💃 dà jiā dōu bù gōng zuò，💃 xué shēng yě bú shàng kè。",
+      "vi": "Mọi người đều không làm việc, học sinh cũng không phải đến lớp."
+    },
+    {
+      "start": 172.3,
+      "end": 179.1,
+      "en": "This is a very long holiday, right? Yes, usually we have seven days, or even longer.",
+      "zh": "🕺这是一个很长的假期，🕺对吗？ 💃是的，💃一般我们有七天，甚至更长的假期。",
+      "pinyin": "🕺 zhè shì yí gè hěn cháng de jià qī，🕺 duì ma？ 💃 shì de，💃 yì bān wǒ men yǒu qī tiān， shèn zhì gèng cháng de jià qī。",
+      "vi": "Đây là một kỳ nghỉ rất dài, đúng không? Đúng vậy, thường chúng ta có bảy ngày, thậm chí còn dài hơn."
+    },
+    {
+      "start": 179.1,
+      "end": 180.53,
+      "en": "Wow, seven days!",
+      "zh": "🕺哇，七天！",
+      "pinyin": "🕺 wā， qī tiān！",
+      "vi": "Ồ, bảy ngày!"
+    },
+    {
+      "start": 180.53,
+      "end": 181.37,
+      "en": "That’s great.",
+      "zh": "🕺太好了。",
+      "pinyin": "🕺 tài hǎo le。",
+      "vi": "Tuyệt quá."
+    },
+    {
+      "start": 181.37,
+      "end": 184.93,
+      "en": "What preparations do people make before Spring Festival?",
+      "zh": "💃在春节以前，大家会做什么准备呢？",
+      "pinyin": "💃 zài chūn jié yǐ qián， dà jiā huì zuò shén me zhǔn bèi ne？",
+      "vi": "Trước Tết, mọi người sẽ chuẩn bị những gì?"
+    },
+    {
+      "start": 184.93,
+      "end": 187.03,
+      "en": "There are so many preparations to do!",
+      "zh": "🕺准备工作非常多！",
+      "pinyin": "🕺 zhǔn bèi gōng zuò fēi cháng duō！",
+      "vi": "Có rất nhiều việc phải chuẩn bị!"
+    },
+    {
+      "start": 187.07,
+      "end": 190.67,
+      "en": "Very busy! Like what? For example, we have to do a “big cleaning”.",
+      "zh": "🕺非常忙！ 💃比如呢？ 🕺比如，要“大扫除”。",
+      "pinyin": "🕺 fēi cháng máng！ 💃 bǐ rú ne？ 🕺 bǐ rú， yào “ dà sǎo chú ”。",
+      "vi": "Rất bận! Ví dụ thì sao? Ví dụ, phải “tổng vệ sinh”."
+    },
+    {
+      "start": 190.67,
+      "end": 194.67,
+      "en": "“Big cleaning”? Does it mean cleaning the house very thoroughly?",
+      "zh": "💃“大扫除”？就是把家里打扫得很干净？",
+      "pinyin": "💃“ dà sǎo chú ”？ jiù shì bǎ jiā lǐ dǎ sǎo dé hěn gān jìng？",
+      "vi": "“Tổng vệ sinh”? Là dọn dẹp nhà cửa thật sạch sẽ phải không?"
+    },
+    {
+      "start": 194.67,
+      "end": 196.8,
+      "en": "Right! Very, very clean.",
+      "zh": "🕺对！非常非常干净。",
+      "pinyin": "🕺 duì！ fēi cháng fēi cháng gān jìng。",
+      "vi": "Đúng! Rất rất sạch."
+    },
+    {
+      "start": 196.8,
+      "end": 198.67,
+      "en": "Every place has to be cleaned.",
+      "zh": "🕺每个地方都要打扫。",
+      "pinyin": "🕺 měi gè dì fāng dōu yào dǎ sǎo。",
+      "vi": "Mọi nơi đều phải được dọn dẹp."
+    },
+    {
+      "start": 198.67,
+      "end": 200.37,
+      "en": "Why do you have to do a “big cleaning”?",
+      "zh": "💃为什么要“大扫除”？",
+      "pinyin": "💃 wèi shén me yào “ dà sǎo chú ”？",
+      "vi": "Tại sao phải “tổng vệ sinh”?"
+    },
+    {
+      "start": 200.37,
+      "end": 207.37,
+      "en": "Because we need to “sweep away” all the bad things from last year and welcome the new year with a clean home.",
+      "zh": "🕺因为，🕺我们要把去年的、不好的东西都“扫走”，🕺用干净的家，迎接新的一年。",
+      "pinyin": "🕺 yīn wèi，🕺 wǒ men yào bǎ qù nián de、 bù hǎo de dōng xī dōu “ sǎo zǒu ”，🕺 yòng gān jìng de jiā， yíng jiē xīn de yì nián。",
+      "vi": "Bởi vì chúng ta phải “quét đi” những điều không tốt của năm cũ, dùng một ngôi nhà sạch sẽ để đón năm mới."
+    },
+    {
+      "start": 207.37,
+      "end": 209.2,
+      "en": "This is a good habit.",
+      "zh": "💃这是一个好习惯。",
+      "pinyin": "💃 zhè shì yí gè hǎo xí guàn。",
+      "vi": "Đây là một thói quen tốt."
+    },
+    {
+      "start": 209.33,
+      "end": 210.93,
+      "en": "Besides the big cleaning, what else?",
+      "zh": "💃除了大扫除呢？",
+      "pinyin": "💃 chú le dà sǎo chú ne？",
+      "vi": "Ngoài tổng vệ sinh ra thì sao?"
+    },
+    {
+      "start": 210.93,
+      "end": 212.47,
+      "en": "We also have to “buy New Year goods”.",
+      "zh": "🕺还要“买年货”。",
+      "pinyin": "🕺 hái yào “ mǎi nián huò ”。",
+      "vi": "Còn phải “mua hàng Tết”."
+    },
+    {
+      "start": 212.9,
+      "end": 217.73,
+      "en": "“New Year goods”? Is it goods bought for celebrating the New Year?",
+      "zh": "💃“年货”？是过年（年）买的货物（货）吗？",
+      "pinyin": "💃“ nián huò ”？ shì guò nián （ nián ） mǎi de huò wù （ huò ） ma？",
+      "vi": "“Hàng Tết”? Là hàng hóa mua để đón Tết phải không?"
+    },
+    {
+      "start": 217.73,
+      "end": 223.07,
+      "en": "That’s right. “New Year goods” are things to eat, use, and wear during the New Year.",
+      "zh": "🕺没错。“年货”就是在过年时吃的、🕺用的、穿的东西。",
+      "pinyin": "🕺 méi cuò。“ nián huò ” jiù shì zài guò nián shí chī de、🕺 yòng de、 chuān de dōng xī。",
+      "vi": "Đúng vậy. “Hàng Tết” là những thứ để ăn, để dùng và để mặc trong dịp Tết."
+    },
+    {
+      "start": 223.07,
+      "end": 229.3,
+      "en": "For example, new clothes, lots and lots of delicious food, and gifts for family members. Right.",
+      "zh": "💃比如新的衣服、💃很多很多好吃的、💃还有送给家人的礼物。 🕺对。",
+      "pinyin": "💃 bǐ rú xīn de yī fu、💃 hěn duō hěn duō hǎo chī de、💃 hái yǒu sòng gěi jiā rén de lǐ wù。 🕺 duì。",
+      "vi": "Ví dụ như quần áo mới, rất nhiều món ngon, và cả quà tặng cho người thân. Đúng."
+    },
+    {
+      "start": 229.33,
+      "end": 235.3,
+      "en": "Before Spring Festival, supermarkets and shopping malls are packed with people; everyone is buying New Year goods.",
+      "zh": "🕺春节前，超市里、商场里，人山人海，🕺大家都在买年货。",
+      "pinyin": "🕺 chūn jié qián， chāo shì lǐ、 shāng chǎng lǐ， rén shān rén hǎi，🕺 dà jiā dōu zài mǎi nián huò。",
+      "vi": "Trước Tết, trong siêu thị và trung tâm thương mại, người đông như biển, mọi người đều đang mua đồ Tết."
+    },
+    {
+      "start": 235.3,
+      "end": 238.17,
+      "en": "People also buy lots of red things.",
+      "zh": "💃大家还会买很多红色的东西。",
+      "pinyin": "💃 dà jiā hái huì mǎi hěn duō hóng sè de dōng xī。",
+      "vi": "Mọi người còn mua rất nhiều đồ màu đỏ."
+    },
+    {
+      "start": 238.17,
+      "end": 239.4,
+      "en": "Why red?",
+      "zh": "🕺为什么是红色？",
+      "pinyin": "🕺 wèi shén me shì hóng sè？",
+      "vi": "Tại sao lại là màu đỏ?"
+    },
+    {
+      "start": 239.4,
+      "end": 244.1,
+      "en": "Because in China, red is the color of \"good luck\" and \"joy.\"",
+      "zh": "💃因为红色在中国，💃是“好运”和“高兴”的颜色。",
+      "pinyin": "💃 yīn wèi hóng sè zài zhōng guó，💃 shì “ hǎo yùn ” hé “ gāo xìng ” de yán sè。",
+      "vi": "Vì ở Trung Quốc, màu đỏ là màu của “may mắn” và “vui vẻ”."
+    },
+    {
+      "start": 244.1,
+      "end": 245.8,
+      "en": "I see.",
+      "zh": "🕺我知道了。",
+      "pinyin": "🕺 wǒ zhī dào le。",
+      "vi": "Tôi hiểu rồi."
+    },
+    {
+      "start": 245.8,
+      "end": 250.1,
+      "en": "So during the New Year, we can see many red lanterns.",
+      "zh": "🕺所以过年的时候，🕺我们能看到很多红色的灯笼。",
+      "pinyin": "🕺 suǒ yǐ guò nián de shí hòu，🕺 wǒ men néng kàn dào hěn duō hóng sè de dēng long。",
+      "vi": "Vì vậy vào dịp Tết, chúng ta có thể thấy rất nhiều đèn lồng đỏ."
+    },
+    {
+      "start": 250.1,
+      "end": 251.7,
+      "en": "Yes, red lanterns.",
+      "zh": "💃对，红灯笼。",
+      "pinyin": "💃 duì， hóng dēng long。",
+      "vi": "Đúng, đèn lồng đỏ."
+    },
+    {
+      "start": 251.87,
+      "end": 253.67,
+      "en": "There are also red \"Spring Festival couplets.\"",
+      "zh": "💃还有红色的“春联”。",
+      "pinyin": "💃 hái yǒu hóng sè de “ chūn lián ”。",
+      "vi": "Còn có cả “câu đối Tết” màu đỏ."
+    },
+    {
+      "start": 254.13,
+      "end": 258.93,
+      "en": "\"Spring Festival couplets\" are paper with blessings written on them, pasted on both sides of the door.",
+      "zh": "💃“春联”是写着祝福的话的纸，💃贴在门的两边。",
+      "pinyin": "💃“ chūn lián ” shì xiě zhe zhù fú de huà de zhǐ，💃 tiē zài mén de liǎng biān。",
+      "vi": "“Câu đối Tết” là giấy có viết những lời chúc phúc, được dán ở hai bên cửa."
+    },
+    {
+      "start": 258.93,
+      "end": 260.9,
+      "en": "There is also the red character \"Fu\" for fortune.",
+      "zh": "🕺还有红色的“福”字。",
+      "pinyin": "🕺 hái yǒu hóng sè de “ fú ” zì。",
+      "vi": "Còn có chữ “Phúc” màu đỏ."
+    },
+    {
+      "start": 260.9,
+      "end": 266.7,
+      "en": "Exactly. Spring Festival is a red, lively, and joyful holiday.",
+      "zh": "💃没错。春节就是红色的、💃热闹的、让人开心的节日。",
+      "pinyin": "💃 méi cuò。 chūn jié jiù shì hóng sè de、💃 rè nào de、 ràng rén kāi xīn de jié rì。",
+      "vi": "Đúng vậy. Tết Nguyên Đán là một ngày lễ màu đỏ, náo nhiệt và khiến người ta vui vẻ."
+    },
+    {
+      "start": 266.7,
+      "end": 268.2,
+      "en": "It sounds wonderful just hearing about it.",
+      "zh": "🕺听起来就很棒。",
+      "pinyin": "🕺 tīng qǐ lái jiù hěn bàng。",
+      "vi": "Nghe thôi đã thấy tuyệt rồi."
+    },
+    {
+      "start": 268.2,
+      "end": 277.13,
+      "en": "But Xiaoyu, the most important meaning of Spring Festival isn't buying things and having time off. Right, its most important meaning—we'll talk about it in the next part.",
+      "zh": "🕺但是，小雨，🕺春节最重要的意义，🕺还不是买东西和放假。 💃对，它，💃最重要的意义，我们下一部分来谈，",
+      "pinyin": "🕺 dàn shì， xiǎo yǔ，🕺 chūn jié zuì zhòng yào de yì yì，🕺 hái bú shì mǎi dōng xī hé fàng jiǎ。 💃 duì， tā，💃 zuì zhòng yào de yì yì， wǒ men xià yí bù fen lái tán，",
+      "vi": "Nhưng Tiểu Vũ à, ý nghĩa quan trọng nhất của Tết Nguyên Đán vẫn chưa phải là mua sắm và nghỉ lễ. Đúng vậy, ý nghĩa quan trọng nhất của nó, chúng ta sẽ nói ở phần tiếp theo."
+    },
+    {
+      "start": 277.13,
+      "end": 278.6,
+      "en": "That is \"reunion.\"",
+      "zh": "💃就是“团圆”。",
+      "pinyin": "💃 jiù shì “ tuán yuán ”。",
+      "vi": "Đó chính là “sum họp”."
+    },
+    {
+      "start": 280.8,
+      "end": 286.6,
+      "en": "Xiaoyu, as we just said, the most important meaning of Spring Festival is \"reunion.\"",
+      "zh": "🕺小雨，我们刚才说，春节最重，🕺要的意义是“团圆”。",
+      "pinyin": "🕺 xiǎo yǔ， wǒ men gāng cái shuō， chūn jié zuì zhòng，🕺 yào de yì yì shì “ tuán yuán ”。",
+      "vi": "Tiểu Vũ, như chúng ta vừa nói, ý nghĩa quan trọng nhất của Tết Nguyên Đán là “sum họp”."
+    },
+    {
+      "start": 286.7,
+      "end": 290.93,
+      "en": "Exactly. The two characters for \"reunion\" are so important.",
+      "zh": "💃没错。“团圆”这两个字，太重要了。",
+      "pinyin": "💃 méi cuò。“ tuán yuán ” zhè liǎng gè zì， tài zhòng yào le。",
+      "vi": "Đúng vậy. Hai chữ “sum họp” này quan trọng lắm."
+    },
+    {
+      "start": 291,
+      "end": 295.33,
+      "en": "Can we explain \"reunion\" to our friends? Sure.",
+      "zh": "🕺我们可以和朋友们解释一下，🕺“团圆”吗？ 💃好的。",
+      "pinyin": "🕺 wǒ men kě yǐ hé péng yǒu men jiě shì yí xià，🕺“ tuán yuán ” ma？ 💃 hǎo de。",
+      "vi": "Chúng ta có thể giải thích cho các bạn bè hiểu “sum họp” là gì không? Được."
+    },
+    {
+      "start": 295.6,
+      "end": 300.13,
+      "en": "\"Tuan\" means \"gathering,\" and \"yuan\" means \"completeness.\"",
+      "zh": "💃“团”是“团聚”，💃“圆”是“圆满”。",
+      "pinyin": "💃“ tuán ” shì “ tuán jù ”，💃“ yuán ” shì “ yuán mǎn ”。",
+      "vi": "“Đoàn” là “tụ họp”, “viên” là “viên mãn”."
+    },
+    {
+      "start": 300.27,
+      "end": 304.3,
+      "en": "\"Reunion\" means the whole family being together.",
+      "zh": "🕺“团圆”的意思就是，一家人在一起。",
+      "pinyin": "🕺“ tuán yuán ” de yì sī jiù shì， yì jiā rén zài yì qǐ。",
+      "vi": "“Sum họp” có nghĩa là cả gia đình ở bên nhau."
+    },
+    {
+      "start": 304.3,
+      "end": 311.13,
+      "en": "No matter where you work, no matter which city you study in, during the New Year, you must... must.",
+      "zh": "💃不管你在哪里工作，💃不管你在哪个城市学习，💃过年的时候，你都必须…… 🕺必须",
+      "pinyin": "💃 bù guǎn nǐ zài nǎ lǐ gōng zuò，💃 bù guǎn nǐ zài nǎ gè chéng shì xué xí，💃 guò nián de shí hòu， nǐ dōu bì xū …… 🕺 bì xū",
+      "vi": "Dù bạn làm việc ở đâu, dù bạn học ở thành phố nào, vào dịp Tết, bạn đều phải… phải."
+    },
+    {
+      "start": 311.53,
+      "end": 316.33,
+      "en": "\"Going home\"! Right, \"going home\" is the biggest theme of Spring Festival.",
+      "zh": "🕺“回家”！ 💃对，💃“回家”是春节最大的主题。",
+      "pinyin": "🕺“ huí jiā ”！ 💃 duì，💃“ huí jiā ” shì chūn jié zuì dà de zhǔ tí。",
+      "vi": "“Về nhà”! Đúng vậy, “về nhà” là chủ đề lớn nhất của Tết Nguyên đán."
+    },
+    {
+      "start": 316.33,
+      "end": 319.93,
+      "en": "Exactly. We know China is very large.",
+      "zh": "🕺没错。我们知道，中国非常大。",
+      "pinyin": "🕺 méi cuò。 wǒ men zhī dào， zhōng guó fēi cháng dà。",
+      "vi": "Đúng thế. Chúng ta biết Trung Quốc rất rộng lớn."
+    },
+    {
+      "start": 319.93,
+      "end": 323.23,
+      "en": "Many Chinese people may work very far away.",
+      "zh": "💃很多中国人，可能在很远的地方工作。",
+      "pinyin": "💃 hěn duō zhōng guó rén， kě néng zài hěn yuǎn de dì fāng gōng zuò。",
+      "vi": "Nhiều người Trung Quốc có thể làm việc ở nơi rất xa."
+    },
+    {
+      "start": 323.27,
+      "end": 328.63,
+      "en": "For example, his home is in Chengdu in the west, but he works in Shanghai in the east.",
+      "zh": "💃比如，他的家在西边的成都，💃但是他在东边的上海工作。",
+      "pinyin": "💃 bǐ rú， tā de jiā zài xī biān de chéng dū，💃 dàn shì tā zài dōng biān de shàng hǎi gōng zuò。",
+      "vi": "Ví dụ, nhà anh ấy ở Thành Đô phía tây, nhưng anh ấy làm việc ở Thượng Hải phía đông."
+    },
+    {
+      "start": 328.67,
+      "end": 334.2,
+      "en": "Shanghai is very far from Chengdu. A train ride may take more than ten hours.",
+      "zh": "🕺上海离成都，🕺非常远。坐火车可能要十几个小时。",
+      "pinyin": "🕺 shàng hǎi lí chéng dū，🕺 fēi cháng yuǎn。 zuò huǒ chē kě néng yào shí jǐ gè xiǎo shí。",
+      "vi": "Thượng Hải cách Thành Đô rất xa. Đi tàu có thể mất hơn mười tiếng."
+    },
+    {
+      "start": 334.2,
+      "end": 339,
+      "en": "Others work in big cities like Beijing, Guangzhou, and Shenzhen.",
+      "zh": "💃还有的人，在北京、💃广州、深圳这样的大城市工作。",
+      "pinyin": "💃 hái yǒu de rén， zài běi jīng、💃 guǎng zhōu、 shēn zhèn zhè yàng de dài chéng shì gōng zuò。",
+      "vi": "Còn có người làm việc ở những thành phố lớn như Bắc Kinh, Quảng Châu, Thâm Quyến."
+    },
+    {
+      "start": 339,
+      "end": 346.03,
+      "en": "But their \"home\"—their parents—may be in a very distant small city or in the countryside.",
+      "zh": "🕺但是他们的“家”，🕺他们的爸爸妈妈，可能在很，🕺远的小城市，或者农村。",
+      "pinyin": "🕺 dàn shì tā men de “ jiā ”，🕺 tā men de bà ba mā ma， kě néng zài hěn，🕺 yuǎn de xiǎo chéng shì， huò zhě nóng cūn。",
+      "vi": "Nhưng “nhà” của họ, bố mẹ họ, có thể ở một thành phố nhỏ rất xa, hoặc ở nông thôn."
+    },
+    {
+      "start": 346.03,
+      "end": 350.27,
+      "en": "So, as Spring Festival approaches, everyone has to go home.",
+      "zh": "💃所以，一到春节前，💃所有人都要回家。",
+      "pinyin": "💃 suǒ yǐ， yí dào chūn jié qián，💃 suǒ yǒu rén dōu yào huí jiā。",
+      "vi": "Vì vậy, cứ gần đến Tết Nguyên đán, mọi người đều phải về nhà."
+    },
+    {
+      "start": 350.27,
+      "end": 354.1,
+      "en": "Hundreds of millions of people all have to go home in a very short period of time.",
+      "zh": "🕺几亿人，都要在很短的时间里回家。",
+      "pinyin": "🕺 jǐ yì rén， dōu yào zài hěn duǎn de shí jiān lǐ huí jiā。",
+      "vi": "Hàng trăm triệu người đều phải về nhà trong một thời gian rất ngắn."
+    },
+    {
+      "start": 354.1,
+      "end": 360.5,
+      "en": "This brings about something very interesting but also very tiring, called \"Chunyun\" (Spring Festival travel rush). Ah,",
+      "zh": "💃这就带来了一个很有意思的，💃也是很累人的事情，💃叫“春运”。 🕺啊，",
+      "pinyin": "💃 zhè jiù dài lái le yí gè hěn yǒu yì sī de，💃 yě shì hěn lèi rén de shì qíng，💃 jiào “ chūn yùn ”。 🕺 a，",
+      "vi": "Điều này tạo ra một việc rất thú vị nhưng cũng rất mệt, gọi là “Xuân vận”. À,"
+    },
+    {
+      "start": 360.5,
+      "end": 366.73,
+      "en": "\"Chunyun\"! I've heard this word. \"Chun\" means Spring Festival, and \"yun\" means \"transportation.\"",
+      "zh": "🕺“春运”！我听说过，🕺这个词。 💃“春”是春节，💃“运”是“运输”。",
+      "pinyin": "🕺“ chūn yùn ”！ wǒ tīng shuō guò，🕺 zhè ge cí。 💃“ chūn ” shì chūn jié，💃“ yùn ” shì “ yùn shū ”。",
+      "vi": "“Xuân vận”! Tôi đã nghe từ này rồi. “Xuân” là Tết Nguyên đán, “vận” là “vận chuyển”."
+    },
+    {
+      "start": 366.87,
+      "end": 369.7,
+      "en": "\"Chunyun\" is the transportation during Spring Festival.",
+      "zh": "💃“春运”就是春节的运输。",
+      "pinyin": "💃“ chūn yùn ” jiù shì chūn jié de yùn shū。",
+      "vi": "“Xuân vận” chính là việc vận chuyển trong dịp Tết Nguyên đán."
+    },
+    {
+      "start": 369.73,
+      "end": 374.8,
+      "en": "During Chunyun, train stations and airports are crowded with people everywhere.",
+      "zh": "🕺在春运期间，🕺火车站、飞机场，到处都是人。",
+      "pinyin": "🕺 zài chūn yùn qī jiān，🕺 huǒ chē zhàn、 fēi jī chǎng， dào chù dōu shì rén。",
+      "vi": "Trong thời gian Xuân vận, ga tàu, sân bay, đâu đâu cũng đầy người."
+    },
+    {
+      "start": 374.8,
+      "end": 381,
+      "en": "Do you know, Li Ming, during Chunyun, buying a train ticket home is extremely difficult!",
+      "zh": "💃你知道吗，💃李明，在春运的时候，买一张回，💃家的火车票，非常非常难！",
+      "pinyin": "💃 nǐ zhī dào ma，💃 lǐ míng， zài chūn yùn de shí hòu， mǎi yì zhāng huí，💃 jiā de huǒ chē piào， fēi cháng fēi cháng nán！",
+      "vi": "Cậu biết không, Lý Minh, vào dịp Xuân vận, mua một vé tàu về nhà cực kỳ khó!"
+    },
+    {
+      "start": 381,
+      "end": 383.13,
+      "en": "I know. It's too hard.",
+      "zh": "🕺我知道。太难了。",
+      "pinyin": "🕺 wǒ zhī dào。 tài nán le。",
+      "vi": "Tôi biết. Khó quá."
+    },
+    {
+      "start": 383.13,
+      "end": 388.27,
+      "en": "Many people have to get up at five or six in the morning to check tickets on their phones.",
+      "zh": "🕺很多人要早上五点、🕺六点起床，在手机上看票。",
+      "pinyin": "🕺 hěn duō rén yào zǎo shàng wǔ diǎn、🕺 liù diǎn qǐ chuáng， zài shǒu jī shàng kàn piào。",
+      "vi": "Nhiều người phải dậy lúc năm, sáu giờ sáng để xem vé trên điện thoại."
+    },
+    {
+      "start": 388.27,
+      "end": 390.93,
+      "en": "As soon as tickets are released, they're gone in a second!",
+      "zh": "💃票一出来，一秒钟，就没了！",
+      "pinyin": "💃 piào yì chū lái， yì miǎo zhōng， jiù méi le！",
+      "vi": "Vé vừa ra là một giây sau đã hết!"
+    },
+    {
+      "start": 391.27,
+      "end": 393.3,
+      "en": "Really? One second?",
+      "zh": "🕺真的吗？一秒钟？",
+      "pinyin": "🕺 zhēn de ma？ yì miǎo zhōng？",
+      "vi": "Thật sao? Một giây?"
+    },
+    {
+      "start": 393.3,
+      "end": 394.1,
+      "en": "Really!",
+      "zh": "💃真的！",
+      "pinyin": "💃 zhēn de！",
+      "vi": "Thật đấy!"
+    },
+    {
+      "start": 394.1,
+      "end": 398.33,
+      "en": "So many people say \"snatching tickets,\" like \"snatching\" things.",
+      "zh": "💃所以很多人都说“抢票”，像“抢”东西一样。",
+      "pinyin": "💃 suǒ yǐ hěn duō rén dōu shuō “ qiǎng piào ”， xiàng “ qiǎng ” dōng xī yí yàng。",
+      "vi": "Vì vậy nhiều người nói “giành vé”, giống như “giành” đồ vật vậy."
+    },
+    {
+      "start": 398.33,
+      "end": 400.13,
+      "en": "Wow, this is so hard.",
+      "zh": "🕺哇，这太难了。",
+      "pinyin": "🕺 wā， zhè tài nán le。",
+      "vi": "Chà, khó quá."
+    },
+    {
+      "start": 400.13,
+      "end": 404.6,
+      "en": "Some people can't get tickets and may have to take a very long bus ride.",
+      "zh": "🕺有的人买不到票，🕺可能要坐很长时间的汽车。",
+      "pinyin": "🕺 yǒu de rén mǎi bú dào piào，🕺 kě néng yào zuò hěn cháng shí jiān de qì chē。",
+      "vi": "Có người không mua được vé, có thể phải ngồi xe ô tô rất lâu."
+    },
+    {
+      "start": 404.8,
+      "end": 410.17,
+      "en": "Some may have to take a train for over twenty, even thirty hours before reaching home.",
+      "zh": "💃有的人可能要坐二十几个小时，💃甚至三十个小时的火车才能到家。",
+      "pinyin": "💃 yǒu de rén kě néng yào zuò èr shí jǐ gè xiǎo shí，💃 shèn zhì sān shí gè xiǎo shí de huǒ chē cái néng dào jiā。",
+      "vi": "Có người có thể phải đi tàu hỏa hơn hai mươi tiếng, thậm chí ba mươi tiếng mới về đến nhà."
+    },
+    {
+      "start": 410.2,
+      "end": 411.93,
+      "en": "The journey is very tiring.",
+      "zh": "🕺路上非常累。",
+      "pinyin": "🕺 lù shang fēi cháng lèi。",
+      "vi": "Trên đường đi rất mệt."
+    },
+    {
+      "start": 411.93,
+      "end": 413.27,
+      "en": "Then the question arises.",
+      "zh": "💃那问题来了。",
+      "pinyin": "💃 nà wèn tí lái le。",
+      "vi": "Vậy thì câu hỏi đặt ra là."
+    },
+    {
+      "start": 413.27,
+      "end": 417.33,
+      "en": "Why, despite it being so hard and tiring, does everyone still insist on going home?",
+      "zh": "💃为什么这么难，这么累，💃大家还是要回家呢？",
+      "pinyin": "💃 wèi shén me zhè me nán， zhè me lèi，💃 dà jiā hái shì yào huí jiā ne？",
+      "vi": "Tại sao khó khăn, mệt mỏi như vậy mà mọi người vẫn phải về nhà?"
+    },
+    {
+      "start": 417.33,
+      "end": 420.4,
+      "en": "Because \"reunion\" is too important.",
+      "zh": "🕺因为“团圆”太重要了。",
+      "pinyin": "🕺 yīn wèi “ tuán yuán ” tài zhòng yào le。",
+      "vi": "Vì “đoàn viên” quá quan trọng."
+    },
+    {
+      "start": 420.4,
+      "end": 424.77,
+      "en": "Right. In the hearts of Chinese people, \"home\" is the most important place.",
+      "zh": "💃对。在中国人的心里，💃“家”是最重要的地方。",
+      "pinyin": "💃 duì。 zài zhōng guó rén de xīn lǐ，💃“ jiā ” shì zuì zhòng yào de dì fāng。",
+      "vi": "Đúng vậy. Trong lòng người Trung Quốc, “nhà” là nơi quan trọng nhất."
+    },
+    {
+      "start": 424.83,
+      "end": 428.73,
+      "en": "We work and study away from home, toiling for a whole year.",
+      "zh": "🕺我们在外面工作、学习，🕺辛苦了一年。",
+      "pinyin": "🕺 wǒ men zài wài miàn gōng zuò、 xué xí，🕺 xīn kǔ le yì nián。",
+      "vi": "Chúng ta làm việc, học tập ở bên ngoài, vất vả cả một năm."
+    },
+    {
+      "start": 428.73,
+      "end": 432.27,
+      "en": "During the New Year, we must go home to see our parents.",
+      "zh": "💃过年的时候，💃一定要回家看看爸爸妈妈。",
+      "pinyin": "💃 guò nián de shí hòu，💃 yí dìng yào huí jiā kàn kàn bà ba mā ma。",
+      "vi": "Vào dịp Tết, nhất định phải về nhà thăm bố mẹ."
+    },
+    {
+      "start": 432.27,
+      "end": 439.1,
+      "en": "Exactly. Celebrating the New Year with parents, grandparents, children... all family members together.",
+      "zh": "🕺没错。跟爸爸妈妈、🕺爷爷奶奶、孩子……所有家人一起过年。",
+      "pinyin": "🕺 méi cuò。 gēn bà ba mā ma、🕺 yé ye nǎi nai、 hái zi …… suǒ yǒu jiā rén yì qǐ guò nián。",
+      "vi": "Đúng thế. Cùng bố mẹ, ông bà, con cái… tất cả người thân đón Tết."
+    },
+    {
+      "start": 439.1,
+      "end": 441.7,
+      "en": "That feeling is irreplaceable.",
+      "zh": "💃这种感觉是无法替代的。",
+      "pinyin": "💃 zhè zhǒng gǎn jué shì wú fǎ tì dài de。",
+      "vi": "Cảm giác đó không gì thay thế được."
+    },
+    {
+      "start": 441.87,
+      "end": 448.4,
+      "en": "So even if buying tickets is hard and the journey is tiring, everyone still must go home.",
+      "zh": "🕺所以，就算买票很难，🕺就算路上很累，🕺大家也一定要回家。",
+      "pinyin": "🕺 suǒ yǐ， jiù suàn mǎi piào hěn nán，🕺 jiù suàn lù shang hěn lèi，🕺 dà jiā yě yí dìng yào huí jiā。",
+      "vi": "Vì vậy, dù mua vé rất khó, dù đường đi rất mệt, mọi người vẫn nhất định phải về nhà."
+    },
+    {
+      "start": 448.4,
+      "end": 454.33,
+      "en": "Once home, seeing family members' smiles and eating food cooked by Mom makes it all feel worthwhile.",
+      "zh": "💃回到家，看到家人的笑，💃吃到妈妈做的饭，💃就觉得什么都值得了。",
+      "pinyin": "💃 huí dào jiā， kàn dào jiā rén de xiào，💃 chī dào mā ma zuò de fàn，💃 jiù jué de shén me dōu zhí dé le。",
+      "vi": "Về đến nhà, nhìn thấy nụ cười của người thân, được ăn cơm mẹ nấu, liền cảm thấy mọi thứ đều xứng đáng."
+    },
+    {
+      "start": 454.33,
+      "end": 457,
+      "en": "Yes. Home is our \"root.\"",
+      "zh": "🕺是的。家是我们的“根”。",
+      "pinyin": "🕺 shì de。 jiā shì wǒ men de “ gēn ”。",
+      "vi": "Đúng vậy. Nhà là “cội rễ” của chúng ta."
+    },
+    {
+      "start": 457,
+      "end": 461,
+      "en": "This culture of \"reunion\" is deeply rooted in the heart of every Chinese person.",
+      "zh": "💃这种“团圆”的文化，💃深深地在每个中国人的心里。",
+      "pinyin": "💃 zhè zhǒng “ tuán yuán ” de wén huà，💃 shēn shēn dì zài měi gè zhōng guó rén de xīn lǐ。",
+      "vi": "Văn hóa “đoàn viên” ấy ăn sâu vào lòng mỗi người Trung Quốc."
+    },
+    {
+      "start": 461,
+      "end": 468.53,
+      "en": "Exactly. So Spring Festival is not just a holiday; it is an \"emotion,\" a love for home.",
+      "zh": "🕺没错。所以，春节不只是，🕺一个假期，🕺它是一种“情感”，🕺一种对家的爱。",
+      "pinyin": "🕺 méi cuò。 suǒ yǐ， chūn jié bù zhī shì，🕺 yí gè jià qī，🕺 tā shì yì zhǒng “ qíng gǎn ”，🕺 yì zhǒng duì jiā de ài。",
+      "vi": "Đúng vậy. Vì thế, Tết Xuân không chỉ là một kỳ nghỉ, mà còn là một thứ “tình cảm”, một tình yêu dành cho gia đình."
+    },
+    {
+      "start": 468.53,
+      "end": 471.2,
+      "en": "That emotion is the feeling of \"home.\"",
+      "zh": "💃这种情感就是“家”的感觉。",
+      "pinyin": "💃 zhè zhǒng qíng gǎn jiù shì “ jiā ” de gǎn jué。",
+      "vi": "Thứ tình cảm đó chính là cảm giác về “nhà”."
+    },
+    {
+      "start": 471.23,
+      "end": 473.5,
+      "en": "All right, everyone has gone home.",
+      "zh": "🕺好了，大家都回家了。",
+      "pinyin": "🕺 hǎo le， dà jiā dōu huí jiā le。",
+      "vi": "Được rồi, mọi người đều đã về nhà."
+    },
+    {
+      "start": 473.5,
+      "end": 475.13,
+      "en": "The whole family is reunited.",
+      "zh": "🕺一家人团圆了。",
+      "pinyin": "🕺 yì jiā rén tuán yuán le。",
+      "vi": "Cả gia đình đã đoàn tụ."
+    },
+    {
+      "start": 475.13,
+      "end": 477.1,
+      "en": "So, what will they do?",
+      "zh": "💃那么，他们会做什么呢？",
+      "pinyin": "💃 nà me， tā men huì zuò shén me ne？",
+      "vi": "Vậy thì họ sẽ làm gì?"
+    },
+    {
+      "start": 477.1,
+      "end": 480.37,
+      "en": "Of course, eat delicious food!",
+      "zh": "🕺当然是吃好吃的！",
+      "pinyin": "🕺 dāng rán shì chī hǎo chī de！",
+      "vi": "Tất nhiên là ăn đồ ngon rồi!"
+    },
+    {
+      "start": 480.47,
+      "end": 485.43,
+      "en": "Haha, exactly! In the next part, we'll talk about Spring Festival customs and food.",
+      "zh": "💃哈哈，没错！我们下，💃一部分就来聊聊春节的习俗和美食。",
+      "pinyin": "💃 hā hā， méi cuò！ wǒ men xià，💃 yí bù fen jiù lái liáo liáo chūn jié de xí sú hé měi shí。",
+      "vi": "Haha, đúng vậy! Phần tiếp theo chúng ta sẽ nói về phong tục và ẩm thực Tết Nguyên đán."
+    },
+    {
+      "start": 485.5,
+      "end": 486.7,
+      "en": "Welcome back!",
+      "zh": "💃欢迎回来！",
+      "pinyin": "💃 huān yíng huí lái！",
+      "vi": "Chào mừng trở lại!"
+    },
+    {
+      "start": 486.7,
+      "end": 490.33,
+      "en": "In this part, we'll talk about how to eat and how to have fun during the New Year.",
+      "zh": "💃我们这部分聊聊过年怎么“吃”，怎么“玩”。",
+      "pinyin": "💃 wǒ men zhè bù fen liáo liáo guò nián zěn me “ chī ”， zěn me “ wán ”。",
+      "vi": "Trong phần này, chúng ta sẽ nói về cách ăn và cách chơi trong dịp Tết."
+    },
+    {
+      "start": 490.33,
+      "end": 491.13,
+      "en": "Okay.",
+      "zh": "🕺好的。",
+      "pinyin": "🕺 hǎo de。",
+      "vi": "Được."
+    },
+    {
+      "start": 491.27,
+      "end": 494.87,
+      "en": "What is the most important meal when you go home for the New Year called?",
+      "zh": "🕺过年回家，最重要的一顿饭，叫什么？",
+      "pinyin": "🕺 guò nián huí jiā， zuì zhòng yào de yí dùn fàn， jiào shén me？",
+      "vi": "Bữa cơm quan trọng nhất khi về nhà đón Tết gọi là gì?"
+    },
+    {
+      "start": 494.87,
+      "end": 496.7,
+      "en": "It's called the “New Year's Eve dinner.”",
+      "zh": "💃叫“年夜饭”。",
+      "pinyin": "💃 jiào “ nián yè fàn ”。",
+      "vi": "Gọi là “cơm tất niên”."
+    },
+    {
+      "start": 496.7,
+      "end": 499.17,
+      "en": "“New Year's Eve dinner”? On which day is it eaten?",
+      "zh": "🕺“年夜饭”？是哪一天吃？",
+      "pinyin": "🕺“ nián yè fàn ”？ shì nǎ yì tiān chī？",
+      "vi": "“Cơm tất niên” ư? Ăn vào ngày nào?"
+    },
+    {
+      "start": 499.23,
+      "end": 501.8,
+      "en": "It's on the evening before Spring Festival.",
+      "zh": "💃就是春节的前一天晚上。",
+      "pinyin": "💃 jiù shì chūn jié de qián yì tiān wǎn shàng。",
+      "vi": "Là vào đêm trước ngày Tết Nguyên đán."
+    },
+    {
+      "start": 501.8,
+      "end": 507.67,
+      "en": "We call it “New Year's Eve.” Ah, “New Year's Eve.” The night before the New Year.",
+      "zh": "💃我们叫“除夕”。 🕺啊，🕺“除夕”。新年的前一夜。",
+      "pinyin": "💃 wǒ men jiào “ chú xī ”。 🕺 a，🕺“ chú xī ”。 xīn nián de qián yí yè。",
+      "vi": "Chúng tôi gọi là “đêm Giao thừa”. À, “đêm Giao thừa”. Đêm trước của năm mới."
+    },
+    {
+      "start": 507.67,
+      "end": 513,
+      "en": "Right. On New Year's Eve, the whole family must eat together.",
+      "zh": "💃对。在除夕这一天晚上，💃全家人必须在一起吃饭。",
+      "pinyin": "💃 duì。 zài chú xī zhè yì tiān wǎn shàng，💃 quán jiā rén bì xū zài yì qǐ chī fàn。",
+      "vi": "Đúng. Vào đêm Giao thừa, cả gia đình phải ăn cơm cùng nhau."
+    },
+    {
+      "start": 513.07,
+      "end": 517.77,
+      "en": "If someone can't come home, everyone will set out an empty bowl and chopsticks for them.",
+      "zh": "🕺如果有人不能回家，🕺大家会放一个他的空碗和筷子。",
+      "pinyin": "🕺 rú guǒ yǒu rén bù néng huí jiā，🕺 dà jiā huì fàng yí gè tā de kōng wǎn hé kuài zi。",
+      "vi": "Nếu có người không thể về nhà, mọi người sẽ đặt một chiếc bát không và đôi đũa cho người đó."
+    },
+    {
+      "start": 518.4,
+      "end": 524.9,
+      "en": "Yes, it means we are “together.” This meal must be very... sumptuous. “Sumptuous”?",
+      "zh": "💃是的，💃表示我们“在一起”。 🕺这顿饭一定非常，🕺丰盛。 💃“丰盛”？",
+      "pinyin": "💃 shì de，💃 biǎo shì wǒ men “ zài yì qǐ ”。 🕺 zhè dùn fàn yí dìng fēi cháng，🕺 fēng shèng。 💃“ fēng shèng ”？",
+      "vi": "Đúng vậy, thể hiện rằng chúng ta “ở bên nhau”. Bữa cơm này chắc chắn rất... thịnh soạn. “Thịnh soạn”?"
+    },
+    {
+      "start": 525.73,
+      "end": 529.33,
+      "en": "“Sumptuous” means very good, with lots and lots of dishes.",
+      "zh": "🕺“丰盛”就是非常好，🕺有很多很多菜。",
+      "pinyin": "🕺“ fēng shèng ” jiù shì fēi cháng hǎo，🕺 yǒu hěn duō hěn duō cài。",
+      "vi": "“Thịnh soạn” nghĩa là rất tốt, có rất nhiều món."
+    },
+    {
+      "start": 529.33,
+      "end": 532.83,
+      "en": "Right! There will be ten or twenty dishes on the table.",
+      "zh": "💃对！桌子上会有十个、二十个菜。",
+      "pinyin": "💃 duì！ zhuō zi shàng huì yǒu shí gè、 èr shí gè cài。",
+      "vi": "Đúng! Trên bàn sẽ có mười, hai mươi món."
+    },
+    {
+      "start": 532.83,
+      "end": 536.27,
+      "en": "Many more than at a normal meal. Yes.",
+      "zh": "🕺比平常吃饭的菜多很，🕺多。 💃是的。",
+      "pinyin": "🕺 bǐ píng cháng chī fàn de cài duō hěn，🕺 duō。 💃 shì de。",
+      "vi": "Nhiều hơn hẳn bữa ăn thường ngày. Đúng vậy."
+    },
+    {
+      "start": 536.27,
+      "end": 539.2,
+      "en": "So, what must be eaten at the New Year's Eve dinner?",
+      "zh": "💃那么，年夜饭一定要吃什么呢？",
+      "pinyin": "💃 nà me， nián yè fàn yí dìng yào chī shén me ne？",
+      "vi": "Vậy bữa cơm tất niên nhất định phải ăn gì?"
+    },
+    {
+      "start": 539.2,
+      "end": 541.1,
+      "en": "Hmm... let me think.",
+      "zh": "🕺嗯……我想想。",
+      "pinyin": "🕺 ǹg …… wǒ xiǎng xiǎng。",
+      "vi": "Ừm... để tôi nghĩ xem."
+    },
+    {
+      "start": 541.1,
+      "end": 545.83,
+      "en": "In northern China, for example in Beijing, you must eat dumplings.",
+      "zh": "🕺在中国北方，🕺比如北京，🕺一定要吃“饺子”。",
+      "pinyin": "🕺 zài zhōng guó běi fāng，🕺 bǐ rú běi jīng，🕺 yí dìng yào chī “ jiǎo zǐ ”。",
+      "vi": "Ở miền Bắc Trung Quốc, ví dụ như Bắc Kinh, nhất định phải ăn “sủi cảo”."
+    },
+    {
+      "start": 545.83,
+      "end": 547.63,
+      "en": "That's right! Dumplings.",
+      "zh": "💃没错！饺子。",
+      "pinyin": "💃 méi cuò！ jiǎo zǐ。",
+      "vi": "Đúng vậy! Bánh sủi cảo."
+    },
+    {
+      "start": 547.63,
+      "end": 549.33,
+      "en": "Why dumplings?",
+      "zh": "🕺为什么是饺子？",
+      "pinyin": "🕺 wèi shén me shì jiǎo zǐ？",
+      "vi": "Tại sao lại là sủi cảo?"
+    },
+    {
+      "start": 549.33,
+      "end": 554.6,
+      "en": "Because dumplings look a bit like ancient Chinese money, called \"yuanbao\" (gold ingots).",
+      "zh": "💃因为饺子的样子，💃有点像中国古代的钱，💃叫“元宝”。",
+      "pinyin": "💃 yīn wèi jiǎo zǐ de yàng zi，💃 yǒu diǎn xiàng zhōng guó gǔ dài de qián，💃 jiào “ yuán bǎo ”。",
+      "vi": "Vì hình dáng sủi cảo hơi giống tiền cổ Trung Quốc, gọi là “nguyên bảo”."
+    },
+    {
+      "start": 554.63,
+      "end": 562.87,
+      "en": "So eating dumplings is wishing for money in the new year, right? Right, it has the good meaning of \"bringing in wealth and treasure.\"",
+      "zh": "🕺所以吃饺子，是希望新的一年有钱，🕺对吗？ 💃对，💃有“招财进宝”的好意思。",
+      "pinyin": "🕺 suǒ yǐ chī jiǎo zǐ， shì xī wàng xīn de yì nián yǒu qián，🕺 duì ma？ 💃 duì，💃 yǒu “ zhāo cái jìn bǎo ” de hǎo yì si。",
+      "vi": "Vậy ăn sủi cảo là mong năm mới có tiền, đúng không? Đúng, có ý nghĩa tốt là “chiêu tài tiến bảo”."
+    },
+    {
+      "start": 562.87,
+      "end": 568.5,
+      "en": "Moreover, the whole family sitting together to make dumplings is also a very happy thing.",
+      "zh": "🕺而且，一家人坐在一起“包饺子”，🕺也是一件很开心的事。",
+      "pinyin": "🕺 ér qiě， yì jiā rén zuò zài yì qǐ “ bāo jiǎo zǐ ”，🕺 yě shì yí jiàn hěn kāi xīn de shì。",
+      "vi": "Hơn nữa, cả gia đình ngồi quây quần “gói sủi cảo” cũng là một việc rất vui."
+    },
+    {
+      "start": 568.63,
+      "end": 569.27,
+      "en": "That's right.",
+      "zh": "💃没错。",
+      "pinyin": "💃 méi cuò。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 569.27,
+      "end": 573.13,
+      "en": "Everyone makes dumplings while chatting and watching TV.",
+      "zh": "💃大家一边包饺子，一边聊天，看电视。",
+      "pinyin": "💃 dà jiā yì biān bāo jiǎo zǐ， yì biān liáo tiān， kàn diàn shì。",
+      "vi": "Mọi người vừa gói sủi cảo, vừa trò chuyện, xem TV."
+    },
+    {
+      "start": 573.13,
+      "end": 576.87,
+      "en": "Some people even put a coin in one dumpling.",
+      "zh": "🕺有的人，🕺还会在一个饺子里放一枚硬币。",
+      "pinyin": "🕺 yǒu de rén，🕺 hái huì zài yí gè jiǎo zǐ lǐ fàng yì méi yìng bì。",
+      "vi": "Có người còn đặt một đồng xu vào một chiếc sủi cảo."
+    },
+    {
+      "start": 576.87,
+      "end": 581.8,
+      "en": "Whoever eats that dumpling will be especially lucky in the new year!",
+      "zh": "💃谁吃到了那个饺子，💃谁在新的一年里就会特别有运气！",
+      "pinyin": "💃 shuí chī dào le nà ge jiǎo zǐ，💃 shuí zài xīn de yì nián lǐ jiù huì tè bié yǒu yùn qì！",
+      "vi": "Ai ăn được chiếc sủi cảo đó thì người đó sẽ đặc biệt may mắn trong năm mới!"
+    },
+    {
+      "start": 581.8,
+      "end": 584,
+      "en": "Haha, this is very interesting.",
+      "zh": "🕺哈哈，这个很有意思。",
+      "pinyin": "🕺 hā hā， zhè ge hěn yǒu yì sī。",
+      "vi": "Haha, cái này rất thú vị."
+    },
+    {
+      "start": 584.07,
+      "end": 585.67,
+      "en": "What about in the south?",
+      "zh": "🕺那在南方呢？",
+      "pinyin": "🕺 nà zài nán fāng ne？",
+      "vi": "Thế còn ở miền Nam thì sao?"
+    },
+    {
+      "start": 585.67,
+      "end": 587.63,
+      "en": "Do people in the south also eat dumplings?",
+      "zh": "🕺南方人也吃饺子吗？",
+      "pinyin": "🕺 nán fāng rén yě chī jiǎo zǐ ma？",
+      "vi": "Người miền Nam cũng ăn sủi cảo à?"
+    },
+    {
+      "start": 587.63,
+      "end": 591.2,
+      "en": "Some places do, but many southerners eat something else.",
+      "zh": "💃有的地方吃，💃但很多南方人吃别的。",
+      "pinyin": "💃 yǒu de dì fāng chī，💃 dàn hěn duō nán fāng rén chī bié de。",
+      "vi": "Có nơi ăn, nhưng nhiều người miền Nam ăn thứ khác."
+    },
+    {
+      "start": 591.3,
+      "end": 593.53,
+      "en": "For example, they eat \"niangao\" (new year rice cake).",
+      "zh": "💃比如，他们会吃“年糕”。",
+      "pinyin": "💃 bǐ rú， tā men huì chī “ nián gāo ”。",
+      "vi": "Ví dụ, họ ăn “niên cao” (bánh gạo năm mới)."
+    },
+    {
+      "start": 593.53,
+      "end": 602.87,
+      "en": "\"Niangao\"? Right. Eating \"niangao\" is wishing to \"rise higher every year.\" \"Rise higher every year\"? Right, hoping our life and work,",
+      "zh": "🕺“年糕”？ 💃对。吃“年糕”，是希望，💃“年年高”。 🕺“年年高”？ 💃对，💃希望我们的生活、工作、",
+      "pinyin": "🕺“ nián gāo ”？ 💃 duì。 chī “ nián gāo ”， shì xī wàng，💃“ nián nián gāo ”。 🕺“ nián nián gāo ”？ 💃 duì，💃 xī wàng wǒ men de shēng huó、 gōng zuò、",
+      "vi": "“Niên cao”? Đúng. Ăn “niên cao” là mong “năm năm cao hơn”. “Năm năm cao hơn”? Đúng, mong cuộc sống, công việc của chúng ta,"
+    },
+    {
+      "start": 602.87,
+      "end": 607,
+      "en": "and studies will be higher and better year after year.",
+      "zh": "💃学习，一年比一年高，💃一年比一年好。",
+      "pinyin": "💃 xué xí， yì nián bǐ yì nián gāo，💃 yì nián bǐ yì nián hǎo。",
+      "vi": "việc học, một năm cao hơn một năm, một năm tốt hơn một năm."
+    },
+    {
+      "start": 607.07,
+      "end": 608.8,
+      "en": "This is also a good meaning.",
+      "zh": "🕺这也是一个好意思。",
+      "pinyin": "🕺 zhè yě shì yí gè hǎo yì si。",
+      "vi": "Đây cũng là một ý nghĩa tốt."
+    },
+    {
+      "start": 608.8,
+      "end": 613.43,
+      "en": "There is another dish that everyone eats, whether in the south or the north.",
+      "zh": "💃还有一个菜，💃不管是南方还是北方，💃大家都会吃。",
+      "pinyin": "💃 hái yǒu yí gè cài，💃 bù guǎn shì nán fāng hái shì běi fāng，💃 dà jiā dōu huì chī。",
+      "vi": "Còn một món nữa, dù là miền Nam hay miền Bắc, mọi người đều ăn."
+    },
+    {
+      "start": 613.43,
+      "end": 615.53,
+      "en": "What is it? It's \"fish.\"",
+      "zh": "🕺是什么？ 💃是“鱼”。",
+      "pinyin": "🕺 shì shén me？ 💃 shì “ yú ”。",
+      "vi": "Là gì? Là “cá”."
+    },
+    {
+      "start": 615.53,
+      "end": 617.27,
+      "en": "Why eat \"fish\"?",
+      "zh": "🕺为什么要吃“鱼”？",
+      "pinyin": "🕺 wèi shén me yào chī “ yú ”？",
+      "vi": "Tại sao lại ăn “cá”?"
+    },
+    {
+      "start": 617.27,
+      "end": 621.1,
+      "en": "Because \"鱼\" (fish) is pronounced the same as \"余\" (surplus).",
+      "zh": "💃因为“鱼”的发音，和“余”的发音是一样的。",
+      "pinyin": "💃 yīn wèi “ yú ” de fā yīn， hé “ yú ” de fā yīn shì yí yàng de。",
+      "vi": "Vì “鱼” (cá) phát âm giống “余” (dư)."
+    },
+    {
+      "start": 621.1,
+      "end": 622.67,
+      "en": "What does \"余\" mean?",
+      "zh": "🕺“余”是什么意思？",
+      "pinyin": "🕺“ yú ” shì shén me yì sī？",
+      "vi": "“余” có nghĩa là gì?"
+    },
+    {
+      "start": 622.67,
+      "end": 625.2,
+      "en": "\"余\" means \"extra\" or \"surplus.\"",
+      "zh": "💃“余”就是“多出来”的意思。",
+      "pinyin": "💃“ yú ” jiù shì “ duō chū lái ” de yì sī。",
+      "vi": "“余” có nghĩa là “dư ra”, “thừa ra”."
+    },
+    {
+      "start": 625.3,
+      "end": 629.03,
+      "en": "We have a blessing phrase called \"年年有余\" (may there be surplus every year).",
+      "zh": "💃我们有一个祝福的话，💃叫“年年有余”。",
+      "pinyin": "💃 wǒ men yǒu yí gè zhù fú de huà，💃 jiào “ nián nián yǒu yú ”。",
+      "vi": "Chúng tôi có một câu chúc, gọi là “niên niên hữu dư” (năm năm có dư)."
+    },
+    {
+      "start": 629.2,
+      "end": 636.33,
+      "en": "\"年年有余\"... I get it, it means hoping every year there is \"more\" money and \"more\" food.",
+      "zh": "🕺“年年有余”……，🕺我明白了，🕺就是希望每年都有“多”的钱，🕺“多”的食物。",
+      "pinyin": "🕺“ nián nián yǒu yú ”……，🕺 wǒ míng bái le，🕺 jiù shì xī wàng měi nián dōu yǒu “ duō ” de qián，🕺“ duō ” de shí wù。",
+      "vi": "“Niên niên hữu dư”... tôi hiểu rồi, tức là mong mỗi năm đều có “nhiều hơn” tiền, “nhiều hơn” thức ăn."
+    },
+    {
+      "start": 636.33,
+      "end": 639.27,
+      "en": "Right, hoping life gets better and better.",
+      "zh": "💃对，希望生活越来越好。",
+      "pinyin": "💃 duì， xī wàng shēng huó yuè lái yuè hǎo。",
+      "vi": "Đúng, mong cuộc sống ngày càng tốt đẹp hơn."
+    },
+    {
+      "start": 639.27,
+      "end": 643.23,
+      "en": "And when eating fish, you can't finish the whole fish.",
+      "zh": "💃而且，吃鱼的时候，💃这条鱼不能全部吃完。",
+      "pinyin": "💃 ér qiě， chī yú de shí hòu，💃 zhè tiáo yú bù néng quán bù chī wán。",
+      "vi": "Và khi ăn cá, không được ăn hết cả con cá."
+    },
+    {
+      "start": 643.4,
+      "end": 653.07,
+      "en": "Really? You have to \"leave\" a little? Yes, leave a little \"surplus\"; that's what \"年年有余\" means. Wow, Chinese culture is really interesting.",
+      "zh": "🕺真的吗？要“剩”一点？ 💃对，💃要“余”下来一点，💃这才叫“年年有余”。 🕺哇，🕺中国文化真的很有意思。",
+      "pinyin": "🕺 zhēn de ma？ yào “ shèng ” yì diǎn？ 💃 duì，💃 yào “ yú ” xià lái yì diǎn，💃 zhè cái jiào “ nián nián yǒu yú ”。 🕺 wā，🕺 zhōng guó wén huà zhēn de hěn yǒu yì sī。",
+      "vi": "Thật sao? Phải “để lại” một chút? Đúng, phải “để dư” lại một chút, như thế mới gọi là “niên niên hữu dư”. Ồ, văn hóa Trung Quốc thật thú vị."
+    },
+    {
+      "start": 653.07,
+      "end": 656.9,
+      "en": "Yes. Eat dumplings, eat rice cakes, and eat fish.",
+      "zh": "💃是的。吃饺子，💃吃年糕，吃鱼。",
+      "pinyin": "💃 shì de。 chī jiǎo zǐ，💃 chī nián gāo， chī yú。",
+      "vi": "Đúng vậy. Ăn sủi cảo, ăn bánh gạo nếp, ăn cá."
+    },
+    {
+      "start": 657.03,
+      "end": 659.63,
+      "en": "After the New Year's Eve dinner, what will everyone do?",
+      "zh": "🕺吃完年夜饭，大家会做什么？",
+      "pinyin": "🕺 chī wán nián yè fàn， dà jiā huì zuò shén me？",
+      "vi": "Ăn xong bữa cơm tất niên, mọi người sẽ làm gì?"
+    },
+    {
+      "start": 659.63,
+      "end": 661.43,
+      "en": "Children are the happiest.",
+      "zh": "💃小孩子最开心了。",
+      "pinyin": "💃 xiǎo hái zi zuì kāi xīn le。",
+      "vi": "Trẻ con là vui nhất."
+    },
+    {
+      "start": 661.43,
+      "end": 663.47,
+      "en": "Because they can get \"red envelopes.\"",
+      "zh": "💃因为可以拿“红包”。",
+      "pinyin": "💃 yīn wèi kě yǐ ná “ hóng bāo ”。",
+      "vi": "Vì có thể nhận “bao lì xì”."
+    },
+    {
+      "start": 663.47,
+      "end": 664.67,
+      "en": "Haha, right!",
+      "zh": "🕺哈哈，对！",
+      "pinyin": "🕺 hā hā， duì！",
+      "vi": "Haha, đúng vậy!"
+    },
+    {
+      "start": 664.67,
+      "end": 669.23,
+      "en": "\"Red envelope\"! It's a red envelope with money inside.",
+      "zh": "🕺“红包”！就是一个红色的信封，🕺里面有钱。",
+      "pinyin": "🕺“ hóng bāo ”！ jiù shì yí gè hóng sè de xìn fēng，🕺 lǐ miàn yǒu qián。",
+      "vi": "“Bao lì xì”! Là một phong bì màu đỏ, bên trong có tiền."
+    },
+    {
+      "start": 669.23,
+      "end": 675.4,
+      "en": "Elders, such as parents, grandparents, uncles and aunts, give red envelopes to children.",
+      "zh": "💃长辈，比如爸爸妈妈、💃爷爷奶奶、💃叔叔阿姨，会给小孩子红包。",
+      "pinyin": "💃 zhǎng bèi， bǐ rú bà ba mā ma、💃 yé ye nǎi nai、💃 shū shu ā yí， huì gěi xiǎo hái zi hóng bāo。",
+      "vi": "Người lớn, như bố mẹ, ông bà, chú bác cô dì, sẽ lì xì cho trẻ con."
+    },
+    {
+      "start": 675.47,
+      "end": 678.83,
+      "en": "After receiving red envelopes, children should say blessings.",
+      "zh": "🕺拿到红包，🕺小孩子要说祝福的话。",
+      "pinyin": "🕺 ná dào hóng bāo，🕺 xiǎo hái zi yào shuō zhù fú de huà。",
+      "vi": "Nhận được lì xì, trẻ con phải nói lời chúc."
+    },
+    {
+      "start": 678.83,
+      "end": 687,
+      "en": "For example, \"Happy New Year, good health!\", \"Wishing you prosperity, hand over the red envelope!\" Haha, just kidding.",
+      "zh": "💃比如，“祝您新年快乐，💃身体健康！”，🕺“恭喜发财，🕺红包拿来！”，🕺哈哈，开玩笑。",
+      "pinyin": "💃 bǐ rú，“ zhù nín xīn nián kuài lè，💃 shēn tǐ jiàn kāng！”，🕺“ gōng xǐ fā cái，🕺 hóng bāo ná lái！”，🕺 hā hā， kāi wán xiào。",
+      "vi": "Ví dụ, “Chúc bạn năm mới vui vẻ, sức khỏe dồi dào!”, “Cung hỷ phát tài, đưa lì xì đây!”, haha, đùa thôi."
+    },
+    {
+      "start": 687.07,
+      "end": 695.43,
+      "en": "After getting red envelopes, everyone also has to wear \"new clothes.\" Yes, during the New Year you must wear new clothes, representing a new beginning.",
+      "zh": "💃拿了红包，大家还要穿“新衣服”。 🕺对，🕺过年一定要穿新衣服，🕺代表新的开始。",
+      "pinyin": "💃 ná le hóng bāo， dà jiā hái yào chuān “ xīn yī fú ”。 🕺 duì，🕺 guò nián yí dìng yào chuān xīn yī fu，🕺 dài biǎo xīn de kāi shǐ。",
+      "vi": "Nhận lì xì xong, mọi người còn phải mặc “quần áo mới”. Đúng, Tết nhất định phải mặc quần áo mới, tượng trưng cho khởi đầu mới."
+    },
+    {
+      "start": 695.53,
+      "end": 698.27,
+      "en": "Many people will buy new red clothes.",
+      "zh": "🕺很多人会买红色的新衣服。",
+      "pinyin": "🕺 hěn duō rén huì mǎi hóng sè de xīn yī fu。",
+      "vi": "Nhiều người sẽ mua quần áo mới màu đỏ."
+    },
+    {
+      "start": 698.27,
+      "end": 701.17,
+      "en": "In the past, people would also \"set off firecrackers.\"",
+      "zh": "💃以前，大家还会“放鞭炮”。",
+      "pinyin": "💃 yǐ qián， dà jiā hái huì “ fàng biān pào ”。",
+      "vi": "Ngày trước, mọi người còn “đốt pháo”."
+    },
+    {
+      "start": 701.23,
+      "end": 704.9,
+      "en": "\"Firecrackers\" are very loud, with a crackling sound.",
+      "zh": "🕺“鞭炮”，声音很大，🕺噼里啪啦的。",
+      "pinyin": "🕺“ biān pào ”， shēng yīn hěn dà，🕺 pī li pā lā de。",
+      "vi": "“Pháo”, tiếng rất lớn, nổ lép bép."
+    },
+    {
+      "start": 704.9,
+      "end": 711.87,
+      "en": "But now, in many big cities, such as Beijing and Shanghai, to protect the environment and for safety,",
+      "zh": "💃但是现在，在很多大城市，💃比如北京、上海，💃为了保护环境，💃也为了安全，",
+      "pinyin": "💃 dàn shì xiàn zài， zài hěn duō dài chéng shì，💃 bǐ rú běi jīng、 shàng hǎi，💃 wèi le bǎo hù huán jìng，💃 yě wèi le ān quán，",
+      "vi": "Nhưng bây giờ, ở nhiều thành phố lớn, ví dụ như Bắc Kinh, Thượng Hải, để bảo vệ môi trường, và cũng vì an toàn,"
+    },
+    {
+      "start": 711.87,
+      "end": 713.47,
+      "en": "people can no longer set off firecrackers.",
+      "zh": "💃不能放鞭炮了。",
+      "pinyin": "💃 bù néng fàng biān pào le。",
+      "vi": "không thể đốt pháo nữa."
+    },
+    {
+      "start": 713.47,
+      "end": 718.17,
+      "en": "Yes, although it's a bit quieter, everyone is still very happy.",
+      "zh": "🕺是的，虽然安静了一点，🕺但是大家还是很高兴。",
+      "pinyin": "🕺 shì de， suī rán ān jìng le yì diǎn，🕺 dàn shì dà jiā hái shì hěn gāo xìng。",
+      "vi": "Đúng vậy, tuy có yên tĩnh hơn một chút, nhưng mọi người vẫn rất vui."
+    },
+    {
+      "start": 718.2,
+      "end": 724.03,
+      "en": "There's one more thing: starting from the first day of the New Year, we go visiting. Right,",
+      "zh": "💃还有一件事情，💃就是从新年的第一天开始，💃我们要去做客。 🕺对，",
+      "pinyin": "💃 hái yǒu yí jiàn shì qíng，💃 jiù shì cóng xīn nián de dì yī tiān kāi shǐ，💃 wǒ men yào qù zuò kè。 🕺 duì，",
+      "vi": "Còn một điều nữa, đó là từ ngày đầu tiên của năm mới, chúng ta sẽ đi thăm nhà người khác. Đúng vậy,"
+    },
+    {
+      "start": 724.03,
+      "end": 725.53,
+      "en": "It's called \"bainian\" (New Year greetings).",
+      "zh": "🕺叫“拜年”。",
+      "pinyin": "🕺 jiào “ bài nián ”。",
+      "vi": "Gọi là “bái niên” (chúc Tết)."
+    },
+    {
+      "start": 725.53,
+      "end": 730.9,
+      "en": "\"Bainian\" means visiting family and friends and saying \"Happy New Year\" to each other.",
+      "zh": "💃“拜年”，就是去看望家人和朋友，💃互相说“新年好”。",
+      "pinyin": "💃“ bài nián ”， jiù shì qù kàn wàng jiā rén hé péng yǒu，💃 hù xiāng shuō “ xīn nián hǎo ”。",
+      "vi": "“Bái niên” là đi thăm gia đình và bạn bè, nói với nhau “Chúc mừng năm mới”."
+    },
+    {
+      "start": 730.9,
+      "end": 735.77,
+      "en": "Bringing gifts, everyone chats and eats together; it's very lively.",
+      "zh": "🕺带着礼物，大家一起聊天，吃，🕺饭，非常热闹。",
+      "pinyin": "🕺 dài zhe lǐ wù， dà jiā yì qǐ liáo tiān， chī，🕺 fàn， fēi cháng rè nào。",
+      "vi": "Mang theo quà, mọi người cùng trò chuyện, ăn cơm, rất náo nhiệt."
+    },
+    {
+      "start": 735.77,
+      "end": 740.57,
+      "en": "So Spring Festival is truly a festival about \"family\" and \"friends.\"",
+      "zh": "💃所以，春节，💃真的是一个关于“家”和“朋友”的节日。",
+      "pinyin": "💃 suǒ yǐ， chūn jié，💃 zhēn de shì yí gè guān yú “ jiā ” hé “ péng yǒu ” de jié rì。",
+      "vi": "Vì vậy, Tết Nguyên Đán thật sự là một ngày lễ về “gia đình” và “bạn bè”."
+    },
+    {
+      "start": 740.57,
+      "end": 741.2,
+      "en": "That's right.",
+      "zh": "🕺没错。",
+      "pinyin": "🕺 méi cuò。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 743.37,
+      "end": 745.5,
+      "en": "Okay, time really flies.",
+      "zh": "💃好的，时间过得真快。",
+      "pinyin": "💃 hǎo de， shí jiān guò dé zhēn kuài。",
+      "vi": "Được rồi, thời gian trôi qua thật nhanh."
+    },
+    {
+      "start": 746.07,
+      "end": 751.57,
+      "en": "Today we talked a lot about the topics of \"Spring Festival\" and \"reunion.\"",
+      "zh": "💃今天我们聊了很多关于“春节”，💃和“团圆”的话题。",
+      "pinyin": "💃 jīn tiān wǒ men liáo le hěn duō guān yú “ chūn jié ”，💃 hé “ tuán yuán ” de huà tí。",
+      "vi": "Hôm nay chúng ta đã nói rất nhiều về chủ đề “Tết Nguyên Đán” và “đoàn tụ”."
+    },
+    {
+      "start": 751.63,
+      "end": 755.7,
+      "en": "Yes, let's briefly summarize today's content.",
+      "zh": "🕺是的，我们来，🕺简单总结一下今天的内容。",
+      "pinyin": "🕺 shì de， wǒ men lái，🕺 jiǎn dān zǒng jié yí xià jīn tiān de nèi róng。",
+      "vi": "Đúng vậy, chúng ta hãy tóm tắt đơn giản nội dung hôm nay."
+    },
+    {
+      "start": 755.87,
+      "end": 762.7,
+      "en": "First, we learned that \"Spring Festival\" is the most important and liveliest festival for Chinese people.",
+      "zh": "💃首先，我们知道了，💃“春节”是中国人最重要、最热闹的节日。",
+      "pinyin": "💃 shǒu xiān， wǒ men zhī dào le，💃“ chūn jié ” shì zhōng guó rén zuì zhòng yào、 zuì rè nào de jié rì。",
+      "vi": "Đầu tiên, chúng ta đã biết “Tết Nguyên Đán” là ngày lễ quan trọng nhất và náo nhiệt nhất của người Trung Quốc."
+    },
+    {
+      "start": 762.77,
+      "end": 765.23,
+      "en": "We also call it \"guo nian\" (celebrating the New Year).",
+      "zh": "💃我们也叫它“过年”。",
+      "pinyin": "💃 wǒ men yě jiào tā “ guò nián ”。",
+      "vi": "Chúng ta cũng gọi nó là “ăn Tết”."
+    },
+    {
+      "start": 765.6,
+      "end": 770.23,
+      "en": "Before Spring Festival, everyone does a \"big cleanup\" and also \"buys New Year goods.\"",
+      "zh": "🕺春节前，大家要“大扫除”，🕺还要“买年货”。",
+      "pinyin": "🕺 chūn jié qián， dà jiā yào “ dà sǎo chú ”，🕺 hái yào “ mǎi nián huò ”。",
+      "vi": "Trước Tết, mọi người phải “tổng vệ sinh nhà cửa”, và còn phải “mua đồ Tết”."
+    },
+    {
+      "start": 770.4,
+      "end": 775.83,
+      "en": "We also learned that the most important meaning of Spring Festival is \"reunion.\"",
+      "zh": "💃我们也知道了，💃春节最重要的意思是“团圆”。",
+      "pinyin": "💃 wǒ men yě zhī dào le，💃 chūn jié zuì zhòng yào de yì sī shì “ tuán yuán ”。",
+      "vi": "Chúng ta cũng đã biết, ý nghĩa quan trọng nhất của Tết Nguyên Đán là “đoàn tụ”."
+    },
+    {
+      "start": 776.03,
+      "end": 779.07,
+      "en": "\"Reunion\" means the whole family being together.",
+      "zh": "🕺“团圆”就是全家人在一起。",
+      "pinyin": "🕺“ tuán yuán ” jiù shì quán jiā rén zài yì qǐ。",
+      "vi": "“Đoàn tụ” là cả gia đình ở bên nhau."
+    },
+    {
+      "start": 779.23,
+      "end": 784.27,
+      "en": "For reunion, many people have to go through the \"Spring Festival travel rush\" and must \"go home.\"",
+      "zh": "🕺为了团圆，🕺很多人要经历“春运”，🕺一定要“回家”。",
+      "pinyin": "🕺 wèi le tuán yuán，🕺 hěn duō rén yào jīng lì “ chūn yùn ”，🕺 yí dìng yào “ huí jiā ”。",
+      "vi": "Để đoàn tụ, nhiều người phải trải qua “mùa cao điểm đi lại dịp Tết”, nhất định phải “về nhà”."
+    },
+    {
+      "start": 784.43,
+      "end": 791.67,
+      "en": "After going home, the whole family will have a hearty \"New Year's Eve dinner\" together on \"New Year's Eve.\"",
+      "zh": "💃回家以后，💃全家人会在“除夕”晚上，💃一起吃一顿丰盛的“年夜饭”。",
+      "pinyin": "💃 huí jiā yǐ hòu，💃 quán jiā rén huì zài “ chú xī ” wǎn shàng，💃 yì qǐ chī yí dùn fēng shèng de “ nián yè fàn ”。",
+      "vi": "Sau khi về nhà, cả gia đình sẽ cùng nhau ăn một bữa “cơm tất niên” thịnh soạn vào đêm “Giao thừa”."
+    },
+    {
+      "start": 792.03,
+      "end": 799.4,
+      "en": "The New Year's Eve dinner includes many foods with auspicious meanings, such as “dumplings” in the north and “rice cake” in the south,",
+      "zh": "🕺年夜饭会吃很多有“好意思”的食物，🕺比如北方的“饺子”，🕺南方的“年糕”，",
+      "pinyin": "🕺 nián yè fàn huì chī hěn duō yǒu “ hǎo yì si ” de shí wù，🕺 bǐ rú běi fāng de “ jiǎo zǐ ”，🕺 nán fāng de “ nián gāo ”，",
+      "vi": "Bữa cơm tất niên sẽ có nhiều món ăn mang ý nghĩa tốt lành, ví dụ như “sủi cảo” ở miền Bắc, “bánh niên cao” ở miền Nam,"
+    },
+    {
+      "start": 799.4,
+      "end": 801.97,
+      "en": "There is also “fish”, which everyone eats.",
+      "zh": "🕺还有大家都会吃的“鱼”。",
+      "pinyin": "🕺 hái yǒu dà jiā dōu huì chī de “ yú ”。",
+      "vi": "Ngoài ra còn có món “cá” mà mọi người đều ăn."
+    },
+    {
+      "start": 802.37,
+      "end": 809.07,
+      "en": "After the meal, elders give children “red envelopes”; everyone wears new clothes and exchanges New Year greetings.",
+      "zh": "💃吃完饭，长辈会给小孩子“红包”，💃大家穿新衣服，互相“拜年”。",
+      "pinyin": "💃 chī wán fàn， cháng bèi huì gěi xiǎo hái zi “ hóng bāo ”，💃 dà jiā chuān xīn yī fu， hù xiāng “ bài nián ”。",
+      "vi": "Sau bữa cơm, người lớn sẽ phát “lì xì” cho trẻ nhỏ; mọi người mặc quần áo mới và chúc Tết nhau."
+    },
+    {
+      "start": 809.13,
+      "end": 810.03,
+      "en": "That's right.",
+      "zh": "🕺没错。",
+      "pinyin": "🕺 méi cuò。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 810.17,
+      "end": 813.63,
+      "en": "I hope everyone learned some useful words today.",
+      "zh": "🕺希望大家今天学到了一些有用的词。",
+      "pinyin": "🕺 xī wàng dà jiā jīn tiān xué dào le yì xiē yǒu yòng de cí。",
+      "vi": "Hy vọng hôm nay mọi người đã học được một số từ hữu ích."
+    },
+    {
+      "start": 813.87,
+      "end": 818.43,
+      "en": "Let's review a few of today's most important keywords.",
+      "zh": "💃我们来复习几个今天，💃最重要的关键词吧。",
+      "pinyin": "💃 wǒ men lái fù xí jǐ gè jīn tiān，💃 zuì zhòng yào de guān jiàn cí ba。",
+      "vi": "Chúng ta cùng ôn lại vài từ khóa quan trọng nhất hôm nay nhé."
+    },
+    {
+      "start": 818.47,
+      "end": 820.5,
+      "en": "The first one: “Spring Festival”.",
+      "zh": "🕺第一个：“春节”。",
+      "pinyin": "🕺 dì yī gè：“ chūn jié ”。",
+      "vi": "Từ đầu tiên: “Tết Xuân”."
+    },
+    {
+      "start": 820.8,
+      "end": 825.63,
+      "en": "It means Chinese New Year. The second one: “reunion”.",
+      "zh": "💃意思是中国的新年。 🕺第二个：“团圆”。",
+      "pinyin": "💃 yì sī shì zhōng guó de xīn nián。 🕺 dì èr gè：“ tuán yuán ”。",
+      "vi": "Nghĩa là năm mới của Trung Quốc. Từ thứ hai: “đoàn viên”."
+    },
+    {
+      "start": 825.83,
+      "end": 828.73,
+      "en": "It means family being together.",
+      "zh": "💃意思是家人在一起。",
+      "pinyin": "💃 yì sī shì jiā rén zài yì qǐ。",
+      "vi": "Nghĩa là các thành viên trong gia đình ở bên nhau."
+    },
+    {
+      "start": 828.97,
+      "end": 831.07,
+      "en": "The third one: “going home”.",
+      "zh": "🕺第三个：“回家”。",
+      "pinyin": "🕺 dì sān gè：“ huí jiā ”。",
+      "vi": "Từ thứ ba: “về nhà”."
+    },
+    {
+      "start": 831.2,
+      "end": 834.3,
+      "en": "This is the most important thing during Spring Festival.",
+      "zh": "💃这是春节最重要的事情。",
+      "pinyin": "💃 zhè shì chūn jié zuì zhòng yào de shì qíng。",
+      "vi": "Đây là việc quan trọng nhất trong dịp Tết."
+    },
+    {
+      "start": 834.43,
+      "end": 839.97,
+      "en": "The fourth one: “New Year's Eve dinner”. This is the big feast on New Year's Eve.",
+      "zh": "🕺第四个：“年，🕺夜饭”。 💃这是除夕晚上的大餐。",
+      "pinyin": "🕺 dì sì gè：“ nián，🕺 yè fàn ”。 💃 zhè shì chú xī wǎn shàng de dà cān。",
+      "vi": "Từ thứ tư: “cơm tất niên”. Đây là bữa tiệc lớn vào đêm Giao thừa."
+    },
+    {
+      "start": 840.27,
+      "end": 846.13,
+      "en": "The last one: “red envelope”. There is money inside; it's children's favorite.",
+      "zh": "🕺最后一个：“红包”。 💃里面有钱，💃是小孩子的最爱。",
+      "pinyin": "🕺 zuì hòu yí gè：“ hóng bāo ”。 💃 lǐ miàn yǒu qián，💃 shì xiǎo hái zi de zuì ài。",
+      "vi": "Từ cuối cùng: “lì xì”. Bên trong có tiền, là thứ trẻ con thích nhất."
+    },
+    {
+      "start": 846.33,
+      "end": 850.53,
+      "en": "You can try using these words to say one or two sentences.",
+      "zh": "🕺大家可以试着用这些词，🕺说一两个句子。",
+      "pinyin": "🕺 dà jiā kě yǐ shì zhe yòng zhè xiē cí，🕺 shuō yì liǎng gè jù zi。",
+      "vi": "Mọi người có thể thử dùng những từ này để nói một hai câu."
+    },
+    {
+      "start": 850.63,
+      "end": 861.9,
+      "en": "For example: “I'm going home for reunion during Spring Festival.”, “I like eating New Year's Eve dinner and also like receiving red envelopes.” Haha, well said.",
+      "zh": "💃比如：“我春节要回家团圆。”，🕺“我喜欢吃年夜饭，🕺也喜欢拿红包。”，💃哈哈，说得很好。",
+      "pinyin": "💃 bǐ rú：“ wǒ chūn jié yào huí jiā tuán yuán。”，🕺“ wǒ xǐ huān chī nián yè fàn，🕺 yě xǐ huan ná hóng bāo。”，💃 hā hā， shuō dé hěn hǎo。",
+      "vi": "Ví dụ: “Tết này tôi sẽ về nhà đoàn viên.”, “Tôi thích ăn cơm tất niên, cũng thích nhận lì xì.” Haha, nói rất tốt."
+    },
+    {
+      "start": 862.17,
+      "end": 866.57,
+      "en": "Learning Chinese is a gradual process; don't rush.",
+      "zh": "🕺学习中文是一个慢慢的过程，🕺大家不要着急。",
+      "pinyin": "🕺 xué xí zhōng wén shì yí gè màn màn de guò chéng，🕺 dà jiā bú yào zháo jí。",
+      "vi": "Học tiếng Trung là một quá trình từ từ, mọi người đừng vội."
+    },
+    {
+      "start": 866.63,
+      "end": 871.3,
+      "en": "Listen a little every day, learn a little every day, and you will definitely improve.",
+      "zh": "🕺每天听一点，🕺每天学一点，🕺你一定会进步的。",
+      "pinyin": "🕺 měi tiān tīng yì diǎn，🕺 měi tiān xué yì diǎn，🕺 nǐ yí dìng huì jìn bù de。",
+      "vi": "Mỗi ngày nghe một chút, mỗi ngày học một chút, bạn nhất định sẽ tiến bộ."
+    },
+    {
+      "start": 871.6,
+      "end": 875.37,
+      "en": "Thank you everyone for listening to today's “Learn Chinese Podcast”.",
+      "zh": "💃感谢大家收听今天的“学中文播客”。",
+      "pinyin": "💃 gǎn xiè dà jiā shōu tīng jīn tiān de “ xué zhōng wén bō kè ”。",
+      "vi": "Cảm ơn mọi người đã nghe “Học tiếng Trung Podcast” hôm nay."
+    },
+    {
+      "start": 875.57,
+      "end": 879.1,
+      "en": "If you like our show, please “subscribe” to us.",
+      "zh": "🕺如果你喜欢我们的节目，🕺请“订阅”我们。",
+      "pinyin": "🕺 rú guǒ nǐ xǐ huan wǒ men de jié mù，🕺 qǐng “ dìng yuè ” wǒ men。",
+      "vi": "Nếu bạn thích chương trình của chúng tôi, hãy “đăng ký” kênh."
+    },
+    {
+      "start": 879.2,
+      "end": 886.3,
+      "en": "You can also leave us a “comment”, tell us your thoughts on the “Spring Festival”, or what topics you'd like to hear.",
+      "zh": "💃你也可以给我们“留言”，💃告诉我们你对“春节”的看法，或者你，💃想听什么话题。",
+      "pinyin": "💃 nǐ yě kě yǐ gěi wǒ men “ liú yán ”，💃 gào sù wǒ men nǐ duì “ chūn jié ” de kàn fǎ， huò zhě nǐ，💃 xiǎng tīng shén me huà tí。",
+      "vi": "Bạn cũng có thể “để lại bình luận” cho chúng tôi, cho chúng tôi biết suy nghĩ của bạn về “Tết Xuân”, hoặc chủ đề bạn muốn nghe."
+    },
+    {
+      "start": 886.43,
+      "end": 888.83,
+      "en": "🕺 We really want to hear your voice.",
+      "zh": "🕺我们很想听到你的声音。",
+      "pinyin": "🕺 wǒ men hěn xiǎng tīng dào nǐ de shēng yīn。",
+      "vi": "🕺 Chúng tôi rất muốn nghe giọng nói của bạn."
+    },
+    {
+      "start": 888.93,
+      "end": 892.63,
+      "en": "💃 Okay, see you next episode! 🕺 Goodbye!",
+      "zh": "💃好的，我们下期节目再见！ 🕺再见！",
+      "pinyin": "💃 hǎo de， wǒ men xià qī jié mù zài jiàn！ 🕺 zài jiàn！",
+      "vi": "💃 Được rồi, hẹn gặp lại các bạn trong chương trình kỳ sau! 🕺 Tạm biệt!"
+    }
+  ]
+}

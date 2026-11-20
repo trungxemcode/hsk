@@ -1,0 +1,1341 @@
+{
+  "id": "JUM04yRkIS0",
+  "youtubeId": "JUM04yRkIS0",
+  "channelHandle": "@ChineseDailyPodcast",
+  "title": "房宽万间，卧榻三尺 | Ancient Chinese Wisdom for Sleep & Stress | Chinese Daily Podcast",
+  "titleVi": "Phòng rộng vạn gian, giường nằm ba thước",
+  "topic": "Podcast HSK hằng ngày",
+  "level": "HSK 2–4",
+  "levelGroup": "hsk3",
+  "durationSec": 909,
+  "cues": [
+    {
+      "start": 6.4,
+      "end": 10.33,
+      "en": "Good evening, dear friends, welcome to Chinese Daily.",
+      "zh": "晚上好，亲爱的朋友们，欢迎收听每天中文。",
+      "pinyin": "Wǎn shàng hǎo， qīn ài de péng yǒu men， huān yíng shōu tīng měi tiān zhōng wén。",
+      "vi": "Xin chào buổi tối, các bạn thân mến, chào mừng đến với Tiếng Trung Mỗi Ngày."
+    },
+    {
+      "start": 10.33,
+      "end": 11.47,
+      "en": "I am Li Ming.",
+      "zh": "我是李明。",
+      "pinyin": "Wǒ shì lǐ míng。",
+      "vi": "Tôi là Lý Minh."
+    },
+    {
+      "start": 11.5,
+      "end": 13.63,
+      "en": "Good evening everyone, I am Wang Yu.",
+      "zh": "大家晚上好，我是王雨。",
+      "pinyin": "Dà jiā wǎn shàng hǎo， wǒ shì wáng yǔ。",
+      "vi": "Xin chào buổi tối mọi người, tôi là Vương Vũ."
+    },
+    {
+      "start": 14,
+      "end": 16.03,
+      "en": "How was your day today?",
+      "zh": "今天这一天过得怎么样呀？",
+      "pinyin": "Jīn tiān zhè yì tiān guò dé zěn me yàng ya？",
+      "vi": "Hôm nay của các bạn diễn ra thế nào ạ?"
+    },
+    {
+      "start": 16.2,
+      "end": 21.13,
+      "en": "I wonder if you, who are listening to our show right now, have just gotten off work or school and returned home,",
+      "zh": "不知道现在听着我们节目的你，是刚刚下班或者下课回到家，",
+      "pinyin": "Bù zhī dào xiàn zài tīng zhe wǒ men jié mù dì nǐ， shì gāng gāng xià bān huò zhě xià kè huí dào jiā，",
+      "vi": "Không biết người đang nghe chương trình của chúng ta lúc này, là vừa tan ca hoặc tan học về đến nhà,"
+    },
+    {
+      "start": 21.13,
+      "end": 25.9,
+      "en": "or have you already finished your shower and are lying comfortably in bed, ready to rest?",
+      "zh": "还是已经洗完澡，正舒舒服服地躺在床上准备休息呢？",
+      "pinyin": "Hái shì yǐ jīng xǐ wán zǎo， zhèng shū shū fú fú dì tǎng zài chuáng shàng zhǔn bèi xiū xi ne？",
+      "vi": "hay là đã tắm xong, đang nằm thoải mái trên giường chuẩn bị nghỉ ngơi?"
+    },
+    {
+      "start": 26.07,
+      "end": 31.97,
+      "en": "Yes, regardless of whether your day went smoothly or not, after being so busy, you finally have a moment",
+      "zh": "是啊，不管你今天过得顺不顺利，忙了这么久，现在终于有了一段",
+      "pinyin": "Shì a， bù guǎn nǐ jīn tiān guò dé shùn bu shùn lì， máng le zhè me jiǔ， xiàn zài zhōng yú yǒu le yí duàn",
+      "vi": "Đúng vậy, bất kể hôm nay của bạn có suôn sẻ hay không, sau khi bận rộn bấy lâu, giờ đây cuối cùng cũng có được một khoảng thời gian"
+    },
+    {
+      "start": 31.97,
+      "end": 34.27,
+      "en": "of quiet time that belongs solely to you.",
+      "zh": "只属于自己的安静时间。",
+      "pinyin": "Zhī shǔ yú zì jǐ de ān jìng shí jiān。",
+      "vi": "yên tĩnh chỉ thuộc về riêng mình."
+    },
+    {
+      "start": 34.47,
+      "end": 39.93,
+      "en": "You can pour a cup of warm water, gently drop your shoulders, and slowly follow our voices,",
+      "zh": "你可以倒一杯温水，把肩膀轻轻放下来，慢慢跟着我们的声音，",
+      "pinyin": "Nǐ kě yǐ dǎo yì bēi wēn shuǐ， bǎ jiān bǎng qīng qīng fàng xià lái， màn màn gēn zhe wǒ men de shēng yīn，",
+      "vi": "Bạn có thể rót một cốc nước ấm, nhẹ nhàng hạ vai xuống, và từ từ theo giọng nói của chúng tôi,"
+    },
+    {
+      "start": 39.93,
+      "end": 42.87,
+      "en": "to relax the tension you've carried all day.",
+      "zh": "放松一下紧张了一天的心情。",
+      "pinyin": "Fàng sōng yí xià jǐn zhāng le yì tiān de xīn qíng。",
+      "vi": "thư giãn tâm trạng căng thẳng suốt cả ngày."
+    },
+    {
+      "start": 42.87,
+      "end": 49,
+      "en": "Exactly, every evening being able to do this, chatting with everyone like friends, I find it particularly healing.",
+      "zh": "没错，每天晚上能这样，和大家像朋友一样聊聊天，我觉得特别治愈。",
+      "pinyin": "Méi cuò， měi tiān wǎn shàng néng zhè yàng， hé dà jiā xiàng péng yǒu yí yàng liáo liáo tiān， wǒ jué de tè bié zhì yù。",
+      "vi": "Đúng vậy, mỗi tối được như thế này, trò chuyện với mọi người như những người bạn, tôi cảm thấy đặc biệt chữa lành."
+    },
+    {
+      "start": 49.5,
+      "end": 58.4,
+      "en": "However, Li Ming, to be honest, sitting in front of the microphone tonight, I actually feel a bit of unspoken heaviness in my heart and feel particularly exhausted.",
+      "zh": "不过李明，说实话，我今天晚上坐在话筒前面，心里其实有一点点说不出的沉重，感觉特别累。",
+      "pinyin": "Bú guò lǐ míng， shuō shí huà， wǒ jīn tiān wǎn shàng zuò zài huà tǒng qián miàn， xīn lǐ qí shí yǒu yì diǎn diǎn shuō bù chū de chén zhòng， gǎn jué tè bié lèi。",
+      "vi": "Tuy nhiên, Lý Minh, nói thật, tối nay khi ngồi trước micro, trong lòng tôi thực sự có một chút nặng nề khó nói, cảm thấy đặc biệt mệt mỏi."
+    },
+    {
+      "start": 58.4,
+      "end": 59.47,
+      "en": "What's wrong, Wang Yu?",
+      "zh": "怎么了，王雨？",
+      "pinyin": "Zěn me le， wáng yǔ？",
+      "vi": "Sao vậy, Vương Vũ?"
+    },
+    {
+      "start": 59.73,
+      "end": 65.57,
+      "en": "I noticed that when you came over today, you kept sighing, and your dark circles are much heavier than a few days ago,",
+      "zh": "我看你今天过来的时候就一直在叹气，黑眼圈也比前几天重了不少，",
+      "pinyin": "Wǒ kàn nǐ jīn tiān guò lái de shí hòu jiù yì zhí zài tàn qì， hēi yǎn quān yě bǐ qián jǐ tiān zhòng le bù shǎo，",
+      "vi": "Tôi thấy hôm nay khi bạn đến, bạn cứ thở dài hoài, và quầng thâm dưới mắt cũng đậm hơn mấy hôm trước,"
+    },
+    {
+      "start": 65.57,
+      "end": 68.77,
+      "en": "have you been sleeping poorly lately, or is something bothering you?",
+      "zh": "是不是最近没睡好，遇到什么烦心事了？",
+      "pinyin": "Shì bu shì zuì jìn méi shuì hǎo， yù dào shén me fán xīn shì le？",
+      "vi": "có phải dạo này bạn ngủ không ngon, gặp chuyện gì phiền lòng không?"
+    },
+    {
+      "start": 68.77,
+      "end": 73.83,
+      "en": "Well, it's not really a big deal, but I just haven't been able to sleep well these past few days.",
+      "zh": "哎，其实也不是什么大事，就是这几天我一直睡不着。",
+      "pinyin": "Āi， qí shí yě bú shì shén me dà shì， jiù shì zhè jǐ tiān wǒ yì zhí shuì bù zhe。",
+      "vi": "À, thực ra cũng chẳng có gì to tát, chỉ là mấy hôm nay tôi cứ trằn trọc không ngủ được."
+    },
+    {
+      "start": 74.27,
+      "end": 78.2,
+      "en": "Last weekend, I visited my college classmate Xiao Li's new home.",
+      "zh": "上个周末，我去大学同学小丽的新家做客了。",
+      "pinyin": "Shàng gè zhōu mò， wǒ qù dà xué tóng xué xiǎo lì de xīn jiā zuò kè le。",
+      "vi": "Cuối tuần trước, tôi có đến nhà mới của Tiểu Lệ, bạn đại học của tôi, để chơi."
+    },
+    {
+      "start": 78.37,
+      "end": 85.03,
+      "en": "She and her husband bought a very large apartment in the city center, with three rooms and a big balcony.",
+      "zh": "她和她先生，在市中心买了一套特别大的房子，有三个房间，还有一个大阳台。",
+      "pinyin": "Tā hé tā xiān shēng， zài shì zhōng xīn mǎi le yí tào tè bié dà de fáng zi， yǒu sān gè fáng jiān， hái yǒu yí gè dà yáng tái。",
+      "vi": "Cô ấy và chồng đã mua một căn nhà rất lớn ở trung tâm thành phố, có ba phòng và một ban công rộng."
+    },
+    {
+      "start": 85.33,
+      "end": 90.67,
+      "en": "After getting home, I spent two hours looking at rental apps, and then looking at my tiny room,",
+      "zh": "我回来以后，看了两个小时的租房软件，再看看自己小小的房间，",
+      "pinyin": "Wǒ huí lái yǐ hòu， kàn le liǎng gè xiǎo shí de zū fáng ruǎn jiàn， zài kàn kàn zì jǐ xiǎo xiǎo de fáng jiān，",
+      "vi": "Sau khi về nhà, tôi đã xem ứng dụng tìm thuê nhà suốt hai tiếng, rồi nhìn lại căn phòng nhỏ xíu của mình,"
+    },
+    {
+      "start": 90.67,
+      "end": 94.23,
+      "en": "I suddenly felt quite wronged and felt really down inside.",
+      "zh": "突然觉得特别委屈，心里很不是滋味。",
+      "pinyin": "Tū rán jué de tè bié wěi qu， xīn lǐ hěn bú shì zī wèi。",
+      "vi": "bỗng nhiên thấy mình thật đáng thương, trong lòng rất không vui."
+    },
+    {
+      "start": 95.3,
+      "end": 97,
+      "en": "So that's what it's about.",
+      "zh": "原来是因为这个呀。",
+      "pinyin": "Yuán lái shì yīn wèi zhè ge ya。",
+      "vi": "Ra là vì chuyện đó."
+    },
+    {
+      "start": 97.2,
+      "end": 102.07,
+      "en": "So these past few nights, after lying down, have you been thinking about these things non-stop?",
+      "zh": "那你这几天晚上躺下以后，是不是满脑子都在想这些事？",
+      "pinyin": "Nà nǐ zhè jǐ tiān wǎn shàng tǎng xià yǐ hòu， shì bu shì mǎn nǎo zǐ dōu zài xiǎng zhè xiē shì？",
+      "vi": "Vậy mấy đêm nay, sau khi nằm xuống, có phải đầu bạn cứ nghĩ mãi về những chuyện đó không?"
+    },
+    {
+      "start": 102.07,
+      "end": 107.97,
+      "en": "Yes. Every night when I lie in bed, my eyes are closed, but my mind won't stop.",
+      "zh": "是啊。每天晚上躺在床上，眼睛闭上了，可是脑子停不下来。",
+      "pinyin": "Shì a。 měi tiān wǎn shàng tǎng zài chuáng shàng， yǎn jīng bì shàng le， kě shì nǎo zǐ tíng bú xià lái。",
+      "vi": "Đúng vậy. Mỗi đêm nằm trên giường, mắt đã nhắm lại rồi, nhưng đầu óc thì không ngừng nghỉ."
+    },
+    {
+      "start": 108.1,
+      "end": 113.3,
+      "en": "I keep thinking about how to earn more money and when I can finally move to a bigger place,",
+      "zh": "我想的都是怎么才能多赚一点钱，什么时候才能换一个大房子，",
+      "pinyin": "Wǒ xiǎng de dōu shì zěn me cái néng duō zhuàn yì diǎn qián， shén me shí hòu cái néng huàn yí gè dà fáng zi，",
+      "vi": "Tôi cứ nghĩ làm thế nào để kiếm thêm tiền, khi nào mới có thể chuyển sang một căn nhà lớn hơn,"
+    },
+    {
+      "start": 113.3,
+      "end": 118.4,
+      "en": "Or buy a nice car so that others think I'm living a very successful life and have a lot of prestige.",
+      "zh": "或者买一辆好车，让别人觉得我过得很成功，很有面子。",
+      "pinyin": "Huò zhě mǎi yí liàng hǎo chē， ràng bié rén jué de wǒ guò dé hěn chéng gōng， hěn yǒu miàn zi。",
+      "vi": "Hoặc mua một chiếc xe xịn để người khác nghĩ rằng mình sống rất thành công, rất có thể diện."
+    },
+    {
+      "start": 118.8,
+      "end": 123.17,
+      "en": "As a result, the more I think, the more awake I get, often unable to sleep until 2 AM.",
+      "zh": "结果越想越清醒，常常到凌晨两点还睡不着。",
+      "pinyin": "Jié guǒ yuè xiǎng yuè qīng xǐng， cháng cháng dào líng chén liǎng diǎn hái shuì bù zhe。",
+      "vi": "Kết quả là càng nghĩ càng tỉnh, thường đến hai giờ sáng vẫn không ngủ được."
+    },
+    {
+      "start": 123.2,
+      "end": 125.23,
+      "en": "I completely understand how you feel.",
+      "zh": "我完全理解你的心情。",
+      "pinyin": "Wǒ wán quán lǐ jiě nǐ de xīn qíng。",
+      "vi": "Tôi hoàn toàn hiểu cảm xúc của bạn."
+    },
+    {
+      "start": 125.27,
+      "end": 130.5,
+      "en": "Actually, it's not just you; nowadays, many young people are being chased by this kind of pressure.",
+      "zh": "其实，不光是你，现在很多年轻人，都被这种压力追着跑。",
+      "pinyin": "Qí shí， bù guāng shì nǐ， xiàn zài hěn duō nián qīng rén， dōu bèi zhè zhǒng yā lì zhuī zhe pǎo。",
+      "vi": "Thực ra, không chỉ bạn, mà hiện nay rất nhiều người trẻ tuổi đều bị áp lực này đuổi theo."
+    },
+    {
+      "start": 130.87,
+      "end": 138.7,
+      "en": "Every day, when people open their phones and see friends showing off their travels, gourmet food, and new houses, they can't help but compare themselves.",
+      "zh": "大家每天打开手机，看到朋友圈里别人晒旅游、晒美食、晒新房，心里就忍不住去比较。",
+      "pinyin": "Dà jiā měi tiān dǎ kāi shǒu jī， kàn dào péng yǒu quān lǐ bié rén shài lǚ yóu、 shài měi shí、 shài xīn fáng， xīn lǐ jiù rěn bú zhù qù bǐ jiào。",
+      "vi": "Mỗi ngày mọi người mở điện thoại, thấy bạn bè khoe du lịch, khoe đồ ăn ngon, khoe nhà mới, trong lòng không kìm được mà so sánh."
+    },
+    {
+      "start": 138.73,
+      "end": 142.4,
+      "en": "Exactly, it's this kind of comparison that makes people feel particularly exhausted.",
+      "zh": "对呀，就是这种对比让人觉得特别累。",
+      "pinyin": "Duì ya， jiù shì zhè zhǒng duì bǐ ràng rén jué de tè bié lèi。",
+      "vi": "Đúng vậy, chính sự so sánh này khiến người ta cảm thấy đặc biệt mệt mỏi."
+    },
+    {
+      "start": 142.77,
+      "end": 151.07,
+      "en": "It feels as if if I don't earn a lot of money or live in a big house, I am a failure who cannot hold their head up in front of friends.",
+      "zh": "好像如果我没有赚到很多钱，没有住进大房子，我就是一个失败的人，在朋友面前抬不起头来。",
+      "pinyin": "Hǎo xiàng rú guǒ wǒ méi yǒu zhuàn dào hěn duō qián， méi yǒu zhù jìn dà fáng zi， wǒ jiù shì yí gè shī bài de rén， zài péng yǒu miàn qián tái bù qǐ tóu lái。",
+      "vi": "Cứ như thể nếu tôi không kiếm được nhiều tiền, không sống trong ngôi nhà lớn, thì tôi là một kẻ thất bại, không dám ngẩng đầu trước mặt bạn bè."
+    },
+    {
+      "start": 151.53,
+      "end": 154.57,
+      "en": "Li Ming, have you ever felt this way before?",
+      "zh": "李明，你以前也有过这种感觉吗？",
+      "pinyin": "Lǐ míng， nǐ yǐ qián yě yǒu guò zhè zhǒng gǎn jué ma？",
+      "vi": "Lý Minh, trước đây anh cũng từng có cảm giác này sao?"
+    },
+    {
+      "start": 154.57,
+      "end": 159.47,
+      "en": "You usually look so calm, as if you never worry about these things.",
+      "zh": "你平时看起来总是那么平静，好像从来不为这些事发愁。",
+      "pinyin": "Nǐ píng shí kàn qǐ lái zǒng shì nà me píng jìng， hǎo xiàng cóng lái bú wèi zhè xiē shì fā chóu。",
+      "vi": "Bình thường anh trông luôn rất bình tĩnh, dường như không bao giờ lo lắng về những chuyện này."
+    },
+    {
+      "start": 159.7,
+      "end": 161.17,
+      "en": "How could I not have?",
+      "zh": "怎么会没有呢？",
+      "pinyin": "Zěn me huì méi yǒu ne？",
+      "vi": "Sao lại không có chứ?"
+    },
+    {
+      "start": 161.37,
+      "end": 165.83,
+      "en": "A few years ago, when I first came to Beijing to work, I was even more anxious than you are now.",
+      "zh": "几年前我刚来北京工作的时候，比你现在还要焦虑。",
+      "pinyin": "Jǐ nián qián wǒ gāng lái běi jīng gōng zuò de shí hòu， bǐ nǐ xiàn zài hái yào jiāo lǜ。",
+      "vi": "Vài năm trước, khi tôi mới đến Bắc Kinh làm việc, tôi còn lo lắng hơn cả bây giờ."
+    },
+    {
+      "start": 165.93,
+      "end": 172.13,
+      "en": "Back then, I worked late every day and didn't dare to rest on weekends, just thinking about how to get a promotion and a raise quickly.",
+      "zh": "那时候我每天工作到深夜，周末也不敢休息，就想着快点升职加薪。",
+      "pinyin": "Nà shí hòu wǒ měi tiān gōng zuò dào shēn yè， zhōu mò yě bù gǎn xiū xi， jiù xiǎng zhe kuài diǎn shēng zhí jiā xīn。",
+      "vi": "Lúc đó tôi làm việc đến khuya mỗi ngày, cuối tuần cũng không dám nghỉ ngơi, chỉ nghĩ cách thăng chức và tăng lương thật nhanh."
+    },
+    {
+      "start": 172.4,
+      "end": 173.33,
+      "en": "Is that really true?",
+      "zh": "真的吗？",
+      "pinyin": "Zhēn de ma？",
+      "vi": "Thật sao?"
+    },
+    {
+      "start": 173.33,
+      "end": 176.07,
+      "en": "I thought you were always this calm.",
+      "zh": "我以为你一直都这么淡定呢。",
+      "pinyin": "Wǒ yǐ wéi nǐ yì zhí dōu zhè me dàn dìng ne。",
+      "vi": "Tôi cứ tưởng bạn luôn bình thản như vậy."
+    },
+    {
+      "start": 176.07,
+      "end": 178.3,
+      "en": "Were you happy back then?",
+      "zh": "那你当时过得开心吗？",
+      "pinyin": "Nà nǐ dāng shí guò dé kāi xīn ma？",
+      "vi": "Vậy lúc đó bạn có vui vẻ không?"
+    },
+    {
+      "start": 178.3,
+      "end": 180,
+      "en": "Not happy at all.",
+      "zh": "一点也不开心。",
+      "pinyin": "Yì diǎn yě bù kāi xīn。",
+      "vi": "Không vui chút nào."
+    },
+    {
+      "start": 180.27,
+      "end": 188.5,
+      "en": "During that period, I did earn a bit more money than before and bought some very expensive clothes, looking quite respectable.",
+      "zh": "那段时间，我赚的钱确实比以前多了一点，也买了几件很贵的衣服，看起来好像很体面。",
+      "pinyin": "Nà duàn shí jiān， wǒ zhuàn de qián què shí bǐ yǐ qián duō le yì diǎn， yě mǎi le jǐ jiàn hěn guì de yī fu， kàn qǐ lái hǎo xiàng hěn tǐ miàn。",
+      "vi": "Trong thời gian đó, tôi thực sự kiếm được nhiều tiền hơn trước một chút và cũng mua vài bộ quần áo rất đắt tiền, trông có vẻ rất sang trọng."
+    },
+    {
+      "start": 188.7,
+      "end": 196.43,
+      "en": "But my stomach often hurt, and every night I ordered takeout, eating a few bites in a rush before continuing to work.",
+      "zh": "可是我的胃经常疼，每天晚上吃饭都是点外卖，匆匆忙忙吃几口就继续工作。",
+      "pinyin": "Kě shì wǒ de wèi jīng cháng téng， měi tiān wǎn shàng chī fàn dōu shì diǎn wài mài， cōng cōng máng máng chī jǐ kǒu jiù jì xù gōng zuò。",
+      "vi": "Nhưng dạ dày của tôi thường xuyên đau, mỗi tối ăn cơm đều gọi đồ ăn ngoài, ăn vội vài miếng rồi lại tiếp tục làm việc."
+    },
+    {
+      "start": 196.87,
+      "end": 201.27,
+      "en": "After lying in bed, my heart was still pounding, and I couldn't sleep soundly at all.",
+      "zh": "躺在床上以后，心还在咚咚地跳，根本睡不踏实。",
+      "pinyin": "Tǎng zài chuáng shàng yǐ hòu， xīn hái zài dōng dōng dì tiào， gēn běn shuì bú tà shí。",
+      "vi": "Sau khi nằm trên giường, tim vẫn đập thình thịch, hoàn toàn không ngủ được yên."
+    },
+    {
+      "start": 201.27,
+      "end": 203.67,
+      "en": "That sounds really hard.",
+      "zh": "听起来真的好辛苦啊。",
+      "pinyin": "Tīng qǐ lái zhēn de hǎo xīn kǔ a。",
+      "vi": "Nghe thật là vất vả quá."
+    },
+    {
+      "start": 203.73,
+      "end": 205.97,
+      "en": "How did things change later?",
+      "zh": "那后来是怎么改变的呢？",
+      "pinyin": "Nà hòu lái shì zěn me gǎi biàn de ne？",
+      "vi": "Vậy sau này đã thay đổi như thế nào?"
+    },
+    {
+      "start": 205.97,
+      "end": 208.77,
+      "en": "Why have you become so composed now?",
+      "zh": "为什么你现在变得这么从容？",
+      "pinyin": "Wèi shén me nǐ xiàn zài biàn de zhè me cóng róng？",
+      "vi": "Tại sao bây giờ bạn lại trở nên bình thản như vậy?"
+    },
+    {
+      "start": 209.07,
+      "end": 213.27,
+      "en": "This has to be traced back to last autumn when I returned to Hangzhou to visit my grandfather.",
+      "zh": "这还要从前年秋天我回杭州看望爷爷说起。",
+      "pinyin": "Zhè hái yào cóng qián nián qiū tiān wǒ huí háng zhōu kàn wàng yé ye shuō qǐ。",
+      "vi": "Điều này phải kể từ mùa thu năm ngoái khi tôi về Hàng Châu thăm ông nội."
+    },
+    {
+      "start": 213.5,
+      "end": 219.07,
+      "en": "My grandfather is over eighty years old this year and has lived his whole life on a quiet old street.",
+      "zh": "我爷爷今年八十多岁了，一辈子都住在一条安静的老街上。",
+      "pinyin": "Wǒ yé ye jīn nián bā shí duō suì le， yí bèi zi dōu zhù zài yì tiáo ān jìng de lǎo jiē shàng。",
+      "vi": "Ông nội tôi năm nay hơn tám mươi tuổi, cả đời sống trên một con phố cổ yên tĩnh."
+    },
+    {
+      "start": 219.47,
+      "end": 225.6,
+      "en": "His house isn’t big and the furniture is old, but every morning he goes to the park to practice tai chi.",
+      "zh": "他的房子不大，家具也很旧，但是每天早上他都去公园打太极，",
+      "pinyin": "Tā de fáng zǐ bú dà， jiā jù yě hěn jiù， dàn shì měi tiān zǎo shàng tā dōu qù gōng yuán dǎ tài jí，",
+      "vi": "Nhà anh ấy không rộng, đồ nội thất cũng cũ kỹ, nhưng mỗi sáng anh đều đến công viên tập thái cực."
+    },
+    {
+      "start": 225.7,
+      "end": 232.87,
+      "en": "At noon he cooks two small dishes himself, in the afternoon he drinks tea and reads a book, and at 9:30 p.m. he goes to bed on time.",
+      "zh": "中午自己做两道小菜，下午喝喝茶、看看书，晚上九点半就准时睡觉。",
+      "pinyin": "Zhōng wǔ zì jǐ zuò liǎng dào xiǎo cài， xià wǔ hē hē chá、 kàn kàn shū， wǎn shàng jiǔ diǎn bàn jiù zhǔn shí shuì jiào。",
+      "vi": "Buổi trưa tự nấu hai món ăn nhẹ, buổi chiều uống trà và đọc sách, và vào lúc 9 giờ 30 tối anh đi ngủ đúng giờ."
+    },
+    {
+      "start": 232.87,
+      "end": 236.8,
+      "en": "It sounds so pleasant, like life in a movie.",
+      "zh": "听起来好惬意啊，像电影里的生活一样。",
+      "pinyin": "Tīng qǐ lái hǎo qiè yì a， xiàng diàn yǐng lǐ de shēng huó yí yàng。",
+      "vi": "Nghe thật thư thái, như cuộc sống trong phim."
+    },
+    {
+      "start": 236.8,
+      "end": 242.7,
+      "en": "Yeah. One night, I was sitting with my grandfather in the courtyard to cool off, and I couldn’t help but tell him about",
+      "zh": "是啊。有一天晚上，我和爷爷坐，在院子里乘凉，我忍不住跟他说起",
+      "pinyin": "Shì a。 yǒu yì tiān wǎn shàng， wǒ hé yé ye zuò， zài yuàn zi lǐ chéng liáng， wǒ rěn bú zhù gēn tā shuō qǐ",
+      "vi": "Đúng vậy. Một buổi tối, tôi ngồi với ông trong sân để mát, tôi không thể kiềm chế mà kể cho ông nghe về"
+    },
+    {
+      "start": 242.7,
+      "end": 250.3,
+      "en": "the pressure I feel in the big city, saying that I think I don’t earn enough, my house isn’t big enough, and I’m worried that others will look down on me.",
+      "zh": "我在大城市里的压力，说我觉得自己赚得不够多，房子不够大，很担心别人看不起我。",
+      "pinyin": "Wǒ zài dài chéng shì lǐ de yā lì， shuō wǒ jué dé zì jǐ zhuàn dé bú gòu duō， fáng zi bú gòu dà， hěn dān xīn bié rén kàn bù qǐ wǒ。",
+      "vi": "các áp lực ở thành phố lớn, nói rằng tôi cảm thấy mình kiếm được không đủ, nhà không đủ rộng, và lo sợ người khác sẽ khinh thường tôi."
+    },
+    {
+      "start": 250.8,
+      "end": 256.33,
+      "en": "After listening, my grandfather didn’t criticize me; he just smiled and told me an ancient saying.",
+      "zh": "爷爷听完以后，没有批评我，只是笑着对我说了一句古人的话。",
+      "pinyin": "Yé ye tīng wán yǐ hòu， méi yǒu pī píng wǒ， zhǐ shì xiào zhe duì wǒ shuō le yí jù gǔ rén de huà。",
+      "vi": "Ông nghe xong không chỉ trích tôi, chỉ cười và nói cho tôi một câu của người xưa."
+    },
+    {
+      "start": 256.33,
+      "end": 258.07,
+      "en": "What did grandfather say?",
+      "zh": "爷爷说了什么呀？",
+      "pinyin": "Yé ye shuō le shén me ya？",
+      "vi": "Ông nói gì vậy?"
+    },
+    {
+      "start": 258.07,
+      "end": 265.8,
+      "en": "He said, “A house may have ten thousand rooms, but the sleeping mat is only three feet.” – “A house may have ten thousand rooms, a three‑foot sleeping mat?”",
+      "zh": "他说：“房宽万间，卧榻三尺。”，房宽万间，卧榻三尺？",
+      "pinyin": "Tā shuō：“ fáng kuān wàn jiān， wò tà sān chǐ。”， fáng kuān wàn jiān， wò tà sān chǐ？",
+      "vi": "Ông nói: “Nhà rộng có mười ngàn phòng, nhưng giường ngủ chỉ ba tấc.” – “Nhà rộng có mười ngàn phòng, giường ngủ ba tấc?”"
+    },
+    {
+      "start": 266.1,
+      "end": 273.17,
+      "en": "Li Ming, this sentence sounds interesting, but what exactly do “卧榻” and “三尺” mean?",
+      "zh": "李明，这句话听起来很有意思，不过“卧榻”和“三尺”具体是什么意思呀？",
+      "pinyin": "Lǐ míng， zhè jù huà tīng qǐ lái hěn yǒu yì sī， bú guò “ wò tà ” hé “ sān chǐ ” jù tǐ shì shén me yì sī ya？",
+      "vi": "Lý Minh, câu này nghe thú vị, nhưng “卧榻” và “三尺” cụ thể nghĩa là gì?"
+    },
+    {
+      "start": 273.17,
+      "end": 274.83,
+      "en": "Let me explain it to you.",
+      "zh": "我来给你解释一下。",
+      "pinyin": "Wǒ lái gěi nǐ jiě shì yí xià。",
+      "vi": "Để tôi giải thích cho bạn."
+    },
+    {
+      "start": 275.1,
+      "end": 282.9,
+      "en": "“房宽万间” means that even if you have a very luxurious big house, large enough to contain ten thousand rooms.",
+      "zh": "“房宽万间”的意思是，就算你有一座非常豪华的大房子，大到里面有一万个房间。",
+      "pinyin": "“ fáng kuān wàn jiān ” de yì sī shì， jiù suàn nǐ yǒu yí zuò fēi cháng háo huá de dà fáng zi， dà dào lǐ miàn yǒu yí wàn gè fáng jiān。",
+      "vi": "“房宽万间” có nghĩa là, ngay cả khi bạn có một ngôi nhà sang trọng rất lớn, lớn đến mức có tới mười ngàn phòng bên trong."
+    },
+    {
+      "start": 283.27,
+      "end": 287.63,
+      "en": "“卧榻” is an ancient term that refers to the bed we sleep on.",
+      "zh": "“卧榻”是古人用的词，意思就是我们睡觉的床。",
+      "pinyin": "“ wò tà ” shì gǔ rén yòng de cí， yì sī jiù shì wǒ men shuì jiào de chuáng。",
+      "vi": "“卧榻” là từ cổ, nghĩa là chiếc giường chúng ta ngủ."
+    },
+    {
+      "start": 287.8,
+      "end": 296,
+      "en": "And “three chi” was an ancient Chinese unit of length, roughly about one meter wide. Oh, I get it!",
+      "zh": "而“三尺”，是中国古代用来测量长度的单位，大概就是一米左右宽。哦，我明白了！",
+      "pinyin": "Ér “ sān chǐ ”， shì zhōng guó gǔ dài yòng lái cè liáng cháng dù de dān wèi， dà gài jiù shì yì mǐ zuǒ yòu kuān。 ò， wǒ míng bái le！",
+      "vi": "“Ba tấc” là đơn vị đo chiều dài trong thời cổ đại Trung Quốc, khoảng một mét chiều rộng. Ồ, tôi hiểu rồi!"
+    },
+    {
+      "start": 296.07,
+      "end": 303.17,
+      "en": "In other words, even if your house were as big as ten thousand rooms, when you go to sleep each night,",
+      "zh": "也就是说，就算你的房子有一万个房间那么大，每天晚上你睡觉的时候，",
+      "pinyin": "Yě jiù shì shuō， jiù suàn nǐ de fáng zi yǒu yí wàn gè fáng jiān nà me dà， měi tiān wǎn shàng nǐ shuì jiào de shí hòu，",
+      "vi": "Nghĩa là, ngay cả khi ngôi nhà của bạn rộng tới mười ngàn phòng, mỗi tối khi bạn đi ngủ,"
+    },
+    {
+      "start": 303.17,
+      "end": 308.73,
+      "en": "what your body truly needs is just a small bed about one meter wide.",
+      "zh": "身体真正需要的，其实也只是一米宽的一张小床而已。",
+      "pinyin": "Shēn tǐ zhēn zhèng xū yào de， qí shí yě zhǐ shì yì mǐ kuān de yì zhāng xiǎo chuáng ér yǐ。",
+      "vi": "cơ thể thực sự chỉ cần một chiếc giường nhỏ rộng khoảng một mét thôi."
+    },
+    {
+      "start": 309,
+      "end": 311,
+      "en": "Exactly, that's the point.",
+      "zh": "没错，就是这个道理。",
+      "pinyin": "Méi cuò， jiù shì zhè ge dào lǐ。",
+      "vi": "Đúng vậy, đó chính là lý do."
+    },
+    {
+      "start": 311.13,
+      "end": 320,
+      "en": "The ancients also had another saying paired with this one: “ten thousand qing of fertile fields, yet you eat only one sheng per day.”",
+      "zh": "古人其实还有另外一句话，跟这句是配在一起的，叫做“良田万顷，日食一升”。",
+      "pinyin": "Gǔ rén qí shí hái yǒu lìng wài yí jù huà， gēn zhè jù shì pèi zài yì qǐ de， jiào zuò “ liáng tián wàn qǐng， rì shí yì shēng ”。",
+      "vi": "Người xưa còn có một câu khác, đi kèm với câu này, gọi là “mười ngàn mẫu ruộng màu mỡ, mỗi ngày chỉ ăn một thước lương”."
+    },
+    {
+      "start": 320.2,
+      "end": 326.27,
+      "en": "It means that even if you have grain from ten thousand mu of land, the amount you can eat each day,",
+      "zh": "意思是就算你拥有一万亩土地的粮食，每天你能吃进肚子里的，",
+      "pinyin": "Yì sī shì jiù suàn nǐ yōng yǒu yí wàn mǔ tǔ dì de liáng shí， měi tiān nǐ néng chī jìn dù zǐ lǐ de，",
+      "vi": "Nghĩa là, dù bạn có lương thực từ mười ngàn mẫu đất, mỗi ngày bạn chỉ có thể ăn vào bụng mình,"
+    },
+    {
+      "start": 326.27,
+      "end": 332.27,
+      "en": "is no more than a small bowl of rice. Wow, when you think about it, it really seems that way.",
+      "zh": "也不过是一小碗米饭。哇，仔细想想，好像真的是这样。",
+      "pinyin": "Yě bú guò shì yì xiǎo wǎn mǐ fàn。 wā， zǐ xì xiǎng xiǎng， hǎo xiàng zhēn de shì zhè yàng。",
+      "vi": "chỉ là một bát cơm nhỏ. Wow, suy nghĩ kỹ thì thật sự như vậy."
+    },
+    {
+      "start": 332.37,
+      "end": 338.37,
+      "en": "No matter how rich a person is, they can only sleep on one bed and have three meals a day.",
+      "zh": "无论一个人多么有钱，他每天也就只能睡一张床，吃三顿饭。",
+      "pinyin": "Wú lùn yí gè rén duō me yǒu qián， tā měi tiān yě jiù zhǐ néng shuì yì zhāng chuáng， chī sān dùn fàn。",
+      "vi": "Dù một người giàu có đến đâu, mỗi ngày họ cũng chỉ có thể ngủ trên một chiếc giường, ăn ba bữa."
+    },
+    {
+      "start": 338.57,
+      "end": 344.77,
+      "en": "If the room is too big, staying alone at night can feel empty, and cleaning it becomes tiring.",
+      "zh": "如果房间太大，晚上一个人住还会觉得空荡荡的，打扫起来也累。",
+      "pinyin": "Rú guǒ fáng jiān tài dà， wǎn shàng yí gè rén zhù hái huì jué dé kòng dàng dàng de， dǎ sǎo qǐ lái yě lèi。",
+      "vi": "Nếu phòng quá lớn, khi ở một mình vào buổi tối sẽ cảm thấy cô đơn, và việc dọn dẹp cũng mệt mỏi."
+    },
+    {
+      "start": 344.77,
+      "end": 351.53,
+      "en": "Yeah. The reason we feel so exhausted today is often not because we truly lack food or clothing,",
+      "zh": "是啊。我们现在的人之所以这么累，很多时候不是因为真的缺吃缺穿，",
+      "pinyin": "Shì a。 wǒ men xiàn zài de rén zhī suǒ yǐ zhè me lèi， hěn duō shí hòu bú shì yīn wèi zhēn de quē chī quē chuān，",
+      "vi": "Đúng vậy. Ngày nay chúng ta mệt mỏi không phải vì thực sự thiếu ăn thiếu mặc,"
+    },
+    {
+      "start": 351.53,
+      "end": 354.27,
+      "en": "but because we care too much about “face”.",
+      "zh": "而是因为太在乎“面子”了。",
+      "pinyin": "Ér shì yīn wèi tài zài hū “ miàn zi ” liǎo。",
+      "vi": "mà là vì chúng ta quá quan tâm đến “mặt”."
+    },
+    {
+      "start": 354.4,
+      "end": 359.5,
+      "en": "In our culture, “face” often represents how others perceive you.",
+      "zh": "在我们的文化里，“面子”常常代表别人对你的看法。",
+      "pinyin": "Zài wǒ men de wén huà lǐ，“ miàn zi ” cháng cháng dài biǎo bié rén duì nǐ de kàn fǎ。",
+      "vi": "Trong văn hoá của chúng ta, “mặt” thường phản ánh quan điểm của người khác về bạn."
+    },
+    {
+      "start": 359.73,
+      "end": 367.27,
+      "en": "Many people work themselves to the bone and overextend their bodies, not to make themselves comfortable, but to show off to others.",
+      "zh": "很多人拼命工作、透支身体，不是为了让自己舒服，而是为了买给别人看，",
+      "pinyin": "Hěn duō rén pīn mìng gōng zuò、 tòu zhī shēn tǐ， bú shì wèi le ràng zì jǐ shū fú， ér shì wèi le mǎi gěi bié rén kàn，",
+      "vi": "Nhiều người làm việc cật lực, tiêu hao sức khỏe, không phải để mình thoải mái, mà để khoe với người khác."
+    },
+    {
+      "start": 367.27,
+      "end": 370.2,
+      "en": "So that others will say “You’re really impressive.”",
+      "zh": "为了让别人夸一句“你真厉害”。",
+      "pinyin": "Wèi le ràng bié rén kuā yí jù “ nǐ zhēn lì hài ”。",
+      "vi": "Để người khác khen một câu “Bạn thật giỏi”."
+    },
+    {
+      "start": 370.2,
+      "end": 371.67,
+      "en": "You nailed it.",
+      "zh": "被你说中了。",
+      "pinyin": "Bèi nǐ shuō zhōng le。",
+      "vi": "Bạn đã nói đúng."
+    },
+    {
+      "start": 371.8,
+      "end": 377.77,
+      "en": "When I looked at a big house yesterday, I wasn’t actually thinking about whether I would be comfortable living alone.",
+      "zh": "我昨天看大房子的时候，其实心里想的也不是我，一个人住得舒不舒服，",
+      "pinyin": "Wǒ zuó tiān kàn dà fáng zi de shí hòu， qí shí xīn lǐ xiǎng de yě bú shì wǒ， yí gè rén zhù dé shū bu shū fú，",
+      "vi": "Khi tôi xem một ngôi nhà lớn hôm qua, thực ra trong đầu tôi không nghĩ đến việc mình sống một mình có thoải mái hay không,"
+    },
+    {
+      "start": 377.87,
+      "end": 384.77,
+      "en": "What I thought of was that if friends came to visit my home and saw such a huge living room, they would surely be envious of me.",
+      "zh": "我想到的是如果朋友来我家做客，看到这么大的客厅，一定会很羡慕我。",
+      "pinyin": "Wǒ xiǎng dào de shì rú guǒ péng yǒu lái wǒ jiā zuò kè， kàn dào zhè me dà de kè tīng， yí dìng huì hěn xiàn mù wǒ。",
+      "vi": "Mà tôi nghĩ đến là nếu bạn bè đến nhà tôi làm khách, nhìn thấy phòng khách rộng lớn như vậy, chắc chắn sẽ rất ghen tị với tôi."
+    },
+    {
+      "start": 384.77,
+      "end": 387.43,
+      "en": "See, this is the crux of the problem.",
+      "zh": "你看，这就是问题所在。",
+      "pinyin": "Nǐ kàn， zhè jiù shì wèn tí suǒ zài。",
+      "vi": "Bạn thấy đấy, đây chính là vấn đề."
+    },
+    {
+      "start": 387.67,
+      "end": 395.77,
+      "en": "For a few minutes of admiration in others’ eyes, we have to sacrifice many years, even decades of hard work and anxiety.",
+      "zh": "为了别人眼里那几分钟的羡慕，我们却要付出好几年，甚至几十年的辛苦和焦虑，",
+      "pinyin": "Wèi le bié rén yǎn lǐ nà jǐ fēn zhōng de xiàn mù， wǒ men què yào fù chū hǎo jǐ nián， shèn zhì jǐ shí nián de xīn kǔ hé jiāo lǜ，",
+      "vi": "Để đổi lấy vài phút ngưỡng mộ trong mắt người khác, chúng ta phải trả giá bằng nhiều năm, thậm chí hàng chục năm vất vả và lo lắng,"
+    },
+    {
+      "start": 395.87,
+      "end": 398.4,
+      "en": "Is this deal a bit not worth it?",
+      "zh": "这笔账是不是有点不划算？",
+      "pinyin": "Zhè bǐ zhàng shì bu shì yǒu diǎn bú huá suàn？",
+      "vi": "Liệu khoản tính này có hơi không xứng đáng?"
+    },
+    {
+      "start": 398.4,
+      "end": 400.4,
+      "en": "Yeah, it’s indeed not worth it.",
+      "zh": "嗯，确实不划算。",
+      "pinyin": "Ǹg， què shí bú huá suàn。",
+      "vi": "Ừ, thực sự không xứng đáng."
+    },
+    {
+      "start": 400.8,
+      "end": 407.4,
+      "en": "But, Li Ming, I know I sometimes care too much about saving face, yet I often feel conflicted.",
+      "zh": "可是，李明，我知道自己有时候太爱面子了，但我也常常觉得很矛盾。",
+      "pinyin": "Kě shì， lǐ míng， wǒ zhī dào zì jǐ yǒu shí hòu tài ài miàn zi le， dàn wǒ yě cháng cháng jué de hěn máo dùn。",
+      "vi": "Nhưng mà, Lý Minh, tôi biết mình đôi khi quá thích giữ mặt, nhưng tôi cũng thường cảm thấy rất mâu thuẫn."
+    },
+    {
+      "start": 407.57,
+      "end": 414.17,
+      "en": "If I don’t pursue these things, will others think I lack ambition and don’t work hard enough?",
+      "zh": "如果我不去追求这些东西，别人会不会觉得我没有上进心，不够努力呢？",
+      "pinyin": "Rú guǒ wǒ bú qù zhuī qiú zhè xiē dōng xī， bié rén huì bu huì jué de wǒ méi yǒu shàng jìn xīn， bú gòu nǔ lì ne？",
+      "vi": "Nếu tôi không theo đuổi những thứ này, người khác có sẽ nghĩ tôi không có tham vọng, không đủ nỗ lực không?"
+    },
+    {
+      "start": 414.47,
+      "end": 419.3,
+      "en": "Could simply eating well and sleeping well also be considered a kind of success?",
+      "zh": "难道好好吃饭、好好睡觉，也能算是一种成功吗？",
+      "pinyin": "Nán dào hǎo hǎo chī fàn、 hǎo hǎo shuì jiào， yě néng suàn shì yì zhǒng chéng gōng ma？",
+      "vi": "Chẳng lẽ ăn uống và ngủ nghỉ đầy đủ cũng có thể được xem là một dạng thành công sao?"
+    },
+    {
+      "start": 419.3,
+      "end": 427.13,
+      "en": "Of course it counts, and in today's fast-paced society, being able to eat well and get proper sleep,",
+      "zh": "当然算，而且在今天这个快节奏的社会里，能做到好好吃饭、好好睡觉，",
+      "pinyin": "Dāng rán suàn， ér qiě zài jīn tiān zhè ge kuài jié zòu de shè huì lǐ， néng zuò dào hǎo hǎo chī fàn、 hǎo hǎo shuì jiào，",
+      "vi": "Tất nhiên là tính vào, và trong xã hội hiện đại, nhịp độ nhanh như hiện nay, việc có thể ăn uống đầy đủ và ngủ ngon là một thành tựu đáng kể."
+    },
+    {
+      "start": 427.13,
+      "end": 430.27,
+      "en": "is actually a particularly remarkable success.",
+      "zh": "其实是一种特别了不起的成功。",
+      "pinyin": "Qí shí shì yì zhǒng tè bié liǎo bù qǐ de chéng gōng。",
+      "vi": "Thực sự là một thành công đặc biệt đáng kinh ngạc."
+    },
+    {
+      "start": 430.27,
+      "end": 431.77,
+      "en": "Why do I say that?",
+      "zh": "为什么这么说呢？",
+      "pinyin": "Wèi shén me zhè me shuō ne？",
+      "vi": "Tại sao lại nói như vậy?"
+    },
+    {
+      "start": 431.97,
+      "end": 436.77,
+      "en": "In the past, people always thought that success meant making a lot of money and becoming a big boss.",
+      "zh": "以前大家总觉得，成功就是要赚大钱、当大老板。",
+      "pinyin": "Yǐ qián dà jiā zǒng jué de， chéng gōng jiù shì yào zhuàn dà qián、 dāng dà lǎo bǎn。",
+      "vi": "Trước đây, mọi người luôn cho rằng thành công là phải kiếm được nhiều tiền, trở thành ông trùm."
+    },
+    {
+      "start": 436.77,
+      "end": 442.17,
+      "en": "You can imagine that life is actually like climbing a mountain with a backpack.",
+      "zh": "你可以想一想，生活其实就像背着一个书包去爬山。",
+      "pinyin": "Nǐ kě yǐ xiǎng yi xiǎng， shēng huó qí shí jiù xiàng bèi zhe yí gè shū bāo qù pá shān。",
+      "vi": "Bạn có thể tưởng tượng, cuộc sống thực ra giống như việc mang một chiếc ba lô lên núi."
+    },
+    {
+      "start": 442.6,
+      "end": 450.7,
+      "en": "At the start, everyone needs a bit of food and a bottle of water; these are the things that truly help us reach the mountain top,",
+      "zh": "每个人一开始，都需要一点食物和一瓶水，这些是真，正能帮助我们走到山顶的东西，",
+      "pinyin": "Měi gè rén yì kāi shǐ， dōu xū yào yì diǎn shí wù hé yì píng shuǐ， zhè xiē shì zhēn， zhèng néng bāng zhù wǒ men zǒu dào shān dǐng de dōng xī，",
+      "vi": "Mỗi người ngay từ đầu đều cần một ít thực phẩm và một chai nước; đây là những thứ thực sự giúp chúng ta lên tới đỉnh núi,"
+    },
+    {
+      "start": 450.7,
+      "end": 453.67,
+      "en": "Just like our daily sleep and three meals.",
+      "zh": "就像我们每天的睡眠和三餐。",
+      "pinyin": "Jiù xiàng wǒ men měi tiān de shuì mián hé sān cān。",
+      "vi": "Giống như giấc ngủ và ba bữa ăn hàng ngày của chúng ta."
+    },
+    {
+      "start": 454.17,
+      "end": 461.57,
+      "en": "However, many people, in order to appear impressive, fill their backpack with all sorts of big, heavy stones.",
+      "zh": "但是很多人为了显得自己很厉害，在书包里装满了各种又大又重的石头，",
+      "pinyin": "Dàn shì hěn duō rén wèi le xiǎn de zì jǐ hěn lì hài， zài shū bāo lǐ zhuāng mǎn le gè zhǒng yòu dà yòu zhòng de shí tou，",
+      "vi": "Nhưng nhiều người để tỏ ra mình mạnh mẽ, lại nhồi đầy ba lô bằng đủ loại đá to và nặng."
+    },
+    {
+      "start": 461.57,
+      "end": 468.6,
+      "en": "They want passersby to see: “Look, my backpack is bigger than yours, and it’s filled with treasures.”",
+      "zh": "他们想让路过的人看到：“看，我的书包比你们的都大，里面装的都是宝贝。”",
+      "pinyin": "Tā men xiǎng ràng lù guò de rén kàn dào：“ kàn， wǒ de shū bāo bǐ nǐ men de dōu dà， lǐ miàn zhuāng de dōu shì bǎo bèi。”",
+      "vi": "Họ muốn người đi qua thấy: “Nhìn kìa, ba lô của tôi to hơn ba lô của các bạn, bên trong đầy những báu vật.”"
+    },
+    {
+      "start": 468.7,
+      "end": 477.27,
+      "en": "Climbing the mountain with a backpack full of stones, you’ll definitely collapse after just a few steps, and your shoulders will hurt unbearably.",
+      "zh": "背着满书包的石头爬山，那肯定走不了几步就累倒了呀，肩膀也会疼得受不了。",
+      "pinyin": "Bèi zhe mǎn shū bāo de shí tou pá shān， nà kěn dìng zǒu bù liǎo jǐ bù jiù lèi dǎo le ya， jiān bǎng yě huì téng dé shòu bù liǎo。",
+      "vi": "Mang ba lô đầy đá leo núi, chắc chắn sẽ chỉ bước vài bước là kiệt sức, vai cũng sẽ đau không chịu nổi."
+    },
+    {
+      "start": 477.27,
+      "end": 485.3,
+      "en": "Right. Carrying so many stones, you keep your head down, only focusing on moving forward, and you can’t even see the beautiful scenery along the way.",
+      "zh": "对呀。背着这么多石头，你低着头只顾着往前走，连路边漂亮的风景都看不见，",
+      "pinyin": "Duì ya。 bèi zhe zhè me duō shí tóu， nǐ dī zhe tóu zhǐ gù zhe wǎng qián zǒu， lián lù biān piào liang de fēng jǐng dōu kàn bú jiàn，",
+      "vi": "Đúng vậy. Mang quá nhiều đá, bạn cúi đầu chỉ lo tiến về phía trước, không nhìn thấy cảnh đẹp bên đường."
+    },
+    {
+      "start": 485.4,
+      "end": 488.43,
+      "en": "You can’t even feel the cool wind at the summit.",
+      "zh": "山顶清凉的风也感受不到。",
+      "pinyin": "Shān dǐng qīng liáng de fēng yě gǎn shòu bú dào。",
+      "vi": "Bạn cũng không cảm nhận được làn gió mát lạnh trên đỉnh núi."
+    },
+    {
+      "start": 488.77,
+      "end": 495.67,
+      "en": "A truly wise person learns to take out the unnecessary stones from the backpack, one by one,",
+      "zh": "真正的聪明人，会学会把书包里，那些不需要的石头一块一块拿出来，",
+      "pinyin": "Zhēn zhèng de cōng ming rén， huì xué huì bǎ shū bāo lǐ， nà xiē bù xū yào de shí tou yí kuài yi kuài ná chū lái，",
+      "vi": "Người thực sự khôn ngoan sẽ học cách lấy ra từng viên đá không cần thiết khỏi túi sách, một viên một viên,"
+    },
+    {
+      "start": 495.67,
+      "end": 500.6,
+      "en": "Leaving only the lightest, warmest items, and then set off with ease.",
+      "zh": "只留下最轻便、最温暖的东西，轻松地上路。",
+      "pinyin": "Zhī liú xià zuì qīng biàn、 zuì wēn nuǎn de dōng xī， qīng sōng dì shàng lù。",
+      "vi": "Chỉ để lại những thứ nhẹ nhất, ấm áp nhất, rồi đi tiếp một cách dễ dàng."
+    },
+    {
+      "start": 500.97,
+      "end": 502.5,
+      "en": "This metaphor is really good.",
+      "zh": "这个比喻真好。",
+      "pinyin": "Zhè ge bǐ yù zhēn hǎo。",
+      "vi": "Nhà ẩn dụ này thật tuyệt."
+    },
+    {
+      "start": 502.5,
+      "end": 509.7,
+      "en": "Those stones are the judgments of others, endless desires, and unnecessary vanity.",
+      "zh": "那些石头，就是别人对我们的评价、无止境的欲望，还有那些不必要的虚荣心吧。",
+      "pinyin": "Nà xiē shí tou， jiù shì bié rén duì wǒ men de píng jià、 wú zhǐ jìng de yù wàng， hái yǒu nà xiē bú bì yào de xū róng xīn ba。",
+      "vi": "Những viên đá đó chính là những đánh giá của người khác, những ham muốn vô tận, và những niềm tự hào vô lý."
+    },
+    {
+      "start": 509.7,
+      "end": 510.5,
+      "en": "Yes.",
+      "zh": "是的。",
+      "pinyin": "Shì de。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 510.6,
+      "end": 519,
+      "en": "My grandfather told me a word that night, called “知足”. “知” means know, “足” means enough.",
+      "zh": "我爷爷那天晚上还告诉我一个词，叫“知足”。“知”是知道，“足”是足够的意思。",
+      "pinyin": "Wǒ yé ye nà tiān wǎn shàng hái gào sù wǒ yí gè cí， jiào “ zhī zú ”。“ zhī ” shì zhī dào，“ zú ” shì zú gòu de yì sī。",
+      "vi": "Bố tổ của tôi đã kể cho tôi một từ vào đêm đó, gọi là “知足”. “知” nghĩa là biết, “足” nghĩa là đủ."
+    },
+    {
+      "start": 519.4,
+      "end": 527.07,
+      "en": "“知足” does not mean we should be lazy or stop working hard, but rather helps us understand what we truly need.",
+      "zh": "“知足”并不是叫我们懒惰、不去努力工作，而是让我们知道，什么才是自己真正需要的，",
+      "pinyin": "“ zhī zú ” bìng bú shì jiào wǒ men lǎn duò、 bú qù nǔ lì gōng zuò， ér shì ràng wǒ men zhī dào， shén me cái shì zì jǐ zhēn zhèng xū yào de，",
+      "vi": "“知足” không phải là khuyên chúng ta lười biếng, không làm việc chăm chỉ, mà là giúp chúng ta nhận ra điều gì thực sự cần thiết."
+    },
+    {
+      "start": 527.17,
+      "end": 532.7,
+      "en": "When we have everything we have now, we can feel genuinely satisfied and grateful from the heart.",
+      "zh": "在拥有现在的一切时，能发自内心地感到满足和感谢。",
+      "pinyin": "Zài yōng yǒu xiàn zài de yí qiè shí， néng fā zì nèi xīn dì gǎn dào mǎn zú hé gǎn xiè。",
+      "vi": "Khi có tất cả những gì hiện tại, ta có thể cảm thấy hài lòng và biết ơn từ tận đáy lòng."
+    },
+    {
+      "start": 532.7,
+      "end": 535.57,
+      "en": "I suddenly thought of my own small apartment.",
+      "zh": "我突然想到我自己的那个小公寓了。",
+      "pinyin": "Wǒ tū rán xiǎng dào wǒ zì jǐ de nà ge xiǎo gōng yù le。",
+      "vi": "Tôi đột nhiên nhớ đến căn hộ nhỏ của mình."
+    },
+    {
+      "start": 535.57,
+      "end": 541.57,
+      "en": "Although it is only a little over 30 square meters, without a large balcony, the mattress inside is especially soft,",
+      "zh": "虽然它只有三十多平方米，没有大阳台，但是里面的床垫特别软，",
+      "pinyin": "Suī rán tā zhī yǒu sān shí duō píng fāng mǐ， méi yǒu dà yáng tái， dàn shì lǐ miàn de chuáng diàn tè bié ruǎn，",
+      "vi": "Mặc dù nó chỉ rộng hơn 30 mét vuông, không có ban công lớn, nhưng lót giường bên trong rất mềm mại,"
+    },
+    {
+      "start": 541.57,
+      "end": 543.8,
+      "en": "I had to choose for a long time before I bought it.",
+      "zh": "我挑了很久才买到的。",
+      "pinyin": "Wǒ tiāo le hěn jiǔ cái mǎi dào de。",
+      "vi": "Tôi đã phải chọn lựa lâu để mua được."
+    },
+    {
+      "start": 543.9,
+      "end": 549.97,
+      "en": "That evening I returned home, took a hot shower, changed into comfortable pajamas, and brewed a cup of hot milk,",
+      "zh": "晚上我回到家，洗一个热水澡，换上舒服的睡衣，泡一杯热牛奶，",
+      "pinyin": "Wǎn shàng wǒ huí dào jiā， xǐ yí gè rè shuǐ zǎo， huàn shàng shū fú de shuì yī， pào yì bēi rè niú nǎi，",
+      "vi": "Đêm đó, tôi trở về nhà, tắm nước ấm, mặc đồ ngủ thoải mái, pha một cốc sữa ấm."
+    },
+    {
+      "start": 549.97,
+      "end": 556.4,
+      "en": "Sitting on a small sofa and reading for a while, I was actually the most relaxed and happiest at that time.",
+      "zh": "坐在小沙发上看一会儿书，其实那个时候我是最放松、最快乐的。",
+      "pinyin": "Zuò zài xiǎo shā fā shàng kàn yí huì er shū， qí shí nà ge shí hòu wǒ shì zuì fàng sōng、 zuì kuài lè de。",
+      "vi": "Ngồi trên ghế sofa nhỏ và đọc sách một lúc, thực ra lúc đó tôi cảm thấy thư giãn và hạnh phúc nhất."
+    },
+    {
+      "start": 556.4,
+      "end": 561.27,
+      "en": "You see, you actually know very clearly what makes you feel happy.",
+      "zh": "你看，你心里其实非常清楚什么让你感到幸福。",
+      "pinyin": "Nǐ kàn， nǐ xīn lǐ qí shí fēi cháng qīng chǔ shén me ràng nǐ gǎn dào xìng fú。",
+      "vi": "Bạn thấy, trong lòng bạn thực sự rất rõ điều gì khiến bạn cảm thấy hạnh phúc."
+    },
+    {
+      "start": 561.57,
+      "end": 567.1,
+      "en": "That feeling of calm and steady peace of mind is what we call “安心” in Chinese.",
+      "zh": "那种心里安安静静、踏踏实实的感觉，我们中文里叫“安心”。",
+      "pinyin": "Nà zhǒng xīn lǐ ān ān jìng jìng、 tā tā shi shí de gǎn jué， wǒ men zhōng wén lǐ jiào “ ān xīn ”。",
+      "vi": "Cảm giác bình yên, yên ả trong lòng, chúng ta gọi trong tiếng Trung là “安心”."
+    },
+    {
+      "start": 567.33,
+      "end": 574.57,
+      "en": "You can't buy peace of mind with a thousand gold, if someone lives in a luxurious villa but every night worries about business, worries about others' opinions, tosses and turns and can't sleep, they are actually no happier than you.",
+      "zh": "千金难买心安，如果一个人住着豪华的别墅，但是每天晚上都担心生意、",
+      "pinyin": "Qiān jīn nán mǎi xīn ān， rú guǒ yí gè rén zhù zhe háo huá de bié shù， dàn shì měi tiān wǎn shàng dōu dān xīn shēng yì、",
+      "vi": "Không thể mua được sự an tâm bằng một ngàn vàng, nếu một người sống trong biệt thự sang trọng nhưng mỗi đêm lo lắng về công việc, lo lắng về ánh mắt người khác, lăn lộn không ngủ được, thực ra anh ta không hạnh phúc hơn bạn."
+    },
+    {
+      "start": 574.57,
+      "end": 580.67,
+      "en": "Hmm, I just felt a breath of relief in my heart.",
+      "zh": "担心别人的眼光，翻来覆去睡不着，那他其实并不比你快乐。",
+      "pinyin": "Dān xīn bié rén de yǎn guāng， fān lái fù qù shuì bù zhe， nà tā qí shí bìng bù bǐ nǐ kuài lè。",
+      "vi": "Ừ, bây giờ tôi cảm thấy nhẹ nhõm ngay lập tức."
+    },
+    {
+      "start": 580.67,
+      "end": 584.17,
+      "en": "But Li Ming, even though I understand the logic, sometimes at night that anxiety still sneaks out.",
+      "zh": "嗯，我现在心里一下子松了一口气。",
+      "pinyin": "Ǹg， wǒ xiàn zài xīn lǐ yí xià zǐ sōng le yì kǒu qì。",
+      "vi": "Nhưng Li Ming, mặc dù tôi hiểu lý lẽ, nhưng đôi khi vào buổi tối, lo lắng đó vẫn lặng lẽ xuất hiện."
+    },
+    {
+      "start": 584.3,
+      "end": 591.77,
+      "en": "I think it's not just me; many of our listeners may also have such moments.",
+      "zh": "不过李明，虽然道理我都懂，但有时候到了晚上，那种焦虑还是会悄悄跑出来。",
+      "pinyin": "Bú guò lǐ míng， suī rán dào lǐ wǒ dōu dǒng， dàn yǒu shí hòu dào le wǎn shàng， nà zhǒng jiāo lǜ hái shì huì qiāo qiāo pǎo chū lái。",
+      "vi": "Tôi nghĩ không chỉ mình mình, nhiều người nghe chương trình của chúng ta cũng có thể có những khoảnh khắc như vậy."
+    },
+    {
+      "start": 591.8,
+      "end": 597.53,
+      "en": "You’re right, I’m the same.",
+      "zh": "我觉得不只是我，收听我们节目的很多朋友，可能也会有这样的时刻。",
+      "pinyin": "Wǒ jué de bù zhī shì wǒ， shōu tīng wǒ men jié mù dì hěn duō péng yǒu， kě néng yě huì yǒu zhè yàng de shí kè。",
+      "vi": "Bạn nói đúng, thực ra tôi cũng vậy."
+    },
+    {
+      "start": 597.53,
+      "end": 599.87,
+      "en": "When the night settles down, people are most prone to wandering thoughts.",
+      "zh": "你说得对，其实我也一样。",
+      "pinyin": "Nǐ shuō dé duì， qí shí wǒ yě yí yàng。",
+      "vi": "Khi buổi tối trở nên yên tĩnh, con người dễ dàng lạc lối trong suy nghĩ."
+    },
+    {
+      "start": 600.07,
+      "end": 603.8,
+      "en": "Yes.",
+      "zh": "晚上安静下来的时候，人最容易胡思乱想。",
+      "pinyin": "Wǎn shàng ān jìng xià lái de shí hòu， rén zuì róng yì hú sī luàn xiǎng。",
+      "vi": "Đúng vậy."
+    },
+    {
+      "start": 603.87,
+      "end": 604.67,
+      "en": "Especially for listeners who are learning Chinese, friends, sometimes studying can bring similar pressure.",
+      "zh": "是啊。",
+      "pinyin": "Shì a。",
+      "vi": "Đặc biệt đối với những người đang học tiếng Trung, bạn bè, đôi khi học tập cũng mang lại áp lực tương tự."
+    },
+    {
+      "start": 611.9,
+      "end": 619.27,
+      "en": "I guess many beginner friends, when the night is deep and quiet, might wonder: why can't I remember so many Chinese characters?",
+      "zh": "我猜很多初学者朋友，在夜深人静的时候，可能会想：为什么我记不住这么多汉字？",
+      "pinyin": "Wǒ cāi hěn duō chū xué zhě péng yǒu， zài yè shēn rén jìng de shí hòu， kě néng huì xiǎng： wèi shén me wǒ jì bú zhù zhè me duō hàn zì？",
+      "vi": "Tôi đoán nhiều người mới học, khi màn đêm tối tĩnh lặng, có thể sẽ tự hỏi: tại sao mình không nhớ được bao nhiêu chữ Hán như vậy?"
+    },
+    {
+      "start": 619.3,
+      "end": 626.4,
+      "en": "While others can already chat fluently, and I only learn a few simple words each day, is my progress too slow?",
+      "zh": "别人已经能流利地聊天了，我每天只学了几个简单的词，是不是进步太慢了？",
+      "pinyin": "Bié rén yǐ jīng néng liú lì dì liáo tiān le， wǒ měi tiān zhī xué le jǐ gè jiǎn dān de cí， shì bu shì jìn bù tài màn le？",
+      "vi": "Khi người khác đã có thể trò chuyện lưu loát, còn mình chỉ học vài từ đơn giản mỗi ngày, có phải tiến bộ quá chậm không?"
+    },
+    {
+      "start": 626.57,
+      "end": 630.4,
+      "en": "The more you think like that, the more anxious you become, and the more you can't sleep.",
+      "zh": "越这么想，就越着急，越想越睡不着。",
+      "pinyin": "Yuè zhè me xiǎng， jiù yuè zháo jí， yuè xiǎng yuè shuì bù zhe。",
+      "vi": "Càng nghĩ như vậy, càng bận tâm, càng không ngủ được."
+    },
+    {
+      "start": 630.53,
+      "end": 633.6,
+      "en": "Hearing you say that really resonates with me.",
+      "zh": "听到你这么说，我真的很有感触。",
+      "pinyin": "Tīng dào nǐ zhè me shuō， wǒ zhēn de hěn yǒu gǎn chù。",
+      "vi": "Nhìn thấy bạn nói như vậy, tôi thực sự cảm thấy rất đồng cảm."
+    },
+    {
+      "start": 634.1,
+      "end": 642.67,
+      "en": "In fact, whether it's life, making money, or learning Chinese, the thing we fear most is “comparing with others” and “being too anxious.”",
+      "zh": "其实，无论是生活、赚钱，还是学习中文，最怕的就是“跟别人比较”和“太着急”。",
+      "pinyin": "Qí shí， wú lùn shì shēng huó、 zhuàn qián， hái shì xué xí zhōng wén， zuì pà de jiù shì “ gēn bié rén bǐ jiào ” hé “ tài zháo jí ”。",
+      "vi": "Thật ra, dù là cuộc sống, kiếm tiền, hay học tiếng Trung, điều mà sợ nhất chính là “so sánh với người khác” và “quá bận tâm”."
+    },
+    {
+      "start": 643,
+      "end": 649.57,
+      "en": "If you always think of cramming everything in one go, or memorizing thousands of words in one night,",
+      "zh": "如果你总想着一口气吃成一个大胖子，或者一个晚上就记住几千个词语，",
+      "pinyin": "Rú guǒ nǐ zǒng xiǎng zhe yì kǒu qì chī chéng yí gè dà pàng zi， huò zhě yí gè wǎn shàng jiù jì zhù jǐ qiān gè cí yǔ，",
+      "vi": "Nếu bạn luôn nghĩ rằng mình sẽ ăn hết một lần và trở thành một người to gầy, hoặc trong một đêm ghi nhớ hàng nghìn từ..."
+    },
+    {
+      "start": 649.57,
+      "end": 655.77,
+      "en": "Then you'll be carrying a lot of heavy stones in your heart, and learning will become very painful.",
+      "zh": "那你的心里就会背上很多沉重的石头，学习也会变得很痛苦。",
+      "pinyin": "Nà nǐ de xīn lǐ jiù huì bèi shàng hěn duō chén zhòng de shí tou， xué xí yě huì biàn de hěn tòng kǔ。",
+      "vi": "Thì trong lòng bạn sẽ gánh nặng nhiều viên đá nặng, và việc học cũng sẽ trở nên rất đau khổ."
+    },
+    {
+      "start": 655.77,
+      "end": 663.6,
+      "en": "So Li Ming, if you lie in bed at night and start feeling anxious again, or feel tired and behind, what then?",
+      "zh": "那李明，如果晚上躺在床上，真的又开始焦虑了，或者觉得自己很累、很落后的时候，",
+      "pinyin": "Nà lǐ míng， rú guǒ wǎn shàng tǎng zài chuáng shàng， zhēn de yòu kāi shǐ jiāo lǜ le， huò zhě jué de zì jǐ hěn lèi、 hěn luò hòu de shí hòu，",
+      "vi": "Vậy Li Ming, nếu tối nay nằm trên giường, thực sự lại bắt đầu lo lắng, hoặc cảm thấy mình mệt mỏi, tụt lại phía sau thì sao?"
+    },
+    {
+      "start": 663.6,
+      "end": 669.2,
+      "en": "Is there any simple, practical little trick that can help us calm down quickly?",
+      "zh": "有没有什么简单又实用的小办法，可以帮我们快点安静下来呢？",
+      "pinyin": "Yǒu méi yǒu shén me jiǎn dān yòu shí yòng de xiǎo bàn fǎ， kě yǐ bāng wǒ men kuài diǎn ān jìng xià lái ne？",
+      "vi": "Có bất kỳ cách nhỏ, đơn giản và thực tế nào có thể giúp chúng ta nhanh chóng bình tĩnh lại không?"
+    },
+    {
+      "start": 669.37,
+      "end": 676.47,
+      "en": "I have a few small habits that I use every night, and they work great; today I'm sharing them with you and everyone.",
+      "zh": "我自己有几个，每天晚上都在用的小习惯，效果很好，今天也分享给你和大家。",
+      "pinyin": "Wǒ zì jǐ yǒu jǐ gè， měi tiān wǎn shàng dōu zài yòng de xiǎo xí guàn， xiào guǒ hěn hǎo， jīn tiān yě fēn xiǎng gěi nǐ hé dà jiā。",
+      "vi": "Tôi có một vài thói quen nhỏ mà mình dùng mỗi tối, hiệu quả rất tốt, hôm nay cũng chia sẻ với bạn và mọi người."
+    },
+    {
+      "start": 676.87,
+      "end": 682.83,
+      "en": "First, an hour before bed, put your phone a bit farther from the bed.",
+      "zh": "第一，在睡觉前的一个小时，把手机放在离床远一点的地方。",
+      "pinyin": "Dì yī， zài shuì jiào qián de yí gè xiǎo shí， bǎ shǒu jī fàng zài lí chuáng yuǎn yì diǎn de dì fāng。",
+      "vi": "Đầu tiên, một giờ trước khi ngủ, hãy đặt điện thoại ở xa giường hơn một chút."
+    },
+    {
+      "start": 682.93,
+      "end": 689.2,
+      "en": "Don't scroll through your social media to see other people's lives, and don't read the news that makes you tense.",
+      "zh": "不要再去刷朋友圈看别人的生活，也不要去看那些让人紧张的新闻",
+      "pinyin": "Bú yào zài qù shuā péng yǒu quān kàn bié rén de shēng huó， yě bú yào qù kàn nà xiē ràng rén jǐn zhāng de xīn wén",
+      "vi": "Đừng lướt qua tin nhắn trên mạng xã hội để xem cuộc sống của người khác, cũng đừng xem những tin tức làm người ta căng thẳng."
+    },
+    {
+      "start": 689.2,
+      "end": 693.27,
+      "en": "And information. This point is too important to me!",
+      "zh": "和信息。这一点对我来说太重要了！",
+      "pinyin": "Hé xìn xī。 zhè yì diǎn duì wǒ lái shuō tài zhòng yào le！",
+      "vi": "Và thông tin. Điều này đối với tôi quá quan trọng!"
+    },
+    {
+      "start": 693.27,
+      "end": 697.9,
+      "en": "I always love to look at my phone before bed, and the more I look, the more alert I become.",
+      "zh": "我就是睡前总爱看手机，结果越看越精神。",
+      "pinyin": "Wǒ jiù shì shuì qián zǒng ài kàn shǒu jī， jié guǒ yuè kàn yuè jīng shén。",
+      "vi": "Tôi luôn thích xem điện thoại trước khi ngủ, nhưng càng xem càng tỉnh táo."
+    },
+    {
+      "start": 698.07,
+      "end": 700.67,
+      "en": "So what do you do after putting the phone down?",
+      "zh": "那放下手机以后做什么呢？",
+      "pinyin": "Nà fàng xià shǒu jī yǐ hòu zuò shén me ne？",
+      "vi": "Vậy sau khi đặt điện thoại xuống, ta làm gì?"
+    },
+    {
+      "start": 700.87,
+      "end": 708.3,
+      "en": "Step two: you can pour a small cup of warm water and sip it slowly, or, like me, listen to a Chinese program with a slower pace and gentler voice. You don't need to take notes on every new word; just listen as if chatting with a friend, and count how much you understand.",
+      "zh": "第二步，你可以倒一小杯温水，慢慢喝下去，或者像我一样，听一段语速慢一点、",
+      "pinyin": "Dì èr bù， nǐ kě yǐ dǎo yì xiǎo bēi wēn shuǐ， màn màn hē xià qù， huò zhě xiàng wǒ yí yàng， tīng yí duàn yǔ sù màn yì diǎn、",
+      "vi": "Bước thứ hai, bạn có thể đổ một cốc nước ấm nhỏ, uống chậm rãi, hoặc như tôi, nghe một chương trình tiếng Trung với tốc độ chậm hơn và giọng nói nhẹ nhàng hơn. Bạn không cần ghi chú từng từ mới, chỉ cần nghe như đang trò chuyện với bạn bè, hiểu được bao nhiêu thì được bao nhiêu."
+    },
+    {
+      "start": 708.3,
+      "end": 717.67,
+      "en": "Then close your eyes, take three deep breaths, inhale slowly, then exhale slowly.",
+      "zh": "声音温柔一点的中文节目，不需要去拿笔记每一个生词，只要像听朋友聊天一样，听懂多少算多少。",
+      "pinyin": "Shēng yīn wēn róu yì diǎn de zhōng wén jié mù， bù xū yào qù ná bǐ jì měi yí gè shēng cí， zhǐ yào xiàng tīng péng yǒu liáo tiān yí yàng， tīng dǒng duō shǎo suàn duō shǎo。",
+      "vi": "Sau đó, nhắm mắt lại, hít sâu ba lần, hít vào chậm rãi, rồi thở ra chậm rãi."
+    },
+    {
+      "start": 717.77,
+      "end": 724.07,
+      "en": "Deep breathing is indeed very useful, it can calm a person quickly.",
+      "zh": "然后闭上眼睛，做三次深呼吸，慢慢吸气，再慢慢呼气。",
+      "pinyin": "Rán hòu bì shàng yǎn jīng， zuò sān cì shēn hū xī， màn màn xī qì， zài màn màn hū qì。",
+      "vi": "Hít thở sâu thực sự rất hiệu quả, giúp người ta nhanh chóng bình tĩnh lại."
+    },
+    {
+      "start": 724.3,
+      "end": 729.4,
+      "en": "Anything else?",
+      "zh": "深呼吸确实很有用，能让人很快平静下来。",
+      "pinyin": "Shēn hū xī què shí hěn yǒu yòng， néng ràng rén hěn kuài píng jìng xià lái。",
+      "vi": "Còn gì nữa?"
+    },
+    {
+      "start": 729.4,
+      "end": 730.47,
+      "en": "Step three, which is also my favorite, is to say a sentence to yourself in your mind before bed every day, affirming yourself for the day.",
+      "zh": "还有吗？",
+      "pinyin": "Hái yǒu ma？",
+      "vi": "Bước thứ ba, và cũng là bước tôi thích nhất, là mỗi tối trước khi ngủ, nói một câu cho bản thân trong lòng, khẳng định bản thân ngày hôm đó."
+    },
+    {
+      "start": 730.6,
+      "end": 735.9,
+      "en": "For example, you could say: 'Today I worked diligently, ate a good dinner, and that is already great.'",
+      "zh": "第三步，也是我最喜欢的一步，就是每天睡前在心里对自己",
+      "pinyin": "Dì sān bù， yě shì wǒ zuì xǐ huan de yí bù， jiù shì měi tiān shuì qián zài xīn lǐ duì zì jǐ",
+      "vi": "Ví dụ, bạn có thể nói: 'Hôm nay tôi đã làm việc chăm chỉ, ăn tối ngon, điều đó đã rất tuyệt.'"
+    },
+    {
+      "start": 735.9,
+      "end": 739.27,
+      "en": "If you are learning Chinese, you can also tell yourself: 'Today I learned three more Chinese characters.'",
+      "zh": "说一句话，肯定一下今天的自己。",
+      "pinyin": "Shuō yí jù huà， kěn dìng yí xià jīn tiān de zì jǐ。",
+      "vi": "Nếu bạn đang học tiếng Trung, cũng có thể tự nói: 'Hôm nay tôi đã học thêm ba chữ Hán.'"
+    },
+    {
+      "start": 739.4,
+      "end": 746.43,
+      "en": "Today I learned three more Chinese characters,",
+      "zh": "比如你可以说：“今天我认真工作了，好好吃了晚饭，这就已经很棒了。”",
+      "pinyin": "Bǐ rú nǐ kě yǐ shuō：“ jīn tiān wǒ rèn zhēn gōng zuò le， hǎo hǎo chī le wǎn fàn， zhè jiù yǐ jīng hěn bàng le。”",
+      "vi": "Hôm nay tôi đã học thêm ba chữ Hán,"
+    },
+    {
+      "start": 746.67,
+      "end": 753.07,
+      "en": "Today I learned three more Chinese characters,",
+      "zh": "如果是正在学中文的朋友，也可以告诉自己：“今天我又多认识了三个汉字，",
+      "pinyin": "Rú guǒ shì zhèng zài xué zhōng wén de péng yǒu， yě kě yǐ gào sù zì jǐ：“ jīn tiān wǒ yòu duō rèn shi le sān gè hàn zì，",
+      "vi": "Hôm nay tôi đã học thêm ba chữ Hán,"
+    },
+    {
+      "start": 753.07,
+      "end": 763,
+      "en": "Or, having understood an interesting phrase, I've made a little more progress than yesterday. Hearing you say that, I feel my whole self warmed up.",
+      "zh": "或者听懂了一句有趣的话，我比昨天又进步了一点点。”，听你这么一说，我感觉整个人都温暖起来了。",
+      "pinyin": "Huò zhě tīng dǒng le yí jù yǒu qù de huà， wǒ bǐ zuó tiān yòu jìn bù le yì diǎn diǎn。”， tīng nǐ zhè me yì shuō， wǒ gǎn jué zhěng gè rén dōu wēn nuǎn qǐ lái le。",
+      "vi": "Hoặc đã nghe hiểu một câu nói thú vị, tôi đã tiến bộ một chút hơn hôm qua. Nghe bạn nói như vậy, tôi cảm thấy toàn thân mình ấm áp."
+    },
+    {
+      "start": 763.1,
+      "end": 771,
+      "en": "In fact, life is like a small cup of warm water before bed, you don't need a big bucket, just the right temperature,",
+      "zh": "其实人生就像睡前的一小杯温水，不需要太大一桶，只要温度刚刚好，",
+      "pinyin": "Qí shí rén shēng jiù xiàng shuì qián de yì xiǎo bēi wēn shuǐ， bù xū yào tài dà yì tǒng， zhǐ yào wēn dù gāng gāng hǎo，",
+      "vi": "Thật ra cuộc đời giống như một ngụm nước ấm nhỏ trước khi ngủ, không cần một cái bình lớn, chỉ cần nhiệt độ vừa phải,"
+    },
+    {
+      "start": 771,
+      "end": 774.43,
+      "en": "If it can warm your heart, that's already a kind of happiness.",
+      "zh": "能暖到心里，就已经很幸福了。",
+      "pinyin": "Néng nuǎn dào xīn lǐ， jiù yǐ jīng hěn xìng fú le。",
+      "vi": "Nếu có thể làm ấm trong tim, đó đã là hạnh phúc."
+    },
+    {
+      "start": 774.57,
+      "end": 775.37,
+      "en": "Yes.",
+      "zh": "是啊。",
+      "pinyin": "Shì a。",
+      "vi": "Đúng rồi."
+    },
+    {
+      "start": 775.37,
+      "end": 783.4,
+      "en": "The evening is a time to rest and heal yourself; keep all the worries and comparisons of the day outside.",
+      "zh": "晚上是用来休息和治愈自己的时间，把白天所有的烦恼和比较都留在门外吧。",
+      "pinyin": "Wǎn shàng shì yòng lái xiū xi hé zhì yù zì jǐ de shí jiān， bǎ bái tiān suǒ yǒu de fán nǎo hé bǐ jiào dōu liú zài mén wài ba。",
+      "vi": "Tối là thời gian để nghỉ ngơi và chữa lành bản thân, hãy để mọi phiền phức và sự so sánh của ngày hôm nay ra ngoài cửa."
+    },
+    {
+      "start": 783.4,
+      "end": 791.77,
+      "en": "Even if the room is small, there's still a three-foot warm space that belongs to you; even when life is busy, remember to eat well and sleep well.",
+      "zh": "房间再小，也有属于你自己的三尺温暖；生活再忙，也要记得好好吃饭，好好睡觉。",
+      "pinyin": "Fáng jiān zài xiǎo， yě yǒu shǔ yú nǐ zì jǐ de sān chǐ wēn nuǎn； shēng huó zài máng， yě yào jì de hǎo hǎo chī fàn， hǎo hǎo shuì jiào。",
+      "vi": "Dù phòng nhỏ, vẫn có một khoảng không gian ấm áp ba feet dành cho bạn; dù cuộc sống bận rộn, hãy nhớ ăn uống đầy đủ và ngủ ngon."
+    },
+    {
+      "start": 792.07,
+      "end": 798.6,
+      "en": "After chatting with you about so much today, I feel I will definitely get a particularly sweet sleep tonight!",
+      "zh": "今天跟你聊了这么多，我觉得今晚我一定能睡一个特别香甜的好觉！",
+      "pinyin": "Jīn tiān gēn nǐ liáo le zhè me duō， wǒ jué de jīn wǎn wǒ yí dìng néng shuì yí gè tè bié xiāng tián de hǎo jué！",
+      "vi": "Sau khi trò chuyện với bạn nhiều như vậy hôm nay, tôi tin rằng tối nay mình sẽ có một giấc ngủ thật ngọt ngào!"
+    },
+    {
+      "start": 798.73,
+      "end": 805.4,
+      "en": "Actually, I think many of the words we talked about today are especially suitable for savoring before bed.",
+      "zh": "其实我觉得，今天我们聊到的很多词，都特别适合在睡前慢慢回味。",
+      "pinyin": "Qí shí wǒ jué de， jīn tiān wǒ men liáo dào de hěn duō cí， dōu tè bié shì hé zài shuì qián màn màn huí wèi。",
+      "vi": "Thật ra tôi nghĩ, nhiều từ mà chúng ta đã đề cập hôm nay rất thích hợp để lẩm nhẩm trước khi ngủ."
+    },
+    {
+      "start": 805.73,
+      "end": 811.67,
+      "en": "Li Ming, could you briefly summarize for everyone the key terms we mentioned today?",
+      "zh": "李明，你能不能帮大家稍微总结一下，今天提到的几个关键词？",
+      "pinyin": "Lǐ míng， nǐ néng bu néng bāng dà jiā shāo wēi zǒng jié yí xià， jīn tiān tí dào de jǐ gè guān jiàn cí？",
+      "vi": "Lý Minh, bạn có thể tóm tắt một chút cho mọi người về những từ khóa mà hôm nay đã đề cập không?"
+    },
+    {
+      "start": 811.8,
+      "end": 812.6,
+      "en": "Sure.",
+      "zh": "好呀。",
+      "pinyin": "Hǎo ya。",
+      "vi": "Được rồi."
+    },
+    {
+      "start": 812.7,
+      "end": 822.3,
+      "en": "The core ancient saying we discussed today is “房宽万间，卧榻三尺”, reminding us not to be trapped by too much material.",
+      "zh": "今天我们最核心的一句古话是，“房宽万间，卧榻三尺”，提醒我们不要被过多的物质困住。",
+      "pinyin": "Jīn tiān wǒ men zuì hé xīn de yí jù gǔ huà shì，“ fáng kuān wàn jiān， wò tà sān chǐ ”， tí xǐng wǒ men bú yào bèi guò duō de wù zhì kùn zhù。",
+      "vi": "Câu tục ngữ cốt lõi nhất hôm nay là “房宽万间，卧榻三尺”, nhắc nhở chúng ta không nên bị ràng buộc bởi quá nhiều vật chất."
+    },
+    {
+      "start": 822.47,
+      "end": 828.87,
+      "en": "We also talked about “face” and “pressure”, and many anxieties stem from caring too much about others' opinions.",
+      "zh": "我们还聊到了“面子”和“压力”，很多焦虑都是因为太在乎别人的眼光。",
+      "pinyin": "Wǒ men hái liáo dào le “ miàn zǐ ” hé “ yā lì ”， hěn duō jiāo lǜ dōu shì yīn wèi tài zài hū bié rén de yǎn guāng。",
+      "vi": "Chúng ta cũng đã bàn về “mặt” và “điều áp lực”, nhiều lo lắng xuất phát từ việc quá quan tâm đến ánh mắt của người khác."
+    },
+    {
+      "start": 829,
+      "end": 838.47,
+      "en": "On the contrary, what truly gives us strength is \"contentment\" and \"peace of mind\" — knowing that what we have is enough and keeping our hearts at peace.",
+      "zh": "相反，真正能带给我们力量的，是“知足”和“安心”——，知道自己拥有的已经足够，让内心保持平静。",
+      "pinyin": "Xiāng fǎn， zhēn zhèng néng dài gěi wǒ men lì liàng de， shì “ zhī zú ” hé “ ān xīn ”——， zhī dào zì jǐ yōng yǒu de yǐ jīng zú gòu， ràng nèi xīn bǎo chí píng jìng。",
+      "vi": "Ngược lại, điều thực sự mang lại sức mạnh cho chúng ta là \"tri túc\" và \"an tâm\" — nhận ra những gì mình đang có là đủ, giữ cho tâm hồn luôn bình yên."
+    },
+    {
+      "start": 838.73,
+      "end": 845.13,
+      "en": "Finally, I hope everyone remembers that in today's life, \"eating well and sleeping well\"",
+      "zh": "最后，希望大家都能记住，在今天的生活里，“好好吃饭，好好睡觉”",
+      "pinyin": "Zuì hòu， xī wàng dà jiā dōu néng jì zhù， zài jīn tiān de shēng huó lǐ，“ hǎo hǎo chī fàn， hǎo hǎo shuì jiào ”",
+      "vi": "Cuối cùng, hy vọng mọi người đều ghi nhớ rằng trong cuộc sống hiện tại, \"ăn ngon, ngủ đủ\""
+    },
+    {
+      "start": 845.13,
+      "end": 848.1,
+      "en": "is itself a remarkable success.",
+      "zh": "本身就是一种了不起的成功。",
+      "pinyin": "Běn shēn jiù shì yì zhǒng liǎo bù qǐ de chéng gōng。",
+      "vi": "bản thân nó đã là một thành công phi thường."
+    },
+    {
+      "start": 848.37,
+      "end": 849.7,
+      "en": "Well said.",
+      "zh": "说得真好。",
+      "pinyin": "Shuō dé zhēn hǎo。",
+      "vi": "Nói thật hay."
+    },
+    {
+      "start": 849.73,
+      "end": 858.57,
+      "en": "Dear listeners, if you are now lying in bed preparing to rest, or have just finished a busy day of work and study,",
+      "zh": "听众朋友们，如果你现在正躺在床上准备休息，或者，刚刚结束一天忙碌的工作和学习，",
+      "pinyin": "Tīng zhòng péng yǒu men， rú guǒ nǐ xiàn zài zhèng tǎng zài chuáng shàng zhǔn bèi xiū xi， huò zhě， gāng gāng jié shù yì tiān máng lù de gōng zuò hé xué xí，",
+      "vi": "Thính giả thân mến, nếu bây giờ bạn đang nằm trên giường chuẩn bị nghỉ ngơi, hoặc vừa kết thúc một ngày làm việc và học tập bận rộn,"
+    },
+    {
+      "start": 858.7,
+      "end": 867.37,
+      "en": "I want to ask you a question: Tonight, which heavy stone do you most want to put down from your \"bag\"?",
+      "zh": "我想问你一个问题：今天晚上，你最想从自己的“书，包”里放下哪一块沉重的石头呢？",
+      "pinyin": "Wǒ xiǎng wèn nǐ yí gè wèn tí： jīn tiān wǎn shàng， nǐ zuì xiǎng cóng zì jǐ de “ shū， bāo ” lǐ fàng xià nǎ yí kuài chén zhòng de shí tou ne？",
+      "vi": "tôi muốn hỏi bạn một câu hỏi: Tối nay, bạn muốn đặt xuống từ \"cái túi\" của mình viên đá nặng nề nào nhất?"
+    },
+    {
+      "start": 867.6,
+      "end": 874.03,
+      "en": "When you wake up tomorrow, what simple and happy little thing would you like to do for yourself?",
+      "zh": "明天醒来以后，你又想为自己做一件，什么简单又开心的小事呢？",
+      "pinyin": "Míng tiān xǐng lái yǐ hòu， nǐ yòu xiǎng wèi zì jǐ zuò yí jiàn， shén me jiǎn dān yòu kāi xīn de xiǎo shì ne？",
+      "vi": "Ngày mai khi thức dậy, bạn muốn làm một việc nhỏ đơn giản và vui vẻ gì cho bản thân?"
+    },
+    {
+      "start": 874.13,
+      "end": 878.83,
+      "en": "You can keep the answer to yourself or share it with us in the comments section.",
+      "zh": "你可以把答案留在心里，或者在评论区和我们分享。",
+      "pinyin": "Nǐ kě yǐ bǎ dá àn liú zài xīn lǐ， huò zhě zài píng lùn qū hé wǒ men fēn xiǎng。",
+      "vi": "Bạn có thể giữ câu trả lời trong lòng hoặc chia sẻ với chúng tôi trong phần bình luận."
+    },
+    {
+      "start": 879.07,
+      "end": 882.07,
+      "en": "Thank you all for accompanying Daily Chinese tonight.",
+      "zh": "谢谢大家今晚陪伴每天中文。",
+      "pinyin": "Xiè xiè dà jiā jīn wǎn péi bàn měi tiān zhōng wén。",
+      "vi": "Cảm ơn mọi người đã đồng hành cùng Mỗi Ngày Tiếng Trung tối nay."
+    },
+    {
+      "start": 882.2,
+      "end": 889.87,
+      "en": "Alright, it's late at night. Please close your eyes, relax your shoulders, and stop worrying about tomorrow's troubles.",
+      "zh": "好了，夜深了，请闭上眼睛，放松肩膀，今晚不再去想明天的烦恼。",
+      "pinyin": "Hǎo le， yè shēn le， qǐng bì shàng yǎn jīng， fàng sōng jiān bǎng， jīn wǎn bú zài qù xiǎng míng tiān de fán nǎo。",
+      "vi": "Được rồi, đêm đã khuya, hãy nhắm mắt lại, thả lỏng vai, và đừng nghĩ đến những lo lắng của ngày mai nữa."
+    },
+    {
+      "start": 890,
+      "end": 898.47,
+      "en": "Wishing everyone a sweet dream tonight, sleep well, good night. Good night, see you in the next episode.",
+      "zh": "祝大家今晚都有一个甜美的梦，好好睡觉，晚安。晚安，我们下期节目再见。",
+      "pinyin": "Zhù dà jiā jīn wǎn dōu yǒu yí gè tián měi de mèng， hǎo hǎo shuì jiào， wǎn ān。 wǎn ān， wǒ men xià qī jié mù zài jiàn。",
+      "vi": "Chúc mọi người một giấc mơ ngọt ngào đêm nay, ngủ ngon, chúc ngủ ngon. Chúc ngủ ngon, hẹn gặp lại trong chương trình tiếp theo."
+    }
+  ]
+}
