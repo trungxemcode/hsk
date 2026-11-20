@@ -230,13 +230,97 @@
   border:1px solid var(--line);
   background:var(--paper);
 }
+.custom-ai-architect{
+  padding:12px 14px;
+  border:1px solid var(--accent);
+  border-radius:var(--radius-card);
+  background:var(--paper);
+  display:grid;
+  gap:10px;
+}
+.custom-ai-architect-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.custom-ai-badge{
+  font-size:.8rem;
+  font-weight:700;
+  padding:4px 10px;
+  border-radius:var(--radius-pill);
+  background:var(--accent);
+  color:var(--palette-white);
+}
+.custom-ai-architect-form{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:8px;
+  align-items:center;
+}
+.custom-ai-architect-form input,
+.custom-ai-scenario-input{
+  min-height:44px;
+  padding:8px 12px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-btn);
+  background:var(--surface);
+  color:var(--ink);
+  font-size:.92rem;
+  min-width:0;
+}
+.custom-ai-coach-tip{
+  padding:10px 12px;
+  border-left:3px solid var(--accent);
+  border-radius:var(--radius-btn);
+  background:var(--surface);
+  font-size:.9rem;
+  line-height:1.45;
+}
+.custom-ai-drill-list{
+  display:grid;
+  gap:12px;
+}
+.custom-ai-drill-card,
+.custom-ai-vocab-card,
+.custom-ai-scenario-box{
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-card);
+  background:var(--surface);
+  display:grid;
+  gap:8px;
+}
+.custom-ai-drill-options{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:8px;
+}
+.custom-ai-drill-opt{
+  background:var(--paper);
+  color:var(--ink);
+  border:1px solid var(--line);
+  justify-content:flex-start!important;
+  text-align:left!important;
+}
+.custom-ai-drill-opt.is-correct{
+  border-color:var(--green);
+  background:color-mix(in srgb, var(--green) 14%, var(--surface));
+  font-weight:700;
+}
+.custom-ai-drill-opt.is-wrong{
+  border-color:var(--red);
+  background:color-mix(in srgb, var(--red) 12%, var(--surface));
+}
 @media(max-width:600px){
   .lesson-custom-banner,
   .overview-custom-lesson,
   .lesson-custom-runner{
     padding:14px;
   }
-  .custom-chat-compose{
+  .custom-chat-compose,
+  .custom-ai-architect-form{
     grid-template-columns:1fr;
   }
   .lesson-custom-actions>button,

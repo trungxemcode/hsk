@@ -43,9 +43,88 @@ const http = require('node:http');
       await page.route('**/translation-config.json', r => r.fulfill({ json: { enabled: true, endpoint: 'https://custom-test.invalid/translate' } }));
       await page.route('https://custom-test.invalid/custom-lesson-profile', async route => {
         const body = route.request().postDataJSON();
-        assert.ok(body.answers.length >= 1);
+        if (body.mode === 'design') {
+          return route.fulfill({
+            json: {
+              aiSource: { provider: 'deepseek', model: 'deepseek-chat' },
+              lessonDesign: {
+                lessonId: body.lesson?.id || 'standard-1-01',
+                coachIntroVi: 'AI đã đọc từ vựng & ngữ pháp bài này để thiết kế 2 phiên học và bài tập riêng cho bạn.',
+                customPrompt: body.customPrompt || '',
+                aiProvider: 'deepseek',
+                sessions: [
+                  {
+                    label: 'Phiên 1 · Từ vựng & mẹo nhớ AI',
+                    minutes: 15,
+                    goalVi: 'Nắm từ khóa và làm bài tập phản xạ do AI soạn.',
+                    steps: [
+                      {
+                        id: 'ai_drill_step',
+                        skill: 'vocab',
+                        action: 'ai_drill',
+                        minutes: 8,
+                        titleVi: 'Bài tập phản xạ từ vựng (AI biên soạn)',
+                        detailVi: 'Trắc nghiệm tình huống do AI tạo riêng cho bài này.',
+                        coachTipVi: 'Đọc kỹ ngữ cảnh trước khi chọn đáp án.',
+                        drills: [
+                          {
+                            promptVi: 'Khi gặp nhau lần đầu tiên, bạn chào thế nào tự nhiên nhất?',
+                            questionCn: '___，很高兴认识你！',
+                            options: ['你好', '再见', '谢谢', '不客气'],
+                            answerIndex: 0,
+                            explanationVi: 'Dùng 你好 (Xin chào) khi mới gặp nhau.'
+                          },
+                          {
+                            promptVi: 'Chọn câu cảm ơn phù hợp khi được giúp đỡ:',
+                            questionCn: 'A: 我帮你拿行李。 B: ___！',
+                            options: ['谢谢', '再见', '你好', '不去'],
+                            answerIndex: 0,
+                            explanationVi: '谢谢 dùng để cảm ơn người vừa giúp mình.'
+                          }
+                        ]
+                      },
+                      {
+                        id: 'ai_vocab_step',
+                        skill: 'vocab',
+                        action: 'ai_vocab_coach',
+                        minutes: 7,
+                        titleVi: 'Từ vựng trọng tâm kèm mẹo nhớ AI',
+                        detailVi: 'Học từ với mẹo nhớ và câu ví dụ giao tiếp.',
+                        coachTipVi: 'Nghe audio và đọc to câu ví dụ.',
+                        focusWords: [
+                          {
+                            han: '你好',
+                            pin: 'nǐ hǎo',
+                            mean: 'xin chào',
+                            mnemonicVi: 'Bạn (你) + Tốt lành (好) = Chúc bạn tốt lành (Xin chào).',
+                            exampleCn: '你好，我是新来的同事。',
+                            examplePin: 'Nǐ hǎo, wǒ shì xīn lái de tóngshì.',
+                            exampleVi: 'Xin chào, tôi là đồng nghiệp mới tới.'
+                          }
+                        ]
+                      },
+                      {
+                        id: 'external_vocab_quiz',
+                        skill: 'vocab',
+                        action: 'vocab_quiz',
+                        minutes: 3,
+                        titleVi: 'Kiểm tra từ vựng sau bài học AI',
+                        detailVi: 'Mở bài kiểm tra bên ngoài và quay lại sau khi hoàn thành.',
+                        coachTipVi: 'Tự nhớ nghĩa trước khi mở đáp án.',
+                        wordLimit: 8
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          });
+        }
+        assert.ok((body.answers && body.answers.length >= 1) || (body.messages && body.messages.length >= 1));
         return route.fulfill({
           json: {
+            ready: true,
+            aiSource: { provider: 'deepseek', model: 'deepseek-chat' },
             profile: {
               version: 1,
               hsk: body.hsk,
@@ -56,7 +135,8 @@ const http = require('node:http');
               goal: 'conversation',
               weights: { vocab: 50, grammar: 15, reading: 15, listening: 15, writing: 5 },
               summaryVi: 'AI đã cấu trúc lại bài học ưu tiên 50% từ vựng trong 25 phút/ngày theo giờ trống.',
-              followUpVi: 'Chia 3 phiên ngắn mỗi ngày.'
+              followUpVi: 'Chia 3 phiên ngắn mỗi ngày.',
+              learnerContextVi: 'Học viên bận rộn, ưu tiên từ vựng giao tiếp thực tế trong các khung giờ nghỉ ngắn.'
             }
           }
         });
@@ -110,7 +190,7 @@ const http = require('node:http');
       assert.equal(await page.evaluate(() => window.HSKStudyStore.customLesson?.minutes), 30);
       assert.equal(await page.evaluate(() => window.HSKStudyStore.customLesson?.focusChoice), 'grammar_heavy');
 
-      // 4. Open Custom Lesson Runner and complete a step
+      // 4. Open Custom Lesson Runner, trigger AI Lesson Architect design, and complete an AI drill step
       await page.locator('#lessonCustomStartSession').click();
       await page.locator('#lessonCustomRunner').waitFor({ state: 'visible' });
       const topBtnStats = await page.evaluate(() => [...document.querySelectorAll('#lessonCustomRunner > .lesson-custom-actions > button')].map(b => ({
@@ -121,8 +201,15 @@ const http = require('node:http');
       assert.ok(Math.abs(topBtnStats[0].h - topBtnStats[1].h) <= 1, 'Top runner buttons height mismatch: ' + JSON.stringify(topBtnStats));
       assert.ok(topBtnStats.every(x => x.mb === '0px'), 'Top runner buttons marginBottom must be 0px: ' + JSON.stringify(topBtnStats));
 
+      // Verify AI Lesson Architect bar exists and designs bespoke lesson + AI drills
+      await page.locator('#lessonCustomAiArchitect').waitFor({ state: 'visible' });
+      await page.locator('#lessonCustomAiPromptInput').fill('Ưu tiên bài tập giao tiếp lần đầu gặp mặt');
+      await page.locator('#lessonCustomAiDesignBtn').click();
+      await page.locator('#lessonCustomAiArchitect').filter({ hasText: 'AI · DeepSeek' }).waitFor({ state: 'visible' });
+
       const firstStep = page.locator('[data-custom-step]').first();
       await firstStep.waitFor({ state: 'visible' });
+      assert.match(await firstStep.innerText(), /AI biên soạn/);
       const stepBtnStats = await firstStep.evaluate(card => [...card.querySelectorAll('.lesson-custom-actions > button')].map(b => ({
         h: Math.round(b.getBoundingClientRect().height),
         mb: getComputedStyle(b).marginBottom
@@ -131,7 +218,20 @@ const http = require('node:http');
         assert.ok(Math.abs(stepBtnStats[0].h - stepBtnStats[1].h) <= 1, 'Step action buttons height mismatch: ' + JSON.stringify(stepBtnStats));
         assert.ok(stepBtnStats.every(x => x.mb === '0px'), 'Step action buttons marginBottom must be 0px: ' + JSON.stringify(stepBtnStats));
       }
-      await firstStep.getByRole('button', { name: 'Đánh dấu xong', exact: true }).click();
+
+      // An AI drill cannot be skipped: its parent shortcut is hidden and completion waits for every question.
+      assert.equal(await firstStep.getByRole('button', { name: 'Đánh dấu xong', exact: true }).count(), 0);
+      await firstStep.getByRole('button', { name: 'Thực hiện bước này', exact: true }).click();
+      await page.locator('#customStepStage').waitFor({ state: 'visible' });
+      const drillCards = page.locator('.custom-ai-drill-card');
+      assert.equal(await drillCards.count(), 2);
+      await drillCards.nth(0).locator('.custom-ai-drill-opt').first().click();
+      assert.match(await page.locator('#customStepStage').innerText(), /Chính xác!/);
+      const finishDrills = page.locator('#customStepStage').getByRole('button', { name: 'Hoàn thành bài tập AI', exact: true });
+      assert.equal(await finishDrills.isDisabled(), true, 'cannot finish before answering every AI drill');
+      await drillCards.nth(1).locator('.custom-ai-drill-opt').first().click();
+      assert.equal(await finishDrills.isDisabled(), false);
+      await finishDrills.click();
       assert.match(await firstStep.innerText(), /Đã hoàn thành/);
 
       // Opening a quiz is not completion; the learner marks it done after returning.

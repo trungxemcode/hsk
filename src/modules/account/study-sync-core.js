@@ -10,9 +10,41 @@ const VALID_CUSTOM_SKILLS=['vocab','grammar','reading','listening','writing'];
 const VALID_CUSTOM_FOCUS=['vocab_heavy','grammar_heavy','listening_speaking','reading_heavy','balanced'];
 const VALID_CUSTOM_STYLES=['spare_time','focused_block','hands_free','bedtime_review','weekend_sprint'];
 const VALID_CUSTOM_GOALS=['exam','conversation','reading_comprehension','work_travel'];
-const VALID_CUSTOM_FIELDS=['version','id','hsk','focusChoice','minutes','days','style','goal','weights','summaryVi','followUpVi','sessionsDone','updatedAt'];
+const VALID_CUSTOM_FIELDS=['version','id','hsk','focusChoice','minutes','days','style','goal','weights','summaryVi','followUpVi','sessionsDone','updatedAt','aiGenerated','aiProvider','aiModel','learnerContextVi','aiBlueprint','aiLessonDesigns'];
+const VALID_AI_ACTIONS=['vocab_cards','vocab_quiz','vocab_srs','grammar_focus','reading_dialogue','passive_listen','guided_auto','practice_mini','practice_check','real_reading','ai_vocab_coach','ai_drill','ai_scenario'];
+function validAiWord(word){return Boolean(word&&typeof word==='object'&&!Array.isArray(word)&&['han','pin','mean','mnemonicVi','exampleCn','examplePin','exampleVi'].every(k=>typeof word[k]==='string'&&word[k].length<=300));}
+function validAiDrill(drill){return Boolean(drill&&typeof drill==='object'&&!Array.isArray(drill)&&typeof drill.promptVi==='string'&&drill.promptVi.length<=260&&typeof drill.questionCn==='string'&&drill.questionCn.length<=140&&Array.isArray(drill.options)&&drill.options.length===4&&drill.options.every(x=>typeof x==='string'&&x.length<=120)&&new Set(drill.options).size===4&&Number.isInteger(drill.answerIndex)&&drill.answerIndex>=0&&drill.answerIndex<4&&typeof drill.explanationVi==='string'&&drill.explanationVi.length<=300);}
+function validAiScenario(scenario){return Boolean(scenario&&typeof scenario==='object'&&!Array.isArray(scenario)&&['contextVi','promptVi','sampleCn','samplePin','sampleVi'].every(k=>typeof scenario[k]==='string'&&scenario[k].length<=260));}
+function validAiStep(step){
+ if(!step||typeof step!=='object'||Array.isArray(step)||Object.keys(step).some(k=>!['id','skill','action','minutes','titleVi','detailVi','coachTipVi','wordLimit','grammarLimit','focusWords','drills','scenario'].includes(k)))return false;
+ if(typeof step.id!=='string'||!step.id.trim()||step.id.length>40||!VALID_CUSTOM_SKILLS.includes(step.skill)||!VALID_AI_ACTIONS.includes(step.action)||!Number.isInteger(step.minutes)||step.minutes<1||step.minutes>90)return false;
+ if(typeof step.titleVi!=='string'||!step.titleVi.trim()||step.titleVi.length>140||typeof step.detailVi!=='string'||!step.detailVi.trim()||step.detailVi.length>260||typeof step.coachTipVi!=='string'||!step.coachTipVi.trim()||step.coachTipVi.length>280)return false;
+ if(step.wordLimit!==undefined&&(!Number.isInteger(step.wordLimit)||step.wordLimit<1||step.wordLimit>50)||step.grammarLimit!==undefined&&(!Number.isInteger(step.grammarLimit)||step.grammarLimit<1||step.grammarLimit>10))return false;
+ if(step.focusWords!==undefined&&(!Array.isArray(step.focusWords)||step.focusWords.length>12||!step.focusWords.every(validAiWord)))return false;
+ if(step.drills!==undefined&&(!Array.isArray(step.drills)||step.drills.length>4||!step.drills.every(validAiDrill)))return false;
+ if(step.scenario!==undefined&&!validAiScenario(step.scenario))return false;
+ if(step.action==='ai_vocab_coach'&&(!Array.isArray(step.focusWords)||!step.focusWords.length))return false;
+ if(step.action==='ai_drill'&&(!Array.isArray(step.drills)||step.drills.length<2))return false;
+ if(step.action==='ai_scenario'&&!validAiScenario(step.scenario))return false;
+ return true;
+}
+function validAiSessions(sessions){return Array.isArray(sessions)&&sessions.length>=1&&sessions.length<=4&&sessions.every(session=>session&&typeof session==='object'&&!Array.isArray(session)&&typeof session.label==='string'&&session.label.length<=140&&typeof session.goalVi==='string'&&session.goalVi.length<=220&&Number.isInteger(session.minutes)&&session.minutes>=1&&session.minutes<=180&&Array.isArray(session.steps)&&session.steps.length>=2&&session.steps.length<=4&&session.steps.every(validAiStep));}
+function validCustomAiFields(v){
+ if(v.aiGenerated!==undefined&&typeof v.aiGenerated!=='boolean')return false;
+ if(v.aiProvider!==undefined&&(typeof v.aiProvider!=='string'||v.aiProvider.length>40))return false;
+ if(v.aiModel!==undefined&&(typeof v.aiModel!=='string'||v.aiModel.length>80))return false;
+ if(v.learnerContextVi!==undefined&&(typeof v.learnerContextVi!=='string'||v.learnerContextVi.length>500))return false;
+ if(v.aiBlueprint!==undefined&&!validAiSessions(v.aiBlueprint))return false;
+ if(v.aiLessonDesigns!==undefined){
+  const designs=v.aiLessonDesigns;
+  if(!designs||typeof designs!=='object'||Array.isArray(designs))return false;
+  const ids=Object.keys(designs);if(ids.length>12)return false;
+  for(const id of ids){const design=designs[id];if(!/^[a-zA-Z0-9_-]{1,64}$/.test(id)||!design||typeof design!=='object'||Array.isArray(design)||design.lessonId!==id||typeof design.coachIntroVi!=='string'||!design.coachIntroVi.trim()||design.coachIntroVi.length>500||typeof design.customPrompt!=='string'||design.customPrompt.length>300||typeof design.aiProvider!=='string'||design.aiProvider.length>40||typeof design.aiModel!=='string'||design.aiModel.length>80||!Number.isFinite(design.updatedAt)||!validAiSessions(design.sessions))return false;}
+ }
+ try{return JSON.stringify(v).length<=200000;}catch{return false;}
+}
 function validCustom(v){
- if(!v||typeof v!=='object'||Array.isArray(v)||v.version!==1||Object.keys(v).some(k=>!VALID_CUSTOM_FIELDS.includes(k)))return false;
+ if(!v||typeof v!=='object'||Array.isArray(v)||v.version!==1||Object.keys(v).some(k=>!VALID_CUSTOM_FIELDS.includes(k))||!validCustomAiFields(v))return false;
  if(typeof v.id!=='string'||!v.id.trim()||v.id.length>80)return false;
  if(!Number.isInteger(v.hsk)||v.hsk<1||v.hsk>6)return false;
  if(!VALID_CUSTOM_FOCUS.includes(v.focusChoice)||!VALID_CUSTOM_STYLES.includes(v.style)||!VALID_CUSTOM_GOALS.includes(v.goal))return false;

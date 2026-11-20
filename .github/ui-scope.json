@@ -1,8 +1,7 @@
 {
-  "request": "Add Custom HSK Lesson feature (Home + Lessons, PC + mobile) and fix #sentenceEditor .sentence-rail mobile horizontal tool rail layout.",
+  "request": "Upgrade the AI Lesson Architect and custom lesson experience on Home + Lessons, desktop and mobile.",
   "excludedRoutes": [
     "home",
-    "lessons",
-    "sentence-editor"
+    "lessons"
   ]
 }
