@@ -1130,15 +1130,28 @@
       ? sanitizeAiSessions(lessonAiDesign.sessions, profile.minutes)
       : null;
     const aiSessionsSource = rawAiSessions?.length
-      ? (options.customPrompt && customSchedule?.explicitMicro ? reshapeAiSessionsToCustomSchedule(rawAiSessions, customSchedule) : rawAiSessions)
+      ? (customSchedule?.explicitMicro ? reshapeAiSessionsToCustomSchedule(rawAiSessions, customSchedule) : rawAiSessions)
       : null;
     const blueprintSessions = !aiSessionsSource?.length && Array.isArray(profile.aiBlueprint) && profile.aiBlueprint.length
       ? sanitizeAiSessions(profile.aiBlueprint, profile.minutes)
       : null;
-    const useAiBlueprint = Boolean(
-      blueprintSessions?.length &&
-      (!customSchedule?.explicitMicro || blueprintSessions.length >= 2 || blueprintSessions.some(sess => sess.minutes <= 12))
+    const expectedMicroCount = customSchedule?.sessions?.filter(sess => sess.isMicro).length || 0;
+    const actualMicroCount = blueprintSessions?.filter(sess =>
+      Number(sess.minutes) >= (customSchedule?.minMicro || 0) &&
+      Number(sess.minutes) <= (customSchedule?.maxMicro || 180)
+    ).length || 0;
+    const blueprintHasFocusedSession = !customSchedule?.isHybrid || blueprintSessions?.some(sess =>
+      Math.abs(Number(sess.minutes) - customSchedule.eveningMins) <= 5
     );
+    const blueprintFitsCustomSchedule = !customSchedule?.explicitMicro || (
+      actualMicroCount >= Math.max(1, expectedMicroCount - 1) &&
+      blueprintHasFocusedSession &&
+      (customSchedule.isHybrid || blueprintSessions.every(sess =>
+        Number(sess.minutes) >= customSchedule.minMicro &&
+        Number(sess.minutes) <= customSchedule.maxMicro
+      ))
+    );
+    const useAiBlueprint = Boolean(blueprintSessions?.length && blueprintFitsCustomSchedule);
 
     const sessions = [];
     let completedSteps = 0;
