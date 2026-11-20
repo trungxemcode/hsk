@@ -16,10 +16,10 @@ function validAiWord(word){return Boolean(word&&typeof word==='object'&&!Array.i
 function validAiDrill(drill){return Boolean(drill&&typeof drill==='object'&&!Array.isArray(drill)&&typeof drill.promptVi==='string'&&drill.promptVi.length<=260&&typeof drill.questionCn==='string'&&drill.questionCn.length<=140&&Array.isArray(drill.options)&&drill.options.length===4&&drill.options.every(x=>typeof x==='string'&&x.length<=120)&&new Set(drill.options).size===4&&Number.isInteger(drill.answerIndex)&&drill.answerIndex>=0&&drill.answerIndex<4&&typeof drill.explanationVi==='string'&&drill.explanationVi.length<=300);}
 function validAiScenario(scenario){return Boolean(scenario&&typeof scenario==='object'&&!Array.isArray(scenario)&&['contextVi','promptVi','sampleCn','samplePin','sampleVi'].every(k=>typeof scenario[k]==='string'&&scenario[k].length<=260));}
 function validAiStep(step){
- if(!step||typeof step!=='object'||Array.isArray(step)||Object.keys(step).some(k=>!['id','skill','action','minutes','titleVi','detailVi','coachTipVi','wordLimit','grammarLimit','focusWords','drills','scenario'].includes(k)))return false;
+ if(!step||typeof step!=='object'||Array.isArray(step)||Object.keys(step).some(k=>!['id','skill','action','minutes','titleVi','detailVi','coachTipVi','wordLimit','wordOffset','grammarLimit','focusWords','drills','scenario'].includes(k)))return false;
  if(typeof step.id!=='string'||!step.id.trim()||step.id.length>40||!VALID_CUSTOM_SKILLS.includes(step.skill)||!VALID_AI_ACTIONS.includes(step.action)||!Number.isInteger(step.minutes)||step.minutes<1||step.minutes>90)return false;
  if(typeof step.titleVi!=='string'||!step.titleVi.trim()||step.titleVi.length>140||typeof step.detailVi!=='string'||!step.detailVi.trim()||step.detailVi.length>260||typeof step.coachTipVi!=='string'||!step.coachTipVi.trim()||step.coachTipVi.length>280)return false;
- if(step.wordLimit!==undefined&&(!Number.isInteger(step.wordLimit)||step.wordLimit<1||step.wordLimit>50)||step.grammarLimit!==undefined&&(!Number.isInteger(step.grammarLimit)||step.grammarLimit<1||step.grammarLimit>10))return false;
+ if(step.wordLimit!==undefined&&(!Number.isInteger(step.wordLimit)||step.wordLimit<1||step.wordLimit>50)||step.wordOffset!==undefined&&(!Number.isInteger(step.wordOffset)||step.wordOffset<0||step.wordOffset>100)||step.grammarLimit!==undefined&&(!Number.isInteger(step.grammarLimit)||step.grammarLimit<1||step.grammarLimit>10))return false;
  if(step.focusWords!==undefined&&(!Array.isArray(step.focusWords)||step.focusWords.length>12||!step.focusWords.every(validAiWord)))return false;
  if(step.drills!==undefined&&(!Array.isArray(step.drills)||step.drills.length>4||!step.drills.every(validAiDrill)))return false;
  if(step.scenario!==undefined&&!validAiScenario(step.scenario))return false;
@@ -28,7 +28,7 @@ function validAiStep(step){
  if(step.action==='ai_scenario'&&!validAiScenario(step.scenario))return false;
  return true;
 }
-function validAiSessions(sessions){return Array.isArray(sessions)&&sessions.length>=1&&sessions.length<=4&&sessions.every(session=>session&&typeof session==='object'&&!Array.isArray(session)&&typeof session.label==='string'&&session.label.length<=140&&typeof session.goalVi==='string'&&session.goalVi.length<=220&&Number.isInteger(session.minutes)&&session.minutes>=1&&session.minutes<=180&&Array.isArray(session.steps)&&session.steps.length>=2&&session.steps.length<=4&&session.steps.every(validAiStep));}
+function validAiSessions(sessions){return Array.isArray(sessions)&&sessions.length>=1&&sessions.length<=10&&sessions.every(session=>session&&typeof session==='object'&&!Array.isArray(session)&&typeof session.label==='string'&&session.label.length<=140&&typeof session.goalVi==='string'&&session.goalVi.length<=220&&Number.isInteger(session.minutes)&&session.minutes>=1&&session.minutes<=180&&Array.isArray(session.steps)&&session.steps.length>=1&&session.steps.length<=4&&session.steps.every(validAiStep));}
 function validCustomAiFields(v){
  if(v.aiGenerated!==undefined&&typeof v.aiGenerated!=='boolean')return false;
  if(v.aiProvider!==undefined&&(typeof v.aiProvider!=='string'||v.aiProvider.length>40))return false;

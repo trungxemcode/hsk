@@ -323,6 +323,9 @@
     if (Number.isFinite(Number(raw.wordLimit)) && Number(raw.wordLimit) > 0) {
       step.wordLimit = clamp(Math.round(Number(raw.wordLimit)), 1, 50);
     }
+    if (Number.isFinite(Number(raw.wordOffset)) && Number(raw.wordOffset) >= 0) {
+      step.wordOffset = clamp(Math.round(Number(raw.wordOffset)), 0, 100);
+    }
     if (Number.isFinite(Number(raw.grammarLimit)) && Number(raw.grammarLimit) > 0) {
       step.grammarLimit = clamp(Math.round(Number(raw.grammarLimit)), 1, 10);
     }
@@ -382,11 +385,20 @@
     }
     if (!cleaned.length || totalSteps > targetTotal) return [];
 
-    // Allocate session minutes by required step count; the total budget is always conserved.
-    const sessionMins = distributeMinutesWithMinimum(targetTotal, cleaned.map(session => ({ weight: session.minutes })), cleaned.map(session => session.steps.length));
+    // Preserve the AI's exact session minutes when they already sum to targetTotal;
+    // otherwise allocate session minutes proportionally while conserving total budget.
+    const rawSessionSum = cleaned.reduce((sum, session) => sum + session.minutes, 0);
+    const exactSessionFit = rawSessionSum === targetTotal && cleaned.every(session => session.minutes >= session.steps.length);
+    const sessionMins = exactSessionFit
+      ? cleaned.map(session => session.minutes)
+      : distributeMinutesWithMinimum(targetTotal, cleaned.map(session => ({ weight: session.minutes })), cleaned.map(session => session.steps.length));
     return cleaned.map((session, index) => {
       const minutes = sessionMins[index];
-      const stepMins = distributeMinutes(minutes, session.steps.map(step => ({ weight: step.minutes })));
+      const rawStepSum = session.steps.reduce((sum, step) => sum + step.minutes, 0);
+      const exactStepFit = rawStepSum === minutes && session.steps.every(step => step.minutes >= 1);
+      const stepMins = exactStepFit
+        ? session.steps.map(step => step.minutes)
+        : distributeMinutes(minutes, session.steps.map(step => ({ weight: step.minutes })));
       const cleanLabel = String(session.label || `Phiên ${index + 1}`)
         .replace(/\s*(?:[·•-]\s*)?\d+\s*phút\s*$/i, '').trim() || `Phiên ${index + 1}`;
       return {
@@ -1003,6 +1015,100 @@
     return list;
   }
 
+  function bindAiBlueprintToLesson(blueprintSessions, profile, targetLesson, progressRecord, doneSet) {
+    const blueprints = buildSkillBlueprints(profile, targetLesson, progressRecord);
+    const byAction = Object.fromEntries(blueprints.map(item => [item.action, item]));
+    const bySkill = Object.fromEntries(blueprints.map(item => [item.skill, item]));
+    const words = Array.isArray(targetLesson?.words) ? targetLesson.words : [];
+    const totalWords = words.length;
+    const vocabQuota = totalWords
+      ? clamp(Math.round((totalWords * profile.weights.vocab) / 45), 3, totalWords)
+      : 6;
+
+    const mapGenericAction = step => {
+      if (step.action === 'ai_vocab_coach') return 'vocab_cards';
+      if (step.action === 'ai_drill') return step.skill === 'grammar' ? 'practice_check' : 'vocab_quiz';
+      if (step.action === 'ai_scenario') return 'reading_dialogue';
+      return ALLOWED_STEP_ACTIONS.includes(step.action) ? step.action : 'vocab_cards';
+    };
+
+    let vocabCardStepsCount = 0;
+    for (const sess of blueprintSessions) {
+      for (const step of (sess.steps || [])) {
+        if (mapGenericAction(step) === 'vocab_cards') vocabCardStepsCount++;
+      }
+    }
+    const vocabShares = vocabCardStepsCount > 1
+      ? distributeMinutes(vocabQuota, Array.from({ length: vocabCardStepsCount }, () => ({ weight: 1 })))
+      : [vocabQuota];
+    let vocabCardCursor = 0;
+    let runningWordOffset = 0;
+
+    let completedSteps = 0;
+    let totalSteps = 0;
+    const sessions = blueprintSessions.map((aiSess, sIdx) => {
+      const steps = (aiSess.steps || []).map((rawStep, stepIdx) => {
+        const action = mapGenericAction(rawStep);
+        const template = byAction[action] || bySkill[rawStep.skill] || blueprints[0] || {
+          id: action,
+          skill: rawStep.skill || 'vocab',
+          action,
+          titleVi: SKILL_LABELS[rawStep.skill] || 'Hoạt động bài học',
+          detailVi: 'Thực hiện bước học theo lộ trình AI.',
+          weight: 10
+        };
+        const stepIdBase = `${action}_${stepIdx + 1}`;
+        const stepId = `${targetLesson.id}:${stepIdBase}:s${sIdx + 1}`;
+        const completed = doneSet.has(stepId);
+        totalSteps++;
+        if (completed) completedSteps++;
+
+        const bound = {
+          id: stepIdBase,
+          stepId,
+          skill: template.skill || rawStep.skill || 'vocab',
+          skillLabel: SKILL_LABELS[template.skill || rawStep.skill] || rawStep.skill,
+          action,
+          minutes: rawStep.minutes,
+          titleVi: template.titleVi,
+          detailVi: template.detailVi,
+          completed
+        };
+
+        if (action === 'vocab_cards') {
+          const share = vocabShares[Math.min(vocabCardCursor, vocabShares.length - 1)] || vocabQuota;
+          bound.wordOffset = runningWordOffset;
+          bound.wordLimit = share;
+          if (vocabCardStepsCount > 1) {
+            bound.titleVi = `Thẻ từ trọng tâm · Nhóm ${vocabCardCursor + 1} (${share} từ)`;
+            bound.detailVi = `Học nhanh ${share} từ khóa trong phiên ${aiSess.minutes} phút: lật thẻ, nghe phát âm và nhớ nghĩa.`;
+          }
+          runningWordOffset += share;
+          vocabCardCursor++;
+        } else if (action === 'vocab_quiz') {
+          bound.wordLimit = clamp(Number(rawStep.wordLimit) || Math.min(8, vocabQuota), 3, Math.max(3, totalWords || 8));
+        } else if (template.grammarLimit) {
+          bound.grammarLimit = template.grammarLimit;
+        }
+        return bound;
+      });
+
+      const cleanLabel = String(aiSess.label || `Phiên ${sIdx + 1}`)
+        .replace(/\s*(?:[·•-]\s*)?\d+\s*phút\s*$/i, '').trim() || `Phiên ${sIdx + 1}`;
+      return {
+        index: sIdx + 1,
+        id: `session-${sIdx + 1}`,
+        label: `${cleanLabel} · ${aiSess.minutes} phút`,
+        goalVi: aiSess.goalVi || '',
+        minutes: aiSess.minutes,
+        steps,
+        completed: steps.every(step => step.completed)
+      };
+    });
+
+    return { sessions, completedSteps, totalSteps };
+  }
+
   function buildLessonPlan(profileInput, lesson, progressRecord = {}, options = {}) {
     const profile = validProfile(profileInput) ? profileInput : createProfile(profileInput);
     const targetLesson = lesson || { id: `standard-${profile.hsk}-01`, number: 1, vi: `Bài 1 · HSK ${profile.hsk}`, words: [] };
@@ -1018,14 +1124,21 @@
     const lessonAiDesign = profile.aiLessonDesigns?.[targetLesson.id] || null;
     const customSchedule = extractCustomSchedule(profile, {
       ...planOptions,
-      customPrompt: lessonAiDesign?.customPrompt || options.customPrompt || ''
+      customPrompt: options.customPrompt || lessonAiDesign?.customPrompt || ''
     });
     const rawAiSessions = lessonAiDesign?.sessions?.length
       ? sanitizeAiSessions(lessonAiDesign.sessions, profile.minutes)
       : null;
     const aiSessionsSource = rawAiSessions?.length
-      ? (customSchedule?.explicitMicro ? reshapeAiSessionsToCustomSchedule(rawAiSessions, customSchedule) : rawAiSessions)
+      ? (options.customPrompt && customSchedule?.explicitMicro ? reshapeAiSessionsToCustomSchedule(rawAiSessions, customSchedule) : rawAiSessions)
       : null;
+    const blueprintSessions = !aiSessionsSource?.length && Array.isArray(profile.aiBlueprint) && profile.aiBlueprint.length
+      ? sanitizeAiSessions(profile.aiBlueprint, profile.minutes)
+      : null;
+    const useAiBlueprint = Boolean(
+      blueprintSessions?.length &&
+      (!customSchedule?.explicitMicro || blueprintSessions.length >= 2 || blueprintSessions.some(sess => sess.minutes <= 12))
+    );
 
     const sessions = [];
     let completedSteps = 0;
@@ -1060,6 +1173,11 @@
           aiAuthored: true
         });
       }
+    } else if (useAiBlueprint) {
+      const bound = bindAiBlueprintToLesson(blueprintSessions, profile, targetLesson, progressRecord, doneSet);
+      sessions.push(...bound.sessions);
+      completedSteps = bound.completedSteps;
+      totalSteps = bound.totalSteps;
     } else if (customSchedule?.sessions?.length) {
       const blueprints = buildSkillBlueprints(profile, targetLesson, progressRecord);
       const grouped = buildSessionsFromCustomSchedule(blueprints, customSchedule, profile);
@@ -1143,6 +1261,10 @@
       ? 'Ngày thường học gọn nhẹ; cuối tuần tăng cường tổng hợp.'
       : profile.followUpVi;
 
+    const aiSessionSummaryLabel = (aiSessionsSource?.length || useAiBlueprint) && sessions.length > 1
+      ? `AI chia ${sessions.length} phiên (${sessions.map(s => `${s.minutes}p`).join(' · ')})`
+      : '';
+
     return {
       lessonId: targetLesson.id,
       lessonNumber: targetLesson.number || 1,
@@ -1151,7 +1273,7 @@
       totalMinutes: profile.minutes,
       days: profile.days,
       style: profile.style,
-      styleLabel: customSchedule?.styleLabel || STYLE_LABELS[profile.style],
+      styleLabel: aiSessionSummaryLabel || customSchedule?.styleLabel || STYLE_LABELS[profile.style],
       goal: profile.goal,
       goalLabel: GOAL_LABELS[profile.goal],
       weights: { ...profile.weights },
@@ -1182,6 +1304,7 @@
       aiGenerated: true,
       aiProvider: clean.aiProvider || profile.aiProvider || 'ai',
       aiModel: clean.aiModel || profile.aiModel || '',
+      aiBlueprint: clean.sessions,
       aiLessonDesigns: nextMap,
       updatedAt: now
     }, now);

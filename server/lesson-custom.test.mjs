@@ -491,4 +491,60 @@ test('custom micro-interval & hybrid schedule splits 60m into 5-10m micro-sessio
   assert.equal(pureMicroPlan.sessions.length, 8);
   assert.equal(pureMicroPlan.sessions.reduce((sum, s) => sum + s.minutes, 0), 60);
   assert.ok(pureMicroPlan.sessions.every(s => s.minutes >= 5 && s.minutes <= 10));
+
+  // 3. AI-authored custom session structure (aiBlueprint / lessonDesign) directly controls session count, names and exact minutes
+  const aiCustomBlueprintProfile = C.createProfile({
+    hsk: 3,
+    minutes: 60,
+    days: 5,
+    focusChoice: 'vocab_heavy',
+    style: 'spare_time',
+    goal: 'conversation',
+    aiGenerated: true,
+    learnerContextVi: 'AI tự thiết kế cấu trúc phiên riêng theo mục đích học viên.',
+    aiBlueprint: [
+      {
+        label: 'Cà phê sáng · Khởi động từ mới',
+        minutes: 6,
+        goalVi: 'Nắm nhóm từ mở đầu',
+        steps: [{ id: 's1', skill: 'vocab', action: 'vocab_cards', minutes: 6, titleVi: 'Từ nhóm 1', detailVi: 'Học nhanh', coachTipVi: 'Đọc to' }]
+      },
+      {
+        label: 'Giờ nghỉ trưa · Từ vựng & phản xạ',
+        minutes: 9,
+        goalVi: 'Học nhóm từ 2 và trắc nghiệm',
+        steps: [
+          { id: 's2', skill: 'vocab', action: 'vocab_cards', minutes: 5, titleVi: 'Từ nhóm 2', detailVi: 'Học tiếp', coachTipVi: 'Nhớ ngữ cảnh' },
+          { id: 's3', skill: 'vocab', action: 'vocab_quiz', minutes: 4, titleVi: 'Quiz nhanh', detailVi: 'Kiểm tra', coachTipVi: 'Phản xạ 3s' }
+        ]
+      },
+      {
+        label: 'Chiều tan làm · Nghe thụ động',
+        minutes: 10,
+        goalVi: 'Nghe hội thoại trên đường về',
+        steps: [{ id: 's4', skill: 'listening', action: 'passive_listen', minutes: 10, titleVi: 'Nghe hội thoại', detailVi: 'Nghe không nhìn chữ', coachTipVi: 'Bắt từ khóa' }]
+      },
+      {
+        label: 'Tối chuyên sâu · Ngữ pháp & Đọc hiểu',
+        minutes: 35,
+        goalVi: 'Tổng hợp cấu trúc câu và đọc đoạn văn',
+        steps: [
+          { id: 's5', skill: 'grammar', action: 'grammar_focus', minutes: 15, titleVi: 'Ngữ pháp sâu', detailVi: 'Phân tích mẫu câu', coachTipVi: 'Đặt 2 câu' },
+          { id: 's6', skill: 'reading', action: 'reading_dialogue', minutes: 20, titleVi: 'Đọc hội thoại bài', detailVi: 'Đọc hiểu toàn bài', coachTipVi: 'Tóm tắt lại' }
+        ]
+      }
+    ]
+  }, now);
+
+  const aiDrivenPlan = C.buildLessonPlan(aiCustomBlueprintProfile, hsk3Lesson1, {}, { dayKey: '2026-11-20', now });
+  assert.equal(aiDrivenPlan.sessions.length, 4);
+  assert.deepEqual(aiDrivenPlan.sessions.map(s => s.minutes), [6, 9, 10, 35], 'Exact AI session durations [6, 9, 10, 35] are preserved');
+  assert.deepEqual(aiDrivenPlan.sessions[1].steps.map(st => st.minutes), [5, 4], 'Exact AI step durations [5, 4] are preserved');
+  assert.match(aiDrivenPlan.sessions[0].label, /Cà phê sáng · Khởi động từ mới · 6 phút/);
+  assert.match(aiDrivenPlan.styleLabel, /AI chia 4 phiên \(6p · 9p · 10p · 35p\)/);
+  // The two vocab_cards steps across session 1 and session 2 automatically split the 17 words without overlap
+  assert.equal(aiDrivenPlan.sessions[0].steps[0].wordOffset, 0);
+  assert.equal(aiDrivenPlan.sessions[0].steps[0].wordLimit, 9);
+  assert.equal(aiDrivenPlan.sessions[1].steps[0].wordOffset, 9);
+  assert.equal(aiDrivenPlan.sessions[1].steps[0].wordLimit, 8);
 });
