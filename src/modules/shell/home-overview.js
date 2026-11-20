@@ -43,8 +43,11 @@ const streak=button('',()=>window.HSKStudio?.navigate('profile'));streak.id='hom
 const wordBox=make('section',null,'overview-word'),wordHead=make('div',null,'overview-word-head'),wordDetails=make('details'),summary=make('summary'),han=make('strong'),pin=make('span'),meaning=make('span'),wordBody=make('div',null,'overview-word-body'),wordRow=make('div',null,'overview-word-row'),sound=make('div',null,'overview-word-sound');
 const progressCard=make('section',null,'overview-progress-card'),knownStat=make('p'),dueStat=make('p');
 progressCard.append(make('h3','Tiến độ học'),knownStat,dueStat,button('Xem hồ sơ →',()=>window.HSKStudio?.navigate('profile')));
+const customCard=make('section',null,'overview-custom-lesson');
+customCard.id='homeCustomLesson';
+customCard.setAttribute('aria-label','Bài học của tôi hôm nay');
 side.prepend(progressCard);
-let offset=0,current=null,signature='',frame=0,lastMobile=null;
+let offset=0,current=null,signature='',customSig='',frame=0,lastMobile=null;
 wordBox.id='homeDailyWord';wordHead.append(make('h3','Từ vựng hôm nay'),button('Đổi từ ↻',()=>{offset++;render();}));summary.append(han,pin,meaning);wordDetails.append(summary,wordBody);wordRow.append(wordDetails,sound);wordBox.append(wordHead,wordRow);home.querySelector('.dashboard-grid').after(wordBox);wordBox.after(searchDetails);
 // The phone keeps the daily word first; desktop uses it as the first supporting card.
 function pool(){try{return typeof words!=='undefined'?words:[];}catch{return [];}}
@@ -64,8 +67,10 @@ if(mobile!==lastMobile){
   }
   wordBox.before(searchDetails);
   if(placement)placementAnchor.after(placement);
+  hero.after(customCard);
  }else{
   side.prepend(searchDetails,wordBox);
+  side.append(customCard);
   $('planTodayTitle').after(planToggle);
   taskList.hidden=!desktopPlanExpanded;
   planSetup.after(planProgress);
@@ -95,13 +100,15 @@ const due=Number($('studioHomeDue').textContent)||0;write(knownStat,$('studioKno
 write(flash.querySelector('small'),$('studioProgressLabel').textContent+' · '+$('studioKnownCount').textContent.split(' · ')[0]);const count=Object.values(window.HSKNotebook?.items||{}).filter(w=>w&&typeof w.han==='string'&&typeof w.mean==='string').length;write(saved.querySelector('small'),`${count} từ đã lưu`);
 const days=$('studioStreak').textContent.match(/\d+/)?.[0]||'0';write(streak,'🔥 '+days);streak.setAttribute('aria-label',`Chuỗi học tập: ${days} ngày. Mở tài khoản`);
 extras.hidden=$('homeAssessment').hidden&&$('mobileHeroResult').hidden;
+const cProf=window.HSKStudyStore?.customLesson,cSig=JSON.stringify([cProf||null,window.HSKPlanner?.plan?.target]);
+if(cSig!==customSig&&window.HSKLessonCustom){customSig=cSig;window.HSKLessonCustom.renderHomeCard(customCard);}
 const all=pool(),level=document.querySelector('[data-filter].active')?.dataset.filter||'all',list=all.filter(w=>level==='all'||String(w.hsk)===level),seed=Math.floor(Date.now()/86400000),w=list.length?list[(seed+offset)%list.length]:null;
 const sig=JSON.stringify([w?.han,w?.pin,w?.mean,level]);if(sig!==signature){signature=sig;current=w;wordDetails.open=false;wordBody.replaceChildren();sound.replaceChildren();if(w){write(han,w.han);write(pin,w.pin||'');write(meaning,String(w.practice?.meanings?.[0]||w.mean).split(/[;；\n]/)[0]);const example=window.HSKLessons?.examples(w)?.[0];if(example){wordBody.append(make('p',example.cn),make('p',example.vi));}else wordBody.append(make('p',w.mean));wordBody.append(button('Học từ này →',()=>{window.HSKStudio?.navigate('learn');window.HSKDictionaryBridge?.open(current.han,current.pin);}));if(window.HSKNotebook)wordBody.append(HSKNotebook.button(()=>current));if(window.HSKSpeech)sound.append(HSKSpeech.button(w.han,'Nghe '+w.han));}else{write(han,'Đang tải từ vựng…');write(pin,'');write(meaning,'');}}}
 function schedule(){if(!frame)frame=requestAnimationFrame(render);}
 new MutationObserver(schedule).observe(home,{subtree:true,childList:true,characterData:true});
 new MutationObserver(schedule).observe(document.body,{attributes:true,attributeFilter:['class','data-studio-hub']});
 for(const id of ['studioKnownCount','studioHomeDue','studioStreak'])new MutationObserver(schedule).observe($(id),{childList:true,characterData:true,subtree:true});
-for(const event of ['hsk-plan-change','hsk-account-ready','hsk-notebook-change','hsk-lessons-ready','storage'])window.addEventListener(event,schedule);
+for(const event of ['hsk-plan-change','hsk-account-ready','hsk-notebook-change','hsk-lessons-ready','hsk-custom-lesson-change','storage'])window.addEventListener(event,schedule);
 document.addEventListener('click',e=>{if(e.target.closest('[data-filter]'))schedule();});
 const timer=setInterval(schedule,30000);window.addEventListener('pagehide',()=>clearInterval(timer));render();
 });

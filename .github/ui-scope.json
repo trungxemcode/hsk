@@ -1,4 +1,7 @@
 {
-  "request": "PR #445: add 186 new Learn Chinese Through Podcast episodes and 1 new Chinese Daily Podcast episode with their four-layer cue packs. The Podcast panel is opened from the Home shortcut and is not a standalone route in the visual-scope inventory; its behavior/layout is covered by tools/check-podcast-ui.cjs. Keep every inventoried route protected, including Home and Admin.",
-  "excludedRoutes": []
+  "request": "Add Custom HSK Lesson feature: entry button and 'Bài học của tôi' section on the Lessons page plus 'Bài học của tôi hôm nay' card on Home (PC + mobile), with AI interview chat, fixed-form fallback, account sync, and deterministic time-boxed session runner.",
+  "excludedRoutes": [
+    "home",
+    "lessons"
+  ]
 }
