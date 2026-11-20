@@ -238,18 +238,19 @@
     if (!Array.isArray(rawWords)) return [];
     const list = [];
     for (const item of rawWords.slice(0, 12)) {
-      if (!item || typeof item !== 'object') continue;
-      const han = String(item.han || '').trim().slice(0, 32);
-      if (!han) continue;
-      list.push({
-        han,
+      if (!item || typeof item !== 'object' || Array.isArray(item)) continue;
+      const word = {
+        han: String(item.han || '').trim().slice(0, 32),
         pin: String(item.pin || '').trim().slice(0, 64),
         mean: String(item.mean || '').trim().slice(0, 140),
         mnemonicVi: String(item.mnemonicVi || '').trim().slice(0, 260),
         exampleCn: String(item.exampleCn || '').trim().slice(0, 120),
         examplePin: String(item.examplePin || '').trim().slice(0, 160),
         exampleVi: String(item.exampleVi || '').trim().slice(0, 180)
-      });
+      };
+      if (!/\p{Script=Han}/u.test(word.han) || !word.pin || !word.mean || !word.mnemonicVi ||
+          !/\p{Script=Han}/u.test(word.exampleCn) || !word.examplePin || !word.exampleVi) continue;
+      list.push(word);
     }
     return list;
   }
@@ -257,50 +258,50 @@
   function sanitizeDrills(rawDrills) {
     if (!Array.isArray(rawDrills)) return [];
     const list = [];
-    for (const d of rawDrills.slice(0, 6)) {
-      if (!d || typeof d !== 'object') continue;
-      const promptVi = String(d.promptVi || '').trim().slice(0, 260);
-      const options = Array.isArray(d.options)
-        ? d.options.map(o => String(o ?? '').trim().slice(0, 120)).filter(Boolean).slice(0, 4)
+    for (const drill of rawDrills.slice(0, 4)) {
+      if (!drill || typeof drill !== 'object' || Array.isArray(drill)) continue;
+      const promptVi = String(drill.promptVi || '').trim().slice(0, 260);
+      const questionCn = String(drill.questionCn || '').trim().slice(0, 140);
+      const options = Array.isArray(drill.options)
+        ? drill.options.map(option => String(option ?? '').trim().slice(0, 120)).filter(Boolean).slice(0, 4)
         : [];
-      if (!promptVi || options.length < 2) continue;
-      const ans = Number(d.answerIndex);
-      list.push({
-        promptVi,
-        questionCn: String(d.questionCn || '').trim().slice(0, 140),
-        options,
-        answerIndex: Number.isInteger(ans) && ans >= 0 && ans < options.length ? ans : 0,
-        explanationVi: String(d.explanationVi || '').trim().slice(0, 300)
-      });
+      const answerIndex = Number(drill.answerIndex);
+      const explanationVi = String(drill.explanationVi || '').trim().slice(0, 300);
+      if (!promptVi || options.length !== 4 || new Set(options).size !== 4 ||
+          !Number.isInteger(answerIndex) || answerIndex < 0 || answerIndex >= options.length || !explanationVi) continue;
+      list.push({ promptVi, questionCn, options, answerIndex, explanationVi });
     }
     return list;
   }
 
   function sanitizeScenario(rawScenario) {
     if (!rawScenario || typeof rawScenario !== 'object' || Array.isArray(rawScenario)) return null;
-    const contextVi = String(rawScenario.contextVi || '').trim().slice(0, 240);
-    const promptVi = String(rawScenario.promptVi || '').trim().slice(0, 260);
-    if (!contextVi && !promptVi) return null;
-    return {
-      contextVi,
-      promptVi,
+    const scenario = {
+      contextVi: String(rawScenario.contextVi || '').trim().slice(0, 240),
+      promptVi: String(rawScenario.promptVi || '').trim().slice(0, 260),
       sampleCn: String(rawScenario.sampleCn || '').trim().slice(0, 160),
       samplePin: String(rawScenario.samplePin || '').trim().slice(0, 200),
       sampleVi: String(rawScenario.sampleVi || '').trim().slice(0, 220)
     };
+    if (!scenario.contextVi || !scenario.promptVi || !/\p{Script=Han}/u.test(scenario.sampleCn) || !scenario.samplePin || !scenario.sampleVi) return null;
+    return scenario;
   }
 
-  function sanitizeAiStep(raw, idx = 0) {
+  function sanitizeAiStep(raw, idx = 0, allowedWords = null) {
     if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
     const titleVi = String(raw.titleVi || '').trim().slice(0, 140);
     if (!titleVi) return null;
     const skill = SKILLS.includes(raw.skill) ? raw.skill : 'vocab';
-    const focusWords = sanitizeFocusWords(raw.focusWords);
+    const focusWords = sanitizeFocusWords(raw.focusWords).filter(word => !allowedWords || allowedWords.has(word.han));
     const drills = sanitizeDrills(raw.drills);
     const scenario = sanitizeScenario(raw.scenario);
     let action = ALLOWED_STEP_ACTIONS.includes(raw.action) ? raw.action : '';
+    // Never leave an AI action selected when its required interactive payload is missing.
+    if (action === 'ai_drill' && drills.length < 2) action = '';
+    if (action === 'ai_scenario' && !scenario) action = '';
+    if (action === 'ai_vocab_coach' && !focusWords.length) action = 'vocab_cards';
     if (!action) {
-      if (drills.length) action = 'ai_drill';
+      if (drills.length >= 2) action = 'ai_drill';
       else if (focusWords.length) action = 'ai_vocab_coach';
       else if (scenario) action = 'ai_scenario';
       else if (skill === 'grammar') action = 'grammar_focus';
@@ -309,14 +310,15 @@
       else action = 'vocab_cards';
     }
     const id = String(raw.id || `${action}_${idx + 1}`).replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 40) || `step_${idx + 1}`;
+    const detailVi = String(raw.detailVi || '').trim().slice(0, 260) || titleVi;
     const step = {
       id,
       skill,
       action,
       minutes: clamp(Math.round(Number(raw.minutes) || 5), 1, 90),
       titleVi,
-      detailVi: String(raw.detailVi || '').trim().slice(0, 260) || titleVi,
-      coachTipVi: String(raw.coachTipVi || '').trim().slice(0, 280)
+      detailVi,
+      coachTipVi: String(raw.coachTipVi || '').trim().slice(0, 280) || detailVi
     };
     if (Number.isFinite(Number(raw.wordLimit)) && Number(raw.wordLimit) > 0) {
       step.wordLimit = clamp(Math.round(Number(raw.wordLimit)), 1, 50);
@@ -330,45 +332,63 @@
     return step;
   }
 
-  function sanitizeAiSessions(rawSessions, totalMinutes = 20) {
+  function sanitizeAiSessions(rawSessions, totalMinutes = 20, allowedWords = null) {
     if (!Array.isArray(rawSessions) || !rawSessions.length) return [];
+    const targetTotal = clamp(Math.round(Number(totalMinutes) || 20), 10, 180);
     const cleaned = [];
-    for (let i = 0; i < Math.min(rawSessions.length, 5); i++) {
-      const s = rawSessions[i];
-      if (!s || typeof s !== 'object') continue;
-      const steps = Array.isArray(s.steps)
-        ? s.steps.map((st, idx) => sanitizeAiStep(st, idx)).filter(Boolean).slice(0, 6)
+    for (let i = 0; i < Math.min(rawSessions.length, 4); i++) {
+      const session = rawSessions[i];
+      if (!session || typeof session !== 'object' || Array.isArray(session)) continue;
+      const steps = Array.isArray(session.steps)
+        ? session.steps.map((step, idx) => sanitizeAiStep(step, idx, allowedWords)).filter(Boolean).slice(0, 4)
         : [];
-      if (!steps.length) continue;
-      const rawMins = clamp(Math.round(Number(s.minutes) || steps.reduce((a, b) => a + b.minutes, 0) || 10), 2, 180);
+      if (steps.length < 2) continue;
       cleaned.push({
-        label: String(s.label || `Phiên ${cleaned.length + 1}`).trim().slice(0, 100),
-        goalVi: String(s.goalVi || '').trim().slice(0, 220),
-        minutes: rawMins,
+        label: String(session.label || `Phiên ${cleaned.length + 1}`).trim().slice(0, 100),
+        goalVi: String(session.goalVi || '').trim().slice(0, 220),
+        minutes: clamp(Math.round(Number(session.minutes) || steps.reduce((sum, step) => sum + step.minutes, 0) || 10), 2, 180),
         steps
       });
     }
     if (!cleaned.length) return [];
-    const targetTotal = clamp(Math.round(Number(totalMinutes) || 20), 10, 180);
-    const sessionMins = distributeMinutes(targetTotal, cleaned.map(s => ({ weight: s.minutes })));
-    return cleaned.map((s, i) => {
-      const sMin = sessionMins[i];
-      const stepMins = distributeMinutes(sMin, s.steps.map(st => ({ weight: st.minutes })));
+
+    // Every step needs at least one minute. Keep the AI's 2–4-step session shape
+    // while ensuring the total step count can fit inside the learner's daily budget.
+    cleaned.length = Math.min(cleaned.length, Math.floor(targetTotal / 2));
+    let totalSteps = cleaned.reduce((sum, session) => sum + session.steps.length, 0);
+    while (totalSteps > targetTotal) {
+      const candidate = cleaned.reduce((best, session) =>
+        session.steps.length > 2 && (!best || session.steps.length > best.steps.length) ? session : best, null);
+      if (!candidate) break;
+      candidate.steps.pop();
+      totalSteps--;
+    }
+    if (!cleaned.length || totalSteps > targetTotal) return [];
+
+    // Allocate session minutes by required step count; the total budget is always conserved.
+    const sessionMins = distributeMinutesWithMinimum(targetTotal, cleaned.map(session => ({ weight: session.minutes })), cleaned.map(session => session.steps.length));
+    return cleaned.map((session, index) => {
+      const minutes = sessionMins[index];
+      const stepMins = distributeMinutes(minutes, session.steps.map(step => ({ weight: step.minutes })));
+      const cleanLabel = String(session.label || `Phiên ${index + 1}`)
+        .replace(/\s*(?:[·•-]\s*)?\d+\s*phút\s*$/i, '').trim() || `Phiên ${index + 1}`;
       return {
-        ...s,
-        minutes: sMin,
-        steps: s.steps.map((st, j) => ({ ...st, minutes: stepMins[j] }))
+        ...session,
+        label: `${cleanLabel} · ${minutes} phút`,
+        minutes,
+        steps: session.steps.map((step, stepIndex) => ({ ...step, minutes: stepMins[stepIndex] }))
       };
     });
   }
 
-  function sanitizeAiLessonDesign(rawDesign, lessonId, totalMinutes = 20) {
+  function sanitizeAiLessonDesign(rawDesign, lessonId, totalMinutes = 20, allowedWords = null) {
     if (!rawDesign || typeof rawDesign !== 'object' || Array.isArray(rawDesign)) return null;
-    const sessions = sanitizeAiSessions(rawDesign.sessions, totalMinutes);
-    if (!sessions.length) return null;
+    const coachIntroVi = String(rawDesign.coachIntroVi || '').trim().slice(0, 500);
+    const sessions = sanitizeAiSessions(rawDesign.sessions, totalMinutes, allowedWords);
+    if (!coachIntroVi || !sessions.length) return null;
     return {
       lessonId: String(lessonId || rawDesign.lessonId || '').trim().slice(0, 64),
-      coachIntroVi: String(rawDesign.coachIntroVi || '').trim().slice(0, 500),
+      coachIntroVi,
       customPrompt: String(rawDesign.customPrompt || '').trim().slice(0, 300),
       aiProvider: String(rawDesign.aiProvider || '').trim().slice(0, 40),
       aiModel: String(rawDesign.aiModel || '').trim().slice(0, 80),
@@ -386,7 +406,12 @@
       .slice(0, 12);
     for (const [k, v] of entries) {
       const clean = sanitizeAiLessonDesign(v, k, totalMinutes);
-      if (clean) out[k] = clean;
+      if (clean && JSON.stringify(clean).length <= 45000) out[k] = clean;
+      if (JSON.stringify(out).length > 140000) {
+        while (Object.keys(out).length && JSON.stringify(out).length > 140000) {
+          delete out[Object.keys(out).pop()];
+        }
+      }
     }
     return out;
   }
@@ -485,6 +510,23 @@
       idx++;
     }
     return allocated;
+  }
+
+  function distributeMinutesWithMinimum(totalMinutes, buckets, minimums = []) {
+    if (!buckets.length) return [];
+    const base = buckets.map((_, index) => Math.max(1, Math.round(Number(minimums[index]) || 1)));
+    const baseTotal = base.reduce((sum, minutes) => sum + minutes, 0);
+    const total = Math.max(baseTotal, Math.round(Number(totalMinutes) || baseTotal));
+    const remaining = total - baseTotal;
+    const weights = buckets.map(bucket => Math.max(1, Number(bucket.weight) || 1));
+    const weightTotal = weights.reduce((sum, weight) => sum + weight, 0);
+    const shares = weights.map(weight => remaining * weight / weightTotal);
+    const extras = shares.map(Math.floor);
+    let leftover = remaining - extras.reduce((sum, value) => sum + value, 0);
+    const order = shares.map((share, index) => ({ index, fraction: share - extras[index] }))
+      .sort((a, b) => b.fraction - a.fraction || a.index - b.index);
+    for (let index = 0; index < leftover; index++) extras[order[index % order.length].index]++;
+    return base.map((minutes, index) => minutes + extras[index]);
   }
 
   function vnDayKey(now = Date.now()) {
@@ -650,107 +692,103 @@
   function buildLessonPlan(profileInput, lesson, progressRecord = {}, options = {}) {
     const profile = validProfile(profileInput) ? profileInput : createProfile(profileInput);
     const targetLesson = lesson || { id: `standard-${profile.hsk}-01`, number: 1, vi: `Bài 1 · HSK ${profile.hsk}`, words: [] };
-    const dayKey = options.dayKey || vnDayKey(options.now || Date.now());
+    const now = Number.isFinite(options.now) ? options.now : Date.now();
+    const isWeekend = typeof options.isWeekend === 'boolean'
+      ? options.isWeekend
+      : [0, 6].includes(new Date(now + 7 * 3600000).getUTCDay());
+    const planOptions = { ...options, now, isWeekend };
+    const dayKey = options.dayKey || vnDayKey(now);
     const doneSet = new Set(profile.sessionsDone?.[dayKey] || []);
 
+    // A lesson-specific design must never leak its vocabulary or drills into another lesson.
     const lessonAiDesign = profile.aiLessonDesigns?.[targetLesson.id] || null;
-    const aiSessionsSource = (lessonAiDesign?.sessions?.length ? lessonAiDesign.sessions : null) ||
-      (Array.isArray(profile.aiBlueprint) && profile.aiBlueprint.length ? sanitizeAiSessions(profile.aiBlueprint, profile.minutes) : null);
+    const aiSessionsSource = lessonAiDesign?.sessions?.length
+      ? sanitizeAiSessions(lessonAiDesign.sessions, profile.minutes)
+      : null;
 
     const sessions = [];
     let completedSteps = 0;
     let totalSteps = 0;
 
-    if (aiSessionsSource && aiSessionsSource.length) {
-      const normalizedAiSessions = sanitizeAiSessions(aiSessionsSource, profile.minutes);
-      for (let i = 0; i < normalizedAiSessions.length; i++) {
-        const aiSess = normalizedAiSessions[i];
-        const steps = aiSess.steps.map(s => {
-          const stepId = `${targetLesson.id}:${s.id}:s${i + 1}`;
-          const completed = doneSet.has(stepId) || Boolean(
-            (s.id === 'practice_check' && progressRecord?.read) ||
-            (s.id === 'reading_dialogue' && progressRecord?.read)
-          );
+    if (aiSessionsSource?.length) {
+      for (let i = 0; i < aiSessionsSource.length; i++) {
+        const aiSess = aiSessionsSource[i];
+        const steps = aiSess.steps.map(step => {
+          const stepId = `${targetLesson.id}:${step.id}:s${i + 1}`;
+          const completed = doneSet.has(stepId);
           totalSteps++;
           if (completed) completedSteps++;
           return {
-            ...s,
+            ...step,
             stepId,
-            skillLabel: SKILL_LABELS[s.skill] || s.skill,
+            skillLabel: SKILL_LABELS[step.skill] || step.skill,
             completed,
             aiAuthored: true
           };
         });
-        const cleanLabel = aiSess.label.includes('phút')
-          ? aiSess.label
-          : `${aiSess.label} · ${aiSess.minutes} phút`;
+        const cleanLabel = String(aiSess.label || `Phiên ${i + 1}`)
+          .replace(/\s*(?:[·•-]\s*)?\d+\s*phút\s*$/i, '').trim() || `Phiên ${i + 1}`;
         sessions.push({
           index: i + 1,
           id: `session-${i + 1}`,
-          label: cleanLabel,
+          label: `${cleanLabel} · ${aiSess.minutes} phút`,
           goalVi: aiSess.goalVi || '',
           minutes: aiSess.minutes,
           steps,
-          completed: steps.every(st => st.completed),
+          completed: steps.every(step => step.completed),
           aiAuthored: true
         });
       }
     } else {
       const blueprints = buildSkillBlueprints(profile, targetLesson, progressRecord);
-      const sessionCount = Math.min(pickSessionCount(profile, options), Math.max(1, blueprints.length));
+      const sessionCount = Math.min(pickSessionCount(profile, planOptions), Math.max(1, blueprints.length));
       const sessionMinuteBudgets = distributeMinutes(
         profile.minutes,
         Array.from({ length: sessionCount }, (_, idx) => ({
           weight: profile.style === 'spare_time' ? 1 : (sessionCount - idx + 1)
         }))
       );
-
-      // Group blueprints into sessionCount sessions cleanly, keeping at least 1 step per session
       const grouped = Array.from({ length: sessionCount }, () => []);
-      blueprints.forEach((bp, i) => {
-        if (i < sessionCount) grouped[i].push(bp);
-        else grouped[i % sessionCount].push(bp);
+      blueprints.forEach((blueprint, index) => {
+        if (index < sessionCount) grouped[index].push(blueprint);
+        else grouped[index % sessionCount].push(blueprint);
       });
 
       for (let i = 0; i < sessionCount; i++) {
         const stepsRaw = grouped[i];
         const sessionMinutes = sessionMinuteBudgets[i];
-        const stepMins = distributeMinutes(sessionMinutes, stepsRaw.map(s => ({ weight: s.weight })));
-        const steps = stepsRaw.map((s, j) => {
-          const stepId = `${targetLesson.id}:${s.id}:s${i + 1}`;
-          const completed = doneSet.has(stepId) || Boolean(
-            (s.id === 'practice_check' && progressRecord?.read) ||
-            (s.id === 'reading_dialogue' && progressRecord?.read)
-          );
+        const stepMins = distributeMinutes(sessionMinutes, stepsRaw.map(step => ({ weight: step.weight })));
+        const steps = stepsRaw.map((step, j) => {
+          const stepId = `${targetLesson.id}:${step.id}:s${i + 1}`;
+          // A general lesson-read flag does not prove that this custom step was completed.
+          const completed = doneSet.has(stepId);
           totalSteps++;
           if (completed) completedSteps++;
           return {
-            ...s,
+            ...step,
             stepId,
             minutes: stepMins[j],
-            skillLabel: SKILL_LABELS[s.skill] || s.skill,
+            skillLabel: SKILL_LABELS[step.skill] || step.skill,
             completed
           };
         });
-
         const labelPrefix = profile.style === 'spare_time'
           ? `Phiên trống ${i + 1}`
           : profile.style === 'bedtime_review'
             ? `Nhịp tối ${i + 1}`
             : `Phiên ${i + 1}`;
-
         sessions.push({
           index: i + 1,
           id: `session-${i + 1}`,
           label: `${labelPrefix} · ${sessionMinutes} phút`,
           minutes: sessionMinutes,
           steps,
-          completed: steps.every(st => st.completed)
+          completed: steps.every(step => step.completed)
         });
       }
     }
 
-    const subtitleNote = profile.style === 'weekend_sprint' && options.isWeekend === false
+    const subtitleNote = profile.style === 'weekend_sprint' && !planOptions.isWeekend
       ? 'Ngày thường học gọn nhẹ; cuối tuần tăng cường tổng hợp.'
       : profile.followUpVi;
 
@@ -769,7 +807,7 @@
       summaryVi: profile.summaryVi,
       noteVi: subtitleNote,
       coachIntroVi: lessonAiDesign?.coachIntroVi || profile.learnerContextVi || profile.summaryVi,
-      aiDesigned: Boolean(lessonAiDesign || profile.aiBlueprint?.length || profile.aiGenerated),
+      aiDesigned: Boolean(lessonAiDesign || profile.aiGenerated),
       hasLessonAiDesign: Boolean(lessonAiDesign?.sessions?.length),
       aiProvider: lessonAiDesign?.aiProvider || profile.aiProvider || '',
       aiModel: lessonAiDesign?.aiModel || profile.aiModel || '',
@@ -781,11 +819,11 @@
     };
   }
 
-  function saveLessonDesign(profileInput, lessonId, rawDesign, now = Date.now()) {
+  function saveLessonDesign(profileInput, lessonId, rawDesign, now = Date.now(), allowedWords = null) {
     const profile = createProfile(profileInput, now);
     const key = String(lessonId || '').trim().slice(0, 64);
     if (!key) return profile;
-    const clean = sanitizeAiLessonDesign({ ...rawDesign, updatedAt: now }, key, profile.minutes);
+    const clean = sanitizeAiLessonDesign({ ...rawDesign, updatedAt: now }, key, profile.minutes, allowedWords);
     if (!clean) return profile;
     const nextMap = { ...(profile.aiLessonDesigns || {}), [key]: clean };
     return createProfile({

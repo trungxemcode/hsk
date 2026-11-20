@@ -865,7 +865,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
   if(!env.FIREBASE_API_KEY||!isLessonAsk&&!isCustomLesson&&!isPersonalSettings&&!isRole&&!isSample&&!isProfileSync&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
   const token=request.headers.get('Authorization')?.match(/^Bearer ([^\s]+)$/)?.[1],c=token&&token.length<5000?claims(token):null,project=env.FIREBASE_PROJECT_ID||'hsk-flashcards-44631';
   if(!c||c.aud!==project||c.iss!=='https://securetoken.google.com/'+project||typeof c.sub!=='string'||!c.sub||typeof c.exp!=='number'||c.exp<=now()/1000)return reply({error:'Hãy đăng nhập tài khoản app để dịch.'},401);
-  let body;try{body=await readBody(request,isAdminResources?1048576:isTranscript?60000:isSample?4096:isOcr?2100000:isHandwriting?550000:isLessonAsk?7600000:isDictionaryTranslate?60000:20000);}catch{return reply({error:isOcr||isHandwriting?'Ảnh quá lớn hoặc không hợp lệ.':'Câu nhập không hợp lệ hoặc quá dài.'},400);}
+  let body;try{body=await readBody(request,isAdminResources?1048576:isTranscript?60000:isSample?4096:isOcr?2100000:isHandwriting?550000:isLessonAsk?7600000:isCustomLesson?60000:isDictionaryTranslate?60000:20000);}catch{return reply({error:isOcr||isHandwriting?'Ảnh quá lớn hoặc không hợp lệ.':'Câu nhập không hợp lệ hoặc quá dài.'},400);}
   if(!body||typeof body!=='object')return reply({error:'Yêu cầu không hợp lệ.'},400);
   if(!isPersonalSettings&&!isTranscript&&!isRole&&!isProfileSync&&!isDictionaryRoute&&!isDictionaryTranslate&&!isOcr&&!isSample&&!isHandwriting&&!isReading&&(!Number.isInteger(body.hsk)||body.hsk<1||body.hsk>6))return reply({error:'Chọn trình độ HSK 1–6.'},400);
   if(!isRole&&!isOcr&&!isAsk&&!isSample&&body.direction!==undefined&&!['vi-zh','zh-vi'].includes(body.direction))return reply({error:'Chọn chiều dịch hợp lệ.'},400);
@@ -928,7 +928,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    if(typeof body.question!=='string'||!body.question.trim()||body.question.length>500||!t||typeof t.vietnamese!=='string'||!t.vietnamese.trim()||t.vietnamese.length>4000||typeof t.chinese!=='string'||!t.chinese.trim()||t.chinese.length>2000||typeof t.pinyin!=='string'||t.pinyin.length>2000||typeof t.explanation!=='string'||t.explanation.length>2000||!Array.isArray(h)||h.length>8||!h.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.text==='string'&&m.text.length<=1000))return reply({error:'Câu hỏi hoặc ngữ cảnh không hợp lệ.'},400);
   }else if(typeof body.text!=='string'||!body.text.trim()||body.text.length>500)return reply({error:'Nhập câu tối đa 500 ký tự.'},400);
 
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isTranscript?140000:isOcr?110000:isReading?85000:isLessonAsk&&['ai-qa','sentence-editor','sentence-ai-detect','podcast-subtitles'].includes(body.lesson?.content?.mode)?180000:isAsk?45000:60000);
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),isTranscript?140000:isOcr?110000:isReading?85000:isCustomLesson?(body.mode==='design'?100000:60000):isLessonAsk&&body.lesson?.content?.aiCustomSpec?.mode==='design'?100000:isLessonAsk&&['ai-qa','sentence-editor','sentence-ai-detect','podcast-subtitles'].includes(body.lesson?.content?.mode)?180000:isAsk?45000:60000);
   const abortRequest=()=>controller.abort();if(request.signal.aborted)controller.abort();else request.signal.addEventListener('abort',abortRequest,{once:true});
   try{
    const auth=await fetchFn('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='+encodeURIComponent(env.FIREBASE_API_KEY),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idToken:token}),signal:controller.signal});
@@ -1138,7 +1138,7 @@ Trả về JSON thuần.`
      ?{hsk:body.hsk,profile:body.profile||null,customPrompt:body.customPrompt||'',lesson:body.lesson}
      :{hsk:body.hsk,answers:body.answers||[],messages:body.messages||[],lesson:body.lesson||null};
 
-    const providerBody={systemInstruction:{parts:[{text:instruction}]},contents:[{role:'user',parts:[{text:JSON.stringify(userPayload)}]}],generationConfig:{temperature:customMode==='design'?0.35:0.25,maxOutputTokens:customMode==='design'?2600:1400,responseMimeType:'application/json',responseSchema:schema}};
+    const providerBody={systemInstruction:{parts:[{text:instruction}]},contents:[{role:'user',parts:[{text:JSON.stringify(userPayload)}]}],generationConfig:{temperature:customMode==='design'?0.35:0.25,maxOutputTokens:customMode==='design'?6000:1400,responseMimeType:'application/json',responseSchema:schema}};
 
     let response,activeProvider='gemini',activeModel=model;
     const usePersonalCookie=usePersonalAi&&personalAi.provider==='chatgpt-cookie';
@@ -1194,7 +1194,15 @@ Trả về JSON thuần.`
     const aiSource={provider:activeProvider,model:activeModel};
 
     if(customMode==='design'){
-     if(!Array.isArray(result.sessions)||!result.sessions.length||typeof result.coachIntroVi!=='string'||!result.coachIntroVi.trim())return reply({error:'AI chưa trả giáo án bài học hợp lệ.'},502);
+     const allowedSkills=['vocab','grammar','reading','listening','writing'];
+     const allowedActions=['vocab_cards','vocab_quiz','vocab_srs','grammar_focus','reading_dialogue','passive_listen','guided_auto','practice_mini','practice_check','real_reading','ai_vocab_coach','ai_drill','ai_scenario'];
+     const lessonWordSet=new Set((Array.isArray(body.lesson?.words)?body.lesson.words:[]).map(word=>typeof word==='string'?word:word?.han).filter(value=>typeof value==='string'&&value.trim()).map(value=>value.trim()));
+     const validWord=word=>word&&typeof word==='object'&&['han','pin','mean','mnemonicVi','exampleCn','examplePin','exampleVi'].every(key=>typeof word[key]==='string'&&word[key].trim())&&/\p{Script=Han}/u.test(word.han)&&lessonWordSet.size>0&&lessonWordSet.has(word.han.trim())&&/\p{Script=Han}/u.test(word.exampleCn);
+     const validDrill=drill=>drill&&typeof drill==='object'&&typeof drill.promptVi==='string'&&drill.promptVi.trim()&&typeof drill.questionCn==='string'&&Array.isArray(drill.options)&&drill.options.length===4&&drill.options.every(option=>typeof option==='string'&&option.trim())&&new Set(drill.options).size===4&&/\p{Script=Han}/u.test(drill.questionCn)&&Number.isInteger(drill.answerIndex)&&drill.answerIndex>=0&&drill.answerIndex<4&&typeof drill.explanationVi==='string'&&drill.explanationVi.trim();
+     const validScenario=scenario=>scenario&&typeof scenario==='object'&&['contextVi','promptVi','sampleCn','samplePin','sampleVi'].every(key=>typeof scenario[key]==='string'&&scenario[key].trim())&&/\p{Script=Han}/u.test(scenario.sampleCn);
+     const validStep=step=>step&&typeof step==='object'&&typeof step.id==='string'&&step.id.trim()&&allowedSkills.includes(step.skill)&&allowedActions.includes(step.action)&&Number.isInteger(step.minutes)&&step.minutes>=1&&step.minutes<=90&&['titleVi','detailVi','coachTipVi'].every(key=>typeof step[key]==='string'&&step[key].trim())&&(step.focusWords===undefined||Array.isArray(step.focusWords)&&step.focusWords.length<=8&&step.focusWords.every(validWord))&&(step.drills===undefined||Array.isArray(step.drills)&&step.drills.length<=4&&step.drills.every(validDrill))&&(step.scenario===undefined||validScenario(step.scenario))&&(step.action!=='ai_vocab_coach'||Array.isArray(step.focusWords)&&step.focusWords.length>0)&&(step.action!=='ai_drill'||Array.isArray(step.drills)&&step.drills.length>=2)&&(step.action!=='ai_scenario'||validScenario(step.scenario));
+     const validSessions=Array.isArray(result.sessions)&&result.sessions.length>=1&&result.sessions.length<=4&&result.sessions.every(session=>session&&typeof session.label==='string'&&session.label.trim()&&typeof session.goalVi==='string'&&session.goalVi.trim()&&Number.isInteger(session.minutes)&&session.minutes>=1&&session.minutes<=180&&Array.isArray(session.steps)&&session.steps.length>=2&&session.steps.length<=4&&session.steps.every(validStep));
+     if(!validSessions||typeof result.coachIntroVi!=='string'||!result.coachIntroVi.trim())return reply({error:'AI chưa trả giáo án đầy đủ và hợp lệ. Hãy thử thiết kế lại.'},502);
      return reply({
       lessonDesign:{
        lessonId:String(body.lesson.id||'').trim().slice(0,64),

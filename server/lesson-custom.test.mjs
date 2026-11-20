@@ -78,6 +78,25 @@ test('HSKLessonCustomCore normalizes weights to 100 and validates profiles stric
   assert.equal(C.validProfile({ ...p, minutes: 3 }), false);
   assert.equal(C.validProfile({ ...p, weights: { ...p.weights, vocab: 99 } }), false);
   assert.equal(C.validProfile({ ...p, style: 'unknown_style' }), false);
+  assert.equal(S.validCustom(p), true);
+  assert.equal(S.validCustom({ ...p, style: 'unknown_style' }), false);
+  assert.equal(S.validCustom({ ...p, extraPayload: 'not allowed' }), false);
+  assert.equal(S.validCustom({ ...p, sessionsDone: { invalid: ['step-1'] } }), false);
+
+  const aiDesign = {
+    coachIntroVi: 'AI chia bài thành hai phiên theo quỹ thời gian của bạn.',
+    sessions: [{ label: 'Phiên 1 · 10 phút', minutes: 10, goalVi: 'Luyện từ vựng và phản xạ', steps: [
+      { id: 'vocab-ai', skill: 'vocab', action: 'ai_vocab_coach', minutes: 5, titleVi: 'Từ trọng tâm', detailVi: 'Học từ theo ngữ cảnh', coachTipVi: 'Đọc to ví dụ', focusWords: [{ han: '旅游', pin: 'lǚyóu', mean: 'du lịch', mnemonicVi: 'Lữ hành', exampleCn: '我去旅游。', examplePin: 'Wǒ qù lǚyóu.', exampleVi: 'Tôi đi du lịch.' }] },
+      { id: 'drill-ai', skill: 'grammar', action: 'ai_drill', minutes: 5, titleVi: 'Luyện tập', detailVi: 'Chọn đáp án đúng', coachTipVi: 'Đọc kỹ câu hỏi', drills: [0, 1].map(i => ({ promptVi: `Câu ${i + 1}`, questionCn: '我___去。', options: ['要', '最', '也', '新'], answerIndex: 0, explanationVi: '要 chỉ dự định.' })) }
+    ] }]
+  };
+  const aiProfile = C.saveLessonDesign({ ...p, aiGenerated: true, aiProvider: 'deepseek', aiModel: 'deepseek-chat', learnerContextVi: 'Học viên ưu tiên giao tiếp.', aiBlueprint: aiDesign.sessions }, 'standard-2-01', aiDesign, 2000);
+  assert.equal(S.validCustom(aiProfile), true);
+  const aiState = S.saveCustomLesson(S.empty('user-ai'), aiProfile);
+  assert.deepEqual(S.customLesson(aiState), aiProfile);
+  const aiCaptured = A.capture({}, {}, { [S.KEY]: JSON.stringify(aiState) }, now, 'dev-ai');
+  assert.ok(aiCaptured.changed.includes('study-plan:custom-lesson'));
+  assert.equal(S.validCustom(A.materialize(aiCaptured.items, 'user-ai')[S.KEY] ? JSON.parse(A.materialize(aiCaptured.items, 'user-ai')[S.KEY]).customLesson : null), true);
 });
 
 test('HSKLessonCustomCore parses free-text Vietnamese interview answers accurately', () => {
@@ -112,6 +131,17 @@ test('buildLessonPlan restructures lessons by focus, time budget and study style
   const planC = C.buildLessonPlan(handsFree, sampleLesson, {}, { dayKey: '2026-11-20', now });
   assert.ok(planC.sessions[0].steps[0].skill === 'listening');
   assert.equal(planC.sessions.reduce((acc, s) => acc + s.minutes, 0), 30);
+
+  const previouslyRead = C.buildLessonPlan(focusedGrammar, sampleLesson, { read: true }, { dayKey: '2026-11-20', now });
+  assert.equal(previouslyRead.completedSteps, 0, 'general lesson read state must not auto-complete custom activities');
+
+  const weekendSprint = C.createProfile({ hsk: 2, focusChoice: 'balanced', minutes: 30, style: 'weekend_sprint', days: 5, goal: 'exam' }, now);
+  const saturday = C.buildLessonPlan(weekendSprint, sampleLesson, {}, { now: Date.parse('2026-11-21T03:00:00Z') });
+  const monday = C.buildLessonPlan(weekendSprint, sampleLesson, {}, { now: Date.parse('2026-11-23T03:00:00Z') });
+  assert.equal(saturday.sessions.length, 1, 'weekend sprint consolidates a 30-minute Saturday into one session');
+  assert.equal(monday.sessions.length, 2, 'weekend sprint splits a 30-minute weekday into two sessions');
+  assert.match(monday.noteVi, /Ngày thường học gọn nhẹ/);
+  assert.doesNotMatch(saturday.noteVi, /Ngày thường học gọn nhẹ/);
 });
 
 test('markStepCompleted and adaptProfileWeekly track progress cleanly and rebalance weak skills', () => {
@@ -270,6 +300,13 @@ test('Worker POST /custom-lesson-profile supports real AI interview turns (mode=
                 options: ['最', '要', '也', '新'],
                 answerIndex: 0,
                 explanationVi: 'Dùng 最 + tính từ (最好) để chỉ mức độ cao nhất.'
+              },
+              {
+                promptVi: 'Chọn từ phù hợp để nói "Tôi muốn đi du lịch":',
+                questionCn: '我___去旅游。',
+                options: ['要', '最', '也', '新'],
+                answerIndex: 0,
+                explanationVi: '要 diễn tả mong muốn hoặc dự định làm việc gì.'
               }
             ]
           }
@@ -295,6 +332,15 @@ test('Worker POST /custom-lesson-profile supports real AI interview turns (mode=
               samplePin: 'Zhōumò wǒmen yìqǐ qù tī zúqiú ba!',
               sampleVi: 'Cuối tuần chúng mình cùng đi đá bóng nhé!'
             }
+          },
+          {
+            id: 'ai_reading_2',
+            skill: 'reading',
+            action: 'reading_dialogue',
+            minutes: 4,
+            titleVi: 'Đọc lại câu mẫu theo ngữ cảnh',
+            detailVi: 'Đọc to câu mẫu và tự thay đổi thời gian hoặc địa điểm.',
+            coachTipVi: 'Thay 周末 bằng một mốc thời gian khác để tạo câu mới.'
           }
         ]
       }
@@ -319,6 +365,16 @@ test('Worker POST /custom-lesson-profile supports real AI interview turns (mode=
   assert.equal(designData.lessonDesign.lessonId, 'standard-2-01');
   assert.equal(designData.lessonDesign.sessions.length, 2);
 
+  const hallucinatedDesign = structuredClone(aiLessonDesign);
+  hallucinatedDesign.sessions[0].steps[0].focusWords[0].han = '银行';
+  const hallucinatedWorker = setupWorker(hallucinatedDesign);
+  const hallucinatedRes = await hallucinatedWorker.run({
+    hsk: 2,
+    mode: 'design',
+    lesson: { id: sampleLesson.id, number: sampleLesson.number, title: sampleLesson.title, vi: sampleLesson.vi, words: sampleLesson.words.map(han => ({ han, pin: '', mean: '' })) }
+  });
+  assert.equal(hallucinatedRes.status, 502, 'AI may only select focus words from the actual lesson');
+
   // 3. Verify HSKLessonCustomCore saves and builds plan directly from AI lesson design
   const baseProf = C.createProfile({ hsk: 2, focusChoice: 'vocab_heavy', minutes: 24, style: 'spare_time', days: 6, goal: 'conversation' }, now);
   const profWithAi = C.saveLessonDesign(baseProf, sampleLesson.id, designData.lessonDesign, now + 500);
@@ -330,4 +386,49 @@ test('Worker POST /custom-lesson-profile supports real AI interview turns (mode=
   assert.equal(aiPlan.sessions[0].steps[0].focusWords[0].han, '旅游');
   assert.equal(aiPlan.sessions[0].steps[1].drills[0].options[0], '最');
   assert.equal(aiPlan.sessions[1].steps[0].scenario.sampleCn, '周末我们一起去踢足球吧！');
+
+  const hallucinatedClientDesign = structuredClone(designData.lessonDesign);
+  hallucinatedClientDesign.sessions[0].steps[0].focusWords[0].han = '银行';
+  const filteredProfile = C.saveLessonDesign(baseProf, sampleLesson.id, hallucinatedClientDesign, now + 700, new Set(sampleLesson.words));
+  assert.equal(JSON.stringify(filteredProfile.aiLessonDesigns[sampleLesson.id]).includes('银行'), false);
+});
+
+
+test('AI session sanitizer preserves 2–4 steps and never exceeds the learner time budget', () => {
+  const step = (id, minutes = 5) => ({ id, skill: 'vocab', action: 'vocab_cards', minutes, titleVi: id, detailVi: id, coachTipVi: 'Làm chậm và đọc thành tiếng.' });
+  const raw = Array.from({ length: 4 }, (_, index) => ({
+    label: `Phiên ${index + 1} · 20 phút`, minutes: 20, goalVi: 'Ôn tập trọng tâm',
+    steps: Array.from({ length: 4 }, (_, stepIndex) => step(`s${index}-${stepIndex}`, stepIndex + 1))
+  }));
+  const sessions = C.sanitizeAiSessions(raw, 10);
+  assert.equal(sessions.length, 4);
+  assert.equal(sessions.reduce((sum, session) => sum + session.minutes, 0), 10);
+  assert.equal(sessions.reduce((sum, session) => sum + session.steps.length, 0), 10);
+  for (const session of sessions) {
+    assert.ok(session.steps.length >= 2 && session.steps.length <= 4);
+    assert.ok(session.minutes >= session.steps.length);
+    assert.equal(session.steps.reduce((sum, item) => sum + item.minutes, 0), session.minutes);
+    assert.ok(session.steps.every(item => item.minutes >= 1));
+    assert.doesNotMatch(session.label, /20 phút/);
+  }
+  const weighted = C.sanitizeAiSessions([
+    { label: 'Phiên dài', minutes: 16, goalVi: 'Chuyên sâu', steps: [step('long-1'), step('long-2')] },
+    { label: 'Phiên ngắn', minutes: 4, goalVi: 'Ôn nhanh', steps: [step('short-1'), step('short-2')] }
+  ], 10);
+  assert.deepEqual(weighted.map(session => session.minutes), [7, 3]);
+});
+
+test('profile-level interview blueprint is not reused as lesson content in another HSK lesson', () => {
+  const profile = C.createProfile({
+    hsk: 2, minutes: 20, aiGenerated: true, focusChoice: 'vocab_heavy', style: 'spare_time', goal: 'conversation',
+    aiBlueprint: [{ label: 'Phiên mẫu', minutes: 20, goalVi: 'Luyện hội thoại', steps: [
+      { id: 'old-vocab', skill: 'vocab', action: 'ai_vocab_coach', minutes: 10, titleVi: 'Từ cũ', detailVi: 'Từ của bài trước', coachTipVi: 'Ôn lại', focusWords: [{ han: '旅游', pin: 'lǚyóu', mean: 'du lịch', mnemonicVi: 'Lữ hành', exampleCn: '我去旅游。', examplePin: 'Wǒ qù lǚyóu.', exampleVi: 'Tôi đi du lịch.' }] },
+      { id: 'old-drill', skill: 'grammar', action: 'grammar_focus', minutes: 10, titleVi: 'Ngữ pháp cũ', detailVi: 'Bài trước', coachTipVi: 'Đọc lại' }
+    ] }]
+  });
+  const nextLesson = { id: 'standard-2-02', number: 2, vi: 'Bài 2', words: [{ han: '学校', pin: 'xuéxiào', mean: 'trường học' }], content: { grammar: [] } };
+  const plan = C.buildLessonPlan(profile, nextLesson, {}, { dayKey: '2026-11-20', now });
+  assert.equal(plan.hasLessonAiDesign, false);
+  assert.equal(plan.sessions.some(session => session.steps.some(item => item.aiAuthored)), false);
+  assert.equal(JSON.stringify(plan).includes('旅游'), false);
 });

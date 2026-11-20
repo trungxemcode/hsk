@@ -73,6 +73,13 @@ const http = require('node:http');
                             options: ['你好', '再见', '谢谢', '不客气'],
                             answerIndex: 0,
                             explanationVi: 'Dùng 你好 (Xin chào) khi mới gặp nhau.'
+                          },
+                          {
+                            promptVi: 'Chọn câu cảm ơn phù hợp khi được giúp đỡ:',
+                            questionCn: 'A: 我帮你拿行李。 B: ___！',
+                            options: ['谢谢', '再见', '你好', '不去'],
+                            answerIndex: 0,
+                            explanationVi: '谢谢 dùng để cảm ơn người vừa giúp mình.'
                           }
                         ]
                       },
@@ -95,6 +102,16 @@ const http = require('node:http');
                             exampleVi: 'Xin chào, tôi là đồng nghiệp mới tới.'
                           }
                         ]
+                      },
+                      {
+                        id: 'external_vocab_quiz',
+                        skill: 'vocab',
+                        action: 'vocab_quiz',
+                        minutes: 3,
+                        titleVi: 'Kiểm tra từ vựng sau bài học AI',
+                        detailVi: 'Mở bài kiểm tra bên ngoài và quay lại sau khi hoàn thành.',
+                        coachTipVi: 'Tự nhớ nghĩa trước khi mở đáp án.',
+                        wordLimit: 8
                       }
                     ]
                   }
@@ -157,6 +174,12 @@ const http = require('node:http');
       const savedMinutes = await page.evaluate(() => window.HSKStudyStore.customLesson?.minutes);
       assert.equal(savedMinutes, 25);
 
+      // Editing an existing profile must reopen the interview, not only show the saved preview.
+      await page.locator('#lessonCustomEditBtn').click();
+      await page.locator('#lessonCustomChatInput').waitFor({ state: 'visible' });
+      assert.match(await page.locator('#lessonCustomInterview').innerText(), /Bạn muốn bài học HSK tập trung nhiều nhất/);
+      await page.locator('#lessonCustomInterview').getByRole('button', { name: 'Đóng', exact: true }).click();
+
       // 3. Test offline fixed-form fallback
       await page.locator('#lessonCustomEditBtn').click();
       await page.locator('#lessonCustomToggleForm').click();
@@ -196,13 +219,31 @@ const http = require('node:http');
         assert.ok(stepBtnStats.every(x => x.mb === '0px'), 'Step action buttons marginBottom must be 0px: ' + JSON.stringify(stepBtnStats));
       }
 
-      // Open the AI drill step and answer the AI-generated multiple-choice question
+      // An AI drill cannot be skipped: its parent shortcut is hidden and completion waits for every question.
+      assert.equal(await firstStep.getByRole('button', { name: 'Đánh dấu xong', exact: true }).count(), 0);
       await firstStep.getByRole('button', { name: 'Thực hiện bước này', exact: true }).click();
       await page.locator('#customStepStage').waitFor({ state: 'visible' });
-      await page.locator('.custom-ai-drill-opt').first().click();
+      const drillCards = page.locator('.custom-ai-drill-card');
+      assert.equal(await drillCards.count(), 2);
+      await drillCards.nth(0).locator('.custom-ai-drill-opt').first().click();
       assert.match(await page.locator('#customStepStage').innerText(), /Chính xác!/);
-      await page.locator('#customStepStage').getByRole('button', { name: 'Hoàn thành bài tập AI', exact: true }).click();
+      const finishDrills = page.locator('#customStepStage').getByRole('button', { name: 'Hoàn thành bài tập AI', exact: true });
+      assert.equal(await finishDrills.isDisabled(), true, 'cannot finish before answering every AI drill');
+      await drillCards.nth(1).locator('.custom-ai-drill-opt').first().click();
+      assert.equal(await finishDrills.isDisabled(), false);
+      await finishDrills.click();
       assert.match(await firstStep.innerText(), /Đã hoàn thành/);
+
+      // Opening a quiz is not completion; the learner marks it done after returning.
+      const quizStep = page.locator('[data-custom-step*="vocab_quiz"]').first();
+      await quizStep.waitFor({ state: 'visible' });
+      const quizStepId = await quizStep.getAttribute('data-custom-step');
+      await quizStep.getByRole('button', { name: 'Thực hiện bước này', exact: true }).click();
+      const quizWasPremarked = await page.evaluate(id =>
+        Object.values(window.HSKStudyStore.customLesson?.sessionsDone || {}).some(ids => ids.includes(id)),
+        quizStepId
+      );
+      assert.equal(quizWasPremarked, false, 'opening an external quiz must not mark its custom step complete');
 
       // 5. Check Home card reflects saved profile without horizontal overflow
       await page.evaluate(() => window.HSKStudio.navigate('home'));

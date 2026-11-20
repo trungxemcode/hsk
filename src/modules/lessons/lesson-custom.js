@@ -222,7 +222,7 @@
         signal: controller.signal
       }
     );
-    const timer = setTimeout(() => controller.abort(), 40000);
+    const timer = setTimeout(() => controller.abort(), 55000);
     try {
       const token = await account.getIdToken();
       const payloadAnswers = answers.map(a => ({ id: a.id || 'turn', answer: String(a.answer || '').slice(0, 500) }));
@@ -309,7 +309,7 @@
       detail: 'Đang đọc từ vựng, ngữ pháp bài học và biên soạn bài tập riêng cho bạn...',
       signal: controller.signal
     });
-    const timer = setTimeout(() => controller.abort(), 45000);
+    const timer = setTimeout(() => controller.abort(), 95000);
     try {
       const token = await account.getIdToken();
       const reqBody = {
@@ -354,14 +354,21 @@
         throw Error('AI chưa trả giáo án hợp lệ cho bài học này.');
       }
       const provider = data?.aiSource?.provider || rawDesign.aiProvider || providerHeader || 'ai';
+      const allowedWords = new Set((Array.isArray(words) ? words : []).map(word => typeof word === 'string' ? word : word?.han).filter(Boolean));
       const updatedProfile = C.saveLessonDesign(profile, lesson.id, {
         ...rawDesign,
         customPrompt: reqBody.customPrompt,
         aiProvider: provider,
         aiModel: data?.aiSource?.model || rawDesign.aiModel || ''
-      });
-      saveProfile(updatedProfile);
-      return { ok: true, profile: updatedProfile, provider };
+      }, Date.now(), allowedWords);
+      if (!updatedProfile.aiLessonDesigns?.[lesson.id]?.sessions?.length) {
+        throw Error('Giáo án AI thiếu nội dung hợp lệ; chưa lưu thay đổi. Hãy thử thiết kế lại.');
+      }
+      const savedProfile = saveProfile(updatedProfile);
+      if (!savedProfile?.aiLessonDesigns?.[lesson.id]?.sessions?.length) {
+        throw Error('Không lưu được giáo án AI vào hồ sơ học tập. Hãy thử lại sau.');
+      }
+      return { ok: true, profile: savedProfile, provider };
     } catch (e) {
       return {
         ok: false,
@@ -379,6 +386,7 @@
     aiDynamicChips = null;
     interviewBusy = false;
     interviewStatus = '';
+    formMode = false;
     draftProfile = null;
     const first = C.INTERVIEW_STEPS[0];
     chatHistory = [
@@ -453,16 +461,23 @@
     const toggleBtn = btn(
       formMode ? 'Chuyển sang hỏi đáp AI' : 'Chọn nhanh bằng bảng',
       () => {
-        formMode = !formMode;
-        if (formMode && !draftProfile) {
-          const base = getSavedProfile();
-          draftProfile = base
-            ? C.createProfile({ ...base, hsk })
-            : C.createProfile({
-                hsk,
-                minutes: window.HSKPlanner?.plan?.minutes || 20,
-                days: window.HSKPlanner?.plan?.days || 6
-              });
+        if (!formMode) {
+          if (!draftProfile) {
+            const base = getSavedProfile();
+            draftProfile = collectedAnswers.length
+              ? seedFromAnswers(hsk, collectedAnswers)
+              : (base
+                ? C.createProfile({ ...base, hsk })
+                : C.createProfile({
+                    hsk,
+                    minutes: window.HSKPlanner?.plan?.minutes || 20,
+                    days: window.HSKPlanner?.plan?.days || 6
+                  }));
+          }
+          formMode = true;
+        } else {
+          resetInterview(hsk);
+          formMode = false;
         }
         rerender();
       },
@@ -872,6 +887,8 @@
     wrap.append(el('h4', `✨ Bài tập thực hành do AI thiết kế riêng (${drills.length} câu)`));
     let answeredCount = 0;
     let correctCount = 0;
+    const doneBtn = onDone ? btn('Hoàn thành bài tập AI', onDone, 'lesson-custom-primary') : null;
+    if (doneBtn) doneBtn.disabled = true;
     const scoreEl = el('p', `Tiến độ: 0/${drills.length} câu`, 'hint');
     wrap.append(scoreEl);
 
@@ -898,6 +915,8 @@
           optBtn.classList.add(isRight ? 'is-correct' : 'is-wrong');
           const allBtns = optsGrid.querySelectorAll('button');
           if (allBtns[d.answerIndex]) allBtns[d.answerIndex].classList.add('is-correct');
+          allBtns.forEach(button => { button.disabled = true; });
+          if (doneBtn) doneBtn.disabled = answeredCount < drills.length;
           explainEl.textContent = `${isRight ? '✓ Chính xác!' : '✗ Chưa đúng.'} ${d.explanationVi || ''}`;
           explainEl.hidden = false;
           scoreEl.textContent = `Tiến độ: ${answeredCount}/${drills.length} câu · Đúng ${correctCount}/${answeredCount}`;
@@ -909,9 +928,7 @@
       wrap.append(card);
     });
 
-    if (onDone) {
-      wrap.append(btn('Hoàn thành bài tập AI', onDone, 'lesson-custom-primary'));
-    }
+    if (doneBtn) wrap.append(doneBtn);
     stageEl.append(wrap);
   }
 
@@ -943,7 +960,15 @@
       btn('Xem câu trả lời mẫu của AI', () => { sampleWrap.hidden = !sampleWrap.hidden; }, 'lesson-custom-secondary')
     );
     if (onDone) {
-      actions.append(btn('Hoàn thành tình huống này', onDone, 'lesson-custom-primary'));
+      const doneBtn = btn('Hoàn thành tình huống này', onDone, 'lesson-custom-primary');
+      const spokenBtn = btn('Tôi đã tự trả lời bằng lời nói', () => {
+        doneBtn.disabled = false;
+        spokenBtn.disabled = true;
+        spokenBtn.textContent = 'Đã xác nhận luyện nói';
+      }, 'lesson-custom-secondary');
+      doneBtn.disabled = true;
+      input.addEventListener('input', () => { doneBtn.disabled = !input.value.trim(); });
+      actions.append(spokenBtn, doneBtn);
     }
     box.append(sampleWrap, actions);
     stageEl.append(box);
@@ -1282,32 +1307,26 @@
       const runBtn = btn(step.completed ? 'Luyện lại bước này' : 'Thực hiện bước này', () => {
         if (!hasRichAiContent) {
           if (step.action === 'vocab_quiz') {
-            completeStep(step.stepId);
             hooks.startQuiz?.(words.slice(0, step.wordLimit || words.length));
             return;
           }
           if (step.action === 'vocab_srs') {
-            completeStep(step.stepId);
             hooks.startSrs?.(words.slice(0, step.wordLimit || words.length));
             return;
           }
           if (step.action === 'guided_auto') {
-            completeStep(step.stepId);
             hooks.openSection?.('guided');
             return;
           }
           if (step.action === 'practice_mini') {
-            completeStep(step.stepId);
             hooks.openSection?.('practice', 'mini');
             return;
           }
           if (step.action === 'practice_check') {
-            completeStep(step.stepId);
             hooks.openSection?.('practice', 'check');
             return;
           }
           if (step.action === 'real_reading' && window.HSKRealReading?.openFromLesson) {
-            completeStep(step.stepId);
             window.HSKRealReading.openFromLesson({
               id: lesson.id,
               hsk,
@@ -1324,7 +1343,10 @@
       }, 'lesson-custom-primary');
 
       row.append(runBtn);
-      if (!step.completed) {
+      const requiresAiPractice = (step.action === 'ai_drill' && Boolean(step.drills?.length)) ||
+        (step.action === 'ai_scenario' && Boolean(step.scenario)) ||
+        (['ai_vocab_coach', 'vocab_cards'].includes(step.action) && Boolean(step.focusWords?.length));
+      if (!step.completed && !requiresAiPractice) {
         row.append(btn('Đánh dấu xong', () => completeStep(step.stepId), 'lesson-custom-secondary'));
       }
       card.append(row);

@@ -7,7 +7,59 @@ function row(x={}){const r={};for(const k of counts)r[k]=Math.max(0,Number.isFin
 function aggregate(parts){const result={};for(const p of Object.values(parts||{})){if(!p||!/^\d{4}-\d{2}-\d{2}$/.test(p.day))continue;const slot=result[p.day]||(result[p.day]={base:row(),live:row()});const target=p.legacy?slot.base:slot.live,r=row(p.row);for(const k of counts)target[k]=p.legacy?Math.max(target[k],r[k]):target[k]+r[k];for(const k of arrays)target[k]=[...new Set([...target[k],...r[k]])];}return Object.fromEntries(Object.entries(result).map(([d,{base,live}])=>{for(const k of counts)live[k]+=base[k];for(const k of arrays)live[k]=[...new Set([...live[k],...base[k]])];return [d,live];}));}
 function plan(state){if(!state.plan)return null;const p=clone(state.plan);p.journal=aggregate(Object.fromEntries(Object.entries(state.parts||{}).filter(([,v])=>v.planId===p.id)));return p;}
 const VALID_CUSTOM_SKILLS=['vocab','grammar','reading','listening','writing'];
-function validCustom(v){if(!v||typeof v!=='object'||Array.isArray(v)||v.version!==1)return false;if(typeof v.id!=='string'||!v.id.trim()||v.id.length>80)return false;if(!Number.isInteger(v.hsk)||v.hsk<1||v.hsk>6)return false;if(!Number.isInteger(v.minutes)||v.minutes<10||v.minutes>180)return false;if(!Number.isInteger(v.days)||v.days<3||v.days>7)return false;if(!v.weights||typeof v.weights!=='object'||Array.isArray(v.weights))return false;if(!VALID_CUSTOM_SKILLS.every(k=>Number.isInteger(v.weights[k])&&v.weights[k]>=5&&v.weights[k]<=70))return false;if(VALID_CUSTOM_SKILLS.reduce((n,k)=>n+v.weights[k],0)!==100)return false;return true;}
+const VALID_CUSTOM_FOCUS=['vocab_heavy','grammar_heavy','listening_speaking','reading_heavy','balanced'];
+const VALID_CUSTOM_STYLES=['spare_time','focused_block','hands_free','bedtime_review','weekend_sprint'];
+const VALID_CUSTOM_GOALS=['exam','conversation','reading_comprehension','work_travel'];
+const VALID_CUSTOM_FIELDS=['version','id','hsk','focusChoice','minutes','days','style','goal','weights','summaryVi','followUpVi','sessionsDone','updatedAt','aiGenerated','aiProvider','aiModel','learnerContextVi','aiBlueprint','aiLessonDesigns'];
+const VALID_AI_ACTIONS=['vocab_cards','vocab_quiz','vocab_srs','grammar_focus','reading_dialogue','passive_listen','guided_auto','practice_mini','practice_check','real_reading','ai_vocab_coach','ai_drill','ai_scenario'];
+function validAiWord(word){return Boolean(word&&typeof word==='object'&&!Array.isArray(word)&&['han','pin','mean','mnemonicVi','exampleCn','examplePin','exampleVi'].every(k=>typeof word[k]==='string'&&word[k].length<=300));}
+function validAiDrill(drill){return Boolean(drill&&typeof drill==='object'&&!Array.isArray(drill)&&typeof drill.promptVi==='string'&&drill.promptVi.length<=260&&typeof drill.questionCn==='string'&&drill.questionCn.length<=140&&Array.isArray(drill.options)&&drill.options.length===4&&drill.options.every(x=>typeof x==='string'&&x.length<=120)&&new Set(drill.options).size===4&&Number.isInteger(drill.answerIndex)&&drill.answerIndex>=0&&drill.answerIndex<4&&typeof drill.explanationVi==='string'&&drill.explanationVi.length<=300);}
+function validAiScenario(scenario){return Boolean(scenario&&typeof scenario==='object'&&!Array.isArray(scenario)&&['contextVi','promptVi','sampleCn','samplePin','sampleVi'].every(k=>typeof scenario[k]==='string'&&scenario[k].length<=260));}
+function validAiStep(step){
+ if(!step||typeof step!=='object'||Array.isArray(step)||Object.keys(step).some(k=>!['id','skill','action','minutes','titleVi','detailVi','coachTipVi','wordLimit','grammarLimit','focusWords','drills','scenario'].includes(k)))return false;
+ if(typeof step.id!=='string'||!step.id.trim()||step.id.length>40||!VALID_CUSTOM_SKILLS.includes(step.skill)||!VALID_AI_ACTIONS.includes(step.action)||!Number.isInteger(step.minutes)||step.minutes<1||step.minutes>90)return false;
+ if(typeof step.titleVi!=='string'||!step.titleVi.trim()||step.titleVi.length>140||typeof step.detailVi!=='string'||!step.detailVi.trim()||step.detailVi.length>260||typeof step.coachTipVi!=='string'||!step.coachTipVi.trim()||step.coachTipVi.length>280)return false;
+ if(step.wordLimit!==undefined&&(!Number.isInteger(step.wordLimit)||step.wordLimit<1||step.wordLimit>50)||step.grammarLimit!==undefined&&(!Number.isInteger(step.grammarLimit)||step.grammarLimit<1||step.grammarLimit>10))return false;
+ if(step.focusWords!==undefined&&(!Array.isArray(step.focusWords)||step.focusWords.length>12||!step.focusWords.every(validAiWord)))return false;
+ if(step.drills!==undefined&&(!Array.isArray(step.drills)||step.drills.length>4||!step.drills.every(validAiDrill)))return false;
+ if(step.scenario!==undefined&&!validAiScenario(step.scenario))return false;
+ if(step.action==='ai_vocab_coach'&&(!Array.isArray(step.focusWords)||!step.focusWords.length))return false;
+ if(step.action==='ai_drill'&&(!Array.isArray(step.drills)||step.drills.length<2))return false;
+ if(step.action==='ai_scenario'&&!validAiScenario(step.scenario))return false;
+ return true;
+}
+function validAiSessions(sessions){return Array.isArray(sessions)&&sessions.length>=1&&sessions.length<=4&&sessions.every(session=>session&&typeof session==='object'&&!Array.isArray(session)&&typeof session.label==='string'&&session.label.length<=140&&typeof session.goalVi==='string'&&session.goalVi.length<=220&&Number.isInteger(session.minutes)&&session.minutes>=1&&session.minutes<=180&&Array.isArray(session.steps)&&session.steps.length>=2&&session.steps.length<=4&&session.steps.every(validAiStep));}
+function validCustomAiFields(v){
+ if(v.aiGenerated!==undefined&&typeof v.aiGenerated!=='boolean')return false;
+ if(v.aiProvider!==undefined&&(typeof v.aiProvider!=='string'||v.aiProvider.length>40))return false;
+ if(v.aiModel!==undefined&&(typeof v.aiModel!=='string'||v.aiModel.length>80))return false;
+ if(v.learnerContextVi!==undefined&&(typeof v.learnerContextVi!=='string'||v.learnerContextVi.length>500))return false;
+ if(v.aiBlueprint!==undefined&&!validAiSessions(v.aiBlueprint))return false;
+ if(v.aiLessonDesigns!==undefined){
+  const designs=v.aiLessonDesigns;
+  if(!designs||typeof designs!=='object'||Array.isArray(designs))return false;
+  const ids=Object.keys(designs);if(ids.length>12)return false;
+  for(const id of ids){const design=designs[id];if(!/^[a-zA-Z0-9_-]{1,64}$/.test(id)||!design||typeof design!=='object'||Array.isArray(design)||design.lessonId!==id||typeof design.coachIntroVi!=='string'||!design.coachIntroVi.trim()||design.coachIntroVi.length>500||typeof design.customPrompt!=='string'||design.customPrompt.length>300||typeof design.aiProvider!=='string'||design.aiProvider.length>40||typeof design.aiModel!=='string'||design.aiModel.length>80||!Number.isFinite(design.updatedAt)||!validAiSessions(design.sessions))return false;}
+ }
+ try{return JSON.stringify(v).length<=200000;}catch{return false;}
+}
+function validCustom(v){
+ if(!v||typeof v!=='object'||Array.isArray(v)||v.version!==1||Object.keys(v).some(k=>!VALID_CUSTOM_FIELDS.includes(k))||!validCustomAiFields(v))return false;
+ if(typeof v.id!=='string'||!v.id.trim()||v.id.length>80)return false;
+ if(!Number.isInteger(v.hsk)||v.hsk<1||v.hsk>6)return false;
+ if(!VALID_CUSTOM_FOCUS.includes(v.focusChoice)||!VALID_CUSTOM_STYLES.includes(v.style)||!VALID_CUSTOM_GOALS.includes(v.goal))return false;
+ if(!Number.isInteger(v.minutes)||v.minutes<10||v.minutes>180)return false;
+ if(!Number.isInteger(v.days)||v.days<3||v.days>7)return false;
+ if(!v.weights||typeof v.weights!=='object'||Array.isArray(v.weights)||Object.keys(v.weights).some(k=>!VALID_CUSTOM_SKILLS.includes(k)))return false;
+ if(!VALID_CUSTOM_SKILLS.every(k=>Number.isInteger(v.weights[k])&&v.weights[k]>=5&&v.weights[k]<=70))return false;
+ if(VALID_CUSTOM_SKILLS.reduce((n,k)=>n+v.weights[k],0)!==100)return false;
+ if(typeof v.summaryVi!=='string'||!v.summaryVi.trim()||v.summaryVi.length>500)return false;
+ if(typeof v.followUpVi!=='string'||!v.followUpVi.trim()||v.followUpVi.length>400)return false;
+ if(!Number.isFinite(v.updatedAt)||!v.sessionsDone||typeof v.sessionsDone!=='object'||Array.isArray(v.sessionsDone))return false;
+ const days=Object.keys(v.sessionsDone);if(days.length>14)return false;
+ for(const day of days){const ids=v.sessionsDone[day];if(!/^\d{4}-\d{2}-\d{2}$/.test(day)||!Array.isArray(ids)||ids.length>60||ids.some(id=>typeof id!=='string'||id.length>80)||new Set(ids).size!==ids.length)return false;}
+ return true;
+}
 function customLesson(state){return validCustom(state?.customLesson)?clone(state.customLesson):null;}
 function saveCustomLesson(state,value){const s=clone(state);if(value===null){delete s.customLesson;return s;}if(!validCustom(value))return s;s.customLesson=clone(value);return s;}
 function seed(owner,oldPlan,oldActivity,current){const s=current?.owner===owner?clone(current):empty(owner);s.parts=s.parts||{};s.activity=s.activity||{};
