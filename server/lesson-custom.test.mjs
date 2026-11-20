@@ -207,3 +207,127 @@ test('Worker POST /custom-lesson-profile validates auth/input, returns schema-ch
   const badAiRes = await badAi.run({ hsk: 2, answers: [{ id: 'focus', answer: 'từ vựng' }] });
   assert.equal(badAiRes.status, 502);
 });
+
+test('Worker POST /custom-lesson-profile supports real AI interview turns (mode=interview) and bespoke lesson design (mode=design)', async () => {
+  // 1. mode=interview returning next question + dynamic chips
+  const interviewTurnWorker = setupWorker({
+    ready: false,
+    replyVi: 'Tuyệt vời! Bạn muốn ưu tiên từ vựng giao tiếp. Mỗi ngày bạn có khoảng bao nhiêu phút rảnh để học?',
+    suggestedReplies: ['15 phút giờ nghỉ trưa', '25 phút chia 2 lần', '45 phút buổi tối']
+  });
+  const turnRes = await interviewTurnWorker.run({
+    hsk: 2,
+    mode: 'interview',
+    messages: [{ role: 'user', text: 'Mình muốn tập trung học nhiều từ vựng để giao tiếp công việc' }]
+  });
+  assert.equal(turnRes.status, 200);
+  const turnData = await turnRes.json();
+  assert.equal(turnData.ready, false);
+  assert.match(turnData.replyVi, /bao nhiêu phút/);
+  assert.equal(turnData.suggestedReplies.length, 3);
+
+  // 2. mode=design returning AI-authored sessions, focusWords mnemonics, interactive drills and scenario
+  const aiLessonDesign = {
+    coachIntroVi: 'Vì bạn học 24 phút/ngày theo giờ trống và ưu tiên từ vựng du lịch, AI chia Bài 1 thành 2 phiên ngắn kèm bài tập phản xạ.',
+    sessions: [
+      {
+        label: 'Phiên 1 · Từ vựng du lịch cốt lõi',
+        minutes: 12,
+        goalVi: 'Nắm chắc 4 từ trọng tâm và mẹo nhớ nhanh.',
+        steps: [
+          {
+            id: 'ai_vocab_1',
+            skill: 'vocab',
+            action: 'ai_vocab_coach',
+            minutes: 7,
+            titleVi: 'Từ vựng du lịch Bắc Kinh (AI chọn lọc)',
+            detailVi: 'Học từ kèm mẹo nhớ và câu ví dụ sát giao tiếp.',
+            coachTipVi: 'Đọc to câu ví dụ 2 lần sau khi xem mẹo nhớ.',
+            focusWords: [
+              {
+                han: '旅游',
+                pin: 'lǚyóu',
+                mean: 'du lịch',
+                mnemonicVi: 'Lữ (đi xa) + Du (rong chơi) = đi du lịch.',
+                exampleCn: '九月去北京旅游最好。',
+                examplePin: 'Jiǔyuè qù Běijīng lǚyóu zuì hǎo.',
+                exampleVi: 'Tháng 9 đi Bắc Kinh du lịch là tuyệt nhất.'
+              }
+            ]
+          },
+          {
+            id: 'ai_drill_1',
+            skill: 'grammar',
+            action: 'ai_drill',
+            minutes: 5,
+            titleVi: 'Bài tập AI: Phân biệt 要 và 最',
+            detailVi: '2 câu trắc nghiệm tình huống do AI biên soạn từ bài.',
+            coachTipVi: 'Chú ý vị trí của 最 trước tính từ.',
+            drills: [
+              {
+                promptVi: 'Chọn câu diễn tả đúng "Tháng 9 đi Bắc Kinh là đẹp nhất":',
+                questionCn: '九月去北京旅游___好。',
+                options: ['最', '要', '也', '新'],
+                answerIndex: 0,
+                explanationVi: 'Dùng 最 + tính từ (最好) để chỉ mức độ cao nhất.'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        label: 'Phiên 2 · Phản xạ đặt câu thực tế',
+        minutes: 12,
+        goalVi: 'Ứng dụng hội thoại đặt vé và rủ bạn đi chơi.',
+        steps: [
+          {
+            id: 'ai_scenario_1',
+            skill: 'listening',
+            action: 'ai_scenario',
+            minutes: 12,
+            titleVi: 'Tình huống AI: Rủ đồng nghiệp đi du lịch',
+            detailVi: 'Đặt câu với 一起 và 要.',
+            coachTipVi: 'Thử tự nói trước khi mở đáp án mẫu của AI.',
+            scenario: {
+              contextVi: 'Bạn muốn rủ đồng nghiệp cuối tuần cùng đi đá bóng hoặc du lịch.',
+              promptVi: 'Hãy nói: "Cuối tuần chúng mình cùng đi đá bóng nhé!"',
+              sampleCn: '周末我们一起去踢足球吧！',
+              samplePin: 'Zhōumò wǒmen yìqǐ qù tī zúqiú ba!',
+              sampleVi: 'Cuối tuần chúng mình cùng đi đá bóng nhé!'
+            }
+          }
+        ]
+      }
+    ]
+  };
+
+  const designWorker = setupWorker(aiLessonDesign);
+  const designRes = await designWorker.run({
+    hsk: 2,
+    mode: 'design',
+    customPrompt: 'Tạo thêm bài tập phân biệt 要 và 最',
+    lesson: {
+      id: sampleLesson.id,
+      number: sampleLesson.number,
+      title: sampleLesson.title,
+      vi: sampleLesson.vi,
+      words: sampleLesson.words.map(w => ({ han: w, pin: '', mean: '' }))
+    }
+  });
+  assert.equal(designRes.status, 200);
+  const designData = await designRes.json();
+  assert.equal(designData.lessonDesign.lessonId, 'standard-2-01');
+  assert.equal(designData.lessonDesign.sessions.length, 2);
+
+  // 3. Verify HSKLessonCustomCore saves and builds plan directly from AI lesson design
+  const baseProf = C.createProfile({ hsk: 2, focusChoice: 'vocab_heavy', minutes: 24, style: 'spare_time', days: 6, goal: 'conversation' }, now);
+  const profWithAi = C.saveLessonDesign(baseProf, sampleLesson.id, designData.lessonDesign, now + 500);
+  assert.equal(profWithAi.aiGenerated, true);
+  const aiPlan = C.buildLessonPlan(profWithAi, sampleLesson, {}, { dayKey: '2026-11-20', now: now + 500 });
+  assert.equal(aiPlan.aiDesigned, true);
+  assert.equal(aiPlan.hasLessonAiDesign, true);
+  assert.equal(aiPlan.sessions.length, 2);
+  assert.equal(aiPlan.sessions[0].steps[0].focusWords[0].han, '旅游');
+  assert.equal(aiPlan.sessions[0].steps[1].drills[0].options[0], '最');
+  assert.equal(aiPlan.sessions[1].steps[0].scenario.sampleCn, '周末我们一起去踢足球吧！');
+});

@@ -218,6 +218,179 @@
     return clean;
   }
 
+  const ALLOWED_STEP_ACTIONS = [
+    'vocab_cards',
+    'vocab_quiz',
+    'vocab_srs',
+    'grammar_focus',
+    'reading_dialogue',
+    'passive_listen',
+    'guided_auto',
+    'practice_mini',
+    'practice_check',
+    'real_reading',
+    'ai_vocab_coach',
+    'ai_drill',
+    'ai_scenario'
+  ];
+
+  function sanitizeFocusWords(rawWords) {
+    if (!Array.isArray(rawWords)) return [];
+    const list = [];
+    for (const item of rawWords.slice(0, 12)) {
+      if (!item || typeof item !== 'object') continue;
+      const han = String(item.han || '').trim().slice(0, 32);
+      if (!han) continue;
+      list.push({
+        han,
+        pin: String(item.pin || '').trim().slice(0, 64),
+        mean: String(item.mean || '').trim().slice(0, 140),
+        mnemonicVi: String(item.mnemonicVi || '').trim().slice(0, 260),
+        exampleCn: String(item.exampleCn || '').trim().slice(0, 120),
+        examplePin: String(item.examplePin || '').trim().slice(0, 160),
+        exampleVi: String(item.exampleVi || '').trim().slice(0, 180)
+      });
+    }
+    return list;
+  }
+
+  function sanitizeDrills(rawDrills) {
+    if (!Array.isArray(rawDrills)) return [];
+    const list = [];
+    for (const d of rawDrills.slice(0, 6)) {
+      if (!d || typeof d !== 'object') continue;
+      const promptVi = String(d.promptVi || '').trim().slice(0, 260);
+      const options = Array.isArray(d.options)
+        ? d.options.map(o => String(o ?? '').trim().slice(0, 120)).filter(Boolean).slice(0, 4)
+        : [];
+      if (!promptVi || options.length < 2) continue;
+      const ans = Number(d.answerIndex);
+      list.push({
+        promptVi,
+        questionCn: String(d.questionCn || '').trim().slice(0, 140),
+        options,
+        answerIndex: Number.isInteger(ans) && ans >= 0 && ans < options.length ? ans : 0,
+        explanationVi: String(d.explanationVi || '').trim().slice(0, 300)
+      });
+    }
+    return list;
+  }
+
+  function sanitizeScenario(rawScenario) {
+    if (!rawScenario || typeof rawScenario !== 'object' || Array.isArray(rawScenario)) return null;
+    const contextVi = String(rawScenario.contextVi || '').trim().slice(0, 240);
+    const promptVi = String(rawScenario.promptVi || '').trim().slice(0, 260);
+    if (!contextVi && !promptVi) return null;
+    return {
+      contextVi,
+      promptVi,
+      sampleCn: String(rawScenario.sampleCn || '').trim().slice(0, 160),
+      samplePin: String(rawScenario.samplePin || '').trim().slice(0, 200),
+      sampleVi: String(rawScenario.sampleVi || '').trim().slice(0, 220)
+    };
+  }
+
+  function sanitizeAiStep(raw, idx = 0) {
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+    const titleVi = String(raw.titleVi || '').trim().slice(0, 140);
+    if (!titleVi) return null;
+    const skill = SKILLS.includes(raw.skill) ? raw.skill : 'vocab';
+    const focusWords = sanitizeFocusWords(raw.focusWords);
+    const drills = sanitizeDrills(raw.drills);
+    const scenario = sanitizeScenario(raw.scenario);
+    let action = ALLOWED_STEP_ACTIONS.includes(raw.action) ? raw.action : '';
+    if (!action) {
+      if (drills.length) action = 'ai_drill';
+      else if (focusWords.length) action = 'ai_vocab_coach';
+      else if (scenario) action = 'ai_scenario';
+      else if (skill === 'grammar') action = 'grammar_focus';
+      else if (skill === 'reading') action = 'reading_dialogue';
+      else if (skill === 'listening') action = 'guided_auto';
+      else action = 'vocab_cards';
+    }
+    const id = String(raw.id || `${action}_${idx + 1}`).replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 40) || `step_${idx + 1}`;
+    const step = {
+      id,
+      skill,
+      action,
+      minutes: clamp(Math.round(Number(raw.minutes) || 5), 1, 90),
+      titleVi,
+      detailVi: String(raw.detailVi || '').trim().slice(0, 260) || titleVi,
+      coachTipVi: String(raw.coachTipVi || '').trim().slice(0, 280)
+    };
+    if (Number.isFinite(Number(raw.wordLimit)) && Number(raw.wordLimit) > 0) {
+      step.wordLimit = clamp(Math.round(Number(raw.wordLimit)), 1, 50);
+    }
+    if (Number.isFinite(Number(raw.grammarLimit)) && Number(raw.grammarLimit) > 0) {
+      step.grammarLimit = clamp(Math.round(Number(raw.grammarLimit)), 1, 10);
+    }
+    if (focusWords.length) step.focusWords = focusWords;
+    if (drills.length) step.drills = drills;
+    if (scenario) step.scenario = scenario;
+    return step;
+  }
+
+  function sanitizeAiSessions(rawSessions, totalMinutes = 20) {
+    if (!Array.isArray(rawSessions) || !rawSessions.length) return [];
+    const cleaned = [];
+    for (let i = 0; i < Math.min(rawSessions.length, 5); i++) {
+      const s = rawSessions[i];
+      if (!s || typeof s !== 'object') continue;
+      const steps = Array.isArray(s.steps)
+        ? s.steps.map((st, idx) => sanitizeAiStep(st, idx)).filter(Boolean).slice(0, 6)
+        : [];
+      if (!steps.length) continue;
+      const rawMins = clamp(Math.round(Number(s.minutes) || steps.reduce((a, b) => a + b.minutes, 0) || 10), 2, 180);
+      cleaned.push({
+        label: String(s.label || `Phiên ${cleaned.length + 1}`).trim().slice(0, 100),
+        goalVi: String(s.goalVi || '').trim().slice(0, 220),
+        minutes: rawMins,
+        steps
+      });
+    }
+    if (!cleaned.length) return [];
+    const targetTotal = clamp(Math.round(Number(totalMinutes) || 20), 10, 180);
+    const sessionMins = distributeMinutes(targetTotal, cleaned.map(s => ({ weight: s.minutes })));
+    return cleaned.map((s, i) => {
+      const sMin = sessionMins[i];
+      const stepMins = distributeMinutes(sMin, s.steps.map(st => ({ weight: st.minutes })));
+      return {
+        ...s,
+        minutes: sMin,
+        steps: s.steps.map((st, j) => ({ ...st, minutes: stepMins[j] }))
+      };
+    });
+  }
+
+  function sanitizeAiLessonDesign(rawDesign, lessonId, totalMinutes = 20) {
+    if (!rawDesign || typeof rawDesign !== 'object' || Array.isArray(rawDesign)) return null;
+    const sessions = sanitizeAiSessions(rawDesign.sessions, totalMinutes);
+    if (!sessions.length) return null;
+    return {
+      lessonId: String(lessonId || rawDesign.lessonId || '').trim().slice(0, 64),
+      coachIntroVi: String(rawDesign.coachIntroVi || '').trim().slice(0, 500),
+      customPrompt: String(rawDesign.customPrompt || '').trim().slice(0, 300),
+      aiProvider: String(rawDesign.aiProvider || '').trim().slice(0, 40),
+      aiModel: String(rawDesign.aiModel || '').trim().slice(0, 80),
+      updatedAt: Number.isFinite(rawDesign.updatedAt) ? rawDesign.updatedAt : Date.now(),
+      sessions
+    };
+  }
+
+  function sanitizeAiLessonDesignsMap(rawMap, totalMinutes = 20) {
+    const out = {};
+    if (!rawMap || typeof rawMap !== 'object' || Array.isArray(rawMap)) return out;
+    const entries = Object.entries(rawMap)
+      .filter(([k, v]) => typeof k === 'string' && k.length <= 64 && v && typeof v === 'object')
+      .sort((a, b) => Number(b[1]?.updatedAt || 0) - Number(a[1]?.updatedAt || 0))
+      .slice(0, 12);
+    for (const [k, v] of entries) {
+      const clean = sanitizeAiLessonDesign(v, k, totalMinutes);
+      if (clean) out[k] = clean;
+    }
+    return out;
+  }
+
   function createProfile(input = {}, now = Date.now()) {
     const focusChoice = FOCUS_PRESETS[input.focusChoice] ? input.focusChoice : 'balanced';
     const minutes = clamp(Math.round(Number(input.minutes) || 20), 10, 180);
@@ -236,7 +409,7 @@
       ? input.followUpVi.trim().slice(0, 400)
       : defaultFollowUpVi({ style, weights });
 
-    return {
+    const profile = {
       version: 1,
       id,
       hsk,
@@ -251,6 +424,27 @@
       sessionsDone: sanitizeSessionsDone(input.sessionsDone),
       updatedAt: Number.isFinite(input.updatedAt) ? input.updatedAt : now
     };
+
+    if (input.aiGenerated === true) profile.aiGenerated = true;
+    if (typeof input.aiProvider === 'string' && input.aiProvider.trim()) {
+      profile.aiProvider = input.aiProvider.trim().slice(0, 40);
+    }
+    if (typeof input.aiModel === 'string' && input.aiModel.trim()) {
+      profile.aiModel = input.aiModel.trim().slice(0, 80);
+    }
+    if (typeof input.learnerContextVi === 'string' && input.learnerContextVi.trim()) {
+      profile.learnerContextVi = input.learnerContextVi.trim().slice(0, 500);
+    }
+    const cleanBlueprint = sanitizeAiSessions(input.aiBlueprint, minutes);
+    if (cleanBlueprint.length) {
+      profile.aiBlueprint = cleanBlueprint;
+    }
+    const cleanDesigns = sanitizeAiLessonDesignsMap(input.aiLessonDesigns, minutes);
+    if (Object.keys(cleanDesigns).length) {
+      profile.aiLessonDesigns = cleanDesigns;
+    }
+
+    return profile;
   }
 
   function validProfile(p) {
@@ -458,62 +652,102 @@
     const targetLesson = lesson || { id: `standard-${profile.hsk}-01`, number: 1, vi: `Bài 1 · HSK ${profile.hsk}`, words: [] };
     const dayKey = options.dayKey || vnDayKey(options.now || Date.now());
     const doneSet = new Set(profile.sessionsDone?.[dayKey] || []);
-    const blueprints = buildSkillBlueprints(profile, targetLesson, progressRecord);
 
-    const sessionCount = Math.min(pickSessionCount(profile, options), Math.max(1, blueprints.length));
-    const sessionMinuteBudgets = distributeMinutes(
-      profile.minutes,
-      Array.from({ length: sessionCount }, (_, idx) => ({
-        weight: profile.style === 'spare_time' ? 1 : (sessionCount - idx + 1)
-      }))
-    );
-
-    // Group blueprints into sessionCount sessions cleanly, keeping at least 1 step per session
-    const grouped = Array.from({ length: sessionCount }, () => []);
-    blueprints.forEach((bp, i) => {
-      if (i < sessionCount) grouped[i].push(bp);
-      else grouped[i % sessionCount].push(bp);
-    });
+    const lessonAiDesign = profile.aiLessonDesigns?.[targetLesson.id] || null;
+    const aiSessionsSource = (lessonAiDesign?.sessions?.length ? lessonAiDesign.sessions : null) ||
+      (Array.isArray(profile.aiBlueprint) && profile.aiBlueprint.length ? sanitizeAiSessions(profile.aiBlueprint, profile.minutes) : null);
 
     const sessions = [];
     let completedSteps = 0;
     let totalSteps = 0;
 
-    for (let i = 0; i < sessionCount; i++) {
-      const stepsRaw = grouped[i];
-      const sessionMinutes = sessionMinuteBudgets[i];
-      const stepMins = distributeMinutes(sessionMinutes, stepsRaw.map(s => ({ weight: s.weight })));
-      const steps = stepsRaw.map((s, j) => {
-        const stepId = `${targetLesson.id}:${s.id}:s${i + 1}`;
-        const completed = doneSet.has(stepId) || Boolean(
-          (s.id === 'practice_check' && progressRecord?.read) ||
-          (s.id === 'reading_dialogue' && progressRecord?.read)
-        );
-        totalSteps++;
-        if (completed) completedSteps++;
-        return {
-          ...s,
-          stepId,
-          minutes: stepMins[j],
-          skillLabel: SKILL_LABELS[s.skill] || s.skill,
-          completed
-        };
+    if (aiSessionsSource && aiSessionsSource.length) {
+      const normalizedAiSessions = sanitizeAiSessions(aiSessionsSource, profile.minutes);
+      for (let i = 0; i < normalizedAiSessions.length; i++) {
+        const aiSess = normalizedAiSessions[i];
+        const steps = aiSess.steps.map(s => {
+          const stepId = `${targetLesson.id}:${s.id}:s${i + 1}`;
+          const completed = doneSet.has(stepId) || Boolean(
+            (s.id === 'practice_check' && progressRecord?.read) ||
+            (s.id === 'reading_dialogue' && progressRecord?.read)
+          );
+          totalSteps++;
+          if (completed) completedSteps++;
+          return {
+            ...s,
+            stepId,
+            skillLabel: SKILL_LABELS[s.skill] || s.skill,
+            completed,
+            aiAuthored: true
+          };
+        });
+        const cleanLabel = aiSess.label.includes('phút')
+          ? aiSess.label
+          : `${aiSess.label} · ${aiSess.minutes} phút`;
+        sessions.push({
+          index: i + 1,
+          id: `session-${i + 1}`,
+          label: cleanLabel,
+          goalVi: aiSess.goalVi || '',
+          minutes: aiSess.minutes,
+          steps,
+          completed: steps.every(st => st.completed),
+          aiAuthored: true
+        });
+      }
+    } else {
+      const blueprints = buildSkillBlueprints(profile, targetLesson, progressRecord);
+      const sessionCount = Math.min(pickSessionCount(profile, options), Math.max(1, blueprints.length));
+      const sessionMinuteBudgets = distributeMinutes(
+        profile.minutes,
+        Array.from({ length: sessionCount }, (_, idx) => ({
+          weight: profile.style === 'spare_time' ? 1 : (sessionCount - idx + 1)
+        }))
+      );
+
+      // Group blueprints into sessionCount sessions cleanly, keeping at least 1 step per session
+      const grouped = Array.from({ length: sessionCount }, () => []);
+      blueprints.forEach((bp, i) => {
+        if (i < sessionCount) grouped[i].push(bp);
+        else grouped[i % sessionCount].push(bp);
       });
 
-      const labelPrefix = profile.style === 'spare_time'
-        ? `Phiên trống ${i + 1}`
-        : profile.style === 'bedtime_review'
-          ? `Nhịp tối ${i + 1}`
-          : `Phiên ${i + 1}`;
+      for (let i = 0; i < sessionCount; i++) {
+        const stepsRaw = grouped[i];
+        const sessionMinutes = sessionMinuteBudgets[i];
+        const stepMins = distributeMinutes(sessionMinutes, stepsRaw.map(s => ({ weight: s.weight })));
+        const steps = stepsRaw.map((s, j) => {
+          const stepId = `${targetLesson.id}:${s.id}:s${i + 1}`;
+          const completed = doneSet.has(stepId) || Boolean(
+            (s.id === 'practice_check' && progressRecord?.read) ||
+            (s.id === 'reading_dialogue' && progressRecord?.read)
+          );
+          totalSteps++;
+          if (completed) completedSteps++;
+          return {
+            ...s,
+            stepId,
+            minutes: stepMins[j],
+            skillLabel: SKILL_LABELS[s.skill] || s.skill,
+            completed
+          };
+        });
 
-      sessions.push({
-        index: i + 1,
-        id: `session-${i + 1}`,
-        label: `${labelPrefix} · ${sessionMinutes} phút`,
-        minutes: sessionMinutes,
-        steps,
-        completed: steps.every(st => st.completed)
-      });
+        const labelPrefix = profile.style === 'spare_time'
+          ? `Phiên trống ${i + 1}`
+          : profile.style === 'bedtime_review'
+            ? `Nhịp tối ${i + 1}`
+            : `Phiên ${i + 1}`;
+
+        sessions.push({
+          index: i + 1,
+          id: `session-${i + 1}`,
+          label: `${labelPrefix} · ${sessionMinutes} phút`,
+          minutes: sessionMinutes,
+          steps,
+          completed: steps.every(st => st.completed)
+        });
+      }
     }
 
     const subtitleNote = profile.style === 'weekend_sprint' && options.isWeekend === false
@@ -534,11 +768,34 @@
       weights: { ...profile.weights },
       summaryVi: profile.summaryVi,
       noteVi: subtitleNote,
+      coachIntroVi: lessonAiDesign?.coachIntroVi || profile.learnerContextVi || profile.summaryVi,
+      aiDesigned: Boolean(lessonAiDesign || profile.aiBlueprint?.length || profile.aiGenerated),
+      hasLessonAiDesign: Boolean(lessonAiDesign?.sessions?.length),
+      aiProvider: lessonAiDesign?.aiProvider || profile.aiProvider || '',
+      aiModel: lessonAiDesign?.aiModel || profile.aiModel || '',
+      customPrompt: lessonAiDesign?.customPrompt || '',
       dayKey,
       sessions,
       completedSteps,
       totalSteps
     };
+  }
+
+  function saveLessonDesign(profileInput, lessonId, rawDesign, now = Date.now()) {
+    const profile = createProfile(profileInput, now);
+    const key = String(lessonId || '').trim().slice(0, 64);
+    if (!key) return profile;
+    const clean = sanitizeAiLessonDesign({ ...rawDesign, updatedAt: now }, key, profile.minutes);
+    if (!clean) return profile;
+    const nextMap = { ...(profile.aiLessonDesigns || {}), [key]: clean };
+    return createProfile({
+      ...profile,
+      aiGenerated: true,
+      aiProvider: clean.aiProvider || profile.aiProvider || 'ai',
+      aiModel: clean.aiModel || profile.aiModel || '',
+      aiLessonDesigns: nextMap,
+      updatedAt: now
+    }, now);
   }
 
   function markStepCompleted(profileInput, dayKey, stepId, now = Date.now()) {
@@ -608,8 +865,12 @@
     GOAL_LABELS,
     FOCUS_PRESETS,
     INTERVIEW_STEPS,
+    ALLOWED_STEP_ACTIONS,
     normalizeWeights,
     parseNaturalReply,
+    sanitizeAiSessions,
+    sanitizeAiLessonDesign,
+    saveLessonDesign,
     createProfile,
     validProfile,
     buildLessonPlan,

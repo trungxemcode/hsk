@@ -5603,7 +5603,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
   if(!isPersonalSettings&&!isTranscript&&!isRole&&route!=='/translate'&&!isAsk&&!isOcr&&!isSample&&!isHandwriting&&!isReading&&!isProfileSync)return reply({error:'Không tìm thấy dịch vụ.'},404);
   if(request.method!=='POST')return reply({error:'Yêu cầu không hợp lệ.'},405);
   if(isTranscript&&env.MUSIC_TRANSCRIPT_ENABLED==='false')return reply({error:'Tự tạo script bằng AI đã được tắt. Hãy gắn script LRC/SRT/JSON có sẵn.',code:'MUSIC_TRANSCRIPT_DISABLED'},503);
-  if(!env.FIREBASE_API_KEY||!isLessonAsk&&!isPersonalSettings&&!isRole&&!isSample&&!isProfileSync&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
+  if(!env.FIREBASE_API_KEY||!isLessonAsk&&!isCustomLesson&&!isPersonalSettings&&!isRole&&!isSample&&!isProfileSync&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ dịch chưa được kích hoạt.'},503);
   const token=request.headers.get('Authorization')?.match(/^Bearer ([^\s]+)$/)?.[1],c=token&&token.length<5000?claims(token):null,project=env.FIREBASE_PROJECT_ID||'hsk-flashcards-44631';
   if(!c||c.aud!==project||c.iss!=='https://securetoken.google.com/'+project||typeof c.sub!=='string'||!c.sub||typeof c.exp!=='number'||c.exp<=now()/1000)return reply({error:'Hãy đăng nhập tài khoản app để dịch.'},401);
   let body;try{body=await readBody(request,isAdminResources?1048576:isTranscript?60000:isSample?4096:isOcr?2100000:isHandwriting?550000:isLessonAsk?7600000:isDictionaryTranslate?60000:20000);}catch{return reply({error:isOcr||isHandwriting?'Ảnh quá lớn hoặc không hợp lệ.':'Câu nhập không hợp lệ hoặc quá dài.'},400);}
@@ -5635,8 +5635,16 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    const s=body.stats,fields=['ratio','attempts','accuracy','recalls','retention','meanMinutes','actual','expected','remaining','daysLeft','minutes','budget'];
    if(Object.keys(body).some(k=>!['hsk','signal','stats'].includes(k))||!['fast','steady','slow'].includes(body.signal)||!s||typeof s!=='object'||Object.keys(s).some(k=>!fields.includes(k))||!fields.every(k=>(['accuracy','retention'].includes(k)&&s[k]===null)||Number.isFinite(s[k])&&s[k]>=0&&s[k]<=100000)||s.accuracy!==null&&s.accuracy>1||s.retention!==null&&s.retention>1||s.minutes>240||s.budget>240)return reply({error:'Thống kê kế hoạch không hợp lệ.'},400);
   }else if(isCustomLesson){
-   const ans=body.answers,allowedIds=['focus','minutes','style','days','goal','freeform'];
-   if(Object.keys(body).some(k=>!['hsk','answers'].includes(k))||!Array.isArray(ans)||ans.length<1||ans.length>8||!ans.every(a=>a&&typeof a==='object'&&!Array.isArray(a)&&Object.keys(a).every(k=>['id','answer'].includes(k))&&allowedIds.includes(a.id)&&typeof a.answer==='string'&&a.answer.trim().length>=1&&a.answer.length<=400))return reply({error:'Thông tin phỏng vấn bài học không hợp lệ.'},400);
+   const mode=body.mode===undefined?'profile':body.mode;
+   const allowedRoot=['hsk','mode','answers','messages','profile','lesson','customPrompt','aiProvider','personalProvider','aiModel','thinking'];
+   const ans=body.answers,msgs=body.messages,allowedIds=['focus','minutes','style','days','goal','freeform','turn'];
+   const validAns=ans===undefined||(Array.isArray(ans)&&ans.length>=1&&ans.length<=10&&ans.every(a=>a&&typeof a==='object'&&!Array.isArray(a)&&Object.keys(a).every(k=>['id','answer'].includes(k))&&allowedIds.includes(a.id)&&typeof a.answer==='string'&&a.answer.trim().length>=1&&a.answer.length<=600));
+   const validMsgs=msgs===undefined||(Array.isArray(msgs)&&msgs.length>=1&&msgs.length<=12&&msgs.every(m=>m&&typeof m==='object'&&!Array.isArray(m)&&Object.keys(m).every(k=>['role','text'].includes(k))&&['user','assistant'].includes(m.role)&&typeof m.text==='string'&&m.text.trim().length>=1&&m.text.length<=600));
+   const validLesson=body.lesson===undefined||(body.lesson&&typeof body.lesson==='object'&&!Array.isArray(body.lesson)&&typeof body.lesson.id==='string'&&body.lesson.id.trim().length>=1&&body.lesson.id.length<=64&&JSON.stringify(body.lesson).length<=35000);
+   const validProf=body.profile===undefined||(body.profile&&typeof body.profile==='object'&&!Array.isArray(body.profile)&&JSON.stringify(body.profile).length<=15000);
+   const validPrompt=body.customPrompt===undefined||(typeof body.customPrompt==='string'&&body.customPrompt.length<=500);
+   const hasInterviewData=(Array.isArray(ans)&&ans.length>=1)||(Array.isArray(msgs)&&msgs.length>=1);
+   if(Object.keys(body).some(k=>!allowedRoot.includes(k))||!['profile','interview','design'].includes(mode)||!validAns||!validMsgs||!validLesson||!validProf||!validPrompt||((mode==='profile'||mode==='interview')&&!hasInterviewData)||(mode==='design'&&!body.lesson))return reply({error:'Thông tin phỏng vấn bài học không hợp lệ.'},400);
   }else if(isDictionaryTranslate){
    const entries=body.entries;
    if(Object.keys(body).some(k=>k!=='entries')||!Array.isArray(entries)||!entries.length||entries.length>40||new Set(entries.map(e=>e?.id)).size!==entries.length||!entries.every(e=>e&&Object.keys(e).every(k=>['id','han','pinyin','gloss'].includes(k))&&['id','han','pinyin','gloss'].every(k=>typeof e[k]==='string'&&e[k].trim())&&e.id.length<=240&&e.han.length<=80&&/\p{Script=Han}/u.test(e.han)&&e.pinyin.length<=160&&e.gloss.length<=1000))return reply({error:'Nhóm từ cần dịch không hợp lệ (tối đa 40 từ).'},400);
@@ -5710,7 +5718,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     }catch(err){return reply({error:err?.message||'Máy chủ chưa bật lưu API riêng.'},err?.status||503);}
    }
    const isAiQa=isLessonAsk&&body.lesson?.content?.mode==='ai-qa';
-   const isPersonalAllowed=isAiQa||isLessonAsk;
+   const isPersonalAllowed=isAiQa||isLessonAsk||isCustomLesson;
    const thinking=body.thinking??'low',requestedAiModel=isPersonalAllowed&&typeof body.aiModel==='string'?body.aiModel.trim():'';
    if(isPersonalAllowed&&(!QA_THINKING_MODELS.has(thinking)||requestedAiModel&&!/^[a-z0-9][a-z0-9._/:-]{0,99}$/i.test(requestedAiModel)))return reply({error:'Mức suy nghĩ không hợp lệ.'},400);
    const aiChoice=isPersonalAllowed?normalizeAiProviderChoice(body.aiProvider):'auto';
@@ -5728,7 +5736,7 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    const choiceError=isPersonalAllowed?aiProviderChoiceError(aiChoice,{personalEnabled:personalAi?.enabled===true,sharedCookieReady,geminiReady:configuredGeminiKeys(env).length>0}):null;
    if(choiceError)return reply({error:choiceError,code:'AI_PROVIDER_UNAVAILABLE'},409);
    const useSharedChatGptCookie=isPersonalAllowed&&!usePersonalAi&&sharedCookieReady&&(aiChoice==='system-chatgpt'||aiChoice==='auto'&&(env.AI_QA_PROVIDER==='chatgpt-cookie'||!configuredGeminiKeys(env).length));
-   if(isLessonAsk&&!usePersonalAi&&!useSharedChatGptCookie&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ AI chưa được kích hoạt.'},503);
+   if((isLessonAsk||isCustomLesson)&&!usePersonalAi&&!useSharedChatGptCookie&&!configuredGeminiKeys(env).length)return reply({error:'Dịch vụ AI chưa được kích hoạt.'},503);
    if(isAiQa){
     const guardCheck=sharedGuardrail.validateInput(body.question,'qa',{strictRelevance:false});
     if(!guardCheck.valid)return reply({error:guardCheck.reason,code:'AI_GUARDRAIL_BLOCKED'},400);
@@ -5773,10 +5781,10 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
    let previousMusicScript=null;
    if(isTranscript){try{previousMusicScript=await env.MUSIC_BUCKET?.head('lyrics/'+body.trackId+'.json');body.media=await libraryTranscriptMedia(body.trackId,{fetchFn:rawFetchFn,env,signal:controller.signal});}catch(e){return reply({error:e.message||'Chưa xác minh được bài trong kho.'},e.status||502);}}
    // Per-isolate cooldown reduces double submissions; provider free-tier quotas remain the global limit.
-   const cooldownKey=(isTranscript?'transcript:':isReading?'reading:':isDictionaryTranslate?'dictionary-translate:':isHandwriting?'handwriting:':isOcr?'ocr:':isAsk?'ask:':'translate:')+c.sub;
-   if(!isAdmin&&!usePersonalAi&&env.AI_ABUSE_ENABLED!=='true'&&(cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
+   const cooldownKey=(isTranscript?'transcript:':isReading?'reading:':isDictionaryTranslate?'dictionary-translate:':isCustomLesson?'custom-lesson:':isHandwriting?'handwriting:':isOcr?'ocr:':isAsk?'ask:':'translate:')+c.sub;
+   if(!isAdmin&&!usePersonalAi&&!isCustomLesson&&env.AI_ABUSE_ENABLED!=='true'&&(cooldowns.get(cooldownKey)||0)>now())return reply({error:'Bạn vừa gửi yêu cầu. Đợi vài giây rồi thử lại.'},429);
    if(cooldowns.size>1000)for(const [uid,t] of cooldowns)if(t<=now())cooldowns.delete(uid);
-   if(!isAdmin&&!usePersonalAi&&env.AI_ABUSE_ENABLED!=='true')cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
+   if(!isAdmin&&!usePersonalAi&&!isCustomLesson&&env.AI_ABUSE_ENABLED!=='true')cooldowns.set(cooldownKey,now()+(isReading?25000:isDictionaryTranslate?1500:isHandwriting?5000:10000));
    const level=body.hsk;
    if(!usePersonalAi&&env.QA_CACHE_ENABLED==='true'&&['/ask','/lesson-ask','/dictionary-lookup','/dictionary-translate'].includes(route)){
     {const env=roleEnv;qaSession=await qaBegin(route,body,account.localId,env,isAdmin);}
@@ -5830,17 +5838,145 @@ export function createHandler(providerFetch=fetch,now=()=>Date.now()){
     if(body.signal==='slow')result.action='slow';return reply({action:result.action,reason:result.reason});
    }
    if(isCustomLesson){
-    if(!/^[a-z0-9.-]+$/.test(model))return reply({error:'Cấu hình mô hình chưa hợp lệ.'},503);
-    const instruction='You design an HSK custom lesson profile from learner interview answers. Reply in Vietnamese. Choose focusChoice (vocab_heavy, grammar_heavy, listening_speaking, reading_heavy, balanced), minutes (integer 10..180), days (integer 3..7), style (spare_time, focused_block, hands_free, bedtime_review, weekend_sprint), goal (exam, conversation, reading_comprehension, work_travel), weights ({vocab,grammar,reading,listening,writing} integers each 5..70 summing to 100), summaryVi (concise Vietnamese summary of how lessons are restructured), followUpVi (short actionable Vietnamese study tip). Respect explicit time and focus preferences from the learner. Never invent curriculum content.';
-    const schema={type:'OBJECT',properties:{focusChoice:{type:'STRING',enum:['vocab_heavy','grammar_heavy','listening_speaking','reading_heavy','balanced']},minutes:{type:'INTEGER'},days:{type:'INTEGER'},style:{type:'STRING',enum:['spare_time','focused_block','hands_free','bedtime_review','weekend_sprint']},goal:{type:'STRING',enum:['exam','conversation','reading_comprehension','work_travel']},weights:{type:'OBJECT',properties:{vocab:{type:'INTEGER'},grammar:{type:'INTEGER'},reading:{type:'INTEGER'},listening:{type:'INTEGER'},writing:{type:'INTEGER'}},required:['vocab','grammar','reading','listening','writing']},summaryVi:{type:'STRING'},followUpVi:{type:'STRING'}},required:['focusChoice','minutes','days','style','goal','weights','summaryVi','followUpVi']};
-    const response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':env.GEMINI_API_KEY},signal:controller.signal,body:JSON.stringify({systemInstruction:{parts:[{text:instruction}]},contents:[{role:'user',parts:[{text:JSON.stringify({hsk:body.hsk,answers:body.answers})}]}],generationConfig:{temperature:0.25,maxOutputTokens:700,responseMimeType:'application/json',responseSchema:schema}})});
-    if(!response.ok)return reply(await providerFailure(response,model,env),response.status===429?429:502);
+    const customMode=body.mode===undefined?'profile':body.mode;
+    const stepSchema={type:'OBJECT',properties:{id:{type:'STRING'},skill:{type:'STRING',enum:['vocab','grammar','reading','listening','writing']},action:{type:'STRING',enum:['vocab_cards','vocab_quiz','vocab_srs','grammar_focus','reading_dialogue','passive_listen','guided_auto','practice_mini','practice_check','real_reading','ai_vocab_coach','ai_drill','ai_scenario']},minutes:{type:'INTEGER'},titleVi:{type:'STRING'},detailVi:{type:'STRING'},coachTipVi:{type:'STRING'},focusWords:{type:'ARRAY',items:{type:'OBJECT',properties:{han:{type:'STRING'},pin:{type:'STRING'},mean:{type:'STRING'},mnemonicVi:{type:'STRING'},exampleCn:{type:'STRING'},examplePin:{type:'STRING'},exampleVi:{type:'STRING'}},required:['han','pin','mean','mnemonicVi','exampleCn','examplePin','exampleVi']}},drills:{type:'ARRAY',items:{type:'OBJECT',properties:{promptVi:{type:'STRING'},questionCn:{type:'STRING'},options:{type:'ARRAY',items:{type:'STRING'}},answerIndex:{type:'INTEGER'},explanationVi:{type:'STRING'}},required:['promptVi','questionCn','options','answerIndex','explanationVi']}},scenario:{type:'OBJECT',properties:{contextVi:{type:'STRING'},promptVi:{type:'STRING'},sampleCn:{type:'STRING'},samplePin:{type:'STRING'},sampleVi:{type:'STRING'}},required:['contextVi','promptVi','sampleCn','samplePin','sampleVi']}},required:['id','skill','action','minutes','titleVi','detailVi','coachTipVi']};
+    const sessionSchema={type:'OBJECT',properties:{label:{type:'STRING'},minutes:{type:'INTEGER'},goalVi:{type:'STRING'},steps:{type:'ARRAY',items:stepSchema}},required:['label','minutes','goalVi','steps']};
+    const profileSchemaObj={type:'OBJECT',properties:{focusChoice:{type:'STRING',enum:['vocab_heavy','grammar_heavy','listening_speaking','reading_heavy','balanced']},minutes:{type:'INTEGER'},days:{type:'INTEGER'},style:{type:'STRING',enum:['spare_time','focused_block','hands_free','bedtime_review','weekend_sprint']},goal:{type:'STRING',enum:['exam','conversation','reading_comprehension','work_travel']},weights:{type:'OBJECT',properties:{vocab:{type:'INTEGER'},grammar:{type:'INTEGER'},reading:{type:'INTEGER'},listening:{type:'INTEGER'},writing:{type:'INTEGER'}},required:['vocab','grammar','reading','listening','writing']},summaryVi:{type:'STRING'},followUpVi:{type:'STRING'},learnerContextVi:{type:'STRING'},aiBlueprint:{type:'ARRAY',items:sessionSchema}},required:['focusChoice','minutes','days','style','goal','weights','summaryVi','followUpVi']};
+
+    const instruction=customMode==='design'
+     ?`Bạn là Kiến trúc sư Giáo án HSK ${body.hsk} cá nhân hóa bằng AI cho người Việt.
+Nhiệm vụ: Đọc hồ sơ người học (profile, customPrompt) và dữ liệu thật của bài học HSK (lesson: từ vựng, ngữ pháp, hội thoại/bài đọc) để TỰ THIẾT KẾ giáo án & bài tập riêng cho bài này.
+QUY TẮC BẮT BUỘC:
+1. Viết coachIntroVi (tiếng Việt) giải thích rõ chiến lược học bài này đã được bạn thiết kế riêng theo quỹ thời gian, kiểu học và yêu cầu của học viên như thế nào.
+2. Chia thời gian thành 1–4 phiên (sessions) khớp đúng kiểu học (vd: spare_time chia 2–4 phiên ngắn 5–10p; focused_block 1–2 phiên liền mạch; hands_free ưu tiên nghe).
+3. Mỗi phiên có label (tên phiên cụ thể theo nội dung bài), minutes, goalVi và 2–4 bước (steps).
+4. Trong các bước của bài, BẮT BUỘC tự biên soạn nội dung AI thật dựa trên từ vựng & ngữ pháp của bài:
+   - Bước từ vựng (action="ai_vocab_coach" hoặc "vocab_cards"): chọn 4–8 từ quan trọng nhất từ lesson.words vào focusWords, tự viết mnemonicVi (mẹo nhớ thú vị bằng tiếng Việt) và câu ví dụ ứng dụng (exampleCn, examplePin, exampleVi) sát mục tiêu của học viên.
+   - Bước bài tập thực hành do AI thiết kế (action="ai_drill"): tự sáng tạo 2–4 câu hỏi trắc nghiệm tình huống / điền từ / phân biệt lỗi sai trong drills (promptVi, questionCn, 4 options, answerIndex 0..3, explanationVi giải thích chi tiết bằng tiếng Việt).
+   - Bước ngữ pháp / hội thoại / tình huống ứng dụng: gắn scenario (contextVi, promptVi, sampleCn, samplePin, sampleVi) để học viên thực hành đặt câu hoặc phản xạ theo ngữ cảnh thực tế.
+   - Mọi bước đều phải có coachTipVi (hướng dẫn cách học cụ thể của gia sư AI).
+Trả về JSON thuần đúng schema: {"coachIntroVi":"...","sessions":[...]}.`
+     :customMode==='interview'
+     ?`Bạn là Gia sư & Kiến trúc sư lộ trình HSK ${body.hsk} cá nhân hóa cho người Việt.
+Nhiệm vụ: Trò chuyện tự nhiên với học viên (dựa trên messages/answers) để tìm hiểu cách họ muốn học rồi tự thiết kế cấu trúc bài học.
+Ba nhóm thông tin cần nắm:
+1. Trọng tâm muốn ưu tiên hoặc điểm yếu (từ vựng, ngữ pháp, nghe nói phản xạ, đọc hiểu, chữ Hán, hay chủ đề công việc/đời sống cụ thể).
+2. Quỹ thời gian mỗi ngày (phút/ngày) & nhịp sinh hoạt (học tranh thủ giờ trống 5-10p, ngồi học 1 mạch, nghe rảnh tay khi di chuyển, ôn trước khi ngủ, hay cuối tuần học sâu).
+3. Mục tiêu chính (thi HSK, giao tiếp phản xạ, đọc hiểu, công việc & du lịch).
+QUY TẮC:
+- Nếu học viên mới trả lời dưới 3 lượt VÀ chưa nêu đủ trọng tâm + thời gian/kiểu học: đặt ready=false, viết replyVi (tiếng Việt thân thiện, phản hồi trực tiếp ý học viên vừa nói rồi hỏi 1 câu ngắn gọn tiếp theo cho phần còn thiếu), và sinh suggestedReplies (3–4 gợi ý trả lời nhanh sát câu hỏi đó).
+- Nếu học viên ĐÃ nêu đủ thông tin (kể cả gõ gộp trong 1–2 câu tự nhiên) HOẶC đã trả lời từ 3 lượt trở lên: đặt ready=true, viết replyVi tổng kết chiến lược cá nhân hóa, đồng thời trả về profile đầy đủ (focusChoice, minutes 10..180, days 3..7, style, goal, weights {vocab,grammar,reading,listening,writing} mỗi kỹ năng 5..70 tổng đúng bằng 100, summaryVi, followUpVi, learnerContextVi, và aiBlueprint gồm 1–3 phiên học mẫu do bạn thiết kế riêng).
+Trả về JSON thuần.`
+     :`You design an HSK custom lesson profile and AI session blueprint from learner interview answers. Reply in Vietnamese. Choose focusChoice (vocab_heavy, grammar_heavy, listening_speaking, reading_heavy, balanced), minutes (integer 10..180), days (integer 3..7), style (spare_time, focused_block, hands_free, bedtime_review, weekend_sprint), goal (exam, conversation, reading_comprehension, work_travel), weights ({vocab,grammar,reading,listening,writing} integers each 5..70 summing to 100), summaryVi (concise Vietnamese summary of how lessons are restructured by AI), followUpVi (short actionable Vietnamese study tip), learnerContextVi (distilled learner context in Vietnamese), and optional aiBlueprint (1..3 tailored study sessions with steps). Respect explicit time and focus preferences from the learner.`;
+
+    const schema=customMode==='design'
+     ?{type:'OBJECT',properties:{coachIntroVi:{type:'STRING'},sessions:{type:'ARRAY',items:sessionSchema}},required:['coachIntroVi','sessions']}
+     :customMode==='interview'
+     ?{type:'OBJECT',properties:{ready:{type:'BOOLEAN'},replyVi:{type:'STRING'},suggestedReplies:{type:'ARRAY',items:{type:'STRING'}},profile:profileSchemaObj},required:['ready','replyVi']}
+     :profileSchemaObj;
+
+    const userPayload=customMode==='design'
+     ?{hsk:body.hsk,profile:body.profile||null,customPrompt:body.customPrompt||'',lesson:body.lesson}
+     :{hsk:body.hsk,answers:body.answers||[],messages:body.messages||[],lesson:body.lesson||null};
+
+    const providerBody={systemInstruction:{parts:[{text:instruction}]},contents:[{role:'user',parts:[{text:JSON.stringify(userPayload)}]}],generationConfig:{temperature:customMode==='design'?0.35:0.25,maxOutputTokens:customMode==='design'?2600:1400,responseMimeType:'application/json',responseSchema:schema}};
+
+    let response,activeProvider='gemini',activeModel=model;
+    const usePersonalCookie=usePersonalAi&&personalAi.provider==='chatgpt-cookie';
+    if(usePersonalAi&&!usePersonalCookie){
+     activeProvider=personalAi.provider;
+     activeModel=requestedAiModel||(typeof body.thinking==='string'&&QA_PROVIDER_TIER_MODELS[personalAi.provider]?.[body.thinking])||personalAi.model;
+     headers['X-HSK-AI-Provider']=activeProvider;
+     try{
+      response=await personalAiGenerate({...personalAi,model:activeModel},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now,sentenceReview:false});
+     }catch(err){
+      if(configuredGeminiKeys(env).length){
+       activeProvider='gemini';activeModel=model;headers['X-HSK-AI-Provider']='gemini';
+       const gk=configuredGeminiKeys(env)[0]||env.GEMINI_API_KEY;
+       response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':gk},signal:controller.signal,body:JSON.stringify(providerBody)});
+      }else{
+       const timeout=controller.signal.aborted||err?.name==='AbortError';
+       return reply({error:timeout?'API riêng phản hồi quá lâu. Hãy thử lại.':'Không kết nối được tới máy chủ API riêng.',code:timeout?'PERSONAL_AI_TIMEOUT':'PERSONAL_AI_NETWORK'},timeout?504:502);
+      }
+     }
+     if(!response.ok&&configuredGeminiKeys(env).length){
+      activeProvider='gemini';activeModel=model;headers['X-HSK-AI-Provider']='gemini';
+      const gk=configuredGeminiKeys(env)[0]||env.GEMINI_API_KEY;
+      response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':gk},signal:controller.signal,body:JSON.stringify(providerBody)});
+     }
+    }else if(useSharedChatGptCookie||usePersonalCookie){
+     activeProvider='chatgpt-cookie';
+     const baseCookieConfig=usePersonalCookie?personalAi:{model:env.CHATGPT_COOKIE_MODEL||'gpt-4o-mini',apiKey:env.CHATGPT_SESSION_TOKEN};
+     activeModel=requestedAiModel||baseCookieConfig.model;
+     headers['X-HSK-AI-Provider']='chatgpt-cookie';
+     response=await chatgptCookieGenerate({...baseCookieConfig,model:activeModel},providerBody,providerFetch,controller.signal,{env,uid:account.localId,ctx,now});
+    }else{
+     if(!/^[a-z0-9.-]+$/.test(model))return reply({error:'Cấu hình mô hình chưa hợp lệ.'},503);
+     headers['X-HSK-AI-Provider']='gemini';
+     const gk=configuredGeminiKeys(env)[0]||env.GEMINI_API_KEY;
+     response=await fetchFn('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':gk},signal:controller.signal,body:JSON.stringify(providerBody)});
+    }
+    if(!response.ok)return reply(await providerFailure(response,activeModel,env),response.status===429?429:502);
     const payload=await response.json();
-    let result;try{result=JSON.parse(payload.candidates?.[0]?.content?.parts?.filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('')||'');}catch{return reply({error:'AI chưa trả hồ sơ bài học hợp lệ.'},502);}
+    const rawText= (payload.candidates?.[0]?.content?.parts||[]).filter(p=>!p.thought&&typeof p.text==='string').map(p=>p.text).join('')||'';
+    const parseCustomJson=txt=>{
+     if(!txt||typeof txt!=='string')return null;
+     let s=txt.trim().replace(/<(?:think|thought|reasoning)>[\s\S]*?<\/(?:think|thought|reasoning)>/gi,'').trim();
+     const fenced=s.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+     if(fenced)s=fenced[1].trim();
+     try{return JSON.parse(s);}catch{
+      const firstBrace=s.indexOf('{'),lastBrace=s.lastIndexOf('}');
+      if(firstBrace>=0&&lastBrace>firstBrace){try{return JSON.parse(s.slice(firstBrace,lastBrace+1));}catch{}}
+      return null;
+     }
+    };
+    const result=parseCustomJson(rawText);
+    if(!result||typeof result!=='object')return reply({error:'AI chưa trả hồ sơ bài học hợp lệ.'},502);
+    const aiSource={provider:activeProvider,model:activeModel};
+
+    if(customMode==='design'){
+     if(!Array.isArray(result.sessions)||!result.sessions.length||typeof result.coachIntroVi!=='string'||!result.coachIntroVi.trim())return reply({error:'AI chưa trả giáo án bài học hợp lệ.'},502);
+     return reply({
+      lessonDesign:{
+       lessonId:String(body.lesson.id||'').trim().slice(0,64),
+       coachIntroVi:result.coachIntroVi.trim().slice(0,500),
+       customPrompt:String(body.customPrompt||'').trim().slice(0,300),
+       aiProvider:activeProvider,
+       aiModel:activeModel,
+       sessions:result.sessions
+      },
+      aiSource
+     });
+    }
+
+    if(customMode==='interview'&&result.ready===false){
+     if(typeof result.replyVi!=='string'||!result.replyVi.trim())return reply({error:'AI chưa trả câu hỏi phỏng vấn hợp lệ.'},502);
+     const suggestedReplies=Array.isArray(result.suggestedReplies)?result.suggestedReplies.map(x=>String(x||'').trim().slice(0,120)).filter(Boolean).slice(0,5):[];
+     return reply({ready:false,replyVi:result.replyVi.trim().slice(0,600),suggestedReplies,aiSource});
+    }
+
+    const prof=customMode==='interview'&&result.profile&&typeof result.profile==='object'?result.profile:result;
     const skills=['vocab','grammar','reading','listening','writing'];
-    const validW=result?.weights&&typeof result.weights==='object'&&!Array.isArray(result.weights)&&skills.every(k=>Number.isInteger(result.weights[k])&&result.weights[k]>=5&&result.weights[k]<=70)&&skills.reduce((n,k)=>n+result.weights[k],0)===100;
-    if(!result||!['vocab_heavy','grammar_heavy','listening_speaking','reading_heavy','balanced'].includes(result.focusChoice)||!['spare_time','focused_block','hands_free','bedtime_review','weekend_sprint'].includes(result.style)||!['exam','conversation','reading_comprehension','work_travel'].includes(result.goal)||!Number.isInteger(result.minutes)||result.minutes<10||result.minutes>180||!Number.isInteger(result.days)||result.days<3||result.days>7||!validW||typeof result.summaryVi!=='string'||!result.summaryVi.trim()||result.summaryVi.length>500||typeof result.followUpVi!=='string'||!result.followUpVi.trim()||result.followUpVi.length>400)return reply({error:'AI chưa trả hồ sơ bài học hợp lệ.'},502);
-    return reply({profile:{version:1,hsk:body.hsk,focusChoice:result.focusChoice,minutes:result.minutes,days:result.days,style:result.style,goal:result.goal,weights:Object.fromEntries(skills.map(k=>[k,result.weights[k]])),summaryVi:result.summaryVi.trim(),followUpVi:result.followUpVi.trim()}});
+    const validW=prof?.weights&&typeof prof.weights==='object'&&!Array.isArray(prof.weights)&&skills.every(k=>Number.isInteger(prof.weights[k])&&prof.weights[k]>=5&&prof.weights[k]<=70)&&skills.reduce((n,k)=>n+prof.weights[k],0)===100;
+    if(!prof||!['vocab_heavy','grammar_heavy','listening_speaking','reading_heavy','balanced'].includes(prof.focusChoice)||!['spare_time','focused_block','hands_free','bedtime_review','weekend_sprint'].includes(prof.style)||!['exam','conversation','reading_comprehension','work_travel'].includes(prof.goal)||!Number.isInteger(prof.minutes)||prof.minutes<10||prof.minutes>180||!Number.isInteger(prof.days)||prof.days<3||prof.days>7||!validW||typeof prof.summaryVi!=='string'||!prof.summaryVi.trim()||prof.summaryVi.length>500||typeof prof.followUpVi!=='string'||!prof.followUpVi.trim()||prof.followUpVi.length>400)return reply({error:'AI chưa trả hồ sơ bài học hợp lệ.'},502);
+    const outProfile={
+     version:1,
+     hsk:body.hsk,
+     focusChoice:prof.focusChoice,
+     minutes:prof.minutes,
+     days:prof.days,
+     style:prof.style,
+     goal:prof.goal,
+     weights:Object.fromEntries(skills.map(k=>[k,prof.weights[k]])),
+     summaryVi:prof.summaryVi.trim(),
+     followUpVi:prof.followUpVi.trim(),
+     aiGenerated:true,
+     aiProvider:activeProvider,
+     aiModel:activeModel
+    };
+    if(typeof prof.learnerContextVi==='string'&&prof.learnerContextVi.trim())outProfile.learnerContextVi=prof.learnerContextVi.trim().slice(0,500);
+    if(Array.isArray(prof.aiBlueprint)&&prof.aiBlueprint.length)outProfile.aiBlueprint=prof.aiBlueprint;
+    return reply({ready:true,replyVi:typeof result.replyVi==='string'&&result.replyVi.trim()?result.replyVi.trim().slice(0,600):outProfile.summaryVi,profile:outProfile,aiSource});
    }
 
    if(isHandwriting){
