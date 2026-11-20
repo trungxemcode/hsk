@@ -28,7 +28,7 @@ export async function requestBackupJSON({fetchFn,env,signal,instruction,prompt,m
 export const AI_TIMEOUTS=Object.freeze({text:6000,reading:12000,backup:25000});
 export const AI_ROLE_TIMEOUTS=Object.freeze({text:10000,reading:18000,gemini:25000,complex:15000,heavyReading:25000});
 export function aiTaskRole(route,body={}){
- if(['/ocr','/handwriting-recognize','/study-plan-review'].includes(route))return 'gemini';
+ if(['/ocr','/handwriting-recognize','/study-plan-review','/custom-lesson-profile'].includes(route))return 'gemini';
  if(route==='/lesson-ask'&&body.images?.length)return 'gemini';
  if(route==='/reading-next')return 'gemini'; // Full passage + pinyin + translation + quiz is a generation task.
  if(route==='/dictionary-translate')return body.entries?.length>15?'gemini':'xkiro';

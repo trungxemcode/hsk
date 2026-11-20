@@ -2720,6 +2720,19 @@
         {"kind": "contains", "file": "server/account-roles.mjs", "value": "roles-resources-get"},
         {"kind": "contains", "file": "server/account-roles.mjs", "value": "roles-resources-set"}
       ]
+    },
+    {
+      "id": "custom-hsk-lessons",
+      "name": "Bài học HSK tùy chỉnh theo phỏng vấn AI",
+      "checks": [
+        {"kind": "file", "file": "src/modules/lessons/lesson-custom-core.js", "value": ""},
+        {"kind": "file", "file": "src/modules/lessons/lesson-custom.js", "value": ""},
+        {"kind": "file", "file": "lesson-custom.css", "value": ""},
+        {"kind": "contains", "file": "src/modules/account/study-sync-core.js", "value": "study-plan:custom-lesson"},
+        {"kind": "contains", "file": "server/translator-worker.mjs", "value": "/custom-lesson-profile"},
+        {"kind": "contains", "file": "src/modules/lessons/lessons.js", "value": "openCustom"},
+        {"kind": "contains", "file": "src/modules/shell/home-overview.js", "value": "homeCustomLesson"}
+      ]
     }
   ]
 }

@@ -2,5 +2,5 @@
 function read(){const s=parse(C.KEY,null);return s?.owner===owner()?s:C.empty(owner());}
 function legacy(uid=owner()){return C.seed(uid,parse('hsk-study-plan-v1:'+uid,null),parse('hsk-studio-activity-v1:'+uid,null),parse(C.KEY,null));}
 function write(s){localStorage.setItem(C.KEY,JSON.stringify(s));return s;}
-window.HSKStudyStore={legacy,initialize(){return write(legacy());},get plan(){return C.plan(read());},savePlan(p){const s=write(C.savePlan(read(),p,writer));return C.plan(s);},activity:()=>C.activity(read()),recordActivity(now=Date.now()){return C.activity(write(C.recordActivity(read(),writer,now)));}};
+window.HSKStudyStore={legacy,initialize(){return write(legacy());},get plan(){return C.plan(read());},savePlan(p){const s=write(C.savePlan(read(),p,writer));return C.plan(s);},get customLesson(){return C.customLesson(read());},saveCustomLesson(p){const s=write(C.saveCustomLesson(read(),p));window.dispatchEvent(new Event('hsk-custom-lesson-change'));return C.customLesson(s);},activity:()=>C.activity(read()),recordActivity(now=Date.now()){return C.activity(write(C.recordActivity(read(),writer,now)));}};
 })();

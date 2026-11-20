@@ -80,7 +80,9 @@ function render(){
  const courseBar=el('progress');courseBar.max=100;courseBar.value=aggregate.percent;courseBar.setAttribute('aria-label','Tiến độ học các bài HSK '+hsk);courseBox.append(courseBar);
  const resume=course().lessons.find(l=>p[l.id]?.startedAt&&!measure(l,p).mastered)||course().lessons.find(l=>!measure(l,p).mastered);
  if(resume)courseBox.append(button((p[resume.id]?.startedAt?'Tiếp tục bài ':'Bắt đầu bài ')+resume.number+' · '+resume.vi,()=>select(resume),'lesson-resume'));
- root.append(courseBox,el('h4','Danh sách bài học','lesson-list-heading'));
+ const customBox=el('div');
+ window.HSKLessonCustom?.renderCatalogBanner(customBox,{hsk,lesson:resume||course().lessons[0],progressRecord:resume?p[resume.id]:{},onOpenRunner:targetLesson=>{select(targetLesson||resume||course().lessons[0]);changeSection('custom');}});
+ root.append(courseBox,customBox,el('h4','Danh sách bài học','lesson-list-heading'));
  if(hsk>=4){const volumes=el('div',undefined,'lesson-actions');for(const [v,label] of [['','Cả hai tập'],['A','Thượng · Tập 1'],['B','Hạ · Tập 2']]){const b=button(label,()=>{volume=v;render();});b.setAttribute('aria-pressed',String(volume===v));volumes.append(b);}root.append(volumes);}
  const list=el('div',undefined,'lesson-list');
  for(const l of course().lessons.filter(l=>!volume||l.volume===volume)){
@@ -97,12 +99,14 @@ function masteryChips(meter,m,total,miniTotal){let chips=meter.querySelector('.l
 function renderLesson(l,p){
  const ws=matched(l),known=ws.filter(w=>api().record(w)?.status==='known').length;
  if(lessonSection==='guided'&&window.HSKLessonGuided){status.textContent='';root.append(button('← Bài học',()=>changeSection('overview'),'lesson-back'));window.HSKLessonGuided.mount(root,l,ws,{read:()=>progress()[l.id]||{},persist:value=>save(l.id,value,false,true),exit:()=>changeSection('overview'),readComplete:()=>save(l.id,{read:true,completed:false},false),practice:()=>changeSection('practice'),answer:(q,correct)=>{const old=progress()[l.id]||{},evidence={...old.contentEvidence},r=evidence[q.id]||{streak:0,attempts:0};evidence[q.id]={streak:correct?Math.min(2,r.streak+1):0,attempts:r.attempts+1,last:Date.now()};save(l.id,{contentEvidence:evidence},false,true);}});return;}
+ if(lessonSection==='custom'&&window.HSKLessonCustom){status.textContent='';window.HSKLessonCustom.mountLessonRunner(root,l,ws,{progress:()=>progress()[l.id]||{},markRead:()=>save(l.id,{read:true,completed:false},false),exit:()=>changeSection('overview'),openSection:(sec,mode)=>changeSection(sec,mode),startQuiz:subset=>{close(true);api().quiz(subset?.length?subset:ws,'HSK '+hsk+' · Bài '+l.number,l.id);},startSrs:subset=>{close(true);api().srs(subset?.length?subset:ws,l.id);}});return;}
  const header=el('header',undefined,'lesson-detail-header');
  header.append(button('← Quay về danh sách',goList,'lesson-back'),
   el('p','HSK '+hsk+(l.volume?' · Tập '+(l.volume==='A'?'Thượng':'Hạ'):'')+' · Bài '+l.number,'lesson-eyebrow'),
   el('h3','Bài '+l.number+' · '+l.vi),el('p',l.title,'lesson-title-cn'));
  const studyModes=el('div',undefined,'lesson-study-modes');
  studyModes.append(button('Học tự động',()=>changeSection('guided'),'lesson-guided-entry'),
+  button('Học theo cách của tôi',()=>changeSection('custom'),'lesson-guided-entry lesson-custom-entry'),
   button('Đọc thêm tình huống thực tế',()=>window.HSKRealReading?.openFromLesson({id:l.id,hsk,number:l.number,words:ws.map(w=>({han:w.han,mean:w.mean,pin:w.pin}))}),'lesson-guided-entry lesson-reading-entry'));
  header.append(studyModes);root.append(header);
  const m=measure(l,p),meter=el('section',undefined,'lesson-mastery');
@@ -225,7 +229,9 @@ function renderContentPractice(l,view){
 function breakdown(m){return 'Học qua: '+(m.read?m.weights.read:0)+'/'+m.weights.read+' · Kiểm tra từ: '+Math.floor(m.quiz*m.weights.quiz)+'/'+m.weights.quiz+' · Hiểu bài: '+Math.floor(m.content*m.weights.content)+'/'+m.weights.content+' · SRS: '+Math.floor(m.srs*m.weights.srs)+'/'+m.weights.srs+(m.weights.mini?' · Ôn ngắn: '+Math.floor(m.mini*m.weights.mini)+'/'+m.weights.mini:'');}
 function courseProgress(level,p=progress()){const list=data?.courses.find(c=>c.hsk===Number(level))?.lessons||[],scores=list.map(l=>measure(l,p));return {total:list.length,completed:scores.filter(m=>m.mastered).length,percent:list.length?Math.floor(10*scores.reduce((n,m)=>n+m.percent,0)/list.length)/10:0};}
 
-window.HSKLessonNav={open,progress:courseProgress,setPreferredLevel,get level(){return hsk;}};
+async function openCustomInterview(targetHsk){const n=Number(targetHsk);if(Number.isInteger(n)&&n>=1&&n<=6)hsk=n;volume='';selected=null;lessonSection='overview';window.HSKLessonCustom?.triggerOpenInterview?.(hsk);if(location.hash.startsWith('#lesson/'))history.replaceState(null,'',location.pathname+location.search);window.HSKStudio?.navigate?.('lessons');await open({preserveLevel:true});$('lessonCustomBanner')?.scrollIntoView?.({block:'start',behavior:'smooth'});}
+async function openCustom(targetHsk){const n=Number(targetHsk);if(Number.isInteger(n)&&n>=1&&n<=6)hsk=n;volume='';selected=null;if(location.hash.startsWith('#lesson/'))history.replaceState(null,'',location.pathname+location.search);window.HSKStudio?.navigate?.('lessons');await open({preserveLevel:true});const p=progress(),c=course(),targetLesson=c?.lessons?.find(l=>p[l.id]?.startedAt&&!measure(l,p).mastered)||c?.lessons?.find(l=>!measure(l,p).mastered)||c?.lessons?.[0];if(targetLesson){select(targetLesson);changeSection('custom');}}
+window.HSKLessonNav={open,openCustom,openCustomInterview,progress:courseProgress,setPreferredLevel,get level(){return hsk;}};
 $('lessonPracticeBack').onclick=()=>api()?.show();
 for(const b of document.querySelectorAll('[data-lesson-level]'))b.addEventListener('click',()=>{hsk=Number(b.dataset.lessonLevel);volume='';selected=null;history.pushState(null,'',location.pathname+location.search);root.replaceChildren();$('drawerClose').click();return open({preserveLevel:true});});
 window.addEventListener('popstate',()=>{if(location.hash.startsWith('#lesson/'))api()?.show();else if(!panel.hidden)goListFromHistory();});
@@ -235,6 +241,7 @@ for(const n of document.querySelectorAll('.app-tabs button:not([data-mode="lesso
 for(const b of document.querySelectorAll('.filter-btn[data-filter]'))b.addEventListener('click',event=>{if(panel.hidden||!document.body.classList.contains('show-lessons'))return;event.preventDefault();event.stopImmediatePropagation();const next=Number(b.dataset.filter);if(Number.isInteger(next)&&next>=1&&next<=6)hsk=next;volume='';selected=null;history.replaceState(null,'',location.pathname+location.search);root.replaceChildren();$('drawerClose').click();open();},true);
 $('mobileMode').addEventListener('change',()=>{if($('mobileMode').value!=='lessons')close();});
 window.addEventListener('hsk-account-ready',()=>{selected=location.hash.startsWith('#lesson/')?fromHash():null;cardIndex=0;revealed=false;if(!panel.hidden)render();});
-window.addEventListener('storage',e=>{if([KEY,'hsk-flashcards-progress-v1'].includes(e.key)&&!panel.hidden)render();});
+window.addEventListener('storage',e=>{if([KEY,'hsk-flashcards-progress-v1','hsk-study-sync-v1'].includes(e.key)&&!panel.hidden)render();});
+window.addEventListener('hsk-custom-lesson-change',()=>{if(!panel.hidden)render();});
 window.addEventListener('hsk-lessons-ready',()=>{if(location.hash.startsWith('#lesson/'))api().show();if(!panel.hidden){status.textContent='';render();}});
 })();
